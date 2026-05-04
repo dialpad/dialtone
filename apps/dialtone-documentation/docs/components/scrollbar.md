@@ -141,8 +141,8 @@ In addition to using directive arguments for scrollbar visibility (`:always`, `:
 | `offset.blockEnd` | `number \| string` | `undefined` | Insets horizontal scrollbar from the block-end edge |
 | `offset.inlineStart` | `number \| string` | `undefined` | Insets horizontal scrollbar from the inline-start edge |
 | `offset.inlineEnd` | `number \| string` | `undefined` | Insets vertical scrollbar from the inline-end edge |
-| `verticalClasses` | `string` | `undefined` | CSS classes to apply to the vertical scrollbar |
-| `horizontalClasses` | `string` | `undefined` | CSS classes to apply to the horizontal scrollbar |
+| `blockClasses` | `string` | `undefined` | CSS classes to apply to the vertical scrollbar |
+| `inlineClasses` | `string` | `undefined` | CSS classes to apply to the horizontal scrollbar |
 
 ### Offset Option
 
@@ -203,10 +203,10 @@ The `offset` option allows you to adjust the positioning of scrollbars to accomm
 
 The directive supports applying custom CSS classes to scrollbar elements, allowing you to use utility classes or custom styles for scrollbar appearance.
 
-#### Vertical Scrollbar Classes
+#### Block Axis (Vertical) Scrollbar Classes
 
 ```vue demo
-<div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar="{ verticalClasses: 'd-w12 d-bgc-purple-300', showScrollbar: 'always' }">
+<div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar="{ blockClasses: 'd-w12 d-bgc-purple-300', showScrollbar: 'always' }">
   <dt-stack>
     <div v-for="item in items" class="item">
       {{ item}}
@@ -215,10 +215,10 @@ The directive supports applying custom CSS classes to scrollbar elements, allowi
 </div>
 ```
 
-#### Horizontal Scrollbar Classes
+#### Inline Axis (Horizontal) Scrollbar Classes
 
 ```vue code-only
-<div v-dt-scrollbar="{ horizontalClasses: 'd-h8 d-bgc-blue-300' }">
+<div v-dt-scrollbar="{ inlineClasses: 'd-h8 d-bgc-blue-300' }">
   <div>Scrollable content with styled horizontal scrollbar</div>
 </div>
 ```
@@ -227,8 +227,8 @@ The directive supports applying custom CSS classes to scrollbar elements, allowi
 
 ```vue code-only
 <div v-dt-scrollbar="{
-  verticalClasses: 'd-w12',
-  horizontalClasses: 'd-h8'
+  blockClasses: 'd-w12',
+  inlineClasses: 'd-h8'
 }">
   <div>Different classes for each scrollbar</div>
 </div>
@@ -237,7 +237,7 @@ The directive supports applying custom CSS classes to scrollbar elements, allowi
 #### Combined with Offset
 
 ```vue demo
-<div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar="{ offset: { blockStart: 20, blockEnd: 20 }, verticalClasses: 'd-w12 d-bgc-magenta-300', showScrollbar: 'always' }">
+<div class="d-hmx164 d-w30p d-bar8 d-ba" v-dt-scrollbar="{ offset: { blockStart: 20, blockEnd: 20 }, blockClasses: 'd-w12 d-bgc-magenta-300', showScrollbar: 'always' }">
   <dt-stack>
     <div v-for="item in items" class="item">
       {{ item}}

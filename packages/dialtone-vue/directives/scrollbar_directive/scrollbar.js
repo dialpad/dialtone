@@ -29,6 +29,14 @@ function applyOffset (el, offset) {
   setProp(el, '--dt-scrollbar-offset-inline-end', offset.inlineEnd ?? offset.inline);
 }
 
+function applyScrollbarClasses (os, value, prev) {
+  const { scrollbarVertical, scrollbarHorizontal } = os.elements();
+  if (prev?.blockClasses) scrollbarVertical.scrollbar.classList.remove(...prev.blockClasses.split(' ').filter(Boolean));
+  if (prev?.inlineClasses) scrollbarHorizontal.scrollbar.classList.remove(...prev.inlineClasses.split(' ').filter(Boolean));
+  if (value?.blockClasses) scrollbarVertical.scrollbar.classList.add(...value.blockClasses.split(' ').filter(Boolean));
+  if (value?.inlineClasses) scrollbarHorizontal.scrollbar.classList.add(...value.inlineClasses.split(' ').filter(Boolean));
+}
+
 export const DtScrollbarDirective = {
   name: 'dt-scrollbar-directive',
   install (app) {
@@ -53,6 +61,7 @@ export const DtScrollbarDirective = {
         el.setAttribute('data-overlayscrollbars-initialize', true);
         el.classList.add('d-scrollbar');
         applyOffset(el, binding.value?.offset);
+        applyScrollbarClasses(os, binding.value);
         instances.set(el, os);
       },
       updated (el, binding) {
@@ -67,6 +76,7 @@ export const DtScrollbarDirective = {
           },
         });
         applyOffset(el, binding.value?.offset);
+        applyScrollbarClasses(os, binding.value, binding.oldValue);
       },
       unmounted (el) {
         instances.get(el).destroy();

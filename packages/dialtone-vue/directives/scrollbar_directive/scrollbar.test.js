@@ -11,9 +11,17 @@ const makeWrapper = (template, options = {}) => ({
 const WrapperDefault = makeWrapper(`<div v-dt-scrollbar><div id="viewport"></div></div>`);
 
 const mocks = vi.hoisted(() => {
+  const blockScrollbar = document.createElement('div');
+  const inlineScrollbar = document.createElement('div');
   return {
     destroy: vi.fn(),
     options: vi.fn(),
+    elements: vi.fn(() => ({
+      scrollbarVertical: { scrollbar: blockScrollbar },
+      scrollbarHorizontal: { scrollbar: inlineScrollbar },
+    })),
+    blockScrollbar,
+    inlineScrollbar,
   };
 });
 
@@ -37,6 +45,9 @@ describe('DtScrollbarDirective Tests', () => {
     OverlayScrollbars.mockClear();
     mocks.destroy.mockClear();
     mocks.options.mockClear();
+    mocks.elements.mockClear();
+    mocks.blockScrollbar.className = '';
+    mocks.inlineScrollbar.className = '';
   });
 
   beforeAll(() => {
@@ -45,6 +56,7 @@ describe('DtScrollbarDirective Tests', () => {
       const OverlayScrollbarsMock = vi.fn().mockImplementation(() => ({
         destroy: mocks.destroy,
         options: mocks.options,
+        elements: mocks.elements,
       }));
       OverlayScrollbarsMock.plugin = mockPlugin;
       return {
@@ -192,6 +204,42 @@ describe('DtScrollbarDirective Tests', () => {
       it('should set inline-start and inline-end from inline shorthand', () => {
         expect(wrapper.element.style.getPropertyValue('--dt-scrollbar-offset-inline-start')).toBe('2rem');
         expect(wrapper.element.style.getPropertyValue('--dt-scrollbar-offset-inline-end')).toBe('2rem');
+      });
+    });
+
+    describe('when directive value has blockClasses', () => {
+      beforeEach(() => {
+        mountWith(
+          makeWrapper(`<div v-dt-scrollbar="opts"><div id="viewport"></div></div>`, { props: { opts: { type: Object, default: () => ({}) } } }),
+          { opts: { blockClasses: 'd-w12 d-bgc-purple-300' } },
+        );
+      });
+
+      it('should add blockClasses to the vertical scrollbar element', () => {
+        expect(mocks.blockScrollbar.classList.contains('d-w12')).toBe(true);
+        expect(mocks.blockScrollbar.classList.contains('d-bgc-purple-300')).toBe(true);
+      });
+
+      it('should not add blockClasses to the horizontal scrollbar element', () => {
+        expect(mocks.inlineScrollbar.classList.contains('d-w12')).toBe(false);
+      });
+    });
+
+    describe('when directive value has inlineClasses', () => {
+      beforeEach(() => {
+        mountWith(
+          makeWrapper(`<div v-dt-scrollbar="opts"><div id="viewport"></div></div>`, { props: { opts: { type: Object, default: () => ({}) } } }),
+          { opts: { inlineClasses: 'd-h8 d-bgc-blue-300' } },
+        );
+      });
+
+      it('should add inlineClasses to the horizontal scrollbar element', () => {
+        expect(mocks.inlineScrollbar.classList.contains('d-h8')).toBe(true);
+        expect(mocks.inlineScrollbar.classList.contains('d-bgc-blue-300')).toBe(true);
+      });
+
+      it('should not add inlineClasses to the vertical scrollbar element', () => {
+        expect(mocks.blockScrollbar.classList.contains('d-h8')).toBe(false);
       });
     });
   });
