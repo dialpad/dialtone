@@ -417,12 +417,29 @@ export default {
     'keyup',
 
     /**
-     * Native keydown event
+     * Native keydown event. Fired for any key pressed while a chip is focused
+     * or while the text input is focused. Inspect `event.target` to disambiguate.
      *
      * @event keydown
      * @type {KeyboardEvent}
-      */
+     */
     'keydown',
+
+    /**
+     * Native escape event fired when Escape is pressed in the text input.
+     * Not fired when a chip is focused.
+     *
+     * @event escape
+     */
+    'escape',
+
+    /**
+     * Native enter event fired when Enter is pressed in the text input.
+     * Not fired when a chip is focused.
+     *
+     * @event enter
+     */
+    'enter',
 
     /**
      * Event fired when combobox item is highlighted
@@ -472,7 +489,17 @@ export default {
         },
 
         onKeydown: event => {
+          if (this.disabled) return;
           this.onInputKeyDown(event);
+          this.$emit('keydown', event);
+          // Use event.key (not event.code) so NumpadEnter normalizes to 'Enter'
+          // and consumers don't have to special-case the numpad.
+          const key = event.key?.toLowerCase();
+          if (key === 'escape') {
+            this.$emit('escape');
+          } else if (key === 'enter') {
+            this.$emit('enter');
+          }
         },
 
         onKeyup: event => {

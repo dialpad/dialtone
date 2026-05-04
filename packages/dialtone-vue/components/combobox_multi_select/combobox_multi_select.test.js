@@ -305,6 +305,57 @@ describe('DtComboboxMultiSelect Tests', () => {
     });
   });
 
+  describe('Input Key Event Tests', () => {
+    it('Should emit "escape" when Escape is pressed while input is focused', async () => {
+      await input.trigger('keydown', { key: 'Escape' });
+      expect(wrapper.emitted('escape').length).toBe(1);
+    });
+
+    it('Should emit "enter" when Enter is pressed while input is focused', async () => {
+      await input.trigger('keydown', { key: 'Enter', code: 'Enter' });
+      expect(wrapper.emitted('enter').length).toBe(1);
+    });
+
+    it('Should emit "enter" when NumpadEnter is pressed while input is focused', async () => {
+      // event.key normalizes NumpadEnter to 'Enter'; using event.code would miss this.
+      await input.trigger('keydown', { key: 'Enter', code: 'NumpadEnter' });
+      expect(wrapper.emitted('enter').length).toBe(1);
+    });
+
+    it('Should emit "keydown" with KeyboardEvent when a key is pressed in the input', async () => {
+      await input.trigger('keydown', { key: 'Tab', code: 'Tab' });
+      expect(wrapper.emitted('keydown').length).toBe(1);
+      expect(wrapper.emitted('keydown')[0][0]).toBeInstanceOf(KeyboardEvent);
+    });
+
+    describe('When chips are present', () => {
+      beforeEach(async () => {
+        await wrapper.setProps({ selectedItems: ['1'] });
+        _setChildWrappers();
+      });
+
+      it('Should not emit "escape" when Escape is pressed while a chip is focused', async () => {
+        await chips.at(0).trigger('keydown', { key: 'Escape', code: 'Escape' });
+        expect(wrapper.emitted('keydown').length).toBeGreaterThanOrEqual(1);
+        expect(wrapper.emitted('escape')).toBeUndefined();
+      });
+
+      it('Should still emit "keydown" when a key is pressed on a chip (backward compatibility)', async () => {
+        await chips.at(0).trigger('keydown', { key: 'ArrowLeft', code: 'ArrowLeft' });
+        expect(wrapper.emitted('keydown').length).toBeGreaterThanOrEqual(1);
+      });
+    });
+
+    it('Should not emit input-level keydown when the component is disabled', async () => {
+      // Suppressed by the explicit `if (this.disabled) return;` guard in
+      // inputListeners.onKeydown — not by native DOM disabled semantics
+      // (JSDOM's trigger() fires regardless of the HTML disabled attribute).
+      await wrapper.setProps({ disabled: true });
+      await input.trigger('keydown', { key: 'Tab', code: 'Tab' });
+      expect(wrapper.emitted('keydown')).toBeUndefined();
+    });
+  });
+
   describe('Duplicate Items Tests', () => {
     beforeEach(async () => {
       await wrapper.setProps({ selectedItems: ['item1', 'item1', 'item1'] });

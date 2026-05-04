@@ -26,6 +26,9 @@ export const argsData = {
   onMaxSelected: action('maxSelected'),
   onComboboxHighlight: action('comboboxHighlight'),
   onFocus: action('focus'),
+  onKeydown: action('keydown'),
+  onEscape: action('escape'),
+  onEnter: action('enter'),
 };
 
 export const argTypesData = {
