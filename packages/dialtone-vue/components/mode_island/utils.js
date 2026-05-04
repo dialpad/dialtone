@@ -26,6 +26,15 @@ export function getRootContrast () {
 }
 
 /**
+ * Get the material from the root HTML element
+ * @returns {string} The root material or 'sandstone' as default
+ */
+export function getRootMaterial () {
+  const rootMaterial = document.documentElement.getAttribute('data-dt-material');
+  return rootMaterial || 'sandstone';
+}
+
+/**
  * Find the mode from the nearest parent element with data-dt-mode attribute
  * @param {HTMLElement} el - The starting element
  * @returns {string} The parent mode or root mode
@@ -45,5 +54,6 @@ export default {
   getOppositeMode,
   getRootMode,
   getRootContrast,
+  getRootMaterial,
   findParentMode,
 };

@@ -5,9 +5,10 @@ import * as ModeDirectiveStories from './mode.stories.js';
 
 # Mode directive
 
-Apply light, dark, or inverted color mode to any element. Sets `data-dt-mode` and
-`data-dt-contrast` on the bound element, scoping descendant token-based styles
-(`d-fc-primary`, `d-bgc-secondary`, etc.) to the specified mode.
+Apply light, dark, or inverted color mode to any element. Sets `data-dt-mode`,
+`data-dt-contrast`, and `data-dt-material` on the bound element, scoping
+descendant token-based styles (`d-fc-primary`, `d-bgc-secondary`, etc.) to the
+specified mode under the active contrast and material.
 
 For full documentation, see the [Mode Island page](https://dialtone.dialpad.com/components/mode-island.html).
 
@@ -86,6 +87,8 @@ Bind a reactive variable to switch modes at runtime.
 
 - Sets `data-dt-mode` (`light` or `dark`) on the element
 - Sets `data-dt-contrast` inherited from root `<html>` element
+- Sets `data-dt-material` inherited from root `<html>` element
+- Watches root for `data-dt-contrast` and `data-dt-material` changes via MutationObserver and keeps the bound element in sync
 - For `invert`, watches ancestor mode changes via MutationObserver and reacts automatically
 - Does **not** add the `d-mode-island` CSS class or set `background-color`
 - Interoperable with `<dt-mode-island>` — nesting either inside the other works naturally

@@ -5,6 +5,7 @@
     :data-dt-mode="computedMode"
     :data-mode-island-inverted="invertedAttribute"
     :data-dt-contrast="currentContrast"
+    :data-dt-material="currentMaterial"
   >
     <!-- @slot Slot for main content -->
     <slot />
@@ -18,6 +19,7 @@ import {
   getOppositeMode,
   getRootMode,
   getRootContrast,
+  getRootMaterial,
   findParentMode,
 } from './utils';
 
@@ -67,7 +69,9 @@ export default {
   data () {
     return {
       currentContrast: getRootContrast(),
+      currentMaterial: getRootMaterial(),
       contrastObserver: null,
+      materialObserver: null,
       modeObserver: null,
       elementRef: null,
       calculatedMode: null, // Store calculated mode as reactive data
@@ -113,6 +117,9 @@ export default {
     // Setup MutationObserver to watch for contrast changes on root
     this.setupContrastObserver();
 
+    // Setup MutationObserver to watch for material changes on root
+    this.setupMaterialObserver();
+
     // Setup MutationObserver to watch for mode changes (only if inverted)
     if (this.isInverted) {
       // Initialize the calculated mode
@@ -120,8 +127,9 @@ export default {
       this.setupModeObserver();
     }
 
-    // Initial contrast value
+    // Initial values
     this.currentContrast = getRootContrast();
+    this.currentMaterial = getRootMaterial();
   },
 
   beforeUnmount () {
@@ -129,6 +137,10 @@ export default {
     if (this.contrastObserver) {
       this.contrastObserver.disconnect();
       this.contrastObserver = null;
+    }
+    if (this.materialObserver) {
+      this.materialObserver.disconnect();
+      this.materialObserver = null;
     }
     if (this.modeObserver) {
       this.modeObserver.disconnect();
@@ -168,6 +180,21 @@ export default {
       this.contrastObserver.observe(document.documentElement, {
         attributes: true,
         attributeFilter: ['data-dt-contrast'],
+      });
+    },
+
+    setupMaterialObserver () {
+      this.materialObserver = new MutationObserver((mutationsList) => {
+        for (const mutation of mutationsList) {
+          if (mutation.type === 'attributes' && mutation.attributeName === 'data-dt-material') {
+            this.currentMaterial = getRootMaterial();
+          }
+        }
+      });
+
+      this.materialObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-dt-material'],
       });
     },
 
