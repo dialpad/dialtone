@@ -3,6 +3,8 @@
     "root",
     "base/default",
     "base/dark",
+    "base/refs/default",
+    "base/refs/dark",
     "theme/dp/default",
     "theme/dp/dark",
     "theme/dp/high-contrast",
