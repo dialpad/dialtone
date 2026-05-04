@@ -226,10 +226,10 @@ layout: Blank
       <dt-prose class="d-fc-secondary">
         All four ramps share the current black ramp's lightness curve; <strong>L, C, and H all drift gradually</strong> along each ramp — no constants, mirroring how bronze intentionally drifts all three coords.
         <ul>
-          <li><strong>Bronze</strong> — current values (yellow-warm, H~84°)</li>
-          <li><strong>Mono</strong> — <code>C=0</code> (achromatic)</li>
-          <li><strong>Steel</strong> — 60/40 blend of two reference cool tables (more steel-leaning than graphite-leaning; H drifts ~263°–272°)</li>
-          <li><strong>Graphite</strong> — quiet violet (peak C ≈ 0.017; stop 550 ≈ <code>oklch(0.5586 0.0162 285.938)</code>)</li>
+          <li><strong>Mono</strong>: pure black</li>
+          <li><strong>Bronze</strong>: warm</li>
+          <li><strong>Steel</strong>: cool</li>
+          <li><strong>Graphite</strong>: cool, less saturated</li>
         </ul>
         Toggle Mode at top.
       </dt-prose>
