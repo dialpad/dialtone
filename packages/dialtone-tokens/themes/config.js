@@ -45,6 +45,16 @@ let initializationState = null;
  */
 
 /**
+ * @typedef {Object} MaterialTheme
+ * Material theme overrides — re-binds the underlying `--dt-color-black-*` ramp
+ * (and, via the relative-color-syntax build pipeline, every token derived from it)
+ * to a non-default material like steel/graphite/mono.
+ * @property {Object} material - Material-specific overrides
+ * @property {string} material.name - Material identifier (e.g., 'steel')
+ * @property {string} material.css - Material override CSS
+ */
+
+/**
  * Set the current theme, brand, and optionally contrast - BACKWARD COMPATIBLE
  *
  * Auto-detects whether you're using the legacy theme format or the new layered format
@@ -153,17 +163,21 @@ function _setThemeLayered(theme, rootNode = document.documentElement) {
 
 /**
  * Set the content of a style tag with the given id, create it if the id doesn't exist.
+ * If `beforeId` is provided and that tag exists, insert the new tag immediately before
+ * it (so the named tag wins at the same specificity). Otherwise append.
  */
-function _setStyleTag (id, content, rootNode) {
+function _setStyleTag (id, content, rootNode, beforeId = null) {
   if (!rootNode?.querySelector('#' + id)) {
     const style = document.createElement('style');
     style.setAttribute('type', 'text/css');
     style.setAttribute('id', id);
     style.innerHTML = content;
-    if (rootNode?.querySelector('head')) {
-      rootNode.querySelector('head').appendChild(style);
+    const parent = rootNode?.querySelector('head') ?? rootNode;
+    const anchor = beforeId ? rootNode?.querySelector('#' + beforeId) : null;
+    if (anchor && anchor.parentNode === parent) {
+      parent.insertBefore(style, anchor);
     } else {
-      rootNode?.appendChild(style);
+      parent?.appendChild(style);
     }
   } else {
     const existingTag = rootNode.querySelector('#' + id);
@@ -355,6 +369,53 @@ export function setContrast(contrastTheme, rootNode = document.documentElement) 
 }
 
 /**
+ * Set the active material — re-binds `--dt-color-black-*` to the chosen ramp.
+ *
+ * Bronze is the default and ships baked into the base CSS, so passing a
+ * non-default material (steel, graphite, mono) injects an override. Passing
+ * `null` or a `{ material: { name: 'bronze' } }` theme removes the override
+ * and returns to the default. Material's `<style>` tag inserts before brand,
+ * so brand overrides still win at the same specificity.
+ *
+ * Tokens whose value is `oklch(from var(--dt-color-black-N) l c h / α)`
+ * (emitted by the V1 relative-color-syntax build pipeline) automatically
+ * re-derive when this is called — no per-token reload needed.
+ *
+ * @param {MaterialTheme|null} materialTheme - Theme object with material property, or null to reset to bronze
+ * @param {ThemeRootNode} [rootNode=document.documentElement] - Root element for style injection
+ *
+ * @example
+ * import { setMaterial } from '@dialpad/dialtone/themes/config';
+ * import Steel from '@dialpad/dialtone-tokens/themes/material-steel';
+ * setMaterial(Steel);
+ *
+ * @example
+ * setMaterial(null); // back to default (bronze)
+ */
+export function setMaterial (materialTheme, rootNode = document.documentElement) {
+  if (rootNode instanceof ShadowRoot) {
+    console.warn(
+      '[Dialtone] You passed a ShadowRoot directly to setMaterial(). ' +
+      'Please pass the host element instead. The function will access shadowRoot automatically.',
+    );
+  }
+
+  if (rootNode?.shadowRoot) {
+    rootNode = rootNode.shadowRoot;
+  }
+
+  const name = materialTheme?.material?.name;
+  if (name && name !== 'bronze') {
+    // Insert before the brand tag so brand can override material at the same specificity.
+    _setStyleTag('dialtone-css-material', materialTheme.material.css, rootNode, 'dialtone-css-brand-colors');
+    rootNode?.setAttribute('data-dt-material', name);
+  } else {
+    _removeStyleTag('dialtone-css-material', rootNode);
+    rootNode?.setAttribute('data-dt-material', 'bronze');
+  }
+}
+
+/**
  * Initialize Dialtone theme system - call once on app startup
  *
  * Loads core tokens, base colors, sets initial mode and brand. This function should be called
@@ -502,8 +563,9 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
   // Set initial brand
   setBrand(brandTheme, rootNode);
 
-  // Set default contrast
+  // Set defaults for contrast and material
   rootNode?.setAttribute('data-dt-contrast', 'default');
+  rootNode?.setAttribute('data-dt-material', 'bronze');
 
   // Track initialization state for future idempotency checks
   initializationState = {
@@ -551,6 +613,7 @@ export function resetTheme(rootNode = document.documentElement) {
   // Remove all theme style tags
   _removeStyleTag('dialtone-css-core', actualRoot);
   _removeStyleTag('dialtone-css-base-colors', actualRoot);
+  _removeStyleTag('dialtone-css-material', actualRoot);
   _removeStyleTag('dialtone-css-brand-colors', actualRoot);
   _removeStyleTag('dialtone-css-contrast', actualRoot);
 
@@ -558,4 +621,5 @@ export function resetTheme(rootNode = document.documentElement) {
   actualRoot?.removeAttribute('data-dt-mode');
   actualRoot?.removeAttribute('data-dt-brand');
   actualRoot?.removeAttribute('data-dt-contrast');
+  actualRoot?.removeAttribute('data-dt-material');
 }
