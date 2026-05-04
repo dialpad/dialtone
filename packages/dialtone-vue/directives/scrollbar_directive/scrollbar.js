@@ -1,7 +1,13 @@
 import { OverlayScrollbars, ClickScrollPlugin } from 'overlayscrollbars';
 
+const VALID_SHOW_SCROLLBAR = new Set(['always', 'enter', 'scroll', 'move']);
+
 function resolveShowScrollbar (value, arg) {
   const mode = value?.showScrollbar ?? arg ?? 'enter';
+  if (!VALID_SHOW_SCROLLBAR.has(mode)) {
+    console.info(`[v-dt-scrollbar] Unknown showScrollbar value "${mode}". Valid values: ${[...VALID_SHOW_SCROLLBAR].join(', ')}. Falling back to "enter".`);
+    return 'leave'; // 'enter' resolved
+  }
   // 'always' → OS 'never' (always visible); 'enter' → OS 'leave' (show on enter, hide on leave)
   if (mode === 'always') return 'never';
   if (mode === 'enter') return 'leave';

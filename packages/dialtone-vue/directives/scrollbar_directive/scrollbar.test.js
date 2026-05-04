@@ -133,6 +133,31 @@ describe('DtScrollbarDirective Tests', () => {
       });
     });
 
+    describe('when directive value has an invalid showScrollbar', () => {
+      beforeEach(() => {
+        vi.spyOn(console, 'info').mockImplementation(() => {});
+        mountWith(
+          makeWrapper(`<div v-dt-scrollbar="opts"><div id="viewport"></div></div>`, { props: { opts: { type: Object, default: () => ({}) } } }),
+          { opts: { showScrollbar: 'invalid-value' } },
+        );
+      });
+
+      afterEach(() => {
+        console.info.mockRestore();
+      });
+
+      it('should log an informational message', () => {
+        expect(console.info).toHaveBeenCalledWith(expect.stringContaining('"invalid-value"'));
+      });
+
+      it('should fall back to enter mode (autoHide leave)', () => {
+        expect(OverlayScrollbars).toHaveBeenCalledWith(
+          expect.any(Object),
+          { scrollbars: { autoHide: 'leave', clickScroll: true, autoHideDelay: 0 } },
+        );
+      });
+    });
+
     describe('when directive value is an object with showScrollbar', () => {
       beforeEach(() => {
         mountWith(
