@@ -201,6 +201,14 @@ async function buildLayeredTokensForBrand(brandName, lightThemeConfig, darkTheme
                 (token.$extensions?.['studio.tokens']?.originalType === 'boxShadow' && token.type === 'color')) {
               return false;
             }
+            // Inline (don't emit as var()) when the reference points into the
+            // `material.*` namespace — that namespace lives in source-only token
+            // sets (base/refs/*) and its CSS vars are intentionally not output,
+            // so a var() reference would resolve to nothing at runtime.
+            const orig = token.original?.value;
+            if (typeof orig === 'string' && orig.includes('{material.')) {
+              return false;
+            }
             return true;
           },
         },
@@ -246,6 +254,14 @@ async function buildLayeredTokensForBrand(brandName, lightThemeConfig, darkTheme
             }
             if (token.$extensions?.['studio.tokens']?.modify ||
                 (token.$extensions?.['studio.tokens']?.originalType === 'boxShadow' && token.type === 'color')) {
+              return false;
+            }
+            // Inline (don't emit as var()) when the reference points into the
+            // `material.*` namespace — that namespace lives in source-only token
+            // sets (base/refs/*) and its CSS vars are intentionally not output,
+            // so a var() reference would resolve to nothing at runtime.
+            const orig = token.original?.value;
+            if (typeof orig === 'string' && orig.includes('{material.')) {
               return false;
             }
             return true;
