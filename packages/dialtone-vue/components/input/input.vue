@@ -153,7 +153,7 @@ import {
   hasSlotContent,
   removeClassStyleAttrs,
 } from '@/common/utils';
-import { DtValidationMessages } from '@/components/validation_messages';
+import { DtValidationMessages } from '@/components/ValidationMessages';
 import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/text';
 import { MessagesMixin } from '@/common/mixins/input';
 

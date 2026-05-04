@@ -112,7 +112,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji-picker
 
 ## Vue API
 
-<component-vue-api component-name="emoji_picker" />
+<component-vue-api component-name="EmojiPicker" />
 
 ## Usage
 

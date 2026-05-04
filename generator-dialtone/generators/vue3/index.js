@@ -39,7 +39,7 @@ module.exports = class extends Generator {
           ]);
         }
         this.category = this.inputValues.category;
-        this.subfolder = this.inputValues.category ? _.snakeCase(this.inputValues.category) : '';
+        this.subfolder = this.inputValues.category ? _.upperFirst(_.camelCase(this.inputValues.category)) : '';
       }
 
       this.inputValues = await this.prompt([
@@ -76,8 +76,8 @@ module.exports = class extends Generator {
       }
     } while (!valid);
 
-    // convert to snake case and remove the 'dt' as we don't use it in the filename
-    this.fileName = _.snakeCase(this.componentName.slice(this.isRecipe ? 8 : 2));
+    // remove the 'Dt'/'DtRecipe' prefix for the filename (keep PascalCase)
+    this.fileName = this.componentName.slice(this.isRecipe ? 8 : 2);
     this.componentNameKebab = _.kebabCase(this.componentName);
 
     this.destinationFolder = this.isRecipe
@@ -108,7 +108,7 @@ module.exports = class extends Generator {
 
     this.fs.copyTpl(
       this.templatePath('constants.ejs'),
-      `${this.destinationFolder}/${this.fileName}_constants.js`,
+      `${this.destinationFolder}/${this.fileName}Constants.js`,
       params,
     );
 
@@ -133,14 +133,14 @@ module.exports = class extends Generator {
     let storyName = 'Default';
     this.fs.copyTpl(
       this.templatePath('story.ejs'),
-      `${this.destinationFolder}/${this.fileName}_${_.snakeCase(storyName)}.story.vue`,
+      `${this.destinationFolder}/${this.fileName}${storyName}.story.vue`,
       { ...params, storyName },
     );
 
     storyName = 'Variants';
     this.fs.copyTpl(
       this.templatePath('story.ejs'),
-      `${this.destinationFolder}/${this.fileName}_${_.snakeCase(storyName)}.story.vue`,
+      `${this.destinationFolder}/${this.fileName}${storyName}.story.vue`,
       { ...params, storyName },
     );
   }

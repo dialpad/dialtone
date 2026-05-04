@@ -1,5 +1,5 @@
 import LocalizationDefault from './LocalizationDefault.story.vue';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 
 // Default Props for all variations
 export const argsData = {};

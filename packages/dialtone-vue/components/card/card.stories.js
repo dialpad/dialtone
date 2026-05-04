@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import DtCard from './card.vue';
 
 import DtCardDefaultTemplate from './CardDefault.story.vue';

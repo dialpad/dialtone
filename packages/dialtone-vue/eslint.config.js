@@ -7,7 +7,7 @@ import globals from 'globals'
 import componentsList from '../../common/components_list.js';
 
 componentsList.push('btn', 'select', 'validation-message', 'label', 'description', 'split-btn', 'mention-suggestion', 'suggestion-list');
-const componentsNames = componentsList.map(name => name.replace('_', '-').replace('.vue', ''));
+const componentsNames = componentsList.map(name => name.replace('.vue', '').replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase());
 
 export default [
   js.configs.recommended,
@@ -191,7 +191,7 @@ export default [
   {
     files: [
       '**/*.test.js',
-      'tests/shared_examples/*.js',
+      'tests/SharedExamples/*.js',
       'tests/setupTests.js',
     ],
     plugins: {
@@ -239,11 +239,11 @@ export default [
       '**/*.ejs',
       'dist',
       '**/common/emoji/index.js',
-      '**/common/storybook_utils.js',
+      '**/common/StorybookUtils.js',
       '**/components/emoji/emoji.test.js',
-      '**/components/emoji_text_wrapper/emoji_text_wrapper.test.js',
-      '**/components/icon/icon_constants.js',
-      '**/components/illustration/illustration_constants.js',
+      '**/components/EmojiTextWrapper/EmojiTextWrapper.test.js',
+      '**/components/icon/IconConstants.js',
+      '**/components/illustration/IllustrationConstants.js',
     ],
   },
 ];

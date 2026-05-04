@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import { action } from 'storybook/actions';
 import DtLink from './link.vue';
 

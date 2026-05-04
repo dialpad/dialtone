@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/StorybookUtils';
 import DtRecipeGroupedChip from './GroupedChip.vue';
 
 import DtRecipeGroupedChipDefaultTemplate from './GroupedChipDefault.story.vue';

@@ -1,6 +1,6 @@
 import { DtLazyShow } from './';
 import LazyShowDefault from './LazyShowDefault.story.vue';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 
 const argTypesData = {
   // Slots

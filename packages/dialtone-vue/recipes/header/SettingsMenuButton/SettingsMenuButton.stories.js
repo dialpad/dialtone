@@ -1,5 +1,5 @@
 import { action } from 'storybook/actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import DtRecipeSettingsMenuButton from './SettingsMenuButton.vue';
 import DtRecipeSettingsMenuButtonDefaultTemplate from './SettingsMenuButtonDefault.story.vue';
 

@@ -1,5 +1,5 @@
 import { action } from 'storybook/actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import { DtResizable } from './';
 
 import ResizableDefaultStory from './ResizableDefault.story.vue';

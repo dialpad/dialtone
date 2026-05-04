@@ -3,7 +3,7 @@ import DtRecipeTimePill from './TimePill.vue';
 import {
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikePassesCustomPropValidation,
-} from '@/tests/shared_examples/validation.js';
+} from '@/tests/SharedExamples/validation.js';
 
 // Constants
 const today = new Date();

@@ -34,8 +34,8 @@
 </template>
 
 <script>
-import { DtListItemGroup } from '@/components/list_item_group';
-import { DtListItem } from '@/components/list_item';
+import { DtListItemGroup } from '@/components/ListItemGroup';
+import { DtListItem } from '@/components/ListItem';
 
 export default {
   name: 'DtListItemGroupDefault',

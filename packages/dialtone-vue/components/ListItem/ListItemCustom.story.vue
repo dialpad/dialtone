@@ -80,7 +80,7 @@ import { DtStack } from '@/components/stack';
 import { DtButton } from '@/components/button';
 import { DtIcon } from '@/components/icon';
 import DtListItem from './ListItem.vue';
-import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
+import KeyboardNavigation from '@/common/mixins/KeyboardListNavigation';
 
 export default {
   name: 'DtListItemDefault',

@@ -1,5 +1,5 @@
 import KitchenSinkView from './KitchenSinkView.vue';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 
 const componentLoaders = import.meta.glob(['../**/*.stories.js', '!../kitchen_sink/**']);
 const recipeLoaders = import.meta.glob('../../recipes/**/*.stories.js');

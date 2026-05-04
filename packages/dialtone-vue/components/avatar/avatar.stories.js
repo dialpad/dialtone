@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/StorybookUtils';
 import DtAvatar from './avatar.vue';
 import { AVATAR_SIZE_MODIFIERS, AVATAR_PRESENCE_STATES } from './AvatarConstants';
 import DtAvatarDefaultTemplate from './AvatarDefault.story.vue';

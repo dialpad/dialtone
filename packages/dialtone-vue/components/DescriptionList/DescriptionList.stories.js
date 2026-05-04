@@ -1,5 +1,5 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import { DT_STACK_GAP } from '@/components/stack/stack_constants';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
+import { DT_STACK_GAP } from '@/components/stack/StackConstants';
 import DtDescriptionList from './DescriptionList.vue';
 import DtDescriptionListDefaultTemplate from './DescriptionListDefault.story.vue';
 

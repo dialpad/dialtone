@@ -1,4 +1,4 @@
-import { DT_STACK_DIRECTION, DT_STACK_GAP, DT_STACK_RESPONSIVE_BREAKPOINTS, DT_STACK_ALIGN, DT_STACK_JUSTIFY } from '@/components/stack/stack_constants';
+import { DT_STACK_DIRECTION, DT_STACK_GAP, DT_STACK_RESPONSIVE_BREAKPOINTS, DT_STACK_ALIGN, DT_STACK_JUSTIFY } from '@/components/stack/StackConstants';
 
 function _isDefaultDirection (direction) {
   return direction === DT_STACK_DIRECTION.default;

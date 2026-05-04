@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { DtKeyboardShortcut } from '@/components/keyboard_shortcut';
+import { DtKeyboardShortcut } from '@/components/KeyboardShortcut';
 import { DtText } from '@/components/text';
 import { SHORTCUTS_ALIASES_LIST } from './KeyboardShortcutConstants';
 

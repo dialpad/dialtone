@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/StorybookUtils';
 import DtRecipeFeedItemPill from './FeedItemPill.vue';
 import DtRecipeFeedItemPillDefaultTemplate from './FeedItemPillDefault.story.vue';
 import DtRecipeFeedItemPillVariantsTemplate from './FeedItemPillVariants.story.vue';

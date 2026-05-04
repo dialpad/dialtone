@@ -66,7 +66,7 @@
 </template>
 
 <script>
-import DtListItem from '@/components/list_item/list_item.vue';
+import DtListItem from '@/components/ListItem/ListItem.vue';
 import DtComboboxMultiSelect from './ComboboxMultiSelect.vue';
 import { ITEMS_LIST_DATA } from './ComboboxMultiSelectStoryConstants';
 

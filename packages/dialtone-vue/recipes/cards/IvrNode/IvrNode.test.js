@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import DtRecipeIvrNode from './IvrNode.vue';
 import {
   IVR_NODE_CLASS_MAPPING, IVR_NODE_HANGUP, IVR_NODE_LABELS,
-} from '@/recipes/cards/ivr_node/ivr_node_constants';
+} from '@/recipes/cards/IvrNode/IvrNodeConstants';
 
 const baseProps = {
   nodeType: IVR_NODE_HANGUP,

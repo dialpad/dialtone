@@ -1,10 +1,10 @@
 import { action } from 'storybook/actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import DtRecipeContactRow from './ContactRow.vue';
 
 import DtRecipeContactRowDefaultTemplate from './ContactRowDefault.story.vue';
 import DtRecipeContactRowVariantsTemplate from './ContactRowVariants.story.vue';
-import { AVATAR_PRESENCE_STATES } from '@/components/avatar/avatar_constants';
+import { AVATAR_PRESENCE_STATES } from '@/components/avatar/AvatarConstants';
 import defaultImage from '@/common/assets/avatar2.png';
 
 // Default Prop Values

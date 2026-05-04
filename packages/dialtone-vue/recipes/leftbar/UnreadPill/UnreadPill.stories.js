@@ -1,5 +1,5 @@
 import { action } from 'storybook/actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import DtRecipeUnreadPill from './UnreadPill.vue';
 
 import DtRecipeUnreadPillDefaultTemplate from './UnreadPillDefault.story.vue';
@@ -7,7 +7,7 @@ import DtRecipeUnreadPillVariantsTemplate from './UnreadPillVariants.story.vue';
 import {
   UNREAD_PILL_DIRECTIONS,
   UNREAD_PILL_KINDS,
-} from '@/recipes/leftbar/unread_pill/unread_pill_constants';
+} from '@/recipes/leftbar/UnreadPill/UnreadPillConstants';
 
 // Default Prop Values
 export const argsData = {

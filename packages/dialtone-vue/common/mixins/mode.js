@@ -1,9 +1,9 @@
-import { CONTENT_MODE_PROP } from '@/common/mode_constants';
+import { CONTENT_MODE_PROP } from '@/common/ModeConstants';
 import {
   getOppositeMode,
   getRootContrast,
   findParentMode,
-} from '@/components/mode_island/utils';
+} from '@/components/ModeIsland/utils';
 
 /**
  * Mixin that adds a `contentMode` prop and computes `modeAttrs` for binding

@@ -1,5 +1,5 @@
 import { action } from 'storybook/actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import DtRecipeTopBannerInfo from './TopBannerInfo.vue';
 
 import DtRecipeTopBannerInfoDefaultTemplate from './TopBannerInfoDefault.story.vue';

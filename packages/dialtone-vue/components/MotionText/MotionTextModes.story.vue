@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { DtMotionText, MOTION_TEXT_ANIMATION_MODES } from '@/components/motion_text';
+import { DtMotionText, MOTION_TEXT_ANIMATION_MODES } from '@/components/MotionText';
 import { DtButton } from '@/components/button';
 import { DtStack } from '@/components/stack';
 

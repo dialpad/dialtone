@@ -61,7 +61,7 @@
 import DtCombobox from './combobox.vue';
 import { DtAvatar } from '@/components/avatar';
 import { DtInput } from '@/components/input';
-import { DtListItem } from '@/components/list_item';
+import { DtListItem } from '@/components/ListItem';
 
 export default {
   name: 'DtComboboxDefault',

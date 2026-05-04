@@ -292,12 +292,12 @@ import DtRecipeFeedItemRow from './FeedItemRow.vue';
 import { DtRecipeEmojiRow } from '../EmojiRow';
 import { DtRecipeFeedItemPill } from '../FeedItemPill';
 import { DtStack } from '@/components/stack';
-import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
+import { DtEmojiTextWrapper } from '@/components/EmojiTextWrapper';
 import { DtAvatar } from '@/components/avatar';
 import { DtIcon } from '@/components/icon';
-import { DtImageViewer } from '@/components/image_viewer';
+import { DtImageViewer } from '@/components/ImageViewer';
 import { DtButton } from '@/components/button';
-import { useMockReactions } from '@/recipes/conversation_view/emoji_row/composables/useMockReactions.js';
+import { useMockReactions } from '@/recipes/ConversationView/EmojiRow/composables/useMockReactions.js';
 import fryImage from '@/common/assets/fry.gif';
 
 const fadeState = ref('SEARCHED');

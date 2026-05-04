@@ -2,14 +2,14 @@ import DtStack from './stack.vue';
 
 import StackDefault from './StackDefault.story.vue';
 import StackVariants from './StackVariants.story.vue';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import {
   DT_STACK_DIRECTION,
   DT_STACK_GAP,
   DT_STACK_RESPONSIVE_BREAKPOINTS,
   DT_STACK_ALIGN,
   DT_STACK_JUSTIFY,
-} from '@/components/stack/stack_constants';
+} from '@/components/stack/StackConstants';
 
 export const argsData = {
   direction: { default: 'column' },

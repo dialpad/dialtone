@@ -235,13 +235,13 @@
 import DtFilterPill from './FilterPill.vue';
 import { BUTTON_SIZE_MODIFIERS } from '@/components/button';
 import { DtStack } from '@/components/stack';
-import { DtRadioGroup } from '@/components/radio_group';
+import { DtRadioGroup } from '@/components/RadioGroup';
 import { DtRadio } from '@/components/radio';
 import { DtIconFilter } from '@dialpad/dialtone-icons/vue';
 import { DtIconBoxSelect } from '@dialpad/dialtone-icons/vue';
 
 import { DtText } from '../text/index';
-import { DtListItem } from '@/components/list_item';
+import { DtListItem } from '@/components/ListItem';
 
 export default {
   name: 'DtFilterPillVariants',

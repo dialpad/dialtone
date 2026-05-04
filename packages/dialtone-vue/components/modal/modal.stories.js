@@ -2,10 +2,10 @@ import DtModal from './modal.vue';
 
 import DtModalDefaultTemplate from './ModalDefault.story.vue';
 import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './ModalConstants';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import { action } from 'storybook/actions';
 import { NOTICE_KINDS } from '@/components/notice';
-import { CONTENT_MODE_ARG_TYPE } from '@/common/mode_constants';
+import { CONTENT_MODE_ARG_TYPE } from '@/common/ModeConstants';
 
 // Default Props for all variations
 export const argsData = {

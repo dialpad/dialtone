@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { InputGroupMixin } from '@/common/mixins/input_group';
+import { InputGroupMixin } from '@/common/mixins/InputGroup';
 import { DtValidationMessages } from '../ValidationMessages';
 import { DtText } from '@/components/text';
 import { hasSlotContent } from '@/common/utils';

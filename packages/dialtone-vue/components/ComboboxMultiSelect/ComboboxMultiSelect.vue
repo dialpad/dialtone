@@ -125,15 +125,15 @@
 
 <script>
 /* eslint-disable max-lines */
-import DtComboboxWithPopover from '@/components/combobox_with_popover/combobox_with_popover.vue';
+import DtComboboxWithPopover from '@/components/ComboboxWithPopover/ComboboxWithPopover.vue';
 import DtInput from '@/components/input/input.vue';
 import DtChip from '@/components/chip/chip.vue';
-import DtValidationMessages from '@/components/validation_messages/validation_messages.vue';
+import DtValidationMessages from '@/components/ValidationMessages/ValidationMessages.vue';
 import { validationMessageValidator } from '@/common/validators';
 import { extractVueListeners, extractNonListeners, hasSlotContent, returnFirstEl } from '@/common/utils';
 import {
   POPOVER_APPEND_TO_VALUES,
-} from '@/components/popover/popover_constants';
+} from '@/components/popover/PopoverConstants';
 import {
   CHIP_SIZES,
   CHIP_TOP_POSITION,

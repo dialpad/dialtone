@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile, getIconNames, getIllustrationNames } from '@/common/storybook_utils';
+import { createTemplateFromVueFile, getIconNames, getIllustrationNames } from '@/common/StorybookUtils';
 import DtEmptyState from './EmptyState.vue';
 import DtEmptyStateDefaultTemplate from './EmptyStateDefault.story.vue';
 import DtEmptyStateVariantsTemplate from './EmptyStateVariants.story.vue';

@@ -13,7 +13,7 @@
 </template>
 
 <script setup>
-import { CDN_URL } from '@/components/emoji_picker/emoji_picker_constants';
+import { CDN_URL } from '@/components/EmojiPicker/EmojiPickerConstants';
 
 defineProps({
   /**

@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import DtProgressCircle from './ProgressCircle.vue';
 import { PROGRESS_CIRCLE_SIZES, PROGRESS_CIRCLE_SIZE_DEFAULT, PROGRESS_CIRCLE_KINDS, PROGRESS_CIRCLE_KIND_DEFAULT } from './ProgressCircleConstants';
 import DtProgressCircleDefaultTemplate from './ProgressCircleDefault.story.vue';

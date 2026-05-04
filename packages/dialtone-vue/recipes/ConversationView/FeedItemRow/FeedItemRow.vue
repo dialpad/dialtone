@@ -125,8 +125,8 @@
 <script>
 import { DEFAULT_FEED_ROW_STATE, FEED_ROW_STATE_BACKGROUND_COLOR } from './FeedItemRowConstants.js';
 import { DtAvatar } from '@/components/avatar';
-import { DtLazyShow } from '@/components/lazy_show';
-import { DtListItem } from '@/components/list_item';
+import { DtLazyShow } from '@/components/LazyShow';
+import { DtListItem } from '@/components/ListItem';
 import { DtBadge } from '@/components/badge';
 import Modal from '@/common/mixins/modal';
 import { DtIconUser } from '@dialpad/dialtone-icons/vue';

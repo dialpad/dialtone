@@ -65,7 +65,7 @@ import { REACTIONS_ATTRIBUTES } from './EmojiRowConstants.js';
 import { DtButton } from '@/components/button';
 import { DtTooltip } from '@/components/tooltip';
 import { DtEmoji } from '@/components/emoji';
-import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
+import { DtEmojiTextWrapper } from '@/components/EmojiTextWrapper';
 import { DialtoneLocalization } from '@/localization';
 import { getEmojiShortCode } from '@/common/emoji';
 

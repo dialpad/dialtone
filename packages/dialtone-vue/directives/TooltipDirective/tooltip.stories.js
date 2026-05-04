@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils.js';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils.js';
 import TooltipDirectiveDefaultTemplate from './TooltipDirectiveDefault.story.vue';
 
 export const argsData = {};

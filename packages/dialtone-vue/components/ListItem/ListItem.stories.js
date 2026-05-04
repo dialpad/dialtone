@@ -1,5 +1,5 @@
 import { action } from 'storybook/actions';
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/StorybookUtils';
 import DtListItem from './ListItem.vue';
 
 import { LIST_ITEM_NAVIGATION_TYPES, LIST_ITEM_TYPES } from './ListItemConstants';

@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import DtComboboxMultiSelect from './ComboboxMultiSelect.vue';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import { flushPromises } from '@/common/utils';
-import SrOnlyCloseButtonComponent from '@/common/sr_only_close_button.vue';
+import SrOnlyCloseButtonComponent from '@/common/SrOnlyCloseButton.vue';
 
 // Constants
 const baseProps = {

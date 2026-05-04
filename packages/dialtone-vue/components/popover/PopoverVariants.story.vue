@@ -455,7 +455,7 @@
 import { DtPopover } from './';
 import { DtButton } from '@/components/button';
 import { DtDropdown } from '@/components/dropdown';
-import { DtListItem } from '@/components/list_item';
+import { DtListItem } from '@/components/ListItem';
 import { DtTooltip } from '@/components/tooltip';
 import { DtIcon } from '@/components/icon';
 import { DtStack } from '@/components/stack';

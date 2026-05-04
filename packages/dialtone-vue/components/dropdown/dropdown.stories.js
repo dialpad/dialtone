@@ -1,5 +1,5 @@
 import { action } from 'storybook/actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import DtDropdown from './dropdown.vue';
 
 import DtDropdownDefaultTemplate from './DropdownDefault.story.vue';
@@ -8,7 +8,7 @@ import { LIST_ITEM_NAVIGATION_TYPES } from '../ListItem/ListItemConstants';
 import { POPOVER_CONTENT_WIDTHS } from '../popover';
 import { DROPDOWN_PADDING_CLASSES } from './DropdownConstants';
 import { POPOVER_DIRECTIONS } from '../popover/PopoverConstants';
-import { CONTENT_MODE_ARG_TYPE } from '@/common/mode_constants';
+import { CONTENT_MODE_ARG_TYPE } from '@/common/ModeConstants';
 
 // Default Prop Values
 export const argsData = {

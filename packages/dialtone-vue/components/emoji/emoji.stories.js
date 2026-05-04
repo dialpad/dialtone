@@ -1,5 +1,5 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
+import { ICON_SIZE_MODIFIERS } from '@/components/icon/IconConstants';
 import DtEmoji from './emoji.vue';
 
 import DtEmojiDefaultTemplate from './EmojiDefault.story.vue';

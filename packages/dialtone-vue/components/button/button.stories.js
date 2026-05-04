@@ -11,7 +11,7 @@ import { LINK_KIND_MODIFIERS } from '../link/LinkConstants';
 
 import ButtonDefault from './ButtonDefault.story.vue';
 import ButtonVariants from './ButtonVariants.story.vue';
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/StorybookUtils';
 
 export const argsData = {
   onClick: action('click'),

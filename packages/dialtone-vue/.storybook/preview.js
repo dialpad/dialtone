@@ -46,11 +46,11 @@ import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCus
 import customEmojiJson from '@/common/custom-emoji.json';
 import { dialtoneDarkTheme, dialtoneLightTheme } from './dialtone-themes.js';
 import { DialtoneDocsPage } from './DialtoneDocsPage.js';
-import { DtTooltipDirective } from '@/directives/tooltip_directive';
-import { DtScrollbarDirective } from '@/directives/scrollbar_directive';
-import { DtModeDirective } from '@/directives/mode_directive';
-import { DtFocusgroupDirective } from '@/directives/focusgroup_directive';
-import { DtFocustrapDirective } from '@/directives/focustrap_directive';
+import { DtTooltipDirective } from '@/directives/TooltipDirective';
+import { DtScrollbarDirective } from '@/directives/ScrollbarDirective';
+import { DtModeDirective } from '@/directives/ModeDirective';
+import { DtFocusgroupDirective } from '@/directives/FocusgroupDirective';
+import { DtFocustrapDirective } from '@/directives/FocustrapDirective';
 import { DtStack } from '@/components/stack';
 import { faker } from '@faker-js/faker';
 

@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import DtSegmentedControl from './SegmentedControl.vue';
 import DtSegmentedControlDefaultTemplate from './SegmentedControlDefault.story.vue';
 import DtSegmentedControlVariantsTemplate from './SegmentedControlVariants.story.vue';

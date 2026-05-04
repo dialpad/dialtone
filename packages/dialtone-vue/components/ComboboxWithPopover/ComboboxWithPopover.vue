@@ -116,14 +116,14 @@
 </template>
 
 <script>
-import ComboboxLoadingList from '@/components/combobox/combobox_loading-list.vue';
-import ComboboxEmptyList from '@/components/combobox/combobox_empty-list.vue';
+import ComboboxLoadingList from '@/components/combobox/ComboboxLoading-list.vue';
+import ComboboxEmptyList from '@/components/combobox/ComboboxEmpty-list.vue';
 import { DtCombobox, COMBOBOX_LABEL_SIZES } from '@/components/combobox';
 import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_CONTENT_WIDTHS } from '@/components/popover';
 import { getUniqueString, hasSlotContent } from '@/common/utils';
 import { COMPONENT_SIZES } from '@/common/constants';
 import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown';
-import { CONTENT_MODE_PROP } from '@/common/mode_constants';
+import { CONTENT_MODE_PROP } from '@/common/ModeConstants';
 
 export default {
   compatConfig: { MODE: 3 },

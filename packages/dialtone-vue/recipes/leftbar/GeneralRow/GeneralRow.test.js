@@ -4,7 +4,7 @@ import {
   LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS,
   LEFTBAR_GENERAL_ROW_TYPES,
   LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR,
-} from '@/recipes/leftbar/general_row/general_row_constants';
+} from '@/recipes/leftbar/GeneralRow/GeneralRowConstants';
 
 // Constants
 const baseProps = {

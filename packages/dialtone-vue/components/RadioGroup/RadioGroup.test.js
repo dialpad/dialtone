@@ -1,7 +1,7 @@
 import { config, mount, shallowMount } from '@vue/test-utils';
-import { DtValidationMessages } from '@/components/validation_messages';
+import { DtValidationMessages } from '@/components/ValidationMessages';
 import { DtRadio } from '@/components/radio';
-import { DtRadioGroup } from '@/components/radio_group';
+import { DtRadioGroup } from '@/components/RadioGroup';
 import RadiosFixture from '@/tests/fixtures/radios.vue';
 
 const MOCK_LEGEND = 'My Legend';

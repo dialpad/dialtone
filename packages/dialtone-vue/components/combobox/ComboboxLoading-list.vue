@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import { DtListItem } from '@/components/list_item';
+import { DtListItem } from '@/components/ListItem';
 import { DtSkeleton } from '@/components/skeleton';
 
 export default {

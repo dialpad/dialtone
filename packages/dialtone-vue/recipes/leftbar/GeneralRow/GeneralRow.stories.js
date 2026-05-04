@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import { action } from 'storybook/actions';
 import DtRecipeGeneralRow from './GeneralRow.vue';
 
@@ -7,7 +7,7 @@ import DtRecipeGeneralRowVariantsTemplate from './GeneralRowVariants.story.vue';
 import {
   LEFTBAR_GENERAL_ROW_TYPES,
   LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS,
-} from '@/recipes/leftbar/general_row/general_row_constants';
+} from '@/recipes/leftbar/GeneralRow/GeneralRowConstants';
 import { LEFTBAR_GENERAL_ROW_ICON_SIZES } from './GeneralRowConstants';
 
 // Default Prop Values

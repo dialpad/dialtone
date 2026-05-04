@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import DtRecipeCallbox from './callbox.vue';
-import { CALLBOX_BADGE_COLORS, CALLBOX_BORDER_COLORS } from '@/recipes/leftbar/callbox/callbox_constants.js';
+import { CALLBOX_BADGE_COLORS, CALLBOX_BORDER_COLORS } from '@/recipes/leftbar/callbox/CallboxConstants.js';
 
 const MOCK_CALLBOX_STUB = vi.fn();
 const MOCK_AVATAR_IMAGE_SOURCE = 'image.png';

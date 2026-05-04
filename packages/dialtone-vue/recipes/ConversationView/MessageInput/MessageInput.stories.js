@@ -1,15 +1,15 @@
 import { action } from 'storybook/actions';
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/StorybookUtils';
 import DtRecipeMessageInput from './MessageInput.vue';
 import DtRecipeMessageInputDefaultTemplate from './MessageInputDefault.story.vue';
 import DtRecipeMessageInputMarkdownOutputTemplate from './MessageInputMarkdownOutput.story.vue';
-import mentionSuggestion from '@/components/rich_text_editor/mention_suggestion';
-import channelSuggestion from '@/components/rich_text_editor/channel_suggestion';
-import slashCommandSuggestion from '@/components/rich_text_editor/slash_command_suggestion';
+import mentionSuggestion from '@/components/RichTextEditor/MentionSuggestion';
+import channelSuggestion from '@/components/RichTextEditor/ChannelSuggestion';
+import slashCommandSuggestion from '@/components/RichTextEditor/SlashCommandSuggestion';
 import customEmojiJson from '@/common/custom-emoji.json';
 import {
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
-} from '@/components/rich_text_editor/rich_text_editor_constants.js'
+} from '@/components/RichTextEditor/RichTextEditorConstants.js'
 
 const iconsList = getIconNames();
 

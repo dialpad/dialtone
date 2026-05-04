@@ -10,9 +10,9 @@ function _getEntries (pathPrefix, globRegex) {
       '**/*.story.vue',
       '**/*.stories.js',
       '**/*.test.js',
-      'common/storybook_utils.js',
-      'common/v_html.js',
-      'common/mixins/keyboard_list_navigation_tester.vue',
+      'common/StorybookUtils.js',
+      'common/VHtml.js',
+      'common/mixins/KeyboardListNavigationTester.vue',
       'components/plugins/*',
     ],
     maxDepth: 4,
@@ -72,7 +72,7 @@ export default defineConfig({
         ...recipeEntries,
 
         // Shared components
-        'shared/sr_only_close_button': './common/SrOnlyCloseButton.vue',
+        'shared/SrOnlyCloseButton': './common/SrOnlyCloseButton.vue',
 
         // Dependencies
         'node_modules/@tiptap/vue-3': './node_modules/@tiptap/vue-3/dist/index.js',
@@ -126,9 +126,9 @@ export default defineConfig({
         '**/node_modules/**',
         '**/dist/**',
         '**/coverage/**',
-        'common/storybook_utils.js',
-        'common/v_html.js',
-        'common/mixins/keyboard_list_navigation_tester.vue',
+        'common/StorybookUtils.js',
+        'common/VHtml.js',
+        'common/mixins/KeyboardListNavigationTester.vue',
         'components/plugins/*',
         '.storybook/**',
         'storybook-static/**',

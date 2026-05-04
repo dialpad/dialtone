@@ -3,7 +3,7 @@ import DtSplitButton from './SplitButton.vue';
 import SplitButtonStart from './SplitButton-start.vue';
 import SplitButtonEnd from './SplitButton-end.vue';
 import { DtIconSend } from '@dialpad/dialtone-icons/vue';
-import { DtTooltipDirective } from '@/directives/tooltip_directive';
+import { DtTooltipDirective } from '@/directives/TooltipDirective';
 
 const MOCK_START_BUTTON_STUB = vi.fn();
 const MOCK_END_BUTTON_STUB = vi.fn();

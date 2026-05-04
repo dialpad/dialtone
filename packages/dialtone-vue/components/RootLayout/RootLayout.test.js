@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import DtRootLayout from './RootLayout.vue';
-import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from '@/components/root_layout/root_layout_constants';
+import { ROOT_LAYOUT_SIDEBAR_POSITIONS } from '@/components/RootLayout/RootLayoutConstants';
 
 const baseProps = {
 };

@@ -206,14 +206,14 @@
 
 <script>
 import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES } from '@/components/popover';
-import { CONTENT_MODE_PROP } from '@/common/mode_constants';
+import { CONTENT_MODE_PROP } from '@/common/ModeConstants';
 import { BUTTON_SIZE_MODIFIERS, BUTTON_ICON_SIZES, DtButton } from '@/components/button';
 import { DtIconChevronDown, DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { DialtoneLocalization } from '@/localization';
 import { DtCheckbox } from '@/components/checkbox';
-import { DtCheckboxGroup } from '@/components/checkbox_group';
+import { DtCheckboxGroup } from '@/components/CheckboxGroup';
 import { DtDropdown } from '@/components/dropdown';
-import { DtListItem } from '@/components/list_item';
+import { DtListItem } from '@/components/ListItem';
 import { DtStack } from '@/components/stack';
 
 export default {

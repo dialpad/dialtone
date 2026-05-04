@@ -138,7 +138,7 @@ import {
   MODAL_SIZE_MODIFIERS,
 } from './ModalConstants';
 import { getUniqueString, hasSlotContent, returnFirstEl, disableRootScrolling, enableRootScrolling } from '@/common/utils';
-import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
+import SrOnlyCloseButton from '@/common/SrOnlyCloseButton.vue';
 import { NOTICE_KINDS } from '@/components/notice';
 import { DialtoneLocalization } from '@/localization';
 

@@ -82,7 +82,7 @@
 <script>
 import DtComboboxWithPopover from './ComboboxWithPopover.vue';
 import DtInput from '@/components/input/input.vue';
-import DtListItem from '@/components/list_item/list_item.vue';
+import DtListItem from '@/components/ListItem/ListItem.vue';
 import DtCheckbox from '@/components/checkbox/checkbox.vue';
 import { DtStack } from '@/components/stack';
 

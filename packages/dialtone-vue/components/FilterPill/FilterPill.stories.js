@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 
 import DtFilterPill from './FilterPill.vue';
 import DtFilterPillDefaultTemplate from './FilterPillDefault.story.vue';
@@ -6,7 +6,7 @@ import DtFilterPillVariantsTemplate from './FilterPillVariants.story.vue';
 import { action } from 'storybook/actions';
 import { BUTTON_SIZE_MODIFIERS } from '@/components/button';
 import { POPOVER_DIRECTIONS, POPOVER_PADDING_CLASSES } from '@/components/popover/index.js';
-import { CONTENT_MODE_ARG_TYPE } from '@/common/mode_constants';
+import { CONTENT_MODE_ARG_TYPE } from '@/common/ModeConstants';
 
 // Set default values at the story level here.
 export const argsData = {

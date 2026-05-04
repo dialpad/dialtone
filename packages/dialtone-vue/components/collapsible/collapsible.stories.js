@@ -1,6 +1,6 @@
 import { action } from 'storybook/actions';
 import { DtCollapsible } from './';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 
 import DtCollapsibleDefaultStory from './CollapsibleDefault.story.vue';
 

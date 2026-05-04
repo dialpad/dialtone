@@ -24,7 +24,7 @@
 </template>
 
 <script>
-import { DtMotionText } from '@/components/motion_text';
+import { DtMotionText } from '@/components/MotionText';
 import { DtStack } from '@/components/stack';
 
 export default {

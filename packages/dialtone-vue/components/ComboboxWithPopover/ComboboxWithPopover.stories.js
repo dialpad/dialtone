@@ -1,12 +1,12 @@
 import { action } from 'storybook/actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import DtComboboxWithPopover from './ComboboxWithPopover.vue';
 
 import DtComboboxWithPopoverDefaultTemplate from './ComboboxWithPopoverDefault.story.vue';
-import { POPOVER_CONTENT_WIDTHS } from '@/components/popover/popover_constants';
-import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown/dropdown_constants';
+import { POPOVER_CONTENT_WIDTHS } from '@/components/popover/PopoverConstants';
+import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown/DropdownConstants';
 import { COMBOBOX_LABEL_SIZES } from '@/components/combobox';
-import { CONTENT_MODE_ARG_TYPE } from '@/common/mode_constants';
+import { CONTENT_MODE_ARG_TYPE } from '@/common/ModeConstants';
 
 // Default Prop Values
 export const argsData = {

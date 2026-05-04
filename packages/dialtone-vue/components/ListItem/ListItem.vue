@@ -53,7 +53,7 @@ import {
 } from './ListItemConstants';
 import utils from '@/common/utils';
 import { DtIconCheck } from '@dialpad/dialtone-icons/vue';
-import { DtItemLayout } from '@/components/item_layout';
+import { DtItemLayout } from '@/components/ItemLayout';
 
 const ROLES = ['listitem', 'menuitem', 'option'];
 

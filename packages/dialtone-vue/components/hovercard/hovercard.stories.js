@@ -4,13 +4,13 @@ import DtHovercardDefaultTemplate from './HovercardDefault.story.vue';
 import DtHovercardManyTemplate from './HovercardMany.story.vue';
 import DtHovercardWithInputTemplate from './HovercardWithInput.story.vue';
 import DtHovercardExternalAnchorTemplate from './HovercardExternalAnchor.story.vue';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import { action } from 'storybook/actions';
 import {
   POPOVER_DIRECTIONS,
   POPOVER_PADDING_CLASSES,
 } from '@/components/popover/index.js';
-import { CONTENT_MODE_ARG_TYPE } from '@/common/mode_constants';
+import { CONTENT_MODE_ARG_TYPE } from '@/common/ModeConstants';
 
 export const argTypesData = {
   // Slots

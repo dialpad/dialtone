@@ -116,7 +116,7 @@
 
 <script setup>
 import DtHovercard from './hovercard.vue';
-import DtRecipeContactRow from '@/recipes/leftbar/contact_row/contact_row.vue';
+import DtRecipeContactRow from '@/recipes/leftbar/ContactRow/ContactRow.vue';
 import defaultImage from '@/common/assets/avatar2.png';
 import DtStack from '../stack/stack.vue';
 import DtIcon from '../icon/icon.vue';

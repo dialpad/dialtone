@@ -1,13 +1,13 @@
 import { action } from 'storybook/actions';
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/StorybookUtils';
 import DtRecipeCallbarButtonWithDropdown from './CallbarButtonWithDropdown.vue';
 
 import DtRecipeCallbarButtonWithDropdownDefaultTemplate from './CallbarButtonWithDropdownDefault.story.vue';
 
 import {
   POPOVER_DIRECTIONS,
-} from '@/components/popover/popover_constants';
-import { CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '@/recipes/buttons/callbar_button/callbar_button_constants';
+} from '@/components/popover/PopoverConstants';
+import { CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '@/recipes/buttons/CallbarButton/CallbarButtonConstants';
 
 const iconsList = getIconNames();
 

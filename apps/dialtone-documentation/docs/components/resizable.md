@@ -400,11 +400,11 @@ Double-clicking a handle resets the two adjacent panels to their initial size pr
 
 ### DtResizablePanel
 
-<component-vue-api component-name="resizable_panel" />
+<component-vue-api component-name="ResizablePanel" />
 
 ### DtResizableHandle
 
-<component-vue-api component-name="resizable_handle" />
+<component-vue-api component-name="ResizableHandle" />
 
 <script setup>
 import ExampleResizable from '@exampleComponents/ExampleResizable.vue';

@@ -3,7 +3,7 @@ import {
   addMonths, startOfMonth, getDay, getDate,
   subMonths, endOfMonth,
 } from 'date-fns';
-import { WEEK_START } from '@/components/datepicker/datepicker_constants.js';
+import { WEEK_START } from '@/components/datepicker/DatepickerConstants.js';
 
 const _parsedGetDate = (value) => (value ? new Date(value) : new Date());
 

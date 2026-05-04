@@ -46,12 +46,12 @@
 </template>
 
 <script>
-import { DtImageViewer } from '@/components/image_viewer';
+import { DtImageViewer } from '@/components/ImageViewer';
 import { DtButton } from '@/components/button';
 import { DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { DialtoneLocalization } from '@/localization';
 
-import { DtProgressCircle } from '@/components/progress_circle';
+import { DtProgressCircle } from '@/components/ProgressCircle';
 
 export default {
   compatConfig: { MODE: 3 },

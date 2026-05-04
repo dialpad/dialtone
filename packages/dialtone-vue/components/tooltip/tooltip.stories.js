@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import DtTooltip from './tooltip.vue';
 import DtTooltipFlipTemplate from './TooltipFlip.story.vue';
 import DtTooltipDefault from './TooltipDefault.story.vue';
@@ -7,7 +7,7 @@ import DtTooltipChangeOnClick from './TooltipChangeOnClick.story.vue';
 import { action } from 'storybook/actions';
 
 import { TOOLTIP_DIRECTIONS, TOOLTIP_STICKY_VALUES } from './TooltipConstants';
-import { CONTENT_MODE_ARG_TYPE } from '@/common/mode_constants';
+import { CONTENT_MODE_ARG_TYPE } from '@/common/ModeConstants';
 
 // Default Prop Values
 export const argsData = {

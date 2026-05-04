@@ -1,6 +1,6 @@
 
 // import { action } from 'storybook/actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import {
   ROOT_LAYOUT_RESPONSIVE_BREAKPOINTS,
   ROOT_LAYOUT_SIDEBAR_POSITIONS,

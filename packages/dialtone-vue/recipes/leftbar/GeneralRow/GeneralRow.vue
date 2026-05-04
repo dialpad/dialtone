@@ -201,7 +201,7 @@ import {
 } from '@dialpad/dialtone-icons/vue';
 import { DtButton } from '@/components/button';
 import { DtTooltip } from '@/components/tooltip';
-import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
+import { DtEmojiTextWrapper } from '@/components/EmojiTextWrapper';
 import { DtAvatar } from '@/components/avatar';
 import DtRecipeLeftbarGeneralRowIcon from './LeftbarGeneralRowIcon.vue';
 import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs, returnFirstEl } from '@/common/utils';

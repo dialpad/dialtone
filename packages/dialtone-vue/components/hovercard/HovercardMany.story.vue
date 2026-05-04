@@ -139,8 +139,8 @@
 import DtHovercard from './hovercard.vue';
 import avatar1 from '@/common/assets/avatar1.png?url';
 import avatar2 from '@/common/assets/avatar2.png?url';
-import { DtRecipeFeedItemRow } from '@/recipes/conversation_view/feed_item_row';
-import { DtRecipeEmojiRow } from '@/recipes/conversation_view/emoji_row';
+import { DtRecipeFeedItemRow } from '@/recipes/ConversationView/FeedItemRow';
+import { DtRecipeEmojiRow } from '@/recipes/ConversationView/EmojiRow';
 import { DtStack } from '@/components/stack';
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';

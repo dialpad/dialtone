@@ -200,7 +200,7 @@
 <script>
 import DtStack from '@/components/stack/stack.vue';
 import DtText from '@/components/text/text.vue';
-import DtSelectMenu from '@/components/select_menu/select_menu.vue';
+import DtSelectMenu from '@/components/SelectMenu/SelectMenu.vue';
 import DtToggle from '@/components/toggle/toggle.vue';
 
 export default {

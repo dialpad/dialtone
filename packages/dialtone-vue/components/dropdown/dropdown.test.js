@@ -1,6 +1,6 @@
 import { config, mount } from '@vue/test-utils';
 import DtDropdown from './dropdown.vue';
-import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
+import SrOnlyCloseButton from '@/common/SrOnlyCloseButton.vue';
 import { DtPopover } from '@/components/popover';
 
 const MOCK_HIGHLIGHT_STUB = vi.fn();

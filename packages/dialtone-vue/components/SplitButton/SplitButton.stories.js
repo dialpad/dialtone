@@ -1,5 +1,5 @@
 import { action } from 'storybook/actions';
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/StorybookUtils';
 import DtSplitButton from './SplitButton.vue';
 import DtSplitButtonDefaultTemplate from './SplitButtonDefault.story.vue';
 import DtSplitButtonVariantsTemplate from './SplitButtonVariants.story.vue';

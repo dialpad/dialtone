@@ -31,7 +31,7 @@
 <script>
 import DtListItem from './ListItem.vue';
 import { DtIcon } from '@/components/icon';
-import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
+import KeyboardNavigation from '@/common/mixins/KeyboardListNavigation';
 
 export default {
   name: 'DtListItemDefault',

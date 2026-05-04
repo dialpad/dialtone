@@ -2,7 +2,7 @@ import DtBox from './box.vue';
 import DtStack from '@/components/stack/stack.vue';
 import DtText from '@/components/text/text.vue';
 import BoxVariants from './BoxVariants.story.vue';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import {
   DT_BOX_AS_VALUES,
   DT_BOX_SPACING_VALUES,

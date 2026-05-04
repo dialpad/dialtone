@@ -73,7 +73,7 @@
 <script>
 import DtSplitButton from './SplitButton.vue';
 import { DtIcon } from '@/components/icon';
-import { DtListItem } from '@/components/list_item';
+import { DtListItem } from '@/components/ListItem';
 
 export default {
   name: 'DtSplitButtonDefault',

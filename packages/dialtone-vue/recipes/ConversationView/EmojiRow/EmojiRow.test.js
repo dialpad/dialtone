@@ -2,7 +2,7 @@ import { mount } from '@vue/test-utils';
 import {
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikePassesCustomPropValidation,
-} from '@/tests/shared_examples/validation.js';
+} from '@/tests/SharedExamples/validation.js';
 import DtRecipeEmojiRow from './EmojiRow.vue';
 import { DtTooltip } from '@/components/tooltip';
 import { getEmojiShortCode } from '@/common/emoji';

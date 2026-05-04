@@ -2,7 +2,7 @@ import { DtTooltip, TOOLTIP_DIRECTIONS } from '@/components/tooltip';
 import { getUniqueString } from '@/common/utils';
 import { createApp, h } from 'vue';
 import deepEqual from 'deep-equal';
-import { CONTENT_MODE_VALUES } from '@/common/mode_constants';
+import { CONTENT_MODE_VALUES } from '@/common/ModeConstants';
 
 export const DtTooltipDirective = {
   name: 'dt-tooltip-directive',

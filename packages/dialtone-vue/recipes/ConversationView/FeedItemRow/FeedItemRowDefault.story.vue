@@ -134,12 +134,12 @@
 <script setup>
 import DtRecipeFeedItemRow from './FeedItemRow.vue';
 import { DtRecipeEmojiRow } from '../EmojiRow';
-import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
+import { DtEmojiTextWrapper } from '@/components/EmojiTextWrapper';
 import { DtAvatar } from '@/components/avatar';
 import { DtIcon } from '@/components/icon';
 import { DtButton } from '@/components/button';
 import { DtStack } from '@/components/stack';
-import { useMockReactions } from '@/recipes/conversation_view/emoji_row/composables/useMockReactions.js';
+import { useMockReactions } from '@/recipes/ConversationView/EmojiRow/composables/useMockReactions.js';
 
 const hoverButtons = ['bell', 'living-thing', 'map-pin'];
 

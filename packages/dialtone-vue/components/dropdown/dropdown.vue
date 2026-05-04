@@ -59,13 +59,13 @@
 </template>
 
 <script>
-import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
+import KeyboardNavigation from '@/common/mixins/KeyboardListNavigation';
 import { DtPopover, POPOVER_APPEND_TO_VALUES } from '@/components/popover';
-import { LIST_ITEM_NAVIGATION_TYPES } from '@/components/list_item';
+import { LIST_ITEM_NAVIGATION_TYPES } from '@/components/ListItem';
 import { DROPDOWN_PADDING_CLASSES } from './DropdownConstants';
 import { getUniqueString } from '@/common/utils';
 import { EVENT_KEYNAMES } from '@/common/constants';
-import { CONTENT_MODE_PROP } from '@/common/mode_constants';
+import { CONTENT_MODE_PROP } from '@/common/ModeConstants';
 
 export default {
   compatConfig: { MODE: 3 },

@@ -2,8 +2,8 @@ import {
   getOppositeMode,
   getRootContrast,
   findParentMode,
-} from '@/components/mode_island/utils';
-import { CONTENT_MODE_VALUES } from '@/common/mode_constants';
+} from '@/components/ModeIsland/utils';
+import { CONTENT_MODE_VALUES } from '@/common/ModeConstants';
 
 const VALID_MODES = CONTENT_MODE_VALUES;
 

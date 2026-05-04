@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import { EMOJIS_PER_ROW, ARROW_KEYS } from '@/components/emoji_picker/emoji_picker_constants';
+import { EMOJIS_PER_ROW, ARROW_KEYS } from '@/components/EmojiPicker/EmojiPickerConstants';
 
 export function useKeyboardNavigation () {
   const emojiRefs = ref([]);

@@ -104,8 +104,8 @@
 /* eslint-disable max-lines */
 import { emojisGrouped as emojis } from '@dialpad/dialtone-emojis';
 import { computed, onMounted, onBeforeUnmount, ref, watch, nextTick } from 'vue';
-import { CDN_URL, ARROW_KEYS } from '@/components/emoji_picker/emoji_picker_constants';
-import { useKeyboardNavigation } from '@/components/emoji_picker/composables/useKeyboardNavigation';
+import { CDN_URL, ARROW_KEYS } from '@/components/EmojiPicker/EmojiPickerConstants';
+import { useKeyboardNavigation } from '@/components/EmojiPicker/composables/useKeyboardNavigation';
 
 const props = defineProps({
   /**

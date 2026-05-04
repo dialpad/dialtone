@@ -3,7 +3,7 @@ import DtRecipeTopBannerInfo from './TopBannerInfo.vue';
 import {
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikePassesCustomPropValidation,
-} from '@/tests/shared_examples/validation.js';
+} from '@/tests/SharedExamples/validation.js';
 
 // Constants
 const baseProps = {

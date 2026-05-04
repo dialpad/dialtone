@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { DtRichTextEditor } from '@/components/rich_text_editor';
+import { DtRichTextEditor } from '@/components/RichTextEditor';
 import { EditorContent } from '@tiptap/vue-3';
 import { findAllVariables } from '../../../../common/TestUtils/NodeTraversal';
 

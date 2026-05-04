@@ -136,12 +136,12 @@ import {
   POPOVER_STICKY_VALUES,
 } from './PopoverConstants';
 import { getUniqueString, hasSlotContent, isOutOfViewPort, warnIfUnmounted, disableRootScrolling, enableRootScrolling, returnFirstEl } from '@/common/utils';
-import { DtLazyShow } from '@/components/lazy_show';
+import { DtLazyShow } from '@/components/LazyShow';
 import ModalMixin from '@/common/mixins/modal';
 import ModeMixin from '@/common/mixins/mode';
 import { createTippyPopover, getPopperOptions } from './TippyUtils';
 import PopoverHeaderFooter from './PopoverHeaderFooter.vue';
-import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
+import SrOnlyCloseButton from '@/common/SrOnlyCloseButton.vue';
 
 /**
  * A Popover displays a content overlay when its anchor element is activated.

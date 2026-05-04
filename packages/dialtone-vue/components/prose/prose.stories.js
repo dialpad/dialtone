@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import DtProse from './prose.vue';
 import DtProseDefaultTemplate from './ProseDefault.story.vue';
 import {

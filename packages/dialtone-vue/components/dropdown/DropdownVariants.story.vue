@@ -227,8 +227,8 @@
 <script>
 import { DtDropdown, DtDropdownSeparator } from '@/components/dropdown';
 import { DtStack } from '@/components/stack';
-import { DtListItemGroup } from '@/components/list_item_group';
-import { DtListItem } from '@/components/list_item';
+import { DtListItemGroup } from '@/components/ListItemGroup';
+import { DtListItem } from '@/components/ListItem';
 import { DtButton } from '@/components/button';
 import { DROPDOWN_STORY_ITEMS } from './DropdownStoryConstants';
 

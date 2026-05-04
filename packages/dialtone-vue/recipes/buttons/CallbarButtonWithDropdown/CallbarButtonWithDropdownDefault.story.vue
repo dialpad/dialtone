@@ -76,8 +76,8 @@
 <script>
 import DtRecipeCallbarButtonWithDropdown from './CallbarButtonWithDropdown.vue';
 import { DtIcon } from '@/components/icon';
-import { DtListItem } from '@/components/list_item';
-import { DtListItemGroup } from '@/components/list_item_group';
+import { DtListItem } from '@/components/ListItem';
+import { DtListItemGroup } from '@/components/ListItemGroup';
 import { DtDropdownSeparator } from '@/components/dropdown';
 
 export default {

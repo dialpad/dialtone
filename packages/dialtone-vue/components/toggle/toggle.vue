@@ -33,7 +33,7 @@
 
 <script>
 import { getUniqueString, hasSlotContent, removeClassStyleAttrs } from '@/common/utils';
-import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/toggle/toggle_constants';
+import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/toggle/ToggleConstants';
 
 /**
  * A toggle (or "switch") is a button control element that allows the user to make a binary (on/off) selection.

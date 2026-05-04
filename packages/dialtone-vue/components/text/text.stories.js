@@ -1,5 +1,5 @@
 import { action } from 'storybook/actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import DtText from './text.vue';
 import DtTextDefault from './TextDefault.story.vue';
 import DtTextVariants from './TextVariants.story.vue';

@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { formatDate, formatMonth } from '@/components/datepicker/utils.js';
 import DtDatepicker from './datepicker.vue';
-import { INTL_MONTH_FORMAT } from '@/components/datepicker/datepicker_constants.js';
+import { INTL_MONTH_FORMAT } from '@/components/datepicker/DatepickerConstants.js';
 
 const MOCK_DAY = 21;
 const MOCK_MONTH = 6; // Note: month is zero-based, so 6 represents July

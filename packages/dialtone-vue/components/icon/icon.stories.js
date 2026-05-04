@@ -3,7 +3,7 @@ import { ICON_SIZE_MODIFIERS } from './IconConstants';
 
 import DtIconDefaultTemplate from './IconDefault.story.vue';
 import DtIconVariantsTemplate from './IconVariants.story.vue';
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/StorybookUtils';
 const iconsList = getIconNames();
 export const argTypesData = {
   size: {

@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import DtValidationMessages from './ValidationMessages.vue';
 

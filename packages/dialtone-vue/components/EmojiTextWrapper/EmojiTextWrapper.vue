@@ -2,7 +2,7 @@
 import { DtEmoji } from '../emoji';
 import { findEmojis, findShortCodes } from '@/common/emoji';
 import { h, resolveDynamicComponent } from 'vue';
-import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
+import { ICON_SIZE_MODIFIERS } from '@/components/icon/IconConstants';
 
 const COMMENT_TYPE = h(resolveDynamicComponent(null)).type;
 

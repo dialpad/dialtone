@@ -147,8 +147,8 @@ import { DtIconExternalLink } from '@dialpad/dialtone-icons/vue';
 import { DtButton } from '@/components/button';
 import { DtStack } from '@/components/stack';
 import { DtAvatar } from '@/components/avatar';
-import { DtListItem } from '@/components/list_item';
-import { DtKeyboardShortcut } from '@/components/keyboard_shortcut';
+import { DtListItem } from '@/components/ListItem';
+import { DtKeyboardShortcut } from '@/components/KeyboardShortcut';
 
 export default {
   name: 'DtRecipeIvrNodeDefault',

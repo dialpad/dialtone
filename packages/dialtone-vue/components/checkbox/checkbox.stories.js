@@ -1,5 +1,5 @@
 import { action } from 'storybook/actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import CheckboxDefault from './CheckboxDefault.story.vue';
 import CheckboxVariants from './CheckboxVariants.story.vue';

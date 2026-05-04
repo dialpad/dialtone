@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { DtModeDirective } from './mode.js';
-import DtModeIsland from '@/components/mode_island/mode_island.vue';
+import DtModeIsland from '@/components/ModeIsland/ModeIsland.vue';
 
 describe('DtModeDirective Tests', () => {
   let wrapper;

@@ -189,7 +189,7 @@
 </template>
 
 <script>
-import { DtMotionText, MOTION_TEXT_SPEEDS } from '@/components/motion_text';
+import { DtMotionText, MOTION_TEXT_SPEEDS } from '@/components/MotionText';
 import { DtButton } from '@/components/button';
 import { DtStack } from '@/components/stack';
 

@@ -38,7 +38,7 @@ import DtChip from './chip.vue';
 import { CHIP_ICON_SIZES } from './ChipConstants.js';
 import { DtIcon } from '@/components/icon';
 import { DtAvatar } from '@/components/avatar';
-import VHtml from '@/common/v_html';
+import VHtml from '@/common/VHtml';
 
 export default {
   name: 'DtChipDefault',

@@ -284,12 +284,12 @@ import {
   DtRichTextEditor,
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
-} from '@/components/rich_text_editor';
+} from '@/components/RichTextEditor';
 import lastActiveNodes from './LastActiveNodes';
 import { removeClassStyleAttrs, returnFirstEl } from '@/common/utils';
 import MeetingPill from './extensions/MeetingPill/MeetingPill';
 import { DtButton } from '@/components/button';
-import { DtEmojiPicker } from '@/components/emoji_picker';
+import { DtEmojiPicker } from '@/components/EmojiPicker';
 import { DtPopover } from '@/components/popover';
 import { DtInput } from '@/components/input';
 import { DtTooltip } from '@/components/tooltip';

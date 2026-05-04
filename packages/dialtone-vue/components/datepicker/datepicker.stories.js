@@ -1,5 +1,5 @@
 import { action } from 'storybook/actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import DtDatepicker from './datepicker.vue';
 import DtDatepickerDefaultTemplate from './DatepickerDefault.story.vue';
 import DtDatepickerWithPopoverTemplate from './DatepickerPopover.story.vue';

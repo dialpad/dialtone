@@ -107,8 +107,8 @@ import OptionsDropdown from './components/OptionsDropdown.vue';
 import { DtButton } from '@/components/button';
 import { DtIconBellRing } from '@dialpad/dialtone-icons/vue';
 import { DtStack } from '@/components/stack';
-import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
-import { DtRecipeContactRow } from '@/recipes/leftbar/contact_row';
+import { DtRecipeGeneralRow } from '@/recipes/leftbar/GeneralRow';
+import { DtRecipeContactRow } from '@/recipes/leftbar/ContactRow';
 import { faker } from '@faker-js/faker';
 import { computed } from 'vue';
 

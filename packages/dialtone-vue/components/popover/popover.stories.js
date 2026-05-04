@@ -8,11 +8,11 @@ import {
 import PopoverDefault from './PopoverDefault.story.vue';
 import PopoverVariants from './PopoverVariants.story.vue';
 import PopoverIframe from './PopoverIframe.story.vue';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 
 import { action } from 'storybook/actions';
 import { POPOVER_DIRECTIONS, POPOVER_STICKY_VALUES } from './PopoverConstants';
-import { CONTENT_MODE_ARG_TYPE } from '@/common/mode_constants';
+import { CONTENT_MODE_ARG_TYPE } from '@/common/ModeConstants';
 
 // Default Props for all variations
 export const argsData = {

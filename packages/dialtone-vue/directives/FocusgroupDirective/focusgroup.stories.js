@@ -1,8 +1,8 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils.js';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils.js';
 import DtButton from '@/components/button/button.vue';
 import DtLink from '@/components/link/link.vue';
 import DtInput from '@/components/input/input.vue';
-import DtSelectMenu from '@/components/select_menu/select_menu.vue';
+import DtSelectMenu from '@/components/SelectMenu/SelectMenu.vue';
 import FocusgroupDirectiveEventsTemplate from './FocusgroupDirectiveEvents.story.vue';
 import FocusgroupDirectiveRecipesTemplate from './FocusgroupDirectiveRecipes.story.vue';
 

@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import DtLoader from './loader.vue';
 import DtLoaderDefaultTemplate from './LoaderDefault.story.vue';
 import DtLoaderVariantsTemplate from './LoaderVariants.story.vue';

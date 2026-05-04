@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/StorybookUtils';
 import DtBadge from './badge.vue';
 import DtBadgeDefaultTemplate from './BadgeDefault.story.vue';
 import DtBadgeVariantsTemplate from './BadgeVariants.story.vue';

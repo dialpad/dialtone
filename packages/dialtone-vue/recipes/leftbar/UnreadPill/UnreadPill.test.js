@@ -3,8 +3,8 @@ import DtRecipeUnreadPill from './UnreadPill.vue';
 import {
   itBehavesLikeFailsCustomPropValidation,
   itBehavesLikePassesCustomPropValidation,
-} from '@/tests/shared_examples/validation';
-import { UNREAD_PILL_DIRECTIONS, UNREAD_PILL_KINDS } from '@/recipes/leftbar/unread_pill/unread_pill_constants';
+} from '@/tests/SharedExamples/validation';
+import { UNREAD_PILL_DIRECTIONS, UNREAD_PILL_KINDS } from '@/recipes/leftbar/UnreadPill/UnreadPillConstants';
 
 const MOCK_UNREAD_MENTIONS_TEXT = 'Unread mentions';
 const MOCK_UNREAD_MESSAGES_TEXT = 'Unread messages';

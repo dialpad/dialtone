@@ -1,5 +1,5 @@
 import { action } from 'storybook/actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import DtRecipeAttachmentCarousel from './AttachmentCarousel.vue';
 import DtRecipeAttachmentCarouselDefaultTemplate from './AttachmentCarouselDefault.story.vue';
 import TestImage from '@/common/assets/test.jpg?url';

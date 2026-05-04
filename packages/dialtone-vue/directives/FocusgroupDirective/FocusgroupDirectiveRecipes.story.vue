@@ -679,7 +679,7 @@ import DtCollapsible from '@/components/collapsible/collapsible.vue';
 import DtAvatar from '@/components/avatar/avatar.vue';
 import DtIcon from '@/components/icon/icon.vue';
 import DtBadge from '@/components/badge/badge.vue';
-import { DtRecipeContactRow } from '@/recipes/leftbar/contact_row';
+import { DtRecipeContactRow } from '@/recipes/leftbar/ContactRow';
 
 export default {
   name: 'DtFocusgroupDirectiveRecipes',

@@ -1,5 +1,5 @@
 import { action } from 'storybook/actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import { SELECT_SIZE_MODIFIERS } from './SelectMenuConstants';
 import DtSelectMenu from './SelectMenu.vue';
 

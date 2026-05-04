@@ -3,8 +3,8 @@ import { nextTick } from 'vue';
 import DtFilterPill from './FilterPill.vue';
 import { DtPopover } from '@/components/popover';
 import { DtDropdown } from '@/components/dropdown';
-import { DtListItem } from '@/components/list_item';
-import { DtTooltipDirective } from '@/directives/tooltip_directive';
+import { DtListItem } from '@/components/ListItem';
+import { DtTooltipDirective } from '@/directives/TooltipDirective';
 
 const MOCK_OPEN_STUB = vi.fn();
 const MOCK_CLEAR_STUB = vi.fn();

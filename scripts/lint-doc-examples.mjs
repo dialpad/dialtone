@@ -42,13 +42,13 @@ const require = createRequire(import.meta.url);
 const COMPONENTS_LIST = require('../common/components_list.js');
 
 const CSS_PREFIX_OVERRIDES = {
-  button: 'btn',
-  split_button: 'split-btn',
+  Button: 'btn',
+  SplitButton: 'split-btn',
 };
 
 const componentPrefixes = COMPONENTS_LIST.map(filename => {
   const name = filename.replace('.vue', '');
-  return CSS_PREFIX_OVERRIDES[name] ?? name.replace(/_/g, '-');
+  return CSS_PREFIX_OVERRIDES[name] ?? name.replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase();
 });
 
 const prefixAlternation = componentPrefixes.join('|');

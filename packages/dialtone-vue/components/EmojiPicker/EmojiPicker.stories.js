@@ -1,5 +1,5 @@
 import { action } from 'storybook/actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import DtEmojiPicker from './EmojiPicker.vue';
 import DtEmojiPickerDefaultTemplate from './EmojiPickerDefault.story.vue';
 import DtEmojiPickerWithPopoverTemplate from './EmojiPickerPopover.story.vue';

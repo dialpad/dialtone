@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { DtPopover } from '@/components/popover';
-import SrOnlyCloseButtonComponent from '@/common/sr_only_close_button.vue';
+import SrOnlyCloseButtonComponent from '@/common/SrOnlyCloseButton.vue';
 
 const MOCK_DEFAULT_SLOT_MESSAGE = 'Message';
 const MOCK_HEADER_CONTENT = 'Popover Title';

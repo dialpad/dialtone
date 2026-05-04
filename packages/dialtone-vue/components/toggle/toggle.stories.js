@@ -1,10 +1,10 @@
 import { action } from 'storybook/actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import ToggleDefault from './ToggleDefault.story.vue';
 import ToggleVariants from './ToggleVariants.story.vue';
 
 import DtToggle from './toggle.vue';
-import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/toggle/toggle_constants';
+import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/toggle/ToggleConstants';
 
 // Default Prop Values
 export const argsData = {

@@ -1,5 +1,5 @@
 import { action } from 'storybook/actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import DtRecipeEditor from './editor.vue';
 import DtRecipeEditorDefault from './EditorDefault.story.vue';
 import DtRecipeEditorSignature from './EditorSignature.story.vue';

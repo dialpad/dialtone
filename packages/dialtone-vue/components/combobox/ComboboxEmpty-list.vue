@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { DtListItem } from '@/components/list_item';
+import { DtListItem } from '@/components/ListItem';
 
 export default {
   name: 'ComboboxEmptyList',

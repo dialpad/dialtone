@@ -1,7 +1,7 @@
 import DtModeIsland from './ModeIsland.vue';
 import ModeIslandDefaultStory from './ModeIslandDefault.story.vue';
 import DtStack from '@/components/stack/stack.vue';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import { DT_MODE_ISLAND_TYPES } from './ModeIslandConstants';
 
 export const argsData = {

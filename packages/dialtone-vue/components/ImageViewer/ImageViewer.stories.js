@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import DtImageViewer from './ImageViewer.vue';
 
 import DtImageViewerDefaultTemplate from './ImageViewerDefault.story.vue';

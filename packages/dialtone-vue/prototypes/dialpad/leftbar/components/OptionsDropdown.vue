@@ -47,7 +47,7 @@
 
 <script setup>
 import { DtDropdown, DtDropdownSeparator } from '@/components/dropdown';
-import { DtListItem } from '@/components/list_item';
+import { DtListItem } from '@/components/ListItem';
 import { DtButton } from '@/components/button';
 import { DtIconMoreVertical } from '@dialpad/dialtone-icons/vue';
 

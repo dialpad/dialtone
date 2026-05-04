@@ -364,13 +364,13 @@
 import { DtSplitButton } from './';
 import { DtStack } from '@/components/stack';
 import { DtIcon } from '@/components/icon';
-import { DtListItem } from '@/components/list_item';
+import { DtListItem } from '@/components/ListItem';
 import { DtPopover } from '@/components/popover';
 import {
   BUTTON_IMPORTANCE_MODIFIERS,
   BUTTON_KIND_MODIFIERS,
   BUTTON_SIZE_MODIFIERS, ICON_POSITION_MODIFIERS,
-} from '@/components/button/button_constants.js';
+} from '@/components/button/ButtonConstants.js';
 
 export default {
   name: 'DtSplitButtonVariants',

@@ -40,7 +40,7 @@ import {
 import {
   LEFTBAR_GENERAL_ROW_TYPES as TYPES,
   LEFTBAR_GENERAL_ROW_CONTACT_CENTER_COLORS as COLORS,
-} from '@/recipes/leftbar/general_row/general_row_constants';
+} from '@/recipes/leftbar/GeneralRow/GeneralRowConstants';
 
 const typeToIcon = new Map([
   [TYPES.INBOX, DtIconInbox],

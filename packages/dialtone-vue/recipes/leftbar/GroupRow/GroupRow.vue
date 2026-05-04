@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
+import { DtRecipeGeneralRow } from '@/recipes/leftbar/GeneralRow';
 import { DtIconUsers } from '@dialpad/dialtone-icons/vue';
 import { safeConcatStrings, extractVueListeners } from '@/common/utils';
 import { DialtoneLocalization } from '@/localization';

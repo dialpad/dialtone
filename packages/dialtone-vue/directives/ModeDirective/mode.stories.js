@@ -1,4 +1,4 @@
-import { createTemplateFromVueFile } from '@/common/storybook_utils.js';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils.js';
 import ModeDirectiveDefaultTemplate from './ModeDirectiveDefault.story.vue';
 
 export const argsData = {};

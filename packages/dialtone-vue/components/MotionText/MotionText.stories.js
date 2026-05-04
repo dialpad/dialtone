@@ -1,5 +1,5 @@
 import { action } from 'storybook/actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import DtMotionText from './MotionText.vue';
 import {
   MOTION_TEXT_ANIMATION_MODES,

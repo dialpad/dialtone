@@ -1,5 +1,5 @@
 import { action } from 'storybook/actions';
-import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import { createTemplateFromVueFile, getIconNames } from '@/common/StorybookUtils';
 import DtRecipeCallbarButtonWithPopover from './CallbarButtonWithPopover.vue';
 
 import DtRecipeCallbarButtonWithPopoverDefaultTemplate from './CallbarButtonWithPopoverDefault.story.vue';
@@ -8,8 +8,8 @@ import DtRecipeCallbarButtonWithPopoverVariantsTemplate from './CallbarButtonWit
 import {
   POPOVER_DIRECTIONS,
   POPOVER_INITIAL_FOCUS_STRINGS,
-} from '@/components/popover/popover_constants';
-import { CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '@/recipes/buttons/callbar_button/callbar_button_constants';
+} from '@/components/popover/PopoverConstants';
+import { CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '@/recipes/buttons/CallbarButton/CallbarButtonConstants';
 
 const iconsList = getIconNames();
 

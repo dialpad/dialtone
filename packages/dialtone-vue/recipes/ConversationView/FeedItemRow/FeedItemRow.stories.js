@@ -1,5 +1,5 @@
 import { action } from 'storybook/actions';
-import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { createTemplateFromVueFile } from '@/common/StorybookUtils';
 import DtRecipeFeedItemRow from './FeedItemRow.vue';
 import DtRecipeFeedItemRowDefaultTemplate from './FeedItemRowDefault.story.vue';
 import DtRecipeFeedItemRowVariantsTemplate from './FeedItemRowVariants.story.vue';

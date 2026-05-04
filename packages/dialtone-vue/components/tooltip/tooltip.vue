@@ -57,7 +57,7 @@ import {
   createTippy,
   getAnchor,
   getPopperOptions,
-} from '@/components/popover/tippy_utils';
+} from '@/components/popover/TippyUtils';
 import ModeMixin from '@/common/mixins/mode';
 
 /**
