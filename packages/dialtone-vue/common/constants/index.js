@@ -81,7 +81,7 @@ export const DEFAULT_VALIDATION_MESSAGE_TYPE = VALIDATION_MESSAGE_TYPES.CRITICAL
 export const DEFAULT_PREFIX = 'dt';
 
 // Component size scale
-export { COMPONENT_SIZES, TEXT_HEADLINE_SIZES } from './sizes.js';
+export { COMPONENT_SIZES, TEXT_HEADLINE_SIZES } from './Sizes.js';
 
 export default {
   VALIDATION_MESSAGE_TYPES,

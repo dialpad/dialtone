@@ -1,0 +1,58 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+import * as ScrollbarDirectiveStories from './Scrollbar.stories.js';
+
+<Meta of={ScrollbarDirectiveStories}/>
+
+# Scrollbar directive
+
+A custom scrollbar directive that wraps [OverlayScrollbars](https://kingsora.github.io/OverlayScrollbars/)
+to provide styled, cross-browser-consistent scrollbars.
+
+## Usage
+
+Import the directive from dialtone-vue
+
+```js
+import { DtScrollbarDirective } from "@dialpad/dialtone-vue";
+```
+
+Install the directive into vue instance
+
+```js
+Vue.use(DtScrollbarDirective);
+```
+
+### Default
+
+Default scrollbar uses `leave` auto-hide behavior — the scrollbar hides when the pointer leaves the element.
+
+```html
+<div v-dt-scrollbar>
+  <div>Scrollable content</div>
+</div>
+```
+
+### Auto-hide modes
+
+Control when the scrollbar hides using directive arguments:
+
+**Never auto-hide** — scrollbar is always visible
+
+```html
+<div v-dt-scrollbar:never>
+  <div>Scrollable content</div>
+</div>
+```
+
+**Hide on scroll** — scrollbar hides after scrolling stops (1300ms delay)
+
+```html
+<div v-dt-scrollbar:scroll>
+  <div>Scrollable content</div>
+</div>
+```
+
+### Important
+
+The directive expects the scrollable content to be wrapped in a single child element,
+which becomes the OverlayScrollbars viewport.

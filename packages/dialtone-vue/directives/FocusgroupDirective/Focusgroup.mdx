@@ -1,0 +1,383 @@
+import { Meta, Canvas } from '@storybook/addon-docs/blocks';
+import * as FocusgroupDirectiveStories from './Focusgroup.stories.js';
+
+<Meta of={FocusgroupDirectiveStories}/>
+
+# Focusgroup directive
+
+Declarative roving tabindex for composite widgets. Manages arrow-key navigation,
+`tabindex` management, looping, focus memory, and disabled-item skipping — following
+the [Open UI focusgroup proposal](https://open-ui.org/components/scoped-focusgroup.explainer/).
+
+The directive handles **focus movement only**. Activation and selection (toggling
+`aria-selected`, `aria-checked`, etc.) remain the consumer's responsibility.
+
+## Usage
+
+Import and install the directive:
+
+```js
+import { DtFocusgroupDirective } from "@dialpad/dialtone-vue";
+app.use(DtFocusgroupDirective);
+```
+
+### Important: always pair with ARIA
+
+The directive manages keyboard focus but does not set any ARIA attributes. For
+screen readers to announce the widget correctly, you must provide:
+
+- A `role` (`toolbar`, `tablist`, `listbox`, `radiogroup`, `menu`, `menubar` — or any other role; these have smart defaults)
+- An accessible name (`aria-label` or `aria-labelledby`)
+- `aria-orientation` when the axis differs from the role's default
+
+Without a role, the container is opaque to assistive technology — arrow-key
+cycling works, but the user has no context for what they're navigating.
+
+Two ESLint rules in `eslint-plugin-dialtone` catch these omissions:
+
+- `dialtone/focusgroup-requires-role` — warns when `v-dt-focusgroup` is used without a `role`
+- `dialtone/focusgroup-requires-label` — warns when `v-dt-focusgroup` is used without `aria-label` or `aria-labelledby`
+
+Enable them in your ESLint config:
+
+```js
+rules: {
+  'dialtone/focusgroup-requires-role': 'warn',
+  'dialtone/focusgroup-requires-label': 'warn',
+}
+```
+
+### Token syntax — horizontal toolbar
+
+<Canvas of={FocusgroupDirectiveStories.Default} />
+
+### Object syntax
+
+<Canvas of={FocusgroupDirectiveStories.ObjectSyntax} />
+
+### Vertical toolbar
+
+<Canvas of={FocusgroupDirectiveStories.Vertical} />
+
+### No value (defaults)
+
+<Canvas of={FocusgroupDirectiveStories.Defaults} />
+
+### Disable looping
+
+Use `noloop` so focus stops at the first and last items instead of cycling:
+
+<Canvas of={FocusgroupDirectiveStories.Noloop} />
+
+### Disable memory
+
+Use `nomemory` so re-entry via Tab always starts at the first item instead of
+restoring the last focused item:
+
+<Canvas of={FocusgroupDirectiveStories.Nomemory} />
+
+### Disabled items
+
+By default, disabled items (`aria-disabled="true"` or native `disabled`) are
+skipped during arrow-key navigation:
+
+<Canvas of={FocusgroupDirectiveStories.DisabledSkipped} />
+
+For `role="tablist"`, disabled items remain focusable so screen reader users can
+discover them. This is the WAI-ARIA Tabs convention and the directive applies it
+automatically. Override with explicit `skipdisabled` if needed.
+
+<Canvas of={FocusgroupDirectiveStories.DisabledFocusable} />
+
+### Selection follows focus
+
+The directive dispatches a `dt-focusgroup-move` event when focus moves via arrow
+keys. Use it to implement selection-follows-focus. See the
+[Events story](?path=/story/directives-focusgroup--events) for the full interactive example.
+
+<Canvas of={FocusgroupDirectiveStories.Events} sourceState="none" />
+
+### Item opt-out
+
+Add `data-dt-focusgroup-skip` to exclude an element from arrow-key navigation
+(e.g., text inputs that need their own arrow keys):
+
+<Canvas of={FocusgroupDirectiveStories.OptOut} />
+
+### Mixed focusable elements
+
+The directive cycles through any focusable element matched by the selector,
+regardless of element type:
+
+<Canvas of={FocusgroupDirectiveStories.Mixed} />
+
+### Nesting depth
+
+Items do not need to be direct children. The directive uses `querySelectorAll`
+on the container, finding items at any nesting depth in DOM order:
+
+<Canvas of={FocusgroupDirectiveStories.Nesting} />
+
+## Tokens
+
+Space-separated string tokens configure the directive behavior:
+
+<table>
+  <thead>
+    <tr><th>Token</th><th>Description</th><th>Default</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>horizontal</code></td><td>Left/Right arrow keys only</td><td><code>both</code></td></tr>
+    <tr><td><code>vertical</code></td><td>Up/Down arrow keys only</td><td><code>both</code></td></tr>
+    <tr><td><code>both</code></td><td>All four arrow keys (Left/Up = prev, Right/Down = next)</td><td><code>both</code></td></tr>
+    <tr><td><code>loop</code></td><td>Focus loops from last to first and vice versa</td><td><code>loop</code></td></tr>
+    <tr><td><code>noloop</code></td><td>Focus stops at boundaries</td><td><code>loop</code></td></tr>
+    <tr><td><code>memory</code></td><td>Re-entry restores last focused item</td><td><code>memory</code></td></tr>
+    <tr><td><code>nomemory</code></td><td>Re-entry always starts at first item</td><td><code>memory</code></td></tr>
+    <tr><td><code>skipdisabled</code></td><td>Arrow keys skip disabled items</td><td>Role-aware</td></tr>
+    <tr><td><code>noskipdisabled</code></td><td>Disabled items remain focusable (e.g., tabs)</td><td>Role-aware</td></tr>
+  </tbody>
+</table>
+
+## Object config
+
+The object syntax accepts the same options as named properties:
+
+<table>
+  <thead>
+    <tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>axis</code></td><td><code>'horizontal' | 'vertical' | 'both'</code></td><td><code>'both'</code></td><td>Which arrow keys respond</td></tr>
+    <tr><td><code>loop</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Loop at boundaries</td></tr>
+    <tr><td><code>memory</code></td><td><code>boolean</code></td><td><code>true</code></td><td>Remember last focused item</td></tr>
+    <tr><td><code>selector</code></td><td><code>string | null</code></td><td>Role-aware</td><td>CSS selector for focusable items</td></tr>
+    <tr><td><code>skipDisabled</code></td><td><code>boolean | null</code></td><td>Role-aware</td><td>Whether to skip disabled items</td></tr>
+  </tbody>
+</table>
+
+## Role-aware defaults
+
+When no explicit selector or skipDisabled is provided, the directive infers
+defaults from the container's `role` attribute:
+
+<table>
+  <thead>
+    <tr><th>Container role</th><th>Default selector</th><th>Skip disabled?</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>tablist</code></td><td><code>[role="tab"]</code></td><td>No (disabled tabs remain focusable)</td></tr>
+    <tr><td><code>radiogroup</code></td><td><code>[role="radio"]</code></td><td>Yes</td></tr>
+    <tr><td><code>listbox</code></td><td><code>[role="option"]</code></td><td>Yes</td></tr>
+    <tr><td><code>menu</code> / <code>menubar</code></td><td><code>[role="menuitem"], ...</code></td><td>Yes</td></tr>
+    <tr><td><code>toolbar</code></td><td>All focusable elements</td><td>Yes</td></tr>
+    <tr><td><em>(other)</em></td><td>All focusable elements</td><td>Yes</td></tr>
+  </tbody>
+</table>
+
+## Events
+
+### dt-focusgroup-move
+
+Dispatched on the container as a native `CustomEvent` when the directive moves
+focus via arrow key, Home, or End. **Not** dispatched on click or Tab re-entry.
+
+```html
+<div
+  role="tablist"
+  v-dt-focusgroup="'horizontal nomemory'"
+  @dt-focusgroup-move="selectTab($event.detail.item)"
+>
+```
+
+The `event.detail` payload:
+
+<table>
+  <thead>
+    <tr><th>Property</th><th>Type</th><th>Description</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>item</code></td><td><code>HTMLElement</code></td><td>The newly focused element</td></tr>
+    <tr><td><code>index</code></td><td><code>number</code></td><td>Index of the newly focused item</td></tr>
+    <tr><td><code>previousItem</code></td><td><code>HTMLElement</code></td><td>The previously focused element</td></tr>
+    <tr><td><code>previousIndex</code></td><td><code>number</code></td><td>Index of the previously focused item</td></tr>
+  </tbody>
+</table>
+
+## Keyboard support
+
+<table>
+  <thead>
+    <tr><th>Key</th><th>Behavior</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Arrow Right / Arrow Down</td><td>Move to next item (when axis allows)</td></tr>
+    <tr><td>Arrow Left / Arrow Up</td><td>Move to previous item (when axis allows)</td></tr>
+    <tr><td>Home</td><td>Move to first enabled item</td></tr>
+    <tr><td>End</td><td>Move to last enabled item</td></tr>
+  </tbody>
+</table>
+
+Arrow direction is RTL-aware: in right-to-left contexts, Left arrow moves
+forward and Right arrow moves backward on the horizontal axis.
+
+## Limitations
+
+- **Nesting**: Nesting multiple `v-dt-focusgroup` directives is **not recommended**. Each instance is independent — keydown events bubble, so both handlers fire. This can cause unpredictable double-moves if both respond to the same arrow keys. If you must nest, use distinct axes (e.g., outer `vertical`, inner `horizontal`). Most cases where nesting seems necessary are better served by 2D grid navigation (see below).
+- **2D grid navigation**: Not supported. All navigation is 1D (linear DOM order). A future `grid` token on this directive will address cases where Up/Down and Left/Right need to mean different things (rows vs columns).
+- **`aria-activedescendant`**: The directive uses roving tabindex (actual DOM focus moves between items). It does not support the `aria-activedescendant` pattern where the container retains focus and items are "virtually" focused. Use the `keyboard_list_navigation` mixin for that model.
+- **RTL**: Direction is resolved at mount time. If `dir` changes dynamically without remounting, the directive won't pick it up.
+- **Dynamic items**: The directive re-queries items on every keystroke, so dynamically added/removed items are handled correctly during navigation. However, the initial `tabindex` setup only runs on mount — items added after mount (e.g., async data) won't have `tabindex="-1"` until the first keyboard interaction.
+- **Escape key**: Not handled. The directive manages arrow-key cycling only. Consumers who need Escape behavior (e.g., closing a menu) should add their own `@keydown.escape` handler.
+
+## Accessibility: `aria-orientation`
+
+The directive manages focus behavior but does **not** set `aria-orientation`.
+This follows the established pattern used by Radix, React Aria, and Headless UI:
+the focus primitive handles keyboard mechanics, the widget sets ARIA semantics.
+
+**You must set `aria-orientation` yourself** when the axis differs from the
+role's implicit default. Without it, screen readers will announce incorrect
+navigation cues (e.g., "use Left/Right" when Up/Down is what works).
+
+<table>
+  <thead>
+    <tr><th>Role</th><th>Implicit default</th><th>When to add <code>aria-orientation</code></th></tr>
+  </thead>
+  <tbody>
+    <tr><td><code>toolbar</code></td><td>horizontal</td><td>Add <code>aria-orientation="vertical"</code> when using <code>axis: 'vertical'</code></td></tr>
+    <tr><td><code>tablist</code></td><td>horizontal</td><td>Add <code>aria-orientation="vertical"</code> when using <code>axis: 'vertical'</code></td></tr>
+    <tr><td><code>listbox</code></td><td>vertical</td><td>Add <code>aria-orientation="horizontal"</code> when using <code>axis: 'horizontal'</code></td></tr>
+    <tr><td><code>menu</code></td><td>vertical</td><td>Add <code>aria-orientation="horizontal"</code> when using <code>axis: 'horizontal'</code></td></tr>
+    <tr><td><code>radiogroup</code></td><td>undefined</td><td>Always set it explicitly</td></tr>
+  </tbody>
+</table>
+
+**Rule of thumb:** if you specify `axis`, check whether it matches the role's
+default. If it doesn't, add `aria-orientation`.
+
+## Recipes
+
+Real-world patterns showing how `v-dt-focusgroup` composes with Dialtone components.
+
+### Table with row navigation
+
+Use `selector` to target `tbody tr` elements. Up/Down cycles rows; Tab reaches
+interactive content within a row.
+
+```html
+<table v-dt-focusgroup="{ axis: 'vertical', selector: 'tbody tr' }" aria-label="Office List">
+  <thead>
+    <tr>
+      <th scope="col">Office</th>
+      <th scope="col">Country</th>
+      <th scope="col">Contact</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr tabindex="0">
+      <th scope="row">Austin, TX</th>
+      <td>United States</td>
+      <td>Henna Ferry</td>
+    </tr>
+    <tr tabindex="-1">
+      <th scope="row">Bangalore</th>
+      <td>India</td>
+      <td>Arun Chadda</td>
+    </tr>
+  </tbody>
+</table>
+```
+
+### Inbox
+
+A vertical list using `DtRecipeContactRow`. Up/Down cycles all focusable elements.
+
+```html
+<dt-stack role="list" v-dt-focusgroup="'vertical'" aria-label="Contacts" gap="0">
+  <dt-recipe-contact-row role="listitem" tabindex="0" name="Ashanti Trevor" avatar-presence="active" user-status="Good morning!" has-call-button />
+  <dt-recipe-contact-row role="listitem" tabindex="-1" name="Marcus Chen" avatar-presence="away" presence-text="Away" user-status="Out for a bit" has-call-button />
+  <dt-recipe-contact-row role="listitem" tabindex="-1" name="Priya Sharma" avatar-presence="busy" presence-text="In a meeting" user-status="Meetings all day" has-call-button />
+  <dt-recipe-contact-row role="listitem" tabindex="-1" name="Jordan Kim" unread-count="3" :has-unreads="true" has-call-button />
+</dt-stack>
+```
+
+### Contact list
+
+A vertical list of rich content items built with Dialtone primitives. Up/Down cycles all focusable elements.
+
+```html
+<dt-stack role="list" v-dt-focusgroup="'vertical'" aria-label="Contacts">
+  <dt-stack role="listitem" tabindex="0" gap="100" class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar-400">
+    <dt-stack direction="row" gap="100" class="d-w100p">
+      <dt-avatar full-name="Ashanti Trevor" />
+      <dt-stack class="d-fl1">
+        <dt-text kind="body" :size="200" strength="bold">Ashanti Trevor</dt-text>
+        <dt-stack direction="row" gap="50">
+          <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
+          <dt-text kind="body" :size="100" tone="tertiary">Outgoing call</dt-text>
+          <dt-text kind="body" :size="100" tone="tertiary">&bull; 2m 10s</dt-text>
+        </dt-stack>
+      </dt-stack>
+      <dt-text kind="body" :size="200" tone="tertiary" numeric>3:23 pm</dt-text>
+      <dt-badge kind="count" type="bulletin" text="6" />
+    </dt-stack>
+  </dt-stack>
+  <dt-stack role="listitem" tabindex="-1" gap="100" class="d-p-100 d-w-800 h:d-bgc-moderate-opaque fv:d-bgc-moderate-opaque d-bar-400">
+    <dt-stack direction="row" gap="100" class="d-w100p">
+      <dt-avatar full-name="Marcus Chen" />
+      <dt-stack class="d-fl1">
+        <dt-text kind="body" :size="200" strength="bold">Marcus Chen</dt-text>
+        <dt-stack direction="row" gap="50">
+          <dt-icon name="phone-incoming" size="200" class="d-fc-tertiary" />
+          <dt-text kind="body" :size="100" tone="tertiary">Incoming call</dt-text>
+          <dt-text kind="body" :size="100" tone="tertiary">&bull; 14m 32s</dt-text>
+        </dt-stack>
+      </dt-stack>
+      <dt-text kind="body" :size="200" tone="tertiary" numeric>1:47 pm</dt-text>
+    </dt-stack>
+  </dt-stack>
+</dt-stack>
+```
+
+### Contact list with hovercards (custom selector)
+
+When items are wrapped in complex components like `DtHovercard`, use a custom
+`selector` with a data attribute to target only the intended focusable items.
+
+```html
+<dt-stack
+  role="list"
+  v-dt-focusgroup="{ axis: 'vertical', loop: false, selector: '[data-custom-attribute-name]' }"
+  aria-label="Contacts"
+>
+  <dt-hovercard placement="right">
+    <template #anchor>
+      <dt-recipe-contact-row
+        data-custom-attribute-name
+        role="listitem"
+        name="Ashanti Trevor"
+        avatar-presence="active"
+        user-status="Good morning!"
+      />
+    </template>
+    <template #content>
+      <ExampleProfileCard />
+    </template>
+  </dt-hovercard>
+  <dt-hovercard placement="right">
+    <template #anchor>
+      <dt-recipe-contact-row
+        data-custom-attribute-name
+        role="listitem"
+        name="Marcus Chen"
+        avatar-presence="away"
+        presence-text="Away"
+      />
+    </template>
+    <template #content>
+      <ExampleProfileCard />
+    </template>
+  </dt-hovercard>
+</dt-stack>
+```

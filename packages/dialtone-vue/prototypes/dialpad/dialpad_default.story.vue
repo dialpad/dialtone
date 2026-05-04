@@ -8,5 +8,5 @@
 
 <script setup>
 import DialpadLayout from './dialpad_layout.vue';
-import DialpadLeftbar from './leftbar/dialpad_leftbar.vue';
+import DialpadLeftbar from './Leftbar/dialpad_leftbar.vue';
 </script>

@@ -1,0 +1,97 @@
+import { Canvas, Story, Subtitle, Controls, Meta } from '@storybook/addon-docs/blocks';
+import * as DtRecipeEditorStories from './Editor.stories.js';
+
+<Meta of={DtRecipeEditorStories}/>
+
+# Editor Recipe
+
+<Subtitle>
+  Editor recipe wraps the Rich Text Editor for use cases where formatted text is needed.
+</Subtitle>
+
+## Base Style
+
+<Canvas of={DtRecipeEditorStories.Default} />
+
+## Variants
+
+### Signature
+
+Enables font family, font size, font color, background color, and line height controls alongside
+variable insertion, inline images with resizing, and tables. This is the recommended configuration
+for email signature editors.
+
+<Canvas of={DtRecipeEditorStories.Signature} />
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtRecipeEditor } from '@dialpad/dialtone-vue';
+```
+
+### Email Signature
+
+```html
+<dt-recipe-editor
+  :show-font-style-button="true"
+  :show-font-size-button="true"
+  :show-font-color-button="true"
+  :show-variable-button="true"
+  :show-inline-image-button="true"
+  :allow-tables="true"
+  :allow-image-resize="true"
+  :use-div-tags="true"
+  :preserve-whitespace="false"
+  :variable-categories="variableCategories"
+/>
+```
+
+### With Tables
+
+```html
+<dt-recipe-editor
+  :allow-tables="true"
+/>
+```
+
+### With Inline Images and Resizing
+
+```html
+<dt-recipe-editor
+  :show-inline-image-button="true"
+  :allow-image-resize="true"
+/>
+```
+
+### With Variables
+
+```html
+<dt-recipe-editor
+  :show-variable-button="true"
+  :variable-categories="variableCategories"
+/>
+```
+
+### With Background Color and Line Height
+
+```html
+<dt-recipe-editor
+  :allow-background-color="true"
+  :allow-line-height="true"
+/>
+```
+
+### With Preserve Whitespace
+
+```html
+<dt-recipe-editor
+  :preserve-whitespace="full"
+  :use-div-tags="true"
+/>
+```

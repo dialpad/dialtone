@@ -1,0 +1,80 @@
+import DtIcon from './Icon.vue';
+import { ICON_SIZE_MODIFIERS } from './IconConstants';
+
+import DtIconDefaultTemplate from './IconDefault.story.vue';
+import DtIconVariantsTemplate from './IconVariants.story.vue';
+import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+const iconsList = getIconNames();
+export const argTypesData = {
+  size: {
+    options: Object.keys(ICON_SIZE_MODIFIERS),
+    control: {
+      type: 'select',
+    },
+  },
+  name: {
+    options: iconsList,
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
+  showSkeleton: {
+    control: {
+      type: 'boolean',
+    },
+  },
+};
+
+export const argsData = {};
+
+export default {
+  title: 'Components/Icon',
+  component: DtIcon,
+  args: argsData,
+  argTypes: argTypesData,
+  excludeStories: /.*Data$/,
+};
+
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtIconDefaultTemplate,
+);
+const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtIconVariantsTemplate,
+);
+
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    name: 'accessibility',
+  },
+  parameters: {
+    percy: {
+      args: {
+        showSkeleton: false,
+      },
+    },
+  },
+};
+
+export const Variants = {
+  render: VariantsTemplate,
+  args: { limit: undefined },
+  parameters: {
+    percy: {
+      args: {
+        limit: 10,
+        showSkeleton: false,
+      },
+    },
+    options: { showPanel: false },
+    controls: { disable: true },
+  },
+};

@@ -1,0 +1,877 @@
+import { mount, flushPromises } from '@vue/test-utils';
+import DtRecipeEditor from './Editor.vue';
+import {
+  findVariable,
+  countVariables,
+  variableExists,
+} from '../../../common/test_utils/node_traversal';
+
+// Wrappers
+let wrapper;
+let editor;
+
+let fontStyleBtn;
+let fontSizeBtn;
+let fontColorBtn;
+let boldFormatBtn;
+let italicsFormatBtn;
+let underlineFormatBtn;
+let strikeFormatBtn;
+let listItemsFormatBtn;
+let alignLeftBtn;
+let alignCenterBtn;
+let alignRightBtn;
+let alignJustifyBtn;
+let orderedListBtn;
+let blockquoteBtn;
+let codeblockBtn;
+let quickRepliesBtn;
+let addLinkBtn;
+let variableBtn;
+
+const testText = 'In the beginning, it was a nice day.';
+
+// Constants
+const baseProps = {
+  modelValue: testText,
+  inputAriaLabel: 'aria-label text',
+  inputClass: 'qa-editor',
+  autoFocus: 'all',
+  showFontStyleButton: true,
+  showFontSizeButton: true,
+  showFontColorButton: true,
+};
+
+// Test Environment
+let propsData = baseProps;
+let slots;
+let listeners;
+const getClientRectsMock = vi.fn(() => [{}]);
+const getBoundingClientRectMock = vi.fn(() => [{}]);
+const scrollByMock = vi.fn();
+
+const testContext = {};
+
+const _setChildWrappers = () => {
+  editor = wrapper.find('[data-qa="dt-rich-text-editor"]').find('div[contenteditable]');
+
+  // buttons
+  fontStyleBtn = wrapper.find('[data-qa="dt-recipe-editor-font-style-btn"]');
+  fontSizeBtn = wrapper.find('[data-qa="dt-recipe-editor-font-size-btn"]');
+  fontColorBtn = wrapper.find('[data-qa="dt-recipe-editor-font-color-btn"]');
+  boldFormatBtn = wrapper.find('[data-qa="dt-recipe-editor-bold-btn"]');
+  italicsFormatBtn = wrapper.find('[data-qa="dt-recipe-editor-italics-btn"]');
+  underlineFormatBtn = wrapper.find('[data-qa="dt-recipe-editor-underline-btn"]');
+  strikeFormatBtn = wrapper.find('[data-qa="dt-recipe-editor-strike-btn"]');
+  listItemsFormatBtn = wrapper.find('[data-qa="dt-recipe-editor-list-items-btn"]');
+  addLinkBtn = wrapper.find('[data-qa="dt-recipe-editor-add-link-btn"]');
+  alignLeftBtn = wrapper.find('[data-qa="dt-recipe-editor-align-left-btn"]');
+  alignCenterBtn = wrapper.find('[data-qa="dt-recipe-editor-align-center-btn"]');
+  alignRightBtn = wrapper.find('[data-qa="dt-recipe-editor-align-right-btn"]');
+  alignJustifyBtn = wrapper.find('[data-qa="dt-recipe-editor-align-justify-btn"]');
+  orderedListBtn = wrapper.find('[data-qa="dt-recipe-editor-ordered-list-items-btn"]');
+  blockquoteBtn = wrapper.find('[data-qa="dt-recipe-editor-blockquote-btn"]');
+  codeblockBtn = wrapper.find('[data-qa="dt-recipe-editor-code-block-btn"]');
+  quickRepliesBtn = wrapper.find('[data-qa="dt-recipe-editor-quick-replies-btn"]');
+  variableBtn = wrapper.find('[data-qa="dt-recipe-editor-variable-btn"]');
+};
+
+const _mountWrapper = () => {
+  wrapper = mount(DtRecipeEditor, {
+    propsData,
+    listeners,
+    slots,
+    localVue: testContext.localVue,
+    attachTo: document.body,
+  });
+};
+
+describe('DtRecipeEditor tests', () => {
+  // Test Setup
+  beforeAll(() => {
+    global.Range.prototype.getClientRects = getClientRectsMock;
+    global.Range.prototype.getBoundingClientRect = getBoundingClientRectMock;
+    global.scrollBy = scrollByMock;
+  });
+
+  beforeEach(async () => {
+    _mountWrapper();
+    await wrapper.vm.$nextTick();
+    _setChildWrappers();
+  });
+
+  // Test Teardown
+  afterEach(async function () {
+    propsData = baseProps;
+    wrapper.unmount();
+    await flushPromises();
+  });
+
+  describe('Presentation Tests', function () {
+    it('should render the component', function () {
+      expect(wrapper.exists()).toBe(true);
+    });
+
+    it('should contain the initial value', function () {
+      expect(editor.text()).toBe(testText);
+    });
+
+    describe('When font formatting buttons are enabled', () => {
+      it('should contain font style button', function () {
+        expect(fontStyleBtn.exists()).toBe(true);
+      });
+
+      it('should contain font size button', function () {
+        expect(fontSizeBtn.exists()).toBe(true);
+      });
+
+      it('should contain font color button', function () {
+        expect(fontColorBtn.exists()).toBe(true);
+      });
+    });
+
+    it('should contain bold format button', function () {
+      expect(boldFormatBtn.exists()).toBe(true);
+    });
+
+    it('should contain italics format btn', function () {
+      expect(italicsFormatBtn.exists()).toBe(true);
+    });
+
+    it('should contain underline button', function () {
+      expect(underlineFormatBtn.exists()).toBe(true);
+    });
+
+    it('should contain strike button', function () {
+      expect(strikeFormatBtn.exists()).toBe(true);
+    });
+
+    it('should contain list items button', function () {
+      expect(listItemsFormatBtn.exists()).toBe(true);
+    });
+
+    it('should contain ordered list button', function () {
+      expect(orderedListBtn.exists()).toBe(true);
+    });
+
+    it('should contain align left button', function () {
+      expect(alignLeftBtn.exists()).toBe(true);
+    });
+
+    it('should contain align center button', function () {
+      expect(alignCenterBtn.exists()).toBe(true);
+    });
+
+    it('should contain align right button', function () {
+      expect(alignRightBtn.exists()).toBe(true);
+    });
+
+    it('should contain align justify button', function () {
+      expect(alignJustifyBtn.exists()).toBe(true);
+    });
+
+    it('should contain add link button', function () {
+      expect(addLinkBtn.exists()).toBe(true);
+    });
+
+    it('should contain blockquote button', function () {
+      expect(blockquoteBtn.exists()).toBe(true);
+    });
+
+    it('should contain quick replies button', function () {
+      expect(quickRepliesBtn.exists()).toBe(true);
+    });
+
+    it('should contain code block button', function () {
+      expect(codeblockBtn.exists()).toBe(true);
+    });
+
+    describe('Tooltip messages for new formatting buttons', () => {
+      it('should have correct tooltip for font style button', () => {
+        expect(fontStyleBtn.attributes('aria-label')).toContain('Font');
+      });
+
+      it('should have correct tooltip for font size button', () => {
+        expect(fontSizeBtn.attributes('aria-label')).toContain('Font Size');
+      });
+
+      it('should have correct tooltip for font color button', () => {
+        expect(fontColorBtn.attributes('aria-label')).toContain('Text Color');
+      });
+    });
+
+    describe('When bold button is disabled', () => {
+      beforeEach(async () => {
+        _mountWrapper();
+        await wrapper.setProps({ showBoldButton: false });
+        await wrapper.vm.$nextTick();
+        _setChildWrappers();
+      });
+
+      it('should not appear in the formatting options', () => {
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-bold-btn"]')
+          .exists()).toBe(false);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-italics-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-underline-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-strike-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-list-items-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-quick-replies-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-add-link-btn"]')
+          .exists()).toBe(true);
+      });
+    });
+
+    describe('When italics button is disabled', () => {
+      beforeEach(async () => {
+        _mountWrapper();
+        await wrapper.setProps({ showItalicsButton: false });
+        await wrapper.vm.$nextTick();
+        _setChildWrappers();
+      });
+
+      it('should not appear in the formatting options', () => {
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-bold-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-italics-btn"]')
+          .exists()).toBe(false);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-underline-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-strike-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-list-items-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-quick-replies-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-add-link-btn"]')
+          .exists()).toBe(true);
+      });
+    });
+
+    describe('When underline button is disabled', () => {
+      beforeEach(async () => {
+        _mountWrapper();
+        await wrapper.setProps({ showUnderlineButton: false });
+        await wrapper.vm.$nextTick();
+        _setChildWrappers();
+      });
+
+      it('should not appear in the formatting options', () => {
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-bold-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-italics-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-underline-btn"]')
+          .exists()).toBe(false);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-strike-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-list-items-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-quick-replies-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-add-link-btn"]')
+          .exists()).toBe(true);
+      });
+    });
+
+    describe('When strike button is disabled', () => {
+      beforeEach(async () => {
+        _mountWrapper();
+        await wrapper.setProps({ showStrikeButton: false });
+        await wrapper.vm.$nextTick();
+        _setChildWrappers();
+      });
+
+      it('should not appear in the formatting options', () => {
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-bold-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-italics-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-underline-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-strike-btn"]')
+          .exists()).toBe(false);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-list-items-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-quick-replies-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-add-link-btn"]')
+          .exists()).toBe(true);
+      });
+    });
+
+    describe('When list items button is disabled', () => {
+      beforeEach(async () => {
+        _mountWrapper();
+        await wrapper.setProps({ showListItemsButton: false });
+        await wrapper.vm.$nextTick();
+        _setChildWrappers();
+      });
+
+      it('should not appear in the formatting options', () => {
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-bold-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-italics-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-underline-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-strike-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-list-items-btn"]')
+          .exists()).toBe(false);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-quick-replies-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-add-link-btn"]')
+          .exists()).toBe(true);
+      });
+    });
+
+    describe('When quick replies button is disabled', () => {
+      beforeEach(async () => {
+        _mountWrapper();
+        await wrapper.setProps({ showQuickRepliesButton: false });
+        await wrapper.vm.$nextTick();
+        _setChildWrappers();
+      });
+
+      it('should not appear in the formatting options', () => {
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-bold-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-italics-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-underline-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-strike-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-list-items-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-quick-replies-btn"]')
+          .exists()).toBe(false);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-add-link-btn"]')
+          .exists()).toBe(true);
+      });
+    });
+
+    describe('When add link button is disabled', () => {
+      beforeEach(async () => {
+        _mountWrapper();
+        await wrapper.setProps({ showAddLink: { showAddLinkButton: false } });
+        await wrapper.vm.$nextTick();
+        _setChildWrappers();
+      });
+
+      it('should not appear in the formatting options', () => {
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-bold-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-italics-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-underline-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-strike-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-list-items-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-quick-replies-btn"]')
+          .exists()).toBe(true);
+
+        expect(wrapper
+          .find('[data-qa="dt-recipe-editor-add-link-btn"]')
+          .exists()).toBe(false);
+      });
+    });
+
+    describe('Variable functionality tests', () => {
+      describe('When variable button is enabled', () => {
+        beforeEach(async () => {
+          await wrapper.unmount();
+          propsData = {
+            ...baseProps,
+            showVariableButton: true,
+            variableCategories: [
+              {
+                name: 'Customer',
+                items: [
+                  { id: 'customer_name', name: 'Customer Name', placeholder: 'Customer Name' },
+                  { id: 'customer_email', name: 'Customer Email', placeholder: 'Customer Email' },
+                ],
+              },
+              {
+                name: 'Ticket',
+                items: [
+                  { id: 'ticket_id', name: 'Ticket ID', placeholder: 'Ticket ID' },
+                  { id: 'ticket_status', name: 'Ticket Status', placeholder: 'Ticket Status' },
+                ],
+              },
+            ],
+          };
+          _mountWrapper();
+          await wrapper.vm.$nextTick();
+          _setChildWrappers();
+        });
+
+        it('should display the variable button', () => {
+          expect(variableBtn.exists()).toBe(true);
+        });
+
+        it('should have correct aria-label for variable button', () => {
+          expect(variableBtn.attributes('aria-label')).toContain('Variable');
+        });
+
+        it('should have correct data-qa attribute', () => {
+          expect(variableBtn.attributes('data-qa')).toBe('dt-recipe-editor-variable-btn');
+        });
+      });
+
+      describe('When variable button is disabled', () => {
+        beforeEach(async () => {
+          await wrapper.unmount();
+          propsData = {
+            ...baseProps,
+            showVariableButton: false,
+            variableCategories: [],
+          };
+          _mountWrapper();
+          await wrapper.vm.$nextTick();
+          _setChildWrappers();
+        });
+
+        it('should not display the variable button', () => {
+          expect(variableBtn.exists()).toBe(false);
+        });
+      });
+    });
+  });
+
+  describe('Interactivity tests', function () {
+    beforeEach(async () => {
+      _mountWrapper();
+      await wrapper.vm.$nextTick();
+      _setChildWrappers();
+      wrapper.vm.$refs.richTextEditor?.editor.commands.selectAll();
+    });
+
+    describe('When bold font button is clicked', () => {
+      it('editor output should be enclosed in bold html tags', async () => {
+        await boldFormatBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+        expect(editor.html()).toContain('<strong>In the beginning, it was a nice day.</strong>');
+      });
+    });
+
+    describe('When calling insert in message body', () => {
+      it('message content is inserted at current caret position', async () => {
+        await wrapper.vm.setCursorPosition(19);
+        await wrapper.vm.$nextTick();
+        await wrapper.vm.insertInMessageBody('all things considered, ');
+        expect(editor.html()).toContain('<p>In the beginning, all things considered, it was a nice day.</p>');
+      });
+    });
+
+    describe('When italics font button is clicked', () => {
+      it('editor output should be enclosed in italics html tags', async () => {
+        await italicsFormatBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+        expect(editor.html()).toContain('<em>In the beginning, it was a nice day.</em>');
+      });
+    });
+
+    describe('When underline text button is clicked', () => {
+      it('editor output should be enclosed in underline html tags', async () => {
+        await underlineFormatBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+        expect(editor.html()).toContain('<u>In the beginning, it was a nice day.</u>');
+      });
+    });
+
+    describe('When strike button is clicked', () => {
+      it('editor output should be enclosed in strike html tags', async () => {
+        await strikeFormatBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+        expect(editor.html()).toContain('<s>In the beginning, it was a nice day.</s>');
+      });
+    });
+
+    describe('When alignment button is clicked', () => {
+      it('if alignment is default then text output has no styles applied', async () => {
+        expect(editor.html()).toContain('<p>In the beginning, it was a nice day.</p>');
+      });
+
+      it('if alignment is left then text output has no styles applied', async () => {
+        await alignLeftBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+        expect(editor.html()).toContain('text-align: left');
+      });
+
+      it('if alignment is center then text should be aligned to the center', async () => {
+        await alignCenterBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+        expect(editor.html()).toContain('text-align: center');
+      });
+
+      it('if alignment is right then text should be aligned to the right', async () => {
+        await alignRightBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+        expect(editor.html()).toContain('text-align: right');
+      });
+
+      it('if alignment is justify then text style should be set to justify', async () => {
+        await alignJustifyBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+        expect(editor.html()).toContain('text-align: justify');
+      });
+    });
+
+    describe('When blockquote button is clocked', () => {
+      it('editor output should be enclosed in blockquote tags', async () => {
+        const expectedOutput = '<blockquote><p>In the beginning, it was a nice day.</p></blockquote>';
+        await blockquoteBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+        expect(editor.html()
+          .replace(/(\r\n|\n|\s+|\r)/gm, ''))
+          .toContain(expectedOutput.replace(/(\r\n|\n|\s+|\r)/gm, ''));
+      });
+    });
+
+    describe('When code block button is clocked', () => {
+      it('editor output should be enclosed in code block tags', async () => {
+        await codeblockBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+        expect(editor.html()).toContain('<code>In the beginning, it was a nice day.</code>');
+      });
+    });
+
+    describe('When list items button is clicked', () => {
+      it('editor output should be enclosed in list item html tags', async () => {
+        const expectedHtmlOutput = '<ul><li><p>In the beginning, it was a nice day.</p></li></ul>';
+        await listItemsFormatBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+
+        // Editor adds spaces and linebreaks for this. So remove them to compare
+        const editorHtmlOutput = editor.html().replaceAll(/[\n\r]/g, '').replaceAll(' ', '');
+        expect(editorHtmlOutput)
+          .toContain(expectedHtmlOutput.replaceAll(' ', ''));
+      });
+    });
+
+    describe('When ordered list button is clicked', () => {
+      it('editor output should be enclosed in ordered list item html tags', async () => {
+        const expectedHtmlOutput = '<ol><li><p>In the beginning, it was a nice day.</p></li></ol>';
+        await orderedListBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+
+        // Editor adds spaces and linebreaks for this. So remove them to compare
+        const editorHtmlOutput = editor.html().replaceAll(/[\n\r]/g, '').replaceAll(' ', '');
+        expect(editorHtmlOutput)
+          .toContain(expectedHtmlOutput.replaceAll(' ', ''));
+      });
+    });
+
+    describe('When quick replies button is clicked', () => {
+      it('quick replies clicked event should be fired', async () => {
+        await quickRepliesBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+        expect('quick-replies-click' in wrapper.emitted()).toBeTruthy();
+      });
+    });
+
+    describe('When font color button is clicked', () => {
+      it('should have font color button with click handler', () => {
+        expect(fontColorBtn.exists()).toBe(true);
+        // The font color button exists and has the correct data-qa attribute
+        expect(fontColorBtn.attributes('data-qa')).toBe('dt-recipe-editor-font-color-btn');
+      });
+
+      it('should trigger click event on font color button', async () => {
+        // Test that the button can be clicked without errors
+        await fontColorBtn.trigger('click');
+        await wrapper.vm.$nextTick();
+        // The component should handle the click event internally
+        expect(fontColorBtn.exists()).toBe(true);
+      });
+    });
+
+    describe('Variable insertion tests', () => {
+      beforeEach(async () => {
+        await wrapper.unmount();
+        propsData = {
+          ...baseProps,
+          showVariableButton: true,
+          variableCategories: [
+            {
+              name: 'Customer',
+              items: [
+                { id: 'customer_name', name: 'Customer Name', placeholder: 'Customer Name' },
+                { id: 'customer_email', name: 'Customer Email', placeholder: 'Customer Email' },
+              ],
+            },
+            {
+              name: 'Ticket',
+              items: [
+                { id: 'ticket_id', name: 'Ticket ID', placeholder: 'Ticket ID' },
+                { id: 'ticket_status', name: 'Ticket Status', placeholder: 'Ticket Status' },
+              ],
+            },
+          ],
+        };
+        _mountWrapper();
+        await wrapper.vm.$nextTick();
+        _setChildWrappers();
+      });
+
+      it('should insert a variable when insertVariable is called', async () => {
+        wrapper.vm.insertVariable('Customer', {
+          id: 'customer_name',
+          placeholder: 'Customer Name',
+        });
+        await wrapper.vm.$nextTick();
+
+        const editorJSON = wrapper.vm.$refs.richTextEditor.editor.getJSON();
+        const variableFound = variableExists(editorJSON.content, 'customer_name');
+        expect(variableFound).toBe(true);
+      });
+
+      it('should insert multiple variables', async () => {
+        wrapper.vm.insertVariable('Customer', {
+          id: 'customer_name',
+          placeholder: 'Customer Name',
+        });
+        wrapper.vm.insertVariable('Ticket', {
+          id: 'ticket_id',
+          placeholder: 'Ticket ID',
+        });
+        await wrapper.vm.$nextTick();
+
+        const editorJSON = wrapper.vm.$refs.richTextEditor.editor.getJSON();
+        const variableCount = countVariables(editorJSON.content);
+        expect(variableCount).toBe(2);
+      });
+
+      it('should insert variable with correct attributes', async () => {
+        wrapper.vm.insertVariable('Customer', {
+          id: 'customer_email',
+          placeholder: 'Customer Email',
+        });
+        await wrapper.vm.$nextTick();
+
+        const editorJSON = wrapper.vm.$refs.richTextEditor.editor.getJSON();
+        const variableNode = findVariable(editorJSON.content, 'customer_email');
+        expect(variableNode).not.toBeNull();
+        expect(variableNode.attrs.id).toBe('customer_email');
+        expect(variableNode.attrs.altText).toBe('');
+      });
+
+      it('should render variables in HTML output', async () => {
+        wrapper.vm.insertVariable('Ticket', {
+          id: 'ticket_status',
+          placeholder: 'Ticket Status',
+        });
+        await wrapper.vm.$nextTick();
+
+        const html = wrapper.vm.$refs.richTextEditor.editor.getHTML();
+        expect(html).toContain('data-variable-id="ticket_status"');
+      });
+
+      it('should have flattened variable items computed correctly', () => {
+        const flattenedItems = wrapper.vm.flattenedVariableItems;
+        expect(flattenedItems).toHaveLength(4);
+        expect(flattenedItems.some(item => item.id === 'customer_name')).toBe(true);
+        expect(flattenedItems.some(item => item.id === 'customer_email')).toBe(true);
+        expect(flattenedItems.some(item => item.id === 'ticket_id')).toBe(true);
+        expect(flattenedItems.some(item => item.id === 'ticket_status')).toBe(true);
+      });
+    });
+
+    describe('When use div tags is enabled', () => {
+      beforeEach(async () => {
+        wrapper = mount(DtRecipeEditor, {
+          propsData: {...propsData, useDivTags: true },
+          listeners,
+          slots,
+          localVue: testContext.localVue,
+          attachTo: document.body,
+        });
+        await wrapper.vm.$nextTick();
+        _setChildWrappers();
+      });
+      it('should contain the initial value in div tags', function () {
+        expect(editor.html()).toContain(`<div>${testText}</div>`);
+      });
+    });
+
+    describe('Top Action Bar Tests', () => {
+      beforeEach(async () => {
+        _mountWrapper();
+        await wrapper.vm.$nextTick();
+      });
+
+      it('should have only the first button as a focusable item', async function () {
+        await quickRepliesBtn.trigger('focus');
+        expect(quickRepliesBtn.html()).toContain(`tabindex="0"`);
+        expect(fontStyleBtn.html()).toContain(`tabindex="-1"`);
+        expect(fontSizeBtn.html()).toContain(`tabindex="-1"`);
+        expect(fontColorBtn.html()).toContain(`tabindex="-1"`);
+      });
+
+      it('should focus the next button to the right when right arrow key is pressed', async function () {
+        await quickRepliesBtn.trigger('focus');
+        await quickRepliesBtn.trigger('keydown', { key: 'Right' });
+        expect(quickRepliesBtn.html()).toContain(`tabindex="-1"`);
+        expect(fontStyleBtn.html()).toContain(`tabindex="0"`);
+        expect(document.activeElement).toBe(fontStyleBtn.element);
+      });
+
+      it('should navigate through all new formatting buttons with arrow keys', async function () {
+        await quickRepliesBtn.trigger('focus');
+        // Navigate to font style button
+        await quickRepliesBtn.trigger('keydown', { key: 'Right' });
+        expect(document.activeElement).toBe(fontStyleBtn.element);
+
+        // Navigate to font size button
+        await fontStyleBtn.trigger('keydown', { key: 'Right' });
+        expect(fontSizeBtn.html()).toContain(`tabindex="0"`);
+        expect(document.activeElement).toBe(fontSizeBtn.element);
+
+        // Navigate to font color button
+        await fontSizeBtn.trigger('keydown', { key: 'Right' });
+        expect(fontColorBtn.html()).toContain(`tabindex="0"`);
+        expect(document.activeElement).toBe(fontColorBtn.element);
+      });
+
+      it('should focus the next button to the left when left arrow key is pressed', async function () {
+        await quickRepliesBtn.trigger('focus');
+        await quickRepliesBtn.trigger('keydown', { key: 'Right' });
+        await fontStyleBtn.trigger('keydown', { key: 'Left' });
+        expect(quickRepliesBtn.html()).toContain(`tabindex="0"`);
+        expect(fontStyleBtn.html()).toContain(`tabindex="-1"`);
+        expect(document.activeElement).toBe(quickRepliesBtn.element);
+      });
+
+      it('should navigate backwards through new formatting buttons with left arrow key', async function () {
+        await quickRepliesBtn.trigger('focus');
+        // Navigate forward to font color button
+        await quickRepliesBtn.trigger('keydown', { key: 'Right' });
+        await fontStyleBtn.trigger('keydown', { key: 'Right' });
+        await fontSizeBtn.trigger('keydown', { key: 'Right' });
+        expect(document.activeElement).toBe(fontColorBtn.element);
+
+        // Navigate back to font size button
+        await fontColorBtn.trigger('keydown', { key: 'Left' });
+        expect(document.activeElement).toBe(fontSizeBtn.element);
+
+        // Navigate back to font style button
+        await fontSizeBtn.trigger('keydown', { key: 'Left' });
+        expect(document.activeElement).toBe(fontStyleBtn.element);
+      });
+
+      it('should wrap around and only have the last button as a focusable item when the left arrow key button is pressed', async function () {
+        await quickRepliesBtn.trigger('focus');
+        await quickRepliesBtn.trigger('keydown', { key: 'Left' });
+        expect(addLinkBtn.html()).toContain(`tabindex="0"`);
+        expect(quickRepliesBtn.html()).toContain(`tabindex="-1"`);
+        expect(document.activeElement).toBe(addLinkBtn.element);
+      });
+
+      it('should wrap around and only have the first button as a focusable item when the right arrow key button is pressed past the last button', async function () {
+        await quickRepliesBtn.trigger('focus');
+        await quickRepliesBtn.trigger('keydown', { key: 'Left' });
+        await addLinkBtn.trigger('keydown', { key: 'Right' });
+        expect(document.activeElement).toBe(quickRepliesBtn.element);
+        expect(quickRepliesBtn.html()).toContain(`tabindex="0"`);
+        expect(addLinkBtn.html()).toContain(`tabindex="-1"`);
+      });
+    });
+  });
+});

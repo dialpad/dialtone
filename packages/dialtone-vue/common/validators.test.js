@@ -1,5 +1,5 @@
 import { VALIDATION_MESSAGE_TYPES } from './constants';
-import { validationMessageValidator } from './validators';
+import { validationMessageValidator } from './Validators';
 
 describe('Validator Tests', () => {
   describe('validationMessageValidator', () => {

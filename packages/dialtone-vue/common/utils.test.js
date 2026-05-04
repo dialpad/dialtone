@@ -14,7 +14,7 @@ import {
   isURL,
   isEmailAddress,
   capitalizeFirstLetter,
-} from './utils';
+} from './Utils';
 
 describe('Util Tests', () => {
   // Test Environment

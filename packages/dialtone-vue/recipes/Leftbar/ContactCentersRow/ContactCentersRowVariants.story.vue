@@ -1,0 +1,185 @@
+<template>
+  <dt-stack gap="400">
+    <div>
+      <h3 class="d-mbe-100">
+        Ai Contact Centers leftbar
+      </h3>
+      <dt-recipe-contact-centers-row
+        description="Ai Contact Centers"
+      >
+        <template #end>
+          <dt-button
+            importance="clear"
+            kind="muted"
+            :class="[
+              'leftbar-call-centers-duty-status__button',
+              'd-bar-pill',
+              'd-py-50',
+              'd-fc-positive',
+            ]"
+            class="d-to-ellipsis"
+            :size="200"
+            data-qa="leftbar-call-centers-duty-value"
+            aria-label="Available"
+          >
+            <template #icon>
+              <dt-icon-bell-ring size="100" />
+            </template>
+            <span class="d-truncate d-wmx-200">
+              Available
+            </span>
+          </dt-button>
+        </template>
+      </dt-recipe-contact-centers-row>
+    </div>
+    <div>
+      <h3 class="d-mbe-100">
+        Ai Contact Centers selected
+      </h3>
+      <dt-recipe-contact-centers-row
+        description="Ai Contact Centers"
+        selected
+      >
+        <template #end>
+          <dt-button
+            importance="clear"
+            kind="muted"
+            :class="[
+              'leftbar-call-centers-duty-status__button',
+              'd-bar-pill',
+              'd-py-50',
+              'd-fc-positive',
+            ]"
+            class="d-to-ellipsis"
+            :size="200"
+            data-qa="leftbar-call-centers-duty-value"
+            aria-label="Available"
+          >
+            <template #icon>
+              <dt-icon-bell-ring size="100" />
+            </template>
+            <span class="d-truncate d-wmx-200">
+              Available
+            </span>
+          </dt-button>
+        </template>
+      </dt-recipe-contact-centers-row>
+    </div>
+    <div>
+      <h3 class="d-mbe-100">
+        Ai Contact Centers with unread messages
+      </h3>
+      <dt-recipe-contact-centers-row
+        description="Ai Contact Centers"
+        menu-button-aria-label="Menu button"
+        unread-count="7"
+        unread-count-tooltip="7 unread messages"
+      >
+        <template #end>
+          <dt-button
+            importance="clear"
+            kind="muted"
+            :class="[
+              'leftbar-call-centers-duty-status__button',
+              'd-bar-pill',
+              'd-py-50',
+              'd-fc-positive',
+            ]"
+            class="d-to-ellipsis"
+            :size="200"
+            data-qa="leftbar-call-centers-duty-value"
+            aria-label="Available"
+          >
+            <template #icon>
+              <dt-icon-bell-ring size="100" />
+            </template>
+            <span class="d-truncate d-wmx-200">
+              Available
+            </span>
+          </dt-button>
+        </template>
+      </dt-recipe-contact-centers-row>
+    </div>
+    <div>
+      <h3 class="d-mbe-100">
+        Ai Contact Centers selected with unread messages
+      </h3>
+      <dt-recipe-contact-centers-row
+        description="Ai Contact Centers"
+        menu-button-aria-label="Menu button"
+        selected
+        unread-count="7"
+      >
+        <template #end>
+          <dt-button
+            importance="clear"
+            kind="muted"
+            :class="[
+              'leftbar-call-centers-duty-status__button',
+              'd-bar-pill',
+              'd-py-50',
+              'd-fc-positive',
+            ]"
+            class="d-to-ellipsis"
+            :size="200"
+            data-qa="leftbar-call-centers-duty-value"
+            aria-label="Available"
+          >
+            <template #icon>
+              <dt-icon-bell-ring size="100" />
+            </template>
+            <span class="d-truncate d-wmx-200">
+              Available
+            </span>
+          </dt-button>
+        </template>
+      </dt-recipe-contact-centers-row>
+    </div>
+    <div>
+      <h3 class="d-mbe-100">
+        Ai Contact Centers leftbar with hidden actions
+      </h3>
+      <dt-recipe-contact-centers-row
+        description="Ai Contact Centers"
+        menu-button-aria-label="Menu button"
+        :show-actions="false"
+      >
+        <template #end>
+          <dt-button
+            importance="clear"
+            kind="muted"
+            :class="[
+              'leftbar-call-centers-duty-status__button',
+              'd-bar-pill',
+              'd-py-50',
+              'd-fc-positive',
+            ]"
+            class="d-to-ellipsis"
+            :size="200"
+            data-qa="leftbar-call-centers-duty-value"
+            aria-label="Available"
+          >
+            <template #icon>
+              <dt-icon-bell-ring size="100" />
+            </template>
+            <span class="d-truncate d-wmx-200">
+              Available
+            </span>
+          </dt-button>
+        </template>
+      </dt-recipe-contact-centers-row>
+    </div>
+  </dt-stack>
+</template>
+
+<script>
+import { DtButton } from '@/components/Button';
+import { DtStack } from '@/components/Stack';
+import DtIconBellRing from '@dialpad/dialtone-icons/vue/bell-ring';
+import DtRecipeContactCentersRow from './ContactCentersRow.vue';
+
+export default {
+  name: 'DtRecipeContactCentersRowVariants',
+  components: { DtRecipeContactCentersRow, DtStack, DtButton, DtIconBellRing },
+};
+</script>

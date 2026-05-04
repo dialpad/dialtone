@@ -1,0 +1,73 @@
+<template>
+  <dt-tooltip>
+    <template #anchor>
+      <dt-button
+        :data-qa="dataQa"
+        importance="clear"
+        kind="muted"
+        :aria-label="ariaLabel"
+        :size="100"
+        :active="isActive"
+        @click="$emit('click', $event)"
+      >
+        <template #icon>
+          <slot name="icon" />
+        </template>
+      </dt-button>
+    </template>
+    <dt-stack gap="200">
+      <p>{{ tooltipText }}</p>
+      <dt-keyboard-shortcut
+        v-if="keyboardShortcutText"
+        inverted
+        :shortcut="keyboardShortcutText"
+      />
+    </dt-stack>
+  </dt-tooltip>
+</template>
+
+<script>
+import { DtButton } from '@/components/Button';
+import { DtTooltip } from '@/components/Tooltip';
+import { DtStack } from '@/components/Stack';
+import { DtKeyboardShortcut } from '@/components/KeyboardShortcut';
+export default {
+  compatConfig: { MODE: 3 },
+  name: 'DtRecipeMessageInputButton',
+  components: {
+    DtButton,
+    DtTooltip,
+    DtStack,
+    DtKeyboardShortcut,
+  },
+
+  props: {
+    ariaLabel: {
+      type: String,
+      required: true,
+    },
+
+    tooltipText: {
+      type: String,
+      required: true,
+    },
+
+    keyboardShortcutText: {
+      type: String,
+      default: '',
+    },
+
+    isActive: {
+      type: Boolean,
+      default: false,
+    },
+
+    dataQa: {
+      type: String,
+      required: true,
+    },
+  },
+
+  emits: ['click'],
+};
+</script>

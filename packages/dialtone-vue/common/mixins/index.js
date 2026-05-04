@@ -1,27 +1,27 @@
-export { default as DtDOMMixin } from './dom';
+export { default as DtDOMMixin } from './Dom';
 
 export {
   InputMixin as DtInputMixin,
   CheckableMixin as DtCheckableInputMixin,
   GroupableMixin as DtGroupableInputMixin,
-} from './input';
+} from './Input';
 
 export {
   InputGroupMixin as DtInputGroupMixin,
-} from './input_group';
+} from './InputGroup';
 
 export {
   default as DtKeyboardListNavigationMixin,
-} from './keyboard_list_navigation';
+} from './KeyboardListNavigation';
 
 export {
   default as DtModalMixin,
-} from './modal';
+} from './Modal';
 
 export {
   default as DtSkeletonMixin,
-} from './skeleton';
+} from './Skeleton';
 
 export {
   default as DtModeMixin,
-} from './mode';
+} from './Mode';

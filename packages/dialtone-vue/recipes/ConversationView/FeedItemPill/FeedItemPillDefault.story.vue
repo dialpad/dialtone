@@ -1,0 +1,62 @@
+<template>
+  <dt-recipe-feed-item-pill
+    :title="$attrs.title"
+    :class="$attrs.class"
+    :button-class="$attrs.buttonClass"
+    :border-color="$attrs.borderColor"
+    :toggleable="$attrs.toggleable"
+    :default-toggled="$attrs.defaultToggled"
+  >
+    <template
+      #startIcon="{ iconSize }"
+    >
+      <dt-icon
+        :name="$attrs.startIcon"
+        :size="iconSize"
+      />
+    </template>
+    <template #subtitle>
+      Last 43 minutes - Ended at 5:04pm
+    </template>
+    <template #blockEnd>
+      <span class="d-fc-tertiary d-fs-100">8 people joined</span>
+    </template>
+    <template #end>
+      <div>
+        <dt-button
+          aria-label="Open external link"
+          kind="muted"
+          importance="clear"
+          :circle="true"
+          @click.stop=""
+        >
+          <template #icon>
+            <dt-icon
+              name="external-link"
+              size="300"
+            />
+          </template>
+        </dt-button>
+      </div>
+    </template>
+    <template #content>
+      <span class="d-p-200">
+        The agent from Dialpad called to follow up on a support ticket
+        that Jeff was handling for them regarding Dialpad CTI. They apologized
+        for calling outside of the requested time and expressed that they had
+        asked the team to look into the issue and would email them after the call.
+      </span>
+    </template>
+  </dt-recipe-feed-item-pill>
+</template>
+
+<script>
+import { DtIcon } from '@/components/Icon';
+import { DtButton } from '@/components/Button';
+import DtRecipeFeedItemPill from './FeedItemPill.vue';
+
+export default {
+  name: 'DtRecipeFeedItemPillDefault',
+  components: { DtRecipeFeedItemPill, DtButton, DtIcon },
+};
+</script>

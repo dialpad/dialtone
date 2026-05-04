@@ -1,0 +1,188 @@
+import { mount } from '@vue/test-utils';
+import DtRecipeContactInfo from './ContactInfo.vue';
+
+// Constants
+const baseProps = {
+  avatarSrc: 'avatar1.png',
+  avatarFullName: 'Joseph Lumaban',
+  presence: 'active',
+};
+
+const baseSlots = {
+  header: 'Joseph Lumaban',
+  subtitle: '+1 (415) 123-4567',
+  bottom: 'Aerolabs Support',
+};
+
+describe('DtRecipeContactInfo Tests', () => {
+  // Wrappers
+  let wrapper;
+  let rootElement;
+  let headerElement;
+  let avatarElement;
+  let subtitleElement;
+  let bottomElement;
+
+  // Environment
+  let props = baseProps;
+  let attrs = {};
+  let slots = baseSlots;
+  let provide = {};
+
+  // Helpers
+  const _setChildWrappers = () => {
+    rootElement = wrapper.find('[data-qa="contact-info"]');
+    headerElement = wrapper.find('[data-qa="contact-info-header"]');
+    avatarElement = wrapper.find('[data-qa="dt-avatar"]');
+    subtitleElement = wrapper.find('[data-qa="contact-info-subtitle"]');
+    bottomElement = wrapper.find('[data-qa="contact-info-bottom"]');
+  };
+
+  const _setWrappers = () => {
+    wrapper = mount(DtRecipeContactInfo, {
+      props,
+      attrs,
+      slots,
+      global: {
+        provide,
+      },
+    });
+    _setChildWrappers();
+  };
+
+  // Setup
+  beforeEach(function () {
+    _setWrappers();
+  });
+
+  // Teardown
+  afterEach(function () {
+    props = baseProps;
+    attrs = {};
+    slots = baseSlots;
+    provide = {};
+  });
+
+  describe('Presentation Tests', () => {
+    /*
+     * Test(s) to ensure that the component is correctly rendering
+     */
+
+    describe('When pass default content', () => {
+      it('Should render contact info component', () => {
+        expect(wrapper.exists()).toBe(true);
+        expect(rootElement.exists()).toBe(true);
+      });
+      it('Should display header content correctly', () => {
+        expect(headerElement.exists()).toBe(true);
+        expect(headerElement.text()).toBe('Joseph Lumaban');
+      });
+      it('Should render avatar component', () => {
+        expect(avatarElement.exists()).toBe(true);
+      });
+      it('Should render subtitle content correctly', () => {
+        expect(subtitleElement.exists()).toBe(true);
+        expect(subtitleElement.text()).toBe('+1 (415) 123-4567');
+      });
+      it('Should render bottom content correctly', () => {
+        expect(bottomElement.exists()).toBe(true);
+        expect(bottomElement.text()).toBe('Aerolabs Support');
+      });
+    });
+
+    describe('When `avatarSrc` is empty and `avatarFullName` is passed', () => {
+      beforeEach(async () => {
+        await wrapper.setProps({
+          avatarSrc: '',
+          avatarFullName: 'JL',
+        });
+        _setChildWrappers();
+        await wrapper.vm.$nextTick();
+        _setChildWrappers();
+      });
+      it('Avatar should display', () => {
+        expect(avatarElement.exists()).toBe(true);
+      });
+      it('Should display correct initials', () => {
+        expect(avatarElement.text()).toBe('JL');
+      });
+    });
+
+    describe('When `avatarColor` is defined', () => {
+      beforeEach(async () => {
+        await wrapper.setProps({
+          avatarColor: '540',
+        });
+        _setChildWrappers();
+      });
+      it('Avatar should display', () => {
+        expect(avatarElement.exists()).toBe(true);
+      });
+      it('Should display correct color via data-attributes', () => {
+        // color '540' = family 5, variant 4
+        expect(avatarElement.attributes('data-avatar-family')).toBe('5');
+        expect(avatarElement.attributes('data-avatar-variant')).toBe('4');
+      });
+    });
+
+    describe('When `showAvatar` is false', () => {
+      beforeEach(async () => {
+        await wrapper.setProps({
+          showAvatar: false,
+        });
+        _setChildWrappers();
+      });
+      it('Should not display avatar', () => {
+        expect(avatarElement.exists()).toBe(false);
+      });
+    });
+
+    describe('When new `end` slot is provided', () => {
+      beforeEach(() => {
+        slots = { end: '<span>end content</span>', header: 'header' };
+        _setWrappers();
+      });
+      it('Should render end slot content', () => {
+        const rightElement = wrapper.find('[data-qa="contact-info-right"]');
+        expect(rightElement.exists()).toBe(true);
+        expect(rightElement.text()).toBe('end content');
+      });
+    });
+
+    describe('When deprecated `right` slot is provided', () => {
+      beforeEach(() => {
+        slots = { right: '<span>right content</span>', header: 'header' };
+        _setWrappers();
+      });
+      it('Should render right slot content', () => {
+        const rightElement = wrapper.find('[data-qa="contact-info-right"]');
+        expect(rightElement.exists()).toBe(true);
+        expect(rightElement.text()).toBe('right content');
+      });
+    });
+
+    describe('When new `blockEnd` slot is provided', () => {
+      beforeEach(() => {
+        slots = { blockEnd: '<span>block end content</span>', header: 'header' };
+        _setWrappers();
+      });
+      it('Should render blockEnd slot content', () => {
+        const blockEndElement = wrapper.find('[data-qa="contact-info-bottom"]');
+        expect(blockEndElement.exists()).toBe(true);
+        expect(blockEndElement.text()).toBe('block end content');
+      });
+    });
+
+    describe('When deprecated `bottom` slot is provided', () => {
+      beforeEach(() => {
+        slots = { bottom: '<span>bottom content</span>', header: 'header' };
+        _setWrappers();
+      });
+      it('Should render bottom slot content', () => {
+        const blockEndElement = wrapper.find('[data-qa="contact-info-bottom"]');
+        expect(blockEndElement.exists()).toBe(true);
+        expect(blockEndElement.text()).toBe('bottom content');
+      });
+    });
+  });
+});
