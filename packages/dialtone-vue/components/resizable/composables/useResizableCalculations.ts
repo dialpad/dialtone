@@ -1,5 +1,5 @@
-import { MIN_PANEL_SIZE_PX } from '../resizable_constants';
-import type { ResizablePanelState } from '../resizable_constants';
+import { MIN_PANEL_SIZE_PX } from '../ResizableConstants';
+import type { ResizablePanelState } from '../ResizableConstants';
 import { clampSize } from './constraintResolver';
 
 // ============================================================================

@@ -22,8 +22,8 @@
 </template>
 
 <script>
-import { BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants';
-import DtBreadcrumbItem from './breadcrumb_item.vue';
+import { BREADCRUMBS_INVERTED_MODIFIER } from './BreadcrumbsConstants';
+import DtBreadcrumbItem from './BreadcrumbItem.vue';
 import utils from '@/common/utils';
 import { DialtoneLocalization } from '@/localization';
 

@@ -1,7 +1,7 @@
 import DtStack from './stack.vue';
 
-import StackDefault from './stack_default.story.vue';
-import StackVariants from './stack_variants.story.vue';
+import StackDefault from './StackDefault.story.vue';
+import StackVariants from './StackVariants.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import {
   DT_STACK_DIRECTION,

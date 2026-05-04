@@ -1,5 +1,5 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DialpadDefaultTemplate from './dialpad_default.story.vue';
+import DialpadDefaultTemplate from './DialpadDefault.story.vue';
 
 // Story Collection
 export default {

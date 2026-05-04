@@ -1,8 +1,8 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtCodeblock from './codeblock.vue';
 
-import DtCodeblockDefaultTemplate from './codeblock_default.story.vue';
-import DtCodeblockVariantsTemplate from './codeblock_variants.story.vue';
+import DtCodeblockDefaultTemplate from './CodeblockDefault.story.vue';
+import DtCodeblockVariantsTemplate from './CodeblockVariants.story.vue';
 
 export const argTypesData = {
   // Props

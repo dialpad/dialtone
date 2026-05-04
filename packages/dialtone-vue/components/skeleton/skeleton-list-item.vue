@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import { SKELETON_SHAPES } from './skeleton_constants';
+import { SKELETON_SHAPES } from './SkeletonConstants';
 import DtSkeletonShape from './skeleton-shape.vue';
 import DtSkeletonParagraph from './skeleton-paragraph.vue';
 

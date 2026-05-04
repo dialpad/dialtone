@@ -94,7 +94,7 @@ import {
   colorToFamilyVariant,
   getRandomFamilyVariant,
   computeAvatarHex,
-} from './avatar_constants';
+} from './AvatarConstants';
 import { extractInitialsFromName } from './utils';
 
 // Check if browser supports oklch() - only compute hex fallback if not

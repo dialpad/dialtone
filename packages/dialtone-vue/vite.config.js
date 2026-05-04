@@ -72,7 +72,7 @@ export default defineConfig({
         ...recipeEntries,
 
         // Shared components
-        'shared/sr_only_close_button': './common/sr_only_close_button.vue',
+        'shared/sr_only_close_button': './common/SrOnlyCloseButton.vue',
 
         // Dependencies
         'node_modules/@tiptap/vue-3': './node_modules/@tiptap/vue-3/dist/index.js',

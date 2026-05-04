@@ -1,4 +1,4 @@
-import LocalizationDefault from './localization_default.story.vue';
+import LocalizationDefault from './LocalizationDefault.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 
 // Default Props for all variations

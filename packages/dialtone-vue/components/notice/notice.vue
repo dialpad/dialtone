@@ -40,10 +40,10 @@
 </template>
 
 <script>
-import DtNoticeIcon from './notice_icon.vue';
-import DtNoticeContent from './notice_content.vue';
-import DtNoticeAction from './notice_action.vue';
-import { NOTICE_KINDS, NOTICE_ROLES } from './notice_constants';
+import DtNoticeIcon from './NoticeIcon.vue';
+import DtNoticeContent from './NoticeContent.vue';
+import DtNoticeAction from './NoticeAction.vue';
+import { NOTICE_KINDS, NOTICE_ROLES } from './NoticeConstants';
 
 /**
  * A notice is an informational and assistive message that appears inline with content.

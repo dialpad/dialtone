@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import DtBadge from './badge.vue';
-import { BADGE_TYPE_MODIFIERS, BADGE_KIND_MODIFIERS, BADGE_DECORATION_MODIFIERS } from './badge_constants';
+import { BADGE_TYPE_MODIFIERS, BADGE_KIND_MODIFIERS, BADGE_DECORATION_MODIFIERS } from './BadgeConstants';
 
 const MOCK_SLOT_TEXT = 'Default slot text';
 const MOCK_PROP_TEXT = 'Prop text';

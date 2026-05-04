@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import DtButton from './button.vue';
 import EmptyComponentFixture from '@/tests/fixtures/component.vue';
-import { BUTTON_ICON_SIZES } from './button_constants';
+import { BUTTON_ICON_SIZES } from './ButtonConstants';
 
 const MOCK_BUTTON_STUB = vi.fn();
 

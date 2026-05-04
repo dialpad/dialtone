@@ -1,7 +1,7 @@
 import DtBox from './box.vue';
 import DtStack from '@/components/stack/stack.vue';
 import DtText from '@/components/text/text.vue';
-import BoxVariants from './box_variants.story.vue';
+import BoxVariants from './BoxVariants.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import {
   DT_BOX_AS_VALUES,
@@ -11,7 +11,7 @@ import {
   DT_BOX_BORDER_WIDTH_VALUES,
   DT_BOX_BORDER_RADIUS_VALUES,
   DT_BOX_SHADOW_VALUES,
-} from './box_constants.js';
+} from './BoxConstants.js';
 
 export const argsData = {
   as: 'div',

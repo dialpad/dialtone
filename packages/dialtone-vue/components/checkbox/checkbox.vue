@@ -73,8 +73,8 @@ import {
   MessagesMixin,
 } from '@/common/mixins/input';
 import { removeClassStyleAttrs } from '@/common/utils';
-import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './checkbox_constants';
-import { DtValidationMessages } from '../validation_messages';
+import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './CheckboxConstants';
+import { DtValidationMessages } from '../ValidationMessages';
 import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/text';
 
 /**

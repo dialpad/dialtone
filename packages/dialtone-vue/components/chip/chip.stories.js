@@ -2,9 +2,9 @@ import { action } from 'storybook/actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtChip from './chip.vue';
 
-import DtChipDefaultTemplate from './chip_default.story.vue';
-import DtChipVariantsTemplate from './chip_variants.story.vue';
-import { CHIP_SIZE_MODIFIERS } from './chip_constants';
+import DtChipDefaultTemplate from './ChipDefault.story.vue';
+import DtChipVariantsTemplate from './ChipVariants.story.vue';
+import { CHIP_SIZE_MODIFIERS } from './ChipConstants';
 
 const iconsList = getIconNames();
 

@@ -3,7 +3,7 @@ import DtTooltip from './tooltip.vue';
 import {
   TOOLTIP_KIND_MODIFIERS,
   TOOLTIP_DIRECTIONS,
-} from './tooltip_constants';
+} from './TooltipConstants';
 
 const MOCK_GET_ROOT_NODE = () => document;
 

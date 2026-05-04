@@ -39,9 +39,9 @@
 </template>
 
 <script>
-import { TOAST_MIN_DURATION, TOAST_LAYOUTS } from './toast_constants.js';
-import ToastLayoutDefault from './layouts/toast_layout_default.vue';
-import ToastLayoutAlternate from './layouts/toast_layout_alternate.vue';
+import { TOAST_MIN_DURATION, TOAST_LAYOUTS } from './ToastConstants.js';
+import ToastLayoutDefault from './layouts/ToastLayoutDefault.vue';
+import ToastLayoutAlternate from './layouts/ToastLayoutAlternate.vue';
 
 /**
  * A toast notice, sometimes called a snackbar, is a time-based message that appears based on users' actions.

@@ -1,7 +1,7 @@
 import { action } from 'storybook/actions';
 import DtNotice from './notice.vue';
-import { NOTICE_KINDS, NOTICE_ROLES } from './notice_constants';
-import NoticeDefault from './notice_default.story.vue';
+import { NOTICE_KINDS, NOTICE_ROLES } from './NoticeConstants';
+import NoticeDefault from './NoticeDefault.story.vue';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 
 const iconsList = getIconNames();

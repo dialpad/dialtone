@@ -6,13 +6,13 @@
  */
 
 import type { Ref } from 'vue';
-import { DEFAULT_PANEL_SIZE } from '../resizable_constants';
+import { DEFAULT_PANEL_SIZE } from '../ResizableConstants';
 import type {
   ResizablePanelState,
   ResizableSizeValue,
   CollapseRule,
-} from '../resizable_constants';
-import { parseSizeToPixels } from '../resizable_utils';
+} from '../ResizableConstants';
+import { parseSizeToPixels } from '../ResizableUtils';
 import { applyPanelPixelConstraints, canResetPanelPair } from './useResizablePanelState';
 
 // ============================================================================

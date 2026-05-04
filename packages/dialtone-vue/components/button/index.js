@@ -7,4 +7,4 @@ export {
   ICON_POSITION_MODIFIERS,
   INVALID_COMBINATION,
   BUTTON_ICON_SIZES,
-} from './button_constants.js';
+} from './ButtonConstants.js';

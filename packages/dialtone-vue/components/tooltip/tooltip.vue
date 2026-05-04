@@ -48,10 +48,10 @@ import {
   TOOLTIP_DIRECTIONS,
   TOOLTIP_STICKY_VALUES,
   TOOLTIP_DELAY_MS,
-} from './tooltip_constants.js';
+} from './TooltipConstants.js';
 import {
   POPOVER_APPEND_TO_VALUES,
-} from '../popover/popover_constants';
+} from '../popover/PopoverConstants';
 import { flushPromises, getUniqueString, hasSlotContent, warnIfUnmounted, returnFirstEl } from '@/common/utils';
 import {
   createTippy,

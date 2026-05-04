@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils';
 
 import DtNotice from './notice.vue';
-import DtNoticeAction from '../notice/notice_action.vue';
-import DtNoticeContent from '../notice/notice_content.vue';
-import DtNoticeIcon from '../notice/notice_icon.vue';
+import DtNoticeAction from '../notice/NoticeAction.vue';
+import DtNoticeContent from '../notice/NoticeContent.vue';
+import DtNoticeIcon from '../notice/NoticeIcon.vue';
 
 const baseProps = {
   headerText: '',

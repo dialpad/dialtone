@@ -1,8 +1,8 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtSkeleton from './skeleton.vue';
 
-import DtSkeletonDefaultTemplate from './skeleton_default.story.vue';
-import DtSkeletonVariantsTemplate from './skeleton_variants.story.vue';
+import DtSkeletonDefaultTemplate from './SkeletonDefault.story.vue';
+import DtSkeletonVariantsTemplate from './SkeletonVariants.story.vue';
 
 export const argsData = {
   ariaLabel: '',

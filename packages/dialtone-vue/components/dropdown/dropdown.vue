@@ -62,7 +62,7 @@
 import KeyboardNavigation from '@/common/mixins/keyboard_list_navigation';
 import { DtPopover, POPOVER_APPEND_TO_VALUES } from '@/components/popover';
 import { LIST_ITEM_NAVIGATION_TYPES } from '@/components/list_item';
-import { DROPDOWN_PADDING_CLASSES } from './dropdown_constants';
+import { DROPDOWN_PADDING_CLASSES } from './DropdownConstants';
 import { getUniqueString } from '@/common/utils';
 import { EVENT_KEYNAMES } from '@/common/constants';
 import { CONTENT_MODE_PROP } from '@/common/mode_constants';

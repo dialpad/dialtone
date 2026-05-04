@@ -1,5 +1,5 @@
 export { default as DtNotice } from './notice.vue';
-export { default as DtNoticeAction } from './notice_action.vue';
-export { default as DtNoticeIcon } from './notice_icon.vue';
-export { default as DtNoticeContent } from './notice_content.vue';
-export { NOTICE_KINDS, NOTICE_ROLES } from './notice_constants';
+export { default as DtNoticeAction } from './NoticeAction.vue';
+export { default as DtNoticeIcon } from './NoticeIcon.vue';
+export { default as DtNoticeContent } from './NoticeContent.vue';
+export { NOTICE_KINDS, NOTICE_ROLES } from './NoticeConstants';

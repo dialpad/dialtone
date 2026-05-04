@@ -2,10 +2,10 @@
 import { action } from 'storybook/actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtInput from './input.vue';
-import { INPUT_SIZES, INPUT_TYPES } from './input_constants';
+import { INPUT_SIZES, INPUT_TYPES } from './InputConstants';
 
-import InputDefault from './input_default.story.vue';
-import InputSearchVariant from './input_search_variant.story.vue';
+import InputDefault from './InputDefault.story.vue';
+import InputSearchVariant from './InputSearchVariant.story.vue';
 
 const iconsList = getIconNames();
 

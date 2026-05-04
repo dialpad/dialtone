@@ -5,13 +5,13 @@ import {
   POPOVER_CONTENT_WIDTHS,
   POPOVER_INITIAL_FOCUS_STRINGS,
 } from './';
-import PopoverDefault from './popover_default.story.vue';
-import PopoverVariants from './popover_variants.story.vue';
-import PopoverIframe from './popover_iframe.story.vue';
+import PopoverDefault from './PopoverDefault.story.vue';
+import PopoverVariants from './PopoverVariants.story.vue';
+import PopoverIframe from './PopoverIframe.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 
 import { action } from 'storybook/actions';
-import { POPOVER_DIRECTIONS, POPOVER_STICKY_VALUES } from './popover_constants';
+import { POPOVER_DIRECTIONS, POPOVER_STICKY_VALUES } from './PopoverConstants';
 import { CONTENT_MODE_ARG_TYPE } from '@/common/mode_constants';
 
 // Default Props for all variations

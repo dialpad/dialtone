@@ -14,4 +14,4 @@ export {
   colorToFamilyVariant,
   getRandomFamilyVariant,
   computeAvatarHex,
-} from './avatar_constants';
+} from './AvatarConstants';

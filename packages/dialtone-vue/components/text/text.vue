@@ -25,7 +25,7 @@ import {
   TEXT_BOX_TRIM_MODIFIERS,
   TEXT_STRENGTH_MODIFIERS,
   TEXT_DENSITY_MODIFIERS,
-} from './text_constants';
+} from './TextConstants';
 
 const DEFAULT_SIZE = '300';
 const SEMANTIC_HEADING_ELEMENTS = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'];

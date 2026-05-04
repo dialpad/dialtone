@@ -50,4 +50,4 @@ export { useResizableOffset } from './useResizableOffset';
 export type { ResizableOffsetOptions, ResizableOffsetResult } from './useResizableOffset';
 
 // Re-export types for convenience
-export type * from '../resizable_constants';
+export type * from '../ResizableConstants';

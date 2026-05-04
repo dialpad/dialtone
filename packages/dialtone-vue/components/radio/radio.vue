@@ -70,8 +70,8 @@ import {
   GroupableMixin,
   MessagesMixin,
 } from '@/common/mixins/input';
-import { RADIO_INPUT_VALIDATION_CLASSES } from './radio_constants';
-import { DtValidationMessages } from '../validation_messages';
+import { RADIO_INPUT_VALIDATION_CLASSES } from './RadioConstants';
+import { DtValidationMessages } from '../ValidationMessages';
 import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/text';
 import { hasSlotContent, removeClassStyleAttrs } from '@/common/utils';
 

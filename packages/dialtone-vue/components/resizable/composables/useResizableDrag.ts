@@ -13,7 +13,7 @@
  */
 
 import { reactive, onUnmounted, type ComputedRef, type Ref } from 'vue';
-import type { ResizableDirection, ResizablePanelState } from '../resizable_constants';
+import type { ResizableDirection, ResizablePanelState } from '../ResizableConstants';
 import type { ResizeHandler } from './useResizableCalculations';
 
 // ============================================================================

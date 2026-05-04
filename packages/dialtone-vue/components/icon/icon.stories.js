@@ -1,8 +1,8 @@
 import DtIcon from './icon.vue';
-import { ICON_SIZE_MODIFIERS } from './icon_constants';
+import { ICON_SIZE_MODIFIERS } from './IconConstants';
 
-import DtIconDefaultTemplate from './icon_default.story.vue';
-import DtIconVariantsTemplate from './icon_variants.story.vue';
+import DtIconDefaultTemplate from './IconDefault.story.vue';
+import DtIconVariantsTemplate from './IconVariants.story.vue';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 const iconsList = getIconNames();
 export const argTypesData = {

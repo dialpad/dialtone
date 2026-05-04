@@ -6,11 +6,11 @@ import {
   BUTTON_IMPORTANCE_MODIFIERS,
   BUTTON_TYPES,
   ICON_POSITION_MODIFIERS,
-} from './button_constants';
-import { LINK_KIND_MODIFIERS } from '../link/link_constants';
+} from './ButtonConstants';
+import { LINK_KIND_MODIFIERS } from '../link/LinkConstants';
 
-import ButtonDefault from './button_default.story.vue';
-import ButtonVariants from './button_variants.story.vue';
+import ButtonDefault from './ButtonDefault.story.vue';
+import ButtonVariants from './ButtonVariants.story.vue';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 
 export const argsData = {

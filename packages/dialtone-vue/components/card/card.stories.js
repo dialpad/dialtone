@@ -1,7 +1,7 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtCard from './card.vue';
 
-import DtCardDefaultTemplate from './card_default.story.vue';
+import DtCardDefaultTemplate from './CardDefault.story.vue';
 
 // Default Prop Values
 export const argsData = {};

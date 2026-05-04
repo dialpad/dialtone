@@ -1,0 +1,80 @@
+<template>
+  <div
+    aria-hidden="true"
+    :class="['d-toast-layout-alternate__icon', iconClass]"
+  >
+    <slot>
+      <component
+        :is="defaultIcon"
+        v-if="defaultIcon"
+        :size="size"
+      />
+    </slot>
+  </div>
+</template>
+
+<script>
+import {
+  DtIconInfo,
+  DtIconAlertTriangle,
+  DtIconBell,
+  DtIconSparkle,
+} from '@dialpad/dialtone-icons/vue';
+import { TOAST_ALTERNATE_KINDS } from '../ToastConstants.js';
+import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants.js';
+
+const kindToIcon = new Map([
+  ['info', DtIconInfo],
+  ['positive', DtIconInfo],
+  ['warning', DtIconAlertTriangle],
+  ['critical', DtIconInfo],
+  ['base', DtIconBell],
+  ['gradient', DtIconSparkle],
+]);
+
+export default {
+  compatConfig: { MODE: 3 },
+  name: 'DtToastLayoutAlternateIcon',
+
+  components: {
+    DtIconInfo,
+    DtIconAlertTriangle,
+    DtIconBell,
+    DtIconSparkle,
+  },
+
+  props: {
+    /**
+     * Kind of icon
+     * @values base, critical, info, positive, warning
+     */
+    kind: {
+      type: String,
+      default: 'base',
+      validator (kind) {
+        return TOAST_ALTERNATE_KINDS.includes(kind);
+      },
+    },
+
+    size: {
+      type: String,
+      default: '400',
+      validator: (s) => Object.keys(ICON_SIZE_MODIFIERS).includes(s),
+    },
+
+    /**
+     * Additional class name for the icon wrapper element.
+     */
+    iconClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+  },
+
+  computed: {
+    defaultIcon () {
+      return kindToIcon.get(this.kind);
+    },
+  },
+};
+</script>

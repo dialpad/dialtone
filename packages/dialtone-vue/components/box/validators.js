@@ -9,7 +9,7 @@ import {
   DT_BOX_LAYOUT_VALUES,
   DT_BOX_OVERFLOW_VALUES,
   DT_BOX_SCROLLBAR_VALUES,
-} from './box_constants.js';
+} from './BoxConstants.js';
 
 // Vue's default validator warning omits the invalid value and allowed list.
 // This factory adds a dev-only console.warn to fill that gap.

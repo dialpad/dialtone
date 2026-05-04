@@ -15,13 +15,13 @@
  */
 
 import { ref, computed, watch, nextTick, type ComputedRef, type Ref } from 'vue';
-import type { ResizablePanelConfig, ResizablePanelState, ResizableDirection } from '../resizable_constants';
+import type { ResizablePanelConfig, ResizablePanelState, ResizableDirection } from '../ResizableConstants';
 import type { LayoutResult } from './computeLayout';
 import type { SavedPanelData } from './useResizableStorage';
 import { computeLayout } from './computeLayout';
 import { useResizableStorage } from './useResizableStorage';
 import { calculateConstraintHierarchy } from './constraintResolver';
-import { validateContainerSize } from '../resizable_utils';
+import { validateContainerSize } from '../ResizableUtils';
 
 // ============================================================================
 // OPTIONS
@@ -32,7 +32,7 @@ export interface UseResizableGroupOptions {
   direction: ComputedRef<ResizableDirection>;
   containerRef: Ref<HTMLElement | null>;
   /** Custom storage adapter. Overrides storageKey when provided. */
-  storageAdapter?: import('../resizable_constants').ResizableStorageAdapter;
+  storageAdapter?: import('../ResizableConstants').ResizableStorageAdapter;
 }
 
 // ============================================================================

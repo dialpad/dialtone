@@ -1,7 +1,7 @@
 import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import ToggleDefault from './toggle_default.story.vue';
-import ToggleVariants from './toggle_variants.story.vue';
+import ToggleDefault from './ToggleDefault.story.vue';
+import ToggleVariants from './ToggleVariants.story.vue';
 
 import DtToggle from './toggle.vue';
 import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/toggle/toggle_constants';

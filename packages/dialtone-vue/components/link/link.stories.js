@@ -2,9 +2,9 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from 'storybook/actions';
 import DtLink from './link.vue';
 
-import DtLinkDefaultTemplate from './link_default.story.vue';
-import DtLinkVariantsTemplate from './link_variants.story.vue';
-import { LINK_VARIANTS } from './link_constants';
+import DtLinkDefaultTemplate from './LinkDefault.story.vue';
+import DtLinkVariantsTemplate from './LinkVariants.story.vue';
+import { LINK_VARIANTS } from './LinkConstants';
 
 // Default Prop Values
 export const argsData = {

@@ -12,4 +12,4 @@ export {
   TEXT_BOX_TRIM_MODIFIERS,
   TEXT_STRENGTH_MODIFIERS,
   TEXT_DENSITY_MODIFIERS,
-} from './text_constants';
+} from './TextConstants';

@@ -1,6 +1,6 @@
 import { computed, ref, watch, nextTick } from 'vue';
 import { getWeekDayNames, calculateNextFocusDate, calculatePrevFocusDate, formatDate } from '../utils.js';
-import { INTL_MONTH_FORMAT } from '../datepicker_constants.js';
+import { INTL_MONTH_FORMAT } from '../DatepickerConstants.js';
 import { returnFirstEl } from '@/common/utils';
 import { DialtoneLocalization } from '@/localization';
 

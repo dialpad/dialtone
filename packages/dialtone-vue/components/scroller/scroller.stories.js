@@ -1,6 +1,6 @@
 import DtScroller from './scroller.vue';
-import ScrollerDefault from './scroller_default.story.vue';
-import ScrollerDynamic from './scroller_dynamic.story.vue';
+import ScrollerDefault from './ScrollerDefault.story.vue';
+import ScrollerDynamic from './ScrollerDynamic.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from 'storybook/actions';
 

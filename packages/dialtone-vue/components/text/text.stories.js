@@ -1,8 +1,8 @@
 import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtText from './text.vue';
-import DtTextDefault from './text_default.story.vue';
-import DtTextVariants from './text_variants.story.vue';
+import DtTextDefault from './TextDefault.story.vue';
+import DtTextVariants from './TextVariants.story.vue';
 import {
   TEXT_KIND_MODIFIERS,
   TEXT_SIZE_MODIFIERS,
@@ -12,7 +12,7 @@ import {
   TEXT_DENSITY_MODIFIERS,
   TEXT_WRAP_MODIFIERS,
   TEXT_BOX_TRIM_MODIFIERS,
-} from './text_constants';
+} from './TextConstants';
 
 const kindOptions = Object.keys(TEXT_KIND_MODIFIERS);
 const sizeOptions = Array.from(new Set(Object.values(TEXT_SIZE_MODIFIERS).flat()));

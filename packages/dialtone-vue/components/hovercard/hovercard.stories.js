@@ -1,9 +1,9 @@
 import DtHovercard from './hovercard.vue';
 
-import DtHovercardDefaultTemplate from './hovercard_default.story.vue';
-import DtHovercardManyTemplate from './hovercard_many.story.vue';
-import DtHovercardWithInputTemplate from './hovercard_with_input.story.vue';
-import DtHovercardExternalAnchorTemplate from './hovercard_external_anchor.story.vue';
+import DtHovercardDefaultTemplate from './HovercardDefault.story.vue';
+import DtHovercardManyTemplate from './HovercardMany.story.vue';
+import DtHovercardWithInputTemplate from './HovercardWithInput.story.vue';
+import DtHovercardExternalAnchorTemplate from './HovercardExternalAnchor.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from 'storybook/actions';
 import {

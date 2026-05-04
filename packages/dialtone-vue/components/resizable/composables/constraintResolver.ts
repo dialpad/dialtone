@@ -8,8 +8,8 @@
  * @see ../resizable_constants.ts
  */
 
-import type { ResizablePanelConfig } from '../resizable_constants';
-import { parseSizeToPixels } from '../resizable_utils';
+import type { ResizablePanelConfig } from '../ResizableConstants';
+import { parseSizeToPixels } from '../ResizableUtils';
 
 // ============================================================================
 // TYPES

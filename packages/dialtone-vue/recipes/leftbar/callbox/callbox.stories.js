@@ -1,7 +1,7 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtRecipeCallbox from './callbox.vue';
-import DtRecipeCallboxDefaultTemplate from './callbox_default.story.vue';
-import DtRecipeCallboxVariantsTemplate from './callbox_variants.story.vue';
+import DtRecipeCallboxDefaultTemplate from './CallboxDefault.story.vue';
+import DtRecipeCallboxVariantsTemplate from './CallboxVariants.story.vue';
 import { action } from 'storybook/actions';
 
 export const argTypesData = {

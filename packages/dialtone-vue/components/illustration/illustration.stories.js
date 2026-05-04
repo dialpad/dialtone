@@ -1,5 +1,5 @@
 import DtIllustration from './illustration.vue';
-import DtIllustrationDefaultTemplate from './illustration_default.story.vue';
+import DtIllustrationDefaultTemplate from './IllustrationDefault.story.vue';
 import { createTemplateFromVueFile, getIllustrationNames } from '@/common/storybook_utils';
 
 const illustrationsList = getIllustrationNames();

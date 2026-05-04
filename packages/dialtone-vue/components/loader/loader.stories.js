@@ -1,7 +1,7 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtLoader from './loader.vue';
-import DtLoaderDefaultTemplate from './loader_default.story.vue';
-import DtLoaderVariantsTemplate from './loader_variants.story.vue';
+import DtLoaderDefaultTemplate from './LoaderDefault.story.vue';
+import DtLoaderVariantsTemplate from './LoaderVariants.story.vue';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon';
 
 const argTypesData = {

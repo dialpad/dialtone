@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { PRESENCE_STATES, PRESENCE_STATES_LIST } from './presence_constants';
+import { PRESENCE_STATES, PRESENCE_STATES_LIST } from './PresenceConstants';
 /**
  * Presence is a user status visual indicator element.
  * @see https://dialtone.dialpad.com/components/presence.html

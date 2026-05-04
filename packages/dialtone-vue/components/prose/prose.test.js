@@ -1,6 +1,6 @@
 import DtProse from './prose.vue';
 import { mount } from '@vue/test-utils';
-import { PROSE_SIZE_MODIFIERS, PROSE_DENSITY_MODIFIERS } from './prose_constants.js';
+import { PROSE_SIZE_MODIFIERS, PROSE_DENSITY_MODIFIERS } from './ProseConstants.js';
 
 const PROSE_SELECTOR = '[data-qa="dt-prose"]';
 

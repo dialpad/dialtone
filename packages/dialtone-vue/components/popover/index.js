@@ -8,4 +8,4 @@ export {
   POPOVER_APPEND_TO_VALUES,
   POPOVER_STICKY_VALUES,
   POPOVER_DIRECTIONS,
-} from './popover_constants';
+} from './PopoverConstants';

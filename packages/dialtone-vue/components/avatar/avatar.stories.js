@@ -1,8 +1,8 @@
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtAvatar from './avatar.vue';
-import { AVATAR_SIZE_MODIFIERS, AVATAR_PRESENCE_STATES } from './avatar_constants';
-import DtAvatarDefaultTemplate from './avatar_default.story.vue';
-import DtAvatarVariantsTemplate from './avatar_variants.story.vue';
+import { AVATAR_SIZE_MODIFIERS, AVATAR_PRESENCE_STATES } from './AvatarConstants';
+import DtAvatarDefaultTemplate from './AvatarDefault.story.vue';
+import DtAvatarVariantsTemplate from './AvatarVariants.story.vue';
 import { action } from 'storybook/actions';
 
 import defaultImage from '@/common/assets/avatar2.png';

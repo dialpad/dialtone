@@ -2,13 +2,13 @@ import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { DtResizable } from './';
 
-import ResizableDefaultStory from './resizable_default.story.vue';
-import ResizableThreePanelStory from './resizable_three_panel.story.vue';
-import ResizableConstraintsStory from './resizable_constraints.story.vue';
-import ResizableCollapsibleStory from './resizable_collapsible.story.vue';
-import ResizablePersistenceStory from './resizable_persistence.story.vue';
-import ResizableKeyboardStory from './resizable_keyboard.story.vue';
-import ResizableOffsetStory from './resizable_offset.story.vue';
+import ResizableDefaultStory from './ResizableDefault.story.vue';
+import ResizableThreePanelStory from './ResizableThreePanel.story.vue';
+import ResizableConstraintsStory from './ResizableConstraints.story.vue';
+import ResizableCollapsibleStory from './ResizableCollapsible.story.vue';
+import ResizablePersistenceStory from './ResizablePersistence.story.vue';
+import ResizableKeyboardStory from './ResizableKeyboard.story.vue';
+import ResizableOffsetStory from './ResizableOffset.story.vue';
 
 export const argsData = {
   direction: 'row',

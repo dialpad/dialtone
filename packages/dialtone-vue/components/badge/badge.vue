@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { BADGE_TYPE_MODIFIERS, BADGE_KIND_MODIFIERS, BADGE_DECORATION_MODIFIERS } from './badge_constants';
+import { BADGE_TYPE_MODIFIERS, BADGE_KIND_MODIFIERS, BADGE_DECORATION_MODIFIERS } from './BadgeConstants';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon';
 import { hasSlotContent } from '@/common/utils/index.js';
 

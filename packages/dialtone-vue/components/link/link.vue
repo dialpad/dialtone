@@ -12,7 +12,7 @@
 
 <script>
 import { resolveComponent } from 'vue';
-import { LINK_VARIANTS, LINK_KIND_MODIFIERS, getLinkKindModifier } from './link_constants';
+import { LINK_VARIANTS, LINK_KIND_MODIFIERS, getLinkKindModifier } from './LinkConstants';
 
 /**
  * A link is a navigational element that can be found on its own, within other text, or directly following content.

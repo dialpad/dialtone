@@ -155,7 +155,7 @@ import {
   BUTTON_TYPES,
   ICON_POSITION_MODIFIERS,
   INVALID_COMBINATION,
-} from './button_constants';
+} from './ButtonConstants';
 
 import { LINK_KIND_MODIFIERS, getLinkKindModifier } from '@/components/link';
 import { DialtoneLocalization } from '@/localization';

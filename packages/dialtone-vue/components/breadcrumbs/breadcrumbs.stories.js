@@ -1,8 +1,8 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtBreadcrumbs from './breadcrumbs.vue';
 
-import DtBreadcrumbsDefaultTemplate from './breadcrumbs_default.story.vue';
-import DtBreadcrumbsVariantsTemplate from './breadcrumbs_variants.story.vue';
+import DtBreadcrumbsDefaultTemplate from './BreadcrumbsDefault.story.vue';
+import DtBreadcrumbsVariantsTemplate from './BreadcrumbsVariants.story.vue';
 
 // Default Prop Values
 export const argsData = {

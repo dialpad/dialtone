@@ -1,12 +1,12 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtTooltip from './tooltip.vue';
-import DtTooltipFlipTemplate from './tooltip_flip.story.vue';
-import DtTooltipDefault from './tooltip_default.story.vue';
-import DtTooltipVariantsTemplate from './tooltip_variants.story.vue';
-import DtTooltipChangeOnClick from './tooltip_change_on_click.story.vue';
+import DtTooltipFlipTemplate from './TooltipFlip.story.vue';
+import DtTooltipDefault from './TooltipDefault.story.vue';
+import DtTooltipVariantsTemplate from './TooltipVariants.story.vue';
+import DtTooltipChangeOnClick from './TooltipChangeOnClick.story.vue';
 import { action } from 'storybook/actions';
 
-import { TOOLTIP_DIRECTIONS, TOOLTIP_STICKY_VALUES } from './tooltip_constants';
+import { TOOLTIP_DIRECTIONS, TOOLTIP_STICKY_VALUES } from './TooltipConstants';
 import { CONTENT_MODE_ARG_TYPE } from '@/common/mode_constants';
 
 // Default Prop Values

@@ -136,7 +136,7 @@ import {
   MODAL_BANNER_KINDS,
   MODAL_KIND_MODIFIERS,
   MODAL_SIZE_MODIFIERS,
-} from './modal_constants';
+} from './ModalConstants';
 import { getUniqueString, hasSlotContent, returnFirstEl, disableRootScrolling, enableRootScrolling } from '@/common/utils';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 import { NOTICE_KINDS } from '@/components/notice';

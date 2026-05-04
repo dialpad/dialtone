@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import DtBreadcrumb from './breadcrumbs.vue';
-import { BREADCRUMB_ITEM_SELECTED_MODIFIER, BREADCRUMBS_INVERTED_MODIFIER } from './breadcrumbs_constants';
+import { BREADCRUMB_ITEM_SELECTED_MODIFIER, BREADCRUMBS_INVERTED_MODIFIER } from './BreadcrumbsConstants';
 
 const MOCK_ROOT_CLASS = 'custom-class';
 

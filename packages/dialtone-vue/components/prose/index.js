@@ -4,4 +4,4 @@ export {
   PROSE_ALLOWED_ATTRIBUTES,
   PROSE_SIZE_MODIFIERS,
   PROSE_DENSITY_MODIFIERS,
-} from './prose_constants.js';
+} from './ProseConstants.js';

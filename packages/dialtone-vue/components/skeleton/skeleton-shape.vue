@@ -19,7 +19,7 @@ import SkeletonAnimation from '@/common/mixins/skeleton';
 import {
   SKELETON_SHAPES,
   SKELETON_SHAPE_SIZES,
-} from './skeleton_constants';
+} from './SkeletonConstants';
 
 export default {
   compatConfig: { MODE: 3 },

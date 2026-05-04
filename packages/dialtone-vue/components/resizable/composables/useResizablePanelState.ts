@@ -7,9 +7,9 @@
  * Constraint math has been extracted to constraintResolver.ts.
  */
 
-import { DEFAULT_PANEL_SIZE } from '../resizable_constants';
-import type { ResizablePanelConfig, ResizablePanelState } from '../resizable_constants';
-import { parseSizeToPixels } from '../resizable_utils';
+import { DEFAULT_PANEL_SIZE } from '../ResizableConstants';
+import type { ResizablePanelConfig, ResizablePanelState } from '../ResizableConstants';
+import { parseSizeToPixels } from '../ResizableUtils';
 import { clampToTier } from './constraintResolver';
 
 import { calculateConstraintHierarchy } from './constraintResolver';

@@ -22,7 +22,7 @@ import {
   PROSE_SIZE_MODIFIERS,
   PROSE_DENSITY_MODIFIERS,
   _isSafeProseUrl,
-} from './prose_constants.js';
+} from './ProseConstants.js';
 
 const props = defineProps({
   /**

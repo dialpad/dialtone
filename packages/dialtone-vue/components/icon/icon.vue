@@ -10,7 +10,7 @@
 
 <script>
 import { icons } from '@dialpad/dialtone-icons/vue';
-import { ICON_SIZE_MODIFIERS, ICON_NAMES } from './icon_constants';
+import { ICON_SIZE_MODIFIERS, ICON_NAMES } from './IconConstants';
 // import { DialtoneLocalization } from '@/localization';
 // import { toFluentKeyString } from '@/common/utils';
 

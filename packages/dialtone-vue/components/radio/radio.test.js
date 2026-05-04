@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
-import { RADIO_INPUT_VALIDATION_CLASSES } from './radio_constants';
+import { RADIO_INPUT_VALIDATION_CLASSES } from './RadioConstants';
 import DtRadio from './radio.vue';
 import { DtText } from '@/components/text';
 

@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { CODEBLOCK_SIZES, CODEBLOCK_SIZE_MAP } from './codeblock_constants';
+import { CODEBLOCK_SIZES, CODEBLOCK_SIZE_MAP } from './CodeblockConstants';
 
 export default {
   compatConfig: { MODE: 3 },

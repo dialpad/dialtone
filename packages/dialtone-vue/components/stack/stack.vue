@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import { DT_STACK_DIRECTION, DT_STACK_GAP, DT_STACK_RESPONSIVE_BREAKPOINTS, DT_STACK_ALIGN, DT_STACK_JUSTIFY } from './stack_constants';
+import { DT_STACK_DIRECTION, DT_STACK_GAP, DT_STACK_RESPONSIVE_BREAKPOINTS, DT_STACK_ALIGN, DT_STACK_JUSTIFY } from './StackConstants';
 import { directionValidator, gapValidator, alignValidator, justifyValidator } from './validators';
 import { getDefaultDirectionClass, getResponsiveClasses, getDefaultGapClass, getDefaultAlignClass, getDefaultJustifyClass } from './utils';
 

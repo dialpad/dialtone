@@ -9,7 +9,7 @@
 <script setup>
 import { computed } from 'vue';
 import { illustrations } from '@dialpad/dialtone-icons/vue';
-import { ILLUSTRATION_NAMES } from './illustration_constants';
+import { ILLUSTRATION_NAMES } from './IllustrationConstants';
 
 defineOptions({
   name: 'DtIllustration',

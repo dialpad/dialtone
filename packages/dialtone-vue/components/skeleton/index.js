@@ -9,4 +9,4 @@ export {
   SKELETON_TEXT_TYPES,
   SKELETON_SHAPE_SIZES,
   SKELETON_HEADING_HEIGHTS,
-} from './skeleton_constants';
+} from './SkeletonConstants';

@@ -78,7 +78,7 @@
 
 <script>
 import { extractVueListeners, getUniqueString, hasSlotContent } from '@/common/utils';
-import DtCollapsibleLazyShow from './collapsible_lazy_show.vue';
+import DtCollapsibleLazyShow from './CollapsibleLazyShow.vue';
 import { DtButton } from '@/components/button';
 import { DtLazyShow } from '@/components/lazy_show';
 import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue';

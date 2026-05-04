@@ -1,10 +1,10 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtProse from './prose.vue';
-import DtProseDefaultTemplate from './prose_default.story.vue';
+import DtProseDefaultTemplate from './ProseDefault.story.vue';
 import {
   PROSE_SIZE_MODIFIERS,
   PROSE_DENSITY_MODIFIERS,
-} from './prose_constants';
+} from './ProseConstants';
 
 export const argTypesData = {
   size: {

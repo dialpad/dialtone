@@ -31,7 +31,7 @@ import {
   onUnmounted,
   provide,
 } from 'vue';
-import { RESIZABLE_CONTEXT_KEY, buildHandleId } from './resizable_constants';
+import { RESIZABLE_CONTEXT_KEY, buildHandleId } from './ResizableConstants';
 import {
   useResizablePanelControls,
   useResizableGroup,

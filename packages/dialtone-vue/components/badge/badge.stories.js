@@ -1,13 +1,13 @@
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtBadge from './badge.vue';
-import DtBadgeDefaultTemplate from './badge_default.story.vue';
-import DtBadgeVariantsTemplate from './badge_variants.story.vue';
-import DtBadgeExamplesTemplate from './badge_examples.story.vue';
+import DtBadgeDefaultTemplate from './BadgeDefault.story.vue';
+import DtBadgeVariantsTemplate from './BadgeVariants.story.vue';
+import DtBadgeExamplesTemplate from './BadgeExamples.story.vue';
 import {
   BADGE_TYPE_MODIFIERS,
   BADGE_KIND_MODIFIERS,
   BADGE_DECORATION_MODIFIERS,
-} from './badge_constants';
+} from './BadgeConstants';
 
 const iconsList = getIconNames();
 

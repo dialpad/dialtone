@@ -16,9 +16,9 @@
  * @see constraintResolver.ts
  */
 
-import { DEFAULT_PANEL_SIZE, buildHandleId } from '../resizable_constants';
-import type { ResizablePanelConfig } from '../resizable_constants';
-import { parseSizeToPixels } from '../resizable_utils';
+import { DEFAULT_PANEL_SIZE, buildHandleId } from '../ResizableConstants';
+import type { ResizablePanelConfig } from '../ResizableConstants';
+import { parseSizeToPixels } from '../ResizableUtils';
 import { calculateConstraintHierarchy, clampToTier, type ConstraintHierarchy } from './constraintResolver';
 
 // ============================================================================

@@ -1,0 +1,170 @@
+import { mount } from '@vue/test-utils';
+import DtEmojiTextWrapper from './EmojiTextWrapper.vue';
+import { setCustomEmojiJson, setCustomEmojiUrl, setEmojiAssetUrlLarge } from '@/common/emoji';
+import customEmojiJson from '@/common/custom-emoji.json' with { type: 'json' };
+
+setEmojiAssetUrlLarge('https://mockstorage.com/emojis/', '.svg');
+setCustomEmojiUrl('https://mockstorage.com/emojis/');
+
+const MOCK_EXPECTED_SMILE_SRC = 'https://mockstorage.com/emojis/1f604.svg';
+const MOCK_EXPECTED_BABY_YODA_SRC = 'https://storage.googleapis.com/uv-beta_custom_emojis/5646620347596800/baby_yoda';
+
+const baseProps = {};
+const baseSlots = {};
+
+let mockProps = {};
+let mockSlots = {};
+
+describe('DtEmojiTextWrapper Tests', () => {
+  let wrapper;
+  let emoji;
+
+  const updateWrapper = () => {
+    wrapper = mount(DtEmojiTextWrapper, {
+      props: { ...baseProps, ...mockProps },
+      slots: { ...baseSlots, ...mockSlots },
+    });
+
+    emoji = wrapper.find('img');
+  };
+
+  beforeEach(() => {
+    updateWrapper();
+  });
+
+  afterEach(() => {
+    mockProps = {};
+    mockSlots = {};
+  });
+
+  describe('Presentation Tests', () => {
+    describe('When default slot is provided', () => {
+      describe('When default slot does not contains shortcode or unicode emoji', () => {
+        beforeEach(() => {
+          mockSlots = { default: 'Content without emoji.' };
+
+          updateWrapper();
+        });
+
+        it('Renders the text correctly', () => {
+          expect(wrapper.text()).toBe(mockSlots.default);
+        });
+
+        it('Does not contain emoji component', () => {
+          expect(emoji.exists()).toBe(false);
+        });
+      });
+
+      describe('When default slot contains shortcodes', () => {
+        describe('When default slot contains valid shortcode', () => {
+          beforeEach(() => {
+            mockSlots = { default: 'Content with :smile: emoji.' };
+
+            updateWrapper();
+          });
+
+          it('Contains emoji component', () => {
+            expect(emoji.exists()).toBe(true);
+          });
+
+          it('Renders the correct emoji', () => {
+            expect(emoji.attributes('src')).toBe(MOCK_EXPECTED_SMILE_SRC);
+          });
+        });
+
+        describe('When default slot contains valid custom shortcode', () => {
+          beforeEach(() => {
+            setCustomEmojiJson(customEmojiJson);
+
+            mockSlots = { default: 'Content with :baby_yoda: emoji.' };
+
+            updateWrapper();
+          });
+          afterAll(() => {
+            setCustomEmojiJson('');
+          });
+
+          it('Contains emoji component', () => {
+            expect(emoji.exists()).toBe(true);
+          });
+
+          it('Renders the correct emoji', () => {
+            expect(emoji.attributes('src')).toBe(MOCK_EXPECTED_BABY_YODA_SRC);
+          });
+        });
+
+        describe('When default slot contains text with a colon and a valid emoji', () => {
+          beforeEach(() => {
+            mockSlots = { default: 'This is a smile emoji: :smile:' };
+
+            updateWrapper();
+          });
+
+          it('Contains emoji component', () => {
+            expect(emoji.exists()).toBe(true);
+          });
+
+          it('Renders the correct emoji', () => {
+            expect(emoji.attributes('src')).toBe(MOCK_EXPECTED_SMILE_SRC);
+          });
+        });
+
+        describe('When default slot contains invalid shortcode', () => {
+          beforeEach(() => {
+            mockSlots = { default: 'Content with :invalid: emoji.' };
+
+            updateWrapper();
+          });
+
+          it('Renders text only', () => {
+            expect(wrapper.text()).toBe(mockSlots.default);
+          });
+
+          it('Does not contain emoji component', () => {
+            expect(emoji.exists()).toBe(false);
+          });
+        });
+      });
+
+      describe('When default slot contains unicode emoji', () => {
+        describe('When default slot contains valid unicode emoji', () => {
+          beforeEach(() => {
+            mockSlots = { default: 'Content with valid 😄 emoji.' };
+
+            updateWrapper();
+          });
+
+          it('Contains emoji component', () => {
+            expect(emoji.exists()).toBe(true);
+          });
+
+          it('Renders the correct emoji', () => {
+            expect(emoji.attributes('src')).toBe(MOCK_EXPECTED_SMILE_SRC);
+          });
+        });
+      });
+
+      describe('When default slot contains html', () => {
+        beforeEach(() => {
+          mockSlots = { default: 'this <strong>noun</strong> being <em>bolded :star_struck:</em> is <!--slightly--> impressive!' }
+
+          updateWrapper();
+        });
+
+        it('Contains emoji component', () => {
+          expect(emoji.exists()).toBe(true);
+        });
+
+        it('Does not render comments as text', () => {
+          expect(wrapper.text()).not.toContain('slightly');
+        });
+      });
+    });
+
+    describe('When default slot is not provided', () => {
+      it('Is empty', () => {
+        expect(wrapper.text()).toBe('');
+      });
+    });
+  });
+});

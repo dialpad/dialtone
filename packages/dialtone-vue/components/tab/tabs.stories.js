@@ -1,10 +1,10 @@
 import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
-import DtTabGroup from './tab_group.vue';
+import DtTabGroup from './TabGroup.vue';
 
-import DtTabsDefaultTemplate from './tabs_default.story.vue';
-import DtTabsVariantsTemplate from './tabs_variants.story.vue';
-import { TAB_LIST_SIZES, TAB_SPREADS } from './tabs_constants';
+import DtTabsDefaultTemplate from './TabsDefault.story.vue';
+import DtTabsVariantsTemplate from './TabsVariants.story.vue';
+import { TAB_LIST_SIZES, TAB_SPREADS } from './TabsConstants';
 
 // Default Prop Values
 export const argsData = {

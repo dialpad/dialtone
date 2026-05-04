@@ -2,8 +2,8 @@ import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtCombobox from './combobox.vue';
 
-import DtComboboxDefaultTemplate from './combobox_default.story.vue';
-import { COMBOBOX_LABEL_SIZES } from './combobox_constants';
+import DtComboboxDefaultTemplate from './ComboboxDefault.story.vue';
+import { COMBOBOX_LABEL_SIZES } from './ComboboxConstants';
 
 // Default Prop Values
 export const argsData = {

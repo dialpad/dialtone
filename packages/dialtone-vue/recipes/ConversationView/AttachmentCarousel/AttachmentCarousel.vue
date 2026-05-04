@@ -1,0 +1,179 @@
+<template>
+  <div
+    class="d-recipe-attachment-carousel"
+    role="presentation"
+  >
+    <ul
+      v-if="mediaList.length > 0"
+      ref="carousel"
+      class="d-recipe-attachment-carousel__media-list"
+      @scroll="handleScroll"
+    >
+      <!-- media list -->
+      <component
+        :is="mediaComponent(mediaItem.type)"
+        v-for="(mediaItem, index) in filteredMediaList"
+        :key="`media-${index}`"
+        :index="index"
+        :media-item="mediaItem"
+        @remove-media="removeMediaItem(index)"
+        @focusin="onItemFocus"
+      />
+    </ul>
+
+    <!-- Carousel Arrows -->
+    <dt-button
+      v-show="showLeftArrow"
+      tabindex="-1"
+      :aria-label="i18n.$t('DIALTONE_ATTACHMENT_CAROUSEL_LEFT_ARROW_ARIA_LABEL')"
+      class="d-recipe-attachment-carousel__arrow d-recipe-attachment-carousel__arrow--left"
+      circle
+      :size="100"
+      importance="clear"
+      @click="leftScroll"
+    >
+      <template #icon>
+        <dt-icon-arrow-left
+          size="100"
+        />
+      </template>
+    </dt-button>
+    <dt-button
+      v-show="showRightArrow"
+      tabindex="-1"
+      :aria-label="i18n.$t('DIALTONE_ATTACHMENT_CAROUSEL_RIGHT_ARROW_ARIA_LABEL')"
+      class="d-recipe-attachment-carousel__arrow d-recipe-attachment-carousel__arrow--right"
+      circle
+      :size="100"
+      importance="clear"
+      @click="rightScroll"
+    >
+      <template #icon>
+        <dt-icon-arrow-right
+          size="100"
+        />
+      </template>
+    </dt-button>
+  </div>
+</template>
+
+<script>
+import { DtIconArrowRight, DtIconArrowLeft } from '@dialpad/dialtone-icons/vue';
+import { DtButton } from '@/components/button';
+import { DialtoneLocalization } from '@/localization';
+
+import DtImageCarousel from './MediaComponents/ImageCarousel.vue';
+
+const MEDIA_ITEM_WIDTH = 64;
+
+export default {
+  compatConfig: { MODE: 3 },
+  name: 'DtRecipeAttachmentCarousel',
+
+  components: {
+    DtButton,
+    DtIconArrowRight,
+    DtIconArrowLeft,
+    DtImageCarousel,
+  },
+
+  /* inheritAttrs: false is generally an option we want to set on library
+    components. This allows any attributes passed in that are not recognized
+    as props to be passed down to another element or component using v-bind:$attrs
+    more info: https://vuejs.org/v2/api/#inheritAttrs */
+  // inheritAttrs: false,
+
+  props: {
+    /**
+     * media - object array of media objects
+     * @type {Array}
+     *
+     * Object: {
+     *  path: String,
+     *  altText: String | null,
+     * }
+     */
+    mediaList: {
+      type: Array,
+      default: () => [],
+    },
+  },
+
+  emits: [
+    /**
+     * Emitted when popover is shown or hidden
+     *
+     * @event remove-media
+     * @type {Number}
+     */
+    'remove-media',
+  ],
+
+  data () {
+    return {
+      showCloseButton: {},
+      showRightArrow: true,
+      showLeftArrow: false,
+      isMounted: false,
+      i18n: new DialtoneLocalization(),
+    };
+  },
+
+  computed: {
+    filteredMediaList () {
+      return this.mediaList.filter((mediaItem) => mediaItem.type === 'image' || mediaItem.type === 'video');
+    },
+  },
+
+  mounted: function () {
+    this.showLeftArrow = this.$refs.carousel.scrollLeft > 0;
+    this.showRightArrow = this.$refs.carousel.scrollWidth > this.$refs.carousel.clientWidth;
+  },
+
+  methods: {
+    onItemFocus (e) {
+      e.currentTarget.scrollIntoView({ behavior: 'smooth' });
+    },
+
+    mediaComponent (type) {
+      switch (type) {
+        case 'image':
+          return 'dt-image-carousel';
+        default:
+          // unknown media type
+          return null;
+      }
+    },
+
+    removeMediaItem (index) {
+      // make sure the carousel arrows is updated. 64 is the width of each media item
+      this.showRightArrow = this.$refs.carousel.scrollWidth > (this.$refs.carousel.clientWidth + MEDIA_ITEM_WIDTH);
+      this.$emit('remove-media', index);
+    },
+
+    closeButton (val, index) {
+      this.showCloseButton[index] = val;
+    },
+
+    handleScroll () {
+      const carousel = this.$refs.carousel;
+      this.showLeftArrow = carousel.scrollLeft > 0;
+      this.showRightArrow = !((carousel.scrollLeft + carousel.clientWidth) === carousel.scrollWidth);
+    },
+
+    leftScroll () {
+      this.$refs.carousel.scrollTo({
+        left: this.$refs.carousel.scrollLeft - 100,
+        behavior: 'smooth',
+      });
+    },
+
+    rightScroll () {
+      this.$refs.carousel.scrollTo({
+        left: this.$refs.carousel.scrollLeft + 100,
+        behavior: 'smooth',
+      });
+    },
+  },
+};
+</script>

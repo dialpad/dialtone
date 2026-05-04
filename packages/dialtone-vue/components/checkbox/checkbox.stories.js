@@ -1,8 +1,8 @@
 import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
-import CheckboxDefault from './checkbox_default.story.vue';
-import CheckboxVariants from './checkbox_variants.story.vue';
+import CheckboxDefault from './CheckboxDefault.story.vue';
+import CheckboxVariants from './CheckboxVariants.story.vue';
 
 import DtCheckbox from './checkbox.vue';
 

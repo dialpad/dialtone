@@ -29,8 +29,8 @@
 </template>
 
 <script setup>
-import CoreScroller from './modules/core_scroller.vue';
-import DynamicScroller from './modules/dynamic_scroller.vue';
+import CoreScroller from './modules/CoreScroller.vue';
+import DynamicScroller from './modules/DynamicScroller.vue';
 import { provide, computed, watch, ref } from 'vue';
 
 defineOptions({

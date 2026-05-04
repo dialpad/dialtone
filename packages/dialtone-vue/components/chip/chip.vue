@@ -64,7 +64,7 @@ import {
   CHIP_CLOSE_BUTTON_SIZE_MODIFIERS,
   CHIP_SIZE_MODIFIERS,
   CHIP_ICON_SIZES,
-} from './chip_constants';
+} from './ChipConstants';
 import { getUniqueString, hasSlotContent } from '@/common/utils';
 import { DialtoneLocalization } from '@/localization';
 

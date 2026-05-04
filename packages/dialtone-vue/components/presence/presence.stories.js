@@ -1,9 +1,9 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 
 import DtPresence from './presence.vue';
-import { PRESENCE_STATES_LIST } from './presence_constants';
-import PresenceDefaultTemplate from './presence_default.story.vue';
-import PresenceVariantsTemplate from './presence_variants.story.vue';
+import { PRESENCE_STATES_LIST } from './PresenceConstants';
+import PresenceDefaultTemplate from './PresenceDefault.story.vue';
+import PresenceVariantsTemplate from './PresenceVariants.story.vue';
 
 export const argTypesData = {
   presence: {

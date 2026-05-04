@@ -2,8 +2,8 @@ import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtPagination from './pagination.vue';
 
-import DtPaginationDefaultTemplate from './pagination_default.story.vue';
-import DtPaginationVariantsTemplate from './pagination_variants.story.vue';
+import DtPaginationDefaultTemplate from './PaginationDefault.story.vue';
+import DtPaginationVariantsTemplate from './PaginationVariants.story.vue';
 
 // Default Prop Values
 export const argsData = {

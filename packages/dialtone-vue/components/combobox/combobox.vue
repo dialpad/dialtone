@@ -49,8 +49,8 @@
 </template>
 
 <script>
-import ComboboxLoadingList from './combobox_loading-list.vue';
-import ComboboxEmptyList from './combobox_empty-list.vue';
+import ComboboxLoadingList from './ComboboxLoading-list.vue';
+import ComboboxEmptyList from './ComboboxEmpty-list.vue';
 import { DtKeyboardListNavigationMixin } from '@/common/mixins';
 import { getUniqueString, hasSlotContent } from '@/common/utils';
 import { COMBOBOX_LABEL_SIZES } from '@/components/combobox';

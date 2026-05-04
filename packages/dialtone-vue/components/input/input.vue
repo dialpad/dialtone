@@ -146,7 +146,7 @@ import {
   INPUT_SIZE_CLASSES,
   INPUT_ICON_SIZES,
   INPUT_STATE_CLASSES,
-} from './input_constants';
+} from './InputConstants';
 import {
   getUniqueString,
   getValidationState,

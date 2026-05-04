@@ -1,8 +1,8 @@
 import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtDatepicker from './datepicker.vue';
-import DtDatepickerDefaultTemplate from './datepicker_default.story.vue';
-import DtDatepickerWithPopoverTemplate from './datepicker_popover.story.vue';
+import DtDatepickerDefaultTemplate from './DatepickerDefault.story.vue';
+import DtDatepickerWithPopoverTemplate from './DatepickerPopover.story.vue';
 
 const defaultDate = new Date('2023-01-01T00:00:00');
 

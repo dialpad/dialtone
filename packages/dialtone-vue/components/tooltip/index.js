@@ -5,4 +5,4 @@ export {
   TOOLTIP_KIND_MODIFIERS,
   TOOLTIP_STICKY_VALUES,
   TOOLTIP_HIDE_ON_CLICK_VARIANTS,
-} from './tooltip_constants';
+} from './TooltipConstants';

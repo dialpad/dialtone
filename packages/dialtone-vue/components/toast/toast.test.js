@@ -1,9 +1,9 @@
 import { mount } from '@vue/test-utils';
 import DtToast from './toast.vue';
-import { TOAST_MIN_DURATION } from './toast_constants';
-import DtNoticeAction from '../notice/notice_action.vue';
-import DtNoticeContent from '../notice/notice_content.vue';
-import DtNoticeIcon from '../notice/notice_icon.vue';
+import { TOAST_MIN_DURATION } from './ToastConstants';
+import DtNoticeAction from '../notice/NoticeAction.vue';
+import DtNoticeContent from '../notice/NoticeContent.vue';
+import DtNoticeIcon from '../notice/NoticeIcon.vue';
 
 const baseProps = { headerText: '', open: true };
 const baseSlots = {};

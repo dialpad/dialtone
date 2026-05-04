@@ -1,8 +1,8 @@
 import { action } from 'storybook/actions';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 import DtToast from './toast.vue';
-import DtToastDefaultTemplate from './toast_default.story.vue';
-import { TOAST_LAYOUTS, TOAST_ALTERNATE_KINDS } from './toast_constants.js';
+import DtToastDefaultTemplate from './ToastDefault.story.vue';
+import { TOAST_LAYOUTS, TOAST_ALTERNATE_KINDS } from './ToastConstants.js';
 
 const iconsList = getIconNames();
 

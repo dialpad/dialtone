@@ -108,7 +108,7 @@
 </template>
 
 <script>
-import { CALLBOX_BADGE_COLORS, CALLBOX_BORDER_COLORS } from './callbox_constants';
+import { CALLBOX_BADGE_COLORS, CALLBOX_BORDER_COLORS } from './CallboxConstants';
 import DtAvatar from '@/components/avatar/avatar.vue';
 import DtBadge from '@/components/badge/badge.vue';
 import { DtIconPause } from '@dialpad/dialtone-icons/vue';

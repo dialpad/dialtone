@@ -1,8 +1,8 @@
 import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
-import RadioDefault from './radio_default.story.vue';
-import RadioVariants from './radio_variants.story.vue';
+import RadioDefault from './RadioDefault.story.vue';
+import RadioVariants from './RadioVariants.story.vue';
 
 import DtRadio from './radio.vue';
 

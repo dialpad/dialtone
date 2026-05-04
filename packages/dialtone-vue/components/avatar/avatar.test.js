@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { DtIconUser } from '@dialpad/dialtone-icons/vue';
 import DtAvatar from './avatar.vue';
-import { AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS, colorToFamilyVariant } from './avatar_constants';
+import { AVATAR_KIND_MODIFIERS, AVATAR_SIZE_MODIFIERS, colorToFamilyVariant } from './AvatarConstants';
 import { extractInitialsFromName } from './utils';
 
 const MOCK_AVATAR_STUB = vi.fn();

@@ -1,7 +1,7 @@
 import { action } from 'storybook/actions';
 import DtBanner from './banner.vue';
 import { NOTICE_KINDS } from '@/components/notice/index.js';
-import BannerDefault from './banner_default.story.vue';
+import BannerDefault from './BannerDefault.story.vue';
 import backgroundImage from '@/common/assets/dialpad-gradient.png';
 import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
 

@@ -1,7 +1,7 @@
 import { computed, ref, watch } from 'vue';
 import { addMonths, endOfMonth, getDate, getMonth, getYear, set, startOfDay, startOfMonth, subMonths } from 'date-fns';
 import { formatMonth, getCalendarDays } from '../utils.js';
-import { INTL_MONTH_FORMAT } from '../datepicker_constants';
+import { INTL_MONTH_FORMAT } from '../DatepickerConstants';
 import { returnFirstEl } from '@/common/utils';
 import { DialtoneLocalization } from '@/localization';
 

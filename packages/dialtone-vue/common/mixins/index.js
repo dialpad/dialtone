@@ -8,11 +8,11 @@ export {
 
 export {
   InputGroupMixin as DtInputGroupMixin,
-} from './input_group';
+} from './InputGroup';
 
 export {
   default as DtKeyboardListNavigationMixin,
-} from './keyboard_list_navigation';
+} from './KeyboardListNavigation';
 
 export {
   default as DtModalMixin,

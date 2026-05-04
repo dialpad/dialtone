@@ -2,7 +2,7 @@ import { InputMixin } from './input';
 import {
   itBehavesLikePassesCustomPropValidation,
   itBehavesLikeFailsCustomPropValidation,
-} from '../../tests/shared_examples/validation';
+} from '../../tests/SharedExamples/validation';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 
 describe('Input Mixin Tests', () => {

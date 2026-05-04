@@ -4,7 +4,7 @@ import {
   LINK_KIND_MODIFIERS,
   LINK_VARIANTS,
   getLinkKindModifier,
-} from './link_constants';
+} from './LinkConstants';
 
 const TONE_VALUES = LINK_VARIANTS.filter(v => v !== '');
 

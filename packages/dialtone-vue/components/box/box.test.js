@@ -8,7 +8,7 @@ import {
   DT_BOX_BORDER_RADIUS_VALUES,
   DT_BOX_SHADOW_VALUES,
   DT_BOX_OVERFLOW_VALUES,
-} from './box_constants.js';
+} from './BoxConstants.js';
 
 describe('DtBox', () => {
   const slotContent = 'Box content';

@@ -10,4 +10,4 @@ export {
   DT_BOX_LAYOUT_VALUES,
   DT_BOX_OVERFLOW_VALUES,
   DT_BOX_SCROLLBAR_VALUES,
-} from './box_constants.js';
+} from './BoxConstants.js';

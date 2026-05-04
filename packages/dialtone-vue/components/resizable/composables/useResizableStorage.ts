@@ -1,7 +1,7 @@
-import { DEFAULT_PANEL_SIZE } from '../resizable_constants';
-import type { ResizablePanelConfig, ResizablePanelState } from '../resizable_constants';
-import type { ResizableStorageAdapter, ResizableStoragePanelData } from '../resizable_constants';
-import { parseSizeToPixels } from '../resizable_utils';
+import { DEFAULT_PANEL_SIZE } from '../ResizableConstants';
+import type { ResizablePanelConfig, ResizablePanelState } from '../ResizableConstants';
+import type { ResizableStorageAdapter, ResizableStoragePanelData } from '../ResizableConstants';
+import { parseSizeToPixels } from '../ResizableUtils';
 
 // Re-export for backward compatibility
 export type SavedPanelData = ResizableStoragePanelData;

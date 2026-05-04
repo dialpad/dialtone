@@ -1,7 +1,7 @@
 import DtModal from './modal.vue';
 
-import DtModalDefaultTemplate from './modal_default.story.vue';
-import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './modal_constants';
+import DtModalDefaultTemplate from './ModalDefault.story.vue';
+import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './ModalConstants';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from 'storybook/actions';
 import { NOTICE_KINDS } from '@/components/notice';

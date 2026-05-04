@@ -2,8 +2,8 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { ICON_SIZE_MODIFIERS } from '@/components/icon/icon_constants';
 import DtEmoji from './emoji.vue';
 
-import DtEmojiDefaultTemplate from './emoji_default.story.vue';
-import DtEmojiVariantsTemplate from './emoji_variants.story.vue';
+import DtEmojiDefaultTemplate from './EmojiDefault.story.vue';
+import DtEmojiVariantsTemplate from './EmojiVariants.story.vue';
 
 // Default Prop Values
 export const argsData = {

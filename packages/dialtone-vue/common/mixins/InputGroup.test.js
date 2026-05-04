@@ -1,0 +1,20 @@
+import { InputGroupMixin } from './InputGroup';
+import {
+  itBehavesLikePassesCustomPropValidation,
+  itBehavesLikeFailsCustomPropValidation,
+} from '../../tests/SharedExamples/validation';
+
+describe('Input Group Mixin Tests', () => {
+  describe('Validation Tests', () => {
+    describe('messages', () => {
+      // Test Environment
+      const prop = InputGroupMixin.props.messages;
+
+      itBehavesLikePassesCustomPropValidation(prop, ['Error']);
+
+      describe('When the provided messages are numeric', () => {
+        itBehavesLikeFailsCustomPropValidation(prop, [123]);
+      });
+    });
+  });
+});

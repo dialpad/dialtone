@@ -1,5 +1,5 @@
 import { mount } from '@vue/test-utils';
-import { INPUT_SIZES } from './input_constants';
+import { INPUT_SIZES } from './InputConstants';
 import { DtIcon } from '@/components/icon';
 import { DtText } from '@/components/text';
 import DtInput from './input.vue';

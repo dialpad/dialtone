@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { SKELETON_HEADING_HEIGHTS, SKELETON_TEXT_TYPES } from './skeleton_constants';
+import { SKELETON_HEADING_HEIGHTS, SKELETON_TEXT_TYPES } from './SkeletonConstants';
 import SkeletonAnimation from '@/common/mixins/skeleton';
 
 export default {

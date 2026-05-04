@@ -2,8 +2,8 @@ import { ref, type ComputedRef, type Ref } from 'vue';
 import type {
   ResizablePanelState,
   ResizableDirection,
-} from '../resizable_constants';
-import { MIN_PANEL_SIZE_PX, buildHandleId } from '../resizable_constants';
+} from '../ResizableConstants';
+import { MIN_PANEL_SIZE_PX, buildHandleId } from '../ResizableConstants';
 import { useResizeHandling } from './useResizableCalculations';
 
 export interface ResizableKeyboardMessages {
