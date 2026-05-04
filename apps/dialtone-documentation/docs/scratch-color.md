@@ -13,14 +13,18 @@ layout: Blank
           kind="muted"
           :size="200"
         >
-          <dt-stack gap="100" direction="row">
+          <dt-stack gap="100" direction="row" as="span">
             <span>
               <dt-text strength="bold">Mode:</dt-text>
-              <dt-text tone="tertiary">{{ capitalize(currentMode) }}</dt-text>
+              <dt-text>{{ capitalize(currentMode) }}</dt-text>
+            </span>
+            <span>
+              <dt-text strength="bold">Material:</dt-text>
+              <dt-text>{{ formatMaterial(currentMaterial) }}</dt-text>
             </span>
             <span>
               <dt-text strength="bold">Contrast:</dt-text>
-              <dt-text tone="tertiary">{{ capitalize(currentContrast) }}</dt-text>
+              <dt-text>{{ capitalize(currentContrast) }}</dt-text>
             </span>
           </dt-stack>
           <template #startIcon="{ iconSize }">
@@ -99,6 +103,24 @@ layout: Blank
             </template>
           </dt-list-item>
         </dt-list-item-group>
+        <dt-dropdown-separator />
+        <dt-list-item-group
+          heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
+          heading="Material"
+        >
+          <dt-list-item
+            v-for="material in materials"
+            :key="material"
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setMaterial(material)"
+          >
+            {{ formatMaterial(material) }}
+            <template #end>
+              <dt-icon :class="{ 'd-o0': currentMaterial !== material }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
       </template>
     </dt-dropdown>
     <dt-dropdown
@@ -108,7 +130,7 @@ layout: Blank
       <template #anchor>
         <dt-button
           v-dt-tooltip:bottom="`Theme: ${capitalize(currentTheme)}`"
-          class="theme-toggle-button dialtone-shell-btn"
+          class="theme-toggle-button"
           importance="outlined"
           kind="muted"
           :size="200"
@@ -221,29 +243,6 @@ layout: Blank
 </dt-box>
 <dt-box surface="primary" padding="400">
   <dt-stack gap="400">
-    <dt-stack gap="100">
-      <dt-text as="h2" kind="headline" size="500">Black ramp candidates</dt-text>
-      <dt-prose class="d-fc-secondary">
-        All four ramps share the current black ramp's lightness curve; <strong>L, C, and H all drift gradually</strong> along each ramp — no constants, mirroring how bronze intentionally drifts all three coords.
-        <ul>
-          <li><strong>Mono</strong>: pure black</li>
-          <li><strong>Bronze</strong>: warm</li>
-          <li><strong>Steel</strong>: cool</li>
-          <li><strong>Graphite</strong>: cool, less saturated</li>
-        </ul>
-        Toggle Mode at top.
-      </dt-prose>
-    </dt-stack>
-    <dt-box class="d-d-grid d-g-cols4 asdfqwer">
-      <base-color color-name="mono" :stops="monoStops" :mode="resolvedMode" />
-      <base-color color-name="bronze" :stops="bronzeStops" :mode="resolvedMode" />
-      <base-color color-name="steel" :stops="steelStops" :mode="resolvedMode" />
-      <base-color color-name="graphite" :stops="graphiteStops" :mode="resolvedMode" />
-    </dt-box>
-  </dt-stack>
-</dt-box>
-<dt-box surface="primary" padding="400">
-  <dt-stack gap="400">
     <dt-stack gap="200">
       <dt-text as="h3" kind="label" size="200" strength="bold" tone="primary">Surfaces</dt-text>
       <dt-stack direction="row" align="start">
@@ -269,7 +268,8 @@ layout: Blank
       </dt-stack>
       <dt-stack direction="row" align="start">
         <dt-box v-for="surfaceName in semanticStrongSurfaces" :key="surfaceName" padding="300" :surface="surfaceName">
-          <dt-text as="p" kind="code" size="100" strength="bold" tone="primary" v-dt-mode:invert>{{ surfaceName }}</dt-text>
+          <dt-text v-if="surfaceName !== 'warning'" as="p" kind="code" size="100" strength="bold" tone="primary" v-dt-mode:invert>{{ surfaceName }}</dt-text>
+          <dt-text v-else as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceName }}</dt-text>
         </dt-box>
       </dt-stack>
       <dt-stack direction="row" align="start">
@@ -285,22 +285,23 @@ layout: Blank
             :key="surfaceItem.name"
           >
             <dt-box padding="300" :surface="surfaceItem.name">
-              <dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceItem.name }}-inv</dt-text>
+              <dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceItem.name }}</dt-text>
             </dt-box>
             <dt-box padding="300" :surface="`${surfaceItem.name}-opaque`">
-              <dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceItem.name }}-opa-inv</dt-text>
+              <dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceItem.name }}-opaque</dt-text>
             </dt-box>
           </dt-stack>
         </dt-stack>
         <dt-stack direction="row" align="start">
           <dt-stack v-for="surfaceName in semanticSubtleSurfaces" :key="surfaceName">
-            <dt-box padding="300" :surface="surfaceName"><dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceName }}-inv</dt-text></dt-box>
-            <dt-box padding="300" :surface="`${surfaceName}-opaque`"><dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceName }}-opa-inv</dt-text></dt-box>
+            <dt-box padding="300" :surface="surfaceName"><dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceName }}</dt-text></dt-box>
+            <dt-box padding="300" :surface="`${surfaceName}-opaque`"><dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceName }}-opaque</dt-text></dt-box>
           </dt-stack>
         </dt-stack>
         <dt-stack direction="row" align="start">
           <dt-box v-for="surfaceName in semanticStrongSurfaces" :key="surfaceName" padding="300" :surface="surfaceName">
-            <dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceName }}-inv</dt-text>
+            <dt-text v-if="surfaceName !== 'warning-strong'" as="p" kind="code" size="100" strength="bold" tone="primary" v-dt-mode:invert>{{ surfaceName }}</dt-text>
+            <dt-text v-else as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceName }}</dt-text>
           </dt-box>
         </dt-stack>
       </dt-stack>
@@ -413,6 +414,33 @@ layout: Blank
 </dialtone-usage>
   </dt-stack>
 </dt-box>
+<dt-box surface="primary" padding="400" outline>
+  <dt-stack gap="400">
+    <dt-stack gap="100">
+      <dt-text as="h2" kind="headline" size="500">Black ramp candidates</dt-text>
+      <dt-prose class="d-fc-secondary">
+        All six ramps share the current black ramp's lightness curve; <strong>L, C, and H all drift gradually</strong> along each ramp — no constants, mirroring how sandstone intentionally drifts all three coords. Ordered warmest&nbsp;&rarr;&nbsp;coolest with iron as the neutral pivot.
+        <ul>
+          <li><strong>Copper</strong>: warm, orange-red undertone</li>
+          <li><strong>Sandstone</strong>: warm, yellow undertone</li>
+          <li><strong>Iron</strong>: pure black (no hue)</li>
+          <li><strong>Jade</strong>: cool, green undertone</li>
+          <li><strong>Steel</strong>: cool, blue</li>
+          <li><strong>Graphite</strong>: cool, violet undertone</li>
+        </ul>
+        Toggle Mode at top.
+      </dt-prose>
+    </dt-stack>
+    <dt-box class="d-d-grid d-g-cols6 asdfqwer">
+      <base-color color-name="copper" :stops="copperStops" :mode="resolvedMode" />
+      <base-color color-name="sandstone" :stops="sandstoneStops" :mode="resolvedMode" />
+      <base-color color-name="iron" :stops="ironStops" :mode="resolvedMode" />
+      <base-color color-name="jade" :stops="jadeStops" :mode="resolvedMode" />
+      <base-color color-name="steel" :stops="steelStops" :mode="resolvedMode" />
+      <base-color color-name="graphite" :stops="graphiteStops" :mode="resolvedMode" />
+    </dt-box>
+  </dt-stack>
+</dt-box>
 
 <style>
   .asdfqwer [style] * {
@@ -518,23 +546,27 @@ const progressKinds = ['default', 'brand', 'critical', 'positive', 'warning', 'i
 const {
   currentMode,
   currentContrast,
+  currentMaterial,
   currentModeIconName,
   resolvedMode,
   setMode,
   setContrast,
+  setMaterial,
   currentTheme,
   setTheme,
   namedThemes,
   numberedThemes,
   formatThemeName,
+  materials,
 } = useThemeManager({ includeThemes: true });
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+const formatMaterial = (m) => m === 'sandstone' ? 'Sandstone (default)' : capitalize(m);
 
 // Build candidate stop arrays. Each ramp shares the current black ramp's L
 // curve (read from tokensDocs per active mode); only C/H differ.
-//   bronze   = current values verbatim (yellow-warm)
-//   mono     = C=0 (true achromatic)
+//   sandstone   = current values verbatim (yellow-warm)
+//   iron     = C=0 (true achromatic)
 //   steel    = blend of two cool reference tables
 //   graphite = single cool reference table (quietest)
 function buildAllStops (mkValue) {
@@ -545,11 +577,16 @@ function buildAllStops (mkValue) {
   if (!fgP || !fgI) return [];
   const fgPrimaryRGB = colorToRGB(fgP);
   const fgInvertedRGB = colorToRGB(fgI);
+  // Extract the trailing numeric stop via split/pop. Avoids regex-match-with-
+  // bracket-index on purpose: that JS shape collides with markdown's
+  // reversed-link syntax and the docs linter "fixes" it on save, breaking
+  // the script at runtime.
+  const stopOf = (name) => Number(name.split('-').pop());
   const blackKeys = Object.keys(tokensDocs)
     .filter(name => /^--dt-color-black-\d{2,4}$/.test(name))
-    .sort((a, b) => Number(a.match(/\d+$/)[0]) - Number(b.match(/\d+$/)[0]));
+    .sort((a, b) => stopOf(a) - stopOf(b));
   return blackKeys.map(name => {
-    const stop = name.match(/\d+$/)[0];
+    const stop = stopOf(name);
     const sourceValue = tokensDocs[name][`base-${mode}`].value;
     const [L] = new Color(sourceValue).to('oklch').coords;
     const value = mkValue(sourceValue, L);
@@ -564,14 +601,14 @@ function buildAllStops (mkValue) {
   });
 }
 
-const bronzeStops = computed(() => buildAllStops((v) => v));
-const monoStops = computed(() => buildAllStops((_, L) => `oklch(${L} 0 0)`));
+const sandstoneStops = computed(() => buildAllStops((v) => v));
+const ironStops = computed(() => buildAllStops((_, L) => `oklch(${L} 0 0)`));
 
 // Steel and graphite — both C and H per stop interpolated from an L→C/H
-// reference table, evaluated at the bronze-derived L per stop. All three of
+// reference table, evaluated at the sandstone-derived L per stop. All three of
 // L, C, H drift gradually along each ramp (no constant-anything), matching
-// the pattern of the curated bronze `color.black`. Because bronze light's L
-// curve and bronze dark's L curve already diverge slightly (per-mode smoothing),
+// the pattern of the curated sandstone `color.black`. Because sandstone light's L
+// curve and sandstone dark's L curve already diverge slightly (per-mode smoothing),
 // the per-stop H interp lands at different angles in the two modes — so each
 // ramp's dark mode is no longer just an L-flip of its light mode.
 //
@@ -603,6 +640,39 @@ const GRAPHITE_REF_LCH = [
   [0.967, 0.001, 286.375],
   [0.985, 0.001, 286.375],
 ];
+// Jade — anchored at oklch(0.467 0.0207 203.21) (sits at stop 650, where sandstone L≈0.4747).
+// Cool with a green undertone; hue stays near 200–205° (cyan-green) across the ramp,
+// with C peaking in the L=0.27–0.40 mid-region and tapering to ~0 at the extremes.
+const JADE_REF_LCH = [
+  [0.130, 0.012, 195.0],
+  [0.210, 0.018, 198.5],
+  [0.279, 0.024, 201.0],
+  [0.373, 0.025, 202.5],
+  [0.446, 0.022, 203.5],
+  [0.551, 0.018, 203.0],
+  [0.707, 0.013, 202.5],
+  [0.872, 0.006, 202.0],
+  [0.928, 0.004, 201.5],
+  [0.967, 0.002, 201.0],
+  [0.985, 0.001, 200.5],
+];
+// Copper — anchored at oklch(0.4747 0.018 44.84) (lands exactly at stop 650).
+// Warm, orange-red undertone; hue drifts from ~38° (red-orange) at darkest stops
+// to ~57° (yellow-orange) at lightest, mirroring how real copper shifts under light.
+// C peaks in the L=0.27–0.40 mid-region.
+const COPPER_REF_LCH = [
+  [0.130, 0.014, 38.0],
+  [0.210, 0.020, 40.0],
+  [0.279, 0.026, 42.0],
+  [0.373, 0.025, 43.5],
+  [0.446, 0.020, 44.5],
+  [0.551, 0.016, 46.0],
+  [0.707, 0.011, 48.0],
+  [0.872, 0.005, 50.5],
+  [0.928, 0.003, 52.5],
+  [0.967, 0.002, 54.5],
+  [0.985, 0.001, 56.5],
+];
 function coordsFromTable (L, table) {
   if (L >= 1.0) return [0, 0]; // pure white anchor
   if (L <= table[0][0]) return [table[0][1], table[0][2]];
@@ -623,10 +693,12 @@ function coordsFromTable (L, table) {
   return [0, 0];
 }
 
-const makeRampStops = (table) => computed(() => buildAllStops((_, L) => {
+// `chromaScale` multiplies every stop's C by a scalar. 1 = table verbatim,
+// >1 saturates, <1 mutes (0 = monochrome). Hue and L are unaffected.
+const makeRampStops = (table, chromaScale = 1) => computed(() => buildAllStops((_, L) => {
   if (L >= 0.9999) return 'oklch(1 0 0)';
   const [C, H] = coordsFromTable(L, table);
-  return `oklch(${L} ${C.toFixed(4)} ${H.toFixed(2)})`;
+  return `oklch(${L} ${(C * chromaScale).toFixed(4)} ${H.toFixed(2)})`;
 }));
 
 // Blend two reference tables — at each L, evaluate both and lerp C/H by `t`
@@ -643,5 +715,7 @@ const makeBlendedStops = (tableA, tableB, t) => computed(() => buildAllStops((_,
 }));
 
 const steelStops = makeBlendedStops(STEEL_REF_LCH, GRAPHITE_REF_LCH, 0.4);
-const graphiteStops = makeRampStops(GRAPHITE_REF_LCH);
+const graphiteStops = makeRampStops(GRAPHITE_REF_LCH, 1.3);
+const jadeStops = makeRampStops(JADE_REF_LCH, .5);
+const copperStops = makeRampStops(COPPER_REF_LCH, .6);
 </script>
