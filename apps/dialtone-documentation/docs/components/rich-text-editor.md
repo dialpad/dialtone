@@ -104,7 +104,7 @@ To see it in action type char '@' into rich editor With channel mentions.
 ```vue demo
 <example-rich-text-editor
   modelValue="<p>The editor can also suggest mentions: <mention-component name='Test Person' avatarsrc='' id='test.person'></mention-component>, <mention-component name='Test Person 2' avatarsrc='' id='test.person2'></mention-component>! The suggestions dropdown will wait 1000ms to simulate an API call.</p>"
-  :mentionSuggestion="{ items }"
+  :mention-suggestion="{ items }"
 />
 <!-- @code -->
 <dt-rich-text-editor
