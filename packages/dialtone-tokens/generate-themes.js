@@ -41,6 +41,9 @@ export async function generateThemeFiles () {
   // Generate high contrast theme
   await generateHighContrastTheme();
 
+  // Generate per-material override themes (V2 — runtime material switching)
+  await generateMaterialThemeFiles();
+
   console.log('Layered theme files generated - OLD SYSTEM REPLACED');
 }
 
@@ -123,4 +126,33 @@ export default {
 
   fs.writeFileSync(filePath, content);
   console.log('Generated high-contrast theme');
+}
+
+/**
+ * Generate per-material override theme files (steel, graphite, mono).
+ * Bronze is the default and ships baked into base CSS, so it doesn't get a file.
+ * Reads the CSS files emitted by `build-material-overrides.js`.
+ */
+async function generateMaterialThemeFiles() {
+  const materialDir = path.join(LAYERED_CSS_DIR, 'material');
+  if (!fs.existsSync(materialDir)) return;
+
+  const files = fs.readdirSync(materialDir)
+    .filter(f => f.startsWith('tokens-') && f.endsWith('.css'))
+    .map(f => f.replace('tokens-', '').replace('.css', ''));
+
+  for (const name of files) {
+    const filePath = path.join(THEMES_OUTPUT_DIR, `material-${name}.js`);
+    const content = `import MaterialCss from '@dialpad/dialtone-tokens/layered/material/tokens-${name}.css?inline';
+
+export default {
+  material: {
+    css: MaterialCss,
+    name: '${name}',
+  },
+};
+`;
+    fs.writeFileSync(filePath, content);
+    console.log(`Generated material-${name} theme`);
+  }
 }

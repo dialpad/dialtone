@@ -5,6 +5,7 @@
 import { writeDocs } from './build-docs.js';
 import { run as runSdTransforms } from './build-sd-transforms.js';
 import { generateThemeFiles } from './generate-themes.js';
+import { buildMaterialOverrides } from './build-material-overrides.js';
 import postcss from 'postcss';
 import fs from 'fs';
 import dialtoneTokensPlugin from './postcss/dialtone-tokens.cjs';
@@ -24,6 +25,9 @@ await generateDebugTheme();
 console.log('\n=== Generating Layered Token System ===\n');
 const { buildLayeredTokens } = await import('./build-layered.js');
 await buildLayeredTokens(); // Generate layered CSS files
+
+// Generate per-material override CSS files for runtime setMaterial() switching
+await buildMaterialOverrides();
 
 // Generate theme files (now uses layered system - REPLACES old system)
 await generateThemeFiles();
