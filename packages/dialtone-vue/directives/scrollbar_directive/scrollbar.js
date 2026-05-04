@@ -47,7 +47,7 @@ export const DtScrollbarDirective = {
           scrollbars: {
             autoHide,
             clickScroll: true,
-            autoHideDelay: `${noDelay ? 0 : 1300}`,
+            autoHideDelay: noDelay ? 0 : 1300,
           },
         });
         el.setAttribute('data-overlayscrollbars-initialize', true);

@@ -67,7 +67,7 @@ describe('DtScrollbarDirective Tests', () => {
       it('should initialize OverlayScrollbars with autoHide leave (enter mode)', () => {
         expect(OverlayScrollbars).toHaveBeenCalledWith(
           { target: wrapper.element, elements: { viewport: viewportElement } },
-          { scrollbars: { autoHide: 'leave', clickScroll: true, autoHideDelay: '0' } },
+          { scrollbars: { autoHide: 'leave', clickScroll: true, autoHideDelay: 0 } },
         );
       });
 
@@ -90,7 +90,7 @@ describe('DtScrollbarDirective Tests', () => {
       it('should initialize with autoHide never', () => {
         expect(OverlayScrollbars).toHaveBeenCalledWith(
           expect.any(Object),
-          { scrollbars: { autoHide: 'never', clickScroll: true, autoHideDelay: '0' } },
+          { scrollbars: { autoHide: 'never', clickScroll: true, autoHideDelay: 0 } },
         );
       });
     });
@@ -103,7 +103,7 @@ describe('DtScrollbarDirective Tests', () => {
       it('should initialize with autoHide leave', () => {
         expect(OverlayScrollbars).toHaveBeenCalledWith(
           expect.any(Object),
-          { scrollbars: { autoHide: 'leave', clickScroll: true, autoHideDelay: '0' } },
+          { scrollbars: { autoHide: 'leave', clickScroll: true, autoHideDelay: 0 } },
         );
       });
     });
@@ -116,7 +116,7 @@ describe('DtScrollbarDirective Tests', () => {
       it('should initialize with autoHide scroll and delay', () => {
         expect(OverlayScrollbars).toHaveBeenCalledWith(
           expect.any(Object),
-          { scrollbars: { autoHide: 'scroll', clickScroll: true, autoHideDelay: '1300' } },
+          { scrollbars: { autoHide: 'scroll', clickScroll: true, autoHideDelay: 1300 } },
         );
       });
     });
@@ -132,7 +132,7 @@ describe('DtScrollbarDirective Tests', () => {
       it('should initialize with autoHide from showScrollbar value', () => {
         expect(OverlayScrollbars).toHaveBeenCalledWith(
           expect.any(Object),
-          { scrollbars: { autoHide: 'never', clickScroll: true, autoHideDelay: '0' } },
+          { scrollbars: { autoHide: 'never', clickScroll: true, autoHideDelay: 0 } },
         );
       });
     });

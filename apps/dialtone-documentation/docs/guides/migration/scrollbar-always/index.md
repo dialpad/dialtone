@@ -19,7 +19,7 @@ description: "The v-dt-scrollbar directive argument :never and the DtBox scrollb
 | `v-dt-scrollbar:never` | `v-dt-scrollbar:always` |
 | `scrollbar="never"` (DtBox) | `scrollbar="always"` (DtBox) |
 
-All other directive arguments (`leave`, `scroll`, `move`) and DtBox scrollbar values are unchanged.
+All other directive arguments (`enter`, `scroll`, `move`) and DtBox scrollbar values are unchanged.
 
 ## Migration
 

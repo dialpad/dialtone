@@ -41,10 +41,10 @@ export function transformContent (content) {
   return content
     // v-dt-scrollbar:never → v-dt-scrollbar:always
     .replace(/v-dt-scrollbar:never\b/g, 'v-dt-scrollbar:always')
-    // scrollbar="never" → scrollbar="always"
-    .replace(/\bscrollbar="never"/g, 'scrollbar="always"')
-    // scrollbar='never' → scrollbar='always'
-    .replace(/\bscrollbar='never'/g, 'scrollbar=\'always\'')
+    // scrollbar="never" → scrollbar="always" (unbound prop only; negative lookbehind excludes :scrollbar="never")
+    .replace(/(?<!:)\bscrollbar="never"/g, 'scrollbar="always"')
+    // scrollbar='never' → scrollbar='always' (unbound prop only)
+    .replace(/(?<!:)\bscrollbar='never'/g, 'scrollbar=\'always\'')
     // :scrollbar="'never'" → :scrollbar="'always'"
     .replace(/:scrollbar="'never'"/g, ':scrollbar="\'always\'"')
     // :scrollbar="\"never\"" → :scrollbar="\"always\""
