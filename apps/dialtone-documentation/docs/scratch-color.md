@@ -2,6 +2,8 @@
 layout: Blank
 ---
 
+<ClientOnly>
+
 <dt-box class="d-ps-fixed d-ibs-100 d-iie-200" surface="primary">
   <dt-stack direction="row" gap="100">
     <dt-dropdown
@@ -441,6 +443,8 @@ layout: Blank
     </dt-box>
   </dt-stack>
 </dt-box>
+
+</ClientOnly>
 
 <style>
   .asdfqwer [style] * {
