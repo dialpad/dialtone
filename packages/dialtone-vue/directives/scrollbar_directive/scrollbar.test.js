@@ -221,13 +221,19 @@ describe('DtScrollbarDirective Tests', () => {
         );
       });
 
-      it('should set block-start and block-end from block shorthand', () => {
+      it('should set block-start from block shorthand', () => {
         expect(wrapper.element.style.getPropertyValue('--dt-scrollbar-offset-block-start')).toBe('1rem');
+      });
+
+      it('should set block-end from block shorthand', () => {
         expect(wrapper.element.style.getPropertyValue('--dt-scrollbar-offset-block-end')).toBe('1rem');
       });
 
-      it('should set inline-start and inline-end from inline shorthand', () => {
+      it('should set inline-start from inline shorthand', () => {
         expect(wrapper.element.style.getPropertyValue('--dt-scrollbar-offset-inline-start')).toBe('2rem');
+      });
+
+      it('should set inline-end from inline shorthand', () => {
         expect(wrapper.element.style.getPropertyValue('--dt-scrollbar-offset-inline-end')).toBe('2rem');
       });
     });
