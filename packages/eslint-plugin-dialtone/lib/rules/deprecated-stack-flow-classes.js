@@ -59,7 +59,10 @@ module.exports = {
 
   create(context) {
     const sourceCode = context.sourceCode ?? context.getSourceCode();
-    return sourceCode.parserServices.defineTemplateBodyVisitor({
+    const defineTemplateBodyVisitor = sourceCode.parserServices?.defineTemplateBodyVisitor;
+    if (!defineTemplateBodyVisitor) return {};
+
+    return defineTemplateBodyVisitor({
 
       VElement(node) {
         const classAttr = node.startTag.attributes.find(
