@@ -85,7 +85,9 @@ export const DtScrollbarDirective = {
         applyScrollbarClasses(os, binding.value, binding.oldValue);
       },
       unmounted (el) {
-        instances.get(el).destroy();
+        const os = instances.get(el);
+        if (os) os.destroy();
+        instances.delete(el);
       },
     });
   },
