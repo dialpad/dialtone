@@ -55,7 +55,7 @@ describe('DtScrollbarDirective Tests', () => {
   });
 
   describe('Presentation Tests', () => {
-    describe('when directive has no argument (default leave)', () => {
+    describe('when directive has no argument (default enter)', () => {
       beforeEach(() => {
         mountWith(WrapperDefault);
       });
@@ -64,7 +64,7 @@ describe('DtScrollbarDirective Tests', () => {
         expect(wrapper.exists()).toBe(true);
       });
 
-      it('should initialize OverlayScrollbars with autoHide leave', () => {
+      it('should initialize OverlayScrollbars with autoHide leave (enter mode)', () => {
         expect(OverlayScrollbars).toHaveBeenCalledWith(
           { target: wrapper.element, elements: { viewport: viewportElement } },
           { scrollbars: { autoHide: 'leave', clickScroll: true, autoHideDelay: '0' } },
@@ -91,6 +91,19 @@ describe('DtScrollbarDirective Tests', () => {
         expect(OverlayScrollbars).toHaveBeenCalledWith(
           expect.any(Object),
           { scrollbars: { autoHide: 'never', clickScroll: true, autoHideDelay: '0' } },
+        );
+      });
+    });
+
+    describe('when directive arg is :enter', () => {
+      beforeEach(() => {
+        mountWith(makeWrapper(`<div v-dt-scrollbar:enter><div id="viewport"></div></div>`));
+      });
+
+      it('should initialize with autoHide leave', () => {
+        expect(OverlayScrollbars).toHaveBeenCalledWith(
+          expect.any(Object),
+          { scrollbars: { autoHide: 'leave', clickScroll: true, autoHideDelay: '0' } },
         );
       });
     });
@@ -143,6 +156,23 @@ describe('DtScrollbarDirective Tests', () => {
       it('should not set unspecified offset properties', () => {
         expect(wrapper.element.style.getPropertyValue('--dt-scrollbar-offset-block-end')).toBe('');
         expect(wrapper.element.style.getPropertyValue('--dt-scrollbar-offset-inline-start')).toBe('');
+      });
+    });
+
+    describe('when directive value has numeric offset', () => {
+      beforeEach(() => {
+        mountWith(
+          makeWrapper(`<div v-dt-scrollbar="opts"><div id="viewport"></div></div>`, { props: { opts: { type: Object, default: () => ({}) } } }),
+          { opts: { offset: { blockStart: 64, inlineEnd: 16 } } },
+        );
+      });
+
+      it('should append px to numeric block-start offset', () => {
+        expect(wrapper.element.style.getPropertyValue('--dt-scrollbar-offset-block-start')).toBe('64px');
+      });
+
+      it('should append px to numeric inline-end offset', () => {
+        expect(wrapper.element.style.getPropertyValue('--dt-scrollbar-offset-inline-end')).toBe('16px');
       });
     });
 

@@ -1,15 +1,21 @@
 import { OverlayScrollbars, ClickScrollPlugin } from 'overlayscrollbars';
 
 function resolveShowScrollbar (value, arg) {
-  const mode = value?.showScrollbar ?? arg ?? 'leave';
-  // 'always' maps to OS autoHide 'never' (always visible); all other values pass through
-  return mode === 'always' ? 'never' : mode;
+  const mode = value?.showScrollbar ?? arg ?? 'enter';
+  // 'always' → OS 'never' (always visible); 'enter' → OS 'leave' (show on enter, hide on leave)
+  if (mode === 'always') return 'never';
+  if (mode === 'enter') return 'leave';
+  return mode;
 }
 
 const OFFSET_SIDES = ['block-start', 'block-end', 'inline-start', 'inline-end'];
 
+function toCssLength (val) {
+  return typeof val === 'number' ? `${val}px` : val;
+}
+
 function setProp (el, prop, val) {
-  val != null ? el.style.setProperty(prop, val) : el.style.removeProperty(prop);
+  val != null ? el.style.setProperty(prop, toCssLength(val)) : el.style.removeProperty(prop);
 }
 
 function applyOffset (el, offset) {
@@ -31,7 +37,7 @@ export const DtScrollbarDirective = {
     app.directive('dt-scrollbar', {
       mounted (el, binding) {
         const autoHide = resolveShowScrollbar(binding.value, binding.arg);
-        const noDelay = autoHide === 'never' || autoHide === 'leave';
+        const noDelay = autoHide === 'never' || autoHide === 'leave'; // OS values, already resolved
         const os = OverlayScrollbars({
           target: el,
           elements: {
@@ -53,7 +59,7 @@ export const DtScrollbarDirective = {
         const os = instances.get(el);
         if (!os) return;
         const autoHide = resolveShowScrollbar(binding.value, binding.arg);
-        const noDelay = autoHide === 'never' || autoHide === 'leave';
+        const noDelay = autoHide === 'never' || autoHide === 'leave'; // OS values, already resolved
         os.options({
           scrollbars: {
             autoHide,
