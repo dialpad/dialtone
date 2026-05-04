@@ -19,83 +19,83 @@
     },
     "black": {
       "50": {
-        "value": "oklch(1 0 0)",
+        "value": "{material.bronze.50}",
         "type": "color"
       },
       "100": {
-        "value": "oklch(0.9748 0.0025 48.72)",
+        "value": "{material.bronze.100}",
         "type": "color"
       },
       "150": {
-        "value": "oklch(0.9512 0.0027 66.64)",
+        "value": "{material.bronze.150}",
         "type": "color"
       },
       "200": {
-        "value": "oklch(0.9245 0.0029 84.56)",
+        "value": "{material.bronze.200}",
         "type": "color"
       },
       "250": {
-        "value": "oklch(0.8894 0.0044 84.56)",
+        "value": "{material.bronze.250}",
         "type": "color"
       },
       "300": {
-        "value": "oklch(0.8448 0.0059 84.57)",
+        "value": "{material.bronze.300}",
         "type": "color"
       },
       "350": {
-        "value": "oklch(0.7914 0.006 84.57)",
+        "value": "{material.bronze.350}",
         "type": "color"
       },
       "400": {
-        "value": "oklch(0.7321 0.0061 84.57)",
+        "value": "{material.bronze.400}",
         "type": "color"
       },
       "450": {
-        "value": "oklch(0.6706 0.0047 84.56)",
+        "value": "{material.bronze.450}",
         "type": "color"
       },
       "500": {
-        "value": "oklch(0.6114 0.0032 84.56)",
+        "value": "{material.bronze.500}",
         "type": "color"
       },
       "550": {
-        "value": "oklch(0.5586 0.0047 89.87)",
+        "value": "{material.bronze.550}",
         "type": "color"
       },
       "600": {
-        "value": "oklch(0.5134 0.0063 95.18)",
+        "value": "{material.bronze.600}",
         "type": "color"
       },
       "650": {
-        "value": "oklch(0.4747 0.0059 86.72)",
+        "value": "{material.bronze.650}",
         "type": "color"
       },
       "700": {
-        "value": "oklch(0.4355 0.0055 78.27)",
+        "value": "{material.bronze.700}",
         "type": "color"
       },
       "750": {
-        "value": "oklch(0.3902 0.0055 67.24)",
+        "value": "{material.bronze.750}",
         "type": "color"
       },
       "800": {
-        "value": "oklch(0.3436 0.0055 56.21)",
+        "value": "{material.bronze.800}",
         "type": "color"
       },
       "850": {
-        "value": "oklch(0.3008 0.0059 67.21)",
+        "value": "{material.bronze.850}",
         "type": "color"
       },
       "900": {
-        "value": "oklch(0.2572 0.0063 78.21)",
+        "value": "{material.bronze.900}",
         "type": "color"
       },
       "950": {
-        "value": "oklch(0.2083 0.006 91.63)",
+        "value": "{material.bronze.950}",
         "type": "color"
       },
       "1000": {
-        "value": "oklch(0.1595 0.0045 84.59)",
+        "value": "{material.bronze.1000}",
         "type": "color"
       }
     },
