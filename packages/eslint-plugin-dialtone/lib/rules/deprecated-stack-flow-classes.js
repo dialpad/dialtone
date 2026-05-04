@@ -5,12 +5,38 @@
 'use strict';
 
 // Word boundaries handle responsive prefixes (`md:d-stack16`) and adjacent classes.
-const DEPRECATED_AUTO_SPACING_RE = /\bd-(?:stack|flow)\d+\b/;
+// Capture group 1 is the px size; used to map to the equivalent `<dt-stack>` `gap` token.
+const DEPRECATED_AUTO_SPACING_RE = /\bd-(?:stack|flow)(\d+)\b/;
 
 // Same pattern as a quoted string literal anywhere inside a `:class` binding.
 // Scans the whole quoted span so multi-class strings (`'d-ps-relative d-stack2 d-px-0'`)
 // and responsive prefixes (`'md:d-stack16'`) both match.
 const DEPRECATED_IN_BINDING_RE = /['"][^'"]*\bd-(?:stack|flow)\d+\b[^'"]*['"]/;
+
+// Mirrors the table in docs/rules/deprecated-stack-flow-classes.md.
+const PX_TO_GAP = {
+  0: '0',
+  1: '1',
+  2: '25',
+  4: '50',
+  6: '75',
+  8: '100',
+  12: '150',
+  16: '200',
+  20: '250',
+  24: '300',
+  32: '400',
+  48: '600',
+  64: '800',
+};
+
+function describeMatch(text) {
+  const match = DEPRECATED_AUTO_SPACING_RE.exec(text);
+  if (!match) return null;
+  const px = match[1];
+  const gap = PX_TO_GAP[px];
+  return { className: match[0], px, gap };
+}
 
 /** @type {import('eslint').Rule.RuleModule} */
 module.exports = {
@@ -24,8 +50,10 @@ module.exports = {
     fixable: null,
     schema: [],
     messages: {
-      preferStack: '`d-stack*` / `d-flow*` are deprecated sibling-margin utilities. Use `<dt-stack>` with the equivalent `gap` prop instead.',
-      preferStackInBinding: '`d-stack*` / `d-flow*` detected in dynamic `:class` binding. These sibling-margin utilities are deprecated. Use `<dt-stack>` with the equivalent `gap` prop. Manual migration required.',
+      preferStack: '`{{className}}` is deprecated. Use `<dt-stack>` with `gap="{{gap}}"` instead.',
+      preferStackUnmapped: '`{{className}}` is deprecated. No exact `gap` equivalent for {{px}}px — use the closest `<dt-stack>` `gap` value (see rule docs).',
+      preferStackInBinding: '`{{className}}` detected in dynamic `:class` binding. Use `<dt-stack>` with `gap="{{gap}}"`. Manual migration required.',
+      preferStackInBindingUnmapped: '`{{className}}` detected in dynamic `:class` binding. No exact `gap` equivalent for {{px}}px — use the closest `<dt-stack>` `gap` value (see rule docs). Manual migration required.',
     },
   },
 
@@ -39,10 +67,12 @@ module.exports = {
         );
 
         if (classAttr && classAttr.value && classAttr.value.value) {
-          if (DEPRECATED_AUTO_SPACING_RE.test(classAttr.value.value)) {
+          const info = describeMatch(classAttr.value.value);
+          if (info) {
             context.report({
               node: classAttr,
-              messageId: 'preferStack',
+              messageId: info.gap ? 'preferStack' : 'preferStackUnmapped',
+              data: info,
             });
           }
         }
@@ -55,10 +85,14 @@ module.exports = {
             node.value) {
           const bindingText = sourceCode.getText(node.value);
           if (DEPRECATED_IN_BINDING_RE.test(bindingText)) {
-            context.report({
-              node: node,
-              messageId: 'preferStackInBinding',
-            });
+            const info = describeMatch(bindingText);
+            if (info) {
+              context.report({
+                node: node,
+                messageId: info.gap ? 'preferStackInBinding' : 'preferStackInBindingUnmapped',
+                data: info,
+              });
+            }
           }
         }
       },

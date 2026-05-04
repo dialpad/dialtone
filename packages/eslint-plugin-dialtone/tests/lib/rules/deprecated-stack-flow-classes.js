@@ -31,9 +31,13 @@ ruleTester.run('deprecated-stack-flow-classes', rule, {
   ],
 
   invalid: [
+    // Carries the data assertion that pins the px → gap mapping in the message.
     {
       code: '<template><div class="d-stack16">...</div></template>',
-      errors: [{ messageId: 'preferStack' }],
+      errors: [{
+        messageId: 'preferStack',
+        data: { className: 'd-stack16', px: '16', gap: '200' },
+      }],
     },
     {
       code: '<template><div class="d-flow24">...</div></template>',
@@ -61,9 +65,13 @@ ruleTester.run('deprecated-stack-flow-classes', rule, {
       code: '<template><div :class="{ \'d-stack16\': condition }">...</div></template>',
       errors: [{ messageId: 'preferStackInBinding' }],
     },
+    // Carries the data assertion for binding messages.
     {
       code: '<template><div :class="\'d-flow24\'">...</div></template>',
-      errors: [{ messageId: 'preferStackInBinding' }],
+      errors: [{
+        messageId: 'preferStackInBinding',
+        data: { className: 'd-flow24', px: '24', gap: '300' },
+      }],
     },
     {
       code: '<template><div v-bind:class="[\'d-stack8\']">...</div></template>',
@@ -86,6 +94,21 @@ ruleTester.run('deprecated-stack-flow-classes', rule, {
         { messageId: 'preferStack' },
         { messageId: 'preferStackInBinding' },
       ],
+    },
+    // Template literal binding: outer attribute quotes wrap the backtick-delimited
+    // expression, so the binding regex still matches and the rule fires.
+    {
+      code: '<template><div :class="`d-stack16`">...</div></template>',
+      errors: [{ messageId: 'preferStackInBinding' }],
+    },
+    // Sizes outside the gap-token scale (>= 72) fall back to the unmapped message.
+    {
+      code: '<template><div class="d-stack72">...</div></template>',
+      errors: [{ messageId: 'preferStackUnmapped' }],
+    },
+    {
+      code: '<template><div :class="\'d-stack72\'">...</div></template>',
+      errors: [{ messageId: 'preferStackInBindingUnmapped' }],
     },
   ],
 });
