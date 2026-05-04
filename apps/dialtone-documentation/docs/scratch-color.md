@@ -221,6 +221,29 @@ layout: Blank
 </dt-box>
 <dt-box surface="primary" padding="400">
   <dt-stack gap="400">
+    <dt-stack gap="100">
+      <dt-text as="h2" kind="headline" size="500">Black ramp candidates</dt-text>
+      <dt-prose class="d-fc-secondary">
+        All four ramps share the current black ramp's lightness curve; <strong>L, C, and H all drift gradually</strong> along each ramp — no constants, mirroring how bronze intentionally drifts all three coords.
+        <ul>
+          <li><strong>Bronze</strong> — current values (yellow-warm, H~84°)</li>
+          <li><strong>Mono</strong> — <code>C=0</code> (achromatic)</li>
+          <li><strong>Steel</strong> — 60/40 blend of two reference cool tables (more steel-leaning than graphite-leaning; H drifts ~263°–272°)</li>
+          <li><strong>Graphite</strong> — quiet violet (peak C ≈ 0.017; stop 550 ≈ <code>oklch(0.5586 0.0162 285.938)</code>)</li>
+        </ul>
+        Toggle Mode at top.
+      </dt-prose>
+    </dt-stack>
+    <dt-box class="d-d-grid d-g-cols4 asdfqwer">
+      <base-color color-name="mono" :stops="monoStops" :mode="resolvedMode" />
+      <base-color color-name="bronze" :stops="bronzeStops" :mode="resolvedMode" />
+      <base-color color-name="steel" :stops="steelStops" :mode="resolvedMode" />
+      <base-color color-name="graphite" :stops="graphiteStops" :mode="resolvedMode" />
+    </dt-box>
+  </dt-stack>
+</dt-box>
+<dt-box surface="primary" padding="400">
+  <dt-stack gap="400">
     <dt-stack gap="200">
       <dt-text as="h3" kind="label" size="200" strength="bold" tone="primary">Surfaces</dt-text>
       <dt-stack direction="row" align="start">
@@ -391,9 +414,56 @@ layout: Blank
   </dt-stack>
 </dt-box>
 
+<style>
+  .asdfqwer [style] * {
+    opacity: 0;
+  }
+  .asdfqwer:hover [style] * {
+    opacity: initial;
+  }
+</style>
+
 <script setup>
+import { computed, inject } from 'vue';
+import Color from 'colorjs.io';
+import BaseColor from '@baseComponents/BaseColor.vue';
 import { useThemeManager } from '@composables/useThemeManager';
 import ExampleNotice from '@exampleComponents/ExampleNotice.vue';
+
+const tokensDocs = inject('tokensDocs');
+
+// APCA Lc — port of ColorsCatalog.vue logic so the candidate ramps share its
+// contrast model. Constants tuned together; do not alter individually.
+function colorToRGB (colorValue) {
+  const c = new Color(colorValue).to('srgb');
+  return {
+    r: Math.max(0, Math.min(255, Math.round(c.coords[0] * 255))),
+    g: Math.max(0, Math.min(255, Math.round(c.coords[1] * 255))),
+    b: Math.max(0, Math.min(255, Math.round(c.coords[2] * 255))),
+  };
+}
+function sRGBtoY (r, g, b) {
+  const lin = (val) => {
+    const v = val / 255;
+    return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+  };
+  return 0.2126729 * lin(r) + 0.7151522 * lin(g) + 0.0721750 * lin(b);
+}
+function apcaContrast (bg, fg) {
+  const bgY = sRGBtoY(bg.r, bg.g, bg.b);
+  const fgY = sRGBtoY(fg.r, fg.g, fg.b);
+  const SOFT = 0.022;
+  const bgYc = bgY > SOFT ? bgY : bgY + Math.pow(SOFT - bgY, 1.414);
+  const fgYc = fgY > SOFT ? fgY : fgY + Math.pow(SOFT - fgY, 1.414);
+  let contrast;
+  if (bgYc >= fgYc) {
+    contrast = (Math.pow(bgYc, 0.56) - Math.pow(fgYc, 0.57)) * 1.14;
+  } else {
+    contrast = (Math.pow(bgYc, 0.65) - Math.pow(fgYc, 0.62)) * 1.14;
+  }
+  if (Math.abs(contrast) < 0.1) return 0;
+  return contrast > 0 ? (contrast - 0.027) * 100 : (contrast + 0.027) * 100;
+}
 
 const messages = {
   warning: { "message": "Warning validation message", "type": "warning" },
@@ -449,6 +519,7 @@ const {
   currentMode,
   currentContrast,
   currentModeIconName,
+  resolvedMode,
   setMode,
   setContrast,
   currentTheme,
@@ -459,4 +530,118 @@ const {
 } = useThemeManager({ includeThemes: true });
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+// Build candidate stop arrays. Each ramp shares the current black ramp's L
+// curve (read from tokensDocs per active mode); only C/H differ.
+//   bronze   = current values verbatim (yellow-warm)
+//   mono     = C=0 (true achromatic)
+//   steel    = blend of two cool reference tables
+//   graphite = single cool reference table (quietest)
+function buildAllStops (mkValue) {
+  if (!tokensDocs) return [];
+  const mode = resolvedMode.value;
+  const fgP = tokensDocs['--dt-color-foreground-primary']?.[`dp-${mode}`]?.value;
+  const fgI = tokensDocs['--dt-color-foreground-primary-inverted']?.[`dp-${mode}`]?.value;
+  if (!fgP || !fgI) return [];
+  const fgPrimaryRGB = colorToRGB(fgP);
+  const fgInvertedRGB = colorToRGB(fgI);
+  const blackKeys = Object.keys(tokensDocs)
+    .filter(name => /^--dt-color-black-\d{2,4}$/.test(name))
+    .sort((a, b) => Number(a.match(/\d+$/)[0]) - Number(b.match(/\d+$/)[0]));
+  return blackKeys.map(name => {
+    const stop = name.match(/\d+$/)[0];
+    const sourceValue = tokensDocs[name][`base-${mode}`].value;
+    const [L] = new Color(sourceValue).to('oklch').coords;
+    const value = mkValue(sourceValue, L);
+    const bgRGB = colorToRGB(value);
+    return {
+      stop,
+      value,
+      lightness: L,
+      primaryContrast: Math.abs(apcaContrast(bgRGB, fgPrimaryRGB)),
+      invertedContrast: Math.abs(apcaContrast(bgRGB, fgInvertedRGB)),
+    };
+  });
+}
+
+const bronzeStops = computed(() => buildAllStops((v) => v));
+const monoStops = computed(() => buildAllStops((_, L) => `oklch(${L} 0 0)`));
+
+// Steel and graphite — both C and H per stop interpolated from an L→C/H
+// reference table, evaluated at the bronze-derived L per stop. All three of
+// L, C, H drift gradually along each ramp (no constant-anything), matching
+// the pattern of the curated bronze `color.black`. Because bronze light's L
+// curve and bronze dark's L curve already diverge slightly (per-mode smoothing),
+// the per-stop H interp lands at different angles in the two modes — so each
+// ramp's dark mode is no longer just an L-flip of its light mode.
+//
+// Reference tables are starting points only; values may be retuned to fit
+// Dialtone's own design intent.
+const STEEL_REF_LCH = [
+  [0.130, 0.028, 261.692],
+  [0.210, 0.034, 264.665],
+  [0.279, 0.041, 260.031],
+  [0.373, 0.034, 259.733],
+  [0.446, 0.030, 256.802],
+  [0.551, 0.027, 264.365],
+  [0.707, 0.022, 261.325],
+  [0.872, 0.010, 258.338],
+  [0.928, 0.006, 264.531],
+  [0.967, 0.003, 264.542],
+  [0.985, 0.002, 247.839],
+];
+const GRAPHITE_REF_LCH = [
+  [0.141, 0.005, 285.823],
+  [0.210, 0.006, 285.885],
+  [0.274, 0.006, 286.033],
+  [0.370, 0.013, 285.805],
+  [0.442, 0.017, 285.786],
+  [0.552, 0.016, 285.938],
+  [0.705, 0.015, 286.067],
+  [0.871, 0.006, 286.286],
+  [0.920, 0.004, 286.320],
+  [0.967, 0.001, 286.375],
+  [0.985, 0.001, 286.375],
+];
+function coordsFromTable (L, table) {
+  if (L >= 1.0) return [0, 0]; // pure white anchor
+  if (L <= table[0][0]) return [table[0][1], table[0][2]];
+  const top = table[table.length - 1];
+  if (L >= top[0]) {
+    // Taper C toward 0 between (top.L, top.C) and (1.0, 0); hold H
+    const t = (L - top[0]) / (1.0 - top[0]);
+    return [top[1] * (1 - t), top[2]];
+  }
+  for (let i = 0; i < table.length - 1; i++) {
+    const [L1, C1, H1] = table[i];
+    const [L2, C2, H2] = table[i + 1];
+    if (L1 <= L && L <= L2) {
+      const t = (L - L1) / (L2 - L1);
+      return [C1 + t * (C2 - C1), H1 + t * (H2 - H1)];
+    }
+  }
+  return [0, 0];
+}
+
+const makeRampStops = (table) => computed(() => buildAllStops((_, L) => {
+  if (L >= 0.9999) return 'oklch(1 0 0)';
+  const [C, H] = coordsFromTable(L, table);
+  return `oklch(${L} ${C.toFixed(4)} ${H.toFixed(2)})`;
+}));
+
+// Blend two reference tables — at each L, evaluate both and lerp C/H by `t`
+// (0 = pure tableA, 1 = pure tableB). Used by steel to sit between the two
+// reference tables (steel-ref leans bluer; graphite-ref is quieter and more
+// violet).
+const makeBlendedStops = (tableA, tableB, t) => computed(() => buildAllStops((_, L) => {
+  if (L >= 0.9999) return 'oklch(1 0 0)';
+  const [Ca, Ha] = coordsFromTable(L, tableA);
+  const [Cb, Hb] = coordsFromTable(L, tableB);
+  const C = Ca * (1 - t) + Cb * t;
+  const H = Ha * (1 - t) + Hb * t;
+  return `oklch(${L} ${C.toFixed(4)} ${H.toFixed(2)})`;
+}));
+
+const steelStops = makeBlendedStops(STEEL_REF_LCH, GRAPHITE_REF_LCH, 0.4);
+const graphiteStops = makeRampStops(GRAPHITE_REF_LCH);
 </script>
