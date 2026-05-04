@@ -274,4 +274,90 @@ describe('DtScrollbarDirective Tests', () => {
       });
     });
   });
+
+  describe('Interactivity Tests', () => {
+    const optsComponent = makeWrapper(
+      `<div v-dt-scrollbar="opts"><div id="viewport"></div></div>`,
+      { props: { opts: { type: Object, default: () => ({}) } } },
+    );
+
+    describe('when showScrollbar prop changes', () => {
+      beforeEach(async () => {
+        mountWith(optsComponent, { opts: { showScrollbar: 'enter' } });
+        await wrapper.setProps({ opts: { showScrollbar: 'always' } });
+      });
+
+      it('should call options on the existing instance with new autoHide', () => {
+        expect(mocks.options).toHaveBeenCalledWith(
+          { scrollbars: { autoHide: 'never', autoHideDelay: 0 } },
+        );
+      });
+
+      it('should not re-initialize OverlayScrollbars', () => {
+        expect(OverlayScrollbars).toHaveBeenCalledTimes(1);
+      });
+
+      it('should not call destroy during update', () => {
+        expect(mocks.destroy).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('when showScrollbar changes from always to scroll', () => {
+      beforeEach(async () => {
+        mountWith(optsComponent, { opts: { showScrollbar: 'always' } });
+        await wrapper.setProps({ opts: { showScrollbar: 'scroll' } });
+      });
+
+      it('should call options with autoHide scroll and delay', () => {
+        expect(mocks.options).toHaveBeenCalledWith(
+          { scrollbars: { autoHide: 'scroll', autoHideDelay: 1300 } },
+        );
+      });
+    });
+
+    describe('when offset prop changes', () => {
+      beforeEach(async () => {
+        mountWith(optsComponent, { opts: { offset: { blockStart: '1rem' } } });
+        await wrapper.setProps({ opts: { offset: { blockStart: '3rem', inlineEnd: '2rem' } } });
+      });
+
+      it('should update block-start custom property', () => {
+        expect(wrapper.element.style.getPropertyValue('--dt-scrollbar-offset-block-start')).toBe('3rem');
+      });
+
+      it('should set newly added inline-end custom property', () => {
+        expect(wrapper.element.style.getPropertyValue('--dt-scrollbar-offset-inline-end')).toBe('2rem');
+      });
+    });
+
+    describe('when blockClasses prop changes', () => {
+      beforeEach(async () => {
+        mountWith(optsComponent, { opts: { blockClasses: 'd-w8' } });
+        await wrapper.setProps({ opts: { blockClasses: 'd-w12' } });
+      });
+
+      it('should remove old blockClasses from the vertical scrollbar', () => {
+        expect(mocks.blockScrollbar.classList.contains('d-w8')).toBe(false);
+      });
+
+      it('should add new blockClasses to the vertical scrollbar', () => {
+        expect(mocks.blockScrollbar.classList.contains('d-w12')).toBe(true);
+      });
+    });
+
+    describe('when inlineClasses prop changes', () => {
+      beforeEach(async () => {
+        mountWith(optsComponent, { opts: { inlineClasses: 'd-h8' } });
+        await wrapper.setProps({ opts: { inlineClasses: 'd-h12' } });
+      });
+
+      it('should remove old inlineClasses from the horizontal scrollbar', () => {
+        expect(mocks.inlineScrollbar.classList.contains('d-h8')).toBe(false);
+      });
+
+      it('should add new inlineClasses to the horizontal scrollbar', () => {
+        expect(mocks.inlineScrollbar.classList.contains('d-h12')).toBe(true);
+      });
+    });
+  });
 });
