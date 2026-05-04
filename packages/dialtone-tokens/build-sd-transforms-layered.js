@@ -9,13 +9,15 @@ import { register, getTransforms, expandTypesMap } from '@tokens-studio/sd-trans
 import StyleDictionary from 'style-dictionary';
 import { promises, readFileSync } from 'fs';
 
-import { registerDialtoneTransforms } from './dialtone-transforms.js';
+import { registerDialtoneTransforms, registerDialtonePreprocessors, registerRelativeColorWrap } from './dialtone-transforms.js';
 import { buildDocs } from './build-docs.js';
 const Root = JSON.parse(readFileSync('./tokens/root.json', 'utf8'));
 const BASE_FONT_SIZE = Root.font.size.root.value;
 
 register(StyleDictionary);
 registerDialtoneTransforms(StyleDictionary);
+registerDialtonePreprocessors(StyleDictionary);
+registerRelativeColorWrap(StyleDictionary);
 
 // Register custom format for mode-specific CSS variables
 StyleDictionary.registerFormat({
@@ -138,7 +140,7 @@ async function buildLayeredTokensForBrand(brandName, lightThemeConfig, darkTheme
     const coreConfig = {
       // Include both base AND dp sources to get all non-color tokens
       source: [...lightThemeConfig.include, ...lightThemeConfig.source],
-      preprocessors: ['tokens-studio'],
+      preprocessors: ['tokens-studio', 'dt/relative-color/extract'],
       expand: {
         typesMap: expandTypesMap,
       },
@@ -178,7 +180,7 @@ async function buildLayeredTokensForBrand(brandName, lightThemeConfig, darkTheme
   // Build light colors
   const lightColorConfig = {
     source: lightThemeConfig.source,
-    preprocessors: ['tokens-studio'],
+    preprocessors: ['tokens-studio', 'dt/relative-color/extract'],
     expand: {
       typesMap: expandTypesMap,
     },
@@ -233,7 +235,7 @@ async function buildLayeredTokensForBrand(brandName, lightThemeConfig, darkTheme
   // Build dark colors
   const darkColorConfig = {
     source: darkThemeConfig.source,
-    preprocessors: ['tokens-studio'],
+    preprocessors: ['tokens-studio', 'dt/relative-color/extract'],
     expand: {
       typesMap: expandTypesMap,
     },
@@ -425,7 +427,7 @@ export async function runLayeredTokens() {
 
     const contrastConfig = {
       source,
-      preprocessors: ['tokens-studio'],
+      preprocessors: ['tokens-studio', 'dt/relative-color/extract'],
       expand: { typesMap: expandTypesMap },
       include,
       platforms: {
