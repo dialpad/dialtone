@@ -129,8 +129,8 @@ export default {
 }
 
 /**
- * Generate per-material override theme files (steel, graphite, mono).
- * Bronze is the default and ships baked into base CSS, so it doesn't get a file.
+ * Generate per-material override theme files (steel, graphite, iron, jade, copper).
+ * Sandstone is the default and ships baked into base CSS, so it doesn't get a file.
  * Reads the CSS files emitted by `build-material-overrides.js`.
  */
 async function generateMaterialThemeFiles() {

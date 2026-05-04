@@ -19,83 +19,83 @@
     },
     "black": {
       "50": {
-        "value": "{material.bronze.50}",
+        "value": "{material.sandstone.50}",
         "type": "color"
       },
       "100": {
-        "value": "{material.bronze.100}",
+        "value": "{material.sandstone.100}",
         "type": "color"
       },
       "150": {
-        "value": "{material.bronze.150}",
+        "value": "{material.sandstone.150}",
         "type": "color"
       },
       "200": {
-        "value": "{material.bronze.200}",
+        "value": "{material.sandstone.200}",
         "type": "color"
       },
       "250": {
-        "value": "{material.bronze.250}",
+        "value": "{material.sandstone.250}",
         "type": "color"
       },
       "300": {
-        "value": "{material.bronze.300}",
+        "value": "{material.sandstone.300}",
         "type": "color"
       },
       "350": {
-        "value": "{material.bronze.350}",
+        "value": "{material.sandstone.350}",
         "type": "color"
       },
       "400": {
-        "value": "{material.bronze.400}",
+        "value": "{material.sandstone.400}",
         "type": "color"
       },
       "450": {
-        "value": "{material.bronze.450}",
+        "value": "{material.sandstone.450}",
         "type": "color"
       },
       "500": {
-        "value": "{material.bronze.500}",
+        "value": "{material.sandstone.500}",
         "type": "color"
       },
       "550": {
-        "value": "{material.bronze.550}",
+        "value": "{material.sandstone.550}",
         "type": "color"
       },
       "600": {
-        "value": "{material.bronze.600}",
+        "value": "{material.sandstone.600}",
         "type": "color"
       },
       "650": {
-        "value": "{material.bronze.650}",
+        "value": "{material.sandstone.650}",
         "type": "color"
       },
       "700": {
-        "value": "{material.bronze.700}",
+        "value": "{material.sandstone.700}",
         "type": "color"
       },
       "750": {
-        "value": "{material.bronze.750}",
+        "value": "{material.sandstone.750}",
         "type": "color"
       },
       "800": {
-        "value": "{material.bronze.800}",
+        "value": "{material.sandstone.800}",
         "type": "color"
       },
       "850": {
-        "value": "{material.bronze.850}",
+        "value": "{material.sandstone.850}",
         "type": "color"
       },
       "900": {
-        "value": "{material.bronze.900}",
+        "value": "{material.sandstone.900}",
         "type": "color"
       },
       "950": {
-        "value": "{material.bronze.950}",
+        "value": "{material.sandstone.950}",
         "type": "color"
       },
       "1000": {
-        "value": "{material.bronze.1000}",
+        "value": "{material.sandstone.1000}",
         "type": "color"
       }
     },

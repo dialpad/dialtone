@@ -8,7 +8,7 @@ import {
   setMaterial as setMaterialConfig,
 } from '@dialpad/dialtone-tokens/themes/config';
 
-const MATERIALS = ['bronze', 'steel', 'graphite', 'mono'];
+const MATERIALS = ['sandstone', 'steel', 'graphite', 'iron'];
 
 /**
  * Composable for managing theme, mode, and contrast settings across the documentation site.
@@ -95,14 +95,14 @@ export function useThemeManager(options = {}) {
   };
 
   /**
-   * Sets the active material (bronze, steel, graphite, mono).
-   * Bronze is the default — passing 'bronze' (or anything unrecognized) removes any override.
+   * Sets the active material (sandstone, steel, graphite, iron).
+   * Sandstone is the default — passing 'sandstone' (or anything unrecognized) removes any override.
    * @param {string} material - The material name
    */
   const setMaterial = (material) => {
     if (!MATERIALS.includes(material)) {
-      console.warn(`[useThemeManager] Unknown material '${material}'. Falling back to 'bronze'.`);
-      material = 'bronze';
+      console.warn(`[useThemeManager] Unknown material '${material}'. Falling back to 'sandstone'.`);
+      material = 'sandstone';
     }
     currentMaterial.value = material;
     setCss();
@@ -157,11 +157,11 @@ export function useThemeManager(options = {}) {
 
   /**
    * Applies the selected material via the shared setMaterial config function.
-   * Bronze removes any override; other materials inject the per-material CSS.
+   * Sandstone removes any override; other materials inject the per-material CSS.
    * @param {string} material - The material name
    */
   const applyMaterialTheme = (material) => {
-    if (material === 'bronze') {
+    if (material === 'sandstone') {
       setMaterialConfig(null, document.documentElement);
       return;
     }
@@ -224,7 +224,7 @@ export function useThemeManager(options = {}) {
 
     const brandName = currentTheme.value || 'dp';
     const contrast = currentContrast.value || 'default';
-    const material = currentMaterial.value || 'bronze';
+    const material = currentMaterial.value || 'sandstone';
 
     // Use shared setMode function from config.js (handles attribute setting)
     setModeConfig(mode, document.documentElement);

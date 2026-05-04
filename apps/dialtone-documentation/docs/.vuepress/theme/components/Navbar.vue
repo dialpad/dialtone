@@ -402,7 +402,7 @@ const {
 } = useThemeManager({ includeThemes: true });
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
-const formatMaterial = (m) => m === 'bronze' ? 'Bronze (default)' : capitalize(m);
+const formatMaterial = (m) => m === 'sandstone' ? 'Sandstone (default)' : capitalize(m);
 
 const isActiveLink = (link) => {
   // For Design System, check all related paths (same as useSidebarItems.js)

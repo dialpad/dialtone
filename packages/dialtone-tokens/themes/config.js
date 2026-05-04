@@ -48,7 +48,7 @@ let initializationState = null;
  * @typedef {Object} MaterialTheme
  * Material theme overrides — re-binds the underlying `--dt-color-black-*` ramp
  * (and, via the relative-color-syntax build pipeline, every token derived from it)
- * to a non-default material like steel/graphite/mono.
+ * to a non-default material like steel/graphite/iron.
  * @property {Object} material - Material-specific overrides
  * @property {string} material.name - Material identifier (e.g., 'steel')
  * @property {string} material.css - Material override CSS
@@ -371,9 +371,9 @@ export function setContrast(contrastTheme, rootNode = document.documentElement) 
 /**
  * Set the active material — re-binds `--dt-color-black-*` to the chosen ramp.
  *
- * Bronze is the default and ships baked into the base CSS, so passing a
- * non-default material (steel, graphite, mono) injects an override. Passing
- * `null` or a `{ material: { name: 'bronze' } }` theme removes the override
+ * Sandstone is the default and ships baked into the base CSS, so passing a
+ * non-default material (steel, graphite, iron, jade, copper) injects an override. Passing
+ * `null` or a `{ material: { name: 'sandstone' } }` theme removes the override
  * and returns to the default. Material's `<style>` tag inserts before brand,
  * so brand overrides still win at the same specificity.
  *
@@ -381,7 +381,7 @@ export function setContrast(contrastTheme, rootNode = document.documentElement) 
  * (emitted by the V1 relative-color-syntax build pipeline) automatically
  * re-derive when this is called — no per-token reload needed.
  *
- * @param {MaterialTheme|null} materialTheme - Theme object with material property, or null to reset to bronze
+ * @param {MaterialTheme|null} materialTheme - Theme object with material property, or null to reset to sandstone
  * @param {ThemeRootNode} [rootNode=document.documentElement] - Root element for style injection
  *
  * @example
@@ -390,7 +390,7 @@ export function setContrast(contrastTheme, rootNode = document.documentElement) 
  * setMaterial(Steel);
  *
  * @example
- * setMaterial(null); // back to default (bronze)
+ * setMaterial(null); // back to default (sandstone)
  */
 export function setMaterial (materialTheme, rootNode = document.documentElement) {
   if (rootNode instanceof ShadowRoot) {
@@ -405,13 +405,13 @@ export function setMaterial (materialTheme, rootNode = document.documentElement)
   }
 
   const name = materialTheme?.material?.name;
-  if (name && name !== 'bronze') {
+  if (name && name !== 'sandstone') {
     // Insert before the brand tag so brand can override material at the same specificity.
     _setStyleTag('dialtone-css-material', materialTheme.material.css, rootNode, 'dialtone-css-brand-colors');
     rootNode?.setAttribute('data-dt-material', name);
   } else {
     _removeStyleTag('dialtone-css-material', rootNode);
-    rootNode?.setAttribute('data-dt-material', 'bronze');
+    rootNode?.setAttribute('data-dt-material', 'sandstone');
   }
 }
 
@@ -565,7 +565,7 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
 
   // Set defaults for contrast and material
   rootNode?.setAttribute('data-dt-contrast', 'default');
-  rootNode?.setAttribute('data-dt-material', 'bronze');
+  rootNode?.setAttribute('data-dt-material', 'sandstone');
 
   // Track initialization state for future idempotency checks
   initializationState = {

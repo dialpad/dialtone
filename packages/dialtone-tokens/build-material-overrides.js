@@ -1,10 +1,10 @@
 /**
  * Emit per-material override CSS files for V2 runtime material switching.
  *
- * For each non-default material (steel, graphite, mono), reads the ramp values
+ * For each non-default material (steel, graphite, iron), reads the ramp values
  * from `tokens/base/refs/{default,dark}.json` and writes a CSS file that
  * re-binds `--dt-color-black-N` (light values to `:root`, dark values under
- * `[data-dt-mode="dark"]`). Bronze is the default and ships baked into the
+ * `[data-dt-mode="dark"]`). Sandstone is the default and ships baked into the
  * base CSS, so it doesn't need an override file.
  *
  * Output: `dist/css/layered/material/tokens-{material}.css`
@@ -22,7 +22,7 @@ import path from 'path';
 const REFS_LIGHT = './tokens/base/refs/default.json';
 const REFS_DARK = './tokens/base/refs/dark.json';
 const OUTPUT_DIR = './dist/css/layered/material/';
-const NON_DEFAULT_MATERIALS = ['steel', 'graphite', 'mono'];
+const NON_DEFAULT_MATERIALS = ['steel', 'graphite', 'iron'];
 
 function readRamp (file, material) {
   const json = JSON.parse(readFileSync(file, 'utf8'));
@@ -36,9 +36,14 @@ function buildCss (material) {
   const dark = readRamp(REFS_DARK, material);
   const lightVars = light.map(([stop, value]) => `  --dt-color-black-${stop}: ${value};`).join('\n');
   const darkVars = dark.map(([stop, value]) => `  --dt-color-black-${stop}: ${value};`).join('\n');
+  // Use [data-dt-mode="light"] (NOT :root) so a nested mode island that flips
+  // to light inside a dark root still picks up the light values. The :root
+  // selector only matches <html> and doesn't re-resolve at descendant scopes,
+  // which means light-inside-dark inheritance fails for material overrides.
+  // Matches the selector pattern used by the base ramp CSS.
   return `/**\n * Material override: ${material}\n * Re-binds --dt-color-black-* so V1 relative-color tokens follow this ramp.\n * Do not edit directly, this file was auto-generated.\n */
 
-:root {
+[data-dt-mode="light"] {
 ${lightVars}
 }
 
