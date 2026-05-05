@@ -433,6 +433,7 @@ export async function runLayeredTokens() {
                   (token.$extensions?.['studio.tokens']?.originalType === 'boxShadow' && token.type === 'color')) {
                 return false;
               }
+              if (isMaterialNamespaceRef(token)) return false;
               return true;
             },
           },
