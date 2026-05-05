@@ -137,7 +137,7 @@ export const argTypesData = {
     },
   },
   dialogClass: {
-    description: 'Additional class for the popover dialog element. Supports descendant selectors for deep customization.',
+    description: 'Additional class for the popover dialog element.',
     control: {
       type: 'text',
     },
