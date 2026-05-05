@@ -6199,7 +6199,6 @@
       "components/checkbox/default": "enabled",
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
-      "components/presence/default-prota-deuter": "enabled",
       "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
@@ -6225,8 +6224,6 @@
       "components/icon/default": "enabled",
       "components/presence/default": "enabled",
       "components/presence/dark": "enabled",
-      "components/presence/default-prota-deuter": "enabled",
-      "components/presence/dark-prota-deuter": "enabled",
       "components/radio/default": "enabled"
     },
     "$figmaVariableReferences": {},
