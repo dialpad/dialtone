@@ -1,3 +1,10 @@
+## [9.182.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.182.2...dialtone/v9.182.3) (2026-05-05)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA fix bubble menu not displaying ([d2c097f](https://github.com/dialpad/dialtone/commit/d2c097f94087dfad967fe7022fad784999a1969b))
+
 ## [9.182.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.182.1...dialtone/v9.182.2) (2026-05-05)
 
 
