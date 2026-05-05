@@ -368,6 +368,7 @@ describe('DtComboboxMultiSelect Tests', () => {
   describe('When dialogClass is provided', () => {
     beforeEach(async () => {
       props = { ...baseProps, dialogClass: 'custom-dialog-class' };
+      wrapper?.unmount();
       _setWrappers();
       await input.trigger('focus');
       await flushPromises();

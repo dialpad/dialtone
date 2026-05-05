@@ -553,6 +553,7 @@ describe('DtComboboxWithPopover Tests', () => {
   describe('When dialogClass is provided', () => {
     beforeEach(async () => {
       props = { ...baseProps, dialogClass: 'custom-dialog-class' };
+      wrapper?.unmount();
       _mountWrapper();
       await _openComboboxPopover();
     });
