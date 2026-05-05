@@ -340,23 +340,35 @@ describe('DtComboboxMultiSelect Tests', () => {
       });
     });
 
+    it.each([
+      { key: 'Escape', code: 'Escape' },
+      { key: 'Enter', code: 'Enter' },
+      { key: 'Enter', code: 'NumpadEnter' },
+    ])('Should emit "input-keydown" for key=$key code=$code', async ({ key, code }) => {
+      await input.trigger('keydown', { key, code });
+      expect(wrapper.emitted('input-keydown').length).toBe(1);
+    });
+
     describe('When chips are present', () => {
       beforeEach(async () => {
         await wrapper.setProps({ selectedItems: ['1'] });
         _setChildWrappers();
       });
 
-      describe('When Escape is pressed while a chip is focused', () => {
+      describe.each([
+        { key: 'Escape', semanticEvent: 'escape' },
+        { key: 'Enter', semanticEvent: 'enter' },
+      ])('When $key is pressed while a chip is focused', ({ key, semanticEvent }) => {
         beforeEach(async () => {
-          await chips.at(0).trigger('keydown', { key: 'Escape', code: 'Escape' });
+          await chips.at(0).trigger('keydown', { key, code: key });
         });
 
         it('Should still emit "keydown" from the chip', () => {
           expect(wrapper.emitted('keydown').length).toBe(1);
         });
 
-        it('Should not emit "escape"', () => {
-          expect(wrapper.emitted('escape')).toBeUndefined();
+        it(`Should not emit "${semanticEvent}"`, () => {
+          expect(wrapper.emitted(semanticEvent)).toBeUndefined();
         });
       });
 
@@ -366,13 +378,28 @@ describe('DtComboboxMultiSelect Tests', () => {
       });
     });
 
-    it('Should not emit "input-keydown" when the component is disabled', async () => {
+    describe('When the component is disabled', () => {
       // Suppressed by the explicit `if (this.disabled) return;` guard in
       // inputListeners.onKeydown — not by native DOM disabled semantics
       // (JSDOM's trigger() fires regardless of the HTML disabled attribute).
-      await wrapper.setProps({ disabled: true });
-      await input.trigger('keydown', { key: 'Tab', code: 'Tab' });
-      expect(wrapper.emitted('input-keydown')).toBeUndefined();
+      beforeEach(async () => {
+        await wrapper.setProps({ disabled: true });
+      });
+
+      it('Should not emit "input-keydown"', async () => {
+        await input.trigger('keydown', { key: 'Tab', code: 'Tab' });
+        expect(wrapper.emitted('input-keydown')).toBeUndefined();
+      });
+
+      it('Should not emit "escape"', async () => {
+        await input.trigger('keydown', { key: 'Escape', code: 'Escape' });
+        expect(wrapper.emitted('escape')).toBeUndefined();
+      });
+
+      it('Should not emit "enter"', async () => {
+        await input.trigger('keydown', { key: 'Enter', code: 'Enter' });
+        expect(wrapper.emitted('enter')).toBeUndefined();
+      });
     });
   });
 
