@@ -984,7 +984,7 @@ export default {
     },
 
     bubbleMenuShouldShow ({ editor }) {
-      return this.showLinkBubbleMenu && editor.isActive('link');
+      return !this.hideLinkBubbleMenu && editor.isActive('link');
     },
 
     /**
