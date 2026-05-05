@@ -352,7 +352,7 @@ describe('DtComboboxMultiSelect Tests', () => {
         });
 
         it('Should still emit "keydown" from the chip', () => {
-          expect(wrapper.emitted('keydown').length).toBeGreaterThanOrEqual(1);
+          expect(wrapper.emitted('keydown').length).toBe(1);
         });
 
         it('Should not emit "escape"', () => {
@@ -362,7 +362,7 @@ describe('DtComboboxMultiSelect Tests', () => {
 
       it('Should still emit "keydown" when a key is pressed on a chip (backward compatibility)', async () => {
         await chips.at(0).trigger('keydown', { key: 'ArrowLeft', code: 'ArrowLeft' });
-        expect(wrapper.emitted('keydown').length).toBeGreaterThanOrEqual(1);
+        expect(wrapper.emitted('keydown').length).toBe(1);
       });
     });
 
