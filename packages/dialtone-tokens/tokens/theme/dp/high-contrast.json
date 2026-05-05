@@ -14,15 +14,15 @@
         "type": "color"
       },
       "muted": {
-        "value": "{color.black.700}",
+        "value": "{color.black.750}",
         "type": "color"
       },
       "placeholder": {
-        "value": "{color.black.700}",
+        "value": "{color.black.750}",
         "type": "color"
       },
       "disabled": {
-        "value": "{color.black.700}",
+        "value": "{color.black.750}",
         "type": "color"
       },
       "critical": {
@@ -110,6 +110,10 @@
       },
       "primary-hover": {
         "value": "{color.purple.900}",
+        "type": "color"
+      },
+      "muted": {
+        "value": "{color.foreground.secondary}",
         "type": "color"
       }
     }
