@@ -150,6 +150,13 @@ export const argTypesData = {
     },
   },
 
+  dialogClass: {
+    description: 'Additional class for the popover dialog element. Supports descendant selectors for deep customization.',
+    control: {
+      type: 'text',
+    },
+  },
+
   // Action Event Handlers
   onEscape: {
     table: {

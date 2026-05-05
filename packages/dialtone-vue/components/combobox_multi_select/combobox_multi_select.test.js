@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
 import DtComboboxMultiSelect from './combobox_multi_select.vue';
+import DtPopover from '@/components/popover/popover.vue';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import { flushPromises } from '@/common/utils';
 import SrOnlyCloseButtonComponent from '@/common/sr_only_close_button.vue';
@@ -361,6 +362,20 @@ describe('DtComboboxMultiSelect Tests', () => {
         _setChildWrappers();
         expect(validationMsg.text()).toBe('More than 2 selected');
       });
+    });
+  });
+
+  describe('When dialogClass is provided', () => {
+    beforeEach(async () => {
+      props = { ...baseProps, dialogClass: 'custom-dialog-class' };
+      _setWrappers();
+      await input.trigger('focus');
+      await flushPromises();
+    });
+    it('should apply the class to the popover dialog element', () => {
+      const dialog = wrapper.findComponent(DtPopover).findComponent({ ref: 'content' });
+      expect(dialog.exists()).toBe(true);
+      expect(dialog.classes()).toContain('custom-dialog-class');
     });
   });
 });

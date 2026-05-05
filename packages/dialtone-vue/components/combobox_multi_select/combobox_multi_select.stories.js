@@ -136,6 +136,12 @@ export const argTypesData = {
       disable: true,
     },
   },
+  dialogClass: {
+    description: 'Additional class for the popover dialog element. Supports descendant selectors for deep customization.',
+    control: {
+      type: 'text',
+    },
+  },
 };
 
 // Story Collection

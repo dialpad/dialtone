@@ -549,4 +549,17 @@ describe('DtComboboxWithPopover Tests', () => {
       );
     });
   });
+
+  describe('When dialogClass is provided', () => {
+    beforeEach(async () => {
+      props = { ...baseProps, dialogClass: 'custom-dialog-class' };
+      _mountWrapper();
+      await _openComboboxPopover();
+    });
+    it('should apply the class to the popover dialog element', () => {
+      const dialog = wrapper.findComponent(DtPopover).findComponent({ ref: 'content' });
+      expect(dialog.exists()).toBe(true);
+      expect(dialog.classes()).toContain('custom-dialog-class');
+    });
+  });
 });
