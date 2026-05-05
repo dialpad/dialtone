@@ -39,6 +39,60 @@
         "value": "{color.blue.1000}",
         "type": "color"
       }
+    },
+    "border": {
+      "subtle": {
+        "value": "{color.black.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".33",
+              "space": "oklch"
+            }
+          }
+        }
+      },
+      "default": {
+        "value": "{color.black.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".33",
+              "space": "oklch"
+            }
+          }
+        }
+      },
+      "moderate": {
+        "value": "{color.black.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".33",
+              "space": "oklch"
+            }
+          }
+        }
+      },
+      "bold": {
+        "value": "{color.black.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".33",
+              "space": "oklch"
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -84,7 +84,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".66",
+              "value": ".50",
               "space": "oklch"
             }
           }
@@ -97,7 +97,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".85",
+              "value": ".50",
               "space": "oklch"
             }
           }
@@ -108,7 +108,11 @@
         "type": "color",
         "$extensions": {
           "studio.tokens": {
-            "modify": null
+            "modify": {
+              "type": "alpha",
+              "value": ".50",
+              "space": "oklch"
+            }
           }
         }
       }
