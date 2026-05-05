@@ -8,7 +8,8 @@ import {
   setMaterial as setMaterialConfig,
 } from '@dialpad/dialtone-tokens/themes/config';
 
-const MATERIALS = ['sandstone', 'steel', 'graphite', 'iron'];
+const DEFAULT_MATERIAL = 'sandstone';
+const MATERIALS = Object.freeze([DEFAULT_MATERIAL, 'steel', 'graphite', 'iron']);
 
 /**
  * Composable for managing theme, mode, and contrast settings across the documentation site.
@@ -101,8 +102,8 @@ export function useThemeManager(options = {}) {
    */
   const setMaterial = (material) => {
     if (!MATERIALS.includes(material)) {
-      console.warn(`[useThemeManager] Unknown material '${material}'. Falling back to 'sandstone'.`);
-      material = 'sandstone';
+      console.warn(`[useThemeManager] Unknown material '${material}'. Falling back to '${DEFAULT_MATERIAL}'.`);
+      material = DEFAULT_MATERIAL;
     }
     currentMaterial.value = material;
     setCss();
@@ -161,7 +162,7 @@ export function useThemeManager(options = {}) {
    * @param {string} material - The material name
    */
   const applyMaterialTheme = (material) => {
-    if (material === 'sandstone') {
+    if (material === DEFAULT_MATERIAL) {
       setMaterialConfig(null, document.documentElement);
       return;
     }
@@ -224,7 +225,7 @@ export function useThemeManager(options = {}) {
 
     const brandName = currentTheme.value || 'dp';
     const contrast = currentContrast.value || 'default';
-    const material = currentMaterial.value || 'sandstone';
+    const material = currentMaterial.value || DEFAULT_MATERIAL;
 
     // Use shared setMode function from config.js (handles attribute setting)
     setModeConfig(mode, document.documentElement);

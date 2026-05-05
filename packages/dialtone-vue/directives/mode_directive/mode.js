@@ -75,13 +75,11 @@ export const DtModeDirective = {
       if (!arg) return 'invert';
       if (VALID_MODES.includes(arg)) return arg;
       if (SUGGESTIONS[arg]) {
-         
         console.warn(
           `[DtModeDirective] Invalid mode "${arg}". Did you mean "${SUGGESTIONS[arg]}"? Falling back to "${SUGGESTIONS[arg]}".`,
         );
         return SUGGESTIONS[arg];
       }
-       
       console.warn(
         `[DtModeDirective] Invalid mode "${arg}". Valid modes: ${VALID_MODES.join(', ')}. Falling back to "invert".`,
       );
