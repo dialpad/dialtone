@@ -320,7 +320,7 @@
         "value": "{color.link.primary-hover}",
         "type": "color"
       },
-      "mention-backgroundd": {
+      "mention-background": {
         "value": "{color.surface.brand-opaque}",
         "type": "color",
         "$extensions": {

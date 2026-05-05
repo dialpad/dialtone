@@ -372,7 +372,7 @@ export function setContrast(contrastTheme, rootNode = document.documentElement) 
  * Set the active material — re-binds `--dt-color-black-*` to the chosen ramp.
  *
  * Sandstone is the default and ships baked into the base CSS, so passing a
- * non-default material (steel, graphite, iron, jade, copper) injects an override. Passing
+ * non-default material (steel, graphite, iron) injects an override. Passing
  * `null` or a `{ material: { name: 'sandstone' } }` theme removes the override
  * and returns to the default. Material's `<style>` tag inserts before brand,
  * so brand overrides still win at the same specificity.
@@ -393,6 +393,32 @@ export function setContrast(contrastTheme, rootNode = document.documentElement) 
  * setMaterial(null); // back to default (sandstone)
  */
 export function setMaterial (materialTheme, rootNode = document.documentElement) {
+  // When a non-null theme is provided, validate its shape — mirrors setBrand.
+  if (materialTheme !== null && materialTheme !== undefined) {
+    if (typeof materialTheme !== 'object') {
+      throw new TypeError(
+        '[Dialtone] setMaterial: materialTheme must be an object or null.',
+      );
+    }
+    if (!materialTheme.material || typeof materialTheme.material !== 'object') {
+      throw new TypeError(
+        '[Dialtone] setMaterial: materialTheme.material must be an object with {name, css} properties.',
+      );
+    }
+    if (typeof materialTheme.material.name !== 'string' || !materialTheme.material.name) {
+      throw new TypeError(
+        '[Dialtone] setMaterial: materialTheme.material.name must be a non-empty string.',
+      );
+    }
+    // css is only required when the chosen material isn't the default — sandstone
+    // resets to the base CSS without injecting a `<style>`.
+    if (materialTheme.material.name !== 'sandstone' && typeof materialTheme.material.css !== 'string') {
+      throw new TypeError(
+        '[Dialtone] setMaterial: materialTheme.material.css must be a string containing CSS.',
+      );
+    }
+  }
+
   if (rootNode instanceof ShadowRoot) {
     console.warn(
       '[Dialtone] You passed a ShadowRoot directly to setMaterial(). ' +

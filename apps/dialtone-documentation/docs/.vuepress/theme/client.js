@@ -375,7 +375,10 @@ async function importDialtoneThemes (app) {
       'material-iron': themeModules[53].default,
     };
 
-    console.info(`Successfully loaded ${Object.keys(themes).length - 1} themes + high contrast`);
+    const themeKeys = Object.keys(themes);
+    const materialCount = themeKeys.filter((k) => k.startsWith('material-')).length;
+    const brandCount = themeKeys.length - materialCount - 1; // minus high-contrast
+    console.info(`Successfully loaded ${brandCount} themes + high contrast + ${materialCount} material overrides`);
 
     app.provide('themes', themes);
   } catch (error) {
