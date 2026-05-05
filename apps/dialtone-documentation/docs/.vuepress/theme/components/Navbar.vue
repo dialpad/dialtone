@@ -15,12 +15,16 @@
         :offset="[-8, 8]"
       >
         <template #anchor>
-          <dt-button v-bind="navButtonProps(link)" @click="dismissHovercard(link.text, 'anchor')">
+          <dt-button
+            class="dialtone-shell-btn"
+            v-bind="navButtonProps(link)"
+            @click="dismissHovercard(link.text, 'anchor')"
+          >
             {{ link.text }}
           </dt-button>
         </template>
         <template #content>
-          <dt-box class="d-d-grid d-g-50 d-g-cols2 d-ai-stretch ">
+          <dt-box class="d-d-grid d-g-50 d-g-cols2 d-ai-stretch">
             <dt-button
               v-for="item in hovercardMap[link.text]"
               :key="item.link"
@@ -50,6 +54,7 @@
       </dt-hovercard>
       <dt-button
         v-else
+        class="dialtone-shell-btn"
         v-bind="navButtonProps(link)"
         @mouseleave="releaseDismissal(link.text)"
         @blur="releaseDismissal(link.text)"
