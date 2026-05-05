@@ -15,7 +15,12 @@
       },
       "muted": {
         "value": "{color.black.750}",
-        "type": "color"
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": null
+          }
+        }
       },
       "placeholder": {
         "value": "{color.black.750}",
@@ -100,7 +105,12 @@
       },
       "bold": {
         "value": "{color.black.1000}",
-        "type": "color"
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": null
+          }
+        }
       }
     },
     "link": {
