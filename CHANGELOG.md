@@ -1,3 +1,15 @@
+## [9.182.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.182.1...dialtone/v9.182.2) (2026-05-05)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA fix bubble menu error ([df37b06](https://github.com/dialpad/dialtone/commit/df37b06af1339026d0c6b7d1da55b13169bdf6bd))
+
+
+### Documentation
+
+* **Tabs, Skeleton, Rich Text Editor, Emoji, Avatar:** DLT-3347 update doc page code examples ([#1221](https://github.com/dialpad/dialtone/issues/1221)) ([c80061f](https://github.com/dialpad/dialtone/commit/c80061f922b868a20c82987644414766ebe3f086))
+
 ## [9.182.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.182.0...dialtone/v9.182.1) (2026-05-01)
 
 
