@@ -306,6 +306,14 @@ describe('DtComboboxMultiSelect Tests', () => {
   });
 
   describe('Input Key Event Tests', () => {
+    beforeEach(async () => {
+      // Establish the "while input is focused" precondition the spec describes
+      // before each keydown trigger. Nested describes that target chips manage
+      // their own keydown source — triggering focus on the input is a no-op
+      // for those code paths.
+      await input.trigger('focus');
+    });
+
     it('Should emit "escape" when Escape is pressed while input is focused', async () => {
       await input.trigger('keydown', { key: 'Escape' });
       expect(wrapper.emitted('escape').length).toBe(1);
