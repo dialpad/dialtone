@@ -9,7 +9,7 @@ import { register, getTransforms, expandTypesMap } from '@tokens-studio/sd-trans
 import StyleDictionary from 'style-dictionary';
 import { promises, readFileSync } from 'fs';
 
-import { registerDialtoneTransforms, registerDialtonePreprocessors, registerRelativeColorWrap } from './dialtone-transforms.js';
+import { registerDialtoneTransforms, registerDialtonePreprocessors, registerRelativeColorWrap, isMaterialNamespaceRef } from './dialtone-transforms.js';
 import { buildDocs } from './build-docs.js';
 const Root = JSON.parse(readFileSync('./tokens/root.json', 'utf8'));
 const BASE_FONT_SIZE = Root.font.size.root.value;
@@ -203,14 +203,7 @@ async function buildLayeredTokensForBrand(brandName, lightThemeConfig, darkTheme
                 (token.$extensions?.['studio.tokens']?.originalType === 'boxShadow' && token.type === 'color')) {
               return false;
             }
-            // Inline (don't emit as var()) when the reference points into the
-            // `material.*` namespace — that namespace lives in source-only token
-            // sets (base/refs/*) and its CSS vars are intentionally not output,
-            // so a var() reference would resolve to nothing at runtime.
-            const orig = token.original?.value;
-            if (typeof orig === 'string' && orig.includes('{material.')) {
-              return false;
-            }
+            if (isMaterialNamespaceRef(token)) return false;
             return true;
           },
         },
@@ -258,14 +251,7 @@ async function buildLayeredTokensForBrand(brandName, lightThemeConfig, darkTheme
                 (token.$extensions?.['studio.tokens']?.originalType === 'boxShadow' && token.type === 'color')) {
               return false;
             }
-            // Inline (don't emit as var()) when the reference points into the
-            // `material.*` namespace — that namespace lives in source-only token
-            // sets (base/refs/*) and its CSS vars are intentionally not output,
-            // so a var() reference would resolve to nothing at runtime.
-            const orig = token.original?.value;
-            if (typeof orig === 'string' && orig.includes('{material.')) {
-              return false;
-            }
+            if (isMaterialNamespaceRef(token)) return false;
             return true;
           },
         },

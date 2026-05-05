@@ -45,6 +45,18 @@ function throwSizeError (name, value, unitType) {
   throw new Error(`Invalid Number: '${name}: ${value}' is not a valid number, cannot transform to '${unitType}' \n`);
 }
 
+/**
+ * Returns true when a token's original value references the `material.*` namespace.
+ * That namespace lives in source-only token sets (`base/refs/*`) and its CSS vars
+ * are intentionally not output, so a `var()` reference would resolve to nothing
+ * at runtime — emit the inlined value instead. Used to gate `outputReferences`
+ * across all SD configs.
+ */
+export function isMaterialNamespaceRef (token) {
+  const orig = token.original?.value;
+  return typeof orig === 'string' && orig.includes('{material.');
+}
+
 export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/size/pxToRem',
