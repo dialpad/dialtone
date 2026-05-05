@@ -1,7 +1,7 @@
 // You can see all available options here https://typedoc.org/guides/options/ or via `pnpm exec typedoc --help`
 
 export default {
-  entryPoints: ['common/*/Index.js'],
+  entryPoints: ['common/*/index.js'],
 
   // Non-public modules should be added here.
   exclude: [

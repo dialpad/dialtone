@@ -2,7 +2,7 @@ import {
   DEFAULT_PREFIX,
   DEFAULT_VALIDATION_MESSAGE_TYPE,
   VALIDATION_MESSAGE_TYPES,
-} from '../constants/Index.js';
+} from '../constants/index.js';
 import {
   h,
   Comment,
