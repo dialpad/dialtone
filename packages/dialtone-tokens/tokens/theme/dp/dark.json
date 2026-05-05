@@ -167,7 +167,7 @@
         }
       },
       "muted": {
-        "value": "{color.black.650}",
+        "value": "{color.black.700}",
         "type": "color"
       }
     },
