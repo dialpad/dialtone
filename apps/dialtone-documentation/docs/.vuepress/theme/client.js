@@ -38,8 +38,7 @@ const MATERIAL_THEMES = {
 // Mirrors the style-tag id and cascade slot used at runtime by setMaterial().
 if (typeof document !== 'undefined' && typeof localStorage !== 'undefined') {
   const saved = localStorage.getItem('preferredMaterial');
-  const themeKey = saved && saved !== 'sandstone' ? `material-${saved}` : null;
-  const theme = themeKey ? MATERIAL_THEMES[themeKey] : null;
+  const theme = saved && saved !== 'sandstone' ? MATERIAL_THEMES[`material-${saved}`] : null;
   if (theme?.material?.css) {
     const style = document.createElement('style');
     style.id = 'dialtone-css-material';
