@@ -76,8 +76,8 @@ describe('DtChip Tests', () => {
         expect(avatar.exists()).toBe(false);
       });
 
-      it('default interactive', () => {
-        expect(chip.element.tagName).toBe('BUTTON');
+      it('default interactive is false, renders as span', () => {
+        expect(chip.element.tagName).toBe('SPAN');
       });
 
       it('chip should have aria-labelledby', () => {

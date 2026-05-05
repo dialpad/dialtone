@@ -1,5 +1,6 @@
 <template>
   <dt-tab-group
+    label="Label Example Group"
     :size="size"
     :kind="kind"
     :outlined="outlined"
@@ -29,7 +30,6 @@
       <dt-tab
         id="5"
         panel-id="6"
-        label="Third Label"
       >
         Third tab
       </dt-tab>

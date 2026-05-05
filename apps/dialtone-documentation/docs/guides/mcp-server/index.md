@@ -52,7 +52,7 @@ Commit `.mcp.json` to version control. Restart Claude Code to connect.
 
 Available across all your projects. Choose one method:
 
-**Option A: Install in dedicated directory**
+#### Option A: Install in dedicated directory
 
 ```bash
 # Install in a dedicated directory
@@ -64,14 +64,14 @@ npm install @dialpad/dialtone-mcp-server
 claude mcp add dialtone --scope user dialtone-mcp-server
 ```
 
-**Option B: Install globally**
+#### Option B: Install globally
 
 ```bash
 npm install -g @dialpad/dialtone-mcp-server
 claude mcp add dialtone --scope user dialtone-mcp-server
 ```
 
-**Option C: Use npx (no installation)**
+#### Option C: Use npx (no installation)
 
 ```bash
 claude mcp add dialtone --scope user -- npx -y @dialpad/dialtone-mcp-server

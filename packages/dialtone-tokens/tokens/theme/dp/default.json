@@ -223,11 +223,11 @@
         "type": "color"
       },
       "info": {
-        "value": "{color.foreground.info}",
+        "value": "{color.blue.600}",
         "type": "color"
       },
       "info-hover": {
-        "value": "{color.foreground.info-strong}",
+        "value": "{color.blue.700}",
         "type": "color"
       },
       "muted": {

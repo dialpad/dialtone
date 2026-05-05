@@ -469,6 +469,14 @@ export default {
     },
 
     /**
+     * Allow text alignment controls (left, center, right, justify) in the editor.
+     */
+    allowTextAlign: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
      * Whether the input allows image resize to be introduced in the text.
      */
     allowImageResize: {
@@ -740,9 +748,11 @@ export default {
       // hence this should be done last otherwise the enter wont add a emoji.
       extensions.push(Emoji);
 
-      extensions.push(TextAlign.configure({
-        types: ['paragraph'],
-      }));
+      if (this.allowTextAlign) {
+        extensions.push(TextAlign.configure({
+          types: ['paragraph'],
+        }));
+      }
 
       if (this.allowCode) {
         extensions.push(Code);
@@ -750,8 +760,70 @@ export default {
 
       if (this.allowCodeblock) {
         extensions.push(CodeBlock.extend({
-          renderText ({ node }) {
-            return `\`\`\`\n${node.textContent}\n\`\`\``;
+          renderText ({ node, pos, range }) {
+            // Tiptap 3.x passes range = { from, to } (the overall selection range).
+            // Full node in range: wrap in fences (getText(), full doc selection).
+            // Partial selection: return only the overlapping text.
+            const from = range?.from ?? 0;
+            const to = range?.to ?? (pos + node.nodeSize);
+            if (from <= pos && to >= pos + node.nodeSize) {
+              return `\`\`\`\n${node.textContent}\n\`\`\``;
+            }
+            const textStart = Math.max(0, from - pos - 1);
+            const textEnd = Math.min(node.textContent.length, to - pos - 1);
+            return node.textContent.slice(textStart, textEnd);
+          },
+          addCommands () {
+            return {
+              ...this.parent?.(),
+              toggleCodeBlock: (attributes = {}) => ({ state, chain, commands }) => {
+                const codeBlockType = state.schema.nodes[this.name];
+                const { $from } = state.selection;
+
+                if ($from.parent.type === codeBlockType) {
+                  const paragraphType = state.schema.nodes.paragraph;
+                  const lines = $from.parent.textContent.split('\n');
+                  const codeBlockPos = $from.before();
+                  const codeBlockNode = $from.parent;
+                  return chain()
+                    .command(({ tr }) => {
+                      const paragraphs = lines.map(line =>
+                        paragraphType.create({}, line ? [state.schema.text(line)] : []),
+                      );
+                      tr.replaceWith(codeBlockPos, codeBlockPos + codeBlockNode.nodeSize, paragraphs);
+                      return true;
+                    })
+                    .run();
+                }
+
+                const { from, to } = state.selection;
+                const blocks = [];
+                state.doc.nodesBetween(from, to, (node, pos) => {
+                  if (node.isTextblock) {
+                    blocks.push({ node, pos });
+                    return false;
+                  }
+                });
+
+                if (blocks.length <= 1) {
+                  return commands.setNode(this.name, attributes);
+                }
+
+                // Multiple paragraphs selected: merge into a single code block
+                const combinedText = blocks.map(({ node }) => node.textContent).join('\n');
+                const firstPos = blocks[0].pos;
+                const lastBlock = blocks[blocks.length - 1];
+                const lastPos = lastBlock.pos + lastBlock.node.nodeSize;
+
+                return chain()
+                  .command(({ tr }) => {
+                    const content = combinedText.length ? [state.schema.text(combinedText)] : [];
+                    tr.replaceWith(firstPos, lastPos, codeBlockType.create(attributes, content));
+                    return true;
+                  })
+                  .run();
+              },
+            };
           },
         }).configure({
           HTMLAttributes: {
@@ -893,8 +965,11 @@ export default {
 
           // Moves the <br /> tags inside the previous closing tag to avoid
           // Prosemirror wrapping them within another </p> tag.
+          // Converts <hr> to an empty paragraph so it pastes as a line separator.
           transformPastedHTML (html) {
-            return html.replace(/(<\/\w+>)((<br \/>)+)/g, '$2$3$1');
+            return html
+              .replace(/<hr[^>]*\/?>/gi, '<p><br></p>')
+              .replace(/(<\/\w+>)((<br \/>)+)/g, '$2$1');
           },
         },
       });

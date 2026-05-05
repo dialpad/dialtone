@@ -119,7 +119,7 @@ export default {
      */
     interactive: {
       type: Boolean,
-      default: true,
+      default: false,
     },
 
     /**
