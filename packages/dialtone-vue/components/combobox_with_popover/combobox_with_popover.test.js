@@ -558,9 +558,11 @@ describe('DtComboboxWithPopover Tests', () => {
       await _openComboboxPopover();
     });
     it('should apply the class to the popover dialog element', () => {
-      const dialog = wrapper.findComponent(DtPopover).findComponent({ ref: 'content' });
-      expect(dialog.exists()).toBe(true);
-      expect(dialog.classes()).toContain('custom-dialog-class');
+      // Popover teleports to body, so query body directly via data-qa
+      // (same pattern as tooltip/split_button/hovercard tests).
+      const dialog = document.body.querySelector('[data-qa="dt-popover"]');
+      expect(dialog).not.toBeNull();
+      expect(dialog.classList.contains('custom-dialog-class')).toBe(true);
     });
   });
 });

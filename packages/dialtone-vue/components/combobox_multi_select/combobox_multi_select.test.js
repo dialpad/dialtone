@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils';
 import DtComboboxMultiSelect from './combobox_multi_select.vue';
-import DtPopover from '@/components/popover/popover.vue';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import { flushPromises } from '@/common/utils';
 import SrOnlyCloseButtonComponent from '@/common/sr_only_close_button.vue';
@@ -374,9 +373,11 @@ describe('DtComboboxMultiSelect Tests', () => {
       await flushPromises();
     });
     it('should apply the class to the popover dialog element', () => {
-      const dialog = wrapper.findComponent(DtPopover).findComponent({ ref: 'content' });
-      expect(dialog.exists()).toBe(true);
-      expect(dialog.classes()).toContain('custom-dialog-class');
+      // Popover teleports to body, so query body directly via data-qa
+      // (same pattern as tooltip/split_button/hovercard tests).
+      const dialog = document.body.querySelector('[data-qa="dt-popover"]');
+      expect(dialog).not.toBeNull();
+      expect(dialog.classList.contains('custom-dialog-class')).toBe(true);
     });
   });
 });
