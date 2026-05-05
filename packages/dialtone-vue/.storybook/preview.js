@@ -41,7 +41,7 @@ import { setup } from '@storybook/vue3-vite';
 import React, { useState, useEffect } from 'react';
 import { DocsContainer } from '@storybook/addon-docs/blocks';
 import { DARK_MODE_EVENT_NAME } from '@vueless/storybook-dark-mode';
-import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
+import fixDefaultSlot from '../components/Plugins/FixDefaultSlot';
 import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '@/common/emoji';
 import customEmojiJson from '@/common/custom-emoji.json';
 import { dialtoneDarkTheme, dialtoneLightTheme } from './dialtone-themes.js';
@@ -51,7 +51,7 @@ import { DtScrollbarDirective } from '@/directives/scrollbar_directive';
 import { DtModeDirective } from '@/directives/mode_directive';
 import { DtFocusgroupDirective } from '@/directives/focusgroup_directive';
 import { DtFocustrapDirective } from '@/directives/focustrap_directive';
-import { DtStack } from '@/components/stack';
+import { DtStack } from '@/components/Stack';
 import { faker } from '@faker-js/faker';
 
 let currentContrast = 'default';

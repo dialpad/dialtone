@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import { DtButton } from '@/components/button';
+import { DtButton } from '@/components/Button';
 
 export default {
   name: 'EditorToolbarButton',

@@ -8,7 +8,7 @@
 
 <script setup>
 import DtRecipeEmojiRow from './emoji_row.vue';
-import { useMockReactions } from '@/recipes/conversation_view/emoji_row/composables/useMockReactions.js';
+import { useMockReactions } from '@/recipes/conversation_view/emoji_row/Composables/useMockReactions.js';
 
 const { mockReactions: emojiReactionsData } = useMockReactions();
 </script>

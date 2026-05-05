@@ -393,23 +393,23 @@ import {
   DtRichTextEditor,
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
-} from '@/components/rich_text_editor';
+} from '@/components/RichTextEditor';
 import {
   EDITOR_SUPPORTED_LINK_PROTOCOLS,
   EDITOR_DEFAULT_LINK_PREFIX,
   EDITOR_DEFAULT_FONT_COLOR,
 } from './editor_constants.js';
 import { removeClassStyleAttrs } from '@/common/utils';
-import { DtButton } from '@/components/button';
-import { DtPopover } from '@/components/popover';
-import { DtStack } from '@/components/stack';
-import { DtInput } from '@/components/input';
-import { DtTooltip } from '@/components/tooltip';
-import { DtListItem } from '@/components/list_item';
-import { DtCombobox } from '@/components/combobox';
+import { DtButton } from '@/components/Button';
+import { DtPopover } from '@/components/Popover';
+import { DtStack } from '@/components/Stack';
+import { DtInput } from '@/components/Input';
+import { DtTooltip } from '@/components/Tooltip';
+import { DtListItem } from '@/components/ListItem';
+import { DtCombobox } from '@/components/Combobox';
 
-import { DtDropdownSeparator } from '@/components/dropdown/index.js';
-import { DtListItemGroup } from '@/components/list_item_group/index.js';
+import { DtDropdownSeparator } from '@/components/Dropdown/Index.js';
+import { DtListItemGroup } from '@/components/ListItemGroup/Index.js';
 import EditorToolbarButton from './EditorToolbarButton.vue';
 import EditorToolbarDropdownButton from './EditorToolbarDropdownButton.vue';
 import EditorToolbarPopoverButton from './EditorToolbarPopoverButton.vue';

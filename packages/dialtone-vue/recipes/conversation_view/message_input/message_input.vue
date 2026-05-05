@@ -284,16 +284,16 @@ import {
   DtRichTextEditor,
   RICH_TEXT_EDITOR_OUTPUT_FORMATS,
   RICH_TEXT_EDITOR_AUTOFOCUS_TYPES,
-} from '@/components/rich_text_editor';
+} from '@/components/RichTextEditor';
 import lastActiveNodes from './last_active_nodes';
 import { removeClassStyleAttrs, returnFirstEl } from '@/common/utils';
-import MeetingPill from './extensions/meeting_pill/meeting_pill';
-import { DtButton } from '@/components/button';
-import { DtEmojiPicker } from '@/components/emoji_picker';
-import { DtPopover } from '@/components/popover';
-import { DtInput } from '@/components/input';
-import { DtTooltip } from '@/components/tooltip';
-import { DtStack } from '@/components/stack';
+import MeetingPill from './Extensions/meeting_pill/meeting_pill';
+import { DtButton } from '@/components/Button';
+import { DtEmojiPicker } from '@/components/EmojiPicker';
+import { DtPopover } from '@/components/Popover';
+import { DtInput } from '@/components/Input';
+import { DtTooltip } from '@/components/Tooltip';
+import { DtStack } from '@/components/Stack';
 import {
   DtIconImage, DtIconVerySatisfied, DtIconSatisfied, DtIconSend,
 } from '@dialpad/dialtone-icons/vue';

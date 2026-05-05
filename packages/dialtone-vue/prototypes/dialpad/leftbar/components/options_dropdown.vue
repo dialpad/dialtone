@@ -46,9 +46,9 @@
 </template>
 
 <script setup>
-import { DtDropdown, DtDropdownSeparator } from '@/components/dropdown';
-import { DtListItem } from '@/components/list_item';
-import { DtButton } from '@/components/button';
+import { DtDropdown, DtDropdownSeparator } from '@/components/Dropdown';
+import { DtListItem } from '@/components/ListItem';
+import { DtButton } from '@/components/Button';
 import { DtIconMoreVertical } from '@dialpad/dialtone-icons/vue';
 
 const emits = defineEmits(['select-menu-option', 'open-dropdown']);

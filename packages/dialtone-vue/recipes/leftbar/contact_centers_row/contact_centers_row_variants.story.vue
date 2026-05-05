@@ -173,8 +173,8 @@
 </template>
 
 <script>
-import { DtButton } from '@/components/button';
-import { DtStack } from '@/components/stack';
+import { DtButton } from '@/components/Button';
+import { DtStack } from '@/components/Stack';
 import DtIconBellRing from '@dialpad/dialtone-icons/vue/bell-ring';
 import DtRecipeContactCentersRow from './contact_centers_row.vue';
 

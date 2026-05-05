@@ -39,8 +39,8 @@
 </template>
 
 <script>
-import { DtButton } from '@/components/button';
-import { DtDropdown } from '@/components/dropdown';
+import { DtButton } from '@/components/Button';
+import { DtDropdown } from '@/components/Dropdown';
 
 export default {
   name: 'EditorToolbardropdownButton',

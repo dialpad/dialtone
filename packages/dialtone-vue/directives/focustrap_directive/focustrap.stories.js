@@ -1,7 +1,7 @@
-import DtButton from '@/components/button/button.vue';
-import DtInput from '@/components/input/input.vue';
-import DtLink from '@/components/link/link.vue';
-import { DtText } from '@/components/text';
+import DtButton from '@/components/Button/Button.vue';
+import DtInput from '@/components/Input/Input.vue';
+import DtLink from '@/components/Link/Link.vue';
+import { DtText } from '@/components/Text';
 
 export const argsData = {};
 export const argTypesData = {};

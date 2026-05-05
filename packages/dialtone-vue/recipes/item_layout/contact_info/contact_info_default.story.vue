@@ -52,7 +52,7 @@
 
 <script>
 import DtRecipeContactInfo from './contact_info.vue';
-import { DtIcon } from '@/components/icon';
+import { DtIcon } from '@/components/Icon';
 
 export default {
   name: 'DtRecipeContactInfoDefault',

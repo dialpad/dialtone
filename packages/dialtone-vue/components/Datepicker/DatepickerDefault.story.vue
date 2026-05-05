@@ -1,0 +1,68 @@
+<template>
+  <div>
+    <p>
+      Selected date: {{ currentSelectedDate }}
+    </p>
+    <br>
+    <br>
+    <table class="d-table">
+      <tr>
+        <th>Format</th>
+        <th>Result</th>
+      </tr>
+      <tr>
+        <td>formatLong</td>
+        <td>{{ formatLong(currentSelectedDate, $attrs.locale) }}</td>
+      </tr>
+      <tr>
+        <td>formatMedium</td>
+        <td>{{ formatMedium(currentSelectedDate, $attrs.locale) }}</td>
+      </tr>
+      <tr>
+        <td>formatShort</td>
+        <td>{{ formatShort(currentSelectedDate, $attrs.locale) }}</td>
+      </tr>
+      <tr>
+        <td>formatShort (no weekday)</td>
+        <td>{{ formatShort(currentSelectedDate, $attrs.locale, false) }}</td>
+      </tr>
+      <tr>
+        <td>formatNoYear</td>
+        <td>{{ formatNoYear(currentSelectedDate, $attrs.locale) }}</td>
+      </tr>
+      <tr>
+        <td>formatNoYear (abbreviated)</td>
+        <td>{{ formatNoYear(currentSelectedDate, $attrs.locale, true) }}</td>
+      </tr>
+      <tr>
+        <td>formatNumerical</td>
+        <td>{{ formatNumerical(currentSelectedDate, $attrs.locale) }}</td>
+      </tr>
+    </table>
+    <br>
+    <br>
+    <dt-datepicker
+      :selected-date="currentSelectedDate"
+      :min-date="$attrs.minDate"
+      :max-date="$attrs.maxDate"
+      :week-starts-on="$attrs.weekStartsOn"
+      @selected-date="currentSelectedDate = $event; $attrs.onSelectedDate($event)"
+      @close-datepicker="$attrs.onCloseDatepicker"
+    />
+  </div>
+</template>
+
+<script setup>
+import DtDatepicker from './Datepicker.vue';
+import { formatLong, formatMedium, formatShort, formatNoYear, formatNumerical } from './FormatUtils.js';
+import { ref } from 'vue';
+
+const props = defineProps({
+  date: {
+    type: Date,
+    default: () => (new Date()),
+  },
+});
+
+const currentSelectedDate = ref(props.date);
+</script>

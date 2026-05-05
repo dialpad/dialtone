@@ -1,6 +1,6 @@
 import { Meta, Subtitle, Story, Canvas } from '@storybook/addon-docs/blocks';
 import { DocImg } from '../components'
-import * as InputStories from '../../components/input/input.stories';
+import * as InputStories from '../../components/Input/input.stories';
 
 <Meta title="Docs/Storybook/Writing Stories" />
 
@@ -24,7 +24,7 @@ For example, the `WithPositive` story from `input.stories.js` gets rendered as:
 
 ```js
 # input.stories.js
-import DtInput from './input';
+import DtInput from './Input';
 
 ...
 
@@ -65,7 +65,7 @@ the same `*.stories.js` file are defined. It also provides fields for addon conf
 ```js
 // input.stories.js
 
-import DtInput from './input';
+import DtInput from './Input';
 
 export default {
   title: 'Forms/Input',
@@ -115,14 +115,14 @@ To write stories, we first import the component that we wish to write stories fo
 
 ```js
 // input.stories.js
-import DtInput from './input';
+import DtInput from './Input';
 ```
 
 Then we will define the `Default Export` for the simplest use case (No configuration):
 
 ```js
 // input.stories.js
-import DtInput from './input';
+import DtInput from './Input';
 
 export default {
   title: 'Forms/Input',
@@ -222,7 +222,7 @@ In order to address a current storybook bug where props that share the same name
 sidebar controls we must define the slots controls in `argTypesData` as seen in the example below.
 
 ```js
-import DtNotice from './notice';
+import DtNotice from './Notice';
 import NoticeDefault from './NoticeDefault.story.vue';
 
 export const argTypesData = {
@@ -292,8 +292,8 @@ folder as the corresponding stories.js file. In this case it is in the same fold
 </template>
 
 <script>
-import DtNotice from './notice';
-import { DtIcon } from '../components/icon';
+import DtNotice from './Notice';
+import { DtIcon } from '../components/Icon';
 
 export default {
   name: 'NoticeDefault',
@@ -310,7 +310,7 @@ will on other named exports will create stories with those props set.
 
 ```js
 // input.stories.js
-import DtInput from './input';
+import DtInput from './Input';
 import { generateTemplate } from '@/common/storybook_utils';
 
 export default {
@@ -355,7 +355,7 @@ field in the `default export`
 ```js
 // input.stories.js
 
-import DtInput from './input';
+import DtInput from './Input';
 
 export default {
   title: 'Forms/Input',

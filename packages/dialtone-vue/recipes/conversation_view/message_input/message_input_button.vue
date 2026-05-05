@@ -27,10 +27,10 @@
 </template>
 
 <script>
-import { DtButton } from '@/components/button';
-import { DtTooltip } from '@/components/tooltip';
-import { DtStack } from '@/components/stack';
-import { DtKeyboardShortcut } from '@/components/keyboard_shortcut';
+import { DtButton } from '@/components/Button';
+import { DtTooltip } from '@/components/Tooltip';
+import { DtStack } from '@/components/Stack';
+import { DtKeyboardShortcut } from '@/components/KeyboardShortcut';
 export default {
   compatConfig: { MODE: 3 },
   name: 'DtRecipeMessageInputButton',

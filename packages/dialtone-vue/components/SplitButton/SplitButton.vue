@@ -1,0 +1,681 @@
+<template>
+  <span
+    data-qa="dt-split-button"
+    :class="['d-split-btn', { 'd-split-btn--no-divider': !showDivider && importance === 'clear' }, $attrs.class]"
+    :style="[$attrs.style, { width }]"
+  >
+    <split-button-start
+      v-bind="startButtonProps"
+      ref="startButton"
+      @click="onStartClick"
+    >
+      <!-- Dual-icon path: when startEndIcon is provided, use DtButton's startIcon/endIcon -->
+      <template
+        v-if="$slots.startEndIcon"
+        #startIcon="{ size: iconSize }"
+      >
+        <!-- @slot Start (left) button icon slot -->
+        <slot
+          v-if="$slots.startIcon"
+          name="startIcon"
+          :size="iconSize"
+        />
+        <!-- @slot @deprecated Use startIcon -->
+        <slot
+          v-else
+          name="alphaIcon"
+          :size="iconSize"
+        />
+      </template>
+      <template
+        v-if="$slots.startEndIcon"
+        #endIcon="{ size: iconSize }"
+      >
+        <!-- @slot End-positioned icon within the start button (enables dual icons on the start button) -->
+        <slot
+          name="startEndIcon"
+          :size="iconSize"
+        />
+      </template>
+      <!-- Legacy single-icon path: uses DtButton's icon slot with iconPosition -->
+      <template
+        v-if="!$slots.startEndIcon"
+        #icon="{ size: iconSize }"
+      >
+        <!-- @slot Start (left) button icon slot -->
+        <slot
+          v-if="$slots.startIcon"
+          name="startIcon"
+          :size="iconSize"
+        />
+        <!-- @slot @deprecated Use startIcon -->
+        <slot
+          v-else
+          name="alphaIcon"
+          :size="iconSize"
+        />
+      </template>
+      <template
+        v-if="$slots.leading"
+        #leading
+      >
+        <!-- @slot Leading slot, forwarded to the alpha button's leading slot -->
+        <slot name="leading" />
+      </template>
+      <template
+        v-if="$slots.trailing"
+        #trailing
+      >
+        <!-- @slot Trailing slot, forwarded to the alpha button's trailing slot -->
+        <slot name="trailing" />
+      </template>
+      <!-- @slot Default content slot -->
+      <slot name="default" />
+    </split-button-start>
+    <!-- @slot End (right) content slot, overrides end button styling and functionality completely -->
+    <template v-if="$slots.end">
+      <slot name="end" />
+    </template>
+    <!-- @slot @deprecated Use end -->
+    <template v-else-if="$slots.omega">
+      <slot name="omega" />
+    </template>
+    <template v-else>
+      <dt-dropdown
+        v-if="$slots.dropdownList"
+        :placement="dropdownPlacement"
+        @click="isDropdownOpen = true"
+        @opened="open => isDropdownOpen = open"
+      >
+        <template #anchor="attrs">
+          <split-button-end
+            v-bind="{ ...attrs, ...endButtonProps }"
+            :active="isDropdownOpen"
+            @click="onEndClick"
+          >
+            <template #icon="{ size: iconSize }">
+              <!-- @slot End (right) button icon slot -->
+              <slot
+                v-if="$slots.endIcon"
+                name="endIcon"
+                :size="iconSize"
+              />
+              <!-- @slot @deprecated Use endIcon -->
+              <slot
+                v-else
+                name="omegaIcon"
+                :size="iconSize"
+              />
+            </template>
+          </split-button-end>
+        </template>
+        <template #list="{ close }">
+          <!-- @slot Built-in dropdown content slot, use of dt-list-item is highly recommended here. -->
+          <slot
+            name="dropdownList"
+            :close="close"
+          />
+        </template>
+      </dt-dropdown>
+
+      <split-button-end
+        v-else
+        v-bind="endButtonProps"
+        @click="onEndClick"
+      >
+        <template #icon="{ size: iconSize }">
+          <!-- @slot End (right) button icon slot -->
+          <slot
+            v-if="$slots.endIcon"
+            name="endIcon"
+            :size="iconSize"
+          />
+          <!-- @slot @deprecated Use endIcon -->
+          <slot
+            v-else
+            name="omegaIcon"
+            :size="iconSize"
+          />
+        </template>
+      </split-button-end>
+    </template>
+  </span>
+</template>
+
+<script>
+import {
+  BUTTON_IMPORTANCE_MODIFIERS,
+  BUTTON_KIND_MODIFIERS,
+  BUTTON_SIZE_MODIFIERS,
+  ICON_POSITION_MODIFIERS,
+} from '@/components/Button';
+import SplitButtonStart from './SplitButtonStart.vue';
+import SplitButtonEnd from './SplitButtonEnd.vue';
+import { DtDropdown } from '@/components/Dropdown';
+import { hasSlotContent, warnIfUnmounted, returnFirstEl } from '@/common/utils';
+
+export default {
+  compatConfig: { MODE: 3 },
+  name: 'DtSplitButton',
+
+  components: {
+    SplitButtonEnd,
+    DtDropdown,
+    SplitButtonStart,
+  },
+
+  inheritAttrs: false,
+
+  props: {
+    /**
+     * Determines whether the start button should have active styling
+     * @values true, false
+     */
+    startActive: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * @deprecated Use startActive
+     * @values true, false
+     */
+    alphaActive: {
+      type: Boolean,
+      default: null,
+    },
+
+    /**
+     * Descriptive label for the start button
+     */
+    startAriaLabel: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * @deprecated Use startAriaLabel
+     */
+    alphaAriaLabel: {
+      type: String,
+      default: undefined,
+    },
+
+    /**
+     * The position of the icon slot within the start button.
+     * @values start, end, blockStart, blockEnd, left, right, top, bottom
+     */
+    startIconPosition: {
+      type: String,
+      default: 'left',
+      validator: (position) => Object.keys(ICON_POSITION_MODIFIERS).includes(position),
+    },
+
+    /**
+     * @deprecated Use startIconPosition
+     * @values start, end, blockStart, blockEnd, left, right, top, bottom
+     */
+    alphaIconPosition: {
+      type: String,
+      default: undefined,
+      validator: (position) => position === undefined || Object.keys(ICON_POSITION_MODIFIERS).includes(position),
+    },
+
+    /**
+     * Used to customize the start label container
+     */
+    startLabelClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Used to customize the start button leading container
+     */
+    startLeadingClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * @deprecated Use startLeadingClass
+     */
+    alphaLeadingClass: {
+      type: [String, Array, Object],
+      default: undefined,
+    },
+
+    /**
+     * Used to customize the start button trailing container
+     */
+    startTrailingClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * @deprecated Use startTrailingClass
+     */
+    alphaTrailingClass: {
+      type: [String, Array, Object],
+      default: undefined,
+    },
+
+    /**
+     * @deprecated Use startLabelClass
+     */
+    alphaLabelClass: {
+      type: [String, Array, Object],
+      default: undefined,
+    },
+
+    /**
+     * HTML button disabled attribute for start button only
+     * <a class="d-link" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#disabled" target="_blank">
+     *  (Reference)
+     * </a>
+     * @values true, false
+     */
+    startDisabled: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * @deprecated Use startDisabled
+     * @values true, false
+     */
+    alphaDisabled: {
+      type: Boolean,
+      default: null,
+    },
+
+    /**
+     * Whether the start button should display a loading animation or not.
+     * @values true, false
+     */
+    startLoading: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * @deprecated Use startLoading
+     * @values true, false
+     */
+    alphaLoading: {
+      type: Boolean,
+      default: null,
+    },
+
+    /**
+     * Text shown in tooltip when you hover the start button,
+     * required if no content is passed to default slot
+     */
+    startTooltipText: {
+      type: String,
+      default: undefined,
+    },
+
+    /**
+     * @deprecated Use startTooltipText
+     */
+    alphaTooltipText: {
+      type: String,
+      default: undefined,
+    },
+
+    /**
+     * Determines whether a screenreader reads live updates of
+     * the button content to the user while the button
+     * is in focus.
+     * @values true, false
+     */
+    assertiveOnFocus: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * HTML button disabled attribute for both buttons.
+     * Use startDisabled or endDisabled to disable buttons individually.
+     * <a class="d-link" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#disabled" target="_blank">
+     *  (Reference)
+     * </a>
+     * @values true, false
+     */
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * The direction the dropdown displays relative to the anchor.
+     * @values top, top-start, top-end, right, right-start, right-end, left, left-start, left-end, bottom, bottom-start, bottom-end, auto, auto-start, auto-end
+     */
+    dropdownPlacement: {
+      type: String,
+      default: 'bottom-end',
+    },
+
+    /**
+     * The fill and outline of the button associated with its visual importance.
+     * @values clear, outlined, primary
+     */
+    importance: {
+      type: String,
+      default: 'primary',
+      validator: (i) => Object.keys(BUTTON_IMPORTANCE_MODIFIERS).includes(i),
+    },
+
+    /**
+     * The color of the button.
+     * @values default, unstyled, muted, critical, positive
+     */
+    kind: {
+      type: String,
+      default: 'default',
+      validator: (k) => Object.keys(BUTTON_KIND_MODIFIERS).includes(k),
+    },
+
+    /**
+     * Determines whether the end button should have active styling
+     * @values true, false
+     */
+    endActive: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * @deprecated Use endActive
+     * @values true, false
+     */
+    omegaActive: {
+      type: Boolean,
+      default: null,
+    },
+
+    /**
+     * Descriptive label for the end button
+     */
+    endAriaLabel: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * @deprecated Use endAriaLabel
+     */
+    omegaAriaLabel: {
+      type: String,
+      default: undefined,
+    },
+
+    /**
+     * HTML button disabled attribute for end button only
+     * <a class="d-link" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#disabled" target="_blank">
+     *  (Reference)
+     * </a>
+     * @values true, false
+     */
+    endDisabled: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * @deprecated Use endDisabled
+     * @values true, false
+     */
+    omegaDisabled: {
+      type: Boolean,
+      default: null,
+    },
+
+    /**
+     * Element ID, useful in case you need to reference the button
+     * as an external anchor for popover.
+     */
+    endId: {
+      type: String,
+      default: undefined,
+    },
+
+    /**
+     * @deprecated Use endId
+     */
+    omegaId: {
+      type: String,
+      default: undefined,
+    },
+
+    /**
+     * Text shown in tooltip when you hover the end button,
+     * required as it is an icon only button
+     */
+    endTooltipText: {
+      type: String,
+      default: undefined,
+    },
+
+    /**
+     * @deprecated Use endTooltipText
+     */
+    omegaTooltipText: {
+      type: String,
+      default: undefined,
+    },
+
+    /**
+     * The size of the button.
+     * @values 100, 200, 300, 400, 500
+     */
+    size: {
+      type: [String, Number],
+      default: 300,
+      validator: (s) => Object.keys(BUTTON_SIZE_MODIFIERS).includes(String(s)),
+    },
+
+    /**
+     * Button width, accepts
+     * <a class="d-link" href="https://developer.mozilla.org/en-US/docs/Web/CSS/width" target="_blank">
+     *   CSS width attribute
+     * </a>
+     * values
+     */
+    width: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * Whether to show the vertical divider between the start and end buttons.
+     * Only applies when importance is "clear".
+     * @values true, false
+     */
+    showDivider: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Vue router `to` prop for the start button.
+     * When set, renders the start button as a `<router-link>`.
+     */
+    startTo: {
+      type: [String, Object],
+      default: null,
+    },
+
+    /**
+     * Whether to use `router.replace()` instead of `router.push()`
+     * when navigating via `startTo`.
+     * @values true, false
+     */
+    startReplace: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * HTML href for the start button.
+     * When set, renders the start button as an `<a>` element.
+     */
+    startHref: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * HTML target attribute for the start button link.
+     * Only applies when `startHref` is set.
+     */
+    startTarget: {
+      type: String,
+      default: null,
+    },
+
+    /**
+     * HTML rel attribute for the start button link.
+     * Only applies when `startHref` is set.
+     */
+    startRel: {
+      type: String,
+      default: null,
+    },
+  },
+
+  emits: [
+    /**
+     * Native start button click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'start-clicked',
+
+    /**
+     * @deprecated Use start-clicked
+     */
+    'alpha-clicked',
+
+    /**
+     * Native end button click event
+     *
+     * @event click
+     * @type {PointerEvent | KeyboardEvent}
+     */
+    'end-clicked',
+
+    /**
+     * @deprecated Use end-clicked
+     */
+    'omega-clicked',
+  ],
+
+  data () {
+    return {
+      isDropdownOpen: false,
+    };
+  },
+
+  computed: {
+    startButtonProps () {
+      return {
+        active: this.alphaActive ?? this.startActive,
+        ariaLabel: this.alphaAriaLabel ?? this.startAriaLabel,
+        assertiveOnFocus: this.assertiveOnFocus,
+        disabled: this.disabled || (this.alphaDisabled ?? this.startDisabled),
+        iconPosition: this.alphaIconPosition ?? this.startIconPosition,
+        labelClass: this.alphaLabelClass ?? this.startLabelClass,
+        leadingClass: this.alphaLeadingClass ?? this.startLeadingClass,
+        trailingClass: this.alphaTrailingClass ?? this.startTrailingClass,
+        loading: this.alphaLoading ?? this.startLoading,
+        importance: this.importance,
+        kind: this.kind,
+        size: this.size,
+        tooltipText: this.alphaTooltipText ?? this.startTooltipText,
+        to: this.startTo,
+        replace: this.startReplace,
+        href: this.startHref,
+        target: this.startTarget,
+        rel: this.startRel,
+        class: this.$attrs.class,
+        style: this.$attrs.style,
+      };
+    },
+
+    endButtonProps () {
+      return {
+        id: this.omegaId ?? this.endId,
+        active: this.omegaActive ?? this.endActive,
+        ariaLabel: this.omegaAriaLabel ?? this.endAriaLabel,
+        disabled: this.disabled || (this.omegaDisabled ?? this.endDisabled),
+        importance: this.importance,
+        kind: this.kind,
+        size: this.size,
+        tooltipText: this.omegaTooltipText ?? this.endTooltipText,
+        class: this.$attrs.class,
+        style: this.$attrs.style,
+      };
+    },
+  },
+
+  created () {
+    this.validateProps();
+  },
+
+  updated () {
+    this.validateProps();
+  },
+
+  mounted () {
+    warnIfUnmounted(returnFirstEl(this.$el), this.$options.name);
+  },
+
+  methods: {
+    onStartClick () {
+      this.$emit('start-clicked');
+      this.$emit('alpha-clicked');
+    },
+
+    onEndClick () {
+      this.$emit('end-clicked');
+      this.$emit('omega-clicked');
+    },
+
+    validateProps () {
+      this.validateStartButtonProps();
+      this.validateEndButtonProps();
+      this.validateShowDivider();
+    },
+
+    validateStartButtonProps () {
+      if (hasSlotContent(this.$slots.default)) return;
+
+      if ((hasSlotContent(this.$slots.startIcon) || hasSlotContent(this.$slots.alphaIcon)) &&
+        !(this.alphaTooltipText ?? this.startTooltipText)) {
+        console.warn('start-tooltip-text prop must be set if start button has an icon only');
+      }
+    },
+
+    validateEndButtonProps () {
+      if (hasSlotContent(this.$slots.end) || hasSlotContent(this.$slots.omega)) return;
+
+      if (!(this.omegaTooltipText ?? this.endTooltipText)) {
+        console.warn('end-tooltip-text prop is required as it is an icon-only button');
+      }
+    },
+
+    validateShowDivider () {
+      if (!this.showDivider && this.importance !== 'clear') {
+        console.warn(
+          'show-divider prop set to false has no effect when importance is not "clear". ' +
+          'The divider is always shown for "outlined" and "primary" importances.',
+        );
+      }
+    },
+  },
+};
+</script>

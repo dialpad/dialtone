@@ -1,4 +1,4 @@
-import { DtTooltip, TOOLTIP_DIRECTIONS } from '@/components/tooltip';
+import { DtTooltip, TOOLTIP_DIRECTIONS } from '@/components/Tooltip';
 import { getUniqueString } from '@/common/utils';
 import { createApp, h } from 'vue';
 import deepEqual from 'deep-equal';

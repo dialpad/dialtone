@@ -104,9 +104,9 @@
 import LeftbarSection from './components/leftbar_section.vue';
 import MarkAllAsReadButton from './components/mark_all_as_read_button.vue';
 import OptionsDropdown from './components/options_dropdown.vue';
-import { DtButton } from '@/components/button';
+import { DtButton } from '@/components/Button';
 import { DtIconBellRing } from '@dialpad/dialtone-icons/vue';
-import { DtStack } from '@/components/stack';
+import { DtStack } from '@/components/Stack';
 import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
 import { DtRecipeContactRow } from '@/recipes/leftbar/contact_row';
 import { faker } from '@faker-js/faker';

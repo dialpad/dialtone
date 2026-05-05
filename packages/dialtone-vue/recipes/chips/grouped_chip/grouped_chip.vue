@@ -96,7 +96,7 @@
 </template>
 
 <script>
-import { DtChip } from '@/components/chip';
+import { DtChip } from '@/components/Chip';
 import { hasSlotContent } from '@/common/utils';
 
 export default {

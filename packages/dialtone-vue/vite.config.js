@@ -13,7 +13,7 @@ function _getEntries (pathPrefix, globRegex) {
       'common/storybook_utils.js',
       'common/v_html.js',
       'common/mixins/keyboard_list_navigation_tester.vue',
-      'components/plugins/*',
+      'components/Plugins/*',
     ],
     maxDepth: 4,
   }).reduce((entries, path) => {
@@ -64,7 +64,7 @@ export default defineConfig({
     },
     lib: {
       entry: {
-        'dialtone-vue': './index.js',
+        'dialtone-vue': './Index.js',
 
         ...commonEntries,
         ...componentEntries,
@@ -75,7 +75,7 @@ export default defineConfig({
         'shared/sr_only_close_button': './common/sr_only_close_button.vue',
 
         // Dependencies
-        'node_modules/@tiptap/vue-3': './node_modules/@tiptap/vue-3/dist/index.js',
+        'node_modules/@tiptap/vue-3': './node_modules/@tiptap/vue-3/dist/Index.js',
 
         // Localization
         'localization/index': './localization/index.js',
@@ -129,7 +129,7 @@ export default defineConfig({
         'common/storybook_utils.js',
         'common/v_html.js',
         'common/mixins/keyboard_list_navigation_tester.vue',
-        'components/plugins/*',
+        'components/Plugins/*',
         '.storybook/**',
         'storybook-static/**',
       ],

@@ -104,7 +104,7 @@
 </template>
 
 <script>
-import DtStack from '@/components/stack/stack.vue';
+import DtStack from '@/components/Stack/Stack.vue';
 export default {
   name: 'DtScrollbarDirectiveDefault',
   components: { DtStack },

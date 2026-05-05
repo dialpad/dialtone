@@ -59,7 +59,7 @@
 
 <script>
 import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover.vue';
-import { DtIcon } from '@/components/icon';
+import { DtIcon } from '@/components/Icon';
 
 export default {
   name: 'DtRecipeCallbarButtonWithPopoverDefault',
