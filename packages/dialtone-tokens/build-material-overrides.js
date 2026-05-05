@@ -22,7 +22,12 @@ import path from 'path';
 const REFS_LIGHT = './tokens/base/refs/default.json';
 const REFS_DARK = './tokens/base/refs/dark.json';
 const OUTPUT_DIR = './dist/css/layered/material/';
-const NON_DEFAULT_MATERIALS = ['steel', 'graphite', 'iron', 'amethyst'];
+
+/**
+ * Single source of truth for non-default materials. Imported by `generate-themes.js`
+ * so override CSS files and runtime entrypoints can't drift apart.
+ */
+export const NON_DEFAULT_MATERIALS = ['steel', 'graphite', 'iron', 'amethyst'];
 
 function readRamp (file, material) {
   const json = JSON.parse(readFileSync(file, 'utf8'));

@@ -5,6 +5,7 @@
 
 import fs from 'fs';
 import path from 'path';
+import { NON_DEFAULT_MATERIALS } from './build-material-overrides.js';
 
 const LAYERED_CSS_DIR = './dist/css/layered';
 const THEMES_OUTPUT_DIR = './themes';
@@ -129,19 +130,26 @@ export default {
 }
 
 /**
- * Generate per-material override theme files (steel, graphite, iron, jade, copper).
+ * Generate per-material override theme files. Iterates the canonical
+ * `NON_DEFAULT_MATERIALS` list exported from `build-material-overrides.js` so
+ * the CSS emitter and the runtime entrypoint generator stay in lockstep.
  * Sandstone is the default and ships baked into base CSS, so it doesn't get a file.
- * Reads the CSS files emitted by `build-material-overrides.js`.
+ * Stale `material-*.js` files in THEMES_OUTPUT_DIR are removed before generation
+ * so a renamed/dropped material can't leave a shipped artifact behind.
  */
 async function generateMaterialThemeFiles() {
-  const materialDir = path.join(LAYERED_CSS_DIR, 'material');
-  if (!fs.existsSync(materialDir)) return;
+  // Prune stale material-*.js entrypoints (e.g. from a renamed/removed material).
+  for (const file of fs.readdirSync(THEMES_OUTPUT_DIR)) {
+    if (file.startsWith('material-') && file.endsWith('.js')) {
+      fs.unlinkSync(path.join(THEMES_OUTPUT_DIR, file));
+    }
+  }
 
-  const files = fs.readdirSync(materialDir)
-    .filter(f => f.startsWith('tokens-') && f.endsWith('.css'))
-    .map(f => f.replace('tokens-', '').replace('.css', ''));
-
-  for (const name of files) {
+  for (const name of NON_DEFAULT_MATERIALS) {
+    const cssPath = path.join(LAYERED_CSS_DIR, 'material', `tokens-${name}.css`);
+    if (!fs.existsSync(cssPath)) {
+      throw new Error(`Missing override CSS for material '${name}' at ${cssPath}. Did buildMaterialOverrides() run first?`);
+    }
     const filePath = path.join(THEMES_OUTPUT_DIR, `material-${name}.js`);
     const content = `import MaterialCss from '@dialpad/dialtone-tokens/layered/material/tokens-${name}.css?inline';
 
