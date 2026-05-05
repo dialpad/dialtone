@@ -100,6 +100,16 @@ export const argTypesData = {
       disable: true,
     },
   },
+  onEnter: {
+    table: {
+      disable: true,
+    },
+  },
+  onKeydown: {
+    table: {
+      disable: true,
+    },
+  },
   onHighlight: {
     table: {
       disable: true,

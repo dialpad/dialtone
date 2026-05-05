@@ -322,10 +322,18 @@ describe('DtComboboxMultiSelect Tests', () => {
       expect(wrapper.emitted('enter').length).toBe(1);
     });
 
-    it('Should emit "keydown" with KeyboardEvent when a key is pressed in the input', async () => {
-      await input.trigger('keydown', { key: 'Tab', code: 'Tab' });
-      expect(wrapper.emitted('keydown').length).toBe(1);
-      expect(wrapper.emitted('keydown')[0][0]).toBeInstanceOf(KeyboardEvent);
+    describe('When a key is pressed in the input', () => {
+      beforeEach(async () => {
+        await input.trigger('keydown', { key: 'Tab', code: 'Tab' });
+      });
+
+      it('Should emit "keydown" once', () => {
+        expect(wrapper.emitted('keydown').length).toBe(1);
+      });
+
+      it('Should emit "keydown" with a KeyboardEvent payload', () => {
+        expect(wrapper.emitted('keydown')[0][0]).toBeInstanceOf(KeyboardEvent);
+      });
     });
 
     describe('When chips are present', () => {
@@ -334,10 +342,18 @@ describe('DtComboboxMultiSelect Tests', () => {
         _setChildWrappers();
       });
 
-      it('Should not emit "escape" when Escape is pressed while a chip is focused', async () => {
-        await chips.at(0).trigger('keydown', { key: 'Escape', code: 'Escape' });
-        expect(wrapper.emitted('keydown').length).toBeGreaterThanOrEqual(1);
-        expect(wrapper.emitted('escape')).toBeUndefined();
+      describe('When Escape is pressed while a chip is focused', () => {
+        beforeEach(async () => {
+          await chips.at(0).trigger('keydown', { key: 'Escape', code: 'Escape' });
+        });
+
+        it('Should still emit "keydown" from the chip', () => {
+          expect(wrapper.emitted('keydown').length).toBeGreaterThanOrEqual(1);
+        });
+
+        it('Should not emit "escape"', () => {
+          expect(wrapper.emitted('escape')).toBeUndefined();
+        });
       });
 
       it('Should still emit "keydown" when a key is pressed on a chip (backward compatibility)', async () => {
