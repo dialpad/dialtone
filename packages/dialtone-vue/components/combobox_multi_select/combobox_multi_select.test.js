@@ -365,18 +365,24 @@ describe('DtComboboxMultiSelect Tests', () => {
   });
 
   describe('When dialogClass is provided', () => {
+    // Popover teleports to body, so query body directly via data-qa
+    // (same pattern as tooltip/split_button/hovercard tests).
+    let dialog;
+
     beforeEach(async () => {
       props = { ...baseProps, dialogClass: 'custom-dialog-class' };
       wrapper?.unmount();
       _setWrappers();
       await input.trigger('focus');
       await flushPromises();
+      dialog = document.body.querySelector('[data-qa="dt-popover"]');
     });
-    it('should apply the class to the popover dialog element', () => {
-      // Popover teleports to body, so query body directly via data-qa
-      // (same pattern as tooltip/split_button/hovercard tests).
-      const dialog = document.body.querySelector('[data-qa="dt-popover"]');
+
+    it('should render the popover dialog element', () => {
       expect(dialog).not.toBeNull();
+    });
+
+    it('should apply the class to the popover dialog element', () => {
       expect(dialog.classList.contains('custom-dialog-class')).toBe(true);
     });
   });
