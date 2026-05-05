@@ -1,3 +1,10 @@
+## [3.219.4](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.219.3...dialtone-vue/v3.219.4) (2026-05-05)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA fix bubble menu not displaying ([d2c097f](https://github.com/dialpad/dialtone/commit/d2c097f94087dfad967fe7022fad784999a1969b))
+
 ## [3.219.3](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.219.2...dialtone-vue/v3.219.3) (2026-05-05)
 
 
