@@ -408,8 +408,8 @@ import { DtTooltip } from '@/components/Tooltip';
 import { DtListItem } from '@/components/ListItem';
 import { DtCombobox } from '@/components/Combobox';
 
-import { DtDropdownSeparator } from '@/components/Dropdown/Index.js';
-import { DtListItemGroup } from '@/components/ListItemGroup/Index.js';
+import { DtDropdownSeparator } from '@/components/Dropdown/index.js';
+import { DtListItemGroup } from '@/components/ListItemGroup/index.js';
 import EditorToolbarButton from './EditorToolbarButton.vue';
 import EditorToolbarDropdownButton from './EditorToolbarDropdownButton.vue';
 import EditorToolbarPopoverButton from './EditorToolbarPopoverButton.vue';

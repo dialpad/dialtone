@@ -5,7 +5,7 @@ import DtFilterPillDefaultTemplate from './FilterPillDefault.story.vue';
 import DtFilterPillVariantsTemplate from './FilterPillVariants.story.vue';
 import { action } from 'storybook/actions';
 import { BUTTON_SIZE_MODIFIERS } from '@/components/Button';
-import { POPOVER_DIRECTIONS, POPOVER_PADDING_CLASSES } from '@/components/Popover/Index.js';
+import { POPOVER_DIRECTIONS, POPOVER_PADDING_CLASSES } from '@/components/Popover/index.js';
 import { CONTENT_MODE_ARG_TYPE } from '@/common/mode_constants';
 
 // Set default values at the story level here.

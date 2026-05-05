@@ -9,7 +9,7 @@ import { action } from 'storybook/actions';
 import {
   POPOVER_DIRECTIONS,
   POPOVER_PADDING_CLASSES,
-} from '@/components/Popover/Index.js';
+} from '@/components/Popover/index.js';
 import { CONTENT_MODE_ARG_TYPE } from '@/common/mode_constants';
 
 export const argTypesData = {

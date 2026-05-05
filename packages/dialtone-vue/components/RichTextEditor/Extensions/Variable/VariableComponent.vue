@@ -3,7 +3,7 @@ import { DtButton } from '@/components/Button';
 import { DtPopover } from '@/components/Popover';
 import { DtInput } from '@/components/Input';
 import { DtBadge } from '@/components/Badge';
-import { DialtoneLocalization } from '@/localization/Index.js';
+import { DialtoneLocalization } from '@/localization/index.js';
 import { nodeViewProps, NodeViewWrapper } from '@tiptap/vue-3';
 
 const MAX_VARIABLE_ALT_LENGTH = 100;

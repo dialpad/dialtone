@@ -287,7 +287,7 @@ import {
 } from '@/components/RichTextEditor';
 import lastActiveNodes from './last_active_nodes';
 import { removeClassStyleAttrs, returnFirstEl } from '@/common/utils';
-import MeetingPill from './Extensions/meeting_pill/meeting_pill';
+import MeetingPill from './extensions/meeting_pill/meeting_pill';
 import { DtButton } from '@/components/Button';
 import { DtEmojiPicker } from '@/components/EmojiPicker';
 import { DtPopover } from '@/components/Popover';

@@ -58,8 +58,8 @@
 
 <script setup>
 import { ref, watch, nextTick, onMounted, onBeforeUnmount } from 'vue';
-import { POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES, DtPopover } from '@/components/Popover/Index.js';
-import { TOOLTIP_DIRECTIONS, TOOLTIP_DELAY_MS } from '@/components/Tooltip/Index.js';
+import { POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES, DtPopover } from '@/components/Popover/index.js';
+import { TOOLTIP_DIRECTIONS, TOOLTIP_DELAY_MS } from '@/components/Tooltip/index.js';
 import { getUniqueString } from '@/common/utils';
 import { CONTENT_MODE_PROP } from '@/common/mode_constants';
 
