@@ -164,7 +164,7 @@ function generateUtilityClassDocumentation (docs, rule) {
 
   if (classNames.length === 0) return;
 
-  const values = rule.nodes.map(node => {
+  const values = rule.nodes.filter(node => node.type === 'decl').map(node => {
     const _value = node.value;
     const _important = node.important ? ' !important' : '';
 
