@@ -33,6 +33,25 @@ const MATERIAL_THEMES = {
   'material-amethyst': MaterialAmethyst,
 };
 
+// Normalize stale localStorage values from removed/renamed entries (e.g.
+// bronze → sandstone). preferredTheme has its own force-reset in onBeforeMount.
+const VALID_PREFS = {
+  preferredMode: { valid: ['system', 'light', 'dark'], fallback: 'system' },
+  preferredContrast: { valid: ['default', 'high'], fallback: 'default' },
+  preferredMaterial: {
+    valid: ['sandstone', ...Object.keys(MATERIAL_THEMES).map(k => k.slice('material-'.length))],
+    fallback: 'sandstone',
+  },
+};
+if (typeof localStorage !== 'undefined') {
+  for (const [key, { valid, fallback }] of Object.entries(VALID_PREFS)) {
+    const stored = localStorage.getItem(key);
+    if (stored !== null && !valid.includes(stored)) {
+      localStorage.setItem(key, fallback);
+    }
+  }
+}
+
 // Pre-mount bootstrap: inject the persisted material override CSS before Vue
 // hydrates so the page paints with the user's saved choice, not sandstone.
 // Mirrors the style-tag id and cascade slot used at runtime by setMaterial().
