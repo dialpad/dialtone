@@ -17,6 +17,39 @@ import '@dialpad/dialtone-tokens/layered/tokens-core.css';
 import '@dialpad/dialtone-tokens/layered/tokens-base-colors.css';
 import '@dialpad/dialtone-tokens/layered/tokens-dp-colors.css';
 
+// Material override themes — imported synchronously so a previously-chosen
+// non-default material can be applied before first paint, avoiding a flash of
+// the default sandstone ramp on reload. Reused by importDialtoneThemes() below
+// for the picker, so both surfaces share one source of truth.
+import MaterialSteel from '@dialpad/dialtone-tokens/themes/material-steel';
+import MaterialGraphite from '@dialpad/dialtone-tokens/themes/material-graphite';
+import MaterialIron from '@dialpad/dialtone-tokens/themes/material-iron';
+import MaterialAmethyst from '@dialpad/dialtone-tokens/themes/material-amethyst';
+
+const MATERIAL_THEMES = {
+  'material-steel': MaterialSteel,
+  'material-graphite': MaterialGraphite,
+  'material-iron': MaterialIron,
+  'material-amethyst': MaterialAmethyst,
+};
+
+// Pre-mount bootstrap: inject the persisted material override CSS before Vue
+// hydrates so the page paints with the user's saved choice, not sandstone.
+// Mirrors the style-tag id and cascade slot used at runtime by setMaterial().
+if (typeof document !== 'undefined' && typeof localStorage !== 'undefined') {
+  const saved = localStorage.getItem('preferredMaterial');
+  const themeKey = saved && saved !== 'sandstone' ? `material-${saved}` : null;
+  const theme = themeKey ? MATERIAL_THEMES[themeKey] : null;
+  if (theme?.material?.css) {
+    const style = document.createElement('style');
+    style.id = 'dialtone-css-material';
+    style.setAttribute('type', 'text/css');
+    style.innerHTML = theme.material.css;
+    document.head.appendChild(style);
+    document.documentElement.setAttribute('data-dt-material', saved);
+  }
+}
+
 // Legacy CSS (still needed for components)
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
 import '@dialpad/dialtone-combinator/css';
@@ -311,11 +344,7 @@ async function importDialtoneThemes (app) {
       import('@dialpad/dialtone-tokens/themes/137'),
       // High contrast
       import('@dialpad/dialtone-tokens/themes/high-contrast'),
-      // Material overrides (sandstone is the default and lives in base; non-defaults injected on demand)
-      import('@dialpad/dialtone-tokens/themes/material-steel'),
-      import('@dialpad/dialtone-tokens/themes/material-graphite'),
-      import('@dialpad/dialtone-tokens/themes/material-iron'),
-      import('@dialpad/dialtone-tokens/themes/material-amethyst'),
+      // Material overrides imported sync at top of file; see MATERIAL_THEMES.
     ]);
 
     // Build themes object with same order as in Navbar
@@ -371,10 +400,7 @@ async function importDialtoneThemes (app) {
       '136': themeModules[48].default,
       '137': themeModules[49].default,
       'high-contrast': themeModules[50].default,
-      'material-steel': themeModules[51].default,
-      'material-graphite': themeModules[52].default,
-      'material-iron': themeModules[53].default,
-      'material-amethyst': themeModules[54].default,
+      ...MATERIAL_THEMES,
     };
 
     const themeKeys = Object.keys(themes);
