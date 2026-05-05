@@ -491,6 +491,88 @@
         "value": "oklch(0.1595 0.0097 38.74)",
         "type": "color"
       }
+    },
+    "amethyst": {
+      "50": {
+        "value": "oklch(1 0 0)",
+        "type": "color"
+      },
+      "100": {
+        "value": "oklch(0.9748 0.0013 289.00)",
+        "type": "color"
+      },
+      "150": {
+        "value": "oklch(0.9512 0.0026 289.00)",
+        "type": "color"
+      },
+      "200": {
+        "value": "oklch(0.9245 0.0048 289.10)",
+        "type": "color"
+      },
+      "250": {
+        "value": "oklch(0.8894 0.0068 289.10)",
+        "type": "color"
+      },
+      "300": {
+        "value": "oklch(0.8448 0.0096 289.20)",
+        "type": "color"
+      },
+      "350": {
+        "value": "oklch(0.7914 0.0134 289.30)",
+        "type": "color"
+      },
+      "400": {
+        "value": "oklch(0.7321 0.0176 289.40)",
+        "type": "color"
+      },
+      "450": {
+        "value": "oklch(0.6706 0.0198 289.50)",
+        "type": "color"
+      },
+      "500": {
+        "value": "oklch(0.6114 0.0203 289.70)",
+        "type": "color"
+      },
+      "550": {
+        "value": "oklch(0.5586 0.0207 289.80)",
+        "type": "color"
+      },
+      "600": {
+        "value": "oklch(0.5134 0.0213 290.00)",
+        "type": "color"
+      },
+      "650": {
+        "value": "oklch(0.4747 0.0217 290.10)",
+        "type": "color"
+      },
+      "700": {
+        "value": "oklch(0.4355 0.0216 290.20)",
+        "type": "color"
+      },
+      "750": {
+        "value": "oklch(0.3902 0.0184 290.40)",
+        "type": "color"
+      },
+      "800": {
+        "value": "oklch(0.3436 0.0220 290.70)",
+        "type": "color"
+      },
+      "850": {
+        "value": "oklch(0.3008 0.0350 290.90)",
+        "type": "color"
+      },
+      "900": {
+        "value": "oklch(0.2572 0.0650 291.20)",
+        "type": "color"
+      },
+      "950": {
+        "value": "oklch(0.1595 0.0924 291.53)",
+        "type": "color"
+      },
+      "1000": {
+        "value": "oklch(0.1500 0.0900 291.53)",
+        "type": "color"
+      }
     }
   }
 }

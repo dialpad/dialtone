@@ -22,7 +22,7 @@ import path from 'path';
 const REFS_LIGHT = './tokens/base/refs/default.json';
 const REFS_DARK = './tokens/base/refs/dark.json';
 const OUTPUT_DIR = './dist/css/layered/material/';
-const NON_DEFAULT_MATERIALS = ['steel', 'graphite', 'iron'];
+const NON_DEFAULT_MATERIALS = ['steel', 'graphite', 'iron', 'amethyst'];
 
 function readRamp (file, material) {
   const json = JSON.parse(readFileSync(file, 'utf8'));

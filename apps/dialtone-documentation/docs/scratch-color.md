@@ -421,7 +421,7 @@ layout: Blank
     <dt-stack gap="100">
       <dt-text as="h2" kind="headline" size="500">Black ramp candidates</dt-text>
       <dt-prose class="d-fc-secondary">
-        All six ramps share the current black ramp's lightness curve; <strong>L, C, and H all drift gradually</strong> along each ramp — no constants, mirroring how sandstone intentionally drifts all three coords. Ordered warmest&nbsp;&rarr;&nbsp;coolest with iron as the neutral pivot.
+        All seven ramps share the current black ramp's lightness curve; <strong>L, C, and H all drift gradually</strong> along each ramp — no constants, mirroring how sandstone intentionally drifts all three coords. Ordered warmest&nbsp;&rarr;&nbsp;coolest with iron as the neutral pivot.
         <ul>
           <li><strong>Copper</strong>: warm, orange-red undertone</li>
           <li><strong>Sandstone</strong>: warm, yellow undertone</li>
@@ -429,17 +429,19 @@ layout: Blank
           <li><strong>Jade</strong>: cool, green undertone</li>
           <li><strong>Steel</strong>: cool, blue</li>
           <li><strong>Graphite</strong>: cool, violet undertone</li>
+          <li><strong>Amethyst</strong>: cool, deep vivid violet</li>
         </ul>
         Toggle Mode at top.
       </dt-prose>
     </dt-stack>
-    <dt-box class="d-d-grid d-g-cols6 asdfqwer">
+    <dt-box class="d-d-grid d-g-cols7 asdfqwer">
       <base-color color-name="copper" :stops="copperStops" :mode="resolvedMode" />
       <base-color color-name="sandstone" :stops="sandstoneStops" :mode="resolvedMode" />
       <base-color color-name="iron" :stops="ironStops" :mode="resolvedMode" />
       <base-color color-name="jade" :stops="jadeStops" :mode="resolvedMode" />
       <base-color color-name="steel" :stops="steelStops" :mode="resolvedMode" />
       <base-color color-name="graphite" :stops="graphiteStops" :mode="resolvedMode" />
+      <base-color color-name="amethyst" :stops="amethystStops" :mode="resolvedMode" />
     </dt-box>
   </dt-stack>
 </dt-box>
@@ -677,6 +679,26 @@ const COPPER_REF_LCH = [
   [0.967, 0.002, 54.5],
   [0.985, 0.001, 56.5],
 ];
+// Amethyst — duo-hue ramp, single hue family throughout. H drifts gently from ~289°
+// at the lightest stops to 291.53° at the anchor (no longer borrowed from graphite).
+// L and C track graphite's muted character through stop 750, lift subtly at 800,
+// then ramp through 850 + 900 into the vivid anchor at stops 950 + 1000.
+const AMETHYST_REF_LCH = [
+  [0.130, 0.090,  291.53],
+  [0.210, 0.075,  291.20],
+  [0.260, 0.060,  290.90],
+  [0.300, 0.035,  290.70],
+  [0.343, 0.022,  290.70],
+  [0.390, 0.0184, 290.40],
+  [0.435, 0.0216, 290.20],
+  [0.474, 0.0217, 290.10],
+  [0.551, 0.0207, 289.80],
+  [0.671, 0.0198, 289.50],
+  [0.791, 0.0134, 289.20],
+  [0.889, 0.0068, 289.10],
+  [0.951, 0.0026, 289.00],
+  [0.985, 0.0013, 289.00],
+];
 function coordsFromTable (L, table) {
   if (L >= 1.0) return [0, 0]; // pure white anchor
   if (L <= table[0][0]) return [table[0][1], table[0][2]];
@@ -722,4 +744,5 @@ const steelStops = makeBlendedStops(STEEL_REF_LCH, GRAPHITE_REF_LCH, 0.4);
 const graphiteStops = makeRampStops(GRAPHITE_REF_LCH, 1.3);
 const jadeStops = makeRampStops(JADE_REF_LCH, .5);
 const copperStops = makeRampStops(COPPER_REF_LCH, .6);
+const amethystStops = makeRampStops(AMETHYST_REF_LCH, 1.0);
 </script>

@@ -372,7 +372,7 @@ export function setContrast(contrastTheme, rootNode = document.documentElement) 
  * Set the active material — re-binds `--dt-color-black-*` to the chosen ramp.
  *
  * Sandstone is the default and ships baked into the base CSS, so passing a
- * non-default material (steel, graphite, iron) injects an override. Passing
+ * non-default material (steel, graphite, iron, amethyst) injects an override. Passing
  * `null` or a `{ material: { name: 'sandstone' } }` theme removes the override
  * and returns to the default. Material's `<style>` tag inserts before brand,
  * so brand overrides still win at the same specificity.

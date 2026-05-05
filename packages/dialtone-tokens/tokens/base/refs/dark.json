@@ -491,6 +491,88 @@
         "value": "oklch(1 0 0)",
         "type": "color"
       }
+    },
+    "amethyst": {
+      "50": {
+        "value": "oklch(0.1500 0.0900 291.53)",
+        "type": "color"
+      },
+      "100": {
+        "value": "oklch(0.1595 0.0924 291.53)",
+        "type": "color"
+      },
+      "150": {
+        "value": "oklch(0.2301 0.0650 291.20)",
+        "type": "color"
+      },
+      "200": {
+        "value": "oklch(0.2657 0.0350 290.90)",
+        "type": "color"
+      },
+      "250": {
+        "value": "oklch(0.3028 0.0220 290.70)",
+        "type": "color"
+      },
+      "300": {
+        "value": "oklch(0.3436 0.0144 290.40)",
+        "type": "color"
+      },
+      "350": {
+        "value": "oklch(0.3894 0.0183 290.20)",
+        "type": "color"
+      },
+      "400": {
+        "value": "oklch(0.4355 0.0216 290.10)",
+        "type": "color"
+      },
+      "450": {
+        "value": "oklch(0.4777 0.0217 290.00)",
+        "type": "color"
+      },
+      "500": {
+        "value": "oklch(0.5184 0.0212 289.80)",
+        "type": "color"
+      },
+      "550": {
+        "value": "oklch(0.5619 0.0207 289.70)",
+        "type": "color"
+      },
+      "600": {
+        "value": "oklch(0.6114 0.0203 289.50)",
+        "type": "color"
+      },
+      "650": {
+        "value": "oklch(0.6689 0.0198 289.40)",
+        "type": "color"
+      },
+      "700": {
+        "value": "oklch(0.7306 0.0177 289.30)",
+        "type": "color"
+      },
+      "750": {
+        "value": "oklch(0.7913 0.0134 289.20)",
+        "type": "color"
+      },
+      "800": {
+        "value": "oklch(0.8448 0.0096 289.10)",
+        "type": "color"
+      },
+      "850": {
+        "value": "oklch(0.8874 0.0069 289.10)",
+        "type": "color"
+      },
+      "900": {
+        "value": "oklch(0.9244 0.0048 289.00)",
+        "type": "color"
+      },
+      "950": {
+        "value": "oklch(0.9622 0.0017 289.00)",
+        "type": "color"
+      },
+      "1000": {
+        "value": "oklch(1 0 0)",
+        "type": "color"
+      }
     }
   }
 }

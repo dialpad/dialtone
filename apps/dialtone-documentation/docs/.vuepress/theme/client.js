@@ -315,6 +315,7 @@ async function importDialtoneThemes (app) {
       import('@dialpad/dialtone-tokens/themes/material-steel'),
       import('@dialpad/dialtone-tokens/themes/material-graphite'),
       import('@dialpad/dialtone-tokens/themes/material-iron'),
+      import('@dialpad/dialtone-tokens/themes/material-amethyst'),
     ]);
 
     // Build themes object with same order as in Navbar
@@ -373,6 +374,7 @@ async function importDialtoneThemes (app) {
       'material-steel': themeModules[51].default,
       'material-graphite': themeModules[52].default,
       'material-iron': themeModules[53].default,
+      'material-amethyst': themeModules[54].default,
     };
 
     const themeKeys = Object.keys(themes);
