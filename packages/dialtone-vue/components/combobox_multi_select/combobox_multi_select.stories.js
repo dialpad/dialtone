@@ -27,6 +27,7 @@ export const argsData = {
   onComboboxHighlight: action('comboboxHighlight'),
   onFocus: action('focus'),
   onKeydown: action('keydown'),
+  onInputKeydown: action('input-keydown'),
   onEscape: action('escape'),
   onEnter: action('enter'),
 };
@@ -106,6 +107,11 @@ export const argTypesData = {
     },
   },
   onKeydown: {
+    table: {
+      disable: true,
+    },
+  },
+  onInputKeydown: {
     table: {
       disable: true,
     },

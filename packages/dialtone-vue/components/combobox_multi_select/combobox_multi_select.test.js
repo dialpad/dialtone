@@ -327,12 +327,16 @@ describe('DtComboboxMultiSelect Tests', () => {
         await input.trigger('keydown', { key: 'Tab', code: 'Tab' });
       });
 
-      it('Should emit "keydown" once', () => {
-        expect(wrapper.emitted('keydown').length).toBe(1);
+      it('Should emit "input-keydown" once', () => {
+        expect(wrapper.emitted('input-keydown').length).toBe(1);
       });
 
-      it('Should emit "keydown" with a KeyboardEvent payload', () => {
-        expect(wrapper.emitted('keydown')[0][0]).toBeInstanceOf(KeyboardEvent);
+      it('Should emit "input-keydown" with a KeyboardEvent payload', () => {
+        expect(wrapper.emitted('input-keydown')[0][0]).toBeInstanceOf(KeyboardEvent);
+      });
+
+      it('Should not emit "keydown" (chip-only contract)', () => {
+        expect(wrapper.emitted('keydown')).toBeUndefined();
       });
     });
 
@@ -362,13 +366,13 @@ describe('DtComboboxMultiSelect Tests', () => {
       });
     });
 
-    it('Should not emit input-level keydown when the component is disabled', async () => {
+    it('Should not emit "input-keydown" when the component is disabled', async () => {
       // Suppressed by the explicit `if (this.disabled) return;` guard in
       // inputListeners.onKeydown — not by native DOM disabled semantics
       // (JSDOM's trigger() fires regardless of the HTML disabled attribute).
       await wrapper.setProps({ disabled: true });
       await input.trigger('keydown', { key: 'Tab', code: 'Tab' });
-      expect(wrapper.emitted('keydown')).toBeUndefined();
+      expect(wrapper.emitted('input-keydown')).toBeUndefined();
     });
   });
 
