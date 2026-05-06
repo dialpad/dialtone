@@ -711,22 +711,28 @@ export default {
       const spaceLeft = input.getBoundingClientRect().width - left;
       // input.style.paddingLeft = left + 'px';
 
-      if (spaceLeft > this.reservedRightSpace) {
-        input.style.paddingLeft = left + 'px';
-      } else {
-        input.style.paddingLeft = '4px';
+      const firstChip = this.getFirstChip();
+      const isWrapped = firstChip && lastChip.offsetTop > firstChip.offsetTop;
+
+      input.style.paddingLeft = spaceLeft > this.reservedRightSpace ? `${left}px` : '4px';
+
+      if (spaceLeft > this.reservedRightSpace && !isWrapped) {
+        // Chips fit on the same row as the input. Chip is centered against
+        // the input via CSS, so don't override the input's natural padding-top
+        // (which would grow the input — most visible on xs).
+        return;
       }
 
-      // Get the chip wrapper height minus the 4px padding
+      if (spaceLeft > this.reservedRightSpace) {
+        // Chips wrapped, cursor sits beside the last chip on the wrapped row.
+        input.style.paddingTop = `${lastChip.offsetTop + 2}px`;
+        return;
+      }
+
+      // Last chip fills its row; cursor drops to the next line below.
       const chipsWrapperHeight = chipsWrapper.getBoundingClientRect().height - 4;
       const lastChipHeight = lastChip.getBoundingClientRect().height - 4;
-
-      // Get lastChip offsetTop plus 2px of the input padding.
-      const top = spaceLeft > this.reservedRightSpace
-        ? lastChip.offsetTop + 2
-        : (chipsWrapperHeight + lastChipHeight - 9);
-
-      input.style.paddingTop = `${top}px`;
+      input.style.paddingTop = `${chipsWrapperHeight + lastChipHeight - 9}px`;
     },
 
     revertInputPadding (input) {
