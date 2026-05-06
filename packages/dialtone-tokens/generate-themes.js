@@ -1,6 +1,7 @@
 /**
- * Script to automatically generate theme files using the NEW LAYERED TOKEN SYSTEM.
- * Replaces the old system entirely - generates theme files that reference layered tokens.
+ * Generate per-theme `.js` entrypoints that re-export the layered CSS as inline
+ * strings. Each entrypoint is consumed by the runtime setMode/setBrand/
+ * setContrast/setMaterial APIs in `themes/config.js`.
  */
 
 import fs from 'fs';
@@ -26,11 +27,8 @@ function readNonDefaultMaterials() {
   return [...names];
 }
 
-/**
- * Generate theme files for all themes (LAYERED SYSTEM)
- */
 export async function generateThemeFiles () {
-  console.log('Generating layered theme files (DIRECT REPLACEMENT)...');
+  console.log('Generating layered theme files...');
 
   // Ensure themes directory exists
   if (!fs.existsSync(THEMES_OUTPUT_DIR)) {
@@ -61,7 +59,7 @@ export async function generateThemeFiles () {
   // Generate per-material override themes (V2 — runtime material switching)
   await generateMaterialThemeFiles();
 
-  console.log('Layered theme files generated - OLD SYSTEM REPLACED');
+  console.log('Layered theme files generated');
 }
 
 /**
