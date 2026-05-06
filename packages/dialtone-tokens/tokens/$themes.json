@@ -568,6 +568,196 @@
     "group": "contrast"
   },
   {
+    "id": "material-sandstone",
+    "name": "sandstone",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/refs/default": "source",
+      "theme/dp/default": "source",
+      "components/presence/default": "source",
+      "components/badge/default": "source"
+    },
+    "$figmaVariableReferences": {},
+    "group": "material"
+  },
+  {
+    "id": "material-steel-light",
+    "name": "steel-light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/refs/default": "source",
+      "theme/dp/default": "source",
+      "base/material/steel": "enabled",
+      "components/presence/default": "source",
+      "components/badge/default": "source"
+    },
+    "$figmaVariableReferences": {},
+    "group": "material"
+  },
+  {
+    "id": "material-steel-dark",
+    "name": "steel-dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/dark": "source",
+      "base/refs/default": "source",
+      "base/refs/dark": "source",
+      "theme/dp/default": "source",
+      "theme/dp/dark": "source",
+      "base/material/steel": "enabled",
+      "components/presence/default": "source",
+      "components/badge/default": "source"
+    },
+    "$figmaVariableReferences": {},
+    "group": "material"
+  },
+  {
+    "id": "material-graphite-light",
+    "name": "graphite-light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/refs/default": "source",
+      "theme/dp/default": "source",
+      "base/material/graphite": "enabled",
+      "components/presence/default": "source",
+      "components/badge/default": "source"
+    },
+    "$figmaVariableReferences": {},
+    "group": "material"
+  },
+  {
+    "id": "material-graphite-dark",
+    "name": "graphite-dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/dark": "source",
+      "base/refs/default": "source",
+      "base/refs/dark": "source",
+      "theme/dp/default": "source",
+      "theme/dp/dark": "source",
+      "base/material/graphite": "enabled",
+      "components/presence/default": "source",
+      "components/badge/default": "source"
+    },
+    "$figmaVariableReferences": {},
+    "group": "material"
+  },
+  {
+    "id": "material-iron-light",
+    "name": "iron-light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/refs/default": "source",
+      "theme/dp/default": "source",
+      "base/material/iron": "enabled",
+      "components/presence/default": "source",
+      "components/badge/default": "source"
+    },
+    "$figmaVariableReferences": {},
+    "group": "material"
+  },
+  {
+    "id": "material-iron-dark",
+    "name": "iron-dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/dark": "source",
+      "base/refs/default": "source",
+      "base/refs/dark": "source",
+      "theme/dp/default": "source",
+      "theme/dp/dark": "source",
+      "base/material/iron": "enabled",
+      "components/presence/default": "source",
+      "components/badge/default": "source"
+    },
+    "$figmaVariableReferences": {},
+    "group": "material"
+  },
+  {
+    "id": "material-amethyst-light",
+    "name": "amethyst-light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/refs/default": "source",
+      "theme/dp/default": "source",
+      "base/material/amethyst": "enabled",
+      "components/presence/default": "source",
+      "components/badge/default": "source"
+    },
+    "$figmaVariableReferences": {},
+    "group": "material"
+  },
+  {
+    "id": "material-amethyst-dark",
+    "name": "amethyst-dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/dark": "source",
+      "base/refs/default": "source",
+      "base/refs/dark": "source",
+      "theme/dp/default": "source",
+      "theme/dp/dark": "source",
+      "base/material/amethyst": "enabled",
+      "components/presence/default": "source",
+      "components/badge/default": "source"
+    },
+    "$figmaVariableReferences": {},
+    "group": "material"
+  },
+  {
+    "id": "material-jade-light",
+    "name": "jade-light",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/refs/default": "source",
+      "theme/dp/default": "source",
+      "base/material/jade": "enabled",
+      "components/presence/default": "source",
+      "components/badge/default": "source"
+    },
+    "$figmaVariableReferences": {},
+    "group": "material"
+  },
+  {
+    "id": "material-jade-dark",
+    "name": "jade-dark",
+    "$figmaStyleReferences": {},
+    "selectedTokenSets": {
+      "root": "source",
+      "base/default": "source",
+      "base/dark": "source",
+      "base/refs/default": "source",
+      "base/refs/dark": "source",
+      "theme/dp/default": "source",
+      "theme/dp/dark": "source",
+      "base/material/jade": "enabled",
+      "components/presence/default": "source",
+      "components/badge/default": "source"
+    },
+    "$figmaVariableReferences": {},
+    "group": "material"
+  },
+  {
     "id": "025593f9f8f0cc2511035095197b6266f41e0855",
     "name": "light",
     "$figmaStyleReferences": {

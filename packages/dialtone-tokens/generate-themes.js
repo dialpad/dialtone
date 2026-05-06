@@ -5,10 +5,26 @@
 
 import fs from 'fs';
 import path from 'path';
-import { NON_DEFAULT_MATERIALS } from './build-material-overrides.js';
 
 const LAYERED_CSS_DIR = './dist/css/layered';
 const THEMES_OUTPUT_DIR = './themes';
+const TOKENS_THEMES_PATH = './tokens/$themes.json';
+
+/**
+ * Read the list of non-default material names from $themes.json's "material"
+ * group. Sandstone is the implicit default and is excluded since it has no
+ * override CSS to ship. Names like "steel-light"/"steel-dark" are deduped to
+ * just "steel" since one CSS file covers both modes.
+ */
+function readNonDefaultMaterials() {
+  const $themes = JSON.parse(fs.readFileSync(TOKENS_THEMES_PATH, 'utf8'));
+  const names = new Set();
+  for (const theme of $themes) {
+    if (theme.group !== 'material' || theme.name === 'sandstone') continue;
+    names.add(theme.name.replace(/-(light|dark)$/, ''));
+  }
+  return [...names];
+}
 
 /**
  * Generate theme files for all themes (LAYERED SYSTEM)
@@ -130,12 +146,12 @@ export default {
 }
 
 /**
- * Generate per-material override theme files. Iterates the canonical
- * `NON_DEFAULT_MATERIALS` list exported from `build-material-overrides.js` so
- * the CSS emitter and the runtime entrypoint generator stay in lockstep.
- * Sandstone is the default and ships baked into base CSS, so it doesn't get a file.
- * Stale `material-*.js` files in THEMES_OUTPUT_DIR are removed before generation
- * so a renamed/dropped material can't leave a shipped artifact behind.
+ * Generate per-material override theme files. Reads the non-default material
+ * list from `tokens/$themes.json`'s "material" group — single source of truth
+ * shared with Tokens Studio and the layered build pipeline. Sandstone is the
+ * default and ships baked into base CSS, so it doesn't get a file. Stale
+ * `material-*.js` files in THEMES_OUTPUT_DIR are removed before generation so
+ * a renamed/dropped material can't leave a shipped artifact behind.
  */
 async function generateMaterialThemeFiles() {
   // Prune stale material-*.js entrypoints (e.g. from a renamed/removed material).
@@ -145,10 +161,10 @@ async function generateMaterialThemeFiles() {
     }
   }
 
-  for (const name of NON_DEFAULT_MATERIALS) {
+  for (const name of readNonDefaultMaterials()) {
     const cssPath = path.join(LAYERED_CSS_DIR, 'material', `tokens-${name}.css`);
     if (!fs.existsSync(cssPath)) {
-      throw new Error(`Missing override CSS for material '${name}' at ${cssPath}. Did buildMaterialOverrides() run first?`);
+      throw new Error(`Missing override CSS for material '${name}' at ${cssPath}. Did the layered build run first?`);
     }
     const filePath = path.join(THEMES_OUTPUT_DIR, `material-${name}.js`);
     const content = `import MaterialCss from '@dialpad/dialtone-tokens/layered/material/tokens-${name}.css?inline';
