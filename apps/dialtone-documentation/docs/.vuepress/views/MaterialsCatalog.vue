@@ -7,11 +7,12 @@
   >
     <div class="d-d-grid d-g-200 d-rg-400 d-g-cols1 md:d-g-cols2 lg:d-g-cols3">
       <base-color
-        v-for="({ stops }, colorName) in colors"
-        :key="colorName"
-        :color-name="colorName"
-        :stops="stops || []"
+        v-for="({ stops }, materialName) in materials"
+        :key="materialName"
+        :color-name="materialName"
+        :stops="stops"
         :mode="mode"
+        namespace="material"
       />
     </div>
   </dt-box>
@@ -21,6 +22,8 @@
 import { inject, onMounted, ref } from 'vue';
 import BaseColor from '../baseComponents/BaseColor.vue';
 import { makeGetContrastRatio, oklchLightness } from '../common/contrast';
+import lightRefs from '@dialpad/dialtone-tokens/tokens/base/refs/default.json';
+import darkRefs from '@dialpad/dialtone-tokens/tokens/base/refs/dark.json';
 
 const tokensDocs = inject('tokensDocs');
 const props = defineProps({
@@ -29,36 +32,36 @@ const props = defineProps({
     default: 'light',
   },
 });
+
+// Reuse the same foreground colors as ColorsCatalog so LC contrast is computed
+// against the same reference text and reads consistently across both catalogs.
 const foregroundPrimaryValue = tokensDocs['--dt-color-foreground-primary'][`dp-${props.mode}`].value;
 const foregroundPrimaryInvertedValue = tokensDocs['--dt-color-foreground-primary-inverted'][`dp-${props.mode}`].value;
 const getContrastRatio = makeGetContrastRatio(foregroundPrimaryValue, foregroundPrimaryInvertedValue);
 
-const colors = ref(undefined);
+const materials = ref(undefined);
 
-// Display order, left → right (red → magenta hue wheel). `black` is intentionally
-// omitted — it lives in `MaterialsCatalog` since its values are picker-dependent.
-const RAMP_ORDER = [
-  'red',
-  'coral',
-  'gold',
-  'olive',
-  'green',
-  'teal',
-  'blue',
-  'indigo',
-  'purple',
-  'magenta',
-  'berry',
+// Display order. Default (sandstone) first, then non-default ramps that surface
+// in the global Material picker, then the additional named ramps that exist
+// only as design tokens (jade, copper).
+const MATERIAL_ORDER = [
+  'sandstone',
+  'steel',
+  'graphite',
+  'iron',
+  'amethyst',
+  // 'jade',
+  // 'copper',
 ];
 
 onMounted(() => {
+  const refs = (props.mode === 'dark' ? darkRefs : lightRefs).material;
   const result = {};
-  for (const colorName of RAMP_ORDER) {
-    const stops = Object.keys(tokensDocs)
-      .filter(t => new RegExp(`^--dt-color-${colorName}-\\d{2,4}$`).test(t))
-      .map(tokenName => {
-        const stop = tokenName.replace(/.*-(\d{2,4})$/, '$1');
-        const value = tokensDocs[tokenName][`base-${props.mode}`]?.value;
+  for (const materialName of MATERIAL_ORDER) {
+    const ramp = refs[materialName];
+    if (!ramp) continue;
+    const stops = Object.entries(ramp)
+      .map(([stop, { value }]) => {
         const lightness = oklchLightness(value);
         const contrastRatio = getContrastRatio(value);
         return {
@@ -70,8 +73,8 @@ onMounted(() => {
         };
       })
       .sort((a, b) => Number(a.stop) - Number(b.stop));
-    if (stops.length) result[colorName] = { stops };
+    result[materialName] = { stops };
   }
-  colors.value = result;
+  materials.value = result;
 });
 </script>

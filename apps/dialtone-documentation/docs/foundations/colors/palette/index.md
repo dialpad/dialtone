@@ -90,9 +90,9 @@ CSS variables for themeable parts of the UI, primarily targeting the top bar and
 
 Base colors are the literal value of all available colors. Use these only if all abstracted Text, Status text, Surface, or Border colors do not fit your need — consult a Product Designer.
 
-Each of the colors listed above references these. For example, in Light mode
-`var(--dt-color-foreground-primary)` is an alias to `var(--dt-color-black-900)`, and
-`var(--dt-color-foreground-critical)` is an alias to
+All semantic design tokens reference to these base colors, and base colors are not meant to be used directly. For example, in Light mode
+`var(--dt-color-foreground-primary)` might be aliased to `var(--dt-color-black-900)`, and
+`var(--dt-color-foreground-critical)` might be aliased to
 `var(--dt-color-red-300)`, and will have a different value in Dark mode.
 
 <div :class="{ 'is-bare': !showDetails }">
@@ -122,9 +122,19 @@ Each of the colors listed above references these. For example, in Light mode
   </template>
   <dt-tab-panel id="2" tab-id="1">
     <ColorsCatalog mode="light"></ColorsCatalog>
+    <dt-box padding-block-start="300">
+      <dt-text
+        as="p"
+        kind="body"
+      >
+        Materials are the reference colors used for the "black" ramp, depending on the "Material" theme selected. They do not have direct CSS variables or CSS Utilities. "Sandstone" is the default.
+      </dt-text>
+    </dt-box>
+    <MaterialsCatalog mode="light" class="d-mbs-200"></MaterialsCatalog>
   </dt-tab-panel>
   <dt-tab-panel id="4" tab-id="3">
     <ColorsCatalog mode="dark"></ColorsCatalog>
+    <MaterialsCatalog mode="dark" class="d-mbs-200"></MaterialsCatalog>
   </dt-tab-panel>
 </dt-tab-group>
 </div>
@@ -134,6 +144,7 @@ import { ref } from 'vue';
 import DesignColorTable from '@baseComponents/DesignColorTable.vue';
 import ThemeColorTable from '@baseComponents/ThemeColorTable.vue';
 import ColorsCatalog from '@views/ColorsCatalog.vue';
+import MaterialsCatalog from '@views/MaterialsCatalog.vue';
 
 const showDetails = ref(true);
 
