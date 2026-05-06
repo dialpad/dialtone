@@ -1,7 +1,7 @@
 ---
 title: Box
 description: Low-level surface and spacing primitive for building token-constrained containers.
-status: beta
+status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-box--default
 keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius", "sizing", "overflow", "scrollbar", "background", "spacing", "layout", "primitive", "elevation"]
