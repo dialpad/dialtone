@@ -8,11 +8,11 @@ keywords: ["brand colors","marketing colors","purple"]
   <div>
     <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols3 d-ai-center">
       <div>
-        <h2 class="d-docsite--header-3 d-mbs-0 d-mbs-0">Core Color</h2>
+        <h2 class="d-docsite--header-3 d-mbs-0">Core Color</h2>
         <p class="d-docsite--paragraph">Dialpad’s color theory is organized into three schemes depending on usage.</p>
-        <h3 class="d-docsite--header-4 d-mbs-0 d-mbs-0">Primary</h3>
+        <h3 class="d-docsite--header-4 d-mbs-0">Primary</h3>
         <p class="d-docsite--paragraph">For most general brand communications use light and dark neutrals for backgrounds with purple and a warm gradient tone used for accents.</p>
-        <h3 class="d-docsite--header-4 d-mbs-0 d-mbs-0">Secondary</h3>
+        <h3 class="d-docsite--header-4 d-mbs-0">Secondary</h3>
         <p class="d-docsite--paragraph">For specialty brand communications use one of the Dialpad brand purples for backgrounds.</p>
       </div>
       <div class="d-gc2">
@@ -60,7 +60,7 @@ keywords: ["brand colors","marketing colors","purple"]
         </dt-stack>
       </dt-box>
       <dt-stack>
-        <h3 class="d-docsite--header-4 d-mbs-0 d-mbs-0">{{ color.name }}</h3>
+        <h3 class="d-docsite--header-4 d-mbs-0">{{ color.name }}</h3>
         <p class="d-docsite--paragraph">{{ color.description }}</p>
       </dt-stack>
     </dt-stack>
