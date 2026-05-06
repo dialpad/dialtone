@@ -64,7 +64,7 @@ keywords: ["loading placeholder", "shimmer", "ghost", "d-skeleton", "DtSkeleton"
 ```vue demo
 <!-- @wrapper -->
 <div class="d-w-400">
-  <dt-skeleton :animate="false" arial-label="Loading" />
+  <dt-skeleton :animate="false" aria-label="Loading" />
 </div>
 ```
 
@@ -73,7 +73,7 @@ keywords: ["loading placeholder", "shimmer", "ghost", "d-skeleton", "DtSkeleton"
 ```vue demo
 <!-- @wrapper -->
 <div class="d-w-400">
-  <dt-skeleton arial-label="Loading" />
+  <dt-skeleton aria-label="Loading" />
 </div>
 ```
 
@@ -89,7 +89,7 @@ To customize a non-animating Skeleton background color modify the `--placeholder
     :text-option="{
       style: '--placeholder-from-color: var(--dt-color-blue-400)',
     }"
-    arial-label="Loading"
+    aria-label="Loading"
   />
 </div>
 ```
@@ -103,7 +103,7 @@ Customize an animating Skeleton by modifying the `--placeholder-from-color` and 
     :text-option="{
       style: '--placeholder-from-color: var(--dt-color-blue-400); --placeholder-to-color: var(--dt-color-blue-200);',
     }"
-    arial-label="Loading"
+    aria-label="Loading"
   />
 </div>
 ```

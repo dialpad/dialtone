@@ -211,7 +211,7 @@ Integrates the `v-dt-scrollbar` directive. An inner viewport wrapper is inserted
   padding="200"
   border-width="100"
   border-radius="300"
-  scrollbar="never"
+  scrollbar="always"
   block-size="300"
 >
   <dt-stack gap="100">

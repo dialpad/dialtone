@@ -14,7 +14,7 @@ Use `d-size-{stop}` to set both width and height using layout token stops. The h
 > Bare integer stops (`25`, `50`, `100`, …) are scale-indexed on the 64px base — `value_in_px = stop × 64 / 100`, so `25` = 16px and `100` = 64px. Stops with a `px` suffix (`1px`, `2px`, `8px`, `20px`, `24px`) are off-scale exceptions that encode the literal pixel value.
 
 ```vue demo
-<div v-dt-scrollbar:never class="d-bar-400 d-d-flex d-bgc-secondary d-w100p d-hmx-500 d-ta-center">
+<div v-dt-scrollbar:always class="d-bar-400 d-d-flex d-bgc-secondary d-w100p d-hmx-500 d-ta-center">
   <dt-stack gap="100" align="start">
     <div v-for="(i, index) in layout" v-dt-tooltip="{ message: `${i.px}px`, delay: false }">
       <dt-text kind="code" size="100" class="d-w-100 d-us-all">d-size-{{i.stop}}</dt-text>

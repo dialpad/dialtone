@@ -1,5 +1,5 @@
 <template>
-  <div v-dt-scrollbar:never class="d-hmx-700 d-bar-400 d-ba d-bc-subtle d-mbs-300">
+  <div v-dt-scrollbar:always class="d-hmx-700 d-bar-400 d-ba d-bc-subtle d-mbs-300">
     <div>
       <table class="d-table dialtone-doc-table">
         <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">

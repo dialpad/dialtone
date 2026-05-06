@@ -1,0 +1,137 @@
+name: Standards Freshness Check
+
+on:
+  pull_request:
+    paths:
+      - 'packages/dialtone-docs/src/content/standards/**'
+
+env:
+  HUSKY: 0
+
+concurrency:
+  group: "standards-freshness-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+      pull-requests: write
+
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Run freshness check
+        id: freshness
+        # Tolerate script errors so the workflow stays non-blocking — fall back to a SENTINEL
+        # report (with `error` field) rather than failing the job. The comment step distinguishes
+        # this from a true "all fresh" result so a scan failure isn't displayed as ✅.
+        run: |
+          if node packages/dialtone-docs/src/generators/check-freshness.mjs > /tmp/freshness.json 2> /tmp/freshness.err; then
+            echo "Freshness check ran successfully."
+          else
+            echo "::warning::check-freshness.mjs failed; emitting error sentinel. stderr was:"
+            cat /tmp/freshness.err
+            ERR_MSG=$(head -c 500 /tmp/freshness.err | jq -Rs .)
+            echo "{\"generated_at\":\"\",\"threshold_days\":90,\"checked_files\":[],\"stale\":[],\"error\":${ERR_MSG}}" > /tmp/freshness.json
+          fi
+          STALE_COUNT=$(jq '.stale | length' /tmp/freshness.json)
+          echo "stale_count=$STALE_COUNT" >> $GITHUB_OUTPUT
+
+      - name: Upsert PR comment
+        # Always run so a previously-stale PR can be cleared by a fix-up commit.
+        # continue-on-error means a 403 from a fork's read-only token won't fail the job.
+        continue-on-error: true
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const report = JSON.parse(fs.readFileSync('/tmp/freshness.json', 'utf8'));
+
+            // Stable marker so we can find and update the same comment instead of spamming
+            const MARKER = '<!-- standards-freshness-check -->';
+            const HEADER = '## ⏰ Standards Freshness Check';
+
+            let body;
+            if (report.error) {
+              // Distinguish a script failure from a clean scan — never display ✅ on error.
+              body = [
+                MARKER,
+                HEADER,
+                '',
+                '⚠️ The freshness check could not run on this PR. Standards may or may not be stale; the scan itself failed.',
+                '',
+                '<details><summary>Error</summary>',
+                '',
+                '```',
+                report.error.toString().slice(0, 1000),
+                '```',
+                '',
+                '</details>',
+              ].join('\n');
+            } else if (report.stale.length > 0) {
+              const rows = report.stale.map(({ file, last_verified, days_since_verified }) => {
+                const age = days_since_verified !== null ? `${days_since_verified} days` : 'never verified';
+                return `| \`${file}\` | ${last_verified ?? '—'} | ${age} |`;
+              }).join('\n');
+
+              body = [
+                MARKER,
+                HEADER,
+                '',
+                `The following ${report.stale.length === 1 ? 'standard has' : 'standards have'} \`last_verified\` older than ${report.threshold_days} days:`,
+                '',
+                '| File | last_verified | Age |',
+                '|------|--------------|-----|',
+                rows,
+                '',
+                '**To resolve:** re-read each flagged standard, confirm it is still accurate, then bump its `last_verified` date in the YAML frontmatter.',
+                '',
+                '> The 90-day cadence aligns with the AI citation decay window — see `standard-geo-optimization.md` for context.',
+              ].join('\n');
+            } else {
+              body = [
+                MARKER,
+                HEADER,
+                '',
+                '✅ All standards are within the 90-day verification window.',
+              ].join('\n');
+            }
+
+            // Find any existing bot comment with our marker. Paginate so PRs with >100 comments
+            // still match — otherwise the marker can fall off the first page and we'd post a
+            // duplicate comment instead of upserting.
+            const existingComments = await github.paginate(github.rest.issues.listComments, {
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 100,
+            });
+            const previous = existingComments.find(c => c.body && c.body.includes(MARKER));
+
+            if (previous) {
+              // Update in place — no comment spam on repeated pushes
+              await github.rest.issues.updateComment({
+                comment_id: previous.id,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body,
+              });
+            } else if (report.stale.length > 0 || report.error) {
+              // Only create a new comment when there's actually something to surface
+              // (real findings OR a scan failure that the user should know about).
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body,
+              });
+            }
+            // else: no findings, no error, and no prior comment → stay silent.

@@ -280,6 +280,14 @@
                     "link": "/guides/migration/component-props/"
                   },
                   {
+                    "text": "DtChip interactive default",
+                    "link": "/guides/migration/chip-interactive/"
+                  },
+                  {
+                    "text": "Scrollbar :never → :always",
+                    "link": "/guides/migration/scrollbar-always/"
+                  },
+                  {
                     "text": "Vue 2 Removal",
                     "link": "/guides/migration/vue2-removal/"
                   }

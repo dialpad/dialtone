@@ -246,8 +246,15 @@ export default {
     this.validateProperAnchor();
   },
 
+  beforeUnmount () {
+    this._isUnmounting = true;
+    // Prevent transition callbacks from calling into dead lifecycle methods
+    // after this component is torn down (DP-185811).
+  },
+
   methods: {
     onLeaveTransitionComplete () {
+      if (this._isUnmounting) return;
       this.$emit('opened', false);
       if (this.open !== null) {
         this.$emit('update:open', false);
@@ -255,6 +262,7 @@ export default {
     },
 
     onEnterTransitionComplete () {
+      if (this._isUnmounting) return;
       this.$emit('opened', true, this.$refs.content);
       if (this.open !== null) {
         this.$emit('update:open', true);

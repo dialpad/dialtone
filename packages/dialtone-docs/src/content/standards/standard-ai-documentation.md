@@ -4,6 +4,7 @@ category: standards
 keywords: [ai-documentation, searchability, completeness, structure, frontmatter, naming-conventions, validation, content-quality]
 ai_summary: Standards for creating AI-discoverable documentation in Dialtone — searchability, completeness, structure, and validation rules.
 last_updated: 2026-03-09
+last_verified: 2026-04-27
 ---
 
 # AI Documentation Standards for Dialtone
@@ -79,7 +80,8 @@ Built with our static site generator and deployed automatically.
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `last_updated` | string | YYYY-MM-DD format |
+| `last_updated` | string | YYYY-MM-DD format. Set when the file is edited. |
+| `last_verified` | string | YYYY-MM-DD format. Set when a human re-reads the document and confirms it is still accurate — distinct from `last_updated`, which only records edits. Expected on all `standards/` documents; optional elsewhere. By convention, bump only after substantive review (not just housekeeping edits). |
 | `related_packages` | array | Package names this doc relates to |
 | `related_docs` | array | Links to related documentation |
 

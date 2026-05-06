@@ -112,26 +112,27 @@ export function useThemeManager(options = {}) {
    * @param {string} brandName - The brand theme name
    */
   const applyBrandTheme = (brandName) => {
-    // DP is the base theme - for docs site, we don't need to apply brand overrides for DP
-    // since the base DP theme CSS is already loaded in the HTML
-    // For non-DP brands, we apply the brand override using the shared setBrand function
-    if (brandName !== 'dp') {
-      const theme = themes && themes[brandName];
-
-      if (!theme) {
-        console.warn(`[useThemeManager] Theme "${brandName}" not found in loaded themes`);
-        return;
-      }
-
-      if (!theme.brand?.css) {
-        console.warn(`[useThemeManager] Theme "${brandName}" missing brand.css property`);
-        return;
-      }
-
-      // Use shared setBrand function from config.js
-      setBrand(theme, document.documentElement);
+    // DP's base CSS is already loaded in the HTML — switching back to it requires
+    // stripping any previously injected brand override tag. TODO: replace with
+    // a clearBrand() export from @dialpad/dialtone-tokens/themes/config when added.
+    if (brandName === 'dp') {
+      document.getElementById('dialtone-css-brand-colors')?.remove();
+      return;
     }
-    // Note: The shared setBrand function handles style tag creation, updates, and cleanup
+
+    const theme = themes && themes[brandName];
+
+    if (!theme) {
+      console.warn(`[useThemeManager] Theme "${brandName}" not found in loaded themes`);
+      return;
+    }
+
+    if (!theme.brand?.css) {
+      console.warn(`[useThemeManager] Theme "${brandName}" missing brand.css property`);
+      return;
+    }
+
+    setBrand(theme, document.documentElement);
   };
 
   /**
