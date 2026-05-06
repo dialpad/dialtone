@@ -9,7 +9,7 @@ import {
 } from '@dialpad/dialtone-tokens/themes/config';
 
 const DEFAULT_MATERIAL = 'sandstone';
-const MATERIALS = Object.freeze([DEFAULT_MATERIAL, 'steel', 'graphite', 'iron', 'amethyst']);
+const MATERIALS = Object.freeze([DEFAULT_MATERIAL, 'steel', 'graphite', 'iron', 'amethyst', 'jade']);
 
 /**
  * Composable for managing theme, mode, and contrast settings across the documentation site.

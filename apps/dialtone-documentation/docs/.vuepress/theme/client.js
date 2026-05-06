@@ -25,12 +25,14 @@ import MaterialSteel from '@dialpad/dialtone-tokens/themes/material-steel';
 import MaterialGraphite from '@dialpad/dialtone-tokens/themes/material-graphite';
 import MaterialIron from '@dialpad/dialtone-tokens/themes/material-iron';
 import MaterialAmethyst from '@dialpad/dialtone-tokens/themes/material-amethyst';
+import MaterialJade from '@dialpad/dialtone-tokens/themes/material-jade';
 
 const MATERIAL_THEMES = {
   'material-steel': MaterialSteel,
   'material-graphite': MaterialGraphite,
   'material-iron': MaterialIron,
   'material-amethyst': MaterialAmethyst,
+  'material-jade': MaterialJade,
 };
 
 // Normalize stale localStorage values from removed/renamed entries (e.g.

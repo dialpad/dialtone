@@ -27,7 +27,7 @@ const OUTPUT_DIR = './dist/css/layered/material/';
  * Single source of truth for non-default materials. Imported by `generate-themes.js`
  * so override CSS files and runtime entrypoints can't drift apart.
  */
-export const NON_DEFAULT_MATERIALS = ['steel', 'graphite', 'iron', 'amethyst'];
+export const NON_DEFAULT_MATERIALS = ['steel', 'graphite', 'iron', 'amethyst', 'jade'];
 
 function readRamp (file, material) {
   const json = JSON.parse(readFileSync(file, 'utf8'));

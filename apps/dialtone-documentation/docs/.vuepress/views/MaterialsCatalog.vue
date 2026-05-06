@@ -50,7 +50,7 @@ const MATERIAL_ORDER = [
   'graphite',
   'iron',
   'amethyst',
-  // 'jade',
+  'jade',
   // 'copper',
 ];
 
