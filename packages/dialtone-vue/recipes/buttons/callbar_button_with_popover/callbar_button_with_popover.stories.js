@@ -8,7 +8,7 @@ import DtRecipeCallbarButtonWithPopoverVariantsTemplate from './callbar_button_w
 import {
   POPOVER_DIRECTIONS,
   POPOVER_INITIAL_FOCUS_STRINGS,
-} from '@/components/popover/popover_constants';
+} from '@/components/Popover/PopoverConstants';
 import { CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '@/recipes/buttons/callbar_button/callbar_button_constants';
 
 const iconsList = getIconNames();

@@ -136,8 +136,8 @@
 
 <script>
 import DtRecipeCallbarButtonWithPopover from './callbar_button_with_popover.vue';
-import { DtIcon } from '@/components/icon';
-import { DtStack } from '@/components/stack';
+import { DtIcon } from '@/components/Icon';
+import { DtStack } from '@/components/Stack';
 
 export default {
   name: 'DtRecipeCallbarButtonWithPopoverVariants',

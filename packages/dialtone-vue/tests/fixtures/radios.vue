@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { DtRadio } from '../../components/radio';
+import { DtRadio } from '../../components/Radio';
 
 export default {
   name: 'DtRadiosFixture',

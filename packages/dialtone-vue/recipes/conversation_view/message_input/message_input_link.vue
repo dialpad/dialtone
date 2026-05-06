@@ -102,10 +102,10 @@
 </template>
 
 <script>
-import { DtPopover } from '@/components/popover';
-import { DtInput } from '@/components/input';
-import { DtButton } from '@/components/button';
-import { DtStack } from '@/components/stack';
+import { DtPopover } from '@/components/Popover';
+import { DtInput } from '@/components/Input';
+import { DtButton } from '@/components/Button';
+import { DtStack } from '@/components/Stack';
 import { DtIconLink2 } from '@dialpad/dialtone-icons/vue';
 import DtRecipeMessageInputButton from './message_input_button.vue';
 import { DialtoneLocalization } from '@/localization';

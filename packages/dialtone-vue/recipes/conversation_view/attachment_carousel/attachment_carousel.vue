@@ -59,7 +59,7 @@
 
 <script>
 import { DtIconArrowRight, DtIconArrowLeft } from '@dialpad/dialtone-icons/vue';
-import { DtButton } from '@/components/button';
+import { DtButton } from '@/components/Button';
 import { DialtoneLocalization } from '@/localization';
 
 import DtImageCarousel from './media_components/image_carousel.vue';

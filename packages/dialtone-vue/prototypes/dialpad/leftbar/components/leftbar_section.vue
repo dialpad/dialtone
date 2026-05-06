@@ -39,8 +39,8 @@
 </template>
 
 <script setup>
-import { DtCollapsible } from '@/components/collapsible';
-import { DtButton } from '@/components/button';
+import { DtCollapsible } from '@/components/Collapsible';
+import { DtButton } from '@/components/Button';
 import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue';
 import { ref } from 'vue';
 

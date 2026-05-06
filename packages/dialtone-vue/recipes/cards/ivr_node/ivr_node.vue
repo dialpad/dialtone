@@ -86,9 +86,9 @@
 </template>
 
 <script>
-import { DtCard } from '@/components/card';
-import { DtButton } from '@/components/button';
-import { DtDropdown } from '@/components/dropdown';
+import { DtCard } from '@/components/Card';
+import { DtButton } from '@/components/Button';
+import { DtDropdown } from '@/components/Dropdown';
 import {
   DtIconKeypad,
   DtIconDialer,

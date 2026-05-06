@@ -121,7 +121,7 @@
 
 <script>
 import DtRecipeMessageInput from './message_input.vue';
-import { DtIcon } from '@/components/icon';
+import { DtIcon } from '@/components/Icon';
 
 export default {
   name: 'DtRecipeMessageInputDefault',

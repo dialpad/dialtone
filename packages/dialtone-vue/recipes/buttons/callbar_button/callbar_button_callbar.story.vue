@@ -214,8 +214,8 @@
 
 <script>
 import DtRecipeCallbarButton from './callbar_button.vue';
-import { DtIcon } from '@/components/icon';
-import { DtStack } from '@/components/stack';
+import { DtIcon } from '@/components/Icon';
+import { DtStack } from '@/components/Stack';
 
 export default {
   name: 'DtRecipeCallbarButtonCallbar',

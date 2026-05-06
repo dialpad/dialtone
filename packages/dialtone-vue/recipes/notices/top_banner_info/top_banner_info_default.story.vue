@@ -48,7 +48,7 @@
 
 <script>
 import DtRecipeTopBannerInfo from './top_banner_info.vue';
-import { DtText } from '@/components/text';
+import { DtText } from '@/components/Text';
 
 export default {
   name: 'DtRecipeTopBannerInfoDefault',

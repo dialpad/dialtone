@@ -17,6 +17,6 @@
 </template>
 
 <script setup>
-import { DtButton } from '@/components/button';
+import { DtButton } from '@/components/Button';
 import { DtIconDoubleCheck } from '@dialpad/dialtone-icons/vue';
 </script>

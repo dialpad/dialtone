@@ -40,8 +40,8 @@
 </template>
 
 <script>
-import { DtButton } from '@/components/button';
-import { DtPopover } from '@/components/popover';
+import { DtButton } from '@/components/Button';
+import { DtPopover } from '@/components/Popover';
 
 export default {
   name: 'EditorToolbarPopoverButton',

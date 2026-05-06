@@ -79,8 +79,8 @@
 </template>
 
 <script>
-import { DtButton } from '@/components/button';
-import { DtDropdown } from '@/components/dropdown';
+import { DtButton } from '@/components/Button';
+import { DtDropdown } from '@/components/Dropdown';
 import { DtIconChevronUp } from '@dialpad/dialtone-icons/vue';
 import { DtRecipeCallbarButton, CALLBAR_BUTTON_VALID_WIDTH_SIZE } from '../callbar_button';
 import utils, { warnIfUnmounted, removeClassStyleAttrs, returnFirstEl } from '@/common/utils';
