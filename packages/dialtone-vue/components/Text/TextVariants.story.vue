@@ -469,7 +469,7 @@
 
 <script>
 import { DtStack } from '../Stack';
-import { DtText } from './Index';
+import { DtText } from './index';
 import { TEXT_SIZE_MODIFIERS } from './TextConstants';
 
 export default {

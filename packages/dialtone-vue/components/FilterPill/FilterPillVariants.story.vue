@@ -240,7 +240,7 @@ import { DtRadio } from '@/components/Radio';
 import { DtIconFilter } from '@dialpad/dialtone-icons/vue';
 import { DtIconBoxSelect } from '@dialpad/dialtone-icons/vue';
 
-import { DtText } from '../Text/Index';
+import { DtText } from '../Text/index';
 import { DtListItem } from '@/components/ListItem';
 
 export default {

@@ -297,7 +297,7 @@ import { DtAvatar } from '@/components/Avatar';
 import { DtIcon } from '@/components/Icon';
 import { DtImageViewer } from '@/components/ImageViewer';
 import { DtButton } from '@/components/Button';
-import { useMockReactions } from '@/recipes/conversation_view/emoji_row/Composables/useMockReactions.js';
+import { useMockReactions } from '@/recipes/conversation_view/emoji_row/composables/useMockReactions.js';
 import fryImage from '@/common/assets/fry.gif';
 
 const fadeState = ref('SEARCHED');

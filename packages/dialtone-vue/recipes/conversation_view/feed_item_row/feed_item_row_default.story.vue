@@ -139,7 +139,7 @@ import { DtAvatar } from '@/components/Avatar';
 import { DtIcon } from '@/components/Icon';
 import { DtButton } from '@/components/Button';
 import { DtStack } from '@/components/Stack';
-import { useMockReactions } from '@/recipes/conversation_view/emoji_row/Composables/useMockReactions.js';
+import { useMockReactions } from '@/recipes/conversation_view/emoji_row/composables/useMockReactions.js';
 
 const hoverButtons = ['bell', 'living-thing', 'map-pin'];
 

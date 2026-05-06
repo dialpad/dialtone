@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { DtText } from './Index';
+import { DtText } from './index';
 
 export default {
   name: 'DtTextDefault',
