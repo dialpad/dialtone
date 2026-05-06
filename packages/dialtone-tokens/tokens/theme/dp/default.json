@@ -645,7 +645,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".27",
+              "value": ".39",
               "space": "oklch"
             }
           }
