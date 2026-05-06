@@ -10,6 +10,7 @@ export const DT_BOX_AS_VALUES = ['div', 'span', 'section', 'article', 'aside', '
  */
 export const DT_BOX_SPACING_VALUES = ['0', '1', '25', '50', '75', '100', '125', '150', '175', '200', '250', '300', '350', '400', '450', '500', '525', '550', '600', '650', '700', '750', '800'];
 
+
 /**
  * Surface color values (neutral + semantic + subtle/strong + opaque).
  * @type {string[]}
@@ -77,4 +78,4 @@ export const DT_BOX_OVERFLOW_VALUES = ['hidden', 'scroll', 'auto', 'clip', 'visi
  * Scrollbar autoHide mode values (maps to OverlayScrollbars autoHide option).
  * @type {string[]}
  */
-export const DT_BOX_SCROLLBAR_VALUES = ['leave', 'scroll', 'move', 'never'];
+export const DT_BOX_SCROLLBAR_VALUES = ['leave', 'scroll', 'move', 'always'];

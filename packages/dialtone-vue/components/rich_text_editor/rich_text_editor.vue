@@ -5,7 +5,7 @@
   <div>
     <!-- why the hell is this visibility: hidden by default??? -->
     <bubble-menu
-      v-if="editor && link && showLinkBubbleMenu"
+      v-if="editor && link"
       :editor="editor"
       :should-show="bubbleMenuShouldShow"
       :options="floatingOptions"
@@ -977,7 +977,7 @@ export default {
     },
 
     bubbleMenuShouldShow ({ editor }) {
-      return editor.isActive('link');
+      return this.showLinkBubbleMenu && editor.isActive('link');
     },
 
     /**

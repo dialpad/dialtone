@@ -1,7 +1,7 @@
 ---
 title: Box
 description: Low-level surface and spacing primitive for building token-constrained containers.
-status: beta
+status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-box--default
 keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius", "sizing", "overflow", "scrollbar", "background", "spacing", "layout", "primitive", "elevation"]
@@ -211,7 +211,7 @@ Integrates the `v-dt-scrollbar` directive. An inner viewport wrapper is inserted
   padding="200"
   border-width="100"
   border-radius="300"
-  scrollbar="never"
+  scrollbar="always"
   block-size="300"
 >
   <dt-stack gap="100">

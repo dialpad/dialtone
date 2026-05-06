@@ -243,29 +243,35 @@ layout: Blank
     </dt-dropdown>
   </dt-stack>
 </dt-box>
-<dt-box surface="primary" padding="400">
+<dt-box class="foo" surface="primary" padding="400">
   <dt-stack gap="400">
     <dt-stack gap="200">
-      <dt-text as="h3" kind="label" size="200" strength="bold" tone="primary">Surfaces</dt-text>
       <dt-stack direction="row" align="start">
         <dt-stack
-          v-for="surfaceItem in primarySurfaces"
-          :key="surfaceItem.name"
+          v-for="{ name, dark } in [
+            { name: 'primary' },
+            { name: 'secondary' },
+            { name: 'moderate' },
+            { name: 'bold' },
+            { name: 'strong', dark: true },
+            { name: 'contrast', dark: true },
+          ]"
+          :key="name"
         >
-          <dt-box padding="300" :surface="surfaceItem.name">
-            <dt-text v-if="surfaceItem.dark" v-dt-mode:invert as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceItem.name }}</dt-text>
-            <dt-text v-else as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceItem.name }}</dt-text>
+          <dt-box padding="300" :surface="name">
+            <dt-text v-if="dark" v-dt-mode:invert as="p" kind="code" size="100" strength="bold" tone="primary">{{ name }}</dt-text>
+            <dt-text v-else as="p" kind="code" size="100" strength="bold" tone="primary">{{ name }}</dt-text>
           </dt-box>
-          <dt-box padding="300" :surface="`${surfaceItem.name}-opaque`">
-            <dt-text v-if="surfaceItem.dark" v-dt-mode:invert as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceItem.name }}-opaque</dt-text>
-            <dt-text v-else as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceItem.name }}-opaque</dt-text>
+          <dt-box padding="300" :surface="`${name}-opaque`">
+            <dt-text v-if="dark" v-dt-mode:invert as="p" kind="code" size="100" strength="bold" tone="primary">{{ name }}-opaque</dt-text>
+            <dt-text v-else as="p" kind="code" size="100" strength="bold" tone="primary">{{ name }}-opaque</dt-text>
           </dt-box>
         </dt-stack>
       </dt-stack>
       <dt-stack direction="row" align="start">
-        <dt-stack v-for="surfaceName in semanticSubtleSurfaces" :key="surfaceName">
-          <dt-box padding="300" :surface="surfaceName"><dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceName }}</dt-text></dt-box>
-          <dt-box padding="300" :surface="`${surfaceName}-opaque`"><dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceName }}-opaque</dt-text></dt-box>
+        <dt-stack v-for="name in ['info', 'info-subtle', 'brand', 'brand-subtle', 'positive', 'positive-subtle', 'warning', 'warning-subtle', 'critical', 'critical-subtle']" :key="name">
+          <dt-box padding="300" :surface="name"><dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ name }}</dt-text></dt-box>
+          <dt-box padding="300" :surface="`${name}-opaque`"><dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ name }}-opaque</dt-text></dt-box>
         </dt-stack>
       </dt-stack>
       <dt-stack direction="row" align="start">
@@ -273,9 +279,6 @@ layout: Blank
           <dt-text v-if="surfaceName !== 'warning'" as="p" kind="code" size="100" strength="bold" tone="primary" v-dt-mode:invert>{{ surfaceName }}</dt-text>
           <dt-text v-else as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceName }}</dt-text>
         </dt-box>
-      </dt-stack>
-      <dt-stack direction="row" align="start">
-        <dt-box padding="300" surface="backdrop"><dt-text as="p" kind="code" size="100" strength="bold" tone="primary">backdrop</dt-text></dt-box>
       </dt-stack>
     </dt-stack>
     <dt-box surface="primary" padding="300" border-radius="200" v-dt-mode:invert>
@@ -309,66 +312,35 @@ layout: Blank
       </dt-stack>
     </dt-box>
     <dt-stack gap="200">
-      <dt-text as="h3" kind="label" size="200" strength="bold" tone="primary">Borders</dt-text>
       <dt-stack
-        v-for="borderRow in borderRows"
-        :key="borderRow.join()"
+        v-for="row in [
+          ['subtle', 'default', 'moderate', 'bold'],
+          ['critical', 'critical-subtle', 'critical-strong', 'info', 'info-subtle', 'info-strong', 'positive', 'positive-subtle', 'positive-strong', 'warning', 'warning-subtle', 'warning-strong', 'brand', 'brand-subtle', 'brand-strong'],
+        ]"
+        :key="row.join()"
         direction="row"
         align="stretch"
         gap="200"
       >
-        <dt-box v-for="borderName in borderRow" :key="borderName" padding="200" border-width="200" border-radius="500" :border-color="borderName">
-          <dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ borderName }}</dt-text>
+        <dt-box v-for="name in row" :key="name" padding="200" border-width="200" border-radius="500" :border-color="name">
+          <dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ name }}</dt-text>
         </dt-box>
       </dt-stack>
     </dt-stack>
-    <dt-box surface="primary" padding="300" border-radius="200" v-dt-mode:invert>
-      <dt-stack gap="200">
-        <dt-text as="h3" kind="label" size="200" strength="bold" tone="primary">Borders — inverted</dt-text>
-        <dt-stack
-          v-for="borderRow in borderRows"
-          :key="borderRow.join()"
-          direction="row"
-          align="stretch"
-          gap="200"
-        >
-          <dt-box v-for="borderName in borderRow" :key="borderName" padding="200" border-width="200" border-radius="500" :border-color="borderName">
-            <dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ borderName }}-inv</dt-text>
-          </dt-box>
-        </dt-stack>
-      </dt-stack>
-    </dt-box>
-    <dt-stack gap="200">
-      <dt-text as="h3" kind="label" size="200" strength="bold" tone="primary">Foreground (text tones)</dt-text>
-      <dt-stack direction="row" gap="100" align="baseline">
-        <dt-text v-for="toneName in foregroundTones" :key="toneName" :tone="toneName">{{ toneName }}</dt-text>
-      </dt-stack>
+    <dt-stack direction="row" gap="100" align="baseline">
+      <dt-text v-for="t in ['primary', 'secondary', 'tertiary', 'muted', 'disabled', 'placeholder', 'positive', 'positive-strong', 'warning', 'critical', 'critical-strong', 'info', 'info-strong']" :key="t" :tone="t">{{ t }}</dt-text>
     </dt-stack>
-    <dt-box surface="primary" padding="300" border-radius="200" v-dt-mode:invert>
-      <dt-stack gap="200">
-        <dt-text as="h3" kind="label" size="200" strength="bold" tone="primary">Foreground — inverted</dt-text>
-        <dt-stack direction="row" gap="100" align="baseline">
-          <dt-text v-for="toneName in foregroundTones" :key="toneName" :tone="toneName">{{ toneName }}</dt-text>
-        </dt-stack>
-      </dt-stack>
-    </dt-box>
-    <dt-stack gap="200">
-      <dt-text as="h3" kind="label" size="200" strength="bold" tone="primary">Links</dt-text>
-      <dt-stack direction="row" gap="100" align="baseline">
-        <dt-link v-for="linkTone in linkTones" :key="linkTone" href="#link" :tone="linkTone === 'base' ? undefined : linkTone">{{ capitalize(linkTone) }} link</dt-link>
-      </dt-stack>
+    <dt-stack direction="row" gap="100" align="baseline">
+      <dt-link v-for="t in ['base', 'critical', 'muted', 'positive', 'warning', 'info', 'mention']" :key="t" href="#link" :tone="t === 'base' ? undefined : t">{{ capitalize(t) }} link</dt-link>
     </dt-stack>
-    <dt-box surface="primary" padding="300" border-radius="200" v-dt-mode:invert>
-      <dt-stack gap="200">
-        <dt-text as="h3" kind="label" size="200" strength="bold" tone="primary">Links — inverted</dt-text>
-        <dt-stack direction="row" gap="100" align="baseline">
-          <dt-link v-for="linkTone in linkTones" :key="linkTone" href="#link" :tone="linkTone === 'base' ? undefined : linkTone">{{ capitalize(linkTone) }} link</dt-link>
-        </dt-stack>
-      </dt-stack>
-    </dt-box>
     <dt-stack gap="200">
       <dt-stack
-        v-for="row in buttonVariants"
+        v-for="row in [
+          { kind: undefined, importances: [undefined, 'outlined', 'clear'] },
+          { kind: 'critical', importances: [undefined, 'outlined', 'clear'] },
+          { kind: 'positive', importances: [undefined, 'outlined', 'clear'] },
+          { kind: 'muted', importances: ['clear', 'outlined'] },
+        ]"
         :key="row.kind || 'default'"
         gap="100"
         direction="row"
@@ -382,17 +354,17 @@ layout: Blank
       <dt-presence presence="away" />
     </dt-stack>
     <dt-stack direction="row" gap="100">
-      <template v-for="kind in badgeKinds" :key="kind || 'text'">
-        <dt-badge v-for="t in badgeTypes" :key="`${kind || 'text'}-${t || 'default'}`" :text="kind === 'count' ? '1' : 'Label'" :kind="kind" :type="t" />
+      <template v-for="kind in [undefined, 'count']" :key="kind || 'text'">
+        <dt-badge v-for="t in [undefined, 'info', 'positive', 'warning', 'critical']" :key="`${kind || 'text'}-${t || 'default'}`" :text="kind === 'count' ? '1' : 'Label'" :kind="kind" :type="t" />
       </template>
     </dt-stack>
     <dt-stack direction="row" gap="200">
       <dt-stack v-for="important in [false, true]" :key="important" gap="100">
-        <example-notice v-for="k in noticeKinds" :key="k" :important="important" :kind="k" :title="`${capitalize(k)} title (optional)`" />
+        <example-notice v-for="k in ['base', 'critical', 'info', 'positive', 'warning']" :key="k" :important="important" :kind="k" :title="`${capitalize(k)} title (optional)`" />
       </dt-stack>
     </dt-stack>
     <dt-stack direction="row" gap="200">
-      <dt-stack v-for="k in progressKinds" :key="k" gap="100">
+      <dt-stack v-for="k in ['default', 'brand', 'critical', 'positive', 'warning', 'info', 'ai']" :key="k" gap="100">
         <dt-progress-circle :kind="k" :progress="66" :aria-label="`kind ${k}`" />
       </dt-stack>
     </dt-stack>
@@ -427,50 +399,6 @@ const messages = {
   critical: { "message": "Critical validation message", "type": "critical" },
   positive: { "message": "Positive validation message", "type": "positive" },
 };
-
-// Each section renders twice: once normally and once inside a v-dt-mode:invert
-// wrapper, which swaps all tokens to their *-inverted counterparts automatically.
-
-const primarySurfaces = [
-  { name: 'primary' },
-  { name: 'secondary' },
-  { name: 'moderate' },
-  { name: 'bold' },
-  { name: 'strong', dark: true },
-  { name: 'contrast', dark: true },
-];
-const semanticSubtleSurfaces = [
-  'info-subtle', 'info',
-  'brand-subtle', 'brand',
-  'positive-subtle', 'positive',
-  'warning-subtle', 'warning',
-  'critical-subtle', 'critical',
-];
-const semanticStrongSurfaces = [
-  'info-strong', 'brand-strong', 'positive-strong', 'warning-strong', 'critical-strong',
-];
-
-const borderRows = [
-  ['subtle', 'default', 'moderate', 'bold'],
-  ['critical-subtle', 'critical', 'critical-strong', 'info-subtle', 'info', 'info-strong', 'positive-subtle', 'positive', 'positive-strong', 'warning-subtle', 'warning', 'warning-strong', 'brand-subtle', 'brand', 'brand-strong'],
-  ['focus', 'accent'],
-];
-
-const foregroundTones = [
-  'primary', 'secondary', 'tertiary', 'muted', 'disabled', 'placeholder',
-  'positive', 'warning', 'critical', 'info',
-];
-const linkTones = ['base', 'critical', 'muted', 'positive', 'warning', 'info', 'mention'];
-const buttonVariants = [
-  { kind: undefined, importances: [undefined, 'outlined', 'clear'] },
-  { kind: 'critical', importances: [undefined, 'outlined', 'clear'] },
-  { kind: 'positive', importances: [undefined, 'outlined', 'clear'] },
-  { kind: 'muted', importances: ['clear', 'outlined'] },
-];
-const badgeKinds = [undefined, 'count'];
-const badgeTypes = [undefined, 'info', 'positive', 'warning', 'critical'];
-const noticeKinds = ['base', 'critical', 'info', 'positive', 'warning'];
-const progressKinds = ['default', 'brand', 'critical', 'positive', 'warning', 'info', 'ai'];
 
 const {
   currentMode,

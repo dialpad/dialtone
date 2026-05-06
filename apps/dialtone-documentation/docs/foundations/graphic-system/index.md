@@ -1,7 +1,6 @@
 ---
 title: Graphic System
 description: Abstract graphics and illustrations used across Dialpad's brand and product surfaces.
-download_url: /downloads/#graphic
 thumb: true
 keywords: ["visual", "brand", "image"]
 ---

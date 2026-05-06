@@ -135,7 +135,7 @@ function _extractFrontmatter (app, path, options, exceptions = []) {
         ...page.frontmatter,
       };
     })
-    .sort((a, b) => sortingArr.indexOf(a.name) - sortingArr.indexOf(b.name));
+    .sort((a, b) => sortingArr.indexOf(a.fileName) - sortingArr.indexOf(b.fileName));
 }
 
 function _extractComponentStatus (app) {

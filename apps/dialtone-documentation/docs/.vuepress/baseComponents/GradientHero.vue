@@ -6,23 +6,9 @@
       kind="headline"
       :size="600"
       strength="medium"
-      class="d-h100p d-w100p d-d-grid d-plc-center d-ta-center d-wmx-1600 d-m-auto d-p-400"
-      style="
-        font-size: 64px;
-        font-family: var(--dt-font-family-expressive);
-        text-wrap: balance;
-        opacity: var(--text-opacity);
-        transform: translateY(var(--text-translate-y, 0px));
-        transition: none;
-      "
+      class="d-h100p d-w100p d-d-grid d-plc-center d-ta-center d-wmx-1600 d-m-auto d-p-400 home-gradient-hero-title"
     >
-      <div
-        style="
-          background: linear-gradient(180deg, var(--dt-color-purple-900), var(--dt-color-purple-1000));
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        "
-      >
+      <div class="home-gradient-hero-title__text">
         Making every business, a better business through design.
       </div>
     </dt-text>
@@ -34,7 +20,23 @@
 // Animations are controlled by parent page's scroll handler that updates CSS variables
 </script>
 
-<style>
+<style lang="less">
 /* Styles are inherited from parent page's .gradient-overlay definitions */
 /* Unscoped to allow parent's dynamic CSS variable updates to work */
+
+.home-gradient-hero-title {
+  font-size: 64px;
+  font-family: var(--dt-font-family-expressive);
+  text-wrap: balance;
+  opacity: var(--text-opacity);
+  transform: translateY(var(--text-translate-y, 0px));
+  transition: none;
+
+  &__text {
+    background: linear-gradient(180deg, var(--dt-color-purple-900), var(--dt-color-purple-1000));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+}
 </style>

@@ -284,6 +284,10 @@
                     "link": "/guides/migration/chip-interactive/"
                   },
                   {
+                    "text": "Scrollbar :never → :always",
+                    "link": "/guides/migration/scrollbar-always/"
+                  },
+                  {
                     "text": "Vue 2 Removal",
                     "link": "/guides/migration/vue2-removal/"
                   }
@@ -291,7 +295,8 @@
               },
               {
                 "text": "MCP Server",
-                "link": "/guides/mcp-server/"
+                "link": "/guides/mcp-server/",
+                "status": "new"
               },
               {
                 "text": "Getting Started",
@@ -1028,7 +1033,8 @@
           {
             "text": "Vue Utilities",
             "link": "/functions-and-utilities/",
-            "icon": "code"
+            "icon": "code",
+            "status": "new"
           }
         ]
       }
