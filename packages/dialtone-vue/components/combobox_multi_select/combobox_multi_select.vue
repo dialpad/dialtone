@@ -525,7 +525,7 @@ export default {
         await this.$nextTick();
         const input = this.getInput();
         this.revertInputPadding(input);
-        this.initialInputHeight = input.getBoundingClientRect().height;
+        this.setInitialInputHeight();
         this.setInputPadding();
         this.setChipsTopPosition();
       },
@@ -766,7 +766,14 @@ export default {
     setInitialInputHeight () {
       const input = this.getInput();
       if (!input) return;
+      // Clear any previous lock so we measure the natural height for the current size
+      input.style.minHeight = '';
+      input.style.height = '';
       this.initialInputHeight = input.getBoundingClientRect().height;
+      // Pin a min-height floor so chip padding can't shrink the visible input,
+      // and release the fixed height so padding grows the box when chips wrap.
+      input.style.minHeight = `${this.initialInputHeight}px`;
+      input.style.height = 'auto';
     },
 
     async handleInputFocusIn () {
