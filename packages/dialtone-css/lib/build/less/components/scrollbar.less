@@ -30,6 +30,28 @@
         opacity: var(--dt-opacity-1100);
       }
     }
+
+    // Track offsets via CSS custom properties set by v-dt-scrollbar directive.
+    // The base rules (0,3,0) beat OS's non-cornerless rules (0,1,0).
+    // The cornerless overrides (0,4,0) beat OS's cornerless rules (0,3,0) which reset
+    // top/bottom on vertical and left/right on horizontal — regardless of import order.
+    &.os-scrollbar-vertical {
+      inset-block-start: var(--dt-scrollbar-offset-block-start, 0);
+      inset-inline-end: var(--dt-scrollbar-offset-inline-end, 0);
+    }
+
+    &.os-scrollbar-vertical.os-scrollbar-cornerless {
+      inset-block: var(--dt-scrollbar-offset-block-start, 0) var(--dt-scrollbar-offset-block-end, 0);
+    }
+
+    &.os-scrollbar-horizontal {
+      inset-block-end: var(--dt-scrollbar-offset-block-end, 0);
+      inset-inline-start: var(--dt-scrollbar-offset-inline-start, 0);
+    }
+
+    &.os-scrollbar-horizontal.os-scrollbar-cornerless {
+      inset-inline: var(--dt-scrollbar-offset-inline-start, 0) var(--dt-scrollbar-offset-inline-end, 0);
+    }
   }
 }
 

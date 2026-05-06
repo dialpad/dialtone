@@ -6,7 +6,7 @@ import '@dialpad/dialtone-tokens/layered/tokens-core.css';
 import '@dialpad/dialtone-tokens/layered/tokens-base-colors.css';
 import '@dialpad/dialtone-tokens/layered/tokens-dp-colors.css';
 import { addons } from 'storybook/preview-api';
-import { setTheme, setMode, setBrand, setContrast, initDialtoneTheme } from '@dialpad/dialtone-tokens/themes/config';
+import { setMode, setBrand, setContrast, initDialtoneTheme } from '@dialpad/dialtone-tokens/themes/config';
 
 // Layered theme imports
 let Dp, Tmo, Aegean, Botany, Buttercream, HighDesert, Melon, Plum, Sunflower, VerdantHaze;
@@ -45,7 +45,7 @@ import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
 import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '@/common/emoji';
 import customEmojiJson from '@/common/custom-emoji.json';
 import { dialtoneDarkTheme, dialtoneLightTheme } from './dialtone-themes.js';
-import { DialtoneDocsPage } from './DialtoneDocsPage.jsx';
+import { DialtoneDocsPage } from './DialtoneDocsPage.js';
 import { DtTooltipDirective } from '@/directives/tooltip_directive';
 import { DtScrollbarDirective } from '@/directives/scrollbar_directive';
 import { DtModeDirective } from '@/directives/mode_directive';
@@ -63,7 +63,7 @@ let currentDarkMode = (() => {
       const parsed = JSON.parse(storedValue);
       return parsed.current === 'dark';
     }
-  } catch (e) {
+  } catch {
     // Ignore errors
   }
   return false; // Default to light mode
@@ -263,13 +263,10 @@ export default {
           };
         }, [channel, setDark]);
 
-        return (
-          <DocsContainer
-            theme={isDark ? dialtoneDarkTheme : dialtoneLightTheme}
-            context={props.context}
-          >
-            {children}
-          </DocsContainer>
+        return React.createElement(
+          DocsContainer,
+          { theme: isDark ? dialtoneDarkTheme : dialtoneLightTheme, context: props.context },
+          children,
         );
       },
     },
@@ -285,5 +282,5 @@ export default {
     },
   ],
 
-  tags: ['autodocs']
+  tags: ['autodocs'],
 };

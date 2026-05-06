@@ -39,6 +39,7 @@
       <span v-html="$attrs.header" />
     </template>
     <template #list>
+      <!-- eslint-disable-next-line dialtone/deprecated-stack-flow-classes -->
       <ul
         class="d-ps-relative d-stack2 d-m-50 d-px-0"
       >

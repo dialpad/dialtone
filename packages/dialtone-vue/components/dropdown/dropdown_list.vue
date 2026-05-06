@@ -16,7 +16,7 @@
         {{ heading }}
       </dt-text>
     </dt-stack>
-    <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events -->
+    <!-- eslint-disable-next-line vuejs-accessibility/mouse-events-have-key-events, dialtone/deprecated-stack-flow-classes -->
     <ul
       :class="['d-ps-relative', 'd-stack2', 'd-px-0', listClass]"
       data-qa="dt-dropdown-list-wrapper"

@@ -213,7 +213,7 @@ The migration tool intelligently handles various edge cases:
 **Skipped (with warnings):**
 
 - `d-fl-col*` - Deprecated flex column system
-- `d-stack*`, `d-flow*` - Auto-spacing utilities (margin-based, incompatible with gap)
+- `d-stack*`, `d-flow*` - Auto-spacing utilities (margin-based, incompatible with gap). Also flagged by the [`deprecated-stack-flow-classes`](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-stack-flow-classes.md) ESLint rule, which suggests `<dt-stack>` with the equivalent `gap` prop. The rule's docs include a px → `gap` prop mapping table.
 - `d-d-inline-flex` - Inline flex containers (DtStack is block-level only)
 - Elements with `ref` attributes used for DOM manipulation (see [Ref Attributes](#ref-attributes) below)
 - Dynamic `:class` bindings containing flex utilities (see [Dynamic Class Bindings](#dynamic-class-bindings))

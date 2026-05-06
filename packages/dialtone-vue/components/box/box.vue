@@ -55,7 +55,7 @@ const props = defineProps({
   /**
    * Custom scrollbar via OverlayScrollbars. When set, an inner viewport
    * wrapper (.d-box__scrollbar-content) is inserted automatically.
-   * @values leave, scroll, move, never
+   * @values leave, scroll, move, always
    */
   scrollbar: { type: [String, Boolean], default: undefined, validator: scrollbarValidator },
 

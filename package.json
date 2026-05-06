@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.181.0",
+  "version": "9.183.0-next.1",
   "packageManager": "pnpm@9.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
@@ -45,7 +45,8 @@
   ],
   "bin": {
     "dialtone-migrate-flex-to-stack": "./dist/js/dialtone_migrate_flex_to_stack/index.mjs",
-    "dialtone-migrate-link-rendering": "./dist/js/dialtone_migrate_link_rendering/index.mjs"
+    "dialtone-migrate-link-rendering": "./dist/js/dialtone_migrate_link_rendering/index.mjs",
+    "dialtone-migrate-chip-interactive": "./dist/js/dialtone_migrate_chip_interactive/index.mjs"
   },
   "exports": {
     "./CHANGELOG.json": "./CHANGELOG.json",
@@ -58,22 +59,22 @@
       "require": "./dist/tokens/postcss/*.cjs"
     },
     "./vue": {
-      "types": "./dist/vue3/types/index.d.ts",
+      "types": "./dist/vue3/index.d.ts",
       "import": "./dist/vue3/dialtone-vue.js",
       "require": "./dist/vue3/dialtone-vue.cjs"
     },
     "./vue/lib/*": {
-      "types": "./dist/vue3/types/index.d.ts",
+      "types": "./dist/vue3/index.d.ts",
       "import": "./dist/vue3/lib/*/index.js",
       "require": "./dist/vue3/lib/*/index.cjs"
     },
     "./vue3": {
-      "types": "./dist/vue3/types/index.d.ts",
+      "types": "./dist/vue3/index.d.ts",
       "import": "./dist/vue3/dialtone-vue.js",
       "require": "./dist/vue3/dialtone-vue.cjs"
     },
     "./vue3/lib/*": {
-      "types": "./dist/vue3/types/index.d.ts",
+      "types": "./dist/vue3/index.d.ts",
       "import": "./dist/vue3/lib/*/index.js",
       "require": "./dist/vue3/lib/*/index.cjs"
     },

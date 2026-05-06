@@ -30,6 +30,7 @@
             v-for="(item, index) in selectedItems"
             ref="chips"
             :key="`${index}-${item}`"
+            :interactive="true"
             :label-class="['d-chip__label']"
             :class="[
               'd-recipe-combobox-multi-select__chip',

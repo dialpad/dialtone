@@ -15,12 +15,12 @@ const settings = {
 //  @@ GENERAL
 const { src, dest, series } = require('gulp');
 const merge = require('merge-stream');
-const del = require('del');
 const rename = require('gulp-rename');
 const fs = require('fs');
 const jsonFormat = require('gulp-json-format');
 const { glob } = require('glob');
 const exec = require('child_process').exec;
+const execSync = require('child_process').execSync;
 
 //  @@ SVGs
 const path = settings.svgs ? require('path') : null;
@@ -62,30 +62,22 @@ const paths = {
 //  ================================================================================
 //  @@  CLEAN UP
 //  ================================================================================
-//  --  Function to clean out folders / files
-const cleanUp = (items) => {
-  // Make sure the feature is active before running
-  if (!settings.clean) return;
-
-  // Clean dist folders
-  return Promise.all([
-    del.sync(items),
-  ]);
-};
-
 //  --  Clean out ./dist
-const cleanDist = () => {
-  return cleanUp([paths.clean.dist]);
+const cleanDist = (done) => {
+  if (settings.clean && fs.existsSync('./dist')) execSync('rm -rf ./dist');
+  done();
 };
 
 //  --  Clean out ./src/icons
-const cleanIcons = () => {
-  return cleanUp([paths.clean.icons]);
+const cleanIcons = (done) => {
+  if (settings.clean && fs.existsSync('./src/icons')) execSync('rm -rf ./src/icons');
+  done();
 };
 
 //  --  Clean out ./src/illustrations
-const cleanIllustrations = () => {
-  return cleanUp([paths.clean.illustrations]);
+const cleanIllustrations = (done) => {
+  if (settings.clean && fs.existsSync('./src/illustrations')) execSync('rm -rf ./src/illustrations');
+  done();
 };
 
 //  ================================================================================

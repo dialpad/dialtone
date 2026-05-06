@@ -1,3 +1,114 @@
+# [8.80.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.80.0-next.3...dialtone-css/v8.80.0-next.4) (2026-05-01)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA fix multiple rich text issues ([#1240](https://github.com/dialpad/dialtone/issues/1240)) ([f285a3e](https://github.com/dialpad/dialtone/commit/f285a3ed7c8cd409e0e59bd269282723b85003e6))
+
+## [8.79.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.79.1...dialtone-css/v8.79.2) (2026-05-01)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA fix multiple rich text issues ([#1240](https://github.com/dialpad/dialtone/issues/1240)) ([f285a3e](https://github.com/dialpad/dialtone/commit/f285a3ed7c8cd409e0e59bd269282723b85003e6))
+
+## [8.79.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.79.0...dialtone-css/v8.79.1) (2026-04-24)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DP-185735 fix arrow key navigation broken near links ([#1217](https://github.com/dialpad/dialtone/issues/1217)) ([8e272e9](https://github.com/dialpad/dialtone/commit/8e272e921efa07bbc1ab9edad7a739a892db55ca))
+
+# [8.79.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.78.0...dialtone-css/v8.79.0) (2026-04-14)
+
+
+### Features
+
+* **Button:** DLT-3269 improve disabled styles ([#1180](https://github.com/dialpad/dialtone/issues/1180)) ([00a75f2](https://github.com/dialpad/dialtone/commit/00a75f2c8d958a2ea43d571df272bf6dce08b2de))
+
+# [8.78.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.77.0...dialtone-css/v8.78.0) (2026-04-07)
+
+
+### Features
+
+* **Resizable:** DLT-2097 add DtResizable panel layout component ([#1162](https://github.com/dialpad/dialtone/issues/1162)) ([c6bd3bc](https://github.com/dialpad/dialtone/commit/c6bd3bcbae65634015f3fa29bbe9043ae40baa90))
+
+# [8.77.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.76.0...dialtone-css/v8.77.0) (2026-03-19)
+
+
+### Features
+
+* DLT-3144 support truncation within message input bottom btns ([#1134](https://github.com/dialpad/dialtone/issues/1134)) ([22175f5](https://github.com/dialpad/dialtone/commit/22175f59d8b6e270f30992a31cd8604aaeed4984))
+
+# [8.76.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.75.1...dialtone-css/v8.76.0) (2026-03-17)
+
+
+### Features
+
+* **Editor:** DP-175912 extend table extension for table styling ([#1130](https://github.com/dialpad/dialtone/issues/1130)) ([b3793e7](https://github.com/dialpad/dialtone/commit/b3793e7976baba98ca84ada303c87e8e0935c1de))
+* **Loader:** DLT-2963 add track to loader ([#1133](https://github.com/dialpad/dialtone/issues/1133)) ([48a7a52](https://github.com/dialpad/dialtone/commit/48a7a527432f5e450d6dd9b12b4d64f8ef86bd2c))
+
+## [8.75.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.75.0...dialtone-css/v8.75.1) (2026-03-12)
+
+
+### Bug Fixes
+
+* **Popover:** DP-175009 revert visibility CSS that caused tippy-box click stealing ([#1119](https://github.com/dialpad/dialtone/issues/1119)) ([82ffcb6](https://github.com/dialpad/dialtone/commit/82ffcb64c3dbd4d80a170385cdcc4aa4b5218a83))
+
+# [8.75.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.74.0...dialtone-css/v8.75.0) (2026-03-09)
+
+
+### Features
+
+* **Button:** DLT-3086 update loading state to use dt-loader component ([#1111](https://github.com/dialpad/dialtone/issues/1111)) ([621c49a](https://github.com/dialpad/dialtone/commit/621c49a451dd653ad24bb4641f5cff36501670e3))
+
+# [8.74.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.73.0...dialtone-css/v8.74.0) (2026-03-06)
+
+
+### Features
+
+* **Loader,progress Circle:** NO-JIRA polish DtProgressCircle visual and align DtLoader visual with DtProgressCircle ([#1102](https://github.com/dialpad/dialtone/issues/1102)) ([7b9e9b6](https://github.com/dialpad/dialtone/commit/7b9e9b6d699515805bec979c7ffdf5b5f737b316))
+* **Progress Circle:** DLT-2983 add progress-circle component ([#1098](https://github.com/dialpad/dialtone/issues/1098)) ([c0f0e40](https://github.com/dialpad/dialtone/commit/c0f0e403acfd76d8db7dbe002862330d71571d5f))
+
+
+### Reverts
+
+* NO-JIRA revert progress circle polish commits for re-PR ([#1101](https://github.com/dialpad/dialtone/issues/1101)) ([a212c41](https://github.com/dialpad/dialtone/commit/a212c41e5c857ebabfacc9670e7a7054dcd9c6de))
+
+
+# [8.80.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.80.0-next.2...dialtone-css/v8.80.0-next.3) (2026-04-30)
+
+
+### Bug Fixes
+
+* **Css:** DLT-3321 reorder utility classes so single-direction wins over shorthand ([#1205](https://github.com/dialpad/dialtone/issues/1205)) ([df3bd74](https://github.com/dialpad/dialtone/commit/df3bd74d9ce6d2a58fd4c4e97ca511b3f7eca4ff))
+* **Css:** DLT-3336 register bgo, fco, bco vars as non-inheriting ([#1209](https://github.com/dialpad/dialtone/issues/1209)) ([0278620](https://github.com/dialpad/dialtone/commit/0278620b6c7b7e6cabe0c9e588acb194f30fb808))
+* **Rich Text Editor:** DP-185735 fix arrow key navigation broken near links ([#1217](https://github.com/dialpad/dialtone/issues/1217)) ([8e272e9](https://github.com/dialpad/dialtone/commit/8e272e921efa07bbc1ab9edad7a739a892db55ca))
+
+
+### Code Refactoring
+
+* **Box:** DLT-3333 rename percent prop values to p-suffix ([#1208](https://github.com/dialpad/dialtone/issues/1208)) ([e5fa5da](https://github.com/dialpad/dialtone/commit/e5fa5da83cd27bce1b3e5533a5503d2592ca0642))
+
+
+### Documentation
+
+* **Foundations, Homepage:** DLT-3349 DLT-3350 refresh foundations content and homepage ([#1228](https://github.com/dialpad/dialtone/issues/1228)) ([ab73dfd](https://github.com/dialpad/dialtone/commit/ab73dfd172aad9c04b5ac8078543aac0fdfb004a))
+* **Migration Guide:** NO-JIRA improve prop/slot migration guide ([#1227](https://github.com/dialpad/dialtone/issues/1227)) ([1328452](https://github.com/dialpad/dialtone/commit/1328452bf131125f79ec898e80773a4e811480e0))
+
+
+### Features
+
+* **Css Utilities, Design Tokens:** DLT-3330 DLT-3332 add off-scale pixel-indexed layout tokens and sizing utilities ([#1206](https://github.com/dialpad/dialtone/issues/1206)) ([1054875](https://github.com/dialpad/dialtone/commit/10548759c34e9db53396109ded36b5932b3525d8))
+* **Css Utilities, Eslint Plugin Dialtone:** DLT-3329 update border-radius css utilities and associated tooling ([#1211](https://github.com/dialpad/dialtone/issues/1211)) ([6bc3599](https://github.com/dialpad/dialtone/commit/6bc35991cff422b694f83b3b93184556e2c3475c))
+* **Css Utilities:** DLT-3357 DLT-3358 add ease-in and retune ease-out ([#1226](https://github.com/dialpad/dialtone/issues/1226)) ([961965a](https://github.com/dialpad/dialtone/commit/961965a8caace12352de528a6dc7272ec2a65c35))
+* **Design Tokens, Text, Link, Box, Css:** DLT-3338 add info semantic tokens and consumers ([#1210](https://github.com/dialpad/dialtone/issues/1210)) ([2f04b45](https://github.com/dialpad/dialtone/commit/2f04b45b8e44a223c81da839c4c1469e3d6e0285))
+* **Prose:** DLT-3245 new component ([#1169](https://github.com/dialpad/dialtone/issues/1169)) ([adee928](https://github.com/dialpad/dialtone/commit/adee92878ce6bdbcd4553d2e2d4a77dde1b2f00d))
+* **Scripts, Eslint, Stylelint:** DLT-3359 add success-to-positive migration tooling ([#1231](https://github.com/dialpad/dialtone/issues/1231)) ([0d652a5](https://github.com/dialpad/dialtone/commit/0d652a5b19770c47dd9d1a676f23477cdf877166))
+* **Scripts:** DLT-3033 DLT-3034 DLT-3035 add link-rendering migration codemod and ESLint rule ([#1233](https://github.com/dialpad/dialtone/issues/1233)) ([35a7238](https://github.com/dialpad/dialtone/commit/35a7238192a25f33a7b7020109f3005594b952e1))
+* **Scripts:** DLT-3304 add scripts/docs for migration props changes ([#1219](https://github.com/dialpad/dialtone/issues/1219)) ([589173f](https://github.com/dialpad/dialtone/commit/589173f2dd8acd82319da2f8a8171f7d3b1eb79b))
+* **Tokens, Css:** DLT-3331 rename success tokens and utility classes to positive ([#1230](https://github.com/dialpad/dialtone/issues/1230)) ([34bdff5](https://github.com/dialpad/dialtone/commit/34bdff5fced88803f45de606df3a204bc191265b))
+
 ## [8.79.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.79.0...dialtone-css/v8.79.1) (2026-04-24)
 
 
