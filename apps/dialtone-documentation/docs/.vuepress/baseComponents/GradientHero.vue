@@ -35,6 +35,7 @@
   &__text {
     background: linear-gradient(180deg, var(--dt-color-purple-900), var(--dt-color-purple-1000));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
   }
 }
