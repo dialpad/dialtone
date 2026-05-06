@@ -717,19 +717,15 @@ export default {
       input.style.paddingLeft = spaceLeft > this.reservedRightSpace ? `${left}px` : '4px';
 
       if (spaceLeft > this.reservedRightSpace && !isWrapped) {
-        // Chips fit on the same row as the input. Chip is centered against
-        // the input via CSS, so don't override the input's natural padding-top
-        // (which would grow the input — most visible on xs).
+        // Chip and cursor share the input's first row; chip is centered via CSS.
         return;
       }
 
       if (spaceLeft > this.reservedRightSpace) {
-        // Chips wrapped, cursor sits beside the last chip on the wrapped row.
         input.style.paddingTop = `${lastChip.offsetTop + 2}px`;
         return;
       }
 
-      // Last chip fills its row; cursor drops to the next line below.
       const chipsWrapperHeight = chipsWrapper.getBoundingClientRect().height - 4;
       const lastChipHeight = lastChip.getBoundingClientRect().height - 4;
       input.style.paddingTop = `${chipsWrapperHeight + lastChipHeight - 9}px`;
@@ -772,12 +768,11 @@ export default {
     setInitialInputHeight () {
       const input = this.getInput();
       if (!input) return;
-      // Clear any previous lock so we measure the natural height for the current size
+      // Reset before measuring the natural height for the current size.
       input.style.minHeight = '';
       input.style.height = '';
       this.initialInputHeight = input.getBoundingClientRect().height;
-      // Pin a min-height floor so chip padding can't shrink the visible input,
-      // and release the fixed height so padding grows the box when chips wrap.
+      // min-height floors the box; height: auto lets it grow when chips wrap.
       input.style.minHeight = `${this.initialInputHeight}px`;
       input.style.height = 'auto';
     },
