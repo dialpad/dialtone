@@ -394,5 +394,13 @@
         "type": "dimension"
       }
     }
+  },
+  "shell": {
+    "base": {
+      "material": {
+        "value": "sandstone",
+        "type": "other"
+      }
+    }
   }
 }

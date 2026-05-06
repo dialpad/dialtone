@@ -1,6 +1,10 @@
 {
   "shell": {
     "base": {
+      "material": {
+        "value": "sandstone",
+        "type": "other"
+      },
       "color": {
         "surface": {
           "value": "oklch(0.9667 0.0136 92.98)",

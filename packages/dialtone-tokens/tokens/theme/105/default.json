@@ -1,6 +1,10 @@
 {
   "shell": {
     "base": {
+      "material": {
+        "value": "jade",
+        "type": "other"
+      },
       "color": {
         "surface": {
           "value": "oklch(0.9326 0.0052 247.88)",

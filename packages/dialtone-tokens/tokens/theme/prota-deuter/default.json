@@ -1,57 +1,181 @@
 {
   "color": {
     "green": {
-      "50":   { "value": "{color.teal.50}",   "type": "color" },
-      "100":  { "value": "{color.teal.100}",  "type": "color" },
-      "200":  { "value": "{color.teal.200}",  "type": "color" },
-      "300":  { "value": "{color.teal.300}",  "type": "color" },
-      "400":  { "value": "{color.teal.400}",  "type": "color" },
-      "500":  { "value": "{color.teal.500}",  "type": "color" },
-      "600":  { "value": "{color.teal.600}",  "type": "color" },
-      "700":  { "value": "{color.teal.700}",  "type": "color" },
-      "800":  { "value": "{color.teal.800}",  "type": "color" },
-      "900":  { "value": "{color.teal.900}",  "type": "color" },
-      "950":  { "value": "{color.teal.950}",  "type": "color" },
-      "1000": { "value": "{color.teal.1000}", "type": "color" }
+      "50": {
+        "value": "{color.teal.50}",
+        "type": "color"
+      },
+      "100": {
+        "value": "{color.teal.100}",
+        "type": "color"
+      },
+      "200": {
+        "value": "{color.teal.200}",
+        "type": "color"
+      },
+      "300": {
+        "value": "{color.teal.300}",
+        "type": "color"
+      },
+      "400": {
+        "value": "{color.teal.400}",
+        "type": "color"
+      },
+      "500": {
+        "value": "{color.teal.500}",
+        "type": "color"
+      },
+      "600": {
+        "value": "{color.teal.600}",
+        "type": "color"
+      },
+      "700": {
+        "value": "{color.teal.700}",
+        "type": "color"
+      },
+      "800": {
+        "value": "{color.teal.800}",
+        "type": "color"
+      },
+      "900": {
+        "value": "{color.teal.900}",
+        "type": "color"
+      },
+      "950": {
+        "value": "{color.teal.950}",
+        "type": "color"
+      },
+      "1000": {
+        "value": "{color.teal.1000}",
+        "type": "color"
+      }
     },
     "red": {
-      "50":   { "value": "{color.magenta.50}",   "type": "color" },
-      "100":  { "value": "{color.magenta.100}",  "type": "color" },
-      "200":  { "value": "{color.magenta.200}",  "type": "color" },
-      "300":  { "value": "{color.magenta.300}",  "type": "color" },
-      "400":  { "value": "{color.magenta.400}",  "type": "color" },
-      "500":  { "value": "{color.magenta.500}",  "type": "color" },
-      "600":  { "value": "{color.magenta.600}",  "type": "color" },
-      "700":  { "value": "{color.magenta.700}",  "type": "color" },
-      "800":  { "value": "{color.magenta.800}",  "type": "color" },
-      "900":  { "value": "{color.magenta.900}",  "type": "color" },
-      "950":  { "value": "{color.magenta.950}",  "type": "color" },
-      "1000": { "value": "{color.magenta.1000}", "type": "color" }
+      "50": {
+        "value": "{color.magenta.50}",
+        "type": "color"
+      },
+      "100": {
+        "value": "{color.magenta.100}",
+        "type": "color"
+      },
+      "200": {
+        "value": "{color.magenta.200}",
+        "type": "color"
+      },
+      "300": {
+        "value": "{color.magenta.300}",
+        "type": "color"
+      },
+      "400": {
+        "value": "{color.magenta.400}",
+        "type": "color"
+      },
+      "500": {
+        "value": "{color.magenta.500}",
+        "type": "color"
+      },
+      "600": {
+        "value": "{color.magenta.600}",
+        "type": "color"
+      },
+      "700": {
+        "value": "{color.magenta.700}",
+        "type": "color"
+      },
+      "800": {
+        "value": "{color.magenta.800}",
+        "type": "color"
+      },
+      "900": {
+        "value": "{color.magenta.900}",
+        "type": "color"
+      },
+      "950": {
+        "value": "{color.magenta.950}",
+        "type": "color"
+      },
+      "1000": {
+        "value": "{color.magenta.1000}",
+        "type": "color"
+      }
     },
     "surface": {
-      "info":            { "value": "{color.blue.200}",  "type": "color" },
-      "positive":        { "value": "{color.green.200}", "type": "color" },
-      "positive-strong": { "value": "{color.green.700}", "type": "color" },
-      "positive-subtle": { "value": "{color.green.100}", "type": "color" },
+      "info": {
+        "value": "{color.blue.200}",
+        "type": "color"
+      },
+      "positive": {
+        "value": "{color.green.200}",
+        "type": "color"
+      },
+      "positive-strong": {
+        "value": "{color.green.700}",
+        "type": "color"
+      },
+      "positive-subtle": {
+        "value": "{color.green.100}",
+        "type": "color"
+      },
       "info-opaque": {
         "value": "{color.blue.300}",
         "type": "color",
-        "$extensions": { "studio.tokens": { "modify": { "type": "alpha", "value": "0.5", "space": "oklch" } } }
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": "0.5",
+              "space": "oklch"
+            }
+          }
+        }
       },
       "positive-opaque": {
         "value": "{color.green.300}",
         "type": "color",
-        "$extensions": { "studio.tokens": { "modify": { "type": "alpha", "value": "0.53", "space": "oklch" } } }
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": "0.53",
+              "space": "oklch"
+            }
+          }
+        }
       },
       "positive-subtle-opaque": {
         "value": "{color.green.200}",
         "type": "color",
-        "$extensions": { "studio.tokens": { "modify": { "type": "alpha", "value": "0.5", "space": "oklch" } } }
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": "0.5",
+              "space": "oklch"
+            }
+          }
+        }
       },
       "critical-opaque": {
         "value": "{color.magenta.300}",
         "type": "color",
-        "$extensions": { "studio.tokens": { "modify": { "type": "alpha", "value": "0.25", "space": "oklch" } } }
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": "0.25",
+              "space": "oklch"
+            }
+          }
+        }
+      }
+    }
+  },
+  "shell": {
+    "base": {
+      "material": {
+        "value": "sandstone",
+        "type": "other"
       }
     }
   }

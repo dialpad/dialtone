@@ -1,6 +1,10 @@
 {
   "shell": {
     "base": {
+      "material": {
+        "value": "sandstone",
+        "type": "other"
+      },
       "color": {
         "surface": {
           "value": "{color.berry.50}",

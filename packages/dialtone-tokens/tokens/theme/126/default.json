@@ -1,6 +1,10 @@
 {
   "shell": {
     "base": {
+      "material": {
+        "value": "amethyst",
+        "type": "other"
+      },
       "color": {
         "surface": {
           "value": "oklch(0.9308 0.0108 316.49)",
