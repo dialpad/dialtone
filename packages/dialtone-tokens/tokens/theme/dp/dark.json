@@ -2,7 +2,7 @@
   "color": {
     "foreground": {
       "primary": {
-        "value": "{color.black.900}",
+        "value": "{color.black.850}",
         "type": "color"
       },
       "secondary": {
