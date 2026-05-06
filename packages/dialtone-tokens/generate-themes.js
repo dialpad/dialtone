@@ -102,12 +102,31 @@ export default {
 }
 
 /**
+ * Read the declared material lock for a brand from its source token JSON.
+ * Returns the material name string (e.g. "sandstone") or null if the brand
+ * does not declare a lock OR has no source JSON (e.g. CSS-only variants like
+ * `expressive-sm` whose CSS is generated from a parent brand).
+ * @param {string} brandName
+ * @returns {string|null}
+ */
+function readBrandMaterial(brandName) {
+  const jsonPath = `./tokens/theme/${brandName}/default.json`;
+  if (!fs.existsSync(jsonPath)) return null;
+  return JSON.parse(fs.readFileSync(jsonPath, 'utf8')).shell?.base?.material?.value ?? null;
+}
+
+/**
  * Generate a brand override theme file
  * @param {string} brandName - The brand name (e.g., 'tmo', 'sunflower')
  */
 async function generateBrandThemeFile(brandName) {
   const fileName = `${brandName}.js`;
   const filePath = path.join(THEMES_OUTPUT_DIR, fileName);
+
+  const materialName = readBrandMaterial(brandName);
+  const materialExport = materialName
+    ? `  material: {\n    name: '${materialName}',\n  },\n`
+    : '';
 
   const content = `import BrandColors from '@dialpad/dialtone-tokens/layered/themes/tokens-${brandName}-colors.css?inline';
 
@@ -116,7 +135,7 @@ export default {
     css: BrandColors,
     name: '${brandName}',
   },
-};
+${materialExport}};
 `;
 
   fs.writeFileSync(filePath, content);

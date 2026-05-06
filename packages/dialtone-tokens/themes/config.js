@@ -317,6 +317,10 @@ export function setBrand(brandTheme, rootNode = document.documentElement) {
 
   _setStyleTag('dialtone-css-brand-colors', brandTheme.brand.css, rootNode);
   rootNode?.setAttribute('data-dt-brand', brandTheme.brand.name);
+
+  if (brandTheme.material?.name) {
+    setMaterial({ material: brandTheme.material }, rootNode);
+  }
 }
 
 /**
