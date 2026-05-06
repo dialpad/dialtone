@@ -95,35 +95,47 @@ Each of the colors listed above references these. For example, in Light mode
 `var(--dt-color-foreground-critical)` is an alias to
 `var(--dt-color-red-300)`, and will have a different value in Dark mode.
 
+<div :class="{ 'is-bare': !showDetails }">
 <dt-tab-group outlined activation-mode="auto" size="200">
   <template #tabs>
-    <dt-tab id="1" panel-id="2" selected>
-      Light Mode
-      <template #icon>
-        <dt-icon name="sun" size="200"></dt-icon>
-      </template>
-    </dt-tab>
-    <dt-tab id="3" panel-id="4">
-      Dark Mode
-      <template #icon>
-        <dt-icon name="moon" size="200"></dt-icon>
-      </template>
-    </dt-tab>
+    <dt-box inline-size="100p" padding-inline-end="200">
+      <dt-stack direction="row" gap="300" justify="space-between" align="baseline">
+        <dt-box>
+          <dt-tab id="1" panel-id="2" selected>
+            Light Mode
+            <template #icon>
+              <dt-icon name="sun" size="200"></dt-icon>
+            </template>
+          </dt-tab>
+          <dt-tab id="3" panel-id="4">
+            Dark Mode
+            <template #icon>
+              <dt-icon name="moon" size="200"></dt-icon>
+            </template>
+          </dt-tab>
+        </dt-box>
+        <dt-toggle size="sm" class="d-g-100" v-model="showDetails">
+          <dt-text kind="label" size="100" strength="normal">Show details</dt-text>
+        </dt-toggle>
+      </dt-stack>
+    </dt-box>
   </template>
-  <div>
-    <dt-tab-panel id="2" tab-id="1">
-      <ColorsCatalog mode="light"></ColorsCatalog>
-    </dt-tab-panel>
-    <dt-tab-panel id="4" tab-id="3">
-      <ColorsCatalog mode="dark"></ColorsCatalog>
-    </dt-tab-panel>
-  </div>
+  <dt-tab-panel id="2" tab-id="1">
+    <ColorsCatalog mode="light"></ColorsCatalog>
+  </dt-tab-panel>
+  <dt-tab-panel id="4" tab-id="3">
+    <ColorsCatalog mode="dark"></ColorsCatalog>
+  </dt-tab-panel>
 </dt-tab-group>
+</div>
 
 <script setup>
+import { ref } from 'vue';
 import DesignColorTable from '@baseComponents/DesignColorTable.vue';
 import ThemeColorTable from '@baseComponents/ThemeColorTable.vue';
 import ColorsCatalog from '@views/ColorsCatalog.vue';
+
+const showDetails = ref(true);
 
 /*
 * Remove unwanted background-clip classes
@@ -149,3 +161,13 @@ const statusTextColorsExclusionList = [
   'inverted',
 ];
 </script>
+
+<style>
+/* "Show details" toggle off — strip text + padding from each color stop so the
+   catalog reads as a stack of pure-color stripes. !important is needed to
+   override the d-px-150/d-py-100 utility classes on `.color-stop`. */
+.is-bare .color-stop__meta,
+.is-bare .color-stop__lc {
+  opacity: 0;
+}
+</style>

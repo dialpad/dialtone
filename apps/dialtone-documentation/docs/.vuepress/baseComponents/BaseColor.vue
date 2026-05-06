@@ -29,7 +29,7 @@
         align="center"
         justify="space-between"
         :class="[
-          'd-px-150 d-py-100 d-text-code--xs',
+          'color-stop d-px-150 d-py-100 d-text-code--xs',
           {
             'd-bbsr-300': index === 0,
             'd-bber-300': index === (stops.length - 1),
@@ -37,7 +37,7 @@
         ]"
         :style="`background-color: ${stop.value}`"
       >
-        <dt-stack gap="50" :class="fontColorClass(stop.lightness)">
+        <dt-stack gap="50" :class="['color-stop__meta', fontColorClass(stop.lightness)]">
           <dt-text as="strong" class="d-us-all">
             {{ `var(--dt-color-${colorName}-${stop.stop})` }}
           </dt-text>
@@ -47,7 +47,7 @@
         </dt-stack>
         <dt-text
           strength="bold"
-          :class="fontColorClass(stop.lightness)"
+          :class="['color-stop__lc', fontColorClass(stop.lightness)]"
         >
           {{ formattedContrast(activeContrast(stop)) }}
         </dt-text>

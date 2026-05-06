@@ -21,7 +21,6 @@
 import { inject, onMounted, ref } from 'vue';
 import BaseColor from '../baseComponents/BaseColor.vue';
 import Color from 'colorjs.io';
-import { alphabeticalSorter } from '@utilities';
 
 const tokensDocs = inject('tokensDocs');
 const props = defineProps({
@@ -161,32 +160,35 @@ function getContrastRatio (colorValue) {
   };
 }
 
+// Display order, left → right (red → magenta hue wheel, then achromatic black).
+// Edit this list to add/remove/reorder ramps.
+const RAMP_ORDER = [
+  'red', 'coral', 'gold', 'olive', 'green', 'teal',
+  'blue', 'indigo', 'purple', 'magenta', 'berry',
+  'black',
+];
+
 onMounted(() => {
-  colors.value = Object.keys(tokensDocs)
-    .filter(tokenName => /--dt-color-\w+-\d{2,4}$/.test(tokenName))
-    .sort(alphabeticalSorter)
-    .reduce((result, tokenName) => {
-      const colorName = tokenName.replace(/--dt-color-(\w+).*/, '$1');
-      const colorStop = tokenName.replace(/--dt-color-\w+-(\d{2,4})/, '$1');
-      const token = tokensDocs[tokenName][`base-${props.mode}`];
-      const colorValue = token?.value;
-      const contrastRatio = getContrastRatio(colorValue);
-
-      if (!result[colorName]) {
-        result[colorName] = { stops: [] };
-      }
-
-      const lightness = new Color(colorValue).to('oklch').coords[0];
-
-      result[colorName].stops.push({
-        stop: colorStop,
-        value: colorValue,
-        lightness,
-        primaryContrast: contrastRatio.primary,
-        invertedContrast: contrastRatio.primaryInverted,
-      });
-
-      return result;
-    }, {});
+  const result = {};
+  for (const colorName of RAMP_ORDER) {
+    const stops = Object.keys(tokensDocs)
+      .filter(t => new RegExp(`^--dt-color-${colorName}-\\d{2,4}$`).test(t))
+      .map(tokenName => {
+        const stop = tokenName.replace(/.*-(\d{2,4})$/, '$1');
+        const value = tokensDocs[tokenName][`base-${props.mode}`]?.value;
+        const lightness = new Color(value).to('oklch').coords[0];
+        const contrastRatio = getContrastRatio(value);
+        return {
+          stop,
+          value,
+          lightness,
+          primaryContrast: contrastRatio.primary,
+          invertedContrast: contrastRatio.primaryInverted,
+        };
+      })
+      .sort((a, b) => Number(a.stop) - Number(b.stop));
+    if (stops.length) result[colorName] = { stops };
+  }
+  colors.value = result;
 });
 </script>
