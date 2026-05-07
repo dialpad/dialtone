@@ -1,3 +1,10 @@
+# [1.2.0-next.8](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.7...combinator/v1.2.0-next.8) (2026-05-07)
+
+
+### Features
+
+* **Scrollbar:** DLT-3158 implement object props ([#1249](https://github.com/dialpad/dialtone/issues/1249)) ([09ff456](https://github.com/dialpad/dialtone/commit/09ff4561f2a84cd0cf8bb86bdd15c6ff2032d51e))
+
 # [1.2.0-next.7](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.6...combinator/v1.2.0-next.7) (2026-04-30)
 
 
