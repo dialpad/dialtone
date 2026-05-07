@@ -8,7 +8,7 @@ keywords: ["dark mode","light mode","color scheme"]
 ## Overview
 
 > [!BASE] In progress
-> This page is currently being worked on ,and may not reflect the current state of the theming system.
+> This page is currently being worked on, and may not reflect the current state of the theming system.
 
 Dialtone's theming system is a flexible foundation for creating consistent visual experiences. It lets you adapt the user interface to different contexts, preferences, and product variations. Our approach uses semantic color tokens to easily switch between themes and modes.
 
