@@ -335,16 +335,12 @@ describe('DtComboboxMultiSelect Tests', () => {
         await input.trigger('keydown', { key: 'Tab', code: 'Tab' });
       });
 
-      it('Should emit "input-keydown" once', () => {
-        expect(wrapper.emitted('input-keydown').length).toBe(1);
+      it('Should emit "keydown" once', () => {
+        expect(wrapper.emitted('keydown').length).toBe(1);
       });
 
-      it('Should emit "input-keydown" with a KeyboardEvent payload', () => {
-        expect(wrapper.emitted('input-keydown')[0][0]).toBeInstanceOf(KeyboardEvent);
-      });
-
-      it('Should not emit "keydown" (chip-only contract)', () => {
-        expect(wrapper.emitted('keydown')).toBeUndefined();
+      it('Should emit "keydown" with a KeyboardEvent payload', () => {
+        expect(wrapper.emitted('keydown')[0][0]).toBeInstanceOf(KeyboardEvent);
       });
     });
 
@@ -352,9 +348,9 @@ describe('DtComboboxMultiSelect Tests', () => {
       { key: 'Escape', code: 'Escape' },
       { key: 'Enter', code: 'Enter' },
       { key: 'Enter', code: 'NumpadEnter' },
-    ])('Should emit "input-keydown" for key=$key code=$code', async ({ key, code }) => {
+    ])('Should emit "keydown" for key=$key code=$code', async ({ key, code }) => {
       await input.trigger('keydown', { key, code });
-      expect(wrapper.emitted('input-keydown').length).toBe(1);
+      expect(wrapper.emitted('keydown').length).toBe(1);
     });
 
     describe('When chips are present', () => {
@@ -371,8 +367,12 @@ describe('DtComboboxMultiSelect Tests', () => {
           await chips.at(0).trigger('keydown', { key, code: key });
         });
 
-        it('Should still emit "keydown" from the chip', () => {
-          expect(wrapper.emitted('keydown').length).toBe(1);
+        it('Should emit "chip-keydown" from the chip', () => {
+          expect(wrapper.emitted('chip-keydown').length).toBe(1);
+        });
+
+        it('Should not emit unprefixed "keydown" from the chip', () => {
+          expect(wrapper.emitted('keydown')).toBeUndefined();
         });
 
         it(`Should not emit "${semanticEvent}"`, () => {
@@ -380,9 +380,9 @@ describe('DtComboboxMultiSelect Tests', () => {
         });
       });
 
-      it('Should still emit "keydown" when a key is pressed on a chip (backward compatibility)', async () => {
+      it('Should emit "chip-keydown" when a key is pressed on a chip', async () => {
         await chips.at(0).trigger('keydown', { key: 'ArrowLeft', code: 'ArrowLeft' });
-        expect(wrapper.emitted('keydown').length).toBe(1);
+        expect(wrapper.emitted('chip-keydown').length).toBe(1);
       });
     });
 
@@ -394,9 +394,9 @@ describe('DtComboboxMultiSelect Tests', () => {
         await wrapper.setProps({ disabled: true });
       });
 
-      it('Should not emit "input-keydown"', async () => {
+      it('Should not emit "keydown"', async () => {
         await input.trigger('keydown', { key: 'Tab', code: 'Tab' });
-        expect(wrapper.emitted('input-keydown')).toBeUndefined();
+        expect(wrapper.emitted('keydown')).toBeUndefined();
       });
 
       it('Should not emit "escape"', async () => {

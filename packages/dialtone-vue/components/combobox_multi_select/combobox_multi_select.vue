@@ -417,8 +417,8 @@ export default {
     'keyup',
 
     /**
-     * Native keydown event fired when a key is pressed while a chip is focused.
-     * For input-level keystrokes, listen to `input-keydown`.
+     * Native keydown event fired when a key is pressed in the text input.
+     * For the common Escape and Enter cases, listen to `escape` / `enter` instead.
      *
      * @event keydown
      * @type {KeyboardEvent}
@@ -426,14 +426,12 @@ export default {
     'keydown',
 
     /**
-     * Native keydown event fired when a key is pressed while the text input is focused.
-     * Use this to handle arbitrary keys (e.g., Tab) in the search input. For the
-     * common Escape and Enter cases, listen to `escape` / `enter` instead.
+     * Native keydown event fired when a key is pressed while a chip is focused.
      *
-     * @event input-keydown
+     * @event chip-keydown
      * @type {KeyboardEvent}
      */
-    'input-keydown',
+    'chip-keydown',
 
     /**
      * Native escape event fired when Escape is pressed in the text input.
@@ -483,7 +481,7 @@ export default {
       return {
         keydown: event => {
           this.onChipKeyDown(event);
-          this.$emit('keydown', event);
+          this.$emit('chip-keydown', event);
         },
       };
     },
@@ -501,7 +499,7 @@ export default {
         onKeydown: event => {
           if (this.disabled) return;
           this.onInputKeyDown(event);
-          this.$emit('input-keydown', event);
+          this.$emit('keydown', event);
           // Use event.key (not event.code) so NumpadEnter normalizes to 'Enter'
           // and consumers don't have to special-case the numpad.
           const key = event.key?.toLowerCase();
