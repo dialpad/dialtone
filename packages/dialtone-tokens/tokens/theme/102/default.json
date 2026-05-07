@@ -2,7 +2,7 @@
   "shell": {
     "base": {
       "material": {
-        "value": "jade",
+        "value": "iron",
         "type": "other"
       },
       "color": {

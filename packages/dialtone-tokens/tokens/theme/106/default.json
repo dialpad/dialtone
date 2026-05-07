@@ -2,7 +2,7 @@
   "shell": {
     "base": {
       "material": {
-        "value": "sandstone",
+        "value": "iron",
         "type": "other"
       },
       "color": {
