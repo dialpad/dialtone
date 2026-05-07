@@ -409,14 +409,6 @@ export default {
     'max-selected',
 
     /**
-     * Native keyup event
-     *
-     * @event keyup
-     * @type {KeyboardEvent}
-      */
-    'keyup',
-
-    /**
      * Native keydown event fired when a key is pressed in the text input.
      * For the common Escape and Enter cases, listen to `escape` / `enter` instead.
      *
@@ -510,10 +502,6 @@ export default {
           } else if (key === 'enter') {
             this.$emit('enter', event);
           }
-        },
-
-        onKeyup: event => {
-          this.$emit('keyup', event);
         },
 
         onClick: () => {
