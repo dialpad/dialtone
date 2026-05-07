@@ -136,6 +136,12 @@ export const argTypesData = {
       disable: true,
     },
   },
+  dialogClass: {
+    description: 'Additional class for the popover dialog element.',
+    control: {
+      type: 'text',
+    },
+  },
 };
 
 // Story Collection

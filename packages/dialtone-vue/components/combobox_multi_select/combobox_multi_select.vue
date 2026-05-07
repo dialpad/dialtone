@@ -10,6 +10,7 @@
     :has-suggestion-list="hasSuggestionList"
     content-width="anchor"
     :append-to="appendTo"
+    :dialog-class="dialogClass"
     :transition="transition"
     v-bind="extractNonListeners($attrs)"
     @select="onComboboxSelect"
@@ -372,6 +373,14 @@ export default {
     disabled: {
       type: Boolean,
       default: false,
+    },
+
+    /**
+     * Additional class for the popover dialog element.
+     */
+    dialogClass: {
+      type: [String, Object, Array],
+      default: '',
     },
   },
 
