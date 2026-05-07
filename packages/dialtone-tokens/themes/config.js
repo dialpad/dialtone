@@ -34,6 +34,9 @@ let initializationState = null;
  * @property {Object} brand - Brand-specific overrides
  * @property {string} brand.name - Brand identifier (e.g., 'dp', 'tmo')
  * @property {string} brand.css - Brand override CSS
+ * @property {Object} [material] - Optional brand-locked material declaration; absent on free-choice brands (dp, tmo)
+ * @property {string} [material.name] - Material identifier (e.g., 'jade', 'sandstone')
+ * @property {string} [material.css] - Optional inlined material CSS
  */
 
 /**
@@ -318,7 +321,11 @@ export function setBrand(brandTheme, rootNode = document.documentElement) {
   _setStyleTag('dialtone-css-brand-colors', brandTheme.brand.css, rootNode);
   rootNode?.setAttribute('data-dt-brand', brandTheme.brand.name);
 
-  if (brandTheme.material?.name) {
+  // Apply directly when the brand inlines material CSS (or is sandstone, the
+  // reset case). Brands that only declare a name rely on the consumer to
+  // resolve and call setMaterial separately.
+  if (brandTheme.material?.name &&
+      (brandTheme.material.name === 'sandstone' || typeof brandTheme.material.css === 'string')) {
     setMaterial({ material: brandTheme.material }, rootNode);
   }
 }
@@ -603,6 +610,22 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
     mode: mode,
     contrast: 'default',
   };
+}
+
+/**
+ * @param {BrandTheme} brandTheme
+ * @returns {string|null} the locked material name, or null when the brand is free-choice
+ */
+export function getBrandMaterial(brandTheme) {
+  return brandTheme?.material?.name ?? null;
+}
+
+/**
+ * @param {BrandTheme} brandTheme
+ * @returns {boolean}
+ */
+export function hasBrandMaterialLock(brandTheme) {
+  return getBrandMaterial(brandTheme) !== null;
 }
 
 /**

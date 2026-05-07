@@ -77,7 +77,7 @@
       id="theme-toggle-dropdown"
       :hidden="!showThemeSwitcher"
       navigation-type="arrow-keys"
-      placement="bottom-start"
+      placement="bottom"
       class="theme-toggle-dropdown"
       max-height="33vh"
     >
@@ -192,7 +192,7 @@
         </dt-list-item-group>
       </template>
     </dt-dropdown>
-    <dt-dropdown navigation-type="arrow-keys" placement="bottom-start">
+    <dt-dropdown navigation-type="arrow-keys" placement="bottom">
       <template #anchor>
         <dt-button
           v-dt-tooltip:bottom="`Mode: ${capitalize(currentMode)}`"
@@ -270,24 +270,26 @@
             </template>
           </dt-list-item>
         </dt-list-item-group>
-        <dt-dropdown-separator />
-        <dt-list-item-group
-          heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
-          heading="Material"
-        >
-          <dt-list-item
-            v-for="material in materials"
-            :key="material"
-            role="menuitem"
-            navigation-type="arrow-keys"
-            @click="setMaterial(material)"
+        <template v-if="!isMaterialLocked">
+          <dt-dropdown-separator />
+          <dt-list-item-group
+            heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
+            heading="Material"
           >
-            {{ formatMaterial(material) }}
-            <template #end>
-              <dt-icon :class="{ 'd-o0': currentMaterial !== material }" name="check" size="200" />
-            </template>
-          </dt-list-item>
-        </dt-list-item-group>
+            <dt-list-item
+              v-for="material in materials"
+              :key="material"
+              role="menuitem"
+              navigation-type="arrow-keys"
+              @click="setMaterial(material)"
+            >
+              {{ formatMaterial(material) }}
+              <template #end>
+                <dt-icon :class="{ 'd-o0': currentMaterial !== material }" name="check" size="200" />
+              </template>
+            </dt-list-item>
+          </dt-list-item-group>
+        </template>
       </template>
     </dt-dropdown>
     <dt-button
@@ -393,7 +395,6 @@ const {
   currentMode,
   currentTheme,
   currentContrast,
-  currentMaterial,
   currentModeIconName,
   setMode,
   setContrast,
@@ -403,6 +404,8 @@ const {
   numberedThemes,
   formatThemeName,
   materials,
+  currentMaterial,
+  isMaterialLocked,
 } = useThemeManager({ includeThemes: true });
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);

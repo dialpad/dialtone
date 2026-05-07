@@ -6,6 +6,7 @@ import {
   setBrand,
   setContrast as setContrastConfig,
   setMaterial as setMaterialConfig,
+  getBrandMaterial,
 } from '@dialpad/dialtone-tokens/themes/config';
 
 const DEFAULT_MATERIAL = 'sandstone';
@@ -58,6 +59,13 @@ export function useThemeManager(options = {}) {
         return 'circle-half-filled';
     }
   });
+
+  // `themes` is provided synchronously in `enhance` (client.js), before any
+  // component mounts — so it's safe to read non-reactively here.
+  const activeBrandModule = computed(() => themes?.[currentTheme.value] ?? null);
+  const lockedMaterial = computed(() => getBrandMaterial(activeBrandModule.value));
+  const isMaterialLocked = computed(() => lockedMaterial.value !== null);
+  const displayedMaterial = computed(() => lockedMaterial.value ?? currentMaterial.value);
 
   /**
    * Computed resolved mode that converts 'system' to actual 'light' or 'dark'
@@ -226,7 +234,9 @@ export function useThemeManager(options = {}) {
 
     const brandName = currentTheme.value || 'dp';
     const contrast = currentContrast.value || 'default';
-    const material = currentMaterial.value || DEFAULT_MATERIAL;
+    // displayedMaterial supersedes currentMaterial on locked brands, so the
+    // user's saved preference is preserved for round-trip back to dp/tmo.
+    const material = displayedMaterial.value || DEFAULT_MATERIAL;
 
     // Use shared setMode function from config.js (handles attribute setting)
     setModeConfig(mode, document.documentElement);
@@ -277,6 +287,9 @@ export function useThemeManager(options = {}) {
     // Computed
     currentModeIconName,
     resolvedMode,
+    isMaterialLocked,
+    lockedMaterial,
+    displayedMaterial,
 
     // Methods
     setMode,
