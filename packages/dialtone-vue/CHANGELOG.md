@@ -1,3 +1,22 @@
+# [3.220.0-next.5](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.220.0-next.4...dialtone-vue/v3.220.0-next.5) (2026-05-07)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** bubble menu error ([68e3591](https://github.com/dialpad/dialtone/commit/68e359138b1c82094cad5fce9451bdc8da55289e))
+
+
+### Code Refactoring
+
+* **Components:** dlt-3196 components to pascal case ([#1255](https://github.com/dialpad/dialtone/issues/1255)) ([aa6d259](https://github.com/dialpad/dialtone/commit/aa6d259786c78da49a91cbd5f5bfc102ae9bfe1e))
+
+
+### Features
+
+* **Chip:** DLT-3195 change interactive prop default from true to false ([#1246](https://github.com/dialpad/dialtone/issues/1246)) ([30a5ea2](https://github.com/dialpad/dialtone/commit/30a5ea2791db1fe740adff15ac8abafa986e3242))
+* **Eslint Plugin Dialtone:** DLT-3365 add deprecated-stack-flow-classes rule ([#1247](https://github.com/dialpad/dialtone/issues/1247)) ([8554f5a](https://github.com/dialpad/dialtone/commit/8554f5a4a087d666265b9e4ce50587fced4adaa3))
+* **Scrollbar:** DLT-3158 implement object props ([#1249](https://github.com/dialpad/dialtone/issues/1249)) ([09ff456](https://github.com/dialpad/dialtone/commit/09ff4561f2a84cd0cf8bb86bdd15c6ff2032d51e))
+
 # [3.220.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.220.0-next.3...dialtone-vue/v3.220.0-next.4) (2026-05-01)
 
 
