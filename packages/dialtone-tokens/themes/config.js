@@ -334,24 +334,30 @@ export function setBrand(brandTheme, rootNode = document.documentElement) {
   _setStyleTag('dialtone-css-brand-colors', brandTheme.brand.css, rootNode);
   rootNode?.setAttribute('data-dt-brand', brandTheme.brand.name);
 
-  // Auto-apply the brand's locked material if declared.
+  _applyBrandLockedMaterial(brandTheme, rootNode);
+}
+
+function _applyBrandLockedMaterial(brandTheme, rootNode) {
   const lockName = brandTheme.material?.name;
-  if (lockName) {
-    if (typeof brandTheme.material.css === 'string' || lockName === 'sandstone') {
-      setMaterial({ material: brandTheme.material }, rootNode);
-    } else {
-      const theme = MATERIAL_THEMES[`material-${lockName}`];
-      if (theme) {
-        setMaterial(theme, rootNode);
-      } else {
-        console.warn(
-          `[Dialtone] setBrand: brand '${brandTheme.brand.name}' ` +
-          `declares unknown material '${lockName}'; falling back to sandstone.`,
-        );
-        setMaterial(null, rootNode);
-      }
-    }
+  if (!lockName) return;
+
+  // Sandstone is the reset case (no CSS); inlined CSS bypasses the registry.
+  if (typeof brandTheme.material.css === 'string' || lockName === 'sandstone') {
+    setMaterial({ material: brandTheme.material }, rootNode);
+    return;
   }
+
+  const theme = MATERIAL_THEMES[`material-${lockName}`];
+  if (theme) {
+    setMaterial(theme, rootNode);
+    return;
+  }
+
+  console.warn(
+    `[Dialtone] setBrand: brand '${brandTheme.brand.name}' ` +
+    `declares unknown material '${lockName}'; falling back to sandstone.`,
+  );
+  setMaterial(null, rootNode);
 }
 
 /**
