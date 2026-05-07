@@ -474,6 +474,7 @@ export default {
     chipListeners () {
       return {
         keydown: event => {
+          if (this.disabled) return;
           this.onChipKeyDown(event);
           this.$emit('chip-keydown', event);
         },
