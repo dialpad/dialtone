@@ -434,18 +434,20 @@ export default {
     'chip-keydown',
 
     /**
-     * Native escape event fired when Escape is pressed in the text input.
+     * Fired when Escape is pressed in the text input.
      * Not fired when a chip is focused.
      *
      * @event escape
+     * @type {KeyboardEvent}
      */
     'escape',
 
     /**
-     * Native enter event fired when Enter is pressed in the text input.
+     * Fired when Enter is pressed in the text input.
      * Not fired when a chip is focused.
      *
      * @event enter
+     * @type {KeyboardEvent}
      */
     'enter',
 
@@ -504,9 +506,9 @@ export default {
           // and consumers don't have to special-case the numpad.
           const key = event.key?.toLowerCase();
           if (key === 'escape') {
-            this.$emit('escape');
+            this.$emit('escape', event);
           } else if (key === 'enter') {
-            this.$emit('enter');
+            this.$emit('enter', event);
           }
         },
 

@@ -319,9 +319,19 @@ describe('DtComboboxMultiSelect Tests', () => {
       expect(wrapper.emitted('escape').length).toBe(1);
     });
 
+    it('Should emit "escape" with a KeyboardEvent payload', async () => {
+      await input.trigger('keydown', { key: 'Escape' });
+      expect(wrapper.emitted('escape')[0][0]).toBeInstanceOf(KeyboardEvent);
+    });
+
     it('Should emit "enter" when Enter is pressed while input is focused', async () => {
       await input.trigger('keydown', { key: 'Enter', code: 'Enter' });
       expect(wrapper.emitted('enter').length).toBe(1);
+    });
+
+    it('Should emit "enter" with a KeyboardEvent payload', async () => {
+      await input.trigger('keydown', { key: 'Enter', code: 'Enter' });
+      expect(wrapper.emitted('enter')[0][0]).toBeInstanceOf(KeyboardEvent);
     });
 
     it('Should emit "enter" when NumpadEnter is pressed while input is focused', async () => {
