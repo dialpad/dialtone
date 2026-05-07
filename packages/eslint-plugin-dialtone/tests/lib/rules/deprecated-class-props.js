@@ -187,6 +187,23 @@ ruleTester.run("deprecated-class-props (autofix)", rule, {
       errors: 1,
       output: "<template><dt-input class=\"foo &amp; bar\" /></template>",
     },
+    // Scenario 10: Vue 3.4+ same-name shorthand (`:rootClass` with no value).
+    // attr.value is null in the AST — fixer must expand to :class="rootClass" using
+    // the camelCase form (the variable name Vue would have implicitly referenced).
+    {
+      code: "<template><dt-input :rootClass /></template>",
+      errors: 1,
+      output: "<template><dt-input :class=\"rootClass\" /></template>",
+    },
+    // Scenario 11: two dynamic deprecated props, no existing :class.
+    // dynamicFixable is false (length > 1), so the rule warns on both but
+    // emits no autofix — two arbitrary expressions can't be auto-merged into one
+    // :class binding without changing semantics.
+    {
+      code: "<template><dt-input :root-class=\"a\" :wrapper-class=\"b\" /></template>",
+      errors: 2,
+      output: null,
+    },
   ],
 });
 

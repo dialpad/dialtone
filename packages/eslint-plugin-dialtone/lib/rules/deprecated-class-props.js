@@ -227,7 +227,18 @@ module.exports = {
           // --- Dynamic side ---
           if (dynamicFixable) {
             const dyn = dynamicDeps[0];
-            const valueText = sourceCode.getText(dyn.attr.value);
+            // Vue 3.4+ same-name shorthand (`:rootClass` with no `=`) makes
+            // vue-eslint-parser synthesize an expression for the implicit identifier;
+            // the value range covers the bare identifier text with no surrounding quotes.
+            // Detect that case (or a missing value entirely) and wrap in quotes so the
+            // emitted attribute remains a valid quoted directive value.
+            let valueText;
+            if (!dyn.attr.value) {
+              valueText = `"${dyn.entry.camel}"`;
+            } else {
+              const raw = sourceCode.getText(dyn.attr.value);
+              valueText = (raw.startsWith("\"") || raw.startsWith("'")) ? raw : `"${raw}"`;
+            }
             // Preserve `v-bind:` long form vs `:` shorthand to avoid stylistic mutation.
             const prefix = sourceCode.getText(dyn.attr).startsWith("v-bind:") ? "v-bind:class" : ":class";
             fixes.push(fixer.replaceText(dyn.attr, `${prefix}=${valueText}`));
