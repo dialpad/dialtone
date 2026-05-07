@@ -627,12 +627,12 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
   // Set initial mode
   setMode(mode, rootNode);
 
-  // Set initial brand
-  setBrand(brandTheme, rootNode);
-
-  // Set defaults for contrast and material
+  // Seed defaults; setBrand may override `data-dt-material` below if the brand declares a lock.
   rootNode?.setAttribute('data-dt-contrast', 'default');
   rootNode?.setAttribute('data-dt-material', 'sandstone');
+
+  // Set initial brand (auto-applies brand-locked material if declared)
+  setBrand(brandTheme, rootNode);
 
   // Track initialization state for future idempotency checks
   initializationState = {
