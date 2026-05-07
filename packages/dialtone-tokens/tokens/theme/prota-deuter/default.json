@@ -170,13 +170,5 @@
         }
       }
     }
-  },
-  "shell": {
-    "base": {
-      "material": {
-        "value": "sandstone",
-        "type": "other"
-      }
-    }
   }
 }

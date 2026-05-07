@@ -153,10 +153,6 @@
   },
   "shell": {
     "base": {
-      "material": {
-        "value": "sandstone",
-        "type": "other"
-      },
       "color": {
         "accent": {
           "value": "oklch(0.5959 0.2417 25.26)",

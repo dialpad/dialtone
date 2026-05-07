@@ -1,5 +1,18 @@
 /* eslint-disable complexity */
 import Core from '@/themes/core.js';
+import MaterialSteel from '@/themes/material-steel.js';
+import MaterialGraphite from '@/themes/material-graphite.js';
+import MaterialIron from '@/themes/material-iron.js';
+import MaterialAmethyst from '@/themes/material-amethyst.js';
+import MaterialJade from '@/themes/material-jade.js';
+
+export const MATERIAL_THEMES = {
+  'material-steel': MaterialSteel,
+  'material-graphite': MaterialGraphite,
+  'material-iron': MaterialIron,
+  'material-amethyst': MaterialAmethyst,
+  'material-jade': MaterialJade,
+};
 
 // Track if core tokens are loaded (per JavaScript instance)
 // Note: In micro-frontend architecture, each app has separate bundle with its own
@@ -321,12 +334,23 @@ export function setBrand(brandTheme, rootNode = document.documentElement) {
   _setStyleTag('dialtone-css-brand-colors', brandTheme.brand.css, rootNode);
   rootNode?.setAttribute('data-dt-brand', brandTheme.brand.name);
 
-  // Apply directly when the brand inlines material CSS (or is sandstone, the
-  // reset case). Brands that only declare a name rely on the consumer to
-  // resolve and call setMaterial separately.
-  if (brandTheme.material?.name &&
-      (brandTheme.material.name === 'sandstone' || typeof brandTheme.material.css === 'string')) {
-    setMaterial({ material: brandTheme.material }, rootNode);
+  // Auto-apply the brand's locked material if declared.
+  const lockName = brandTheme.material?.name;
+  if (lockName) {
+    if (typeof brandTheme.material.css === 'string' || lockName === 'sandstone') {
+      setMaterial({ material: brandTheme.material }, rootNode);
+    } else {
+      const theme = MATERIAL_THEMES[`material-${lockName}`];
+      if (theme) {
+        setMaterial(theme, rootNode);
+      } else {
+        console.warn(
+          `[Dialtone] setBrand: brand '${brandTheme.brand.name}' ` +
+          `declares unknown material '${lockName}'; falling back to sandstone.`,
+        );
+        setMaterial(null, rootNode);
+      }
+    }
   }
 }
 

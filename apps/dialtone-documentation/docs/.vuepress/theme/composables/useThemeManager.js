@@ -244,9 +244,9 @@ export function useThemeManager(options = {}) {
     // Set brand attribute manually (setBrand will handle the style injection)
     document.documentElement.setAttribute('data-dt-brand', brandName);
 
-    // Apply material BEFORE brand so brand overrides win at the same specificity.
-    // Apply contrast last (it's the topmost layer in the cascade order).
-    applyMaterialTheme(material);
+    if (!isMaterialLocked.value) {
+      applyMaterialTheme(material);
+    }
     applyBrandTheme(brandName);
     applyContrastTheme(contrast);
   };

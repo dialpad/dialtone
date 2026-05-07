@@ -17,23 +17,7 @@ import '@dialpad/dialtone-tokens/layered/tokens-core.css';
 import '@dialpad/dialtone-tokens/layered/tokens-base-colors.css';
 import '@dialpad/dialtone-tokens/layered/tokens-dp-colors.css';
 
-// Material override themes — imported synchronously so a previously-chosen
-// non-default material can be applied before first paint, avoiding a flash of
-// the default sandstone ramp on reload. Reused by importDialtoneThemes() below
-// for the picker, so both surfaces share one source of truth.
-import MaterialSteel from '@dialpad/dialtone-tokens/themes/material-steel';
-import MaterialGraphite from '@dialpad/dialtone-tokens/themes/material-graphite';
-import MaterialIron from '@dialpad/dialtone-tokens/themes/material-iron';
-import MaterialAmethyst from '@dialpad/dialtone-tokens/themes/material-amethyst';
-import MaterialJade from '@dialpad/dialtone-tokens/themes/material-jade';
-
-const MATERIAL_THEMES = {
-  'material-steel': MaterialSteel,
-  'material-graphite': MaterialGraphite,
-  'material-iron': MaterialIron,
-  'material-amethyst': MaterialAmethyst,
-  'material-jade': MaterialJade,
-};
+import { MATERIAL_THEMES } from '@dialpad/dialtone-tokens/themes/config';
 
 // Normalize stale localStorage values from removed/renamed entries (e.g.
 // bronze → sandstone). preferredTheme has its own force-reset in onBeforeMount.
