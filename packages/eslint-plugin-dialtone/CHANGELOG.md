@@ -1,3 +1,10 @@
+# [1.13.0-next.2](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.13.0-next.1...eslint-plugin-dialtone/v1.13.0-next.2) (2026-05-07)
+
+
+### Features
+
+* **Eslint Plugin Dialtone:** DLT-3365 add deprecated-stack-flow-classes rule ([#1247](https://github.com/dialpad/dialtone/issues/1247)) ([8554f5a](https://github.com/dialpad/dialtone/commit/8554f5a4a087d666265b9e4ce50587fced4adaa3))
+
 # [1.13.0-next.1](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.12.0...eslint-plugin-dialtone/v1.13.0-next.1) (2026-04-30)
 
 
