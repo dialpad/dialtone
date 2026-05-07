@@ -6,7 +6,7 @@
   >
     <dt-stack>
       <p>
-        <!-- eslint-disable-next-line max-len -->
+        <!-- eslint-disable max-len -->
         <dt-link
           href="https://github.com/dialpad/dialtone/blob/next/packages/dialtone-vue/directives/focusgroup_directive/focusgroup_directive_recipes.story.vue"
           target="_blank"
@@ -671,14 +671,14 @@
 </template>
 
 <script>
-import DtStack from '@/components/stack/stack.vue';
-import DtText from '@/components/text/text.vue';
-import DtButton from '@/components/button/button.vue';
-import DtLink from '@/components/link/link.vue';
-import DtCollapsible from '@/components/collapsible/collapsible.vue';
-import DtAvatar from '@/components/avatar/avatar.vue';
-import DtIcon from '@/components/icon/icon.vue';
-import DtBadge from '@/components/badge/badge.vue';
+import DtStack from '@/components/Stack/Stack.vue';
+import DtText from '@/components/Text/Text.vue';
+import DtButton from '@/components/Button/Button.vue';
+import DtLink from '@/components/Link/Link.vue';
+import DtCollapsible from '@/components/Collapsible/Collapsible.vue';
+import DtAvatar from '@/components/Avatar/Avatar.vue';
+import DtIcon from '@/components/Icon/Icon.vue';
+import DtBadge from '@/components/Badge/Badge.vue';
 import { DtRecipeContactRow } from '@/recipes/leftbar/contact_row';
 
 export default {

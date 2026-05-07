@@ -35,7 +35,7 @@
 /*
  * TODO (Dialtone 10): Localize this component as it'd be a breaking change localizing right now.
  */
-import DtButton from '@/components/button/button.vue';
+import DtButton from '@/components/Button/Button.vue';
 import { DtIconMoreVertical } from '@dialpad/dialtone-icons/vue';
 
 export default {

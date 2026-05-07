@@ -140,7 +140,7 @@
 </template>
 
 <script>
-import { DtStack } from '@/components/stack';
+import { DtStack } from '@/components/Stack';
 import {
   DtIconListBullet,
   DtIconBold,

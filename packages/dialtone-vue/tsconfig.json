@@ -18,7 +18,7 @@
     "**/*.d.ts",
     "common/storybook_utils.js",
     "common/v_html.js",
-    "components/plugins",
+    "components/Plugins",
     "common/mixins/keyboard_list_navigation_tester.vue",
     "node_modules"
   ],

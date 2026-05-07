@@ -36,9 +36,9 @@
 
 <script>
 import { NodeViewWrapper, nodeViewProps } from '@tiptap/vue-3';
-import { DtItemLayout } from '@/components/item_layout';
+import { DtItemLayout } from '@/components/ItemLayout';
 import { DtIconClose, DtIconVideo } from '@dialpad/dialtone-icons/vue';
-import { DtButton } from '@/components/button';
+import { DtButton } from '@/components/Button';
 import { DialtoneLocalization } from '@/localization';
 
 export default {

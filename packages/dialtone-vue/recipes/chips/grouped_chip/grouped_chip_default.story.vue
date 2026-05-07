@@ -34,7 +34,7 @@
 
 <script>
 import DtRecipeGroupedChip from './grouped_chip.vue';
-import { DtIcon } from '@/components/icon';
+import { DtIcon } from '@/components/Icon';
 
 export default {
   name: 'DtRecipeGroupedChipDefault',

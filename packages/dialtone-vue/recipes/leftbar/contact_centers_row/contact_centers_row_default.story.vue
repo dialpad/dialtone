@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { DtButton } from '@/components/button';
+import { DtButton } from '@/components/Button';
 import DtIconBellRing from '@dialpad/dialtone-icons/vue/bell-ring';
 import DtRecipeContactCentersRow from './contact_centers_row.vue';
 

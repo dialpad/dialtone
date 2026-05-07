@@ -179,7 +179,7 @@ import {
   LEFTBAR_GENERAL_ROW_CONTACT_CENTER_VALIDATION_ERROR,
   LEFTBAR_GENERAL_ROW_ICON_SIZES,
 } from './general_row_constants';
-import { DtBadge } from '@/components/badge';
+import { DtBadge } from '@/components/Badge';
 import {
   DtIconPhone,
   DtIconWaveform,
@@ -199,10 +199,10 @@ import {
   DtIconLaptop2,
   DtIconCalendarClock,
 } from '@dialpad/dialtone-icons/vue';
-import { DtButton } from '@/components/button';
-import { DtTooltip } from '@/components/tooltip';
-import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
-import { DtAvatar } from '@/components/avatar';
+import { DtButton } from '@/components/Button';
+import { DtTooltip } from '@/components/Tooltip';
+import { DtEmojiTextWrapper } from '@/components/EmojiTextWrapper';
+import { DtAvatar } from '@/components/Avatar';
 import DtRecipeLeftbarGeneralRowIcon from './leftbar_general_row_icon.vue';
 import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs, returnFirstEl } from '@/common/utils';
 import { DialtoneLocalization } from '@/localization';

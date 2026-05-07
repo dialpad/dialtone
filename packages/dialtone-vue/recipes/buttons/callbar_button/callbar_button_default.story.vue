@@ -39,7 +39,7 @@
 
 <script>
 import DtRecipeCallbarButton from './callbar_button.vue';
-import { DtIcon } from '@/components/icon';
+import { DtIcon } from '@/components/Icon';
 
 export default {
   name: 'DtRecipeCallbarButtonDefault',

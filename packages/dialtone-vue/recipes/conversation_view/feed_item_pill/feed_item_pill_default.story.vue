@@ -51,8 +51,8 @@
 </template>
 
 <script>
-import { DtIcon } from '@/components/icon';
-import { DtButton } from '@/components/button';
+import { DtIcon } from '@/components/Icon';
+import { DtButton } from '@/components/Button';
 import DtRecipeFeedItemPill from './feed_item_pill.vue';
 
 export default {

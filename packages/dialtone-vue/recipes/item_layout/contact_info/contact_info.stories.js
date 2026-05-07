@@ -5,8 +5,8 @@ import DtRecipeContactInfo from './contact_info.vue';
 
 import DtRecipeContactInfoDefaultTemplate from './contact_info_default.story.vue';
 import DtRecipeContactInfoVariantsTemplate from './contact_info_variants.story.vue';
-import { AVATAR_SIZE_MODIFIERS } from '@/components/avatar';
-import { PRESENCE_STATES_LIST } from '@/components/presence';
+import { AVATAR_SIZE_MODIFIERS } from '@/components/Avatar';
+import { PRESENCE_STATES_LIST } from '@/components/Presence';
 
 import avatarImage from '@/common/assets/avatar1.png?url';
 const iconsList = getIconNames();

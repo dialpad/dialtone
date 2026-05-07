@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import DtRecipeCallbarButton from './callbar_button.vue';
-import { DtTooltip } from '@/components/tooltip';
+import { DtTooltip } from '@/components/Tooltip';
 
 // Constants
 const baseProps = {};

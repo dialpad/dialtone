@@ -62,10 +62,10 @@
 
 <script>
 import { REACTIONS_ATTRIBUTES } from './emoji_row_constants.js';
-import { DtButton } from '@/components/button';
-import { DtTooltip } from '@/components/tooltip';
-import { DtEmoji } from '@/components/emoji';
-import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
+import { DtButton } from '@/components/Button';
+import { DtTooltip } from '@/components/Tooltip';
+import { DtEmoji } from '@/components/Emoji';
+import { DtEmojiTextWrapper } from '@/components/EmojiTextWrapper';
 import { DialtoneLocalization } from '@/localization';
 import { getEmojiShortCode } from '@/common/emoji';
 

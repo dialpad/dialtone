@@ -5,7 +5,7 @@
   >
     <dt-stack>
       <p>
-        <!-- eslint-disable-next-line max-len -->
+        <!-- eslint-disable max-len -->
         <dt-link
           href="https://github.com/dialpad/dialtone/blob/next/packages/dialtone-vue/directives/focusgroup_directive/focusgroup_directive_events.story.vue"
           target="_blank"
@@ -123,11 +123,11 @@
 </template>
 
 <script>
-import DtStack from '@/components/stack/stack.vue';
-import DtText from '@/components/text/text.vue';
-import DtButton from '@/components/button/button.vue';
-import DtLink from '@/components/link/link.vue';
-import DtIcon from '@/components/icon/icon.vue';
+import DtStack from '@/components/Stack/Stack.vue';
+import DtText from '@/components/Text/Text.vue';
+import DtButton from '@/components/Button/Button.vue';
+import DtLink from '@/components/Link/Link.vue';
+import DtIcon from '@/components/Icon/Icon.vue';
 export default {
   name: 'DtFocusgroupDirectiveEvents',
   components: { DtStack, DtText, DtButton, DtLink, DtIcon },

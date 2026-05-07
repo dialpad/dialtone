@@ -287,9 +287,9 @@
 
 <script>
 import DtRecipeFeedItemPill from './feed_item_pill.vue';
-import { DtIcon } from '@/components/icon';
-import { DtButton } from '@/components/button';
-import { DtStack } from '@/components/stack';
+import { DtIcon } from '@/components/Icon';
+import { DtButton } from '@/components/Button';
+import { DtStack } from '@/components/Stack';
 
 import {
   DtIconPhoneOutgoing,

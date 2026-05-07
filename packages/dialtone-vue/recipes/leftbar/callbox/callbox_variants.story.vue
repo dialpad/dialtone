@@ -406,7 +406,7 @@
 
 <script>
 import DtRecipeCallbox from './callbox.vue';
-import DtButton from '@/components/button/button.vue';
+import DtButton from '@/components/Button/Button.vue';
 import {
   DtIconDialpadSparkle,
   DtIconPhoneHangUp,
@@ -417,8 +417,8 @@ import {
   DtIconUsers,
   DtIconWaveform,
 } from '@dialpad/dialtone-icons/vue';
-import DtItemLayout from '@/components/item_layout/item_layout.vue';
-import DtStack from '@/components/stack/stack.vue';
+import DtItemLayout from '@/components/ItemLayout/ItemLayout.vue';
+import DtStack from '@/components/Stack/Stack.vue';
 import chattingPersonImage from '@/common/assets/chatting-person-example.png';
 
 export default {

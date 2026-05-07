@@ -12,7 +12,7 @@
 </template>
 
 <script setup>
-import { DtRootLayout } from '@/components/root_layout';
+import { DtRootLayout } from '@/components/RootLayout';
 </script>
 
 <style lang="less">

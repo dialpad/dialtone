@@ -134,8 +134,8 @@
 </template>
 
 <script>
-import DtItemLayout from '@/components/item_layout/item_layout.vue';
-import DtAvatar from '@/components/avatar/avatar.vue';
+import DtItemLayout from '@/components/ItemLayout/ItemLayout.vue';
+import DtAvatar from '@/components/Avatar/Avatar.vue';
 
 export default {
   compatConfig: { MODE: 3 },

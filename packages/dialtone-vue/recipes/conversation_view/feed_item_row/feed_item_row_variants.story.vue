@@ -291,12 +291,12 @@ import DtRecipeFeedItemRow from './feed_item_row.vue';
 
 import { DtRecipeEmojiRow } from '../emoji_row';
 import { DtRecipeFeedItemPill } from '../feed_item_pill';
-import { DtStack } from '@/components/stack';
-import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
-import { DtAvatar } from '@/components/avatar';
-import { DtIcon } from '@/components/icon';
-import { DtImageViewer } from '@/components/image_viewer';
-import { DtButton } from '@/components/button';
+import { DtStack } from '@/components/Stack';
+import { DtEmojiTextWrapper } from '@/components/EmojiTextWrapper';
+import { DtAvatar } from '@/components/Avatar';
+import { DtIcon } from '@/components/Icon';
+import { DtImageViewer } from '@/components/ImageViewer';
+import { DtButton } from '@/components/Button';
 import { useMockReactions } from '@/recipes/conversation_view/emoji_row/composables/useMockReactions.js';
 import fryImage from '@/common/assets/fry.gif';
 
