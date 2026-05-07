@@ -1,3 +1,18 @@
+# [8.80.0-next.5](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.80.0-next.4...dialtone-css/v8.80.0-next.5) (2026-05-07)
+
+
+### Code Refactoring
+
+* **Components:** dlt-3196 components to pascal case ([#1255](https://github.com/dialpad/dialtone/issues/1255)) ([aa6d259](https://github.com/dialpad/dialtone/commit/aa6d259786c78da49a91cbd5f5bfc102ae9bfe1e))
+
+
+### Features
+
+* **Chip:** DLT-3195 change interactive prop default from true to false ([#1246](https://github.com/dialpad/dialtone/issues/1246)) ([30a5ea2](https://github.com/dialpad/dialtone/commit/30a5ea2791db1fe740adff15ac8abafa986e3242))
+* **Colors, Link, Tokens:** DLT-3360 retune blue/gold/purple/black/red palette, add mention semantic tokens, migrate success to positive ([#1245](https://github.com/dialpad/dialtone/issues/1245)) ([880b37b](https://github.com/dialpad/dialtone/commit/880b37b9176c5da6c8402d440062220c4c6a15f0))
+* **Design Tokens:** DLT-3356 extend prota/deuter/trita accessible themes to semantic and components ([#1237](https://github.com/dialpad/dialtone/issues/1237)) ([d8fbf58](https://github.com/dialpad/dialtone/commit/d8fbf5867e3569fb0be436df759108fcd0e18e34))
+* **Scrollbar:** DLT-3158 implement object props ([#1249](https://github.com/dialpad/dialtone/issues/1249)) ([09ff456](https://github.com/dialpad/dialtone/commit/09ff4561f2a84cd0cf8bb86bdd15c6ff2032d51e))
+
 # [8.80.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.80.0-next.3...dialtone-css/v8.80.0-next.4) (2026-05-01)
 
 
