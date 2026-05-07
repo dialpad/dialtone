@@ -208,7 +208,7 @@ describe('DtComboboxMultiSelect Tests', () => {
 
         describe('When LEFT key is pressed', () => {
           beforeEach(async () => {
-            input.trigger('keydown', { code: 'arrowleft' });
+            input.trigger('keydown', { key: 'arrowleft' });
           });
 
           it('should focus the last chip', () => {
@@ -220,14 +220,14 @@ describe('DtComboboxMultiSelect Tests', () => {
           it('should not call moveFromInputToChip when input has text', async () => {
             const spy = vi.spyOn(wrapper.vm, 'moveFromInputToChip');
             await input.setValue('a');
-            await input.trigger('keydown', { code: 'arrowleft' });
+            await input.trigger('keydown', { key: 'arrowleft' });
             expect(spy).not.toHaveBeenCalled();
           });
         });
 
         describe('When BACKSPACE key is pressed', () => {
           beforeEach(async () => {
-            input.trigger('keydown', { code: 'backspace' });
+            input.trigger('keydown', { key: 'backspace' });
           });
 
           it('should focus the last chip', () => {
@@ -239,7 +239,7 @@ describe('DtComboboxMultiSelect Tests', () => {
           it('should not call moveFromInputToChip when input has text', async () => {
             const spy = vi.spyOn(wrapper.vm, 'moveFromInputToChip');
             await input.setValue('a');
-            await input.trigger('keydown', { code: 'backspace' });
+            await input.trigger('keydown', { key: 'backspace' });
             expect(spy).not.toHaveBeenCalled();
           });
         });

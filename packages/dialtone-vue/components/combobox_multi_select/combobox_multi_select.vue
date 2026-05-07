@@ -681,7 +681,7 @@ export default {
     },
 
     onInputKeyDown (event) {
-      const key = event.code?.toLowerCase();
+      const key = event.key?.toLowerCase();
       // If the cursor is at the start of the text,
       // press 'backspace' or 'left' focuses the last chip
       if (this.selectedItems.length > 0 && event.target.selectionStart === 0) {
