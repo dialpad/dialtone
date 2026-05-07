@@ -156,11 +156,29 @@ ruleTester.run("deprecated-class-props (autofix)", rule, {
       errors: 1,
       output: null,
     },
-    // Scenario 5: two different offending props on the same element — each is fixed independently
+    // Scenario 5: two different offending static props on the same element → merged into single class
     {
       code: "<template><dt-input root-class=\"a\" wrapper-class=\"b\" /></template>",
       errors: 2,
-      output: "<template><dt-input class=\"a\" class=\"b\" /></template>",
+      output: "<template><dt-input class=\"a b\" /></template>",
+    },
+    // Scenario 6: two static deprecated + existing class → all merged into the existing class
+    {
+      code: "<template><dt-input class=\"orig\" root-class=\"a\" wrapper-class=\"b\" /></template>",
+      errors: 2,
+      output: "<template><dt-input class=\"orig a b\" /></template>",
+    },
+    // Scenario 7: mixed static + dynamic deprecated, no existing class/:class → handled independently
+    {
+      code: "<template><dt-input root-class=\"a\" :wrapper-class=\"expr\" /></template>",
+      errors: 2,
+      output: "<template><dt-input class=\"a\" :class=\"expr\" /></template>",
+    },
+    // Scenario 8: v-bind long-form preserved (not collapsed to shorthand)
+    {
+      code: "<template><dt-input v-bind:root-class=\"expr\" /></template>",
+      errors: 1,
+      output: "<template><dt-input v-bind:class=\"expr\" /></template>",
     },
   ],
 });

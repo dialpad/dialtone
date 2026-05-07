@@ -28,7 +28,7 @@ Branch: `feat/dlt-3281-eslint-deprecated-class-props` (off `staging`)
 - Autofix that renames the offending attribute to `class` (or `:class` for dynamic bindings), merging into an existing class binding when present, per the algorithm in `packages/dialtone-css/lib/build/js/dialtone_migrate_props/index.mjs:358-401`.
 - One conservative non-fix case: dynamic `:<prop>="expr"` + existing `:class="..."` — warn only, no autofix.
 - Severity: `warn`.
-- Single message format: `"Dt[Name] does not accept a `[propName]` prop. Use the native `class` attribute instead. See: https://dialtone.dialpad.com/guides/migration/component-props/"`.
+- Single message format: `"Dt[Name] does not accept a '[propName]' prop. Use the native 'class' attribute instead. See: https://dialtone.dialpad.com/guides/migration/component-props/"`.
 - Tests covering: 12 detection cases for DtInput (3 prop bases × 2 casings × 2 binding forms — DtInput is the post-deprecation anchor in the test fixture); 4 autofix scenarios (static-no-class, static-with-class, dynamic-no-class, dynamic-with-class-warn-only); 1 regression case (DtListItem with `wrapperClass` must NOT trigger). All tests run against a controlled fixture data source via `proxyquire` — never against the live workspace JSON.
 - Documentation file `docs/rules/deprecated-class-props.md` matching the format of existing rule docs.
 - Add `@dialpad/dialtone-vue` and `vue-eslint-parser` to the plugin's `peerDependencies`. Add `vue-eslint-parser` and `proxyquire` to `devDependencies`.
@@ -213,6 +213,7 @@ Branch: `feat/dlt-3281-eslint-deprecated-class-props` (off `staging`)
 - **Reporting:** report on the offending `VAttribute` node. Message: `"DtFoo does not accept a 'rootClass' prop. Use the native 'class' attribute instead. See: https://dialtone.dialpad.com/guides/migration/component-props/"`.
 - **No fix in this task** — `meta.fixable: null` for now. Task 3 flips to `'code'` and adds the fixer.
 - **Test setup:** mirror `tests/lib/rules/deprecated-stack-alignment-classes.js` AND inject mocked component data via `proxyquire`:
+
   ```js
   const proxyquire = require('proxyquire').noCallThru();
   const MOCK_COMPONENTS = [
@@ -228,6 +229,7 @@ Branch: `feat/dlt-3281-eslint-deprecated-class-props` (off `staging`)
   });
   const ruleTester = new RuleTester({ parser: require.resolve('vue-eslint-parser'), parserOptions: { ecmaVersion: 'latest' } });
   ```
+
   All test cases run against `MOCK_COMPONENTS` — the rule's behavior is fully deterministic regardless of what's in `packages/dialtone-vue/dist/component-documentation.json` on the current branch.
 - **Tests for this task — detection cases only:**
   - Valid cases (should NOT report):
@@ -383,6 +385,7 @@ Branch: `feat/dlt-3281-eslint-deprecated-class-props` (off `staging`)
 
 - ESLint 9 flat config has dropped the legacy CLI flags (`--no-eslintrc`, `--rule` as CLI string, `--plugin`). The workspace runs `eslint ^9.33.0`, so a CLI smoke test would require constructing a temporary flat config file. Simpler and more reliable: write the smoke test as another `RuleTester` block with multi-statement code samples.
 - Smoke test shape (added to the same test file using the same MOCK_COMPONENTS):
+
   ```js
   ruleTester.run('deprecated-class-props (integration)', rule, {
     valid: [
@@ -420,6 +423,7 @@ Branch: `feat/dlt-3281-eslint-deprecated-class-props` (off `staging`)
     ],
   });
   ```
+
 - Run full plugin test suite: `pnpm nx run eslint-plugin-dialtone:test`. Expect: all 11 existing rule tests + new test file pass, 0 failures.
 - This integration block lives in the same test file as the unit cases — no separate fixture file, no separate ESLint invocation. It exercises the rule end-to-end through the same data path consumers will use, with realistic multi-line input.
 

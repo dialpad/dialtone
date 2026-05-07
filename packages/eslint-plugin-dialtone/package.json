@@ -72,6 +72,11 @@
     "eslint": ">=7",
     "vue-eslint-parser": ">=9"
   },
+  "peerDependenciesMeta": {
+    "@dialpad/dialtone-vue": {
+      "optional": true
+    }
+  },
   "nx": {
     "includedScripts": [
       "lint",

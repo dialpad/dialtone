@@ -56,12 +56,18 @@ module.exports = {
             node.key.name.name === 'bind' &&
             node.key.argument?.name === 'class') {
 
+          // Skip dt-stack / DtStack — these are handled by deprecated-stack-alignment-classes
+          // (use rawName because node.name is always lowercased by vue-eslint-parser)
+          const parentEl = node.parent?.parent;
+          const parentName = parentEl?.rawName;
+          if (parentName === 'dt-stack' || parentName === 'DtStack') return;
+
           // Get the raw source of the binding expression
           const bindingText = sourceCode.getText(node.value);
 
-          // Check if it contains flex utilities (as string literals)
-          // Look for patterns like 'd-d-flex', 'd-ai-', 'd-jc-', 'd-fd-', 'd-g\d', 'd-gg\d'
-          if (/['"]d-d-flex|['"]d-ai-|['"]d-jc-|['"]d-fd-|['"]d-gg?\d/.test(bindingText)) {
+          // Check if it contains flex utilities (as string literals).
+          // `\b` after `d-d-flex` prevents false matches on hypothetical `d-d-flexible`.
+          if (/['"]d-d-flex\b|['"]d-ai-|['"]d-jc-|['"]d-fd-|['"]d-gg?\d/.test(bindingText)) {
             context.report({
               node: node,
               messageId: 'dynamicFlexBinding',

@@ -22,6 +22,16 @@ try {
   );
 }
 
+// Defensive: handle malformed data (not an array) gracefully.
+if (!Array.isArray(components)) components = [];
+
+// Pre-build a Map<displayName, Set<propName>> for O(1) lookup. Built once at module load.
+const componentPropsMap = new Map(
+  components
+    .filter(c => c && typeof c.displayName === "string")
+    .map(c => [c.displayName, new Set((c.props ?? []).map(p => p?.name).filter(Boolean))]),
+);
+
 // ---------------------------------------------------------------------------
 // Constants
 // ---------------------------------------------------------------------------
@@ -64,8 +74,7 @@ function isDialtoneTag (rawName) {
 }
 
 function componentDeclaresProp (displayName, camelPropName) {
-  const comp = components.find(c => c.displayName === displayName);
-  return Boolean(comp?.props?.some(p => p.name === camelPropName));
+  return componentPropsMap.get(displayName)?.has(camelPropName) ?? false;
 }
 
 function isStaticClassAttr (attr) {
@@ -85,6 +94,24 @@ function removeAttrWithLeadingSpace (fixer, fullSource, attr) {
   let remStart = attr.range[0];
   while (remStart > 0 && /\s/.test(fullSource[remStart - 1])) remStart--;
   return fixer.removeRange([remStart, attr.range[1]]);
+}
+
+// Detect whether an attribute is one of the deprecated class props we care about.
+// Returns { entry, dynamic } or null.
+function classifyDeprecatedAttr (attr) {
+  if (!attr.directive && attr.key) {
+    const entry = STATIC_ATTR_MAP.get(attr.key.name);
+    if (entry) return { entry, dynamic: false };
+  }
+  if (
+    attr.directive &&
+    attr.key?.name?.name === "bind" &&
+    attr.key?.argument?.rawName
+  ) {
+    const entry = DYNAMIC_ATTR_MAP.get(attr.key.argument.rawName);
+    if (entry) return { entry, dynamic: true };
+  }
+  return null;
 }
 
 // ---------------------------------------------------------------------------
@@ -118,70 +145,77 @@ module.exports = {
         const displayName = tagNameToPascal(rawName);
         const attrs = node.startTag.attributes;
 
+        // Collect every deprecated class-prop attribute on this element.
+        const deprecated = [];
         for (const attr of attrs) {
-          let entry = null;
-          let dynamic = false;
+          const cls = classifyDeprecatedAttr(attr);
+          if (!cls) continue;
+          if (componentDeclaresProp(displayName, cls.entry.camel)) continue;
+          deprecated.push({ attr, ...cls });
+        }
+        if (deprecated.length === 0) return;
 
-          // Static attribute: root-class="x" or rootClass="x"
-          if (!attr.directive && attr.key) {
-            entry = STATIC_ATTR_MAP.get(attr.key.name);
-          }
+        const existingStaticClass = attrs.find(a => isStaticClassAttr(a));
+        const existingDynClass = attrs.find(a => isDynamicClassAttr(a));
 
-          // Dynamic (v-bind shorthand): :root-class="expr" or :rootClass="expr"
-          if (
-            attr.directive &&
-            attr.key?.name?.name === "bind" &&
-            attr.key?.argument?.rawName
-          ) {
-            const dynEntry = DYNAMIC_ATTR_MAP.get(attr.key.argument.rawName);
-            if (dynEntry) {
-              entry = dynEntry;
-              dynamic = true;
+        const staticDeps = deprecated.filter(d => !d.dynamic);
+        const dynamicDeps = deprecated.filter(d => d.dynamic);
+
+        // Dynamic autofix is only safe when exactly one dynamic deprecated attr exists
+        // AND there is no existing :class (two dynamic class expressions can't be merged
+        // automatically — would require building an array literal).
+        const dynamicFixable = dynamicDeps.length === 1 && !existingDynClass;
+
+        // Build a single element-level fix that ESLint applies once per pass.
+        // Attached to the first reported attr; subsequent reports get no fix.
+        const elementFix = (fixer) => {
+          const fixes = [];
+          const fullSource = sourceCode.getText();
+
+          // --- Static side ---
+          if (staticDeps.length > 0) {
+            const addedValues = staticDeps
+              .map(d => d.attr.value?.value ?? "")
+              .filter(Boolean);
+
+            if (existingStaticClass) {
+              const existingVal = existingStaticClass.value?.value ?? "";
+              const merged = [existingVal, ...addedValues].filter(Boolean).join(" ");
+              fixes.push(fixer.replaceText(existingStaticClass, `class="${merged}"`));
+              for (const d of staticDeps) {
+                fixes.push(removeAttrWithLeadingSpace(fixer, fullSource, d.attr));
+              }
+            } else {
+              // No existing class: first static dep becomes the consolidated class, rest are removed.
+              const merged = addedValues.join(" ");
+              fixes.push(fixer.replaceText(staticDeps[0].attr, `class="${merged}"`));
+              for (const d of staticDeps.slice(1)) {
+                fixes.push(removeAttrWithLeadingSpace(fixer, fullSource, d.attr));
+              }
             }
           }
 
-          if (!entry) continue;
-          if (componentDeclaresProp(displayName, entry.camel)) continue;
+          // --- Dynamic side ---
+          if (dynamicFixable) {
+            const dyn = dynamicDeps[0];
+            const valueText = sourceCode.getText(dyn.attr.value);
+            // Preserve `v-bind:` long form vs `:` shorthand to avoid stylistic mutation.
+            const prefix = sourceCode.getText(dyn.attr).startsWith("v-bind:") ? "v-bind:class" : ":class";
+            fixes.push(fixer.replaceText(dyn.attr, `${prefix}=${valueText}`));
+          }
+          // If !dynamicFixable, dynamic deps stay as warnings with no autofix.
 
-          const propName = entry.display;
+          return fixes.length > 0 ? fixes : null;
+        };
 
+        deprecated.forEach((dep, idx) => {
           context.report({
-            node: attr,
+            node: dep.attr,
             messageId: "propRemoved",
-            data: { displayName, propName },
-            fix (fixer) {
-              const fullSource = sourceCode.getText();
-
-              if (dynamic) {
-                // Find existing :class binding on this element
-                const existingDynClass = attrs.find(a => isDynamicClassAttr(a) && a !== attr);
-                if (existingDynClass) {
-                  // Cannot merge two dynamic bindings — warn only, no fix
-                  return null;
-                }
-                // Rename :prop="expr" → :class="expr"
-                const valueText = sourceCode.getText(attr.value);
-                return fixer.replaceText(attr, `:class=${valueText}`);
-              } else {
-                // Static attr: get the string value (without surrounding quotes)
-                const addedVal = attr.value ? attr.value.value : "";
-                const existingStaticClass = attrs.find(a => isStaticClassAttr(a) && a !== attr);
-
-                if (existingStaticClass) {
-                  // Merge: remove offending attr + append value to existing class
-                  const existingVal = existingStaticClass.value.value;
-                  return [
-                    removeAttrWithLeadingSpace(fixer, fullSource, attr),
-                    fixer.replaceText(existingStaticClass, `class="${existingVal} ${addedVal}"`),
-                  ];
-                } else {
-                  // Simple rename: root-class="x" → class="x"
-                  return fixer.replaceText(attr, `class="${addedVal}"`);
-                }
-              }
-            },
+            data: { displayName, propName: dep.entry.display },
+            fix: idx === 0 ? elementFix : () => null,
           });
-        }
+        });
       },
     });
   },

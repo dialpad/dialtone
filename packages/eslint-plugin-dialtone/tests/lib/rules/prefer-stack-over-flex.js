@@ -60,6 +60,14 @@ ruleTester.run("prefer-stack-over-flex", rule, {
     {
       code: "<template><dt-stack :class=\"{ 'custom-class': active }\">...</dt-stack></template>",
     },
+    // DtStack (kebab) with dynamic flex binding — handled by deprecated-stack-alignment-classes, not this rule
+    {
+      code: "<template><dt-stack :class=\"{ 'd-d-flex': active }\">...</dt-stack></template>",
+    },
+    // DtStack (PascalCase) with dynamic flex binding — same, should not trigger
+    {
+      code: "<template><DtStack :class=\"{ 'd-d-flex': active, 'd-ai-center': isRow }\">...</DtStack></template>",
+    },
   ],
 
   invalid: [
