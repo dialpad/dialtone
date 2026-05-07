@@ -16,9 +16,10 @@ const rule = require("../../../lib/rules/prefer-stack-over-flex"),
 //------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
-  // eslint-disable-next-line n/no-extraneous-require
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 'latest' }
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
+    parserOptions: { ecmaVersion: 'latest' },
+  },
 });
 
 ruleTester.run("prefer-stack-over-flex", rule, {

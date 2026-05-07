@@ -28,8 +28,8 @@ module.exports = {
     const sourceCode = context.sourceCode ?? context.getSourceCode();
     return sourceCode.parserServices.defineTemplateBodyVisitor({
       VElement(node) {
-        // Skip if already dt-stack or DtStack
-        const elementName = node.name || node.rawName;
+        // Skip if already dt-stack or DtStack (use rawName — node.name is always lowercased)
+        const elementName = node.rawName;
         if (elementName === 'dt-stack' || elementName === 'DtStack') return;
 
         // Find class attribute
@@ -61,7 +61,7 @@ module.exports = {
 
           // Check if it contains flex utilities (as string literals)
           // Look for patterns like 'd-d-flex', 'd-ai-', 'd-jc-', 'd-fd-', 'd-g\d', 'd-gg\d'
-          if (/['"]d-d-flex['"]|['"]d-ai-|['"]d-jc-|['"]d-fd-|['"]d-gg?\d/.test(bindingText)) {
+          if (/['"]d-d-flex|['"]d-ai-|['"]d-jc-|['"]d-fd-|['"]d-gg?\d/.test(bindingText)) {
             context.report({
               node: node,
               messageId: 'dynamicFlexBinding',
