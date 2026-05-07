@@ -1,3 +1,11 @@
+# [1.48.0-next.16](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.15...dialtone-tokens/v1.48.0-next.16) (2026-05-07)
+
+
+### Features
+
+* **Colors, Link, Tokens:** DLT-3360 retune blue/gold/purple/black/red palette, add mention semantic tokens, migrate success to positive ([#1245](https://github.com/dialpad/dialtone/issues/1245)) ([880b37b](https://github.com/dialpad/dialtone/commit/880b37b9176c5da6c8402d440062220c4c6a15f0))
+* **Design Tokens:** DLT-3356 extend prota/deuter/trita accessible themes to semantic and components ([#1237](https://github.com/dialpad/dialtone/issues/1237)) ([d8fbf58](https://github.com/dialpad/dialtone/commit/d8fbf5867e3569fb0be436df759108fcd0e18e34))
+
 # [1.48.0-next.15](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.14...dialtone-tokens/v1.48.0-next.15) (2026-04-30)
 
 
