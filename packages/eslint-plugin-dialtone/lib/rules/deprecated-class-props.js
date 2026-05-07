@@ -22,15 +22,20 @@ try {
   );
 }
 
-// Defensive: handle malformed data (not an array) gracefully.
+// Defensive: handle malformed top-level data (not an array) gracefully.
 if (!Array.isArray(components)) components = [];
 
 // Pre-build a Map<displayName, Set<propName>> for O(1) lookup. Built once at module load.
-const componentPropsMap = new Map(
-  components
-    .filter(c => c && typeof c.displayName === "string")
-    .map(c => [c.displayName, new Set((c.props ?? []).map(p => p?.name).filter(Boolean))]),
-);
+// Only entries with a valid displayName AND an array `props` are included — entries with
+// malformed/missing `props` are excluded entirely, so the rule fails closed (does not fire)
+// on components whose declared-prop set is unknown rather than flagging them as deprecated.
+const componentPropsMap = new Map();
+for (const c of components) {
+  if (!c || typeof c.displayName !== "string") continue;
+  if (!Array.isArray(c.props)) continue;
+  const propNames = c.props.map(p => p?.name).filter(s => typeof s === "string");
+  componentPropsMap.set(c.displayName, new Set(propNames));
+}
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -75,6 +80,13 @@ function isDialtoneTag (rawName) {
 
 function componentDeclaresProp (displayName, camelPropName) {
   return componentPropsMap.get(displayName)?.has(camelPropName) ?? false;
+}
+
+// True when we have validated metadata for this component. Components missing from the
+// map (unknown to the installed dialtone-vue, or malformed entry) are NOT flagged — the
+// rule's job is to flag deprecation, not to flag unrecognised tags.
+function componentHasMetadata (displayName) {
+  return componentPropsMap.has(displayName);
 }
 
 function isStaticClassAttr (attr) {
@@ -137,12 +149,29 @@ module.exports = {
   create (context) {
     const sourceCode = context.sourceCode ?? context.getSourceCode();
 
+    // Read the raw source slice for an attribute's value, preserving HTML entities
+    // and quote style. Strips surrounding quote characters; returns "" when missing.
+    const getRawAttrValue = (attr) => {
+      if (!attr.value) return "";
+      const text = sourceCode.getText(attr.value);
+      if (text.length >= 2 && (text[0] === "\"" || text[0] === "'")) {
+        return text.slice(1, -1);
+      }
+      return text;
+    };
+
     return sourceCode.parserServices.defineTemplateBodyVisitor({
       VElement (node) {
         const rawName = node.rawName;
         if (!isDialtoneTag(rawName)) return;
 
         const displayName = tagNameToPascal(rawName);
+
+        // Skip components we don't have validated metadata for. This includes both
+        // unknown tags (`<dt-foobar>`) and entries with malformed `props` arrays.
+        // Fail closed: if we can't confirm the prop is deprecated, don't fire.
+        if (!componentHasMetadata(displayName)) return;
+
         const attrs = node.startTag.attributes;
 
         // Collect every deprecated class-prop attribute on this element.
@@ -173,13 +202,13 @@ module.exports = {
           const fullSource = sourceCode.getText();
 
           // --- Static side ---
+          // Use raw source values (not decoded `attr.value.value`) so HTML entities
+          // like &quot; round-trip correctly into the rewritten attribute.
           if (staticDeps.length > 0) {
-            const addedValues = staticDeps
-              .map(d => d.attr.value?.value ?? "")
-              .filter(Boolean);
+            const addedValues = staticDeps.map(d => getRawAttrValue(d.attr)).filter(Boolean);
 
             if (existingStaticClass) {
-              const existingVal = existingStaticClass.value?.value ?? "";
+              const existingVal = getRawAttrValue(existingStaticClass);
               const merged = [existingVal, ...addedValues].filter(Boolean).join(" ");
               fixes.push(fixer.replaceText(existingStaticClass, `class="${merged}"`));
               for (const d of staticDeps) {

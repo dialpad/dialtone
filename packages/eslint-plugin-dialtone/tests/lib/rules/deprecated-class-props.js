@@ -180,6 +180,56 @@ ruleTester.run("deprecated-class-props (autofix)", rule, {
       errors: 1,
       output: "<template><dt-input v-bind:class=\"expr\" /></template>",
     },
+    // Scenario 9: HTML entities in class value round-trip without corruption
+    // (e.g. data-attribute selectors stored in class strings during dev tooling)
+    {
+      code: "<template><dt-input root-class=\"foo &amp; bar\" /></template>",
+      errors: 1,
+      output: "<template><dt-input class=\"foo &amp; bar\" /></template>",
+    },
+  ],
+});
+
+// ---------------------------------------------------------------------------
+// Fail-closed behavior: components without validated metadata in the JSON
+// must NOT be flagged. Covers two cases:
+//   1. Component entry is missing entirely (unknown to installed dialtone-vue)
+//   2. Component entry exists but `props` is malformed (not an array)
+// ---------------------------------------------------------------------------
+
+const MALFORMED_MOCK = [
+  // Valid: DtInput is fine
+  { displayName: "DtInput", props: [{ name: "label" }] },
+  // Malformed: props is an object, not an array
+  { displayName: "DtMalformed", props: { name: "rootClass" } },
+  // Malformed: props is missing entirely
+  { displayName: "DtNoProps" },
+  // Malformed: entry is null
+  null,
+  // Malformed: displayName is not a string
+  { displayName: 42, props: [] },
+];
+
+const malformedRule = proxyquire("../../../lib/rules/deprecated-class-props", {
+  "@dialpad/dialtone-vue/component-documentation.json": MALFORMED_MOCK,
+});
+
+ruleTester.run("deprecated-class-props (fail-closed)", malformedRule, {
+  valid: [
+    // DtMalformed has malformed props — rule must NOT fire even though it looks deprecated
+    { code: "<template><dt-malformed root-class=\"x\" /></template>" },
+    // DtNoProps is missing props field — rule must NOT fire
+    { code: "<template><dt-no-props root-class=\"x\" /></template>" },
+    // DtUnknown is not in the JSON at all — rule must NOT fire
+    { code: "<template><dt-unknown root-class=\"x\" /></template>" },
+  ],
+  invalid: [
+    // DtInput is valid in this fixture and has no rootClass — should still fire
+    {
+      code: "<template><dt-input root-class=\"x\" /></template>",
+      errors: 1,
+      output: "<template><dt-input class=\"x\" /></template>",
+    },
   ],
 });
 
