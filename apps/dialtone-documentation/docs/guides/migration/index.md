@@ -41,7 +41,8 @@ Work through each applicable guide in order. Guides earlier in the list are prer
 
 | # | Guide | Breaking? | Tool | Summary |
 | --- | --- | --- | --- | --- |
-| 15 | [Vue 2 Removal](./vue2-removal/) | **Yes** | — | Vue 2 support dropped. Last Vue 2 version: `9.154.0`. |
+| 15 | [Theme to Mode](./theme-to-mode/) | **Yes** | `dialtone-migration-helper` | Legacy `setTheme` deprecated. New layered API uses `setMode` / `setBrand` / `setContrast` / `initDialtoneTheme`. Root attributes `data-dt-theme` → `data-dt-mode` + `data-dt-brand` + `data-dt-contrast`. |
+| 16 | [Vue 2 Removal](./vue2-removal/) | **Yes** | — | Vue 2 support dropped. Last Vue 2 version: `9.154.0`. |
 
 ## Quick Start
 
@@ -72,29 +73,33 @@ npx dialtone-migration-helper --cwd ./src
 npx dialtone-migration-helper --cwd ./src
 # Select "success-to-positive"
 
-# 7. Flex to Stack
+# 7. Theme to Mode (deprecates setTheme, switches to layered API)
+npx dialtone-migration-helper --cwd ./src
+# Select "theme to mode"
+
+# 8. Flex to Stack
 npx dialtone-migrate-flex-to-stack --cwd ./src
 
-# 8. Link and Button navigation (anchor/router-link to DtButton/DtLink)
+# 9. Link and Button navigation (anchor/router-link to DtButton/DtLink)
 npx dialtone-migrate-link-rendering --cwd ./src
 
-# 9. T-shirt sizes to numeric
+# 10. T-shirt sizes to numeric
 npx dialtone-migrate-tshirt-to-numeric --cwd ./src
 
-# 10. Physical to logical naming
+# 11. Physical to logical naming
 npx dialtone-migration-helper --cwd ./src
 # Select "physical-to-logical"
 
-# 11. Component props, events, and slots
+# 12. Component props, events, and slots
 npx dialtone-migrate-props --cwd ./src
 
-# 12. DtChip interactive default (adds :interactive="true" to clickable chips)
+# 13. DtChip interactive default (adds :interactive="true" to clickable chips)
 npx dialtone-migrate-chip-interactive --cwd ./src
 
-# 13. Scrollbar :never → :always
+# 14. Scrollbar :never → :always
 npx dialtone-migrate-scrollbar-always --cwd ./src
 
-# 14. ESLint auto-fix pass
+# 15. ESLint auto-fix pass
 npx eslint --fix "src/**/*.vue"
 ```
 

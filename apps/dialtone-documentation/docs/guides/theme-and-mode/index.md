@@ -26,7 +26,7 @@ npm install @dialpad/dialtone
 Initialize theming in your main.js or App.vue:
 
 ```js
-import { initDialtoneTheme } from '@dialpad/dialtone/themes/config';
+import { initDialtoneTheme } from '@dialpad/dialtone-tokens/themes/config';
 import Dp from '@dialpad/dialtone-tokens/themes/dp';
 
 initDialtoneTheme(Dp, 'light');
@@ -59,7 +59,7 @@ Done. Your app now has theming with light mode and the Dialpad base theme.
 ### Toggle Light/Dark Mode
 
 ```js
-import { setMode } from '@dialpad/dialtone/themes/config';
+import { setMode } from '@dialpad/dialtone-tokens/themes/config';
 
 setMode('dark');  // Switch to dark mode
 setMode('light'); // Switch to light mode
@@ -68,7 +68,7 @@ setMode('light'); // Switch to light mode
 ### Switch Themes Dynamically
 
 ```js
-import { setBrand } from '@dialpad/dialtone/themes/config';
+import { setBrand } from '@dialpad/dialtone-tokens/themes/config';
 import Melon from '@dialpad/dialtone-tokens/themes/melon';
 import Tmo from '@dialpad/dialtone-tokens/themes/tmo';
 
@@ -79,7 +79,7 @@ setBrand(Tmo);   // Switch to T-Mobile theme
 ### Enable High Contrast
 
 ```js
-import { setContrast } from '@dialpad/dialtone/themes/config';
+import { setContrast } from '@dialpad/dialtone-tokens/themes/config';
 import HighContrast from '@dialpad/dialtone-tokens/themes/high-contrast';
 
 setContrast(HighContrast); // Enable high contrast
@@ -211,6 +211,9 @@ Each app bundle manages exactly ONE rootNode. State is isolated by bundle bounda
 
 ## Migrating from Legacy System
 
+> [!INFO] Full migration guide
+> See the dedicated [Theme to Mode migration guide](/guides/migration/theme-to-mode/) for step-by-step instructions, automated tooling, and a manual-review checklist.
+
 ### What's the Difference?
 
 **Legacy system:**
@@ -242,7 +245,7 @@ setTheme(DpDark);
 **After (layered):**
 
 ```js
-import { initDialtoneTheme, setMode } from '@dialpad/dialtone/themes/config';
+import { initDialtoneTheme, setMode } from '@dialpad/dialtone-tokens/themes/config';
 import Dp from '@dialpad/dialtone-tokens/themes/dp';
 
 initDialtoneTheme(Dp, 'light');

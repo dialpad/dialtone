@@ -288,6 +288,10 @@
                     "link": "/guides/migration/scrollbar-always/"
                   },
                   {
+                    "text": "Theme to Mode",
+                    "link": "/guides/migration/theme-to-mode/"
+                  },
+                  {
                     "text": "Vue 2 Removal",
                     "link": "/guides/migration/vue2-removal/"
                   }

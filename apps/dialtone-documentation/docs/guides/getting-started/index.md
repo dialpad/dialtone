@@ -32,7 +32,7 @@ npm install @dialpad/dialtone @dialpad/dialtone-tokens
 ```
 
 ```js
-import { initDialtoneTheme } from '@dialpad/dialtone/themes/config';
+import { initDialtoneTheme } from '@dialpad/dialtone-tokens/themes/config';
 import Dp from '@dialpad/dialtone-tokens/themes/dp';
 
 initDialtoneTheme(Dp, 'light');
