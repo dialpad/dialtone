@@ -489,6 +489,7 @@ export default {
 
     chipWrapperClass () {
       return {
+        [`d-recipe-combobox-multi-select__chip-wrapper--${this.size}`]: true,
         [`d-recipe-combobox-multi-select__chip-wrapper-${this.size}--collapsed`]: !this.inputFocused && this.collapseOnFocusOut,
       };
     },
