@@ -4,7 +4,13 @@
 "use strict";
 
 const RuleTester = require("eslint").RuleTester;
-const proxyquire = require("proxyquire").noCallThru();
+// noPreserveCache forces a fresh module load on each proxyquire call so the
+// MOCK_COMPONENTS fixture (used by detection/autofix/regression suites) and
+// the MALFORMED_MOCK fixture (used by the fail-closed suite below) are both
+// actually exercised. Without it, proxyquire's default cache reuse means the
+// second require returns the first-loaded fixture, silently passing the
+// fail-closed assertions for the wrong reason.
+const proxyquire = require("proxyquire").noCallThru().noPreserveCache();
 
 // Post-deprecation fixture: mirrors what component-documentation.json will look like
 // once DLT-3100 ships. DtListItem keeps wrapperClass (it was never deprecated).
