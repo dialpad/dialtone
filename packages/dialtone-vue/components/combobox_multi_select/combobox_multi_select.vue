@@ -710,7 +710,6 @@ export default {
       // The input cursor should be the same "top" as that chip and next besides it
       const left = lastChip.offsetLeft + this.getFullWidth(lastChip);
       const spaceLeft = input.getBoundingClientRect().width - left;
-      // input.style.paddingLeft = left + 'px';
 
       const firstChip = this.getFirstChip();
       const isWrapped = firstChip && lastChip.offsetTop > firstChip.offsetTop;
