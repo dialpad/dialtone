@@ -78,6 +78,25 @@ export interface IconsData {
   }
 }
 
+export interface DocumentationFrontmatter {
+  title?: string;
+  description?: string;
+  status?: 'ready' | 'planned' | 'beta' | 'wip' | string;
+  figmaUrl?: string;
+  storybook?: string;
+}
+
+export interface DocumentationRecord {
+  id: string;
+  docId: string;
+  docTitle: string;
+  category: string;
+  headingPath: string[];
+  content: string;
+  frontmatter: DocumentationFrontmatter;
+  filePath: string;
+}
+
 export interface SearchResult {
   type: string;
   name: string;

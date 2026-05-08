@@ -265,7 +265,7 @@ showHtmlWarning />
 
 ### With Validation States
 
-Provides feedback to the user based on their interaction, or lack thereof, with an input.
+Provides feedback to the user based on their interaction, or lack thereof, with an input. When a DtInput has an error message, it displays a red border to indicate the invalid state. The red border and error message appear when you pass a message with `type: "error"` to the `messages` prop. Success states show a green border, and warnings show a yellow border.
 
 <code-well-header>
   <div class="d-stack16 d-w100p">

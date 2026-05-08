@@ -1,0 +1,62 @@
+[
+  {
+    "id": "TS-002",
+    "query": "What component do I use for a search box with autocomplete?",
+    "allowlist": ["combobox", "search-input"],
+    "rationale": "Discovery by use case — should match Combobox (which documents autocomplete search-box pattern)"
+  },
+  {
+    "id": "TS-003",
+    "query": "What's the difference between DtButton kind='primary' and kind='danger'?",
+    "allowlist": ["button"],
+    "rationale": "Prop value semantics — should match button Variants section describing primary/danger kinds"
+  },
+  {
+    "id": "TS-004",
+    "query": "Why isn't my DtModal closing on outside click — is that correct behavior?",
+    "allowlist": ["modal"],
+    "rationale": "Default behavior + rationale — should match modal Usage section explaining outside-click-does-not-close"
+  },
+  {
+    "id": "TS-005",
+    "query": "DtOldPopover is deprecated — what's the replacement?",
+    "allowlist": ["popover"],
+    "rationale": "Deprecation mapping — should match popover Usage section with DtOldPopover migration note"
+  },
+  {
+    "id": "TS-006",
+    "query": "Which Dialtone component supports multi-select with avatars?",
+    "allowlist": ["combobox-multi-select", "combobox"],
+    "rationale": "Use-case discovery — should match combobox-multi-select Usage section describing avatar multi-select"
+  },
+  {
+    "id": "TS-007",
+    "query": "How do I wire DtSelectMenu v-model to a Vuex store?",
+    "allowlist": ["select-menu"],
+    "rationale": "v-model payload + pattern — should match select-menu Usage section with v-model/Vuex documentation"
+  },
+  {
+    "id": "TS-008",
+    "query": "Can I put DtTooltip on a disabled DtButton?",
+    "allowlist": ["tooltip", "button"],
+    "rationale": "Accessibility + composition rules — should match tooltip section about wrapping disabled DtButton"
+  },
+  {
+    "id": "TS-009",
+    "query": "List all components that support dark mode.",
+    "allowlist": [],
+    "rationale": "Cross-cutting metadata — any results acceptable; whats-new posts and design docs mention dark mode"
+  },
+  {
+    "id": "TS-010",
+    "query": "How do I make DtButton show a loading spinner during async submit?",
+    "allowlist": ["button"],
+    "rationale": "Recipe / pattern — should match button Loading section describing spinner for async operations"
+  },
+  {
+    "id": "TS-011",
+    "query": "Why does DtInput show a red border?",
+    "allowlist": ["input"],
+    "rationale": "Validation state semantics — should match input With Validation States section about red border/error"
+  }
+]
