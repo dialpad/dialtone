@@ -5,6 +5,8 @@
 import type { DocumentationRecord, SearchResult } from '../types.js';
 
 const CONTENT_EXCERPT_MAX = 500;
+const MAX_QUERY_CHARS = 256;
+const MAX_QUERY_TERMS = 12;
 
 // Common English words that add no signal when matching docs.
 // Filtering them prevents AND-logic from requiring "how", "I", "difference" etc.
@@ -50,8 +52,12 @@ export function searchDocumentation(
 ): { results: SearchResult[]; notes: string[] } {
   if (!query || typeof query !== 'string') return { results: [], notes: [] };
 
+  // Bound input to prevent expensive worst-case scans on very long queries.
+  const truncated = query.length > MAX_QUERY_CHARS;
+  const bounded = truncated ? query.slice(0, MAX_QUERY_CHARS) : query;
+
   // Normalize: lowercase, strip punctuation (keep alphanumerics + hyphens for v-model etc.)
-  const normalized = query.toLowerCase()
+  const normalized = bounded.toLowerCase()
     .replace(/[='"]/g, ' ')    // strip = ' " (from kind='primary')
     .replace(/[^\w\s-]/g, ' ') // strip remaining punctuation except hyphens
     .trim();
@@ -59,8 +65,10 @@ export function searchDocumentation(
   const allWords = normalized.split(/\s+/).filter(w => w.length > 1);
   // Remove stop words, but keep all words if the entire query is stop words
   const meaningful = allWords.filter(w => !STOP_WORDS.has(w));
-  const words = meaningful.length > 0 ? meaningful : allWords.filter(w => w.length > 0);
-  if (words.length === 0) return { results: [], notes: [] };
+  const baseWords = meaningful.length > 0 ? meaningful : allWords.filter(w => w.length > 0);
+  if (baseWords.length === 0) return { results: [], notes: [] };
+  const wordsTruncated = baseWords.length > MAX_QUERY_TERMS;
+  const words = wordsTruncated ? baseWords.slice(0, MAX_QUERY_TERMS) : baseWords;
 
   const regexes = words.map(w => {
     const escaped = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
@@ -100,7 +108,11 @@ export function searchDocumentation(
   // Sort tier ascending (1 before 2 before 3), preserve corpus order within tier
   results.sort((a, b) => (a.tier ?? 3) - (b.tier ?? 3));
 
-  return { results, notes: [] };
+  const notes: string[] = [];
+  if (truncated) notes.push(`Query truncated to ${MAX_QUERY_CHARS} characters.`);
+  if (wordsTruncated) notes.push(`Query truncated to ${MAX_QUERY_TERMS} terms.`);
+
+  return { results, notes };
 }
 
 /**

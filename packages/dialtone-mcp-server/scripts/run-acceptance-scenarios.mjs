@@ -19,6 +19,12 @@ const scenarios = JSON.parse(
   readFileSync(resolve(__dirname, 'acceptance-scenarios.json'), 'utf8'),
 );
 
+// Guard against accidental scenario edits — PASS_BAR is calibrated to exactly 10 scenarios.
+if (scenarios.length !== 10) {
+  console.error(`❌ Expected exactly 10 scenarios, found ${scenarios.length}. Update PASS_BAR if scenario count changes.`);
+  process.exit(1);
+}
+
 const COL_ID = 8;
 const COL_QUERY = 48;
 const COL_TOP3 = 45;

@@ -134,6 +134,10 @@ describe('buildRecords — status filter (blacklist)', () => {
   test('status:experimental file is included (not in blacklist)', () => {
     expect(buildRecords(resolve(fixtureDir, 'unknown-status.md'))).toHaveLength(1);
   });
+
+  test('uppercase status (e.g. "WIP") is normalized and excluded', () => {
+    expect(buildRecords(resolve(fixtureDir, 'uppercase-status.md'))).toHaveLength(0);
+  });
 });
 
 // ─── Edge case tests ─────────────────────────────────────────────────────────
@@ -159,5 +163,16 @@ describe('buildRecords — edge cases', () => {
     const nested = records.find(r => r.headingPath.length === 2);
     expect(nested).toBeDefined();
     expect(nested.headingPath[1]).toBe('Subsection 1');
+  });
+
+  test('heading inside an indented fenced code block does not split', () => {
+    // indented-fence.md has only one ## Usage section; the indented ```js block
+    // contains a fake ## heading that must NOT produce a separate record.
+    const records = buildRecords(resolve(fixtureDir, 'indented-fence.md'));
+    const fakeRecord = records.find(r => r.headingPath.some(h => h.includes('Fake Heading')));
+    expect(fakeRecord).toBeUndefined();
+    const usage = records.find(r => r.headingPath.includes('Usage'));
+    expect(usage).toBeDefined();
+    expect(usage.content).toContain('More content after the fence');
   });
 });

@@ -67,7 +67,7 @@ export function chunkSections(body) {
 
   for (const line of lines) {
     // Track fenced code blocks (3+ backticks or tildes)
-    const fenceMatch = line.match(/^(`{3,}|~{3,})/);
+    const fenceMatch = line.match(/^ {0,3}(`{3,}|~{3,})/);
     if (fenceMatch) {
       const char = fenceMatch[1][0];
       if (!inFence) {
@@ -120,8 +120,11 @@ export function buildRecords(absolutePath) {
   const rawFile = readFileSync(absolutePath, 'utf8');
   const { data: frontmatter, content: body } = matter(rawFile);
 
-  // Blacklist filter: skip explicitly non-ready docs
-  if (frontmatter.status && NON_READY_STATUSES.has(String(frontmatter.status))) return [];
+  // Blacklist filter: skip explicitly non-ready docs (case-insensitive against canonical lowercase set)
+  const status = typeof frontmatter.status === 'string'
+    ? frontmatter.status.trim().toLowerCase()
+    : '';
+  if (status && NON_READY_STATUSES.has(status)) return [];
 
   const filePath = relative(repoRoot, absolutePath).replace(/\\/g, '/');
   const name = basename(absolutePath, '.md');

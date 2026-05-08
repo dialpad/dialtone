@@ -132,6 +132,20 @@ describe('searchDocumentation', () => {
     const { notes } = searchDocumentation('button', fixture);
     expect(notes).toEqual([]);
   });
+
+  test('truncates very long queries and emits a note', () => {
+    const longQuery = 'button '.repeat(100); // > 256 chars
+    const { results, notes } = searchDocumentation(longQuery, fixture);
+    expect(results.length).toBeGreaterThan(0);
+    expect(notes.some(n => n.includes('256 characters'))).toBe(true);
+  });
+
+  test('caps term count and emits a note', () => {
+    // 20 distinct meaningful terms, only first 12 should be used
+    const terms = ['button', 'modal', 'primary', 'danger', 'muted', 'clear', 'loading', 'spinner', 'variants', 'usage', 'figma', 'storybook', 'extra1', 'extra2', 'extra3'];
+    const { notes } = searchDocumentation(terms.join(' '), fixture);
+    expect(notes.some(n => n.includes('12 terms'))).toBe(true);
+  });
 });
 
 // ─── formatDocumentationResults ─────────────────────────────────────────────

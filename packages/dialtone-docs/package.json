@@ -15,7 +15,7 @@
     "vitest": "^4.1.0"
   },
   "exports": {
-    "./*": "./*"
+    "./dist/public-docs.json": "./dist/public-docs.json"
   },
   "keywords": ["documentation", "ai", "dialtone"],
   "license": "MIT"

@@ -10,7 +10,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox--de
 
 ## Base Style
 
-A combobox provides accessibility controls and common functionality for search inputs with autocomplete and filtering. It does not render any functioning UI on it's own, but it depends on the elements passed to it via slots. Use it to build a search box where typing filters a list of suggestions — the canonical pattern for autocomplete inputs in Dialtone.
+A combobox provides accessibility controls and common functionality for search inputs with autocomplete and filtering. It does not render any functioning UI on its own, but it depends on the elements passed to it via slots. Use it to build a search box where typing filters a list of suggestions — the canonical pattern for autocomplete inputs in Dialtone.
 
 It has 2 core required slots:
 

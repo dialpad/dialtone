@@ -81,7 +81,7 @@ export interface IconsData {
 export interface DocumentationFrontmatter {
   title?: string;
   description?: string;
-  status?: 'ready' | 'planned' | 'beta' | 'wip' | string;
+  status?: 'ready' | 'planned' | 'beta' | 'wip';
   figmaUrl?: string;
   storybook?: string;
 }
