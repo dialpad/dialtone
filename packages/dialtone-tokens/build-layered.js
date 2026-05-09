@@ -356,8 +356,8 @@ async function processMaterials(outputDir) {
         lightFile: pair.light,
         darkFile: pair.dark,
         outputFile: `tokens-${name}.css`,
-        lightSelector: '[data-dt-mode="light"]',
-        darkSelector: '[data-dt-mode="dark"]',
+        lightSelector: `[data-dt-material="${name}"][data-dt-mode="light"]`,
+        darkSelector: `[data-dt-material="${name}"][data-dt-mode="dark"]`,
         header: `/**
  * Material override: ${name}
  * Re-binds --dt-color-black-* so V1 relative-color tokens follow this ramp.

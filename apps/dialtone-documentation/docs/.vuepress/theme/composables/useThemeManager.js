@@ -167,21 +167,12 @@ export function useThemeManager(options = {}) {
 
   /**
    * Applies the selected material via the shared setMaterial config function.
-   * Sandstone removes any override; other materials inject the per-material CSS.
+   * Material switching is attribute-only — `setMaterialConfig` toggles
+   * `data-dt-material` and the pre-bundled per-material CSS handles the rest.
    * @param {string} material - The material name
    */
   const applyMaterialTheme = (material) => {
-    if (material === DEFAULT_MATERIAL) {
-      setMaterialConfig(null, document.documentElement);
-      return;
-    }
-    const themeKey = `material-${material}`;
-    const materialTheme = themes && themes[themeKey];
-    if (!materialTheme?.material?.css) {
-      console.warn(`[useThemeManager] Material theme '${themeKey}' not found in loaded themes`);
-      return;
-    }
-    setMaterialConfig(materialTheme, document.documentElement);
+    setMaterialConfig(material === DEFAULT_MATERIAL ? null : material, document.documentElement);
   };
 
   /**
