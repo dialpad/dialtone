@@ -15,6 +15,11 @@ import '@docsearch/css';
 // Layered Theming System - Base layers (always loaded). Material override CSS
 // loads here so all materials are available for attribute-driven switching;
 // brand CSS (dp by default) loads after, so brand wins at the same specificity.
+//
+// Sandstone has no override file — it's the default ramp baked into
+// `tokens-base-colors.css` and applies whenever `data-dt-material` is absent
+// or set to `'sandstone'` (no `[data-dt-material="sandstone"]` selector exists
+// to match against, so the bare base selectors govern).
 import '@dialpad/dialtone-tokens/layered/tokens-core.css';
 import '@dialpad/dialtone-tokens/layered/tokens-base-colors.css';
 import '@dialpad/dialtone-tokens/layered/material/tokens-steel.css';
