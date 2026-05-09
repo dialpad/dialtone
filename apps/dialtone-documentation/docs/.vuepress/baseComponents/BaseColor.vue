@@ -1,16 +1,18 @@
 <template>
-  <dt-stack as="aside" gap="50">
+  <dt-stack as="aside" gap="100">
     <dt-stack v-if="stops.length" as="header" direction="row" justify="between" align="baseline">
-      <dt-text
-        as="h4"
-        kind="headline"
-        :size="400"
-        class="d-tt-capitalize"
-        text-box-trim="start"
-        tabindex="-1"
-      >
-        {{ colorName }}
-      </dt-text>
+      <dt-box padding-inline="150">
+        <dt-text
+          as="h4"
+          kind="headline"
+          :size="300"
+          class="d-tt-capitalize"
+          text-box-trim="start"
+          tabindex="-1"
+        >
+          {{ colorName }}
+        </dt-text>
+      </dt-box>
       <dt-text
         v-dt-tooltip="`Lightness Contrast (APCA) against either pure white or black. 60 is considered AA accessible.`"
         as="abbr"
@@ -29,7 +31,7 @@
         align="center"
         justify="space-between"
         :class="[
-          'd-px-150 d-py-100 d-text-code--xs',
+          'color-stop d-px-150 d-py-100 d-text-code--xs',
           {
             'd-bbsr-300': index === 0,
             'd-bber-300': index === (stops.length - 1),
@@ -37,9 +39,9 @@
         ]"
         :style="`background-color: ${stop.value}`"
       >
-        <dt-stack gap="50" :class="fontColorClass(stop.lightness)">
+        <dt-stack gap="50" :class="['color-stop__meta', fontColorClass(stop.lightness)]">
           <dt-text as="strong" class="d-us-all">
-            {{ `var(--dt-color-${colorName}-${stop.stop})` }}
+            {{ tokenName(stop.stop) }}
           </dt-text>
           <dt-text class="d-o75 d-us-all">
             {{ stop.value }}
@@ -47,7 +49,7 @@
         </dt-stack>
         <dt-text
           strength="bold"
-          :class="fontColorClass(stop.lightness)"
+          :class="['color-stop__lc', fontColorClass(stop.lightness)]"
         >
           {{ formattedContrast(activeContrast(stop)) }}
         </dt-text>
@@ -70,10 +72,23 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  // Token-name display format. 'color' (default) renders `var(--dt-color-{name}-{stop})`
+  // since named ramps are CSS variables. Any other value renders the source-path
+  // form `{namespace}.{name}.{stop}` — used by `material` since material ramps
+  // don't emit CSS variables.
+  namespace: {
+    type: String,
+    default: 'color',
+  },
 });
 
 const LIGHTNESS_THRESHOLD = 0.65;
 
+function tokenName (stop) {
+  return props.namespace === 'color'
+    ? `var(--dt-color-${props.colorName}-${stop})`
+    : `${props.namespace}.${props.colorName}.${stop}`;
+}
 function fontColorClass (lightness) {
   return lightness >= LIGHTNESS_THRESHOLD
     ? 'd-fc-neutral-black'

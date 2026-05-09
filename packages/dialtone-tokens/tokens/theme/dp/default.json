@@ -7,12 +7,12 @@
         "description": "Default text color throughout the UI."
       },
       "secondary": {
-        "value": "{color.black.700}",
+        "value": "{color.black.750}",
         "type": "color",
         "description": "Example uses include introduction paragraphs, labels, and descriptions paired with form elements."
       },
       "tertiary": {
-        "value": "{color.black.600}",
+        "value": "{color.black.650}",
         "type": "color",
         "description": "Used to imply visual hierarchy relative to primary and secondary text colors, e.g. headlines and labels."
       },
@@ -55,7 +55,7 @@
         "description": "Indicates a positive state."
       },
       "positive-strong": {
-        "value": "{color.green.950}",
+        "value": "{color.green.800}",
         "type": "color",
         "description": "Indicates a strong positive state on surfaces that require a stronger contrast."
       },
@@ -72,17 +72,22 @@
         "description": "Indicates a strong positive state on surfaces that require a stronger contrast."
       },
       "warning": {
+        "value": "{color.gold.700}",
+        "type": "color",
+        "description": "Indicates a warning state."
+      },
+      "warning-strong": {
         "value": "{color.gold.800}",
         "type": "color",
-        "description": "Indicates information that requires user’s attention and further action may be necessary."
+        "description": "Indicates a strong warning state on surfaces that require a stronger contrast."
       },
       "info": {
-        "value": "{color.blue.800}",
+        "value": "{color.blue.700}",
         "type": "color",
         "description": "Indicates a generally informational state."
       },
       "info-strong": {
-        "value": "{color.blue.900}",
+        "value": "{color.blue.800}",
         "type": "color",
         "description": "Indicates a generally informational state on surfaces that require a stronger contrast."
       },
@@ -175,11 +180,11 @@
     },
     "link": {
       "primary": {
-        "value": "{color.purple.600}",
+        "value": "{color.purple.500}",
         "type": "color"
       },
       "primary-hover": {
-        "value": "{color.purple.800}",
+        "value": "{color.purple.700}",
         "type": "color"
       },
       "critical": {
@@ -226,11 +231,11 @@
         "type": "color"
       },
       "muted": {
-        "value": "{color.foreground.secondary}",
+        "value": "{color.foreground.tertiary}",
         "type": "color"
       },
       "muted-hover": {
-        "value": "{color.foreground.primary}",
+        "value": "{color.foreground.secondary}",
         "type": "color"
       },
       "disabled": {
@@ -321,9 +326,9 @@
         "$extensions": {
           "studio.tokens": {
             "modify": {
-              "type": "alpha",
+              "type": "lighten",
               "value": ".1",
-              "space": "oklch"
+              "space": "lch"
             }
           }
         }
@@ -488,18 +493,18 @@
         "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
       },
       "brand-strong": {
-        "value": "{color.purple.600}",
+        "value": "{color.purple.500}",
         "type": "color",
         "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
       },
       "primary-opaque": {
-        "value": "{color.surface.primary}",
+        "value": "{color.surface.secondary}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".96",
+              "value": ".07",
               "space": "oklch"
             }
           }
@@ -507,13 +512,13 @@
         "description": "Primary surface as opaque background color."
       },
       "secondary-opaque": {
-        "value": "{color.black.900}",
+        "value": "{color.surface.moderate}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".02",
+              "value": ".3",
               "space": "oklch"
             }
           }
@@ -521,13 +526,13 @@
         "description": "Secondary surface as opaque background color."
       },
       "moderate-opaque": {
-        "value": "{color.black.900}",
+        "value": "{color.surface.bold}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".10",
+              "value": ".45",
               "space": "oklch"
             }
           }
@@ -535,13 +540,13 @@
         "description": "Moderate surface as opaque background color."
       },
       "bold-opaque": {
-        "value": "{color.black.900}",
+        "value": "{color.surface.strong}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".19",
+              "value": ".3",
               "space": "oklch"
             }
           }
@@ -549,7 +554,7 @@
         "description": "Bold surface as opaque background color."
       },
       "strong-opaque": {
-        "value": "{color.black.900}",
+        "value": "{color.surface.contrast}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
@@ -569,7 +574,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".94",
+              "value": ".92",
               "space": "oklch"
             }
           }
@@ -583,7 +588,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".31",
+              "value": ".67",
               "space": "oklch"
             }
           }
@@ -597,7 +602,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".50",
+              "value": ".52",
               "space": "oklch"
             }
           }
@@ -605,13 +610,13 @@
         "description": "Warning surface as opaque background color"
       },
       "positive-opaque": {
-        "value": "{color.green.400}",
+        "value": "{color.green.200}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".25",
+              "value": ".45",
               "space": "oklch"
             }
           }
@@ -631,7 +636,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".35",
+              "value": ".6",
               "space": "oklch"
             }
           }
@@ -645,7 +650,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".39",
+              "value": ".66",
               "space": "oklch"
             }
           }
@@ -673,7 +678,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".50",
+              "value": ".30",
               "space": "oklch"
             }
           }
@@ -681,7 +686,7 @@
         "description": "Warning subtle surface as opaque background color"
       },
       "positive-subtle-opaque": {
-        "value": "{color.green.100}",
+        "value": "{color.surface.positive}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
@@ -701,7 +706,7 @@
         "description": "Success subtle surface as opaque background color."
       },
       "info-subtle-opaque": {
-        "value": "{color.blue.100}",
+        "value": "{color.surface.info}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
@@ -715,13 +720,13 @@
         "description": "Info surface as opaque background color."
       },
       "brand-subtle-opaque": {
-        "value": "{color.purple.200}",
+        "value": "{color.surface.brand}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".20",
+              "value": ".5",
               "space": "oklch"
             }
           }
@@ -3865,7 +3870,7 @@
             "type": "color"
           },
           "hover": {
-            "value": "{color.surface.brand-opaque}",
+            "value": "{color.surface.brand-subtle-opaque}",
             "type": "color"
           },
           "active": {
@@ -3902,7 +3907,7 @@
             "type": "color"
           },
           "hover": {
-            "value": "{color.surface.critical-opaque}",
+            "value": "{color.surface.critical-subtle-opaque}",
             "type": "color"
           },
           "active": {
@@ -3977,8 +3982,8 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": ".14",
-                  "space": "oklch"
+                  "value": ".6",
+                  "space": "lch"
                 }
               }
             }
@@ -4006,7 +4011,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "darken",
-                  "value": ".3",
+                  "value": ".11",
                   "space": "oklch"
                 }
               }

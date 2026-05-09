@@ -38,7 +38,7 @@
         select-class="d-w-200"
         :model-value="format"
         :options="formatSelectMenuOptions"
-        @change="updateFormat"
+        @update:model-value="updateFormat"
       />
       <dt-select-menu
         name="mode-select"
@@ -46,7 +46,7 @@
         select-class="d-w-200"
         :model-value="mode"
         :options="MODES"
-        @change="updateMode"
+        @update:model-value="updateMode"
       />
       <dt-select-menu
         name="theme-select"
@@ -54,7 +54,7 @@
         select-class="d-w-200"
         :model-value="theme"
         :options="THEMES"
-        @change="updateTheme"
+        @update:model-value="updateTheme"
       />
       <dt-button
         v-dt-tooltip:top-end="shareLinkTooltip"

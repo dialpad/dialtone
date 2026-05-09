@@ -19,51 +19,83 @@
     },
     "black": {
       "50": {
-        "value": "oklch(1 0 0)",
+        "value": "{material.sandstone.50}",
         "type": "color"
       },
       "100": {
-        "value": "oklch(0.9774 0.0025 48.72)",
+        "value": "{material.sandstone.100}",
+        "type": "color"
+      },
+      "150": {
+        "value": "{material.sandstone.150}",
         "type": "color"
       },
       "200": {
-        "value": "oklch(0.9312 0.0029 84.56)",
+        "value": "{material.sandstone.200}",
+        "type": "color"
+      },
+      "250": {
+        "value": "{material.sandstone.250}",
         "type": "color"
       },
       "300": {
-        "value": "oklch(0.858 0.0059 84.57)",
+        "value": "{material.sandstone.300}",
+        "type": "color"
+      },
+      "350": {
+        "value": "{material.sandstone.350}",
         "type": "color"
       },
       "400": {
-        "value": "oklch(0.7321 0.0061 84.57)",
+        "value": "{material.sandstone.400}",
+        "type": "color"
+      },
+      "450": {
+        "value": "{material.sandstone.450}",
         "type": "color"
       },
       "500": {
-        "value": "oklch(0.6001 0.0032 84.56)",
+        "value": "{material.sandstone.500}",
+        "type": "color"
+      },
+      "550": {
+        "value": "{material.sandstone.550}",
         "type": "color"
       },
       "600": {
-        "value": "oklch(0.5134 0.0063 95.18)",
+        "value": "{material.sandstone.600}",
+        "type": "color"
+      },
+      "650": {
+        "value": "{material.sandstone.650}",
         "type": "color"
       },
       "700": {
-        "value": "oklch(0.4468 0.0055 78.27)",
+        "value": "{material.sandstone.700}",
+        "type": "color"
+      },
+      "750": {
+        "value": "{material.sandstone.750}",
         "type": "color"
       },
       "800": {
-        "value": "oklch(0.3352 0.0055 56.21)",
+        "value": "{material.sandstone.800}",
+        "type": "color"
+      },
+      "850": {
+        "value": "{material.sandstone.850}",
         "type": "color"
       },
       "900": {
-        "value": "oklch(0.2572 0.0063 78.21)",
+        "value": "{material.sandstone.900}",
         "type": "color"
       },
       "950": {
-        "value": "oklch(0.2134 0.006 91.63)",
+        "value": "{material.sandstone.950}",
         "type": "color"
       },
       "1000": {
-        "value": "oklch(0.1595 0.0045 84.59)",
+        "value": "{material.sandstone.1000}",
         "type": "color"
       }
     },
@@ -681,7 +713,7 @@
     },
     "brand": {
       "purple": {
-        "value": "oklch(0.5851 0.2414 287.62)",
+        "value": "oklch(0.5829 0.2426 287.41)",
         "type": "color",
         "description": "Primary brand color."
       },
@@ -704,59 +736,59 @@
   },
   "opacity": {
     "0": {
-      "value": 0,
+      "value": "0",
       "type": "number"
     },
     "100": {
-      "value": 0.05,
+      "value": "0.05",
       "type": "number"
     },
     "200": {
-      "value": 0.1,
+      "value": "0.1",
       "type": "number"
     },
     "300": {
-      "value": 0.2,
+      "value": "0.2",
       "type": "number"
     },
     "400": {
-      "value": 0.25,
+      "value": "0.25",
       "type": "number"
     },
     "500": {
-      "value": 0.3,
+      "value": "0.3",
       "type": "number"
     },
     "600": {
-      "value": 0.4,
+      "value": "0.4",
       "type": "number"
     },
     "700": {
-      "value": 0.5,
+      "value": "0.5",
       "type": "number"
     },
     "800": {
-      "value": 0.6,
+      "value": "0.6",
       "type": "number"
     },
     "900": {
-      "value": 0.7,
+      "value": "0.7",
       "type": "number"
     },
     "1000": {
-      "value": 0.75,
+      "value": "0.75",
       "type": "number"
     },
     "1100": {
-      "value": 0.8,
+      "value": "0.8",
       "type": "number"
     },
     "1200": {
-      "value": 0.9,
+      "value": "0.9",
       "type": "number"
     },
     "1300": {
-      "value": 1,
+      "value": "1",
       "type": "number"
     }
   },
@@ -764,15 +796,15 @@
     "family": {
       "body": {
         "value": "-apple-system, BlinkMacSystemFont, \"SF Pro\", \"Segoe UI Adjusted\", \"Segoe UI\", SFMono, \"Helvetica Neue\", Cantarell, Ubuntu, Roboto, Arial, \"Noto Sans\", sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\", \"Noto Color Emoji\"",
-        "type": "fontFamily"
+        "type": "fontFamilies"
       },
       "expressive": {
         "value": "\"Season Mix\", {font.family.body}",
-        "type": "fontFamily"
+        "type": "fontFamilies"
       },
       "mono": {
         "value": "SFMono-Regular, \"SF Mono\", Consolas, \"Liberation Mono\", Menlo, Courier, monospace",
-        "type": "fontFamily"
+        "type": "fontFamilies"
       }
     },
     "size": {
@@ -859,19 +891,19 @@
     "weight": {
       "normal": {
         "value": "400",
-        "type": "fontWeight"
+        "type": "fontWeights"
       },
       "medium": {
         "value": "500",
-        "type": "fontWeight"
+        "type": "fontWeights"
       },
       "semiBold": {
         "value": "600",
-        "type": "fontWeight"
+        "type": "fontWeights"
       },
       "bold": {
         "value": "700",
-        "type": "fontWeight"
+        "type": "fontWeights"
       }
     },
     "text-case": {
@@ -1622,35 +1654,10 @@
     }
   },
   "layout": {
-    "1px": {
-      "value": "1px",
-      "type": "dimension",
-      "description": "1px"
-    },
-    "2px": {
-      "value": "2px",
-      "type": "dimension",
-      "description": "2px"
-    },
-    "8px": {
-      "value": "8px",
-      "type": "dimension",
-      "description": "8px"
-    },
     "25": {
       "value": "{layout.base} * 0.25",
       "type": "dimension",
       "description": "16px"
-    },
-    "20px": {
-      "value": "20px",
-      "type": "dimension",
-      "description": "20px"
-    },
-    "24px": {
-      "value": "24px",
-      "type": "dimension",
-      "description": "24px"
     },
     "50": {
       "value": "{layout.base} * 0.5",
@@ -1826,6 +1833,31 @@
       "value": "{layout.base} * 16",
       "type": "dimension",
       "description": "1024px"
+    },
+    "1px": {
+      "value": "1px",
+      "type": "dimension",
+      "description": "1px"
+    },
+    "2px": {
+      "value": "2px",
+      "type": "dimension",
+      "description": "2px"
+    },
+    "8px": {
+      "value": "8px",
+      "type": "dimension",
+      "description": "8px"
+    },
+    "20px": {
+      "value": "20px",
+      "type": "dimension",
+      "description": "20px"
+    },
+    "24px": {
+      "value": "24px",
+      "type": "dimension",
+      "description": "24px"
     },
     "0-percent": {
       "value": "{size.0-percent}",

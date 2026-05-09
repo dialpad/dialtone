@@ -5,7 +5,12 @@ import {
   setMode as setModeConfig,
   setBrand,
   setContrast as setContrastConfig,
+  setMaterial as setMaterialConfig,
+  getBrandMaterial,
 } from '@dialpad/dialtone-tokens/themes/config';
+
+const DEFAULT_MATERIAL = 'sandstone';
+const MATERIALS = Object.freeze([DEFAULT_MATERIAL, 'steel', 'graphite', 'iron', 'amethyst', 'jade']);
 
 /**
  * Composable for managing theme, mode, and contrast settings across the documentation site.
@@ -28,6 +33,7 @@ export function useThemeManager(options = {}) {
   const currentMode = inject('currentMode');
   const currentTheme = inject('currentTheme');
   const currentContrast = inject('currentContrast');
+  const currentMaterial = inject('currentMaterial');
   const themes = inject('themes');
 
   // Constants
@@ -53,6 +59,13 @@ export function useThemeManager(options = {}) {
         return 'circle-half-filled';
     }
   });
+
+  // `themes` is provided synchronously in `enhance` (client.js), before any
+  // component mounts — so it's safe to read non-reactively here.
+  const activeBrandModule = computed(() => themes?.[currentTheme.value] ?? null);
+  const lockedMaterial = computed(() => getBrandMaterial(activeBrandModule.value));
+  const isMaterialLocked = computed(() => lockedMaterial.value !== null);
+  const displayedMaterial = computed(() => lockedMaterial.value ?? currentMaterial.value);
 
   /**
    * Computed resolved mode that converts 'system' to actual 'light' or 'dark'
@@ -87,6 +100,23 @@ export function useThemeManager(options = {}) {
     setCss();
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem('preferredContrast', contrast);
+    }
+  };
+
+  /**
+   * Sets the active material (sandstone, steel, graphite, iron).
+   * Sandstone is the default — passing 'sandstone' (or anything unrecognized) removes any override.
+   * @param {string} material - The material name
+   */
+  const setMaterial = (material) => {
+    if (!MATERIALS.includes(material)) {
+      console.warn(`[useThemeManager] Unknown material '${material}'. Falling back to '${DEFAULT_MATERIAL}'.`);
+      material = DEFAULT_MATERIAL;
+    }
+    currentMaterial.value = material;
+    setCss();
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('preferredMaterial', material);
     }
   };
 
@@ -133,6 +163,16 @@ export function useThemeManager(options = {}) {
     }
 
     setBrand(theme, document.documentElement);
+  };
+
+  /**
+   * Applies the selected material via the shared setMaterial config function.
+   * Material switching is attribute-only — `setMaterialConfig` toggles
+   * `data-dt-material` and the pre-bundled per-material CSS handles the rest.
+   * @param {string} material - The material name
+   */
+  const applyMaterialTheme = (material) => {
+    setMaterialConfig(material === DEFAULT_MATERIAL ? null : material, document.documentElement);
   };
 
   /**
@@ -185,6 +225,9 @@ export function useThemeManager(options = {}) {
 
     const brandName = currentTheme.value || 'dp';
     const contrast = currentContrast.value || 'default';
+    // displayedMaterial supersedes currentMaterial on locked brands, so the
+    // user's saved preference is preserved for round-trip back to dp/tmo.
+    const material = displayedMaterial.value || DEFAULT_MATERIAL;
 
     // Use shared setMode function from config.js (handles attribute setting)
     setModeConfig(mode, document.documentElement);
@@ -192,7 +235,9 @@ export function useThemeManager(options = {}) {
     // Set brand attribute manually (setBrand will handle the style injection)
     document.documentElement.setAttribute('data-dt-brand', brandName);
 
-    // Apply brand and contrast themes using shared functions
+    if (!isMaterialLocked.value) {
+      applyMaterialTheme(material);
+    }
     applyBrandTheme(brandName);
     applyContrastTheme(contrast);
   };
@@ -227,15 +272,20 @@ export function useThemeManager(options = {}) {
     currentMode,
     currentTheme,
     currentContrast,
+    currentMaterial,
     themes,
 
     // Computed
     currentModeIconName,
     resolvedMode,
+    isMaterialLocked,
+    lockedMaterial,
+    displayedMaterial,
 
     // Methods
     setMode,
     setContrast,
+    setMaterial,
     setTheme,
 
     // Theme utilities (only when includeThemes is enabled)
@@ -246,5 +296,6 @@ export function useThemeManager(options = {}) {
 
     // Constants
     modes,
+    materials: MATERIALS,
   };
 }

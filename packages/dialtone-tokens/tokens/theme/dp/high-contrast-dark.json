@@ -1,0 +1,98 @@
+{
+  "color": {
+    "link": {
+      "primary": {
+        "value": "{color.purple.900}",
+        "type": "color"
+      },
+      "primary-hover": {
+        "value": "{color.purple.1000}",
+        "type": "color"
+      }
+    },
+    "foreground": {
+      "primary": {
+        "value": "{color.black.1000}",
+        "type": "color"
+      },
+      "critical": {
+        "value": "{color.red.900}",
+        "type": "color"
+      },
+      "critical-strong": {
+        "value": "{color.red.1000}",
+        "type": "color"
+      },
+      "warning": {
+        "value": "{color.gold.900}",
+        "type": "color"
+      },
+      "warning-strong": {
+        "value": "{color.gold.1000}",
+        "type": "color"
+      },
+      "info": {
+        "value": "{color.blue.900}",
+        "type": "color"
+      },
+      "info-copy": {
+        "value": "{color.blue.1000}",
+        "type": "color"
+      }
+    },
+    "border": {
+      "subtle": {
+        "value": "{color.black.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".33",
+              "space": "oklch"
+            }
+          }
+        }
+      },
+      "default": {
+        "value": "{color.black.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".33",
+              "space": "oklch"
+            }
+          }
+        }
+      },
+      "moderate": {
+        "value": "{color.black.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".33",
+              "space": "oklch"
+            }
+          }
+        }
+      },
+      "bold": {
+        "value": "{color.black.1000}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".33",
+              "space": "oklch"
+            }
+          }
+        }
+      }
+    }
+  }
+}

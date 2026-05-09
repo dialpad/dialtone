@@ -90,40 +90,92 @@ CSS variables for themeable parts of the UI, primarily targeting the top bar and
 
 Base colors are the literal value of all available colors. Use these only if all abstracted Text, Status text, Surface, or Border colors do not fit your need — consult a Product Designer.
 
-Each of the colors listed above references these. For example, in Light mode
-`var(--dt-color-foreground-primary)` is an alias to `var(--dt-color-black-900)`, and
-`var(--dt-color-foreground-critical)` is an alias to
+All semantic design tokens reference to these base colors, and base colors are not meant to be used directly. For example, in Light mode
+`var(--dt-color-foreground-primary)` might be aliased to `var(--dt-color-black-900)`, and
+`var(--dt-color-foreground-critical)` might be aliased to
 `var(--dt-color-red-300)`, and will have a different value in Dark mode.
 
-<dt-tab-group outlined activation-mode="auto" size="200">
-  <template #tabs>
-    <dt-tab id="1" panel-id="2" selected>
-      Light Mode
-      <template #icon>
-        <dt-icon name="sun" size="200"></dt-icon>
-      </template>
-    </dt-tab>
-    <dt-tab id="3" panel-id="4">
-      Dark Mode
-      <template #icon>
-        <dt-icon name="moon" size="200"></dt-icon>
-      </template>
-    </dt-tab>
-  </template>
-  <div>
-    <dt-tab-panel id="2" tab-id="1">
+<div :class="{ 'is-bare': !showBaseDetails }">
+  <dt-tab-group outlined activation-mode="auto" size="200">
+    <template #tabs>
+      <dt-box inline-size="100p" padding-inline-end="200">
+        <dt-stack direction="row" gap="300" justify="space-between" align="baseline">
+          <dt-box>
+            <dt-tab id="base-light-tab" panel-id="base-light-panel" selected>
+              Light Mode
+              <template #icon>
+                <dt-icon name="sun" size="200"></dt-icon>
+              </template>
+            </dt-tab>
+            <dt-tab id="base-dark-tab" panel-id="base-dark-panel">
+              Dark Mode
+              <template #icon>
+                <dt-icon name="moon" size="200"></dt-icon>
+              </template>
+            </dt-tab>
+          </dt-box>
+          <dt-toggle size="sm" class="d-g-100" v-model="showBaseDetails">
+            <dt-text kind="label" size="100" strength="normal">Show details</dt-text>
+          </dt-toggle>
+        </dt-stack>
+      </dt-box>
+    </template>
+    <dt-tab-panel id="base-light-panel" tab-id="base-light-tab">
       <ColorsCatalog mode="light"></ColorsCatalog>
     </dt-tab-panel>
-    <dt-tab-panel id="4" tab-id="3">
+    <dt-tab-panel id="base-dark-panel" tab-id="base-dark-tab">
       <ColorsCatalog mode="dark"></ColorsCatalog>
     </dt-tab-panel>
-  </div>
-</dt-tab-group>
+  </dt-tab-group>
+</div>
+
+## Material Palette
+
+Materials are the reference colors used for the "black" ramp, depending on the "Material" theme selected. They do not have direct CSS variables or CSS Utilities. "Sandstone" is the default.
+
+<div :class="{ 'is-bare': !showMaterialDetails }">
+  <dt-tab-group outlined activation-mode="auto" size="200">
+    <template #tabs>
+      <dt-box inline-size="100p" padding-inline-end="200">
+        <dt-stack direction="row" gap="300" justify="space-between" align="baseline">
+          <dt-box>
+            <dt-tab id="material-light-tab" panel-id="material-light-panel" selected>
+              Light Mode
+              <template #icon>
+                <dt-icon name="sun" size="200"></dt-icon>
+              </template>
+            </dt-tab>
+            <dt-tab id="material-dark-tab" panel-id="material-dark-panel">
+              Dark Mode
+              <template #icon>
+                <dt-icon name="moon" size="200"></dt-icon>
+              </template>
+            </dt-tab>
+          </dt-box>
+          <dt-toggle size="sm" class="d-g-100" v-model="showMaterialDetails">
+            <dt-text kind="label" size="100" strength="normal">Show details</dt-text>
+          </dt-toggle>
+        </dt-stack>
+      </dt-box>
+    </template>
+    <dt-tab-panel id="material-light-panel" tab-id="material-light-tab">
+      <MaterialsCatalog mode="light"></MaterialsCatalog>
+    </dt-tab-panel>
+    <dt-tab-panel id="material-dark-panel" tab-id="material-dark-tab">
+      <MaterialsCatalog mode="dark"></MaterialsCatalog>
+    </dt-tab-panel>
+  </dt-tab-group>
+</div>
 
 <script setup>
+import { ref } from 'vue';
 import DesignColorTable from '@baseComponents/DesignColorTable.vue';
 import ThemeColorTable from '@baseComponents/ThemeColorTable.vue';
 import ColorsCatalog from '@views/ColorsCatalog.vue';
+import MaterialsCatalog from '@views/MaterialsCatalog.vue';
+
+const showBaseDetails = ref(true);
+const showMaterialDetails = ref(true);
 
 /*
 * Remove unwanted background-clip classes
@@ -149,3 +201,13 @@ const statusTextColorsExclusionList = [
   'inverted',
 ];
 </script>
+
+<style>
+/* "Show details" toggle off — strip text + padding from each color stop so the
+   catalog reads as a stack of pure-color stripes. !important is needed to
+   override the d-px-150/d-py-100 utility classes on `.color-stop`. */
+.is-bare .color-stop__meta,
+.is-bare .color-stop__lc {
+  opacity: 0;
+}
+</style>
