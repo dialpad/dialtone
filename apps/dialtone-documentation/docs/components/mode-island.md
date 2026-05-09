@@ -259,7 +259,7 @@ Pass a boolean value to conditionally apply or remove the directive. When `false
 - Contrast is inherited from the root `<html>` element and kept in sync via MutationObserver
 - Material is inherited from the root `<html>` element the same way — `data-dt-material` propagates onto the island/directive element so `--dt-color-black-*` re-binds correctly inside inverted regions
 - For `invert` mode, the directive reads the nearest ancestor's `data-dt-mode`, computes the opposite, and reacts when it changes
-- `data-dt-brand` (theme) cannot be set on mode islands — brand is root-level only
+- `data-dt-brand` (theme) and `data-dt-material` cannot be overridden on mode islands — brand and material are root-level by design (material is paired to brand for visual coherence; see [brand-locked materials](/guides/theme-and-mode/#brand-locked-materials))
 
 ## Variants
 

@@ -92,3 +92,4 @@ Bind a reactive variable to switch modes at runtime.
 - For `invert`, watches ancestor mode changes via MutationObserver and reacts automatically
 - Does **not** add the `d-mode-island` CSS class or set `background-color`
 - Interoperable with `<dt-mode-island>` — nesting either inside the other works naturally
+- `data-dt-brand` and `data-dt-material` cannot be overridden — brand and material are root-level by design (material is paired to brand for visual coherence). Mode is the only theming dimension the directive overrides locally.

@@ -65,7 +65,7 @@ All functions live at `@dialpad/dialtone/themes/config`. Theme modules live at `
 | `setMode(mode, rootNode?)` | Switch between `'light'` and `'dark'`. | — |
 | `setBrand(brandTheme, rootNode?)` | Apply a brand. Auto-applies the brand's locked material if declared. | — |
 | `setContrast(contrastTheme \| null, rootNode?)` | Apply or remove a contrast layer. | `null` |
-| `setMaterial(materialTheme \| null, rootNode?)` | Apply or remove a material override. | `null` |
+| `setMaterial(name \| null, rootNode?)` | Apply or remove a material override. Accepts a string material name. | `null` |
 | `getBrandMaterial(brandTheme)` | Returns the brand's locked material name, or `null` for free-choice brands. | — |
 | `hasBrandMaterialLock(brandTheme)` | Boolean form of `getBrandMaterial` for picker logic. | — |
 | `resetTheme(rootNode?)` | Remove all theme styles and attributes. Allows re-`init`. | — |
@@ -118,13 +118,15 @@ setContrast(null);          // Disable high contrast
 
 ```js
 import { setMaterial } from '@dialpad/dialtone/themes/config';
-import Steel from '@dialpad/dialtone/themes/material-steel';
 
-setMaterial(Steel); // Apply the steel material
-setMaterial(null);  // Reset to sandstone (the default)
+setMaterial('steel'); // Apply the steel material
+setMaterial(null);    // Reset to sandstone (the default)
 ```
 
-`setMaterial` swaps the neutral (`--dt-color-black-*`) ramp without touching brand or mode. Pass any of the five non-default materials (`material-steel`, `material-graphite`, `material-iron`, `material-amethyst`, `material-jade`); pass `null` to clear the override.
+`setMaterial` toggles the `data-dt-material` attribute on the root, which selects the matching material override CSS already loaded in the bundle. It doesn't touch brand or mode. Pass any of the five non-default material names (`steel`, `graphite`, `iron`, `amethyst`, `jade`); pass `null` or `'sandstone'` to clear the override.
+
+> [!INFO] Material is root-level by design
+> Material applies at the document root only — there's no per-subtree override. Material is paired to brand for visual coherence (see [Brand-locked materials](#brand-locked-materials)), and mixing materials within a page would break that pairing. Mode (light/dark) is the only theming dimension with per-subtree override (via DtModeIsland and `v-dt-mode`).
 
 ## Available Themes
 
@@ -151,12 +153,14 @@ Dialtone provides 51+ themes. Import any theme from `@dialpad/dialtone/themes/{t
 
 **Materials:**
 
-- `sandstone` - Default warm-yellow neutral ramp (no override CSS shipped — clearing the material returns here)
-- `steel`, `graphite`, `iron`, `amethyst`, `jade` - Override ramps imported from `@dialpad/dialtone/themes/material-{name}`
+- `sandstone` - Default warm-yellow neutral ramp (baked into base CSS — clearing the material returns here)
+- `steel`, `graphite`, `iron`, `amethyst`, `jade` - Override ramps. All ship pre-bundled in the layered CSS; `setMaterial(name)` toggles the active one via `data-dt-material`.
+
+Materials are passed to `setMaterial` by string name — there are no per-material modules to import.
 
 Most brands declare a locked material in their token JSON. Switching to a locked brand auto-applies its material; the [Material picker in the navbar](#brand-locked-materials) disables on those brands. Free-choice brands (`dp`, `tmo`, `prota-deuter`, `trita`) keep the picker enabled.
 
-**Import pattern:**
+**Brand import pattern:**
 
 ```js
 import ThemeName from '@dialpad/dialtone/themes/{theme-name}';
@@ -164,7 +168,6 @@ import ThemeName from '@dialpad/dialtone/themes/{theme-name}';
 import Dp from '@dialpad/dialtone/themes/dp';
 import Melon from '@dialpad/dialtone/themes/melon';
 import ProtaDeuter from '@dialpad/dialtone/themes/prota-deuter';
-import Steel from '@dialpad/dialtone/themes/material-steel';
 ```
 
 <!-- [Browse all themes with visual examples →](/foundations/colors/themes/) -->
@@ -189,7 +192,7 @@ hasBrandMaterialLock(Dp);     // false
 
 Disable material options in your picker when `hasBrandMaterialLock(activeBrandTheme)` returns true.
 
-**Side effect on `setBrand`:** for a locked brand, `setBrand` calls `setMaterial` internally so brand and material land in the same paint frame:
+**Side effect on `setBrand`:** for a locked brand, `setBrand` auto-applies the matching material (toggling `data-dt-material` alongside `data-dt-brand` in the same paint frame):
 
 ```js
 import { setBrand } from '@dialpad/dialtone/themes/config';
@@ -441,11 +444,6 @@ import Dp from '@dialpad/dialtone/themes/dp';
 import Melon from '@dialpad/dialtone/themes/melon'; // locked to iron
 import Tmo from '@dialpad/dialtone/themes/tmo';
 import HighContrast from '@dialpad/dialtone/themes/high-contrast';
-import Steel from '@dialpad/dialtone/themes/material-steel';
-import Graphite from '@dialpad/dialtone/themes/material-graphite';
-import Iron from '@dialpad/dialtone/themes/material-iron';
-import Amethyst from '@dialpad/dialtone/themes/material-amethyst';
-import Jade from '@dialpad/dialtone/themes/material-jade';
 
 const isDark = ref(false);
 const highContrast = ref(false);
@@ -459,14 +457,6 @@ const brandOptions = [
   { value: 'tmo', label: 'T-Mobile' },
 ];
 
-const materials = {
-  sandstone: null, // null clears the override
-  steel: Steel,
-  graphite: Graphite,
-  iron: Iron,
-  amethyst: Amethyst,
-  jade: Jade,
-};
 const materialOptions = [
   { value: 'sandstone', label: 'Sandstone' },
   { value: 'steel', label: 'Steel' },
@@ -490,7 +480,7 @@ function toggleMode() {
 
 watch(currentBrand, (name) => setBrand(brands[name])); // auto-applies any locked material
 watch(userMaterial, (name) => {
-  if (!isMaterialLocked.value) setMaterial(materials[name]);
+  if (!isMaterialLocked.value) setMaterial(name === 'sandstone' ? null : name);
 });
 watch(highContrast, (on) => setContrast(on ? HighContrast : null));
 </script>
