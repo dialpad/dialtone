@@ -13,9 +13,10 @@ export default defineConfig({
   },
   resolve: {
     alias: [
-      // Must precede the '@' prefix alias below — Vite array-form aliases match in order.
+      // Must precede the '@/' prefix alias below — Vite array-form aliases match in order.
       { find: '@/themes/core.js', replacement: coreStub },
-      { find: '@', replacement: packageRoot },
+      // Restricted to '@/...' so it doesn't match scoped package imports like '@scope/pkg'.
+      { find: /^@\/(.*)/, replacement: `${packageRoot}/$1` },
     ],
   },
 });
