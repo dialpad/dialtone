@@ -22,6 +22,9 @@ concurrency:
 jobs:
   changes:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+      contents: read
     outputs:
       vue: ${{ steps.filter.outputs.vue }}
       tokens: ${{ steps.filter.outputs.tokens }}
