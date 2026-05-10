@@ -12,13 +12,21 @@
       <div class="dialtone-header">
         <!-- <dialtone-logo /> -->
         <router-link
-          class="d-pis-100"
+          class="d-pis-100 d-td-none"
           title="Dialtone homepage"
           to="/"
         >
-          <dt-stack>
-            <dt-illustration name="dialpad-logo" />
-          </dt-stack>
+          <DtStack direction="row" gap="150">
+            <DtIllustration name="dialpad-logo" />
+            <DtBox v-if="branchName" padding-block-start="100">
+              <DtBadge>
+                <template #startIcon="{ iconSize }">
+                  <dt-icon-branch :size="iconSize" />
+                </template>
+                {{ branchName }}
+              </DtBadge>
+            </DtBox>
+          </DtStack>
         </router-link>
         <navbar
           @search="openSearch"
@@ -64,6 +72,7 @@ import { computed, ref, watch, onMounted, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import { disableRootScrolling, enableRootScrolling } from '@dialpad/dialtone-vue';
+import { DtIconBranch } from '@dialpad/dialtone-icons/vue';
 
 const route = useRoute();
 const prev = ref(null);
@@ -71,6 +80,7 @@ const next = ref(null);
 const docSearchBtn = ref(null);
 const items = useThemeLocaleData().value.sidebar;
 const mobileBreakpoint = 980;
+const branchName = __DIALTONE_BRANCH_NAME__;
 const evaluateWindowWidth = () => {
   isMobile.value = window.innerWidth <= mobileBreakpoint;
 };
