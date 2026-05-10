@@ -4,7 +4,7 @@ export default {
   default: {
     slots: {
       default: {
-        initialValue: 'Message body with <a href="#" class="d-link d-link--muted">a link</a>.',
+        initialValue: 'Message body with <dt-link href="#" tone="muted">a link</dt-link>.',
       },
     },
     props: {

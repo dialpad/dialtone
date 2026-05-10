@@ -4,7 +4,7 @@
     :disabled="disabled"
     :messages="messages"
     :size="100"
-    @input="e => emit(VALUE_UPDATE_EVENT, e)"
+    @update:model-value="e => emit(VALUE_UPDATE_EVENT, e)"
   >
     <template #label>
       <dt-text

@@ -4,7 +4,7 @@
     :disabled="disabled"
     type="number"
     :size="100"
-    @input="e => emit(VALUE_UPDATE_EVENT, e === '' ? undefined : parseInt(e))"
+    @update:model-value="e => emit(VALUE_UPDATE_EVENT, e === '' ? undefined : parseInt(e))"
   >
     <template #label>
       <dt-text
