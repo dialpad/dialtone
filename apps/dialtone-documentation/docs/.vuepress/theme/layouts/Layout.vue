@@ -18,7 +18,7 @@
         >
           <DtStack direction="row" gap="150">
             <DtIllustration name="dialpad-logo" />
-            <DtBox v-if="branchName" padding-block-start="100">
+            <DtBox v-if="showBranchBadge" padding-block-start="100">
               <DtBadge>
                 <template #startIcon="{ iconSize }">
                   <dt-icon-branch :size="iconSize" />
@@ -81,6 +81,7 @@ const docSearchBtn = ref(null);
 const items = useThemeLocaleData().value.sidebar;
 const mobileBreakpoint = 980;
 const branchName = __DIALTONE_BRANCH_NAME__;
+const showBranchBadge = branchName && (__VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__);
 const evaluateWindowWidth = () => {
   isMobile.value = window.innerWidth <= mobileBreakpoint;
 };
