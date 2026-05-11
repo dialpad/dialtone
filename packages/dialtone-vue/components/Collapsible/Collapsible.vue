@@ -80,7 +80,6 @@
 import { extractVueListeners, getUniqueString, hasSlotContent } from '@/common/utils';
 import DtCollapsibleLazyShow from './CollapsibleLazyShow.vue';
 import { DtButton } from '@/components/Button';
-import { DtLazyShow } from '@/components/LazyShow';
 import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue';
 
 /**
@@ -93,7 +92,6 @@ export default {
   components: {
     DtButton,
     DtCollapsibleLazyShow,
-    DtLazyShow,
     DtIconChevronDown,
     DtIconChevronRight,
   },

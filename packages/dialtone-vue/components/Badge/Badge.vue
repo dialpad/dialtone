@@ -112,7 +112,7 @@ export default {
     /**
      * Decoration for the badge. This can be only used with kind: label and type: default
      * with no left and right icons
-     * @values default, black-400, black-500, black-900, red-200, red-300, red-400, purple-200,
+     * @values black-400, black-500, black-900, red-200, red-300, red-400, purple-200,
      * purple-300, purple-400, purple-500, blue-200, blue-300, blue-400, green-300, green-400,
      * green-500, gold-300, gold-400, gold-500, magenta-200, magenta-300, magenta-400
      */
@@ -184,6 +184,10 @@ export default {
     hasIcons () {
       return this.hasLeftIcon || this.hasRightIcon;
     },
+  },
+
+  mounted () {
+    this.validateProps();
   },
 
   updated () {

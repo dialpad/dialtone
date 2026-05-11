@@ -67,7 +67,7 @@ describe('DtBreadcrumb Tests', () => {
     });
 
     describe('When the breadcrumb has default state', () => {
-      it('should has correct aria-current', () => {
+      it('should have correct aria-current', () => {
         const elementWithValidAria = breadcrumbItems.filter(item => {
           return item.find('[aria-current="location"]').exists();
         });
@@ -75,11 +75,11 @@ describe('DtBreadcrumb Tests', () => {
         expect(elementWithValidAria.length).toBe(1);
       });
 
-      it('should has correct rendered items', () => {
+      it('should have correct rendered items', () => {
         expect(breadcrumbItems.length).toEqual(baseProps.breadcrumbs.length);
       });
 
-      it('should has correct sequence', () => {
+      it('should have correct sequence', () => {
         expect(breadcrumbItems.length).toEqual(baseProps.breadcrumbs.length);
 
         baseProps.breadcrumbs.forEach(({ label }, i) => {
@@ -110,8 +110,8 @@ describe('DtBreadcrumb Tests', () => {
   });
 
   describe('Accessibility Tests', () => {
-    describe('When a new area-label is provided', () => {
-      it('should update area-label value', () => {
+    describe('When a new aria-label is provided', () => {
+      it('should update aria-label value', () => {
         mockProps = { ariaLabel: 'newAria' };
 
         updateWrapper();

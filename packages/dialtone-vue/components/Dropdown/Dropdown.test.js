@@ -109,13 +109,13 @@ describe('DtDropdown Tests', () => {
 
         updateWrapper();
 
-        expect(anchorElement.attributes('aria-expanded') === 'false').toBe(true);
+        expect(anchorElement.attributes('aria-expanded')).toBe('false');
       });
     });
 
     describe('When the dropdown is open', () => {
       it('aria-expanded should be "true"', () => {
-        expect(anchorElement.attributes('aria-expanded') === 'true').toBe(true);
+        expect(anchorElement.attributes('aria-expanded')).toBe('true');
       });
     });
   });
@@ -159,7 +159,7 @@ describe('DtDropdown Tests', () => {
       it('should close the dropdown', async () => {
         await closeButton.trigger('click');
 
-        expect(anchorElement.attributes('aria-expanded') === 'false').toBe(true);
+        expect(anchorElement.attributes('aria-expanded')).toBe('false');
       });
     });
   });

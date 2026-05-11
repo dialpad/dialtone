@@ -9,7 +9,6 @@ const baseSlots = {};
 
 let mockProps = {};
 let mockSlots = {};
-const testContext = {};
 
 describe('DtBreadcrumbItem Tests', () => {
   let wrapper;
@@ -18,7 +17,6 @@ describe('DtBreadcrumbItem Tests', () => {
     wrapper = mount(DtBreadcrumbItem, {
       props: { ...baseProps, ...mockProps },
       slots: { ...baseSlots, ...mockSlots },
-      localVue: testContext.localVue,
     });
   };
 

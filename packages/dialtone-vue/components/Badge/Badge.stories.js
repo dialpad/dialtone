@@ -8,6 +8,7 @@ import {
   BADGE_KIND_MODIFIERS,
   BADGE_DECORATION_MODIFIERS,
 } from './BadgeConstants';
+import { ICON_SIZE_MODIFIERS } from '@/components/Icon';
 
 const iconsList = getIconNames();
 
@@ -89,6 +90,37 @@ export const argTypesData = {
     },
     options: [undefined, ...Object.keys(BADGE_DECORATION_MODIFIERS)],
     // TODO: Find a way to add conditions on more than one argument
+  },
+
+  iconSize: {
+    options: Object.keys(ICON_SIZE_MODIFIERS),
+    control: {
+      type: 'select',
+    },
+  },
+
+  text: {
+    control: { type: 'text' },
+  },
+
+  startIconClass: {
+    description: 'Pass through classes. Used to customize the start icon container',
+  },
+
+  endIconClass: {
+    description: 'Pass through classes. Used to customize the end icon container',
+  },
+
+  subtle: {
+    control: {
+      type: 'boolean',
+    },
+  },
+
+  outlined: {
+    control: {
+      type: 'boolean',
+    },
   },
 
   labelClass: {

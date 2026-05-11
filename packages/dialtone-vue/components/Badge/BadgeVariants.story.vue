@@ -13,7 +13,7 @@
       :type="type.value"
     />
     <dt-badge
-      v-for="type in types.slice(0, types.length - 1)"
+      v-for="type in types.filter(t => t.value !== 'ai')"
       :key="`${type.value}-count`"
       text="1"
       :type="type.value"

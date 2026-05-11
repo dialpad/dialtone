@@ -9,7 +9,8 @@
       class="d-banner__dialog"
       :class="dialogClass"
       :role="role"
-      :aria-labelledby="headerId"
+      :aria-modal="important || undefined"
+      :aria-labelledby="hasHeader ? headerId : undefined"
       :aria-describedby="contentId"
     >
       <dt-notice-icon
@@ -227,6 +228,10 @@ export default {
   computed: {
     role () {
       return this.important ? 'alertdialog' : 'status';
+    },
+
+    hasHeader () {
+      return !!this.headerText || !!this.$slots.header;
     },
 
     bannerClass () {

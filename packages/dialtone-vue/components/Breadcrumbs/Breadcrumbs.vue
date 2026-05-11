@@ -12,7 +12,7 @@
       <slot>
         <dt-breadcrumb-item
           v-for="(item, index) in breadcrumbs"
-          :key="getBreadcrumbItemKey(index)"
+          :key="`breadcrumbs-item-${index}-${item.href}`"
           :inverted="inverted"
           v-bind="item"
         />
@@ -24,7 +24,6 @@
 <script>
 import { BREADCRUMBS_INVERTED_MODIFIER } from './BreadcrumbsConstants';
 import DtBreadcrumbItem from './BreadcrumbItem.vue';
-import utils from '@/common/utils';
 import { DialtoneLocalization } from '@/localization';
 
 /**
@@ -46,7 +45,7 @@ export default {
     breadcrumbs: {
       type: Array,
       default: () => [],
-      validate (breadcrumbs) {
+      validator (breadcrumbs) {
         return breadcrumbs.every(({ href, label }) => {
           return href !== undefined && label !== undefined;
         });
@@ -86,12 +85,6 @@ export default {
       BREADCRUMBS_INVERTED_MODIFIER,
       i18n: new DialtoneLocalization(),
     };
-  },
-
-  methods: {
-    getBreadcrumbItemKey (index) {
-      return `breadcrumbs-item-${index}-${utils.getUniqueString()}`;
-    },
   },
 };
 </script>

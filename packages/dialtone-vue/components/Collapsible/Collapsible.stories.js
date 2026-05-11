@@ -45,6 +45,34 @@ const argTypesData = {
     },
   },
 
+  maxHeight: {
+    control: { type: 'text' },
+  },
+  maxWidth: {
+    control: { type: 'text' },
+  },
+  elementType: {
+    control: { type: 'text' },
+  },
+  contentElementType: {
+    control: { type: 'text' },
+  },
+  anchorClass: {
+    description: 'Additional class name for the anchor wrapper element.',
+  },
+  contentClass: {
+    description: 'Additional class name for the content wrapper element.',
+  },
+  ariaLabel: {
+    control: { type: 'text' },
+  },
+  ariaLabelledBy: {
+    control: { type: 'text' },
+  },
+  open: {
+    control: { type: 'boolean' },
+  },
+
   // Action Event Handlers
   onOpened: {
     table: {
