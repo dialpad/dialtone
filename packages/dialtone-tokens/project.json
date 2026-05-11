@@ -61,6 +61,13 @@
         "command": "pnpm publish --filter ./packages/dialtone-tokens"
       }
     },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "pnpm test"
+      }
+    },
     "release": {
       "executor": "nx:run-commands",
       "options": {
