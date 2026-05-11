@@ -101,7 +101,6 @@ import deepEqual from 'deep-equal';
 import { DialtoneLocalization } from '@/localization';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtRichTextEditor',
 
   components: {

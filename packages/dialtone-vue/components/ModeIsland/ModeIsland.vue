@@ -25,7 +25,6 @@ import {
 
 export default {
   name: 'DtModeIsland',
-  compatConfig: { MODE: 3 },
 
   provide () {
     return {

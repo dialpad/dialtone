@@ -97,7 +97,6 @@
 import { hasSlotContent } from '@/common/utils';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtItemLayout',
   props: {
     /**

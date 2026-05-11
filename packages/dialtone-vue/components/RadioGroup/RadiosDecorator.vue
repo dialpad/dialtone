@@ -14,7 +14,6 @@
 import { DtRadio } from '../Radio';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'RadiosDecorator',
   components: { DtRadio },
   created () {

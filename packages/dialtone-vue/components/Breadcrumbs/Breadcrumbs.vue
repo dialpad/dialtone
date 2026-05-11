@@ -33,7 +33,6 @@ import { DialtoneLocalization } from '@/localization';
  * @see https://dialtone.dialpad.com/components/breadcrumbs.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtBreadcrumbs',
 
   components: {

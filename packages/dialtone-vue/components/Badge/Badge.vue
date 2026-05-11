@@ -68,7 +68,6 @@ import { hasSlotContent } from '@/common/utils/index.js';
  * @see https://dialtone.dialpad.com/components/badge.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtBadge',
 
   props: {

@@ -40,7 +40,6 @@ import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/Toggl
  * @see https://dialtone.dialpad.com/components/toggle.html
  */
 export default {
-  compatConfig: { MODE: 3 },
 
   name: 'DtToggle',
 

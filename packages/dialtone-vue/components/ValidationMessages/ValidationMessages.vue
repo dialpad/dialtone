@@ -35,7 +35,6 @@ import {
  * @see https://dialtone.dialpad.com/components/validation_messages.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtValidationMessages',
 
   props: {

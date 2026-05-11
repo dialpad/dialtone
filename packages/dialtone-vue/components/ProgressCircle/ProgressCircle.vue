@@ -6,7 +6,6 @@
 import { PROGRESS_CIRCLE_SIZES, PROGRESS_CIRCLE_KINDS } from './ProgressCircleConstants';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtProgressCircle',
   props: {
     /** Accessible label read by screen readers. */

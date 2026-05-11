@@ -43,7 +43,6 @@ export const resetHeadlineSemanticInfoFlag = () => {
  * @see https://dialtone.dialpad.com/components/text.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtText',
 
   props: {

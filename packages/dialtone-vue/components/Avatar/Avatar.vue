@@ -105,7 +105,6 @@ const supportsOklch = typeof CSS !== 'undefined' && CSS.supports?.('background',
  * @see https://dialtone.dialpad.com/components/avatar.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtAvatar',
   components: { DtPresence },
 

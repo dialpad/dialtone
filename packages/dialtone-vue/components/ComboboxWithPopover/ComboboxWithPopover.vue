@@ -126,7 +126,6 @@ import { DROPDOWN_PADDING_CLASSES } from '@/components/Dropdown';
 import { CONTENT_MODE_PROP } from '@/common/mode_constants';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtComboboxWithPopover',
 
   components: {

@@ -80,7 +80,6 @@ import { DtButton } from '../Button';
  * @see https://dialtone.dialpad.com/components/tabs.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtTab',
   components: {
     DtButton,

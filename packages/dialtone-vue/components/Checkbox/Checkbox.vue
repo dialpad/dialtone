@@ -83,7 +83,6 @@ import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/componen
  * @see https://dialtone.dialpad.com/components/checkbox.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtCheckbox',
 
   components: { DtValidationMessages, DtText },

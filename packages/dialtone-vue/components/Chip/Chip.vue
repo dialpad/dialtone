@@ -75,7 +75,6 @@ import { DialtoneLocalization } from '@/localization';
  * @see https://dialtone.dialpad.com/components/chip.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtChip',
 
   components: {

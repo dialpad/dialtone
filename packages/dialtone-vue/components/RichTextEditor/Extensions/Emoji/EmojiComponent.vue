@@ -16,7 +16,6 @@ import { nodeViewProps, NodeViewWrapper } from '@tiptap/vue-3';
 import { DtEmoji } from '@/components/Emoji';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'EmojiComponent',
   components: {
     NodeViewWrapper,

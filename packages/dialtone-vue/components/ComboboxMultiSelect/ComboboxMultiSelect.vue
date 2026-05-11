@@ -141,7 +141,6 @@ import {
 import { COMPONENT_SIZES } from '@/common/constants';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtComboboxMultiSelect',
 
   components: {

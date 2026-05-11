@@ -96,7 +96,6 @@ const KEY_ABBREVIATIONS = {
  * @see https://dialtone.dialpad.com/components/keyboard_shortcut.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtKeyboardShortcut',
 
   components: {

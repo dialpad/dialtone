@@ -48,7 +48,6 @@ import { hasSlotContent, returnFirstEl } from '@/common/utils';
 import { DialtoneLocalization } from '@/localization';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'PopoverHeaderFooter',
   components: {
     DtButton,

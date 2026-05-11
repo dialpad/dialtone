@@ -62,7 +62,6 @@ import { COMPONENT_SIZES } from '@/common/constants';
  * @see https://dialtone.dialpad.com/components/combobox.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtCombobox',
 
   components: {

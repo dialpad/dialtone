@@ -49,7 +49,6 @@ import ToastLayoutAlternate from './Layouts/ToastLayoutAlternate.vue';
  * @see https://dialtone.dialpad.com/components/toast.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtToast',
 
   components: {

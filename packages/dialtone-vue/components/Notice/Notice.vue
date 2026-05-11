@@ -50,7 +50,6 @@ import { NOTICE_KINDS, NOTICE_ROLES } from './NoticeConstants';
  * @see https://dialtone.dialpad.com/components/notice.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtNotice',
 
   components: {

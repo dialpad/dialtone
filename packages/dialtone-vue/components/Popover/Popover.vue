@@ -148,7 +148,6 @@ import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
  * @see https://dialtone.dialpad.com/components/popover.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtPopover',
 
   /********************

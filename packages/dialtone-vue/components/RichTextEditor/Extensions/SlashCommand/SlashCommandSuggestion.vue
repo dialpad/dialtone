@@ -23,7 +23,6 @@
 import { DtText } from '@/components/Text';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'SlashCommandSuggestion',
   components: { DtText },
 

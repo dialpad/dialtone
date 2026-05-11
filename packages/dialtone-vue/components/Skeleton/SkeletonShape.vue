@@ -22,7 +22,6 @@ import {
 } from './SkeletonConstants';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtSkeletonShape',
 
   mixins: [SkeletonAnimation],

@@ -151,7 +151,6 @@ const focusableSelector = 'button:not(:disabled),[href],input:not(:disabled),sel
  * @see https://dialtone.dialpad.com/components/modal.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtModal',
 
   components: {

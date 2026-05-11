@@ -11,7 +11,6 @@ const COMMENT_TYPE = h(resolveDynamicComponent(null)).type;
  * @see https://dialtone.dialpad.com/components/emoji_text_wrapper.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtEmojiTextWrapper',
 
   components: {
