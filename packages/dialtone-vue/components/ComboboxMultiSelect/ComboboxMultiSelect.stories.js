@@ -118,6 +118,12 @@ export const argTypesData = {
   hasSuggestionList: {
     control: { type: 'boolean' },
   },
+  collapseOnFocusOut: {
+    control: { type: 'boolean' },
+  },
+  inputWrapperClass: {
+    description: 'Additional class name for the input wrapper element.',
+  },
 
   // Action Event Handlers
   onEscape: {
