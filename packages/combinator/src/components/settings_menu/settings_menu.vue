@@ -23,8 +23,8 @@
           <dt-radio-group
             name="theme-radio-group"
             legend="Theme"
-            :value="settings.root.theme"
-            @input="e => updateSettings('root', 'theme', e)"
+            :model-value="settings.root.theme"
+            @update:model-value="e => updateSettings('root', 'theme', e)"
           >
             <dt-radio value="light">
               Light
@@ -38,8 +38,8 @@
           <dt-radio-group
             name="scheme-radio-group"
             legend="Scheme"
-            :value="settings.code.scheme"
-            @input="e => updateSettings('code', 'scheme', e)"
+            :model-value="settings.code.scheme"
+            @update:model-value="e => updateSettings('code', 'scheme', e)"
           >
             <dt-radio value="mono">
               Mono
@@ -53,8 +53,8 @@
           <dt-radio-group
             name="sidebar-radio-group"
             legend="Sidebar Position"
-            :value="settings.root.sidebar"
-            @input="e => updateSettings('root', 'sidebar', e)"
+            :model-value="settings.root.sidebar"
+            @update:model-value="e => updateSettings('root', 'sidebar', e)"
           >
             <dt-radio value="left">
               Left
@@ -69,14 +69,14 @@
             :key="indentKey"
             type="number"
             label="Indent Spaces"
-            :value="settings.code.indent"
-            @input="updateIndent"
+            :model-value="settings.code.indent"
+            @update:model-value="updateIndent"
           />
         </section>
         <section class="d-p-100">
           <dt-checkbox
-            :checked="settings.code.verbose"
-            @input="e => updateSettings('code', 'verbose', e)"
+            :model-value="settings.code.verbose"
+            @update:model-value="e => updateSettings('code', 'verbose', e)"
           >
             Verbose
           </dt-checkbox>

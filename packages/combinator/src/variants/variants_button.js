@@ -168,7 +168,7 @@ export default {
       kind: { initialValue: 'muted' },
       importance: { initialValue: 'outlined' },
       size: { initialValue: '200' },
-      iconPosition: { initialValue: 'right' },
+      iconPosition: { initialValue: 'end' },
     },
     slots: {
       icon: { initialValue: '<dt-icon name="external-link" :size="iconSize" />' },

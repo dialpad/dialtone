@@ -6,7 +6,7 @@
     input-class="d-pie-400"
     spellcheck="false"
     :size="100"
-    @input="updateValue"
+    @update:model-value="updateValue"
   >
     <template #label>
       <dt-text
