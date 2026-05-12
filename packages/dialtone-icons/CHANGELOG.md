@@ -1,3 +1,10 @@
+# [4.52.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.51.1...dialtone-icons/v4.52.0) (2026-05-12)
+
+
+### Features
+
+* **Dialtone Icons:** NO-JIRA add agent-assist-color brand-full-color icon ([#1265](https://github.com/dialpad/dialtone/issues/1265)) ([d159d78](https://github.com/dialpad/dialtone/commit/d159d7842e5f5f8b21b6ed314cb9b7f1e4c206b7))
+
 ## [4.51.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.51.0...dialtone-icons/v4.51.1) (2026-05-01)
 
 

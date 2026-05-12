@@ -214,6 +214,12 @@
       ]
     },
     "brand-full-color": {
+      "agent-assist-color": [
+        "ai",
+        "conversation",
+        "chat",
+        "brand"
+      ],
       "airtable": [],
       "amex": [],
       "app-store-badge": [],
