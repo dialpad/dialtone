@@ -105,12 +105,22 @@ function capturePR(prNumber, label = 'baseline') {
     process.exit(1);
   }
   try {
-    // Inline review comments (diff comments, per-line)
+    // Inline review comments (diff comments, per-line). Use --paginate to cover PRs
+    // with >30 inline comments (default page size); --jq merges all pages into one array.
     const raw = execSync(
-      `gh api repos/dialpad/dialtone/pulls/${prNumber}/comments`,
+      `gh api --paginate repos/dialpad/dialtone/pulls/${prNumber}/comments --jq '.'`,
       { cwd: ROOT, encoding: 'utf8' },
     );
-    reviewComments = JSON.parse(raw);
+    // --paginate returns multiple JSON arrays concatenated; parse each line if needed.
+    const trimmed = raw.trim();
+    if (trimmed.startsWith('[')) {
+      // Single page or merged array
+      reviewComments = JSON.parse(trimmed);
+    } else {
+      // Multiple pages — split by newline-separated arrays and concatenate
+      reviewComments = trimmed.split(/(?<=\])\s*(?=\[)/)
+        .flatMap(chunk => JSON.parse(chunk));
+    }
   } catch (err) {
     console.warn(`Warning: could not fetch inline review comments for PR #${prNumber}: ${err.message}`);
   }
@@ -120,10 +130,15 @@ function capturePR(prNumber, label = 'baseline') {
     ...reviewComments,
   ];
 
-  // Filter to CodeRabbit comments — use startsWith to catch coderabbitai, coderabbitai[bot], etc.
-  const coderabbitComments = allComments.filter(c =>
-    c.author?.login?.startsWith('coderabbitai'),
-  );
+  // Filter to CodeRabbit comments. The two API sources use DIFFERENT author field shapes:
+  // - `gh pr view --json comments` returns `c.author.login` (issue-comment GraphQL shape)
+  // - `gh api .../pulls/N/comments` returns `c.user.login` (REST review-comment shape)
+  // Check both to avoid dropping inline review comments. Use startsWith to catch
+  // `coderabbitai`, `coderabbitai[bot]`, etc.
+  const coderabbitComments = allComments.filter(c => {
+    const login = c.author?.login || c.user?.login;
+    return login?.startsWith('coderabbitai');
+  });
 
   if (coderabbitComments.length === 0) {
     console.warn(`⚠️  No CodeRabbit comments found for PR #${prNumber}. Check that this PR was reviewed by CodeRabbit.`);
