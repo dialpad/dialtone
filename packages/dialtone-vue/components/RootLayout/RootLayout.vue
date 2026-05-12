@@ -55,7 +55,6 @@ import { ROOT_LAYOUT_SIDEBAR_POSITIONS, ROOT_LAYOUT_RESPONSIVE_BREAKPOINTS } fro
  * A root layout provides a standardized group of containers to display content at the root level.
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtRootLayout',
 
   props: {

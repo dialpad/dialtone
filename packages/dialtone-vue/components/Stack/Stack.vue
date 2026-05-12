@@ -22,7 +22,6 @@ import { directionValidator, gapValidator, alignValidator, justifyValidator } fr
 import { getDefaultDirectionClass, getResponsiveClasses, getDefaultGapClass, getDefaultAlignClass, getDefaultJustifyClass } from './Utils';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtStack',
 
   props: {

@@ -20,7 +20,6 @@ import { LINK_VARIANTS, LINK_KIND_MODIFIERS, getLinkKindModifier } from './LinkC
  * @see https://dialtone.dialpad.com/components/link.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtLink',
 
   props: {

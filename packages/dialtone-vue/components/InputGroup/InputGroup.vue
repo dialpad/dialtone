@@ -42,7 +42,6 @@ import { hasSlotContent } from '@/common/utils';
  * @see https://dialtone.dialpad.com/components/input_group.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtInputGroup',
 
   components: { DtValidationMessages, DtText },

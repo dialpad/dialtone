@@ -30,7 +30,6 @@
 import { DtListItem } from '@/components/ListItem';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'SuggestionList',
   components: {
     DtListItem,

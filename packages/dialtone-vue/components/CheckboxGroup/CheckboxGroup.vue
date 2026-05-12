@@ -8,7 +8,6 @@ import { DtInputGroup } from '../InputGroup';
  * @see https://dialtone.dialpad.com/components/checkbox_group.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtCheckboxGroup',
 
   extends: DtInputGroup,

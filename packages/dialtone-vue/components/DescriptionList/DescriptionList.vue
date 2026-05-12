@@ -1,8 +1,8 @@
 <template>
   <dl :class="['d-description-list', getDirectionClass, getGapClass]">
     <template
-      v-for="item in items"
-      :key="item.term"
+      v-for="(item, index) in items"
+      :key="`${index}-${item.term}`"
     >
       <dt :class="dtClass">
         {{ item.term }}
@@ -20,7 +20,6 @@ import { DT_DESCRIPTION_LIST_DIRECTION } from './DescriptionListConstants';
 import { itemsValidator } from './DescriptionListValidators';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtDescriptionList',
 
   props: {

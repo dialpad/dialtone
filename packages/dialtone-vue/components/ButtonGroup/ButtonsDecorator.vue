@@ -13,7 +13,6 @@
 import { DtButton } from '../Button';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'ButtonsDecorator',
   components: { DtButton },
 };

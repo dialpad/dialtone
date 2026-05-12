@@ -50,7 +50,7 @@
       </div>
     </template>
     <template
-      v-if="showFooter & variants"
+      v-if="showFooter && variants"
       #footer
     >
       <dt-button>

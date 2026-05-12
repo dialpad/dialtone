@@ -84,6 +84,30 @@ export const argTypesData = {
       },
     },
   },
+  showLabel: {
+    control: { type: 'boolean' },
+  },
+  showList: {
+    control: { type: 'boolean' },
+  },
+  listRenderedOutside: {
+    control: { type: 'boolean' },
+  },
+  loading: {
+    control: { type: 'boolean' },
+  },
+  emptyList: {
+    control: { type: 'boolean' },
+  },
+  emptyStateMessage: {
+    control: { type: 'text' },
+  },
+  emptyStateClass: {
+    description: 'Additional class name for the empty list element.',
+  },
+  clickOnSelect: {
+    control: { type: 'boolean' },
+  },
   onBeginningOfList: {
     table: {
       category: 'props',

@@ -191,7 +191,7 @@
       </dt-stack>
     </div>
     <div>
-      <h2>Clickable</h2>
+      <h2>Interactive</h2>
       <dt-stack
         direction="row"
         gap="200"
@@ -199,12 +199,12 @@
         <dt-avatar
           :seed="$attrs.seed"
           full-name="Person avatar"
-          clickable
+          interactive
         />
         <dt-avatar
           :seed="$attrs.seed"
           icon-aria-label="user icon"
-          clickable
+          interactive
         >
           <template #icon>
             <dt-icon-user />
@@ -215,7 +215,7 @@
           full-name="Person avatar"
           :image-src="$attrs.imageSrc"
           :image-alt="$attrs.imageAlt"
-          clickable
+          interactive
         />
       </dt-stack>
     </div>

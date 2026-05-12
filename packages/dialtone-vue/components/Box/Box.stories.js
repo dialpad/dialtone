@@ -11,6 +11,9 @@ import {
   DT_BOX_BORDER_WIDTH_VALUES,
   DT_BOX_BORDER_RADIUS_VALUES,
   DT_BOX_SHADOW_VALUES,
+  DT_BOX_LAYOUT_VALUES,
+  DT_BOX_OVERFLOW_VALUES,
+  DT_BOX_SCROLLBAR_VALUES,
 } from './BoxConstants.js';
 
 export const argsData = {
@@ -79,6 +82,65 @@ export const argTypesData = {
   shadow: {
     control: 'select',
     options: [undefined, ...DT_BOX_SHADOW_VALUES],
+  },
+  overflow: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_OVERFLOW_VALUES],
+  },
+  scrollbar: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_SCROLLBAR_VALUES],
+  },
+  scrollbarContentClass: {
+    description: 'Additional CSS classes applied to the scrollbar content wrapper element.',
+  },
+  inlineSize: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_LAYOUT_VALUES],
+  },
+  blockSize: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_LAYOUT_VALUES],
+  },
+  minInlineSize: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_LAYOUT_VALUES],
+  },
+  maxInlineSize: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_LAYOUT_VALUES],
+  },
+  minBlockSize: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_LAYOUT_VALUES],
+  },
+  maxBlockSize: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_LAYOUT_VALUES],
+  },
+  borderWidthBlock: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_BORDER_WIDTH_VALUES],
+  },
+  borderWidthBlockEnd: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_BORDER_WIDTH_VALUES],
+  },
+  borderWidthBlockStart: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_BORDER_WIDTH_VALUES],
+  },
+  borderWidthInline: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_BORDER_WIDTH_VALUES],
+  },
+  borderWidthInlineEnd: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_BORDER_WIDTH_VALUES],
+  },
+  borderWidthInlineStart: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_BORDER_WIDTH_VALUES],
   },
 };
 

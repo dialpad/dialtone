@@ -11,7 +11,7 @@ describe('DtCodeblock Tests', () => {
 
   const updateWrapper = () => {
     wrapper = mount(DtCodeblock, {
-      propsData: { ...baseProps, ...mockProps },
+      props: { ...baseProps, ...mockProps },
     });
   };
 

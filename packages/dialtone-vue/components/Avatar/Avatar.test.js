@@ -175,30 +175,20 @@ describe('DtAvatar Tests', () => {
         expect(count.exists()).toBe(false);
       });
 
-      it('applies correct digit modifiers at boundaries', async () => {
-        // 9 -> no group shown, no digit modifiers
-        await wrapper.setProps({ group: 9 });
-        expect(wrapper.classes('d-avatar--group')).toBe(true);
-        expect(wrapper.classes('d-avatar--group-digits-2')).toBe(false);
-        expect(wrapper.classes('d-avatar--group-digits-3')).toBe(false);
+      it.each([
+        [9, true, false, false],
+        [10, true, true, false],
+        [99, true, true, false],
+        [100, true, false, true],
+      ])('group %i applies d-avatar--group=%s, digits-2=%s, digits-3=%s', async (group, hasGroup, hasDigits2, hasDigits3) => {
+        await wrapper.setProps({ group });
+        expect(wrapper.classes('d-avatar--group')).toBe(hasGroup);
+        expect(wrapper.classes('d-avatar--group-digits-2')).toBe(hasDigits2);
+        expect(wrapper.classes('d-avatar--group-digits-3')).toBe(hasDigits3);
+      });
 
-        // 10 -> base + digits-2
-        await wrapper.setProps({ group: 10 });
-        expect(wrapper.classes('d-avatar--group')).toBe(true);
-        expect(wrapper.classes('d-avatar--group-digits-2')).toBe(true);
-        expect(wrapper.classes('d-avatar--group-digits-3')).toBe(false);
-
-        // 99 -> base + digits-2
-        await wrapper.setProps({ group: 99 });
-        expect(wrapper.classes('d-avatar--group')).toBe(true);
-        expect(wrapper.classes('d-avatar--group-digits-2')).toBe(true);
-        expect(wrapper.classes('d-avatar--group-digits-3')).toBe(false);
-
-        // 100 -> base + digits-3 and count shows 99+
+      it('shows 99+ when group is 100 or more', async () => {
         await wrapper.setProps({ group: 100 });
-        expect(wrapper.classes('d-avatar--group')).toBe(true);
-        expect(wrapper.classes('d-avatar--group-digits-2')).toBe(false);
-        expect(wrapper.classes('d-avatar--group-digits-3')).toBe(true);
         const count = wrapper.find('[data-qa="dt-avatar-count"]');
         expect(count.text()).toBe('99+');
       });

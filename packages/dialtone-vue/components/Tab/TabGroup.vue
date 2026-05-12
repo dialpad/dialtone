@@ -60,7 +60,6 @@ import { useIndicatorAnimation } from '@/common/composables/useIndicatorAnimatio
  * @see https://dialtone.dialpad.com/components/tabs.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtTabGroup',
 
   provide () {

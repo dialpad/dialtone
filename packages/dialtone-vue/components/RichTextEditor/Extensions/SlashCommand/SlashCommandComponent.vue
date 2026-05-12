@@ -11,7 +11,6 @@
 import { nodeViewProps, NodeViewWrapper } from '@tiptap/vue-3';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'SlashCommandsComponent',
   components: {
     NodeViewWrapper,

@@ -21,7 +21,6 @@
  * @see https://dialtone.dialpad.com/components/lazy_show.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtLazyShow',
 
   inheritAttrs: false,
