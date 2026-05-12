@@ -706,7 +706,6 @@ export default {
     setInputPadding () {
       const lastChip = this.getLastChip();
       const input = this.getInput();
-      const chipsWrapper = this.$refs.chipsWrapper;
       if (!input) return;
       this.revertInputPadding(input);
       this.popoverOffset = [0, 4];
@@ -718,29 +717,27 @@ export default {
       // Get the position of the last chip
       // The input cursor should be the same "top" as that chip and next besides it
       const left = lastChip.offsetLeft + this.getFullWidth(lastChip);
-      const spaceLeft = input.getBoundingClientRect().width - left;
-
+      const hasSpace = input.getBoundingClientRect().width - left > this.reservedRightSpace;
       const firstChip = this.getFirstChip();
       const isWrapped = firstChip && lastChip.offsetTop > firstChip.offsetTop;
 
-      input.style.paddingLeft = spaceLeft > this.reservedRightSpace ? `${left}px` : '4px';
+      input.style.paddingLeft = hasSpace ? `${left}px` : '4px';
 
+      const paddingTop = this.getInputPaddingTop(lastChip, hasSpace, isWrapped);
+      if (paddingTop != null) input.style.paddingTop = `${paddingTop}px`;
+    },
+
+    getInputPaddingTop (lastChip, hasSpace, isWrapped) {
       // Chip fits beside the cursor on its row; CSS handles vertical centering.
-      if (spaceLeft > this.reservedRightSpace && !isWrapped) return;
-
+      if (hasSpace && !isWrapped) return null;
       // Chip wrapped onto a new row with space remaining; align cursor to it.
-      if (spaceLeft > this.reservedRightSpace) {
-        input.style.paddingTop = `${lastChip.offsetTop + 2}px`;
-        return;
-      }
-
+      if (hasSpace) return lastChip.offsetTop + 2;
       // No space for cursor on the chip's row — predict the offsetTop a chip
       // would have on the next row so paddingTop stays constant when a chip
       // later lands there.
-      const wrapperPadTop = parseFloat(getComputedStyle(chipsWrapper).paddingTop) || 0;
       const chipMarginTop = parseFloat(getComputedStyle(lastChip).marginTop) || 0;
-      const wrapperH = chipsWrapper.getBoundingClientRect().height;
-      input.style.paddingTop = `${wrapperH - wrapperPadTop + chipMarginTop + 2}px`;
+      const lastChipHeight = lastChip.getBoundingClientRect().height;
+      return lastChip.offsetTop + lastChipHeight + chipMarginTop + 2;
     },
 
     revertInputPadding (input) {
