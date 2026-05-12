@@ -4,10 +4,26 @@ import { llmsPlugin } from '@vuepress/plugin-llms';
 import viteSvgLoader from 'vite-svg-loader';
 import anchor from 'markdown-it-anchor';
 import { getDirname, path } from 'vuepress/utils'
+import { execSync } from 'node:child_process';
 
 const sidebar = require('../_data/site-nav.json');
 const { dialtoneVuepressTheme } = require('./theme');
 const baseURL = (process.env.VUEPRESS_BASE_URL ?? '/');
+
+function resolveBranchName () {
+  // GITHUB_HEAD_REF is set on pull_request events; GITHUB_REF_NAME on push events.
+  const fromCi = process.env.GITHUB_HEAD_REF || process.env.GITHUB_REF_NAME;
+  if (fromCi) return fromCi;
+  try {
+    return execSync('git symbolic-ref --short HEAD', { stdio: ['ignore', 'pipe', 'ignore'] })
+      .toString()
+      .trim();
+  } catch {
+    return '';
+  }
+}
+
+const branchName = resolveBranchName();
 
 const themeConfig = {
   logo: baseURL + 'assets/images/dialpad-logo.svg',
@@ -40,6 +56,7 @@ export default defineUserConfig({
     viteOptions: {
       define: {
         __DIALTONE_DEPLOY_PREVIEW__: JSON.stringify(baseURL.includes('deploy-previews')),
+        __DIALTONE_BRANCH_NAME__: JSON.stringify(branchName),
       },
       build: {
         sourcemap: true,

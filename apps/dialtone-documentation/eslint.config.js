@@ -19,6 +19,7 @@ export default [
         __VUEPRESS_SSR__: 'readonly',
         __VUEPRESS_DEV__: 'readonly',
         __DIALTONE_DEPLOY_PREVIEW__: 'readonly',
+        __DIALTONE_BRANCH_NAME__: 'readonly',
       },
     },
     rules: {
