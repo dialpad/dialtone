@@ -1,3 +1,10 @@
+# [3.220.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.219.4...dialtone-vue/v3.220.0) (2026-05-12)
+
+
+### Features
+
+* **Combobox With Popover, Combobox Multi Select:** DLT-3395 forward dialogClass to popover dialog ([#1254](https://github.com/dialpad/dialtone/issues/1254)) ([0059451](https://github.com/dialpad/dialtone/commit/0059451c0ce901cd47eb1498d8dfc28e5282a73c))
+
 ## [3.219.4](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.219.3...dialtone-vue/v3.219.4) (2026-05-05)
 
 
