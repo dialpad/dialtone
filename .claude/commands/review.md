@@ -1,11 +1,12 @@
 ---
-description: Run a local code review against Dialtone review rules. Reviews staged/unstaged changes or specific files.
+description: Run a local code review using the 3-agent + validator pipeline against Dialtone rules. Reviews staged/unstaged changes with confidence-scored findings.
 ---
 
-Run the **review** skill to check changed code against the Dialtone code review checklist.
+Run the **review** skill to check changed code through the Dialtone review pipeline (Conventions + Bugs/Logic + Architecture agents, then a batched Validator with confidence threshold 80%).
 
 ## Usage
 
-- `/review` — Review all changed files
-- `/review <area>` — Focus on one category: `reuse`, `quality`, `vue`, `css`, `api`, `testing`, `storybook`, `i18n`, `accessibility`
-- `/review <file>` — Review a specific file
+- `/review` — Review all changed files (full 3-agent pipeline)
+- `/review <area>` — Focus on one area: `vue`, `css`, `api`, `testing`, `storybook`, `i18n`, `accessibility`
+
+**Removed:** `/review <file>` mode — run `/review` on a branch where only that file has changed instead.

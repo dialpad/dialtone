@@ -13,6 +13,25 @@ knowledge_base:
       instructions: "Primary Dialpad web app and the main consumer of @dialpad/dialtone-vue components and Dialtone CSS utilities."
 
 reviews:
+  # Signal-over-noise tuning — 2026-05-12 (DLT code-review-coordination)
+  # PHASE 0 REQUIRED: before evaluating this config, capture baseline ratings:
+  #   node scripts/benchmark-review.mjs --pr 1259 --label pre-coderabbit-tuning
+  #   then rate every CodeRabbit comment as useful/noise in the CSV.
+  #   Run again post-merge with --label post to compare useful-ratio.
+  #
+  # Phase 1 (override inherited profile): chill produces fewer speculative comments
+  # vs. assertive. Verify: open a small test PR and check CodeRabbit's walkthrough
+  # section for "profile: chill", or compare comment volume on the same diff.
+  profile: chill
+  #
+  # Phase 2 (cosmetic features disabled): these add lines to PRs without review signal.
+  poem: false
+  high_level_summary: false
+  review_status: false
+  collapse_walkthrough: true
+  related_issues: false
+  related_prs: false
+
   # CODEOWNERS (.github/CODEOWNERS) already assigns the full team on every PR.
   # These rules supplement CODEOWNERS with area-specific expertise suggestions.
   # auto_assign_reviewers: false → suggest only, not assign (CODEOWNERS handles assignment).
@@ -106,8 +125,6 @@ reviews:
     # Vue tests
     - path: 'packages/dialtone-vue/**/*.test.js'
       instructions: >
-        - Tests use Vitest + @vue/test-utils.
-
         - One assertion per test. Use beforeAll/beforeEach to reduce repetition.
           Use it.each for similar tests with different values.
 
@@ -116,7 +133,13 @@ reviews:
 
         Follow the conventions in .claude/rules/vue-tests.md.
 
+        # TRIMMED: "Tests use Vitest + @vue/test-utils" — informational, not a flaggable rule.
+
     # CSS utilities
+    # PHASE 3 PENDING: "Flag raw hex/rgb values" may be covered by stylelint-plugin-dialtone.
+    # Before trimming, verify: run `pnpm nx run dialtone-css:lint` against a .less file
+    # with `width: 16px; color: #fff;` and confirm both are flagged. If confirmed,
+    # remove the "hardcoded raw values" instruction to avoid duplicate-of-CI commentary.
     - path: 'packages/dialtone-css/**'
       instructions: >
         - All values must use var(--dt-*) custom properties. Flag any hardcoded

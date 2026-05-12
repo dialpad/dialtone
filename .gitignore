@@ -82,3 +82,12 @@ SKILLS_TODO*.md
 *.deprecated
 .claude/scheduled_tasks.lock
 .omx/
+
+# CodeGraph local index (per-machine)
+.codegraph/
+
+# Session-local plan files (committed plans live in docs/plans/)
+.claude/plans/
+
+# Benchmark output (per-run test artifacts; committed plans live in docs/plans/)
+scripts/benchmark-review-output/

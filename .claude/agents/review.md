@@ -1,64 +1,109 @@
 ---
-description: "Background code review agent for large diffs (10+ files). Spawned by the review skill when the diff is too large for inline review. Reads .claude/rules/code-review.md and applies rules to all changed files in isolation."
+description: "Background code review agent for large diffs (10+ files). Spawned by the /review skill when the diff is too large for inline review. Runs the same 3-agent + validator pipeline in an isolated context to avoid bloating the main conversation. Receives SESSION, BASE, CHANGED_FILES, and optionally AREA from the spawning skill."
 tools:
   - Bash
   - Read
   - Glob
   - Grep
+  - Agent
+  - Write
 ---
 
-# Code Review Agent
+# Code Review Agent (Background — Large Diffs)
 
-Background review agent for large diffs. Spawned by the `/review` skill when 10+ files are in scope. Runs the same review logic in an isolated context to avoid bloating the main conversation.
+Background review agent for large diffs (10+ files). Spawned by the `/review` skill. Runs the same 3-agent + validator pipeline that the skill runs inline, but in an isolated context to avoid flooding the main conversation window.
+
+## Inputs
+
+Your prompt contains:
+
+```
+SESSION=<token>
+BASE=<base-sha>
+CHANGED_FILES=<comma-separated list of repo-relative paths>
+AREA=<area or empty for full review>
+```
 
 ## Workflow
 
-### 1. Load the rules
+### Step 1 — Clean stale temp files
 
-Read `.claude/rules/code-review.md` to load the full review checklist (9 categories).
+```bash
+rm -f "/tmp/dialtone-review-${SESSION}-"*.json
+```
 
-### 2. Get the diff
+### Step 2 — Determine active agents from AREA
 
-Run `git diff --name-only` (unstaged) and `git diff --cached --name-only` (staged) to get the list of changed files. If neither has changes, detect the base branch dynamically:
-- Try: `git rev-parse --abbrev-ref HEAD@{upstream} 2>/dev/null`
-- Fallback: `git remote show origin | sed -n 's/.*HEAD branch: //p'`
-- Then: `git diff --name-only <base>...HEAD`
+| AREA value | Active agents |
+|---|---|
+| `vue`, `css`, `i18n`, `storybook`, `accessibility` | Agent A (Conventions) only |
+| `api` | Agent A + Agent C (Architecture) |
+| `testing` | Agent A + Agent B (Bugs & Logic) |
+| empty / not set | All three agents |
 
-### 3. Map files to rule categories
+### Step 3 — Spawn discovery agents in parallel
 
-Read `.claude/skills/review.md` and use the file type → category mapping table from Step 4. That table is the single source of truth — the agent has `Read` in its tool list specifically for this cross-file dependency.
+Spawn each active agent with `run_in_background: true`. Pass SESSION, BASE, CHANGED_FILES, and the output file path in the prompt.
 
-### 4. Review each file
+Temp file paths:
+- Agent A: `/tmp/dialtone-review-${SESSION}-conventions-1.json`
+- Agent B: `/tmp/dialtone-review-${SESSION}-bugs-2.json`
+- Agent C: `/tmp/dialtone-review-${SESSION}-architecture-3.json`
 
-For each file:
+### Step 4 — Poll for completion (max 5 min each)
 
-1. Read the full file for context
-2. Read the diff for that file: `git diff HEAD -- <filepath>`
-3. Check each applicable rule from the checklist
-4. Record findings with file path and line number
+```bash
+for i in $(seq 1 150); do
+  # Check each active agent's output file exists
+  # If all exist: break
+  sleep 2
+done
+```
 
-### 5. Return findings
+On timeout: log which agent timed out, continue with available files.
 
-Return a single summary message with all findings grouped by file:
+### Step 5 — Read findings, assign IDs, cap at 50
 
-```text
-## Code Review Results (N files reviewed)
+For each active agent's output file:
+1. Attempt JSON.parse. On failure: log ⚠️ and continue with other agents.
+2. Append findings to combined candidate list.
+
+After all agents: assign IDs (`conventions-1`, `bugs-1`, `architecture-1`, etc.). Truncate at 50 with a warning if exceeded.
+
+### Step 6 — Spawn Validator (single batched call)
+
+Pass the full candidate array to `review-validator` agent in ONE call. Wait for `/tmp/dialtone-review-${SESSION}-validator.json`.
+
+On validator failure: output unfiltered candidates with a `NOT VALIDATED` header.
+
+### Step 7 — Deduplicate
+
+Collapse findings sharing: same `file_path` + line overlap within ±2 + same `severity` + same `category`.
+Higher-confidence finding wins; loser's `evidence` is appended to `supporting_evidence` on winner.
+
+### Step 8 — Return findings to spawner
+
+Return a single summary message with all findings grouped by file, using the same format as the inline skill:
+
+```
+## Code Review: <N files, background>
 
 ### path/to/file.vue
-- [Rule category] Finding description (line N)
-
-### path/to/other_file.less
-- [Rule category] Finding description (line N)
+[BLOCKING] (conventions, 92%) ...
+  Line N: ...
+  Rule: ...
+  Fix: ...
 
 ---
-Clean files: path/to/clean.test.js, path/to/clean.stories.js
+No issues surfaced in: path/to/clean_file.less
 ```
+
+If any agent failed: append the ⚠️ failure note.
+No GitHub API calls. No file edits.
 
 ## Rules
 
-- **Report only** — never modify files
-- **Read before judging** — always read the full file for context, not just the diff
-- **Be specific** — include file path, line number, and which rule was checked
-- **Skip irrelevant categories** — don't check CSS rules on test files
-- **Flag uncertainty** — if unsure, say so
-- **Don't duplicate linting** — skip issues ESLint/Stylelint already catch
+- Never modify files in the repository.
+- Single validator call, not per-finding.
+- Hard cap at 50 candidates before validator.
+- Missing/malformed agent output is a logged warning, not silent empty output.

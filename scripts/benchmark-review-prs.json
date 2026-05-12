@@ -1,0 +1,14 @@
+[
+  {
+    "pr": 1259,
+    "title": "feat(mcp-server, query-core, dialtone-docs, dialtone-cli): DLT-3416 add search_documentation tool",
+    "baseSha": "origin/staging",
+    "notes": "Good candidate: mix of new feature code, tests, config, docs. Had 9 CodeRabbit review comments."
+  },
+  {
+    "pr": 1254,
+    "title": "feat(combobox-with-popover, combobox-multi-select): DLT-3395 forward dialogClass to popover dialog",
+    "baseSha": "origin/staging",
+    "notes": "Good candidate: Vue component changes, has CodeRabbit review."
+  }
+]
