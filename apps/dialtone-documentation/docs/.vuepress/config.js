@@ -15,7 +15,7 @@ function resolveBranchName () {
   const fromCi = process.env.GITHUB_HEAD_REF || process.env.GITHUB_REF_NAME;
   if (fromCi) return fromCi;
   try {
-    return execSync('git rev-parse --abbrev-ref HEAD', { stdio: ['ignore', 'pipe', 'ignore'] })
+    return execSync('git symbolic-ref --short HEAD', { stdio: ['ignore', 'pipe', 'ignore'] })
       .toString()
       .trim();
   } catch {
