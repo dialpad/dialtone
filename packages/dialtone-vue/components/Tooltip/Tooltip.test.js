@@ -307,4 +307,64 @@ describe('DtTooltip tests', () => {
       });
     });
   });
+
+  describe('appendTo behavior', () => {
+    describe('when anchor is inside a <dialog> element and appendTo is "body"', () => {
+      it('should append the tooltip to the dialog element, not body', async () => {
+        const dialogEl = document.createElement('dialog');
+        document.body.appendChild(dialogEl);
+
+        const localWrapper = mount(DtTooltip, {
+          props: { delay: false, appendTo: 'body', open: true },
+          slots: { ...baseSlots },
+          global: { stubs: { transition: false } },
+          attachTo: dialogEl,
+        });
+
+        await flushPromises();
+
+        const tippyBoxInDialog = dialogEl.querySelector('.tippy-box');
+        expect(tippyBoxInDialog).not.toBeNull();
+
+        localWrapper.unmount();
+        document.body.removeChild(dialogEl);
+      });
+    });
+
+    describe('when anchor is NOT inside a <dialog> element', () => {
+      it('should append the tooltip to body', async () => {
+        mockProps = { open: true };
+        updateWrapper();
+        await flushPromises();
+
+        const tippyBoxInBody = document.body.querySelector('.tippy-box');
+        expect(tippyBoxInBody).not.toBeNull();
+      });
+    });
+
+    describe('when anchor is inside a <dialog> but appendTo is explicitly set to an HTMLElement', () => {
+      it('should use the explicit appendTo target, bypassing dialog detection', async () => {
+        const dialogEl = document.createElement('dialog');
+        const explicitTarget = document.createElement('div');
+        document.body.appendChild(dialogEl);
+        document.body.appendChild(explicitTarget);
+
+        const localWrapper = mount(DtTooltip, {
+          props: { delay: false, appendTo: explicitTarget, open: true },
+          slots: { ...baseSlots },
+          global: { stubs: { transition: false } },
+          attachTo: dialogEl,
+        });
+
+        await flushPromises();
+
+        expect(explicitTarget.querySelector('.tippy-box')).not.toBeNull();
+        expect(dialogEl.querySelector('.tippy-box')).toBeNull();
+
+        localWrapper.unmount();
+        document.body.removeChild(dialogEl);
+        document.body.removeChild(explicitTarget);
+      });
+    });
+  });
 });
