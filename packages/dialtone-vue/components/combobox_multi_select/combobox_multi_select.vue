@@ -716,19 +716,22 @@ export default {
 
       input.style.paddingLeft = spaceLeft > this.reservedRightSpace ? `${left}px` : '4px';
 
-      if (spaceLeft > this.reservedRightSpace && !isWrapped) {
-        // Chip and cursor share the input's first row; chip is centered via CSS.
-        return;
-      }
+      // Chip fits beside the cursor on its row; CSS handles vertical centering.
+      if (spaceLeft > this.reservedRightSpace && !isWrapped) return;
 
+      // Chip wrapped onto a new row with space remaining; align cursor to it.
       if (spaceLeft > this.reservedRightSpace) {
         input.style.paddingTop = `${lastChip.offsetTop + 2}px`;
         return;
       }
 
-      const chipsWrapperHeight = chipsWrapper.getBoundingClientRect().height - 4;
-      const lastChipHeight = lastChip.getBoundingClientRect().height - 4;
-      input.style.paddingTop = `${chipsWrapperHeight + lastChipHeight - 9}px`;
+      // No space for cursor on the chip's row — predict the offsetTop a chip
+      // would have on the next row so paddingTop stays constant when a chip
+      // later lands there.
+      const wrapperPadTop = parseFloat(getComputedStyle(chipsWrapper).paddingTop) || 0;
+      const chipMarginTop = parseFloat(getComputedStyle(lastChip).marginTop) || 0;
+      const wrapperH = chipsWrapper.getBoundingClientRect().height;
+      input.style.paddingTop = `${wrapperH - wrapperPadTop + chipMarginTop + 2}px`;
     },
 
     revertInputPadding (input) {
@@ -768,13 +771,18 @@ export default {
     setInitialInputHeight () {
       const input = this.getInput();
       if (!input) return;
-      // Reset before measuring the natural height for the current size.
-      input.style.minHeight = '';
-      input.style.height = '';
+      // xs renders correctly without the min-height floor; only sm/md need it
+      // so the input can grow when chips wrap.
+      const enforceHeight = this.size !== 'xs';
+      if (enforceHeight) {
+        input.style.minHeight = '';
+        input.style.height = '';
+      }
       this.initialInputHeight = input.getBoundingClientRect().height;
-      // min-height floors the box; height: auto lets it grow when chips wrap.
-      input.style.minHeight = `${this.initialInputHeight}px`;
-      input.style.height = 'auto';
+      if (enforceHeight) {
+        input.style.minHeight = `${this.initialInputHeight}px`;
+        input.style.height = 'auto';
+      }
     },
 
     async handleInputFocusIn () {
