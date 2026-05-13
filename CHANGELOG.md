@@ -1,3 +1,22 @@
+# [9.183.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.183.0-next.2...dialtone/v9.183.0-next.3) (2026-05-13)
+
+
+### Bug Fixes
+
+* **Components:** dlt-3408 components clean up ([#1264](https://github.com/dialpad/dialtone/issues/1264)) ([38c383a](https://github.com/dialpad/dialtone/commit/38c383a0e5d3cb5ff16d01c747b31c70d6baf513))
+* **Modal:** auto-detect shadow root and teleport dialog into it ([#1268](https://github.com/dialpad/dialtone/issues/1268)) ([f945c84](https://github.com/dialpad/dialtone/commit/f945c847e96007d31e9f9de4f554579e4e3d925c))
+
+
+### Code Refactoring
+
+* **Combinator:** DLT-3418 migrate controls prop changes ([#1261](https://github.com/dialpad/dialtone/issues/1261)) ([ab03b44](https://github.com/dialpad/dialtone/commit/ab03b44225ba3f7acc3be5303a57d2921759acb5))
+
+
+### Features
+
+* **Design Tokens:** DLT-3368 DLT-3371 DLT-3410 add material dimension and brand-locked pairings ([#1252](https://github.com/dialpad/dialtone/issues/1252)) ([eeedc67](https://github.com/dialpad/dialtone/commit/eeedc6780f6107f618daf283669f01de74a1abb6))
+* **Popover, Tooltip:** DLT-3419 auto-append to nearest dialog for top-layer support ([#1266](https://github.com/dialpad/dialtone/issues/1266)) ([a5427e8](https://github.com/dialpad/dialtone/commit/a5427e8210a35663dbd397aee58d0ff05a376210))
+
 # [9.183.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.183.0-next.1...dialtone/v9.183.0-next.2) (2026-05-07)
 
 
