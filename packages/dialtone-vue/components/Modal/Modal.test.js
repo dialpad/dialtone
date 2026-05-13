@@ -266,5 +266,56 @@ describe('DtModal Tests', () => {
 
       document.documentElement.removeAttribute('data-dt-mode');
     });
+
+    describe('When rendered inside a shadow root', () => {
+      let shadowHost;
+      let shadowRoot;
+      let mountPoint;
+
+      beforeEach(async () => {
+        shadowHost = document.createElement('div');
+        document.body.appendChild(shadowHost);
+        shadowRoot = shadowHost.attachShadow({ mode: 'open' });
+
+        mountPoint = document.createElement('div');
+        shadowRoot.appendChild(mountPoint);
+
+        wrapper = mount(DtModal, {
+          props: { ...baseProps, ...mockProps },
+          attachTo: mountPoint,
+        });
+
+        await wrapper.vm.$nextTick();
+      });
+
+      afterEach(() => {
+        wrapper.unmount();
+        shadowHost.remove();
+      });
+
+      it('should teleport the dialog into the shadow root', () => {
+        const dialog = shadowRoot.querySelector('[data-qa="dt-modal"]');
+        expect(dialog).not.toBeNull();
+      });
+
+      it('should not teleport into shadow root when appendTo prop is provided', async () => {
+        const target = document.createElement('div');
+        document.body.appendChild(target);
+        target.id = 'custom-target';
+
+        wrapper.unmount();
+        wrapper = mount(DtModal, {
+          props: { ...baseProps, appendTo: '#custom-target' },
+          attachTo: mountPoint,
+        });
+
+        await wrapper.vm.$nextTick();
+
+        expect(shadowRoot.querySelector('[data-qa="dt-modal"]')).toBeNull();
+        expect(target.querySelector('[data-qa="dt-modal"]')).not.toBeNull();
+
+        target.remove();
+      });
+    });
   });
 });
