@@ -32,7 +32,7 @@ Work through each applicable guide in order. Guides earlier in the list are prer
 | 9 | [Component Sizes to Numeric](./component-sizes/) | Deprecation | ESLint + `dialtone-migrate-tshirt-to-numeric` | `size="sm"` becomes `:size="200"` across all components. |
 | 10 | [Avatar Updates](./avatar-updates/) | **Yes** | Manual (grep) | `DtAvatar` size prop moves to numeric, `iconSize` removed, group avatar behavior changed. |
 | 11 | [Logical Naming](./logical-naming/) | Deprecation | `dialtone-migration-helper` | Slots, props, events: `left`/`right` becomes `start`/`end`. |
-| 12 | [Recipes to UI Kits](./recipes-to-ui-kits/) | **Yes** | Migration script | `DtRecipe*` components move to standalone `@dialpad/` UI Kit packages. |
+| 12 | [Removal of Dialtone Recipes](./recipes-to-ui-kits/) | **Yes** | Migration script | All `DtRecipe*` components have been removed. Use standalone `@dialpad/` UI Kit packages instead. |
 | 13 | [Component Props & Events](./component-props/) | **Yes** | `dialtone-migrate-props` | Value renames (including DtBox `surface`/`bc`, DtText `tone-strong`, DtButton `link-kind`), `show` becomes `open`, `hide-*` inversion, `title` becomes `header-text`, event/slot renames, `rootClass` removal. |
 | 14 | [DtChip interactive default](./chip-interactive/) | **Yes** | `dialtone-migrate-chip-interactive` | `interactive` prop default changed from `true` to `false`. Chips that need click/keyboard behavior must opt in with `:interactive="true"`. |
 | 15 | [Scrollbar :never → :always](./scrollbar-always/) | **Yes** | `dialtone-migrate-scrollbar-always` | `v-dt-scrollbar:never` renamed to `v-dt-scrollbar:always`; `DtBox` `scrollbar="never"` renamed to `scrollbar="always"`. |
