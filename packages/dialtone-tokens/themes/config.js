@@ -118,17 +118,19 @@ export function setTheme (theme, rootNode = document.documentElement, contrastTh
  */
 function _setThemeLegacy(theme, rootNode = document.documentElement, contrastTheme = null) {
   _setThemeAttributeOnRoot(theme.base.name, theme.brand.name, rootNode);
-  const styleRoot = rootNode?.shadowRoot ?? rootNode;
+  if (rootNode?.shadowRoot) {
+    rootNode = rootNode.shadowRoot;
+  }
   // Load css files
-  _setStyleTag('dialtone-css-theme', theme.base.css, styleRoot);
-  _setStyleTag('dialtone-css-brand', theme.brand.css, styleRoot);
+  _setStyleTag('dialtone-css-theme', theme.base.css, rootNode);
+  _setStyleTag('dialtone-css-brand', theme.brand.css, rootNode);
 
   // Apply contrast layer
   if (contrastTheme) {
-    _setStyleTag('dialtone-css-contrast', contrastTheme.css, styleRoot);
+    _setStyleTag('dialtone-css-contrast', contrastTheme.css, rootNode);
     rootNode?.setAttribute('data-dt-contrast', 'high');
   } else {
-    _removeStyleTag('dialtone-css-contrast', styleRoot);
+    _removeStyleTag('dialtone-css-contrast', rootNode);
     rootNode?.setAttribute('data-dt-contrast', 'default');
   }
 }
@@ -137,28 +139,30 @@ function _setThemeLegacy(theme, rootNode = document.documentElement, contrastThe
  * Layered theme setter (new optimized system)
  */
 function _setThemeLayered(theme, rootNode = document.documentElement) {
-  const styleRoot = rootNode?.shadowRoot ?? rootNode;
+  if (rootNode?.shadowRoot) {
+    rootNode = rootNode.shadowRoot;
+  }
 
   // Load core tokens only once per JavaScript instance
   if (theme.core && !coreTokensLoaded) {
-    _setStyleTag('dialtone-css-core', theme.core, styleRoot);
+    _setStyleTag('dialtone-css-core', theme.core, rootNode);
     coreTokensLoaded = true;
   }
 
   // Load base colors only once
-  if (theme.baseColors && !styleRoot?.querySelector('#dialtone-css-base-colors')) {
-    _setStyleTag('dialtone-css-base-colors', theme.baseColors, styleRoot);
+  if (theme.baseColors && !rootNode?.querySelector('#dialtone-css-base-colors')) {
+    _setStyleTag('dialtone-css-base-colors', theme.baseColors, rootNode);
   }
 
   // Load brand colors (dp base is always loaded, others are overrides)
   if (theme.brand) {
-    _setStyleTag('dialtone-css-brand-colors', theme.brand.css, styleRoot);
+    _setStyleTag('dialtone-css-brand-colors', theme.brand.css, rootNode);
     rootNode?.setAttribute('data-dt-brand', theme.brand.name);
   }
 
   // Apply contrast layer if provided
   if (theme.contrast) {
-    _setStyleTag('dialtone-css-contrast', theme.contrast.css, styleRoot);
+    _setStyleTag('dialtone-css-contrast', theme.contrast.css, rootNode);
     rootNode?.setAttribute('data-dt-contrast', theme.contrast.name);
   }
 }
@@ -245,7 +249,10 @@ export function setMode(mode, rootNode = document.documentElement) {
       '[Dialtone] You passed a ShadowRoot directly to setMode(). ' +
       'Please pass the host element instead. The function will access shadowRoot automatically.',
     );
-    return;
+  }
+
+  if (rootNode?.shadowRoot) {
+    rootNode = rootNode.shadowRoot;
   }
 
   rootNode?.setAttribute('data-dt-mode', mode);
@@ -308,11 +315,13 @@ export function setBrand(brandTheme, rootNode = document.documentElement) {
       '[Dialtone] You passed a ShadowRoot directly to setBrand(). ' +
       'Please pass the host element instead. The function will access shadowRoot automatically.',
     );
-    return;
   }
 
-  const styleRoot = rootNode?.shadowRoot ?? rootNode;
-  _setStyleTag('dialtone-css-brand-colors', brandTheme.brand.css, styleRoot);
+  if (rootNode?.shadowRoot) {
+    rootNode = rootNode.shadowRoot;
+  }
+
+  _setStyleTag('dialtone-css-brand-colors', brandTheme.brand.css, rootNode);
   rootNode?.setAttribute('data-dt-brand', brandTheme.brand.name);
 
   _applyBrandLockedMaterial(brandTheme, rootNode);
@@ -372,15 +381,17 @@ export function setContrast(contrastTheme, rootNode = document.documentElement) 
       '[Dialtone] You passed a ShadowRoot directly to setContrast(). ' +
       'Please pass the host element instead. The function will access shadowRoot automatically.',
     );
-    return;
   }
 
-  const styleRoot = rootNode?.shadowRoot ?? rootNode;
+  if (rootNode?.shadowRoot) {
+    rootNode = rootNode.shadowRoot;
+  }
+
   if (contrastTheme && contrastTheme.contrast) {
-    _setStyleTag('dialtone-css-contrast', contrastTheme.contrast.css, styleRoot);
+    _setStyleTag('dialtone-css-contrast', contrastTheme.contrast.css, rootNode);
     rootNode?.setAttribute('data-dt-contrast', contrastTheme.contrast.name);
   } else {
-    _removeStyleTag('dialtone-css-contrast', styleRoot);
+    _removeStyleTag('dialtone-css-contrast', rootNode);
     rootNode?.setAttribute('data-dt-contrast', 'default');
   }
 }
@@ -416,7 +427,10 @@ export function setMaterial (name, rootNode = document.documentElement) {
       '[Dialtone] You passed a ShadowRoot directly to setMaterial(). ' +
       'Please pass the host element instead. The function will access shadowRoot automatically.',
     );
-    return;
+  }
+
+  if (rootNode?.shadowRoot) {
+    rootNode = rootNode.shadowRoot;
   }
 
   const resolved = name || 'sandstone';
@@ -525,10 +539,11 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
       'Correct: initDialtoneTheme(brand, mode, hostElement)\n' +
       'Incorrect: initDialtoneTheme(brand, mode, hostElement.shadowRoot)',
     );
-    return;
   }
 
-  const styleRoot = rootNode?.shadowRoot ?? rootNode;
+  if (rootNode?.shadowRoot) {
+    rootNode = rootNode.shadowRoot;
+  }
 
   // CRITICAL: Detect embedded app trying to use document.documentElement
   // This check MUST run on first init, before idempotency check
@@ -566,11 +581,11 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
   }
 
   // Load core tokens (once per JavaScript instance)
-  _setStyleTag('dialtone-css-core', Core.core, styleRoot);
+  _setStyleTag('dialtone-css-core', Core.core, rootNode);
   coreTokensLoaded = true;
 
   // Load base colors (once)
-  _setStyleTag('dialtone-css-base-colors', Core.baseColors, styleRoot);
+  _setStyleTag('dialtone-css-base-colors', Core.baseColors, rootNode);
 
   // Set initial mode
   setMode(mode, rootNode);
@@ -634,7 +649,8 @@ export function hasBrandMaterialLock(brandTheme) {
  * }
  */
 export function resetTheme(rootNode = document.documentElement) {
-  const styleRoot = rootNode?.shadowRoot ?? rootNode;
+  // Access shadowRoot if present
+  const actualRoot = rootNode?.shadowRoot || rootNode;
 
   // Clear initialization state (only one instance per app)
   initializationState = null;
@@ -643,15 +659,15 @@ export function resetTheme(rootNode = document.documentElement) {
   // Remove all theme style tags. Material no longer injects a style tag
   // (attribute-driven), but resetTheme should still scrub any pre-existing
   // injection from older code paths.
-  _removeStyleTag('dialtone-css-core', styleRoot);
-  _removeStyleTag('dialtone-css-base-colors', styleRoot);
-  _removeStyleTag('dialtone-css-material', styleRoot);
-  _removeStyleTag('dialtone-css-brand-colors', styleRoot);
-  _removeStyleTag('dialtone-css-contrast', styleRoot);
+  _removeStyleTag('dialtone-css-core', actualRoot);
+  _removeStyleTag('dialtone-css-base-colors', actualRoot);
+  _removeStyleTag('dialtone-css-material', actualRoot);
+  _removeStyleTag('dialtone-css-brand-colors', actualRoot);
+  _removeStyleTag('dialtone-css-contrast', actualRoot);
 
-  // Remove theme attributes from the host element (not ShadowRoot — it has no removeAttribute)
-  rootNode?.removeAttribute('data-dt-mode');
-  rootNode?.removeAttribute('data-dt-brand');
-  rootNode?.removeAttribute('data-dt-contrast');
-  rootNode?.removeAttribute('data-dt-material');
+  // Remove theme attributes
+  actualRoot?.removeAttribute('data-dt-mode');
+  actualRoot?.removeAttribute('data-dt-brand');
+  actualRoot?.removeAttribute('data-dt-contrast');
+  actualRoot?.removeAttribute('data-dt-material');
 }
