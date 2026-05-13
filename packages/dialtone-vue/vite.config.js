@@ -24,6 +24,7 @@ function _getEntries (pathPrefix, globRegex) {
       .replace(`${pathPrefix}/`, '')
       .replace(/\.(vue|js)/, '')
       .replaceAll('_', '-')
+      .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
       .toLowerCase();
 
     entries[`${pathPrefix}/${entryName}`] = path;
