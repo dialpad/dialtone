@@ -1,3 +1,10 @@
+# [1.2.0-next.9](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.8...combinator/v1.2.0-next.9) (2026-05-13)
+
+
+### Code Refactoring
+
+* **Combinator:** DLT-3418 migrate controls prop changes ([#1261](https://github.com/dialpad/dialtone/issues/1261)) ([ab03b44](https://github.com/dialpad/dialtone/commit/ab03b44225ba3f7acc3be5303a57d2921759acb5))
+
 # [1.2.0-next.8](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.7...combinator/v1.2.0-next.8) (2026-05-07)
 
 
