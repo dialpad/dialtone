@@ -424,7 +424,7 @@ export default {
       if (root instanceof ShadowRoot) {
         this.autoTeleportTarget = root;
         // Defer syncDialogState so the teleport renders inside the shadow root first.
-        if (this.open) this.$nextTick(() => { this.syncDialogState(true); });
+        if (this.open) this.$nextTick(() => { if (this.open) this.syncDialogState(true); });
         return;
       }
     }
