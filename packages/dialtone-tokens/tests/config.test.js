@@ -184,7 +184,15 @@ describe('themes/config.js', () => {
       });
     });
 
-    it.skip('host-with-shadowRoot writes attribute on shadowRoot — pending bug fix', () => {});
+    it('host-with-shadowRoot: sets data-dt-* attributes on host, injects styles into shadowRoot', () => {
+      const { host, shadowRoot } = setupShadowHost();
+      initDialtoneTheme(dpStub, 'light', host);
+      expect(host.getAttribute('data-dt-mode')).toBe('light');
+      expect(host.getAttribute('data-dt-brand')).toBe(dpStub.brand.name);
+      expect(host.getAttribute('data-dt-contrast')).toBe('default');
+      expect(shadowRoot.querySelector('#dialtone-css-core')).not.toBeNull();
+      expect(shadowRoot.querySelector('#dialtone-css-brand-colors')).not.toBeNull();
+    });
   });
 
   describe('getBrandMaterial', () => {
