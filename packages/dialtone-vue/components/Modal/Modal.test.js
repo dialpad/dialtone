@@ -293,20 +293,17 @@ describe('DtModal Tests', () => {
         shadowHost.remove();
       });
 
-      it('should set autoTeleportTarget to the shadow root', () => {
-        expect(wrapper.vm.autoTeleportTarget).toBe(shadowRoot);
-      });
-
       it('should teleport the dialog into the shadow root', () => {
         const dialog = shadowRoot.querySelector('[data-qa="dt-modal"]');
         expect(dialog).not.toBeNull();
       });
 
-      it('should not set autoTeleportTarget when appendTo prop is provided', async () => {
+      it('should not teleport into shadow root when appendTo prop is provided', async () => {
         const target = document.createElement('div');
         document.body.appendChild(target);
         target.id = 'custom-target';
 
+        wrapper.unmount();
         wrapper = mount(DtModal, {
           props: { ...baseProps, appendTo: '#custom-target' },
           attachTo: mountPoint,
@@ -314,7 +311,8 @@ describe('DtModal Tests', () => {
 
         await wrapper.vm.$nextTick();
 
-        expect(wrapper.vm.autoTeleportTarget).toBeNull();
+        expect(shadowRoot.querySelector('[data-qa="dt-modal"]')).toBeNull();
+        expect(target.querySelector('[data-qa="dt-modal"]')).not.toBeNull();
 
         target.remove();
       });
