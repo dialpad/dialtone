@@ -27,6 +27,9 @@ export const argTypesData = {
       },
     },
   },
+  iconClass: {
+    description: 'Additional class name for the icon wrapper element.',
+  },
 };
 
 // Story Collection

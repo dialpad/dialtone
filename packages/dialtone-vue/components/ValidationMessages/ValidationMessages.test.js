@@ -34,6 +34,7 @@ describe('Validation Messages Tests', () => {
   });
 
   afterEach(() => {
+    wrapper?.unmount();
     mockProps = {};
   });
 
@@ -303,7 +304,7 @@ describe('Validation Messages Tests', () => {
       });
 
       it('does not render the default icon', () => {
-        expect(wrapper.find('[data-qa="dt-icon"]').classes()).not.toContain('d-icon--alert-circle');
+        expect(wrapper.find('[data-qa="validation-message-icon"]').exists()).toBe(false);
       });
     });
 

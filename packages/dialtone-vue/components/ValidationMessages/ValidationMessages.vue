@@ -16,7 +16,8 @@
         messageTypeClass(type),
       ]"
     >
-      <!-- @slot icon — replaces the default per-type DtIcon. Receives { type } scope. -->
+      <!-- @slot icon — replaces the default per-type DtIcon. Slot content must be a Dialtone icon (carries
+      the `d-icon` class) so the CSS pseudo-element fallback suppresses correctly. Receives { type } scope. -->
       <slot
         name="icon"
         :type="type"
