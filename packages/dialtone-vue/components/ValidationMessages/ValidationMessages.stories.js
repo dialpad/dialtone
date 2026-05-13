@@ -1,6 +1,9 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import DtValidationMessages from './ValidationMessages.vue';
+import {
+  DtIconBell,
+} from '@dialpad/dialtone-icons/vue';
 
 // Constants
 const VALIDATION_MESSAGES = [
@@ -81,5 +84,28 @@ export const Variants = {
         ],
       },
     },
+  },
+};
+
+const WithCustomIconTemplate = () => {
+  return {
+    components: { DtValidationMessages, DtIconBell },
+    template: `
+      <dt-validation-messages
+        :validationMessages="[{ message: 'Custom icon override', type: 'warning' }]"
+      >
+        <template #icon>
+          <dt-icon-bell size="300" />
+        </template>
+      </dt-validation-messages>
+    `,
+  };
+};
+
+export const WithCustomIcon = {
+  render: WithCustomIconTemplate,
+  parameters: {
+    options: { showPanel: false },
+    controls: { disable: true },
   },
 };

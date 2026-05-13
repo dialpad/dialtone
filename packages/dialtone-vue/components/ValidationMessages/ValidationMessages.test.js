@@ -219,6 +219,113 @@ describe('Validation Messages Tests', () => {
     });
   });
 
+  describe('Icon Tests', () => {
+    beforeEach(() => {
+      mockProps = { validationMessages: MOCK_BASE_VALIDATION_MESSAGES };
+
+      updateWrapper();
+    });
+
+    it('renders the icon wrapper', () => {
+      expect(wrapper.find('[data-qa="validation-message-icon"]').exists()).toBe(true);
+    });
+
+    describe('When type is warning', () => {
+      beforeEach(() => {
+        mockProps = {
+          validationMessages: setFormattedValidationMessages(
+            VALIDATION_MESSAGE_TYPES.WARNING,
+            'Warning message',
+          ),
+        };
+
+        updateWrapper();
+      });
+
+      it('renders the warning icon', () => {
+        expect(wrapper.find('[data-qa="validation-message-icon"]').classes()).toContain('d-icon--alert-triangle');
+      });
+    });
+
+    describe('When type is critical', () => {
+      beforeEach(() => {
+        mockProps = {
+          validationMessages: setFormattedValidationMessages(
+            VALIDATION_MESSAGE_TYPES.CRITICAL,
+            'Critical message',
+          ),
+        };
+
+        updateWrapper();
+      });
+
+      it('renders the critical icon', () => {
+        expect(wrapper.find('[data-qa="validation-message-icon"]').classes()).toContain('d-icon--alert-circle');
+      });
+    });
+
+    describe('When type is positive', () => {
+      beforeEach(() => {
+        mockProps = {
+          validationMessages: setFormattedValidationMessages(
+            VALIDATION_MESSAGE_TYPES.POSITIVE,
+            'Positive message',
+          ),
+        };
+
+        updateWrapper();
+      });
+
+      it('renders the positive icon', () => {
+        expect(wrapper.find('[data-qa="validation-message-icon"]').classes()).toContain('d-icon--check-circle');
+      });
+    });
+
+    describe('When the icon slot is overridden', () => {
+      beforeEach(() => {
+        mockProps = {
+          validationMessages: setFormattedValidationMessages(
+            VALIDATION_MESSAGE_TYPES.CRITICAL,
+            'Critical message',
+          ),
+        };
+
+        wrapper = mount(DtValidationMessages, {
+          props: { ...baseProps, ...mockProps },
+          slots: { icon: '<svg class="d-icon d-icon--custom-test" data-qa="dt-icon" />' },
+        });
+
+        messages = wrapper.findAll('[data-qa="validation-message"]');
+      });
+
+      it('renders the custom icon', () => {
+        expect(wrapper.find('[data-qa="dt-icon"]').classes()).toContain('d-icon--custom-test');
+      });
+
+      it('does not render the default icon', () => {
+        expect(wrapper.find('[data-qa="dt-icon"]').classes()).not.toContain('d-icon--alert-circle');
+      });
+    });
+
+    describe('When iconClass prop is provided', () => {
+      beforeEach(() => {
+        mockProps = {
+          validationMessages: setFormattedValidationMessages(
+            VALIDATION_MESSAGE_TYPES.CRITICAL,
+            'Critical message',
+          ),
+          iconClass: 'custom-class',
+        };
+
+        updateWrapper();
+      });
+
+      it('applies iconClass to the icon wrapper', () => {
+        expect(wrapper.find('[data-qa="validation-message-icon"]').classes()).toContain('custom-class');
+      });
+    });
+  });
+
   describe('Validation Tests', () => {
     describe('When there are validation messages', () => {
       const MOCK_PROP = DtValidationMessages.props.validationMessages;

@@ -16,6 +16,18 @@
         messageTypeClass(type),
       ]"
     >
+      <!-- @slot icon — replaces the default per-type DtIcon. Receives { type } scope. -->
+      <slot
+        name="icon"
+        :type="type"
+      >
+        <component
+          :is="iconForType(type)"
+          :class="['d-validation-message__icon', iconClass]"
+          data-qa="validation-message-icon"
+          size="300"
+        />
+      </slot>
       <p v-html="message" />
     </div>
   </div>
@@ -28,6 +40,17 @@ import {
   filterFormattedMessages,
   getValidationState,
 } from '@/common/utils';
+import {
+  DtIconAlertTriangle,
+  DtIconAlertCircle,
+  DtIconCheckCircle,
+} from '@dialpad/dialtone-icons/vue';
+
+const kindToIcon = Object.freeze({
+  warning: DtIconAlertTriangle,
+  critical: DtIconAlertCircle,
+  positive: DtIconCheckCircle,
+});
 
 /**
  * Validation messages are used to convey information to the user about the current state of the input element.
@@ -36,6 +59,8 @@ import {
  */
 export default {
   name: 'DtValidationMessages',
+
+  components: { DtIconAlertTriangle, DtIconAlertCircle, DtIconCheckCircle },
 
   props: {
     /**
@@ -66,6 +91,14 @@ export default {
       type: Boolean,
       default: true,
     },
+
+    /**
+     * Additional class name for the icon wrapper element.
+     */
+    iconClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
   },
 
   computed: {
@@ -85,6 +118,10 @@ export default {
   methods: {
     getMessageKey (type, index) {
       return `validation-message-${type}-${index}-${this.id}`;
+    },
+
+    iconForType (type) {
+      return kindToIcon[type] ?? null;
     },
 
     messageTypeClass (type) {
