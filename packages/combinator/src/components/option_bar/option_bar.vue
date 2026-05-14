@@ -197,7 +197,6 @@ function tokenizeName (name) {
     const compound = parts[i + 1] ? `${parts[i]}-${parts[i + 1]}` : null;
     if (compound && COMPOUND_TOKENS.has(compound)) {
       tokens.push(compound);
-      tokens.push(parts[i]);
       i++;
     } else {
       tokens.push(parts[i]);
