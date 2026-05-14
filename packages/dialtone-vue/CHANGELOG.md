@@ -1,3 +1,10 @@
+# [3.220.0-next.7](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.220.0-next.6...dialtone-vue/v3.220.0-next.7) (2026-05-14)
+
+
+### Bug Fixes
+
+* **Components:** no-jira update tree-shaking export ([#1270](https://github.com/dialpad/dialtone/issues/1270)) ([f12ddcc](https://github.com/dialpad/dialtone/commit/f12ddccf753ee2ef299f1f62ae23d679f161e92c))
+
 # [3.220.0-next.6](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.220.0-next.5...dialtone-vue/v3.220.0-next.6) (2026-05-13)
 
 
