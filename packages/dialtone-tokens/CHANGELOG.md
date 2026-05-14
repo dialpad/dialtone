@@ -1,3 +1,10 @@
+# [1.48.0-next.18](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.17...dialtone-tokens/v1.48.0-next.18) (2026-05-14)
+
+
+### Bug Fixes
+
+* **Dialtone Tokens:** NO-JIRA fix shadow DOM setAttribute crash in theme setters ([#1271](https://github.com/dialpad/dialtone/issues/1271)) ([554047b](https://github.com/dialpad/dialtone/commit/554047b928c18635f8b7ce90546511ffe5f76ee9))
+
 # [1.48.0-next.17](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.16...dialtone-tokens/v1.48.0-next.17) (2026-05-13)
 
 
