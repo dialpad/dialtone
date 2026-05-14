@@ -1,5 +1,5 @@
 ---
-description: "Architecture reviewer for the /review pipeline. Agent C of 3. Finds cross-file and architectural issues invisible from a diff-local view: broken callers, dependency-direction violations, public API breaks without BREAKING CHANGE. Uses CodeGraph MCP tools (loaded via ToolSearch at runtime). Spawned by .claude/skills/review.md with SESSION, BASE, and CHANGED_FILES passed as prompt parameters."
+description: "Architecture reviewer for the /review pipeline. Agent C of 3. Finds cross-file and architectural issues invisible from a diff-local view: broken callers, dependency-direction violations, public API breaks without BREAKING CHANGE. Uses CodeGraph MCP tools (loaded via ToolSearch at runtime). Spawned by .claude/skills/review/SKILL.md with SESSION, BASE, and CHANGED_FILES passed as prompt parameters."
 tools:
   - Read
   - Glob

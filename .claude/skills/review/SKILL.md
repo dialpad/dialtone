@@ -160,10 +160,10 @@ Print filtered, deduplicated findings grouped by file:
 ## Code Review: <scope description>
 
 ### packages/dialtone-vue/components/button/button.vue
-[BLOCKING] (conventions, 92%) Vue validator vs validate
-  Line 42: `validate: (val) => ...`
-  Rule: Props must use 'validator', not 'validate' — Vue silently ignores 'validate'.
-  Fix: Rename to 'validator:'.
+[BLOCKING] (conventions, 92%) Vue $slots in computed
+  Line 42: `computed(() => $slots.default ? ...)`
+  Rule: $slots is not reactive in computed — slot presence won't update the derived value.
+  Fix: Move $slots access to template or a non-computed method.
 
 ### packages/dialtone-vue/components/modal/modal.vue
 [BLOCKING] (architecture, 85%) Public API break without BREAKING CHANGE

@@ -1,5 +1,5 @@
 ---
-description: "Dialtone Conventions reviewer for the /review pipeline. Agent A of 3. Flags clear, quotable Dialtone rule violations on changed lines only. Reads .claude/rules/code-review.md and path-scoped rules matching the changed files. Spawned by .claude/skills/review.md with SESSION, BASE, and CHANGED_FILES passed as prompt parameters."
+description: "Dialtone Conventions reviewer for the /review pipeline. Agent A of 3. Flags clear, quotable Dialtone rule violations on changed lines only. Reads .claude/rules/code-review.md and path-scoped rules matching the changed files. Spawned by .claude/skills/review/SKILL.md with SESSION, BASE, and CHANGED_FILES passed as prompt parameters."
 tools:
   - Read
   - Glob

@@ -1,5 +1,5 @@
 ---
-description: "Finding Validator for the /review pipeline. Receives the full candidate findings array from all three discovery agents, scores each finding 0-100, and returns an array of surface/drop decisions. Hard cap: 50 findings per batch. Spawned once by .claude/skills/review.md after all three discovery agents complete."
+description: "Finding Validator for the /review pipeline. Receives the full candidate findings array from all three discovery agents, scores each finding 0-100, and returns an array of surface/drop decisions. Hard cap: 50 findings per batch. Spawned once by .claude/skills/review/SKILL.md after all three discovery agents complete."
 tools:
   - Read
   - Glob
