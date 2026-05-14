@@ -69,3 +69,31 @@ onStartClick () {
   this.$emit('alpha-clicked');
 },
 ```
+
+## Description Prose
+
+**Identifiers stay logical. Descriptions become bilingual.**
+
+When writing a JSDoc comment, slot description, or doc-page prose that mentions a logical direction, always add the LTR-default physical equivalent as an `(aka <physical>)` parenthetical. This helps consumers mid-migration anchor the logical term to a physical one without requiring them to look it up.
+
+| Logical phrase in description | Bridged form |
+|-------------------------------|--------------|
+| `block-start side` / `block-start edge` | `block-start side (aka top)` |
+| `block-end side` / `block-end edge` | `block-end side (aka bottom)` |
+| `inline-start side` / `inline-start edge` | `inline-start side (aka left)` |
+| `inline-end side` / `inline-end edge` | `inline-end side (aka right)` |
+| `block axis` | `block axis (aka top/bottom)` |
+| `inline axis` | `inline axis (aka left/right)` |
+
+Rules:
+
+- Parenthetical is lowercase: `(aka top)` not `(AKA top)`
+- Placed inside the sentence, before the period: `… side (aka top). Overrides…`
+- Bridge the first mention in a JSDoc block only — leave subsequent `Overrides …` sentences as-is
+- Drop legacy qualifiers: `(top/bottom in horizontal writing mode)` → `(aka top/bottom)`, `in LTR` → delete
+
+## Combinator Filter
+
+The Combinator prop/slot search uses `packages/combinator/src/lib/logical_aliases.js` as its canonical alias map. The `filterMembers` function in `option_bar.vue` tokenizes prop/slot names, expands each logical token via this map, and matches the union against the search query. This means searching `"top"` finds `borderWidthBlockStart`, `paddingBlockStart`, etc. automatically.
+
+**When adding new logical-naming vocabulary** (e.g. a new axis concept beyond `block`/`inline`), add the new token and its physical aliases to `logical_aliases.js`. No per-component or per-prop changes needed — the filter picks it up automatically for any component that uses the new token in its prop/slot names.

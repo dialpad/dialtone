@@ -139,6 +139,7 @@ import { computed, ref, nextTick } from 'vue';
 import { OPTIONS_UPDATE_EVENT } from '@/src/lib/constants';
 import { getControlByMemberType, getControlByValue } from '@/src/lib/control';
 import { isIconSlot } from '@/src/lib/icons';
+import { LOGICAL_ALIASES } from '@/src/lib/logical_aliases';
 import { DtStack, DtTabGroup, DtTab, DtTabPanel } from '@dialpad/dialtone-vue';
 import { DtIconSearch } from '@dialpad/dialtone-icons/vue';
 
@@ -186,14 +187,43 @@ function normalizeForSearch (str) {
   return str.toLowerCase().replace(/[\s\-_]/g, '');
 }
 
-function filterMembers (members) {
-  const q = normalizeForSearch(searchQuery.value);
-  if (q.length < 2) return members;
-  return members.filter(m => normalizeForSearch(m.name).includes(q));
+// Derived from LOGICAL_ALIASES keys so tokenizeName stays in sync automatically.
+const COMPOUND_TOKENS = new Set(Object.keys(LOGICAL_ALIASES).filter(k => k.includes('-')));
+
+function tokenizeName (name) {
+  const parts = name.replace(/([A-Z])/g, ' $1').trim().toLowerCase().split(/\s+/);
+  const tokens = [];
+  for (let i = 0; i < parts.length; i++) {
+    const compound = parts[i + 1] ? `${parts[i]}-${parts[i + 1]}` : null;
+    if (compound && COMPOUND_TOKENS.has(compound)) {
+      tokens.push(compound);
+      tokens.push(parts[i]);
+      i++;
+    } else {
+      tokens.push(parts[i]);
+    }
+  }
+  return tokens;
 }
 
-const filteredProps = computed(() => filterMembers(props.info.props));
-const filteredSlots = computed(() => filterMembers(props.info.slots));
+function getSearchCorpus (name) {
+  const tokens = tokenizeName(name);
+  const aliases = tokens.flatMap(t => LOGICAL_ALIASES[t] ?? []);
+  return [name, ...tokens, ...aliases].map(normalizeForSearch).join(' ');
+}
+
+// Pre-compute corpora once per member list so per-keystroke filtering is just a substring scan.
+const propCorpora = computed(() => (props.info.props ?? []).map(m => ({ member: m, corpus: getSearchCorpus(m.name) })));
+const slotCorpora = computed(() => (props.info.slots ?? []).map(m => ({ member: m, corpus: getSearchCorpus(m.name) })));
+
+function filterCorpora (corpora) {
+  const q = normalizeForSearch(searchQuery.value);
+  if (q.length < 2) return corpora.map(({ member }) => member);
+  return corpora.filter(({ corpus }) => corpus.includes(q)).map(({ member }) => member);
+}
+
+const filteredProps = computed(() => filterCorpora(propCorpora.value));
+const filteredSlots = computed(() => filterCorpora(slotCorpora.value));
 
 /**
  * Gets an array of controls for a binding.
