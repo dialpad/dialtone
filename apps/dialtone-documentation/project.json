@@ -1,6 +1,14 @@
 {
   "name": "dialtone-documentation",
   "targets": {
+    "thumbs": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["dialtone-tokens:build", "dialtone-vue:build"],
+      "options": {
+        "cwd": "{workspaceRoot}",
+        "command": "node apps/dialtone-documentation/scripts/thumbs/generate.mjs"
+      }
+    },
     "build": {
       "executor": "nx:run-commands",
       "dependsOn": [

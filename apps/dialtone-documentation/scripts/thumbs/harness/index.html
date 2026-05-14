@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=400">
+  <title>Thumb Harness</title>
+  <style>
+    /* Layout only — let dialtone-css handle ALL typography, colors, and component styles. */
+    html, body {
+      inline-size: 400px;
+      block-size: 225px;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: transparent;
+    }
+    #thumb-root {
+      inline-size: 400px;
+      block-size: 225px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div id="thumb-root"></div>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

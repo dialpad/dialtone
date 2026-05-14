@@ -87,3 +87,6 @@ SKILLS_TODO*.md
 *.deprecated
 .claude/scheduled_tasks.lock
 .omx/
+
+# Thumb generator content-hash cache
+apps/dialtone-documentation/scripts/thumbs/.cache.json
