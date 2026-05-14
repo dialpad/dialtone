@@ -205,7 +205,7 @@ Unordered and ordered lists can be freely nested inside each other, with each le
 
 ### Blockquote
 
-Blockquotes are visually offset with an inline-start border and muted color, supporting multi-paragraph content, nesting, and attributed citations.
+Blockquotes are visually offset with an inline-start (aka left) border and muted color, supporting multi-paragraph content, nesting, and attributed citations.
 
 ```vue demo
 <!-- @wrapper -->
