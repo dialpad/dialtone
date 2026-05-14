@@ -137,10 +137,10 @@ In addition to using directive arguments for scrollbar visibility (`:always`, `:
 | --- | --- | --- | --- |
 | `showScrollbar` | `'enter' \| 'always' \| 'scroll' \| 'move'` | `'enter'` | Scrollbar visibility mode |
 | `offset` | `Object` | `null` | Offset configuration for scrollbar positioning |
-| `offset.blockStart` | `number \| string` | `undefined` | Insets vertical scrollbar from the block-start edge |
-| `offset.blockEnd` | `number \| string` | `undefined` | Insets horizontal scrollbar from the block-end edge |
-| `offset.inlineStart` | `number \| string` | `undefined` | Insets horizontal scrollbar from the inline-start edge |
-| `offset.inlineEnd` | `number \| string` | `undefined` | Insets vertical scrollbar from the inline-end edge |
+| `offset.blockStart` | `number \| string` | `undefined` | Insets vertical scrollbar from the block-start (aka top) edge |
+| `offset.blockEnd` | `number \| string` | `undefined` | Insets horizontal scrollbar from the block-end (aka bottom) edge |
+| `offset.inlineStart` | `number \| string` | `undefined` | Insets horizontal scrollbar from the inline-start (aka left) edge |
+| `offset.inlineEnd` | `number \| string` | `undefined` | Insets vertical scrollbar from the inline-end (aka right) edge |
 | `blockClasses` | `string` | `undefined` | CSS classes to apply to the vertical scrollbar |
 | `inlineClasses` | `string` | `undefined` | CSS classes to apply to the horizontal scrollbar |
 
@@ -162,10 +162,10 @@ The `offset` option allows you to adjust the positioning of scrollbars to accomm
 
 | Property | Type | Description |
 | --- | --- | --- |
-| `blockStart` | `number \| string` | Insets vertical scrollbar from the block-start edge |
-| `blockEnd` | `number \| string` | Insets horizontal scrollbar from the block-end edge |
-| `inlineStart` | `number \| string` | Insets horizontal scrollbar from the inline-start edge |
-| `inlineEnd` | `number \| string` | Insets vertical scrollbar from the inline-end edge |
+| `blockStart` | `number \| string` | Insets vertical scrollbar from the block-start (aka top) edge |
+| `blockEnd` | `number \| string` | Insets horizontal scrollbar from the block-end (aka bottom) edge |
+| `inlineStart` | `number \| string` | Insets horizontal scrollbar from the inline-start (aka left) edge |
+| `inlineEnd` | `number \| string` | Insets vertical scrollbar from the inline-end (aka right) edge |
 
 #### Numeric Values (Auto-converted to px)
 
