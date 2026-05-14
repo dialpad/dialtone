@@ -1,3 +1,16 @@
+# [9.183.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone/v9.183.0-next.3...dialtone/v9.183.0-next.4) (2026-05-14)
+
+
+### Bug Fixes
+
+* **Components:** no-jira update tree-shaking export ([#1270](https://github.com/dialpad/dialtone/issues/1270)) ([f12ddcc](https://github.com/dialpad/dialtone/commit/f12ddccf753ee2ef299f1f62ae23d679f161e92c))
+* **Dialtone Tokens:** NO-JIRA fix shadow DOM setAttribute crash in theme setters ([#1271](https://github.com/dialpad/dialtone/issues/1271)) ([554047b](https://github.com/dialpad/dialtone/commit/554047b928c18635f8b7ce90546511ffe5f76ee9))
+
+
+### Documentation
+
+* **Recipes:** dlt-3308 recipes removed from dialtone - migration guide ([#1269](https://github.com/dialpad/dialtone/issues/1269)) ([d1d5c59](https://github.com/dialpad/dialtone/commit/d1d5c59c783f8992cb6ced63a2875ac95293984f))
+
 # [9.183.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.183.0-next.2...dialtone/v9.183.0-next.3) (2026-05-13)
 
 
