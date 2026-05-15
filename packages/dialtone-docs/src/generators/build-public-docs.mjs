@@ -137,7 +137,11 @@ export function buildRecords(absolutePath) {
     ? basename(dirname(absolutePath))
     : (relParts.length > 1 ? relParts[0] : 'root');
 
-  const docId = name;
+  // Use relative path from docsRoot as docId to avoid collisions (e.g. multiple index.md files).
+  // Falls back to basename for files outside docsRoot (test fixtures).
+  const docId = relParts[0] === '..'
+    ? name
+    : relToDocsRoot.replace(/\\/g, '/').replace(/\.md$/, '');
   const docTitle = extractTitle(frontmatter, body) ?? docId;
 
   // Frontmatter stored on each record. Source uses snake_case (VuePress convention),

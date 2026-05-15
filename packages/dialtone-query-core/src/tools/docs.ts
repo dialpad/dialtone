@@ -28,7 +28,7 @@ const STOP_WORDS = new Set([
   'what', 'which', 'who', 'whom', 'whose', 'how', 'when', 'where', 'why',
   // Quantifiers / adverbs
   'all', 'both', 'each', 'few', 'more', 'most', 'other', 'some', 'such',
-  'no', 'not', 'so', 'than', 'too', 'very', 'just', 'also', 'now', 'then',
+  'no', 'not', 'than', 'too', 'very', 'just', 'also', 'now', 'then',
   // Query-structure words (appear in natural-language questions, not in docs)
   'difference', 'differences', 'correct', 'behavior', 'replacement',
   'async', 'during', 'wire', 'list', 'put', 'make', 'show', 'closing', 'opening',
