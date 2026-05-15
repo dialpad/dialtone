@@ -2,6 +2,7 @@
 title: Filter Pill
 description: A Filter Pill offers a button paired with a popover to show and manage filtering options, the label and content of the filter can be handled through slots and props.
 status: new
+thumb: true
 # storybook: https://dialtone.dialpad.com/vue/?path=/story/components-filter-pill--default @TODO: Uncomment once it's RFP
 keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFilterPill", "dt-filter-pill", "removable tag", "dismissible chip"]
 ---

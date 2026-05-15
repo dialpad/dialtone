@@ -3,7 +3,6 @@ title: Collapsible
 description: A collapsible is a component consisting of an interactive anchor that toggled the expandable/collapsible element.
 status: ready
 thumb: true
-image: assets/images/components/collapsible.png
 figma: planned
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-collapsible--default
 keywords: ["accordion", "expand", "collapse", "toggle content", "d-collapsible", "DtCollapsible", "dt-collapsible", "disclosure", "expandable"]

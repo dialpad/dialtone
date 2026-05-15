@@ -18,3 +18,8 @@ export const slugToExportName = slugToPascalComponentName;
 export function fileToExportName (filename) {
   return slugToPascalComponentName(fileToSlug(filename));
 }
+
+/** 'DtButtonGroup' → 'button-group' (inverse of slugToExportName) */
+export function exportNameToSlug (exportName) {
+  return exportName.slice(2).replace(/([A-Z])/g, '-$1').toLowerCase().slice(1);
+}

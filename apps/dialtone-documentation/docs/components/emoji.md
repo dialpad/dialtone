@@ -3,7 +3,6 @@ title: Emoji
 description: "Renders an emoji from a shortcode such as :smile: or unicode character such as 😄."
 status: ready
 thumb: true
-image: assets/images/components/emoji.png
 figma: planned
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji--default
 keywords: ["emoticon","smiley","d-emoji","DtEmoji","dt-emoji"]

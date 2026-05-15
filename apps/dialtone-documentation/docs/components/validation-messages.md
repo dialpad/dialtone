@@ -2,7 +2,6 @@
 title: Validation messages
 status: ready
 thumb: true
-image: assets/images/components/validation-messages.png
 description: Validation messages are used to convey information to the user about the current state of the input element. These messages can have a critical, warning or positive type.
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-validation-messages--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=11399-76353

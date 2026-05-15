@@ -3,15 +3,10 @@ title: Popover
 description: A Popover displays a content overlay when its anchor element is activated.
 status: ready
 thumb: true
-image: assets/images/components/popover.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-popover--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=7298-20354
 keywords: ["popup", "overlay", "floating", "d-popover", "DtPopover", "dt-popover", "flyout", "tooltip panel"]
 ---
-
-```vue demo-only
-<example-popover modal />
-```
 
 <component-combinator component-name="DtPopover" />
 

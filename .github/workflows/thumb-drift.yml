@@ -1,0 +1,173 @@
+name: Thumb Drift Check
+
+on:
+  pull_request:
+    paths:
+      - 'packages/dialtone-vue/components/**'
+      - 'packages/dialtone-tokens/**'
+      - 'packages/combinator/src/variants/**'
+      - 'apps/dialtone-documentation/scripts/thumbs/**'
+      - 'apps/dialtone-documentation/docs/.vuepress/public/assets/images/components/**'
+      - 'common/components_list.js'
+      - '.github/workflows/thumb-drift.yml'
+
+env:
+  HUSKY: 0
+
+concurrency:
+  group: "thumb-drift-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+      pull-requests: write
+
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Install Playwright Chromium
+        run: pnpm exec playwright install --with-deps chromium
+
+      - name: Build component dependencies
+        run: |
+          pnpm nx run dialtone-tokens:build
+          pnpm nx run dialtone-vue:build
+
+      - name: Regenerate thumbs
+        id: regen
+        continue-on-error: true
+        run: |
+          # No PLAYWRIGHT_CHROMIUM_PATH in CI — Playwright uses its bundled Chromium.
+          if node apps/dialtone-documentation/scripts/thumbs/generate.mjs --force > /tmp/regen.log 2>&1; then
+            echo "status=ok" >> $GITHUB_OUTPUT
+          else
+            echo "status=error" >> $GITHUB_OUTPUT
+            tail -c 2000 /tmp/regen.log > /tmp/regen.tail
+          fi
+
+      - name: Detect drift
+        id: drift
+        run: |
+          DRIFTED=$(git diff --name-only HEAD -- apps/dialtone-documentation/docs/.vuepress/public/assets/images/components/ 2>/dev/null | sort -u)
+          UNTRACKED=$(git ls-files --others --exclude-standard -- apps/dialtone-documentation/docs/.vuepress/public/assets/images/components/ 2>/dev/null | sort -u)
+          ALL=$(printf "%s\n%s" "$DRIFTED" "$UNTRACKED" | grep -v '^$' | sort -u || true)
+          {
+            echo "files<<DRIFT_EOF"
+            echo "$ALL"
+            echo "DRIFT_EOF"
+          } >> $GITHUB_OUTPUT
+          COUNT=$(echo "$ALL" | grep -c '^' || echo 0)
+          [ -z "$ALL" ] && COUNT=0
+          echo "count=$COUNT" >> $GITHUB_OUTPUT
+
+      - name: Upsert PR comment
+        # continue-on-error so a fork PR's read-only token doesn't fail the job.
+        continue-on-error: true
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+
+            const MARKER = '<!-- thumb-drift-check -->';
+            const HEADER = '## 🖼️ Component Thumb Drift Check';
+
+            const regenStatus = '${{ steps.regen.outputs.status }}';
+            const driftFilesRaw = `${{ steps.drift.outputs.files }}`;
+            const driftFiles = driftFilesRaw.split('\n').map(s => s.trim()).filter(Boolean);
+            const driftCount = parseInt('${{ steps.drift.outputs.count }}', 10) || 0;
+
+            let body;
+            if (regenStatus === 'error') {
+              let errTail = '';
+              try { errTail = fs.readFileSync('/tmp/regen.tail', 'utf8'); } catch {}
+              body = [
+                MARKER,
+                HEADER,
+                '',
+                '⚠️ The thumb regenerator failed to run on this PR. Drift could not be checked.',
+                '',
+                '<details><summary>Generator output (tail)</summary>',
+                '',
+                '```',
+                errTail.slice(0, 1900),
+                '```',
+                '',
+                '</details>',
+                '',
+                'To investigate locally:',
+                '',
+                '```bash',
+                'pnpm nx run dialtone-documentation:thumbs',
+                '```',
+              ].join('\n');
+            } else if (driftCount > 0) {
+              // Extract unique component slugs from the drifted file paths.
+              const slugs = [...new Set(driftFiles
+                .map(p => p.split('/').pop().replace(/(-light|-dark)?\.png$/, ''))
+                .filter(s => s.endsWith('.png') === false),
+              )].sort();
+              const slugList = slugs.map(s => `- \`${s}\``).join('\n');
+
+              body = [
+                MARKER,
+                HEADER,
+                '',
+                `${slugs.length === 1 ? '**1 component** has' : `**${slugs.length} components** have`} stale thumbnail PNGs. Regenerate locally and commit:`,
+                '',
+                '```bash',
+                'pnpm nx run dialtone-documentation:thumbs',
+                'git add apps/dialtone-documentation/docs/.vuepress/public/assets/images/components/',
+                '```',
+                '',
+                '### Affected components',
+                '',
+                slugList,
+                '',
+                `<details><summary>${driftFiles.length} drifted files</summary>`,
+                '',
+                '```',
+                driftFiles.slice(0, 100).join('\n'),
+                driftFiles.length > 100 ? `… and ${driftFiles.length - 100} more` : '',
+                '```',
+                '',
+                '</details>',
+                '',
+                '> This check is non-blocking. Regenerating is recommended so doc-site previews and og:image cards reflect the change.',
+              ].filter(Boolean).join('\n');
+            } else {
+              body = [MARKER, HEADER, '', '✅ All component thumbnails are up to date.'].join('\n');
+            }
+
+            const existingComments = await github.paginate(github.rest.issues.listComments, {
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              per_page: 100,
+            });
+            const previous = existingComments.find(c => c.body && c.body.includes(MARKER));
+
+            if (previous) {
+              await github.rest.issues.updateComment({
+                comment_id: previous.id,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body,
+              });
+            } else if (driftCount > 0 || regenStatus === 'error') {
+              await github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body,
+              });
+            }
+            // else: clean PR with no prior comment — stay silent.

@@ -3,7 +3,6 @@ title: Checkbox Group
 description: Checkbox groups are convenient components for a grouping of related Checkboxes.
 status: ready
 thumb: true
-image: assets/images/components/checkbox-group.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-checkbox-group--default
 keywords: ["checkboxes","multi select","form fields","d-checkbox-group","DtCheckboxGroup","dt-checkbox-group"]
 ---

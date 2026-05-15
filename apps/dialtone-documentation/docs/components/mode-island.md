@@ -2,6 +2,7 @@
 title: Mode
 description: Directive to apply light, dark, or inverted color mode to any element or region.
 status: new
+thumb: true
 keywords: ["theme island","mode island","mode override","v-dt-mode","directive","light","dark","invert","v-dt"]
 ---
 

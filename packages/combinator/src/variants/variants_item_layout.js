@@ -1,4 +1,4 @@
- 
+
 
 export default {
   default: {
@@ -14,12 +14,12 @@ export default {
 
   full: {
     slots: {
-      start: { initialValue: '<dt-icon size="300" name="lock" />' },
+      start: { initialValue: '<dt-icon size="200" name="lock" />' },
       default: { initialValue: 'Layout title' },
       subtitle: { initialValue: 'Subtitle' },
       bottom: { initialValue: '<dt-badge>Content</dt-badge>' },
-      end: { initialValue: '<dt-icon size="300" name="share" />' },
-      selected: { initialValue: '<dt-icon size="300" name="check" />' },
+      end: { initialValue: '<dt-icon size="200" name="share" />' },
+      selected: { initialValue: '<dt-icon size="200" name="check" />' },
     },
   },
 };

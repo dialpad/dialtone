@@ -80,12 +80,20 @@ export default {
   },
 
   'end icon': {
+    props: {
+      importance: {
+        initialValue: 'clear',
+      },
+      kind: {
+        initialValue: 'muted',
+      },
+    },
     slots: {
       default: {
         initialValue: 'Label',
       },
       endIcon: {
-        initialValue: '<dt-icon-arrow-right :size="iconSize" />',
+        initialValue: '<dt-icon-chevron-down :size="iconSize" />',
       },
     },
   },

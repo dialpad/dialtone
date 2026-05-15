@@ -11,9 +11,8 @@
  */
 
 import { createServer } from 'vite';
-import vue from '@vitejs/plugin-vue';
 import { chromium } from 'playwright';
-import { writeFileSync, mkdirSync } from 'fs';
+import { writeFileSync, mkdirSync, copyFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
 import { createRequire } from 'module';
@@ -42,18 +41,28 @@ const TIMEOUTS = {
   transitionSettle: 250,
 };
 
-// Components that render nothing useful in their default state.
-// Handled later by V3 (override files) or V4 (forceOpen mechanism).
-const OVERLAY_SKIP = new Set([
-  // Pure overlays — render nothing when closed
-  'modal', 'toast', 'tooltip', 'hovercard',
-  // Popover-style — only the anchor renders
-  'combobox', 'dropdown', 'popover',
-  // Composite that needs full page structure
-  'root-layout', 'resizable-panel',
-  // Complex async (ProseMirror) — needs special override
-  'rich-text-editor',
-]);
+// Components that still produce nothing useful even after V2.6 variant overrides
+// and V3 hand-authored thumbs at apps/dialtone-documentation/thumbs/<slug>.vue.
+// (Currently empty — all components covered.)
+const OVERLAY_SKIP = new Set();
+
+// Wall pages whose components aren't in common/components_list.js but DO need
+// generated PNGs. e.g. `DtIllustration` lives in @dialpad/dialtone-icons and is
+// exposed via the docs wall as a standalone "Illustration" page.
+const EXTRA_SLUGS = [
+  'illustration',
+];
+
+// Wall-page slugs that don't match the components_list slug 1:1. After capture,
+// copy <source-slug>-*.png to <alias>-*.png so the wall card finds its thumb.
+// E.g., tabs.md (title "Tabs" → fileName "tabs") is the wall card for the Tab
+// Group component, whose PNGs are generated as `tab-group-*.png`.
+const SLUG_ALIASES = {
+  // Wall page "Tabs" (title-derived slug 'tabs') uses the tab-group thumb.
+  'tab-group': ['tabs'],
+  // Wall page "Mode" (title-derived slug 'mode') uses the mode-island thumb.
+  'mode-island': ['mode'],
+};
 
 const argMap = Object.fromEntries(
   process.argv.slice(2)
@@ -79,7 +88,7 @@ const allFiles = require(resolve(REPO_ROOT, 'common/components_list.js'));
 
 const targetSlugs = singleComponent
   ? [singleComponent]
-  : allFiles.map(fileToSlug).filter(slug => !OVERLAY_SKIP.has(slug));
+  : [...allFiles.map(fileToSlug), ...EXTRA_SLUGS].filter(slug => !OVERLAY_SKIP.has(slug));
 
 const manifest = readManifest();
 if (manifest._version !== CACHE_VERSION) {
@@ -103,14 +112,18 @@ if (forceRegen) {
   console.log(`[generate] ${staleSlugs.length} stale component(s) to regenerate`);
 }
 
-console.log(`[generate] starting harness on :${HARNESS_PORT}…`);
+// Vite auto-loads harness/vite.config.js (shared with the preview server).
+// strictPort: false → if 5899 is taken (e.g. the preview server is running),
+// Vite picks the next free port instead of failing. We read the resolved port
+// below to construct URLs.
 const vite = await createServer({
   root: HARNESS_ROOT,
-  plugins: [vue()],
-  server: { port: HARNESS_PORT, strictPort: true, open: false },
+  server: { port: HARNESS_PORT, strictPort: false, open: false },
   logLevel: 'warn',
 });
 await vite.listen();
+const resolvedPort = vite.httpServer.address().port;
+console.log(`[generate] harness on :${resolvedPort}${resolvedPort === HARNESS_PORT ? '' : ` (${HARNESS_PORT} was busy)`}…`);
 
 const browser = await chromium.launch({
   executablePath: process.env.PLAYWRIGHT_CHROMIUM_PATH || undefined,
@@ -137,6 +150,17 @@ async function captureOne (url, outPath) {
     await page.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
     await page.waitForTimeout(TIMEOUTS.transitionSettle);
 
+    // Pre-capture cleanup: suppress preview decorations, drop any focus that
+    // would render as a :focus ring (e.g. autofocused inputs in EmojiPicker,
+    // SelectMenu, etc.), and clear any text selection.
+    await page.evaluate(() => {
+      document.body.classList.add('thumb-capturing');
+      if (document.activeElement && document.activeElement !== document.body) {
+        document.activeElement.blur();
+      }
+      window.getSelection()?.removeAllRanges();
+    });
+
     const hasContent = await page.evaluate(() => {
       const root = document.getElementById('thumb-root');
       if (!root || !root.firstElementChild) return false;
@@ -158,9 +182,8 @@ for (const slug of staleSlugs) {
   const exportName = slugToExportName(slug);
   process.stdout.write(`  [shot] ${slug}… `);
 
-  // Light + dark are independent — run in parallel.
   const modeResults = await Promise.all(MODES.map(async mode => {
-    const url = `http://localhost:${HARNESS_PORT}/?thumb=${exportName}&mode=${mode}`;
+    const url = `http://localhost:${resolvedPort}/?thumb=${exportName}&mode=${mode}`;
     const outPath = resolve(OUTPUT_DIR, `${slug}-${mode}.png`);
     try {
       return await captureOne(url, outPath);
@@ -171,6 +194,18 @@ for (const slug of staleSlugs) {
 
   const modeOk = modeResults.filter(r => r === true).length;
   const firstError = modeResults.find(r => r instanceof Error);
+
+  // Wall-slug aliases — copy the captured PNGs to alternate filenames
+  // for components whose docs page title doesn't match the components_list slug.
+  for (const alias of SLUG_ALIASES[slug] ?? []) {
+    for (let i = 0; i < MODES.length; i++) {
+      if (modeResults[i] !== true) continue;
+      copyFileSync(
+        resolve(OUTPUT_DIR, `${slug}-${MODES[i]}.png`),
+        resolve(OUTPUT_DIR, `${alias}-${MODES[i]}.png`),
+      );
+    }
+  }
 
   if (modeOk === MODES.length) {
     manifest[slug] = { inputHash: computeHash(slug, exportName) };

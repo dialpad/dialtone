@@ -9,6 +9,14 @@
         "command": "node apps/dialtone-documentation/scripts/thumbs/generate.mjs"
       }
     },
+    "thumbs:preview": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["dialtone-tokens:build", "dialtone-vue:build"],
+      "options": {
+        "cwd": "{workspaceRoot}",
+        "command": "pnpm exec vite apps/dialtone-documentation/scripts/thumbs/harness --port 5899 --host"
+      }
+    },
     "build": {
       "executor": "nx:run-commands",
       "dependsOn": [

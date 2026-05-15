@@ -1,0 +1,10 @@
+<template>
+  <dt-box
+    padding="200"
+    border-width="200"
+    border-color="subtle"
+    inline-size="300"
+    block-size="200"
+    class="d-bas-dashed"
+  />
+</template>

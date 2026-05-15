@@ -7,8 +7,8 @@
   <style>
     /* Layout only — let dialtone-css handle ALL typography, colors, and component styles. */
     html, body {
-      inline-size: 400px;
-      block-size: 225px;
+      inline-size: 400px; /* capture-frame width, intentionally custom */
+      block-size: 225px;  /* capture-frame height, intentionally custom */
       margin: 0;
       padding: 0;
       overflow: hidden;
@@ -21,7 +21,80 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 16px;
+      padding: var(--dt-spacing-200);
+    }
+    /* Preview-only frame outline — shown in `vite serve` so the author can see
+       the 400×225 viewport boundary. Removed by the generator (which adds
+       `.thumb-capturing` to body) so the captured PNG stays clean. */
+    body:not(.thumb-capturing) #thumb-root {
+      outline: var(--dt-size-border-100) dashed var(--dt-color-border-subtle);
+      outline-offset: calc(-1 * var(--dt-size-border-100));
+    }
+
+    /* Suppress focus rings in captured screenshots — autofocused inputs (e.g.
+       EmojiPicker search, SelectMenu) would otherwise render with a blue focus
+       ring. We also blur the active element pre-capture in generate.mjs; this
+       handles the edge case where a component re-focuses after blur. */
+    body.thumb-capturing :focus,
+    body.thumb-capturing :focus-visible {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    /* Picker mode (root URL with no ?thumb=) — release the 400×225 viewport so
+       the component list can flow naturally. Never reached during capture. */
+    body.picker-mode,
+    body.picker-mode html {
+      inline-size: auto;
+      block-size: auto;
+      overflow: auto;
+    }
+    body.picker-mode #thumb-root {
+      inline-size: auto;
+      block-size: auto;
+      display: block;
+      padding: var(--dt-spacing-300);
+      outline: none;
+    }
+    .picker {
+      max-inline-size: 72rem; /* ~720px, picker-specific layout width */
+    }
+    .picker h1 {
+      margin: 0 0 var(--dt-spacing-100);
+      font-size: var(--dt-font-size-300);
+    }
+    .picker p {
+      margin: 0 0 var(--dt-spacing-150);
+      color: var(--dt-color-foreground-secondary);
+    }
+    .picker code {
+      font-family: var(--dt-font-family-mono);
+      padding: var(--dt-size-border-100) var(--dt-spacing-50);
+      background: var(--dt-color-surface-secondary);
+      border-radius: var(--dt-size-radius-200);
+    }
+    .picker__list {
+      list-style: none;
+      padding: 0;
+      margin: var(--dt-spacing-200) 0 0;
+      columns: 2;
+      column-gap: var(--dt-spacing-300);
+    }
+    .picker__list li {
+      padding: var(--dt-spacing-50) 0;
+      break-inside: avoid;
+    }
+    .picker__meta {
+      color: var(--dt-color-foreground-tertiary);
+      font-size: var(--dt-font-size-100);
+    }
+    .picker__badge {
+      font-style: normal;
+      padding: var(--dt-size-border-100) var(--dt-spacing-75);
+      border-radius: var(--dt-size-radius-200);
+      background: var(--dt-color-surface-info);
+      color: var(--dt-color-foreground-on-info);
+      font-size: var(--dt-font-size-100);
     }
   </style>
 </head>
