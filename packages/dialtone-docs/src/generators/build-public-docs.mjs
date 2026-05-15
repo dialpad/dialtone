@@ -68,15 +68,17 @@ export function chunkSections(body) {
 
   for (const line of lines) {
     // Track fenced code blocks (3+ backticks or tildes)
-    const fenceMatch = line.match(/^ {0,3}(`{3,}|~{3,})/);
+    const fenceMatch = line.match(/^ {0,3}(`{3,}|~{3,})(.*)$/);
     if (fenceMatch) {
       const char = fenceMatch[1][0];
       const len = fenceMatch[1].length;
+      const trailing = fenceMatch[2];
       if (!inFence) {
         inFence = true;
         fenceChar = char;
         fenceLength = len;
-      } else if (char === fenceChar && len >= fenceLength) {
+      } else if (char === fenceChar && len >= fenceLength && /^[ \t]*$/.test(trailing)) {
+        // CommonMark §4.5: closing fences must have no trailing text (info strings are only valid on openers)
         inFence = false;
         fenceChar = null;
         fenceLength = 0;
