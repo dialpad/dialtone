@@ -41,6 +41,14 @@ describe('chunkSections', () => {
     expect(sections[0].raw).toContain('More content');
   });
 
+  test('shorter closing fence does not close a longer opening fence', () => {
+    const body = '## Real\nIntro.\n````js\n## Fake\nconst x = 1;\n```\nstill inside\n````\nAfter.';
+    const sections = chunkSections(body);
+    expect(sections).toHaveLength(1);
+    expect(sections[0].headingPath).toEqual(['Real']);
+    expect(sections[0].raw).toContain('After.');
+  });
+
   test('second H2 resets H3 context', () => {
     // ## A has content before ### A1, so 3 sections are produced: [A], [A,A1], [B]
     const body = '## A\nContent A.\n### A1\nContent A1.\n## B\nContent B.';
@@ -163,6 +171,16 @@ describe('buildRecords — edge cases', () => {
     const nested = records.find(r => r.headingPath.length === 2);
     expect(nested).toBeDefined();
     expect(nested.headingPath[1]).toBe('Subsection 1');
+  });
+
+  test('shorter closing fence does not close a longer opening fence', () => {
+    // long-fence.md opens with ```` (4 backticks); the ``` inside must NOT close it.
+    const records = buildRecords(resolve(fixtureDir, 'long-fence.md'));
+    const fakeRecord = records.find(r => r.headingPath.some(h => h.includes('Fake Heading')));
+    expect(fakeRecord).toBeUndefined();
+    const usage = records.find(r => r.headingPath.includes('Usage'));
+    expect(usage).toBeDefined();
+    expect(usage.content).toContain('More content after the fence');
   });
 
   test('heading inside an indented fenced code block does not split', () => {

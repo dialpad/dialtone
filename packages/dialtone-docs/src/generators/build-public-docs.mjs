@@ -55,6 +55,7 @@ export function chunkSections(body) {
   let currentLines = [];
   let inFence = false;
   let fenceChar = null;
+  let fenceLength = 0;
 
   function flush() {
     const raw = currentLines.join('\n').trim();
@@ -70,12 +71,15 @@ export function chunkSections(body) {
     const fenceMatch = line.match(/^ {0,3}(`{3,}|~{3,})/);
     if (fenceMatch) {
       const char = fenceMatch[1][0];
+      const len = fenceMatch[1].length;
       if (!inFence) {
         inFence = true;
         fenceChar = char;
-      } else if (char === fenceChar) {
+        fenceLength = len;
+      } else if (char === fenceChar && len >= fenceLength) {
         inFence = false;
         fenceChar = null;
+        fenceLength = 0;
       }
       currentLines.push(line);
       continue;
