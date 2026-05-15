@@ -55,6 +55,7 @@
         :modal="false"
         :auto-focus="false"
         :append-to="appendTo"
+        :dialog-class="dialogClass"
         :transition="transition"
         @opened="opened"
       >
@@ -219,6 +220,14 @@ export default {
      * Additional class for the footer wrapper element.
      */
     footerClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class for the popover dialog element.
+     */
+    dialogClass: {
       type: [String, Array, Object],
       default: '',
     },

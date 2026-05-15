@@ -23,6 +23,7 @@
     :max-selected-message="$attrs.maxSelectedMessage"
     :has-suggestion-list="$attrs.hasSuggestionList"
     :append-to="$attrs.appendTo"
+    :dialog-class="$attrs.dialogClass"
     :transition="$attrs.transition"
     :reserved-right-space="$attrs.reservedRightSpace"
     @update:model-value="onComboboxInput"
