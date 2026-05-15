@@ -1,8 +1,6 @@
 ---
 paths:
-  - "docs/**"
   - "apps/dialtone-documentation/docs/**"
-  - "*.md"
 ---
 
 # Documentation Writing Rules
