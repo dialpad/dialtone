@@ -1376,11 +1376,7 @@ packages:
     resolution: {integrity: sha512-NzGie5sIbfW/AyJwtIRZOumhAiXP6329VNBOrVerXgGrXqbTacTAuXPPVSgprFol5kWdbV34QtAlKN5OY11WEw==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-services/1.11.0/20198484967555617ab62da6ad3c276265ee232d}
     hasBin: true
     peerDependencies:
-      '@vue/composition-api': '*'
       vue: ^2.0.0 || >=3.0.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
 
   '@dialpad/i18n@1.22.3':
     resolution: {integrity: sha512-vIviaCpnXRyd/CegJw4jlcdB9Zbgmml0gmHr9cNXUtJuC+DEOtwadVtq7qpUedggKMltg7VlMkC38U85C6W/yw==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n/1.22.3/fcdcd6ab6ab141035696d71caf35b3554b64c726}
@@ -16551,6 +16547,8 @@ snapshots:
       fluent-vue: 3.7.2(@fluent/bundle@0.17.1)(vue@3.5.32(typescript@5.9.3))
       vue: 3.5.32(typescript@5.9.3)
       vue-demi: 0.14.10(vue@3.5.32(typescript@5.9.3))
+    transitivePeerDependencies:
+      - '@vue/composition-api'
 
   '@dialpad/i18n@1.22.3(vue@3.5.32(typescript@5.9.3))':
     dependencies:
