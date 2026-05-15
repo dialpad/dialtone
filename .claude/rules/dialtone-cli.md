@@ -33,3 +33,9 @@ Rollup bundles everything (core + JSON data) into a single self-contained `build
 2. Import search functions from `@dialpad/dialtone-query-core`
 3. Register in `src/index.ts` under `subCommands`
 4. Rebuild: `pnpm exec rollup -c`
+
+## Argument Validation
+
+- Numeric args (e.g., `--limit`) must use a strict integer check — `Number.parseInt` accepts floats (`1.5`), hex (`0x10`), and trailing chars (`10abc`). Use a regex guard: `/^(0|[1-9]\d*)$/.test(value)` before parsing.
+- Invalid args must print a human-readable error to stderr and call `process.exit(1)`.
+- The `--format` flag only accepts `minimal`, `markdown`, or `json` — reject any other value explicitly.

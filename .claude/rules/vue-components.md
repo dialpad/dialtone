@@ -6,7 +6,7 @@ paths:
 # Vue Component Rules
 
 ## API Style
-- **New components**: Composition API with `<script setup lang="ts">`. Use `defineProps`, `defineEmits`, `defineSlots`.
+- **New components**: Composition API with `<script setup>`. Use `defineProps`, `defineEmits`, `defineSlots`.
 - **Existing components**: Options API with `compatConfig: { MODE: 3 }`. Do NOT convert unless explicitly asked.
 
 ## Props
@@ -14,6 +14,10 @@ paths:
 - Import allowed values from `*_constants.js`. Never hardcode valid value arrays inline.
 - Add JSDoc with `@values` annotation.
 - Boolean visibility toggles: prefer `hideX` negative polarity (`hideClose`, `hideHeader`, `hideArrow`).
+- `class` props must accept all three binding forms: `type: [String, Object, Array]`.
+
+## Reactivity Gotchas
+- Never use `$slots` inside `computed()` — `$slots` is not reactive in computed, so the derived value will not update when slot presence changes. Access `$slots` in templates or non-computed methods only.
 
 ## Events
 - `update:modelValue` for v-model.
@@ -27,7 +31,7 @@ paths:
 ## Sizes
 - Interactive components: `xs`, `sm`, `md`, `lg`, `xl` (string).
 - Icons: numeric scale `100`–`800`.
-- Export from `*_constants.js`: `COMPONENT_SIZES` object + `COMPONENT_SIZE_DEFAULT`.
+- Size constants use component-prefixed names: `BUTTON_SIZE_MODIFIERS`, `EMPTY_STATE_SIZE_MODIFIERS`, etc. — objects mapping size keys to CSS class strings. Export from `*_constants.js`.
 
 ## Separation of Concerns
 - **Template**: Presentation only. No complex expressions (extract to computed). No API calls.

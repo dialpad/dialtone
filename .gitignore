@@ -82,3 +82,6 @@ SKILLS_TODO*.md
 *.deprecated
 .claude/scheduled_tasks.lock
 .omx/
+.claude/plans/
+docs/prd/
+docs/plans/
