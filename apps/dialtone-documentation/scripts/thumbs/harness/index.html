@@ -31,16 +31,11 @@
       outline-offset: calc(-1 * var(--dt-size-border-100));
     }
 
-    /* Suppress focus rings in captured screenshots. dialtone-css lives in
-       `@layer dialtone.components`, where an unlayered `!important` rule
-       loses to a layered `!important` rule — neutralizing the underlying
-       focus tokens bypasses the cascade entirely.
-       Scope: `--dt-shadow-focus` (button focus rings) and input-only tokens.
-       Avoid touching `--dt-color-border-focus` / `--dt-size-border-focus`
-       directly because components like DtResizableHandle legitimately style
-       themselves with `--dt-color-border-focus` as an accent — overriding it
-       here would erase intentional UI, not just unwanted focus state. The
-       blur + tippy-hide pre-capture cleanup handles those cases instead. */
+    /* Token-level focus suppression. dialtone-css declares components in
+       `@layer dialtone.components`, where unlayered `!important` loses to
+       layered `!important` — overriding the tokens bypasses the cascade.
+       NOT general-purpose tokens like --dt-color-border-focus, since
+       components (DtResizableHandle) use those as design accents. */
     body.thumb-capturing {
       --dt-shadow-focus: none;
       --dt-inputs-color-background-focus: transparent;
@@ -75,12 +70,7 @@
       outline: none;
     }
     .gallery {
-      /* max-inline-size: 96rem; */
       margin: 0 auto;
-    }
-    .gallery h1 {
-      margin: 0 0 var(--dt-spacing-100);
-      font-size: var(--dt-font-size-300);
     }
     .gallery > p {
       margin: 0 0 var(--dt-spacing-200);
@@ -124,7 +114,8 @@
     .picker {
       max-inline-size: 72rem; /* ~720px, picker-specific layout width */
     }
-    .picker h1 {
+    .picker h1,
+    .gallery h1 {
       margin: 0 0 var(--dt-spacing-100);
       font-size: var(--dt-font-size-300);
     }

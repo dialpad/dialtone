@@ -40,20 +40,12 @@ const TIMEOUTS = {
   mount: 5_000,
   networkIdle: 5_000,
   transitionSettle: 250,
+  cleanupRecheck: 150,
 };
 
-// Components that still produce nothing useful even after V2.6 variant overrides
-// and V3 hand-authored thumbs at apps/dialtone-documentation/thumbs/<slug>.vue.
-// (Currently empty — all components covered.)
-const OVERLAY_SKIP = new Set();
-
-// Wall pages whose components aren't in common/components_list.js but DO need
-// generated PNGs. Two flavors:
-//   - 'illustration' is a Dt* component exported from dialtone-vue but lives
-//     in dialtone-icons by design.
-//   - 'table' / 'scrollbar' have NO Vue component — the docs pages cover CSS
-//     primitives and directives. Their thumbs are rendered entirely from
-//     `apps/dialtone-documentation/thumbs/<slug>.vue` overrides.
+// Wall pages without a components_list.js entry — either Dt* components from
+// dialtone-icons (illustration) or CSS-primitive / directive-only slugs that
+// only render via their override .vue file (table, scrollbar).
 const EXTRA_SLUGS = [
   'illustration',
   'table',
@@ -115,8 +107,7 @@ const allFiles = require(resolve(REPO_ROOT, 'common/components_list.js'));
 const targetSlugs = singleComponent
   // --component=foo bypasses isOnWall so devs can iterate on non-wall slugs.
   ? [singleComponent]
-  : [...allFiles.map(fileToSlug), ...EXTRA_SLUGS]
-    .filter(slug => isOnWall(slug, wallSlugs) && !OVERLAY_SKIP.has(slug));
+  : [...allFiles.map(fileToSlug), ...EXTRA_SLUGS].filter(slug => isOnWall(slug, wallSlugs));
 
 const manifest = readManifest();
 if (manifest._version !== CACHE_VERSION) {
@@ -178,14 +169,10 @@ async function captureOne (url, outPath) {
     await page.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
     await page.waitForTimeout(TIMEOUTS.transitionSettle);
 
-    // Two exceptions preserve intentional popover state:
-    //   - `[autofocus]` anywhere → skip cleanup entirely so override files like
-    //     tooltip.vue can trigger DtTooltip via its native focus trigger.
-    //   - tippy instances with `trigger: 'manual'` → preserved, so DtPopover /
-    //     DtHovercard rendered with `:open="true"` stay visible.
-    // Run twice with a wait between, because some components re-focus after
-    // the initial blur (e.g. Modal's close button via a transition callback,
-    // Datepicker's nav buttons via reactive watchers).
+    // Preserves `[autofocus]` (override files rely on focus-triggered shows)
+    // and tippy `trigger: 'manual'` (programmatic popovers like DtPopover
+    // :open="true"). Runs twice because some components re-focus after the
+    // first blur (Modal close on transition end, Datepicker nav watchers).
     const cleanupFn = () => {
       document.body.classList.add('thumb-capturing');
       if (document.querySelector('[autofocus]')) return;
@@ -201,7 +188,7 @@ async function captureOne (url, outPath) {
       window.getSelection()?.removeAllRanges();
     };
     await page.evaluate(cleanupFn);
-    await page.waitForTimeout(150);
+    await page.waitForTimeout(TIMEOUTS.cleanupRecheck);
     await page.evaluate(cleanupFn);
 
     const hasContent = await page.evaluate(() => {

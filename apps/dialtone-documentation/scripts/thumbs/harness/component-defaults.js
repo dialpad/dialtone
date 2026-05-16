@@ -7,13 +7,9 @@ const FALLBACK = { props: {}, slots: { default: () => 'Label' } };
 
 // Slot value may be plain text, pure markup, or mixed — always compile via
 // runtime template so the same path handles all three.
-const _slotFnCache = new Map();
 function makeSlotFn (value) {
   if (typeof value !== 'string' || value === '') return null;
-  if (_slotFnCache.has(value)) return _slotFnCache.get(value);
-  const fn = () => h(defineComponent({ name: 'SlotContent', template: value }));
-  _slotFnCache.set(value, fn);
-  return fn;
+  return () => h(defineComponent({ name: 'SlotContent', template: value }));
 }
 
 function extractProps (variantProps) {

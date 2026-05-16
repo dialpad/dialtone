@@ -1,5 +1,3 @@
-// STABLE HARNESS
-
 import { createApp, h, defineComponent } from 'vue';
 import * as dialtoneVue from '@dialpad/dialtone-vue';
 import * as dialtoneIcons from '@dialpad/dialtone-icons/vue';
@@ -164,9 +162,6 @@ function mountComponent (componentName) {
     render () {
       if (Override) return h(Override);
       const cfg = getDefaultConfig(componentName);
-      if (typeof cfg.renderFn === 'function') {
-        return cfg.renderFn(h, ComponentClass, dialtoneVue);
-      }
       return h(ComponentClass, cfg.props ?? {}, cfg.slots ?? {});
     },
   });
@@ -189,16 +184,12 @@ function mountComponent (componentName) {
   const app = createApp(ThumbRoot);
   app.component('RouterLink', RouterLinkStub);
 
+  // Directive check first — `Dt*Directive` exports must go through app.use,
+  // not app.component, even though they also start with `Dt`.
   Object.entries(dialtoneVue).forEach(([name, comp]) => {
-    // Directives first — they're also exported with a `Dt` prefix
-    // (DtModeDirective, DtTooltipDirective, etc.) so the order matters:
-    // checking `name.endsWith('Directive')` before the component branch
-    // ensures `app.use(plugin)` runs instead of registering them as components.
     if (name.endsWith('Directive') && typeof comp?.install === 'function') {
       app.use(comp);
     } else if (name.startsWith('Dt') && typeof comp === 'object' && comp !== null) {
-      // Note: Resizable components use `<script setup>` without `defineOptions({ name })`,
-      // so `comp.name` is undefined. The Dt prefix is sufficient to isolate components.
       app.component(name, comp);
     }
   });

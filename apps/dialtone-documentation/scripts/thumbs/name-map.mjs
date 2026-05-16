@@ -14,11 +14,6 @@ export function fileToSlug (filename) {
 /** 'button-group' → 'DtButtonGroup' — re-export of scripts/lib helper for ergonomic local naming. */
 export const slugToExportName = slugToPascalComponentName;
 
-/** 'button_group.vue' → 'DtButtonGroup' */
-export function fileToExportName (filename) {
-  return slugToPascalComponentName(fileToSlug(filename));
-}
-
 /** 'DtButtonGroup' → 'button-group' (inverse of slugToExportName) */
 export function exportNameToSlug (exportName) {
   return exportName.slice(2).replace(/([A-Z])/g, '-$1').toLowerCase().slice(1);
