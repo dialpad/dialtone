@@ -1,9 +1,19 @@
 # Thumbnail overrides
 
-Hand-authored `.vue` files in this directory replace the auto-generated thumbnail
-for a component when its default render isn't viable (e.g., skeleton has no
-inherent size, root-layout needs full viewport, rich-text-editor uses async
-ProseMirror, etc.).
+The thumb pipeline resolves what to render for each component using exactly two
+inputs:
+
+1. `apps/dialtone-documentation/thumbs/<slug>.vue` — if this file exists, render it
+2. Otherwise — render the Combinator's `default` variant from
+   `packages/combinator/src/variants/variants_<snake_name>.js`
+
+No hidden third tier. Authoring an override here is the only way to deviate
+from the Combinator default (e.g., to force an open state on an overlay, pick
+a non-default variant, or compose a parent-required leaf component).
+
+Components without a wall page in `apps/dialtone-documentation/docs/components/`
+are skipped entirely — the generator auto-discovers wall slugs at startup, so
+adding/removing a `.md` page automatically opts the component in or out.
 
 ## File convention
 
@@ -13,8 +23,7 @@ apps/dialtone-documentation/thumbs/<slug>.vue
 
 `<slug>` is the kebab-case slug used in the docs site URL — e.g. `skeleton.vue`,
 `rich-text-editor.vue`. The generator discovers these files via
-`import.meta.glob` in `scripts/thumbs/harness/main.js`; the override wins over
-the Combinator-variant lookup if present.
+`import.meta.glob` in `scripts/thumbs/harness/main.js`.
 
 ## Live preview while authoring
 

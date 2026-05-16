@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 107" fill="none">
-<rect x="97" y="41" width="96" height="12" rx="6" fill="var(--dt-color-foreground-placeholder)" id="title"/>
-<rect x="97" y="61" width="54" height="8" rx="4" fill="var(--dt-color-surface-moderate)" id="description"/>
-<rect x="70.5" y="37.5" width="19" height="19" rx="9.5" fill="var(--dt-color-neutral-white)" stroke="var(--dt-radio-color-border-checked)" id="icon-behind"/>
-<rect x="74" y="41" width="12" height="12" rx="6" fill="var(--dt-radio-color-border-checked)" id="icon-behind"/>
-</svg>
