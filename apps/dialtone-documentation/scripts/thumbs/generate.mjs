@@ -12,7 +12,7 @@
 
 import { createServer } from 'vite';
 import { chromium } from 'playwright';
-import { writeFileSync, mkdirSync, copyFileSync } from 'fs';
+import { writeFileSync, mkdirSync, copyFileSync, readdirSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
 import { createRequire } from 'module';
@@ -64,6 +64,38 @@ const SLUG_ALIASES = {
   'mode-island': ['mode'],
 };
 
+// Wall is the source of truth for which components need thumbnails. Each .md
+// page in docs/components/ is one wall card; components with no wall page
+// (e.g. DtTab, DtTabPanel, DtResizableHandle, DtResizablePanel,
+// DtSegmentedControlItem — leaf parts of composite components) get skipped.
+const WALL_DOCS_DIR = resolve(REPO_ROOT, 'apps/dialtone-documentation/docs/components');
+let wallSlugs;
+try {
+  wallSlugs = new Set(
+    readdirSync(WALL_DOCS_DIR)
+      .filter(f => f.endsWith('.md') && f !== 'index.md')
+      .map(f => f.replace(/\.md$/, '')),
+  );
+} catch (err) {
+  console.error(`[generate] cannot read wall pages at ${WALL_DOCS_DIR}: ${err.message}`);
+  process.exit(1);
+}
+
+// Catch alias rot — a SLUG_ALIASES entry pointing at a missing wall page
+// means a component slug bypasses isOnWall() but produces no displayed thumb.
+for (const [src, aliases] of Object.entries(SLUG_ALIASES)) {
+  for (const a of aliases) {
+    if (!wallSlugs.has(a)) {
+      console.warn(`[generate] SLUG_ALIASES['${src}'] → '${a}': no matching ${a}.md on wall`);
+    }
+  }
+}
+
+function isOnWall (componentSlug) {
+  if (wallSlugs.has(componentSlug)) return true;
+  return (SLUG_ALIASES[componentSlug] ?? []).some(a => wallSlugs.has(a));
+}
+
 const argMap = Object.fromEntries(
   process.argv.slice(2)
     .filter(a => a.startsWith('--'))
@@ -87,8 +119,10 @@ const require = createRequire(import.meta.url);
 const allFiles = require(resolve(REPO_ROOT, 'common/components_list.js'));
 
 const targetSlugs = singleComponent
+  // --component=foo bypasses isOnWall so devs can iterate on non-wall slugs.
   ? [singleComponent]
-  : [...allFiles.map(fileToSlug), ...EXTRA_SLUGS].filter(slug => !OVERLAY_SKIP.has(slug));
+  : [...allFiles.map(fileToSlug), ...EXTRA_SLUGS]
+    .filter(slug => isOnWall(slug) && !OVERLAY_SKIP.has(slug));
 
 const manifest = readManifest();
 if (manifest._version !== CACHE_VERSION) {
@@ -150,16 +184,31 @@ async function captureOne (url, outPath) {
     await page.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
     await page.waitForTimeout(TIMEOUTS.transitionSettle);
 
-    // Pre-capture cleanup: suppress preview decorations, drop any focus that
-    // would render as a :focus ring (e.g. autofocused inputs in EmojiPicker,
-    // SelectMenu, etc.), and clear any text selection.
-    await page.evaluate(() => {
+    // Two exceptions preserve intentional popover state:
+    //   - `[autofocus]` anywhere → skip cleanup entirely so override files like
+    //     tooltip.vue can trigger DtTooltip via its native focus trigger.
+    //   - tippy instances with `trigger: 'manual'` → preserved, so DtPopover /
+    //     DtHovercard rendered with `:open="true"` stay visible.
+    // Run twice with a wait between, because some components re-focus after
+    // the initial blur (e.g. Modal's close button via a transition callback,
+    // Datepicker's nav buttons via reactive watchers).
+    const cleanupFn = () => {
       document.body.classList.add('thumb-capturing');
+      if (document.querySelector('[autofocus]')) return;
       if (document.activeElement && document.activeElement !== document.body) {
         document.activeElement.blur();
       }
+      document.querySelectorAll('*').forEach(el => {
+        const trigger = el._tippy?.props?.trigger;
+        if (el._tippy && typeof trigger === 'string' && !trigger.includes('manual')) {
+          el._tippy.hide();
+        }
+      });
       window.getSelection()?.removeAllRanges();
-    });
+    };
+    await page.evaluate(cleanupFn);
+    await page.waitForTimeout(150);
+    await page.evaluate(cleanupFn);
 
     const hasContent = await page.evaluate(() => {
       const root = document.getElementById('thumb-root');

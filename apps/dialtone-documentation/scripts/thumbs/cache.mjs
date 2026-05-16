@@ -22,8 +22,6 @@ const CACHE_PATH = resolve(__dir, '.cache.json');
 const HARNESS_FILES = [
   'harness/main.js',
   'harness/component-defaults.js',
-  'harness/local-overrides.js',
-  'harness/thumb-variants.js',
   'harness/index.html',
 ].map(p => resolve(__dir, p));
 const TOKENS_CSS = resolve(REPO_ROOT, 'packages/dialtone-tokens/dist/css/layered/tokens-dp-colors.css');
