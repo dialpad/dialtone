@@ -2,7 +2,7 @@
   <dt-modal
     header-text="Example title"
     :open="isOpen"
-    :banner-title="bannerTitle"
+    :banner-header-text="bannerTitle"
     :banner-kind="bannerKind"
     :fixed-header-footer="fixedHeaderFooter"
     :size="size"
