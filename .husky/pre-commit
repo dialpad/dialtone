@@ -15,4 +15,16 @@ if ! git diff --staged --quiet .vscode/extensions.json; then
   node scripts/sync-vscode-extensions.mjs
 fi
 
+# Regenerate component wall thumbnails when a relevant input changed.
+# The generator's content-hash cache means only affected slugs actually
+# rerun — typical single-component commits regen in ~5–10s warm.
+THUMB_INPUTS='packages/dialtone-vue/components apps/dialtone-documentation/thumbs packages/combinator/src/variants packages/dialtone-tokens'
+if ! git diff --staged --quiet -- $THUMB_INPUTS; then
+  echo "Detected changes to thumb inputs, regenerating component thumbnails..."
+  echo "  (override authoring: apps/dialtone-documentation/thumbs/README.md)"
+  pnpm nx run dialtone-documentation:thumbs;
+
+  git add apps/dialtone-documentation/docs/.vuepress/public/assets/images/components;
+fi
+
 pnpm exec lint-staged --relative
