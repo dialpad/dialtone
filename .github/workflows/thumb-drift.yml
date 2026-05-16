@@ -7,9 +7,28 @@ on:
       - 'packages/dialtone-tokens/**'
       - 'packages/combinator/src/variants/**'
       - 'apps/dialtone-documentation/scripts/thumbs/**'
+      - 'apps/dialtone-documentation/thumbs/**'
       - 'apps/dialtone-documentation/docs/.vuepress/public/assets/images/components/**'
+      - 'apps/dialtone-documentation/docs/components/**'
       - 'common/components_list.js'
       - '.github/workflows/thumb-drift.yml'
+  # Block deploys on release branches if committed PNGs don't match a fresh
+  # regen. PR behavior stays comment-only (devs can defer regen on WIP); this
+  # is the post-merge tripwire so the deployed wall is always in sync.
+  push:
+    branches:
+      - staging
+      - next
+      - production
+    paths:
+      - 'packages/dialtone-vue/components/**'
+      - 'packages/dialtone-tokens/**'
+      - 'packages/combinator/src/variants/**'
+      - 'apps/dialtone-documentation/scripts/thumbs/**'
+      - 'apps/dialtone-documentation/thumbs/**'
+      - 'apps/dialtone-documentation/docs/.vuepress/public/assets/images/components/**'
+      - 'apps/dialtone-documentation/docs/components/**'
+      - 'common/components_list.js'
 
 env:
   HUSKY: 0
@@ -70,6 +89,8 @@ jobs:
 
       - name: Upsert PR comment
         # continue-on-error so a fork PR's read-only token doesn't fail the job.
+        # Skipped on push events (no PR context to comment on).
+        if: github.event_name == 'pull_request'
         continue-on-error: true
         uses: actions/github-script@v7
         with:
@@ -171,3 +192,15 @@ jobs:
               });
             }
             // else: clean PR with no prior comment — stay silent.
+
+      - name: Fail on drift (release branches only)
+        # Push to staging/next/production must arrive with thumbs in sync. The
+        # pre-commit hook + PR comment should already have caught this; this
+        # step is the tripwire if both were bypassed.
+        if: github.event_name == 'push' && (steps.drift.outputs.count != '0' || steps.regen.outputs.status == 'error')
+        run: |
+          echo "::error::Thumb drift detected on push to ${{ github.ref_name }}. ${{ steps.drift.outputs.count }} file(s) out of sync."
+          echo "Regenerate locally and commit:"
+          echo "  pnpm nx run dialtone-documentation:thumbs"
+          echo "  git add apps/dialtone-documentation/docs/.vuepress/public/assets/images/components/"
+          exit 1
