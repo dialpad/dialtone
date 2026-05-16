@@ -12,13 +12,14 @@
 
 import { createServer } from 'vite';
 import { chromium } from 'playwright';
-import { writeFileSync, mkdirSync, copyFileSync, readdirSync } from 'fs';
+import { writeFileSync, mkdirSync, copyFileSync, readdirSync, readFileSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
 import { createRequire } from 'module';
 
 import { fileToSlug, slugToExportName } from './name-map.mjs';
 import { getStale, computeHash, readManifest, writeManifest } from './cache.mjs';
+import { SLUG_ALIASES, isOnWall, frontmatterToSlug } from './wall.mjs';
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dir, '../../../..');
@@ -47,34 +48,32 @@ const TIMEOUTS = {
 const OVERLAY_SKIP = new Set();
 
 // Wall pages whose components aren't in common/components_list.js but DO need
-// generated PNGs. e.g. `DtIllustration` lives in @dialpad/dialtone-icons and is
-// exposed via the docs wall as a standalone "Illustration" page.
+// generated PNGs. Two flavors:
+//   - 'illustration' is a Dt* component exported from dialtone-vue but lives
+//     in dialtone-icons by design.
+//   - 'table' / 'scrollbar' have NO Vue component — the docs pages cover CSS
+//     primitives and directives. Their thumbs are rendered entirely from
+//     `apps/dialtone-documentation/thumbs/<slug>.vue` overrides.
 const EXTRA_SLUGS = [
   'illustration',
+  'table',
+  'scrollbar',
 ];
-
-// Wall-page slugs that don't match the components_list slug 1:1. After capture,
-// copy <source-slug>-*.png to <alias>-*.png so the wall card finds its thumb.
-// E.g., tabs.md (title "Tabs" → fileName "tabs") is the wall card for the Tab
-// Group component, whose PNGs are generated as `tab-group-*.png`.
-const SLUG_ALIASES = {
-  // Wall page "Tabs" (title-derived slug 'tabs') uses the tab-group thumb.
-  'tab-group': ['tabs'],
-  // Wall page "Mode" (title-derived slug 'mode') uses the mode-island thumb.
-  'mode-island': ['mode'],
-};
 
 // Wall is the source of truth for which components need thumbnails. Each .md
 // page in docs/components/ is one wall card; components with no wall page
 // (e.g. DtTab, DtTabPanel, DtResizableHandle, DtResizablePanel,
 // DtSegmentedControlItem — leaf parts of composite components) get skipped.
+// A page's wall slug comes from its frontmatter, not its filename — see
+// frontmatterToSlug for the rule.
 const WALL_DOCS_DIR = resolve(REPO_ROOT, 'apps/dialtone-documentation/docs/components');
 let wallSlugs;
 try {
   wallSlugs = new Set(
     readdirSync(WALL_DOCS_DIR)
       .filter(f => f.endsWith('.md') && f !== 'index.md')
-      .map(f => f.replace(/\.md$/, '')),
+      .map(f => frontmatterToSlug(readFileSync(resolve(WALL_DOCS_DIR, f), 'utf8')))
+      .filter(Boolean),
   );
 } catch (err) {
   console.error(`[generate] cannot read wall pages at ${WALL_DOCS_DIR}: ${err.message}`);
@@ -89,11 +88,6 @@ for (const [src, aliases] of Object.entries(SLUG_ALIASES)) {
       console.warn(`[generate] SLUG_ALIASES['${src}'] → '${a}': no matching ${a}.md on wall`);
     }
   }
-}
-
-function isOnWall (componentSlug) {
-  if (wallSlugs.has(componentSlug)) return true;
-  return (SLUG_ALIASES[componentSlug] ?? []).some(a => wallSlugs.has(a));
 }
 
 const argMap = Object.fromEntries(
@@ -122,7 +116,7 @@ const targetSlugs = singleComponent
   // --component=foo bypasses isOnWall so devs can iterate on non-wall slugs.
   ? [singleComponent]
   : [...allFiles.map(fileToSlug), ...EXTRA_SLUGS]
-    .filter(slug => isOnWall(slug) && !OVERLAY_SKIP.has(slug));
+    .filter(slug => isOnWall(slug, wallSlugs) && !OVERLAY_SKIP.has(slug));
 
 const manifest = readManifest();
 if (manifest._version !== CACHE_VERSION) {

@@ -8,6 +8,10 @@
     gap="300"
     :style="{ width: '320px' }"
   >
-    <dt-skeleton :paragraph-option="{ lines: 4 }" />
+    <dt-skeleton
+      :list-item-option="{ shapeSize: 'sm', paragraphs: { rows: 1 } }"
+      :animate="false"
+    />
+    <dt-skeleton :paragraph-option="{ lines: 2 }" :animate="false" />
   </dt-stack>
 </template>
