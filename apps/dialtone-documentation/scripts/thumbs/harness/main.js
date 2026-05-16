@@ -1,3 +1,5 @@
+// STABLE HARNESS
+
 import { createApp, h, defineComponent } from 'vue';
 import * as dialtoneVue from '@dialpad/dialtone-vue';
 import * as dialtoneIcons from '@dialpad/dialtone-icons/vue';
@@ -92,7 +94,7 @@ function mountComponent (componentName) {
     return;
   }
 
-   
+
   // defines ThumbRoot + RouterLinkStub together; splitting into separate files
   // would add unnecessary indirection for a dev-only single-purpose app.
   const ThumbRoot = defineComponent({
