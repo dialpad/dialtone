@@ -113,6 +113,11 @@ export const argTypesData = {
       type: 'boolean',
     },
   },
+  transparentBackdrop: {
+    control: {
+      type: 'boolean',
+    },
+  },
   open: {
     control: {
       type: 'boolean',
@@ -215,6 +220,17 @@ export const WithFullSize = {
 
   args: {
     size: 'full',
+    showFooter: true,
+  },
+
+  parameters: { ...Default.parameters },
+};
+
+export const WithTransparentBackdrop = {
+  render: DefaultTemplate,
+
+  args: {
+    transparentBackdrop: true,
     showFooter: true,
   },
 
