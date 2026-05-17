@@ -17,8 +17,8 @@ export const CHIP_SIZES = {
 // that many CSS px on hi-DPI and may flip the rounding side on 1x.
 export const CHIP_TOP_POSITION = {
   xs: 1.4,
-  sm: 0.4,
-  md: 0.6,
+  sm: -0.1,
+  md: -0.3,
 };
 
 export default {

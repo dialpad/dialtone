@@ -16,18 +16,6 @@
   overflow-y: visible;
 }
 
-.d-recipe-combobox-multi-select__chip-wrapper--sm,
-.d-recipe-combobox-multi-select__chip-wrapper--md {
-  padding-top: var(--dt-space-50);
-}
-
-// md combobox uses the sm chip (rendered ~23px) inside a 32px input, leaving a
-// 9px gap. Centering at 4.5px snaps unevenly on 1x. Forcing the chip to 24px
-// makes the gap 8, so both DPIs centre on an integer pixel.
-.d-recipe-combobox-multi-select__chip-wrapper--md .d-chip__label--sm {
-  min-height: var(--dt-size-550);
-}
-
 .d-recipe-combobox-multi-select__chip-wrapper-md--collapsed {
   max-height: 2.8rem;
   overflow-y: hidden;

@@ -498,7 +498,6 @@ export default {
 
     chipWrapperClass () {
       return {
-        [`d-recipe-combobox-multi-select__chip-wrapper--${this.size}`]: true,
         [`d-recipe-combobox-multi-select__chip-wrapper-${this.size}--collapsed`]: !this.inputFocused && this.collapseOnFocusOut,
       };
     },
@@ -717,13 +716,17 @@ export default {
       // Get the position of the last chip
       // The input cursor should be the same "top" as that chip and next besides it
       const left = lastChip.offsetLeft + this.getFullWidth(lastChip);
-      const hasSpace = input.getBoundingClientRect().width - left > this.reservedRightSpace;
+      const spaceLeft = input.getBoundingClientRect().width - left;
       const firstChip = this.getFirstChip();
       const isWrapped = firstChip && lastChip.offsetTop > firstChip.offsetTop;
 
-      input.style.paddingLeft = hasSpace ? `${left}px` : '4px';
+      if (spaceLeft > this.reservedRightSpace) {
+        input.style.paddingLeft = left + 'px';
+      } else {
+        input.style.paddingLeft = '4px';
+      }
 
-      const paddingTop = this.getInputPaddingTop(lastChip, hasSpace, isWrapped);
+      const paddingTop = this.getInputPaddingTop(lastChip, spaceLeft > this.reservedRightSpace, isWrapped);
       if (paddingTop != null) input.style.paddingTop = `${paddingTop}px`;
     },
 
