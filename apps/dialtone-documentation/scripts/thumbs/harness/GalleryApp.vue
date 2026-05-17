@@ -96,14 +96,9 @@ function onModeChange (newMode) {
 const cacheBust = ref(0);
 const regenerating = ref(false);
 
-// `modifiedSlugs` is the set of override slugs whose source file has changed
-// since the last regen, as reported by the dev-server's `thumb-regen` plugin.
-// Drives three things: each matching cell gets a focus border, the header
-// shows the count, and the split button's start half enables. Two channels:
-//   - GET /__regen-status — initial snapshot on page load (catches changes
-//     that happened before the page was opened)
-//   - HMR custom events `regen:dirty` (carries the slug list) / `regen:clean`
-//     — live updates while the page is open
+// Set of override slugs whose source file has changed since the last regen,
+// as reported by the dev-server's `thumb-regen` plugin. Bootstrapped on mount
+// (HMR-on listeners only fire for events received after subscription).
 const modifiedSlugs = ref(new Set());
 const dirty = computed(() => modifiedSlugs.value.size > 0);
 

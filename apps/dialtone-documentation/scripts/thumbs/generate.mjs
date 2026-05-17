@@ -110,7 +110,7 @@ const allFiles = require(resolve(REPO_ROOT, 'common/components_list.js'));
 const OVERRIDE_DIR = resolve(REPO_ROOT, 'apps/dialtone-documentation/thumbs');
 const overrideSlugs = readdirSync(OVERRIDE_DIR)
   .filter(f => f.endsWith('.vue'))
-  .map(f => f.replace(/\.vue$/, ''));
+  .map(fileToSlug);
 
 const targetSlugs = singleComponent
   // --component=foo bypasses isOnWall so devs can iterate on non-wall slugs.

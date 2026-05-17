@@ -72,8 +72,12 @@ export default defineConfig({
           // authored one file per slug at apps/dialtone-documentation/thumbs/<slug>.vue.
           const slug = file.slice(THUMBS_OVERRIDE_DIR.length + 1).replace(/\.vue$/, '');
           if (inFlight) changedDuringRegen = true;
+          // Atomic-write editors (vim, JetBrains) fire 2–4 chokidar events per
+          // save. Only broadcast on a real set growth — saves a full v-for
+          // re-render on the client per duplicate event.
+          const sizeBefore = modifiedSlugs.size;
           modifiedSlugs.add(slug);
-          broadcastDirty();
+          if (modifiedSlugs.size !== sizeBefore) broadcastDirty();
         }
         server.watcher.on('change', onFsEvent);
         server.watcher.on('add', onFsEvent);
