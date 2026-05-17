@@ -104,10 +104,22 @@ if (argMap.component != null && !singleComponent) {
 const require = createRequire(import.meta.url);
 const allFiles = require(resolve(REPO_ROOT, 'common/components_list.js'));
 
+// Override slugs that have no components_list.js entry (e.g.
+// combobox-multi-select, combobox-with-popover) still need to be in the
+// target set — otherwise editing their override .vue would never regen.
+const OVERRIDE_DIR = resolve(REPO_ROOT, 'apps/dialtone-documentation/thumbs');
+const overrideSlugs = readdirSync(OVERRIDE_DIR)
+  .filter(f => f.endsWith('.vue'))
+  .map(f => f.replace(/\.vue$/, ''));
+
 const targetSlugs = singleComponent
   // --component=foo bypasses isOnWall so devs can iterate on non-wall slugs.
   ? [singleComponent]
-  : [...allFiles.map(fileToSlug), ...EXTRA_SLUGS].filter(slug => isOnWall(slug, wallSlugs));
+  : [...new Set([
+      ...allFiles.map(fileToSlug),
+      ...EXTRA_SLUGS,
+      ...overrideSlugs,
+    ])].filter(slug => isOnWall(slug, wallSlugs));
 
 const manifest = readManifest();
 if (manifest._version !== CACHE_VERSION) {

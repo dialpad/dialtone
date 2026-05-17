@@ -27,15 +27,67 @@ export default defineConfig({
       },
     },
     {
-      // POST /__regenerate spawns the thumb generator in-place so the gallery
-      // page can ship a "Regenerate" button. Equivalent to running
+      // Powers the gallery's "Regenerate" button.
+      //
+      // Tracks an in-memory `dirty` flag: flips to true whenever a watched
+      // override .vue file is added / changed / removed, and resets after a
+      // successful regen. Clients ask for the current state via GET
+      // /__regen-status (used on initial page load), and subscribe to live
+      // updates via Vite's HMR custom events (`regen:dirty` / `regen:clean`).
+      //
+      // POST /__regenerate spawns the generator in-place — equivalent to
       // `pnpm nx run dialtone-documentation:thumbs` from the repo root.
-      // Output streams to the terminal running this dev server. Serializes
-      // requests via a single in-flight child — clicking the button while
-      // regen is running returns 409 instead of spawning a second instance.
-      name: 'thumb-regen-endpoint',
+      // Output streams to the terminal running this dev server. Serialized
+      // via a single in-flight child; concurrent clicks return 409.
+      //
+      // Race detail: if a watched file is touched WHILE a regen is running,
+      // the generator's disk snapshot already missed it — so we keep
+      // dirty=true on exit instead of letting the success path clear it.
+      name: 'thumb-regen',
       configureServer (server) {
+        // Set of slugs whose override file has changed since the last regen.
+        // The gallery uses this to highlight the matching cells with a focus
+        // border, and the split button's "Regenerate" (start) is enabled
+        // when this set is non-empty.
+        const modifiedSlugs = new Set();
         let inFlight = null;
+        let changedDuringRegen = false;
+
+        function broadcastDirty () {
+          server.ws.send({
+            type: 'custom',
+            event: 'regen:dirty',
+            data: { slugs: [...modifiedSlugs] },
+          });
+        }
+
+        function broadcastClean () {
+          server.ws.send({ type: 'custom', event: 'regen:clean' });
+        }
+
+        function onFsEvent (file) {
+          if (typeof file !== 'string' || !file.startsWith(THUMBS_OVERRIDE_DIR)) return;
+          if (!file.endsWith('.vue')) return;
+          // The filename (without extension) is the slug — overrides are
+          // authored one file per slug at apps/dialtone-documentation/thumbs/<slug>.vue.
+          const slug = file.slice(THUMBS_OVERRIDE_DIR.length + 1).replace(/\.vue$/, '');
+          if (inFlight) changedDuringRegen = true;
+          modifiedSlugs.add(slug);
+          broadcastDirty();
+        }
+        server.watcher.on('change', onFsEvent);
+        server.watcher.on('add', onFsEvent);
+        server.watcher.on('unlink', onFsEvent);
+
+        server.middlewares.use('/__regen-status', (req, res, next) => {
+          if (req.method !== 'GET') return next();
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({
+            dirty: modifiedSlugs.size > 0,
+            slugs: [...modifiedSlugs],
+          }));
+        });
+
         server.middlewares.use('/__regenerate', (req, res, next) => {
           if (req.method !== 'POST') return next();
           if (inFlight) {
@@ -43,17 +95,26 @@ export default defineConfig({
             res.setHeader('Content-Type', 'application/json');
             return res.end(JSON.stringify({ ok: false, reason: 'already-running' }));
           }
-          const child = spawn(
-            'node',
-            ['apps/dialtone-documentation/scripts/thumbs/generate.mjs'],
-            { cwd: REPO_ROOT, stdio: 'inherit' },
-          );
+          // `?all=1` → pass `--force` to skip the content-hash cache and
+          // regenerate every component. Without it, the generator's normal
+          // cache logic only regens what's actually stale.
+          const url = new URL(req.url, 'http://_');
+          const force = url.searchParams.has('all');
+          changedDuringRegen = false;
+          const args = ['apps/dialtone-documentation/scripts/thumbs/generate.mjs'];
+          if (force) args.push('--force');
+          const child = spawn('node', args, { cwd: REPO_ROOT, stdio: 'inherit' });
           inFlight = child;
           child.on('exit', (code) => {
             inFlight = null;
-            res.statusCode = code === 0 ? 200 : 500;
+            const ok = code === 0;
+            if (ok && !changedDuringRegen) {
+              modifiedSlugs.clear();
+              broadcastClean();
+            }
+            res.statusCode = ok ? 200 : 500;
             res.setHeader('Content-Type', 'application/json');
-            res.end(JSON.stringify({ ok: code === 0, code }));
+            res.end(JSON.stringify({ ok, code }));
           });
         });
       },

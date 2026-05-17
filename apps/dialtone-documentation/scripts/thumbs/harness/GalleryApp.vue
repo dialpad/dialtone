@@ -1,8 +1,8 @@
 <template>
   <dt-stack gap="300">
     <dt-stack gap="100">
-      <dt-stack direction="row" gap="200" align="center">
-        <dt-text as="h1" kind="headline" size="500">
+      <dt-stack direction="row" gap="200" align="center" justify="space-between">
+        <dt-text as="h1" kind="headline" size="600">
           Thumb Gallery
         </dt-text>
         <dt-segmented-control
@@ -23,17 +23,29 @@
             </template>
           </dt-segmented-control-item>
         </dt-segmented-control>
-        <dt-button
-          importance="outlined"
-          :loading="regenerating"
-          @click="onRegenerate"
-        >
-          Regenerate
-        </dt-button>
+        <dt-stack direction="row" gap="200" align="center">
+          <dt-text v-if="modifiedSlugs.size > 0" kind="body" size="200" tone="info">
+            {{ modifiedSlugs.size }} modified
+          </dt-text>
+          <dt-split-button
+            :disabled="regenerating"
+            :start-disabled="!dirty"
+            :start-loading="regenerating"
+            @start-clicked="onRegenerate(false)"
+          >
+            Regenerate
+            <template #dropdownList>
+              <dt-list-item
+                role="menuitem"
+                navigation-type="arrow-keys"
+                @click="onRegenerate(true)"
+              >
+                Regenerate all {{ slugCount }}
+              </dt-list-item>
+            </template>
+          </dt-split-button>
+        </dt-stack>
       </dt-stack>
-      <dt-text as="p" kind="body" size="200">
-        {{ slugCount }} components
-      </dt-text>
     </dt-stack>
     <div class="thumb-gallery">
       <dt-link
@@ -45,8 +57,8 @@
       >
         <dt-stack gap="100">
           <dt-box
-            border-width="100"
-            border-color="subtle"
+            :border-color="modifiedSlugs.has(cell.slug) ? 'focus' : 'subtle'"
+            :border-width="modifiedSlugs.has(cell.slug) ? '300' : '100'"
             surface="secondary"
             class="h:d-bc-default"
           >
@@ -56,7 +68,7 @@
             <dt-text as="p" kind="label" size="400" tone="tertiary">
               {{ cell.slug }}
             </dt-text>
-            <dt-badge v-if="cell.hasOverride" text="override" type="info" />
+            <dt-badge v-if="cell.hasOverride" text="override" />
           </dt-stack>
         </dt-stack>
       </dt-link>
@@ -65,7 +77,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, computed, onMounted } from 'vue';
 
 defineProps({
   cells: { type: Array, required: true },
@@ -84,10 +96,40 @@ function onModeChange (newMode) {
 const cacheBust = ref(0);
 const regenerating = ref(false);
 
-async function onRegenerate () {
+// `modifiedSlugs` is the set of override slugs whose source file has changed
+// since the last regen, as reported by the dev-server's `thumb-regen` plugin.
+// Drives three things: each matching cell gets a focus border, the header
+// shows the count, and the split button's start half enables. Two channels:
+//   - GET /__regen-status — initial snapshot on page load (catches changes
+//     that happened before the page was opened)
+//   - HMR custom events `regen:dirty` (carries the slug list) / `regen:clean`
+//     — live updates while the page is open
+const modifiedSlugs = ref(new Set());
+const dirty = computed(() => modifiedSlugs.value.size > 0);
+
+onMounted(async () => {
+  try {
+    const res = await fetch('/__regen-status');
+    if (res.ok) {
+      const data = await res.json();
+      modifiedSlugs.value = new Set(data.slugs || []);
+    }
+  } catch { /* dev-server-only feature; ignore in any other context */ }
+});
+
+if (import.meta.hot) {
+  import.meta.hot.on('regen:dirty', (data) => {
+    modifiedSlugs.value = new Set(data?.slugs || []);
+  });
+  import.meta.hot.on('regen:clean', () => {
+    modifiedSlugs.value = new Set();
+  });
+}
+
+async function onRegenerate (all = false) {
   regenerating.value = true;
   try {
-    const res = await fetch('/__regenerate', { method: 'POST' });
+    const res = await fetch(`/__regenerate${all ? '?all=1' : ''}`, { method: 'POST' });
     if (res.ok) cacheBust.value++;
   } finally {
     regenerating.value = false;
