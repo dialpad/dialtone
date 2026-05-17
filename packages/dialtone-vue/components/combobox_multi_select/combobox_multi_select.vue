@@ -780,15 +780,12 @@ export default {
     setInitialInputHeight () {
       const input = this.getInput();
       if (!input) return;
+      input.style.minHeight = '';
+      input.style.height = '';
+      this.initialInputHeight = input.getBoundingClientRect().height;
       // xs renders correctly without the min-height floor; only sm/md need it
       // so the input can grow when chips wrap.
-      const enforceHeight = this.size !== 'xs';
-      if (enforceHeight) {
-        input.style.minHeight = '';
-        input.style.height = '';
-      }
-      this.initialInputHeight = input.getBoundingClientRect().height;
-      if (enforceHeight) {
+      if (this.size !== 'xs') {
         input.style.minHeight = `${this.initialInputHeight}px`;
         input.style.height = 'auto';
       }
