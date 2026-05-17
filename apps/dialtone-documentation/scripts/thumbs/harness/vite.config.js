@@ -6,9 +6,11 @@
  */
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
+import { spawn } from 'node:child_process';
 import { fileURLToPath } from 'url';
 
 const THUMBS_OVERRIDE_DIR = fileURLToPath(new URL('../../../thumbs', import.meta.url));
+const REPO_ROOT = fileURLToPath(new URL('../../../../..', import.meta.url));
 
 export default defineConfig({
   plugins: [
@@ -22,6 +24,38 @@ export default defineConfig({
       name: 'watch-thumb-overrides',
       configureServer (server) {
         server.watcher.add(THUMBS_OVERRIDE_DIR);
+      },
+    },
+    {
+      // POST /__regenerate spawns the thumb generator in-place so the gallery
+      // page can ship a "Regenerate" button. Equivalent to running
+      // `pnpm nx run dialtone-documentation:thumbs` from the repo root.
+      // Output streams to the terminal running this dev server. Serializes
+      // requests via a single in-flight child — clicking the button while
+      // regen is running returns 409 instead of spawning a second instance.
+      name: 'thumb-regen-endpoint',
+      configureServer (server) {
+        let inFlight = null;
+        server.middlewares.use('/__regenerate', (req, res, next) => {
+          if (req.method !== 'POST') return next();
+          if (inFlight) {
+            res.statusCode = 409;
+            res.setHeader('Content-Type', 'application/json');
+            return res.end(JSON.stringify({ ok: false, reason: 'already-running' }));
+          }
+          const child = spawn(
+            'node',
+            ['apps/dialtone-documentation/scripts/thumbs/generate.mjs'],
+            { cwd: REPO_ROOT, stdio: 'inherit' },
+          );
+          inFlight = child;
+          child.on('exit', (code) => {
+            inFlight = null;
+            res.statusCode = code === 0 ? 200 : 500;
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify({ ok: code === 0, code }));
+          });
+        });
       },
     },
   ],
