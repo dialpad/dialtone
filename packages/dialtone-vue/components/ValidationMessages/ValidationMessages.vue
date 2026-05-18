@@ -45,23 +45,25 @@ import {
   DtIconAlertTriangle,
   DtIconAlertCircle,
   DtIconCheckCircle,
+  DtIconInfo,
 } from '@dialpad/dialtone-icons/vue';
 
 const kindToIcon = Object.freeze({
   warning: DtIconAlertTriangle,
   critical: DtIconAlertCircle,
   positive: DtIconCheckCircle,
+  info: DtIconInfo,
 });
 
 /**
  * Validation messages are used to convey information to the user about the current state of the input element.
- * These messages can have a critical, warning or positive type.
+ * These messages can have a critical, warning, positive, or info type.
  * @see https://dialtone.dialpad.com/components/validation_messages.html
  */
 export default {
   name: 'DtValidationMessages',
 
-  components: { DtIconAlertTriangle, DtIconAlertCircle, DtIconCheckCircle },
+  components: { DtIconAlertTriangle, DtIconAlertCircle, DtIconCheckCircle, DtIconInfo },
 
   props: {
     /**
@@ -76,7 +78,7 @@ export default {
 
     /**
      * Array of validation messages. Each message has the following structure:
-     * `{ message: "Some informative message", type: "critical|warning|positive"}`
+     * `{ message: "Some informative message", type: "critical|warning|positive|info"}`
      */
     validationMessages: {
       type: Array,
@@ -130,6 +132,7 @@ export default {
         critical: 'base-input__message--critical d-validation-message--critical',
         warning: 'base-input__message--warning d-validation-message--warning',
         positive: 'base-input__message--positive d-validation-message--positive',
+        info: 'base-input__message--info d-validation-message--info',
       };
 
       return messageTypesClasses[type];

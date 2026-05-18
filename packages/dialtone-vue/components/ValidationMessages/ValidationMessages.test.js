@@ -282,6 +282,23 @@ describe('Validation Messages Tests', () => {
       });
     });
 
+    describe('When type is info', () => {
+      beforeEach(() => {
+        mockProps = {
+          validationMessages: setFormattedValidationMessages(
+            VALIDATION_MESSAGE_TYPES.INFO,
+            'Info message',
+          ),
+        };
+
+        updateWrapper();
+      });
+
+      it('renders the info icon', () => {
+        expect(wrapper.find('[data-qa="validation-message-icon"]').classes()).toContain('d-icon--info');
+      });
+    });
+
     describe('When the icon slot is overridden', () => {
       beforeEach(() => {
         mockProps = {
@@ -338,6 +355,18 @@ describe('Validation Messages Tests', () => {
       describe('When the provided messages are numeric', () => {
         it('fails custom prop validation', () => {
           expect(MOCK_PROP.validator([123])).toBe(false);
+        });
+      });
+
+      describe('When the type is info', () => {
+        it('passes custom prop validation', () => {
+          expect(MOCK_PROP.validator([{ message: 'Info message', type: VALIDATION_MESSAGE_TYPES.INFO }])).toBe(true);
+        });
+      });
+
+      describe('When the type is unknown', () => {
+        it('fails custom prop validation', () => {
+          expect(MOCK_PROP.validator([{ message: 'Unknown', type: 'unknown' }])).toBe(false);
         });
       });
     });

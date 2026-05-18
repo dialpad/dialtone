@@ -208,7 +208,7 @@ describe('DtComboboxMultiSelect Tests', () => {
 
         describe('When LEFT key is pressed', () => {
           beforeEach(async () => {
-            input.trigger('keydown', { code: 'arrowleft' });
+            input.trigger('keydown', { key: 'ArrowLeft' });
           });
 
           it('should focus the last chip', () => {
@@ -220,14 +220,14 @@ describe('DtComboboxMultiSelect Tests', () => {
           it('should not call moveFromInputToChip when input has text', async () => {
             const spy = vi.spyOn(wrapper.vm, 'moveFromInputToChip');
             await input.setValue('a');
-            await input.trigger('keydown', { code: 'arrowleft' });
+            await input.trigger('keydown', { key: 'ArrowLeft' });
             expect(spy).not.toHaveBeenCalled();
           });
         });
 
         describe('When BACKSPACE key is pressed', () => {
           beforeEach(async () => {
-            input.trigger('keydown', { code: 'backspace' });
+            input.trigger('keydown', { key: 'Backspace' });
           });
 
           it('should focus the last chip', () => {
@@ -239,7 +239,7 @@ describe('DtComboboxMultiSelect Tests', () => {
           it('should not call moveFromInputToChip when input has text', async () => {
             const spy = vi.spyOn(wrapper.vm, 'moveFromInputToChip');
             await input.setValue('a');
-            await input.trigger('keydown', { code: 'backspace' });
+            await input.trigger('keydown', { key: 'Backspace' });
             expect(spy).not.toHaveBeenCalled();
           });
         });
@@ -305,6 +305,129 @@ describe('DtComboboxMultiSelect Tests', () => {
     });
   });
 
+  describe('Input Key Event Tests', () => {
+    beforeEach(async () => {
+      // Establish the "while input is focused" precondition the spec describes
+      // before each keydown trigger. Nested describes that target chips manage
+      // their own keydown source — triggering focus on the input is a no-op
+      // for those code paths.
+      await input.trigger('focus');
+    });
+
+    it('Should emit "escape" when Escape is pressed while input is focused', async () => {
+      await input.trigger('keydown', { key: 'Escape' });
+      expect(wrapper.emitted('escape').length).toBe(1);
+    });
+
+    it('Should emit "escape" with a KeyboardEvent payload', async () => {
+      await input.trigger('keydown', { key: 'Escape' });
+      expect(wrapper.emitted('escape')[0][0]).toBeInstanceOf(KeyboardEvent);
+    });
+
+    it('Should emit "enter" when Enter is pressed while input is focused', async () => {
+      await input.trigger('keydown', { key: 'Enter', code: 'Enter' });
+      expect(wrapper.emitted('enter').length).toBe(1);
+    });
+
+    it('Should emit "enter" with a KeyboardEvent payload', async () => {
+      await input.trigger('keydown', { key: 'Enter', code: 'Enter' });
+      expect(wrapper.emitted('enter')[0][0]).toBeInstanceOf(KeyboardEvent);
+    });
+
+    it('Should emit "enter" when NumpadEnter is pressed while input is focused', async () => {
+      // event.key normalizes NumpadEnter to 'Enter'; using event.code would miss this.
+      await input.trigger('keydown', { key: 'Enter', code: 'NumpadEnter' });
+      expect(wrapper.emitted('enter').length).toBe(1);
+    });
+
+    describe('When a key is pressed in the input', () => {
+      beforeEach(async () => {
+        await input.trigger('keydown', { key: 'Tab', code: 'Tab' });
+      });
+
+      it('Should emit "keydown" once', () => {
+        expect(wrapper.emitted('keydown').length).toBe(1);
+      });
+
+      it('Should emit "keydown" with a KeyboardEvent payload', () => {
+        expect(wrapper.emitted('keydown')[0][0]).toBeInstanceOf(KeyboardEvent);
+      });
+    });
+
+    it.each([
+      { key: 'Escape', code: 'Escape' },
+      { key: 'Enter', code: 'Enter' },
+      { key: 'Enter', code: 'NumpadEnter' },
+    ])('Should emit "keydown" for key=$key code=$code', async ({ key, code }) => {
+      await input.trigger('keydown', { key, code });
+      expect(wrapper.emitted('keydown').length).toBe(1);
+    });
+
+    describe('When chips are present', () => {
+      beforeEach(async () => {
+        await wrapper.setProps({ selectedItems: ['1'] });
+        _setChildWrappers();
+      });
+
+      describe.each([
+        { key: 'Escape', semanticEvent: 'escape' },
+        { key: 'Enter', semanticEvent: 'enter' },
+      ])('When $key is pressed while a chip is focused', ({ key, semanticEvent }) => {
+        beforeEach(async () => {
+          await chips.at(0).trigger('keydown', { key, code: key });
+        });
+
+        it('Should emit "chip-keydown" from the chip', () => {
+          expect(wrapper.emitted('chip-keydown').length).toBe(1);
+        });
+
+        it('Should not emit unprefixed "keydown" from the chip', () => {
+          expect(wrapper.emitted('keydown')).toBeUndefined();
+        });
+
+        it(`Should not emit "${semanticEvent}"`, () => {
+          expect(wrapper.emitted(semanticEvent)).toBeUndefined();
+        });
+      });
+
+      it('Should emit "chip-keydown" when a key is pressed on a chip', async () => {
+        await chips.at(0).trigger('keydown', { key: 'ArrowLeft', code: 'ArrowLeft' });
+        expect(wrapper.emitted('chip-keydown').length).toBe(1);
+      });
+    });
+
+    describe('When the component is disabled', () => {
+      // Suppressed by the explicit `if (this.disabled) return;` guard in
+      // inputListeners.onKeydown — not by native DOM disabled semantics
+      // (JSDOM's trigger() fires regardless of the HTML disabled attribute).
+      beforeEach(async () => {
+        await wrapper.setProps({ disabled: true });
+      });
+
+      it('Should not emit "keydown"', async () => {
+        await input.trigger('keydown', { key: 'Tab', code: 'Tab' });
+        expect(wrapper.emitted('keydown')).toBeUndefined();
+      });
+
+      it('Should not emit "escape"', async () => {
+        await input.trigger('keydown', { key: 'Escape', code: 'Escape' });
+        expect(wrapper.emitted('escape')).toBeUndefined();
+      });
+
+      it('Should not emit "enter"', async () => {
+        await input.trigger('keydown', { key: 'Enter', code: 'Enter' });
+        expect(wrapper.emitted('enter')).toBeUndefined();
+      });
+
+      it('Should not emit "chip-keydown" when a key is pressed on a chip', async () => {
+        await wrapper.setProps({ selectedItems: ['1'] });
+        _setChildWrappers();
+        await chips.at(0).trigger('keydown', { key: 'ArrowLeft', code: 'ArrowLeft' });
+        expect(wrapper.emitted('chip-keydown')).toBeUndefined();
+      });
+    });
+  });
+
   describe('Duplicate Items Tests', () => {
     beforeEach(async () => {
       await wrapper.setProps({ selectedItems: ['item1', 'item1', 'item1'] });
@@ -361,6 +484,29 @@ describe('DtComboboxMultiSelect Tests', () => {
         _setChildWrappers();
         expect(validationMsg.text()).toBe('More than 2 selected');
       });
+    });
+  });
+
+  describe('When dialogClass is provided', () => {
+    // Popover teleports to body, so query body directly via data-qa
+    // (same pattern as tooltip/split_button/hovercard tests).
+    let dialog;
+
+    beforeEach(async () => {
+      props = { ...baseProps, dialogClass: 'custom-dialog-class' };
+      wrapper?.unmount();
+      _setWrappers();
+      await input.trigger('focus');
+      await flushPromises();
+      dialog = document.body.querySelector('[data-qa="dt-popover"]');
+    });
+
+    it('should render the popover dialog element', () => {
+      expect(dialog).not.toBeNull();
+    });
+
+    it('should apply the class to the popover dialog element', () => {
+      expect(dialog.classList.contains('custom-dialog-class')).toBe(true);
     });
   });
 });

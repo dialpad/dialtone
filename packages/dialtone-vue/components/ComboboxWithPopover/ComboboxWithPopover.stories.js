@@ -152,6 +152,13 @@ export const argTypesData = {
     },
   },
 
+  dialogClass: {
+    description: 'Additional class for the popover dialog element.',
+    control: {
+      type: 'text',
+    },
+  },
+
   // Action Event Handlers
   onEscape: {
     table: {

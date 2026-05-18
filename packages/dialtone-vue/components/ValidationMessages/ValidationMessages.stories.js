@@ -66,6 +66,10 @@ const VariantsTemplate = () => {
           :validationMessages="[{ message: 'With Critical Validation Message', type: 'critical' }]"
         />
         <br />
+        <dt-validation-messages
+          :validationMessages="[{ message: 'With Info Validation Message', type: 'info' }]"
+        />
+        <br />
       </div>
     `,
   };

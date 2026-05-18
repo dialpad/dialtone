@@ -8,6 +8,7 @@ import {
 import PopoverDefault from './PopoverDefault.story.vue';
 import PopoverVariants from './PopoverVariants.story.vue';
 import PopoverIframe from './PopoverIframe.story.vue';
+import PopoverInsideDialog from './PopoverInsideDialog.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 
 import { action } from 'storybook/actions';
@@ -170,6 +171,7 @@ export default {
 const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, PopoverDefault);
 const TemplateVariants = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, PopoverVariants);
 const TemplateIFrame = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, PopoverIframe);
+const TemplateInsideDialog = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, PopoverInsideDialog);
 
 export const Default = {
   render: Template,
@@ -224,6 +226,30 @@ export const IframeTest = {
     percy: {
       args: {
         open: true,
+      },
+    },
+  },
+};
+
+export const InsideDialog = {
+  render: TemplateInsideDialog,
+
+  args: {
+    open: false,
+    popoverOpen: false,
+    tooltipOpen: false,
+  },
+
+  parameters: {
+    options: {
+      showPanel: false,
+    },
+
+    percy: {
+      args: {
+        open: true,
+        popoverOpen: true,
+        tooltipOpen: true,
       },
     },
   },
