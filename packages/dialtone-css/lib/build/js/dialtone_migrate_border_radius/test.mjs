@@ -266,6 +266,57 @@ describe('Different quote styles and contexts', () => {
 });
 
 // ---------------------------------------------------------------------------
+// Template literals (JS/TS backtick strings)
+// ---------------------------------------------------------------------------
+
+describe('Template literal delimiters', () => {
+  it('transforms d-bar6 inside a simple template literal', () => {
+    const input = 'const cls = `d-bar6`;';
+    const expected = 'const cls = `d-bar-350`;';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, expected);
+    assert.equal(count, 1);
+  });
+
+  it('transforms pair keyword inside a template literal', () => {
+    const input = 'const cls = `d-btr-pill`;';
+    const expected = 'const cls = `d-bbsr-pill`;';
+    const { transformed } = transformContent(input);
+    assert.equal(transformed, expected);
+  });
+
+  it('transforms pair numeric inside a template literal', () => {
+    const input = 'const cls = `d-brr16`;';
+    const expected = 'const cls = `d-bier-500`;';
+    const { transformed } = transformContent(input);
+    assert.equal(transformed, expected);
+  });
+
+  it('transforms multiple classes inside a template literal', () => {
+    const input = 'const cls = `d-bar8 d-btr-circle`;';
+    const expected = 'const cls = `d-bar-400 d-bbsr-circle`;';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, expected);
+    assert.equal(count, 2);
+  });
+
+  it('transforms class inside a template literal with interpolation', () => {
+    const input = 'const cls = `d-bar6 ${otherClass}`;';
+    const expected = 'const cls = `d-bar-350 ${otherClass}`;';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, expected);
+    assert.equal(count, 1);
+  });
+
+  it('does not match inside a non-delimited context (no false positive)', () => {
+    const input = 'const cls = `foo-d-bar6`;';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, input);
+    assert.equal(count, 0);
+  });
+});
+
+// ---------------------------------------------------------------------------
 // Edge cases
 // ---------------------------------------------------------------------------
 

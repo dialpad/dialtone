@@ -63,9 +63,9 @@ const NUMERIC_SUFFIXES = Object.keys(RADIUS_STOP_MAP)
 const PAIR_PREFIXES = Object.keys(PAIR_PREFIX_MAP).join('|');
 
 // Word-boundary anchored patterns to avoid matching inside unrelated class names.
-const ALL_CORNERS_NUMERIC = new RegExp(`(?<=[\\s"'=])d-bar(${NUMERIC_SUFFIXES})(?=[\\s"'>;])`, 'g');
-const PAIR_NUMERIC        = new RegExp(`(?<=[\\s"'=])d-(${PAIR_PREFIXES})(${NUMERIC_SUFFIXES})(?=[\\s"'>;])`, 'g');
-const PAIR_KEYWORD        = new RegExp(`(?<=[\\s"'=])d-(${PAIR_PREFIXES})-(pill|circle)(?=[\\s"'>;])`, 'g');
+const ALL_CORNERS_NUMERIC = new RegExp(`(?<=[\\s"'=\`])d-bar(${NUMERIC_SUFFIXES})(?=[\\s"'>;\`])`, 'g');
+const PAIR_NUMERIC        = new RegExp(`(?<=[\\s"'=\`])d-(${PAIR_PREFIXES})(${NUMERIC_SUFFIXES})(?=[\\s"'>;\`])`, 'g');
+const PAIR_KEYWORD        = new RegExp(`(?<=[\\s"'=\`])d-(${PAIR_PREFIXES})-(pill|circle)(?=[\\s"'>;\`])`, 'g');
 
 // ---------------------------------------------------------------------------
 // Transform
