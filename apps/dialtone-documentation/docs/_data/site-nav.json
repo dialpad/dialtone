@@ -232,6 +232,10 @@
                 "link": "/guides/migration/",
                 "children": [
                   {
+                    "text": "Border-Radius Logical Names",
+                    "link": "/guides/migration/border-radius/"
+                  },
+                  {
                     "text": "CSS Cascade Layers",
                     "link": "/guides/migration/css-cascade-layers/"
                   },
@@ -250,10 +254,6 @@
                   {
                     "text": "Success to Positive",
                     "link": "/guides/migration/success-to-positive/"
-                  },
-                  {
-                    "text": "Border-Radius Logical Names",
-                    "link": "/guides/migration/border-radius/"
                   },
                   {
                     "text": "Flex to DtStack",
