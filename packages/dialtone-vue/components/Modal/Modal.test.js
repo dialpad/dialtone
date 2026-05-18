@@ -207,6 +207,16 @@ describe('DtModal Tests', () => {
       expect(overlay.classes(modalClass)).toBe(true);
     });
 
+    it('Should not apply transparent-backdrop modifier by default', () => {
+      expect(overlay.classes('d-modal--transparent-backdrop')).toBe(false);
+    });
+
+    it('Should apply transparent-backdrop modifier when transparentBackdrop is true', async () => {
+      await wrapper.setProps({ transparentBackdrop: true });
+
+      expect(overlay.classes('d-modal--transparent-backdrop')).toBe(true);
+    });
+
     it('Should pass content class through to content modal element', async () => {
       const contentClass = 'content-class';
 
