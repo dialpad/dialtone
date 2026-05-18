@@ -3,7 +3,6 @@
 //  RECIPES: MOTION TEXT
 //
 //  TABLE OF CONTENTS
-//  • CSS CUSTOM PROPERTIES
 //  • BASE STYLE
 //  • CHILD ELEMENTS
 //  • ANIMATION KEYFRAMES
@@ -15,15 +14,6 @@
 //  • MODIFIERS
 //  • ACCESSIBILITY
 //
-//  ============================================================================
-//  $   CSS CUSTOM PROPERTIES
-//  ----------------------------------------------------------------------------
-@property --d-motion-text-mask-pos {
-  inherits: true;
-  initial-value: 0%;
-  syntax: '<percentage>';
-}
-
 //  ============================================================================
 //  $   BASE STYLE
 //  ----------------------------------------------------------------------------
@@ -113,11 +103,11 @@
 
 @keyframes d-motion-text-gradient-in-word-reveal {
   from {
-    --d-motion-text-mask-pos: 100%;
+    mask-position: 100% 0%;
   }
 
   to {
-    --d-motion-text-mask-pos: 0%;
+    mask-position: 0% 0%;
   }
 }
 
@@ -178,11 +168,11 @@
   animation: d-motion-text-gradient-in-char-appear calc(var(--d-motion-text-char-duration) * 0.5) var(--ttf-out-quint) reverse;
 }
 
-.d-motion-text-word-gradient-in-enter-active {
+.d-motion-text-word-gradient-in-enter-active::before {
   animation: d-motion-text-gradient-in-word-reveal calc(var(--d-motion-text-word-duration) * 1.5) var(--ttf-out-quint);
 }
 
-.d-motion-text-word-gradient-in-leave-active {
+.d-motion-text-word-gradient-in-leave-active::before {
   animation: d-motion-text-gradient-in-word-reveal calc(var(--d-motion-text-word-duration) * 0.5) var(--ttf-out-quint) reverse;
 }
 
@@ -239,6 +229,10 @@
 .d-motion-text--shimmer {
   position: relative;
   display: inline-block;
+}
+
+.d-motion-text--gradient-sweep::before,
+.d-motion-text--shimmer {
   animation: d-motion-text-gradient-in-word-reveal calc(var(--d-motion-text-word-duration) * 1.5) var(--ttf-in-out) 1;
 }
 
@@ -255,13 +249,11 @@
   pointer-events: none;
   -webkit-text-fill-color: transparent;
   mask: var(--d-motion-text-gradient);
-  mask-position: var(--d-motion-text-mask-pos) 0%;
 }
 
 .d-motion-text--shimmer {
   content: attr(data-text-content);
   mask: var(--d-motion-text-shimmer-gradient);
-  mask-position: var(--d-motion-text-mask-pos) 0%;
 }
 
 //  ============================================================================
@@ -273,10 +265,12 @@
   opacity: 1;
 }
 
-.d-motion-text--paused {
+.d-motion-text--paused,
+.d-motion-text--paused::before {
   animation-play-state: paused !important;
 }
 
+.d-motion-text--looped::before,
 .d-motion-text--looped {
   animation-iteration-count: infinite !important;
 }
