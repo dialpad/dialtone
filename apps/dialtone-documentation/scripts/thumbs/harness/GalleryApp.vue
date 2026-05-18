@@ -59,6 +59,7 @@
         :href="cell.href"
         :underline="false"
         class="d-d-block h:d-td-none"
+        @click.prevent.exact="openSlug = cell.slug"
       >
         <dt-stack gap="100">
           <dt-box
@@ -78,13 +79,34 @@
         </dt-stack>
       </dt-link>
     </div>
+    <dt-modal
+      :open="openSlug !== null"
+      @update:open="(v) => { if (!v) openSlug = null }"
+    >
+      <template #header>
+        <dt-stack direction="row" gap="100" align="baseline" justify="space-between">
+          {{ openSlug || '' }}
+          <dt-badge v-if="openSlug && modifiedSlugs.has(openSlug)" text="Modified" type="info" />
+        </dt-stack>
+      </template>
+      <dt-box padding-block="400">
+        <iframe
+          v-if="modalCell"
+          class="d-d-block d-baw0 d-mx-auto"
+          :src="modalCell.href"
+          :title="modalCell.slug"
+          width="400"
+          height="225"
+        />
+      </dt-box>
+    </dt-modal>
   </dt-stack>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
 
-defineProps({
+const props = defineProps({
   cells: { type: Array, required: true },
   mode: { type: String, required: true },
   slugCount: { type: Number, required: true },
@@ -100,6 +122,11 @@ function onModeChange (newMode) {
 // (same URL, new bytes on disk) so the gallery shows the freshly written PNGs.
 const cacheBust = ref(0);
 const regenerating = ref(false);
+
+const openSlug = ref(null);
+const modalCell = computed(() =>
+  openSlug.value ? props.cells.find(c => c.slug === openSlug.value) : null,
+);
 
 // Set of override slugs whose source file has changed since the last regen,
 // as reported by the dev-server's `thumb-regen` plugin. Bootstrapped on mount
@@ -142,8 +169,5 @@ async function onRegenerate (all = false) {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(264px, 1fr));
   gap: var(--dt-spacing-300);
-}
-[outline] {
-  outline: 2px solid orangered;
 }
 </style>
