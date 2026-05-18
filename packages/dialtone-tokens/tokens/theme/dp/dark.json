@@ -172,6 +172,10 @@
       }
     },
     "surface": {
+      "overlay": {
+        "value": "{color.black.200}",
+        "type": "color"
+      },
       "primary": {
         "value": "{color.black.100}",
         "type": "color"
