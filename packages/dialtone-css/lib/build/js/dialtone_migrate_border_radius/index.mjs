@@ -199,10 +199,14 @@ async function main () {
   const changes = [];
 
   for (const file of files) {
-    const content = await fs.readFile(file, 'utf8');
-    const { transformed, count } = transformContent(content);
-    if (count > 0) {
-      changes.push({ file, content, transformed, count });
+    try {
+      const content = await fs.readFile(file, 'utf8');
+      const { transformed, count } = transformContent(content);
+      if (count > 0) {
+        changes.push({ file, content, transformed, count });
+      }
+    } catch (err) {
+      console.warn(`  ⚠ skipped (read error): ${path.relative(opts.cwd, file)} — ${err.message}`);
     }
   }
 
@@ -231,11 +235,17 @@ async function main () {
     }
   }
 
+  let written = 0;
   for (const { file, transformed } of changes) {
-    await fs.writeFile(file, transformed, 'utf8');
+    try {
+      await fs.writeFile(file, transformed, 'utf8');
+      written++;
+    } catch (err) {
+      console.warn(`  ⚠ skipped (write error): ${path.relative(opts.cwd, file)} — ${err.message}`);
+    }
   }
 
-  console.log(`\nMigrated ${changes.reduce((sum, c) => sum + c.count, 0)} references across ${changes.length} file(s).\n`);
+  console.log(`\nMigrated ${changes.reduce((sum, c) => sum + c.count, 0)} references across ${written} file(s).\n`);
 }
 
 const isDirectRun = (() => {
