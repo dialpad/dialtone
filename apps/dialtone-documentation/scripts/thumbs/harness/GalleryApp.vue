@@ -120,10 +120,10 @@
             aria-label="Regenerating thumbnails"
             size="600"
           />
-          <dt-text v-if="!progressSettled && progressTotal > 0" as="p" tone="secondary">
+          <dt-text v-if="!progressSettled && progressTotal > 0" as="p" numeric>
             {{ progressCurrent }} of {{ progressTotal }}
           </dt-text>
-          <dt-text v-if="progressComplete" as="p" tone="secondary">
+          <dt-text v-if="progressComplete" as="p">
             {{ progressTotal }} components processed, check your git status to see what changed.
           </dt-text>
           <dt-text v-if="progressFailed" as="p" tone="critical">
