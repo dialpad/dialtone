@@ -48,8 +48,6 @@ const fixture: DocumentationRecord[] = [
       title: 'Modal',
       description: 'Dialog that focuses user attention',
       status: 'ready',
-      figmaUrl: null,
-      storybook: null,
     },
     filePath: 'apps/dialtone-documentation/docs/components/modal.md',
   },
@@ -63,9 +61,6 @@ const fixture: DocumentationRecord[] = [
     frontmatter: {
       title: 'Accessibility',
       description: 'Guidance on building products for everyone',
-      status: null,
-      figmaUrl: null,
-      storybook: null,
     },
     filePath: 'apps/dialtone-documentation/docs/guides/accessibility/index.md',
   },
@@ -86,9 +81,8 @@ describe('searchDocumentation', () => {
     expect(results.every(r => r.details.docId === 'modal')).toBe(true);
   });
 
-  test('AND logic — all words must appear', () => {
+  test('highest-scoring result (both terms matched) ranks first', () => {
     const { results } = searchDocumentation('primary danger', fixture);
-    // Only button#usage mentions both "primary" AND "danger"
     expect(results.length).toBeGreaterThan(0);
     expect(results[0].details.docId).toBe('button');
   });
@@ -106,18 +100,23 @@ describe('searchDocumentation', () => {
     expect(r.name).toBeTruthy();
     expect(r.details).toBeDefined();
     expect(r.metadata).toBeNull();
-    expect(typeof r.tier).toBe('number');
   });
 
-  test('tier 1 (heading match) ranks above tier 3 (content-only match)', () => {
-    const { results } = searchDocumentation('button', fixture);
-    // Results sorted by tier ascending — tier 1 records come first
-    expect(results[0].tier).toBe(1);
-    expect(results[0].details.docId).toBe('button');
-    // All tier values are non-decreasing (sorted correctly)
-    for (let i = 1; i < results.length; i++) {
-      expect(results[i].tier!).toBeGreaterThanOrEqual(results[i - 1].tier!);
-    }
+  test('section matching more query terms ranks above section matching fewer', () => {
+    // button#variants has both 'primary' and 'loading' (2/2)
+    // button#usage has 'primary' but not 'loading' (1/2)
+    // button#variants must rank first
+    const { results } = searchDocumentation('primary loading', fixture);
+    expect(results.length).toBeGreaterThan(0);
+    expect(results[0].details.id).toBe('button#variants');
+  });
+
+  test('returns results even when not all query terms match any section', () => {
+    // 'xyzzy' matches nothing; 'button' matches sections
+    // OR logic: should still return results for the matching term
+    const { results } = searchDocumentation('button xyzzy', fixture);
+    expect(results.length).toBeGreaterThan(0);
+    expect(results.some((r: any) => r.details.docId === 'button')).toBe(true);
   });
 
   test('search is case-insensitive', () => {
@@ -187,59 +186,61 @@ describe('formatDocumentationResults', () => {
 // Pass bar: ≥ 8 of 10 must return a relevant top-3 result.
 // If a scenario fails here, add the missing vocabulary to the doc page (not the engine).
 
-describe('Acceptance scenarios — 10 real-query scenarios against the full corpus', () => {
+describe('Acceptance scenarios — real queries against the full corpus', () => {
+  // allowlist: expected docTitles that should appear in top-3 results.
+  // Using docTitle (stable human name) not docId (file-path format that can change).
   type Scenario = { query: string; allowlist: string[]; id: string };
 
   const scenarios: Scenario[] = [
     {
       id: 'TS-002',
       query: "What component do I use for a search box with autocomplete?",
-      allowlist: ['combobox', 'search-input'],
+      allowlist: ['Combobox'],
     },
     {
       id: 'TS-003',
       query: "What's the difference between DtButton kind='primary' and kind='danger'?",
-      allowlist: ['button'],
+      allowlist: ['Button'],
     },
     {
       id: 'TS-004',
       query: "Why isn't my DtModal closing on outside click — is that correct behavior?",
-      allowlist: ['modal'],
+      allowlist: ['Modal'],
     },
     {
       id: 'TS-005',
       query: "DtOldPopover is deprecated — what's the replacement?",
-      allowlist: ['popover'],
+      allowlist: ['Popover'],
     },
     {
       id: 'TS-006',
       query: "Which Dialtone component supports multi-select with avatars?",
-      allowlist: ['combobox-multi-select', 'combobox'],
+      allowlist: ['Combobox Multi-Select', 'Combobox'],
     },
     {
       id: 'TS-007',
       query: "How do I wire DtSelectMenu v-model to a Vuex store?",
-      allowlist: ['select-menu'],
+      allowlist: ['Select menu'],
     },
     {
       id: 'TS-008',
       query: "Can I put DtTooltip on a disabled DtButton?",
-      allowlist: ['tooltip', 'button'],
+      allowlist: ['Tooltip', 'Button'],
     },
     {
       id: 'TS-009',
       query: "List all components that support dark mode.",
-      allowlist: [], // any result is acceptable — cross-cutting query
+      allowlist: [],
     },
     {
       id: 'TS-010',
       query: "How do I make DtButton show a loading spinner during async submit?",
-      allowlist: ['button'],
+      allowlist: ['Button'],
     },
     {
       id: 'TS-011',
       query: "Why does DtInput show a red border?",
-      allowlist: ['input'],
+      allowlist: ['Input'],
     },
   ];
 
@@ -247,42 +248,28 @@ describe('Acceptance scenarios — 10 real-query scenarios against the full corp
     expect(documentation.length).toBeGreaterThan(1000);
   });
 
-  // Run all 10 scenarios and assert ≥ 8 pass (acceptance bar per PRD)
-  test('≥ 8 of 10 scenarios return a relevant top-3 result', () => {
-    const results = scenarios.map(({ id, query, allowlist }) => {
-      const { results: hits } = searchDocumentation(query, documentation);
-      const top3DocIds = hits.slice(0, 3).map(r => (r.details as DocumentationRecord).docId);
-      const pass = allowlist.length > 0
-        ? allowlist.some(d => top3DocIds.includes(d))
-        : top3DocIds.length > 0;
-      return { id, pass, top3DocIds, query: query.slice(0, 40) };
-    });
-
-    const passed = results.filter(r => r.pass).length;
-    const failing = results.filter(r => !r.pass);
-
-    if (failing.length > 0) {
-      console.warn('Failing scenarios (corpus vocabulary gaps to fix):');
-      failing.forEach(f => console.warn(`  ${f.id}: "${f.query}..." — got top3: ${f.top3DocIds}`));
-    }
-
-    expect(passed).toBeGreaterThanOrEqual(8);
-  });
-
-  // Individual scenario tests — document each expected behavior
   for (const { id, query, allowlist } of scenarios) {
     test(`${id}: "${query.slice(0, 55)}..."`, () => {
       const { results: hits } = searchDocumentation(query, documentation);
-      const top3DocIds = hits.slice(0, 3).map(r => (r.details as DocumentationRecord).docId);
+      const top3Titles = hits.slice(0, 3).map(r => (r.details as DocumentationRecord).docTitle);
       if (allowlist.length > 0) {
         expect(
-          allowlist.some(d => top3DocIds.includes(d)),
-          `Expected one of ${allowlist} in top-3 [${top3DocIds}] for "${query}"`,
+          allowlist.some(t => top3Titles.includes(t)),
+          `Expected one of [${allowlist}] in top-3 titles [${top3Titles}] for "${query}"`,
         ).toBe(true);
       } else {
-        // Cross-cutting query — just needs some results
-        expect(top3DocIds.length, `Expected at least one result for "${query}"`).toBeGreaterThan(0);
+        expect(top3Titles.length, `Expected at least one result for "${query}"`).toBeGreaterThan(0);
       }
     });
   }
+
+  test('OR logic: partial query match still returns results (migrate DtOldPopover)', () => {
+    // "migrate" does not appear verbatim in the corpus — only "migration" does.
+    // Under AND logic this returned 0 results.
+    // Under OR logic, "DtOldPopover" alone matches the Popover doc — so results are non-empty.
+    const { results } = searchDocumentation('migrate DtOldPopover', documentation);
+    expect(results.length).toBeGreaterThan(0);
+    const allTitles = results.map(r => (r.details as DocumentationRecord).docTitle);
+    expect(allTitles).toContain('Popover');
+  });
 });

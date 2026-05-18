@@ -6,7 +6,7 @@ title: Info Text Fence Test
 
 Content before the fence.
 
-```
+```text
 ```js
 ## Fake Heading After Info-Text Line
 const x = 1;

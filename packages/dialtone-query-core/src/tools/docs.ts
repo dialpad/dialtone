@@ -42,9 +42,9 @@ const STOP_WORDS = new Set([
 ]);
 
 /**
- * Search documentation sections using AND-logic word-boundary regex matching.
- * Mirrors the hand-rolled pattern used by the other 4 search tools.
- * Tier scoring: 1 = title/heading match, 2 = description match, 3 = content-only.
+ * Search documentation sections using OR-logic word-boundary regex matching.
+ * Each query term independently scores sections; results ranked by match count descending.
+ * Whats-new posts are ranked after all other content regardless of match count.
  */
 export function searchDocumentation(
   query: string,
@@ -75,38 +75,38 @@ export function searchDocumentation(
     return new RegExp(`\\b${escaped}\\b`, 'i');
   });
 
-  const results: SearchResult[] = [];
+  const scored: Array<{ result: SearchResult; matchCount: number }> = [];
 
   for (const record of data) {
-    const titleAndHeading = [record.docTitle, ...record.headingPath].join(' ');
-    const description = record.frontmatter.description ?? '';
-    const fullBlob = [titleAndHeading, description, record.content].join(' ');
+    const fullBlob = [record.docTitle, ...record.headingPath, record.frontmatter.description ?? '', record.content].join(' ');
 
-    // AND logic: every word must appear somewhere in the record
-    if (!regexes.every(r => r.test(fullBlob))) continue;
-
-    // Tier scoring based on WHERE the match concentrates
-    const tier = regexes.every(r => r.test(titleAndHeading))
-      ? 1
-      : regexes.every(r => r.test(description))
-        ? 2
-        : 3;
+    const matchCount = regexes.filter(r => r.test(fullBlob)).length;
+    if (matchCount === 0) continue;
 
     const headingLabel = record.headingPath.length > 0
       ? ` > ${record.headingPath.join(' > ')}`
       : '';
 
-    results.push({
-      type: 'documentation',
-      name: `${record.docTitle}${headingLabel}`,
-      details: record,
-      metadata: null,
-      tier,
+    scored.push({
+      result: {
+        type: 'documentation',
+        name: `${record.docTitle}${headingLabel}`,
+        details: record,
+        metadata: null,
+      },
+      matchCount,
     });
   }
 
-  // Sort tier ascending (1 before 2 before 3), preserve corpus order within tier
-  results.sort((a, b) => (a.tier ?? 3) - (b.tier ?? 3));
+  // Sort: non-whats-new results first (by match count), whats-new buried last (by match count).
+  // Whats-new posts surface only when no other content matched.
+  scored.sort((a, b) => {
+    const aIsNews = (a.result.details as DocumentationRecord).docId.startsWith('about/whats-new');
+    const bIsNews = (b.result.details as DocumentationRecord).docId.startsWith('about/whats-new');
+    if (aIsNews !== bIsNews) return aIsNews ? 1 : -1;
+    return b.matchCount - a.matchCount;
+  });
+  const results = scored.map(s => s.result);
 
   const notes: string[] = [];
   if (truncated) notes.push(`Query truncated to ${MAX_QUERY_CHARS} characters.`);

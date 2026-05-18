@@ -243,13 +243,13 @@ async function main() {
         },
         {
           name: "search_documentation",
-          description: "Search the Dialtone documentation site for prose-y guidance: usage patterns, recipes, accessibility rules, migration guides, do/don't, design principles, composition patterns. Use when the question is conceptual or how-to ('how do I X', 'what\\'s the difference between Y and Z', 'why does W behave this way', 'is A on B accessible'). NOT for finding components / icons / tokens / utility classes by name — use the dedicated search_components / search_icons / search_tokens / search_utility_classes tools for those.",
+          description: "Search Dialtone documentation for usage patterns, accessibility rules, migration guides, design principles, and how-to guidance. Use when query mentions behavior (loading, disabled, deprecated, migration, validation, dark mode), patterns (do/don't, composition, recipe), or asks why/how/difference ('modal close behavior', 'tooltip on disabled', 'DtOldPopover replacement'). NOT for finding components / icons / tokens / utility classes by name — use search_components / search_icons / search_tokens / search_utility_classes for those. Returns documentation sections with content excerpts.",
           inputSchema: {
             type: "object",
             properties: {
               query: {
                 type: "string",
-                description: "Natural-language question or keywords (e.g., 'DtButton primary vs danger', 'modal close behavior', 'how to migrate DtOldPopover')"
+                description: "2–5 keyword phrase — topic, behavior, or concept (e.g., 'button loading state', 'modal outside click', 'tooltip disabled', 'migrate DtOldPopover')"
               },
               limit: {
                 type: "number",

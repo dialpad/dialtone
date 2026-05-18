@@ -47,7 +47,7 @@ for (const scenario of scenarios) {
   const top3DocIds = results.slice(0, 3).map(r => r.details.docId);
 
   const pass = allowlist.length > 0
-    ? allowlist.some(d => top3DocIds.includes(d))
+    ? allowlist.some(d => top3DocIds.some(id => id === d || id.endsWith('/' + d)))
     : top3DocIds.length > 0;
 
   const status = pass ? '✅ PASS' : '❌ FAIL';
