@@ -22,25 +22,25 @@
   --d-motion-text-duration: 1000ms;
   --d-motion-text-char-duration: var(--d-motion-text-duration);
   --d-motion-text-word-duration: calc(var(--d-motion-text-duration) * 2);
-  --d-motion-text-highlight-color: linear-gradient(135deg, var(--dt-color-brand-magenta) 10%, var(--dt-color-brand-purple) 80%, var(--dt-color-brand-gold) 100%);
+  --d-motion-text-highlight-color: linear-gradient(135deg, var(--dt-color-brand-magenta) var(--dt-size-10-percent), var(--dt-color-brand-purple) var(--dt-size-80-percent), var(--dt-color-brand-gold) var(--dt-size-100-percent));
   --d-motion-text-gradient: linear-gradient(
     90deg,
-    transparent 0%,
-    transparent 20%,
-    black 40%,
-    black 60%,
-    transparent 80%,
-    transparent 100%
-  ) 0% 0% / 500% 100%;
+    transparent var(--dt-size-0-percent),
+    transparent var(--dt-size-20-percent),
+    black var(--dt-size-40-percent),
+    black var(--dt-size-60-percent),
+    transparent var(--dt-size-80-percent),
+    transparent var(--dt-size-100-percent)
+  ) var(--dt-size-0-percent) var(--dt-size-0-percent) / 500% var(--dt-size-100-percent);
   --d-motion-text-shimmer-gradient: linear-gradient(
     90deg,
-    black 0%,
-    black 20%,
-    #0005 40%,
-    #0005 60%,
-    black 80%,
-    black 100%
-  ) 0% 0% / 500% 100%;
+    black var(--dt-size-0-percent),
+    black var(--dt-size-20-percent),
+    #0005 var(--dt-size-40-percent),
+    #0005 var(--dt-size-60-percent),
+    black var(--dt-size-80-percent),
+    black var(--dt-size-100-percent)
+  ) var(--dt-size-0-percent) var(--dt-size-0-percent) / 500% var(--dt-size-100-percent);
 
   position: relative;
 }
@@ -50,11 +50,11 @@
 //  ----------------------------------------------------------------------------
 .d-motion-text__sr-only {
   position: absolute;
-  width: 1px;
-  height: 1px;
+  width: var(--dt-size-100);
+  height: var(--dt-size-100);
   overflow: hidden;
   white-space: nowrap;
-  clip-path: inset(50%);
+  clip-path: inset(var(--dt-size-50-percent));
 }
 
 .d-motion-text__content {
@@ -83,11 +83,11 @@
 // Gradient-in mode animations
 @keyframes d-motion-text-gradient-in-char-appear {
   from {
-    opacity: 0;
+    opacity: var(--dt-opacity-0);
   }
 
   to {
-    opacity: 1;
+    opacity: var(--dt-opacity-1300);
   }
 }
 
@@ -103,32 +103,32 @@
 
 @keyframes d-motion-text-gradient-in-word-reveal {
   from {
-    mask-position: 100% 0%;
+    mask-position: var(--dt-size-100-percent) var(--dt-size-0-percent);
   }
 
   to {
-    mask-position: 0% 0%;
+    mask-position: var(--dt-size-0-percent) var(--dt-size-0-percent);
   }
 }
 
 // Fade-in mode animations
 @keyframes d-motion-text-fade-in-char-appear {
   from {
-    opacity: 0;
+    opacity: var(--dt-opacity-0);
   }
 
   to {
-    opacity: 1;
+    opacity: var(--dt-opacity-1300);
   }
 }
 
 @keyframes d-motion-text-fade-in-word-appear {
   from {
-    opacity: 0;
+    opacity: var(--dt-opacity-0);
   }
 
   to {
-    opacity: 1;
+    opacity: var(--dt-opacity-1300);
   }
 }
 
@@ -136,24 +136,24 @@
 @keyframes d-motion-text-slide-in-char-appear {
   from {
     transform: translateY(0.3em);
-    opacity: 0;
+    opacity: var(--dt-opacity-0);
   }
 
   to {
-    transform: translateY(0);
-    opacity: 1;
+    transform: translateY(var(--dt-size-0));
+    opacity: var(--dt-opacity-1300);
   }
 }
 
 @keyframes d-motion-text-slide-in-word-appear {
   from {
     transform: translateY(0.5em);
-    opacity: 0;
+    opacity: var(--dt-opacity-0);
   }
 
   to {
-    transform: translateY(0);
-    opacity: 1;
+    transform: translateY(var(--dt-size-0));
+    opacity: var(--dt-opacity-1300);
   }
 }
 
@@ -262,7 +262,7 @@
 .d-motion-text--none .d-motion-text__word,
 .d-motion-text--none .d-motion-text__char {
   transform: none;
-  opacity: 1;
+  opacity: var(--dt-opacity-1300);
 }
 
 .d-motion-text--paused,
