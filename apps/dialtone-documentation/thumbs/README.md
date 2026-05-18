@@ -82,3 +82,64 @@ No imports needed.
 
 The 400×225 viewport is fixed; content is centered. Use inline `:style="{ width: '…' }"`
 on a wrapper to give components a frame to render inside.
+
+## Pre-commit hook
+
+A husky pre-commit hook auto-regenerates thumbnails when your staged changes
+include any of these paths ("thumb inputs"):
+
+- `packages/dialtone-vue/components/`
+- `apps/dialtone-documentation/thumbs/`
+- `packages/combinator/src/variants/`
+- `packages/dialtone-tokens/`
+
+When it fires, it runs `pnpm nx run dialtone-documentation:thumbs` and
+auto-stages any updated PNGs from
+`apps/dialtone-documentation/docs/.vuepress/public/assets/images/components/`.
+The PNGs fold into your existing commit — no separate "regen thumbs" commit
+needed.
+
+### Timing
+
+The generator uses a content-hash cache, so only stale slugs actually rerun:
+
+- Single-component change, cache warm: ~5–10s
+- Cold cache (first regen after pulling, or token/harness changes): up to ~3 min for all 60 components
+
+### Seeing PNG changes in your diff
+
+Normal and expected after touching a component source, override file, variant,
+or token. The hook regenerated them and staged them for you. Don't try to
+revert — the new bytes are correct.
+
+### If the hook fails
+
+Most likely cause: Playwright's Chromium isn't installed locally.
+If the hook does fail with a missing-browser error (custom `.npmrc` with
+`ignore-scripts`, `pnpm install --ignore-scripts`, a failed first install, or
+an OS/arch switch), install Chromium explicitly. Run:
+
+```bash
+pnpm exec playwright install --with-deps chromium
+```
+
+Less common: `dialtone-tokens` or `dialtone-vue` dist artifacts are out of date:
+
+```bash
+pnpm nx run dialtone-tokens:build
+pnpm nx run dialtone-vue:build
+```
+
+Then retry the commit.
+
+### Bypassing the hook
+
+For genuine WIP / throwaway commits where you don't care if PNGs are stale:
+
+```bash
+git commit --no-verify    # skips ALL hooks, including lint-staged
+HUSKY=0 git commit ...    # same effect via env var
+```
+
+Stale PNGs will then linger until a later commit triggers the hook again, or
+you regen manually with `pnpm nx run dialtone-documentation:thumbs`.

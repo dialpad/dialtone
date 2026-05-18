@@ -21,7 +21,8 @@ fi
 THUMB_INPUTS='packages/dialtone-vue/components apps/dialtone-documentation/thumbs packages/combinator/src/variants packages/dialtone-tokens'
 if ! git diff --staged --quiet -- $THUMB_INPUTS; then
   echo "Detected changes to thumb inputs, regenerating component thumbnails..."
-  echo "  (override authoring: apps/dialtone-documentation/thumbs/README.md)"
+  echo "  This auto-stages updated PNGs. Cache: warm regen ~5–10s, cold ~3 min."
+  echo "  Trouble? See apps/dialtone-documentation/thumbs/README.md#pre-commit-hook"
   pnpm nx run dialtone-documentation:thumbs;
 
   git add apps/dialtone-documentation/docs/.vuepress/public/assets/images/components;
