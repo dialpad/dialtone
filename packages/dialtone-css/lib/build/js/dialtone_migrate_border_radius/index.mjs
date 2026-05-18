@@ -162,13 +162,20 @@ Options:
 
 function parseArgs (args) {
   const cwdIndex = args.indexOf('--cwd');
+  let cwd = process.cwd();
+  if (cwdIndex !== -1) {
+    const next = args[cwdIndex + 1];
+    if (!next || next.startsWith('--')) {
+      console.error('Error: --cwd requires a path argument.');
+      process.exit(1);
+    }
+    cwd = path.resolve(next);
+  }
   return {
     help: args.includes('--help'),
     dryRun: args.includes('--dry-run'),
     autoYes: args.includes('--yes'),
-    cwd: cwdIndex !== -1 && args[cwdIndex + 1]
-      ? path.resolve(args[cwdIndex + 1])
-      : process.cwd(),
+    cwd,
   };
 }
 
