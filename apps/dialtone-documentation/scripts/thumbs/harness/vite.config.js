@@ -107,7 +107,43 @@ export default defineConfig({
           changedDuringRegen = false;
           const args = ['apps/dialtone-documentation/scripts/thumbs/generate.mjs'];
           if (force) args.push('--force');
-          const child = spawn('node', args, { cwd: REPO_ROOT, stdio: 'inherit' });
+          const child = spawn('node', args, { cwd: REPO_ROOT, stdio: ['inherit', 'pipe', 'pipe'] });
+          // Forward child output to the dev-server terminal AND parse progress
+          // markers. Both happen in the same 'data' handler to avoid the
+          // back-pressure race that can occur when .pipe() and a 'data' listener
+          // are attached to the same Readable simultaneously.
+          child.stderr.on('data', (chunk) => process.stderr.write(chunk));
+
+          let progressTotal = 0;
+          let progressCurrent = 0;
+          let stdoutBuf = '';
+          child.stdout.on('data', (chunk) => {
+            process.stdout.write(chunk);
+            stdoutBuf += chunk.toString();
+            let nl;
+            while ((nl = stdoutBuf.indexOf('\n')) !== -1) {
+              const line = stdoutBuf.slice(0, nl);
+              stdoutBuf = stdoutBuf.slice(nl + 1);
+              parseProgressLine(line);
+            }
+          });
+
+          function parseProgressLine (line) {
+            let m;
+            if (
+              (m = line.match(/\[generate\] --force: regenerating (\d+) component/)) ||
+              (m = line.match(/\[generate\] (\d+) stale component/))
+            ) {
+              progressTotal = parseInt(m[1], 10);
+              server.ws.send({ type: 'custom', event: 'regen:progress', data: { current: 0, total: progressTotal } });
+              return;
+            }
+            if ((m = line.match(/^ {2}\[shot\] (\S+)… (✅|⚠️|❌)/))) {
+              progressCurrent += 1;
+              server.ws.send({ type: 'custom', event: 'regen:progress', data: { current: progressCurrent, total: progressTotal } });
+            }
+          }
+
           inFlight = child;
           child.on('exit', (code) => {
             inFlight = null;
@@ -116,6 +152,7 @@ export default defineConfig({
               modifiedSlugs.clear();
               broadcastClean();
             }
+            server.ws.send({ type: 'custom', event: 'regen:complete', data: { ok, code, total: progressTotal } });
             res.statusCode = ok ? 200 : 500;
             res.setHeader('Content-Type', 'application/json');
             res.end(JSON.stringify({ ok, code }));

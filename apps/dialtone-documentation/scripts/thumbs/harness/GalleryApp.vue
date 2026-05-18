@@ -100,11 +100,44 @@
         />
       </dt-box>
     </dt-modal>
+    <dt-modal
+      :open="progressOpen"
+      :show-close="progressSettled"
+      :close-on-click="progressSettled"
+      header-text="Regenerating thumbnails"
+      @update:open="(v) => { if (!v && !progressSettled) return; progressOpen = v }"
+    >
+      <dt-box padding="300">
+        <dt-stack gap="200" align="center">
+          <dt-icon-check-circle
+            v-if="progressComplete"
+            size="600"
+            class="d-fc-positive"
+          />
+          <dt-icon v-else-if="progressFailed" name="alert-circle" size="600" class="d-fc-critical" />
+          <dt-loader
+            v-else
+            aria-label="Regenerating thumbnails"
+            size="600"
+          />
+          <dt-text v-if="!progressSettled && progressTotal > 0" as="p" tone="secondary">
+            {{ progressCurrent }} of {{ progressTotal }}
+          </dt-text>
+          <dt-text v-if="progressComplete" as="p" tone="secondary">
+            {{ progressTotal }} components processed, check your git status to see what changed.
+          </dt-text>
+          <dt-text v-if="progressFailed" as="p" tone="critical">
+            Regen failed — check the dev server terminal for details.
+          </dt-text>
+        </dt-stack>
+      </dt-box>
+    </dt-modal>
   </dt-stack>
 </template>
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
+
 
 const props = defineProps({
   cells: { type: Array, required: true },
@@ -122,6 +155,15 @@ function onModeChange (newMode) {
 // (same URL, new bytes on disk) so the gallery shows the freshly written PNGs.
 const cacheBust = ref(0);
 const regenerating = ref(false);
+
+// Progress modal state for "Regenerate all". Non-closeable during regen;
+// becomes user-closeable on completion (progressComplete flips to true).
+const progressOpen = ref(false);
+const progressCurrent = ref(0);
+const progressTotal = ref(0);
+const progressComplete = ref(false);
+const progressFailed = ref(false);
+const progressSettled = computed(() => progressComplete.value || progressFailed.value);
 
 const openSlug = ref(null);
 const modalCell = computed(() =>
@@ -151,9 +193,26 @@ if (import.meta.hot) {
   import.meta.hot.on('regen:clean', () => {
     modifiedSlugs.value = new Set();
   });
+  import.meta.hot.on('regen:progress', (data) => {
+    progressCurrent.value = data?.current ?? 0;
+    progressTotal.value = data?.total ?? 0;
+  });
+  import.meta.hot.on('regen:complete', (data) => {
+    progressTotal.value = data?.total ?? 0;
+    if (data?.ok === false) progressFailed.value = true;
+    else progressComplete.value = true;
+  });
 }
 
 async function onRegenerate (all = false) {
+  if (all) {
+    document.body.click(); // close the split-button dropdown
+    progressCurrent.value = 0;
+    progressTotal.value = 0;
+    progressComplete.value = false;
+    progressFailed.value = false;
+    progressOpen.value = true;
+  }
   regenerating.value = true;
   try {
     const res = await fetch(`/__regenerate${all ? '?all=1' : ''}`, { method: 'POST' });
