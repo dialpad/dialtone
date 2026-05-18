@@ -1,13 +1,16 @@
 <template>
   <dt-stack gap="300">
-    <dt-stack gap="100">
-      <dt-stack direction="row" gap="200" align="center" justify="space-between">
+    <dt-stack direction="row" gap="200" align="center" justify="space-between">
+      <dt-box inline-size="500">
         <dt-text as="h1" kind="headline" size="600">
-          Thumb Gallery
+          Component Thumbs
         </dt-text>
+      </dt-box>
+      <dt-box>
         <dt-segmented-control
           :model-value="mode"
           aria-label="Color mode"
+          size="300"
           @update:model-value="onModeChange"
         >
           <dt-segmented-control-item value="light">
@@ -23,7 +26,9 @@
             </template>
           </dt-segmented-control-item>
         </dt-segmented-control>
-        <dt-stack direction="row" gap="200" align="center">
+      </dt-box>
+      <dt-box inline-size="500">
+        <dt-stack direction="row" gap="200" align="center" justify="end">
           <dt-text v-if="modifiedSlugs.size > 0" kind="body" size="200" tone="info">
             {{ modifiedSlugs.size }} modified
           </dt-text>
@@ -33,19 +38,19 @@
             :start-loading="regenerating"
             @start-clicked="onRegenerate(false)"
           >
-            Regenerate
+            Regenerate thumbs
             <template #dropdownList>
               <dt-list-item
                 role="menuitem"
                 navigation-type="arrow-keys"
                 @click="onRegenerate(true)"
               >
-                Regenerate all {{ slugCount }}
+                Regenerate all {{ slugCount }} thumbs
               </dt-list-item>
             </template>
           </dt-split-button>
         </dt-stack>
-      </dt-stack>
+      </dt-box>
     </dt-stack>
     <div class="thumb-gallery">
       <dt-link
@@ -137,5 +142,8 @@ async function onRegenerate (all = false) {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(264px, 1fr));
   gap: var(--dt-spacing-300);
+}
+[outline] {
+  outline: 2px solid orangered;
 }
 </style>

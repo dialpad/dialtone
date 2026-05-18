@@ -1,3 +1,25 @@
+<template>
+  <div v-if="isUnknown">
+    <dt-validation-messages
+      id="sample--03"
+      :validation-messages="[
+        {
+          message: `<strong>${requestedThumb}</strong> is not a component`,
+          type: 'critical',
+        },
+      ]"
+    />
+  </div>
+  <component :is="ThumbRoot" v-else-if="isThumb" />
+  <gallery-app
+    v-else
+    :cells="galleryCells"
+    :mode="mode"
+    :slug-count="galleryCells.length"
+    @update:mode="changeMode"
+  />
+</template>
+
 <script setup>
 import { ref, computed, defineComponent, h } from 'vue';
 import * as dialtoneVue from '@dialpad/dialtone-vue';
@@ -71,25 +93,3 @@ const ThumbRoot = (isThumb && !isUnknown)
     })
   : null;
 </script>
-
-<template>
-  <div v-if="isUnknown">
-    <dt-validation-messages
-      id="sample--03"
-      :validation-messages="[
-        {
-          message: `<strong>${requestedThumb}</strong> is not a component`,
-          type: 'critical',
-        },
-      ]"
-    />
-  </div>
-  <component :is="ThumbRoot" v-else-if="isThumb" />
-  <gallery-app
-    v-else
-    :cells="galleryCells"
-    :mode="mode"
-    :slug-count="galleryCells.length"
-    @update:mode="changeMode"
-  />
-</template>
