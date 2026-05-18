@@ -17,7 +17,7 @@
   // with this width we have 9 emoji per row
   inline-size: var(--dt-layout-550);
   block-size: 100%;
-  background-color: var(--dt-color-surface-primary);
+  background-color: var(--dt-color-surface-overlay);
   border-radius: var(--dt-size-radius-300);
 
   &--header {
@@ -28,8 +28,8 @@
       position: absolute;
       inset-inline: 0;
       inset-block-end: 0;
-      block-size: var(--dt-size-border-200);
-      background-color: var(--dt-color-surface-moderate) !important;
+      block-size: var(--dt-size-border-100);
+      background-color: var(--dt-color-border-subtle) !important;
       content: '';
     }
   }
@@ -49,7 +49,6 @@
     justify-content: space-between;
     block-size: calc(var(--dt-layout-100) - var(--dt-spacing-75));
     padding: 0 var(--dt-spacing-200);
-    background: var(--dt-color-surface-secondary);
     border-block-start: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
   }
 
@@ -62,7 +61,7 @@
       gap: var(--dt-spacing-0);
 
       &::after {
-        background-color: var(--dt-color-surface-moderate) !important;
+        background-color: transparent !important;
       }
 
       .d-tablist__item {
@@ -93,7 +92,7 @@
       padding: 0;
       background: none;
       border: var(--dt-size-border-100) solid transparent;
-      border-radius: var(--dt-size-radius-350);
+      border-radius: var(--dt-size-radius-circle);
       outline: none;
       cursor: pointer;
 
@@ -103,7 +102,7 @@
 
       &:active,
       &.selected {
-        border-color: var(--dt-color-border-bold);
+        border-color: var(--dt-color-border-moderate);
       }
     }
   }
@@ -116,13 +115,13 @@
       margin: 0;
       padding: calc(var(--dt-spacing-75) + var(--dt-spacing-1));
       background: var(--dt-color-surface-moderate-opaque);
-      border: none;
+      border: 1px solid transparent;
       border-radius: var(--dt-size-radius-circle);
       outline: none;
       cursor: pointer;
 
       &:hover {
-        background: var(--dt-color-surface-bold);
+        border-color: var(--dt-color-border-subtle);
       }
     }
   }
@@ -144,7 +143,7 @@
     inline-size: 100%;
     margin: 0;
     padding: var(--dt-spacing-200) var(--dt-spacing-200) 0 var(--dt-spacing-200);
-    background: var(--dt-color-surface-primary);
+    background: var(--dt-color-surface-overlay);
   }
 
   &__list {
