@@ -236,16 +236,18 @@ async function main () {
   }
 
   let written = 0;
-  for (const { file, transformed } of changes) {
+  let migratedRefs = 0;
+  for (const { file, transformed, count } of changes) {
     try {
       await fs.writeFile(file, transformed, 'utf8');
       written++;
+      migratedRefs += count;
     } catch (err) {
       console.warn(`  ⚠ skipped (write error): ${path.relative(opts.cwd, file)} — ${err.message}`);
     }
   }
 
-  console.log(`\nMigrated ${changes.reduce((sum, c) => sum + c.count, 0)} references across ${written} file(s).\n`);
+  console.log(`\nMigrated ${migratedRefs} references across ${written} file(s).\n`);
 }
 
 const isDirectRun = (() => {
