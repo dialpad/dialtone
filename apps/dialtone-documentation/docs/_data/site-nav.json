@@ -252,6 +252,10 @@
                     "link": "/guides/migration/success-to-positive/"
                   },
                   {
+                    "text": "Border-Radius Logical Names",
+                    "link": "/guides/migration/border-radius/"
+                  },
+                  {
                     "text": "Flex to DtStack",
                     "link": "/guides/migration/flex-to-stack/"
                   },
