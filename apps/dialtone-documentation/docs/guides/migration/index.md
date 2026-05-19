@@ -42,8 +42,8 @@ Work through each applicable guide in order. Guides earlier in the list are prer
 
 | # | Guide | Breaking? | Tool | Summary |
 | --- | --- | --- | --- | --- |
-| 15 | [Theme to Mode](./theme-to-mode/) | **Yes** | `dialtone-migration-helper` | Legacy `setTheme` deprecated. New layered API uses `setMode` / `setBrand` / `setContrast` / `initDialtoneTheme`. Root attributes `data-dt-theme` → `data-dt-mode` + `data-dt-brand` + `data-dt-contrast`. |
-| 16 | [Vue 2 Removal](./vue2-removal/) | **Yes** | — | Vue 2 support dropped. Last Vue 2 version: `9.154.0`. |
+| 17 | [Theme to Mode](./theme-to-mode/) | **Yes** | `dialtone-migration-helper` | Legacy `setTheme` deprecated. New layered API uses `setMode` / `setBrand` / `setContrast` / `initDialtoneTheme`. Root attributes `data-dt-theme` → `data-dt-mode` + `data-dt-brand` + `data-dt-contrast`. |
+| 18 | [Vue 2 Removal](./vue2-removal/) | **Yes** | — | Vue 2 support dropped. Last Vue 2 version: `9.154.0`. |
 
 ## Quick Start
 

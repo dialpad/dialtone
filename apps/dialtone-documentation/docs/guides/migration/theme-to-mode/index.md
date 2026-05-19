@@ -203,7 +203,7 @@ For each flagged location, decide:
 ```
 
 ```js
-import { DtModeDirective } from '@dialpad/dialtone-vue';
+import { DtModeDirective } from '@dialpad/dialtone/vue';
 app.use(DtModeDirective);
 ```
 
