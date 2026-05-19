@@ -41,8 +41,10 @@ export default defineConfig({
     },
   },
   server: {
-    // Allow imports from outside the harness root (the override files live
-    // at apps/dialtone-documentation/thumbs/).
-    fs: { allow: ['..', '../../..', '../../../..'] },
+    // Allow imports from outside the harness root. The override files live
+    // at apps/dialtone-documentation/thumbs/, and the @variants alias
+    // resolves to packages/combinator/src/variants — so the allow list has
+    // to reach the repo root, not just apps/.
+    fs: { allow: ['..', '../../..', '../../../..', '../../../../..'] },
   },
 });
