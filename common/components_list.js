@@ -40,7 +40,7 @@ module.exports = [
   'pagination.vue',
   'popover.vue',
   'progress_circle.vue',
-  'Presence.vue',
+  'presence.vue',
   'prose.vue',
   'radio.vue',
   'radio_group.vue',

@@ -3,6 +3,7 @@ export const PRESENCE_STATES = {
   AWAY: 'away',
   OFFLINE: 'offline',
   ACTIVE: 'active',
+  DND: 'dnd',
 };
 
 export const PRESENCE_STATES_LIST = [
@@ -10,4 +11,5 @@ export const PRESENCE_STATES_LIST = [
   PRESENCE_STATES.AWAY,
   PRESENCE_STATES.OFFLINE,
   PRESENCE_STATES.ACTIVE,
+  PRESENCE_STATES.DND,
 ];

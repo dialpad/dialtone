@@ -47,6 +47,7 @@ export const AVATAR_PRESENCE_STATES = {
   AWAY: 'away',
   OFFLINE: 'offline',
   ACTIVE: 'active',
+  DND: 'dnd',
 };
 
 export const AVATAR_ICON_SIZES = {

@@ -91,6 +91,29 @@
         />
       </div>
     </div>
+
+    <div>
+      <h2>
+        Do not Disturb
+      </h2>
+      <div>
+        <h3>
+          With icon
+        </h3>
+        <dt-presence
+          presence="dnd"
+        />
+      </div>
+      <div>
+        <h3>
+          Without icon
+        </h3>
+        <dt-presence
+          presence="dnd"
+          :show-icon="false"
+        />
+      </div>
+    </div>
   </div>
 </template>
 

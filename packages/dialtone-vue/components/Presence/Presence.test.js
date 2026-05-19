@@ -109,6 +109,14 @@ describe('DtPresence Tests', () => {
           expect(innerPresence.classes('d-presence__inner--offline')).toBe(true);
         });
       });
+
+      describe('When presence is dnd', () => {
+        it('should have correct color class based on presence', async () => {
+          await wrapper.setProps({ presence: 'dnd' });
+
+          expect(innerPresence.classes('d-presence__inner--dnd')).toBe(true);
+        });
+      });
     });
 
     describe('Presence icon', () => {
@@ -116,6 +124,7 @@ describe('DtPresence Tests', () => {
         active: 'dt-presence-active-icon',
         away: 'dt-presence-away-icon',
         busy: 'dt-presence-busy-icon',
+        dnd: 'dt-presence-dnd-icon',
       };
 
       it.each(Object.entries(ICON_QAS))(

@@ -16,7 +16,7 @@
   --presence-color-background-away: var(--dt-presence-color-busy);
   --presence-color-background-offline: var(--dt-color-surface-primary);
   --presence-border-radius: calc(var(--presence-size) * 0.208);
-  --presence-border-inner-width: calc(calc(var(--presence-size) - calc(var(--presence-size) * 0.556)) / 2.5);
+  --presence-border-inner-width: calc(calc(var(--presence-size) - calc(var(--presence-size) * 0.556)) / 3);
   --presence-size: var(--dt-spacing-150);
   --presence-icon-size: var(--dt-layout-100-percent);
   --presence-icon-color: var(--dt-color-foreground-primary-inverted);
@@ -32,12 +32,12 @@
   }
 
   &__inner {
+    display: grid;
     box-sizing: border-box;
-    inline-size: var(--presence-size);
-    block-size: var(--presence-size);
     border: none;
     border-radius: var(--presence-border-radius);
-    display: grid;
+    inline-size: var(--presence-size);
+    block-size: var(--presence-size);
     place-items: center;
 
     &--active {
