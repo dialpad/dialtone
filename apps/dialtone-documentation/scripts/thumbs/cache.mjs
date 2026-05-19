@@ -2,8 +2,8 @@
  * Content-hash cache for the thumb generator.
  *
  * Each component's input hash covers:
- *   - <Name>Default.story.vue source
- *   - <Name>.vue source
+ *   - every render-relevant file in the component directory
+ *     (.vue / .js / .ts, excluding .test.* and .stories.*)
  *   - packages/combinator/src/variants/variants_<snake>.js if present (V2.6 variant)
  *   - apps/dialtone-documentation/thumbs/<slug>.vue if present (V3 override)
  *   - harness/main.js + harness/App.vue (changing the renderer invalidates)
@@ -11,7 +11,7 @@
  */
 
 import { createHash } from 'crypto';
-import { readFileSync, writeFileSync, existsSync } from 'fs';
+import { readFileSync, writeFileSync, readdirSync, existsSync } from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
 
@@ -34,6 +34,19 @@ function sha256 (content) {
 
 function readSafe (path) {
   return existsSync(path) ? readFileSync(path, 'utf8') : '';
+}
+
+// Concat render-relevant source files in `dir` for hashing. Composite
+// components (e.g. Combobox/ComboboxItemList.vue) and constants files (e.g.
+// ButtonConstants.js) affect the rendered output too — hardcoding two
+// filenames per component missed those and produced spurious cache hits.
+function readDirHash (dir) {
+  if (!existsSync(dir)) return '';
+  return readdirSync(dir)
+    .filter(f => /\.(vue|js|ts)$/.test(f) && !/\.(test|stories)\.[^.]+$/.test(f))
+    .sort()
+    .map(f => readFileSync(resolve(dir, f), 'utf8'))
+    .join('');
 }
 
 let _harnessHash = null;
@@ -69,8 +82,7 @@ export function computeHash (slug, exportName) {
   const overrideFile = resolve(REPO_ROOT, `apps/dialtone-documentation/thumbs/${slug}.vue`);
   const variantsFile = resolve(REPO_ROOT, `packages/combinator/src/variants/variants_${snake}.js`);
   const content =
-    readSafe(resolve(componentDir, `${pascal}Default.story.vue`)) +
-    readSafe(resolve(componentDir, `${pascal}.vue`)) +
+    readDirHash(componentDir) +
     readSafe(variantsFile) +
     readSafe(overrideFile) +
     harnessHash();
