@@ -25,10 +25,28 @@ import { ref, computed, defineComponent, h } from 'vue';
 import * as dialtoneVue from '@dialpad/dialtone-vue';
 import { initDialtoneTheme, setMode } from '@dialpad/dialtone-tokens/themes/config';
 import Dp from '@dialpad/dialtone-tokens/themes/dp';
-import { exportNameToSlug, slugToExportName } from '../name-map.mjs';
-import { frontmatterToSlug, wallSlugToComponentSlug } from '../wall.mjs';
-import { getDefaultConfig } from './component-defaults.js';
+import variantsFactory from '@variants/variants.js';
+import { exportNameToSlug, slugToExportName, frontmatterToSlug, wallSlugToComponentSlug } from '../wall.mjs';
 import GalleryApp from './GalleryApp.vue';
+
+const variants = variantsFactory();
+function getDefaultConfig (exportName) {
+  const variant = variants[exportName]?.default;
+  if (!variant) return { props: {}, slots: { default: () => 'Label' } };
+  const props = {};
+  for (const [name, cfg] of Object.entries(variant.props || {})) {
+    if (cfg?.initialValue !== undefined) props[name] = cfg.initialValue;
+  }
+  const slots = {};
+  for (const [name, cfg] of Object.entries(variant.slots || {})) {
+    // Slot values may be plain text or markup — always compile via runtime
+    // template so the same path handles both.
+    if (typeof cfg?.initialValue === 'string' && cfg.initialValue !== '') {
+      slots[name] = () => h(defineComponent({ name: 'SlotContent', template: cfg.initialValue }));
+    }
+  }
+  return { props, slots };
+}
 
 const wallPageContents = import.meta.glob('../../../docs/components/*.md', {
   eager: true,

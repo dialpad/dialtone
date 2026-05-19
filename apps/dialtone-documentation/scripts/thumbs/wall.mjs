@@ -1,3 +1,25 @@
+import { slugToPascalComponentName } from '../lib/utils.mjs';
+
+/**
+ * Filename / slug / export-name conversions for the thumb pipeline.
+ * components_list.js uses snake_case filenames (button_group.vue).
+ * Output SVG/PNG filenames use kebab-case (button-group.png).
+ * dialtone-vue exports are PascalCase prefixed with Dt (DtButtonGroup).
+ */
+
+/** 'button_group.vue' → 'button-group' */
+export function fileToSlug (filename) {
+  return filename.replace(/\.vue$/, '').replace(/_/g, '-');
+}
+
+/** 'button-group' → 'DtButtonGroup' */
+export const slugToExportName = slugToPascalComponentName;
+
+/** 'DtButtonGroup' → 'button-group' (inverse of slugToExportName) */
+export function exportNameToSlug (exportName) {
+  return exportName.slice(2).replace(/([A-Z])/g, '-$1').toLowerCase().slice(1);
+}
+
 // Wall-page slugs that don't match the components_list slug 1:1. After capture,
 // copy <source-slug>-*.png to <alias>-*.png so the wall card finds its thumb.
 // E.g., the wall card for DtTabGroup resolves to fileName 'tabs' (tabs.md has

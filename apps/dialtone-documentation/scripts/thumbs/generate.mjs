@@ -17,9 +17,8 @@ import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
 import { createRequire } from 'module';
 
-import { fileToSlug, slugToExportName } from './name-map.mjs';
 import { getStale, computeHash, readManifest, writeManifest } from './cache.mjs';
-import { SLUG_ALIASES, isOnWall, frontmatterToSlug } from './wall.mjs';
+import { fileToSlug, slugToExportName, SLUG_ALIASES, isOnWall, frontmatterToSlug } from './wall.mjs';
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dir, '../../../..');

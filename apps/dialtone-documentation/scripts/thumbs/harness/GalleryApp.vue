@@ -39,11 +39,11 @@
             @start-clicked="onRegenerate(false)"
           >
             Regenerate thumbs
-            <template #dropdownList>
+            <template #dropdownList="{ close }">
               <dt-list-item
                 role="menuitem"
                 navigation-type="arrow-keys"
-                @click="onRegenerate(true)"
+                @click="close(); onRegenerate(true)"
               >
                 Regenerate all {{ slugCount }} thumbs
               </dt-list-item>
@@ -101,32 +101,32 @@
       </dt-box>
     </dt-modal>
     <dt-modal
-      :open="progressOpen"
+      :open="progress.open"
       :show-close="progressSettled"
       :close-on-click="progressSettled"
       header-text="Regenerating thumbnails"
-      @update:open="(v) => { if (!v && !progressSettled) return; progressOpen = v }"
+      @update:open="(v) => { if (!v && !progressSettled) return; progress.open = v }"
     >
       <dt-box padding="300">
         <dt-stack gap="200" align="center">
           <dt-icon-check-circle
-            v-if="progressComplete"
+            v-if="progress.complete"
             size="600"
             class="d-fc-positive"
           />
-          <dt-icon v-else-if="progressFailed" name="alert-circle" size="600" class="d-fc-critical" />
+          <dt-icon v-else-if="progress.failed" name="alert-circle" size="600" class="d-fc-critical" />
           <dt-loader
             v-else
             aria-label="Regenerating thumbnails"
             size="600"
           />
-          <dt-text v-if="!progressSettled && progressTotal > 0" as="p" numeric>
-            {{ progressCurrent }} of {{ progressTotal }}
+          <dt-text v-if="!progressSettled && progress.total > 0" as="p" numeric>
+            {{ progress.current }} of {{ progress.total }}
           </dt-text>
-          <dt-text v-if="progressComplete" as="p">
-            {{ progressTotal }} components processed, check your git status to see what changed.
+          <dt-text v-if="progress.complete" as="p">
+            {{ progress.total }} components processed, check your git status to see what changed.
           </dt-text>
-          <dt-text v-if="progressFailed" as="p" tone="critical">
+          <dt-text v-if="progress.failed" as="p" tone="critical">
             Regen failed — check the dev server terminal for details.
           </dt-text>
         </dt-stack>
@@ -136,8 +136,8 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
-
+import { ref, computed } from 'vue';
+import { useModifiedSlugs, useRegenProgress } from './composables.js';
 
 const props = defineProps({
   cells: { type: Array, required: true },
@@ -156,63 +156,16 @@ function onModeChange (newMode) {
 const cacheBust = ref(0);
 const regenerating = ref(false);
 
-// Progress modal state for "Regenerate all". Non-closeable during regen;
-// becomes user-closeable on completion (progressComplete flips to true).
-const progressOpen = ref(false);
-const progressCurrent = ref(0);
-const progressTotal = ref(0);
-const progressComplete = ref(false);
-const progressFailed = ref(false);
-const progressSettled = computed(() => progressComplete.value || progressFailed.value);
+const { modifiedSlugs, dirty } = useModifiedSlugs();
+const { progress, settled: progressSettled, openProgress } = useRegenProgress();
 
 const openSlug = ref(null);
 const modalCell = computed(() =>
   openSlug.value ? props.cells.find(c => c.slug === openSlug.value) : null,
 );
 
-// Set of override slugs whose source file has changed since the last regen,
-// as reported by the dev-server's `thumb-regen` plugin. Bootstrapped on mount
-// (HMR-on listeners only fire for events received after subscription).
-const modifiedSlugs = ref(new Set());
-const dirty = computed(() => modifiedSlugs.value.size > 0);
-
-onMounted(async () => {
-  try {
-    const res = await fetch('/__regen-status');
-    if (res.ok) {
-      const data = await res.json();
-      modifiedSlugs.value = new Set(data.slugs || []);
-    }
-  } catch { /* dev-server-only feature; ignore in any other context */ }
-});
-
-if (import.meta.hot) {
-  import.meta.hot.on('regen:dirty', (data) => {
-    modifiedSlugs.value = new Set(data?.slugs || []);
-  });
-  import.meta.hot.on('regen:clean', () => {
-    modifiedSlugs.value = new Set();
-  });
-  import.meta.hot.on('regen:progress', (data) => {
-    progressCurrent.value = data?.current ?? 0;
-    progressTotal.value = data?.total ?? 0;
-  });
-  import.meta.hot.on('regen:complete', (data) => {
-    progressTotal.value = data?.total ?? 0;
-    if (data?.ok === false) progressFailed.value = true;
-    else progressComplete.value = true;
-  });
-}
-
 async function onRegenerate (all = false) {
-  if (all) {
-    document.body.click(); // close the split-button dropdown
-    progressCurrent.value = 0;
-    progressTotal.value = 0;
-    progressComplete.value = false;
-    progressFailed.value = false;
-    progressOpen.value = true;
-  }
+  if (all) openProgress();
   regenerating.value = true;
   try {
     const res = await fetch(`/__regenerate${all ? '?all=1' : ''}`, { method: 'POST' });
