@@ -19,7 +19,7 @@ pageClass: dialpad-design-home
   <dt-box as="article" padding-block="800">
     <showcase-carousel />
   </dt-box>
-  <dt-box as="article" padding-block="800" padding-inline="800" surface="secondary-opaque">
+  <dt-box as="article" padding-block="800" padding-inline="800">
     <dt-stack gap="550" align="center">
       <dt-link to="/dialtone/">
         <dt-box inline-size="200" style="filter: drop-shadow(rgba(0, 0, 0, 0.25) 0px 25px 30px);">
@@ -76,7 +76,7 @@ pageClass: dialpad-design-home
       </dt-stack>
     </dt-stack>
   </dt-box>
-  <dt-box as="article" padding-block="800" padding-inline="800" surface="secondary-opaque">
+  <dt-box as="article" padding-block="800" padding-inline="800">
     <dt-stack gap="700" align="center">
       <dt-stack class="home-section-inline" :direction="{ 'default': 'column', 'md': 'row' }" gap="600" justify="center">
         <dt-link to="./components/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">

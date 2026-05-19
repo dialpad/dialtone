@@ -272,12 +272,24 @@
                     "link": "/guides/migration/logical-naming/"
                   },
                   {
-                    "text": "Recipes to UI Kits",
+                    "text": "Removal of Dialtone Recipes",
                     "link": "/guides/migration/recipes-to-ui-kits/"
                   },
                   {
                     "text": "Component Props & Events",
                     "link": "/guides/migration/component-props/"
+                  },
+                  {
+                    "text": "DtChip interactive default",
+                    "link": "/guides/migration/chip-interactive/"
+                  },
+                  {
+                    "text": "Scrollbar :never → :always",
+                    "link": "/guides/migration/scrollbar-always/"
+                  },
+                  {
+                    "text": "DtModal Native Dialog",
+                    "link": "/guides/migration/modal-native-dialog/"
                   },
                   {
                     "text": "Vue 2 Removal",
@@ -287,7 +299,8 @@
               },
               {
                 "text": "MCP Server",
-                "link": "/guides/mcp-server/"
+                "link": "/guides/mcp-server/",
+                "status": "new"
               },
               {
                 "text": "Getting Started",
@@ -1024,7 +1037,8 @@
           {
             "text": "Vue Utilities",
             "link": "/functions-and-utilities/",
-            "icon": "code"
+            "icon": "code",
+            "status": "new"
           }
         ]
       }

@@ -1,9 +1,9 @@
- 
+
 
 export default {
   default: {
     props: {
-      show: {
+      open: {
         initialValue: false,
       },
       message: {
@@ -18,7 +18,7 @@ export default {
   },
   inverted: {
     props: {
-      show: {
+      open: {
         initialValue: false,
       },
       message: {

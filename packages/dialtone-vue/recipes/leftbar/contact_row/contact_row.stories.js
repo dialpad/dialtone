@@ -4,7 +4,7 @@ import DtRecipeContactRow from './contact_row.vue';
 
 import DtRecipeContactRowDefaultTemplate from './contact_row_default.story.vue';
 import DtRecipeContactRowVariantsTemplate from './contact_row_variants.story.vue';
-import { AVATAR_PRESENCE_STATES } from '@/components/avatar/avatar_constants';
+import { AVATAR_PRESENCE_STATES } from '@/components/Avatar/AvatarConstants';
 import defaultImage from '@/common/assets/avatar2.png';
 
 // Default Prop Values

@@ -144,11 +144,11 @@ import {
   IVR_NODE_TRANSFER,
 } from './ivr_node_constants';
 import { DtIconExternalLink } from '@dialpad/dialtone-icons/vue';
-import { DtButton } from '@/components/button';
-import { DtStack } from '@/components/stack';
-import { DtAvatar } from '@/components/avatar';
-import { DtListItem } from '@/components/list_item';
-import { DtKeyboardShortcut } from '@/components/keyboard_shortcut';
+import { DtButton } from '@/components/Button';
+import { DtStack } from '@/components/Stack';
+import { DtAvatar } from '@/components/Avatar';
+import { DtListItem } from '@/components/ListItem';
+import { DtKeyboardShortcut } from '@/components/KeyboardShortcut';
 
 export default {
   name: 'DtRecipeIvrNodeDefault',

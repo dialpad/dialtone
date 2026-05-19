@@ -1,3 +1,43 @@
+# [1.2.0-next.9](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.8...combinator/v1.2.0-next.9) (2026-05-13)
+
+
+### Code Refactoring
+
+* **Combinator:** DLT-3418 migrate controls prop changes ([#1261](https://github.com/dialpad/dialtone/issues/1261)) ([ab03b44](https://github.com/dialpad/dialtone/commit/ab03b44225ba3f7acc3be5303a57d2921759acb5))
+
+# [1.2.0-next.8](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.7...combinator/v1.2.0-next.8) (2026-05-07)
+
+
+### Features
+
+* **Scrollbar:** DLT-3158 implement object props ([#1249](https://github.com/dialpad/dialtone/issues/1249)) ([09ff456](https://github.com/dialpad/dialtone/commit/09ff4561f2a84cd0cf8bb86bdd15c6ff2032d51e))
+
+# [1.2.0-next.7](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.6...combinator/v1.2.0-next.7) (2026-04-30)
+
+
+### Bug Fixes
+
+* **Combinator:** NO-JIRA remove unnecessary eslint-disable max-len comments ([e431bf6](https://github.com/dialpad/dialtone/commit/e431bf61f178d602ad361b038544558cc07ad7fd))
+
+
+### Code Refactoring
+
+* **Box:** DLT-3333 rename percent prop values to p-suffix ([#1208](https://github.com/dialpad/dialtone/issues/1208)) ([e5fa5da](https://github.com/dialpad/dialtone/commit/e5fa5da83cd27bce1b3e5533a5503d2592ca0642))
+* **Components:** DLT-3284 refactor props to not have native html attributes names ([#1204](https://github.com/dialpad/dialtone/issues/1204)) ([48a0f57](https://github.com/dialpad/dialtone/commit/48a0f57e86b8154bc6e33edc1be9bfb02d22b208))
+
+
+### Documentation
+
+* **Css Utilities:** DLT-3337 migrate internal utility-class consumers to token-indexed names and rewrite radius docs ([#1212](https://github.com/dialpad/dialtone/issues/1212)) ([d675238](https://github.com/dialpad/dialtone/commit/d675238409adf887a60b783b5aa045cde8e15944))
+* **Layout And Spacing:** improve to focus on understanding new layout and spacing system ([c75201f](https://github.com/dialpad/dialtone/commit/c75201f4ce3e970efa2d61d780455ffd25f1e5ec))
+
+
+### Features
+
+* **Css Utilities, Design Tokens:** DLT-3330 DLT-3332 add off-scale pixel-indexed layout tokens and sizing utilities ([#1206](https://github.com/dialpad/dialtone/issues/1206)) ([1054875](https://github.com/dialpad/dialtone/commit/10548759c34e9db53396109ded36b5932b3525d8))
+* **Prose:** DLT-3245 new component ([#1169](https://github.com/dialpad/dialtone/issues/1169)) ([adee928](https://github.com/dialpad/dialtone/commit/adee92878ce6bdbcd4553d2e2d4a77dde1b2f00d))
+* **Tokens, Css:** DLT-3331 rename success tokens and utility classes to positive ([#1230](https://github.com/dialpad/dialtone/issues/1230)) ([34bdff5](https://github.com/dialpad/dialtone/commit/34bdff5fced88803f45de606df3a204bc191265b))
+
 # [1.2.0-next.6](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.5...combinator/v1.2.0-next.6) (2026-04-17)
 
 

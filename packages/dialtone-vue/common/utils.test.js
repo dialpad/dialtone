@@ -347,6 +347,26 @@ describe('Util Tests', () => {
         expect(getValidationState(formattedMessages)).toBe(VALIDATION_MESSAGE_TYPES.CRITICAL);
       });
     });
+
+    describe('when all message types are INFO', () => {
+      beforeEach(() => {
+        _setFormattedMessages(VALIDATION_MESSAGE_TYPES.INFO);
+      });
+
+      it('should return INFO', () => {
+        expect(getValidationState(formattedMessages)).toBe(VALIDATION_MESSAGE_TYPES.INFO);
+      });
+    });
+
+    describe('when there is an INFO message alongside a POSITIVE message', () => {
+      beforeEach(() => {
+        _addFormattedMessage(VALIDATION_MESSAGE_TYPES.INFO);
+      });
+
+      it('should return POSITIVE', () => {
+        expect(getValidationState(formattedMessages)).toBe(VALIDATION_MESSAGE_TYPES.POSITIVE);
+      });
+    });
   });
 
   describe('isPhoneNumber', () => {

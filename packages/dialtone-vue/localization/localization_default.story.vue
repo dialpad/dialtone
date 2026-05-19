@@ -1,6 +1,6 @@
 <script>
-import { DtButton } from '@/components/button';
-import { DtStack } from '@/components/stack';
+import { DtButton } from '@/components/Button';
+import { DtStack } from '@/components/Stack';
 import { DialtoneLocalization } from '@/localization';
 
 export default {

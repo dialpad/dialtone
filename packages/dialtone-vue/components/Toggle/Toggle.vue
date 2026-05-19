@@ -1,0 +1,211 @@
+<template>
+  <div
+    :class="['d-toggle-wrapper', $attrs.class]"
+    :style="$attrs.style"
+  >
+    <label
+      v-if="showLabel && hasSlotContent($slots.default)"
+      :class="labelClass"
+      :for="id"
+      v-bind="labelChildProps"
+      data-qa="toggle-label"
+    >
+      <!-- @slot Slot for the main content -->
+      <slot />
+    </label>
+    <button
+      :id="id"
+      :role="toggleRole"
+      type="button"
+      :aria-checked="internalChecked.toString()"
+      :disabled="disabled"
+      :aria-disabled="disabled.toString()"
+      :class="toggleClasses"
+      v-bind="inputListeners"
+    >
+      <span
+        v-if="showIcon"
+        class="d-toggle__inner"
+      />
+    </button>
+  </div>
+</template>
+
+<script>
+import { getUniqueString, hasSlotContent, removeClassStyleAttrs } from '@/common/utils';
+import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/Toggle/ToggleConstants';
+
+/**
+ * A toggle (or "switch") is a button control element that allows the user to make a binary (on/off) selection.
+ * @see https://dialtone.dialpad.com/components/toggle.html
+ */
+export default {
+
+  name: 'DtToggle',
+
+  inheritAttrs: false,
+
+  props: {
+
+    /**
+     * The id of the toggle
+     */
+    id: {
+      type: String,
+      default () { return getUniqueString(); },
+    },
+
+    /**
+     * Disables the toggle interactions
+     * @values true, false
+     */
+    disabled: {
+      type: Boolean,
+      default: false,
+    },
+
+    /**
+     * Value of the toggle
+     * @values true, false, 'mixed'
+     */
+    modelValue: {
+      type: [Boolean, String],
+      default: false,
+      validator: (v) => TOGGLE_CHECKED_VALUES.includes(v),
+    },
+
+    /**
+     * Whether the component toggles on click. If you set this to false it means you will handle the toggling manually
+     * via the checked prop or v-model. Change events will still be triggered.
+     * @values true, false
+     */
+    toggleOnClick: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * The size of the toggle.
+     * @values 200, 300
+     */
+    size: {
+      type: [String, Number],
+      default: 300,
+      validator: (s) => Object.keys(TOGGLE_SIZE_MODIFIERS).includes(String(s)),
+    },
+
+    /**
+     * Determines visibility of toggle label.
+     * @values true, false
+     */
+    showLabel: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Shows the icon
+     * @values true, false
+     */
+    showIcon: {
+      type: Boolean,
+      default: true,
+    },
+
+    /**
+     * Used to customize the label container
+     */
+    labelClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * A set of props that are passed into the label container
+     */
+    labelChildProps: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+
+  emits: [
+    /**
+     * Event fired to sync the modelValue prop with the parent component
+     *
+     * @event update:modelValue
+     * @type {Boolean}
+     */
+    'update:modelValue',
+  ],
+
+  data () {
+    return {
+      internalChecked: this.modelValue,
+      hasSlotContent,
+    };
+  },
+
+  computed: {
+    inputListeners () {
+      return {
+        ...removeClassStyleAttrs(this.$attrs),
+        onClick: () => this.toggleCheckedValue(),
+      };
+    },
+
+    isIndeterminate () {
+      return this.internalChecked === 'mixed';
+    },
+
+    toggleRole () {
+      return this.isIndeterminate ? 'checkbox' : 'switch';
+    },
+
+    toggleClasses () {
+      return [
+        'd-toggle',
+        TOGGLE_SIZE_MODIFIERS[String(this.size)],
+        {
+          'd-toggle--checked': this.internalChecked === true,
+          'd-toggle--disabled': this.disabled,
+          'd-toggle--indeterminate': this.isIndeterminate,
+        },
+      ];
+    },
+  },
+
+  watch: {
+    modelValue (newChecked) {
+      this.internalChecked = newChecked;
+    },
+  },
+
+  mounted () {
+    this.runValidations();
+  },
+
+  methods: {
+    toggleCheckedValue () {
+      this.$emit('update:modelValue', !this.internalChecked);
+
+      if (this.toggleOnClick) {
+        this.internalChecked = !this.internalChecked;
+      }
+    },
+
+    hasSlotLabel () {
+      return !!(this.$slots.default);
+    },
+
+    runValidations () {
+      const hasVisibleLabel = this.showLabel && this.hasSlotLabel();
+      if (!hasVisibleLabel && !this.$attrs['aria-label']) {
+        console.info(
+          '[Dialtone] A label is required for accessibility. Provide a label and use show-label="false" to hide it visually.',
+        );
+      }
+    },
+  },
+};
+</script>

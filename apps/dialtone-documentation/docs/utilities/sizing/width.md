@@ -12,7 +12,7 @@ Use `d-w-{stop}` to set a fixed width for an element using layout token stops. T
 > Bare integer stops (`25`, `50`, `100`, …) are scale-indexed on the 64px base — `value_in_px = stop × 64 / 100`, so `25` = 16px and `100` = 64px. Stops with a `px` suffix (`1px`, `2px`, `8px`, `20px`, `24px`) are off-scale exceptions that encode the literal pixel value.
 
 ```vue demo
-<div v-dt-scrollbar:never class="d-bar-400 d-d-flex d-bgc-secondary d-w100p d-hmx-500 d-ta-center">
+<div v-dt-scrollbar:always class="d-bar-400 d-d-flex d-bgc-secondary d-w100p d-hmx-500 d-ta-center">
   <dt-stack gap="100" align="start">
     <div v-for="(i, index) in layout" v-dt-tooltip="{ message: `${i.px}px`, delay: false }">
       <dt-text kind="code" size="100" class="d-w-100 d-us-all">d-w-{{i.stop}}</dt-text>
@@ -31,7 +31,7 @@ Use `d-w-{stop}` to set a fixed width for an element using layout token stops. T
 Use `d-w{n}p` to set a percentage width for an element. No hyphen before the number, `p` suffix indicates a literal percentage value. Note: `d-w33p` = 33.333% and `d-w66p` = 66.667%.
 
 ```vue demo
-<div v-dt-scrollbar:never class="d-bar-400 d-bgc-secondary d-w100p d-hmx-500">
+<div v-dt-scrollbar:always class="d-bar-400 d-bgc-secondary d-w100p d-hmx-500">
   <div>
     <dt-stack as="div" gap="200" align="center" justify="center" class="d-w100p">
       <div v-for="i in percentage" v-dt-tooltip="{ message: `${i}%`, delay: false }" class="d-bgc-moderate d-w100p">

@@ -1,6 +1,10 @@
 {
   "shell": {
     "base": {
+      "material": {
+        "value": "graphite",
+        "type": "other"
+      },
       "color": {
         "surface": {
           "value": "oklch(0.9488 0.0193 80.12)",

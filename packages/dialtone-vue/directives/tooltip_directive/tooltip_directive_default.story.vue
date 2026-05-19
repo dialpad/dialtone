@@ -34,9 +34,9 @@
 </template>
 
 <script>
-import DtStack from '@/components/stack/stack.vue';
-import DtButton from '@/components/button/button.vue';
-import DtIcon from '@/components/icon/icon.vue';
+import DtStack from '@/components/Stack/Stack.vue';
+import DtButton from '@/components/Button/Button.vue';
+import DtIcon from '@/components/Icon/Icon.vue';
 export default {
   name: 'DtTooltipDirectiveDefault',
   components: { DtIcon, DtButton, DtStack },

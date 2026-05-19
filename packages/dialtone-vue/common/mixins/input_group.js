@@ -1,5 +1,5 @@
 import { warn } from 'vue';
-import { DtValidationMessages } from '@/components/validation_messages';
+import { DtValidationMessages } from '@/components/ValidationMessages';
 import { validationMessageValidator } from '@/common/validators';
 import {
   getUniqueString,

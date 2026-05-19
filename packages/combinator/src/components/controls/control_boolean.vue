@@ -7,7 +7,7 @@
       :size="200"
       class="d-jc-space-between"
       data-qa="dtc-control-boolean-input"
-      @change="e => emit(VALUE_UPDATE_EVENT, e)"
+      @update:model-value="e => emit(VALUE_UPDATE_EVENT, e)"
     >
       <dt-text
         kind="label"

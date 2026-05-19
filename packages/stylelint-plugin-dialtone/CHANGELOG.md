@@ -1,3 +1,10 @@
+# [1.4.0-next.3](https://github.com/dialpad/dialtone/compare/stylelint-plugin-dialtone/v1.4.0-next.2...stylelint-plugin-dialtone/v1.4.0-next.3) (2026-04-30)
+
+
+### Features
+
+* **Scripts, Eslint, Stylelint:** DLT-3359 add success-to-positive migration tooling ([#1231](https://github.com/dialpad/dialtone/issues/1231)) ([0d652a5](https://github.com/dialpad/dialtone/commit/0d652a5b19770c47dd9d1a676f23477cdf877166))
+
 # [1.4.0-next.2](https://github.com/dialpad/dialtone/compare/stylelint-plugin-dialtone/v1.4.0-next.1...stylelint-plugin-dialtone/v1.4.0-next.2) (2026-03-31)
 
 

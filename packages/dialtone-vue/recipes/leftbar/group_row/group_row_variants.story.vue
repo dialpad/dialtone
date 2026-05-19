@@ -40,7 +40,7 @@
 
 <script>
 import DtRecipeGroupRow from './group_row.vue';
-import { DtStack } from '@/components/stack';
+import { DtStack } from '@/components/Stack';
 
 export default {
   name: 'DtRecipeGroupRowVariants',

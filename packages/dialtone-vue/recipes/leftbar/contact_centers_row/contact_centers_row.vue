@@ -89,9 +89,9 @@
 
 <script>
 import { extractVueListeners, safeConcatStrings, removeClassStyleAttrs, returnFirstEl } from '@/common/utils';
-import { DtBadge } from '@/components/badge';
-import { DtButton } from '@/components/button';
-import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
+import { DtBadge } from '@/components/Badge';
+import { DtButton } from '@/components/Button';
+import { DtEmojiTextWrapper } from '@/components/EmojiTextWrapper';
 import { DtIconChevronDown, DtIconHeadphones } from '@dialpad/dialtone-icons/vue';
 import { DialtoneLocalization } from '@/localization';
 

@@ -1,3 +1,37 @@
+# [1.48.0-next.18](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.17...dialtone-tokens/v1.48.0-next.18) (2026-05-14)
+
+
+### Bug Fixes
+
+* **Dialtone Tokens:** NO-JIRA fix shadow DOM setAttribute crash in theme setters ([#1271](https://github.com/dialpad/dialtone/issues/1271)) ([554047b](https://github.com/dialpad/dialtone/commit/554047b928c18635f8b7ce90546511ffe5f76ee9))
+
+# [1.48.0-next.17](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.16...dialtone-tokens/v1.48.0-next.17) (2026-05-13)
+
+
+### Features
+
+* **Design Tokens:** DLT-3368 DLT-3371 DLT-3410 add material dimension and brand-locked pairings ([#1252](https://github.com/dialpad/dialtone/issues/1252)) ([eeedc67](https://github.com/dialpad/dialtone/commit/eeedc6780f6107f618daf283669f01de74a1abb6))
+
+# [1.48.0-next.16](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.15...dialtone-tokens/v1.48.0-next.16) (2026-05-07)
+
+
+### Features
+
+* **Colors, Link, Tokens:** DLT-3360 retune blue/gold/purple/black/red palette, add mention semantic tokens, migrate success to positive ([#1245](https://github.com/dialpad/dialtone/issues/1245)) ([880b37b](https://github.com/dialpad/dialtone/commit/880b37b9176c5da6c8402d440062220c4c6a15f0))
+* **Design Tokens:** DLT-3356 extend prota/deuter/trita accessible themes to semantic and components ([#1237](https://github.com/dialpad/dialtone/issues/1237)) ([d8fbf58](https://github.com/dialpad/dialtone/commit/d8fbf5867e3569fb0be436df759108fcd0e18e34))
+
+# [1.48.0-next.15](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.14...dialtone-tokens/v1.48.0-next.15) (2026-04-30)
+
+
+### Features
+
+* **Colors:** DLT-3354 split green palette into distinct light and dark mode values ([#1225](https://github.com/dialpad/dialtone/issues/1225)) ([cf63034](https://github.com/dialpad/dialtone/commit/cf63034e6e856a5190f6aeae6092fe7f92d04568))
+* **Css Utilities, Design Tokens:** DLT-3330 DLT-3332 add off-scale pixel-indexed layout tokens and sizing utilities ([#1206](https://github.com/dialpad/dialtone/issues/1206)) ([1054875](https://github.com/dialpad/dialtone/commit/10548759c34e9db53396109ded36b5932b3525d8))
+* **Css Utilities, Eslint Plugin Dialtone:** DLT-3329 update border-radius css utilities and associated tooling ([#1211](https://github.com/dialpad/dialtone/issues/1211)) ([6bc3599](https://github.com/dialpad/dialtone/commit/6bc35991cff422b694f83b3b93184556e2c3475c))
+* **Design Tokens, Text, Link, Box, Css:** DLT-3338 add info semantic tokens and consumers ([#1210](https://github.com/dialpad/dialtone/issues/1210)) ([2f04b45](https://github.com/dialpad/dialtone/commit/2f04b45b8e44a223c81da839c4c1469e3d6e0285))
+* **Scripts, Eslint, Stylelint:** DLT-3359 add success-to-positive migration tooling ([#1231](https://github.com/dialpad/dialtone/issues/1231)) ([0d652a5](https://github.com/dialpad/dialtone/commit/0d652a5b19770c47dd9d1a676f23477cdf877166))
+* **Tokens, Css:** DLT-3331 rename success tokens and utility classes to positive ([#1230](https://github.com/dialpad/dialtone/issues/1230)) ([34bdff5](https://github.com/dialpad/dialtone/commit/34bdff5fced88803f45de606df3a204bc191265b))
+
 # [1.48.0-next.14](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.13...dialtone-tokens/v1.48.0-next.14) (2026-04-15)
 
 

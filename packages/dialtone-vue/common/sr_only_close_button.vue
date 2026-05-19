@@ -14,7 +14,7 @@
 
 <script>
 import { DtIconClose } from '@dialpad/dialtone-icons/vue';
-import { DtButton } from '@/components/button';
+import { DtButton } from '@/components/Button';
 import { DialtoneLocalization } from '@/localization';
 
 export default {

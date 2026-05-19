@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { DtModeDirective } from './mode.js';
-import DtModeIsland from '@/components/mode_island/mode_island.vue';
+import DtModeIsland from '@/components/ModeIsland/ModeIsland.vue';
 
 describe('DtModeDirective Tests', () => {
   let wrapper;
@@ -8,12 +8,14 @@ describe('DtModeDirective Tests', () => {
   beforeEach(() => {
     document.documentElement.setAttribute('data-dt-mode', 'light');
     document.documentElement.setAttribute('data-dt-contrast', 'default');
+    document.documentElement.setAttribute('data-dt-material', 'sandstone');
   });
 
   afterEach(() => {
     wrapper?.unmount();
     document.documentElement.removeAttribute('data-dt-mode');
     document.documentElement.removeAttribute('data-dt-contrast');
+    document.documentElement.removeAttribute('data-dt-material');
   });
 
   describe('Explicit Mode Tests', () => {
@@ -113,6 +115,32 @@ describe('DtModeDirective Tests', () => {
     });
   });
 
+  describe('Material Tests', () => {
+    it('should set data-dt-material from root', () => {
+      wrapper = mount({
+        template: '<section v-dt-mode:dark data-qa="target">Content</section>',
+      }, {
+        global: { plugins: [DtModeDirective] },
+      });
+
+      expect(wrapper.find('[data-qa="target"]').attributes('data-dt-material')).toBe('sandstone');
+    });
+
+    it('should update data-dt-material when root changes', async () => {
+      wrapper = mount({
+        template: '<section v-dt-mode:dark data-qa="target">Content</section>',
+      }, {
+        global: { plugins: [DtModeDirective] },
+      });
+
+      document.documentElement.setAttribute('data-dt-material', 'graphite');
+      // Wait for MutationObserver callback
+      await new Promise(resolve => setTimeout(resolve, 10));
+
+      expect(wrapper.find('[data-qa="target"]').attributes('data-dt-material')).toBe('graphite');
+    });
+  });
+
   describe('Reactive Tests', () => {
     it('should re-invert when root mode changes', async () => {
       wrapper = mount({
@@ -138,6 +166,7 @@ describe('DtModeDirective Tests', () => {
 
       expect(wrapper.find('[data-qa="target"]').attributes('data-dt-mode')).toBeUndefined();
       expect(wrapper.find('[data-qa="target"]').attributes('data-dt-contrast')).toBeUndefined();
+      expect(wrapper.find('[data-qa="target"]').attributes('data-dt-material')).toBeUndefined();
     });
 
     it('should apply mode when value changes from false to true', async () => {

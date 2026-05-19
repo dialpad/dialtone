@@ -4,7 +4,7 @@ import {
   itBehavesLikePassesCustomPropValidation,
 } from '@/tests/shared_examples/validation.js';
 import DtRecipeEmojiRow from './emoji_row.vue';
-import { DtTooltip } from '@/components/tooltip';
+import { DtTooltip } from '@/components/Tooltip';
 import { getEmojiShortCode } from '@/common/emoji';
 
 // Constants

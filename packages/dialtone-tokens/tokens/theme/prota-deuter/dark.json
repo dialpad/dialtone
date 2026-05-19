@@ -1,45 +1,26 @@
 {
-  "shell": {
-    "base": {
-      "color": {
-        "surface": {
-          "value": "oklch(0.2536 0.0075 285.86)",
-          "type": "color"
-        },
-        "accent": {
-          "value": "oklch(0.7559 0.135 244.32)",
-          "type": "color"
-        }
-      }
-    },
-    "logo": {
-      "color": {
-        "star": {
-          "value": "{color.purple.1000}",
-          "type": "color"
-        },
-        "wordmark": {
-          "value": "{color.purple.1000}",
-          "type": "color"
-        }
-      }
-    },
-    "mention": {
-      "color": {
-        "foreground": {
-          "primary": {
-            "value": "{color.neutral.black}",
-            "type": "color"
-          }
-        }
-      }
-    }
-  },
   "color": {
-    "foreground": {
-      "warning": {
-        "value": "{color.gold.700}",
-        "type": "color"
+    "surface": {
+      "critical": { "value": "{color.red.200}", "type": "color" },
+      "info-opaque": {
+        "value": "{color.blue.300}",
+        "type": "color",
+        "$extensions": { "studio.tokens": { "modify": { "type": "alpha", "value": "0.6", "space": "oklch" } } }
+      },
+      "positive-opaque": {
+        "value": "{color.green.300}",
+        "type": "color",
+        "$extensions": { "studio.tokens": { "modify": { "type": "alpha", "value": "0.6", "space": "oklch" } } }
+      },
+      "positive-subtle-opaque": {
+        "value": "{color.green.200}",
+        "type": "color",
+        "$extensions": { "studio.tokens": { "modify": { "type": "alpha", "value": "0.3", "space": "oklch" } } }
+      },
+      "critical-opaque": {
+        "value": "{color.magenta.300}",
+        "type": "color",
+        "$extensions": { "studio.tokens": { "modify": { "type": "alpha", "value": "0.65", "space": "oklch" } } }
       }
     }
   }

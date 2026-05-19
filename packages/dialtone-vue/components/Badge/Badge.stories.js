@@ -1,0 +1,175 @@
+import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import DtBadge from './Badge.vue';
+import DtBadgeDefaultTemplate from './BadgeDefault.story.vue';
+import DtBadgeVariantsTemplate from './BadgeVariants.story.vue';
+import DtBadgeExamplesTemplate from './BadgeExamples.story.vue';
+import {
+  BADGE_TYPE_MODIFIERS,
+  BADGE_KIND_MODIFIERS,
+  BADGE_DECORATION_MODIFIERS,
+} from './BadgeConstants';
+import { ICON_SIZE_MODIFIERS } from '@/components/Icon';
+
+const iconsList = getIconNames();
+
+export const argsData = {
+  type: 'default',
+  kind: 'label',
+  decoration: undefined,
+  startIcon: undefined,
+  endIcon: undefined,
+};
+
+export const argTypesData = {
+  // Slots
+  default: {
+    control: 'text',
+    table: {
+      type: {
+        summary: 'VNode',
+      },
+    },
+  },
+  startIcon: {
+    options: iconsList,
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
+  endIcon: {
+    options: iconsList,
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
+  leftIcon: {
+    table: {
+      disable: true,
+    },
+  },
+  rightIcon: {
+    table: {
+      disable: true,
+    },
+  },
+
+  // Props
+  type: {
+    control: {
+      type: 'select',
+    },
+    options: Object.keys(BADGE_TYPE_MODIFIERS),
+  },
+
+  kind: {
+    control: {
+      type: 'select',
+    },
+    options: Object.keys(BADGE_KIND_MODIFIERS),
+    if: { arg: 'type', neq: 'ai' },
+  },
+
+  decoration: {
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+    options: [undefined, ...Object.keys(BADGE_DECORATION_MODIFIERS)],
+    // TODO: Find a way to add conditions on more than one argument
+  },
+
+  iconSize: {
+    options: Object.keys(ICON_SIZE_MODIFIERS),
+    control: {
+      type: 'select',
+    },
+  },
+
+  text: {
+    control: { type: 'text' },
+  },
+
+  startIconClass: {
+    description: 'Pass through classes. Used to customize the start icon container',
+  },
+
+  endIconClass: {
+    description: 'Pass through classes. Used to customize the end icon container',
+  },
+
+  subtle: {
+    control: {
+      type: 'boolean',
+    },
+  },
+
+  outlined: {
+    control: {
+      type: 'boolean',
+    },
+  },
+
+  labelClass: {
+    description: 'Pass through classes. Used to customize the label container',
+  },
+};
+
+// Story Collection
+export default {
+  title: 'Components/Badge',
+  component: DtBadge,
+  excludeStories: /.*Data$/,
+  args: argsData,
+  argTypes: argTypesData,
+};
+
+// Templates
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtBadgeDefaultTemplate);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtBadgeVariantsTemplate);
+const ExamplesTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtBadgeExamplesTemplate);
+
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    default: 'Badge',
+  },
+};
+
+export const Count = {
+  render: DefaultTemplate,
+
+  args: {
+    default: '1',
+    kind: 'count',
+  },
+};
+
+export const Variants = {
+  render: VariantsTemplate,
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+  args: {},
+};
+
+export const Examples = {
+  render: ExamplesTemplate,
+  parameters: { options: { showPanel: false }, controls: { disable: true } },
+  args: {},
+};

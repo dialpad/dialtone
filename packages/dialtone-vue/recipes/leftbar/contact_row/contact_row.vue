@@ -64,8 +64,8 @@
 
 <script>
 import { DtRecipeGeneralRow } from '@/recipes/leftbar/general_row';
-import { DtEmojiTextWrapper } from '@/components/emoji_text_wrapper';
-import { DtAvatar } from '@/components/avatar';
+import { DtEmojiTextWrapper } from '@/components/EmojiTextWrapper';
+import { DtAvatar } from '@/components/Avatar';
 import { extractVueListeners, safeConcatStrings } from '@/common/utils';
 import { DtIconUser } from '@dialpad/dialtone-icons/vue';
 

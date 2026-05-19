@@ -7,6 +7,12 @@ const {
   REGEX_OPTIONS,
 } = require('./constants.cjs');
 
+// Hoisted to module scope — these regexes are read-only and the plugin's
+// hot path runs them per CSS file in a large per-theme loop.
+const TYPOGRAPHY_SEGMENTS_REGEX = new RegExp(`--dt-typography-(${REGEX_OPTIONS.TYPOGRAPHY_TYPE})-?(${REGEX_OPTIONS.TYPOGRAPHY_SIZES})?-?(${REGEX_OPTIONS.TYPOGRAPHY_VARIABLES})?-?(${REGEX_OPTIONS.TYPOGRAPHY_VARIABLES})?-?(.+)`);
+const TEXT_SEGMENTS_REGEX = new RegExp(`--dt-text-(${REGEX_OPTIONS.TEXT_TYPE})-(${REGEX_OPTIONS.TEXT_SIZES})-(.+)`);
+const SHADOW_SEGMENTS_REGEX = new RegExp(`--dt-shadow-(${REGEX_OPTIONS.SHADOW_VARIABLES})-?([0-9])?-(\\w+)`);
+
 let newDocEntries = {};
 
 /**
@@ -14,11 +20,10 @@ let newDocEntries = {};
  * @param { Declaration } declaration
  */
 function typography (typographyDeclarations, Declaration) {
-  const typographySegmentsRegex = new RegExp(`--dt-typography-(${REGEX_OPTIONS.TYPOGRAPHY_TYPE})-?(${REGEX_OPTIONS.TYPOGRAPHY_SIZES})?-?(${REGEX_OPTIONS.TYPOGRAPHY_VARIABLES})?-?(${REGEX_OPTIONS.TYPOGRAPHY_VARIABLES})?-?(.+)`);
   const typographyMap = typographyDeclarations.map(m => m.prop).filter(prop => !prop.endsWith('-font-family'))
     .reduce((typographies, typography) => {
       const matches = typography
-        .split(typographySegmentsRegex)
+        .split(TYPOGRAPHY_SEGMENTS_REGEX)
         .filter(chunk => !!chunk);
 
       matches.pop();
@@ -42,11 +47,10 @@ function typography (typographyDeclarations, Declaration) {
  * @param { Declaration } declaration
  */
 function text (textDeclarations, Declaration) {
-  const textSegmentsRegex = new RegExp(`--dt-text-(${REGEX_OPTIONS.TEXT_TYPE})-(${REGEX_OPTIONS.TEXT_SIZES})-(.+)`);
   const textMap = textDeclarations.map(m => m.prop).filter(prop => !prop.endsWith('-font-family'))
     .reduce((texts, text) => {
       const matches = text
-        .split(textSegmentsRegex)
+        .split(TEXT_SEGMENTS_REGEX)
         .filter(chunk => !!chunk);
 
       matches.pop();
@@ -71,11 +75,10 @@ function text (textDeclarations, Declaration) {
  * @param { Declaration } declaration
  */
 function boxShadows (shadowDeclarations, Declaration) {
-  const shadowSegmentsRegex = new RegExp(`--dt-shadow-(${REGEX_OPTIONS.SHADOW_VARIABLES})-?([0-9])?-(\\w+)`);
   const shadowMap = shadowDeclarations.map(m => m.prop)
     .reduce((shadows, shadow) => {
       const [name, index] = shadow
-        .split(shadowSegmentsRegex).slice(1, -1);
+        .split(SHADOW_SEGMENTS_REGEX).slice(1, -1);
       // Track the maximum layer index for multi-layer shadows
       const layerIndex = Number.isNaN(Number.parseInt(index)) ? 1 : Number.parseInt(index);
       shadows[name] = Math.max(shadows[name] || 0, layerIndex);

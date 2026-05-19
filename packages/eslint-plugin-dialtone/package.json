@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/eslint-plugin-dialtone",
-  "version": "1.12.0",
+  "version": "1.13.0-next.2",
   "description": "dialtone eslint plugin",
   "keywords": [
     "Dialpad",
@@ -29,6 +29,11 @@
       "name": "Nina Repetto",
       "email": "nina.repetto@dialpad.com",
       "url": "https://github.com/ninamarina"
+    },
+    {
+      "name": "Belu Montoya",
+      "email": "belu.montoya@dialpad.com",
+      "url": "https://github.com/belumontoya"
     }
   ],
   "bugs": {

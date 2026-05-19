@@ -12,6 +12,7 @@ export const VALIDATION_MESSAGE_TYPES = {
   CRITICAL: 'critical',
   WARNING: 'warning',
   POSITIVE: 'positive',
+  INFO: 'info',
 };
 
 // Description size variants

@@ -121,7 +121,7 @@ const blogLink = computed(() => {
 
     :where(code, kbd) {
       background-color: var(--dt-color-background-default);
-      color: var(--dt-color-foreground-info);
+      color: var(--dt-color-foreground-info-strong);
       font: var(--dt-text-code-xs);
       font-size: 85%;
     }

@@ -1,11 +1,12 @@
 {
   "name": "@dialpad/dialtone-tokens",
-  "version": "1.48.0-next.14",
+  "version": "1.48.0-next.18",
   "description": "Design tokens for Dialtone.",
   "type": "module",
   "scripts": {
     "sync:tokens-to-figma": "tsx sync-scripts/sync_tokens_to_figma.ts",
-    "sync:figma-to-tokens": "tsx sync-scripts/sync_figma_to_tokens.ts"
+    "sync:figma-to-tokens": "tsx sync-scripts/sync_figma_to_tokens.ts",
+    "test": "pnpm exec vitest run"
   },
   "files": [
     "dist"
@@ -72,6 +73,11 @@
       "name": "Nina Repetto",
       "email": "nina.repetto@dialpad.com",
       "url": "https://github.com/ninamarina"
+    },
+    {
+      "name": "Belu Montoya",
+      "email": "belu.montoya@dialpad.com",
+      "url": "https://github.com/belumontoya"
     }
   ]
 }

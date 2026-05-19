@@ -1,6 +1,9 @@
 /**
- * Script to automatically generate theme files using the NEW LAYERED TOKEN SYSTEM.
- * Replaces the old system entirely - generates theme files that reference layered tokens.
+ * Generate per-theme `.js` entrypoints that re-export the layered CSS as inline
+ * strings. Each entrypoint is consumed by the runtime setMode/setBrand/
+ * setContrast APIs in `themes/config.js`. Material switching is attribute-only
+ * (driven by `data-dt-material` against pre-bundled per-material CSS) and does
+ * not generate JS entrypoints.
  */
 
 import fs from 'fs';
@@ -9,11 +12,8 @@ import path from 'path';
 const LAYERED_CSS_DIR = './dist/css/layered';
 const THEMES_OUTPUT_DIR = './themes';
 
-/**
- * Generate theme files for all themes (LAYERED SYSTEM)
- */
 export async function generateThemeFiles () {
-  console.log('Generating layered theme files (DIRECT REPLACEMENT)...');
+  console.log('Generating layered theme files...');
 
   // Ensure themes directory exists
   if (!fs.existsSync(THEMES_OUTPUT_DIR)) {
@@ -41,7 +41,7 @@ export async function generateThemeFiles () {
   // Generate high contrast theme
   await generateHighContrastTheme();
 
-  console.log('Layered theme files generated - OLD SYSTEM REPLACED');
+  console.log('Layered theme files generated');
 }
 
 /**
@@ -84,12 +84,31 @@ export default {
 }
 
 /**
+ * Read the declared material lock for a brand from its source token JSON.
+ * Returns the material name string (e.g. "sandstone") or null if the brand
+ * does not declare a lock OR has no source JSON (e.g. CSS-only variants like
+ * `expressive-sm` whose CSS is generated from a parent brand).
+ * @param {string} brandName
+ * @returns {string|null}
+ */
+function readBrandMaterial(brandName) {
+  const jsonPath = `./tokens/theme/${brandName}/default.json`;
+  if (!fs.existsSync(jsonPath)) return null;
+  return JSON.parse(fs.readFileSync(jsonPath, 'utf8')).shell?.base?.material?.value ?? null;
+}
+
+/**
  * Generate a brand override theme file
  * @param {string} brandName - The brand name (e.g., 'tmo', 'sunflower')
  */
 async function generateBrandThemeFile(brandName) {
   const fileName = `${brandName}.js`;
   const filePath = path.join(THEMES_OUTPUT_DIR, fileName);
+
+  const materialName = readBrandMaterial(brandName);
+  const materialExport = materialName
+    ? `  material: {\n    name: '${materialName}',\n  },\n`
+    : '';
 
   const content = `import BrandColors from '@dialpad/dialtone-tokens/layered/themes/tokens-${brandName}-colors.css?inline';
 
@@ -98,7 +117,7 @@ export default {
     css: BrandColors,
     name: '${brandName}',
   },
-};
+${materialExport}};
 `;
 
   fs.writeFileSync(filePath, content);
@@ -124,3 +143,4 @@ export default {
   fs.writeFileSync(filePath, content);
   console.log('Generated high-contrast theme');
 }
+

@@ -108,8 +108,8 @@
 
 <script>
 import { FEED_ITEM_PILL_BORDER_COLORS } from './feed_item_pill_constants';
-import { DtItemLayout } from '@/components/item_layout';
-import { DtCollapsible } from '@/components/collapsible';
+import { DtItemLayout } from '@/components/ItemLayout';
+import { DtCollapsible } from '@/components/Collapsible';
 import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue';
 import { DialtoneLocalization } from '@/localization';
 

@@ -1,6 +1,15 @@
 /* eslint-disable complexity */
 import Core from '@/themes/core.js';
 
+/**
+ * Names of all materials, including the default (sandstone). Material switching
+ * is attribute-driven: setMaterial sets `data-dt-material` on the rootNode,
+ * and the bundled per-material CSS (loaded once at app startup) applies via
+ * the matching `[data-dt-material="<name>"]` selector.
+ */
+export const VALID_MATERIALS = Object.freeze(['sandstone', 'steel', 'graphite', 'iron', 'amethyst', 'jade']);
+const VALID_MATERIALS_SET = new Set(VALID_MATERIALS);
+
 // Track if core tokens are loaded (per JavaScript instance)
 // Note: In micro-frontend architecture, each app has separate bundle with its own
 // config.js instance, so this boolean only tracks state within a single app.
@@ -34,6 +43,8 @@ let initializationState = null;
  * @property {Object} brand - Brand-specific overrides
  * @property {string} brand.name - Brand identifier (e.g., 'dp', 'tmo')
  * @property {string} brand.css - Brand override CSS
+ * @property {Object} [material] - Optional brand-locked material declaration; absent on free-choice brands (dp, tmo, prota-deuter, trita)
+ * @property {string} [material.name] - Material identifier (e.g., 'jade', 'sandstone')
  */
 
 /**
@@ -42,6 +53,11 @@ let initializationState = null;
  * @property {Object} contrast - Contrast-specific overrides
  * @property {string} contrast.name - Contrast identifier (e.g., 'high')
  * @property {string} contrast.css - Contrast override CSS
+ */
+
+/**
+ * @typedef {'sandstone'|'steel'|'graphite'|'iron'|'amethyst'|'jade'} MaterialName
+ * Material identifier — one of the names in VALID_MATERIALS.
  */
 
 /**
@@ -102,19 +118,17 @@ export function setTheme (theme, rootNode = document.documentElement, contrastTh
  */
 function _setThemeLegacy(theme, rootNode = document.documentElement, contrastTheme = null) {
   _setThemeAttributeOnRoot(theme.base.name, theme.brand.name, rootNode);
-  if (rootNode?.shadowRoot) {
-    rootNode = rootNode.shadowRoot;
-  }
+  const styleRoot = rootNode?.shadowRoot ?? rootNode;
   // Load css files
-  _setStyleTag('dialtone-css-theme', theme.base.css, rootNode);
-  _setStyleTag('dialtone-css-brand', theme.brand.css, rootNode);
+  _setStyleTag('dialtone-css-theme', theme.base.css, styleRoot);
+  _setStyleTag('dialtone-css-brand', theme.brand.css, styleRoot);
 
   // Apply contrast layer
   if (contrastTheme) {
-    _setStyleTag('dialtone-css-contrast', contrastTheme.css, rootNode);
+    _setStyleTag('dialtone-css-contrast', contrastTheme.css, styleRoot);
     rootNode?.setAttribute('data-dt-contrast', 'high');
   } else {
-    _removeStyleTag('dialtone-css-contrast', rootNode);
+    _removeStyleTag('dialtone-css-contrast', styleRoot);
     rootNode?.setAttribute('data-dt-contrast', 'default');
   }
 }
@@ -123,47 +137,49 @@ function _setThemeLegacy(theme, rootNode = document.documentElement, contrastThe
  * Layered theme setter (new optimized system)
  */
 function _setThemeLayered(theme, rootNode = document.documentElement) {
-  if (rootNode?.shadowRoot) {
-    rootNode = rootNode.shadowRoot;
-  }
+  const styleRoot = rootNode?.shadowRoot ?? rootNode;
 
   // Load core tokens only once per JavaScript instance
   if (theme.core && !coreTokensLoaded) {
-    _setStyleTag('dialtone-css-core', theme.core, rootNode);
+    _setStyleTag('dialtone-css-core', theme.core, styleRoot);
     coreTokensLoaded = true;
   }
 
   // Load base colors only once
-  if (theme.baseColors && !rootNode?.querySelector('#dialtone-css-base-colors')) {
-    _setStyleTag('dialtone-css-base-colors', theme.baseColors, rootNode);
+  if (theme.baseColors && !styleRoot?.querySelector('#dialtone-css-base-colors')) {
+    _setStyleTag('dialtone-css-base-colors', theme.baseColors, styleRoot);
   }
 
   // Load brand colors (dp base is always loaded, others are overrides)
   if (theme.brand) {
-    _setStyleTag('dialtone-css-brand-colors', theme.brand.css, rootNode);
+    _setStyleTag('dialtone-css-brand-colors', theme.brand.css, styleRoot);
     rootNode?.setAttribute('data-dt-brand', theme.brand.name);
   }
 
   // Apply contrast layer if provided
   if (theme.contrast) {
-    _setStyleTag('dialtone-css-contrast', theme.contrast.css, rootNode);
+    _setStyleTag('dialtone-css-contrast', theme.contrast.css, styleRoot);
     rootNode?.setAttribute('data-dt-contrast', theme.contrast.name);
   }
 }
 
 /**
  * Set the content of a style tag with the given id, create it if the id doesn't exist.
+ * If `beforeId` is provided and that tag exists, insert the new tag immediately before
+ * it (so the named tag wins at the same specificity). Otherwise append.
  */
-function _setStyleTag (id, content, rootNode) {
+function _setStyleTag (id, content, rootNode, beforeId = null) {
   if (!rootNode?.querySelector('#' + id)) {
     const style = document.createElement('style');
     style.setAttribute('type', 'text/css');
     style.setAttribute('id', id);
     style.innerHTML = content;
-    if (rootNode?.querySelector('head')) {
-      rootNode.querySelector('head').appendChild(style);
+    const parent = rootNode?.querySelector('head') ?? rootNode;
+    const anchor = beforeId ? rootNode?.querySelector('#' + beforeId) : null;
+    if (anchor && anchor.parentNode === parent) {
+      parent.insertBefore(style, anchor);
     } else {
-      rootNode?.appendChild(style);
+      parent?.appendChild(style);
     }
   } else {
     const existingTag = rootNode.querySelector('#' + id);
@@ -229,10 +245,7 @@ export function setMode(mode, rootNode = document.documentElement) {
       '[Dialtone] You passed a ShadowRoot directly to setMode(). ' +
       'Please pass the host element instead. The function will access shadowRoot automatically.',
     );
-  }
-
-  if (rootNode?.shadowRoot) {
-    rootNode = rootNode.shadowRoot;
+    return;
   }
 
   rootNode?.setAttribute('data-dt-mode', mode);
@@ -295,14 +308,34 @@ export function setBrand(brandTheme, rootNode = document.documentElement) {
       '[Dialtone] You passed a ShadowRoot directly to setBrand(). ' +
       'Please pass the host element instead. The function will access shadowRoot automatically.',
     );
+    return;
   }
 
-  if (rootNode?.shadowRoot) {
-    rootNode = rootNode.shadowRoot;
-  }
-
-  _setStyleTag('dialtone-css-brand-colors', brandTheme.brand.css, rootNode);
+  const styleRoot = rootNode?.shadowRoot ?? rootNode;
+  _setStyleTag('dialtone-css-brand-colors', brandTheme.brand.css, styleRoot);
   rootNode?.setAttribute('data-dt-brand', brandTheme.brand.name);
+
+  _applyBrandLockedMaterial(brandTheme, rootNode);
+}
+
+function _applyBrandLockedMaterial(brandTheme, rootNode) {
+  const lockName = brandTheme.material?.name;
+  if (!lockName) return;
+
+  // Skip the round-trip through setMaterial — caller (setBrand) already
+  // resolved shadowRoot, and we'd just hit the same VALID_MATERIALS_SET
+  // lookup. Set the attribute directly; preserve the brand-context warn
+  // for unknown names so token-JSON typos surface clearly.
+  if (VALID_MATERIALS_SET.has(lockName)) {
+    rootNode?.setAttribute('data-dt-material', lockName);
+    return;
+  }
+
+  console.warn(
+    `[Dialtone] setBrand: brand '${brandTheme.brand.name}' ` +
+    `declares unknown material '${lockName}'; falling back to sandstone.`,
+  );
+  rootNode?.setAttribute('data-dt-material', 'sandstone');
 }
 
 /**
@@ -339,19 +372,63 @@ export function setContrast(contrastTheme, rootNode = document.documentElement) 
       '[Dialtone] You passed a ShadowRoot directly to setContrast(). ' +
       'Please pass the host element instead. The function will access shadowRoot automatically.',
     );
+    return;
   }
 
-  if (rootNode?.shadowRoot) {
-    rootNode = rootNode.shadowRoot;
-  }
-
+  const styleRoot = rootNode?.shadowRoot ?? rootNode;
   if (contrastTheme && contrastTheme.contrast) {
-    _setStyleTag('dialtone-css-contrast', contrastTheme.contrast.css, rootNode);
+    _setStyleTag('dialtone-css-contrast', contrastTheme.contrast.css, styleRoot);
     rootNode?.setAttribute('data-dt-contrast', contrastTheme.contrast.name);
   } else {
-    _removeStyleTag('dialtone-css-contrast', rootNode);
+    _removeStyleTag('dialtone-css-contrast', styleRoot);
     rootNode?.setAttribute('data-dt-contrast', 'default');
   }
+}
+
+/**
+ * Set the active material — toggles `data-dt-material` on the rootNode. The
+ * matching `[data-dt-material="<name>"][data-dt-mode="..."]` CSS (loaded once
+ * in the layered bundle) re-binds `--dt-color-black-*` for that subtree.
+ *
+ * Pass `null`, `undefined`, or `'sandstone'` to clear the override (sandstone
+ * is the default neutral ramp baked into the base CSS, so it has no override
+ * selector — the attribute simply matches nothing and the bare base values
+ * apply). Pass a known string name to apply that material.
+ *
+ * Unknown material names emit a `console.warn` and fall back to sandstone.
+ *
+ * @param {MaterialName|null} name - Material name, or null/undefined to reset to sandstone
+ * @param {ThemeRootNode} [rootNode=document.documentElement] - Root element to apply the attribute to
+ *
+ * @example
+ * setMaterial('steel');
+ * setMaterial(null); // back to default (sandstone)
+ */
+export function setMaterial (name, rootNode = document.documentElement) {
+  if (name !== null && name !== undefined && typeof name !== 'string') {
+    throw new TypeError(
+      '[Dialtone] setMaterial: expected a string material name or null.',
+    );
+  }
+
+  if (rootNode instanceof ShadowRoot) {
+    console.warn(
+      '[Dialtone] You passed a ShadowRoot directly to setMaterial(). ' +
+      'Please pass the host element instead. The function will access shadowRoot automatically.',
+    );
+    return;
+  }
+
+  const resolved = name || 'sandstone';
+  if (!VALID_MATERIALS_SET.has(resolved)) {
+    console.warn(
+      `[Dialtone] setMaterial: unknown material '${name}'; falling back to sandstone.`,
+    );
+    rootNode?.setAttribute('data-dt-material', 'sandstone');
+    return;
+  }
+
+  rootNode?.setAttribute('data-dt-material', resolved);
 }
 
 /**
@@ -448,11 +525,10 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
       'Correct: initDialtoneTheme(brand, mode, hostElement)\n' +
       'Incorrect: initDialtoneTheme(brand, mode, hostElement.shadowRoot)',
     );
+    return;
   }
 
-  if (rootNode?.shadowRoot) {
-    rootNode = rootNode.shadowRoot;
-  }
+  const styleRoot = rootNode?.shadowRoot ?? rootNode;
 
   // CRITICAL: Detect embedded app trying to use document.documentElement
   // This check MUST run on first init, before idempotency check
@@ -490,20 +566,21 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
   }
 
   // Load core tokens (once per JavaScript instance)
-  _setStyleTag('dialtone-css-core', Core.core, rootNode);
+  _setStyleTag('dialtone-css-core', Core.core, styleRoot);
   coreTokensLoaded = true;
 
   // Load base colors (once)
-  _setStyleTag('dialtone-css-base-colors', Core.baseColors, rootNode);
+  _setStyleTag('dialtone-css-base-colors', Core.baseColors, styleRoot);
 
   // Set initial mode
   setMode(mode, rootNode);
 
-  // Set initial brand
-  setBrand(brandTheme, rootNode);
-
-  // Set default contrast
+  // Seed defaults; setBrand may override `data-dt-material` below if the brand declares a lock.
   rootNode?.setAttribute('data-dt-contrast', 'default');
+  rootNode?.setAttribute('data-dt-material', 'sandstone');
+
+  // Set initial brand (auto-applies brand-locked material if declared)
+  setBrand(brandTheme, rootNode);
 
   // Track initialization state for future idempotency checks
   initializationState = {
@@ -511,6 +588,22 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
     mode: mode,
     contrast: 'default',
   };
+}
+
+/**
+ * @param {BrandTheme} brandTheme
+ * @returns {string|null} the locked material name, or null when the brand is free-choice
+ */
+export function getBrandMaterial(brandTheme) {
+  return brandTheme?.material?.name ?? null;
+}
+
+/**
+ * @param {BrandTheme} brandTheme
+ * @returns {boolean}
+ */
+export function hasBrandMaterialLock(brandTheme) {
+  return getBrandMaterial(brandTheme) !== null;
 }
 
 /**
@@ -541,21 +634,24 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
  * }
  */
 export function resetTheme(rootNode = document.documentElement) {
-  // Access shadowRoot if present
-  const actualRoot = rootNode?.shadowRoot || rootNode;
+  const styleRoot = rootNode?.shadowRoot ?? rootNode;
 
   // Clear initialization state (only one instance per app)
   initializationState = null;
   coreTokensLoaded = false;
 
-  // Remove all theme style tags
-  _removeStyleTag('dialtone-css-core', actualRoot);
-  _removeStyleTag('dialtone-css-base-colors', actualRoot);
-  _removeStyleTag('dialtone-css-brand-colors', actualRoot);
-  _removeStyleTag('dialtone-css-contrast', actualRoot);
+  // Remove all theme style tags. Material no longer injects a style tag
+  // (attribute-driven), but resetTheme should still scrub any pre-existing
+  // injection from older code paths.
+  _removeStyleTag('dialtone-css-core', styleRoot);
+  _removeStyleTag('dialtone-css-base-colors', styleRoot);
+  _removeStyleTag('dialtone-css-material', styleRoot);
+  _removeStyleTag('dialtone-css-brand-colors', styleRoot);
+  _removeStyleTag('dialtone-css-contrast', styleRoot);
 
-  // Remove theme attributes
-  actualRoot?.removeAttribute('data-dt-mode');
-  actualRoot?.removeAttribute('data-dt-brand');
-  actualRoot?.removeAttribute('data-dt-contrast');
+  // Remove theme attributes from the host element (not ShadowRoot — it has no removeAttribute)
+  rootNode?.removeAttribute('data-dt-mode');
+  rootNode?.removeAttribute('data-dt-brand');
+  rootNode?.removeAttribute('data-dt-contrast');
+  rootNode?.removeAttribute('data-dt-material');
 }

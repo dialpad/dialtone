@@ -1,0 +1,229 @@
+import { action } from 'storybook/actions';
+import { createTemplateFromVueFile, getIconNames } from '@/common/storybook_utils';
+import DtToast from './Toast.vue';
+import DtToastDefaultTemplate from './ToastDefault.story.vue';
+import { TOAST_LAYOUTS, TOAST_ALTERNATE_KINDS } from './ToastConstants.js';
+
+const iconsList = getIconNames();
+
+// Default Prop Values
+export const argsData = {
+  duration: 6000,
+  onClose: action('close'),
+  onClick: action('click'),
+};
+
+export const argTypesData = {
+  // Slots
+  icon: {
+    options: iconsList,
+    table: {
+      type: { summary: 'component' },
+    },
+    control: {
+      type: 'select',
+      labels: {
+        undefined: '(empty)',
+      },
+    },
+  },
+  default: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+  action: {
+    table: {
+      type: { summary: 'VNode' },
+    },
+    control: {
+      type: 'text',
+    },
+  },
+
+  // Props
+  headerText: {
+    control: {
+      type: 'text',
+    },
+  },
+  headerId: {
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
+  contentId: {
+    table: {
+      defaultValue: {
+        summary: 'generated unique ID',
+      },
+    },
+  },
+  kind: {
+    options: TOAST_ALTERNATE_KINDS,
+    control: {
+      type: 'select',
+    },
+  },
+  layout: {
+    options: TOAST_LAYOUTS,
+    control: {
+      type: 'select',
+    },
+  },
+  open: {
+    table: {
+      defaultValue: {
+        summary: 'false',
+      },
+    },
+  },
+  duration: {
+    table: {
+      defaultValue: {
+        summary: 'null',
+      },
+    },
+  },
+  showClose: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  showIcon: {
+    control: {
+      type: 'boolean',
+    },
+  },
+  showAction: {
+    control: {
+      type: 'boolean',
+    },
+  },
+
+  // Action Event Handlers
+  onClick: {
+    table: {
+      disable: true,
+    },
+  },
+  onClose: {
+    table: {
+      disable: true,
+    },
+  },
+
+  close: {
+    description: 'Close button click event',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+};
+
+// Story Collection
+export default {
+  title: 'Components/Toast',
+  component: DtToast,
+  args: argsData,
+  argTypes: argTypesData,
+  excludeStories: /.*Data$/,
+};
+
+// Templates
+const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(
+  args,
+  argTypes,
+  DtToastDefaultTemplate,
+);
+
+export const Default = {
+  render: DefaultTemplate,
+
+  args: {
+    headerText: 'Base title (optional)',
+    kind: 'base',
+  },
+
+  parameters: {
+    percy: {
+      args: {
+        open: true,
+      },
+    },
+  },
+};
+
+export const Critical = {
+  render: DefaultTemplate,
+
+  args: {
+    ...Default.args,
+    headerText: 'Critical title (optional)',
+    kind: 'critical',
+  },
+
+  parameters: {
+    ...Default.parameters,
+  },
+};
+
+export const Info = {
+  render: DefaultTemplate,
+
+  args: {
+    ...Default.args,
+    headerText: 'Info title (optional)',
+    kind: 'info',
+  },
+
+  parameters: {
+    ...Default.parameters,
+  },
+};
+
+export const Positive = {
+  render: DefaultTemplate,
+
+  args: {
+    ...Default.args,
+    headerText: 'Positive title (optional)',
+    kind: 'positive',
+  },
+
+  parameters: {
+    ...Default.parameters,
+  },
+};
+
+export const Warning = {
+  render: DefaultTemplate,
+
+  args: {
+    ...Default.args,
+    headerText: 'Warning title (optional)',
+    kind: 'warning',
+  },
+
+  parameters: {
+    ...Default.parameters,
+  },
+};
+
+export const Important = {
+  render: DefaultTemplate,
+
+  args: {
+    ...Default.args,
+    important: true,
+  },
+
+  parameters: {
+    ...Default.parameters,
+  },
+};

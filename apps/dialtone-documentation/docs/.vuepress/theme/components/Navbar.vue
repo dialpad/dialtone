@@ -10,17 +10,20 @@
         placement="bottom-start"
         dialog-class="d-w-1000 d-p-0"
         padding="large"
-        transition="true"
         enter-delay="500"
         :offset="[-8, 8]"
       >
         <template #anchor>
-          <dt-button v-bind="navButtonProps(link)" @click="dismissHovercard(link.text, 'anchor')">
+          <dt-button
+            class="dialtone-shell-btn"
+            v-bind="navButtonProps(link)"
+            @click="dismissHovercard(link.text, 'anchor')"
+          >
             {{ link.text }}
           </dt-button>
         </template>
         <template #content>
-          <dt-box class="d-d-grid d-g-50 d-g-cols2 d-ai-stretch ">
+          <dt-box class="d-d-grid d-g-50 d-g-cols2 d-ai-stretch">
             <dt-button
               v-for="item in hovercardMap[link.text]"
               :key="item.link"
@@ -50,6 +53,7 @@
       </dt-hovercard>
       <dt-button
         v-else
+        class="dialtone-shell-btn"
         v-bind="navButtonProps(link)"
         @mouseleave="releaseDismissal(link.text)"
         @blur="releaseDismissal(link.text)"
@@ -73,7 +77,7 @@
       id="theme-toggle-dropdown"
       :hidden="!showThemeSwitcher"
       navigation-type="arrow-keys"
-      placement="bottom-start"
+      placement="bottom"
       class="theme-toggle-dropdown"
       max-height="33vh"
     >
@@ -188,7 +192,7 @@
         </dt-list-item-group>
       </template>
     </dt-dropdown>
-    <dt-dropdown navigation-type="arrow-keys" placement="bottom-start">
+    <dt-dropdown navigation-type="arrow-keys" placement="bottom">
       <template #anchor>
         <dt-button
           v-dt-tooltip:bottom="`Mode: ${capitalize(currentMode)}`"
@@ -266,6 +270,26 @@
             </template>
           </dt-list-item>
         </dt-list-item-group>
+        <template v-if="!isMaterialLocked">
+          <dt-dropdown-separator />
+          <dt-list-item-group
+            heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
+            heading="Material"
+          >
+            <dt-list-item
+              v-for="material in materials"
+              :key="material"
+              role="menuitem"
+              navigation-type="arrow-keys"
+              @click="setMaterial(material)"
+            >
+              {{ formatMaterial(material) }}
+              <template #end>
+                <dt-icon :class="{ 'd-o0': currentMaterial !== material }" name="check" size="200" />
+              </template>
+            </dt-list-item>
+          </dt-list-item-group>
+        </template>
       </template>
     </dt-dropdown>
     <dt-button
@@ -374,13 +398,18 @@ const {
   currentModeIconName,
   setMode,
   setContrast,
+  setMaterial,
   setTheme,
   namedThemes,
   numberedThemes,
   formatThemeName,
+  materials,
+  currentMaterial,
+  isMaterialLocked,
 } = useThemeManager({ includeThemes: true });
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+const formatMaterial = (m) => m === 'sandstone' ? 'Sandstone (default)' : capitalize(m);
 
 const isActiveLink = (link) => {
   // For Design System, check all related paths (same as useSidebarItems.js)

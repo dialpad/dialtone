@@ -124,10 +124,10 @@
 
 <script>
 import { DEFAULT_FEED_ROW_STATE, FEED_ROW_STATE_BACKGROUND_COLOR } from './feed_item_row_constants.js';
-import { DtAvatar } from '@/components/avatar';
-import { DtLazyShow } from '@/components/lazy_show';
-import { DtListItem } from '@/components/list_item';
-import { DtBadge } from '@/components/badge';
+import { DtAvatar } from '@/components/Avatar';
+import { DtLazyShow } from '@/components/LazyShow';
+import { DtListItem } from '@/components/ListItem';
+import { DtBadge } from '@/components/Badge';
 import Modal from '@/common/mixins/modal';
 import { DtIconUser } from '@dialpad/dialtone-icons/vue';
 import { hasSlotContent } from '@/common/utils';

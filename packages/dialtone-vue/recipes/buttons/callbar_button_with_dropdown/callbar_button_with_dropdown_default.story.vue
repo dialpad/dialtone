@@ -75,10 +75,10 @@
 
 <script>
 import DtRecipeCallbarButtonWithDropdown from './callbar_button_with_dropdown.vue';
-import { DtIcon } from '@/components/icon';
-import { DtListItem } from '@/components/list_item';
-import { DtListItemGroup } from '@/components/list_item_group';
-import { DtDropdownSeparator } from '@/components/dropdown';
+import { DtIcon } from '@/components/Icon';
+import { DtListItem } from '@/components/ListItem';
+import { DtListItemGroup } from '@/components/ListItemGroup';
+import { DtDropdownSeparator } from '@/components/Dropdown';
 
 export default {
   name: 'DtRecipeCallbarButtonWithPopoverDefault',

@@ -8,7 +8,7 @@
   >
     <template #content>
       <div
-        v-dt-scrollbar:never
+        v-dt-scrollbar:always
         :class="['dtc-theme__canvas d-p-200', { 'd-hmx-250': !fullScreen }]"
       >
         <dtc-code-editor

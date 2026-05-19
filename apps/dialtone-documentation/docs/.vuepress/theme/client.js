@@ -12,10 +12,50 @@ import { flushPromises } from '@workspaceRoot/common/utils/client.mjs';
 // CSS
 import '@docsearch/css';
 
-// Layered Theming System - Base layers (always loaded)
+// Layered Theming System - Base layers (always loaded). Material override CSS
+// loads here so all materials are available for attribute-driven switching;
+// brand CSS (dp by default) loads after, so brand wins at the same specificity.
+//
+// Sandstone has no override file — it's the default ramp baked into
+// `tokens-base-colors.css` and applies whenever `data-dt-material` is absent
+// or set to `'sandstone'` (no `[data-dt-material="sandstone"]` selector exists
+// to match against, so the bare base selectors govern).
 import '@dialpad/dialtone-tokens/layered/tokens-core.css';
 import '@dialpad/dialtone-tokens/layered/tokens-base-colors.css';
+import '@dialpad/dialtone-tokens/layered/material/tokens-steel.css';
+import '@dialpad/dialtone-tokens/layered/material/tokens-graphite.css';
+import '@dialpad/dialtone-tokens/layered/material/tokens-iron.css';
+import '@dialpad/dialtone-tokens/layered/material/tokens-amethyst.css';
+import '@dialpad/dialtone-tokens/layered/material/tokens-jade.css';
 import '@dialpad/dialtone-tokens/layered/tokens-dp-colors.css';
+
+import { VALID_MATERIALS } from '@dialpad/dialtone-tokens/themes/config';
+
+// Normalize stale localStorage values from removed/renamed entries (e.g.
+// bronze → sandstone). preferredTheme has its own force-reset in onBeforeMount.
+const VALID_PREFS = {
+  preferredMode: { valid: ['system', 'light', 'dark'], fallback: 'system' },
+  preferredContrast: { valid: ['default', 'high'], fallback: 'default' },
+  preferredMaterial: { valid: [...VALID_MATERIALS], fallback: 'sandstone' },
+};
+if (typeof localStorage !== 'undefined') {
+  for (const [key, { valid, fallback }] of Object.entries(VALID_PREFS)) {
+    const stored = localStorage.getItem(key);
+    if (stored !== null && !valid.includes(stored)) {
+      localStorage.setItem(key, fallback);
+    }
+  }
+}
+
+// Pre-mount bootstrap: apply the persisted material via the data-dt-material
+// attribute before Vue hydrates so the page paints with the user's saved choice.
+// All material CSS is loaded above; the attribute selects which set wins.
+if (typeof document !== 'undefined' && typeof localStorage !== 'undefined') {
+  const saved = localStorage.getItem('preferredMaterial');
+  if (saved) {
+    document.documentElement.setAttribute('data-dt-material', saved);
+  }
+}
 
 // Legacy CSS (still needed for components)
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
@@ -150,14 +190,17 @@ export default defineClientConfig({
       const preferredMode = localStorage.getItem('preferredMode') || 'system';
       const preferredTheme = localStorage.getItem('preferredTheme');
       const preferredContrast = localStorage.getItem('preferredContrast') || 'default';
+      const preferredMaterial = localStorage.getItem('preferredMaterial') || 'sandstone';
 
       const currentMode = ref(preferredMode);
       const currentTheme = ref(preferredTheme);
       const currentContrast = ref(preferredContrast);
+      const currentMaterial = ref(preferredMaterial);
 
       provide('currentMode', currentMode);
       provide('currentTheme', currentTheme);
       provide('currentContrast', currentContrast);
+      provide('currentMaterial', currentMaterial);
     });
     onMounted(async () => {
       // Reveal the app now that Vue has hydrated and components are registered
@@ -308,6 +351,8 @@ async function importDialtoneThemes (app) {
       import('@dialpad/dialtone-tokens/themes/137'),
       // High contrast
       import('@dialpad/dialtone-tokens/themes/high-contrast'),
+      // Material overrides are not theme modules — material switching is
+      // attribute-driven against pre-bundled CSS imported at the top of this file.
     ]);
 
     // Build themes object with same order as in Navbar
@@ -365,7 +410,8 @@ async function importDialtoneThemes (app) {
       'high-contrast': themeModules[50].default,
     };
 
-    console.info(`Successfully loaded ${Object.keys(themes).length - 1} themes + high contrast`);
+    const brandCount = Object.keys(themes).length - 1; // minus high-contrast
+    console.info(`Successfully loaded ${brandCount} themes + high contrast`);
 
     app.provide('themes', themes);
   } catch (error) {

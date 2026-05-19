@@ -80,11 +80,7 @@
             >
               <dt-stack as="span" direction="row" justify="space-between" class="d-w100p">
                 {{ subItem.text }}
-                <dt-badge
-                  class="d-fw-normal d-mis-50"
-                >
-                  Planned
-                </dt-badge>
+                <dt-badge v-bind="getBadge(subItem.status)" class="d-mis-50" />
               </dt-stack>
             </div>
             <dt-button
@@ -103,13 +99,7 @@
             >
               <dt-stack as="span" direction="row" justify="space-between" class="d-w100p">
                 {{ subItem.text }}
-                <dt-badge
-                  v-if="subItem.status === 'beta'"
-                  class="d-fw-normal d-mis-50"
-                  type="info"
-                >
-                  Beta
-                </dt-badge>
+                <dt-badge v-if="getBadge(subItem.status)" v-bind="getBadge(subItem.status)" class="d-mis-50" />
               </dt-stack>
             </dt-button>
             <dt-button
@@ -121,7 +111,7 @@
               label-class="d-jc-flex-start d-tw-pretty"
               :data-sidebar-link="subItem.link"
               :class="[
-                'd-w100p d-fw-normal',
+                'd-w100p d-fw-normal dialtone-shell-btn',
                 { 'd-pis-600': depth === 0 },
                 { 'd-pis-800': depth === 1 },
                 {
@@ -130,19 +120,14 @@
               ]"
             >
               <dt-stack
-                v-if="subItem.status === 'beta'"
+                v-if="getBadge(subItem.status)"
                 as="span"
                 direction="row"
                 justify="space-between"
                 class="d-w100p"
               >
                 {{ subItem.text }}
-                <dt-badge
-                  class="d-fw-normal d-mis-50"
-                  type="info"
-                >
-                  Beta
-                </dt-badge>
+                <dt-badge v-bind="getBadge(subItem.status)" class="d-mis-50" />
               </dt-stack>
               <template v-else>
                 {{ subItem.text }}
@@ -180,7 +165,19 @@
         size="400"
         class="d-mie-150 d-fc-muted"
       />
-      {{ item.text }}
+      <dt-stack
+        v-if="getBadge(item.status)"
+        as="span"
+        direction="row"
+        justify="space-between"
+        class="d-w100p"
+      >
+        {{ item.text }}
+        <dt-badge v-bind="getBadge(item.status)" class="d-mis-50" />
+      </dt-stack>
+      <template v-else>
+        {{ item.text }}
+      </template>
     </dt-button>
   </li>
 </template>
@@ -189,6 +186,13 @@
 import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 const isExternalUrl = (link) => /^https?:\/\//.test(link);
+
+const STATUS_BADGES = {
+  beta: { type: 'info', text: 'Beta' },
+  new: { type: 'bulletin', text: 'New' },
+  planned: { text: 'Planned' },
+};
+const getBadge = (status) => STATUS_BADGES[status];
 
 const props = defineProps({
   isSinglePage: {

@@ -13,7 +13,7 @@ function _getEntries (pathPrefix, globRegex) {
       'common/storybook_utils.js',
       'common/v_html.js',
       'common/mixins/keyboard_list_navigation_tester.vue',
-      'components/plugins/*',
+      'components/Plugins/*',
     ],
     maxDepth: 4,
   }).reduce((entries, path) => {
@@ -23,7 +23,9 @@ function _getEntries (pathPrefix, globRegex) {
       .join('/')
       .replace(`${pathPrefix}/`, '')
       .replace(/\.(vue|js)/, '')
-      .replaceAll('_', '-');
+      .replaceAll('_', '-')
+      .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+      .toLowerCase();
 
     entries[`${pathPrefix}/${entryName}`] = path;
 
@@ -129,7 +131,7 @@ export default defineConfig({
         'common/storybook_utils.js',
         'common/v_html.js',
         'common/mixins/keyboard_list_navigation_tester.vue',
-        'components/plugins/*',
+        'components/Plugins/*',
         '.storybook/**',
         'storybook-static/**',
       ],

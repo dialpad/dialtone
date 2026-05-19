@@ -3,7 +3,7 @@ import {
   getOppositeMode,
   getRootContrast,
   findParentMode,
-} from '@/components/mode_island/utils';
+} from '@/components/ModeIsland/Utils';
 
 /**
  * Mixin that adds a `contentMode` prop and computes `modeAttrs` for binding

@@ -418,7 +418,7 @@ html body {
 
     :where(code, kbd) {
       background-color: var(--dt-color-background-default);
-      color: var(--dt-color-foreground-info);
+      color: var(--dt-color-foreground-info-strong);
       font: var(--dt-text-code-xs);
       font-size: 85%;
     }
@@ -552,7 +552,7 @@ code {
 
     :where(code, kbd) {
       background-color: var(--dt-color-background-default);
-      color: var(--dt-color-foreground-info);
+      color: var(--dt-color-foreground-info-strong);
       font: var(--dt-text-code-xs);
       font-size: 85%;
     }
@@ -586,7 +586,7 @@ code {
 :where(:is(.d-docsite--paragraph, .d-docsite--unordered-list, .d-docsite--ordered-list, .d-docsite--list-element, .d-docsite--preview-header) code) {
   font: var(--dt-text-code-sm);
   padding: var(--dt-spacing-25) var(--dt-spacing-50);
-  color: var(--dt-color-foreground-info);
+  color: var(--dt-color-foreground-info-strong);
   border-radius: var(--dt-size-radius-200);
   border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
   user-select: all;
@@ -606,7 +606,7 @@ code {
 }
 
 .d-docsite-code {
-  color: var(--dt-color-foreground-info) !important;
+  color: var(--dt-color-foreground-info-strong) !important;
   font-weight: var(--dt-font-weight-normal) !important;
   user-select: all;
 }
@@ -914,7 +914,6 @@ code {
     position: relative;
     overflow: hidden;
     text-align: center;
-    aspect-ratio: 340 / 250;
   }
 
   &__thumb {

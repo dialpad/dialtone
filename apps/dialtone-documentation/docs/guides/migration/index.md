@@ -32,14 +32,17 @@ Work through each applicable guide in order. Guides earlier in the list are prer
 | 9 | [Component Sizes to Numeric](./component-sizes/) | Deprecation | ESLint + `dialtone-migrate-tshirt-to-numeric` | `size="sm"` becomes `:size="200"` across all components. |
 | 10 | [Avatar Updates](./avatar-updates/) | **Yes** | Manual (grep) | `DtAvatar` size prop moves to numeric, `iconSize` removed, group avatar behavior changed. |
 | 11 | [Logical Naming](./logical-naming/) | Deprecation | `dialtone-migration-helper` | Slots, props, events: `left`/`right` becomes `start`/`end`. |
-| 12 | [Recipes to UI Kits](./recipes-to-ui-kits/) | **Yes** | Migration script | `DtRecipe*` components move to standalone `@dialpad/` UI Kit packages. |
+| 12 | [Removal of Dialtone Recipes](./recipes-to-ui-kits/) | **Yes** | Migration script | All `DtRecipe*` components have been removed. Use standalone `@dialpad/` UI Kit packages instead. |
 | 13 | [Component Props & Events](./component-props/) | **Yes** | `dialtone-migrate-props` | Value renames (including DtBox `surface`/`bc`, DtText `tone-strong`, DtButton `link-kind`), `show` becomes `open`, `hide-*` inversion, `title` becomes `header-text`, event/slot renames, `rootClass` removal. |
+| 14 | [DtChip interactive default](./chip-interactive/) | **Yes** | `dialtone-migrate-chip-interactive` | `interactive` prop default changed from `true` to `false`. Chips that need click/keyboard behavior must opt in with `:interactive="true"`. |
+| 15 | [Scrollbar :never → :always](./scrollbar-always/) | **Yes** | `dialtone-migrate-scrollbar-always` | `v-dt-scrollbar:never` renamed to `v-dt-scrollbar:always`; `DtBox` `scrollbar="never"` renamed to `scrollbar="always"`. |
+| 16 | [DtModal Native Dialog](./modal-native-dialog/) | No | — | `DtModal` now uses a native `<dialog>` element. Popovers and tooltips inside modals auto-append to the dialog. Only affects consumers targeting internal DOM structure. |
 
 ### Framework
 
 | # | Guide | Breaking? | Tool | Summary |
 | --- | --- | --- | --- | --- |
-| 14 | [Vue 2 Removal](./vue2-removal/) | **Yes** | — | Vue 2 support dropped. Last Vue 2 version: `9.154.0`. |
+| 15 | [Vue 2 Removal](./vue2-removal/) | **Yes** | — | Vue 2 support dropped. Last Vue 2 version: `9.154.0`. |
 
 ## Quick Start
 
@@ -86,7 +89,13 @@ npx dialtone-migration-helper --cwd ./src
 # 11. Component props, events, and slots
 npx dialtone-migrate-props --cwd ./src
 
-# 12. ESLint auto-fix pass
+# 12. DtChip interactive default (adds :interactive="true" to clickable chips)
+npx dialtone-migrate-chip-interactive --cwd ./src
+
+# 13. Scrollbar :never → :always
+npx dialtone-migrate-scrollbar-always --cwd ./src
+
+# 14. ESLint auto-fix pass
 npx eslint --fix "src/**/*.vue"
 ```
 

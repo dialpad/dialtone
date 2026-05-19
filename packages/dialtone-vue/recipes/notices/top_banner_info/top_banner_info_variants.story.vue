@@ -165,10 +165,10 @@
 
 <script>
 import DtRecipeTopBannerInfo from './top_banner_info.vue';
-import { DtButton } from '@/components/button';
-import { DtIcon } from '@/components/icon';
-import { DtStack } from '@/components/stack';
-import { DtText } from '@/components/text';
+import { DtButton } from '@/components/Button';
+import { DtIcon } from '@/components/Icon';
+import { DtStack } from '@/components/Stack';
+import { DtText } from '@/components/Text';
 
 export default {
   name: 'DtRecipeTopBannerInfoVariants',

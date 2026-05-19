@@ -20,10 +20,12 @@ writeDocs();
 
 await generateDebugTheme();
 
-// Generate layered token system
+// Generate layered token system (includes per-material override CSS files for
+// runtime setMaterial() switching — emitted via the same Style Dictionary
+// pipeline that builds high-contrast)
 console.log('\n=== Generating Layered Token System ===\n');
 const { buildLayeredTokens } = await import('./build-layered.js');
-await buildLayeredTokens(); // Generate layered CSS files
+await buildLayeredTokens();
 
 // Generate theme files (now uses layered system - REPLACES old system)
 await generateThemeFiles();

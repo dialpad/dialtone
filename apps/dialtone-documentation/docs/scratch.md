@@ -413,7 +413,7 @@ layout: Blank
   <dt-text kind="headline" size="md">Scrollbar integration</dt-text>
 
 ```vue demo
-<dt-box padding="200" surface="secondary" border-width="100" border-radius="200" scrollbar="never" max-block-size="300">
+<dt-box padding="200" surface="secondary" border-width="100" border-radius="200" scrollbar="always" max-block-size="300">
   <dt-stack gap="100">
     <div v-for="i in 20" :key="i">Scrollable item {{ i }}</div>
   </dt-stack>

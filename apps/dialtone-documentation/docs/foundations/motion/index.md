@@ -3,6 +3,8 @@ title: Motion Principles
 shortTitle: Motion
 description: Guidelines for marketing animation and motion design
 thumb: true
+download_url: https://drive.google.com/open?id=1a5tWzkaMcQ3JVKvjzfvlPLd-dITjeLIf&usp=drive_fs
+download_url_label: Motion Templates
 keywords: ["animation","transition","movement","easing", "ease", "video"]
 ---
 

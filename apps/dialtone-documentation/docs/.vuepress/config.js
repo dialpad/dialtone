@@ -1,12 +1,29 @@
 import { viteBundler } from '@vuepress/bundler-vite';
 import { defineUserConfig } from 'vuepress'
+import { llmsPlugin } from '@vuepress/plugin-llms';
 import viteSvgLoader from 'vite-svg-loader';
 import anchor from 'markdown-it-anchor';
 import { getDirname, path } from 'vuepress/utils'
+import { execSync } from 'node:child_process';
 
 const sidebar = require('../_data/site-nav.json');
 const { dialtoneVuepressTheme } = require('./theme');
 const baseURL = (process.env.VUEPRESS_BASE_URL ?? '/');
+
+function resolveBranchName () {
+  // GITHUB_HEAD_REF is set on pull_request events; GITHUB_REF_NAME on push events.
+  const fromCi = process.env.GITHUB_HEAD_REF || process.env.GITHUB_REF_NAME;
+  if (fromCi) return fromCi;
+  try {
+    return execSync('git symbolic-ref --short HEAD', { stdio: ['ignore', 'pipe', 'ignore'] })
+      .toString()
+      .trim();
+  } catch {
+    return '';
+  }
+}
+
+const branchName = resolveBranchName();
 
 const themeConfig = {
   logo: baseURL + 'assets/images/dialpad-logo.svg',
@@ -39,6 +56,7 @@ export default defineUserConfig({
     viteOptions: {
       define: {
         __DIALTONE_DEPLOY_PREVIEW__: JSON.stringify(baseURL.includes('deploy-previews')),
+        __DIALTONE_BRANCH_NAME__: JSON.stringify(branchName),
       },
       build: {
         sourcemap: true,
@@ -133,6 +151,47 @@ export default defineUserConfig({
     '@': path.resolve(__dirname, '../'),
     '@workspaceRoot': path.resolve(__dirname, '../../../../'),
   },
+
+  plugins: [
+    llmsPlugin({
+      domain: 'https://dialtone.dialpad.com',
+      llmsTxt: true,
+      llmsFullTxt: true,
+      llmsPageTxt: false,
+      filter: (page) => {
+        const p = page.path;
+
+        // Exclude changelogs and brand assets regardless of other rules
+        if (p.startsWith('/about/whats-new/')) return false;
+        if (p.startsWith('/design/brand/')) return false;
+        if (p.startsWith('/design/illustrations/')) return false;
+
+        // Homepage
+        if (p === '/') return true;
+
+        // All design foundations (colors, typography, space, elevation, motion, icons, size)
+        if (p.startsWith('/design/')) return true;
+
+        // Section indexes only — no deep component/utility/token pages
+        if (p === '/components/') return true;
+        if (p === '/utilities/') return true;
+        if (p === '/tokens/') return true;
+
+        // Key guides
+        if (p.startsWith('/guides/getting-started/')) return true;
+        if (p.startsWith('/guides/accessibility/')) return true;
+        if (p.startsWith('/guides/contributing/')) return true;
+        if (p.startsWith('/guides/mcp-server/')) return true;
+
+        return false;
+      },
+      llmsTxtTemplateGetter: {
+        title: 'Dialtone Design System',
+        description: 'Dialpad\'s design system — 58 Vue 3 components, 3,336 CSS utility classes, 6,019 design tokens, and documentation for building consistent UIs across Dialpad products.',
+        details: 'Site: https://dialtone.dialpad.com | Repository: https://github.com/dialpad/dialtone | MCP server available for AI-assisted development.',
+      },
+    }),
+  ],
 
   extendsPage: (page) => {
     const SITE_URL = 'https://dialtone.dialpad.com';

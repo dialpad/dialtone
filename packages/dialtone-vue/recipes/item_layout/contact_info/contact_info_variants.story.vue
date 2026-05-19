@@ -412,10 +412,10 @@
 
 <script>
 import DtRecipeContactInfo from './contact_info.vue';
-import { DtButton } from '@/components/button';
-import { DtIcon } from '@/components/icon';
-import { DtLink } from '@/components/link';
-import { DtStack } from '@/components/stack';
+import { DtButton } from '@/components/Button';
+import { DtIcon } from '@/components/Icon';
+import { DtLink } from '@/components/Link';
+import { DtStack } from '@/components/Stack';
 
 import avatar1 from '@/common/assets/avatar1.png?url';
 import avatar2 from '@/common/assets/avatar2.png?url';

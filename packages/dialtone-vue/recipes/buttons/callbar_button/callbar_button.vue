@@ -47,8 +47,8 @@
 
 <script>
 import { CALLBAR_BUTTON_VALID_WIDTH_SIZE } from './callbar_button_constants';
-import { DtButton } from '@/components/button';
-import { DtTooltip } from '@/components/tooltip';
+import { DtButton } from '@/components/Button';
+import { DtTooltip } from '@/components/Tooltip';
 import utils, { extractVueListeners, removeClassStyleAttrs } from '@/common/utils';
 
 export default {
