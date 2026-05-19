@@ -146,7 +146,15 @@ if (forceRegen) {
 // strictPort: false → if 5899 is taken (e.g. the preview server is running),
 // Vite picks the next free port instead of failing. We read the resolved port
 // below to construct URLs.
-const vite = await createServer({
+//
+// Wrap the lifecycle in try/catch/finally so an unexpected throw doesn't
+// leak the Vite server or Chromium process — leaked Chromiums accumulate
+// across pre-commit-hook runs otherwise.
+let vite;
+let browser;
+let exitCode = 0;
+try {
+vite = await createServer({
   root: HARNESS_ROOT,
   server: { port: HARNESS_PORT, strictPort: false, open: false },
   logLevel: 'warn',
@@ -155,7 +163,7 @@ await vite.listen();
 const resolvedPort = vite.httpServer.address().port;
 console.log(`[generate] harness on :${resolvedPort}${resolvedPort === HARNESS_PORT ? '' : ` (${HARNESS_PORT} was busy)`}…`);
 
-const browser = await chromium.launch({
+browser = await chromium.launch({
   executablePath: process.env.PLAYWRIGHT_CHROMIUM_PATH || undefined,
 });
 
@@ -267,8 +275,6 @@ for (const slug of staleSlugs) {
   }
 }
 
-await browser.close();
-await vite.close();
 writeManifest(manifest);
 
 console.log(`\n${'─'.repeat(60)}`);
@@ -280,4 +286,12 @@ console.log(`${'─'.repeat(60)}`);
 // Non-zero exit on capture errors so the pre-commit hook surfaces failures
 // instead of silently staging partial/stale PNGs. results.skip stays exit 0
 // — an empty render is an expected outcome for some slugs, not a failure.
-process.exit(results.error.length > 0 ? 1 : 0);
+exitCode = results.error.length > 0 ? 1 : 0;
+} catch (err) {
+  console.error('[generate] fatal:', err);
+  exitCode = 1;
+} finally {
+  if (browser) await browser.close().catch(() => {});
+  if (vite) await vite.close().catch(() => {});
+}
+process.exit(exitCode);
