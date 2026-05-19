@@ -201,6 +201,12 @@ describe('Validation Messages Tests', () => {
   });
 
   describe('Accessibility Tests', () => {
+    describe('When there are no messages', () => {
+      it('renders the live-region container', () => {
+        expect(wrapper.find('[data-qa="validation-messages-container"]').exists()).toBe(true);
+      });
+    });
+
     describe('When there is a validation message', () => {
       beforeEach(() => {
         mockProps = { validationMessages: MOCK_BASE_VALIDATION_MESSAGES };
@@ -208,14 +214,27 @@ describe('Validation Messages Tests', () => {
         updateWrapper();
       });
 
-      describe('When validation messages are shown', () => {
-        it('has a status role', () => {
-          expect(messages.at(0).attributes('role')).toBe('status');
-        });
+      it('has aria-live set to assertive on the container', () => {
+        expect(wrapper.find('[data-qa="validation-messages-container"]').attributes('aria-live')).toBe('assertive');
+      });
 
-        it('has aria-live set to polite', () => {
-          expect(messages.at(0).attributes('aria-live')).toBe('polite');
-        });
+      it('does not re-mount the live-region container when messages change', async () => {
+        const containerBefore = wrapper.find('[data-qa="validation-messages-container"]').element;
+
+        await wrapper.setProps({ validationMessages: [] });
+        await wrapper.setProps({ validationMessages: MOCK_BASE_VALIDATION_MESSAGES });
+
+        expect(wrapper.find('[data-qa="validation-messages-container"]').element).toBe(containerBefore);
+      });
+    });
+
+    describe('When id prop is provided', () => {
+      it('binds the id to the container', () => {
+        mockProps = { id: 'test-messages-id', validationMessages: MOCK_BASE_VALIDATION_MESSAGES };
+
+        updateWrapper();
+
+        expect(wrapper.find('[data-qa="validation-messages-container"]').attributes('id')).toBe('test-messages-id');
       });
     });
   });
