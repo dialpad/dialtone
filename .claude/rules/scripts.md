@@ -28,9 +28,9 @@ const __dirname = path.dirname(__filename);
 - Resolve paths relative to `__dirname`, then walk up: `join(__dirname, '../packages/dialtone-vue')`
 - Don't hardcode absolute paths or `process.cwd()`-relative paths — both break when invoked from different launchers (CI, NX, direct node)
 
-## Workspace Imports
+## Shared Helpers
 
-Scripts may import from other packages via the workspace alias:
+Scripts may import shared helpers via relative paths from `common/utils/`:
 
 ```javascript
 import { getValidFileList } from '../common/utils/server.mjs';

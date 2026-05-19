@@ -47,7 +47,9 @@ describe('DtComponentName Tests', () => {
 });
 ```
 
-`beforeEach` remounts fresh for each test. `afterEach` resets mock variables — do NOT call `wrapper?.unmount()`, the remount handles cleanup.
+`beforeEach` remounts fresh for each test. `afterEach` resets mock variables.
+
+Call `wrapper.unmount()` in `afterEach` when the component uses teleport/portal DOM (overlays like `DtTooltip`, `DtPopover`, `DtDropdown`, `DtModal`, `DtComboboxWithPopover`) — the teleported nodes live outside the wrapper and leak across tests if not torn down explicitly. For simple, non-teleporting components, the next `beforeEach` remount is enough and no `unmount()` is needed.
 
 ## Element Selection
 

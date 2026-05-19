@@ -14,14 +14,17 @@ Read `.claude/rules/general-rules.md`. These apply to every changed file regardl
 
 ### Step 2 — Detect scope
 
-Collect **both** staged and unstaged changed files:
+Collect staged, unstaged, **and untracked** changed files:
 
 ```bash
 git diff --cached --name-only
 git diff --name-only
+git ls-files --others --exclude-standard
 ```
 
-Deduplicate the union. If no local changes, diff against the base branch:
+Deduplicate the union. New files that exist on disk but have never been added to the index appear only in the third command — without it, brand-new files would be silently skipped.
+
+If no local changes, diff against the base branch:
 
 ```bash
 BASE=$(git rev-parse --abbrev-ref HEAD@{upstream} 2>/dev/null \

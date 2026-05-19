@@ -72,4 +72,4 @@ const DialtoneDocs = require('../../node_modules/@dialpad/dialtone-css/lib/dist/
 - Importing JSON via `import` instead of `require` — Volar's runtime expects CommonJS resolution for these data files
 - Duplicating documentation data here — always pull from the published JSON in the source package
 - Adding business logic to services that should live in `dialtone-query-core` — keep services thin, delegate search to the query core when overlap arises
-- Editing `vscode/` and `server/` in lockstep without bumping both `CHANGELOG.json` files — they ship independently
+- Editing `vscode/` and `server/` in lockstep without bumping both `CHANGELOG.md` files — they ship independently (semantic-release regenerates the sibling `CHANGELOG.json` automatically)
