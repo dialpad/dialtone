@@ -34,5 +34,5 @@ pnpm nx run dialtone-mcp-server:build
 
 ## Provides
 
-4 search tools: `search_components`, `search_utility_classes`, `search_tokens`, `search_icons`
-5 resources: utility-classes, tokens, components, icons, client-rules
+5 search tools: `search_components`, `search_utility_classes`, `search_tokens`, `search_icons`, `search_documentation`
+6 resources: utility-classes, tokens, components, icons, client-rules, documentation

@@ -82,3 +82,4 @@ SKILLS_TODO*.md
 *.deprecated
 .claude/scheduled_tasks.lock
 .omx/
+.worktrees/
