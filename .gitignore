@@ -83,3 +83,6 @@ SKILLS_TODO*.md
 .claude/scheduled_tasks.lock
 .omx/
 .worktrees/
+.claude/plans/
+docs/prd/
+docs/plans/
