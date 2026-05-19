@@ -104,9 +104,38 @@ export function searchDocumentation(
     const aIsNews = (a.result.details as DocumentationRecord).docId.startsWith('about/whats-new');
     const bIsNews = (b.result.details as DocumentationRecord).docId.startsWith('about/whats-new');
     if (aIsNews !== bIsNews) return aIsNews ? 1 : -1;
+    // A section whose docTitle is itself a query term ranks above all sections without a title match,
+    // regardless of matchCount. Prevents high-count incidental mentions (e.g. Modal docs mentioning
+    // "toast" as an alternative) from outranking the doc actually being asked about.
+    // Two-directional check: query term in title ("toast" → "Toast") OR title word in query term
+    // ("input" inside "dtinput") to handle Dt-prefixed component names like DtInput → Input.
+    const hasTitleMatch = (details: DocumentationRecord) => {
+      const titleLower = details.docTitle.toLowerCase();
+      return words.some(w => {
+        // Direct: query term equals the full docTitle ("toast" → "Toast")
+        if (w === titleLower) return true;
+        // Dt-prefix: Dialtone component names are prefixed with Dt in code but not in doc titles.
+        // "dtinput" → strip prefix → "input" matches "Input" title.
+        if (w.startsWith('dt') && w.length > 2 && w.slice(2) === titleLower) return true;
+        return false;
+      });
+    };
+    const aTitleMatch = hasTitleMatch(a.result.details as DocumentationRecord);
+    const bTitleMatch = hasTitleMatch(b.result.details as DocumentationRecord);
+    if (aTitleMatch !== bTitleMatch) return aTitleMatch ? -1 : 1;
     return b.matchCount - a.matchCount;
   });
-  const results = scored.map(s => s.result);
+  // Deduplicate by docId — keep only the highest-scoring section per document.
+  // The sort guarantees the best section per doc is first, so the first occurrence wins.
+  const seenDocIds = new Set<string>();
+  const results = scored
+    .map(s => s.result)
+    .filter(r => {
+      const docId = (r.details as DocumentationRecord).docId;
+      if (seenDocIds.has(docId)) return false;
+      seenDocIds.add(docId);
+      return true;
+    });
 
   const notes: string[] = [];
   if (truncated) notes.push(`Query truncated to ${MAX_QUERY_CHARS} characters.`);
