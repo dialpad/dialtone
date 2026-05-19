@@ -253,7 +253,9 @@ for (const slug of staleSlugs) {
     console.log(`✅  light + dark`);
     results.ok.push(slug);
   } else if (modeOk > 0) {
-    manifest[slug] = { inputHash: computeHash(slug, exportName) };
+    // Don't cache as up-to-date: a transient failure on one mode would
+    // otherwise persist until --force. Leave the slug stale so the next
+    // run retries both modes; the captured mode's PNG stays on disk.
     console.log(`⚠️   only ${modeOk}/${MODES.length} mode(s)`);
     results.ok.push(slug);
   } else if (firstError) {
