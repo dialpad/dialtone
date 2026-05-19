@@ -6,7 +6,7 @@
  *   - <Name>.vue source
  *   - packages/combinator/src/variants/variants_<snake>.js if present (V2.6 variant)
  *   - apps/dialtone-documentation/thumbs/<slug>.vue if present (V3 override)
- *   - harness/main.js + harness/component-defaults.js (changing defaults invalidates)
+ *   - harness/main.js + harness/App.vue (changing the renderer invalidates)
  *   - dialtone-tokens compiled CSS (token changes invalidate)
  */
 
@@ -21,7 +21,7 @@ const CACHE_PATH = resolve(__dir, '.cache.json');
 
 const HARNESS_FILES = [
   'harness/main.js',
-  'harness/component-defaults.js',
+  'harness/App.vue',
   'harness/index.html',
 ].map(p => resolve(__dir, p));
 const TOKENS_CSS = resolve(REPO_ROOT, 'packages/dialtone-tokens/dist/css/layered/tokens-dp-colors.css');
