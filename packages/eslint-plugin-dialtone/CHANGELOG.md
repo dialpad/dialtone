@@ -1,3 +1,10 @@
+# [1.13.0](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.12.0...eslint-plugin-dialtone/v1.13.0) (2026-05-19)
+
+
+### Features
+
+* **Eslint Plugin:** DLT-3281 add deprecated-class-props rule ([#1258](https://github.com/dialpad/dialtone/issues/1258)) ([3c5925e](https://github.com/dialpad/dialtone/commit/3c5925e38f340ddae01ebd59079b185a49f81304))
+
 # [1.12.0](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.11.2...eslint-plugin-dialtone/v1.12.0) (2026-04-17)
 
 
