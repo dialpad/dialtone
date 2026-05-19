@@ -12,10 +12,11 @@
   --presence-color-border-offline: var(--dt-presence-color-offline);
   --presence-color-background-active: var(--dt-presence-color-available);
   --presence-color-background-busy: var(--dt-presence-color-unavailable);
+  --presence-color-border-dnd: var(--dt-presence-color-unavailable);
   --presence-color-background-away: var(--dt-presence-color-busy);
   --presence-color-background-offline: var(--dt-color-surface-primary);
   --presence-border-radius: calc(var(--presence-size) * 0.208);
-  --presence-border-inner-width: calc(calc(var(--presence-size) - calc(var(--presence-size) * 0.556)) / 2);
+  --presence-border-inner-width: calc(calc(var(--presence-size) - calc(var(--presence-size) * 0.556)) / 2.5);
   --presence-size: var(--dt-spacing-150);
   --presence-icon-size: var(--dt-layout-100-percent);
   --presence-icon-color: var(--dt-color-foreground-primary-inverted);
@@ -40,7 +41,6 @@
     place-items: center;
 
     &--active {
-      --presence-icon-color: var(--dt-color-neutral-transparent);
       background-color: var(--presence-color-background-active);
     }
 
@@ -49,12 +49,19 @@
     }
 
     &--away {
-      --presence-icon-color: var(--dt-color-neutral-black);
       background-color: var(--presence-color-background-away);
     }
 
     &--offline {
       border-color: var(--presence-color-border-offline);
+      border-style: solid;
+      border-width: var(--presence-border-inner-width);
+    }
+
+    &--dnd {
+      --presence-icon-color: var(--presence-color-border-dnd);
+
+      border-color: var(--presence-color-border-dnd);
       border-style: solid;
       border-width: var(--presence-border-inner-width);
     }

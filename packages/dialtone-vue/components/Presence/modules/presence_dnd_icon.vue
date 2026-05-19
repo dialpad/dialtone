@@ -1,7 +1,7 @@
 <template>
   <svg
     class="d-presence__icon"
-    data-qa="dt-presence-busy-icon"
+    data-qa="dt-presence-dnd-icon"
     viewBox="0 0 12 12"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
@@ -13,6 +13,6 @@
 
 <script>
 export default {
-  name: 'DtPresenceBusyIcon',
+  name: 'DtPresenceDndIcon',
 };
 </script>
