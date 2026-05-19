@@ -75,13 +75,33 @@ export function searchDocumentation(
     return new RegExp(`\\b${escaped}\\b`, 'i');
   });
 
-  const scored: Array<{ result: SearchResult; matchCount: number }> = [];
+  // Determine whether a record's docTitle matches a query term.
+  // Extracted before the scoring loop so title-matching sections are included even when
+  // matchCount === 0 (e.g. searching "DtCombobox" when corpus sections say "Combobox").
+  // Two checks:
+  //   1. Direct:    query word === full docTitle  ("toast" → "Toast")
+  //   2. Dt-prefix: strip leading "dt" and compare ("dtinput" → "Input" title)
+  // Multi-word titles (e.g. "Select menu"): all title words must appear in query words.
+  const checkTitleMatch = (record: DocumentationRecord): boolean => {
+    const titleLower = record.docTitle.toLowerCase();
+    if (words.some(w => {
+      if (w === titleLower) return true;
+      if (w.startsWith('dt') && w.length > 2 && w.slice(2) === titleLower) return true;
+      return false;
+    })) return true;
+    // Multi-word title: every word in the title must appear in the query terms.
+    const titleWords = titleLower.split(/\s+/).filter(t => t.length >= 2);
+    return titleWords.length > 1 && titleWords.every(tw => words.includes(tw));
+  };
+
+  const scored: Array<{ result: SearchResult; matchCount: number; titleMatch: boolean }> = [];
 
   for (const record of data) {
     const fullBlob = [record.docTitle, ...record.headingPath, record.frontmatter.description ?? '', record.content].join(' ');
-
     const matchCount = regexes.filter(r => r.test(fullBlob)).length;
-    if (matchCount === 0) continue;
+    const titleMatch = checkTitleMatch(record);
+    // Include if content matched OR the document is specifically named in the query.
+    if (matchCount === 0 && !titleMatch) continue;
 
     const headingLabel = record.headingPath.length > 0
       ? ` > ${record.headingPath.join(' > ')}`
@@ -95,35 +115,26 @@ export function searchDocumentation(
         metadata: null,
       },
       matchCount,
+      titleMatch,
     });
   }
 
-  // Sort: non-whats-new results first (by match count), whats-new buried last (by match count).
-  // Whats-new posts surface only when no other content matched.
+  // Sort priority (highest to lowest):
+  //   1. Non-whats-new before whats-new (burial)
+  //   2. Title match before non-title-match (named component beats incidental mention)
+  //   3. Match count descending (more query terms matched = more relevant)
+  //   4. Sections with headings before intro stubs (non-empty headingPath wins ties)
   scored.sort((a, b) => {
     const aIsNews = (a.result.details as DocumentationRecord).docId.startsWith('about/whats-new');
     const bIsNews = (b.result.details as DocumentationRecord).docId.startsWith('about/whats-new');
     if (aIsNews !== bIsNews) return aIsNews ? 1 : -1;
-    // A section whose docTitle is itself a query term ranks above all sections without a title match,
-    // regardless of matchCount. Prevents high-count incidental mentions (e.g. Modal docs mentioning
-    // "toast" as an alternative) from outranking the doc actually being asked about.
-    // Two-directional check: query term in title ("toast" → "Toast") OR title word in query term
-    // ("input" inside "dtinput") to handle Dt-prefixed component names like DtInput → Input.
-    const hasTitleMatch = (details: DocumentationRecord) => {
-      const titleLower = details.docTitle.toLowerCase();
-      return words.some(w => {
-        // Direct: query term equals the full docTitle ("toast" → "Toast")
-        if (w === titleLower) return true;
-        // Dt-prefix: Dialtone component names are prefixed with Dt in code but not in doc titles.
-        // "dtinput" → strip prefix → "input" matches "Input" title.
-        if (w.startsWith('dt') && w.length > 2 && w.slice(2) === titleLower) return true;
-        return false;
-      });
-    };
-    const aTitleMatch = hasTitleMatch(a.result.details as DocumentationRecord);
-    const bTitleMatch = hasTitleMatch(b.result.details as DocumentationRecord);
-    if (aTitleMatch !== bTitleMatch) return aTitleMatch ? -1 : 1;
-    return b.matchCount - a.matchCount;
+    if (a.titleMatch !== b.titleMatch) return a.titleMatch ? -1 : 1;
+    if (b.matchCount !== a.matchCount) return b.matchCount - a.matchCount;
+    // Prefer sections with actual headings over intro stubs (headingPath: [])
+    const aIsIntro = (a.result.details as DocumentationRecord).headingPath.length === 0;
+    const bIsIntro = (b.result.details as DocumentationRecord).headingPath.length === 0;
+    if (aIsIntro !== bIsIntro) return aIsIntro ? 1 : -1;
+    return 0;
   });
   // Deduplicate by docId — keep only the highest-scoring section per document.
   // The sort guarantees the best section per doc is first, so the first occurrence wins.

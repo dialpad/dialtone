@@ -29,7 +29,10 @@ function slugify(text) {
 
 function extractTitle(frontmatter, body) {
   if (frontmatter.title) return String(frontmatter.title);
-  const match = body.match(/^#\s+(.+)$/m);
+  // Strip fenced code blocks before searching for H1 — a shell comment inside a
+  // code block (e.g. `# some-flag`) must not be mistaken for a page heading.
+  const bodyWithoutCode = body.replace(/^ {0,3}(?:`{3,}|~{3,}).*\n[\s\S]*?^ {0,3}(?:`{3,}|~{3,})[^\n]*/gm, '');
+  const match = bodyWithoutCode.match(/^#\s+(.+)$/m);
   if (!match) return null;
   return match[1]
     .replace(/`([^`]+)`/g, '$1')
@@ -177,9 +180,13 @@ export function buildRecords(absolutePath) {
     }];
   }
 
+  const usedSlugs = new Map();
   return sections.map(({ headingPath, raw }) => {
     const content = stripMarkdown(raw, { stripFrontmatter: false });
-    const slug = headingPath.length > 0 ? slugify(headingPath.join('-')) : 'intro';
+    const baseSlug = headingPath.length > 0 ? slugify(headingPath.join('-')) : 'intro';
+    const count = usedSlugs.get(baseSlug) ?? 0;
+    usedSlugs.set(baseSlug, count + 1);
+    const slug = count === 0 ? baseSlug : `${baseSlug}-${count}`;
     const id = `${docId}#${slug}`;
     return {
       id,
