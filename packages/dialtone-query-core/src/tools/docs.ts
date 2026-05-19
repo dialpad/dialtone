@@ -41,6 +41,32 @@ const STOP_WORDS = new Set([
   's', 't',
 ]);
 
+// Suffix rules ordered longest-first so "ation" is tried before "ion", "ion" before "ed", etc.
+// Each entry is [suffix, minimumStemLength]. The minimum prevents over-stemming short words
+// (e.g. "danger" → "dang" is rejected because 4 < 5 for the -er rule).
+const STEM_RULES: [string, number][] = [
+  ['ation', 4], ['ing', 4], ['ion', 4], ['ment', 4],
+  ['ness', 4], ['ed', 4], ['er', 5], ['es', 4], ['ly', 4], ['e', 4], ['s', 5],
+];
+
+/**
+ * Reduce a query term to its morphological stem using a lightweight suffix-stripping pass.
+ * Both the query term and the corpus word will independently produce the same stem, letting
+ * prefix-matching `\bstem\w*` catch all inflected forms without hardcoding word pairs.
+ *
+ * Examples: migrate → migrat, migration → migrat, loading → load, disabled → disabl
+ */
+function stemTerm(word: string): string {
+  if (word.length < 5) return word;
+  for (const [suffix, minStem] of STEM_RULES) {
+    if (word.endsWith(suffix)) {
+      const stem = word.slice(0, word.length - suffix.length);
+      if (stem.length >= minStem) return stem;
+    }
+  }
+  return word;
+}
+
 /**
  * Search documentation sections using OR-logic word-boundary regex matching.
  * Each query term independently scores sections; results ranked by match count descending.
@@ -72,7 +98,16 @@ export function searchDocumentation(
 
   const regexes = words.map(w => {
     const escaped = w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-    return new RegExp(`\\b${escaped}\\b`, 'i');
+    const stem = stemTerm(escaped);
+    // Use prefix matching (\bstem\w*) when the stem is ≥ 4 chars — this catches inflected
+    // forms without needing a separate rule per suffix:
+    //   migrate/migration/migrating → stem "migrat"   → \bmigrat\w*
+    //   disable/disabled/disabling  → stem "disabl"   → \bdisabl\w*
+    //   load/loading/loaded         → stem "load"     → \bload\w*
+    //   tooltip/tooltips            → stem "tooltip"  → \btooltip\w*
+    // Exact matching for very short stems (< 4 chars) to prevent noise (e.g. "ui" → \bui\b).
+    const pattern = stem.length >= 4 ? `\\b${stem}\\w*` : `\\b${escaped}\\b`;
+    return new RegExp(pattern, 'i');
   });
 
   // Determine whether a record's docTitle matches a query term.
