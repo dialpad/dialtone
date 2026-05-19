@@ -388,6 +388,71 @@ describe('DtPopover Tests', () => {
     });
   });
 
+  describe('appendTo behavior', () => {
+    describe('when anchor is inside a <dialog> element and appendTo is "body"', () => {
+      it('should append the popover to the dialog element, not body', async () => {
+        const dialogEl = document.createElement('dialog');
+        document.body.appendChild(dialogEl);
+
+        const localWrapper = mount(DtPopover, {
+          props: { ...baseProps, open: null },
+          slots: { ...baseSlots },
+          global: { stubs: { transition: false } },
+          attachTo: dialogEl,
+        });
+
+        const btn = localWrapper.find('[data-qa="dt-button"]');
+        await btn.trigger('click');
+
+        expect(localWrapper.vm.tip.popper.parentElement).toBe(dialogEl);
+
+        localWrapper.unmount();
+        document.body.removeChild(dialogEl);
+      });
+    });
+
+    describe('when anchor is NOT inside a <dialog> element and appendTo is "body"', () => {
+      it('should append the popover to document.body', async () => {
+        const localWrapper = mount(DtPopover, {
+          props: { ...baseProps, open: null },
+          slots: { ...baseSlots },
+          global: { stubs: { transition: false } },
+          attachTo: document.body,
+        });
+
+        const btn = localWrapper.find('[data-qa="dt-button"]');
+        await btn.trigger('click');
+
+        expect(localWrapper.vm.tip.popper.parentElement).toBe(document.body);
+
+        localWrapper.unmount();
+      });
+    });
+
+    describe('when anchor is inside a <dialog> but appendTo is explicitly set', () => {
+      it('should use the explicit appendTo target, bypassing dialog detection', async () => {
+        const dialogEl = document.createElement('dialog');
+        document.body.appendChild(dialogEl);
+
+        const localWrapper = mount(DtPopover, {
+          props: { ...baseProps, open: null, appendTo: 'parent' },
+          slots: { ...baseSlots },
+          global: { stubs: { transition: false } },
+          attachTo: dialogEl,
+        });
+
+        const btn = localWrapper.find('[data-qa="dt-button"]');
+        await btn.trigger('click');
+
+        // 'parent' means the popover container element, not the dialog
+        expect(localWrapper.vm.tip.popper.parentElement).not.toBe(dialogEl);
+
+        localWrapper.unmount();
+        document.body.removeChild(dialogEl);
+      });
+    });
+  });
+
   describe('When anchor slot content changes', () => {
     it('should attach the tippy instance to the new DOM node', async () => {
       const component = {

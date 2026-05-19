@@ -102,6 +102,28 @@ export const argTypesData = {
     },
   },
 
+  dialogClass: {
+    description: 'Inner dialog class',
+  },
+  backgroundImage: {
+    control: { type: 'text' },
+  },
+  backgroundSize: {
+    control: { type: 'text' },
+  },
+  iconClass: {
+    description: 'Additional class name for the icon wrapper element.',
+  },
+  headerClass: {
+    description: 'Additional class name for the header wrapper element.',
+  },
+  contentClass: {
+    description: 'Additional class name for the content wrapper element.',
+  },
+  actionClass: {
+    description: 'Additional class name for the action wrapper element.',
+  },
+
   // Action Event Handlers
   onClick: {
     table: {

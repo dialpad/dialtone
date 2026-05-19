@@ -37,7 +37,6 @@ import { DtSkeleton } from '@/components/Skeleton';
  * @see https://dialtone.dialpad.com/components/emoji.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtEmoji',
 
   components: {

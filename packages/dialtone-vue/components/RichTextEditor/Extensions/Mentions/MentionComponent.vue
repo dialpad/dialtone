@@ -22,7 +22,6 @@ import { nodeViewProps, NodeViewWrapper } from '@tiptap/vue-3';
 import { DtLink } from '@/components/Link';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'MentionComponent',
   components: {
     NodeViewWrapper,

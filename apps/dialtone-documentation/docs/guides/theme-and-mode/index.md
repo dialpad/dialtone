@@ -1,21 +1,14 @@
 ---
 title: Theme and Mode
-description: Dialtone's system to customize appearance and support light/dark modes.
+description: Dialtone system to customize appearance and support light/dark modes.
 keywords: ["dark mode", "light mode"]
 ---
 
 ## Overview
 
-Dialtone provides a flexible theming system that allows you to:
+Dialtone has four theming tiers (mode, brand, material, and contrast) overlaid on a core token bundle that loads once.
 
-- **Switch between light and dark modes** for user preference
-- **Apply different brand themes**
-- **Enable high contrast mode** for accessibility
-- **Support Shadow DOM** for web components and micro-frontends
-
-The system uses a layered architecture that loads core tokens once and applies theme-specific overrides, resulting in better performance and a tighter bundle size compared to legacy approaches.
-
-## Quick Start
+### Quick Start
 
 Install the required packages:
 
@@ -26,33 +19,68 @@ npm install @dialpad/dialtone
 Initialize theming in your main.js or App.vue:
 
 ```js
-import { initDialtoneTheme } from '@dialpad/dialtone-tokens/themes/config';
-import Dp from '@dialpad/dialtone-tokens/themes/dp';
+import { initDialtoneTheme } from '@dialpad/dialtone/themes/config';
+import Dp from '@dialpad/dialtone/themes/dp';
 
 initDialtoneTheme(Dp, 'light');
 ```
 
 Done. Your app now has theming with light mode and the Dialpad base theme.
 
-## Understanding Themes vs Modes
+## Understanding the Theming System
 
-**Mode** controls the light/dark appearance of your interface:
+### 1. Mode
+
+Controls the light/dark appearance of your interface:
 
 - `light` - Standard light background with dark text
 - `dark` - Dark background with light text
 
-**Theme** (brand) controls the color palette and brand identity:
+### 2. Brand
+
+Controls the color palette and identity layer applied on top of the base tokens:
 
 - Base themes: `dp` (Dialpad), `tmo` (T-Mobile)
 - Named themes: `aegean`, `botany`, `buttercream`, `melon`, `plum`, etc.
 - Accessibility themes: `prota-deuter`, `trita`
 - Experimental themes: `101` through `137`
 
-**Contrast** provides additional accessibility support:
+### 3. Material
 
-- `high-contrast` - Enhanced contrast ratios for WCAG AAA compliance
+Retints the neutral (`--dt-color-black-*`) ramp. Choices are `sandstone` (default), `steel`, `graphite`, `iron`, `amethyst`, and `jade`. Brands can lock to a specific material via the `shell.base.material` token in their token JSON; brands that omit the field are free-choice. Free-choice brands today: `dp`, `tmo`, `prota-deuter`, `trita`.
 
-[See all themes visually →](/foundations/colors/themes/)
+### 4. Contrast
+
+- `high-contrast` - Enhanced contrast between foreground and background colors, introduce borders selectively, along with stronger border contrast.
+
+<!-- [See all themes visually →](/foundations/colors/themes/) -->
+
+## API at a glance
+
+All functions live at `@dialpad/dialtone/themes/config`. Theme modules live at `@dialpad/dialtone/themes/<name>`.
+
+| Function | Purpose | Reset signal |
+| --- | --- | --- |
+| `initDialtoneTheme(brand, mode?, rootNode?)` | One-time setup. Loads core tokens and applies an initial brand and mode. | — |
+| `setMode(mode, rootNode?)` | Switch between `'light'` and `'dark'`. | — |
+| `setBrand(brandTheme, rootNode?)` | Apply a brand. Auto-applies the brand's locked material if declared. | — |
+| `setContrast(contrastTheme \| null, rootNode?)` | Apply or remove a contrast layer. | `null` |
+| `setMaterial(name \| null, rootNode?)` | Apply or remove a material override. Accepts a string material name. | `null` |
+| `getBrandMaterial(brandTheme)` | Returns the brand's locked material name, or `null` for free-choice brands. | — |
+| `hasBrandMaterialLock(brandTheme)` | Boolean form of `getBrandMaterial` for picker logic. | — |
+| `resetTheme(rootNode?)` | Remove all theme styles and attributes. Allows re-`init`. | — |
+| `setTheme(theme, rootNode?, contrast?)` | Legacy single-call API. New code should use the layered functions above. | — |
+
+`rootNode` defaults to `document.documentElement`. In Web Components, pass the host element instead — see [Web Components and Shadow DOM](#web-components-and-shadow-dom).
+
+The active state is reflected on the root element as data attributes:
+
+| Attribute | Values |
+| --- | --- |
+| `data-dt-mode` | `light`, `dark` |
+| `data-dt-brand` | `dp`, `tmo`, `melon`, `botany`, … (any [available brand](#available-themes)) |
+| `data-dt-material` | `sandstone`, `steel`, `graphite`, `iron`, `amethyst`, `jade` |
+| `data-dt-contrast` | `default`, `high` |
 
 ## Basic Usage
 
@@ -65,30 +93,44 @@ setMode('dark');  // Switch to dark mode
 setMode('light'); // Switch to light mode
 ```
 
-### Switch Themes Dynamically
+### Switch Brand
 
 ```js
-import { setBrand } from '@dialpad/dialtone-tokens/themes/config';
-import Melon from '@dialpad/dialtone-tokens/themes/melon';
-import Tmo from '@dialpad/dialtone-tokens/themes/tmo';
+import { setBrand } from '@dialpad/dialtone/themes/config';
+import Melon from '@dialpad/dialtone/themes/melon';
+import Tmo from '@dialpad/dialtone/themes/tmo';
 
-setBrand(Melon); // Switch to Melon theme
-setBrand(Tmo);   // Switch to T-Mobile theme
+setBrand(Melon);
+setBrand(Tmo);
 ```
 
 ### Enable High Contrast
 
 ```js
-import { setContrast } from '@dialpad/dialtone-tokens/themes/config';
-import HighContrast from '@dialpad/dialtone-tokens/themes/high-contrast';
+import { setContrast } from '@dialpad/dialtone/themes/config';
+import HighContrast from '@dialpad/dialtone/themes/high-contrast';
 
 setContrast(HighContrast); // Enable high contrast
 setContrast(null);          // Disable high contrast
 ```
 
+### Switch Material
+
+```js
+import { setMaterial } from '@dialpad/dialtone/themes/config';
+
+setMaterial('steel'); // Apply the steel material
+setMaterial(null);    // Reset to sandstone (the default)
+```
+
+`setMaterial` toggles the `data-dt-material` attribute on the root, which selects the matching material override CSS already loaded in the bundle. It doesn't touch brand or mode. Pass any of the five non-default material names (`steel`, `graphite`, `iron`, `amethyst`, `jade`); pass `null` or `'sandstone'` to clear the override.
+
+> [!INFO] Material is root-level by design
+> Material applies at the document root only — there's no per-subtree override. Material is paired to brand for visual coherence (see [Brand-locked materials](#brand-locked-materials)), and mixing materials within a page would break that pairing. Mode (light/dark) is the only theming dimension with per-subtree override (via DtModeIsland and `v-dt-mode`).
+
 ## Available Themes
 
-Dialtone provides 51+ themes. Import any theme from `@dialpad/dialtone-tokens/themes/{theme-name}`:
+Dialtone provides 51+ themes. Import any theme from `@dialpad/dialtone/themes/{theme-name}`:
 
 **Standard themes:**
 
@@ -109,19 +151,62 @@ Dialtone provides 51+ themes. Import any theme from `@dialpad/dialtone-tokens/th
 
 - `high-contrast` - Enhanced contrast for accessibility
 
-**Import pattern:**
+**Materials:**
+
+- `sandstone` - Default warm-yellow neutral ramp (baked into base CSS — clearing the material returns here)
+- `steel`, `graphite`, `iron`, `amethyst`, `jade` - Override ramps. All ship pre-bundled in the layered CSS; `setMaterial(name)` toggles the active one via `data-dt-material`.
+
+Materials are passed to `setMaterial` by string name — there are no per-material modules to import.
+
+Most brands declare a locked material in their token JSON. Switching to a locked brand auto-applies its material; the [Material picker in the navbar](#brand-locked-materials) disables on those brands. Free-choice brands (`dp`, `tmo`, `prota-deuter`, `trita`) keep the picker enabled.
+
+**Brand import pattern:**
 
 ```js
-import ThemeName from '@dialpad/dialtone-tokens/themes/{theme-name}';
+import ThemeName from '@dialpad/dialtone/themes/{theme-name}';
 // Examples:
-import Dp from '@dialpad/dialtone-tokens/themes/dp';
-import Melon from '@dialpad/dialtone-tokens/themes/melon';
-import ProtaDeuter from '@dialpad/dialtone-tokens/themes/prota-deuter';
+import Dp from '@dialpad/dialtone/themes/dp';
+import Melon from '@dialpad/dialtone/themes/melon';
+import ProtaDeuter from '@dialpad/dialtone/themes/prota-deuter';
 ```
 
-[Browse all themes with visual examples →](/foundations/colors/themes/)
+<!-- [Browse all themes with visual examples →](/foundations/colors/themes/) -->
 
 ## Advanced Usage
+
+### Brand-locked materials
+
+Brands can declare a locked material via the `shell.base.material` token in their token JSON. Switching to a locked brand auto-applies the matching material — no separate `setMaterial` call needed. Two getters help you build a picker UI around this:
+
+```js
+import { getBrandMaterial, hasBrandMaterialLock } from '@dialpad/dialtone/themes/config';
+import Botany from '@dialpad/dialtone/themes/botany';
+import Dp from '@dialpad/dialtone/themes/dp';
+
+getBrandMaterial(Botany);     // 'sandstone'
+getBrandMaterial(Dp);         // null (free-choice)
+
+hasBrandMaterialLock(Botany); // true
+hasBrandMaterialLock(Dp);     // false
+```
+
+Disable material options in your picker when `hasBrandMaterialLock(activeBrandTheme)` returns true.
+
+**Side effect on `setBrand`:** for a locked brand, `setBrand` auto-applies the matching material (toggling `data-dt-material` alongside `data-dt-brand` in the same paint frame):
+
+```js
+import { setBrand } from '@dialpad/dialtone/themes/config';
+import Botany from '@dialpad/dialtone/themes/botany';
+
+setBrand(Botany); // brand → botany; material → sandstone (botany's lock)
+```
+
+If a brand declares an unknown material name (typo in token JSON, removed material), `setBrand` falls back to sandstone and logs a `console.warn` so the issue surfaces in development without breaking paint.
+
+> [!WARNING] Set brand first, then material
+> Calling `setMaterial` and then `setBrand` for a locked brand discards your manual choice. `setBrand`'s side effect runs last and applies the brand's lock. If you need to override for a free-choice brand, call `setBrand` first, then `setMaterial`.
+
+`setMaterial` itself is not lock-aware: it applies what you pass regardless of the active brand. The picker UI enforces the lock (via `hasBrandMaterialLock`); the runtime API does not. Direct overrides still work, which is useful for catalog previews.
 
 ### Web Components and Shadow DOM
 
@@ -161,7 +246,11 @@ class MyElement extends HTMLElement {
 
 ### CSS-Only Approach (No JavaScript)
 
-For environments where JavaScript module imports aren't available, use CSS imports:
+For environments where JavaScript module imports aren't available, use CSS imports. The `layered/` CSS files are only published from `@dialpad/dialtone-tokens`, so add it as a direct dependency for this path:
+
+```shell
+npm install @dialpad/dialtone-tokens
+```
 
 ```css
 @import "@dialpad/dialtone-tokens/layered/tokens-core.css";
@@ -209,66 +298,38 @@ initDialtoneTheme(Dp, 'dark', myContainer);
 
 Each app bundle manages exactly ONE rootNode. State is isolated by bundle boundaries, not by tracking within a single instance.
 
-## Migrating from Legacy System
+### Resetting (tests, teardown)
 
-> [!INFO] Full migration guide
-> See the dedicated [Theme to Mode migration guide](/guides/migration/theme-to-mode/) for step-by-step instructions, automated tooling, and a manual-review checklist.
-
-### What's the Difference?
-
-**Legacy system:**
-
-- Complete token files per theme (~1256KB each)
-- Imports like `DpLight`, `DpDark`, `TmoLight`, `TmoDark`
-- Single function: `setTheme(DpLight)`
-
-**Layered system (current):**
-
-- Core tokens loaded once, brand overrides applied
-- Smaller bundle sizes, better performance
-- Separate functions: `initDialtoneTheme()`, `setMode()`, `setBrand()`
-
-### Migration Example
-
-**Before (legacy):**
+Use `resetTheme()` to remove all theme styles and attributes from a root node. After reset, `initDialtoneTheme()` can run again on the same node.
 
 ```js
+import { resetTheme } from '@dialpad/dialtone/themes/config';
+
+// Test cleanup
+afterEach(() => resetTheme());
+
+// Web Component teardown
+disconnectedCallback() {
+  resetTheme(this);
+}
+```
+
+## Migrating from Legacy `setTheme`
+
+The legacy `setTheme()` API ships complete per-theme bundles (e.g. `DpLight`, `DpDark`, `TmoLight`). It still works and stays supported; new code should use the layered API instead, which loads core tokens once and overlays smaller per-dimension overrides.
+
+```js
+// Legacy
 import { setTheme } from '@dialpad/dialtone/themes/config';
 import DpLight from '@dialpad/dialtone/themes/dp-light';
-import DpDark from '@dialpad/dialtone/themes/dp-dark';
-
 setTheme(DpLight);
-// Later:
-setTheme(DpDark);
-```
 
-**After (layered):**
-
-```js
-import { initDialtoneTheme, setMode } from '@dialpad/dialtone-tokens/themes/config';
-import Dp from '@dialpad/dialtone-tokens/themes/dp';
-
+// Layered (preferred)
+import { initDialtoneTheme, setMode } from '@dialpad/dialtone/themes/config';
+import Dp from '@dialpad/dialtone/themes/dp';
 initDialtoneTheme(Dp, 'light');
-// Later:
 setMode('dark');
 ```
-
-### Should You Migrate?
-
-**Migrate if:**
-
-- Building a new project
-- Need better performance
-- Want smaller bundle sizes
-- Plan to offer multiple theme choices
-
-**Stay on legacy if:**
-
-- Existing project working fine
-- Migration effort not justified
-- Only need simple light/dark switching
-
-**Note:** Both systems are fully supported and work identically with Shadow DOM.
 
 ## Troubleshooting
 
@@ -330,19 +391,17 @@ setMode('Light');  // Wrong capitalization
 setMode(true);     // Wrong type
 ```
 
-### Performance Issues with Frequent Switching
+### Why is the Material picker disabled when I switch brands?
 
-**Problem:** Theme switching feels slow or causes layout shifts.
+**Problem:** Material options are unselectable after switching to a non-`dp`/non-`tmo` brand.
 
-**Solution:** The system optimizes by skipping DOM updates when content unchanged. If switching feels slow:
+**Solution:** The brand declares a locked material in its token JSON, and the picker reflects that. To re-enable manual selection, switch back to `dp`, `tmo`, `prota-deuter`, or `trita` (the free-choice brands).
 
-1. Ensure you're using the layered system (not legacy)
-2. Only switch what changed (use `setMode()` instead of re-initializing)
-3. Consider debouncing rapid theme switches in your UI
+**Why:** Most brands declare a `shell.base.material` token that pairs the brand with a hue-aligned material. `setBrand` auto-applies the locked material, and `hasBrandMaterialLock` returns `true` so the picker disables. See [Brand-locked materials](#brand-locked-materials) for the full API.
 
 ## Complete Example
 
-Vue 3 app with theme switching:
+Vue 3 app with mode, brand, material, and contrast pickers. The Material picker disables when the active brand declares a lock.
 
 ```vue
 <template>
@@ -351,52 +410,79 @@ Vue 3 app with theme switching:
       Switch to {{ isDark ? 'Light' : 'Dark' }} Mode
     </dt-button>
     <dt-select-menu
-      label="Brand Theme"
-      :options="themeOptions"
-      @change="changeTheme"
+      v-model="currentBrand"
+      label="Brand"
+      :options="brandOptions"
+    />
+    <dt-select-menu
+      v-model="userMaterial"
+      :model-value="displayedMaterial"
+      label="Material"
+      :options="materialOptions"
+      :disabled="isMaterialLocked"
     />
     <dt-checkbox
       v-model="highContrast"
       label="High Contrast"
-      @input="toggleContrast"
     />
   </dt-stack>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 import { DtButton, DtSelectMenu, DtCheckbox, DtStack } from '@dialpad/dialtone-vue';
-import { initDialtoneTheme, setMode, setBrand, setContrast } from '@dialpad/dialtone-tokens/themes/config';
-import Dp from '@dialpad/dialtone-tokens/themes/dp';
-import Melon from '@dialpad/dialtone-tokens/themes/melon'; // example theme
-import Tmo from '@dialpad/dialtone-tokens/themes/tmo';
-import HighContrast from '@dialpad/dialtone-tokens/themes/high-contrast';
+import {
+  initDialtoneTheme,
+  setMode,
+  setBrand,
+  setContrast,
+  setMaterial,
+  getBrandMaterial,
+  hasBrandMaterialLock,
+} from '@dialpad/dialtone/themes/config';
+import Dp from '@dialpad/dialtone/themes/dp';
+import Melon from '@dialpad/dialtone/themes/melon'; // locked to iron
+import Tmo from '@dialpad/dialtone/themes/tmo';
+import HighContrast from '@dialpad/dialtone/themes/high-contrast';
 
 const isDark = ref(false);
 const highContrast = ref(false);
-const themes = { dp: Dp, melon: Melon, tmo: Tmo };
-const themeOptions = [
+const currentBrand = ref('dp');
+const userMaterial = ref('sandstone');
+
+const brands = { dp: Dp, melon: Melon, tmo: Tmo };
+const brandOptions = [
   { value: 'dp', label: 'Dialpad' },
-  { value: 'melon', label: 'Melon' },
-  { value: 'tmo', label: 'T-Mobile' }
+  { value: 'melon', label: 'Melon (locked → iron)' },
+  { value: 'tmo', label: 'T-Mobile' },
 ];
 
-onMounted(() => {
-  initDialtoneTheme(Dp, 'light');
-});
+const materialOptions = [
+  { value: 'sandstone', label: 'Sandstone' },
+  { value: 'steel', label: 'Steel' },
+  { value: 'graphite', label: 'Graphite' },
+  { value: 'iron', label: 'Iron' },
+  { value: 'amethyst', label: 'Amethyst' },
+  { value: 'jade', label: 'Jade' },
+];
+
+const activeBrandTheme = computed(() => brands[currentBrand.value]);
+const lockedMaterial = computed(() => getBrandMaterial(activeBrandTheme.value));
+const isMaterialLocked = computed(() => hasBrandMaterialLock(activeBrandTheme.value));
+const displayedMaterial = computed(() => lockedMaterial.value ?? userMaterial.value);
+
+onMounted(() => initDialtoneTheme(Dp, 'light'));
 
 function toggleMode() {
   isDark.value = !isDark.value;
   setMode(isDark.value ? 'dark' : 'light');
 }
 
-function changeTheme(value) {
-  setBrand(themes[value]);
-}
-
-function toggleContrast() {
-  setContrast(highContrast.value ? HighContrast : null);
-}
+watch(currentBrand, (name) => setBrand(brands[name])); // auto-applies any locked material
+watch(userMaterial, (name) => {
+  if (!isMaterialLocked.value) setMaterial(name === 'sandstone' ? null : name);
+});
+watch(highContrast, (on) => setContrast(on ? HighContrast : null));
 </script>
 ```
 

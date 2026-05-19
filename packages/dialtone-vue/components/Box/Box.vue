@@ -85,42 +85,42 @@ const props = defineProps({
   borderWidth: { type: String, default: undefined, validator: borderWidthValidator },
 
   /**
-   * Border width on the block axis (top/bottom in horizontal writing mode).
+   * Border width on the block axis (aka top/bottom).
    * Overrides `borderWidth` for block sides.
    * @values 0, 50, 100, 150, 200, 300, 400
    */
   borderWidthBlock: { type: String, default: undefined, validator: borderWidthValidator },
 
   /**
-   * Border width on the block-end side.
+   * Border width on the block-end side (aka bottom).
    * Overrides `borderWidthBlock` and `borderWidth` for block-end.
    * @values 0, 50, 100, 150, 200, 300, 400
    */
   borderWidthBlockEnd: { type: String, default: undefined, validator: borderWidthValidator },
 
   /**
-   * Border width on the block-start side.
+   * Border width on the block-start side (aka top).
    * Overrides `borderWidthBlock` and `borderWidth` for block-start.
    * @values 0, 50, 100, 150, 200, 300, 400
    */
   borderWidthBlockStart: { type: String, default: undefined, validator: borderWidthValidator },
 
   /**
-   * Border width on the inline axis (left/right in LTR).
+   * Border width on the inline axis (aka left/right).
    * Overrides `borderWidth` for inline sides.
    * @values 0, 50, 100, 150, 200, 300, 400
    */
   borderWidthInline: { type: String, default: undefined, validator: borderWidthValidator },
 
   /**
-   * Border width on the inline-end side.
+   * Border width on the inline-end side (aka right).
    * Overrides `borderWidthInline` and `borderWidth` for inline-end.
    * @values 0, 50, 100, 150, 200, 300, 400
    */
   borderWidthInlineEnd: { type: String, default: undefined, validator: borderWidthValidator },
 
   /**
-   * Border width on the inline-start side.
+   * Border width on the inline-start side (aka left).
    * Overrides `borderWidthInline` and `borderWidth` for inline-start.
    * @values 0, 50, 100, 150, 200, 300, 400
    */
@@ -133,55 +133,55 @@ const props = defineProps({
   padding: { type: String, default: undefined, validator: spacingValidator },
 
   /**
-   * Padding on the block axis (top/bottom in horizontal writing mode).
+   * Padding on the block axis (aka top/bottom).
    * Overrides `padding` for the block axis.
    * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800
    */
   paddingBlock: { type: String, default: undefined, validator: spacingValidator },
 
   /**
-   * Padding on the block-end side.
+   * Padding on the block-end side (aka bottom).
    * Overrides `paddingBlock` and `padding` for block-end.
    * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800
    */
   paddingBlockEnd: { type: String, default: undefined, validator: spacingValidator },
 
   /**
-   * Padding on the block-start side.
+   * Padding on the block-start side (aka top).
    * Overrides `paddingBlock` and `padding` for block-start.
    * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800
    */
   paddingBlockStart: { type: String, default: undefined, validator: spacingValidator },
 
   /**
-   * Padding on the inline axis (left/right in LTR).
+   * Padding on the inline axis (aka left/right).
    * Overrides `padding` for the inline axis.
    * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800
    */
   paddingInline: { type: String, default: undefined, validator: spacingValidator },
 
   /**
-   * Padding on the inline-end side.
+   * Padding on the inline-end side (aka right).
    * Overrides `paddingInline` and `padding` for inline-end.
    * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800
    */
   paddingInlineEnd: { type: String, default: undefined, validator: spacingValidator },
 
   /**
-   * Padding on the inline-start side.
+   * Padding on the inline-start side (aka left).
    * Overrides `paddingInline` and `padding` for inline-start.
    * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800
    */
   paddingInlineStart: { type: String, default: undefined, validator: spacingValidator },
 
   /**
-   * Block size (height in horizontal writing mode). Maps to --dt-layout-* tokens.
+   * Block size (aka height). Maps to --dt-layout-* tokens.
    * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
    */
   blockSize: { type: String, default: undefined, validator: layoutValidator },
 
   /**
-   * Inline size (width in horizontal writing mode). Maps to --dt-layout-* tokens.
+   * Inline size (aka width). Maps to --dt-layout-* tokens.
    * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
    */
   inlineSize: { type: String, default: undefined, validator: layoutValidator },

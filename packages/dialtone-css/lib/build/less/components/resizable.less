@@ -62,14 +62,14 @@
   touch-action: none;
 
   // Logical properties handle both row/column via parent writing-mode
-  inset-block: var(--dt-size-200);
-  inline-size: var(--dt-size-300);
+  inset-block: var(--dt-layout-2px);
+  inline-size: calc(var(--dt-layout-2px) * 2);
 
   // Invisible hit area for easier grabbing
   &::before {
     position: absolute;
     content: '';
-    inset: var(--dt-size-400-negative);
+    inset: var(--dt-spacing-100-negative);
   }
 
   // Cursor is the only direction-specific property

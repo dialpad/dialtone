@@ -23,6 +23,12 @@ export const argTypesData = {
       type: 'select',
     },
   },
+  termClass: {
+    description: 'Additional class name for the term elements.',
+  },
+  descriptionClass: {
+    description: 'Additional class name for the description elements.',
+  },
 };
 
 export const argsData = {

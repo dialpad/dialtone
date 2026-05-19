@@ -15,7 +15,7 @@
           :value="value"
           :warning="warning"
           :disabled="disabled"
-          @input="e => onInputInternal(e, onInput)"
+          @update:value="e => onInputInternal(e, onInput)"
         >
           <template #default>
             <slot />

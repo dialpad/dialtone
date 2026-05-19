@@ -47,7 +47,7 @@ Use `d-p-{stop}` to set padding using spacing token stops. The number references
 
 ## Classes
 
-Padding can be added to an element by using `d-p-{stop}` or a directional class like `d-p{t|r|b|l|y|x}-{stop}`. Logical property aliases are also available: `d-pbs-{stop}` (padding-block-start), `d-pbe-{stop}` (padding-block-end), `d-pis-{stop}` (padding-inline-start), `d-pie-{stop}` (padding-inline-end).
+Padding can be added to an element by using `d-p-{stop}` or a directional class like `d-p{t|r|b|l|y|x}-{stop}`. Logical property aliases are also available: `d-pbs-{stop}` (padding-block-start, aka top), `d-pbe-{stop}` (padding-block-end, aka bottom), `d-pis-{stop}` (padding-inline-start, aka left), `d-pie-{stop}` (padding-inline-end, aka right).
 
 It is highly recommended to use the [DtBox component](/components/box.md) before applying padding individually.
 

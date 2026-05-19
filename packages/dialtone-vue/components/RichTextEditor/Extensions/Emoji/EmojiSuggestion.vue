@@ -16,7 +16,6 @@ import { DtEmoji } from '@/components/Emoji';
 import { DtStack } from '@/components/Stack';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'EmojiSuggestion',
   components: {
     DtEmoji,

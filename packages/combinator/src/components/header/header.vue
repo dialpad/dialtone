@@ -20,10 +20,10 @@
             label="Select target component variant"
             label-class="d-vi-visible-sr"
             name="select-menu"
-            :value="selectedVariant"
+            :model-value="selectedVariant"
             :options="variantOptions"
             :size="500"
-            @input="e => emit('update:variant', e)"
+            @update:model-value="e => emit('update:variant', e)"
           />
         </div>
       </dt-stack>

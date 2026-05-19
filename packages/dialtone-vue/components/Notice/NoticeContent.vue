@@ -38,7 +38,6 @@ import { hasSlotContent } from '@/common/utils';
 import { DtText } from '@/components/Text';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtNoticeContent',
 
   components: { DtText },

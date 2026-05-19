@@ -207,6 +207,16 @@ describe('DtModal Tests', () => {
       expect(overlay.classes(modalClass)).toBe(true);
     });
 
+    it('Should not apply transparent-backdrop modifier by default', () => {
+      expect(overlay.classes('d-modal--transparent-backdrop')).toBe(false);
+    });
+
+    it('Should apply transparent-backdrop modifier when transparentBackdrop is true', async () => {
+      await wrapper.setProps({ transparentBackdrop: true });
+
+      expect(overlay.classes('d-modal--transparent-backdrop')).toBe(true);
+    });
+
     it('Should pass content class through to content modal element', async () => {
       const contentClass = 'content-class';
 
@@ -265,6 +275,57 @@ describe('DtModal Tests', () => {
       expect(modal.attributes('data-dt-mode')).toBe('dark');
 
       document.documentElement.removeAttribute('data-dt-mode');
+    });
+
+    describe('When rendered inside a shadow root', () => {
+      let shadowHost;
+      let shadowRoot;
+      let mountPoint;
+
+      beforeEach(async () => {
+        shadowHost = document.createElement('div');
+        document.body.appendChild(shadowHost);
+        shadowRoot = shadowHost.attachShadow({ mode: 'open' });
+
+        mountPoint = document.createElement('div');
+        shadowRoot.appendChild(mountPoint);
+
+        wrapper = mount(DtModal, {
+          props: { ...baseProps, ...mockProps },
+          attachTo: mountPoint,
+        });
+
+        await wrapper.vm.$nextTick();
+      });
+
+      afterEach(() => {
+        wrapper.unmount();
+        shadowHost.remove();
+      });
+
+      it('should teleport the dialog into the shadow root', () => {
+        const dialog = shadowRoot.querySelector('[data-qa="dt-modal"]');
+        expect(dialog).not.toBeNull();
+      });
+
+      it('should not teleport into shadow root when appendTo prop is provided', async () => {
+        const target = document.createElement('div');
+        document.body.appendChild(target);
+        target.id = 'custom-target';
+
+        wrapper.unmount();
+        wrapper = mount(DtModal, {
+          props: { ...baseProps, appendTo: '#custom-target' },
+          attachTo: mountPoint,
+        });
+
+        await wrapper.vm.$nextTick();
+
+        expect(shadowRoot.querySelector('[data-qa="dt-modal"]')).toBeNull();
+        expect(target.querySelector('[data-qa="dt-modal"]')).not.toBeNull();
+
+        target.remove();
+      });
     });
   });
 });

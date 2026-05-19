@@ -29,7 +29,6 @@ import { DtIconChevronDown } from '@dialpad/dialtone-icons/vue';
 import { getUniqueString } from '@/common/utils';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'SplitButtonEnd',
   components: {
     DtButton,

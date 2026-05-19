@@ -26,6 +26,10 @@ export const argsData = {
   onMaxSelected: action('maxSelected'),
   onComboboxHighlight: action('comboboxHighlight'),
   onFocus: action('focus'),
+  onKeydown: action('keydown'),
+  onChipKeydown: action('chip-keydown'),
+  onEscape: action('escape'),
+  onEnter: action('enter'),
 };
 
 export const argTypesData = {
@@ -91,8 +95,57 @@ export const argTypesData = {
     options: Object.values(MULTI_SELECT_SIZES),
   },
 
+  showLabel: {
+    control: { type: 'boolean' },
+  },
+  showList: {
+    control: { type: 'boolean' },
+  },
+  listMaxHeight: {
+    control: { type: 'text' },
+  },
+  loading: {
+    control: { type: 'boolean' },
+  },
+  loadingMessage: {
+    control: { type: 'text' },
+  },
+  selectedItems: {
+    control: 'object',
+  },
+  maxSelected: {
+    control: { type: 'number' },
+  },
+  maxSelectedMessage: {
+    control: 'object',
+  },
+  hasSuggestionList: {
+    control: { type: 'boolean' },
+  },
+  collapseOnFocusOut: {
+    control: { type: 'boolean' },
+  },
+  inputWrapperClass: {
+    description: 'Additional class name for the input wrapper element.',
+  },
+
   // Action Event Handlers
   onEscape: {
+    table: {
+      disable: true,
+    },
+  },
+  onEnter: {
+    table: {
+      disable: true,
+    },
+  },
+  onKeydown: {
+    table: {
+      disable: true,
+    },
+  },
+  onChipKeydown: {
     table: {
       disable: true,
     },
@@ -134,6 +187,12 @@ export const argTypesData = {
   onComboboxHighlight: {
     table: {
       disable: true,
+    },
+  },
+  dialogClass: {
+    description: 'Additional class for the popover dialog element.',
+    control: {
+      type: 'text',
     },
   },
 };

@@ -2,6 +2,8 @@
 layout: Blank
 ---
 
+<ClientOnly>
+
 <dt-box class="d-ps-fixed d-ibs-100 d-iie-200" surface="primary">
   <dt-stack direction="row" gap="100">
     <dt-dropdown
@@ -13,14 +15,18 @@ layout: Blank
           kind="muted"
           :size="200"
         >
-          <dt-stack gap="100" direction="row">
+          <dt-stack gap="100" direction="row" as="span">
             <span>
               <dt-text strength="bold">Mode:</dt-text>
-              <dt-text tone="tertiary">{{ currentMode.charAt(0).toUpperCase() + currentMode.slice(1) }}</dt-text>
+              <dt-text>{{ capitalize(currentMode) }}</dt-text>
+            </span>
+            <span>
+              <dt-text strength="bold">Material:</dt-text>
+              <dt-text>{{ formatMaterial(currentMaterial) }}</dt-text>
             </span>
             <span>
               <dt-text strength="bold">Contrast:</dt-text>
-              <dt-text tone="tertiary">{{ currentContrast.charAt(0).toUpperCase() + currentContrast.slice(1) }}</dt-text>
+              <dt-text>{{ capitalize(currentContrast) }}</dt-text>
             </span>
           </dt-stack>
           <template #startIcon="{ iconSize }">
@@ -99,6 +105,24 @@ layout: Blank
             </template>
           </dt-list-item>
         </dt-list-item-group>
+        <dt-dropdown-separator />
+        <dt-list-item-group
+          heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
+          heading="Material"
+        >
+          <dt-list-item
+            v-for="material in materials"
+            :key="material"
+            role="menuitem"
+            navigation-type="arrow-keys"
+            @click="setMaterial(material)"
+          >
+            {{ formatMaterial(material) }}
+            <template #end>
+              <dt-icon :class="{ 'd-o0': currentMaterial !== material }" name="check" size="200" />
+            </template>
+          </dt-list-item>
+        </dt-list-item-group>
       </template>
     </dt-dropdown>
     <dt-dropdown
@@ -108,7 +132,7 @@ layout: Blank
       <template #anchor>
         <dt-button
           v-dt-tooltip:bottom="`Theme: ${capitalize(currentTheme)}`"
-          class="theme-toggle-button dialtone-shell-btn"
+          class="theme-toggle-button"
           importance="outlined"
           kind="muted"
           :size="200"
@@ -251,11 +275,42 @@ layout: Blank
         </dt-stack>
       </dt-stack>
       <dt-stack direction="row" align="start">
-        <dt-box v-for="name in ['info-strong', 'brand-strong', 'positive-strong', 'warning-strong', 'critical-strong']" :key="name" padding="300" :surface="name">
-          <dt-text as="p" kind="code" size="100" strength="bold" tone="primary" v-dt-mode:invert>{{ name }}</dt-text>
+        <dt-box v-for="surfaceName in semanticStrongSurfaces" :key="surfaceName" padding="300" :surface="surfaceName">
+          <dt-text v-if="surfaceName !== 'warning'" as="p" kind="code" size="100" strength="bold" tone="primary" v-dt-mode:invert>{{ surfaceName }}</dt-text>
+          <dt-text v-else as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceName }}</dt-text>
         </dt-box>
       </dt-stack>
     </dt-stack>
+    <dt-box surface="primary" padding="300" border-radius="200" v-dt-mode:invert>
+      <dt-stack gap="200">
+        <dt-text as="h3" kind="label" size="200" strength="bold" tone="primary">Surfaces — inverted</dt-text>
+        <dt-stack direction="row" align="start">
+          <dt-stack
+            v-for="surfaceItem in primarySurfaces"
+            :key="surfaceItem.name"
+          >
+            <dt-box padding="300" :surface="surfaceItem.name">
+              <dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceItem.name }}</dt-text>
+            </dt-box>
+            <dt-box padding="300" :surface="`${surfaceItem.name}-opaque`">
+              <dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceItem.name }}-opaque</dt-text>
+            </dt-box>
+          </dt-stack>
+        </dt-stack>
+        <dt-stack direction="row" align="start">
+          <dt-stack v-for="surfaceName in semanticSubtleSurfaces" :key="surfaceName">
+            <dt-box padding="300" :surface="surfaceName"><dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceName }}</dt-text></dt-box>
+            <dt-box padding="300" :surface="`${surfaceName}-opaque`"><dt-text as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceName }}-opaque</dt-text></dt-box>
+          </dt-stack>
+        </dt-stack>
+        <dt-stack direction="row" align="start">
+          <dt-box v-for="surfaceName in semanticStrongSurfaces" :key="surfaceName" padding="300" :surface="surfaceName">
+            <dt-text v-if="surfaceName !== 'warning-strong'" as="p" kind="code" size="100" strength="bold" tone="primary" v-dt-mode:invert>{{ surfaceName }}</dt-text>
+            <dt-text v-else as="p" kind="code" size="100" strength="bold" tone="primary">{{ surfaceName }}</dt-text>
+          </dt-box>
+        </dt-stack>
+      </dt-stack>
+    </dt-box>
     <dt-stack gap="200">
       <dt-stack
         v-for="row in [
@@ -333,12 +388,7 @@ layout: Blank
 </dialtone-usage>
   </dt-stack>
 </dt-box>
-
-<style>
-.foo {
-  /* background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 0H20V20H0V0Z' fill='var(--dt-color-surface-primary)'/%3E%3Cpath d='M0 0L20 20M20 0L0 20' stroke='%23666' stroke-width='1'/%3E%3C/svg%3E"); */
-}
-</style>
+</ClientOnly>
 
 <script setup>
 import { useThemeManager } from '@composables/useThemeManager';
@@ -353,15 +403,20 @@ const messages = {
 const {
   currentMode,
   currentContrast,
+  currentMaterial,
   currentModeIconName,
+  resolvedMode,
   setMode,
   setContrast,
+  setMaterial,
   currentTheme,
   setTheme,
   namedThemes,
   numberedThemes,
   formatThemeName,
+  materials,
 } = useThemeManager({ includeThemes: true });
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+const formatMaterial = (m) => m === 'sandstone' ? 'Sandstone (default)' : capitalize(m);
 </script>

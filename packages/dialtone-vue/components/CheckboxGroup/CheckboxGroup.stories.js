@@ -80,6 +80,24 @@ export const argTypesData = {
   messagesClass: {
     control: 'text',
   },
+  name: {
+    control: { type: 'text' },
+  },
+  disabled: {
+    control: { type: 'boolean' },
+  },
+  messages: {
+    control: 'object',
+  },
+  showMessages: {
+    control: { type: 'boolean' },
+  },
+  legendChildProps: {
+    control: null,
+  },
+  messagesChildProps: {
+    control: null,
+  },
 
   // Directives
   'v-model': {

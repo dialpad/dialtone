@@ -1,6 +1,10 @@
 {
   "shell": {
     "base": {
+      "material": {
+        "value": "jade",
+        "type": "other"
+      },
       "color": {
         "surface": {
           "value": "{color.indigo.200}",

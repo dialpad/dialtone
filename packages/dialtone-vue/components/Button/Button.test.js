@@ -39,6 +39,7 @@ describe('DtButton Tests', () => {
     mockProps = {};
     mockSlots = {};
     mockAttrs = {};
+    MOCK_BUTTON_STUB.mockReset();
   });
 
   describe('Presentation Tests', () => {

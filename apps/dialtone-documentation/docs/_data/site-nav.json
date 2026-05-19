@@ -272,7 +272,7 @@
                     "link": "/guides/migration/logical-naming/"
                   },
                   {
-                    "text": "Recipes to UI Kits",
+                    "text": "Removal of Dialtone Recipes",
                     "link": "/guides/migration/recipes-to-ui-kits/"
                   },
                   {
@@ -290,6 +290,10 @@
                   {
                     "text": "Theme to Mode",
                     "link": "/guides/migration/theme-to-mode/"
+                  },
+                  {
+                    "text": "DtModal Native Dialog",
+                    "link": "/guides/migration/modal-native-dialog/"
                   },
                   {
                     "text": "Vue 2 Removal",

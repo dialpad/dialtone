@@ -1,3 +1,10 @@
+# [8.80.0-next.6](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.80.0-next.5...dialtone-css/v8.80.0-next.6) (2026-05-13)
+
+
+### Features
+
+* **Design Tokens:** DLT-3368 DLT-3371 DLT-3410 add material dimension and brand-locked pairings ([#1252](https://github.com/dialpad/dialtone/issues/1252)) ([eeedc67](https://github.com/dialpad/dialtone/commit/eeedc6780f6107f618daf283669f01de74a1abb6))
+
 # [8.80.0-next.5](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.80.0-next.4...dialtone-css/v8.80.0-next.5) (2026-05-07)
 
 

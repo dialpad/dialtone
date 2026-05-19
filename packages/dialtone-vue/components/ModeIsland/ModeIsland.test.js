@@ -25,15 +25,17 @@ describe('DtModeIsland Tests', () => {
   };
 
   beforeEach(() => {
-    // Mock getRootMode and getRootContrast
+    // Mock getRootMode, getRootContrast, getRootMaterial
     document.documentElement.setAttribute('data-dt-mode', 'light');
     document.documentElement.setAttribute('data-dt-contrast', 'default');
+    document.documentElement.setAttribute('data-dt-material', 'sandstone');
     updateWrapper();
   });
 
   afterEach(() => {
     document.documentElement.removeAttribute('data-dt-mode');
     document.documentElement.removeAttribute('data-dt-contrast');
+    document.documentElement.removeAttribute('data-dt-material');
     mockProps = {};
     mockSlots = {};
     mockAttrs = {};
@@ -52,6 +54,7 @@ describe('DtModeIsland Tests', () => {
       it('should have correct data attributes', () => {
         expect(wrapper.attributes('data-dt-mode')).toBeDefined();
         expect(wrapper.attributes('data-dt-contrast')).toBeDefined();
+        expect(wrapper.attributes('data-dt-material')).toBeDefined();
       });
     });
   });
@@ -102,6 +105,19 @@ describe('DtModeIsland Tests', () => {
       // Trigger the mutation observer
       await new Promise(resolve => setTimeout(resolve, 10));
       expect(wrapper.vm.currentContrast).toBe('high');
+    });
+  });
+
+  describe('Material Tests', () => {
+    it('should inherit material from root', () => {
+      expect(wrapper.attributes('data-dt-material')).toBe('sandstone');
+    });
+
+    it('should update material when root changes', async () => {
+      document.documentElement.setAttribute('data-dt-material', 'graphite');
+      // Trigger the mutation observer
+      await new Promise(resolve => setTimeout(resolve, 10));
+      expect(wrapper.vm.currentMaterial).toBe('graphite');
     });
   });
 

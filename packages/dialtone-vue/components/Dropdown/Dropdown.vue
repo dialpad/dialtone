@@ -68,7 +68,6 @@ import { EVENT_KEYNAMES } from '@/common/constants';
 import { CONTENT_MODE_PROP } from '@/common/mode_constants';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtDropdown',
 
   components: {

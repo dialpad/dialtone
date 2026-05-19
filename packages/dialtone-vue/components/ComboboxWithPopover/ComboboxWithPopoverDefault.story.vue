@@ -14,6 +14,7 @@
     :padding="$attrs.padding"
     :list-id="$attrs.listId"
     :list-class="$attrs.listClass"
+    :dialog-class="$attrs.dialogClass"
     :open-with-arrow-keys="$attrs.openWithArrowKeys"
     :empty-list="$attrs.emptyList"
     :empty-state-message="$attrs.emptyStateMessage"

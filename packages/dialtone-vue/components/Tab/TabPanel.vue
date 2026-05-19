@@ -23,7 +23,6 @@ import { returnFirstEl } from '@/common/utils';
  * @see https://dialtone.dialpad.com/components/tabs.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtTabPanel',
 
   mixins: [Modal],

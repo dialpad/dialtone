@@ -261,71 +261,128 @@ async function cleanupFullThemeFiles(outputDir) {
 }
 
 /**
+ * Extract `--var: value` lines from inside a `:root { ... }` block, drop
+ * `color-scheme`, and re-indent with two spaces.
+ */
+function extractRootVars(content) {
+  const match = content.match(/:root\s*\{([^}]+)\}/s);
+  if (!match) return '';
+  return match[1].trim().split('\n')
+    .filter(line => line.trim() && !line.includes('color-scheme'))
+    .map(line => '  ' + line.trim())
+    .join('\n');
+}
+
+/**
+ * Read a light/dark `:root`-scoped CSS pair, re-wrap the variables under custom
+ * selectors, write the combined file, and remove the originals. Shared by the
+ * high-contrast and material combine steps.
+ */
+async function combineModePair({ dir, lightFile, darkFile, outputFile, lightSelector, darkSelector, header }) {
+  const lightContent = await fs.readFile(`${dir}/${lightFile}`, 'utf8');
+  const darkContent = await fs.readFile(`${dir}/${darkFile}`, 'utf8');
+  const combined = `${header}
+
+${lightSelector} {
+${extractRootVars(lightContent)}
+}
+
+${darkSelector} {
+${extractRootVars(darkContent)}
+}
+`;
+  await fs.writeFile(`${dir}/${outputFile}`, combined);
+  await fs.unlink(`${dir}/${lightFile}`);
+  await fs.unlink(`${dir}/${darkFile}`);
+}
+
+/**
  * Step 4: Process high contrast files
  *
- * Style Dictionary generates separate light and dark high contrast files.
- * This combines them into one organized file.
- *
- * Process:
- * 1. Find high-light and high-dark files in contrast/ directory
- * 2. Extract variables from each (remove :root selector)
- * 3. Combine into one file with [data-dt-mode] and [data-dt-contrast] selectors
- * 4. Delete the original files
- *
- * Result: Single tokens-high-contrast.css supporting both modes.
- * Skipped if files don't exist.
+ * Style Dictionary emits separate light and dark high-contrast files; combine
+ * them under [data-dt-mode][data-dt-contrast] selectors and delete the
+ * originals. Skipped if files don't exist.
  */
 async function processHighContrast(outputDir) {
   console.log('\nStep 4: Processing high contrast overrides...\n');
 
-  const contrastDir = `${outputDir}/contrast`;
+  const dir = `${outputDir}/contrast`;
   try {
-    const contrastFiles = await fs.readdir(contrastDir);
+    const files = await fs.readdir(dir);
+    const lightFile = files.find(f => f.includes('high-light'));
+    const darkFile = files.find(f => f.includes('high-dark'));
+    if (!(lightFile && darkFile)) return;
 
-    // Combine high-light and high-dark into a single file with selectors
-    const highLightFile = contrastFiles.find(f => f.includes('high-light'));
-    const highDarkFile = contrastFiles.find(f => f.includes('high-dark'));
-
-    if (highLightFile && highDarkFile) {
-      const lightContent = await fs.readFile(`${contrastDir}/${highLightFile}`, 'utf8');
-      const darkContent = await fs.readFile(`${contrastDir}/${highDarkFile}`, 'utf8');
-
-      const extractVars = (content) => {
-        const match = content.match(/:root\s*\{([^}]+)\}/s);
-        if (!match) return '';
-        return match[1].trim().split('\n')
-          .filter(line => line.trim() && !line.includes('color-scheme'))
-          .map(line => '  ' + line.trim())
-          .join('\n');
-      };
-
-      const lightVars = extractVars(lightContent);
-      const darkVars = extractVars(darkContent);
-
-      const combined = `/**
+    await combineModePair({
+      dir,
+      lightFile,
+      darkFile,
+      outputFile: 'tokens-high-contrast.css',
+      lightSelector: '[data-dt-mode="light"][data-dt-contrast="high"]',
+      darkSelector: '[data-dt-mode="dark"][data-dt-contrast="high"]',
+      header: `/**
  * Do not edit directly, this file was auto-generated.
  * High contrast overrides for both light and dark modes
- */
-
-/* High contrast - Light mode */
-[data-dt-mode="light"][data-dt-contrast="high"] {
-${lightVars}
-}
-
-/* High contrast - Dark mode */
-[data-dt-mode="dark"][data-dt-contrast="high"] {
-${darkVars}
-}`;
-
-      await fs.writeFile(`${contrastDir}/tokens-high-contrast.css`, combined);
-      await fs.unlink(`${contrastDir}/${highLightFile}`);
-      await fs.unlink(`${contrastDir}/${highDarkFile}`);
-
-      console.log('Generated high contrast override file');
-    }
-  } catch {
+ */`,
+    });
+    console.log('Generated high contrast override file');
+  } catch (err) {
+    if (err.code !== 'ENOENT') throw err;
     console.log('No high contrast files found, skipping...');
   }
+}
+
+/**
+ * Step 5: Process material override files
+ *
+ * Style Dictionary emits per-material light and dark CSS files; combine each
+ * pair under [data-dt-mode] selectors. The runtime setMaterial() injects
+ * whichever combined file matches the active material; mode resolution then
+ * happens via the document's data-dt-mode attribute.
+ */
+async function processMaterials(outputDir) {
+  console.log('\nStep 5: Processing material overrides...\n');
+
+  const dir = `${outputDir}/material`;
+  try {
+    const files = await fs.readdir(dir);
+    const materials = groupMaterialFiles(files);
+
+    for (const [name, pair] of materials) {
+      if (!(pair.light && pair.dark)) continue;
+
+      await combineModePair({
+        dir,
+        lightFile: pair.light,
+        darkFile: pair.dark,
+        outputFile: `tokens-${name}.css`,
+        lightSelector: `[data-dt-material="${name}"][data-dt-mode="light"]`,
+        darkSelector: `[data-dt-material="${name}"][data-dt-mode="dark"]`,
+        header: `/**
+ * Material override: ${name}
+ * Re-binds --dt-color-black-* so V1 relative-color tokens follow this ramp.
+ * Do not edit directly, this file was auto-generated.
+ */`,
+      });
+      console.log(`Generated tokens-${name}.css`);
+    }
+  } catch (err) {
+    if (err.code !== 'ENOENT') throw err;
+    console.log('No material files found, skipping...');
+  }
+}
+
+/** Group `tokens-{name}-{light|dark}.css` filenames by material name. */
+function groupMaterialFiles(files) {
+  const materials = new Map();
+  for (const file of files) {
+    const match = file.match(/^tokens-(.+)-(light|dark)\.css$/);
+    if (!match) continue;
+    const [, name, mode] = match;
+    if (!materials.has(name)) materials.set(name, {});
+    materials.get(name)[mode] = file;
+  }
+  return materials;
 }
 
 /**
@@ -349,8 +406,10 @@ function outputBuildSummary(stats) {
   console.log('    ├── tokens-base-colors.css (177KB)');
   console.log('    ├── tokens-dp-colors.css (628KB) [base theme]');
   console.log(`    ├── themes/ (${stats.themeCount} override files)`);
-  console.log('    └── contrast/');
-  console.log('        └── tokens-high-contrast.css [high contrast overrides]');
+  console.log('    ├── contrast/');
+  console.log('    │   └── tokens-high-contrast.css [high contrast overrides]');
+  console.log('    └── material/');
+  console.log('        └── tokens-{material}.css [per-material overrides]');
 }
 
 /**
@@ -374,7 +433,10 @@ function outputBuildSummary(stats) {
  * 4. processHighContrast()
  *    Combine high-light and high-dark into one file.
  *
- * 5. outputBuildSummary()
+ * 5. processMaterials()
+ *    Combine per-material light and dark files (one tokens-{name}.css each).
+ *
+ * 6. outputBuildSummary()
  *    Show what got built and where to find it.
  *
  * Why not output diffs directly?
@@ -388,6 +450,7 @@ async function buildLayeredTokens() {
   const stats = await generateThemeOverrides(outputDir);
   await cleanupFullThemeFiles(outputDir);
   await processHighContrast(outputDir);
+  await processMaterials(outputDir);
   outputBuildSummary(stats);
 }
 

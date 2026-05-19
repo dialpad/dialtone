@@ -97,7 +97,6 @@
 import { hasSlotContent } from '@/common/utils';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtItemLayout',
   props: {
     /**
@@ -159,7 +158,7 @@ export default {
     },
 
     /**
-     * Set the class for the block-end section.
+     * Set the class for the block-end section (aka bottom).
      */
     blockEndClass: {
       type: [String, Array, Object],
@@ -167,7 +166,7 @@ export default {
     },
 
     /**
-     * Set the class for the block-end section.
+     * Set the class for the block-end section (aka bottom).
      * @deprecated Use blockEndClass
      */
     bottomClass: {

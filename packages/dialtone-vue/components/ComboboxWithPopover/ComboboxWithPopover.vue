@@ -55,6 +55,7 @@
         :modal="false"
         :auto-focus="false"
         :append-to="appendTo"
+        :dialog-class="dialogClass"
         :transition="transition"
         @opened="opened"
       >
@@ -126,7 +127,6 @@ import { DROPDOWN_PADDING_CLASSES } from '@/components/Dropdown';
 import { CONTENT_MODE_PROP } from '@/common/mode_constants';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtComboboxWithPopover',
 
   components: {
@@ -220,6 +220,14 @@ export default {
      * Additional class for the footer wrapper element.
      */
     footerClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
+     * Additional class for the popover dialog element.
+     */
+    dialogClass: {
       type: [String, Array, Object],
       default: '',
     },

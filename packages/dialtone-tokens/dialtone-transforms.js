@@ -45,6 +45,18 @@ function throwSizeError (name, value, unitType) {
   throw new Error(`Invalid Number: '${name}: ${value}' is not a valid number, cannot transform to '${unitType}' \n`);
 }
 
+/**
+ * Returns true when a token's original value references the `material.*` namespace.
+ * That namespace lives in source-only token sets (`base/refs/*`) and its CSS vars
+ * are intentionally not output, so a `var()` reference would resolve to nothing
+ * at runtime — emit the inlined value instead. Used to gate `outputReferences`
+ * across all SD configs.
+ */
+export function isMaterialNamespaceRef (token) {
+  const orig = token.original?.value;
+  return typeof orig === 'string' && orig.includes('{material.');
+}
+
 export function registerDialtoneTransforms (styleDictionary) {
   styleDictionary.registerTransform({
     name: 'dt/size/pxToRem',
@@ -418,4 +430,151 @@ export function registerDialtoneTransforms (styleDictionary) {
     },
   });
 
+}
+
+/**
+ * Tag every alpha-modified single-ref token whose chain resolves to
+ * `color.black.N` with `$extensions.dt.relativeColor = { ref, alpha }`. Pairs
+ * with `registerRelativeColorWrap` to emit CSS Color 5 relative-color syntax
+ * in CSS output (e.g. `oklch(from var(--dt-color-black-800) l c h / .5)`),
+ * letting modified-from-black tokens follow a runtime `--dt-color-black-N`
+ * swap instead of being baked at build time.
+ *
+ * Why it's a preprocessor and not a transform: SD clones tokens between
+ * transitive transform passes, so mutating `$extensions` from inside a
+ * transform gets reverted. Preprocessors run once before any cloning.
+ *
+ * Why we leave `studio.tokens.modify` intact: iOS, Android, and JSON
+ * pipelines use their own `<platform>/color/modifiers` transforms to apply
+ * alpha at build time. They need the original extension. Only the CSS wrap
+ * short-circuits on `dt.relativeColor`; non-CSS platforms are unaffected.
+ *
+ * Scope: alpha modifiers only (any space — alpha math is space-agnostic).
+ * The chain may be pure aliases (e.g. `surface.bold = {color.black.300}`,
+ * `surface.bold-opaque = alpha(.3, {color.surface.bold})`) or
+ * alpha-on-alpha (e.g. `shell.color.border.subtle` chained off the flagged
+ * `border.subtle`); both kinds compose via nested `oklch(from …)`.
+ *
+ * Excluded: candidates with any non-alpha downstream consumer. If we tagged
+ * one of those, sd-transforms would later pass our relative-syntax string
+ * to colorjs.io's `lighten`/`darken`/`mix` — which can't parse `oklch(from …)`
+ * — and throw at build time. The unsafe-set walk in pass 3 prunes them.
+ */
+function tagRelativeColorChain (dictionary, BLACK_REF) {
+  const { alphaTokens, refOf, dependents } = collectChainEdges(dictionary);
+  const reachesBlack = transitivelyReaches(refOf, BLACK_REF);
+  const unsafe = candidatesWithNonAlphaConsumer(alphaTokens, dependents);
+
+  for (const [name, { node, ref, alpha }] of alphaTokens) {
+    if (unsafe.has(name)) continue;
+    if (!BLACK_REF.test(ref) && !reachesBlack.has(ref)) continue;
+    node.$extensions.dt = node.$extensions.dt || {};
+    node.$extensions.dt.relativeColor = { ref, alpha };
+  }
+  return dictionary;
+}
+
+/** Walk the dictionary, building three structures used to compute the flag set:
+ *   - alphaTokens: candidates (name → {node, ref, alpha})
+ *   - refOf: chain edges that relay relative-syntax (no-modify aliases AND alpha-flagged tokens)
+ *   - dependents: reverse-index (ref-target → consumers + their modify) for non-alpha downstream detection */
+function collectChainEdges (dictionary) {
+  const SINGLE_REF = /^\{([^}]+)\}$/;
+  const alphaTokens = new Map();
+  const refOf = new Map();
+  const dependents = new Map();
+  (function recur (node, path) {
+    if (!node || typeof node !== 'object') return;
+    if (typeof node.value === 'string') {
+      const match = SINGLE_REF.exec(node.value.trim());
+      if (!match) return;
+      const name = path.join('.');
+      const ref = match[1];
+      const modify = node.$extensions?.['studio.tokens']?.modify;
+      const isAlpha = modify?.type === 'alpha';
+      // Pure aliases and alpha-flagged tokens both relay the chain;
+      // non-alpha modifiers (lighten/darken/mix) break it.
+      if (!modify || isAlpha) refOf.set(name, ref);
+      if (isAlpha) alphaTokens.set(name, { node, ref, alpha: modify.value });
+      if (!dependents.has(ref)) dependents.set(ref, []);
+      dependents.get(ref).push({ name, modify });
+      return;
+    }
+    for (const key of Object.keys(node)) recur(node[key], [...path, key]);
+  })(dictionary, []);
+  return { alphaTokens, refOf, dependents };
+}
+
+/** Fixed-point iteration: a chain link is in the set if its ref matches
+ *  `rootPattern` directly, or its ref is itself in the set. */
+function transitivelyReaches (refOf, rootPattern) {
+  const reached = new Set();
+  for (let added = true; added;) {
+    added = false;
+    for (const [name, ref] of refOf) {
+      if (reached.has(name)) continue;
+      if (rootPattern.test(ref) || reached.has(ref)) {
+        reached.add(name);
+        added = true;
+      }
+    }
+  }
+  return reached;
+}
+
+/** Forward DFS from each candidate through `dependents`; mark unsafe if any
+ *  reachable consumer carries a non-alpha modifier. */
+function candidatesWithNonAlphaConsumer (alphaTokens, dependents) {
+  const unsafe = new Set();
+  for (const candidate of alphaTokens.keys()) {
+    const stack = [candidate];
+    const seen = new Set();
+    while (stack.length) {
+      const cur = stack.pop();
+      for (const { name, modify } of dependents.get(cur) || []) {
+        if (seen.has(name)) continue;
+        seen.add(name);
+        if (modify && modify.type !== 'alpha') { unsafe.add(candidate); break; }
+        stack.push(name);
+      }
+      if (unsafe.has(candidate)) break;
+    }
+  }
+  return unsafe;
+}
+
+export function registerDialtonePreprocessors (styleDictionary) {
+  const BLACK_REF = /^color\.black\.\d+$/;
+  styleDictionary.registerPreprocessor({
+    name: 'dt/relative-color/extract',
+    preprocessor: (dictionary) => tagRelativeColorChain(dictionary, BLACK_REF),
+  });
+}
+
+/**
+ * Re-register sd-transforms' `ts/color/modifiers` with a wrap that emits CSS
+ * Color 5 relative-color syntax for tokens flagged by `dt/relative-color/extract`.
+ * Re-using the same name preserves the transform's array position, so other
+ * modifier shapes (lighten/darken/mix on non-black ramps) continue to flow
+ * through sd-transforms' original logic untouched.
+ *
+ * The wrap declares single-arg lambdas (`(token) => …`) intentionally —
+ * sd-transforms's original is single-arg, and SD 4.x infers function arity
+ * for some internal invocations. A two-arg form caused transitive resolution
+ * of unrelated chart tokens to throw `undefined Lightness in oklch()`.
+ */
+export function registerRelativeColorWrap (styleDictionary) {
+  const original = styleDictionary.hooks.transforms['ts/color/modifiers'];
+  styleDictionary.registerTransform({
+    ...original,
+    name: 'ts/color/modifiers',
+    transform: (token) => {
+      if (token.$extensions?.dt?.relativeColor) {
+        const { ref, alpha } = token.$extensions.dt.relativeColor;
+        const cssVar = `--dt-${ref.replace(/\./g, '-')}`;
+        return `oklch(from var(${cssVar}) l c h / ${alpha})`;
+      }
+      return original.transform(token);
+    },
+  });
 }

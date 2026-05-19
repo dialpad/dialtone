@@ -41,7 +41,7 @@
     </div>
     <dt-stack
       direction="row"
-      gap="200"
+      gap="50"
       class="d-ps-sticky d-ibs-0 d-iie-0"
     >
       <dt-button

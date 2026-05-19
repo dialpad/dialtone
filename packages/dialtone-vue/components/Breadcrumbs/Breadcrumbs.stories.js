@@ -51,6 +51,9 @@ export const argTypesData = {
       },
     },
   },
+  ariaLabel: {
+    control: { type: 'text' },
+  },
   inverted: {
     table: { category: 'Deprecated' },
     description: 'Deprecated.',

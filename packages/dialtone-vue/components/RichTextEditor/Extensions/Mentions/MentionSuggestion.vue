@@ -66,7 +66,6 @@ import { DtStack } from '@/components/Stack';
 import { DtText } from '@/components/Text';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'MentionSuggestion',
   components: {
     DtAvatar,

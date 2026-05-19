@@ -109,7 +109,6 @@ import { DtValidationMessages } from '../ValidationMessages';
  * @see https://dialtone.dialpad.com/components/select.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtSelectMenu',
 
   components: { DtValidationMessages, DtText },

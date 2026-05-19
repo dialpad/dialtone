@@ -1,7 +1,7 @@
 <template>
   <teleport
-    :disabled="!appendTo"
-    :to="appendTo"
+    :disabled="!appendTo && !autoTeleportTarget"
+    :to="appendTo || autoTeleportTarget"
   >
     <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
     <dialog
@@ -10,6 +10,7 @@
         'd-modal',
         MODAL_KIND_MODIFIERS[kind],
         MODAL_SIZE_MODIFIERS[size],
+        { 'd-modal--transparent-backdrop': transparentBackdrop },
         modalClass,
       ]"
       data-qa="dt-modal"
@@ -151,7 +152,6 @@ const focusableSelector = 'button:not(:disabled),[href],input:not(:disabled),sel
  * @see https://dialtone.dialpad.com/components/modal.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtModal',
 
   components: {
@@ -359,6 +359,17 @@ export default {
       type: String,
       default: undefined,
     },
+
+    /**
+     * When true, the surrounding backdrop is rendered fully transparent
+     * instead of the default dimming overlay. The dialog box itself
+     * remains opaque. Useful when the underlying UI should remain visible.
+     * @values true, false
+     */
+    transparentBackdrop: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -395,6 +406,7 @@ export default {
       MODAL_BANNER_KINDS,
       hasSlotContent,
       i18n: new DialtoneLocalization(),
+      autoTeleportTarget: null,
     };
   },
 
@@ -419,6 +431,15 @@ export default {
   },
 
   mounted () {
+    if (!this.appendTo) {
+      const root = this.$el?.getRootNode();
+      if (root instanceof ShadowRoot) {
+        this.autoTeleportTarget = root;
+        // Defer syncDialogState so the teleport renders inside the shadow root first.
+        if (this.open) this.$nextTick(() => { if (this.open) this.syncDialogState(true); });
+        return;
+      }
+    }
     if (this.open) {
       this.syncDialogState(true);
     }

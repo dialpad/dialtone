@@ -22,6 +22,12 @@ export const argTypesData = {
     },
     control: 'text',
   },
+  label: {
+    control: { type: 'text' },
+  },
+  selected: {
+    control: { type: 'boolean' },
+  },
   inverted: {
     table: { category: 'Deprecated' },
     description: 'Deprecated.',

@@ -1,14 +1,14 @@
 ---
-title: Migrating Recipes to UI Kits
-description: Dialtone recipes have been deprecated and moved to the UI-Kits repository. Includes migration mappings and automated script.
+title: Removal of Dialtone Recipes
+description: All Dialtone recipe components have been removed. Use the standalone UI-Kit packages instead.
 ---
 
 ## TLDR
 
-- All `DtRecipe*` components are deprecated and moved to standalone UI-Kit packages.
-- A few recipes have been upgraded to core Dialtone components.
-- An automated migration script handles import rewrites, component renames, and CSS class changes.
-- `DtRecipe*` components will remain until the next major Dialtone release but **will no longer receive updates**.
+- All `DtRecipe*` components have been **removed** from `@dialpad/dialtone`.
+- They have been replaced by standalone UI-Kit packages or promoted to core Dialtone components.
+- If you haven't migrated yet, refer to the migration mapping and automated script below — originally published as part of the [Migrating Recipes to UI Kits](#migration-mapping) deprecation guide.
+- Any `DtRecipe*` imports remaining in your codebase will break after upgrading to this major version.
 
 ## New Packages
 
@@ -68,8 +68,8 @@ Import the CSS for each kit you install:
 
 ## Timeline
 
-- `DtRecipe*` components will remain available until the next major Dialtone release (Q2 2026), but **will no longer receive updates**
-- Migrate before then to stay current with improvements and bug fixes
+- `DtRecipe*` components were deprecated in a previous release and have now been **fully removed** in this major version.
+- If you have not yet migrated, you **must** do so before upgrading.
 
 ## Automated Migration Script
 

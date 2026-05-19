@@ -57,7 +57,7 @@
         startIconClass,
       ]"
     >
-      <!-- @slot Icon displayed at the start (left in LTR) of the button -->
+      <!-- @slot Icon displayed at the start (aka left) of the button -->
       <slot
         name="startIcon"
         :icon-size="iconSize"
@@ -107,7 +107,7 @@
         endIconClass,
       ]"
     >
-      <!-- @slot Icon displayed at the end (right in LTR) of the button -->
+      <!-- @slot Icon displayed at the end (aka right) of the button -->
       <slot
         name="endIcon"
         :icon-size="iconSize"
@@ -167,7 +167,6 @@ import { DialtoneLocalization } from '@/localization';
  * @see https://dialtone.dialpad.com/components/button.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtButton',
 
   components: { DtLoader },
@@ -335,7 +334,7 @@ export default {
     },
 
     /**
-     * Used to customize the block-start icon container
+     * Used to customize the block-start (aka top) icon container
      */
     blockStartIconClass: {
       type: [String, Array, Object],
@@ -343,7 +342,7 @@ export default {
     },
 
     /**
-     * Used to customize the block-end icon container
+     * Used to customize the block-end (aka bottom) icon container
      */
     blockEndIconClass: {
       type: [String, Array, Object],

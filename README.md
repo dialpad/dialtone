@@ -20,19 +20,21 @@ npm install @dialpad/dialtone @dialpad/i18n
 
 ### Theming
 
+Dialtone has four theming dimensions: **mode** (light/dark), **brand** (the color palette), **material** (the neutral ramp), and **contrast** (default/high). Each switches at runtime via `@dialpad/dialtone/themes/config`. See the [Theme and Mode guide](https://dialtone.dialpad.com/guides/theme-and-mode/) for the full API.
+
 #### Quick Start
 
-**Install packages:**
+**Install:**
 
 ```shell
-npm install @dialpad/dialtone @dialpad/dialtone-tokens
+npm install @dialpad/dialtone
 ```
 
 **Initialize (main.js or App.vue):**
 
 ```js
 import { initDialtoneTheme } from '@dialpad/dialtone/themes/config';
-import Dp from '@dialpad/dialtone-tokens/themes/dp';
+import Dp from '@dialpad/dialtone/themes/dp';
 
 initDialtoneTheme(Dp, 'light');
 ```
@@ -43,43 +45,46 @@ Done. Your app now has theming.
 
 ##### Basic Usage
 
-**Toggle light/dark mode:**
-
 ```js
-import { setMode } from '@dialpad/dialtone/themes/config';
-setMode('dark');
+import {
+  setMode,
+  setBrand,
+  setMaterial,
+  setContrast,
+} from '@dialpad/dialtone/themes/config';
+import Tmo from '@dialpad/dialtone/themes/tmo';
+import HighContrast from '@dialpad/dialtone/themes/high-contrast';
+
+setMode('dark');           // toggles data-dt-mode
+setBrand(Tmo);             // injects brand CSS, sets data-dt-brand
+setMaterial('steel');      // toggles data-dt-material
+setContrast(HighContrast); // injects contrast CSS, sets data-dt-contrast
+setContrast(null);         // remove contrast override
 ```
 
-**Use different theme at startup:**
+`setMode` and `setMaterial` toggle attributes against pre-bundled CSS — no injection. `setBrand` and `setContrast` inject per-theme override CSS.
+
+---
+
+##### Brand-locked materials
+
+Most brands declare a paired material via the `shell.base.material` token in their token JSON. `setBrand` auto-applies the locked material in the same paint frame. Free-choice brands (`dp`, `tmo`, `prota-deuter`, `trita`) keep material independent.
 
 ```js
-import Melon from '@dialpad/dialtone-tokens/themes/melon';
-initDialtoneTheme(Melon, 'light');
+import { getBrandMaterial, hasBrandMaterialLock } from '@dialpad/dialtone/themes/config';
+import Botany from '@dialpad/dialtone/themes/botany';
+
+getBrandMaterial(Botany);     // 'sandstone'
+hasBrandMaterialLock(Botany); // true
 ```
 
-**Switch themes dynamically:**
-
-```js
-import { setBrand } from '@dialpad/dialtone/themes/config';
-import Tmo from '@dialpad/dialtone-tokens/themes/tmo';
-setBrand(Tmo);
-```
-
-**Enable high contrast:**
-
-```js
-import { setContrast } from '@dialpad/dialtone/themes/config';
-import HighContrast from '@dialpad/dialtone-tokens/themes/high-contrast';
-
-setContrast(HighContrast);
-setContrast(null);  // disable
-```
+Use these getters to drive picker UI (disable material options on locked brands).
 
 ---
 
 ##### Available Themes
 
-51 themes total. Use any with `initDialtoneTheme()` or `setBrand()`.
+50+ themes total. Pass theme modules to `initDialtoneTheme()` or `setBrand()`.
 
 **Standard:** dp, tmo, aegean, botany, buttercream, high-desert, melon, plum, sunflower, verdant-haze
 
@@ -89,10 +94,10 @@ setContrast(null);  // disable
 
 **Contrast:** high-contrast
 
-**Import pattern:**
+**Materials** (string names, no module imports): sandstone, steel, graphite, iron, amethyst, jade
 
 ```js
-import ThemeName from '@dialpad/dialtone-tokens/themes/theme-name';
+import ThemeName from '@dialpad/dialtone/themes/theme-name';
 ```
 
 ---
@@ -118,7 +123,7 @@ initDialtoneTheme(Dp, 'light', this);
 Then set attributes:
 
 ```html
-<html data-dt-mode="light" data-dt-brand="dp" data-dt-contrast="default">
+<html data-dt-mode="light" data-dt-brand="dp" data-dt-material="sandstone" data-dt-contrast="default">
 ```
 
 **Mode sections:**
@@ -129,29 +134,18 @@ See [Mode Island component](https://dialtone.dialpad.com/components/mode-island.
 
 ##### Legacy Theming System (Backward Compatible)
 
-The original theming system remains fully supported for existing projects. New projects should use the layered system above for better performance and smaller bundle sizes.
-
-**Note:** Both systems support Shadow DOM identically - pass the host element as the second parameter.
+The original `setTheme()` API remains supported for existing projects. New projects should use the layered system above for smaller bundle sizes and finer-grained switching across all four dimensions.
 
 ```js
 import { setTheme } from '@dialpad/dialtone/themes/config';
 import DpLight from '@dialpad/dialtone/themes/dp-light';
 import DpDark from '@dialpad/dialtone/themes/dp-dark';
-import TmoLight from '@dialpad/dialtone/themes/tmo-light';
-import TmoDark from '@dialpad/dialtone/themes/tmo-dark';
 
-// Set theme (automatically detected as legacy)
-setTheme(DpLight);
-
-// Shadow DOM support
-setTheme(DpLight, document.querySelector('#my-shadow-root-host'));
+setTheme(DpLight);   // auto-detected as legacy
+setTheme(DpLight, document.querySelector('#my-shadow-root-host')); // Shadow DOM support
 ```
 
-**Legacy themes available:**
-
-- `DpLight`, `DpDark`, `TmoLight`, `TmoDark`
-
-**Note:** Legacy system loads complete token files (~1256KB per theme). Consider migrating to layered system for better performance.
+**Legacy themes:** `DpLight`, `DpDark`, `TmoLight`, `TmoDark` — each ships the complete token set (~1256KB per theme), versus the layered system's small per-dimension overrides.
 
 #### Dialtone icons
 

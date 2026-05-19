@@ -111,7 +111,7 @@
               label-class="d-jc-flex-start d-tw-pretty"
               :data-sidebar-link="subItem.link"
               :class="[
-                'd-w100p d-fw-normal',
+                'd-w100p d-fw-normal dialtone-shell-btn',
                 { 'd-pis-600': depth === 0 },
                 { 'd-pis-800': depth === 1 },
                 {

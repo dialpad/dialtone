@@ -29,7 +29,6 @@ import { DtStack } from '@/components/Stack';
 import { DtLink } from '@/components/Link';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'ChannelComponent',
   components: {
     NodeViewWrapper,

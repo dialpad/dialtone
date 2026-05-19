@@ -8,7 +8,7 @@ keywords: ["outer spacing", "gap", "offset", "margin inline start", "margin inli
 >
 > Avoid applying margins directly. Lean toward using layout components like [Stack](/components/stack/) for consistent and maintainable spacing **between** elements.
 
-Use `d-m-{stop}` to set margin using spacing token stops. The number references the spacing token (`d-m-100` = `--dt-spacing-100` = 8px). Logical property aliases are also available: `d-mbs-{stop}` (margin-block-start), `d-mbe-{stop}` (margin-block-end), `d-mis-{stop}` (margin-inline-start), `d-mie-{stop}` (margin-inline-end).
+Use `d-m-{stop}` to set margin using spacing token stops. The number references the spacing token (`d-m-100` = `--dt-spacing-100` = 8px). Logical property aliases are also available: `d-mbs-{stop}` (margin-block-start, aka top), `d-mbe-{stop}` (margin-block-end, aka bottom), `d-mis-{stop}` (margin-inline-start, aka left), `d-mie-{stop}` (margin-inline-end, aka right).
 
 ## Add Margin to All Sides
 
@@ -67,7 +67,7 @@ Auto margins allow an element to fill a remaining space within an object. This i
 
 ## Classes
 
-Margins can be added using `d-m-{stop}` or directional classes like `d-m{t|r|b|l|y|x}-{stop}`. Logical property aliases are also available: `d-mbs-{stop}` (margin-block-start), `d-mbe-{stop}` (margin-block-end), `d-mis-{stop}` (margin-inline-start), `d-mie-{stop}` (margin-inline-end).
+Margins can be added using `d-m-{stop}` or directional classes like `d-m{t|r|b|l|y|x}-{stop}`. Logical property aliases are also available: `d-mbs-{stop}` (margin-block-start, aka top), `d-mbe-{stop}` (margin-block-end, aka bottom), `d-mis-{stop}` (margin-inline-start, aka left), `d-mie-{stop}` (margin-inline-end, aka right).
 
 It is highly recommended to use the [DtStack component](/components/stack.md) prior to applying margins individually.
 

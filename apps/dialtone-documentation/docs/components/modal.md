@@ -71,7 +71,7 @@ Although highly versatile, this doesn't mean modal dialogs are fit for all purpo
 <example-modal />
 <!-- @code -->
 <dt-modal
-  title="Example title"
+  header-text="Example title"
   :open="isOpen"
   @update:open="updateOpen"
   copy="Lorem ipsum ..."
@@ -109,7 +109,7 @@ This is the default behavior that adds the scroll automatically in the modal con
 <example-modal fixed-header-footer :copy="fixedHeaderFooterCopy" />
 <!-- @code -->
 <dt-modal
-  title="Example title"
+  header-text="Example title"
   :open="isOpen"
   @update:open="updateOpen"
   :showFooter="true"
@@ -149,7 +149,7 @@ A modal style for destructive or irreversible actions.
 <example-modal kind="critical" />
 <!-- @code -->
 <dt-modal
-  title="Example title"
+  header-text="Example title"
   :open="isOpen"
   kind="critical"
   copy="Sed at orci quis nunc finibus gravida eget vitae est..."
@@ -189,9 +189,48 @@ To make this modal take up as much of the screen as possible.
 <example-modal size="full" />
 <!-- @code -->
 <dt-modal
-  title="Example title"
+  header-text="Example title"
   :open="isOpen"
   size="full"
+  copy="Sed at orci quis nunc finibus gravida eget vitae est..."
+  @update:open="updateOpen"
+>
+  <template
+    #footer
+  >
+    <dt-button
+      id="cancel-button"
+      :kind="secondaryButtonKind"
+      importance="clear"
+    >
+      Cancel
+    </dt-button>
+    <dt-button
+      id="confirm-button"
+      importance="primary"
+    >
+      Confirm
+    </dt-button>
+  </template>
+</dt-modal>
+<dt-button
+  @click="isOpen = !isOpen"
+>
+  Click to open
+</dt-button>
+```
+
+### Transparent Backdrop
+
+By default, modals render a dimming overlay behind the dialog box. Set `transparent-backdrop` to render the surrounding backdrop fully transparent. The dialog box itself keeps its solid background. Use this when the underlying UI should remain visible behind the modal.
+
+```vue demo
+<example-modal transparent-backdrop />
+<!-- @code -->
+<dt-modal
+  header-text="Example title"
+  :open="isOpen"
+  transparent-backdrop
   copy="Sed at orci quis nunc finibus gravida eget vitae est..."
   @update:open="updateOpen"
 >
@@ -236,7 +275,7 @@ When there is a need of more context information regarding the content of the Mo
 </dt-stack>
 <!-- @code -->
 <dt-modal
-  title="Example title"
+  header-text="Example title"
   :open="isOpen"
   banner-title="This banner can have different kinds."
   :bannerKind="selectedBannerKind"
@@ -322,7 +361,7 @@ Modal content renders outside the DOM tree. Use the `contentMode` prop to apply 
   <dt-button @click="invertedModalOpen = true">Open Inverted Modal</dt-button>
   <dt-modal
     content-mode="invert"
-    title="Inverted Modal"
+    header-text="Inverted Modal"
     copy="This modal's content is in the inverted mode."
     :open="invertedModalOpen"
     @update:open="invertedModalOpen = $event"

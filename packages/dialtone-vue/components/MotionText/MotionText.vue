@@ -77,7 +77,6 @@
 import { MOTION_TEXT_ANIMATION_MODES, MOTION_TEXT_SPEEDS, MOTION_TEXT_TIMING_PRESETS } from './MotionTextConstants';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtMotionText',
 
   props: {

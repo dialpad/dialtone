@@ -67,7 +67,6 @@ import ModeMixin from '@/common/mixins/mode';
  * @see https://dialtone.dialpad.com/components/tooltip.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtTooltip',
 
   mixins: [ModeMixin],
@@ -172,7 +171,9 @@ export default {
 
     /**
      * Sets the element to which the tooltip is going to append to.
-     * 'body' will append to the nearest body (supports shadow DOM).
+     * 'body' appends to the nearest ancestor <dialog> element when inside one
+     * (keeping the tooltip in the browser's top layer), or to the nearest body otherwise.
+     * To always append to body regardless of dialog context, pass document.body as an HTMLElement.
      * This prop is not reactive, must be set on initial render.
      * @values 'body', 'parent', HTMLElement,
      */
@@ -488,6 +489,14 @@ export default {
       }
     },
 
+    resolveAppendTo () {
+      // When inside a native <dialog>, append there to stay in the browser's top layer.
+      if (this.appendTo === 'body') {
+        return this.anchor?.closest('dialog') ?? this.anchor?.getRootNode()?.querySelector('body');
+      }
+      return this.appendTo;
+    },
+
     setProps () {
       if (!this.tip || !this.tip.setProps || !this.anchor) return;
 
@@ -495,7 +504,7 @@ export default {
         this.tip.setProps({
           ...this.tippyProps,
           // these need to be set here rather than in tippyProps because they are non-reactive
-          appendTo: this.appendTo === 'body' ? this.anchor?.getRootNode()?.querySelector('body') : this.appendTo,
+          appendTo: this.resolveAppendTo(),
           zIndex: this.calculateAnchorZindex(),
         });
       }
@@ -529,6 +538,7 @@ export default {
         touch: false,
         onMount: this.onMount,
         showOnCreate: this.internalShow,
+        appendTo: this.resolveAppendTo(),
         popperOptions: getPopperOptions({
           hasHideModifierEnabled: true,
         }),

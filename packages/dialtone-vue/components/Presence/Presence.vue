@@ -29,7 +29,6 @@ import { PRESENCE_STATES, PRESENCE_STATES_LIST } from './PresenceConstants';
  * @see https://dialtone.dialpad.com/components/presence.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtPresence',
   props: {
 

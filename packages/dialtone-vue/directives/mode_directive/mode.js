@@ -1,6 +1,7 @@
 import {
   getOppositeMode,
   getRootContrast,
+  getRootMaterial,
   findParentMode,
 } from '@/components/ModeIsland/Utils';
 import { CONTENT_MODE_VALUES } from '@/common/mode_constants';
@@ -14,8 +15,9 @@ const SUGGESTIONS = {
 /**
  * v-dt-mode directive — applies a color mode (light, dark, or invert) to an element.
  *
- * Sets `data-dt-mode` and `data-dt-contrast` attributes so descendant token-based
- * styles (`d-fc-primary`, `d-bgc-secondary`, etc.) resolve to the correct palette.
+ * Sets `data-dt-mode`, `data-dt-contrast`, and `data-dt-material` attributes so
+ * descendant token-based styles (`d-fc-primary`, `d-bgc-secondary`, etc.) resolve
+ * to the correct palette under the active contrast and material.
  *
  * @example
  * // Explicit modes
@@ -73,13 +75,11 @@ export const DtModeDirective = {
       if (!arg) return 'invert';
       if (VALID_MODES.includes(arg)) return arg;
       if (SUGGESTIONS[arg]) {
-        // eslint-disable-next-line no-console
         console.warn(
           `[DtModeDirective] Invalid mode "${arg}". Did you mean "${SUGGESTIONS[arg]}"? Falling back to "${SUGGESTIONS[arg]}".`,
         );
         return SUGGESTIONS[arg];
       }
-      // eslint-disable-next-line no-console
       console.warn(
         `[DtModeDirective] Invalid mode "${arg}". Valid modes: ${VALID_MODES.join(', ')}. Falling back to "invert".`,
       );
@@ -90,6 +90,7 @@ export const DtModeDirective = {
       const state = {
         arg: mode,
         contrastObserver: null,
+        materialObserver: null,
         modeObserver: null,
       };
 
@@ -103,6 +104,18 @@ export const DtModeDirective = {
       state.contrastObserver.observe(document.documentElement, {
         attributes: true,
         attributeFilter: ['data-dt-contrast'],
+      });
+
+      // Set material from root
+      el.setAttribute('data-dt-material', getRootMaterial());
+
+      // Watch for material changes on root
+      state.materialObserver = new MutationObserver(() => {
+        el.setAttribute('data-dt-material', getRootMaterial());
+      });
+      state.materialObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-dt-material'],
       });
 
       if (mode === 'light' || mode === 'dark') {
@@ -144,6 +157,7 @@ export const DtModeDirective = {
     function removeAttributes (el) {
       el.removeAttribute('data-dt-mode');
       el.removeAttribute('data-dt-contrast');
+      el.removeAttribute('data-dt-material');
     }
 
     function cleanup (state) {
@@ -151,6 +165,10 @@ export const DtModeDirective = {
       if (state.contrastObserver) {
         state.contrastObserver.disconnect();
         state.contrastObserver = null;
+      }
+      if (state.materialObserver) {
+        state.materialObserver.disconnect();
+        state.materialObserver = null;
       }
       if (state.modeObserver) {
         state.modeObserver.disconnect();

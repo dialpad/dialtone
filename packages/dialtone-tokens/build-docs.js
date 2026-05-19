@@ -53,7 +53,7 @@ export function buildDocs (platformName, theme, currentObj) {
  * @returns {Array|undefined} Array with the keywords, or undefined if there are none
  */
 function getTokenKeywords (obj, tokenPath, keywords = []) {
-  if (tokenPath.legth === 0 || !obj) return;
+  if (tokenPath.length === 0 || !obj) return;
   const currentCategory = tokenPath[0];
   if (currentCategory && obj[currentCategory] && obj[currentCategory].keywords) {
     keywords.push(...obj[currentCategory].keywords);

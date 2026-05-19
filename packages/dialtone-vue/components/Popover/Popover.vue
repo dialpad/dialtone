@@ -148,7 +148,6 @@ import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
  * @see https://dialtone.dialpad.com/components/popover.html
  */
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtPopover',
 
   /********************
@@ -526,7 +525,9 @@ export default {
 
     /**
      * Sets the element to which the popover is going to append to.
-     * 'body' will append to the nearest body (supports shadow DOM).
+     * 'body' will append to the nearest ancestor <dialog> element when inside one
+     * (keeping the popover in the browser's top layer), or to the nearest body otherwise.
+     * To always append to body regardless of dialog context, pass document.body as an HTMLElement.
      * 'root' will try append to the iFrame's parent body if it is contained in an iFrame
      * and has permissions to access it, else, it'd default to 'parent'.
      * @values 'body', 'parent', 'root', HTMLElement
@@ -1074,7 +1075,10 @@ export default {
 
       switch (this.appendTo) {
         case 'body':
-          internalAppendTo = this.anchorEl?.getRootNode()?.querySelector('body');
+          // When inside a native <dialog> (e.g. DtModal in Dialtone Next), append to the
+          // dialog so the popover stays in the browser's top layer. Otherwise fall back to body.
+          internalAppendTo = this.anchorEl?.closest('dialog') ??
+            this.anchorEl?.getRootNode()?.querySelector('body');
           break;
 
         case 'root':

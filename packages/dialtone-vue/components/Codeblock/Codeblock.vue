@@ -12,7 +12,6 @@
 import { CODEBLOCK_SIZES, CODEBLOCK_SIZE_MAP } from './CodeblockConstants';
 
 export default {
-  compatConfig: { MODE: 3 },
   name: 'DtCodeblock',
 
   props: {

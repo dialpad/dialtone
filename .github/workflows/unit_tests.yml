@@ -4,11 +4,13 @@ on:
   pull_request:
     paths:
       - 'packages/dialtone-vue/**'
+      - 'packages/dialtone-tokens/**'
   push:
     branches:
       - staging
     paths:
       - 'packages/dialtone-vue/**'
+      - 'packages/dialtone-tokens/**'
 
 env:
   HUSKY: 0
@@ -18,7 +20,28 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  changes:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+      contents: read
+    outputs:
+      vue: ${{ steps.filter.outputs.vue }}
+      tokens: ${{ steps.filter.outputs.tokens }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            vue:
+              - 'packages/dialtone-vue/**'
+            tokens:
+              - 'packages/dialtone-tokens/**'
+
   test:
+    needs: changes
+    if: needs.changes.outputs.vue == 'true'
     runs-on: ubuntu-latest
     permissions:
       packages: read
@@ -31,3 +54,19 @@ jobs:
 
       - name: Run dialtone-vue tests with coverage
         run: pnpm nx run dialtone-vue:test:coverage
+
+  test-tokens:
+    needs: changes
+    if: needs.changes.outputs.tokens == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      packages: read
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Run dialtone-tokens tests
+        run: pnpm nx run dialtone-tokens:test

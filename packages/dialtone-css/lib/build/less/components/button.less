@@ -281,21 +281,21 @@
 
   .d-btn:disabled &,
   .d-btn--disabled & {
-    opacity: .6;
+    opacity: var(--dt-opacity-800);
   }
 }
 
 .d-btn__leading {
   order: -1;
   margin-inline: calc(-1 * var(--button-padding-x)) var(--dt-spacing-25);
-  border-start-start-radius: calc(var(--button-border-radius) - 1px);
-  border-end-start-radius: calc(var(--button-border-radius) - 1px);
+  border-start-start-radius: calc(var(--button-border-radius) - var(--dt-layout-1px));
+  border-end-start-radius: calc(var(--button-border-radius) - var(--dt-layout-1px));
 }
 
 .d-btn__trailing {
   margin-inline: var(--dt-spacing-25) calc(-1 * var(--button-padding-x));
-  border-start-end-radius: calc(var(--button-border-radius) - 1px);
-  border-end-end-radius: calc(var(--button-border-radius) - 1px);
+  border-start-end-radius: calc(var(--button-border-radius) - var(--dt-layout-1px));
+  border-end-end-radius: calc(var(--button-border-radius) - var(--dt-layout-1px));
   order: 2;
 }
 
@@ -303,11 +303,11 @@
 //  $   BUTTON LABEL
 //  ----------------------------------------------------------------------------
 .d-btn__label {
+  z-index: var(--zi-base1);
   display: inline-flex;
   flex: 1 auto;
   align-items: center;
   justify-content: center;
-  // background-color: rgba(0,0,0,.5);
 }
 
 //  ============================================================================
@@ -630,7 +630,7 @@
   .d-btn__icon,
   .d-btn__label {
     opacity: 0;
-    transition: opacity 50ms var(--ttf-in-out);
+    transition: opacity var(--td50) var(--ttf-in-out);
   }
 
   //  Pseudo-element spinner (fallback for raw HTML consumers)

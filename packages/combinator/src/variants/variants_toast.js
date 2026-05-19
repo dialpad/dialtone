@@ -8,14 +8,14 @@ export default {
   default: {
     slots: {
       default: {
-        initialValue: 'Message body with <a href="#" class="d-link">a link</a>.',
+        initialValue: 'Message body with <dt-link href="#">a link</dt-link>.',
       },
     },
     props: {
       headerText: {
         initialValue: 'Base title (optional)',
       },
-      show: {
+      open: {
         initialValue: true,
       },
     },
@@ -26,10 +26,10 @@ export default {
       headerText: { initialValue: 'Info title' },
       kind: { initialValue: 'info' },
       showClose: { initialValue: false },
-      show: { initialValue: true },
+      open: { initialValue: true },
     },
     slots: {
-      default: { initialValue: 'Message body with <a href="#" class="d-link">a link</a>.' },
+      default: { initialValue: 'Message body with <dt-link href="#">a link</dt-link>.' },
       action: { initialValue: '<dt-button :size="200" importance="outlined" kind="muted">Action</dt-button>' },
     },
   },
@@ -39,7 +39,7 @@ export default {
       headerText: { initialValue: 'Warning title' },
       kind: { initialValue: 'warning' },
       important: { initialValue: true },
-      show: { initialValue: true },
+      open: { initialValue: true },
     },
   },
 };

@@ -1,55 +1,5 @@
 {
   "color": {
-    "black": {
-      "50": {
-        "value": "oklch(0.1595 0.0045 84.59)",
-        "type": "color"
-      },
-      "100": {
-        "value": "oklch(0.2134 0.006 91.63)",
-        "type": "color"
-      },
-      "200": {
-        "value": "oklch(0.2572 0.0063 78.21)",
-        "type": "color"
-      },
-      "300": {
-        "value": "oklch(0.3352 0.0055 56.21)",
-        "type": "color"
-      },
-      "400": {
-        "value": "oklch(0.4468 0.0055 78.27)",
-        "type": "color"
-      },
-      "500": {
-        "value": "oklch(0.5134 0.0063 95.18)",
-        "type": "color"
-      },
-      "600": {
-        "value": "oklch(0.6001 0.0032 84.56)",
-        "type": "color"
-      },
-      "700": {
-        "value": "oklch(0.7321 0.0061 84.57)",
-        "type": "color"
-      },
-      "800": {
-        "value": "oklch(0.858 0.0059 84.57)",
-        "type": "color"
-      },
-      "900": {
-        "value": "oklch(0.9312 0.0029 84.56)",
-        "type": "color"
-      },
-      "950": {
-        "value": "oklch(0.9774 0.0025 48.72)",
-        "type": "color"
-      },
-      "1000": {
-        "value": "oklch(1 0 0)",
-        "type": "color"
-      }
-    },
     "purple": {
       "50": {
         "value": "oklch(0.1531 0.0859 291.49)",

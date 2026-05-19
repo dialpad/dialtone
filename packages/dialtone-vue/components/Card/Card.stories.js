@@ -26,6 +26,10 @@ export const argTypesData = {
     },
   },
 
+  maxHeight: {
+    control: { type: 'text' },
+  },
+
   // Slots
   content: {
     control: 'text',

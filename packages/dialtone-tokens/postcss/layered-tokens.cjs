@@ -4,15 +4,19 @@ const {
   REGEX_OPTIONS,
 } = require('./constants.cjs');
 
+// Hoisted to module scope — read-only and the plugin runs them per selector
+// across the whole layered build.
+const TYPOGRAPHY_SEGMENTS_REGEX = new RegExp(`--dt-typography-(${REGEX_OPTIONS.TYPOGRAPHY_TYPE})-?(${REGEX_OPTIONS.TYPOGRAPHY_SIZES})?-?(${REGEX_OPTIONS.TYPOGRAPHY_VARIABLES})?-?(${REGEX_OPTIONS.TYPOGRAPHY_VARIABLES})?-?(.+)`);
+const SHADOW_SEGMENTS_REGEX = new RegExp(`--dt-shadow-(${REGEX_OPTIONS.SHADOW_VARIABLES})-?([0-9])?-(\\w+)`);
+
 /**
  * Compose typography tokens within a selector
  */
 function typography (typographyDeclarations, Declaration, parentRule) {
-  const typographySegmentsRegex = new RegExp(`--dt-typography-(${REGEX_OPTIONS.TYPOGRAPHY_TYPE})-?(${REGEX_OPTIONS.TYPOGRAPHY_SIZES})?-?(${REGEX_OPTIONS.TYPOGRAPHY_VARIABLES})?-?(${REGEX_OPTIONS.TYPOGRAPHY_VARIABLES})?-?(.+)`);
   const typographyMap = typographyDeclarations.map(m => m.prop).filter(prop => !prop.endsWith('-font-family'))
     .reduce((typographies, typography) => {
       const matches = typography
-        .split(typographySegmentsRegex)
+        .split(TYPOGRAPHY_SEGMENTS_REGEX)
         .filter(chunk => !!chunk);
 
       matches.pop();
@@ -31,11 +35,10 @@ function typography (typographyDeclarations, Declaration, parentRule) {
  * Compose box shadow tokens within a selector
  */
 function boxShadows (shadowDeclarations, Declaration, parentRule) {
-  const shadowSegmentsRegex = new RegExp(`--dt-shadow-(${REGEX_OPTIONS.SHADOW_VARIABLES})-?([0-9])?-(\\w+)`);
   const shadowMap = shadowDeclarations.map(m => m.prop)
     .reduce((shadows, shadow) => {
       const [name, index] = shadow
-        .split(shadowSegmentsRegex).slice(1, -1);
+        .split(SHADOW_SEGMENTS_REGEX).slice(1, -1);
       // Track the maximum layer index for multi-layer shadows
       const layerIndex = Number.isNaN(Number.parseInt(index)) ? 1 : Number.parseInt(index);
       shadows[name] = Math.max(shadows[name] || 0, layerIndex);

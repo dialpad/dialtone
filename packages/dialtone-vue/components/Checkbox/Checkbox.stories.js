@@ -72,10 +72,57 @@ export const argTypesData = {
     control: 'select',
     options: ['', ...Object.values(VALIDATION_MESSAGE_TYPES)],
   },
+  label: {
+    control: { type: 'text' },
+  },
+  name: {
+    control: { type: 'text' },
+  },
+  value: {
+    control: { type: 'text' },
+  },
+  disabled: {
+    control: { type: 'boolean' },
+  },
+  indeterminate: {
+    control: { type: 'boolean' },
+  },
+  showLabel: {
+    control: { type: 'boolean' },
+  },
+  labelSize: {
+    options: ['100', '200', '300', '400'],
+    control: { type: 'select' },
+  },
+  labelStrength: {
+    options: ['bold', 'semibold', 'medium', 'normal'],
+    control: { type: 'select' },
+  },
+  inputClass: {
+    description: 'Used to customize the input element',
+  },
+  labelClass: {
+    description: 'Used to customize the label container',
+  },
+  descriptionClass: {
+    description: 'Used to customize the description container',
+  },
+  messagesClass: {
+    description: 'Used to customize the validation messages component',
+  },
+  showMessages: {
+    control: { type: 'boolean' },
+  },
+  messages: {
+    control: 'object',
+  },
   labelChildProps: {
     control: null,
   },
   descriptionChildProps: {
+    control: null,
+  },
+  messagesChildProps: {
     control: null,
   },
 

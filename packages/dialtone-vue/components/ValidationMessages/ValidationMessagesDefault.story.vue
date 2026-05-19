@@ -4,6 +4,7 @@
       :id="$attrs.id"
       :validation-messages="$attrs.validationMessages"
       :show-messages="$attrs.showMessages"
+      :icon-class="$attrs.iconClass"
     />
   </div>
 </template>

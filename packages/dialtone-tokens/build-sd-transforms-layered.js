@@ -3,92 +3,38 @@
  * This generates separate files for core (non-color) tokens and brand-specific color tokens.
  */
 
-/* eslint-disable complexity, max-lines */
+/* eslint-disable complexity */
 
 import { register, getTransforms, expandTypesMap } from '@tokens-studio/sd-transforms';
 import StyleDictionary from 'style-dictionary';
-import { promises, readFileSync } from 'fs';
+import { existsSync, promises, readFileSync, writeFileSync, unlinkSync } from 'fs';
+import path from 'path';
 
-import { registerDialtoneTransforms } from './dialtone-transforms.js';
+import { registerDialtoneTransforms, registerDialtonePreprocessors, registerRelativeColorWrap, isMaterialNamespaceRef } from './dialtone-transforms.js';
 import { buildDocs } from './build-docs.js';
 const Root = JSON.parse(readFileSync('./tokens/root.json', 'utf8'));
 const BASE_FONT_SIZE = Root.font.size.root.value;
 
 register(StyleDictionary);
 registerDialtoneTransforms(StyleDictionary);
+registerDialtonePreprocessors(StyleDictionary);
+registerRelativeColorWrap(StyleDictionary);
 
-// Register custom format for mode-specific CSS variables
-StyleDictionary.registerFormat({
-  name: 'css/variables-with-modes',
-  format: function ({ dictionary, options = {} }) {
-    const { outputReferences } = options;
-
-    // Group tokens by mode (light/dark)
-    const tokensByMode = {
-      light: [],
-      dark: [],
-    };
-
-    dictionary.allTokens.forEach(token => {
-      // Determine if token is for dark mode based on file path
-      const isDarkMode = token.filePath?.includes('/dark.json') ||
-                        token.filePath?.includes('base/dark.json');
-
-      // Format the value
-      let value = token.value;
-
-      // Handle references
-      if (outputReferences !== false) {
-        // Check if we should output a reference
-        const shouldOutputRef = outputReferences === true ||
-          (typeof outputReferences === 'function' && outputReferences(token));
-
-        if (shouldOutputRef && token.original && token.original.value &&
-            typeof token.original.value === 'string' &&
-            token.original.value.includes('{')) {
-          // Token is a reference, use var()
-          const matches = token.original.value.match(/{([^}]+)}/g);
-          if (matches) {
-            value = token.original.value;
-            matches.forEach((match) => {
-              const tokenPath = match.slice(1, -1).split('.');
-              const varName = 'dt-' + tokenPath.join('-').toLowerCase().replace(/_/g, '-');
-              value = value.replace(match, `var(--${varName})`);
-            });
-          }
-        }
-      }
-
-      const cssVar = `  --${token.name}: ${value};`;
-
-      if (isDarkMode) {
-        tokensByMode.dark.push(cssVar);
-      } else {
-        tokensByMode.light.push(cssVar);
-      }
-    });
-
-    let output = '/**\n * Do not edit directly, this file was auto-generated.\n */\n\n';
-
-    // Add light mode tokens to :root
-    if (tokensByMode.light.length > 0) {
-      output += ':root {\n';
-      output += '  color-scheme: light;\n';
-      output += tokensByMode.light.join('\n') + '\n';
-      output += '}\n';
-    }
-
-    // Add dark mode tokens with data attribute selector
-    if (tokensByMode.dark.length > 0) {
-      output += '\n[data-dt-mode="dark"] {\n';
-      output += '  color-scheme: dark;\n';
-      output += tokensByMode.dark.join('\n') + '\n';
-      output += '}\n';
-    }
-
-    return output;
-  },
-});
+/**
+ * Default `outputReferences` policy for layered builds: emit `var(--…)` for
+ * most token references, but resolve to literals for cases where the var form
+ * is wrong or the consumer expects a numeric:
+ *   - avatar.anchor.hue: must be a numeric hue, not a var()
+ *   - studio-tokens-modified values + boxShadow colors: rgb-encoded, not refable
+ *   - {material.*} refs: belong to the runtime material override, not this output
+ */
+function defaultLayeredOutputReferences (token) {
+  if (token.path?.join('.') === 'avatar.anchor.hue') return false;
+  if (token.$extensions?.['studio.tokens']?.modify ||
+      (token.$extensions?.['studio.tokens']?.originalType === 'boxShadow' && token.type === 'color')) return false;
+  if (isMaterialNamespaceRef(token)) return false;
+  return true;
+}
 
 // Token filter functions
 const isColorToken = (token) => {
@@ -138,7 +84,7 @@ async function buildLayeredTokensForBrand(brandName, lightThemeConfig, darkTheme
     const coreConfig = {
       // Include both base AND dp sources to get all non-color tokens
       source: [...lightThemeConfig.include, ...lightThemeConfig.source],
-      preprocessors: ['tokens-studio'],
+      preprocessors: ['tokens-studio', 'dt/relative-color/extract'],
       expand: {
         typesMap: expandTypesMap,
       },
@@ -178,7 +124,7 @@ async function buildLayeredTokensForBrand(brandName, lightThemeConfig, darkTheme
   // Build light colors
   const lightColorConfig = {
     source: lightThemeConfig.source,
-    preprocessors: ['tokens-studio'],
+    preprocessors: ['tokens-studio', 'dt/relative-color/extract'],
     expand: {
       typesMap: expandTypesMap,
     },
@@ -191,19 +137,7 @@ async function buildLayeredTokensForBrand(brandName, lightThemeConfig, darkTheme
         basePxFontSize: Number.parseFloat(BASE_FONT_SIZE),
         buildPath: 'dist/css/layered/',
         theme: `${brandName}-light`,
-        options: {
-          outputReferences: (token) => {
-            // Don't output reference for avatar anchor hue - it needs to be a numeric value
-            if (token.path?.join('.') === 'avatar.anchor.hue') {
-              return false;
-            }
-            if (token.$extensions?.['studio.tokens']?.modify ||
-                (token.$extensions?.['studio.tokens']?.originalType === 'boxShadow' && token.type === 'color')) {
-              return false;
-            }
-            return true;
-          },
-        },
+        options: { outputReferences: defaultLayeredOutputReferences },
         files: [
           {
             destination: `tokens-${brandName}-colors-light.css`,
@@ -225,7 +159,7 @@ async function buildLayeredTokensForBrand(brandName, lightThemeConfig, darkTheme
   // Build dark colors
   const darkColorConfig = {
     source: darkThemeConfig.source,
-    preprocessors: ['tokens-studio'],
+    preprocessors: ['tokens-studio', 'dt/relative-color/extract'],
     expand: {
       typesMap: expandTypesMap,
     },
@@ -238,19 +172,7 @@ async function buildLayeredTokensForBrand(brandName, lightThemeConfig, darkTheme
         basePxFontSize: Number.parseFloat(BASE_FONT_SIZE),
         buildPath: 'dist/css/layered/',
         theme: `${brandName}-dark`,
-        options: {
-          outputReferences: (token) => {
-            // Don't output reference for avatar anchor hue - it needs to be a numeric value
-            if (token.path?.join('.') === 'avatar.anchor.hue') {
-              return false;
-            }
-            if (token.$extensions?.['studio.tokens']?.modify ||
-                (token.$extensions?.['studio.tokens']?.originalType === 'boxShadow' && token.type === 'color')) {
-              return false;
-            }
-            return true;
-          },
-        },
+        options: { outputReferences: defaultLayeredOutputReferences },
         files: [
           {
             destination: `tokens-${brandName}-colors-dark.css`,
@@ -279,39 +201,17 @@ async function buildLayeredTokensForBrand(brandName, lightThemeConfig, darkTheme
     await sd.buildAllPlatforms();
   }
 
-  // Combine light and dark color files
-  const fs = await import('fs');
-  const path = await import('path');
-
+  // Combine the per-mode color files into a single tokens-{brand}-colors.css
+  // with [data-dt-mode] selectors. Math expressions get wrapped in calc().
   const lightFile = path.join('dist/css/layered', `tokens-${brandName}-colors-light.css`);
   const darkFile = path.join('dist/css/layered', `tokens-${brandName}-colors-dark.css`);
   const combinedFile = path.join('dist/css/layered', `tokens-${brandName}-colors.css`);
 
-  if (fs.existsSync(lightFile) && fs.existsSync(darkFile)) {
-    let lightContent = fs.readFileSync(lightFile, 'utf8');
-    let darkContent = fs.readFileSync(darkFile, 'utf8');
+  if (existsSync(lightFile) && existsSync(darkFile)) {
+    const lightVars = extractRootVarsWithCalc(readFileSync(lightFile, 'utf8'));
+    const darkVars = extractRootVarsWithCalc(readFileSync(darkFile, 'utf8'));
 
-    // Extract just the CSS variables from each file
-    const extractVars = (content) => {
-      const match = content.match(/:root\s*{([^}]*)}/s);
-      const vars = match ? match[1].trim() : '';
-
-      // Fix any math expressions that don't have calc()
-      // Matches patterns like "var(--dt-size-200) + var(--dt-size-100)"
-      return vars.replace(/:\s*(var\([^)]+\)\s*[+\-*/][^;]+);/g, (match, expression) => {
-        // If it already has calc(), leave it alone
-        if (expression.includes('calc(')) {
-          return match;
-        }
-        // Wrap the expression with calc()
-        return `: calc(${expression});`;
-      });
-    };
-
-    const lightVars = extractVars(lightContent);
-    const darkVars = extractVars(darkContent);
-
-    // Create combined content
+    const indent = (vars) => vars.split('\n').map(line => '  ' + line.trim()).filter(l => l.trim()).join('\n');
     const combined = `/**
  * Do not edit directly, this file was auto-generated.
  */
@@ -319,21 +219,32 @@ async function buildLayeredTokensForBrand(brandName, lightThemeConfig, darkTheme
 /* Light mode */
 [data-dt-mode="light"] {
   color-scheme: light;
-${lightVars.split('\n').map(line => '  ' + line.trim()).filter(l => l.trim()).join('\n')}
+${indent(lightVars)}
 }
 
 /* Dark mode */
 [data-dt-mode="dark"] {
   color-scheme: dark;
-${darkVars.split('\n').map(line => '  ' + line.trim()).filter(l => l.trim()).join('\n')}
+${indent(darkVars)}
 }`;
 
-    fs.writeFileSync(combinedFile, combined);
-
-    // Remove the separate files
-    fs.unlinkSync(lightFile);
-    fs.unlinkSync(darkFile);
+    writeFileSync(combinedFile, combined);
+    unlinkSync(lightFile);
+    unlinkSync(darkFile);
   }
+}
+
+/**
+ * Extract `--var: value;` declarations from a `:root { ... }` block, then
+ * wrap any math expressions (`var(...) + var(...)`) in `calc()` if they
+ * aren't already.
+ */
+function extractRootVarsWithCalc (content) {
+  const match = content.match(/:root\s*{([^}]*)}/s);
+  const vars = match ? match[1].trim() : '';
+  return vars.replace(/:\s*(var\([^)]+\)\s*[+\-*/][^;]+);/g, (m, expression) =>
+    expression.includes('calc(') ? m : `: calc(${expression});`,
+  );
 }
 
 /**
@@ -365,25 +276,8 @@ export async function runLayeredTokens() {
     if (themes.light && themes.dark) {
       console.log(`Building layered tokens for brand: ${brandName}`);
 
-      // Prepare configurations
-      const prepareConfig = (theme) => {
-        const include = $metadata.tokenSetOrder
-          .filter(set => Object.entries(theme.selectedTokenSets)
-            .filter(([, val]) => val === 'source')
-            .map(([key]) => key).includes(set))
-          .map(set => `tokens/${set}.json`);
-
-        const source = $metadata.tokenSetOrder
-          .filter(set => Object.entries(theme.selectedTokenSets)
-            .filter(([, val]) => val === 'enabled')
-            .map(([key]) => key).includes(set))
-          .map(set => `tokens/${set}.json`);
-
-        return { source, include };
-      };
-
-      const lightConfig = prepareConfig(themes.light);
-      const darkConfig = prepareConfig(themes.dark);
+      const lightConfig = prepareLayeredConfig(themes.light, $metadata);
+      const darkConfig = prepareLayeredConfig(themes.dark, $metadata);
 
       await buildLayeredTokensForBrand(brandName, lightConfig, darkConfig);
     }
@@ -391,64 +285,83 @@ export async function runLayeredTokens() {
 
   // Build high contrast tokens (separate from brand themes)
   console.log('\nBuilding high contrast tokens...');
-
   const highContrastThemes = $themes.filter(t => t.group === 'contrast' && t.name.includes('high'));
+  for (const theme of highContrastThemes) {
+    await runOverrideBuild(theme, $metadata, {
+      buildPath: 'dist/css/layered/contrast/',
+      outputReferences: defaultLayeredOutputReferences,
+    });
+  }
 
-  for (const contrastTheme of highContrastThemes) {
-    const include = $metadata.tokenSetOrder
-      .filter(set => Object.entries(contrastTheme.selectedTokenSets)
-        .filter(([, val]) => val === 'source')
-        .map(([key]) => key).includes(set))
-      .map(set => `tokens/${set}.json`);
-
-    const source = $metadata.tokenSetOrder
-      .filter(set => Object.entries(contrastTheme.selectedTokenSets)
-        .filter(([, val]) => val === 'enabled')
-        .map(([key]) => key).includes(set))
-      .map(set => `tokens/${set}.json`);
-
-    const contrastConfig = {
-      source,
-      preprocessors: ['tokens-studio'],
-      expand: { typesMap: expandTypesMap },
-      include,
-      platforms: {
-        css: {
-          transformGroup: 'custom/css/tokens-studio',
-          prefix: 'dt',
-          basePxFontSize: Number.parseFloat(BASE_FONT_SIZE),
-          buildPath: 'dist/css/layered/contrast/',
-          theme: contrastTheme.name,
-          options: {
-            outputReferences: (token) => {
-              // Don't output reference for avatar anchor hue - it needs to be a numeric value
-              if (token.path?.join('.') === 'avatar.anchor.hue') {
-                return false;
-              }
-              if (token.$extensions?.['studio.tokens']?.modify ||
-                  (token.$extensions?.['studio.tokens']?.originalType === 'boxShadow' && token.type === 'color')) {
-                return false;
-              }
-              return true;
-            },
-          },
-          files: [{
-            destination: `tokens-${contrastTheme.name}.css`,
-            format: 'css/variables',
-            filter: (token) => isColorToken(token) && token.isSource,
-          }],
-        },
-      },
-      log: { warnings: 'disabled', verbosity: 'default', errors: { brokenReferences: 'throw' } },
-    };
-
-    const sd = new StyleDictionary(contrastConfig);
-    await sd.hasInitialized;
-    await sd.cleanAllPlatforms();
-    await sd.buildAllPlatforms();
+  // Build per-material override tokens (one CSS file per material per mode).
+  // Sandstone is the implicit default and ships in base CSS, so no override file.
+  console.log('\nBuilding material override tokens...');
+  const materialThemes = $themes.filter(t => t.group === 'material' && t.name !== 'sandstone');
+  for (const theme of materialThemes) {
+    await runOverrideBuild(theme, $metadata, {
+      buildPath: 'dist/css/layered/material/',
+      // Resolve {material.*} refs to literal OKLCH values — the runtime injection
+      // re-binds --dt-color-black-N from these literals.
+      outputReferences: false,
+    });
   }
 
   console.log('Layered token generation complete!');
+}
+
+/**
+ * Resolve a Tokens Studio theme entry's `selectedTokenSets` to Style Dictionary
+ * `source` (output) and `include` (reference-only) file paths, ordered by the
+ * canonical `tokenSetOrder`.
+ *
+ * The Tokens Studio "source" semantic maps to SD's `include`, and "enabled"
+ * maps to SD's `source`. (Tokens Studio "source" = referenced; SD "source" =
+ * emitted. Naming collision predates this code.)
+ */
+function prepareLayeredConfig(theme, $metadata) {
+  const roleByPath = new Map(Object.entries(theme.selectedTokenSets));
+  const collect = (role) => $metadata.tokenSetOrder
+    .filter(set => roleByPath.get(set) === role)
+    .map(set => `tokens/${set}.json`);
+  return {
+    source: collect('enabled'),
+    include: collect('source'),
+  };
+}
+
+/**
+ * Build a single override CSS file from a Tokens Studio theme entry.
+ * Shared by the high-contrast and material build steps — they differ only in
+ * `buildPath` and the `outputReferences` policy passed in by the caller.
+ */
+async function runOverrideBuild(theme, $metadata, { buildPath, outputReferences }) {
+  const { source, include } = prepareLayeredConfig(theme, $metadata);
+  const config = {
+    source,
+    preprocessors: ['tokens-studio', 'dt/relative-color/extract'],
+    expand: { typesMap: expandTypesMap },
+    include,
+    platforms: {
+      css: {
+        transformGroup: 'custom/css/tokens-studio',
+        prefix: 'dt',
+        basePxFontSize: Number.parseFloat(BASE_FONT_SIZE),
+        buildPath,
+        theme: theme.name,
+        options: { outputReferences },
+        files: [{
+          destination: `tokens-${theme.name}.css`,
+          format: 'css/variables',
+          filter: (token) => isColorToken(token) && token.isSource,
+        }],
+      },
+    },
+    log: { warnings: 'disabled', verbosity: 'default', errors: { brokenReferences: 'throw' } },
+  };
+  const sd = new StyleDictionary(config);
+  await sd.hasInitialized;
+  await sd.cleanAllPlatforms();
+  await sd.buildAllPlatforms();
 }
 
 // Allow running directly

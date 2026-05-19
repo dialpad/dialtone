@@ -7,7 +7,7 @@ import StyleDictionary from 'style-dictionary';
 import { promises, readFileSync } from 'fs';
 import { kebabCaseToPascalCase } from '../../common/utils/client.mjs';
 
-import { registerDialtoneTransforms } from './dialtone-transforms.js';
+import { registerDialtoneTransforms, registerDialtonePreprocessors, registerRelativeColorWrap, isMaterialNamespaceRef } from './dialtone-transforms.js';
 import { buildDocs } from './build-docs.js';
 const Root = JSON.parse(readFileSync('./tokens/root.json', 'utf8'));
 const BASE_FONT_SIZE = Root.font.size.root.value;
@@ -15,6 +15,8 @@ const BASE_FONT_SIZE = Root.font.size.root.value;
 register(StyleDictionary);
 
 registerDialtoneTransforms(StyleDictionary);
+registerDialtonePreprocessors(StyleDictionary);
+registerRelativeColorWrap(StyleDictionary);
 
 StyleDictionary.registerAction({
   name: 'buildDocJson',
@@ -67,7 +69,7 @@ export async function run () {
 
     return {
       source,
-      preprocessors: ['tokens-studio'],
+      preprocessors: ['tokens-studio', 'dt/relative-color/extract'],
       expand: {
         typesMap: expandTypesMap,
       },
@@ -87,6 +89,7 @@ export async function run () {
               if (token.$extensions?.['studio.tokens']?.modify || (token.$extensions?.['studio.tokens']?.originalType === 'boxShadow' && token.type === 'color')) {
                 return false;
               }
+              if (isMaterialNamespaceRef(token)) return false;
               return true;
             },
           },

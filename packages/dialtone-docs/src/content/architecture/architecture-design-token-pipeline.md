@@ -2,8 +2,8 @@
 type: architecture
 category: architecture
 keywords: [design-tokens, style-dictionary, figma, dialtone-tokens, css-custom-properties, less, themes, token-pipeline, rem, runtime-theming]
-ai_summary: How Dialtone design tokens flow from Figma through Style Dictionary into CSS, LESS, JS, and Vue components across 14 themes.
-last_updated: 2026-03-04
+ai_summary: How Dialtone design tokens flow from Figma through Style Dictionary into CSS, LESS, JS, and Vue components across 50+ brands and the four-dimension layered runtime API (mode, brand, contrast, material).
+last_updated: 2026-05-09
 related_packages: [dialtone-tokens, dialtone-css, dialtone-vue]
 ---
 
@@ -83,7 +83,7 @@ tokens/
 │   ├── sunflower/
 │   ├── melon/
 │   ├── aegean/
-│   └── ... (14 brand themes total)
+│   └── ... (50+ brand themes total)
 ├── components/
 │   ├── avatar/
 │   ├── badge/
@@ -169,14 +169,14 @@ Style Dictionary builds 7 output formats simultaneously:
 | CSS custom properties | `--dt-color-foreground-primary` | kebab-case | `dist/css/` |
 | LESS variables | `@dt-color-foreground-primary` | kebab-case | `dist/less/` |
 | Flat JSON | `{ "dtColorForegroundPrimary": "#1C1C1C" }` | camelCase | `dist/` |
-| JS theme bundles | CSS strings for runtime injection | — | `dist/themes/` |
+| JS theme bundles | Per-brand/contrast modules consumed by the runtime API | — | `dist/themes/` |
 | Android XML | `<color name="dtColorForegroundPrimary">` | — | `dist/android/res/` |
 | Android Kotlin | `object DialtoneTokens { val colorForegroundPrimary }` | — | `dist/android/java/` |
 | iOS Swift | `enum DialtoneTokens { static let colorForegroundPrimary }` | — | `dist/ios/` |
 
 All CSS and LESS outputs are prefixed with `--dt` to avoid collisions with other CSS variables in the consuming application.
 
-36 CSS files and 36 LESS files are generated — one per theme × mode combination (e.g., `tokens-dp-light.css`, `tokens-dp-dark.css`, `tokens-aegean-light.css`).
+~120 CSS files and the equivalent LESS files are generated — one per brand × mode combination plus the layered per-dimension overrides (e.g., `tokens-dp-light.css`, `tokens-dp-dark.css`, `tokens-aegean-light.css`).
 
 ## Stage 4 — dialtone-css Consumption
 
@@ -214,30 +214,43 @@ The `d-btn--primary` class resolves to `background-color: var(--dt-color-brand-p
 
 ### Runtime Theme Switching
 
-Each brand × mode combination is also available as a JavaScript theme bundle in `dist/themes/`. Each bundle (~325KB minified) contains the full set of CSS custom property declarations as a string, intended to be injected into the DOM at runtime to switch themes without a page reload:
+The `dist/themes/` JavaScript entrypoints back the layered runtime API in `@dialpad/dialtone/themes/config`. Apps initialize once on startup and switch any of the four theming dimensions (mode, brand, contrast, material) at runtime without a page reload.
 
 ```javascript
-// Import a theme
-import dpDark from '@dialpad/dialtone-tokens/themes/dp-dark';
+import {
+  initDialtoneTheme,
+  setMode,
+  setBrand,
+  setContrast,
+  setMaterial,
+} from '@dialpad/dialtone/themes/config';
+import Dp from '@dialpad/dialtone/themes/dp';
+import Tmo from '@dialpad/dialtone/themes/tmo';
+import HighContrast from '@dialpad/dialtone/themes/high-contrast';
 
-// Inject into DOM
-const style = document.createElement('style');
-style.textContent = dpDark.brand.css;
-document.head.appendChild(style);
-
-// All --dt-* custom properties now reflect dp dark theme
-// Every component updates automatically
+initDialtoneTheme(Dp, 'light');  // load core, base, dp brand, light mode
+setMode('dark');                 // toggle data-dt-mode attribute
+setBrand(Tmo);                   // inject Tmo brand CSS, set data-dt-brand
+setContrast(HighContrast);       // inject contrast CSS, set data-dt-contrast
+setMaterial('steel');            // toggle data-dt-material attribute
 ```
 
-The base (light/dark mode) and brand CSS are separate exports within each theme bundle, allowing apps to switch mode independently from brand.
+The four dimensions split along two switching mechanisms:
+
+- **Mode and material** are attribute-driven. The runtime sets `data-dt-mode` / `data-dt-material` on the root; pre-bundled CSS (loaded once at app startup) applies via `[data-dt-mode="..."]` / `[data-dt-material="..."][data-dt-mode="..."]` attribute selectors.
+- **Brand and contrast** are injection-driven. The runtime injects per-theme override `<style>` tags keyed by id (`dialtone-css-brand-colors`, `dialtone-css-contrast`); brand and contrast each ship one small CSS payload per option.
+
+Brands can pair to a locked material via the `shell.base.material` token in their source JSON. When `setBrand` is called for a locked brand, `data-dt-material` toggles automatically alongside `data-dt-brand` in the same paint frame.
+
+For the full API surface (including `getBrandMaterial` / `hasBrandMaterialLock` getters, the brand-locked-material order-of-operations, and Web Components / Shadow DOM support), see the [Theme and Mode guide](https://dialtone.dialpad.com/guides/theme-and-mode/).
 
 ## All Token Outputs at a Glance
 
 ```
 packages/dialtone-tokens/dist/
-├── css/                    # 36 CSS files (--dt-* custom properties)
-├── less/                   # 36 LESS files (@dt-* variables)
-├── themes/                 # 59 JS bundles for runtime switching
+├── css/                    # ~120 CSS files (--dt-* custom properties)
+├── less/                   # ~120 LESS files (@dt-* variables)
+├── themes/                 # ~55 JS bundles for the runtime API
 │   └── chunks/             # Shared CSS chunks (Vite code splitting)
 ├── postcss/                # PostCSS plugins
 │   ├── debug-mode.js       # Highlights token-driven values in orange
