@@ -282,4 +282,4 @@ npx dialtone-migrate-border-radius --yes --cwd ./src
 ## What Requires Manual Review
 
 - **Dynamic class bindings.** Computed class names like `:class="{ ['d-btr-' + keyword]: true }"` or `:class="['d-blr-' + variant]"` cannot be rewritten by a static text replacement. Update the source data instead.
-- **String concatenation.** Expressions like `'d-btr-' + (rounded ? 'pill' : '6')` are skipped. Replace with the new logical prefix and stop values.
+- **String concatenation.** Expressions like `` `d-btr-${rounded ? 'pill' : 'circle'}` `` are skipped. Replace with the new logical prefix (e.g. `d-bbsr-pill`, `d-bbsr-circle`).
