@@ -1,6 +1,5 @@
 // Migration: deprecated `setTheme()` and `data-dt-theme` attribute → layered API.
 //
-// - Import paths: @dialpad/dialtone/themes/ → @dialpad/dialtone-tokens/themes/
 // - Startup call: setTheme(KnownTheme) → initDialtoneTheme(KnownTheme, 'mode')
 // - Dynamic calls: setTheme(expr) → flagged with TODO comment
 // - HTML attributes: data-dt-theme= → data-dt-mode=
@@ -19,7 +18,6 @@ const KNOWN_PATTERN = ALL_KNOWN.join('|');
 export default {
   description:
     'Migrates from the deprecated setTheme() / data-dt-theme API to the layered theming API.\n' +
-    '- Import paths: @dialpad/dialtone/themes/* → @dialpad/dialtone-tokens/themes/*\n' +
     '- setTheme(DpLight) → initDialtoneTheme(DpLight, \'light\')\n' +
     '- setTheme(DpDark) → initDialtoneTheme(DpDark, \'dark\')\n' +
     '- Same for TmoLight, TmoDark, ExpressiveLight, ExpressiveDark, ExpressiveSmLight, ExpressiveSmDark\n' +
@@ -39,15 +37,7 @@ export default {
   },
 
   expressions: [
-    // 1. Import path: @dialpad/dialtone/themes/ → @dialpad/dialtone-tokens/themes/
-    //    Handles all theme JSON and config imports in one expression.
-    //    Anchored to quote chars to avoid touching unrelated package names.
-    {
-      from: /(['"])@dialpad\/dialtone\/themes\//g,
-      to: (_match, quote) => `${quote}@dialpad/dialtone-tokens/themes/`,
-    },
-
-    // 2. setTheme() call rewrites for known light identifiers.
+    // 1. setTheme() call rewrites for known light identifiers.
     //    Must run BEFORE the unknown-call flag expression (3) so these are
     //    fully consumed before the fallthrough regex fires.
     {
@@ -58,7 +48,7 @@ export default {
       to: (_match, identifier) => `initDialtoneTheme(${identifier}, 'light')`,
     },
 
-    // 3. setTheme() call rewrites for known dark identifiers.
+    // 2. setTheme() call rewrites for known dark identifiers.
     {
       from: new RegExp(
         `(?<!\\.)setTheme\\(\\s*(${KNOWN_DARK.join('|')})\\s*\\)`,
@@ -67,7 +57,7 @@ export default {
       to: (_match, identifier) => `initDialtoneTheme(${identifier}, 'dark')`,
     },
 
-    // 4. setTheme() calls with unknown / dynamic arguments → TODO comment.
+    // 3. setTheme() calls with unknown / dynamic arguments → TODO comment.
     //    Negative-lookahead skips the eight known identifiers already rewritten above.
     //    Negative-lookbehind on '.' prevents matching unrelated .setTheme() methods.
     {
@@ -79,7 +69,7 @@ export default {
         `// TODO: review for layered API migration — see /guides/migration/theme-to-mode/\n${match}`,
     },
 
-    // 5. Attribute rename: data-dt-theme → data-dt-mode
+    // 4. Attribute rename: data-dt-theme → data-dt-mode
     //    Covers HTML/Vue/JSX attributes, JS string literals, and CSS selectors.
     //    Negative lookahead (?!-) prevents matching data-dt-theme-x (longer names).
     //    Works correctly with applyConfig's inner match.replace() since the inner
@@ -90,7 +80,7 @@ export default {
       to: () => 'data-dt-mode',
     },
 
-    // 6. CSS selector invert — add TODO comment before the renamed selector.
+    // 5. CSS selector invert — add TODO comment before the renamed selector.
     //    Expression 5 already renamed [data-dt-theme=...] → [data-dt-mode=...],
     //    so we match on the result.  HTML attribute invert is handled by
     //    expression 5 (just renamed, no comment — inserting HTML comments inside
@@ -102,13 +92,13 @@ export default {
         `/* TODO: review for v-dt-mode adoption — see /guides/migration/theme-to-mode/ */\n${match}`,
     },
 
-    // 7. JS attribute methods: setAttribute/getAttribute/etc. on 'data-dt-theme'
+    // 6. JS attribute methods: setAttribute/getAttribute/etc. on 'data-dt-theme'
     {
       from: /(\.(?:set|get|toggle|remove|has)Attribute\(\s*['"])data-dt-theme(['"])/g,
       to: (_match, prefix, suffix) => `${prefix}data-dt-mode${suffix}`,
     },
 
-    // 9. CSS attribute selectors: [data-dt-theme...] → [data-dt-mode...]
+    // 7. CSS attribute selectors: [data-dt-theme...] → [data-dt-mode...]
     //    Runs after the invert-flagging expressions to avoid double-processing.
     {
       from: /\[data-dt-theme(\]|=[^\]]*\])/g,

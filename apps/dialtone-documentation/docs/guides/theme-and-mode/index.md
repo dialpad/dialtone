@@ -87,7 +87,7 @@ The active state is reflected on the root element as data attributes:
 ### Toggle Light/Dark Mode
 
 ```js
-import { setMode } from '@dialpad/dialtone-tokens/themes/config';
+import { setMode } from '@dialpad/dialtone/themes/config';
 
 setMode('dark');  // Switch to dark mode
 setMode('light'); // Switch to light mode
