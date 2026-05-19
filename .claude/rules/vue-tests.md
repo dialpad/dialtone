@@ -91,7 +91,7 @@ describe('When image is provided', () => {
 
 ## Constants
 
-Import valid values from `*_constants.js`. Never hardcode strings like `'md'` — use `COMPONENT_SIZE_DEFAULT`.
+Import valid values from `*_constants.js`. Never hardcode strings like `'md'` directly in tests.
 
 ## Required Test Categories
 
