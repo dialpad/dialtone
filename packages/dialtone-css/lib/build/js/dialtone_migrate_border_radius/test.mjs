@@ -6,8 +6,9 @@
  */
 
 import assert from 'node:assert/strict';
+import { createRequire } from 'node:module';
 import { describe, it } from 'node:test';
-import { transformContent } from './index.mjs';
+import { transformContent, RADIUS_STOP_MAP, PAIR_PREFIX_MAP } from './index.mjs';
 
 // ---------------------------------------------------------------------------
 // All-corners numeric (d-barN → d-bar-STOP)
@@ -375,5 +376,47 @@ describe('Real-world patterns', () => {
     const { transformed, count } = transformContent(input);
     assert.equal(transformed, expected);
     assert.equal(count, 5);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Contract: parity with ESLint rule maps
+// ---------------------------------------------------------------------------
+
+describe('Contract: maps match ESLint rule', () => {
+  const require = createRequire(import.meta.url);
+
+  let eslintSource;
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    eslintSource = fs.readFileSync(
+      path.resolve(
+        import.meta.dirname,
+        '../../../../../eslint-plugin-dialtone/lib/rules/deprecated-radius-utility-classes.js',
+      ),
+      'utf8',
+    );
+  } catch { /* will fail tests below with clear message */ }
+
+  function extractObject (source, varName) {
+    const re = new RegExp(`const ${varName}\\s*=\\s*\\{([^}]+)\\}`);
+    const match = source?.match(re);
+    if (!match) return null;
+    return Function(`return {${match[1]}}`)();
+  }
+
+  it('RADIUS_STOP_MAP matches ESLint rule', () => {
+    assert.ok(eslintSource, 'Could not read ESLint rule source file');
+    const eslintMap = extractObject(eslintSource, 'RADIUS_STOP_MAP');
+    assert.ok(eslintMap, 'Could not parse RADIUS_STOP_MAP from ESLint rule');
+    assert.deepEqual(RADIUS_STOP_MAP, eslintMap);
+  });
+
+  it('PAIR_PREFIX_MAP matches ESLint rule', () => {
+    assert.ok(eslintSource, 'Could not read ESLint rule source file');
+    const eslintMap = extractObject(eslintSource, 'PAIR_PREFIX_MAP');
+    assert.ok(eslintMap, 'Could not parse PAIR_PREFIX_MAP from ESLint rule');
+    assert.deepEqual(PAIR_PREFIX_MAP, eslintMap);
   });
 });
