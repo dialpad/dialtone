@@ -276,3 +276,8 @@ console.log(`✅  generated: ${results.ok.length}`);
 if (results.skip.length) console.log(`⚠️   empty / no content: ${results.skip.length}  — ${results.skip.join(', ')}`);
 if (results.error.length) console.log(`❌  errors: ${results.error.length}  — ${results.error.join(', ')}`);
 console.log(`${'─'.repeat(60)}`);
+
+// Non-zero exit on capture errors so the pre-commit hook surfaces failures
+// instead of silently staging partial/stale PNGs. results.skip stays exit 0
+// — an empty render is an expected outcome for some slugs, not a failure.
+process.exit(results.error.length > 0 ? 1 : 0);
