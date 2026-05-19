@@ -2,6 +2,8 @@
   <fieldset
     class="d-input-group__fieldset"
     :data-qa="dataQaGroup"
+    :aria-invalid="ariaInvalid"
+    :aria-describedby="ariaDescribedBy"
   >
     <dt-text
       v-if="hasSlotContent($slots.legend) || legend"
@@ -20,6 +22,7 @@
     <!-- @slot slot for Input Group Components -->
     <slot />
     <dt-validation-messages
+      :id="messagesId"
       :validation-messages="formattedMessages"
       :show-messages="showMessages"
       :class="messagesClass"
@@ -33,7 +36,8 @@
 import { InputGroupMixin } from '@/common/mixins/input_group';
 import { DtValidationMessages } from '../ValidationMessages';
 import { DtText } from '@/components/Text';
-import { hasSlotContent } from '@/common/utils';
+import { hasSlotContent, getUniqueString, getValidationState } from '@/common/utils';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 
 /**
  * Input Groups are convenience components for a grouping of related inputs.
@@ -78,7 +82,18 @@ export default {
     return {
       internalValue: this.value,
       hasSlotContent,
+      messagesId: getUniqueString(),
     };
+  },
+
+  computed: {
+    ariaInvalid () {
+      return getValidationState(this.formattedMessages) === VALIDATION_MESSAGE_TYPES.CRITICAL ? 'true' : undefined;
+    },
+
+    ariaDescribedBy () {
+      return this.showMessages && this.formattedMessages.length > 0 ? this.messagesId : undefined;
+    },
   },
 
   watch: {

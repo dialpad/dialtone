@@ -70,6 +70,7 @@
         />
 
         <dt-validation-messages
+          :id="messagesId"
           :validation-messages="maxSelectedMessage"
           :show-messages="showValidationMessages"
         />
@@ -131,7 +132,7 @@ import DtInput from '@/components/Input/Input.vue';
 import DtChip from '@/components/Chip/Chip.vue';
 import DtValidationMessages from '@/components/ValidationMessages/ValidationMessages.vue';
 import { validationMessageValidator } from '@/common/validators';
-import { extractVueListeners, extractNonListeners, hasSlotContent, returnFirstEl } from '@/common/utils';
+import { extractVueListeners, extractNonListeners, hasSlotContent, returnFirstEl, getUniqueString } from '@/common/utils';
 import {
   POPOVER_APPEND_TO_VALUES,
 } from '@/components/Popover/PopoverConstants';
@@ -503,6 +504,7 @@ export default {
       hasSlotContent,
       inputFocused: false,
       hideInputText: false,
+      messagesId: getUniqueString(),
     };
   },
 

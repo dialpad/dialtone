@@ -53,6 +53,8 @@
             SELECT_STATE_MODIFIERS[state],
           ]"
           :aria-label="!showLabel && label ? label : undefined"
+          :aria-invalid="ariaInvalid"
+          :aria-describedby="ariaDescribedBy"
           v-bind="removeClassStyleAttrs($attrs)"
           data-qa="dt-select"
           :disabled="disabled"
@@ -75,6 +77,7 @@
       </div>
     </label>
     <dt-validation-messages
+      :id="messagesId"
       :validation-messages="formattedMessages"
       :show-messages="showMessages"
       :class="messagesClass"
@@ -100,6 +103,7 @@ import {
 import { MessagesMixin } from '@/common/mixins/input';
 import { optionsValidator } from './SelectMenuValidators.js';
 import { DtValidationMessages } from '../ValidationMessages';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 
 /**
  * A select menu is an input control that allows users to choose one option from a list.
@@ -279,6 +283,7 @@ export default {
       SELECT_SIZE_MODIFIERS,
       SELECT_STATE_MODIFIERS,
       hasSlotContent,
+      messagesId: getUniqueString(),
     };
   },
 
@@ -318,6 +323,14 @@ export default {
 
     state () {
       return getValidationState(this.formattedMessages);
+    },
+
+    ariaInvalid () {
+      return this.state === VALIDATION_MESSAGE_TYPES.CRITICAL ? 'true' : undefined;
+    },
+
+    ariaDescribedBy () {
+      return this.showMessages && this.formattedMessages.length > 0 ? this.messagesId : undefined;
     },
 
     selectKey () {

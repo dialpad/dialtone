@@ -31,7 +31,7 @@ describe('Input Group Tests', () => {
 
     inputGroup = wrapper.find('[data-qa="input-group"]');
     inputGroupLegend = wrapper.find('[data-qa="input-group-legend"]');
-    inputGroupMessages = wrapper.findComponent('[data-qa="input-group-messages"]');
+    inputGroupMessages = wrapper.findComponent(DtValidationMessages);
   };
 
   beforeEach(() => {

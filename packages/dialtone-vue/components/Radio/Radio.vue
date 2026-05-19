@@ -13,6 +13,8 @@
           type="radio"
           :class="['d-radio', inputValidationClass, inputClass]"
           :aria-label="!showLabel && label ? label : undefined"
+          :aria-invalid="ariaInvalid"
+          :aria-describedby="ariaDescribedBy"
           v-bind="removeClassStyleAttrs($attrs)"
           v-on="inputListeners"
         >
@@ -33,12 +35,11 @@
       </dt-text>
     </label>
     <div
-      v-if="$slots.description || description || hasMessages"
+      v-if="$slots.description || description"
       class="d-radio__messages"
       data-qa="radio-description-messages"
     >
       <dt-text
-        v-if="$slots.description || description"
         kind="body"
         :size="200"
         tone="tertiary"
@@ -52,14 +53,15 @@
           {{ description }}
         </slot>
       </dt-text>
-      <dt-validation-messages
-        :validation-messages="formattedMessages"
-        :show-messages="showMessages"
-        :class="messagesClass"
-        v-bind="messagesChildProps"
-        data-qa="dt-radio-validation-messages"
-      />
     </div>
+    <dt-validation-messages
+      :id="messagesId"
+      :validation-messages="formattedMessages"
+      :show-messages="showMessages"
+      :class="messagesClass"
+      v-bind="messagesChildProps"
+      data-qa="dt-radio-validation-messages"
+    />
   </div>
 </template>
 
@@ -73,7 +75,8 @@ import {
 import { RADIO_INPUT_VALIDATION_CLASSES } from './RadioConstants';
 import { DtValidationMessages } from '../ValidationMessages';
 import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/Text';
-import { hasSlotContent, removeClassStyleAttrs } from '@/common/utils';
+import { hasSlotContent, removeClassStyleAttrs, getUniqueString, getValidationState } from '@/common/utils';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 
 /**
  * Radios are control elements that allow the user to make a single selection.
@@ -165,6 +168,7 @@ export default {
   data () {
     return {
       hasSlotContent,
+      messagesId: getUniqueString(),
     };
   },
 
@@ -205,6 +209,14 @@ export default {
 
     hasMessages () {
       return this.formattedMessages.length && this.showMessages;
+    },
+
+    ariaInvalid () {
+      return getValidationState(this.formattedMessages) === VALIDATION_MESSAGE_TYPES.CRITICAL ? 'true' : undefined;
+    },
+
+    ariaDescribedBy () {
+      return this.showMessages && this.formattedMessages.length > 0 ? this.messagesId : undefined;
     },
   },
 

@@ -91,7 +91,7 @@ describe('DtSelectMenu Tests', () => {
         });
       });
       it('should not render any validation messages', () => {
-        expect(messages.exists()).toBe(false);
+        expect(messages.findAll('[data-qa="validation-message"]').length).toBe(0);
       });
     });
 
@@ -289,7 +289,7 @@ describe('DtSelectMenu Tests', () => {
         });
 
         it('should not render any validation messages', () => {
-          expect(messages.exists()).toBe(false);
+          expect(messages.findAll('[data-qa="validation-message"]').length).toBe(0);
         });
       });
     });
