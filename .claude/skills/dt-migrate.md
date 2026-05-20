@@ -15,6 +15,7 @@ description: "Run Dialtone migration tools for token and utility renames. Use '/
 | `utility-class-to-token-stops` | Rewrites legacy pixel-indexed utility class names (`d-h16`, `d-p8`) to token-stop-based names (`d-h-25`, `d-p-100`). Covers off-scale pixel-indexed exceptions (`d-w1` → `d-w-1px`, `d-h24` → `d-h-24px`, etc.) | `npx dialtone-migration-helper` → "utility class to token stops" |
 | `hsl-to-oklch` | Migrates consumer HSL channel variable patterns to OKLCH relative color syntax or plain `var()` | `npx dialtone-migration-helper` → "hsl to oklch" |
 | `link-rendering` | Migrates `<a class="d-btn">`, `<router-link class="d-link">`, etc. to `<dt-button>` / `<dt-link>` with `to`/`href` props. Also extracts `d-btn--*` / `d-link--*` modifiers into corresponding props (size, kind, importance, tone) and converts `d-td-*` classes on DtLink to the `underline` prop. Standalone CLI, not a config of `dialtone-migration-helper`. | `npx dialtone-migrate-link-rendering` |
+| `typography` | Migrates legacy typography utility classes (`d-headline--*`, `d-body--*`, `d-label--*`, `d-code--md`, `d-fw-*`, `d-fc-*`, `d-lh-*`, `d-truncate`, `d-ta-*`) on `<p>`/`<span>`/`<div>`/`<h1>`-`<h6>`/`<label>` elements to `<dt-text>` with semantic props. Flags `d-headline--eyebrow`, `d-code--sm`, `d-helper--*`, dynamic `:class` bindings, and `d-fs-*` for manual review. | `npx dialtone-migrate-typography` |
 
 ## Usage
 
