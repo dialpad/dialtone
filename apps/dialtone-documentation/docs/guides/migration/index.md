@@ -46,7 +46,30 @@ Work through each applicable guide in order. Guides earlier in the list are prer
 
 ## Quick Start
 
-For most projects, run the automated tools in sequence. Each tool runs interactively by default — it will show you the files to be modified and ask for confirmation before applying changes. Add `--force` (migration-helper) or `--yes` (other scripts) to skip prompts.
+### Master migration script (recommended)
+
+The fastest path is the master migration script. It orchestrates all tools in the correct order and includes a health check to see what's left.
+
+```bash
+# Check which migrations your codebase still needs
+npx dialtone-migrate --health-check --cwd ./src
+
+# Run all required (breaking-change) migrations interactively
+npx dialtone-migrate --cwd ./src
+
+# Run all required migrations non-interactively
+npx dialtone-migrate --all --yes --cwd ./src
+
+# Dry-run to preview changes first
+npx dialtone-migrate --all --dry-run --cwd ./src
+
+# Run specific migrations only
+npx dialtone-migrate --only color-stops,hsl-to-oklch --cwd ./src
+```
+
+### Individual scripts
+
+You can also run each migration tool individually. Each tool runs interactively by default — it will show you the files to be modified and ask for confirmation before applying changes. Add `--force` (migration-helper) or `--yes` (other scripts) to skip prompts.
 
 ```bash
 # 1. Color stops (renames old stop numbers)
