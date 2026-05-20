@@ -265,7 +265,7 @@ for (const slug of staleSlugs) {
     // otherwise persist until --force. Leave the slug stale so the next
     // run retries both modes; the captured mode's PNG stays on disk.
     console.log(`⚠️   only ${modeOk}/${MODES.length} mode(s)`);
-    results.ok.push(slug);
+    results.error.push(slug);
   } else if (firstError) {
     console.log(`❌  ${firstError.message.split('\n')[0]}`);
     results.error.push(slug);
