@@ -1331,9 +1331,13 @@ async function processFile (filePath, options) {
   await fs.writeFile(filePath, transformed, 'utf-8');
   console.log(log.green('   ✓ Saved'));
 
-  // Only warn about missing DtText import when the output actually contains a NEW <dt-text>
-  // — review-marker-only changes (e.g. eyebrow/d-code--sm/d-fs-* flags) don't require an import.
-  const addedDtText = /<dt-text\b/.test(transformed) && !/<dt-text\b/.test(content);
+  // Only warn about missing DtText import when we actually INSERTED new <dt-text> elements
+  // — review-marker-only changes (eyebrow/d-code--sm/d-fs-* flags) don't require an import.
+  // Use a count delta (not boolean presence) so partial migrations on a file that already
+  // had a <dt-text> still warn when more are added.
+  const beforeCount = (content.match(/<dt-text\b/g) || []).length;
+  const afterCount = (transformed.match(/<dt-text\b/g) || []).length;
+  const addedDtText = afterCount > beforeCount;
   const importCheck = detectMissingDtTextImport(transformed, addedDtText);
   if (importCheck?.needsImport) printImportInstructions(filePath, importCheck);
 

@@ -450,6 +450,19 @@ describe('F8 — validateDtTextProps masks inert content + quote-aware', () => {
   });
 });
 
+describe('C8 — addedDtText uses count delta, not boolean presence', () => {
+  it('partial migration: existing <dt-text> + new <p class="d-headline--md"> → both kept, count grows', () => {
+    const input = '<dt-text kind="body">existing</dt-text>\n<p class="d-headline--md">new</p>';
+    const out = run(input);
+    const before = (input.match(/<dt-text\b/g) || []).length;
+    const after = (out.match(/<dt-text\b/g) || []).length;
+    assert.equal(before, 1);
+    assert.equal(after, 2);
+    // The count-delta detection is what processFile uses to gate the import-warning;
+    // we just assert here that the transform produces the expected before/after counts.
+  });
+});
+
 describe('C3 — validateDtTextProps reports correct line numbers past masked regions', () => {
   it('line number after a large script block matches the actual source line', () => {
     const lines = ['<script>'];
