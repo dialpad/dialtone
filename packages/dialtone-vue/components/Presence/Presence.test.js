@@ -150,7 +150,7 @@ describe('DtPresence Tests', () => {
       it('should not render an icon when showIcon is false', () => {
         mockProps = { showIcon: false };
         updateWrapper();
-        expect(wrapper.find(`[data-qa="${ICON_QAS.active}"]`).exists()).toBe(false);
+        expect(wrapper.find(`[data-qa="${ICON_QAS[PRESENCE_STATES.ACTIVE]}"]`).exists()).toBe(false);
       });
     });
   });
