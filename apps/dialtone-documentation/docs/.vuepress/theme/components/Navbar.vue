@@ -98,9 +98,14 @@
       </template>
       <template #list>
         <dt-list-item-group
-          heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
-          heading="Base Theme"
+          heading-class="d-px-100"
+          heading=" "
         >
+          <template #heading>
+            <dt-text as="label" kind="label" size="100" tone="tertiary">
+              Base Theme
+            </dt-text>
+          </template>
           <dt-list-item
             role="menuitem"
             navigation-type="arrow-keys"
@@ -114,9 +119,14 @@
         </dt-list-item-group>
         <dt-dropdown-separator />
         <dt-list-item-group
-          heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
-          heading="Partner Themes"
+          heading=" "
+          heading-class="d-px-100"
         >
+          <template #heading>
+            <dt-text as="label" kind="label" size="100" tone="tertiary">
+              Partner Themes
+            </dt-text>
+          </template>
           <dt-list-item
             role="menuitem"
             navigation-type="arrow-keys"
@@ -130,9 +140,14 @@
         </dt-list-item-group>
         <dt-dropdown-separator />
         <dt-list-item-group
-          heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
-          heading="Accessibility"
+          heading=" "
+          heading-class="d-px-100"
         >
+          <template #heading>
+            <dt-text as="label" kind="label" size="100" tone="tertiary">
+              Accessibility
+            </dt-text>
+          </template>
           <dt-list-item
             role="menuitem"
             navigation-type="arrow-keys"
@@ -156,9 +171,14 @@
         </dt-list-item-group>
         <dt-dropdown-separator />
         <dt-list-item-group
-          heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
-          heading="Named Themes"
+          heading=" "
+          heading-class="d-px-100"
         >
+          <template #heading>
+            <dt-text as="label" kind="label" size="100" tone="tertiary">
+              Named Themes
+            </dt-text>
+          </template>
           <dt-list-item
             v-for="themeName in namedThemes"
             :key="themeName"
@@ -210,9 +230,14 @@
       </template>
       <template #list>
         <dt-list-item-group
-          heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
-          heading="Mode"
+          heading=" "
+          heading-class="d-px-100"
         >
+          <template #heading>
+            <dt-text as="label" kind="label" size="100" tone="tertiary">
+              Mode
+            </dt-text>
+          </template>
           <dt-list-item
             role="menuitem"
             navigation-type="arrow-keys"
@@ -246,9 +271,14 @@
         </dt-list-item-group>
         <dt-dropdown-separator />
         <dt-list-item-group
-          heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
-          heading="Contrast"
+          heading=" "
+          heading-class="d-px-100"
         >
+          <template #heading>
+            <dt-text as="label" kind="label" size="100" tone="tertiary">
+              Contrast
+            </dt-text>
+          </template>
           <dt-list-item
             role="menuitem"
             navigation-type="arrow-keys"
@@ -273,9 +303,14 @@
         <template v-if="!isMaterialLocked">
           <dt-dropdown-separator />
           <dt-list-item-group
-            heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
-            heading="Material"
+            heading=" "
+            heading-class="d-px-100"
           >
+            <template #heading>
+              <dt-text as="label" kind="label" size="100" tone="tertiary">
+                Material
+              </dt-text>
+            </template>
             <dt-list-item
               v-for="material in materials"
               :key="material"
