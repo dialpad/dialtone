@@ -22,12 +22,12 @@
     <!-- @slot slot for Input Group Components -->
     <slot />
     <dt-validation-messages
+      v-bind="messagesChildProps"
       :id="messagesId"
       :validation-messages="formattedMessages"
       :show-messages="showMessages"
       :class="messagesClass"
       :data-qa="dataQaGroupMessages"
-      v-bind="messagesChildProps"
     />
   </fieldset>
 </template>

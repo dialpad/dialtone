@@ -275,6 +275,14 @@ describe('DtSelectMenu Tests', () => {
         it('should render validation message', () => {
           expect(messages?.findAll('[data-qa="validation-message"]').length).toBe(1);
         });
+
+        it('should set aria-invalid on the select element', () => {
+          expect(select.attributes('aria-invalid')).toBe('true');
+        });
+
+        it('should set aria-describedby on the select element pointing to the messages container', () => {
+          expect(select.attributes('aria-describedby')).toBe(messages.attributes('id'));
+        });
       });
 
       describe('When validation messages are hidden', () => {
@@ -290,6 +298,14 @@ describe('DtSelectMenu Tests', () => {
 
         it('should not render any validation messages', () => {
           expect(messages.findAll('[data-qa="validation-message"]').length).toBe(0);
+        });
+
+        it('should keep aria-invalid on the select element', () => {
+          expect(select.attributes('aria-invalid')).toBe('true');
+        });
+
+        it('should not set aria-describedby on the select element', () => {
+          expect(select.attributes('aria-describedby')).toBeUndefined();
         });
       });
     });

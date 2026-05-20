@@ -154,6 +154,36 @@ describe('Input Group Tests', () => {
     });
   });
 
+  describe('Accessibility Tests', () => {
+    describe('When a critical validation message is provided', () => {
+      beforeEach(() => {
+        mockProps = { messages: ['Error'] };
+
+        updateWrapper();
+      });
+
+      it('should set aria-invalid on the fieldset', () => {
+        expect(inputGroup.attributes('aria-invalid')).toBe('true');
+      });
+
+      it('should set aria-describedby on the fieldset pointing to the messages container', () => {
+        const messagesContainer = wrapper.find('[data-qa="input-group-messages"]');
+
+        expect(inputGroup.attributes('aria-describedby')).toBe(messagesContainer.attributes('id'));
+      });
+    });
+
+    describe('When no validation messages are provided', () => {
+      it('should not set aria-invalid on the fieldset', () => {
+        expect(inputGroup.attributes('aria-invalid')).toBeUndefined();
+      });
+
+      it('should not set aria-describedby on the fieldset', () => {
+        expect(inputGroup.attributes('aria-describedby')).toBeUndefined();
+      });
+    });
+  });
+
   describe('Interactivity Tests', () => {
     const MOCK_SELECTED_VALUE = 'apple';
 

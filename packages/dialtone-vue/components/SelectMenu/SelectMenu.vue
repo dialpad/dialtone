@@ -77,11 +77,11 @@
       </div>
     </label>
     <dt-validation-messages
+      v-bind="messagesChildProps"
       :id="messagesId"
       :validation-messages="formattedMessages"
       :show-messages="showMessages"
       :class="messagesClass"
-      v-bind="messagesChildProps"
       data-qa="dt-select-messages"
     />
   </div>

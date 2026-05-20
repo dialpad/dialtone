@@ -73,6 +73,14 @@ describe('Validation Messages Tests', () => {
 
             expect(messages.length).toBe(0);
           });
+
+          it('should keep the live-region container mounted', () => {
+            mockProps = { validationMessages: MOCK_VALIDATION_MESSAGES, showMessages: false };
+
+            updateWrapper();
+
+            expect(wrapper.find('[data-qa="validation-messages-container"]').exists()).toBe(true);
+          });
         });
       });
 

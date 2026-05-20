@@ -55,11 +55,11 @@
         </slot>
       </dt-text>
       <dt-validation-messages
+        v-bind="messagesChildProps"
         :id="messagesId"
         :validation-messages="formattedMessages"
         :show-messages="showMessages"
         :class="messagesClass"
-        v-bind="messagesChildProps"
         data-qa="dt-checkbox-validation-messages"
       />
     </div>
