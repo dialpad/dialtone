@@ -18,12 +18,14 @@
         >
           <DtStack direction="row" gap="150">
             <DtIllustration name="dialpad-logo" />
-            <DtBox v-if="showBranchBadge" padding-block-start="100">
+            <DtBox v-if="showBranchBadge" padding-block-start="100" :title="branchName">
               <DtBadge>
                 <template #startIcon="{ iconSize }">
                   <dt-icon-branch :size="iconSize" />
                 </template>
-                {{ branchName }}
+                <DtText as="p" class="d-wmx-250" truncate>
+                  {{ branchName }}
+                </DtText>
               </DtBadge>
             </DtBox>
           </DtStack>
