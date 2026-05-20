@@ -11,8 +11,8 @@
   </svg>
 </template>
 
-<script>
-export default {
+<script setup lang="ts">
+defineOptions({
   name: 'DtPresenceDndIcon',
-};
+});
 </script>

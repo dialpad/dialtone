@@ -12,6 +12,7 @@
     >{{ srText }} </span>
     <div
       class="d-presence__inner"
+      data-qa="dt-presence-inner"
       :class="{
         'd-presence__inner--active': presence === 'active',
         'd-presence__inner--away': presence === 'away',

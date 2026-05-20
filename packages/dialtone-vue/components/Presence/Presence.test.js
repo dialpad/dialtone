@@ -17,7 +17,7 @@ describe('DtPresence Tests', () => {
     });
 
     presence = wrapper.find('[data-qa="dt-presence"]');
-    innerPresence = wrapper.find('.d-presence__inner');
+    innerPresence = wrapper.find('[data-qa="dt-presence-inner"]');
   };
 
   beforeEach(() => {
