@@ -422,7 +422,7 @@ export default {
      *
      * @event keyup
      * @type {KeyboardEvent}
-     */
+      */
     'keyup',
 
     /**
