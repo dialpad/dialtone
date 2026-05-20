@@ -422,7 +422,7 @@ export default {
      *
      * @event keyup
      * @type {KeyboardEvent}
-      */
+     */
     'keyup',
 
     /**
@@ -430,7 +430,7 @@ export default {
      *
      * @event keydown
      * @type {KeyboardEvent}
-      */
+     */
     'keydown',
 
     /**
@@ -735,9 +735,8 @@ export default {
       if (hasSpace && !isWrapped) return null;
       // Chip wrapped onto a new row with space remaining; align cursor to it.
       if (hasSpace) return lastChip.offsetTop + 2;
-      // No space for cursor on the chip's row — predict the offsetTop a chip
-      // would have on the next row so paddingTop stays constant when a chip
-      // later lands there.
+      // No space on the chip's row — predict next-row offsetTop so paddingTop
+      // stays stable when a chip lands there.
       const chipMarginTop = parseFloat(getComputedStyle(lastChip).marginTop) || 0;
       const lastChipHeight = lastChip.getBoundingClientRect().height;
       return lastChip.offsetTop + lastChipHeight + chipMarginTop + 2;
@@ -783,8 +782,7 @@ export default {
       input.style.minHeight = '';
       input.style.height = '';
       this.initialInputHeight = input.getBoundingClientRect().height;
-      // xs renders correctly without the min-height floor; only sm/md need it
-      // so the input can grow when chips wrap.
+      // xs renders correctly without a min-height floor; other sizes need it to grow when chips wrap.
       if (this.size !== 'xs') {
         input.style.minHeight = `${this.initialInputHeight}px`;
         input.style.height = 'auto';

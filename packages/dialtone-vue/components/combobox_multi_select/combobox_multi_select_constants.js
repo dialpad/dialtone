@@ -11,10 +11,7 @@ export const CHIP_SIZES = {
   md: 'sm',
 };
 
-// Per-size sub-pixel offset (CSS px) subtracted from the chip wrapper's top so
-// the chip lands integer-aligned with the input on both 1x and 2x displays.
-// Empirically tuned — adjusting a value shifts the painted chip position by
-// that many CSS px on hi-DPI and may flip the rounding side on 1x.
+// Adjusted in DLT-3409 for sub-pixel offset for sizes sm and md
 export const CHIP_TOP_POSITION = {
   xs: 1.4,
   sm: -0.1,
