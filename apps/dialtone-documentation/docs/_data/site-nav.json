@@ -288,6 +288,10 @@
                     "link": "/guides/migration/scrollbar-always/"
                   },
                   {
+                    "text": "Theme to Mode",
+                    "link": "/guides/migration/theme-to-mode/"
+                  },
+                  {
                     "text": "DtModal Native Dialog",
                     "link": "/guides/migration/modal-native-dialog/"
                   },
