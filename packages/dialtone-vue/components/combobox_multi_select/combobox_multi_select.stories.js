@@ -26,6 +26,10 @@ export const argsData = {
   onMaxSelected: action('maxSelected'),
   onComboboxHighlight: action('comboboxHighlight'),
   onFocus: action('focus'),
+  onKeydown: action('keydown'),
+  onChipKeydown: action('chip-keydown'),
+  onEscape: action('escape'),
+  onEnter: action('enter'),
 };
 
 export const argTypesData = {
@@ -93,6 +97,21 @@ export const argTypesData = {
 
   // Action Event Handlers
   onEscape: {
+    table: {
+      disable: true,
+    },
+  },
+  onEnter: {
+    table: {
+      disable: true,
+    },
+  },
+  onKeydown: {
+    table: {
+      disable: true,
+    },
+  },
+  onChipKeydown: {
     table: {
       disable: true,
     },

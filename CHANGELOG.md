@@ -1,3 +1,12 @@
+# [9.184.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.183.0...dialtone/v9.184.0) (2026-05-19)
+
+
+### Features
+
+* **Combobox Multi Select:** DLT-3366 forward input-level escape, enter, keydown events ([#1253](https://github.com/dialpad/dialtone/issues/1253)) ([a635301](https://github.com/dialpad/dialtone/commit/a635301168a096fe9b741d5f5a74925874237024))
+* **Dialtone Icons:** NO-JIRA add agent-assist-color brand-full-color icon ([#1265](https://github.com/dialpad/dialtone/issues/1265)) ([d159d78](https://github.com/dialpad/dialtone/commit/d159d7842e5f5f8b21b6ed314cb9b7f1e4c206b7))
+* **Eslint Plugin:** DLT-3281 add deprecated-class-props rule ([#1258](https://github.com/dialpad/dialtone/issues/1258)) ([3c5925e](https://github.com/dialpad/dialtone/commit/3c5925e38f340ddae01ebd59079b185a49f81304))
+
 # [9.183.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.182.3...dialtone/v9.183.0) (2026-05-12)
 
 

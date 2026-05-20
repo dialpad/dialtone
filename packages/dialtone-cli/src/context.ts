@@ -3,7 +3,7 @@
 // Resolved once at startup, read by all commands.
 // ============================================================================
 
-import type { UtilityClassesData, TokensData, Component, IconsData } from '@dialpad/dialtone-query-core';
+import type { UtilityClassesData, TokensData, Component, IconsData, DocumentationRecord } from '@dialpad/dialtone-query-core';
 import { resolveData } from './data-resolver.js';
 
 interface CliContext {
@@ -11,6 +11,7 @@ interface CliContext {
   tokens: TokensData;
   components: Component[];
   icons: IconsData;
+  documentation: DocumentationRecord[];
   source: 'local' | 'bundled';
   version?: string;
 }

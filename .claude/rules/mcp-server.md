@@ -34,5 +34,10 @@ pnpm nx run dialtone-mcp-server:build
 
 ## Provides
 
-4 search tools: `search_components`, `search_utility_classes`, `search_tokens`, `search_icons`
-5 resources: utility-classes, tokens, components, icons, client-rules
+5 search tools: `search_components`, `search_utility_classes`, `search_tokens`, `search_icons`, `search_documentation`
+6 resources: utility-classes, tokens, components, icons, client-rules, documentation
+
+## Tool Interface Rules
+
+- Schema `default` for each tool's `limit` parameter must match the runtime fallback (`args.limit || N`). Mismatches mean clients relying on the schema get a different number of results than expected.
+- Renaming a tool or changing a parameter schema is a breaking change for AI clients that have cached the schema — requires a version bump.
