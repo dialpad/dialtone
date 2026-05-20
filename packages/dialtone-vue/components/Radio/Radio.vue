@@ -35,11 +35,11 @@
       </dt-text>
     </label>
     <div
-      v-if="$slots.description || description"
       class="d-radio__messages"
       data-qa="radio-description-messages"
     >
       <dt-text
+        v-if="$slots.description || description"
         kind="body"
         :size="200"
         tone="tertiary"
@@ -53,15 +53,15 @@
           {{ description }}
         </slot>
       </dt-text>
+      <dt-validation-messages
+        :id="messagesId"
+        :validation-messages="formattedMessages"
+        :show-messages="showMessages"
+        :class="messagesClass"
+        v-bind="messagesChildProps"
+        data-qa="dt-radio-validation-messages"
+      />
     </div>
-    <dt-validation-messages
-      :id="messagesId"
-      :validation-messages="formattedMessages"
-      :show-messages="showMessages"
-      :class="messagesClass"
-      v-bind="messagesChildProps"
-      data-qa="dt-radio-validation-messages"
-    />
   </div>
 </template>
 

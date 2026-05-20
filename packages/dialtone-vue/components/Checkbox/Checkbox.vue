@@ -36,11 +36,11 @@
       </dt-text>
     </label>
     <div
-      v-if="$slots.description || description"
       class="d-checkbox__messages"
       data-qa="checkbox-description-messages"
     >
       <dt-text
+        v-if="$slots.description || description"
         kind="body"
         :size="200"
         tone="tertiary"
@@ -54,15 +54,15 @@
           {{ description }}
         </slot>
       </dt-text>
+      <dt-validation-messages
+        :id="messagesId"
+        :validation-messages="formattedMessages"
+        :show-messages="showMessages"
+        :class="messagesClass"
+        v-bind="messagesChildProps"
+        data-qa="dt-checkbox-validation-messages"
+      />
     </div>
-    <dt-validation-messages
-      :id="messagesId"
-      :validation-messages="formattedMessages"
-      :show-messages="showMessages"
-      :class="messagesClass"
-      v-bind="messagesChildProps"
-      data-qa="dt-checkbox-validation-messages"
-    />
   </div>
 </template>
 

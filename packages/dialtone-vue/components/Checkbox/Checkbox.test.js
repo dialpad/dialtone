@@ -203,8 +203,8 @@ describe('DtCheckbox Tests', () => {
         expect(label.exists()).toBe(false);
       });
 
-      it('should remove the checkbox description/messages container if neither is provided', () => {
-        expect(descriptionMessagesContainer.exists()).toBe(false);
+      it('should keep the checkbox description/messages container in the DOM', () => {
+        expect(descriptionMessagesContainer.exists()).toBe(true);
       });
 
       it('should keep the input checkbox', () => {
