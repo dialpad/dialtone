@@ -1,35 +1,53 @@
 ---
 title: Migrating Border-Radius Utility Classes to Logical Names
-description: Physical directional border-radius utility classes (d-btr*, d-bbr*, d-blr*, d-brr*) are replaced by logical equivalents (d-bbsr*, d-bber*, d-bisr*, d-bier*). Numeric stop values are also standardized. ESLint auto-fix and migration script included.
+description: Physical-direction and legacy pixel-suffixed border-radius utilities are deprecated in favor of logical names. ESLint auto-fix and a migration script are available.
 ---
+
+> [!INFO] Deprecated aliases still render
+> The legacy selectors still compile as aliases for the new utilities, so this migration should not change the rendered border radius. Update to the canonical classes now so your code is ready when the aliases are removed.
 
 ## TLDR
 
-- Physical directional border-radius utility classes (`d-btr*`, `d-bbr*`, `d-blr*`, `d-brr*`) are **removed**.
-- Replaced by logical equivalents: `d-bbsr*` (block-start), `d-bber*` (block-end), `d-bisr*` (inline-start), `d-bier*` (inline-end).
-- All-corners numeric classes (`d-bar6`, `d-bar8`, etc.) are replaced by token-stop-indexed names (`d-bar-350`, `d-bar-400`, etc.).
-- Use the [ESLint rule](#eslint-rule) or [migration script](#migration-script) to update your code.
+- Legacy all-corners numeric classes (`d-bar6`, `d-bar8`, etc.) are deprecated in favor of token-stop-indexed names (`d-bar-350`, `d-bar-400`, etc.).
+- Legacy physical side-pair classes (`d-btr*`, `d-bbr*`, `d-blr*`, `d-brr*`) are deprecated in favor of logical side-pair classes (`d-bbsr*`, `d-bber*`, `d-bisr*`, `d-bier*`).
+- Pair keywords migrate too: `d-btr-pill` to `d-bbsr-pill`, `d-brr-circle` to `d-bier-circle`.
+- Run [dialtone-migrate-border-radius](#migration-script) for a radius-only batch migration, then use the [ESLint rule](#eslint-rule) to catch reintroductions in Vue templates.
+- If you're already running `dialtone-migration-helper`, its `utility-class-to-token-stops` config covers these rewrites.
 
 ## Why Logical?
 
-- **RTL and internationalization.** Logical names respect writing direction: `inline-start` means the start edge regardless of locale.
-- **CSS alignment.** Matches CSS logical properties (`border-start-start-radius`, `border-end-end-radius`) that Dialtone already uses internally.
-- **Consistency.** One naming convention across tokens, CSS utilities, and Vue components.
+- **RTL and internationalization.** Logical names respect writing direction: `inline-start` means the start edge regardless of locale. In other words, `left` becomes `inline-start` in LTR.
+- **CSS alignment.** The class names align with CSS logical properties such as `border-start-start-radius` and `border-end-end-radius`.
+- **Token consistency.** Numeric suffixes now reference the `--dt-size-radius-{stop}` token scale instead of legacy pixel suffixes.
+
+## What Changed
+
+Border-radius utilities now use token stops and logical class roots. The generated CSS co-selects the legacy and new selectors, so both currently resolve to the same declaration, e.g...
+
+```css
+.d-bbsr-350,
+.d-btr6 {
+  border-start-start-radius: var(--dt-size-radius-350) !important;
+  border-start-end-radius: var(--dt-size-radius-350) !important;
+}
+```
+
+Single-corner utilities (`d-bssr-*`, `d-bser-*`, `d-besr-*`, `d-beer-*`) are also available. They have no legacy physical equivalent.
 
 ## Pair-Prefix Mapping
 
-| Physical prefix | Logical prefix | Direction |
-| --- | --- | --- |
-| `btr` (top) | `bbsr` (block-start) | Top corners in LTR |
-| `bbr` (bottom) | `bber` (block-end) | Bottom corners in LTR |
-| `blr` (left) | `bisr` (inline-start) | Left corners in LTR |
-| `brr` (right) | `bier` (inline-end) | Right corners in LTR |
+| Legacy physical prefix | New logical prefix | CSS properties | Visible side in LTR |
+| --- | --- | --- | --- |
+| `btr` (top) | `bbsr` (block-start) | `border-start-start-radius`, `border-start-end-radius` | Top |
+| `bbr` (bottom) | `bber` (block-end) | `border-end-start-radius`, `border-end-end-radius` | Bottom |
+| `blr` (left) | `bisr` (inline-start) | `border-start-start-radius`, `border-end-start-radius` | Left |
+| `brr` (right) | `bier` (inline-end) | `border-start-end-radius`, `border-end-end-radius` | Right |
 
 ## Numeric Stop Mapping
 
-All-corners (`d-bar*`) and pair classes use the same stop scale:
+All-corners classes and side-pair classes use the same radius stop scale:
 
-| Old suffix | New stop | px value |
+| Old suffix | New stop | Value |
 | --- | --- | --- |
 | `0` | `0` | 0px |
 | `1` | `100` | 1px |
@@ -44,7 +62,7 @@ All-corners (`d-bar*`) and pair classes use the same stop scale:
 
 ## Examples
 
-### All-corners numeric
+### All-Corners Numeric
 
 <div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
 <div>
@@ -54,7 +72,7 @@ All-corners (`d-bar*`) and pair classes use the same stop scale:
 ```html
 <div class="d-bar6">...</div>
 <div class="d-bar8">...</div>
-<div class="d-bar12">...</div>
+<div class="d-bar24">...</div>
 ```
 
 </div>
@@ -65,13 +83,13 @@ All-corners (`d-bar*`) and pair classes use the same stop scale:
 ```html
 <div class="d-bar-350">...</div>
 <div class="d-bar-400">...</div>
-<div class="d-bar-450">...</div>
+<div class="d-bar-550">...</div>
 ```
 
 </div>
 </div>
 
-### Top (block-start) pair
+### Top Pair to Block-Start Pair
 
 <div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
 <div>
@@ -98,7 +116,7 @@ All-corners (`d-bar*`) and pair classes use the same stop scale:
 </div>
 </div>
 
-### Bottom (block-end) pair
+### Bottom Pair to Block-End Pair
 
 <div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
 <div>
@@ -125,7 +143,7 @@ All-corners (`d-bar*`) and pair classes use the same stop scale:
 </div>
 </div>
 
-### Left (inline-start) pair
+### Left Pair to Inline-Start Pair
 
 <div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
 <div>
@@ -152,7 +170,7 @@ All-corners (`d-bar*`) and pair classes use the same stop scale:
 </div>
 </div>
 
-### Right (inline-end) pair
+### Right Pair to Inline-End Pair
 
 <div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
 <div>
@@ -179,7 +197,7 @@ All-corners (`d-bar*`) and pair classes use the same stop scale:
 </div>
 </div>
 
-### Mixed usage
+### Mixed Usage
 
 <div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
 <div>
@@ -208,17 +226,86 @@ All-corners (`d-bar*`) and pair classes use the same stop scale:
 </div>
 </div>
 
-## What's NOT Affected
+## What's Not Affected
 
-- **All-corners keyword classes** (`d-bar-pill`, `d-bar-circle`, `d-bar-unset`) — unchanged.
-- **Single-corner logical classes** (`d-bssr-*`, `d-bser-*`, `d-besr-*`, `d-beer-*`) — already logical, unchanged.
-- **CSS custom properties** — no token renames in this migration.
+- **All-corners keyword classes** (`d-bar-pill`, `d-bar-circle`, `d-bar-unset`) keep their names.
+- **Already-logical side-pair classes** (`d-bbsr-*`, `d-bber-*`, `d-bisr-*`, `d-bier-*`) are already canonical.
+- **Single-corner logical classes** (`d-bssr-*`, `d-bser-*`, `d-besr-*`, `d-beer-*`) are canonical and have no old physical equivalent.
+- **CSS custom properties** are not renamed by this border-radius migration. This page covers utility classes.
+
+## Migration Script
+
+For radius-only migrations:
+
+```bash
+npx dialtone-migrate-border-radius --dry-run --cwd ./src
+```
+
+Apply the changes after reviewing the file list:
+
+```bash
+npx dialtone-migrate-border-radius --cwd ./src
+```
+
+Skip the confirmation prompt:
+
+```bash
+npx dialtone-migrate-border-radius --yes --cwd ./src
+```
+
+The script scans `.vue`, `.md`, `.html`, `.js`, `.ts`, `.jsx`, and `.tsx` files and rewrites literal class names in static attributes, string literals, object/array class bindings, and simple template literals:
+
+<div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
+<div>
+
+**Before**
+
+```vue
+<template>
+  <div class="d-bar6 d-btr8" />
+  <div :class="{ 'd-bbr-pill': rounded }" />
+</template>
+
+<script setup>
+const headerClass = `d-btr6 ${extraClass}`;
+</script>
+```
+
+</div>
+<div>
+
+**After**
+
+```vue
+<template>
+  <div class="d-bar-350 d-bbsr-400" />
+  <div :class="{ 'd-bber-pill': rounded }" />
+</template>
+
+<script setup>
+const headerClass = `d-bbsr-350 ${extraClass}`;
+</script>
+```
+
+</div>
+</div>
+
+### Broader Utility-Class Migration
+
+The `dialtone-migration-helper` `utility-class-to-token-stops` config also includes these border-radius rewrites. Use it if you're already migrating sizing, spacing, gap, and position classes in the same pass:
+
+```bash
+npx dialtone-migration-helper --cwd ./src
+# Select "utility-class-to-token-stops"
+```
+
+Unlike the radius-only script, it also scans `.mdx`, `.less`, and `.css` and covers other utility families.
 
 ## ESLint Rule
 
-`deprecated-radius-utility-classes` flags all deprecated border-radius utility classes and auto-fixes them to their logical equivalents.
+`deprecated-radius-utility-classes` flags deprecated radius classes in static Vue template `class` attributes and auto-fixes them to the canonical names.
 
-Add to your ESLint config:
+Add it to your ESLint config:
 
 ```js
 // eslint.config.js (flat config)
@@ -240,46 +327,23 @@ Then run:
 npx eslint --fix "src/**/*.vue"
 ```
 
-**The rule handles:** `class="..."` static attributes, unquoted and single-quoted class attributes.
-
-**Skipped:** Dynamic class bindings (`:class="..."`), class names built via string concatenation.
-
-## Migration Script
-
-`dialtone-migrate-border-radius` batch-transforms deprecated border-radius utility classes across your codebase.
-
-### Preview Changes
-
-```bash
-npx dialtone-migrate-border-radius --dry-run --cwd ./src
-```
-
-### Apply Changes
-
-```bash
-npx dialtone-migrate-border-radius --cwd ./src
-```
-
-### Apply All Without Prompting
-
-```bash
-npx dialtone-migrate-border-radius --yes --cwd ./src
-```
-
-**The script handles:**
-
-- `.vue`, `.md`, `.html`, `.js`, `.ts`, `.jsx`, `.tsx` files
-- All-corners numeric renames (`d-bar6` → `d-bar-350`)
-- Pair numeric renames (`d-btr8` → `d-bbsr-400`)
-- Pair keyword renames (`d-btr-pill` → `d-bbsr-pill`)
-
-**Skipped:**
-
-- Already-migrated classes (e.g. `d-bar-350`, `d-bbsr-pill`)
-- Classes embedded inside other class names (e.g. `foo-d-bar6`)
-- Dynamic class bindings and string concatenation
+The rule handles static `class` attributes in Vue templates and preserves double quotes, single quotes, or unquoted attributes. It's a Vue-template guardrail, not a codemod replacement: it skips `:class` bindings, JS/TS strings, Markdown, and stylesheet files.
 
 ## What Requires Manual Review
 
-- **Dynamic class bindings.** Computed class names like `:class="{ ['d-btr-' + keyword]: true }"` or `:class="['d-blr-' + variant]"` cannot be rewritten by a static text replacement. Update the source data instead.
-- **String concatenation.** Expressions like `` `d-btr-${rounded ? 'pill' : 'circle'}` `` are skipped. Replace with the new logical prefix (e.g. `d-bbsr-pill`, `d-bbsr-circle`).
+The tools are intentionally conservative. Search for the remaining patterns below after the automated pass.
+
+| Pattern | Example | Why manual |
+| --- | --- | --- |
+| Constructed class names | `` `d-btr${size}` ``, `'d-' + side + radius` | No complete legacy class exists in source text. Update the source data or class-building logic. |
+| Variant-prefixed utility classes | `sm:d-bar6`, `md:d-btr8`, `h:d-brr-pill` | The current radius codemod and ESLint rule match unprefixed utility classes only. |
+| Custom wrappers around class names | `const topRadius = 'btr6'` | The tools only rewrite full Dialtone class names such as `d-btr6`. |
+| Stylesheets with legacy class references | `.card { @apply d-bar6; }` | The radius-only script does not scan `.css` or `.less`. Use `utility-class-to-token-stops` or update manually. |
+
+Final check:
+
+```bash
+rg -n "d-(bar(0|1|2|4|6|8|12|16|24|32)|(btr|bbr|blr|brr)(0|1|2|4|6|8|12|16|24|32)|(btr|bbr|blr|brr)-(pill|circle))" src
+```
+
+Migrate any matches to the canonical class.
