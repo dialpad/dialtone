@@ -450,6 +450,45 @@ describe('F8 — validateDtTextProps masks inert content + quote-aware', () => {
   });
 });
 
+describe('C3 — validateDtTextProps reports correct line numbers past masked regions', () => {
+  it('line number after a large script block matches the actual source line', () => {
+    const lines = ['<script>'];
+    for (let i = 0; i < 50; i++) lines.push('  const x' + i + ' = ' + i + ';');
+    lines.push('</script>');
+    lines.push('<dt-text kind="title">x</dt-text>');
+    const issues = validateDtTextProps(lines.join('\n'));
+    assert.equal(issues.length, 1);
+    assert.equal(issues[0].line, 53, `expected line 53, got ${issues[0].line}`);
+  });
+});
+
+describe('C7 — idempotent dynamic-class marker insertion', () => {
+  it('running the codemod twice produces the same output as one run', () => {
+    const input = '<p :class="{ \'d-headline--md\': cond }">x</p>';
+    const once = transformContent(input).transformed;
+    const twice = transformContent(once).transformed;
+    assert.equal(once, twice, 'second run should be a no-op');
+  });
+  it('marker count stays at 1 across multiple runs', () => {
+    const input = '<p :class="{ \'d-headline--md\': cond }">x</p>';
+    let out = input;
+    for (let i = 0; i < 3; i++) out = transformContent(out).transformed;
+    assert.equal((out.match(/review dynamic class/g) || []).length, 1);
+  });
+});
+
+describe('C1 — nested span with flagged composed class stays unwrapped', () => {
+  it('<span class="d-code--sm"> inside migrated parent is NOT rewritten', () => {
+    const out = run('<p class="d-headline--md"><span class="d-code--sm">x</span></p>');
+    assert.ok(out.includes('<span class="d-code--sm">x</span>'), `span should be preserved, got: ${out}`);
+    assert.ok(!out.includes('<dt-text class="d-code--sm">'), 'should not rewrite flagged class');
+  });
+  it('<span class="d-headline--eyebrow"> inside migrated parent stays unwrapped', () => {
+    const out = run('<p class="d-headline--md"><span class="d-headline--eyebrow">x</span></p>');
+    assert.ok(out.includes('<span class="d-headline--eyebrow">x</span>'), `should preserve, got: ${out}`);
+  });
+});
+
 describe('F4 — parseExistingProps does not false-match suffix attrs', () => {
   it('font-kind= is not treated as kind=', () => {
     assert.equal(

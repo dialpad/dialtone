@@ -289,9 +289,28 @@ export function transformContent (content, opts = {}) {
   out = flagLegacyHeadings(out, filePath, warnings, notes);
   out = flagFontSizeClasses(out, filePath, warnings, notes);
 
-  const transformed = unmaskInertContent(out, segments, token, endToken);
+  const unmasked = unmaskInertContent(out, segments, token, endToken);
+
+  // Idempotency: collapse consecutive identical dt-text-migrate own-line markers.
+  // This handles the re-run case where a marker emitted by a prior run gets masked
+  // (since it's an HTML comment) and the same marker is re-emitted by flagDynamicClasses
+  // / flagLegacyHeadings on the same target line.
+  const transformed = deduplicateAdjacentMarkers(unmasked);
 
   return { transformed, warnings, notes };
+}
+
+function deduplicateAdjacentMarkers (content) {
+  const lines = content.split('\n');
+  const out = [];
+  const markerRe = /^\s*<!--\s*dt-text-migrate:[\s\S]*?-->\s*$/;
+  for (const line of lines) {
+    const prev = out[out.length - 1];
+    // Drop this line if it's a dt-text-migrate marker identical (trimmed) to the previous emitted line
+    if (prev && markerRe.test(line) && markerRe.test(prev) && line.trim() === prev.trim()) continue;
+    out.push(line);
+  }
+  return out.join('\n');
 }
 
 //------------------------------------------------------------------------------
@@ -779,7 +798,12 @@ function isSafeToCollapseSpan (fullTag) {
   if (withoutClass.length > 0) return false;
 
   const classes = classMatch[1].split(/\s+/).filter(Boolean);
-  return classes.length > 0 && classes.every(c => ALL_KNOWN_CLASSES.has(c));
+  if (classes.length === 0 || !classes.every(c => ALL_KNOWN_CLASSES.has(c))) return false;
+
+  // Reject if any composed class is flagged (eyebrow / code-sm / helper) — those are
+  // explicitly out-of-scope-for-auto-rewrite per the PRD and Task 2 already emits a
+  // review marker for them. Rewriting here would contradict the flag.
+  return !classes.some(c => COMPOSED_CLASS_MAP[c] && COMPOSED_CLASS_MAP[c].flag);
 }
 
 /**
@@ -1145,18 +1169,24 @@ const VALID_ALIGNS = new Set(['start', 'center', 'end', 'justify']);
 export function validateDtTextProps (content) {
   const issues = [];
 
-  // Mask inert content (script/style/comments) so we never report false positives
-  // on commented-out DtText markup or string literals inside <script>.
-  // We need line numbers in the original content — track original positions via the masked
-  // content (positions are preserved length-for-length since maskInertContent emits a
-  // token of the same name for each segment, but we re-resolve line numbers from `content`
-  // which is the unmasked source).
-  const { masked } = maskInertContent(content);
+  // Compute inert regions (script/style/comments) over the ORIGINAL content so we
+  // can both skip false positives AND keep accurate line numbers. maskInertContent
+  // emits compact tokens that change offsets — using its masked output would produce
+  // wrong line numbers when a large script/comment precedes a real <dt-text> tag.
+  const inertRanges = [];
+  for (const pattern of [/<script[\s\S]*?<\/script>/gi, /<style[\s\S]*?<\/style>/gi, /<!--[\s\S]*?-->/g]) {
+    let im;
+    while ((im = pattern.exec(content)) !== null) {
+      inertRanges.push([im.index, im.index + im[0].length]);
+    }
+  }
+  const isInsideInert = (idx) => inertRanges.some(([s, e]) => idx >= s && idx < e);
 
   // Quote-aware tag scan so `:title="a > b"` doesn't truncate the attr capture
   const tagRe = new RegExp(`<(?:dt-text|DtText)\\b(${ATTR_BODY})>`, 'g');
   let m;
-  while ((m = tagRe.exec(masked)) !== null) {
+  while ((m = tagRe.exec(content)) !== null) {
+    if (isInsideInert(m.index)) continue;
     const attrStr = m[1];
     const lineNum = content.slice(0, m.index).split('\n').length;
     const tagSnippet = m[0].length > 120 ? m[0].slice(0, 117) + '...' : m[0];
@@ -1301,7 +1331,10 @@ async function processFile (filePath, options) {
   await fs.writeFile(filePath, transformed, 'utf-8');
   console.log(log.green('   ✓ Saved'));
 
-  const importCheck = detectMissingDtTextImport(transformed, true);
+  // Only warn about missing DtText import when the output actually contains a NEW <dt-text>
+  // — review-marker-only changes (e.g. eyebrow/d-code--sm/d-fs-* flags) don't require an import.
+  const addedDtText = /<dt-text\b/.test(transformed) && !/<dt-text\b/.test(content);
+  const importCheck = detectMissingDtTextImport(transformed, addedDtText);
   if (importCheck?.needsImport) printImportInstructions(filePath, importCheck);
 
   if (notes.length > 0) {

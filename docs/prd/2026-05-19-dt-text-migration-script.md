@@ -69,7 +69,7 @@ DtText is Dialtone's new typography primitive — the canonical way to apply tex
 ## Technical Context
 
 - **Location:** `packages/dialtone-css/lib/build/js/dialtone_migrate_typography/index.mjs` (same directory convention as all sibling scripts)
-- **Bin registration:** add `"dialtone-migrate-typography": "./dist/js/dialtone_migrate_typography/index.mjs"` to `dialtone-css/package.json` `"bin"` block (same pattern as existing entries)
+- **Bin registration:** add `"dialtone-migrate-typography": "./lib/dist/js/dialtone_migrate_typography/index.mjs"` to `dialtone-css/package.json` `"bin"` block (same pattern as existing entries)
 - **Implementation model:** closest analogs are `dialtone_migrate_flex_to_stack/index.mjs` (class combinations → component props) and `dialtone_migrate_link_rendering/index.mjs` (element tag replacement + attribute extraction). Both use pure Node.js, regex-based transforms, no external dependencies beyond `fs/promises`, `path`, `readline`.
 - **Class-to-prop mapping table** (embed in script as a `const`):
 

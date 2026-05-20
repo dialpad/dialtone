@@ -83,7 +83,7 @@ The class-to-prop mapping table is authoritative — it was validated against to
 
 - Mirror `chip-interactive/index.mjs` structure: `parseArgs`, `findFiles`, `maskInertContent`/`unmaskInertContent`, `processFile`, `prompt`, `main`. Copy the color/log helpers verbatim — every sibling script duplicates them (no shared module exists, do NOT create one).
 - Mapping tables: copy the 31-row table from `docs/prd/2026-05-19-dt-text-migration-script.md`. Encode as `COMPOSED_CLASS_MAP` (`{ [className]: { kind, size, density?, strength?, flag?: 'eyebrow' | 'code-sm' | 'helper' } }`) and `OVERRIDE_CLASS_MAP` (for `d-fw-*`, `d-fc-*`, `d-lh-*`, `d-truncate`, `d-ta-*`).
-- CLI flags: `--cwd <path>`, `--dry-run`, `--yes`, `--help`, `--file <path>` (repeatable), `--remove-markers` — mirror chip-interactive's flag set, drop `--validate`/`--show-outline`/`--remove-outline`.
+- CLI flags: `--cwd <path>`, `--dry-run`, `--yes`, `--help`, `--file <path>` (repeatable), `--remove-markers`, `--validate` — mirror chip-interactive's flag set; drop flex-to-stack's `--show-outline`/`--remove-outline`. (`--validate` was added during verification — see the "post-migration prop validation" pass below.)
 - Add a runtime assertion at the bottom of `transformContent` that asserts emitted `(kind, size)` pairs honour `TEXT_HEADLINE_ONLY_SIZES = ['700','600','500']` from `packages/dialtone-vue/components/Text/TextConstants.js`. Mitigates risk #2.
 - Fast-path regex check before invoking transform: `/d-headline|d-body|d-label|d-code|d-fw-|d-fc-|d-lh-|d-truncate|d-ta-|d-fs-/`. Skip files that don't match.
 
