@@ -19,6 +19,13 @@ export default {
       },
     },
   },
+  dnd: {
+    props: {
+      presence: {
+        initialValue: 'dnd',
+      },
+    },
+  },
   away: {
     props: {
       presence: {

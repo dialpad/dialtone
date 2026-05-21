@@ -12,30 +12,51 @@
     >{{ srText }} </span>
     <div
       class="d-presence__inner"
+      data-qa="dt-presence-inner"
       :class="{
         'd-presence__inner--active': presence === 'active',
         'd-presence__inner--away': presence === 'away',
         'd-presence__inner--busy': presence === 'busy',
         'd-presence__inner--offline': presence === 'offline',
+        'd-presence__inner--dnd': presence === 'dnd',
       }"
-    />
+    >
+      <template v-if="showIcon && presence !== 'offline'">
+        <dt-presence-active-icon v-if="presence === 'active'" />
+        <dt-presence-away-icon v-else-if="presence === 'away'" />
+        <dt-presence-busy-icon v-else-if="presence === 'busy'" />
+        <dt-presence-dnd-icon v-else-if="presence === 'dnd'" />
+      </template>
+    </div>
   </div>
 </template>
 
 <script>
 import { PRESENCE_STATES, PRESENCE_STATES_LIST } from './PresenceConstants';
+import DtPresenceActiveIcon from './modules/presence_active_icon.vue';
+import DtPresenceAwayIcon from './modules/presence_away_icon.vue';
+import DtPresenceBusyIcon from './modules/presence_busy_icon.vue';
+import DtPresenceDndIcon from './modules/presence_dnd_icon.vue';
+
 /**
  * Presence is a user status visual indicator element.
  * @see https://dialtone.dialpad.com/components/presence.html
  */
 export default {
   name: 'DtPresence',
+  components: {
+    DtPresenceActiveIcon,
+    DtPresenceAwayIcon,
+    DtPresenceBusyIcon,
+    DtPresenceDndIcon,
+  },
+
   props: {
 
     /**
      * Determines the color of the inner presence circle, indicating status.
-     * Accepts one of 4 values: 'busy', 'away', 'active', 'offline'
-     * @values busy, away, active, offline
+     * Accepts one of 5 values: 'busy', 'away', 'active', 'offline', 'dnd'
+     * @values busy, away, active, offline, dnd
      */
     presence: {
       type: String,
@@ -53,6 +74,15 @@ export default {
     srText: {
       type: String,
       default: null,
+    },
+
+    /**
+     * Renders a state-specific glyph inside the colored circle to reinforce meaning beyond color.
+     * Active shows a checkmark; busy and dnd show a minus dash. The `away` and `offline` states do not render a glyph.
+     */
+    showIcon: {
+      type: Boolean,
+      default: true,
     },
   },
 };
