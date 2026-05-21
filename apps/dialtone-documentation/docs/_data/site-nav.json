@@ -232,6 +232,10 @@
                 "link": "/guides/migration/",
                 "children": [
                   {
+                    "text": "Border-Radius Logical Names",
+                    "link": "/guides/migration/border-radius/"
+                  },
+                  {
                     "text": "CSS Cascade Layers",
                     "link": "/guides/migration/css-cascade-layers/"
                   },
@@ -286,6 +290,10 @@
                   {
                     "text": "Scrollbar :never → :always",
                     "link": "/guides/migration/scrollbar-always/"
+                  },
+                  {
+                    "text": "Theme to Mode",
+                    "link": "/guides/migration/theme-to-mode/"
                   },
                   {
                     "text": "DtModal Native Dialog",
