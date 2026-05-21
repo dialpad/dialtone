@@ -23,9 +23,9 @@
     >
       <template v-if="showIcon && presence !== 'offline'">
         <dt-presence-active-icon v-if="presence === 'active'" />
-        <dt-presence-away-icon v-if="presence === 'away'" />
-        <dt-presence-busy-icon v-if="presence === 'busy'" />
-        <dt-presence-dnd-icon v-if="presence === 'dnd'" />
+        <dt-presence-away-icon v-else-if="presence === 'away'" />
+        <dt-presence-busy-icon v-else-if="presence === 'busy'" />
+        <dt-presence-dnd-icon v-else-if="presence === 'dnd'" />
       </template>
     </div>
   </div>
