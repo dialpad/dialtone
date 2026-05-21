@@ -1,12 +1,13 @@
 <template>
   <dt-modal
-    title="Example title"
+    header-text="Example title"
     :open="isOpen"
-    :banner-title="bannerTitle"
+    :banner-header-text="bannerTitle"
     :banner-kind="bannerKind"
     :fixed-header-footer="fixedHeaderFooter"
     :size="size"
     :copy="copy"
+    :transparent-backdrop="transparentBackdrop"
     @update:open="isOpen = $event"
   >
     <template
@@ -65,6 +66,11 @@ export default {
     size: {
       type: String,
       default: 'default',
+    },
+
+    transparentBackdrop: {
+      type: Boolean,
+      default: false,
     },
 
     copy: {

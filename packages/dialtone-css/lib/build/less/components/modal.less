@@ -96,7 +96,7 @@
     //  ------------------------------------------------------------------------
     --modal-backdrop-color-background: var(--dt-color-surface-backdrop);
     --modal-dialog-padding: var(--dt-spacing-400);
-    --modal-dialog-color-background: var(--dt-color-surface-primary);
+    --modal-dialog-color-background: var(--dt-color-surface-overlay);
     --modal-dialog-color-border: var(--dt-color-border-subtle);
     --modal-dialog-color-text: var(--dt-color-foreground-primary);
     --modal-header-color-text: var(--dt-color-foreground-primary);
@@ -144,7 +144,7 @@
 }
 
 .d-modal--transparent {
-  --modal-backdrop-color-background: var(--d-bgc-transparent);
+  --modal-backdrop-color-background: var(--dt-color-neutral-transparent);
 
   // If we don't set this the native app header region will override all click events on the modal overlay
   -webkit-app-region: no-drag;
@@ -156,6 +156,12 @@
     inline-size: 100%;
     min-block-size: 100%;
   }
+}
+
+// Not to be confused with .d-modal--transparent above — that one is used
+// standalone (without .d-modal) by Popover/Tooltip.
+.d-modal--transparent-backdrop {
+  --modal-backdrop-color-background: var(--dt-color-neutral-transparent);
 }
 
 //  $$  MODAL DIALOG

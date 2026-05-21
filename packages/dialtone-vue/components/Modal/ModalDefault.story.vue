@@ -18,6 +18,7 @@
       :close-on-click="$attrs.closeOnClick"
       :append-to="$attrs.appendTo"
       :content-mode="$attrs.contentMode"
+      :transparent-backdrop="$attrs.transparentBackdrop"
       @update:open="close"
     >
       <template
