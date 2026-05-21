@@ -267,7 +267,7 @@ async function selectValue (value, { animate: shouldAnimate = true } = {}) {
     newEl,
     orientation: props.orientation,
     hideProps: { backgroundColor: 'transparent' },
-    indicatorExtra: { backgroundColor: old.style.backgroundColor },
+    indicatorExtra: { backgroundColor: 'var(--button-color-background)' },
     pseudoElement: '::after',
   });
 }
