@@ -110,6 +110,46 @@ const MIGRATIONS = [
     fileExtensions: ['.css', '.less', '.scss', '.html', '.vue', '.js', '.ts', '.jsx', '.tsx'],
   },
   {
+    id: 'border-radius',
+    name: 'Border-Radius Logical Names',
+    description: 'Physical directional radius classes (d-btr*, d-bbr*, d-blr*, d-brr*) replaced by logical equivalents (d-bbsr*, d-bber*, d-bisr*, d-bier*). Numeric stops standardized.',
+    category: 'required',
+    type: 'standalone',
+    scriptDir: 'dialtone_migrate_border_radius',
+    detectPatterns: [
+      /(?:["'\s=`])d-bar(?:0|1|2|4|6|8|12|16|24|32)(?:["'\s>;`])/,
+      /(?:["'\s=`])d-(?:btr|bbr|blr|brr)(?:\d|-pill|-circle)(?:["'\s>;`])/,
+    ],
+    fileExtensions: ['.vue', '.html', '.js', '.ts', '.jsx', '.tsx', '.md'],
+  },
+  {
+    id: 'utility-class-to-token-stops',
+    name: 'Utility Class Token Stops',
+    description: 'Pixel-based utility class names migrated to token-stop-based names (d-h16 → d-h-25, d-p8 → d-p-100, etc.).',
+    category: 'required',
+    type: 'config',
+    configName: 'utility-class-to-token-stops',
+    detectPatterns: [
+      /(?:["'\s])d-(?:h|w|hmn|hmx|wmn|wmx)(?:16|32|48|64|96|128)(?:["'\s])/,
+      /(?:["'\s])d-(?:m|mt|mr|mb|ml|mx|my|p|pt|pr|pb|pl|px|py)(?:4|8|12|16|24|32|48|64)(?:["'\s])/,
+      /(?:["'\s])d-(?:g|rg|cg)(?:4|8|12|16|24|32)(?:["'\s])/,
+    ],
+    fileExtensions: ['.vue', '.html', '.js', '.ts', '.jsx', '.tsx', '.md', '.css', '.less'],
+  },
+  {
+    id: 'theme-to-mode',
+    name: 'Theme to Mode',
+    description: 'Deprecated setTheme() and data-dt-theme migrated to the layered theming API (setMode/setBrand/setContrast/initDialtoneTheme).',
+    category: 'required',
+    type: 'config',
+    configName: 'theme-to-mode',
+    detectPatterns: [
+      /(?<!\.)setTheme\s*\(/,
+      /\bdata-dt-theme\b/,
+    ],
+    fileExtensions: ['.vue', '.html', '.js', '.ts', '.jsx', '.tsx', '.css', '.less', '.scss', '.mjs'],
+  },
+  {
     id: 'component-props',
     name: 'Component Props & Events',
     description: 'Value renames, show→open, hide-* inversion, title→header-text, event/slot renames, rootClass removal.',
@@ -150,7 +190,7 @@ const MIGRATIONS = [
     fileExtensions: ['.vue', '.html'],
   },
 
-  // ── Opt-in (deprecation, not yet active) ───────────────────────────
+  // ── Opt-in (deprecation, best practices) ──────────────────────────
   {
     id: 'base-to-semantic',
     name: 'Base to Semantic Colors',
@@ -176,6 +216,19 @@ const MIGRATIONS = [
       /d-(?:fc|bgc|bc)-success/,
     ],
     fileExtensions: ['.css', '.less', '.html', '.vue', '.js', '.ts', '.jsx', '.tsx'],
+  },
+  {
+    id: 'stack-gap-to-spacing',
+    name: 'Stack Gap to Spacing',
+    description: 'DtStack and DtDescriptionList gap prop values migrated from old size stops to new spacing stops.',
+    category: 'opt-in',
+    type: 'config',
+    configName: 'stack-gap-to-spacing',
+    detectPatterns: [
+      /gap="(?:50|100|200|300|350|400|450|500|525|550|600|625|650|700)"/,
+      /d-stack--gap-(?:50|100|200|300|350|400|450|500|525|550|600|625|650|700)/,
+    ],
+    fileExtensions: ['.vue', '.html', '.js', '.ts', '.jsx', '.tsx', '.md'],
   },
   {
     id: 'flex-to-stack',
@@ -271,10 +324,10 @@ Options:
   --help             Show help
 
 Available migration IDs (required):
-${MIGRATIONS.filter(m => m.category === 'required').map(m => `  ${m.id.padEnd(22)} ${m.name}`).join('\n')}
+${MIGRATIONS.filter(m => m.category === 'required').map(m => `  ${m.id.padEnd(32)} ${m.name}`).join('\n')}
 
 Available migration IDs (opt-in):
-${MIGRATIONS.filter(m => m.category === 'opt-in').map(m => `  ${m.id.padEnd(22)} ${m.name}`).join('\n')}
+${MIGRATIONS.filter(m => m.category === 'opt-in').map(m => `  ${m.id.padEnd(32)} ${m.name}`).join('\n')}
 
 Examples:
   npx dialtone-migrate                              # Interactive selection

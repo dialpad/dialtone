@@ -64,7 +64,7 @@ npx dialtone-migrate --all --yes --cwd ./src
 npx dialtone-migrate --all --dry-run --cwd ./src
 
 # Run specific migrations only
-npx dialtone-migrate --only color-stops,hsl-to-oklch --cwd ./src
+npx dialtone-migrate --only color-stops,border-radius --cwd ./src
 ```
 
 ### Individual scripts

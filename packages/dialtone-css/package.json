@@ -57,7 +57,8 @@
     "dialtone-migrate-tshirt-to-numeric": "./lib/dist/js/dialtone_migrate_tshirt_to_numeric/index.mjs",
     "dialtone-migrate-props": "./lib/dist/js/dialtone_migrate_props/index.mjs",
     "dialtone-migrate-chip-interactive": "./lib/dist/js/dialtone_migrate_chip_interactive/index.mjs",
-    "dialtone-migrate-scrollbar-always": "./lib/dist/js/dialtone_migrate_scrollbar_always/index.mjs"
+    "dialtone-migrate-scrollbar-always": "./lib/dist/js/dialtone_migrate_scrollbar_always/index.mjs",
+    "dialtone-migrate-border-radius": "./lib/dist/js/dialtone_migrate_border_radius/index.mjs"
   },
   "type": "module",
   "scripts": {
