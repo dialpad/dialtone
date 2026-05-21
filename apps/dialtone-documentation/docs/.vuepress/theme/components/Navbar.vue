@@ -194,9 +194,14 @@
         </dt-list-item-group>
         <dt-dropdown-separator />
         <dt-list-item-group
-          heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
-          heading="Experimental (37 themes)"
+          heading=" "
+          heading-class="d-px-100"
         >
+          <template #heading>
+            <dt-text as="label" kind="label" size="100" tone="tertiary">
+              Experimental (37 themes)
+            </dt-text>
+          </template>
           <dt-list-item
             v-for="themeNum in numberedThemes"
             :key="themeNum"
