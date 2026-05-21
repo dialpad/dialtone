@@ -171,6 +171,15 @@ const OVERRIDE_CLASS_MAP = {
 // Rewriteable element tags (only these get turned into <dt-text>)
 const REWRITEABLE_TAGS = new Set(['p', 'span', 'div', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'label']);
 
+// Inline-phrasing children that DO NOT disqualify an element from being a text leaf.
+// Anything outside this set as a child (block elements, custom components, interactive
+// controls, headings, another <p>) signals the element is a wrapper, not text.
+const INLINE_PHRASING_TAGS = new Set([
+  'span', 'br', 'em', 'strong', 'code', 'i', 'b', 'u', 's',
+  'sub', 'sup', 'kbd', 'samp', 'small', 'mark', 'wbr',
+  'time', 'data', 'abbr', 'cite', 'q', 'dfn', 'var',
+]);
+
 // All recognised class names combined (for safe-to-collapse predicate in Task 4)
 const ALL_KNOWN_CLASSES = new Set([
   ...Object.keys(COMPOSED_CLASS_MAP),
@@ -284,6 +293,9 @@ export function transformContent (content, opts = {}) {
   // Task 4: nested-span collapse + dynamic class / d-fs-* flagging
   out = collapseNestedSpans(out, filePath, warnings, notes);
   out = flagDynamicClasses(out, filePath, warnings, notes);
+  // Task 4b: composed typography classes on tags outside our rewrite scope
+  // (dt-* components, <a>, <button>, custom elements). Emit marker to surface them.
+  out = flagComposedOnWrapperTags(out, filePath, warnings, notes);
   // Legacy heading hint runs BEFORE flagFontSizeClasses — when both fire, the richer
   // hint wins (flagFontSizeClasses skips if any dt-text-migrate comment already exists nearby).
   out = flagLegacyHeadings(out, filePath, warnings, notes);
@@ -474,6 +486,25 @@ function buildDtTextTag (opts) {
   return conflictComment + openTag;
 }
 
+// True if any class signals layout intent (display utility).
+// `<div class="d-d-flex d-body--md">` is a flex container, not a text element.
+function hasLayoutDisplaySignal (classes) {
+  return classes.some(c => /^d-d-/.test(c));
+}
+
+// True if the element body contains a child tag that disqualifies the parent
+// from being a text leaf. Block elements, custom components (dt-*, kebab-case),
+// interactive controls, headings, another <p>, and <dt-text> all count.
+// Inline phrasing children (span, em, strong, br, etc.) do NOT disqualify.
+function hasBlockOrComponentChild (body) {
+  if (!body) return false;
+  const tagOpens = body.matchAll(/<([a-zA-Z][a-zA-Z0-9-]*)\b/g);
+  for (const m of tagOpens) {
+    if (!INLINE_PHRASING_TAGS.has(m[1].toLowerCase())) return true;
+  }
+  return false;
+}
+
 function rewriteComposedClasses (content) {
   const elementRe = new RegExp(ELEMENT_RE.source, 'g');
   const matches = [];
@@ -519,6 +550,34 @@ function rewriteComposedClasses (content) {
       }
     }
 
+    // Wrapper safety: skip auto-convert when the element looks like a layout container
+    // or contains non-text children. Emit a review marker so the legacy class still
+    // surfaces in the migration diff. Only applies to native HTML rewriteable tags
+    // — dt-text residual lifts go through their own path in liftResidualOverrides.
+    const elementBody = (!isSelfClosing && closeStart !== null)
+      ? content.slice(openEnd, closeStart)
+      : '';
+    const isWrapper = isNativeRewriteable
+      && (hasLayoutDisplaySignal(retainedClasses) || hasBlockOrComponentChild(elementBody));
+
+    if (isWrapper) {
+      matches.push({
+        entry: { flag: 'wrapper' },
+        composedCls,
+        tagName,
+        attrsBefore: attrsBefore.trim(),
+        attrsAfter: attrsAfter.trim(),
+        retainedClasses,
+        isSelfClosing,
+        openStart,
+        openEnd,
+        closeStart: null,
+        closeEnd: null,
+        closeReplacement: null,
+      });
+      continue;
+    }
+
     matches.push({
       entry,
       composedCls,
@@ -552,6 +611,18 @@ function rewriteComposedClasses (content) {
         start: openStart,
         end: openStart,
         replacement: '<!-- dt-text-migrate: review -->',
+      });
+      continue;
+    }
+
+    if (entry.flag === 'wrapper') {
+      // Layout container or wrapper with non-text children — emit a review
+      // marker so the legacy composed class surfaces in the diff. Tag and
+      // classes are left intact for the consumer to migrate manually.
+      replacements.push({
+        start: openStart,
+        end: openStart,
+        replacement: '<!-- dt-text-migrate: review composed class on wrapper -->',
       });
       continue;
     }
@@ -725,6 +796,17 @@ function liftResidualOverrides (content) {
 
       // Skip if any class is unrecognised — custom CSS may target it, unsafe to auto-convert
       if (classes.some(c => !ALL_KNOWN_CLASSES.has(c))) continue;
+
+      // Wrapper safety: skip if element body contains block/component children.
+      // <span class="d-fw-bold"><dt-button>x</dt-button></span> should NOT become
+      // <dt-text strength="bold"><dt-button>…</dt-text>. (Mirrors the composed-path safety.)
+      if (!isSelfClosing) {
+        const closing = findMatchingClosingTag(content, openEnd, tagName);
+        if (closing) {
+          const body = content.slice(openEnd, closing.index);
+          if (hasBlockOrComponentChild(body)) continue;
+        }
+      }
 
       // Check no dynamic :class conflicts
       const { overrideProps, remaining } = extractOverrideProps(classes, {});
@@ -928,6 +1010,43 @@ function flagDynamicClasses (content) {
   });
 
   return out.join('\n');
+}
+
+// Find composed typography classes on tags outside the rewrite scope
+// (dt-* components, <a>, <button>, other custom elements). Emit a marker
+// so the legacy class surfaces in the migration diff instead of being silently
+// passed over. Tags ARE in the rewrite scope (p/span/div/h1-6/label/dt-text)
+// are handled by rewriteComposedClasses + liftResidualOverrides.
+function flagComposedOnWrapperTags (content) {
+  const tagRe = new RegExp(
+    `<([a-zA-Z][a-zA-Z0-9-]*)(${ATTR_BODY})\\sclass="([^"]*)"(${ATTR_BODY})\\/?>`,
+    'g',
+  );
+  const insertions = [];
+  let m;
+  while ((m = tagRe.exec(content)) !== null) {
+    const [, tagName, , classValue] = m;
+    const tagLower = tagName.toLowerCase();
+    if (REWRITEABLE_TAGS.has(tagLower)) continue;
+    if (tagLower === 'dt-text' || tagName === 'DtText') continue;
+    const classes = classValue.split(/\s+/).filter(Boolean);
+    const hasComposed = classes.some(c => COMPOSED_CLASS_MAP[c]);
+    if (!hasComposed) continue;
+    // Idempotency: skip if our marker is already on the preceding line/inline
+    const before = content.slice(Math.max(0, m.index - 80), m.index);
+    if (/<!--\s*dt-text-migrate:\s*review composed class on wrapper tag\s*-->/.test(before)) continue;
+    insertions.push(m.index);
+  }
+  if (insertions.length === 0) return content;
+  let out = content;
+  for (const idx of insertions.reverse()) {
+    // Place marker on its own line above, preserving indentation
+    const lineStart = out.lastIndexOf('\n', idx - 1) + 1;
+    const indent = out.slice(lineStart, idx).match(/^[ \t]*/)[0];
+    const marker = `${indent}<!-- dt-text-migrate: review composed class on wrapper tag -->\n`;
+    out = out.slice(0, lineStart) + marker + out.slice(lineStart);
+  }
+  return out;
 }
 
 // On-menu d-fs-N → DtText size mapping hint (body/label size + headline size if applicable)

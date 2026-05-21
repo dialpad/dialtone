@@ -177,17 +177,23 @@ describe('element tags — only rewriteable tags are converted', () => {
   it('<span> is rewritten without as prop (DtText default)', () => {
     assert.equal(run('<span class="d-body--sm">x</span>'), '<dt-text kind="body" size="100">x</dt-text>');
   });
-  it('<a> is not rewritten', () => {
-    const input = '<a class="d-headline--md">link</a>';
-    assert.equal(run(input), input);
+  // Non-rewriteable tags (a, button, li, dt-*) carrying composed typography
+  // classes are NOT auto-converted, but they DO get a review marker so the
+  // legacy class surfaces in the migration diff. (Per francisrupert review on PR #1289.)
+  it('<a> is not rewritten but gets a wrapper-tag marker', () => {
+    const out = run('<a class="d-headline--md">link</a>');
+    assert.ok(/dt-text-migrate: review composed class on wrapper tag/.test(out), `expected marker, got: ${out}`);
+    assert.ok(out.includes('<a class="d-headline--md">link</a>'), 'original element preserved');
   });
-  it('<button> is not rewritten', () => {
-    const input = '<button class="d-headline--md">btn</button>';
-    assert.equal(run(input), input);
+  it('<button> is not rewritten but gets a wrapper-tag marker', () => {
+    const out = run('<button class="d-headline--md">btn</button>');
+    assert.ok(/dt-text-migrate: review composed class on wrapper tag/.test(out), `expected marker, got: ${out}`);
+    assert.ok(out.includes('<button class="d-headline--md">btn</button>'), 'original element preserved');
   });
-  it('<li> is not rewritten', () => {
-    const input = '<li class="d-headline--md">item</li>';
-    assert.equal(run(input), input);
+  it('<li> is not rewritten but gets a wrapper-tag marker', () => {
+    const out = run('<li class="d-headline--md">item</li>');
+    assert.ok(/dt-text-migrate: review composed class on wrapper tag/.test(out), `expected marker, got: ${out}`);
+    assert.ok(out.includes('<li class="d-headline--md">item</li>'), 'original element preserved');
   });
 });
 
@@ -801,5 +807,197 @@ describe('inert content masking — should not match in script or comments', () 
   it('does not transform class inside <style>', () => {
     const input = '<style>\n.d-headline--md { color: red; }\n</style>';
     assert.equal(run(input), input);
+  });
+});
+
+// ---------------------------------------------------------------------------
+// Wrapper safety — composed typography classes on layout containers,
+// custom components, and elements with block/component children. Shapes
+// here are drawn from real firespotter occurrences flagged in PR #1289
+// review (francisrupert). Three categories:
+//   1. Composed class on non-rewriteable tag (dt-*, custom-element).
+//   2. Composed class on a rewriteable tag with a layout display utility.
+//   3. Composed class on a rewriteable tag with block/component children.
+// ---------------------------------------------------------------------------
+
+describe('wrapper safety — non-rewriteable tag with composed class', () => {
+  // Shape: ubervoice/.../callbar.vue:33 — <dt-stack class="… d-body--md …">
+  it('<dt-stack class="d-body--md"> emits wrapper-tag marker, tag unchanged', () => {
+    const out = run('<dt-stack class="d-body--md">x</dt-stack>');
+    assert.ok(/dt-text-migrate: review composed class on wrapper tag/.test(out), `expected marker, got: ${out}`);
+    assert.ok(out.includes('<dt-stack class="d-body--md">'), 'original tag intact');
+  });
+  // Shape: ubervoice/.../operator_contact_row.vue:28 — <dt-link class="d-label--sm-plain …">
+  it('<dt-link class="d-label--sm-plain"> emits wrapper-tag marker', () => {
+    const out = run('<dt-link class="d-label--sm-plain d-td-none">link</dt-link>');
+    assert.ok(/dt-text-migrate: review composed class on wrapper tag/.test(out));
+    assert.ok(out.includes('<dt-link class="d-label--sm-plain d-td-none">'), 'original tag intact');
+  });
+  // Shape: ubervoice/.../signup_checkout_summary.vue:291 — <dt-notice class="… d-headline--md-compact">
+  it('<dt-notice class="d-headline--md-compact"> emits wrapper-tag marker', () => {
+    const out = run('<dt-notice kind="warning" class="d-mt32 d-headline--md-compact">x</dt-notice>');
+    assert.ok(/dt-text-migrate: review composed class on wrapper tag/.test(out));
+  });
+  // Custom element (kebab-case) with composed class
+  it('<dt-recipe-message-input class="d-body--md"> emits wrapper-tag marker', () => {
+    const out = run('<dt-recipe-message-input class="d-body--md" ref="input">x</dt-recipe-message-input>');
+    assert.ok(/dt-text-migrate: review composed class on wrapper tag/.test(out));
+  });
+  // Negative — non-rewriteable tag WITHOUT composed class should not get a marker
+  it('<dt-stack class="d-d-flex"> (no composed class) is left fully alone', () => {
+    const input = '<dt-stack class="d-d-flex">x</dt-stack>';
+    assert.equal(run(input), input);
+  });
+  // Idempotency — re-running does not stack markers
+  it('marker is not duplicated when codemod runs twice', () => {
+    const once = run('<dt-stack class="d-body--md">x</dt-stack>');
+    const twice = run(once);
+    const matches = once.match(/review composed class on wrapper tag/g) || [];
+    const matchesTwice = twice.match(/review composed class on wrapper tag/g) || [];
+    assert.equal(matches.length, 1, 'first run emits exactly one marker');
+    assert.equal(matchesTwice.length, 1, 'second run does not duplicate');
+  });
+});
+
+describe('wrapper safety — rewriteable tag with layout display utility', () => {
+  // Shape: ubervoice/.../buy_license_bundles_confirmation_summary.vue:116
+  // <div class="d-d-flex d-jc-space-between d-headline--lg-compact d-bt d-bc-bold d-pt12">
+  it('<div class="d-d-flex … d-headline--lg-compact …"> emits wrapper marker, no conversion', () => {
+    const out = run('<div class="d-d-flex d-jc-space-between d-headline--lg-compact">x</div>');
+    assert.ok(/dt-text-migrate: review composed class on wrapper/.test(out), `expected marker, got: ${out}`);
+    assert.ok(!out.includes('<dt-text'), 'div must NOT be converted to dt-text');
+    assert.ok(out.includes('d-headline--lg-compact'), 'composed class preserved for manual review');
+  });
+  // Shape: ubervoice/.../billing_history.vue:28
+  // <div class="d-w100p d-h100p d-d-flex d-fd-column d-jc-center d-ai-center d-body--md">
+  it('<div class="d-d-flex d-fd-column … d-body--md"> emits wrapper marker', () => {
+    const out = run('<div class="d-w100p d-d-flex d-fd-column d-body--md">x</div>');
+    assert.ok(/dt-text-migrate: review composed class on wrapper/.test(out));
+    assert.ok(!out.includes('<dt-text'));
+  });
+  // Grid container variant
+  it('<div class="d-d-grid d-body--md"> emits wrapper marker', () => {
+    const out = run('<div class="d-d-grid d-body--md">x</div>');
+    assert.ok(/dt-text-migrate: review composed class on wrapper/.test(out));
+    assert.ok(!out.includes('<dt-text'));
+  });
+  // <p> with display utility is also a layout container — should bail
+  it('<p class="d-d-flex d-body--md"> emits wrapper marker even on <p>', () => {
+    const out = run('<p class="d-d-flex d-body--md">x</p>');
+    assert.ok(/dt-text-migrate: review composed class on wrapper/.test(out));
+    assert.ok(!out.includes('<dt-text'));
+  });
+  // Headings with display utility — should also bail
+  it('<h2 class="d-d-flex d-headline--md"> emits wrapper marker', () => {
+    const out = run('<h2 class="d-d-flex d-headline--md">x</h2>');
+    assert.ok(/dt-text-migrate: review composed class on wrapper/.test(out));
+    assert.ok(!out.includes('<dt-text'));
+  });
+});
+
+describe('wrapper safety — rewriteable tag with block/component children', () => {
+  // Shape: ubervoice/.../missed_calls_limit.vue:22 — <div class="d-body--md-compact"><dt-stack>
+  it('<div class="d-body--md-compact"> wrapping <dt-stack> emits marker, no conversion', () => {
+    const out = run('<div class="d-body--md-compact">\n<dt-stack gap="400"><span>x</span></dt-stack>\n</div>');
+    assert.ok(/dt-text-migrate: review composed class on wrapper/.test(out), `expected marker, got: ${out}`);
+    assert.ok(!/<dt-text[^>]*as="div"/.test(out), 'div must NOT be converted to dt-text');
+  });
+  // Shape: ubervoice/.../call_recording_rules_settings.vue:3
+  // <div class="d-mt12 d-mb12 d-d-flex d-ai-center d-label--md-plain"><dt-checkbox>
+  // (Caught by layout signal first, but verify wrapping a form control alone also triggers.)
+  it('<div class="d-label--md-plain"> wrapping <dt-checkbox> emits wrapper marker', () => {
+    const out = run('<div class="d-label--md-plain"><dt-checkbox label="x" /></div>');
+    assert.ok(/dt-text-migrate: review composed class on wrapper/.test(out));
+    assert.ok(!/<dt-text[^>]*as="div"/.test(out));
+  });
+  // Francis's exact reproducer from the inline review
+  it('<div class="d-body--md"> wrapping <dt-button> emits wrapper marker', () => {
+    const out = run('<div class="d-body--md"><dt-button>Save</dt-button></div>');
+    assert.ok(/dt-text-migrate: review composed class on wrapper/.test(out));
+    assert.ok(!/<dt-text[^>]*as="div"/.test(out));
+  });
+  // Block element child (sibling <p>s inside a div with composed class)
+  it('<div class="d-body--md"> wrapping two <p> children emits wrapper marker', () => {
+    const out = run('<div class="d-body--md"><p>one</p><p>two</p></div>');
+    assert.ok(/dt-text-migrate: review composed class on wrapper/.test(out));
+    assert.ok(!/<dt-text[^>]*as="div"/.test(out));
+  });
+  // Nested div child
+  it('<div class="d-body--md"> wrapping <div> child emits wrapper marker', () => {
+    const out = run('<div class="d-body--md"><div>nested</div></div>');
+    assert.ok(/dt-text-migrate: review composed class on wrapper/.test(out));
+    assert.ok(!/<dt-text[^>]*as="div"/.test(out));
+  });
+  // Interactive child
+  it('<div class="d-body--md"> wrapping native <button> emits wrapper marker', () => {
+    const out = run('<div class="d-body--md"><button>x</button></div>');
+    assert.ok(/dt-text-migrate: review composed class on wrapper/.test(out));
+  });
+});
+
+describe('wrapper safety — positive cases still convert (no false positives)', () => {
+  // Plain text-leaf div should still convert
+  it('<div class="d-body--md"> with text-only content still converts', () => {
+    assert.equal(
+      run('<div class="d-body--md">Hello</div>'),
+      '<dt-text as="div" kind="body" size="300">Hello</dt-text>',
+    );
+  });
+  // Div with allowed inline children (span, em, strong) — should still convert
+  it('<div class="d-body--md"> wrapping <span>+<em> still converts', () => {
+    const out = run('<div class="d-body--md"><span>x</span> <em>y</em></div>');
+    assert.ok(/<dt-text[^>]*as="div"/.test(out), `expected conversion, got: ${out}`);
+    assert.ok(!/review composed class on wrapper/.test(out), 'should not emit wrapper marker for inline children');
+  });
+  // <p> with text-only content (the dominant happy path) — still converts
+  it('<p class="d-body--md">Hi</p> still converts', () => {
+    assert.equal(
+      run('<p class="d-body--md">Hi</p>'),
+      '<dt-text as="p" kind="body" size="300">Hi</dt-text>',
+    );
+  });
+  // <span> with composed class still converts to plain dt-text
+  it('<span class="d-body--sm">x</span> still converts', () => {
+    assert.equal(
+      run('<span class="d-body--sm">x</span>'),
+      '<dt-text kind="body" size="100">x</dt-text>',
+    );
+  });
+  // Empty body — no children at all
+  it('<p class="d-headline--md"></p> (empty body) still converts', () => {
+    const out = run('<p class="d-headline--md"></p>');
+    assert.ok(/<dt-text[^>]*as="p"/.test(out), `expected conversion, got: ${out}`);
+  });
+});
+
+describe('wrapper safety — override path (d-fw-*, d-fc-*, etc.) with component children', () => {
+  // Override path mirrors the composed-path safety: if the rewriteable tag
+  // wraps a component/block child, skip auto-conversion. Behavior here is a
+  // silent skip — element stays as-is with the override class intact, so it
+  // remains visible in the consumer's review.
+  it('<span class="d-fw-bold"> wrapping <dt-button> is NOT converted', () => {
+    const input = '<span class="d-fw-bold"><dt-button>Save</dt-button></span>';
+    assert.equal(run(input), input);
+  });
+  it('<p class="d-fw-bold"> wrapping <dt-icon /> is NOT converted', () => {
+    const input = '<p class="d-fw-bold"><dt-icon name="x" /></p>';
+    assert.equal(run(input), input);
+  });
+  it('<label class="d-fw-medium"> wrapping <dt-checkbox /> is NOT converted', () => {
+    const input = '<label class="d-fw-medium"><dt-checkbox label="x" /></label>';
+    assert.equal(run(input), input);
+  });
+  // Positive guardrails — leaf text on override classes still converts
+  it('<span class="d-fw-bold">Bold text</span> still converts', () => {
+    assert.equal(
+      run('<span class="d-fw-bold">Bold text</span>'),
+      '<dt-text strength="bold">Bold text</dt-text>',
+    );
+  });
+  it('<p class="d-fw-bold">Bold paragraph</p> still converts', () => {
+    assert.equal(
+      run('<p class="d-fw-bold">Bold paragraph</p>'),
+      '<dt-text as="p" strength="bold">Bold paragraph</dt-text>',
+    );
   });
 });
