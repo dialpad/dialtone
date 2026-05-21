@@ -157,8 +157,9 @@ const MIGRATIONS = [
     type: 'standalone',
     scriptDir: 'dialtone_migrate_props',
     detectPatterns: [
-      /(?:show|hide-close|hide-icon|label-visible|selected-values|title)(?:=|[\s>])/,
-      /@(?:input|change)(?:=|\.)/,
+      /(?:show|hide-close|hide-icon|label-visible|selected-values)(?:=|[\s>])/,
+      /<(?:dt-(?:banner|notice|toast|modal)|Dt(?:Banner|Notice|Toast|Modal))\b[^>]*\btitle(?:=|[\s>])/,
+      /<(?:dt-[\w-]+|Dt\w+)\b[^>]*@(?:input|change)(?:=|\.)/,
       /kind="(?:danger|error)"/,
       /validation-state="(?:error|success)"/,
     ],
