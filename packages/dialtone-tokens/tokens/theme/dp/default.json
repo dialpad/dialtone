@@ -374,6 +374,11 @@
       }
     },
     "surface": {
+      "overlay": {
+        "value": "{color.black.50}",
+        "type": "color",
+        "description": "For overlay surfaces like modals, popovers, and dialogs."
+      },
       "primary": {
         "value": "{color.black.50}",
         "type": "color",
