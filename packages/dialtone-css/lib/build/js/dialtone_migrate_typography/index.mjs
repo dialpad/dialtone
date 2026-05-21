@@ -496,9 +496,12 @@ function hasLayoutDisplaySignal (classes) {
 // from being a text leaf. Block elements, custom components (dt-*, kebab-case),
 // interactive controls, headings, another <p>, and <dt-text> all count.
 // Inline phrasing children (span, em, strong, br, etc.) do NOT disqualify.
+// Strips quoted attribute values first so a tag-like string in an attr (e.g.
+// `<span title="<dt-button>">`) does not false-match as a real child.
 function hasBlockOrComponentChild (body) {
   if (!body) return false;
-  const tagOpens = body.matchAll(/<([a-zA-Z][a-zA-Z0-9-]*)\b/g);
+  const stripped = body.replace(/"[^"]*"|'[^']*'/g, '');
+  const tagOpens = stripped.matchAll(/<([a-zA-Z][a-zA-Z0-9-]*)\b/g);
   for (const m of tagOpens) {
     if (!INLINE_PHRASING_TAGS.has(m[1].toLowerCase())) return true;
   }

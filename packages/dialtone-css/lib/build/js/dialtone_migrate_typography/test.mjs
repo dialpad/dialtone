@@ -968,6 +968,23 @@ describe('wrapper safety — positive cases still convert (no false positives)',
     const out = run('<p class="d-headline--md"></p>');
     assert.ok(/<dt-text[^>]*as="p"/.test(out), `expected conversion, got: ${out}`);
   });
+  // Quote-aware child detection — tag-like strings inside quoted attribute
+  // values must not be treated as real child elements (CodeRabbit, PR #1289).
+  it('<div class="d-body--md"> with tag-like string in title attr still converts', () => {
+    const out = run('<div class="d-body--md"><span title="<dt-button>">x</span></div>');
+    assert.ok(/<dt-text[^>]*as="div"/.test(out), `expected conversion, got: ${out}`);
+    assert.ok(!/review composed class on wrapper/.test(out), 'should not flag — only attr looks like a tag');
+  });
+  it('<p class="d-body--md"> with tag-like string in data attr still converts', () => {
+    const out = run('<p class="d-body--md"><span data-foo="<button>">x</span></p>');
+    assert.ok(/<dt-text[^>]*as="p"/.test(out));
+  });
+  // Combined case — attr tag-like AND a real component sibling still bails
+  it('attr tag-like plus real component sibling still emits wrapper marker', () => {
+    const out = run('<div class="d-body--md"><span title="<button>">x</span><dt-button>y</dt-button></div>');
+    assert.ok(/review composed class on wrapper/.test(out));
+    assert.ok(!/<dt-text[^>]*as="div"/.test(out));
+  });
 });
 
 describe('wrapper safety — override path (d-fw-*, d-fc-*, etc.) with component children', () => {
