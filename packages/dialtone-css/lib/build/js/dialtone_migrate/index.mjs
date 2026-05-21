@@ -569,60 +569,103 @@ async function selectMigrations (migrations) {
 // ---------------------------------------------------------------------------
 
 /**
- * Run a config-based migration by importing the config and using the
- * migration-helper functions directly, avoiding interactive prompts.
+ * Run a config-based migration using only Node builtins.
+ * Reads the config's expressions and applies them to matching files
+ * without importing the migration-helper (which requires chalk/globby/inquirer).
  */
 async function runConfigMigration (migration, opts) {
   const configPath = path.resolve(
     __dirname, '..', 'dialtone_migration_helper', 'configs', `${migration.configName}.mjs`,
   );
 
-  const helpersPath = path.resolve(
-    __dirname, '..', 'dialtone_migration_helper', 'helpers.mjs',
-  );
-
   const { default: configData } = await import(configPath);
-  const helpers = await import(helpersPath);
 
-  // Set up config
-  configData.globbyConfig = configData.globbyConfig || {};
-  configData.globbyConfig.gitignore = true;
-  configData.globbyConfig.cwd = opts.cwd;
+  // Derive file extensions from the config's glob patterns
+  const extPattern = /\{([^}]+)\}/;
+  const extensions = [];
+  for (const p of (configData.patterns || [])) {
+    const m = p.match(extPattern);
+    if (m) {
+      for (const ext of m[1].split(',')) {
+        const e = '.' + ext.trim();
+        if (!extensions.includes(e)) extensions.push(e);
+      }
+    }
+  }
+  // Fallback to migration registry extensions if config patterns don't specify
+  if (extensions.length === 0) {
+    extensions.push(...migration.fileExtensions);
+  }
 
   console.log(`  Configuration: ${migration.configName}`);
   console.log(`  ${configData.description.split('\n')[0]}\n`);
 
-  // Find matching files
-  const files = await helpers.doPatternSearch(configData)
-    .then(f => helpers.findMatchedFiles(f, configData));
+  // Find files using the master script's own walker
+  const allFiles = await findFiles(opts.cwd, extensions);
 
-  if (files.length === 0) {
+  // Read and filter files that have matches
+  const matched = [];
+  for (const file of allFiles) {
+    let data;
+    try {
+      data = await fs.readFile(file, 'utf8');
+    } catch { continue; }
+    // Skip likely minified files
+    if ((data.match(/[\n\r]/g) || []).length <= 3) continue;
+    let matchCount = 0;
+    for (const expr of configData.expressions) {
+      const testRe = new RegExp(expr.from.source, expr.from.flags.replace('g', ''));
+      if (testRe.test(data)) matchCount++;
+    }
+    if (matchCount > 0) {
+      matched.push({ file, data, matches: 0 });
+    }
+  }
+
+  if (matched.length === 0) {
     console.log('  No matches found. Skipping.\n');
     return { skipped: true };
   }
 
-  console.log(`  ${files.length} file(s) queued for modification.`);
+  console.log(`  ${matched.length} file(s) queued for modification.`);
 
   if (opts.dryRun) {
     console.log('  --dry-run: No files were modified.\n');
-    for (const f of files.slice(0, 10)) console.log(`    ${f}`);
-    if (files.length > 10) console.log(`    ... and ${files.length - 10} more`);
-    return { dryRun: true, fileCount: files.length };
+    for (const f of matched.slice(0, 10)) {
+      console.log(`    ${path.relative(opts.cwd, f.file)}`);
+    }
+    if (matched.length > 10) console.log(`    ... and ${matched.length - 10} more`);
+    return { dryRun: true, fileCount: matched.length };
   }
 
   if (!opts.autoYes) {
-    const answer = await prompt(`  Apply changes to ${files.length} file(s)? (y/N) `);
+    const answer = await prompt(`  Apply changes to ${matched.length} file(s)? (y/N) `);
     if (answer !== 'y' && answer !== 'yes') {
       console.log('  Skipped.\n');
       return { skipped: true };
     }
   }
 
-  const content = await helpers.getAllFileContents(files, configData.globbyConfig.cwd);
-  await helpers.modifyFileContents(content, configData.expressions);
-  console.log();
+  // Apply expressions and write files
+  for (const entry of matched) {
+    for (const expr of configData.expressions) {
+      entry.data = entry.data.replace(expr.from, (match, ...args) => {
+        entry.matches++;
+        if (typeof expr.to === 'function') {
+          return expr.to(match, ...args);
+        }
+        return match.replace(expr.from, expr.to);
+      });
+    }
+    if (entry.matches > 0) {
+      await fs.writeFile(entry.file, entry.data, 'utf8');
+      const shortname = path.relative(opts.cwd, entry.file);
+      console.log(`  >> ${shortname}, ${entry.matches} changes`);
+    }
+  }
 
-  return { applied: true, fileCount: files.length };
+  console.log();
+  return { applied: true, fileCount: matched.length };
 }
 
 /**
