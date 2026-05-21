@@ -285,7 +285,7 @@ describe('DtResizable Tests', () => {
         attachTo: document.body,
       });
 
-      const handle = wrapper.find('.d-resizable-handle');
+      const handle = wrapper.find('[data-qa="dt-resizable-handle"]');
       expect(handle.element.style.insetInlineStart).toBe('498px');
     });
   });

@@ -2,6 +2,7 @@
   <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
   <div
     ref="handleElement"
+    data-qa="dt-resizable-handle"
     :class="[
       'd-resizable-handle',
       `d-resizable-handle--${direction}`,
