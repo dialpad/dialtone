@@ -169,6 +169,7 @@ const UPDATE_EVENT_RENAMES = {
 
 // Component events removed from emits and replaced by @update:model-value
 const EMIT_EVENT_RENAMES = {
+  'dt-checkbox': { input: 'update:model-value' },
   'dt-input': { input: 'update:model-value' },
   'dt-radio': { input: 'update:model-value' },
   'dt-radio-group': { input: 'update:model-value' },
@@ -630,7 +631,7 @@ Migrations applied:
   selected-values        → model-value           (dt-checkbox-group)
   v-model:selected-values → v-model             (dt-checkbox-group)
   @update:selected-values → @update:model-value (dt-checkbox-group)
-  @input                 → @update:model-value  (dt-input, dt-radio, dt-radio-group, dt-combobox-multi-select, dt-rich-text-editor, dt-input-group)
+  @input                 → @update:model-value  (dt-checkbox, dt-input, dt-radio, dt-radio-group, dt-combobox-multi-select, dt-rich-text-editor, dt-input-group)
   @change                → @update:model-value  (dt-toggle, dt-select-menu)
   show                   → open                  (dt-modal, dt-toast, dt-tooltip)
   @update:show           → @update:open          (dt-modal, dt-toast, dt-tooltip)

@@ -646,16 +646,26 @@ async function runConfigMigration (migration, opts) {
     }
   }
 
-  // Apply expressions and write files
+  // Apply expressions and write files.
+  // Loop until convergence: some config regexes only match one token per
+  // property declaration per pass (e.g. border-width with two var(--dt-size-*)).
   for (const entry of matched) {
-    for (const expr of configData.expressions) {
-      entry.data = entry.data.replace(expr.from, (match, ...args) => {
-        entry.matches++;
-        if (typeof expr.to === 'function') {
-          return expr.to(match, ...args);
+    let changed = true;
+    while (changed) {
+      changed = false;
+      for (const expr of configData.expressions) {
+        const before = entry.data;
+        entry.data = entry.data.replace(expr.from, (match, ...args) => {
+          if (typeof expr.to === 'function') {
+            return expr.to(match, ...args);
+          }
+          return match.replace(expr.from, expr.to);
+        });
+        if (entry.data !== before) {
+          entry.matches++;
+          changed = true;
         }
-        return match.replace(expr.from, expr.to);
-      });
+      }
     }
     if (entry.matches > 0) {
       await fs.writeFile(entry.file, entry.data, 'utf8');
