@@ -232,4 +232,61 @@ describe('DtResizable Tests', () => {
       expect(emits).toContain('resize-end');
     });
   });
+
+  describe('Handle positioning', () => {
+    it('should center the resting handle over the panel boundary', () => {
+      wrapper = mount(DtResizableHandle, {
+        global: {
+          provide: {
+            [RESIZABLE_CONTEXT_KEY]: {
+              layout: computed(() => ({
+                panels: new Map(),
+                handles: [{
+                  id: 'left:right',
+                  beforePanelId: 'left',
+                  afterPanelId: 'right',
+                  left: 500,
+                  disabled: false,
+                }],
+              })),
+              panels: computed(() => []),
+              panelMap: computed(() => new Map([[
+                'left',
+                {
+                  id: 'left',
+                  pixelSize: 500,
+                  userMinSizePixels: 0,
+                  userMaxSizePixels: 1000,
+                },
+              ]])),
+              direction: computed(() => 'row'),
+              containerSize: computed(() => 1000),
+              isResizing: computed(() => false),
+              activeHandleId: computed(() => undefined),
+              isInitializing: computed(() => false),
+              messages: {},
+              startResize: vi.fn(),
+              resetPanels: vi.fn(),
+              registerHandle: vi.fn(),
+              unregisterHandle: vi.fn(),
+              registerPanel: vi.fn(),
+              unregisterPanel: vi.fn(),
+              saveToStorage: vi.fn(),
+              announce: vi.fn(),
+              offsetHandleStyles: computed(() => ({})),
+              offsetContentStyles: computed(() => ({})),
+              collapsePanel: vi.fn(),
+              emitPanelResize: vi.fn(),
+              commitPanelSize: vi.fn(),
+              updateSavedPanel: vi.fn(),
+            },
+          },
+        },
+        attachTo: document.body,
+      });
+
+      const handle = wrapper.find('.d-resizable-handle');
+      expect(handle.element.style.insetInlineStart).toBe('498px');
+    });
+  });
 });

@@ -14,6 +14,7 @@
 
 import { reactive, onUnmounted, type ComputedRef, type Ref } from 'vue';
 import type { ResizableDirection, ResizablePanelState } from '../ResizableConstants';
+import { RESIZABLE_HANDLE_CENTER_OFFSET_PX } from '../ResizableConstants';
 import type { ResizeHandler } from './UseResizableCalculations';
 
 // ============================================================================
@@ -304,7 +305,7 @@ export function useResizableDrag(options: UseResizableDragOptions) {
     const containerSizeValue = containerSize.value;
     const constrainedCursor = result.constrainedCursorPosition;
     const beforeRight = containerSizeValue - constrainedCursor;
-    const handlePos = constrainedCursor - 2;
+    const handlePos = constrainedCursor - RESIZABLE_HANDLE_CENTER_OFFSET_PX;
 
     const afterRight = containerSizeValue - constrainedCursor - result.afterPanelSize;
 

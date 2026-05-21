@@ -3,7 +3,7 @@ import type {
   ResizablePanelState,
   ResizableDirection,
 } from '../ResizableConstants';
-import { MIN_PANEL_SIZE_PX, buildHandleId } from '../ResizableConstants';
+import { MIN_PANEL_SIZE_PX, RESIZABLE_HANDLE_CENTER_OFFSET_PX, buildHandleId } from '../ResizableConstants';
 import { useResizeHandling } from './UseResizableCalculations';
 
 export interface ResizableKeyboardMessages {
@@ -160,7 +160,7 @@ export function useResizableKeyboard(options: ResizableKeyboardOptions) {
     afterEl.style.inlineSize = '';
 
     if (handleEl) {
-      handleEl.style.insetInlineStart = `${Math.max(0, cursorPos - 2)}px`;
+      handleEl.style.insetInlineStart = `${Math.max(0, cursorPos - RESIZABLE_HANDLE_CENTER_OFFSET_PX)}px`;
     }
   }
 
