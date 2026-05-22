@@ -115,6 +115,38 @@
   }
 }
 
+// This is gnerally redundant since the button mixin already handles disabled states
+// but keeping it here for explicit chip close button styling.
+// PLUS it may be simplified outright with a Chip redesign/refactor incoming soon.
+.d-chip__close:where(.d-chip__close--disabled, :disabled) {
+  --chroma-adjust-text: .08;
+  --chroma-adjust-background: .08;
+  --chroma-adjust-border: .08;
+  --opacity-adjust-text: 65%;
+  --opacity-adjust-background: 65%;
+  --opacity-adjust-border: 40%;
+
+  color:            color-mix(in oklch, oklch( from var(--button-color-text)       l calc(c - var(--chroma-adjust-text)) h ) var(--opacity-adjust-text), transparent );
+  background-color: color-mix(in oklch, oklch( from var(--button-color-background) l calc(c - var(--chroma-adjust-background)) h ) var(--opacity-adjust-background), transparent );
+  border-color:     color-mix(in oklch, oklch( from var(--button-color-border)     l calc(c - var(--chroma-adjust-border)) h ) var(--opacity-adjust-border), transparent );
+  cursor: not-allowed;
+  transition: none;
+  pointer-events: none;
+
+  &:where(.d-btn--primary) {
+    --opacity-adjust-text: 80%;
+  }
+
+  &:where(.d-btn--muted) {
+    --opacity-adjust-text: 50%;
+    --opacity-adjust-border: 60%;
+  }
+
+  &:where(.d-btn--active):where(.d-btn--outlined, .d-btn--muted) {
+    --button-color-background: var(--dt-action-color-background-muted-active);
+  }
+}
+
 .d-chip__icon {
   --chip-icon-size: calc(var(--dt-layout-25) * 1.25);
 
