@@ -11,7 +11,7 @@ import { defineComponent, inject, computed, h } from 'vue';
 import DtResizable from './Resizable.vue';
 import DtResizablePanel from './ResizablePanel.vue';
 import DtResizableHandle from './ResizableHandle.vue';
-import { RESIZABLE_CONTEXT_KEY } from './ResizableConstants';
+import { RESIZABLE_CONTEXT_KEY, RESIZABLE_HANDLE_CENTER_OFFSET_PX } from './ResizableConstants';
 
 // Mock ResizeObserver for test environment
 global.ResizeObserver = vi.fn().mockImplementation(() => ({
@@ -19,6 +19,21 @@ global.ResizeObserver = vi.fn().mockImplementation(() => ({
   unobserve: vi.fn(),
   disconnect: vi.fn(),
 }));
+
+const originalClientWidth = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'clientWidth');
+
+function mockClientWidth (width) {
+  Object.defineProperty(HTMLElement.prototype, 'clientWidth', {
+    configurable: true,
+    get () { return width; },
+  });
+}
+
+function restoreClientWidth () {
+  if (originalClientWidth) {
+    Object.defineProperty(HTMLElement.prototype, 'clientWidth', originalClientWidth);
+  }
+}
 
 // ─── Test child component that reads injected values ────────────────────────
 const InjectionReader = defineComponent({
@@ -46,6 +61,9 @@ const InjectionReader = defineComponent({
 
 let wrapper;
 
+const CONTAINER_WIDTH = 1000;
+const PANEL_BOUNDARY = CONTAINER_WIDTH / 2;
+
 const _setWrapper = (props = {}, slots = {}) => {
   wrapper = mount(DtResizable, {
     props: { ...props },
@@ -57,6 +75,7 @@ const _setWrapper = (props = {}, slots = {}) => {
 describe('DtResizable Tests', () => {
   afterEach(() => {
     wrapper?.unmount();
+    restoreClientWidth();
   });
 
   describe('Presentation', () => {
@@ -230,6 +249,34 @@ describe('DtResizable Tests', () => {
       expect(emits).toContain('panel-collapse');
       expect(emits).toContain('resize-start');
       expect(emits).toContain('resize-end');
+    });
+  });
+
+  describe('Handle positioning', () => {
+    const CenteredHandleLayout = defineComponent({
+      name: 'CenteredHandleLayout',
+      components: { DtResizable, DtResizablePanel, DtResizableHandle },
+      template: `
+        <div style="width: 1000px; height: 400px;">
+          <dt-resizable>
+            <dt-resizable-panel id="left" initial-size="50p" />
+            <dt-resizable-handle />
+            <dt-resizable-panel id="right" initial-size="50p" />
+          </dt-resizable>
+        </div>
+      `,
+    });
+
+    it('should center the resting handle over the panel boundary', async () => {
+      mockClientWidth(CONTAINER_WIDTH);
+
+      wrapper = mount(CenteredHandleLayout, { attachTo: document.body });
+      await wrapper.vm.$nextTick();
+
+      const handle = wrapper.find('[data-qa="dt-resizable-handle"]');
+      expect(handle.element.style.insetInlineStart).toBe(
+        `${PANEL_BOUNDARY - RESIZABLE_HANDLE_CENTER_OFFSET_PX}px`,
+      );
     });
   });
 });
