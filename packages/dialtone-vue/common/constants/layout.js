@@ -18,16 +18,25 @@ export const LAYOUT_SIZE_VALUES = [
 ];
 
 /**
+ * Percentage layout values accepted by DtBox layout props.
+ * @type {string[]}
+ */
+export const LAYOUT_PERCENT_VALUES = [
+  '10p', '20p', '25p', '30p', '33p', '40p', '50p',
+  '60p', '66p', '70p', '75p', '80p', '90p', '95p', '100p',
+];
+
+/**
  * Layout token and percentage values accepted by DtBox layout props.
  * @type {string[]}
  */
 export const LAYOUT_VALUES = [
   ...LAYOUT_SIZE_VALUES,
-  '10p', '20p', '25p', '30p', '33p', '40p', '50p',
-  '60p', '66p', '70p', '75p', '80p', '90p', '95p', '100p',
+  ...LAYOUT_PERCENT_VALUES,
 ];
 
 export default {
   LAYOUT_SIZE_VALUES,
+  LAYOUT_PERCENT_VALUES,
   LAYOUT_VALUES,
 };

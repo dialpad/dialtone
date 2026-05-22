@@ -16,6 +16,7 @@ describe('DtBox', () => {
   const slotContent = 'Box content';
   const EXPANDED_LAYOUT_VALUES = DT_BOX_LAYOUT_VALUES.filter((value) => {
     const token = Number(value);
+    // Intermediate stops between 100-multiple base stops, such as 125, 350, and 1550.
     return Number.isInteger(token) && token > 100 && token % 100 !== 0;
   });
   let wrapper;

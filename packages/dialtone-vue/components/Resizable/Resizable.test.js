@@ -91,6 +91,7 @@ const REPRESENTATIVE_LAYOUT_VALUES = LAYOUT_SIZE_VALUES.filter(value => ['350', 
 const RESIZABLE_SIZE_PROPS = ['initialSize', 'userMinSize', 'userMaxSize', 'systemMinSize', 'systemMaxSize', 'collapseSize'];
 const EXPANDED_LAYOUT_TOKEN_VALUES = LAYOUT_SIZE_VALUES.filter((value) => {
   const token = Number(value);
+  // Intermediate stops between 100-multiple base stops, such as 125, 350, and 1550.
   return Number.isInteger(token) && token > 100 && token % 100 !== 0;
 });
 const REPRESENTATIVE_LAYOUT_TOKEN_PIXEL_CASES = REPRESENTATIVE_LAYOUT_VALUES.map(value => [
