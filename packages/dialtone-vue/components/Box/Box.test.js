@@ -1,4 +1,5 @@
 import { mount } from '@vue/test-utils';
+import { vi } from 'vitest';
 import DtBox from './Box.vue';
 import {
   DT_BOX_AS_VALUES,
@@ -7,11 +8,13 @@ import {
   DT_BOX_BORDER_WIDTH_VALUES,
   DT_BOX_BORDER_RADIUS_VALUES,
   DT_BOX_SHADOW_VALUES,
+  DT_BOX_LAYOUT_VALUES,
   DT_BOX_OVERFLOW_VALUES,
 } from './BoxConstants.js';
 
 describe('DtBox', () => {
   const slotContent = 'Box content';
+  const expandedLayoutValues = ['125', '150', '175', '250', '350', '450', '550', '650', '750', '850', '950', '1050', '1550'];
   let wrapper;
 
   const mountComponent = (props = {}, attrs = {}, slots = {}) => {
@@ -22,12 +25,18 @@ describe('DtBox', () => {
         default: slotContent,
         ...slots,
       },
+      global: {
+        directives: {
+          'dt-scrollbar': {},
+        },
+      },
     });
     return wrapper;
   };
 
   afterEach(() => {
     wrapper?.unmount();
+    vi.restoreAllMocks();
   });
 
   // ── Presentation ──────────────────────────────────────────
@@ -338,6 +347,36 @@ describe('DtBox', () => {
     const wrapper = mountComponent({ maxBlockSize: '600' });
 
     expect(wrapper.classes()).toContain('d-box--max-bls-600');
+  });
+
+  it.each(expandedLayoutValues)('accepts expanded layout token %s', (value) => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    const wrapper = mountComponent({ inlineSize: value });
+
+    expect(DT_BOX_LAYOUT_VALUES).toContain(value);
+    expect(wrapper.classes()).toContain(`d-box--is-${value}`);
+    expect(warnSpy).not.toHaveBeenCalled();
+  });
+
+  it.each([
+    ['inlineSize', '350', 'd-box--is-350'],
+    ['blockSize', '650', 'd-box--bls-650'],
+    ['minInlineSize', '750', 'd-box--min-is-750'],
+    ['maxInlineSize', '350', 'd-box--max-is-350'],
+    ['minBlockSize', '650', 'd-box--min-bls-650'],
+    ['maxBlockSize', '750', 'd-box--max-bls-750'],
+  ])('applies %s modifier class for expanded layout token %s', (prop, value, expectedClass) => {
+    const wrapper = mountComponent({ [prop]: value });
+
+    expect(wrapper.classes()).toContain(expectedClass);
+  });
+
+  it('warns when layout token is invalid', () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    mountComponent({ inlineSize: '225' });
+
+    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('[DtBox] Invalid prop value: "225"'));
   });
 
   // ── Overflow ──────────────────────────────────────────────

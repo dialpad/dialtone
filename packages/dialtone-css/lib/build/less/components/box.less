@@ -62,6 +62,8 @@
 }
 
 ._box-layout(@prop) {
+  &-0 { @{prop}: 0; }
+
   &-1px { @{prop}: var(--dt-layout-1px); }
   &-2px { @{prop}: var(--dt-layout-2px); }
   &-8px { @{prop}: var(--dt-layout-8px); }
@@ -70,9 +72,15 @@
   &-24px { @{prop}: var(--dt-layout-24px); }
   &-50 { @{prop}: var(--dt-layout-50); }
   &-75 { @{prop}: var(--dt-layout-75); }
-  each(range(0, 1600, 100), {
+
+  each(range(100, 200, 25), {
     &-@{value} { @{prop}: ~"var(--dt-layout-@{value})"; }
   });
+
+  each(range(250, 1600, 50), {
+    &-@{value} { @{prop}: ~"var(--dt-layout-@{value})"; }
+  });
+
   // Percentage tokens
   each(@box-layout-percent-values, {
     &-@{value}p { @{prop}: ~"var(--dt-layout-@{value}-percent)"; }

@@ -1,3 +1,5 @@
+import { DIALTONE_LAYOUT_VALUES } from '../../common/constants/layout.js';
+
 /**
  * Valid `as` elements for the box component.
  * @type {string[]}
@@ -62,11 +64,7 @@ export const DT_BOX_SHADOW_VALUES = ['small', 'medium', 'large', 'extra-large', 
  * Layout token scale (for sizing props: inlineSize, blockSize, min/max variants).
  * @type {string[]}
  */
-export const DT_BOX_LAYOUT_VALUES = [
-  '0', '1px', '2px', '8px', '25', '20px', '24px', '50', '75', '100', '200', '300', '400', '500', '600', '700', '800', '900', '1000', '1100', '1200', '1300', '1400', '1500', '1600',
-  '10p', '20p', '25p', '30p', '33p', '40p', '50p',
-  '60p', '66p', '70p', '75p', '80p', '90p', '95p', '100p',
-];
+export const DT_BOX_LAYOUT_VALUES = DIALTONE_LAYOUT_VALUES;
 
 /**
  * Overflow values.

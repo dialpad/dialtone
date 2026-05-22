@@ -83,6 +83,12 @@ export const DEFAULT_PREFIX = 'dt';
 
 // Component size scale
 export { COMPONENT_SIZES, TEXT_HEADLINE_SIZES } from './sizes.js';
+export {
+  DIALTONE_LAYOUT_TOKEN_VALUES,
+  DIALTONE_LAYOUT_SIZE_VALUES,
+  DIALTONE_LAYOUT_PERCENT_VALUES,
+  DIALTONE_LAYOUT_VALUES,
+} from './layout.js';
 
 export default {
   VALIDATION_MESSAGE_TYPES,

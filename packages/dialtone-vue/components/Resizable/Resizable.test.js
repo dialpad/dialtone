@@ -12,6 +12,7 @@ import DtResizable from './Resizable.vue';
 import DtResizablePanel from './ResizablePanel.vue';
 import DtResizableHandle from './ResizableHandle.vue';
 import { RESIZABLE_CONTEXT_KEY, RESIZABLE_HANDLE_CENTER_OFFSET_PX } from './ResizableConstants';
+import { isValidSizing, parseSizeToPixels } from './ResizableUtils';
 
 // Mock ResizeObserver for test environment
 global.ResizeObserver = vi.fn().mockImplementation(() => ({
@@ -59,10 +60,44 @@ const InjectionReader = defineComponent({
   },
 });
 
+const PanelSizeValidationLayout = defineComponent({
+  name: 'PanelSizeValidationLayout',
+  props: {
+    panelProps: {
+      type: Object,
+      default: () => ({}),
+    },
+  },
+
+  setup (props) {
+    return () => h('div', { style: 'width: 1000px; height: 400px;' }, [
+      h(DtResizable, null, {
+        default: () => [
+          h(DtResizablePanel, { id: 'left', ...props.panelProps }),
+          h(DtResizableHandle),
+          h(DtResizablePanel, { id: 'right', initialSize: '50p' }),
+        ],
+      }),
+    ]);
+  },
+});
+
 let wrapper;
 
 const CONTAINER_WIDTH = 1000;
 const PANEL_BOUNDARY = CONTAINER_WIDTH / 2;
+const BEACON_LAYOUT_VALUES = ['350', '650', '750'];
+const RESIZABLE_SIZE_PROPS = ['initialSize', 'userMinSize', 'userMaxSize', 'systemMinSize', 'systemMaxSize', 'collapseSize'];
+const EXPANDED_LAYOUT_TOKEN_VALUES = [
+  '125', '150', '175', '250', '350', '450', '550', '650', '750', '850', '950', '1050', '1550',
+];
+const BEACON_LAYOUT_TOKEN_PIXEL_CASES = [
+  ['350', 224],
+  ['650', 416],
+  ['750', 480],
+];
+const PRESERVED_SIZE_VALUES = ['0', '1px', '2px', '8px', '20px', '24px', '50p'];
+const INVALID_SIZE_VALUES = ['72', '225', '9999', '101p'];
 
 const _setWrapper = (props = {}, slots = {}) => {
   wrapper = mount(DtResizable, {
@@ -76,6 +111,7 @@ describe('DtResizable Tests', () => {
   afterEach(() => {
     wrapper?.unmount();
     restoreClientWidth();
+    vi.restoreAllMocks();
   });
 
   describe('Presentation', () => {
@@ -184,6 +220,60 @@ describe('DtResizable Tests', () => {
     it('should expose readonly state', () => {
       expect(wrapper.vm.state).toBeDefined();
       expect(wrapper.vm.state.direction).toBe('row');
+    });
+  });
+
+  describe('Sizing validation', () => {
+    it.each(EXPANDED_LAYOUT_TOKEN_VALUES)('should accept expanded layout token %s', (value) => {
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+      expect(isValidSizing(value)).toBe(true);
+      expect(warnSpy).not.toHaveBeenCalled();
+    });
+
+    it.each(BEACON_LAYOUT_TOKEN_PIXEL_CASES)('should resolve Beacon layout token %s to %ipx', (value, expectedPixels) => {
+      expect(parseSizeToPixels(value, 2000)).toBe(expectedPixels);
+    });
+
+    it.each(PRESERVED_SIZE_VALUES)('should preserve existing valid size value %s', (value) => {
+      expect(isValidSizing(value)).toBe(true);
+    });
+
+    it.each(INVALID_SIZE_VALUES)('should reject invalid size value %s', (value) => {
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+      expect(isValidSizing(value)).toBe(false);
+      expect(parseSizeToPixels(value, 1000)).toBe(0);
+      expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('[resizable] Invalid ResizableSizeValue'));
+    });
+
+    it.each(
+      RESIZABLE_SIZE_PROPS.flatMap(prop => BEACON_LAYOUT_VALUES.map(value => [prop, value])),
+    )('should not warn when %s uses expanded layout token %s', async (prop, value) => {
+      const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+      mockClientWidth(CONTAINER_WIDTH);
+
+      wrapper = mount(PanelSizeValidationLayout, {
+        props: { panelProps: { [prop]: value } },
+        attachTo: document.body,
+      });
+      await wrapper.vm.$nextTick();
+
+      expect(errorSpy).not.toHaveBeenCalled();
+      expect(warnSpy).not.toHaveBeenCalled();
+    });
+
+    it('should warn when a panel size prop uses an invalid value', () => {
+      const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+      wrapper = mount(PanelSizeValidationLayout, {
+        props: { panelProps: { userMinSize: '225' } },
+        attachTo: document.body,
+      });
+
+      expect(errorSpy).toHaveBeenCalledWith('[DtResizablePanel] Invalid userMinSize: "225".');
     });
   });
 
