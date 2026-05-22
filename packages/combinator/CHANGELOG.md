@@ -1,3 +1,20 @@
+# [1.2.0-next.10](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.9...combinator/v1.2.0-next.10) (2026-05-22)
+
+
+### Code Refactoring
+
+* **Validation Messages:** DLT-3422 update to use icon slot over embedded icon ([#1272](https://github.com/dialpad/dialtone/issues/1272)) ([344b737](https://github.com/dialpad/dialtone/commit/344b7373afbc135a5a695bdaf214f9832f3dd388))
+
+
+### Documentation
+
+* **Combinator:** DLT-3424 bridge logical to physical naming ([#1273](https://github.com/dialpad/dialtone/issues/1273)) ([ad4a5a1](https://github.com/dialpad/dialtone/commit/ad4a5a1b4d5f777b1f261d5d8d711e56f9fbca6c))
+
+
+### Features
+
+* **Presence, Avatar:** DLT-3438 add icons to presence ([#1287](https://github.com/dialpad/dialtone/issues/1287)) ([51062be](https://github.com/dialpad/dialtone/commit/51062beb5b12911eae9c752b6376939394dd374f))
+
 # [1.2.0-next.9](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.8...combinator/v1.2.0-next.9) (2026-05-13)
 
 
