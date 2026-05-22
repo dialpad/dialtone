@@ -13,6 +13,7 @@ import DtResizablePanel from './ResizablePanel.vue';
 import DtResizableHandle from './ResizableHandle.vue';
 import { RESIZABLE_CONTEXT_KEY, RESIZABLE_HANDLE_CENTER_OFFSET_PX } from './ResizableConstants';
 import { isValidSizing, parseSizeToPixels } from './ResizableUtils';
+import { DIALTONE_LAYOUT_PERCENT_VALUES, DIALTONE_LAYOUT_SIZE_VALUES } from '../../common/constants/layout.js';
 
 // Mock ResizeObserver for test environment
 global.ResizeObserver = vi.fn().mockImplementation(() => ({
@@ -86,17 +87,20 @@ let wrapper;
 
 const CONTAINER_WIDTH = 1000;
 const PANEL_BOUNDARY = CONTAINER_WIDTH / 2;
-const BEACON_LAYOUT_VALUES = ['350', '650', '750'];
+const LAYOUT_BASE_PX = 64;
+const BEACON_LAYOUT_VALUES = DIALTONE_LAYOUT_SIZE_VALUES.filter(value => ['350', '650', '750'].includes(value));
 const RESIZABLE_SIZE_PROPS = ['initialSize', 'userMinSize', 'userMaxSize', 'systemMinSize', 'systemMaxSize', 'collapseSize'];
-const EXPANDED_LAYOUT_TOKEN_VALUES = [
+const EXPANDED_LAYOUT_TOKEN_VALUES = DIALTONE_LAYOUT_SIZE_VALUES.filter(value => [
   '125', '150', '175', '250', '350', '450', '550', '650', '750', '850', '950', '1050', '1550',
+].includes(value));
+const BEACON_LAYOUT_TOKEN_PIXEL_CASES = BEACON_LAYOUT_VALUES.map(value => [
+  value,
+  (Number(value) * LAYOUT_BASE_PX) / 100,
+]);
+const PRESERVED_SIZE_VALUES = [
+  ...DIALTONE_LAYOUT_SIZE_VALUES.filter(value => ['0', '1px', '2px', '8px', '20px', '24px'].includes(value)),
+  ...DIALTONE_LAYOUT_PERCENT_VALUES.filter(value => value === '50p'),
 ];
-const BEACON_LAYOUT_TOKEN_PIXEL_CASES = [
-  ['350', 224],
-  ['650', 416],
-  ['750', 480],
-];
-const PRESERVED_SIZE_VALUES = ['0', '1px', '2px', '8px', '20px', '24px', '50p'];
 const INVALID_SIZE_VALUES = ['72', '225', '9999', '101p'];
 
 const _setWrapper = (props = {}, slots = {}) => {
@@ -225,9 +229,14 @@ describe('DtResizable Tests', () => {
 
   describe('Sizing validation', () => {
     it.each(EXPANDED_LAYOUT_TOKEN_VALUES)('should accept expanded layout token %s', (value) => {
+      expect(isValidSizing(value)).toBe(true);
+    });
+
+    it.each(EXPANDED_LAYOUT_TOKEN_VALUES)('should not warn when validating expanded layout token %s', (value) => {
       const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-      expect(isValidSizing(value)).toBe(true);
+      isValidSizing(value);
+
       expect(warnSpy).not.toHaveBeenCalled();
     });
 
@@ -240,18 +249,27 @@ describe('DtResizable Tests', () => {
     });
 
     it.each(INVALID_SIZE_VALUES)('should reject invalid size value %s', (value) => {
+      expect(isValidSizing(value)).toBe(false);
+    });
+
+    it.each(INVALID_SIZE_VALUES)('should fall back to zero for invalid size value %s', (value) => {
+      vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+      expect(parseSizeToPixels(value, 1000)).toBe(0);
+    });
+
+    it.each(INVALID_SIZE_VALUES)('should warn for invalid size value %s', (value) => {
       const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
-      expect(isValidSizing(value)).toBe(false);
-      expect(parseSizeToPixels(value, 1000)).toBe(0);
+      parseSizeToPixels(value, 1000);
+
       expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('[resizable] Invalid ResizableSizeValue'));
     });
 
     it.each(
       RESIZABLE_SIZE_PROPS.flatMap(prop => BEACON_LAYOUT_VALUES.map(value => [prop, value])),
-    )('should not warn when %s uses expanded layout token %s', async (prop, value) => {
+    )('should not error when %s uses expanded layout token %s', async (prop, value) => {
       const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
-      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
       mockClientWidth(CONTAINER_WIDTH);
 
       wrapper = mount(PanelSizeValidationLayout, {
@@ -261,6 +279,20 @@ describe('DtResizable Tests', () => {
       await wrapper.vm.$nextTick();
 
       expect(errorSpy).not.toHaveBeenCalled();
+    });
+
+    it.each(
+      RESIZABLE_SIZE_PROPS.flatMap(prop => BEACON_LAYOUT_VALUES.map(value => [prop, value])),
+    )('should not warn when %s uses expanded layout token %s', async (prop, value) => {
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+      mockClientWidth(CONTAINER_WIDTH);
+
+      wrapper = mount(PanelSizeValidationLayout, {
+        props: { panelProps: { [prop]: value } },
+        attachTo: document.body,
+      });
+      await wrapper.vm.$nextTick();
+
       expect(warnSpy).not.toHaveBeenCalled();
     });
 

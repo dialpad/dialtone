@@ -8,7 +8,6 @@ import {
   DT_BOX_BORDER_WIDTH_VALUES,
   DT_BOX_BORDER_RADIUS_VALUES,
   DT_BOX_SHADOW_VALUES,
-  DT_BOX_LAYOUT_VALUES,
   DT_BOX_OVERFLOW_VALUES,
 } from './BoxConstants.js';
 
@@ -349,12 +348,17 @@ describe('DtBox', () => {
     expect(wrapper.classes()).toContain('d-box--max-bls-600');
   });
 
-  it.each(expandedLayoutValues)('accepts expanded layout token %s', (value) => {
-    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+  it.each(expandedLayoutValues)('applies inlineSize class for expanded layout token %s', (value) => {
     const wrapper = mountComponent({ inlineSize: value });
 
-    expect(DT_BOX_LAYOUT_VALUES).toContain(value);
     expect(wrapper.classes()).toContain(`d-box--is-${value}`);
+  });
+
+  it.each(expandedLayoutValues)('does not warn for expanded layout token %s', (value) => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    mountComponent({ inlineSize: value });
+
     expect(warnSpy).not.toHaveBeenCalled();
   });
 
