@@ -51,6 +51,16 @@ DtBox complements [DtText](/components/text.html) (typography) and [DtStack](/co
 
 Background surface color mapped to `--dt-color-surface-*` tokens.
 
+### Overlay
+
+For modal, popover, and dialog surfaces — use `overlay` when the box floats above page content.
+
+```vue demo
+<dt-box surface="overlay" padding="200" border-radius="300" shadow="medium">overlay</dt-box>
+```
+
+### Neutral
+
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="200">

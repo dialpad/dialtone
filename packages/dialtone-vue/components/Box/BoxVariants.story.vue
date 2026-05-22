@@ -13,6 +13,32 @@
         kind="headline"
         size="md"
       >
+        Overlay
+      </dt-text>
+      <dt-stack
+        direction="row"
+        gap="100"
+      >
+        <dt-box
+          v-for="s in overlaySurfaces"
+          :key="s"
+          padding="100"
+          :surface="s"
+          border-width="100"
+        >
+          <dt-text
+            kind="body"
+            :size="100"
+          >
+            {{ s }}
+          </dt-text>
+        </dt-box>
+      </dt-stack>
+      <dt-text
+        as="h3"
+        kind="headline"
+        size="md"
+      >
         Neutral
       </dt-text>
       <dt-stack
@@ -244,6 +270,7 @@ export default {
   components: { DtBox, DtStack, DtText },
   data () {
     return {
+      overlaySurfaces: ['overlay'],
       neutralSurfaces: ['primary', 'secondary', 'moderate', 'bold', 'strong', 'contrast'],
       semanticSurfaces: ['brand', 'info', 'positive', 'warning', 'critical'],
       variantSurfaces: ['brand-subtle', 'brand-strong', 'info-subtle', 'info-strong', 'positive-subtle', 'positive-strong', 'warning-subtle', 'warning-strong', 'critical-subtle', 'critical-strong'],
