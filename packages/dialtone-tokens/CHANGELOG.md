@@ -1,3 +1,10 @@
+# [1.48.0-next.19](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.18...dialtone-tokens/v1.48.0-next.19) (2026-05-22)
+
+
+### Features
+
+* **Design Tokens, Modal, Notice, Popover, Hovercard, Emoji Picker:** DLT-3436 add overlay surface color ([#1282](https://github.com/dialpad/dialtone/issues/1282)) ([62d60f2](https://github.com/dialpad/dialtone/commit/62d60f21358b8f8875a9407e4f7fec5afaece355))
+
 # [1.48.0-next.18](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.17...dialtone-tokens/v1.48.0-next.18) (2026-05-14)
 
 
