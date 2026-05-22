@@ -1,5 +1,5 @@
 import type { ResizableSizeValue } from './ResizableConstants';
-import { DIALTONE_LAYOUT_SIZE_VALUES } from '../../common/constants/layout.js';
+import { LAYOUT_SIZE_VALUES } from '@/common/constants';
 
 // ─── Layout Token Resolution ───────────────────────────────────────────────
 // Resolves Dialtone layout tokens (e.g., '500', '200', '8px') to pixel values.
@@ -12,7 +12,7 @@ import { DIALTONE_LAYOUT_SIZE_VALUES } from '../../common/constants/layout.js';
 // `d-w-*` / `d-h-*` utility classes.
 
 const LAYOUT_BASE_PX = 64;
-const layoutSizeValueSet = new Set<string>(DIALTONE_LAYOUT_SIZE_VALUES);
+const layoutSizeValueSet = new Set<string>(LAYOUT_SIZE_VALUES);
 
 /** Cache for resolved token pixel values (populated on first use). */
 const tokenCache = new Map<string, number>();

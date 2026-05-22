@@ -13,7 +13,7 @@ import DtResizablePanel from './ResizablePanel.vue';
 import DtResizableHandle from './ResizableHandle.vue';
 import { RESIZABLE_CONTEXT_KEY, RESIZABLE_HANDLE_CENTER_OFFSET_PX } from './ResizableConstants';
 import { isValidSizing, parseSizeToPixels } from './ResizableUtils';
-import { DIALTONE_LAYOUT_PERCENT_VALUES, DIALTONE_LAYOUT_SIZE_VALUES } from '../../common/constants/layout.js';
+import { LAYOUT_SIZE_VALUES, LAYOUT_VALUES } from '@/common/constants';
 
 // Mock ResizeObserver for test environment
 global.ResizeObserver = vi.fn().mockImplementation(() => ({
@@ -63,6 +63,7 @@ const InjectionReader = defineComponent({
 
 const PanelSizeValidationLayout = defineComponent({
   name: 'PanelSizeValidationLayout',
+  components: { DtResizable, DtResizablePanel, DtResizableHandle },
   props: {
     panelProps: {
       type: Object,
@@ -70,17 +71,15 @@ const PanelSizeValidationLayout = defineComponent({
     },
   },
 
-  setup (props) {
-    return () => h('div', { style: 'width: 1000px; height: 400px;' }, [
-      h(DtResizable, null, {
-        default: () => [
-          h(DtResizablePanel, { id: 'left', ...props.panelProps }),
-          h(DtResizableHandle),
-          h(DtResizablePanel, { id: 'right', initialSize: '50p' }),
-        ],
-      }),
-    ]);
-  },
+  template: `
+    <div style="width: 1000px; height: 400px;">
+      <dt-resizable>
+        <dt-resizable-panel id="left" v-bind="panelProps" />
+        <dt-resizable-handle />
+        <dt-resizable-panel id="right" initial-size="50p" />
+      </dt-resizable>
+    </div>
+  `,
 });
 
 let wrapper;
@@ -88,18 +87,19 @@ let wrapper;
 const CONTAINER_WIDTH = 1000;
 const PANEL_BOUNDARY = CONTAINER_WIDTH / 2;
 const LAYOUT_BASE_PX = 64;
-const BEACON_LAYOUT_VALUES = DIALTONE_LAYOUT_SIZE_VALUES.filter(value => ['350', '650', '750'].includes(value));
+const REPRESENTATIVE_LAYOUT_VALUES = LAYOUT_SIZE_VALUES.filter(value => ['350', '650', '750'].includes(value));
 const RESIZABLE_SIZE_PROPS = ['initialSize', 'userMinSize', 'userMaxSize', 'systemMinSize', 'systemMaxSize', 'collapseSize'];
-const EXPANDED_LAYOUT_TOKEN_VALUES = DIALTONE_LAYOUT_SIZE_VALUES.filter(value => [
-  '125', '150', '175', '250', '350', '450', '550', '650', '750', '850', '950', '1050', '1550',
-].includes(value));
-const BEACON_LAYOUT_TOKEN_PIXEL_CASES = BEACON_LAYOUT_VALUES.map(value => [
+const EXPANDED_LAYOUT_TOKEN_VALUES = LAYOUT_SIZE_VALUES.filter((value) => {
+  const token = Number(value);
+  return Number.isInteger(token) && token > 100 && token % 100 !== 0;
+});
+const REPRESENTATIVE_LAYOUT_TOKEN_PIXEL_CASES = REPRESENTATIVE_LAYOUT_VALUES.map(value => [
   value,
   (Number(value) * LAYOUT_BASE_PX) / 100,
 ]);
 const PRESERVED_SIZE_VALUES = [
-  ...DIALTONE_LAYOUT_SIZE_VALUES.filter(value => ['0', '1px', '2px', '8px', '20px', '24px'].includes(value)),
-  ...DIALTONE_LAYOUT_PERCENT_VALUES.filter(value => value === '50p'),
+  ...LAYOUT_SIZE_VALUES.filter(value => ['0', '1px', '2px', '8px', '20px', '24px'].includes(value)),
+  ...LAYOUT_VALUES.filter(value => value === '50p'),
 ];
 const INVALID_SIZE_VALUES = ['72', '225', '9999', '101p'];
 
@@ -240,7 +240,7 @@ describe('DtResizable Tests', () => {
       expect(warnSpy).not.toHaveBeenCalled();
     });
 
-    it.each(BEACON_LAYOUT_TOKEN_PIXEL_CASES)('should resolve Beacon layout token %s to %ipx', (value, expectedPixels) => {
+    it.each(REPRESENTATIVE_LAYOUT_TOKEN_PIXEL_CASES)('should resolve layout token %s to %ipx', (value, expectedPixels) => {
       expect(parseSizeToPixels(value, 2000)).toBe(expectedPixels);
     });
 
@@ -267,7 +267,7 @@ describe('DtResizable Tests', () => {
     });
 
     it.each(
-      RESIZABLE_SIZE_PROPS.flatMap(prop => BEACON_LAYOUT_VALUES.map(value => [prop, value])),
+      RESIZABLE_SIZE_PROPS.flatMap(prop => REPRESENTATIVE_LAYOUT_VALUES.map(value => [prop, value])),
     )('should not error when %s uses expanded layout token %s', async (prop, value) => {
       const errorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
       mockClientWidth(CONTAINER_WIDTH);
@@ -282,7 +282,7 @@ describe('DtResizable Tests', () => {
     });
 
     it.each(
-      RESIZABLE_SIZE_PROPS.flatMap(prop => BEACON_LAYOUT_VALUES.map(value => [prop, value])),
+      RESIZABLE_SIZE_PROPS.flatMap(prop => REPRESENTATIVE_LAYOUT_VALUES.map(value => [prop, value])),
     )('should not warn when %s uses expanded layout token %s', async (prop, value) => {
       const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
       mockClientWidth(CONTAINER_WIDTH);

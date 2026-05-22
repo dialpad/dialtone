@@ -8,12 +8,16 @@ import {
   DT_BOX_BORDER_WIDTH_VALUES,
   DT_BOX_BORDER_RADIUS_VALUES,
   DT_BOX_SHADOW_VALUES,
+  DT_BOX_LAYOUT_VALUES,
   DT_BOX_OVERFLOW_VALUES,
 } from './BoxConstants.js';
 
 describe('DtBox', () => {
   const slotContent = 'Box content';
-  const expandedLayoutValues = ['125', '150', '175', '250', '350', '450', '550', '650', '750', '850', '950', '1050', '1550'];
+  const EXPANDED_LAYOUT_VALUES = DT_BOX_LAYOUT_VALUES.filter((value) => {
+    const token = Number(value);
+    return Number.isInteger(token) && token > 100 && token % 100 !== 0;
+  });
   let wrapper;
 
   const mountComponent = (props = {}, attrs = {}, slots = {}) => {
@@ -26,6 +30,7 @@ describe('DtBox', () => {
       },
       global: {
         directives: {
+          // Vue resolves the directive during render even when the scrollbar branch is not mounted.
           'dt-scrollbar': {},
         },
       },
@@ -348,13 +353,13 @@ describe('DtBox', () => {
     expect(wrapper.classes()).toContain('d-box--max-bls-600');
   });
 
-  it.each(expandedLayoutValues)('applies inlineSize class for expanded layout token %s', (value) => {
+  it.each(EXPANDED_LAYOUT_VALUES)('applies inlineSize class for expanded layout token %s', (value) => {
     const wrapper = mountComponent({ inlineSize: value });
 
     expect(wrapper.classes()).toContain(`d-box--is-${value}`);
   });
 
-  it.each(expandedLayoutValues)('does not warn for expanded layout token %s', (value) => {
+  it.each(EXPANDED_LAYOUT_VALUES)('does not warn for expanded layout token %s', (value) => {
     const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
 
     mountComponent({ inlineSize: value });
