@@ -115,9 +115,9 @@
   }
 }
 
-// This is gnerally redundant since the button mixin already handles disabled states
-// but keeping it here for explicit chip close button styling.
-// PLUS it may be simplified outright with a Chip redesign/refactor incoming soon.
++// Explicit disabled styling for chip close button.
++// This duplicates the button disabled logic since the ._btn() mixin no longer includes disabled state handling.
++// PLUS it may be simplified with upcoming Chip redesign/refactor
 .d-chip__close:where(.d-chip__close--disabled, :disabled) {
   --chroma-adjust-text: .08;
   --chroma-adjust-background: .08;
