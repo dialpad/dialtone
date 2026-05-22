@@ -129,13 +129,21 @@
     transition: none;
     pointer-events: none;
 
-    &.d-btn--primary {
+    &:is(.d-btn--primary) {
       --opacity-adjust-text: 80%;
     }
 
-    &.d-btn--muted {
+    &:is(.d-btn--muted) {
       --opacity-adjust-text: 50%;
-      --opacity-adjust-border: 50%;
+      --opacity-adjust-border: 60%;
+    }
+
+    &:is(.d-btn--active.d-btn--outlined) {
+      --button-color-background: var(--dt-action-color-background-muted-active);
+    }
+
+    &:is(.d-btn--active.d-btn--muted) {
+      --button-color-background: var(--dt-action-color-background-muted-active);
     }
   }
 }
