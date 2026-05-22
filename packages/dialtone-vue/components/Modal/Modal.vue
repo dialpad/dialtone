@@ -67,7 +67,7 @@
             density="100"
             text-box-trim="start"
             as="h2"
-            class="d-modal__header"
+            :class="['d-modal__header', headerClass]"
             data-qa="dt-modal-title"
           >
             {{ headerText }}

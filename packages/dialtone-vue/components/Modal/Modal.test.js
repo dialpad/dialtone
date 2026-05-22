@@ -242,6 +242,16 @@ describe('DtModal Tests', () => {
       expect(banner.classes(bannerClass)).toBe(true);
     });
 
+    it('Should apply header class to the header text element', async () => {
+      const headerClass = 'header-class';
+
+      expect(title.classes(headerClass)).toBe(false);
+
+      await wrapper.setProps({ headerClass });
+
+      expect(title.classes(headerClass)).toBe(true);
+    });
+
     it('Should apply banner kind', async () => {
       await wrapper.setProps({
         open: true,
