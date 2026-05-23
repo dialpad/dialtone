@@ -929,11 +929,19 @@
     "raised": {
       "value": [
         {
-          "x": "{size.0}",
-          "y": "{size.200}",
-          "blur": "{size.300}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.149)",
+          "x": "0",
+          "y": "0",
+          "blur": "1px",
+          "spread": "0",
+          "color": "oklch(0 0 0 / 0.06)",
+          "type": "dropShadow"
+        },
+        {
+          "x": "0",
+          "y": "2px",
+          "blur": "4px",
+          "spread": "0",
+          "color": "oklch(0 0 0 / 0.12)",
           "type": "dropShadow"
         }
       ],
@@ -942,11 +950,27 @@
     "overlay": {
       "value": [
         {
-          "x": "{size.0}",
-          "y": "{size.200}",
-          "blur": "{size.400}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.251)",
+          "x": "0",
+          "y": "1px",
+          "blur": "2px",
+          "spread": "0",
+          "color": "oklch(0 0 0 / 0.04)",
+          "type": "dropShadow"
+        },
+        {
+          "x": "0",
+          "y": "2px",
+          "blur": "8px",
+          "spread": "0",
+          "color": "oklch(0 0 0 / 0.06)",
+          "type": "dropShadow"
+        },
+        {
+          "x": "0",
+          "y": "8px",
+          "blur": "12px",
+          "spread": "0",
+          "color": "oklch(0 0 0 / 0.08)",
           "type": "dropShadow"
         }
       ],
@@ -955,15 +979,44 @@
     "modal": {
       "value": [
         {
-          "x": "{size.0}",
-          "y": "{size.200}",
-          "blur": "{size.500}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.302)",
+          "x": "0",
+          "y": "2px",
+          "blur": "2px",
+          "spread": "0",
+          "color": "oklch(0 0 0 / 0.02)",
+          "type": "dropShadow"
+        },
+        {
+          "x": "0",
+          "y": "4px",
+          "blur": "6px",
+          "spread": "0",
+          "color": "oklch(0 0 0 / 0.06)",
+          "type": "dropShadow"
+        },
+        {
+          "x": "0",
+          "y": "12px",
+          "blur": "16px",
+          "spread": "0",
+          "color": "oklch(0 0 0 / 0.08)",
+          "type": "dropShadow"
+        },
+        {
+          "x": "0",
+          "y": "32px",
+          "blur": "32px",
+          "spread": "0",
+          "color": "oklch(0 0 0 / 0.16)",
           "type": "dropShadow"
         }
       ],
       "type": "boxShadow"
+    },
+    "card": {
+      "value": "{shadow.raised}",
+      "type": "boxShadow",
+      "$deprecated": "Use shadow.raised instead."
     },
     "small": {
       "value": "{shadow.raised}",
@@ -983,12 +1036,7 @@
     "extraLarge": {
       "value": "{shadow.overlay}",
       "type": "boxShadow",
-      "$deprecated": "Use shadow.overlay instead."
-    },
-    "card": {
-      "value": "{shadow.raised}",
-      "type": "boxShadow",
-      "$deprecated": "Use shadow.raised instead."
+      "$deprecated": "Use shadow.modal instead."
     },
     "focus": {
       "value": [

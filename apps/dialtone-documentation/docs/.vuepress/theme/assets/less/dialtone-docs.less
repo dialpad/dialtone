@@ -699,7 +699,7 @@ code {
 
     &:hover,
     .dialtone-icon-card[data-selected='yes'] & {
-      background-color: oklch(from var(--dt-color-neutral-black) l c h / 0.8);
+      background-color: oklch(0 0 0 / 0.8);
     }
 
     .dialtone-icon-card__name {
@@ -1121,72 +1121,4 @@ code {
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
-}
-
-
-// ============================================================================
-// $    EXPERIMENTAL
-// ----------------------------------------------------------------------------
-
-[data-dt-mode="light"]{
-  --dt-shadow-small:
-    0 0 1px 0 oklch(from var(--dt-color-neutral-black) l c h / .06),
-    0 2px 4px 0 oklch(from var(--dt-color-neutral-black) l c h / .12)
-    !important
-  ;
-  --dt-shadow-medium:
-    0 1px 2px 0 oklch(from var(--dt-color-neutral-black) l c h / .04),
-    0 2px 8px 0 oklch(from var(--dt-color-neutral-black) l c h / .06),
-    0 8px 12px 0 oklch(from var(--dt-color-neutral-black) l c h / .08)
-    !important
-  ;
-  --dt-shadow-large:
-    0 2px 2px 0 oklch(from var(--dt-color-neutral-black) l c h / .02),
-    0 4px 6px 0 oklch(from var(--dt-color-neutral-black) l c h / .06),
-    0 12px 16px 0 oklch(from var(--dt-color-neutral-black) l c h / .08),
-    0 32px 32px 0 oklch(from var(--dt-color-neutral-black) l c h / .16)
-    !important
-  ;
-}
-
-[data-dt-mode="dark"]{
-  --dt-shadow-small:
-    0 2px 6px 0 oklch(from var(--dt-color-neutral-black) l c h / .33),
-
-    0.5px 0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2),
-    -0.5px -0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2),
-    -0.5px 0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2),
-    0.5px -0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2)
-    !important
-  ;
-  --dt-shadow-medium:
-    0 1px 2px 0 oklch(from var(--dt-color-neutral-black) l c h / .08),
-    0 2px 8px 0 oklch(from var(--dt-color-neutral-black) l c h / .12),
-    0 8px 12px 0 oklch(from var(--dt-color-neutral-black) l c h / .16),
-
-    0.5px 0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2),
-    -0.5px -0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2),
-    -0.5px 0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2),
-    0.5px -0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2)
-    !important
-  ;
-  --dt-shadow-large:
-    0 4px 6px 0 oklch(from var(--dt-color-neutral-black) l c h / .08),
-    0 12px 16px 0 oklch(from var(--dt-color-neutral-black) l c h / .20),
-    0 48px 48px 0 oklch(from var(--dt-color-neutral-black) l c h / .32),
-
-    0.5px 0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2),
-    -0.5px -0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2),
-    -0.5px 0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2),
-    0.5px -0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2)
-    !important
-  ;
-}
-:root {
-  --dt-shadow-raised: var(--dt-shadow-small) !important;
-  --dt-shadow-overlay: var(--dt-shadow-medium) !important;
-  --dt-shadow-modal: var(--dt-shadow-large) !important;
-
-  --dt-shadow-card: var(--dt-shadow-small) !important;
-  --dt-shadow-extra-large: var(--dt-shadow-large) !important;
 }
