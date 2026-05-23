@@ -926,7 +926,7 @@
     }
   },
   "shadow": {
-    "small": {
+    "raised": {
       "value": [
         {
           "x": "{size.0}",
@@ -939,7 +939,7 @@
       ],
       "type": "boxShadow"
     },
-    "medium": {
+    "overlay": {
       "value": [
         {
           "x": "{size.0}",
@@ -952,7 +952,7 @@
       ],
       "type": "boxShadow"
     },
-    "large": {
+    "modal": {
       "value": [
         {
           "x": "{size.0}",
@@ -964,48 +964,31 @@
         }
       ],
       "type": "boxShadow"
+    },
+    "small": {
+      "value": "{shadow.raised}",
+      "type": "boxShadow",
+      "$deprecated": "Use shadow.raised instead."
+    },
+    "medium": {
+      "value": "{shadow.overlay}",
+      "type": "boxShadow",
+      "$deprecated": "Use shadow.overlay instead."
+    },
+    "large": {
+      "value": "{shadow.modal}",
+      "type": "boxShadow",
+      "$deprecated": "Use shadow.modal instead."
     },
     "extraLarge": {
-      "value": [
-        {
-          "x": "{size.0}",
-          "y": "{size.200}",
-          "blur": "{size.600}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.302)",
-          "type": "dropShadow"
-        }
-      ],
-      "type": "boxShadow"
+      "value": "{shadow.overlay}",
+      "type": "boxShadow",
+      "$deprecated": "Use shadow.overlay instead."
     },
     "card": {
-      "value": [
-        {
-          "x": "{size.0}",
-          "y": "{size.100}",
-          "blur": "{size.200}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.0314)",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.0}",
-          "y": "{size.200}",
-          "blur": "{size.300}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.0392)",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.0}",
-          "y": "{size.200}",
-          "blur": "{size.500}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.0784)",
-          "type": "dropShadow"
-        }
-      ],
-      "type": "boxShadow"
+      "value": "{shadow.raised}",
+      "type": "boxShadow",
+      "$deprecated": "Use shadow.raised instead."
     },
     "focus": {
       "value": [

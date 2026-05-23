@@ -608,7 +608,7 @@
     }
   },
   "shadow": {
-    "small": {
+    "raised": {
       "value": [
         {
           "x": "{size.0}",
@@ -653,7 +653,7 @@
       ],
       "type": "boxShadow"
     },
-    "medium": {
+    "overlay": {
       "value": [
         {
           "x": "{size.0}",
@@ -698,7 +698,7 @@
       ],
       "type": "boxShadow"
     },
-    "large": {
+    "modal": {
       "value": [
         {
           "x": "{size.0}",
@@ -710,112 +710,6 @@
         },
         {
           "x": "{size.50-negative}",
-          "y": "{size.50}",
-          "blur": "{size.0}",
-          "spread": "{size.0}",
-          "color": "{color.neutral.black}",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.50-negative}",
-          "y": "{size.50-negative}",
-          "blur": "0",
-          "spread": "0",
-          "color": "{color.neutral.black}",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.50-negative}",
-          "y": "{size.50}",
-          "blur": "0",
-          "spread": "0",
-          "color": "{color.neutral.black}",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.50}",
-          "y": "{size.50-negative}",
-          "blur": "0",
-          "spread": "0",
-          "color": "{color.neutral.black}",
-          "type": "dropShadow"
-        }
-      ],
-      "type": "boxShadow"
-    },
-    "extraLarge": {
-      "value": [
-        {
-          "x": "{size.0}",
-          "y": "{size.200}",
-          "blur": "{size.600}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.549)",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.50}",
-          "y": "{size.50}",
-          "blur": "{size.0}",
-          "spread": "{size.0}",
-          "color": "{color.neutral.black}",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.50-negative}",
-          "y": "{size.50-negative}",
-          "blur": "0",
-          "spread": "0",
-          "color": "{color.neutral.black}",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.50-negative}",
-          "y": "{size.50}",
-          "blur": "0",
-          "spread": "0",
-          "color": "{color.neutral.black}",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.50}",
-          "y": "{size.50-negative}",
-          "blur": "0",
-          "spread": "0",
-          "color": "{color.neutral.black}",
-          "type": "dropShadow"
-        }
-      ],
-      "type": "boxShadow"
-    },
-    "card": {
-      "value": [
-        {
-          "x": "{size.0}",
-          "y": "{size.100}",
-          "blur": "{size.200}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.349)",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.0}",
-          "y": "{size.200}",
-          "blur": "{size.300}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.451)",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.0}",
-          "y": "{size.200}",
-          "blur": "{size.500}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.5804)",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.50}",
           "y": "{size.50}",
           "blur": "{size.0}",
           "spread": "{size.0}",
