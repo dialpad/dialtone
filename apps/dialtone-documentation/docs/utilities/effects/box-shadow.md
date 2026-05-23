@@ -74,6 +74,47 @@ When dragging a `raised` card, change its box shadow to `overlay`.
 </dt-card>
 ```
 
+### Sample demo script
+
+```js
+const dragging = ref(false);
+const dragOffset = ref({ x: 0, y: 0 });
+let dragOrigin = null;
+
+const draggableCardClass = computed(() => [
+  'd-ba d-bc-transparent h:d-bc-subtle',
+  dragging.value ? 'd-bs-overlay d-c-grabbing' : 'd-c-grab',
+]);
+
+const draggableCardStyle = computed(() => ({
+  transform: `translate3d(${dragOffset.value.x}px, ${dragOffset.value.y}px, 0)`,
+  transition: dragging.value ? 'none' : 'transform var(--td150) var(--ttf-out)',
+  touchAction: 'none',
+  userSelect: dragging.value ? 'none' : undefined,
+}));
+
+function startCardDrag (event) {
+  if (event.button !== 0) return;
+  event.preventDefault();
+  dragOrigin = { id: event.pointerId, x: event.clientX, y: event.clientY };
+  event.currentTarget.setPointerCapture?.(event.pointerId);
+}
+
+function moveCardDrag (event) {
+  if (event.pointerId !== dragOrigin?.id) return;
+  const x = event.clientX - dragOrigin.x;
+  const y = event.clientY - dragOrigin.y;
+  if (!dragging.value && Math.hypot(x, y) < 4) return;
+  dragging.value = true;
+  dragOffset.value = { x, y };
+}
+
+function stopCardDrag () {
+  dragging.value = false;
+  dragOffset.value = { x: 0, y: 0 };
+  dragOrigin = null;
+}
+```
 ## Classes
 
 <utility-class-table>
