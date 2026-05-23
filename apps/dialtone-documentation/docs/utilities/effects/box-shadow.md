@@ -9,9 +9,9 @@ keywords: ["drop shadow", "elevation"]
 ```vue demo
 <!-- @wrapper -->
 <dt-stack class="d-py-500" gap="600" justify="space-evenly" :direction="{ 'default': 'column', 'lg': 'row' }">
-  <DtBox padding="200" border-radius="400" surface="raised" class="d-bs-raised">d-bs-raised</DtBox>
-  <DtBox padding="200" border-radius="400" surface="overlay" class="d-bs-overlay">d-bs-overlay</DtBox>
-  <DtBox padding="200" border-radius="400" surface="modal" class="d-bs-modal">d-bs-modal</DtBox>
+  <DtBox padding="200" border-radius="400" surface="raised" shadow="raised">d-bs-raised</DtBox>
+  <DtBox padding="200" border-radius="400" surface="overlay" shadow="overlay">d-bs-overlay</DtBox>
+  <DtBox padding="200" border-radius="400" surface="modal" shadow="modal">d-bs-modal</DtBox>
 </dt-stack>
 ```
 
@@ -20,7 +20,7 @@ keywords: ["drop shadow", "elevation"]
 Use `d-bs-none` to remove a box shadow to an element.
 
 ```vue demo
-<div class="d-p-200 d-bar-400 d-bgc-overlay d-bs-none">.d-bs-none</div>
+<div class="d-p-200 d-bar-400 d-bgc-raised d-bs-none">d-bs-none</div>
 ```
 
 ## Hover
@@ -28,7 +28,7 @@ Use `d-bs-none` to remove a box shadow to an element.
 Use `h:d-bs-{n}` to change an element's `:hover` state box shadow.
 
 ```vue demo
-<dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-overlay h:d-bs-raised">Hover over me</dt-button>
+<dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-raised h:d-bs-raised">Hover over me</dt-button>
 ```
 
 ## Focus
@@ -36,7 +36,7 @@ Use `h:d-bs-{n}` to change an element's `:hover` state box shadow.
 Use `f:d-bs-{n}` to change an element's `:focus` and `:focus-within` state box shadow.
 
 ```vue demo
-<dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-overlay f:d-bs-raised">Focus me</dt-button>
+<dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-raised f:d-bs-raised">Focus me</dt-button>
 ```
 
 ## Focus Visible
@@ -44,7 +44,7 @@ Use `f:d-bs-{n}` to change an element's `:focus` and `:focus-within` state box s
 Use `fv:d-bs-{n}` to change an element's `:focus-visible` state box shadow [only when focused by keyboard].
 
 ```vue demo
-<dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-overlay fv:d-bs-raised">Keyboard focus me</dt-button>
+<dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-raised fv:d-bs-raised">Keyboard focus me</dt-button>
 ```
 
 ## Classes
@@ -52,17 +52,9 @@ Use `fv:d-bs-{n}` to change an element's `:focus-visible` state box shadow [only
 <utility-class-table>
   <template #content>
     <tbody>
-      <tr v-for="size in boxShadowSizes">
-        <th scope="row" class="d-code--sm d-docsite-code">.d-bs-{{ size }}</th>
-        <td v-if="size !== 'card'" class="d-code--sm">
-            box-shadow: var(--dt-shadow-{{ size }}-0-x) var(--dt-shadow-{{ size }}-0-y) var(--dt-shadow-{{ size }}-0-blur) var(--dt-shadow-{{ size }}-0-spread) var(--dt-shadow-{{ size }}-0-color) !important;
-        </td>
-        <td v-else class="d-code--sm">
-            box-shadow: var(--dt-shadow-card-0-x) var(--dt-shadow-card-0-y) var(--dt-shadow-card-0-blur) var(--dt-shadow-card-0-spread) var(--dt-shadow-card-0-color),<br/>
-            var(--dt-shadow-card-1-x) var(--dt-shadow-card-1-y) var(--dt-shadow-card-1-blur) var(--dt-shadow-card-1-spread) var(--dt-shadow-card-1-color),<br/>
-            var(--dt-shadow-card-2-x) var(--dt-shadow-card-2-y) var(--dt-shadow-card-2-blur) var(--dt-shadow-card-2-spread) var(--dt-shadow-card-2-color)<br/>
-            !important
-        </td>
+      <tr v-for="name in boxShadowNames">
+        <th scope="row" class="d-code--sm d-docsite-code">.d-bs-{{ name }}</th>
+        <td class="d-code--sm">box-shadow: var(--dt-shadow-{{ name }}) !important;</td>
       </tr>
       <tr>
         <th scope="row" class="d-code--sm d-docsite-code">.d-bs-none</th>
@@ -77,5 +69,5 @@ Use `fv:d-bs-{n}` to change an element's `:focus-visible` state box shadow [only
 </utility-class-table>
 
 <script setup>
-const boxShadowSizes = ['sm', 'md', 'lg', 'xl', 'card'];
+const boxShadowNames = ['raised', 'overlay', 'modal'];
 </script>

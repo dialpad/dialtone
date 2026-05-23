@@ -212,7 +212,7 @@ const props = defineProps({
 
   /**
    * Box shadow. Maps to --dt-shadow-* tokens.
-   * @values small, medium, large, extra-large, card
+   * @values raised, overlay, modal
    */
   shadow: { type: String, default: undefined, validator: shadowValidator },
 

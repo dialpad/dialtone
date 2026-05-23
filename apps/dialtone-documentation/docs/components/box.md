@@ -67,8 +67,8 @@ The five tiers form a spatial ladder for surface depth:
   <dt-box padding="200" border-radius="300" surface="sunken" border-width="100">sunken</dt-box>
   <dt-box padding="200" border-radius="300" surface="default" border-width="100">default</dt-box>
   <dt-box padding="200" border-radius="300" surface="raised" border-width="100">raised</dt-box>
-  <dt-box padding="200" border-radius="300" surface="overlay" shadow="medium">overlay</dt-box>
-  <dt-box padding="200" border-radius="300" surface="modal" shadow="medium">modal</dt-box>
+  <dt-box padding="200" border-radius="300" surface="overlay" shadow="overlay">overlay</dt-box>
+  <dt-box padding="200" border-radius="300" surface="modal" shadow="modal">modal</dt-box>
 </dt-stack>
 ```
 
@@ -265,7 +265,7 @@ Use the `as` prop to render semantic HTML elements for accessibility.
   surface="primary"
   border-width="100"
   border-radius="400"
-  shadow="card"
+  shadow="raised"
 >
   <dt-stack gap="200">
     <dt-text as="h3" kind="headline" size="md">Card title</dt-text>

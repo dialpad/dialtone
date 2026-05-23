@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+
 export default {
   defaults: {
     props: {
@@ -39,11 +39,11 @@ export default {
     props: {
       as: { initialValue: 'aside' },
       padding: { initialValue: '200' },
-      surface: { initialValue: 'primary' },
+      surface: { initialValue: 'raised' },
       borderWidth: { initialValue: '100' },
       borderColor: { initialValue: 'subtle' },
       borderRadius: { initialValue: '400' },
-      shadow: { initialValue: 'card' },
+      shadow: { initialValue: 'raised' },
     },
     slots: {
       default: { initialValue: `<dt-stack gap="200">
@@ -71,19 +71,18 @@ export default {
   'combined with DtStack and DtText': {
     props: {
       padding: { initialValue: '200' },
-      surface: { initialValue: 'moderate-opaque' },
+      surface: { initialValue: 'default' },
       borderRadius: { initialValue: '450' },
-      shadow: { initialValue: 'card' },
     },
     slots: {
       default: { initialValue: `<dt-stack direction="row" gap="200">
-  <dt-box surface="moderate-opaque" border-radius="400" padding="100" padding-inline="150">
+  <dt-box surface="sunken" border-radius="400" padding="100" padding-inline="150">
     <dt-text kind="body" size="sm">First</dt-text>
   </dt-box>
-  <dt-box surface="moderate-opaque" border-radius="400" padding="100" padding-inline="150">
+  <dt-box surface="sunken" border-radius="400" padding="100" padding-inline="150">
     <dt-text kind="body" size="sm">Second</dt-text>
   </dt-box>
-  <dt-box surface="moderate-opaque" border-radius="400" padding="100" padding-inline="150">
+  <dt-box surface="sunken" border-radius="400" padding="100" padding-inline="150">
     <dt-text kind="body" size="sm">Third</dt-text>
   </dt-box>
 </dt-stack>` },
@@ -93,7 +92,7 @@ export default {
   'sized': {
     props: {
       padding: { initialValue: '200' },
-      surface: { initialValue: 'moderate' },
+      surface: { initialValue: 'default' },
       borderWidth: { initialValue: '100' },
       inlineSize: { initialValue: '500' },
       blockSize: { initialValue: '600' },
@@ -103,15 +102,15 @@ export default {
     },
   },
 
-  'shadow': {
+  'overlay shadow': {
     props: {
       padding: { initialValue: '200' },
-      surface: { initialValue: 'primary' },
+      surface: { initialValue: 'overlay' },
       borderRadius: { initialValue: '200' },
-      shadow: { initialValue: 'large' },
+      shadow: { initialValue: 'overlay' },
     },
     slots: {
-      default: { initialValue: 'Large shadow' },
+      default: { initialValue: 'Overlay shadow' },
     },
   },
 
@@ -119,7 +118,7 @@ export default {
     props: {
       padding: { initialValue: '100' },
       paddingInline: { initialValue: '200' },
-      surface: { initialValue: 'moderate' },
+      surface: { initialValue: 'default' },
       borderRadius: { initialValue: 'pill' },
     },
     slots: {
@@ -132,9 +131,7 @@ export default {
   'composed layout': {
     props: {
       padding: { initialValue: '200' },
-      surface: { initialValue: 'primary' },
-      borderWidth: { initialValue: '100' },
-      borderColor: { initialValue: 'subtle' },
+      surface: { initialValue: 'default' },
       borderRadius: { initialValue: '400' },
     },
     slots: {
@@ -149,16 +146,16 @@ export default {
     </dt-button>
   </dt-stack>
   <dt-stack direction="row" align="start" gap="200">
-    <dt-box class="d-fl1" padding="200" surface="secondary" border-width="100" border-color="subtle" border-radius="300">
+    <dt-box class="d-fl1" padding="200" surface="sunken" border-width="100" border-color="subtle" border-radius="300">
       <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 1</dt-text>
     </dt-box>
-    <dt-box class="d-fl1" padding="200" surface="secondary" border-width="100" border-color="subtle" border-radius="300">
+    <dt-box class="d-fl1" padding="200" surface="sunken" border-width="100" border-color="subtle" border-radius="300">
       <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 2</dt-text>
     </dt-box>
-    <dt-box class="d-fl1" padding="200" surface="secondary" border-width="100" border-color="subtle" border-radius="300">
+    <dt-box class="d-fl1" padding="200" surface="sunken" border-width="100" border-color="subtle" border-radius="300">
       <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 3</dt-text>
     </dt-box>
-    <dt-box class="d-fl1" padding="200" surface="secondary" border-width="100" border-color="subtle" border-radius="300">
+    <dt-box class="d-fl1" padding="200" surface="sunken" border-width="100" border-color="subtle" border-radius="300">
       <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 4</dt-text>
     </dt-box>
   </dt-stack>

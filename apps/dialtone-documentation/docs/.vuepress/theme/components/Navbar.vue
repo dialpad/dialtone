@@ -8,7 +8,7 @@
       <dt-hovercard
         v-if="hovercardMap[link.text].length && dismissedKey !== link.text"
         placement="bottom-start"
-        dialog-class="d-w-1000 d-p-0"
+        dialog-class="d-w-1000 d-p-0 d-bs-modal"
         padding="large"
         enter-delay="500"
         :offset="[-8, 8]"

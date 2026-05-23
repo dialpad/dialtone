@@ -236,13 +236,13 @@ describe('DtBox', () => {
   // ── Shadow ────────────────────────────────────────────────
 
   it('applies shadow modifier class', () => {
-    const wrapper = mountComponent({ shadow: 'small' });
+    const wrapper = mountComponent({ shadow: 'raised' });
 
-    expect(wrapper.classes()).toContain('d-box--shadow-small');
+    expect(wrapper.classes()).toContain('d-box--shadow-raised');
   });
 
   it.each(
-    DT_BOX_SHADOW_VALUES.filter(v => v !== 'small'),
+    DT_BOX_SHADOW_VALUES.filter(v => v !== 'raised'),
   )('applies shadow modifier class for %s', (shadow) => {
     const wrapper = mountComponent({ shadow });
 
