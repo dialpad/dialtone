@@ -14,6 +14,9 @@ module.exports = {
   IS_TEXT_REGEX: /--dt-text-/,
   REGEX_OPTIONS: {
     SHADOW_VARIABLES: [
+      'raised',
+      'overlay',
+      'modal',
       'small',
       'medium',
       'large',
