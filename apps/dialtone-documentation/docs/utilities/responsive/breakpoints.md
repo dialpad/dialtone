@@ -185,7 +185,7 @@ To help keep prefixes concise, we use abbreviations. This syntax is used consist
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
+      <thead class="d-bgc-default d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
           <th scope="col" class="d-p-0 d-bbw0 d-w25p"><div class="d-p-200 d-bb d-bbw1">Class Prefix</div></th>
           <th scope="col" class="d-p-0 d-bbw0 d-w25p"><div class="d-p-200 d-bb d-bbw1">Media Query</div></th>

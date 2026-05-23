@@ -29,7 +29,7 @@ The `flex-direction` property declares a flex container’s main axis direction.
 <clamped-table-wrapper class="d-mbe-200">
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
+      <thead class="d-bgc-default d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
           <th scope="col" class="d-p-0 d-bbw0 d-w20p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
           <th scope="col" class="d-p-0 d-bbw0 d-w30p"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
@@ -64,7 +64,7 @@ The `flex-wrap` property declares a flex container’s wrapping status. The defa
 <clamped-table-wrapper class="d-mbe-200">
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
+      <thead class="d-bgc-default d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
           <th scope="col" class="d-p-0 d-bbw0 d-w20p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
           <th scope="col" class="d-p-0 d-bbw0 d-w30p"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
@@ -99,7 +99,7 @@ The `flex-flow` property is a shorthand property that sets allows you to quickly
 <clamped-table-wrapper class="d-mbe-200">
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
+      <thead class="d-bgc-default d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
           <th scope="col" class="d-p-0 d-bbw0 d-w20p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
           <th scope="col" class="d-p-0 d-bbw0 d-w30p"><div class="d-p-200 d-bb d-bbw1">Output</div></th>

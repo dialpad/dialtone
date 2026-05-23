@@ -13,14 +13,14 @@
         kind="headline"
         size="md"
       >
-        Overlay
+        Elevation
       </dt-text>
       <dt-stack
         direction="row"
         gap="100"
       >
         <dt-box
-          v-for="s in overlaySurfaces"
+          v-for="s in elevationSurfaces"
           :key="s"
           padding="100"
           :surface="s"
@@ -270,7 +270,7 @@ export default {
   components: { DtBox, DtStack, DtText },
   data () {
     return {
-      overlaySurfaces: ['overlay'],
+      elevationSurfaces: ['sunken', 'default', 'raised', 'overlay', 'modal'],
       neutralSurfaces: ['primary', 'secondary', 'moderate', 'bold', 'strong', 'contrast'],
       semanticSurfaces: ['brand', 'info', 'positive', 'warning', 'critical'],
       variantSurfaces: ['brand-subtle', 'brand-strong', 'info-subtle', 'info-strong', 'positive-subtle', 'positive-strong', 'warning-subtle', 'warning-strong', 'critical-subtle', 'critical-strong'],

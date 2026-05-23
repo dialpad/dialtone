@@ -2,8 +2,49 @@
 layout: Blank
 ---
 
-<dt-stack class="d-p-400 d-bgc-primary" gap="400">
-  <dt-box padding="300">
+<dt-stack class="d-p-400 d-bgc-default" gap="400">
+  <dt-text as="h1" kind="headline" :size="600">
+    Elevation Surface
+  </dt-text>
+  <dt-box padding="500">
+    <dt-stack gap="800" direction="row" justify="space-evenly">
+      <DtBox padding="400" border-radius="400" surface="sunken">
+        <DtText as="p" kind="code" size="100">surface-sunken</DtText>
+      </DtBox>
+      <DtBox padding="400" border-radius="400" surface="default">
+        <DtText as="p" kind="code" size="100">surface-default</DtText>
+      </DtBox>
+      <DtBox padding="400" border-radius="400" surface="raised">
+        <DtText as="p" kind="code" size="100">surface-raised</DtText>
+      </DtBox>
+      <DtBox padding="400" border-radius="400" surface="overlay">
+        <DtText as="p" kind="code" size="100">surface-overlay</DtText>
+      </DtBox>
+      <DtBox padding="400" border-radius="400" surface="modal">
+        <DtText as="p" kind="code" size="100">surface-modal</DtText>
+      </DtBox>
+    </dt-stack>
+  </dt-box>
+  <dt-text as="h1" kind="headline" :size="600">
+    Shadow
+  </dt-text>
+  <dt-box padding="500">
+    <dt-stack gap="800" direction="row" justify="space-evenly">
+      <DtBox padding="400" border-radius="400" surface="default" class="d-bs-none">
+        <DtText as="p" kind="code" size="100">d-bs-none</DtText>
+      </DtBox>
+      <DtBox padding="400" border-radius="400" surface="raised" class="d-bs-raised">
+        <DtText as="p" kind="code" size="100">d-bs-raised</DtText>
+      </DtBox>
+      <DtBox padding="400" border-radius="400" surface="overlay" class="d-bs-overlay">
+        <DtText as="p" kind="code" size="100">d-bs-overlay</DtText>
+      </DtBox>
+      <DtBox padding="400" border-radius="400" surface="modal" class="d-bs-modal">
+        <DtText as="p" kind="code" size="100">d-bs-modal</DtText>
+      </DtBox>
+    </dt-stack>
+  </dt-box>
+  <dt-box padding="300" style="margin-block-start: 100rem;">
     <dt-stack gap="300" direction="row">
       <dt-stack direction="row" align="center" gap="100">
         <dt-presence presence="active" />

@@ -61,7 +61,7 @@ html body {
   // --docsearch-logo-color
   --docsearch-modal-width: var(--dt-layout-800);
   --docsearch-modal-height: auto;
-  --docsearch-modal-background: var(--dt-color-surface-secondary);
+  --docsearch-modal-background: var(--dt-color-surface-raised);
   --docsearch-modal-shadow: var(--dt-shadow-large);
   /* stylelint-disable-next-line meowtec/no-px */
   --docsearch-searchbox-height: 40px;
@@ -81,13 +81,13 @@ html body {
     var(--dt-color-border-subtle);
   --docsearch-key-gradient: linear-gradient(
     -225deg,
-    var(--dt-color-surface-primary),
-    var(--dt-color-surface-secondary)
+    var(--dt-color-surface-default),
+    var(--dt-color-surface-raised)
   );
   --docsearch-key-shadow: inset 0 0 0 var(--dt-size-border-100)
     var(--dt-color-border-default);
   --docsearch-footer-height: var(--dt-layout-75);
-  --docsearch-footer-background: var(--dt-color-surface-primary);
+  --docsearch-footer-background: var(--dt-color-surface-raised);
   /* stylelint-disable-next-line meowtec/no-px */
   --docsearch-footer-shadow: 0 var(--dt-spacing-100-negative) 0 0
       var(--dt-color-border-subtle),
@@ -373,7 +373,7 @@ html body {
 }
 
 .dialtone-content {
-  background-color: var(--dt-color-surface-primary);
+  background-color: var(--dt-color-surface-default);
   border-block: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
 
   @media (min-width: 980px) {
@@ -793,7 +793,7 @@ code {
 
 .hero {
   position: relative;
-  background-color: var(--dt-color-surface-primary);
+  background-color: var(--dt-color-surface-default);
 
   &__inner-wrapper {
     padding-block: calc(var(--dt-spacing-100) * 16);
@@ -887,8 +887,8 @@ code {
     display: block;
     overflow: hidden;
     text-decoration: none;
-    background-color: var(--dt-color-surface-secondary);
-    border: var(--dt-size-border-100) solid transparent;
+    background-color: var(--dt-color-surface-raised);
+    border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
     border-radius: var(--dt-size-radius-500);
     opacity: 0.7;
     transition-timing-function: var(--ttf-in-out);
@@ -1121,4 +1121,72 @@ code {
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
+}
+
+
+// ============================================================================
+// $    EXPERIMENTAL
+// ----------------------------------------------------------------------------
+
+[data-dt-mode="light"]{
+  --dt-shadow-small:
+    0 0 1px 0 oklch(from var(--dt-color-neutral-black) l c h / .06),
+    0 2px 4px 0 oklch(from var(--dt-color-neutral-black) l c h / .12)
+    !important
+  ;
+  --dt-shadow-medium:
+    0 1px 2px 0 oklch(from var(--dt-color-neutral-black) l c h / .04),
+    0 2px 8px 0 oklch(from var(--dt-color-neutral-black) l c h / .06),
+    0 8px 12px 0 oklch(from var(--dt-color-neutral-black) l c h / .08)
+    !important
+  ;
+  --dt-shadow-large:
+    0 2px 2px 0 oklch(from var(--dt-color-neutral-black) l c h / .02),
+    0 4px 6px 0 oklch(from var(--dt-color-neutral-black) l c h / .06),
+    0 12px 16px 0 oklch(from var(--dt-color-neutral-black) l c h / .08),
+    0 32px 32px 0 oklch(from var(--dt-color-neutral-black) l c h / .16)
+    !important
+  ;
+}
+
+[data-dt-mode="dark"]{
+  --dt-shadow-small:
+    0 2px 6px 0 oklch(from var(--dt-color-neutral-black) l c h / .33),
+
+    0.5px 0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2),
+    -0.5px -0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2),
+    -0.5px 0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2),
+    0.5px -0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2)
+    !important
+  ;
+  --dt-shadow-medium:
+    0 1px 2px 0 oklch(from var(--dt-color-neutral-black) l c h / .08),
+    0 2px 8px 0 oklch(from var(--dt-color-neutral-black) l c h / .12),
+    0 8px 12px 0 oklch(from var(--dt-color-neutral-black) l c h / .16),
+
+    0.5px 0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2),
+    -0.5px -0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2),
+    -0.5px 0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2),
+    0.5px -0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2)
+    !important
+  ;
+  --dt-shadow-large:
+    0 4px 6px 0 oklch(from var(--dt-color-neutral-black) l c h / .08),
+    0 12px 16px 0 oklch(from var(--dt-color-neutral-black) l c h / .24),
+    0 48px 48px 0 oklch(from var(--dt-color-neutral-black) l c h / .48),
+
+    0.5px 0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2),
+    -0.5px -0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2),
+    -0.5px 0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2),
+    0.5px -0.5px 0px 0px oklch(from var(--dt-color-neutral-black) l c h / .2)
+    !important
+  ;
+}
+:root {
+  --dt-shadow-raised: var(--dt-shadow-small) !important;
+  --dt-shadow-overlay: var(--dt-shadow-medium) !important;
+  --dt-shadow-modal: var(--dt-shadow-large) !important;
+
+  --dt-shadow-card: var(--dt-shadow-small) !important;
+  --dt-shadow-extra-large: var(--dt-shadow-large) !important;
 }

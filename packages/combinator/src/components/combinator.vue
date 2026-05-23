@@ -536,7 +536,7 @@ export default {
     display:none;
     flex-direction: column;
     margin-block: var(--dt-spacing-200);
-    background-color: var(--dt-color-surface-secondary);
+    background-color: var(--dt-color-surface-sunken);
     border-radius: var(--dt-size-radius-400);
 
     @media screen and (min-width: 640px) {

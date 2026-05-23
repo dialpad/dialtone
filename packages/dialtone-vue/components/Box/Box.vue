@@ -61,7 +61,7 @@ const props = defineProps({
 
   /**
    * Background surface color. Maps to --dt-color-surface-* tokens.
-   * @values overlay, primary, primary-opaque, secondary, secondary-opaque, moderate, moderate-opaque, bold, bold-opaque, strong, strong-opaque, contrast, contrast-opaque, brand, brand-opaque, brand-subtle, brand-subtle-opaque, brand-strong, info, info-opaque, info-subtle, info-subtle-opaque, info-strong, positive, positive-opaque, positive-subtle, positive-subtle-opaque, positive-strong, warning, warning-opaque, warning-subtle, warning-subtle-opaque, warning-strong, critical, critical-opaque, critical-subtle, critical-subtle-opaque, critical-strong, backdrop
+   * @values sunken, default, raised, overlay, modal, primary, primary-opaque, secondary, secondary-opaque, moderate, moderate-opaque, bold, bold-opaque, strong, strong-opaque, contrast, contrast-opaque, brand, brand-opaque, brand-subtle, brand-subtle-opaque, brand-strong, info, info-opaque, info-subtle, info-subtle-opaque, info-strong, positive, positive-opaque, positive-subtle, positive-subtle-opaque, positive-strong, warning, warning-opaque, warning-subtle, warning-subtle-opaque, warning-strong, critical, critical-opaque, critical-subtle, critical-subtle-opaque, critical-strong, backdrop
    */
   surface: { type: String, default: undefined, validator: surfaceValidator },
 

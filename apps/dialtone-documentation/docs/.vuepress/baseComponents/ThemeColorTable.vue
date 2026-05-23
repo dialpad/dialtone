@@ -2,7 +2,7 @@
   <clamped-table-wrapper>
     <div>
       <table class="d-table dialtone-doc-table">
-        <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
+        <thead class="d-bgc-default d-ps-sticky d-zi-base1 d-ibs-0">
           <tr>
             <th class="d-p-0 d-bbw0" scope="col">
               <div class="d-p-200 d-bb d-bbw1">

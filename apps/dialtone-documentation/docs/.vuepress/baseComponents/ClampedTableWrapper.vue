@@ -60,7 +60,7 @@
       aria-hidden="true"
     >
       <dt-button
-        class="dialtone-doc-table-clamped__more-btn d-bgc-secondary d-bs-sm"
+        class="dialtone-doc-table-clamped__more-btn d-bgc-raised h:d-bgc-sunken d-bs-raised"
         kind="muted"
         importance="outlined"
         :size="100"

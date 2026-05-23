@@ -65,7 +65,7 @@ export default {
      */
     bgclass: {
       type: String,
-      default: 'd-bgc-secondary',
+      default: 'd-bgc-sunken',
     },
 
     /**

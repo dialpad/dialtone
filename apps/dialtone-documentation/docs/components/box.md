@@ -7,6 +7,48 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-box--default
 keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius", "sizing", "overflow", "scrollbar", "background", "spacing", "layout", "primitive", "elevation"]
 ---
 
+<dt-text as="h1" kind="headline" :size="600">
+  Elevation Surface
+</dt-text>
+<dt-box padding="500">
+  <dt-stack gap="800" direction="row" justify="space-evenly">
+    <DtBox padding="400" border-radius="400" surface="sunken">
+      <DtText as="p" kind="code" size="100">surface-sunken</DtText>
+    </DtBox>
+    <DtBox padding="400" border-radius="400" surface="default">
+      <DtText as="p" kind="code" size="100">surface-default</DtText>
+    </DtBox>
+    <DtBox padding="400" border-radius="400" surface="raised">
+      <DtText as="p" kind="code" size="100">surface-raised</DtText>
+    </DtBox>
+    <DtBox padding="400" border-radius="400" surface="overlay">
+      <DtText as="p" kind="code" size="100">surface-overlay</DtText>
+    </DtBox>
+    <DtBox padding="400" border-radius="400" surface="modal">
+      <DtText as="p" kind="code" size="100">surface-modal</DtText>
+    </DtBox>
+  </dt-stack>
+</dt-box>
+<dt-text as="h1" kind="headline" :size="600">
+  Shadow
+</dt-text>
+<dt-box padding="500">
+  <dt-stack gap="800" direction="row" justify="space-evenly">
+    <DtBox padding="400" border-radius="400" surface="default" class="d-bs-none">
+      <DtText as="p" kind="code" size="100">d-bs-none</DtText>
+    </DtBox>
+    <DtBox padding="400" border-radius="400" surface="raised" class="d-bs-raised">
+      <DtText as="p" kind="code" size="100">d-bs-raised</DtText>
+    </DtBox>
+    <DtBox padding="400" border-radius="400" surface="overlay" class="d-bs-overlay">
+      <DtText as="p" kind="code" size="100">d-bs-overlay</DtText>
+    </DtBox>
+    <DtBox padding="400" border-radius="400" surface="modal" class="d-bs-modal">
+      <DtText as="p" kind="code" size="100">d-bs-modal</DtText>
+    </DtBox>
+  </dt-stack>
+</dt-box>
+
 <component-combinator component-name="DtBox" />
 
 ## Usage
@@ -51,12 +93,25 @@ DtBox complements [DtText](/components/text.html) (typography) and [DtStack](/co
 
 Background surface color mapped to `--dt-color-surface-*` tokens.
 
-### Overlay
+### Elevation
 
-For modal, popover, and dialog surfaces — use `overlay` when the box floats above page content.
+The five tiers form a spatial ladder for surface depth:
+
+* `sunken`: below the floor
+* `default`: the base floor
+* `raised`: lifted up from the base floor
+* `overlay`: detached and floating above the base floor
+* `modal`: blocking and floating significantly above the base floor
 
 ```vue demo
-<dt-box surface="overlay" padding="200" border-radius="300" shadow="medium">overlay</dt-box>
+<!-- @wrapper -->
+<dt-stack direction="row" gap="200">
+  <dt-box padding="200" border-radius="300" surface="sunken" border-width="100">sunken</dt-box>
+  <dt-box padding="200" border-radius="300" surface="default" border-width="100">default</dt-box>
+  <dt-box padding="200" border-radius="300" surface="raised" border-width="100">raised</dt-box>
+  <dt-box padding="200" border-radius="300" surface="overlay" shadow="medium">overlay</dt-box>
+  <dt-box padding="200" border-radius="300" surface="modal" shadow="medium">modal</dt-box>
+</dt-stack>
 ```
 
 ### Neutral

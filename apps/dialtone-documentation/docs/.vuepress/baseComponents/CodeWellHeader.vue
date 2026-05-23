@@ -23,7 +23,7 @@ export default {
      */
     bgclass: {
       type: String,
-      default: 'd-bgc-secondary',
+      default: 'd-bgc-sunken',
     },
 
     /**
@@ -41,13 +41,13 @@ export default {
       return [
         'd-p-400 d-w100p d-of-auto',
         this.bgclass,
-        { 'd-ba d-bc-subtle d-bbsr-400 d-baw1': this.isSurfacePrimary },
+        { 'd-ba d-bc-subtle d-bbsr-400 d-baw1': this.isSurfaceDefault },
         this.$attrs.class,
       ];
     },
 
-    isSurfacePrimary () {
-      return this.bgclass === 'd-bgc-primary';
+    isSurfaceDefault () {
+      return this.bgclass === 'd-bgc-default';
     },
   },
 };

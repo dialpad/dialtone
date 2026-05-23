@@ -65,7 +65,7 @@
       aria-hidden="true"
     >
       <dt-button
-        class="code-example-tab-group__more-btn d-bgc-secondary d-bs-sm"
+        class="code-example-tab-group__more-btn d-bgc-raised h:d-bgc-sunken d-bs-raised"
         kind="muted"
         importance="outlined"
         :size="100"

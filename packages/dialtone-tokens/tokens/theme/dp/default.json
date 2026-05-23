@@ -374,10 +374,30 @@
       }
     },
     "surface": {
+      "sunken": {
+        "value": "{color.black.100}",
+        "type": "color",
+        "description": "For sunken or recessed surfaces."
+      },
+      "default": {
+        "value": "{color.black.50}",
+        "type": "color",
+        "description": "For default primary surfaces."
+      },
+      "raised": {
+        "value": "{color.black.50}",
+        "type": "color",
+        "description": "For raised surfaces like cards and panels."
+      },
       "overlay": {
         "value": "{color.black.50}",
         "type": "color",
         "description": "For overlay surfaces like modals, popovers, and dialogs."
+      },
+      "modal": {
+        "value": "{color.black.50}",
+        "type": "color",
+        "description": "For blocking modal surfaces."
       },
       "primary": {
         "value": "{color.black.50}",
@@ -4510,7 +4530,7 @@
     "base": {
       "color": {
         "surface": {
-          "value": "{color.surface.secondary}",
+          "value": "{color.surface.sunken}",
           "type": "color"
         },
         "foreground": {
