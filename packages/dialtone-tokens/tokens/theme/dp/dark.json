@@ -188,12 +188,12 @@
         "description": "For raised surfaces like cards and panels."
       },
       "overlay": {
-        "value": "{color.black.150}",
+        "value": "{color.black.200}",
         "type": "color",
         "description": "For overlay surfaces like modals, popovers, and dialogs."
       },
       "modal": {
-        "value": "{color.black.150}",
+        "value": "{color.black.200}",
         "type": "color",
         "description": "For blocking modal surfaces."
       },

@@ -7,48 +7,6 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-box--default
 keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius", "sizing", "overflow", "scrollbar", "background", "spacing", "layout", "primitive", "elevation"]
 ---
 
-<dt-text as="h1" kind="headline" :size="600">
-  Elevation Surface
-</dt-text>
-<dt-box padding="500">
-  <dt-stack gap="800" direction="row" justify="space-evenly">
-    <DtBox padding="400" border-radius="400" surface="sunken">
-      <DtText as="p" kind="code" size="100">surface-sunken</DtText>
-    </DtBox>
-    <DtBox padding="400" border-radius="400" surface="default">
-      <DtText as="p" kind="code" size="100">surface-default</DtText>
-    </DtBox>
-    <DtBox padding="400" border-radius="400" surface="raised">
-      <DtText as="p" kind="code" size="100">surface-raised</DtText>
-    </DtBox>
-    <DtBox padding="400" border-radius="400" surface="overlay">
-      <DtText as="p" kind="code" size="100">surface-overlay</DtText>
-    </DtBox>
-    <DtBox padding="400" border-radius="400" surface="modal">
-      <DtText as="p" kind="code" size="100">surface-modal</DtText>
-    </DtBox>
-  </dt-stack>
-</dt-box>
-<dt-text as="h1" kind="headline" :size="600">
-  Shadow
-</dt-text>
-<dt-box padding="500">
-  <dt-stack gap="800" direction="row" justify="space-evenly">
-    <DtBox padding="400" border-radius="400" surface="default" class="d-bs-none">
-      <DtText as="p" kind="code" size="100">d-bs-none</DtText>
-    </DtBox>
-    <DtBox padding="400" border-radius="400" surface="raised" class="d-bs-raised">
-      <DtText as="p" kind="code" size="100">d-bs-raised</DtText>
-    </DtBox>
-    <DtBox padding="400" border-radius="400" surface="overlay" class="d-bs-overlay">
-      <DtText as="p" kind="code" size="100">d-bs-overlay</DtText>
-    </DtBox>
-    <DtBox padding="400" border-radius="400" surface="modal" class="d-bs-modal">
-      <DtText as="p" kind="code" size="100">d-bs-modal</DtText>
-    </DtBox>
-  </dt-stack>
-</dt-box>
-
 <component-combinator component-name="DtBox" />
 
 ## Usage
@@ -232,10 +190,9 @@ Defaults to `'default'` (`--dt-color-border-default`). Only visible when a `bord
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="300">
-  <dt-box padding="200" surface="moderate" border-radius="300" shadow="small">small</dt-box>
-  <dt-box padding="200" surface="moderate" border-radius="300" shadow="medium">medium</dt-box>
-  <dt-box padding="200" surface="moderate" border-radius="300" shadow="large">large</dt-box>
-  <dt-box padding="200" surface="moderate" border-radius="300" shadow="card">card</dt-box>
+  <dt-box padding="200" surface="moderate" border-radius="300" shadow="raised">raised</dt-box>
+  <dt-box padding="200" surface="moderate" border-radius="300" shadow="overlay">overlay</dt-box>
+  <dt-box padding="200" surface="moderate" border-radius="300" shadow="modal">modal</dt-box>
 </dt-stack>
 ```
 
