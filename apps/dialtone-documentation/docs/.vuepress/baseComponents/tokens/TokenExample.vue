@@ -68,7 +68,7 @@ const TYPOGRAPHY_KEY_MAP = {
   'text-case': 'text-transform',
 };
 
-const SHADOW_COMPOSITION_TOKENS = ['small', 'medium', 'large', 'extra-large', 'card', 'focus', 'focus-inset'];
+const SHADOW_COMPOSITION_TOKENS = ['raised', 'overlay', 'modal', 'small', 'medium', 'large', 'extra-large', 'card', 'focus', 'focus-inset'];
 
 const isTypography = (name, key) => name.includes('--dt-typography') && name.includes(key);
 const isText = (name, key) => name.includes('--dt-text') && name.includes(key);
