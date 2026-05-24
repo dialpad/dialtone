@@ -1,6 +1,6 @@
 <!-- eslint-disable vuejs-accessibility/no-autofocus -->
 <template>
-  <div class="d-d-grid d-g-200 d-g-cols6 d-mbs-400 d-mbe-200 d-p-200 d-bgc-secondary d-bar-400">
+  <div class="d-d-grid d-g-200 d-g-cols6 d-mbs-400 d-mbe-200 d-p-200 d-bgc-sunken d-bar-400">
     <div class="d-gc4">
       <dt-input
         id="search-input"

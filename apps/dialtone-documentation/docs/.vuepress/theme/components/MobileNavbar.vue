@@ -44,7 +44,7 @@
         d-ps-fixed
         d-l-0
         d-w100p
-        d-bgc-secondary
+        d-bgc-sunken
         d-of-auto
         d-fs-300
         d-py-300

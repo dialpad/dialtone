@@ -48,7 +48,7 @@
       <svg-loader class="hero__image d-w50p" name="home-billboard" />
     </dt-stack>
   </section>
-  <section class="links d-bt d-bb d-bc-subtle d-bgc-secondary">
+  <section class="links d-bt d-bb d-bc-subtle d-bgc-sunken">
     <div class="d-d-grid d-g-200 d-g-cols12 d-wmx1340 d-mx-auto">
       <dt-stack gap="100" class="link d-body--md d-gc3 d-px-400 d-ta-center">
         <router-link class="d-fc-primary h:d-td-underline d-td-none d-bar-400 d-pbs-50" to="/design/">

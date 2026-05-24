@@ -16,8 +16,7 @@ const SUGGESTIONS = {
  * v-dt-mode directive — applies a color mode (light, dark, or invert) to an element.
  *
  * Sets `data-dt-mode`, `data-dt-contrast`, and `data-dt-material` attributes so
- * descendant token-based styles (`d-fc-primary`, `d-bgc-secondary`, etc.) resolve
- * to the correct palette under the active contrast and material.
+ * descendant token-based styles resolve to the correct palette under the active contrast and material.
  *
  * @example
  * // Explicit modes

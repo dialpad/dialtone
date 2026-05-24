@@ -8,7 +8,7 @@
         d-px-200
         d-ps-fixed
         d-w100p
-        d-bgc-secondary
+        d-bgc-sunken
         d-h-100
         d-x-0
         d-bb
