@@ -251,11 +251,11 @@ Explicitly set to dark mode regardless of parent or root mode.
 Mode boundaries can be nested. Each `v-dt-mode:invert` reads the nearest parent boundary and flips. In this example the first level is explicitly set to light mode, the second level inverts against that, and the third level inverts again.
 
 ```vue demo
-<dt-stack gap="200" v-dt-mode:light class="d-p-200 d-bar-400 d-bgc-secondary d-ba">
+<dt-stack gap="200" v-dt-mode:light class="d-p-200 d-bar-400 d-bgc-default d-ba">
   <dt-text as="p" tone="positive" text-box-trim="both">Explicit Light</dt-text>
-  <dt-stack v-dt-mode gap="200" class="d-p-200 d-bar-400 d-bgc-secondary">
+  <dt-stack v-dt-mode gap="200" class="d-p-200 d-bar-400 d-bgc-default">
     <dt-text as="p" tone="positive" text-box-trim="both">Inverted (Dark)</dt-text>
-    <dt-stack v-dt-mode gap="200" class="d-p-200 d-bar-300 d-bgc-secondary">
+    <dt-stack v-dt-mode gap="200" class="d-p-200 d-bar-300 d-bgc-default">
       <dt-text as="p" tone="positive" text-box-trim="both">Inverted again (Light)</dt-text>
     </dt-stack>
   </dt-stack>
@@ -311,7 +311,7 @@ The background surface of a Mode Island defaults to the root surface color. To o
 A real-world pattern: the callbar container already exists as a semantic element. The directive applies mode theming directly — no wrapper needed.
 
 ```vue demo
-<dt-stack v-dt-mode class="d-ba d-bc-subtle d-bgc-secondary d-p-75 d-py-50 d-bar-450 d-bs-md d-w100p" direction="row" gap="400">
+<dt-stack v-dt-mode class="d-ba d-bc-subtle d-bgc-default d-p-75 d-py-50 d-bar-450 d-bs-overlay d-w100p" direction="row" gap="400">
   <dt-stack gap="100" direction="row">
     <dt-avatar
       full-name="TA"

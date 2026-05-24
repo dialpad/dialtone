@@ -10,7 +10,7 @@ Use `d-ls-reset` to reset the margin, padding, and list-style-type of a list. Re
 
 ```vue demo
 <!-- @custom -->
-<!-- @class d-d-flex d-jc-center d-fd-column d-p-300 d-bgc-secondary d-w100p d-hmn102 -->
+<!-- @class d-d-flex d-jc-center d-fd-column d-p-300 d-bgc-sunken d-w100p d-hmn102 -->
 <ul class="d-ls-reset">
   <li>An unordered list item</li>
   <li>
@@ -37,7 +37,7 @@ Use `d-lst-{none|disc|circle|decimal|content|none}` to change a list item's bull
 
 ```vue demo
 <!-- @custom -->
-<!-- @class d-d-flex d-jc-center d-fd-column d-p-300 d-bgc-secondary d-w100p d-hmn102 -->
+<!-- @class d-d-flex d-jc-center d-fd-column d-p-300 d-bgc-sunken d-w100p d-hmn102 -->
 <dt-stack gap="100">
   <p>Paragraph of text.</p>
   <ul class="d-pis-200">
@@ -73,7 +73,7 @@ Use the `start` attribute for an `<ol>` to set its starting number.
 
 ```vue demo
 <!-- @custom -->
-<!-- @class d-d-flex d-jc-center d-fd-column d-p-300 d-bgc-secondary d-w100p d-hmn102 -->
+<!-- @class d-d-flex d-jc-center d-fd-column d-p-300 d-bgc-sunken d-w100p d-hmn102 -->
 <dt-stack gap="100">
   <p>Paragraph of text.</p>
   <ol class="d-pis-300">

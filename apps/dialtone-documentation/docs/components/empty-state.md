@@ -13,8 +13,8 @@ keywords: ["no results", "blank slate", "zero state", "d-empty-state", "DtEmptyS
 
 ## Anatomy
 
-<div class="d-d-grid d-g-cols3 d-ba d-bc-subtle d-mbe-200 d-bar-400 d-bgc-secondary">
-  <div class="d-gc2 d-bar-400 d-bgc-primary"><img class="d-bar-400 d-d-block d-w100p" alt="empty state bullets" src="/assets/images/components/empty-state01.png"></div>
+<div class="d-d-grid d-g-cols3 d-ba d-bc-subtle d-mbe-200 d-bar-400 d-bgc-sunken">
+  <div class="d-gc2 d-bar-400"><img class="d-bar-400 d-d-block d-w100p" alt="empty state bullets" src="/assets/images/components/empty-state01.png"></div>
   <div class="d-gc1 d-bl d-bc-subtle d-p-400">
     <ol class="d-pis-200">
       <li class="d-lst-decimal">Illustration or Icon <span class="d-fc-tertiary">(optional)</span></li>
@@ -68,59 +68,59 @@ keywords: ["no results", "blank slate", "zero state", "d-empty-state", "DtEmptyS
 
 The four most likely scenarios for an empty state are **Zero State**, **No Results**, **New Feature**, and **Not Enabled**. This is not an exhaustive list, but a good starting point for most use cases.
 
-<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar-400 d-bgc-secondary d-mbe-400">
+<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar-400 d-bgc-sunken d-mbe-400">
 
-  <div class="d-p-200 d-plc-center">
+  <div class="d-p-400 d-plc-center">
 
 #### Zero State
 
 The Empty State should guide the user on how to achieve a non-empty state. You might provide a useful tip, such as a shortcut or explanation of what needs to occur if no direct action can be taken.
 
   </div>
-  <div class="d-gc2 d-p-200">
-    <img class="d-ba d-bc-subtle d-bar-300 d-w100p d-bs-sm" alt="Example: Zero state" src="/assets/images/components/empty-state02.png">
+  <div class="d-gc2 d-p-400">
+    <img class="d-ba d-bc-subtle d-bar-300 d-w100p" alt="Example: Zero state" src="/assets/images/components/empty-state02.png">
   </div>
 </div>
 
-<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar-400 d-bgc-secondary d-mbe-400">
+<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar-400 d-bgc-sunken d-mbe-400">
 
-  <div class="d-p-200 d-plc-center">
+  <div class="d-p-400 d-plc-center">
 
 #### No Results
 
 When an action results in no data or information to display, recommend alternate steps to take. For example, suggest an alternative filter if a table search yields no results, or guide the user on creating a new entry with the desired properties.
 
   </div>
-  <div class="d-gc2 d-p-200">
-    <img class="d-ba d-bc-subtle d-bar-400 d-w100p d-bs-sm" alt="Example: No results" src="/assets/images/components/empty-state03.png">
+  <div class="d-gc2 d-p-400">
+    <img class="d-ba d-bc-subtle d-bar-400 d-w100p" alt="Example: No results" src="/assets/images/components/empty-state03.png">
   </div>
 </div>
 
-<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar-400 d-bgc-secondary d-mbe-400">
+<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar-400 d-bgc-sunken d-mbe-400">
 
-  <div class="d-p-200 d-plc-center">
+  <div class="d-p-400 d-plc-center">
 
 #### New Feature
 
 An opportunity to introduce something new or not yet take advantage of. If it includes a plan change, clearly inform the user. Use this space to entice the user to explore and utilize the new feature.
 
   </div>
-  <div class="d-gc2 d-p-200">
-    <img class="d-ba d-bc-subtle d-bar-400 d-w100p d-bs-sm" alt="Example: New feature" src="/assets/images/components/empty-state04.png">
+  <div class="d-gc2 d-p-400">
+    <img class="d-ba d-bc-subtle d-bar-400 d-w100p" alt="Example: New feature" src="/assets/images/components/empty-state04.png">
   </div>
 </div>
 
-<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar-400 d-bgc-secondary d-mbe-400">
+<div class="d-d-grid d-g-cols1 lg:d-g-cols3 d-bar-400 d-bgc-sunken d-mbe-400">
 
-  <div class="d-p-200 d-plc-center">
+  <div class="d-p-400 d-plc-center">
 
 #### Not Enabled
 
 Appropriate for indicating that something is currently unavailable to them. Provide guidance on how they can gain access or why the feature is not enabled.
 
   </div>
-  <div class="d-gc2 d-p-200">
-    <img class="d-ba d-bc-subtle d-bar-400 d-w100p d-bs-sm" alt="Example: Not enabled" src="/assets/images/components/empty-state05.png">
+  <div class="d-gc2 d-p-400">
+    <img class="d-ba d-bc-subtle d-bar-400 d-w100p" alt="Example: Not enabled" src="/assets/images/components/empty-state05.png">
   </div>
 </div>
 

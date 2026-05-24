@@ -14,7 +14,7 @@ Use `d-bgc-{color}` to set an element's background color.
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }">
-  <div class="d-p-200 d-bar-300 d-bgc-primary">Primary</div>
+  <div class="d-p-200 d-bar-300 d-bgc-default">Primary</div>
   <div class="d-p-200 d-bar-300 d-bgc-critical">Critical</div>
 </dt-stack>
 ```
@@ -24,7 +24,7 @@ Use `d-bgc-{color}` to set an element's background color.
 Use `h:d-bgc-{color}` to change an element's `:hover` state background color.
 
 ```vue demo
-<dt-button kind="unstyled" class="d-p-200 d-bgc-primary h:d-bgc-critical">
+<dt-button kind="unstyled" class="d-p-200 d-bgc-default h:d-bgc-critical">
   Hover over me
 </dt-button>
 ```
@@ -34,7 +34,7 @@ Use `h:d-bgc-{color}` to change an element's `:hover` state background color.
 Use `f:d-bgc-{color}` to change an element's `:focus` and `:focus-within` state background color.
 
 ```vue demo
-<dt-button kind="unstyled" class="d-p-200 d-bgc-primary f:d-bgc-critical">
+<dt-button kind="unstyled" class="d-p-200 d-bgc-default f:d-bgc-critical">
   Focus me
 </dt-button>
 ```
@@ -44,7 +44,7 @@ Use `f:d-bgc-{color}` to change an element's `:focus` and `:focus-within` state 
 Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background color [only when focused by keyboard].
 
 ```vue demo
-<dt-button kind="unstyled" class="d-p-200 d-bgc-primary fv:d-bgc-critical">
+<dt-button kind="unstyled" class="d-p-200 d-bgc-default fv:d-bgc-critical">
   Keyboard focus me
 </dt-button>
 ```
@@ -76,7 +76,7 @@ Use `d-bgo{stop}` to change an element's background color opacity. You can also 
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }">
-  <div v-dt-mode:invert class="d-p-200 d-bar-300 d-bgc-primary">Primary</div>
+  <div v-dt-mode:invert class="d-p-200 d-bar-300 d-bgc-default">Primary</div>
   <div v-dt-mode:invert class="d-p-200 d-bar-300 d-bgc-critical">Critical</div>
 </dt-stack>
 ```

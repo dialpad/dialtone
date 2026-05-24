@@ -63,9 +63,9 @@ describe('transformFencedDemo', () => {
   });
 
   it('handles @bg directive', () => {
-    const input = '<!-- @bg d-bgc-primary -->\n<dt-button>Click me</dt-button>\n';
+    const input = '<!-- @bg d-bgc-default -->\n<dt-button>Click me</dt-button>\n';
     const result = transformFencedDemo(input);
-    assert.ok(result.includes('bgclass="d-bgc-primary"'));
+    assert.ok(result.includes('bgclass="d-bgc-default"'));
     assert.ok(!result.includes('<!-- @bg'));
   });
 
@@ -78,13 +78,13 @@ describe('transformFencedDemo', () => {
 
   it('combines @bg and @class directives', () => {
     const input = [
-      '<!-- @bg d-bgc-primary -->',
+      '<!-- @bg d-bgc-default -->',
       '<!-- @class d-d-block -->',
       '<dt-button>Click me</dt-button>',
       '',
     ].join('\n');
     const result = transformFencedDemo(input);
-    assert.ok(result.includes('bgclass="d-bgc-primary"'));
+    assert.ok(result.includes('bgclass="d-bgc-default"'));
     assert.ok(result.includes('class="d-d-block"'));
   });
 
@@ -246,8 +246,8 @@ describe('transformFencedDemo', () => {
   it('handles @custom directive', () => {
     const input = [
       '<!-- @custom -->',
-      '<!-- @class d-fl-center d-p-300 d-bgc-secondary d-w100p -->',
-      '<dt-button kind="unstyled" class="d-p-200 d-bar8 h:d-bs-md">Hover</dt-button>',
+      '<!-- @class d-fl-center d-p-300 d-bgc-sunken d-w100p -->',
+      '<dt-button kind="unstyled" class="d-p-200 d-bar8 h:d-bs-raised">Hover</dt-button>',
       '',
     ].join('\n');
     const result = transformFencedDemo(input);
@@ -262,7 +262,7 @@ describe('transformFencedDemo', () => {
       '<!-- @class d-fl-center d-p-300 -->',
       '<div v-for="c in colors" :class="`d-bgc-${c}`">{{ c }}</div>',
       '<!-- @code -->',
-      '<div class="d-bgc-primary">...</div>',
+      '<div class="d-bgc-default">...</div>',
       '',
     ].join('\n');
     const result = transformFencedDemo(input);

@@ -38,25 +38,25 @@ pageClass: dialpad-design-home
     <dt-stack gap="700" align="center">
       <dt-stack class="home-section-inline" :direction="{ 'default': 'column', 'md': 'row' }" gap="600" justify="center">
         <dt-link to="./foundations/brand/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
-          <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" name="home-foundations-01" />
+          <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-raised" name="home-foundations-01" />
           <dt-box padding-inline="150">
             <dt-text as="p" kind="body" size="300">Brand</dt-text>
           </dt-box>
         </dt-link>
         <dt-link to="./foundations/colors/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
-          <img src="/assets/images/home-foundations-02.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" />
+          <img src="/assets/images/home-foundations-02.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-raised" />
           <dt-box padding-inline="150">
             <dt-text as="p" kind="body" size="300">Colors</dt-text>
           </dt-box>
         </dt-link>
         <dt-link to="./foundations/typography/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
-          <img src="/assets/images/home-foundations-03.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" />
+          <img src="/assets/images/home-foundations-03.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-raised" />
           <dt-box padding-inline="150">
             <dt-text as="p" kind="body" size="300">Typography</dt-text>
           </dt-box>
         </dt-link>
         <dt-link to="./foundations/motion/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
-          <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" name="home-foundations-04" />
+          <svg-loader class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-raised" name="home-foundations-04" />
           <dt-box padding-inline="150">
             <dt-text as="p" kind="body" size="300">Motion</dt-text>
           </dt-box>
@@ -80,25 +80,25 @@ pageClass: dialpad-design-home
     <dt-stack gap="700" align="center">
       <dt-stack class="home-section-inline" :direction="{ 'default': 'column', 'md': 'row' }" gap="600" justify="center">
         <dt-link to="./components/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
-          <img src="/assets/images/home-system--01.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" />
+          <img src="/assets/images/home-system--01.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-raised" />
           <dt-box padding-inline="150">
             <dt-text as="p" kind="body" size="300">Components</dt-text>
           </dt-box>
         </dt-link>
         <dt-link to="./utilities/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
-          <img src="/assets/images/home-system--02.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" />
+          <img src="/assets/images/home-system--02.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-raised" />
           <dt-box padding-inline="150">
             <dt-text as="p" kind="body" size="300">CSS Utilities</dt-text>
           </dt-box>
         </dt-link>
         <dt-link to="./tokens/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
-          <img src="/assets/images/home-system--03.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" />
+          <img src="/assets/images/home-system--03.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-raised" />
           <dt-box padding-inline="150">
             <dt-text as="p" kind="body" size="300">Design Tokens</dt-text>
           </dt-box>
         </dt-link>
         <dt-link to="./ui-kits/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
-          <img src="/assets/images/home-system--04.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-card" />
+          <img src="/assets/images/home-system--04.png" alt="" class="d-bar-500 d-w100p d-ba d-bc-subtle h:d-bc-default h:d-bs-raised" />
           <dt-box padding-inline="150">
             <dt-text as="p" kind="body" size="300">UI Kits</dt-text>
           </dt-box>
@@ -136,7 +136,7 @@ pageClass: dialpad-design-home
             v-for="post in $page.blogPosts.sort(sortHandler).slice(0, 3)"
             :key="post.posted"
             :to="`/dialtone/whats-new/posts/${post.posted}`"
-            class="d-d-block d-bar-500 d-td-none d-p-300 h:d-box-secondary-opaque d-ba d-bc-transparent h:d-bc-subtle h:d-bs-card"
+            class="d-d-block d-bar-500 d-td-none d-p-300 h:d-box-secondary-opaque d-ba d-bc-transparent h:d-bc-subtle h:d-bs-raised"
           >
             <dt-stack gap="100">
               <dt-link class="d-d-inline">

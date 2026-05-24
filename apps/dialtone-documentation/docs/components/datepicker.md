@@ -96,7 +96,7 @@ const maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() 
 
 The following functions are available for date formatting.
 
-<div class="d-bgc-secondary d-bar-400 d-p-200">
+<div class="d-bgc-sunken d-bar-400 d-p-200">
   <dt-stack
     :direction="{ 'default': 'column', 'md': 'row' }"
     gap="600"

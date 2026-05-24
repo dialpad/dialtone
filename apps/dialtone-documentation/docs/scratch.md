@@ -298,7 +298,7 @@ layout: Blank
     </dt-text>
 
 ```vue demo
-<dt-box padding="200" surface="moderate" class="d-bar-400 d-bs-sm">
+<dt-box padding="200" surface="moderate" class="d-bar-400 d-bs-raised">
   Box demo
 </dt-box>
 ```

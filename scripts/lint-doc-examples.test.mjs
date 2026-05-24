@@ -291,7 +291,7 @@ showHtmlWarning />
     it('does not flag utility classes that start like a component name', () => {
       const content = `
 <code-well-header>
-  <div class="d-w100p d-p16 d-bgc-secondary">
+  <div class="d-w100p d-p16 d-bgc-sunken">
     <dt-button>Click</dt-button>
   </div>
 </code-well-header>

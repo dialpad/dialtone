@@ -11,10 +11,10 @@ Use `d-ba` to add a border to all sides of your element.
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }">
-  <div class="d-p-200 d-ba d-bgc-primary d-baw0">d-baw0</div>
-  <div class="d-p-200 d-ba d-bgc-primary d-baw1">d-baw1</div>
-  <div class="d-p-200 d-ba d-bgc-primary d-baw2">d-baw2</div>
-  <div class="d-p-200 d-ba d-bgc-primary d-baw4">d-baw4</div>
+  <div class="d-p-200 d-ba d-bgc-default d-baw0">d-baw0</div>
+  <div class="d-p-200 d-ba d-bgc-default d-baw1">d-baw1</div>
+  <div class="d-p-200 d-ba d-bgc-default d-baw2">d-baw2</div>
+  <div class="d-p-200 d-ba d-bgc-default d-baw4">d-baw4</div>
 </dt-stack>
 ```
 
@@ -25,13 +25,13 @@ Use `d-b{t|r|b|l|x|y}` to add a border to only specific sides of your element.
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }">
-  <div class="d-p-200 d-baw4 d-bgc-primary d-bt">d-bt</div>
-  <div class="d-p-200 d-baw4 d-bgc-primary d-br">d-br</div>
-  <div class="d-p-200 d-baw4 d-bgc-primary d-bb">d-bb</div>
-  <div class="d-p-200 d-baw4 d-bgc-primary d-bl">d-bl</div>
-  <div class="d-p-200 d-baw4 d-bgc-primary d-bx">d-bx</div>
-  <div class="d-p-200 d-baw4 d-bgc-primary d-by">d-by</div>
-  <div class="d-p-200 d-baw4 d-bgc-primary d-ba">d-ba</div>
+  <div class="d-p-200 d-baw4 d-bgc-default d-bt">d-bt</div>
+  <div class="d-p-200 d-baw4 d-bgc-default d-br">d-br</div>
+  <div class="d-p-200 d-baw4 d-bgc-default d-bb">d-bb</div>
+  <div class="d-p-200 d-baw4 d-bgc-default d-bl">d-bl</div>
+  <div class="d-p-200 d-baw4 d-bgc-default d-bx">d-bx</div>
+  <div class="d-p-200 d-baw4 d-bgc-default d-by">d-by</div>
+  <div class="d-p-200 d-baw4 d-bgc-default d-ba">d-ba</div>
 </dt-stack>
 ```
 

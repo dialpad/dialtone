@@ -398,7 +398,7 @@
       v-dt-focusgroup="'vertical'"
       role="list"
       aria-label="Contacts"
-      class="d-p-200 d-bgc-secondary d-w-400"
+      class="d-p-200 d-bgc-sunken d-w-400"
     >
       <dt-recipe-contact-row
         role="listitem"

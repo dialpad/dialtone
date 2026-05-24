@@ -62,7 +62,7 @@ html body {
   --docsearch-modal-width: var(--dt-layout-800);
   --docsearch-modal-height: auto;
   --docsearch-modal-background: var(--dt-color-surface-raised);
-  --docsearch-modal-shadow: var(--dt-shadow-large);
+  --docsearch-modal-shadow: var(--dt-shadow-modal);
   /* stylelint-disable-next-line meowtec/no-px */
   --docsearch-searchbox-height: 40px;
   /* stylelint-disable-next-line meowtec/no-px */
@@ -103,7 +103,7 @@ html body {
     background-clip: padding-box;
     border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
     border-radius: var(--dt-size-radius-500);
-    box-shadow: var(--dt-shadow-large);
+    box-shadow: var(--dt-shadow-modal);
   }
 
   // Override 'overflow: hidden' when algolia modal is showing because we are using
@@ -313,7 +313,7 @@ html body {
     --position-top: var(--dt-spacing-200);
 
     position: fixed;
-    z-index: 1;
+    z-index: var(--zi-navigation);
     max-inline-size: calc(var(--dt-layout-1100) * 2);
     border-radius: var(--dt-size-radius-450);
     /* stylelint-disable-next-line meowtec/no-px */
@@ -907,7 +907,7 @@ code {
     &:is(a):hover {
       text-decoration: none;
       border-color: var(--dt-color-border-default);
-      box-shadow: var(--dt-shadow-small);
+      box-shadow: var(--dt-shadow-raised);
     }
 
     &:is(a):active {

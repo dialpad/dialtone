@@ -3,19 +3,23 @@
     :to="`/dialtone/whats-new/posts/${format(posted, 'y-M-d')}`"
     class="d-fc-unset d-d-block d-bar-400 d-td-none"
   >
-    <dt-card
-      class="d-my-100 d-bgc-primary d-bs-none h:d-bs-sm d-bar-500 d-bbw1 d-bc-transparent h:d-bc-subtle d-p-100 d-py-50"
+    <dt-box
+      padding="200"
+      padding-inline="300"
+      surface="defaeult"
+      border-radius="450"
+      border-width="100"
+      border-color="transparent"
+      class="h:d-bs-raised h:d-bc-subtle"
     >
-      <template #content>
-        <blog-post
-          :author="author"
-          :heading="heading"
-          :posted="posted"
-          :is-preview="true"
-          :excerpt="excerpt"
-        />
-      </template>
-    </dt-card>
+      <blog-post
+        :author="author"
+        :heading="heading"
+        :posted="posted"
+        :is-preview="true"
+        :excerpt="excerpt"
+      />
+    </dt-box>
   </dt-link>
 </template>
 

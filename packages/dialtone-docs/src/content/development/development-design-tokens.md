@@ -202,9 +202,10 @@ Output CSS variable names follow the token JSON path hierarchy, converted to keb
 | JSON path | CSS variable |
 |-----------|-------------|
 | `color.foreground.primary` | `--dt-color-foreground-primary` |
-| `space.400` | `--dt-space-400` |
+| `spacing.400` | `--dt-spacing-400` |
+| `layout.200` | `--dt-layout-200` |
 | `size.radius.md` | `--dt-size-radius-md` |
-| `shadow.card.3.color` | `--dt-shadow-card-3-color` |
+| `shadow.raised.3.color` | `--dt-shadow-raised-3-color` |
 | `typography.body.md` | `--dt-typography-body-md` |
 
 LESS output uses `@` prefix instead: `@dt-color-foreground-primary`
@@ -218,6 +219,7 @@ pnpm nx run dialtone-tokens:build
 ```
 
 The build runs sequentially:
+
 1. **`build-sd-transforms.js`** — Style Dictionary resolves references and applies custom transforms. Outputs 36 CSS files and 36 LESS files (one per theme × mode) into `dist/css/` and `dist/less/`
 2. **PostCSS** — Composes shorthand typography and box-shadow tokens from their component parts
 3. **`writeDocs()`** — Regenerates token documentation metadata

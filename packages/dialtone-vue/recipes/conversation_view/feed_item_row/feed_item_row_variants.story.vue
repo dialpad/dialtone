@@ -71,7 +71,7 @@
             <!-- TODO replace this with DT menu -->
             <dt-stack
               direction="row"
-              class="d-bgc-primary d-bar-pill d-bc-default d-ba"
+              class="d-bgc-default d-bar-pill d-bc-default d-ba"
               role="group"
             >
               <dt-button

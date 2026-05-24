@@ -63,6 +63,7 @@ These files use Tokens Studio's format with `$` prefixed fields and Figma-specif
 ```
 
 Two sync scripts in `sync-scripts/` handle the Figma ↔ repo exchange:
+
 - `sync_figma_to_tokens.ts` — pulls updated tokens from Figma into the repo
 - `sync_tokens_to_figma.ts` — pushes repo changes back to Figma
 
@@ -117,12 +118,14 @@ The resolution cascade is: `root` → `base/default` → `base/dark` → `theme/
 The token system has two tiers:
 
 **Raw palette** — literal values, not intended for direct use in components:
+
 ```
 color.black.900 = #1C1C1C
 color.red.450 = #E8543A
 ```
 
 **Semantic tokens** — reference raw tokens, describe intent:
+
 ```
 color.foreground.primary → {color.black.900}
 color.foreground.critical → {color.red.450}
@@ -268,11 +271,12 @@ All token output names follow the same hierarchy: `dt-{category}-{semantic-name}
 
 ```
 --dt-color-foreground-primary     # color → foreground (intent) → primary
---dt-color-surface-primary        # color → surface (container) → primary
+--dt-color-surface-default        # color → surface (container) → primary
 --dt-font-size-200                # font-size scale
---dt-space-400                    # spacing scale
---dt-size-radius-md               # border radius
---dt-shadow-card-3-color          # shadow system
+--dt-spacing-400                  # spacing scale
+--dt-layout-400                   # layout scale
+--dt-size-radius-200              # border radius
+--dt-shadow-raised.color          # shadow system
 ```
 
 Categories: `color`, `font-size`, `font-family`, `font-weight`, `space`, `size`, `shadow`, `typography` (composites).

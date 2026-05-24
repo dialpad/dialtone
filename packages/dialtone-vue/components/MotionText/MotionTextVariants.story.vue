@@ -36,7 +36,7 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-p-200 d-bar-400 d-ba d-bc-subtle d-bgc-secondary d-hmn-150"
+            class="d-p-200 d-bar-400 d-ba d-bc-subtle d-bgc-sunken d-hmn-150"
           >
             <dt-motion-text
               :ref="el => { if (el) speedRefs[speed.value] = el }"
@@ -84,7 +84,7 @@
           <dt-stack
             direction="row"
             align="center"
-            class="d-p-200 d-bar-400 d-ba d-bc-subtle d-bgc-secondary d-hmn-150"
+            class="d-p-200 d-bar-400 d-ba d-bc-subtle d-bgc-sunken d-hmn-150"
           >
             <dt-motion-text
               :ref="el => { if (el) sizeRefs[size.class] = el }"
@@ -107,7 +107,7 @@
       <dt-stack
         direction="row"
         align="center"
-        class="d-p-300 d-bar-400 d-ba d-bc-subtle d-bgc-secondary d-hmn-200"
+        class="d-p-300 d-bar-400 d-ba d-bc-subtle d-bgc-sunken d-hmn-200"
       >
         <dt-motion-text
           text="This text loops continuously"
@@ -172,7 +172,7 @@
         <dt-stack
           direction="row"
           align="center"
-          class="d-p-300 d-bar-400 d-ba d-bc-subtle d-bgc-secondary d-hmn-200"
+          class="d-p-300 d-bar-400 d-ba d-bc-subtle d-bgc-sunken d-hmn-200"
         >
           <dt-motion-text
             ref="manualRef"

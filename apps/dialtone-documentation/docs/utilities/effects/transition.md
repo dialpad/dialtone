@@ -9,7 +9,7 @@ keywords: ["animation", "animate", "ease", "duration", "motion"]
 Use `d-t` to add a transition to an element. It defaults to a duration of `.d-td50`, easing of `.d-ttf-in-out`, for all style properties. Override any of these with `d-td*` (e.g. `d-td200`) for a different duration, `d-ttf-*` (e.g. `d-ttf-in`) for a different easing, or `d-tp-*` (e.g. `d-tp-bgc`) for a different property.
 
 ```vue demo
-<dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t">Hover me</dt-button>
+<dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-raised h:d-fc-critical d-t">Hover me</dt-button>
 ```
 
 ## Changing Transition Duration
@@ -19,12 +19,12 @@ Use `d-td{n}` change an element's `transition-delay` from it's default `50ms` le
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="200">
-  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td0  ">0ms</dt-button>
-  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t        ">50ms</dt-button>
-  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td100">100ms</dt-button>
-  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td150">150ms</dt-button>
-  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td200">200ms</dt-button>
-  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td300">300ms</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-raised h:d-fc-critical d-t d-td0  ">0ms</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-raised h:d-fc-critical d-t        ">50ms</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-raised h:d-fc-critical d-t d-td100">100ms</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-raised h:d-fc-critical d-t d-td150">150ms</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-raised h:d-fc-critical d-t d-td200">200ms</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-raised h:d-fc-critical d-t d-td300">300ms</dt-button>
 </dt-stack>
 ```
 
@@ -35,11 +35,11 @@ Use `d-ttf-{n}` change an element's `transition-timing-function` (aka easing) fr
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="200">
-  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td300 d-ttf          ">Ease</dt-button>
-  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td300 d-ttf-in       ">Ease In</dt-button>
-  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td300                ">Ease In, Ease Out</dt-button>
-  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td300 d-ttf-out      ">Ease Out</dt-button>
-  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td300 d-ttf-out-quint">Ease Out Quint</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-raised h:d-fc-critical d-t d-td300 d-ttf          ">Ease</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-raised h:d-fc-critical d-t d-td300 d-ttf-in       ">Ease In</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-raised h:d-fc-critical d-t d-td300                ">Ease In, Ease Out</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-raised h:d-fc-critical d-t d-td300 d-ttf-out      ">Ease Out</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-raised h:d-fc-critical d-t d-td300 d-ttf-out-quint">Ease Out Quint</dt-button>
 </dt-stack>
 ```
 
@@ -50,12 +50,12 @@ Use `d-tp-{n}` change an what items within an element are transitioned.
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="200">
-  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td300 d-ttf-out-quint ">All</dt-button>
-  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td300 d-ttf-out-quint h:d-o50 d-tp-o">Opacity</dt-button>
-  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td300 d-ttf-out-quint d-tp-bs">Box shadow</dt-button>
-  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td300 d-ttf-out-quint d-tp-bgc">Background</dt-button>
-  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td300 d-ttf-out-quint d-tp-transform">Transform</dt-button>
-  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-md h:d-fc-critical d-t d-td300 d-ttf-out-quint d-tp-colors">Colors</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-raised h:d-fc-critical d-t d-td300 d-ttf-out-quint ">All</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-raised h:d-fc-critical d-t d-td300 d-ttf-out-quint h:d-o50 d-tp-o">Opacity</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-raised h:d-fc-critical d-t d-td300 d-ttf-out-quint d-tp-bs">Box shadow</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-raised h:d-fc-critical d-t d-td300 d-ttf-out-quint d-tp-bgc">Background</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-raised h:d-fc-critical d-t d-td300 d-ttf-out-quint d-tp-transform">Transform</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-moderate h:d-bgc-critical h:d-bs-raised h:d-fc-critical d-t d-td300 d-ttf-out-quint d-tp-colors">Colors</dt-button>
 </dt-stack>
 ```
 

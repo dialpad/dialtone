@@ -350,8 +350,8 @@ describe('Edge cases', () => {
 
 describe('Real-world patterns', () => {
   it('transforms radius in a card-like component', () => {
-    const input = '<div class="d-p-200 d-bgc-primary d-bar8 d-bs-sm">';
-    const expected = '<div class="d-p-200 d-bgc-primary d-bar-400 d-bs-sm">';
+    const input = '<div class="d-p-200 d-bgc-default d-bar8 d-bs-raised">';
+    const expected = '<div class="d-p-200 d-bgc-default d-bar-400 d-bs-raised">';
     const { transformed } = transformContent(input);
     assert.equal(transformed, expected);
   });

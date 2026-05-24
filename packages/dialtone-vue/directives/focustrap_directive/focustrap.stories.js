@@ -29,7 +29,7 @@ export const Default = inline({ DtButton, DtInput, DtLink, DtText }, `\
   v-dt-focustrap
   role="dialog"
   aria-label="Settings"
-  class="d-w-500 d-p-300 d-bar-400 d-bc-default d-ba d-bgc-primary"
+  class="d-w-500 d-p-300 d-bar-400 d-bc-default d-ba d-bgc-default"
 >
   <dt-stack gap="200">
     <dt-text as="p" kind="body" :size="200">Tab and Shift+Tab cycle within this container.</dt-text>
@@ -53,7 +53,7 @@ export const InitialFocusSelector = inline({ DtButton, DtInput, DtText }, `\
   v-dt-focustrap="{ initialFocus: '#focus-target' }"
   role="dialog"
   aria-label="Initial focus demo"
-  class="d-w-500 d-p-300 d-bar-400 d-bc-default d-ba d-bgc-primary"
+  class="d-w-500 d-p-300 d-bar-400 d-bc-default d-ba d-bgc-default"
 >
   <dt-stack gap="200">
     <dt-text as="p" kind="body" :size="200">Initial focus goes to the email input via <code>#focus-target</code> selector.</dt-text>
@@ -86,7 +86,7 @@ export const ToggleActivation = {
     v-dt-focustrap="{ active: isActive, restoreFocus: true }"
     role="dialog"
     aria-label="Toggle demo"
-    class="d-w-500 d-p-300 d-bar-400 d-bc-default d-ba d-bgc-primary"
+    class="d-w-500 d-p-300 d-bar-400 d-bc-default d-ba d-bgc-default"
   >
     <dt-stack gap="200">
       <dt-text as="p" kind="body" :size="200">
@@ -136,7 +136,7 @@ export const NoInitialFocus = inline({ DtButton, DtInput, DtText }, `\
   v-dt-focustrap="{ initialFocus: false }"
   role="dialog"
   aria-label="No initial focus demo"
-  class="d-w-500 d-p-300 d-bar-400 d-bc-default d-ba d-bgc-primary"
+  class="d-w-500 d-p-300 d-bar-400 d-bc-default d-ba d-bgc-default"
 >
   <dt-stack gap="200">
     <dt-text as="p" kind="body" :size="200">

@@ -205,7 +205,7 @@ All-corners classes and side-pair classes use the same radius stop scale:
 **Before**
 
 ```html
-<div class="d-p-200 d-bgc-primary d-bar8 d-bs-sm">
+<div class="d-p-200 d-bgc-default d-bar8 d-bs-raised">
   <div class="d-btr6 d-bgc-moderate">Header</div>
   <div class="d-bbr-pill">Footer</div>
 </div>
@@ -217,7 +217,7 @@ All-corners classes and side-pair classes use the same radius stop scale:
 **After**
 
 ```html
-<div class="d-p-200 d-bgc-primary d-bar-400 d-bs-sm">
+<div class="d-p-200 d-bgc-default d-bar-400 d-bs-raised">
   <div class="d-bbsr-350 d-bgc-moderate">Header</div>
   <div class="d-bber-pill">Footer</div>
 </div>

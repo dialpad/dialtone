@@ -89,7 +89,7 @@ Text Style CSS utilities should be considered a last resort or as a fallback for
 
 Titles and headings to establish hierarchy and set the tone of contextual groupings.
 
-<code-well-header class="d-p-200 d-bgc-secondary" custom>
+<code-well-header class="d-p-200 d-bgc-sunken" custom>
   <table class="d-w100p">
     <tbody>
       <template v-for="({ var: varName }, index) in typographyStylesHeadlines" :key="varName">
@@ -124,7 +124,7 @@ Titles and headings to establish hierarchy and set the tone of contextual groupi
 
 Default text style for longer-form prose content, designed for comfort and clarity in reading varying lengths.
 
-<code-well-header class="d-p-200 d-bgc-secondary" custom>
+<code-well-header class="d-p-200 d-bgc-sunken" custom>
   <table class="d-w100p">
     <tbody>
       <tr v-for="({ var: varName }, index) in typographyStylesBody" :key="varName">
@@ -158,7 +158,7 @@ Default text style for longer-form prose content, designed for comfort and clari
 Shorter-length copy like form fields, buttons, and other UI-labeling elements, ensuring clear navigation and
 interaction.
 
-<code-well-header class="d-p-200 d-bgc-secondary" custom>
+<code-well-header class="d-p-200 d-bgc-sunken" custom>
   <table class="d-w100p">
     <tbody>
       <tr v-for="({ var: varName }, index) in typographyStylesLabel" :key="varName">
@@ -191,7 +191,7 @@ interaction.
 
 Code snippets, technical commands, or data values rendered as a monospaced font.
 
-<code-well-header class="d-p-200 d-bgc-secondary" custom>
+<code-well-header class="d-p-200 d-bgc-sunken" custom>
   <table class=d-w100p>
     <tbody>
       <tr v-for="({ var: varName }, index) in typographyStylesCode" :key="varName">

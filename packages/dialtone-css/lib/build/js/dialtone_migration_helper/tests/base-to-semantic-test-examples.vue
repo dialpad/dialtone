@@ -94,7 +94,7 @@
   <!-- ============================================ -->
 
   <p class="d-fc-critical">already semantic</p>
-  <div class="d-bgc-primary">already semantic</div>
+  <div class="d-bgc-default">already semantic</div>
   <div class="d-bc-success">already semantic</div>
 </template>
 

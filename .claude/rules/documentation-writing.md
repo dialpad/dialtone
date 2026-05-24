@@ -86,7 +86,7 @@ Prefer the info string for `demo-only`/`code-only`. Use the directive form when 
 
 <!-- Custom background -->
 ```vue demo
-<!-- @bg d-bgc-primary -->
+<!-- @bg d-bgc-default -->
 <dt-button>Click me</dt-button>
 ```
 ````
@@ -132,7 +132,7 @@ Use `<!-- @custom -->` when the default demo wrapper styles (padding, width, bac
 ```vue demo
 <!-- @custom -->
 <!-- @class d-d-block -->
-<div v-dt-scrollbar:never class="d-bar-400 d-bgc-secondary d-hmx-500">
+<div v-dt-scrollbar:never class="d-bar-400 d-bgc-sunken d-hmx-500">
   ...
 </div>
 ```

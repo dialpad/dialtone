@@ -679,8 +679,8 @@ describe('root-class auto-migration', () => {
   });
 
   it('renames container-class to class on dt-card', () => {
-    const { transformed } = transformContent('<dt-card container-class="d-bgc-primary" />');
-    assert.equal(transformed, '<dt-card class="d-bgc-primary" />');
+    const { transformed } = transformContent('<dt-card container-class="d-bgc-default" />');
+    assert.equal(transformed, '<dt-card class="d-bgc-default" />');
   });
 
   it('renames root-class on dt-breadcrumb-item', () => {

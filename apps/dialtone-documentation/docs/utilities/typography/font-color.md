@@ -13,7 +13,7 @@ Use [DtText's](/components/text.html#tone) `tone` prop to declare the text's ton
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack class="d-py-100 d-px-200 d-bgc-primary d-bar-300">
+<dt-stack class="d-py-100 d-px-200 d-bgc-default d-bar-300">
   <dt-text tone="primary">primary</dt-text>
   <dt-text tone="secondary">secondary</dt-text>
   <dt-text tone="tertiary">tertiary</dt-text>
@@ -72,7 +72,7 @@ Use `fv:d-fc-{color}` to change an element's text color on `:focus-visible` stat
 
 ```vue demo
 <dt-stack direction="row" gap="400">
-  <dt-stack class="d-py-100 d-px-200 d-bgc-primary d-bar-300">
+  <dt-stack class="d-py-100 d-px-200 d-bgc-default d-bar-300">
     <dt-text tone="primary">primary</dt-text>
     <dt-text tone="secondary">secondary</dt-text>
     <dt-text tone="tertiary">tertiary</dt-text>
@@ -140,7 +140,7 @@ Use `d-fco{n}` to change an element's text color opacity. You can also change fo
 <new-utility-class-table :classes="fontColors">
   <template #example="{ className }">
     <dt-stack direction="row" align="center" justify="center" class="d-fl-shrink0 d-h42 d-w42 d-bar-circle d-ba d-bc-moderate" :class="[
-        {'d-bgc-primary': !className.endsWith('inverted')},
+        {'d-bgc-default': !className.endsWith('inverted')},
         {'d-bgc-contrast': className.endsWith('inverted')},
         className
       ]">

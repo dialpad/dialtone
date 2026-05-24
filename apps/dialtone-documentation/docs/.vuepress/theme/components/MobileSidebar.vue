@@ -37,7 +37,7 @@
         d-ps-fixed
         d-l-0
         d-w100p
-        d-bgc-primary
+        d-bgc-default
         d-of-auto
         d-pbs-300
         d-px-200

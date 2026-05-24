@@ -272,6 +272,6 @@ export const WithStyledInput = {
 
   args: {
     selectedItems: ['item12', 'item13', 'item14'],
-    inputWrapperClass: ['d-ba-none', 'd-bgc-primary'],
+    inputWrapperClass: ['d-ba-none', 'd-bgc-default'],
   },
 };

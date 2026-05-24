@@ -26,8 +26,8 @@
         gap="100"
         direction="row"
       >
-        <div class="d-bgc-secondary d-p-200 d-py-100 d-ba d-bc-subtle">
-          Secondary Surface
+        <div class="d-bgc-sunken d-p-200 d-py-100 d-ba d-bc-subtle">
+          Sunken Surface
         </div>
         <div class="d-bgc-moderate d-p-200 d-py-100 d-ba d-bc-subtle">
           Moderate Surface

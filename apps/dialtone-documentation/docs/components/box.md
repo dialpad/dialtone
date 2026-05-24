@@ -41,7 +41,7 @@ DtBox complements [DtText](/components/text.html) (typography) and [DtStack](/co
 
 * Don't use DtBox for flex layout — use [DtStack](/components/stack.html) for direction, gap, alignment.
 * Don't use DtBox for typography — use [DtText](/components/text.html) for font, size, tone.
-* Don't use utility classes for properties DtBox already handles (e.g., avoid `class="d-bgc-primary"` when `surface="primary"` exists).
+* Don't use utility classes for properties DtBox already handles (e.g., avoid `class="d-bgc-default"` when `surface="default"` exists).
 * Don't nest DtBox deeply when a dedicated component (DtCard, DtNotice) better fits the pattern.
 
 </template>

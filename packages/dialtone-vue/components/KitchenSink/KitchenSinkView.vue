@@ -24,7 +24,7 @@
           d-zi-base1
           d-mbs-n125
           d-mx-n125
-          d-bs-card
+          d-bs-raised
         "
         gap="100"
       >

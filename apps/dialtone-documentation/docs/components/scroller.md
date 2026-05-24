@@ -28,8 +28,7 @@ The rule of thumb: if every item in your list is the same height, use fixed. If 
 Use when all items share a known, uniform height. Set `:item-size` to that height in pixels.
 
 ```vue demo
-<!-- @wrapper -->
-<div class="d-w-400">
+<dt-box inline-size="400" surface="raised" v-dt-scrollbar:always>
   <dt-scroller
     :items="[
       { id: 1, name: 'James Cooper' }, { id: 2, name: 'Sarah Mitchell' }, { id: 3, name: 'Tyler Brooks' },
@@ -61,7 +60,7 @@ Use when all items share a known, uniform height. Set `:item-size` to that heigh
       <dt-text class="d-px-50">{{ item.name }}</dt-text>
     </template>
   </dt-scroller>
-</div>
+</dt-box>
 ```
 
 ### Variable height items
@@ -69,8 +68,7 @@ Use when all items share a known, uniform height. Set `:item-size` to that heigh
 Use when item heights depend on their content. Set `dynamic="true"` and `:min-item-size` to the smallest expected item height — the component measures actual sizes after render.
 
 ```vue demo
-<!-- @wrapper -->
-<div class="d-w-400">
+<dt-box inline-size="400" surface="raised" v-dt-scrollbar:always>
   <dt-scroller
     :items="[
       { id: 'J.C.', message: 'Lorem ipsum dolor sit amet' },
@@ -134,7 +132,7 @@ Use when item heights depend on their content. Set `dynamic="true"` and `:min-it
       </dt-stack>
     </template>
   </dt-scroller>
-</div>
+</dt-box>
 ```
 
 ### Direction
@@ -142,8 +140,7 @@ Use when item heights depend on their content. Set `dynamic="true"` and `:min-it
 Defaults to `vertical`. Set to `horizontal` for a horizontal scroller.
 
 ```vue demo
-<!-- @wrapper -->
-<div class="d-w-400">
+<dt-box inline-size="400" surface="raised" v-dt-scrollbar:always>
   <dt-scroller
     :items="[
       { id: 1, name: 'JC' }, { id: 2, name: 'SM' }, { id: 3, name: 'TB' },
@@ -172,10 +169,10 @@ Defaults to `vertical`. Set to `horizontal` for a horizontal scroller.
     class="d-ba d-bar-400 d-p-50"
     >
     <template #default="{ item }">
-      <dt-stack class="d-p-150 d-ba h:d-bgc-secondary d-bc-subtle d-bar-300 d-c-default" align="center" justify="center"><dt-text kind="code">{{ item.name }}</dt-text></dt-stack>
+      <dt-stack class="d-p-150 d-ba h:d-bgc-moderate d-bc-subtle d-bar-300 d-c-default" align="center" justify="center"><dt-text kind="code">{{ item.name }}</dt-text></dt-stack>
     </template>
   </dt-scroller>
-</div>
+</dt-box>
 ```
 
 ## Vue API
