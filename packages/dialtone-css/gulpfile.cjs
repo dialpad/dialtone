@@ -30,6 +30,7 @@ const del = require('del');
 const rename = require('gulp-rename');
 const cache = require('gulp-cached');
 const through2 = require('through2');
+const fs = require('fs');
 const path = require('path');
 
 //  @@ STYLES
@@ -77,6 +78,7 @@ const paths = {
   styles: {
     inputLib: ['./lib/build/less/dialtone.less', './lib/build/less/dialtone-default-theme.less'],
     outputLib: './lib/dist/',
+    tempOutputLib: './lib/.dist-tmp/',
   },
   tokens: {
     input: 'node_modules/@dialpad/dialtone-tokens/dist/css/*.css',
@@ -205,9 +207,34 @@ const libStylesDev = function (done) {
       if (sourcePath === '<no source>') return sourcePath;
       return '../../build/less/' + sourcePath;
     }))
-    .pipe(sourcemaps.write())
-    .pipe(dest(paths.styles.outputLib));
+    // Keep maps external so Vite never parses a half-written inline data URL.
+    .pipe(sourcemaps.write('.', { includeContent: false }))
+    .pipe(dest(paths.styles.tempOutputLib))
+    .pipe(atomicDest(paths.styles.outputLib, paths.styles.tempOutputLib));
 };
+
+// Vite reads lib/dist CSS directly while this watcher rebuilds. Write to a temp
+// directory first, then rename complete files into place so Vite never sees
+// partially written CSS with missing generated utilities.
+function atomicDest (outputPath, tempPath) {
+  return through2.obj(function (file, enc, cb) {
+    if (file.isNull()) return cb(null, file);
+
+    const destinationPath = path.resolve(outputPath, path.basename(file.path));
+    fs.mkdir(path.dirname(destinationPath), { recursive: true }, error => {
+      if (error) return cb(error);
+
+      fs.rename(file.path, destinationPath, error => {
+        if (error) return cb(error);
+
+        file.path = destinationPath;
+        cb(null, file);
+      });
+    });
+  }, function (cb) {
+    fs.rm(path.resolve(tempPath), { recursive: true, force: true }, cb);
+  });
+}
 
 const moveStyleTagsToEOF = function (file, enc, cb) {
   if (file.isBuffer()) {

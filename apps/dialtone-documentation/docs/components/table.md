@@ -15,7 +15,6 @@ keywords: ["data table", "grid", "rows", "d-table", "DtTable", "dt-table", "data
 ### Base Style
 
 ```vue demo
-<!-- @bg d-bgc-primary -->
 <!-- @class d-d-block -->
 <table class="d-table dialtone-doc-table">
   <caption class="d-table__caption">Office List</caption>
@@ -46,7 +45,6 @@ keywords: ["data table", "grid", "rows", "d-table", "DtTable", "dt-table", "data
 ### Striped
 
 ```vue demo
-<!-- @bg d-bgc-primary -->
 <!-- @class d-d-block -->
 <table class="d-table dialtone-doc-table d-table--striped">
   <caption class="d-table__caption">Office List</caption>

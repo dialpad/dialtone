@@ -8,13 +8,12 @@
 
 @layer dialtone.components {
 .d-presence {
-  --presence-color-border-base: var(--dt-color-surface-secondary);
+  --presence-color-border-base: var(--dt-color-surface-sunken);
   --presence-color-border-offline: var(--dt-presence-color-offline);
   --presence-color-background-active: var(--dt-presence-color-available);
   --presence-color-background-busy: var(--dt-presence-color-unavailable);
   --presence-color-border-dnd: var(--dt-presence-color-unavailable);
   --presence-color-background-away: var(--dt-presence-color-busy);
-  --presence-color-background-offline: var(--dt-color-surface-primary);
   --presence-border-radius: calc(var(--presence-size) * 0.208);
   --presence-border-inner-width: calc(calc(var(--presence-size) - calc(var(--presence-size) * 0.556)) / 3);
   --presence-size: var(--dt-spacing-150);
@@ -24,7 +23,7 @@
   display: inline-block;
 
   .d-recipe-leftbar-row--selected & {
-    --presence-color-border-base: var(--dt-color-surface-secondary);
+    --presence-color-border-base: var(--dt-color-surface-sunken);
   }
 
   .d-recipe-leftbar-row__primary:hover & {

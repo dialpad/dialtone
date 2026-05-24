@@ -22,7 +22,6 @@ A notice delivers informational and assistive messages that inform the user abou
 Used in most scenarios when the message should be noticeable but not dominate.
 
 ```vue demo
-<!-- @bg d-bgc-primary -->
 <dt-stack gap="100">
   <example-notice kind="base" title="Base title (optional)" />
   <example-notice kind="critical" title="Critical title (optional)" />
@@ -286,7 +285,6 @@ Used occasionally in scenarios when the message needs to dominate.
 Truncates the text instead of wrapping it. Useful when the Notice needs to have a fixed height.
 
 ```vue demo
-<!-- @bg d-bgc-primary -->
 <dt-notice
   :truncate-text="true"
   title="Lorem ipsum dolor sit amet, consectetur adipiscing elit,

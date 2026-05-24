@@ -20,7 +20,8 @@ describe('transformFencedDemo', () => {
   it('handles @code-only directive', () => {
     const input = '<!-- @code-only -->\n<dt-button>Click me</dt-button>\n';
     const result = transformFencedDemo(input);
-    assert.ok(result.startsWith('<code-example only-show="code">'));
+    assert.ok(result.includes('only-show="code"'));
+    assert.ok(result.includes('source-code='));
     assert.ok(!result.includes('@code-only'));
   });
 
@@ -129,14 +130,37 @@ describe('transformFencedDemo', () => {
   it('handles code-only via info string', () => {
     const input = '<dt-button>Click me</dt-button>\n';
     const result = transformFencedDemo(input, 'code-only');
-    assert.ok(result.startsWith('<code-example only-show="code">'));
+    assert.ok(result.includes('only-show="code"'));
+    assert.ok(result.includes('source-code='));
+  });
+
+  it('keeps code-only content out of the live slot', () => {
+    const input = [
+      '<template>',
+      '  <div>Scrollable content</div>',
+      '</template>',
+      '',
+      '<script>',
+      'export default {}',
+      '</script>',
+      '',
+    ].join('\n');
+
+    const result = transformFencedDemo(input, 'code-only');
+
+    assert.ok(result.includes('only-show="code"'));
+    assert.ok(result.includes('source-code='));
+    assert.ok(result.includes('&lt;script&gt;'));
+    assert.ok(!result.includes('\n<template>'));
+    assert.ok(!result.includes('\n<script>'));
   });
 
   it('directive overrides info string mode', () => {
     // info string says demo, but directive says code-only
     const input = '<!-- @code-only -->\n<dt-button>Click me</dt-button>\n';
     const result = transformFencedDemo(input, 'demo');
-    assert.ok(result.startsWith('<code-example only-show="code">'));
+    assert.ok(result.includes('only-show="code"'));
+    assert.ok(result.includes('source-code='));
   });
 
   it('info string demo-only combines with other directives', () => {
