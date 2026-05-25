@@ -173,19 +173,9 @@
     },
     "surface": {
       "sunken": {
-        "value": "{color.black.100}",
+        "value": "{color.black.150}",
         "type": "color",
-        "description": "For sunken or recessed surfaces.",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "mix",
-              "value": ".5",
-              "space": "oklch",
-              "color": "{color.black.150}"
-            }
-          }
-        }
+        "description": "For sunken or recessed surfaces."
       },
       "default": {
         "value": "{color.black.150}",
@@ -203,38 +193,48 @@
         }
       },
       "raised": {
-        "value": "{color.surface.default}",
+        "value": "{color.black.200}",
         "type": "color",
-        "description": "For raised surfaces like cards and panels."
+        "description": "For raised surfaces like cards and panels. Typically paired with raised shadow."
       },
       "overlay": {
         "value": "{color.black.200}",
         "type": "color",
-        "description": "For overlay surfaces like modals, popovers, and dialogs."
+        "description": "For overlay surfaces like modals, popovers, and dialogs. Typically paired with overlay shadow."
       },
       "modal": {
         "value": "{color.black.200}",
         "type": "color",
-        "description": "For blocking modal surfaces."
+        "description": "For blocking modal surfaces. Typically paired with modal shadow."
       },
       "primary": {
         "value": "{color.black.100}",
         "type": "color"
       },
       "secondary": {
-        "value": "{color.black.150}",
-        "type": "color"
+        "value": "{color.black.100}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "mix",
+              "value": ".5",
+              "space": "oklch",
+              "color": "{color.black.150}"
+            }
+          }
+        }
       },
       "moderate": {
-        "value": "{color.black.250}",
+        "value": "{color.black.200}",
         "type": "color"
       },
       "bold": {
-        "value": "{color.black.350}",
+        "value": "{color.black.300}",
         "type": "color"
       },
       "strong": {
-        "value": "{color.black.550}",
+        "value": "{color.black.450}",
         "type": "color"
       },
       "contrast": {
