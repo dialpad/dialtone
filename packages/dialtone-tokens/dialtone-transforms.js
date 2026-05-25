@@ -1,3 +1,5 @@
+/* eslint-disable max-lines */
+/* eslint-disable complexity */
 /**
  * custom transforms specific to dialtone-tokens. All of these will be
  * prefixed with dt/ for easy identification. Most of these are for mobile
@@ -87,7 +89,7 @@ export function registerDialtoneTransforms (styleDictionary) {
     transform: (token) => {
       // replace unmathable characters with empty string
       const mathString = token.value.replace(/dp|sp|em|px|%/g, '');
-       
+
       const result = eval(mathString).toFixed(2);
       return `${result}dp`;
     },
@@ -234,7 +236,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       if (token.value.includes('.sp')) unit = 'sp';
       if (token.value.includes('.em')) unit = 'em';
       const mathString = token.value.replace(/\.dp|\.sp|\.em|px|%/g, '');
-       
+
       const result = eval(mathString);
       return `${result}.${unit}`;
     },
@@ -577,6 +579,49 @@ function formatMixPercentage (amount) {
   return `${Number.parseFloat((amount * 100).toFixed(4))}%`;
 }
 
+function formatNumber (value) {
+  return Number.parseFloat(value.toFixed(4));
+}
+
+function isRuntimeColorExpression (value) {
+  const color = value?.toString().trim();
+  return color?.startsWith('color-mix(') || color?.startsWith('oklch(from ');
+}
+
+function transformRuntimeColorModifier (token) {
+  const modify = token.$extensions?.['studio.tokens']?.modify;
+  if (!modify || !isRuntimeColorExpression(token.value)) return null;
+
+  const amount = parseMixAmount(modify.value);
+  if (amount === null) return null;
+
+  const ref = getSingleReference(token.original?.value);
+  const base = ref ? 'var(' + tokenRefToCssVar(ref) + ')' : token.value;
+  const space = modify.space || 'oklch';
+
+  if (modify.type === 'alpha') {
+    return 'oklch(from ' + base + ' l c h / ' + modify.value + ')';
+  }
+  if (space === 'oklch' && modify.type === 'darken') {
+    return 'oklch(from ' + base + ' calc(l * ' + formatNumber(1 - amount) + ') c h / alpha)';
+  }
+  if (space === 'oklch' && modify.type === 'lighten') {
+    return 'oklch(from ' + base + ' calc(l * ' + formatNumber(1 + amount) + ') c h / alpha)';
+  }
+  if (modify.type === 'mix') {
+    const colorRef = getSingleReference(modify.color);
+    const mixColor = colorRef ? 'var(' + tokenRefToCssVar(colorRef) + ')' : modify.color;
+    if (!mixColor) return null;
+    return [
+      'color-mix(in ' + space + ',',
+      base + ' ' + formatMixPercentage(1 - amount) + ',',
+      mixColor + ' ' + formatMixPercentage(amount) + ')',
+    ].join(' ');
+  }
+
+  return null;
+}
+
 function tokenRefToCssVar (ref) {
   return `--dt-${ref.replace(/\./g, '-')}`;
 }
@@ -658,6 +703,8 @@ export function registerRelativeColorWrap (styleDictionary) {
           `var(${tokenRefToCssVar(colorRef)}) ${formatMixPercentage(amount)})`,
         ].join(' ');
       }
+      const runtimeColorModifier = transformRuntimeColorModifier(token);
+      if (runtimeColorModifier) return runtimeColorModifier;
       return original.transform(token);
     },
   });
