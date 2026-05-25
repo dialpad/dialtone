@@ -7,6 +7,156 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-box--default
 keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius", "sizing", "overflow", "scrollbar", "background", "spacing", "layout", "primitive", "elevation"]
 ---
 
+<dt-stack gap="100">
+  <dt-stack direction="row">
+    <dt-box class="d-fl1" padding="200" surface="default">
+      <dt-text as="p" kind="body" size="200" align="center" tone="muted">default</dt-text>
+    </dt-box>
+    <dt-box class="d-fl1" padding="200" surface="raised">
+      <dt-text as="p" kind="body" size="200" align="center" tone="muted">raised</dt-text>
+    </dt-box>
+    <dt-box class="d-fl1" padding="200" surface="overlay">
+      <dt-text as="p" kind="body" size="200" align="center" tone="muted">overlay</dt-text>
+    </dt-box>
+    <dt-box class="d-fl1" padding="200" surface="modal">
+      <dt-text as="p" kind="body" size="200" align="center" tone="muted">modal</dt-text>
+    </dt-box>
+    <dt-box class="d-fl1" padding="200" surface="primary">
+      <dt-text as="p" kind="body" size="200" align="center" tone="muted">primary</dt-text>
+    </dt-box>
+    <dt-box class="d-fl1" padding="200" surface="sunken">
+      <dt-text as="p" kind="body" size="200" align="center" tone="muted">sunken</dt-text>
+    </dt-box>
+    <dt-box class="d-fl1" padding="200" surface="secondary">
+      <dt-text as="p" kind="body" size="200" align="center" tone="muted">secondary</dt-text>
+    </dt-box>
+  </dt-stack>
+  <dt-box
+    surface="sunken"
+    border-radius="400"
+    padding="200"
+  >
+    <dt-stack gap="200">
+    <dt-stack gap="400" direction="row" justify="space-between" align="baseline">
+      <dt-text as="h2" kind="headline" size="400">Title</dt-text>
+      <dt-button size="200">
+        <template #endIcon="{ iconSize }">
+          <dt-icon name="chevron-down" :size="iconSize" />
+        </template>
+        Add Box
+      </dt-button>
+    </dt-stack>
+    <dt-stack direction="row" align="start" gap="200">
+      <dt-box class="d-fl1" padding="200" surface="default">
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 1</dt-text>
+      </dt-box>
+      <dt-box class="d-fl1" padding="200" surface="default">
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 2</dt-text>
+      </dt-box>
+      <dt-box class="d-fl1" padding="200" surface="default">
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 3</dt-text>
+      </dt-box>
+      <dt-box class="d-fl1" padding="200" surface="default">
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 4</dt-text>
+      </dt-box>
+    </dt-stack>
+  </dt-stack>
+  </dt-box>
+  <dt-box
+    surface="primary"
+    border-radius="400"
+    padding="200"
+  >
+    <dt-stack gap="200">
+    <dt-stack gap="400" direction="row" justify="space-between" align="baseline">
+      <dt-text as="h2" kind="headline" size="400">Title</dt-text>
+      <dt-button size="200">
+        <template #endIcon="{ iconSize }">
+          <dt-icon name="chevron-down" :size="iconSize" />
+        </template>
+        Add Box
+      </dt-button>
+    </dt-stack>
+    <dt-stack direction="row" align="start" gap="200">
+      <dt-box class="d-fl1" padding="200" surface="secondary">
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 1</dt-text>
+      </dt-box>
+      <dt-box class="d-fl1" padding="200" surface="secondary">
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 2</dt-text>
+      </dt-box>
+      <dt-box class="d-fl1" padding="200" surface="secondary">
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 3</dt-text>
+      </dt-box>
+      <dt-box class="d-fl1" padding="200" surface="secondary">
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 4</dt-text>
+      </dt-box>
+    </dt-stack>
+  </dt-stack>
+  </dt-box>
+  <dt-box
+    surface="secondary"
+    border-radius="400"
+    padding="200"
+  >
+    <dt-stack gap="200">
+    <dt-stack gap="400" direction="row" justify="space-between" align="baseline">
+      <dt-text as="h2" kind="headline" size="400">Title</dt-text>
+      <dt-button size="200">
+        <template #endIcon="{ iconSize }">
+          <dt-icon name="chevron-down" :size="iconSize" />
+        </template>
+        Add Box
+      </dt-button>
+    </dt-stack>
+    <dt-stack direction="row" align="start" gap="200">
+      <dt-box class="d-fl1" padding="200" surface="primary">
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 1</dt-text>
+      </dt-box>
+      <dt-box class="d-fl1" padding="200" surface="primary">
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 2</dt-text>
+      </dt-box>
+      <dt-box class="d-fl1" padding="200" surface="primary">
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 3</dt-text>
+      </dt-box>
+      <dt-box class="d-fl1" padding="200" surface="primary">
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 4</dt-text>
+      </dt-box>
+    </dt-stack>
+  </dt-stack>
+  </dt-box>
+  <dt-box
+    surface="sunken"
+    border-radius="400"
+    padding="200"
+  >
+    <dt-stack gap="200">
+    <dt-stack gap="400" direction="row" justify="space-between" align="baseline">
+      <dt-text as="h2" kind="headline" size="400">Title</dt-text>
+      <dt-button size="200">
+        <template #endIcon="{ iconSize }">
+          <dt-icon name="chevron-down" :size="iconSize" />
+        </template>
+        Add Box
+      </dt-button>
+    </dt-stack>
+    <dt-stack direction="row" align="start" gap="200">
+      <dt-box class="d-fl1" padding="200" surface="secondary">
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 1</dt-text>
+      </dt-box>
+      <dt-box class="d-fl1" padding="200" surface="secondary">
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 2</dt-text>
+      </dt-box>
+      <dt-box class="d-fl1" padding="200" surface="secondary">
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 3</dt-text>
+      </dt-box>
+      <dt-box class="d-fl1" padding="200" surface="secondary">
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 4</dt-text>
+      </dt-box>
+    </dt-stack>
+  </dt-stack>
+  </dt-box>
+</dt-stack>
+
 <component-combinator component-name="DtBox" />
 
 ## Usage
