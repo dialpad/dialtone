@@ -3,7 +3,7 @@
     "base": {
       "color": {
         "surface": {
-          "value": "oklch(0.2735 0.0379 272.91)",
+          "value": "oklch(0.23 0.03 273.19)",
           "type": "color"
         },
         "foreground": {
