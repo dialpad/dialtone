@@ -1,78 +1,95 @@
 <!-- eslint-disable vuejs-accessibility/no-autofocus -->
 <template>
-  <dt-stack gap="200" class="d-p-200 d-bgc-sunken d-bar-400">
-    <dt-input
-      id="search-input"
-      v-model="searchCriteria"
-      label="Search Tokens / Value / Keyword"
-      autofocus
-      aria-label="Search tokens"
-      type="text"
-      autocomplete="off"
-      @keyup="searchToken"
-    >
-      <template #startIcon>
-        <dt-icon name="search" size="300" />
-      </template>
-      <template #endIcon>
+  <dt-box padding="200" surface="sunken" border-radius="400">
+    <dt-stack gap="200">
+      <dt-input
+        id="search-input"
+        v-model="searchCriteria"
+        class="d-fl1"
+        autofocus
+        aria-label="Search tokens"
+        type="text"
+        autocomplete="off"
+        @keyup="searchToken"
+      >
+        <template #label>
+          <dt-stack direction="row" justify="space-between" class="d-mbe-50">
+            <span>Search Tokens / Value / Keyword</span>
+            <dt-toggle
+              class="d-g-100"
+              size="sm"
+              :model-value="hideDeprecated"
+              @update:model-value="updateHideDeprecated"
+            >
+              <dt-text kind="label" size="xs" strength="normal">
+                Hide deprecated
+              </dt-text>
+            </dt-toggle>
+          </dt-stack>
+        </template>
+        <template #startIcon>
+          <dt-icon name="search" size="300" />
+        </template>
+        <template #endIcon>
+          <dt-button
+            v-if="hasSearchTerm"
+            id="search-input-button-close"
+            v-dt-tooltip="'Clear search'"
+            kind="muted"
+            importance="clear"
+            :size="100"
+            aria-label="Clear search"
+            @click="resetSearch"
+          >
+            <template #startIcon>
+              <dt-icon name="close" size="200" />
+            </template>
+          </dt-button>
+        </template>
+      </dt-input>
+      <dt-stack direction="row" gap="200" class="d-ai-flex-end">
+        <dt-select-menu
+          name="format-select"
+          label="Format"
+          select-class="d-w-200"
+          :model-value="format"
+          :options="formatSelectMenuOptions"
+          @update:model-value="updateFormat"
+        />
+        <dt-select-menu
+          name="mode-select"
+          label="Mode"
+          select-class="d-w-200"
+          :model-value="mode"
+          :options="MODES"
+          @update:model-value="updateMode"
+        />
+        <dt-select-menu
+          name="theme-select"
+          label="Theme"
+          select-class="d-w-200"
+          :model-value="theme"
+          :options="THEMES"
+          @update:model-value="updateTheme"
+        />
         <dt-button
-          v-if="hasSearchTerm"
-          id="search-input-button-close"
-          v-dt-tooltip="'Clear search'"
-          kind="muted"
+          v-dt-tooltip:top-end="shareLinkTooltip"
           importance="clear"
-          :size="100"
-          aria-label="Clear search"
-          @click="resetSearch"
+          kind="muted"
+          class="d-mis-auto"
+          @click="copyURLToClipboard"
         >
-          <template #startIcon>
-            <dt-icon name="close" size="200" />
+          Share Search Filter
+          <template #startIcon="{ iconSize }">
+            <dt-icon
+              name="link-2"
+              :size="iconSize"
+            />
           </template>
         </dt-button>
-      </template>
-    </dt-input>
-    <dt-stack direction="row" gap="200" class="d-ai-flex-end">
-      <dt-select-menu
-        name="format-select"
-        label="Format"
-        select-class="d-w-200"
-        :model-value="format"
-        :options="formatSelectMenuOptions"
-        @update:model-value="updateFormat"
-      />
-      <dt-select-menu
-        name="mode-select"
-        label="Mode"
-        select-class="d-w-200"
-        :model-value="mode"
-        :options="MODES"
-        @update:model-value="updateMode"
-      />
-      <dt-select-menu
-        name="theme-select"
-        label="Theme"
-        select-class="d-w-200"
-        :model-value="theme"
-        :options="THEMES"
-        @update:model-value="updateTheme"
-      />
-      <dt-button
-        v-dt-tooltip:top-end="shareLinkTooltip"
-        importance="clear"
-        kind="muted"
-        class="d-mis-auto"
-        @click="copyURLToClipboard"
-      >
-        Share Search Filter
-        <template #startIcon="{ iconSize }">
-          <dt-icon
-            name="link-2"
-            :size="iconSize"
-          />
-        </template>
-      </dt-button>
+      </dt-stack>
     </dt-stack>
-  </dt-stack>
+  </dt-box>
 </template>
 
 <script setup>
@@ -98,12 +115,23 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  hideDeprecated: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const route = useRoute();
 const router = useRouter();
 
-const emit = defineEmits(['filter', 'update:search', 'update:format', 'update:theme', 'update:mode']);
+const emit = defineEmits([
+  'filter',
+  'update:search',
+  'update:format',
+  'update:theme',
+  'update:mode',
+  'update:hideDeprecated',
+]);
 const searchCriteria = ref(props.search?.trim());
 const shareLinkTooltip = ref('Copy URL to clipboard');
 
@@ -149,6 +177,17 @@ const updateTheme = async (newTheme) => {
   if (props.theme === newTheme) return;
   await router.replace({ path: route.path, hash: route.hash, query: { ...route.query, theme: newTheme } });
   emit('update:theme', newTheme);
+  emit('filter');
+};
+
+const updateHideDeprecated = async (newHideDeprecated) => {
+  if (props.hideDeprecated === newHideDeprecated) return;
+  await router.replace({
+    path: route.path,
+    hash: route.hash,
+    query: { ...route.query, hideDeprecated: String(newHideDeprecated) },
+  });
+  emit('update:hideDeprecated', newHideDeprecated);
   emit('filter');
 };
 

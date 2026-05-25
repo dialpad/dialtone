@@ -393,11 +393,9 @@ layout: Blank
 
 ```vue demo
 <dt-stack direction="row" gap="300">
-  <dt-box padding="200" surface="primary" border-radius="200" shadow="small">Box demo</dt-box>
-  <dt-box padding="200" surface="primary" border-radius="200" shadow="medium">Box demo</dt-box>
-  <dt-box padding="200" surface="primary" border-radius="200" shadow="large">Box demo</dt-box>
-  <dt-box padding="200" surface="primary" border-radius="200" shadow="extra-large">Box demo</dt-box>
-  <dt-box padding="200" surface="primary" border-radius="200" shadow="card">Box demo</dt-box>
+  <dt-box padding="200" surface="primary" border-radius="200" shadow="raised">Box demo</dt-box>
+  <dt-box padding="200" surface="primary" border-radius="200" shadow="overlay">Box demo</dt-box>
+  <dt-box padding="200" surface="primary" border-radius="200" shadow="modal">Box demo</dt-box>
 </dt-stack>
 ```
 

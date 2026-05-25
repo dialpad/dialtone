@@ -4,6 +4,7 @@
     v-model:format="format"
     v-model:mode="mode"
     v-model:theme="theme"
+    v-model:hide-deprecated="hideDeprecated"
     @filter="filterTokens"
   />
   <dt-empty-state
@@ -16,7 +17,14 @@
       <dt-icon name="box" :size="iconSize" />
     </template>
   </dt-empty-state>
-  <token-tree v-else :node="filteredTokens" :category="null" :level="2" :mode="mode" />
+  <token-tree
+    v-else
+    :node="filteredTokens"
+    :category="null"
+    :level="2"
+    :mode="mode"
+    :hide-deprecated="hideDeprecated"
+  />
 </template>
 
 <script setup>
@@ -31,6 +39,7 @@ const format = ref(route.query.format || 'CSS');
 const mode = ref(route.query.mode || 'light');
 const theme = ref(route.query.theme || 'dp');
 const searchCriteria = ref(route.query.search || null);
+const hideDeprecated = ref(route.query.hideDeprecated !== 'false');
 const processedTokens = {}; // is set beforeMount and never changes
 const filteredTokens = shallowRef({}); // same as processedTokens but filtered by format, theme and search
 const filteredHeaders = shallowRef([]); // to fill the dynamic table of contents
@@ -38,6 +47,14 @@ const { headers } = inject('headers');
 
 const noSearchResults = computed(() => filteredTokens.value === null);
 const themeKey = computed(() => `${theme.value}-${mode.value}`);
+
+const isVisibleToken = (token) => !token.hidden && !(hideDeprecated.value && token.deprecated);
+
+const hasVisibleContent = (node) => {
+  if (!node) return false;
+  if (node._children?.some(isVisibleToken)) return true;
+  return Object.keys(node).some(key => key !== '_children' && hasVisibleContent(node[key]));
+};
 
 const filterTokens = () => {
   if (!searchCriteria.value) {
@@ -67,10 +84,10 @@ const filterTokenNode = (node, name, regexArray) => {
   });
   // If the name matches all the terms, return the entire node
   if (nonMatchingRegex.length === 0) {
-    return node;
+    return hasVisibleContent(node) ? node : null;
     // else return the children that match
   } else if (node._children) {
-    childrenRet = node._children.filter(token => !token.hidden).filter(token => {
+    childrenRet = node._children.filter(isVisibleToken).filter(token => {
       const { name: tokenName, tokenValue, keywords } = token;
       return nonMatchingRegex.every(regex => regex.test(tokenName) || regex.test(tokenValue) || regex.test(keywords));
     });
@@ -99,7 +116,7 @@ const updateHeaders = () => {
 
 const updateHeadersRecursively = (node, category) => {
   return Object.keys(node)
-    .filter(subNodeKey => subNodeKey !== '_children')
+    .filter(subNodeKey => subNodeKey !== '_children' && hasVisibleContent(node[subNodeKey]))
     .map(subNodeKey => {
       return {
         title: capitalize(subNodeKey),

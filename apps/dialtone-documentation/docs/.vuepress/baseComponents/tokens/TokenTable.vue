@@ -145,6 +145,11 @@ export default {
       type: Boolean,
       default: true,
     },
+
+    hideDeprecated: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   data: () => ({
@@ -154,7 +159,7 @@ export default {
 
   computed: {
     shownTokens () {
-      return this.tokens.filter(token => !token.hidden);
+      return this.tokens.filter(token => !token.hidden && !(this.hideDeprecated && token.deprecated));
     },
   },
 
