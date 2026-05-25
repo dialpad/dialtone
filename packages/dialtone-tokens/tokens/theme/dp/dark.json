@@ -175,15 +175,35 @@
       "sunken": {
         "value": "{color.black.100}",
         "type": "color",
-        "description": "For sunken or recessed surfaces."
+        "description": "For sunken or recessed surfaces.",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "mix",
+              "value": ".5",
+              "space": "oklch",
+              "color": "{color.black.150}"
+            }
+          }
+        }
       },
       "default": {
         "value": "{color.black.150}",
         "type": "color",
-        "description": "For default primary surfaces."
+        "description": "For default primary surfaces.",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "mix",
+              "value": ".5",
+              "space": "oklch",
+              "color": "{color.black.200}"
+            }
+          }
+        }
       },
       "raised": {
-        "value": "{color.black.150}",
+        "value": "{color.surface.default}",
         "type": "color",
         "description": "For raised surfaces like cards and panels."
       },

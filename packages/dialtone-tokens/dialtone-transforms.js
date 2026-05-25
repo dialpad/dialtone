@@ -433,12 +433,12 @@ export function registerDialtoneTransforms (styleDictionary) {
 }
 
 /**
- * Tag every alpha-modified single-ref token whose chain resolves to
- * `color.black.N` with `$extensions.dt.relativeColor = { ref, alpha }`. Pairs
- * with `registerRelativeColorWrap` to emit CSS Color 5 relative-color syntax
- * in CSS output (e.g. `oklch(from var(--dt-color-black-800) l c h / .5)`),
- * letting modified-from-black tokens follow a runtime `--dt-color-black-N`
- * swap instead of being baked at build time.
+ * Tag modified single-ref tokens whose color inputs resolve to `color.black.N`.
+ * Alpha tokens receive `$extensions.dt.relativeColor = { ref, alpha }`; mix
+ * tokens receive `$extensions.dt.colorMix = { ref, colorRef, amount, space }`.
+ * `registerRelativeColorWrap` then emits CSS Color 5 relative-color or
+ * `color-mix()` syntax, letting modified-from-black tokens follow a runtime
+ * `--dt-color-black-N` swap instead of being baked at build time.
  *
  * Why it's a preprocessor and not a transform: SD clones tokens between
  * transitive transform passes, so mutating `$extensions` from inside a
@@ -446,14 +446,15 @@ export function registerDialtoneTransforms (styleDictionary) {
  *
  * Why we leave `studio.tokens.modify` intact: iOS, Android, and JSON
  * pipelines use their own `<platform>/color/modifiers` transforms to apply
- * alpha at build time. They need the original extension. Only the CSS wrap
- * short-circuits on `dt.relativeColor`; non-CSS platforms are unaffected.
+ * modifiers at build time. They need the original extension. Only the CSS wrap
+ * short-circuits on `dt.relativeColor` or `dt.colorMix`; non-CSS platforms
+ * are unaffected.
  *
- * Scope: alpha modifiers only (any space — alpha math is space-agnostic).
- * The chain may be pure aliases (e.g. `surface.bold = {color.black.300}`,
- * `surface.bold-opaque = alpha(.3, {color.surface.bold})`) or
- * alpha-on-alpha (e.g. `shell.color.border.subtle` chained off the flagged
- * `border.subtle`); both kinds compose via nested `oklch(from …)`.
+ * Scope: alpha modifiers and mix modifiers whose base and mix color resolve to
+ * the black ramp. The chain may be pure aliases (e.g.
+ * `surface.bold = {color.black.300}`, `surface.bold-opaque = alpha(.3,
+ * {color.surface.bold})`) or alpha-on-alpha (e.g.
+ * `shell.color.border.subtle` chained off the flagged `border.subtle`).
  *
  * Excluded: candidates with any non-alpha downstream consumer. If we tagged
  * one of those, sd-transforms would later pass our relative-syntax string
@@ -461,8 +462,9 @@ export function registerDialtoneTransforms (styleDictionary) {
  * — and throw at build time. The unsafe-set walk in pass 3 prunes them.
  */
 function tagRelativeColorChain (dictionary, BLACK_REF) {
-  const { alphaTokens, refOf, dependents } = collectChainEdges(dictionary);
-  const reachesBlack = transitivelyReaches(refOf, BLACK_REF);
+  const { alphaTokens, mixTokens, refOf, aliasRefOf, dependents } = collectChainEdges(dictionary);
+  const mixRefOf = tagColorMixTokens(mixTokens, aliasRefOf, BLACK_REF);
+  const reachesBlack = transitivelyReaches(new Map([...refOf, ...mixRefOf]), BLACK_REF);
   const unsafe = candidatesWithNonAlphaConsumer(alphaTokens, dependents);
 
   for (const [name, { node, ref, alpha }] of alphaTokens) {
@@ -474,35 +476,109 @@ function tagRelativeColorChain (dictionary, BLACK_REF) {
   return dictionary;
 }
 
-/** Walk the dictionary, building three structures used to compute the flag set:
- *   - alphaTokens: candidates (name → {node, ref, alpha})
+/** Walk the dictionary, building the structures used to compute the flag set:
+ *   - alphaTokens: alpha-modifier candidates (name → {node, ref, alpha})
+ *   - mixTokens: mix-modifier candidates (name → {node, ref, colorRef, amount, space})
  *   - refOf: chain edges that relay relative-syntax (no-modify aliases AND alpha-flagged tokens)
+ *   - aliasRefOf: pure-alias subset of refOf (excludes alpha-flagged); walked to resolve mix bases to color.black.N
  *   - dependents: reverse-index (ref-target → consumers + their modify) for non-alpha downstream detection */
 function collectChainEdges (dictionary) {
-  const SINGLE_REF = /^\{([^}]+)\}$/;
   const alphaTokens = new Map();
+  const mixTokens = new Map();
   const refOf = new Map();
+  const aliasRefOf = new Map();
   const dependents = new Map();
   (function recur (node, path) {
     if (!node || typeof node !== 'object') return;
     if (typeof node.value === 'string') {
-      const match = SINGLE_REF.exec(node.value.trim());
-      if (!match) return;
+      const ref = getSingleReference(node.value);
+      if (!ref) return;
       const name = path.join('.');
-      const ref = match[1];
       const modify = node.$extensions?.['studio.tokens']?.modify;
       const isAlpha = modify?.type === 'alpha';
+      const isMix = modify?.type === 'mix';
       // Pure aliases and alpha-flagged tokens both relay the chain;
       // non-alpha modifiers (lighten/darken/mix) break it.
       if (!modify || isAlpha) refOf.set(name, ref);
+      if (!modify) aliasRefOf.set(name, ref);
       if (isAlpha) alphaTokens.set(name, { node, ref, alpha: modify.value });
+      if (isMix) {
+        mixTokens.set(name, {
+          node,
+          ref,
+          colorRef: getSingleReference(modify.color),
+          amount: modify.value,
+          space: modify.space,
+        });
+      }
       if (!dependents.has(ref)) dependents.set(ref, []);
       dependents.get(ref).push({ name, modify });
       return;
     }
     for (const key of Object.keys(node)) recur(node[key], [...path, key]);
   })(dictionary, []);
-  return { alphaTokens, refOf, dependents };
+  return { alphaTokens, mixTokens, refOf, aliasRefOf, dependents };
+}
+
+function getSingleReference (value) {
+  if (typeof value !== 'string') return null;
+  const match = /^\{([^}]+)\}$/.exec(value.trim());
+  return match?.[1] ?? null;
+}
+
+function tagColorMixTokens (mixTokens, aliasRefOf, BLACK_REF) {
+  const mixRefOf = new Map();
+
+  for (const [name, { node, ref, colorRef, amount, space }] of mixTokens) {
+    const baseRef = resolveAliasToBlack(ref, aliasRefOf, BLACK_REF);
+    const mixRef = resolveAliasToBlack(colorRef, aliasRefOf, BLACK_REF);
+    const mixAmount = parseMixAmount(amount);
+    if (!baseRef || !mixRef || mixAmount === null) continue;
+
+    node.$extensions.dt = node.$extensions.dt || {};
+    node.$extensions.dt.colorMix = {
+      ref: baseRef,
+      colorRef: mixRef,
+      amount: mixAmount,
+      space: space || 'oklch',
+    };
+    mixRefOf.set(name, baseRef);
+  }
+
+  return mixRefOf;
+}
+
+function resolveAliasToBlack (ref, aliasRefOf, BLACK_REF) {
+  if (!ref) return null;
+  let current = ref;
+  const seen = new Set();
+
+  while (current && !seen.has(current)) {
+    if (BLACK_REF.test(current)) return current;
+    seen.add(current);
+    current = aliasRefOf.get(current);
+  }
+
+  return null;
+}
+
+function parseMixAmount (amount) {
+  const rawAmount = amount?.toString().trim();
+  if (!rawAmount) return null;
+
+  const parsed = Number.parseFloat(rawAmount);
+  if (Number.isNaN(parsed)) return null;
+
+  const normalized = rawAmount.endsWith('%') ? parsed / 100 : parsed;
+  return Math.min(1, Math.max(0, normalized));
+}
+
+function formatMixPercentage (amount) {
+  return `${Number.parseFloat((amount * 100).toFixed(4))}%`;
+}
+
+function tokenRefToCssVar (ref) {
+  return `--dt-${ref.replace(/\./g, '-')}`;
 }
 
 /** Fixed-point iteration: a chain link is in the set if its ref matches
@@ -571,8 +647,16 @@ export function registerRelativeColorWrap (styleDictionary) {
     transform: (token) => {
       if (token.$extensions?.dt?.relativeColor) {
         const { ref, alpha } = token.$extensions.dt.relativeColor;
-        const cssVar = `--dt-${ref.replace(/\./g, '-')}`;
+        const cssVar = tokenRefToCssVar(ref);
         return `oklch(from var(${cssVar}) l c h / ${alpha})`;
+      }
+      if (token.$extensions?.dt?.colorMix) {
+        const { ref, colorRef, amount, space } = token.$extensions.dt.colorMix;
+        return [
+          `color-mix(in ${space},`,
+          `var(${tokenRefToCssVar(ref)}) ${formatMixPercentage(1 - amount)},`,
+          `var(${tokenRefToCssVar(colorRef)}) ${formatMixPercentage(amount)})`,
+        ].join(' ');
       }
       return original.transform(token);
     },

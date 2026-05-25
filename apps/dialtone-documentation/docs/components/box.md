@@ -64,9 +64,9 @@ The five tiers form a spatial ladder for surface depth:
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="200">
-  <dt-box padding="200" border-radius="300" surface="sunken" border-width="100">sunken</dt-box>
-  <dt-box padding="200" border-radius="300" surface="default" border-width="100">default</dt-box>
-  <dt-box padding="200" border-radius="300" surface="raised" border-width="100">raised</dt-box>
+  <dt-box padding="200" border-radius="300" surface="sunken">sunken</dt-box>
+  <dt-box padding="200" border-radius="300" surface="default">default</dt-box>
+  <dt-box padding="200" border-radius="300" surface="raised">raised</dt-box>
   <dt-box padding="200" border-radius="300" surface="overlay" shadow="overlay">overlay</dt-box>
   <dt-box padding="200" border-radius="300" surface="modal" shadow="modal">modal</dt-box>
 </dt-stack>
@@ -77,11 +77,11 @@ The five tiers form a spatial ladder for surface depth:
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="200">
-  <dt-box padding="200" surface="primary" border-width="100" border-radius="300">primary</dt-box>
-  <dt-box padding="200" surface="secondary" border-width="100" border-radius="300">secondary</dt-box>
-  <dt-box padding="200" surface="moderate" border-width="100" border-radius="300">moderate</dt-box>
-  <dt-box padding="200" surface="bold" border-width="100" border-radius="300">bold</dt-box>
-  <dt-box padding="200" surface="strong" border-width="100" border-radius="300">strong</dt-box>
+  <dt-box padding="200" surface="primary" border-radius="300">primary</dt-box>
+  <dt-box padding="200" surface="secondary" border-radius="300">secondary</dt-box>
+  <dt-box padding="200" surface="moderate" border-radius="300">moderate</dt-box>
+  <dt-box padding="200" surface="bold" border-radius="300">bold</dt-box>
+  <dt-box padding="200" surface="strong" border-radius="300">strong</dt-box>
 </dt-stack>
 <!-- @code -->
 <dt-box surface="{surfaceColor}">...</dt-box>
@@ -92,11 +92,11 @@ The five tiers form a spatial ladder for surface depth:
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="200">
-  <dt-box padding="200" surface="brand" border-width="100" border-radius="300">brand</dt-box>
-  <dt-box padding="200" surface="info" border-width="100" border-radius="300">info</dt-box>
-  <dt-box padding="200" surface="positive" border-width="100" border-radius="300">positive</dt-box>
-  <dt-box padding="200" surface="warning" border-width="100" border-radius="300">warning</dt-box>
-  <dt-box padding="200" surface="critical" border-width="100" border-radius="300">critical</dt-box>
+  <dt-box padding="200" surface="brand" border-radius="300">brand</dt-box>
+  <dt-box padding="200" surface="info" border-radius="300">info</dt-box>
+  <dt-box padding="200" surface="positive" border-radius="300">positive</dt-box>
+  <dt-box padding="200" surface="warning" border-radius="300">warning</dt-box>
+  <dt-box padding="200" surface="critical" border-radius="300">critical</dt-box>
 </dt-stack>
 <!-- @code -->
 <dt-box surface="{surfaceColor}">...</dt-box>
@@ -109,9 +109,9 @@ Spacing token scale values for internal whitespace. The padding cascade resolves
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="200">
-  <dt-box padding="200" surface="moderate" border-radius="300">padding="200"</dt-box>
-  <dt-box padding="300" surface="moderate" border-radius="300">padding="300"</dt-box>
-  <dt-box padding="400" surface="moderate" border-radius="300">padding="400"</dt-box>
+  <dt-box padding="200" surface="default" border-radius="300">padding="200"</dt-box>
+  <dt-box padding="300" surface="default" border-radius="300">padding="300"</dt-box>
+  <dt-box padding="400" surface="default" border-radius="300">padding="400"</dt-box>
 </dt-stack>
 <!-- @code -->
 <dt-box padding="{padding}">...</dt-box>
@@ -124,9 +124,9 @@ Override specific sides. The cascade resolves: `paddingBlockStart` > `paddingBlo
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="200">
-  <dt-box padding="200" surface="moderate" border-radius="300">All sides: 200</dt-box>
-  <dt-box padding="200" padding-inline="400" surface="moderate" border-radius="300">Inline override: 400</dt-box>
-  <dt-box padding="200" padding-block-start="400" surface="moderate" border-radius="300">Block-start override: 400</dt-box>
+  <dt-box padding="200" surface="default" border-radius="300">All sides: 200</dt-box>
+  <dt-box padding="200" padding-inline="400" surface="default" border-radius="300">Inline override: 400</dt-box>
+  <dt-box padding="200" padding-block-start="400" surface="default" border-radius="300">Block-start override: 400</dt-box>
 </dt-stack>
 ```
 
@@ -139,9 +139,9 @@ No visible border until a `border-width` is set. Uniform width applies to all si
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="200">
-  <dt-box padding="200" surface="moderate" border-radius="300">No border</dt-box>
-  <dt-box padding="200" surface="moderate" border-width="100" border-radius="300">100</dt-box>
-  <dt-box padding="200" surface="moderate" border-width="200" border-radius="300">200</dt-box>
+  <dt-box padding="200" surface="default" border-radius="300">No border</dt-box>
+  <dt-box padding="200" surface="default" border-width="100" border-radius="300">100</dt-box>
+  <dt-box padding="200" surface="default" border-width="200" border-radius="300">200</dt-box>
 </dt-stack>
 ```
 
@@ -152,9 +152,9 @@ Show borders on specific sides only.
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="200">
-  <dt-box padding="200" surface="moderate" border-width-block-end="100">Bottom only</dt-box>
-  <dt-box padding="200" surface="moderate" border-width-inline-start="200" border-color="critical">Start critical</dt-box>
-  <dt-box padding="200" surface="moderate" border-width-block="100" border-width-inline="0">Block only</dt-box>
+  <dt-box padding="200" surface="default" border-width-block-end="100">Bottom only</dt-box>
+  <dt-box padding="200" surface="default" border-width-inline-start="200" border-color="critical">Start critical</dt-box>
+  <dt-box padding="200" surface="default" border-width-block="100" border-width-inline="0">Block only</dt-box>
 </dt-stack>
 ```
 
@@ -165,10 +165,10 @@ Defaults to `'default'` (`--dt-color-border-default`). Only visible when a `bord
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="200">
-  <dt-box padding="200" surface="moderate" border-width="100" border-radius="300">default</dt-box>
-  <dt-box padding="200" surface="moderate" border-width="100" border-color="subtle" border-radius="300">subtle</dt-box>
-  <dt-box padding="200" surface="moderate" border-width="100" border-color="critical" border-radius="300">critical</dt-box>
-  <dt-box padding="200" surface="moderate" border-width="100" border-color="positive" border-radius="300">positive</dt-box>
+  <dt-box padding="200" surface="default" border-width="100" border-radius="300">default</dt-box>
+  <dt-box padding="200" surface="default" border-width="100" border-color="subtle" border-radius="300">subtle</dt-box>
+  <dt-box padding="200" surface="default" border-width="100" border-color="critical" border-radius="300">critical</dt-box>
+  <dt-box padding="200" surface="default" border-width="100" border-color="positive" border-radius="300">positive</dt-box>
 </dt-stack>
 ```
 
@@ -177,11 +177,11 @@ Defaults to `'default'` (`--dt-color-border-default`). Only visible when a `bord
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="200" align="center">
-  <dt-box padding="200" surface="moderate" border-radius="0">0</dt-box>
-  <dt-box padding="200" surface="moderate" border-radius="200">200</dt-box>
-  <dt-box padding="200" surface="moderate" border-radius="400">400</dt-box>
-  <dt-box padding="200" surface="moderate" border-radius="pill" inline-size="200" class="d-ta-center">pill</dt-box>
-  <dt-box surface="moderate" border-radius="circle" inline-size="100" block-size="100" class="d-plc-center d-ta-center">circle</dt-box>
+  <dt-box padding="200" surface="default" border-radius="0">0</dt-box>
+  <dt-box padding="200" surface="default" border-radius="200">200</dt-box>
+  <dt-box padding="200" surface="default" border-radius="400">400</dt-box>
+  <dt-box padding="200" surface="default" border-radius="pill" inline-size="200" class="d-ta-center">pill</dt-box>
+  <dt-box surface="default" border-radius="circle" inline-size="100" block-size="100" class="d-plc-center d-ta-center">circle</dt-box>
 </dt-stack>
 ```
 
@@ -189,10 +189,10 @@ Defaults to `'default'` (`--dt-color-border-default`). Only visible when a `bord
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack direction="row" gap="300">
-  <dt-box padding="200" surface="moderate" border-radius="300" shadow="raised">raised</dt-box>
-  <dt-box padding="200" surface="moderate" border-radius="300" shadow="overlay">overlay</dt-box>
-  <dt-box padding="200" surface="moderate" border-radius="300" shadow="modal">modal</dt-box>
+<dt-stack direction="row" gap="300" class="d-p-500">
+  <dt-box padding="200" surface="raised" border-radius="300" shadow="raised">raised</dt-box>
+  <dt-box padding="200" surface="overlay" border-radius="300" shadow="overlay">overlay</dt-box>
+  <dt-box padding="200" surface="modal" border-radius="300" shadow="modal">modal</dt-box>
 </dt-stack>
 ```
 
@@ -203,9 +203,9 @@ Maps to Dialtone's **layout token scale** (`--dt-layout-*`). Supports both fixed
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="200">
-  <dt-box padding="200" surface="moderate" border-radius="300" inline-size="300">300 (192px)</dt-box>
-  <dt-box padding="200" surface="moderate" border-radius="300" inline-size="500">500 (320px)</dt-box>
-  <dt-box padding="200" surface="moderate" border-radius="300" inline-size="50p">50p</dt-box>
+  <dt-box padding="200" surface="default" border-radius="300" inline-size="300">300 (192px)</dt-box>
+  <dt-box padding="200" surface="default" border-radius="300" inline-size="500">500 (320px)</dt-box>
+  <dt-box padding="200" surface="default" border-radius="300" inline-size="50p">50p</dt-box>
 </dt-stack>
 ```
 
@@ -213,7 +213,7 @@ Maps to Dialtone's **layout token scale** (`--dt-layout-*`). Supports both fixed
 
 ```vue demo
 <dt-box
-  surface="moderate"
+  surface="default"
   border-radius="300"
   overflow="hidden"
   inline-size="500"
@@ -231,7 +231,7 @@ Integrates the `v-dt-scrollbar` directive. An inner viewport wrapper is inserted
 ```vue demo
 <dt-box
   padding="200"
-  border-width="100"
+  surface="default"
   border-radius="300"
   scrollbar="always"
   block-size="300"
@@ -249,9 +249,9 @@ Use the `as` prop to render semantic HTML elements for accessibility.
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="200">
-  <dt-box as="section" padding="200" surface="moderate" border-radius="300">as="section"</dt-box>
-  <dt-box as="nav" padding="200" surface="moderate" border-radius="300">as="nav"</dt-box>
-  <dt-box as="article" padding="200" surface="moderate" border-radius="300">as="article"</dt-box>
+  <dt-box as="section" padding="200" surface="default" border-radius="300">as="section"</dt-box>
+  <dt-box as="nav" padding="200" surface="default" border-radius="300">as="nav"</dt-box>
+  <dt-box as="article" padding="200" surface="default" border-radius="300">as="article"</dt-box>
 </dt-stack>
 ```
 
@@ -262,8 +262,7 @@ Use the `as` prop to render semantic HTML elements for accessibility.
 ```vue demo
 <dt-box
   padding="300"
-  surface="primary"
-  border-width="100"
+  surface="default"
   border-radius="400"
   shadow="raised"
 >
@@ -279,8 +278,7 @@ Use the `as` prop to render semantic HTML elements for accessibility.
 ```vue demo
 <dt-box
   padding="200"
-  surface="primary"
-  border-width="100"
+  surface="default"
   border-radius="400"
 >
   <dt-stack gap="200">
@@ -289,13 +287,13 @@ Use the `as` prop to render semantic HTML elements for accessibility.
       <dt-button size="200">Action</dt-button>
     </dt-stack>
     <dt-stack direction="row" gap="200">
-      <dt-box class="d-fl1" padding="200" surface="secondary" border-width="100" border-color="subtle" border-radius="300">
+      <dt-box class="d-fl1" padding="200" surface="sunken" border-color="subtle" border-radius="300">
         <dt-text as="p" align="center" tone="muted">Box 1</dt-text>
       </dt-box>
-      <dt-box class="d-fl1" padding="200" surface="secondary" border-width="100" border-color="subtle" border-radius="300">
+      <dt-box class="d-fl1" padding="200" surface="sunken" border-color="subtle" border-radius="300">
         <dt-text as="p" align="center" tone="muted">Box 2</dt-text>
       </dt-box>
-      <dt-box class="d-fl1" padding="200" surface="secondary" border-width="100" border-color="subtle" border-radius="300">
+      <dt-box class="d-fl1" padding="200" surface="sunken" border-color="subtle" border-radius="300">
         <dt-text as="p" align="center" tone="muted">Box 3</dt-text>
       </dt-box>
     </dt-stack>
