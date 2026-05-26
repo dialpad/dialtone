@@ -261,6 +261,39 @@ describe('DtComboboxMultiSelect Tests', () => {
         });
       });
     });
+
+    describe('ARIA validation wiring', () => {
+      describe('When a critical validation message is provided', () => {
+        beforeEach(async () => {
+          await wrapper.setProps({
+            maxSelected: 1,
+            maxSelectedMessage: [{ message: 'Too many selected', type: VALIDATION_MESSAGE_TYPES.CRITICAL }],
+            selectedItems: ['item1', 'item2'],
+          });
+          await flushPromises();
+          _setChildWrappers();
+        });
+
+        it('should set aria-invalid on the input', () => {
+          expect(input.attributes('aria-invalid')).toBe('true');
+        });
+
+        it('should set aria-describedby on the input pointing to the messages container', () => {
+          const messagesContainer = wrapper.find('[data-qa="validation-messages-container"]');
+          expect(input.attributes('aria-describedby')).toBe(messagesContainer.attributes('id'));
+        });
+      });
+
+      describe('When no validation messages are provided', () => {
+        it('should not set aria-invalid on the input', () => {
+          expect(input.attributes('aria-invalid')).toBeUndefined();
+        });
+
+        it('should not set aria-describedby on the input', () => {
+          expect(input.attributes('aria-describedby')).toBeUndefined();
+        });
+      });
+    });
   });
 
   describe('Interactivity Tests', () => {
