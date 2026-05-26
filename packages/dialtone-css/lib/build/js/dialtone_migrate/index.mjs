@@ -278,11 +278,25 @@ const MIGRATIONS = [
     configName: 'physical-to-logical',
     detectPatterns: [
       /#leftIcon|#rightIcon|#alphaIcon|#omegaIcon/,
+      /(<(?:dt-(?:item-layout|list-item)|Dt(?:ItemLayout|ListItem))[\s\S]*?)#(?:left|right|bottom)(?=[\s"'>])/,
       /alpha-(?:disabled|loading|active)/,
       /omega-(?:disabled|active)/,
       /icon-position="(?:left|right)"/,
     ],
     fileExtensions: ['.vue', '.html'],
+  },
+  {
+    id: 'vue3-to-vue-imports',
+    name: 'Vue 3 Import Paths',
+    description: '@dialpad/dialtone-icons/vue3 and @dialpad/dialtone-vue/vue3 import paths renamed to /vue.',
+    category: 'required',
+    type: 'config',
+    configName: 'vue3-to-vue-imports',
+    detectPatterns: [
+      /@dialpad\/dialtone-icons\/vue3/,
+      /@dialpad\/dialtone-vue\/vue3/,
+    ],
+    fileExtensions: ['.vue', '.js', '.ts', '.jsx', '.tsx', '.mjs', '.mts'],
   },
 ];
 
@@ -656,12 +670,11 @@ async function runConfigMigration (migration, opts) {
       changed = false;
       for (const expr of configData.expressions) {
         const before = entry.data;
-        entry.data = entry.data.replace(expr.from, (match, ...args) => {
-          if (typeof expr.to === 'function') {
-            return expr.to(match, ...args);
-          }
-          return match.replace(expr.from, expr.to);
-        });
+        // String.prototype.replace handles both string ($1 backrefs) and
+        // function replacers natively — no callback wrapper needed for
+        // strings. The previous match.replace() approach broke lookaheads
+        // because the matched substring doesn't include lookahead chars.
+        entry.data = entry.data.replace(expr.from, expr.to);
         if (entry.data !== before) {
           entry.matches++;
           changed = true;
