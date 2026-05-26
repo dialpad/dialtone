@@ -487,7 +487,7 @@ export default {
     },
 
     _trapFocusGlobal (e) {
-      if (!this.show || e.key !== 'Tab') return;
+      if (!this.show || e.code !== EVENT_KEYNAMES.tab) return;
       const modalEl = this.$refs.modalRoot?.$el || this.$el;
       if (modalEl && !modalEl.contains(document.activeElement)) {
         e.preventDefault();

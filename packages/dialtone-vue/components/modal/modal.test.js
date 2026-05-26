@@ -162,7 +162,7 @@ describe('DtModal Tests', () => {
       it('Should return focus to the modal when Tab is subsequently pressed', async () => {
         const cancelBtn = wrapper.find('[data-qa="dt-modal-cancel"]');
         await copy.trigger('click');
-        document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', bubbles: true, cancelable: true }));
+        document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', code: 'Tab', bubbles: true, cancelable: true }));
         await wrapper.vm.$nextTick();
         await wrapper.vm.$nextTick();
 
