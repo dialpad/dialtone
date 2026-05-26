@@ -90,3 +90,7 @@ SKILLS_TODO*.md
 
 # Thumb generator content-hash cache
 apps/dialtone-documentation/scripts/thumbs/.cache.json
+.worktrees/
+.claude/plans/
+docs/prd/
+docs/plans/

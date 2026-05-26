@@ -207,6 +207,16 @@ describe('DtModal Tests', () => {
       expect(overlay.classes(modalClass)).toBe(true);
     });
 
+    it('Should not apply transparent-backdrop modifier by default', () => {
+      expect(overlay.classes('d-modal--transparent-backdrop')).toBe(false);
+    });
+
+    it('Should apply transparent-backdrop modifier when transparentBackdrop is true', async () => {
+      await wrapper.setProps({ transparentBackdrop: true });
+
+      expect(overlay.classes('d-modal--transparent-backdrop')).toBe(true);
+    });
+
     it('Should pass content class through to content modal element', async () => {
       const contentClass = 'content-class';
 
@@ -230,6 +240,16 @@ describe('DtModal Tests', () => {
       banner = wrapper.find('[data-qa="dt-modal-banner"]');
 
       expect(banner.classes(bannerClass)).toBe(true);
+    });
+
+    it('Should apply header class to the header text element', async () => {
+      const headerClass = 'header-class';
+
+      expect(title.classes(headerClass)).toBe(false);
+
+      await wrapper.setProps({ headerClass });
+
+      expect(title.classes(headerClass)).toBe(true);
     });
 
     it('Should apply banner kind', async () => {

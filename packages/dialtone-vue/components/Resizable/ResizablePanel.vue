@@ -39,37 +39,37 @@ const props = defineProps({
    * Initial size as a Dialtone layout token (maps to `--dt-layout-*`, matching
    * DtBox and the `d-w-*` / `d-h-*` utility classes) or a percentage with 'p'
    * suffix (e.g. '25p' for 25% of the container).
-   * @values 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
+   * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100, 1150, 1200, 1250, 1300, 1350, 1400, 1450, 1500, 1550, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
    */
   initialSize: { type: String, default: undefined },
   /**
    * Minimum size for user drag interactions (hard floor). Accepts a layout
    * token or percentage; see `initialSize` for the value set.
-   * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
+   * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100, 1150, 1200, 1250, 1300, 1350, 1400, 1450, 1500, 1550, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
    */
   userMinSize: { type: String, default: undefined },
   /**
    * Maximum size for user drag interactions (hard ceiling). Accepts a layout
    * token or percentage; see `initialSize` for the value set.
-   * @values 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
+   * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100, 1150, 1200, 1250, 1300, 1350, 1400, 1450, 1500, 1550, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
    */
   userMaxSize: { type: String, default: undefined },
   /**
    * Minimum size for system viewport scaling. Falls back to userMinSize.
    * Accepts a layout token or percentage; see `initialSize` for the value set.
-   * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
+   * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100, 1150, 1200, 1250, 1300, 1350, 1400, 1450, 1500, 1550, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
    */
   systemMinSize: { type: String, default: undefined },
   /**
    * Maximum size for system viewport scaling. Falls back to userMaxSize.
    * Accepts a layout token or percentage; see `initialSize` for the value set.
-   * @values 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
+   * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100, 1150, 1200, 1250, 1300, 1350, 1400, 1450, 1500, 1550, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
    */
   systemMaxSize: { type: String, default: undefined },
   /**
    * Container width threshold that triggers auto-collapse. Accepts a layout
    * token or percentage; see `initialSize` for the value set.
-   * @values 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000, 1100, 1200, 1300, 1400, 1500, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
+   * @values 0, 1px, 2px, 8px, 25, 20px, 24px, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800, 850, 900, 950, 1000, 1050, 1100, 1150, 1200, 1250, 1300, 1350, 1400, 1450, 1500, 1550, 1600, 10p, 20p, 25p, 30p, 33p, 40p, 50p, 60p, 66p, 70p, 75p, 80p, 90p, 95p, 100p
    */
   collapseSize: { type: String, default: undefined },
   /** Whether this panel can be resized by dragging. */

@@ -70,7 +70,17 @@ export default {
   'with presence': {
     props: {
       size: { initialValue: '200' },
-      presence: { initialValue: 'away' },
+      presence: { initialValue: 'busy' },
+      imageSrc: { initialValue: '/assets/images/person.png' },
+      imageAlt: { initialValue: 'Person Avatar' },
+    },
+  },
+
+  'with presence, no icon': {
+    props: {
+      size: { initialValue: '200' },
+      presence: { initialValue: 'busy' },
+      presenceProps: { initialValue: { showIcon: false } },
       imageSrc: { initialValue: '/assets/images/person.png' },
       imageAlt: { initialValue: 'Person Avatar' },
     },

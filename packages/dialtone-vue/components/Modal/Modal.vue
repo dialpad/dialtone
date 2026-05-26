@@ -10,6 +10,7 @@
         'd-modal',
         MODAL_KIND_MODIFIERS[kind],
         MODAL_SIZE_MODIFIERS[size],
+        { 'd-modal--transparent-backdrop': transparentBackdrop },
         modalClass,
       ]"
       data-qa="dt-modal"
@@ -66,7 +67,7 @@
             density="100"
             text-box-trim="start"
             as="h2"
-            class="d-modal__header"
+            :class="['d-modal__header', headerClass]"
             data-qa="dt-modal-title"
           >
             {{ headerText }}
@@ -357,6 +358,17 @@ export default {
     appendTo: {
       type: String,
       default: undefined,
+    },
+
+    /**
+     * When true, the surrounding backdrop is rendered fully transparent
+     * instead of the default dimming overlay. The dialog box itself
+     * remains opaque. Useful when the underlying UI should remain visible.
+     * @values true, false
+     */
+    transparentBackdrop: {
+      type: Boolean,
+      default: false,
     },
   },
 

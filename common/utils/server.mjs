@@ -14,7 +14,7 @@ import { readdirSync } from 'node:fs';
 export function getValidFileList (folder) {
   const parentFolderName = folder.split('/').pop();
   const excludedFolderNamesRegex = /(extensions|modules|decorators)$/;
-  const validFileNamesRegex = new RegExp(`^${parentFolderName}\\w*\\.vue$`);
+  const validFileNamesRegex = new RegExp(`^${parentFolderName}\\w*\\.vue$`, 'i');
 
   return readdirSync(folder, { withFileTypes: true })
     .filter((item) => {

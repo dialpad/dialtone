@@ -16,9 +16,10 @@ const rule = require("../../../lib/rules/deprecated-stack-alignment-classes"),
 //------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
-  // eslint-disable-next-line n/no-extraneous-require
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 'latest' }
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
+    parserOptions: { ecmaVersion: 'latest' },
+  },
 });
 
 ruleTester.run("deprecated-stack-alignment-classes", rule, {

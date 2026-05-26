@@ -12,6 +12,8 @@ keywords: ["dropdown", "picker", "d-select-menu", "DtSelectMenu", "dt-select-men
 
 ## Usage
 
+DtSelectMenu is bound to a value using `v-model`, which emits the selected option's value. To wire DtSelectMenu to a reactive store (such as Vuex or Pinia), bind `:modelValue` to the store getter and listen for `@update:modelValue` to commit the mutation — or use `v-model` with a computed setter.
+
 <dialtone-usage>
 <template #do>
 

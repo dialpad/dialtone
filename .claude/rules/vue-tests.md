@@ -5,7 +5,7 @@ paths:
 
 # Vue Component Test Rules
 
-> **Canonical reference**: See [TEST_GUIDELINE.md](../../packages/dialtone-vue/.github/TEST_CONTRIBUTING/TEST_GUIDELINE.md) for the full test contributing guide, including the standardized template, `updateWrapper()` pattern, and the 5 required test sections.
+> **Canonical reference**: See [TEST_GUIDELINE.md](../../packages/dialtone-vue/.github/TEST_CONTRIBUTING/TEST_GUIDELINE.md) for the full test contributing guide, including the standardized template and the 5 required test sections.
 
 ## Framework
 
@@ -13,21 +13,44 @@ paths:
 - Run all: `pnpm nx run dialtone-vue:test`
 - Run single: `pnpm nx run dialtone-vue:test -- --testPathPattern=component_name`
 
-## `_setWrapper` Pattern
+## `updateWrapper` Pattern
 
-Every test file uses a shared `_setWrapper` helper for consistent mounting:
+Every test file defines `updateWrapper` inside the top-level `describe` block:
 
 ```javascript
-const _setWrapper = (props = {}, attrs = {}, slots = {}) => {
-  wrapper = mount(DtComponentName, {
-    props: { ...baseProps, ...props },
-    attrs: { ...baseAttrs, ...attrs },
-    slots: { ...baseSlots, ...slots },
+const baseProps = { /* required props */ };
+const baseAttrs = {};
+
+let mockProps = {};
+let mockAttrs = {};
+let mockSlots = {};
+
+describe('DtComponentName Tests', () => {
+  let wrapper;
+
+  const updateWrapper = () => {
+    wrapper = mount(DtComponentName, {
+      props: { ...baseProps, ...mockProps },
+      attrs: { ...baseAttrs, ...mockAttrs },
+      slots: { ...mockSlots },
+    });
+  };
+
+  beforeEach(() => {
+    updateWrapper();
   });
-};
+
+  afterEach(() => {
+    mockProps = {};
+    mockAttrs = {};
+    mockSlots = {};
+  });
+});
 ```
 
-Always include `afterEach(() => { wrapper?.unmount(); })` for cleanup.
+`beforeEach` remounts fresh for each test. `afterEach` resets mock variables.
+
+Call `wrapper.unmount()` in `afterEach` when the component uses teleport/portal DOM (overlays like `DtTooltip`, `DtPopover`, `DtDropdown`, `DtModal`, `DtComboboxWithPopover`) — the teleported nodes live outside the wrapper and leak across tests if not torn down explicitly. For simple, non-teleporting components, the next `beforeEach` remount is enough and no `unmount()` is needed.
 
 ## Element Selection
 
@@ -52,4 +75,4 @@ Each `it` block should test one behavior. Multiple assertions are fine when they
 
 - Don't test internal state (`wrapper.vm.internalCounter`) — test observable behavior.
 - Don't rely on snapshot tests alone — they don't test behavior.
-- Don't skip cleanup — always unmount in `afterEach`.
+- Don't call `wrapper?.unmount()` in `afterEach` — reset mock variables instead.

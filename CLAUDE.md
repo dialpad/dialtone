@@ -104,6 +104,7 @@ When creating or updating a component, ALL must stay in sync:
 5. **VuePress documentation** — `apps/dialtone-documentation/docs/`, sidebar in `_data/site-nav.json`. Use fenced ` ```vue demo ` blocks for code examples (see `.claude/rules/documentation-writing.md`)
 6. **MCP server data** — `packages/dialtone-mcp-server/src/data.ts`
 7. **Component wall thumbnail** — auto-generated PNG at `apps/dialtone-documentation/docs/.vuepress/public/assets/images/components/<slug>-{light,dark}.png`. Run `pnpm nx run dialtone-documentation:thumbs` to regen (pre-commit hook fires automatically on relevant staged changes). If the Combinator default doesn't render well as a thumbnail, author an override at `apps/dialtone-documentation/thumbs/<slug>.vue` — see `apps/dialtone-documentation/thumbs/README.md`. Preview live at `pnpm nx run dialtone-documentation:thumbs:preview` (picker at `/`, full grid at `/?gallery`).
+7. **Public docs JSON** — `packages/dialtone-docs/dist/public-docs.json`, built by `packages/dialtone-docs/src/generators/build-public-docs.mjs` from `apps/dialtone-documentation/docs/**/*.md`. Consumed by `dialtone-mcp-server` (`search_documentation` tool) and `dialtone-cli` (`dialtone docs`) via `@dialpad/dialtone-query-core`. Rebuilt automatically when `pnpm nx run dialtone-docs:build` runs (NX watches `apps/dialtone-documentation/docs/**/*.md` as an input).
 
 ## Release Process
 

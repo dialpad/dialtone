@@ -1,4 +1,5 @@
 import type { ResizableSizeValue } from './ResizableConstants';
+import { LAYOUT_SIZE_VALUES } from '@/common/constants';
 
 // ─── Layout Token Resolution ───────────────────────────────────────────────
 // Resolves Dialtone layout tokens (e.g., '500', '200', '8px') to pixel values.
@@ -6,9 +7,12 @@ import type { ResizableSizeValue } from './ResizableConstants';
 // with the token pipeline. Falls back to a static map in environments where
 // CSS custom properties aren't available (tests, SSR).
 //
-// The allowlist (keys of FALLBACK_LAYOUT_TOKENS) mirrors DtBox's layout value
-// set so the same numeric label resolves to the same pixel size in both
-// components and in the `d-w-*` / `d-h-*` utility classes.
+// The size allowlist mirrors the shared Dialtone layout value set so the same
+// numeric label resolves to the same pixel size in DtBox, DtResizable, and the
+// `d-w-*` / `d-h-*` utility classes.
+
+const LAYOUT_BASE_PX = 64;
+const layoutSizeValueSet = new Set<string>(LAYOUT_SIZE_VALUES);
 
 /** Cache for resolved token pixel values (populated on first use). */
 const tokenCache = new Map<string, number>();
@@ -28,13 +32,12 @@ function getRootFontSize(): number {
 
 /**
  * Resolve a Dialtone layout token to pixels via CSS custom properties.
- * Early-rejects tokens not in the FALLBACK_LAYOUT_TOKENS allowlist so the
- * accepted value set matches DtBox regardless of whether extra layout stops
- * exist in the token pipeline.
- * Falls back to FALLBACK_LAYOUT_TOKENS when CSS isn't available.
+ * Early-rejects tokens not in the shared layout token allowlist so the
+ * accepted value set matches DtBox and the token pipeline.
+ * Falls back to derived layout token values when CSS isn't available.
  */
 function resolveTokenPixels(token: string): number | undefined {
-  if (!Object.prototype.hasOwnProperty.call(FALLBACK_LAYOUT_TOKENS, token)) return undefined;
+  if (!isSizeToken(token)) return undefined;
   if (tokenCache.has(token)) return tokenCache.get(token);
 
   // Try runtime CSS resolution first so theme overrides propagate without rebuild
@@ -60,26 +63,28 @@ function resolveTokenPixels(token: string): number | undefined {
   }
 
   // Static fallback — kept for jsdom tests and SSR where CSS custom properties aren't loaded.
-  const px = FALLBACK_LAYOUT_TOKENS[token];
+  const px = getFallbackLayoutTokenPixels(token);
+  if (px === undefined) return undefined;
+
   tokenCache.set(token, px);
   return px;
 }
 
 /**
- * Static fallback map — mirrors the DtBox layout value set from
- * `packages/dialtone-vue/components/box/box_constants.js` (DT_BOX_LAYOUT_VALUES)
- * and the underlying `layout.*` tokens in `dialtone-tokens`.
- * Acts as the allowlist for `isValidSizing` and as the pixel source when CSS
- * custom properties aren't available (tests, SSR).
+ * Static fallback resolution — mirrors the layout stop rule in
+ * `packages/dialtone-css/postcss/constants.cjs`:
+ * - '*px' values are literal off-scale pixels.
+ * - numeric stops are scale-indexed on the 64px layout base.
  */
-const FALLBACK_LAYOUT_TOKENS: Record<string, number> = {
-  // off-scale (DLT-3330)
-  '0': 0, '1px': 1, '2px': 2, '8px': 8, '25': 16, '20px': 20, '24px': 24, '50': 32, '75': 48,
-  // 100-multiples (layout.base × N)
-  '100': 64, '200': 128, '300': 192, '400': 256, '500': 320,
-  '600': 384, '700': 448, '800': 512, '900': 576, '1000': 640,
-  '1100': 704, '1200': 768, '1300': 832, '1400': 896, '1500': 960, '1600': 1024,
-};
+function getFallbackLayoutTokenPixels(token: string): number | undefined {
+  if (token === '0') return 0;
+  if (token.endsWith('px')) return parseFloat(token);
+
+  const stop = Number(token);
+  if (!Number.isFinite(stop)) return undefined;
+
+  return (stop * LAYOUT_BASE_PX) / 100;
+}
 
 // ─── Percentage Resolution ─────────────────────────────────────────────────
 // Percentage tokens use a simple pattern: numeric value + 'p' suffix.
@@ -93,7 +98,7 @@ function parsePercentage(value: string): number | undefined {
 // ─── Token Helpers ──────────────────────────────────────────────────────────
 
 function isSizeToken(value: string): boolean {
-  return resolveTokenPixels(value) !== undefined;
+  return layoutSizeValueSet.has(value);
 }
 
 function isPercentageToken(value: string): boolean {
@@ -104,15 +109,14 @@ export function isValidSizing(value: string): boolean {
   return isSizeToken(value) || isPercentageToken(value);
 }
 
-function parseTokenToPixels(value: string, containerSize: number): number {
+function parseSizingToPixels(value: string, containerSize: number): number | undefined {
   const sizePixels = resolveTokenPixels(value);
   if (sizePixels !== undefined) return sizePixels;
 
   const percentage = parsePercentage(value);
   if (percentage !== undefined) return (percentage / 100) * containerSize;
 
-  console.warn(`[resizable] Invalid sizing value: ${value}`);
-  return 0;
+  return undefined;
 }
 
 // ─── Public API ─────────────────────────────────────────────────────────────
@@ -157,13 +161,19 @@ export function parseSizeToPixels(
 
   const calculationContainerSize = validatedContainerSize === 0 ? 1000 : validatedContainerSize;
 
-  if (typeof value === 'string' && isValidSizing(value)) {
-    const result = parseTokenToPixels(value, calculationContainerSize);
+  if (typeof value === 'string') {
+    const result = parseSizingToPixels(value, calculationContainerSize);
+    if (result === undefined) return warnInvalidSizeValue(value);
+
     return validatePixelResult(result, value, validatedContainerSize, clampToContainer);
   }
 
+  return warnInvalidSizeValue(value);
+}
+
+function warnInvalidSizeValue(value: ResizableSizeValue): 0 {
   console.warn(
-    `[resizable] Invalid ResizableSizeValue: ${value}. Expected a size token or percentage with 'p' suffix.`
+    `[resizable] Invalid ResizableSizeValue: ${value}. Expected a size token or percentage with 'p' suffix.`,
   );
   return 0;
 }

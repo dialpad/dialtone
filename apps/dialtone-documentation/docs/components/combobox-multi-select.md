@@ -65,7 +65,7 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-mul
 
 ## Usage
 
-The Combobox Multi-Select component combines an input element with a dropdown list, allowing users to select multiple items. Selected items appear as chips within the input field.
+The Combobox Multi-Select component combines an input element with a dropdown list, allowing users to select multiple items. Selected items appear as chips within the input field. It is commonly used for multi-select user pickers where selected items display avatars alongside names — for example, selecting team members, recipients, or participants with avatar chips.
 
 ### Closing the list after selection
 
