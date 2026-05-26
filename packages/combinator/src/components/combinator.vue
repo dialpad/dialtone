@@ -2,7 +2,8 @@
   <div
     :class="
       [
-        'dialtone-playground',
+        'dialtone-playground d-ba d-my-200',
+        settings.playground.surface === 'sunken' ? 'd-bc-transparent' : 'd-bc-subtle',
         `d-bgc-${settings.playground.surface}`,
         { 'dialtone-playground--fullscreen': isFullScreen },
       ]
@@ -602,10 +603,8 @@ export default {
   & {
     display:none;
     flex-direction: column;
-    margin-block: var(--dt-spacing-200);
     background-color: var(--dt-color-surface-sunken);
     border-radius: var(--dt-size-radius-400);
-    border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
 
     @media screen and (min-width: 640px) {
       display: flex;
