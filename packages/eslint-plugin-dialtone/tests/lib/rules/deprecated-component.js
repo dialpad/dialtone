@@ -15,7 +15,7 @@ const rule = require("../../../lib/rules/deprecated-component"), RuleTester = re
 // Tests
 //------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester({parserOptions: {sourceType: 'module', ecmaVersion: 'latest'}});
+const ruleTester = new RuleTester({ languageOptions: { sourceType: 'module', ecmaVersion: 'latest' } });
 ruleTester.run("deprecated-component", rule, {
     valid: [
         {

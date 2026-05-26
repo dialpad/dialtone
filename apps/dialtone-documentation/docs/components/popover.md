@@ -22,6 +22,8 @@ If you are looking for a dialog that does not display relative to the anchor, se
 Some common examples of popover usage: dropdown list, emoji picker dialog, add comment dialog.
 A popover can be modal or non-modal. Below are some guidelines on when to use a modal vs non-modal popover.
 
+**Migration note:** `DtOldPopover` is deprecated. Replace all uses with `DtPopover` (this component). DtOldPopover will be removed in a future major version. See the [whats-new posts](/about/whats-new/) for migration details.
+
 Your popover should be modal when:
 
 - It contains scrollable content.

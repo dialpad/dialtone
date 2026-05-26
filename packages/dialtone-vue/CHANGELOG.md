@@ -41,6 +41,7 @@
 * **Dialtone Vue:** DLT-3226 update documentation and consuming code to numeric size scale ([#1158](https://github.com/dialpad/dialtone/issues/1158)) ([149c763](https://github.com/dialpad/dialtone/commit/149c7636987aef44ff33ae19b63c0efd334dc187))
 * DLT-3345 migrate d-stack*/d-flow* wrappers to DtStack ([#1218](https://github.com/dialpad/dialtone/issues/1218)) ([fa090ef](https://github.com/dialpad/dialtone/commit/fa090ef365d6776601e1f94b2d15b9890ddd1ee3))
 * **Playground:** DLT-3119 refine playground UI and integrate across doc site ([#1127](https://github.com/dialpad/dialtone/issues/1127)) ([ba6b599](https://github.com/dialpad/dialtone/commit/ba6b599ad6b2cb0213491b9b4980d6fc914dc945))
+# [3.221.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.220.0...dialtone-vue/v3.221.0) (2026-05-19)
 
 
 ### Features
@@ -105,6 +106,7 @@
 
 * **Design Tokens:** DLT-3368 DLT-3371 DLT-3410 add material dimension and brand-locked pairings ([#1252](https://github.com/dialpad/dialtone/issues/1252)) ([eeedc67](https://github.com/dialpad/dialtone/commit/eeedc6780f6107f618daf283669f01de74a1abb6))
 * **Popover, Tooltip:** DLT-3419 auto-append to nearest dialog for top-layer support ([#1266](https://github.com/dialpad/dialtone/issues/1266)) ([a5427e8](https://github.com/dialpad/dialtone/commit/a5427e8210a35663dbd397aee58d0ff05a376210))
+* **Combobox Multi Select:** DLT-3366 forward input-level escape, enter, keydown events ([#1253](https://github.com/dialpad/dialtone/issues/1253)) ([a635301](https://github.com/dialpad/dialtone/commit/a635301168a096fe9b741d5f5a74925874237024))
 
 # [3.220.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.219.4...dialtone-vue/v3.220.0) (2026-05-12)
 

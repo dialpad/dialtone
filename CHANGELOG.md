@@ -146,6 +146,9 @@
 * **Tokens:** update color ramps and consumer color migration tools DLT-3004 DLT-3005 DLT-3006 DLT-3007 DLT-3008 ([#1054](https://github.com/dialpad/dialtone/issues/1054)) ([28cb1de](https://github.com/dialpad/dialtone/commit/28cb1de09ea18abd8ffa79e99d23866d861df111))
 * **Typography, Tokens:** DLT-2856 DLT-2857 next typography system ([#994](https://github.com/dialpad/dialtone/issues/994)) ([d744e97](https://github.com/dialpad/dialtone/commit/d744e97e86796a4de2153e43fa521384da8e8848))
 * **Validation Messages:** DLT-3423 add info variant ([#1274](https://github.com/dialpad/dialtone/issues/1274)) ([412154b](https://github.com/dialpad/dialtone/commit/412154b5dd9d88637fb424746208f42173d5ef61))
+* **Combobox Multi Select:** DLT-3366 forward input-level escape, enter, keydown events ([#1253](https://github.com/dialpad/dialtone/issues/1253)) ([a635301](https://github.com/dialpad/dialtone/commit/a635301168a096fe9b741d5f5a74925874237024))
+* **Dialtone Icons:** NO-JIRA add agent-assist-color brand-full-color icon ([#1265](https://github.com/dialpad/dialtone/issues/1265)) ([d159d78](https://github.com/dialpad/dialtone/commit/d159d7842e5f5f8b21b6ed314cb9b7f1e4c206b7))
+* **Eslint Plugin:** DLT-3281 add deprecated-class-props rule ([#1258](https://github.com/dialpad/dialtone/issues/1258)) ([3c5925e](https://github.com/dialpad/dialtone/commit/3c5925e38f340ddae01ebd59079b185a49f81304))
 
 # [9.183.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.182.3...dialtone/v9.183.0) (2026-05-12)
 

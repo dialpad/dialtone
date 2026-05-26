@@ -17,11 +17,13 @@ export type {
   Component,
   Icon,
   IconsData,
+  DocumentationFrontmatter,
+  DocumentationRecord,
   SearchResult
 } from './types.js';
 
 // Data
-export { utilityClasses, tokens, components, icons } from './data.js';
+export { utilityClasses, tokens, components, icons, documentation } from './data.js';
 
 // Utility classes search
 export {
@@ -47,6 +49,9 @@ export {
 
 // Icons search
 export { searchIcons, formatIconResults } from './tools/icons.js';
+
+// Documentation search
+export { searchDocumentation, formatDocumentationResults } from './tools/docs.js';
 
 // Filters
 export { applySmartFilter } from './utils/filters.js';

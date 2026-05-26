@@ -7,6 +7,7 @@ import { componentCommand } from './commands/component.js';
 import { tokenCommand } from './commands/token.js';
 import { promptCommand } from './commands/prompt.js';
 import { utilityCommand } from './commands/utility.js';
+import { docsCommand } from './commands/docs.js';
 
 silenceDebug();
 
@@ -48,6 +49,7 @@ const main = defineCommand({
     component: componentCommand,
     token: tokenCommand,
     utility: utilityCommand,
+    docs: docsCommand,
     prompt: promptCommand,
   },
 });

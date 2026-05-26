@@ -16,6 +16,7 @@ export const CHIP_SIZES = {
   md: 'sm',
 };
 
+// Adjusted in DLT-3409 for sub-pixel offset for sizes sm and md
 export const CHIP_TOP_POSITION = {
   // Numeric (preferred)
   100: 1.4,
@@ -23,8 +24,8 @@ export const CHIP_TOP_POSITION = {
   300: 0.2,
   // T-shirt aliases (deprecated)
   xs: 1.4,
-  sm: 0.4,
-  md: 0.2,
+  sm: -0.1,
+  md: -0.3,
 };
 
 export default {

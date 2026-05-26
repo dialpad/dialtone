@@ -1,30 +1,33 @@
 import { defineCommand } from 'citty';
 import {
-  searchUtilityClasses, searchTokens, searchComponents, searchIcons,
+  searchUtilityClasses, searchTokens, searchComponents, searchIcons, searchDocumentation,
 } from '@dialpad/dialtone-query-core';
 import type { TokensData, IconsData, SearchResult } from '@dialpad/dialtone-query-core';
 import { getContext } from '../context.js';
 import { formatSearchOutput, type Format } from '../formatters.js';
 
 function searchAll(query: string): { results: SearchResult[]; notes: string[] } {
-  const { utilityClasses, tokens, components, icons } = getContext();
+  const { utilityClasses, tokens, components, icons, documentation } = getContext();
 
   const classResults = searchUtilityClasses(query, utilityClasses);
   const tokenResults = searchTokens(query, tokens as TokensData);
   const componentResults = searchComponents(query, components);
   const iconResults = searchIcons(query, icons as IconsData);
+  const docResults = searchDocumentation(query, documentation);
 
   return {
     results: [
       ...componentResults.results,
-      ...classResults.results,
+      ...docResults.results,
       ...tokenResults.results,
+      ...classResults.results,
       ...iconResults.results,
     ],
     notes: [
       ...componentResults.notes,
-      ...classResults.notes,
+      ...docResults.notes,
       ...tokenResults.notes,
+      ...classResults.notes,
       ...iconResults.notes,
     ],
   };

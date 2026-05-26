@@ -9,14 +9,18 @@
     "build"
   ],
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "test": "vitest run"
   },
   "devDependencies": {
     "@dialpad/dialtone-css": "workspace:*",
+    "@dialpad/dialtone-docs": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
     "@dialpad/dialtone-vue": "workspace:*",
     "@types/node": "24.3.1",
-    "typescript": "^5.2"
+    "@vitest/coverage-v8": "^4.1.0",
+    "typescript": "^5.2",
+    "vitest": "^4.1.0"
   },
   "keywords": [
     "dialtone",

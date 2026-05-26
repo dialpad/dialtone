@@ -93,7 +93,7 @@ chore: NO-JIRA update dependencies
 
 Detailed conventions are in path-scoped rules (`.claude/rules/vue-components.md`) that activate automatically when editing component files.
 
-## Documentation Pipeline (6 Artifacts)
+## Documentation Pipeline (7 Artifacts)
 
 When creating or updating a component, ALL must stay in sync:
 
@@ -103,6 +103,7 @@ When creating or updating a component, ALL must stay in sync:
 4. **Component docs JSON** — via `scripts/build-dialtone-vue-docs.mjs`
 5. **VuePress documentation** — `apps/dialtone-documentation/docs/`, sidebar in `_data/site-nav.json`. Use fenced ` ```vue demo ` blocks for code examples (see `.claude/rules/documentation-writing.md`)
 6. **MCP server data** — `packages/dialtone-mcp-server/src/data.ts`
+7. **Public docs JSON** — `packages/dialtone-docs/dist/public-docs.json`, built by `packages/dialtone-docs/src/generators/build-public-docs.mjs` from `apps/dialtone-documentation/docs/**/*.md`. Consumed by `dialtone-mcp-server` (`search_documentation` tool) and `dialtone-cli` (`dialtone docs`) via `@dialpad/dialtone-query-core`. Rebuilt automatically when `pnpm nx run dialtone-docs:build` runs (NX watches `apps/dialtone-documentation/docs/**/*.md` as an input).
 
 ## Release Process
 

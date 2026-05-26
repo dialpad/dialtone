@@ -591,7 +591,7 @@ export default {
         await this.$nextTick();
         const input = this.getInput();
         this.revertInputPadding(input);
-        this.initialInputHeight = input.getBoundingClientRect().height;
+        this.setInitialInputHeight();
         this.setInputPadding();
         this.setChipsTopPosition();
       },
@@ -762,7 +762,6 @@ export default {
     setInputPadding () {
       const lastChip = this.getLastChip();
       const input = this.getInput();
-      const chipsWrapper = this.$refs.chipsWrapper;
       if (!input) return;
       this.revertInputPadding(input);
       this.popoverOffset = [0, 4];
@@ -775,7 +774,8 @@ export default {
       // The input cursor should be the same "top" as that chip and next besides it
       const left = lastChip.offsetLeft + this.getFullWidth(lastChip);
       const spaceLeft = input.getBoundingClientRect().width - left;
-      // input.style.paddingLeft = left + 'px';
+      const firstChip = this.getFirstChip();
+      const isWrapped = firstChip && lastChip.offsetTop > firstChip.offsetTop;
 
       if (spaceLeft > this.reservedRightSpace) {
         input.style.paddingInlineStart = left + 'px';
@@ -783,16 +783,20 @@ export default {
         input.style.paddingInlineStart = '4px';
       }
 
-      // Get the chip wrapper height minus the 4px padding
-      const chipsWrapperHeight = chipsWrapper.getBoundingClientRect().height - 4;
-      const lastChipHeight = lastChip.getBoundingClientRect().height - 4;
+      const paddingTop = this.getInputPaddingTop(lastChip, spaceLeft > this.reservedRightSpace, isWrapped);
+      if (paddingTop != null) input.style.paddingTop = `${paddingTop}px`;
+    },
 
-      // Get lastChip offsetTop plus 2px of the input padding.
-      const top = spaceLeft > this.reservedRightSpace
-        ? lastChip.offsetTop + 2
-        : (chipsWrapperHeight + lastChipHeight - 9);
-
-      input.style.paddingBlockStart = `${top}px`;
+    getInputPaddingTop (lastChip, hasSpace, isWrapped) {
+      // Chip fits beside the cursor on its row; CSS handles vertical centering.
+      if (hasSpace && !isWrapped) return null;
+      // Chip wrapped onto a new row with space remaining; align cursor to it.
+      if (hasSpace) return lastChip.offsetTop + 2;
+      // No space on the chip's row — predict next-row offsetTop so paddingTop
+      // stays stable when a chip lands there.
+      const chipMarginTop = parseFloat(getComputedStyle(lastChip).marginTop) || 0;
+      const lastChipHeight = lastChip.getBoundingClientRect().height;
+      return lastChip.offsetTop + lastChipHeight + chipMarginTop + 2;
     },
 
     revertInputPadding (input) {
@@ -832,7 +836,14 @@ export default {
     setInitialInputHeight () {
       const input = this.getInput();
       if (!input) return;
+      input.style.minHeight = '';
+      input.style.height = '';
       this.initialInputHeight = input.getBoundingClientRect().height;
+      // xs renders correctly without a min-height floor; other sizes need it to grow when chips wrap.
+      if (this.size !== 'xs') {
+        input.style.minHeight = `${this.initialInputHeight}px`;
+        input.style.height = 'auto';
+      }
     },
 
     async handleInputFocusIn () {

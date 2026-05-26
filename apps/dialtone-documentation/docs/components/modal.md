@@ -16,7 +16,7 @@ keywords: ["dialog", "popup", "overlay", "lightbox", "d-modal", "DtModal", "dt-m
 
 ## Usage
 
-Modals disable underlying content and are used to present a short-term task the user needs to perform without losing the context of the underlying page. Users won't be able to interact with the page until they close the modal.
+Modals disable underlying content and are used to present a short-term task the user needs to perform without losing the context of the underlying page. Users won't be able to interact with the page until they close the modal. By design, clicking outside the DtModal dialog does not close it — this is intentional behavior to prevent accidental dismissal of important tasks. Users must explicitly click the close button or trigger a close action to dismiss the modal.
 
 Although highly versatile, this doesn't mean modal dialogs are fit for all purposes. Modals are purposefully disruptive and should be used thoughtfully and sparingly, specifically in moments where focus is required or an action must be taken.
 
