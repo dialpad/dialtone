@@ -1,5 +1,13 @@
 <template>
-  <div :class="['dialtone-playground', { 'dialtone-playground--fullscreen': isFullScreen }]">
+  <div
+    :class="
+      [
+        'dialtone-playground',
+        `d-bgc-${settings.playground.surface}`,
+        { 'dialtone-playground--fullscreen': isFullScreen },
+      ]
+    "
+  >
     <dt-stack
       direction="row"
       gap="500"
@@ -79,6 +87,53 @@
         gap="100"
         direction="row"
       >
+        <dt-dropdown
+          navigation-type="arrow-keys"
+          placement="bottom-start"
+        >
+          <template #anchor>
+            <dt-button
+              importance="clear"
+              kind="muted"
+              leading-class="d-pbs-1 d-pis-150 d-mie-n25"
+            >
+              <template #leading>
+                <dt-text
+                  kind="body"
+                  tone="primary"
+                  strength="semibold"
+                  class="d-fs-inherit"
+                >
+                  Surface:
+                </dt-text>
+              </template>
+              {{ settings.playground.surface }}
+              <template #endIcon="{ iconSize }">
+                <dt-icon-chevrons-up-down
+                  class="d-fc-muted"
+                  :size="iconSize"
+                />
+              </template>
+            </dt-button>
+          </template>
+          <template #list="{ close }">
+            <dt-list-item
+              v-for="option in SURFACE_OPTIONS"
+              :key="option.value"
+              role="menuitem"
+              navigation-type="arrow-keys"
+              @click="settings.playground.surface = option.value; close()"
+            >
+              {{ option.label }}
+              <template #end>
+                <dt-icon-check
+                  size="200"
+                  :class="option.value === settings.playground.surface ? 'd-o100' : 'd-o0'"
+                />
+              </template>
+            </dt-list-item>
+          </template>
+        </dt-dropdown>
         <dt-button
           v-if="hasChanges"
           v-dt-tooltip="`Reset`"
@@ -165,6 +220,7 @@ import { getComponentInfo } from '@/src/lib/info';
 import {
   SETTINGS_BACKGROUND_KEY,
   SETTINGS_INDENT_KEY,
+  SETTINGS_PLAYGROUND_SURFACE_KEY,
   SETTINGS_POSITIONING_KEY,
   SETTINGS_SCHEME_KEY,
   SETTINGS_SIDEBAR_KEY,
@@ -236,6 +292,14 @@ const variantOptions = computed(() => {
     .filter(key => key !== 'exclusions' && key !== 'defaults')
     .map(key => ({ value: key, label: key }));
 });
+
+const SURFACE_OPTIONS = [
+  { value: 'sunken', label: 'Sunken' },
+  { value: 'default', label: 'Default' },
+  { value: 'raised', label: 'Raised' },
+  { value: 'overlay', label: 'Overlay' },
+  { value: 'modal', label: 'Modal' },
+];
 
 /**
  * Container for all extended component information for the target component.
@@ -333,6 +397,9 @@ const settings = computedModel(
       renderer: {
         positioning: cachedRef(SETTINGS_POSITIONING_KEY, defaultSettings.renderer['default-positioning']),
         background: cachedRef(SETTINGS_BACKGROUND_KEY, defaultSettings.renderer['default-background']),
+      },
+      playground: {
+        surface: cachedRef(SETTINGS_PLAYGROUND_SURFACE_KEY, defaultSettings.playground['default-surface']),
       },
       code: {
         scheme: cachedRef(SETTINGS_SCHEME_KEY, defaultSettings.code['default-scheme']),
@@ -538,6 +605,7 @@ export default {
     margin-block: var(--dt-spacing-200);
     background-color: var(--dt-color-surface-sunken);
     border-radius: var(--dt-size-radius-400);
+    border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
 
     @media screen and (min-width: 640px) {
       display: flex;
@@ -549,7 +617,6 @@ export default {
     position: fixed;
     inset: 0;
     z-index: var(--zi-popover);
-    background-color: var(--dt-color-surface-modal);
   }
 
   &__start {
