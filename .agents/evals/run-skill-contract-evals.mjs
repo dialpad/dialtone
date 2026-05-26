@@ -109,14 +109,67 @@ function commandsForChangedFiles(files) {
     }
     if (file.startsWith('packages/dialtone-vue/')) {
       commands.add('pnpm nx run dialtone-vue:test');
+      commands.add('pnpm nx run dialtone-vue:lint');
       commands.add('pnpm nx run dialtone-vue:build');
+    }
+    if (file.startsWith('packages/dialtone-css/')) {
+      commands.add('pnpm nx run dialtone-css:lint');
+      commands.add('pnpm nx run dialtone-css:build');
+    }
+    if (file.startsWith('packages/dialtone-tokens/')) {
+      commands.add('pnpm nx run dialtone-tokens:build');
+    }
+    if (file.startsWith('packages/dialtone-icons/')) {
+      commands.add('pnpm nx run dialtone-icons:build');
+    }
+    if (file.startsWith('apps/dialtone-documentation/')) {
+      commands.add('pnpm nx run dialtone-documentation:lint');
+      commands.add('pnpm nx run dialtone-documentation:build');
+    }
+    if (file.startsWith('packages/dialtone-docs/')) {
+      commands.add('pnpm nx run dialtone-docs:build');
+      commands.add('pnpm nx run dialtone-docs:test');
     }
     if (file.startsWith('packages/dialtone-query-core/')) {
       commands.add('pnpm nx run dialtone-query-core:test');
       commands.add('pnpm nx run dialtone-query-core:build');
     }
+    if (file.startsWith('packages/dialtone-mcp-server/')) {
+      commands.add('pnpm nx run dialtone-mcp-server:build');
+    }
+    if (file.startsWith('packages/dialtone-cli/')) {
+      commands.add('pnpm nx run dialtone-cli:build');
+    }
+    if (file.startsWith('packages/language-server/')) {
+      commands.add('pnpm nx run language-server:build');
+    }
+    if (file.startsWith('packages/eslint-plugin-dialtone/')) {
+      commands.add('pnpm nx run eslint-plugin-dialtone:test');
+    }
+    if (file.startsWith('packages/stylelint-plugin-dialtone/')) {
+      commands.add('pnpm nx run stylelint-plugin-dialtone:test');
+    }
+    if (file.startsWith('packages/postcss-responsive-variations/')) {
+      commands.add('pnpm nx run postcss-responsive-variations:test');
+    }
   }
   return [...commands];
+}
+
+function isReleaseConfig(file) {
+  return (
+    file.includes('release') ||
+    file === '.releaserc' ||
+    file === '.releaserc.json'
+  );
+}
+
+function isBranchStrategy(file) {
+  return file.includes('branch') || file === 'AGENTS.md';
+}
+
+function isCommitConvention(file) {
+  return file === '.github/COMMIT_CONVENTION.md';
 }
 
 function docsForChangedFiles(files) {
@@ -129,6 +182,12 @@ function docsForChangedFiles(files) {
       docs.add(
         'packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md',
       );
+      docs.add(
+        'packages/dialtone-docs/src/content/reference/reference-accessibility-checklist.md',
+      );
+      docs.add(
+        'packages/dialtone-docs/src/content/development/development-testing.md',
+      );
     }
     if (file.startsWith('packages/dialtone-tokens/')) {
       docs.add(
@@ -138,9 +197,34 @@ function docsForChangedFiles(files) {
         'packages/dialtone-docs/src/content/architecture/architecture-design-token-pipeline.md',
       );
     }
+    if (file.startsWith('packages/dialtone-css/')) {
+      docs.add(
+        'packages/dialtone-docs/src/content/development/development-css-utilities.md',
+      );
+    }
+    if (file.startsWith('packages/dialtone-icons/')) {
+      docs.add(
+        'packages/dialtone-docs/src/content/development/development-icons.md',
+      );
+    }
     if (file.startsWith('.github/workflows/')) {
       docs.add(
         'packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md',
+      );
+    }
+    if (isReleaseConfig(file)) {
+      docs.add(
+        'packages/dialtone-docs/src/content/workflows/workflow-release-process.md',
+      );
+    }
+    if (isBranchStrategy(file)) {
+      docs.add(
+        'packages/dialtone-docs/src/content/workflows/workflow-branch-strategy.md',
+      );
+    }
+    if (isCommitConvention(file)) {
+      docs.add(
+        'packages/dialtone-docs/src/content/workflows/workflow-conventional-commits.md',
       );
     }
   }

@@ -4,7 +4,18 @@
     "changedFiles": ["packages/dialtone-vue/components/button/button.vue"],
     "expectedDocs": [
       "packages/dialtone-docs/src/content/development/development-component-workflow.md",
-      "packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md"
+      "packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md",
+      "packages/dialtone-docs/src/content/reference/reference-accessibility-checklist.md",
+      "packages/dialtone-docs/src/content/development/development-testing.md"
+    ]
+  },
+  {
+    "id": "css",
+    "changedFiles": [
+      "packages/dialtone-css/lib/build/less/utility-classes/flex.less"
+    ],
+    "expectedDocs": [
+      "packages/dialtone-docs/src/content/development/development-css-utilities.md"
     ]
   },
   {
@@ -16,10 +27,31 @@
     ]
   },
   {
+    "id": "icons",
+    "changedFiles": ["packages/dialtone-icons/src/svg/add.svg"],
+    "expectedDocs": [
+      "packages/dialtone-docs/src/content/development/development-icons.md"
+    ]
+  },
+  {
     "id": "github_workflow",
     "changedFiles": [".github/workflows/unit_tests.yml"],
     "expectedDocs": [
       "packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md"
+    ]
+  },
+  {
+    "id": "commit_convention",
+    "changedFiles": [".github/COMMIT_CONVENTION.md"],
+    "expectedDocs": [
+      "packages/dialtone-docs/src/content/workflows/workflow-conventional-commits.md"
+    ]
+  },
+  {
+    "id": "branch_strategy",
+    "changedFiles": ["AGENTS.md"],
+    "expectedDocs": [
+      "packages/dialtone-docs/src/content/workflows/workflow-branch-strategy.md"
     ]
   }
 ]

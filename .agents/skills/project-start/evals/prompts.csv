@@ -3,4 +3,3 @@ no_jira_tooling,"$project-start NO-JIRA add codex tooling","Uses chore/NO-JIRA-a
 ticket_feature,"$project-start DLT-1234 add popover layout token","Uses a DLT-1234 branch and does not create a new Jira ticket."
 dirty_tracked,"$project-start NO-JIRA docs cleanup with tracked edits present","Blocks branch creation until tracked edits are resolved."
 dirty_untracked,"$project-start NO-JIRA docs cleanup with untracked generated docs present","Reports untracked files and leaves them unstaged."
-
