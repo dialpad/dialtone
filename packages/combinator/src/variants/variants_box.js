@@ -28,12 +28,16 @@ export default {
     },
   },
 
+
   default: {
+    props: {
+      surface: { initialValue: 'default' },
+      padding: { initialValue: '200' },
+    },
     slots: {
       default: { initialValue: 'Box content' },
     },
   },
-
 
   'custom card': {
     props: {
@@ -102,7 +106,19 @@ export default {
     },
   },
 
-  'overlay shadow': {
+  'raised': {
+    props: {
+      padding: { initialValue: '200' },
+      surface: { initialValue: 'raised' },
+      borderRadius: { initialValue: '200' },
+      shadow: { initialValue: 'raised' },
+    },
+    slots: {
+      default: { initialValue: 'Raised shadow' },
+    },
+  },
+
+  'overlay': {
     props: {
       padding: { initialValue: '200' },
       surface: { initialValue: 'overlay' },

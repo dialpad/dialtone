@@ -7,6 +7,8 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-box--default
 keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius", "sizing", "overflow", "scrollbar", "background", "spacing", "layout", "primitive", "elevation"]
 ---
 
+<!--
+TESTING
 <dt-stack gap="100">
   <dt-stack direction="row">
     <dt-box class="d-fl1" padding="200" surface="default">
@@ -156,6 +158,7 @@ keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius
   </dt-stack>
   </dt-box>
 </dt-stack>
+-->
 
 <component-combinator component-name="DtBox" />
 
