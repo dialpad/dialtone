@@ -1,0 +1,29 @@
+# Dialtone Validation Map
+
+Use this resource from `validate`, `pr-prep`, `component-work`, and PR workflows. Prefer focused checks first, then broader checks when an API or downstream package changed.
+
+## Path To Commands
+
+| Changed path                                | Suggested checks                                                                                                                                                                                     |
+| ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `AGENTS.md`, `.agents/**`                   | `node .agents/evals/run-skill-contract-evals.mjs`; relevant skill evals; `pnpm exec markdownlint AGENTS.md .agents/**/*.md`; `pnpm exec prettier --check AGENTS.md .agents/**/*.md .agents/**/*.mjs` |
+| `packages/dialtone-vue/**`                  | `pnpm nx run dialtone-vue:test`; `pnpm nx run dialtone-vue:lint`; `pnpm nx run dialtone-vue:build`                                                                                                   |
+| `packages/dialtone-css/**`                  | `pnpm nx run dialtone-css:lint`; `pnpm nx run dialtone-css:build`                                                                                                                                    |
+| `packages/dialtone-tokens/**`               | `pnpm nx run dialtone-tokens:build`                                                                                                                                                                  |
+| `packages/dialtone-icons/**`                | `pnpm nx run dialtone-icons:build`                                                                                                                                                                   |
+| `apps/dialtone-documentation/**`            | `pnpm nx run dialtone-documentation:lint`; `pnpm nx run dialtone-documentation:build`                                                                                                                |
+| `packages/dialtone-docs/**`                 | `pnpm nx run dialtone-docs:build`; `pnpm nx run dialtone-docs:test`; `pnpm nx run dialtone-docs:check-freshness` when standards change                                                               |
+| `packages/dialtone-query-core/**`           | `pnpm nx run dialtone-query-core:test`; `pnpm nx run dialtone-query-core:build`                                                                                                                      |
+| `packages/dialtone-mcp-server/**`           | `pnpm nx run dialtone-mcp-server:build`; `node packages/dialtone-mcp-server/scripts/run-acceptance-scenarios.mjs` when documentation search behavior changes                                         |
+| `packages/dialtone-cli/**`                  | `pnpm nx run dialtone-cli:build`                                                                                                                                                                     |
+| `packages/language-server/**`               | `pnpm nx run language-server:build`                                                                                                                                                                  |
+| `packages/eslint-plugin-dialtone/**`        | `pnpm nx run eslint-plugin-dialtone:test`                                                                                                                                                            |
+| `packages/stylelint-plugin-dialtone/**`     | `pnpm nx run stylelint-plugin-dialtone:test`                                                                                                                                                         |
+| `packages/postcss-responsive-variations/**` | `pnpm nx run postcss-responsive-variations:test`                                                                                                                                                     |
+| `.github/**`                                | YAML/readability review; run workflow-specific local checks if present                                                                                                                               |
+
+## Done When
+
+- Every changed area has at least one focused check selected or an explicit reason it was skipped.
+- Cross-package changes include downstream build or test coverage where the package graph indicates risk.
+- Validation output is summarized with pass/fail/skip status and exact commands.

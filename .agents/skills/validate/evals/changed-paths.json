@@ -1,0 +1,26 @@
+[
+  {
+    "id": "codex_tooling",
+    "changedFiles": ["AGENTS.md", ".agents/skills/project-start/SKILL.md"],
+    "expectedCommands": [
+      "node .agents/evals/run-skill-contract-evals.mjs",
+      "pnpm exec markdownlint AGENTS.md .agents/**/*.md"
+    ]
+  },
+  {
+    "id": "vue_component",
+    "changedFiles": ["packages/dialtone-vue/components/button/button.vue"],
+    "expectedCommands": [
+      "pnpm nx run dialtone-vue:test",
+      "pnpm nx run dialtone-vue:build"
+    ]
+  },
+  {
+    "id": "query_core",
+    "changedFiles": ["packages/dialtone-query-core/src/tools/docs.ts"],
+    "expectedCommands": [
+      "pnpm nx run dialtone-query-core:test",
+      "pnpm nx run dialtone-query-core:build"
+    ]
+  }
+]

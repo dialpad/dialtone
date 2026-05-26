@@ -1,0 +1,29 @@
+[
+  {
+    "id": "inline_comments",
+    "comments": [
+      {
+        "id": 101,
+        "path": "packages/dialtone-vue/components/Box/Box.test.js",
+        "line": 42,
+        "body": "Split this into one observable per test.",
+        "in_reply_to_id": null
+      },
+      {
+        "id": 102,
+        "path": "packages/dialtone-vue/components/Box/Box.test.js",
+        "line": 42,
+        "body": "Fixed.",
+        "in_reply_to_id": 101
+      },
+      {
+        "id": 103,
+        "path": "packages/dialtone-vue/components/Resizable/Resizable.test.js",
+        "line": 88,
+        "body": "Use shared constants for valid fixtures.",
+        "in_reply_to_id": null
+      }
+    ],
+    "expectedTopLevelIds": [101, 103]
+  }
+]
