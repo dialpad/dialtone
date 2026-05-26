@@ -144,6 +144,32 @@ describe('DtModal Tests', () => {
   });
 
   describe('Interactivity Tests', () => {
+    describe('When clicking non-focusable modal content', () => {
+      beforeEach(() => {
+        wrapper.unmount();
+        mockSlots = { footer: '<button data-qa="dt-modal-cancel">Cancel</button>' };
+        updateWrapper();
+      });
+
+      it('Should NOT refocus the first focusable element', async () => {
+        const cancelBtn = wrapper.find('[data-qa="dt-modal-cancel"]');
+        await copy.trigger('click');
+        await wrapper.vm.$nextTick();
+
+        expect(document.activeElement).not.toBe(cancelBtn.element);
+      });
+
+      it('Should return focus to the modal when Tab is subsequently pressed', async () => {
+        const cancelBtn = wrapper.find('[data-qa="dt-modal-cancel"]');
+        await copy.trigger('click');
+        document.dispatchEvent(new KeyboardEvent('keydown', { key: 'Tab', code: 'Tab', bubbles: true, cancelable: true }));
+        await wrapper.vm.$nextTick();
+        await wrapper.vm.$nextTick();
+
+        expect(document.activeElement).toBe(cancelBtn.element);
+      });
+    });
+
     it('Should emit a sync-able update event when overlay is clicked', async () => {
       expect(wrapper.emitted(SYNC_EVENT_NAME)).toBeFalsy();
 
