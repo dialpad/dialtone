@@ -193,17 +193,17 @@
         }
       },
       "raised": {
-        "value": "{color.black.200}",
+        "value": "{color.black.150}",
         "type": "color",
         "description": "For raised surfaces like cards and panels. Typically paired with raised shadow."
       },
       "overlay": {
-        "value": "{color.black.200}",
+        "value": "{color.black.150}",
         "type": "color",
         "description": "For overlay surfaces like modals, popovers, and dialogs. Typically paired with overlay shadow."
       },
       "modal": {
-        "value": "{color.black.200}",
+        "value": "{color.black.150}",
         "type": "color",
         "description": "For blocking modal surfaces. Typically paired with modal shadow."
       },

@@ -48,7 +48,7 @@
           >
             <template #leading>
               <dt-text
-                kind="code"
+                kind="label"
                 tone="primary"
                 strength="semibold"
                 class="d-fs-inherit"
@@ -99,7 +99,7 @@
             >
               <template #leading>
                 <dt-text
-                  kind="body"
+                  kind="label"
                   tone="primary"
                   strength="semibold"
                   class="d-fs-inherit"
