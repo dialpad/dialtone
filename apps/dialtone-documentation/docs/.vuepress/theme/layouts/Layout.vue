@@ -16,17 +16,15 @@
           title="Dialtone homepage"
           to="/"
         >
-          <DtStack direction="row" gap="150">
+          <DtStack direction="row" gap="200">
             <DtIllustration name="dialpad-logo" />
-            <DtBox v-if="showBranchBadge" padding-block-start="100" :title="branchName">
-              <DtBadge>
-                <template #startIcon="{ iconSize }">
-                  <dt-icon-branch :size="iconSize" />
-                </template>
-                <DtText as="p" class="d-wmx-250" truncate>
+            <DtBox v-if="showBranchBadge" padding-block-start="200" :title="branchName">
+              <DtStack direction="row" gap="50">
+                <dt-icon-branch class="d-fc-muted" :size="100" />
+                <DtText as="p" kind="body" size="100" tone="muted" class="d-wmx-250" truncate>
                   {{ branchName }}
                 </DtText>
-              </DtBadge>
+              </DtStack>
             </DtBox>
           </DtStack>
         </router-link>
