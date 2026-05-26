@@ -20,5 +20,29 @@
       "includeCssChecklist": false,
       "allowJiraCreation": false
     }
+  },
+  {
+    "id": "new_export",
+    "changedFiles": ["packages/dialtone-query-core/src/index.ts"],
+    "ticketMode": "DLT-1234",
+    "newExports": ["searchDocumentation"],
+    "expected": {
+      "titlePrefix": "feat: DLT-1234",
+      "includeVueChecklist": false,
+      "includeCssChecklist": false,
+      "allowJiraCreation": false
+    }
+  },
+  {
+    "id": "breaking_removal",
+    "changedFiles": ["packages/dialtone-vue/components/button/button.vue"],
+    "ticketMode": "DLT-1234",
+    "removals": ["oldProp"],
+    "expected": {
+      "titlePrefix": "feat!: DLT-1234",
+      "includeVueChecklist": true,
+      "includeCssChecklist": false,
+      "allowJiraCreation": false
+    }
   }
 ]

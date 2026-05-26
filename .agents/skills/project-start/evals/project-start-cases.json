@@ -30,7 +30,7 @@
     "untrackedFiles": [],
     "expected": {
       "ticketMode": "NO-JIRA",
-      "branch": "docs/NO-JIRA-docs-cleanup",
+      "branch": "chore/NO-JIRA-docs-cleanup",
       "jiraAction": "none",
       "canCreateBranch": false
     }
@@ -44,7 +44,7 @@
     ],
     "expected": {
       "ticketMode": "NO-JIRA",
-      "branch": "docs/NO-JIRA-docs-cleanup",
+      "branch": "chore/NO-JIRA-docs-cleanup",
       "jiraAction": "none",
       "canCreateBranch": true,
       "untrackedPolicy": "report-only"

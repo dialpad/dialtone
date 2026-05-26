@@ -4,8 +4,9 @@
     "changedFiles": ["AGENTS.md", ".agents/skills/project-start/SKILL.md"],
     "expectedCommands": [
       "node .agents/evals/run-skill-contract-evals.mjs",
+      "node .agents/skills/project-start/evals/run-project-start-evals.mjs",
       "pnpm exec markdownlint AGENTS.md .agents/**/*.md",
-      "pnpm exec prettier --check AGENTS.md .agents/**/*.md .agents/**/*.mjs"
+      "pnpm exec prettier --check --single-quote AGENTS.md .agents/**/*.md .agents/**/*.mjs"
     ]
   },
   {

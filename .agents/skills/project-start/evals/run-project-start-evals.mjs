@@ -29,6 +29,8 @@ function slugify(text) {
 }
 
 function inferType(description, ticketMode) {
+  if (ticketMode === 'NO-JIRA') return 'chore';
+
   const text = description.toLowerCase();
   if (
     text.includes('codex') ||
@@ -39,7 +41,6 @@ function inferType(description, ticketMode) {
   if (text.includes('doc')) return 'docs';
   if (text.includes('fix')) return 'fix';
   if (text.includes('test')) return 'test';
-  if (ticketMode === 'NO-JIRA') return 'chore';
   return 'feat';
 }
 

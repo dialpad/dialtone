@@ -48,6 +48,13 @@
     ]
   },
   {
+    "id": "release_config",
+    "changedFiles": [".releaserc"],
+    "expectedDocs": [
+      "packages/dialtone-docs/src/content/workflows/workflow-release-process.md"
+    ]
+  },
+  {
     "id": "branch_strategy",
     "changedFiles": ["AGENTS.md"],
     "expectedDocs": [

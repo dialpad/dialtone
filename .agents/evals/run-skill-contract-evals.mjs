@@ -102,9 +102,14 @@ function commandsForChangedFiles(files) {
   for (const file of files) {
     if (file === 'AGENTS.md' || file.startsWith('.agents/')) {
       commands.add('node .agents/evals/run-skill-contract-evals.mjs');
+      if (file.startsWith('.agents/skills/project-start/')) {
+        commands.add(
+          'node .agents/skills/project-start/evals/run-project-start-evals.mjs',
+        );
+      }
       commands.add('pnpm exec markdownlint AGENTS.md .agents/**/*.md');
       commands.add(
-        'pnpm exec prettier --check AGENTS.md .agents/**/*.md .agents/**/*.mjs',
+        'pnpm exec prettier --check --single-quote AGENTS.md .agents/**/*.md .agents/**/*.mjs',
       );
     }
     if (file.startsWith('packages/dialtone-vue/')) {
@@ -241,7 +246,19 @@ function prCreatePolicy(caseData) {
   const hasCss = caseData.changedFiles.some((file) =>
     file.startsWith('packages/dialtone-css/'),
   );
-  const type = isCodex ? 'chore' : hasVue ? 'feat' : 'chore';
+  const hasBreakingChange =
+    caseData.changeType === 'breaking' ||
+    Boolean(caseData.removals?.length) ||
+    Boolean(caseData.renames?.length);
+  const hasFeatureChange =
+    caseData.changeType === 'feature' || Boolean(caseData.newExports?.length);
+  const type = hasBreakingChange
+    ? 'feat!'
+    : hasFeatureChange || hasVue
+      ? 'feat'
+      : isCodex
+        ? 'chore'
+        : 'chore';
   return {
     titlePrefix: `${type}: ${caseData.ticketMode}`,
     includeVueChecklist: hasVue,

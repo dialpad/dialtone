@@ -5,10 +5,11 @@ Use this resource to map changed paths to affected packages and downstream impac
 ## Package Graph
 
 ```text
-dialtone-tokens -> dialtone-css -> dialtone-vue -> dialtone-documentation
-                                      -> dialtone-mcp-server
-                                      -> language-server
-                                      -> dialtone-docs / dialtone-query-core / dialtone-cli
+dialtone-tokens -> dialtone-css ----\
+dialtone-icons ----------------------> dialtone-vue -> dialtone-documentation
+                                                     -> dialtone-mcp-server
+                                                     -> language-server
+                                                     -> dialtone-docs / dialtone-query-core / dialtone-cli
 ```
 
 ## Affected Areas
