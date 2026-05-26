@@ -1,4 +1,6 @@
 
+const isUnset = v => v == null;
+
 export default {
   defaults: {
     props: {
@@ -28,6 +30,20 @@ export default {
     },
   },
 
+  exclusions: [
+    {
+      when: {
+        borderWidth: isUnset,
+        borderWidthInline: isUnset,
+        borderWidthInlineStart: isUnset,
+        borderWidthInlineEnd: isUnset,
+        borderWidthBlock: isUnset,
+        borderWidthBlockStart: isUnset,
+        borderWidthBlockEnd: isUnset,
+      },
+      hide: { props: ['borderColor'] },
+    },
+  ],
 
   default: {
     props: {
