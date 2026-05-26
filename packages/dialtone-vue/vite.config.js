@@ -76,10 +76,8 @@ export default defineConfig({
         // Shared components
         'shared/sr_only_close_button': './common/sr_only_close_button.vue',
 
-        // Dependencies — use 'vendor/' prefix instead of 'node_modules/' to avoid
-        // broken relative imports in the dist output (e.g. "./node_modules/@tiptap/vue-3.js")
-        // that fail when consumers install the package.
-        'vendor/tiptap-vue-3': './node_modules/@tiptap/vue-3/dist/index.js',
+        // Dependencies
+        'node_modules/@tiptap/vue-3': './node_modules/@tiptap/vue-3/dist/index.js',
 
         // Localization
         'localization/index': './localization/index.js',
