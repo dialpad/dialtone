@@ -221,7 +221,6 @@ import { getComponentInfo } from '@/src/lib/info';
 import {
   SETTINGS_BACKGROUND_KEY,
   SETTINGS_INDENT_KEY,
-  SETTINGS_PLAYGROUND_SURFACE_KEY,
   SETTINGS_POSITIONING_KEY,
   SETTINGS_SCHEME_KEY,
   SETTINGS_SIDEBAR_KEY,
@@ -293,6 +292,8 @@ const variantOptions = computed(() => {
     .filter(key => key !== 'exclusions' && key !== 'defaults')
     .map(key => ({ value: key, label: key }));
 });
+
+const DEFAULT_PLAYGROUND_SURFACE = 'sunken';
 
 const SURFACE_OPTIONS = [
   { value: 'sunken', label: 'Sunken' },
@@ -400,7 +401,7 @@ const settings = computedModel(
         background: cachedRef(SETTINGS_BACKGROUND_KEY, defaultSettings.renderer['default-background']),
       },
       playground: {
-        surface: cachedRef(SETTINGS_PLAYGROUND_SURFACE_KEY, defaultSettings.playground['default-surface']),
+        surface: ref(DEFAULT_PLAYGROUND_SURFACE),
       },
       code: {
         scheme: cachedRef(SETTINGS_SCHEME_KEY, defaultSettings.code['default-scheme']),

@@ -16,4 +16,3 @@ export const SETTINGS_VERBOSE_KEY = 'dialtoneCombinatorCodeVerbose';
 export const SETTINGS_INDENT_KEY = 'dialtoneCombinatorCodeIndent';
 export const SETTINGS_POSITIONING_KEY = 'dialtoneCombinatorRendererPositioning';
 export const SETTINGS_BACKGROUND_KEY = 'dialtoneCombinatorRendererBackground';
-export const SETTINGS_PLAYGROUND_SURFACE_KEY = 'dialtoneCombinatorPlaygroundSurface';

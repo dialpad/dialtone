@@ -11,8 +11,5 @@
   "renderer": {
     "default-positioning": "center",
     "default-background": "white"
-  },
-  "playground": {
-    "default-surface": "sunken"
   }
 }
