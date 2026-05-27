@@ -23,6 +23,15 @@ const skills = {
     ],
     patterns: [/NO-JIRA/, /Jira creation is separate/, /chore\/NO-JIRA/],
   },
+  'dialtone-lookup': {
+    resources: ['.agents/resources/dialtone-lookup.md'],
+    patterns: [
+      /Dialtone MCP server/,
+      /\.\/node_modules\/\.bin\/dialtone/,
+      /Prefer the local `\.\/node_modules\/\.bin\/dialtone` CLI/,
+      /Do not guess component APIs/,
+    ],
+  },
   review: {
     resources: [
       '.agents/resources/rules/general.md',
@@ -100,17 +109,26 @@ function assert(condition, message, failures) {
 function commandsForChangedFiles(files) {
   const commands = new Set();
   for (const file of files) {
-    if (file === 'AGENTS.md' || file.startsWith('.agents/')) {
+    if (
+      file === 'AGENTS.md' ||
+      file.startsWith('.agents/') ||
+      file.startsWith('.codex/')
+    ) {
       commands.add('node .agents/evals/run-skill-contract-evals.mjs');
       if (file.startsWith('.agents/skills/project-start/')) {
         commands.add(
           'node .agents/skills/project-start/evals/run-project-start-evals.mjs',
         );
       }
+    }
+    if (file === 'AGENTS.md' || file.startsWith('.agents/')) {
       commands.add('pnpm exec markdownlint AGENTS.md .agents/**/*.md');
       commands.add(
         'pnpm exec prettier --check --single-quote AGENTS.md .agents/**/*.md .agents/**/*.mjs',
       );
+    }
+    if (file.startsWith('.codex/')) {
+      commands.add('./node_modules/.bin/dialtone --help');
     }
     if (file.startsWith('packages/dialtone-vue/')) {
       commands.add('pnpm nx run dialtone-vue:test');
@@ -238,7 +256,10 @@ function docsForChangedFiles(files) {
 
 function prCreatePolicy(caseData) {
   const isCodex = caseData.changedFiles.some(
-    (file) => file === 'AGENTS.md' || file.startsWith('.agents/'),
+    (file) =>
+      file === 'AGENTS.md' ||
+      file.startsWith('.agents/') ||
+      file.startsWith('.codex/'),
   );
   const hasVue = caseData.changedFiles.some((file) =>
     file.startsWith('packages/dialtone-vue/'),
@@ -341,6 +362,30 @@ for (const rulePath of new Set(mappedRulePaths)) {
   assert(
     existsSync(join(repoRoot, rulePath)),
     `.agents/resources/rule-map.md references missing ${rulePath}`,
+    failures,
+  );
+}
+
+assert(
+  existsSync(join(repoRoot, '.codex/config.toml')),
+  'missing .codex/config.toml for Dialtone MCP runtime config',
+  failures,
+);
+if (existsSync(join(repoRoot, '.codex/config.toml'))) {
+  const codexConfig = read('.codex/config.toml');
+  assert(
+    codexConfig.includes('[mcp_servers.dialtone]'),
+    '.codex/config.toml must register the Dialtone MCP server',
+    failures,
+  );
+  assert(
+    codexConfig.includes('./node_modules/.bin/dialtone-mcp-server'),
+    '.codex/config.toml must use the local Dialtone MCP server binary',
+    failures,
+  );
+  assert(
+    codexConfig.includes('"search_documentation"'),
+    '.codex/config.toml must enable search_documentation',
     failures,
   );
 }

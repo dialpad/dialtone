@@ -19,7 +19,7 @@ Use this resource to lazy-load Codex review guidance. Always start with `.agents
 | `apps/dialtone-documentation/**`            | `.agents/resources/rules/documentation-site.md`; `.agents/resources/rules/documentation-writing.md`                                                                                      |
 | `.github/**`                                | `.agents/resources/rules/github-workflows.md`                                                                                                                                            |
 | `scripts/**`                                | `.agents/resources/rules/scripts.md`                                                                                                                                                     |
-| `.agents/**`, `AGENTS.md`                   | `.agents/resources/rules/codex-tooling.md`; `.agents/resources/rules/general.md`                                                                                                         |
+| `.agents/**`, `.codex/**`, `AGENTS.md`      | `.agents/resources/rules/codex-tooling.md`; `.agents/resources/rules/general.md`                                                                                                         |
 
 ## Review Discipline
 

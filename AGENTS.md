@@ -13,4 +13,5 @@ Dialtone is a public design system monorepo. Keep Codex work branch-safe, public
 - This is a public repo. Do not add private Dialpad links, secrets, customer data, or internal-only context to committed files or PR bodies.
 - Commit and PR titles follow `.github/COMMIT_CONVENTION.md`: `<type>(<scope>): <jira> <subject>`.
 - Never include `Co-Authored-By` lines in commits or PR descriptions.
+- Use Dialtone CLI or MCP lookup before guessing about public component APIs, tokens, utility classes, icons, or docs guidance. Prefer CLI for version-sensitive work.
 - Read `.agents/README.md` to choose the local Codex skill or resource for a task.

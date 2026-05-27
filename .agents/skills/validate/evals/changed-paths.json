@@ -10,6 +10,14 @@
     ]
   },
   {
+    "id": "codex_runtime_config",
+    "changedFiles": [".codex/config.toml"],
+    "expectedCommands": [
+      "node .agents/evals/run-skill-contract-evals.mjs",
+      "./node_modules/.bin/dialtone --help"
+    ]
+  },
+  {
     "id": "vue_component",
     "changedFiles": ["packages/dialtone-vue/components/button/button.vue"],
     "expectedCommands": [
