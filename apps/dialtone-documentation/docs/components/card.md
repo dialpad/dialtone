@@ -3,7 +3,6 @@ title: Card
 description: A card contains summary content and actions about a single subject. It can be used by itself or within a list, and is generally interactive.
 status: ready
 thumb: true
-image: assets/images/components/card.png
 figma: planned
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-card--default
 keywords: ["panel", "container", "box", "d-card", "DtCard", "dt-card", "tile", "surface"]
@@ -75,7 +74,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
     </dt-button>
   </template>
   <template #content>
-    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
+    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper.
   </template>
 </dt-card>
 ```
@@ -85,7 +84,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
 ```vue demo
 <dt-card class="d-w-400">
   <template #content>
-    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
+    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper.
   </template>
   <template #footer>
     <dt-button
@@ -103,7 +102,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
 ```vue demo
 <dt-card class="d-w-400">
   <template #content>
-    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.
+    Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper.
   </template>
 </dt-card>
 ```
@@ -129,7 +128,7 @@ They should be easy to scan for relevant and actionable information. Elements, l
     </dt-button>
   </template>
   <template #content>
-    <div class="d-h-125 d-pie-200" v-dt-scrollbar:always>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper. Morbi finibus nulla turpis, nec molestie mi rutrum.</div>
+    <div class="d-h-125 d-pie-200" v-dt-scrollbar:always>Content slot. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec fermentum molestie semper.</div>
   </template>
   <template #footer>
     <dt-button

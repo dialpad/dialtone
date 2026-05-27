@@ -204,6 +204,13 @@ Storybook allows you to render each component in isolation and change any availa
 Our storybook is hosted at <https://dialtone.dialpad.com/vue>, and can also be run locally via `npm start`.
 For more detailed info on how to use storybook in Dialtone Vue, refer to our [storybook documentation](https://dialtone.dialpad.com/vue/?path=/story/docs-storybook-getting-started--docs).
 
+### Component Wall Thumbnail
+
+Every component that appears on the [Components overview wall](https://dialtone.dialpad.com/components/) has an auto-generated thumbnail PNG.
+Thumbnails render the component's Combinator default variant; if that doesn't read well (overlay components, layout primitives, etc.), you can author an override `.vue` file.
+Run `pnpm nx run dialtone-documentation:thumbs` to regenerate after touching a component (a pre-commit hook also fires automatically on staged component changes).
+For override-authoring details and the live `?gallery` preview workflow, see [`apps/dialtone-documentation/thumbs/README.md`](../../../apps/dialtone-documentation/thumbs/README.md).
+
 #### Function Documentation via TypeDoc
 
 Storybook does not support documentation of functions by default, however we have a custom solution to this problem.

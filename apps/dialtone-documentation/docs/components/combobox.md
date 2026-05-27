@@ -3,7 +3,6 @@ title: Combobox
 description: A combobox is a semantic component that displays an input element combined with a listbox, which enables the user to select items from the list.
 status: ready
 thumb: true
-image: assets/images/components/combobox.png
 figma: planned
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox--default
 keywords: ["autocomplete","typeahead","search select","d-combobox","DtCombobox","dt-combobox"]

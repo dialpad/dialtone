@@ -3,7 +3,6 @@ title: Hovercard
 description: A Hovercard toggles a content overlay when its anchor element is hovered for a minimum amount of time.
 status: ready
 thumb: true
-image: assets/images/components/hovercard.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-hovercard--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=14395-441
 keywords: ["hover tooltip", "popover", "card overlay", "d-hovercard", "DtHovercard", "dt-hovercard", "preview card", "user card"]

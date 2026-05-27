@@ -3,20 +3,9 @@ title: Emoji Text Wrapper
 description: "Wrapper to find and replace shortcodes like :smile: or unicode chars such as 😄 with our custom Emojis implementation."
 status: ready
 thumb: true
-image: assets/images/components/emoji-text-wrapper.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji-text-wrapper--default
 keywords: ["emoji support","emoticon wrapper","d-emoji-text-wrapper","DtEmojiTextWrapper","dt-emoji-text-wrapper"]
 ---
-
-```vue demo-only
-<dt-text kind="body" :size="300">
-  <dt-emoji-text-wrapper>
-    Some text with :invalid-emoji: :smile: :cry: and 😄, and custom emojis :octocat: :shipit:
-  </dt-emoji-text-wrapper>
-</dt-text>
-```
-
-<!-- <component-combinator component-name="DtEmojiTextWrapper" /> -->
 
 ## Variants and Examples
 

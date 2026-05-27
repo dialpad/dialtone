@@ -3,7 +3,6 @@ title: Root layout
 description: A root layout provides a standardized group of containers to display content at the root level.
 status: ready
 thumb: true
-image: assets/images/components/root-layout.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-root-layout--default
 keywords: ["app layout","page layout","d-root-layout","DtRootLayout","dt-root-layout"]
 ---

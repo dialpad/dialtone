@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 107" fill="none">
-<rect x="101" y="42" width="88" height="12" rx="6" fill="var(--dt-color-foreground-placeholder)" id="text2"/>
-<rect x="101" y="68" width="88" height="12" rx="6" fill="var(--dt-color-foreground-placeholder)" id="text"/>
-<rect x="75" y="23" width="40" height="8" rx="4" fill="var(--dt-color-surface-moderate)" id="label"/>
-<rect x="75" y="65" width="18" height="18" rx="3" fill="var(--dt-action-color-background-base-primary-default)" id="checkbox-icon-checked"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M89.7325 69.2579C90.0847 69.6062 90.0898 70.176 89.7439 70.5306L82.7227 77.7306C82.5546 77.9029 82.3249 78 82.0851 78C81.8453 78 81.6156 77.9029 81.4476 77.7306L78.2561 74.4579C77.9102 74.1033 77.9153 73.5335 78.2675 73.1852C78.6196 72.8369 79.1853 72.842 79.5312 73.1966L82.0851 75.8156L88.4688 69.2694C88.8147 68.9147 89.3804 68.9096 89.7325 69.2579Z" fill="var(--dt-action-color-foreground-base-primary-default)" id="check"/>
-<rect x="74.5" y="38.5" width="19" height="19" rx="3.5" fill="var(--dt-color-surface-secondary)" stroke="var(--dt-checkbox-color-border-unchecked)" id="checkbox-icon"/>
-</svg>

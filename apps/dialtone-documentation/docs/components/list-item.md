@@ -3,7 +3,6 @@ title: List item
 description: A list item is an element that can be used to represent individual items in a list.
 status: ready
 thumb: true
-image: assets/images/components/list-item.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-list-item--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=10732-69390
 keywords: ["list element", "d-list-item", "DtListItem", "dt-list-item"]

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=400">
+  <title>Thumb Harness</title>
+  <style>
+    /* Layout only — let dialtone-css handle ALL typography, colors, and component styles. */
+    html, body {
+      inline-size: 400px; /* capture-frame width, intentionally custom */
+      block-size: 225px;  /* capture-frame height, intentionally custom */
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: transparent;
+    }
+    #thumb-root {
+      inline-size: 400px;
+      block-size: 225px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--dt-spacing-200);
+    }
+    /* Preview-only frame outline — shown in `vite serve` so the author can see
+       the 400×225 viewport boundary. Removed by the generator (which adds
+       `.thumb-capturing` to body) so the captured PNG stays clean. */
+    body:not(.thumb-capturing) #thumb-root {
+      outline: var(--dt-size-border-100) dashed var(--dt-color-border-subtle);
+      outline-offset: calc(-1 * var(--dt-size-border-100));
+    }
+
+    /* Token-level focus suppression. dialtone-css declares components in
+       `@layer dialtone.components`, where unlayered `!important` loses to
+       layered `!important` — overriding the tokens bypasses the cascade.
+       NOT general-purpose tokens like --dt-color-border-focus, since
+       components (DtResizableHandle) use those as design accents. */
+    body.thumb-capturing {
+      --dt-shadow-focus: none;
+      --dt-inputs-color-background-focus: transparent;
+      --dt-inputs-color-border-focus: transparent;
+    }
+    body.thumb-capturing :focus,
+    body.thumb-capturing :focus-visible,
+    body.thumb-capturing :focus-within {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+
+    /* Gallery mode — release the 400×225 viewport so the grid of all thumbs
+       can flow naturally. The :has() selector reaches <html> so it loses
+       its overflow:hidden and 400px inline-size too; without that the page
+       can't scroll and the grid is pinned to 400px. Never reached during
+       capture. */
+    html:has(body.gallery-mode),
+    body.gallery-mode {
+      inline-size: auto;
+      block-size: auto;
+      overflow: auto;
+    }
+    body.gallery-mode #thumb-root {
+      inline-size: auto;
+      block-size: auto;
+      display: block;
+      padding: var(--dt-spacing-300);
+      outline: none;
+    }
+    /* Gallery-specific layout / chrome lives in GalleryApp.vue's scoped
+       <style>. Only harness-mechanical rules stay in this file. */
+  </style>
+</head>
+<body>
+  <div id="thumb-root"></div>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

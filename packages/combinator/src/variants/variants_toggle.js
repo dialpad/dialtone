@@ -7,6 +7,7 @@ export default {
     },
     props: {
       labelClass: { initialValue: 'd-pie-100' },
+      modelValue: { initialValue: true },
     },
   },
 

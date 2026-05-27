@@ -3,7 +3,6 @@ title: Input
 description: An input field is an input control that allows users to enter alphanumeric information. It can have a range of options and supports single line and multi-line lengths, as well as varying formats, including numbers, masked passwords, etc.
 status: ready
 thumb: true
-image: assets/images/components/input.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-input--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=25665-5366
 keywords: ["text field", "form field", "textbox", "d-input", "DtInput", "dt-input", "text input", "form input"]
