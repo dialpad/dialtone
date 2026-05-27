@@ -27,7 +27,7 @@ The migration tool automates the conversion process with several key benefits:
 - **Consistency**: Ensures uniform conversion patterns across all files
 - **Safety**: Flags patterns it cannot safely auto-migrate (dynamic `:class` bindings, unsupported tag types, font-size utilities)
 - **Accuracy**: No manual transcription errors or missed conversions
-- **Visibility**: Color-coded diffs and review markers help you spot cases that need a second look
+- **Visibility**: Inline `dt-text-migrate` review markers flag cases that need a second look, and `--dry-run` previews which files would change before you write anything
 
 The tool is ideal for projects with many text elements using utility classes. For small, one-off changes, manual migration may be faster.
 
