@@ -132,20 +132,26 @@ The tool is ideal for projects with many text elements using utility classes. Fo
 - `d-ta-left/right/center/justify` → `align="start/end/center/justify"`
 - `d-ff-mono` → `kind="code"`
 
-**Non-rewriteable tags** (`<a>`, `<button>`, `<li>`, `<td>`, custom Vue components, etc.) carrying only override utilities are left untouched silently. These tags carry semantic behavior beyond text and have no clean DtText receiver.
+**Non-rewriteable tags** (`<a>`, `<button>`, `<li>`, `<td>`, custom Vue components, etc.) are never converted — they carry semantic behavior beyond text and have no clean DtText receiver. If such a tag carries **only override utilities** (`d-fw-*`, `d-fc-*`, etc.) it is left untouched silently. If it carries a **composed class**, the tool flags it with a `review composed class on wrapper tag` marker instead of rewriting it (see the markers table below).
+
+**Layout containers are skipped, not rewritten.** A rewriteable tag carrying a composed class is only converted when it's a genuine text leaf. If it has a layout display class or block/component children (i.e. it's a wrapper, not text), the tool leaves it in place and flags it with a `review composed class on wrapper` marker.
 
 ### What the Tool Flags for Review
 
-The following patterns cannot be safely auto-migrated. The script emits a `<!-- dt-text-migrate: review … -->` comment and leaves the element unchanged (or approximated, in the case of `d-helper--*`). Run `--remove-markers` to strip all comments after manual review.
+Patterns the tool can't safely auto-migrate are surfaced with an inline `<!-- dt-text-migrate: … -->` comment. In most cases the element is left unchanged so the legacy class still appears in the diff for you to handle; the `d-helper--*` case is the exception (it is rewritten to an approximation *and* flagged). Run `--remove-markers` once you've resolved every flagged case to strip all `dt-text-migrate` comments.
 
 | Marker comment | What triggered it | What to do |
 | --- | --- | --- |
 | `<!-- dt-text-migrate: review -->` | `d-headline--eyebrow` / `d-headline-eyebrow` (uses `text-transform: uppercase` — no DtText prop); `d-code--sm` / `d-code-small` (below DtText minimum code size) | Check whether uppercase or small code is genuinely required; implement a custom solution or leave as-is |
 | `<!-- dt-text-migrate: review helper -->` | `d-helper--*` — approximated as `kind="body"` + appropriate `density`; element IS rewritten | Verify the approximation is visually correct; adjust `density` or `size` if needed |
+| `<!-- dt-text-migrate: review composed class on wrapper -->` | A rewriteable tag (`<div>`, `<p>`, etc.) carrying a composed class that is actually a **layout container** — it has a layout display class or block/component children, so it isn't a text leaf. Left unchanged. | Move the composed class onto the actual text element inside, or wrap the text in a `<dt-text>`; keep the container as plain layout |
+| `<!-- dt-text-migrate: review composed class on wrapper tag -->` | A composed class on a tag the tool never rewrites — `<a>`, `<button>`, `<dt-*>` components, custom Vue components, etc. Left unchanged. | Decide whether the text inside should become `<dt-text>`, or apply the equivalent `kind`/`size` to the component if it accepts them |
 | `<!-- dt-text-migrate: review nested span -->` | A child `<span>` with directives, events, or extra attributes that can't be safely collapsed into a nested `<dt-text>` | Migrate the child manually, or keep it as a plain `<span>` inside the parent `<dt-text>` |
 | `<!-- dt-text-migrate: review dynamic class -->` | `:class` / `v-bind:class` bindings containing typography utilities | Convert conditionally bound utilities to conditional props (e.g., `:strength="isBold ? 'bold' : 'normal'"`) |
-| `<!-- dt-text-migrate: review d-fs-* -->` | Raw `d-fs-*` font-size classes — no DtText prop equivalent | Remove the class, or use a CSS custom property override if a non-standard size is needed |
 | `<!-- dt-text-migrate: review conflicting class -->` | A utility class clashes with an explicit prop already on the element (e.g., `<dt-text strength="bold" class="d-fw-normal">`) | Remove the redundant class; keep the explicit prop |
+| `<!-- dt-text-migrate: review d-fs-N (on-menu — maps to …) -->` | A raw `d-fs-N` font-size class whose size *does* line up with a DtText scale stop. The comment names the suggested `kind`/`size`. | Apply the suggested `size` (and `kind`) to the element, then drop the `d-fs-N` class |
+| `<!-- dt-text-migrate: review d-fs-N (off-menu — no clean DtText equivalent, keep class) -->` | A raw `d-fs-N` whose size has no DtText equivalent | Keep the `d-fs-N` class, or pick the nearest on-menu size if the exact value isn't load-bearing |
+| `<!-- dt-text-migrate: legacy heading — as=… \| kind=… \| size: … \| strength=… \| tone=… -->` | The hand-rolled heading pattern: an element with both `d-fw-*` and `d-fs-N` (no composed class). The comment carries a full proposed migration; `kind` is `headline` for `<h1>`–`<h6>` and `kind=body\|label\|headline (VERIFY)` for ambiguous tags. | Apply the proposed props from the comment; for non-heading tags, confirm the right `kind` before applying |
 
 ### How the Tool Works
 
@@ -231,12 +237,21 @@ npx dialtone-migrate-typography --yes
 npx dialtone-migrate-typography
 ```
 
-Interactive mode displays each change with a color-coded diff (red = before, green = after) and prompts for each file. For each match, respond with:
+In interactive mode the tool processes one file at a time. For each file that has changes, it prints the file path and prompts once before writing:
 
-- `y` or `yes`: Apply this change
-- `n` or `no`: Skip this change
-- `a` or `all`: Apply all remaining changes without further prompts
-- `q` or `quit`: Stop and save
+```text
+📄 src/components/Header.vue
+   Apply? [y]es / [n]o / [a]ll / [q]uit:
+```
+
+Respond with:
+
+- `y` / `yes`: apply all changes in this file
+- `n` / `no`: skip this file
+- `a` / `all`: apply this file and every remaining file without further prompts
+- `q` / `quit`: stop immediately
+
+The prompt applies or skips the whole file — it does not step through individual changes within a file. To preview exactly what would change before committing, run `--dry-run` first (it reports which files would be modified).
 
 #### Target Specific Files
 
@@ -284,7 +299,7 @@ Files processed: `.vue` and `.html`.
 
 ### Add DtText Imports
 
-When a file gains its first `<dt-text>`, the script prints a per-file notice on stdout if `DtText` is not already imported or registered. Follow the printed instructions:
+When a file gains its first `<dt-text>`, the script prints a per-file notice on stdout if `DtText` is not already imported or registered. It infers the import path from the file's existing imports: files that already import from `@dialpad/dialtone-vue` (or `@dialpad/dialtone-icons`) get an `@dialpad/dialtone-vue` suggestion; otherwise it suggests the local `@/components/text` path. Follow the printed instructions:
 
 **Options API (registered globally in your app):**
 
@@ -304,6 +319,8 @@ export default {
 import { DtText } from '@dialpad/dialtone-vue';
 </script>
 ```
+
+Projects that import Dialtone components locally will instead see `import { DtText } from '@/components/text';` — use whichever path matches your project's existing imports.
 
 ### Remove Review Markers
 
