@@ -4864,7 +4864,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": ".10",
+                  "value": ".08",
                   "space": "oklch"
                 }
               }
@@ -4877,7 +4877,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": ".16",
+                  "value": ".14",
                   "space": "oklch"
                 }
               }
@@ -4890,7 +4890,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": ".13",
+                  "value": ".11",
                   "space": "oklch"
                 }
               }
@@ -4916,7 +4916,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": ".10",
+                  "value": ".08",
                   "space": "oklch"
                 }
               }
@@ -4929,7 +4929,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": ".16",
+                  "value": ".14",
                   "space": "oklch"
                 }
               }
@@ -4942,7 +4942,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": ".13",
+                  "value": ".11",
                   "space": "oklch"
                 }
               }
@@ -4955,7 +4955,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": "0.05",
+                  "value": "0.04",
                   "space": "oklch"
                 }
               }
@@ -4968,7 +4968,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": ".10",
+                  "value": ".09",
                   "space": "oklch"
                 }
               }
@@ -4981,7 +4981,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": ".07",
+                  "value": ".06",
                   "space": "oklch"
                 }
               }
@@ -4994,7 +4994,7 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": "0.07",
+                  "value": "0.06",
                   "space": "oklch"
                 }
               }
