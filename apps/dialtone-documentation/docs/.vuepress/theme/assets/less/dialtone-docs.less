@@ -1135,9 +1135,42 @@ code {
 }
 
 [data-dt-mode="light"]{
-  // --dt-color-surface-sunken: oklch(from var(--dt-color-black-100) 0.9848 c h) !important; // ORIGINAL: oklch(0.9748 0.0025 48.72)
+    // --dt-color-surface-secondary: color-mix(in oklch, var(--dt-color-black-100) 50%, var(--dt-color-black-150) 80%);
+    // --dt-color-surface-secondary: var(--dt-color-black-150);
+
+  // @layer dialtone.utilities {
+  //   .test {
+  //     .d-bgc-sunken:hover  { background-color: var(--dt-color-black-150) !important; }
+  //     .d-bgc-sunken:active { background-color: var(--dt-color-black-200) !important; }
+
+  //     .d-bgc-default:hover  { background-color: var(--dt-color-black-100) !important; }
+  //     .d-bgc-default:active { background-color: var(--dt-color-black-150) !important; }
+
+  //     .d-bgc-raised:hover  { background-color: var(--dt-color-black-100) !important; }
+  //     .d-bgc-raised:active { background-color: var(--dt-color-black-150) !important; }
+
+  //     .d-bgc-overlay:hover  { background-color: var(--dt-color-black-100) !important; }
+  //     .d-bgc-overlay:active { background-color: var(--dt-color-black-150) !important; }
+  //   }
+  // }
 }
 [data-dt-mode="dark"]{
+  // @layer dialtone.utilities {
+  //   .test {
+  //     .d-bgc-sunken:hover  { background-color: var(--dt-color-black-200) !important; }
+  //     .d-bgc-sunken:active { background-color: var(--dt-color-black-250) !important; }
+
+  //     .d-bgc-default:hover  { background-color: var(--dt-color-black-250) !important; }
+  //     .d-bgc-default:active { background-color: var(--dt-color-black-300) !important; }
+
+  //     .d-bgc-raised:hover  { background-color: var(--dt-color-black-250) !important; }
+  //     .d-bgc-raised:active { background-color: var(--dt-color-black-300) !important; }
+
+  //     .d-bgc-overlay:hover  { background-color: var(--dt-color-black-250) !important; }
+  //     .d-bgc-overlay:active { background-color: var(--dt-color-black-300) !important; }
+  //   }
+  // }
+
   // --dt-color-surface-sunken: oklch(from var(--dt-color-black-100) l c h) !important; // ORIGINAL: oklch(0.1949 0.006 91.63)
   // --dt-color-surface-sunken: oklch(from var(--dt-color-black-100) 0.2149 c h) !important; // ORIGINAL: oklch(0.1949 0.006 91.63)
 

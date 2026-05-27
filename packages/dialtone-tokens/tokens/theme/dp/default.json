@@ -379,20 +379,60 @@
         "type": "color",
         "description": "For sunken or recessed surfaces."
       },
+      "sunken-hover": {
+        "value": "{color.black.150}",
+        "type": "color",
+        "description": "For sunken or recessed surfaces on hover."
+      },
+      "sunken-active": {
+        "value": "{color.black.200}",
+        "type": "color",
+        "description": "For sunken or recessed surfaces on active or pressing state."
+      },
       "default": {
         "value": "{color.black.50}",
         "type": "color",
         "description": "For default primary surfaces."
+      },
+      "default-hover": {
+        "value": "{color.black.100}",
+        "type": "color",
+        "description": "For default primary surfaces on hover."
+      },
+      "default-active": {
+        "value": "{color.black.150}",
+        "type": "color",
+        "description": "For default primary surfaces on active or pressing state."
       },
       "raised": {
         "value": "{color.black.50}",
         "type": "color",
         "description": "For raised surfaces like cards and panels."
       },
+      "raised-hover": {
+        "value": "{color.black.100}",
+        "type": "color",
+        "description": "For raised surfaces like cards and panels on hover."
+      },
+      "raised-active": {
+        "value": "{color.black.150}",
+        "type": "color",
+        "description": "For raised surfaces like cards and panels on active or pressing state."
+      },
       "overlay": {
         "value": "{color.black.50}",
         "type": "color",
         "description": "For overlay surfaces like modals, popovers, and dialogs."
+      },
+      "overlay-hover": {
+        "value": "{color.black.100}",
+        "type": "color",
+        "description": "For overlay surfaces like modals, popovers, and dialogs on hover."
+      },
+      "overlay-active": {
+        "value": "{color.black.150}",
+        "type": "color",
+        "description": "For overlay surfaces like modals, popovers, and dialogs on hover."
       },
       "modal": {
         "value": "{color.black.50}",
@@ -407,7 +447,17 @@
       "secondary": {
         "value": "{color.black.100}",
         "type": "color",
-        "description": "For adjacent or complementary regions."
+        "description": "For adjacent or complementary regions.",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "mix",
+              "value": ".5",
+              "space": "oklch",
+              "color": "{color.black.150}"
+            }
+          }
+        }
       },
       "moderate": {
         "value": "{color.black.200}",

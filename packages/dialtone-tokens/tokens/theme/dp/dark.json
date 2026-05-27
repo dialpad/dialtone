@@ -174,13 +174,19 @@
     "surface": {
       "sunken": {
         "value": "{color.black.150}",
-        "type": "color",
-        "description": "For sunken or recessed surfaces."
+        "type": "color"
+      },
+      "sunken-hover": {
+        "value": "{color.black.200}",
+        "type": "color"
+      },
+      "sunken-active": {
+        "value": "{color.black.250}",
+        "type": "color"
       },
       "default": {
         "value": "{color.black.150}",
         "type": "color",
-        "description": "For default primary surfaces.",
         "$extensions": {
           "studio.tokens": {
             "modify": {
@@ -192,20 +198,41 @@
           }
         }
       },
+      "default-hover": {
+        "value": "{color.black.200}",
+        "type": "color"
+      },
+      "default-active": {
+        "value": "{color.black.250}",
+        "type": "color"
+      },
       "raised": {
         "value": "{color.black.200}",
-        "type": "color",
-        "description": "For raised surfaces like cards and panels. Typically paired with raised shadow."
+        "type": "color"
+      },
+      "raised-hover": {
+        "value": "{color.black.250}",
+        "type": "color"
+      },
+      "raised-active": {
+        "value": "{color.black.300}",
+        "type": "color"
       },
       "overlay": {
         "value": "{color.black.200}",
-        "type": "color",
-        "description": "For overlay surfaces like modals, popovers, and dialogs. Typically paired with overlay shadow."
+        "type": "color"
+      },
+      "overlay-hover": {
+        "value": "{color.black.250}",
+        "type": "color"
+      },
+      "overlay-active": {
+        "value": "{color.black.300}",
+        "type": "color"
       },
       "modal": {
         "value": "{color.black.200}",
-        "type": "color",
-        "description": "For blocking modal surfaces. Typically paired with modal shadow."
+        "type": "color"
       },
       "primary": {
         "value": "{color.black.100}",
