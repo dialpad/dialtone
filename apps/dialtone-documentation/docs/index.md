@@ -136,7 +136,7 @@ pageClass: dialpad-design-home
             v-for="post in $page.blogPosts.sort(sortHandler).slice(0, 3)"
             :key="post.posted"
             :to="`/dialtone/whats-new/posts/${post.posted}`"
-            class="d-d-block d-bar-500 d-td-none d-p-300 h:d-box-secondary-opaque d-ba d-bc-transparent h:d-bc-subtle h:d-bs-raised"
+            class="d-d-block d-bar-500 d-td-none d-p-300 h:d-box-secondary-opaque d-ba d-bc-transparent h:d-bc-default h:d-bs-raised"
           >
             <dt-stack gap="100">
               <dt-link class="d-d-inline">
