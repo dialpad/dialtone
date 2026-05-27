@@ -48,6 +48,8 @@ export default {
   default: {
     props: {
       surface: { initialValue: 'default' },
+      borderWidth: { initialValue: '100' },
+      borderColor: { initialValue: 'subtle' },
       padding: { initialValue: '200' },
     },
     slots: {
