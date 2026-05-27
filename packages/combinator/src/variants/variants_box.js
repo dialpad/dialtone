@@ -134,7 +134,7 @@ export default {
     },
   },
 
-  'overlay': {
+  'overlay surface with shadow': {
     props: {
       padding: { initialValue: '200' },
       surface: { initialValue: 'overlay' },

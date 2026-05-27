@@ -4,8 +4,8 @@ description: Utilities for setting the background color.
 keywords: ["bg color","background colour","bgc"]
 ---
 
-> [!WARNING]
-> Before using background color utilities, first consider [semantic surface colors](/design/colors/palette/#surface).
+> [!WARNING] DtBox
+> Before using background color utilities, first consider the [DtBox](/components/box.md) component with the `surface` prop, which provides semantic surface colors.
 
 ## Usage
 

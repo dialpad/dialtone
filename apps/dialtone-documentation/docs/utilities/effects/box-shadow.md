@@ -4,6 +4,9 @@ description: Utilities for controlling an element's box shadows.
 keywords: ["drop shadow", "elevation"]
 ---
 
+> [!WARNING] DtBox
+> Before using box shadow utilities, first consider the [DtBox](/components/box.md) component with the `shadow` prop, which provides semantic shadow levels (`raised`, `overlay`, `modal`).
+
 ## Outer Shadow
 
 ```vue demo
@@ -47,74 +50,6 @@ Use `fv:d-bs-{n}` to change an element's `:focus-visible` state box shadow [only
 <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-raised fv:d-bs-raised">Keyboard focus me</dt-button>
 ```
 
-## Change Shadow on Drag
-
-When dragging a `raised` card, change its box shadow to `overlay`.
-
-
-```vue demo
-<!-- @custom -->
-<!-- @class d-p-600 d-bgc-default d-ba d-bc-subtle -->
-<dt-card
-  :class="draggableCardClass"
-  :style="draggableCardStyle"
-  @pointerdown="startCardDrag"
-  @pointermove="moveCardDrag"
-  @pointerup="stopCardDrag"
-  @pointercancel="stopCardDrag"
-  @lostpointercapture="stopCardDrag"
->
-  <template #content>
-    <dt-stack direction="row" align="center" gap="100">
-      <dt-icon name="grip-vertical" size="100" class="d-fc-tertiary" />
-      Drag me
-      <dt-icon name="grip-vertical" size="100" class="d-fc-tertiary" />
-    </dt-stack>
-  </template>
-</dt-card>
-```
-
-### Sample demo script
-
-```js
-const dragging = ref(false);
-const dragOffset = ref({ x: 0, y: 0 });
-let dragOrigin = null;
-
-const draggableCardClass = computed(() => [
-  'd-ba d-bc-transparent h:d-bc-subtle',
-  dragging.value ? 'd-bs-overlay d-c-grabbing' : 'd-c-grab',
-]);
-
-const draggableCardStyle = computed(() => ({
-  transform: `translate3d(${dragOffset.value.x}px, ${dragOffset.value.y}px, 0)`,
-  transition: dragging.value ? 'none' : 'transform var(--td150) var(--ttf-out)',
-  touchAction: 'none',
-  userSelect: dragging.value ? 'none' : undefined,
-}));
-
-function startCardDrag (event) {
-  if (event.button !== 0) return;
-  event.preventDefault();
-  dragOrigin = { id: event.pointerId, x: event.clientX, y: event.clientY };
-  event.currentTarget.setPointerCapture?.(event.pointerId);
-}
-
-function moveCardDrag (event) {
-  if (event.pointerId !== dragOrigin?.id) return;
-  const x = event.clientX - dragOrigin.x;
-  const y = event.clientY - dragOrigin.y;
-  if (!dragging.value && Math.hypot(x, y) < 4) return;
-  dragging.value = true;
-  dragOffset.value = { x, y };
-}
-
-function stopCardDrag () {
-  dragging.value = false;
-  dragOffset.value = { x: 0, y: 0 };
-  dragOrigin = null;
-}
-```
 ## Classes
 
 <utility-class-table>
@@ -137,45 +72,5 @@ function stopCardDrag () {
 </utility-class-table>
 
 <script setup>
-import { computed, ref } from 'vue';
-
 const boxShadowNames = ['raised', 'overlay', 'modal'];
-
-const dragging = ref(false);
-const dragOffset = ref({ x: 0, y: 0 });
-let dragOrigin = null;
-
-const draggableCardClass = computed(() => [
-  'd-ba d-bc-transparent h:d-bc-subtle',
-  dragging.value ? 'd-bs-overlay d-c-grabbing' : 'd-c-grab',
-]);
-
-const draggableCardStyle = computed(() => ({
-  transform: `translate3d(${dragOffset.value.x}px, ${dragOffset.value.y}px, 0)`,
-  transition: dragging.value ? 'none' : 'transform var(--td150) var(--ttf-out)',
-  touchAction: 'none',
-  userSelect: dragging.value ? 'none' : undefined,
-}));
-
-function startCardDrag (event) {
-  if (event.button !== 0) return;
-  event.preventDefault();
-  dragOrigin = { id: event.pointerId, x: event.clientX, y: event.clientY };
-  event.currentTarget.setPointerCapture?.(event.pointerId);
-}
-
-function moveCardDrag (event) {
-  if (event.pointerId !== dragOrigin?.id) return;
-  const x = event.clientX - dragOrigin.x;
-  const y = event.clientY - dragOrigin.y;
-  if (!dragging.value && Math.hypot(x, y) < 4) return;
-  dragging.value = true;
-  dragOffset.value = { x, y };
-}
-
-function stopCardDrag () {
-  dragging.value = false;
-  dragOffset.value = { x: 0, y: 0 };
-  dragOrigin = null;
-}
 </script>

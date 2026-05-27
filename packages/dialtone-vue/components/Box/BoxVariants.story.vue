@@ -270,7 +270,14 @@ export default {
   components: { DtBox, DtStack, DtText },
   data () {
     return {
-      elevationSurfaces: ['sunken', 'default', 'raised', 'overlay', 'modal'],
+      elevationSurfaces: [
+        'sunken', 'sunken-hover', 'sunken-active',
+        'default', 'default-hover', 'default-active',
+        'raised', 'raised-hover', 'raised-active',
+        'overlay', 'overlay-hover', 'overlay-active',
+        'modal',
+      ],
+
       neutralSurfaces: ['primary', 'secondary', 'moderate', 'bold', 'strong', 'contrast'],
       semanticSurfaces: ['brand', 'info', 'positive', 'warning', 'critical'],
       variantSurfaces: ['brand-subtle', 'brand-strong', 'info-subtle', 'info-strong', 'positive-subtle', 'positive-strong', 'warning-subtle', 'warning-strong', 'critical-subtle', 'critical-strong'],

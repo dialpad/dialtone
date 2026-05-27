@@ -229,9 +229,12 @@ The five tiers form a spatial ladder for surface depth:
 * `overlay`: detached and floating above the base floor
 * `modal`: blocking and floating significantly above the base floor
 
+> [!INFO] Surfaces in Light vs Dark Mode
+> Although `default`, `raised`, `overlay`, and `modal` appear identical in light mode, they differ in dark mode in visual appearance and depth. For example, `raised`, `overlay`, and `modal` appear to "more forward" in dark mode.
+
 ```vue demo
 <!-- @wrapper -->
-<dt-stack direction="row" gap="200">
+<dt-stack direction="row" gap="400" class="d-py-400">
   <dt-box padding="200" border-radius="300" surface="sunken">sunken</dt-box>
   <dt-box padding="200" border-radius="300" surface="default">default</dt-box>
   <dt-box padding="200" border-radius="300" surface="raised">raised</dt-box>
@@ -240,7 +243,41 @@ The five tiers form a spatial ladder for surface depth:
 </dt-stack>
 ```
 
-### Neutral
+#### Interactive states
+
+Each interactive tier (`sunken`, `default`, `raised`, `overlay`) has a `-hover` and `-active` variant via both the `surface` prop, via utilities like `h:d-bgc-raised-hover`, or CSS Variables like `var(--dt-color-surface-raised-active)`. The `modal` surface has no interactive styled variants because modal surfaces block interaction beneath them.
+
+```vue demo
+<!-- @custom -->
+<!-- @class d-p-300 d-bgc-default d-ba d-bc-subtle -->
+<!-- @wrapper -->
+<dt-stack gap="200" direction="row">
+  <dt-stack gap="200">
+    <dt-box padding="200" border-radius="300" surface="sunken" >sunken</dt-box>
+    <dt-box padding="200" border-radius="300" surface="sunken-hover" >sunken-hover</dt-box>
+    <dt-box padding="200" border-radius="300" surface="sunken-active" >sunken-active</dt-box>
+  </dt-stack>
+  <dt-stack gap="200">
+    <dt-box padding="200" border-radius="300" surface="default" >default</dt-box>
+    <dt-box padding="200" border-radius="300" surface="default-hover" >default-hover</dt-box>
+    <dt-box padding="200" border-radius="300" surface="default-active" >default-active</dt-box>
+  </dt-stack>
+  <dt-stack gap="200">
+    <dt-box padding="200" border-radius="300" surface="raised" >raised</dt-box>
+    <dt-box padding="200" border-radius="300" surface="raised-hover" >raised-hover</dt-box>
+    <dt-box padding="200" border-radius="300" surface="raised-active" >raised-active</dt-box>
+  </dt-stack>
+  <dt-stack gap="200">
+    <dt-box padding="200" border-radius="300" surface="overlay">overlay</dt-box>
+    <dt-box padding="200" border-radius="300" surface="overlay-hover">overlay-hover</dt-box>
+    <dt-box padding="200" border-radius="300" surface="overlay-active">overlay-active</dt-box>
+  </dt-stack>
+</dt-stack>
+```
+
+### Neutral Surfaces
+
+Neutral surface are less favored as a primary method of declaring surface colors as they don't respond to mode changes as intended. Favor the Elevation surfaces. However, they will remain available in the near-term for cases where a more subtle distinction remains necessary.
 
 ```vue demo
 <!-- @wrapper -->
@@ -255,7 +292,7 @@ The five tiers form a spatial ladder for surface depth:
 <dt-box surface="{surfaceColor}">...</dt-box>
 ```
 
-### Semantic surfaces
+### Semantic Surfaces
 
 ```vue demo
 <!-- @wrapper -->
@@ -362,6 +399,37 @@ Defaults to `'default'` (`--dt-color-border-default`). Only visible when a `bord
   <dt-box padding="200" surface="overlay" border-radius="300" shadow="overlay">overlay</dt-box>
   <dt-box padding="200" surface="modal" border-radius="300" shadow="modal">modal</dt-box>
 </dt-stack>
+```
+
+### Interactive Elevation
+
+Use DtBox state props to coordinate surface, border, and shadow changes during interaction. For example, when dragging a `raised` box, change its surface and box shadow to `overlay`.
+
+```vue demo
+<!-- @custom -->
+<!-- @class d-p-600 d-bgc-default d-ba d-bc-subtle -->
+<dt-box
+  padding-block="200"
+  padding-inline="300"
+  border-radius="400"
+  :surface="draggableBoxSurface"
+  border-width="100"
+  :border-color="draggableBoxBorderColor"
+  :class="draggableBoxClass"
+  :style="draggableBoxStyle"
+  :shadow="draggableBoxShadow"
+  @pointerdown="startBoxDrag"
+  @pointermove="moveBoxDrag"
+  @pointerup="stopBoxDrag"
+  @pointercancel="stopBoxDrag"
+  @lostpointercapture="stopBoxDrag"
+>
+  <dt-stack direction="row" align="center" gap="100">
+    <dt-icon name="grip-vertical" size="100" class="d-fc-tertiary" />
+    Drag me
+    <dt-icon name="grip-vertical" size="100" class="d-fc-tertiary" />
+  </dt-stack>
+</dt-box>
 ```
 
 ## Sizing
@@ -483,3 +551,49 @@ Use the `as` prop to render semantic HTML elements for accessibility.
 ## Classes
 
 <component-class-table component-name="box" />
+
+<script setup>
+import { computed, ref } from 'vue';
+
+const dragging = ref(false);
+const dragOffset = ref({ x: 0, y: 0 });
+let dragOrigin = null;
+
+const draggableBoxClass = computed(() => [
+  'h:d-bc-subtle',
+  dragging.value ? 'd-c-grabbing' : 'd-c-grab',
+]);
+
+const draggableBoxSurface = computed(() => dragging.value ? 'overlay' : 'raised');
+const draggableBoxShadow = computed(() => dragging.value ? 'overlay' : 'raised');
+const draggableBoxBorderColor = computed(() => dragging.value ? 'subtle' : 'transparent');
+
+const draggableBoxStyle = computed(() => ({
+  transform: `translate3d(${dragOffset.value.x}px, ${dragOffset.value.y}px, 0)`,
+  transition: dragging.value ? 'none' : 'transform var(--td150) var(--ttf-out)',
+  touchAction: 'none',
+  userSelect: dragging.value ? 'none' : undefined,
+}));
+
+function startBoxDrag (event) {
+  if (event.button !== 0) return;
+  event.preventDefault();
+  dragOrigin = { id: event.pointerId, x: event.clientX, y: event.clientY };
+  event.currentTarget.setPointerCapture?.(event.pointerId);
+}
+
+function moveBoxDrag (event) {
+  if (event.pointerId !== dragOrigin?.id) return;
+  const x = event.clientX - dragOrigin.x;
+  const y = event.clientY - dragOrigin.y;
+  if (!dragging.value && Math.hypot(x, y) < 4) return;
+  dragging.value = true;
+  dragOffset.value = { x, y };
+}
+
+function stopBoxDrag () {
+  dragging.value = false;
+  dragOffset.value = { x: 0, y: 0 };
+  dragOrigin = null;
+}
+</script>
