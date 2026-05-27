@@ -185,49 +185,39 @@
         "type": "color"
       },
       "default": {
-        "value": "{color.black.150}",
-        "type": "color",
-        "$extensions": {
-          "studio.tokens": {
-            "modify": {
-              "type": "mix",
-              "value": ".5",
-              "space": "oklch",
-              "color": "{color.black.200}"
-            }
-          }
-        }
+        "value": "{color.black.200}",
+        "type": "color"
       },
       "default-hover": {
-        "value": "{color.black.200}",
+        "value": "{color.black.250}",
         "type": "color"
       },
       "default-active": {
-        "value": "{color.black.250}",
+        "value": "{color.black.300}",
         "type": "color"
       },
       "raised": {
-        "value": "{color.black.200}",
+        "value": "{color.black.250}",
         "type": "color"
       },
       "raised-hover": {
-        "value": "{color.black.250}",
+        "value": "{color.black.300}",
         "type": "color"
       },
       "raised-active": {
-        "value": "{color.black.300}",
+        "value": "{color.black.350}",
         "type": "color"
       },
       "overlay": {
-        "value": "{color.black.200}",
-        "type": "color"
-      },
-      "overlay-hover": {
         "value": "{color.black.250}",
         "type": "color"
       },
-      "overlay-active": {
+      "overlay-hover": {
         "value": "{color.black.300}",
+        "type": "color"
+      },
+      "overlay-active": {
+        "value": "{color.black.350}",
         "type": "color"
       },
       "modal": {
@@ -253,11 +243,11 @@
         }
       },
       "moderate": {
-        "value": "{color.black.200}",
+        "value": "{color.black.300}",
         "type": "color"
       },
       "bold": {
-        "value": "{color.black.300}",
+        "value": "{color.black.350}",
         "type": "color"
       },
       "strong": {

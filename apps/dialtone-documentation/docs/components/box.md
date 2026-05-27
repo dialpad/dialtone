@@ -10,19 +10,45 @@ keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius
 <!-- TESTING
 <dt-stack direction="row" class="test" gap="100">
   <dt-box padding="200" class="d-fl1 d-bgc-sunken h:d-bgc-sunken-hover">
-    <dt-text as="p" kind="body" size="200" align="center" tone="muted">sunken</dt-text>
+    <dt-text as="p" kind="body" size="200" align="center" tone="muted">sunken:hover</dt-text>
   </dt-box>
   <dt-box padding="200" class="d-fl1 d-bgc-default h:d-bgc-default-hover">
-    <dt-text as="p" kind="body" size="200" align="center" tone="muted">default</dt-text>
+    <dt-text as="p" kind="body" size="200" align="center" tone="muted">default:hover</dt-text>
   </dt-box>
   <dt-box padding="200" class="d-fl1 d-bgc-raised h:d-bgc-raised-hover">
-    <dt-text as="p" kind="body" size="200" align="center" tone="muted">raised</dt-text>
+    <dt-text as="p" kind="body" size="200" align="center" tone="muted">raised:hover</dt-text>
   </dt-box>
   <dt-box padding="200" class="d-fl1 d-bgc-overlay h:d-bgc-overlay-hover">
-    <dt-text as="p" kind="body" size="200" align="center" tone="muted">overlay</dt-text>
+    <dt-text as="p" kind="body" size="200" align="center" tone="muted">overlay:hover</dt-text>
   </dt-box>
 </dt-stack>
 <dt-stack gap="100">
+  <dt-stack direction="row">
+    <dt-box class="d-fl1" padding="200" surface="primary">
+      <dt-text as="p" kind="body" size="200" align="center" tone="muted">primary</dt-text>
+    </dt-box>
+    <dt-box class="d-fl1" padding="200" surface="primary-opaque">
+      <dt-text as="p" kind="body" size="200" align="center" tone="muted">primary-opq</dt-text>
+    </dt-box>
+    <dt-box class="d-fl1" padding="200" surface="secondary">
+      <dt-text as="p" kind="body" size="200" align="center" tone="muted">secondary</dt-text>
+    </dt-box>
+    <dt-box class="d-fl1" padding="200" surface="secondary-opaque">
+      <dt-text as="p" kind="body" size="200" align="center" tone="muted">secondary-opq</dt-text>
+    </dt-box>
+    <dt-box class="d-fl1" padding="200" surface="moderate">
+      <dt-text as="p" kind="body" size="200" align="center" tone="muted">Moderate</dt-text>
+    </dt-box>
+    <dt-box class="d-fl1" padding="200" surface="moderate-opaque">
+      <dt-text as="p" kind="body" size="200" align="center" tone="muted">Moderate-opq</dt-text>
+    </dt-box>
+    <dt-box class="d-fl1" padding="200" surface="bold">
+      <dt-text as="p" kind="body" size="200" align="center" tone="muted">Bold</dt-text>
+    </dt-box>
+    <dt-box class="d-fl1" padding="200" surface="bold-opaque">
+      <dt-text as="p" kind="body" size="200" align="center" tone="muted">Bold-opq</dt-text>
+    </dt-box>
+  </dt-stack>
   <dt-stack direction="row">
     <dt-box class="d-fl1" padding="200" surface="default">
       <dt-text as="p" kind="body" size="200" align="center" tone="muted">default</dt-text>
@@ -41,12 +67,6 @@ keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius
     </dt-box>
     <dt-box class="d-fl1" padding="200" surface="sunken">
       <dt-text as="p" kind="body" size="200" align="center" tone="muted">sunken</dt-text>
-    </dt-box>
-    <dt-box class="d-fl1" padding="200" surface="secondary">
-      <dt-text as="p" kind="body" size="200" align="center" tone="muted">secondary</dt-text>
-    </dt-box>
-    <dt-box class="d-fl1" padding="200" surface="moderate">
-      <dt-text as="p" kind="body" size="200" align="center" tone="muted">Moderate</dt-text>
     </dt-box>
   </dt-stack>
   <dt-box
