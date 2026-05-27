@@ -24,6 +24,18 @@
     }
   },
   {
+    "id": "ticket_test_flakiness",
+    "input": "DLT-5678 fix test flakiness",
+    "trackedDirty": false,
+    "untrackedFiles": [],
+    "expected": {
+      "ticketMode": "DLT-5678",
+      "branch": "test/DLT-5678-fix-test-flakiness",
+      "jiraAction": "none",
+      "canCreateBranch": true
+    }
+  },
+  {
     "id": "dirty_tracked",
     "input": "NO-JIRA docs cleanup",
     "trackedDirty": true,

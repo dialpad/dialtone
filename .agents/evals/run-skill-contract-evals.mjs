@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 import { existsSync, readFileSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { dirname, join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
 
-const repoRoot = resolve('.');
+const repoRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 
 const requiredSections = [
   '## Goal',
@@ -109,11 +110,13 @@ function assert(condition, message, failures) {
 function commandsForChangedFiles(files) {
   const commands = new Set();
   for (const file of files) {
-    if (
-      file === 'AGENTS.md' ||
-      file.startsWith('.agents/') ||
-      file.startsWith('.codex/')
-    ) {
+    const isAgentToolingFile =
+      file === 'AGENTS.md' || file.startsWith('.agents/');
+    const isCodexRuntimeFile = file.startsWith('.codex/');
+    const isCodexMarkdownFile = isCodexRuntimeFile && file.endsWith('.md');
+    const isCodexScriptFile = isCodexRuntimeFile && file.endsWith('.mjs');
+
+    if (isAgentToolingFile || isCodexRuntimeFile) {
       commands.add('node .agents/evals/run-skill-contract-evals.mjs');
       if (file.startsWith('.agents/skills/project-start/')) {
         commands.add(
@@ -121,13 +124,20 @@ function commandsForChangedFiles(files) {
         );
       }
     }
-    if (file === 'AGENTS.md' || file.startsWith('.agents/')) {
+    if (isAgentToolingFile) {
       commands.add('pnpm exec markdownlint AGENTS.md .agents/**/*.md');
       commands.add(
         'pnpm exec prettier --check --single-quote AGENTS.md .agents/**/*.md .agents/**/*.mjs',
       );
     }
-    if (file.startsWith('.codex/')) {
+    if (isCodexMarkdownFile) {
+      commands.add(`pnpm exec markdownlint ${file}`);
+      commands.add(`pnpm exec prettier --check --single-quote ${file}`);
+    }
+    if (isCodexScriptFile) {
+      commands.add(`pnpm exec prettier --check --single-quote ${file}`);
+    }
+    if (isCodexRuntimeFile) {
       commands.add('./node_modules/.bin/dialtone --help');
     }
     if (file.startsWith('packages/dialtone-vue/')) {
@@ -342,6 +352,7 @@ for (const [skillName, config] of Object.entries(skills)) {
 }
 
 const ruleMap = read('.agents/resources/rule-map.md');
+const codexToolingRules = read('.agents/resources/rules/codex-tooling.md');
 const claudeRulesPath = ['.claude', 'rules'].join('/');
 assert(
   !ruleMap.includes(claudeRulesPath),
@@ -365,6 +376,13 @@ for (const rulePath of new Set(mappedRulePaths)) {
     failures,
   );
 }
+
+assert(
+  codexToolingRules.includes('first-class harness alongside Claude tooling') &&
+    codexToolingRules.includes('Do not gate Codex validation on `.claude/**`'),
+  '.agents/resources/rules/codex-tooling.md must document Codex and Claude harness coexistence',
+  failures,
+);
 
 assert(
   existsSync(join(repoRoot, '.codex/config.toml')),

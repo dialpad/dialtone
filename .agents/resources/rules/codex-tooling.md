@@ -8,6 +8,7 @@ Apply to `AGENTS.md`, `.agents/**`, and `.codex/**`.
 - Active Codex skills and resources should reference `.agents/**` runtime files.
 - Use `.codex/**` only for Codex runtime configuration such as MCP registration, hooks, command approval rules, permission profiles, or custom subagents.
 - Existing `.claude/**` files may be source material or comparative evidence, but should not be required by Codex skills at runtime.
+- Do not gate Codex validation on `.claude/**`; validate the Codex harness independently and update `.agents/resources/agent-tooling-parity.md` when a workflow intentionally mirrors or diverges from Claude behavior.
 
 ## Context Cost
 

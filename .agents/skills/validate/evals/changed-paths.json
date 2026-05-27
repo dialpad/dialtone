@@ -18,6 +18,16 @@
     ]
   },
   {
+    "id": "codex_markdown",
+    "changedFiles": [".codex/README.md"],
+    "expectedCommands": [
+      "node .agents/evals/run-skill-contract-evals.mjs",
+      "pnpm exec markdownlint .codex/README.md",
+      "pnpm exec prettier --check --single-quote .codex/README.md",
+      "./node_modules/.bin/dialtone --help"
+    ]
+  },
+  {
     "id": "vue_component",
     "changedFiles": ["packages/dialtone-vue/components/button/button.vue"],
     "expectedCommands": [

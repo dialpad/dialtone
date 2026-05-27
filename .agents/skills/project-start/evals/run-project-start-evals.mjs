@@ -38,9 +38,14 @@ function inferType(description, ticketMode) {
     text.includes('tooling')
   )
     return 'chore';
-  if (text.includes('doc')) return 'docs';
-  if (text.includes('fix')) return 'fix';
-  if (text.includes('test')) return 'test';
+  if (/\bdoc(s|umentation)?\b/.test(text)) return 'docs';
+  if (
+    /\b(test|tests|testing|spec|fixture|flaky|flakiness|eval|evals)\b/.test(
+      text,
+    )
+  )
+    return 'test';
+  if (/\b(fix|bug|regression|broken)\b/.test(text)) return 'fix';
   return 'feat';
 }
 
