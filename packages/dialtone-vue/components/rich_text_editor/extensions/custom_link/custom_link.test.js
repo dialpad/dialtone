@@ -329,6 +329,46 @@ describe('DtRichTextEditor Link Extension tests', () => {
             expect(_getLinksFromJSON()).toHaveLinksWithTexts(['(714) 410-7035']);
           });
         });
+
+        describe('phone-click event', () => {
+          it('sets isPhone=true and phoneNumber attributes on phone marks', async () => {
+            await _setValue('call me at (714) 410-7035 any time!');
+            const links = _getLinksFromJSON();
+            const mark = links[0]?.marks?.find(m => m.type === 'CustomLink');
+            expect(mark?.attrs?.isPhone).toBe(true);
+            expect(mark?.attrs?.phoneNumber).toBe('(714) 410-7035');
+          });
+
+          it('does not set isPhone on URL marks', async () => {
+            await _setValue('check out dialpad.com it is cool');
+            const links = _getLinksFromJSON();
+            const mark = links[0]?.marks?.find(m => m.type === 'CustomLink');
+            expect(mark?.attrs?.isPhone).toBe(false);
+          });
+
+          it('emits phone-click when a phone number link is clicked', async () => {
+            await _setValue('call me at (714) 410-7035 any time!');
+            await wrapper.vm.$nextTick();
+
+            const phoneLink = document.querySelector('[data-is-phone="true"]');
+            phoneLink.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+            await wrapper.vm.$nextTick();
+
+            expect(wrapper.emitted('phone-click')).toBeTruthy();
+            expect(wrapper.emitted('phone-click')[0][0]).toEqual({ phoneNumber: '(714) 410-7035' });
+          });
+
+          it('does not emit phone-click when clicking a URL link', async () => {
+            await _setValue('check out dialpad.com it is cool');
+            await wrapper.vm.$nextTick();
+
+            const urlLink = document.querySelector('.d-link:not([data-is-phone])');
+            urlLink?.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+            await wrapper.vm.$nextTick();
+
+            expect(wrapper.emitted('phone-click')).toBeFalsy();
+          });
+        });
       });
     });
   });

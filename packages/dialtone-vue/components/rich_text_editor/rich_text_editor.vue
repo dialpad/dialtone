@@ -603,6 +603,15 @@ export default {
      * @type {Object}
      */
     'channel-click',
+
+    /**
+     * Event fired when a phone number link (autolinked by the CustomLink extension) is clicked.
+     * Payload: { phoneNumber: string } — the raw phone number text as matched.
+     * Only emitted when the `customLink` prop is used.
+     * @event phone-click
+     * @type {Object}
+     */
+    'phone-click',
   ],
 
   data () {
@@ -1262,6 +1271,11 @@ export default {
       // Channel is clicked
       this.editor.on('channel-click', (channelData) => {
         this.$emit('channel-click', channelData);
+      });
+
+      // Phone number link is clicked (requires customLink prop)
+      this.editor.on('phone-click', (phoneData) => {
+        this.$emit('phone-click', phoneData);
       });
     },
 

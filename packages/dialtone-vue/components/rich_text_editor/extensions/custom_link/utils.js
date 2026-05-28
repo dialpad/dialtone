@@ -131,6 +131,9 @@ export function removeMarks (range, doc, tr, type) {
 // Regex to match partial phone numbers.
 const partialPhoneNumberRegex = getPhoneNumberRegex(1, 15);
 
+// Regex to detect complete phone number matches.
+const phoneNumberRegex = getPhoneNumberRegex();
+
 /**
  * Find matches from text and add marks on them.
  */
@@ -188,6 +191,13 @@ export function addMarks (text, pos, from, to, tr, type) {
     // Sum up the from index and the match length to get the end index.
     const to = from + word.length;
 
-    tr.addMark(from, to, type.create());
+    // Skip positions already covered by a standard 'link' mark — adding CustomLink on
+    // top would produce nested <a> elements, which is invalid HTML.
+    if (tr.doc.resolve(from).marks().some(m => m.type.name === 'link')) {
+      return;
+    }
+
+    const attrs = phoneNumberRegex.test(word) ? { isPhone: true, phoneNumber: word } : {};
+    tr.addMark(from, to, type.create(attrs));
   });
 }
