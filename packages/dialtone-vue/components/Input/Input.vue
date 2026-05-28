@@ -86,6 +86,8 @@
           :class="inputClasses()"
           :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
           :aria-label="!showLabel && label ? label : undefined"
+          :aria-invalid="ariaInvalid"
+          :aria-describedby="ariaDescribedBy"
           data-qa="dt-input-input"
           v-bind="removeClassStyleAttrs($attrs)"
           v-on="inputListeners"
@@ -101,6 +103,8 @@
           :class="inputClasses()"
           :maxlength="shouldLimitMaxLength ? validationProps.length.max : null"
           :aria-label="!showLabel && label ? label : undefined"
+          :aria-invalid="ariaInvalid"
+          :aria-describedby="ariaDescribedBy"
           data-qa="dt-input-input"
           v-bind="removeClassStyleAttrs($attrs)"
           v-on="inputListeners"
@@ -128,10 +132,11 @@
       </div>
     </label>
     <dt-validation-messages
+      v-bind="messagesChildProps"
+      :id="messagesId"
       :validation-messages="validationMessages"
       :show-messages="showMessages"
       :class="messagesClass"
-      v-bind="messagesChildProps"
       data-qa="dt-input-messages"
     />
   </div>
@@ -431,6 +436,7 @@ export default {
       hasSlotContent,
       isComposing: false,
       justEndedComposition: false,
+      messagesId: getUniqueString(),
     };
   },
 
@@ -513,6 +519,14 @@ export default {
 
     inputState () {
       return getValidationState(this.validationMessages);
+    },
+
+    ariaInvalid () {
+      return this.inputState === VALIDATION_MESSAGE_TYPES.CRITICAL ? 'true' : undefined;
+    },
+
+    ariaDescribedBy () {
+      return this.showMessages && this.validationMessages.length > 0 ? this.messagesId : undefined;
     },
 
     defaultLengthCalculation () {

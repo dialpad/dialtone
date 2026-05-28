@@ -1,36 +1,38 @@
 <template>
+  <!-- Live region is always present so VoiceOver can detect mutations on a stable node (DLT-3430). -->
   <div
-    v-if="showMessages && !isFilteredValidationMessagesEmpty"
+    :id="id"
+    aria-live="assertive"
     class="base-input__messages d-validation-message__container"
     data-qa="validation-messages-container"
   >
-    <div
-      v-for="({ message, type }, index) in filteredValidationMessages"
-      :key="getMessageKey(type, index)"
-      role="status"
-      aria-live="polite"
-      data-qa="validation-message"
-      :class="[
-        'base-input__message',
-        'd-validation-message',
-        messageTypeClass(type),
-      ]"
-    >
-      <!-- @slot icon — replaces the default per-type DtIcon. Slot content must be a Dialtone icon (carries
-      the `d-icon` class) so the CSS pseudo-element fallback suppresses correctly. Receives { type } scope. -->
-      <slot
-        name="icon"
-        :type="type"
+    <template v-if="showMessages">
+      <div
+        v-for="({ message, type }, index) in filteredValidationMessages"
+        :key="getMessageKey(type, index)"
+        data-qa="validation-message"
+        :class="[
+          'base-input__message',
+          'd-validation-message',
+          messageTypeClass(type),
+        ]"
       >
-        <component
-          :is="iconForType(type)"
-          :class="['d-validation-message__icon', iconClass]"
-          data-qa="validation-message-icon"
-          size="300"
-        />
-      </slot>
-      <p v-html="message" />
-    </div>
+        <!-- @slot icon — replaces the default per-type DtIcon. Slot content must be a Dialtone icon (carries
+        the `d-icon` class) so the CSS pseudo-element fallback suppresses correctly. Receives { type } scope. -->
+        <slot
+          name="icon"
+          :type="type"
+        >
+          <component
+            :is="iconForType(type)"
+            :class="['d-validation-message__icon', iconClass]"
+            data-qa="validation-message-icon"
+            size="300"
+          />
+        </slot>
+        <p v-html="message" />
+      </div>
+    </template>
   </div>
 </template>
 
@@ -105,10 +107,6 @@ export default {
   },
 
   computed: {
-    isFilteredValidationMessagesEmpty () {
-      return this.filteredValidationMessages.length === 0;
-    },
-
     filteredValidationMessages () {
       return filterFormattedMessages(this.validationMessages);
     },

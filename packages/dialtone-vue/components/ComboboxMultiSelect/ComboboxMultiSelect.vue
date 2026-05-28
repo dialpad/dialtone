@@ -59,6 +59,8 @@
           :input-wrapper-class="inputWrapperClass"
           :disabled="disabled"
           :aria-label="label"
+          :aria-invalid="ariaInvalid"
+          :aria-describedby="ariaDescribedBy"
           :label="showLabel ? label : ''"
           :description="description"
           :placeholder="inputPlaceHolder"
@@ -70,6 +72,7 @@
         />
 
         <dt-validation-messages
+          :id="messagesId"
           :validation-messages="maxSelectedMessage"
           :show-messages="showValidationMessages"
         />
@@ -131,7 +134,7 @@ import DtInput from '@/components/Input/Input.vue';
 import DtChip from '@/components/Chip/Chip.vue';
 import DtValidationMessages from '@/components/ValidationMessages/ValidationMessages.vue';
 import { validationMessageValidator } from '@/common/validators';
-import { extractVueListeners, extractNonListeners, hasSlotContent, returnFirstEl } from '@/common/utils';
+import { extractVueListeners, extractNonListeners, hasSlotContent, returnFirstEl, getUniqueString, getValidationState } from '@/common/utils';
 import {
   POPOVER_APPEND_TO_VALUES,
 } from '@/components/Popover/PopoverConstants';
@@ -139,7 +142,7 @@ import {
   CHIP_SIZES,
   CHIP_TOP_POSITION,
 } from './ComboboxMultiSelectConstants';
-import { COMPONENT_SIZES } from '@/common/constants';
+import { COMPONENT_SIZES, VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 
 export default {
   name: 'DtComboboxMultiSelect',
@@ -503,6 +506,7 @@ export default {
       hasSlotContent,
       inputFocused: false,
       hideInputText: false,
+      messagesId: getUniqueString(),
     };
   },
 
@@ -551,6 +555,14 @@ export default {
           }
         },
       };
+    },
+
+    ariaInvalid () {
+      return getValidationState(this.maxSelectedMessage) === VALIDATION_MESSAGE_TYPES.CRITICAL ? 'true' : undefined;
+    },
+
+    ariaDescribedBy () {
+      return this.showValidationMessages && this.maxSelectedMessage.length > 0 ? this.messagesId : undefined;
     },
 
     chipWrapperClass () {

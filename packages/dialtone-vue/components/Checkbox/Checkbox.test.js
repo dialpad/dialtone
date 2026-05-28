@@ -203,8 +203,8 @@ describe('DtCheckbox Tests', () => {
         expect(label.exists()).toBe(false);
       });
 
-      it('should remove the checkbox description/messages container if neither is provided', () => {
-        expect(descriptionMessagesContainer.exists()).toBe(false);
+      it('should keep the checkbox description/messages container in the DOM', () => {
+        expect(descriptionMessagesContainer.exists()).toBe(true);
       });
 
       it('should keep the input checkbox', () => {
@@ -348,6 +348,36 @@ describe('DtCheckbox Tests', () => {
 
             expect(wrapper.emitted('update:modelValue')).toBeFalsy();
           });
+        });
+      });
+    });
+
+    describe('ARIA validation wiring', () => {
+      describe('When a critical validation message is provided', () => {
+        beforeEach(() => {
+          mockProps = { messages: [{ message: 'Error', type: VALIDATION_MESSAGE_TYPES.CRITICAL }] };
+
+          updateWrapper();
+        });
+
+        it('should set aria-invalid on the input', () => {
+          expect(input.attributes('aria-invalid')).toBe('true');
+        });
+
+        it('should set aria-describedby on the input pointing to the messages container', () => {
+          const messagesContainer = wrapper.find('[data-qa="dt-checkbox-validation-messages"]');
+
+          expect(input.attributes('aria-describedby')).toBe(messagesContainer.attributes('id'));
+        });
+      });
+
+      describe('When no validation messages are provided', () => {
+        it('should not set aria-invalid on the input', () => {
+          expect(input.attributes('aria-invalid')).toBeUndefined();
+        });
+
+        it('should not set aria-describedby on the input', () => {
+          expect(input.attributes('aria-describedby')).toBeUndefined();
         });
       });
     });

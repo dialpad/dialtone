@@ -13,6 +13,8 @@
           :disabled="internalDisabled"
           :class="['d-checkbox', inputValidationClass, inputClass]"
           :aria-label="!showLabel && label ? label : undefined"
+          :aria-invalid="ariaInvalid"
+          :aria-describedby="ariaDescribedBy"
           v-bind="removeClassStyleAttrs($attrs)"
           :indeterminate.prop="internalIndeterminate"
           v-on="inputListeners"
@@ -34,7 +36,6 @@
       </dt-text>
     </label>
     <div
-      v-if="$slots.description || description || hasMessages"
       class="d-checkbox__messages"
       data-qa="checkbox-description-messages"
     >
@@ -54,10 +55,11 @@
         </slot>
       </dt-text>
       <dt-validation-messages
+        v-bind="messagesChildProps"
+        :id="messagesId"
         :validation-messages="formattedMessages"
         :show-messages="showMessages"
         :class="messagesClass"
-        v-bind="messagesChildProps"
         data-qa="dt-checkbox-validation-messages"
       />
     </div>
@@ -72,7 +74,8 @@ import {
   GroupableMixin,
   MessagesMixin,
 } from '@/common/mixins/input';
-import { removeClassStyleAttrs } from '@/common/utils';
+import { removeClassStyleAttrs, getUniqueString, getValidationState } from '@/common/utils';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import { CHECKBOX_INPUT_VALIDATION_CLASSES } from './CheckboxConstants';
 import { DtValidationMessages } from '../ValidationMessages';
 import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/Text';
@@ -148,6 +151,12 @@ export default {
     'focusout',
   ],
 
+  data () {
+    return {
+      messagesId: getUniqueString(),
+    };
+  },
+
   computed: {
     resolvedLabelSize () {
       return this.labelSize ?? 300;
@@ -171,6 +180,14 @@ export default {
 
     hasMessages () {
       return this.formattedMessages.length && this.showMessages;
+    },
+
+    ariaInvalid () {
+      return getValidationState(this.formattedMessages) === VALIDATION_MESSAGE_TYPES.CRITICAL ? 'true' : undefined;
+    },
+
+    ariaDescribedBy () {
+      return this.showMessages && this.formattedMessages.length > 0 ? this.messagesId : undefined;
     },
 
     inputListeners () {
