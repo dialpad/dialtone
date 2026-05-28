@@ -173,20 +173,31 @@
     },
     "surface": {
       "sunken": {
-        "value": "{color.black.150}",
+        "value": "{color.black.100}",
         "type": "color"
       },
       "sunken-hover": {
-        "value": "{color.black.200}",
+        "value": "{color.black.150}",
         "type": "color"
       },
       "sunken-active": {
-        "value": "{color.black.250}",
+        "value": "{color.black.200}",
         "type": "color"
       },
       "default": {
-        "value": "{color.black.200}",
-        "type": "color"
+        "value": "{color.black.150}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "mix",
+              "value": ".5",
+              "space": "oklch",
+              "color": "{color.black.200}"
+            }
+          }
+        }
+
       },
       "default-hover": {
         "value": "{color.black.250}",
