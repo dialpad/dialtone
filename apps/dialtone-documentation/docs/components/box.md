@@ -8,21 +8,21 @@ keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius
 ---
 
 <!-- TESTING
-<dt-stack direction="row" class="test" gap="100">
-  <dt-box padding="200" class="d-fl1 d-bgc-sunken h:d-bgc-sunken-hover">
-    <dt-text as="p" kind="body" size="200" align="center" tone="muted">sunken:hover</dt-text>
-  </dt-box>
-  <dt-box padding="200" class="d-fl1 d-bgc-default h:d-bgc-default-hover">
-    <dt-text as="p" kind="body" size="200" align="center" tone="muted">default:hover</dt-text>
-  </dt-box>
-  <dt-box padding="200" class="d-fl1 d-bgc-raised h:d-bgc-raised-hover">
-    <dt-text as="p" kind="body" size="200" align="center" tone="muted">raised:hover</dt-text>
-  </dt-box>
-  <dt-box padding="200" class="d-fl1 d-bgc-overlay h:d-bgc-overlay-hover">
-    <dt-text as="p" kind="body" size="200" align="center" tone="muted">overlay:hover</dt-text>
-  </dt-box>
-</dt-stack>
 <dt-stack gap="100">
+  <dt-stack direction="row" class="test" gap="100">
+    <dt-box padding="200" class="d-fl1 d-bgc-sunken h:d-bgc-sunken-hover">
+      <dt-text as="p" kind="body" size="200" align="center" tone="muted">sunken:hover</dt-text>
+    </dt-box>
+    <dt-box padding="200" class="d-fl1 d-bgc-default h:d-bgc-default-hover">
+      <dt-text as="p" kind="body" size="200" align="center" tone="muted">default:hover</dt-text>
+    </dt-box>
+    <dt-box padding="200" class="d-fl1 d-bgc-raised h:d-bgc-raised-hover">
+      <dt-text as="p" kind="body" size="200" align="center" tone="muted">raised:hover</dt-text>
+    </dt-box>
+    <dt-box padding="200" class="d-fl1 d-bgc-overlay h:d-bgc-overlay-hover">
+      <dt-text as="p" kind="body" size="200" align="center" tone="muted">overlay:hover</dt-text>
+    </dt-box>
+  </dt-stack>
   <dt-stack direction="row">
     <dt-box class="d-fl1" padding="200" surface="primary">
       <dt-text as="p" kind="body" size="200" align="center" tone="muted">primary</dt-text>
@@ -76,7 +76,7 @@ keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius
   >
     <dt-stack gap="200">
     <dt-stack gap="400" direction="row" justify="space-between" align="baseline">
-      <dt-text as="h2" kind="headline" size="400">Title</dt-text>
+      <dt-text as="h2" kind="headline" size="400">sunken</dt-text>
       <dt-button size="200">
         <template #endIcon="{ iconSize }">
           <dt-icon name="chevron-down" :size="iconSize" />
@@ -86,16 +86,16 @@ keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius
     </dt-stack>
     <dt-stack direction="row" align="start" gap="200">
       <dt-box class="d-fl1" padding="200" surface="default">
-        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 1</dt-text>
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">default</dt-text>
       </dt-box>
       <dt-box class="d-fl1" padding="200" surface="default">
-        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 2</dt-text>
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">default</dt-text>
       </dt-box>
       <dt-box class="d-fl1" padding="200" surface="default">
-        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 3</dt-text>
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">default</dt-text>
       </dt-box>
       <dt-box class="d-fl1" padding="200" surface="default">
-        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 4</dt-text>
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">default</dt-text>
       </dt-box>
     </dt-stack>
   </dt-stack>
@@ -107,7 +107,7 @@ keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius
   >
     <dt-stack gap="200">
     <dt-stack gap="400" direction="row" justify="space-between" align="baseline">
-      <dt-text as="h2" kind="headline" size="400">Title</dt-text>
+      <dt-text as="h2" kind="headline" size="400">primary</dt-text>
       <dt-button size="200">
         <template #endIcon="{ iconSize }">
           <dt-icon name="chevron-down" :size="iconSize" />
@@ -117,16 +117,16 @@ keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius
     </dt-stack>
     <dt-stack direction="row" align="start" gap="200">
       <dt-box class="d-fl1" padding="200" surface="secondary">
-        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 1</dt-text>
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">secondary</dt-text>
       </dt-box>
       <dt-box class="d-fl1" padding="200" surface="secondary">
-        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 2</dt-text>
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">secondary</dt-text>
       </dt-box>
       <dt-box class="d-fl1" padding="200" surface="secondary">
-        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 3</dt-text>
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">secondary</dt-text>
       </dt-box>
       <dt-box class="d-fl1" padding="200" surface="secondary">
-        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 4</dt-text>
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">secondary</dt-text>
       </dt-box>
     </dt-stack>
   </dt-stack>
@@ -138,7 +138,7 @@ keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius
   >
     <dt-stack gap="200">
     <dt-stack gap="400" direction="row" justify="space-between" align="baseline">
-      <dt-text as="h2" kind="headline" size="400">Title</dt-text>
+      <dt-text as="h2" kind="headline" size="400">secondary</dt-text>
       <dt-button size="200">
         <template #endIcon="{ iconSize }">
           <dt-icon name="chevron-down" :size="iconSize" />
@@ -148,16 +148,16 @@ keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius
     </dt-stack>
     <dt-stack direction="row" align="start" gap="200">
       <dt-box class="d-fl1" padding="200" surface="primary">
-        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 1</dt-text>
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">primary</dt-text>
       </dt-box>
       <dt-box class="d-fl1" padding="200" surface="primary">
-        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 2</dt-text>
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">primary</dt-text>
       </dt-box>
       <dt-box class="d-fl1" padding="200" surface="primary">
-        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 3</dt-text>
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">primary</dt-text>
       </dt-box>
       <dt-box class="d-fl1" padding="200" surface="primary">
-        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 4</dt-text>
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">primary</dt-text>
       </dt-box>
     </dt-stack>
   </dt-stack>
@@ -169,7 +169,7 @@ keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius
   >
     <dt-stack gap="200">
     <dt-stack gap="400" direction="row" justify="space-between" align="baseline">
-      <dt-text as="h2" kind="headline" size="400">Title</dt-text>
+      <dt-text as="h2" kind="headline" size="400">sunken</dt-text>
       <dt-button size="200">
         <template #endIcon="{ iconSize }">
           <dt-icon name="chevron-down" :size="iconSize" />
@@ -179,16 +179,16 @@ keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius
     </dt-stack>
     <dt-stack direction="row" align="start" gap="200">
       <dt-box class="d-fl1" padding="200" surface="secondary">
-        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 1</dt-text>
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">secondary</dt-text>
       </dt-box>
       <dt-box class="d-fl1" padding="200" surface="secondary">
-        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 2</dt-text>
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">secondary</dt-text>
       </dt-box>
       <dt-box class="d-fl1" padding="200" surface="secondary">
-        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 3</dt-text>
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">secondary</dt-text>
       </dt-box>
       <dt-box class="d-fl1" padding="200" surface="secondary">
-        <dt-text as="p" kind="body" size="200" align="center" tone="muted">Box 4</dt-text>
+        <dt-text as="p" kind="body" size="200" align="center" tone="muted">secondary</dt-text>
       </dt-box>
     </dt-stack>
   </dt-stack>
@@ -267,30 +267,41 @@ The five tiers form a spatial ladder for surface depth:
 
 Each interactive tier (`sunken`, `default`, `raised`, `overlay`) has a `-hover` and `-active` variant via both the `surface` prop, via utilities like `h:d-bgc-raised-hover`, or CSS Variables like `var(--dt-color-surface-raised-active)`. The `modal` surface has no interactive styled variants because modal surfaces block interaction beneath them.
 
+#### Hover Demo
+
 ```vue demo
-<!-- @custom -->
-<!-- @class d-p-300 d-bgc-default d-ba d-bc-subtle -->
+<dt-stack gap="200" direction="row">
+  <dt-box padding="200" border-width="100" border-color="subtle" border-radius="300" surface="sunken" class="h:d-bgc-sunken-hover">sunken</dt-box>
+  <dt-box padding="200" border-width="100" border-color="subtle" border-radius="300" surface="default" class="h:d-bgc-default-hover">default</dt-box>
+  <dt-box padding="200" border-width="100" border-color="subtle" border-radius="300" surface="raised" class="h:d-bgc-raised-hover">raised</dt-box>
+  <dt-box padding="200" border-width="100" border-color="subtle" border-radius="300" surface="overlay" class="h:d-bgc-overlay-hover">overlay</dt-box>
+</dt-stack>
+```
+
+#### Surface variants
+
+```vue demo
 <!-- @wrapper -->
 <dt-stack gap="200" direction="row">
   <dt-stack gap="200">
-    <dt-box padding="200" border-radius="300" surface="sunken" >sunken</dt-box>
-    <dt-box padding="200" border-radius="300" surface="sunken-hover" >sunken-hover</dt-box>
-    <dt-box padding="200" border-radius="300" surface="sunken-active" >sunken-active</dt-box>
+    <dt-box padding="200" border-width="100" border-color="subtle" border-radius="300" surface="sunken">sunken</dt-box>
+    <dt-box padding="200" border-width="100" border-color="subtle" border-radius="300" surface="sunken-hover">sunken-hover</dt-box>
+    <dt-box padding="200" border-width="100" border-color="subtle" border-radius="300" surface="sunken-active">sunken-active</dt-box>
   </dt-stack>
   <dt-stack gap="200">
-    <dt-box padding="200" border-radius="300" surface="default" >default</dt-box>
-    <dt-box padding="200" border-radius="300" surface="default-hover" >default-hover</dt-box>
-    <dt-box padding="200" border-radius="300" surface="default-active" >default-active</dt-box>
+    <dt-box padding="200" border-width="100" border-color="subtle" border-radius="300" surface="default">default</dt-box>
+    <dt-box padding="200" border-width="100" border-color="subtle" border-radius="300" surface="default-hover">default-hover</dt-box>
+    <dt-box padding="200" border-width="100" border-color="subtle" border-radius="300" surface="default-active">default-active</dt-box>
   </dt-stack>
   <dt-stack gap="200">
-    <dt-box padding="200" border-radius="300" surface="raised" >raised</dt-box>
-    <dt-box padding="200" border-radius="300" surface="raised-hover" >raised-hover</dt-box>
-    <dt-box padding="200" border-radius="300" surface="raised-active" >raised-active</dt-box>
+    <dt-box padding="200" border-width="100" border-color="subtle" border-radius="300" surface="raised">raised</dt-box>
+    <dt-box padding="200" border-width="100" border-color="subtle" border-radius="300" surface="raised-hover">raised-hover</dt-box>
+    <dt-box padding="200" border-width="100" border-color="subtle" border-radius="300" surface="raised-active">raised-active</dt-box>
   </dt-stack>
   <dt-stack gap="200">
-    <dt-box padding="200" border-radius="300" surface="overlay">overlay</dt-box>
-    <dt-box padding="200" border-radius="300" surface="overlay-hover">overlay-hover</dt-box>
-    <dt-box padding="200" border-radius="300" surface="overlay-active">overlay-active</dt-box>
+    <dt-box padding="200" border-width="100" border-color="subtle" border-radius="300" surface="overlay">overlay</dt-box>
+    <dt-box padding="200" border-width="100" border-color="subtle" border-radius="300" surface="overlay-hover">overlay-hover</dt-box>
+    <dt-box padding="200" border-width="100" border-color="subtle" border-radius="300" surface="overlay-active">overlay-active</dt-box>
   </dt-stack>
 </dt-stack>
 ```
