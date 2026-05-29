@@ -286,6 +286,20 @@ const MIGRATIONS = [
     fileExtensions: ['.vue', '.html'],
   },
   {
+    id: 'typography',
+    name: 'Typography Utilities to DtText',
+    description: 'Replace legacy typography utility classes (d-headline--*, d-body--*, d-label--*, d-code--md, d-fw-*, d-fc-*, d-lh-*, d-truncate, d-ta-*) with the <dt-text> component.',
+    category: 'opt-in',
+    type: 'standalone',
+    scriptDir: 'dialtone_migrate_typography',
+    detectPatterns: [
+      /class="[^"]*d-(?:headline|body|label)--(?:sm|md|lg|xl|xxl)/,
+      /class="[^"]*d-(?:headline|body|label)-(?:small|medium|large)/,
+      /class="[^"]*d-code--(?:sm|md|lg)/,
+    ],
+    fileExtensions: ['.vue', '.html'],
+  },
+  {
     id: 'vue3-to-vue-imports',
     name: 'Vue 3 Import Paths',
     description: '@dialpad/dialtone-icons/vue3 and @dialpad/dialtone-vue/vue3 import paths renamed to /vue.',
