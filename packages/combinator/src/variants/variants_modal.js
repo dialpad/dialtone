@@ -10,11 +10,6 @@ export default {
         initialValue: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
       },
     },
-    slots: {
-      footer: {
-        initialValue: '<dt-button importance="clear">Cancel</dt-button><dt-button importance="primary" class="d-mis-75">Confirm</dt-button>',
-      },
-    },
   },
   critical: {
     props: {

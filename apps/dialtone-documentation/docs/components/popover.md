@@ -3,15 +3,10 @@ title: Popover
 description: A Popover displays a content overlay when its anchor element is activated.
 status: ready
 thumb: true
-image: assets/images/components/popover.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-popover--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=7298-20354
 keywords: ["popup", "overlay", "floating", "d-popover", "DtPopover", "dt-popover", "flyout", "tooltip panel"]
 ---
-
-```vue demo-only
-<example-popover modal />
-```
 
 <component-combinator component-name="DtPopover" />
 
@@ -21,6 +16,8 @@ A Popover contains a dialog that will appear above other content when activated.
 If you are looking for a dialog that does not display relative to the anchor, see [Modal](modal.md).
 Some common examples of popover usage: dropdown list, emoji picker dialog, add comment dialog.
 A popover can be modal or non-modal. Below are some guidelines on when to use a modal vs non-modal popover.
+
+**Migration note:** `DtOldPopover` is deprecated. Replace all uses with `DtPopover` (this component). DtOldPopover will be removed in a future major version. See the [whats-new posts](/about/whats-new/) for migration details.
 
 Your popover should be modal when:
 

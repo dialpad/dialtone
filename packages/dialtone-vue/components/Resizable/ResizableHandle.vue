@@ -2,6 +2,7 @@
   <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
   <div
     ref="handleElement"
+    data-qa="dt-resizable-handle"
     :class="[
       'd-resizable-handle',
       `d-resizable-handle--${direction}`,
@@ -35,7 +36,7 @@
 
 <script setup>
 import { computed, inject, onMounted, onUnmounted, ref, getCurrentInstance } from 'vue';
-import { RESIZABLE_CONTEXT_KEY, buildHandleId } from './ResizableConstants';
+import { RESIZABLE_CONTEXT_KEY, RESIZABLE_HANDLE_CENTER_OFFSET_PX, buildHandleId } from './ResizableConstants';
 import { pixelsToPercentage } from './ResizableUtils';
 import { useResizableKeyboard } from './Composables/UseResizableKeyboard';
 
@@ -131,7 +132,7 @@ const handleStyles = computed(() => {
   }
 
   return {
-    insetInlineStart: `${Math.max(0, pos.left)}px`,
+    insetInlineStart: `${Math.max(0, pos.left - RESIZABLE_HANDLE_CENTER_OFFSET_PX)}px`,
     visibility: '',
     ...offsetHandleStyles.value,
   };

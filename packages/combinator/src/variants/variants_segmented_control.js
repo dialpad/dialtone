@@ -10,7 +10,6 @@ export default {
     props: {
       modelValue: { initialValue: 'all' },
       ariaLabel: { initialValue: 'View filter' },
-      class: { initialValue: 'd-ba d-bc-critical' },
     },
   },
 
@@ -200,3 +199,4 @@ export default {
     },
   },
 };
+

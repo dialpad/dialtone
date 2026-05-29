@@ -1,7 +1,6 @@
 ---
 title: Emoji Picker
 thumb: true
-image: assets/images/components/emoji-picker.png
 description: A emoji picker component that allows you to view and select an emoji from a list.
 status: ready
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji-picker--default

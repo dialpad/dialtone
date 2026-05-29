@@ -2,7 +2,6 @@
 title: Tooltip
 status: ready
 thumb: true
-image: assets/images/components/tooltip.png
 description: A tooltip is a floating label that briefly explains an action, function, or an element. Its content is exclusively text and shouldn't be vital information for users. If richer media is desired, consider using a popover instead.
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-tooltip--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=261-0
@@ -75,7 +74,9 @@ Vue.use(DtTooltipDirective);
 The tooltip, also known as infotip or hint, is a common graphical user interface element in which, when hovering over a
 screen element or component, a text box displays information about that element (such as a description of a button's
 function, or what an abbreviation stands for). The tooltip is displayed continuously as long as the user hovers over the
-element
+element.
+
+When placing DtTooltip on a disabled DtButton, wrap the button in a `<span>` element — disabled elements do not fire mouse events, so the tooltip anchor must be on the wrapper, not on the disabled button itself.
 
 A tooltip has two slots:
 

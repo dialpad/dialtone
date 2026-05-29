@@ -2,160 +2,114 @@
 title: Mode
 description: Directive to apply light, dark, or inverted color mode to any element or region.
 status: new
+thumb: true
 keywords: ["theme island","mode island","mode override","v-dt-mode","directive","light","dark","invert","v-dt"]
 ---
 
 ```vue demo-only
-<dt-stack gap="200">
-  <dt-stack direction="row" gap="200" justify="space-between" class="d-w100p">
-    <dt-text as="h4" kind="headline" :size="400">Demo</dt-text>
-    <dt-dropdown
-      navigation-type="arrow-keys"
-      placement="bottom-end"
+<dt-stack gap="400">
+  <dt-stack direction="row" gap="200" align="center" justify="center">
+    <dt-segmented-control
+      size="100"
+      :model-value="currentMode"
+      aria-label="Mode"
+      activation-mode="manual"
+      @update:model-value="setMode"
     >
-      <template #anchor>
-        <dt-button
-          importance="outlined"
-          kind="muted"
-          :size="200"
-        >
-          <dt-stack gap="100" direction="row">
-            <span>
-              <dt-text strength="bold">Mode:</dt-text>
-              <dt-text tone="tertiary">{{ currentMode.charAt(0).toUpperCase() + currentMode.slice(1) }}</dt-text>
-            </span>
-            <span>
-              <dt-text strength="bold">Contrast:</dt-text>
-              <dt-text tone="tertiary">{{ currentContrast.charAt(0).toUpperCase() + currentContrast.slice(1) }}</dt-text>
-            </span>
-          </dt-stack>
-          <template #startIcon="{ iconSize }">
-            <dt-icon
-              :size="iconSize"
-              :name="currentModeIconName"
-            />
-          </template>
-          <template #endIcon="{ iconSize }">
-            <dt-icon
-              :size="iconSize"
-              name="chevron-down"
-            />
-          </template>
-        </dt-button>
-      </template>
-      <template #list>
-        <dt-list-item-group
-          heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
-          heading="Mode"
-        >
-          <dt-list-item
-            role="menuitem"
-            navigation-type="arrow-keys"
-            @click="setMode('system')"
-          >
-            System
-            <template #end>
-              <dt-icon :class="{ 'd-o0': currentMode !== 'system' }" name="check" size="200" />
-            </template>
-          </dt-list-item>
-          <dt-list-item
-            role="menuitem"
-            navigation-type="arrow-keys"
-            @click="setMode('light')"
-          >
-            Light
-            <template #end>
-              <dt-icon :class="{ 'd-o0': currentMode !== 'light' }" name="check" size="200" />
-            </template>
-          </dt-list-item>
-          <dt-list-item
-            role="menuitem"
-            navigation-type="arrow-keys"
-            @click="setMode('dark')"
-          >
-            Dark
-            <template #end>
-              <dt-icon :class="{ 'd-o0': currentMode !== 'dark' }" name="check" size="200" />
-            </template>
-          </dt-list-item>
-        </dt-list-item-group>
-        <dt-dropdown-separator />
-        <dt-list-item-group
-          heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
-          heading="Contrast"
-        >
-          <dt-list-item
-            role="menuitem"
-            navigation-type="arrow-keys"
-            @click="setContrast('default')"
-          >
-            Default
-            <template #end>
-              <dt-icon :class="{ 'd-o0': currentContrast !== 'default' }" name="check" size="200" />
-            </template>
-          </dt-list-item>
-          <dt-list-item
-            role="menuitem"
-            navigation-type="arrow-keys"
-            @click="setContrast('high')"
-          >
-            High
-            <template #end>
-              <dt-icon :class="{ 'd-o0': currentContrast !== 'high' }" name="check" size="200" />
-            </template>
-          </dt-list-item>
-        </dt-list-item-group>
-      </template>
-    </dt-dropdown>
+      <dt-segmented-control-item value="system">
+        System
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="laptop-2" :size="iconSize" />
+        </template>
+      </dt-segmented-control-item>
+      <dt-segmented-control-item value="light">
+        Light
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="sun" :size="iconSize" />
+        </template>
+      </dt-segmented-control-item>
+      <dt-segmented-control-item value="dark">
+        Dark
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="moon" :size="iconSize" />
+        </template>
+      </dt-segmented-control-item>
+    </dt-segmented-control>
+    <dt-segmented-control
+      size="100"
+      :model-value="currentContrast"
+      aria-label="Contrast"
+      activation-mode="manual"
+      @update:model-value="setContrast"
+    >
+      <dt-segmented-control-item value="default">
+        Default
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="hash" :size="iconSize" />
+        </template>
+      </dt-segmented-control-item>
+      <dt-segmented-control-item value="high">
+        High
+        <template #startIcon="{ iconSize }">
+          <dt-icon name="hash-bold" :size="iconSize" />
+        </template>
+      </dt-segmented-control-item>
+    </dt-segmented-control>
   </dt-stack>
   <dt-stack :direction="{ 'default': 'column', 'lg': 'row' }" gap="200" class="d-w100p">
-    <dt-stack gap="100" class="d-fl1">
-      <dt-text as="h3" kind="headline" :size="300">Inverted <dt-text strength="normal">(auto)</dt-text></dt-text>
-      <dt-stack v-dt-mode:invert gap="100" class="d-bgc-secondary d-p-200 d-bar-400 d-ba d-bc-default">
-        <dt-stack gap="100" direction="row">
-          <dt-icon name="circle-half-filled" size="300" class="d-fc-positive" />
-          <dt-text as="p" kind="body" :size="200">Primary</dt-text>
-          <dt-text as="p" kind="body" :size="200" tone="muted">Muted</dt-text>
-          <dt-text as="p" kind="body" :size="200" tone="critical">Critical</dt-text>
-          <dt-link>Link</dt-link>
+    <dt-stack gap="100">
+      <dt-text as="h3" kind="headline" :size="200">Inverted <dt-text strength="normal">(auto)</dt-text></dt-text>
+      <dt-box v-dt-mode:invert surface="secondary" padding="200" border-radius="400" border-width="100">
+        <dt-stack gap="100">
+          <dt-stack gap="100" direction="row">
+            <dt-icon name="circle-half-filled" size="200" class="d-fc-positive" />
+            <dt-text as="p" kind="body" :size="100">Primary</dt-text>
+            <dt-text as="p" kind="body" :size="100" tone="muted">Muted</dt-text>
+            <dt-text as="p" kind="body" :size="100" tone="critical">Critical</dt-text>
+            <dt-text as="p" kind="body" :size="100"><dt-link>Link</dt-link></dt-text>
+          </dt-stack>
+          <dt-stack direction="row" gap="100" class="d-100p">
+            <dt-button :size="100" class="d-fl1">Button</dt-button>
+            <dt-button :size="100" class="d-fl1" kind="critical">Button</dt-button>
+          </dt-stack>
         </dt-stack>
-        <dt-stack direction="row" gap="100" class="d-100p">
-          <dt-button :size="200" class="d-fl1">Button</dt-button>
-          <dt-button :size="200" class="d-fl1" kind="critical">Button</dt-button>
-        </dt-stack>
-      </dt-stack>
+      </dt-box>
     </dt-stack>
-    <dt-stack gap="100" class="d-fl1">
-      <dt-text as="h3" kind="headline" :size="300">Explicit light</dt-text>
-      <dt-stack v-dt-mode:light gap="100" class="d-bgc-secondary d-p-200 d-bar-400 d-ba d-bc-default">
-        <dt-stack gap="100" direction="row">
-          <dt-icon name="sun" size="300" class="d-fc-positive" />
-          <dt-text as="p" kind="body" :size="200">Primary</dt-text>
-          <dt-text as="p" kind="body" :size="200" tone="muted">Muted</dt-text>
-          <dt-text as="p" kind="body" :size="200" tone="critical">Critical</dt-text>
-          <dt-link>Link</dt-link>
+    <dt-stack gap="100">
+      <dt-text as="h3" kind="headline" :size="200">Dark <dt-text strength="normal">(auto)</dt-text></dt-text>
+      <dt-box v-dt-mode:dark surface="secondary" padding="200" border-radius="400" border-width="100">
+        <dt-stack gap="100">
+          <dt-stack gap="100" direction="row">
+            <dt-icon name="circle-half-filled" size="200" class="d-fc-positive" />
+            <dt-text as="p" kind="body" :size="100">Primary</dt-text>
+            <dt-text as="p" kind="body" :size="100" tone="muted">Muted</dt-text>
+            <dt-text as="p" kind="body" :size="100" tone="critical">Critical</dt-text>
+            <dt-text as="p" kind="body" :size="100"><dt-link>Link</dt-link></dt-text>
+          </dt-stack>
+          <dt-stack direction="row" gap="100" class="d-100p">
+            <dt-button :size="100" class="d-fl1">Button</dt-button>
+            <dt-button :size="100" class="d-fl1" kind="critical">Button</dt-button>
+          </dt-stack>
         </dt-stack>
-        <dt-stack direction="row" gap="100" class="d-100p">
-          <dt-button :size="200" class="d-fl1">Button</dt-button>
-          <dt-button :size="200" class="d-fl1" kind="critical">Button</dt-button>
-        </dt-stack>
-      </dt-stack>
+      </dt-box>
     </dt-stack>
-    <dt-stack gap="100" class="d-fl1">
-      <dt-text as="h3" kind="headline" :size="300">Explicit dark</dt-text>
-      <dt-stack v-dt-mode:dark gap="100" class="d-bgc-secondary d-p-200 d-bar-400 d-ba d-bc-default">
-        <dt-stack gap="100" direction="row">
-          <dt-icon name="moon" size="300" class="d-fc-positive" />
-          <dt-text as="p" kind="body" :size="200">Primary</dt-text>
-          <dt-text as="p" kind="body" :size="200" tone="muted">Muted</dt-text>
-          <dt-text as="p" kind="body" :size="200" tone="critical">Critical</dt-text>
-          <dt-link>Link</dt-link>
+    <dt-stack gap="100">
+      <dt-text as="h3" kind="headline" :size="200">Light <dt-text strength="normal">(auto)</dt-text></dt-text>
+      <dt-box v-dt-mode:light surface="secondary" padding="200" border-radius="400" border-width="100">
+        <dt-stack gap="100">
+          <dt-stack gap="100" direction="row">
+            <dt-icon name="circle-half-filled" size="200" class="d-fc-positive" />
+            <dt-text as="p" kind="body" :size="100">Primary</dt-text>
+            <dt-text as="p" kind="body" :size="100" tone="muted">Muted</dt-text>
+            <dt-text as="p" kind="body" :size="100" tone="critical">Critical</dt-text>
+            <dt-text as="p" kind="body" :size="100"><dt-link>Link</dt-link></dt-text>
+          </dt-stack>
+          <dt-stack direction="row" gap="100" class="d-100p">
+            <dt-button :size="100" class="d-fl1">Button</dt-button>
+            <dt-button :size="100" class="d-fl1" kind="critical">Button</dt-button>
+          </dt-stack>
         </dt-stack>
-        <dt-stack direction="row" gap="100" class="d-100p">
-          <dt-button :size="200" class="d-fl1">Button</dt-button>
-          <dt-button :size="200" class="d-fl1" kind="critical">Button</dt-button>
-        </dt-stack>
-      </dt-stack>
+      </dt-box>
     </dt-stack>
   </dt-stack>
 </dt-stack>
@@ -666,7 +620,6 @@ import { ref } from 'vue';
 const {
   currentMode,
   currentContrast,
-  currentModeIconName,
   setMode,
   setContrast,
 } = useThemeManager({ includeThemes: false });

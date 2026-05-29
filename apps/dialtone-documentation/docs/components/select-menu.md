@@ -3,7 +3,6 @@ title: Select menu
 description: A select menu is an input control that allows users to choose one option from a list.
 status: ready
 thumb: true
-image: assets/images/components/select-menu.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-select-menu--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=25737-2711
 keywords: ["dropdown", "picker", "d-select-menu", "DtSelectMenu", "dt-select-menu", "native select", "listbox"]
@@ -12,6 +11,8 @@ keywords: ["dropdown", "picker", "d-select-menu", "DtSelectMenu", "dt-select-men
 <component-combinator component-name="DtSelectMenu" />
 
 ## Usage
+
+DtSelectMenu is bound to a value using `v-model`, which emits the selected option's value. To wire DtSelectMenu to a reactive store (such as Vuex or Pinia), bind `:modelValue` to the store getter and listen for `@update:modelValue` to commit the mutation — or use `v-model` with a computed setter.
 
 <dialtone-usage>
 <template #do>

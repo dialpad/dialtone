@@ -3,7 +3,6 @@ title: Button
 description: A button is an UI element which signals key actions to take an action throughout an app. It is important a button is identifiable, consistent, communicates its actions clearly, and is appropriately sized to its action.
 status: ready
 thumb: true
-image: assets/images/components/button.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-button--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=19800-32233
 keywords: ["btn","click","action","cta","d-button","DtButton","dt-button"]
@@ -57,7 +56,7 @@ Button labels should be clear and predictable so users have confidence in their 
 
 ## Variants
 
-Dialtone provides five options for `kind`, with three levels of `importance`.
+Dialtone provides five options for `kind`, with three levels of `importance`. Use `kind="primary"` for the main call to action, `kind="danger"` for destructive actions, `kind="muted"` for secondary actions, `kind="clear"` for low-emphasis actions, and `kind="link"` for navigation-style buttons. The DtButton `kind` prop controls the visual hierarchy and semantic meaning of the action.
 
 <ButtonVariantsTable></ButtonVariantsTable>
 
@@ -649,7 +648,7 @@ The following styles are available as a circle shape.
 
 ## Loading
 
-Loading buttons are useful for communicating a delay between the button interaction and its action taking place. Every button style can accept the loading button class, though we only provide a few possible examples.
+Loading buttons are useful for communicating a delay between the button interaction and its action taking place. Every button style can accept the loading button class, though we only provide a few possible examples. When `loading` is true, DtButton replaces the label with a spinner animation, indicating an async operation (such as form submit) is in progress. The spinner is centered within the button and the button remains disabled until loading is false.
 
 ### Replace button label
 

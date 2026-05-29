@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-css",
-  "version": "8.80.0-next.6",
+  "version": "8.80.0-next.7",
   "description": "Dialpad's design system",
   "keywords": [
     "Dialpad",
@@ -58,6 +58,7 @@
     "dialtone-migrate-props": "./lib/dist/js/dialtone_migrate_props/index.mjs",
     "dialtone-migrate-chip-interactive": "./lib/dist/js/dialtone_migrate_chip_interactive/index.mjs",
     "dialtone-migrate-scrollbar-always": "./lib/dist/js/dialtone_migrate_scrollbar_always/index.mjs",
+    "dialtone-migrate-typography": "./lib/dist/js/dialtone_migrate_typography/index.mjs",
     "dialtone-migrate-border-radius": "./lib/dist/js/dialtone_migrate_border_radius/index.mjs"
   },
   "type": "module",

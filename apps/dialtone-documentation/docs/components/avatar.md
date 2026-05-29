@@ -3,7 +3,6 @@ title: Avatar
 description: An avatar is a visual representation of a user or object.
 status: ready
 thumb: true
-image: assets/images/components/avatar.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-avatar--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=5413-13176
 keywords: ["profile picture", "user image", "profile image", "d-avatar", "DtAvatar", "dt-avatar", "initials", "user icon", "persona"]
@@ -175,15 +174,15 @@ Provides the user's current [presence](/components/presence.md), positioned in t
     <dt-avatar :size="100" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
     <dt-avatar :size="200" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
     <dt-avatar :size="300" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-    <dt-avatar :size="400" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-    <dt-avatar :size="500" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    <dt-avatar :size="400" presence="dnd" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    <dt-avatar :size="500" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
   </dt-stack>
   <dt-stack direction="row" align="center" gap="100">
     <dt-avatar :size="100" presence="active" seed="user-1" full-name="Test Name" />
     <dt-avatar :size="200" presence="away" seed="user-2" full-name="William Steele" />
     <dt-avatar :size="300" presence="busy" seed="user-3" full-name="Frank Richard" />
-    <dt-avatar :size="400" presence="offline" seed="user-4" full-name="John Hawkins" />
-    <dt-avatar :size="500" presence="active" seed="user-5" full-name="Alice Edwards" />
+    <dt-avatar :size="400" presence="dnd" seed="user-4" full-name="John Hawkins" />
+    <dt-avatar :size="500" presence="offline" seed="user-5" full-name="Alice Edwards" />
   </dt-stack>
 </dt-stack>
 ```

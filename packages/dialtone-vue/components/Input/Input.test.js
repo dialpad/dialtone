@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { INPUT_SIZES } from './InputConstants';
+import { VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 import { DtIcon } from '@/components/Icon';
 import { DtText } from '@/components/Text';
 import DtInput from './Input.vue';
@@ -51,7 +52,7 @@ describe('DtInput tests', () => {
     label = wrapper.find('[data-qa="dt-input-label"]');
     description = wrapper.find('[data-qa="dt-input-description"]');
     nativeInput = wrapper.find('input');
-    nativeTextarea = wrapper.find('textarea');
+    nativeTextarea = wrapper.find('[data-qa="dt-input-input"]');
     leftIconWrapper = wrapper.find('[data-qa="dt-input-left-icon-wrapper"]');
     rightIconWrapper = wrapper.find('[data-qa="dt-input-right-icon-wrapper"]');
   };
@@ -143,7 +144,7 @@ describe('DtInput tests', () => {
 
         updateWrapper();
 
-        nativeTextarea = wrapper.find('textarea');
+        nativeTextarea = wrapper.find('[data-qa="dt-input-input"]');
 
         expect(nativeTextarea.attributes('aria-label')).toBe(baseProps.label);
       });
@@ -824,6 +825,76 @@ describe('DtInput tests', () => {
         await wrapper.setProps({ modelValue: 'external update' });
 
         expect(nativeTextarea.element.value).toBe('composing...');
+      });
+    });
+  });
+
+  describe('Accessibility Tests', () => {
+    describe('ARIA validation wiring', () => {
+      describe('When type is input', () => {
+        describe('When a critical validation message is provided', () => {
+          beforeEach(() => {
+            mockProps = { messages: [{ message: 'Error', type: VALIDATION_MESSAGE_TYPES.CRITICAL }] };
+
+            updateWrapper();
+          });
+
+          it('should set aria-invalid on the input', () => {
+            expect(nativeInput.attributes('aria-invalid')).toBe('true');
+          });
+
+          it('should set aria-describedby on the input pointing to the messages container', () => {
+            const messagesContainer = wrapper.find('[data-qa="dt-input-messages"]');
+
+            expect(nativeInput.attributes('aria-describedby')).toBe(messagesContainer.attributes('id'));
+          });
+        });
+
+        describe('When no validation messages are provided', () => {
+          it('should not set aria-invalid on the input', () => {
+            expect(nativeInput.attributes('aria-invalid')).toBeUndefined();
+          });
+
+          it('should not set aria-describedby on the input', () => {
+            expect(nativeInput.attributes('aria-describedby')).toBeUndefined();
+          });
+        });
+      });
+
+      describe('When type is textarea', () => {
+        describe('When a critical validation message is provided', () => {
+          beforeEach(() => {
+            mockProps = { type: 'textarea', messages: [{ message: 'Error', type: VALIDATION_MESSAGE_TYPES.CRITICAL }] };
+
+            updateWrapper();
+          });
+
+          it('should set aria-invalid on the textarea', () => {
+            expect(wrapper.find('[data-qa="dt-input-input"]').attributes('aria-invalid')).toBe('true');
+          });
+
+          it('should set aria-describedby on the textarea pointing to the messages container', () => {
+            const messagesContainer = wrapper.find('[data-qa="dt-input-messages"]');
+
+            expect(wrapper.find('[data-qa="dt-input-input"]').attributes('aria-describedby')).toBe(messagesContainer.attributes('id'));
+          });
+        });
+
+        describe('When no validation messages are provided', () => {
+          beforeEach(() => {
+            mockProps = { type: 'textarea' };
+
+            updateWrapper();
+          });
+
+          it('should not set aria-invalid on the textarea', () => {
+            expect(wrapper.find('[data-qa="dt-input-input"]').attributes('aria-invalid')).toBeUndefined();
+          });
+
+          it('should not set aria-describedby on the textarea', () => {
+            expect(wrapper.find('[data-qa="dt-input-input"]').attributes('aria-describedby')).toBeUndefined();
+          });
+        });
       });
     });
   });

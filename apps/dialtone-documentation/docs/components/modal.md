@@ -3,7 +3,6 @@ title: Modal
 description: A modal focuses the user's attention on a single task or message.
 status: ready
 thumb: true
-image: assets/images/components/modal.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-modal--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=4454-10944
 keywords: ["dialog", "popup", "overlay", "lightbox", "d-modal", "DtModal", "dt-modal", "alert dialog", "sheet"]
@@ -16,7 +15,7 @@ keywords: ["dialog", "popup", "overlay", "lightbox", "d-modal", "DtModal", "dt-m
 
 ## Usage
 
-Modals disable underlying content and are used to present a short-term task the user needs to perform without losing the context of the underlying page. Users won't be able to interact with the page until they close the modal.
+Modals disable underlying content and are used to present a short-term task the user needs to perform without losing the context of the underlying page. Users won't be able to interact with the page until they close the modal. By design, clicking outside the DtModal dialog does not close it — this is intentional behavior to prevent accidental dismissal of important tasks. Users must explicitly click the close button or trigger a close action to dismiss the modal.
 
 Although highly versatile, this doesn't mean modal dialogs are fit for all purposes. Modals are purposefully disruptive and should be used thoughtfully and sparingly, specifically in moments where focus is required or an action must be taken.
 

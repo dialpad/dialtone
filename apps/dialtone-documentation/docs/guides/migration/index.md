@@ -38,13 +38,14 @@ Work through each applicable guide in order. Guides earlier in the list are prer
 | 15 | [DtChip interactive default](./chip-interactive/) | **Yes** | `dialtone-migrate-chip-interactive` | `interactive` prop default changed from `true` to `false`. Chips that need click/keyboard behavior must opt in with `:interactive="true"`. |
 | 16 | [Scrollbar :never → :always](./scrollbar-always/) | **Yes** | `dialtone-migrate-scrollbar-always` | `v-dt-scrollbar:never` renamed to `v-dt-scrollbar:always`; `DtBox` `scrollbar="never"` renamed to `scrollbar="always"`. |
 | 17 | [DtModal Native Dialog](./modal-native-dialog/) | No | — | `DtModal` now uses a native `<dialog>` element. Popovers and tooltips inside modals auto-append to the dialog. Only affects consumers targeting internal DOM structure. |
+| 18 | [Typography Utilities to DtText](./typography/) | Deprecation | `dialtone-migrate-typography` | Replace legacy typography utility classes (`d-headline--*`, `d-body--*`, `d-label--*`, `d-code--md`, `d-fw-*`, `d-fc-*`, `d-lh-*`, `d-truncate`, `d-ta-*`) on text elements with the `<dt-text>` component. |
 
 ### Framework
 
 | # | Guide | Breaking? | Tool | Summary |
 | --- | --- | --- | --- | --- |
-| 18 | [Theme to Mode](./theme-to-mode/) | **Yes** | `dialtone-migration-helper` | Legacy `setTheme` deprecated. New layered API uses `setMode` / `setBrand` / `setContrast` / `initDialtoneTheme`. Root attributes `data-dt-theme` → `data-dt-mode` + `data-dt-brand` + `data-dt-contrast`. |
-| 19 | [Vue 2 Removal](./vue2-removal/) | **Yes** | — | Vue 2 support dropped. Last Vue 2 version: `9.154.0`. |
+| 19 | [Theme to Mode](./theme-to-mode/) | **Yes** | `dialtone-migration-helper` | Legacy `setTheme` deprecated. New layered API uses `setMode` / `setBrand` / `setContrast` / `initDialtoneTheme`. Root attributes `data-dt-theme` → `data-dt-mode` + `data-dt-brand` + `data-dt-contrast`. |
+| 20 | [Vue 2 Removal](./vue2-removal/) | **Yes** | — | Vue 2 support dropped. Last Vue 2 version: `9.154.0`. |
 
 ## Quick Start
 
@@ -127,7 +128,10 @@ npx dialtone-migrate-chip-interactive --cwd ./src
 # 15. Scrollbar :never → :always
 npx dialtone-migrate-scrollbar-always --cwd ./src
 
-# 16. ESLint auto-fix pass
+# 16. Typography utilities to DtText
+npx dialtone-migrate-typography --cwd ./src
+
+# 17. ESLint auto-fix pass
 npx eslint --fix "src/**/*.vue"
 ```
 

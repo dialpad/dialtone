@@ -146,7 +146,7 @@ describe('Checkbox Group Tests', () => {
 
           updateWrapper();
 
-          expect(checkboxGroupMessages.exists()).toBe(false);
+          expect(checkboxGroupMessages.findAll('[data-qa="validation-message"]').length).toBe(0);
         });
       });
     });

@@ -3,7 +3,6 @@ title: Badge
 description: A badge is a compact UI element providing brief, descriptive information about an element and its surrounding context. It is terse, ideally one word.
 status: ready
 thumb: true
-image: assets/images/components/badge.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-badge--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=2128-0
 keywords: ["label","tag","indicator","count","d-badge","DtBadge","dt-badge"]

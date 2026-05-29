@@ -3,7 +3,6 @@ title: Item Layout
 description: An item layout provides a standardized group of containers to enable developer to use list-item like stack. It is used as base for `dt-list-item` component
 status: ready
 thumb: true
-image: assets/images/components/item-layout.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-item-layout--default
 keywords: ["list layout","item structure","d-item-layout","DtItemLayout","dt-item-layout"]
 ---

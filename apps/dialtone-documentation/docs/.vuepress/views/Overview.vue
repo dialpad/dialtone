@@ -9,8 +9,8 @@
         >
           <div v-if="page.thumb" class="dialtone-wall__image">
             <img
-              v-if="thumbPngUrl(page.fileName)"
-              :src="thumbPngUrl(page.fileName)"
+              v-if="thumbImgUrl(page.fileName)"
+              :src="thumbImgUrl(page.fileName)"
               :alt="page.title"
               class="dialtone-wall__thumb"
             >
@@ -38,6 +38,7 @@
 </template>
 
 <script setup>
+import { ref, onMounted, onBeforeUnmount } from 'vue';
 import SvgLoader from '../baseComponents/SvgLoader.vue';
 
 defineProps({
@@ -47,19 +48,51 @@ defineProps({
   },
 });
 
-// Pre-resolved URL maps so thumb rendering can fall back from SVG to PNG.
+const lightPngModules = import.meta.glob(
+  '../public/assets/images/components/*-light.png',
+  { eager: true, query: '?url', import: 'default' },
+);
+const darkPngModules = import.meta.glob(
+  '../public/assets/images/components/*-dark.png',
+  { eager: true, query: '?url', import: 'default' },
+);
+const legacyPngModules = import.meta.glob(
+  '../public/assets/images/*.png',
+  { eager: true, query: '?url', import: 'default' },
+);
 const svgModules = import.meta.glob(
   '../public/assets/images/*.svg',
   { eager: true, query: '?url', import: 'default' },
 );
-const pngModules = import.meta.glob(
-  '../public/assets/images/*.png',
-  { eager: true, query: '?url', import: 'default' },
-);
 
-const thumbPngUrl = (fileName) => {
+const DEFAULT_MODE = 'dark';
+const currentMode = ref(readMode());
+
+function readMode () {
+  if (typeof document === 'undefined') return DEFAULT_MODE;
+  return document.documentElement.getAttribute('data-dt-mode') || DEFAULT_MODE;
+}
+
+let observer = null;
+onMounted(() => {
+  currentMode.value = readMode();
+  observer = new MutationObserver(() => { currentMode.value = readMode(); });
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-dt-mode'] });
+});
+onBeforeUnmount(() => observer?.disconnect());
+
+/**
+ * Resolve a thumb's image URL with this precedence:
+ *   1. themed PNG for the current mode (auto-generated)
+ *   2. hand-crafted SVG if it exists (returns null → template falls through to svg-loader)
+ *   3. legacy non-themed PNG
+ */
+const thumbImgUrl = (fileName) => {
+  const themedMap = currentMode.value === 'light' ? lightPngModules : darkPngModules;
+  const themed = themedMap[`../public/assets/images/components/${fileName}-${currentMode.value}.png`];
+  if (themed) return themed;
   if (svgModules[`../public/assets/images/${fileName}.svg`]) return null;
-  return pngModules[`../public/assets/images/${fileName}.png`] ?? null;
+  return legacyPngModules[`../public/assets/images/${fileName}.png`] ?? null;
 };
 
 const BADGE_KIND_CLASSES = {

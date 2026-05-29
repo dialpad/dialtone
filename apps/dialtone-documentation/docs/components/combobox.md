@@ -3,7 +3,6 @@ title: Combobox
 description: A combobox is a semantic component that displays an input element combined with a listbox, which enables the user to select items from the list.
 status: ready
 thumb: true
-image: assets/images/components/combobox.png
 figma: planned
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox--default
 keywords: ["autocomplete","typeahead","search select","d-combobox","DtCombobox","dt-combobox"]
@@ -13,7 +12,7 @@ keywords: ["autocomplete","typeahead","search select","d-combobox","DtCombobox",
 
 ## Base Style
 
-A combobox provides accessibility controls and common functionality. It does not render any functioning UI on it's own, but it depends on the elements passed to it via slots.
+A combobox provides accessibility controls and common functionality for search inputs with autocomplete and filtering. It does not render any functioning UI on its own, but it depends on the elements passed to it via slots. Use it to build a search box where typing filters a list of suggestions — the canonical pattern for autocomplete inputs in Dialtone.
 
 It has 2 core required slots:
 

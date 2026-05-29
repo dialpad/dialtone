@@ -1,7 +1,6 @@
 ---
 title: Datepicker
 thumb: true
-image: assets/images/components/datepicker.png
 description: Datepicker component will provide a calendar to select a date.
 status: ready
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-datepicker--default

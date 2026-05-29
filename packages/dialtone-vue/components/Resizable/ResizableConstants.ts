@@ -175,6 +175,9 @@ export const DEFAULT_PANEL_SIZE = '50p';
 /** Minimum panel size in pixels below which a resize is rejected. */
 export const MIN_PANEL_SIZE_PX = 10;
 
+/** Centers the 4px handle over the panel boundary. */
+export const RESIZABLE_HANDLE_CENTER_OFFSET_PX = 2;
+
 // ─── Storage Adapter ───────────────────────────────────────────────────────
 
 /**

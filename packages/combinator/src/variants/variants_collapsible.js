@@ -1,15 +1,21 @@
- 
-
+/* eslint-disable max-len */
 export default {
   default: {
     props: {
       anchorText: {
-        initialValue: 'Click me to toggle Content',
+        initialValue: 'Collapsible label',
       },
     },
     slots: {
       content: {
-        initialValue: '<div>Content slot</div>',
+        initialValue: `<dt-box
+  padding="200"
+  border-width="200"
+  border-color="subtle"
+  class="d-bas-dashed"
+>
+  <dt-text as="p" kind="body" size="100" tone="tertiary" align="center">Content slot</dt-text>
+</dt-box>`,
       },
     },
   },
@@ -20,7 +26,16 @@ export default {
     },
     slots: {
       anchor: { initialValue: '<dt-button>Click Me!</dt-button>' },
-      content: { initialValue: '<div>This will be shown in the expanded area.</div>' },
+      content: {
+        initialValue: `<dt-box
+  padding="200"
+  border-width="200"
+  border-color="subtle"
+  class="d-bas-dashed"
+>
+  <dt-text as="p" kind="body" size="100" tone="tertiary" align="center">This will be shown in the expanded area.</dt-text>
+</dt-box>`,
+      },
     },
   },
 };

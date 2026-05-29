@@ -24,6 +24,8 @@
 * **Scripts, Eslint, Stylelint:** DLT-3359 add success-to-positive migration tooling ([#1231](https://github.com/dialpad/dialtone/issues/1231)) ([0d652a5](https://github.com/dialpad/dialtone/commit/0d652a5b19770c47dd9d1a676f23477cdf877166))
 * **Scripts:** DLT-3033 DLT-3034 DLT-3035 add link-rendering migration codemod and ESLint rule ([#1233](https://github.com/dialpad/dialtone/issues/1233)) ([35a7238](https://github.com/dialpad/dialtone/commit/35a7238192a25f33a7b7020109f3005594b952e1))
 * **Tokens, Css:** DLT-3331 rename success tokens and utility classes to positive ([#1230](https://github.com/dialpad/dialtone/issues/1230)) ([34bdff5](https://github.com/dialpad/dialtone/commit/34bdff5fced88803f45de606df3a204bc191265b))
+* **Eslint Plugin:** DLT-3281 add deprecated-class-props rule ([#1258](https://github.com/dialpad/dialtone/issues/1258)) ([3c5925e](https://github.com/dialpad/dialtone/commit/3c5925e38f340ddae01ebd59079b185a49f81304))
+
 
 # [1.12.0](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.11.2...eslint-plugin-dialtone/v1.12.0) (2026-04-17)
 

@@ -2,7 +2,7 @@ import matter from 'gray-matter';
 
 const PATTERNS = {
   headingGlobal: /^(#{1,6})\s+(.+?)(?:\s+#+)?$/gm,
-  codeBlockFenced: /^`{3,}([^\n]*)\n([\s\S]*?)^`{3,}/gm,
+  codeBlockFenced: /^(?:`{3,}|~{3,})([^\n]*)\n([\s\S]*?)^(?:`{3,}|~{3,})/gm,
   codeInline: /`([^`]+)`/g,
   link: /\[([^\]]*)\]\(([^)]+)\)/g,
   image: /!\[([^\]]*)\]\(([^)]+)\)/g,

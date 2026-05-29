@@ -1,3 +1,30 @@
+# [8.80.0-next.7](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.80.0-next.6...dialtone-css/v8.80.0-next.7) (2026-05-22)
+
+
+### Bug Fixes
+
+* **Segmented Control, Button:** NO-JIRA correct layering of slot items ([#1283](https://github.com/dialpad/dialtone/issues/1283)) ([046f212](https://github.com/dialpad/dialtone/commit/046f2123cb68d84b1a3396ebe5371e00f6694b2e))
+
+
+### Code Refactoring
+
+* **Validation Messages:** DLT-3422 update to use icon slot over embedded icon ([#1272](https://github.com/dialpad/dialtone/issues/1272)) ([344b737](https://github.com/dialpad/dialtone/commit/344b7373afbc135a5a695bdaf214f9832f3dd388))
+
+
+### Documentation
+
+* **Border Radius:** dlt-3362 border-radius migration guide ([#1280](https://github.com/dialpad/dialtone/issues/1280)) ([12fd76a](https://github.com/dialpad/dialtone/commit/12fd76a86071278bd5da98ce17e9d81d7ccaf46c))
+
+
+### Features
+
+* **Design Tokens, Modal, Notice, Popover, Hovercard, Emoji Picker:** DLT-3436 add overlay surface color ([#1282](https://github.com/dialpad/dialtone/issues/1282)) ([62d60f2](https://github.com/dialpad/dialtone/commit/62d60f21358b8f8875a9407e4f7fec5afaece355))
+* **Dialtone Css, Dialtone Documentation:** DLT-3363 add theme-to-mode migration guide and codemod ([#1260](https://github.com/dialpad/dialtone/issues/1260)) ([90aa4b4](https://github.com/dialpad/dialtone/commit/90aa4b4765e42b6bbed29b678eb8aaf88afd63a3))
+* **Dialtone Css:** DLT-3278 add dialtone-migrate-typography codemod ([#1289](https://github.com/dialpad/dialtone/issues/1289)) ([aea7eba](https://github.com/dialpad/dialtone/commit/aea7eba123949aba2a160ff46371611fb8ea9f1f))
+* **Modal:** DLT-3432 add transparentBackdrop prop ([#1277](https://github.com/dialpad/dialtone/issues/1277)) ([daace31](https://github.com/dialpad/dialtone/commit/daace3102255d214dbe7eaa522c4088edaa7ccd9))
+* **Presence, Avatar:** DLT-3438 add icons to presence ([#1287](https://github.com/dialpad/dialtone/issues/1287)) ([51062be](https://github.com/dialpad/dialtone/commit/51062beb5b12911eae9c752b6376939394dd374f))
+* **Validation Messages:** DLT-3423 add info variant ([#1274](https://github.com/dialpad/dialtone/issues/1274)) ([412154b](https://github.com/dialpad/dialtone/commit/412154b5dd9d88637fb424746208f42173d5ef61))
+
 # [8.80.0-next.6](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.80.0-next.5...dialtone-css/v8.80.0-next.6) (2026-05-13)
 
 

@@ -113,31 +113,6 @@
     box-shadow: var(--dt-shadow-focus);
   }
 
-  &--disabled,
-  &:disabled {
-    --chroma-adjust-text: .08;
-    --chroma-adjust-background: .08;
-    --chroma-adjust-border: .08;
-    --opacity-adjust-text: 65%;
-    --opacity-adjust-background: 65%;
-    --opacity-adjust-border: 40%;
-
-    color:            color-mix(in oklch, oklch( from var(--button-color-text)       l calc(c - var(--chroma-adjust-text)) h ) var(--opacity-adjust-text), transparent );
-    background-color: color-mix(in oklch, oklch( from var(--button-color-background) l calc(c - var(--chroma-adjust-background)) h ) var(--opacity-adjust-background), transparent );
-    border-color:     color-mix(in oklch, oklch( from var(--button-color-border)     l calc(c - var(--chroma-adjust-border)) h ) var(--opacity-adjust-border), transparent );
-    cursor: not-allowed;
-    transition: none;
-    pointer-events: none;
-
-    &.d-btn--primary {
-      --opacity-adjust-text: 80%;
-    }
-
-    &.d-btn--muted {
-      --opacity-adjust-text: 50%;
-      --opacity-adjust-border: 50%;
-    }
-  }
 }
 
 ._btn-circle() {
@@ -205,6 +180,36 @@
 .d-btn,
 .d-btn--md {
   ._btn();
+}
+
+.d-btn:where(.d-btn--disabled, :disabled),
+.d-btn--md:where(.d-btn--disabled, :disabled) {
+  --chroma-adjust-text: .08;
+  --chroma-adjust-background: .08;
+  --chroma-adjust-border: .08;
+  --opacity-adjust-text: 65%;
+  --opacity-adjust-background: 65%;
+  --opacity-adjust-border: 40%;
+
+  color:            color-mix(in oklch, oklch( from var(--button-color-text)       l calc(c - var(--chroma-adjust-text)) h ) var(--opacity-adjust-text), transparent );
+  background-color: color-mix(in oklch, oklch( from var(--button-color-background) l calc(c - var(--chroma-adjust-background)) h ) var(--opacity-adjust-background), transparent );
+  border-color:     color-mix(in oklch, oklch( from var(--button-color-border)     l calc(c - var(--chroma-adjust-border)) h ) var(--opacity-adjust-border), transparent );
+  cursor: not-allowed;
+  transition: none;
+  pointer-events: none;
+
+  &:where(.d-btn--primary) {
+    --opacity-adjust-text: 80%;
+  }
+
+  &:where(.d-btn--muted) {
+    --opacity-adjust-text: 50%;
+    --opacity-adjust-border: 60%;
+  }
+
+  &:where(.d-btn--active):where(.d-btn--outlined, .d-btn--muted) {
+    --button-color-background: var(--dt-action-color-background-muted-active);
+  }
 }
 
 .d-btn--unstyled {

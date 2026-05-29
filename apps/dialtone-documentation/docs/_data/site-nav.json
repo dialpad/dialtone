@@ -300,6 +300,10 @@
                     "link": "/guides/migration/modal-native-dialog/"
                   },
                   {
+                    "text": "Typography Utilities to DtText",
+                    "link": "/guides/migration/typography/"
+                  },
+                  {
                     "text": "Vue 2 Removal",
                     "link": "/guides/migration/vue2-removal/"
                   }

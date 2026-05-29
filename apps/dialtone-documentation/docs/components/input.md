@@ -3,7 +3,6 @@ title: Input
 description: An input field is an input control that allows users to enter alphanumeric information. It can have a range of options and supports single line and multi-line lengths, as well as varying formats, including numbers, masked passwords, etc.
 status: ready
 thumb: true
-image: assets/images/components/input.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-input--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=25665-5366
 keywords: ["text field", "form field", "textbox", "d-input", "DtInput", "dt-input", "text input", "form input"]
@@ -87,7 +86,7 @@ An input is normally paired with a label, but there are times when it can be use
 
 ### With Validation States
 
-Provides feedback to the user based on their interaction, or lack thereof, with an input.
+Provides feedback to the user based on their interaction, or lack thereof, with an input. When a DtInput has an error message, it displays a red border to indicate the invalid state. The red border and error message appear when you pass a message with `type: "error"` to the `messages` prop. Success states show a green border, and warnings show a yellow border.
 
 ```vue demo
 <!-- @wrapper -->

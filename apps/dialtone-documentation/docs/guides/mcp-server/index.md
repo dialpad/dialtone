@@ -11,6 +11,7 @@ The Dialtone MCP Server provides AI assistants with real-time search access to:
 - **5,691 design tokens** - Find tokens like `--dt-color-foreground-primary`, `--dt-spacing-100`
 - **87 Vue components** - Discover `DtButton`, `DtModal` with full API documentation
 - **594 icons** - Find icons like `bell-ring`, `arrow-up`, `calendar-plus`
+- **Public documentation** - `search_documentation`: Search usage prose, recipes, accessibility rules, migration guides, and design principles. Use for "how-to" and "why" questions that go beyond component/token/icon lookups.
 
 ### Smart Features
 

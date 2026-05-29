@@ -16,9 +16,9 @@ export default {
     },
     slots: {
       default: {
-        initialValue: `<div class="d-bgc-moderate-opaque d-p-200 d-bar-400">Stack item 1</div>
-<div class="d-bgc-moderate-opaque d-p-200 d-bar-400">Stack item 2<br>with second line</div>
-<div class="d-bgc-moderate-opaque d-p-200 d-bar-400">Stack item 3</div>`,
+        initialValue: `<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" kind="body" size="200">Stack item 1</dt-text></dt-box>
+<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" kind="body" size="200">Stack item 2<br>with second line</dt-text></dt-box>
+<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" kind="body" size="200">Stack item 3</dt-text></dt-box>`,
       },
     },
   },
@@ -31,9 +31,9 @@ export default {
     },
     slots: {
       default: {
-        initialValue: `<div class="d-bgc-moderate-opaque d-p-200 d-bar-400">Stack item 1</div>
-<div class="d-bgc-moderate-opaque d-p-200 d-bar-400">Stack item 2</div>
-<div class="d-bgc-moderate-opaque d-p-200 d-bar-400">Stack item 3</div>`,
+        initialValue: `<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" kind="body" size="200">Stack item 1</dt-text></dt-box>
+<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" kind="body" size="200">Stack item 2</dt-text></dt-box>
+<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" kind="body" size="200">Stack item 3</dt-text></dt-box>`,
       },
     },
   },
@@ -52,9 +52,9 @@ export default {
     },
     slots: {
       default: {
-        initialValue: `<div class="d-bgc-moderate-opaque d-p-200 d-bar-400">Stack item 1</div>
-<div class="d-bgc-moderate-opaque d-p-200 d-bar-400">Stack item 2<br>with second line</div>
-<div class="d-bgc-moderate-opaque d-p-200 d-bar-400">Stack item 3</div>`,
+        initialValue: `<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" kind="body" size="200">Stack item 1</dt-text></dt-box>
+<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" kind="body" size="200">Stack item 2<br>with second line</dt-text></dt-box>
+<dt-box surface="moderate-opaque" padding="200" border-radius="300"><dt-text as="p" kind="body" size="200">Stack item 3</dt-text></dt-box>`,
       },
     },
   },
