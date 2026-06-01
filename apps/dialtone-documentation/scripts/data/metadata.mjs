@@ -15,6 +15,14 @@
  * Keys MUST match the Z_INDEX keys — the emitter throws if a level is missing one,
  * which surfaces drift the moment a new z-index level is added to the constant.
  */
+/**
+ * gap.json direction options (docs display).
+ *
+ * Not derivable from tokens — these are the flex/grid gap axes documented on the gap utility
+ * pages (`d-cg-*` column, `d-rg-*` row, `d-g-*` both).
+ */
+export const gapDirections = ['both', 'column', 'row'];
+
 export const zIndexDescriptions = {
   hide: 'Hides an element behind everything',
   base: 'Resets an element to the base z-index',

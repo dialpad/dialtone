@@ -22,6 +22,8 @@ export const DATA_DIR = resolve(REPO_ROOT, 'apps/dialtone-documentation/docs/_da
 const TOKENS_CONSTANTS = resolve(REPO_ROOT, 'packages/dialtone-tokens/postcss/constants.cjs');
 const ROOT_TOKENS = resolve(REPO_ROOT, 'packages/dialtone-tokens/tokens/root.json');
 const ICON_TOKENS = resolve(REPO_ROOT, 'packages/dialtone-tokens/tokens/components/icon/default.json');
+const CSS_CONSTANTS = resolve(REPO_ROOT, 'packages/dialtone-css/postcss/constants.cjs');
+const DOC_TOKENS = resolve(REPO_ROOT, 'packages/dialtone-tokens/dist/doc.json');
 
 /** Import a CommonJS module from ESM and return its `module.exports`. */
 async function importCjs (absPath) {
@@ -67,6 +69,53 @@ export function getIconSizes () {
     sizes.push({ size: stop, px: sizeBase * parseFloat(match[1]) });
   }
   return sizes;
+}
+
+/**
+ * Spacing-scale stops (0–800), in declaration order.
+ *
+ * Source of truth for which spacing utilities exist: the `SPACING_STOPS` array in
+ * dialtone-css/postcss/constants.cjs — the same list that drives utility-class generation.
+ * Returned as numbers, exactly as declared.
+ */
+export async function getSpacingStops () {
+  const { SPACING_STOPS } = await importCjs(CSS_CONSTANTS);
+  return SPACING_STOPS;
+}
+
+// --- Resolved px from the built token output (Style Dictionary's dist/doc.json) ---
+
+let _docBaseLight = null;
+function docBaseLight () {
+  if (!_docBaseLight) {
+    const doc = loadJson(DOC_TOKENS);
+    _docBaseLight = doc['base-light'];
+    if (!_docBaseLight) {
+      throw new Error('doc.json has no "base-light" theme — run `nx run dialtone-tokens:build` first.');
+    }
+  }
+  return _docBaseLight;
+}
+
+/** Normalize a doc.json dimension value to integer px (doc.json uses a 10px rem base). */
+function toPx (value) {
+  if (value.endsWith('px')) return parseFloat(value);
+  if (value.endsWith('rem')) return Math.round(parseFloat(value) * 10);
+  throw new Error(`doc.json: unexpected dimension value "${value}"`);
+}
+
+/**
+ * Resolved px for a token stop, read from the built token output:
+ *   getTokenPx('spacing', '100') → 8   ·   getTokenPx('layout', '25') → 16
+ * Throws if the stop has no token — surfacing a stop list that references a missing token.
+ */
+export function getTokenPx (category, stop) {
+  const entry = docBaseLight()[`${category}/${stop}`];
+  const cssVar = entry && entry['css/variables'];
+  if (!cssVar) {
+    throw new Error(`doc.json: no "${category}/${stop}" token (rebuild dialtone-tokens, or stop was removed?)`);
+  }
+  return toPx(cssVar.value);
 }
 
 /**
