@@ -10,7 +10,7 @@
  * Paths are resolved relative to this file (never process.cwd()) so the script works the same
  * from `node …`, NX, or CI.
  */
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
@@ -20,11 +20,18 @@ const REPO_ROOT = resolve(__dirname, '../../../..');
 
 export const DATA_DIR = resolve(REPO_ROOT, 'apps/dialtone-documentation/docs/_data');
 const TOKENS_CONSTANTS = resolve(REPO_ROOT, 'packages/dialtone-tokens/postcss/constants.cjs');
+const ROOT_TOKENS = resolve(REPO_ROOT, 'packages/dialtone-tokens/tokens/root.json');
+const ICON_TOKENS = resolve(REPO_ROOT, 'packages/dialtone-tokens/tokens/components/icon/default.json');
 
 /** Import a CommonJS module from ESM and return its `module.exports`. */
 async function importCjs (absPath) {
   const mod = await import(pathToFileURL(absPath).href);
   return mod.default ?? mod;
+}
+
+/** Read + parse a JSON file. */
+function loadJson (absPath) {
+  return JSON.parse(readFileSync(absPath, 'utf-8'));
 }
 
 /**
@@ -37,6 +44,29 @@ async function importCjs (absPath) {
 export async function getZIndexLevels () {
   const { Z_INDEX } = await importCjs(TOKENS_CONSTANTS);
   return Object.entries(Z_INDEX).map(([name, value]) => ({ name, value }));
+}
+
+/**
+ * Icon sizes, in declaration order.
+ *
+ * The stops + multipliers are token source (tokens/components/icon/default.json, each value
+ * `"{size.base} * N"`); the resolved px = `size.base` (root.json, 8px) × N. The `border`
+ * sub-scale is excluded — it's not part of the icon-size docs table. Returns `{ size, px }`.
+ * (Style Dictionary's dist output leaves these as unresolved `calc()`, so we resolve from source.)
+ */
+export function getIconSizes () {
+  const sizeBase = parseFloat(loadJson(ROOT_TOKENS).size.base.value); // "8px" → 8
+  const { icon } = loadJson(ICON_TOKENS);
+  const sizes = [];
+  for (const [stop, def] of Object.entries(icon.size)) {
+    if (stop === 'border') continue;
+    const match = /^\{size\.base\}\s*\*\s*([\d.]+)$/.exec(def.value);
+    if (!match) {
+      throw new Error(`icon-size "${stop}": unexpected token value "${def.value}" (expected "{size.base} * N")`);
+    }
+    sizes.push({ size: stop, px: sizeBase * parseFloat(match[1]) });
+  }
+  return sizes;
 }
 
 /**
