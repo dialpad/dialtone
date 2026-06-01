@@ -122,6 +122,7 @@
         :options="options"
         :library="library"
         :disabled-members="disabledMembers"
+        @event="onComponentEvent"
       />
       <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
       <div
@@ -353,6 +354,23 @@ const settings = computedModel(
 );
 
 watch(() => settings.value.root.theme, clearTokenCache);
+
+/**
+ * Handles events emitted by the rendered target component.
+ * For v-model events (`update:<prop>`), writes the new value back into the
+ * reactive options model so the preview and the generated code stay in sync.
+ *
+ * @param {string} name - The emitted event name (e.g. 'update:modelValue').
+ * @param {*} value - The emitted value.
+ */
+function onComponentEvent (name, value) {
+  if (!name?.startsWith('update:')) return;
+  const prop = name.slice('update:'.length);
+  options.value = (model) => {
+    if (model.props && prop in model.props) model.props[prop] = value;
+    else if (model.attributes && prop in model.attributes) model.attributes[prop] = value;
+  };
+}
 
 function updateVariant (e) {
   _presetChanging = true;
