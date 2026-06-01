@@ -41,6 +41,69 @@ export const widthHeight = {
   keywords: ['auto', 'unset', 'fit-content', 'max-content', 'min-content'],
 };
 
+/**
+ * spacing.json docs-only metadata.
+ *
+ * The `values` array and the coordinate stop list + `value` are token-derived (see emit-spacing.mjs);
+ * everything here is non-derivable docs metadata:
+ *  - `directions`: padding/margin direction suffixes, with deprecated physical names flagged.
+ *  - `coordinateDirections`: the inset utility axes (logical property, physical display name,
+ *    class prefix, and whether percentage offsets apply).
+ *  - `coordinateFlags`: per-coordinate `negative`/`combo` flags (docs-only). Keys MUST cover every
+ *    spacing stop; the emitter throws otherwise, surfacing a newly added stop.
+ *  - `extraCoordinates`: literal percentage/calc coordinates appended after the token-stop ones.
+ */
+export const spacing = {
+  directions: [
+    { name: 'All' },
+    { name: 'top', deprecated: true },
+    { name: 'right', deprecated: true },
+    { name: 'bottom', deprecated: true },
+    { name: 'left', deprecated: true },
+    { name: 'x' },
+    { name: 'y' },
+  ],
+  coordinateDirections: [
+    { direction: 'inset-block-start', directionPhysical: 'Top', prefix: 'ibs', percent: 'yes' },
+    { direction: 'inset-inline-end', directionPhysical: 'Right', prefix: 'iie', percent: 'yes' },
+    { direction: 'inset-block-end', directionPhysical: 'Bottom', prefix: 'ibe', percent: 'yes' },
+    { direction: 'inset-inline-start', directionPhysical: 'Left', prefix: 'iis', percent: 'yes' },
+    { direction: 'inset-inline', directionPhysical: 'Left/Right', prefix: 'x', percent: 'no' },
+    { direction: 'inset-block', directionPhysical: 'Top/Bottom', prefix: 'y', percent: 'no' },
+    { direction: 'inset', directionPhysical: 'All', prefix: 'all', percent: 'no' },
+  ],
+  coordinateFlags: {
+    0: { negative: 'no', combo: 'yes' },
+    1: { negative: 'yes', combo: 'yes' },
+    25: { negative: 'yes', combo: 'yes' },
+    50: { negative: 'yes', combo: 'yes' },
+    75: { negative: 'yes', combo: 'yes' },
+    100: { negative: 'yes', combo: 'yes' },
+    125: { negative: 'yes', combo: 'yes' },
+    150: { negative: 'yes', combo: 'yes' },
+    175: { negative: 'yes', combo: 'yes' },
+    200: { negative: 'yes', combo: 'yes' },
+    250: { negative: 'yes', combo: 'yes' },
+    300: { negative: 'yes', combo: 'yes' },
+    350: { negative: 'yes', combo: 'yes' },
+    400: { negative: 'yes', combo: 'yes' },
+    450: { negative: 'yes', combo: 'yes' },
+    500: { negative: 'yes', combo: 'yes' },
+    525: { negative: 'yes', combo: 'yes' },
+    550: { negative: 'yes', combo: 'yes' },
+    600: { negative: 'yes', combo: 'yes' },
+    650: { negative: 'yes', combo: 'yes' },
+    700: { negative: 'yes', combo: 'yes' },
+    750: { negative: 'yes', combo: 'yes' },
+    800: { negative: 'yes', combo: 'yes' },
+  },
+  extraCoordinates: [
+    { coordinate: '50p', negative: 'yes', combo: 'no', value: '50%' },
+    { coordinate: '100p', negative: 'yes', combo: 'no', value: '100%' },
+    { coordinate: '100p-calc', negative: 'yes', combo: 'no', value: 'calc(100% + 8px)' },
+  ],
+};
+
 export const zIndexDescriptions = {
   hide: 'Hides an element behind everything',
   base: 'Resets an element to the base z-index',

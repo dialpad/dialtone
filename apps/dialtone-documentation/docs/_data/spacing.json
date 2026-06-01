@@ -1,12 +1,30 @@
 {
   "directions": [
-    { "name": "All" },
-    { "name": "top", "deprecated": true },
-    { "name": "right", "deprecated": true },
-    { "name": "bottom", "deprecated": true },
-    { "name": "left", "deprecated": true },
-    { "name": "x" },
-    { "name": "y" }
+    {
+      "name": "All"
+    },
+    {
+      "name": "top",
+      "deprecated": true
+    },
+    {
+      "name": "right",
+      "deprecated": true
+    },
+    {
+      "name": "bottom",
+      "deprecated": true
+    },
+    {
+      "name": "left",
+      "deprecated": true
+    },
+    {
+      "name": "x"
+    },
+    {
+      "name": "y"
+    }
   ],
   "values": [
     {
@@ -220,16 +238,64 @@
       "value": "2.4rem"
     },
     {
+      "coordinate": "350",
+      "negative": "yes",
+      "combo": "yes",
+      "value": "2.8rem"
+    },
+    {
       "coordinate": "400",
       "negative": "yes",
       "combo": "yes",
       "value": "3.2rem"
     },
     {
+      "coordinate": "450",
+      "negative": "yes",
+      "combo": "yes",
+      "value": "3.6rem"
+    },
+    {
+      "coordinate": "500",
+      "negative": "yes",
+      "combo": "yes",
+      "value": "4rem"
+    },
+    {
+      "coordinate": "525",
+      "negative": "yes",
+      "combo": "yes",
+      "value": "4.2rem"
+    },
+    {
+      "coordinate": "550",
+      "negative": "yes",
+      "combo": "yes",
+      "value": "4.4rem"
+    },
+    {
       "coordinate": "600",
       "negative": "yes",
       "combo": "yes",
       "value": "4.8rem"
+    },
+    {
+      "coordinate": "650",
+      "negative": "yes",
+      "combo": "yes",
+      "value": "5.2rem"
+    },
+    {
+      "coordinate": "700",
+      "negative": "yes",
+      "combo": "yes",
+      "value": "5.6rem"
+    },
+    {
+      "coordinate": "750",
+      "negative": "yes",
+      "combo": "yes",
+      "value": "6rem"
     },
     {
       "coordinate": "800",

@@ -128,6 +128,11 @@ export function getTokenPx (category, stop) {
   return toPx(cssVar.value);
 }
 
+/** Format px as the docs' rem string (10px root font-size): 8 → "0.8rem", 10 → "1rem", 0 → "0rem". */
+export function pxToRem (px) {
+  return `${px / 10}rem`;
+}
+
 /**
  * Write a docs `_data` file as 2-space-indented JSON + trailing newline — matching the
  * formatting of the existing committed files so regeneration produces a minimal diff.
