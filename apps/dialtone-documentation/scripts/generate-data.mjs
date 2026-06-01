@@ -8,7 +8,7 @@
  * _data/, so the documented scales can no longer drift from the tokens.
  *
  * Idempotent: running it twice on an unchanged tree produces no diff. Wired into the docs build
- * via the `gen-data` NX target (dependsOn dialtone-tokens:build), and guarded by a pre-commit
+ * via the `generate-token-data` NX target (dependsOn dialtone-tokens:build), and guarded by a pre-commit
  * hook + a CI check that regenerates and fails on any diff.
  *
  * Usage: node apps/dialtone-documentation/scripts/generate-data.mjs
@@ -28,11 +28,11 @@ async function main () {
     const data = await emitter.build();
     const count = Array.isArray(data) ? data.length : Object.keys(data).length;
     const outPath = writeDataFile(emitter.file, data);
-    console.info(`gen-data: wrote ${emitter.file} (${count} entries) → ${outPath}`);
+    console.info(`generate-token-data: wrote ${emitter.file} (${count} entries) → ${outPath}`);
   }
 }
 
 main().catch((err) => {
-  console.error('gen-data failed:', err);
+  console.error('generate-token-data failed:', err);
   process.exit(1);
 });
