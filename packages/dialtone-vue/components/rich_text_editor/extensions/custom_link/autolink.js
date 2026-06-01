@@ -20,6 +20,9 @@ export function autolink (options) {
   // the initial content through the plugin if the editor was mounted with some.
   let hasInitialized = false;
 
+  // Backend-confirmed phone numbers. null = auto-detect all; array = restrict to list.
+  const phoneNumbers = options.phoneNumbers ?? null;
+
   return new Plugin({
     key: new PluginKey('autolink'),
 
@@ -39,9 +42,13 @@ export function autolink (options) {
       // Text content after the original transaction.
       const { textContent } = newState.doc;
 
-      // When the editor is initialized we want to add links to it.
-      if (!hasInitialized) {
-        addMarks(textContent, 0, 0, textContent.length, tr, options.type);
+      // On initialization OR a full content replacement (e.g. setContent called
+      // after server confirmation), scan the entire document text. This is more
+      // reliable than getChangedRanges for wholesale document replacements.
+      if (!hasInitialized || !oldState.doc.textContent) {
+        addMarks(textContent, 0, 0, textContent.length, tr, options.type, phoneNumbers);
+        hasInitialized = true;
+        return tr;
       }
 
       hasInitialized = true;
@@ -55,7 +62,25 @@ export function autolink (options) {
       // All the changes within the document.
       const changes = getChangedRanges(transform);
 
+      // If the changed ranges don't cover the document (e.g. setContent replaced
+      // the whole document but getChangedRanges returned nothing), fall back to a
+      // full scan so phone-number marks are always applied.
+      if (!changes.length) {
+        addMarks(textContent, 0, 0, textContent.length, tr, options.type, phoneNumbers);
+        return tr;
+      }
+
       changes.forEach(({ oldRange, newRange }) => {
+        // When getChangedRanges returns a degenerate zero-width range (from mark
+        // steps like AddMarkStep/RemoveMarkStep whose StepMap has no position
+        // changes), fall back to a full-document scan. Using [0,0] would cause
+        // removeMarks to hit our phone mark via ±1 expansion but findChildrenInRange
+        // to find no paragraphs, permanently deleting the mark.
+        if (newRange.from === newRange.to) {
+          addMarks(textContent, 0, 0, textContent.length, tr, options.type, phoneNumbers);
+          return;
+        }
+
         // Remove all link marks in the changed range since we'll add them
         // right back if they're still valid links.
         removeMarks(newRange, newState.doc, tr, options.type);
@@ -76,6 +101,7 @@ export function autolink (options) {
             newRange.to,
             tr,
             options.type,
+            phoneNumbers,
           );
         });
       });

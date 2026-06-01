@@ -95,7 +95,7 @@ import { emojiPattern } from 'regex-combined-emojis';
 import mentionSuggestion from './extensions/mentions/suggestion';
 import channelSuggestion from './extensions/channels/suggestion';
 import slashCommandSuggestion from './extensions/slash_command/suggestion';
-import { warnIfUnmounted, returnFirstEl } from '@/common/utils';
+import { warnIfUnmounted, returnFirstEl, getPhoneNumberRegex, linkRegex } from '@/common/utils';
 import { renderEditorToMarkdown } from './markdownRenderer';
 import deepEqual from 'deep-equal';
 import { DialtoneLocalization } from '@/localization';
@@ -241,6 +241,18 @@ export default {
     customLink: {
       type: [Boolean, Object],
       default: false,
+    },
+
+    /**
+     * When set to an array alongside `customLink`, restricts phone-number
+     * autolinking to only those specific strings (e.g. numbers confirmed by
+     * the backend via `rich_media`). An empty array means no phone marks at all.
+     * When `null` (default), all phone-like text is auto-linked.
+     * @type {string[]|null}
+     */
+    phoneNumbers: {
+      type: Array,
+      default: null,
     },
 
     /**
@@ -723,12 +735,18 @@ export default {
             class: 'd-link d-wb-break-all',
           },
           openOnClick: false,
-          autolink: true,
+          // Disable autolink when customLink is active — customLink handles all
+          // phone/URL autolinking and the two autolink plugins conflict on '+' prefixed
+          // phone numbers (e.g. +541144372368), causing marks to be removed.
+          autolink: !this.customLink,
           protocols: RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
         }));
       }
       if (this.customLink) {
-        extensions.push(this.getExtension(CustomLink, this.customLink));
+        const customLinkOptions = typeof this.customLink === 'object'
+          ? { ...this.customLink, phoneNumbers: this.phoneNumbers }
+          : { phoneNumbers: this.phoneNumbers };
+        extensions.push(this.getExtension(CustomLink, customLinkOptions));
       }
 
       if (this.mentionSuggestion) {
@@ -938,6 +956,16 @@ export default {
   mounted () {
     warnIfUnmounted(returnFirstEl(this.$el), this.$options.name);
     this.processValue(this.modelValue, false);
+    // Force appendTransaction to run after mount — the editor may be pre-populated
+    // via createEditor(content: modelValue), causing setContent to dispatch no
+    // transaction and skipping our autolink's appendTransaction entirely.
+    if (this.customLink) {
+      this.$nextTick(() => {
+        if (this.editor) {
+          this.editor.view.dispatch(this.editor.state.tr.setMeta('dp-force-autolink', true));
+        }
+      });
+    }
   },
 
   methods: {
@@ -1086,11 +1114,54 @@ export default {
         newValue = newValue?.replace(inputUnicodeRegex, '<emoji-component code="$1"></emoji-component>');
       }
 
-      // Otherwise replace the content (resets the cursor position).
-      this.editor.commands.setContent(newValue, {
-        emitUpdate: false,
-        parseOptions: { preserveWhitespace: this.preserveWhitespace },
-      });
+      // Replace content and immediately apply phone marks in one transaction
+      // when customLink is active, bypassing appendTransaction entirely.
+      // This guarantees phone marks are applied even when the editor is
+      // pre-populated via createEditor() with the same value, which would
+      // otherwise make setContent a no-op and skip appendTransaction.
+      if (this.customLink) {
+        try {
+          const schema = this.editor.state.schema;
+          const customLinkType = schema.marks?.CustomLink;
+          const newDoc = schema.nodeFromJSON(
+            typeof newValue === 'string' ? { type: 'doc', content: [{ type: 'paragraph', content: [{ type: 'text', text: newValue }] }] } : newValue,
+          );
+          const tr = this.editor.state.tr.replaceWith(0, this.editor.state.doc.content.size, newDoc.content);
+          // null = auto-detect (skip direct marking, let autolink handle it);
+          // array = use backend list (possibly empty = no phone marks)
+          if (customLinkType && this.phoneNumbers !== null) {
+            const phoneRegex = getPhoneNumberRegex();
+            const fullLinkRegex = new RegExp(linkRegex.source, 'gi');
+            const allowedPhones = new Set(this.phoneNumbers);
+            newDoc.descendants((node, pos) => {
+              if (!node.isText || !node.text) return;
+              fullLinkRegex.lastIndex = 0;
+              let match;
+              while ((match = fullLinkRegex.exec(node.text)) !== null) {
+                const word = match[0];
+                if (!phoneRegex.test(word)) continue;
+                if (!allowedPhones.has(word)) continue;
+                const from = pos + match.index;
+                const to = from + word.length;
+                tr.addMark(from, to, customLinkType.create({ isPhone: true, phoneNumber: word }));
+              }
+            });
+          }
+          this.editor.view.dispatch(tr);
+        } catch {
+          // Fall back to standard setContent if direct dispatch fails
+          this.editor.commands.setContent(newValue, {
+            emitUpdate: false,
+            parseOptions: { preserveWhitespace: this.preserveWhitespace },
+          });
+        }
+      } else {
+        // Otherwise replace the content (resets the cursor position).
+        this.editor.commands.setContent(newValue, {
+          emitUpdate: false,
+          parseOptions: { preserveWhitespace: this.preserveWhitespace },
+        });
+      }
     },
 
     destroyEditor () {

@@ -27,6 +27,18 @@ const defaultAttributes = {
 export const CustomLink = Mark.create({
   name: 'CustomLink',
 
+  addOptions () {
+    return {
+      HTMLAttributes: {},
+      /**
+       * Backend-confirmed phone numbers to link (from rich_media).
+       * When an array, only those numbers are linked (empty = no links).
+       * When null (default), all phone-like text is auto-linked.
+       */
+      phoneNumbers: null,
+    };
+  },
+
   addAttributes () {
     return {
       /**
@@ -69,9 +81,10 @@ export const CustomLink = Mark.create({
   addProseMirrorPlugins () {
     const editor = this.editor;
     const type = this.type;
+    const phoneNumbers = this.options.phoneNumbers ?? null;
 
     return [
-      autolink({ type }),
+      autolink({ type, phoneNumbers }),
       new Plugin({
         key: new PluginKey('customLinkClick'),
         props: {

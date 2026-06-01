@@ -350,8 +350,19 @@ describe('DtRichTextEditor Link Extension tests', () => {
             await _setValue('call me at (714) 410-7035 any time!');
             await wrapper.vm.$nextTick();
 
-            const phoneLink = document.querySelector('[data-is-phone="true"]');
-            phoneLink.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
+            // Find the position of the phone mark in the document and invoke
+            // the click handler directly (dispatchEvent doesn't work in JSDOM
+            // because ProseMirror relies on getBoundingClientRect for pos).
+            const { state, view } = wrapper.vm.editor;
+            let phoneMarkPos = null;
+            state.doc.descendants((node, pos) => {
+              if (node.isText && node.marks.some(m => m.type.name === 'CustomLink' && m.attrs.isPhone)) {
+                phoneMarkPos = pos + 1;
+              }
+            });
+            expect(phoneMarkPos).not.toBeNull();
+            const event = new MouseEvent('click', { bubbles: true, cancelable: true });
+            view.someProp('handleClick', (fn) => fn(view, phoneMarkPos, event));
             await wrapper.vm.$nextTick();
 
             expect(wrapper.emitted('phone-click')).toBeTruthy();

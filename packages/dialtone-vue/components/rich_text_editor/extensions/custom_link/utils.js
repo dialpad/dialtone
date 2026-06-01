@@ -136,8 +136,10 @@ const phoneNumberRegex = getPhoneNumberRegex();
 
 /**
  * Find matches from text and add marks on them.
+ * @param {string[]} [phoneNumbers] - When non-empty, only link these specific
+ *   phone numbers (backend-confirmed). When empty, link all phone-like text.
  */
-export function addMarks (text, pos, from, to, tr, type) {
+export function addMarks (text, pos, from, to, tr, type, phoneNumbers = []) {
   if (!text) {
     return;
   }
@@ -191,13 +193,26 @@ export function addMarks (text, pos, from, to, tr, type) {
     // Sum up the from index and the match length to get the end index.
     const to = from + word.length;
 
-    // Skip positions already covered by a standard 'link' mark — adding CustomLink on
-    // top would produce nested <a> elements, which is invalid HTML.
-    if (tr.doc.resolve(from).marks().some(m => m.type.name === 'link')) {
+    const isPhone = phoneNumberRegex.test(word);
+
+    // When phoneNumbers is null (default), auto-detect all phone-like text.
+    // When phoneNumbers is an array (even empty), only mark numbers in that list —
+    // this means the caller is explicitly relying on backend detection (rich_media).
+    if (isPhone && phoneNumbers !== null && !phoneNumbers.includes(word)) {
       return;
     }
 
-    const attrs = phoneNumberRegex.test(word) ? { isPhone: true, phoneNumber: word } : {};
+    // For phone numbers, remove any existing standard 'link' mark first — the
+    // Link extension's autolink may have matched the '+' prefix as a URL, which
+    // would produce nested <a> elements and block our phone-click handler.
+    // For non-phone matches, skip entirely to avoid nested <a> elements.
+    const existingLinkMark = tr.doc.resolve(from).marks().find(m => m.type.name === 'link');
+    if (existingLinkMark) {
+      if (!isPhone) return;
+      tr.removeMark(from, to, existingLinkMark.type);
+    }
+
+    const attrs = isPhone ? { isPhone: true, phoneNumber: word } : {};
     tr.addMark(from, to, type.create(attrs));
   });
 }
