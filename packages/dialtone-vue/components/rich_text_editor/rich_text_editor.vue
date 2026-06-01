@@ -100,6 +100,9 @@ import { renderEditorToMarkdown } from './markdownRenderer';
 import deepEqual from 'deep-equal';
 import { DialtoneLocalization } from '@/localization';
 
+const _phoneRegex = getPhoneNumberRegex();
+const _fullLinkRegex = new RegExp(linkRegex.source, 'gi');
+
 export default {
   compatConfig: { MODE: 3 },
   name: 'DtRichTextEditor',
@@ -1130,16 +1133,14 @@ export default {
           // null = auto-detect (skip direct marking, let autolink handle it);
           // array = use backend list (possibly empty = no phone marks)
           if (customLinkType && this.phoneNumbers !== null) {
-            const phoneRegex = getPhoneNumberRegex();
-            const fullLinkRegex = new RegExp(linkRegex.source, 'gi');
             const allowedPhones = new Set(this.phoneNumbers);
             newDoc.descendants((node, pos) => {
               if (!node.isText || !node.text) return;
-              fullLinkRegex.lastIndex = 0;
+              _fullLinkRegex.lastIndex = 0;
               let match;
-              while ((match = fullLinkRegex.exec(node.text)) !== null) {
+              while ((match = _fullLinkRegex.exec(node.text)) !== null) {
                 const word = match[0];
-                if (!phoneRegex.test(word)) continue;
+                if (!_phoneRegex.test(word)) continue;
                 if (!allowedPhones.has(word)) continue;
                 const from = pos + match.index;
                 const to = from + word.length;
@@ -1148,8 +1149,8 @@ export default {
             });
           }
           this.editor.view.dispatch(tr);
-        } catch {
-          // Fall back to standard setContent if direct dispatch fails
+        } catch (err) {
+          console.warn('[DtRichTextEditor] processValue: direct dispatch failed, falling back to setContent', err);
           this.editor.commands.setContent(newValue, {
             emitUpdate: false,
             parseOptions: { preserveWhitespace: this.preserveWhitespace },

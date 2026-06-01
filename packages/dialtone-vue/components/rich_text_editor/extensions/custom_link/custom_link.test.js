@@ -346,13 +346,17 @@ describe('DtRichTextEditor Link Extension tests', () => {
             expect(mark?.attrs?.isPhone).toBe(false);
           });
 
+          it('does not set isPhone on a URL whose path contains 7+ digits', async () => {
+            await _setValue('check out https://example.com/7658813 it is cool');
+            const links = _getLinksFromJSON();
+            const mark = links[0]?.marks?.find(m => m.type === 'CustomLink');
+            expect(mark?.attrs?.isPhone).toBe(false);
+          });
+
           it('emits phone-click when a phone number link is clicked', async () => {
             await _setValue('call me at (714) 410-7035 any time!');
             await wrapper.vm.$nextTick();
 
-            // Find the position of the phone mark in the document and invoke
-            // the click handler directly (dispatchEvent doesn't work in JSDOM
-            // because ProseMirror relies on getBoundingClientRect for pos).
             const { state, view } = wrapper.vm.editor;
             let phoneMarkPos = null;
             state.doc.descendants((node, pos) => {
@@ -360,12 +364,28 @@ describe('DtRichTextEditor Link Extension tests', () => {
                 phoneMarkPos = pos + 1;
               }
             });
-            expect(phoneMarkPos).not.toBeNull();
-            const event = new MouseEvent('click', { bubbles: true, cancelable: true });
-            view.someProp('handleClick', (fn) => fn(view, phoneMarkPos, event));
+            // Invoke click handler directly — dispatchEvent does not work in JSDOM
+            // because ProseMirror relies on getBoundingClientRect to resolve positions.
+            view.someProp('handleClick', (fn) => fn(view, phoneMarkPos, new MouseEvent('click')));
             await wrapper.vm.$nextTick();
 
             expect(wrapper.emitted('phone-click')).toBeTruthy();
+          });
+
+          it('includes the phone number in the phone-click event payload', async () => {
+            await _setValue('call me at (714) 410-7035 any time!');
+            await wrapper.vm.$nextTick();
+
+            const { state, view } = wrapper.vm.editor;
+            let phoneMarkPos = null;
+            state.doc.descendants((node, pos) => {
+              if (node.isText && node.marks.some(m => m.type.name === 'CustomLink' && m.attrs.isPhone)) {
+                phoneMarkPos = pos + 1;
+              }
+            });
+            view.someProp('handleClick', (fn) => fn(view, phoneMarkPos, new MouseEvent('click')));
+            await wrapper.vm.$nextTick();
+
             expect(wrapper.emitted('phone-click')[0][0]).toEqual({ phoneNumber: '(714) 410-7035' });
           });
 
@@ -373,9 +393,17 @@ describe('DtRichTextEditor Link Extension tests', () => {
             await _setValue('check out dialpad.com it is cool');
             await wrapper.vm.$nextTick();
 
-            const urlLink = document.querySelector('.d-link:not([data-is-phone])');
-            urlLink?.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true }));
-            await wrapper.vm.$nextTick();
+            const { state, view } = wrapper.vm.editor;
+            let urlMarkPos = null;
+            state.doc.descendants((node, pos) => {
+              if (node.isText && node.marks.some(m => m.type.name === 'CustomLink' && !m.attrs.isPhone)) {
+                urlMarkPos = pos + 1;
+              }
+            });
+            if (urlMarkPos !== null) {
+              view.someProp('handleClick', (fn) => fn(view, urlMarkPos, new MouseEvent('click')));
+              await wrapper.vm.$nextTick();
+            }
 
             expect(wrapper.emitted('phone-click')).toBeFalsy();
           });

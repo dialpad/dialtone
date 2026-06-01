@@ -193,7 +193,10 @@ export function addMarks (text, pos, from, to, tr, type, phoneNumbers = []) {
     // Sum up the from index and the match length to get the end index.
     const to = from + word.length;
 
-    const isPhone = phoneNumberRegex.test(word);
+    // Guard against URLs that happen to contain 7+ digit path segments
+    // (e.g. https://example.com/7658813). A real phone number consists only
+    // of digits, spaces, dashes, parens, and an optional leading +.
+    const isPhone = phoneNumberRegex.test(word) && !/[a-zA-Z:/.]/.test(word);
 
     // When phoneNumbers is null (default), auto-detect all phone-like text.
     // When phoneNumbers is an array (even empty), only mark numbers in that list —
