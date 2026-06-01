@@ -23,6 +23,24 @@
  */
 export const gapDirections = ['both', 'column', 'row'];
 
+/**
+ * width-height.json docs-only metadata — none of this is token-derived:
+ *  - `percentage`: the percentage width/height utilities (`d-w{n}p`)
+ *  - `viewport`: viewport-relative CSS keywords (vh/dvh/svh/lvh, vw/dvw/svw/lvw)
+ *  - `characterWidth`: ch-based widths
+ *  - `keywords`: intrinsic-sizing CSS keywords
+ * The `layout` stop list + px come from `LAYOUT_STOPS` + the layout tokens (see emit-width-height.mjs).
+ */
+export const widthHeight = {
+  percentage: [10, 15, 20, 25, 30, 33, 40, 50, 60, 66, 70, 75, 80, 85, 90, 100],
+  viewport: {
+    height: ['100vh', 'dvh', 'svh', 'lvh'],
+    width: ['100vw', 'dvw', 'svw', 'lvw'],
+  },
+  characterWidth: ['60ch', '75ch', '90ch'],
+  keywords: ['auto', 'unset', 'fit-content', 'max-content', 'min-content'],
+};
+
 export const zIndexDescriptions = {
   hide: 'Hides an element behind everything',
   base: 'Resets an element to the base z-index',

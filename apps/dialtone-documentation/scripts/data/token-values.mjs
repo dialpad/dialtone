@@ -83,6 +83,16 @@ export async function getSpacingStops () {
   return SPACING_STOPS;
 }
 
+/**
+ * Layout-scale stops, in declaration order, from `LAYOUT_STOPS` in
+ * dialtone-css/postcss/constants.cjs. Mixed type, exactly as declared: bare numbers are
+ * layout-token stops (`25` → `--dt-layout-25`); `"Npx"` strings are off-scale pixel exceptions.
+ */
+export async function getLayoutStops () {
+  const { LAYOUT_STOPS } = await importCjs(CSS_CONSTANTS);
+  return LAYOUT_STOPS;
+}
+
 // --- Resolved px from the built token output (Style Dictionary's dist/doc.json) ---
 
 let _docBaseLight = null;

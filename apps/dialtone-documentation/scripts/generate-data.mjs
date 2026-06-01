@@ -17,9 +17,10 @@ import { writeDataFile } from './data/token-values.mjs';
 import * as zIndex from './data/emit-z-index.mjs';
 import * as iconsSizes from './data/emit-icons-sizes.mjs';
 import * as gap from './data/emit-gap.mjs';
+import * as widthHeight from './data/emit-width-height.mjs';
 
 // Each emitter exposes `{ file, build() }`. Add new emitters here.
-const emitters = [zIndex, iconsSizes, gap];
+const emitters = [zIndex, iconsSizes, gap, widthHeight];
 
 async function main () {
   for (const emitter of emitters) {
