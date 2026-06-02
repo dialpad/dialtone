@@ -23,7 +23,7 @@
     :allow-underline="$attrs.allowUnderline"
     :additional-extensions="$attrs.additionalExtensions"
     @blur="$attrs.onBlur"
-    @input="$attrs.onInput"
+    @update:model-value="$attrs.onInput"
     @focus="$attrs.onFocus"
     @enter="$attrs.onEnter"
   />
