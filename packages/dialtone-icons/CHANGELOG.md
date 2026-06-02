@@ -1,3 +1,10 @@
+# [4.53.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.52.1-next.1...dialtone-icons/v4.53.0-next.1) (2026-06-02)
+
+
+### Features
+
+* **Dialtone Icons:** NO-JIRA add /vue export to dialtone-icon ([#1304](https://github.com/dialpad/dialtone/issues/1304)) ([081b0e9](https://github.com/dialpad/dialtone/commit/081b0e95293d7450f1cff21b285b504d95d52689))
+
 ## [4.52.1-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.52.0...dialtone-icons/v4.52.1-next.1) (2026-05-22)
 
 
