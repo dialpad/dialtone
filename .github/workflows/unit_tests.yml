@@ -5,12 +5,14 @@ on:
     paths:
       - 'packages/dialtone-vue/**'
       - 'packages/dialtone-tokens/**'
+      - 'packages/combinator/**'
   push:
     branches:
       - staging
     paths:
       - 'packages/dialtone-vue/**'
       - 'packages/dialtone-tokens/**'
+      - 'packages/combinator/**'
 
 env:
   HUSKY: 0
@@ -28,6 +30,7 @@ jobs:
     outputs:
       vue: ${{ steps.filter.outputs.vue }}
       tokens: ${{ steps.filter.outputs.tokens }}
+      combinator: ${{ steps.filter.outputs.combinator }}
     steps:
       - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3
@@ -38,6 +41,8 @@ jobs:
               - 'packages/dialtone-vue/**'
             tokens:
               - 'packages/dialtone-tokens/**'
+            combinator:
+              - 'packages/combinator/**'
 
   test:
     needs: changes
@@ -70,3 +75,19 @@ jobs:
 
       - name: Run dialtone-tokens tests
         run: pnpm nx run dialtone-tokens:test
+
+  test-combinator:
+    needs: changes
+    if: needs.changes.outputs.combinator == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      packages: read
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Run dialtone-combinator tests
+        run: pnpm nx run dialtone-combinator:test
