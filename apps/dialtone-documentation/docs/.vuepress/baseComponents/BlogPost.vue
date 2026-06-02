@@ -23,6 +23,8 @@
           :size="300"
           :seed="author"
           :full-name="author"
+          :image-src="avatarSrc"
+          :image-alt="`${author} avatar`"
         />
         <dt-stack>
           <dt-text :size="200" kind="label" tone="secondary" density="200">
@@ -56,8 +58,9 @@
 import { format } from 'date-fns';
 import { computed } from 'vue';
 import CopyButton from './CopyButton.vue';
+import { authorAvatarUrl } from './authorHandles.js';
 
-defineProps({
+const props = defineProps({
   posted: {
     type: Date,
     required: true,
@@ -79,6 +82,8 @@ defineProps({
     default: '',
   },
 });
+
+const avatarSrc = computed(() => authorAvatarUrl(props.author));
 
 const blogLink = computed(() => {
   return window.location.href;
