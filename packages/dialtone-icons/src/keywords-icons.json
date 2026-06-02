@@ -1702,9 +1702,25 @@
         "done",
         "success"
       ],
+      "circle-dashed": [
+        "circle",
+        "dashed",
+        "dotted",
+        "outline",
+        "shape",
+        "round",
+        "selection"
+      ],
       "circle-half-filled": [
         "mode",
         "dark"
+      ],
+      "circle": [
+        "circle",
+        "ring",
+        "outline",
+        "shape",
+        "round"
       ],
       "close": [
         "cancel",
