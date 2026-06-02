@@ -1,3 +1,11 @@
+# [8.80.0-next.8](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.80.0-next.7...dialtone-css/v8.80.0-next.8) (2026-06-02)
+
+
+### Bug Fixes
+
+* **Resizable, Box:** DLT-3445 accept full layout token set ([#1293](https://github.com/dialpad/dialtone/issues/1293)) ([4a63990](https://github.com/dialpad/dialtone/commit/4a63990f1124b04ab039470457ad9df93ec6599b))
+* **Segmented Control, Button:** DLT-3446 update disabled active button style ([#1294](https://github.com/dialpad/dialtone/issues/1294)) ([9968aac](https://github.com/dialpad/dialtone/commit/9968aac164bc378e4864db1da7c3e6661f119f3b))
+
 # [8.80.0-next.7](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.80.0-next.6...dialtone-css/v8.80.0-next.7) (2026-05-22)
 
 
