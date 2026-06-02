@@ -1,3 +1,15 @@
+# [1.4.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.4.0-next.1...dialtone-mcp-server/v1.4.0-next.2) (2026-06-02)
+
+
+### Documentation
+
+* **Css Utilities:** DLT-3337 migrate internal utility-class consumers to token-indexed names and rewrite radius docs ([#1212](https://github.com/dialpad/dialtone/issues/1212)) ([d675238](https://github.com/dialpad/dialtone/commit/d675238409adf887a60b783b5aa045cde8e15944))
+
+
+### Features
+
+* **Mcp Server, Query Core, Dialtone Docs, Dialtone Cli:** DLT-3416 add search_documentation tool ([#1259](https://github.com/dialpad/dialtone/issues/1259)) ([ef1d5a8](https://github.com/dialpad/dialtone/commit/ef1d5a897df670200c8a7f0c34ed47c430e3ed35))
+
 # [1.4.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.3.0...dialtone-mcp-server/v1.4.0-next.1) (2026-04-03)
 
 
