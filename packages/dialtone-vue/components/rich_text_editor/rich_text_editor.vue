@@ -1118,17 +1118,16 @@ export default {
       }
 
       // Replace content and immediately apply phone marks in one transaction
-      // when customLink is active, bypassing appendTransaction entirely.
-      // This guarantees phone marks are applied even when the editor is
-      // pre-populated via createEditor() with the same value, which would
-      // otherwise make setContent a no-op and skip appendTransaction.
-      if (this.customLink) {
+      // when customLink is active and the value is a TipTap JSON object.
+      // Plain strings have no phone-link marks to add, so they go through
+      // setContent below. The direct dispatch avoids the two-step flicker
+      // (content change → appendTransaction) and handles the edge case where
+      // the same JSON value is already set (setContent would be a no-op).
+      if (this.customLink && typeof newValue === 'object' && newValue !== null) {
         try {
           const schema = this.editor.state.schema;
           const customLinkType = schema.marks?.CustomLink;
-          const newDoc = schema.nodeFromJSON(
-            typeof newValue === 'string' ? { type: 'doc', content: [{ type: 'paragraph', content: [{ type: 'text', text: newValue }] }] } : newValue,
-          );
+          const newDoc = schema.nodeFromJSON(newValue);
           const tr = this.editor.state.tr.replaceWith(0, this.editor.state.doc.content.size, newDoc.content);
           // null = auto-detect (skip direct marking, let autolink handle it);
           // array = use backend list (possibly empty = no phone marks)
