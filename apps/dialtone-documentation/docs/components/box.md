@@ -54,6 +54,7 @@ Background surface color mapped to `--dt-color-surface-*` tokens.
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="200">
+  <dt-box padding="200" surface="overlay" border-width="100" border-radius="300">overlay</dt-box>
   <dt-box padding="200" surface="primary" border-width="100" border-radius="300">primary</dt-box>
   <dt-box padding="200" surface="secondary" border-width="100" border-radius="300">secondary</dt-box>
   <dt-box padding="200" surface="moderate" border-width="100" border-radius="300">moderate</dt-box>
@@ -175,7 +176,7 @@ Defaults to `'default'` (`--dt-color-border-default`). Only visible when a `bord
 
 ### Dynamic Shadow
 
-Use DtBox state props to coordinate surface, border, and shadow changes during interaction. For example, when dragging a `primary` box, change its surface to `secondary` and its box shadow to `overlay`.
+Use DtBox state props to coordinate surface, border, and shadow changes during interaction. For example, when dragging a `primary` box, change its shadow to `overlay` and its surface to `overlay`.
 
 ```vue demo
 <!-- @custom -->
@@ -185,8 +186,6 @@ Use DtBox state props to coordinate surface, border, and shadow changes during i
   padding-inline="300"
   border-radius="400"
   :surface="draggableBoxSurface"
-  border-width="100"
-  :border-color="draggableBoxBorderColor"
   :class="draggableBoxClass"
   :style="draggableBoxStyle"
   :shadow="draggableBoxShadow"
@@ -272,6 +271,7 @@ Use the `as` prop to render semantic HTML elements for accessibility.
   padding="300"
   surface="primary"
   border-width="100"
+  border-color="subtle"
   border-radius="400"
   shadow="raised"
 >
@@ -289,6 +289,7 @@ Use the `as` prop to render semantic HTML elements for accessibility.
   padding="200"
   surface="primary"
   border-width="100"
+  border-color="subtle"
   border-radius="400"
 >
   <dt-stack gap="200">
@@ -337,9 +338,8 @@ const draggableBoxClass = computed(() => [
   dragging.value ? 'd-c-grabbing d-zi-modal' : 'd-c-grab',
 ]);
 
-const draggableBoxSurface = computed(() => dragging.value ? 'primary' : 'secondary');
+const draggableBoxSurface = computed(() => dragging.value ? 'overlay' : 'secondary');
 const draggableBoxShadow = computed(() => dragging.value ? 'overlay' : 'raised');
-const draggableBoxBorderColor = computed(() => dragging.value ? 'subtle' : 'transparent');
 
 const draggableBoxStyle = computed(() => ({
   transform: `translate3d(${dragOffset.value.x}px, ${dragOffset.value.y}px, 0)`,

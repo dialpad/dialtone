@@ -12,8 +12,8 @@ Use `d-bs-{n}` to add an outer box shadow to an element.
 <!-- @wrapper -->
 <dt-stack gap="400" :direction="{ 'default': 'column', 'lg': 'row' }">
   <div class="d-p-200 d-bar-400 d-bgc-primary d-bs-raised">d-bs-raised</div>
-  <div class="d-p-200 d-bar-400 d-bgc-primary d-bs-overlay">d-bs-overlay</div>
-  <div class="d-p-200 d-bar-400 d-bgc-primary d-bs-modal">d-bs-modal</div>
+  <div class="d-p-200 d-bar-400 d-bgc-overlay d-bs-overlay">d-bs-overlay</div>
+  <div class="d-p-200 d-bar-400 d-bgc-overlay d-bs-modal">d-bs-modal</div>
 </dt-stack>
 ```
 

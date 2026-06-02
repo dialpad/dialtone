@@ -103,10 +103,10 @@ export default {
     },
   },
 
-  'shadow': {
+  'overlay shadow': {
     props: {
       padding: { initialValue: '200' },
-      surface: { initialValue: 'primary' },
+      surface: { initialValue: 'overlay' },
       borderRadius: { initialValue: '200' },
       shadow: { initialValue: 'overlay' },
     },
