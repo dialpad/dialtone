@@ -12,7 +12,26 @@
       "import": "./vue/dist/dialtone-icons.js",
       "require": "./vue/dist/dialtone-icons.cjs"
     },
+    "./vue3": {
+      "types": "./vue/dist/types/index.d.ts",
+      "import": "./vue/dist/dialtone-icons.js",
+      "require": "./vue/dist/dialtone-icons.cjs"
+    },
     "./vue/*": {
+      "types": [
+        "./vue/dist/types/src/icons/*.vue.d.ts",
+        "./vue/dist/types/src/illustrations/*.vue.d.ts"
+      ],
+      "import": [
+        "./vue/dist/components/icons/*.js",
+        "./vue/dist/components/illustrations/*.js"
+      ],
+      "require": [
+        "./vue/dist/components/icons/*.cjs",
+        "./vue/dist/components/illustrations/*.cjs"
+      ]
+    },
+    "./vue3/*": {
       "types": [
         "./vue/dist/types/src/icons/*.vue.d.ts",
         "./vue/dist/types/src/illustrations/*.vue.d.ts"
