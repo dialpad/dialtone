@@ -38,6 +38,15 @@
         ]
       }
     },
+    "test": {
+      "executor": "nx:run-script",
+      "dependsOn": [
+        "dialtone-vue:build"
+      ],
+      "options": {
+        "script": "test"
+      }
+    },
     "release": {
       "executor": "nx:run-commands",
       "options": {

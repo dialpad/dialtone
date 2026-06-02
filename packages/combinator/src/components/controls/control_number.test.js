@@ -1,6 +1,6 @@
 import DtcControlNumber from './control_number.vue';
 
-import { assert } from 'chai';
+import { expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 
 const inputSelector = 'input';
@@ -21,13 +21,13 @@ describe('control_number.vue test', function () {
     inputWrapper = wrapper.find(inputSelector);
   };
 
-  before(function () {
+  beforeAll(function () {
     _mountWrapper();
   });
 
   describe('When mounted', function () {
     it('Should render successfully', function () {
-      assert.isTrue(wrapper.exists());
+      expect(wrapper.exists()).toBe(true);
     });
   });
 
@@ -40,7 +40,7 @@ describe('control_number.vue test', function () {
     });
 
     it('Should set the native input to value', function () {
-      assert.equal(inputValue, inputWrapper.element.value);
+      expect(inputWrapper.element.value).toBe(String(inputValue));
     });
   });
 
@@ -50,7 +50,7 @@ describe('control_number.vue test', function () {
     });
 
     it('Should set the native input to control default', function () {
-      assert.equal(defaultValue, inputWrapper.element.value);
+      expect(inputWrapper.element.value).toBe(String(defaultValue));
     });
   });
 });

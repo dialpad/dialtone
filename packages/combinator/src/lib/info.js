@@ -86,7 +86,7 @@ function renameModelProp (info) {
  * @returns {Array} - Array of attribute members.
  */
 function getAttributes (info) {
-  const properties = info.tags.property;
+  const properties = info.tags?.property;
 
   if (!properties) {
     return null;

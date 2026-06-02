@@ -1,46 +1,36 @@
 import DtcControlBoolean from './control_boolean.vue';
+import { DtToggle } from '@dialpad/dialtone-vue';
 
-import { assert } from 'chai';
-import { mount } from '@vue/test-utils';
-
-const inputSelector = '[data-qa=dtc-control-boolean-input]';
+import { expect } from 'vitest';
+import { shallowMount } from '@vue/test-utils';
 
 const inputValue = true;
 const defaultValue = DtcControlBoolean.props.value.default();
 
 describe('control_boolean.vue test', function () {
   let wrapper;
-  let inputWrapper;
 
-  const _mountWrapper = () => {
-    wrapper = mount(DtcControlBoolean);
-    _setChildWrappers();
+  const _mountWrapper = (props = {}) => {
+    wrapper = shallowMount(DtcControlBoolean, { props });
   };
 
-  const _setChildWrappers = () => {
-    inputWrapper = wrapper.find(inputSelector);
-  };
-
-  before(function () {
+  beforeAll(function () {
     _mountWrapper();
   });
 
   describe('When mounted', function () {
     it('Should render successfully', function () {
-      assert.isTrue(wrapper.exists());
+      expect(wrapper.exists()).toBe(true);
     });
   });
 
   describe('When a value is provided', function () {
     beforeEach(async function () {
-      await wrapper.setProps({
-        value: inputValue,
-      });
-      _setChildWrappers();
+      await wrapper.setProps({ value: inputValue });
     });
 
-    it('Should set the native input to value', function () {
-      assert.equal(inputValue, inputWrapper.element.checked);
+    it('Should set the toggle to value', function () {
+      expect(wrapper.findComponent(DtToggle).props('modelValue')).toBe(inputValue);
     });
   });
 
@@ -49,8 +39,8 @@ describe('control_boolean.vue test', function () {
       _mountWrapper();
     });
 
-    it('Should set the native input to control default', function () {
-      assert.equal(defaultValue, inputWrapper.element.checked);
+    it('Should set the toggle to control default', function () {
+      expect(wrapper.findComponent(DtToggle).props('modelValue')).toBe(defaultValue);
     });
   });
 });
