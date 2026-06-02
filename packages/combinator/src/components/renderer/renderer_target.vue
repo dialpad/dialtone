@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import { capitalize, computed, h, nextTick, onMounted, onUpdated, ref, render, useSlots } from 'vue';
+import { capitalize, computed, getCurrentInstance, h, nextTick, onMounted, onUpdated, ref, render, useSlots } from 'vue';
 import { DtNotice } from '@dialpad/dialtone-vue';
 
 const ERROR_MESSAGE = 'Invalid combination';
@@ -49,6 +49,11 @@ const emit = defineEmits([
 ]);
 
 const slots = useSlots();
+
+// Standalone render() creates an app-less context; attaching appContext here
+// lets the target component and all its children (including DtcNode slots)
+// resolve globally registered components, directives, and provides.
+const { appContext } = getCurrentInstance();
 
 /**
  * Map object containing events and their respective handlers.
@@ -114,11 +119,13 @@ function renderTarget () {
   const slotKey = Object.keys(slots).sort().join(',');
 
   try {
-    render(h(props.component, {
+    const vnode = h(props.component, {
       ...filteredBindings,
       ...events.value,
       key: slotKey,
-    }, slots), currentContainer);
+    }, slots);
+    vnode.appContext = appContext;
+    render(vnode, currentContainer);
   } catch (e) {
     console.warn('Rendering warning: \n', e);
     currentContainer = freshContainer();
