@@ -1,3 +1,10 @@
+# [9.186.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.185.0...dialtone/v9.186.0) (2026-06-02)
+
+
+### Features
+
+* **Dialtone Icons:** NO-JIRA add /vue export to dialtone-icon ([#1304](https://github.com/dialpad/dialtone/issues/1304)) ([f7ca6d4](https://github.com/dialpad/dialtone/commit/f7ca6d438cc7c644d7e95bc963bd303ea2259b4d))
+
 # [9.185.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.184.0...dialtone/v9.185.0) (2026-05-26)
 
 
