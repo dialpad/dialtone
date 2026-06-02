@@ -1,6 +1,6 @@
 import DtcControlArray from './control_array.vue';
 
-import { assert } from 'chai';
+import { expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 
 const itemSelector = '[data-qa=dtc-control-array-item]';
@@ -28,13 +28,13 @@ describe('control_array.vue test', function () {
     inputWrappers = itemWrappers.map(itemWrapper => itemWrapper.find(itemInputSelector));
   };
 
-  before(function () {
+  beforeAll(function () {
     _mountWrapper();
   });
 
   describe('When mounted', function () {
     it('Should render successfully', function () {
-      assert.isTrue(wrapper.exists());
+      expect(wrapper.exists()).toBe(true);
     });
   });
 
@@ -47,7 +47,7 @@ describe('control_array.vue test', function () {
     });
 
     it('Should generate a control for each array item', function () {
-      assert.equal(inputValues.length, itemWrappers.length);
+      expect(inputValues.length).toBe(itemWrappers.length);
     });
 
     // Checking if each value passed to the component has a native input with a matching value
@@ -55,7 +55,7 @@ describe('control_array.vue test', function () {
       inputValues.forEach(value => {
         it(`Should have a matching native input for value '${value}'`, function () {
           const itemValues = inputWrappers.map(inputWrapper => inputWrapper.element.value);
-          assert.isTrue(itemValues.includes(value.toString()));
+          expect(itemValues.includes(value.toString())).toBe(true);
         });
       });
     });

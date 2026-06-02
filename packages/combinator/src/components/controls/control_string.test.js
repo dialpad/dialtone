@@ -1,6 +1,6 @@
 import DtcControlString from './control_string.vue';
 
-import { assert } from 'chai';
+import { expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 
 const inputSelector = 'input';
@@ -25,13 +25,13 @@ describe('control_string.vue test', function () {
     inputWrapper = wrapper.find(inputSelector);
   };
 
-  before(function () {
+  beforeAll(function () {
     _mountWrapper();
   });
 
   describe('When mounted', function () {
     it('Should render successfully', function () {
-      assert.isTrue(wrapper.exists());
+      expect(wrapper.exists()).toBe(true);
     });
   });
 
@@ -44,7 +44,7 @@ describe('control_string.vue test', function () {
     });
 
     it('Should set the native input to value', function () {
-      assert.equal(inputValue, inputWrapper.element.value);
+      expect(inputValue).toBe(inputWrapper.element.value);
     });
   });
 
@@ -54,7 +54,7 @@ describe('control_string.vue test', function () {
     });
 
     it('Should set the native input to control default', function () {
-      assert.equal(defaultValue, inputWrapper.element.value);
+      expect(defaultValue).toBe(inputWrapper.element.value);
     });
   });
 });

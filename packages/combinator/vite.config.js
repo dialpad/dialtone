@@ -29,6 +29,12 @@ export default defineConfig({
     },
   },
   plugins: [vue()],
+  test: {
+    globals: true,
+    environment: 'jsdom',
+    include: ['./src/**/*.test.js'],
+    setupFiles: './tests/setupTests.js',
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('.', import.meta.url)),

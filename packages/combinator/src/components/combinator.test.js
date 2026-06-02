@@ -1,6 +1,6 @@
 import DtcCombinator from './combinator.vue';
 
-import { assert } from 'chai';
+import { expect } from 'vitest';
 import { shallowMount } from '@vue/test-utils';
 import { nextTick } from 'vue';
 import { getSupportedComponents } from '@/src/lib/test/utils_test';
@@ -34,7 +34,7 @@ describe('combinator.vue test', function () {
         });
 
         it('Should render successfully', function () {
-          assert.isTrue(wrapper.exists());
+          expect(wrapper.exists()).toBe(true);
         });
       });
     });
