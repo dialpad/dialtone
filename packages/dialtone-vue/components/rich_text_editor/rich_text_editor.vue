@@ -1148,8 +1148,7 @@ export default {
             });
           }
           this.editor.view.dispatch(tr);
-        } catch (err) {
-          console.warn('[DtRichTextEditor] processValue: direct dispatch failed, falling back to setContent', err);
+        } catch {
           this.editor.commands.setContent(newValue, {
             emitUpdate: false,
             parseOptions: { preserveWhitespace: this.preserveWhitespace },
