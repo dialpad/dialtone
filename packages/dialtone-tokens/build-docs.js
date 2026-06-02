@@ -3,6 +3,7 @@ import keywordsJson from './keywords.json' with { type: 'json' };
 
 // stores the documentation data for all tokens. This is output to file.
 const docTokens = {};
+const deprecatedCompositionTokens = {};
 
 // Recurse through style dictionary object and pick out
 // bottom level token values.
@@ -23,16 +24,19 @@ export function buildDocs (platformName, theme, currentObj) {
 
   if (tokenValue && tokenPath) {
     const tokenKey = tokenPath.join('/');
+    const formattedTokenName = formatTokenName(platformName, tokenName);
+    rememberDeprecatedCompositionToken(theme, platformName, formattedTokenName, tokenPath, tokenDeprecated);
+    const deprecated = tokenDeprecated ?? getDeprecatedCompositionToken(theme, formattedTokenName);
 
     docTokens[theme][tokenKey] = {
       ...docTokens[theme][tokenKey],
       [platformName]: {
-        name: formatTokenName(platformName, tokenName),
+        name: formattedTokenName,
         value: tokenValue,
         description: tokenDescription,
         keywords: getTokenKeywords(keywordsJson, tokenPath),
         isCompositionToken,
-        deprecated: tokenDeprecated,
+        deprecated,
       },
     };
     return null;
@@ -42,6 +46,22 @@ export function buildDocs (platformName, theme, currentObj) {
     if (!Object.prototype.hasOwnProperty.call(currentObj, key)) { continue; }
     buildDocs(platformName, theme, currentObj[key]);
   }
+}
+
+function rememberDeprecatedCompositionToken (theme, platformName, formattedTokenName, tokenPath, deprecated) {
+  if (!deprecated || platformName !== 'css/variables' || tokenPath[0] !== 'shadow') return;
+
+  const match = formattedTokenName.match(
+    /^var\((--dt-shadow-.+?)(?:-\d+)?-(?:offset-x|offset-y|blur|spread|color|type)\)$/,
+  );
+  if (!match) return;
+
+  deprecatedCompositionTokens[theme] ??= {};
+  deprecatedCompositionTokens[theme][`var(${match[1]})`] = deprecated;
+}
+
+function getDeprecatedCompositionToken (theme, formattedTokenName) {
+  return deprecatedCompositionTokens[theme]?.[formattedTokenName];
 }
 
 /**

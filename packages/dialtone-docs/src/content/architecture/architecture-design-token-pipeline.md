@@ -272,7 +272,7 @@ All token output names follow the same hierarchy: `dt-{category}-{semantic-name}
 --dt-font-size-200                # font-size scale
 --dt-space-400                    # spacing scale
 --dt-size-radius-md               # border radius
---dt-shadow-card-3-color          # shadow system
+--dt-shadow-raised-2-color          # shadow system
 ```
 
 Categories: `color`, `font-size`, `font-family`, `font-weight`, `space`, `size`, `shadow`, `typography` (composites).

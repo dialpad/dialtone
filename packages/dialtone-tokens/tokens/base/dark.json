@@ -608,242 +608,168 @@
     }
   },
   "shadow": {
-    "small": {
+    "raised": {
       "value": [
         {
-          "x": "{size.0}",
-          "y": "{size.200}",
-          "blur": "{size.300}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.451)",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.50}",
-          "y": "{size.50}",
-          "blur": "{size.0}",
-          "spread": "{size.0}",
-          "color": "{color.neutral.black}",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.50-negative}",
-          "y": "{size.50-negative}",
-          "blur": "0",
+          "x": "0",
+          "y": "2px",
+          "blur": "6px",
           "spread": "0",
-          "color": "{color.neutral.black}",
+          "color": "oklch(0 0 0 / 0.33)",
           "type": "dropShadow"
         },
         {
-          "x": "{size.50-negative}",
-          "y": "{size.50}",
-          "blur": "0",
-          "spread": "0",
-          "color": "{color.neutral.black}",
+          "x": "0.5px",
+          "y": "0.5px",
+          "blur": "0px",
+          "spread": "0px",
+          "color": "oklch(0 0 0 / 0.2)",
           "type": "dropShadow"
         },
         {
-          "x": "{size.50}",
-          "y": "{size.50-negative}",
-          "blur": "0",
-          "spread": "0",
-          "color": "{color.neutral.black}",
+          "x": "-0.5px",
+          "y": "-0.5px",
+          "blur": "0px",
+          "spread": "0px",
+          "color": "oklch(0 0 0 / 0.2)",
+          "type": "dropShadow"
+        },
+        {
+          "x": "-0.5px",
+          "y": "0.5px",
+          "blur": "0px",
+          "spread": "0px",
+          "color": "oklch(0 0 0 / 0.2)",
+          "type": "dropShadow"
+        },
+        {
+          "x": "0.5px",
+          "y": "-0.5px",
+          "blur": "0px",
+          "spread": "0px",
+          "color": "oklch(0 0 0 / 0.2)",
           "type": "dropShadow"
         }
       ],
       "type": "boxShadow"
     },
-    "medium": {
+    "overlay": {
       "value": [
         {
-          "x": "{size.0}",
-          "y": "{size.200}",
-          "blur": "{size.400}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.549)",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.50}",
-          "y": "{size.50}",
-          "blur": "{size.0}",
-          "spread": "{size.0}",
-          "color": "{color.neutral.black}",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.50-negative}",
-          "y": "{size.50-negative}",
-          "blur": "0",
+          "x": "0",
+          "y": "1px",
+          "blur": "2px",
           "spread": "0",
-          "color": "{color.neutral.black}",
+          "color": "oklch(0 0 0 / 0.08)",
           "type": "dropShadow"
         },
         {
-          "x": "{size.50-negative}",
-          "y": "{size.50}",
-          "blur": "0",
+          "x": "0",
+          "y": "2px",
+          "blur": "8px",
           "spread": "0",
-          "color": "{color.neutral.black}",
+          "color": "oklch(0 0 0 / 0.12)",
           "type": "dropShadow"
         },
         {
-          "x": "{size.50}",
-          "y": "{size.50-negative}",
-          "blur": "0",
+          "x": "0",
+          "y": "8px",
+          "blur": "12px",
           "spread": "0",
-          "color": "{color.neutral.black}",
+          "color": "oklch(0 0 0 / 0.16)",
+          "type": "dropShadow"
+        },
+        {
+          "x": "0.5px",
+          "y": "0.5px",
+          "blur": "0px",
+          "spread": "0px",
+          "color": "oklch(0 0 0 / 0.2)",
+          "type": "dropShadow"
+        },
+        {
+          "x": "-0.5px",
+          "y": "-0.5px",
+          "blur": "0px",
+          "spread": "0px",
+          "color": "oklch(0 0 0 / 0.2)",
+          "type": "dropShadow"
+        },
+        {
+          "x": "-0.5px",
+          "y": "0.5px",
+          "blur": "0px",
+          "spread": "0px",
+          "color": "oklch(0 0 0 / 0.2)",
+          "type": "dropShadow"
+        },
+        {
+          "x": "0.5px",
+          "y": "-0.5px",
+          "blur": "0px",
+          "spread": "0px",
+          "color": "oklch(0 0 0 / 0.2)",
           "type": "dropShadow"
         }
       ],
       "type": "boxShadow"
     },
-    "large": {
+    "modal": {
       "value": [
         {
-          "x": "{size.0}",
-          "y": "{size.200}",
-          "blur": "{size.500}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.549)",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.50-negative}",
-          "y": "{size.50}",
-          "blur": "{size.0}",
-          "spread": "{size.0}",
-          "color": "{color.neutral.black}",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.50-negative}",
-          "y": "{size.50-negative}",
-          "blur": "0",
+          "x": "0",
+          "y": "4px",
+          "blur": "6px",
           "spread": "0",
-          "color": "{color.neutral.black}",
+          "color": "oklch(0 0 0 / 0.08)",
           "type": "dropShadow"
         },
         {
-          "x": "{size.50-negative}",
-          "y": "{size.50}",
-          "blur": "0",
+          "x": "0",
+          "y": "12px",
+          "blur": "16px",
           "spread": "0",
-          "color": "{color.neutral.black}",
+          "color": "oklch(0 0 0 / 0.20)",
           "type": "dropShadow"
         },
         {
-          "x": "{size.50}",
-          "y": "{size.50-negative}",
-          "blur": "0",
+          "x": "0",
+          "y": "48px",
+          "blur": "48px",
           "spread": "0",
-          "color": "{color.neutral.black}",
-          "type": "dropShadow"
-        }
-      ],
-      "type": "boxShadow"
-    },
-    "extraLarge": {
-      "value": [
-        {
-          "x": "{size.0}",
-          "y": "{size.200}",
-          "blur": "{size.600}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.549)",
+          "color": "oklch(0 0 0 / 0.32)",
           "type": "dropShadow"
         },
         {
-          "x": "{size.50}",
-          "y": "{size.50}",
-          "blur": "{size.0}",
-          "spread": "{size.0}",
-          "color": "{color.neutral.black}",
+          "x": "0.5px",
+          "y": "0.5px",
+          "blur": "0px",
+          "spread": "0px",
+          "color": "oklch(0 0 0 / 0.2)",
           "type": "dropShadow"
         },
         {
-          "x": "{size.50-negative}",
-          "y": "{size.50-negative}",
-          "blur": "0",
-          "spread": "0",
-          "color": "{color.neutral.black}",
+          "x": "-0.5px",
+          "y": "-0.5px",
+          "blur": "0px",
+          "spread": "0px",
+          "color": "oklch(0 0 0 / 0.2)",
           "type": "dropShadow"
         },
         {
-          "x": "{size.50-negative}",
-          "y": "{size.50}",
-          "blur": "0",
-          "spread": "0",
-          "color": "{color.neutral.black}",
+          "x": "-0.5px",
+          "y": "0.5px",
+          "blur": "0px",
+          "spread": "0px",
+          "color": "oklch(0 0 0 / 0.2)",
           "type": "dropShadow"
         },
         {
-          "x": "{size.50}",
-          "y": "{size.50-negative}",
-          "blur": "0",
-          "spread": "0",
-          "color": "{color.neutral.black}",
-          "type": "dropShadow"
-        }
-      ],
-      "type": "boxShadow"
-    },
-    "card": {
-      "value": [
-        {
-          "x": "{size.0}",
-          "y": "{size.100}",
-          "blur": "{size.200}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.349)",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.0}",
-          "y": "{size.200}",
-          "blur": "{size.300}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.451)",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.0}",
-          "y": "{size.200}",
-          "blur": "{size.500}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.5804)",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.50}",
-          "y": "{size.50}",
-          "blur": "{size.0}",
-          "spread": "{size.0}",
-          "color": "{color.neutral.black}",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.50-negative}",
-          "y": "{size.50-negative}",
-          "blur": "0",
-          "spread": "0",
-          "color": "{color.neutral.black}",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.50-negative}",
-          "y": "{size.50}",
-          "blur": "0",
-          "spread": "0",
-          "color": "{color.neutral.black}",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.50}",
-          "y": "{size.50-negative}",
-          "blur": "0",
-          "spread": "0",
-          "color": "{color.neutral.black}",
+          "x": "0.5px",
+          "y": "-0.5px",
+          "blur": "0px",
+          "spread": "0px",
+          "color": "oklch(0 0 0 / 0.2)",
           "type": "dropShadow"
         }
       ],

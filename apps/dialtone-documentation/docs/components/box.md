@@ -167,11 +167,41 @@ Defaults to `'default'` (`--dt-color-border-default`). Only visible when a `bord
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="300">
-  <dt-box padding="200" surface="moderate" border-radius="300" shadow="small">small</dt-box>
-  <dt-box padding="200" surface="moderate" border-radius="300" shadow="medium">medium</dt-box>
-  <dt-box padding="200" surface="moderate" border-radius="300" shadow="large">large</dt-box>
-  <dt-box padding="200" surface="moderate" border-radius="300" shadow="card">card</dt-box>
+  <dt-box padding="200" surface="primary" border-radius="300" shadow="raised">raised</dt-box>
+  <dt-box padding="200" surface="overlay" border-radius="300" shadow="overlay">overlay</dt-box>
+  <dt-box padding="200" surface="overlay" border-radius="300" shadow="modal">modal</dt-box>
 </dt-stack>
+```
+
+### Dynamic Shadow
+
+Use DtBox state props to coordinate surface, border, and shadow changes during interaction. For example, when dragging a `primary` box, change its surface to `secondary` and its box shadow to `overlay`.
+
+```vue demo
+<!-- @custom -->
+<!-- @class d-p-800 d-bgc-transparent -->
+<dt-box
+  padding-block="200"
+  padding-inline="300"
+  border-radius="400"
+  :surface="draggableBoxSurface"
+  border-width="100"
+  :border-color="draggableBoxBorderColor"
+  :class="draggableBoxClass"
+  :style="draggableBoxStyle"
+  :shadow="draggableBoxShadow"
+  @pointerdown="startBoxDrag"
+  @pointermove="moveBoxDrag"
+  @pointerup="stopBoxDrag"
+  @pointercancel="stopBoxDrag"
+  @lostpointercapture="stopBoxDrag"
+>
+  <dt-stack direction="row" align="center" gap="100">
+    <dt-icon name="grip-vertical" size="100" class="d-fc-tertiary" />
+    Drag me
+    <dt-icon name="grip-vertical" size="100" class="d-fc-tertiary" />
+  </dt-stack>
+</dt-box>
 ```
 
 ## Sizing
@@ -243,7 +273,7 @@ Use the `as` prop to render semantic HTML elements for accessibility.
   surface="primary"
   border-width="100"
   border-radius="400"
-  shadow="card"
+  shadow="raised"
 >
   <dt-stack gap="200">
     <dt-text as="h3" kind="headline" size="md">Card title</dt-text>
@@ -295,3 +325,48 @@ Use the `as` prop to render semantic HTML elements for accessibility.
 ## Classes
 
 <component-class-table component-name="box" />
+
+<script setup>
+import { computed, ref } from 'vue';
+
+const dragging = ref(false);
+const dragOffset = ref({ x: 0, y: 0 });
+let dragOrigin = null;
+
+const draggableBoxClass = computed(() => [
+  dragging.value ? 'd-c-grabbing d-zi-modal' : 'd-c-grab',
+]);
+
+const draggableBoxSurface = computed(() => dragging.value ? 'primary' : 'secondary');
+const draggableBoxShadow = computed(() => dragging.value ? 'overlay' : 'raised');
+const draggableBoxBorderColor = computed(() => dragging.value ? 'subtle' : 'transparent');
+
+const draggableBoxStyle = computed(() => ({
+  transform: `translate3d(${dragOffset.value.x}px, ${dragOffset.value.y}px, 0)`,
+  transition: dragging.value ? 'none' : 'transform var(--td150) var(--ttf-out)',
+  touchAction: 'none',
+  userSelect: dragging.value ? 'none' : undefined,
+}));
+
+function startBoxDrag (event) {
+  if (event.button !== 0) return;
+  event.preventDefault();
+  dragOrigin = { id: event.pointerId, x: event.clientX, y: event.clientY };
+  event.currentTarget.setPointerCapture?.(event.pointerId);
+}
+
+function moveBoxDrag (event) {
+  if (event.pointerId !== dragOrigin?.id) return;
+  const x = event.clientX - dragOrigin.x;
+  const y = event.clientY - dragOrigin.y;
+  if (!dragging.value && Math.hypot(x, y) < 4) return;
+  dragging.value = true;
+  dragOffset.value = { x, y };
+}
+
+function stopBoxDrag () {
+  dragging.value = false;
+  dragOffset.value = { x: 0, y: 0 };
+  dragOrigin = null;
+}
+</script>

@@ -250,13 +250,13 @@ describe('DtBox', () => {
   // ── Shadow ────────────────────────────────────────────────
 
   it('applies shadow modifier class', () => {
-    const wrapper = mountComponent({ shadow: 'small' });
+    const wrapper = mountComponent({ shadow: 'raised' });
 
-    expect(wrapper.classes()).toContain('d-box--shadow-small');
+    expect(wrapper.classes()).toContain('d-box--shadow-raised');
   });
 
   it.each(
-    DT_BOX_SHADOW_VALUES.filter(v => v !== 'small'),
+    DT_BOX_SHADOW_VALUES.filter(v => v !== 'raised'),
   )('applies shadow modifier class for %s', (shadow) => {
     const wrapper = mountComponent({ shadow });
 
@@ -277,13 +277,13 @@ describe('DtBox', () => {
       borderColor: 'subtle',
       borderWidth: '100',
       borderRadius: '300',
-      shadow: 'card',
+      shadow: 'raised',
     });
 
     expect(wrapper.classes()).toContain('d-box--bc-subtle');
     expect(wrapper.classes()).toContain('d-box--bw-100');
     expect(wrapper.classes()).toContain('d-box--br-300');
-    expect(wrapper.classes()).toContain('d-box--shadow-card');
+    expect(wrapper.classes()).toContain('d-box--shadow-raised');
   });
 
   it('applies V1 and V2 props together', () => {
@@ -293,7 +293,7 @@ describe('DtBox', () => {
       borderColor: 'default',
       borderWidth: '100',
       borderRadius: '400',
-      shadow: 'medium',
+      shadow: 'overlay',
     });
 
     expect(wrapper.classes()).toContain('d-box--p-200');
@@ -301,7 +301,7 @@ describe('DtBox', () => {
     expect(wrapper.classes()).toContain('d-box--bc-default');
     expect(wrapper.classes()).toContain('d-box--bw-100');
     expect(wrapper.classes()).toContain('d-box--br-400');
-    expect(wrapper.classes()).toContain('d-box--shadow-medium');
+    expect(wrapper.classes()).toContain('d-box--shadow-overlay');
   });
 
   // ── Sizing (layout tokens) ─────────────────────────────────

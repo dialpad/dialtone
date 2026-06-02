@@ -198,10 +198,10 @@ export const CardComposition = {
     components: { DtBox, DtStack, DtText },
     template: `
       <dt-stack direction="row" gap="200">
-        <dt-box padding="300" surface="primary" border-width="100" border-radius="300" shadow="card">
-          <dt-text kind="body" :size="200">Card: subtle border + radius + card shadow</dt-text>
+        <dt-box padding="300" surface="primary" border-width="100" border-radius="300" shadow="raised">
+          <dt-text kind="body" :size="200">Card: subtle border + radius + raised shadow</dt-text>
         </dt-box>
-        <dt-box padding="300" surface="primary" border-width="100" border-radius="400" shadow="medium">
+        <dt-box padding="300" surface="primary" border-width="100" border-radius="400" shadow="overlay">
           <dt-text kind="body" :size="200">Elevated card</dt-text>
         </dt-box>
         <dt-box padding="300" surface="brand-subtle" border-color="brand" border-width="100" border-radius="200">

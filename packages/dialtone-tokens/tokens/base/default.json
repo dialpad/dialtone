@@ -926,86 +926,125 @@
     }
   },
   "shadow": {
-    "small": {
+    "raised": {
       "value": [
         {
-          "x": "{size.0}",
-          "y": "{size.200}",
-          "blur": "{size.300}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.149)",
+          "x": "0",
+          "y": "-1px",
+          "blur": "1px",
+          "spread": "0",
+          "color": "oklch(0 0 0 / 0.04)",
+          "type": "dropShadow"
+        },
+        {
+          "x": "0",
+          "y": "1px",
+          "blur": "2px",
+          "spread": "0",
+          "color": "oklch(0 0 0 / 0.06)",
+          "type": "dropShadow"
+        },
+        {
+          "x": "0",
+          "y": "2px",
+          "blur": "4px",
+          "spread": "0",
+          "color": "oklch(0 0 0 / 0.12)",
           "type": "dropShadow"
         }
       ],
       "type": "boxShadow"
     },
-    "medium": {
+    "overlay": {
       "value": [
         {
-          "x": "{size.0}",
-          "y": "{size.200}",
-          "blur": "{size.400}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.251)",
+          "x": "0",
+          "y": "1px",
+          "blur": "2px",
+          "spread": "0",
+          "color": "oklch(0 0 0 / 0.04)",
+          "type": "dropShadow"
+        },
+        {
+          "x": "0",
+          "y": "2px",
+          "blur": "8px",
+          "spread": "0",
+          "color": "oklch(0 0 0 / 0.06)",
+          "type": "dropShadow"
+        },
+        {
+          "x": "0",
+          "y": "8px",
+          "blur": "12px",
+          "spread": "0",
+          "color": "oklch(0 0 0 / 0.08)",
           "type": "dropShadow"
         }
       ],
       "type": "boxShadow"
     },
-    "large": {
+    "modal": {
       "value": [
         {
-          "x": "{size.0}",
-          "y": "{size.200}",
-          "blur": "{size.500}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.302)",
+          "x": "0",
+          "y": "2px",
+          "blur": "2px",
+          "spread": "0",
+          "color": "oklch(0 0 0 / 0.02)",
           "type": "dropShadow"
-        }
-      ],
-      "type": "boxShadow"
-    },
-    "extraLarge": {
-      "value": [
+        },
         {
-          "x": "{size.0}",
-          "y": "{size.200}",
-          "blur": "{size.600}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.302)",
+          "x": "0",
+          "y": "4px",
+          "blur": "6px",
+          "spread": "0",
+          "color": "oklch(0 0 0 / 0.06)",
+          "type": "dropShadow"
+        },
+        {
+          "x": "0",
+          "y": "12px",
+          "blur": "16px",
+          "spread": "0",
+          "color": "oklch(0 0 0 / 0.08)",
+          "type": "dropShadow"
+        },
+        {
+          "x": "0",
+          "y": "32px",
+          "blur": "32px",
+          "spread": "0",
+          "color": "oklch(0 0 0 / 0.16)",
           "type": "dropShadow"
         }
       ],
       "type": "boxShadow"
     },
     "card": {
-      "value": [
-        {
-          "x": "{size.0}",
-          "y": "{size.100}",
-          "blur": "{size.200}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.0314)",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.0}",
-          "y": "{size.200}",
-          "blur": "{size.300}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.0392)",
-          "type": "dropShadow"
-        },
-        {
-          "x": "{size.0}",
-          "y": "{size.200}",
-          "blur": "{size.500}",
-          "spread": "{size.0}",
-          "color": "oklch(0 0 0 / 0.0784)",
-          "type": "dropShadow"
-        }
-      ],
-      "type": "boxShadow"
+      "value": "{shadow.raised}",
+      "type": "boxShadow",
+      "$deprecated": "Use shadow.raised instead."
+    },
+    "small": {
+      "value": "{shadow.raised}",
+      "type": "boxShadow",
+      "$deprecated": "Use shadow.raised instead."
+    },
+    "medium": {
+      "value": "{shadow.overlay}",
+      "type": "boxShadow",
+      "$deprecated": "Use shadow.overlay instead."
+    },
+    "large": {
+      "value": "{shadow.overlay}",
+      "type": "boxShadow",
+      "$deprecated": "Use shadow.overlay instead."
+    },
+    "extraLarge": {
+      "value": "{shadow.modal}",
+      "type": "boxShadow",
+      "$deprecated": "Use shadow.modal instead."
     },
     "focus": {
       "value": [

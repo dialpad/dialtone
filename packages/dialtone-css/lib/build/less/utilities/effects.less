@@ -142,11 +142,17 @@
 //  ============================================================================
 //  $   BOX SHADOW
 //  ----------------------------------------------------------------------------
-.d-bs-sm { box-shadow: var(--dt-shadow-small) !important; }
-.d-bs-md { box-shadow: var(--dt-shadow-medium) !important; }
-.d-bs-lg { box-shadow: var(--dt-shadow-large) !important; }
-.d-bs-xl { box-shadow: var(--dt-shadow-extra-large) !important; }
-.d-bs-card { box-shadow: var(--dt-shadow-card) !important; }
+.d-bs-raised,
+.d-bs-sm,
+.d-bs-card { box-shadow: var(--dt-shadow-raised) !important; }
+
+.d-bs-overlay,
+.d-bs-md,
+.d-bs-lg { box-shadow: var(--dt-shadow-overlay) !important; }
+
+.d-bs-modal,
+.d-bs-xl { box-shadow: var(--dt-shadow-modal) !important; }
+
 .d-bs-none { box-shadow: none !important; }
 .d-bs-unset { box-shadow: unset !important; }
 

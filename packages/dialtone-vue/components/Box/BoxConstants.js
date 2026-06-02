@@ -58,7 +58,7 @@ export const DT_BOX_BORDER_RADIUS_VALUES = ['0', '100', '200', '300', '350', '40
  * Shadow values (maps to --dt-shadow-* tokens).
  * @type {string[]}
  */
-export const DT_BOX_SHADOW_VALUES = ['small', 'medium', 'large', 'extra-large', 'card'];
+export const DT_BOX_SHADOW_VALUES = ['raised', 'overlay', 'modal'];
 
 /**
  * Layout token scale (for sizing props: inlineSize, blockSize, min/max variants).
