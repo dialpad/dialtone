@@ -29,8 +29,8 @@ For detailed instructions on using the icons, check the [DtIcon component](/comp
     <div class="d-fl-center">
       <dt-icon :name="selectedIcon" :size="selectedSize" />
     </div>
-    <dt-select-menu label="Name" :options="iconListOptions" @change="changeIcon" />
-    <dt-select-menu label="Size" :options="sizeValues" @change="changeIconSize" />
+    <dt-select-menu label="Name" :options="iconListOptions" @update:model-value="changeIcon" />
+    <dt-select-menu label="Size" :options="sizeValues" @update:model-value="changeIconSize" />
   </div>
 </code-well-header>
 </div>

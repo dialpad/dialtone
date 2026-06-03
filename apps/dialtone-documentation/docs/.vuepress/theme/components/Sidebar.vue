@@ -15,7 +15,7 @@
         aria-label="Search"
         placeholder="Search"
         type="search"
-        @input="focusedIndex = -1"
+        @update:model-value="focusedIndex = -1"
       >
         <template #startIcon="{ iconSize }">
           <dt-icon name="search" :size="iconSize" />
