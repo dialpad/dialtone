@@ -28,4 +28,18 @@ if ! git diff --staged --quiet -- $THUMB_INPUTS; then
   git add apps/dialtone-documentation/docs/.vuepress/public/assets/images/components;
 fi
 
+# Regenerate token-derived docs data when a source that feeds it changed.
+# generate-token-data dependsOn dialtone-tokens:build, so token edits get a fresh doc.json first.
+DATA_INPUTS='packages/dialtone-tokens/tokens packages/dialtone-tokens/postcss/constants.cjs packages/dialtone-css/postcss/constants.cjs apps/dialtone-documentation/scripts/data apps/dialtone-documentation/scripts/generate-data.mjs'
+if ! git diff --staged --quiet -- $DATA_INPUTS; then
+  echo "Detected changes to docs-data inputs, regenerating token-derived _data files..."
+  pnpm nx run dialtone-documentation:generate-token-data;
+
+  git add apps/dialtone-documentation/docs/_data/spacing.json \
+          apps/dialtone-documentation/docs/_data/gap.json \
+          apps/dialtone-documentation/docs/_data/width-height.json \
+          apps/dialtone-documentation/docs/_data/icons-sizes.json \
+          apps/dialtone-documentation/docs/_data/z-index.json;
+fi
+
 pnpm exec lint-staged --relative
