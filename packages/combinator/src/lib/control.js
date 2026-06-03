@@ -108,17 +108,24 @@ export function getControlByValue (value) {
 }
 
 export function getControlByMemberType (type, args) {
+  const values = args?.values ?? [];
+
+  if (isMixedBooleanEnum(values)) return 'segmented';
   if (type === 'boolean') return 'boolean';
-  if (args?.values?.length > 0) {
-    if (shouldUseSegmented(args.values)) return 'segmented';
-    return 'selection';
+
+  if (values.length > 0) {
+    return shouldUseSegmented(values) ? 'segmented' : 'selection';
   }
-  switch (type) {
-    case 'string': return 'string';
-    default: return type;
-  }
+
+  return type === 'string' ? 'string' : type;
 }
 
+function isMixedBooleanEnum (values) {
+  return values.length === 3 &&
+    values.includes(true) &&
+    values.includes(false) &&
+    values.includes('mixed');
+}
 function shouldUseSegmented (values) {
   return values.length <= MAX_SEGMENTED_COUNT &&
     values.every(v => String(v).length <= MAX_SEGMENTED_LABEL_LENGTH);
