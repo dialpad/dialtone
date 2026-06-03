@@ -90,16 +90,28 @@ export default {
     },
   },
 
-  'sized': {
+  'fixed height with scrollbar': {
     props: {
       padding: { initialValue: '200' },
       surface: { initialValue: 'moderate' },
       borderWidth: { initialValue: '100' },
       inlineSize: { initialValue: '500' },
       blockSize: { initialValue: '600' },
+      scrollbar: { initialValue: 'always' },
     },
     slots: {
-      default: { initialValue: 'Fixed size' },
+      default: { initialValue: `<dt-stack gap="200">
+  <dt-text as="p" kind="body" size="200">Paragraph 1: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</dt-text>
+  <dt-text as="p" kind="body" size="200">Paragraph 2: Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</dt-text>
+  <dt-text as="p" kind="body" size="200">Paragraph 3: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</dt-text>
+  <dt-text as="p" kind="body" size="200">Paragraph 4: Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</dt-text>
+  <dt-text as="p" kind="body" size="200">Paragraph 5: Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</dt-text>
+  <dt-text as="p" kind="body" size="200">Paragraph 6: Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</dt-text>
+  <dt-text as="p" kind="body" size="200">Paragraph 7: Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.</dt-text>
+  <dt-text as="p" kind="body" size="200">Paragraph 8: Ut labore et dolore magnam aliquam quaerat voluptatem.</dt-text>
+  <dt-text as="p" kind="body" size="200">Paragraph 9: Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur.</dt-text>
+  <dt-text as="p" kind="body" size="200">Paragraph 10: At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum.</dt-text>
+</dt-stack>` },
     },
   },
 
