@@ -43,11 +43,11 @@
     "@dialpad/postcss-responsive-variations": "workspace:*",
     "@vue/test-utils": "^2.4.0",
     "eslint-plugin-jsdoc": "^51.4.1",
-    "eslint-plugin-vitest": "^0.5.4",
+    "@vitest/eslint-plugin": "^1.0.0",
     "jsdom": "^24.0.0",
     "vitest": "^4.1.0"
   },
-  "peerDependencies": {
+
     "eslint": "^9.31.0",
     "vue": ">=3.2"
   },

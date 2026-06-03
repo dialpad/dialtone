@@ -2,7 +2,7 @@ import js from '@eslint/js';
 import vue from 'eslint-plugin-vue';
 import jsdoc from 'eslint-plugin-jsdoc';
 import vueAccessibility from 'eslint-plugin-vuejs-accessibility';
-import vitest from 'eslint-plugin-vitest';
+import vitest from '@vitest/eslint-plugin';
 import globals from 'globals';
 
 export default [
@@ -50,7 +50,7 @@ export default [
       globals: {
         ...globals.browser,
         ...globals.node,
-        ...vitest.environments.env.globals,
+        ...globals.vitest,
       },
     },
     rules: {
