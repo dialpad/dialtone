@@ -46,8 +46,8 @@ The Toggle component acts as a way to allow the User to switch between two mutua
   <dt-toggle :model-value="true" class="d-g-200">Checked Toggle</dt-toggle>
   <dt-toggle disabled class="d-g-200">Unchecked Disabled</dt-toggle>
   <dt-toggle :model-value="true" disabled class="d-g-200">Checked Disabled</dt-toggle>
-  <dt-toggle :model-value="mixed" class="d-g-200">Indeterminate Toggle</dt-toggle>
-  <dt-toggle :model-value="mixed" class="d-g-200" disabled>Indeterminate Disabled</dt-toggle>
+  <dt-toggle :model-value="'mixed'" class="d-g-200">Indeterminate Toggle</dt-toggle>
+  <dt-toggle :model-value="'mixed'" class="d-g-200" disabled>Indeterminate Disabled</dt-toggle>
   <dt-toggle class="d-g-200" :show-icon="false">Without icon</dt-toggle>
 </dt-stack>
 ```
