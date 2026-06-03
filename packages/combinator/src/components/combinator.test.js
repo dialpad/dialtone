@@ -63,7 +63,7 @@ describe('combinator.vue test', function () {
         await renderer.vm.$emit('event', 'update:modelValue', !initialValue);
         await nextTick();
 
-        assert.strictEqual(renderer.props('options').props.modelValue, !initialValue);
+        expect(renderer.props('options').props.modelValue).toBe(!initialValue);
       });
 
       it('does not mutate options.props for non-update events (e.g. "change")', async function () {
@@ -73,7 +73,7 @@ describe('combinator.vue test', function () {
         await renderer.vm.$emit('event', 'change', 'something');
         await nextTick();
 
-        assert.strictEqual(JSON.stringify(renderer.props('options').props), before);
+        expect(JSON.stringify(renderer.props('options').props)).toBe(before);
       });
     });
 
@@ -98,7 +98,7 @@ describe('combinator.vue test', function () {
         await renderer.vm.$emit('event', 'update:modelValue', 'hello');
         await nextTick();
 
-        assert.strictEqual(renderer.props('options').props.modelValue, 'hello');
+        expect(renderer.props('options').props.modelValue).toBe('hello');
       });
 
       it('reflects subsequent updates (simulates typing character by character)', async function () {
@@ -109,7 +109,7 @@ describe('combinator.vue test', function () {
           await nextTick();
         }
 
-        assert.strictEqual(renderer.props('options').props.modelValue, 'hello');
+        expect(renderer.props('options').props.modelValue).toBe('hello');
       });
     });
   });
