@@ -1,3 +1,4 @@
+import clone from 'just-clone';
 import { controlMap } from '@/src/lib/control';
 import { extendBinding, extendEvent, extendMember } from '@/src/lib/info_extend';
 
@@ -13,8 +14,16 @@ import { extendBinding, extendEvent, extendMember } from '@/src/lib/info_extend'
  * @returns {object} A newly instantiated info object.
  */
 export function getComponentInfo (component, documentation) {
-  extendInfo(documentation, component);
-  return documentation;
+  // Extend a deep clone rather than the argument itself. `documentation` is a
+  // reactive prop, and `extendInfo` reassigns member groups (and mutates member
+  // objects) in place. Mutating it here makes the `info`/`defaultInfo` computeds
+  // that read it invalidate themselves on every evaluation — an unbounded
+  // recompute loop that surfaces as "Maximum recursive updates" once a v-model
+  // write-back perturbs the reactive graph. `clone` preserves function refs
+  // (e.g. prop validators/defaults).
+  const info = documentation ? clone(documentation) : documentation;
+  extendInfo(info, component);
+  return info;
 }
 
 /**
