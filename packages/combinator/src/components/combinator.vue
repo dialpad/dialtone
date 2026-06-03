@@ -514,9 +514,9 @@ const disabledMembers = computed(() => {
   const disabled = new Set();
   const exclusions = info.value.exclusions;
   const propValues = options.value.props;
-  const depMap = buildDependencyMap(info.value.props);
+  const depMap = buildDependencyMap(info.value.props ?? []);
 
-  for (const member of info.value.props) {
+  for (const member of (info.value.props ?? [])) {
     if (member.required) continue;
     if (shouldExclude(member.name, 'props', exclusions, propValues) ||
       shouldHideProp(member.name, depMap, propValues)) {

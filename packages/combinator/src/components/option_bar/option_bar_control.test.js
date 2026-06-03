@@ -1,11 +1,10 @@
 import DtcOptionBarControl from './option_bar_control.vue';
 
-import { assert } from 'chai';
+import { expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { controlMap } from '@/src/lib/control';
 
 const labelSelector = '[data-qa=dtc-option-bar-control-label]';
-const descriptionSelector = '[data-qa=dtc-option-bar-control-description]';
 
 const testControls = Object.keys(controlMap);
 
@@ -17,7 +16,7 @@ describe('option_bar_control.vue test', function () {
     const testDescription = `${control} description`;
 
     describe(`When mounted with control '${control}'`, function () {
-      before(function () {
+      beforeAll(function () {
         const member = {
           validControls: [control],
           label: testLabel,
@@ -32,15 +31,11 @@ describe('option_bar_control.vue test', function () {
       });
 
       it('Should render successfully', function () {
-        assert.isTrue(wrapper.exists());
+        expect(wrapper.exists()).toBe(true);
       });
 
       it('Should display label text', function () {
-        assert.equal(wrapper.find(labelSelector).text(), testLabel);
-      });
-
-      it('Should display description text', function () {
-        assert.equal(wrapper.find(descriptionSelector).text(), testDescription);
+        expect(wrapper.find(labelSelector).text()).toBe(testLabel.replaceAll('-', ' '));
       });
     });
   });

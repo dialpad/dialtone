@@ -1,6 +1,6 @@
 import DtcEventConsole from './event_console.vue';
 
-import { assert } from 'chai';
+import { expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 
 describe('event_console.vue test', function () {
@@ -12,7 +12,7 @@ describe('event_console.vue test', function () {
 
   describe('When mounted', function () {
     it('Should render successfully', function () {
-      assert.exists(wrapper);
+      expect(wrapper).toBeTruthy();
     });
   });
 });

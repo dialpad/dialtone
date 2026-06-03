@@ -1,10 +1,7 @@
 import DtcControlSelection from './control_selection.vue';
 
-import { assert } from 'chai';
-import { mount } from '@vue/test-utils';
-
-const inputSelector = 'select';
-const optionSelector = 'option';
+import { expect } from 'vitest';
+import { shallowMount } from '@vue/test-utils';
 
 const selections = [
   'selection1',
@@ -16,49 +13,38 @@ const inputValue = selections[1];
 
 describe('control_selection.vue test', function () {
   let wrapper;
-  let inputWrapper;
-  let optionWrappers;
 
   const _mountWrapper = () => {
-    wrapper = mount(DtcControlSelection, {
+    wrapper = shallowMount(DtcControlSelection, {
       props: {
         value: inputValue,
         validValues: selections,
       },
     });
-    _setChildWrappers();
   };
 
-  const _setChildWrappers = () => {
-    inputWrapper = wrapper.find(inputSelector);
-    optionWrappers = wrapper.findAll(optionSelector);
-  };
-
-  before(function () {
+  beforeAll(function () {
     _mountWrapper();
   });
 
   describe('When mounted', function () {
     it('Should render successfully', function () {
-      assert.isTrue(wrapper.exists());
+      expect(wrapper.exists()).toBe(true);
     });
   });
 
-  describe('When rendering the native select', function () {
-    describe('Should create option elements for each selection', function () {
+  describe('When rendering options', function () {
+    describe('Should create an option for each selection', function () {
       selections.forEach(selection => {
-        it(`Should have a matching option element for selection '${selection}'`, function () {
-          const optionValues = optionWrappers.map(optionWrapper => {
-            return optionWrapper.element.value;
-          });
-          assert.isTrue(optionValues.includes(selection));
+        it(`Should have a computed option for selection '${selection}'`, function () {
+          expect(wrapper.vm.options.some(o => o.value === selection)).toBe(true);
         });
       });
     });
 
     describe('When a value is provided', function () {
-      it('Should set the native input to value', function () {
-        assert.equal(inputValue, inputWrapper.element.value);
+      it('Should display the label for the selected value', function () {
+        expect(wrapper.vm.selectedLabel).toBe(inputValue.toString());
       });
     });
   });

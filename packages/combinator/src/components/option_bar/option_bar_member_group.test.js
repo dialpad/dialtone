@@ -1,6 +1,6 @@
 import DtcOptionBarMemberGroup from './option_bar_member_group.vue';
 
-import { assert } from 'chai';
+import { expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 import { getSupportedComponents } from '@/src/lib/test/utils_test';
 
@@ -13,6 +13,7 @@ const booleanMemberKey = 'booleanMember';
 function createTestMember (key) {
   return {
     name: key,
+    label: key,
   };
 }
 
@@ -34,7 +35,7 @@ describe('option_bar_member_group.vue test', function () {
 
   const testComponents = getSupportedComponents();
   testComponents.forEach((component) => {
-    before(function () {
+    beforeAll(function () {
       wrapper = mount(DtcOptionBarMemberGroup, {
         props: {
           component,
@@ -48,11 +49,11 @@ describe('option_bar_member_group.vue test', function () {
 
     describe(`When mounted with component '${component.name}'`, function () {
       it('Should render successfully', function () {
-        assert.exists(wrapper);
+        expect(wrapper).toBeTruthy();
       });
 
       it('Should render a control for each member', function () {
-        assert.equal(Object.keys(testMembers).length, controlWrappers.length);
+        expect(Object.keys(testMembers).length).toBe(controlWrappers.length);
       });
     });
   });

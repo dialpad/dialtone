@@ -1,18 +1,18 @@
 import DtcControlBase from './control_base.vue';
 
-import { assert } from 'chai';
+import { expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 
 describe('control_base.vue test', function () {
   let wrapper;
 
-  before(function () {
+  beforeAll(function () {
     wrapper = mount(DtcControlBase);
   });
 
   describe('When mounted', function () {
     it('Should render successfully', function () {
-      assert.isTrue(wrapper.exists());
+      expect(wrapper.exists()).toBe(true);
     });
   });
 });

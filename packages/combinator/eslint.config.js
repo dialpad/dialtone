@@ -2,7 +2,7 @@ import js from '@eslint/js';
 import vue from 'eslint-plugin-vue';
 import jsdoc from 'eslint-plugin-jsdoc';
 import vueAccessibility from 'eslint-plugin-vuejs-accessibility';
-import mocha from 'eslint-plugin-mocha';
+import vitest from 'eslint-plugin-vitest';
 import globals from 'globals';
 
 export default [
@@ -42,24 +42,20 @@ export default [
     },
   },
   {
-    files: ['**/*.test.js', 'src/lib/test/*.js'],
+    files: ['**/*.test.js', 'src/lib/test/*.js', 'tests/*.js'],
     plugins: {
-      mocha,
+      vitest,
     },
     languageOptions: {
       globals: {
         ...globals.browser,
         ...globals.node,
-        ...globals.mocha,
+        ...vitest.environments.env.globals,
       },
     },
     rules: {
-      ...mocha.configs.recommended.rules,
+      ...vitest.configs.recommended.rules,
       'max-lines': 'off',
-      'mocha/no-setup-in-describe': 'off',
-      'mocha/no-exclusive-tests': 'error',
-      'mocha/no-hooks-for-single-case': 'off',
-      'mocha/no-exports': 0,
     },
   },
   {
