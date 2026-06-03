@@ -36,4 +36,10 @@ export default defineConfig({
       '@workspaceRoot': fileURLToPath(new URL('../../', import.meta.url)),
     },
   },
+  test: {
+    name: 'dialtone-combinator',
+    globals: true,
+    environment: 'jsdom',
+    include: ['./src/**/*.test.js'],
+  },
 });

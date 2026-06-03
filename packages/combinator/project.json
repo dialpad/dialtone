@@ -1,6 +1,13 @@
 {
   "name": "dialtone-combinator",
   "targets": {
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "pnpm test"
+      }
+    },
     "build": {
       "executor": "nx:run-commands",
       "dependsOn": [

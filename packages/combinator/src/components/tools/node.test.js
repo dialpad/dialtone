@@ -1,14 +1,13 @@
+import { describe, it, beforeEach, afterEach, expect } from 'vitest';
+import { mount } from '@vue/test-utils';
 import DtcNode from './node.vue';
 
-import { assert } from 'chai';
-import { mount } from '@vue/test-utils';
-
-describe('node.vue test', function () {
-  describe('When a globally registered directive is used in the slot template', function () {
+describe('node.vue test', () => {
+  describe('When a globally registered directive is used in the slot template', () => {
     let wrapper;
     let mountedSpy;
 
-    beforeEach(function () {
+    beforeEach(() => {
       mountedSpy = { called: false };
 
       wrapper = mount(DtcNode, {
@@ -25,19 +24,19 @@ describe('node.vue test', function () {
       });
     });
 
-    afterEach(function () {
+    afterEach(() => {
       wrapper.unmount();
     });
 
-    it('Should fire the directive mounted hook', function () {
-      assert.isTrue(mountedSpy.called);
+    it('Should fire the directive mounted hook', () => {
+      expect(mountedSpy.called).toBe(true);
     });
   });
 
-  describe('When a component is passed via the library prop', function () {
+  describe('When a component is passed via the library prop', () => {
     let wrapper;
 
-    beforeEach(function () {
+    beforeEach(() => {
       const StubComponent = {
         name: 'StubComponent',
         template: '<span class="stub-rendered">stub</span>',
@@ -51,12 +50,12 @@ describe('node.vue test', function () {
       });
     });
 
-    afterEach(function () {
+    afterEach(() => {
       wrapper.unmount();
     });
 
-    it('Should render the library component', function () {
-      assert.isTrue(wrapper.find('.stub-rendered').exists());
+    it('Should render the library component', () => {
+      expect(wrapper.find('.stub-rendered').exists()).toBe(true);
     });
   });
 });
