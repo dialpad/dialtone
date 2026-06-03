@@ -1,3 +1,11 @@
+# [1.4.0](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.3.0...dialtone-mcp-server/v1.4.0) (2026-05-26)
+
+
+### Features
+
+* **Mcp Server, Query Core, Dialtone Docs, Dialtone Cli:** DLT-3416 add search_documentation tool ([#1259](https://github.com/dialpad/dialtone/issues/1259)) ([ef1d5a8](https://github.com/dialpad/dialtone/commit/ef1d5a897df670200c8a7f0c34ed47c430e3ed35))
+
+
 # [1.4.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.4.0-next.1...dialtone-mcp-server/v1.4.0-next.2) (2026-06-02)
 
 
