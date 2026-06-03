@@ -1,5 +1,4 @@
 import DtcControlNullish from './control_nullish.vue';
-import DtcControlSelection from './control_selection.vue';
 
 import { expect } from 'vitest';
 import { shallowMount } from '@vue/test-utils';
@@ -11,11 +10,9 @@ const defaultString = 'null';
 
 describe('control_nullish.vue test', function () {
   let wrapper;
-  let inputWrapper;
 
   const _mountWrapper = (props = {}) => {
     wrapper = shallowMount(DtcControlNullish, { props });
-    inputWrapper = wrapper.findComponent(DtcControlSelection);
   };
 
   beforeAll(function () {
@@ -31,11 +28,10 @@ describe('control_nullish.vue test', function () {
   describe('When a value is provided', function () {
     beforeEach(async function () {
       await wrapper.setProps({ value: inputValue });
-      inputWrapper = wrapper.findComponent(DtcControlSelection);
     });
 
-    it('Should set the native input to value', function () {
-      expect(inputWrapper.props('value')).toBe(inputString);
+    it('Should resolve to the correct selection key', function () {
+      expect(wrapper.vm.selection).toBe(inputString);
     });
   });
 
@@ -44,8 +40,8 @@ describe('control_nullish.vue test', function () {
       _mountWrapper();
     });
 
-    it('Should set the native input to control default', function () {
-      expect(inputWrapper.props('value')).toBe(defaultString);
+    it('Should resolve to the default selection key', function () {
+      expect(wrapper.vm.selection).toBe(defaultString);
     });
   });
 });

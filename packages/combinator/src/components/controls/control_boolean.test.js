@@ -1,8 +1,9 @@
 import DtcControlBoolean from './control_boolean.vue';
-import { DtToggle } from '@dialpad/dialtone-vue';
 
 import { expect } from 'vitest';
-import { shallowMount } from '@vue/test-utils';
+import { mount } from '@vue/test-utils';
+
+const inputSelector = '[data-qa=dtc-control-boolean-input]';
 
 const inputValue = true;
 const defaultValue = DtcControlBoolean.props.value.default();
@@ -11,7 +12,7 @@ describe('control_boolean.vue test', function () {
   let wrapper;
 
   const _mountWrapper = (props = {}) => {
-    wrapper = shallowMount(DtcControlBoolean, { props });
+    wrapper = mount(DtcControlBoolean, { props });
   };
 
   beforeAll(function () {
@@ -29,8 +30,8 @@ describe('control_boolean.vue test', function () {
       await wrapper.setProps({ value: inputValue });
     });
 
-    it('Should set the toggle to value', function () {
-      expect(wrapper.findComponent(DtToggle).props('modelValue')).toBe(inputValue);
+    it('Should set the toggle aria-checked to value', function () {
+      expect(wrapper.find(inputSelector).attributes('aria-checked')).toBe(String(inputValue));
     });
   });
 
@@ -39,8 +40,8 @@ describe('control_boolean.vue test', function () {
       _mountWrapper();
     });
 
-    it('Should set the toggle to control default', function () {
-      expect(wrapper.findComponent(DtToggle).props('modelValue')).toBe(defaultValue);
+    it('Should set the toggle aria-checked to control default', function () {
+      expect(wrapper.find(inputSelector).attributes('aria-checked')).toBe(String(defaultValue));
     });
   });
 });

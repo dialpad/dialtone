@@ -4,7 +4,5 @@ class MockObserver {
   unobserve () {}
 }
 
-beforeAll(() => {
-  global.IntersectionObserver = MockObserver;
-  global.ResizeObserver = MockObserver;
-});
+global.IntersectionObserver = MockObserver;
+global.ResizeObserver = MockObserver;

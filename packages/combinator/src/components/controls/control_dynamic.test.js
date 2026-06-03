@@ -1,5 +1,4 @@
 import DtcControlDynamic from './control_dynamic.vue';
-import DtcControlSelection from './control_selection.vue';
 import DtcControlNumber from '@/src/components/controls/control_number.vue';
 import DtcControlString from '@/src/components/controls/control_string.vue';
 
@@ -47,13 +46,13 @@ describe('control_dynamic.vue test', function () {
           _mountWrapper({ value });
         });
 
-        it(`Should set selection to '${control}'`, function () {
-          expect(wrapper.findComponent(DtcControlSelection).props('value')).toBe(control);
+        it(`Should resolve selection to '${control}'`, function () {
+          expect(wrapper.vm.selectedControl).toBe(control);
         });
 
         if (component) {
-          it(`Should set the generated control to '${component.name}'`, function () {
-            expect(wrapper.findComponent(component)).toBeTruthy();
+          it(`Should render the generated control '${component.name}'`, function () {
+            expect(wrapper.findComponent(component).exists()).toBe(true);
           });
         }
       },
