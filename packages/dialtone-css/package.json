@@ -49,10 +49,13 @@
     "lib"
   ],
   "bin": {
+    "dialtone-migrate": "./lib/dist/js/dialtone_migrate/index.mjs",
     "dialtone-health-check": "./lib/dist/js/dialtone_health_check/index.cjs",
     "dialtone-migration-helper": "./lib/dist/js/dialtone_migration_helper/index.mjs",
     "dialtone-migrate-flex-to-stack": "./lib/dist/js/dialtone_migrate_flex_to_stack/index.mjs",
     "dialtone-migrate-link-rendering": "./lib/dist/js/dialtone_migrate_link_rendering/index.mjs",
+    "dialtone-migrate-tshirt-to-numeric": "./lib/dist/js/dialtone_migrate_tshirt_to_numeric/index.mjs",
+    "dialtone-migrate-props": "./lib/dist/js/dialtone_migrate_props/index.mjs",
     "dialtone-migrate-chip-interactive": "./lib/dist/js/dialtone_migrate_chip_interactive/index.mjs",
     "dialtone-migrate-scrollbar-always": "./lib/dist/js/dialtone_migrate_scrollbar_always/index.mjs",
     "dialtone-migrate-typography": "./lib/dist/js/dialtone_migrate_typography/index.mjs",

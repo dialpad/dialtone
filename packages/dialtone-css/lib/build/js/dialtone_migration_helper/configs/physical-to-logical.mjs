@@ -33,15 +33,15 @@ export default {
     // Generic short slot names (#left, #right, #bottom) are scoped to known
     // Dialtone components to avoid renaming slots on non-Dialtone components.
     // Uses multiline matching to find the slot within a dt-* or dt-recipe-* tag.
-    // Components: dt-item-layout, dt-recipe-callbox, dt-recipe-contact-centers-row,
+    // Components: dt-item-layout, dt-list-item, dt-recipe-callbox, dt-recipe-contact-centers-row,
     //             dt-recipe-general-row, dt-recipe-top-banner-info
 
-    // #left → #start (only on dt-item-layout, dt-recipe-general-row, dt-recipe-top-banner-info)
-    { from: /(<dt-(?:item-layout|recipe-general-row|recipe-top-banner-info)[\s\S]*?)#left(?=[\s"'>])/gm, to: '$1#start' },
-    // #right → #end (only on dt-item-layout, dt-recipe-callbox, dt-recipe-contact-centers-row, dt-recipe-top-banner-info)
-    { from: /(<dt-(?:item-layout|recipe-callbox|recipe-contact-centers-row|recipe-top-banner-info)[\s\S]*?)#right(?=[\s"'>])/gm, to: '$1#end' },
-    // #bottom → #blockEnd (only on dt-item-layout, dt-recipe-callbox)
-    { from: /(<dt-(?:item-layout|recipe-callbox)[\s\S]*?)#bottom(?=[\s"'>])/gm, to: '$1#blockEnd' },
+    // #left → #start (only on dt-item-layout, dt-list-item, dt-recipe-general-row, dt-recipe-top-banner-info)
+    { from: /(<(?:dt-(?:item-layout|list-item|recipe-general-row|recipe-top-banner-info)|Dt(?:ItemLayout|ListItem|RecipeGeneralRow|RecipeTopBannerInfo))[\s\S]*?)#left(?=[\s"'>])/gm, to: '$1#start' },
+    // #right → #end (only on dt-item-layout, dt-list-item, dt-recipe-callbox, dt-recipe-contact-centers-row, dt-recipe-top-banner-info)
+    { from: /(<(?:dt-(?:item-layout|list-item|recipe-callbox|recipe-contact-centers-row|recipe-top-banner-info)|Dt(?:ItemLayout|ListItem|RecipeCallbox|RecipeContactCentersRow|RecipeTopBannerInfo))[\s\S]*?)#right(?=[\s"'>])/gm, to: '$1#end' },
+    // #bottom → #blockEnd (only on dt-item-layout, dt-list-item, dt-recipe-callbox)
+    { from: /(<(?:dt-(?:item-layout|list-item|recipe-callbox)|Dt(?:ItemLayout|ListItem|RecipeCallbox))[\s\S]*?)#bottom(?=[\s"'>])/gm, to: '$1#blockEnd' },
 
     // ── Prop renames ──────────────────────────────────────────────────────
     // Longer patterns first within each prefix group.
