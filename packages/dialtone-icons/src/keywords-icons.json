@@ -1712,8 +1712,16 @@
         "selection"
       ],
       "circle-half-filled": [
+        "circle",
+        "half",
+        "half-filled",
+        "semi",
+        "partial",
         "mode",
-        "dark"
+        "dark",
+        "light",
+        "theme",
+        "contrast"
       ],
       "circle": [
         "circle",
