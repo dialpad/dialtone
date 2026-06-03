@@ -43,7 +43,7 @@ export default {
       borderWidth: { initialValue: '100' },
       borderColor: { initialValue: 'subtle' },
       borderRadius: { initialValue: '400' },
-      shadow: { initialValue: 'raised' },
+      shadow: { initialValue: 'card' },
     },
     slots: {
       default: { initialValue: `<dt-stack gap="200">
@@ -73,7 +73,7 @@ export default {
       padding: { initialValue: '200' },
       surface: { initialValue: 'moderate-opaque' },
       borderRadius: { initialValue: '450' },
-      shadow: { initialValue: 'raised' },
+      shadow: { initialValue: 'card' },
     },
     slots: {
       default: { initialValue: `<dt-stack direction="row" gap="200">
@@ -103,15 +103,15 @@ export default {
     },
   },
 
-  'overlay shadow': {
+  'shadow': {
     props: {
       padding: { initialValue: '200' },
-      surface: { initialValue: 'overlay' },
+      surface: { initialValue: 'primary' },
       borderRadius: { initialValue: '200' },
-      shadow: { initialValue: 'overlay' },
+      shadow: { initialValue: 'large' },
     },
     slots: {
-      default: { initialValue: 'Overlay shadow' },
+      default: { initialValue: 'Large shadow' },
     },
   },
 

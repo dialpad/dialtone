@@ -18,7 +18,7 @@ export const DT_BOX_SPACING_VALUES = ['0', '1', '25', '50', '75', '100', '125', 
  * @type {string[]}
  */
 export const DT_BOX_SURFACE_VALUES = [
-  'overlay', 'primary', 'secondary', 'moderate', 'bold', 'strong', 'contrast', 'backdrop',
+  'primary', 'secondary', 'moderate', 'bold', 'strong', 'contrast', 'backdrop',
   'brand', 'info', 'positive', 'warning', 'critical',
   'brand-subtle', 'brand-strong', 'info-subtle', 'info-strong',
   'positive-subtle', 'positive-strong', 'warning-subtle', 'warning-strong',
@@ -58,7 +58,7 @@ export const DT_BOX_BORDER_RADIUS_VALUES = ['0', '100', '200', '300', '350', '40
  * Shadow values (maps to --dt-shadow-* tokens).
  * @type {string[]}
  */
-export const DT_BOX_SHADOW_VALUES = ['raised', 'overlay', 'modal'];
+export const DT_BOX_SHADOW_VALUES = ['small', 'medium', 'large', 'extra-large', 'card'];
 
 /**
  * Layout token scale (for sizing props: inlineSize, blockSize, min/max variants).

@@ -244,7 +244,7 @@ export default {
   components: { DtBox, DtStack, DtText },
   data () {
     return {
-      neutralSurfaces: ['overlay', 'primary', 'secondary', 'moderate', 'bold', 'strong', 'contrast'],
+      neutralSurfaces: ['primary', 'secondary', 'moderate', 'bold', 'strong', 'contrast'],
       semanticSurfaces: ['brand', 'info', 'positive', 'warning', 'critical'],
       variantSurfaces: ['brand-subtle', 'brand-strong', 'info-subtle', 'info-strong', 'positive-subtle', 'positive-strong', 'warning-subtle', 'warning-strong', 'critical-subtle', 'critical-strong'],
       opaqueSurfaces: ['primary-opaque', 'secondary-opaque', 'moderate-opaque', 'bold-opaque', 'strong-opaque', 'contrast-opaque'],

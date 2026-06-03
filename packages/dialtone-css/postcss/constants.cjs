@@ -317,9 +317,6 @@ module.exports = {
       'strong-inverted',
     ].join('|'),
     BOX_SHADOWS: [
-      'raised',
-      'overlay',
-      'modal',
       'sm',
       'md',
       'lg',

@@ -212,7 +212,7 @@ const tokenTests = [
 
   // Shadow tokens
   { query: 'shadow', expect: '--dt-shadow' },
-  { query: 'shadow card', expect: '--dt-shadow-raised' },
+  { query: 'shadow card', expect: '--dt-shadow-card' },
 
   // Values (these return many valid tokens - check if ANY token matches)
   { query: '8px', expect: '--dt-' }, // Multiple valid tokens with this value

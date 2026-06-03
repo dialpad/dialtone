@@ -204,7 +204,7 @@ Output CSS variable names follow the token JSON path hierarchy, converted to keb
 | `color.foreground.primary` | `--dt-color-foreground-primary` |
 | `space.400` | `--dt-space-400` |
 | `size.radius.md` | `--dt-size-radius-md` |
-| `shadow.raised.2.color` | `--dt-shadow-raised-2-color` |
+| `shadow.card.3.color` | `--dt-shadow-card-3-color` |
 | `typography.body.md` | `--dt-typography-body-md` |
 
 LESS output uses `@` prefix instead: `@dt-color-foreground-primary`
