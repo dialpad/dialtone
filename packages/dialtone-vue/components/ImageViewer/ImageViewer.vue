@@ -18,6 +18,7 @@
       :to="appendTo"
     >
       <div
+        v-dt-focustrap="{ active: isOpen, initialFocus: false, restoreFocus: false }"
         :aria-hidden="!isOpen ? 'true' : 'false'"
         class="d-modal"
         data-qa="dt-modal"
@@ -72,7 +73,6 @@
 </template>
 
 <script>
-import Modal from '@/common/mixins/modal';
 import ModeMixin from '@/common/mixins/mode';
 import { returnFirstEl } from '@/common/utils';
 import { EVENT_KEYNAMES } from '@/common/constants';
@@ -90,7 +90,7 @@ export default {
     DtIconClose,
   },
 
-  mixins: [Modal, ModeMixin],
+  mixins: [ModeMixin],
 
   props: {
     /**
@@ -181,13 +181,11 @@ export default {
         },
 
         keydown: event => {
+          // Tab focus trapping is handled by the v-dt-focustrap directive on the modal.
           switch (event.code) {
             case EVENT_KEYNAMES.esc:
             case EVENT_KEYNAMES.escape:
               this.close();
-              break;
-            case EVENT_KEYNAMES.tab:
-              this.trapFocus(event);
               break;
           }
         },
@@ -251,12 +249,6 @@ export default {
 
     focusAfterOpen () {
       returnFirstEl(this.$refs.closeImage?.$el)?.focus();
-    },
-
-    trapFocus (e) {
-      if (this.isOpen) {
-        this.focusTrappedTabPress(e);
-      }
     },
   },
 };
