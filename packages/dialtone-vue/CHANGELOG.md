@@ -1,3 +1,15 @@
+# [3.222.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.222.0-next.1...dialtone-vue/v3.222.0-next.2) (2026-06-04)
+
+
+### Bug Fixes
+
+* **Modal:** DLT-3442 fix focus snapping back to first button on click ([#1276](https://github.com/dialpad/dialtone/issues/1276)) ([37ec398](https://github.com/dialpad/dialtone/commit/37ec398fb671ee1d22dccea78158d405d4558047))
+
+
+### Reverts
+
+* remove accidental next-shadows commits from next ([868a502](https://github.com/dialpad/dialtone/commit/868a502fbd08713845bbd19d9af043f4d778ab4f))
+
 ## [3.221.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.221.0...dialtone-vue/v3.221.1) (2026-05-26)
 
 
