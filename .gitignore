@@ -81,6 +81,7 @@ SKILLS_TODO*.md
 *.old
 *.deprecated
 .claude/scheduled_tasks.lock
+.agents/**/evals/artifacts/
 .omx/
 .worktrees/
 .claude/plans/
