@@ -1,3 +1,20 @@
+# [8.80.0-next.9](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.80.0-next.8...dialtone-css/v8.80.0-next.9) (2026-06-04)
+
+
+### Bug Fixes
+
+* **Contact Info:** no-jira remove min-inline-size regression from token migration ([ed8ee12](https://github.com/dialpad/dialtone/commit/ed8ee1217234731d99fcaaed0bd1f6cb9aa3a825))
+
+
+### Documentation
+
+* **Migration Script:** dlt-3303 master migration script to next ([#1288](https://github.com/dialpad/dialtone/issues/1288)) ([332b3cc](https://github.com/dialpad/dialtone/commit/332b3cc03aec33b0f80a1db7b873a9150435276f))
+
+
+### Reverts
+
+* remove accidental next-shadows commits from next ([868a502](https://github.com/dialpad/dialtone/commit/868a502fbd08713845bbd19d9af043f4d778ab4f))
+
 # [8.80.0-next.8](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.80.0-next.7...dialtone-css/v8.80.0-next.8) (2026-06-02)
 
 
