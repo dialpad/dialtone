@@ -1,13 +1,14 @@
-<!-- eslint-disable vuejs-accessibility/no-static-element-interactions -->
 <template>
   <aside
+    v-dt-focustrap="{ active: important, initialFocus: 'auto', restoreFocus: true }"
     :class="bannerClass"
     :style="bannerBackgroundImage"
-    @keydown.tab="trapFocus"
+    data-qa="dt-banner"
   >
     <div
       class="d-banner__dialog"
       :class="dialogClass"
+      data-qa="dt-banner-dialog"
       :role="role"
       :aria-modal="important || undefined"
       :aria-labelledby="hasHeader ? headerId : undefined"
@@ -51,7 +52,6 @@
 
 <script>
 import { DtNoticeIcon, DtNoticeContent, DtNoticeAction, NOTICE_KINDS } from '@/components/Notice';
-import Modal from '@/common/mixins/modal';
 import utils from '@/common/utils';
 
 /**
@@ -67,8 +67,6 @@ export default {
     DtNoticeContent,
     DtNoticeAction,
   },
-
-  mixins: [Modal],
 
   props: {
     /**
@@ -99,8 +97,9 @@ export default {
 
     /**
      * Used in scenarios where the message needs to visually dominate the screen.
-     * This will also change the aria role from status to alertdialog.
-     * and will modally trap the keyboard focus in the dialog as soon as it displays.
+     * This will also change the aria role from status to alertdialog,
+     * and will modally trap keyboard focus within the banner while it is shown (via the
+     * v-dt-focustrap directive), restoring focus to the previously focused element on close.
      * @values true, false
      */
     important: {
@@ -258,20 +257,6 @@ export default {
 
       return `background-image: url(${this.backgroundImage});
               background-size: ${this.backgroundSize};`;
-    },
-  },
-
-  mounted () {
-    if (this.important) {
-      this.focusFirstElement();
-    }
-  },
-
-  methods: {
-    trapFocus (e) {
-      if (this.important) {
-        this.focusTrappedTabPress(e);
-      }
     },
   },
 };
