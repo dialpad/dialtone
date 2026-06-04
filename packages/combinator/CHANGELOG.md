@@ -1,3 +1,20 @@
+# [1.2.0-next.11](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.10...combinator/v1.2.0-next.11) (2026-06-04)
+
+
+### Bug Fixes
+
+* **Combinator:** DLT-3171 update v-model bindings from rendered component events ([#1299](https://github.com/dialpad/dialtone/issues/1299)) ([81d0c15](https://github.com/dialpad/dialtone/commit/81d0c153c96690eb38d1f41a900227a65b6eaf81))
+
+
+### Documentation
+
+* DLT-3434 build pipeline for component wall thumbs ([#1278](https://github.com/dialpad/dialtone/issues/1278)) ([cb9992f](https://github.com/dialpad/dialtone/commit/cb9992fffbe3e01063488b19cd3d028a2a6f38ea))
+
+
+### Reverts
+
+* remove accidental next-shadows commits from next ([868a502](https://github.com/dialpad/dialtone/commit/868a502fbd08713845bbd19d9af043f4d778ab4f))
+
 # [1.2.0-next.10](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.9...combinator/v1.2.0-next.10) (2026-05-22)
 
 
