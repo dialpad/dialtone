@@ -302,11 +302,12 @@ const MIGRATIONS = [
   {
     id: 'vue3-to-vue-imports',
     name: 'Vue 3 Import Paths',
-    description: '@dialpad/dialtone-icons/vue3 and @dialpad/dialtone-vue/vue3 import paths renamed to /vue.',
+    description: '@dialpad/dialtone/vue3, @dialpad/dialtone-icons/vue3, and @dialpad/dialtone-vue/vue3 import paths renamed to /vue.',
     category: 'required',
     type: 'config',
     configName: 'vue3-to-vue-imports',
     detectPatterns: [
+      /@dialpad\/dialtone\/vue3/,
       /@dialpad\/dialtone-icons\/vue3/,
       /@dialpad\/dialtone-vue\/vue3/,
     ],
