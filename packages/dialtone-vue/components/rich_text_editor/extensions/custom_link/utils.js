@@ -131,15 +131,10 @@ export function removeMarks (range, doc, tr, type) {
 // Regex to match partial phone numbers.
 const partialPhoneNumberRegex = getPhoneNumberRegex(1, 15);
 
-// Regex to detect complete phone number matches.
-const phoneNumberRegex = getPhoneNumberRegex();
-
 /**
  * Find matches from text and add marks on them.
- * @param {string[]} [phoneNumbers] - When non-empty, only link these specific
- *   phone numbers (backend-confirmed). When empty, link all phone-like text.
  */
-export function addMarks (text, pos, from, to, tr, type, phoneNumbers = []) {
+export function addMarks (text, pos, from, to, tr, type) {
   if (!text) {
     return;
   }
@@ -193,29 +188,6 @@ export function addMarks (text, pos, from, to, tr, type, phoneNumbers = []) {
     // Sum up the from index and the match length to get the end index.
     const to = from + word.length;
 
-    // Guard against URLs that happen to contain 7+ digit path segments
-    // (e.g. https://example.com/7658813). A real phone number consists only
-    // of digits, spaces, dashes, parens, and an optional leading +.
-    const isPhone = phoneNumberRegex.test(word) && !/[a-zA-Z:/.]/.test(word);
-
-    // When phoneNumbers is null (default), auto-detect all phone-like text.
-    // When phoneNumbers is an array (even empty), only mark numbers in that list —
-    // this means the caller is explicitly relying on backend detection (rich_media).
-    if (isPhone && phoneNumbers !== null && !phoneNumbers.includes(word)) {
-      return;
-    }
-
-    // For phone numbers, remove any existing standard 'link' mark first — the
-    // Link extension's autolink may have matched the '+' prefix as a URL, which
-    // would produce nested <a> elements and block our phone-click handler.
-    // For non-phone matches, skip entirely to avoid nested <a> elements.
-    const existingLinkMark = tr.doc.resolve(from).marks().find(m => m.type.name === 'link');
-    if (existingLinkMark) {
-      if (!isPhone) return;
-      tr.removeMark(from, to, existingLinkMark.type);
-    }
-
-    const attrs = isPhone ? { isPhone: true, phoneNumber: word } : {};
-    tr.addMark(from, to, type.create(attrs));
+    tr.addMark(from, to, type.create());
   });
 }

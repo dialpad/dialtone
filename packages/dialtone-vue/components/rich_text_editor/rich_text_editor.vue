@@ -5,7 +5,7 @@
   <div>
     <!-- why the hell is this visibility: hidden by default??? -->
     <bubble-menu
-      v-if="editor && link && !hideLinkBubbleMenu"
+      v-if="editor && link"
       :editor="editor"
       :should-show="bubbleMenuShouldShow"
       :options="floatingOptions"
@@ -79,6 +79,7 @@ import { CustomTextStyle } from './extensions/text_style/text_style';
 import { TextStyleKit } from '@tiptap/extension-text-style';
 import Emoji from './extensions/emoji';
 import CustomLink from './extensions/custom_link';
+import { LinkPhoneNumbers } from './extensions/link_phone_numbers/link_phone_numbers';
 import ConfigurableImage from './extensions/image';
 import DivParagraph from './extensions/div';
 import { MentionPlugin } from './extensions/mentions/mention';
@@ -95,13 +96,10 @@ import { emojiPattern } from 'regex-combined-emojis';
 import mentionSuggestion from './extensions/mentions/suggestion';
 import channelSuggestion from './extensions/channels/suggestion';
 import slashCommandSuggestion from './extensions/slash_command/suggestion';
-import { warnIfUnmounted, returnFirstEl, getPhoneNumberRegex, linkRegex } from '@/common/utils';
+import { warnIfUnmounted, returnFirstEl } from '@/common/utils';
 import { renderEditorToMarkdown } from './markdownRenderer';
 import deepEqual from 'deep-equal';
 import { DialtoneLocalization } from '@/localization';
-
-const _phoneRegex = getPhoneNumberRegex();
-const _fullLinkRegex = new RegExp(linkRegex.source, 'gi');
 
 export default {
   compatConfig: { MODE: 3 },
@@ -247,15 +245,15 @@ export default {
     },
 
     /**
-     * When set to an array alongside `customLink`, restricts phone-number
-     * autolinking to only those specific strings (e.g. numbers confirmed by
-     * the backend via `rich_media`). An empty array means no phone marks at all.
-     * When `null` (default), all phone-like text is auto-linked.
-     * @type {string[]|null}
+     * Enables phone-number autolinking and the `phone-click` event.
+     * Pass `true` to auto-detect all phone-like text, or an array of specific
+     * phone number strings (e.g. backend-confirmed numbers from `rich_media`)
+     * to restrict which numbers are linked. An empty array disables all phone links.
+     * @type {boolean|string[]}
      */
-    phoneNumbers: {
-      type: Array,
-      default: null,
+    linkPhoneNumbers: {
+      type: [Boolean, Array],
+      default: false,
     },
 
     /**
@@ -620,9 +618,9 @@ export default {
     'channel-click',
 
     /**
-     * Event fired when a phone number link (autolinked by the CustomLink extension) is clicked.
+     * Event fired when a phone number link is clicked.
      * Payload: { phoneNumber: string } — the raw phone number text as matched.
-     * Only emitted when the `customLink` prop is used.
+     * Only emitted when the `linkPhoneNumbers` prop is set.
      * @event phone-click
      * @type {Object}
      */
@@ -738,18 +736,18 @@ export default {
             class: 'd-link d-wb-break-all',
           },
           openOnClick: false,
-          // Disable autolink when customLink is active — customLink handles all
-          // phone/URL autolinking and the two autolink plugins conflict on '+' prefixed
-          // phone numbers (e.g. +541144372368), causing marks to be removed.
+          // Disable autolink when customLink is active — customLink handles URL/IP
+          // autolinking and the two autolink plugins can conflict on the same text.
           autolink: !this.customLink,
           protocols: RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
         }));
       }
       if (this.customLink) {
-        const customLinkOptions = typeof this.customLink === 'object'
-          ? { ...this.customLink, phoneNumbers: this.phoneNumbers }
-          : { phoneNumbers: this.phoneNumbers };
-        extensions.push(this.getExtension(CustomLink, customLinkOptions));
+        extensions.push(this.getExtension(CustomLink, this.customLink));
+      }
+      if (this.linkPhoneNumbers) {
+        const phoneNumbers = Array.isArray(this.linkPhoneNumbers) ? this.linkPhoneNumbers : null;
+        extensions.push(LinkPhoneNumbers.configure({ phoneNumbers }));
       }
 
       if (this.mentionSuggestion) {
@@ -962,7 +960,7 @@ export default {
     // Force appendTransaction to run after mount — the editor may be pre-populated
     // via createEditor(content: modelValue), causing setContent to dispatch no
     // transaction and skipping our autolink's appendTransaction entirely.
-    if (this.customLink) {
+    if (this.customLink || this.linkPhoneNumbers) {
       this.$nextTick(() => {
         if (this.editor) {
           this.editor.view.dispatch(this.editor.state.tr.setMeta('dp-force-autolink', true));
@@ -1024,7 +1022,7 @@ export default {
     },
 
     bubbleMenuShouldShow ({ editor }) {
-      return editor.isActive('link');
+      return !this.hideLinkBubbleMenu && editor.isActive('link');
     },
 
     /**
@@ -1117,50 +1115,11 @@ export default {
         newValue = newValue?.replace(inputUnicodeRegex, '<emoji-component code="$1"></emoji-component>');
       }
 
-      // Replace content and immediately apply phone marks in one transaction
-      // when customLink is active and the value is a TipTap JSON object.
-      // Plain strings have no phone-link marks to add, so they go through
-      // setContent below. The direct dispatch avoids the two-step flicker
-      // (content change → appendTransaction) and handles the edge case where
-      // the same JSON value is already set (setContent would be a no-op).
-      if (this.customLink && typeof newValue === 'object' && newValue !== null) {
-        try {
-          const schema = this.editor.state.schema;
-          const customLinkType = schema.marks?.CustomLink;
-          const newDoc = schema.nodeFromJSON(newValue);
-          const tr = this.editor.state.tr.replaceWith(0, this.editor.state.doc.content.size, newDoc.content);
-          // null = auto-detect (skip direct marking, let autolink handle it);
-          // array = use backend list (possibly empty = no phone marks)
-          if (customLinkType && this.phoneNumbers !== null) {
-            const allowedPhones = new Set(this.phoneNumbers);
-            newDoc.descendants((node, pos) => {
-              if (!node.isText || !node.text) return;
-              _fullLinkRegex.lastIndex = 0;
-              let match;
-              while ((match = _fullLinkRegex.exec(node.text)) !== null) {
-                const word = match[0];
-                if (!_phoneRegex.test(word)) continue;
-                if (!allowedPhones.has(word)) continue;
-                const from = pos + match.index;
-                const to = from + word.length;
-                tr.addMark(from, to, customLinkType.create({ isPhone: true, phoneNumber: word }));
-              }
-            });
-          }
-          this.editor.view.dispatch(tr);
-        } catch {
-          this.editor.commands.setContent(newValue, {
-            emitUpdate: false,
-            parseOptions: { preserveWhitespace: this.preserveWhitespace },
-          });
-        }
-      } else {
-        // Otherwise replace the content (resets the cursor position).
-        this.editor.commands.setContent(newValue, {
-          emitUpdate: false,
-          parseOptions: { preserveWhitespace: this.preserveWhitespace },
-        });
-      }
+      // Otherwise replace the content (resets the cursor position).
+      this.editor.commands.setContent(newValue, {
+        emitUpdate: false,
+        parseOptions: { preserveWhitespace: this.preserveWhitespace },
+      });
     },
 
     destroyEditor () {
@@ -1343,7 +1302,7 @@ export default {
         this.$emit('channel-click', channelData);
       });
 
-      // Phone number link is clicked (requires customLink prop)
+      // Phone number link is clicked (requires linkPhoneNumbers prop)
       this.editor.on('phone-click', (phoneData) => {
         this.$emit('phone-click', phoneData);
       });

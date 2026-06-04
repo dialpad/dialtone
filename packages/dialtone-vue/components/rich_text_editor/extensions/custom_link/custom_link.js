@@ -11,10 +11,6 @@ import {
   mergeAttributes,
   Mark,
 } from '@tiptap/core';
-import {
-  Plugin,
-  PluginKey,
-} from '@tiptap/pm/state';
 import { autolink } from './autolink';
 
 const defaultAttributes = {
@@ -26,42 +22,6 @@ const defaultAttributes = {
 // functionality comes from the ProseMirror plugin.
 export const CustomLink = Mark.create({
   name: 'CustomLink',
-
-  addOptions () {
-    return {
-      HTMLAttributes: {},
-      /**
-       * Backend-confirmed phone numbers to link (from rich_media).
-       * When an array, only those numbers are linked (empty = no links).
-       * When null (default), all phone-like text is auto-linked.
-       */
-      phoneNumbers: null,
-    };
-  },
-
-  addAttributes () {
-    return {
-      /**
-       * Whether this link marks a phone number (vs a URL or email).
-       * Set by the autolink plugin when it detects a phone number match.
-       */
-      isPhone: {
-        default: false,
-        parseHTML: (element) => element.dataset.isPhone === 'true',
-        renderHTML: (attrs) => attrs.isPhone ? { 'data-is-phone': 'true' } : {},
-      },
-
-      /**
-       * The raw phone number text (only set when isPhone is true).
-       * Emitted as part of the phone-click event payload.
-       */
-      phoneNumber: {
-        default: null,
-        parseHTML: (element) => element.dataset.phoneNumber ?? null,
-        renderHTML: (attrs) => attrs.phoneNumber ? { 'data-phone-number': attrs.phoneNumber } : {},
-      },
-    };
-  },
 
   renderHTML ({ HTMLAttributes }) {
     return [
@@ -79,28 +39,8 @@ export const CustomLink = Mark.create({
   },
 
   addProseMirrorPlugins () {
-    const editor = this.editor;
-    const type = this.type;
-    const phoneNumbers = this.options.phoneNumbers ?? null;
-
     return [
-      autolink({ type, phoneNumbers }),
-      new Plugin({
-        key: new PluginKey('customLinkClick'),
-        props: {
-          handleClick (view, pos, event) {
-            const resolvedPos = view.state.doc.resolve(pos);
-            const customLinkMark = resolvedPos.marks().find(m => m.type === type);
-
-            if (customLinkMark?.attrs?.isPhone) {
-              event.preventDefault();
-              editor.emit('phone-click', { phoneNumber: customLinkMark.attrs.phoneNumber });
-              return true;
-            }
-            return false;
-          },
-        },
-      }),
+      autolink({ type: this.type }),
     ];
   },
 });

@@ -20,9 +20,6 @@ export function autolink (options) {
   // the initial content through the plugin if the editor was mounted with some.
   let hasInitialized = false;
 
-  // Backend-confirmed phone numbers. null = auto-detect all; array = restrict to list.
-  const phoneNumbers = options.phoneNumbers ?? null;
-
   return new Plugin({
     key: new PluginKey('autolink'),
 
@@ -42,11 +39,9 @@ export function autolink (options) {
       // Text content after the original transaction.
       const { textContent } = newState.doc;
 
-      // On initialization OR a full content replacement (e.g. setContent called
-      // after server confirmation), scan the entire document text. This is more
-      // reliable than getChangedRanges for wholesale document replacements.
+      // On initialization OR a full content replacement, scan the entire document.
       if (!hasInitialized || !oldState.doc.textContent) {
-        addMarks(textContent, 0, 0, textContent.length, tr, options.type, phoneNumbers);
+        addMarks(textContent, 0, 0, textContent.length, tr, options.type);
         hasInitialized = true;
         return tr;
       }
@@ -62,22 +57,17 @@ export function autolink (options) {
       // All the changes within the document.
       const changes = getChangedRanges(transform);
 
-      // If the changed ranges don't cover the document (e.g. setContent replaced
-      // the whole document but getChangedRanges returned nothing), fall back to a
-      // full scan so phone-number marks are always applied.
+      // Fallback to full scan when getChangedRanges returns nothing (e.g. wholesale setContent).
       if (!changes.length) {
-        addMarks(textContent, 0, 0, textContent.length, tr, options.type, phoneNumbers);
+        addMarks(textContent, 0, 0, textContent.length, tr, options.type);
         return tr;
       }
 
       changes.forEach(({ oldRange, newRange }) => {
-        // When getChangedRanges returns a degenerate zero-width range (from mark
-        // steps like AddMarkStep/RemoveMarkStep whose StepMap has no position
-        // changes), fall back to a full-document scan. Using [0,0] would cause
-        // removeMarks to hit our phone mark via ±1 expansion but findChildrenInRange
-        // to find no paragraphs, permanently deleting the mark.
+        // Zero-width ranges come from mark-only steps (AddMarkStep/RemoveMarkStep).
+        // removeMarks expands by ±1 and would delete our mark without re-adding it.
         if (newRange.from === newRange.to) {
-          addMarks(textContent, 0, 0, textContent.length, tr, options.type, phoneNumbers);
+          addMarks(textContent, 0, 0, textContent.length, tr, options.type);
           return;
         }
 
@@ -101,7 +91,6 @@ export function autolink (options) {
             newRange.to,
             tr,
             options.type,
-            phoneNumbers,
           );
         });
       });
