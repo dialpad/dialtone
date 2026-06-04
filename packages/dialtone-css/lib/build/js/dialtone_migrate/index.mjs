@@ -28,7 +28,7 @@
  *   npx dialtone-migrate --only color-stops,hsl-to-oklch
  */
 
-import { spawn } from 'node:child_process';
+import { spawn, execFileSync } from 'node:child_process';
 import fs from 'fs/promises';
 import path from 'path';
 import readline from 'readline';
@@ -370,7 +370,7 @@ Examples:
 // File walker (shared utility)
 // ---------------------------------------------------------------------------
 
-const DEFAULT_IGNORE = ['node_modules', 'dist', '.git', '.vuepress/public', '.vuepress/.temp', '.vuepress/.cache', 'storybook-static'];
+const DEFAULT_IGNORE = ['node_modules', 'dist', '.git', '.vuepress/public', '.vuepress/.temp', '.vuepress/.cache', 'storybook-static', 'compiled'];
 
 function isIgnoredPath (fullPath) {
   const segments = fullPath.split(path.sep);
@@ -384,6 +384,28 @@ function isIgnoredPath (fullPath) {
     }
     return segments.includes(ig);
   });
+}
+
+/**
+ * Filter out files that are ignored by .gitignore using git check-ignore.
+ * Falls back gracefully if git is not available.
+ */
+function filterGitIgnored (files, cwd) {
+  if (files.length === 0) return files;
+  try {
+    const input = files.join('\n');
+    const output = execFileSync('git', ['check-ignore', '--stdin'], {
+      input,
+      cwd,
+      encoding: 'utf8',
+      stdio: ['pipe', 'pipe', 'ignore'],
+    });
+    const ignored = new Set(output.trim().split('\n').filter(Boolean));
+    return files.filter(f => !ignored.has(f));
+  } catch {
+    // git not available or not a git repo — return all files unfiltered
+    return files;
+  }
 }
 
 async function findFiles (dir, extensions) {
@@ -404,7 +426,7 @@ async function findFiles (dir, extensions) {
     }
   }
   await walk(dir);
-  return results;
+  return filterGitIgnored(results, dir);
 }
 
 // ---------------------------------------------------------------------------
