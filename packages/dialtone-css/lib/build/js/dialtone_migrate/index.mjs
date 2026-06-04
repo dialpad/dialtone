@@ -403,9 +403,12 @@ function filterGitIgnored (files, cwd) {
     });
     const ignored = new Set(output.trim().split('\n').filter(Boolean));
     return files.filter(f => !ignored.has(f));
-  } catch {
-    // git not available or not a git repo — return all files unfiltered
-    return files;
+  } catch (err) {
+    // status 1 → no paths ignored; status 128 → not a git repo; ENOENT → git missing
+    if (err.status === 1 || err.status === 128 || err.code === 'ENOENT') {
+      return files;
+    }
+    throw err;
   }
 }
 
