@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-mcp-server",
-  "version": "1.4.0",
+  "version": "1.5.0-next.1",
   "main": "build/index.js",
   "type": "module",
   "bin": {
