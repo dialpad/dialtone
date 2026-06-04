@@ -440,6 +440,11 @@
         "share",
         "email"
       ],
+      "hand-filled": [
+        "gesture",
+        "palm",
+        "filled"
+      ],
       "hand": [
         "gesture",
         "palm"
