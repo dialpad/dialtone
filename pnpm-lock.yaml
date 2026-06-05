@@ -1374,7 +1374,7 @@ packages:
     engines: {node: '>=10'}
 
   '@dialpad/dialtone-css@8.80.0-next.9':
-    resolution: {integrity: sha512-v71lkHAy5FiBGkkg4dNrxvJiPvEGIQTruqTH/9ZwIzBOOrOzpyNslObSmfj53zzwQfwOriwR4ri60OR+g5KEPQ==}
+    resolution: {integrity: sha512-v71lkHAy5FiBGkkg4dNrxvJiPvEGIQTruqTH/9ZwIzBOOrOzpyNslObSmfj53zzwQfwOriwR4ri60OR+g5KEPQ==, tarball: https://npm.pkg.github.com/download/@dialpad/dialtone-css/8.80.0-next.9/cd6fb0004977d5a4d167440d432dc105127878d3}
     hasBin: true
     peerDependencies:
       chalk: ^5.2.0
