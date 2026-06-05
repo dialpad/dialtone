@@ -28,7 +28,7 @@
  *   npx dialtone-migrate --only color-stops,hsl-to-oklch
  */
 
-import { spawn } from 'node:child_process';
+import { spawn, execFileSync } from 'node:child_process';
 import fs from 'fs/promises';
 import path from 'path';
 import readline from 'readline';
@@ -302,11 +302,12 @@ const MIGRATIONS = [
   {
     id: 'vue3-to-vue-imports',
     name: 'Vue 3 Import Paths',
-    description: '@dialpad/dialtone-icons/vue3 and @dialpad/dialtone-vue/vue3 import paths renamed to /vue.',
+    description: '@dialpad/dialtone/vue3, @dialpad/dialtone-icons/vue3, and @dialpad/dialtone-vue/vue3 import paths renamed to /vue.',
     category: 'required',
     type: 'config',
     configName: 'vue3-to-vue-imports',
     detectPatterns: [
+      /@dialpad\/dialtone\/vue3/,
       /@dialpad\/dialtone-icons\/vue3/,
       /@dialpad\/dialtone-vue\/vue3/,
     ],
@@ -370,7 +371,7 @@ Examples:
 // File walker (shared utility)
 // ---------------------------------------------------------------------------
 
-const DEFAULT_IGNORE = ['node_modules', 'dist', '.git', '.vuepress/public', '.vuepress/.temp', '.vuepress/.cache', 'storybook-static'];
+const DEFAULT_IGNORE = ['node_modules', 'dist', '.git', '.vuepress/public', '.vuepress/.temp', '.vuepress/.cache', 'storybook-static', 'compiled'];
 
 function isIgnoredPath (fullPath) {
   const segments = fullPath.split(path.sep);
@@ -384,6 +385,31 @@ function isIgnoredPath (fullPath) {
     }
     return segments.includes(ig);
   });
+}
+
+/**
+ * Filter out files that are ignored by .gitignore using git check-ignore.
+ * Falls back gracefully if git is not available.
+ */
+function filterGitIgnored (files, cwd) {
+  if (files.length === 0) return files;
+  try {
+    const input = files.join('\n');
+    const output = execFileSync('git', ['check-ignore', '--stdin'], {
+      input,
+      cwd,
+      encoding: 'utf8',
+      stdio: ['pipe', 'pipe', 'ignore'],
+    });
+    const ignored = new Set(output.trim().split('\n').filter(Boolean));
+    return files.filter(f => !ignored.has(f));
+  } catch (err) {
+    // status 1 → no paths ignored; status 128 → not a git repo; ENOENT → git missing
+    if (err.status === 1 || err.status === 128 || err.code === 'ENOENT') {
+      return files;
+    }
+    throw err;
+  }
 }
 
 async function findFiles (dir, extensions) {
@@ -404,7 +430,7 @@ async function findFiles (dir, extensions) {
     }
   }
   await walk(dir);
-  return results;
+  return filterGitIgnored(results, dir);
 }
 
 // ---------------------------------------------------------------------------
