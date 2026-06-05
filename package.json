@@ -23,6 +23,7 @@
       }
     },
     "overrides": {
+      "playwright-core": ">=1.60.0",
       "@typescript-eslint/utils": "^8.44.1",
       "braces": ">=3.0.3",
       "cross-spawn": ">=7.0.5",
