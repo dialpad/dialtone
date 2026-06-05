@@ -1,3 +1,4 @@
+// no-op: trigger a11y CI
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { globSync } from 'glob';
