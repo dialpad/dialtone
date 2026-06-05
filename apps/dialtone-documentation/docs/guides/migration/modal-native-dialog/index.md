@@ -64,8 +64,8 @@ If you targeted `.d-modal[aria-hidden='false']` in your CSS, those selectors sti
 
 ### Focus management
 
-- **Focus trapping** is now handled natively by the `<dialog>` element — the custom `trapFocus` and `focusin` handlers have been removed.
-- **Escape key** closing is handled natively — the custom `keydown` Escape handler has been removed.
+- **Focus trapping** — while the modal is open, keyboard focus stays inside the dialog: Tab from the last focusable element wraps to the first, and Shift+Tab from the first wraps to the last. This is enforced by the native `<dialog>` (opened with `showModal()`) together with the `v-dt-focustrap` directive.
+- **Escape key** — pressing Escape closes the modal: the native `<dialog>` emits a `cancel` event, which `DtModal` handles (`@cancel.prevent`) to close it.
 - **Initial focus** still works via the `initialFocusElement` prop (`'first'`, `'#id'`, or an `HTMLElement`).
 
 ### Transition events
