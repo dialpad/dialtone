@@ -12,6 +12,7 @@
     placement="bottom-start"
     content-width="anchor"
     content-class="d-hmx-400"
+    @opened="onOpened"
   >
     <template #anchor="{ attrs }">
       <dt-button
@@ -53,49 +54,85 @@
       </dt-button>
     </template>
     <template #list="{ close }">
-      <dt-list-item
-        v-for="option in options"
-        :key="option.value"
-        role="menuitem"
-        navigation-type="arrow-keys"
-        :class="{ 'd-o50 d-pe-none': option.disabled, 'd-bgc-moderate-opaque': option.value === value }"
-        :aria-disabled="option.disabled || undefined"
-        @click="!option.disabled && (onInput(option.value), close())"
+      <dt-box
+        v-if="showSearch"
+        surface="overlay"
+        padding-block-end="50"
+        border-width-block-end="100"
+        border-color="subtle"
+        class="d-ps-sticky d-ibs-0 d-zi-base1"
       >
-        <dt-stack
-          direction="row"
-          gap="100"
-          align="baseline"
-          class="d-w100p"
+        <dt-input
+          ref="searchInput"
+          v-model="query"
+          type="search"
+          :size="100"
+          placeholder="Search"
+          @keydown="onSearchKeydown($event, close)"
         >
-          <span
-            v-if="option.resolved && isColor(option.resolved)"
-            class="d-ba d-bc-subtle d-bar-circle d-as-center"
-            :style="swatchStyle(option.resolved)"
-          />
-          <span>{{ option.label }}</span>
-          <dt-text
-            v-if="option.resolved && !isColor(option.resolved)"
-            kind="body"
-            :size="100"
-            tone="muted"
-            class="d-mis-auto"
+          <template #startIcon="{ iconSize }">
+            <dt-icon-search :size="iconSize" />
+          </template>
+        </dt-input>
+      </dt-box>
+      <div ref="listWrapper">
+        <dt-list-item
+          v-for="option in filteredOptions"
+          :key="option.value"
+          role="menuitem"
+          navigation-type="arrow-keys"
+          :class="{ 'd-o50 d-pe-none': option.disabled, 'd-bgc-moderate-opaque': option.value === value }"
+          :aria-disabled="option.disabled || undefined"
+          @click="!option.disabled && (onInput(option.value), close())"
+        >
+          <dt-stack
+            direction="row"
+            gap="100"
+            align="baseline"
+            class="d-w100p"
           >
-            {{ option.resolved }}
-          </dt-text>
-        </dt-stack>
-      </dt-list-item>
+            <span
+              v-if="option.resolved && isColor(option.resolved)"
+              class="d-ba d-bc-subtle d-bar-circle d-as-center"
+              :style="swatchStyle(option.resolved)"
+            />
+            <span>{{ option.label }}</span>
+            <dt-text
+              v-if="option.resolved && !isColor(option.resolved)"
+              kind="body"
+              :size="100"
+              tone="muted"
+              class="d-mis-auto"
+            >
+              {{ option.resolved }}
+            </dt-text>
+          </dt-stack>
+        </dt-list-item>
+      </div>
+      <dt-text
+        v-if="!filteredOptions.length"
+        kind="body"
+        :size="100"
+        tone="muted"
+        as="div"
+        class="d-px-200 d-py-150 d-ta-center"
+      >
+        No matches
+      </dt-text>
     </template>
   </dt-dropdown>
 </template>
 
 <script setup>
-import { DtButton, DtStack, DtText } from '@dialpad/dialtone-vue';
-import { DtIconChevronsUpDown } from '@dialpad/dialtone-icons/vue';
+import { DtBox, DtButton, DtInput, DtStack, DtText } from '@dialpad/dialtone-vue';
+import { DtIconChevronsUpDown, DtIconSearch } from '@dialpad/dialtone-icons/vue';
 
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { resolveTokenValue } from '@/src/lib/tokens';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
+
+// Show the in-popover search only for lists long enough to be worth filtering.
+const SEARCH_THRESHOLD = 5;
 
 const props = defineProps({
   value: {
@@ -168,6 +205,66 @@ const selectedOption = computed(() => {
 });
 
 const selectedLabel = computed(() => selectedOption.value?.label ?? '');
+
+const query = ref('');
+const searchInput = ref(null);
+const listWrapper = ref(null);
+
+const showSearch = computed(() => options.value.length > SEARCH_THRESHOLD);
+
+const filteredOptions = computed(() => {
+  const q = query.value.trim().toLowerCase();
+  if (!q) return options.value;
+  return options.value.filter(o => `${o.label} ${o.resolved ?? ''}`.toLowerCase().includes(q));
+});
+
+/**
+ * Resets and focuses the search field each time the dropdown opens. Runs on
+ * `opened` (after the popover has shown and applied its own initial focus to the
+ * dialog), and defers a frame so the search field reliably wins focus.
+ *
+ * @param {boolean} open - Whether the dropdown just opened.
+ */
+function onOpened (open) {
+  if (!open) return;
+  query.value = '';
+  requestAnimationFrame(() => {
+    searchInput.value?.$el?.querySelector('input')?.focus();
+  });
+}
+
+/**
+ * Selects the first enabled match — lets the user filter and press Enter.
+ *
+ * @param {Function} close - Closes the dropdown.
+ */
+function selectFirst (close) {
+  const first = filteredOptions.value.find(o => !o.disabled);
+  if (!first) return;
+  onInput(first.value);
+  close();
+}
+
+/**
+ * Handles keys in the search field. Stops propagation so the dropdown's own
+ * key handling (type-ahead / arrow navigation) doesn't intercept typing, while
+ * keeping Enter (select first match) and Escape (close) working.
+ *
+ * @param {KeyboardEvent} e - The keydown event.
+ * @param {Function} close - Closes the dropdown.
+ */
+function onSearchKeydown (e, close) {
+  e.stopPropagation();
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    selectFirst(close);
+  } else if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    listWrapper.value?.querySelector('[role="menuitem"]:not([aria-disabled="true"])')?.focus();
+  } else if (e.key === 'Escape') {
+    close();
+  }
+}
 </script>
 
 <script>
