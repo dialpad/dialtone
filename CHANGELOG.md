@@ -1,3 +1,12 @@
+# [9.187.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.186.0...dialtone/v9.187.0) (2026-06-08)
+
+
+### Features
+
+* **Icons:** DLT-3460 DLT-3461 hand icon update ([#1315](https://github.com/dialpad/dialtone/issues/1315)) ([83ad138](https://github.com/dialpad/dialtone/commit/83ad138665f38e06411fce9ee27585fceb677a2b))
+* **Icons:** DP-192459 add circle and circle-dashed icons ([#1305](https://github.com/dialpad/dialtone/issues/1305)) ([8c41212](https://github.com/dialpad/dialtone/commit/8c41212d49dc1bc7fba2cfc51ffc01ab3896b619))
+* **Rich Text Editor:** DP-190415 implement phone number linking ([#1297](https://github.com/dialpad/dialtone/issues/1297)) ([20a4fcc](https://github.com/dialpad/dialtone/commit/20a4fcc3644ecbe5f2036a4f04953be95c5022b2))
+
 # [9.186.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.185.0...dialtone/v9.186.0) (2026-06-02)
 
 
