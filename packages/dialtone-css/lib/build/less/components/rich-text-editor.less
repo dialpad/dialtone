@@ -24,6 +24,14 @@
       display: inline;
     }
 
+    // The :where(a) rule above has effective specificity (0,2,0) due to the scoping selectors,
+    // which overrides .d-link's (0,1,0) and flattens mention/channel node view links from
+    // inline-flex to inline. Restoring inline-flex at higher specificity keeps the flex layout
+    // intact so DtStack inside these chips doesn't create a stray block formatting context.
+    [data-node-view-wrapper] .d-link {
+      display: inline-flex;
+    }
+
     p.is-editor-empty:first-child::before {
       float: left;
       height: 0;
