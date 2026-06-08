@@ -1,3 +1,10 @@
+# [3.222.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.221.1...dialtone-vue/v3.222.0) (2026-06-08)
+
+
+### Features
+
+* **Rich Text Editor:** DP-190415 implement phone number linking ([#1297](https://github.com/dialpad/dialtone/issues/1297)) ([20a4fcc](https://github.com/dialpad/dialtone/commit/20a4fcc3644ecbe5f2036a4f04953be95c5022b2))
+
 ## [3.221.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.221.0...dialtone-vue/v3.221.1) (2026-05-26)
 
 
