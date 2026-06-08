@@ -1,3 +1,17 @@
+# [4.53.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.52.0...dialtone-icons/v4.53.0) (2026-06-02)
+
+
+### Features
+
+* **Dialtone Icons:** NO-JIRA add /vue export to dialtone-icon ([#1304](https://github.com/dialpad/dialtone/issues/1304)) ([f7ca6d4](https://github.com/dialpad/dialtone/commit/f7ca6d438cc7c644d7e95bc963bd303ea2259b4d))
+
+# [4.52.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.51.1...dialtone-icons/v4.52.0) (2026-05-12)
+
+
+### Features
+
+* **Dialtone Icons:** NO-JIRA add agent-assist-color brand-full-color icon ([#1265](https://github.com/dialpad/dialtone/issues/1265)) ([d159d78](https://github.com/dialpad/dialtone/commit/d159d7842e5f5f8b21b6ed314cb9b7f1e4c206b7))
+
 ## [4.51.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.51.0...dialtone-icons/v4.51.1) (2026-05-01)
 
 

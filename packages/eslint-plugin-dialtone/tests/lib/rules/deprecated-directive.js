@@ -15,10 +15,11 @@ const rule = require("../../../lib/rules/deprecated-directive"), RuleTester = re
 // Tests
 //------------------------------------------------------------------------------
 const ruleTester = new RuleTester({
-  // eslint-disable-next-line n/no-extraneous-require
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 'latest' }
-})
+  languageOptions: {
+    parser: require('vue-eslint-parser'),
+    parserOptions: { ecmaVersion: 'latest' },
+  },
+});
 ruleTester.run("deprecated-directive", rule, {
   valid: [
     {

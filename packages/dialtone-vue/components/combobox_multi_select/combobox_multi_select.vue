@@ -10,6 +10,7 @@
     :has-suggestion-list="hasSuggestionList"
     content-width="anchor"
     :append-to="appendTo"
+    :dialog-class="dialogClass"
     :transition="transition"
     v-bind="extractNonListeners($attrs)"
     @select="onComboboxSelect"
@@ -373,6 +374,14 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Additional class for the popover dialog element.
+     */
+    dialogClass: {
+      type: [String, Object, Array],
+      default: '',
+    },
   },
 
   emits: [
@@ -409,20 +418,39 @@ export default {
     'max-selected',
 
     /**
-     * Native keyup event
-     *
-     * @event keyup
-     * @type {KeyboardEvent}
-      */
-    'keyup',
-
-    /**
-     * Native keydown event
+     * Native keydown event fired when a key is pressed in the text input.
+     * For the common Escape and Enter cases, listen to `escape` / `enter` instead.
      *
      * @event keydown
      * @type {KeyboardEvent}
-      */
+     */
     'keydown',
+
+    /**
+     * Native keydown event fired when a key is pressed while a chip is focused.
+     *
+     * @event chip-keydown
+     * @type {KeyboardEvent}
+     */
+    'chip-keydown',
+
+    /**
+     * Fired when Escape is pressed in the text input.
+     * Not fired when a chip is focused.
+     *
+     * @event escape
+     * @type {KeyboardEvent}
+     */
+    'escape',
+
+    /**
+     * Fired when Enter is pressed in the text input.
+     * Not fired when a chip is focused.
+     *
+     * @event enter
+     * @type {KeyboardEvent}
+     */
+    'enter',
 
     /**
      * Event fired when combobox item is highlighted
@@ -455,8 +483,9 @@ export default {
     chipListeners () {
       return {
         keydown: event => {
+          if (this.disabled) return;
           this.onChipKeyDown(event);
-          this.$emit('keydown', event);
+          this.$emit('chip-keydown', event);
         },
       };
     },
@@ -472,11 +501,17 @@ export default {
         },
 
         onKeydown: event => {
+          if (this.disabled) return;
           this.onInputKeyDown(event);
-        },
-
-        onKeyup: event => {
-          this.$emit('keyup', event);
+          this.$emit('keydown', event);
+          // Use event.key (not event.code) so NumpadEnter normalizes to 'Enter'
+          // and consumers don't have to special-case the numpad.
+          const key = event.key?.toLowerCase();
+          if (key === 'escape') {
+            this.$emit('escape', event);
+          } else if (key === 'enter') {
+            this.$emit('enter', event);
+          }
         },
 
         onClick: () => {
@@ -525,7 +560,7 @@ export default {
         await this.$nextTick();
         const input = this.getInput();
         this.revertInputPadding(input);
-        this.initialInputHeight = input.getBoundingClientRect().height;
+        this.setInitialInputHeight();
         this.setInputPadding();
         this.setChipsTopPosition();
       },
@@ -644,7 +679,7 @@ export default {
     },
 
     onInputKeyDown (event) {
-      const key = event.code?.toLowerCase();
+      const key = event.key?.toLowerCase();
       // If the cursor is at the start of the text,
       // press 'backspace' or 'left' focuses the last chip
       if (this.selectedItems.length > 0 && event.target.selectionStart === 0) {
@@ -696,7 +731,6 @@ export default {
     setInputPadding () {
       const lastChip = this.getLastChip();
       const input = this.getInput();
-      const chipsWrapper = this.$refs.chipsWrapper;
       if (!input) return;
       this.revertInputPadding(input);
       this.popoverOffset = [0, 4];
@@ -709,7 +743,8 @@ export default {
       // The input cursor should be the same "top" as that chip and next besides it
       const left = lastChip.offsetLeft + this.getFullWidth(lastChip);
       const spaceLeft = input.getBoundingClientRect().width - left;
-      // input.style.paddingLeft = left + 'px';
+      const firstChip = this.getFirstChip();
+      const isWrapped = firstChip && lastChip.offsetTop > firstChip.offsetTop;
 
       if (spaceLeft > this.reservedRightSpace) {
         input.style.paddingLeft = left + 'px';
@@ -717,16 +752,20 @@ export default {
         input.style.paddingLeft = '4px';
       }
 
-      // Get the chip wrapper height minus the 4px padding
-      const chipsWrapperHeight = chipsWrapper.getBoundingClientRect().height - 4;
-      const lastChipHeight = lastChip.getBoundingClientRect().height - 4;
+      const paddingTop = this.getInputPaddingTop(lastChip, spaceLeft > this.reservedRightSpace, isWrapped);
+      if (paddingTop != null) input.style.paddingTop = `${paddingTop}px`;
+    },
 
-      // Get lastChip offsetTop plus 2px of the input padding.
-      const top = spaceLeft > this.reservedRightSpace
-        ? lastChip.offsetTop + 2
-        : (chipsWrapperHeight + lastChipHeight - 9);
-
-      input.style.paddingTop = `${top}px`;
+    getInputPaddingTop (lastChip, hasSpace, isWrapped) {
+      // Chip fits beside the cursor on its row; CSS handles vertical centering.
+      if (hasSpace && !isWrapped) return null;
+      // Chip wrapped onto a new row with space remaining; align cursor to it.
+      if (hasSpace) return lastChip.offsetTop + 2;
+      // No space on the chip's row — predict next-row offsetTop so paddingTop
+      // stays stable when a chip lands there.
+      const chipMarginTop = parseFloat(getComputedStyle(lastChip).marginTop) || 0;
+      const lastChipHeight = lastChip.getBoundingClientRect().height;
+      return lastChip.offsetTop + lastChipHeight + chipMarginTop + 2;
     },
 
     revertInputPadding (input) {
@@ -766,7 +805,14 @@ export default {
     setInitialInputHeight () {
       const input = this.getInput();
       if (!input) return;
+      input.style.minHeight = '';
+      input.style.height = '';
       this.initialInputHeight = input.getBoundingClientRect().height;
+      // xs renders correctly without a min-height floor; other sizes need it to grow when chips wrap.
+      if (this.size !== 'xs') {
+        input.style.minHeight = `${this.initialInputHeight}px`;
+        input.style.height = 'auto';
+      }
     },
 
     async handleInputFocusIn () {

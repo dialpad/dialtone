@@ -1,3 +1,39 @@
+## [3.221.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.221.0...dialtone-vue/v3.221.1) (2026-05-26)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** DLT-3409 stop input from shrinking when chips are added ([#1257](https://github.com/dialpad/dialtone/issues/1257)) ([7f54cff](https://github.com/dialpad/dialtone/commit/7f54cffe7937c7200ccfdb79cf4ee621c0927315))
+* **Modal:** DLT-3442 fix focus snapping back to first button on click ([#1276](https://github.com/dialpad/dialtone/issues/1276)) ([37ec398](https://github.com/dialpad/dialtone/commit/37ec398fb671ee1d22dccea78158d405d4558047))
+
+# [3.221.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.220.0...dialtone-vue/v3.221.0) (2026-05-19)
+
+
+### Features
+
+* **Combobox Multi Select:** DLT-3366 forward input-level escape, enter, keydown events ([#1253](https://github.com/dialpad/dialtone/issues/1253)) ([a635301](https://github.com/dialpad/dialtone/commit/a635301168a096fe9b741d5f5a74925874237024))
+
+# [3.220.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.219.4...dialtone-vue/v3.220.0) (2026-05-12)
+
+
+### Features
+
+* **Combobox With Popover, Combobox Multi Select:** DLT-3395 forward dialogClass to popover dialog ([#1254](https://github.com/dialpad/dialtone/issues/1254)) ([0059451](https://github.com/dialpad/dialtone/commit/0059451c0ce901cd47eb1498d8dfc28e5282a73c))
+
+## [3.219.4](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.219.3...dialtone-vue/v3.219.4) (2026-05-05)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA fix bubble menu not displaying ([d2c097f](https://github.com/dialpad/dialtone/commit/d2c097f94087dfad967fe7022fad784999a1969b))
+
+## [3.219.3](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.219.2...dialtone-vue/v3.219.3) (2026-05-05)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA fix bubble menu error ([df37b06](https://github.com/dialpad/dialtone/commit/df37b06af1339026d0c6b7d1da55b13169bdf6bd))
+
 ## [3.219.2](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.219.1...dialtone-vue/v3.219.2) (2026-05-01)
 
 

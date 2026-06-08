@@ -377,9 +377,6 @@ export default {
           // Handle backdrop clicks for closing modal
           if (this.closeOnClick && event.target === event.currentTarget) {
             this.close();
-          } else if (this.show && event.target !== event.currentTarget) {
-            // Ensure focus stays within modal when clicking inside it
-            this.handleModalClick(event);
           }
 
           this.$emit('click', event);
@@ -439,15 +436,31 @@ export default {
           this.previousActiveElement = document.activeElement;
           const modalEl = this.$refs.modalRoot?.$el || this.$el;
           disableRootScrolling(returnFirstEl(modalEl).getRootNode().host);
+          document.addEventListener('keydown', this._trapFocusGlobalBound);
         } else {
           const modalEl = this.$refs.modalRoot?.$el || this.$el;
           enableRootScrolling(returnFirstEl(modalEl).getRootNode().host);
           // Modal is being hidden, so return focus to the previously active element before clearing the reference.
           this.previousActiveElement?.focus();
           this.previousActiveElement = null;
+          document.removeEventListener('keydown', this._trapFocusGlobalBound);
         }
       },
     },
+  },
+
+  created () {
+    this._trapFocusGlobalBound = (e) => this._trapFocusGlobal(e);
+  },
+
+  mounted () {
+    if (this.show) {
+      document.addEventListener('keydown', this._trapFocusGlobalBound);
+    }
+  },
+
+  beforeUnmount () {
+    document.removeEventListener('keydown', this._trapFocusGlobalBound);
   },
 
   methods: {
@@ -473,18 +486,12 @@ export default {
       }
     },
 
-    handleModalClick (event) {
-      // Ensure focus stays within modal when clicking inside it
-      const clickedElement = event.target;
+    _trapFocusGlobal (e) {
+      if (!this.show || e.code !== EVENT_KEYNAMES.tab) return;
       const modalEl = this.$refs.modalRoot?.$el || this.$el;
-      const focusableElements = this._getFocusableElements(modalEl);
-
-      // If the clicked element is not focusable, ensure focus stays in modal
-      if (focusableElements.length && !focusableElements.includes(clickedElement)) {
-        // Check if current active element is still within the modal
-        if (!focusableElements.includes(document.activeElement)) {
-          this.focusFirstElement(modalEl);
-        }
+      if (modalEl && !modalEl.contains(document.activeElement)) {
+        e.preventDefault();
+        this.focusFirstElement(modalEl);
       }
     },
   },

@@ -26,6 +26,10 @@ export const argsData = {
   onMaxSelected: action('maxSelected'),
   onComboboxHighlight: action('comboboxHighlight'),
   onFocus: action('focus'),
+  onKeydown: action('keydown'),
+  onChipKeydown: action('chip-keydown'),
+  onEscape: action('escape'),
+  onEnter: action('enter'),
 };
 
 export const argTypesData = {
@@ -97,6 +101,21 @@ export const argTypesData = {
       disable: true,
     },
   },
+  onEnter: {
+    table: {
+      disable: true,
+    },
+  },
+  onKeydown: {
+    table: {
+      disable: true,
+    },
+  },
+  onChipKeydown: {
+    table: {
+      disable: true,
+    },
+  },
   onHighlight: {
     table: {
       disable: true,
@@ -134,6 +153,12 @@ export const argTypesData = {
   onComboboxHighlight: {
     table: {
       disable: true,
+    },
+  },
+  dialogClass: {
+    description: 'Additional class for the popover dialog element.',
+    control: {
+      type: 'text',
     },
   },
 };

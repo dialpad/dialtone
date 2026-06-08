@@ -60,7 +60,7 @@ Button labels should be clear and predictable so users have confidence in their 
 
 ## Variants
 
-Dialtone provides five options for `kind`, with three levels of `importance`.
+Dialtone provides five options for `kind`, with three levels of `importance`. Use `kind="primary"` for the main call to action, `kind="danger"` for destructive actions, `kind="muted"` for secondary actions, `kind="clear"` for low-emphasis actions, and `kind="link"` for navigation-style buttons. The DtButton `kind` prop controls the visual hierarchy and semantic meaning of the action.
 
 <ButtonVariantsTable></ButtonVariantsTable>
 
@@ -1071,7 +1071,7 @@ showHtmlWarning />
 
 ## Loading
 
-Loading buttons are useful for communicating a delay between the button interaction and its action taking place. Every button style can accept the loading button class, though we only provide a few possible examples.
+Loading buttons are useful for communicating a delay between the button interaction and its action taking place. Every button style can accept the loading button class, though we only provide a few possible examples. When `loading` is true, DtButton replaces the label with a spinner animation, indicating an async operation (such as form submit) is in progress. The spinner is centered within the button and the button remains disabled until loading is false.
 
 ### Replace button label
 

@@ -5,11 +5,12 @@ import pkg from '../package.json' with { type: 'json' };
 import clientRules from '../client-rules.json' with { type: 'json' };
 
 import {
-  utilityClasses, tokens, components, icons,
+  utilityClasses, tokens, components, icons, documentation,
   searchUtilityClasses, formatResults, buildCompoundPropertiesSet,
   searchTokens, formatTokenResults,
   searchComponents, formatComponentResults,
   searchIcons, formatIconResults,
+  searchDocumentation, formatDocumentationResults,
 } from '@dialpad/dialtone-query-core';
 
 import type { TokensData, IconsData } from '@dialpad/dialtone-query-core';
@@ -124,6 +125,20 @@ async function main() {
     };
   });
 
+  server.resource("documentation", "dialtone://documentation", {
+    name: "Dialtone Documentation",
+    description: "Public docs site corpus — sections of usage prose, recipes, accessibility, migrations, and design principles",
+    mimeType: "application/json",
+  }, async () => {
+    return {
+      contents: [{
+        uri: "dialtone://documentation",
+        mimeType: "application/json",
+        text: JSON.stringify(documentation)
+      }]
+    };
+  });
+
   server.resource("client-rules", "dialtone://client-rules", {
     name: "Dialtone Client Rules",
     description: "Guidelines and rules for AI clients when working with Dialtone",
@@ -225,6 +240,27 @@ async function main() {
             },
             required: ["query"]
           }
+        },
+        {
+          name: "search_documentation",
+          description: "Search Dialtone documentation for usage patterns, accessibility rules, migration guides, design principles, and how-to guidance. Use when query mentions behavior (loading, disabled, deprecated, migration, validation, dark mode), patterns (do/don't, composition, recipe), or asks why/how/difference ('modal close behavior', 'tooltip on disabled', 'DtOldPopover replacement'). NOT for finding components / icons / tokens / utility classes by name — use search_components / search_icons / search_tokens / search_utility_classes for those. Returns documentation sections with content excerpts.",
+          inputSchema: {
+            type: "object",
+            properties: {
+              query: {
+                type: "string",
+                description: "2–5 keyword phrase — topic, behavior, or concept (e.g., 'button loading state', 'modal outside click', 'tooltip disabled', 'migrate DtOldPopover')"
+              },
+              limit: {
+                type: "number",
+                description: "Maximum number of results to return (1-30, default 10)",
+                default: 10,
+                minimum: 1,
+                maximum: 30
+              }
+            },
+            required: ["query"]
+          }
         }
       ]
     };
@@ -264,6 +300,9 @@ async function main() {
       } else if (toolName === "search_icons") {
         searchResult = searchIcons(query, icons as IconsData);
         formatterFunction = formatIconResults;
+      } else if (toolName === "search_documentation") {
+        searchResult = searchDocumentation(query, documentation);
+        formatterFunction = formatDocumentationResults;
       } else {
         throw new Error(`Unknown tool: ${toolName}`);
       }

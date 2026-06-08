@@ -20,14 +20,16 @@ import {
   tokens as bundledTokens,
   components as bundledComponents,
   icons as bundledIcons,
+  documentation as bundledDocumentation,
 } from '@dialpad/dialtone-query-core';
-import type { UtilityClassesData, TokensData, Component, IconsData } from '@dialpad/dialtone-query-core';
+import type { UtilityClassesData, TokensData, Component, IconsData, DocumentationRecord } from '@dialpad/dialtone-query-core';
 
 interface ResolvedData {
   utilityClasses: UtilityClassesData;
   tokens: TokensData;
   components: Component[];
   icons: IconsData;
+  documentation: DocumentationRecord[];
   source: 'local' | 'bundled';
   version?: string;
 }
@@ -37,6 +39,8 @@ const BUNDLED: ResolvedData = {
   tokens: bundledTokens,
   components: bundledComponents,
   icons: bundledIcons,
+  // documentation is bundled-only in v1 — no local-package resolution path
+  documentation: bundledDocumentation,
   source: 'bundled',
 };
 
@@ -72,6 +76,7 @@ function tryIndividualPackages(localRequire: NodeRequire): ResolvedData | null {
       tokens: tokens as TokensData,
       components: components as Component[],
       icons: icons as IconsData,
+      documentation: bundledDocumentation,
       source: 'local',
       version: tryResolveVersion(localRequire, '@dialpad/dialtone-css/package.json'),
     };
@@ -104,6 +109,7 @@ function tryUmbrellaPackage(localRequire: NodeRequire): ResolvedData | null {
       tokens: tokens as TokensData,
       components: components as Component[],
       icons: (icons as IconsData) || bundledIcons,
+      documentation: bundledDocumentation,
       source: 'local',
       version,
     };

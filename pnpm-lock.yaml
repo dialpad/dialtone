@@ -697,6 +697,9 @@ importers:
       '@dialpad/dialtone-css':
         specifier: workspace:*
         version: link:../dialtone-css
+      '@dialpad/dialtone-docs':
+        specifier: workspace:*
+        version: link:../dialtone-docs
       '@dialpad/dialtone-icons':
         specifier: workspace:*
         version: link:../dialtone-icons
@@ -706,9 +709,15 @@ importers:
       '@types/node':
         specifier: 24.3.1
         version: 24.3.1
+      '@vitest/coverage-v8':
+        specifier: ^4.1.0
+        version: 4.1.2(vitest@4.1.2(@types/node@24.3.1)(jsdom@24.1.3)(vite@8.0.3(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@24.3.1)(esbuild@0.27.7)(jiti@1.21.7)(less@4.6.4)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3)))
       typescript:
         specifier: ^5.2
         version: 5.9.3
+      vitest:
+        specifier: ^4.1.0
+        version: 4.1.2(@types/node@24.3.1)(jsdom@24.1.3)(vite@8.0.3(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@24.3.1)(esbuild@0.27.7)(jiti@1.21.7)(less@4.6.4)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
 
   packages/dialtone-tokens:
     dependencies:
@@ -918,6 +927,9 @@ importers:
 
   packages/eslint-plugin-dialtone:
     dependencies:
+      '@dialpad/dialtone-vue':
+        specifier: ^3
+        version: 3.219.4(@dialpad/dialtone-css@8.79.2(chalk@5.6.2)(globby@14.1.0)(inquirer@9.3.8(@types/node@24.3.1))(yargs@17.7.2))(@floating-ui/dom@1.7.6)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(vue@3.5.32(typescript@5.9.3))
       eslint:
         specifier: '>=7'
         version: 9.39.4(jiti@1.21.7)
@@ -928,6 +940,12 @@ importers:
       mocha:
         specifier: ^10.0.0
         version: 10.8.2
+      proxyquire:
+        specifier: ^2.1.3
+        version: 2.1.3
+      vue-eslint-parser:
+        specifier: '>=9'
+        version: 10.4.0(eslint@9.39.4(jiti@1.21.7))
 
   packages/language-server/server:
     dependencies:
@@ -1341,14 +1359,32 @@ packages:
     resolution: {integrity: sha512-TLsyNwTUmGK6TtvdoC4SE/13Ae501pdzhSIyOV9V3HOVf8YrVTOgLUJ/l97kZSxcTOeRbFeRjbWfH7W3ixn36g==, tarball: https://npm.pkg.github.com/download/@dialpad/conventional-changelog-angular/1.1.1/1c54240f941b2d02d73e4ca2d4e53420d128bbf6}
     engines: {node: '>=10'}
 
+  '@dialpad/dialtone-css@8.79.2':
+    resolution: {integrity: sha512-y3JGJkpc2rn+QE/HdsejYXTfwXnL2/RU0KyD/ANE8MfMrbDfWX18OKApaldz3SRx9GwEHsH/TK5pLr8AAQtvoA==, tarball: https://npm.pkg.github.com/download/@dialpad/dialtone-css/8.79.2/257ac0687bbd7018095fe3a59e400e648d9ff4ea}
+    hasBin: true
+    peerDependencies:
+      chalk: ^5.2.0
+      globby: ^13.1.4
+      inquirer: ^9.1.5
+      yargs: ^17.7.2
+
+  '@dialpad/dialtone-emojis@1.2.5':
+    resolution: {integrity: sha512-qWR9oifO0L7nqi6C5uQjb3eAneS9z4P3HKl7sz5K6zL2hxtCUos38VPIYxVEiCiKYfu4FmNH92BbJhlgpS6mHA==, tarball: https://npm.pkg.github.com/download/@dialpad/dialtone-emojis/1.2.5/4704dd3524245aa2267d1a1a7b00c1594bcc951e}
+
+  '@dialpad/dialtone-icons@4.51.1':
+    resolution: {integrity: sha512-2LlrVsvsyVJrKOOjkni1PeiUavDFW9yP1xXDMcDNGyMjdwFrYwKGVJwQP8niSMwHgSEqR0gy6K22MM8llG0clQ==, tarball: https://npm.pkg.github.com/download/@dialpad/dialtone-icons/4.51.1/978bccc9e77eb62ff47a8ee1c8bd25a1274ee715}
+
+  '@dialpad/dialtone-vue@3.219.4':
+    resolution: {integrity: sha512-0g+/9GDEr96zHjc4ISRzL+cuQg891uvCytAenZm4qtJvtF39naW5uRK6KiY7SAzPWE0KImi7d8EImS6sq9GEtQ==, tarball: https://npm.pkg.github.com/download/@dialpad/dialtone-vue/3.219.4/167cbc430772921a4044663848f8b00a700305d9}
+    engines: {node: '>= 14.17'}
+    peerDependencies:
+      '@dialpad/dialtone-css': ^8.79.2
+      vue: '>=3.2'
+
   '@dialpad/i18n-goblin-core@1.2.0':
     resolution: {integrity: sha512-DQJ6kPkz2JfQMljPxxCCWoJneKHlUrxrxwwEZ3bkC1gc1ze+MDWo4d8pylkqypBYSDxw2l3Pa61Loy1cEdsqMg==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-goblin-core/1.2.0/e78ef24567fc081840905a6594f241d5c8523688}
     peerDependencies:
-      '@vue/composition-api': '*'
       vue: ^3.0.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
 
   '@dialpad/i18n-goblin-services@1.3.0':
     resolution: {integrity: sha512-KTJGeRxw9DHfQP/vxjOZW4kzgBbZeTRYtl0/FdvFdVoBFZ8SDjf+FwOc57o/q/K8zvGVVjb8xxpyXBBJACRIeg==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-goblin-services/1.3.0/069db4d56165365b9c0f4e0daca9a7b61ff7c534}
@@ -8293,6 +8329,10 @@ packages:
   filelist@1.0.6:
     resolution: {integrity: sha512-5giy2PkLYY1cP39p17Ech+2xlpTRL9HLspOfEgm0L6CwBXBTgsK5ou0JtzYuepxkaQ/tvhCFIJ5uXo0OrM2DxA==}
 
+  fill-keys@1.0.2:
+    resolution: {integrity: sha512-tcgI872xXjwFF4xgQmLxi76GnwJG3g/3isB1l4/G5Z4zrbddGpBjqZCO9oEAcB5wX0Hj/5iQB3toxfO7in1hHA==}
+    engines: {node: '>=0.10.0'}
+
   fill-range@7.1.1:
     resolution: {integrity: sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==}
     engines: {node: '>=8'}
@@ -9569,6 +9609,9 @@ packages:
   is-obj@2.0.0:
     resolution: {integrity: sha512-drqDG3cbczxxEJRoOXcOjtdp1J/lyp1mNn0xaznRs8+muBhgQcrnbspox5X5fOw0HnMnbfDzvnEMEtqDEJEo8w==}
     engines: {node: '>=8'}
+
+  is-object@1.0.2:
+    resolution: {integrity: sha512-2rRIahhZr2UWb45fIOuvZGpFtz0TyOZLf32KxBbSoUCeZR495zCKlWUKKUByk3geS2eAs7ZAABt0Y/Rx0GiQGA==}
 
   is-path-cwd@2.2.0:
     resolution: {integrity: sha512-w942bTcih8fdJPJmQHFzkS76NEP8Kzzvmw92cXsazb8intwLqPibPPdXf4ANdKV3rYMuuQYGIWtvz9JilB3NFQ==}
@@ -11291,6 +11334,9 @@ packages:
 
   module-alias@2.3.4:
     resolution: {integrity: sha512-bOclZt8hkpuGgSSoG07PKmvzTizROilUTvLNyrMqvlC9snhs7y7GzjNWAVbISIOlhCP1T14rH1PDAV9iNyBq/w==}
+
+  module-not-found-error@1.0.1:
+    resolution: {integrity: sha512-pEk4ECWQXV6z2zjhRZUongnLJNUeGQJ3w6OQ5ctGwD+i5o93qjRQUk2Rt6VdNeu3sEP0AB4LcfvdebpxBRVr4g==}
 
   mrmime@2.0.1:
     resolution: {integrity: sha512-Y3wQdFg2Va6etvQ5I82yUhGdsKrcYox6p7FfL1LbK2J4V01F9TGlepTIhnK24t7koZibmg82KGglhA1XK5IsLQ==}
@@ -13072,6 +13118,9 @@ packages:
   proxy-from-env@2.1.0:
     resolution: {integrity: sha512-cJ+oHTW1VAEa8cJslgmUZrc+sjRKgAKl3Zyse6+PV38hZe/V6Z14TbCuXcan9F9ghlz4QrFr2c92TNF82UkYHA==}
     engines: {node: '>=10'}
+
+  proxyquire@2.1.3:
+    resolution: {integrity: sha512-BQWfCqYM+QINd+yawJz23tbBM40VIGXOdDw3X344KcclI/gtBbdWF6SlQ4nK/bYhF9d27KYug9WzljHC6B9Ysg==}
 
   prr@1.0.1:
     resolution: {integrity: sha512-yPw4Sng1gWghHQWj0B3ZggWUm4qVbPwPFcRG8KyxiU7J2OHFSoEHKS+EZ3fv5l1t9CyCiop6l/ZYeWbrgoQejw==}
@@ -15172,6 +15221,7 @@ packages:
 
   uuid@8.3.2:
     resolution: {integrity: sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==}
+    deprecated: uuid@10 and below is no longer supported.  For ESM codebases, update to uuid@latest.  For CommonJS codebases, use uuid@11 (but be aware this version will likely be deprecated in 2028).
     hasBin: true
 
   v8-compile-cache-lib@3.0.1:
@@ -15434,8 +15484,8 @@ packages:
   vue-component-type-helpers@2.2.12:
     resolution: {integrity: sha512-YbGqHZ5/eW4SnkPNR44mKVc6ZKQoRs/Rux1sxC6rdwXb4qpbOSYfDr9DsTHolOTGmIKgM9j141mZbBeg05R1pw==}
 
-  vue-component-type-helpers@3.2.7:
-    resolution: {integrity: sha512-+gPp5YGmhfsj1IN+xUo7y0fb4clfnOiiUA39y07yW1VzCRjzVgwLbtmdWlghh7mXrPsEaYc7rrIir/HT6C8vYQ==}
+  vue-component-type-helpers@3.2.8:
+    resolution: {integrity: sha512-9689efAXhN/EV86plgkL/XFiJSXhGtWPG6JDboZ+QnjlUWUUQrQ0ILKQtw4iQsuwIwu5k6Aw+JnehDe7161e7A==}
 
   vue-demi@0.14.10:
     resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
@@ -16473,11 +16523,77 @@ snapshots:
       compare-func: 2.0.0
       q: 1.5.1
 
+  '@dialpad/dialtone-css@8.79.2(chalk@5.6.2)(globby@14.1.0)(inquirer@9.3.8(@types/node@24.3.1))(yargs@17.7.2)':
+    dependencies:
+      chalk: 5.6.2
+      docopt: 0.6.2
+      globby: 14.1.0
+      inquirer: 9.3.8(@types/node@24.3.1)
+      yargs: 17.7.2
+
+  '@dialpad/dialtone-emojis@1.2.5': {}
+
+  '@dialpad/dialtone-icons@4.51.1': {}
+
+  '@dialpad/dialtone-vue@3.219.4(@dialpad/dialtone-css@8.79.2(chalk@5.6.2)(globby@14.1.0)(inquirer@9.3.8(@types/node@24.3.1))(yargs@17.7.2))(@floating-ui/dom@1.7.6)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)(vue@3.5.32(typescript@5.9.3))':
+    dependencies:
+      '@dialpad/dialtone-css': 8.79.2(chalk@5.6.2)(globby@14.1.0)(inquirer@9.3.8(@types/node@24.3.1))(yargs@17.7.2)
+      '@dialpad/dialtone-emojis': 1.2.5
+      '@dialpad/dialtone-icons': 4.51.1
+      '@dialpad/i18n': 1.25.3(vue@3.5.32(typescript@5.9.3))
+      '@tiptap/core': 3.19.0(@tiptap/pm@3.19.0)
+      '@tiptap/extension-blockquote': 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))
+      '@tiptap/extension-bold': 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))
+      '@tiptap/extension-bubble-menu': 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0)
+      '@tiptap/extension-bullet-list': 3.19.0(@tiptap/extension-list@3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0))
+      '@tiptap/extension-code': 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))
+      '@tiptap/extension-code-block': 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0)
+      '@tiptap/extension-color': 3.19.0(@tiptap/extension-text-style@3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0)))
+      '@tiptap/extension-document': 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))
+      '@tiptap/extension-floating-menu': 3.19.0(@floating-ui/dom@1.7.6)(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0)
+      '@tiptap/extension-font-family': 3.19.0(@tiptap/extension-text-style@3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0)))
+      '@tiptap/extension-hard-break': 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))
+      '@tiptap/extension-history': 3.19.0(@tiptap/extensions@3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0))
+      '@tiptap/extension-image': 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))
+      '@tiptap/extension-italic': 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))
+      '@tiptap/extension-link': 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0)
+      '@tiptap/extension-list': 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0)
+      '@tiptap/extension-list-item': 3.19.0(@tiptap/extension-list@3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0))
+      '@tiptap/extension-mention': 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0)(@tiptap/suggestion@3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0))
+      '@tiptap/extension-ordered-list': 3.19.0(@tiptap/extension-list@3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0))
+      '@tiptap/extension-paragraph': 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))
+      '@tiptap/extension-placeholder': 3.19.0(@tiptap/extensions@3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0))
+      '@tiptap/extension-strike': 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))
+      '@tiptap/extension-text': 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))
+      '@tiptap/extension-text-align': 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))
+      '@tiptap/extension-text-style': 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))
+      '@tiptap/extension-underline': 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))
+      '@tiptap/extensions': 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0)
+      '@tiptap/pm': 3.19.0
+      '@tiptap/static-renderer': 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+      '@tiptap/suggestion': 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0)
+      '@tiptap/vue-3': 3.19.0(patch_hash=hlk524tqy4svh2bbayevihx324)(@floating-ui/dom@1.7.6)(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0)(vue@3.5.32(typescript@5.9.3))
+      date-fns: 4.1.0
+      deep-equal: 2.2.3
+      emoji-toolkit: 9.0.1
+      linkifyjs: 4.3.2
+      overlayscrollbars: 2.10.0
+      regex-combined-emojis: 1.6.0
+      tippy.js: 6.3.7
+      vue: 3.5.32(typescript@5.9.3)
+    transitivePeerDependencies:
+      - '@floating-ui/dom'
+      - '@vue/composition-api'
+      - react
+      - react-dom
+
   '@dialpad/i18n-goblin-core@1.2.0(vue@3.5.32(typescript@5.9.3))':
     dependencies:
       '@fluent/bundle': 0.17.1
       fluent-vue: 3.7.2(@fluent/bundle@0.17.1)(vue@3.5.32(typescript@5.9.3))
       vue: 3.5.32(typescript@5.9.3)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
 
   '@dialpad/i18n-goblin-services@1.3.0':
     dependencies:
@@ -19689,7 +19805,7 @@ snapshots:
       storybook: 10.3.0(@testing-library/dom@10.4.1)(prettier@3.3.2)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
       type-fest: 2.19.0
       vue: 3.5.32(typescript@5.9.3)
-      vue-component-type-helpers: 3.2.7
+      vue-component-type-helpers: 3.2.8
 
   '@swc/core-darwin-arm64@1.15.21':
     optional: true
@@ -20490,6 +20606,20 @@ snapshots:
       std-env: 4.0.0
       tinyrainbow: 3.1.0
       vitest: 4.1.2(@types/node@20.19.39)(jsdom@24.1.3)(vite@8.0.3(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@20.19.39)(esbuild@0.27.7)(jiti@1.21.7)(less@4.6.4)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
+
+  '@vitest/coverage-v8@4.1.2(vitest@4.1.2(@types/node@24.3.1)(jsdom@24.1.3)(vite@8.0.3(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@24.3.1)(esbuild@0.27.7)(jiti@1.21.7)(less@4.6.4)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3)))':
+    dependencies:
+      '@bcoe/v8-coverage': 1.0.2
+      '@vitest/utils': 4.1.2
+      ast-v8-to-istanbul: 1.0.0
+      istanbul-lib-coverage: 3.2.2
+      istanbul-lib-report: 3.0.1
+      istanbul-reports: 3.2.0
+      magicast: 0.5.2
+      obug: 2.1.1
+      std-env: 4.0.0
+      tinyrainbow: 3.1.0
+      vitest: 4.1.2(@types/node@24.3.1)(jsdom@24.1.3)(vite@8.0.3(@emnapi/core@1.9.2)(@emnapi/runtime@1.9.2)(@types/node@24.3.1)(esbuild@0.27.7)(jiti@1.21.7)(less@4.6.4)(terser@5.46.1)(tsx@4.21.0)(yaml@2.8.3))
 
   '@vitest/expect@3.2.4':
     dependencies:
@@ -24640,6 +24770,11 @@ snapshots:
     dependencies:
       minimatch: 5.1.9
 
+  fill-keys@1.0.2:
+    dependencies:
+      is-object: 1.0.2
+      merge-descriptors: 1.0.3
+
   fill-range@7.1.1:
     dependencies:
       to-regex-range: 5.0.1
@@ -26197,6 +26332,8 @@ snapshots:
   is-number@7.0.0: {}
 
   is-obj@2.0.0: {}
+
+  is-object@1.0.2: {}
 
   is-path-cwd@2.2.0: {}
 
@@ -28631,6 +28768,8 @@ snapshots:
 
   module-alias@2.3.4: {}
 
+  module-not-found-error@1.0.1: {}
+
   mrmime@2.0.1: {}
 
   ms@2.0.0: {}
@@ -30437,6 +30576,12 @@ snapshots:
       ipaddr.js: 1.9.1
 
   proxy-from-env@2.1.0: {}
+
+  proxyquire@2.1.3:
+    dependencies:
+      fill-keys: 1.0.2
+      module-not-found-error: 1.0.1
+      resolve: 1.22.11
 
   prr@1.0.1: {}
 
@@ -33341,7 +33486,7 @@ snapshots:
 
   vue-component-type-helpers@2.2.12: {}
 
-  vue-component-type-helpers@3.2.7: {}
+  vue-component-type-helpers@3.2.8: {}
 
   vue-demi@0.14.10(vue@3.5.32(typescript@5.9.3)):
     dependencies:
