@@ -620,7 +620,7 @@ export default {
     /**
      * Event fired when a phone number link is clicked.
      * Payload: { phoneNumber: string } — the raw phone number text as matched.
-     * Only emitted when the `linkPhoneNumbers` prop is set.
+     * Requires the `linkPhoneNumbers` prop to be set (loads the LinkPhoneNumbers extension).
      * @event phone-click
      * @type {Object}
      */
@@ -960,16 +960,6 @@ export default {
   mounted () {
     warnIfUnmounted(returnFirstEl(this.$el), this.$options.name);
     this.processValue(this.modelValue, false);
-    // Force appendTransaction to run after mount — the editor may be pre-populated
-    // via createEditor(content: modelValue), causing setContent to dispatch no
-    // transaction and skipping our autolink's appendTransaction entirely.
-    if (this.customLink) {
-      this.$nextTick(() => {
-        if (this.editor) {
-          this.editor.view.dispatch(this.editor.state.tr.setMeta('dp-force-autolink', true));
-        }
-      });
-    }
   },
 
   methods: {
@@ -1127,21 +1117,28 @@ export default {
     },
 
     _applyPhoneMarks () {
-      if (!this.editor || !this.linkPhoneNumbers?.length) return;
+      if (!this.editor) return;
       const type = this.editor.schema.marks.LinkPhoneNumbers;
       if (!type) return;
-      const tr = this.editor.state.tr;
-      this.editor.state.doc.descendants((node, pos) => {
-        if (!node.isText || !node.text) return;
-        for (const number of this.linkPhoneNumbers) {
-          let searchFrom = 0;
-          let idx;
-          while ((idx = node.text.indexOf(number, searchFrom)) !== -1) {
-            tr.addMark(pos + idx, pos + idx + number.length, type.create());
-            searchFrom = idx + number.length;
+      const { tr, doc } = this.editor.state;
+      tr.removeMark(0, doc.content.size, type);
+      if (this.linkPhoneNumbers?.length) {
+        // Searches within individual text nodes only. A phone number that spans a
+        // mark boundary (e.g. partially bold) is split into separate text nodes by
+        // ProseMirror and will not be found. Backend-provided numbers are plain text,
+        // so this is expected to be a non-issue in practice.
+        doc.descendants((node, pos) => {
+          if (!node.isText || !node.text) return;
+          for (const number of this.linkPhoneNumbers) {
+            let searchFrom = 0;
+            let idx;
+            while ((idx = node.text.indexOf(number, searchFrom)) !== -1) {
+              tr.addMark(pos + idx, pos + idx + number.length, type.create());
+              searchFrom = idx + number.length;
+            }
           }
-        }
-      });
+        });
+      }
       this.editor.view.dispatch(tr);
     },
 
@@ -1325,7 +1322,7 @@ export default {
         this.$emit('channel-click', channelData);
       });
 
-      // Phone number link is clicked (requires linkPhoneNumbers prop)
+      // Phone number link is clicked — only emitted by the LinkPhoneNumbers extension
       this.editor.on('phone-click', (phoneData) => {
         this.$emit('phone-click', phoneData);
       });

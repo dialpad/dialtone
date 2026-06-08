@@ -1,6 +1,7 @@
 import {
   Mark,
   mergeAttributes,
+  getMarkRange,
 } from '@tiptap/core';
 import {
   Plugin,
@@ -29,11 +30,13 @@ export const LinkPhoneNumbers = Mark.create({
         key: new PluginKey('phoneClick'),
         props: {
           handleClick (view, pos, event) {
-            const mark = view.state.doc.resolve(pos).marks().find(m => m.type === type);
-            if (!mark) return false;
-            const link = event.target?.closest('a');
+            const { state } = view;
+            const $pos = state.doc.resolve(pos);
+            if (!$pos.marks().some(m => m.type === type)) return false;
+            const range = getMarkRange($pos, type);
+            const phoneNumber = range ? state.doc.textBetween(range.from, range.to) : '';
             event.preventDefault();
-            editor.emit('phone-click', { phoneNumber: link?.textContent ?? '' });
+            editor.emit('phone-click', { phoneNumber });
             return true;
           },
         },

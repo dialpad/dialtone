@@ -105,6 +105,28 @@ describe('LinkPhoneNumbers extension', () => {
       await wrapper.vm.$nextTick();
       expect(_getPhoneLinksFromJSON()).toHaveLength(1);
     });
+
+    it('removes stale marks when a number is no longer in the list', async () => {
+      const OTHER_NUMBER = '(800) 555-0199';
+      _mountWrapper({ linkPhoneNumbers: [PHONE_NUMBER] });
+      await _setValue(`${PHONE_NUMBER} or ${OTHER_NUMBER}`);
+      expect(_getPhoneLinksFromJSON()).toHaveLength(1);
+
+      await wrapper.setProps({ linkPhoneNumbers: [OTHER_NUMBER] });
+      await wrapper.vm.$nextTick();
+      const links = _getPhoneLinksFromJSON();
+      expect(links).toHaveLength(1);
+      expect(links[0].text).toBe(OTHER_NUMBER);
+    });
+
+    it('removes all marks when linkPhoneNumbers becomes an empty array', async () => {
+      await _setValue(`call me at ${PHONE_NUMBER} any time!`);
+      expect(_getPhoneLinksFromJSON()).toHaveLength(1);
+
+      await wrapper.setProps({ linkPhoneNumbers: [] });
+      await wrapper.vm.$nextTick();
+      expect(_getPhoneLinksFromJSON()).toHaveLength(0);
+    });
   });
 
   describe('phone-click event', () => {
@@ -120,6 +142,7 @@ describe('LinkPhoneNumbers extension', () => {
       await wrapper.vm.$nextTick();
 
       expect(wrapper.emitted('phone-click')).toBeTruthy();
+      expect(wrapper.emitted('phone-click')[0][0]).toEqual({ phoneNumber: PHONE_NUMBER });
     });
 
     it('does not emit phone-click when no phone mark is at the clicked position', async () => {
