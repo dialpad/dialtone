@@ -3,17 +3,17 @@ import { DtRichTextEditor } from '@/components/rich_text_editor';
 import { EditorContent } from '@tiptap/vue-3';
 
 let wrapper;
-let editorEl;
+
+const PHONE_NUMBER = '(714) 410-7035';
 
 const baseProps = {
-  value: '',
+  modelValue: '',
   inputAriaLabel: 'aria-label text',
-  linkPhoneNumbers: true,
+  linkPhoneNumbers: [PHONE_NUMBER],
   inputClass: 'qa-editor',
 };
 
 const _mountWrapper = (props = {}) => {
-  editorEl?.remove();
   wrapper = mount(DtRichTextEditor, {
     props: { ...baseProps, ...props },
     components: { EditorContent },
@@ -21,12 +21,8 @@ const _mountWrapper = (props = {}) => {
   });
 };
 
-const _setChildWrappers = () => {
-  editorEl = document.getElementsByClassName('qa-editor')[0];
-};
-
 const _setValue = async (value) => {
-  editorEl.innerHTML = value;
+  await wrapper.setProps({ modelValue: value });
   await wrapper.vm.$nextTick();
 };
 
@@ -59,70 +55,61 @@ describe('LinkPhoneNumbers extension', () => {
     global.scrollBy = vi.fn();
   });
 
+  beforeEach(() => {
+    _mountWrapper();
+  });
+
   afterEach(() => {
     wrapper?.unmount();
   });
 
-  describe('auto-detection', () => {
-    beforeEach(async () => {
-      _mountWrapper();
-      await wrapper.vm.$nextTick();
-      _setChildWrappers();
-    });
-
-    it('links a formatted phone number', async () => {
-      await _setValue('call me at (714) 410-7035 any time!');
+  describe('exact-match linking', () => {
+    it('links a number in the phoneNumbers list', async () => {
+      await _setValue(`call me at ${PHONE_NUMBER} any time!`);
       const links = _getPhoneLinksFromJSON();
       expect(links).toHaveLength(1);
-      expect(links[0].text).toBe('(714) 410-7035');
+      expect(links[0].text).toBe(PHONE_NUMBER);
     });
 
-    it('links an international phone number', async () => {
-      await _setValue('reach me at +17787658813');
-      const links = _getPhoneLinksFromJSON();
-      expect(links).toHaveLength(1);
-    });
-
-    it('does not link a URL', async () => {
-      await _setValue('check out dialpad.com it is cool');
+    it('does not link a number not in the phoneNumbers list', async () => {
+      await _setValue('call me at (800) 555-0100 any time!');
       expect(_getPhoneLinksFromJSON()).toHaveLength(0);
     });
 
-    it('does not link a URL whose path contains 7+ digits', async () => {
-      await _setValue('check out https://example.com/7658813 it is cool');
+    it('links multiple occurrences of the same number', async () => {
+      await _setValue(`${PHONE_NUMBER} or ${PHONE_NUMBER}`);
+      expect(_getPhoneLinksFromJSON()).toHaveLength(2);
+    });
+
+    it('does not link plain text with no matching number', async () => {
+      await _setValue('check out dialpad.com it is cool');
       expect(_getPhoneLinksFromJSON()).toHaveLength(0);
     });
   });
 
-  describe('phoneNumbers allowlist', () => {
-    it('links only numbers in the allowlist', async () => {
-      _mountWrapper({ linkPhoneNumbers: ['(714) 410-7035'] });
-      await wrapper.vm.$nextTick();
-      _setChildWrappers();
-      await _setValue('call (714) 410-7035 or (800) 555-0100');
-      const links = _getPhoneLinksFromJSON();
-      expect(links).toHaveLength(1);
-      expect(links[0].text).toBe('(714) 410-7035');
-    });
-
-    it('links no phones when given an empty array', async () => {
+  describe('when linkPhoneNumbers is an empty array', () => {
+    it('links nothing', async () => {
       _mountWrapper({ linkPhoneNumbers: [] });
-      await wrapper.vm.$nextTick();
-      _setChildWrappers();
-      await _setValue('call me at (714) 410-7035 any time!');
+      await _setValue(`call me at ${PHONE_NUMBER} any time!`);
       expect(_getPhoneLinksFromJSON()).toHaveLength(0);
+    });
+  });
+
+  describe('when linkPhoneNumbers prop changes', () => {
+    it('applies marks when the prop is updated after content is set', async () => {
+      _mountWrapper({ linkPhoneNumbers: [] });
+      await _setValue(`call me at ${PHONE_NUMBER} any time!`);
+      expect(_getPhoneLinksFromJSON()).toHaveLength(0);
+
+      await wrapper.setProps({ linkPhoneNumbers: [PHONE_NUMBER] });
+      await wrapper.vm.$nextTick();
+      expect(_getPhoneLinksFromJSON()).toHaveLength(1);
     });
   });
 
   describe('phone-click event', () => {
-    beforeEach(async () => {
-      _mountWrapper();
-      await wrapper.vm.$nextTick();
-      _setChildWrappers();
-    });
-
     it('emits phone-click when a phone number link is clicked', async () => {
-      await _setValue('call me at (714) 410-7035 any time!');
+      await _setValue(`call me at ${PHONE_NUMBER} any time!`);
       await wrapper.vm.$nextTick();
 
       const { state, view } = wrapper.vm.editor;

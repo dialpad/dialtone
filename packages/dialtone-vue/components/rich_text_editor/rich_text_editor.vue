@@ -245,15 +245,15 @@ export default {
     },
 
     /**
-     * Enables phone-number autolinking and the `phone-click` event.
-     * Pass `true` to auto-detect all phone-like text, or an array of specific
-     * phone number strings (e.g. backend-confirmed numbers from `rich_media`)
-     * to restrict which numbers are linked. An empty array disables all phone links.
-     * @type {boolean|string[]}
+     * Phone number strings to display as clickable links, typically provided
+     * by the backend via `rich_media`. Matching text in the editor will be
+     * marked and emit a `phone-click` event when clicked. An empty array or
+     * `null` disables phone linking.
+     * @type {string[]|null}
      */
     linkPhoneNumbers: {
-      type: [Boolean, Array],
-      default: false,
+      type: Array,
+      default: null,
     },
 
     /**
@@ -745,9 +745,8 @@ export default {
       if (this.customLink) {
         extensions.push(this.getExtension(CustomLink, this.customLink));
       }
-      if (this.linkPhoneNumbers) {
-        const phoneNumbers = Array.isArray(this.linkPhoneNumbers) ? this.linkPhoneNumbers : null;
-        extensions.push(LinkPhoneNumbers.configure({ phoneNumbers }));
+      if (this.linkPhoneNumbers !== null) {
+        extensions.push(LinkPhoneNumbers);
       }
 
       if (this.mentionSuggestion) {
@@ -944,6 +943,10 @@ export default {
     modelValue (newValue) {
       this.processValue(newValue);
     },
+
+    linkPhoneNumbers () {
+      this._applyPhoneMarks();
+    },
   },
 
   created () {
@@ -960,7 +963,7 @@ export default {
     // Force appendTransaction to run after mount — the editor may be pre-populated
     // via createEditor(content: modelValue), causing setContent to dispatch no
     // transaction and skipping our autolink's appendTransaction entirely.
-    if (this.customLink || this.linkPhoneNumbers) {
+    if (this.customLink) {
       this.$nextTick(() => {
         if (this.editor) {
           this.editor.view.dispatch(this.editor.state.tr.setMeta('dp-force-autolink', true));
@@ -1120,6 +1123,26 @@ export default {
         emitUpdate: false,
         parseOptions: { preserveWhitespace: this.preserveWhitespace },
       });
+      this._applyPhoneMarks();
+    },
+
+    _applyPhoneMarks () {
+      if (!this.editor || !this.linkPhoneNumbers?.length) return;
+      const type = this.editor.schema.marks.LinkPhoneNumbers;
+      if (!type) return;
+      const tr = this.editor.state.tr;
+      this.editor.state.doc.descendants((node, pos) => {
+        if (!node.isText || !node.text) return;
+        for (const number of this.linkPhoneNumbers) {
+          let searchFrom = 0;
+          let idx;
+          while ((idx = node.text.indexOf(number, searchFrom)) !== -1) {
+            tr.addMark(pos + idx, pos + idx + number.length, type.create());
+            searchFrom = idx + number.length;
+          }
+        }
+      });
+      this.editor.view.dispatch(tr);
     },
 
     destroyEditor () {
