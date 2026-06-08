@@ -15,7 +15,7 @@ export const LinkPhoneNumbers = Mark.create({
     return [
       'a',
       mergeAttributes(HTMLAttributes, {
-        class: 'd-link d-c-text d-d-inline-block d-wb-break-all',
+        class: 'd-link d-c-pointer d-d-inline-block d-wb-break-all',
         rel: 'noopener noreferrer nofollow',
       }),
     ];
