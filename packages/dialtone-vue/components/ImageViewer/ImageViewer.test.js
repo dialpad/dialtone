@@ -1,4 +1,6 @@
 import { mount } from '@vue/test-utils';
+import { DtFocustrapDirective } from '@/directives/focustrap_directive';
+import { flushPromises } from '@/common/utils';
 import DtImageViewer from './ImageViewer.vue';
 
 const baseProps = {
@@ -23,10 +25,12 @@ describe('DtImageViewer Tests', () => {
     wrapper = mount(DtImageViewer, {
       props: { ...baseProps, ...mockProps },
       global: {
+        plugins: [DtFocustrapDirective],
         stubs: {
           teleport: true,
         },
       },
+      attachTo: document.body,
     });
 
     imageViewerPreview = wrapper.find('[data-qa="dt-image-viewer-preview"]');
@@ -38,6 +42,7 @@ describe('DtImageViewer Tests', () => {
   });
 
   afterEach(() => {
+    wrapper.unmount();
     mockProps = {};
   });
 
@@ -46,7 +51,7 @@ describe('DtImageViewer Tests', () => {
 
     imageViewerFull = wrapper.find('[data-qa="dt-image-viewer-full"]');
     fullImage = imageViewerFull.find('img');
-    closeButton = wrapper.find('[data-qa="dt-image-viewer-close-btn"');
+    closeButton = wrapper.find('[data-qa="dt-image-viewer-close-btn"]');
     overlay = wrapper.find('[data-qa="dt-modal"]');
   };
 
@@ -89,6 +94,23 @@ describe('DtImageViewer Tests', () => {
 
         expect(fullImage.attributes('alt')).toBe(baseProps.imageAlt);
       });
+    });
+  });
+
+  describe('Focus trapping', () => {
+    it('keeps focus trapped inside the open modal (Tab is intercepted)', async () => {
+      await _openModal();
+      await flushPromises();
+
+      const closeEl = wrapper.find('[data-qa="dt-image-viewer-close-btn"]').element;
+      closeEl.focus();
+      expect(document.activeElement).toBe(closeEl);
+
+      const tabEvent = new KeyboardEvent('keydown', { key: 'Tab', bubbles: true, cancelable: true });
+      overlay.element.dispatchEvent(tabEvent);
+
+      // v-dt-focustrap intercepts Tab at the boundary so focus cannot escape the modal.
+      expect(tabEvent.defaultPrevented).toBe(true);
     });
   });
 
