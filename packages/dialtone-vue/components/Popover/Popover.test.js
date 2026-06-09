@@ -456,7 +456,7 @@ describe('DtPopover Tests', () => {
         const localWrapper = mount(DtPopover, {
           props: { ...baseProps, open: null },
           slots: { ...baseSlots },
-          global: { stubs: { transition: false } },
+          global: { plugins: [DtFocustrapDirective], stubs: { transition: false } },
           attachTo: dialogEl,
         });
 
@@ -475,7 +475,7 @@ describe('DtPopover Tests', () => {
         const localWrapper = mount(DtPopover, {
           props: { ...baseProps, open: null },
           slots: { ...baseSlots },
-          global: { stubs: { transition: false } },
+          global: { plugins: [DtFocustrapDirective], stubs: { transition: false } },
           attachTo: document.body,
         });
 
@@ -496,7 +496,7 @@ describe('DtPopover Tests', () => {
         const localWrapper = mount(DtPopover, {
           props: { ...baseProps, open: null, appendTo: 'parent' },
           slots: { ...baseSlots },
-          global: { stubs: { transition: false } },
+          global: { plugins: [DtFocustrapDirective], stubs: { transition: false } },
           attachTo: dialogEl,
         });
 
@@ -535,6 +535,7 @@ describe('DtPopover Tests', () => {
       const wrapper = mount(component, {
         props: { showAlternateAnchor: false },
         global: {
+          plugins: [DtFocustrapDirective],
           stubs: {
             transition: false,
           },
