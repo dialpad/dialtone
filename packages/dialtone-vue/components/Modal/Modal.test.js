@@ -1,5 +1,8 @@
 import { DtModal, MODAL_BANNER_KINDS } from '@/components/Modal';
 import { mount } from '@vue/test-utils';
+import { DtFocustrapDirective } from '@/directives/focustrap_directive';
+import { getTabbableElements } from '@/directives/focustrap_directive/focustrap_utils';
+import { flushPromises } from '@/common/utils';
 
 const SYNC_EVENT_NAME = 'update:open';
 
@@ -50,6 +53,9 @@ describe('DtModal Tests', () => {
     wrapper = mount(DtModal, {
       props: { ...baseProps, ...mockProps },
       slots: { ...baseSlots, ...mockSlots },
+      global: {
+        plugins: [DtFocustrapDirective],
+      },
       attachTo: document.body,
     });
 
@@ -196,6 +202,47 @@ describe('DtModal Tests', () => {
     });
   });
 
+  describe('Focus trapping', () => {
+    beforeEach(() => {
+      mockSlots = {
+        default: '<button data-qa="modal-trap-a">a</button><button data-qa="modal-trap-b">b</button>',
+      };
+
+      updateWrapper();
+    });
+
+    it('keeps focus trapped inside the open dialog (Tab wraps from last to first)', async () => {
+      await flushPromises();
+
+      const focusables = getTabbableElements(overlay.element);
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      last.focus();
+      const tabEvent = new KeyboardEvent('keydown', { key: 'Tab', bubbles: true, cancelable: true });
+      overlay.element.dispatchEvent(tabEvent);
+
+      // v-dt-focustrap wraps focus at the boundary and prevents Tab from escaping the dialog.
+      expect(tabEvent.defaultPrevented).toBe(true);
+      expect(document.activeElement).toBe(first);
+    });
+
+    it('wraps focus in reverse (Shift+Tab from the first element to the last)', async () => {
+      await flushPromises();
+
+      const focusables = getTabbableElements(overlay.element);
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      first.focus();
+      const shiftTabEvent = new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true, bubbles: true, cancelable: true });
+      overlay.element.dispatchEvent(shiftTabEvent);
+
+      expect(shiftTabEvent.defaultPrevented).toBe(true);
+      expect(document.activeElement).toBe(last);
+    });
+  });
+
   describe('Extendability Tests', () => {
     it('Should pass content class through to root modal element', async () => {
       const modalClass = 'modal-class';
@@ -302,6 +349,9 @@ describe('DtModal Tests', () => {
 
         wrapper = mount(DtModal, {
           props: { ...baseProps, ...mockProps },
+          global: {
+            plugins: [DtFocustrapDirective],
+          },
           attachTo: mountPoint,
         });
 
@@ -326,6 +376,9 @@ describe('DtModal Tests', () => {
         wrapper.unmount();
         wrapper = mount(DtModal, {
           props: { ...baseProps, appendTo: '#custom-target' },
+          global: {
+            plugins: [DtFocustrapDirective],
+          },
           attachTo: mountPoint,
         });
 

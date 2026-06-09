@@ -6,6 +6,7 @@
     <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
     <dialog
       ref="dialogEl"
+      v-dt-focustrap="{ active: open, initialFocus: false, restoreFocus: false }"
       :class="[
         'd-modal',
         MODAL_KIND_MODIFIERS[kind],

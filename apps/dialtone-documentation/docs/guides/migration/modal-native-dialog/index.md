@@ -7,7 +7,7 @@ description: DtModal now uses a native <dialog> element. This changes the DOM st
 
 - `DtModal` now renders a native `<dialog>` element instead of a `<div role="dialog">`.
 - The native `::backdrop` pseudo-element replaces the custom `.d-modal__backdrop` div.
-- Focus trapping and Escape-to-close are handled natively by the browser.
+- Focus stays trapped within the dialog and Escape closes it — handled by the native `<dialog>` together with the `v-dt-focustrap` directive (Escape via the native `cancel` event).
 - Popovers and tooltips inside modals now auto-append to the nearest `<dialog>` to stay in the browser's top layer.
 - We are **not** considering this a breaking change since consumers should not be targeting internal DOM structure. This guide is provided in case you are.
 
@@ -64,8 +64,8 @@ If you targeted `.d-modal[aria-hidden='false']` in your CSS, those selectors sti
 
 ### Focus management
 
-- **Focus trapping** is now handled natively by the `<dialog>` element — the custom `trapFocus` and `focusin` handlers have been removed.
-- **Escape key** closing is handled natively — the custom `keydown` Escape handler has been removed.
+- **Focus trapping** — while the modal is open, keyboard focus stays inside the dialog: Tab from the last focusable element wraps to the first, and Shift+Tab from the first wraps to the last. This is enforced by the native `<dialog>` (opened with `showModal()`) together with the `v-dt-focustrap` directive.
+- **Escape key** — pressing Escape closes the modal: the native `<dialog>` emits a `cancel` event, which `DtModal` handles (`@cancel.prevent`) to close it.
 - **Initial focus** still works via the `initialFocusElement` prop (`'first'`, `'#id'`, or an `HTMLElement`).
 
 ### Transition events
@@ -85,7 +85,7 @@ Most likely **no**. These are internal implementation changes. You are affected 
 
 1. **Target `.d-modal__backdrop` or other internal class selectors** in your CSS — review and update those selectors.
 2. **Apply `::backdrop` pseudo-element styles** — the native backdrop is now transparent; the `.d-modal` element is the visual overlay.
-3. **Had custom `focusin` or `keydown.tab` handlers** wired around the old DOM structure — the native dialog handles focus trapping and Escape natively.
+3. **Had custom `focusin` or `keydown.tab` handlers** wired around the old DOM structure — focus trapping is now handled by the native `<dialog>` together with the `v-dt-focustrap` directive, and Escape via the native `cancel` event.
 4. **Relied on `DtLazyShow` transition events** wrapping the dialog — those no longer fire.
 5. **Relied on `appendTo="body"` for popovers/tooltips inside modals** to append to `<body>` — they now append to the `<dialog>`. Pass `document.body` explicitly if you need the old behavior.
 
