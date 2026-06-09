@@ -1,6 +1,7 @@
 import { DtModal, MODAL_BANNER_KINDS } from '@/components/Modal';
 import { mount } from '@vue/test-utils';
 import { DtFocustrapDirective } from '@/directives/focustrap_directive';
+import { getTabbableElements } from '@/directives/focustrap_directive/focustrap_utils';
 import { flushPromises } from '@/common/utils';
 
 const SYNC_EVENT_NAME = 'update:open';
@@ -213,9 +214,7 @@ describe('DtModal Tests', () => {
     it('keeps focus trapped inside the open dialog (Tab wraps from last to first)', async () => {
       await flushPromises();
 
-      const focusables = [
-        ...overlay.element.querySelectorAll('button,[href],input,select,textarea,details,[tabindex]'),
-      ];
+      const focusables = getTabbableElements(overlay.element);
       const first = focusables[0];
       const last = focusables[focusables.length - 1];
 
@@ -226,6 +225,21 @@ describe('DtModal Tests', () => {
       // v-dt-focustrap wraps focus at the boundary and prevents Tab from escaping the dialog.
       expect(tabEvent.defaultPrevented).toBe(true);
       expect(document.activeElement).toBe(first);
+    });
+
+    it('wraps focus in reverse (Shift+Tab from the first element to the last)', async () => {
+      await flushPromises();
+
+      const focusables = getTabbableElements(overlay.element);
+      const first = focusables[0];
+      const last = focusables[focusables.length - 1];
+
+      first.focus();
+      const shiftTabEvent = new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true, bubbles: true, cancelable: true });
+      overlay.element.dispatchEvent(shiftTabEvent);
+
+      expect(shiftTabEvent.defaultPrevented).toBe(true);
+      expect(document.activeElement).toBe(last);
     });
   });
 
