@@ -840,6 +840,7 @@ export default {
     },
 
     addEventListeners () {
+      if (typeof window === 'undefined') return;
       window.addEventListener('dt-popover-close', this.closePopover);
       // align popover content width when contentWidth is 'anchor'
       if (this.contentWidth === 'anchor') {
@@ -848,6 +849,7 @@ export default {
     },
 
     removeEventListeners () {
+      if (typeof window === 'undefined') return;
       window.removeEventListener('dt-popover-close', this.closePopover);
       if (this.contentWidth === 'anchor') {
         window.removeEventListener('resize', this.onResize);
@@ -900,6 +902,7 @@ export default {
     async onShow () {
       if (this.contentWidth === 'anchor') {
         await this.setPopoverContentAnchorWidth();
+        if (this._isUnmounting) return;
       }
 
       if (this.contentWidth === null) {
