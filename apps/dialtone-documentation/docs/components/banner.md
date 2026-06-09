@@ -46,11 +46,11 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
 ```
 
 <dt-banner
+  v-if="shownBanner === 'example-kind'"
   :pinned="pinned"
   :important="important"
   :kind="selectedKind"
   header-text="Optional banner title"
-  v-show="shownBanner === 'example-kind'"
   @close="closeBanner"
 >
   Message body
@@ -110,6 +110,12 @@ Pins the banner to the top of the window.
 <component-class-table component-name="banner"></component-class-table>
 
 ## Accessibility
+
+### Focus management
+
+When `important` is set, the banner is presented as a modal `alertdialog`: keyboard focus moves to the first focusable element when it appears, stays trapped within the banner while it is shown, and returns to the previously focused element when the banner is dismissed. Reserve `important` for messages that must block the rest of the page until they are addressed.
+
+Non-important banners use the `status` role and do **not** trap focus — keyboard users can Tab straight through them.
 
 <component-accessible-table component-name="banner"></component-accessible-table>
 
