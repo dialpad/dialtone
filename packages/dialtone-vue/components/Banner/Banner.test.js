@@ -39,6 +39,10 @@ describe('DtBanner Tests', () => {
   });
 
   afterEach(() => {
+    // Tear down the mounted instance so it doesn't stay attached to document.body
+    // after the final test. Null it so updateWrapper's unmount-first is a no-op next run.
+    wrapper?.unmount();
+    wrapper = null;
     mockProps = {};
     mockSlots = {};
   });
