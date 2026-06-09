@@ -375,6 +375,10 @@ export default {
       hasSlotContent,
       isComposing: false,
       justEndedComposition: false,
+      // Moved from beforeMount so these are available during SSR (beforeMount
+      // does not run server-side, causing labelSizeClasses to be undefined).
+      labelSizeClasses: LABEL_SIZE_CLASSES,
+      descriptionSizeClasses: DESCRIPTION_SIZE_CLASSES,
     };
   },
 
@@ -563,8 +567,8 @@ export default {
   },
 
   beforeMount () {
-    this.descriptionSizeClasses = DESCRIPTION_SIZE_CLASSES;
-    this.labelSizeClasses = LABEL_SIZE_CLASSES;
+    // labelSizeClasses and descriptionSizeClasses are now initialized in data()
+    // so they are available during SSR (beforeMount does not run server-side).
   },
 
   mounted () {

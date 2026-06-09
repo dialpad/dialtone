@@ -62,7 +62,7 @@ import { DtPopover, POPOVER_APPEND_TO_VALUES } from '@/components/popover';
 import { LIST_ITEM_NAVIGATION_TYPES } from '@/components/list_item';
 import { DROPDOWN_PADDING_CLASSES } from './dropdown_constants';
 import { getUniqueString } from '@/common/utils';
-import { EVENT_KEYNAMES } from '@/common/constants';
+import { EVENT_KEYNAMES, HTML_ELEMENT_TYPE } from '@/common/constants';
 
 export default {
   compatConfig: { MODE: 3 },
@@ -234,7 +234,7 @@ export default {
      * @values 'body', 'parent', HTMLElement,
      */
     appendTo: {
-      type: [HTMLElement, String],
+      type: [HTML_ELEMENT_TYPE, String],
       default: 'body',
       validator: appendTo => {
         return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||

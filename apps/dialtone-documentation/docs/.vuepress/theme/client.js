@@ -38,14 +38,17 @@ const initOverlayScrollbars = () => {
 
 export default defineClientConfig({
   async enhance ({ app, router }) {
-    // Register libraries
+    // Register Dialtone components and icons for both SSR and client so the
+    // layout shell (DtRootLayout, DtStack, DtButton, etc.) renders server-side.
+    await registerDialtoneVue(app);
+    await registerDialtoneIcons(app);
+
+    await importDocumentation(app);
+    await importDialtoneThemes(app);
+
     if (!__VUEPRESS_SSR__) {
       await initOverlayScrollbars();
-      await registerDialtoneVue(app);
       await registerDialtoneCombinator(app);
-      await registerDialtoneIcons(app);
-      await importDocumentation(app);
-      await importDialtoneThemes(app);
     }
     router.options.scrollBehavior = async (to) => {
       if (to.hash) {
@@ -65,18 +68,14 @@ export default defineClientConfig({
     };
   },
   setup () {
+    const currentMode = ref('system');
+    const currentTheme = ref('dp');
+    provide('currentMode', currentMode);
+    provide('currentTheme', currentTheme);
+
     onBeforeMount(() => {
-      // Set the theme to 'dp' by default
+      // Keep localStorage in sync with the canonical theme (dp is the only brand).
       localStorage.setItem('preferredTheme', 'dp');
-
-      const preferredMode = localStorage.getItem('preferredMode') || 'system';
-      const preferredTheme = localStorage.getItem('preferredTheme');
-
-      const currentMode = ref(preferredMode);
-      const currentTheme = ref(preferredTheme);
-
-      provide('currentMode', currentMode);
-      provide('currentTheme', currentTheme);
     });
     onMounted(async () => {
       const docsearch = (await import('@docsearch/js'))?.default;
@@ -108,7 +107,22 @@ async function registerDialtoneVue (app) {
     if (/^[A-Z_]+$/.test(key)) {
       dialtoneConstants[key] = module[key];
     } else if (key.endsWith('Directive')) {
-      app.use(module[key]);
+      if (!__VUEPRESS_SSR__) {
+        // Full installation client-side (may touch document at install time).
+        app.use(module[key]);
+      } else {
+        // During SSR, register a no-op stub under the directive's name so
+        // resolveDirective() never returns undefined. Without this,
+        // ssrGetDirectiveProps(ctx, undefined) throws when the directive is
+        // applied to a native HTML element in a docs page.
+        // Derive the kebab-case name: DtScrollbarDirective → dt-scrollbar.
+        const stubName = 'dt-' + key
+          .replace(/^Dt/, '')
+          .replace(/Directive$/, '')
+          .replace(/([a-z])([A-Z])/g, '$1-$2')
+          .toLowerCase();
+        app.directive(stubName, {});
+      }
     } else if (key.startsWith('Dt')) {
       dialtoneComponents[key] = module[key];
       app.component(key, module[key]);
@@ -120,13 +134,15 @@ async function registerDialtoneVue (app) {
   app.provide('dialtoneUtils', dialtoneUtils);
   app.provide('dialtoneComponents', dialtoneComponents);
   app.provide('dialtoneComponentsDocumentation', documentation.default);
+  // Provide constants via inject so page setup functions can access them in
+  // both SSR and client contexts without referencing window.
+  app.provide('dialtoneConstants', dialtoneConstants);
 
-  window.DIALTONE_CONSTANTS = dialtoneConstants;
-
-  // setup custom emojis
-  const { setCustomEmojiUrl, setCustomEmojiJson } = dialtoneUtils;
-  setCustomEmojiUrl('https://github.githubassets.com/images/icons/emoji/');
-  setCustomEmojiJson(customEmojis);
+  if (!__VUEPRESS_SSR__) {
+    const { setCustomEmojiUrl, setCustomEmojiJson } = dialtoneUtils;
+    setCustomEmojiUrl('https://github.githubassets.com/images/icons/emoji/');
+    setCustomEmojiJson(customEmojis);
+  }
 }
 
 async function registerDialtoneCombinator (app) {

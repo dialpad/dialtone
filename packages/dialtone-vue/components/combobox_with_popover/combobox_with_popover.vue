@@ -119,6 +119,7 @@ import ComboboxEmptyList from '@/components/combobox/combobox_empty-list.vue';
 import { DtCombobox, COMBOBOX_LABEL_SIZES } from '@/components/combobox';
 import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_CONTENT_WIDTHS } from '@/components/popover';
 import { getUniqueString, hasSlotContent } from '@/common/utils';
+import { HTML_ELEMENT_TYPE } from '@/common/constants';
 import { DROPDOWN_PADDING_CLASSES } from '@/components/dropdown';
 
 export default {
@@ -324,7 +325,7 @@ export default {
      * @values 'body', 'parent', HTMLElement,
      */
     appendTo: {
-      type: [HTMLElement, String],
+      type: [HTML_ELEMENT_TYPE, String],
       default: 'body',
       validator: appendTo => {
         return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||
