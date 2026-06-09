@@ -47,6 +47,7 @@
       <dt-lazy-show
         :id="id"
         ref="content"
+        v-dt-focustrap="{ active: modal && isOpen, initialFocus: false, restoreFocus: false }"
         :role="role"
         :data-qa="$attrs['data-qa'] ? `${$attrs['data-qa']}__dialog` : 'dt-popover'"
         :aria-hidden="`${!isOpen}`"
@@ -1012,11 +1013,7 @@ export default {
     },
 
     onKeydown (e) {
-      if (e.key === 'Tab') {
-        if (this.modal) {
-          this.focusTrappedTabPress(e, this.popoverContentEl);
-        }
-      }
+      // Tab focus trapping (when modal) is handled by the v-dt-focustrap directive on the content.
       if (e.key === 'Escape') {
         this.closePopover();
       }

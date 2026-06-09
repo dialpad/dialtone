@@ -1,5 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { DtPopover } from '@/components/Popover';
+import { DtFocustrapDirective } from '@/directives/focustrap_directive';
+import { flushPromises } from '@/common/utils';
 import SrOnlyCloseButtonComponent from '@/common/sr_only_close_button.vue';
 
 const MOCK_DEFAULT_SLOT_MESSAGE = 'Message';
@@ -38,6 +40,7 @@ describe('DtPopover Tests', () => {
       props: { ...baseProps, ...mockProps },
       slots: { ...baseSlots, ...mockSlots },
       global: {
+        plugins: [DtFocustrapDirective],
         stubs: {
           transition: false,
         },
@@ -305,6 +308,62 @@ describe('DtPopover Tests', () => {
     });
   });
 
+  describe('Focus trapping', () => {
+    const MOCK_TRAP_CONTENT =
+      '<button data-qa="trap-first">One</button><button data-qa="trap-last">Two</button>';
+
+    describe('When modal and open', () => {
+      beforeEach(async () => {
+        mockProps = { modal: true };
+        mockSlots = { content: MOCK_TRAP_CONTENT };
+
+        updateWrapper();
+        await wrapper.setProps({ open: true });
+        await flushPromises();
+      });
+
+      it('wraps focus from the last element to the first on Tab', async () => {
+        const first = popoverWindow.find('[data-qa="dt-popover-close"]').element;
+        const last = popoverWindow.find('[data-qa="trap-last"]').element;
+
+        last.focus();
+        await popoverWindow.trigger('keydown', { key: 'Tab' });
+
+        expect(document.activeElement).toBe(first);
+      });
+
+      it('wraps focus from the first element to the last on Shift+Tab', async () => {
+        const first = popoverWindow.find('[data-qa="dt-popover-close"]').element;
+        const last = popoverWindow.find('[data-qa="trap-last"]').element;
+
+        first.focus();
+        await popoverWindow.trigger('keydown', { key: 'Tab', shiftKey: true });
+
+        expect(document.activeElement).toBe(last);
+      });
+    });
+
+    describe('When not modal', () => {
+      beforeEach(async () => {
+        mockProps = { modal: false };
+        mockSlots = { content: MOCK_TRAP_CONTENT };
+
+        updateWrapper();
+        await wrapper.setProps({ open: true });
+        await flushPromises();
+      });
+
+      it('does not trap focus (Tab is not wrapped)', async () => {
+        const last = popoverWindow.find('[data-qa="trap-last"]').element;
+
+        last.focus();
+        await popoverWindow.trigger('keydown', { key: 'Tab' });
+
+        expect(document.activeElement).toBe(last);
+      });
+    });
+  });
+
   describe('Pass-through class props', () => {
     it('Should apply anchorClass to the anchor wrapper', () => {
       mockProps = { anchorClass: 'my-anchor-class' };
@@ -397,7 +456,7 @@ describe('DtPopover Tests', () => {
         const localWrapper = mount(DtPopover, {
           props: { ...baseProps, open: null },
           slots: { ...baseSlots },
-          global: { stubs: { transition: false } },
+          global: { plugins: [DtFocustrapDirective], stubs: { transition: false } },
           attachTo: dialogEl,
         });
 
@@ -416,7 +475,7 @@ describe('DtPopover Tests', () => {
         const localWrapper = mount(DtPopover, {
           props: { ...baseProps, open: null },
           slots: { ...baseSlots },
-          global: { stubs: { transition: false } },
+          global: { plugins: [DtFocustrapDirective], stubs: { transition: false } },
           attachTo: document.body,
         });
 
@@ -437,7 +496,7 @@ describe('DtPopover Tests', () => {
         const localWrapper = mount(DtPopover, {
           props: { ...baseProps, open: null, appendTo: 'parent' },
           slots: { ...baseSlots },
-          global: { stubs: { transition: false } },
+          global: { plugins: [DtFocustrapDirective], stubs: { transition: false } },
           attachTo: dialogEl,
         });
 
@@ -476,6 +535,7 @@ describe('DtPopover Tests', () => {
       const wrapper = mount(component, {
         props: { showAlternateAnchor: false },
         global: {
+          plugins: [DtFocustrapDirective],
           stubs: {
             transition: false,
           },
