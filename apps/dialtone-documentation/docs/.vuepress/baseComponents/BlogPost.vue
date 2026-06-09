@@ -66,6 +66,6 @@ defineProps({
 });
 
 const blogLink = computed(() => {
-  return window.location.href;
+  return typeof window !== 'undefined' ? window.location.href : '';
 });
 </script>

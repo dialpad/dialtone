@@ -134,6 +134,7 @@ import {
   POPOVER_STICKY_VALUES,
 } from './popover_constants';
 import { getUniqueString, hasSlotContent, isOutOfViewPort, warnIfUnmounted, disableRootScrolling, enableRootScrolling, returnFirstEl } from '@/common/utils';
+import { HTML_ELEMENT_TYPE } from '@/common/constants';
 import { DtLazyShow } from '@/components/lazy_show';
 import ModalMixin from '@/common/mixins/modal';
 import { createTippyPopover, getPopperOptions } from './tippy_utils';
@@ -293,7 +294,7 @@ export default {
      * the anchor may be inside a Shadow DOM, as querySelector cannot pierce shadow boundaries.
      */
     externalAnchorElement: {
-      type: HTMLElement,
+      type: HTML_ELEMENT_TYPE,
       default: null,
     },
 
@@ -479,7 +480,7 @@ export default {
      * @values none, dialog, first
      */
     initialFocusElement: {
-      type: [String, HTMLElement],
+      type: [String, HTML_ELEMENT_TYPE],
       default: 'first',
       validator: initialFocusElement => {
         return POPOVER_INITIAL_FOCUS_STRINGS.includes(initialFocusElement) ||
@@ -506,7 +507,7 @@ export default {
      * @values 'body', 'parent', 'root', HTMLElement
      */
     appendTo: {
-      type: [HTMLElement, String],
+      type: [HTML_ELEMENT_TYPE, String],
       default: 'body',
       validator: appendTo => {
         return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||

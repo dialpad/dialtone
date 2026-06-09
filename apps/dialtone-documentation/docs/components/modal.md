@@ -374,7 +374,7 @@ At minimum, modals contain a title and one button. They could also contain body 
 
 <script setup>
   import ExampleModal from '@exampleComponents/ExampleModal.vue';
-  import { ref } from 'vue';
+  import { ref, inject } from 'vue';
 
   const isOpen = ref(false);
   const selectedBannerKind = ref('success');
@@ -392,6 +392,7 @@ At minimum, modals contain a title and one button. They could also contain body 
     if (!value) isOpen.value = false;
   };
 
-  const bannerKinds = Object.keys(window.DIALTONE_CONSTANTS.MODAL_BANNER_KINDS)
+  const dialtoneConstants = inject('dialtoneConstants', {});
+  const bannerKinds = Object.keys(dialtoneConstants.MODAL_BANNER_KINDS ?? {})
     .map(kind => ({ value: kind, label: kind }));
 </script>

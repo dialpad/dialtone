@@ -131,7 +131,7 @@ import {
 } from './modal_constants';
 import { returnFirstEl, getUniqueString, hasSlotContent, disableRootScrolling, enableRootScrolling } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
-import { EVENT_KEYNAMES } from '@/common/constants';
+import { EVENT_KEYNAMES, HTML_ELEMENT_TYPE } from '@/common/constants';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 import { NOTICE_KINDS } from '@/components/notice';
 import { DialtoneLocalization } from '@/localization';
@@ -314,7 +314,7 @@ export default {
      * If the dialog is modal this prop cannot be 'none'.
      */
     initialFocusElement: {
-      type: [String, HTMLElement],
+      type: [String, HTML_ELEMENT_TYPE],
       default: 'first',
       validator: initialFocusElement => {
         return initialFocusElement === 'first' ||

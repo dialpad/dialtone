@@ -121,9 +121,10 @@ const route = useRoute();
 const currentMode = inject('currentMode');
 const currentTheme = inject('currentTheme');
 const modes = ['system', 'light', 'dark'];
-const themes = inject('themes');
+const themes = inject('themes', {});
 const excludedThemeNames = ['dp-deca', 'expressive'];
-const prefersDarkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+// window is not available during SSR; the real value is assigned client-side.
+const prefersDarkMediaQuery = !__VUEPRESS_SSR__ ? window.matchMedia('(prefers-color-scheme: dark)') : null;
 const themesKeys = Array.from(
   new Set(
     Object.keys(themes)
@@ -185,12 +186,13 @@ const setCss = () => {
 };
 
 onMounted(() => {
-  prefersDarkMediaQuery.addEventListener('change', setCss);
+  currentMode.value = localStorage.getItem('preferredMode') || 'system';
+  prefersDarkMediaQuery?.addEventListener('change', setCss);
   setCss();
 });
 
 onUnmounted(() => {
-  prefersDarkMediaQuery.removeEventListener('change', setCss);
+  prefersDarkMediaQuery?.removeEventListener('change', setCss);
 });
 </script>
 

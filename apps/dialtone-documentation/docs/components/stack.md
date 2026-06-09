@@ -1463,7 +1463,7 @@ View the [Migrating from Flex CSS Utilities to DtStack](/about/whats-new/posts/2
 <component-class-table component-name="stack"></component-class-table>
 
 <script setup>
-  import { ref, nextTick } from 'vue';
+  import { ref, nextTick, inject } from 'vue';
   import {
     DtIconMessage,
     DtIconLock,
@@ -1478,7 +1478,8 @@ View the [Migrating from Flex CSS Utilities to DtStack](/about/whats-new/posts/2
     selectedGap.value = gap;
   };
 
-  const gaps = window.DIALTONE_CONSTANTS.DT_STACK_GAP;
+  const dialtoneConstants = inject('dialtoneConstants', {});
+  const gaps = dialtoneConstants.DT_STACK_GAP ?? [];
 
   // Find the index of the currently selected gap
   const getSelectedGapIndex = () => {
