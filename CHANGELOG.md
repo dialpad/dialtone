@@ -1,3 +1,10 @@
+## [9.187.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.187.0...dialtone/v9.187.1) (2026-06-10)
+
+
+### Bug Fixes
+
+* **Docs:** NO-JIRA actually static render the docs ([#1319](https://github.com/dialpad/dialtone/issues/1319)) ([0107a8e](https://github.com/dialpad/dialtone/commit/0107a8ebb20dce64efe0c29f883300bce08bc56a))
+
 # [9.187.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.186.0...dialtone/v9.187.0) (2026-06-08)
 
 
