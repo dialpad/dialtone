@@ -52,7 +52,7 @@
     "@dialpad/dialtone-icons": "workspace:*",
     "@dialpad/dialtone-tokens": "workspace:*",
     "@dialpad/dialtone-vue": "workspace:vue3-next",
-    "@dialpad/i18n": "1.22.3",
+    "@dialpad/i18n": "1.25.3",
     "@dialpad/postcss-responsive-variations": "workspace:*",
     "@dialpad/stylelint-plugin-dialtone": "workspace:*",
     "@docsearch/css": "^4.0.1",
