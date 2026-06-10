@@ -118,7 +118,6 @@
           @close="closePopover"
         />
       </dt-lazy-show>
-tml>
     </component>
   </div>
 </template>
@@ -161,22 +160,48 @@ export default {
   mixins: [ModalMixin],
 
   props: {
+    /**
+     * Controls whether the popover is shown. Leaving this null will have the popover trigger on click by default.
+     * If you set this value, the default trigger behavior will be disabled, and you can control it as you need.
+     * Supports v-model
+     * @values null, true, false
+     */
     open: {
       type: Boolean,
       default: null,
     },
+
+    /**
+     * Opens the popover on right click (context menu). If you set this value to `true`,
+     * the default trigger behavior will be disabled.
+     * @values true, false
+     */
     openOnContext: {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Element type (tag name) of the root element of the component.
+     */
     elementType: {
       type: String,
       default: 'div',
     },
+
+    /**
+     * Named transition when the content display is toggled.
+     * @see DtLazyShow
+     */
     transition: {
       type: String,
       default: 'fade',
     },
+
+    /**
+     * ARIA role for the content of the popover. Defaults to "dialog".
+     * <a class="d-link" href="https://www.w3.org/TR/wai-aria/#aria-haspopup" target="_blank">aria-haspopup</a>
+     */
     role: {
       type: String,
       default: 'dialog',
@@ -184,14 +209,32 @@ export default {
         return POPOVER_ROLES.includes(role);
       },
     },
+
+    /**
+     * ID of the element that serves as the label for the popover content.
+     * Defaults to the "anchor" element; this exists to provide a different
+     * ID of the label element if, for example, the anchor slot contains
+     * other items that do not serve as a label. You should provide this
+     * or ariaLabel, but not both.
+     */
     ariaLabelledby: {
       type: String,
       default: null,
     },
+
+    /**
+     * Descriptive label for the popover content. You should provide this
+     * or ariaLabelledby, but not both.
+     */
     ariaLabel: {
       type: String,
       default: null,
     },
+
+    /**
+     * Padding size class for the popover content.
+     * @values none, small, medium, large
+     */
     padding: {
       type: String,
       default: 'large',
@@ -199,61 +242,175 @@ export default {
         return Object.keys(POPOVER_PADDING_CLASSES).some((item) => item === padding);
       },
     },
+
+    /**
+     * Additional class name for the content wrapper element.
+     */
     contentClass: {
       type: [String, Array, Object],
       default: '',
     },
+
+    /**
+     * Width configuration for the popover content. When its value is 'anchor',
+     * the popover content will have the same width as the anchor.
+     * @values null, anchor
+     */
     contentWidth: {
       type: String,
       default: '',
       validator: contentWidth => POPOVER_CONTENT_WIDTHS.includes(contentWidth),
     },
+
+    /**
+     * Whether to apply transition on initial render in the content lazy show component.
+     */
     contentAppear: {
       type: Boolean,
       default: null,
     },
+
+    /**
+     * Tabindex value for the content. Passing null, no tabindex attribute will be set.
+     */
     contentTabindex: {
       type: Number || null,
       default: -1,
     },
+
+    /**
+     * External anchor id to use in those cases the anchor can't be provided via the slot.
+     * For instance, using the combobox's input as the anchor for the popover.
+     * @deprecated Use externalAnchorElement instead for Shadow DOM compatibility.
+     */
     externalAnchor: {
       type: String,
       default: '',
     },
+
+    /**
+     * External anchor element reference. Use this instead of externalAnchor when
+     * the anchor may be inside a Shadow DOM, as querySelector cannot pierce shadow boundaries.
+     */
     externalAnchorElement: {
       type: HTMLElement,
       default: null,
     },
+
+    /**
+     * The id of the tooltip
+     */
     id: {
       type: String,
       default () { return getUniqueString(); },
     },
+
+    /**
+     *  Displaces the content box from its anchor element
+     *  by the specified number of pixels.
+     *  <a
+     *    class="d-link"
+     *    href="https://atomiks.github.io/tippyjs/v6/all-props/#offset"
+     *    target="_blank"
+     *  >
+     *    Tippy.js docs
+     *  </a>
+     */
     offset: {
       type: Array,
       default: () => [0, 4],
     },
+
+    /**
+     * Determines if the popover hides upon clicking the
+     * anchor or outside the content box.
+     * @values true, false
+     */
     hideOnClick: {
       type: Boolean,
       default: true,
     },
+
+    /**
+     * Determines modal state. If enabled popover has a modal overlay
+     * preventing interaction with elements below it, but it is invisible.
+     * @values true, false
+     */
     modal: {
       type: Boolean,
       default: true,
     },
+
+    /**
+     * If the popover does not fit in the direction described by "placement",
+     * it will attempt to change its direction to the "fallbackPlacements".
+     * <a
+     *   class="d-link"
+     *   href="https://popper.js.org/docs/v2/modifiers/flip/#fallbackplacements"
+     *   target="_blank"
+     * >
+     *   Popper.js docs
+     * </a>
+     * */
     fallbackPlacements: {
       type: Array,
       default: () => {
         return ['auto'];
       },
     },
+
+    /**
+     * The direction the popover displays relative to the anchor.
+     * <a
+     *   class="d-link"
+     *   href="https://atomiks.github.io/tippyjs/v6/all-props/#placement"
+     *   target="_blank"
+     * >
+     *   Tippy.js docs
+     * </a>
+     * @values top, top-start, top-end,
+     * right, right-start, right-end,
+     * left, left-start, left-end,
+     * bottom, bottom-start, bottom-end,
+     * auto, auto-start, auto-end
+     */
     placement: {
       type: String,
       default: 'bottom-end',
     },
+
+    /**
+     * If set to false the dialog will display over top of the anchor when there is insufficient space.
+     * If set to true it will never move from its position relative to the anchor and will clip instead.
+     * <a
+     *   class="d-link"
+     *   href="https://popper.js.org/docs/v2/modifiers/prevent-overflow/#tether"
+     *   target="_blank"
+     * >
+     *   Popper.js docs
+     * </a>
+     * @values true, false
+     */
     tether: {
       type: Boolean,
       default: true,
     },
+
+    /**
+     * If the popover sticks to the anchor. This is usually not needed, but can be needed
+     * if the reference element's position is animating, or to automatically update the popover
+     * position in those cases the DOM layout changes the reference element's position.
+     * `true` enables it, `reference` only checks the "reference" rect for changes and `popper` only
+     * checks the "popper" rect for changes.
+     * <a
+     *   class="d-link"
+     *   href="https://atomiks.github.io/tippyjs/v6/all-props/#sticky"
+     *   target="_blank"
+     * >
+     *   Tippy.js docs
+     * </a>
+     * @values true, false, reference, popper
+     */
     sticky: {
       type: [Boolean, String],
       default: false,
@@ -261,30 +418,66 @@ export default {
         return POPOVER_STICKY_VALUES.includes(sticky);
       },
     },
+
+    /**
+     * Determines maximum height for the popover before overflow.
+     * Possible units rem|px|em
+     */
     maxHeight: {
       type: String,
       default: '',
     },
+
+    /**
+     * Determines maximum width for the popover before overflow.
+     * Possible units rem|px|%|em
+     */
     maxWidth: {
       type: String,
       default: '',
     },
+
+    /**
+     * Determines visibility for close button
+     * @values true, false
+     */
     showCloseButton: {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Additional class name for the header content wrapper element.
+     */
     headerClass: {
       type: [String, Array, Object],
       default: '',
     },
+
+    /**
+     * Additional class name for the footer content wrapper element.
+     */
     footerClass: {
       type: [String, Array, Object],
       default: '',
     },
+
+    /**
+     * Additional class name for the dialog element.
+     */
     dialogClass: {
       type: [String, Array, Object],
       default: '',
     },
+
+    /**
+     * The element that is focused when the popover is opened. This can be an
+     * HTMLElement within the popover, a string starting with '#' which will
+     * find the element by ID. 'first' which will automatically focus
+     * the first element, or 'dialog' which will focus the dialog window itself.
+     * If the dialog is modal this prop cannot be 'none'.
+     * @values none, dialog, first
+     */
     initialFocusElement: {
       type: [String, HTMLElement],
       default: 'first',
@@ -294,10 +487,24 @@ export default {
           initialFocusElement.startsWith('#');
       },
     },
+
+    /**
+     * If the popover should open pressing up or down arrow key on the anchor element.
+     * This can be set when not passing open prop.
+     * @values true, false
+     */
     openWithArrowKeys: {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * Sets the element to which the popover is going to append to.
+     * 'body' will append to the nearest body (supports shadow DOM).
+     * 'root' will try append to the iFrame's parent body if it is contained in an iFrame
+     * and has permissions to access it, else, it'd default to 'parent'.
+     * @values 'body', 'parent', 'root', HTMLElement
+     */
     appendTo: {
       type: [HTMLElement, String],
       default: 'body',
@@ -309,12 +516,54 @@ export default {
   },
 
   emits: [
+    /**
+     * Native keydown event
+     *
+     * @event keydown
+     * @type {KeyboardEvent}
+     */
     'keydown',
+
+    /**
+     * Event fired to sync the open prop with the parent component
+     * @event update:open
+     */
     'update:open',
+
+    /**
+     * Emitted when popover is shown or hidden
+     *
+     * @event opened
+     * @type {Boolean | Array}
+     */
     'opened',
+
+    /**
+     * Emitted when the mouse enters the popover
+     *
+     * @event mouseenter-popover
+     */
     'mouseenter-popover',
+
+    /**
+     * Emitted when the mouse leaves the popover
+     *
+     * @event mouseleave-popover
+     */
     'mouseleave-popover',
+
+    /**
+     * Emitted when the mouse enters the popover anchor
+     *
+     * @event mouseenter-popover-anchor
+     */
     'mouseenter-popover-anchor',
+
+    /**
+     * Emitted when the mouse leaves the popover anchor
+     *
+     * @event mouseleave-popover-anchor
+     */
     'mouseleave-popover-anchor',
   ],
 
@@ -339,9 +588,11 @@ export default {
         keydown: event => {
           this.onKeydown(event);
         },
+
         'after-leave': () => {
           this.onLeaveTransitionComplete();
         },
+
         'after-enter': () => {
           this.onEnterTransitionComplete();
         },
@@ -356,6 +607,8 @@ export default {
     },
 
     labelledBy () {
+      // aria-labelledby should be set only if aria-labelledby is passed as a prop, or if
+      // there is no aria-label and the labelledby should point to the anchor.
       return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtPopover__anchor'));
     },
   },
@@ -418,6 +671,7 @@ export default {
           this.toAppear = true;
         }
       },
+
       immediate: true,
     },
 
@@ -449,12 +703,18 @@ export default {
     this.mutationObserver = new MutationObserver(this.updateAnchorEl);
     this.mutationObserver.observe(this.$refs.anchor, {childList: true});
 
+    // rootMargin here must be greater than the margin of the height we are setting in calculatedMaxHeight which
+    // currently is var(--dt-space-300) (4px). If not the intersectionObserver will continually trigger in an infinite
+    // loop.
+    // threshold 1.0 makes this trigger every time the dialog "touches" the edge of the viewport.
     this.intersectionObserver = new IntersectionObserver(this.hasIntersectedViewport);
     this.intersectionObserver.observe(this.popoverContentEl);
   },
 
   beforeUnmount () {
     this._isUnmounting = true;
+    // Cancel any in-progress CSS transitions so transitionend cannot fire
+    // after this component is torn down and call into dead lifecycle methods.
     if (this.popoverContentEl) {
       this.popoverContentEl.style.transition = 'none';
     }
@@ -518,8 +778,11 @@ export default {
     },
 
     calculateAnchorZindex () {
+      // if a modal is currently active render at modal-element z-index, otherwise at popover z-index
       if (returnFirstEl(this.$el).getRootNode()
         .querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"]') ||
+        // Special case because we don't have any dialtone drawer component yet. Render at 650 when
+        // anchor of popover is within a drawer.
         this.anchorEl?.closest('.d-zi-drawer')) {
         return 650;
       } else {
@@ -530,6 +793,8 @@ export default {
     defaultToggleOpen (e) {
       if (this.openOnContext) { return; }
 
+      // Only use default toggle behaviour if the user has not set the open prop.
+      // Check that the anchor element specifically was clicked.
       if (this.open === null || this.open === undefined) {
         if ((!this.anchorEl?.contains(e.target) && !this.anchorEl?.isEqualNode(e.target)) || this.anchorEl?.disabled) {
           return;
@@ -593,6 +858,12 @@ export default {
       this.isOpen = false;
     },
 
+    /*
+    * Prevents scrolling outside of the currently opened modal popover by:
+    *   - when anchor is not within another popover: setting the body to overflow: hidden
+    *   - when anchor is within another popover: set the popover dialog container to it's non-modal z-index
+    *     since it is no longer the active modal. This puts it underneath the overlay and prevents scrolling.
+    **/
     preventScrolling () {
       if (this.modal) {
         const element = this.anchorEl?.closest('body, .tippy-box');
@@ -606,6 +877,9 @@ export default {
       }
     },
 
+    /*
+    * Resets the prevent scrolling properties set in preventScrolling() back to normal.
+    **/
     enableScrolling () {
       const element = this.anchorEl?.closest('body, .tippy-box');
       if (!element) return;
@@ -641,6 +915,7 @@ export default {
       if (this.modal) {
         await this.focusFirstElement(this.$refs.anchor);
         if (this._isUnmounting) return;
+        // await next tick in case the user wants to change focus themselves.
         await this.$nextTick();
         if (this._isUnmounting) return;
         this.enableScrolling();
@@ -656,6 +931,7 @@ export default {
     async onEnterTransitionComplete () {
       if (this._isUnmounting) return;
       this.focusInitialElement();
+      // await next tick in case the user wants to change focus themselves.
       await this.$nextTick();
       if (this._isUnmounting) return;
       this.preventScrolling();
@@ -669,6 +945,7 @@ export default {
       if (this.initialFocusElement === 'dialog') {
         returnFirstEl(this.$refs.content?.$el)?.focus();
       }
+      // find by ID
       if (this.initialFocusElement.startsWith('#')) {
         this.focusInitialElementById();
       }
@@ -697,6 +974,7 @@ export default {
 
     onClickOutside () {
       if (!this.hideOnClick) return;
+      // If a popover is opened inside of this one, do not hide on click out
       const innerModals = this.popoverContentEl?.querySelector('.d-popover__anchor--opened');
       if (!innerModals) {
         this.closePopover();
@@ -728,10 +1006,16 @@ export default {
       } else if (this.showCloseButton) {
         this.$refs.popover__header?.focusCloseButton();
       } else {
+        // if there are no focusable elements at all focus the dialog itself
         returnFirstEl(this.$refs.content?.$el).focus();
       }
     },
 
+    /**
+     * Return's the anchor ClientRect object relative to the window.
+     * Refer to: https://atomiks.github.io/tippyjs/v6/all-props/#getreferenceclientrect for more information
+     * @param error
+     */
     getReferenceClientRect (error) {
       const anchorReferenceRect = this.anchorEl?.getBoundingClientRect();
 
@@ -765,6 +1049,7 @@ export default {
           break;
 
         case 'root':
+          // Try to attach the popover to root document, fallback to parent is fail
           try {
             internalAppendTo = window.parent.document.body;
           } catch (err) {
@@ -791,6 +1076,8 @@ export default {
         interactive: true,
         trigger: 'manual',
         getReferenceClientRect: () => this.getReferenceClientRect(iFrameError),
+        // We have to manage hideOnClick functionality manually to handle
+        // popover within popover situations.
         hideOnClick: false,
         zIndex: this.modal ? 650 : this.calculateAnchorZindex(),
         onClickOutside: this.onClickOutside,
