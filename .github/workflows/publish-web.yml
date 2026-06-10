@@ -19,6 +19,7 @@ on:
           - stylelint-plugin-dialtone
           - postcss-responsive-variations
           - dialtone-mcp-server
+          - dialtone-cli
   push:
     branches:
       - production
@@ -78,6 +79,8 @@ jobs:
               - 'packages/postcss-responsive-variations/package.json'
             dialtone-mcp-server:
               - 'packages/dialtone-mcp-server/package.json'
+            dialtone-cli:
+              - 'packages/dialtone-cli/package.json'
 
       - name: Filter actions by input
         if: ${{ github.event_name == 'workflow_dispatch' }}

@@ -21,6 +21,7 @@ on:
           - stylelint-plugin
           - postcss-responsive-variations
           - dialtone-mcp-server
+          - dialtone-cli
   schedule:
     - cron: "0 10 * * 2"
 
@@ -117,6 +118,10 @@ jobs:
       - name: Release Dialtone MCP Server ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'dialtone-mcp-server' }}
         run: pnpm nx run dialtone-mcp-server:release
+
+      - name: Release Dialtone CLI ${{ env.RELEASE_TAG }}
+        if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'dialtone-cli' }}
+        run: pnpm nx run dialtone-cli:release
 
       - name: Release Dialtone ${{ env.RELEASE_TAG }}
         if: ${{ github.event_name == 'schedule' || github.event.inputs.package == 'all' || github.event.inputs.package == 'dialtone' }}
