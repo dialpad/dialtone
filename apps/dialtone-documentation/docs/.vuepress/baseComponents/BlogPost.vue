@@ -86,7 +86,7 @@ const props = defineProps({
 const avatarSrc = computed(() => authorAvatarUrl(props.author));
 
 const blogLink = computed(() => {
-  return window.location.href;
+  return typeof window !== 'undefined' ? window.location.href : '';
 });
 </script>
 

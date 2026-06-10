@@ -61,6 +61,7 @@ import { ref, watch, nextTick, onMounted, onBeforeUnmount } from 'vue';
 import { POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES, DtPopover } from '@/components/Popover/index.js';
 import { TOOLTIP_DIRECTIONS, TOOLTIP_DELAY_MS } from '@/components/Tooltip/index.js';
 import { getUniqueString } from '@/common/utils';
+import { HTML_ELEMENT_TYPE } from '@/common/constants';
 import { CONTENT_MODE_PROP } from '@/common/mode_constants';
 
 defineOptions({
@@ -200,7 +201,7 @@ const props = defineProps({
      * @values 'body', 'parent', HTMLElement,
      */
   appendTo: {
-    type: [HTMLElement, String],
+    type: [HTML_ELEMENT_TYPE, String],
     default: 'body',
     validator: appendTo => {
       return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||
@@ -231,7 +232,7 @@ const props = defineProps({
    * the anchor may be inside a Shadow DOM, as querySelector cannot pierce shadow boundaries.
    */
   externalAnchorElement: {
-    type: HTMLElement,
+    type: HTML_ELEMENT_TYPE,
     default: null,
   },
 });

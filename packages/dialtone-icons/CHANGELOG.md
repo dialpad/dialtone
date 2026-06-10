@@ -1,3 +1,12 @@
+# [4.54.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.53.0...dialtone-icons/v4.54.0) (2026-06-08)
+
+
+### Features
+
+* **Icons:** DLT-3460 DLT-3461 hand icon update ([#1315](https://github.com/dialpad/dialtone/issues/1315)) ([83ad138](https://github.com/dialpad/dialtone/commit/83ad138665f38e06411fce9ee27585fceb677a2b))
+* **Icons:** DP-192459 add circle and circle-dashed icons ([#1305](https://github.com/dialpad/dialtone/issues/1305)) ([8c41212](https://github.com/dialpad/dialtone/commit/8c41212d49dc1bc7fba2cfc51ffc01ab3896b619))
+
+
 # [4.54.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.53.0...dialtone-icons/v4.54.0-next.1) (2026-06-04)
 
 
@@ -11,27 +20,13 @@
 * **Dialtone Icons:** NO-JIRA add /vue export to dialtone-icon ([#1304](https://github.com/dialpad/dialtone/issues/1304)) ([081b0e9](https://github.com/dialpad/dialtone/commit/081b0e95293d7450f1cff21b285b504d95d52689))
 * **Icons:** DP-192459 add circle and circle-dashed icons ([#1305](https://github.com/dialpad/dialtone/issues/1305)) ([8c41212](https://github.com/dialpad/dialtone/commit/8c41212d49dc1bc7fba2cfc51ffc01ab3896b619))
 
+
 # [4.53.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.52.0...dialtone-icons/v4.53.0) (2026-06-02)
 
 
 ### Features
 
 * **Dialtone Icons:** NO-JIRA add /vue export to dialtone-icon ([#1304](https://github.com/dialpad/dialtone/issues/1304)) ([f7ca6d4](https://github.com/dialpad/dialtone/commit/f7ca6d438cc7c644d7e95bc963bd303ea2259b4d))
-
-
-# [4.53.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.52.1-next.1...dialtone-icons/v4.53.0-next.1) (2026-06-02)
-
-
-### Features
-
-* **Dialtone Icons:** NO-JIRA add /vue export to dialtone-icon ([#1304](https://github.com/dialpad/dialtone/issues/1304)) ([081b0e9](https://github.com/dialpad/dialtone/commit/081b0e95293d7450f1cff21b285b504d95d52689))
-
-## [4.52.1-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.52.0...dialtone-icons/v4.52.1-next.1) (2026-05-22)
-
-
-### Documentation
-
-* DLT-1510 DLT-1511 DLT-1512 site redesign and ia ([#968](https://github.com/dialpad/dialtone/issues/968)) ([6ea7eb9](https://github.com/dialpad/dialtone/commit/6ea7eb959f01bfb01c91c3b6a92465ed0c2e0f4b))
 
 # [4.52.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.51.1...dialtone-icons/v4.52.0) (2026-05-12)
 
@@ -46,39 +41,6 @@
 ### Bug Fixes
 
 * **Rich Text Editor:** NO-JIRA fix multiple rich text issues ([#1240](https://github.com/dialpad/dialtone/issues/1240)) ([f285a3e](https://github.com/dialpad/dialtone/commit/f285a3ed7c8cd409e0e59bd269282723b85003e6))
-
-## [4.51.2-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.51.1...dialtone-icons/v4.51.2-next.1) (2026-05-01)
-
-
-### Documentation
-
-* DLT-1510 DLT-1511 DLT-1512 site redesign and ia ([#968](https://github.com/dialpad/dialtone/issues/968)) ([6ea7eb9](https://github.com/dialpad/dialtone/commit/6ea7eb959f01bfb01c91c3b6a92465ed0c2e0f4b))
-
-## [4.51.1-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.51.0...dialtone-icons/v4.51.1-next.1) (2026-04-15)
-
-
-### Documentation
-
-* DLT-1510 DLT-1511 DLT-1512 site redesign and ia ([#968](https://github.com/dialpad/dialtone/issues/968)) ([6ea7eb9](https://github.com/dialpad/dialtone/commit/6ea7eb959f01bfb01c91c3b6a92465ed0c2e0f4b))
-
-## [4.51.1-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.51.0...dialtone-icons/v4.51.1-next.1) (2026-04-15)
-
-
-### Documentation
-
-* DLT-1510 DLT-1511 DLT-1512 site redesign and ia ([#968](https://github.com/dialpad/dialtone/issues/968)) ([6ea7eb9](https://github.com/dialpad/dialtone/commit/6ea7eb959f01bfb01c91c3b6a92465ed0c2e0f4b))
-
-# [4.51.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.50.0...dialtone-icons/v4.51.0-next.1) (2026-04-03)
-
-
-### Documentation
-
-* DLT-1510 DLT-1511 DLT-1512 site redesign and ia ([#968](https://github.com/dialpad/dialtone/issues/968)) ([6ea7eb9](https://github.com/dialpad/dialtone/commit/6ea7eb959f01bfb01c91c3b6a92465ed0c2e0f4b))
-
-
-### Features
-
-* **Icons:** DP-182525 add filter-filled icon ([#1161](https://github.com/dialpad/dialtone/issues/1161)) ([ee25905](https://github.com/dialpad/dialtone/commit/ee25905b4d1a7a1c6cfbfc9643d952e772b37daa))
 
 # [4.51.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.50.0...dialtone-icons/v4.51.0) (2026-04-02)
 
@@ -105,15 +67,6 @@
 ### Features
 
 * **Icon:** DLT-3136 convert docs inline svgs to components ([#1123](https://github.com/dialpad/dialtone/issues/1123)) ([8bae326](https://github.com/dialpad/dialtone/commit/8bae326eda78aaee3632464068113a748d6c3e69))
-
-## [4.48.1-next.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.48.1-next.1...dialtone-icons/v4.48.1-next.2) (2026-03-16)
-
-## [4.48.1-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.48.0...dialtone-icons/v4.48.1-next.1) (2026-03-02)
-
-
-### Documentation
-
-* DLT-1510 DLT-1511 DLT-1512 site redesign and ia ([#968](https://github.com/dialpad/dialtone/issues/968)) ([6ea7eb9](https://github.com/dialpad/dialtone/commit/6ea7eb959f01bfb01c91c3b6a92465ed0c2e0f4b))
 
 # [4.48.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.47.2...dialtone-icons/v4.48.0) (2026-02-25)
 

@@ -7,6 +7,12 @@ Example:
     ...
 */
 
+// `HTMLElement` is a browser-only global. Referencing it bare in a prop `type:`
+// dereferences it at module-load time, which throws in Node SSR environments.
+// Use this constant instead: it resolves to `HTMLElement` in the browser and
+// falls back to `Object` on the server (where prop typing is never checked).
+export const HTML_ELEMENT_TYPE = typeof HTMLElement !== 'undefined' ? HTMLElement : Object;
+
 // Types of messages, also dictates what is the current state of the input.
 export const VALIDATION_MESSAGE_TYPES = {
   CRITICAL: 'critical',

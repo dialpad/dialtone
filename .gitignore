@@ -86,6 +86,7 @@ SKILLS_TODO*.md
 *.old
 *.deprecated
 .claude/scheduled_tasks.lock
+.agents/**/evals/artifacts/
 .omx/
 
 # Thumb generator content-hash cache

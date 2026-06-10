@@ -1,8 +1,12 @@
 <script setup>
-console.log(window.DIALTONE_CONSTANTS);
+import { inject } from 'vue';
 
-const kindModifiers = Object.keys(window.DIALTONE_CONSTANTS.BUTTON_KIND_MODIFIERS).filter(k => k !== 'inverted');
-const importanceModifiers = Object.keys(window.DIALTONE_CONSTANTS.BUTTON_IMPORTANCE_MODIFIERS);
+// Provided by registerDialtoneVue via app.provide('dialtoneConstants', ...).
+// Available in both SSR and client; falls back to empty object when not yet set.
+const CONSTANTS = inject('dialtoneConstants', {});
+
+const kindModifiers = Object.keys(CONSTANTS.BUTTON_KIND_MODIFIERS ?? {});
+const importanceModifiers = Object.keys(CONSTANTS.BUTTON_IMPORTANCE_MODIFIERS ?? {});
 
 const importanceDescriptions = {
   clear: 'Default level of importance. Typically used for secondary or minimally important actions.',

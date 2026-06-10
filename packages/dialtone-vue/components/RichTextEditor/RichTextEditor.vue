@@ -79,6 +79,7 @@ import { CustomTextStyle } from './Extensions/TextStyle/TextStyle';
 import { TextStyleKit } from '@tiptap/extension-text-style';
 import Emoji from './Extensions/Emoji';
 import CustomLink from './Extensions/CustomLink';
+import { LinkPhoneNumbers } from './Extensions/LinkPhoneNumbers/LinkPhoneNumbers';
 import ConfigurableImage from './Extensions/Image';
 import DivParagraph from './Extensions/Div';
 import { MentionPlugin } from './Extensions/Mentions/Mention';
@@ -240,6 +241,18 @@ export default {
     customLink: {
       type: [Boolean, Object],
       default: false,
+    },
+
+    /**
+     * Phone number strings to display as clickable links, typically provided
+     * by the backend via `rich_media`. Matching text in the editor will be
+     * marked and emit a `phone-click` event when clicked. An empty array or
+     * `null` disables phone linking.
+     * @type {string[]|null}
+     */
+    linkPhoneNumbers: {
+      type: Array,
+      default: null,
     },
 
     /**
@@ -595,6 +608,15 @@ export default {
      * @type {Object}
      */
     'channel-click',
+
+    /**
+     * Event fired when a phone number link is clicked.
+     * Payload: { phoneNumber: string } — the raw phone number text as matched.
+     * Requires the `linkPhoneNumbers` prop to be set (loads the LinkPhoneNumbers extension).
+     * @event phone-click
+     * @type {Object}
+     */
+    'phone-click',
   ],
 
   data () {
@@ -706,12 +728,17 @@ export default {
             class: 'd-link d-wb-break-all',
           },
           openOnClick: false,
-          autolink: true,
+          // Disable autolink when customLink is active — customLink handles URL/IP
+          // autolinking and the two autolink plugins can conflict on the same text.
+          autolink: !this.customLink,
           protocols: RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
         }));
       }
       if (this.customLink) {
         extensions.push(this.getExtension(CustomLink, this.customLink));
+      }
+      if (this.linkPhoneNumbers !== null) {
+        extensions.push(LinkPhoneNumbers);
       }
 
       if (this.mentionSuggestion) {
@@ -908,6 +935,10 @@ export default {
     modelValue (newValue) {
       this.processValue(newValue);
     },
+
+    linkPhoneNumbers () {
+      this._applyPhoneMarks();
+    },
   },
 
   created () {
@@ -1074,6 +1105,33 @@ export default {
         emitUpdate: false,
         parseOptions: { preserveWhitespace: this.preserveWhitespace },
       });
+      this._applyPhoneMarks();
+    },
+
+    _applyPhoneMarks () {
+      if (!this.editor) return;
+      const type = this.editor.schema.marks.LinkPhoneNumbers;
+      if (!type) return;
+      const { tr, doc } = this.editor.state;
+      tr.removeMark(0, doc.content.size, type);
+      if (this.linkPhoneNumbers?.length) {
+        // Searches within individual text nodes only. A phone number that spans a
+        // mark boundary (e.g. partially bold) is split into separate text nodes by
+        // ProseMirror and will not be found. Backend-provided numbers are plain text,
+        // so this is expected to be a non-issue in practice.
+        doc.descendants((node, pos) => {
+          if (!node.isText || !node.text) return;
+          for (const number of this.linkPhoneNumbers) {
+            let searchFrom = 0;
+            let idx;
+            while ((idx = node.text.indexOf(number, searchFrom)) !== -1) {
+              tr.addMark(pos + idx, pos + idx + number.length, type.create());
+              searchFrom = idx + number.length;
+            }
+          }
+        });
+      }
+      this.editor.view.dispatch(tr);
     },
 
     destroyEditor () {
@@ -1253,6 +1311,11 @@ export default {
       // Channel is clicked
       this.editor.on('channel-click', (channelData) => {
         this.$emit('channel-click', channelData);
+      });
+
+      // Phone number link is clicked — only emitted by the LinkPhoneNumbers extension
+      this.editor.on('phone-click', (phoneData) => {
+        this.$emit('phone-click', phoneData);
       });
     },
 

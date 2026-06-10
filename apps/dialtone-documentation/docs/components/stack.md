@@ -1142,7 +1142,7 @@ View the [Migrating from Flex CSS Utilities to DtStack](/guides/migration/flex-t
 <component-class-table component-name="stack"></component-class-table>
 
 <script setup>
-  import { ref } from 'vue';
+  import { ref, inject } from 'vue';
   import ClampedTableWrapper from '@baseComponents/ClampedTableWrapper.vue';
   import ExampleProfileCard from '@exampleComponents/ExampleProfileCard.vue';
   import { values as spacingValues } from '@data/spacing.json';
@@ -1158,8 +1158,8 @@ View the [Migrating from Flex CSS Utilities to DtStack](/guides/migration/flex-t
     selectedGap.value = gap;
   };
 
-  const allGaps = window.DIALTONE_CONSTANTS.DT_STACK_GAP;
-  const gaps = allGaps.slice(0, allGaps.indexOf('400') + 1);
+  const dialtoneConstants = inject('dialtoneConstants', {});
+  const gaps = dialtoneConstants.DT_STACK_GAP ?? [];
 </script>
 
 <style scoped lang="less">

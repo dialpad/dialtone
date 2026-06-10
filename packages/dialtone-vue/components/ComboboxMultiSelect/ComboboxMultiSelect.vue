@@ -135,6 +135,7 @@ import DtChip from '@/components/Chip/Chip.vue';
 import DtValidationMessages from '@/components/ValidationMessages/ValidationMessages.vue';
 import { validationMessageValidator } from '@/common/validators';
 import { extractVueListeners, extractNonListeners, hasSlotContent, returnFirstEl, getUniqueString, getValidationState } from '@/common/utils';
+import { HTML_ELEMENT_TYPE } from '@/common/constants';
 import {
   POPOVER_APPEND_TO_VALUES,
 } from '@/components/Popover/PopoverConstants';
@@ -302,7 +303,7 @@ export default {
      * @values 'body', 'parent', HTMLElement,
      */
     appendTo: {
-      type: [HTMLElement, String],
+      type: [HTML_ELEMENT_TYPE, String],
       default: 'body',
       validator: appendTo => {
         return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||

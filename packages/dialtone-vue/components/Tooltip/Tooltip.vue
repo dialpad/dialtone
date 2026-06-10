@@ -53,6 +53,7 @@ import {
   POPOVER_APPEND_TO_VALUES,
 } from '../Popover/PopoverConstants';
 import { flushPromises, getUniqueString, hasSlotContent, warnIfUnmounted, returnFirstEl } from '@/common/utils';
+import { HTML_ELEMENT_TYPE } from '@/common/constants';
 import {
   createTippy,
   getAnchor,
@@ -178,7 +179,7 @@ export default {
      * @values 'body', 'parent', HTMLElement,
      */
     appendTo: {
-      type: [HTMLElement, String],
+      type: [HTML_ELEMENT_TYPE, String],
       default: 'body',
       validator: appendTo => {
         return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||
@@ -274,7 +275,7 @@ export default {
      * the anchor may be inside a Shadow DOM, as querySelector cannot pierce shadow boundaries.
      */
     externalAnchorElement: {
-      type: HTMLElement,
+      type: HTML_ELEMENT_TYPE,
       default: null,
     },
   },

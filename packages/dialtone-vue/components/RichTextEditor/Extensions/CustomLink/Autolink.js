@@ -39,9 +39,11 @@ export function autolink (options) {
       // Text content after the original transaction.
       const { textContent } = newState.doc;
 
-      // When the editor is initialized we want to add links to it.
-      if (!hasInitialized) {
+      // On initialization OR a full content replacement, scan the entire document.
+      if (!hasInitialized || !oldState.doc.textContent) {
         addMarks(textContent, 0, 0, textContent.length, tr, options.type);
+        hasInitialized = true;
+        return tr;
       }
 
       hasInitialized = true;
@@ -55,7 +57,20 @@ export function autolink (options) {
       // All the changes within the document.
       const changes = getChangedRanges(transform);
 
+      // Fallback to full scan when getChangedRanges returns nothing (e.g. wholesale setContent).
+      if (!changes.length) {
+        addMarks(textContent, 0, 0, textContent.length, tr, options.type);
+        return tr;
+      }
+
       changes.forEach(({ oldRange, newRange }) => {
+        // Zero-width ranges come from mark-only steps (AddMarkStep/RemoveMarkStep).
+        // removeMarks expands by ±1 and would delete our mark without re-adding it.
+        if (newRange.from === newRange.to) {
+          addMarks(textContent, 0, 0, textContent.length, tr, options.type);
+          return;
+        }
+
         // Remove all link marks in the changed range since we'll add them
         // right back if they're still valid links.
         removeMarks(newRange, newState.doc, tr, options.type);

@@ -48,11 +48,12 @@ const props = defineProps({
   },
 });
 
+const empty = { render: () => null };
+
 const illustrationSVGs = [
-  defineAsyncComponent({
-    loader: () => import(`../../../node_modules/@dialpad/dialtone-icons/dist/svg/illustrations/${props.name}.svg`),
-    onError: () => {},
-  }),
+  defineAsyncComponent(() =>
+    import(`../../../node_modules/@dialpad/dialtone-icons/dist/svg/illustrations/${props.name}.svg`).catch(() => empty),
+  ),
 ];
 
 const svgPaths = [
@@ -62,18 +63,15 @@ const svgPaths = [
 ];
 
 const svgs = [
-  defineAsyncComponent({
-    loader: () => import(`../public/assets/images/${props.name}.svg?component`),
-    onError: () => {},
-  }),
-  defineAsyncComponent({
-    loader: () => import(`../public/assets/images/components/${props.name}.svg?component`),
-    onError: () => {},
-  }),
-  defineAsyncComponent({
-    loader: () => import(`../public/assets/images/favicons/${props.name}.svg?component`),
-    onError: () => {},
-  }),
+  defineAsyncComponent(() =>
+    import(`../public/assets/images/${props.name}.svg?component`).catch(() => empty),
+  ),
+  defineAsyncComponent(() =>
+    import(`../public/assets/images/components/${props.name}.svg?component`).catch(() => empty),
+  ),
+  defineAsyncComponent(() =>
+    import(`../public/assets/images/favicons/${props.name}.svg?component`).catch(() => empty),
+  ),
 ];
 
 

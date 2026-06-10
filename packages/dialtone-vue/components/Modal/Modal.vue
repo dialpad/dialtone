@@ -140,6 +140,7 @@ import {
   MODAL_SIZE_MODIFIERS,
 } from './ModalConstants';
 import { getUniqueString, hasSlotContent, returnFirstEl, disableRootScrolling, enableRootScrolling } from '@/common/utils';
+import { HTML_ELEMENT_TYPE } from '@/common/constants';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 import { NOTICE_KINDS } from '@/components/Notice';
 import { DialtoneLocalization } from '@/localization';
@@ -344,7 +345,7 @@ export default {
      * If the dialog is modal this prop cannot be 'none'.
      */
     initialFocusElement: {
-      type: [String, HTMLElement],
+      type: [String, HTML_ELEMENT_TYPE],
       default: 'first',
       validator: initialFocusElement => {
         return initialFocusElement === 'first' ||
