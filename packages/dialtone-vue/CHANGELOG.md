@@ -1,3 +1,10 @@
+## [3.222.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.222.0...dialtone-vue/v3.222.1) (2026-06-10)
+
+
+### Bug Fixes
+
+* **Docs:** NO-JIRA actually static render the docs ([#1319](https://github.com/dialpad/dialtone/issues/1319)) ([0107a8e](https://github.com/dialpad/dialtone/commit/0107a8ebb20dce64efe0c29f883300bce08bc56a))
+
 # [3.222.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.221.1...dialtone-vue/v3.222.0) (2026-06-08)
 
 
