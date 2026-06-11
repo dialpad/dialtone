@@ -8,28 +8,34 @@ export function getOppositeMode (currentMode) {
 }
 
 /**
- * Get the mode from the root HTML element
+ * Get the mode from the root HTML element.
+ * Returns the default during SSR, where no DOM exists.
  * @returns {string} The root mode or 'light' as default
  */
 export function getRootMode () {
+  if (typeof document === 'undefined') return 'light';
   const rootMode = document.documentElement.getAttribute('data-dt-mode');
   return rootMode || 'light';
 }
 
 /**
- * Get the contrast from the root HTML element
+ * Get the contrast from the root HTML element.
+ * Returns the default during SSR, where no DOM exists.
  * @returns {string} The root contrast or 'default' as default
  */
 export function getRootContrast () {
+  if (typeof document === 'undefined') return 'default';
   const rootContrast = document.documentElement.getAttribute('data-dt-contrast');
   return rootContrast || 'default';
 }
 
 /**
- * Get the material from the root HTML element
+ * Get the material from the root HTML element.
+ * Returns the default during SSR, where no DOM exists.
  * @returns {string} The root material or 'sandstone' as default
  */
 export function getRootMaterial () {
+  if (typeof document === 'undefined') return 'sandstone';
   const rootMaterial = document.documentElement.getAttribute('data-dt-material');
   return rootMaterial || 'sandstone';
 }

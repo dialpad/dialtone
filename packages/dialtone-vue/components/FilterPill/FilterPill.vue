@@ -206,6 +206,7 @@
 
 <script>
 import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES } from '@/components/Popover';
+import { HTML_ELEMENT_TYPE } from '@/common/constants';
 import { CONTENT_MODE_PROP } from '@/common/mode_constants';
 import { BUTTON_SIZE_MODIFIERS, BUTTON_ICON_SIZES, DtButton } from '@/components/Button';
 import { DtIconChevronDown, DtIconClose } from '@dialpad/dialtone-icons/vue';
@@ -324,7 +325,7 @@ export default {
      * @values body, parent, root, HTMLElement
      */
     popoverAppendTo: {
-      type: [HTMLElement, String],
+      type: [HTML_ELEMENT_TYPE, String],
       default: 'body',
       validator: appendTo => {
         return POPOVER_APPEND_TO_VALUES.includes(appendTo) ||

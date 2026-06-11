@@ -436,7 +436,7 @@ The filter pill is built on `DtButton` and `DtPopover`/`DtDropdown`, inheriting 
 <component-class-table component-name="filter-pill"></component-class-table>
 
 <script setup>
-import { ref, computed } from 'vue';
+import { ref, computed, inject } from 'vue';
 
 const heroConversationTypes = ref([
   {name: 'All Conversations'},
@@ -514,5 +514,6 @@ function selectDropdownType (name, close) {
 function resetDropdownType () {
   dropdownTypes.value.forEach(f => { f.active = false; });
 }
-const sizes = Object.keys(window.DIALTONE_CONSTANTS.BUTTON_SIZE_MODIFIERS).filter(k => /^\d+$/.test(k));
+const dialtoneConstants = inject('dialtoneConstants', {});
+const sizes = Object.keys(dialtoneConstants.BUTTON_SIZE_MODIFIERS ?? {}).filter(k => /^\d+$/.test(k));
 </script>
