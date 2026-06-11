@@ -1,0 +1,343 @@
+//
+//  DIALTONE
+//  COMPONENTS: SLIDER
+//
+//  These are slider classes for Dialpad's design system Dialtone.
+//  For further documentation of these and other classes,
+//  visit https://dialtone.dialpad.com/components/slider
+//
+//  TABLE OF CONTENTS
+//  • VARIABLES
+//  • SLIDER
+//    - Base Style
+//    - Track & Indicator
+//    - Thumb
+//    - Ticks & Marks
+//    - States (disabled, inverted)
+//    - Sizes
+//    - Vertical orientation
+//  • REDUCED MOTION
+//
+
+@layer dialtone.components {
+
+//  $  SLIDER
+//  ============================================================================
+.d-slider {
+    //  Component CSS vars — override these for size/state modifiers
+    --slider-track-height: var(--dt-size-border-300);         // 4px
+    --slider-track-color: var(--dt-color-surface-strong);
+    --slider-indicator-color: var(--dt-color-brand-purple);
+    --slider-thumb-size: var(--dt-spacing-350);               // 28px — controls control area + hit target
+    --slider-thumb-visual-size: calc(var(--slider-thumb-size) * 0.8); // 20% smaller than the hit target
+    --slider-thumb-color: var(--dt-color-surface-primary);
+    --slider-thumb-border-color: var(--dt-color-border-subtle);
+    --slider-thumb-border-width: var(--dt-size-border-100);
+    --slider-thumb-dot-color: var(--dt-color-brand-purple);
+    --slider-thumb-dot-size: 35%;
+    --slider-thumb-shadow: var(--dt-shadow-small);
+    --slider-focus-shadow: var(--dt-shadow-focus);
+    --slider-disabled-track-color: var(--dt-inputs-color-background-disabled);
+    --slider-disabled-indicator-color: var(--dt-inputs-color-foreground-disabled);
+    --slider-disabled-thumb-color: var(--dt-inputs-color-foreground-disabled);
+    --slider-disabled-border-color: var(--dt-inputs-color-border-disabled);
+    --slider-tick-color: var(--dt-color-border-bold);
+    --slider-boundary-color: var(--dt-color-foreground-tertiary);
+    --slider-track-length: var(--dt-layout-300);               // 192px — used as block-size in vertical mode
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--dt-spacing-50);
+    inline-size: 100%;
+}
+
+//  $$  LABEL
+//  ----------------------------------------------------------------------------
+.d-slider__label {
+    display: block;
+}
+
+//  $$  BODY
+//  ----------------------------------------------------------------------------
+.d-slider__body {
+    display: flex;
+    gap: var(--dt-spacing-100);
+    align-items: center;
+    inline-size: 100%;
+}
+
+.d-slider__start,
+.d-slider__end {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    color: var(--slider-boundary-color);
+}
+
+//  $$  CONTROL AREA (track + thumbs container)
+//  ----------------------------------------------------------------------------
+.d-slider__control {
+    position: relative;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    box-sizing: content-box;
+    cursor: default;
+    block-size: var(--slider-thumb-size);
+
+    // Minimum WCAG 2.5.5 touch target via padding
+    padding-block: max(0, calc((var(--dt-spacing-550) - var(--slider-thumb-size)) / 2));
+}
+
+//  $$  TRACK
+//  ----------------------------------------------------------------------------
+.d-slider__track {
+    position: absolute;
+    inset-inline: 0;
+    block-size: var(--slider-track-height);
+    background-color: var(--slider-track-color);
+    border-radius: var(--dt-size-radius-pill);
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+//  $$  INDICATOR (filled portion)
+//  ----------------------------------------------------------------------------
+.d-slider__indicator {
+    position: absolute;
+    block-size: var(--slider-track-height);
+    background-color: var(--slider-indicator-color);
+    border-radius: var(--dt-size-radius-pill);
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: width 0.1s ease, left 0.1s ease, right 0.1s ease;
+    }
+}
+
+//  $$  VISUAL THUMB (the styled handle)
+//  ----------------------------------------------------------------------------
+.d-slider__thumb-visual {
+    position: absolute;
+    z-index: 1;
+    background: radial-gradient(
+        circle at center,
+        var(--slider-thumb-dot-color) 0%,
+        var(--slider-thumb-dot-color) var(--slider-thumb-dot-size),
+        var(--slider-thumb-color) var(--slider-thumb-dot-size)
+    );
+    border: var(--slider-thumb-border-width) solid var(--slider-thumb-border-color);
+    border-radius: 50%;
+    box-shadow: var(--slider-thumb-shadow);
+    pointer-events: none;
+    inline-size: var(--slider-thumb-visual-size);
+    block-size: var(--slider-thumb-visual-size);
+    inset-block-start: 50%;
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: box-shadow 0.1s ease;
+    }
+}
+
+.d-slider__thumb-visual--focused {
+    box-shadow: var(--slider-thumb-shadow), var(--slider-focus-shadow);
+}
+
+//  $$  THUMB HIT AREA (min 44×44px transparent touch target per thumb)
+//  ----------------------------------------------------------------------------
+.d-slider__thumb-hit {
+    position: absolute;
+    z-index: 2;
+    min-inline-size: var(--dt-spacing-550);
+    min-block-size: var(--dt-spacing-550);
+    border-radius: 50%;
+    cursor: grab;
+    inset-block-start: 50%;
+}
+
+//  $$  NATIVE INPUT (transparent, a11y + keyboard carrier)
+//  ----------------------------------------------------------------------------
+.d-slider__thumb {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    pointer-events: none;
+    inline-size: 100%;
+    block-size: 100%;
+    inset: 0;
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+    }
+
+    &::-moz-range-thumb {
+        background: transparent;
+        border: none;
+        appearance: none;
+    }
+}
+
+//  $$  TICKS
+//  ----------------------------------------------------------------------------
+.d-slider__tick {
+    position: absolute;
+    inline-size: var(--dt-size-border-200);
+    block-size: var(--dt-spacing-50);
+    background-color: var(--slider-tick-color);
+    inset-block-start: 50%;
+    margin-block-start: calc(var(--slider-track-height) / 2 + var(--dt-size-border-100));
+    pointer-events: none;
+}
+
+//  $$  MARKS (text annotations centered under a track position)
+//  Independent of ticks; set via the marks prop.
+//  ----------------------------------------------------------------------------
+.d-slider__mark {
+    position: absolute;
+    color: var(--slider-boundary-color);
+    font: var(--dt-typography-body-sm);
+    white-space: nowrap;
+    transform: translateX(-50%);
+    pointer-events: none;
+    inset-block-start: calc(50% + var(--slider-track-height) / 2 + var(--dt-spacing-50));
+}
+
+//  $$  DRAGGING STATE
+//  ----------------------------------------------------------------------------
+.d-slider[data-dragging] {
+    .d-slider__control,
+    .d-slider__thumb-hit {
+        cursor: grabbing;
+    }
+}
+
+//  $$  DISABLED STATE
+//  ----------------------------------------------------------------------------
+.d-slider--disabled {
+    .d-slider__control,
+    .d-slider__thumb-hit {
+        cursor: not-allowed;
+    }
+
+    .d-slider__track {
+        background-color: var(--slider-disabled-track-color);
+    }
+
+    .d-slider__indicator {
+        background-color: var(--slider-disabled-indicator-color);
+    }
+
+    .d-slider__thumb-visual {
+        --slider-thumb-color: var(--dt-inputs-color-background-disabled);
+        --slider-thumb-dot-color: var(--slider-disabled-thumb-color);
+
+        border-color: var(--slider-disabled-border-color);
+    }
+}
+
+//  $$  INVERTED STATE
+//  (indicator is already positioned by the Vue component via :style)
+//  Class provided for consumer overrides.
+// .d-slider--inverted {}
+
+//  $$  SIZES
+//  ----------------------------------------------------------------------------
+.d-slider--xs {
+    --slider-track-height: var(--dt-size-border-200);
+    --slider-thumb-size: var(--dt-spacing-150);
+}
+
+.d-slider--sm {
+    --slider-track-height: var(--dt-size-border-200);
+    --slider-thumb-size: var(--dt-spacing-175);
+}
+
+.d-slider--lg {
+    --slider-track-height: var(--dt-size-border-400);
+    --slider-thumb-size: var(--dt-spacing-700);
+}
+
+.d-slider--xl {
+    --slider-track-height: var(--dt-size-border-400);
+    --slider-thumb-size: var(--dt-spacing-700);
+}
+
+//  $$  VERTICAL ORIENTATION
+//  ----------------------------------------------------------------------------
+.d-slider--vertical {
+    inline-size: auto;
+    block-size: var(--slider-track-length);
+
+    .d-slider__body {
+        flex-direction: column;
+        align-items: center;
+        block-size: 100%;
+    }
+
+    .d-slider__control {
+        inline-size: var(--slider-thumb-size);
+        block-size: auto;
+        flex: 1;
+        flex-direction: column;
+        padding-block: 0;
+        padding-inline: max(0, calc((var(--dt-spacing-550) - var(--slider-thumb-size)) / 2));
+    }
+
+    .d-slider__track {
+        inset-inline: unset;
+        inset-block: 0;
+        inline-size: var(--slider-track-height);
+        block-size: 100%;
+        inset-inline-start: 50%;
+        inset-block-start: 0;
+        transform: translateX(-50%);
+    }
+
+    .d-slider__indicator {
+        inline-size: var(--slider-track-height);
+        block-size: auto;
+        inset-inline-start: 50%;
+        inset-block-start: unset;
+        transform: translateX(-50%);
+        transition: height 0.1s ease, bottom 0.1s ease, top 0.1s ease;
+    }
+
+    .d-slider__thumb-visual {
+        inset-inline-start: 50%;
+        inset-block-start: unset;
+        // bottom is set inline via style
+        transform: translate(-50%, 50%);
+    }
+
+    .d-slider__thumb-hit {
+        inset-inline-start: 50%;
+        inset-block-start: unset;
+    }
+
+    .d-slider__tick {
+        inline-size: var(--dt-spacing-50);
+        block-size: var(--dt-size-border-200);
+        inset-block-start: unset;
+        inset-inline-start: calc(50% + var(--slider-track-height) / 2 + var(--dt-size-border-100));
+        margin-block-start: 0;
+        // bottom set via style
+        transform: translateY(50%);
+    }
+
+    .d-slider__mark {
+        inset-block-start: unset;
+        inset-inline-start: calc(50% + var(--slider-thumb-size) / 2 + var(--dt-spacing-50));
+        transform: translateY(50%);
+        // bottom set inline via style
+    }
+}
+
+} // @layer

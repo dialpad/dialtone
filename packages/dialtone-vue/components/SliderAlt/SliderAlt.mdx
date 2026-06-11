@@ -1,0 +1,99 @@
+import { Canvas, Subtitle, Controls, Meta } from '@storybook/addon-docs/blocks';
+
+import * as SliderAltStories from './SliderAlt.stories';
+
+<Meta of={SliderAltStories}/>
+
+# Slider Alt
+
+<Subtitle>
+  An alternative slider control with a pill-shaped thumb, suitable for compact
+  layouts. Supports single-thumb and range modes with the same API as DtSlider.
+</Subtitle>
+
+## Base Style
+
+<Canvas of={SliderAltStories.Default} />
+
+## All Variants
+
+<Canvas of={SliderAltStories.Variants} />
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtSliderAlt } from '@dialpad/dialtone-vue';
+```
+
+### Single thumb
+
+```html
+<dt-slider-alt v-model="volume" label="Volume" />
+```
+
+### Range slider
+
+```html
+<dt-slider-alt v-model="priceRange" label="Price range" />
+<!-- where priceRange = ref([20, 70]) -->
+```
+
+### Fill from origin
+
+```html
+<dt-slider-alt
+  v-model="percentage"
+  label="Percentage"
+  :min="-100"
+  :max="100"
+  :fill-origin="0"
+/>
+```
+
+### Vertical orientation
+
+```html
+<dt-slider-alt
+  v-model="value"
+  label="Height"
+  orientation="vertical"
+  style="height: 200px"
+/>
+```
+
+### Visually hidden label (screen-reader accessible)
+
+```html
+<dt-slider-alt
+  v-model="value"
+  label="Volume"
+  label-hidden
+/>
+```
+
+## Accessibility
+
+### Keyboard support
+
+| Key | Action |
+| --- | --- |
+| Arrow Right / Arrow Up | Increase by `step` |
+| Arrow Left / Arrow Down | Decrease by `step` |
+| Home | Jump to `min` |
+| End | Jump to `max` |
+| Page Up | Increase by `largeStep` (default 10) |
+| Page Down | Decrease by `largeStep` (default 10) |
+
+### Screen reader notes
+
+- Each thumb is a native `<input type="range">` with `role="slider"` (native), `aria-valuemin`, `aria-valuemax`, and `aria-valuenow` automatically set from the `min`, `max`, and current value props.
+- Provide a `label` prop (use `labelHidden` to hide it visually). The label is associated via `aria-labelledby` on each thumb.
+- For range sliders, provide a `getAriaValueText` callback to give each thumb a distinct description, for example `(v, i) => i === 0 ? 'Minimum: ' + v : 'Maximum: ' + v`.
+- If using icon-only content in the `start` or `end` slots, ensure each icon has an `aria-label` or hidden text — the slot wrapper itself carries no semantic label.
+- The `name` attribute enables form submission. In range mode, both `<input>` elements share the same name; retrieve both values with `FormData.getAll(name)`.
