@@ -56,11 +56,12 @@ import { computed } from 'vue';
 const themeData = useThemeLocaleData();
 
 const kits = computed(() => {
-  return (
-    themeData.value.sidebar?.topLevelGroups?.['ui-kits']?.sections?.[
-      '/ui-kits/'
-    ]?.[0]?.children || []
-  );
+  // 'UI Kits' (top level) and its 'Meet the Kits' child both link to /ui-kits/;
+  // the kit entries are the children of 'Meet the Kits'.
+  const nav = themeData.value.sidebar?.nav || [];
+  const uiKits = nav.find(item => item.link === '/ui-kits/');
+  const meetTheKits = uiKits?.children?.find(child => child.link === '/ui-kits/');
+  return meetTheKits?.children || [];
 });
 
 const badgeKindClass = (status) => {

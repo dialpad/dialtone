@@ -285,7 +285,7 @@ html body {
 //  ----------------------------------------------------------------------------
 .dialtone-header {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  grid-template-columns: 1fr auto;
   align-items: center;
   padding: var(--dt-spacing-200) var(--dt-spacing-300) var(--dt-spacing-200) var(--dt-spacing-200);
   color: var(--dt-shell-color-foreground-primary);
@@ -294,10 +294,6 @@ html body {
 
   > :where(:first-child) {
     justify-self: start;
-  }
-
-  > :where(:nth-child(2)) {
-    justify-self: center;
   }
 
   > :where(:last-child) {

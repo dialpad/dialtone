@@ -319,8 +319,19 @@ function buildOverviewLink (linkPath, currentRawDir) {
  * Load nav categories for a section from site-nav.json.
  * Returns the category children array, or null if not found.
  */
+function findNavItemByLink (items, link) {
+  for (const item of items || []) {
+    if (item.link === link) return item;
+    if (item.children) {
+      const found = findNavItemByLink(item.children, link);
+      if (found) return found;
+    }
+  }
+  return null;
+}
+
 function loadNavCategories (navSection) {
-  return _navData?.topLevelGroups?.dialtone?.sections?.[navSection]?.[0]?.children ?? null;
+  return findNavItemByLink(_navData?.nav, navSection)?.children ?? null;
 }
 
 /**
@@ -617,7 +628,7 @@ function tryAppendNavChildren (entry, rawBase) {
  * Skips pages that already have a "## Pages" section from filesystem-based linking.
  */
 function appendNavChildLinks (rawBase) {
-  if (!_navData) return;
+  if (!_navData?.nav) return;
 
   function walk (entries) {
     if (!entries) return;
@@ -627,11 +638,7 @@ function appendNavChildLinks (rawBase) {
     }
   }
 
-  const sections = _navData?.topLevelGroups?.dialtone?.sections;
-  if (!sections) return;
-  for (const sectionEntries of Object.values(sections)) {
-    walk(sectionEntries);
-  }
+  walk(_navData.nav);
 }
 
 function main () {

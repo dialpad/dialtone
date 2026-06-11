@@ -96,42 +96,12 @@ let observer = null;
 const isMobile = ref(false);
 
 /**
- * Determine which top-level group the current route belongs to
- * @param {string} path Current route path
- * @returns {string} The top-level group key
- */
-function detectTopLevelGroup(path) {
-  // Map routes to top-level groups
-  const designSystemPaths = ['/components/', '/utilities/', '/tokens/', '/guides/', '/about/', '/functions-and-utilities/'];
-
-  if (designSystemPaths.some(p => path.includes(p))) {
-    return 'dialtone';
-  }
-  if (path.includes('/foundations/')) {
-    return 'foundations';
-  }
-  if (path.includes('/ui-kits/')) {
-    return 'ui-kits';
-  }
-  if (path.includes('/careers/')) {
-    return 'careers';
-  }
-  if (path.includes('/articles/')) {
-    return 'articles';
-  }
-  if (path.includes('/dialtone/')) {
-    return 'dialtone';
-  }
-
-  // Default to dialtone for any unknown paths
-  return 'dialtone';
-}
-
-/**
  * Recursively extract all navigable pages from a tree structure
  * Groups them by their parent category for pagination purposes
  * Includes both parent pages with children AND leaf nodes
  */
+const isExternalUrl = (link) => /^https?:\/\//.test(link);
+
 function extractLeafNodes(items, planned = false) {
   const groups = [];
 
@@ -140,7 +110,7 @@ function extractLeafNodes(items, planned = false) {
       if (item.planned && !planned) return;
 
       // Include this item if it has a link (it's a navigable page)
-      if (item.link) {
+      if (item.link && !isExternalUrl(item.link)) {
         currentGroup.push(item);
       }
 
@@ -155,7 +125,7 @@ function extractLeafNodes(items, planned = false) {
     const group = [];
 
     // Include parent if it has a link
-    if (parentItem.link && (!parentItem.planned || planned)) {
+    if (parentItem.link && !isExternalUrl(parentItem.link) && (!parentItem.planned || planned)) {
       group.push(parentItem);
     }
 
@@ -172,25 +142,10 @@ function extractLeafNodes(items, planned = false) {
   return groups;
 }
 
-// Remove "planned" items to avoid errors
+// Flatten the nav tree into per-section page groups for prev/next pagination.
 const currentItems = computed(() => {
-  // Check if using new top-level groups structure
-  if (items.topLevelGroups) {
-    const topLevelGroup = detectTopLevelGroup(route.path);
-    const sections = items.topLevelGroups[topLevelGroup]?.sections || {};
-
-    // Flatten all sections into a single array
-    const allSections = Object.values(sections).flat();
-    if (!allSections.length) return null;
-
-    // Extract all leaf nodes (actual pages) recursively
-    return extractLeafNodes(allSections);
-  }
-
-  // Fallback to old flat structure (for backwards compatibility)
-  const key = Object.keys(items).filter(item => route.path.includes(item));
-  if (!Array.isArray(items[key])) return null;
-  return items[key].map(item => item.children.filter(child => !child.planned));
+  if (!items.nav?.length) return null;
+  return extractLeafNodes(items.nav);
 });
 
 // Finds the current item

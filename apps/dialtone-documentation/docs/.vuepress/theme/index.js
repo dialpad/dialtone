@@ -226,67 +226,29 @@ function _injectFrontmatterIntoSidebar (app, options) {
     });
   };
 
-  // Process all sidebar sections
-  if (options.sidebar?.topLevelGroups) {
-    Object.values(options.sidebar.topLevelGroups).forEach(group => {
-      if (group.sections) {
-        Object.values(group.sections).forEach(section => {
-          injectData(section);
-        });
-      }
-    });
+  // Process the nav tree
+  if (options.sidebar?.nav) {
+    injectData(options.sidebar.nav);
   }
 }
 
-function getChildrenPageNames (path, pages) {
-  // Handle new topLevelGroups structure
-  if (pages?.topLevelGroups) {
-    // Search all top-level groups and merge their sections
-    const allSections = {};
-    Object.values(pages.topLevelGroups).forEach(group => {
-      if (group.sections) {
-        Object.assign(allSections, group.sections);
-      }
-    });
-    pages = allSections;
-  }
-
-  // If pages is not an object (e.g., undefined or null), return empty array
-  if (!pages || typeof pages !== 'object') {
-    return [];
-  }
-
-  // If pages is already an array (from recursive call), search within it
-  if (Array.isArray(pages)) {
-    const item = pages.find(item => {
-      const itemPath = item.link?.replace(/\/$/, '');
-      const searchPath = `/${path}`.replace(/\/$/, '');
-      return itemPath === searchPath;
-    });
-    return item?.children || [];
-  }
-
-  const [, parent, child] = path.split('/');
-  const page = Object.keys(pages).find(pageKey => {
-    return pageKey === `/${parent}/` || pages[pageKey]?.link?.endsWith(`${path}/`);
-  });
-
-  // Handle both nested structure (first item has children) and flat structure (array IS the children)
-  let children;
-  if (pages?.[page]) {
-    const pageItems = pages[page];
-    // Check if first item has children property (nested structure)
-    if (pageItems[0]?.children) {
-      children = pageItems[0].children;
-    } else if (Array.isArray(pageItems)) {
-      // Flat structure - the array itself contains the items
-      children = pageItems;
+function findNavItemByLink (items, link) {
+  for (const item of items || []) {
+    if (item.link === link) return item;
+    if (item.children) {
+      const found = findNavItemByLink(item.children, link);
+      if (found) return found;
     }
   }
+  return null;
+}
 
-  if (!child) return children || [];
-
-  return getChildrenPageNames(child, children);
+/**
+ * Children of the nav item whose link matches `path` (e.g. '/components/').
+ * Returns [] when no nav item matches.
+ */
+function getChildrenPageNames (path, pages) {
+  return findNavItemByLink(pages?.nav, path)?.children || [];
 }
 
 export const dialtoneVuepressTheme = (options) => ({
