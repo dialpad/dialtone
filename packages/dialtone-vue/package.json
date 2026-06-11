@@ -65,6 +65,7 @@
     "@storybook/addon-links": "10.3.0",
     "@storybook/test-runner": "^0.24.4",
     "@storybook/vue3-vite": "10.3.0",
+    "@vitejs/plugin-react": "6.0.2",
     "@vue/test-utils": "^2.4.0",
     "@vueless/storybook-dark-mode": "^10.0.7",
     "react": "19.2.4",
