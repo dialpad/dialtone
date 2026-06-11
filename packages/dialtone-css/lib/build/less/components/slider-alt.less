@@ -1,0 +1,343 @@
+//
+//  DIALTONE
+//  COMPONENTS: SLIDER ALT
+//
+//  These are slider-alt classes for Dialpad's design system Dialtone.
+//  A visual variant of the slider with an iOS toggle-inspired aesthetic:
+//  fat pill-shaped track, full-height indicator fill, plain white pill thumb.
+//
+//  TABLE OF CONTENTS
+//  • VARIABLES
+//  • SLIDER ALT
+//    - Base Style
+//    - Label
+//    - Body
+//    - Control Wrapper
+//    - Track & Indicator
+//    - Thumb
+//    - Ticks & Marks
+//    - States (disabled, inverted)
+//    - Sizes
+//    - Vertical orientation
+//  • REDUCED MOTION
+//
+
+@layer dialtone.components {
+
+//  $  SLIDER ALT
+//  ============================================================================
+.d-slider-alt {
+    //  Component CSS vars — override these for size/state modifiers
+    //  Default size: 16px track, 12px thumb block-size
+    --slider-alt-track-height: var(--dt-layout-25);               // 16px
+    --slider-alt-track-color: var(--dt-color-surface-strong);
+    --slider-alt-indicator-color: var(--dt-color-brand-purple);
+    --slider-alt-thumb-size: var(--dt-icon-size-100);             // 12px — block-size (height)
+    --slider-alt-thumb-width: calc(var(--slider-alt-thumb-size) * 1.875); // ~22px — inline-size (pill long axis)
+    --slider-alt-thumb-inset: calc((var(--slider-alt-track-height) - var(--slider-alt-thumb-size)) / 2); // 2px gap each side
+    --slider-alt-thumb-color: var(--dt-color-surface-primary);
+    --slider-alt-thumb-shadow: var(--dt-shadow-small);
+    --slider-alt-focus-shadow: var(--dt-shadow-focus);
+    --slider-alt-tick-color: var(--dt-color-border-bold);
+    --slider-alt-boundary-color: var(--dt-color-foreground-tertiary);
+    --slider-alt-track-length: var(--dt-layout-300);             // 192px — used as block-size in vertical mode
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--dt-spacing-50);
+    inline-size: 100%;
+}
+
+//  $$  LABEL
+//  ----------------------------------------------------------------------------
+.d-slider-alt__label {
+    display: block;
+}
+
+//  $$  BODY
+//  ----------------------------------------------------------------------------
+.d-slider-alt__body {
+    display: flex;
+    gap: var(--dt-spacing-100);
+    align-items: center;
+    inline-size: 100%;
+}
+
+.d-slider-alt__start,
+.d-slider-alt__end {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    color: var(--slider-alt-boundary-color);
+}
+
+//  $$  CONTROL WRAPPER (flex:1 container that holds the control + boundaries)
+//  Boundaries live outside the overflow:hidden control so they aren't clipped.
+//  ----------------------------------------------------------------------------
+.d-slider-alt__control-wrapper {
+    position: relative;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: var(--dt-spacing-50);
+}
+
+//  $$  CONTROL AREA (track + thumbs container)
+//  overflow: hidden + border-radius clips all children to the pill shape,
+//  preventing the indicator's smaller pill radius from protruding outside
+//  the track's wider pill corners at narrow fill widths.
+//  flex: 1 is on the wrapper; this element just fills it.
+//  ----------------------------------------------------------------------------
+.d-slider-alt__control {
+    position: relative;
+    display: flex;
+    align-items: center;
+    box-sizing: content-box;
+    overflow: hidden;
+    border-radius: var(--dt-size-radius-pill);
+    cursor: default;
+    block-size: var(--slider-alt-track-height);
+}
+
+//  Focus ring applied to the control element (not a child) so overflow:hidden
+//  on this same element does not clip the shadow.
+.d-slider-alt__control--focused {
+    box-shadow: var(--slider-alt-focus-shadow);
+}
+
+//  $$  TRACK
+//  ----------------------------------------------------------------------------
+.d-slider-alt__track {
+    position: absolute;
+    inset: 0;
+    block-size: auto;
+    background-color: var(--slider-alt-track-color);
+    border-radius: var(--dt-size-radius-pill);
+    pointer-events: none;
+}
+
+//  $$  INDICATOR (filled portion — full block-size, fills from inline-start)
+//  ----------------------------------------------------------------------------
+.d-slider-alt__indicator {
+    position: absolute;
+    inset-block: 0;
+    block-size: auto;
+    background-color: var(--slider-alt-indicator-color);
+    border-radius: var(--dt-size-radius-pill);
+    pointer-events: none;
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: width 0.1s ease, left 0.1s ease, right 0.1s ease;
+    }
+}
+
+//  $$  VISUAL THUMB (plain pill, no border)
+//  ----------------------------------------------------------------------------
+.d-slider-alt__thumb-visual {
+    position: absolute;
+    z-index: 1;
+    background: var(--slider-alt-thumb-color);
+    border-radius: var(--dt-size-radius-pill);
+    box-shadow: var(--slider-alt-thumb-shadow);
+    pointer-events: none;
+    inline-size: var(--slider-alt-thumb-width);
+    block-size: var(--slider-alt-thumb-size);
+    inset-block-start: 50%;
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: box-shadow 0.1s ease;
+    }
+}
+
+//  Placeholder for focused-thumb visual overrides (focus ring is on the control).
+// .d-slider-alt__thumb-visual--focused {}
+
+//  $$  THUMB HIT AREA (min 44×44px transparent touch target per thumb)
+//  ----------------------------------------------------------------------------
+.d-slider-alt__thumb-hit {
+    position: absolute;
+    z-index: 2;
+    min-inline-size: var(--dt-spacing-550);
+    min-block-size: var(--dt-spacing-550);
+    border-radius: var(--dt-size-radius-pill);
+    cursor: grab;
+    inset-block-start: 50%;
+}
+
+//  $$  NATIVE INPUT (transparent, a11y + keyboard carrier)
+//  ----------------------------------------------------------------------------
+.d-slider-alt__thumb {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    pointer-events: none;
+    inline-size: 100%;
+    block-size: 100%;
+    inset: 0;
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+    }
+
+    &::-moz-range-thumb {
+        background: transparent;
+        border: none;
+        appearance: none;
+    }
+}
+
+//  $$  TICKS — full-height hairline dividers inside the fat track
+//  Rendered inside the overflow:hidden control at z-index above the indicator,
+//  so they appear as subtle segmentation lines through the pill track.
+//  ----------------------------------------------------------------------------
+.d-slider-alt__tick {
+    position: absolute;
+    inline-size: var(--dt-size-border-100);
+    inset-block: 0;
+    z-index: 2;
+    background-color: var(--slider-alt-tick-color);
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+//  $$  MARKS (text annotations at specific positions, outside overflow:hidden control)
+//  Absolutely positioned inside .d-slider-alt__control-wrapper so they are not
+//  clipped, and left: X% aligns them relative to the wrapper (= track) width.
+//  ----------------------------------------------------------------------------
+.d-slider-alt__mark {
+    position: absolute;
+    color: var(--slider-alt-boundary-color);
+    font: var(--dt-typography-body-sm);
+    white-space: nowrap;
+    transform: translateX(-50%);
+    pointer-events: none;
+    inset-block-start: calc(var(--slider-alt-track-height) + var(--dt-spacing-50));
+}
+
+//  $$  DRAGGING STATE
+//  ----------------------------------------------------------------------------
+.d-slider-alt[data-dragging] {
+    .d-slider-alt__control,
+    .d-slider-alt__thumb-hit {
+        cursor: grabbing;
+    }
+}
+
+//  $$  DISABLED STATE
+//  Mirror the toggle: uniform opacity so no transparency bleeding between layers.
+//  ----------------------------------------------------------------------------
+.d-slider-alt--disabled {
+    opacity: 0.5;
+
+    .d-slider-alt__control,
+    .d-slider-alt__thumb-hit {
+        cursor: not-allowed;
+    }
+}
+
+//  $$  INVERTED STATE
+//  (indicator is already positioned by the Vue component via :style)
+//  Class provided for consumer overrides.
+// .d-slider-alt--inverted {}
+
+//  $$  SIZES
+//  ----------------------------------------------------------------------------
+.d-slider-alt--xs {
+    --slider-alt-track-height: var(--dt-spacing-150);                                   // 12px
+    --slider-alt-thumb-size: var(--dt-spacing-100);                                     // 8px — 2px inset
+}
+
+.d-slider-alt--sm {
+    --slider-alt-track-height: calc(var(--dt-spacing-150) + var(--dt-spacing-25));      // 14px
+    --slider-alt-thumb-size: calc(var(--dt-spacing-100) + var(--dt-spacing-25));        // 10px — 2px inset
+}
+
+.d-slider-alt--lg {
+    --slider-alt-track-height: var(--dt-spacing-250);                                   // 20px
+    --slider-alt-thumb-size: var(--dt-layout-25);                                       // 16px — 2px inset
+}
+
+.d-slider-alt--xl {
+    --slider-alt-track-height: var(--dt-spacing-300);                                   // 24px
+    --slider-alt-thumb-size: var(--dt-icon-size-400);                                   // 20px — 2px inset
+}
+
+//  $$  VERTICAL ORIENTATION
+//  ----------------------------------------------------------------------------
+.d-slider-alt--vertical {
+    inline-size: auto;
+    block-size: var(--slider-alt-track-length);
+
+    .d-slider-alt__body {
+        flex-direction: column;
+        align-items: center;
+        block-size: 100%;
+    }
+
+    .d-slider-alt__control-wrapper {
+        flex-direction: column;
+        align-items: center;
+        block-size: 100%;
+    }
+
+    .d-slider-alt__control {
+        inline-size: var(--slider-alt-track-height);
+        block-size: auto;
+        flex: 1;
+        flex-direction: column;
+        padding-block: 0;
+        padding-inline: 0;
+    }
+
+    .d-slider-alt__track {
+        inset: 0;
+        inline-size: auto;
+        block-size: auto;
+    }
+
+    .d-slider-alt__indicator {
+        inline-size: auto;
+        block-size: auto;
+        inset-inline: 0;
+        inset-block-start: unset;
+
+        @media (prefers-reduced-motion: no-preference) {
+            transition: height 0.1s ease, bottom 0.1s ease, top 0.1s ease;
+        }
+    }
+
+    .d-slider-alt__thumb-visual {
+        inset-inline-start: 50%;
+        inset-block-start: unset;
+        inline-size: var(--slider-alt-thumb-size);   // narrow (fits track width)
+        block-size: var(--slider-alt-thumb-width);   // tall (pill long axis)
+        transform: translate(-50%, 50%);
+    }
+
+    .d-slider-alt__thumb-hit {
+        inset-inline-start: 50%;
+        inset-block-start: unset;
+    }
+
+    //  Ticks become full-width horizontal hairlines inside the vertical track.
+    .d-slider-alt__tick {
+        block-size: var(--dt-size-border-100);
+        inset-inline: 0;
+        inline-size: auto;
+        transform: translateY(50%);
+    }
+
+    //  Marks repositioned to the side of the vertical track.
+    .d-slider-alt__mark {
+        inset-block-start: unset;
+        inset-inline-start: calc(50% + var(--slider-alt-track-height) / 2 + var(--dt-spacing-50));
+        transform: translateY(50%);
+    }
+}
+
+} // @layer
