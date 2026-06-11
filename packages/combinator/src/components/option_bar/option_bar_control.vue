@@ -245,7 +245,9 @@ function updateValue (e) {
 
 const showRawToggle = computed(() => {
   const name = props.controlData.component?.name;
-  return name === 'DtcControlArray' || name === 'DtcControlObject';
+  if (name === 'DtcControlArray' || name === 'DtcControlObject') return true;
+  // Also show for props that accept array/object in addition to other types (e.g. Number | Number[])
+  return props.validControls.some(c => c === 'array' || c === 'object');
 });
 
 const rawMode = ref(false);

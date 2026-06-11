@@ -574,6 +574,10 @@
                 "link": "/components/skeleton.html"
               },
               {
+                "text": "Slider",
+                "link": "/components/slider.html"
+              },
+              {
                 "text": "Split Button",
                 "link": "/components/split-button.html"
               },

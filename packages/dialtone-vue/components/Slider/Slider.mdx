@@ -1,0 +1,115 @@
+import { Canvas, Subtitle, Controls, Meta } from '@storybook/addon-docs/blocks';
+
+import * as SliderStories from './Slider.stories';
+
+<Meta of={SliderStories}/>
+
+# Slider
+
+<Subtitle>
+  A form control that lets users select a numeric value — or a range of values
+  — by dragging a thumb along a track.
+</Subtitle>
+
+## Base Style
+
+<Canvas of={SliderStories.Default} />
+
+## All Variants
+
+<Canvas of={SliderStories.Variants} />
+
+## Slots, Props & Events
+
+<Controls />
+
+## Usage
+
+### Import
+
+```jsx
+import { DtSlider } from '@dialpad/dialtone-vue';
+```
+
+### Single thumb
+
+```html
+<dt-slider v-model="volume" label="Volume" />
+```
+
+### Range slider
+
+```html
+<dt-slider v-model="priceRange" label="Price range" />
+<!-- where priceRange = ref([20, 70]) -->
+```
+
+### With ticks
+
+```html
+<dt-slider
+  v-model="rating"
+  label="Rating"
+  :min="0"
+  :max="10"
+  :step="1"
+  :tick-interval="1"
+  show-ticks
+/>
+```
+
+### Vertical orientation
+
+```html
+<dt-slider
+  v-model="value"
+  label="Height"
+  orientation="vertical"
+  style="height: 200px"
+/>
+```
+
+### Visually hidden label (screen-reader accessible)
+
+```html
+<dt-slider
+  v-model="value"
+  label="Volume"
+  label-hidden
+/>
+```
+
+### With start / end slot content
+
+```html
+<dt-slider v-model="brightness" label="Brightness">
+  <template #start>
+    <!-- When using icon-only, provide aria-label on the icon -->
+    <dt-icon name="sun-outline" size="200" aria-label="Low" />
+  </template>
+  <template #end>
+    <dt-icon name="sun" size="200" aria-label="High" />
+  </template>
+</dt-slider>
+```
+
+## Accessibility
+
+### Keyboard support
+
+| Key | Action |
+| --- | --- |
+| Arrow Right / Arrow Up | Increase by `step` |
+| Arrow Left / Arrow Down | Decrease by `step` |
+| Home | Jump to `min` |
+| End | Jump to `max` |
+| Page Up | Increase by `largeStep` (default 10) |
+| Page Down | Decrease by `largeStep` (default 10) |
+
+### Screen reader notes
+
+- Each thumb is a native `<input type="range">` with `role="slider"` (native), `aria-valuemin`, `aria-valuemax`, and `aria-valuenow` automatically set from the `min`, `max`, and current value props.
+- Provide a `label` prop (use `labelHidden` to hide it visually). The label is associated via `aria-labelledby` on each thumb.
+- For range sliders, provide a `getAriaValueText` callback to give each thumb a distinct description, for example `(v, i) => i === 0 ? 'Minimum: ' + v : 'Maximum: ' + v`.
+- If using icon-only content in the `start` or `end` slots, ensure each icon has an `aria-label` or hidden text — the slot wrapper itself carries no semantic label.
+- The `name` attribute enables form submission. In range mode, both `<input>` elements share the same name; retrieve both values with `FormData.getAll(name)`.
