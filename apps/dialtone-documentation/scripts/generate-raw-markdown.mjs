@@ -23,6 +23,7 @@ import { setTokenDocs } from './lib/transform-tokens.mjs';
 import { setIconKeywords, setIllustrationData } from './lib/transform-icon-catalog.mjs';
 import { setTokensDocs, setColorUtilityClassDocs } from './lib/transform-color-tables.mjs';
 import { SECTION_META, generateLlmsTxt, generateLlmsFullTxt } from './lib/generate-llms.mjs';
+import { findNavItemByLink } from '../docs/.vuepress/theme/utils/findNavItemByLink.js';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const ROOT = resolve(__dirname, '..');
@@ -319,17 +320,6 @@ function buildOverviewLink (linkPath, currentRawDir) {
  * Load nav categories for a section from site-nav.json.
  * Returns the category children array, or null if not found.
  */
-function findNavItemByLink (items, link) {
-  for (const item of items || []) {
-    if (item.link === link) return item;
-    if (item.children) {
-      const found = findNavItemByLink(item.children, link);
-      if (found) return found;
-    }
-  }
-  return null;
-}
-
 function loadNavCategories (navSection) {
   return findNavItemByLink(_navData?.nav, navSection)?.children ?? null;
 }

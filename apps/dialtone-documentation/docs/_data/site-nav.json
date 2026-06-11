@@ -1016,8 +1016,7 @@
     },
     {
       "text": "Downloads",
-      "link": "/downloads/",
-      "icon": "box-select"
+      "link": "/downloads/"
     }
   ]
 }

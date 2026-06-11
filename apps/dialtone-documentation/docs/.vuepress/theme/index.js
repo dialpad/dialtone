@@ -8,6 +8,7 @@ import markdownItClass from '@toycode/markdown-it-class';
 import fencedDemoPlugin from '../plugins/markdown-it-fenced-demo.js';
 import codeExampleSourcePlugin from '../plugins/markdown-it-code-example-source.js';
 import noticePlugin from '../plugins/markdown-it-notice.js';
+import { findNavItemByLink } from './utils/findNavItemByLink.js';
 import { getDirname, path } from 'vuepress/utils'
 
 const __dirname = getDirname(import.meta.url);
@@ -103,12 +104,6 @@ function _injectOverviewPages (app) {
 
 function _extractFrontmatter (app, path, options, exceptions = []) {
   const children = getChildrenPageNames(path, options.sidebar);
-
-  // Defensive check: if getChildrenPageNames returns null/undefined, log warning and use empty array
-  if (!children) {
-    console.warn(`[extractFrontmatter] No children found for path: ${path}. Navigation data may be missing.`);
-    return;
-  }
 
   // Filter out the parent page itself (e.g., "Overview" which links to the index page)
   const childPages = children.filter(child => child.link !== path);
@@ -232,23 +227,12 @@ function _injectFrontmatterIntoSidebar (app, options) {
   }
 }
 
-function findNavItemByLink (items, link) {
-  for (const item of items || []) {
-    if (item.link === link) return item;
-    if (item.children) {
-      const found = findNavItemByLink(item.children, link);
-      if (found) return found;
-    }
-  }
-  return null;
-}
-
 /**
  * Children of the nav item whose link matches `path` (e.g. '/components/').
  * Returns [] when no nav item matches.
  */
-function getChildrenPageNames (path, pages) {
-  return findNavItemByLink(pages?.nav, path)?.children || [];
+function getChildrenPageNames (path, sidebar) {
+  return findNavItemByLink(sidebar?.nav, path)?.children || [];
 }
 
 export const dialtoneVuepressTheme = (options) => ({

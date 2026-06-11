@@ -48,7 +48,6 @@
         v-for="item in sidebarItems"
         :key="item.link || item.text"
         :item="item"
-        :is-single-page="item.isSinglePage"
         @click="toggleSiteNav"
       />
     </dt-stack>

@@ -183,9 +183,9 @@
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue';
+import { computed } from 'vue';
 import { useRoute } from 'vue-router';
-const isExternalUrl = (link) => /^https?:\/\//.test(link);
+import { isExternalUrl } from '../utils/isExternalUrl';
 
 const STATUS_BADGES = {
   beta: { type: 'info', text: 'Beta' },
@@ -195,10 +195,6 @@ const STATUS_BADGES = {
 const getBadge = (status) => STATUS_BADGES[status];
 
 const props = defineProps({
-  isSinglePage: {
-    type: Boolean,
-    default: false,
-  },
   item: {
     type: Object,
     default: () => {},
@@ -231,7 +227,6 @@ const actionableTabIndex = computed(() => {
 });
 
 const route = useRoute();
-const hash = ref(route.hash);
 
 // Controlled component - open state comes from parent via openItems Set
 const isOpen = computed(() => {
@@ -239,13 +234,6 @@ const isOpen = computed(() => {
   return props.openItems.has(key);
 });
 
-watch(route, (newRoute) => {
-  hash.value = newRoute.hash;
-});
-
-// isExactActive from router-link doesn't work with hashes,
-// that's why we need to check for the hash if it's a single page.
-// Now computed from route directly instead of router-link's scoped slot.
 const isActiveLink = (link, isParentButton = false) => {
   if (!link) return false;
 
@@ -264,8 +252,7 @@ const isActiveLink = (link, isParentButton = false) => {
     return true;
   }
 
-  const isExactActive = route.path === link;
-  return props.isSinglePage ? hash.value === link : isExactActive;
+  return route.path === link;
 };
 
 function handleClick (event, listeners, link) {

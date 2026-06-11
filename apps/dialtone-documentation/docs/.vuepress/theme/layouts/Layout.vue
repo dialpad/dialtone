@@ -74,6 +74,7 @@ import Home from '../components/Home.vue';
 import Page from '../components/Page.vue';
 import MobileSidebar from '../components/MobileSidebar.vue';
 import MigrationBanner from '../../baseComponents/MigrationBanner.vue';
+import { isExternalUrl } from '../utils/isExternalUrl';
 import { computed, ref, watch, onMounted, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
@@ -100,15 +101,11 @@ const isMobile = ref(false);
  * Groups them by their parent category for pagination purposes
  * Includes both parent pages with children AND leaf nodes
  */
-const isExternalUrl = (link) => /^https?:\/\//.test(link);
-
-function extractLeafNodes(items, planned = false) {
+function extractLeafNodes(items) {
   const groups = [];
 
   function traverse(itemsList, currentGroup = []) {
     itemsList.forEach(item => {
-      if (item.planned && !planned) return;
-
       // Include this item if it has a link (it's a navigable page)
       if (item.link && !isExternalUrl(item.link)) {
         currentGroup.push(item);
@@ -125,7 +122,7 @@ function extractLeafNodes(items, planned = false) {
     const group = [];
 
     // Include parent if it has a link
-    if (parentItem.link && !isExternalUrl(parentItem.link) && (!parentItem.planned || planned)) {
+    if (parentItem.link && !isExternalUrl(parentItem.link)) {
       group.push(parentItem);
     }
 

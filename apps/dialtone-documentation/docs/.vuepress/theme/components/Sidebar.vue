@@ -40,7 +40,6 @@
       v-for="item in filteredItems"
       :key="item.link || item.text"
       :item="item"
-      :is-single-page="item.isSinglePage"
       :depth="0"
       :open-items="openItems"
       @toggle="handleToggle"
