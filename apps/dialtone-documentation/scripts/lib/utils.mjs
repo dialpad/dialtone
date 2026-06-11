@@ -131,7 +131,7 @@ export function stripHtmlTags (html) {
  * Sections that have raw markdown equivalents under /md/.
  */
 const RAW_SECTIONS = new Set([
-  'components', 'foundations', 'dialtone', 'ui-kits',
+  'components', 'foundations', 'dialtone', 'functions-and-utilities', 'ui-kits',
   'guides', 'tokens', 'utilities',
 ]);
 

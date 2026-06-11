@@ -43,7 +43,7 @@
                 <dt-text kind="headline" size="300">
                   {{ item.text }}
                 </dt-text>
-                <dt-text kind="body" size="200" tone="muted">
+                <dt-text kind="body" size="200" tone="tertiary">
                   {{ item.description }}
                 </dt-text>
               </dt-stack>

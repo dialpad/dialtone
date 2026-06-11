@@ -16,6 +16,7 @@ const BASE_URL = 'https://dialtone.dialpad.com';
 export const SECTION_META = {
   components: 'Components',
   utilities: 'Utilities',
+  'functions-and-utilities': 'Vue Utilities',
   foundations: 'Foundations',
   tokens: 'Tokens',
   guides: 'Guides',

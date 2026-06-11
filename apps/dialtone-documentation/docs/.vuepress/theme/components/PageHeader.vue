@@ -249,7 +249,17 @@ const SLUG_OVERRIDES = { tabs: 'tab' };
 const EXCLUDED_SLUGS = new Set(['scrollbar', 'table']);
 const GITHUB_BASE = 'https://github.com/dialpad/dialtone/tree/staging/packages/dialtone-vue/components';
 
-const RAW_SECTIONS = ['/components/', '/foundations/', '/dialtone/', '/ui-kits/', '/utilities/', '/guides/', '/tokens/', '/downloads/'];
+const RAW_SECTIONS = [
+  '/components/',
+  '/foundations/',
+  '/dialtone/',
+  '/functions-and-utilities/',
+  '/ui-kits/',
+  '/utilities/',
+  '/guides/',
+  '/tokens/',
+  '/downloads/',
+];
 
 const rawMarkdownUrl = computed(() => {
   const path = page.value.path;
