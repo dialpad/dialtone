@@ -59,6 +59,8 @@ export * from './components/Scroller';
 export * from './components/SegmentedControl';
 export * from './components/SelectMenu';
 export * from './components/Skeleton';
+export * from './components/Slider';
+export * from './components/SliderAlt';
 export * from './components/SplitButton';
 export * from './components/Stack';
 export * from './components/Tab';
