@@ -20,7 +20,7 @@ describe('transformFencedDemo', () => {
   it('handles @code-only directive', () => {
     const input = '<!-- @code-only -->\n<dt-button>Click me</dt-button>\n';
     const result = transformFencedDemo(input);
-    assert.ok(result.startsWith('<code-example only-show="code">'));
+    assert.match(result, /^<code-example only-show="code"/);
     assert.ok(!result.includes('@code-only'));
   });
 
@@ -129,14 +129,41 @@ describe('transformFencedDemo', () => {
   it('handles code-only via info string', () => {
     const input = '<dt-button>Click me</dt-button>\n';
     const result = transformFencedDemo(input, 'code-only');
-    assert.ok(result.startsWith('<code-example only-show="code">'));
+    assert.match(result, /^<code-example only-show="code"/);
+  });
+
+  it('keeps code-only SFC snippets out of the live slot', () => {
+    const input = [
+      '<template>',
+      '  <div v-dt-scrollbar="scrollbarConfig">',
+      '    <div>Scrollable content</div>',
+      '  </div>',
+      '</template>',
+      '',
+      '<script>',
+      'export default {',
+      '  computed: {',
+      '    scrollbarConfig() {',
+      '      return { showScrollbar: \'always\' }',
+      '    }',
+      '  }',
+      '}',
+      '</script>',
+      '',
+    ].join('\n');
+
+    const result = transformFencedDemo(input, 'code-only');
+
+    assert.ok(result.includes('source-code='));
+    assert.doesNotMatch(result, /<code-example[^>]*>\s*<template>/);
+    assert.doesNotMatch(result, /<script>/);
   });
 
   it('directive overrides info string mode', () => {
     // info string says demo, but directive says code-only
     const input = '<!-- @code-only -->\n<dt-button>Click me</dt-button>\n';
     const result = transformFencedDemo(input, 'demo');
-    assert.ok(result.startsWith('<code-example only-show="code">'));
+    assert.match(result, /^<code-example only-show="code"/);
   });
 
   it('info string demo-only combines with other directives', () => {

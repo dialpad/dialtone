@@ -58,6 +58,11 @@ export function transformFencedDemo (raw, infoMode = 'demo') {
 
   let { slotContent, sourceCode } = splitContent(lines, directives);
 
+  if (directives.onlyShow === 'code') {
+    sourceCode ??= slotContent;
+    slotContent = '';
+  }
+
   if (directives.hasWrapper) {
     slotContent = addDataDemoWrapper(slotContent);
   }
@@ -117,4 +122,3 @@ function addDataDemoWrapper (content) {
     '$1 data-demo-wrapper$2',
   );
 }
-
