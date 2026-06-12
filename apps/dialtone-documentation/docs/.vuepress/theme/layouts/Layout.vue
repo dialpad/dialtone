@@ -32,10 +32,12 @@
     <dt-stack direction="row" align="start" gap="400">
       <DtBox
         v-if="!$frontmatter.home && !$frontmatter.noSidebar"
-        inline-size="600"
+        min-inline-size="500"
+        max-inline-size="500"
         padding="200"
         surface="secondary"
         border-radius="400"
+        class="d-ps-sticky d-ibs-300"
       >
         <sidebar />
       </DtBox>
@@ -77,7 +79,6 @@ import { DtIconBranch } from '@dialpad/dialtone-icons/vue';
 const route = useRoute();
 const prev = ref(null);
 const next = ref(null);
-const docSearchBtn = ref(null);
 const items = useThemeLocaleData().value.sidebar;
 const mobileBreakpoint = 980;
 const branchName = __DIALTONE_BRANCH_NAME__;
@@ -163,9 +164,6 @@ const findCurrent = () => {
 
   prev.value = isFirstItem && prevItems ? prevItems[prevItems.length - 1] : filteredItems[childIndex - 1];
   next.value = isLastItem && nextItems ? nextItems[0] : filteredItems[childIndex + 1];
-};
-const openSearch = () => {
-  docSearchBtn.value?.children[0]?.click();
 };
 
 watch(

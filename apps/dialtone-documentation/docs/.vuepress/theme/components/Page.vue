@@ -1,7 +1,7 @@
 <template>
   <page-header />
-  <DtStack direction="row" align="start" gap="400">
-    <DtBox class="d-fl1" min-inline-size="0">
+  <DtStack direction="row" align="start" gap="250">
+    <DtBox class="d-fl1 " min-inline-size="0">
       <!-- eslint-disable-next-line vue/no-undef-components -->
       <content class="d-docsite-article" />
       <DtStack
@@ -11,7 +11,6 @@
         align="center"
         class="d-pbs-400"
         gap="400"
-        outline:blue
       >
         <dt-button
           v-if="prev"
@@ -53,12 +52,17 @@
         </dt-button>
       </DtStack>
     </DtBox>
-    <DtBox v-if="!isMobile && includeToc" max-inline-size="400" min-inline-size="400">
+    <DtBox
+      v-if="!isMobile && includeToc"
+      max-inline-size="400"
+      min-inline-size="400"
+      class="d-ps-sticky d-ibs-450"
+    >
       <page-toc :headers="headers" />
     </DtBox>
   </DtStack>
-  <DtBox>
-    <dt-text as="p" kind="body" :size="200" tone="muted">
+  <DtBox padding-block="400">
+    <dt-text as="p" kind="body" :size="300" tone="muted">
       <dt-text v-if="$frontmatter.title">
         {{ $frontmatter.title }}
       </dt-text>
