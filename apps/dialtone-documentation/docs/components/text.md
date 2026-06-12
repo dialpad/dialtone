@@ -5,9 +5,8 @@ status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-text--default
 keywords: ["dt-box", "DtBox", "typography", "size", "tone", "font", "font size", "font weight", "line height", "density", "strength", "primitive"]
+combinator: DtText
 ---
-
-<component-combinator component-name="DtText" />
 
 ## Usage
 

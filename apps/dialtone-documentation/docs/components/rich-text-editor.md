@@ -5,12 +5,11 @@ status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-rich-text-editor--default
 keywords: ["rte", "wysiwyg", "markdown", "d-rte", "DtRichTextEditor", "dt-rich-text-editor", "content editor", "rich editor"]
+combinator: DtRichTextEditor
 ---
 
 > [!INFO]
 > Not a standalone component, please use Message Input recipe instead
-
-<component-combinator component-name="DtRichTextEditor" />
 
 ## Base Style
 

@@ -31,8 +31,6 @@ The hovercard will appear upon the mouse entering the anchor, with a delay of 30
 </dt-hovercard>
 ```
 
-<!-- <component-combinator component-name="DtHovercard" /> -->
-
 ## Variants
 
 ### Many Hovercards

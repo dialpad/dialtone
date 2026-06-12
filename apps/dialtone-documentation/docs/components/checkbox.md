@@ -6,9 +6,8 @@ thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-checkbox--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=24943-2447
 keywords: ["tick", "select", "form field", "d-checkbox", "DtCheckbox", "dt-checkbox"]
+combinator: DtCheckbox
 ---
-
-<component-combinator component-name="DtCheckbox" />
 
 ## Usage
 

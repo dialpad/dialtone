@@ -25,6 +25,11 @@
         </dt-tab-group>
       </DtBox>
     </DtBox>
+    <!-- eslint-disable-next-line vue/no-undef-components -->
+    <component-combinator
+      v-if="componentCombinatorName"
+      :component-name="componentCombinatorName"
+    />
     <DtStack direction="row" align="start" gap="250">
       <DtBox class="d-fl1 " min-inline-size="0">
         <!-- eslint-disable-next-line vue/no-undef-components -->
@@ -102,11 +107,12 @@
 <script setup>
 import PageHeader from '../components/PageHeader.vue';
 import PageToc from '../components/PageToc.vue';
+import { getComponentCombinatorName } from '../utils/componentCombinator.js';
 import { computed, watch, inject } from 'vue';
 import { useRoute } from 'vue-router';
 import { usePageData } from 'vuepress/client';
 
-const props = defineProps({
+defineProps({
   prev: {
     type: Object,
     default: () => {
@@ -123,6 +129,7 @@ const props = defineProps({
   },
 });
 const pageData = usePageData();
+const componentCombinatorName = computed(() => getComponentCombinatorName(pageData.value?.frontmatter));
 const lastUpdated = computed(() => {
   const updatedTime = pageData.value?.git?.updatedTime;
   if (!updatedTime) return 'Not available';

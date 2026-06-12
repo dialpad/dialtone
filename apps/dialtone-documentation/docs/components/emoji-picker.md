@@ -4,9 +4,8 @@ thumb: true
 description: A emoji picker component that allows you to view and select an emoji from a list.
 status: ready
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji-picker--default
+combinator: DtEmojiPicker
 ---
-
-<component-combinator component-name="DtEmojiPicker" />
 
 ## Variants and Examples
 

@@ -5,9 +5,8 @@ status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-loader--default
 keywords: ["spinner", "loading", "progress", "d-loader", "DtLoader", "dt-loader", "activity indicator", "spin"]
+combinator: DtLoader
 ---
-
-<component-combinator component-name="DtLoader" />
 
 ## Loader vs Skeleton
 

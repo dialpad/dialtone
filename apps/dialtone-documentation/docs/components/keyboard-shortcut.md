@@ -6,9 +6,8 @@ thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-keyboard-shortcut--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=7239-203541
 keywords: ["hotkey", "key binding", "shortcut key", "d-kbd", "DtKeyboardShortcut", "dt-keyboard-shortcut", "kbd", "accelerator"]
+combinator: DtKeyboardShortcut
 ---
-
-<component-combinator component-name="DtKeyboardShortcut" />
 
 ## Base
 

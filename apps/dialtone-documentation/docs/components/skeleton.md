@@ -14,8 +14,6 @@ keywords: ["loading placeholder", "shimmer", "ghost", "d-skeleton", "DtSkeleton"
 </div>
 ```
 
-<!-- <component-combinator component-name="DtSkeleton" /> -->
-
 ## Skeleton vs Loader
 
 **Use Skeleton when:**

@@ -83,7 +83,6 @@ import Navbar from '../components/Navbar.vue';
 import Sidebar from '../components/Sidebar.vue';
 import Home from '../components/Home.vue';
 import Page from '../components/Page.vue';
-import MobileSidebar from '../components/MobileSidebar.vue';
 import MigrationBanner from '../../baseComponents/MigrationBanner.vue';
 import { isExternalUrl } from '../utils/isExternalUrl';
 import { computed, ref, watch, onMounted, onUnmounted } from 'vue';

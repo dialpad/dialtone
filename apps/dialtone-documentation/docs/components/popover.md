@@ -6,9 +6,8 @@ thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-popover--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=7298-20354
 keywords: ["popup", "overlay", "floating", "d-popover", "DtPopover", "dt-popover", "flyout", "tooltip panel"]
+combinator: DtPopover
 ---
-
-<component-combinator component-name="DtPopover" />
 
 ## Usage
 

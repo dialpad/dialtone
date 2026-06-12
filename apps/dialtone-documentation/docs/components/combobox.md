@@ -6,9 +6,8 @@ thumb: true
 figma: planned
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox--default
 keywords: ["autocomplete","typeahead","search select","d-combobox","DtCombobox","dt-combobox"]
+combinator: DtCombobox
 ---
-
-<component-combinator component-name="DtCombobox" />
 
 ## Base Style
 

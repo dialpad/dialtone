@@ -5,9 +5,8 @@ status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-list-item-group--default
 keywords: ["list group", "list items", "d-list-item-group", "DtListItemGroup", "dt-list-item-group", "menu list", "option list"]
+combinator: DtListItemGroup
 ---
-
-<component-combinator component-name="DtListItemGroup" />
 
 ## Usage
 

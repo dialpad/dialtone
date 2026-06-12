@@ -4,9 +4,8 @@ description: A circular SVG progress indicator for determinate upload or process
 status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-progress-circle--default
+combinator: DtProgressCircle
 ---
-
-<component-combinator component-name="DtProgressCircle" />
 
 ## Usage
 

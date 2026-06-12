@@ -5,6 +5,7 @@ status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-segmented-control--default
 keywords: ["segmented control", "toggle group", "button toggle", "radio group", "d-segmented-control", "DtSegmentedControl", "dt-segmented-control", "select", "scope", "content switcher"]
+combinator: DtSegmentedControl
 ---
 
 ```vue demo-only
@@ -15,8 +16,6 @@ keywords: ["segmented control", "toggle group", "button toggle", "radio group", 
   <dt-segmented-control-item value="groups">Groups</dt-segmented-control-item>
 </dt-segmented-control>
 ```
-
-<component-combinator component-name="DtSegmentedControl" />
 
 ## Usage
 

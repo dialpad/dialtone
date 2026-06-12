@@ -6,9 +6,8 @@ description: Validation messages are used to convey information to the user abou
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-validation-messages--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=11399-76353
 keywords: ["error message", "form validation", "field error", "d-validation-messages", "DtValidationMessages", "dt-validation-messages", "inline validation", "form errors"]
+combinator: DtValidationMessages
 ---
-
-<component-combinator component-name="DtValidationMessages" />
 
 ## Usage
 

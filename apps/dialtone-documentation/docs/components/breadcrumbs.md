@@ -6,9 +6,8 @@ thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-breadcrumbs--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=2455-0
 keywords: ["navigation", "path", "d-breadcrumbs", "DtBreadcrumbs", "dt-breadcrumbs", "trail", "path navigation"]
+combinator: DtBreadcrumbs
 ---
-
-<component-combinator component-name="DtBreadcrumbs" />
 
 ## Usage
 

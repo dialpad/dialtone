@@ -6,9 +6,8 @@ thumb: true
 figma: planned
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji--default
 keywords: ["emoticon","smiley","d-emoji","DtEmoji","dt-emoji"]
+combinator: DtEmoji
 ---
-
-<component-combinator component-name="DtEmoji" />
 
 ## Variants and Examples
 

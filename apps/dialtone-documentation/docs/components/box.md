@@ -5,9 +5,8 @@ status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-box--default
 keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius", "sizing", "overflow", "scrollbar", "background", "spacing", "layout", "primitive", "elevation"]
+combinator: DtBox
 ---
-
-<component-combinator component-name="DtBox" />
 
 ## Usage
 

@@ -29,8 +29,6 @@ keywords: ["list element", "d-list-item", "DtListItem", "dt-list-item"]
 </ul>
 ```
 
-<!-- <component-combinator component-name="DtListItem" /> -->
-
 ## Base Style
 
 A list item provides accessibility controls and common functionality. The component uses child components that provide styling and slots for different types of list items. If you want to create a custom list item you can pass a type "custom", which will let you define the structure of the content.

@@ -7,8 +7,6 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 keywords: ["data table", "grid", "rows", "d-table", "DtTable", "dt-table", "datagrid", "data list"]
 ---
 
-<!-- <component-combinator component-name="DtTable" /> -->
-
 ## Variants and Examples
 
 ### Base Style

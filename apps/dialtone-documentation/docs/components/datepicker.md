@@ -6,9 +6,8 @@ status: ready
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-datepicker--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=13998-86
 keywords: ["date picker", "calendar", "date selector", "d-datepicker", "DtDatepicker", "dt-datepicker", "date input", "schedule"]
+combinator: DtDatepicker
 ---
-
-<component-combinator component-name="DtDatepicker" />
 
 ## Usage
 

@@ -5,9 +5,8 @@ status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-radio-group--default
 keywords: ["radio buttons","radio options","form fields","d-radio-group","DtRadioGroup","dt-radio-group"]
+combinator: DtRadioGroup
 ---
-
-<component-combinator component-name="DtRadioGroup" />
 
 ## Variants
 

@@ -5,6 +5,7 @@ status: deprecated
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-input-group--default
 keywords: ["input addon", "input prefix", "input suffix", "d-input-group", "DtInputGroup", "dt-input-group", "compound input", "prepend append"]
+combinator: DtInputGroup
 ---
 
 ```vue demo-only
@@ -17,8 +18,6 @@ keywords: ["input addon", "input prefix", "input suffix", "d-input-group", "DtIn
   <dt-radio value="other"><span>Other</span></dt-radio>
 </dt-input-group>
 ```
-
-<component-combinator component-name="DtInputGroup" />
 
 ## Default
 

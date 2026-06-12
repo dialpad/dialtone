@@ -42,8 +42,6 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-wit
 </dt-combobox-with-popover>
 ```
 
-<!-- <component-combinator component-name="DtComboboxWithPopover" /> -->
-
 ## Usage
 
 The combobox contains the `input` and `list` slots specified in the [combobox documentation](/components/combobox.html).

@@ -6,8 +6,6 @@ thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-scroller--default
 ---
 
-<!-- <component-combinator component-name="DtScroller" /> -->
-
 ## Usage
 
 You have a long list and need it to stay fast. Think of it like lazy loading for list items: instead of loading every item on the page at once, it will render only those currently visible. Scroll down, old items are removed from the DOM, new ones take their place. A list of 10,000 items performs the same as a list of 10.

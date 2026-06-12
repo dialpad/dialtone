@@ -32,8 +32,6 @@ class="d-w100p d-h-500"
 </dt-root-layout>
 ```
 
-<!-- <component-combinator component-name="DtRootLayout" /> -->
-
 ## Base Style
 
 A root layout consists of a header, body, sidebar and footer. Content can optionally be passed into the slots which

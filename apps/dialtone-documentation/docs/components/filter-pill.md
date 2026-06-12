@@ -5,6 +5,7 @@ status: new
 thumb: true
 # storybook: https://dialtone.dialpad.com/vue/?path=/story/components-filter-pill--default @TODO: Uncomment once it's RFP
 keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFilterPill", "dt-filter-pill", "removable tag", "dismissible chip"]
+combinator: DtFilterPill
 ---
 
 ```vue demo-only
@@ -61,8 +62,6 @@ keywords: ["filter tag", "filter chip", "search filter", "d-filter-pill", "DtFil
   </dt-button>
 </dt-stack>
 ```
-
-<component-combinator component-name="DtFilterPill" />
 
 ## Usage
 

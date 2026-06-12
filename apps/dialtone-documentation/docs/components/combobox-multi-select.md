@@ -7,8 +7,6 @@ thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-multi-select--default
 ---
 
-<!-- <component-combinator component-name="DtComboboxMultiSelect" /> -->
-
 ```vue demo
 <!-- @class d-d-block -->
 <dt-combobox-multi-select

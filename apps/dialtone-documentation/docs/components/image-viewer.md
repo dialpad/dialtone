@@ -5,9 +5,8 @@ status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-image-viewer--default
 keywords: ["lightbox", "image modal", "photo viewer", "d-image-viewer", "DtImageViewer", "dt-image-viewer", "gallery", "carousel"]
+combinator: DtImageViewer
 ---
-
-<component-combinator component-name="DtImageViewer" />
 
 ## Examples
 

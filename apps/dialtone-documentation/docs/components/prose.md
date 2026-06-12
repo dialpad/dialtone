@@ -6,9 +6,8 @@ thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-prose--default
 figma_url: planned
 keywords: ["typography", "markdown", "content", "article", "html", "rich content", "d-prose", "DtProse", "dt-prose"]
+combinator: DtProse
 ---
-
-<component-combinator component-name="DtProse" />
 
 ## Usage
 

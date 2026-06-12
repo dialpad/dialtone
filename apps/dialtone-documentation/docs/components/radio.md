@@ -6,9 +6,8 @@ thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-radio--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=24935-9743
 keywords: ["radio button", "option", "form field", "d-radio", "DtRadio", "dt-radio", "option selector"]
+combinator: DtRadio
 ---
-
-<component-combinator component-name="DtRadio" />
 
 ## Usage
 

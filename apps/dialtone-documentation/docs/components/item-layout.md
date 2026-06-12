@@ -5,9 +5,8 @@ status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-item-layout--default
 keywords: ["list layout","item structure","d-item-layout","DtItemLayout","dt-item-layout"]
+combinator: DtItemLayout
 ---
-
-<component-combinator component-name="DtItemLayout" />
 
 ## With Default Styling
 
