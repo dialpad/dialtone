@@ -54,7 +54,6 @@
 
 <script>
 /* eslint-disable max-lines */
-import { TextSelection } from '@tiptap/pm/state';
 import { Editor, EditorContent } from '@tiptap/vue-3';
 import { BubbleMenu } from '@tiptap/vue-3/menus';
 import { Extension } from '@tiptap/core';
@@ -799,11 +798,6 @@ export default {
                         paragraphType.create({}, line ? [state.schema.text(line)] : []),
                       );
                       tr.replaceWith(codeBlockPos, codeBlockPos + codeBlockNode.nodeSize, paragraphs);
-                      // replaceWith uses right-biased mapping (assoc=1), which moves the cursor
-                      // to the start of the next line when replacing newlines with paragraph
-                      // boundaries. Left-bias (assoc=-1) keeps it at the end of the current line.
-                      const correctedAnchor = tr.mapping.map(state.selection.anchor, -1);
-                      tr.setSelection(TextSelection.create(tr.doc, correctedAnchor));
                       return true;
                     })
                     .run();
@@ -1271,6 +1265,24 @@ export default {
       // Channel is clicked
       this.editor.on('channel-click', (channelData) => {
         this.$emit('channel-click', channelData);
+      });
+
+      // Fix cursor jump when toggleCodeBlock converts a multi-line code block back to
+      // paragraphs. ProseMirror's default right-biased step mapping moves the cursor to
+      // the start of the next paragraph; left-bias (assoc=-1) keeps it on the current line.
+      let prevAnchor = this.editor.state.selection.anchor;
+      let prevInCodeBlock = this.editor.isActive('codeBlock');
+      this.editor.on('selectionUpdate', ({ editor: selEd }) => {
+        prevAnchor = selEd.state.selection.anchor;
+        prevInCodeBlock = selEd.isActive('codeBlock');
+      });
+      this.editor.on('transaction', ({ editor: txEd, transaction }) => {
+        if (!transaction.docChanged || !prevInCodeBlock || txEd.isActive('codeBlock')) return;
+        const corrected = transaction.mapping.map(prevAnchor, -1);
+        if (corrected === txEd.state.selection.anchor) return;
+        setTimeout(() => {
+          if (!this.editor.isDestroyed) this.editor.commands.setTextSelection(corrected);
+        }, 0);
       });
     },
 
