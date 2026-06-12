@@ -382,6 +382,8 @@ function updateVariant (e) {
   nextTick(() => { _presetChanging = false; });
 }
 
+watch(() => props.component.name, resetOptions);
+
 /**
  * Merges variant override data into an info object.
  *

@@ -4,12 +4,16 @@ import { expect } from 'vitest';
 import { shallowMount } from '@vue/test-utils';
 import { nextTick } from 'vue';
 import { getSupportedComponents } from '@/src/lib/test/utils_test';
-import { DtInput, DtToggle } from '@dialpad/dialtone-vue';
+import { DtButton, DtCard, DtInput, DtToggle } from '@dialpad/dialtone-vue';
 import allDocs from '@/node_modules/@dialpad/dialtone-vue/dist/component-documentation.json';
+import variants from '@/src/variants/variants';
 
 const documentation = allDocs;
+const buttonDoc = allDocs.find(d => d.displayName === 'DtButton');
+const cardDoc = allDocs.find(d => d.displayName === 'DtCard');
 const toggleDoc = allDocs.find(d => d.displayName === 'DtToggle');
 const inputDoc = allDocs.find(d => d.displayName === 'DtInput');
+const variantBank = variants();
 
 describe('combinator.vue test', function () {
   const testComponents = getSupportedComponents();
@@ -111,6 +115,41 @@ describe('combinator.vue test', function () {
 
         expect(renderer.props('options').props.modelValue).toBe('hello');
       });
+    });
+  });
+
+  describe('component changes', function () {
+    beforeEach(function () {
+      wrapper = shallowMount(DtcCombinator, {
+        props: {
+          component: DtButton,
+          documentation: buttonDoc,
+          variants: variantBank.DtButton,
+        },
+      });
+    });
+
+    afterEach(function () {
+      wrapper.unmount();
+    });
+
+    it('resets the active preset and options when the target component changes', async function () {
+      wrapper.vm.updateVariant('icon only');
+      await nextTick();
+
+      await wrapper.setProps({
+        component: DtCard,
+        documentation: cardDoc,
+        variants: variantBank.DtCard,
+      });
+      await nextTick();
+
+      const renderer = wrapper.findComponent({ name: 'DtcRenderer' });
+
+      expect(wrapper.vm.selectedVariant).toBe('default');
+      expect(renderer.props('options').slots.content).toBe(
+        variantBank.DtCard.default.slots.content.initialValue,
+      );
     });
   });
 });
