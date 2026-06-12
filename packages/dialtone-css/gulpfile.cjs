@@ -363,6 +363,37 @@ const buildNewSVGIcons = function (done) {
 };
 
 //  ================================================================================
+//  @@  FONTS CSS + JS ENTRY POINT
+//      Extract @font-face declarations into a standalone CSS file and a JS entry
+//      point so consumers can import '@dialpad/dialtone/fonts' via a bundler.
+//      Webpack resolves the woff2 url() paths relative to dialtone-fonts.css in
+//      dist/css/, which is where the font files live — no symlinks needed.
+//  ================================================================================
+const libFontStyles = function (done) {
+  if (!settings.styles) return done();
+
+  const fs = require('fs');
+  const css = fs.readFileSync('./lib/dist/dialtone.css', 'utf8');
+
+  const fontFaceBlocks = [];
+  const regex = /@font-face\s*\{[^}]+\}/g;
+  let match;
+  while ((match = regex.exec(css)) !== null) {
+    fontFaceBlocks.push(match[0]);
+  }
+
+  fs.writeFileSync('./lib/dist/dialtone-fonts.css', fontFaceBlocks.join('\n') + '\n');
+  done();
+};
+
+const libFontsJS = function (done) {
+  const fs = require('fs');
+  // eslint-disable-next-line quotes
+  fs.writeFileSync('./lib/dist/fonts.js', "import './dialtone-fonts.css';\n");
+  done();
+};
+
+//  ================================================================================
 //  @@  BUILD DOCS
 //      Process files and generate documentation
 //  ================================================================================
@@ -399,6 +430,8 @@ exports.default = series(
   exports.svg,
   tokens,
   libStyles,
+  libFontStyles,
+  libFontsJS,
   libDocs,
   libScripts,
 );

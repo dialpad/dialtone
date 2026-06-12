@@ -82,6 +82,7 @@
       "import": "./dist/tokens/themes/*.js",
       "require": "./dist/tokens/themes/*.cjs"
     },
+    "./fonts": "./dist/css/fonts.js",
     "./*": "./dist/*"
   },
   "dependencies": {
@@ -216,7 +217,10 @@
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false,
+  "sideEffects": [
+    "./dist/css/*.css",
+    "./dist/css/fonts.js"
+  ],
   "nx": {
     "includedScripts": []
   }
