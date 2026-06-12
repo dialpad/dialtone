@@ -3,12 +3,11 @@
     Local navigation
   </h2>
   <dt-stack
-    v-if="sidebarItems.length"
-    as="ul"
     class="dialtone-sidebar__list"
     gap="50"
+    @keydown="handleKeydown"
   >
-    <div class="d-pbe-100">
+    <DtBox padding-block-end="100">
       <dt-input
         ref="searchInput"
         v-model="inputValue"
@@ -35,31 +34,38 @@
           </dt-button>
         </template>
       </dt-input>
-    </div>
-    <sidebar-item
-      v-for="item in filteredItems"
-      :key="item.link || item.text"
-      :item="item"
-      :depth="0"
-      :open-items="openItems"
-      @toggle="handleToggle"
-    />
-    <li v-if="filteredItems.length === 0 && inputValue.trim()">
-      <dt-empty-state
-        :size="200"
-        :header-text="`No results found for &quot;${inputValue}&quot;`"
-        class="d-w100p"
-      >
-        <template #icon>
-          <dt-icon name="search" size="500" />
-        </template>
-      </dt-empty-state>
-    </li>
+    </DtBox>
+    <DtStack
+      ref="listRef"
+      as="ul"
+      class="dialtone-sidebar__list-items"
+      gap="50"
+    >
+      <sidebar-item
+        v-for="item in filteredItems"
+        :key="item.link || item.text"
+        :item="item"
+        :depth="0"
+        :open-items="openItems"
+        @toggle="handleToggle"
+      />
+      <li v-if="filteredItems.length === 0 && inputValue.trim()">
+        <dt-empty-state
+          :size="200"
+          :header-text="`No results found for &quot;${inputValue}&quot;`"
+          class="d-w100p"
+        >
+          <template #icon>
+            <dt-icon name="search" size="500" />
+          </template>
+        </dt-empty-state>
+      </li>
+    </DtStack>
   </dt-stack>
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue';
+import { ref, computed, watch, onMounted, nextTick } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import SidebarItem from './SidebarItem.vue';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
@@ -81,6 +87,12 @@ const focusedIndex = ref(-1);
 
 // Ref to the search input element
 const searchInput = ref(null);
+
+// Ref to the list element wrapping the sidebar items — scopes DOM lookups to
+// this instance's subtree (MobileSidebar renders the same data-sidebar-link attrs)
+const listRef = ref(null);
+
+const focusSearchInput = () => searchInput.value?.focus();
 
 // Strip separators and case for fuzzy matching.
 const normalize = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -212,7 +224,8 @@ const computeOpenItems = (items, routePath) => {
   return open;
 };
 
-// Global keyboard event handler for sidebar navigation
+// Keyboard navigation for search results — bound to the sidebar root, so it
+// only fires while focus is within the sidebar (input or item buttons)
 const handleKeydown = (event) => {
   // Only handle keyboard navigation when search is active with results
   if (!inputValue.value.trim() || flattenedFilteredItems.value.length === 0) {
@@ -235,10 +248,7 @@ const handleKeydown = (event) => {
         focusedIndex.value--;
       } else {
         focusedIndex.value = -1;
-        nextTick(() => {
-          const inputElement = searchInput.value?.$el?.querySelector('input');
-          inputElement?.focus();
-        });
+        nextTick(focusSearchInput);
       }
       break;
 
@@ -257,28 +267,14 @@ const handleKeydown = (event) => {
       inputValue.value = '';
       focusedIndex.value = -1;
       // Return focus to search input
-      nextTick(() => {
-        if (searchInput.value?.$el) {
-          const inputElement = searchInput.value.$el.querySelector('input');
-          if (inputElement) {
-            inputElement.focus();
-          }
-        }
-      });
+      nextTick(focusSearchInput);
       break;
   }
 };
 
-// Initialize open items and set up keyboard handling after mount
+// Initialize open items after mount
 onMounted(() => {
   openItems.value = computeOpenItems(sidebarItems.value, route.path);
-  // Add global keyboard listener
-  document.addEventListener('keydown', handleKeydown);
-});
-
-// Clean up keyboard listener on unmount
-onUnmounted(() => {
-  document.removeEventListener('keydown', handleKeydown);
 });
 
 // Update open items when route changes
@@ -312,7 +308,7 @@ watch(focusedIndex, async (newIndex) => {
     await nextTick();
 
     const targetItem = flattenedFilteredItems.value[newIndex];
-    const button = document.querySelector(`.dialtone-sidebar__list [data-sidebar-link="${targetItem.link}"]`);
+    const button = listRef.value?.$el?.querySelector(`[data-sidebar-link="${targetItem.link}"]`);
 
     if (button) {
       button.focus();
