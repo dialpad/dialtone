@@ -1326,6 +1326,24 @@ export default {
       this.editor.on('phone-click', (phoneData) => {
         this.$emit('phone-click', phoneData);
       });
+
+      // Fix cursor jump when toggleCodeBlock converts a multi-line code block back to
+      // paragraphs. ProseMirror's default right-biased step mapping moves the cursor to
+      // the start of the next paragraph; left-bias (assoc=-1) keeps it on the current line.
+      let prevAnchor = this.editor.state.selection.anchor;
+      let prevInCodeBlock = this.editor.isActive('codeBlock');
+      this.editor.on('selectionUpdate', ({ editor: selEd }) => {
+        prevAnchor = selEd.state.selection.anchor;
+        prevInCodeBlock = selEd.isActive('codeBlock');
+      });
+      this.editor.on('transaction', ({ editor: txEd, transaction }) => {
+        if (!transaction.docChanged || !prevInCodeBlock || txEd.isActive('codeBlock')) return;
+        const corrected = transaction.mapping.map(prevAnchor, -1);
+        if (corrected === txEd.state.selection.anchor) return;
+        setTimeout(() => {
+          if (!this.editor.isDestroyed) this.editor.commands.setTextSelection(corrected);
+        }, 0);
+      });
     },
 
     getOutput () {
