@@ -977,9 +977,11 @@ export default {
             return html
               .replace(/<hr[^>]*\/?>/gi, '<p><br></p>')
               .replace(/(<\/\w+>)((<br \/>)+)/g, '$2$1')
-              // Strip trailing <br> just before </p> so pasted content doesn't
-              // produce an extra blank line at the end of the message.
-              .replace(/(<br[^>]*>)\s*<\/p>/gi, '</p>');
+              // Strip trailing <br> just before the final </p> so pasted content
+              // doesn't produce an extra blank line at the end of the message.
+              // Anchored to end-of-string to avoid removing intentional hard breaks
+              // inside non-final paragraphs.
+              .replace(/(<br[^>]*>)\s*<\/p>(\s*)$/i, '</p>$2');
           },
         },
       });
