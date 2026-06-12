@@ -269,19 +269,6 @@
         </template>
       </template>
     </dt-dropdown>
-    <dt-button
-      v-dt-tooltip:bottom-end="'Search'"
-      importance="clear"
-      kind="muted"
-      @click="$emit('search')"
-    >
-      <template #startIcon>
-        <dt-icon
-          name="search"
-          size="300"
-        />
-      </template>
-    </dt-button>
   </dt-stack>
 </template>
 

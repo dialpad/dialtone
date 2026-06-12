@@ -52,90 +52,88 @@
       </dt-stack>
     </template>
     <template #content>
-      <div v-dt-scrollbar class="d-hmx-700">
-        <dt-stack
-          as="ul"
-          :aria-labelledby="labelId"
-          gap="25"
-          :class="{
-            'd-pbs-50': depth === 0 || depth === 1,
-          }"
+      <dt-stack
+        as="ul"
+        :aria-labelledby="labelId"
+        gap="25"
+        :class="{
+          'd-pbs-50': depth === 0 || depth === 1,
+        }"
+      >
+        <li
+          v-for="(subItem, index) in subItems"
+          :key="subItem.text"
         >
-          <li
-            v-for="(subItem, index) in subItems"
-            :key="subItem.text"
+          <sidebar-item
+            v-if="subItem.children"
+            :item="subItem"
+            :depth="depth + 1"
+            :open-items="openItems"
+            nested
+            @toggle="(itemKey, shouldOpen) => $emit('toggle', itemKey, shouldOpen)"
+          />
+          <div
+            v-else-if="subItem.status === 'planned'"
+            class="d-btn d-w100p d-jc-flex-start d-ta-left d-fw-normal d-fc-muted h:d-bgc-transparent d-c-default"
+            :class="[{ 'd-pis-600': depth === 0 }, { 'd-pis-800': depth === 1 }]"
           >
-            <sidebar-item
-              v-if="subItem.children"
-              :item="subItem"
-              :depth="depth + 1"
-              :open-items="openItems"
-              nested
-              @toggle="(itemKey, shouldOpen) => $emit('toggle', itemKey, shouldOpen)"
-            />
-            <div
-              v-else-if="subItem.status === 'planned'"
-              class="d-btn d-w100p d-jc-flex-start d-ta-left d-fw-normal d-fc-muted h:d-bgc-transparent d-c-default"
-              :class="[{ 'd-pis-600': depth === 0 }, { 'd-pis-800': depth === 1 }]"
+            <dt-stack as="span" direction="row" justify="space-between" class="d-w100p">
+              {{ subItem.text }}
+              <dt-badge v-bind="getBadge(subItem.status)" class="d-mis-50" />
+            </dt-stack>
+          </div>
+          <dt-button
+            v-else-if="isExternalUrl(subItem.link)"
+            :href="subItem.link"
+            target="_blank"
+            rel="noopener noreferrer"
+            importance="clear"
+            kind="muted"
+            label-class="d-jc-flex-start d-ta-left d-fw-normal d-tw-pretty"
+            :class="[
+              'dialtone-shell-btn d-w100p d-tw-pretty',
+              { 'd-pis-600': depth === 0 },
+              { 'd-pis-800': depth === 1 },
+            ]"
+          >
+            <dt-stack as="span" direction="row" justify="space-between" class="d-w100p">
+              {{ subItem.text }}
+              <dt-badge v-if="getBadge(subItem.status)" v-bind="getBadge(subItem.status)" class="d-mis-50" />
+            </dt-stack>
+          </dt-button>
+          <dt-button
+            v-else
+            :to="subItem.link"
+            :active="isActiveLink(subItem.link)"
+            importance="clear"
+            kind="muted"
+            label-class="d-jc-flex-start d-tw-pretty"
+            :data-sidebar-link="subItem.link"
+            :class="[
+              'd-w100p d-fw-normal dialtone-shell-btn',
+              { 'd-pis-600': depth === 0 },
+              { 'd-pis-800': depth === 1 },
+              {
+                'd-mbs-25': (index === 0 && nested), // add margin top to first nested item
+              },
+            ]"
+          >
+            <dt-stack
+              v-if="getBadge(subItem.status)"
+              as="span"
+              direction="row"
+              justify="space-between"
+              class="d-w100p"
             >
-              <dt-stack as="span" direction="row" justify="space-between" class="d-w100p">
-                {{ subItem.text }}
-                <dt-badge v-bind="getBadge(subItem.status)" class="d-mis-50" />
-              </dt-stack>
-            </div>
-            <dt-button
-              v-else-if="isExternalUrl(subItem.link)"
-              :href="subItem.link"
-              target="_blank"
-              rel="noopener noreferrer"
-              importance="clear"
-              kind="muted"
-              label-class="d-jc-flex-start d-ta-left d-fw-normal d-tw-pretty"
-              :class="[
-                'dialtone-shell-btn d-w100p d-tw-pretty',
-                { 'd-pis-600': depth === 0 },
-                { 'd-pis-800': depth === 1 },
-              ]"
-            >
-              <dt-stack as="span" direction="row" justify="space-between" class="d-w100p">
-                {{ subItem.text }}
-                <dt-badge v-if="getBadge(subItem.status)" v-bind="getBadge(subItem.status)" class="d-mis-50" />
-              </dt-stack>
-            </dt-button>
-            <dt-button
-              v-else
-              :to="subItem.link"
-              :active="isActiveLink(subItem.link)"
-              importance="clear"
-              kind="muted"
-              label-class="d-jc-flex-start d-tw-pretty"
-              :data-sidebar-link="subItem.link"
-              :class="[
-                'd-w100p d-fw-normal dialtone-shell-btn',
-                { 'd-pis-600': depth === 0 },
-                { 'd-pis-800': depth === 1 },
-                {
-                  'd-mbs-25': (index === 0 && nested), // add margin top to first nested item
-                },
-              ]"
-            >
-              <dt-stack
-                v-if="getBadge(subItem.status)"
-                as="span"
-                direction="row"
-                justify="space-between"
-                class="d-w100p"
-              >
-                {{ subItem.text }}
-                <dt-badge v-bind="getBadge(subItem.status)" class="d-mis-50" />
-              </dt-stack>
-              <template v-else>
-                {{ subItem.text }}
-              </template>
-            </dt-button>
-          </li>
-        </dt-stack>
-      </div>
+              {{ subItem.text }}
+              <dt-badge v-bind="getBadge(subItem.status)" class="d-mis-50" />
+            </dt-stack>
+            <template v-else>
+              {{ subItem.text }}
+            </template>
+          </dt-button>
+        </li>
+      </dt-stack>
     </template>
   </dt-collapsible>
 

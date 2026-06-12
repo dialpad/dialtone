@@ -42,10 +42,6 @@ html {
   scroll-padding-block-start: 7.2rem;
 }
 
-body {
-  background-color: var(--dt-shell-color-surface-default);
-}
-
 //  ============================================================================
 //  $   SEARCH (Algolia)
 //      Override
@@ -284,47 +280,47 @@ html body {
 //      appropriate to ship as part of Dialtone.
 //  ----------------------------------------------------------------------------
 .dialtone-header {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: center;
-  padding: var(--dt-spacing-200) var(--dt-spacing-300) var(--dt-spacing-200) var(--dt-spacing-200);
-  color: var(--dt-shell-color-foreground-primary);
-  background-color: var(--dt-shell-color-surface-default);
-  view-transition-name: dialtone-header;
+  // display: grid;
+  // grid-template-columns: 1fr auto;
+  // align-items: center;
+  // padding: var(--dt-spacing-200) var(--dt-spacing-300) var(--dt-spacing-200) var(--dt-spacing-200);
+  // color: var(--dt-shell-color-foreground-primary);
+  // background-color: var(--dt-shell-color-surface-default);
+  // view-transition-name: dialtone-header;
 
-  > :where(:first-child) {
-    justify-self: start;
-  }
+  // > :where(:first-child) {
+  //   justify-self: start;
+  // }
 
-  > :where(:last-child) {
-    justify-self: end;
-  }
+  // > :where(:last-child) {
+  //   justify-self: end;
+  // }
 
-  &--home {
-    --position-top: var(--dt-spacing-200);
+  // &--home {
+  //   --position-top: var(--dt-spacing-200);
 
-    position: fixed;
-    z-index: 1;
-    max-inline-size: calc(var(--dt-layout-1100) * 2);
-    border-radius: var(--dt-size-radius-450);
-    /* stylelint-disable-next-line meowtec/no-px */
-    box-shadow:
-      0 255.043px 71.487px 0 rgba(0, 0, 0, 0),
-      0 163.131px 65.306px 0 rgba(0, 0, 0, 0.01),
-      0 91.912px 55.094px 0 rgba(0, 0, 0, 0.03),
-      0 40.85px 40.85px 0 rgba(0, 0, 0, 0.05),
-      0 10.212px 22.306px 0 rgba(0, 0, 0, 0.05);
-    -webkit-backdrop-filter: blur(var(--dt-spacing-100));
-    backdrop-filter: blur(var(--dt-spacing-100));
-    transition: inset cubic-bezier(0.4, 0, 0.2, 1) 0.66s;
-    will-change: inset;
-    inset: var(--position-top) var(--dt-spacing-200);
-    inset-block-end: auto;
-  }
+  //   position: fixed;
+  //   z-index: 1;
+  //   max-inline-size: calc(var(--dt-layout-1100) * 2);
+  //   border-radius: var(--dt-size-radius-450);
+  //   /* stylelint-disable-next-line meowtec/no-px */
+  //   box-shadow:
+  //     0 255.043px 71.487px 0 rgba(0, 0, 0, 0),
+  //     0 163.131px 65.306px 0 rgba(0, 0, 0, 0.01),
+  //     0 91.912px 55.094px 0 rgba(0, 0, 0, 0.03),
+  //     0 40.85px 40.85px 0 rgba(0, 0, 0, 0.05),
+  //     0 10.212px 22.306px 0 rgba(0, 0, 0, 0.05);
+  //   -webkit-backdrop-filter: blur(var(--dt-spacing-100));
+  //   backdrop-filter: blur(var(--dt-spacing-100));
+  //   transition: inset cubic-bezier(0.4, 0, 0.2, 1) 0.66s;
+  //   will-change: inset;
+  //   inset: var(--position-top) var(--dt-spacing-200);
+  //   inset-block-end: auto;
+  // }
 
-  &--off-canvas {
-    --position-top: -105%;
-  }
+  // &--off-canvas {
+  //   --position-top: -105%;
+  // }
 }
 
 .dialtone-shell-btn {
@@ -349,22 +345,6 @@ html body {
     --button-color-background: var(
       --dt-shell-action-color-background-secondary-hover
     );
-  }
-}
-
-.dialtone-sidebar {
-  position: sticky;
-  overflow-y: auto;
-  color: var(--dt-shell-color-foreground-primary);
-  inset-block-start: var(--dt-layout-100);
-  // TODO: redo 😜
-  block-size: calc(100vh - var(--dt-layout-100));
-
-  &__list {
-    padding: var(--dt-spacing-300) 0 calc(var(--dt-spacing-100) * 12) var(--dt-spacing-200);
-    padding-block-start: var(--dt-spacing-700);
-    inset-block: var(--dt-layout-100) 0;
-    inline-size: var(--dt-layout-400);
   }
 }
 
@@ -451,6 +431,10 @@ a.header-anchor {
   font: var(--dt-text-headline-2xl);
   font-weight: var(--dt-font-weight-medium);
   margin-block: var(--dt-spacing-400) var(--dt-spacing-200);
+
+  &:first-of-type {
+    margin-block-start: 0;
+  }
 }
 
 .d-docsite--header-3 {
@@ -868,7 +852,7 @@ code {
     gap: var(--dt-spacing-400);
   }
 
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 1024px) {
     grid-template-columns: [full-start] repeat(
         3,
         [col-start] var(--col-width, minmax(0, 1fr)) [col-end]
@@ -876,6 +860,10 @@ code {
   }
 
   @media screen and (min-width: 1354px) {
+    grid-template-columns: [full-start] repeat(
+        4,
+        [col-start] var(--col-width, minmax(0, 1fr)) [col-end]
+      ) [full-end] !important;
     gap: var(--dt-spacing-400);
   }
 
@@ -1091,6 +1079,19 @@ code {
 
 [outline] {
   outline: var(--dt-spacing-25) solid orangered;
+  outline-offset: var(--dt-spacing-25-negative);
+}
+[outline\:green] {
+  outline: var(--dt-spacing-25) solid green;
+  outline-offset: var(--dt-spacing-25-negative);
+}
+[outline\:blue] {
+  outline: var(--dt-spacing-25) solid green;
+  outline-offset: var(--dt-spacing-25-negative);
+}
+[outline\:cyan] {
+  outline: var(--dt-spacing-25) solid cyan;
+  outline-offset: var(--dt-spacing-25-negative);
 }
 
 // ============================================================================

@@ -1,64 +1,57 @@
 <template>
   <migration-banner />
-  <dt-root-layout
-    :fixed="false"
-    :header-sticky="true"
-    header-class="d-ol-none"
-    sidebar-class="dialtone-sidebar d-d-none lg:d-d-block d-ol-none"
-    footer-class="d-text-right d-ol-none"
-    content-class="d-ol-none dialtone-content"
-  >
-    <template #header>
-      <div class="dialtone-header">
-        <!-- <dialtone-logo /> -->
-        <router-link
-          class="d-pis-100 d-td-none"
-          title="Dialtone homepage"
-          to="/"
-        >
-          <DtStack direction="row" gap="200">
-            <DtIllustration name="dialpad-logo" />
-            <DtBox v-if="showBranchBadge" padding-block-start="200" :title="branchName">
-              <DtStack direction="row" gap="50">
-                <dt-icon-branch class="d-fc-muted" :size="100" />
-                <DtText as="p" kind="body" size="100" tone="muted" class="d-wmx-250" truncate>
-                  {{ branchName }}
-                </DtText>
-              </DtStack>
-            </DtBox>
-          </DtStack>
-        </router-link>
-        <navbar
-          @search="openSearch"
+  <DtBox padding="250" padding-block-end="0">
+    <DtBox padding-block="100" padding="200" surface="secondary" border-radius="400">
+      <dt-stack direction="row" class="dialtone-header" justify="space-between" gap="400">
+        <dt-stack direction="row" gap="200" align="end">
+          <router-link
+            class="d-td-none"
+            title="Dialtone homepage"
+            to="/"
+          >
+            <dt-stack direction="row" gap="200">
+              <DtIllustration name="dialpad-logo" />
+              <!-- <dialtone-logo /> -->
+            </dt-stack>
+          </router-link>
+          <DtBox v-if="showBranchBadge" :title="branchName" padding-block-end="100">
+            <dt-stack direction="row" gap="50">
+              <dt-icon-branch class="d-fc-muted" :size="100" />
+              <DtText as="p" kind="body" size="100" tone="muted" class="d-wmx-250" truncate>
+                {{ branchName }}
+              </DtText>
+            </dt-stack>
+          </DtBox>
+        </dt-stack>
+        <navbar />
+      </dt-stack>
+    </DtBox>
+  </DtBox>
+  <mobile-sidebar v-if="isMobile && route.path !== '/'" />
+  <DtBox padding="250" padding-block-end="0">
+    <dt-stack direction="row" align="start" gap="400">
+      <DtBox
+        v-if="!$frontmatter.home && !$frontmatter.noSidebar"
+        inline-size="600"
+        padding="200"
+        surface="secondary"
+        border-radius="400"
+      >
+        <sidebar />
+      </DtBox>
+      <DtBox v-if="$frontmatter.home" inline-size="100p">
+        <home />
+      </DtBox>
+      <DtBox v-else class="d-fl1" min-inline-size="0">
+        <page
+          :prev="$frontmatter.prev || prev"
+          :next="$frontmatter.next || next"
+          :is-mobile="isMobile"
+          outline
         />
-        <mobile-sidebar
-          v-if="isMobile && route.path !== '/'"
-        />
-      </div>
-      <!-- eslint-disable-next-line vue/no-undef-components -->
-      <div
-        id="docsearch"
-        ref="docSearchBtn"
-        class="d-d-none"
-        options=""
-      />
-    </template>
-    <template
-      v-if="!$frontmatter.home && !$frontmatter.noSidebar"
-      #sidebar
-    >
-      <sidebar />
-    </template>
-    <template #default>
-      <home v-if="$frontmatter.home" />
-      <page
-        v-else
-        :prev="$frontmatter.prev || prev"
-        :next="$frontmatter.next || next"
-        :is-mobile="isMobile"
-      />
-    </template>
-  </dt-root-layout>
+      </DtBox>
+    </dt-stack>
+  </DtBox>
 </template>
 
 <script setup>
@@ -78,7 +71,7 @@ import { isExternalUrl } from '../utils/isExternalUrl';
 import { computed, ref, watch, onMounted, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
-import { disableRootScrolling, enableRootScrolling } from '@dialpad/dialtone-vue';
+import { disableRootScrolling, DtStack, enableRootScrolling } from '@dialpad/dialtone-vue';
 import { DtIconBranch } from '@dialpad/dialtone-icons/vue';
 
 const route = useRoute();

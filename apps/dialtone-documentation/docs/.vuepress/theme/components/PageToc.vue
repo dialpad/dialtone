@@ -1,5 +1,5 @@
 <template>
-  <aside class="dialtone-toc d-of-auto d-py-800 d-ps-fixed d-d-none xl:d-d-block">
+  <aside>
     <dt-text
       as="h2"
       kind="headline"
@@ -14,7 +14,6 @@
       <ul
         v-for="header in headers"
         :key="header.slug"
-        class="d-mbs-25"
       >
         <li v-if="!header.children.length">
           <toc-item

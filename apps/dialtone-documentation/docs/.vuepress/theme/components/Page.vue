@@ -1,29 +1,17 @@
 <template>
-  <div
-    class="d-d-grid d-jc-center"
-    :class="gridClass"
-  >
-    <div class="d-p-600">
-      <page-header />
-      <article class="dialtone-content__article">
-        <div
-          v-if="$page.path.startsWith('/components') && !$frontmatter.no_preview"
-          id="preview-header"
-        >
-          <h2 class="d-vi-visible-sr">
-            Preview
-          </h2>
-        </div>
-        <!-- eslint-disable-next-line vue/no-undef-components -->
-        <content class="d-docsite-article" />
-      </article>
-      <dt-stack
+  <page-header />
+  <DtStack direction="row" align="start" gap="400">
+    <DtBox class="d-fl1" min-inline-size="0">
+      <!-- eslint-disable-next-line vue/no-undef-components -->
+      <content class="d-docsite-article" />
+      <DtStack
+        as="nav"
         direction="row"
         :justify="prev ? 'between' : 'end'"
         align="center"
         class="d-pbs-400"
-        as="nav"
         gap="400"
+        outline:blue
       >
         <dt-button
           v-if="prev"
@@ -63,21 +51,21 @@
             <span>{{ next.text }}</span>
           </dt-stack>
         </dt-button>
-      </dt-stack>
-      <footer class="d-mbs-200 d-mbe-200">
-        <dt-text as="p" kind="body" :size="200" tone="muted">
-          <dt-text v-if="$frontmatter.title">
-            {{ $frontmatter.title }}
-          </dt-text>
-          documentation last updated
-          <dt-text>{{ lastUpdated }}</dt-text>
-        </dt-text>
-      </footer>
-    </div>
-    <div class="d-ps-relative d-ga-toc">
-      <page-toc v-if="!isMobile && includeToc" :headers="headers" />
-    </div>
-  </div>
+      </DtStack>
+    </DtBox>
+    <DtBox v-if="!isMobile && includeToc" max-inline-size="400" min-inline-size="400">
+      <page-toc :headers="headers" />
+    </DtBox>
+  </DtStack>
+  <DtBox>
+    <dt-text as="p" kind="body" :size="200" tone="muted">
+      <dt-text v-if="$frontmatter.title">
+        {{ $frontmatter.title }}
+      </dt-text>
+      documentation last updated
+      <dt-text>{{ lastUpdated }}</dt-text>
+    </dt-text>
+  </DtBox>
 </template>
 
 <script setup>
@@ -112,10 +100,6 @@ const lastUpdated = computed(() => {
   if (Number.isNaN(date.valueOf())) return 'Not available';
 
   return new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(date);
-});
-const gridClass = computed(() => {
-  if (props.isMobile || !includeToc.value) return 'd-gl-docsite';
-  return 'd-gl-docsite-toc';
 });
 const { headers } = inject('headers');
 

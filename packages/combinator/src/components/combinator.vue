@@ -553,7 +553,7 @@ export default {
   & {
     display:none;
     flex-direction: column;
-    margin-block: var(--dt-spacing-200);
+    margin-block-end: var(--dt-spacing-200);
     background-color: var(--dt-color-surface-secondary);
     border-radius: var(--dt-size-radius-400);
 

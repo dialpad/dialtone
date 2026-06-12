@@ -10,7 +10,7 @@
     </template>
     Dialtone's next major version includes breaking changes.
     The
-    <dt-link to="/guides/migration/">
+    <dt-link to="/guides/migration/" tone="muted">
       Migration Guide
     </dt-link>
     includes step by step instructions and automated tooling.
