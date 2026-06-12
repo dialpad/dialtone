@@ -14,13 +14,15 @@
         aria-label="Search"
         placeholder="Search"
         type="search"
+        end-icon-class="d-mie-0 d-pie-50"
         @update:model-value="focusedIndex = -1"
       >
         <template #startIcon="{ iconSize }">
           <dt-icon name="search" :size="iconSize" />
         </template>
-        <template v-if="inputValue.length !== 0" #endIcon="{ clear }">
+        <template #endIcon="{ clear }">
           <dt-button
+            v-if="inputValue.length !== 0"
             v-dt-tooltip="'Clear search'"
             kind="muted"
             importance="clear"
@@ -32,6 +34,11 @@
               <dt-icon name="close" :size="iconSize" />
             </template>
           </dt-button>
+          <dt-keyboard-shortcut
+            v-else
+            shortcut="/"
+            screen-reader-text="Slash"
+          />
         </template>
       </dt-input>
     </DtBox>
@@ -65,7 +72,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, nextTick } from 'vue';
+import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import SidebarItem from './SidebarItem.vue';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
@@ -93,6 +100,57 @@ const searchInput = ref(null);
 const listRef = ref(null);
 
 const focusSearchInput = () => searchInput.value?.focus();
+
+const nonTextInputTypes = new Set([
+  'button',
+  'checkbox',
+  'color',
+  'file',
+  'hidden',
+  'image',
+  'radio',
+  'range',
+  'reset',
+  'submit',
+]);
+
+const characterInputSelector = [
+  '[role="combobox"]',
+  '[role="searchbox"]',
+  '[role="spinbutton"]',
+  '[role="textbox"]',
+  'select',
+  'textarea',
+].join(',');
+
+const isPlainSlashShortcut = (event) => {
+  return event.key === '/' &&
+    !event.defaultPrevented &&
+    !event.isComposing &&
+    !event.altKey &&
+    !event.ctrlKey &&
+    !event.metaKey;
+};
+
+const canReceiveCharacterInput = (element) => {
+  if (!(element instanceof HTMLElement)) return false;
+  if (element.isContentEditable || element.closest(characterInputSelector)) return true;
+  if (!element.matches('input')) return false;
+
+  const inputType = element.getAttribute('type')?.toLowerCase() || 'text';
+  return !nonTextInputTypes.has(inputType);
+};
+
+const handleSearchShortcut = (event) => {
+  if (!isPlainSlashShortcut(event)) return;
+
+  const target = event.target instanceof Element ? event.target : document.activeElement;
+
+  if (canReceiveCharacterInput(target)) return;
+
+  event.preventDefault();
+  nextTick(focusSearchInput);
+};
 
 // Strip separators and case for fuzzy matching.
 const normalize = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -275,6 +333,11 @@ const handleKeydown = (event) => {
 // Initialize open items after mount
 onMounted(() => {
   openItems.value = computeOpenItems(sidebarItems.value, route.path);
+  document.addEventListener('keydown', handleSearchShortcut);
+});
+
+onUnmounted(() => {
+  document.removeEventListener('keydown', handleSearchShortcut);
 });
 
 // Update open items when route changes
