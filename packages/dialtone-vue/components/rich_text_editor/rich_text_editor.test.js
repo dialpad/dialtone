@@ -2152,6 +2152,42 @@ describe('DtRichTextEditor tests', () => {
       });
     });
 
+    describe('Code block cursor fix tests', function () {
+      beforeEach(async function () {
+        await wrapper.setProps({ allowCodeblock: true, modelValue: '' });
+        await wrapper.vm.$nextTick();
+      });
+
+      describe('When toggling a multi-line code block with a trailing newline back to paragraphs', function () {
+        it('cursor stays in a content paragraph instead of jumping to the empty trailing paragraph', async function () {
+          const ed = wrapper.vm.editor;
+
+          // "line one\nline two\n" — the trailing \n produces an empty paragraph when
+          // split, which is the ghost-paragraph the cursor would jump to without the fix.
+          // Positions inside the codeBlock: 1 = before 'l' of "line one",
+          //   10 = before 'l' of "line two", 17 = after 'o' of "two", 18 = the trailing '\n'.
+          ed.commands.setContent({
+            type: 'doc',
+            content: [{
+              type: 'codeBlock',
+              content: [{ type: 'text', text: 'line one\nline two\n' }],
+            }],
+          });
+          ed.commands.setTextSelection(17); // after last char of "line two", before trailing '\n'
+          await wrapper.vm.$nextTick();
+
+          vi.useFakeTimers();
+          ed.commands.toggleCodeBlock();
+          vi.runAllTimers();
+          vi.useRealTimers();
+          await wrapper.vm.$nextTick();
+
+          const $anchor = ed.state.doc.resolve(ed.state.selection.anchor);
+          expect($anchor.parent.textContent).not.toBe('');
+        });
+      });
+    });
+
     describe('Variable with different output formats', function () {
       beforeEach(async function () {
         await wrapper.setProps({
