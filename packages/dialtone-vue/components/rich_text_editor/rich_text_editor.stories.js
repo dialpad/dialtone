@@ -27,6 +27,7 @@ export const argsData = {
   onHtmlInput: action('html-input'),
   onTextInput: action('text-input'),
   onMarkdownInput: action('markdown-input'),
+  onPhoneClick: action('phone-click'),
   onEditLink: action('edit-link'),
   onSelectedCommand: action('selected-command'),
   onMentionClick: action('mention-click'),
@@ -117,6 +118,11 @@ export const argTypesData = {
       disable: true,
     },
   },
+  onPhoneClick: {
+    table: {
+      disable: true,
+    },
+  },
   onEditLink: {
     table: {
       disable: true,
@@ -190,6 +196,15 @@ export const WithCustomExtensions = {
     allowCodeblock: false,
     link: false,
     useDivTags: false,
+  },
+};
+
+export const WithLinkedPhoneNumbers = {
+  ...Default,
+  args: {
+    editable: false,
+    modelValue: '<p>You can reach our support team at (714) 410-7035 or toll-free at (800) 555-0199. Click either number to handle the call.</p>',
+    linkPhoneNumbers: ['(714) 410-7035', '(800) 555-0199'],
   },
 };
 

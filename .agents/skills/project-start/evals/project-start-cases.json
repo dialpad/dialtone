@@ -1,0 +1,65 @@
+[
+  {
+    "id": "no_jira_tooling",
+    "input": "NO-JIRA add codex tooling",
+    "trackedDirty": false,
+    "untrackedFiles": [],
+    "expected": {
+      "ticketMode": "NO-JIRA",
+      "branch": "chore/NO-JIRA-add-codex-tooling",
+      "jiraAction": "none",
+      "canCreateBranch": true
+    }
+  },
+  {
+    "id": "ticket_feature",
+    "input": "DLT-1234 add popover layout token",
+    "trackedDirty": false,
+    "untrackedFiles": [],
+    "expected": {
+      "ticketMode": "DLT-1234",
+      "branch": "feat/DLT-1234-add-popover-layout-token",
+      "jiraAction": "none",
+      "canCreateBranch": true
+    }
+  },
+  {
+    "id": "ticket_test_flakiness",
+    "input": "DLT-5678 fix test flakiness",
+    "trackedDirty": false,
+    "untrackedFiles": [],
+    "expected": {
+      "ticketMode": "DLT-5678",
+      "branch": "test/DLT-5678-fix-test-flakiness",
+      "jiraAction": "none",
+      "canCreateBranch": true
+    }
+  },
+  {
+    "id": "dirty_tracked",
+    "input": "NO-JIRA docs cleanup",
+    "trackedDirty": true,
+    "untrackedFiles": [],
+    "expected": {
+      "ticketMode": "NO-JIRA",
+      "branch": "chore/NO-JIRA-docs-cleanup",
+      "jiraAction": "none",
+      "canCreateBranch": false
+    }
+  },
+  {
+    "id": "dirty_untracked",
+    "input": "NO-JIRA docs cleanup",
+    "trackedDirty": false,
+    "untrackedFiles": [
+      "apps/dialtone-documentation/docs/.vuepress/public/llms.txt"
+    ],
+    "expected": {
+      "ticketMode": "NO-JIRA",
+      "branch": "chore/NO-JIRA-docs-cleanup",
+      "jiraAction": "none",
+      "canCreateBranch": true,
+      "untrackedPolicy": "report-only"
+    }
+  }
+]

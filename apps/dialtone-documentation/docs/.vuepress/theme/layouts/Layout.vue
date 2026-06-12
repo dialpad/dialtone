@@ -51,6 +51,12 @@
 </template>
 
 <script setup>
+// Default (dp-light) theme CSS — Vite bundles this into the main CSS asset so it's
+// present before any JS runs. setTheme() injects <style id="dialtone-css-*"> tags
+// that override these vars at runtime. Both persist across SPA navigation because
+// neither is tracked by VuePress's head management system.
+import '@dialpad/dialtone-tokens/tokens-base-light.css';
+import '@dialpad/dialtone-tokens/tokens-dp-light.css';
 import Navbar from '../components/Navbar.vue';
 import Sidebar from '../components/Sidebar.vue';
 import Home from '../components/Home.vue';

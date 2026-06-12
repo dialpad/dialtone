@@ -1,0 +1,26 @@
+[
+  {
+    "id": "merged_no_jira_clean",
+    "merged": true,
+    "dirty": false,
+    "ticketMode": "NO-JIRA",
+    "expectedAction": "switch-to-staging",
+    "jiraAction": "none"
+  },
+  {
+    "id": "open_pr",
+    "merged": false,
+    "dirty": false,
+    "ticketMode": "NO-JIRA",
+    "expectedAction": "stop-unmerged",
+    "jiraAction": "none"
+  },
+  {
+    "id": "dirty_tree",
+    "merged": true,
+    "dirty": true,
+    "ticketMode": "DLT-1234",
+    "expectedAction": "stop-dirty",
+    "jiraAction": "separate-explicit-action"
+  }
+]

@@ -1,3 +1,26 @@
+## [9.187.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.187.0...dialtone/v9.187.1) (2026-06-10)
+
+
+### Bug Fixes
+
+* **Docs:** NO-JIRA actually static render the docs ([#1319](https://github.com/dialpad/dialtone/issues/1319)) ([0107a8e](https://github.com/dialpad/dialtone/commit/0107a8ebb20dce64efe0c29f883300bce08bc56a))
+
+# [9.187.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.186.0...dialtone/v9.187.0) (2026-06-08)
+
+
+### Features
+
+* **Icons:** DLT-3460 DLT-3461 hand icon update ([#1315](https://github.com/dialpad/dialtone/issues/1315)) ([83ad138](https://github.com/dialpad/dialtone/commit/83ad138665f38e06411fce9ee27585fceb677a2b))
+* **Icons:** DP-192459 add circle and circle-dashed icons ([#1305](https://github.com/dialpad/dialtone/issues/1305)) ([8c41212](https://github.com/dialpad/dialtone/commit/8c41212d49dc1bc7fba2cfc51ffc01ab3896b619))
+* **Rich Text Editor:** DP-190415 implement phone number linking ([#1297](https://github.com/dialpad/dialtone/issues/1297)) ([20a4fcc](https://github.com/dialpad/dialtone/commit/20a4fcc3644ecbe5f2036a4f04953be95c5022b2))
+
+# [9.186.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.185.0...dialtone/v9.186.0) (2026-06-02)
+
+
+### Features
+
+* **Dialtone Icons:** NO-JIRA add /vue export to dialtone-icon ([#1304](https://github.com/dialpad/dialtone/issues/1304)) ([f7ca6d4](https://github.com/dialpad/dialtone/commit/f7ca6d438cc7c644d7e95bc963bd303ea2259b4d))
+
 # [9.185.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.184.0...dialtone/v9.185.0) (2026-05-26)
 
 

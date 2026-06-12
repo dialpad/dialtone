@@ -1,0 +1,48 @@
+[
+  {
+    "id": "codex_tooling",
+    "changedFiles": ["AGENTS.md", ".agents/README.md"],
+    "ticketMode": "NO-JIRA",
+    "expected": {
+      "titlePrefix": "chore: NO-JIRA",
+      "includeVueChecklist": false,
+      "includeCssChecklist": false,
+      "allowJiraCreation": false
+    }
+  },
+  {
+    "id": "vue_component",
+    "changedFiles": ["packages/dialtone-vue/components/button/button.vue"],
+    "ticketMode": "DLT-1234",
+    "expected": {
+      "titlePrefix": "feat: DLT-1234",
+      "includeVueChecklist": true,
+      "includeCssChecklist": false,
+      "allowJiraCreation": false
+    }
+  },
+  {
+    "id": "new_export",
+    "changedFiles": ["packages/dialtone-query-core/src/index.ts"],
+    "ticketMode": "DLT-1234",
+    "newExports": ["searchDocumentation"],
+    "expected": {
+      "titlePrefix": "feat: DLT-1234",
+      "includeVueChecklist": false,
+      "includeCssChecklist": false,
+      "allowJiraCreation": false
+    }
+  },
+  {
+    "id": "breaking_removal",
+    "changedFiles": ["packages/dialtone-vue/components/button/button.vue"],
+    "ticketMode": "DLT-1234",
+    "removals": ["oldProp"],
+    "expected": {
+      "titlePrefix": "feat!: DLT-1234",
+      "includeVueChecklist": true,
+      "includeCssChecklist": false,
+      "allowJiraCreation": false
+    }
+  }
+]

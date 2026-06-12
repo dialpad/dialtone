@@ -1,0 +1,15 @@
+[mcp_servers.dialtone]
+command = "./node_modules/.bin/dialtone-mcp-server"
+cwd = "."
+enabled = true
+required = false
+startup_timeout_sec = 20
+tool_timeout_sec = 60
+enabled_tools = [
+  "search_utility_classes",
+  "search_tokens",
+  "search_components",
+  "search_icons",
+  "search_documentation",
+]
+default_tools_approval_mode = "approve"

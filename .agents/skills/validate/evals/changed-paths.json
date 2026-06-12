@@ -1,0 +1,65 @@
+[
+  {
+    "id": "codex_tooling",
+    "changedFiles": ["AGENTS.md", ".agents/skills/project-start/SKILL.md"],
+    "expectedCommands": [
+      "node .agents/evals/run-skill-contract-evals.mjs",
+      "node .agents/skills/project-start/evals/run-project-start-evals.mjs",
+      "pnpm exec markdownlint AGENTS.md .agents/**/*.md",
+      "pnpm exec prettier --check --single-quote AGENTS.md .agents/**/*.md .agents/**/*.mjs"
+    ]
+  },
+  {
+    "id": "codex_runtime_config",
+    "changedFiles": [".codex/config.toml"],
+    "expectedCommands": [
+      "node .agents/evals/run-skill-contract-evals.mjs",
+      "./node_modules/.bin/dialtone --help"
+    ]
+  },
+  {
+    "id": "codex_markdown",
+    "changedFiles": [".codex/README.md"],
+    "expectedCommands": [
+      "node .agents/evals/run-skill-contract-evals.mjs",
+      "pnpm exec markdownlint .codex/README.md",
+      "pnpm exec prettier --check --single-quote .codex/README.md",
+      "./node_modules/.bin/dialtone --help"
+    ]
+  },
+  {
+    "id": "vue_component",
+    "changedFiles": ["packages/dialtone-vue/components/button/button.vue"],
+    "expectedCommands": [
+      "pnpm nx run dialtone-vue:test",
+      "pnpm nx run dialtone-vue:lint",
+      "pnpm nx run dialtone-vue:build"
+    ]
+  },
+  {
+    "id": "css",
+    "changedFiles": [
+      "packages/dialtone-css/lib/build/less/components/button.less"
+    ],
+    "expectedCommands": [
+      "pnpm nx run dialtone-css:lint",
+      "pnpm nx run dialtone-css:build"
+    ]
+  },
+  {
+    "id": "query_core",
+    "changedFiles": ["packages/dialtone-query-core/src/tools/docs.ts"],
+    "expectedCommands": [
+      "pnpm nx run dialtone-query-core:test",
+      "pnpm nx run dialtone-query-core:build"
+    ]
+  },
+  {
+    "id": "docs_site",
+    "changedFiles": ["apps/dialtone-documentation/docs/.vuepress/config.js"],
+    "expectedCommands": [
+      "pnpm nx run dialtone-documentation:lint",
+      "pnpm nx run dialtone-documentation:build"
+    ]
+  }
+]

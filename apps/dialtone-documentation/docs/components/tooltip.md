@@ -267,7 +267,9 @@ You are encouraged to consult the ARIA documentation for the particular role.
 <component-accessible-table component-name="tooltip" />
 
 <script setup>
+import { inject } from 'vue';
 import ExampleTooltipDirections from '@exampleComponents/ExampleTooltipDirections.vue';
 
-const directions = window.DIALTONE_CONSTANTS.TOOLTIP_DIRECTIONS;
+const dialtoneConstants = inject('dialtoneConstants', {});
+const directions = dialtoneConstants.TOOLTIP_DIRECTIONS;
 </script>

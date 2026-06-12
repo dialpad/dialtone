@@ -131,7 +131,7 @@ import {
 } from './modal_constants';
 import { returnFirstEl, getUniqueString, hasSlotContent, disableRootScrolling, enableRootScrolling } from '@/common/utils';
 import { DtLazyShow } from '@/components/lazy_show';
-import { EVENT_KEYNAMES } from '@/common/constants';
+import { EVENT_KEYNAMES, HTML_ELEMENT_TYPE } from '@/common/constants';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
 import { NOTICE_KINDS } from '@/components/notice';
 import { DialtoneLocalization } from '@/localization';
@@ -314,7 +314,7 @@ export default {
      * If the dialog is modal this prop cannot be 'none'.
      */
     initialFocusElement: {
-      type: [String, HTMLElement],
+      type: [String, HTML_ELEMENT_TYPE],
       default: 'first',
       validator: initialFocusElement => {
         return initialFocusElement === 'first' ||
@@ -373,9 +373,17 @@ export default {
   computed: {
     modalListeners () {
       return {
+        mousedown: event => {
+          // Track whether the drag originated on the backdrop so that a drag
+          // starting inside the dialog and ending outside doesn't close the modal.
+          this._mousedownOnBackdrop = (event.target === event.currentTarget);
+        },
+
         click: event => {
-          // Handle backdrop clicks for closing modal
-          if (this.closeOnClick && event.target === event.currentTarget) {
+          // Handle backdrop clicks for closing modal.
+          // Require mousedown to have also started on the backdrop — prevents
+          // text-selection drags that end outside from dismissing the modal.
+          if (this.closeOnClick && event.target === event.currentTarget && this._mousedownOnBackdrop) {
             this.close();
           }
 
@@ -451,6 +459,7 @@ export default {
 
   created () {
     this._trapFocusGlobalBound = (e) => this._trapFocusGlobal(e);
+    this._mousedownOnBackdrop = false;
   },
 
   mounted () {

@@ -440,6 +440,11 @@
         "share",
         "email"
       ],
+      "hand-filled": [
+        "gesture",
+        "palm",
+        "filled"
+      ],
       "hand": [
         "gesture",
         "palm"
@@ -1702,9 +1707,33 @@
         "done",
         "success"
       ],
+      "circle-dashed": [
+        "circle",
+        "dashed",
+        "dotted",
+        "outline",
+        "shape",
+        "round",
+        "selection"
+      ],
       "circle-half-filled": [
+        "circle",
+        "half",
+        "half-filled",
+        "semi",
+        "partial",
         "mode",
-        "dark"
+        "dark",
+        "light",
+        "theme",
+        "contrast"
+      ],
+      "circle": [
+        "circle",
+        "ring",
+        "outline",
+        "shape",
+        "round"
       ],
       "close": [
         "cancel",

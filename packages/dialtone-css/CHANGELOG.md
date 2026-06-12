@@ -1,3 +1,10 @@
+# [8.80.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.79.2...dialtone-css/v8.80.0) (2026-06-08)
+
+
+### Features
+
+* **Rich Text Editor:** DP-190415 implement phone number linking ([#1297](https://github.com/dialpad/dialtone/issues/1297)) ([20a4fcc](https://github.com/dialpad/dialtone/commit/20a4fcc3644ecbe5f2036a4f04953be95c5022b2))
+
 ## [8.79.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.79.1...dialtone-css/v8.79.2) (2026-05-01)
 
 

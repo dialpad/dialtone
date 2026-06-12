@@ -233,12 +233,17 @@ export function useResizableGroup(options: UseResizableGroupOptions) {
 
   // ── ResizeObserver ─────────────────────────────────────────────────────────
 
-  const resizeObserver = new ResizeObserver(entries => {
-    for (const entry of entries) {
-      const dim = direction.value === 'row' ? entry.contentRect.width : entry.contentRect.height;
-      containerSize.value = clampContainerSize(Math.round(dim));
-    }
-  });
+  // Guard against SSR (Node.js) where ResizeObserver is not defined.
+  // The no-op stub keeps the observe/unobserve/disconnect call-sites valid so
+  // the composable can be imported and set up server-side without throwing.
+  const resizeObserver = typeof ResizeObserver !== 'undefined'
+    ? new ResizeObserver(entries => {
+      for (const entry of entries) {
+        const dim = direction.value === 'row' ? entry.contentRect.width : entry.contentRect.height;
+        containerSize.value = clampContainerSize(Math.round(dim));
+      }
+    })
+    : { observe: () => {}, unobserve: () => {}, disconnect: () => {} } as ResizeObserver;
 
   function disconnectObserver(): void {
     resizeObserver.disconnect();
