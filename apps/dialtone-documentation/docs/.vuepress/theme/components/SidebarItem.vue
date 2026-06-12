@@ -2,12 +2,12 @@
   <!-- Item with children - render as collapsible -->
   <dt-collapsible
     v-if="subItems.length > 0"
-    v-model:open="isOpen"
+    :open="isOpen"
     element-type="li"
     class="d-w100p"
     anchor-class="d-w100p"
   >
-    <template #anchor="{ attrs, listeners }">
+    <template #anchor="{ attrs }">
       <dt-stack
         direction="row"
         class="d-ps-relative"
@@ -33,6 +33,7 @@
             },
           ]"
           :data-sidebar-link="item.link"
+          @click.capture="handleClick"
         >
           <dt-icon
             v-if="depth === 0 && item.icon"
@@ -232,6 +233,11 @@ const isOpen = computed(() => {
   return props.openItems.has(key);
 });
 
+// True when the route targets this item or any descendant. Reuses isActiveLink
+// for the per-node check so the What's New → posts special case lives in one place.
+const isRouteMatch = (item) =>
+  isActiveLink(item.link) || (item.children?.some(isRouteMatch) ?? false);
+
 const isActiveLink = (link, isParentButton = false) => {
   if (!link) return false;
 
@@ -253,19 +259,13 @@ const isActiveLink = (link, isParentButton = false) => {
   return route.path === link;
 };
 
-function handleClick (event, listeners, link) {
+function handleClick (event) {
   const itemKey = props.item.link || props.item.text;
 
-  // If we're already on this exact page, just toggle the collapsible
-  if (link && route.path === link) {
-    event.preventDefault();
-    // Only emit toggle to parent - don't call listeners to avoid double toggle
-    emit('toggle', itemKey, !isOpen.value);
-    return;
-  }
-
-  // If no link, just toggle
-  if (!link) {
+  // Runs in the capture phase to decide toggle-vs-navigate before the button's
+  // router-link fires: toggle when already open, link-less, or browsing within
+  // this item's tree; otherwise let the click navigate in.
+  if (isOpen.value || !props.item.link || isRouteMatch(props.item)) {
     event.preventDefault();
     emit('toggle', itemKey, !isOpen.value);
   }
