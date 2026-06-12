@@ -1,5 +1,20 @@
 <template>
   <dt-stack direction="row" gap="50">
+    <dt-button
+      class="dialtone-shell-btn"
+      active
+      to="/dialtone/"
+    >
+      Product Design
+    </dt-button>
+    <dt-button
+      class="dialtone-shell-btn"
+      href="https://dialpad.design/brand"
+    >
+      Brand Design
+    </dt-button>
+  </dt-stack>
+  <dt-stack direction="row" gap="50">
     <!-- <dt-button
       to="/dialtone/whats-new/"
       class="d-mie-100"

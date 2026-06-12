@@ -4,7 +4,8 @@
     v-if="subItems.length > 0"
     v-model:open="isOpen"
     element-type="li"
-    class="dt-sidebar-item"
+    class="d-w100p"
+    anchor-class="d-w100p"
   >
     <template #anchor="{ attrs, listeners }">
       <dt-stack
@@ -32,7 +33,6 @@
             },
           ]"
           :data-sidebar-link="item.link"
-          @click="handleClick($event, listeners, item.link)"
         >
           <dt-icon
             v-if="depth === 0 && item.icon"
@@ -140,7 +140,7 @@
   <!-- Item without children - render as simple link -->
   <li
     v-else
-    class="dt-sidebar-item"
+    class="d-w100p"
   >
     <dt-button
       :to="item.link || undefined"
@@ -271,9 +271,3 @@ function handleClick (event, listeners, link) {
   }
 }
 </script>
-
-<style lang="less" scoped>
-.dt-sidebar-item {
-  inline-size: var(--dt-layout-100-percent);
-}
-</style>

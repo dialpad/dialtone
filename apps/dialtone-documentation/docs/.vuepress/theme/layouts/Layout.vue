@@ -41,8 +41,8 @@
           v-if="!$frontmatter.home && !$frontmatter.noSidebar"
           padding-block="250"
           padding-inline-start="250"
-          min-inline-size="500"
-          max-inline-size="500"
+          min-inline-size="450"
+          max-inline-size="450"
           block-size="100p"
           scrollbar="move"
         >
@@ -58,6 +58,7 @@
         <DtBox
           v-else
           min-inline-size="0"
+          inline-size="100p"
           scrollbar="move"
           padding-inline-end="250"
         >

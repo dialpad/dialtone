@@ -30,8 +30,8 @@
       v-if="componentCombinatorName"
       :component-name="componentCombinatorName"
     />
-    <DtStack direction="row" align="start" gap="250">
-      <DtBox class="d-fl1 " min-inline-size="0">
+    <DtStack direction="row" align="start" gap="250" class="d-100p">
+      <DtBox class="d-fl1" min-inline-size="0">
         <!-- eslint-disable-next-line vue/no-undef-components -->
         <content class="d-docsite-article" />
         <DtStack
@@ -92,7 +92,7 @@
         <page-toc :headers="headers" />
       </DtBox>
     </DtStack>
-    <DtBox>
+    <DtBox outline>
       <dt-text as="p" kind="body" :size="300" tone="muted">
         <dt-text v-if="$frontmatter.title">
           {{ $frontmatter.title }}
