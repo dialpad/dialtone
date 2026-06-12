@@ -1,59 +1,75 @@
 <template>
-  <migration-banner />
-  <DtBox padding="250" padding-block-end="0">
-    <DtBox padding-block="100" padding="200" surface="secondary" border-radius="400">
-      <dt-stack direction="row" class="dialtone-header" justify="space-between" gap="400">
-        <dt-stack direction="row" gap="200" align="end">
-          <router-link
-            class="d-td-none"
-            title="Dialtone homepage"
-            to="/"
-          >
-            <dt-stack direction="row" gap="200">
-              <DtIllustration name="dialpad-logo" />
-              <!-- <dialtone-logo /> -->
+  <!-- <mobile-sidebar v-if="isMobile && route.path !== '/'" /> -->
+  <dt-stack class="d-ps-fixed d-all-0 d-of-hidden">
+    <DtBox>
+      <migration-banner />
+      <DtBox padding="250" padding-block-end="0">
+        <DtBox padding-block="100" padding="200" surface="secondary" border-radius="400">
+          <dt-stack direction="row" class="dialtone-header" justify="space-between" gap="400">
+            <dt-stack direction="row" gap="200" align="end">
+              <router-link
+                class="d-td-none"
+                title="Dialtone homepage"
+                to="/"
+              >
+                <dt-stack direction="row" gap="200">
+                  <DtIllustration name="dialpad-logo" />
+                  <!-- <dialtone-logo /> -->
+                </dt-stack>
+              </router-link>
+              <DtBox v-if="showBranchBadge" :title="branchName" padding-block-end="100">
+                <dt-stack direction="row" gap="50">
+                  <dt-icon-branch class="d-fc-muted" :size="100" />
+                  <DtText as="p" kind="body" size="100" tone="muted" class="d-wmx-250" truncate>
+                    {{ branchName }}
+                  </DtText>
+                </dt-stack>
+              </DtBox>
             </dt-stack>
-          </router-link>
-          <DtBox v-if="showBranchBadge" :title="branchName" padding-block-end="100">
-            <dt-stack direction="row" gap="50">
-              <dt-icon-branch class="d-fc-muted" :size="100" />
-              <DtText as="p" kind="body" size="100" tone="muted" class="d-wmx-250" truncate>
-                {{ branchName }}
-              </DtText>
-            </dt-stack>
-          </DtBox>
-        </dt-stack>
-        <navbar />
+            <navbar />
+          </dt-stack>
+        </DtBox>
+      </DtBox>
+    </DtBox>
+    <DtBox
+      padding-block-end="0"
+      min-block-size="0"
+      class="d-fl1"
+    >
+      <dt-stack direction="row" align="stretch" gap="400" class="d-h100p">
+        <DtBox
+          v-if="!$frontmatter.home && !$frontmatter.noSidebar"
+          padding-block="250"
+          padding-inline-start="250"
+          min-inline-size="500"
+          max-inline-size="500"
+          block-size="100p"
+          scrollbar="move"
+        >
+          <sidebar />
+        </DtBox>
+        <DtBox
+          v-if="$frontmatter.home"
+          inline-size="100p"
+          padding-inline-end="250"
+        >
+          <home />
+        </DtBox>
+        <DtBox
+          v-else
+          min-inline-size="0"
+          scrollbar="move"
+          padding-inline-end="250"
+        >
+          <page
+            :prev="$frontmatter.prev || prev"
+            :next="$frontmatter.next || next"
+            :is-mobile="isMobile"
+          />
+        </DtBox>
       </dt-stack>
     </DtBox>
-  </DtBox>
-  <mobile-sidebar v-if="isMobile && route.path !== '/'" />
-  <DtBox padding="250" padding-block-end="0">
-    <dt-stack direction="row" align="start" gap="400">
-      <DtBox
-        v-if="!$frontmatter.home && !$frontmatter.noSidebar"
-        min-inline-size="500"
-        max-inline-size="500"
-        padding="200"
-        surface="secondary"
-        border-radius="400"
-        class="d-ps-sticky d-ibs-300"
-      >
-        <sidebar />
-      </DtBox>
-      <DtBox v-if="$frontmatter.home" inline-size="100p">
-        <home />
-      </DtBox>
-      <DtBox v-else class="d-fl1" min-inline-size="0">
-        <page
-          :prev="$frontmatter.prev || prev"
-          :next="$frontmatter.next || next"
-          :is-mobile="isMobile"
-          outline
-        />
-      </DtBox>
-    </dt-stack>
-  </DtBox>
+  </dt-stack>
 </template>
 
 <script setup>

@@ -6,7 +6,7 @@
       :size="100"
       strength="semibold"
       tone="secondary"
-      class="d-tt-uppercase d-px-100 d-pbe-50"
+      class="d-tt-uppercase d-px-100 d-pbe-50 d-vi-visible-sr"
     >
       On this page
     </dt-text>

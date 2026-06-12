@@ -1,6 +1,6 @@
 <template>
   <dt-stack direction="row" gap="50">
-    <dt-button
+    <!-- <dt-button
       to="/dialtone/whats-new/"
       class="d-mie-100"
       size="200"
@@ -9,7 +9,7 @@
       <template #startIcon="{ iconSize }">
         <dt-icon name="megaphone" :size="iconSize" />
       </template>
-    </dt-button>
+    </dt-button> -->
     <dt-dropdown
       id="theme-toggle-dropdown"
       :hidden="!showThemeSwitcher"
