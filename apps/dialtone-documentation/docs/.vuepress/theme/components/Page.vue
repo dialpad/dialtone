@@ -92,7 +92,7 @@
         <page-toc :headers="headers" />
       </DtBox>
     </DtStack>
-    <DtBox outline>
+    <DtBox>
       <dt-text as="p" kind="body" :size="300" tone="muted">
         <dt-text v-if="$frontmatter.title">
           {{ $frontmatter.title }}

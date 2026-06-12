@@ -36,11 +36,13 @@
       min-block-size="0"
       class="d-fl1"
     >
-      <dt-stack direction="row" align="stretch" gap="400" class="d-h100p">
+      <dt-stack direction="row" align="stretch" gap="150" class="d-h100p">
         <DtBox
           v-if="!$frontmatter.home && !$frontmatter.noSidebar"
-          padding-block="250"
+          padding-block-start="250"
+          padding-block-end="400"
           padding-inline-start="250"
+          padding-inline-end="200"
           min-inline-size="450"
           max-inline-size="450"
           block-size="100p"
@@ -61,6 +63,7 @@
           inline-size="100p"
           scrollbar="move"
           padding-inline-end="250"
+          padding-block-end="400"
         >
           <page
             :prev="$frontmatter.prev || prev"
