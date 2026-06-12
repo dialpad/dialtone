@@ -54,6 +54,7 @@
 
 <script>
 /* eslint-disable max-lines */
+import { TextSelection } from '@tiptap/pm/state';
 import { Editor, EditorContent } from '@tiptap/vue-3';
 import { BubbleMenu } from '@tiptap/vue-3/menus';
 import { Extension } from '@tiptap/core';
@@ -798,6 +799,11 @@ export default {
                         paragraphType.create({}, line ? [state.schema.text(line)] : []),
                       );
                       tr.replaceWith(codeBlockPos, codeBlockPos + codeBlockNode.nodeSize, paragraphs);
+                      // replaceWith uses right-biased mapping (assoc=1), which moves the cursor
+                      // to the start of the next line when replacing newlines with paragraph
+                      // boundaries. Left-bias (assoc=-1) keeps it at the end of the current line.
+                      const correctedAnchor = tr.mapping.map(state.selection.anchor, -1);
+                      tr.setSelection(TextSelection.create(tr.doc, correctedAnchor));
                       return true;
                     })
                     .run();
@@ -976,7 +982,10 @@ export default {
           transformPastedHTML (html) {
             return html
               .replace(/<hr[^>]*\/?>/gi, '<p><br></p>')
-              .replace(/(<\/\w+>)((<br \/>)+)/g, '$2$1');
+              .replace(/(<\/\w+>)((<br \/>)+)/g, '$2$1')
+              // Strip trailing <br> just before </p> so pasted content doesn't
+              // produce an extra blank line at the end of the message.
+              .replace(/(<br[^>]*>)\s*<\/p>/gi, '</p>');
           },
         },
       });
