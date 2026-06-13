@@ -78,6 +78,10 @@ import { useRoute, useRouter } from 'vue-router';
 import SidebarItem from './SidebarItem.vue';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import { useSidebarItems } from '../composables/useSidebarItems';
+import {
+  canReceiveCharacterInput,
+  isSidebarSearchShortcut,
+} from '../utils/sidebarShortcuts';
 
 const route = useRoute();
 const router = useRouter();
@@ -102,48 +106,8 @@ const listRef = ref(null);
 
 const focusSearchInput = () => searchInput.value?.focus();
 
-const nonTextInputTypes = new Set([
-  'button',
-  'checkbox',
-  'color',
-  'file',
-  'hidden',
-  'image',
-  'radio',
-  'range',
-  'reset',
-  'submit',
-]);
-
-const characterInputSelector = [
-  '[role="combobox"]',
-  '[role="searchbox"]',
-  '[role="spinbutton"]',
-  '[role="textbox"]',
-  'select',
-  'textarea',
-].join(',');
-
-const isPlainSlashShortcut = (event) => {
-  return event.key === '/' &&
-    !event.defaultPrevented &&
-    !event.isComposing &&
-    !event.altKey &&
-    !event.ctrlKey &&
-    !event.metaKey;
-};
-
-const canReceiveCharacterInput = (element) => {
-  if (!(element instanceof HTMLElement)) return false;
-  if (element.isContentEditable || element.closest(characterInputSelector)) return true;
-  if (!element.matches('input')) return false;
-
-  const inputType = element.getAttribute('type')?.toLowerCase() || 'text';
-  return !nonTextInputTypes.has(inputType);
-};
-
 const handleSearchShortcut = (event) => {
-  if (!isPlainSlashShortcut(event)) return;
+  if (!isSidebarSearchShortcut(event)) return;
 
   const target = event.target instanceof Element ? event.target : document.activeElement;
 
