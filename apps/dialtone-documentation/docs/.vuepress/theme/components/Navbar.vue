@@ -27,7 +27,7 @@
       </template>
     </dt-button> -->
     <dt-button
-      v-dt-tooltip="'Storybook'"
+      v-dt-tooltip:bottom="'Storybook'"
       href="https://dialtone.dialpad.com/vue"
       target="_blank"
       rel="noreferrer noopener"
@@ -40,7 +40,7 @@
       </template>
     </dt-button>
     <dt-button
-      v-dt-tooltip="'Github Repository'"
+      v-dt-tooltip:bottom="'Github Repository'"
       href="https://github.com/dialpad/dialtone"
       target="_blank"
       rel="noreferrer noopener"
