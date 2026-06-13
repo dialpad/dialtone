@@ -4,6 +4,10 @@ export const PAGE_SCROLL_CONTAINER_SELECTOR = '.dialtone-doc-page-scroll-contain
 export const PAGE_STICKY_HEADER_SELECTOR = '#page-sticky-header';
 export const TOC_SCROLL_OFFSET_GAP = 16;
 
+// Scroll behavior for hash navigation — kept as a function (not a const) as a seam
+// for a future prefers-reduced-motion check. Visual smoothness is owned by CSS
+// (.dialtone-doc-page-scroll-container); this value also arms the scroll-spy guard
+// (see startProgrammaticScroll in PageToc.vue).
 export function getHashScrollBehavior () {
   return 'smooth';
 }

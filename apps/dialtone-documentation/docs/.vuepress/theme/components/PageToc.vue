@@ -90,6 +90,12 @@ const scrollContainer = ref(null);
 const activeHash = ref(route.hash);
 const routeHashScrollGuard = createRouteHashScrollGuard();
 
+// Absolute cap on how long scroll-spy stays suppressed after a programmatic scroll,
+// for browsers/cases where `scrollend` never fires.
+const PROGRAMMATIC_SCROLL_MAX_MS = 2000;
+// Idle gap after the last scroll event before a programmatic scroll is considered settled.
+const SCROLL_IDLE_SETTLE_MS = 150;
+
 let removeScrollListener = null;
 let scrollFrame = null;
 let isProgrammaticScrolling = false;
@@ -153,16 +159,20 @@ function scrollToHash (hash, behavior = 'smooth') {
   });
 }
 
+// Only smooth scrolls animate over time, so only they need scroll-spy paused until
+// they finish; an instant scroll lands immediately. (The smoothness itself is CSS,
+// not this argument — see getHashScrollBehavior.)
 function startProgrammaticScroll (behavior) {
   if (behavior !== 'smooth') return;
 
   isProgrammaticScrolling = true;
+  // Re-attach fresh in case a prior programmatic scroll hasn't resolved (rapid clicks).
   scrollContainer.value?.removeEventListener('scrollend', stopProgrammaticScroll);
   scrollContainer.value?.addEventListener('scrollend', stopProgrammaticScroll, { once: true });
-  refreshProgrammaticScrollTimer(2000);
+  refreshProgrammaticScrollTimer(PROGRAMMATIC_SCROLL_MAX_MS);
 }
 
-function refreshProgrammaticScrollTimer (delay = 150) {
+function refreshProgrammaticScrollTimer (delay = SCROLL_IDLE_SETTLE_MS) {
   window.clearTimeout(programmaticScrollTimer);
   programmaticScrollTimer = window.setTimeout(stopProgrammaticScroll, delay);
 }
@@ -176,7 +186,7 @@ function stopProgrammaticScroll () {
   scrollContainer.value?.removeEventListener('scrollend', stopProgrammaticScroll);
 }
 
-async function updateRouteHash (hash, { replace = false } = {}) {
+async function updateRouteHash (hash) {
   if (route.hash === hash) return;
 
   // Suppress the router's global scroll-to-hash (set in client.js) for this write:
@@ -187,7 +197,7 @@ async function updateRouteHash (hash, { replace = false } = {}) {
   router.options.scrollBehavior = undefined;
 
   try {
-    await router[replace ? 'replace' : 'push']({
+    await router.push({
       path: route.path,
       query: route.query,
       hash,
