@@ -15,23 +15,23 @@
     </dt-button>
   </dt-stack>
   <dt-stack direction="row" gap="50">
-    <!-- <dt-button
+    <dt-button
       to="/dialtone/whats-new/"
       class="d-mie-100"
-      size="200"
+      size="100"
     >
       What's New
       <template #startIcon="{ iconSize }">
         <dt-icon name="megaphone" :size="iconSize" />
       </template>
-    </dt-button> -->
+    </dt-button>
     <dt-dropdown
       id="theme-toggle-dropdown"
-      :hidden="!showThemeSwitcher"
       navigation-type="arrow-keys"
       placement="bottom"
       class="theme-toggle-dropdown"
       max-height="33vh"
+      hidden
     >
       <template #anchor>
         <dt-button

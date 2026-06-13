@@ -39,7 +39,6 @@
       <dt-stack direction="row" align="stretch" gap="150" class="d-h100p">
         <DtBox
           v-if="!$frontmatter.home && !$frontmatter.noSidebar"
-          padding-block-start="250"
           padding-block-end="400"
           padding-inline-start="250"
           padding-inline-end="200"

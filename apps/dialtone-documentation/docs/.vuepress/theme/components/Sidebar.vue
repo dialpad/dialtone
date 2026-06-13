@@ -1,13 +1,14 @@
 <template>
-  <h2 class="d-vi-visible-sr">
-    Local navigation
-  </h2>
   <dt-stack
     class="dialtone-sidebar__list"
     gap="50"
     @keydown="handleKeydown"
   >
-    <DtBox padding-block-end="100">
+    <DtBox
+      padding-block-end="100"
+      padding-block-start="300"
+      class="d-ps-sticky d-bgc-primary d-ibs-0 d-zi-navigation-fixed"
+    >
       <dt-input
         ref="searchInput"
         v-model="inputValue"
