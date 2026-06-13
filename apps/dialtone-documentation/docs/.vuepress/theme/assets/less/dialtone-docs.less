@@ -44,6 +44,8 @@ html {
 .dialtone-doc-page-scroll-container {
   scroll-behavior: smooth;
 
+  // Instant scrolls defeat the smooth default via this modifier — see
+  // scrollRouteToTop() in pageToc.js. Toggle it rather than inventing another opt-out.
   &--no-smooth {
     scroll-behavior: auto;
   }

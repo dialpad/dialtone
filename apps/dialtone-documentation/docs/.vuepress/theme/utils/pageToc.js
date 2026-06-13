@@ -24,11 +24,13 @@ export function shouldScrollRouteToTop (to, from) {
 export function scrollRouteToTop (scrollContainer, scheduleRestore = scheduleScrollBehaviorRestore) {
   if (!scrollContainer?.scrollTo) return;
 
-  const scrollBehavior = getRouteScrollToTopBehavior();
+  // The container's CSS `scroll-behavior: smooth` can win over the scrollTo `behavior`
+  // option and animate this jump, so force it instant by toggling the --no-smooth class
+  // around the scroll and restoring smoothness next frame. (Same quirk: IconCatalog.vue.)
   scrollContainer.classList?.add(PAGE_SCROLL_CONTAINER_NO_SMOOTH_CLASS);
   scrollContainer.scrollTo({
     top: 0,
-    behavior: scrollBehavior,
+    behavior: getRouteScrollToTopBehavior(),
   });
   scheduleRestore(() => {
     scrollContainer.classList?.remove(PAGE_SCROLL_CONTAINER_NO_SMOOTH_CLASS);
