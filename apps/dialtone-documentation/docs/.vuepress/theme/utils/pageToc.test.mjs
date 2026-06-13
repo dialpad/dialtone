@@ -2,7 +2,9 @@ import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   PAGE_SCROLL_CONTAINER_SELECTOR,
+  createRouteHashScrollGuard,
   getActiveHeaderLink,
+  getHashScrollBehavior,
   getScrollOffset,
   getTargetScrollTop,
   hashToId,
@@ -11,6 +13,24 @@ import {
 describe('pageToc utilities', () => {
   it('uses a docs-owned page scroll container selector', () => {
     assert.equal(PAGE_SCROLL_CONTAINER_SELECTOR, '.dialtone-doc-page-scroll-container');
+  });
+
+  it('uses smooth scrolling for hash changes including deep links', () => {
+    assert.equal(getHashScrollBehavior(), 'smooth');
+  });
+
+  it('skips scroll for route hash changes written by TOC navigation', () => {
+    const guard = createRouteHashScrollGuard();
+
+    guard.skip('#split-button');
+
+    assert.equal(guard.shouldSkip('#classes'), false);
+    assert.equal(guard.shouldSkip('#split-button'), true);
+    assert.equal(guard.shouldSkip('#split-button'), false);
+
+    guard.skip('');
+
+    assert.equal(guard.shouldSkip(''), true);
   });
 
   it('decodes a header link to its target id', () => {

@@ -66,8 +66,10 @@
 import { nextTick, onMounted, onUnmounted, ref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import {
+  createRouteHashScrollGuard,
   findPageScrollContainer,
   getActiveHeaderLink,
+  getHashScrollBehavior,
   getScrollOffset,
   getTargetScrollTop,
   hashToId,
@@ -86,11 +88,12 @@ const router = useRouter();
 const tocRef = ref(null);
 const scrollContainer = ref(null);
 const activeHash = ref(route.hash);
+const routeHashScrollGuard = createRouteHashScrollGuard();
 
 let removeScrollListener = null;
 let scrollFrame = null;
-let isUpdatingRouteHash = false;
-let ignoreScrollUpdatesUntil = 0;
+let isProgrammaticScrolling = false;
+let programmaticScrollTimer = null;
 
 function isHeaderActive (header) {
   const links = [header.link, ...(header.children || []).map(child => child.link)];
@@ -113,6 +116,11 @@ function syncScrollContainer () {
 }
 
 function queueActiveHeaderUpdate () {
+  if (isProgrammaticScrolling) {
+    refreshProgrammaticScrollTimer();
+    return;
+  }
+
   if (scrollFrame) return;
 
   scrollFrame = window.requestAnimationFrame(() => {
@@ -122,8 +130,6 @@ function queueActiveHeaderUpdate () {
 }
 
 function updateActiveHeaderFromScroll () {
-  if (performance.now() < ignoreScrollUpdatesUntil) return;
-
   const nextActiveHash = getActiveHeaderLink(props.headers, scrollContainer.value, {
     offset: getScrollOffset(scrollContainer.value),
   });
@@ -131,7 +137,6 @@ function updateActiveHeaderFromScroll () {
   if (nextActiveHash === activeHash.value) return;
 
   activeHash.value = nextActiveHash;
-  void updateRouteHash(nextActiveHash, { replace: true });
 }
 
 function scrollToHash (hash, behavior = 'smooth') {
@@ -140,7 +145,7 @@ function scrollToHash (hash, behavior = 'smooth') {
   const target = document.getElementById(hashToId(hash));
   if (!target) return;
 
-  ignoreScrollUpdatesUntil = performance.now() + (behavior === 'smooth' ? 700 : 100);
+  startProgrammaticScroll(behavior);
 
   scrollContainer.value.scrollTo({
     top: Math.max(0, getTargetScrollTop(scrollContainer.value, target, getScrollOffset(scrollContainer.value))),
@@ -148,15 +153,37 @@ function scrollToHash (hash, behavior = 'smooth') {
   });
 }
 
+function startProgrammaticScroll (behavior) {
+  if (behavior !== 'smooth') return;
+
+  isProgrammaticScrolling = true;
+  scrollContainer.value?.removeEventListener('scrollend', stopProgrammaticScroll);
+  scrollContainer.value?.addEventListener('scrollend', stopProgrammaticScroll, { once: true });
+  refreshProgrammaticScrollTimer(2000);
+}
+
+function refreshProgrammaticScrollTimer (delay = 150) {
+  window.clearTimeout(programmaticScrollTimer);
+  programmaticScrollTimer = window.setTimeout(stopProgrammaticScroll, delay);
+}
+
+function stopProgrammaticScroll () {
+  if (!isProgrammaticScrolling) return;
+
+  isProgrammaticScrolling = false;
+  window.clearTimeout(programmaticScrollTimer);
+  programmaticScrollTimer = null;
+  scrollContainer.value?.removeEventListener('scrollend', stopProgrammaticScroll);
+}
+
 async function updateRouteHash (hash, { replace = false } = {}) {
   if (route.hash === hash) return;
 
   // Suppress the router's global scroll-to-hash (set in client.js) for this write:
   // the TOC owns scrolling inside the page container, so the hash should change
-  // without triggering a second scroll. isUpdatingRouteHash likewise stops the
-  // route.hash watcher from re-scrolling in response to our own replace.
+  // without triggering a second scroll from the route.hash watcher.
   const scrollBehavior = router.options.scrollBehavior;
-  isUpdatingRouteHash = true;
+  routeHashScrollGuard.skip(hash);
   router.options.scrollBehavior = undefined;
 
   try {
@@ -167,9 +194,6 @@ async function updateRouteHash (hash, { replace = false } = {}) {
     });
   } finally {
     router.options.scrollBehavior = scrollBehavior;
-    window.requestAnimationFrame(() => {
-      isUpdatingRouteHash = false;
-    });
   }
 }
 
@@ -188,7 +212,7 @@ onMounted(async () => {
   syncScrollContainer();
 
   if (route.hash) {
-    scrollToHash(route.hash, 'auto');
+    scrollToHash(route.hash, getHashScrollBehavior());
   } else {
     updateActiveHeaderFromScroll();
   }
@@ -197,17 +221,18 @@ onMounted(async () => {
 onUnmounted(() => {
   removeScrollListener?.();
   if (scrollFrame) window.cancelAnimationFrame(scrollFrame);
+  stopProgrammaticScroll();
 });
 
 watch(
   () => route.hash,
   async (hash) => {
     activeHash.value = hash;
-    if (isUpdatingRouteHash) return;
+    if (routeHashScrollGuard.shouldSkip(hash)) return;
 
     await nextTick();
     syncScrollContainer();
-    scrollToHash(hash, 'auto');
+    scrollToHash(hash, getHashScrollBehavior());
   },
   { flush: 'post' },
 );
@@ -220,7 +245,7 @@ watch(
 
     if (route.hash) {
       activeHash.value = route.hash;
-      scrollToHash(route.hash, 'auto');
+      scrollToHash(route.hash, getHashScrollBehavior());
       return;
     }
 

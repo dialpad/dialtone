@@ -4,6 +4,27 @@ export const PAGE_SCROLL_CONTAINER_SELECTOR = '.dialtone-doc-page-scroll-contain
 export const PAGE_STICKY_HEADER_SELECTOR = '#page-sticky-header';
 export const TOC_SCROLL_OFFSET_GAP = 16;
 
+export function getHashScrollBehavior () {
+  return 'smooth';
+}
+
+export function createRouteHashScrollGuard () {
+  let skippedHash = null;
+
+  return {
+    skip (hash) {
+      skippedHash = hash;
+    },
+
+    shouldSkip (hash) {
+      if (skippedHash !== hash) return false;
+
+      skippedHash = null;
+      return true;
+    },
+  };
+}
+
 export function flattenHeaders (headers = []) {
   return headers.flatMap(header => [
     header,
