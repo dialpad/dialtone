@@ -90,11 +90,16 @@ import Home from '../components/Home.vue';
 import Page from '../components/Page.vue';
 import MigrationBanner from '../../baseComponents/MigrationBanner.vue';
 import { isExternalUrl } from '../utils/isExternalUrl';
-import { computed, ref, watch, onMounted, onUnmounted } from 'vue';
+import { computed, nextTick, ref, watch, onMounted, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import { disableRootScrolling, DtStack, enableRootScrolling } from '@dialpad/dialtone-vue';
 import { DtIconBranch } from '@dialpad/dialtone-icons/vue';
+import {
+  PAGE_SCROLL_CONTAINER_SELECTOR,
+  scrollRouteToTop,
+  shouldScrollRouteToTop,
+} from '../utils/pageToc.js';
 
 const route = useRoute();
 const prev = ref(null);
@@ -193,6 +198,17 @@ watch(
     findCurrent();
   },
   { immediate: true },
+);
+
+watch(
+  () => ({ path: route.path, hash: route.hash }),
+  async (to, from) => {
+    if (!shouldScrollRouteToTop(to, from)) return;
+
+    await nextTick();
+    scrollRouteToTop(document.querySelector(PAGE_SCROLL_CONTAINER_SELECTOR));
+  },
+  { flush: 'post' },
 );
 
 onMounted(() => {

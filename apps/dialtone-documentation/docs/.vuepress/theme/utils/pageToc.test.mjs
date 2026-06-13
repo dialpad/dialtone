@@ -1,13 +1,17 @@
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
 import {
+  PAGE_SCROLL_CONTAINER_NO_SMOOTH_CLASS,
   PAGE_SCROLL_CONTAINER_SELECTOR,
   createRouteHashScrollGuard,
   getActiveHeaderLink,
   getHashScrollBehavior,
+  getRouteScrollToTopBehavior,
   getScrollOffset,
   getTargetScrollTop,
   hashToId,
+  scrollRouteToTop,
+  shouldScrollRouteToTop,
 } from './pageToc.js';
 
 describe('pageToc utilities', () => {
@@ -31,6 +35,67 @@ describe('pageToc utilities', () => {
     guard.skip('');
 
     assert.equal(guard.shouldSkip(''), true);
+  });
+
+  it('scrolls to top only when navigating to a different route without a hash', () => {
+    assert.equal(getRouteScrollToTopBehavior(), 'auto');
+
+    assert.equal(
+      shouldScrollRouteToTop(
+        { path: '/components/card.html', hash: '' },
+        { path: '/components/button.html', hash: '#classes' },
+      ),
+      true,
+    );
+    assert.equal(
+      shouldScrollRouteToTop(
+        { path: '/components/card.html', hash: '#usage' },
+        { path: '/components/button.html', hash: '#classes' },
+      ),
+      false,
+    );
+    assert.equal(
+      shouldScrollRouteToTop(
+        { path: '/components/button.html', hash: '#classes' },
+        { path: '/components/button.html', hash: '#usage' },
+      ),
+      false,
+    );
+  });
+
+  it('temporarily toggles the no-smooth class when route-scrolling to top', () => {
+    const classes = new Set();
+    const scrollCalls = [];
+    let restoreScrollBehavior;
+    const scrollContainer = {
+      classList: {
+        add: className => classes.add(className),
+        remove: className => classes.delete(className),
+        contains: className => classes.has(className),
+      },
+      scrollTo (options) {
+        scrollCalls.push({
+          options,
+          noSmooth: this.classList.contains(PAGE_SCROLL_CONTAINER_NO_SMOOTH_CLASS),
+        });
+      },
+    };
+
+    scrollRouteToTop(scrollContainer, callback => {
+      restoreScrollBehavior = callback;
+    });
+
+    assert.deepEqual(scrollCalls, [
+      {
+        options: { top: 0, behavior: 'auto' },
+        noSmooth: true,
+      },
+    ]);
+    assert.equal(classes.has(PAGE_SCROLL_CONTAINER_NO_SMOOTH_CLASS), true);
+
+    restoreScrollBehavior();
+
+    assert.equal(classes.has(PAGE_SCROLL_CONTAINER_NO_SMOOTH_CLASS), false);
   });
 
   it('decodes a header link to its target id', () => {

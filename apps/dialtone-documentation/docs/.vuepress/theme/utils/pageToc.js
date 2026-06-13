@@ -1,4 +1,5 @@
 export const PAGE_SCROLL_CONTAINER_SELECTOR = '.dialtone-doc-page-scroll-container';
+export const PAGE_SCROLL_CONTAINER_NO_SMOOTH_CLASS = 'dialtone-doc-page-scroll-container--no-smooth';
 // Stable id hook (set in Page.vue) rather than a styling-class selector, which
 // would silently break getScrollOffset if the sticky header's utilities change.
 export const PAGE_STICKY_HEADER_SELECTOR = '#page-sticky-header';
@@ -10,6 +11,28 @@ export const TOC_SCROLL_OFFSET_GAP = 16;
 // (see startProgrammaticScroll in PageToc.vue).
 export function getHashScrollBehavior () {
   return 'smooth';
+}
+
+export function getRouteScrollToTopBehavior () {
+  return 'auto';
+}
+
+export function shouldScrollRouteToTop (to, from) {
+  return Boolean(from?.path && to?.path && to.path !== from.path && !to.hash);
+}
+
+export function scrollRouteToTop (scrollContainer, scheduleRestore = scheduleScrollBehaviorRestore) {
+  if (!scrollContainer?.scrollTo) return;
+
+  const scrollBehavior = getRouteScrollToTopBehavior();
+  scrollContainer.classList?.add(PAGE_SCROLL_CONTAINER_NO_SMOOTH_CLASS);
+  scrollContainer.scrollTo({
+    top: 0,
+    behavior: scrollBehavior,
+  });
+  scheduleRestore(() => {
+    scrollContainer.classList?.remove(PAGE_SCROLL_CONTAINER_NO_SMOOTH_CLASS);
+  });
 }
 
 export function createRouteHashScrollGuard () {
@@ -95,6 +118,15 @@ function getPassedHeaderLink (headers, activationTop, getTarget) {
 
 function getElementById (id) {
   return document.getElementById(id);
+}
+
+function scheduleScrollBehaviorRestore (callback) {
+  if (typeof requestAnimationFrame === 'function') {
+    requestAnimationFrame(callback);
+    return;
+  }
+
+  setTimeout(callback, 0);
 }
 
 function isScrolledToBottom (scrollContainer) {
