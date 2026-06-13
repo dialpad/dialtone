@@ -1,21 +1,22 @@
+<!-- eslint-disable max-lines -->
 <template>
-  <dt-stack direction="row" gap="50">
-    <dt-button
-      class="dialtone-shell-btn"
-      active
-      to="/dialtone/"
-    >
-      Product Design
-    </dt-button>
-    <dt-button
-      class="dialtone-shell-btn"
-      href="https://dialpad.design/brand"
-    >
-      Brand Design
-    </dt-button>
-  </dt-stack>
-  <dt-stack direction="row" gap="50">
-    <dt-button
+  <DtStack direction="row" gap="50">
+    <DtStack direction="row" gap="100">
+      <dt-button
+        class="dialtone-shell-btn"
+        active
+        to="/dialtone/"
+      >
+        Product Design
+      </dt-button>
+      <dt-button
+        class="dialtone-shell-btn"
+        href="https://dialpad.design/brand"
+      >
+        Brand Design
+      </dt-button>
+    </DtStack>
+    <!-- <dt-button
       to="/dialtone/whats-new/"
       class="d-mie-100"
       size="100"
@@ -24,14 +25,40 @@
       <template #startIcon="{ iconSize }">
         <dt-icon name="megaphone" :size="iconSize" />
       </template>
+    </dt-button> -->
+    <dt-button
+      v-dt-tooltip="'Storybook'"
+      href="https://dialtone.dialpad.com/vue"
+      target="_blank"
+      rel="noreferrer noopener"
+      kind="muted"
+      importance="clear"
+      aria-label="Open Storybook"
+    >
+      <template #startIcon="{ iconSize }">
+        <dt-icon name="storybook" :size="iconSize" />
+      </template>
+    </dt-button>
+    <dt-button
+      v-dt-tooltip="'Github Repository'"
+      href="https://github.com/dialpad/dialtone"
+      target="_blank"
+      rel="noreferrer noopener"
+      kind="muted"
+      importance="clear"
+      aria-label="Open GitHub repository"
+    >
+      <template #startIcon="{ iconSize }">
+        <dt-icon name="github" :size="iconSize" />
+      </template>
     </dt-button>
     <dt-dropdown
       id="theme-toggle-dropdown"
       navigation-type="arrow-keys"
-      placement="bottom"
+      placement="bottom-end"
       class="theme-toggle-dropdown"
       max-height="33vh"
-      hidden
+      :hidden="!showThemeSwitcher"
     >
       <template #anchor>
         <dt-button
@@ -169,7 +196,7 @@
         </dt-list-item-group>
       </template>
     </dt-dropdown>
-    <dt-dropdown navigation-type="arrow-keys" placement="bottom">
+    <dt-dropdown navigation-type="arrow-keys" placement="bottom-end">
       <template #anchor>
         <dt-button
           v-dt-tooltip:bottom="`Mode: ${capitalize(currentMode)}`"
@@ -177,11 +204,8 @@
           kind="muted"
           class="dialtone-shell-btn"
         >
-          <template #startIcon>
-            <dt-icon
-              size="300"
-              :name="currentModeIconName"
-            />
+          <template #startIcon="{ iconSize }">
+            <dt-icon :name="currentModeIconName" :size="iconSize" />
           </template>
         </dt-button>
       </template>
@@ -284,7 +308,7 @@
         </template>
       </template>
     </dt-dropdown>
-  </dt-stack>
+  </DtStack>
 </template>
 
 <script setup>

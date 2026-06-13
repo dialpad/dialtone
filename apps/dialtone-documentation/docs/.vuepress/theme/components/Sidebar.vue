@@ -15,7 +15,7 @@
         aria-label="Search"
         placeholder="Search"
         type="search"
-        end-icon-class="d-mie-0 d-pie-50"
+        end-icon-class="d-pie-25"
         @update:model-value="focusedIndex = -1"
       >
         <template #startIcon="{ iconSize }">
@@ -37,6 +37,7 @@
           </dt-button>
           <dt-keyboard-shortcut
             v-else
+            class="d-mie-n75"
             shortcut="/"
             screen-reader-text="Slash"
           />

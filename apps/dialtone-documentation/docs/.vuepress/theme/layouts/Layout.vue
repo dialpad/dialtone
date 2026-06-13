@@ -1,34 +1,32 @@
 <template>
   <!-- <mobile-sidebar v-if="isMobile && route.path !== '/'" /> -->
   <dt-stack class="d-ps-fixed d-all-0 d-of-hidden">
-    <DtBox>
-      <migration-banner />
-      <DtBox padding="250" padding-block-end="0">
-        <DtBox padding-block="100" padding="200" surface="secondary" border-radius="400">
-          <dt-stack direction="row" justify="space-between" gap="400">
-            <dt-stack direction="row" gap="200" align="end">
-              <router-link
-                class="d-td-none"
-                title="Dialtone homepage"
-                to="/"
-              >
-                <dt-stack direction="row" gap="200">
-                  <DtIllustration name="dialpad-logo" />
-                  <!-- <dialtone-logo /> -->
-                </dt-stack>
-              </router-link>
-              <DtBox v-if="showBranchBadge" :title="branchName" padding-block-end="100">
-                <dt-stack direction="row" gap="50">
-                  <dt-icon-branch class="d-fc-muted" :size="100" />
-                  <DtText as="p" kind="body" size="100" tone="muted" class="d-wmx-250" truncate>
-                    {{ branchName }}
-                  </DtText>
-                </dt-stack>
-              </DtBox>
-            </dt-stack>
-            <navbar />
+    <migration-banner />
+    <DtBox padding="250" padding-block-end="0">
+      <DtBox padding-block="100" padding="200" surface="secondary" border-radius="400">
+        <dt-stack direction="row" justify="space-between" gap="400">
+          <dt-stack direction="row" gap="200" align="end">
+            <router-link
+              class="d-td-none"
+              title="Dialtone homepage"
+              to="/"
+            >
+              <dt-stack direction="row" gap="200">
+                <DtIllustration name="dialpad-logo" />
+                <!-- <dialtone-logo /> -->
+              </dt-stack>
+            </router-link>
+            <DtBox v-if="showBranchBadge" :title="branchName" padding-block-end="100">
+              <dt-stack direction="row" gap="50">
+                <dt-icon-branch class="d-fc-muted" :size="100" />
+                <DtText as="p" kind="body" size="100" tone="muted" class="d-wmx-250" truncate>
+                  {{ branchName }}
+                </DtText>
+              </dt-stack>
+            </DtBox>
           </dt-stack>
-        </DtBox>
+          <navbar />
+        </dt-stack>
       </DtBox>
     </DtBox>
     <DtBox
