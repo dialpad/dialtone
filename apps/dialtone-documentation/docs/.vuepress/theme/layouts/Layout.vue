@@ -5,7 +5,7 @@
       <migration-banner />
       <DtBox padding="250" padding-block-end="0">
         <DtBox padding-block="100" padding="200" surface="secondary" border-radius="400">
-          <dt-stack direction="row" class="dialtone-header" justify="space-between" gap="400">
+          <dt-stack direction="row" justify="space-between" gap="400">
             <dt-stack direction="row" gap="200" align="end">
               <router-link
                 class="d-td-none"
