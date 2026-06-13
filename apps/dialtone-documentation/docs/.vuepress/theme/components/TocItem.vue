@@ -1,18 +1,22 @@
 <template>
   <dt-button
-    :to="to"
+    :href="to"
     :active="active"
+    :aria-current="active ? 'location' : undefined"
     importance="clear"
     kind="muted"
     :size="100"
     label-class="d-jc-flex-start d-fw-normal d-tw-pretty"
     class="d-w100p"
+    @click="emit('navigate', $event)"
   >
     {{ text }}
   </dt-button>
 </template>
 
 <script setup>
+const emit = defineEmits(['navigate']);
+
 defineProps({
   to: {
     type: String,

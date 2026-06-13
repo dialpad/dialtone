@@ -1,0 +1,77 @@
+export const PAGE_SCROLL_CONTAINER_SELECTOR = '.dialtone-doc-page-scroll-container';
+// Stable id hook (set in Page.vue) rather than a styling-class selector, which
+// would silently break getScrollOffset if the sticky header's utilities change.
+export const PAGE_STICKY_HEADER_SELECTOR = '#page-sticky-header';
+export const TOC_SCROLL_OFFSET_GAP = 16;
+
+export function flattenHeaders (headers = []) {
+  return headers.flatMap(header => [
+    header,
+    ...flattenHeaders(header.children || []),
+  ]);
+}
+
+export function hashToId (link = '') {
+  const hashIndex = link.indexOf('#');
+  const hash = hashIndex === -1 ? link : link.slice(hashIndex + 1);
+
+  return decodeURIComponent(hash.replace(/^#/, ''));
+}
+
+export function findPageScrollContainer (element) {
+  return element?.closest?.(PAGE_SCROLL_CONTAINER_SELECTOR) || document.scrollingElement || document.documentElement;
+}
+
+export function getScrollOffset (scrollContainer) {
+  const stickyHeader = scrollContainer?.querySelector?.(PAGE_STICKY_HEADER_SELECTOR);
+  if (!stickyHeader || !scrollContainer?.getBoundingClientRect) return 0;
+
+  const scrollContainerTop = scrollContainer.getBoundingClientRect().top;
+  const stickyHeaderBottom = stickyHeader.getBoundingClientRect().bottom;
+
+  return Math.max(0, stickyHeaderBottom - scrollContainerTop) + TOC_SCROLL_OFFSET_GAP;
+}
+
+export function getTargetScrollTop (scrollContainer, target, offset = 0) {
+  const scrollContainerTop = scrollContainer.getBoundingClientRect().top;
+  const targetTop = target.getBoundingClientRect().top;
+
+  return scrollContainer.scrollTop + targetTop - scrollContainerTop - offset;
+}
+
+export function getActiveHeaderLink (headers, scrollContainer, { offset = 0, getTarget = getElementById } = {}) {
+  const linkedHeaders = getLinkedHeaders(headers);
+  if (!linkedHeaders.length || !scrollContainer) return '';
+
+  if (isScrolledToBottom(scrollContainer)) {
+    return linkedHeaders[linkedHeaders.length - 1].link;
+  }
+
+  return getPassedHeaderLink(linkedHeaders, scrollContainer.getBoundingClientRect().top + offset, getTarget);
+}
+
+function getLinkedHeaders (headers) {
+  return flattenHeaders(headers).filter(header => header.link);
+}
+
+function getPassedHeaderLink (headers, activationTop, getTarget) {
+  let activeLink = '';
+
+  for (const header of headers) {
+    const target = getTarget(hashToId(header.link));
+    if (!target?.getBoundingClientRect) continue;
+    if (target.getBoundingClientRect().top > activationTop) break;
+
+    activeLink = header.link;
+  }
+
+  return activeLink;
+}
+
+function getElementById (id) {
+  return document.getElementById(id);
+}
+
+function isScrolledToBottom (scrollContainer) {
+  return scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight - 5;
+}

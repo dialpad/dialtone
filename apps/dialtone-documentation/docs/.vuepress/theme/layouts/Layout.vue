@@ -62,6 +62,7 @@
           min-inline-size="0"
           inline-size="100p"
           scrollbar="move"
+          scrollbar-content-class="dialtone-doc-page-scroll-container"
           padding-inline-end="250"
           padding-block-end="400"
         >

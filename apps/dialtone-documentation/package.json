@@ -60,7 +60,6 @@
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@toycode/markdown-it-class": "^1.2.4",
     "@vuepress/bundler-vite": "2.0.0-rc.24",
-    "@vuepress/plugin-active-header-links": "2.0.0-rc.112",
     "@vuepress/plugin-back-to-top": "2.0.0-rc.112",
     "@vuepress/plugin-git": "2.0.0-rc.112",
     "@vuepress/plugin-llms": "2.0.0-rc.112",

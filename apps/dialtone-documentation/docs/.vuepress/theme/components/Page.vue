@@ -1,37 +1,44 @@
 <template>
   <dt-stack gap="300">
-    <DtBox padding-block-start="250" surface="primary" class="d-ps-sticky d-ibs-0 d-zi-navigation-fixed">
-      <DtBox border-width-block-end="100">
-        <page-header />
-        <dt-tab-group
-          v-if="$frontmatter.status"
-          selected="panel-1"
-          borderless
-        >
-          <template #tabs>
-            <dt-tab id="tab-1" panel-id="panel-1" selected>
-              <template #startIcon="{ iconSize }">
-                <dt-icon name="file" :size="iconSize" />
-              </template>
-              Documentation
-            </dt-tab>
-            <dt-tab id="tab-2" panel-id="panel-2">
-              <template #startIcon="{ iconSize }">
-                <dt-icon name="code" :size="iconSize" />
-              </template>
-              API
-            </dt-tab>
-          </template>
-        </dt-tab-group>
-      </DtBox>
-    </DtBox>
-    <!-- eslint-disable-next-line vue/no-undef-components -->
-    <component-combinator
-      v-if="componentCombinatorName"
-      :component-name="componentCombinatorName"
-    />
     <DtStack direction="row" align="start" gap="250" class="d-100p">
       <DtBox class="d-fl1" min-inline-size="0">
+        <DtBox
+          id="page-sticky-header"
+          padding-block-start="250"
+          surface="primary"
+          class="d-ps-sticky d-ibs-0 d-zi-navigation-fixed"
+        >
+          <DtBox border-width-block-end="100">
+            <page-header />
+            <dt-tab-group
+              v-if="$frontmatter.status"
+              selected="panel-1"
+              borderless
+            >
+              <template #tabs>
+                <dt-tab id="tab-1" panel-id="panel-1" selected>
+                  <template #startIcon="{ iconSize }">
+                    <dt-icon name="file" :size="iconSize" />
+                  </template>
+                  Documentation
+                </dt-tab>
+                <dt-tab id="tab-2" panel-id="panel-2">
+                  <template #startIcon="{ iconSize }">
+                    <dt-icon name="code" :size="iconSize" />
+                  </template>
+                  API
+                </dt-tab>
+              </template>
+            </dt-tab-group>
+          </DtBox>
+        </DtBox>
+        <DtBox padding-block-start="250">
+          <!-- eslint-disable-next-line vue/no-undef-components -->
+          <component-combinator
+            v-if="componentCombinatorName"
+            :component-name="componentCombinatorName"
+          />
+        </DtBox>
         <!-- eslint-disable-next-line vue/no-undef-components -->
         <content class="d-docsite-article" />
         <DtStack

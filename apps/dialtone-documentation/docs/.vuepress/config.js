@@ -49,6 +49,14 @@ export default defineUserConfig({
 
   port: 4000,
 
+  pagePatterns: [
+    '**/*.md',
+    '!.vuepress',
+    '!.vuepress/**',
+    '!node_modules',
+    '!node_modules/**',
+  ],
+
   // theme and its config
   theme: dialtoneVuepressTheme(themeConfig),
 

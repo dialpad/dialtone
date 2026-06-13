@@ -1,5 +1,4 @@
 import { themeDataPlugin } from '@vuepress/plugin-theme-data';
-import { activeHeaderLinksPlugin } from '@vuepress/plugin-active-header-links';
 import { prismjsPlugin } from '@vuepress/plugin-prismjs';
 import { backToTopPlugin } from '@vuepress/plugin-back-to-top';
 import { gitPlugin } from '@vuepress/plugin-git';
@@ -241,10 +240,6 @@ export const dialtoneVuepressTheme = (options) => ({
     plugins: [
       themeDataPlugin({
         themeData: options,
-      }),
-      activeHeaderLinksPlugin({
-        headerLinkSelector: 'a.d-link',
-        offset: 128,
       }),
       prismjsPlugin({
         lineNumbers: 'disable',

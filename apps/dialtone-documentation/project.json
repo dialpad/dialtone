@@ -72,7 +72,7 @@
             "command": "nx watch --projects=dialtone-tokens,dialtone-vue,dialtone-combinator -- nx run \\$NX_PROJECT_NAME:build"
           },
           {
-            "command": "node scripts/generate-raw-markdown.mjs && vuepress dev docs"
+            "command": "node scripts/generate-raw-markdown.mjs && vuepress dev docs --clean-temp"
           }
         ]
       }
