@@ -8,49 +8,44 @@
     anchor-class="d-w100p"
   >
     <template #anchor="{ attrs }">
-      <dt-stack
-        direction="row"
-        class="d-ps-relative"
+      <dt-button
+        :id="labelId"
+        v-bind="attrs"
+        :to="item.link || undefined"
+        :active="isActiveLink(item.link, true)"
+        importance="clear"
+        kind="muted"
+        label-class="d-jc-flex-start d-ta-left d-fw-normal d-tw-pretty"
+        :size="depth === 0 ? 'lg' : undefined"
+        :tabindex="actionableTabIndex"
+        :class="[
+          'd-w100p dialtone-shell-btn',
+          {
+            'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
+            'd-pie-200': depth === 1,
+          },
+          {
+            'd-pis-600': depth === 1,
+          },
+        ]"
+        :data-sidebar-link="item.link"
+        @click.capture="handleClick"
       >
-        <dt-button
-          :id="labelId"
-          v-bind="attrs"
-          :to="item.link || undefined"
-          :active="isActiveLink(item.link, true)"
-          importance="clear"
-          kind="muted"
-          label-class="d-jc-flex-start d-ta-left d-fw-normal d-tw-pretty"
-          :size="depth === 0 ? 'lg' : undefined"
-          :tabindex="actionableTabIndex"
-          :class="[
-            'd-w100p dialtone-shell-btn',
-            {
-              'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
-              'd-pie-200': depth === 1,
-            },
-            {
-              'd-pis-600': depth === 1,
-            },
-          ]"
-          :data-sidebar-link="item.link"
-          @click.capture="handleClick"
-        >
+        <dt-icon
+          v-if="depth === 0 && item.icon"
+          :name="item.icon"
+          size="400"
+          class="d-mie-150 d-fc-muted"
+        />
+        {{ item.text }}
+        <template #endIcon="{ iconSize }">
           <dt-icon
-            v-if="depth === 0 && item.icon"
-            :name="item.icon"
-            size="400"
-            class="d-mie-150 d-fc-muted"
+            v-if="item.link"
+            :name="isOpen ? 'chevron-down' : 'chevron-right'"
+            :size="iconSize"
           />
-          {{ item.text }}
-          <template #endIcon="{ iconSize }">
-            <dt-icon
-              v-if="item.link"
-              :name="isOpen ? 'chevron-down' : 'chevron-right'"
-              :size="iconSize"
-            />
-          </template>
-        </dt-button>
-      </dt-stack>
+        </template>
+      </dt-button>
     </template>
     <template #content>
       <dt-stack
@@ -139,10 +134,7 @@
   </dt-collapsible>
 
   <!-- Item without children - render as simple link -->
-  <li
-    v-else
-    class="d-w100p"
-  >
+  <li v-else>
     <dt-button
       :to="item.link || undefined"
       :active="isActiveLink(item.link)"

@@ -46,7 +46,6 @@
     <DtStack
       ref="listRef"
       as="ul"
-      class="dialtone-sidebar__list-items"
       gap="50"
     >
       <sidebar-item
@@ -399,6 +398,7 @@ const handleToggle = (itemKey, shouldOpen) => {
 
 <style>
 .dialtone-sidebar__list .dialtone-shell-btn:focus-visible {
-  box-shadow: var(--dt-shadow-focus-inset);
+  box-shadow: none;
+  --button-color-background: var(--dt-shell-action-color-background-secondary-hover);
 }
 </style>

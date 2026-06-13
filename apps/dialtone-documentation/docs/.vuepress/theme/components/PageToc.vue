@@ -6,7 +6,7 @@
       :size="100"
       strength="semibold"
       tone="secondary"
-      class="d-tt-uppercase d-px-100 d-pbe-50 d-vi-visible-sr"
+      class="d-tt-uppercase d-px-100 d-pbe-50 "
     >
       On this page
     </dt-text>
@@ -41,11 +41,11 @@
             v-if="header.children.length"
             #content
           >
-            <ul class="d-pis-100 d-mbs-25">
+            <ul class="d-pis-100 ">
               <li
                 v-for="child in header.children"
                 :key="child.slug"
-                class="lg:d-d-flex d-fw-wrap d-mbs-25"
+                class="d-fw-wrap "
               >
                 <toc-item
                   :active="isItemActive(child)"
