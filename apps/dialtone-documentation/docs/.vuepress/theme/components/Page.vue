@@ -1,7 +1,11 @@
 <template>
   <dt-stack gap="300">
     <DtStack direction="row" align="start" gap="250" class="d-100p">
-      <DtBox class="d-fl1" min-inline-size="0">
+      <DtBox
+        class="d-fl1 d-mx-auto"
+        min-inline-size="0"
+        max-inline-size="1600"
+      >
         <DtBox
           id="page-sticky-header"
           padding-block-start="250"
@@ -26,7 +30,7 @@
                   <template #startIcon="{ iconSize }">
                     <dt-icon name="code" :size="iconSize" />
                   </template>
-                  API
+                  Properties
                 </dt-tab>
               </template>
             </dt-tab-group>
@@ -41,73 +45,75 @@
         </DtBox>
         <!-- eslint-disable-next-line vue/no-undef-components -->
         <content class="d-docsite-article" />
-        <DtStack
-          as="nav"
-          direction="row"
-          :justify="prev ? 'between' : 'end'"
-          align="center"
-          class="d-pbs-400"
-          gap="400"
-        >
-          <dt-button
-            v-if="prev"
-            :to="prev.link"
-            class="d-wmn40p"
-            label-class="d-jc-space-between"
-            importance="outlined"
-            kind="muted"
-            :size="400"
+        <DtStack gap="300">
+          <DtStack
+            as="nav"
+            direction="row"
+            :justify="prev ? 'between' : 'end'"
+            align="center"
+            class="d-pbs-400"
+            gap="400"
           >
-            <template #startIcon>
-              <dt-icon name="arrow-left" />
-            </template>
-            <dt-stack as="span" class="d-p-100">
-              <dt-text as="span" kind="body" :size="300" tone="muted">
-                Previous
+            <dt-button
+              v-if="prev"
+              :to="prev.link"
+              class="d-wmn40p"
+              label-class="d-jc-space-between"
+              importance="outlined"
+              kind="muted"
+              :size="400"
+            >
+              <template #startIcon>
+                <dt-icon name="arrow-left" />
+              </template>
+              <dt-stack as="span" class="d-p-100">
+                <dt-text as="span" kind="body" :size="300" tone="muted">
+                  Previous
+                </dt-text>
+                <span>{{ prev.text }}</span>
+              </dt-stack>
+            </dt-button>
+            <dt-button
+              v-if="next"
+              :to="next.link"
+              class="d-wmn40p"
+              label-class="d-jc-space-between"
+              importance="outlined"
+              kind="muted"
+              :size="400"
+            >
+              <template #endIcon>
+                <dt-icon name="arrow-right" />
+              </template>
+              <dt-stack as="span" class="d-p-100">
+                <dt-text as="span" kind="body" :size="300" tone="muted">
+                  Next
+                </dt-text>
+                <span>{{ next.text }}</span>
+              </dt-stack>
+            </dt-button>
+          </DtStack>
+          <DtBox>
+            <dt-text as="p" kind="body" :size="300" tone="muted">
+              <dt-text v-if="$frontmatter.title">
+                {{ $frontmatter.title }}
               </dt-text>
-              <span>{{ prev.text }}</span>
-            </dt-stack>
-          </dt-button>
-          <dt-button
-            v-if="next"
-            :to="next.link"
-            class="d-wmn40p"
-            label-class="d-jc-space-between"
-            importance="outlined"
-            kind="muted"
-            :size="400"
-          >
-            <template #endIcon>
-              <dt-icon name="arrow-right" />
-            </template>
-            <dt-stack as="span" class="d-p-100">
-              <dt-text as="span" kind="body" :size="300" tone="muted">
-                Next
-              </dt-text>
-              <span>{{ next.text }}</span>
-            </dt-stack>
-          </dt-button>
+              documentation last updated
+              <dt-text>{{ lastUpdated }}</dt-text>
+            </dt-text>
+          </DtBox>
         </DtStack>
       </DtBox>
       <DtBox
         v-if="!isMobile && includeToc"
         max-inline-size="300"
-        min-inline-size="350"
+        min-inline-size="300"
         padding-block-start="200"
         class="d-ps-sticky d-ibs-450 d-d-none xl:d-d-block"
       >
         <page-toc :headers="headers" />
       </DtBox>
     </DtStack>
-    <DtBox>
-      <dt-text as="p" kind="body" :size="300" tone="muted">
-        <dt-text v-if="$frontmatter.title">
-          {{ $frontmatter.title }}
-        </dt-text>
-        documentation last updated
-        <dt-text>{{ lastUpdated }}</dt-text>
-      </dt-text>
-    </DtBox>
   </dt-stack>
 </template>
 

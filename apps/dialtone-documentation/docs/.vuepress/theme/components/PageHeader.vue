@@ -147,9 +147,10 @@
         v-if="$frontmatter.description"
         as="p"
         kind="body"
+        size="400"
         tone="tertiary"
         wrap="pretty"
-        class="d-my-300 d-fs-300 d-wmx75ch"
+        class="d-my-150 d-wmx75ch"
       >
         {{ $frontmatter.description }}
       </dt-text>
