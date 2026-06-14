@@ -39,26 +39,41 @@
         <DtBox>
           Show this by default
         </DtBox>
-        <DtBox>Show this element at xs</DtBox>
-        <DtBox>Show this element at sm</DtBox>
-        <DtBox>Show this element at md</DtBox>
-        <DtBox>Show this element at lg</DtBox>
-        <DtBox>Show this element at xl</DtBox>
-        <DtBox>Show this element at 2xl</DtBox>
-        <DtBox>Show this element at 3xl</DtBox>
-
+        <DtBox v-if="viewport.above('xs')">
+          Show this element above xs
+        </DtBox>
+        <DtBox v-if="viewport.above('sm')">
+          Show this element above sm
+        </DtBox>
+        <DtBox v-if="viewport.above('md')">
+          Show this element above md
+        </DtBox>
+        <DtBox v-if="viewport.above('lg')">
+          Show this element above lg
+        </DtBox>
+        <DtBox v-if="viewport.above('xl')">
+          Show this element above xl
+        </DtBox>
+        <DtBox v-if="viewport.above('xxl')">
+          Show this element above xxl
+        </DtBox>
+        <DtBox v-if="viewport.above('xxxl')">
+          Show this element above xxxl
+        </DtBox>
         <DtBox
           surface="critical"
-          inline-size="100p"
+          :inline-size="viewport.pick({
+            default: '100p',
+            xs: '100',
+            sm: '200',
+            md: '300',
+            lg: '400',
+            xl: '500',
+            xxl: '600',
+            xxxl: '700',
+          })"
         >
-          Change `inline-size` prop of below like so...
-          xs = `100`
-          sm = `200`
-          md = `300`
-          lg = `400`
-          xl = `500`
-          2xl = `600`
-          3xl = `700`
+          Change inline-size with viewport.pick().
         </DtBox>
       </DtBox>
       <DtBox padding-block-start="250">
@@ -130,16 +145,20 @@
       </DtStack>
     </DtBox>
     <DtBox
-      v-if="!isMobile && includeToc"
+      v-if="includeToc && viewport.pick({
+        default: false,
+        xl: true,
+        xxxl: false,
+      })"
       max-inline-size="300"
       min-inline-size="300"
       padding-block-start="200"
-      class="d-ps-sticky d-ibs-450 d-d-none xl:d-d-block"
+      class="d-ps-sticky d-ibs-450"
     >
       <page-toc :headers="headers" />
     </DtBox>
-    <!--
     <DtBox
+      v-if="viewport.above('xxxl')"
       id="combinator-side-target"
       surface="moderate"
       padding-block-start="250"
@@ -148,13 +167,13 @@
     >
       asdf
     </DtBox>
-    -->
   </DtStack>
 </template>
 
 <script setup>
 import PageHeader from '../components/PageHeader.vue';
 import PageToc from '../components/PageToc.vue';
+import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
 import { getComponentCombinatorName } from '../utils/componentCombinator.js';
 import { computed, watch, inject } from 'vue';
 import { useRoute } from 'vue-router';
@@ -171,10 +190,6 @@ defineProps({
     default: () => {
     },
   },
-  isMobile: {
-    type: Boolean,
-    required: true,
-  },
 });
 const pageData = usePageData();
 const componentCombinatorName = computed(() => getComponentCombinatorName(pageData.value?.frontmatter));
@@ -188,6 +203,7 @@ const lastUpdated = computed(() => {
   return new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(date);
 });
 const { headers } = inject('headers');
+const viewport = useViewportBreakpoints();
 
 const route = useRoute();
 

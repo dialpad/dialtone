@@ -1,5 +1,4 @@
 <template>
-  <!-- <mobile-sidebar v-if="isMobile && route.path !== '/'" /> -->
   <dt-stack class="d-ps-fixed d-all-0 d-of-hidden">
     <migration-banner />
     <DtBox padding="250" padding-block-end="0">
@@ -66,7 +65,6 @@
           <page
             :prev="$frontmatter.prev || prev"
             :next="$frontmatter.next || next"
-            :is-mobile="isMobile"
           />
         </DtBox>
       </dt-stack>
@@ -87,7 +85,7 @@ import Home from '../components/Home.vue';
 import Page from '../components/Page.vue';
 import MigrationBanner from '../../baseComponents/MigrationBanner.vue';
 import { isExternalUrl } from '../utils/isExternalUrl';
-import { computed, nextTick, ref, watch, onMounted, onUnmounted } from 'vue';
+import { computed, nextTick, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import { DtStack } from '@dialpad/dialtone-vue';
@@ -102,14 +100,8 @@ const route = useRoute();
 const prev = ref(null);
 const next = ref(null);
 const items = useThemeLocaleData().value.sidebar;
-const mobileBreakpoint = 980;
 const branchName = __DIALTONE_BRANCH_NAME__;
 const showBranchBadge = branchName && (__VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__);
-const evaluateWindowWidth = () => {
-  isMobile.value = window.innerWidth <= mobileBreakpoint;
-};
-
-const isMobile = ref(false);
 
 /**
  * Recursively extract all navigable pages from a tree structure
@@ -206,13 +198,4 @@ watch(
   },
   { flush: 'post' },
 );
-
-onMounted(() => {
-  evaluateWindowWidth();
-  window.addEventListener('resize', evaluateWindowWidth);
-});
-
-onUnmounted(() => {
-  window.removeEventListener('resize', evaluateWindowWidth);
-});
 </script>
