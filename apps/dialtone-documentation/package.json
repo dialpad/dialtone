@@ -55,8 +55,6 @@
     "@dialpad/i18n": "1.25.3",
     "@dialpad/postcss-responsive-variations": "workspace:*",
     "@dialpad/stylelint-plugin-dialtone": "workspace:*",
-    "@docsearch/css": "^4.0.1",
-    "@docsearch/js": "^4.0.1",
     "@originjs/vite-plugin-commonjs": "^1.0.3",
     "@toycode/markdown-it-class": "^1.2.4",
     "@vuepress/bundler-vite": "2.0.0-rc.24",

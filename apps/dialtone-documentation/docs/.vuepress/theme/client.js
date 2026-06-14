@@ -9,9 +9,6 @@ import { OverlayScrollbars, ClickScrollPlugin } from 'overlayscrollbars';
 import { onBeforeMount, provide, ref, onMounted } from 'vue';
 import { flushPromises } from '@workspaceRoot/common/utils/client.mjs';
 
-// CSS
-import '@docsearch/css';
-
 // Layered Theming System - Base layers (always loaded). Material override CSS
 // loads here so all materials are available for attribute-driven switching;
 // brand CSS (dp by default) loads after, so brand wins at the same specificity.
@@ -109,14 +106,6 @@ const initOverlayScrollbars = () => {
   });
 };
 
-const DOCSEARCH_CONFIG = {
-  apiKey: '6436ebddb959748daeec411eb388a99d',
-  indexName: 'dialpad',
-  appId: 'Y5HG9UX6KM',
-  placeholder: 'Search',
-  container: '#docsearch',
-};
-
 export default defineClientConfig({
   async enhance ({ app, router }) {
     // Register Dialtone components and icons for both SSR and client so the
@@ -156,13 +145,6 @@ export default defineClientConfig({
       router.afterEach(async () => {
         await flushPromises();
         resolveViewTransition?.();
-
-        // Re-initialize docsearch when layout switch recreates the #docsearch container
-        const container = document.querySelector('#docsearch');
-        if (container && !container.children.length) {
-          const docsearchModule = await import('@docsearch/js');
-          docsearchModule.default(DOCSEARCH_CONFIG);
-        }
       });
 
       router.options.scrollBehavior = async (to) => {
@@ -201,12 +183,9 @@ export default defineClientConfig({
       currentContrast.value = localStorage.getItem('preferredContrast') || 'default';
       currentMaterial.value = localStorage.getItem('preferredMaterial') || 'sandstone';
     });
-    onMounted(async () => {
+    onMounted(() => {
       // Reveal the app now that Vue has hydrated and components are registered
       document.documentElement.setAttribute('data-app-ready', '');
-
-      const docsearch = (await import('@docsearch/js'))?.default;
-      docsearch(DOCSEARCH_CONFIG);
     });
   },
   layouts: {

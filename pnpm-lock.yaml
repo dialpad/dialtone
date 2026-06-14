@@ -377,12 +377,6 @@ importers:
       '@dialpad/stylelint-plugin-dialtone':
         specifier: workspace:*
         version: link:../../packages/stylelint-plugin-dialtone
-      '@docsearch/css':
-        specifier: ^4.0.1
-        version: 4.6.2
-      '@docsearch/js':
-        specifier: ^4.0.1
-        version: 4.6.2
       '@originjs/vite-plugin-commonjs':
         specifier: ^1.0.3
         version: 1.0.3
@@ -1387,12 +1381,6 @@ packages:
     engines: {node: '>=14.17'}
     peerDependencies:
       semantic-release: '>=18.0.0'
-
-  '@docsearch/css@4.6.2':
-    resolution: {integrity: sha512-fH/cn8BjEEdM2nJdjNMHIvOVYupG6AIDtFVDgIZrNzdCSj4KXr9kd+hsehqsNGYjpUjObeKYKvgy/IwCb1jZYQ==}
-
-  '@docsearch/js@4.6.2':
-    resolution: {integrity: sha512-qj1yoxl3y4GKoK7+VM6fq/rQqPnvUmg3IKzJ9x0VzN14QVzdB/SG/J6VfV1BWT5RcPUFxIcVwoY1fwHM2fSRRw==}
 
   '@dual-bundle/import-meta-resolve@4.2.1':
     resolution: {integrity: sha512-id+7YRUgoUX6CgV0DtuhirQWodeeA7Lf4i2x71JS/vtA5pRb/hIGWlw+G6MeXvsM+MXrz0VAydTGElX1rAfgPg==}
@@ -15123,10 +15111,6 @@ snapshots:
       fs-extra: 11.3.4
       lodash: 4.18.1
       semantic-release: 21.1.2(typescript@5.9.3)
-
-  '@docsearch/css@4.6.2': {}
-
-  '@docsearch/js@4.6.2': {}
 
   '@dual-bundle/import-meta-resolve@4.2.1': {}
 

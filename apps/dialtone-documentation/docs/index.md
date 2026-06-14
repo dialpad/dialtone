@@ -2,15 +2,9 @@
 layout: Blank
 pageClass: dialpad-design-home
 ---
-<div
-  id="docsearch"
-  ref="docSearchBtn"
-  class="d-d-none"
-  options=""
-/>
 
 <dt-box>
-  <header-overlay @search="openSearch" />
+  <header-overlay />
 </dt-box>
 <dt-box>
   <gradient-hero />
@@ -227,13 +221,11 @@ pageClass: dialpad-design-home
 </style>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue';
+import { onMounted, onUnmounted } from 'vue';
 import { parse, compareDesc, format } from 'date-fns';
 import ShowcaseCarousel from '../../baseComponents/ShowcaseCarousel.vue';
 import GradientHero from '../../baseComponents/GradientHero.vue';
 import HeaderOverlay from '../../baseComponents/HeaderOverlay.vue';
-
-const docSearchBtn = ref(null);
 
 const sortHandler = (a, b) => compareDesc(
   parse(a.posted, 'y-M-d', new Date()),
@@ -242,10 +234,6 @@ const sortHandler = (a, b) => compareDesc(
 
 const formatDate = (dateStr) => {
   return format(parse(dateStr, 'y-M-d', new Date()), 'MMMM do, y');
-};
-
-const openSearch = () => {
-  docSearchBtn.value?.children[0]?.click();
 };
 
 // Mirror the pageClass frontmatter onto <body> for global styles.

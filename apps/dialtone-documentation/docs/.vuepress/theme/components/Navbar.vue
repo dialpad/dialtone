@@ -314,8 +314,6 @@
 <script setup>
 import { useThemeManager } from '../composables/useThemeManager';
 
-defineEmits(['search']);
-
 const showThemeSwitcher = __VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__;
 
 // Use theme manager composable with theme switching enabled

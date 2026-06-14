@@ -90,7 +90,7 @@ import { isExternalUrl } from '../utils/isExternalUrl';
 import { computed, nextTick, ref, watch, onMounted, onUnmounted } from 'vue';
 import { useRoute } from 'vue-router';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
-import { disableRootScrolling, DtStack, enableRootScrolling } from '@dialpad/dialtone-vue';
+import { DtStack } from '@dialpad/dialtone-vue';
 import { DtIconBranch } from '@dialpad/dialtone-icons/vue';
 import {
   PAGE_SCROLL_CONTAINER_SELECTOR,
@@ -108,7 +108,6 @@ const showBranchBadge = branchName && (__VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PRE
 const evaluateWindowWidth = () => {
   isMobile.value = window.innerWidth <= mobileBreakpoint;
 };
-let observer = null;
 
 const isMobile = ref(false);
 
@@ -211,22 +210,9 @@ watch(
 onMounted(() => {
   evaluateWindowWidth();
   window.addEventListener('resize', evaluateWindowWidth);
-
-  observer = new MutationObserver((mutationList) => {
-    for (const mutation of mutationList) {
-      if (mutation.type === 'attributes') {
-        mutation.target.classList.contains('DocSearch--active')
-          ? disableRootScrolling()
-          : enableRootScrolling();
-      }
-    }
-  });
-
-  observer.observe(document.body, { attributes: true });
 });
 
 onUnmounted(() => {
   window.removeEventListener('resize', evaluateWindowWidth);
-  observer?.disconnect();
 });
 </script>
