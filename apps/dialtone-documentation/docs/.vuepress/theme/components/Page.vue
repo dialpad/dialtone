@@ -35,6 +35,32 @@
           </dt-tab-group>
         </DtBox>
       </DtBox>
+      <DtBox id="vue-rwd-demo" outline>
+        <DtBox>
+          Show this by default
+        </DtBox>
+        <DtBox>Show this element at xs</DtBox>
+        <DtBox>Show this element at sm</DtBox>
+        <DtBox>Show this element at md</DtBox>
+        <DtBox>Show this element at lg</DtBox>
+        <DtBox>Show this element at xl</DtBox>
+        <DtBox>Show this element at 2xl</DtBox>
+        <DtBox>Show this element at 3xl</DtBox>
+
+        <DtBox
+          surface="critical"
+          inline-size="100p"
+        >
+          Change `inline-size` prop of below like so...
+          xs = `100`
+          sm = `200`
+          md = `300`
+          lg = `400`
+          xl = `500`
+          2xl = `600`
+          3xl = `700`
+        </DtBox>
+      </DtBox>
       <DtBox padding-block-start="250">
         <!-- eslint-disable-next-line vue/no-undef-components -->
         <component-combinator
