@@ -5,6 +5,15 @@ import {
   VIEWPORT_BREAKPOINTS,
 } from '../utils/viewportBreakpoints.js';
 
+/**
+ * @typedef {import('../utils/viewportBreakpoints.js').ViewportBreakpointName} ViewportBreakpointName
+ */
+
+/**
+ * @template T
+ * @typedef {import('../utils/viewportBreakpoints.js').ViewportPickValues<T>} ViewportPickValues
+ */
+
 const width = ref(0);
 let activeConsumers = 0;
 
@@ -38,10 +47,19 @@ export function useViewportBreakpoints () {
     stopTracking();
   });
 
+  /**
+   * @param {ViewportBreakpointName} name
+   * @returns {boolean}
+   */
   const above = (name) => {
     return isAboveViewportBreakpoint(width.value, name);
   };
 
+  /**
+   * @template T
+   * @param {ViewportPickValues<T>} values
+   * @returns {T | undefined}
+   */
   const pick = (values) => {
     return pickViewportValue(width.value, values);
   };
