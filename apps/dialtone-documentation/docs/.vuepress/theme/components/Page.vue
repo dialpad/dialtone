@@ -165,7 +165,7 @@
       <page-toc :headers="headers" />
     </DtBox>
     <DtBox
-      v-if="viewport.above('xxxl')"
+      v-if="componentCombinatorName && viewport.above('xxxl')"
       id="combinator-side-target"
       surface="moderate"
       padding-block-start="250"
