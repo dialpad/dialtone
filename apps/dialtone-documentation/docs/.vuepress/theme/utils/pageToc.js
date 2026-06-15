@@ -69,7 +69,10 @@ export function hashToId (link = '') {
 }
 
 export function findPageScrollContainer (element) {
-  return element?.closest?.(PAGE_SCROLL_CONTAINER_SELECTOR) || document.scrollingElement || document.documentElement;
+  return element?.closest?.(PAGE_SCROLL_CONTAINER_SELECTOR) ||
+    document.querySelector(PAGE_SCROLL_CONTAINER_SELECTOR) ||
+    document.scrollingElement ||
+    document.documentElement;
 }
 
 export function getScrollOffset (scrollContainer) {

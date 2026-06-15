@@ -48,6 +48,7 @@
                 placement="bottom-end"
                 class="d-mis-auto"
                 padding="small"
+                content-class="d-w-300"
               >
                 <template #anchor>
                   <dt-button
@@ -62,7 +63,7 @@
                   </dt-button>
                 </template>
                 <template #content>
-                  <page-toc :headers="headers" />
+                  <page-toc :headers="headers" always-expanded />
                 </template>
               </dt-popover>
             </template>
