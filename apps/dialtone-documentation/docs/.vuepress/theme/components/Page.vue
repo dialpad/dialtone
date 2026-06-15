@@ -15,7 +15,11 @@
         })"
       >
         <DtBox border-width-block-end="100">
-          <page-header />
+          <page-header>
+            <template #content-top>
+              <slot name="content-top" />
+            </template>
+          </page-header>
           <dt-tab-group
             v-if="$frontmatter.status"
             :size="viewport.pick({

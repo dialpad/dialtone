@@ -1,7 +1,9 @@
 <template>
-  <section>
+  <DtBox as="header">
     <slot name="content-top" />
-    <header>
+    <DtBox
+      :gap="{ default: '25', lg: '200' }"
+    >
       <dt-stack
         :direction="viewport.pick({
           default: 'column',
@@ -153,13 +155,13 @@
         size="400"
         tone="tertiary"
         wrap="pretty"
-        class="d-my-150 d-wmx75ch"
+        class="d-mbs-150 d-mbe-300 d-wmx75ch"
       >
         {{ $frontmatter.description }}
       </dt-text>
-    </header>
+    </DtBox>
     <slot name="content-bottom" />
-  </section>
+  </DtBox>
 </template>
 
 <script setup>
