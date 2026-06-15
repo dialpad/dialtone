@@ -316,6 +316,30 @@ const MIGRATIONS = [
 ];
 
 // ---------------------------------------------------------------------------
+// Migration markers
+// ---------------------------------------------------------------------------
+
+const MARKER_DIR = '.dialtone-migrations';
+
+function markerPath (cwd, id) {
+  return path.join(cwd, MARKER_DIR, id);
+}
+
+async function checkMigrationMarker (cwd, id) {
+  try {
+    await fs.access(markerPath(cwd, id));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function writeMigrationMarker (cwd, id) {
+  await fs.mkdir(path.join(cwd, MARKER_DIR), { recursive: true });
+  await fs.writeFile(markerPath(cwd, id), '', 'utf8');
+}
+
+// ---------------------------------------------------------------------------
 // CLI parsing
 // ---------------------------------------------------------------------------
 
@@ -758,8 +782,21 @@ async function runStandaloneMigration (migration, opts) {
 }
 
 async function runMigration (migration, opts) {
+  if (migration.id === 'color-stops' && !opts.dryRun) {
+    if (await checkMigrationMarker(opts.cwd, migration.id)) {
+      console.log(`  ✓ Already applied on this branch (${MARKER_DIR}/${migration.id} exists). Skipping.\n`);
+      console.log(`    Remove that file to re-run.\n`);
+      return { skipped: true };
+    }
+  }
+
   if (migration.type === 'config') {
-    return runConfigMigration(migration, opts);
+    const result = await runConfigMigration(migration, opts);
+    if (migration.id === 'color-stops' && result.applied) {
+      await writeMigrationMarker(opts.cwd, migration.id);
+      console.log(`  Marker written to ${MARKER_DIR}/${migration.id} — commit this file with your changes.\n`);
+    }
+    return result;
   }
 
   if (migration.type === 'standalone') {
