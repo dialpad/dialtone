@@ -1,7 +1,7 @@
 <!-- eslint-disable max-lines -->
 <template>
   <DtStack direction="row" gap="50">
-    <DtStack v-if="viewport.above('lg')" direction="row" gap="100">
+    <DtStack v-if="viewport.above('lg')" hidden direction="row" gap="100">
       <dt-button
         class="dialtone-shell-btn"
         active

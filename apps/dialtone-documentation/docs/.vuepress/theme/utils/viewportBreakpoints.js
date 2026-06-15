@@ -9,6 +9,7 @@ export const VIEWPORT_BREAKPOINTS = Object.freeze({
   xl: 1264,
   xxl: 1536,
   xxxl: 1764,
+  xxxxl: 2048,
 });
 
 export const VIEWPORT_BREAKPOINT_NAMES = Object.freeze(Object.keys(VIEWPORT_BREAKPOINTS));

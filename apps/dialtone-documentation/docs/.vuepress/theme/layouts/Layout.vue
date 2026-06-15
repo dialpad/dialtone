@@ -18,9 +18,9 @@
             <DtBox v-if="showBranchBadge" :title="branchName" padding-block-end="100">
               <dt-stack direction="row" gap="50">
                 <dt-icon-branch class="d-fc-muted" :size="100" />
-                <DtText as="p" kind="body" size="100" tone="muted" class="d-wmx-250" truncate>
+                <dt-text as="p" kind="body" size="100" tone="muted" class="d-wmx-250" truncate>
                   {{ branchName }}
-                </DtText>
+                </dt-text>
               </dt-stack>
             </DtBox>
           </dt-stack>
@@ -71,6 +71,28 @@
             :next="$frontmatter.next || next"
           />
         </DtBox>
+        <DtBox
+          v-if="componentCombinatorName && viewport.above('xxxl')"
+          id="combinator-side-target"
+          surface="secondary"
+          min-inline-size="1200"
+          inline-size="1200"
+          padding-inline="300"
+          padding-inline-start="0"
+          block-size="100p"
+          border-radius="400"
+          class="d-fl1 d-my-300 d-mie-250"
+        >
+          <dt-text
+            as="p"
+            align="center"
+            kind="headline"
+            :size="500"
+            class="d-mbs-800 d-o25"
+          >
+            (playground moves over here if enough room)
+          </dt-text>
+        </DtBox>
       </dt-stack>
     </DtBox>
   </dt-stack>
@@ -89,11 +111,13 @@ import Sidebar from '../components/Sidebar.vue';
 import Home from '../components/Home.vue';
 import Page from '../components/Page.vue';
 import MigrationBanner from '../../baseComponents/MigrationBanner.vue';
+import { getComponentCombinatorName } from '../utils/componentCombinator.js';
 import { isExternalUrl } from '../utils/isExternalUrl';
 import { computed, nextTick, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
-import { DtStack } from '@dialpad/dialtone-vue';
+import { usePageData } from 'vuepress/client';
+import { DtStack, DtText } from '@dialpad/dialtone-vue';
 import { DtIconBranch } from '@dialpad/dialtone-icons/vue';
 import {
   PAGE_SCROLL_CONTAINER_SELECTOR,
@@ -105,6 +129,8 @@ const route = useRoute();
 const prev = ref(null);
 const next = ref(null);
 const items = useThemeLocaleData().value.sidebar;
+const pageData = usePageData();
+const componentCombinatorName = computed(() => getComponentCombinatorName(pageData.value?.frontmatter));
 const branchName = __DIALTONE_BRANCH_NAME__;
 const showBranchBadge = branchName && (__VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__);
 

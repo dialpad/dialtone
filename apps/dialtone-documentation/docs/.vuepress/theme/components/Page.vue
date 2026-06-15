@@ -1,5 +1,5 @@
 <template>
-  <DtStack direction="row" align="start" gap="250" class="d-100p">
+  <DtStack direction="row" align="start" gap="250">
     <DtBox
       class="d-fl1 d-mx-auto"
       min-inline-size="0"
@@ -156,6 +156,7 @@
         default: false,
         xl: true,
         xxxl: false,
+        xxxxl: true,
       })"
       max-inline-size="300"
       min-inline-size="300"
@@ -163,16 +164,6 @@
       class="d-ps-sticky d-ibs-450"
     >
       <page-toc :headers="headers" />
-    </DtBox>
-    <DtBox
-      v-if="componentCombinatorName && viewport.above('xxxl')"
-      id="combinator-side-target"
-      surface="moderate"
-      padding-block-start="250"
-      block-size="800"
-      class="d-fl1 d-ps-sticky d-ibs-0"
-    >
-      asdf
     </DtBox>
   </DtStack>
 </template>
