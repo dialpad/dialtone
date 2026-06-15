@@ -74,6 +74,16 @@
           </dt-tab-group>
         </DtBox>
       </DtBox>
+      <page-toc
+        v-if="includeToc && viewport.pick({
+          default: true,
+          xl: false,
+          xxxl: true,
+          xxxxl: false,
+        })"
+        :headers="headers"
+        scroll-spy-only
+      />
       <DtBox id="vue-rwd-demo" hidden>
         <DtBox>
           Show this by default

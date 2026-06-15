@@ -6,11 +6,13 @@ import {
   createRouteHashScrollGuard,
   getActiveHeaderLink,
   getHashScrollBehavior,
+  getCurrentBrowserHash,
   getRouteScrollToTopBehavior,
   getScrollOffset,
   getTargetScrollTop,
   hashToId,
   scrollRouteToTop,
+  shouldSyncActiveHeaderFromRouteWatch,
   shouldScrollRouteToTop,
 } from './pageToc.js';
 
@@ -21,6 +23,12 @@ describe('pageToc utilities', () => {
 
   it('uses smooth scrolling for hash changes including deep links', () => {
     assert.equal(getHashScrollBehavior(), 'smooth');
+  });
+
+  it('uses the browser hash when available for lazily mounted TOCs', () => {
+    assert.equal(getCurrentBrowserHash('#usage', { hash: '#classes' }), '#classes');
+    assert.equal(getCurrentBrowserHash('#usage', { hash: '' }), '#usage');
+    assert.equal(getCurrentBrowserHash('#usage', null), '#usage');
   });
 
   it('skips scroll for route hash changes written by TOC navigation', () => {
@@ -59,6 +67,18 @@ describe('pageToc utilities', () => {
         { path: '/components/button.html', hash: '#classes' },
         { path: '/components/button.html', hash: '#usage' },
       ),
+      false,
+    );
+  });
+
+  it('does not sync active headers during cross-route watcher updates', () => {
+    assert.equal(shouldSyncActiveHeaderFromRouteWatch('/components/button.html', undefined), true);
+    assert.equal(
+      shouldSyncActiveHeaderFromRouteWatch('/components/button.html', '/components/button.html'),
+      true,
+    );
+    assert.equal(
+      shouldSyncActiveHeaderFromRouteWatch('/components/box.html', '/components/button.html'),
       false,
     );
   });

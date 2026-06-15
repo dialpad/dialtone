@@ -13,12 +13,20 @@ export function getHashScrollBehavior () {
   return 'smooth';
 }
 
+export function getCurrentBrowserHash (fallback = '', location = typeof window === 'undefined' ? null : window.location) {
+  return location?.hash || fallback;
+}
+
 export function getRouteScrollToTopBehavior () {
   return 'auto';
 }
 
 export function shouldScrollRouteToTop (to, from) {
   return Boolean(from?.path && to?.path && to.path !== from.path && !to.hash);
+}
+
+export function shouldSyncActiveHeaderFromRouteWatch (path, previousPath) {
+  return !previousPath || path === previousPath;
 }
 
 export function scrollRouteToTop (scrollContainer, scheduleRestore = scheduleScrollBehaviorRestore) {
@@ -52,6 +60,44 @@ export function createRouteHashScrollGuard () {
       return true;
     },
   };
+}
+
+export async function writeRouteHash (
+  router,
+  route,
+  hash,
+  routeHashScrollGuard,
+  { replace = false, currentHash = route.hash } = {},
+) {
+  if (currentHash === hash) return;
+
+  const scrollBehavior = router.options.scrollBehavior;
+  const method = replace ? 'replace' : 'push';
+  routeHashScrollGuard.skip(hash);
+  router.options.scrollBehavior = undefined;
+
+  try {
+    await router[method]({
+      path: route.path,
+      query: route.query,
+      hash,
+    });
+  } finally {
+    router.options.scrollBehavior = scrollBehavior;
+  }
+}
+
+export function replaceBrowserHash (hash, {
+  history = window.history,
+  location = window.location,
+} = {}) {
+  if (location.hash === hash) return;
+
+  history.replaceState(
+    history.state,
+    '',
+    `${location.pathname}${location.search}${hash}`,
+  );
 }
 
 export function flattenHeaders (headers = []) {

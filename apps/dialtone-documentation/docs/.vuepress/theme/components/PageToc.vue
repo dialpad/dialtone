@@ -1,5 +1,6 @@
 <template>
-  <aside ref="tocRef">
+  <span v-if="scrollSpyOnly" ref="tocRef" hidden />
+  <aside v-else ref="tocRef">
     <nav>
       <ul
         v-for="header in headers"
@@ -81,10 +82,14 @@ import {
   createRouteHashScrollGuard,
   findPageScrollContainer,
   getActiveHeaderLink,
+  getCurrentBrowserHash,
   getHashScrollBehavior,
   getScrollOffset,
   getTargetScrollTop,
   hashToId,
+  replaceBrowserHash,
+  shouldSyncActiveHeaderFromRouteWatch,
+  writeRouteHash,
 } from '../utils/pageToc.js';
 import TocItem from './TocItem.vue';
 
@@ -97,13 +102,17 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  scrollSpyOnly: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const route = useRoute();
 const router = useRouter();
 const tocRef = ref(null);
 const scrollContainer = ref(null);
-const activeHash = ref(route.hash);
+const activeHash = ref(getCurrentBrowserHash(route.hash));
 const routeHashScrollGuard = createRouteHashScrollGuard();
 
 // Absolute cap on how long scroll-spy stays suppressed after a programmatic scroll,
@@ -147,11 +156,11 @@ function queueActiveHeaderUpdate () {
 
   scrollFrame = window.requestAnimationFrame(() => {
     scrollFrame = null;
-    updateActiveHeaderFromScroll();
+    void updateActiveHeaderFromScroll();
   });
 }
 
-function updateActiveHeaderFromScroll () {
+async function updateActiveHeaderFromScroll () {
   const nextActiveHash = getActiveHeaderLink(props.headers, scrollContainer.value, {
     offset: getScrollOffset(scrollContainer.value),
   });
@@ -159,6 +168,7 @@ function updateActiveHeaderFromScroll () {
   if (nextActiveHash === activeHash.value) return;
 
   activeHash.value = nextActiveHash;
+  replaceBrowserHash(nextActiveHash);
 }
 
 function scrollToHash (hash, behavior = 'smooth') {
@@ -202,25 +212,11 @@ function stopProgrammaticScroll () {
   scrollContainer.value?.removeEventListener('scrollend', stopProgrammaticScroll);
 }
 
-async function updateRouteHash (hash) {
-  if (route.hash === hash) return;
-
-  // Suppress the router's global scroll-to-hash (set in client.js) for this write:
-  // the TOC owns scrolling inside the page container, so the hash should change
-  // without triggering a second scroll from the route.hash watcher.
-  const scrollBehavior = router.options.scrollBehavior;
-  routeHashScrollGuard.skip(hash);
-  router.options.scrollBehavior = undefined;
-
-  try {
-    await router.push({
-      path: route.path,
-      query: route.query,
-      hash,
-    });
-  } finally {
-    router.options.scrollBehavior = scrollBehavior;
-  }
+async function updateRouteHash (hash, options) {
+  await writeRouteHash(router, route, hash, routeHashScrollGuard, {
+    currentHash: window.location.hash,
+    ...options,
+  });
 }
 
 async function handleNavigate (event, item) {
@@ -265,7 +261,7 @@ watch(
 
 watch(
   () => [route.path, props.headers],
-  async () => {
+  async ([path], [previousPath] = []) => {
     await nextTick();
     syncScrollContainer();
 
@@ -276,7 +272,9 @@ watch(
     }
 
     activeHash.value = '';
-    updateActiveHeaderFromScroll();
+    if (shouldSyncActiveHeaderFromRouteWatch(path, previousPath)) {
+      void updateActiveHeaderFromScroll();
+    }
   },
   { flush: 'post' },
 );
