@@ -35,7 +35,7 @@
     >
       <dt-stack direction="row" align="stretch" gap="150" class="d-h100p">
         <DtBox
-          v-if="!$frontmatter.home && !$frontmatter.noSidebar"
+          v-if="viewport.above('lg') && !$frontmatter.home && !$frontmatter.noSidebar"
           padding-block-end="400"
           padding-inline-start="250"
           padding-inline-end="200"
@@ -61,6 +61,10 @@
           scrollbar-content-class="dialtone-doc-page-scroll-container"
           padding-inline-end="250"
           padding-block-end="400"
+          :padding-inline-start="viewport.pick({
+            default: '250',
+            lg: false,
+          })"
         >
           <page
             :prev="$frontmatter.prev || prev"
@@ -79,6 +83,7 @@
 // neither is tracked by VuePress's head management system.
 import '@dialpad/dialtone-tokens/tokens-base-light.css';
 import '@dialpad/dialtone-tokens/tokens-dp-light.css';
+import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
 import Navbar from '../components/Navbar.vue';
 import Sidebar from '../components/Sidebar.vue';
 import Home from '../components/Home.vue';
@@ -178,6 +183,8 @@ const findCurrent = () => {
   prev.value = isFirstItem && prevItems ? prevItems[prevItems.length - 1] : filteredItems[childIndex - 1];
   next.value = isLastItem && nextItems ? nextItems[0] : filteredItems[childIndex + 1];
 };
+
+const viewport = useViewportBreakpoints();
 
 watch(
   () => route.path,

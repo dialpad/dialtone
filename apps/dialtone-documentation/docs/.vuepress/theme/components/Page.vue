@@ -9,12 +9,19 @@
         id="page-sticky-header"
         padding-block-start="250"
         surface="primary"
-        class="d-ps-sticky d-ibs-0 d-zi-navigation-fixed"
+        :class="viewport.pick({
+          default: false,
+          lg: 'd-ps-sticky d-ibs-0 d-zi-navigation-fixed',
+        })"
       >
         <DtBox border-width-block-end="100">
           <page-header />
           <dt-tab-group
             v-if="$frontmatter.status"
+            :size="viewport.pick({
+              default: '200',
+              md: '300',
+            })"
             selected="panel-1"
             borderless
           >
@@ -35,7 +42,7 @@
           </dt-tab-group>
         </DtBox>
       </DtBox>
-      <DtBox id="vue-rwd-demo" outline>
+      <DtBox id="vue-rwd-demo" hidden>
         <DtBox>
           Show this by default
         </DtBox>

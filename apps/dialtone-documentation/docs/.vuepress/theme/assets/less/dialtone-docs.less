@@ -626,7 +626,7 @@ code {
     gap: var(--dt-spacing-400);
   }
 
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 764px) {
     grid-template-columns: [full-start] repeat(
         3,
         [col-start] var(--col-width, minmax(0, 1fr)) [col-end]
@@ -640,6 +640,14 @@ code {
       ) [full-end] !important;
     gap: var(--dt-spacing-400);
   }
+
+  // xs: 320,
+  // sm: 480,
+  // md: 640,
+  // lg: 960,
+  // xl: 1264,
+  // xxl: 1536,
+  // xxxl: 1764,
 
   &__item {
     display: block;

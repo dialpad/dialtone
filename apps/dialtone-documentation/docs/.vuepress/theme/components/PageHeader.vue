@@ -3,7 +3,10 @@
     <slot name="content-top" />
     <header>
       <dt-stack
-        :direction="{ default: 'column', md: 'row' }"
+        :direction="viewport.pick({
+          default: 'column',
+          lg: 'row',
+        })"
         :gap="{ default: '25', lg: '200' }"
         align="baseline"
         justify="between"
@@ -164,6 +167,9 @@ import { DtIconStorybookColor, DtIconFigma, DtIconGithub } from '@dialpad/dialto
 import { computed, onUnmounted, ref } from 'vue';
 import { usePageData, withBase } from 'vuepress/client';
 import { isExternalUrl } from '../utils/isExternalUrl';
+import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
+
+const viewport = useViewportBreakpoints();
 
 const page = usePageData();
 

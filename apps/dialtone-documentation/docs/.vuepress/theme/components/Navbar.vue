@@ -1,7 +1,7 @@
 <!-- eslint-disable max-lines -->
 <template>
   <DtStack direction="row" gap="50">
-    <DtStack direction="row" gap="100">
+    <DtStack v-if="viewport.above('lg')" direction="row" gap="100">
       <dt-button
         class="dialtone-shell-btn"
         active
@@ -27,6 +27,7 @@
       </template>
     </dt-button> -->
     <dt-button
+      v-if="viewport.above('lg')"
       v-dt-tooltip:bottom="'Storybook'"
       href="https://dialtone.dialpad.com/vue"
       target="_blank"
@@ -53,6 +54,7 @@
       </template>
     </dt-button>
     <dt-dropdown
+      v-if="viewport.above('lg')"
       id="theme-toggle-dropdown"
       navigation-type="arrow-keys"
       placement="bottom-end"
@@ -308,11 +310,23 @@
         </template>
       </template>
     </dt-dropdown>
+    <dt-button
+      v-if="!viewport.above('lg')"
+      v-dt-tooltip:bottom="`View menu`"
+      kind="muted"
+      importance="clear"
+      aria-label="Open Menu"
+    >
+      <template #startIcon="{ iconSize }">
+        <dt-icon name="menu" :size="iconSize" />
+      </template>
+    </dt-button>
   </DtStack>
 </template>
 
 <script setup>
 import { useThemeManager } from '../composables/useThemeManager';
+import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
 
 const showThemeSwitcher = __VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__;
 
@@ -336,6 +350,7 @@ const {
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 const formatMaterial = (m) => m === 'sandstone' ? 'Sandstone (default)' : capitalize(m);
+const viewport = useViewportBreakpoints();
 </script>
 
 <style scoped>
