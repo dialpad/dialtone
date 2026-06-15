@@ -59,6 +59,7 @@ Background surface color mapped to `--dt-color-surface-*` tokens.
   <dt-box padding="200" surface="moderate" border-width="100" border-radius="300">moderate</dt-box>
   <dt-box padding="200" surface="bold" border-width="100" border-radius="300">bold</dt-box>
   <dt-box padding="200" surface="strong" border-width="100" border-radius="300">strong</dt-box>
+  <dt-box padding="200" surface="overlay" border-width="100" border-radius="300">overlay</dt-box>
 </dt-stack>
 <!-- @code -->
 <dt-box surface="{surfaceColor}">...</dt-box>
