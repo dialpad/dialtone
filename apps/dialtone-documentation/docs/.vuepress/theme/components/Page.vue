@@ -38,6 +38,33 @@
                 </template>
                 Properties
               </dt-tab>
+              <dt-popover
+                v-if="viewport.pick({
+                  default: true,
+                  xl: false,
+                  xxxl: true,
+                  xxxxl: false,
+                })"
+                placement="bottom-end"
+                class="d-mis-auto"
+                padding="small"
+              >
+                <template #anchor>
+                  <dt-button
+                    importance="outlined"
+                    kind="muted"
+                    :size="200"
+                  >
+                    On this page
+                    <template #endIcon="{ iconSize }">
+                      <dt-icon name="chevron-down" :size="iconSize" />
+                    </template>
+                  </dt-button>
+                </template>
+                <template #content>
+                  <page-toc :headers="headers" />
+                </template>
+              </dt-popover>
             </template>
           </dt-tab-group>
         </DtBox>
@@ -163,6 +190,16 @@
       padding-block-start="200"
       class="d-ps-sticky d-ibs-450"
     >
+      <dt-text
+        as="h2"
+        kind="headline"
+        :size="100"
+        strength="semibold"
+        tone="secondary"
+        class="d-tt-uppercase d-px-100 d-pbe-50 "
+      >
+        On this page
+      </dt-text>
       <page-toc :headers="headers" />
     </DtBox>
   </DtStack>

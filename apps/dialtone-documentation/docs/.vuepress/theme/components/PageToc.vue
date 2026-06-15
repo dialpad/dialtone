@@ -1,15 +1,5 @@
 <template>
   <aside ref="tocRef">
-    <dt-text
-      as="h2"
-      kind="headline"
-      :size="100"
-      strength="semibold"
-      tone="secondary"
-      class="d-tt-uppercase d-px-100 d-pbe-50 "
-    >
-      On this page
-    </dt-text>
     <nav>
       <ul
         v-for="header in headers"
