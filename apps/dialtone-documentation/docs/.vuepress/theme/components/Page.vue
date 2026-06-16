@@ -149,12 +149,7 @@
       </DtStack>
     </DtBox>
     <DtBox
-      v-if="includeToc && viewport.pick({
-        default: false,
-        xl: true,
-        xxxl: false,
-        xxxxl: true,
-      })"
+      v-if="includeToc && viewport.pick(rightRailTocViewportValues)"
       max-inline-size="300"
       min-inline-size="300"
       padding-block-start="200"
@@ -185,6 +180,7 @@ import PageToc from '../components/PageToc.vue';
 import { usePageTocScrollSpy } from '../composables/usePageTocScrollSpy.js';
 import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
 import { getComponentCombinatorName } from '../utils/componentCombinator.js';
+import { getRightRailTocViewportValues } from '../utils/pageToc.js';
 import { computed, watch, inject } from 'vue';
 import { useRoute } from 'vue-router';
 import { usePageData } from 'vuepress/client';
@@ -220,6 +216,9 @@ const route = useRoute();
 
 const includeToc = computed(() => {
   return headers.value && headers.value.length > 0;
+});
+const rightRailTocViewportValues = computed(() => {
+  return getRightRailTocViewportValues(Boolean(componentCombinatorName.value));
 });
 
 // Pages whose headers are populated by their own Vue component via inject('headers')

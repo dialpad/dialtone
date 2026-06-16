@@ -7,6 +7,7 @@ import {
   getActiveHeaderLink,
   getHashScrollBehavior,
   getCurrentBrowserHash,
+  getRightRailTocViewportValues,
   getRouteScrollToTopBehavior,
   getScrollOffset,
   getTargetScrollTop,
@@ -23,6 +24,21 @@ describe('pageToc utilities', () => {
 
   it('uses smooth scrolling for hash changes including deep links', () => {
     assert.equal(getHashScrollBehavior(), 'smooth');
+  });
+
+  it('shows the right-rail TOC at xxxl only when no combinator uses that space', () => {
+    assert.deepEqual(getRightRailTocViewportValues(false), {
+      default: false,
+      xl: true,
+      xxxl: true,
+      xxxxl: true,
+    });
+    assert.deepEqual(getRightRailTocViewportValues(true), {
+      default: false,
+      xl: true,
+      xxxl: false,
+      xxxxl: true,
+    });
   });
 
   it('uses the browser hash when available for lazily mounted TOCs', () => {

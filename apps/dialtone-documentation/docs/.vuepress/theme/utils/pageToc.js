@@ -13,6 +13,15 @@ export function getHashScrollBehavior () {
   return 'smooth';
 }
 
+export function getRightRailTocViewportValues (hasCombinator = false) {
+  return {
+    default: false,
+    xl: true,
+    xxxl: !hasCombinator,
+    xxxxl: true,
+  };
+}
+
 export function getCurrentBrowserHash (fallback = '', location = typeof window === 'undefined' ? null : window.location) {
   return location?.hash || fallback;
 }
