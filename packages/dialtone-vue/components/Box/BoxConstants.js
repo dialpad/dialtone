@@ -18,7 +18,7 @@ export const DT_BOX_SPACING_VALUES = ['0', '1', '25', '50', '75', '100', '125', 
  * @type {string[]}
  */
 export const DT_BOX_SURFACE_VALUES = [
-  'primary', 'secondary', 'moderate', 'bold', 'strong', 'contrast', 'backdrop',
+  'primary', 'secondary', 'moderate', 'bold', 'strong', 'contrast', 'backdrop', 'overlay',
   'brand', 'info', 'positive', 'warning', 'critical',
   'brand-subtle', 'brand-strong', 'info-subtle', 'info-strong',
   'positive-subtle', 'positive-strong', 'warning-subtle', 'warning-strong',
