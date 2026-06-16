@@ -128,7 +128,7 @@
       <DtBox padding-block-start="250">
         <!-- eslint-disable-next-line vue/no-undef-components -->
         <component-combinator
-          v-if="componentCombinatorName"
+          v-if="componentCombinatorName && !viewport.above('xxxl')"
           :component-name="componentCombinatorName"
         />
       </DtBox>

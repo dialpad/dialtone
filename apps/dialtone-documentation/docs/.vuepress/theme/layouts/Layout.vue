@@ -82,25 +82,17 @@
         </DtBox>
         <DtBox
           v-if="componentCombinatorName && viewport.above('xxxl')"
-          id="combinator-side-target"
-          surface="secondary"
           min-inline-size="1200"
           inline-size="1200"
-          padding-inline="300"
-          padding-inline-start="0"
           block-size="100p"
-          border-radius="400"
-          class="d-fl1 d-my-300 d-mie-250"
+          padding-block="250"
+          class="d-mie-250"
         >
-          <dt-text
-            as="p"
-            align="center"
-            kind="headline"
-            :size="500"
-            class="d-mbs-800 d-o25"
-          >
-            (playground moves over here if enough room)
-          </dt-text>
+          <!-- eslint-disable-next-line vue/no-undef-components -->
+          <component-combinator
+            class="d-h100p"
+            :component-name="componentCombinatorName"
+          />
         </DtBox>
       </dt-stack>
     </DtBox>
