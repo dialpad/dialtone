@@ -8,7 +8,7 @@ export const TOC_SCROLL_OFFSET_GAP = 16;
 // Scroll behavior for hash navigation — kept as a function (not a const) as a seam
 // for a future prefers-reduced-motion check. Visual smoothness is owned by CSS
 // (.dialtone-doc-page-scroll-container); this value also arms the scroll-spy guard
-// (see startProgrammaticScroll in PageToc.vue).
+// (see startProgrammaticScroll in usePageTocScrollSpy.js).
 export function getHashScrollBehavior () {
   return 'smooth';
 }
@@ -114,9 +114,8 @@ export function hashToId (link = '') {
   return decodeURIComponent(hash.replace(/^#/, ''));
 }
 
-export function findPageScrollContainer (element) {
-  return element?.closest?.(PAGE_SCROLL_CONTAINER_SELECTOR) ||
-    document.querySelector(PAGE_SCROLL_CONTAINER_SELECTOR) ||
+export function findPageScrollContainer () {
+  return document.querySelector(PAGE_SCROLL_CONTAINER_SELECTOR) ||
     document.scrollingElement ||
     document.documentElement;
 }

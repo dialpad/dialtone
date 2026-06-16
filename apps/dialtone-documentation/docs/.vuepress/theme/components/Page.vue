@@ -67,23 +67,18 @@
                   </dt-button>
                 </template>
                 <template #content>
-                  <page-toc :headers="headers" always-expanded />
+                  <page-toc
+                    :headers="headers"
+                    :active-hash="activeHash"
+                    always-expanded
+                    @navigate="handleNavigate"
+                  />
                 </template>
               </dt-popover>
             </template>
           </dt-tab-group>
         </DtBox>
       </DtBox>
-      <page-toc
-        v-if="includeToc && viewport.pick({
-          default: true,
-          xl: false,
-          xxxl: true,
-          xxxxl: false,
-        })"
-        :headers="headers"
-        scroll-spy-only
-      />
       <DtBox id="vue-rwd-demo" hidden>
         <DtBox>
           Show this by default
@@ -129,6 +124,7 @@
         <!-- eslint-disable-next-line vue/no-undef-components -->
         <component-combinator
           v-if="componentCombinatorName && !viewport.above('xxxl')"
+          class="d-hmx-900"
           :component-name="componentCombinatorName"
         />
       </DtBox>
@@ -215,7 +211,11 @@
       >
         On this page
       </dt-text>
-      <page-toc :headers="headers" />
+      <page-toc
+        :headers="headers"
+        :active-hash="activeHash"
+        @navigate="handleNavigate"
+      />
     </DtBox>
   </DtStack>
 </template>
@@ -223,6 +223,7 @@
 <script setup>
 import PageHeader from '../components/PageHeader.vue';
 import PageToc from '../components/PageToc.vue';
+import { usePageTocScrollSpy } from '../composables/usePageTocScrollSpy.js';
 import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
 import { getComponentCombinatorName } from '../utils/componentCombinator.js';
 import { computed, watch, inject } from 'vue';
@@ -254,6 +255,7 @@ const lastUpdated = computed(() => {
 });
 const { headers } = inject('headers');
 const viewport = useViewportBreakpoints();
+const { activeHash, handleNavigate } = usePageTocScrollSpy(headers);
 
 const route = useRoute();
 
