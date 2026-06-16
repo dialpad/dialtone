@@ -116,6 +116,13 @@ export function flattenHeaders (headers = []) {
   ]);
 }
 
+export function flattenHeadersWithDepth (headers = [], depth = 0) {
+  return headers.flatMap(header => [
+    { ...header, depth },
+    ...flattenHeadersWithDepth(header.children || [], depth + 1),
+  ]);
+}
+
 export function hashToId (link = '') {
   const hashIndex = link.indexOf('#');
   const hash = hashIndex === -1 ? link : link.slice(hashIndex + 1);

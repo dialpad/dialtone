@@ -4,6 +4,7 @@ import {
   PAGE_SCROLL_CONTAINER_NO_SMOOTH_CLASS,
   PAGE_SCROLL_CONTAINER_SELECTOR,
   createRouteHashScrollGuard,
+  flattenHeadersWithDepth,
   getActiveHeaderLink,
   getHashScrollBehavior,
   getCurrentBrowserHash,
@@ -45,6 +46,55 @@ describe('pageToc utilities', () => {
     assert.equal(getCurrentBrowserHash('#usage', { hash: '#classes' }), '#classes');
     assert.equal(getCurrentBrowserHash('#usage', { hash: '' }), '#usage');
     assert.equal(getCurrentBrowserHash('#usage', null), '#usage');
+  });
+
+  it('flattens headers with depth for dropdown rendering', () => {
+    const headers = [
+      { title: 'Usage', link: '#usage', children: [] },
+      {
+        title: 'Variants',
+        link: '#variants',
+        children: [
+          { title: 'Size', link: '#size', children: [] },
+          {
+            title: 'Kind',
+            link: '#kind',
+            children: [
+              { title: 'Muted', link: '#muted', children: [] },
+            ],
+          },
+        ],
+      },
+    ];
+
+    assert.deepEqual(flattenHeadersWithDepth(headers), [
+      { title: 'Usage', link: '#usage', children: [], depth: 0 },
+      {
+        title: 'Variants',
+        link: '#variants',
+        children: [
+          { title: 'Size', link: '#size', children: [] },
+          {
+            title: 'Kind',
+            link: '#kind',
+            children: [
+              { title: 'Muted', link: '#muted', children: [] },
+            ],
+          },
+        ],
+        depth: 0,
+      },
+      { title: 'Size', link: '#size', children: [], depth: 1 },
+      {
+        title: 'Kind',
+        link: '#kind',
+        children: [
+          { title: 'Muted', link: '#muted', children: [] },
+        ],
+        depth: 1,
+      },
+      { title: 'Muted', link: '#muted', children: [], depth: 2 },
+    ]);
   });
 
   it('skips scroll for route hash changes written by TOC navigation', () => {

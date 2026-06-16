@@ -16,7 +16,7 @@
       >
         <DtBox border-width-block-end="100" padding-block-end="200">
           <page-header />
-          <dt-popover
+          <dt-dropdown
             v-if="viewport.pick({
               default: true,
               xl: false,
@@ -26,10 +26,12 @@
             placement="bottom-start"
             class="d-mis-auto"
             padding="small"
-            content-class="d-w-300"
+            list-class="d-w-300"
+            max-height="52vh"
           >
-            <template #anchor>
+            <template #anchor="{ attrs }">
               <dt-button
+                v-bind="attrs"
                 importance="outlined"
                 kind="muted"
                 :size="200"
@@ -40,15 +42,14 @@
                 </template>
               </dt-button>
             </template>
-            <template #content>
-              <page-toc
+            <template #list="{ close }">
+              <page-toc-dropdown
                 :headers="headers"
                 :active-hash="activeHash"
-                always-expanded
-                @navigate="handleNavigate"
+                @navigate="(event, item) => handleDropdownNavigate(event, item, close)"
               />
             </template>
-          </dt-popover>
+          </dt-dropdown>
           <!-- <dt-tab-group
             v-if="$frontmatter.status"
             :size="viewport.pick({
@@ -173,6 +174,7 @@
 <script setup>
 import PageHeader from '../components/PageHeader.vue';
 import PageToc from '../components/PageToc.vue';
+import PageTocDropdown from '../components/PageTocDropdown.vue';
 import { usePageTocScrollSpy } from '../composables/usePageTocScrollSpy.js';
 import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
 import { getComponentCombinatorName } from '../utils/componentCombinator.js';
@@ -207,6 +209,11 @@ const lastUpdated = computed(() => {
 const { headers } = inject('headers');
 const viewport = useViewportBreakpoints();
 const { activeHash, handleNavigate } = usePageTocScrollSpy(headers);
+
+async function handleDropdownNavigate (event, item, close) {
+  await handleNavigate(event, item);
+  close();
+}
 
 const route = useRoute();
 
