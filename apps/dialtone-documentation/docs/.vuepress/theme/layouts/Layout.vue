@@ -1,8 +1,17 @@
 <template>
   <dt-stack class="d-ps-fixed d-all-0 d-of-hidden">
     <migration-banner />
-    <DtBox padding="250" padding-block-end="0">
-      <DtBox padding-block="100" padding="200" surface="secondary" border-radius="400">
+    <DtBox padding="250" padding-block-end="0" class="d-zi-navigation">
+      <DtBox
+        padding-block="100"
+        padding="200"
+        surface="secondary"
+        border-radius="400"
+        :shadow="viewport.pick({
+          default: 'card',
+          lg: false,
+        })"
+      >
         <dt-stack direction="row" justify="space-between" gap="400">
           <dt-stack direction="row" gap="200" align="end">
             <router-link
