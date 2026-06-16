@@ -11,6 +11,7 @@
     navigation-type="arrow-keys"
     placement="bottom-start"
     content-width="anchor"
+    max-height="400px"
     @opened="onOpened"
   >
     <template #anchor="{ attrs }">
@@ -62,6 +63,7 @@
     <template #list="{ close }">
       <dt-box
         v-if="showSearch"
+        class="dtc-search-box"
         surface="overlay"
         padding-block-end="50"
         border-width-block-end="100"
@@ -95,7 +97,7 @@
           </template>
         </dt-input>
       </dt-box>
-      <div ref="listWrapper" class="d-of-y-auto d-hmx-400">
+      <div>
         <dt-list-item
           v-for="option in filteredOptions"
           :key="option.value"
@@ -240,7 +242,6 @@ const selectedLabel = computed(() => selectedOption.value?.label ?? '');
 
 const query = ref('');
 const searchInput = ref(null);
-const listWrapper = ref(null);
 
 const showSearch = computed(() => options.value.length > SEARCH_THRESHOLD);
 
@@ -278,21 +279,22 @@ function selectFirst (close) {
 }
 
 /**
- * Handles keys in the search field. Stops propagation so the dropdown's own
- * key handling (type-ahead / arrow navigation) doesn't intercept typing, while
- * keeping Enter (select first match) and Escape (close) working.
+ * Handles keys in the search field. Arrow keys propagate to DtDropdown so its
+ * highlightIndex stays in sync (avoids the double-keystroke bug). All other
+ * keys are stopped to prevent DtDropdown's type-ahead from intercepting typing.
  *
  * @param {KeyboardEvent} e - The keydown event.
  * @param {Function} close - Closes the dropdown.
  */
 function onSearchKeydown (e, close) {
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    e.preventDefault(); // no page scroll
+    return; // let DtDropdown's navigation handle it
+  }
   e.stopPropagation();
   if (e.key === 'Enter') {
     e.preventDefault();
     selectFirst(close);
-  } else if (e.key === 'ArrowDown') {
-    e.preventDefault();
-    listWrapper.value?.querySelector('[role="menuitem"]:not([aria-disabled="true"])')?.focus();
   } else if (e.key === 'Escape') {
     close();
   }
@@ -307,3 +309,16 @@ export default {
   name: 'DtcControlSelection',
 };
 </script>
+
+<style scoped>
+/*
+ * Stick the search box to the top of the popover's scroll container so it
+ * stays visible as the user scrolls through the list. z-index: 1 keeps it
+ * above list items that slide under it.
+ */
+.dtc-search-box {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 1;
+}
+</style>
