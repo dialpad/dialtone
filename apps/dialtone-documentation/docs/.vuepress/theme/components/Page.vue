@@ -124,7 +124,7 @@
         <!-- eslint-disable-next-line vue/no-undef-components -->
         <component-combinator
           v-if="componentCombinatorName && !viewport.above('xxxl')"
-          class="d-hmx-900"
+          class="d-hmx-700"
           :component-name="componentCombinatorName"
         />
       </DtBox>
@@ -199,7 +199,7 @@
       max-inline-size="300"
       min-inline-size="300"
       padding-block-start="200"
-      class="d-ps-sticky d-ibs-450"
+      class="d-ps-sticky d-ibs-300"
     >
       <dt-text
         as="h2"

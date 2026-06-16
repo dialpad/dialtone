@@ -635,10 +635,7 @@ export default {
 
   &__controls {
     inline-size: var(--dt-size-900);
-    max-inline-size: var(--dt-size-1000);
-    flex-shrink: 0;
     font: var(--dt-text-body-sm);
-    outline: 1px solid red;
 
     :where(.dialtone-playground--fullscreen) & {
       @media screen and (min-width: 640px) {
