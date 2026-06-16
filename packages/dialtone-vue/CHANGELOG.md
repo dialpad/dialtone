@@ -1,3 +1,12 @@
+## [3.222.2](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.222.1...dialtone-vue/v3.222.2) (2026-06-16)
+
+
+### Bug Fixes
+
+* **Modal:** DLT-3476 do not close when drag starts inside dialog and ends on backdrop ([#1322](https://github.com/dialpad/dialtone/issues/1322)) ([4d5726b](https://github.com/dialpad/dialtone/commit/4d5726b0ffd903c4bf7987820e90bc33c01f4f1f))
+* **Popover:** NO-JIRA guard onShow against window access after component unmount ([#1320](https://github.com/dialpad/dialtone/issues/1320)) ([4690585](https://github.com/dialpad/dialtone/commit/4690585c4e5c39d7099969552796c7b9817de5ae))
+* **Rich Text Editor:** DP-190440 strip trailing <br> before </p> on paste ([#1326](https://github.com/dialpad/dialtone/issues/1326)) ([28737c0](https://github.com/dialpad/dialtone/commit/28737c0066cf600eb4ebfffd512056c250de7599))
+
 ## [3.222.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.222.0...dialtone-vue/v3.222.1) (2026-06-10)
 
 
