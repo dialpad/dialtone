@@ -146,10 +146,6 @@ Adds validation for max selection. Make sure to provide the following props:
 </dt-combobox-multi-select>
 ```
 
-## Vue API
-
-<component-vue-api component-name="comboboxmultiselect" />
-
 ## Accessibility
 
 A screen reader visible only close button is added by default.
@@ -231,3 +227,7 @@ function onMaxSelected () {
   console.log('Max selected reached');
 }
 </script>
+
+## Vue API
+
+<component-vue-api component-name="comboboxmultiselect" />

@@ -86,10 +86,6 @@ const maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() 
 />
 ```
 
-## Vue API
-
-<component-vue-api component-name="datepicker"></component-vue-api>
-
 ## Date Formats
 
 The following functions are available for date formatting.
@@ -285,3 +281,7 @@ const toggleDatepicker = () => {
 };
 
 </script>
+
+## Vue API
+
+<component-vue-api component-name="datepicker"></component-vue-api>

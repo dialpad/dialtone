@@ -296,16 +296,6 @@ Popover content renders outside the DOM tree. Use the `contentMode` prop to appl
 <dt-popover content-mode="light">...</dt-popover>
 ```
 
-## Vue API
-
-<component-vue-api component-name="popover" />
-
-## Classes
-
-Popover must contain an anchor and content element. d-modal--transparent can be used as a sibling before the popover container if you wish to make the popover modal.
-
-<component-class-table component-name="popover" />
-
 ## Accessibility
 
 If your popover is modal, please see the accessibility section of this page regarding "focus trapping": [Modal Accessibility](/components/modal.md#accessibility). The same rules will apply here if your popover is modal.
@@ -357,3 +347,13 @@ Additionally you must use the "initialFocusElement" prop to set which element is
 <script setup>
   import ExamplePopover from '@exampleComponents/ExamplePopover.vue';
 </script>
+
+## Vue API
+
+<component-vue-api component-name="popover" />
+
+## Classes
+
+Popover must contain an anchor and content element. d-modal--transparent can be used as a sibling before the popover container if you wish to make the popover modal.
+
+<component-class-table component-name="popover" />

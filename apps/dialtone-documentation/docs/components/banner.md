@@ -99,14 +99,6 @@ Pins the banner to the top of the window.
 </dt-banner>
 ```
 
-## Vue API
-
-<component-vue-api component-name="banner" />
-
-## Classes
-
-<component-class-table component-name="banner"></component-class-table>
-
 ## Accessibility
 
 ### Focus management
@@ -150,3 +142,11 @@ function closeBanner () {
   shownBanner.value = null;
 }
 </script>
+
+## Vue API
+
+<component-vue-api component-name="banner" />
+
+## Classes
+
+<component-class-table component-name="banner"></component-class-table>

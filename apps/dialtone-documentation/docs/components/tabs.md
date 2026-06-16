@@ -387,6 +387,16 @@ If you need to do some validation before changing tabs, you can use the `before-
 </script>
 ```
 
+## Accessibility
+
+To create accessible tabs, be sure to implement the <a class="d-link" href="https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-2/tabs.html" target="_blank">proper keyboard navigation</a> and utilize the following ARIA roles to properly declare element roles, content relationships, and current status:
+
+<component-accessible-table component-name="tabs" />
+
+<script setup>
+  import ExampleTabs from "@exampleComponents/ExampleTabs.vue";
+</script>
+
 ## Vue API
 
 ### Tab Group
@@ -404,13 +414,3 @@ If you need to do some validation before changing tabs, you can use the `before-
 ## Classes
 
 <component-class-table component-name="tabs" />
-
-## Accessibility
-
-To create accessible tabs, be sure to implement the <a class="d-link" href="https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-2/tabs.html" target="_blank">proper keyboard navigation</a> and utilize the following ARIA roles to properly declare element roles, content relationships, and current status:
-
-<component-accessible-table component-name="tabs" />
-
-<script setup>
-  import ExampleTabs from "@exampleComponents/ExampleTabs.vue";
-</script>

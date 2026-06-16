@@ -131,10 +131,6 @@ The event handler is only needed if you need to do additional processing. The v-
 </dt-stack>
 ```
 
-## Vue API
-
-<component-vue-api component-name="radiogroup" />
-
 ## Accessibility
 
 Radio Groups are typically paired with a legend which identifies the group. If no legend is provided then it is expected
@@ -152,3 +148,7 @@ const selectedFruits = ref('apple');
 const onInput = () => {};
 
 </script>
+
+## Vue API
+
+<component-vue-api component-name="radiogroup" />

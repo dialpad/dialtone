@@ -829,10 +829,6 @@ We provide the following branded buttons for log-in and sign-up workflows.
 </dt-stack>
 ```
 
-## Vue API
-
-<component-vue-api component-name="button" />
-
 ## Accessibility
 
 - Choosing between Link and Button elements is paramount for screenreaders to inform the user what will occur. For example: will it go somewhere (Link) or will something happen (Button)?
@@ -845,6 +841,10 @@ We provide the following branded buttons for log-in and sign-up workflows.
   - Pressing the `Tab` key moves focus to the next focusable element.
   - Pressing the `Shift+Tab` key moves focus to the previous focusable element.
 - When using DtButton with `href` or `to`, the component automatically handles Spacebar activation and disabled state (`aria-disabled`, `tabindex="-1"`). Navigating elements keep their native link role — `role="button"` is not added because the element navigates rather than performing an in-page action.
+
+## Vue API
+
+<component-vue-api component-name="button" />
 
 ## Classes
 

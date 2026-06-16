@@ -156,14 +156,6 @@ Tooltip content renders outside the DOM tree via Tippy.js. Use the `contentMode`
 </dt-tooltip>
 ```
 
-## Vue API
-
-<component-vue-api component-name="tooltip" />
-
-## Classes
-
-<component-class-table component-name="tooltip" />
-
 ## Accessibility
 
 Reads out the tooltip content as a supplementary description for its trigger when the trigger is focused.
@@ -194,3 +186,11 @@ import ExampleTooltipDirections from '@exampleComponents/ExampleTooltipDirection
 const dialtoneConstants = inject('dialtoneConstants', {});
 const directions = dialtoneConstants.TOOLTIP_DIRECTIONS;
 </script>
+
+## Vue API
+
+<component-vue-api component-name="tooltip" />
+
+## Classes
+
+<component-class-table component-name="tooltip" />

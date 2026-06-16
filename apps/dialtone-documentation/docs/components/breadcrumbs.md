@@ -60,6 +60,12 @@ In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#
 </div>
 ```
 
+## Accessibility
+
+HTML doesn't provide dedicated semantic elements for breadcrumbs, so we need to add a few ARIA attributes to make them accessible.
+
+<component-accessible-table component-name="breadcrumbs"></component-accessible-table>
+
 ## Vue API
 
 <component-vue-api component-name="breadcrumbs" />
@@ -67,9 +73,3 @@ In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#
 ## Classes
 
 <component-class-table component-name="breadcrumbs"></component-class-table>
-
-## Accessibility
-
-HTML doesn't provide dedicated semantic elements for breadcrumbs, so we need to add a few ARIA attributes to make them accessible.
-
-<component-accessible-table component-name="breadcrumbs"></component-accessible-table>

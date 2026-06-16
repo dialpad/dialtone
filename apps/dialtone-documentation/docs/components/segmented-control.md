@@ -380,20 +380,6 @@ By default, items select immediately on focus via arrow keys, following the <a c
 </dt-segmented-control>
 ```
 
-## Vue API
-
-### Segmented Control
-
-<component-vue-api component-name="segmentedcontrol" :also-import="['segmentedcontrolitem']" />
-
-### Segmented Control Item
-
-<component-vue-api component-name="segmentedcontrolitem" :show-import="false" />
-
-## Classes
-
-<component-class-table component-name="segmented-control" />
-
 ## Accessibility
 
 The segmented control implements the <a class="d-link" href="https://www.w3.org/WAI/ARIA/apg/patterns/radio/" target="_blank">WAI-ARIA Radio Group pattern</a> with roving tabindex for keyboard navigation.
@@ -409,3 +395,17 @@ const iconSelected = ref('compact');
 const iconOnlySelected = ref('system');
 const trailingSelected = ref('apples');
 </script>
+
+## Vue API
+
+### Segmented Control
+
+<component-vue-api component-name="segmentedcontrol" :also-import="['segmentedcontrolitem']" />
+
+### Segmented Control Item
+
+<component-vue-api component-name="segmentedcontrolitem" :show-import="false" />
+
+## Classes
+
+<component-class-table component-name="segmented-control" />

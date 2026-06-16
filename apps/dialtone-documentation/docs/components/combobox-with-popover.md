@@ -136,10 +136,6 @@ Combobox popover content renders outside the DOM tree. Use the `contentMode` pro
 <dt-combobox-with-popover content-mode="light">...</dt-combobox-with-popover>
 ```
 
-## Vue API
-
-<component-vue-api component-name="comboboxwithpopover" />
-
 ## Accessibility
 
 A screen reader visible only close button is added by default.
@@ -187,3 +183,7 @@ function onOpenedHeaderFooter (opened) {
   }
 }
 </script>
+
+## Vue API
+
+<component-vue-api component-name="comboboxwithpopover" />

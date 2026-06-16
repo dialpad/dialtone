@@ -350,16 +350,16 @@ The `#leading` and `#trailing` slots are forwarded to the alpha button. Use `alp
 </dt-stack>
 ```
 
-## Vue API
-
-<component-vue-api component-name="splitButton" />
-
 ## Accessibility
 
 In addition to the [Button component's](button.md#accessibility) accessibility documentation:
 
 - An icon-only primary action and the secondary action require a [Tooltip](tooltip.md) to indicate its function.
 - While the secondary action is focused, pressing `Enter` or `Space` triggers its action, displaying a [Dropdown component](dropdown.md) or [Popover component](popover.md).
+
+## Vue API
+
+<component-vue-api component-name="splitButton" />
 
 ## Classes
 

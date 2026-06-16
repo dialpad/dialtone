@@ -108,10 +108,6 @@ combinator: DtEmojiPicker
 </dt-popover>
 ```
 
-## Vue API
-
-<component-vue-api component-name="emoji_picker" />
-
 ## Usage
 
 We recommend to wrap the emoji picker in a `dt-popover` component.
@@ -211,3 +207,7 @@ const recentlyUsedEmojis = [
 ];
 
 </script>
+
+## Vue API
+
+<component-vue-api component-name="emoji_picker" />

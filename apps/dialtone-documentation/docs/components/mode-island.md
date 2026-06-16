@@ -592,19 +592,6 @@ The `<dt-mode-island>` component is the underlying abstraction that the directiv
 </dt-mode-island>
 ```
 
-## Vue API
-
-### Directive
-
-```js
-import { DtModeDirective } from '@dialpad/dialtone-vue';
-app.use(DtModeDirective);
-```
-
-### Component
-
-<component-vue-api component-name="modeisland" />
-
 ## Accessibility
 
 Purely visual. No semantic HTML impact. Supports high contrast mode via auto contrast inheritance.
@@ -631,3 +618,16 @@ const items = ref([
 ]);
 
 </script>
+
+## Vue API
+
+### Directive
+
+```js
+import { DtModeDirective } from '@dialpad/dialtone-vue';
+app.use(DtModeDirective);
+```
+
+### Component
+
+<component-vue-api component-name="modeisland" />

@@ -151,10 +151,6 @@ You can also use the default slot instead of the text prop:
 </dt-motion-text>
 ```
 
-## Vue API
-
-<component-vue-api component-name="motiontext" />
-
 ## Accessibility
 
 The Motion Text component is built with accessibility as a core principle.
@@ -218,3 +214,7 @@ async function playMode (mode) {
   animDemoRef.value.start();
 }
 </script>
+
+## Vue API
+
+<component-vue-api component-name="motiontext" />

@@ -297,14 +297,6 @@ Truncates the text instead of wrapping it. Useful when the Notice needs to have 
 </dt-notice>
 ```
 
-## Vue API
-
-<component-vue-api component-name="notice" />
-
-## Classes
-
-<component-class-table component-name="notice" />
-
 ## Accessibility
 
 <component-accessible-table component-name="notice" />
@@ -312,3 +304,11 @@ Truncates the text instead of wrapping it. Useful when the Notice needs to have 
 <script setup>
   import ExampleNotice from '@exampleComponents/ExampleNotice.vue';
 </script>
+
+## Vue API
+
+<component-vue-api component-name="notice" />
+
+## Classes
+
+<component-class-table component-name="notice" />

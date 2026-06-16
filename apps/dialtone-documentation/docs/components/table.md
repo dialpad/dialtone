@@ -66,10 +66,6 @@ keywords: ["data table", "grid", "rows", "d-table", "DtTable", "dt-table", "data
 </table>
 ```
 
-## Classes
-
-<component-class-table component-name="table" />
-
 ## Accessibility
 
 Use the `caption` element to describe a table in the same way you would use a heading. A caption helps users find, navigate and understand tables.
@@ -79,3 +75,7 @@ We provide `.d-table__caption` for a basic caption style, but you can also use u
 <script setup>
   import { examples } from '@data/table.json';
 </script>
+
+## Classes
+
+<component-class-table component-name="table" />

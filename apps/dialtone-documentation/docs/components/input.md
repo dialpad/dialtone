@@ -328,14 +328,6 @@ Override the label font weight independently of the label size. Valid values are
 <dt-input label="Label" placeholder="Placeholder" label-strength="bold|semibold|medium|normal" />
 ```
 
-## Vue API
-
-<component-vue-api component-name="input" />
-
-## Classes
-
-<component-class-table component-name="input"></component-class-table>
-
 ## Accessibility
 
 - Make sure the `label` `for` attribute match the input `id`.
@@ -391,3 +383,11 @@ const validate = () => {
   };
 };
 </script>
+
+## Vue API
+
+<component-vue-api component-name="input" />
+
+## Classes
+
+<component-class-table component-name="input"></component-class-table>

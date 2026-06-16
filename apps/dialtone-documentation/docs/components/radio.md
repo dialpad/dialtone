@@ -127,10 +127,6 @@ Use the `label-size` prop to override the default label size.
 </dt-stack>
 ```
 
-## Classes
-
-<component-class-table component-name="radio" />
-
 ## Accessibility
 
 The best accessibility is semantic HTML. Most screen readers understand how to parse inputs if they're correctly formatted. When it comes to radio input, there are a few things to keep in mind:
@@ -145,3 +141,7 @@ The best accessibility is semantic HTML. Most screen readers understand how to p
 ## Vue API
 
 <component-vue-api component-name="radio" />
+
+## Classes
+
+<component-class-table component-name="radio" />

@@ -101,10 +101,6 @@ class="d-w100p d-h-500"
 Root Layout should be used as the top level component for a route. All other components on the page should be nested
 within one of the root layout's slots. The root layout should not be nested within any other elements or components.
 
-## Vue API
-
-<component-vue-api component-name="rootlayout" />
-
 ## Accessibility
 
 The RootLayout component uses
@@ -119,3 +115,7 @@ The RootLayout component will not do this for you.
 
 The sidebar will not automatically wrap to be above the main content by default.
 This can be changed via the `responsiveBreakpoint` prop if desired.
+
+## Vue API
+
+<component-vue-api component-name="rootlayout" />

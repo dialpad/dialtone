@@ -83,14 +83,6 @@ The `kind` prop sets the color variant of the progress circle.
 <dt-progress-circle kind="{kind}" :progress="66" aria-label="value" />
 ```
 
-## Vue API
-
-<component-vue-api component-name="progressCircle" />
-
-## Classes
-
-<component-class-table component-name="progress-circle" />
-
 ## Accessibility
 
 - The root element has `role="progressbar"` with `aria-valuemin="0"`, `aria-valuemax="100"`, and `:aria-valuenow` bound to the current progress value.
@@ -104,3 +96,11 @@ const atMin = computed(() => demoProgress.value <= 0);
 const atMax = computed(() => demoProgress.value >= 100);
 const setProgress = (v) => { demoProgress.value = Math.max(0, Math.min(100, v)); };
 </script>
+
+## Vue API
+
+<component-vue-api component-name="progressCircle" />
+
+## Classes
+
+<component-class-table component-name="progress-circle" />

@@ -88,14 +88,6 @@ Pass `:show-icon="false"` for a dot-only treatment across all states. The `offli
 <dt-presence presence="offline" :show-icon="false" />
 ```
 
-## Vue API
-
-<component-vue-api component-name="presence" />
-
-## Classes
-
-<component-class-table component-name="presence" />
-
 ## Accessibility
 
 You may wish to announce any live changes to this component via the screen reader since this is only a visual indicator.
@@ -117,3 +109,11 @@ Example:
 ```
 
 Abbreviations / symbols should be read out in full for voiceover / screen readers.
+
+## Vue API
+
+<component-vue-api component-name="presence" />
+
+## Classes
+
+<component-class-table component-name="presence" />

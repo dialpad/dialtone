@@ -39,10 +39,6 @@ combinator: DtEmoji
 <dt-emoji size="100|200|300|400|500|600|700|800" code=":smile:" />
 ```
 
-## Vue API
-
-<component-vue-api component-name="emoji" />
-
 ## Assets
 
 Dialtone Vue uses [JoyPixels 8.0](https://joypixels.com/) to render emojis. When using this component, Dialtone Vue will use the free joypixels assets hosted on jsdelivr CDN by default. You may wish to use self hosted joypixels assets such as the SVGs only available to premium license holders. The examples shown here use the free 32px PNGs for emojis 16px and under, and the premium SVGs for emoji's larger than 16px. You may set a custom URL for small emojis and large emojis with the following functions during initialization of your app:
@@ -165,3 +161,7 @@ By default the emoji will be rendered with an aria-label attribute describing th
 const sizes = ['100', '200', '300', '400', '500', '600', '700', '800'];
 
 </script>
+
+## Vue API
+
+<component-vue-api component-name="emoji" />

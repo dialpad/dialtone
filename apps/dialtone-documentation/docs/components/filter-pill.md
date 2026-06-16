@@ -401,10 +401,6 @@ Filter Pill popover content renders outside the DOM tree. Use the `contentMode` 
 <dt-filter-pill content-mode="light">...</dt-filter-pill>
 ```
 
-## Vue API
-
-<component-vue-api component-name="filterPill"></component-vue-api>
-
 ## Accessibility
 
 The filter pill is built on `DtButton` and `DtPopover`/`DtDropdown`, inheriting their keyboard and screen reader support.
@@ -429,6 +425,10 @@ The filter pill is built on `DtButton` and `DtPopover`/`DtDropdown`, inheriting 
 - Always provide a `label` prop or populate the `default` slot so the pill has visible text.
 - When active filters change the visible label (e.g., radio selection patterns), set `start-tooltip-text` to the original label so the full context remains available on hover and to assistive technology.
 - Provide `end-tooltip-text` for the clear button to give it a meaningful accessible name (e.g., "Remove filter").
+
+## Vue API
+
+<component-vue-api component-name="filterPill"></component-vue-api>
 
 ## Classes
 

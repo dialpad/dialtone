@@ -144,10 +144,6 @@ Dropdown content renders outside the DOM tree. Use the `contentMode` prop to app
 <dt-dropdown content-mode="light">...</dt-dropdown>
 ```
 
-## Vue API
-
-<component-vue-api component-name="dropdown" :also-import="['dropdownseparator']" />
-
 ## Accessibility
 
 A screen reader visible only close button is added by default.
@@ -173,3 +169,7 @@ const items = [
   { name: 'Another menu item 2', id: 5 },
 ];
 </script>
+
+## Vue API
+
+<component-vue-api component-name="dropdown" :also-import="['dropdownseparator']" />

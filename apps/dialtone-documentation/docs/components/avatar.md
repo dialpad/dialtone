@@ -231,14 +231,6 @@ Use the `deactivated` prop to render the avatar in a desaturated/washed-out stat
 </dt-stack>
 ```
 
-## Vue API
-
-<component-vue-api component-name="avatar" />
-
-## Classes
-
-<component-class-table component-name="avatar"></component-class-table>
-
 ## Accessibility
 
 Initials avatars use background and text color pairings that meet WCAG AA minimum contrast requirements. Variants 0–5 use light text on dark backgrounds, and variants 6–9 use dark text on light backgrounds.
@@ -255,3 +247,11 @@ import { DtIconUser, DtIconHear } from '@dialpad/dialtone-icons/vue';
 const seeds = ['alice', 'bob', 'carol', 'david', 'eve', 'frank', 'grace', 'henry', 'iris', 'jack', 'kate', 'leo', 'mia', 'noah', 'olive', 'paul', 'quinn', 'ruby'];
 const sizes = ['100', '150', '200', '250', '300', '400', '500', '600', '700', '800', '900'];
 </script>
+
+## Vue API
+
+<component-vue-api component-name="avatar" />
+
+## Classes
+
+<component-class-table component-name="avatar"></component-class-table>

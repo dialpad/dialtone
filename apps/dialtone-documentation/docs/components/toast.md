@@ -104,14 +104,6 @@ If you need to self-position the toast at the top center, use the `d-toast-wrapp
 </aside>
 ```
 
-## Vue API
-
-<component-vue-api component-name="toast" />
-
-## Classes
-
-<component-class-table component-name="toast" />
-
 ## Accessibility
 
 Avoid using toast for critical information since toast disappears automatically and make sure
@@ -167,3 +159,11 @@ function togglePinned () {
   pinned.value = !pinned.value;
 }
 </script>
+
+## Vue API
+
+<component-vue-api component-name="toast" />
+
+## Classes
+
+<component-class-table component-name="toast" />

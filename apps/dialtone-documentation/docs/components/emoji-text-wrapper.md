@@ -52,10 +52,6 @@ keywords: ["emoji support","emoticon wrapper","d-emoji-text-wrapper","DtEmojiTex
 </dt-stack>
 ```
 
-## Vue API
-
-<component-vue-api component-name="emojitextwrapper" />
-
 ## Usage
 
 ### Import
@@ -72,3 +68,7 @@ Currently, this wrapper component **can't handle Vue components**, make sure to 
 
 It supports custom emojis, you can use the shortcode to display them. For example, `:octocat:` will render the octocat emoji.
 To do this, you need to [set up custom emojis](/components/emoji.md#custom-emoji) in your application.
+
+## Vue API
+
+<component-vue-api component-name="emojitextwrapper" />

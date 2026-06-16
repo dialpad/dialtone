@@ -67,14 +67,6 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 <dt-toggle v-model="checked" class="d-g-200">Toggle</dt-toggle>
 ```
 
-## Vue API
-
-<component-vue-api component-name="toggle" />
-
-## Classes
-
-<component-class-table component-name="toggle" />
-
 ## Accessibility
 
 This component uses a native button element under the hood that has a role `switch` and type `button` to improve accessibility.
@@ -105,3 +97,11 @@ import { ref } from 'vue'
 
 const checked = ref(false)
 </script>
+
+## Vue API
+
+<component-vue-api component-name="toggle" />
+
+## Classes
+
+<component-class-table component-name="toggle" />
