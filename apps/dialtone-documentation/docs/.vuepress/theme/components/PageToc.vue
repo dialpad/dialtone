@@ -168,6 +168,9 @@ async function updateActiveHeaderFromScroll () {
   if (nextActiveHash === activeHash.value) return;
 
   activeHash.value = nextActiveHash;
+  // Scroll-spy updates the URL directly (history.replaceState, no router), so route.hash
+  // goes stale during scroll — read window.location.hash / getCurrentBrowserHash for live
+  // state, never route.hash. (Bypassing the router avoids its scroll-to-hash feedback loop.)
   replaceBrowserHash(nextActiveHash);
 }
 
