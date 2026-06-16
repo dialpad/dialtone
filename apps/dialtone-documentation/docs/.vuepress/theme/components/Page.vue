@@ -79,47 +79,6 @@
           </dt-tab-group>
         </DtBox>
       </DtBox>
-      <DtBox id="vue-rwd-demo" hidden>
-        <DtBox>
-          Show this by default
-        </DtBox>
-        <DtBox v-if="viewport.above('xs')">
-          Show this element above xs
-        </DtBox>
-        <DtBox v-if="viewport.above('sm')">
-          Show this element above sm
-        </DtBox>
-        <DtBox v-if="viewport.above('md')">
-          Show this element above md
-        </DtBox>
-        <DtBox v-if="viewport.above('lg')">
-          Show this element above lg
-        </DtBox>
-        <DtBox v-if="viewport.above('xl')">
-          Show this element above xl
-        </DtBox>
-        <DtBox v-if="viewport.above('xxl')">
-          Show this element above xxl
-        </DtBox>
-        <DtBox v-if="viewport.above('xxxl')">
-          Show this element above xxxl
-        </DtBox>
-        <DtBox
-          surface="critical"
-          :inline-size="viewport.pick({
-            default: '100p',
-            xs: '100',
-            sm: '200',
-            md: '300',
-            lg: '400',
-            xl: '500',
-            xxl: '600',
-            xxxl: '700',
-          })"
-        >
-          Change inline-size with viewport.pick().
-        </DtBox>
-      </DtBox>
       <DtBox padding-block-start="250">
         <!-- eslint-disable-next-line vue/no-undef-components -->
         <component-combinator
