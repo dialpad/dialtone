@@ -14,13 +14,42 @@
           lg: 'd-ps-sticky d-ibs-0 d-zi-navigation-fixed',
         })"
       >
-        <DtBox border-width-block-end="100">
-          <page-header>
-            <template #content-top>
-              <slot name="content-top" />
+        <DtBox border-width-block-end="100" padding-block-end="200">
+          <page-header />
+          <dt-popover
+            v-if="viewport.pick({
+              default: true,
+              xl: false,
+              xxxl: true,
+              xxxxl: false,
+            })"
+            placement="bottom-start"
+            class="d-mis-auto"
+            padding="small"
+            content-class="d-w-300"
+          >
+            <template #anchor>
+              <dt-button
+                importance="outlined"
+                kind="muted"
+                :size="200"
+              >
+                On this page
+                <template #endIcon="{ iconSize }">
+                  <dt-icon name="chevron-down" :size="iconSize" />
+                </template>
+              </dt-button>
             </template>
-          </page-header>
-          <dt-tab-group
+            <template #content>
+              <page-toc
+                :headers="headers"
+                :active-hash="activeHash"
+                always-expanded
+                @navigate="handleNavigate"
+              />
+            </template>
+          </dt-popover>
+          <!-- <dt-tab-group
             v-if="$frontmatter.status"
             :size="viewport.pick({
               default: '200',
@@ -42,48 +71,15 @@
                 </template>
                 Properties
               </dt-tab>
-              <dt-popover
-                v-if="viewport.pick({
-                  default: true,
-                  xl: false,
-                  xxxl: true,
-                  xxxxl: false,
-                })"
-                placement="bottom-end"
-                class="d-mis-auto"
-                padding="small"
-                content-class="d-w-300"
-              >
-                <template #anchor>
-                  <dt-button
-                    importance="outlined"
-                    kind="muted"
-                    :size="200"
-                  >
-                    On this page
-                    <template #endIcon="{ iconSize }">
-                      <dt-icon name="chevron-down" :size="iconSize" />
-                    </template>
-                  </dt-button>
-                </template>
-                <template #content>
-                  <page-toc
-                    :headers="headers"
-                    :active-hash="activeHash"
-                    always-expanded
-                    @navigate="handleNavigate"
-                  />
-                </template>
-              </dt-popover>
             </template>
-          </dt-tab-group>
+          </dt-tab-group> -->
         </DtBox>
       </DtBox>
       <DtBox padding-block-start="250">
         <!-- eslint-disable-next-line vue/no-undef-components -->
         <component-combinator
           v-if="componentCombinatorName && !viewport.above('xxxl')"
-          class="d-hmx-700"
+          class="d-hmx-900"
           :component-name="componentCombinatorName"
         />
       </DtBox>
