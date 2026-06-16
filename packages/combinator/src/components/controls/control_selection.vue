@@ -11,7 +11,6 @@
     navigation-type="arrow-keys"
     placement="bottom-start"
     content-width="anchor"
-    content-class="d-hmx-400"
     @opened="onOpened"
   >
     <template #anchor="{ attrs }">
@@ -26,12 +25,19 @@
         leading-class="d-pis-75"
       >
         <template
-          v-if="selectedOption?.resolved && isColor(selectedOption.resolved)"
+          v-if="(selectedOption?.resolved && isColor(selectedOption.resolved)) || selectedOption?.previewComponent"
           #leading
         >
           <span
+            v-if="selectedOption.resolved && isColor(selectedOption.resolved)"
             class="d-ba d-bc-subtle d-bar-circle"
             :style="swatchStyle(selectedOption.resolved)"
+          />
+          <component
+            v-else
+            :is="selectedOption.previewComponent"
+            size="200"
+            class="d-fc-muted"
           />
         </template>
         {{ selectedLabel }}
@@ -60,7 +66,6 @@
         padding-block-end="50"
         border-width-block-end="100"
         border-color="subtle"
-        class="d-ps-sticky d-ibs-0 d-zi-base1"
       >
         <dt-input
           ref="searchInput"
@@ -75,7 +80,7 @@
           </template>
         </dt-input>
       </dt-box>
-      <div ref="listWrapper">
+      <div ref="listWrapper" class="d-of-y-auto d-hmx-400">
         <dt-list-item
           v-for="option in filteredOptions"
           :key="option.value"
@@ -98,6 +103,12 @@
               :style="swatchStyle(option.resolved)"
             />
             <span>{{ option.label }}</span>
+            <component
+              v-if="option.previewComponent"
+              :is="option.previewComponent"
+              size="200"
+              class="d-mis-auto d-as-center d-fc-muted"
+            />
             <dt-text
               v-if="option.resolved && !isColor(option.resolved)"
               kind="body"
@@ -168,6 +179,10 @@ const props = defineProps({
     type: Set,
     default: undefined,
   },
+  generatePreviewComponent: {
+    type: Function,
+    default: null,
+  },
 });
 
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
@@ -192,7 +207,8 @@ const options = computed(() => {
       : null;
     // Show color swatches even for disabled options; hide non-color values (misleading for disabled sizes)
     const resolved = optionDisabled && rawResolved && !isColor(rawResolved) ? null : rawResolved;
-    return { value: selection, label: props.generateLabel(selection), resolved, disabled: optionDisabled };
+    const previewComponent = props.generatePreviewComponent?.(selection) ?? null;
+    return { value: selection, label: props.generateLabel(selection), resolved, disabled: optionDisabled, previewComponent };
   }) ?? [];
 
   if (props.defaultValue === null || props.defaultValue === undefined) {
