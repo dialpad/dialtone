@@ -78,6 +78,21 @@
           <template #startIcon="{ iconSize }">
             <dt-icon-search :size="iconSize" />
           </template>
+          <template #endIcon="{ clear }">
+            <dt-button
+              :style="!query.length ? { visibility: 'hidden', pointerEvents: 'none' } : undefined"
+              kind="muted"
+              importance="clear"
+              :size="100"
+              circle
+              aria-label="Clear search"
+              @click="clear"
+            >
+              <template #startIcon="{ iconSize }">
+                <dt-icon-close :size="iconSize" />
+              </template>
+            </dt-button>
+          </template>
         </dt-input>
       </dt-box>
       <div ref="listWrapper" class="d-of-y-auto d-hmx-400">
@@ -137,7 +152,7 @@
 
 <script setup>
 import { DtBox, DtButton, DtInput, DtStack, DtText } from '@dialpad/dialtone-vue';
-import { DtIconChevronsUpDown, DtIconSearch } from '@dialpad/dialtone-icons/vue';
+import { DtIconClose, DtIconChevronsUpDown, DtIconSearch } from '@dialpad/dialtone-icons/vue';
 
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { resolveTokenValue } from '@/src/lib/tokens';
