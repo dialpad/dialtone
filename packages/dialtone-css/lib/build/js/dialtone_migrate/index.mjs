@@ -316,6 +316,43 @@ const MIGRATIONS = [
 ];
 
 // ---------------------------------------------------------------------------
+// Migration markers
+// ---------------------------------------------------------------------------
+
+const MARKER_DIR = '.dialtone-migrations';
+
+function getRepoRoot (cwd) {
+  try {
+    return execFileSync('git', ['rev-parse', '--show-toplevel'], {
+      cwd,
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+    }).trim();
+  } catch {
+    return cwd;
+  }
+}
+
+function markerPath (cwd, id) {
+  return path.join(getRepoRoot(cwd), MARKER_DIR, id);
+}
+
+async function checkMigrationMarker (cwd, id) {
+  try {
+    await fs.access(markerPath(cwd, id));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+async function writeMigrationMarker (cwd, id) {
+  const p = markerPath(cwd, id);
+  await fs.mkdir(path.dirname(p), { recursive: true });
+  await fs.writeFile(p, '', 'utf8');
+}
+
+// ---------------------------------------------------------------------------
 // CLI parsing
 // ---------------------------------------------------------------------------
 
@@ -749,8 +786,11 @@ async function runStandaloneMigration (migration, opts) {
     });
 
     child.on('close', code => {
-      // Exit code 0 means success (or nothing to do)
-      resolve({ exitCode: code });
+      if (code !== 0) {
+        reject(new Error(`child process exited with code ${code}`));
+      } else {
+        resolve({ exitCode: code });
+      }
     });
 
     child.on('error', reject);
@@ -758,8 +798,21 @@ async function runStandaloneMigration (migration, opts) {
 }
 
 async function runMigration (migration, opts) {
+  if (migration.id === 'color-stops' && !opts.dryRun) {
+    if (await checkMigrationMarker(opts.cwd, migration.id)) {
+      console.log(`  ✓ Already applied on this branch (${path.join(getRepoRoot(opts.cwd), MARKER_DIR, migration.id)} exists). Skipping.\n`);
+      console.log(`    Remove that file to re-run.\n`);
+      return { skipped: true };
+    }
+  }
+
   if (migration.type === 'config') {
-    return runConfigMigration(migration, opts);
+    const result = await runConfigMigration(migration, opts);
+    if (migration.id === 'color-stops' && result.applied) {
+      await writeMigrationMarker(opts.cwd, migration.id);
+      console.log(`  Marker written to ${path.join(getRepoRoot(opts.cwd), MARKER_DIR, migration.id)} — commit this file with your changes.\n`);
+    }
+    return result;
   }
 
   if (migration.type === 'standalone') {
