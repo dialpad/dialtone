@@ -79,6 +79,7 @@
         <dt-list-item
           v-for="option in filteredOptions"
           :key="option.value"
+          element-type="div"
           role="menuitem"
           navigation-type="arrow-keys"
           :class="{ 'd-o50 d-pe-none': option.disabled, 'd-bgc-moderate-opaque': option.value === value }"
