@@ -243,7 +243,7 @@ description: "Visual test fixture for the dt-migration-helper Chrome extension."
 ```vue demo-only
 <div>
   <dt-button @click="isOpen = !isOpen">Open Modal (dialog.d-modal)</dt-button>
-  <dt-modal :open="isOpen" title="Test Modal" @update:open="isOpen = $event">
+  <dt-modal :open="isOpen" header-text="Test Modal" @update:open="isOpen = $event">
     <p>This is a <code>dialog.d-modal</code> in Dialtone next.</p>
   </dt-modal>
 </div>
@@ -314,7 +314,7 @@ description: "Visual test fixture for the dt-migration-helper Chrome extension."
 
 ```vue demo-only
 <div style="display:flex;flex-wrap:wrap;gap:8px;">
-  <dt-box v-for="s in ['primary','secondary','moderate','bold','raised']" :key="s" :surface="s" class="d-p-300 d-bar-200"><dt-text kind="code" :size="100">{{ s }}</dt-text></dt-box>
+  <dt-box v-for="s in ['primary','secondary','moderate','bold','strong','contrast']" :key="s" :surface="s" class="d-p-300 d-bar-200"><dt-text kind="code" :size="100">{{ s }}</dt-text></dt-box>
 </div>
 ```
 
