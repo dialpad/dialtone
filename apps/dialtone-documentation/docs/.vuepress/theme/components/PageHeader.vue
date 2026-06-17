@@ -45,7 +45,7 @@
             {{ $frontmatter.download_url_label || 'Download' }}
           </dt-button>
           <dt-button
-            v-if="$frontmatter.figma_url"
+            v-if="$frontmatter.figma_url && viewport.above('md')"
             :href="$frontmatter.figma_url"
             target="_blank"
             rel="noopener noreferrer"

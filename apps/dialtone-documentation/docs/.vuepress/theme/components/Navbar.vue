@@ -1,22 +1,30 @@
 <!-- eslint-disable max-lines -->
 <template>
+  <DtStack v-if="viewport.above('lg')" hidden direction="row" gap="100">
+    <dt-button
+      class="dialtone-shell-btn"
+      active
+      to="/dialtone/"
+    >
+      Product Design
+    </dt-button>
+    <dt-button
+      class="dialtone-shell-btn"
+      href="https://dialpad.design/brand"
+    >
+      Brand Design
+    </dt-button>
+  </DtStack>
   <DtStack direction="row" gap="50">
-    <DtStack v-if="viewport.above('lg')" hidden direction="row" gap="100">
-      <dt-button
-        class="dialtone-shell-btn"
-        active
-        to="/dialtone/"
-      >
-        Product Design
-      </dt-button>
-      <dt-button
-        class="dialtone-shell-btn"
-        href="https://dialpad.design/brand"
-      >
-        Brand Design
-      </dt-button>
-    </DtStack>
-    <!-- <dt-button
+    <DtBox v-if="viewport.above('md')" padding-inline-end="200">
+      <dt-stack v-if="showBranchBadge" :title="branchName" direction="row" gap="50">
+        <dt-icon name="branch" class="d-fc-muted" :size="100" />
+        <dt-text as="p" kind="body" size="100" tone="muted" class="d-wmx-250 d-c-default" truncate>
+          {{ branchName }}
+        </dt-text>
+      </dt-stack>
+    </DtBox>
+    <dt-button
       to="/dialtone/whats-new/"
       class="d-mie-100"
       size="100"
@@ -25,7 +33,7 @@
       <template #startIcon="{ iconSize }">
         <dt-icon name="megaphone" :size="iconSize" />
       </template>
-    </dt-button> -->
+    </dt-button>
     <dt-button
       v-if="viewport.above('lg')"
       v-dt-tooltip:bottom="'Storybook'"
@@ -329,6 +337,8 @@ import { useThemeManager } from '../composables/useThemeManager';
 import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
 
 const showThemeSwitcher = __VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__;
+const branchName = __DIALTONE_BRANCH_NAME__;
+const showBranchBadge = branchName && (__VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__);
 
 // Use theme manager composable with theme switching enabled
 const {

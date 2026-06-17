@@ -3,8 +3,11 @@
     <migration-banner />
     <DtBox padding="250" padding-block-end="0" class="d-zi-navigation">
       <DtBox
-        padding-block="100"
-        padding="200"
+        :padding="viewport.pick({
+          default: '150',
+          md: '200',
+        })"
+        padding-inline="250"
         surface="secondary"
         border-radius="400"
         :shadow="viewport.pick({
@@ -13,26 +16,13 @@
         })"
       >
         <dt-stack direction="row" justify="space-between" gap="400">
-          <dt-stack direction="row" gap="200" align="end">
-            <router-link
-              class="d-td-none"
-              title="Dialtone homepage"
-              to="/"
-            >
-              <dt-stack direction="row" gap="200">
-                <DtIllustration name="dialpad-logo" />
-                <!-- <dialtone-logo /> -->
-              </dt-stack>
-            </router-link>
-            <DtBox v-if="showBranchBadge" :title="branchName" padding-block-end="100">
-              <dt-stack direction="row" gap="50">
-                <dt-icon-branch class="d-fc-muted" :size="100" />
-                <dt-text as="p" kind="body" size="100" tone="muted" class="d-wmx-250" truncate>
-                  {{ branchName }}
-                </dt-text>
-              </dt-stack>
-            </DtBox>
-          </dt-stack>
+          <dt-link
+            title="Dialtone homepage"
+            :underline="false"
+            to="/"
+          >
+            <DtIllustration name="dialpad-logo" class="d-h-50 d-w-auto" />
+          </dt-link>
           <navbar />
         </dt-stack>
       </DtBox>
@@ -118,8 +108,7 @@ import { computed, nextTick, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import { usePageData } from 'vuepress/client';
-import { DtStack, DtText } from '@dialpad/dialtone-vue';
-import { DtIconBranch } from '@dialpad/dialtone-icons/vue';
+import { DtStack } from '@dialpad/dialtone-vue';
 import {
   PAGE_SCROLL_CONTAINER_SELECTOR,
   scrollRouteToTop,
@@ -132,8 +121,6 @@ const next = ref(null);
 const items = useThemeLocaleData().value.sidebar;
 const pageData = usePageData();
 const componentCombinatorName = computed(() => getComponentCombinatorName(pageData.value?.frontmatter));
-const branchName = __DIALTONE_BRANCH_NAME__;
-const showBranchBadge = branchName && (__VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__);
 
 /**
  * Recursively extract all navigable pages from a tree structure
