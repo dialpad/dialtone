@@ -37,6 +37,7 @@
     </template>
     <template #content>
       <div
+        v-dt-focustrap="{ active: hovercardOpen, initialFocus: false, restoreFocus: true }"
         @focusin="onContentFocusIn"
         @focusout="onContentFocusOut"
       >
