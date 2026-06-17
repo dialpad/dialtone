@@ -1,32 +1,7 @@
 <template>
   <dt-stack class="d-ps-fixed d-all-0 d-of-hidden">
     <migration-banner />
-    <DtBox padding="250" padding-block-end="0" class="d-zi-navigation">
-      <DtBox
-        :padding="viewport.pick({
-          default: '150',
-          md: '200',
-        })"
-        padding-inline="250"
-        surface="secondary"
-        border-radius="400"
-        :shadow="viewport.pick({
-          default: 'card',
-          lg: false,
-        })"
-      >
-        <dt-stack direction="row" justify="space-between" gap="400">
-          <dt-link
-            title="Dialtone homepage"
-            :underline="false"
-            to="/"
-          >
-            <DtIllustration name="dialpad-logo" class="d-h-50 d-w-auto" />
-          </dt-link>
-          <navbar />
-        </dt-stack>
-      </DtBox>
-    </DtBox>
+    <doc-header />
     <DtBox
       padding-block-end="0"
       min-block-size="0"
@@ -36,8 +11,8 @@
         <DtBox
           v-if="viewport.above('lg') && !$frontmatter.home && !$frontmatter.noSidebar"
           padding-block-end="400"
-          padding-inline-start="250"
-          padding-inline-end="200"
+          :padding-inline-start="300"
+          :padding-inline-end="200"
           min-inline-size="450"
           max-inline-size="450"
           block-size="100p"
@@ -58,7 +33,10 @@
           inline-size="100p"
           scrollbar="move"
           scrollbar-content-class="dialtone-doc-page-scroll-container"
-          padding-inline-end="250"
+          :padding-inline-end="viewport.pick({
+            default: '250',
+            lg: '300',
+          })"
           padding-block-end="400"
           :padding-inline-start="viewport.pick({
             default: '250',
@@ -75,8 +53,8 @@
           min-inline-size="1200"
           inline-size="1200"
           block-size="100p"
-          padding-block="250"
-          class="d-mie-250"
+          padding-block="300"
+          class="d-mie-300"
         >
           <!-- eslint-disable-next-line vue/no-undef-components -->
           <component-combinator
@@ -97,7 +75,7 @@
 import '@dialpad/dialtone-tokens/tokens-base-light.css';
 import '@dialpad/dialtone-tokens/tokens-dp-light.css';
 import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
-import Navbar from '../components/Navbar.vue';
+import DocHeader from '../components/Header.vue';
 import Sidebar from '../components/Sidebar.vue';
 import Home from '../components/Home.vue';
 import Page from '../components/Page.vue';

@@ -7,7 +7,7 @@
     >
       <DtBox
         id="page-sticky-header"
-        padding-block-start="250"
+        padding-block-start="300"
         surface="primary"
         :class="viewport.pick({
           default: false,

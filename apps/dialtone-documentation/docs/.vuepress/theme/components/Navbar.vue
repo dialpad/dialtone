@@ -318,17 +318,6 @@
         </template>
       </template>
     </dt-dropdown>
-    <dt-button
-      v-if="!viewport.above('lg')"
-      v-dt-tooltip:bottom="`View menu`"
-      kind="muted"
-      importance="clear"
-      aria-label="Open Menu"
-    >
-      <template #startIcon="{ iconSize }">
-        <dt-icon name="menu" :size="iconSize" />
-      </template>
-    </dt-button>
   </DtStack>
 </template>
 
