@@ -39,24 +39,36 @@
       })"
     >
       <page
-        :prev="prev"
-        :next="next"
+        :prev="props.prev"
+        :next="props.next"
+        :component-combinator-name="props.componentCombinatorName"
       />
     </DtBox>
     <DtBox
-      v-if="componentCombinatorName && viewport.above('xxxl')"
+      v-if="props.componentCombinatorName"
+      v-show="showWideCombinator"
+      id="combinator-wide-target"
       min-inline-size="1200"
       inline-size="1200"
       block-size="100p"
       padding-block="300"
       class="d-mie-300"
+    />
+    <Teleport
+      v-if="props.componentCombinatorName"
+      defer
+      :to="combinatorDockTarget"
     >
       <!-- eslint-disable-next-line vue/no-undef-components -->
       <component-combinator
-        class="d-h100p"
-        :component-name="componentCombinatorName"
+        v-model:full-screen="isCombinatorFullScreen"
+        :class="{
+          'd-h100p': showWideCombinator,
+          'd-hmx-900': !showWideCombinator && !isCombinatorFullScreen,
+        }"
+        :component-name="props.componentCombinatorName"
       />
-    </DtBox>
+    </Teleport>
   </dt-stack>
 </template>
 
@@ -65,8 +77,9 @@ import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js
 import Sidebar from '../components/Sidebar.vue';
 import Home from '../components/Home.vue';
 import Page from '../components/Page.vue';
+import { computed, ref, watch } from 'vue';
 
-defineProps({
+const props = defineProps({
   prev: {
     type: Object,
     default: null,
@@ -82,4 +95,13 @@ defineProps({
 });
 
 const viewport = useViewportBreakpoints();
+const isCombinatorFullScreen = ref(false);
+const showWideCombinator = computed(() => viewport.above('xxxl'));
+const combinatorDockTarget = computed(() => {
+  return showWideCombinator.value ? '#combinator-wide-target' : '#combinator-inline-target';
+});
+
+watch(() => props.componentCombinatorName, () => {
+  isCombinatorFullScreen.value = false;
+});
 </script>

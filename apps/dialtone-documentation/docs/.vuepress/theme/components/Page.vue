@@ -80,12 +80,9 @@
         </DtBox>
       </DtBox>
       <DtBox padding-block-start="250">
-        <!-- eslint-disable-next-line vue/no-undef-components -->
-        <component-combinator
-          v-if="componentCombinatorName && !viewport.above('xxxl')"
-          v-model:full-screen="isCombinatorFullScreen"
-          :class="{ 'd-hmx-900': !viewport.above('xxxl') && !isCombinatorFullScreen }"
-          :component-name="componentCombinatorName"
+        <DtBox
+          v-if="props.componentCombinatorName"
+          id="combinator-inline-target"
         />
       </DtBox>
       <!-- eslint-disable-next-line vue/no-undef-components -->
@@ -181,13 +178,12 @@ import PageToc from '../components/PageToc.vue';
 import PageTocDropdown from '../components/PageTocDropdown.vue';
 import { usePageTocScrollSpy } from '../composables/usePageTocScrollSpy.js';
 import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
-import { getComponentCombinatorName } from '../utils/componentCombinator.js';
 import { getRightRailTocViewportValues } from '../utils/pageToc.js';
-import { computed, inject, ref, watch } from 'vue';
+import { computed, inject, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { usePageData } from 'vuepress/client';
 
-defineProps({
+const props = defineProps({
   prev: {
     type: Object,
     default: () => {
@@ -198,10 +194,12 @@ defineProps({
     default: () => {
     },
   },
+  componentCombinatorName: {
+    type: String,
+    default: null,
+  },
 });
 const pageData = usePageData();
-const componentCombinatorName = computed(() => getComponentCombinatorName(pageData.value?.frontmatter));
-const isCombinatorFullScreen = ref(false);
 const lastUpdated = computed(() => {
   const updatedTime = pageData.value?.git?.updatedTime;
   if (!updatedTime) return 'Not available';
@@ -226,11 +224,7 @@ const includeToc = computed(() => {
   return headers.value && headers.value.length > 0;
 });
 const rightRailTocViewportValues = computed(() => {
-  return getRightRailTocViewportValues(Boolean(componentCombinatorName.value));
-});
-
-watch([componentCombinatorName, () => viewport.above('xxxl')], () => {
-  isCombinatorFullScreen.value = false;
+  return getRightRailTocViewportValues(Boolean(props.componentCombinatorName));
 });
 
 // Pages whose headers are populated by their own Vue component via inject('headers')
