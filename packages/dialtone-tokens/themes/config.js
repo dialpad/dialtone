@@ -129,7 +129,8 @@ export function setBrand (theme, rootNode = document.documentElement, contrastTh
  * Legacy theme setter (original system)
  */
 function _setBrandLegacy(theme, rootNode = document.documentElement, contrastTheme = null) {
-  _setBrandAttributeOnRoot(theme.base.name, theme.brand.name, rootNode);
+  rootNode?.setAttribute('data-dt-theme', theme.base.name);
+  rootNode?.setAttribute('data-dt-brand', theme.brand.name);
   const styleRoot = rootNode?.shadowRoot ?? rootNode;
   // Load css files
   _setStyleTag('dialtone-css-theme', theme.base.css, styleRoot);
@@ -176,6 +177,7 @@ function _setBrandLayered(theme, rootNode = document.documentElement) {
     } else {
       _setStyleTag('dialtone-css-brand', theme.brand.css, styleRoot);
       rootNode?.setAttribute('data-dt-brand', theme.brand.name);
+      _applyBrandLockedMaterial(theme, rootNode);
     }
   }
 
@@ -224,10 +226,7 @@ function _removeStyleTag (id, rootNode) {
 /**
  * Set the dialtone theme and brand custom attributes on the root element
  */
-function _setBrandAttributeOnRoot (theme, brand, rootNode) {
-  rootNode?.setAttribute('data-dt-theme', theme);
-  rootNode?.setAttribute('data-dt-brand', brand);
-}
+
 
 /**
  * LAYERED SYSTEM HELPERS
@@ -656,6 +655,8 @@ export function hasBrandMaterialLock(brandTheme) {
  *   }
  * }
  */
+/** @deprecated Use setBrand instead */
+export const setTheme = setBrand;
 export function resetBrand(rootNode = document.documentElement) {
   const styleRoot = rootNode?.shadowRoot ?? rootNode;
 
