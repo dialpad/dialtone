@@ -362,6 +362,37 @@ describe('DtPopover Tests', () => {
         expect(document.activeElement).toBe(last);
       });
     });
+
+    describe('When focustrap is true and not modal', () => {
+      beforeEach(async () => {
+        mockProps = { modal: false, focustrap: true };
+        mockSlots = { content: MOCK_TRAP_CONTENT };
+
+        updateWrapper();
+        await wrapper.setProps({ open: true });
+        await flushPromises();
+      });
+
+      it('wraps focus from the last element to the first on Tab', async () => {
+        const first = popoverWindow.find('[data-qa="dt-popover-close"]').element;
+        const last = popoverWindow.find('[data-qa="trap-last"]').element;
+
+        last.focus();
+        await popoverWindow.trigger('keydown', { key: 'Tab' });
+
+        expect(document.activeElement).toBe(first);
+      });
+
+      it('wraps focus from the first element to the last on Shift+Tab', async () => {
+        const first = popoverWindow.find('[data-qa="dt-popover-close"]').element;
+        const last = popoverWindow.find('[data-qa="trap-last"]').element;
+
+        first.focus();
+        await popoverWindow.trigger('keydown', { key: 'Tab', shiftKey: true });
+
+        expect(document.activeElement).toBe(last);
+      });
+    });
   });
 
   describe('Pass-through class props', () => {
