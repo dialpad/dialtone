@@ -2,71 +2,27 @@
   <dt-stack class="d-ps-fixed d-all-0 d-of-hidden">
     <migration-banner />
     <doc-header />
-    <DtBox hidden padding-inline="300" surface="primary" scrollbar="always" min-block-size="0" class="d-fl1">
-      <!-- This is a future mobile-only sidebar, not yet hooked up. Don't tinker with it -->
+    <DtBox
+      id="sidebar-mobile"
+      padding-inline="300"
+      surface="primary"
+      scrollbar="always"
+      min-block-size="0"
+      class="d-fl1"
+    >
       <sidebar />
     </DtBox>
     <DtBox
+      id="layout-body"
       padding-block-end="0"
       min-block-size="0"
       class="d-fl1"
     >
-      <dt-stack direction="row" align="stretch" gap="150" class="d-h100p">
-        <DtBox
-          v-if="viewport.above('lg') && !$frontmatter.home && !$frontmatter.noSidebar"
-          padding-block-end="400"
-          :padding-inline-start="300"
-          :padding-inline-end="200"
-          min-inline-size="450"
-          max-inline-size="450"
-          block-size="100p"
-          scrollbar="move"
-        >
-          <sidebar />
-        </DtBox>
-        <DtBox
-          v-if="$frontmatter.home"
-          inline-size="100p"
-          padding-inline-end="250"
-        >
-          <home />
-        </DtBox>
-        <DtBox
-          v-else
-          min-inline-size="0"
-          inline-size="100p"
-          scrollbar="move"
-          scrollbar-content-class="dialtone-doc-page-scroll-container"
-          :padding-inline-end="viewport.pick({
-            default: '250',
-            lg: '300',
-          })"
-          padding-block-end="400"
-          :padding-inline-start="viewport.pick({
-            default: '250',
-            lg: false,
-          })"
-        >
-          <page
-            :prev="$frontmatter.prev || prev"
-            :next="$frontmatter.next || next"
-          />
-        </DtBox>
-        <DtBox
-          v-if="componentCombinatorName && viewport.above('xxxl')"
-          min-inline-size="1200"
-          inline-size="1200"
-          block-size="100p"
-          padding-block="300"
-          class="d-mie-300"
-        >
-          <!-- eslint-disable-next-line vue/no-undef-components -->
-          <component-combinator
-            class="d-h100p"
-            :component-name="componentCombinatorName"
-          />
-        </DtBox>
-      </dt-stack>
+      <layout-body
+        :prev="$frontmatter.prev || prev"
+        :next="$frontmatter.next || next"
+        :component-combinator-name="componentCombinatorName"
+      />
     </DtBox>
   </dt-stack>
 </template>
@@ -78,11 +34,9 @@
 // neither is tracked by VuePress's head management system.
 import '@dialpad/dialtone-tokens/tokens-base-light.css';
 import '@dialpad/dialtone-tokens/tokens-dp-light.css';
-import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
 import DocHeader from '../components/Header.vue';
+import LayoutBody from '../components/LayoutBody.vue';
 import Sidebar from '../components/Sidebar.vue';
-import Home from '../components/Home.vue';
-import Page from '../components/Page.vue';
 import MigrationBanner from '../../baseComponents/MigrationBanner.vue';
 import { getComponentCombinatorName } from '../utils/componentCombinator.js';
 import { isExternalUrl } from '../utils/isExternalUrl';
@@ -179,8 +133,6 @@ const findCurrent = () => {
   prev.value = isFirstItem && prevItems ? prevItems[prevItems.length - 1] : filteredItems[childIndex - 1];
   next.value = isLastItem && nextItems ? nextItems[0] : filteredItems[childIndex + 1];
 };
-
-const viewport = useViewportBreakpoints();
 
 watch(
   () => route.path,

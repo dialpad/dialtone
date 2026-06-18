@@ -1,21 +1,21 @@
 <!-- eslint-disable max-lines -->
 <template>
-  <DtStack v-if="viewport.above('lg')" hidden direction="row" gap="100">
-    <dt-button
-      class="dialtone-shell-btn"
-      active
-      to="/dialtone/"
-    >
-      Product Design
-    </dt-button>
-    <dt-button
-      class="dialtone-shell-btn"
-      href="https://dialpad.design/brand"
-    >
-      Brand Design
-    </dt-button>
-  </DtStack>
   <DtStack direction="row" gap="50">
+    <DtStack v-if="viewport.above('lg')" hidden direction="row" gap="100">
+      <dt-button
+        class="dialtone-shell-btn"
+        active
+        to="/dialtone/"
+      >
+        Product Design
+      </dt-button>
+      <dt-button
+        class="dialtone-shell-btn"
+        href="https://dialpad.design/brand"
+      >
+        Brand Design
+      </dt-button>
+    </DtStack>
     <DtBox v-if="viewport.above('md')" padding-inline-end="200">
       <dt-stack v-if="showBranchBadge" :title="branchName" direction="row" gap="50">
         <dt-icon name="branch" class="d-fc-muted" :size="100" />
