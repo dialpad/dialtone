@@ -1,6 +1,7 @@
 ---
 title: Migrating Anchor and Router Patterns to DtButton and DtLink
 description: DtButton and DtLink now render as router-link or anchor when you pass to or href. DtLink underline behavior is now a prop. A migration script handles the most common patterns.
+keywords: ["href", "to", "router link", "anchor", "cta", "underline"]
 ---
 
 ## TLDR

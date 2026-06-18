@@ -1,6 +1,7 @@
 ---
 title: Text Wrap
 description: Utilities for controlling how text wraps within an element.
+keywords: ["wrapping", "nowrap", "balance", "pretty", "truncate", "typography"]
 ---
 
 ## Nowrap

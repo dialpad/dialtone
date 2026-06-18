@@ -1,6 +1,7 @@
 ---
 title: Progress Circle
 description: A circular SVG progress indicator for determinate upload or processing progress.
+keywords: ["loader", "loading", "spinner", "upload", "processing", "DtProgressCircle", "dt-progress-circle"]
 status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-progress-circle--default

@@ -1,6 +1,7 @@
 ---
 title: CSS Cascade Layers
 description: Dialtone now uses CSS Cascade Layers to organize all styles into a predictable hierarchy, improving specificity control and making overrides more predictable.
+keywords: ["css layers", "@layer", "specificity", "imports", "overrides"]
 ---
 
 ## TLDR

@@ -1,6 +1,7 @@
 ---
 title: How to Contribute
 description: Thanks for your interest in contributing to Dialpad UI Kits!
+keywords: ["ui kits", "contribution", "patterns", "proposal", "review"]
 ---
 
 > [!INFO]

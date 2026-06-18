@@ -1,6 +1,7 @@
 ---
 title: Combobox Multi-Select
 description: Select allows users to make a single selection or multiple selections from a list of options.
+keywords: ["filter", "dropdown", "listbox", "DtComboboxMultiSelect", "dt-combobox-multi-select"]
 status: ready
 thumb: true
 # image: assets/images/components/combobox-multi-select.png

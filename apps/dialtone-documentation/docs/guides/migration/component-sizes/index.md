@@ -1,6 +1,7 @@
 ---
 title: Migrating Component Sizes to Numeric Scale
 description: Component size props move from t-shirt labels (xs, sm, md) to a numeric ordinal scale (100, 200, 300). Extensible, predictable for humans and LLMs, backward-compatible. Migration tools included.
+keywords: ["size prop", "t-shirt sizes", "numeric scale", "xs", "sm", "md"]
 ---
 
 ## TLDR

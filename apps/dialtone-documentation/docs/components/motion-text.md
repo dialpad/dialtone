@@ -1,6 +1,7 @@
 ---
 title: Motion Text
 description: A versatile, accessible text animation component with multiple animation modes, full accessibility support, and comprehensive customization options.
+keywords: ["animated text", "typing", "loading text", "animation", "DtMotionText", "dt-motion-text"]
 status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-motion-text--default

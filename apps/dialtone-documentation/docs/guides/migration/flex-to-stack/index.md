@@ -1,6 +1,7 @@
 ---
 title: Migrating from Flex CSS Utilities to DtStack
 description: Guide and migration tool for replacing d-d-flex utilities with the DtStack component. Covers automatic migration, edge cases, and flex-to-prop mapping.
+keywords: ["d-d-flex", "flexbox utilities", "stack component", "layout", "spacing", "css utilities"]
 ---
 
 ## TLDR

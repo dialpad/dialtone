@@ -1,6 +1,7 @@
 ---
 title: "DtAvatar: Visual Refresh Updates"
 description: "DtAvatar has been updated as part of the Dialtone visual refresh. Size prop moves to a numeric scale, group avatars gain full size support, iconSize is removed, and new color, iconOnly, and deactivated props are introduced."
+keywords: ["DtAvatar", "dt-avatar", "visual refresh", "initials", "image", "presence", "size"]
 ---
 
 ## TLDR

@@ -1,6 +1,7 @@
 ---
 title: Migrating Base Color Stops
 description: Base color stops have been standardized to a 12-stop scale. Includes migration tools for stop renames and upgrading to semantic color tokens.
+keywords: ["color tokens", "base colors", "semantic colors", "palette", "12-stop scale"]
 ---
 
 > [!WARNING] Breaking Change

@@ -1,6 +1,7 @@
 ---
 title: Dialpad UI Kits
 description: Domain-specific components built with Dialtone.
+keywords: ["product patterns", "application patterns", "templates", "domain components"]
 github_url: https://github.com/dialpad/dialpad-uikits
 prev: false
 next:

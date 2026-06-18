@@ -1,6 +1,7 @@
 ---
 title: Resizable
 description: A layout component that lets users resize adjacent panels by dragging a handle between them.
+keywords: ["resize", "split pane", "panel", "drag handle", "DtResizable", "dt-resizable"]
 status: beta
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-resizable--default

@@ -1,6 +1,7 @@
 ---
 title: Migrating Component Props, Events, and Slots
 description: Prop renames, value standardization, event consolidation, slot renames, and removal of rootClass/wrapperClass/containerClass. Automated migration script included.
+keywords: ["slots", "v-model", "component api", "Vue", "rootClass", "wrapperClass", "containerClass"]
 ---
 
 > [!WARNING] Breaking Changes

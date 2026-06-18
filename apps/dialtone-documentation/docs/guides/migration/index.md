@@ -1,6 +1,7 @@
 ---
 title: Migration Guide
 description: Step-by-step guides for migrating to the latest Dialtone major version. Each guide covers what changed, why it changed, and how to update your code — including automated migration tools.
+keywords: ["upgrade", "breaking changes", "deprecations", "codemod", "automated tooling"]
 ---
 
 This guide walks you through every breaking and deprecation change in the upcoming Dialtone major release. Work through each section that applies to your codebase, run the provided migration tools, and verify the results.

@@ -1,6 +1,7 @@
 ---
 title: Migrating Border-Radius Utility Classes to Logical Names
 description: Physical-direction and legacy pixel-suffixed border-radius utilities are deprecated in favor of logical names. ESLint auto-fix and a migration script are available.
+keywords: ["rounded corners", "logical radius", "start end", "css utilities", "eslint", "codemod"]
 ---
 
 > [!INFO] Deprecated aliases still render

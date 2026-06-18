@@ -1,6 +1,7 @@
 ---
 title: What are UI Kits?
 description: An introduction to UI Kits -- domain-specific components built with Dialtone.
+keywords: ["design kits", "product patterns", "composition", "templates", "domain components"]
 prev:
   text: Meet the Kits
   link: /ui-kits/

@@ -1,6 +1,7 @@
 ---
 title: Combobox With Popover
 description: A combobox that renders the listbox inside a popover therefore the listbox is rendered at the root of the document.
+keywords: ["dropdown", "select", "autocomplete", "listbox", "append to body", "DtComboboxWithPopover", "dt-combobox-with-popover"]
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-with-popover--default
