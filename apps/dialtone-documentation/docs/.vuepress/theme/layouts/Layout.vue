@@ -2,6 +2,10 @@
   <dt-stack class="d-ps-fixed d-all-0 d-of-hidden">
     <migration-banner />
     <doc-header />
+    <DtBox hidden padding-inline="300" surface="primary" scrollbar="always" min-block-size="0" class="d-fl1">
+      <!-- This is a future mobile-only sidebar, not yet hooked up. Don't tinker with it -->
+      <sidebar />
+    </DtBox>
     <DtBox
       padding-block-end="0"
       min-block-size="0"

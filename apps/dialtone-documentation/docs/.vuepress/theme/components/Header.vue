@@ -8,18 +8,16 @@
     class="d-zi-navigation"
   >
     <DtBox
-      :padding="viewport.pick({
-        default: '150',
-        md: '200',
-      })"
+      padding="200"
       padding-inline="250"
       surface="secondary"
+      border-color="subtle"
+      :border-width-block-end="viewport.pick({
+        default: '100',
+        lg: false,
+      })"
       :border-radius="viewport.pick({
         lg: '400',
-      })"
-      :shadow="viewport.pick({
-        default: 'l',
-        lg: false,
       })"
     >
       <dt-stack direction="row" justify="space-between" gap="400">
