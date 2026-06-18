@@ -1,17 +1,19 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   setMode,
-  setBrand,
+  setBaseBrand,
   setMaterial,
   setContrast,
+  setBrand,
   initDialtoneTheme,
   getBrandMaterial,
   hasBrandMaterialLock,
-  resetTheme,
+  resetBrand,
   VALID_MATERIALS,
 } from '@/themes/config.js';
 import {
   dpStub,
+  tmoStub,
   melonStub,
   botanyStub,
   unknownMaterialBrandStub,
@@ -29,7 +31,7 @@ describe('themes/config.js', () => {
   });
 
   afterEach(() => {
-    resetTheme(document.documentElement);
+    resetBrand(document.documentElement);
     document.head
       .querySelectorAll('style[id^="dialtone-css-"]')
       .forEach((el) => el.remove());
@@ -81,10 +83,10 @@ describe('themes/config.js', () => {
     });
   });
 
-  describe('setBrand', () => {
+  describe('setBaseBrand', () => {
     describe('When the brand declares an unknown material name', () => {
       beforeEach(() => {
-        setBrand(unknownMaterialBrandStub, root);
+        setBaseBrand(unknownMaterialBrandStub, root);
       });
 
       it('Should warn with brand and material context', () => {
@@ -108,7 +110,7 @@ describe('themes/config.js', () => {
         ['brand without css', { brand: { name: 'x' } }],
         ['brand with non-string css', { brand: { name: 'x', css: 123 } }],
       ])('Should throw TypeError on %s', (_label, input) => {
-        expect(() => setBrand(input, root)).toThrow(TypeError);
+        expect(() => setBaseBrand(input, root)).toThrow(TypeError);
       });
     });
   });
@@ -165,7 +167,7 @@ describe('themes/config.js', () => {
   describe('Shadow DOM rootNode handling', () => {
     const directShadowRootCallers = [
       ['setMode', (rootNode) => setMode('dark', rootNode)],
-      ['setBrand', (rootNode) => setBrand(dpStub, rootNode)],
+      ['setBaseBrand', (rootNode) => setBaseBrand(dpStub, rootNode)],
       ['setMaterial', (rootNode) => setMaterial('steel', rootNode)],
       ['setContrast', (rootNode) => setContrast(highContrastStub, rootNode)],
       ['initDialtoneTheme', (rootNode) => initDialtoneTheme(dpStub, 'light', rootNode)],
@@ -191,7 +193,7 @@ describe('themes/config.js', () => {
       expect(host.getAttribute('data-dt-brand')).toBe(dpStub.brand.name);
       expect(host.getAttribute('data-dt-contrast')).toBe('default');
       expect(shadowRoot.querySelector('#dialtone-css-core')).not.toBeNull();
-      expect(shadowRoot.querySelector('#dialtone-css-brand-colors')).not.toBeNull();
+      expect(shadowRoot.querySelector('#dialtone-css-brand-base')).not.toBeNull();
     });
   });
 
@@ -215,11 +217,65 @@ describe('themes/config.js', () => {
     });
   });
 
-  describe('resetTheme', () => {
+  describe('setBrand (layered format — brand overlay)', () => {
+    beforeEach(() => {
+      initDialtoneTheme(dpStub, 'light', root);
+    });
+
+    describe('When called with a brand different from the base', () => {
+      beforeEach(() => {
+        setBrand(tmoStub, root);
+      });
+
+      it('Should inject dialtone-css-brand', () => {
+        expect(root.querySelector('#dialtone-css-brand')).not.toBeNull();
+      });
+
+      it('Should set data-dt-brand to the override brand', () => {
+        expect(root.getAttribute('data-dt-brand')).toBe('tmo');
+      });
+
+      it('Should leave dialtone-css-brand-base (base) untouched', () => {
+        expect(root.querySelector('#dialtone-css-brand-base')).not.toBeNull();
+      });
+    });
+
+    describe('When called with the same brand as the base', () => {
+      beforeEach(() => {
+        setBrand(tmoStub, root);
+        setBrand(dpStub, root);
+      });
+
+      it('Should remove dialtone-css-brand', () => {
+        expect(root.querySelector('#dialtone-css-brand')).toBeNull();
+      });
+
+      it('Should restore data-dt-brand to the base brand', () => {
+        expect(root.getAttribute('data-dt-brand')).toBe('dp');
+      });
+    });
+
+    describe('When called with null', () => {
+      beforeEach(() => {
+        setBrand(tmoStub, root);
+        setBrand(null, root);
+      });
+
+      it('Should remove dialtone-css-brand', () => {
+        expect(root.querySelector('#dialtone-css-brand')).toBeNull();
+      });
+
+      it('Should restore data-dt-brand to the base brand', () => {
+        expect(root.getAttribute('data-dt-brand')).toBe('dp');
+      });
+    });
+  });
+
+  describe('resetBrand', () => {
     describe('When called on a root with theme attributes set', () => {
       beforeEach(() => {
         initDialtoneTheme(melonStub, 'dark', root);
-        resetTheme(root);
+        resetBrand(root);
       });
 
       it.each([
