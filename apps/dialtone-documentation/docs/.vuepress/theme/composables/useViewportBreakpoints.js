@@ -1,7 +1,8 @@
 import { computed, onMounted, onUnmounted, readonly, ref } from 'vue';
 import {
-  isAboveViewportBreakpoint,
-  pickViewportValue,
+  getActiveViewportBreakpoint,
+  isAboveViewportBreakpointName,
+  pickViewportValueByBreakpointName,
   VIEWPORT_BREAKPOINTS,
 } from '../utils/viewportBreakpoints.js';
 
@@ -10,15 +11,28 @@ import {
  */
 
 /**
+ * @typedef {import('../utils/viewportBreakpoints.js').ActiveViewportBreakpointName} ActiveViewportBreakpointName
+ */
+
+/**
  * @template T
  * @typedef {import('../utils/viewportBreakpoints.js').ViewportPickValues<T>} ViewportPickValues
  */
 
 const width = ref(0);
+/** @type {import('vue').Ref<ActiveViewportBreakpointName>} */
+const activeBreakpoint = ref('');
 let activeConsumers = 0;
 
 const updateWidth = () => {
-  width.value = window.innerWidth;
+  const nextWidth = window.innerWidth;
+  const nextActiveBreakpoint = getActiveViewportBreakpoint(nextWidth);
+
+  width.value = nextWidth;
+
+  if (nextActiveBreakpoint !== activeBreakpoint.value) {
+    activeBreakpoint.value = nextActiveBreakpoint;
+  }
 };
 
 const startTracking = () => {
@@ -36,10 +50,12 @@ const stopTracking = () => {
 
   window.removeEventListener('resize', updateWidth);
   width.value = 0;
+  activeBreakpoint.value = '';
 };
 
 /**
- * Tracks viewport width and exposes docs-theme breakpoint helpers.
+ * Tracks viewport width by active breakpoint band and exposes docs-theme
+ * breakpoint helpers.
  *
  * @example
  * ```vue
@@ -118,7 +134,7 @@ export function useViewportBreakpoints () {
    * @returns {boolean}
    */
   const above = (name) => {
-    return isAboveViewportBreakpoint(width.value, name);
+    return isAboveViewportBreakpointName(activeBreakpoint.value, name);
   };
 
   /**
@@ -127,11 +143,12 @@ export function useViewportBreakpoints () {
    * @returns {T | undefined}
    */
   const pick = (values) => {
-    return pickViewportValue(width.value, values);
+    return pickViewportValueByBreakpointName(activeBreakpoint.value, values);
   };
 
   return {
     width: readonly(width),
+    activeBreakpoint: readonly(activeBreakpoint),
     breakpoints: VIEWPORT_BREAKPOINTS,
     active: computed(() => {
       return Object.fromEntries(

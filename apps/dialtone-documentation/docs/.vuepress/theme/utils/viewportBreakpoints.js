@@ -7,6 +7,10 @@
  */
 
 /**
+ * @typedef {ViewportBreakpointName | ''} ActiveViewportBreakpointName
+ */
+
+/**
  * @template T
  * @typedef {Partial<Record<ViewportBreakpointName, T>> & { default?: T }} ViewportPickValues
  */
@@ -42,6 +46,16 @@ const assertKnownBreakpoint = (name) => {
 };
 
 /**
+ * @param {ActiveViewportBreakpointName} activeName
+ * @returns {void}
+ */
+const assertKnownActiveBreakpoint = (activeName) => {
+  if (activeName === '') return;
+
+  assertKnownBreakpoint(activeName);
+};
+
+/**
  * @template T
  * @param {ViewportPickValues<T>} values
  * @returns {void}
@@ -56,13 +70,56 @@ export const assertKnownViewportValueKeys = (values) => {
 
 /**
  * @param {number} width
+ * @returns {ActiveViewportBreakpointName}
+ */
+export const getActiveViewportBreakpoint = (width) => {
+  for (const name of VIEWPORT_BREAKPOINT_NAMES_DESC) {
+    if (width > VIEWPORT_BREAKPOINTS[name]) return name;
+  }
+
+  return '';
+};
+
+/**
+ * @param {ActiveViewportBreakpointName} activeName
+ * @param {ViewportBreakpointName} name
+ * @returns {boolean}
+ */
+export const isAboveViewportBreakpointName = (activeName, name) => {
+  assertKnownBreakpoint(name);
+  if (activeName === '') return false;
+
+  assertKnownActiveBreakpoint(activeName);
+
+  return VIEWPORT_BREAKPOINTS[activeName] >= VIEWPORT_BREAKPOINTS[name];
+};
+
+/**
+ * @param {number} width
  * @param {ViewportBreakpointName} name
  * @returns {boolean}
  */
 export const isAboveViewportBreakpoint = (width, name) => {
-  assertKnownBreakpoint(name);
+  return isAboveViewportBreakpointName(getActiveViewportBreakpoint(width), name);
+};
 
-  return width > VIEWPORT_BREAKPOINTS[name];
+/**
+ * @template T
+ * @param {ActiveViewportBreakpointName} activeName
+ * @param {ViewportPickValues<T>} values
+ * @returns {T | undefined}
+ */
+export const pickViewportValueByBreakpointName = (activeName, values) => {
+  assertKnownActiveBreakpoint(activeName);
+  assertKnownViewportValueKeys(values);
+
+  for (const name of VIEWPORT_BREAKPOINT_NAMES_DESC) {
+    if (Object.hasOwn(values, name) && isAboveViewportBreakpointName(activeName, name)) {
+      return values[name];
+    }
+  }
+
+  return values[PICK_DEFAULT_KEY];
 };
 
 /**
@@ -72,13 +129,5 @@ export const isAboveViewportBreakpoint = (width, name) => {
  * @returns {T | undefined}
  */
 export const pickViewportValue = (width, values) => {
-  assertKnownViewportValueKeys(values);
-
-  for (const name of VIEWPORT_BREAKPOINT_NAMES_DESC) {
-    if (Object.hasOwn(values, name) && isAboveViewportBreakpoint(width, name)) {
-      return values[name];
-    }
-  }
-
-  return values[PICK_DEFAULT_KEY];
+  return pickViewportValueByBreakpointName(getActiveViewportBreakpoint(width), values);
 };

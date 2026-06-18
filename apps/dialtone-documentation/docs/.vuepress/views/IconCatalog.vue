@@ -103,7 +103,7 @@
     :open="isModalOpen"
     size="full"
     content-class="d-wmx100p d-pie-400"
-    @update:open="isModalOpen = false"
+    @update:open="isModalOpen = $event"
   >
     <template #header>
       <span
@@ -125,16 +125,18 @@ import { computed, onMounted, ref, watch, nextTick } from 'vue';
 import IconPopover from '../baseComponents/IconPopover.vue';
 import IconPopoverContent from '../baseComponents/IconPopoverContent.vue';
 import { debounce } from '../common/utilities';
+import { useViewportBreakpoints } from '../theme/composables/useViewportBreakpoints.js';
 
+const viewport = useViewportBreakpoints();
 const selectedCategory = ref('');
 const search = ref(null);
 const searching = ref(false);
 const searchRef = ref(null);
-const isMobile = ref(false);
 const isModalOpen = ref(false);
 const isPopoverOpen = ref({});
 const filteredIconsList = ref({});
 const selectedIcon = ref(undefined);
+const usesIconModal = computed(() => !viewport.above('lg'));
 const excludedIcons = [
   'brand-dialpad-meetings',
   'brand-dialpad',
@@ -220,12 +222,12 @@ const filterIconList = () => {
 
 const selectIcon = (icon) => {
   selectedIcon.value = icon;
-  if (isMobile.value) isModalOpen.value = true;
+  if (usesIconModal.value) isModalOpen.value = true;
   else isPopoverOpen.value[icon.name] = !isPopoverOpen.value[icon.name];
 };
 
 const scrollToIcon = async (iconName) => {
-  if (isMobile.value) {
+  if (usesIconModal.value) {
     const iconsList = filteredIconsList.value;
     for (const category of Object.keys(iconsList)) {
       if (iconsList[category][iconName]) {
@@ -257,7 +259,6 @@ watch(selectedCategory, (newCategory) => {
 });
 
 onMounted(() => {
-  isMobile.value = window.outerWidth <= 980;
   // Check for existing search parameter in URL
   const queryParams = new URLSearchParams(window.location.search);
   const searchParam = queryParams.get('search');
