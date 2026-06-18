@@ -11,7 +11,6 @@
     navigation-type="arrow-keys"
     placement="bottom-start"
     content-width="anchor"
-    max-height="400px"
     @opened="onOpened"
   >
     <template #anchor="{ attrs }">
@@ -35,8 +34,8 @@
             :style="swatchStyle(selectedOption.resolved)"
           />
           <component
-            v-else
             :is="selectedOption.previewComponent"
+            v-else
             size="200"
             class="d-fc-muted"
           />
@@ -63,7 +62,6 @@
     <template #list="{ close }">
       <dt-box
         v-if="showSearch"
-        class="dtc-search-box"
         surface="overlay"
         padding-block-end="50"
         border-width-block-end="100"
@@ -73,20 +71,18 @@
           ref="searchInput"
           v-model="query"
           type="search"
-          :size="100"
+          aria-label="Search"
           placeholder="Search"
           @keydown="onSearchKeydown($event, close)"
         >
           <template #startIcon="{ iconSize }">
             <dt-icon-search :size="iconSize" />
           </template>
-          <template #endIcon="{ clear }">
+          <template v-if="query.length" #endIcon="{ clear }">
             <dt-button
-              :style="!query.length ? { visibility: 'hidden', pointerEvents: 'none' } : undefined"
               kind="muted"
               importance="clear"
               :size="100"
-              circle
               aria-label="Clear search"
               @click="clear"
             >
@@ -97,7 +93,7 @@
           </template>
         </dt-input>
       </dt-box>
-      <div>
+      <div class="d-of-y-auto d-hmx-400 d-p-50" @keydown.up="onListArrowUp">
         <dt-list-item
           v-for="option in filteredOptions"
           :key="option.value"
@@ -119,17 +115,17 @@
               class="d-ba d-bc-subtle d-bar-circle d-as-center"
               :style="swatchStyle(option.resolved)"
             />
-            <span>{{ option.label }}</span>
             <component
-              v-if="option.previewComponent"
               :is="option.previewComponent"
-              size="200"
-              class="d-mis-auto d-as-center d-fc-muted"
+              v-if="option.previewComponent"
+              size="400"
+              class="d-as-center d-fc-tertiary"
             />
+            <span>{{ option.label }}</span>
             <dt-text
               v-if="option.resolved && !isColor(option.resolved)"
               kind="body"
-              :size="100"
+              :size="400"
               tone="muted"
               class="d-mis-auto"
             >
@@ -138,22 +134,17 @@
           </dt-stack>
         </dt-list-item>
       </div>
-      <dt-text
+      <dt-empty-state
         v-if="!filteredOptions.length"
-        kind="body"
-        :size="100"
-        tone="muted"
-        as="div"
-        class="d-px-200 d-py-150 d-ta-center"
-      >
-        No matches
-      </dt-text>
+        size="200"
+        body-text="No matches"
+      />
     </template>
   </dt-dropdown>
 </template>
 
 <script setup>
-import { DtBox, DtButton, DtInput, DtStack, DtText } from '@dialpad/dialtone-vue';
+import { DtBox, DtButton, DtEmptyState, DtInput, DtStack, DtText } from '@dialpad/dialtone-vue';
 import { DtIconClose, DtIconChevronsUpDown, DtIconSearch } from '@dialpad/dialtone-icons/vue';
 
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
@@ -291,6 +282,7 @@ function onSearchKeydown (e, close) {
     e.preventDefault(); // no page scroll
     return; // let DtDropdown's navigation handle it
   }
+  if (e.key === 'Tab') return; // let focus trap handle Tab/Shift+Tab
   e.stopPropagation();
   if (e.key === 'Enter') {
     e.preventDefault();
@@ -298,6 +290,21 @@ function onSearchKeydown (e, close) {
   } else if (e.key === 'Escape') {
     close();
   }
+}
+
+/**
+ * When ArrowUp is pressed on the first list item, returns focus to the search
+ * input so the user can refine the query without reaching for the mouse.
+ *
+ * @param {KeyboardEvent} e
+ */
+function onListArrowUp (e) {
+  if (!showSearch.value) return;
+  const items = e.currentTarget.querySelectorAll('[role="menuitem"]');
+  if (!items.length || !items[0].contains(e.target)) return;
+  e.preventDefault();
+  e.stopPropagation();
+  searchInput.value?.$el?.querySelector('input')?.focus();
 }
 </script>
 
@@ -309,16 +316,3 @@ export default {
   name: 'DtcControlSelection',
 };
 </script>
-
-<style scoped>
-/*
- * Stick the search box to the top of the popover's scroll container so it
- * stays visible as the user scrolls through the list. z-index: 1 keeps it
- * above list items that slide under it.
- */
-.dtc-search-box {
-  position: sticky;
-  inset-block-start: 0;
-  z-index: 1;
-}
-</style>
