@@ -68,35 +68,37 @@ function _blogPostsFrontmatter (app) {
   }
 }
 
-function _injectOverviewPages (app) {
+function _overviewFileName (name) {
+  return name
+    .toLowerCase()
+    .replaceAll('&', 'and')
+    .replaceAll(/['’]/g, '')
+    .replaceAll(/[^a-z0-9]+/g, '-')
+    .replaceAll(/^-|-$/g, '');
+}
+
+function _getDialtoneOverviewItems (sidebar) {
+  const navItems = sidebar?.nav || [];
+
+  return navItems.filter(item => item.link !== '/dialtone/');
+}
+
+function _injectOverviewPages (app, options) {
   const dialtoneIndexPage = app.pages.find(page => page.path === '/dialtone/');
   if (!dialtoneIndexPage) return;
 
-  const pagePaths = [
-    '/components/',
-    '/utilities/',
-    '/tokens/',
-    '/guides/content/',
-    '/functions-and-utilities/',
-  ];
-
-  dialtoneIndexPage.data.overviewPages = pagePaths.map(path => {
-    const page = app.pages.find(p => p.path === path);
+  dialtoneIndexPage.data.overviewPages = _getDialtoneOverviewItems(options.sidebar).map(item => {
+    const page = app.pages.find(p => p.path === item.link);
     if (!page) return null;
-
-    const fileName = page.frontmatter.title.toLowerCase().replaceAll(' ', '-');
-
-    // For /components/, hardcode thumb since we can't modify its frontmatter
-    // (it uses <overview> for its own children)
-    const thumb = path === '/components/' ? true : page.frontmatter.thumb;
 
     return {
       title: page.frontmatter.title,
-      shortTitle: page.frontmatter.shortTitle,
+      shortTitle: item.text || page.frontmatter.shortTitle,
       description: page.frontmatter.description,
-      thumb: thumb,
-      fileName: fileName,
-      link: path,
+      status: item.status || page.frontmatter.status,
+      thumb: true,
+      fileName: _overviewFileName(item.text || page.frontmatter.shortTitle || page.frontmatter.title),
+      link: item.link,
     };
   }).filter(Boolean);
 }
@@ -274,7 +276,7 @@ export const dialtoneVuepressTheme = (options) => ({
 
     onInitialized (app) {
       _blogPostsFrontmatter(app);
-      _injectOverviewPages(app);
+      _injectOverviewPages(app, options);
       _extractFrontmatter(
         app,
         '/guides/',

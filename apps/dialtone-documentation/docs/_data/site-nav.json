@@ -1016,7 +1016,9 @@
     },
     {
       "text": "Downloads",
-      "link": "/downloads/"
+      "icon": "download",
+      "link": "/downloads/",
+      "status": "new"
     }
   ]
 }
