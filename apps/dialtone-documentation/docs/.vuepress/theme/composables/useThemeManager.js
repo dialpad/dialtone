@@ -142,11 +142,9 @@ export function useThemeManager(options = {}) {
    * @param {string} brandName - The brand theme name
    */
   const applyBrandTheme = (brandName) => {
-    // DP's base CSS is already loaded in the HTML — switching back to it requires
-    // stripping any previously injected brand override tag. TODO: replace with
-    // a clearBrand() export from @dialpad/dialtone-tokens/themes/config when added.
+    // DP is the base brand — clearing the overlay reverts to it.
     if (brandName === 'dp') {
-      document.getElementById('dialtone-css-brand-colors')?.remove();
+      setBrand(null, document.documentElement);
       return;
     }
 
@@ -231,9 +229,6 @@ export function useThemeManager(options = {}) {
 
     // Use shared setMode function from config.js (handles attribute setting)
     setModeConfig(mode, document.documentElement);
-
-    // Set brand attribute manually (setBrand will handle the style injection)
-    document.documentElement.setAttribute('data-dt-brand', brandName);
 
     if (!isMaterialLocked.value) {
       applyMaterialTheme(material);

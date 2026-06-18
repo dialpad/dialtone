@@ -1,7 +1,12 @@
 const STUB_CSS = ':root {}';
+const TMO_CSS = ':root { --dt-color-brand: red; }';
 
 export const dpStub = {
   brand: { name: 'dp', css: STUB_CSS },
+};
+
+export const tmoStub = {
+  brand: { name: 'tmo', css: TMO_CSS },
 };
 
 export const melonStub = {
