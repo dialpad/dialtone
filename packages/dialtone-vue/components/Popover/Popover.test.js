@@ -392,6 +392,29 @@ describe('DtPopover Tests', () => {
 
         expect(document.activeElement).toBe(last);
       });
+
+      it('closes the popover on Escape', async () => {
+        await popoverWindow.trigger('keydown', { key: 'Escape' });
+        await flushPromises();
+
+        expect(popoverWindow.attributes('aria-hidden')).toBe('true');
+      });
+
+      it('restores focus to the previously focused element on Escape', async () => {
+        // Close so the directive deactivates, then set a known previous focus
+        await wrapper.setProps({ open: false });
+        await flushPromises();
+        button.element.focus();
+
+        // Reopen — directive activates and captures button as previousFocus
+        await wrapper.setProps({ open: true });
+        await flushPromises();
+
+        await popoverWindow.trigger('keydown', { key: 'Escape' });
+        await flushPromises();
+
+        expect(document.activeElement).toBe(button.element);
+      });
     });
   });
 

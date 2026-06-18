@@ -47,7 +47,11 @@
       <dt-lazy-show
         :id="id"
         ref="content"
-        v-dt-focustrap="{ active: (modal || focustrap) && isOpen, initialFocus: false, restoreFocus: false }"
+        v-dt-focustrap="{
+          active: (modal || focustrap) && isOpen,
+          initialFocus: false,
+          restoreFocus: !modal && focustrap,
+        }"
         :role="role"
         :data-qa="$attrs['data-qa'] ? `${$attrs['data-qa']}__dialog` : 'dt-popover'"
         :aria-hidden="`${!isOpen}`"

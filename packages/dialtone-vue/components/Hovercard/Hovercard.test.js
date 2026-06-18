@@ -252,6 +252,23 @@ describe('DtHovercard Tests', () => {
         const popover = wrapper.findComponent(DtPopover);
         expect(popover.props('focustrap')).toBeFalsy();
       });
+
+      it('closes and restores focus to the anchor on Escape', async () => {
+        // Focus the anchor before opening so the directive captures it as previousFocus
+        button.element.focus();
+
+        vi.useFakeTimers();
+        await anchor.trigger('mouseenter');
+        vi.runAllTimers();
+        await flushPromises();
+
+        // Trigger Escape on the teleported popover dialog (dt-lazy-show)
+        const popoverDialog = wrapper.findComponent(DtPopover).findComponent({ ref: 'content' });
+        await popoverDialog.trigger('keydown', { key: 'Escape' });
+        await flushPromises();
+
+        expect(document.activeElement).toBe(button.element);
+      });
     });
   });
 });
