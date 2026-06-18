@@ -103,14 +103,15 @@ export function setBrand (theme, rootNode = document.documentElement, contrastTh
       '[Dialtone] You passed a ShadowRoot directly to setBrand(). ' +
       'Please pass the host element instead. The function will access shadowRoot automatically.',
     );
+    return;
   }
 
-  // null → clear the brand override layer and restore the base brand attribute
+  // null → clear the brand overlay and restore the base brand + material
   if (theme === null) {
-    const styleRoot = rootNode?.shadowRoot ?? rootNode;
-    _removeStyleTag('dialtone-css-brand', styleRoot);
+    _removeStyleTag('dialtone-css-brand', rootNode?.shadowRoot ?? rootNode);
     if (initializationState) {
       rootNode?.setAttribute('data-dt-brand', initializationState.brand);
+      rootNode?.setAttribute('data-dt-material', initializationState.material ?? 'sandstone');
     }
     return;
   }
@@ -174,6 +175,7 @@ function _setBrandLayered(theme, rootNode = document.documentElement) {
     if (baseBrand && theme.brand.name === baseBrand) {
       _removeStyleTag('dialtone-css-brand', styleRoot);
       rootNode?.setAttribute('data-dt-brand', baseBrand);
+      rootNode?.setAttribute('data-dt-material', initializationState?.material ?? 'sandstone');
     } else {
       _setStyleTag('dialtone-css-brand', theme.brand.css, styleRoot);
       rootNode?.setAttribute('data-dt-brand', theme.brand.name);
@@ -217,15 +219,8 @@ function _setStyleTag (id, content, rootNode, beforeId = null) {
  * Remove a style tag with the given id
  */
 function _removeStyleTag (id, rootNode) {
-  const existingStyleTag = rootNode?.querySelector('#' + id);
-  if (existingStyleTag) {
-    existingStyleTag.remove();
-  }
+  rootNode?.querySelector('#' + id)?.remove();
 }
-
-/**
- * Set the dialtone theme and brand custom attributes on the root element
- */
 
 
 /**
@@ -312,15 +307,9 @@ export function setBaseBrand(brandTheme, rootNode = document.documentElement) {
     );
   }
 
-  if (typeof brandTheme.brand.name !== 'string' || !brandTheme.brand.name) {
+  if (typeof brandTheme.brand.name !== 'string' || !brandTheme.brand.name || typeof brandTheme.brand.css !== 'string') {
     throw new TypeError(
-      '[Dialtone] setBaseBrand: brandTheme.brand.name must be a non-empty string.',
-    );
-  }
-
-  if (typeof brandTheme.brand.css !== 'string') {
-    throw new TypeError(
-      '[Dialtone] setBaseBrand: brandTheme.brand.css must be a string containing CSS.',
+      '[Dialtone] setBaseBrand: brandTheme.brand.name must be a non-empty string and brandTheme.brand.css must be a string.',
     );
   }
 
@@ -338,6 +327,15 @@ export function setBaseBrand(brandTheme, rootNode = document.documentElement) {
   rootNode?.setAttribute('data-dt-brand', brandTheme.brand.name);
 
   _applyBrandLockedMaterial(brandTheme, rootNode);
+
+  // Clear any active overlay — its variables would otherwise win over the new base.
+  _removeStyleTag('dialtone-css-brand', styleRoot);
+
+  // Update initializationState so setBrand(null) reverts to this new base, not the original.
+  if (initializationState) {
+    initializationState.brand = brandTheme.brand.name;
+    initializationState.material = getBrandMaterial(brandTheme) ?? 'sandstone';
+  }
 }
 
 function _applyBrandLockedMaterial(brandTheme, rootNode) {
@@ -513,15 +511,9 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
     );
   }
 
-  if (typeof brandTheme.brand.name !== 'string' || !brandTheme.brand.name) {
+  if (typeof brandTheme.brand.name !== 'string' || !brandTheme.brand.name || typeof brandTheme.brand.css !== 'string') {
     throw new TypeError(
-      '[Dialtone] initDialtoneTheme: brandTheme.brand.name must be a non-empty string.',
-    );
-  }
-
-  if (typeof brandTheme.brand.css !== 'string') {
-    throw new TypeError(
-      '[Dialtone] initDialtoneTheme: brandTheme.brand.css must be a string containing CSS.',
+      '[Dialtone] initDialtoneTheme: brandTheme.brand.name must be a non-empty string and brandTheme.brand.css must be a string.',
     );
   }
 
@@ -609,6 +601,7 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
     brand: brandTheme.brand.name,
     mode: mode,
     contrast: 'default',
+    material: getBrandMaterial(brandTheme) ?? 'sandstone',
   };
 }
 
@@ -624,9 +617,7 @@ export function getBrandMaterial(brandTheme) {
  * @param {BrandTheme} brandTheme
  * @returns {boolean}
  */
-export function hasBrandMaterialLock(brandTheme) {
-  return getBrandMaterial(brandTheme) !== null;
-}
+export const hasBrandMaterialLock = (brandTheme) => getBrandMaterial(brandTheme) !== null;
 
 /**
  * Reset theme for a given rootNode - useful for testing and cleanup
@@ -657,7 +648,17 @@ export function hasBrandMaterialLock(brandTheme) {
  */
 /** @deprecated Use setBrand instead */
 export const setTheme = setBrand;
+/** @deprecated Use resetBrand instead */
+export const resetTheme = resetBrand;
 export function resetBrand(rootNode = document.documentElement) {
+  if (rootNode instanceof ShadowRoot) {
+    console.warn(
+      '[Dialtone] You passed a ShadowRoot directly to resetBrand(). ' +
+      'Please pass the host element instead. The function will access shadowRoot automatically.',
+    );
+    return;
+  }
+
   const styleRoot = rootNode?.shadowRoot ?? rootNode;
 
   // Clear initialization state (only one instance per app)

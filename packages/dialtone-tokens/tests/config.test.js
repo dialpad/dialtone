@@ -269,6 +269,50 @@ describe('themes/config.js', () => {
         expect(root.getAttribute('data-dt-brand')).toBe('dp');
       });
     });
+
+    describe('When a locked-material overlay is cleared with null', () => {
+      beforeEach(() => {
+        initDialtoneTheme(dpStub, 'light', root);
+        setBrand(melonStub, root); // melon locks to iron
+        setBrand(null, root);
+      });
+
+      it('Should restore data-dt-material to the base brand material (sandstone for dp)', () => {
+        expect(root.getAttribute('data-dt-material')).toBe('sandstone');
+      });
+    });
+
+    describe('When a locked-material overlay is cleared by passing the base brand', () => {
+      beforeEach(() => {
+        initDialtoneTheme(dpStub, 'light', root);
+        setBrand(melonStub, root); // melon locks to iron
+        setBrand(dpStub, root);
+      });
+
+      it('Should restore data-dt-material to the base brand material (sandstone for dp)', () => {
+        expect(root.getAttribute('data-dt-material')).toBe('sandstone');
+      });
+    });
+  });
+
+  describe('setBaseBrand', () => {
+    describe('When called while a brand overlay is active', () => {
+      beforeEach(() => {
+        initDialtoneTheme(dpStub, 'light', root);
+        setBrand(tmoStub, root);
+        setBaseBrand(melonStub, root);
+      });
+
+      it('Should clear the stale overlay tag', () => {
+        expect(root.querySelector('#dialtone-css-brand')).toBeNull();
+      });
+
+      it('Should update initializationState so setBrand(null) reverts to the new base', () => {
+        setBrand(tmoStub, root);
+        setBrand(null, root);
+        expect(root.getAttribute('data-dt-brand')).toBe('melon');
+      });
+    });
   });
 
   describe('resetBrand', () => {
