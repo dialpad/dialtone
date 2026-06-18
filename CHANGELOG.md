@@ -1,3 +1,10 @@
+# [9.188.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.188.0-next.1...dialtone/v9.188.0-next.2) (2026-06-18)
+
+
+### Features
+
+* **Dialtone Tokens:** NO-JIRA rework brand theming API ([#1332](https://github.com/dialpad/dialtone/issues/1332)) ([011afc2](https://github.com/dialpad/dialtone/commit/011afc2c73e8b9364a42cd54d0d862c185090dc8))
+
 # [9.188.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.187.0...dialtone/v9.188.0-next.1) (2026-06-16)
 
 
