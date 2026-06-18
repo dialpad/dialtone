@@ -1,3 +1,15 @@
+# [1.48.0-next.20](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.19...dialtone-tokens/v1.48.0-next.20) (2026-06-18)
+
+
+### Features
+
+* **Dialtone Tokens:** NO-JIRA rework brand theming API ([#1332](https://github.com/dialpad/dialtone/issues/1332)) ([011afc2](https://github.com/dialpad/dialtone/commit/011afc2c73e8b9364a42cd54d0d862c185090dc8))
+
+
+### Reverts
+
+* remove accidental next-shadows commits from next ([868a502](https://github.com/dialpad/dialtone/commit/868a502fbd08713845bbd19d9af043f4d778ab4f))
+
 # [1.48.0-next.19](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.18...dialtone-tokens/v1.48.0-next.19) (2026-05-22)
 
 
