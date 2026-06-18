@@ -36,7 +36,7 @@ The hovercard will appear upon the mouse entering the anchor, with a delay of 30
 ## Usage
 
 - Hovercard is a **progressive enhancement**. It surfaces supplementary information about an entity or provides convenience shortcuts on hover, without navigating away from the current view. Its content or functionality **must also be reachable by another route** (a dedicated page, a menu, or an inline button).
-- Keep content concise. Hovercards are transient overlays — deep interactions, multi-step flows, or extensive content belong in a dedicated UI, or in a [Modal](modal.md).
+- Keep content concise. Hovercards are transient overlays, and are not appropriate for deep interactions, multi-step flows, or extensive content.
 - Use Hovercard for contextual content with structure or actions. Use [Tooltip](tooltip.md) for brief, text-only descriptions of a control. Use [Popover](popover.md) when the content is triggered by a deliberate click and should persist until dismissed.
 - `enterDelay` is used to prevent the card from triggering on accidental cursor passes. The default delay of 300 ms is recommended for most contexts.
 
