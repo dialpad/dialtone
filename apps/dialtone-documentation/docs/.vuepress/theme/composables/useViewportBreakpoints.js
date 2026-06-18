@@ -1,4 +1,4 @@
-import { computed, onMounted, onUnmounted, readonly, ref } from 'vue';
+import { onMounted, onUnmounted, readonly, ref } from 'vue';
 import {
   getActiveViewportBreakpoint,
   isAboveViewportBreakpointName,
@@ -19,16 +19,12 @@ import {
  * @typedef {import('../utils/viewportBreakpoints.js').ViewportPickValues<T>} ViewportPickValues
  */
 
-const width = ref(0);
 /** @type {import('vue').Ref<ActiveViewportBreakpointName>} */
 const activeBreakpoint = ref('');
 let activeConsumers = 0;
 
-const updateWidth = () => {
-  const nextWidth = window.innerWidth;
-  const nextActiveBreakpoint = getActiveViewportBreakpoint(nextWidth);
-
-  width.value = nextWidth;
+const updateActiveBreakpoint = () => {
+  const nextActiveBreakpoint = getActiveViewportBreakpoint(window.innerWidth);
 
   if (nextActiveBreakpoint !== activeBreakpoint.value) {
     activeBreakpoint.value = nextActiveBreakpoint;
@@ -37,8 +33,8 @@ const updateWidth = () => {
 
 const startTracking = () => {
   if (activeConsumers === 0) {
-    updateWidth();
-    window.addEventListener('resize', updateWidth, { passive: true });
+    updateActiveBreakpoint();
+    window.addEventListener('resize', updateActiveBreakpoint, { passive: true });
   }
 
   activeConsumers += 1;
@@ -48,8 +44,7 @@ const stopTracking = () => {
   activeConsumers = Math.max(activeConsumers - 1, 0);
   if (activeConsumers > 0) return;
 
-  window.removeEventListener('resize', updateWidth);
-  width.value = 0;
+  window.removeEventListener('resize', updateActiveBreakpoint);
   activeBreakpoint.value = '';
 };
 
@@ -147,14 +142,8 @@ export function useViewportBreakpoints () {
   };
 
   return {
-    width: readonly(width),
     activeBreakpoint: readonly(activeBreakpoint),
     breakpoints: VIEWPORT_BREAKPOINTS,
-    active: computed(() => {
-      return Object.fromEntries(
-        Object.keys(VIEWPORT_BREAKPOINTS).map(name => [name, above(name)]),
-      );
-    }),
     above,
     pick,
   };
