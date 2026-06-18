@@ -272,7 +272,6 @@ describe('themes/config.js', () => {
 
     describe('When a locked-material overlay is cleared with null', () => {
       beforeEach(() => {
-        initDialtoneTheme(dpStub, 'light', root);
         setBrand(melonStub, root); // melon locks to iron
         setBrand(null, root);
       });
@@ -284,7 +283,6 @@ describe('themes/config.js', () => {
 
     describe('When a locked-material overlay is cleared by passing the base brand', () => {
       beforeEach(() => {
-        initDialtoneTheme(dpStub, 'light', root);
         setBrand(melonStub, root); // melon locks to iron
         setBrand(dpStub, root);
       });
