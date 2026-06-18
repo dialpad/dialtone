@@ -58,7 +58,7 @@ The hovercard will appear upon the mouse entering the anchor, with a delay of 30
 
 ## Accessibility
 
-When focus moves into an open hovercard, focus is trapped within it — the user can Tab between focusable elements inside the card without accidentally leaving. Pressing Escape dismisses the card and restores focus to the element that had focus before the card opened.
+When focus moves into an open hovercard, focus is trapped within. The user can Tab between focusable elements inside the card without accidentally leaving. Clicking outside the hovercard or keypress of `esc` will dismiss the card and restore focus to the element that had focus before the card opened.
 
 ## Variants
 
