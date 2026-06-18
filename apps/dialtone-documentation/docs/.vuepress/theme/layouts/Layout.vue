@@ -1,8 +1,12 @@
 <template>
   <dt-stack class="d-ps-fixed d-all-0 d-of-hidden">
     <migration-banner />
-    <doc-header />
+    <doc-header
+      :mobile-menu-open="isMobileMenuOpen"
+      @toggle-mobile-menu="toggleMobileMenu"
+    />
     <DtBox
+      v-if="isMobileMenuOpen && !viewport.above('lg')"
       id="sidebar-mobile"
       padding-inline="300"
       surface="primary"
@@ -13,6 +17,7 @@
       <sidebar />
     </DtBox>
     <DtBox
+      v-else
       id="layout-body"
       padding-block-end="0"
       min-block-size="0"
@@ -34,6 +39,7 @@
 // neither is tracked by VuePress's head management system.
 import '@dialpad/dialtone-tokens/tokens-base-light.css';
 import '@dialpad/dialtone-tokens/tokens-dp-light.css';
+import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
 import DocHeader from '../components/Header.vue';
 import LayoutBody from '../components/LayoutBody.vue';
 import Sidebar from '../components/Sidebar.vue';
@@ -57,6 +63,12 @@ const next = ref(null);
 const items = useThemeLocaleData().value.sidebar;
 const pageData = usePageData();
 const componentCombinatorName = computed(() => getComponentCombinatorName(pageData.value?.frontmatter));
+const viewport = useViewportBreakpoints();
+const isMobileMenuOpen = ref(false);
+
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value;
+};
 
 /**
  * Recursively extract all navigable pages from a tree structure
@@ -137,6 +149,8 @@ const findCurrent = () => {
 watch(
   () => route.path,
   () => {
+    isMobileMenuOpen.value = false;
+
     if (route.path === '/') return;
     findCurrent();
   },

@@ -101,7 +101,7 @@ const focusedIndex = ref(-1);
 const searchInput = ref(null);
 
 // Ref to the list element wrapping the sidebar items — scopes DOM lookups to
-// this instance's subtree (MobileSidebar renders the same data-sidebar-link attrs)
+// this instance's subtree.
 const listRef = ref(null);
 
 const focusSearchInput = () => searchInput.value?.focus();

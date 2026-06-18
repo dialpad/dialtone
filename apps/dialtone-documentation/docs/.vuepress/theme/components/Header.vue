@@ -24,10 +24,14 @@
         <dt-stack direction="row" gap="150">
           <dt-button
             v-if="!viewport.above('lg')"
-            v-dt-tooltip:bottom="`View menu`"
+            v-dt-tooltip:bottom="mobileMenuOpen ? 'Close menu' : 'View menu'"
             kind="muted"
             importance="outlined"
-            aria-label="Open Menu"
+            aria-controls="sidebar-mobile"
+            :active="mobileMenuOpen"
+            :aria-expanded="mobileMenuOpen ? 'true' : 'false'"
+            :aria-label="mobileMenuOpen ? 'Close menu' : 'Open menu'"
+            @click="emit('toggle-mobile-menu')"
           >
             <template #startIcon="{ iconSize }">
               <dt-icon name="menu" :size="iconSize" />
@@ -53,5 +57,13 @@
 import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
 import Navbar from '../components/Navbar.vue';
 
+defineProps({
+  mobileMenuOpen: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const emit = defineEmits(['toggle-mobile-menu']);
 const viewport = useViewportBreakpoints();
 </script>
