@@ -72,7 +72,7 @@ description: "Visual test fixture for the dt-migration-helper Chrome extension."
   <dt-stack v-for="group in semanticBcGroups" :key="group.name" gap="100">
     <dt-text kind="label" :size="100" class="d-fc-tertiary">{{ group.name }}</dt-text>
     <div class="d-d-flex d-fw-wrap d-g-100">
-      <div v-for="c in group.values" :key="c" :class="`d-bc-${c} d-baw2 d-bas-solid d-p-500 d-bar-200`" :title="`d-bc-${c}`"></div>
+      <dt-box v-for="c in group.values" :key="c" :class="`d-bc-${c}`" border-width="200" padding="500" border-radius="200" :title="`d-bc-${c}`" />
     </div>
   </dt-stack>
 </dt-stack>
@@ -207,19 +207,19 @@ description: "Visual test fixture for the dt-migration-helper Chrome extension."
   <dt-stack v-for="group in semanticBcGroups" :key="group.name" gap="100">
     <dt-text kind="label" :size="100" class="d-fc-tertiary">{{ group.name }}</dt-text>
     <div class="d-d-flex d-fw-wrap d-g-100">
-      <div v-for="c in group.values" :key="c" :class="`d-bc-${c} d-baw2 d-bas-solid d-p-500 d-bar-200`" :title="`d-bc-${c}`"></div>
+      <dt-box v-for="c in group.values" :key="c" :class="`d-bc-${c}`" border-width="200" padding="500" border-radius="200" :title="`d-bc-${c}`" />
     </div>
   </dt-stack>
   <dt-stack v-for="family in baseColorFamilies" :key="family" gap="100">
     <dt-text kind="label" :size="100" class="d-fc-tertiary">{{ family }}</dt-text>
     <div class="d-d-flex d-fw-wrap d-g-100">
-      <div v-for="stop in colorStops" :key="stop" :class="`d-bc-${family}-${stop} d-baw2 d-bas-solid d-p-500 d-bar-200`" :title="`d-bc-${family}-${stop}`"></div>
+      <dt-box v-for="stop in colorStops" :key="stop" :class="`d-bc-${family}-${stop}`" border-width="200" padding="500" border-radius="200" :title="`d-bc-${family}-${stop}`" />
     </div>
   </dt-stack>
   <dt-stack gap="100">
     <dt-text kind="label" :size="100" class="d-fc-tertiary">black</dt-text>
     <div class="d-d-flex d-fw-wrap d-g-100">
-      <div v-for="stop in blackStops" :key="stop" :class="`d-bc-black-${stop} d-baw2 d-bas-solid d-p-500 d-bar-200`" :title="`d-bc-black-${stop}`"></div>
+      <dt-box v-for="stop in blackStops" :key="stop" :class="`d-bc-black-${stop}`" border-width="200" padding="500" border-radius="200" :title="`d-bc-black-${stop}`" />
     </div>
   </dt-stack>
 </dt-stack>
