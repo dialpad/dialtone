@@ -33,6 +33,33 @@ The hovercard will appear upon the mouse entering the anchor, with a delay of 30
 
 <!-- <component-combinator component-name="DtHovercard" /> -->
 
+## Usage
+
+- Hovercard is a **progressive enhancement**. It surfaces supplementary information about an entity or provides convenience shortcuts on hover, without navigating away from the current view. Every action it exposes **must also be reachable by another route** (a dedicated page, a menu, or an inline button).
+- Keep content concise. Hovercards are transient overlays — deep interactions, multi-step flows, or extensive content belong in a dedicated UI, or in a [Modal](modal.md).
+- Use Hovercard for contextual content with structure or actions. Use [Tooltip](tooltip.md) for brief, text-only descriptions of a control. Use [Popover](popover.md) when the content is triggered by a deliberate click and should persist until dismissed.
+- `enterDelay` is used to prevent the card from triggering on accidental cursor passes. The default delay of 300 ms is recommended for most contexts.
+
+<dialtone-usage>
+<template #do>
+
+- Surface contextual details like a user's status, avatar, and quick-action shortcuts.
+- Treat hovercard actions as shortcuts — ensure the same actions are reachable elsewhere in the UI.
+
+</template>
+<template #dont>
+
+- Use Hovercard as the only way to reach content or perform an action.
+- Place critical or destructive actions exclusively inside a hovercard.
+- Use for deep interactions or lengthy content — prefer a dedicated UI or a [Modal](modal.md).
+
+</template>
+</dialtone-usage>
+
+## Accessibility
+
+When focus moves into an open hovercard, focus is trapped within it — the user can Tab between focusable elements inside the card without accidentally leaving. Pressing Escape dismisses the card and restores focus to the element that had focus before the card opened.
+
 ## Variants
 
 ### Many Hovercards
