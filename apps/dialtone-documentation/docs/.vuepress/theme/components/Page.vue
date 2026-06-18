@@ -17,7 +17,7 @@
         <DtBox border-width-block-end="100" padding-block-end="200" border-color="subtle">
           <page-header />
           <dt-dropdown
-            v-if="viewport.pick({
+            v-if="includeToc && viewport.pick({
               default: true,
               xl: false,
               xxxl: true,
@@ -50,7 +50,9 @@
               />
             </template>
           </dt-dropdown>
-          <!-- <dt-tab-group
+          <!--
+          DO NOT REMOVE. Future posibility
+          <dt-tab-group
             v-if="$frontmatter.status"
             :size="viewport.pick({
               default: '200',
@@ -73,7 +75,8 @@
                 Properties
               </dt-tab>
             </template>
-          </dt-tab-group> -->
+          </dt-tab-group>
+          -->
         </DtBox>
       </DtBox>
       <DtBox padding-block-start="250">
