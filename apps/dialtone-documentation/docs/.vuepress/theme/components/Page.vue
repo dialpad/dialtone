@@ -14,7 +14,7 @@
           lg: 'd-ps-sticky d-ibs-0 d-zi-navigation-fixed',
         })"
       >
-        <DtBox border-width-block-end="100" padding-block-end="200">
+        <DtBox border-width-block-end="100" padding-block-end="200" border-color="subtle">
           <page-header />
           <dt-dropdown
             v-if="viewport.pick({

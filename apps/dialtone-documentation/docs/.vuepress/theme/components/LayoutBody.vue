@@ -4,7 +4,10 @@
       v-if="viewport.above('lg') && !$frontmatter.home && !$frontmatter.noSidebar"
       padding-block-end="400"
       :padding-inline-start="300"
-      :padding-inline-end="200"
+      :padding-inline-end="viewport.pick({
+        default: '200',
+        xxxl: '300',
+      })"
       min-inline-size="450"
       max-inline-size="450"
       block-size="100p"

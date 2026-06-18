@@ -16,15 +16,16 @@
         Brand Design
       </dt-button>
     </DtStack>
-    <DtBox v-if="viewport.above('md')" padding-inline-end="200">
+    <DtBox v-if="viewport.above('md')" padding-inline-end="100">
       <dt-stack v-if="showBranchBadge" :title="branchName" direction="row" gap="50">
         <dt-icon name="branch" class="d-fc-muted" :size="100" />
-        <dt-text as="p" kind="body" size="100" tone="muted" class="d-wmx-250 d-c-default" truncate>
+        <dt-text as="p" kind="body" size="100" tone="muted" class="d-wmx-250 d-c-default" :title="branchName" truncate>
           {{ branchName }}
         </dt-text>
       </dt-stack>
     </DtBox>
     <dt-button
+      hidden
       to="/dialtone/whats-new/"
       class="d-mie-100"
       size="100"
@@ -209,7 +210,7 @@
     <dt-dropdown navigation-type="arrow-keys" placement="bottom-end">
       <template #anchor>
         <dt-button
-          v-dt-tooltip:bottom="`Mode: ${capitalize(currentMode)}`"
+          v-dt-tooltip:bottom-end="`Mode: ${capitalize(currentMode)}`"
           importance="clear"
           kind="muted"
           class="dialtone-shell-btn"

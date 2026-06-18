@@ -24,7 +24,7 @@
         <dt-stack direction="row" gap="150">
           <dt-button
             v-if="!viewport.above('lg')"
-            v-dt-tooltip:bottom="mobileMenuOpen ? 'Close menu' : 'View menu'"
+            v-dt-tooltip:bottom-start="mobileMenuOpen ? 'Close menu' : 'View menu'"
             kind="muted"
             importance="outlined"
             aria-controls="sidebar-mobile"

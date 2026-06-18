@@ -214,7 +214,7 @@ a.header-anchor {
 
 .d-docsite--header-3 {
   font: var(--dt-text-headline-xl);
-  margin-block: var(--dt-spacing-200) var(--dt-spacing-50);
+  margin-block: var(--dt-spacing-300) var(--dt-spacing-50);
 }
 
 .d-docsite--header-4 {
@@ -618,26 +618,25 @@ code {
   display: grid;
   gap: var(--dt-spacing-200);
 
-  @media screen and (min-width: 640px) {
-    grid-template-columns: [full-start] repeat(
-        2,
-        [col-start] var(--col-width, minmax(0, 1fr)) [col-end]
-      ) [full-end] !important;
-    gap: var(--dt-spacing-400);
-  }
+  grid-template-columns: [full-start] repeat(
+      2,
+      [col-start] var(--col-width, minmax(0, 1fr)) [col-end]
+    ) [full-end] !important
+  ;
 
-  @media screen and (min-width: 764px) {
+  @media screen and (min-width: 640px) {
     grid-template-columns: [full-start] repeat(
         3,
         [col-start] var(--col-width, minmax(0, 1fr)) [col-end]
-      ) [full-end] !important;
+      ) [full-end] !important
+    ;
   }
 
-  @media screen and (min-width: 1354px) {
-    grid-template-columns: [full-start] repeat(
-        4,
-        [col-start] var(--col-width, minmax(0, 1fr)) [col-end]
-      ) [full-end] !important;
+  @media screen and (min-width: 960px) {
+    gap: var(--dt-spacing-300);
+  }
+
+  @media screen and (min-width: 1264px) {
     gap: var(--dt-spacing-400);
   }
 
@@ -683,14 +682,9 @@ code {
   }
 
   &__thumb {
-    inline-size: auto;
-    block-size: var(--dt-layout-150);
-
-    @media screen and (min-width: 640px) {
-      display: block;
-      inline-size: 100%;
-      block-size: auto;
-    }
+    inline-size: 100%;
+    block-size: auto;
+    display: block;
   }
 
   &__details {
@@ -705,8 +699,15 @@ code {
     gap: var(--dt-spacing-100);
     align-items: center;
     color: var(--dt-color-foreground-secondary);
-    font: var(--dt-text-headline-xl);
+    font: var(--dt-text-headline-md);
     line-height: var(--dt-font-line-height-200);
+
+    @media screen and (min-width: 640px) {
+      font: var(--dt-text-headline-lg);
+    }
+    @media screen and (min-width: 960px) {
+      font: var(--dt-text-headline-xl);
+    }
   }
 
   &__title-text {
