@@ -8,136 +8,138 @@ description: "Visual test fixture for the dt-migration-helper Chrome extension."
 ### Base color palette
 
 ```vue demo-only
-<div>
-  <div v-for="family in baseColorFamilies" :key="family" style="margin-bottom:12px;">
-    <div style="font-size:11px;font-weight:600;margin-bottom:4px;opacity:0.7;">{{ family }}</div>
-    <div style="display:flex;gap:4px;flex-wrap:wrap;">
-      <div v-for="stop in colorStops" :key="stop" :class="`d-bgc-${family}-${stop}`" style="width:40px;height:40px;border-radius:4px;border:1px solid rgba(0,0,0,0.1);" :title="`d-bgc-${family}-${stop}`"></div>
+<dt-stack gap="300">
+  <dt-stack v-for="family in baseColorFamilies" :key="family" gap="100">
+    <dt-text kind="label" :size="100" class="d-fc-tertiary">{{ family }}</dt-text>
+    <div class="d-d-flex d-fw-wrap d-g-100">
+      <div v-for="stop in colorStops" :key="stop" :class="`d-bgc-${family}-${stop} d-p-500 d-bar-200 d-baw1 d-bas-solid d-bc-subtle`" :title="`d-bgc-${family}-${stop}`"></div>
     </div>
-  </div>
-  <div style="margin-bottom:12px;">
-    <div style="font-size:11px;font-weight:600;margin-bottom:4px;opacity:0.7;">black</div>
-    <div style="display:flex;gap:4px;flex-wrap:wrap;">
-      <div v-for="stop in blackStops" :key="stop" :class="`d-bgc-black-${stop}`" style="width:40px;height:40px;border-radius:4px;border:1px solid rgba(0,0,0,0.1);" :title="`d-bgc-black-${stop}`"></div>
+  </dt-stack>
+  <dt-stack gap="100">
+    <dt-text kind="label" :size="100" class="d-fc-tertiary">black</dt-text>
+    <div class="d-d-flex d-fw-wrap d-g-100">
+      <div v-for="stop in blackStops" :key="stop" :class="`d-bgc-black-${stop} d-p-500 d-bar-200 d-baw1 d-bas-solid d-bc-subtle`" :title="`d-bgc-black-${stop}`"></div>
     </div>
-  </div>
-</div>
+  </dt-stack>
+</dt-stack>
 ```
 
 ### Semantic surfaces
 
 ```vue demo-only
-<div>
-  <div v-for="group in semanticSurfaceGroups" :key="group.name" style="margin-bottom:12px;">
-    <div style="font-size:11px;font-weight:600;margin-bottom:4px;opacity:0.7;">{{ group.name }}</div>
-    <div style="display:flex;gap:4px;flex-wrap:wrap;">
-      <dt-box v-for="s in group.values" :key="s" :surface="s" style="width:40px;height:40px;border-radius:4px;border:1px solid rgba(0,0,0,0.1);" :title="s"></dt-box>
+<dt-stack gap="300">
+  <dt-stack v-for="group in semanticSurfaceGroups" :key="group.name" gap="100">
+    <dt-text kind="label" :size="100" class="d-fc-tertiary">{{ group.name }}</dt-text>
+    <div class="d-d-flex d-fw-wrap d-g-100">
+      <dt-box v-for="s in group.values" :key="s" padding="500" border-radius="200" border-color="subtle" border-width="50" :surface="s" :title="s" />
     </div>
-  </div>
-</div>
+  </dt-stack>
+</dt-stack>
 ```
 
 ### Semantic background colors
 
 ```vue demo-only
-<div>
-  <div v-for="group in semanticBgcGroups" :key="group.name" style="margin-bottom:12px;">
-    <div style="font-size:11px;font-weight:600;margin-bottom:4px;opacity:0.7;">{{ group.name }}</div>
-    <div style="display:flex;gap:4px;flex-wrap:wrap;">
-      <div v-for="c in group.values" :key="c" :class="`d-bgc-${c}`" style="width:40px;height:40px;border-radius:4px;border:1px solid rgba(0,0,0,0.1);" :title="`d-bgc-${c}`"></div>
+<dt-stack gap="300">
+  <dt-stack v-for="group in semanticBgcGroups" :key="group.name" gap="100">
+    <dt-text kind="label" :size="100" class="d-fc-tertiary">{{ group.name }}</dt-text>
+    <div class="d-d-flex d-fw-wrap d-g-100">
+      <div v-for="c in group.values" :key="c" :class="`d-bgc-${c} d-p-500 d-bar-200 d-baw1 d-bas-solid d-bc-subtle`" :title="`d-bgc-${c}`"></div>
     </div>
-  </div>
-</div>
+  </dt-stack>
+</dt-stack>
 ```
 
 ### Semantic foreground colors
 
 ```vue demo-only
-<div>
-  <div v-for="group in semanticFcGroups" :key="group.name" style="margin-bottom:12px;">
-    <div style="font-size:11px;font-weight:600;margin-bottom:4px;opacity:0.7;">{{ group.name }}</div>
-    <div style="display:flex;gap:4px;flex-wrap:wrap;">
-      <div v-for="c in group.values" :key="c" :class="`d-fc-${c} d-bgc-secondary`" style="width:40px;height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;" :title="`d-fc-${c}`">Aa</div>
+<dt-stack gap="300">
+  <dt-stack v-for="group in semanticFcGroups" :key="group.name" gap="100">
+    <dt-text kind="label" :size="100" class="d-fc-tertiary">{{ group.name }}</dt-text>
+    <div class="d-d-flex d-fw-wrap d-g-100">
+      <div v-for="c in group.values" :key="c" :class="`d-fc-${c} d-bgc-secondary d-p-500 d-bar-200 d-d-flex d-ai-center d-jc-center`" :title="`d-fc-${c}`">
+        <dt-text kind="label" :size="200" strength="bold" as="span">Aa</dt-text>
+      </div>
     </div>
-  </div>
-</div>
+  </dt-stack>
+</dt-stack>
 ```
 
 ### Semantic border colors
 
 ```vue demo-only
-<div>
-  <div v-for="group in semanticBcGroups" :key="group.name" style="margin-bottom:12px;">
-    <div style="font-size:11px;font-weight:600;margin-bottom:4px;opacity:0.7;">{{ group.name }}</div>
-    <div style="display:flex;gap:4px;flex-wrap:wrap;">
-      <div v-for="c in group.values" :key="c" :class="`d-bc-${c}`" style="width:40px;height:40px;border-radius:4px;border:3px solid;" :title="`d-bc-${c}`"></div>
+<dt-stack gap="300">
+  <dt-stack v-for="group in semanticBcGroups" :key="group.name" gap="100">
+    <dt-text kind="label" :size="100" class="d-fc-tertiary">{{ group.name }}</dt-text>
+    <div class="d-d-flex d-fw-wrap d-g-100">
+      <div v-for="c in group.values" :key="c" :class="`d-bc-${c} d-baw2 d-bas-solid d-p-500 d-bar-200`" :title="`d-bc-${c}`"></div>
     </div>
-  </div>
-</div>
+  </dt-stack>
+</dt-stack>
 ```
 
 ### Spacing
 
 ```vue demo-only
-<div>
-  <div style="font-size:11px;font-weight:600;margin-bottom:6px;opacity:0.7;">spacing scale</div>
-  <div style="display:flex;flex-wrap:wrap;gap:4px;align-items:flex-end;">
-    <div v-for="s in spacingStops" :key="s" style="display:flex;flex-direction:column;align-items:center;gap:4px;">
-      <div :class="`d-p-${s} d-bgc-brand d-bar-200`" style="min-width:2px;min-height:2px;" :title="`d-p-${s}`"></div>
-      <span style="font-size:9px;opacity:0.5;">{{ s }}</span>
-    </div>
+<dt-stack gap="100">
+  <dt-text kind="label" :size="100" class="d-fc-tertiary">spacing scale</dt-text>
+  <div class="d-d-flex d-fw-wrap d-g-100 d-ai-flex-end">
+    <dt-stack v-for="s in spacingStops" :key="s" gap="50" class="d-ai-center">
+      <div :class="`d-p-${s} d-bgc-brand d-bar-200 d-baw1 d-bas-solid d-bc-brand`" :title="`d-p-${s}`"></div>
+      <dt-text kind="code" :size="100" class="d-fc-tertiary">{{ s }}</dt-text>
+    </dt-stack>
   </div>
-</div>
+</dt-stack>
 ```
 
 ### Shadows
 
 ```vue demo-only
-<div>
-  <div style="font-size:11px;font-weight:600;margin-bottom:6px;opacity:0.7;">shadow scale</div>
-  <div style="display:flex;gap:24px;flex-wrap:wrap;">
-    <div v-for="s in ['sm','md','lg','xl']" :key="s" style="display:flex;flex-direction:column;align-items:center;gap:6px;">
-      <div :class="`d-bs-${s} d-bar-200`" style="width:48px;height:48px;background:var(--dt-color-surface-primary);" :title="`d-bs-${s}`"></div>
-      <span style="font-size:9px;opacity:0.5;">{{ s }}</span>
-    </div>
+<dt-stack gap="100">
+  <dt-text kind="label" :size="100" class="d-fc-tertiary">shadow scale</dt-text>
+  <div class="d-d-flex d-g-500">
+    <dt-stack v-for="s in ['sm','md','lg','xl']" :key="s" gap="100" class="d-ai-center">
+      <dt-box padding="500" border-radius="200" :class="`d-bs-${s}`" surface="primary" :title="`d-bs-${s}`" />
+      <dt-text kind="code" :size="100" class="d-fc-tertiary">{{ s }}</dt-text>
+    </dt-stack>
   </div>
-</div>
+</dt-stack>
 ```
 
 ### Border radius
 
 ```vue demo-only
-<div>
-  <div style="font-size:11px;font-weight:600;margin-bottom:6px;opacity:0.7;">radius scale</div>
-  <div style="display:flex;gap:8px;flex-wrap:wrap;">
-    <div v-for="r in ['100','200','300','400','500','600','full']" :key="r" style="display:flex;flex-direction:column;align-items:center;gap:6px;">
-      <div :class="`d-bgc-secondary d-bar-${r}`" style="width:48px;height:48px;border:1px solid rgba(128,128,128,0.3);" :title="`d-bar-${r}`"></div>
-      <span style="font-size:9px;opacity:0.5;">{{ r }}</span>
-    </div>
+<dt-stack gap="100">
+  <dt-text kind="label" :size="100" class="d-fc-tertiary">radius scale</dt-text>
+  <div class="d-d-flex d-g-200">
+    <dt-stack v-for="r in ['100','200','300','400','500','600','full']" :key="r" gap="100" class="d-ai-center">
+      <dt-box padding="500" :border-radius="r" border-color="subtle" border-width="100" surface="secondary" :title="`d-bar-${r}`" />
+      <dt-text kind="code" :size="100" class="d-fc-tertiary">{{ r }}</dt-text>
+    </dt-stack>
   </div>
-</div>
+</dt-stack>
 ```
 
 ### Typography
 
 ```vue demo-only
-<div>
-  <div v-for="group in typographyGroups" :key="group.kind" style="margin-bottom:16px;">
-    <div style="font-size:11px;font-weight:600;margin-bottom:6px;opacity:0.7;">{{ group.kind }}</div>
-    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;">
-      <div v-for="size in group.sizes" :key="size" style="display:flex;flex-direction:column;align-items:flex-start;gap:4px;border:1px solid rgba(128,128,128,0.2);border-radius:4px;padding:8px 12px;min-width:64px;">
+<dt-stack gap="300">
+  <dt-stack v-for="group in typographyGroups" :key="group.kind" gap="100">
+    <dt-text kind="label" :size="100" class="d-fc-tertiary">{{ group.kind }}</dt-text>
+    <div class="d-d-flex d-fw-wrap d-g-200 d-ai-flex-end">
+      <dt-stack v-for="size in group.sizes" :key="size" gap="50" class="d-ai-center d-baw1 d-bas-solid d-bc-subtle d-bar-200 d-p-200">
         <dt-text :kind="group.kind" :size="size">Aa</dt-text>
-        <span style="font-size:10px;opacity:0.5;">{{ size }}</span>
-      </div>
+        <dt-text kind="code" :size="100" class="d-fc-tertiary">{{ size }}</dt-text>
+      </dt-stack>
     </div>
-  </div>
-  <div>
-    <div style="font-size:11px;font-weight:600;margin-bottom:6px;opacity:0.7;">code</div>
-    <div style="border:1px solid rgba(128,128,128,0.2);border-radius:4px;padding:8px 12px;display:inline-block;">
+  </dt-stack>
+  <dt-stack gap="100">
+    <dt-text kind="label" :size="100" class="d-fc-tertiary">code</dt-text>
+    <dt-stack class="d-d-inline-flex d-baw1 d-bas-solid d-bc-subtle d-bar-200 d-p-200" gap="50">
       <dt-text kind="code">const answer = 42</dt-text>
-    </div>
-  </div>
-</div>
+    </dt-stack>
+  </dt-stack>
+</dt-stack>
 ```
 
 ## Utility Classes
@@ -145,76 +147,82 @@ description: "Visual test fixture for the dt-migration-helper Chrome extension."
 ### Foreground — d-fc-*
 
 ```vue demo-only
-<div>
-  <div v-for="group in semanticFcGroups" :key="group.name" style="margin-bottom:12px;">
-    <div style="font-size:11px;font-weight:600;margin-bottom:4px;opacity:0.7;">{{ group.name }}</div>
-    <div style="display:flex;gap:4px;flex-wrap:wrap;">
-      <div v-for="c in group.values" :key="c" :class="`d-fc-${c} d-bgc-secondary`" style="width:40px;height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;" :title="`d-fc-${c}`">Aa</div>
+<dt-stack gap="300">
+  <dt-stack v-for="group in semanticFcGroups" :key="group.name" gap="100">
+    <dt-text kind="label" :size="100" class="d-fc-tertiary">{{ group.name }}</dt-text>
+    <div class="d-d-flex d-fw-wrap d-g-100">
+      <div v-for="c in group.values" :key="c" :class="`d-fc-${c} d-bgc-secondary d-p-500 d-bar-200 d-d-flex d-ai-center d-jc-center`" :title="`d-fc-${c}`">
+        <dt-text kind="label" :size="200" strength="bold" as="span">Aa</dt-text>
+      </div>
     </div>
-  </div>
-  <div v-for="family in baseColorFamilies" :key="family" style="margin-bottom:12px;">
-    <div style="font-size:11px;font-weight:600;margin-bottom:4px;opacity:0.7;">{{ family }}</div>
-    <div style="display:flex;gap:4px;flex-wrap:wrap;">
-      <div v-for="stop in colorStops" :key="stop" :class="`d-fc-${family}-${stop} d-bgc-secondary`" style="width:40px;height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;" :title="`d-fc-${family}-${stop}`">Aa</div>
+  </dt-stack>
+  <dt-stack v-for="family in baseColorFamilies" :key="family" gap="100">
+    <dt-text kind="label" :size="100" class="d-fc-tertiary">{{ family }}</dt-text>
+    <div class="d-d-flex d-fw-wrap d-g-100">
+      <div v-for="stop in colorStops" :key="stop" :class="`d-fc-${family}-${stop} d-bgc-secondary d-p-500 d-bar-200 d-d-flex d-ai-center d-jc-center`" :title="`d-fc-${family}-${stop}`">
+        <dt-text kind="label" :size="200" strength="bold" as="span">Aa</dt-text>
+      </div>
     </div>
-  </div>
-  <div style="margin-bottom:12px;">
-    <div style="font-size:11px;font-weight:600;margin-bottom:4px;opacity:0.7;">black</div>
-    <div style="display:flex;gap:4px;flex-wrap:wrap;">
-      <div v-for="stop in blackStops" :key="stop" :class="`d-fc-black-${stop} d-bgc-secondary`" style="width:40px;height:40px;border-radius:4px;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;" :title="`d-fc-black-${stop}`">Aa</div>
+  </dt-stack>
+  <dt-stack gap="100">
+    <dt-text kind="label" :size="100" class="d-fc-tertiary">black</dt-text>
+    <div class="d-d-flex d-fw-wrap d-g-100">
+      <div v-for="stop in blackStops" :key="stop" :class="`d-fc-black-${stop} d-bgc-secondary d-p-500 d-bar-200 d-d-flex d-ai-center d-jc-center`" :title="`d-fc-black-${stop}`">
+        <dt-text kind="label" :size="200" strength="bold" as="span">Aa</dt-text>
+      </div>
     </div>
-  </div>
-</div>
+  </dt-stack>
+</dt-stack>
 ```
 
 ### Background — d-bgc-*
 
 ```vue demo-only
-<div>
-  <div v-for="group in semanticBgcGroups" :key="group.name" style="margin-bottom:12px;">
-    <div style="font-size:11px;font-weight:600;margin-bottom:4px;opacity:0.7;">{{ group.name }}</div>
-    <div style="display:flex;gap:4px;flex-wrap:wrap;">
-      <div v-for="c in group.values" :key="c" :class="`d-bgc-${c}`" style="width:40px;height:40px;border-radius:4px;border:1px solid rgba(0,0,0,0.1);" :title="`d-bgc-${c}`"></div>
+<dt-stack gap="300">
+  <dt-stack v-for="group in semanticBgcGroups" :key="group.name" gap="100">
+    <dt-text kind="label" :size="100" class="d-fc-tertiary">{{ group.name }}</dt-text>
+    <div class="d-d-flex d-fw-wrap d-g-100">
+      <div v-for="c in group.values" :key="c" :class="`d-bgc-${c} d-p-500 d-bar-200 d-baw1 d-bas-solid d-bc-subtle`" :title="`d-bgc-${c}`"></div>
     </div>
-  </div>
-  <div v-for="family in baseColorFamilies" :key="family" style="margin-bottom:12px;">
-    <div style="font-size:11px;font-weight:600;margin-bottom:4px;opacity:0.7;">{{ family }}</div>
-    <div style="display:flex;gap:4px;flex-wrap:wrap;">
-      <div v-for="stop in colorStops" :key="stop" :class="`d-bgc-${family}-${stop}`" style="width:40px;height:40px;border-radius:4px;border:1px solid rgba(0,0,0,0.1);" :title="`d-bgc-${family}-${stop}`"></div>
+  </dt-stack>
+  <dt-stack v-for="family in baseColorFamilies" :key="family" gap="100">
+    <dt-text kind="label" :size="100" class="d-fc-tertiary">{{ family }}</dt-text>
+    <div class="d-d-flex d-fw-wrap d-g-100">
+      <div v-for="stop in colorStops" :key="stop" :class="`d-bgc-${family}-${stop} d-p-500 d-bar-200 d-baw1 d-bas-solid d-bc-subtle`" :title="`d-bgc-${family}-${stop}`"></div>
     </div>
-  </div>
-  <div style="margin-bottom:12px;">
-    <div style="font-size:11px;font-weight:600;margin-bottom:4px;opacity:0.7;">black</div>
-    <div style="display:flex;gap:4px;flex-wrap:wrap;">
-      <div v-for="stop in blackStops" :key="stop" :class="`d-bgc-black-${stop}`" style="width:40px;height:40px;border-radius:4px;border:1px solid rgba(0,0,0,0.1);" :title="`d-bgc-black-${stop}`"></div>
+  </dt-stack>
+  <dt-stack gap="100">
+    <dt-text kind="label" :size="100" class="d-fc-tertiary">black</dt-text>
+    <div class="d-d-flex d-fw-wrap d-g-100">
+      <div v-for="stop in blackStops" :key="stop" :class="`d-bgc-black-${stop} d-p-500 d-bar-200 d-baw1 d-bas-solid d-bc-subtle`" :title="`d-bgc-black-${stop}`"></div>
     </div>
-  </div>
-</div>
+  </dt-stack>
+</dt-stack>
 ```
 
 ### Border — d-bc-*
 
 ```vue demo-only
-<div>
-  <div v-for="group in semanticBcGroups" :key="group.name" style="margin-bottom:12px;">
-    <div style="font-size:11px;font-weight:600;margin-bottom:4px;opacity:0.7;">{{ group.name }}</div>
-    <div style="display:flex;gap:4px;flex-wrap:wrap;">
-      <div v-for="c in group.values" :key="c" :class="`d-bc-${c}`" style="width:40px;height:40px;border-radius:4px;border:3px solid;" :title="`d-bc-${c}`"></div>
+<dt-stack gap="300">
+  <dt-stack v-for="group in semanticBcGroups" :key="group.name" gap="100">
+    <dt-text kind="label" :size="100" class="d-fc-tertiary">{{ group.name }}</dt-text>
+    <div class="d-d-flex d-fw-wrap d-g-100">
+      <div v-for="c in group.values" :key="c" :class="`d-bc-${c} d-baw2 d-bas-solid d-p-500 d-bar-200`" :title="`d-bc-${c}`"></div>
     </div>
-  </div>
-  <div v-for="family in baseColorFamilies" :key="family" style="margin-bottom:12px;">
-    <div style="font-size:11px;font-weight:600;margin-bottom:4px;opacity:0.7;">{{ family }}</div>
-    <div style="display:flex;gap:4px;flex-wrap:wrap;">
-      <div v-for="stop in colorStops" :key="stop" :class="`d-bc-${family}-${stop}`" style="width:40px;height:40px;border-radius:4px;border:3px solid;" :title="`d-bc-${family}-${stop}`"></div>
+  </dt-stack>
+  <dt-stack v-for="family in baseColorFamilies" :key="family" gap="100">
+    <dt-text kind="label" :size="100" class="d-fc-tertiary">{{ family }}</dt-text>
+    <div class="d-d-flex d-fw-wrap d-g-100">
+      <div v-for="stop in colorStops" :key="stop" :class="`d-bc-${family}-${stop} d-baw2 d-bas-solid d-p-500 d-bar-200`" :title="`d-bc-${family}-${stop}`"></div>
     </div>
-  </div>
-  <div style="margin-bottom:12px;">
-    <div style="font-size:11px;font-weight:600;margin-bottom:4px;opacity:0.7;">black</div>
-    <div style="display:flex;gap:4px;flex-wrap:wrap;">
-      <div v-for="stop in blackStops" :key="stop" :class="`d-bc-black-${stop}`" style="width:40px;height:40px;border-radius:4px;border:3px solid;" :title="`d-bc-black-${stop}`"></div>
+  </dt-stack>
+  <dt-stack gap="100">
+    <dt-text kind="label" :size="100" class="d-fc-tertiary">black</dt-text>
+    <div class="d-d-flex d-fw-wrap d-g-100">
+      <div v-for="stop in blackStops" :key="stop" :class="`d-bc-black-${stop} d-baw2 d-bas-solid d-p-500 d-bar-200`" :title="`d-bc-black-${stop}`"></div>
     </div>
-  </div>
-</div>
+  </dt-stack>
+</dt-stack>
 ```
 
 ### Scrollbar directive
@@ -230,98 +238,162 @@ description: "Visual test fixture for the dt-migration-helper Chrome extension."
 ### DtChip
 
 ```vue demo-only
-<div style="display:flex;flex-wrap:wrap;gap:12px;">
+<dt-stack direction="row" gap="300" class="d-fw-wrap">
   <dt-chip>Non-interactive (span.d-chip)</dt-chip>
   <dt-chip :interactive="true">Interactive (button.d-chip)</dt-chip>
   <dt-chip @close="() => {}">With close</dt-chip>
   <dt-chip :interactive="true" @close="() => {}">Interactive + close</dt-chip>
-</div>
+</dt-stack>
 ```
 
 ### DtModal
 
 ```vue demo-only
-<div>
-  <dt-button @click="isOpen = !isOpen">Open Modal (dialog.d-modal)</dt-button>
+<dt-stack gap="200">
+  <div>
+    <dt-button @click="isOpen = !isOpen">Open Modal (dialog.d-modal)</dt-button>
+  </div>
   <dt-modal :open="isOpen" header-text="Test Modal" @update:open="isOpen = $event">
-    <p>This is a <code>dialog.d-modal</code> in Dialtone next.</p>
+    <p>Renders as <code>dialog.d-modal</code> in Dialtone next.</p>
   </dt-modal>
-</div>
+</dt-stack>
 ```
 
 ### DtAvatar
 
 ```vue demo-only
-<div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-end;">
-  <div v-for="size in avatarSizes" :key="size" style="display:flex;flex-direction:column;align-items:center;gap:4px;">
-    <dt-avatar :size="size" full-name="Test User" />
-    <dt-text kind="code" :size="100">{{ size }}</dt-text>
-  </div>
+<dt-stack gap="300">
+  <dt-stack direction="row" gap="400" class="d-ai-flex-end">
+    <dt-stack v-for="size in avatarSizes" :key="size" gap="100" class="d-ai-center">
+      <dt-avatar :size="size" full-name="Test User" />
+      <dt-text kind="code" :size="100" class="d-fc-tertiary">{{ size }}</dt-text>
+    </dt-stack>
+  </dt-stack>
   <dt-avatar-group>
     <dt-avatar :size="300" full-name="Alpha User" />
     <dt-avatar :size="300" full-name="Beta User" />
     <dt-avatar :size="300" full-name="Gamma User" />
     <dt-avatar :size="300" full-name="Delta User" />
   </dt-avatar-group>
-</div>
+</dt-stack>
 ```
 
 ### DtBadge
 
 ```vue demo-only
-<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;">
-  <dt-badge>default</dt-badge>
-  <dt-badge kind="count">1</dt-badge>
-  <dt-badge kind="count">99+</dt-badge>
+<dt-stack direction="row" gap="200" class="d-fw-wrap d-ai-center">
   <dt-badge kind="label">label</dt-badge>
-  <dt-badge type="info">info</dt-badge>
-  <dt-badge type="positive">positive</dt-badge>
-  <dt-badge type="warning">warning</dt-badge>
-  <dt-badge type="critical">critical</dt-badge>
-</div>
+  <dt-badge kind="count">42</dt-badge>
+  <dt-badge kind="label" type="info">info</dt-badge>
+  <dt-badge kind="label" type="positive">positive</dt-badge>
+  <dt-badge kind="label" type="warning">warning</dt-badge>
+  <dt-badge kind="label" type="critical">critical</dt-badge>
+  <dt-badge kind="label" type="bulletin">bulletin</dt-badge>
+  <dt-badge kind="label" type="ai">ai</dt-badge>
+</dt-stack>
 ```
 
-### DtButton
+### DtBanner
 
 ```vue demo-only
-<div style="display:flex;flex-wrap:wrap;gap:8px;">
-  <dt-button>Default</dt-button>
-  <dt-button importance="outlined">Outlined</dt-button>
-  <dt-button importance="clear">Clear</dt-button>
-  <dt-button kind="critical">Critical</dt-button>
-  <dt-button kind="critical" importance="outlined">Critical outlined</dt-button>
-  <dt-button kind="muted" importance="clear">Muted clear</dt-button>
-  <dt-button href="#dtchip">Href button</dt-button>
-  <dt-button :disabled="true">Disabled</dt-button>
-</div>
+<dt-stack gap="200">
+  <dt-banner kind="base" header-text="Base" />
+  <dt-banner kind="info" header-text="Info" />
+  <dt-banner kind="positive" header-text="Positive" />
+  <dt-banner kind="warning" header-text="Warning" />
+  <dt-banner kind="critical" header-text="Critical" />
+</dt-stack>
+```
+
+### DtButton / DtSplitButton
+
+```vue demo-only
+<dt-stack gap="200">
+  <dt-stack direction="row" gap="200" class="d-fw-wrap">
+    <dt-button>Default</dt-button>
+    <dt-button importance="outlined">Outlined</dt-button>
+    <dt-button importance="clear">Clear</dt-button>
+    <dt-button kind="critical">Critical</dt-button>
+    <dt-button kind="critical" importance="outlined">Critical outlined</dt-button>
+    <dt-button kind="muted" importance="clear">Muted</dt-button>
+    <dt-button :disabled="true">Disabled</dt-button>
+  </dt-stack>
+  <dt-split-button importance="outlined">
+    Split button
+    <template #dropdown>
+      <dt-list-item role="menuitem">Option 1</dt-list-item>
+      <dt-list-item role="menuitem">Option 2</dt-list-item>
+    </template>
+  </dt-split-button>
+</dt-stack>
+```
+
+### DtButtonGroup
+
+```vue demo-only
+<dt-button-group>
+  <dt-button importance="outlined">One</dt-button>
+  <dt-button importance="outlined">Two</dt-button>
+  <dt-button importance="outlined">Three</dt-button>
+</dt-button-group>
 ```
 
 ### DtLink
 
 ```vue demo-only
-<div style="display:flex;flex-wrap:wrap;gap:12px;align-items:baseline;">
-  <dt-link href="#dtchip">Default link</dt-link>
-  <dt-link href="#dtchip" :underline="false">No underline</dt-link>
-  <dt-link href="#dtchip" tone="critical">Critical</dt-link>
-  <dt-link href="#dtchip" tone="muted">Muted</dt-link>
-  <dt-link href="#dtchip" tone="positive">Positive</dt-link>
-  <dt-link href="#dtchip" tone="warning">Warning</dt-link>
-  <dt-link href="#dtchip" tone="info">Info</dt-link>
-</div>
+<dt-stack direction="row" gap="300" class="d-fw-wrap d-ai-baseline">
+  <dt-link href="#">Default</dt-link>
+  <dt-link href="#" :underline="false">No underline</dt-link>
+  <dt-link href="#" tone="critical">Critical</dt-link>
+  <dt-link href="#" tone="muted">Muted</dt-link>
+  <dt-link href="#" tone="positive">Positive</dt-link>
+  <dt-link href="#" tone="warning">Warning</dt-link>
+  <dt-link href="#" tone="info">Info</dt-link>
+</dt-stack>
+```
+
+### DtBreadcrumbs
+
+```vue demo-only
+<dt-breadcrumbs>
+  <dt-breadcrumbs-item href="#">Home</dt-breadcrumbs-item>
+  <dt-breadcrumbs-item href="#">Components</dt-breadcrumbs-item>
+  <dt-breadcrumbs-item>Current Page</dt-breadcrumbs-item>
+</dt-breadcrumbs>
 ```
 
 ### DtBox
 
 ```vue demo-only
-<div style="display:flex;flex-wrap:wrap;gap:8px;">
-  <dt-box v-for="s in ['primary','secondary','moderate','bold','strong','contrast']" :key="s" :surface="s" class="d-p-300 d-bar-200"><dt-text kind="code" :size="100">{{ s }}</dt-text></dt-box>
-</div>
+<dt-stack gap="200">
+  <dt-stack direction="row" gap="200" class="d-fw-wrap">
+    <dt-box v-for="s in ['primary','secondary','moderate','bold','strong','contrast']" :key="s" :surface="s" padding="300" border-radius="200"><dt-text kind="code" :size="100">{{ s }}</dt-text></dt-box>
+  </dt-stack>
+  <dt-box surface="primary" scrollbar="always" class="d-hmx-200 d-of-y-auto" padding="200" border-radius="200">
+    <p v-for="n in 8" :key="n">Line {{ n }} — scrollbar="always"</p>
+  </dt-box>
+</dt-stack>
+```
+
+### DtCard
+
+```vue demo-only
+<dt-stack direction="row" gap="200">
+  <dt-card>
+    <template #header>Card header</template>
+    Card content
+  </dt-card>
+  <dt-card>
+    <template #header>Another card</template>
+    More content here
+  </dt-card>
+</dt-stack>
 ```
 
 ### DtText
 
 ```vue demo-only
-<div>
+<dt-stack gap="100">
   <dt-text kind="headline" :size="600">Headline 600</dt-text>
   <dt-text kind="headline" :size="500">Headline 500</dt-text>
   <dt-text kind="headline" :size="400">Headline 400</dt-text>
@@ -332,82 +404,206 @@ description: "Visual test fixture for the dt-migration-helper Chrome extension."
   <dt-text kind="label" :size="200">Label 200</dt-text>
   <dt-text kind="label" :size="100">Label 100</dt-text>
   <dt-text kind="code">Code text</dt-text>
-</div>
-```
-
-### DtBanner
-
-```vue demo-only
-<div style="display:flex;flex-direction:column;gap:8px;">
-  <dt-banner kind="base" header-text="Base" />
-  <dt-banner kind="info" header-text="Info" />
-  <dt-banner kind="positive" header-text="Positive" />
-  <dt-banner kind="warning" header-text="Warning" />
-  <dt-banner kind="critical" header-text="Critical" />
-</div>
+</dt-stack>
 ```
 
 ### DtStack
 
 ```vue demo-only
-<div style="display:flex;flex-direction:column;gap:16px;">
-  <dt-stack direction="row" gap="300">
-    <dt-box v-for="n in 5" :key="n" surface="secondary" class="d-p-200 d-bar-200">row {{ n }}</dt-box>
+<dt-stack gap="200">
+  <dt-stack direction="row" gap="200">
+    <dt-box v-for="n in 4" :key="n" surface="secondary" padding="200" border-radius="200">row {{ n }}</dt-box>
   </dt-stack>
-  <dt-stack direction="column" gap="200">
-    <dt-box v-for="n in 3" :key="n" surface="secondary" class="d-p-200 d-bar-200">col {{ n }}</dt-box>
+  <dt-stack gap="200">
+    <dt-box v-for="n in 3" :key="n" surface="secondary" padding="200" border-radius="200">col {{ n }}</dt-box>
   </dt-stack>
-</div>
+</dt-stack>
 ```
 
-### DtInput
+### DtInput / DtInputGroup
 
 ```vue demo-only
-<div style="display:flex;flex-wrap:wrap;gap:16px;">
-  <dt-input label="Default input" placeholder="Placeholder" />
-  <dt-input label="Disabled" placeholder="Placeholder" :disabled="true" />
-  <dt-input label="With error" model-value="Value" :messages="[{message:'Error message',type:'critical'}]" />
-  <dt-input label="With success" model-value="Value" :messages="[{message:'Success message',type:'positive'}]" />
-</div>
+<dt-stack gap="300">
+  <dt-stack direction="row" gap="200" class="d-fw-wrap">
+    <dt-input label="Default" placeholder="Placeholder" />
+    <dt-input label="Disabled" placeholder="Placeholder" :disabled="true" />
+    <dt-input label="Error" model-value="Value" :messages="[{message:'Error',type:'critical'}]" />
+    <dt-input label="Success" model-value="Value" :messages="[{message:'Success',type:'positive'}]" />
+  </dt-stack>
+  <dt-input-group legend="Input group">
+    <dt-input label="First" placeholder="First" />
+    <dt-input label="Last" placeholder="Last" />
+  </dt-input-group>
+</dt-stack>
 ```
 
 ### DtSelectMenu
 
 ```vue demo-only
-<div style="display:flex;flex-wrap:wrap;gap:16px;">
-  <dt-select-menu label="Default select">
+<dt-stack direction="row" gap="200">
+  <dt-select-menu label="Select">
     <option value="1">Option 1</option>
     <option value="2">Option 2</option>
-    <option value="3">Option 3</option>
   </dt-select-menu>
-  <dt-select-menu label="Disabled select" :disabled="true">
+  <dt-select-menu label="Disabled" :disabled="true">
     <option value="1">Option 1</option>
   </dt-select-menu>
-</div>
+</dt-stack>
+```
+
+### DtCheckbox / DtRadio / DtToggle
+
+```vue demo-only
+<dt-stack gap="200">
+  <dt-stack direction="row" gap="300">
+    <dt-checkbox label="Checkbox" :checked="true" />
+    <dt-checkbox label="Unchecked" />
+    <dt-checkbox label="Disabled" :disabled="true" />
+  </dt-stack>
+  <dt-stack direction="row" gap="300">
+    <dt-radio label="Radio A" value="a" name="demo" />
+    <dt-radio label="Radio B" value="b" name="demo" />
+  </dt-stack>
+  <dt-stack direction="row" gap="300">
+    <dt-toggle label="Toggle on" :checked="true" />
+    <dt-toggle label="Toggle off" />
+  </dt-stack>
+</dt-stack>
+```
+
+### DtSegmentedControl
+
+```vue demo-only
+<dt-segmented-control :options="[{label:'One',value:'1'},{label:'Two',value:'2'},{label:'Three',value:'3'}]" value="1" />
+```
+
+### DtFilterPill
+
+```vue demo-only
+<dt-stack direction="row" gap="200">
+  <dt-filter-pill>Filter</dt-filter-pill>
+  <dt-filter-pill :selected="true">Selected</dt-filter-pill>
+  <dt-filter-pill :disabled="true">Disabled</dt-filter-pill>
+</dt-stack>
+```
+
+### DtPresence
+
+```vue demo-only
+<dt-stack direction="row" gap="200" class="d-ai-center">
+  <dt-presence v-for="p in ['active','away','busy','offline']" :key="p" :presence="p" />
+</dt-stack>
+```
+
+### DtLoader / DtSkeleton
+
+```vue demo-only
+<dt-stack direction="row" gap="400" class="d-ai-center">
+  <dt-loader />
+  <dt-skeleton :paragraphOption="{rows: 2}" />
+</dt-stack>
+```
+
+### DtProgressCircle
+
+```vue demo-only
+<dt-stack direction="row" gap="300" class="d-ai-center">
+  <dt-progress-circle v-for="k in ['default','brand','positive','warning','critical','info','ai']" :key="k" :kind="k" :progress="66" :aria-label="`${k}`" />
+</dt-stack>
+```
+
+### DtCollapsible
+
+```vue demo-only
+<dt-collapsible>
+  <template #anchor="{ attrs }">
+    <dt-button importance="outlined" v-bind="attrs">Toggle collapsible</dt-button>
+  </template>
+  <dt-box surface="secondary" padding="300" border-radius="200">Collapsible content</dt-box>
+</dt-collapsible>
+```
+
+### DtDropdown
+
+```vue demo-only
+<dt-dropdown>
+  <template #anchor>
+    <dt-button importance="outlined">Open dropdown</dt-button>
+  </template>
+  <template #list>
+    <dt-list-item role="menuitem">Item one</dt-list-item>
+    <dt-list-item role="menuitem">Item two</dt-list-item>
+    <dt-dropdown-separator />
+    <dt-list-item role="menuitem">Item three</dt-list-item>
+  </template>
+</dt-dropdown>
 ```
 
 ### DtNotice
 
 ```vue demo-only
-<div style="display:flex;flex-direction:column;gap:8px;">
-  <dt-notice kind="base" header-text="Base notice" />
-  <dt-notice kind="info" header-text="Info notice" />
-  <dt-notice kind="positive" header-text="Positive notice" />
-  <dt-notice kind="warning" header-text="Warning notice" />
-  <dt-notice kind="critical" header-text="Critical notice" />
-</div>
+<dt-stack gap="200">
+  <dt-notice kind="base" header-text="Base" />
+  <dt-notice kind="info" header-text="Info" />
+  <dt-notice kind="positive" header-text="Positive" />
+  <dt-notice kind="warning" header-text="Warning" />
+  <dt-notice kind="critical" header-text="Critical" />
+</dt-stack>
 ```
 
 ### DtToast
 
 ```vue demo-only
-<div style="display:flex;flex-direction:column;gap:8px;">
-  <dt-toast kind="base" header-text="Base toast" message="Toast message" />
-  <dt-toast kind="info" header-text="Info toast" message="Toast message" />
-  <dt-toast kind="positive" header-text="Positive toast" message="Toast message" />
-  <dt-toast kind="warning" header-text="Warning toast" message="Toast message" />
-  <dt-toast kind="critical" header-text="Critical toast" message="Toast message" />
-</div>
+<dt-stack gap="200">
+  <dt-toast kind="base" header-text="Base" message="Toast message" />
+  <dt-toast kind="info" header-text="Info" message="Toast message" />
+  <dt-toast kind="positive" header-text="Positive" message="Toast message" />
+  <dt-toast kind="warning" header-text="Warning" message="Toast message" />
+  <dt-toast kind="critical" header-text="Critical" message="Toast message" />
+</dt-stack>
+```
+
+### DtTab / DtTabGroup / DtTabPanel
+
+```vue demo-only
+<dt-tab-group activation-mode="auto">
+  <template #tabs>
+    <dt-tab id="t1" panel-id="p1" selected>First</dt-tab>
+    <dt-tab id="t2" panel-id="p2">Second</dt-tab>
+    <dt-tab id="t3" panel-id="p3">Third</dt-tab>
+  </template>
+  <dt-tab-panel id="p1" tab-id="t1"><dt-box surface="secondary" padding="300" border-radius="200">Panel one</dt-box></dt-tab-panel>
+  <dt-tab-panel id="p2" tab-id="t2"><dt-box surface="secondary" padding="300" border-radius="200">Panel two</dt-box></dt-tab-panel>
+  <dt-tab-panel id="p3" tab-id="t3"><dt-box surface="secondary" padding="300" border-radius="200">Panel three</dt-box></dt-tab-panel>
+</dt-tab-group>
+```
+
+### DtPagination
+
+```vue demo-only
+<dt-pagination :total-pages="10" :current-page="5" />
+```
+
+### DtKeyboardShortcut
+
+```vue demo-only
+<dt-stack direction="row" gap="200" class="d-ai-center">
+  <dt-keyboard-shortcut shortcut="⌘K" />
+  <dt-keyboard-shortcut shortcut="⌘⇧P" />
+  <dt-keyboard-shortcut shortcut="Ctrl+C" />
+</dt-stack>
+```
+
+### DtEmptyState
+
+```vue demo-only
+<dt-empty-state header-text="Nothing here" body-text="Try adding something to get started." />
+```
+
+### DtCodeblock
+
+```vue demo-only
+<dt-codeblock code="const greeting = 'Hello, Dialtone';" language="javascript" />
 ```
 
 <script setup>
@@ -464,6 +660,5 @@ const typographyGroups = [
 ];
 
 const spacingStops = ['50','100','150','200','250','300','350','400','450','500','550','600','650','700','750','800'];
-
 const avatarSizes = [100, 200, 300, 400, 500, 600, 700, 800];
 </script>
