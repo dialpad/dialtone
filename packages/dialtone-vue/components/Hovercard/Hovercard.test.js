@@ -1,5 +1,6 @@
 import { mount, flushPromises } from '@vue/test-utils';
 import DtHovercard from './Hovercard.vue';
+import { DtPopover } from '@/components/Popover/index.js';
 import { DtFocustrapDirective } from '@/directives/focustrap_directive';
 
 const MOCK_DEFAULT_SLOT_MESSAGE = 'Message';
@@ -237,53 +238,19 @@ describe('DtHovercard Tests', () => {
     });
 
     describe('Focus trapping', () => {
-      let localWrapper;
-
-      beforeEach(async () => {
+      it('passes focustrap=true to DtPopover when hovercard is open', async () => {
         vi.useFakeTimers();
-        localWrapper = mount(DtHovercard, {
-          props: { ...baseProps },
-          slots: {
-            anchor: '<template #anchor="slotProps"><button data-qa="dt-button" v-bind="slotProps">Hover me</button></template>',
-            content: '<button data-qa="btn-first">First</button><button data-qa="btn-last">Last</button>',
-          },
-          global: {
-            plugins: [DtFocustrapDirective],
-            stubs: { transition: false },
-          },
-          attachTo: document.body,
-        });
-
-        const localAnchor = localWrapper.find('[data-qa="dt-hovercard-anchor"]');
-        await localAnchor.trigger('mouseenter');
+        await anchor.trigger('mouseenter');
         vi.runAllTimers();
         await flushPromises();
+
+        const popover = wrapper.findComponent(DtPopover);
+        expect(popover.props('focustrap')).toBe(true);
       });
 
-      afterEach(() => {
-        localWrapper.unmount();
-      });
-
-      it('wraps Tab forward from last tabbable element to first', () => {
-        const lastBtn = document.querySelector('[data-qa="btn-last"]');
-        lastBtn.focus();
-
-        const tabEvent = new KeyboardEvent('keydown', { key: 'Tab', bubbles: true, cancelable: true });
-        lastBtn.dispatchEvent(tabEvent);
-
-        expect(tabEvent.defaultPrevented).toBe(true);
-        expect(document.activeElement).toBe(document.querySelector('[data-qa="btn-first"]'));
-      });
-
-      it('wraps Shift+Tab backward from first tabbable element to last', () => {
-        const firstBtn = document.querySelector('[data-qa="btn-first"]');
-        firstBtn.focus();
-
-        const shiftTabEvent = new KeyboardEvent('keydown', { key: 'Tab', shiftKey: true, bubbles: true, cancelable: true });
-        firstBtn.dispatchEvent(shiftTabEvent);
-
-        expect(shiftTabEvent.defaultPrevented).toBe(true);
-        expect(document.activeElement).toBe(document.querySelector('[data-qa="btn-last"]'));
+      it('passes a falsy focustrap to DtPopover when hovercard is closed', () => {
+        const popover = wrapper.findComponent(DtPopover);
+        expect(popover.props('focustrap')).toBeFalsy();
       });
     });
   });

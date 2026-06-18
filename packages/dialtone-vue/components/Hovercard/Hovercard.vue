@@ -13,6 +13,7 @@
     :transition="transition ? 'fade' : null"
     :offset="offset"
     :modal="false"
+    :focustrap="hovercardOpen"
     initial-focus-element="none"
     :header-class="headerClass"
     :footer-class="footerClass"
@@ -37,7 +38,6 @@
     </template>
     <template #content>
       <div
-        v-dt-focustrap="{ active: hovercardOpen, initialFocus: false, restoreFocus: true }"
         @focusin="onContentFocusIn"
         @focusout="onContentFocusOut"
       >
