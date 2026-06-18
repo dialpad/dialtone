@@ -9,11 +9,10 @@
       <dt-icon name="rocket" />
     </template>
     Dialtone's next major version includes breaking changes.
-    The
+    View the
     <dt-link to="/guides/migration/" tone="muted">
       Migration Guide
-    </dt-link>
-    includes step by step instructions and automated tooling.
+    </dt-link>.
     <template #action>
       <dt-button
         kind="muted"

@@ -83,7 +83,8 @@
         <!-- eslint-disable-next-line vue/no-undef-components -->
         <component-combinator
           v-if="componentCombinatorName && !viewport.above('xxxl')"
-          class="d-hmx-900"
+          v-model:full-screen="isCombinatorFullScreen"
+          :class="{ 'd-hmx-900': !viewport.above('xxxl') && !isCombinatorFullScreen }"
           :component-name="componentCombinatorName"
         />
       </DtBox>
@@ -182,7 +183,7 @@ import { usePageTocScrollSpy } from '../composables/usePageTocScrollSpy.js';
 import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
 import { getComponentCombinatorName } from '../utils/componentCombinator.js';
 import { getRightRailTocViewportValues } from '../utils/pageToc.js';
-import { computed, watch, inject } from 'vue';
+import { computed, inject, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { usePageData } from 'vuepress/client';
 
@@ -200,6 +201,7 @@ defineProps({
 });
 const pageData = usePageData();
 const componentCombinatorName = computed(() => getComponentCombinatorName(pageData.value?.frontmatter));
+const isCombinatorFullScreen = ref(false);
 const lastUpdated = computed(() => {
   const updatedTime = pageData.value?.git?.updatedTime;
   if (!updatedTime) return 'Not available';
@@ -225,6 +227,10 @@ const includeToc = computed(() => {
 });
 const rightRailTocViewportValues = computed(() => {
   return getRightRailTocViewportValues(Boolean(componentCombinatorName.value));
+});
+
+watch([componentCombinatorName, () => viewport.above('xxxl')], () => {
+  isCombinatorFullScreen.value = false;
 });
 
 // Pages whose headers are populated by their own Vue component via inject('headers')

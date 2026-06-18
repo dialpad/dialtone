@@ -15,6 +15,19 @@ const toggleDoc = allDocs.find(d => d.displayName === 'DtToggle');
 const inputDoc = allDocs.find(d => d.displayName === 'DtInput');
 const variantBank = variants();
 
+function shallowMountCombinator (options) {
+  return shallowMount(DtcCombinator, {
+    ...options,
+    global: {
+      ...options.global,
+      stubs: {
+        ...options.global?.stubs,
+        teleport: false,
+      },
+    },
+  });
+}
+
 describe('combinator.vue test', function () {
   const testComponents = getSupportedComponents();
 
@@ -24,7 +37,7 @@ describe('combinator.vue test', function () {
     testComponents.forEach(component => {
       describe(`When mounted with component '${component.name}'`, function () {
         beforeEach(function () {
-          wrapper = shallowMount(DtcCombinator, {
+          wrapper = shallowMountCombinator({
             props: {
               component,
               documentation,
@@ -47,7 +60,7 @@ describe('combinator.vue test', function () {
   describe('v-model writeback', function () {
     describe('boolean modelValue (DtToggle)', function () {
       beforeEach(function () {
-        wrapper = shallowMount(DtcCombinator, {
+        wrapper = shallowMountCombinator({
           props: {
             component: DtToggle,
             documentation: toggleDoc,
@@ -83,7 +96,7 @@ describe('combinator.vue test', function () {
 
     describe('string modelValue (DtInput)', function () {
       beforeEach(function () {
-        wrapper = shallowMount(DtcCombinator, {
+        wrapper = shallowMountCombinator({
           props: {
             component: DtInput,
             documentation: inputDoc,
@@ -120,7 +133,7 @@ describe('combinator.vue test', function () {
 
   describe('component changes', function () {
     beforeEach(function () {
-      wrapper = shallowMount(DtcCombinator, {
+      wrapper = shallowMountCombinator({
         props: {
           component: DtButton,
           documentation: buttonDoc,
@@ -150,6 +163,38 @@ describe('combinator.vue test', function () {
       expect(renderer.props('options').slots.content).toBe(
         variantBank.DtCard.default.slots.content.initialValue,
       );
+    });
+  });
+
+  describe('fullscreen layout', function () {
+    let host;
+
+    beforeEach(function () {
+      host = document.createElement('div');
+      document.body.appendChild(host);
+      wrapper = shallowMountCombinator({
+        attachTo: host,
+        props: {
+          component: DtButton,
+          documentation: buttonDoc,
+          fullScreen: true,
+          variants: {},
+        },
+      });
+    });
+
+    afterEach(function () {
+      wrapper.unmount();
+      host.remove();
+    });
+
+    it('teleports the fullscreen playground to the document body', function () {
+      const fullscreenPlayground = Array.from(document.body.children).find(child => {
+        return child.classList.contains('dialtone-playground--fullscreen');
+      });
+
+      expect(fullscreenPlayground).toBeTruthy();
+      expect(host.querySelector('.dialtone-playground--fullscreen')).toBeNull();
     });
   });
 });

@@ -5,7 +5,6 @@
       lg: '300',
     })"
     padding-block-end="0"
-    class="d-zi-navigation"
   >
     <DtBox
       padding="200"

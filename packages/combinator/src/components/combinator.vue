@@ -1,156 +1,164 @@
 <template>
-  <div :class="['dialtone-playground', { 'dialtone-playground--fullscreen': isFullScreen }]">
-    <dt-stack
-      direction="row"
-      gap="500"
-      justify="between"
-      class="
-        d-p-100
-        d-pie-200
-        d-bb
-        d-bc-subtle
-      "
-      :class="variantOptions.length > 1 ? 'd-g-cols3' : 'd-g-cols2'"
+  <Teleport
+    to="body"
+    :disabled="!isFullScreen"
+  >
+    <div
+      v-bind="$attrs"
+      :class="['dialtone-playground', { 'dialtone-playground--fullscreen': isFullScreen }]"
     >
-      <dt-text
-        v-if="variantOptions.length < 2"
-        kind="code"
-        tone="primary"
-        strength="semibold"
-        :size="300"
-        as="div"
-        class="d-px-150 d-py-100"
+      <dt-stack
+        direction="row"
+        gap="500"
+        justify="between"
+        class="
+          d-p-100
+          d-pie-200
+          d-bb
+          d-bc-subtle
+        "
+        :class="variantOptions.length > 1 ? 'd-g-cols3' : 'd-g-cols2'"
       >
-        {{ component.name }}
-      </dt-text>
-      <dt-dropdown
-        v-else
-        navigation-type="arrow-keys"
-        placement="bottom-start"
-        content-class="d-wmn-500"
-      >
-        <template #anchor="{ attrs }">
+        <dt-text
+          v-if="variantOptions.length < 2"
+          kind="code"
+          tone="primary"
+          strength="semibold"
+          :size="300"
+          as="div"
+          class="d-px-150 d-py-100"
+        >
+          {{ component.name }}
+        </dt-text>
+        <dt-dropdown
+          v-else
+          navigation-type="arrow-keys"
+          placement="bottom-start"
+          content-class="d-wmn-500"
+        >
+          <template #anchor="{ attrs }">
+            <dt-button
+              v-dt-tooltip="'Presets'"
+              v-bind="attrs"
+              importance="clear"
+              kind="muted"
+              :size="isFullScreen ? 'lg' : 'md'"
+              leading-class="d-pbs-1 d-pis-150 d-mie-n25"
+            >
+              <template #leading>
+                <dt-text
+                  kind="code"
+                  tone="primary"
+                  strength="semibold"
+                  class="d-fs-inherit"
+                >
+                  {{ component.name }}:
+                </dt-text>
+              </template>
+              {{ selectedVariant || 'custom' }}
+              <template #endIcon="{ iconSize }">
+                <dt-icon-chevrons-up-down
+                  class="d-fc-muted"
+                  :size="iconSize"
+                />
+              </template>
+            </dt-button>
+          </template>
+          <template #list="{ close }">
+            <dt-list-item
+              v-for="option in variantOptions"
+              :key="option.value"
+              role="menuitem"
+              navigation-type="arrow-keys"
+              @click="updateVariant(option.value); close()"
+            >
+              {{ option.label }}
+              <template #end>
+                <dt-icon-check
+                  size="200"
+                  :class="option.value === selectedVariant ? 'd-o100' : 'd-o0'"
+                />
+              </template>
+            </dt-list-item>
+          </template>
+        </dt-dropdown>
+        <dt-stack
+          gap="100"
+          direction="row"
+        >
           <dt-button
-            v-dt-tooltip="'Presets'"
-            v-bind="attrs"
-            importance="clear"
+            v-if="hasChanges"
+            v-dt-tooltip="`Reset`"
             kind="muted"
-            :size="isFullScreen ? 'lg' : 'md'"
-            leading-class="d-pbs-1 d-pis-150 d-mie-n25"
+            importance="clear"
+            :size="200"
+            @click="resetOptions"
           >
-            <template #leading>
-              <dt-text
-                kind="code"
-                tone="primary"
-                strength="semibold"
-                class="d-fs-inherit"
-              >
-                {{ component.name }}:
-              </dt-text>
-            </template>
-            {{ selectedVariant || 'custom' }}
-            <template #endIcon="{ iconSize }">
-              <dt-icon-chevrons-up-down
-                class="d-fc-muted"
+            <template #icon="{ iconSize }">
+              <dt-icon-refresh
                 :size="iconSize"
               />
             </template>
           </dt-button>
-        </template>
-        <template #list="{ close }">
-          <dt-list-item
-            v-for="option in variantOptions"
-            :key="option.value"
-            role="menuitem"
-            navigation-type="arrow-keys"
-            @click="updateVariant(option.value); close()"
+          <dt-button
+            v-dt-tooltip="`Fullscreen`"
+            kind="muted"
+            importance="clear"
+            :size="200"
+            @click="toggleFullScreen"
           >
-            {{ option.label }}
-            <template #end>
-              <dt-icon-check
-                size="200"
-                :class="option.value === selectedVariant ? 'd-o100' : 'd-o0'"
+            <template #icon="{ iconSize }">
+              <dt-icon-minimize
+                v-if="isFullScreen"
+                :size="iconSize"
+              />
+              <dt-icon-expand
+                v-else
+                :size="iconSize"
               />
             </template>
-          </dt-list-item>
-        </template>
-      </dt-dropdown>
-      <dt-stack
-        gap="100"
-        direction="row"
-      >
-        <dt-button
-          v-if="hasChanges"
-          v-dt-tooltip="`Reset`"
-          kind="muted"
-          importance="clear"
-          :size="200"
-          @click="resetOptions"
-        >
-          <template #icon="{ iconSize }">
-            <dt-icon-refresh
-              :size="iconSize"
-            />
-          </template>
-        </dt-button>
-        <dt-button
-          v-dt-tooltip="`Fullscreen`"
-          kind="muted"
-          importance="clear"
-          :size="200"
-          @click="toggleFullScreen"
-        >
-          <template #icon="{ iconSize }">
-            <dt-icon-minimize
-              v-if="isFullScreen"
-              :size="iconSize"
-            />
-            <dt-icon-expand
-              v-else
-              :size="iconSize"
-            />
-          </template>
-        </dt-button>
+          </dt-button>
+        </dt-stack>
       </dt-stack>
-    </dt-stack>
-    <div class="dialtone-playground__start">
-      <dtc-renderer
-        v-model:settings="settings"
-        class="dialtone-playground__component"
-        :component="component"
-        :info="info"
-        :options="options"
-        :library="library"
-        :disabled-members="disabledMembers"
-        @event="onComponentEvent"
-      />
-      <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
-      <div
-        class="dialtone-playground__resizer"
-        @pointerdown="startResize"
-        @dblclick="optionBarWidth = null"
-      />
-      <dtc-option-bar
-        v-if="!blueprint"
-        v-model:options="options"
-        :component="component"
-        :info="info"
-        :style="optionBarWidth ? { 'inline-size': optionBarWidth } : {}"
-      />
+      <div class="dialtone-playground__start">
+        <dtc-renderer
+          v-model:settings="settings"
+          class="dialtone-playground__component"
+          :component="component"
+          :info="info"
+          :options="options"
+          :library="library"
+          :disabled-members="disabledMembers"
+          @event="onComponentEvent"
+        />
+        <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
+        <div
+          class="dialtone-playground__resizer"
+          @pointerdown="startResize"
+          @dblclick="optionBarWidth = null"
+        />
+        <dtc-option-bar
+          v-if="!blueprint"
+          v-model:options="options"
+          :component="component"
+          :info="info"
+          :style="optionBarWidth ? { 'inline-size': optionBarWidth } : {}"
+        />
+      </div>
+      <div class="dialtone-playground__end">
+        <dtc-code-panel
+          :info="info"
+          :options="options"
+          :settings="settings"
+          :disabled-members="disabledMembers"
+          :dev-mode="devMode"
+          :has-changes="hasChanges"
+          :full-screen="isFullScreen"
+          @update:options="e => e(options)"
+        />
+      </div>
     </div>
-    <div class="dialtone-playground__end">
-      <dtc-code-panel
-        :info="info"
-        :options="options"
-        :settings="settings"
-        :disabled-members="disabledMembers"
-        :dev-mode="devMode"
-        :has-changes="hasChanges"
-        :full-screen="isFullScreen"
-        @update:options="e => e(options)"
-      />
-    </div>
-  </div>
+  </Teleport>
 </template>
 
 <script setup>
@@ -159,7 +167,7 @@ import DtcRenderer from './renderer/renderer.vue';
 import { enumerateGroups } from '@/src/lib/utils';
 import { shouldExclude } from '@/src/lib/exclusion_rules';
 import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
-import { computed, nextTick, onErrorCaptured, reactive, ref, watch } from 'vue';
+import { computed, nextTick, onErrorCaptured, onUnmounted, reactive, ref, watch } from 'vue';
 import { cachedRef, computedModel } from '@/src/lib/utils_vue';
 import { clearTokenCache } from '@/src/lib/tokens';
 import { getComponentInfo } from '@/src/lib/info';
@@ -223,14 +231,32 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  fullScreen: {
+    type: Boolean,
+    default: undefined,
+  },
+});
+defineOptions({
+  inheritAttrs: false,
 });
 
+const emit = defineEmits(['update:fullScreen']);
 const selectedVariant = ref('default');
 const activeVariant = ref('default');
-const isFullScreen = ref(false);
+const internalFullScreen = ref(false);
 const optionBarWidth = ref(null);
 let _presetChanging = false;
 const _forceReset = ref(0);
+
+const isFullScreen = computed({
+  get () {
+    return props.fullScreen ?? internalFullScreen.value;
+  },
+  set (value) {
+    internalFullScreen.value = value;
+    emit('update:fullScreen', value);
+  },
+});
 
 const variantOptions = computed(() => {
   return Object.keys(props.variants ?? {})
@@ -499,12 +525,23 @@ function startResize (e) {
 
 function toggleFullScreen () {
   isFullScreen.value = !isFullScreen.value;
-  if (isFullScreen.value) {
+}
+
+function updateBodyFullScreenState (value) {
+  if (typeof document === 'undefined') return;
+
+  if (value) {
     document.body.classList.add('d-of-hidden', 'd-h100vh');
   } else {
     document.body.classList.remove('d-of-hidden', 'd-h100vh');
   }
 }
+
+watch(isFullScreen, updateBodyFullScreenState, { immediate: true });
+
+onUnmounted(() => {
+  updateBodyFullScreenState(false);
+});
 
 /**
  * Set of member names that are currently disabled via exclusion rules or prop dependencies.
@@ -565,11 +602,14 @@ export default {
   }
 
   &--fullscreen {
+    max-block-size: none;
+    max-inline-size: none;
     margin-block: 0;
     position: fixed;
     inset: 0;
-    z-index: var(--zi-popover);
+    z-index: var(--zi-modal);
     background-color: var(--dt-color-surface-secondary);
+    border-radius: 0;
   }
 
   &__start {
