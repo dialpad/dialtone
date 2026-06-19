@@ -125,7 +125,7 @@
             <dt-text
               v-if="option.resolved && !isColor(option.resolved)"
               kind="body"
-              :size="400"
+              size="100"
               tone="muted"
               class="d-mis-auto"
             >
@@ -133,12 +133,12 @@
             </dt-text>
           </dt-stack>
         </dt-list-item>
+        <dt-empty-state
+          v-if="!filteredOptions.length"
+          size="200"
+          body-text="No matches"
+        />
       </div>
-      <dt-empty-state
-        v-if="!filteredOptions.length"
-        size="200"
-        body-text="No matches"
-      />
     </template>
   </dt-dropdown>
 </template>
@@ -220,7 +220,7 @@ const options = computed(() => {
   }) ?? [];
 
   if (props.defaultValue === null || props.defaultValue === undefined) {
-    return [{ value: null, label: '\u2013' }, ...valueOptions];
+    return [{ value: null, label: '–' }, ...valueOptions];
   }
   return valueOptions;
 });
