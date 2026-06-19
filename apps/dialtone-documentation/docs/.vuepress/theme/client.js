@@ -8,6 +8,7 @@ import 'overlayscrollbars/overlayscrollbars.css';
 import { OverlayScrollbars, ClickScrollPlugin } from 'overlayscrollbars';
 import { onBeforeMount, provide, ref, onMounted } from 'vue';
 import { flushPromises } from '@workspaceRoot/common/utils/client.mjs';
+import { syncBrowserThemeColor } from './utils/browserThemeColor.js';
 
 // Layered Theming System - Base layers (always loaded). Material override CSS
 // loads here so all materials are available for attribute-driven switching;
@@ -82,6 +83,8 @@ if (typeof document !== 'undefined') {
 
   // Set data attributes immediately
   document.documentElement.setAttribute('data-dt-brand', 'dp');
+
+  syncBrowserThemeColor();
 }
 
 // The default scrollbar exists outside of the vue instance on the body so

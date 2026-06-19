@@ -5,6 +5,7 @@ import viteSvgLoader from 'vite-svg-loader';
 import anchor from 'markdown-it-anchor';
 import { getDirname, path } from 'vuepress/utils'
 import { execSync } from 'node:child_process';
+import { BROWSER_THEME_COLOR_FALLBACK } from './theme/utils/browserThemeColor.js';
 
 const sidebar = require('../_data/site-nav.json');
 const { dialtoneVuepressTheme } = require('./theme');
@@ -113,7 +114,7 @@ export default defineUserConfig({
     ['link', { rel: 'manifest', href: baseURL + 'assets/images/favicons/site.webmanifest' }],
     ['link', { rel: 'mask-icon', href: baseURL + 'assets/images/favicons/safari-pinned-tab.svg', color: '#7C52FF' }],
     ['meta', { name: 'msapplication-TileColor', content: '#7C52FF' }],
-    ['meta', { name: 'theme-color', content: '#ffffff' }],
+    ['meta', { name: 'theme-color', content: BROWSER_THEME_COLOR_FALLBACK }],
     // Site-level SEO defaults
     ['meta', { name: 'description', content: 'Dialtone is Dialpad\'s design system — tokens, CSS utilities, and Vue components for building consistent UIs.' }],
     ['meta', { property: 'og:site_name', content: 'Dialtone Design System' }],

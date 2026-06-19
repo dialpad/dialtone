@@ -1,6 +1,7 @@
 import { inject, computed, onMounted, onUnmounted, ref } from 'vue';
 import { NAMED_THEMES, NUMBERED_THEMES, ALL_THEME_IDS } from '../constants/themes.js';
 import { formatThemeName } from '../utils/formatThemeName.js';
+import { syncBrowserThemeColor } from '../utils/browserThemeColor.js';
 import {
   setMode as setModeConfig,
   setBrand,
@@ -240,6 +241,7 @@ export function useThemeManager(options = {}) {
     }
     applyBrandTheme(brandName);
     applyContrastTheme(contrast);
+    syncBrowserThemeColor();
   };
 
   // Handler to update both CSS and reactive ref when system preference changes
