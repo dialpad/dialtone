@@ -93,8 +93,7 @@
         },
         {
           "text": "MCP Server",
-          "link": "/guides/mcp-server/",
-          "status": "new"
+          "link": "/guides/mcp-server/"
         },
         {
           "text": "Getting Started",
@@ -250,17 +249,7 @@
     {
       "text": "Design Tokens",
       "link": "/tokens/",
-      "icon": "token",
-      "children": [
-        {
-          "text": "Designing with Tokens",
-          "link": "/tokens/for-designers/"
-        },
-        {
-          "text": "Coding with Tokens",
-          "link": "/tokens/for-developers/"
-        }
-      ]
+      "icon": "token"
     },
     {
       "text": "Components",
@@ -944,8 +933,7 @@
     {
       "text": "Vue Utilities",
       "link": "/functions-and-utilities/",
-      "icon": "code",
-      "status": "new"
+      "icon": "code"
     },
     {
       "text": "UI Kits",
@@ -1017,8 +1005,7 @@
     {
       "text": "Downloads",
       "icon": "download",
-      "link": "/downloads/",
-      "status": "new"
+      "link": "/downloads/"
     }
   ]
 }
