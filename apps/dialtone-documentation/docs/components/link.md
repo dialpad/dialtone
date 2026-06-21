@@ -1,6 +1,6 @@
 ---
 title: Link
-description: A link is a navigational element that can be found on its own, within other text, or directly following content.
+description: Navigation element for inline text or adjacent content.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-link--default

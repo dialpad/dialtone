@@ -1,6 +1,6 @@
 ---
 title: Radio Group
-description: Radio groups are control elements that allow the user to make a single selection from a list of options.
+description: Related radio options for choosing a single value.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-radio-group--default

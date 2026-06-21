@@ -1,6 +1,6 @@
 ---
 title: Notice
-description: A notice is an informational and assistive message that appears inline with content.
+description: Inline message for guidance, feedback, or status.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-notice--default

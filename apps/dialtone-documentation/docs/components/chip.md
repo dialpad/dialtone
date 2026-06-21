@@ -1,6 +1,6 @@
 ---
 title: Chip
-description: A Chip is a compact UI element that provides brief, descriptive information about an element. It is terse, ideally one word.
+description: Compact token for selected values, filters, or dismissible items.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-chip--default

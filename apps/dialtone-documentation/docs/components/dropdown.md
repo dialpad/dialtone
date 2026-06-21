@@ -1,6 +1,6 @@
 ---
 title: Dropdown
-description: A Dropdown presents a list of options or actions.
+description: Triggerable menu for actions or choices.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-dropdown--default

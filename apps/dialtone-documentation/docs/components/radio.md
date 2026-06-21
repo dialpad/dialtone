@@ -1,6 +1,6 @@
 ---
 title: Radio
-description: A radio is an input control that allows users to select only one option from a number of choices.
+description: Form control for choosing one option from a set.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-radio--default

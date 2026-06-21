@@ -1,6 +1,6 @@
 ---
 title: Split Button
-description: A Split Button offers a default action paired with a secondary action to reveal alternate or related actions.
+description: Primary action paired with a menu for related actions.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-split-button--default

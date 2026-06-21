@@ -151,8 +151,14 @@
       <dt-text
         v-if="$frontmatter.description"
         as="p"
-        kind="body"
-        size="400"
+        kind="headline"
+        :size="viewport.pick({
+          default: '400',
+          lg: '500',
+        })"
+
+        strength="normal"
+        density="300"
         tone="tertiary"
         wrap="pretty"
         class="d-mbs-150 d-mbe-300 d-wmx75ch"

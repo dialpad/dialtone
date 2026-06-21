@@ -1,6 +1,6 @@
 ---
 title: Image Viewer
-description: Image Viewer lets the user click on an image to see it in a full screen modal.
+description: Full-screen preview for browsing image attachments.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-image-viewer--default

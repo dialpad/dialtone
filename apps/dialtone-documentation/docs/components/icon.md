@@ -1,6 +1,6 @@
 ---
 title: Icon
-description: Collection of customizable symbols and sizes
+description: Customizable symbols for actions, objects, status, and navigation.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-icon--default

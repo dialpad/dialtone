@@ -1,6 +1,6 @@
 ---
 title: Combobox With Popover
-description: A combobox that renders the listbox inside a popover therefore the listbox is rendered at the root of the document.
+description: Searchable input paired with popover-rendered option content.
 keywords: ["dropdown", "select", "autocomplete", "listbox", "append to body", "DtComboboxWithPopover", "dt-combobox-with-popover"]
 status: ready
 thumb: true

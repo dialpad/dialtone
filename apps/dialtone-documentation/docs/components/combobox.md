@@ -1,6 +1,6 @@
 ---
 title: Combobox
-description: A combobox is a semantic component that displays an input element combined with a listbox, which enables the user to select items from the list.
+description: Searchable input for choosing from a list of options.
 status: ready
 thumb: true
 figma: planned

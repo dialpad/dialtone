@@ -1,6 +1,6 @@
 ---
 title: Hovercard
-description: A Hovercard toggles a content overlay when its anchor element is hovered for a minimum amount of time.
+description: Contextual preview revealed from a hover or focus target.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-hovercard--default

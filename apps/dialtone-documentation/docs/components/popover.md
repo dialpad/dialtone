@@ -1,6 +1,6 @@
 ---
 title: Popover
-description: A Popover displays a content overlay when its anchor element is activated.
+description: Floating surface for supplemental content or controls.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-popover--default

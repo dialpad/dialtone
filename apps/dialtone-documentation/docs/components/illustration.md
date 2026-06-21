@@ -1,6 +1,6 @@
 ---
 title: Illustration
-description: The Illustration component provides a set of images to provide context to your application
+description: Contextual artwork for empty states, guidance, and visual support.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-illustration--default

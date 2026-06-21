@@ -2,7 +2,7 @@
 title: Toggle
 status: ready
 thumb: true
-description: A toggle, or "switch", is a button control element that allows the user to make a binary selection.
+description: Switch control for turning a setting on or off.
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-toggle--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=8272-20496
 keywords: ["switch", "checkbox", "on off", "d-toggle", "DtToggle", "dt-toggle", "flip switch"]

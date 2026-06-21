@@ -1,6 +1,6 @@
 ---
 title: List Item Group
-description: The "List Item Group" component uses a non interactive heading which groups list items.
+description: Non-interactive heading that organizes related list items.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-list-item-group--default

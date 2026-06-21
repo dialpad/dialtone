@@ -1,6 +1,6 @@
 ---
 title: Keyboard shortcut
-description: This component displays a visual representation of a keyboard shortcut to the user.
+description: Visual treatment for keyboard commands and key combinations.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-keyboard-shortcut--default

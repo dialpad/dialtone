@@ -1,6 +1,6 @@
 ---
 title: Checkbox Group
-description: Checkbox groups are convenient components for a grouping of related Checkboxes.
+description: Related checkbox options with shared labeling and validation.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-checkbox-group--default

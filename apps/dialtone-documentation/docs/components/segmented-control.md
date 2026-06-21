@@ -1,21 +1,12 @@
 ---
 title: Segmented Control
-description: Single-select, all-options-visible control for switching views, scopes, or modes within the same context.
+description: Single-select control for switching views, scopes, or modes.
 status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-segmented-control--default
 keywords: ["segmented control", "toggle group", "button toggle", "radio group", "d-segmented-control", "DtSegmentedControl", "dt-segmented-control", "select", "scope", "content switcher"]
 combinator: DtSegmentedControl
 ---
-
-```vue demo-only
-<dt-segmented-control v-model="selected" aria-label="View filter">
-  <dt-segmented-control-item value="all">All</dt-segmented-control-item>
-  <dt-segmented-control-item value="favorites">Favorites</dt-segmented-control-item>
-  <dt-segmented-control-item value="recent">Recent</dt-segmented-control-item>
-  <dt-segmented-control-item value="groups">Groups</dt-segmented-control-item>
-</dt-segmented-control>
-```
 
 ## Usage
 

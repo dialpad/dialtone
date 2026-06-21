@@ -1,6 +1,6 @@
 ---
 title: Lazy Show
-description: Lazy show is a utility component that prevents its children from being rendered until the first time it is shown.
+description: Defers rendering child content until it is first shown.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/utilities-lazy-show--default

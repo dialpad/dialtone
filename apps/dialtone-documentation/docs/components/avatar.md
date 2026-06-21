@@ -1,6 +1,6 @@
 ---
 title: Avatar
-description: An avatar is a visual representation of a user or object.
+description: Visual identifier for a user, object, or participant group.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-avatar--default

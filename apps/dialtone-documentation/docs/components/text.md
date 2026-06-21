@@ -1,6 +1,6 @@
 ---
 title: Text
-description: Consistent typography styling through semantic text kinds and sizes.
+description: Token-based typography for semantic text styles.
 status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-text--default

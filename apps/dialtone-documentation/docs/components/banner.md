@@ -1,6 +1,6 @@
 ---
 title: Banner
-description: A banner is a type of Notice, delivering system and engagement messaging. It is highly intrusive and should be used sparingly and appropriately.
+description: High-visibility message for system or engagement updates.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-banner--default

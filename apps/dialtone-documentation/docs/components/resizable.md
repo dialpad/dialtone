@@ -1,6 +1,6 @@
 ---
 title: Resizable
-description: A layout component that lets users resize adjacent panels by dragging a handle between them.
+description: Layout primitive for adjustable panels and split views.
 keywords: ["resize", "split pane", "panel", "drag handle", "DtResizable", "dt-resizable"]
 status: beta
 thumb: true

@@ -1,6 +1,6 @@
 ---
 title: Presence
-description: A visual control element indicating the current status of a user.
+description: Status indicator for user availability.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-presence--default

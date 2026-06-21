@@ -1,6 +1,6 @@
 ---
 title: Stack
-description: Foundational layout primitive for elements along a vertical or horizontal axis, with consistent spacing and alignment.
+description: Layout primitive for arranging children with direction and gap.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-stack--default

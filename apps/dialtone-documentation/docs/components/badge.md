@@ -1,6 +1,6 @@
 ---
 title: Badge
-description: A badge is a compact UI element providing brief, descriptive information about an element and its surrounding context. It is terse, ideally one word.
+description: Compact marker for status, metadata, or short labels.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-badge--default

@@ -1,6 +1,6 @@
 ---
 title: Select menu
-description: A select menu is an input control that allows users to choose one option from a list.
+description: Dropdown field for choosing one option from a list.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-select-menu--default

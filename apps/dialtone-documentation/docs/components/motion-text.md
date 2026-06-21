@@ -1,6 +1,6 @@
 ---
 title: Motion Text
-description: A versatile, accessible text animation component with multiple animation modes, full accessibility support, and comprehensive customization options.
+description: Animated text for reveal, shimmer, and loading moments.
 keywords: ["animated text", "typing", "loading text", "animation", "DtMotionText", "dt-motion-text"]
 status: new
 thumb: true

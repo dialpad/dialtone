@@ -1,6 +1,6 @@
 ---
 title: Checkbox
-description: A checkbox is an input control that allows users to select zero, one, or more options from a number of choices.
+description: Form control for selecting zero, one, or many options.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-checkbox--default

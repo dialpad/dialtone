@@ -1,6 +1,6 @@
 ---
 title: Emoji Text Wrapper
-description: "Wrapper to find and replace shortcodes like :smile: or unicode chars such as 😄 with our custom Emojis implementation."
+description: Text wrapper that replaces emoji shortcodes and Unicode characters.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji-text-wrapper--default

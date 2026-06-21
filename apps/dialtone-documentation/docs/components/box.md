@@ -1,6 +1,6 @@
 ---
 title: Box
-description: Low-level surface and spacing primitive for building token-constrained containers.
+description: Primitive container for surface, border, spacing, and sizing.
 status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-box--default

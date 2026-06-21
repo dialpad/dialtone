@@ -1,6 +1,6 @@
 ---
 title: Progress Circle
-description: A circular SVG progress indicator for determinate upload or processing progress.
+description: Circular indicator for upload or processing progress.
 keywords: ["loader", "loading", "spinner", "upload", "processing", "DtProgressCircle", "dt-progress-circle"]
 status: new
 thumb: true

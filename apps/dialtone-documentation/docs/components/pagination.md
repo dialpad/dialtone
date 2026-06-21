@@ -1,6 +1,6 @@
 ---
 title: Pagination
-description: Pagination allows you to divide large amounts of content into smaller chunks across multiple pages.
+description: Navigation for moving through large sets of paged content.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-pagination--default
