@@ -2212,6 +2212,11 @@
       "file-pdf": [
         "document"
       ],
+      "file-text": [
+        "document",
+        "txt",
+        "data"
+      ],
       "file": [
         "document"
       ],
