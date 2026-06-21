@@ -126,7 +126,7 @@
     {
       "text": "Foundations",
       "link": "/foundations/",
-      "icon": "toy-brick",
+      "icon": "book-open",
       "children": [
         {
           "text": "Logo",
@@ -938,7 +938,7 @@
     {
       "text": "UI Kits",
       "link": "/ui-kits/",
-      "icon": "box",
+      "icon": "package",
       "children": [
         {
           "text": "Meet the Kits",
