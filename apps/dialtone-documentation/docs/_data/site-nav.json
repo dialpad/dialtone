@@ -247,11 +247,6 @@
       ]
     },
     {
-      "text": "Design Tokens",
-      "link": "/tokens/",
-      "icon": "token"
-    },
-    {
       "text": "Components",
       "link": "/components/",
       "icon": "component",
@@ -898,6 +893,11 @@
           ]
         }
       ]
+    },
+    {
+      "text": "Design Tokens",
+      "link": "/tokens/",
+      "icon": "token"
     },
     {
       "text": "Content",

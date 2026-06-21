@@ -5,11 +5,21 @@ keywords: ["design system", "components", "css utilities", "design tokens", "con
 ---
 
 <DtBox class="d-box d-box--bc-default d-d-grid d-g-300 md:d-g-cols3 d-mbe-400">
-  <DtLink to="/dialtone/whats-new/" :underline="false" class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary">
+  <DtLink
+    to="/dialtone/whats-new/"
+    :underline="false"
+    class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary"
+  >
     <DtStack direction="row" gap="150">
-      <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
+      <DtBox
+        :padding="viewport.pick({ default: '100', md: '200' })"
+        border-width="100"
+        border-color="subtle"
+        border-radius="400"
+        surface="secondary"
+      >
         <DtStack>
-          <dt-icon name="megaphone" :size="viewport.pick({ default: '300', md: '500' })" />
+          <dt-icon class="d-fc-tertiary" name="megaphone" :size="viewport.pick({ default: '300', md: '500' })" />
         </DtStack>
       </DtBox>
       <DtStack>
@@ -20,9 +30,15 @@ keywords: ["design system", "components", "css utilities", "design tokens", "con
   </DtLink>
   <DtLink to="/guides/migration/" :underline="false" class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary">
     <DtStack direction="row" gap="150">
-      <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
+      <DtBox
+        :padding="viewport.pick({ default: '100', md: '200' })"
+        border-width="100"
+        border-color="subtle"
+        border-radius="400"
+        surface="secondary"
+      >
         <DtStack>
-          <dt-icon name="list-checks" :size="viewport.pick({ default: '300', md: '500' })" />
+          <dt-icon class="d-fc-tertiary" name="list-checks" :size="viewport.pick({ default: '300', md: '500' })" />
         </DtStack>
       </DtBox>
       <DtStack>
@@ -33,9 +49,15 @@ keywords: ["design system", "components", "css utilities", "design tokens", "con
   </DtLink>
   <DtLink to="/guides/getting-started/" :underline="false" class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary">
     <DtStack direction="row" gap="150">
-      <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
+      <DtBox
+        :padding="viewport.pick({ default: '100', md: '200' })"
+        border-width="100"
+        border-color="subtle"
+        border-radius="400"
+        surface="secondary"
+      >
         <DtStack>
-          <dt-icon name="file-text" :size="viewport.pick({ default: '300', md: '500' })" />
+          <dt-icon class="d-fc-tertiary" name="file-text" :size="viewport.pick({ default: '300', md: '500' })" />
         </DtStack>
       </DtBox>
       <DtStack>

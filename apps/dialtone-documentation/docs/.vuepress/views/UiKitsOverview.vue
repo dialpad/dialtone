@@ -1,10 +1,20 @@
 <template>
   <DtBox class="d-box d-box--bc-default d-d-grid d-g-300 md:d-g-cols3 d-mbe-400">
-    <DtLink to="/ui-kits/what-are-ui-kits/" :underline="false" class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary">
+    <DtLink
+      to="/ui-kits/what-are-ui-kits/"
+      :underline="false"
+      class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary"
+    >
       <DtStack direction="row" gap="150">
-        <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
+        <DtBox
+          :padding="viewport.pick({ default: '100', md: '200' })"
+          border-width="100"
+          border-color="subtle"
+          border-radius="400"
+          surface="secondary"
+        >
           <DtStack>
-            <dt-icon name="file-text" :size="viewport.pick({ default: '300', md: '500' })" />
+            <dt-icon class="d-fc-tertiary" name="file-text" :size="viewport.pick({ default: '300', md: '500' })" />
           </DtStack>
         </DtBox>
         <DtStack>
@@ -17,11 +27,21 @@
         </DtStack>
       </DtStack>
     </DtLink>
-    <DtLink to="/ui-kits/where-to-start/" :underline="false" class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary">
+    <DtLink
+      to="/ui-kits/where-to-start/"
+      :underline="false"
+      class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary"
+    >
       <DtStack direction="row" gap="150">
-        <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
+        <DtBox
+          :padding="viewport.pick({ default: '100', md: '200' })"
+          border-width="100"
+          border-color="subtle"
+          border-radius="400"
+          surface="secondary"
+        >
           <DtStack>
-            <dt-icon name="file-text" :size="viewport.pick({ default: '300', md: '500' })" />
+            <dt-icon class="d-fc-tertiary" name="file-text" :size="viewport.pick({ default: '300', md: '500' })" />
           </DtStack>
         </DtBox>
         <DtStack>
@@ -34,11 +54,21 @@
         </DtStack>
       </DtStack>
     </DtLink>
-    <DtLink to="/ui-kits/how-to-contribute/" :underline="false" class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary">
+    <DtLink
+      to="/ui-kits/how-to-contribute/"
+      :underline="false"
+      class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary"
+    >
       <DtStack direction="row" gap="150">
-        <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
+        <DtBox
+          :padding="viewport.pick({ default: '100', md: '200' })"
+          border-width="100"
+          border-color="subtle"
+          border-radius="400"
+          surface="secondary"
+        >
           <DtStack>
-            <dt-icon name="file-text" :size="viewport.pick({ default: '300', md: '500' })" />
+            <dt-icon class="d-fc-tertiary" name="file-text" :size="viewport.pick({ default: '300', md: '500' })" />
           </DtStack>
         </DtBox>
         <DtStack>
