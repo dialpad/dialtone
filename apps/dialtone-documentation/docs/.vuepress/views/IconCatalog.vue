@@ -62,37 +62,38 @@
       </div>
     </div>
   </div>
-  <div
-    v-for="(icons, category) in filteredIconsList"
-    :key="category"
-    class="d-mbe-200 d-px-200"
-  >
-    <dt-text
-      as="h2"
-      kind="headline"
-      :size="500"
-      class="d-tt-capitalize d-mbe-50"
+  <DtStack gap="300">
+    <DtBox
+      v-for="(icons, category) in filteredIconsList"
+      :key="category"
+      :padding-inline="200"
     >
-      {{ category }}
-    </dt-text>
-    <div class="d-gl-docsite-icons">
-      <icon-popover
-        v-for="(keywords, name) in icons"
-        :id="`in-${name}`"
-        :key="name"
-        v-model="isPopoverOpen[name]"
-        :icon-name="name"
-        :category="category"
-        :keywords="keywords"
-        @click="selectIcon({ name, keywords, category })"
-      />
-    </div>
-  </div>
+      <dt-text
+        as="h2"
+        kind="headline"
+        :size="500"
+        class="d-tt-capitalize d-mbe-50"
+      >
+        {{ category }}
+      </dt-text>
+      <div class="d-gl-docsite-icons">
+        <icon-popover
+          v-for="(keywords, name) in icons"
+          :id="`in-${name}`"
+          :key="name"
+          v-model="isPopoverOpen[name]"
+          :icon-name="name"
+          :category="category"
+          :keywords="keywords"
+          @click="selectIcon({ name, keywords, category })"
+        />
+      </div>
+    </DtBox>
+  </DtStack>
   <dt-empty-state
     v-if="!hasSearchResults"
     :size="200"
     :header-text="`No results found for &OpenCurlyDoubleQuote;${search}&CloseCurlyDoubleQuote;`"
-    class="d-w100p d-ba d-bc-subtle d-bar-400 d-mbs-200 d-pbs-400"
   >
     <template #icon="{ iconSize }">
       <dt-icon name="box" :size="iconSize" />
