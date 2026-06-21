@@ -40,6 +40,7 @@
             title="Dialtone homepage"
             :underline="false"
             to="/"
+            class="d-bar-200"
           >
             <DtIllustration name="dialpad-logo" class="d-h-50 d-w-auto" />
           </dt-link>

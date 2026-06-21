@@ -1,10 +1,10 @@
 <template>
   <DtBox class="d-box d-box--bc-default d-d-grid d-g-300 md:d-g-cols3 d-mbe-400">
-    <DtLink to="/ui-kits/what-are-ui-kits/" :underline="false" class="d-d-block d-fc-secondary h:d-td-none h:d-fc-primary">
+    <DtLink to="/ui-kits/what-are-ui-kits/" :underline="false" class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary">
       <DtStack direction="row" gap="150">
-        <DtBox padding="200" border-width="100" border-color="subtle" border-radius="400" surface="secondary" class="d-d-inline-flex">
+        <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
           <DtStack>
-            <dt-icon name="file-text" size="500" />
+            <dt-icon name="file-text" :size="viewport.pick({ default: '300', md: '500' })" />
           </DtStack>
         </DtBox>
         <DtStack>
@@ -17,11 +17,11 @@
         </DtStack>
       </DtStack>
     </DtLink>
-    <DtLink to="/ui-kits/where-to-start/" :underline="false" class="d-d-block d-fc-secondary h:d-td-none h:d-fc-primary">
+    <DtLink to="/ui-kits/where-to-start/" :underline="false" class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary">
       <DtStack direction="row" gap="150">
-        <DtBox padding="200" border-width="100" border-color="subtle" border-radius="400" surface="secondary" class="d-d-inline-flex">
+        <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
           <DtStack>
-            <dt-icon name="file-text" size="500" />
+            <dt-icon name="file-text" :size="viewport.pick({ default: '300', md: '500' })" />
           </DtStack>
         </DtBox>
         <DtStack>
@@ -34,11 +34,11 @@
         </DtStack>
       </DtStack>
     </DtLink>
-    <DtLink to="/ui-kits/how-to-contribute/" :underline="false" class="d-d-block d-fc-secondary h:d-td-none h:d-fc-primary">
+    <DtLink to="/ui-kits/how-to-contribute/" :underline="false" class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary">
       <DtStack direction="row" gap="150">
-        <DtBox padding="200" border-width="100" border-color="subtle" border-radius="400" surface="secondary" class="d-d-inline-flex">
+        <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
           <DtStack>
-            <dt-icon name="file-text" size="500" />
+            <dt-icon name="file-text" :size="viewport.pick({ default: '300', md: '500' })" />
           </DtStack>
         </DtBox>
         <DtStack>
@@ -106,8 +106,11 @@
 <script setup>
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import { computed } from 'vue';
+import { useViewportBreakpoints } from '../theme/composables/useViewportBreakpoints.js';
 
 const themeData = useThemeLocaleData();
+
+const viewport = useViewportBreakpoints();
 
 const kits = computed(() => {
   // 'UI Kits' (top level) and its 'Meet the Kits' child both link to /ui-kits/;

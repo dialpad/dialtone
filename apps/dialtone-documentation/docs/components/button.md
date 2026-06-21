@@ -5,7 +5,7 @@ status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-button--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=19800-32233
-keywords: ["btn","click","action","cta","d-button","DtButton","dt-button"]
+keywords: ["btn","click","action","cta","d-button","DtButton","dt-button","clear","outline","ghost","muted"]
 combinator: DtButton
 ---
 

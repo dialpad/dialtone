@@ -7,25 +7,27 @@ no_preview: true
 
 ## Newest Components
 
+<!-- :shadow="viewport.pick({ default: 'card', lg: false, })" -->
+
 <DtBox class="d-box d-box--bc-default d-d-grid d-g-300 md:d-g-cols3 d-mbe-400">
-  <DtLink to="/components/box" :underline="false" class="d-d-block d-fc-secondary h:d-td-none h:d-fc-primary">
+  <DtLink to="/components/box" :underline="false" class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary">
     <DtStack direction="row" gap="150">
-      <DtBox padding="200" border-width="100" border-color="subtle" border-radius="400" surface="secondary" class="d-d-inline-flex">
+      <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
         <DtStack>
-          <dt-icon name="puzzle" size="500" />
+          <dt-icon name="puzzle" :size="viewport.pick({ default: '300', md: '500' })" />
         </DtStack>
       </DtBox>
       <DtStack>
         <dt-text as="h3" kind="headline" size="200">DtBox</dt-text>
-        <dt-text as="p" kind="body" size="200">Surface, border, spacing, and sizing container primitive.</dt-text>
+        <dt-text as="p" kind="body" size="200">Primitive container for surface, border, spacing, and sizing.</dt-text>
       </DtStack>
     </DtStack>
   </DtLink>
-  <DtLink to="/components/filter-pill" :underline="false" class="d-d-block d-fc-secondary h:d-td-none h:d-fc-primary">
+  <DtLink to="/components/filter-pill" :underline="false" class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary">
     <DtStack direction="row" gap="150">
-      <DtBox padding="200" border-width="100" border-color="subtle" border-radius="400" surface="secondary" class="d-d-inline-flex">
+      <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
         <DtStack>
-          <dt-icon name="puzzle" size="500" />
+          <dt-icon name="puzzle" :size="viewport.pick({ default: '300', md: '500' })" />
         </DtStack>
       </DtBox>
       <DtStack>
@@ -34,50 +36,63 @@ no_preview: true
       </DtStack>
     </DtStack>
   </DtLink>
-  <DtLink to="/components/mode-island" :underline="false" class="d-d-block d-fc-secondary h:d-td-none h:d-fc-primary">
+  <DtLink to="/components/mode-island" :underline="false" class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary">
     <DtStack direction="row" gap="150">
-      <DtBox padding="200" border-width="100" border-color="subtle" border-radius="400" surface="secondary" class="d-d-inline-flex">
+      <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
         <DtStack>
-          <dt-icon name="puzzle" size="500" />
+          <dt-icon name="puzzle" :size="viewport.pick({ default: '300', md: '500' })" />
         </DtStack>
       </DtBox>
       <DtStack>
         <dt-text as="h3" kind="headline" size="200">Mode Directive</dt-text>
-        <dt-text as="p" kind="body" size="200">Scope light, dark, or inverted mode to a region.</dt-text>
+        <dt-text as="p" kind="body" size="200">Directive for scoping light, dark, or inverted color mode.</dt-text>
       </DtStack>
     </DtStack>
   </DtLink>
-  <DtLink to="/components/motion-text" :underline="false" class="d-d-block d-fc-secondary h:d-td-none h:d-fc-primary">
+  <DtLink to="/components/motion-text" :underline="false" class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary">
     <DtStack direction="row" gap="150">
-      <DtBox padding="200" border-width="100" border-color="subtle" border-radius="400" surface="secondary" class="d-d-inline-flex">
+      <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
         <DtStack>
-          <dt-icon name="puzzle" size="500" />
+          <dt-icon name="puzzle" :size="viewport.pick({ default: '300', md: '500' })" />
         </DtStack>
       </DtBox>
       <DtStack>
         <dt-text as="h3" kind="headline" size="200">DtMotionText</dt-text>
-        <dt-text as="p" kind="body" size="200">Animated text with accessible reveal and shimmer modes.</dt-text>
+        <dt-text as="p" kind="body" size="200">Animated text for reveal, shimmer, and loading moments.</dt-text>
       </DtStack>
     </DtStack>
   </DtLink>
-  <DtLink to="/components/segmented-control" :underline="false" class="d-d-block d-fc-secondary h:d-td-none h:d-fc-primary">
+  <DtLink to="/components/motion-text" :underline="false" class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary">
     <DtStack direction="row" gap="150">
-      <DtBox padding="200" border-width="100" border-color="subtle" border-radius="400" surface="secondary" class="d-d-inline-flex">
+      <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
         <DtStack>
-          <dt-icon name="puzzle" size="500" />
+          <dt-icon name="puzzle" :size="viewport.pick({ default: '300', md: '500' })" />
+        </DtStack>
+      </DtBox>
+      <DtStack>
+        <dt-text as="h3" kind="headline" size="200">DtResizable</dt-text>
+        <dt-text as="p" kind="body" size="200">Layout primitive for adjustable panels and split views.</dt-text>
+      </DtStack>
+    </DtStack>
+  </DtLink>
+  <DtLink to="/components/segmented-control" :underline="false" class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary">
+    <DtStack direction="row" gap="150">
+      <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
+        <DtStack>
+          <dt-icon name="puzzle" :size="viewport.pick({ default: '300', md: '500' })" />
         </DtStack>
       </DtBox>
       <DtStack>
         <dt-text as="h3" kind="headline" size="200">DtSegmentedControl</dt-text>
-        <dt-text as="p" kind="body" size="200">Single-select control for switching views or modes.</dt-text>
+        <dt-text as="p" kind="body" size="200">Single-select control for switching views, scopes, or modes.</dt-text>
       </DtStack>
     </DtStack>
   </DtLink>
-  <DtLink to="/components/text" :underline="false" class="d-d-block d-fc-secondary h:d-td-none h:d-fc-primary">
+  <DtLink to="/components/text" :underline="false" class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary">
     <DtStack direction="row" gap="150">
-      <DtBox padding="200" border-width="100" border-color="subtle" border-radius="400" surface="secondary" class="d-d-inline-flex">
+      <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
         <DtStack>
-          <dt-icon name="puzzle" size="500" />
+          <dt-icon name="puzzle" :size="viewport.pick({ default: '300', md: '500' })" />
         </DtStack>
       </DtBox>
       <DtStack>
@@ -91,3 +106,9 @@ no_preview: true
 ## Components
 
 <overview :pages="$page.enhancedFrontmatter" />
+
+<script setup>
+import { useViewportBreakpoints } from '@composables/useViewportBreakpoints.js';
+
+const viewport = useViewportBreakpoints();
+</script>

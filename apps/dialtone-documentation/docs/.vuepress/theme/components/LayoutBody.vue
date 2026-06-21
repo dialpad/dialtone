@@ -1,5 +1,5 @@
 <template>
-  <dt-stack direction="row" align="stretch" gap="150" class="d-h100p">
+  <dt-stack direction="row" align="stretch" gap="250" class="d-h100p">
     <DtBox
       v-if="viewport.above('lg') && !$frontmatter.home && !$frontmatter.noSidebar"
       padding-block-end="400"

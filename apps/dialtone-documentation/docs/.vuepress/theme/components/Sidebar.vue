@@ -36,7 +36,7 @@
             </template>
           </dt-button>
           <dt-keyboard-shortcut
-            v-else
+            v-else-if="viewport.above('lg')"
             class="d-mie-n75"
             shortcut="/"
             screen-reader-text="Slash"
@@ -78,6 +78,7 @@ import { useRoute, useRouter } from 'vue-router';
 import SidebarItem from './SidebarItem.vue';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import { useSidebarItems } from '../composables/useSidebarItems';
+import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
 import {
   canReceiveCharacterInput,
   isSidebarSearchShortcut,
@@ -87,6 +88,7 @@ const route = useRoute();
 const router = useRouter();
 const items = useThemeLocaleData().value.sidebar;
 const sidebarItems = useSidebarItems(items);
+const viewport = useViewportBreakpoints();
 
 // Track which items are open (by their link or text as key)
 const openItems = ref(new Set());
