@@ -1755,6 +1755,14 @@
         "html",
         "xml"
       ],
+      "component": [
+        "design",
+        "element",
+        "group",
+        "module",
+        "part",
+        "symbol"
+      ],
       "copy": [
         "clone",
         "duplicate"

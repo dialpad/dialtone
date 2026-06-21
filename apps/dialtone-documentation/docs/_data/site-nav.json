@@ -254,7 +254,7 @@
     {
       "text": "Components",
       "link": "/components/",
-      "icon": "puzzle",
+      "icon": "component",
       "children": [
         {
           "text": "Component Status",
