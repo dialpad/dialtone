@@ -1143,4 +1143,48 @@ describe('injectComponentImport — Options API', () => {
     ].join('\n');
     assert.equal(injectComponentImport(content, 'DtText', '@dialpad/dialtone-vue'), null);
   });
+
+  it('does not corrupt a helper object with components: { before export default', () => {
+    const content = [
+      '<script>',
+      'import { DtStack } from \'@dialpad/dialtone-vue\';',
+      'const editorConfig = { components: { toolbar: true } };',
+      'export default {',
+      '  components: {',
+      '    DtStack,',
+      '  },',
+      '};',
+      '</script>',
+    ].join('\n');
+    const out = injectComponentImport(content, 'DtText', '@dialpad/dialtone-vue');
+    assert.ok(out, 'should return updated content');
+    assert.ok(out.includes('import { DtText } from \'@dialpad/dialtone-vue\';'), 'import inserted');
+    // DtText must be added to export default components, not to the editorConfig object
+    const editorConfigIdx = out.indexOf('editorConfig');
+    const dtTextIdx = out.indexOf('DtText,');
+    const exportDefaultIdx = out.indexOf('export default');
+    assert.ok(dtTextIdx > exportDefaultIdx, 'DtText registered after export default');
+    assert.ok(dtTextIdx > editorConfigIdx, 'DtText not inserted into editorConfig helper');
+    assert.ok(!out.slice(0, exportDefaultIdx).includes('DtText,'), 'DtText not in pre-export-default scope');
+  });
+
+  it('returns null when components: { appears only in a template binding, not in export default', () => {
+    // Simulate a file where the script has no components option but the template
+    // has a :config="{ components: { ... } }" binding — the template is masked
+    // during injectComponentImport (which operates on the full SFC), so the
+    // components: { in the template must not be matched.
+    const content = [
+      '<template>',
+      '  <some-editor :config="{ components: { toolbar: MyBar } }" />',
+      '</template>',
+      '<script>',
+      'import { DtStack } from \'@dialpad/dialtone-vue\';',
+      'export default {',
+      '  data () { return {}; },',
+      '};',
+      '</script>',
+    ].join('\n');
+    // No components: { in export default → should return null (can't auto-register)
+    assert.equal(injectComponentImport(content, 'DtText', '@dialpad/dialtone-vue'), null);
+  });
 });

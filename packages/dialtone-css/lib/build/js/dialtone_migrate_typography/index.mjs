@@ -1300,13 +1300,24 @@ export function injectComponentImport (content, componentName, importPath) {
   if (isScriptSetup) return out; // import alone is sufficient for <script setup>
 
   // Options API: also register in components: {}
-  const compMatch = /components\s*:\s*\{/.exec(out);
-  if (!compMatch) return null; // no components object — can't safely auto-register
+  // Re-exec against the updated content to get current positions, then restrict
+  // the components: { search to within the script block and after export default
+  // to avoid matching template bindings or helper objects that appear earlier.
+  const scriptMatchUpdated = scriptBlockRe.exec(out);
+  if (!scriptMatchUpdated) return null;
+  const scriptBodyStart = scriptMatchUpdated.index + scriptMatchUpdated[0].indexOf('>') + 1;
+  const scriptBodyText = scriptMatchUpdated[1];
+  const exportDefaultMatch = /\bexport\s+default\b/.exec(scriptBodyText);
+  if (!exportDefaultMatch) return null;
+  const searchFrom = scriptBodyStart + exportDefaultMatch.index;
+  const compMatchInSlice = /components\s*:\s*\{/.exec(out.slice(searchFrom));
+  if (!compMatchInSlice) return null; // no components object — can't safely auto-register
+  const compAbsIndex = searchFrom + compMatchInSlice.index;
 
-  const lineStart = out.lastIndexOf('\n', compMatch.index) + 1;
-  const compIndent = out.slice(lineStart, compMatch.index).match(/^[ \t]*/)[0];
+  const lineStart = out.lastIndexOf('\n', compAbsIndex) + 1;
+  const compIndent = out.slice(lineStart, compAbsIndex).match(/^[ \t]*/)[0];
   const memberIndent = compIndent + '  ';
-  const insertAt = compMatch.index + compMatch[0].length;
+  const insertAt = compAbsIndex + compMatchInSlice[0].length;
   out = out.slice(0, insertAt) + `\n${memberIndent}${componentName},` + out.slice(insertAt);
 
   return out;
