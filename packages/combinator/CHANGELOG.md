@@ -1,3 +1,15 @@
+# [1.2.0-next.12](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.11...combinator/v1.2.0-next.12) (2026-06-16)
+
+
+### Bug Fixes
+
+* **Combinator:** DLT-3232 pass app context to renderer target for directive resolution ([#1301](https://github.com/dialpad/dialtone/issues/1301)) ([41e125b](https://github.com/dialpad/dialtone/commit/41e125ba465334d94384acf5fc596bd5e5c6a063))
+
+
+### Features
+
+* **Combinator:** DLT-3470 render DtToggle mixed state as a segmented control ([#1309](https://github.com/dialpad/dialtone/issues/1309)) ([ff2a7b8](https://github.com/dialpad/dialtone/commit/ff2a7b89813bc3f090db189aa5fc22c630f43856))
+
 # [1.2.0-next.11](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.10...combinator/v1.2.0-next.11) (2026-06-04)
 
 

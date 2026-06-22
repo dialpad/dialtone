@@ -47,7 +47,11 @@
       <dt-lazy-show
         :id="id"
         ref="content"
-        v-dt-focustrap="{ active: modal && isOpen, initialFocus: false, restoreFocus: false }"
+        v-dt-focustrap="{
+          active: (modal || focustrap) && isOpen,
+          initialFocus: false,
+          restoreFocus: !modal && focustrap,
+        }"
         :role="role"
         :data-qa="$attrs['data-qa'] ? `${$attrs['data-qa']}__dialog` : 'dt-popover'"
         :aria-hidden="`${!isOpen}`"
@@ -342,6 +346,18 @@ export default {
     modal: {
       type: Boolean,
       default: true,
+    },
+
+    /**
+     * When true, traps Tab/Shift+Tab focus within the popover dialog.
+     * Use this to enable focus trapping independently of modal state —
+     * e.g. a non-modal popover whose content still requires keyboard containment.
+     * When `modal` is true, the trap is already active; this prop has no additional effect.
+     * @values true, false
+     */
+    focustrap: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -1014,7 +1030,7 @@ export default {
     },
 
     onKeydown (e) {
-      // Tab focus trapping (when modal) is handled by the v-dt-focustrap directive on the content.
+      // Tab focus trapping (when modal or focustrap) is handled by the v-dt-focustrap directive on the content.
       if (e.key === 'Escape') {
         this.closePopover();
       }

@@ -63,13 +63,13 @@ All functions live at `@dialpad/dialtone/themes/config`. Theme modules live at `
 | --- | --- | --- |
 | `initDialtoneTheme(brand, mode?, rootNode?)` | One-time setup. Loads core tokens and applies an initial brand and mode. | — |
 | `setMode(mode, rootNode?)` | Switch between `'light'` and `'dark'`. | — |
-| `setBrand(brandTheme, rootNode?)` | Apply a brand. Auto-applies the brand's locked material if declared. | — |
+| `setBrand(brandTheme \| null, rootNode?)` | Apply a brand overlay on top of the base. Pass `null` (or the same brand as the base) to clear. Auto-applies the brand's locked material if declared. | `null` |
+| `setBaseBrand(brandTheme, rootNode?)` | Replace the base brand layer (the foundation `initDialtoneTheme` writes to). Prefer `setBrand` for dynamic switching; use this only when you need to reseat the foundation itself. | — |
 | `setContrast(contrastTheme \| null, rootNode?)` | Apply or remove a contrast layer. | `null` |
 | `setMaterial(name \| null, rootNode?)` | Apply or remove a material override. Accepts a string material name. | `null` |
 | `getBrandMaterial(brandTheme)` | Returns the brand's locked material name, or `null` for free-choice brands. | — |
 | `hasBrandMaterialLock(brandTheme)` | Boolean form of `getBrandMaterial` for picker logic. | — |
-| `resetTheme(rootNode?)` | Remove all theme styles and attributes. Allows re-`init`. | — |
-| `setTheme(theme, rootNode?, contrast?)` | Legacy single-call API. New code should use the layered functions above. | — |
+| `resetBrand(rootNode?)` | Remove all theme styles and attributes. Allows re-`init`. | — |
 
 `rootNode` defaults to `document.documentElement`. In Web Components, pass the host element instead — see [Web Components and Shadow DOM](#web-components-and-shadow-dom).
 
@@ -96,12 +96,17 @@ setMode('light'); // Switch to light mode
 ### Switch Brand
 
 ```js
-import { setBrand } from '@dialpad/dialtone/themes/config';
+import { initDialtoneTheme, setBrand } from '@dialpad/dialtone/themes/config';
+import Dp from '@dialpad/dialtone/themes/dp';
 import Melon from '@dialpad/dialtone/themes/melon';
 import Tmo from '@dialpad/dialtone/themes/tmo';
 
-setBrand(Melon);
-setBrand(Tmo);
+initDialtoneTheme(Dp, 'light'); // base brand = dp
+
+setBrand(Tmo);   // overlay tmo on top of dp
+setBrand(Melon); // switch overlay to melon
+setBrand(null);  // clear overlay; back to dp
+setBrand(Dp);    // same as null — dp IS the base, no diff needed
 ```
 
 ### Enable High Contrast
@@ -192,7 +197,7 @@ hasBrandMaterialLock(Dp);     // false
 
 Disable material options in your picker when `hasBrandMaterialLock(activeBrandTheme)` returns true.
 
-**Side effect on `setBrand`:** for a locked brand, `setBrand` auto-applies the matching material (toggling `data-dt-material` alongside `data-dt-brand` in the same paint frame):
+**Side effect on `setBrand`:** for a locked brand, `setBrand` auto-applies the matching material (toggling `data-dt-material` alongside `data-dt-brand` in the same paint frame). This applies to both the overlay setter (`setBrand`) and the base setter (`setBaseBrand`):
 
 ```js
 import { setBrand } from '@dialpad/dialtone/themes/config';
@@ -300,26 +305,26 @@ Each app bundle manages exactly ONE rootNode. State is isolated by bundle bounda
 
 ### Resetting (tests, teardown)
 
-Use `resetTheme()` to remove all theme styles and attributes from a root node. After reset, `initDialtoneTheme()` can run again on the same node.
+Use `resetBrand()` to remove all theme styles and attributes from a root node. After reset, `initDialtoneTheme()` can run again on the same node.
 
 ```js
-import { resetTheme } from '@dialpad/dialtone/themes/config';
+import { resetBrand } from '@dialpad/dialtone/themes/config';
 
 // Test cleanup
-afterEach(() => resetTheme());
+afterEach(() => resetBrand());
 
 // Web Component teardown
 disconnectedCallback() {
-  resetTheme(this);
+  resetBrand(this);
 }
 ```
 
 ## Migrating from Legacy `setTheme`
 
-The legacy `setTheme()` API ships complete per-theme bundles (e.g. `DpLight`, `DpDark`, `TmoLight`). It still works and stays supported; new code should use the layered API instead, which loads core tokens once and overlays smaller per-dimension overrides.
+`setTheme()` is kept as a deprecated alias for `setBrand()` — existing callers continue to work without changes. The legacy format ships complete per-theme bundles (e.g. `DpLight`, `DpDark`, `TmoLight`); `setBrand` auto-detects it via the presence of a `base` property. New code should use the layered API instead, which loads core tokens once and overlays smaller per-dimension overrides.
 
 ```js
-// Legacy
+// Legacy — still works, setTheme is a deprecated alias for setBrand
 import { setTheme } from '@dialpad/dialtone/themes/config';
 import DpLight from '@dialpad/dialtone/themes/dp-light';
 setTheme(DpLight);
@@ -349,7 +354,7 @@ initDialtoneTheme(Dp, 'light', this);
 
 **Problem:** Console warns about multiple calls to `initDialtoneTheme()` on same element.
 
-**Solution:** Only call `initDialtoneTheme()` once per root node. Use `setMode()`, `setBrand()`, or `setContrast()` for dynamic updates:
+**Solution:** Only call `initDialtoneTheme()` once per root node. Use `setMode()`, `setBrand()`, or `setContrast()` for dynamic updates after init:
 
 ```js
 // ✅ Correct

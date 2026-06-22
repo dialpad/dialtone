@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.187.0",
+  "version": "9.188.0-next.2",
   "packageManager": "pnpm@9.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
@@ -82,6 +82,7 @@
       "import": "./dist/tokens/themes/*.js",
       "require": "./dist/tokens/themes/*.cjs"
     },
+    "./fonts": "./dist/css/fonts.js",
     "./*": "./dist/*"
   },
   "dependencies": {
@@ -216,7 +217,10 @@
   "publishConfig": {
     "access": "public"
   },
-  "sideEffects": false,
+  "sideEffects": [
+    "./dist/css/*.css",
+    "./dist/css/fonts.js"
+  ],
   "nx": {
     "includedScripts": []
   }

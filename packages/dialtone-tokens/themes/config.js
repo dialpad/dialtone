@@ -61,63 +61,77 @@ let initializationState = null;
  */
 
 /**
- * Set the current theme, brand, and optionally contrast - BACKWARD COMPATIBLE
+ * Apply a brand theme as an overlay diff — or clear it.
  *
- * Auto-detects whether you're using the legacy theme format or the new layered format
- * and applies the theme accordingly. Maintained for backward compatibility with existing
- * projects. New projects should use initDialtoneTheme() + individual setters instead.
+ * For the layered format (new system), setBrand applies the brand as an *overlay*
+ * on top of whatever base brand was established by initDialtoneTheme().
  *
- * @param {Object} theme - Theme object (legacy: {base, brand} or layered: {core, brand, contrast})
+ * Use initDialtoneTheme() to establish the base brand. Use setBaseBrand() when you want to
+ * replace the base brand itself rather than overlay it.
+ *
+ * Legacy format (theme.base present) is still supported and behaves as before.
+ *
+ * @param {Object|null} theme - Theme object (legacy: {base, brand} or Brand theme object (layered: {brand: {name, css}}), or null to clear
  * @param {ThemeRootNode} [rootNode=document.documentElement] - Root element for style injection
  * @param {Object|null} [contrastTheme=null] - Optional contrast theme (legacy format only)
  *
  * @example
- * // Legacy format (still supported)
- * import theme from '@dialpad/dialtone/themes/legacy-theme.json';
- * setTheme(theme);
+ * // Apply a brand overlay after initDialtoneTheme has set the base
+ * import { initDialtoneTheme, setBrand } from '@dialpad/dialtone/themes/config';
+ * import Dp from '@dialpad/dialtone/themes/dp.json';
+ * import Tmo from '@dialpad/dialtone/themes/tmo.json';
+ *
+ * initDialtoneTheme(Dp, 'light');   // base brand = dp
+ * setBrand(Tmo);                    // overlay: tmo overrides on top of dp
+ * setBrand(null);                   // clear overlay; back to dp
+ * setBrand(Dp);                     // same as null — dp IS the base, no diff needed
  *
  * @example
- * // Layered format
- * import layeredTheme from '@dialpad/dialtone/themes/layered-theme.json';
- * setTheme(layeredTheme);
- *
- * @example
- * // Web Components with either format
+ * // Web Components
  * class MyWidget extends HTMLElement {
  *   constructor() {
  *     super();
  *     this.attachShadow({ mode: 'open' });
- *     setTheme(theme, this); // Works with both legacy and layered
+ *     setBrand(theme, this);
  *   }
  * }
- *
- * @note For new projects, prefer using initDialtoneTheme() for initial setup and
- * setMode(), setBrand(), setContrast() for dynamic switching.
  */
-export function setTheme (theme, rootNode = document.documentElement, contrastTheme = null) {
+export function setBrand (theme, rootNode = document.documentElement, contrastTheme = null) {
   // Warn if someone passed shadowRoot directly instead of the host
   if (rootNode instanceof ShadowRoot) {
     console.warn(
-      '[Dialtone] You passed a ShadowRoot directly to setTheme(). ' +
+      '[Dialtone] You passed a ShadowRoot directly to setBrand(). ' +
       'Please pass the host element instead. The function will access shadowRoot automatically.',
     );
+    return;
   }
 
-  // Detect format: legacy has 'base', layered has 'core' or is just 'brand'
+  // null → clear the brand overlay and restore the base brand + material
+  if (theme === null) {
+    _removeStyleTag('dialtone-css-brand', rootNode?.shadowRoot ?? rootNode);
+    if (initializationState) {
+      rootNode?.setAttribute('data-dt-brand', initializationState.brand);
+      rootNode?.setAttribute('data-dt-material', initializationState.material ?? 'sandstone');
+    }
+    return;
+  }
+
+  // Detect format: legacy has 'base', layered has 'core' or just 'brand'
   if (theme.base) {
     // Legacy format
-    return _setThemeLegacy(theme, rootNode, contrastTheme);
+    return _setBrandLegacy(theme, rootNode, contrastTheme);
   } else {
     // Layered format
-    return _setThemeLayered(theme, rootNode);
+    return _setBrandLayered(theme, rootNode);
   }
 }
 
 /**
  * Legacy theme setter (original system)
  */
-function _setThemeLegacy(theme, rootNode = document.documentElement, contrastTheme = null) {
-  _setThemeAttributeOnRoot(theme.base.name, theme.brand.name, rootNode);
+function _setBrandLegacy(theme, rootNode = document.documentElement, contrastTheme = null) {
+  rootNode?.setAttribute('data-dt-theme', theme.base.name);
+  rootNode?.setAttribute('data-dt-brand', theme.brand.name);
   const styleRoot = rootNode?.shadowRoot ?? rootNode;
   // Load css files
   _setStyleTag('dialtone-css-theme', theme.base.css, styleRoot);
@@ -135,8 +149,12 @@ function _setThemeLegacy(theme, rootNode = document.documentElement, contrastThe
 
 /**
  * Layered theme setter (new optimized system)
+ *
+ * Brand is applied as an overlay (dialtone-css-brand) on top of the base
+ * brand established by initDialtoneTheme. If the requested brand matches the base
+ * brand tracked in initializationState, the override is cleared instead.
  */
-function _setThemeLayered(theme, rootNode = document.documentElement) {
+function _setBrandLayered(theme, rootNode = document.documentElement) {
   const styleRoot = rootNode?.shadowRoot ?? rootNode;
 
   // Load core tokens only once per JavaScript instance
@@ -150,10 +168,19 @@ function _setThemeLayered(theme, rootNode = document.documentElement) {
     _setStyleTag('dialtone-css-base-colors', theme.baseColors, styleRoot);
   }
 
-  // Load brand colors (dp base is always loaded, others are overrides)
+  // Apply brand as an overlay diff over the base brand (set by initDialtoneTheme/setBaseBrand).
+  // If the requested brand is the same as the base, clear the override instead.
   if (theme.brand) {
-    _setStyleTag('dialtone-css-brand-colors', theme.brand.css, styleRoot);
-    rootNode?.setAttribute('data-dt-brand', theme.brand.name);
+    const baseBrand = initializationState?.brand;
+    if (baseBrand && theme.brand.name === baseBrand) {
+      _removeStyleTag('dialtone-css-brand', styleRoot);
+      rootNode?.setAttribute('data-dt-brand', baseBrand);
+      rootNode?.setAttribute('data-dt-material', initializationState?.material ?? 'sandstone');
+    } else {
+      _setStyleTag('dialtone-css-brand', theme.brand.css, styleRoot);
+      rootNode?.setAttribute('data-dt-brand', theme.brand.name);
+      _applyBrandLockedMaterial(theme, rootNode);
+    }
   }
 
   // Apply contrast layer if provided
@@ -192,19 +219,9 @@ function _setStyleTag (id, content, rootNode, beforeId = null) {
  * Remove a style tag with the given id
  */
 function _removeStyleTag (id, rootNode) {
-  const existingStyleTag = rootNode?.querySelector('#' + id);
-  if (existingStyleTag) {
-    existingStyleTag.remove();
-  }
+  rootNode?.querySelector('#' + id)?.remove();
 }
 
-/**
- * Set the dialtone theme and brand custom attributes on the root element
- */
-function _setThemeAttributeOnRoot (theme, brand, rootNode) {
-  rootNode?.setAttribute('data-dt-theme', theme);
-  rootNode?.setAttribute('data-dt-brand', brand);
-}
 
 /**
  * LAYERED SYSTEM HELPERS
@@ -262,23 +279,23 @@ export function setMode(mode, rootNode = document.documentElement) {
  *
  * @example
  * // Standard brand switching
- * import { setBrand } from '@dialpad/dialtone/themes/config';
+ * import { setBaseBrand } from '@dialpad/dialtone/themes/config';
  * import Tmo from '@dialpad/dialtone/themes/tmo.json';
- * setBrand(Tmo);
+ * setBaseBrand(Tmo);
  *
  * @example
  * // In Web Components
  * class MyWidget extends HTMLElement {
  *   switchBrand(brandTheme) {
- *     setBrand(brandTheme, this);
+ *     setBaseBrand(brandTheme, this);
  *   }
  * }
  */
-export function setBrand(brandTheme, rootNode = document.documentElement) {
+export function setBaseBrand(brandTheme, rootNode = document.documentElement) {
   // Validation: brandTheme must be an object
   if (!brandTheme || typeof brandTheme !== 'object') {
     throw new TypeError(
-      '[Dialtone] setBrand: brandTheme must be an object. ' +
+      '[Dialtone] setBaseBrand: brandTheme must be an object. ' +
       'Import a brand theme like: import Dp from \'@dialpad/dialtone-tokens/themes/dp\';',
     );
   }
@@ -286,43 +303,46 @@ export function setBrand(brandTheme, rootNode = document.documentElement) {
   // Validation: brandTheme.brand must exist and be properly structured
   if (!brandTheme.brand || typeof brandTheme.brand !== 'object') {
     throw new TypeError(
-      '[Dialtone] setBrand: brandTheme.brand must be an object with {name, css} properties.',
+      '[Dialtone] setBaseBrand: brandTheme.brand must be an object with {name, css} properties.',
     );
   }
 
-  if (typeof brandTheme.brand.name !== 'string' || !brandTheme.brand.name) {
+  if (typeof brandTheme.brand.name !== 'string' || !brandTheme.brand.name || typeof brandTheme.brand.css !== 'string') {
     throw new TypeError(
-      '[Dialtone] setBrand: brandTheme.brand.name must be a non-empty string.',
-    );
-  }
-
-  if (typeof brandTheme.brand.css !== 'string') {
-    throw new TypeError(
-      '[Dialtone] setBrand: brandTheme.brand.css must be a string containing CSS.',
+      '[Dialtone] setBaseBrand: brandTheme.brand.name must be a non-empty string and brandTheme.brand.css must be a string.',
     );
   }
 
   // Warn if someone passed shadowRoot directly instead of the host
   if (rootNode instanceof ShadowRoot) {
     console.warn(
-      '[Dialtone] You passed a ShadowRoot directly to setBrand(). ' +
+      '[Dialtone] You passed a ShadowRoot directly to setBaseBrand(). ' +
       'Please pass the host element instead. The function will access shadowRoot automatically.',
     );
     return;
   }
 
   const styleRoot = rootNode?.shadowRoot ?? rootNode;
-  _setStyleTag('dialtone-css-brand-colors', brandTheme.brand.css, styleRoot);
+  _setStyleTag('dialtone-css-brand-base', brandTheme.brand.css, styleRoot);
   rootNode?.setAttribute('data-dt-brand', brandTheme.brand.name);
 
   _applyBrandLockedMaterial(brandTheme, rootNode);
+
+  // Clear any active overlay — its variables would otherwise win over the new base.
+  _removeStyleTag('dialtone-css-brand', styleRoot);
+
+  // Update initializationState so setBrand(null) reverts to this new base, not the original.
+  if (initializationState) {
+    initializationState.brand = brandTheme.brand.name;
+    initializationState.material = getBrandMaterial(brandTheme) ?? 'sandstone';
+  }
 }
 
 function _applyBrandLockedMaterial(brandTheme, rootNode) {
   const lockName = brandTheme.material?.name;
   if (!lockName) return;
 
-  // Skip the round-trip through setMaterial — caller (setBrand) already
+  // Skip the round-trip through setMaterial — caller (setBaseBrand) already
   // resolved shadowRoot, and we'd just hit the same VALID_MATERIALS_SET
   // lookup. Set the attribute directly; preserve the brand-context warn
   // for unknown names so token-JSON typos surface clearly.
@@ -332,7 +352,7 @@ function _applyBrandLockedMaterial(brandTheme, rootNode) {
   }
 
   console.warn(
-    `[Dialtone] setBrand: brand '${brandTheme.brand.name}' ` +
+    `[Dialtone] setBaseBrand: brand '${brandTheme.brand.name}' ` +
     `declares unknown material '${lockName}'; falling back to sandstone.`,
   );
   rootNode?.setAttribute('data-dt-material', 'sandstone');
@@ -491,15 +511,9 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
     );
   }
 
-  if (typeof brandTheme.brand.name !== 'string' || !brandTheme.brand.name) {
+  if (typeof brandTheme.brand.name !== 'string' || !brandTheme.brand.name || typeof brandTheme.brand.css !== 'string') {
     throw new TypeError(
-      '[Dialtone] initDialtoneTheme: brandTheme.brand.name must be a non-empty string.',
-    );
-  }
-
-  if (typeof brandTheme.brand.css !== 'string') {
-    throw new TypeError(
-      '[Dialtone] initDialtoneTheme: brandTheme.brand.css must be a string containing CSS.',
+      '[Dialtone] initDialtoneTheme: brandTheme.brand.name must be a non-empty string and brandTheme.brand.css must be a string.',
     );
   }
 
@@ -551,7 +565,7 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
       console.warn(
         `[Dialtone] Theme already initialized with brand '${brandTheme.brand.name}' and mode '${mode}'. ` +
         'Re-applying the same theme may be unnecessary. ' +
-        'If you need to switch themes dynamically, use setBrand() or setMode() instead of calling initDialtoneTheme() again.',
+        'If you need to switch themes dynamically, use setBaseBrand() or setMode() instead of calling initDialtoneTheme() again.',
       );
       return;
     } else {
@@ -559,7 +573,7 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
         `[Dialtone] Theme already initialized. ` +
         `Previous: brand='${existing.brand}', mode='${existing.mode}'. ` +
         `New: brand='${brandTheme.brand.name}', mode='${mode}'. ` +
-        'Re-initializing with different parameters. Consider using setBrand()/setMode() for dynamic switching.',
+        'Re-initializing with different parameters. Consider using setBaseBrand()/setMode() for dynamic switching.',
       );
       return;
     }
@@ -575,18 +589,19 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
   // Set initial mode
   setMode(mode, rootNode);
 
-  // Seed defaults; setBrand may override `data-dt-material` below if the brand declares a lock.
+  // Seed defaults; setBaseBrand may override `data-dt-material` below if the brand declares a lock.
   rootNode?.setAttribute('data-dt-contrast', 'default');
   rootNode?.setAttribute('data-dt-material', 'sandstone');
 
   // Set initial brand (auto-applies brand-locked material if declared)
-  setBrand(brandTheme, rootNode);
+  setBaseBrand(brandTheme, rootNode);
 
   // Track initialization state for future idempotency checks
   initializationState = {
     brand: brandTheme.brand.name,
     mode: mode,
     contrast: 'default',
+    material: getBrandMaterial(brandTheme) ?? 'sandstone',
   };
 }
 
@@ -602,9 +617,7 @@ export function getBrandMaterial(brandTheme) {
  * @param {BrandTheme} brandTheme
  * @returns {boolean}
  */
-export function hasBrandMaterialLock(brandTheme) {
-  return getBrandMaterial(brandTheme) !== null;
-}
+export const hasBrandMaterialLock = (brandTheme) => getBrandMaterial(brandTheme) !== null;
 
 /**
  * Reset theme for a given rootNode - useful for testing and cleanup
@@ -620,20 +633,32 @@ export function hasBrandMaterialLock(brandTheme) {
  *
  * @example
  * // Reset document theme (test cleanup)
- * import { resetTheme } from '@dialpad/dialtone/themes/config';
+ * import { resetBrand } from '@dialpad/dialtone/themes/config';
  * afterEach(() => {
- *   resetTheme();  // Clean slate for next test
+ *   resetBrand();  // Clean slate for next test
  * });
  *
  * @example
  * // Reset Shadow DOM theme (component unmount)
  * class MyWidget extends HTMLElement {
  *   disconnectedCallback() {
- *     resetTheme(this);  // Clean up when component removed
+ *     resetBrand(this);  // Clean up when component removed
  *   }
  * }
  */
-export function resetTheme(rootNode = document.documentElement) {
+/** @deprecated Use setBrand instead */
+export const setTheme = setBrand;
+/** @deprecated Use resetBrand instead */
+export const resetTheme = resetBrand;
+export function resetBrand(rootNode = document.documentElement) {
+  if (rootNode instanceof ShadowRoot) {
+    console.warn(
+      '[Dialtone] You passed a ShadowRoot directly to resetBrand(). ' +
+      'Please pass the host element instead. The function will access shadowRoot automatically.',
+    );
+    return;
+  }
+
   const styleRoot = rootNode?.shadowRoot ?? rootNode;
 
   // Clear initialization state (only one instance per app)
@@ -641,12 +666,13 @@ export function resetTheme(rootNode = document.documentElement) {
   coreTokensLoaded = false;
 
   // Remove all theme style tags. Material no longer injects a style tag
-  // (attribute-driven), but resetTheme should still scrub any pre-existing
+  // (attribute-driven), but resetBrand should still scrub any pre-existing
   // injection from older code paths.
   _removeStyleTag('dialtone-css-core', styleRoot);
   _removeStyleTag('dialtone-css-base-colors', styleRoot);
   _removeStyleTag('dialtone-css-material', styleRoot);
-  _removeStyleTag('dialtone-css-brand-colors', styleRoot);
+  _removeStyleTag('dialtone-css-brand-base', styleRoot);
+  _removeStyleTag('dialtone-css-brand', styleRoot);
   _removeStyleTag('dialtone-css-contrast', styleRoot);
 
   // Remove theme attributes from the host element (not ShadowRoot — it has no removeAttribute)

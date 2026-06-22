@@ -1,5 +1,7 @@
-import { mount } from '@vue/test-utils';
+import { mount, flushPromises } from '@vue/test-utils';
 import DtHovercard from './Hovercard.vue';
+import { DtPopover } from '@/components/Popover/index.js';
+import { DtFocustrapDirective } from '@/directives/focustrap_directive';
 
 const MOCK_DEFAULT_SLOT_MESSAGE = 'Message';
 const MOCK_HEADER_CONTENT = 'Hovercard Title';
@@ -29,6 +31,7 @@ describe('DtHovercard Tests', () => {
       attrs: { ...baseAttrs },
       slots: { ...baseSlots },
       global: {
+        plugins: [DtFocustrapDirective],
         stubs: {
           transition: false,
         },
@@ -231,6 +234,40 @@ describe('DtHovercard Tests', () => {
 
       it('aria-haspopup should be set correctly on the anchor', () => {
         expect(button.attributes('aria-haspopup')).toBe('dialog');
+      });
+    });
+
+    describe('Focus trapping', () => {
+      it('passes focustrap=true to DtPopover when hovercard is open', async () => {
+        vi.useFakeTimers();
+        await anchor.trigger('mouseenter');
+        vi.runAllTimers();
+        await flushPromises();
+
+        const popover = wrapper.findComponent(DtPopover);
+        expect(popover.props('focustrap')).toBe(true);
+      });
+
+      it('passes a falsy focustrap to DtPopover when hovercard is closed', () => {
+        const popover = wrapper.findComponent(DtPopover);
+        expect(popover.props('focustrap')).toBeFalsy();
+      });
+
+      it('closes and restores focus to the anchor on Escape', async () => {
+        // Focus the anchor before opening so the directive captures it as previousFocus
+        button.element.focus();
+
+        vi.useFakeTimers();
+        await anchor.trigger('mouseenter');
+        vi.runAllTimers();
+        await flushPromises();
+
+        // Trigger Escape on the teleported popover dialog (dt-lazy-show)
+        const popoverDialog = wrapper.findComponent(DtPopover).findComponent({ ref: 'content' });
+        await popoverDialog.trigger('keydown', { key: 'Escape' });
+        await flushPromises();
+
+        expect(document.activeElement).toBe(button.element);
       });
     });
   });
