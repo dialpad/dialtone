@@ -45,6 +45,7 @@
     "dist"
   ],
   "bin": {
+    "dialtone-migrate": "./dist/js/dialtone_migrate/index.mjs",
     "dialtone-migrate-flex-to-stack": "./dist/js/dialtone_migrate_flex_to_stack/index.mjs"
   },
   "exports": {
