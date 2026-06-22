@@ -1,3 +1,10 @@
+# [8.81.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.81.0-next.1...dialtone-css/v8.81.0-next.2) (2026-06-22)
+
+
+### Bug Fixes
+
+* **Scripts:** NO-JIRA improve flex-to-stack and typography migration scripts ([#1335](https://github.com/dialpad/dialtone/issues/1335)) ([b7c3a71](https://github.com/dialpad/dialtone/commit/b7c3a71210e395f7c1b1379ab70a84af258904da))
+
 # [8.81.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.80.0...dialtone-css/v8.81.0-next.1) (2026-06-16)
 
 
