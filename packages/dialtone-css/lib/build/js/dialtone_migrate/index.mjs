@@ -363,6 +363,7 @@ function parseArgs (args) {
     help: args.includes('--help'),
     dryRun: args.includes('--dry-run'),
     autoYes: args.includes('--yes'),
+    noImport: args.includes('--no-import'),
     healthCheck: args.includes('--health-check'),
     all: args.includes('--all'),
     cwd: cwdIndex !== -1 && args[cwdIndex + 1]
@@ -778,6 +779,7 @@ async function runStandaloneMigration (migration, opts) {
   const args = ['--cwd', opts.cwd];
   if (opts.dryRun) args.push('--dry-run');
   if (opts.autoYes) args.push('--yes');
+  if (opts.noImport) args.push('--no-import');
 
   return new Promise((resolve, reject) => {
     const child = spawn(process.execPath, [scriptPath, ...args], {

@@ -1028,15 +1028,28 @@ async function processFile(filePath, options) {
       newContent = newContent.slice(0, r.start) + r.replacement + newContent.slice(r.end);
     }
 
-    await fs.writeFile(filePath, newContent, 'utf-8');
-    console.log(log.green(`   ✓ Saved ${changes} change(s)`));
-
-    // Check if file needs DtStack import
-    const importCheck = detectMissingStackImport(newContent, changes > 0);
+    // Auto-inject DtStack import before writing; fall back to manual instructions if needed.
+    // Skipped entirely when --no-import is set (e.g. DtStack is globally registered).
+    const importCheck = options.noImport ? null : detectMissingStackImport(newContent, changes > 0);
+    let finalContent = newContent;
     if (importCheck?.needsImport) {
+      const injected = injectComponentImport(newContent, 'DtStack', importCheck.suggestedPath);
+      if (injected) finalContent = injected;
+    }
+
+    await fs.writeFile(filePath, finalContent, 'utf-8');
+
+    if (importCheck?.needsImport) {
+      if (finalContent !== newContent) {
+        console.log(log.green(`   ✓ Saved ${changes} change(s) + added DtStack import`));
+        return { changes, skipped, needsImport: false };
+      }
+      console.log(log.green(`   ✓ Saved ${changes} change(s)`));
       printImportInstructions(filePath, importCheck);
       return { changes, skipped, needsImport: true };
     }
+
+    console.log(log.green(`   ✓ Saved ${changes} change(s)`));
   }
 
   return { changes, skipped, needsImport: false };
@@ -1134,6 +1147,70 @@ function detectImportPattern(content) {
 }
 
 /**
+ * Attempt to auto-insert a component import (and Options API registration) into a Vue SFC.
+ * Returns updated content on success, or null when the insertion can't be made safely
+ * (caller should fall back to printing manual instructions).
+ *
+ * Handles:
+ *   - <script setup>: inserts import after the last existing import; no components
+ *     registration needed (auto-registered when imported in setup context).
+ *   - Options API with existing `components: {}`: inserts import + adds to the object.
+ *   - Options API without a components object: returns null (manual step required).
+ */
+function injectComponentImport(content, componentName, importPath) {
+  if (new RegExp(`import\\s+(?:\\{[^}]*\\b${componentName}\\b[^}]*\\}|${componentName})\\s+from`).test(content)) {
+    return null; // already imported
+  }
+
+  const isScriptSetup = /<script\b[^>]*\bsetup\b/.test(content);
+  const scriptBlockRe = isScriptSetup
+    ? /<script\b[^>]*\bsetup\b[^>]*>([\s\S]*?)<\/script>/
+    : /<script\b(?![^>]*\bsetup\b)[^>]*>([\s\S]*?)<\/script>/;
+  const scriptMatch = scriptBlockRe.exec(content);
+  if (!scriptMatch) return null;
+
+  const scriptInnerStart = scriptMatch.index + scriptMatch[0].indexOf('>') + 1;
+  const scriptInner = scriptMatch[1];
+
+  const importLineRe = /^import\s.+from\s+['"][^'"]+['"]\s*;?/gm;
+  let lastImportMatch = null;
+  let m;
+  while ((m = importLineRe.exec(scriptInner)) !== null) lastImportMatch = m;
+
+  const insertOffset = lastImportMatch
+    ? scriptInnerStart + lastImportMatch.index + lastImportMatch[0].length
+    : scriptInnerStart;
+
+  const importLine = `\nimport { ${componentName} } from '${importPath}';`;
+  let out = content.slice(0, insertOffset) + importLine + content.slice(insertOffset);
+
+  if (isScriptSetup) return out; // import alone is sufficient for <script setup>
+
+  // Options API: also register in components: {}
+  // Re-exec against the updated content to get current positions, then restrict
+  // the components: { search to within the script block and after export default
+  // to avoid matching template bindings or helper objects that appear earlier.
+  const scriptMatchUpdated = scriptBlockRe.exec(out);
+  if (!scriptMatchUpdated) return null;
+  const scriptBodyStart = scriptMatchUpdated.index + scriptMatchUpdated[0].indexOf('>') + 1;
+  const scriptBodyText = scriptMatchUpdated[1];
+  const exportDefaultMatch = /\bexport\s+default\b/.exec(scriptBodyText);
+  if (!exportDefaultMatch) return null;
+  const searchFrom = scriptBodyStart + exportDefaultMatch.index;
+  const compMatchInSlice = /components\s*:\s*\{/.exec(out.slice(searchFrom));
+  if (!compMatchInSlice) return null; // no components object — can't safely auto-register
+  const compAbsIndex = searchFrom + compMatchInSlice.index;
+
+  const lineStart = out.lastIndexOf('\n', compAbsIndex) + 1;
+  const compIndent = out.slice(lineStart, compAbsIndex).match(/^[ \t]*/)[0];
+  const memberIndent = compIndent + '  ';
+  const insertAt = compAbsIndex + compMatchInSlice[0].length;
+  out = out.slice(0, insertAt) + `\n${memberIndent}${componentName},` + out.slice(insertAt);
+
+  return out;
+}
+
+/**
  * Print instructions for adding DtStack import and registration
  * @param {string} filePath - Path to the file
  * @param {object} importCheck - Result from detectMissingStackImport
@@ -1179,6 +1256,7 @@ function parseArgs() {
     files: [], // Explicit file list via --file flag
     showOutline: false, // Add migration marker for visual debugging
     removeOutline: false, // Remove migration markers (cleanup mode)
+    noImport: false, // Skip import injection (for apps that globally register DtStack)
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -1206,11 +1284,12 @@ Options:
   --yes, -y        Apply all changes without prompting
   --show-outline   Add data-migrate-outline attribute for visual debugging
   --remove-outline Remove data-migrate-outline attributes after review
+  --no-import      Skip import injection (use when DtStack is globally registered)
   --help, -h       Show help
 
 Post-Migration Steps:
   1. Review template changes with data-migrate-outline markers
-  2. Add DtStack imports as instructed by the script
+  2. Add DtStack imports as instructed by the script (skipped with --no-import)
   3. Test your application
   4. Run with --remove-outline to clean up markers
 
@@ -1252,6 +1331,8 @@ Examples:
       options.showOutline = true;
     } else if (arg === '--remove-outline') {
       options.removeOutline = true;
+    } else if (arg === '--no-import') {
+      options.noImport = true;
     } else if (arg === '--file' && args[i + 1]) {
       const filePath = args[++i];
       options.files.push(filePath);
@@ -1348,6 +1429,7 @@ async function main() {
         yes: options.yes,
         showOutline: options.showOutline,
         validate: options.validate,
+        noImport: options.noImport,
       });
     }
 

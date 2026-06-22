@@ -1002,17 +1002,31 @@ function flagDynamicClasses (content) {
   const re = new RegExp(DYNAMIC_CLASS_PATTERN);
   if (!re.test(content)) return content;
 
-  const lines = content.split('\n');
-  const out = lines.map(line => {
-    if (!/:class=|v-bind:class=/.test(line)) return line;
-    if (!new RegExp(DYNAMIC_CLASS_PATTERN).test(line)) return line;
-    // Preserve the line's indentation; put the marker on its own line above.
-    const indentMatch = line.match(/^[ \t]*/);
-    const indent = indentMatch ? indentMatch[0] : '';
-    return `${indent}<!-- dt-text-migrate: review dynamic class -->\n${line}`;
-  });
+  // Walk whole opening tags (quote-aware) so the marker is never injected between
+  // attributes of a multi-line element. The old line-by-line approach would insert
+  // the comment before the :class= line, which lands it between attributes when the
+  // opening tag spans multiple lines.
+  const tagRe = new RegExp(`<[a-zA-Z][\\w-]*(${ATTR_BODY})>`, 'g');
+  const insertions = [];
+  let m;
 
-  return out.join('\n');
+  while ((m = tagRe.exec(content)) !== null) {
+    if (!new RegExp(DYNAMIC_CLASS_PATTERN).test(m[0])) continue;
+    const before = content.slice(Math.max(0, m.index - 80), m.index);
+    if (/<!--\s*dt-text-migrate:\s*review dynamic class\s*-->/.test(before)) continue;
+    insertions.push(m.index);
+  }
+
+  if (insertions.length === 0) return content;
+
+  let out = content;
+  for (const idx of insertions.reverse()) {
+    const lineStart = out.lastIndexOf('\n', idx - 1) + 1;
+    const indent = out.slice(lineStart, idx).match(/^[ \t]*/)[0];
+    const marker = `${indent}<!-- dt-text-migrate: review dynamic class -->\n`;
+    out = out.slice(0, lineStart) + marker + out.slice(lineStart);
+  }
+  return out;
 }
 
 // Find composed typography classes on tags outside the rewrite scope
@@ -1245,6 +1259,70 @@ function detectMissingDtTextImport (content, usesText) {
   };
 }
 
+/**
+ * Attempt to auto-insert a component import (and Options API registration) into a Vue SFC.
+ * Returns updated content on success, or null when the insertion can't be made safely
+ * (caller should fall back to printing manual instructions).
+ *
+ * Handles:
+ *   - <script setup>: inserts import after the last existing import; no components
+ *     registration needed (auto-registered when imported in setup context).
+ *   - Options API with existing `components: {}`: inserts import + adds to the object.
+ *   - Options API without a components object: returns null (manual step required).
+ */
+export function injectComponentImport (content, componentName, importPath) {
+  if (new RegExp(`import\\s+(?:\\{[^}]*\\b${componentName}\\b[^}]*\\}|${componentName})\\s+from`).test(content)) {
+    return null; // already imported
+  }
+
+  const isScriptSetup = /<script\b[^>]*\bsetup\b/.test(content);
+  const scriptBlockRe = isScriptSetup
+    ? /<script\b[^>]*\bsetup\b[^>]*>([\s\S]*?)<\/script>/
+    : /<script\b(?![^>]*\bsetup\b)[^>]*>([\s\S]*?)<\/script>/;
+  const scriptMatch = scriptBlockRe.exec(content);
+  if (!scriptMatch) return null;
+
+  const scriptInnerStart = scriptMatch.index + scriptMatch[0].indexOf('>') + 1;
+  const scriptInner = scriptMatch[1];
+
+  const importLineRe = /^import\s.+from\s+['"][^'"]+['"]\s*;?/gm;
+  let lastImportMatch = null;
+  let m;
+  while ((m = importLineRe.exec(scriptInner)) !== null) lastImportMatch = m;
+
+  const insertOffset = lastImportMatch
+    ? scriptInnerStart + lastImportMatch.index + lastImportMatch[0].length
+    : scriptInnerStart;
+
+  const importLine = `\nimport { ${componentName} } from '${importPath}';`;
+  let out = content.slice(0, insertOffset) + importLine + content.slice(insertOffset);
+
+  if (isScriptSetup) return out; // import alone is sufficient for <script setup>
+
+  // Options API: also register in components: {}
+  // Re-exec against the updated content to get current positions, then restrict
+  // the components: { search to within the script block and after export default
+  // to avoid matching template bindings or helper objects that appear earlier.
+  const scriptMatchUpdated = scriptBlockRe.exec(out);
+  if (!scriptMatchUpdated) return null;
+  const scriptBodyStart = scriptMatchUpdated.index + scriptMatchUpdated[0].indexOf('>') + 1;
+  const scriptBodyText = scriptMatchUpdated[1];
+  const exportDefaultMatch = /\bexport\s+default\b/.exec(scriptBodyText);
+  if (!exportDefaultMatch) return null;
+  const searchFrom = scriptBodyStart + exportDefaultMatch.index;
+  const compMatchInSlice = /components\s*:\s*\{/.exec(out.slice(searchFrom));
+  if (!compMatchInSlice) return null; // no components object — can't safely auto-register
+  const compAbsIndex = searchFrom + compMatchInSlice.index;
+
+  const lineStart = out.lastIndexOf('\n', compAbsIndex) + 1;
+  const compIndent = out.slice(lineStart, compAbsIndex).match(/^[ \t]*/)[0];
+  const memberIndent = compIndent + '  ';
+  const insertAt = compAbsIndex + compMatchInSlice[0].length;
+  out = out.slice(0, insertAt) + `\n${memberIndent}${componentName},` + out.slice(insertAt);
+
+  return out;
+}
+
 function printImportInstructions (filePath, importCheck) {
   console.log(log.yellow('\n⚠️  ACTION REQUIRED: Add DtText import and registration'));
   log.cyan(`   File: ${filePath}`);
@@ -1450,9 +1528,6 @@ async function processFile (filePath, options) {
 
   if (!shouldApply) return { changes: 0, needsImport: false };
 
-  await fs.writeFile(filePath, transformed, 'utf-8');
-  console.log(log.green('   ✓ Saved'));
-
   // Only warn about missing DtText import when we actually INSERTED new <dt-text> elements
   // — review-marker-only changes (eyebrow/d-code--sm/d-fs-* flags) don't require an import.
   // Use a count delta (not boolean presence) so partial migrations on a file that already
@@ -1460,14 +1535,34 @@ async function processFile (filePath, options) {
   const beforeCount = (content.match(/<dt-text\b/g) || []).length;
   const afterCount = (transformed.match(/<dt-text\b/g) || []).length;
   const addedDtText = afterCount > beforeCount;
-  const importCheck = detectMissingDtTextImport(transformed, addedDtText);
-  if (importCheck?.needsImport) printImportInstructions(filePath, importCheck);
+  // Auto-inject DtText import before writing; fall back to manual instructions if needed.
+  // Skipped entirely when --no-import is set (e.g. DtText is globally registered).
+  const importCheck = options.noImport ? null : detectMissingDtTextImport(transformed, addedDtText);
+
+  let finalContent = transformed;
+  if (importCheck?.needsImport) {
+    const injected = injectComponentImport(transformed, 'DtText', importCheck.suggestedPath);
+    if (injected) finalContent = injected;
+  }
+
+  await fs.writeFile(filePath, finalContent, 'utf-8');
+
+  if (importCheck?.needsImport) {
+    if (finalContent !== transformed) {
+      console.log(log.green('   ✓ Saved + added DtText import'));
+    } else {
+      console.log(log.green('   ✓ Saved'));
+      printImportInstructions(filePath, importCheck);
+    }
+  } else {
+    console.log(log.green('   ✓ Saved'));
+  }
 
   if (notes.length > 0) {
     for (const note of notes) log.gray(`   ℹ ${note}`);
   }
 
-  return { changes: 1, needsImport: !!importCheck?.needsImport };
+  return { changes: 1, needsImport: importCheck?.needsImport && finalContent === transformed };
 }
 
 //------------------------------------------------------------------------------
@@ -1484,6 +1579,7 @@ function parseArgs () {
     files: [],
     removeMarkers: false,
     validate: false,
+    noImport: false, // Skip import injection (for apps that globally register DtText)
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -1503,6 +1599,7 @@ Options:
   --remove-markers    Strip all <!-- dt-text-migrate: review ... --> comments
   --validate          Read-only mode: scan existing <dt-text> for prop bugs
                       (object syntax, invalid values, mixed CSS classes)
+  --no-import         Skip import injection (use when DtText is globally registered)
   --help, -h          Show help
 
 Examples:
@@ -1512,7 +1609,7 @@ Examples:
   npx dialtone-migrate-typography --remove-markers --cwd ./src
 
 Post-Migration Steps:
-  1. Add DtText imports as instructed by the script
+  1. Add DtText imports as instructed by the script (skipped with --no-import)
   2. Review files marked with <!-- dt-text-migrate: review --> comments
   3. Run with --remove-markers to clean up all markers after manual review
 `);
@@ -1531,6 +1628,8 @@ Post-Migration Steps:
       options.removeMarkers = true;
     } else if (arg === '--validate') {
       options.validate = true;
+    } else if (arg === '--no-import') {
+      options.noImport = true;
     }
   }
 
