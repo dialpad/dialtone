@@ -156,7 +156,6 @@
           default: '400',
           lg: '500',
         })"
-
         strength="normal"
         density="300"
         tone="tertiary"

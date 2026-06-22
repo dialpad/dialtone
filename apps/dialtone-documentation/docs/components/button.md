@@ -213,6 +213,36 @@ This inverts the underline behavior. With `underline="false"`, the link will not
 </dt-stack>
 ```
 
+<!--
+<DtLink
+  to="/components/link.md"
+  :underline="false"
+  class="
+    d-d-block
+    d-ba
+    d-bc-subtle
+    d-bar-400
+    d-fc-secondary
+    h:d-td-none
+    h:d-fc-primary
+    d-py-100
+    d-px-200
+    h:d-bgc-secondary-opaque
+    d-wmx-500
+    d-my-100
+  "
+>
+  <DtStack direction="row" gap="150">
+    <dt-icon class="d-fc-muted" name="component" :size="viewport.pick({ default: '300', md: '400' })" />
+    <DtStack class="d-fl1">
+      <dt-text as="h3" kind="headline" size="200">DtLink</dt-text>
+      <dt-text as="p" kind="body" size="200">Related component</dt-text>
+    </DtStack>
+    <dt-icon class="d-fc-muted" name="arrow-right" size="400" />
+  </DtStack>
+</DtLink>
+-->
+
 ### Unstyled
 
 The unstyled button removes all default Dialtone styling while preserving the semantic HTML `<button>` element and maintaining proper button behavior and accessibility.
@@ -853,7 +883,9 @@ We provide the following branded buttons for log-in and sign-up workflows.
 <script setup>
 import { ref } from 'vue';
 import ButtonVariantsTable from '@baseComponents/ButtonVariantsTable.vue';
+import { useViewportBreakpoints } from '@composables/useViewportBreakpoints.js';
 
+const viewport = useViewportBreakpoints();
 const isDisabled = ref(true);
 const loading = ref(true);
 const isInverted = ref(true);
