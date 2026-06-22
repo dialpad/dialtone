@@ -1270,7 +1270,7 @@ function detectMissingDtTextImport (content, usesText) {
  *   - Options API with existing `components: {}`: inserts import + adds to the object.
  *   - Options API without a components object: returns null (manual step required).
  */
-function injectComponentImport (content, componentName, importPath) {
+export function injectComponentImport (content, componentName, importPath) {
   if (new RegExp(`import\\s+(?:\\{[^}]*\\b${componentName}\\b[^}]*\\}|${componentName})\\s+from`).test(content)) {
     return null; // already imported
   }
