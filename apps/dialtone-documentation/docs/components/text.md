@@ -1,10 +1,24 @@
 ---
 title: Text
-description: Consistent typography styling through semantic text kinds and sizes.
+description: Consistent typography styling through text variants and raw font-size tokens.
 status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-text--default
-keywords: ["dt-box", "DtBox", "typography", "size", "tone", "font", "font size", "font weight", "line height", "density", "strength", "primitive"]
+keywords:
+  [
+    'dt-box',
+    'DtBox',
+    'typography',
+    'size',
+    'tone',
+    'font',
+    'font size',
+    'font weight',
+    'line height',
+    'density',
+    'strength',
+    'primitive',
+  ]
 ---
 
 <component-combinator component-name="DtText" />
@@ -17,78 +31,103 @@ keywords: ["dt-box", "DtBox", "typography", "size", "tone", "font", "font size",
 
 Use in place of manually applying Text Styles. Examples of manual application **you should avoid** include:
 
-* Applying Text Styles classes, e.g. `class="d-text-body--md"`
-* Combinations of CSS Utilities, e.g. `class="d-fs-300 d-fw-semibold d-lh-300"`
-* Custom CSS, e.g. `.foo { font: var(--dt-typography-body-md); }`.
+- Applying Text Styles classes, e.g. `class="d-text-body--md"`
+- Combinations of CSS Utilities, e.g. `class="d-fs-300 d-fw-semibold d-lh-300"`
+- Custom CSS, e.g. `.foo { font: var(--dt-typography-body-md); }`.
 
 ### Guidance
 
-* Prefer `DtText` over individual typography utility classes to keep implementations aligned with token updates.
-* Use the default slot for rich content. The `text` prop provides a simple fallback string when no slot content is present.
-* Choose the `as` prop to match the semantic HTML element (e.g., `h1`, `label`, `p`).
-* All properties are optional, as they layer in on top of each other.
+- Prefer `DtText` over individual typography utility classes to keep implementations aligned with token updates.
+- Use the default slot for rich content. The `text` prop provides a simple fallback string when no slot content is present.
+- Choose the `as` prop to match the semantic HTML element (e.g., `h1`, `label`, `p`).
+- Use `variant` for complete text compositions and `size` for raw font-size tokens.
+- All properties are optional, as they layer in on top of each other.
 
 <dialtone-usage>
 <template #do>
 
-* Replace multiple `d-` typography classes with a single `dt-text` instance.
-* Pick the smallest `kind`/`size` combination that conveys the desired hierarchy.
-* Use `tone` for semantic color tokens instead of standalone `d-fc-*` classes.
+- Replace multiple `d-` typography classes with a single `dt-text` instance.
+- Pick the smallest `variant` that conveys the desired hierarchy.
+- Use `size` when you only need to set a token-backed font size.
+- Use `tone` for semantic color tokens instead of standalone `d-fc-*` classes.
 
 </template>
 <template #dont>
 
-* Mix `DtText` with conflicting typography utilities (e.g., `d-fs-*`).
-* Render headings with non-heading tags (e.g., avoid `as="div"` for top-level titles).
-* Depend on the `text` prop when the content requires inline formatting; slot it instead.
+- Mix `DtText` with conflicting typography utilities (e.g., `d-fs-*`).
+- Render headings with non-heading tags (e.g., avoid `as="div"` for top-level titles).
+- Depend on the `text` prop when the content requires inline formatting; slot it instead.
 
 </template>
 </dialtone-usage>
 
 ## Variants
 
-### Kind
+### Variant
 
-Declare the role of the content. Default will inherit styles from the parent.
+Use `variant` to apply a complete text composition, including font family, font size, font weight, and line height. Default will inherit styles from the parent.
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }" align="baseline">
-  <dt-text kind="headline" as="span">Headline</dt-text>
-  <dt-text kind="body">Body</dt-text>
-  <dt-text kind="label">Label</dt-text>
-  <dt-text kind="code">Code</dt-text>
+<dt-stack
+  gap="400"
+  :direction="{ default: 'column', md: 'row' }"
+  align="baseline"
+>
+  <dt-text variant="headline-md" as="span">Headline</dt-text>
+  <dt-text variant="body-md">Body</dt-text>
+  <dt-text variant="label-md">Label</dt-text>
+  <dt-text variant="code-md">Code</dt-text>
   <dt-text>Default (inherits)</dt-text>
 </dt-stack>
 ```
 
 ### Size
 
-All kinds support `size` prop, but not all sizes are available for each kind. When `kind` is set, size defaults to `300` if not specified.
+Use `size` to apply a raw font-size token. `size` can be used by itself, or with `variant` to override only the font-size portion of the composition.
 
 <dt-stack class="d-w100p d-ba d-bar-300 d-of-auto">
   <table class="d-w100p d-table">
     <tr class="d-va-baseline">
-      <th></th>
-      <th v-for="s in textSizeColumns" :key="s" class="d-ta-center">
-        <dt-text as="code" kind="code" size="100" class="d-docsite-code">{{ s }}</dt-text>
-      </th>
+      <th>Size</th>
+      <th>Output</th>
+      <th>Example</th>
     </tr>
-    <tr v-for="kind in textSizeKinds" :key="kind.name" class="d-va-baseline">
+    <tr v-for="item in textSizeScale" :key="item.size" class="d-va-baseline">
       <th scope="row">
-        <dt-text as="code" align="end" kind="code" size="100" class="d-docsite-code">{{ kind.name }}</dt-text>
+        <dt-text as="code" variant="code-xs" class="d-docsite-code">{{ item.size }}</dt-text>
       </th>
-      <td v-for="s in textSizeColumns" :key="s" class="d-ta-center">
-        <dt-text v-if="kind.sizes.includes(String(s))" :kind="kind.name" :as="kind.as" :size="s" :class="kind.class" :tone="kind.tone">Text</dt-text>
-        <dt-text v-else tone="muted" kind="body" :size="200" title="not available">-</dt-text>
+      <td>
+        <dt-text variant="body-sm">{{ item.output }}</dt-text>
+      </td>
+      <td>
+        <dt-text :size="item.size">Text</dt-text>
       </td>
     </tr>
   </table>
 </dt-stack>
 
 ```vue code-only
-<dt-text kind="{kind}" :size="{size}">....</dt-text>
+<dt-text size="200">Default body-size text</dt-text>
+<dt-text
+  variant="body-lg"
+  size="300"
+>Body composition with a 20px font-size override</dt-text>
 ```
+
+### Legacy kind
+
+The `kind` prop remains supported for backward compatibility. When `kind` is present and `variant` is absent, `size` keeps its legacy composition behavior.
+
+```vue code-only
+<!-- Legacy, still supported -->
+<dt-text kind="body" size="300">Body medium composition</dt-text>
+
+<!-- Preferred -->
+<dt-text variant="body-md">Body medium composition</dt-text>
+```
+
+T-shirt sizes such as `xs`, `sm`, `md`, and `lg` belong in `variant` names for new usage. Numeric `size` values are raw font-size tokens unless they are being used with legacy `kind`.
 
 ### Numeric
 
@@ -122,7 +161,11 @@ The `numeric` prop applies styles that ensure that each number is set with consi
 Override the font-weight of the text. Applies to any kind/size combination. If omitted, the default weight from the typography token is used.
 
 ```vue demo
-<dt-stack :direction="{ 'default': 'column', 'md': 'row' }" gap="200" class="d-fw-wrap">
+<dt-stack
+  :direction="{ default: 'column', md: 'row' }"
+  gap="200"
+  class="d-fw-wrap"
+>
   <dt-text strength="bold">Bold</dt-text>
   <dt-text strength="semibold">Semibold</dt-text>
   <dt-text strength="medium">Medium</dt-text>
@@ -147,6 +190,35 @@ Override the line-height of the text. Applies to any kind/size combination. If o
 </dt-stack>
 <!-- @code -->
 <dt-text density="{{density}}">...</dt-text>
+```
+
+### Family
+
+Override the font family. By default, `DtText` does not emit a font-family class and inherits naturally from the parent.
+
+```vue demo
+<dt-stack
+  :direction="{ default: 'column', md: 'row' }"
+  gap="200"
+  class="d-fw-wrap"
+>
+  <dt-text>Inherited</dt-text>
+  <dt-text family="sans">Sans</dt-text>
+  <dt-text family="mono">Mono</dt-text>
+  <dt-text family="expressive">Expressive</dt-text>
+</dt-stack>
+<!-- @code -->
+<dt-text family="mono">...</dt-text>
+```
+
+### Italic
+
+Use the `italic` prop to apply italic font style. When omitted or false, `DtText` does not emit a font-style override.
+
+```vue demo
+<dt-text italic>Italic text</dt-text>
+<!-- @code -->
+<dt-text italic>...</dt-text>
 ```
 
 ## Tone
@@ -186,7 +258,10 @@ Rather than use the `-inverted` tone variants, use the [v-dt-mode](/components/m
   </div>
 </dt-stack>
 <!-- @code -->
-<dt-text v-dt-mode:invert tone="critical">critical tone on contrasting surface</dt-text>
+<dt-text
+  v-dt-mode:invert
+  tone="critical"
+>critical tone on contrasting surface</dt-text>
 ```
 
 ## Render as
@@ -340,7 +415,7 @@ Remove extra leading space above and/or below text. Useful for tight component l
 Text box trim will only affect elements with block or inline-block styled context. It may have no effect on elements with inline or flex context.
 
 ```vue demo
-<dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }">
+<dt-stack gap="200" :direction="{ default: 'column', md: 'row' }">
   <dt-text as="p" class="d-bgc-moderate-opaque"><strong>No trim:</strong> lorem ipsum dolor sit amet</dt-text>
   <dt-text as="p" text-box-trim="start" class="d-bgc-moderate-opaque"><strong>Trim start:</strong> lorem ipsum dolor sit amet</dt-text>
   <dt-text as="p" text-box-trim="end" class="d-bgc-moderate-opaque"><strong>Trim end:</strong> lorem ipsum dolor sit amet</dt-text>
@@ -355,13 +430,13 @@ Text box trim will only affect elements with block or inline-block styled contex
 <dialtone-usage>
 <template #do>
 
-* Use `text-box-trim="both"` when text needs to align flush with container's top and/or bottom edges.
+- Use `text-box-trim="both"` when text needs to align flush with container's top and/or bottom edges.
 
 </template>
 <template #dont>
 
-* Apply text-box-trim to body copy that benefits from natural line spacing.
-* Use text-box-trim as a substitute for proper layout spacing.
+- Apply text-box-trim to body copy that benefits from natural line spacing.
+- Use text-box-trim as a substitute for proper layout spacing.
 
 </template>
 </dialtone-usage>
@@ -452,9 +527,9 @@ Text box trim will only affect elements with block or inline-block styled contex
 
 ## Accessibility
 
-* Maintain semantic structure via `as` (e.g., screen readers expect heading levels to be sequential).
-* When using `truncate`, provide another way to access the full content (tooltip, detail view, or explicit `aria-label`). `DtText` does not apply alternative access to the full string, so consuming applications should opt in.
-* Allow numeric content to remain readable by enabling the `numeric` prop when aligning tables or numbers that dynamically update.
+- Maintain semantic structure via `as` (e.g., screen readers expect heading levels to be sequential).
+- When using `truncate`, provide another way to access the full content (tooltip, detail view, or explicit `aria-label`). `DtText` does not apply alternative access to the full string, so consuming applications should opt in.
+- Allow numeric content to remain readable by enabling the `numeric` prop when aligning tables or numbers that dynamically update.
 
 ## Vue API
 
@@ -466,15 +541,27 @@ Text box trim will only affect elements with block or inline-block styled contex
 
 <script setup>
 import { computed, reactive } from 'vue';
-import { TEXT_SIZE_MODIFIERS } from '@dialpad/dialtone-vue';
 import ExampleProfileCard from '@exampleComponents/ExampleProfileCard.vue';
 
-const textSizeColumns = [100, 200, 300, 400, 500, 600, 700];
-const textSizeKinds = [
-  { name: 'headline', as: 'h2', sizes: TEXT_SIZE_MODIFIERS.headline },
-  { name: 'body', as: 'p', sizes: TEXT_SIZE_MODIFIERS.body },
-  { name: 'label', as: 'p', sizes: TEXT_SIZE_MODIFIERS.label },
-  { name: 'code', as: 'code', sizes: TEXT_SIZE_MODIFIERS.code, class: 'd-bgc-transparent', tone: 'secondary' },
+const textSizeScale = [
+  { size: 50, output: '10px' },
+  { size: 75, output: '11px' },
+  { size: 100, output: '12px' },
+  { size: 125, output: '13px' },
+  { size: 150, output: '14px' },
+  { size: 200, output: '16px' },
+  { size: 250, output: '18px' },
+  { size: 300, output: '20px' },
+  { size: 350, output: '22px' },
+  { size: 400, output: '26px' },
+  { size: 450, output: '29px' },
+  { size: 500, output: '32px' },
+  { size: 550, output: '36px' },
+  { size: 600, output: '42px' },
+  { size: 650, output: '46px' },
+  { size: 700, output: '52px' },
+  { size: 750, output: '58px' },
+  { size: 800, output: '66px' },
 ];
 
 const BOUNDS = Object.freeze({ min: 2, max: 10, default: 4 });

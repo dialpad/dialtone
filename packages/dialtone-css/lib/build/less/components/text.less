@@ -12,229 +12,459 @@
 //  • FONT STYLE MODIFIERS
 //
 @layer dialtone.components {
-.d-text {
-  --text-tone: currentColor;
+  .d-text {
+    --text-tone: currentColor;
 
-  //  ============================================================================
-  //  $   BASE STYLE
-  //  ----------------------------------------------------------------------------
-  color: oklch(from var(--text-tone) l c h / var(--fco, alpha));
+    //  ============================================================================
+    //  $   BASE STYLE
+    //  ----------------------------------------------------------------------------
+    color: oklch(from var(--text-tone) l c h / var(--fco, alpha));
 
-  //  ============================================================================
-  //  $   TEXT STYLES
-  //  ----------------------------------------------------------------------------
+    //  ============================================================================
+    //  $   TEXT STYLES
+    //  ----------------------------------------------------------------------------
 
-  // the extra `.d-text` is to tick up specificity to (0,2,0), but not as high as
-  // as a CSS utility with `!important` which has specificity of (0,2,1)
+    // the extra `.d-text` is to tick up specificity to (0,2,0), but not as high as
+    // as a CSS utility with `!important` which has specificity of (0,2,1)
 
-  &-headline {
+    &-headline {
       &--3xl,
-      &--3xl.d-text  { font: var(--dt-text-headline-3xl); }
+      &--3xl.d-text {
+        font: var(--dt-text-headline-3xl);
+      }
 
       &--2xl,
-      &--2xl.d-text  { font: var(--dt-text-headline-2xl); }
+      &--2xl.d-text {
+        font: var(--dt-text-headline-2xl);
+      }
 
       &--xl,
-      &--xl.d-text   { font: var(--dt-text-headline-xl); }
+      &--xl.d-text {
+        font: var(--dt-text-headline-xl);
+      }
 
       &--lg,
-      &--lg.d-text   { font: var(--dt-text-headline-lg); }
+      &--lg.d-text {
+        font: var(--dt-text-headline-lg);
+      }
 
       &--md,
-      &--md.d-text   { font: var(--dt-text-headline-md); }
+      &--md.d-text {
+        font: var(--dt-text-headline-md);
+      }
 
       &--sm,
-      &--sm.d-text   { font: var(--dt-text-headline-sm); }
+      &--sm.d-text {
+        font: var(--dt-text-headline-sm);
+      }
 
       &--xs,
-      &--xs.d-text   { font: var(--dt-text-headline-xs); }
-  }
+      &--xs.d-text {
+        font: var(--dt-text-headline-xs);
+      }
+    }
 
-  &-body {
+    &-body {
       &--lg,
-      &--lg.d-text { font: var(--dt-text-body-lg); }
+      &--lg.d-text {
+        font: var(--dt-text-body-lg);
+      }
 
       &--md,
-      &--md.d-text { font: var(--dt-text-body-md); }
+      &--md.d-text {
+        font: var(--dt-text-body-md);
+      }
 
       &--sm,
-      &--sm.d-text { font: var(--dt-text-body-sm); }
+      &--sm.d-text {
+        font: var(--dt-text-body-sm);
+      }
 
       &--xs,
-      &--xs.d-text { font: var(--dt-text-body-xs); }
-  }
+      &--xs.d-text {
+        font: var(--dt-text-body-xs);
+      }
+    }
 
-  &-label {
+    &-label {
       &--lg,
-      &--lg.d-text { font: var(--dt-text-label-lg); }
+      &--lg.d-text {
+        font: var(--dt-text-label-lg);
+      }
 
       &--md,
-      &--md.d-text { font: var(--dt-text-label-md); }
+      &--md.d-text {
+        font: var(--dt-text-label-md);
+      }
 
       &--sm,
-      &--sm.d-text { font: var(--dt-text-label-sm); }
+      &--sm.d-text {
+        font: var(--dt-text-label-sm);
+      }
 
       &--xs,
-      &--xs.d-text { font: var(--dt-text-label-xs); }
-  }
+      &--xs.d-text {
+        font: var(--dt-text-label-xs);
+      }
+    }
 
-  &-code {
+    &-code {
       &--lg,
-      &--lg.d-text { font: var(--dt-text-code-lg); }
+      &--lg.d-text {
+        font: var(--dt-text-code-lg);
+      }
 
       &--md,
-      &--md.d-text { font: var(--dt-text-code-md); }
+      &--md.d-text {
+        font: var(--dt-text-code-md);
+      }
 
       &--sm,
-      &--sm.d-text { font: var(--dt-text-code-sm); }
+      &--sm.d-text {
+        font: var(--dt-text-code-sm);
+      }
 
       &--xs,
-      &--xs.d-text { font: var(--dt-text-code-xs); }
+      &--xs.d-text {
+        font: var(--dt-text-code-xs);
+      }
+    }
+
+    //  ============================================================================
+    //  $   FONT SIZE
+    //  ----------------------------------------------------------------------------
+
+    &--fs-50,
+    &--fs-50.d-text {
+      font-size: var(--dt-font-size-50);
+    }
+
+    &--fs-75,
+    &--fs-75.d-text {
+      font-size: var(--dt-font-size-75);
+    }
+
+    &--fs-100,
+    &--fs-100.d-text {
+      font-size: var(--dt-font-size-100);
+    }
+
+    &--fs-125,
+    &--fs-125.d-text {
+      font-size: var(--dt-font-size-125);
+    }
+
+    &--fs-150,
+    &--fs-150.d-text {
+      font-size: var(--dt-font-size-150);
+    }
+
+    &--fs-200,
+    &--fs-200.d-text {
+      font-size: var(--dt-font-size-200);
+    }
+
+    &--fs-250,
+    &--fs-250.d-text {
+      font-size: var(--dt-font-size-250);
+    }
+
+    &--fs-300,
+    &--fs-300.d-text {
+      font-size: var(--dt-font-size-300);
+    }
+
+    &--fs-350,
+    &--fs-350.d-text {
+      font-size: var(--dt-font-size-350);
+    }
+
+    &--fs-400,
+    &--fs-400.d-text {
+      font-size: var(--dt-font-size-400);
+    }
+
+    &--fs-450,
+    &--fs-450.d-text {
+      font-size: var(--dt-font-size-450);
+    }
+
+    &--fs-500,
+    &--fs-500.d-text {
+      font-size: var(--dt-font-size-500);
+    }
+
+    &--fs-550,
+    &--fs-550.d-text {
+      font-size: var(--dt-font-size-550);
+    }
+
+    &--fs-600,
+    &--fs-600.d-text {
+      font-size: var(--dt-font-size-600);
+    }
+
+    &--fs-650,
+    &--fs-650.d-text {
+      font-size: var(--dt-font-size-650);
+    }
+
+    &--fs-700,
+    &--fs-700.d-text {
+      font-size: var(--dt-font-size-700);
+    }
+
+    &--fs-750,
+    &--fs-750.d-text {
+      font-size: var(--dt-font-size-750);
+    }
+
+    &--fs-800,
+    &--fs-800.d-text {
+      font-size: var(--dt-font-size-800);
+    }
+
+    //  ============================================================================
+    //  $   FONT FAMILY
+    //  ----------------------------------------------------------------------------
+
+    &--ff-inherit,
+    &--ff-inherit.d-text {
+      font-family: inherit;
+    }
+
+    &--ff-custom,
+    &--ff-custom.d-text,
+    &--ff-sans,
+    &--ff-sans.d-text {
+      font-family: var(--dt-font-family-body);
+    }
+
+    &--ff-mono,
+    &--ff-mono.d-text {
+      font-family: var(--dt-font-family-mono);
+    }
+
+    &--ff-expressive,
+    &--ff-expressive.d-text {
+      font-family: var(--dt-font-family-expressive);
+    }
+
+    //  ============================================================================
+    //  $   FONT STYLE
+    //  ----------------------------------------------------------------------------
+
+    &--italic,
+    &--italic.d-text {
+      font-style: italic;
+    }
+
+    //  ============================================================================
+    //  $   ALIGNMENT
+    //  ----------------------------------------------------------------------------
+
+    &--align {
+      &-start {
+        text-align: start;
+      }
+
+      &-center {
+        text-align: center;
+      }
+
+      &-end {
+        text-align: end;
+      }
+
+      &-justify {
+        text-align: justify;
+      }
+    }
+
+    //  ============================================================================
+    //  $   NUMERIC
+    //  ----------------------------------------------------------------------------
+
+    &--numeric,
+    &--numeric.d-text {
+      // tick up specificity to overcome `font` property of `d-body-[variant]`, `d-header-[variant]`, etc.
+      font-variant-numeric: tabular-nums;
+    }
+
+    //  ============================================================================
+    //  $   LINE CLAMP
+    //  ----------------------------------------------------------------------------
+
+    &--clamp {
+      --dt-text-line-clamp: 1;
+
+      display: -webkit-box;
+      overflow: hidden;
+      -webkit-line-clamp: var(--dt-text-line-clamp);
+      -webkit-box-orient: vertical;
+    }
+
+    //  ============================================================================
+    //  $   WRAP
+    //  ----------------------------------------------------------------------------
+
+    &--wrap {
+      &-wrap {
+        text-wrap: wrap;
+      }
+
+      &-nowrap {
+        text-wrap: nowrap;
+      }
+
+      &-balance {
+        text-wrap: balance;
+      }
+
+      &-pretty {
+        text-wrap: pretty;
+      }
+    }
+
+    //  ============================================================================
+    //  $   TRIM (Leading Space Control)
+    //  ----------------------------------------------------------------------------
+    //  Uses native CSS text-box-trim with cap/alphabetic metrics.
+    //  @see https://developer.mozilla.org/en-US/docs/Web/CSS/text-box-trim
+
+    &--trim {
+      &-start {
+        text-box-trim: trim-start;
+        text-box-edge: cap alphabetic;
+      }
+
+      &-end {
+        text-box-trim: trim-end;
+        text-box-edge: cap alphabetic;
+      }
+
+      &-both {
+        text-box-trim: trim-both;
+        text-box-edge: cap alphabetic;
+      }
+    }
+
+    //  ============================================================================
+    //  $   FONT STYLE MODIFIERS
+    //  ----------------------------------------------------------------------------
+
+    &--fw-bold,
+    &--fw-bold.d-text {
+      font-weight: var(--dt-font-weight-bold);
+    }
+
+    &--fw-semibold,
+    &--fw-semibold.d-text {
+      font-weight: var(--dt-font-weight-semi-bold);
+    }
+
+    &--fw-medium,
+    &--fw-medium.d-text {
+      font-weight: var(--dt-font-weight-medium);
+    }
+
+    &--fw-normal,
+    &--fw-normal.d-text {
+      font-weight: var(--dt-font-weight-normal);
+    }
+
+    &--lh-100,
+    &--lh-100.d-text {
+      line-height: var(--dt-font-line-height-100);
+    }
+
+    &--lh-200,
+    &--lh-200.d-text {
+      line-height: var(--dt-font-line-height-200);
+    }
+
+    &--lh-300,
+    &--lh-300.d-text {
+      line-height: var(--dt-font-line-height-300);
+    }
+
+    &--lh-400,
+    &--lh-400.d-text {
+      line-height: var(--dt-font-line-height-400);
+    }
+
+    &--lh-500,
+    &--lh-500.d-text {
+      line-height: var(--dt-font-line-height-500);
+    }
+
+    &--lh-600,
+    &--lh-600.d-text {
+      line-height: var(--dt-font-line-height-600);
+    }
+
+    //  ============================================================================
+    //  $   TONE MODIFIERS
+    //  ----------------------------------------------------------------------------
+
+    &--tone-primary {
+      --text-tone: var(--dt-color-foreground-primary);
+    }
+
+    &--tone-secondary {
+      --text-tone: var(--dt-color-foreground-secondary);
+    }
+
+    &--tone-tertiary {
+      --text-tone: var(--dt-color-foreground-tertiary);
+    }
+
+    &--tone-muted {
+      --text-tone: var(--dt-color-foreground-muted);
+    }
+
+    &--tone-disabled {
+      --text-tone: var(--dt-color-foreground-disabled);
+    }
+
+    &--tone-placeholder {
+      --text-tone: var(--dt-color-foreground-placeholder);
+    }
+
+    &--tone-critical {
+      --text-tone: var(--dt-color-foreground-critical);
+    }
+
+    &--tone-critical-strong {
+      --text-tone: var(--dt-color-foreground-critical-strong);
+    }
+
+    &--tone-positive {
+      --text-tone: var(--dt-color-foreground-positive);
+    }
+
+    &--tone-positive-strong {
+      --text-tone: var(--dt-color-foreground-positive-strong);
+    }
+
+    &--tone-warning {
+      --text-tone: var(--dt-color-foreground-warning);
+    }
+
+    &--tone-info {
+      --text-tone: var(--dt-color-foreground-info);
+    }
+
+    &--tone-info-strong {
+      --text-tone: var(--dt-color-foreground-info-strong);
+    }
+
+    &--tone-neutral-black {
+      --text-tone: var(--dt-color-neutral-black);
+    }
+
+    &--tone-neutral-white {
+      --text-tone: var(--dt-color-neutral-white);
+    }
   }
-
-  //  ============================================================================
-  //  $   ALIGNMENT
-  //  ----------------------------------------------------------------------------
-
-  &--align {
-    &-start {
-      text-align: start;
-    }
-
-    &-center {
-      text-align: center;
-    }
-
-    &-end {
-      text-align: end;
-    }
-
-    &-justify {
-      text-align: justify;
-    }
-  }
-
-  //  ============================================================================
-  //  $   NUMERIC
-  //  ----------------------------------------------------------------------------
-
-  &--numeric,
-  &--numeric.d-text {
-    // tick up specificity to overcome `font` property of `d-body-[variant]`, `d-header-[variant]`, etc.
-    font-variant-numeric: tabular-nums;
-  }
-
-  //  ============================================================================
-  //  $   LINE CLAMP
-  //  ----------------------------------------------------------------------------
-
-  &--clamp {
-    --dt-text-line-clamp: 1;
-
-    display: -webkit-box;
-    overflow: hidden;
-    -webkit-line-clamp: var(--dt-text-line-clamp);
-    -webkit-box-orient: vertical;
-  }
-
-  //  ============================================================================
-  //  $   WRAP
-  //  ----------------------------------------------------------------------------
-
-  &--wrap {
-    &-wrap {
-      text-wrap: wrap;
-    }
-
-    &-nowrap {
-      text-wrap: nowrap;
-    }
-
-    &-balance {
-      text-wrap: balance;
-    }
-
-    &-pretty {
-      text-wrap: pretty;
-    }
-  }
-
-  //  ============================================================================
-  //  $   TRIM (Leading Space Control)
-  //  ----------------------------------------------------------------------------
-  //  Uses native CSS text-box-trim with cap/alphabetic metrics.
-  //  @see https://developer.mozilla.org/en-US/docs/Web/CSS/text-box-trim
-
-  &--trim {
-    &-start {
-      text-box-trim: trim-start;
-      text-box-edge: cap alphabetic;
-    }
-
-    &-end {
-      text-box-trim: trim-end;
-      text-box-edge: cap alphabetic;
-    }
-
-    &-both {
-      text-box-trim: trim-both;
-      text-box-edge: cap alphabetic;
-    }
-  }
-
-  //  ============================================================================
-  //  $   FONT STYLE MODIFIERS
-  //  ----------------------------------------------------------------------------
-
-  &--fw-bold,
-  &--fw-bold.d-text { font-weight: var(--dt-font-weight-bold); }
-
-  &--fw-semibold,
-  &--fw-semibold.d-text { font-weight: var(--dt-font-weight-semi-bold); }
-
-  &--fw-medium,
-  &--fw-medium.d-text { font-weight: var(--dt-font-weight-medium); }
-
-  &--fw-normal,
-  &--fw-normal.d-text { font-weight: var(--dt-font-weight-normal); }
-
-
-  &--lh-100,
-  &--lh-100.d-text { line-height: var(--dt-font-line-height-100); }
-
-  &--lh-200,
-  &--lh-200.d-text { line-height: var(--dt-font-line-height-200); }
-
-  &--lh-300,
-  &--lh-300.d-text { line-height: var(--dt-font-line-height-300); }
-
-  &--lh-400,
-  &--lh-400.d-text { line-height: var(--dt-font-line-height-400); }
-
-  &--lh-500,
-  &--lh-500.d-text { line-height: var(--dt-font-line-height-500); }
-
-  &--lh-600,
-  &--lh-600.d-text { line-height: var(--dt-font-line-height-600); }
-
-  //  ============================================================================
-  //  $   TONE MODIFIERS
-  //  ----------------------------------------------------------------------------
-
-  &--tone-primary         { --text-tone: var(--dt-color-foreground-primary); }
-  &--tone-secondary       { --text-tone: var(--dt-color-foreground-secondary); }
-  &--tone-tertiary        { --text-tone: var(--dt-color-foreground-tertiary); }
-  &--tone-muted           { --text-tone: var(--dt-color-foreground-muted); }
-  &--tone-disabled        { --text-tone: var(--dt-color-foreground-disabled); }
-  &--tone-placeholder     { --text-tone: var(--dt-color-foreground-placeholder); }
-  &--tone-critical        { --text-tone: var(--dt-color-foreground-critical); }
-  &--tone-critical-strong { --text-tone: var(--dt-color-foreground-critical-strong); }
-  &--tone-positive        { --text-tone: var(--dt-color-foreground-positive); }
-  &--tone-positive-strong { --text-tone: var(--dt-color-foreground-positive-strong); }
-  &--tone-warning         { --text-tone: var(--dt-color-foreground-warning); }
-  &--tone-info            { --text-tone: var(--dt-color-foreground-info); }
-  &--tone-info-strong     { --text-tone: var(--dt-color-foreground-info-strong); }
-  &--tone-neutral-black   { --text-tone: var(--dt-color-neutral-black); }
-  &--tone-neutral-white   { --text-tone: var(--dt-color-neutral-white); }
-}
 }

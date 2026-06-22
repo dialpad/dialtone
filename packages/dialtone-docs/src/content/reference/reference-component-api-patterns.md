@@ -1,9 +1,9 @@
 ---
 type: reference
 category: reference
-keywords: [component-api, props, events, slots, constants, vue-components, dialtone-vue, v-model, provide-inject, aria, data-qa, icon-sizes]
+keywords: [component-api, props, events, slots, constants, vue-components, dialtone-vue, v-model, provide-inject, aria, data-qa, icon-sizes, dt-text]
 ai_summary: Cross-component API contract for Dialtone Vue components — standard props, events, slots, and patterns shared by all components.
-last_updated: 2026-03-09
+last_updated: 2026-06-22
 related_packages: [dialtone-vue]
 ---
 
@@ -36,7 +36,12 @@ Constants are also re-exported from each component's `index.js` so consumers can
 
 Most sizable components accept a `size` prop with values: `xs`, `sm`, `md`, `lg`, `xl`. Default is usually `md`.
 
-Exceptions exist — DtModal uses `default` and `full` instead.
+Exceptions exist:
+
+- DtModal uses `default` and `full`.
+- DtText uses numeric font-size token stops for raw font-size control: `50`, `75`, `100`, `125`, `150`, `200`, `250`, `300`, `350`, `400`, `450`, `500`, `550`, `600`, `650`, `700`, `750`, `800`.
+
+DtText also keeps legacy `kind + size` composition behavior for backward compatibility when `variant` is not set.
 
 ### Kind
 
@@ -46,6 +51,14 @@ Color or semantic variant. Values vary per component:
 - DtModal: `default`, `critical`
 - DtNotice: `base`, `critical`, `info`, `positive`, `warning`
 - DtBadge: uses `type` instead (`default`, `info`, `positive`, `warning`, `critical`, `bulletin`, `ai`)
+
+For DtText, `kind` is legacy composition syntax. Prefer `variant` for new text compositions.
+
+### Variant
+
+Visual variant or complete composition. Values vary per component.
+
+DtText uses `variant` for complete typography compositions such as `headline-md`, `body-md`, `label-md`, and `code-sm`. `variant` can be combined with numeric `size` when the composition is correct but the font-size token needs an explicit override.
 
 ### Importance
 
@@ -91,7 +104,7 @@ Native DOM events are forwarded as-is: `focus`, `blur`, `focusin`, `focusout`, `
 
 Custom events use the `update:{prop}` convention to stay compatible with `v-model`:
 
-```
+```text
 update:modelValue   — value changed
 update:open         — visibility changed
 update:length       — input length changed (DtInput)
@@ -147,13 +160,13 @@ Group-child relationships use Vue's provide/inject. The parent provides a reacti
 
 **Tab group** (`tab_group.vue`):
 
-```
+```javascript
 provides: { groupContext: { selected, disabled }, setFocus }
 ```
 
 **Input groups** (CheckboxGroup, RadioGroup via `input_group.js` mixin):
 
-```
+```javascript
 provides: { groupContext: { name, disabled, validationState, value, selectedValues }, setGroupValue }
 ```
 
@@ -176,7 +189,7 @@ DtTooltip, DtPopover, and DtHovercard use Tippy.js with a similar `appendTo` pro
 
 All components use `data-qa` attributes for test selectors. Pattern: `dt-{component}` for the root, `dt-{component}-{element}` for children:
 
-```
+```html
 data-qa="dt-button"
 data-qa="dt-button-icon"
 data-qa="dt-button-label"

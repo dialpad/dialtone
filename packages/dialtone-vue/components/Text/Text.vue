@@ -13,9 +13,13 @@
 <script>
 import {
   TEXT_KIND_MODIFIERS,
+  TEXT_VARIANT_MODIFIERS,
   TEXT_SIZE_MODIFIERS,
   TEXT_SIZE_MAP,
   TEXT_HEADLINE_ONLY_SIZES,
+  TEXT_FONT_SIZE_MODIFIERS,
+  TEXT_FAMILY_MODIFIERS,
+  TEXT_ITALIC_CLASS,
   TEXT_ALIGN_MODIFIERS,
   TEXT_TONE_MODIFIERS,
   TEXT_NUMERIC_CLASS,
@@ -63,18 +67,58 @@ export default {
       type: String,
       default: null,
       validator: (value) => {
-        return value === null || Object.prototype.hasOwnProperty.call(TEXT_KIND_MODIFIERS, value);
+        return (
+          value === null ||
+          Object.prototype.hasOwnProperty.call(TEXT_KIND_MODIFIERS, value)
+        );
       },
     },
 
     /**
-     * Size variant within the selected `kind`. Falls back to `md`/300 if unsupported.
-     * Headline supports all sizes; body/label/code support 100-400.
-     * @values 100, 200, 300, 400, 500, 600, 700
+     * Typography variant mapping to a complete token-backed composition.
+     * @values headline-3xl, headline-2xl, headline-xl, headline-lg, headline-md, headline-sm, headline-xs, body-lg, body-md, body-sm, body-xs, label-lg, label-md, label-sm, label-xs, code-lg, code-md, code-sm, code-xs
+     */
+    variant: {
+      type: String,
+      default: null,
+      validator: (value) => {
+        return (
+          value === null ||
+          Object.prototype.hasOwnProperty.call(TEXT_VARIANT_MODIFIERS, value)
+        );
+      },
+    },
+
+    /**
+     * Raw font-size token. When used with legacy `kind`, this remains a legacy composition size.
+     * @values 50, 75, 100, 125, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800
      */
     size: {
       type: [String, Number],
       default: null,
+    },
+
+    /**
+     * Overrides font-family. By default, no font-family class is emitted and text inherits naturally.
+     * @values inherit, custom, sans, mono, expressive
+     */
+    family: {
+      type: String,
+      default: null,
+      validator: (value) => {
+        return (
+          value === null ||
+          Object.prototype.hasOwnProperty.call(TEXT_FAMILY_MODIFIERS, value)
+        );
+      },
+    },
+
+    /**
+     * Applies italic font style when true.
+     */
+    italic: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -85,7 +129,10 @@ export default {
       type: String,
       default: null,
       validator: (value) => {
-        return value === null || Object.prototype.hasOwnProperty.call(TEXT_TONE_MODIFIERS, value);
+        return (
+          value === null ||
+          Object.prototype.hasOwnProperty.call(TEXT_TONE_MODIFIERS, value)
+        );
       },
     },
 
@@ -97,7 +144,10 @@ export default {
       type: String,
       default: null,
       validator: (value) => {
-        return value === null || Object.prototype.hasOwnProperty.call(TEXT_ALIGN_MODIFIERS, value);
+        return (
+          value === null ||
+          Object.prototype.hasOwnProperty.call(TEXT_ALIGN_MODIFIERS, value)
+        );
       },
     },
 
@@ -136,7 +186,10 @@ export default {
       type: String,
       default: null,
       validator: (value) => {
-        return value === null || Object.prototype.hasOwnProperty.call(TEXT_WRAP_MODIFIERS, value);
+        return (
+          value === null ||
+          Object.prototype.hasOwnProperty.call(TEXT_WRAP_MODIFIERS, value)
+        );
       },
     },
 
@@ -148,7 +201,10 @@ export default {
       type: String,
       default: null,
       validator: (value) => {
-        return value === null || Object.prototype.hasOwnProperty.call(TEXT_BOX_TRIM_MODIFIERS, value);
+        return (
+          value === null ||
+          Object.prototype.hasOwnProperty.call(TEXT_BOX_TRIM_MODIFIERS, value)
+        );
       },
     },
 
@@ -160,7 +216,10 @@ export default {
       type: String,
       default: null,
       validator: (value) => {
-        return value === null || Object.prototype.hasOwnProperty.call(TEXT_STRENGTH_MODIFIERS, value);
+        return (
+          value === null ||
+          Object.prototype.hasOwnProperty.call(TEXT_STRENGTH_MODIFIERS, value)
+        );
       },
     },
 
@@ -172,17 +231,34 @@ export default {
       type: [String, Number],
       default: null,
       validator: (value) => {
-        return value === null || Object.prototype.hasOwnProperty.call(TEXT_DENSITY_MODIFIERS, value);
+        return (
+          value === null ||
+          Object.prototype.hasOwnProperty.call(TEXT_DENSITY_MODIFIERS, value)
+        );
       },
     },
   },
 
   computed: {
-    textClasses () {
+    textClasses() {
       const classes = ['d-text'];
       const variantClass = this.getVariantClass();
       if (variantClass) {
         classes.push(variantClass);
+      }
+
+      const fontSizeClass = this.getFontSizeClass();
+      if (fontSizeClass) {
+        classes.push(fontSizeClass);
+      }
+
+      const familyClass = this.getFamilyClass();
+      if (familyClass) {
+        classes.push(familyClass);
+      }
+
+      if (this.italic) {
+        classes.push(TEXT_ITALIC_CLASS);
       }
 
       const alignClass = this.getAlignClass();
@@ -230,7 +306,7 @@ export default {
       return classes;
     },
 
-    textStyles () {
+    textStyles() {
       if (!this.maxLines) {
         return undefined;
       }
@@ -241,32 +317,50 @@ export default {
     },
   },
 
-  mounted () {
+  mounted() {
     // Emit info once per session when headline is used without semantic heading element
     if (
       !hasEmittedHeadlineSemanticInfo &&
-      this.kind === 'headline' &&
+      this.usesHeadlineVisualStyle() &&
       !SEMANTIC_HEADING_ELEMENTS.includes(this.as)
     ) {
-
       console.info(
-        '[DtText] kind="headline" is used without a semantic heading element. ' +
-        'Consider using as="h1|h2|h3|h4|h5|h6" for better accessibility.',
+        '[DtText] A headline text style is used without a semantic heading element. ' +
+          'Consider using as="h1|h2|h3|h4|h5|h6" for better accessibility.',
       );
       hasEmittedHeadlineSemanticInfo = true;
     }
   },
 
   methods: {
-    getVariantClass () {
+    usesHeadlineVisualStyle() {
+      if (this.variant) {
+        return this.variant.startsWith('headline-');
+      }
+
+      return this.kind === 'headline';
+    },
+
+    usesLegacyKindSize() {
+      return Boolean(this.kind && !this.variant);
+    },
+
+    getVariantClass() {
+      if (this.variant) {
+        return this.getModifierClass(
+          this.variant,
+          TEXT_VARIANT_MODIFIERS,
+          'variant',
+        );
+      }
+
       if (!this.kind) {
-        if (this.size) {
-          console.warn('[DtText] size prop has no effect without kind. Set kind="headline|body|label|code".');
-        }
         return null;
       }
 
-      if (!Object.prototype.hasOwnProperty.call(TEXT_KIND_MODIFIERS, this.kind)) {
+      if (
+        !Object.prototype.hasOwnProperty.call(TEXT_KIND_MODIFIERS, this.kind)
+      ) {
         console.warn(`[DtText] Unsupported kind "${this.kind}".`);
         return null;
       }
@@ -281,16 +375,20 @@ export default {
         if (TEXT_HEADLINE_ONLY_SIZES.includes(requestedSize)) {
           throw new Error(
             `[DtText] size="${requestedSize}" is only valid for kind="headline". ` +
-            `Cannot use with kind="${this.kind}".`,
+              `Cannot use with kind="${this.kind}".`,
           );
         }
 
         // Universal sizes fall back gracefully with a warning
-        const fallbackSize = allowedSizes.includes(DEFAULT_SIZE) ? DEFAULT_SIZE : allowedSizes[0];
+        const fallbackSize = allowedSizes.includes(DEFAULT_SIZE)
+          ? DEFAULT_SIZE
+          : allowedSizes[0];
         if (fallbackSize) {
           resolvedSize = fallbackSize;
         }
-        console.warn(`[DtText] size="${requestedSize}" is not valid for kind="${this.kind}". Using "${resolvedSize}" instead.`);
+        console.warn(
+          `[DtText] size="${requestedSize}" is not valid for kind="${this.kind}". Using "${resolvedSize}" instead.`,
+        );
       }
 
       if (!resolvedSize) {
@@ -302,7 +400,28 @@ export default {
       return `${TEXT_KIND_MODIFIERS[this.kind]}--${cssSuffix}`;
     },
 
-    getModifierClass (value, modifiers, propName) {
+    getFontSizeClass() {
+      if (
+        this.size === null ||
+        this.size === undefined ||
+        this.usesLegacyKindSize()
+      ) {
+        return null;
+      }
+
+      const size = String(this.size);
+      const className = TEXT_FONT_SIZE_MODIFIERS[size];
+      if (className) {
+        return className;
+      }
+
+      console.warn(
+        `[DtText] Unsupported size "${size}". Use a numeric font-size token.`,
+      );
+      return null;
+    },
+
+    getModifierClass(value, modifiers, propName) {
       if (value === null || value === undefined) {
         return null;
       }
@@ -316,28 +435,48 @@ export default {
       return className;
     },
 
-    getAlignClass () {
+    getAlignClass() {
       return this.getModifierClass(this.align, TEXT_ALIGN_MODIFIERS, 'align');
     },
 
-    getToneClass () {
+    getToneClass() {
       return this.getModifierClass(this.tone, TEXT_TONE_MODIFIERS, 'tone');
     },
 
-    getWrapClass () {
+    getWrapClass() {
       return this.getModifierClass(this.wrap, TEXT_WRAP_MODIFIERS, 'wrap');
     },
 
-    getTextBoxTrimClass () {
-      return this.getModifierClass(this.textBoxTrim, TEXT_BOX_TRIM_MODIFIERS, 'textBoxTrim');
+    getTextBoxTrimClass() {
+      return this.getModifierClass(
+        this.textBoxTrim,
+        TEXT_BOX_TRIM_MODIFIERS,
+        'textBoxTrim',
+      );
     },
 
-    getStrengthClass () {
-      return this.getModifierClass(this.strength, TEXT_STRENGTH_MODIFIERS, 'strength');
+    getStrengthClass() {
+      return this.getModifierClass(
+        this.strength,
+        TEXT_STRENGTH_MODIFIERS,
+        'strength',
+      );
     },
 
-    getDensityClass () {
-      return this.getModifierClass(this.density, TEXT_DENSITY_MODIFIERS, 'density');
+    getDensityClass() {
+      return this.getModifierClass(
+        this.density,
+        TEXT_DENSITY_MODIFIERS,
+        'density',
+      );
+    },
+
+    getFamilyClass() {
+      return this.getModifierClass(
+        this.family,
+        TEXT_FAMILY_MODIFIERS,
+        'family',
+      );
     },
   },
 };
