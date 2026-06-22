@@ -11,7 +11,7 @@
     navigation-type="arrow-keys"
     placement="bottom-start"
     content-width="anchor"
-    content-class="d-hmx-400"
+    @opened="onOpened"
   >
     <template #anchor="{ attrs }">
       <dt-button
@@ -25,12 +25,19 @@
         leading-class="d-pis-75"
       >
         <template
-          v-if="selectedOption?.resolved && isColor(selectedOption.resolved)"
+          v-if="(selectedOption?.resolved && isColor(selectedOption.resolved)) || selectedOption?.previewComponent"
           #leading
         >
           <span
+            v-if="selectedOption.resolved && isColor(selectedOption.resolved)"
             class="d-ba d-bc-subtle d-bar-circle"
             :style="swatchStyle(selectedOption.resolved)"
+          />
+          <component
+            :is="selectedOption.previewComponent"
+            v-else
+            size="200"
+            class="d-fc-muted"
           />
         </template>
         {{ selectedLabel }}
@@ -53,49 +60,99 @@
       </dt-button>
     </template>
     <template #list="{ close }">
-      <dt-list-item
-        v-for="option in options"
-        :key="option.value"
-        role="menuitem"
-        navigation-type="arrow-keys"
-        :class="{ 'd-o50 d-pe-none': option.disabled, 'd-bgc-moderate-opaque': option.value === value }"
-        :aria-disabled="option.disabled || undefined"
-        @click="!option.disabled && (onInput(option.value), close())"
+      <dt-box
+        v-if="showSearch"
+        surface="overlay"
+        padding-block-end="50"
+        border-width-block-end="100"
+        border-color="subtle"
       >
-        <dt-stack
-          direction="row"
-          gap="100"
-          align="baseline"
-          class="d-w100p"
+        <dt-input
+          ref="searchInput"
+          v-model="query"
+          type="search"
+          aria-label="Search"
+          placeholder="Search"
+          @keydown="onSearchKeydown($event, close)"
         >
-          <span
-            v-if="option.resolved && isColor(option.resolved)"
-            class="d-ba d-bc-subtle d-bar-circle d-as-center"
-            :style="swatchStyle(option.resolved)"
-          />
-          <span>{{ option.label }}</span>
-          <dt-text
-            v-if="option.resolved && !isColor(option.resolved)"
-            kind="body"
-            :size="100"
-            tone="muted"
-            class="d-mis-auto"
+          <template #startIcon="{ iconSize }">
+            <dt-icon-search :size="iconSize" />
+          </template>
+          <template v-if="query.length" #endIcon="{ clear }">
+            <dt-button
+              kind="muted"
+              importance="clear"
+              :size="100"
+              aria-label="Clear search"
+              @click="clear"
+            >
+              <template #startIcon="{ iconSize }">
+                <dt-icon-close :size="iconSize" />
+              </template>
+            </dt-button>
+          </template>
+        </dt-input>
+      </dt-box>
+      <div class="d-of-y-auto d-hmx-400 d-p-50" @keydown.up="onListArrowUp">
+        <dt-list-item
+          v-for="option in filteredOptions"
+          :key="option.value"
+          element-type="div"
+          role="menuitem"
+          navigation-type="arrow-keys"
+          :class="{ 'd-o50 d-pe-none': option.disabled, 'd-bgc-moderate-opaque': option.value === value }"
+          :aria-disabled="option.disabled || undefined"
+          @click="!option.disabled && (onInput(option.value), close())"
+        >
+          <dt-stack
+            direction="row"
+            gap="100"
+            align="baseline"
+            class="d-w100p"
           >
-            {{ option.resolved }}
-          </dt-text>
-        </dt-stack>
-      </dt-list-item>
+            <span
+              v-if="option.resolved && isColor(option.resolved)"
+              class="d-ba d-bc-subtle d-bar-circle d-as-center"
+              :style="swatchStyle(option.resolved)"
+            />
+            <component
+              :is="option.previewComponent"
+              v-if="option.previewComponent"
+              size="400"
+              class="d-as-center d-fc-tertiary"
+            />
+            <span>{{ option.label }}</span>
+            <dt-text
+              v-if="option.resolved && !isColor(option.resolved)"
+              kind="body"
+              size="100"
+              tone="muted"
+              class="d-mis-auto"
+            >
+              {{ option.resolved }}
+            </dt-text>
+          </dt-stack>
+        </dt-list-item>
+        <dt-empty-state
+          v-if="!filteredOptions.length"
+          size="200"
+          body-text="No matches"
+        />
+      </div>
     </template>
   </dt-dropdown>
 </template>
 
 <script setup>
-import { DtButton, DtStack, DtText } from '@dialpad/dialtone-vue';
-import { DtIconChevronsUpDown } from '@dialpad/dialtone-icons/vue';
+import { DtBox, DtButton, DtEmptyState, DtInput, DtStack, DtText } from '@dialpad/dialtone-vue';
+import { DtIconClose, DtIconChevronsUpDown, DtIconSearch } from '@dialpad/dialtone-icons/vue';
 
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { resolveTokenValue } from '@/src/lib/tokens';
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
+
+// Show the in-popover search only for lists long enough to be worth filtering.
+const SEARCH_THRESHOLD = 5;
 
 const props = defineProps({
   value: {
@@ -130,6 +187,10 @@ const props = defineProps({
     type: Set,
     default: undefined,
   },
+  generatePreviewComponent: {
+    type: Function,
+    default: null,
+  },
 });
 
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
@@ -154,11 +215,12 @@ const options = computed(() => {
       : null;
     // Show color swatches even for disabled options; hide non-color values (misleading for disabled sizes)
     const resolved = optionDisabled && rawResolved && !isColor(rawResolved) ? null : rawResolved;
-    return { value: selection, label: props.generateLabel(selection), resolved, disabled: optionDisabled };
+    const previewComponent = props.generatePreviewComponent?.(selection) ?? null;
+    return { value: selection, label: props.generateLabel(selection), resolved, disabled: optionDisabled, previewComponent };
   }) ?? [];
 
   if (props.defaultValue === null || props.defaultValue === undefined) {
-    return [{ value: null, label: '\u2013' }, ...valueOptions];
+    return [{ value: null, label: '–' }, ...valueOptions];
   }
   return valueOptions;
 });
@@ -168,6 +230,82 @@ const selectedOption = computed(() => {
 });
 
 const selectedLabel = computed(() => selectedOption.value?.label ?? '');
+
+const query = ref('');
+const searchInput = ref(null);
+
+const showSearch = computed(() => options.value.length > SEARCH_THRESHOLD);
+
+const filteredOptions = computed(() => {
+  const q = query.value.trim().toLowerCase();
+  if (!q) return options.value;
+  return options.value.filter(o => `${o.label} ${o.resolved ?? ''}`.toLowerCase().includes(q));
+});
+
+/**
+ * Resets and focuses the search field each time the dropdown opens. Runs on
+ * `opened` (after the popover has shown and applied its own initial focus to the
+ * dialog), and defers a frame so the search field reliably wins focus.
+ *
+ * @param {boolean} open - Whether the dropdown just opened.
+ */
+function onOpened (open) {
+  if (!open) return;
+  query.value = '';
+  requestAnimationFrame(() => {
+    searchInput.value?.$el?.querySelector('input')?.focus();
+  });
+}
+
+/**
+ * Selects the first enabled match — lets the user filter and press Enter.
+ *
+ * @param {Function} close - Closes the dropdown.
+ */
+function selectFirst (close) {
+  const first = filteredOptions.value.find(o => !o.disabled);
+  if (!first) return;
+  onInput(first.value);
+  close();
+}
+
+/**
+ * Handles keys in the search field. Arrow keys propagate to DtDropdown so its
+ * highlightIndex stays in sync (avoids the double-keystroke bug). All other
+ * keys are stopped to prevent DtDropdown's type-ahead from intercepting typing.
+ *
+ * @param {KeyboardEvent} e - The keydown event.
+ * @param {Function} close - Closes the dropdown.
+ */
+function onSearchKeydown (e, close) {
+  if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+    e.preventDefault(); // no page scroll
+    return; // let DtDropdown's navigation handle it
+  }
+  if (e.key === 'Tab') return; // let focus trap handle Tab/Shift+Tab
+  e.stopPropagation();
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    selectFirst(close);
+  } else if (e.key === 'Escape') {
+    close();
+  }
+}
+
+/**
+ * When ArrowUp is pressed on the first list item, returns focus to the search
+ * input so the user can refine the query without reaching for the mouse.
+ *
+ * @param {KeyboardEvent} e
+ */
+function onListArrowUp (e) {
+  if (!showSearch.value) return;
+  const items = e.currentTarget.querySelectorAll('[role="menuitem"]');
+  if (!items.length || !items[0].contains(e.target)) return;
+  e.preventDefault();
+  e.stopPropagation();
+  searchInput.value?.$el?.querySelector('input')?.focus();
+}
 </script>
 
 <script>
