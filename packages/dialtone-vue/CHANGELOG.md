@@ -1,3 +1,10 @@
+# [3.223.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.223.0-next.1...dialtone-vue/v3.223.0-next.2) (2026-06-22)
+
+
+### Features
+
+* **Hovercard:** DLT-2845 add focus trap to hovercard content ([#1330](https://github.com/dialpad/dialtone/issues/1330)) ([b5aa615](https://github.com/dialpad/dialtone/commit/b5aa6154319f80d4528c3450be0b18b56c788a11))
+
 # [3.223.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.222.0...dialtone-vue/v3.223.0-next.1) (2026-06-16)
 
 
