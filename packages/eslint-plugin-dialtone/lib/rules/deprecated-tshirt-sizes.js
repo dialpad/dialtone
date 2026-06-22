@@ -1,88 +1,210 @@
 /**
  * @fileoverview Detects usage of deprecated t-shirt size props (xs, sm, md, lg, xl) on Dialtone
- * components and suggests numeric equivalents (100, 200, 300, 400, 500).
+ * components and suggests current equivalents.
  * @author Dialtone Team
  */
-'use strict';
+"use strict";
 
 // ------------------------------------------------------------------------------
 // Rule Definition
 // ------------------------------------------------------------------------------
 
 const SIZE_MAP = {
-  xs: '100',
-  sm: '200',
-  md: '300',
-  lg: '400',
-  xl: '500',
-  '2xl': '600',
-  '3xl': '700',
+  xs: "100",
+  sm: "200",
+  md: "300",
+  lg: "400",
+  xl: "500",
+  "2xl": "600",
+  "3xl": "700",
 };
 
 const TSHIRT_VALUES = new Set(Object.keys(SIZE_MAP));
 
+const DT_TEXT_KIND_SIZE_MAP = {
+  headline: new Set(["xs", "sm", "md", "lg", "xl", "2xl", "3xl"]),
+  body: new Set(["xs", "sm", "md", "lg"]),
+  label: new Set(["xs", "sm", "md", "lg"]),
+  code: new Set(["xs", "sm", "md", "lg"]),
+};
+
 // Props that accept the component size scale
-const SIZE_PROPS = ['size', 'label-size', 'labelSize'];
+const SIZE_PROPS = ["size", "label-size", "labelSize"];
 
 // Speed prop on motion-text also uses the same scale
-const SPEED_PROPS = ['speed'];
+const SPEED_PROPS = ["speed"];
 
 // All size-related prop names
 const ALL_SIZE_PROPS = [...SIZE_PROPS, ...SPEED_PROPS];
 
 // Only flag on Dialtone components (dt-* or Dt*)
-function isDialtoneComponent (node) {
+function isDialtoneComponent(node) {
+  const name = getElementName(node);
+  return name.startsWith("dt-") || name.startsWith("Dt");
+}
+
+function getElementName(node) {
   const parent = node.parent;
-  if (!parent || parent.type !== 'VStartTag') return false;
+  if (!parent || parent.type !== "VStartTag") return "";
   const element = parent.parent;
-  if (!element || element.type !== 'VElement') return false;
-  const name = element.rawName || element.name || '';
-  return name.startsWith('dt-') || name.startsWith('Dt');
+  if (!element || element.type !== "VElement") return "";
+  return element.rawName || element.name || "";
+}
+
+function isDtTextComponent(node) {
+  const name = getElementName(node);
+  return name === "dt-text" || name === "DtText";
+}
+
+function getAttributeName(attribute) {
+  if (!attribute) return null;
+  return attribute.directive
+    ? attribute.key.argument && attribute.key.argument.name
+    : attribute.key.name;
+}
+
+function getStaticAttributeValue(attribute) {
+  if (!attribute || attribute.directive || !attribute.value) return null;
+  return attribute.value.value;
+}
+
+function findStaticAttribute(node, name) {
+  const startTag = node.parent;
+  if (!startTag || !Array.isArray(startTag.attributes)) return null;
+
+  return (
+    startTag.attributes.find((attribute) => {
+      return !attribute.directive && getAttributeName(attribute) === name;
+    }) || null
+  );
+}
+
+function removeAttributeFix(fixer, sourceCode, attribute) {
+  let start = attribute.range[0];
+  const end = attribute.range[1];
+  const text = sourceCode.text;
+
+  while (start > 0 && /[ \t]/.test(text[start - 1])) {
+    start -= 1;
+  }
+
+  return fixer.removeRange([start, end]);
+}
+
+function getDtTextVariant(node, sizeValue) {
+  const variantAttribute = findStaticAttribute(node, "variant");
+  if (variantAttribute) return null;
+
+  const kindAttribute = findStaticAttribute(node, "kind");
+  const kindValue = getStaticAttributeValue(kindAttribute) || "body";
+  if (!kindValue || !DT_TEXT_KIND_SIZE_MAP[kindValue]) return null;
+  if (!DT_TEXT_KIND_SIZE_MAP[kindValue].has(sizeValue)) return null;
+
+  return {
+    kindAttribute,
+    variant: `${kindValue}-${sizeValue}`,
+  };
 }
 
 module.exports = {
   meta: {
-    type: 'suggestion',
+    type: "suggestion",
     docs: {
-      description: 'T-shirt sizes (xs, sm, md, lg, xl) are deprecated. Use numeric scale (100, 200, 300, 400, 500) instead.',
+      description:
+        "T-shirt sizes (xs, sm, md, lg, xl) are deprecated. Use the current numeric or DtText variant API instead.",
       recommended: false,
-      url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-tshirt-sizes.md',
+      url: "https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-tshirt-sizes.md",
     },
-    fixable: 'code',
+    fixable: "code",
     schema: [],
     messages: {
-      deprecatedSize: 'Size "{{oldSize}}" is deprecated. Use :{{prop}}="{{newSize}}" instead.',
-      deprecatedSizeInBinding: 'T-shirt size "{{oldSize}}" in dynamic binding is deprecated. Use numeric {{newSize}} instead.',
+      deprecatedSize:
+        'Size "{{oldSize}}" is deprecated. Use :{{prop}}="{{newSize}}" instead.',
+      deprecatedSizeInBinding:
+        'T-shirt size "{{oldSize}}" in dynamic binding is deprecated. Use numeric {{newSize}} instead.',
+      deprecatedDtTextSize:
+        'DtText size "{{oldSize}}" is deprecated for text composition. Use variant="{{variant}}" instead.',
+      deprecatedDtTextSizeManual:
+        'DtText size "{{oldSize}}" is deprecated. Use variant for text composition, or a numeric size token for raw font-size control.',
+      deprecatedDtTextSizeInBinding:
+        'T-shirt size "{{oldSize}}" in DtText size binding is deprecated. Use variant for text composition, or numeric {{newSize}} only for raw font-size control.',
     },
   },
 
-  create (context) {
+  create(context) {
     const sourceCode = context.sourceCode ?? context.getSourceCode();
     return sourceCode.parserServices.defineTemplateBodyVisitor({
-      VAttribute (node) {
+      VAttribute(node) {
         if (!isDialtoneComponent(node)) return;
 
         // Get the prop name and check if it's a size-related prop
         const isDirective = node.directive;
         const propName = isDirective
-          ? (node.key.argument && node.key.argument.name)
+          ? node.key.argument && node.key.argument.name
           : node.key.name;
 
         if (!propName || !ALL_SIZE_PROPS.includes(propName)) return;
+        const isDtText = isDtTextComponent(node);
 
         // --- Static attributes: size="sm" → auto-fixable ---
         if (!isDirective && node.value && node.value.value) {
           const sizeValue = node.value.value;
           if (SIZE_MAP[sizeValue]) {
+            if (isDtText && propName === "size") {
+              const dtTextVariant = getDtTextVariant(node, sizeValue);
+
+              if (dtTextVariant) {
+                context.report({
+                  node,
+                  messageId: "deprecatedDtTextSize",
+                  data: {
+                    oldSize: sizeValue,
+                    variant: dtTextVariant.variant,
+                  },
+                  fix(fixer) {
+                    const fixes = [
+                      fixer.replaceTextRange(
+                        [node.range[0], node.range[1]],
+                        `variant="${dtTextVariant.variant}"`,
+                      ),
+                    ];
+                    if (dtTextVariant.kindAttribute) {
+                      fixes.push(
+                        removeAttributeFix(
+                          fixer,
+                          sourceCode,
+                          dtTextVariant.kindAttribute,
+                        ),
+                      );
+                    }
+                    return fixes;
+                  },
+                });
+                return;
+              }
+
+              const variantAttribute = findStaticAttribute(node, "variant");
+              if (!variantAttribute) {
+                context.report({
+                  node,
+                  messageId: "deprecatedDtTextSizeManual",
+                  data: {
+                    oldSize: sizeValue,
+                  },
+                });
+                return;
+              }
+            }
+
             context.report({
               node,
-              messageId: 'deprecatedSize',
+              messageId: "deprecatedSize",
               data: {
                 oldSize: sizeValue,
                 newSize: SIZE_MAP[sizeValue],
                 prop: propName,
               },
-              fix (fixer) {
+              fix(fixer) {
                 const newAttr = `:${propName}="${SIZE_MAP[sizeValue]}"`;
                 return fixer.replaceTextRange(
                   [node.range[0], node.range[1]],
@@ -100,18 +222,24 @@ module.exports = {
           const expression = node.value.expression;
           const literals = [];
 
-          (function findLiterals (n) {
+          (function findLiterals(n) {
             if (!n) return;
-            if (n.type === 'Literal' && typeof n.value === 'string' && TSHIRT_VALUES.has(n.value)) {
+            if (
+              n.type === "Literal" &&
+              typeof n.value === "string" &&
+              TSHIRT_VALUES.has(n.value)
+            ) {
               literals.push(n);
             }
             // Walk child nodes
             for (const key of Object.keys(n)) {
-              if (key === 'parent') continue;
+              if (key === "parent") continue;
               const child = n[key];
-              if (child && typeof child === 'object') {
+              if (child && typeof child === "object") {
                 if (Array.isArray(child)) {
-                  child.forEach(c => { if (c && c.type) findLiterals(c); });
+                  child.forEach((c) => {
+                    if (c && c.type) findLiterals(c);
+                  });
                 } else if (child.type) {
                   findLiterals(child);
                 }
@@ -120,9 +248,21 @@ module.exports = {
           })(expression);
 
           for (const literal of literals) {
+            if (isDtText && propName === "size") {
+              context.report({
+                node: literal,
+                messageId: "deprecatedDtTextSizeInBinding",
+                data: {
+                  oldSize: literal.value,
+                  newSize: SIZE_MAP[literal.value],
+                },
+              });
+              continue;
+            }
+
             context.report({
               node: literal,
-              messageId: 'deprecatedSizeInBinding',
+              messageId: "deprecatedSizeInBinding",
               data: {
                 oldSize: literal.value,
                 newSize: SIZE_MAP[literal.value],

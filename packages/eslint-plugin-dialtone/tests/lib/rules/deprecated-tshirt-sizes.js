@@ -2,26 +2,28 @@
  * @fileoverview Tests for deprecated-tshirt-sizes rule.
  * @author Dialtone Team
  */
-'use strict';
+"use strict";
 
 //------------------------------------------------------------------------------
 // Requirements
 //------------------------------------------------------------------------------
 
-const rule = require('../../../lib/rules/deprecated-tshirt-sizes'),
-  RuleTester = require('eslint').RuleTester;
+const rule = require("../../../lib/rules/deprecated-tshirt-sizes"),
+  RuleTester = require("eslint").RuleTester,
+  vueParser = require("vue-eslint-parser");
 
 //------------------------------------------------------------------------------
 // Tests
 //------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
-  // eslint-disable-next-line n/no-extraneous-require
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 'latest' },
+  languageOptions: {
+    parser: vueParser,
+    ecmaVersion: "latest",
+  },
 });
 
-ruleTester.run('deprecated-tshirt-sizes', rule, {
+ruleTester.run("deprecated-tshirt-sizes", rule, {
   valid: [
     // Numeric sizes should be valid
     {
@@ -29,6 +31,12 @@ ruleTester.run('deprecated-tshirt-sizes', rule, {
     },
     {
       code: '<template><dt-text :size="300" /></template>',
+    },
+    {
+      code: '<template><dt-text variant="body-sm" /></template>',
+    },
+    {
+      code: '<template><DtText variant="headline-2xl" /></template>',
     },
     {
       code: '<template><dt-chip :size="100" /></template>',
@@ -63,79 +71,108 @@ ruleTester.run('deprecated-tshirt-sizes', rule, {
     {
       code: '<template><dt-button size="xs" /></template>',
       output: '<template><dt-button :size="100" /></template>',
-      errors: [{ messageId: 'deprecatedSize' }],
+      errors: [{ messageId: "deprecatedSize" }],
     },
-    // size="sm" on dt-text
+    // size="sm" on dt-text defaults to body composition
     {
       code: '<template><dt-text size="sm" /></template>',
-      output: '<template><dt-text :size="200" /></template>',
-      errors: [{ messageId: 'deprecatedSize' }],
+      output: '<template><dt-text variant="body-sm" /></template>',
+      errors: [{ messageId: "deprecatedDtTextSize" }],
+    },
+    // size="sm" on dt-text with explicit kind
+    {
+      code: '<template><dt-text kind="body" size="sm" /></template>',
+      output: '<template><dt-text variant="body-sm" /></template>',
+      errors: [{ messageId: "deprecatedDtTextSize" }],
+    },
+    // size="sm" on PascalCase DtText with explicit kind
+    {
+      code: '<template><DtText kind="body" size="sm" /></template>',
+      output: '<template><DtText variant="body-sm" /></template>',
+      errors: [{ messageId: "deprecatedDtTextSize" }],
     },
     // size="md" on dt-input
     {
       code: '<template><dt-input size="md" /></template>',
       output: '<template><dt-input :size="300" /></template>',
-      errors: [{ messageId: 'deprecatedSize' }],
+      errors: [{ messageId: "deprecatedSize" }],
     },
     // size="lg" on dt-toggle
     {
       code: '<template><dt-toggle size="lg" /></template>',
       output: '<template><dt-toggle :size="400" /></template>',
-      errors: [{ messageId: 'deprecatedSize' }],
+      errors: [{ messageId: "deprecatedSize" }],
     },
     // size="xl" on dt-segmented-control
     {
       code: '<template><dt-segmented-control size="xl" /></template>',
       output: '<template><dt-segmented-control :size="500" /></template>',
-      errors: [{ messageId: 'deprecatedSize' }],
+      errors: [{ messageId: "deprecatedSize" }],
     },
-    // size="2xl" on dt-text (headline extended)
+    // size="2xl" on dt-text with headline kind
     {
-      code: '<template><dt-text size="2xl" /></template>',
-      output: '<template><dt-text :size="600" /></template>',
-      errors: [{ messageId: 'deprecatedSize' }],
+      code: '<template><dt-text kind="headline" size="2xl" /></template>',
+      output: '<template><dt-text variant="headline-2xl" /></template>',
+      errors: [{ messageId: "deprecatedDtTextSize" }],
     },
-    // size="3xl" on dt-text (headline extended)
+    // size="3xl" on dt-text without headline kind needs manual migration
     {
       code: '<template><dt-text size="3xl" /></template>',
-      output: '<template><dt-text :size="700" /></template>',
-      errors: [{ messageId: 'deprecatedSize' }],
+      output: null,
+      errors: [{ messageId: "deprecatedDtTextSizeManual" }],
+    },
+    // size="xl" on body dt-text cannot safely map to a supported body variant
+    {
+      code: '<template><dt-text kind="body" size="xl" /></template>',
+      output: null,
+      errors: [{ messageId: "deprecatedDtTextSizeManual" }],
+    },
+    // size t-shirt with a variant is treated as a raw-size override migration
+    {
+      code: '<template><dt-text variant="body-md" size="lg" /></template>',
+      output: '<template><dt-text variant="body-md" :size="400" /></template>',
+      errors: [{ messageId: "deprecatedSize" }],
     },
     // label-size="xs" on dt-input
     {
       code: '<template><dt-input label-size="xs" /></template>',
       output: '<template><dt-input :label-size="100" /></template>',
-      errors: [{ messageId: 'deprecatedSize' }],
+      errors: [{ messageId: "deprecatedSize" }],
     },
     // speed="sm" on dt-motion-text
     {
       code: '<template><dt-motion-text speed="sm" /></template>',
       output: '<template><dt-motion-text :speed="200" /></template>',
-      errors: [{ messageId: 'deprecatedSize' }],
+      errors: [{ messageId: "deprecatedSize" }],
     },
     // PascalCase component names
     {
       code: '<template><DtButton size="sm" /></template>',
       output: '<template><DtButton :size="200" /></template>',
-      errors: [{ messageId: 'deprecatedSize' }],
+      errors: [{ messageId: "deprecatedSize" }],
     },
     // Dynamic binding: :size="'sm'" (string literal in expression)
     {
       code: `<template><dt-button :size="'sm'" /></template>`,
-      errors: [{ messageId: 'deprecatedSizeInBinding' }],
+      errors: [{ messageId: "deprecatedSizeInBinding" }],
+    },
+    // Dynamic binding on dt-text: :size="'sm'" needs a manual variant/raw-size choice
+    {
+      code: `<template><dt-text :size="'sm'" /></template>`,
+      errors: [{ messageId: "deprecatedDtTextSizeInBinding" }],
     },
     // Dynamic binding: ternary with t-shirt literals
     {
       code: `<template><dt-button :size="isCompact ? 'sm' : 'md'" /></template>`,
       errors: [
-        { messageId: 'deprecatedSizeInBinding' },
-        { messageId: 'deprecatedSizeInBinding' },
+        { messageId: "deprecatedSizeInBinding" },
+        { messageId: "deprecatedSizeInBinding" },
       ],
     },
     // Dynamic binding: single t-shirt in ternary
     {
       code: `<template><dt-text :size="isLarge ? 'xl' : 300" /></template>`,
-      errors: [{ messageId: 'deprecatedSizeInBinding' }],
+      errors: [{ messageId: "deprecatedDtTextSizeInBinding" }],
     },
   ],
 });
