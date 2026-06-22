@@ -13,6 +13,7 @@
     :transition="transition ? 'fade' : null"
     :offset="offset"
     :modal="false"
+    :focustrap="hovercardOpen"
     initial-focus-element="none"
     :header-class="headerClass"
     :footer-class="footerClass"
