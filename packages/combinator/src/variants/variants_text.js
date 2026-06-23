@@ -1,9 +1,10 @@
 /* eslint-disable max-len */
 
-
 export default {
   defaults: {
     props: {
+      variant: { tokenCategory: 'typography-variant' },
+      kind: { deprecated: true },
       size: { tokenCategory: 'typography-size' },
       density: { tokenCategory: 'line-height' },
       tone: { tokenCategory: 'color:d-text--tone-:--text-tone' },
@@ -12,8 +13,18 @@ export default {
 
   exclusions: [
     {
-      when: { kind: v => v !== 'headline' },
-      disableValues: { props: { size: ['500', '600', '700'] } },
+      when: { variant: v => !!v },
+      disable: { props: ['kind'] },
+      clear: { props: ['kind'] },
+    },
+    {
+      when: { variant: v => !v, kind: v => !v },
+      disable: { props: ['size'] },
+      clear: { props: ['size'] },
+    },
+    {
+      when: { variant: v => !v, kind: v => v !== 'headline' },
+      disableValues: { props: { size: ['50', '75', '125', '150', '250', '350', '450', '500', '550', '600', '650', '700', '750', '800' ] } },
     },
     {
       when: { size: v => ['500', '600', '700'].includes(String(v)) },
@@ -28,11 +39,8 @@ export default {
       },
     },
     props: {
-      kind: {
-        initialValue: 'body',
-      },
-      size: {
-        initialValue: '300',
+      variant: {
+        initialValue: 'body-md',
       },
     },
   },
@@ -193,9 +201,6 @@ export default {
       },
     },
     props: {
-      kind: {
-        initialValue: 'body',
-      },
       numeric: {
         initialValue: true,
       },
