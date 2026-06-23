@@ -1,9 +1,10 @@
 import { expect } from 'vitest';
-import { shouldExclude, getDisabledValues } from './exclusion_rules';
+import { shouldExclude, shouldDisable, getDisabledValues } from './exclusion_rules';
 
 const EQUALITY_RULE = { when: { kind: 'body' }, disableValues: { props: { size: ['500'] } } };
 const PREDICATE_RULE = { when: { kind: v => v !== 'headline' }, disableValues: { props: { size: ['500'] } } };
 const HIDE_RULE = { when: { kind: 'count' }, hide: { props: ['decoration'] } };
+const DISABLE_RULE = { when: { kind: 'count' }, disable: { props: ['decoration'] } };
 
 describe('exclusion_rules', function () {
   describe('getDisabledValues', function () {
@@ -70,6 +71,20 @@ describe('exclusion_rules', function () {
 
     it('should return false when member is not in hide list', function () {
       expect(shouldExclude('size', 'props', [HIDE_RULE], { kind: 'count' })).toBe(false);
+    });
+  });
+
+  describe('shouldDisable', function () {
+    it('should return false when no rules', function () {
+      expect(shouldDisable('size', 'props', [], {})).toBe(false);
+    });
+
+    it('should return true when condition matches and member is in disable list', function () {
+      expect(shouldDisable('decoration', 'props', [DISABLE_RULE], { kind: 'count' })).toBe(true);
+    });
+
+    it('should treat hide rules as disable rules for backwards compatibility', function () {
+      expect(shouldDisable('decoration', 'props', [HIDE_RULE], { kind: 'count' })).toBe(true);
     });
   });
 });

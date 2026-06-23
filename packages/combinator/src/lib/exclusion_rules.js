@@ -6,6 +6,14 @@ function areConditionsMet (rule, propValues) {
   );
 }
 
+function matchesRuleKey (ruleKey, memberName, memberGroup, exclusionRules, propValues) {
+  if (!exclusionRules?.length) return false;
+  return exclusionRules.some(rule => {
+    if (!areConditionsMet(rule, propValues)) return false;
+    return rule[ruleKey]?.[memberGroup]?.includes(memberName) ?? false;
+  });
+}
+
 /**
  * Determines if a member should be excluded (hidden) based on exclusion rules
  * and the current prop values.
@@ -17,11 +25,42 @@ function areConditionsMet (rule, propValues) {
  * @returns {boolean} Whether the member should be excluded.
  */
 export function shouldExclude (memberName, memberGroup, exclusionRules, propValues) {
+  return matchesRuleKey('hide', memberName, memberGroup, exclusionRules, propValues);
+}
+
+/**
+ * Determines if a member should be disabled based on exclusion rules and the
+ * current prop values. `hide` is treated as a disable signal for backwards
+ * compatibility with variant metadata that predates the `disable` key.
+ *
+ * @param {string} memberName - The name of the member to check.
+ * @param {string} memberGroup - The member group ('props' or 'slots').
+ * @param {Array} exclusionRules - Array of exclusion rule objects.
+ * @param {object} propValues - Current prop values.
+ * @returns {boolean} Whether the member should be disabled.
+ */
+export function shouldDisable (memberName, memberGroup, exclusionRules, propValues) {
   if (!exclusionRules?.length) return false;
   return exclusionRules.some(rule => {
     if (!areConditionsMet(rule, propValues)) return false;
-    return rule.hide?.[memberGroup]?.includes(memberName) ?? false;
+    const isDisabled = rule.disable?.[memberGroup]?.includes(memberName);
+    const isHidden = rule.hide?.[memberGroup]?.includes(memberName);
+    return (isDisabled || isHidden) ?? false;
   });
+}
+
+/**
+ * Determines if a member value should be cleared based on exclusion rules
+ * and the current prop values.
+ *
+ * @param {string} memberName - The name of the member to check.
+ * @param {string} memberGroup - The member group ('props' or 'slots').
+ * @param {Array} exclusionRules - Array of exclusion rule objects.
+ * @param {object} propValues - Current prop values.
+ * @returns {boolean} Whether the member value should be cleared.
+ */
+export function shouldClear (memberName, memberGroup, exclusionRules, propValues) {
+  return matchesRuleKey('clear', memberName, memberGroup, exclusionRules, propValues);
 }
 
 /**

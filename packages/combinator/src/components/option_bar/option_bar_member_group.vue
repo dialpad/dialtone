@@ -15,6 +15,7 @@
         :description="member.description"
         :v-model="isVModel(member)"
         :required="member.required"
+        :deprecated="member.deprecated"
         :locked="member.lockControl"
         :disabled="member.disableControl"
         :args="{
@@ -26,6 +27,7 @@
           tokenCategory: member.tokenCategory,
           propValues,
           disabledValues: getDisabledValues(key, props.exclusionRules, props.propValues),
+          clearable: member.clearable,
         }"
         @update:value="e => updateMember(e, key)"
         @update:control="e => updateControl(e, key)"
@@ -37,22 +39,24 @@
 <script setup>
 import DtcOptionBarControl from './option_bar_control.vue';
 import { MEMBER_UPDATE_EVENT } from '@/src/lib/constants';
-import { computed, reactive } from 'vue';
+import { computed, reactive, watch } from 'vue';
 import { convert } from '@/src/lib/convert';
 import { controlMap } from '@/src/lib/control';
 import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
-import { shouldExclude, getDisabledValues } from '@/src/lib/exclusion_rules';
+import { shouldDisable, shouldClear, getDisabledValues } from '@/src/lib/exclusion_rules';
 import { isIconSlot } from '@/src/lib/icons';
-import { DtStack } from '@dialpad/dialtone-vue';
 
 const ICON_SLOT_ORDER = ['startIcon', 'endIcon', 'blockStartIcon', 'blockEndIcon', 'icon'];
 
 const PROP_PRIORITY = [
-  'title', 'as', 'label', 'importance', 'kind', 'size',
-  'placement', 'tone', 'align', 'density', 'strength',
-  'type', 'underline', 'selected', 'active', 'disabled', 'showDivider', 'color', 'description',
-  'scrollbar', 'surface',
-  'borderColor', 'borderRadius',
+  'title', 'as', 'variant', 'label', 'importance', 'size',
+  'placement', 'tone', 'align', 'density', 'strength', 'family', 'kind',
+  'type', 'underline', 'selected', 'active', 'disabled',
+  'deferSelection', 'readOnly', 'showClear', 'useDropdown',
+  'dropdownListClass', 'popoverContentClass', 'popoverDialogClass', 'popoverFooterClass', 'popoverHeaderClass',
+  'showDivider', 'color', 'description',
+  'scrollbar', 'scrollbarContentClass', 'surface',
+  'borderRadius', 'borderColor',
   'borderWidth', 'borderWidthBlock', 'borderWidthBlockEnd', 'borderWidthBlockStart',
   'borderWidthInline', 'borderWidthInlineEnd', 'borderWidthInlineStart',
   'padding', 'paddingBlock', 'paddingBlockEnd', 'paddingBlockStart',
@@ -229,18 +233,26 @@ function extendMember (member) {
   const dynamicHide = !member.required
     && shouldHideProp(key, dependencyMap.value, props.values);
 
-  const isDeprecated = !!member.tags?.deprecated
+  const isDocDeprecated = !!member.tags?.deprecated
     || member.description?.startsWith('@deprecated');
 
-  const isExcluded = !member.required
-    && shouldExclude(key, props.memberGroup, props.exclusionRules, props.propValues);
+  const isDisabled = !member.required
+    && shouldDisable(key, props.memberGroup, props.exclusionRules, props.propValues);
+
+  const clearValue = !member.required
+    && shouldClear(key, props.memberGroup, props.exclusionRules, props.propValues);
+  // clearable = true when the member has no concrete default (prop is optional, user explicitly set it)
+  const clearable = member.clearable ?? (member.defaultValue == null || member.defaultValue === '');
 
   return {
     ...member,
     control,
     validControls,
-    hideControl: member.hideControl || isDeprecated,
-    disableControl: dynamicHide || isExcluded,
+    hideControl: member.hideControl || isDocDeprecated,
+    clearValue,
+    clearable,
+    deprecated: !!member.deprecated || isDocDeprecated,
+    disableControl: dynamicHide || isDisabled,
   };
 }
 
@@ -256,6 +268,14 @@ function updateMember (e, key) {
     value: e,
   });
 }
+
+watch(memberMap, (members) => {
+  Object.entries(members).forEach(([key, member]) => {
+    if (!member.clearValue) return;
+    if (props.values[key] === null || props.values[key] === undefined) return;
+    updateMember(null, key);
+  });
+}, { immediate: true });
 
 /**
  * Updates the member's control in the 'member map'.
