@@ -75,7 +75,7 @@ export default {
     },
 
     /**
-     * Typography variant mapping to a complete token-backed composition.
+     * Typography variant style mapping to a complete token-backed composition.
      * @values headline-3xl, headline-2xl, headline-xl, headline-lg, headline-md, headline-sm, headline-xs, body-lg, body-md, body-sm, body-xs, label-lg, label-md, label-sm, label-xs, code-lg, code-md, code-sm, code-xs
      */
     variant: {
@@ -90,7 +90,8 @@ export default {
     },
 
     /**
-     * Raw font-size token. When used with legacy `kind`, this remains a legacy composition size.
+     * Raw font-size token. Acts as an override with `variant`. When used with legacy `kind`, this
+     * remains a legacy composition size with `kind`.
      * @values 50, 75, 100, 125, 150, 200, 250, 300, 350, 400, 450, 500, 550, 600, 650, 700, 750, 800
      */
     size: {
