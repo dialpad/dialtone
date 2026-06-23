@@ -6,18 +6,29 @@ import { mount } from '@vue/test-utils';
 const inputSelector = 'input';
 
 const inputValue = 'string test';
-const defaultValue = DtcControlString.props.value.default();
+const defaultValue = typeof DtcControlString.props.value.default === 'function'
+  ? DtcControlString.props.value.default()
+  : DtcControlString.props.value.default;
 
 describe('control_string.vue test', function () {
   let wrapper;
   let inputWrapper;
 
   beforeEach(function () {
-    wrapper = mount(DtcControlString);
+    wrapper = mount(DtcControlString, {
+      slots: {
+        default: 'Label',
+      },
+    });
   });
 
-  const _mountWrapper = () => {
-    wrapper = mount(DtcControlString);
+  const _mountWrapper = (props = {}) => {
+    wrapper = mount(DtcControlString, {
+      props,
+      slots: {
+        default: 'Label',
+      },
+    });
     _setChildWrappers();
   };
 
@@ -55,6 +66,41 @@ describe('control_string.vue test', function () {
 
     it('Should set the native input to control default', function () {
       expect(defaultValue).toBe(inputWrapper.element.value);
+    });
+  });
+
+  describe('When clearing the value', function () {
+    it('Should render a clear button', function () {
+      _mountWrapper();
+
+      expect(wrapper.find('[aria-label="Remove value"]').exists()).toBe(true);
+    });
+
+    it('Should emit null when cleared', function () {
+      _mountWrapper({ value: inputValue });
+      wrapper.vm.clearValue();
+
+      expect(wrapper.emitted('update:value')[0]).toEqual([null]);
+    });
+
+    it('Should disable the clear button for empty values', function () {
+      _mountWrapper();
+
+      expect(wrapper.vm.clearDisabled).toBe(true);
+    });
+
+    it('Should disable the clear button for required values', function () {
+      wrapper = mount(DtcControlString, {
+        props: {
+          required: true,
+          value: inputValue,
+        },
+        slots: {
+          default: 'Label',
+        },
+      });
+
+      expect(wrapper.vm.clearDisabled).toBe(true);
     });
   });
 });

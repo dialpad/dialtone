@@ -44,4 +44,15 @@ describe('control_boolean.vue test', function () {
       expect(wrapper.find(inputSelector).attributes('aria-checked')).toBe(String(defaultValue));
     });
   });
+
+  describe('When a nullable boolean value is routed to the boolean control', function () {
+    beforeEach(function () {
+      _mountWrapper({ value: null });
+    });
+
+    it('Should render the toggle unchecked', function () {
+      expect(wrapper.find(inputSelector).exists()).toBe(true);
+      expect(wrapper.find(inputSelector).attributes('aria-checked')).toBe('false');
+    });
+  });
 });

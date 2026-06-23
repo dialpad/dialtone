@@ -7,145 +7,172 @@
   >
     <slot />
   </dt-text>
-  <dt-dropdown
-    navigation-type="arrow-keys"
-    placement="bottom-start"
-    content-width="anchor"
-    @opened="onOpened"
+  <dt-stack
+    direction="row"
+    gap="50"
   >
-    <template #anchor="{ attrs }">
-      <dt-button
-        v-bind="attrs"
-        importance="outlined"
-        kind="muted"
-        :size="100"
-        :disabled="disabled"
-        class="d-w100p"
-        label-class="d-jc-space-between d-fw-normal"
-        leading-class="d-pis-75"
-      >
-        <template
-          v-if="(selectedOption?.resolved && isColor(selectedOption.resolved)) || selectedOption?.previewComponent"
-          #leading
-        >
-          <span
-            v-if="selectedOption.resolved && isColor(selectedOption.resolved)"
-            class="d-ba d-bc-subtle d-bar-circle"
-            :style="swatchStyle(selectedOption.resolved)"
-          />
-          <component
-            :is="selectedOption.previewComponent"
-            v-else
-            size="200"
-            class="d-fc-muted"
-          />
-        </template>
-        {{ selectedLabel }}
-        <span aria-hidden="true">&thinsp;<!-- hold the space --></span>
-        <dt-text
-          v-if="selectedOption?.resolved && !isColor(selectedOption.resolved)"
-          v-dt-tooltip="selectedOption.resolved.includes('/') ? 'Font Size / Line Height' : undefined"
-          kind="body"
+    <dt-dropdown
+      class="d-fl1"
+      navigation-type="arrow-keys"
+      placement="bottom-start"
+      content-width="anchor"
+      @opened="onOpened"
+    >
+      <template #anchor="{ attrs }">
+        <dt-button
+          v-bind="attrs"
+          importance="outlined"
+          kind="muted"
           :size="100"
-          tone="muted"
+          :disabled="disabled"
+          class="d-w100p"
+          label-class="d-jc-space-between d-fw-normal"
+          leading-class="d-pis-75"
         >
-          {{ selectedOption.resolved }}
-        </dt-text>
-        <template #endIcon="{ iconSize }">
-          <dt-icon-chevrons-up-down
-            class="d-fc-muted"
-            :size="iconSize"
-          />
-        </template>
-      </dt-button>
-    </template>
-    <template #list="{ close }">
-      <dt-box
-        v-if="showSearch"
-        surface="overlay"
-        padding-block-end="50"
-        border-width-block-end="100"
-        border-color="subtle"
-      >
-        <dt-input
-          ref="searchInput"
-          v-model="query"
-          type="search"
-          aria-label="Search"
-          placeholder="Search"
-          @keydown="onSearchKeydown($event, close)"
-        >
-          <template #startIcon="{ iconSize }">
-            <dt-icon-search :size="iconSize" />
-          </template>
-          <template v-if="query.length" #endIcon="{ clear }">
-            <dt-button
-              kind="muted"
-              importance="clear"
-              :size="100"
-              aria-label="Clear search"
-              @click="clear"
-            >
-              <template #startIcon="{ iconSize }">
-                <dt-icon-close :size="iconSize" />
-              </template>
-            </dt-button>
-          </template>
-        </dt-input>
-      </dt-box>
-      <div class="d-of-y-auto d-hmx-400 d-p-50" @keydown.up="onListArrowUp">
-        <dt-list-item
-          v-for="option in filteredOptions"
-          :key="option.value"
-          element-type="div"
-          role="menuitem"
-          navigation-type="arrow-keys"
-          :class="{ 'd-o50 d-pe-none': option.disabled, 'd-bgc-moderate-opaque': option.value === value }"
-          :aria-disabled="option.disabled || undefined"
-          @click="!option.disabled && (onInput(option.value), close())"
-        >
-          <dt-stack
-            direction="row"
-            gap="100"
-            align="baseline"
-            class="d-w100p"
+          <template
+            v-if="(selectedOption?.resolved && isColor(selectedOption.resolved)) || selectedOption?.previewComponent"
+            #leading
           >
             <span
-              v-if="option.resolved && isColor(option.resolved)"
-              class="d-ba d-bc-subtle d-bar-circle d-as-center"
-              :style="swatchStyle(option.resolved)"
+              v-if="selectedOption.resolved && isColor(selectedOption.resolved)"
+              class="d-ba d-bc-subtle d-bar-circle"
+              :style="swatchStyle(selectedOption.resolved)"
             />
             <component
-              :is="option.previewComponent"
-              v-if="option.previewComponent"
-              size="400"
-              class="d-as-center d-fc-tertiary"
+              :is="selectedOption.previewComponent"
+              v-else
+              size="200"
+              class="d-fc-muted"
             />
-            <span>{{ option.label }}</span>
-            <dt-text
-              v-if="option.resolved && !isColor(option.resolved)"
-              kind="body"
-              size="100"
-              tone="muted"
-              class="d-mis-auto"
+          </template>
+          {{ selectedLabel }}
+          <span aria-hidden="true">&nbsp;<!-- hold the space --></span>
+          <dt-text
+            v-if="selectedOption?.resolved && !isColor(selectedOption.resolved)"
+            v-dt-tooltip="selectedOption.resolved.includes('/') ? 'Font Size / Line Height' : undefined"
+            kind="body"
+            :size="100"
+            tone="muted"
+          >
+            {{ selectedOption.resolved }}
+          </dt-text>
+          <template #endIcon="{ iconSize }">
+            <dt-icon-chevrons-up-down
+              class="d-fc-muted"
+              :size="iconSize"
+            />
+          </template>
+        </dt-button>
+      </template>
+      <template #list="{ close }">
+        <dt-box
+          v-if="showSearch"
+          surface="overlay"
+          padding-block-end="50"
+          border-width-block-end="100"
+          border-color="subtle"
+        >
+          <dt-input
+            ref="searchInput"
+            v-model="query"
+            type="search"
+            aria-label="Search"
+            placeholder="Search"
+            @keydown="onSearchKeydown($event, close)"
+          >
+            <template #startIcon="{ iconSize }">
+              <dt-icon-search :size="iconSize" />
+            </template>
+            <template
+              v-if="query.length"
+              #endIcon="{ clear }"
             >
-              {{ option.resolved }}
-            </dt-text>
-          </dt-stack>
-        </dt-list-item>
-        <dt-empty-state
-          v-if="!filteredOptions.length"
-          size="200"
-          body-text="No matches"
-        />
-      </div>
-    </template>
-  </dt-dropdown>
+              <dt-button
+                kind="muted"
+                importance="clear"
+                :size="100"
+                aria-label="Clear search"
+                @click="clear"
+              >
+                <template #startIcon="{ iconSize }">
+                  <dt-icon-close :size="iconSize" />
+                </template>
+              </dt-button>
+            </template>
+          </dt-input>
+        </dt-box>
+        <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
+        <div
+          class="d-of-y-auto d-hmx-400 d-p-50"
+          @keydown.up="onListArrowUp"
+        >
+          <dt-list-item
+            v-for="option in filteredOptions"
+            :key="option.value"
+            element-type="div"
+            role="menuitem"
+            navigation-type="arrow-keys"
+            :class="{ 'd-o50 d-pe-none': option.disabled, 'd-bgc-moderate-opaque': option.value === value }"
+            :aria-disabled="option.disabled || undefined"
+            @click="!option.disabled && (onInput(option.value), close())"
+          >
+            <dt-stack
+              direction="row"
+              gap="100"
+              align="baseline"
+              class="d-w100p"
+            >
+              <span
+                v-if="option.resolved && isColor(option.resolved)"
+                class="d-ba d-bc-subtle d-bar-circle d-as-center"
+                :style="swatchStyle(option.resolved)"
+              />
+              <component
+                :is="option.previewComponent"
+                v-if="option.previewComponent"
+                size="400"
+                class="d-as-center d-fc-tertiary"
+              />
+              <span>{{ option.label }}</span>
+              <dt-text
+                v-if="option.resolved && !isColor(option.resolved)"
+                kind="body"
+                size="100"
+                tone="muted"
+                class="d-mis-auto"
+              >
+                {{ option.resolved }}
+              </dt-text>
+            </dt-stack>
+          </dt-list-item>
+          <dt-empty-state
+            v-if="!filteredOptions.length"
+            size="200"
+            body-text="No matches"
+          />
+        </div>
+      </template>
+    </dt-dropdown>
+    <dt-button
+      v-dt-tooltip="`Remove`"
+      aria-label="Remove value"
+      importance="clear"
+      :size="100"
+      kind="muted"
+      :disabled="clearDisabled"
+      :class="{ 'd-o0': clearDisabled }"
+      @click="clearValue"
+    >
+      <template #startIcon="{ iconSize }">
+        <dt-icon-dash :size="iconSize" />
+      </template>
+    </dt-button>
+  </dt-stack>
 </template>
 
 <script setup>
 import { DtBox, DtButton, DtEmptyState, DtInput, DtStack, DtText } from '@dialpad/dialtone-vue';
-import { DtIconClose, DtIconChevronsUpDown, DtIconSearch } from '@dialpad/dialtone-icons/vue';
+import { DtIconClose, DtIconChevronsUpDown, DtIconSearch, DtIconDash } from '@dialpad/dialtone-icons/vue';
 
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { resolveTokenValue } from '@/src/lib/tokens';
@@ -170,6 +197,14 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false,
+  },
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  clearable: {
+    type: Boolean,
+    default: true,
   },
   generateLabel: {
     type: Function,
@@ -216,12 +251,15 @@ const options = computed(() => {
     // Show color swatches even for disabled options; hide non-color values (misleading for disabled sizes)
     const resolved = optionDisabled && rawResolved && !isColor(rawResolved) ? null : rawResolved;
     const previewComponent = props.generatePreviewComponent?.(selection) ?? null;
-    return { value: selection, label: props.generateLabel(selection), resolved, disabled: optionDisabled, previewComponent };
+    return {
+      value: selection,
+      label: props.generateLabel(selection),
+      resolved,
+      disabled: optionDisabled,
+      previewComponent,
+    };
   }) ?? [];
 
-  if (props.defaultValue === null || props.defaultValue === undefined) {
-    return [{ value: null, label: '–' }, ...valueOptions];
-  }
   return valueOptions;
 });
 
@@ -229,7 +267,12 @@ const selectedOption = computed(() => {
   return options.value.find(o => String(o.value) === String(props.value));
 });
 
-const selectedLabel = computed(() => selectedOption.value?.label ?? '');
+const isEmpty = computed(() => props.value === null || props.value === undefined || props.value === '');
+
+// non-breaking space prevents label height collapse when no value is selected
+const selectedLabel = computed(() => isEmpty.value ? '\u00A0' : selectedOption.value?.label ?? '');
+
+const clearDisabled = computed(() => !props.clearable || props.required || props.disabled || isEmpty.value);
 
 const query = ref('');
 const searchInput = ref(null);
@@ -267,6 +310,11 @@ function selectFirst (close) {
   if (!first) return;
   onInput(first.value);
   close();
+}
+
+function clearValue () {
+  if (clearDisabled.value) return;
+  onInput(null);
 }
 
 /**

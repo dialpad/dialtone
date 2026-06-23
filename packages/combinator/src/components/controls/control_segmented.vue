@@ -7,25 +7,46 @@
   >
     <slot />
   </dt-text>
-  <dt-segmented-control
-    :model-value="String(value)"
-    :size="100"
-    :disabled="disabled"
-    @change="onInput"
+  <dt-stack
+    direction="row"
+    gap="50"
   >
-    <dt-segmented-control-item
-      v-for="option in options"
-      :key="option.value"
-      v-dt-tooltip="option.resolved ?? undefined"
-      :value="String(option.value)"
+    <dt-segmented-control
+      class="d-fl1"
+      :model-value="selectedValue"
+      :size="100"
+      :disabled="disabled"
+      @change="onInput"
     >
-      {{ option.label }}
-    </dt-segmented-control-item>
-  </dt-segmented-control>
+      <dt-segmented-control-item
+        v-for="option in options"
+        :key="option.value"
+        v-dt-tooltip="option.resolved ?? undefined"
+        :value="String(option.value)"
+      >
+        {{ option.label }}
+      </dt-segmented-control-item>
+    </dt-segmented-control>
+    <dt-button
+      v-dt-tooltip="`Remove`"
+      aria-label="Remove value"
+      importance="clear"
+      :size="100"
+      kind="muted"
+      :disabled="clearDisabled"
+      :class="{ 'd-o0': clearDisabled }"
+      @click="clearValue"
+    >
+      <template #startIcon="{ iconSize }">
+        <dt-icon-dash :size="iconSize" />
+      </template>
+    </dt-button>
+  </dt-stack>
 </template>
 
 <script setup>
-import { DtSegmentedControl, DtSegmentedControlItem, DtText } from '@dialpad/dialtone-vue';
+import { DtButton, DtSegmentedControl, DtSegmentedControlItem, DtStack, DtText } from '@dialpad/dialtone-vue';
+import { DtIconDash } from '@dialpad/dialtone-icons/vue';
 
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { resolveTokenValue } from '@/src/lib/tokens';
@@ -43,6 +64,14 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false,
+  },
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  clearable: {
+    type: Boolean,
+    default: true,
   },
   generateLabel: {
     type: Function,
@@ -79,8 +108,19 @@ const valueMap = computed(() => {
   return map;
 });
 
+const isEmpty = computed(() => props.value === null || props.value === undefined || props.value === '');
+
+const selectedValue = computed(() => isEmpty.value ? undefined : String(props.value));
+
+const clearDisabled = computed(() => !props.clearable || props.required || props.disabled || isEmpty.value);
+
 function onInput (stringValue) {
   emit(VALUE_UPDATE_EVENT, valueMap.value[stringValue]);
+}
+
+function clearValue () {
+  if (clearDisabled.value) return;
+  emit(VALUE_UPDATE_EVENT, null);
 }
 </script>
 

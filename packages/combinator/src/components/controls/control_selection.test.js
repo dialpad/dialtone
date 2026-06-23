@@ -56,6 +56,31 @@ describe('control_selection.vue test', function () {
         expect(wrapper.vm.selectedLabel).toBe(inputValue.toString());
       });
     });
+
+    it('Should not include a clear option in the dropdown', function () {
+      _mountWrapper({ defaultValue: selections[0] });
+
+      expect(wrapper.vm.options.some((option) => option.value === null)).toBe(false);
+    });
+
+    it('Should display a non-breaking space when the selection is empty', function () {
+      _mountWrapper({ value: null });
+
+      expect(wrapper.vm.selectedLabel).toBe('\u00A0');
+    });
+
+    it('Should disable the clear button for required selections', function () {
+      _mountWrapper({ required: true });
+
+      expect(wrapper.vm.clearDisabled).toBe(true);
+    });
+
+    it('Should hide the clear button when selection is not clearable', function () {
+      _mountWrapper({ clearable: false });
+
+      expect(wrapper.vm.clearDisabled).toBe(true);
+      expect(wrapper.vm.clearHidden).toBe(true);
+    });
   });
 
   describe('Search visibility', function () {

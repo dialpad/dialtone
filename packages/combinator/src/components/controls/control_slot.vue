@@ -1,43 +1,48 @@
 <template>
-  <dt-input
-    :model-value="value"
-    :disabled="disabled"
-    type="textarea"
-    input-class="d-pie-400"
-    spellcheck="false"
-    :size="100"
-    @update:model-value="updateValue"
+  <dt-stack
+    direction="row"
+    gap="50"
   >
-    <template #label>
-      <dt-text
-        kind="label"
-        :size="100"
-        tone="secondary"
-        class="d-input__label-text"
-      >
-        <slot />
-      </dt-text>
-    </template>
-    <template #endIcon>
-      <dt-button
-        v-if="isModified"
-        kind="muted"
-        importance="clear"
-        :size="100"
-        class="d-p-25 d-mie-n200"
-        @click.stop="onReset"
-      >
-        <template #icon>
-          <dt-icon-close size="100" />
-        </template>
-      </dt-button>
-    </template>
-  </dt-input>
+    <dt-input
+      class="d-fl1"
+      :model-value="inputValue"
+      :disabled="disabled"
+      type="textarea"
+      spellcheck="false"
+      :size="100"
+      @update:model-value="updateValue"
+    >
+      <template #label>
+        <dt-text
+          kind="label"
+          :size="100"
+          tone="secondary"
+          class="d-input__label-text"
+        >
+          <slot />
+        </dt-text>
+      </template>
+    </dt-input>
+    <dt-button
+      v-dt-tooltip="`Remove`"
+      aria-label="Remove value"
+      importance="clear"
+      :size="100"
+      kind="muted"
+      :disabled="clearDisabled"
+      :class="{ 'd-o0': clearDisabled }"
+      @click="clearValue"
+    >
+      <template #startIcon="{ iconSize }">
+        <dt-icon-dash :size="iconSize" />
+      </template>
+    </dt-button>
+  </dt-stack>
 </template>
 
 <script setup>
-import { DtButton, DtInput, DtText } from '@dialpad/dialtone-vue';
-import { DtIconClose } from '@dialpad/dialtone-icons/vue';
+import { DtButton, DtInput, DtStack, DtText } from '@dialpad/dialtone-vue';
+import { DtIconDash } from '@dialpad/dialtone-icons/vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed } from 'vue';
 
@@ -50,6 +55,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  clearable: {
+    type: Boolean,
+    default: true,
+  },
   defaultValue: {
     type: undefined,
     default: () => null,
@@ -58,15 +71,20 @@ const props = defineProps({
 
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
 
-const isModified = computed(() => props.value !== props.defaultValue);
+const inputValue = computed(() => props.value ?? '');
+
+const isEmpty = computed(() => props.value === null || props.value === undefined || props.value === '');
+
+const clearDisabled = computed(() => !props.clearable || props.required || props.disabled || isEmpty.value);
 
 function updateValue (e) {
   const value = e || null;
   emit(VALUE_UPDATE_EVENT, value);
 }
 
-function onReset () {
-  emit(VALUE_UPDATE_EVENT, props.defaultValue);
+function clearValue () {
+  if (clearDisabled.value) return;
+  emit(VALUE_UPDATE_EVENT, null);
 }
 </script>
 
