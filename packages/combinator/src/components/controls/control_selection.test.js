@@ -75,11 +75,10 @@ describe('control_selection.vue test', function () {
       expect(wrapper.vm.clearDisabled).toBe(true);
     });
 
-    it('Should hide the clear button when selection is not clearable', function () {
+    it('Should disable clearing when selection is not clearable', function () {
       _mountWrapper({ clearable: false });
 
       expect(wrapper.vm.clearDisabled).toBe(true);
-      expect(wrapper.vm.clearHidden).toBe(true);
     });
   });
 

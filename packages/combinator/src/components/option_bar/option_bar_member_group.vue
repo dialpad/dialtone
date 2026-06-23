@@ -49,11 +49,10 @@ import { isIconSlot } from '@/src/lib/icons';
 const ICON_SLOT_ORDER = ['startIcon', 'endIcon', 'blockStartIcon', 'blockEndIcon', 'icon'];
 
 const PROP_PRIORITY = [
-  'title', 'as', 'variant', 'label', 'importance', 'size',
-  'placement', 'tone', 'align', 'density', 'strength', 'family', 'kind',
+  'title', 'as', 'variant', 'family', 'label', 'importance', 'size', 'presence',
+  'placement', 'tone', 'align', 'density', 'strength', 'kind',
   'type', 'underline', 'selected', 'active', 'disabled',
   'deferSelection', 'readOnly', 'showClear', 'useDropdown',
-  'dropdownListClass', 'popoverContentClass', 'popoverDialogClass', 'popoverFooterClass', 'popoverHeaderClass',
   'showDivider', 'color', 'description',
   'scrollbar', 'scrollbarContentClass', 'surface',
   'borderRadius', 'borderColor',
@@ -63,6 +62,7 @@ const PROP_PRIORITY = [
   'paddingInline', 'paddingInlineEnd', 'paddingInlineStart',
   'blockSize', 'inlineSize', 'maxBlockSize', 'minBlockSize', 'maxInlineSize', 'minInlineSize',
   'shadow', 'overflow',
+  'dropdownListClass', 'popoverContentClass', 'popoverDialogClass', 'popoverFooterClass', 'popoverHeaderClass',
 ];
 
 const SLOT_PRIORITY = ['start', 'end', 'inlineStart', 'inlineEnd', 'blockStart', 'blockEnd', 'leading', 'trailing'];

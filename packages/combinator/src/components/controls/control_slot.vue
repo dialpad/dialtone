@@ -10,6 +10,7 @@
       type="textarea"
       spellcheck="false"
       :size="100"
+      input-class="comb-control-textarea d-hmx-200"
       @update:model-value="updateValue"
     >
       <template #label>
@@ -96,3 +97,9 @@ export default {
   name: 'DtcControlSlot',
 };
 </script>
+
+<style lang="less">
+.comb-control-textarea {
+  field-sizing: content;
+}
+</style>

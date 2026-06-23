@@ -5,7 +5,7 @@ status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-input--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=25665-5366
-keywords: ["text field", "form field", "textbox", "d-input", "DtInput", "dt-input", "text input", "form input"]
+keywords: ["text field", "form field", "textbox", "d-input", "DtInput", "dt-input", "text input", "form input", "textarea"]
 ---
 
 <component-combinator component-name="DtInput" />
