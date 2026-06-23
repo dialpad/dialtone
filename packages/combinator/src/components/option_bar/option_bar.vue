@@ -46,7 +46,7 @@
           type="search"
           placeholder="Search"
           :size="100"
-          class="d-w100p d-mbs-25 d-mis-50"
+          class="d-w100p d-mbs-25"
         >
           <template #startIcon="{ iconSize }">
             <dt-icon
@@ -89,7 +89,7 @@
               v-if="info.props?.length"
               gap="300"
             >
-              <dt-stack gap="100">
+              <dt-stack gap="150">
                 <dtc-option-bar-member-group
                   :component="component"
                   :control-selector="(prop, value) => getBindingControls(prop, value, 'null')"
@@ -112,7 +112,7 @@
               v-if="info.slots?.length"
               gap="300"
             >
-              <dt-stack gap="100">
+              <dt-stack gap="150">
                 <dtc-option-bar-member-group
                   :component="component"
                   :control-selector="getSlotControls"

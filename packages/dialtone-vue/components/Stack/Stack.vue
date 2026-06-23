@@ -55,7 +55,7 @@ export default {
      * All the undefined breakpoints will have the 'default' value.
      * You can override the default gap with 'default' key.
      * In case of string, it will be applied to all the breakpoints.
-     * @values 0, 50, 100, 200, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700
+     * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800
      */
     gap: {
       type: [String, Object],

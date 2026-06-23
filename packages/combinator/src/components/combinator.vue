@@ -33,9 +33,9 @@
           <dt-button
             v-dt-tooltip="'Presets'"
             v-bind="attrs"
-            importance="clear"
+            importance="outlined"
             kind="muted"
-            :size="isFullScreen ? 'lg' : 'md'"
+            :size="isFullScreen ? '400' : '300'"
             leading-class="d-pbs-1 d-pis-150 d-mie-n25"
           >
             <template #leading>
