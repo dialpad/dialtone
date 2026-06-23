@@ -15,6 +15,7 @@
           :value="value"
           :warning="warning"
           :disabled="disabled"
+          :clearable="false"
           @update:value="e => onInputInternal(e, onInput)"
         >
           <template #default>
@@ -59,7 +60,7 @@ import { DtRecipeComboboxWithPopover, DtListItem } from '@dialpad/dialtone-vue';
 
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed, ref } from 'vue';
-import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue';
+import { DtIconChevronDown } from '@dialpad/dialtone-icons/vue';
 
 const WARNING_MESSAGE = 'Unexpected value';
 

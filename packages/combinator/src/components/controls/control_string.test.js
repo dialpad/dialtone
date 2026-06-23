@@ -4,26 +4,19 @@ import { expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 
 const inputSelector = 'input';
+const addButtonSelector = '[aria-label="Add value"]';
+const clearButtonSelector = '[aria-label="Remove value"]';
 
 const inputValue = 'string test';
-const defaultValue = typeof DtcControlString.props.value.default === 'function'
-  ? DtcControlString.props.value.default()
-  : DtcControlString.props.value.default;
 
 describe('control_string.vue test', function () {
   let wrapper;
   let inputWrapper;
 
-  beforeEach(function () {
-    wrapper = mount(DtcControlString, {
-      slots: {
-        default: 'Label',
-      },
-    });
-  });
-
   const _mountWrapper = (props = {}) => {
+    wrapper?.unmount();
     wrapper = mount(DtcControlString, {
+      attachTo: document.body,
       props,
       slots: {
         default: 'Label',
@@ -36,8 +29,12 @@ describe('control_string.vue test', function () {
     inputWrapper = wrapper.find(inputSelector);
   };
 
-  beforeAll(function () {
+  beforeEach(function () {
     _mountWrapper();
+  });
+
+  afterEach(function () {
+    wrapper?.unmount();
   });
 
   describe('When mounted', function () {
@@ -64,43 +61,20 @@ describe('control_string.vue test', function () {
       _mountWrapper();
     });
 
-    it('Should set the native input to control default', function () {
-      expect(defaultValue).toBe(inputWrapper.element.value);
+    it('Should render the label and add button without the input', function () {
+      expect(wrapper.text()).toContain('Label');
+      expect(wrapper.find(addButtonSelector).exists()).toBe(true);
+      expect(inputWrapper.exists()).toBe(false);
+      expect(wrapper.find(clearButtonSelector).exists()).toBe(false);
     });
   });
 
   describe('When clearing the value', function () {
-    it('Should render a clear button', function () {
-      _mountWrapper();
-
-      expect(wrapper.find('[aria-label="Remove value"]').exists()).toBe(true);
-    });
-
-    it('Should emit null when cleared', function () {
+    it('Should emit null when cleared', async function () {
       _mountWrapper({ value: inputValue });
-      wrapper.vm.clearValue();
+      await wrapper.find(clearButtonSelector).trigger('click');
 
       expect(wrapper.emitted('update:value')[0]).toEqual([null]);
-    });
-
-    it('Should disable the clear button for empty values', function () {
-      _mountWrapper();
-
-      expect(wrapper.vm.clearDisabled).toBe(true);
-    });
-
-    it('Should disable the clear button for required values', function () {
-      wrapper = mount(DtcControlString, {
-        props: {
-          required: true,
-          value: inputValue,
-        },
-        slots: {
-          default: 'Label',
-        },
-      });
-
-      expect(wrapper.vm.clearDisabled).toBe(true);
     });
   });
 });

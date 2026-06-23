@@ -1,9 +1,13 @@
 import DtcControlSelection from './control_selection.vue';
 
 import { expect } from 'vitest';
-import { shallowMount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
+import { nextTick } from 'vue';
 
 const selections = ['selection1', 'selection2', 'selection3'];
+const addButtonSelector = '[aria-label="Add value"]';
+const clearButtonSelector = '[aria-label="Remove value"]';
+const anchorButtonSelector = '.d-w100p';
 
 const manySelections = [
   'alpha',
@@ -193,6 +197,50 @@ describe('control_selection.vue test', function () {
       const emitted = wrapper.emitted('update:value');
       expect(emitted).toBeTruthy();
       expect(emitted[0][0]).toBe('beta');
+    });
+  });
+
+  describe('Clearable collapsed state', function () {
+    let behaviorWrapper;
+
+    const mountBehaviorWrapper = (props = {}) => {
+      behaviorWrapper?.unmount();
+      behaviorWrapper = mount(DtcControlSelection, {
+        attachTo: document.body,
+        props: {
+          value: null,
+          validValues: selections,
+          ...props,
+        },
+        slots: {
+          default: 'Label',
+        },
+      });
+    };
+
+    afterEach(function () {
+      behaviorWrapper?.unmount();
+    });
+
+    it('Should render the label and add button without the dropdown when empty', function () {
+      mountBehaviorWrapper();
+
+      expect(behaviorWrapper.text()).toContain('Label');
+      expect(behaviorWrapper.find(addButtonSelector).exists()).toBe(true);
+      expect(behaviorWrapper.find(anchorButtonSelector).exists()).toBe(false);
+      expect(behaviorWrapper.find(clearButtonSelector).exists()).toBe(false);
+    });
+
+    it('Should collapse on dropdown close when the selection is still empty', async function () {
+      mountBehaviorWrapper();
+
+      await behaviorWrapper.find(addButtonSelector).trigger('click');
+      await nextTick();
+      behaviorWrapper.findComponent({ name: 'DtDropdown' }).vm.$emit('opened', false);
+      await nextTick();
+
+      expect(behaviorWrapper.find(anchorButtonSelector).exists()).toBe(false);
+      expect(behaviorWrapper.find(addButtonSelector).exists()).toBe(true);
     });
   });
 });

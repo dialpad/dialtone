@@ -4,6 +4,7 @@ import { expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 
 const inputSelector = 'input';
+const addButtonSelector = '[aria-label="Add value"]';
 const clearButtonSelector = '[aria-label="Remove value"]';
 
 const inputValue = 5;
@@ -14,7 +15,9 @@ describe('control_number.vue test', function () {
   let inputWrapper;
 
   const _mountWrapper = (props = {}) => {
+    wrapper?.unmount();
     wrapper = mount(DtcControlNumber, {
+      attachTo: document.body,
       props,
       slots: {
         default: 'Label',
@@ -27,8 +30,12 @@ describe('control_number.vue test', function () {
     inputWrapper = wrapper.find(inputSelector);
   };
 
-  beforeAll(function () {
+  beforeEach(function () {
     _mountWrapper();
+  });
+
+  afterEach(function () {
+    wrapper?.unmount();
   });
 
   describe('When mounted', function () {
@@ -60,13 +67,20 @@ describe('control_number.vue test', function () {
     });
   });
 
-  describe('When clearing the value', function () {
-    it('Should render a clear button', function () {
-      _mountWrapper();
-
-      expect(wrapper.find(clearButtonSelector).exists()).toBe(true);
+  describe('When the value is empty', function () {
+    beforeEach(function () {
+      _mountWrapper({ value: null });
     });
 
+    it('Should render the label and add button without the input', function () {
+      expect(wrapper.text()).toContain('Label');
+      expect(wrapper.find(addButtonSelector).exists()).toBe(true);
+      expect(inputWrapper.exists()).toBe(false);
+      expect(wrapper.find(clearButtonSelector).exists()).toBe(false);
+    });
+  });
+
+  describe('When clearing the value', function () {
     it('Should emit null when the clear button is clicked', async function () {
       _mountWrapper({ value: inputValue });
       await wrapper.find(clearButtonSelector).trigger('click');
@@ -77,9 +91,7 @@ describe('control_number.vue test', function () {
     it('Should disable the clear button for empty values', function () {
       _mountWrapper({ value: null });
 
-      const clearButton = wrapper.find(clearButtonSelector);
-      expect(clearButton.attributes('disabled')).toBeDefined();
-      expect(clearButton.classes()).toContain('d-o0');
+      expect(wrapper.find(clearButtonSelector).exists()).toBe(false);
     });
 
     it('Should disable the clear button for required values', function () {
@@ -90,7 +102,7 @@ describe('control_number.vue test', function () {
 
       const clearButton = wrapper.find(clearButtonSelector);
       expect(clearButton.attributes('disabled')).toBeDefined();
-      expect(clearButton.classes()).toContain('d-o0');
+      expect(clearButton.classes()).not.toContain('d-o0');
     });
   });
 });

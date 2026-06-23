@@ -1,22 +1,34 @@
 <template>
-  <dt-text
-    kind="label"
-    :size="100"
-    tone="secondary"
-    class="d-input__label-text d-c-default"
+  <dtc-control-clearable-shell
+    :empty="isEmpty"
+    :expanded="expanded"
+    :disabled="disabled"
+    :required="required"
+    :clearable="clearable"
+    @add="addValue"
+    @clear="clearValue"
   >
-    <slot />
-  </dt-text>
-  <dt-stack
-    direction="row"
-    gap="50"
-  >
+    <template #label>
+      <slot />
+    </template>
+    <template #expanded-label>
+      <dt-text
+        kind="label"
+        :size="100"
+        tone="secondary"
+        class="d-input__label-text d-c-default"
+      >
+        <slot />
+      </dt-text>
+    </template>
     <dt-segmented-control
+      ref="segmentedRef"
       class="d-fl1"
       :model-value="selectedValue"
       :size="100"
       :disabled="disabled"
       @change="onInput"
+      @focusout="collapseIfEmpty"
     >
       <dt-segmented-control-item
         v-for="option in options"
@@ -27,30 +39,16 @@
         {{ option.label }}
       </dt-segmented-control-item>
     </dt-segmented-control>
-    <dt-button
-      v-dt-tooltip="`Remove`"
-      aria-label="Remove value"
-      importance="clear"
-      :size="100"
-      kind="muted"
-      :disabled="clearDisabled"
-      :class="{ 'd-o0': clearDisabled }"
-      @click="clearValue"
-    >
-      <template #startIcon="{ iconSize }">
-        <dt-icon-dash :size="iconSize" />
-      </template>
-    </dt-button>
-  </dt-stack>
+  </dtc-control-clearable-shell>
 </template>
 
 <script setup>
-import { DtButton, DtSegmentedControl, DtSegmentedControlItem, DtStack, DtText } from '@dialpad/dialtone-vue';
-import { DtIconDash } from '@dialpad/dialtone-icons/vue';
+import { DtSegmentedControl, DtSegmentedControlItem, DtText } from '@dialpad/dialtone-vue';
 
+import DtcControlClearableShell from './control_clearable_shell.vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { resolveTokenValue } from '@/src/lib/tokens';
-import { computed } from 'vue';
+import { computed, nextTick, ref, watch } from 'vue';
 
 const props = defineProps({
   value: {
@@ -89,6 +87,10 @@ const props = defineProps({
 
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
 
+const expanded = ref(false);
+const segmentedRef = ref(null);
+const hasPendingValue = ref(false);
+
 const options = computed(() => {
   return props.validValues?.map(v => ({
     value: v,
@@ -110,18 +112,38 @@ const valueMap = computed(() => {
 
 const isEmpty = computed(() => props.value === null || props.value === undefined || props.value === '');
 
-const selectedValue = computed(() => isEmpty.value ? undefined : String(props.value));
+const selectedValue = computed(() => isEmpty.value ? '' : String(props.value));
 
 const clearDisabled = computed(() => !props.clearable || props.required || props.disabled || isEmpty.value);
 
 function onInput (stringValue) {
+  hasPendingValue.value = true;
   emit(VALUE_UPDATE_EVENT, valueMap.value[stringValue]);
+}
+
+async function addValue () {
+  expanded.value = true;
+  await nextTick();
+  segmentedRef.value?.$el?.querySelector('[data-qa="dt-segmented-control-item"]')?.focus();
+}
+
+function collapseIfEmpty (event) {
+  const nextTarget = event?.relatedTarget;
+  if (nextTarget && segmentedRef.value?.$el?.contains(nextTarget)) return;
+  if (!isEmpty.value || hasPendingValue.value) return;
+  expanded.value = false;
 }
 
 function clearValue () {
   if (clearDisabled.value) return;
+  expanded.value = false;
+  hasPendingValue.value = false;
   emit(VALUE_UPDATE_EVENT, null);
 }
+
+watch(() => props.value, () => {
+  hasPendingValue.value = false;
+});
 </script>
 
 <script>

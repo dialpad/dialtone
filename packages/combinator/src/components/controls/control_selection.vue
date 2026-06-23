@@ -1,16 +1,26 @@
 <template>
-  <dt-text
-    kind="label"
-    :size="100"
-    tone="secondary"
-    class="d-input__label-text d-c-default"
+  <dtc-control-clearable-shell
+    :empty="isEmpty"
+    :expanded="expanded"
+    :disabled="disabled"
+    :required="required"
+    :clearable="clearable"
+    @add="addValue"
+    @clear="clearValue"
   >
-    <slot />
-  </dt-text>
-  <dt-stack
-    direction="row"
-    gap="50"
-  >
+    <template #label>
+      <slot />
+    </template>
+    <template #expanded-label>
+      <dt-text
+        kind="label"
+        :size="100"
+        tone="secondary"
+        class="d-input__label-text d-c-default"
+      >
+        <slot />
+      </dt-text>
+    </template>
     <dt-dropdown
       class="d-fl1"
       navigation-type="arrow-keys"
@@ -20,6 +30,7 @@
     >
       <template #anchor="{ attrs }">
         <dt-button
+          ref="anchorRef"
           v-bind="attrs"
           importance="outlined"
           kind="muted"
@@ -153,30 +164,17 @@
         </div>
       </template>
     </dt-dropdown>
-    <dt-button
-      v-dt-tooltip="`Remove`"
-      aria-label="Remove value"
-      importance="clear"
-      :size="100"
-      kind="muted"
-      :disabled="clearDisabled"
-      :class="{ 'd-o0': clearDisabled }"
-      @click="clearValue"
-    >
-      <template #startIcon="{ iconSize }">
-        <dt-icon-dash :size="iconSize" />
-      </template>
-    </dt-button>
-  </dt-stack>
+  </dtc-control-clearable-shell>
 </template>
 
 <script setup>
 import { DtBox, DtButton, DtEmptyState, DtInput, DtStack, DtText } from '@dialpad/dialtone-vue';
-import { DtIconClose, DtIconChevronsUpDown, DtIconSearch, DtIconDash } from '@dialpad/dialtone-icons/vue';
+import { DtIconClose, DtIconChevronsUpDown, DtIconSearch } from '@dialpad/dialtone-icons/vue';
 
+import DtcControlClearableShell from './control_clearable_shell.vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { resolveTokenValue } from '@/src/lib/tokens';
-import { computed, ref } from 'vue';
+import { computed, nextTick, ref, watch } from 'vue';
 
 // Show the in-popover search only for lists long enough to be worth filtering.
 const SEARCH_THRESHOLD = 5;
@@ -230,6 +228,10 @@ const props = defineProps({
 
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
 
+const expanded = ref(false);
+const anchorRef = ref(null);
+const hasPendingValue = ref(false);
+
 const isColor = (v) => /^(rgb|oklch|#)/.test(v);
 
 const swatchStyle = (color) => ({
@@ -239,7 +241,9 @@ const swatchStyle = (color) => ({
 });
 
 function onInput (e) {
-  emit(VALUE_UPDATE_EVENT, e === 'null' ? null : e);
+  const value = e === 'null' ? null : e;
+  hasPendingValue.value = value !== null && value !== undefined && value !== '';
+  emit(VALUE_UPDATE_EVENT, value);
 }
 
 const options = computed(() => {
@@ -293,11 +297,25 @@ const filteredOptions = computed(() => {
  * @param {boolean} open - Whether the dropdown just opened.
  */
 function onOpened (open) {
-  if (!open) return;
+  if (!open) {
+    collapseIfEmpty();
+    return;
+  }
   query.value = '';
   requestAnimationFrame(() => {
     searchInput.value?.$el?.querySelector('input')?.focus();
   });
+}
+
+async function addValue () {
+  expanded.value = true;
+  await nextTick();
+  anchorRef.value?.$el?.focus();
+}
+
+function collapseIfEmpty () {
+  if (!isEmpty.value || hasPendingValue.value) return;
+  expanded.value = false;
 }
 
 /**
@@ -314,8 +332,14 @@ function selectFirst (close) {
 
 function clearValue () {
   if (clearDisabled.value) return;
+  expanded.value = false;
+  hasPendingValue.value = false;
   onInput(null);
 }
+
+watch(() => props.value, () => {
+  hasPendingValue.value = false;
+});
 
 /**
  * Handles keys in the search field. Arrow keys propagate to DtDropdown so its
