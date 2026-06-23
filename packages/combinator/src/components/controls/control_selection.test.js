@@ -242,5 +242,18 @@ describe('control_selection.vue test', function () {
       expect(behaviorWrapper.find(anchorButtonSelector).exists()).toBe(false);
       expect(behaviorWrapper.find(addButtonSelector).exists()).toBe(true);
     });
+
+    it('Should collapse when an external reset clears the selection', async function () {
+      mountBehaviorWrapper();
+
+      await behaviorWrapper.find(addButtonSelector).trigger('click');
+      await behaviorWrapper.setProps({ value: selections[0] });
+      expect(behaviorWrapper.find(anchorButtonSelector).exists()).toBe(true);
+
+      await behaviorWrapper.setProps({ value: null });
+
+      expect(behaviorWrapper.find(anchorButtonSelector).exists()).toBe(false);
+      expect(behaviorWrapper.find(addButtonSelector).exists()).toBe(true);
+    });
   });
 });

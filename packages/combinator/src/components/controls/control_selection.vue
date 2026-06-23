@@ -339,6 +339,7 @@ function clearValue () {
 
 watch(() => props.value, () => {
   hasPendingValue.value = false;
+  if (isEmpty.value) expanded.value = false;
 });
 
 /**
