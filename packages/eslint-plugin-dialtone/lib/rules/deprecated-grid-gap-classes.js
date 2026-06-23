@@ -29,7 +29,7 @@ module.exports = {
     return sourceCode.parserServices.defineTemplateBodyVisitor({
       // Visitor functions for Vue templates
       VAttribute(node) {
-        if (node.key.name === 'class') {
+        if (node.key.name === 'class' && node.value) {
           const classes = node.value.value.split(' ');
           const gapClasses = ['d-gg', 'd-grg', 'd-gcg'];
           const gapClassesFound = classes.filter((className) =>

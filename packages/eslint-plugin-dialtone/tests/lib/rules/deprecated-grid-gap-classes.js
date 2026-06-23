@@ -26,6 +26,9 @@ const ruleTester = new RuleTester({
 ruleTester.run("deprecated-grid-gap-classes", rule, {
   valid: [
     {
+      code: "<template><div class /></template>",
+    },
+    {
       code: "<template><div class=\"d-g8\" /></template>",
     },
     {
