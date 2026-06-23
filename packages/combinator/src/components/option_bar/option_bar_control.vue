@@ -45,7 +45,7 @@
             :size="100"
             kind="label"
             strength="normal"
-            tone="muted"
+            tone="disabled"
             class="d-fs-50"
           >
             v-model

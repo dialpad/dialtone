@@ -611,7 +611,7 @@ export default {
   }
 
   &__resizer {
-    inline-size: 32px;
+    inline-size: var(--dt-layout-50);
     cursor: col-resize;
     flex-shrink: 0;
     position: relative;

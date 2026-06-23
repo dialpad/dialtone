@@ -9,7 +9,7 @@
   </dt-text>
   <dt-text
     kind="code"
-    tone="muted"
+    tone="disabled"
     :size="100"
   >
     <slot name="prefix" />
@@ -56,7 +56,7 @@
   </div>
   <dt-text
     kind="code"
-    tone="muted"
+    tone="disabled"
     :size="100"
   >
     <slot name="suffix" />

@@ -243,6 +243,15 @@ describe('control_selection.vue test', function () {
       expect(behaviorWrapper.find(addButtonSelector).exists()).toBe(true);
     });
 
+    it('Should open the dropdown when the add button is clicked', async function () {
+      mountBehaviorWrapper();
+
+      await behaviorWrapper.find(addButtonSelector).trigger('click');
+      await nextTick();
+
+      expect(behaviorWrapper.findComponent({ name: 'DtDropdown' }).props('open')).toBe(true);
+    });
+
     it('Should collapse when an external reset clears the selection', async function () {
       mountBehaviorWrapper();
 

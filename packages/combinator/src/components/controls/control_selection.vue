@@ -26,6 +26,8 @@
       navigation-type="arrow-keys"
       placement="bottom-start"
       content-width="anchor"
+      :open="dropdownOpen"
+      @update:open="onOpenUpdate"
       @opened="onOpened"
     >
       <template #anchor="{ attrs }">
@@ -229,6 +231,7 @@ const props = defineProps({
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
 
 const expanded = ref(false);
+const dropdownOpen = ref(null);
 const anchorRef = ref(null);
 const hasPendingValue = ref(false);
 
@@ -298,6 +301,7 @@ const filteredOptions = computed(() => {
  */
 function onOpened (open) {
   if (!open) {
+    dropdownOpen.value = null;
     collapseIfEmpty();
     return;
   }
@@ -311,11 +315,16 @@ async function addValue () {
   expanded.value = true;
   await nextTick();
   anchorRef.value?.$el?.focus();
+  dropdownOpen.value = true;
 }
 
 function collapseIfEmpty () {
   if (!isEmpty.value || hasPendingValue.value) return;
   expanded.value = false;
+}
+
+function onOpenUpdate (open) {
+  dropdownOpen.value = open ? true : null;
 }
 
 /**
@@ -332,6 +341,7 @@ function selectFirst (close) {
 
 function clearValue () {
   if (clearDisabled.value) return;
+  dropdownOpen.value = null;
   expanded.value = false;
   hasPendingValue.value = false;
   onInput(null);
@@ -339,7 +349,10 @@ function clearValue () {
 
 watch(() => props.value, () => {
   hasPendingValue.value = false;
-  if (isEmpty.value) expanded.value = false;
+  if (isEmpty.value) {
+    dropdownOpen.value = null;
+    expanded.value = false;
+  }
 });
 
 /**

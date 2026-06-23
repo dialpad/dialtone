@@ -7,7 +7,7 @@
       borderless
       kind="muted"
       activation-mode="auto"
-      class="d-d-flex d-fd-column d-h100p"
+      class="d-d-flex d-fd-column d-h100p d-pis-50"
       tab-list-class="d-ps-sticky d-ibs-0 d-zi-base1 d-pie-200 d-pbs-200 d-pbe-50"
     >
       <template #tabs>
@@ -46,7 +46,7 @@
           type="search"
           placeholder="Search"
           :size="100"
-          class="d-w100p d-mbs-25"
+          class="d-w100p d-mbs-25 d-mis-50"
         >
           <template #startIcon="{ iconSize }">
             <dt-icon
@@ -89,7 +89,7 @@
               v-if="info.props?.length"
               gap="300"
             >
-              <dt-stack gap="150">
+              <dt-stack gap="100">
                 <dtc-option-bar-member-group
                   :component="component"
                   :control-selector="(prop, value) => getBindingControls(prop, value, 'null')"
@@ -112,7 +112,7 @@
               v-if="info.slots?.length"
               gap="300"
             >
-              <dt-stack gap="150">
+              <dt-stack gap="100">
                 <dtc-option-bar-member-group
                   :component="component"
                   :control-selector="getSlotControls"
