@@ -33,7 +33,7 @@ module.exports = {
     return sourceCode.parserServices.defineTemplateBodyVisitor({
       // Visitor functions for Vue templates
       VAttribute (node) {
-        if (node.key.name === 'class' && node.value) {
+        if (node.key.name === 'class' && node.value && typeof node.value.value === 'string') {
           const classes = node.value.value;
           if (classes.match(/d-bgc-\w+-\d{2,4}/)) {
             context.report({ node, messageId: 'recommendBackgroundSemanticColor' });

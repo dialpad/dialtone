@@ -21,6 +21,7 @@ const ruleTester = new RuleTester({
 ruleTester.run('deprecated-base-color-classes', rule, {
   valid: [
     { code: '<template><div class /></template>' },
+    { code: '<template><div class="" /></template>' },
     { code: '<template><div class="d-bgc-primary" /></template>' },
     { code: '<template><div class="d-fc-secondary" /></template>' },
     { code: '<template><div class="d-bc-positive" /></template>' },

@@ -29,6 +29,9 @@ ruleTester.run("deprecated-flex-gap-classes", rule, {
       code: "<template><div class /></template>",
     },
     {
+      code: "<template><div class=\"\" /></template>",
+    },
+    {
       code: "<template><div class=\"d-fl-col2 d-g8\" /></template>",
     },
     {
