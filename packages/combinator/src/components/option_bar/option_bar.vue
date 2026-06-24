@@ -96,7 +96,7 @@
         class="d-fl1 d-pbs-100"
       >
         <dt-stack
-          class="d-fl1 d-pis-50 d-pie-200 d-pbe-200"
+          class="d-fl1 d-pis-50 d-pie-100 d-pbe-200"
         >
           <dt-tab-panel
             v-if="filteredMainProps.length"

@@ -19,6 +19,8 @@
         >
           <dt-text
             v-dt-tooltip="{ message: description, placement: 'left' }"
+            kind="label"
+            :size="100"
             as="span"
             class="d-tt-capitalize"
             :tone="disabled ? 'muted' : undefined"
