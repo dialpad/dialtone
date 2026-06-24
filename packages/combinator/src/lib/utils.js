@@ -116,6 +116,21 @@ export function isClassProp (member) {
   return member?.name?.endsWith('Class');
 }
 
+const UNSUPPORTED_ROOT_CLASS_COMPONENTS = new Set([
+  'DtDropdown',
+]);
+
+/**
+ * Returns true unless a Dialtone component is known not to apply native `class`
+ * attributes directly to its rendered root element.
+ *
+ * @param {string} componentName - The component display name, e.g. 'DtCard'.
+ * @returns {boolean}
+ */
+export function supportsRootClass (componentName) {
+  return Boolean(componentName) && !UNSUPPORTED_ROOT_CLASS_COMPONENTS.has(componentName);
+}
+
 export const getComponentFilesFromDir = (requireContext) => {
   const files = [];
   requireContext.keys().forEach(fileName => {

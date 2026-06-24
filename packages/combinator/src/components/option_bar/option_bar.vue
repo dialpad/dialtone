@@ -37,7 +37,7 @@
           Slots
         </dt-tab>
         <dt-tab
-          v-if="filteredClassProps.length"
+          v-if="hasClassControls"
           id="tab-class"
           panel-id="panel-class"
           :selected="initialTab === 'class'"
@@ -141,13 +141,26 @@
             </dt-stack>
           </dt-tab-panel>
           <dt-tab-panel
-            v-if="filteredClassProps.length"
+            v-if="hasClassControls"
             id="panel-class"
             tab-id="tab-class"
           >
             <dt-stack gap="300">
               <dt-stack gap="150">
                 <dtc-option-bar-member-group
+                  v-if="filteredNativeClassAttributes.length"
+                  :component="component"
+                  :control-selector="(attribute, value) => getBindingControls(attribute, value, 'null')"
+                  :members="filteredNativeClassAttributes"
+                  :values="options.attributes"
+                  :exclusion-rules="info.exclusions"
+                  :prop-values="options.props"
+                  :slot-values="options.slots"
+                  member-group="attributes"
+                  @update:member="updateAttributes"
+                />
+                <dtc-option-bar-member-group
+                  v-if="filteredClassProps.length"
                   :component="component"
                   :control-selector="(prop, value) => getBindingControls(prop, value, 'null')"
                   :members="filteredClassProps"
@@ -256,6 +269,10 @@ const classPropCorpora = computed(() => (props.info.props ?? [])
   .filter(isClassProp)
   .map(member => ({ member, corpus: getSearchCorpus(member.name) })));
 
+const nativeClassAttributeCorpora = computed(() => (props.info.attributes ?? [])
+  .filter(member => member.name === 'class')
+  .map(member => ({ member, corpus: getSearchCorpus(member.name) })));
+
 const slotCorpora = computed(() => (props.info.slots ?? [])
   .map(member => ({ member, corpus: getSearchCorpus(member.name) })));
 
@@ -267,12 +284,14 @@ function filterCorpora (corpora) {
 
 const filteredMainProps = computed(() => filterCorpora(mainPropCorpora.value));
 const filteredClassProps = computed(() => filterCorpora(classPropCorpora.value));
+const filteredNativeClassAttributes = computed(() => filterCorpora(nativeClassAttributeCorpora.value));
 const filteredSlots = computed(() => filterCorpora(slotCorpora.value));
+const hasClassControls = computed(() => filteredNativeClassAttributes.value.length || filteredClassProps.value.length);
 
 const initialTab = computed(() => {
   if (filteredMainProps.value.length) return 'props';
   if (filteredSlots.value.length) return 'slots';
-  if (filteredClassProps.value.length) return 'class';
+  if (hasClassControls.value) return 'class';
   return null;
 });
 
@@ -337,6 +356,7 @@ function getStaticControl (control) {
  */
 function updateMember (memberGroup, { member, value }) {
   emit(OPTIONS_UPDATE_EVENT, (options) => {
+    options[memberGroup] = options[memberGroup] || {};
     options[memberGroup][member] = value;
   });
 }
@@ -349,9 +369,9 @@ function updateProps (e) {
   updateMember('props', e);
 }
 
-// function updateAttributes (e) {
-//   updateMember('attributes', e);
-// }
+function updateAttributes (e) {
+  updateMember('attributes', e);
+}
 </script>
 
 <script>

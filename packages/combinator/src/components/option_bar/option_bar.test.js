@@ -21,7 +21,7 @@ const baseOptions = {
   },
 };
 
-function mountWrapper ({ props = [], slots = [], options = baseOptions } = {}) {
+function mountWrapper ({ props = [], slots = [], attributes = [], options = baseOptions } = {}) {
   return mount(DtcOptionBar, {
     props: {
       component,
@@ -29,6 +29,7 @@ function mountWrapper ({ props = [], slots = [], options = baseOptions } = {}) {
       info: {
         props,
         slots,
+        attributes,
         exclusions: [],
       },
     },
@@ -50,7 +51,6 @@ function mountWrapper ({ props = [], slots = [], options = baseOptions } = {}) {
             'slotValues',
             'memberGroup',
           ],
-          emits: ['update:member'],
           template: `
             <div
               data-qa="option-bar-member-group"
@@ -157,6 +157,61 @@ describe('option_bar.vue test', function () {
     expect(memberGroups[2].props('values')).toEqual(baseOptions.props);
   });
 
+  it('Should render native class before class props in the Class tab', function () {
+    const options = {
+      ...baseOptions,
+      attributes: { class: '' },
+    };
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'kind' },
+        { name: 'labelClass' },
+        { name: 'type' },
+      ],
+      slots: [
+        { name: 'default' },
+      ],
+      attributes: [
+        { name: 'class' },
+      ],
+      options,
+    });
+
+    const memberGroups = getMemberGroups(wrapper);
+
+    expect(getTabs(wrapper)).toEqual(['Props', 'Slots', 'Class']);
+    expect(memberGroups[2].props('memberGroup')).toBe('attributes');
+    expect(memberGroups[2].props('members').map(member => member.name)).toEqual(['class']);
+    expect(memberGroups[2].props('values')).toEqual(options.attributes);
+    expect(memberGroups[3].props('memberGroup')).toBe('props');
+    expect(memberGroups[3].props('members').map(member => member.name)).toEqual(['labelClass']);
+  });
+
+  it('Should render the Class tab for native class without class props', function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'kind' },
+        { name: 'type' },
+      ],
+      slots: [
+        { name: 'default' },
+      ],
+      attributes: [
+        { name: 'class' },
+      ],
+      options: {
+        ...baseOptions,
+        attributes: { class: '' },
+      },
+    });
+
+    const memberGroups = getMemberGroups(wrapper);
+
+    expect(getTabs(wrapper)).toEqual(['Props', 'Slots', 'Class']);
+    expect(memberGroups[2].props('memberGroup')).toBe('attributes');
+    expect(memberGroups[2].props('members').map(member => member.name)).toEqual(['class']);
+  });
+
   it('Should not render the Class tab when there are no class props', function () {
     const wrapper = mountWrapper({
       props: [
@@ -169,6 +224,35 @@ describe('option_bar.vue test', function () {
     });
 
     expect(getTabs(wrapper)).toEqual(['Props', 'Slots']);
+  });
+
+  it('Should emit native class updates through attributes', async function () {
+    const options = {
+      ...baseOptions,
+      attributes: { class: '' },
+    };
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'kind' },
+      ],
+      attributes: [
+        { name: 'class' },
+      ],
+      options,
+    });
+    const classAttributeGroup = getMemberGroups(wrapper)[1];
+
+    await classAttributeGroup.vm.$emit('update:member', {
+      member: 'class',
+      value: 'd-w50p',
+    });
+
+    const update = wrapper.emitted('update:options')[0][0];
+    const updatedOptions = structuredClone(options);
+    update(updatedOptions);
+
+    expect(updatedOptions.attributes.class).toBe('d-w50p');
+    expect(updatedOptions.props.class).toBeUndefined();
   });
 
   it('Should emit class prop updates through props', async function () {
