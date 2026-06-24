@@ -6,58 +6,69 @@ import { applyConfig } from './helpers.mjs';
 const apply = (input) => applyConfig(config, input);
 
 describe('theme-to-mode config', () => {
-  // ─── setTheme call rewrites ───────────────────────────────────────────────
+  // ─── setTheme call flagging ───────────────────────────────────────────────
 
-  describe('setTheme() → initDialtoneTheme() for known identifiers', () => {
-    it('rewrites setTheme(DpLight) → initDialtoneTheme(DpLight, \'light\')', () => {
+  describe('setTheme() → TODO comment for known identifiers', () => {
+    it('flags setTheme(DpLight) with a TODO that includes the light mode hint', () => {
       const input = `setTheme(DpLight);`;
-      const expected = `initDialtoneTheme(DpLight, 'light');`;
-      assert.equal(apply(input), expected);
+      const result = apply(input);
+      assert.ok(result.includes('setTheme(DpLight)'), 'original call preserved');
+      assert.ok(result.includes('TODO:'), 'TODO comment inserted');
+      assert.ok(result.includes('\'light\''), 'light mode hint present');
     });
 
-    it('rewrites setTheme(DpDark) → initDialtoneTheme(DpDark, \'dark\')', () => {
+    it('flags setTheme(DpDark) with a TODO that includes the dark mode hint', () => {
       const input = `setTheme(DpDark);`;
-      const expected = `initDialtoneTheme(DpDark, 'dark');`;
-      assert.equal(apply(input), expected);
+      const result = apply(input);
+      assert.ok(result.includes('setTheme(DpDark)'), 'original call preserved');
+      assert.ok(result.includes('TODO:'), 'TODO comment inserted');
+      assert.ok(result.includes('\'dark\''), 'dark mode hint present');
     });
 
-    it('rewrites setTheme(TmoLight) → initDialtoneTheme(TmoLight, \'light\')', () => {
-      const input = `setTheme(TmoLight);`;
-      const expected = `initDialtoneTheme(TmoLight, 'light');`;
-      assert.equal(apply(input), expected);
+    it('flags setTheme(TmoLight) with a light mode hint', () => {
+      const result = apply(`setTheme(TmoLight);`);
+      assert.ok(result.includes('setTheme(TmoLight)'), 'original call preserved');
+      assert.ok(result.includes('\'light\''), 'light mode hint present');
     });
 
-    it('rewrites setTheme(TmoDark) → initDialtoneTheme(TmoDark, \'dark\')', () => {
-      const input = `setTheme(TmoDark);`;
-      const expected = `initDialtoneTheme(TmoDark, 'dark');`;
-      assert.equal(apply(input), expected);
+    it('flags setTheme(TmoDark) with a dark mode hint', () => {
+      const result = apply(`setTheme(TmoDark);`);
+      assert.ok(result.includes('setTheme(TmoDark)'), 'original call preserved');
+      assert.ok(result.includes('\'dark\''), 'dark mode hint present');
     });
 
-    it('rewrites setTheme(ExpressiveLight) → initDialtoneTheme(ExpressiveLight, \'light\')', () => {
-      const input = `setTheme(ExpressiveLight);`;
-      const expected = `initDialtoneTheme(ExpressiveLight, 'light');`;
-      assert.equal(apply(input), expected);
+    it('flags setTheme(ExpressiveLight) with a light mode hint', () => {
+      const result = apply(`setTheme(ExpressiveLight);`);
+      assert.ok(result.includes('setTheme(ExpressiveLight)'), 'original call preserved');
+      assert.ok(result.includes('\'light\''), 'light mode hint present');
     });
 
-    it('rewrites setTheme(ExpressiveDark) → initDialtoneTheme(ExpressiveDark, \'dark\')', () => {
-      const input = `setTheme(ExpressiveDark);`;
-      const expected = `initDialtoneTheme(ExpressiveDark, 'dark');`;
-      assert.equal(apply(input), expected);
+    it('flags setTheme(ExpressiveDark) with a dark mode hint', () => {
+      const result = apply(`setTheme(ExpressiveDark);`);
+      assert.ok(result.includes('setTheme(ExpressiveDark)'), 'original call preserved');
+      assert.ok(result.includes('\'dark\''), 'dark mode hint present');
     });
 
     it('handles whitespace inside setTheme call', () => {
-      const input = `setTheme( DpLight );`;
-      const expected = `initDialtoneTheme(DpLight, 'light');`;
-      assert.equal(apply(input), expected);
+      const result = apply(`setTheme( DpLight );`);
+      assert.ok(result.includes('setTheme( DpLight )'), 'original call preserved');
+      assert.ok(result.includes('TODO:'), 'TODO comment inserted');
     });
 
-    it('rewrites setTheme(DpLight) as part of onMounted setup', () => {
+    it('flags setTheme(DpLight) inside an onMounted callback', () => {
       const input = `onMounted(() => { setTheme(DpLight); });`;
-      const expected = `onMounted(() => { initDialtoneTheme(DpLight, 'light'); });`;
-      assert.equal(apply(input), expected);
+      const result = apply(input);
+      assert.ok(result.includes('setTheme(DpLight)'), 'original call preserved');
+      assert.ok(result.includes('TODO:'), 'TODO comment inserted');
     });
 
-    it('does NOT rewrite setTheme() with a dynamic variable — emits TODO comment', () => {
+    it('TODO comment mentions both startup (initDialtoneTheme) and per-toggle (setMode) options', () => {
+      const result = apply(`setTheme(DpLight);`);
+      assert.ok(result.includes('initDialtoneTheme'), 'startup option mentioned');
+      assert.ok(result.includes('setMode'), 'toggle option mentioned');
+    });
+
+    it('does NOT rewrite setTheme() with a dynamic variable — emits generic TODO comment', () => {
       const input = `setTheme(myDynamicTheme);`;
       const result = apply(input);
       assert.ok(result.includes('setTheme(myDynamicTheme)'), 'original call preserved');
@@ -71,7 +82,7 @@ describe('theme-to-mode config', () => {
       assert.ok(result.includes('TODO: review for layered API migration'), 'TODO comment inserted');
     });
 
-    it('does NOT rewrite myObj.setTheme() — unrelated method', () => {
+    it('does NOT flag myObj.setTheme() — unrelated method', () => {
       const input = `myThemeManager.setTheme(DpLight);`;
       assert.equal(apply(input), input);
     });

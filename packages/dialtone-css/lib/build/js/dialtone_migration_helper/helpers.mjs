@@ -70,7 +70,7 @@ export const findMatchedFiles = async (fileList, config) => {
       })
       .filter((f) => {
         config.expressions.forEach((e) => {
-          if (e.from.test(f.data)) f.matches++;
+          if (e.from && e.from.test(f.data)) f.matches++;
         });
         return f.matches > 0;
       });
@@ -155,10 +155,18 @@ export const modifyFileContents = async (content, expr) => {
     })
     .map((f) => {
       expr.forEach((e) => {
-        f.data = f.data.replace(e.from, (match) => {
-          f.matches++;
-          return match.replace(e.from, e.to);
-        });
+        if (typeof e.transform === 'function') {
+          const next = e.transform(f.data, f.file);
+          if (next !== f.data) {
+            f.matches++;
+            f.data = next;
+          }
+        } else {
+          f.data = f.data.replace(e.from, (match) => {
+            f.matches++;
+            return match.replace(e.from, e.to);
+          });
+        }
       });
       return f;
     });

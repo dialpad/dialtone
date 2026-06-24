@@ -1,7 +1,11 @@
 // Migration: deprecated `setTheme()` and `data-dt-theme` attribute → layered API.
 //
-// - Startup call: setTheme(KnownTheme) → initDialtoneTheme(KnownTheme, 'mode')
-// - Dynamic calls: setTheme(expr) → flagged with TODO comment
+// - All setTheme() calls → flagged with a TODO comment (preserved, not rewritten).
+//   setTheme() was a re-entrant setter; initDialtoneTheme() is a one-shot bootstrap
+//   that throws if already initialized. The correct replacement depends on call site:
+//     • one-time startup  → initDialtoneTheme(brand, 'mode')
+//     • per-toggle/switch → setMode('mode')
+//   Static analysis cannot distinguish the two, so each call is flagged for manual review.
 // - HTML attributes: data-dt-theme= → data-dt-mode=
 // - JS attribute methods: setAttribute/getAttribute('data-dt-theme') → 'data-dt-mode'
 // - CSS selectors: [data-dt-theme...] → [data-dt-mode...]
@@ -18,9 +22,8 @@ const KNOWN_PATTERN = ALL_KNOWN.join('|');
 export default {
   description:
     'Migrates from the deprecated setTheme() / data-dt-theme API to the layered theming API.\n' +
-    '- setTheme(DpLight) → initDialtoneTheme(DpLight, \'light\')\n' +
-    '- setTheme(DpDark) → initDialtoneTheme(DpDark, \'dark\')\n' +
-    '- Same for TmoLight, TmoDark, ExpressiveLight, ExpressiveDark, ExpressiveSmLight, ExpressiveSmDark\n' +
+    '- setTheme(KnownTheme) → preserved + TODO comment with mode hint\n' +
+    '  (use initDialtoneTheme(brand, mode) once at startup OR setMode(mode) per toggle)\n' +
     '- setTheme(dynamicExpr) → preserved + TODO comment\n' +
     '- data-dt-theme= → data-dt-mode= (HTML attributes, JS attr methods, CSS selectors)\n' +
     '- data-dt-theme="invert" → preserved + TODO comment (review for v-dt-mode directive)\n',
@@ -37,28 +40,31 @@ export default {
   },
 
   expressions: [
-    // 1. setTheme() call rewrites for known light identifiers.
-    //    Must run BEFORE the unknown-call flag expression (3) so these are
-    //    fully consumed before the fallthrough regex fires.
+    // 1. setTheme() calls with known light identifiers → TODO comment with mode hint.
+    //    Must run BEFORE expression 3 so these are consumed before the fallthrough fires.
+    //    setTheme() was re-entrant; initDialtoneTheme() is a one-shot bootstrap that
+    //    throws if already initialized — the caller must decide which replacement applies.
     {
       from: new RegExp(
         `(?<!\\.)setTheme\\(\\s*(${KNOWN_LIGHT.join('|')})\\s*\\)`,
         'g',
       ),
-      to: (_match, identifier) => `initDialtoneTheme(${identifier}, 'light')`,
+      to: (match, identifier) =>
+        `// TODO: startup → initDialtoneTheme(${identifier}, 'light')  or  per-toggle → setMode('light') — see /guides/migration/theme-to-mode/\n${match}`,
     },
 
-    // 2. setTheme() call rewrites for known dark identifiers.
+    // 2. setTheme() calls with known dark identifiers → TODO comment with mode hint.
     {
       from: new RegExp(
         `(?<!\\.)setTheme\\(\\s*(${KNOWN_DARK.join('|')})\\s*\\)`,
         'g',
       ),
-      to: (_match, identifier) => `initDialtoneTheme(${identifier}, 'dark')`,
+      to: (match, identifier) =>
+        `// TODO: startup → initDialtoneTheme(${identifier}, 'dark')  or  per-toggle → setMode('dark') — see /guides/migration/theme-to-mode/\n${match}`,
     },
 
     // 3. setTheme() calls with unknown / dynamic arguments → TODO comment.
-    //    Negative-lookahead skips the eight known identifiers already rewritten above.
+    //    Negative-lookahead skips the eight known identifiers already handled above.
     //    Negative-lookbehind on '.' prevents matching unrelated .setTheme() methods.
     {
       from: new RegExp(
@@ -81,9 +87,9 @@ export default {
     },
 
     // 5. CSS selector invert — add TODO comment before the renamed selector.
-    //    Expression 5 already renamed [data-dt-theme=...] → [data-dt-mode=...],
+    //    Expression 4 already renamed [data-dt-theme=...] → [data-dt-mode=...],
     //    so we match on the result.  HTML attribute invert is handled by
-    //    expression 5 (just renamed, no comment — inserting HTML comments inside
+    //    expression 4 (just renamed, no comment — inserting HTML comments inside
     //    tags produces invalid markup; consumers grep for data-dt-mode="invert"
     //    to find regions needing v-dt-mode review).
     {
