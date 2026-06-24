@@ -206,6 +206,22 @@ describe('theme-to-mode config', () => {
       assert.equal(apply(light), light);
       assert.equal(apply(dark), dark);
     });
+
+    it('rewrites Vue bound :data-dt-theme="\'dp-light\'" → :data-dt-mode="\'light\'"', () => {
+      assert.equal(apply(`:data-dt-theme="'dp-light'"`), `:data-dt-mode="'light'"`);
+    });
+
+    it('rewrites Vue bound :data-dt-theme="\'dp-dark\'" → :data-dt-mode="\'dark\'"', () => {
+      assert.equal(apply(`:data-dt-theme="'dp-dark'"`), `:data-dt-mode="'dark'"`);
+    });
+
+    it('rewrites v-bind:data-dt-theme="\'tmo-light\'" → v-bind:data-dt-mode="\'light\'"', () => {
+      assert.equal(apply(`v-bind:data-dt-theme="'tmo-light'"`), `v-bind:data-dt-mode="'light'"`);
+    });
+
+    it('rewrites Vue bound with reversed quotes :data-dt-theme=\'"dp-dark"\' → :data-dt-mode=\'"dark"\'', () => {
+      assert.equal(apply(`:data-dt-theme='"dp-dark"'`), `:data-dt-mode='"dark"'`);
+    });
   });
 
   describe('data-dt-theme in CSS attribute selectors', () => {

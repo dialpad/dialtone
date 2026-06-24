@@ -100,15 +100,25 @@ export default {
 
     // 5. Rewrite known legacy theme-name values to their mode equivalents.
     //    Runs after expression 4 (which renamed data-dt-theme → data-dt-mode).
-    //    Handles HTML/Vue attributes, Vue bindings, and CSS selectors uniformly.
+    //    Handles two forms:
+    //      Plain:     data-dt-mode="dp-light"          → data-dt-mode="light"
+    //      Vue bound: :data-dt-mode="'dp-light'"       → :data-dt-mode="'light'"
+    //                 v-bind:data-dt-mode="'dp-light'" → v-bind:data-dt-mode="'light'"
     //    Known light: dp-light, tmo-light, expressive-light, expressive-sm-light
     //    Known dark:  dp-dark,  tmo-dark,  expressive-dark,  expressive-sm-dark
-    //    The backreference \1 ensures the surrounding quote style is preserved.
-    //    Unknown theme values are left as-is; consumers can grep for data-dt-mode="
-    //    to find any remaining non-canonical values.
+    //    Unknown theme values are left as-is.
     {
-      from: /\bdata-dt-mode=(["']?)((?:dp|tmo|expressive(?:-sm)?)-(?:light|dark))\1/g,
-      to: (_, q, value) => `data-dt-mode=${q}${value.endsWith('-light') ? 'light' : 'dark'}${q}`,
+      from: new RegExp(
+        '(?:(v-bind:|:)data-dt-mode=(["\'])(["\'])((?:dp|tmo|expressive(?:-sm)?)-(?:light|dark))\\3\\2' +
+          '|\\bdata-dt-mode=(["\']?)((?:dp|tmo|expressive(?:-sm)?)-(?:light|dark))\\5)',
+        'g',
+      ),
+      to: (_, prefix, outerQ, innerQ, boundVal, plainQ, plainVal) => {
+        if (prefix !== undefined) {
+          return `${prefix}data-dt-mode=${outerQ}${innerQ}${boundVal.endsWith('-light') ? 'light' : 'dark'}${innerQ}${outerQ}`;
+        }
+        return `data-dt-mode=${plainQ}${plainVal.endsWith('-light') ? 'light' : 'dark'}${plainQ}`;
+      },
     },
 
     // 6. CSS selector invert — add TODO comment before the renamed selector.
