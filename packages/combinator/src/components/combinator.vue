@@ -514,18 +514,19 @@ const disabledMembers = computed(() => {
   const disabled = new Set();
   const exclusions = info.value.exclusions;
   const propValues = options.value.props;
+  const slotValues = options.value.slots;
   const depMap = buildDependencyMap(info.value.props ?? []);
 
   for (const member of (info.value.props ?? [])) {
     if (member.required) continue;
-    if (shouldDisable(member.name, 'props', exclusions, propValues) ||
+    if (shouldDisable(member.name, 'props', exclusions, propValues, slotValues) ||
       shouldHideProp(member.name, depMap, propValues)) {
       disabled.add(member.name);
     }
   }
   for (const member of (info.value.slots ?? [])) {
     if (member.required) continue;
-    if (shouldDisable(member.name, 'slots', exclusions, propValues)) {
+    if (shouldDisable(member.name, 'slots', exclusions, propValues, slotValues)) {
       disabled.add(member.name);
     }
   }

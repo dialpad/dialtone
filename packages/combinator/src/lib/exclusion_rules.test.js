@@ -1,5 +1,6 @@
 import { expect } from 'vitest';
 import { shouldExclude, shouldDisable, getDisabledValues } from './exclusion_rules';
+import variantsBadge from '@/src/variants/variants_badge';
 
 const EQUALITY_RULE = { when: { kind: 'body' }, disableValues: { props: { size: ['500'] } } };
 const PREDICATE_RULE = { when: { kind: v => v !== 'headline' }, disableValues: { props: { size: ['500'] } } };
@@ -85,6 +86,40 @@ describe('exclusion_rules', function () {
 
     it('should treat hide rules as disable rules for backwards compatibility', function () {
       expect(shouldDisable('decoration', 'props', [HIDE_RULE], { kind: 'count' })).toBe(true);
+    });
+
+    it('should disable DtBadge icon size when no icon slot is provided', function () {
+      expect(shouldDisable('iconSize', 'props', variantsBadge.exclusions, {
+        startIcon: '',
+        endIcon: '',
+      })).toBe(false);
+      expect(shouldDisable('iconSize', 'props', variantsBadge.exclusions, {}, {
+        startIcon: '',
+        endIcon: '',
+      })).toBe(true);
+      expect(shouldDisable('iconSize', 'props', variantsBadge.exclusions, {}, {
+        startIcon: '<dt-icon-lock :size="iconSize" />',
+        endIcon: '',
+      })).toBe(false);
+    });
+
+    it('should disable DtBadge icon class props when their icon slots are empty', function () {
+      expect(shouldDisable('startIconClass', 'props', variantsBadge.exclusions, {}, {
+        startIcon: '',
+        endIcon: '',
+      })).toBe(true);
+      expect(shouldDisable('endIconClass', 'props', variantsBadge.exclusions, {}, {
+        startIcon: '',
+        endIcon: '',
+      })).toBe(true);
+      expect(shouldDisable('startIconClass', 'props', variantsBadge.exclusions, {}, {
+        startIcon: '<dt-icon-lock :size="iconSize" />',
+        endIcon: '',
+      })).toBe(false);
+      expect(shouldDisable('endIconClass', 'props', variantsBadge.exclusions, {}, {
+        startIcon: '<dt-icon-lock :size="iconSize" />',
+        endIcon: '',
+      })).toBe(true);
     });
   });
 });

@@ -26,7 +26,7 @@
           bindings: member.bindings,
           tokenCategory: member.tokenCategory,
           propValues,
-          disabledValues: getDisabledValues(key, props.exclusionRules, props.propValues),
+          disabledValues: getDisabledValues(key, props.exclusionRules, props.propValues, props.slotValues),
           clearable: member.clearable,
         }"
         @update:value="e => updateMember(e, key)"
@@ -56,13 +56,15 @@ const PROP_PRIORITY = [
   'showDivider', 'color', 'description',
   'scrollbar', 'scrollbarContentClass', 'surface',
   'borderRadius', 'borderColor',
-  'borderWidth', 'borderWidthBlock', 'borderWidthBlockEnd', 'borderWidthBlockStart',
-  'borderWidthInline', 'borderWidthInlineEnd', 'borderWidthInlineStart',
-  'padding', 'paddingBlock', 'paddingBlockEnd', 'paddingBlockStart',
-  'paddingInline', 'paddingInlineEnd', 'paddingInlineStart',
-  'blockSize', 'inlineSize', 'maxBlockSize', 'minBlockSize', 'maxInlineSize', 'minInlineSize',
+  'borderWidth', 'borderWidthInline', 'borderWidthInlineEnd', 'borderWidthInlineStart',
+  'borderWidthBlock', 'borderWidthBlockEnd', 'borderWidthBlockStart',
+  'padding', 'paddingInline', 'paddingInlineEnd', 'paddingInlineStart',
+  'paddingBlock', 'paddingBlockEnd', 'paddingBlockStart',
+  'inlineSize', 'minInlineSize', 'maxInlineSize', 'blockSize', 'maxBlockSize', 'minBlockSize',
   'shadow', 'overflow',
   'dropdownListClass', 'popoverContentClass', 'popoverDialogClass', 'popoverFooterClass', 'popoverHeaderClass',
+  'labelClass',
+  'startIconClass', 'endIconClass', 'iconClass', 'leadingClass', 'trailingClass',
 ];
 
 const SLOT_PRIORITY = ['start', 'end', 'inlineStart', 'inlineEnd', 'blockStart', 'blockEnd', 'leading', 'trailing'];
@@ -127,6 +129,14 @@ const props = defineProps({
   propValues: {
     type: Object,
     default: () => ({}),
+  },
+  /**
+   * Current slot values, used only by exclusion rules that opt into
+   * `whenSlots` conditions.
+   */
+  slotValues: {
+    type: Object,
+    default: undefined,
   },
   /**
    * The member group identifier ('props' or 'slots').
@@ -237,10 +247,10 @@ function extendMember (member) {
     || member.description?.startsWith('@deprecated');
 
   const isDisabled = !member.required
-    && shouldDisable(key, props.memberGroup, props.exclusionRules, props.propValues);
+    && shouldDisable(key, props.memberGroup, props.exclusionRules, props.propValues, props.slotValues);
 
   const clearValue = !member.required
-    && shouldClear(key, props.memberGroup, props.exclusionRules, props.propValues);
+    && shouldClear(key, props.memberGroup, props.exclusionRules, props.propValues, props.slotValues);
   // clearable = true when the member has no concrete default (prop is optional, user explicitly set it)
   const clearable = member.clearable ?? (member.defaultValue == null || member.defaultValue === '');
 

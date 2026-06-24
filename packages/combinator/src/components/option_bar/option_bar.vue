@@ -7,8 +7,17 @@
       borderless
       kind="muted"
       activation-mode="auto"
-      class="d-d-flex d-fd-column d-h100p d-pis-50"
-      tab-list-class="d-ps-sticky d-ibs-0 d-zi-base1 d-pie-200 d-pbs-200 d-pbe-50"
+      class="d-d-flex d-fd-column d-h100p"
+      tabs-class="d-pis-50"
+      tab-list-class="
+        d-ps-sticky
+        d-ibs-0
+        d-zi-base1
+        d-pis-50
+        d-pie-200
+        d-pbs-200
+        d-pbe-50
+      "
     >
       <template #tabs>
         <dt-tab
@@ -78,7 +87,7 @@
         class="d-fl1 d-pbs-100"
       >
         <dt-stack
-          class="d-fl1 d-pie-200 d-pbe-200"
+          class="d-fl1 d-pis-50 d-pie-200 d-pbe-200"
         >
           <dt-tab-panel
             v-if="info.props?.length"
@@ -97,6 +106,7 @@
                   :values="options.props"
                   :exclusion-rules="info.exclusions"
                   :prop-values="options.props"
+                  :slot-values="options.slots"
                   member-group="props"
                   @update:member="updateProps"
                 />
@@ -120,6 +130,7 @@
                   :values="options.slots"
                   :exclusion-rules="info.exclusions"
                   :prop-values="options.props"
+                  :slot-values="options.slots"
                   member-group="slots"
                   @update:member="updateSlots"
                 />

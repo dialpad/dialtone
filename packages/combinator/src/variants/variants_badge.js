@@ -1,3 +1,5 @@
+const hasNoIcon = v => !v;
+
 export default {
   defaults: {
     props: {
@@ -23,6 +25,18 @@ export default {
     {
       when: { decoration: v => !!v },
       hide: { slots: ['startIcon', 'endIcon'] },
+    },
+    {
+      whenSlots: { startIcon: hasNoIcon, endIcon: hasNoIcon },
+      disable: { props: ['iconSize'] },
+    },
+    {
+      whenSlots: { startIcon: hasNoIcon },
+      disable: { props: ['startIconClass'] },
+    },
+    {
+      whenSlots: { endIcon: hasNoIcon },
+      disable: { props: ['endIconClass'] },
     },
     {
       when: { kind: 'count' },

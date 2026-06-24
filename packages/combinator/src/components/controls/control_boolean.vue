@@ -23,6 +23,8 @@
           <slot />
         </dt-text>
       </dt-toggle>
+      <!--
+      KEEP THIS HERE SHOULD WE DECIDE TO USE IT LATER.
       <dt-button
         v-dt-tooltip="`Remove`"
         aria-label="Remove value"
@@ -30,12 +32,12 @@
         :size="100"
         kind="muted"
         disabled
-        class="d-o0"
       >
         <template #startIcon="{ iconSize }">
           <dt-icon-dash :size="iconSize" />
         </template>
       </dt-button>
+      -->
     </dt-stack>
   </div>
 </template>
