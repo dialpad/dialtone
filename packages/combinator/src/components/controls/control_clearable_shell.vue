@@ -48,7 +48,7 @@
         @click="emit('clear')"
       >
         <template #startIcon="{ iconSize }">
-          <dt-icon-dash :size="iconSize" />
+          <dt-icon-minus :size="iconSize" />
         </template>
       </dt-button>
     </dt-stack>
@@ -57,7 +57,7 @@
 
 <script setup>
 import { DtButton, DtStack, DtText } from '@dialpad/dialtone-vue';
-import { DtIconDash, DtIconPlus } from '@dialpad/dialtone-icons/vue';
+import { DtIconMinus, DtIconPlus } from '@dialpad/dialtone-icons/vue';
 import { computed } from 'vue';
 
 const props = defineProps({

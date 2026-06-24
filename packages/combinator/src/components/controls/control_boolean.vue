@@ -34,7 +34,7 @@
         disabled
       >
         <template #startIcon="{ iconSize }">
-          <dt-icon-dash :size="iconSize" />
+          <dt-icon-minus :size="iconSize" />
         </template>
       </dt-button>
       -->
