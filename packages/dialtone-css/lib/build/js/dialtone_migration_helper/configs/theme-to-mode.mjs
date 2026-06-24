@@ -50,7 +50,7 @@ export default {
     //    unchanged, so the convergence loop in dialtone-migrate terminates.
     {
       from: new RegExp(
-        `(?:// TODO:[^\\n]*\\n)?(?<!\\.)setTheme\\(\\s*(${KNOWN_LIGHT.join('|')})\\s*\\)`,
+        `(?:// TODO: startup →[^\\n]*\\n)?(?<!\\.)setTheme\\(\\s*(${KNOWN_LIGHT.join('|')})\\s*\\)`,
         'g',
       ),
       to: (match, identifier) => {
@@ -63,7 +63,7 @@ export default {
     //    Same idempotency guard as expression 1.
     {
       from: new RegExp(
-        `(?:// TODO:[^\\n]*\\n)?(?<!\\.)setTheme\\(\\s*(${KNOWN_DARK.join('|')})\\s*\\)`,
+        `(?:// TODO: startup →[^\\n]*\\n)?(?<!\\.)setTheme\\(\\s*(${KNOWN_DARK.join('|')})\\s*\\)`,
         'g',
       ),
       to: (match, identifier) => {
@@ -78,7 +78,7 @@ export default {
     //    Same idempotency guard as expressions 1–2.
     {
       from: new RegExp(
-        `(?:// TODO:[^\\n]*\\n)?(?<!\\.)setTheme\\(\\s*(?!(${KNOWN_PATTERN})\\s*\\))([^)]*)\\)`,
+        `(?:// TODO: review for layered API migration[^\\n]*\\n)?(?<!\\.)setTheme\\(\\s*(?!(${KNOWN_PATTERN})\\s*\\))([^)]*)\\)`,
         'g',
       ),
       to: (match) => {
