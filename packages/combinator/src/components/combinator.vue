@@ -23,58 +23,90 @@
       >
         {{ component.name }}
       </dt-text>
-      <dt-dropdown
+      <dt-stack
         v-else
-        navigation-type="arrow-keys"
-        placement="bottom-start"
-        content-class="d-wmn-500"
+        direction="row"
+        gap="100"
+        class="d-ai-center"
       >
-        <template #anchor="{ attrs }">
-          <dt-button
-            v-dt-tooltip="'Presets'"
-            v-bind="attrs"
-            importance="clear"
-            kind="muted"
-            :size="isFullScreen ? 'lg' : 'md'"
-            leading-class="d-pbs-1 d-pis-150 d-mie-n25"
-          >
-            <template #leading>
-              <dt-text
-                kind="code"
-                tone="primary"
-                strength="semibold"
-                class="d-fs-inherit"
-              >
-                {{ component.name }}:
-              </dt-text>
-            </template>
-            {{ selectedVariant || 'custom' }}
-            <template #endIcon="{ iconSize }">
-              <dt-icon-chevrons-up-down
-                class="d-fc-muted"
-                :size="iconSize"
-              />
-            </template>
-          </dt-button>
-        </template>
-        <template #list="{ close }">
-          <dt-list-item
-            v-for="option in variantOptions"
-            :key="option.value"
-            role="menuitem"
-            navigation-type="arrow-keys"
-            @click="updateVariant(option.value); close()"
-          >
-            {{ option.label }}
-            <template #end>
-              <dt-icon-check
-                size="200"
-                :class="option.value === selectedVariant ? 'd-o100' : 'd-o0'"
-              />
-            </template>
-          </dt-list-item>
-        </template>
-      </dt-dropdown>
+        <dt-dropdown
+          v-if="viewMode === 'single'"
+          navigation-type="arrow-keys"
+          placement="bottom-start"
+          content-class="d-wmn-500"
+        >
+          <template #anchor="{ attrs }">
+            <dt-button
+              v-dt-tooltip="'Presets'"
+              v-bind="attrs"
+              importance="clear"
+              kind="muted"
+              :size="isFullScreen ? 'lg' : 'md'"
+              leading-class="d-pbs-1 d-pis-150 d-mie-n25"
+            >
+              <template #leading>
+                <dt-text
+                  kind="code"
+                  tone="primary"
+                  strength="semibold"
+                  class="d-fs-inherit"
+                >
+                  {{ component.name }}:
+                </dt-text>
+              </template>
+              {{ selectedVariant || 'custom' }}
+              <template #endIcon="{ iconSize }">
+                <dt-icon-chevrons-up-down
+                  class="d-fc-muted"
+                  :size="iconSize"
+                />
+              </template>
+            </dt-button>
+          </template>
+          <template #list="{ close }">
+            <dt-list-item
+              v-for="option in variantOptions"
+              :key="option.value"
+              role="menuitem"
+              navigation-type="arrow-keys"
+              @click="updateVariant(option.value); close()"
+            >
+              {{ option.label }}
+              <template #end>
+                <dt-icon-check
+                  size="200"
+                  :class="option.value === selectedVariant ? 'd-o100' : 'd-o0'"
+                />
+              </template>
+            </dt-list-item>
+          </template>
+        </dt-dropdown>
+        <dt-text
+          v-else
+          kind="code"
+          tone="primary"
+          strength="semibold"
+          :size="300"
+          as="div"
+          class="d-px-150 d-py-100"
+        >
+          {{ component.name }}
+        </dt-text>
+        <dt-button
+          v-dt-tooltip="viewMode === 'grid' ? 'Single view' : 'Spec sheet'"
+          kind="muted"
+          importance="clear"
+          :size="200"
+          :active="viewMode === 'grid'"
+          @click="toggleViewMode"
+        >
+          <template #icon="{ iconSize }">
+            <dt-icon-layout-grid
+              :size="iconSize"
+            />
+          </template>
+        </dt-button>
+      </dt-stack>
       <dt-stack
         gap="100"
         direction="row"
@@ -115,6 +147,7 @@
     </dt-stack>
     <div class="dialtone-playground__start">
       <dtc-renderer
+        v-if="viewMode === 'single'"
         v-model:settings="settings"
         class="dialtone-playground__component"
         :component="component"
@@ -124,21 +157,34 @@
         :disabled-members="disabledMembers"
         @event="onComponentEvent"
       />
+      <dtc-renderer-spec-sheet
+        v-else
+        :component="component"
+        :documentation="documentation"
+        :variants="variants"
+        :library="library"
+        :settings="settings"
+        @select="onSelectVariant"
+      />
       <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
       <div
+        v-if="viewMode === 'single'"
         class="dialtone-playground__resizer"
         @pointerdown="startResize"
         @dblclick="optionBarWidth = null"
       />
       <dtc-option-bar
-        v-if="!blueprint"
+        v-if="!blueprint && viewMode === 'single'"
         v-model:options="options"
         :component="component"
         :info="info"
         :style="optionBarWidth ? { 'inline-size': optionBarWidth } : {}"
       />
     </div>
-    <div class="dialtone-playground__end">
+    <div
+      v-if="viewMode === 'single'"
+      class="dialtone-playground__end"
+    >
       <dtc-code-panel
         :info="info"
         :options="options"
@@ -156,6 +202,7 @@
 <script setup>
 import DtcOptionBar from './option_bar/option_bar.vue';
 import DtcRenderer from './renderer/renderer.vue';
+import DtcRendererSpecSheet from './renderer/renderer_spec_sheet.vue';
 import { enumerateGroups } from '@/src/lib/utils';
 import { shouldExclude } from '@/src/lib/exclusion_rules';
 import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
@@ -163,6 +210,7 @@ import { computed, nextTick, onErrorCaptured, reactive, ref, watch } from 'vue';
 import { cachedRef, computedModel } from '@/src/lib/utils_vue';
 import { clearTokenCache } from '@/src/lib/tokens';
 import { getComponentInfo } from '@/src/lib/info';
+import { cloneInfoMembers, getInitialValues, mergeVariantData } from '@/src/lib/variant_state';
 import {
   SETTINGS_BACKGROUND_KEY,
   SETTINGS_INDENT_KEY,
@@ -179,6 +227,7 @@ import DtIconExpand from '@dialpad/dialtone-icons/vue/expand';
 import DtIconRefresh from '@dialpad/dialtone-icons/vue/refresh';
 import DtIconChevronsUpDown from '@dialpad/dialtone-icons/vue/chevrons-up-down';
 import DtIconCheck from '@dialpad/dialtone-icons/vue/check';
+import DtIconLayoutGrid from '@dialpad/dialtone-icons/vue/layout-grid';
 
 const props = defineProps({
   /**
@@ -229,6 +278,7 @@ const selectedVariant = ref('default');
 const activeVariant = ref('default');
 const isFullScreen = ref(false);
 const optionBarWidth = ref(null);
+const viewMode = ref('single');
 let _presetChanging = false;
 const _forceReset = ref(0);
 
@@ -382,21 +432,18 @@ function updateVariant (e) {
   nextTick(() => { _presetChanging = false; });
 }
 
+function toggleViewMode () {
+  viewMode.value = viewMode.value === 'grid' ? 'single' : 'grid';
+}
+
 /**
- * Merges variant override data into an info object.
+ * Loads a variant from the spec sheet into the editable single view.
  *
- * @param {object} info - The info object to merge into.
- * @param {object} variantData - The variant data to merge.
+ * @param {string} name - The variant to load.
  */
-function mergeVariantData (info, variantData) {
-  if (!variantData) return;
-  Object.entries(variantData).forEach(([memberGroup, members]) => {
-    if (memberGroup === 'exclusions') return;
-    Object.entries(members).forEach(([memberName, member]) => {
-      const infoMember = info[memberGroup]?.find(m => m.name === memberName);
-      if (infoMember) Object.assign(infoMember, member);
-    });
-  });
+function onSelectVariant (name) {
+  updateVariant(name);
+  viewMode.value = 'single';
 }
 
 const defaultInfo = computed(() => {
@@ -407,23 +454,6 @@ const defaultInfo = computed(() => {
   mergeVariantData(info, props.variants?.default);
   return info;
 });
-
-/**
- * Shallow-clones member arrays and their objects so that variant overrides
- * never mutate the shared documentation prop.
- *
- * @param {object} info - The info object to clone.
- * @returns {object} A cloned info object.
- */
-function cloneInfoMembers (info) {
-  const cloned = { ...info };
-  for (const group of ['props', 'slots', 'attributes', 'events']) {
-    if (cloned[group]) {
-      cloned[group] = cloned[group].map(m => ({ ...m }));
-    }
-  }
-  return cloned;
-}
 
 /**
  * Gets a new instantiation of an info object.
@@ -443,21 +473,6 @@ function initializeInfo () {
 
   return info;
 }
-
-/**
- * Gets the values for a given 'options' member group with the provided defaults.
- *
- * @param info
- */
-function getInitialValues (info) {
-  const options = {};
-  info.members.enumerate((memberGroup, member) => {
-    options[memberGroup] = options[memberGroup] || {};
-    options[memberGroup][member.name] = member.initialValue;
-  });
-  return options;
-}
-
 
 const hasChanges = computed(() => {
   const referenceInfo = defaultInfo.value ?? info.value;

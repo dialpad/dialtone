@@ -1,23 +1,25 @@
 <template>
-  <dtc-renderer-target
-    :component="component"
-    :bindings="options.bindings.get()"
-    :events="info.events"
-    :disabled-members="disabledMembers"
-    @event="(event, value) => emit('event', event, value)"
-  >
-    <template
-      v-for="(slot, name) in renderedSlots"
-      :key="name"
-      #[name]="slotBindings"
+  <div>
+    <dtc-renderer-target
+      :component="component"
+      :bindings="options.bindings.get()"
+      :events="info.events"
+      :disabled-members="disabledMembers"
+      @event="(event, value) => emit('event', event, value)"
     >
-      <dtc-node
-        :template="slot"
-        :library="library"
-        :scope="slotBindings"
-      />
-    </template>
-  </dtc-renderer-target>
+      <template
+        v-for="(slot, name) in renderedSlots"
+        :key="name"
+        #[name]="slotBindings"
+      >
+        <dtc-node
+          :template="slot"
+          :library="library"
+          :scope="slotBindings"
+        />
+      </template>
+    </dtc-renderer-target>
+  </div>
 </template>
 
 <script setup>
@@ -87,20 +89,6 @@ const renderedSlots = computed(() => {
   );
 });
 
-// const theme = computed(() => {
-//   switch (background.value) {
-//     case 'black': return 'dark';
-//     case 'white': return 'light';
-//     default: return props.settings.root.theme;
-//   }
-// });
-
-
-// function updateSettings (setting, e) {
-//   emit(SETTINGS_UPDATE_EVENT, (model) => {
-//     model.renderer[setting] = e;
-//   });
-// }
 </script>
 
 <script>
