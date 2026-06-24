@@ -70,7 +70,8 @@ export const findMatchedFiles = async (fileList, config) => {
       })
       .filter((f) => {
         config.expressions.forEach((e) => {
-          if (e.from && e.from.test(f.data)) f.matches++;
+          if (e.from && new RegExp(e.from.source, e.from.flags.replace('g', '')).test(f.data)) f.matches++;
+          else if (typeof e.transform === 'function' && e.transform(f.data, f.file) !== f.data) f.matches++;
         });
         return f.matches > 0;
       });

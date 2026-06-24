@@ -86,6 +86,21 @@ describe('theme-to-mode config', () => {
       const input = `myThemeManager.setTheme(DpLight);`;
       assert.equal(apply(input), input);
     });
+
+    it('is idempotent — re-applying to already-flagged known light call produces no change', () => {
+      const once = apply(`setTheme(DpLight);`);
+      assert.equal(apply(once), once);
+    });
+
+    it('is idempotent — re-applying to already-flagged known dark call produces no change', () => {
+      const once = apply(`setTheme(DpDark);`);
+      assert.equal(apply(once), once);
+    });
+
+    it('is idempotent — re-applying to already-flagged dynamic call produces no change', () => {
+      const once = apply(`setTheme(myDynamic);`);
+      assert.equal(apply(once), once);
+    });
   });
 
   // ─── Attribute renames ────────────────────────────────────────────────────
@@ -93,7 +108,7 @@ describe('theme-to-mode config', () => {
   describe('data-dt-theme → data-dt-mode in HTML attributes', () => {
     it('rewrites data-dt-theme= in HTML attribute', () => {
       const input = `<html data-dt-theme="dp-light">`;
-      const expected = `<html data-dt-mode="dp-light">`;
+      const expected = `<html data-dt-mode="light">`;
       assert.equal(apply(input), expected);
     });
 
@@ -141,6 +156,58 @@ describe('theme-to-mode config', () => {
     });
   });
 
+  describe('data-dt-mode value rewrite — known theme names → light/dark', () => {
+    it('rewrites data-dt-theme="dp-light" → data-dt-mode="light"', () => {
+      assert.equal(apply(`<html data-dt-theme="dp-light">`), `<html data-dt-mode="light">`);
+    });
+
+    it('rewrites data-dt-theme="dp-dark" → data-dt-mode="dark"', () => {
+      assert.equal(apply(`<html data-dt-theme="dp-dark">`), `<html data-dt-mode="dark">`);
+    });
+
+    it('rewrites data-dt-theme="tmo-light" → data-dt-mode="light"', () => {
+      assert.equal(apply(`<html data-dt-theme="tmo-light">`), `<html data-dt-mode="light">`);
+    });
+
+    it('rewrites data-dt-theme="tmo-dark" → data-dt-mode="dark"', () => {
+      assert.equal(apply(`<section data-dt-theme="tmo-dark">`), `<section data-dt-mode="dark">`);
+    });
+
+    it('rewrites data-dt-theme="expressive-light" → data-dt-mode="light"', () => {
+      assert.equal(apply(`<html data-dt-theme="expressive-light">`), `<html data-dt-mode="light">`);
+    });
+
+    it('rewrites data-dt-theme="expressive-sm-dark" → data-dt-mode="dark"', () => {
+      assert.equal(apply(`<html data-dt-theme="expressive-sm-dark">`), `<html data-dt-mode="dark">`);
+    });
+
+    it('rewrites [data-dt-theme="dp-light"] CSS selector value', () => {
+      assert.equal(
+        apply(`[data-dt-theme="dp-light"] { background: white; }`),
+        `[data-dt-mode="light"] { background: white; }`,
+      );
+    });
+
+    it('rewrites unquoted [data-dt-theme=dp-dark] CSS selector value', () => {
+      assert.equal(
+        apply(`[data-dt-theme=dp-dark] .d-banner { border: 1px; }`),
+        `[data-dt-mode=dark] .d-banner { border: 1px; }`,
+      );
+    });
+
+    it('leaves unknown/custom theme values as-is', () => {
+      const input = `<html data-dt-theme="custom-brand">`;
+      assert.equal(apply(input), `<html data-dt-mode="custom-brand">`);
+    });
+
+    it('does not alter data-dt-mode="light" or data-dt-mode="dark" (already canonical)', () => {
+      const light = `<html data-dt-mode="light">`;
+      const dark = `<html data-dt-mode="dark">`;
+      assert.equal(apply(light), light);
+      assert.equal(apply(dark), dark);
+    });
+  });
+
   describe('data-dt-theme in CSS attribute selectors', () => {
     it('rewrites [data-dt-theme] bare selector', () => {
       const input = `[data-dt-theme] { color: red; }`;
@@ -150,7 +217,7 @@ describe('theme-to-mode config', () => {
 
     it('rewrites [data-dt-theme="value"] selector', () => {
       const input = `[data-dt-theme="dp-light"] { background: white; }`;
-      const expected = `[data-dt-mode="dp-light"] { background: white; }`;
+      const expected = `[data-dt-mode="light"] { background: white; }`;
       assert.equal(apply(input), expected);
     });
 
@@ -183,6 +250,11 @@ describe('theme-to-mode config', () => {
       const result = apply(input);
       assert.ok(result.includes('[data-dt-mode=invert]'), 'selector renamed');
       assert.ok(result.includes('TODO: review for v-dt-mode adoption'), 'TODO inserted');
+    });
+
+    it('is idempotent — re-applying to already-flagged CSS invert selector produces no change', () => {
+      const once = apply(`[data-dt-theme="invert"] .d-card { box-shadow: none; }`);
+      assert.equal(apply(once), once);
     });
   });
 });
