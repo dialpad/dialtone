@@ -14,19 +14,25 @@
     >
       <slot name="label" />
     </dt-text>
-    <dt-button
-      v-dt-tooltip="`Add`"
-      aria-label="Add value"
-      importance="clear"
-      :size="100"
-      kind="muted"
-      :disabled="addDisabled"
-      @click="emit('add')"
+    <dt-stack
+      align="center"
+      justify="center"
+      class="d-w-50 d-mie-25"
     >
-      <template #startIcon="{ iconSize }">
-        <dt-icon-plus :size="iconSize" />
-      </template>
-    </dt-button>
+      <dt-button
+        v-dt-tooltip="`Add`"
+        aria-label="Add value"
+        importance="clear"
+        :size="100"
+        kind="muted"
+        :disabled="addDisabled"
+        @click="emit('add')"
+      >
+        <template #startIcon="{ iconSize }">
+          <dt-icon-plus :size="iconSize" />
+        </template>
+      </dt-button>
+    </dt-stack>
   </dt-stack>
   <template v-else>
     <slot name="expanded-label" />
@@ -38,19 +44,25 @@
       <div class="d-fl1">
         <slot />
       </div>
-      <dt-button
-        v-dt-tooltip="`Remove`"
-        aria-label="Remove value"
-        importance="clear"
-        :size="100"
-        kind="muted"
-        :disabled="removeDisabled"
-        @click="emit('clear')"
+      <dt-stack
+        align="center"
+        justify="center"
+        class="d-w-50 d-mie-25"
       >
-        <template #startIcon="{ iconSize }">
-          <dt-icon-minus :size="iconSize" />
-        </template>
-      </dt-button>
+        <dt-button
+          v-dt-tooltip="`Remove`"
+          aria-label="Remove value"
+          importance="clear"
+          :size="100"
+          kind="muted"
+          :disabled="removeDisabled"
+          @click="emit('clear')"
+        >
+          <template #startIcon="{ iconSize }">
+            <dt-icon-minus :size="iconSize" />
+          </template>
+        </dt-button>
+      </dt-stack>
     </dt-stack>
   </template>
 </template>

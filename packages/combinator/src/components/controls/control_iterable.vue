@@ -41,18 +41,24 @@
         </dt-button>
       </dt-stack>
     </template>
-    <dt-button
-      class="dtc-icon"
-      :size="100"
-      importance="clear"
-      kind="muted"
-      :disabled="disabled"
-      @click="addItem"
+    <dt-stack
+      align="center"
+      justify="center"
+      class="d-w-50 d-mie-25"
     >
-      <template #icon="{ iconSize }">
-        <dt-icon-plus :size="iconSize" />
-      </template>
-    </dt-button>
+      <dt-button
+        class="dtc-icon"
+        :size="100"
+        importance="clear"
+        kind="muted"
+        :disabled="disabled"
+        @click="addItem"
+      >
+        <template #icon="{ iconSize }">
+          <dt-icon-plus :size="iconSize" />
+        </template>
+      </dt-button>
+    </dt-stack>
   </div>
   <dt-text
     kind="code"
