@@ -54,7 +54,7 @@ export default {
         'g',
       ),
       to: (match, identifier) => {
-        if (match.startsWith('// TODO:')) return match;
+        if (match.startsWith('// TODO: startup →')) return match;
         return `// TODO: startup → initDialtoneTheme(${identifier}, 'light')  or  per-toggle → setMode('light') — see /guides/migration/theme-to-mode/\n${match}`;
       },
     },
@@ -67,7 +67,7 @@ export default {
         'g',
       ),
       to: (match, identifier) => {
-        if (match.startsWith('// TODO:')) return match;
+        if (match.startsWith('// TODO: startup →')) return match;
         return `// TODO: startup → initDialtoneTheme(${identifier}, 'dark')  or  per-toggle → setMode('dark') — see /guides/migration/theme-to-mode/\n${match}`;
       },
     },
@@ -82,7 +82,7 @@ export default {
         'g',
       ),
       to: (match) => {
-        if (match.startsWith('// TODO:')) return match;
+        if (match.startsWith('// TODO: review for layered API migration')) return match;
         return `// TODO: review for layered API migration — see /guides/migration/theme-to-mode/\n${match}`;
       },
     },
@@ -111,7 +111,7 @@ export default {
       to: (_, q, value) => `data-dt-mode=${q}${value.endsWith('-light') ? 'light' : 'dark'}${q}`,
     },
 
-    // 7. CSS selector invert — add TODO comment before the renamed selector.
+    // 6. CSS selector invert — add TODO comment before the renamed selector.
     //    Expression 4 already renamed [data-dt-theme=...] → [data-dt-mode=...],
     //    so we match on the result.  HTML attribute invert is handled by
     //    expression 4 (just renamed, no comment — inserting HTML comments inside
@@ -126,13 +126,13 @@ export default {
       },
     },
 
-    // 8. JS attribute methods: setAttribute/getAttribute/etc. on 'data-dt-theme'
+    // 7. JS attribute methods: setAttribute/getAttribute/etc. on 'data-dt-theme'
     {
       from: /(\.(?:set|get|toggle|remove|has)Attribute\(\s*['"])data-dt-theme(['"])/g,
       to: (_match, prefix, suffix) => `${prefix}data-dt-mode${suffix}`,
     },
 
-    // 9. CSS attribute selectors: [data-dt-theme...] → [data-dt-mode...]
+    // 8. CSS attribute selectors: [data-dt-theme...] → [data-dt-mode...]
     //    Runs after the invert-flagging expressions to avoid double-processing.
     {
       from: /\[data-dt-theme(\]|=[^\]]*\])/g,
