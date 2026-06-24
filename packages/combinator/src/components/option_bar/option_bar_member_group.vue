@@ -45,6 +45,7 @@ import { controlMap } from '@/src/lib/control';
 import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
 import { shouldDisable, shouldClear, getDisabledValues } from '@/src/lib/exclusion_rules';
 import { isIconSlot } from '@/src/lib/icons';
+import { isClassProp } from '@/src/lib/utils';
 
 const ICON_SLOT_ORDER = ['startIcon', 'endIcon', 'blockStartIcon', 'blockEndIcon', 'icon'];
 
@@ -72,10 +73,6 @@ const CLASS_PROP_PRIORITY = [
 ];
 
 const SLOT_PRIORITY = ['start', 'end', 'inlineStart', 'inlineEnd', 'blockStart', 'blockEnd', 'leading', 'trailing'];
-
-function isClassProp (member) {
-  return member?.name?.endsWith('Class');
-}
 
 function getPropTier (member) {
   if (isClassProp(member)) {

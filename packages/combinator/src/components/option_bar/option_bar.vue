@@ -21,19 +21,28 @@
     >
       <template #tabs>
         <dt-tab
-          v-if="info.props?.length"
+          v-if="filteredMainProps.length"
           id="tab-props"
           panel-id="panel-props"
-          selected
+          :selected="initialTab === 'props'"
         >
           Props
         </dt-tab>
         <dt-tab
-          v-if="info.slots?.length"
+          v-if="filteredSlots.length"
           id="tab-slots"
           panel-id="panel-slots"
+          :selected="initialTab === 'slots'"
         >
           Slots
+        </dt-tab>
+        <dt-tab
+          v-if="filteredClassProps.length"
+          id="tab-class"
+          panel-id="panel-class"
+          :selected="initialTab === 'class'"
+        >
+          Class
         </dt-tab>
         <dt-button
           v-dt-tooltip="'Search'"
@@ -90,19 +99,16 @@
           class="d-fl1 d-pis-50 d-pie-200 d-pbe-200"
         >
           <dt-tab-panel
-            v-if="info.props?.length"
+            v-if="filteredMainProps.length"
             id="panel-props"
             tab-id="tab-props"
           >
-            <dt-stack
-              v-if="info.props?.length"
-              gap="300"
-            >
+            <dt-stack gap="300">
               <dt-stack gap="150">
                 <dtc-option-bar-member-group
                   :component="component"
                   :control-selector="(prop, value) => getBindingControls(prop, value, 'null')"
-                  :members="filteredProps"
+                  :members="filteredMainProps"
                   :values="options.props"
                   :exclusion-rules="info.exclusions"
                   :prop-values="options.props"
@@ -114,14 +120,11 @@
             </dt-stack>
           </dt-tab-panel>
           <dt-tab-panel
-            v-if="info.slots?.length"
+            v-if="filteredSlots.length"
             id="panel-slots"
             tab-id="tab-slots"
           >
-            <dt-stack
-              v-if="info.slots?.length"
-              gap="300"
-            >
+            <dt-stack gap="300">
               <dt-stack gap="150">
                 <dtc-option-bar-member-group
                   :component="component"
@@ -133,6 +136,27 @@
                   :slot-values="options.slots"
                   member-group="slots"
                   @update:member="updateSlots"
+                />
+              </dt-stack>
+            </dt-stack>
+          </dt-tab-panel>
+          <dt-tab-panel
+            v-if="filteredClassProps.length"
+            id="panel-class"
+            tab-id="tab-class"
+          >
+            <dt-stack gap="300">
+              <dt-stack gap="150">
+                <dtc-option-bar-member-group
+                  :component="component"
+                  :control-selector="(prop, value) => getBindingControls(prop, value, 'null')"
+                  :members="filteredClassProps"
+                  :values="options.props"
+                  :exclusion-rules="info.exclusions"
+                  :prop-values="options.props"
+                  :slot-values="options.slots"
+                  member-group="props"
+                  @update:member="updateProps"
                 />
               </dt-stack>
             </dt-stack>
@@ -150,6 +174,7 @@ import { computed, ref, nextTick } from 'vue';
 import { OPTIONS_UPDATE_EVENT } from '@/src/lib/constants';
 import { getControlByMemberType, getControlByValue } from '@/src/lib/control';
 import { isIconSlot } from '@/src/lib/icons';
+import { isClassProp } from '@/src/lib/utils';
 import { LOGICAL_ALIASES } from '@/src/lib/logical_aliases';
 import { DtStack, DtTabGroup, DtTab, DtTabPanel } from '@dialpad/dialtone-vue';
 import { DtIconSearch } from '@dialpad/dialtone-icons/vue';
@@ -223,8 +248,16 @@ function getSearchCorpus (name) {
 }
 
 // Pre-compute corpora once per member list so per-keystroke filtering is just a substring scan.
-const propCorpora = computed(() => (props.info.props ?? []).map(m => ({ member: m, corpus: getSearchCorpus(m.name) })));
-const slotCorpora = computed(() => (props.info.slots ?? []).map(m => ({ member: m, corpus: getSearchCorpus(m.name) })));
+const mainPropCorpora = computed(() => (props.info.props ?? [])
+  .filter(member => !isClassProp(member))
+  .map(member => ({ member, corpus: getSearchCorpus(member.name) })));
+
+const classPropCorpora = computed(() => (props.info.props ?? [])
+  .filter(isClassProp)
+  .map(member => ({ member, corpus: getSearchCorpus(member.name) })));
+
+const slotCorpora = computed(() => (props.info.slots ?? [])
+  .map(member => ({ member, corpus: getSearchCorpus(member.name) })));
 
 function filterCorpora (corpora) {
   const q = normalizeForSearch(searchQuery.value);
@@ -232,8 +265,16 @@ function filterCorpora (corpora) {
   return corpora.filter(({ corpus }) => corpus.includes(q)).map(({ member }) => member);
 }
 
-const filteredProps = computed(() => filterCorpora(propCorpora.value));
+const filteredMainProps = computed(() => filterCorpora(mainPropCorpora.value));
+const filteredClassProps = computed(() => filterCorpora(classPropCorpora.value));
 const filteredSlots = computed(() => filterCorpora(slotCorpora.value));
+
+const initialTab = computed(() => {
+  if (filteredMainProps.value.length) return 'props';
+  if (filteredSlots.value.length) return 'slots';
+  if (filteredClassProps.value.length) return 'class';
+  return null;
+});
 
 /**
  * Gets an array of controls for a binding.

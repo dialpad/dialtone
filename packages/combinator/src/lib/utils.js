@@ -106,6 +106,16 @@ export function enumerateGroups (handler, groups) {
  * @returns {Array} arr of objects containing both the
  * filename and component name in PascalCase.
  */
+/**
+ * Returns true if the member represents a CSS class prop (name ends with 'Class').
+ *
+ * @param {object} member - The member descriptor.
+ * @returns {boolean}
+ */
+export function isClassProp (member) {
+  return member?.name?.endsWith('Class');
+}
+
 export const getComponentFilesFromDir = (requireContext) => {
   const files = [];
   requireContext.keys().forEach(fileName => {
