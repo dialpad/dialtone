@@ -14,10 +14,6 @@ const testControls = {
     value: 17,
     component: DtcControlNumber,
   },
-  true: { value: true },
-  false: { value: false },
-  null: { value: null },
-  undefined: { value: undefined },
 };
 
 describe('control_dynamic.vue test', function () {
@@ -31,14 +27,7 @@ describe('control_dynamic.vue test', function () {
     _mountWrapper();
   });
 
-  describe('When mounted', function () {
-    it('Should render successfully', function () {
-      expect(wrapper.exists()).toBe(true);
-    });
-  });
-
   Object.entries(testControls)
-    .filter(([, { component }]) => component)
     .forEach(([, { value, component }]) => {
       describe(`When provided value is '${value}' {${typeof value}}`, function () {
         beforeEach(function () {

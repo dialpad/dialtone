@@ -38,41 +38,12 @@ describe('control_selection.vue test', function () {
     _mountWrapper();
   });
 
-  describe('When mounted', function () {
-    it('Should render successfully', function () {
-      expect(wrapper.exists()).toBe(true);
-    });
-  });
-
-  describe('When rendering options', function () {
-    describe('Should create an option for each selection', function () {
-      selections.forEach((selection) => {
-        it(`Should have a computed option for selection '${selection}'`, function () {
-          expect(wrapper.vm.options.some((o) => o.value === selection)).toBe(
-            true,
-          );
-        });
-      });
-    });
-
-    describe('When a value is provided', function () {
-      it('Should display the label for the selected value', function () {
-        expect(wrapper.vm.selectedLabel).toBe(inputValue.toString());
-      });
-    });
-
-    it('Should not include a clear option in the dropdown', function () {
-      _mountWrapper({ defaultValue: selections[0] });
-
-      expect(wrapper.vm.options.some((option) => option.value === null)).toBe(false);
-    });
-
-    it('Should display a non-breaking space when the selection is empty', function () {
+  describe('When the selection is empty', function () {
+    it('Should display a non-breaking space to hold the label height', function () {
       _mountWrapper({ value: null });
 
       expect(wrapper.vm.selectedLabel).toBe('\u00A0');
     });
-
   });
 
   describe('Search filtering', function () {

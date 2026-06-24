@@ -38,12 +38,6 @@ describe('control_slot.vue test', function () {
     wrapper?.unmount();
   });
 
-  describe('When mounted', function () {
-    it('Should render successfully', function () {
-      expect(wrapper.exists()).toBe(true);
-    });
-  });
-
   describe('When a value is provided', function () {
     beforeEach(async function () {
       await wrapper.setProps({

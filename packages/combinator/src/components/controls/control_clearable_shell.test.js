@@ -28,19 +28,11 @@ describe('control_clearable_shell.vue test', function () {
     wrapper?.unmount();
   });
 
-  it('Should collapse empty disabled controls with a visible disabled add button', function () {
-    _mountWrapper({ disabled: true });
-
-    const addButton = wrapper.find(addButtonSelector);
-    expect(wrapper.text()).toContain('Label');
-    expect(addButton.exists()).toBe(true);
-    expect(addButton.attributes('disabled')).toBeDefined();
-    expect(addButton.classes()).not.toContain('d-o0');
-    expect(wrapper.find(expandedContentSelector).exists()).toBe(false);
-  });
-
-  it('Should collapse empty disabled non-clearable controls with a visible disabled add button', function () {
-    _mountWrapper({ disabled: true, clearable: false });
+  it.each([
+    { disabled: true },
+    { disabled: true, clearable: false },
+  ])('Should collapse empty disabled controls with a visible disabled add button (%o)', function (props) {
+    _mountWrapper(props);
 
     const addButton = wrapper.find(addButtonSelector);
     expect(wrapper.text()).toContain('Label');

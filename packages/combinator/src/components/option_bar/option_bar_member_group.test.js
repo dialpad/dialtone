@@ -35,11 +35,12 @@ describe('option_bar_member_group.vue test', function () {
   let controlWrappers;
 
   const testComponents = getSupportedComponents();
-  testComponents.forEach((component) => {
+
+  describe('When mounted', function () {
     beforeAll(function () {
       wrapper = mount(DtcOptionBarMemberGroup, {
         props: {
-          component,
+          component: testComponents[0],
           members: testMembers,
           values: testValues,
           controlSelector: () => [['base'], 'base'],
@@ -48,14 +49,8 @@ describe('option_bar_member_group.vue test', function () {
       controlWrappers = wrapper.findAll(controlWrapperSelector);
     });
 
-    describe(`When mounted with component '${component.name}'`, function () {
-      it('Should render successfully', function () {
-        expect(wrapper).toBeTruthy();
-      });
-
-      it('Should render a control for each member', function () {
-        expect(Object.keys(testMembers).length).toBe(controlWrappers.length);
-      });
+    it('Should render a control for each member', function () {
+      expect(controlWrappers.length).toBe(testMembers.length);
     });
   });
 

@@ -66,6 +66,7 @@ const emit = defineEmits([VALUE_UPDATE_EVENT]);
 const expanded = ref(false);
 const inputRef = ref(null);
 const hasPendingValue = ref(false);
+const hasInternalUpdate = ref(false);
 
 const inputValue = computed(() => props.value ?? '');
 
@@ -75,6 +76,8 @@ const clearDisabled = computed(() => !props.clearable || props.required || props
 
 function updateValue (e) {
   const value = e === '' ? null : parseInt(e);
+  expanded.value = true;
+  hasInternalUpdate.value = true;
   hasPendingValue.value = value !== null && value !== undefined && value !== '';
   emit(VALUE_UPDATE_EVENT, value);
 }
@@ -99,6 +102,10 @@ function clearValue () {
 
 watch(() => props.value, () => {
   hasPendingValue.value = false;
+  if (hasInternalUpdate.value) {
+    hasInternalUpdate.value = false;
+    return;
+  }
   if (isEmpty.value) expanded.value = false;
 });
 </script>

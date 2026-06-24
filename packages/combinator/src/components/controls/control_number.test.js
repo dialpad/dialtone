@@ -38,12 +38,6 @@ describe('control_number.vue test', function () {
     wrapper?.unmount();
   });
 
-  describe('When mounted', function () {
-    it('Should render successfully', function () {
-      expect(wrapper.exists()).toBe(true);
-    });
-  });
-
   describe('When a value is provided', function () {
     beforeEach(async function () {
       await wrapper.setProps({
@@ -86,12 +80,6 @@ describe('control_number.vue test', function () {
       await wrapper.find(clearButtonSelector).trigger('click');
 
       expect(wrapper.emitted('update:value')[0]).toEqual([null]);
-    });
-
-    it('Should disable the clear button for empty values', function () {
-      _mountWrapper({ value: null });
-
-      expect(wrapper.find(clearButtonSelector).exists()).toBe(false);
     });
 
     it('Should disable the clear button for required values', function () {

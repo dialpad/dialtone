@@ -37,12 +37,6 @@ describe('control_string.vue test', function () {
     wrapper?.unmount();
   });
 
-  describe('When mounted', function () {
-    it('Should render successfully', function () {
-      expect(wrapper.exists()).toBe(true);
-    });
-  });
-
   describe('When a value is provided', function () {
     beforeEach(async function () {
       await wrapper.setProps({
@@ -75,6 +69,24 @@ describe('control_string.vue test', function () {
       await wrapper.find(clearButtonSelector).trigger('click');
 
       expect(wrapper.emitted('update:value')[0]).toEqual([null]);
+    });
+  });
+
+  describe('When deleting the input value', function () {
+    it('Should keep the input rendered until blur', async function () {
+      _mountWrapper({ value: inputValue });
+
+      await inputWrapper.setValue('');
+      await wrapper.setProps({ value: '' });
+      _setChildWrappers();
+
+      expect(inputWrapper.exists()).toBe(true);
+
+      await inputWrapper.trigger('blur');
+      _setChildWrappers();
+
+      expect(inputWrapper.exists()).toBe(false);
+      expect(wrapper.find(addButtonSelector).exists()).toBe(true);
     });
   });
 });
