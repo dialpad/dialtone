@@ -40,7 +40,7 @@
 import { DtInput, DtText } from '@dialpad/dialtone-vue';
 import DtcControlClearableShell from './control_clearable_shell.vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
-import { computed, nextTick, ref, watch } from 'vue';
+import { useClearableInput } from '@/src/lib/utils_vue';
 
 const props = defineProps({
   value: {
@@ -63,51 +63,8 @@ const props = defineProps({
 
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
 
-const expanded = ref(false);
-const inputRef = ref(null);
-const hasPendingValue = ref(false);
-const hasInternalUpdate = ref(false);
-
-const inputValue = computed(() => props.value ?? '');
-
-const isEmpty = computed(() => props.value === null || props.value === undefined || props.value === '');
-
-const clearDisabled = computed(() => !props.clearable || props.required || props.disabled || isEmpty.value);
-
-function updateValue (e) {
-  const value = e === '' ? null : parseInt(e);
-  expanded.value = true;
-  hasInternalUpdate.value = true;
-  hasPendingValue.value = value !== null && value !== undefined && value !== '';
-  emit(VALUE_UPDATE_EVENT, value);
-}
-
-async function addValue () {
-  expanded.value = true;
-  await nextTick();
-  inputRef.value?.focus();
-}
-
-function collapseIfEmpty () {
-  if (!isEmpty.value || hasPendingValue.value) return;
-  expanded.value = false;
-}
-
-function clearValue () {
-  if (clearDisabled.value) return;
-  expanded.value = false;
-  hasPendingValue.value = false;
-  emit(VALUE_UPDATE_EVENT, null);
-}
-
-watch(() => props.value, () => {
-  hasPendingValue.value = false;
-  if (hasInternalUpdate.value) {
-    hasInternalUpdate.value = false;
-    return;
-  }
-  if (isEmpty.value) expanded.value = false;
-});
+const { expanded, inputRef, inputValue, isEmpty, updateValue, addValue, collapseIfEmpty, clearValue } =
+  useClearableInput({ props, emit, parse: (e) => (e === '' ? null : parseInt(e)) });
 </script>
 
 <script>

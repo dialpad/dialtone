@@ -48,6 +48,7 @@ import { DtSegmentedControl, DtSegmentedControlItem, DtText } from '@dialpad/dia
 import DtcControlClearableShell from './control_clearable_shell.vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { resolveTokenValue } from '@/src/lib/tokens';
+import { useClearableState } from '@/src/lib/utils_vue';
 import { computed, nextTick, ref, watch } from 'vue';
 
 const props = defineProps({
@@ -110,11 +111,9 @@ const valueMap = computed(() => {
   return map;
 });
 
-const isEmpty = computed(() => props.value === null || props.value === undefined || props.value === '');
+const { isEmpty, clearDisabled } = useClearableState(props);
 
 const selectedValue = computed(() => isEmpty.value ? '' : String(props.value));
-
-const clearDisabled = computed(() => !props.clearable || props.required || props.disabled || isEmpty.value);
 
 function onInput (stringValue) {
   hasPendingValue.value = true;

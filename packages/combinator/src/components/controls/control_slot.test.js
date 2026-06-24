@@ -1,11 +1,13 @@
 import DtcControlSlot from './control_slot.vue';
 
 import { expect } from 'vitest';
-import { mount } from '@vue/test-utils';
+import {
+  mountClearableControl,
+  ADD_BUTTON_SELECTOR as addButtonSelector,
+  REMOVE_BUTTON_SELECTOR as clearButtonSelector,
+} from '@/src/lib/test/utils_test';
 
 const inputSelector = 'textarea';
-const addButtonSelector = '[aria-label="Add value"]';
-const clearButtonSelector = '[aria-label="Remove value"]';
 
 const inputValue = 'slot test';
 const defaultValue = '';
@@ -16,13 +18,7 @@ describe('control_slot.vue test', function () {
 
   const _mountWrapper = (props = {}) => {
     wrapper?.unmount();
-    wrapper = mount(DtcControlSlot, {
-      attachTo: document.body,
-      props,
-      slots: {
-        default: 'Label',
-      },
-    });
+    wrapper = mountClearableControl(DtcControlSlot, props);
     _setChildWrappers();
   };
 

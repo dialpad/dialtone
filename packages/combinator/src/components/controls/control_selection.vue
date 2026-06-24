@@ -192,6 +192,7 @@ import { DtIconClose, DtIconChevronsUpDown, DtIconSearch } from '@dialpad/dialto
 import DtcControlClearableShell from './control_clearable_shell.vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { resolveTokenValue } from '@/src/lib/tokens';
+import { useClearableState } from '@/src/lib/utils_vue';
 import { computed, nextTick, ref, watch } from 'vue';
 
 // Show the in-popover search only for lists long enough to be worth filtering.
@@ -289,12 +290,10 @@ const selectedOption = computed(() => {
   return options.value.find(o => String(o.value) === String(props.value));
 });
 
-const isEmpty = computed(() => props.value === null || props.value === undefined || props.value === '');
+const { isEmpty, clearDisabled } = useClearableState(props);
 
 // non-breaking space prevents label height collapse when no value is selected
 const selectedLabel = computed(() => isEmpty.value ? '\u00A0' : selectedOption.value?.label ?? '');
-
-const clearDisabled = computed(() => !props.clearable || props.required || props.disabled || isEmpty.value);
 
 const query = ref('');
 const searchInput = ref(null);

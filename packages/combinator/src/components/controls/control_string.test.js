@@ -1,11 +1,13 @@
 import DtcControlString from './control_string.vue';
 
 import { expect } from 'vitest';
-import { mount } from '@vue/test-utils';
+import {
+  mountClearableControl,
+  ADD_BUTTON_SELECTOR as addButtonSelector,
+  REMOVE_BUTTON_SELECTOR as clearButtonSelector,
+} from '@/src/lib/test/utils_test';
 
 const inputSelector = 'input';
-const addButtonSelector = '[aria-label="Add value"]';
-const clearButtonSelector = '[aria-label="Remove value"]';
 
 const inputValue = 'string test';
 
@@ -15,13 +17,7 @@ describe('control_string.vue test', function () {
 
   const _mountWrapper = (props = {}) => {
     wrapper?.unmount();
-    wrapper = mount(DtcControlString, {
-      attachTo: document.body,
-      props,
-      slots: {
-        default: 'Label',
-      },
-    });
+    wrapper = mountClearableControl(DtcControlString, props);
     _setChildWrappers();
   };
 

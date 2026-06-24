@@ -2,9 +2,11 @@ import DtcControlClearableShell from './control_clearable_shell.vue';
 
 import { expect } from 'vitest';
 import { mount } from '@vue/test-utils';
+import {
+  ADD_BUTTON_SELECTOR as addButtonSelector,
+  REMOVE_BUTTON_SELECTOR as removeButtonSelector,
+} from '@/src/lib/test/utils_test';
 
-const addButtonSelector = '[aria-label="Add value"]';
-const removeButtonSelector = '[aria-label="Remove value"]';
 const expandedContentSelector = '[data-qa="expanded-content"]';
 
 describe('control_clearable_shell.vue test', function () {

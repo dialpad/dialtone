@@ -1,12 +1,14 @@
 import DtcControlSegmented from './control_segmented.vue';
 
 import { expect } from 'vitest';
-import { mount } from '@vue/test-utils';
 import { nextTick } from 'vue';
+import {
+  mountClearableControl,
+  ADD_BUTTON_SELECTOR as addButtonSelector,
+  REMOVE_BUTTON_SELECTOR as clearButtonSelector,
+} from '@/src/lib/test/utils_test';
 
 const selections = ['100', '200', '300'];
-const addButtonSelector = '[aria-label="Add value"]';
-const clearButtonSelector = '[aria-label="Remove value"]';
 const segmentedControlSelector = '[data-qa="dt-segmented-control"]';
 const segmentedItemSelector = '[data-qa="dt-segmented-control-item"]';
 
@@ -15,16 +17,10 @@ describe('control_segmented.vue test', function () {
 
   const _mountWrapper = (props = {}) => {
     wrapper?.unmount();
-    wrapper = mount(DtcControlSegmented, {
-      attachTo: document.body,
-      props: {
-        value: null,
-        validValues: selections,
-        ...props,
-      },
-      slots: {
-        default: 'Label',
-      },
+    wrapper = mountClearableControl(DtcControlSegmented, {
+      value: null,
+      validValues: selections,
+      ...props,
     });
   };
 

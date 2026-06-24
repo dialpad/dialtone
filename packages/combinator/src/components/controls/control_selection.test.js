@@ -1,12 +1,15 @@
 import DtcControlSelection from './control_selection.vue';
 
 import { expect } from 'vitest';
-import { mount, shallowMount } from '@vue/test-utils';
+import { shallowMount } from '@vue/test-utils';
 import { nextTick } from 'vue';
+import {
+  mountClearableControl,
+  ADD_BUTTON_SELECTOR as addButtonSelector,
+  REMOVE_BUTTON_SELECTOR as clearButtonSelector,
+} from '@/src/lib/test/utils_test';
 
 const selections = ['selection1', 'selection2', 'selection3'];
-const addButtonSelector = '[aria-label="Add value"]';
-const clearButtonSelector = '[aria-label="Remove value"]';
 const anchorButtonSelector = '.d-w100p';
 
 const manySelections = [
@@ -140,16 +143,10 @@ describe('control_selection.vue test', function () {
 
     const mountBehaviorWrapper = (props = {}) => {
       behaviorWrapper?.unmount();
-      behaviorWrapper = mount(DtcControlSelection, {
-        attachTo: document.body,
-        props: {
-          value: null,
-          validValues: selections,
-          ...props,
-        },
-        slots: {
-          default: 'Label',
-        },
+      behaviorWrapper = mountClearableControl(DtcControlSelection, {
+        value: null,
+        validValues: selections,
+        ...props,
       });
     };
 

@@ -1,11 +1,13 @@
 import DtcControlNumber from './control_number.vue';
 
 import { expect } from 'vitest';
-import { mount } from '@vue/test-utils';
+import {
+  mountClearableControl,
+  ADD_BUTTON_SELECTOR as addButtonSelector,
+  REMOVE_BUTTON_SELECTOR as clearButtonSelector,
+} from '@/src/lib/test/utils_test';
 
 const inputSelector = 'input';
-const addButtonSelector = '[aria-label="Add value"]';
-const clearButtonSelector = '[aria-label="Remove value"]';
 
 const inputValue = 5;
 const defaultValue = DtcControlNumber.props.value.default;
@@ -16,13 +18,7 @@ describe('control_number.vue test', function () {
 
   const _mountWrapper = (props = {}) => {
     wrapper?.unmount();
-    wrapper = mount(DtcControlNumber, {
-      attachTo: document.body,
-      props,
-      slots: {
-        default: 'Label',
-      },
-    });
+    wrapper = mountClearableControl(DtcControlNumber, props);
     _setChildWrappers();
   };
 
