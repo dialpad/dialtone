@@ -261,6 +261,13 @@ describe('theme-to-mode config', () => {
       assert.ok(result.includes('TODO: review for v-dt-mode adoption'), 'TODO inserted');
     });
 
+    it('adds TODO comment before [data-dt-theme=\'invert\'] single-quoted CSS selector', () => {
+      const input = `[data-dt-theme='invert'] .d-card { box-shadow: none; }`;
+      const result = apply(input);
+      assert.ok(result.includes('[data-dt-mode=\'invert\']'), 'selector renamed');
+      assert.ok(result.includes('TODO: review for v-dt-mode adoption'), 'TODO inserted');
+    });
+
     it('adds TODO comment before [data-dt-theme=invert] unquoted CSS selector', () => {
       const input = `[data-dt-theme=invert] { background: red; }`;
       const result = apply(input);

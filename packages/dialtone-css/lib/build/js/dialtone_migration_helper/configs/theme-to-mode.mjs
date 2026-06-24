@@ -129,7 +129,7 @@ export default {
     //    to find regions needing v-dt-mode review).
     //    The optional prefix makes this idempotent (same pattern as expressions 1–3).
     {
-      from: /(?:\/\* TODO: review for v-dt-mode[^\n]*\n)?(?:\[data-dt-mode="invert"\]|\[data-dt-mode=invert\])/g,
+      from: /(?:\/\* TODO: review for v-dt-mode[^\n]*\n)?\[data-dt-mode=(["']?)invert\1\]/g,
       to: (match) => {
         if (match.startsWith('/* TODO:')) return match;
         return `/* TODO: review for v-dt-mode adoption — see /guides/migration/theme-to-mode/ */\n${match}`;
