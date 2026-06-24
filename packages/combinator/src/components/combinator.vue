@@ -633,7 +633,7 @@ export default {
   }
 
   &__controls {
-    inline-size: var(--dt-size-900);
+    inline-size: var(--dt-layout-450);
     max-inline-size: var(--dt-size-1000);
     flex-shrink: 0;
     max-block-size: var(--dt-size-950);

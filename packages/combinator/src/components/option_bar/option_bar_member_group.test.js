@@ -112,6 +112,38 @@ describe('option_bar_member_group.vue test', function () {
     });
   });
 
+  describe('Control ordering', function () {
+    it('Should render class props after non-class props', function () {
+      wrapper = mount(DtcOptionBarMemberGroup, {
+        props: {
+          component: testComponents[0],
+          members: [
+            { name: 'kind', label: 'kind' },
+            { name: 'labelClass', label: 'label-class' },
+            { name: 'startIconClass', label: 'start-icon-class' },
+            { name: 'outlined', label: 'outlined', types: ['boolean'] },
+            { name: 'text', label: 'text' },
+            { name: 'scrollbar', label: 'scrollbar' },
+            {
+              name: 'scrollbarContentClass',
+              label: 'scrollbar-content-class',
+              description: 'Only applies when scrollbar prop is set.',
+            },
+          ],
+          values: {},
+          controlSelector: () => [['base'], 'base'],
+        },
+      });
+
+      const labels = wrapper.findAllComponents({ name: 'DtcOptionBarControl' })
+        .map(control => control.props('label'));
+
+      expect(labels.indexOf('label-class')).toBeGreaterThan(labels.indexOf('text'));
+      expect(labels.indexOf('start-icon-class')).toBeGreaterThan(labels.indexOf('text'));
+      expect(labels.indexOf('scrollbar-content-class')).toBeGreaterThan(labels.indexOf('text'));
+    });
+  });
+
   describe('Exclusion rules', function () {
     it('Should keep members with matching hide rules visible but disabled', function () {
       wrapper = mount(DtcOptionBarMemberGroup, {

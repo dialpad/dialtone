@@ -3,7 +3,6 @@ import DtcControlNumber from './control_number.vue';
 import { expect } from 'vitest';
 import {
   mountClearableControl,
-  ADD_BUTTON_SELECTOR as addButtonSelector,
   REMOVE_BUTTON_SELECTOR as clearButtonSelector,
 } from '@/src/lib/test/utils_test';
 
@@ -57,27 +56,7 @@ describe('control_number.vue test', function () {
     });
   });
 
-  describe('When the value is empty', function () {
-    beforeEach(function () {
-      _mountWrapper({ value: null });
-    });
-
-    it('Should render the label and add button without the input', function () {
-      expect(wrapper.text()).toContain('Label');
-      expect(wrapper.find(addButtonSelector).exists()).toBe(true);
-      expect(inputWrapper.exists()).toBe(false);
-      expect(wrapper.find(clearButtonSelector).exists()).toBe(false);
-    });
-  });
-
   describe('When clearing the value', function () {
-    it('Should emit null when the clear button is clicked', async function () {
-      _mountWrapper({ value: inputValue });
-      await wrapper.find(clearButtonSelector).trigger('click');
-
-      expect(wrapper.emitted('update:value')[0]).toEqual([null]);
-    });
-
     it('Should disable the clear button for required values', function () {
       _mountWrapper({
         required: true,

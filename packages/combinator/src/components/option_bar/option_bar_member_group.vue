@@ -54,7 +54,7 @@ const PROP_PRIORITY = [
   'type', 'underline', 'selected', 'active', 'disabled',
   'deferSelection', 'readOnly', 'showClear', 'useDropdown',
   'showDivider', 'color', 'description',
-  'scrollbar', 'scrollbarContentClass', 'surface',
+  'scrollbar', 'surface',
   'borderRadius', 'borderColor',
   'borderWidth', 'borderWidthInline', 'borderWidthInlineEnd', 'borderWidthInlineStart',
   'borderWidthBlock', 'borderWidthBlockEnd', 'borderWidthBlockStart',
@@ -62,6 +62,10 @@ const PROP_PRIORITY = [
   'paddingBlock', 'paddingBlockEnd', 'paddingBlockStart',
   'inlineSize', 'minInlineSize', 'maxInlineSize', 'blockSize', 'maxBlockSize', 'minBlockSize',
   'shadow', 'overflow',
+];
+
+const CLASS_PROP_PRIORITY = [
+  'scrollbarContentClass',
   'dropdownListClass', 'popoverContentClass', 'popoverDialogClass', 'popoverFooterClass', 'popoverHeaderClass',
   'labelClass',
   'startIconClass', 'endIconClass', 'iconClass', 'leadingClass', 'trailingClass',
@@ -69,12 +73,20 @@ const PROP_PRIORITY = [
 
 const SLOT_PRIORITY = ['start', 'end', 'inlineStart', 'inlineEnd', 'blockStart', 'blockEnd', 'leading', 'trailing'];
 
+function isClassProp (member) {
+  return member?.name?.endsWith('Class');
+}
+
 function getPropTier (member) {
+  if (isClassProp(member)) {
+    const priorityIdx = CLASS_PROP_PRIORITY.indexOf(member.name);
+    return [4, priorityIdx === -1 ? CLASS_PROP_PRIORITY.length : priorityIdx];
+  }
+
   const priorityIdx = PROP_PRIORITY.indexOf(member.name);
   if (priorityIdx !== -1) return [0, priorityIdx];
   if (member.name?.startsWith('aria')) return [1, 0];
   if (member.types?.includes('boolean')) return [2, 0];
-  if (member.name?.endsWith('Class')) return [4, 0];
   return [3, 0];
 }
 
@@ -84,6 +96,17 @@ function getSlotTier (member) {
   const priorityIdx = SLOT_PRIORITY.indexOf(member.name);
   if (priorityIdx !== -1) return [2, priorityIdx];
   return [3, 0];
+}
+
+// Class props always sort into the trailing class tier, even when a description
+// ("Only applies when…") would otherwise nest them under a parent prop. Detaching
+// them from the ordering dependency map keeps grouping from pulling them forward.
+// The full dependency map is still passed to shouldHideProp, so a class control is
+// still hidden when its parent is off — only its sort position is decoupled here.
+function getOrderingDependencyMap (depMap, membersByName) {
+  return new Map(
+    [...depMap].filter(([child]) => !isClassProp(membersByName.get(child))),
+  );
 }
 
 const props = defineProps({
@@ -161,7 +184,9 @@ const dependencyMap = computed(() => buildDependencyMap(props.members));
 const memberMap = computed(() => {
   if (!props.members?.length) return reactive({});
   const depMap = dependencyMap.value;
-  const childSet = new Set(depMap.keys());
+  const membersByName = new Map(props.members.map(m => [m.name, m]));
+  const orderingDepMap = getOrderingDependencyMap(depMap, membersByName);
+  const childSet = new Set(orderingDepMap.keys());
 
   const getTier = props.memberGroup === 'slots' ? getSlotTier : getPropTier;
   const sortFn = (a, b) => {
@@ -179,10 +204,10 @@ const memberMap = computed(() => {
 
   // Build parent → children map, sorted alphabetically
   const childrenByParent = new Map();
-  for (const [child, parent] of depMap) {
+  for (const [child, parent] of orderingDepMap) {
     if (!childrenByParent.has(parent)) childrenByParent.set(parent, []);
     childrenByParent.get(parent).push(
-      props.members.find(m => m.name === child),
+      membersByName.get(child),
     );
   }
   childrenByParent.forEach(arr => arr.sort(sortFn));

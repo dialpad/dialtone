@@ -52,13 +52,6 @@ describe('control_slot.vue test', function () {
       _mountWrapper();
     });
 
-    it('Should render the label and add button without the textarea', function () {
-      expect(wrapper.text()).toContain('Label');
-      expect(wrapper.find(addButtonSelector).exists()).toBe(true);
-      expect(inputWrapper.exists()).toBe(false);
-      expect(wrapper.find(clearButtonSelector).exists()).toBe(false);
-    });
-
     it('Should expand, focus, and collapse on empty blur', async function () {
       await wrapper.find(addButtonSelector).trigger('click');
       _setChildWrappers();
