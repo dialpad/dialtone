@@ -156,7 +156,7 @@
 <script setup>
 import DtcOptionBar from './option_bar/option_bar.vue';
 import DtcRenderer from './renderer/renderer.vue';
-import { enumerateGroups } from '@/src/lib/utils';
+import { enumerateGroups, shouldDisableSlotClassProp } from '@/src/lib/utils';
 import { shouldDisable } from '@/src/lib/exclusion_rules';
 import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
 import { computed, nextTick, onErrorCaptured, reactive, ref, watch } from 'vue';
@@ -520,7 +520,8 @@ const disabledMembers = computed(() => {
   for (const member of (info.value.props ?? [])) {
     if (member.required) continue;
     if (shouldDisable(member.name, 'props', exclusions, propValues, slotValues) ||
-      shouldHideProp(member.name, depMap, propValues)) {
+      shouldHideProp(member.name, depMap, propValues) ||
+      shouldDisableSlotClassProp(member.name, slotValues)) {
       disabled.add(member.name);
     }
   }

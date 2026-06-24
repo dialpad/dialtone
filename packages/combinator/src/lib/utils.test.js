@@ -1,4 +1,4 @@
-import { supportsRootClass } from './utils';
+import { shouldDisableSlotClassProp, supportsRootClass } from './utils';
 
 import { expect } from 'vitest';
 
@@ -15,5 +15,25 @@ describe('utils.js test', function () {
 
   it('Should reject missing component names', function () {
     expect(supportsRootClass()).toBe(false);
+  });
+
+  describe('shouldDisableSlotClassProp', function () {
+    it('Should disable direct slot class props when their slot is empty', function () {
+      expect(shouldDisableSlotClassProp('startIconClass', { startIcon: '' })).toBe(true);
+    });
+
+    it('Should not disable direct slot class props when their slot has content', function () {
+      expect(shouldDisableSlotClassProp('startIconClass', {
+        startIcon: '<dt-icon-phone :size="iconSize" />',
+      })).toBe(false);
+    });
+
+    it('Should ignore class props without a direct slot dependency', function () {
+      expect(shouldDisableSlotClassProp('labelClass', { label: '' })).toBe(false);
+    });
+
+    it('Should ignore direct slot class props when the slot is not available', function () {
+      expect(shouldDisableSlotClassProp('iconClass', {})).toBe(false);
+    });
   });
 });

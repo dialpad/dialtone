@@ -45,7 +45,7 @@ import { controlMap } from '@/src/lib/control';
 import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
 import { shouldDisable, shouldClear, getDisabledValues } from '@/src/lib/exclusion_rules';
 import { isIconSlot } from '@/src/lib/icons';
-import { isClassProp } from '@/src/lib/utils';
+import { isClassProp, shouldDisableSlotClassProp } from '@/src/lib/utils';
 
 const ICON_SLOT_ORDER = ['startIcon', 'endIcon', 'blockStartIcon', 'blockEndIcon', 'icon'];
 
@@ -269,7 +269,10 @@ function extendMember (member) {
     || member.description?.startsWith('@deprecated');
 
   const isDisabled = !member.required
-    && shouldDisable(key, props.memberGroup, props.exclusionRules, props.propValues, props.slotValues);
+    && (
+      shouldDisable(key, props.memberGroup, props.exclusionRules, props.propValues, props.slotValues) ||
+      (props.memberGroup === 'props' && shouldDisableSlotClassProp(key, props.slotValues))
+    );
 
   const clearValue = !member.required
     && shouldClear(key, props.memberGroup, props.exclusionRules, props.propValues, props.slotValues);

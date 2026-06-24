@@ -116,6 +116,33 @@ export function isClassProp (member) {
   return member?.name?.endsWith('Class');
 }
 
+const SLOT_CLASS_PROP_DEPENDENCIES = new Map([
+  ['blockEndIconClass', 'blockEndIcon'],
+  ['blockStartIconClass', 'blockStartIcon'],
+  ['endIconClass', 'endIcon'],
+  ['iconClass', 'icon'],
+  ['leadingClass', 'leading'],
+  ['startIconClass', 'startIcon'],
+  ['trailingClass', 'trailing'],
+]);
+
+function hasValue (value) {
+  return typeof value === 'string' && value.trim().length > 0;
+}
+
+/**
+ * Returns true when a prop customizes a direct slot wrapper but that slot is empty.
+ *
+ * @param {string} propName - The prop name to check.
+ * @param {object} slotValues - Current slot values.
+ * @returns {boolean}
+ */
+export function shouldDisableSlotClassProp (propName, slotValues) {
+  const slotName = SLOT_CLASS_PROP_DEPENDENCIES.get(propName);
+  if (!slotName || !slotValues || !Object.prototype.hasOwnProperty.call(slotValues, slotName)) return false;
+  return !hasValue(slotValues[slotName]);
+}
+
 const UNSUPPORTED_ROOT_CLASS_COMPONENTS = new Set([
   'DtDropdown',
 ]);
