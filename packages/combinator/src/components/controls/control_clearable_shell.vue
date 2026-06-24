@@ -89,9 +89,11 @@ const props = defineProps({
 
 const emit = defineEmits(['add', 'clear']);
 
-const addDisabled = computed(() => !props.clearable || props.required || props.disabled || !props.empty);
+const baseDisabled = computed(() => !props.clearable || props.required || props.disabled);
 
-const removeDisabled = computed(() => !props.clearable || props.required || props.disabled || props.empty);
+const addDisabled = computed(() => baseDisabled.value || !props.empty);
+
+const removeDisabled = computed(() => baseDisabled.value || props.empty);
 
 const isCollapsed = computed(() => {
   return props.empty && !props.expanded && !props.required && (props.clearable || props.disabled);

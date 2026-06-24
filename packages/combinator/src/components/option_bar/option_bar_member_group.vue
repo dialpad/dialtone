@@ -49,8 +49,8 @@ import { isIconSlot } from '@/src/lib/icons';
 const ICON_SLOT_ORDER = ['startIcon', 'endIcon', 'blockStartIcon', 'blockEndIcon', 'icon'];
 
 const PROP_PRIORITY = [
-  'title', 'as', 'variant', 'family', 'label', 'importance', 'size', 'presence',
-  'placement', 'tone', 'align', 'density', 'strength', 'kind',
+  'title', 'as', 'variant', 'kind', 'size', 'family', 'label', 'importance', 'presence',
+  'placement', 'tone', 'density', 'strength', 'align',
   'type', 'underline', 'selected', 'active', 'disabled',
   'deferSelection', 'readOnly', 'showClear', 'useDropdown',
   'showDivider', 'color', 'description',

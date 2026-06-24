@@ -1,6 +1,7 @@
 import { expect } from 'vitest';
 import { shouldExclude, shouldDisable, getDisabledValues } from './exclusion_rules';
 import variantsBadge from '@/src/variants/variants_badge';
+import variantsText from '@/src/variants/variants_text';
 
 const EQUALITY_RULE = { when: { kind: 'body' }, disableValues: { props: { size: ['500'] } } };
 const PREDICATE_RULE = { when: { kind: v => v !== 'headline' }, disableValues: { props: { size: ['500'] } } };
@@ -54,6 +55,18 @@ describe('exclusion_rules', function () {
 
     it('should ignore rules that only have hide', function () {
       expect(getDisabledValues('decoration', [HIDE_RULE], { kind: 'count' }).size).toBe(0);
+    });
+
+    it('should disable non-legacy headline sizes for DtText headline kind', function () {
+      const disabled = getDisabledValues('size', variantsText.exclusions, {
+        variant: undefined,
+        kind: 'headline',
+      });
+
+      ['50', '75', '125', '150', '250', '350', '450', '550', '650', '750', '800']
+        .forEach(size => expect(disabled.has(size)).toBe(true));
+      ['100', '200', '300', '400', '500', '600', '700']
+        .forEach(size => expect(disabled.has(size)).toBe(false));
     });
   });
 

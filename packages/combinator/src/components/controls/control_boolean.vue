@@ -43,8 +43,7 @@
 </template>
 
 <script setup>
-import { DtButton, DtStack, DtText, DtToggle } from '@dialpad/dialtone-vue';
-import { DtIconDash } from '@dialpad/dialtone-icons/vue';
+import { DtStack, DtText, DtToggle } from '@dialpad/dialtone-vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed } from 'vue';
 

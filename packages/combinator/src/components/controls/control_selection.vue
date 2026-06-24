@@ -266,24 +266,23 @@ function onInput (e) {
 }
 
 const options = computed(() => {
-  const valueOptions = props.validValues?.map(selection => {
+  return props.validValues?.map(selection => {
     const optionDisabled = props.disabledValues?.has(String(selection)) ?? false;
     const rawResolved = props.tokenCategory
       ? resolveTokenValue(props.tokenCategory, selection, props.propValues)
       : null;
     // Show color swatches even for disabled options; hide non-color values (misleading for disabled sizes)
     const resolved = optionDisabled && rawResolved && !isColor(rawResolved) ? null : rawResolved;
-    const previewComponent = props.generatePreviewComponent?.(selection) ?? null;
+    const label = props.generateLabel(selection);
     return {
       value: selection,
-      label: props.generateLabel(selection),
+      label,
       resolved,
       disabled: optionDisabled,
-      previewComponent,
+      previewComponent: props.generatePreviewComponent?.(selection) ?? null,
+      searchCorpus: `${label} ${resolved ?? ''}`.toLowerCase(),
     };
   }) ?? [];
-
-  return valueOptions;
 });
 
 const selectedOption = computed(() => {
@@ -305,7 +304,7 @@ const showSearch = computed(() => options.value.length > SEARCH_THRESHOLD);
 const filteredOptions = computed(() => {
   const q = query.value.trim().toLowerCase();
   if (!q) return options.value;
-  return options.value.filter(o => `${o.label} ${o.resolved ?? ''}`.toLowerCase().includes(q));
+  return options.value.filter(o => o.searchCorpus.includes(q));
 });
 
 /**

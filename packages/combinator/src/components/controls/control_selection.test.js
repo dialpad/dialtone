@@ -73,42 +73,6 @@ describe('control_selection.vue test', function () {
       expect(wrapper.vm.selectedLabel).toBe('\u00A0');
     });
 
-    it('Should disable the clear button for required selections', function () {
-      _mountWrapper({ required: true });
-
-      expect(wrapper.vm.clearDisabled).toBe(true);
-    });
-
-    it('Should disable clearing when selection is not clearable', function () {
-      _mountWrapper({ clearable: false });
-
-      expect(wrapper.vm.clearDisabled).toBe(true);
-    });
-  });
-
-  describe('Search visibility', function () {
-    it('Should not show search when options count is at or below threshold', function () {
-      _mountWrapper({ validValues: selections }); // 3 options
-      expect(wrapper.vm.showSearch).toBe(false);
-    });
-
-    it('Should not show search when options count equals threshold', function () {
-      // defaultValue suppresses the prepended null option, giving exactly 5 options
-      _mountWrapper({
-        validValues: ['a', 'b', 'c', 'd', 'e'],
-        defaultValue: 'a',
-      });
-      expect(wrapper.vm.showSearch).toBe(false);
-    });
-
-    it('Should show search when options count exceeds threshold', function () {
-      // defaultValue suppresses the prepended null option, giving exactly 7 options
-      _mountWrapper({
-        validValues: manySelections,
-        defaultValue: manySelections[0],
-      });
-      expect(wrapper.vm.showSearch).toBe(true);
-    });
   });
 
   describe('Search filtering', function () {

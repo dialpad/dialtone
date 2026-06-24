@@ -27,6 +27,10 @@ export default {
       disableValues: { props: { size: ['50', '75', '125', '150', '250', '350', '450', '500', '550', '600', '650', '700', '750', '800' ] } },
     },
     {
+      when: { variant: v => !v, kind: 'headline' },
+      disableValues: { props: { size: ['50', '75', '125', '150', '250', '350', '450', '550', '650', '750', '800' ] } },
+    },
+    {
       when: { size: v => ['500', '600', '700'].includes(String(v)) },
       disableValues: { props: { kind: ['body', 'label', 'code'] } },
     },
