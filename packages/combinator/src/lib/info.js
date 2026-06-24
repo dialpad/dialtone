@@ -132,6 +132,7 @@ function addRootClassAttribute (info, attributes) {
 
   attributes.unshift({
     name: 'class',
+    description: 'Adds a class to the root element of this component',
     type: {
       name: 'string',
     },
