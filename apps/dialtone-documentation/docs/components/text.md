@@ -1,13 +1,13 @@
 ---
 title: Text
 description: Consistent typography styling through text variants and raw font-size tokens.
-status: new
+status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-text--default
 keywords:
   [
-    'dt-box',
-    'DtBox',
+    'dt-text',
+    'DtText',
     'typography',
     'size',
     'tone',
@@ -40,15 +40,16 @@ Use in place of manually applying Text Styles. Examples of manual application **
 - Prefer `DtText` over individual typography utility classes to keep implementations aligned with token updates.
 - Use the default slot for rich content. The `text` prop provides a simple fallback string when no slot content is present.
 - Choose the `as` prop to match the semantic HTML element (e.g., `h1`, `label`, `p`).
-- Use `variant` for complete text compositions and `size` for raw font-size tokens.
-- All properties are optional, as they layer in on top of each other.
+- Use the default `body-md` variant for plain body copy; set `variant` when a different complete text composition is needed.
+- Use `size` by itself for a raw font-size override on the default `body-md` variant, or with `variant` when a different composition is needed.
+- Most properties are optional, as they layer in on top of each other.
 
 <dialtone-usage>
 <template #do>
 
 - Replace multiple `d-` typography classes with a single `dt-text` instance.
 - Pick the smallest `variant` that conveys the desired hierarchy.
-- Use `size` when you only need to set a token-backed font size.
+- Use `size` when the composition is right but the font size needs a token-backed override.
 - Use `tone` for semantic color tokens instead of standalone `d-fc-*` classes.
 
 </template>
@@ -65,7 +66,7 @@ Use in place of manually applying Text Styles. Examples of manual application **
 
 ### Variant
 
-Use `variant` to apply a complete text composition, including font family, font size, font weight, and line height. Default will inherit styles from the parent.
+Use `variant` to apply a complete text composition, including font family, font size, font weight, and line height. The default variant is `body-md`.
 
 ```vue demo
 <!-- @wrapper -->
@@ -78,13 +79,13 @@ Use `variant` to apply a complete text composition, including font family, font 
   <dt-text variant="body-md">Body</dt-text>
   <dt-text variant="label-md">Label</dt-text>
   <dt-text variant="code-md">Code</dt-text>
-  <dt-text>Default (inherits)</dt-text>
+  <dt-text>Default body-md</dt-text>
 </dt-stack>
 ```
 
 ### Size
 
-Use `size` to apply a raw font-size token. `size` can be used by itself, or with `variant` to override only the font-size portion of the composition.
+Use `size` to apply a raw font-size token while keeping the rest of the composition. If `variant` is omitted, `size` overrides the default `body-md` variant. With legacy `kind`, `size` keeps its historical composition behavior.
 
 <dt-stack class="d-w100p d-ba d-bar-300 d-of-auto">
   <table class="d-w100p d-table">
@@ -108,11 +109,9 @@ Use `size` to apply a raw font-size token. `size` can be used by itself, or with
 </dt-stack>
 
 ```vue code-only
-<dt-text size="200">Default body-size text</dt-text>
 <dt-text
-  variant="body-lg"
   size="300"
->Body composition with a 20px font-size override</dt-text>
+>Default body-md composition with a 20px font-size override</dt-text>
 ```
 
 ### Legacy kind
@@ -127,7 +126,7 @@ The `kind` prop remains supported for backward compatibility. When `kind` is pre
 <dt-text variant="body-md">Body medium composition</dt-text>
 ```
 
-T-shirt sizes such as `xs`, `sm`, `md`, and `lg` belong in `variant` names for new usage. Numeric `size` values are raw font-size tokens unless they are being used with legacy `kind`.
+T-shirt sizes such as `xs`, `sm`, `md`, and `lg` belong in `variant` names for new composition usage. Numeric `size` values are raw font-size tokens on the default or explicit `variant`; with legacy `kind`, they keep the historical composition mapping.
 
 ### Numeric
 
