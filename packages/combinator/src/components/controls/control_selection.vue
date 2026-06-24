@@ -26,6 +26,7 @@
       navigation-type="arrow-keys"
       placement="bottom-start"
       content-width="anchor"
+      list-class="d-m-0"
       :open="dropdownOpen"
       @update:open="onOpenUpdate"
       @opened="onOpened"
@@ -81,16 +82,24 @@
         <dt-box
           v-if="showSearch"
           surface="overlay"
-          padding-block-end="50"
           border-width-block-end="100"
           border-color="subtle"
+          padding="25"
         >
           <dt-input
             ref="searchInput"
             v-model="query"
+            size="200"
             type="search"
             aria-label="Search"
             placeholder="Search"
+            input-wrapper-class="
+              d-bgc-transparent
+              d-px-1
+              d-baw0
+              d-bar-0
+              d-bs-none
+            "
             @keydown="onSearchKeydown($event, close)"
           >
             <template #startIcon="{ iconSize }">
@@ -115,55 +124,62 @@
           </dt-input>
         </dt-box>
         <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
-        <div
-          class="d-of-y-auto d-hmx-400 d-p-50"
+        <dt-box
+          max-block-size="400"
+          padding="50"
+          class="d-of-y-auto"
           @keydown.up="onListArrowUp"
         >
-          <dt-list-item
-            v-for="option in filteredOptions"
-            :key="option.value"
-            element-type="div"
-            role="menuitem"
-            navigation-type="arrow-keys"
-            :class="{ 'd-o50 d-pe-none': option.disabled, 'd-bgc-moderate-opaque': option.value === value }"
-            :aria-disabled="option.disabled || undefined"
-            @click="!option.disabled && (onInput(option.value), close())"
-          >
-            <dt-stack
-              direction="row"
-              gap="100"
-              align="baseline"
-              class="d-w100p"
+          <dt-stack gap="50">
+            <dt-list-item
+              v-for="option in filteredOptions"
+              :key="option.value"
+              element-type="div"
+              role="menuitem"
+              navigation-type="arrow-keys"
+              :class="[
+                'd-m-0',
+                { 'd-o50 d-pe-none': option.disabled, 'd-bgc-moderate-opaque': option.value === value },
+              ]"
+              :aria-disabled="option.disabled || undefined"
+              @click="!option.disabled && (onInput(option.value), close())"
             >
-              <span
-                v-if="option.resolved && isColor(option.resolved)"
-                class="d-ba d-bc-subtle d-bar-circle d-as-center"
-                :style="swatchStyle(option.resolved)"
-              />
-              <component
-                :is="option.previewComponent"
-                v-if="option.previewComponent"
-                size="400"
-                class="d-as-center d-fc-tertiary"
-              />
-              <span>{{ option.label }}</span>
-              <dt-text
-                v-if="option.resolved && !isColor(option.resolved)"
-                kind="body"
-                size="100"
-                tone="muted"
-                class="d-mis-auto"
+              <dt-stack
+                direction="row"
+                gap="100"
+                align="baseline"
+                class="d-w100p"
               >
-                {{ option.resolved }}
-              </dt-text>
-            </dt-stack>
-          </dt-list-item>
+                <span
+                  v-if="option.resolved && isColor(option.resolved)"
+                  class="d-ba d-bc-subtle d-bar-circle d-as-center"
+                  :style="swatchStyle(option.resolved)"
+                />
+                <component
+                  :is="option.previewComponent"
+                  v-if="option.previewComponent"
+                  size="400"
+                  class="d-as-center d-fc-tertiary"
+                />
+                <span>{{ option.label }}</span>
+                <dt-text
+                  v-if="option.resolved && !isColor(option.resolved)"
+                  kind="body"
+                  size="100"
+                  tone="muted"
+                  class="d-mis-auto"
+                >
+                  {{ option.resolved }}
+                </dt-text>
+              </dt-stack>
+            </dt-list-item>
+          </dt-stack>
           <dt-empty-state
             v-if="!filteredOptions.length"
             size="200"
             body-text="No matches"
           />
-        </div>
+        </dt-box>
       </template>
     </dt-dropdown>
   </dtc-control-clearable-shell>

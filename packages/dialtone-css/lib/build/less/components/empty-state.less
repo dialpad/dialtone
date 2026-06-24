@@ -7,7 +7,6 @@
 //
 //  TABLE OF CONTENTS
 //  • BASE STYLE
-
 //  @@  BASE STYLE
 //  ----------------------------------------------------------------------------
 @layer dialtone.components {
@@ -41,6 +40,10 @@
   &__header-text {
     text-wrap: balance;
     max-inline-size: 52ch;
+
+    &:empty {
+      display: none;
+    }
   }
 
   &__body-text {
