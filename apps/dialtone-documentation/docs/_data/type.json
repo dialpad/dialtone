@@ -15,10 +15,6 @@
     {
       "category": "code",
       "size": ["lg", "md", "sm", "xs"]
-    },
-    {
-      "category": "code",
-      "size": ["lg", "md", "sm", "xs"]
     }
   ],
   "typographyStyles": [

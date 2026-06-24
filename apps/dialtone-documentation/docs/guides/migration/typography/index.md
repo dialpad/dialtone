@@ -11,7 +11,7 @@ status: ready
 
 - Replace `d-headline--*`, `d-body--*`, `d-label--*`, `d-code--md`, `d-helper--*` on `<p>`, `<span>`, `<div>`, `<h1>`–`<h6>`, and `<label>` with `<dt-text>`.
 - The migration tool currently emits legacy-compatible `kind="…" size="…"`. For new manual code, prefer `variant="…"` for complete text compositions.
-- Raw font-size utilities like `d-fs-200` can now be replaced with `size="200"` when you only need the font-size token.
+- Raw font-size utilities like `d-fs-200` can now be replaced with `size="200"` when the default `body-md` composition is correct, or with `variant="…" size="200"` when you need a different composition plus an exact font-size override.
 - Override utilities like `d-fw-*`, `d-fc-*`, `d-lh-*`, `d-truncate`, and `d-ta-*` map to `strength`, `tone`, `density`, `truncate`, and `align` props.
 - One command does the migration: `npx dialtone-migrate-typography`.
 
@@ -140,7 +140,7 @@ The tool is ideal for projects with many text elements using utility classes. Fo
 `dialtone-migrate-typography` scans `.vue` and `.html` files for legacy typography utility classes and converts them to `<dt-text>`. It is included with `@dialpad/dialtone-css`.
 
 > [!INFO] Tool output and the new DtText API
-> The current migration tool emits legacy-compatible `kind + size` props for composed typography classes. That output is intentionally still supported. If you are hand-authoring code or revisiting migrated output, prefer `variant` for composed text styles and use numeric `size` only for raw font-size token overrides.
+> The current migration tool emits legacy-compatible `kind + size` props for composed typography classes. That output is intentionally still supported. If you are hand-authoring code or revisiting migrated output, prefer `variant` for composed text styles and use numeric `size` by itself for a raw font-size override on the default `body-md` variant, or with `variant` for other compositions.
 
 ### What the Tool Migrates
 
@@ -178,8 +178,8 @@ Patterns the tool can't safely auto-migrate are surfaced with an inline `<!-- dt
 | `<!-- dt-text-migrate: review nested span -->` | A child `<span>` with directives, events, or extra attributes that can't be safely collapsed into a nested `<dt-text>` | Migrate the child manually, or keep it as a plain `<span>` inside the parent `<dt-text>` |
 | `<!-- dt-text-migrate: review dynamic class -->` | `:class` / `v-bind:class` bindings containing typography utilities | Convert conditionally bound utilities to conditional props (e.g., `:strength="isBold ? 'bold' : 'normal'"`) |
 | `<!-- dt-text-migrate: review conflicting class -->` | A utility class clashes with an explicit prop already on the element (e.g., `<dt-text strength="bold" class="d-fw-normal">`) | Remove the redundant class; keep the explicit prop |
-| `<!-- dt-text-migrate: review d-fs-N (on-menu — maps to …) -->` | A raw `d-fs-N` font-size class whose size lines up with the tool's legacy `kind`/`size` mapping. The comment names the suggested legacy props. | Prefer replacing the class with `size="N"` when you only need the font-size token, or combine `variant="…"` with `size="N"` when you need a composed style plus an exact font-size override |
-| `<!-- dt-text-migrate: review d-fs-N (off-menu — no clean DtText equivalent, keep class) -->` | A raw `d-fs-N` outside the tool's legacy composed-style mapping | If `N` is a Dialtone font-size token, replace the class with `size="N"`. Keep the utility only when the value is not a supported DtText size token or the class must stay on a non-text wrapper |
+| `<!-- dt-text-migrate: review d-fs-N (on-menu — maps to …) -->` | A raw `d-fs-N` font-size class whose size lines up with the tool's legacy `kind`/`size` mapping. The comment names the suggested legacy props. | Use the suggested legacy `kind + size` props, use `size="N"` when default `body-md` is correct, or combine `variant="…"` with `size="N"` when you need another composition plus an exact font-size override |
+| `<!-- dt-text-migrate: review d-fs-N (off-menu — no clean DtText equivalent, keep class) -->` | A raw `d-fs-N` outside the tool's legacy composed-style mapping | If `N` is a Dialtone font-size token, use `size="N"` when default `body-md` is correct, or choose a `variant` and pair it with `size="N"`. Keep the utility when there is no clear text composition, the value is unsupported, or the class must stay on a non-text wrapper |
 | `<!-- dt-text-migrate: legacy heading — as=… \| kind=… \| size: … \| strength=… \| tone=… -->` | The hand-rolled heading pattern: an element with both `d-fw-*` and `d-fs-N` (no composed class). The comment carries a full proposed migration; `kind` is `headline` for `<h1>`–`<h6>` and `kind=body\|label\|headline (VERIFY)` for ambiguous tags. | Apply the proposed props from the comment; for non-heading tags, confirm the right `kind` before applying |
 
 ### How the Tool Works
@@ -390,13 +390,13 @@ npx eslint --fix "./src/**/*.vue"
 
 ### Raw Font-Size Utilities
 
-Use the `size` prop for raw font-size token replacement. `size` can stand alone or override the font-size portion of a `variant`.
+Use the `size` prop for raw font-size token replacement. By itself, `size` overrides the default `body-md` variant. Pair it with `variant` when you need a different complete text composition, or with legacy `kind` while migrating older code.
 
 ```html
 <!-- Before -->
 <p class="d-fs-200">Body text</p>
 
-<!-- After: font-size token only -->
+<!-- After: default body-md composition plus exact font-size token -->
 <dt-text as="p" size="200">Body text</dt-text>
 
 <!-- After: composed style plus exact font-size override -->

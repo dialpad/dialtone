@@ -8,7 +8,8 @@ Headline sizes `xxl` and `xxxl` were renamed to `2xl` and `3xl`. For `DtText`, t
 
 This rule flags:
 
-- `size="xxl"` on `dt-text` / `DtText` -> `variant="headline-2xl"`
+- `size="xxl"` on `dt-text` / `DtText` without `kind="headline"` -> manual error
+- `kind="headline" size="xxl"` on `dt-text` / `DtText` -> `variant="headline-2xl"`
 - `kind="headline" size="xxxl"` on `dt-text` / `DtText` -> `variant="headline-3xl"`
 - `size="xxxl"` on non-DtText components -> `size="3xl"`
 - `d-text-headline--xxl` -> `d-text-headline--2xl`
