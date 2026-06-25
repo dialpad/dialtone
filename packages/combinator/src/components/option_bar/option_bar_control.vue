@@ -207,6 +207,7 @@ const controlArgs = computed(() => {
     value: displayValue,
     disabled: props.locked || props.disabled,
     tags: props.tags,
+    label: controlLabel.value,
     ...props.args,
     required: props.required,
   };

@@ -2,8 +2,8 @@ import supportedComponents from '/src/supported_components.json';
 import * as dialtone from '@dialpad/dialtone-vue';
 import { mount } from '@vue/test-utils';
 
-export const ADD_BUTTON_SELECTOR = '[aria-label="Add value"]';
-export const REMOVE_BUTTON_SELECTOR = '[aria-label="Remove value"]';
+export const ADD_BUTTON_SELECTOR = '[aria-label^="Add value"]';
+export const REMOVE_BUTTON_SELECTOR = '[aria-label^="Remove value"]';
 
 /**
  * Uses the names of supported components from the 'supported_components.json'

@@ -1,5 +1,6 @@
 <template>
   <dtc-control-clearable-shell
+    :label="label"
     :empty="isEmpty"
     :expanded="expanded"
     :disabled="disabled"
@@ -52,6 +53,10 @@ import { useClearableState } from '@/src/lib/utils_vue';
 import { computed, nextTick, ref, watch } from 'vue';
 
 const props = defineProps({
+  label: {
+    type: String,
+    default: '',
+  },
   value: {
     type: undefined,
     required: true,

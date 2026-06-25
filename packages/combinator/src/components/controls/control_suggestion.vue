@@ -12,6 +12,7 @@
       <template #input="{ inputProps, onInput }">
         <dtc-control-string
           v-bind="inputProps"
+          :label="label"
           :value="value"
           :warning="warning"
           :disabled="disabled"
@@ -65,6 +66,10 @@ import { DtIconChevronDown } from '@dialpad/dialtone-icons/vue';
 const WARNING_MESSAGE = 'Unexpected value';
 
 const props = defineProps({
+  label: {
+    type: String,
+    default: '',
+  },
   value: {
     type: String,
     required: true,

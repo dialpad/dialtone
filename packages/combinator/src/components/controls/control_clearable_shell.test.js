@@ -17,6 +17,7 @@ describe('control_clearable_shell.vue test', function () {
     wrapper = mount(DtcControlClearableShell, {
       props: {
         empty: true,
+        label: 'Label Class',
         ...props,
       },
       slots: {
@@ -52,5 +53,15 @@ describe('control_clearable_shell.vue test', function () {
     expect(removeButton.exists()).toBe(true);
     expect(removeButton.attributes('disabled')).toBeDefined();
     expect(removeButton.classes()).not.toContain('d-o0');
+  });
+
+  it('Should include the control label in add and remove button accessible names', function () {
+    _mountWrapper();
+
+    expect(wrapper.find(addButtonSelector).attributes('aria-label')).toBe('Add value for Label Class');
+
+    _mountWrapper({ empty: false });
+
+    expect(wrapper.find(removeButtonSelector).attributes('aria-label')).toBe('Remove value for Label Class');
   });
 });

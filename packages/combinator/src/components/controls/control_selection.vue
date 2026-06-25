@@ -1,5 +1,6 @@
 <template>
   <dtc-control-clearable-shell
+    :label="label"
     :empty="isEmpty"
     :expanded="expanded"
     :disabled="disabled"
@@ -199,6 +200,10 @@ import { computed, nextTick, ref, watch } from 'vue';
 const SEARCH_THRESHOLD = 5;
 
 const props = defineProps({
+  label: {
+    type: String,
+    default: '',
+  },
   value: {
     type: undefined,
     required: true,

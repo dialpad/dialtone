@@ -1,5 +1,6 @@
 <template>
   <dtc-control-clearable-shell
+    :label="label"
     :empty="isEmpty"
     :expanded="expanded"
     :disabled="disabled"
@@ -53,6 +54,10 @@ import { computed } from 'vue';
 import { useClearableInput } from '@/src/lib/utils_vue';
 
 const props = defineProps({
+  label: {
+    type: String,
+    default: '',
+  },
   value: {
     type: undefined,
     default: '',

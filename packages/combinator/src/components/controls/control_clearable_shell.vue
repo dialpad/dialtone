@@ -21,7 +21,7 @@
     >
       <dt-button
         v-dt-tooltip="`Add`"
-        aria-label="Add value"
+        :aria-label="addAriaLabel"
         importance="clear"
         :size="100"
         kind="muted"
@@ -51,7 +51,7 @@
       >
         <dt-button
           v-dt-tooltip="`Remove`"
-          aria-label="Remove value"
+          :aria-label="removeAriaLabel"
           importance="clear"
           :size="100"
           kind="muted"
@@ -73,6 +73,10 @@ import { DtIconMinus, DtIconPlus } from '@dialpad/dialtone-icons/vue';
 import { computed } from 'vue';
 
 const props = defineProps({
+  label: {
+    type: String,
+    default: '',
+  },
   empty: {
     type: Boolean,
     required: true,
@@ -106,6 +110,12 @@ const baseDisabled = computed(() => !props.clearable || props.required || props.
 const addDisabled = computed(() => baseDisabled.value || !props.empty);
 
 const removeDisabled = computed(() => baseDisabled.value || props.empty);
+
+const labelContext = computed(() => props.label ? ` for ${props.label}` : '');
+
+const addAriaLabel = computed(() => `Add value${labelContext.value}`);
+
+const removeAriaLabel = computed(() => `Remove value${labelContext.value}`);
 
 const isCollapsed = computed(() => {
   return props.empty && !props.expanded && !props.required && (props.clearable || props.disabled);
