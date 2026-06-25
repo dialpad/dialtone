@@ -36,7 +36,7 @@ const NEGATIVE_SPACING_MAP = {
   32: '400', 48: '600', 64: '800',
 };
 
-// Layout sizes for margin/padding (96px, 128px use layout tokens)
+// Layout sizes for sizing (96px, 128px use layout tokens)
 const SPACING_LAYOUT_MAP = {
   96: '150', 128: '200',
 };
@@ -77,8 +77,8 @@ export default {
     'Migrates pixel-based utility class names to token-stop-based names.\n' +
     '- Sizing: d-h16 → d-h-25, d-w64 → d-w-100, d-hmn96 → d-hmn-150\n' +
     '- Off-scale sizing: d-w1 → d-w-1px, d-h24 → d-h-24px (pixel-indexed exceptions)\n' +
-    '- Margin: d-m8 → d-m-100, d-mt16 → d-mt-200, d-mtn8 → d-mt-n100\n' +
-    '- Padding: d-p8 → d-p-100, d-pt16 → d-pt-200\n' +
+    '- Margin: d-m8 → d-m-100, d-mt16 → d-mt-200, d-mtn8 → d-mt-n100 (values ≥ 96px left unchanged)\n' +
+    '- Padding: d-p8 → d-p-100, d-pt16 → d-pt-200 (values ≥ 96px left unchanged — no layout-token padding class exists)\n' +
     '- Gap: d-g8 → d-g-100, d-rg16 → d-rg-200\n' +
     '- Position: d-t8 → d-t-100, d-tn8 → d-t-n100\n' +
     '- Border-radius all: d-bar6 → d-bar-350, d-bar24 → d-bar-550\n' +
@@ -134,18 +134,13 @@ export default {
     ]),
 
     // ── Margin: d-m{px} → d-m-{spacing-stop} ─────────────────────────────
-    ...['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my'].flatMap(prefix => [
-      // Spacing sizes (0-64px)
-      {
-        from: buildClassRegex(`d-${prefix}`, SPACING_MAP),
-        to: (match, pre, px, post) => `${pre}d-${prefix}-${SPACING_MAP[px]}${post}`,
-      },
-      // Layout sizes (96, 128px)
-      {
-        from: buildClassRegex(`d-${prefix}`, SPACING_LAYOUT_MAP),
-        to: (match, pre, px, post) => `${pre}d-${prefix}-${SPACING_LAYOUT_MAP[px]}${post}`,
-      },
-    ]),
+    // Only spacing-scale values (0-64px) are migrated. Values ≥ 96px (e.g. d-mt96)
+    // are left unchanged: token-stop margin classes use spacing tokens only, so
+    // d-mt-150 resolves to --dt-spacing-150 (12px), not --dt-layout-150 (96px).
+    ...['m', 'mt', 'mr', 'mb', 'ml', 'mx', 'my'].map(prefix => ({
+      from: buildClassRegex(`d-${prefix}`, SPACING_MAP),
+      to: (match, pre, px, post) => `${pre}d-${prefix}-${SPACING_MAP[px]}${post}`,
+    })),
 
     // ── Negative margin: d-m{dir}n{px} → d-m{dir}-n{spacing-stop} ────────
     ...['mt', 'mr', 'mb', 'ml', 'mx', 'my', 'm'].map(prefix => ({
@@ -154,16 +149,13 @@ export default {
     })),
 
     // ── Padding: d-p{px} → d-p-{spacing-stop} ────────────────────────────
-    ...['p', 'pt', 'pr', 'pb', 'pl', 'px', 'py'].flatMap(prefix => [
-      {
-        from: buildClassRegex(`d-${prefix}`, SPACING_MAP),
-        to: (match, pre, px, post) => `${pre}d-${prefix}-${SPACING_MAP[px]}${post}`,
-      },
-      {
-        from: buildClassRegex(`d-${prefix}`, SPACING_LAYOUT_MAP),
-        to: (match, pre, px, post) => `${pre}d-${prefix}-${SPACING_LAYOUT_MAP[px]}${post}`,
-      },
-    ]),
+    // Only spacing-scale values (0-64px) are migrated. Values ≥ 96px (e.g. d-pt96)
+    // are left unchanged: token-stop padding classes use spacing tokens only, so
+    // d-pt-150 resolves to --dt-spacing-150 (12px), not --dt-layout-150 (96px).
+    ...['p', 'pt', 'pr', 'pb', 'pl', 'px', 'py'].map(prefix => ({
+      from: buildClassRegex(`d-${prefix}`, SPACING_MAP),
+      to: (match, pre, px, post) => `${pre}d-${prefix}-${SPACING_MAP[px]}${post}`,
+    })),
 
     // ── Gap: d-g{px} → d-g-{spacing-stop} ────────────────────────────────
     ...['g', 'rg', 'cg'].map(prefix => ({
@@ -172,17 +164,13 @@ export default {
     })),
 
     // ── Position: d-t{px} → d-t-{spacing-stop} ───────────────────────────
-    ...['t', 'r', 'b', 'l', 'x', 'y', 'all'].flatMap(prefix => [
-      {
-        from: buildClassRegex(`d-${prefix}`, SPACING_MAP),
-        to: (match, pre, px, post) => `${pre}d-${prefix}-${SPACING_MAP[px]}${post}`,
-      },
-      // Layout position sizes (96px)
-      {
-        from: buildClassRegex(`d-${prefix}`, SPACING_LAYOUT_MAP),
-        to: (match, pre, px, post) => `${pre}d-${prefix}-${SPACING_LAYOUT_MAP[px]}${post}`,
-      },
-    ]),
+    // Only spacing-scale values (0-64px) are migrated. Values ≥ 96px (e.g. d-t96)
+    // are left unchanged: token-stop position classes use spacing tokens only, so
+    // d-t-150 resolves to --dt-spacing-150 (12px), not --dt-layout-150 (96px).
+    ...['t', 'r', 'b', 'l', 'x', 'y', 'all'].map(prefix => ({
+      from: buildClassRegex(`d-${prefix}`, SPACING_MAP),
+      to: (match, pre, px, post) => `${pre}d-${prefix}-${SPACING_MAP[px]}${post}`,
+    })),
 
     // ── Negative position: d-{dir}n{px} → d-{dir}-n{spacing-stop} ────────
     ...['t', 'r', 'b', 'l', 'x', 'y', 'all'].map(prefix => ({
