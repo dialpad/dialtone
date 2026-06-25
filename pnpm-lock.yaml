@@ -278,7 +278,7 @@ importers:
         version: 15.5.2(supports-color@8.1.1)
       markdownlint:
         specifier: ^0.38.0
-        version: 0.38.0(supports-color@8.1.1)
+        version: 0.38.0
       markdownlint-cli:
         specifier: ^0.45.0
         version: 0.45.0
@@ -1358,30 +1358,26 @@ packages:
       postcss-selector-parser: ^7.0.0
 
   '@dialpad/conventional-changelog-angular@1.1.1':
-    resolution: {integrity: sha512-qUT8qgaypYlGPXDO5HqYdq0Q670fqAxr5AaJUo3AOzBJ6IRTcG48kXo6Z9GRVgqrL21jd6MS+fx5nu1wKM0W0w==}
+    resolution: {integrity: sha512-TLsyNwTUmGK6TtvdoC4SE/13Ae501pdzhSIyOV9V3HOVf8YrVTOgLUJ/l97kZSxcTOeRbFeRjbWfH7W3ixn36g==, tarball: https://npm.pkg.github.com/download/@dialpad/conventional-changelog-angular/1.1.1/1c54240f941b2d02d73e4ca2d4e53420d128bbf6}
     engines: {node: '>=10'}
 
   '@dialpad/i18n-goblin-core@1.2.0':
-    resolution: {integrity: sha512-IsyKO2TKBIw0RZHiDmDqQ910DoUGgUhPexO7zsmz7IS8PNbR2BwMtaDAjrxaZcOnpW6lkR6tQpjtY/PXwPWlsA==}
+    resolution: {integrity: sha512-DQJ6kPkz2JfQMljPxxCCWoJneKHlUrxrxwwEZ3bkC1gc1ze+MDWo4d8pylkqypBYSDxw2l3Pa61Loy1cEdsqMg==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-goblin-core/1.2.0/e78ef24567fc081840905a6594f241d5c8523688}
     peerDependencies:
-      '@vue/composition-api': '*'
       vue: ^3.0.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
 
   '@dialpad/i18n-goblin-services@1.3.0':
-    resolution: {integrity: sha512-h/2PCR9ZSlzGZ7gq94p/7EcV1JzRlH765afkIw7t1xyUGEuhdhBcBSNxj20xikcfcrAG9gh3neFpBLzhiXuW0A==}
+    resolution: {integrity: sha512-KTJGeRxw9DHfQP/vxjOZW4kzgBbZeTRYtl0/FdvFdVoBFZ8SDjf+FwOc57o/q/K8zvGVVjb8xxpyXBBJACRIeg==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n-goblin-services/1.3.0/069db4d56165365b9c0f4e0daca9a7b61ff7c534}
     hasBin: true
 
   '@dialpad/i18n@1.25.3':
-    resolution: {integrity: sha512-W1GGgOODxeDqNbdC96Hu30X3YB3jl8exZh9sYpxsPzfD74S2htu8K+8nAbeKfOVapLNuGt3WC6arRqn/FxcbCg==}
+    resolution: {integrity: sha512-7YmzXLzYGPfCFZhiA1NLmHJ8R4XgX/zSP6tL4mlUElcES5NexWwgUGUWa9HBBRRHU3GIXxA3Tj7FTUSZ4EgnNg==, tarball: https://npm.pkg.github.com/download/@dialpad/i18n/1.25.3/5af0753ad1eb8c97cea2836cd057283058dcceae}
     hasBin: true
     peerDependencies:
       vue: ^3.0.0
 
   '@dialpad/semantic-release-changelog-json@1.0.0':
-    resolution: {integrity: sha512-9bbDAiJR2MHI6M5KNsLQGebmg1d1exXP9O8lET6SIVWeaq6bIJrWM7WRqyohkBpq3Ad2ZPc0Rq6zCY0UC/wiVQ==}
+    resolution: {integrity: sha512-RIk5Wkco9pTucCO5Pi+4kx2CtmaDzY94V77bK/gluhb3IEDVktnzpS5SIWV+dTKtXUrHweoSXjCH+1cSifgefw==, tarball: https://npm.pkg.github.com/download/@dialpad/semantic-release-changelog-json/1.0.0/40fb236ee722da99879010c02f12b95cb2635ddc}
     engines: {node: '>=14.17'}
     peerDependencies:
       semantic-release: '>=18.0.0'
@@ -16568,6 +16564,8 @@ snapshots:
       '@fluent/bundle': 0.17.1
       fluent-vue: 3.7.2(@fluent/bundle@0.17.1)(vue@3.5.32(typescript@5.9.3))
       vue: 3.5.32(typescript@5.9.3)
+    transitivePeerDependencies:
+      - '@vue/composition-api'
 
   '@dialpad/i18n-goblin-services@1.3.0':
     dependencies:
@@ -28121,16 +28119,16 @@ snapshots:
       jsonc-parser: 3.3.1
       jsonpointer: 5.0.1
       markdown-it: 14.1.1
-      markdownlint: 0.38.0(supports-color@8.1.1)
+      markdownlint: 0.38.0
       minimatch: 10.0.3
       run-con: 1.3.2
       smol-toml: 1.3.4
     transitivePeerDependencies:
       - supports-color
 
-  markdownlint@0.38.0(supports-color@8.1.1):
+  markdownlint@0.38.0:
     dependencies:
-      micromark: 4.0.2(supports-color@8.1.1)
+      micromark: 4.0.2
       micromark-core-commonmark: 2.0.3
       micromark-extension-directive: 4.0.0
       micromark-extension-gfm-autolink-literal: 2.1.0
@@ -28191,7 +28189,7 @@ snapshots:
       decode-named-character-reference: 1.3.0
       devlop: 1.1.0
       mdast-util-to-string: 4.0.0
-      micromark: 4.0.2(supports-color@8.1.1)
+      micromark: 4.0.2
       micromark-util-decode-numeric-character-reference: 2.0.2
       micromark-util-decode-string: 2.0.1
       micromark-util-normalize-identifier: 2.0.1
@@ -28541,7 +28539,7 @@ snapshots:
 
   micromark-util-types@2.0.2: {}
 
-  micromark@4.0.2(supports-color@8.1.1):
+  micromark@4.0.2:
     dependencies:
       '@types/debug': 4.1.13
       debug: 4.4.3(supports-color@8.1.1)
