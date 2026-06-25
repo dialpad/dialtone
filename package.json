@@ -103,7 +103,7 @@
     "@dialpad/conventional-changelog-angular": "^1.1.1",
     "@dialpad/dialtone-cli": "workspace:*",
     "@dialpad/semantic-release-changelog-json": "^1.0.0",
-    "@eslint/js": "^10.0.1",
+    "@eslint/js": "^9.0.0",
     "@faker-js/faker": "8.4.1",
     "@percy/cli": "1.30.9",
     "@percy/storybook": "6.0.3",
