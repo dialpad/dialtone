@@ -64,7 +64,7 @@ With cascade layers:
 4. `dialtone.utilities !important`
 5. **Unlayered `!important`** (lowest)
 
-> **Why utilities use `!important`**: Dialtone utilities are in the last layer with `!important`, giving them the highest effective priority for overriding component styles while staying organized.
+> **Why utilities use `!important`**: Within the layered system, Dialtone utility `!important` declarations outrank all other layered `!important` declarations and — because of how layers reverse `!important` priority — also outrank your unlayered `!important`. This guarantees utilities always win over components, but means consumer `!important` overrides targeting the same properties will not work. Put overrides in a named layer declared after `dialtone.utilities` instead.
 
 ## For Consumers
 
@@ -120,7 +120,7 @@ import '@dialpad/dialtone/css/no-layers/default-theme'; // optional theme
 This build is identical in output — all the same classes — but no `@layer` wrappers are present.
 
 > [!WARNING] `!important` behavior differs in the no-layers build
-> In the layered build, your unlayered `!important` declarations beat Dialtone's layered `!important`. In the no-layers build, Dialtone utility `!important` is fully unlayered and wins over your non-`!important` rules. You will need `!important` in your own overrides to beat utilities.
+> In the layered build, Dialtone's `!important` utility declarations beat your unlayered `!important` (because `!important` priority reverses across layers). In the no-layers build, both sides are unlayered, so your `!important` can beat Dialtone's through normal cascade. However, your non-`!important` rules will lose to Dialtone utility `!important` — you will need `!important` in your own overrides to beat utilities.
 
 ### Third-Party CSS
 

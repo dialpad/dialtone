@@ -221,7 +221,7 @@
     "access": "public"
   },
   "sideEffects": [
-    "./dist/css/*.css",
+    "./dist/css/**/*.css",
     "./dist/css/fonts.js"
   ],
   "nx": {

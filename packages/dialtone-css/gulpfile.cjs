@@ -214,9 +214,10 @@ const libStylesDev = function (done) {
 const libStylesNoLayers = function (done) {
   if (!settings.styles) return done();
 
+  // No font URL rewrite needed — output is one level deeper than lib/dist/,
+  // so the compiled ../fonts/ paths already resolve correctly to lib/dist/fonts/.
   return src(paths.styles.inputLib)
     .pipe(less({ paths: ['./node_modules'] }))
-    .pipe(replace('../fonts/', './fonts/'))
     .pipe(postCSS([postCSSDialtoneGenerator, autoprefixer(), postCSSLayerRemover]))
     .pipe(dest(paths.styles.outputNoLayers))
     .pipe(postCSS([postCSSNano]))
