@@ -7,6 +7,7 @@
       borderless
       kind="muted"
       activation-mode="auto"
+      :selected="selectedPanel"
       class="d-d-flex d-fd-column d-h100p"
       tabs-class="d-pis-50"
       tab-list-class="
@@ -294,6 +295,8 @@ const initialTab = computed(() => {
   if (hasClassControls.value) return 'class';
   return null;
 });
+
+const selectedPanel = computed(() => initialTab.value ? `panel-${initialTab.value}` : '');
 
 /**
  * Gets an array of controls for a binding.

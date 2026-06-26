@@ -1,5 +1,6 @@
 <template>
   <dtc-control-string
+    :label="label"
     :value="value?.toString()"
     :disabled="disabled"
     :required="required"
@@ -16,6 +17,10 @@ import DtcControlString from './control_string.vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 
 defineProps({
+  label: {
+    type: String,
+    default: '',
+  },
   value: {
     type: undefined,
     default: '',

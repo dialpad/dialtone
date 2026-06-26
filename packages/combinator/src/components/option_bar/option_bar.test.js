@@ -106,7 +106,16 @@ function mountWrapper ({ props = [], slots = [], attributes = [], options = base
           `,
         },
         DtTabGroup: {
-          template: '<div><slot name="tabs" /><slot /></div>',
+          props: ['selected'],
+          template: `
+            <div
+              data-qa="option-bar-tab-group"
+              :data-selected-panel="selected"
+            >
+              <slot name="tabs" />
+              <slot />
+            </div>
+          `,
         },
         DtTabPanel: {
           props: ['id', 'tabId'],
@@ -131,6 +140,10 @@ function getTabs (wrapper) {
 
 function getMemberGroups (wrapper) {
   return wrapper.findAllComponents({ name: 'DtcOptionBarMemberGroup' });
+}
+
+function getSelectedPanel (wrapper) {
+  return wrapper.find('[data-qa=option-bar-tab-group]').attributes('data-selected-panel');
 }
 
 describe('option_bar.vue test', function () {
@@ -289,5 +302,22 @@ describe('option_bar.vue test', function () {
 
     expect(getTabs(wrapper)).toEqual(['Class']);
     expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['labelClass']);
+  });
+
+  it('Should keep selected panel synced with filtered tabs', async function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'kind' },
+      ],
+      slots: [
+        { name: 'default' },
+      ],
+    });
+
+    await wrapper.find(searchButtonSelector).trigger('click');
+    await wrapper.find(searchInputSelector).setValue('default');
+
+    expect(getTabs(wrapper)).toEqual(['Slots']);
+    expect(getSelectedPanel(wrapper)).toBe('panel-slots');
   });
 });

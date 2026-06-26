@@ -107,13 +107,13 @@ export function enumerateGroups (handler, groups) {
  * filename and component name in PascalCase.
  */
 /**
- * Returns true if the member represents a CSS class prop (name ends with 'Class').
+ * Returns true if the member represents native `class` or a CSS class prop (name ends with 'Class').
  *
  * @param {object} member - The member descriptor.
  * @returns {boolean}
  */
 export function isClassProp (member) {
-  return member?.name?.endsWith('Class');
+  return member?.name === 'class' || member?.name?.endsWith('Class');
 }
 
 const SLOT_CLASS_PROP_DEPENDENCIES = new Map([

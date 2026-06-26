@@ -156,5 +156,67 @@ describe('option_bar_member_group.vue test', function () {
       expect(controls).toHaveLength(2);
       expect(sizeControl.props('disabled')).toBe(true);
     });
+
+    it('Should not clear members during initial render', function () {
+      wrapper = mount(DtcOptionBarMemberGroup, {
+        props: {
+          component: testComponents[0],
+          members: [
+            { name: 'kind', label: 'kind' },
+            { name: 'borderColor', label: 'border-color', defaultValue: 'default' },
+          ],
+          values: {
+            kind: 'default',
+            borderColor: 'default',
+          },
+          controlSelector: () => [['base'], 'base'],
+          exclusionRules: [
+            { when: { kind: 'default' }, clear: { props: ['borderColor'] } },
+          ],
+          propValues: {
+            kind: 'default',
+            borderColor: 'default',
+          },
+        },
+      });
+
+      expect(wrapper.emitted('update:member')).toBeUndefined();
+    });
+
+    it('Should clear members when matching clear rules become active after mount', async function () {
+      wrapper = mount(DtcOptionBarMemberGroup, {
+        props: {
+          component: testComponents[0],
+          members: [
+            { name: 'kind', label: 'kind' },
+            { name: 'borderColor', label: 'border-color', defaultValue: 'default' },
+          ],
+          values: {
+            kind: 'subtle',
+            borderColor: 'default',
+          },
+          controlSelector: () => [['base'], 'base'],
+          exclusionRules: [
+            { when: { kind: 'default' }, clear: { props: ['borderColor'] } },
+          ],
+          propValues: {
+            kind: 'subtle',
+            borderColor: 'default',
+          },
+        },
+      });
+
+      await wrapper.setProps({
+        propValues: {
+          kind: 'default',
+          borderColor: 'default',
+        },
+      });
+
+      expect(wrapper.emitted('update:member')).toEqual([[{
+        member: 'borderColor',
+        value: null,
+      }]]);
+    });
   });
 });

@@ -1,11 +1,13 @@
 import { expect } from 'vitest';
-import { shouldExclude, shouldDisable, getDisabledValues } from './exclusion_rules';
+import { shouldExclude, shouldDisable, shouldClear, getDisabledValues } from './exclusion_rules';
 import variantsBadge from '@/src/variants/variants_badge';
 
 const EQUALITY_RULE = { when: { kind: 'body' }, disableValues: { props: { size: ['500'] } } };
 const PREDICATE_RULE = { when: { kind: v => v !== 'headline' }, disableValues: { props: { size: ['500'] } } };
 const HIDE_RULE = { when: { kind: 'count' }, hide: { props: ['decoration'] } };
 const DISABLE_RULE = { when: { kind: 'count' }, disable: { props: ['decoration'] } };
+const CLEAR_RULE = { when: { kind: 'outlined' }, clear: { props: ['borderColor'] } };
+const SLOT_CLEAR_RULE = { whenSlots: { startIcon: '' }, clear: { props: ['iconSize'] } };
 
 describe('exclusion_rules', function () {
   describe('getDisabledValues', function () {
@@ -121,6 +123,27 @@ describe('exclusion_rules', function () {
         startIcon: '<dt-icon-lock :size="iconSize" />',
         endIcon: '',
       })).toBe(true);
+    });
+  });
+
+  describe('shouldClear', function () {
+    it('should return false when no rules', function () {
+      expect(shouldClear('borderColor', 'props', [], {})).toBe(false);
+    });
+
+    it('should return true when condition matches and member is in clear list', function () {
+      expect(shouldClear('borderColor', 'props', [CLEAR_RULE], { kind: 'outlined' })).toBe(true);
+    });
+
+    it('should return false when condition does not match', function () {
+      expect(shouldClear('borderColor', 'props', [CLEAR_RULE], { kind: 'default' })).toBe(false);
+    });
+
+    it('should evaluate slot conditions before clearing', function () {
+      expect(shouldClear('iconSize', 'props', [SLOT_CLEAR_RULE], {}, { startIcon: '' })).toBe(true);
+      expect(shouldClear('iconSize', 'props', [SLOT_CLEAR_RULE], {}, {
+        startIcon: '<dt-icon-lock :size="iconSize" />',
+      })).toBe(false);
     });
   });
 });
