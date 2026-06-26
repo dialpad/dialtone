@@ -66,6 +66,14 @@
       "import": "./lib/dist/dialtone.min.css",
       "style": "./lib/dist/dialtone.min.css"
     },
+    "./no-layers": {
+      "import": "./lib/dist/no-layers/dialtone.min.css",
+      "style": "./lib/dist/no-layers/dialtone.min.css"
+    },
+    "./no-layers/default-theme": {
+      "import": "./lib/dist/no-layers/dialtone-default-theme.min.css",
+      "style": "./lib/dist/no-layers/dialtone-default-theme.min.css"
+    },
     "./*": "./*"
   },
   "browserslist": [

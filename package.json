@@ -52,6 +52,8 @@
     "./CHANGELOG.json": "./CHANGELOG.json",
     "./css": "./dist/css/dialtone.min.css",
     "./css-default-theme": "./dist/css/dialtone-default-theme.min.css",
+    "./css/no-layers": "./dist/css/no-layers/dialtone.min.css",
+    "./css/no-layers/default-theme": "./dist/css/no-layers/dialtone-default-theme.min.css",
     "./tokens/*.css": "./dist/tokens/css/*.css",
     "./tokens/postcss/*": {
       "types": "./dist/tokens/types/postcss/*.d.ts",
@@ -219,7 +221,7 @@
     "access": "public"
   },
   "sideEffects": [
-    "./dist/css/*.css",
+    "./dist/css/**/*.css",
     "./dist/css/fonts.js"
   ],
   "nx": {
