@@ -743,8 +743,8 @@ async function runConfigMigration (migration, opts) {
   // Loop until convergence: some config regexes only match one token per
   // property declaration per pass (e.g. border-width with two var(--dt-size-*)).
   for (const entry of matched) {
-    let changed = true;
-    while (changed) {
+    let changed;
+    do {
       changed = false;
       for (const expr of configData.expressions) {
         const before = entry.data;
@@ -758,7 +758,7 @@ async function runConfigMigration (migration, opts) {
           changed = true;
         }
       }
-    }
+    } while (changed && !configData.singlePass);
     if (entry.matches > 0) {
       await fs.writeFile(entry.file, entry.data, 'utf8');
       const shortname = path.relative(opts.cwd, entry.file);
