@@ -33,9 +33,9 @@
           <dt-button
             v-dt-tooltip="'Presets'"
             v-bind="attrs"
-            importance="clear"
+            importance="outlined"
             kind="muted"
-            :size="isFullScreen ? 'lg' : 'md'"
+            :size="isFullScreen ? '400' : '300'"
             leading-class="d-pbs-1 d-pis-150 d-mie-n25"
           >
             <template #leading>
@@ -156,8 +156,8 @@
 <script setup>
 import DtcOptionBar from './option_bar/option_bar.vue';
 import DtcRenderer from './renderer/renderer.vue';
-import { enumerateGroups } from '@/src/lib/utils';
-import { shouldExclude } from '@/src/lib/exclusion_rules';
+import { enumerateGroups, shouldDisableSlotClassProp } from '@/src/lib/utils';
+import { shouldDisable } from '@/src/lib/exclusion_rules';
 import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
 import { computed, nextTick, onErrorCaptured, reactive, ref, watch } from 'vue';
 import { cachedRef, computedModel } from '@/src/lib/utils_vue';
@@ -514,18 +514,20 @@ const disabledMembers = computed(() => {
   const disabled = new Set();
   const exclusions = info.value.exclusions;
   const propValues = options.value.props;
+  const slotValues = options.value.slots;
   const depMap = buildDependencyMap(info.value.props ?? []);
 
   for (const member of (info.value.props ?? [])) {
     if (member.required) continue;
-    if (shouldExclude(member.name, 'props', exclusions, propValues) ||
-      shouldHideProp(member.name, depMap, propValues)) {
+    if (shouldDisable(member.name, 'props', exclusions, propValues, slotValues) ||
+      shouldHideProp(member.name, depMap, propValues) ||
+      shouldDisableSlotClassProp(member.name, slotValues)) {
       disabled.add(member.name);
     }
   }
   for (const member of (info.value.slots ?? [])) {
     if (member.required) continue;
-    if (shouldExclude(member.name, 'slots', exclusions, propValues)) {
+    if (shouldDisable(member.name, 'slots', exclusions, propValues, slotValues)) {
       disabled.add(member.name);
     }
   }
@@ -611,7 +613,7 @@ export default {
   }
 
   &__resizer {
-    inline-size: 32px;
+    inline-size: var(--dt-layout-50);
     cursor: col-resize;
     flex-shrink: 0;
     position: relative;
@@ -632,7 +634,7 @@ export default {
   }
 
   &__controls {
-    inline-size: var(--dt-size-900);
+    inline-size: var(--dt-layout-450);
     max-inline-size: var(--dt-size-1000);
     flex-shrink: 0;
     max-block-size: var(--dt-size-950);

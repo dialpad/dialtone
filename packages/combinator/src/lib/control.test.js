@@ -20,6 +20,12 @@ describe('control.js test', function () {
       expect(getControlByMemberType('string', { values: ['sm', 'md', 'lg'] })).toBe('segmented');
     });
 
+    it('uses the selection control for six short string values', function () {
+      expect(getControlByMemberType('string', {
+        values: ['100', '200', '300', '400', '500', '600'],
+      })).toBe('selection');
+    });
+
     it('uses the selection control for longer string values', function () {
       expect(getControlByMemberType('string', { values: ['label', 'count'] })).toBe('selection');
     });

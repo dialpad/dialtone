@@ -1,4 +1,6 @@
 /* eslint-disable max-len */
+const hasNoBorderWidth = v => !v;
+
 export default {
   defaults: {
     props: {
@@ -27,6 +29,26 @@ export default {
       maxBlockSize: { tokenCategory: 'layout' },
     },
   },
+
+  exclusions: [
+    {
+      when: {
+        borderWidth: hasNoBorderWidth,
+        borderWidthBlock: hasNoBorderWidth,
+        borderWidthBlockEnd: hasNoBorderWidth,
+        borderWidthBlockStart: hasNoBorderWidth,
+        borderWidthInline: hasNoBorderWidth,
+        borderWidthInlineEnd: hasNoBorderWidth,
+        borderWidthInlineStart: hasNoBorderWidth,
+      },
+      disable: { props: ['borderColor'] },
+      clear: { props: ['borderColor'] },
+    },
+    {
+      when: { scrollbar: v => !v },
+      disable: { props: ['scrollbarContentClass'] },
+    },
+  ],
 
   default: {
     slots: {

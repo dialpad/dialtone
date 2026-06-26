@@ -15,6 +15,7 @@
         :description="member.description"
         :v-model="isVModel(member)"
         :required="member.required"
+        :deprecated="member.deprecated"
         :locked="member.lockControl"
         :disabled="member.disableControl"
         :args="{
@@ -25,7 +26,8 @@
           bindings: member.bindings,
           tokenCategory: member.tokenCategory,
           propValues,
-          disabledValues: getDisabledValues(key, props.exclusionRules, props.propValues),
+          disabledValues: getDisabledValues(key, props.exclusionRules, props.propValues, props.slotValues),
+          clearable: member.clearable,
         }"
         @update:value="e => updateMember(e, key)"
         @update:control="e => updateControl(e, key)"
@@ -37,38 +39,51 @@
 <script setup>
 import DtcOptionBarControl from './option_bar_control.vue';
 import { MEMBER_UPDATE_EVENT } from '@/src/lib/constants';
-import { computed, reactive } from 'vue';
+import { computed, reactive, watch } from 'vue';
 import { convert } from '@/src/lib/convert';
 import { controlMap } from '@/src/lib/control';
 import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
-import { shouldExclude, getDisabledValues } from '@/src/lib/exclusion_rules';
+import { shouldDisable, shouldClear, getDisabledValues } from '@/src/lib/exclusion_rules';
 import { isIconSlot } from '@/src/lib/icons';
-import { DtStack } from '@dialpad/dialtone-vue';
+import { isClassProp, shouldDisableSlotClassProp } from '@/src/lib/utils';
 
 const ICON_SLOT_ORDER = ['startIcon', 'endIcon', 'blockStartIcon', 'blockEndIcon', 'icon'];
 
 const PROP_PRIORITY = [
-  'title', 'as', 'label', 'importance', 'kind', 'size',
-  'placement', 'tone', 'align', 'density', 'strength',
-  'type', 'underline', 'selected', 'active', 'disabled', 'showDivider', 'color', 'description',
+  'title', 'as', 'variant', 'kind', 'size', 'family', 'label', 'importance', 'presence',
+  'placement', 'tone', 'density', 'strength', 'align',
+  'type', 'underline', 'selected', 'active', 'disabled',
+  'deferSelection', 'readOnly', 'showClear', 'useDropdown',
+  'showDivider', 'color', 'description',
   'scrollbar', 'surface',
-  'borderColor', 'borderRadius',
-  'borderWidth', 'borderWidthBlock', 'borderWidthBlockEnd', 'borderWidthBlockStart',
-  'borderWidthInline', 'borderWidthInlineEnd', 'borderWidthInlineStart',
-  'padding', 'paddingBlock', 'paddingBlockEnd', 'paddingBlockStart',
-  'paddingInline', 'paddingInlineEnd', 'paddingInlineStart',
-  'blockSize', 'inlineSize', 'maxBlockSize', 'minBlockSize', 'maxInlineSize', 'minInlineSize',
+  'borderRadius', 'borderColor',
+  'borderWidth', 'borderWidthInline', 'borderWidthInlineEnd', 'borderWidthInlineStart',
+  'borderWidthBlock', 'borderWidthBlockEnd', 'borderWidthBlockStart',
+  'padding', 'paddingInline', 'paddingInlineEnd', 'paddingInlineStart',
+  'paddingBlock', 'paddingBlockEnd', 'paddingBlockStart',
+  'inlineSize', 'minInlineSize', 'maxInlineSize', 'blockSize', 'maxBlockSize', 'minBlockSize',
   'shadow', 'overflow',
+];
+
+const CLASS_PROP_PRIORITY = [
+  'scrollbarContentClass',
+  'dropdownListClass', 'popoverContentClass', 'popoverDialogClass', 'popoverFooterClass', 'popoverHeaderClass',
+  'labelClass',
+  'startIconClass', 'endIconClass', 'iconClass', 'leadingClass', 'trailingClass',
 ];
 
 const SLOT_PRIORITY = ['start', 'end', 'inlineStart', 'inlineEnd', 'blockStart', 'blockEnd', 'leading', 'trailing'];
 
 function getPropTier (member) {
+  if (isClassProp(member)) {
+    const priorityIdx = CLASS_PROP_PRIORITY.indexOf(member.name);
+    return [4, priorityIdx === -1 ? CLASS_PROP_PRIORITY.length : priorityIdx];
+  }
+
   const priorityIdx = PROP_PRIORITY.indexOf(member.name);
   if (priorityIdx !== -1) return [0, priorityIdx];
   if (member.name?.startsWith('aria')) return [1, 0];
   if (member.types?.includes('boolean')) return [2, 0];
-  if (member.name?.endsWith('Class')) return [4, 0];
   return [3, 0];
 }
 
@@ -78,6 +93,17 @@ function getSlotTier (member) {
   const priorityIdx = SLOT_PRIORITY.indexOf(member.name);
   if (priorityIdx !== -1) return [2, priorityIdx];
   return [3, 0];
+}
+
+// Class props always sort into the trailing class tier, even when a description
+// ("Only applies when…") would otherwise nest them under a parent prop. Detaching
+// them from the ordering dependency map keeps grouping from pulling them forward.
+// The full dependency map is still passed to shouldHideProp, so a class control is
+// still hidden when its parent is off — only its sort position is decoupled here.
+function getOrderingDependencyMap (depMap, membersByName) {
+  return new Map(
+    [...depMap].filter(([child]) => !isClassProp(membersByName.get(child))),
+  );
 }
 
 const props = defineProps({
@@ -125,6 +151,14 @@ const props = defineProps({
     default: () => ({}),
   },
   /**
+   * Current slot values, used only by exclusion rules that opt into
+   * `whenSlots` conditions.
+   */
+  slotValues: {
+    type: Object,
+    default: undefined,
+  },
+  /**
    * The member group identifier ('props' or 'slots').
    */
   memberGroup: {
@@ -147,7 +181,9 @@ const dependencyMap = computed(() => buildDependencyMap(props.members));
 const memberMap = computed(() => {
   if (!props.members?.length) return reactive({});
   const depMap = dependencyMap.value;
-  const childSet = new Set(depMap.keys());
+  const membersByName = new Map(props.members.map(m => [m.name, m]));
+  const orderingDepMap = getOrderingDependencyMap(depMap, membersByName);
+  const childSet = new Set(orderingDepMap.keys());
 
   const getTier = props.memberGroup === 'slots' ? getSlotTier : getPropTier;
   const sortFn = (a, b) => {
@@ -165,10 +201,10 @@ const memberMap = computed(() => {
 
   // Build parent → children map, sorted alphabetically
   const childrenByParent = new Map();
-  for (const [child, parent] of depMap) {
+  for (const [child, parent] of orderingDepMap) {
     if (!childrenByParent.has(parent)) childrenByParent.set(parent, []);
     childrenByParent.get(parent).push(
-      props.members.find(m => m.name === child),
+      membersByName.get(child),
     );
   }
   childrenByParent.forEach(arr => arr.sort(sortFn));
@@ -229,18 +265,29 @@ function extendMember (member) {
   const dynamicHide = !member.required
     && shouldHideProp(key, dependencyMap.value, props.values);
 
-  const isDeprecated = !!member.tags?.deprecated
+  const isDocDeprecated = !!member.tags?.deprecated
     || member.description?.startsWith('@deprecated');
 
-  const isExcluded = !member.required
-    && shouldExclude(key, props.memberGroup, props.exclusionRules, props.propValues);
+  const isDisabled = !member.required
+    && (
+      shouldDisable(key, props.memberGroup, props.exclusionRules, props.propValues, props.slotValues) ||
+      (props.memberGroup === 'props' && shouldDisableSlotClassProp(key, props.slotValues))
+    );
+
+  const clearValue = !member.required
+    && shouldClear(key, props.memberGroup, props.exclusionRules, props.propValues, props.slotValues);
+  // clearable = true when the member has no concrete default (prop is optional, user explicitly set it)
+  const clearable = member.clearable ?? (member.defaultValue == null || member.defaultValue === '');
 
   return {
     ...member,
     control,
     validControls,
-    hideControl: member.hideControl || isDeprecated,
-    disableControl: dynamicHide || isExcluded,
+    hideControl: member.hideControl || isDocDeprecated,
+    clearValue,
+    clearable,
+    deprecated: !!member.deprecated || isDocDeprecated,
+    disableControl: dynamicHide || isDisabled,
   };
 }
 
@@ -256,6 +303,14 @@ function updateMember (e, key) {
     value: e,
   });
 }
+
+watch(memberMap, (members) => {
+  Object.entries(members).forEach(([key, member]) => {
+    if (!member.clearValue) return;
+    if (props.values[key] === null || props.values[key] === undefined) return;
+    updateMember(null, key);
+  });
+}, { immediate: true });
 
 /**
  * Updates the member's control in the 'member map'.

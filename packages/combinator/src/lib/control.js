@@ -18,7 +18,7 @@ import DtcControlSegmented from '@/src/components/controls/control_segmented.vue
 
 import { typeOfMemberValue } from '@/src/lib/utils';
 
-const MAX_SEGMENTED_COUNT = 6;
+const MAX_SEGMENTED_COUNT = 5;
 const MAX_SEGMENTED_LABEL_LENGTH = 4;
 
 /**
@@ -94,7 +94,8 @@ export const controlMap = Object.freeze({
 });
 
 function getControlDataDefault (controlData) {
-  return controlData.component.props.value.default();
+  const defaultValue = controlData.component.props.value.default;
+  return typeof defaultValue === 'function' ? defaultValue() : defaultValue;
 }
 
 export function getControlByValue (value) {

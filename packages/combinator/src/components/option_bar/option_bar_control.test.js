@@ -30,10 +30,6 @@ describe('option_bar_control.vue test', function () {
         });
       });
 
-      it('Should render successfully', function () {
-        expect(wrapper.exists()).toBe(true);
-      });
-
       it('Should display label text', function () {
         expect(wrapper.find(labelSelector).text()).toBe(testLabel.replaceAll('-', ' '));
       });

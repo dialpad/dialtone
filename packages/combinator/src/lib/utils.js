@@ -106,6 +106,58 @@ export function enumerateGroups (handler, groups) {
  * @returns {Array} arr of objects containing both the
  * filename and component name in PascalCase.
  */
+/**
+ * Returns true if the member represents a CSS class prop (name ends with 'Class').
+ *
+ * @param {object} member - The member descriptor.
+ * @returns {boolean}
+ */
+export function isClassProp (member) {
+  return member?.name?.endsWith('Class');
+}
+
+const SLOT_CLASS_PROP_DEPENDENCIES = new Map([
+  ['blockEndIconClass', 'blockEndIcon'],
+  ['blockStartIconClass', 'blockStartIcon'],
+  ['endIconClass', 'endIcon'],
+  ['iconClass', 'icon'],
+  ['leadingClass', 'leading'],
+  ['startIconClass', 'startIcon'],
+  ['trailingClass', 'trailing'],
+]);
+
+function hasValue (value) {
+  return typeof value === 'string' && value.trim().length > 0;
+}
+
+/**
+ * Returns true when a prop customizes a direct slot wrapper but that slot is empty.
+ *
+ * @param {string} propName - The prop name to check.
+ * @param {object} slotValues - Current slot values.
+ * @returns {boolean}
+ */
+export function shouldDisableSlotClassProp (propName, slotValues) {
+  const slotName = SLOT_CLASS_PROP_DEPENDENCIES.get(propName);
+  if (!slotName || !slotValues || !Object.prototype.hasOwnProperty.call(slotValues, slotName)) return false;
+  return !hasValue(slotValues[slotName]);
+}
+
+const UNSUPPORTED_ROOT_CLASS_COMPONENTS = new Set([
+  'DtDropdown',
+]);
+
+/**
+ * Returns true unless a Dialtone component is known not to apply native `class`
+ * attributes directly to its rendered root element.
+ *
+ * @param {string} componentName - The component display name, e.g. 'DtCard'.
+ * @returns {boolean}
+ */
+export function supportsRootClass (componentName) {
+  return Boolean(componentName) && !UNSUPPORTED_ROOT_CLASS_COMPONENTS.has(componentName);
+}
+
 export const getComponentFilesFromDir = (requireContext) => {
   const files = [];
   requireContext.keys().forEach(fileName => {

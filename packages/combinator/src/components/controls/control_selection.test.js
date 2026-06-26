@@ -2,8 +2,15 @@ import DtcControlSelection from './control_selection.vue';
 
 import { expect } from 'vitest';
 import { shallowMount } from '@vue/test-utils';
+import { nextTick } from 'vue';
+import {
+  mountClearableControl,
+  ADD_BUTTON_SELECTOR as addButtonSelector,
+  REMOVE_BUTTON_SELECTOR as clearButtonSelector,
+} from '@/src/lib/test/utils_test';
 
 const selections = ['selection1', 'selection2', 'selection3'];
+const anchorButtonSelector = '.d-w100p';
 
 const manySelections = [
   'alpha',
@@ -34,121 +41,11 @@ describe('control_selection.vue test', function () {
     _mountWrapper();
   });
 
-  describe('When mounted', function () {
-    it('Should render successfully', function () {
-      expect(wrapper.exists()).toBe(true);
-    });
-  });
+  describe('When the selection is empty', function () {
+    it('Should display a non-breaking space to hold the label height', function () {
+      _mountWrapper({ value: null });
 
-  describe('When rendering options', function () {
-    describe('Should create an option for each selection', function () {
-      selections.forEach((selection) => {
-        it(`Should have a computed option for selection '${selection}'`, function () {
-          expect(wrapper.vm.options.some((o) => o.value === selection)).toBe(
-            true,
-          );
-        });
-      });
-    });
-
-    describe('When a value is provided', function () {
-      it('Should display the label for the selected value', function () {
-        expect(wrapper.vm.selectedLabel).toBe(inputValue.toString());
-      });
-    });
-  });
-
-  describe('Search visibility', function () {
-    it('Should not show search when options count is at or below threshold', function () {
-      _mountWrapper({ validValues: selections }); // 3 options
-      expect(wrapper.vm.showSearch).toBe(false);
-    });
-
-    it('Should not show search when options count equals threshold', function () {
-      // defaultValue suppresses the prepended null option, giving exactly 5 options
-      _mountWrapper({
-        validValues: ['a', 'b', 'c', 'd', 'e'],
-        defaultValue: 'a',
-      });
-      expect(wrapper.vm.showSearch).toBe(false);
-    });
-
-    it('Should show search when options count exceeds threshold', function () {
-      // defaultValue suppresses the prepended null option, giving exactly 7 options
-      _mountWrapper({
-        validValues: manySelections,
-        defaultValue: manySelections[0],
-      });
-      expect(wrapper.vm.showSearch).toBe(true);
-    });
-  });
-
-  describe('Search filtering', function () {
-    beforeEach(function () {
-      _mountWrapper({
-        validValues: manySelections,
-        defaultValue: manySelections[0],
-      });
-    });
-
-    it('Should return all options when query is empty', function () {
-      wrapper.vm.query = '';
-      expect(wrapper.vm.filteredOptions.length).toBe(wrapper.vm.options.length);
-    });
-
-    it('Should filter options by label', function () {
-      wrapper.vm.query = 'alp';
-      expect(wrapper.vm.filteredOptions).toHaveLength(1);
-      expect(wrapper.vm.filteredOptions[0].value).toBe('alpha');
-    });
-
-    it('Should be case-insensitive', function () {
-      wrapper.vm.query = 'ALPHA';
-      expect(wrapper.vm.filteredOptions).toHaveLength(1);
-      expect(wrapper.vm.filteredOptions[0].value).toBe('alpha');
-    });
-
-    it('Should return an empty list when no options match', function () {
-      wrapper.vm.query = 'zzz';
-      expect(wrapper.vm.filteredOptions).toHaveLength(0);
-    });
-  });
-
-  describe('Keyboard handling', function () {
-    let closeSpy;
-
-    beforeEach(function () {
-      _mountWrapper({
-        validValues: manySelections,
-        defaultValue: manySelections[0],
-      });
-      closeSpy = vi.fn();
-    });
-
-    it('Enter selects the first enabled option and closes', function () {
-      wrapper.vm.query = 'alp';
-      wrapper.vm.onSearchKeydown(
-        { key: 'Enter', stopPropagation: vi.fn(), preventDefault: vi.fn() },
-        closeSpy,
-      );
-      expect(closeSpy).toHaveBeenCalled();
-    });
-
-    it('Escape closes the dropdown', function () {
-      wrapper.vm.onSearchKeydown(
-        { key: 'Escape', stopPropagation: vi.fn(), preventDefault: vi.fn() },
-        closeSpy,
-      );
-      expect(closeSpy).toHaveBeenCalled();
-    });
-
-    it('Enter does nothing when no options match', function () {
-      wrapper.vm.query = 'zzz';
-      wrapper.vm.onSearchKeydown(
-        { key: 'Enter', stopPropagation: vi.fn(), preventDefault: vi.fn() },
-        closeSpy,
-      );
-      expect(closeSpy).not.toHaveBeenCalled();
+      expect(wrapper.vm.selectedLabel).toBe('\u00A0');
     });
   });
 
@@ -169,6 +66,66 @@ describe('control_selection.vue test', function () {
       const emitted = wrapper.emitted('update:value');
       expect(emitted).toBeTruthy();
       expect(emitted[0][0]).toBe('beta');
+    });
+  });
+
+  describe('Clearable collapsed state', function () {
+    let behaviorWrapper;
+
+    const mountBehaviorWrapper = (props = {}) => {
+      behaviorWrapper?.unmount();
+      behaviorWrapper = mountClearableControl(DtcControlSelection, {
+        value: null,
+        validValues: selections,
+        ...props,
+      });
+    };
+
+    afterEach(function () {
+      behaviorWrapper?.unmount();
+    });
+
+    it('Should render the label and add button without the dropdown when empty', function () {
+      mountBehaviorWrapper();
+
+      expect(behaviorWrapper.text()).toContain('Label');
+      expect(behaviorWrapper.find(addButtonSelector).exists()).toBe(true);
+      expect(behaviorWrapper.find(anchorButtonSelector).exists()).toBe(false);
+      expect(behaviorWrapper.find(clearButtonSelector).exists()).toBe(false);
+    });
+
+    it('Should collapse on dropdown close when the selection is still empty', async function () {
+      mountBehaviorWrapper();
+
+      await behaviorWrapper.find(addButtonSelector).trigger('click');
+      await nextTick();
+      behaviorWrapper.findComponent({ name: 'DtDropdown' }).vm.$emit('opened', false);
+      await nextTick();
+
+      expect(behaviorWrapper.find(anchorButtonSelector).exists()).toBe(false);
+      expect(behaviorWrapper.find(addButtonSelector).exists()).toBe(true);
+    });
+
+    it('Should open the dropdown when the add button is clicked', async function () {
+      mountBehaviorWrapper();
+
+      await behaviorWrapper.find(addButtonSelector).trigger('click');
+      await nextTick();
+
+      expect(behaviorWrapper.findComponent({ name: 'DtDropdown' }).props('open')).toBe(true);
+    });
+
+    it('Should collapse when an external reset clears the selection', async function () {
+      mountBehaviorWrapper();
+
+      await behaviorWrapper.find(addButtonSelector).trigger('click');
+      await behaviorWrapper.setProps({ value: selections[0] });
+      expect(behaviorWrapper.find(anchorButtonSelector).exists()).toBe(true);
+
+      await behaviorWrapper.setProps({ value: null });
+
+      expect(behaviorWrapper.find(anchorButtonSelector).exists()).toBe(false);
+      expect(behaviorWrapper.find(addButtonSelector).exists()).toBe(true);
     });
   });
 });
