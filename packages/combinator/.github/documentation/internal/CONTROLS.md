@@ -34,7 +34,8 @@ better active control. `null`, `undefined`, and `UNSET` map to `null`.
 
 ## Current controls
 
-- `base`: fallback control for unsupported values.
+- `base`: fallback string control for unsupported values. It forwards label,
+  required, clearable, and default-value behavior to the string control.
 - `null`: selects `null` or intentional `undefined`.
 - `boolean`, `number`, `string`: primitive controls.
 - `array`, `object`, `iterable`, `dynamic`: nested value controls.
@@ -44,7 +45,8 @@ better active control. `null`, `undefined`, and `UNSET` map to `null`.
 - `segmented`: compact selection for small enums.
 - `icon-slot`: searchable Dialtone icon picker for icon-like slots.
 - `suggestion`: standalone suggestion input used by the demo app's component
-  picker.
+  picker. It delegates input behavior to the string control, including label,
+  required, clearable, and `null` value state.
 
 ## Icon-slot control
 

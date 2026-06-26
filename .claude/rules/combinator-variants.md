@@ -106,7 +106,7 @@ New props and slots use logical names. When you add a new logical axis, the opti
 
 ## Class and slot-class props
 
-Props ending in `Class` appear in the Class tab. A new slot-class relationship needs its mapping updated in `src/lib/utils.js` plus a focused test. See `packages/combinator/.github/documentation/internal/EXCLUSIONS.md` ("Slot-class dependencies") for the current mappings.
+The native `class` attribute and props ending in `Class` appear in the Class tab. A new slot-class relationship needs its mapping updated in `src/lib/utils.js` plus a focused test. See `packages/combinator/.github/documentation/internal/EXCLUSIONS.md` ("Slot-class dependencies") for the current mappings.
 
 ## Review checks
 

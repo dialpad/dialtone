@@ -92,6 +92,8 @@ Mutual exclusions need both directions:
 ### `clear`
 
 Clears a member value by writing `null` when the rule matches.
+The option bar applies clear effects after dependency values change; `clear`
+should not rewrite the initial component default baseline on mount.
 
 ```js
 {

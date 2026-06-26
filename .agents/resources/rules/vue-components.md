@@ -11,7 +11,9 @@ Apply to `packages/dialtone-vue/components/**`.
 
 ## Events, Slots, And Sizes
 
-- Use `update:modelValue` for v-model.
+- Use `modelValue` / `update:modelValue` for the v-model prop and emitted event
+  contract. In Vue templates, follow the existing linted listener spelling,
+  for example `@update:model-value`.
 - Use `update:open` for new overlays; preserve legacy `update:show` for Modal, Tooltip, and Toast.
 - Overlay slots use `headerContent` / `footerContent`; structural slots use `header` / `footer`.
 - Interactive component sizes are `xs`, `sm`, `md`, `lg`, `xl`; icon sizes use the numeric `100`-`800` scale.

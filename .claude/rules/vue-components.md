@@ -20,7 +20,9 @@ paths:
 
 ## Events
 
-- `update:modelValue` for v-model.
+- Use `modelValue` / `update:modelValue` for the v-model prop and emitted event
+  contract. In Vue templates, follow the existing linted listener spelling,
+  for example `@update:model-value`.
 - `update:open` for Modal, Tooltip, Toast, Popover, Collapsible, ImageViewer, FilterPill.
 
 ## Slots

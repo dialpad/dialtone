@@ -17,6 +17,8 @@ The Class tab contains the native `class` attribute and props whose names end in
 The option bar also has a search toggle. Search normalizes member names and
 logical aliases, so physical terms such as `left`, `right`, `top`, and `bottom`
 can find logical names such as `inlineStart` and `blockEnd`.
+When search filters out the current tab, the selected panel follows the first
+visible tab so the controls area does not point at a removed panel.
 
 ## Presets
 
