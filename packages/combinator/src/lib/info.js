@@ -174,7 +174,7 @@ function getComponentDefaults (component) {
         return [
           entryKey,
           entryValue.type !== Function && typeof entryDefault === 'function'
-            ? entryDefault()
+            ? entryDefault({})
             : entryDefault,
         ];
       });
