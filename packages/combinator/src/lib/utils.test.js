@@ -1,4 +1,4 @@
-import { shouldDisableSlotClassProp, supportsRootClass } from './utils';
+import { isClassProp, shouldDisableSlotClassProp, supportsRootClass } from './utils';
 
 import { expect } from 'vitest';
 
@@ -15,6 +15,14 @@ describe('utils.js test', function () {
 
   it('Should reject missing component names', function () {
     expect(supportsRootClass()).toBe(false);
+  });
+
+  describe('isClassProp', function () {
+    it('Should treat native class and *Class props as class props', function () {
+      expect(isClassProp({ name: 'class' })).toBe(true);
+      expect(isClassProp({ name: 'startIconClass' })).toBe(true);
+      expect(isClassProp({ name: 'size' })).toBe(false);
+    });
   });
 
   describe('shouldDisableSlotClassProp', function () {

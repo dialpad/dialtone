@@ -16,7 +16,8 @@
           :value="value"
           :warning="warning"
           :disabled="disabled"
-          :clearable="false"
+          :required="required"
+          :clearable="clearable"
           @update:value="e => onInputInternal(e, onInput)"
         >
           <template #default>
@@ -71,8 +72,16 @@ const props = defineProps({
     default: '',
   },
   value: {
-    type: String,
-    required: true,
+    type: [String, null],
+    default: null,
+  },
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  clearable: {
+    type: Boolean,
+    default: true,
   },
   disabled: {
     type: Boolean,

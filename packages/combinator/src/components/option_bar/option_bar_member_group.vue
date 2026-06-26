@@ -310,7 +310,7 @@ watch(memberMap, (members) => {
     if (props.values[key] === null || props.values[key] === undefined) return;
     updateMember(null, key);
   });
-}, { immediate: true });
+});
 
 /**
  * Updates the member's control in the 'member map'.
