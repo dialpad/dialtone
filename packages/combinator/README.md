@@ -1,44 +1,53 @@
 # Dialtone Combinator
 
-Dialtone Combinator is a Vue component that provides an interface for users to interact with Dialtone Vue components. 
+Dialtone Combinator is the interactive playground package for Dialtone Vue components. It renders a selected component, exposes editable props and slots, and generates Vue template code from the current state.
 
 ## Features
 
-* Interactive option bar for component customization
-* Live render preview of component with selected options
-* Live code preview for component with selected options
+- Renderer for the selected Dialtone Vue component.
+- Option bar with Props, Slots, and Class tabs.
+- Variant preset picker backed by `packages/combinator/src/variants/**`.
+- Exclusion and dependency handling for invalid prop and slot combinations.
+- Code panel that copies generated Vue template text from the data model.
 
 ## Documentation
 
-[Overview](.github/documentation/OVERVIEW.md) \
-[Contributing](.github/documentation/CONTRIBUTING.md) \
-[Usage](.github/documentation/USAGE.md)
+- [Overview](.github/documentation/OVERVIEW.md)
+- [Contributing](.github/documentation/CONTRIBUTING.md)
+- [Usage](.github/documentation/USAGE.md)
+- [Release process](.github/documentation/RELEASING.md)
+- [Known issues](.github/documentation/KNOWN_ISSUES.md)
 
-## Environment
+Internal maintainer docs live in
+[.github/documentation/internal](.github/documentation/internal/).
 
-### Install
+## Install
 
-`git clone https://github.com/dialpad/dialtone-combinator.git`
-
-OR
-
-`git clone git@github.com:dialpad/dialtone-combinator.git`
-
-Install dependencies
+Work from the Dialtone monorepo root:
 
 ```bash
 pnpm i
 ```
 
-### Run
+## Run
 
 ```bash
-pnpm run dev
+pnpm nx run dialtone-combinator:start
 ```
+
+The `start` target builds the Dialtone CSS, icons, tokens, and Vue packages, starts a watch for those packages, and runs the Combinator Vite dev server.
+
+## Validate
+
+```bash
+pnpm --dir packages/combinator test
+pnpm --dir packages/combinator lint
+pnpm nx run dialtone-combinator:build
+```
+
+The package `lint` script runs ESLint with `--fix`.
 
 ## Links
 
-[Preview](https://dialpad.github.io/dialtone-combinator/) \
-[Tracker](https://dialpad.atlassian.net/browse/DT-531) \
-[Dialtone](https://github.com/dialpad/dialtone) \
-[Dialtone Vue](https://github.com/dialpad/dialtone-vue)
+- [Dialtone](https://github.com/dialpad/dialtone)
+- [Dialtone Vue package](../dialtone-vue)

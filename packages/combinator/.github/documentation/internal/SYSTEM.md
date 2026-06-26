@@ -1,225 +1,114 @@
 # System
 
-The core system is primarily driven by the info and options data objects.
-Together these provide the required functionality for all the components 
-and inner workings of the system through three main components:
-* Renderer
-* Option bar
-* Code panel
+The Combinator system is driven by three root data objects:
+
+- `info`: processed component metadata;
+- `options`: reactive current values;
+- `settings`: cached UI and code-display preferences.
+
+`DtcCombinator` owns those objects and passes them into the renderer, option bar,
+and code panel.
 
 ## Info
-_Immutable_
 
-<details>
-<summary>Format</summary>
-<pre>
-<code>
-{
-    COMPONENT_FIELD: VALUE,
-    MEMBER_GROUP: 
-    [
-        MEMBER,
-        MEMBER,
-        ...
-    ],
-    ...
-}
-</code>
-</pre>
-</details>
-
-<details>
-<summary>Example</summary>
-<pre>
-<code>
-{
-    displayName: 'DtButton',
-    description: 'Base Vue component for Dialtone Buttons.',
-    attributes: 
-    [
-        {
-            name: 'disabled',
-            defaultValue: false,
-            initialValue: false,
-            defaultType: 'boolean',
-            types: 
-            [
-                'boolean',
-            ],
-        },
-        ...
-    ],
-    props: 
-    [
-        {
-            name: 'circle',
-            description: 'Whether the button is a circle or not.',
-            defaultValue: false,
-            initialValue: false,
-            defaultType: 'boolean',
-            types: 
-            [
-                'boolean',
-            ],
-            values: 
-            [
-                true, 
-                false,
-            ],
-        },
-        {
-            name: 'iconPosition',
-            description: 'The position of the icon slot within the button.',
-            defaultValue: 'left',
-            initialValue: 'left',
-            defaultType: 'string',
-            types: 
-            [
-                'string',
-            ],
-            values: 
-            [
-                'left', 
-                'right',
-                'top',
-                'bottom',
-            ],
-        },
-        {
-            name: 'labelClass',
-            description: 'Used to customize the label container',
-            defaultValue: '',
-            initialValue: '',
-            defaultType: 'string',
-            types: 
-            [
-                'string', 
-                'array', 
-                'object',
-            ],
-        },
-        ...
-    ],
-    slots:
-    [
-        {
-            name: 'default',
-            description: 'Content within button',
-        },
-        ...
-    ],
-    events:
-    [
-        {
-            name: 'click',
-            description: 'Native button click event',
-            types: 
-            [
-                'pointerevent', 
-                'keyboardevent',
-            ],
-        },
-        ...
-    ],
-}
-</code>
-</pre>
-<i>Info for `dt-button` component</i>
-</details>
-
-The **info** data object is a container for all extended component information for the target component.
-The raw Dialtone Vue documentation is processed based on the target component and put into a new **info** object.
-
-This object is considered immutable and should not be modified after it is initialized.
-
-The data object is declared in [combinator.vue](/src/components/combinator.vue). 
-The main functionality for preprocessing the data is included in [info.js](/src/lib/info.js).
-
-Essential documentation processing actions:
-* Rename props with the [model tag](../OVERVIEW.md#model) to original name
-* Generate custom members from the [attribute tag](../OVERVIEW.md#attribute)
-* Member 'type string' is parsed into an array of type names
-* Parse default values
-* ...
-
-It is best to put data in **info** when you want to use it in multiple places. For example `defaultType` is added
-to **info** for each member based on some validation logic using `defaultType` and `types`. This ensures a
-singular, predetermined value is provided to both the option bar and code editor.
-
-Additional data can be added to info in two ways:
-* Add custom comments or tags to the Dialtone Vue documentation
-* Extend programmatically in [info.js](/src/lib/info.js)
-
-The former method is always preferred if possible, 
-however sometimes it may make more sense to modify or extend 'info.js'.
-Sometimes it may be best to do both, if the docgen output is not in a preferable format.
-
-## Options
-_Reactive_
-
-<details>
-<summary>Format</summary>
-<pre>
-<code>
-{
-    MEMBER_GROUP: 
-    { 
-        MEMBER_KEY: VALUE,
-    },
-}
-</code>
-</pre>
-</details>
-
-<details>
-<summary>Example</summary>
-<pre>
-<code>
-{
-    attributes: 
-    { 
-        disabled: false,
-        width: '',
-    },
-    props:
-    {
-        active: false,
-        iconPosition: 'left',
-        labelClass: '',
-        ...
-    },
-    slots:
-    {
-        default: 'dt-button',
-        icon: undefined,
-    },
-}
-</code>
-</pre>
-<i>Options for `dt-button` component with default values</i>
-</details>
-
-The **options** data object is the main reactive object that allows interactivity with the target component. It is
-essentially a map of member key-value pairs that are used to read and write the state of the target component.
-
-**Options** can be updated by emitting an event with a function parameter that update the members in any way.
+`info` is derived from the target component and its Dialtone Vue documentation.
+`DtcCombinator` treats it as immutable after initialization.
 
 Format:
-```js
-emit(EVENT, options => {
-    options[MEMBER_GROUP][MEMBER_KEY] = VALUE;
-});
-```
 
-Example:
 ```js
-function onInput (e) {
-    emit('update:options', options => {
-        options.slots[props.name] = e.target.textContent;
-    });
+{
+  displayName: 'DtButton',
+  props: [member, member],
+  slots: [member, member],
+  attributes: [member, member],
+  events: [member, member],
+  exclusions: [rule, rule],
+  members: {
+    enumerate(handler) {},
+  },
+  bindings: {
+    get() {},
+    enumerate(handler) {},
+  },
 }
 ```
-_Code editor update options slot value on input_
 
-After **info** is initialized, the  `initialValue` fields for each member 
-are used to set the initial values in **options**. 
+`src/lib/info.js` and `src/lib/info_extend.js` handle the main processing:
+
+- clone the documentation input before mutation;
+- rename model props from the `@model` tag;
+- add HTML attribute members from `@property ... attribute` tags;
+- add the native `class` attribute for components that support root class;
+- parse member type strings;
+- normalize boolean enum values;
+- read default prop values from the component;
+- add labels from member names.
+
+The Combinator merges variant data into `info` by member name. It merges
+`defaults` before the selected preset and copies `exclusions` to
+`info.exclusions`.
+
+## Options
+
+`options` is the reactive value map that the renderer, option bar, and code
+panel use.
+
+Format:
+
+```js
+{
+  props: {
+    disabled: false,
+  },
+  attributes: {
+    class: '',
+  },
+  slots: {
+    default: 'Label',
+  },
+  bindings: {
+    get() {},
+    enumerate(handler) {},
+  },
+}
+```
+
+Initial option values come from each member's `initialValue`.
+
+Child components do not mutate `options` directly. They emit a function through
+`update:options`; the root applies that function inside a guarded setter. Manual
+edits clear the selected variant label.
+
+## Settings
+
+`settings` stores cached values for root, code, and renderer settings.
+`DtcCombinator` initializes the model from `src/settings.json` and
+localStorage-backed refs.
+
+See [SETTINGS](SETTINGS.md).
+
+## Disabled members
+
+`disabledMembers` is a computed `Set` in `DtcCombinator`. It includes optional
+props and slots that these rules disable:
+
+- exclusion rules;
+- inferred prop dependencies;
+- slot-class dependency rules.
+
+The root passes disabled members to the renderer and code panel so they suppress
+invalid or inactive members from the preview and generated code.
+
+See [EXCLUSIONS](EXCLUSIONS.md).
+
+## Render flow
+
+1. The root computes `info` from documentation and variants.
+2. The root initializes `options` from `info`.
+3. The option bar edits `options`.
+4. The renderer passes current bindings and slots to the target component.
+5. The code panel generates Vue template text from the same `info` and
+   `options`.
+
+This keeps preview state and copied code tied to the same source data.

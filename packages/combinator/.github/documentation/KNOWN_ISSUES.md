@@ -1,16 +1,47 @@
-# Known Issues
+# Known issues
 
-* Nested arrays and object controls will eventually run out of space.
-* Components that elevate to the highest level in dom can't be contained in the
-renderer such as 'DtBanner'. I think storybook uses an i-frame to resolve this issue.
-* Similarly, components that take focus and don't have close implemented will lock the
-entire site such as 'DtModal'.
-* 'DtSkeleton' animation doesn't seem to work
-* Code editor copy button doesn't work perfectly anymore with the new indentation system
-since flexbox and different containers are used.
-* A lot of components don't have any documentation generated for them such as 'DtRootLayout'
-preventing them from being supported even though they likely would be. They just need to be
-added to 'build_docs.js in dialtone-vue.
-* A lot of components are missing the `@values` tags such as 'DtLink' `kind` prop.
-  * Not just DtLink, a lot should be added
-* The `placeholder` attribute on 'DtInput' should be of type {string}, not {boolean}
+## Latent components
+
+These component folders exist in `packages/combinator/src/components/**`, but the
+current live app does not mount them:
+
+- `settings_menu`
+- `header`
+- `event_console`
+- `renderer/renderer_menu.vue`
+- `renderer/renderer_button_bar.vue`
+
+Do not document them as working UI. DLT-3498 tracks the follow-up decision to
+rewire or remove them.
+
+## Settings without a mounted settings UI
+
+The settings model still reads and writes localStorage-backed values for root
+theme/sidebar, code scheme/indent/verbose, and renderer background/positioning.
+Only settings that mounted components consume affect the live UI. The
+`settings_menu` and `renderer_menu` controls are latent until DLT-3498 resolves
+them.
+
+## Small screens
+
+A `640px` media query hides the root `.dialtone-playground` container. The
+playground currently has no mobile layout.
+
+## Overlay and focus-heavy components
+
+The renderer catches render errors and displays a critical notice, but components
+that move content outside the render container or capture focus still need manual
+checks. Examples include modal, popover, banner, toast, and other overlay-like
+components.
+
+## Generated documentation quality
+
+Control quality depends on the Dialtone Vue component documentation. Missing
+`@values`, missing slot docs, or stale comments can leave the Combinator with
+less specific controls even when the component source supports a narrower API.
+
+## Silent variant member mismatches
+
+The Combinator merges variant data by matching member names against docgen
+output. If a prop, attribute, or slot is renamed in the component but the variant
+file still uses the old name, the Combinator ignores that variant override.

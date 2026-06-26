@@ -1,85 +1,58 @@
-## Git Commit Message Convention
+# Git commit message convention
 
-Dialtone Combinator uses
-[Conventional Commits specification](https://www.conventionalcommits.org/en/v1.0.0/)
-for the commit messages in the release branches: `staging`.
+Dialtone Combinator follows the root Dialtone commit convention in
+`.github/COMMIT_CONVENTION.md`.
 
-When opening a PR, ensure the PR's title also complies with the Conventional Commits specification.
-This way, if your PR is merged using squash strategy, the PR's title will be used as the commit message
-except when your PR contains a single commit, in this case Github will use this commit for the commit message when your
-PR is merged, so in this case to meet the convention on the single commit of your PR is required.
-
-Consult
-[the rules](https://github.com/conventional-changelog/commitlint/tree/master/%40commitlint/config-conventional#rules)
-that are considered problems in the commit message.
-
-Each commit message consists of a **header**, a **body**, and a **footer**.
+Use this header shape:
 
 ```txt
-<header>
-<BLANK LINE>
-<body - optional>
-<BLANK LINE>
-<footer - optional>
+<type>(<scope>): <jira> <subject>
 ```
 
-The `header` is mandatory and has a **type**, **scope** (optional) and **subject**:
+Example:
 
 ```txt
-<type>(<scope - optional>): <subject>
+docs(combinator): DLT-3139 update maintainer documentation
 ```
 
-### Type:
+## Types
 
-Must be one of the following:
+Use the root convention's allowed types:
 
-* **build**: changes that affect the build system.
-* **chore**: general changes that don't fit in other types (code formatting, version changes).
-* **ci**: changes to the CI configuration, files and scripts.
-* **docs**: documentation changes.
-* **feat**: a new feature (corresponding with `MINOR` in SemVer).
-* **fix**: a bug fix (corresponding with `PATCH` in SemVer).
-* **perf**: performance improvements.
-* **refactor**: changes that neither fix a bug nor add a feature.
-* **revert**: changes that revert a commit.
-* **style**: not relevant changes (whitespace, code formatting, semicolons, etc).
-* **test**: changes that add or modify tests.
+- `build`
+- `chore`
+- `ci`
+- `docs`
+- `feat`
+- `fix`
+- `perf`
+- `refactor`
+- `revert`
+- `style`
+- `test`
 
-### Scope:
+## Scope
 
-The optional scope allows to specify the place of the change.
-For instance, if the commit affects a specific component, use the component's name as scope:
+Use `combinator` for package-wide Combinator changes. For small internal areas,
+a narrower scope can be useful:
 
 ```txt
-feat(option-bar): add collapsible sections
+fix(option-bar): DLT-0000 hide invalid prop combinations
+test(renderer): DLT-0000 cover slot render errors
 ```
 
-### Subject:
+## Jira key
 
-The subject contains a short description of the change:
+Include the Jira key after the colon. Use `NO-JIRA` only when the team has
+explicitly approved the work without a Jira ticket.
 
-* use the imperative, present tense: "change" not "changed" nor "changes"
-* don't capitalize first letter
-* no dot (.) at the end of the sentence
+## Subject
 
-### Examples
+- use imperative, present-tense wording;
+- do not capitalize the first word unless it is a proper noun;
+- do not end with a period.
 
-#### Commit message with only header
+## Release impact
 
-```txt
-feat: add themes
-```
-
-#### Commit message with scope
-
-```txt
-feat(code-editor): add self-closing tag
-```
-
-#### Commit message with BREAKING CHANGE footer
-
-```txt
-feat: remove FEATURE
-
-BREAKING CHANGE: remove FEATURE used by PROJECTS
-```
+The release config uses Conventional Commit types to decide version bumps.
+For this package, the release config treats `refactor` commits as patch releases.

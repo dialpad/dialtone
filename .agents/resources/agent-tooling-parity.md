@@ -19,3 +19,20 @@ Codex tooling is a first-class Dialtone agent harness alongside Claude tooling. 
 | Claude package-specific skills for tokens, icons, and utilities     | Future `token-work`, `icon-work`, `utility-work` skills       | Defer                               | Add after the core Codex loop stabilizes. First pilot should be `utility-work`.                               | Future fixture evals.                   |
 | Claude shaping and breadboarding workflows                          | Future planning skills if repeated                            | Defer                               | High context cost; add only if repeated Codex use proves the need.                                            | None yet.                               |
 | Claude configuration and Anthropic-practices review helper surfaces | No direct Codex peer in the first pass                        | Skip                                | The current Codex eval contracts and this resource capture the useful review criteria.                        | None.                                   |
+
+## Rule parity obligation
+
+When a `.claude/rules/*.md` file is added or renamed, add the matching
+`.agents/resources/rules/*.md` peer in the same branch. If Codex should not get
+an exact-name peer yet, record a Defer or Skip decision below and keep the eval
+allowlist in `.agents/evals/run-skill-contract-evals.mjs` in sync with this
+table.
+
+| Claude rule | Codex peer or status | Decision | Rationale |
+| --- | --- | --- | --- |
+| `.claude/rules/claude-config.md` | No Codex peer | Skip | Claude runtime configuration does not apply to Codex runtime rules. |
+| `.claude/rules/css-specificity.md` | No exact Codex peer yet | Defer | Codex CSS review currently routes through `css-utilities` and `design-tokens`; add a peer when specificity review becomes a repeated Codex need. |
+| `.claude/rules/dialtone-query-core.md` | `.agents/resources/rules/query-core.md` | Skip exact-name parity | Codex already has the shorter query-core peer, so an exact duplicate file would add routing noise. |
+| `.claude/rules/general-rules.md` | `.agents/resources/rules/general.md` | Skip exact-name parity | Codex uses a shorter general rule name in its rule map. |
+| `.claude/rules/link-and-button-navigation.md` | No exact Codex peer yet | Defer | Fold into a future accessibility/navigation peer when Codex review needs it. |
+| `.claude/rules/slot-class-props.md` | No exact Codex peer yet | Defer | Current Codex component guidance mentions slot-class impact; add a dedicated peer when slot-class reviews repeat. |
