@@ -6,6 +6,34 @@ const supportedComponent = { name: 'DtCard', props: {} };
 const unsupportedComponent = { name: 'DtDropdown', props: {} };
 
 describe('info.js test', function () {
+  it('Should support prop default factories that read raw props', function () {
+    const info = getComponentInfo({
+      props: {
+        kind: {
+          type: String,
+          default: null,
+        },
+        variant: {
+          type: String,
+          default: rawProps => rawProps.kind ? null : 'body-md',
+        },
+      },
+    }, {
+      props: [
+        {
+          name: 'kind',
+          type: { name: 'string' },
+        },
+        {
+          name: 'variant',
+          type: { name: 'string' },
+        },
+      ],
+    });
+
+    expect(info.props.find(prop => prop.name === 'variant').initialValue).toBe('body-md');
+  });
+
   it('Should add a native class attribute for components that support root class', function () {
     const info = getComponentInfo(supportedComponent, {
       displayName: 'DtCard',
