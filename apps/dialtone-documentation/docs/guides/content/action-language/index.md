@@ -1,7 +1,7 @@
 ---
-title: Action Language
-prev: { link: "/guides/content/", text: "Content" }
-next: { link: "/guides/content/error-messages/", text: "Error Messages" }
+title: Action language
+prev: { link: "/guides/content/writing-approach/", text: "Writing approach" }
+next: { link: "/guides/content/error-messages/", text: "Error messages" }
 description: Customers use Dialpad to connect with others. Content should be written and structured to help them understand and take the most important actions.
 keywords: ["cta","button text","action copy"]
 ---
@@ -154,6 +154,7 @@ When using links in sentences, avoid linking the entire sentence. Only link the 
 </template>
 <template #dont>
 
+<!-- markdownlint-disable-next-line MD059 -->
 * Virtual backgrounds only work in the latest versions of Google Chrome. To learn more, [click here](https://help.dialpad.com/docs/virtual-backgrounds).
 * [Add a desk phone](https://help.dialpad.com/v1/docs/en/desk-phones-and-room-phones) or forwarding number below.
 

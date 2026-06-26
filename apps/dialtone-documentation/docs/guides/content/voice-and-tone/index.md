@@ -1,10 +1,12 @@
 ---
-title: Voice and Tone
-prev: { link: "/guides/content/inclusive-language/", text: "Inclusive Language" }
-next: { link: "/guides/accessibility", text: "Accessibility" }
+title: Voice and tone
+prev: { link: "/guides/content/", text: "Content guidelines" }
+next: { link: "/guides/content/writing-approach/", text: "Writing approach" }
 description: Learn how to apply Dialpad's voice and choose the right tone, no matter the product, feature, or experience you're building.
 keywords: ["writing style", "brand voice"]
 ---
+
+Voice and tone guidance is moving into [Writing approach](/guides/content/writing-approach/). Use Writing approach as the main entry point for in-product writing principles, voice, and tone.
 
 This guide is the comprehensive writing resource for product teams. Reference this guide to ensure accuracy, coherence, and consistency throughout the product. Applying the outlined principles in this guide consistently will maintain high writing quality standards across product teams and throughout the product experience.
 
