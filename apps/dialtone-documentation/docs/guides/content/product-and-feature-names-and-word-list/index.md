@@ -1,8 +1,12 @@
 ---
-title: Product and feature names and word list
+title: Names and word list
+cardTitle: Names and word list
+cardOrder: 9
 prev: { link: "/guides/content/data-formats/", text: "Data formats" }
 next: { link: "/guides/accessibility", text: "Accessibility" }
-description: Guidance for product names, feature names, preferred terms, and words to avoid in product copy.
+description: Product names, feature names, and word list.
+thumb: true
+thumbName: product-and-feature-names-and-word-list
 keywords:
   ["word list", "product names", "feature names", "terminology", "naming"]
 ---
@@ -17,4 +21,4 @@ Until this guidance is expanded, use [Inclusive language](/guides/content/inclus
 
 - [Inclusive language](/guides/content/inclusive-language/)
 - [Grammar and mechanics](/guides/content/grammar-and-mechanics/)
-- [Content guidelines](/guides/content/)
+- [Content](/guides/content/)

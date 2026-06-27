@@ -1,8 +1,11 @@
 ---
 title: Help content
+cardTitle: Help
+cardOrder: 5
 prev: { link: "/guides/content/forms-and-validation/", text: "Forms and validation" }
 next: { link: "/guides/content/inclusive-language/", text: "Inclusive language" }
-description: Help content is educational copy that provides additional information about interactive elements or concepts in the UI.
+description: Guidance that supports decisions.
+thumb: true
 keywords: ["help text","tooltips","documentation"]
 ---
 

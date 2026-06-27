@@ -1,8 +1,11 @@
 ---
 title: Error messages
+cardTitle: Errors
+cardOrder: 3
 prev: { link: "/guides/content/action-language/", text: "Action language" }
 next: { link: "/guides/content/forms-and-validation/", text: "Forms and validation" }
-description: Errors can be scary and frustrating for users. We aim to make users aware of errors, easy to understand, and provide helpful suggestions (when possible) to correct them.
+description: What happened and how to recover.
+thumb: true
 keywords: ["errors","error copy","validation messages"]
 ---
 Good error messages should:

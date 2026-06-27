@@ -1,8 +1,11 @@
 ---
 title: Grammar and mechanics
+cardTitle: Grammar
+cardOrder: 7
 prev: { link: "/guides/content/inclusive-language/", text: "Inclusive language" }
 next: { link: "/guides/content/data-formats/", text: "Data formats" }
-description: These guidelines exist to help everyone at Dialpad write helpful copy that shares the same voice, tone, and consistency.
+description: Capitalization, punctuation, and style.
+thumb: true
 keywords: ["punctuation", "style guide"]
 ---
 

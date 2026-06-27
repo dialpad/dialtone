@@ -1,5 +1,6 @@
 ---
 title: Data formats
+cardOrder: 8
 prev:
   {
     link: "/guides/content/grammar-and-mechanics/",
@@ -8,9 +9,10 @@ prev:
 next:
   {
     link: "/guides/content/product-and-feature-names-and-word-list/",
-    text: "Product and feature names and word list",
+    text: "Names and word list",
   }
-description: Guidance for writing dates, times, numbers, units, currency, and other structured data in product copy.
+description: Dates, times, numbers, and units.
+thumb: true
 keywords: ["data formats", "dates", "times", "numbers", "currency", "units"]
 ---
 
@@ -24,4 +26,4 @@ Until this guidance is expanded, use [Grammar and mechanics](/guides/content/gra
 
 - [Grammar and mechanics](/guides/content/grammar-and-mechanics/)
 - [Error messages](/guides/content/error-messages/)
-- [Product and feature names and word list](/guides/content/product-and-feature-names-and-word-list/)
+- [Names and word list](/guides/content/product-and-feature-names-and-word-list/)

@@ -1,8 +1,11 @@
 ---
 title: Forms and validation
+cardTitle: Forms
+cardOrder: 4
 prev: { link: "/guides/content/error-messages/", text: "Error messages" }
 next: { link: "/guides/content/help-content/", text: "Help content" }
-description: Guidance for labels, helper text, placeholders, validation, and form-related feedback.
+description: Labels, helper text, and field feedback.
+thumb: true
 keywords:
   [
     "forms",

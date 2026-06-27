@@ -1,8 +1,11 @@
 ---
 title: Writing approach
-prev: { link: "/guides/content/", text: "Content guidelines" }
+cardTitle: Approach
+cardOrder: 1
+prev: { link: "/guides/content/", text: "Content" }
 next: { link: "/guides/content/action-language/", text: "Action language" }
-description: How Dialtone approaches in-product writing, including voice, tone, and writing principles.
+description: Voice, tone, and writing principles.
+thumb: true
 keywords:
   ["content guidelines", "voice", "tone", "writing principles", "ux writing"]
 ---

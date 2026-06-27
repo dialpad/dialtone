@@ -1,6 +1,6 @@
 ---
 title: Voice and tone
-prev: { link: "/guides/content/", text: "Content guidelines" }
+prev: { link: "/guides/content/", text: "Content" }
 next: { link: "/guides/content/writing-approach/", text: "Writing approach" }
 description: Learn how to apply Dialpad's voice and choose the right tone, no matter the product, feature, or experience you're building.
 keywords: ["writing style", "brand voice"]

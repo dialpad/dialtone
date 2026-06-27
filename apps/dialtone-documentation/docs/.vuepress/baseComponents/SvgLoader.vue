@@ -76,18 +76,21 @@ const svgs = [
 
 
 // Ref callbacks to add data-svg-source attribute to rendered SVG elements
-const setIllustrationRef = (el) => {
-  if (el?.$el) {
-    el.$el.setAttribute(
-      'data-svg-source',
-      `@dialpad/dialtone-icons/dist/svg/illustrations/${props.name}.svg`,
-    );
+const setSourceAttribute = (el, source) => {
+  const svgEl = el?.$el || el;
+  if (svgEl?.setAttribute) {
+    svgEl.setAttribute('data-svg-source', source);
   }
 };
 
+const setIllustrationRef = (el) => {
+  setSourceAttribute(
+    el,
+    `@dialpad/dialtone-icons/dist/svg/illustrations/${props.name}.svg`,
+  );
+};
+
 const setSvgRef = (el, index) => {
-  if (el?.$el) {
-    el.$el.setAttribute('data-svg-source', svgPaths[index]);
-  }
+  setSourceAttribute(el, svgPaths[index]);
 };
 </script>
