@@ -1,8 +1,8 @@
 ---
 title: Inclusive language
 cardOrder: 6
-prev: { link: "/guides/content/help-content/", text: "Help content" }
-next: { link: "/guides/content/grammar-and-mechanics/", text: "Grammar and mechanics" }
+prev: { link: "../help-content/", text: "Help content" }
+next: { link: "../grammar-and-mechanics/", text: "Grammar and mechanics" }
 description: Words that respect every user.
 thumb: true
 keywords: ["accessibility", "diversity"]

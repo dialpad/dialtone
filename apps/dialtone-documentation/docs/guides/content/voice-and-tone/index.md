@@ -1,12 +1,12 @@
 ---
 title: Voice and tone
-prev: { link: "/guides/content/", text: "Content" }
-next: { link: "/guides/content/writing-approach/", text: "Writing approach" }
+prev: { link: "../", text: "Content" }
+next: { link: "../writing-approach/", text: "Writing approach" }
 description: Learn how to apply Dialpad's voice and choose the right tone, no matter the product, feature, or experience you're building.
 keywords: ["writing style", "brand voice"]
 ---
 
-Voice and tone guidance is moving into [Writing approach](/guides/content/writing-approach/). Use Writing approach as the main entry point for in-product writing principles, voice, and tone.
+Voice and tone guidance is moving into [Writing approach](../writing-approach/). Use Writing approach as the main entry point for in-product writing principles, voice, and tone.
 
 This guide is the comprehensive writing resource for product teams. Reference this guide to ensure accuracy, coherence, and consistency throughout the product. Applying the outlined principles in this guide consistently will maintain high writing quality standards across product teams and throughout the product experience.
 
@@ -104,7 +104,7 @@ Sometimes we want to keep people moving along a desired path. In these situation
 
 Despite our best efforts, errors still happen. These are often simple mistakes or roadblocks to action that can be fixed. Although they aren’t necessarily errors or problems, they might feel that way to users. In that situation, our job is to help people understand what happened and how they can address it so they can get back to their task as quickly as possible.
 
-Read the [error message guidelines](/guides/content/error-messages/index.md) for more detailed guidance.
+Read the [error message guidelines](../error-messages/) for more detailed guidance.
 
 <dialtone-usage>
 <template #do>
@@ -127,7 +127,7 @@ At times we will need to share bad news. This might be due to an outage, an erro
 
 In these situations, there’s a serious risk of damaging trust and hurting our relationship with our customers, so we need to be careful how we communicate.
 
-Read the [error message guidelines](/guides/content/error-messages/index.md) for more detailed guidance.
+Read the [error message guidelines](../error-messages/) for more detailed guidance.
 
 <dialtone-usage>
 <template #do>
@@ -192,7 +192,7 @@ It’s exciting to launch a new feature or update, but always consider the audie
 
 When announcing something new, focus on educating and explaining what it is, what it’s used for, and what the user can expect.
 
-Be sure to use [inclusive language](/guides/content/inclusive-language/index.md) in your writing.
+Be sure to use [inclusive language](../inclusive-language/) in your writing.
 
 <dialtone-usage>
 <template #do>

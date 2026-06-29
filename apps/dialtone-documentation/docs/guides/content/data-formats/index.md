@@ -3,12 +3,12 @@ title: Data formats
 cardOrder: 8
 prev:
   {
-    link: "/guides/content/grammar-and-mechanics/",
+    link: "../grammar-and-mechanics/",
     text: "Grammar and mechanics",
   }
 next:
   {
-    link: "/guides/content/product-and-feature-names-and-word-list/",
+    link: "../product-and-feature-names-and-word-list/",
     text: "Names and word list",
   }
 description: Dates, times, numbers, and units.
@@ -20,10 +20,10 @@ Use this guidance when product copy includes structured information such as date
 
 This area will cover how to keep formatted data scannable, consistent, and understandable across product surfaces. It should help teams choose formats that match user context instead of mixing styles across similar workflows.
 
-Until this guidance is expanded, use [Grammar and mechanics](/guides/content/grammar-and-mechanics/) for general style decisions and keep data formats consistent within each product surface.
+Until this guidance is expanded, use [Grammar and mechanics](../grammar-and-mechanics/) for general style decisions and keep data formats consistent within each product surface.
 
 ## Related guidance
 
-- [Grammar and mechanics](/guides/content/grammar-and-mechanics/)
-- [Error messages](/guides/content/error-messages/)
-- [Names and word list](/guides/content/product-and-feature-names-and-word-list/)
+- [Grammar and mechanics](../grammar-and-mechanics/)
+- [Error messages](../error-messages/)
+- [Names and word list](../product-and-feature-names-and-word-list/)

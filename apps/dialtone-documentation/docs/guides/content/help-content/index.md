@@ -2,8 +2,8 @@
 title: Help content
 cardTitle: Help
 cardOrder: 5
-prev: { link: "/guides/content/forms-and-validation/", text: "Forms and validation" }
-next: { link: "/guides/content/inclusive-language/", text: "Inclusive language" }
+prev: { link: "../forms-and-validation/", text: "Forms and validation" }
+next: { link: "../inclusive-language/", text: "Inclusive language" }
 description: Guidance that supports decisions.
 thumb: true
 keywords: ["help text","tooltips","documentation"]

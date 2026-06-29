@@ -2,8 +2,8 @@
 title: Grammar and mechanics
 cardTitle: Grammar
 cardOrder: 7
-prev: { link: "/guides/content/inclusive-language/", text: "Inclusive language" }
-next: { link: "/guides/content/data-formats/", text: "Data formats" }
+prev: { link: "../inclusive-language/", text: "Inclusive language" }
+next: { link: "../data-formats/", text: "Data formats" }
 description: Capitalization, punctuation, and style.
 thumb: true
 keywords: ["punctuation", "style guide"]

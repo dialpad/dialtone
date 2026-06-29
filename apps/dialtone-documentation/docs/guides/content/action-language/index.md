@@ -2,8 +2,8 @@
 title: Action language
 cardTitle: Actions
 cardOrder: 2
-prev: { link: "/guides/content/writing-approach/", text: "Writing approach" }
-next: { link: "/guides/content/error-messages/", text: "Error messages" }
+prev: { link: "../writing-approach/", text: "Writing approach" }
+next: { link: "../error-messages/", text: "Error messages" }
 description: Labels, links, headings, and navigation.
 thumb: true
 keywords: ["cta","button text","action copy"]
