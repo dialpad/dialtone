@@ -59,11 +59,12 @@
 </template>
 
 <script setup>
-import { computed, reactive } from 'vue';
+import { computed } from 'vue';
 import { DtText } from '@dialpad/dialtone-vue';
 import DtcRendererTarget from '@/src/components/renderer/renderer_target.vue';
 import DtcNode from '@/src/components/tools/node.vue';
 import { buildVariantState } from '@/src/lib/variant_state';
+import { nonEmptySlots } from '@/src/lib/utils';
 
 const props = defineProps({
   /**
@@ -126,19 +127,9 @@ const cells = computed(() => {
       props.variants,
       name,
     );
-    return { name, info, options: reactive(options) };
+    return { name, info, options };
   });
 });
-
-/**
- * Filters out empty slots so only authored slot content is rendered.
- *
- * @param {object} slots - The slot values for a cell.
- * @returns {object} The non-empty slots.
- */
-function nonEmptySlots (slots) {
-  return Object.fromEntries(Object.entries(slots ?? {}).filter(([, slot]) => slot));
-}
 
 /**
  * Selects a variant for the single view — but only when the click landed on the

@@ -1,3 +1,4 @@
+import { reactive } from 'vue';
 import { getComponentInfo } from '@/src/lib/info';
 
 const MEMBER_GROUPS = ['slots', 'props', 'attributes', 'events'];
@@ -11,7 +12,7 @@ const MEMBER_GROUPS = ['slots', 'props', 'attributes', 'events'];
  */
 export function cloneInfoMembers (info) {
   const cloned = { ...info };
-  for (const group of ['props', 'slots', 'attributes', 'events']) {
+  for (const group of MEMBER_GROUPS) {
     if (cloned[group]) {
       cloned[group] = cloned[group].map(m => ({ ...m }));
     }
@@ -89,14 +90,17 @@ export function buildVariantState (component, documentation, variants, variantNa
   if (overrides.props) values.props = { ...(values.props ?? {}), ...overrides.props };
   if (overrides.attributes) values.attributes = { ...(values.attributes ?? {}), ...overrides.attributes };
 
-  const options = {
+  // `options` is made reactive before the bindings closure captures it, so that
+  // `options.props` reads inside `get()` go through Vue's dependency tracking.
+  // Without this, onCellEvent mutations would not trigger re-renders in the spec sheet.
+  const options = reactive({
     ...values,
     bindings: {
       get () {
-        return { ...(values.props ?? {}), ...(values.attributes ?? {}) };
+        return { ...(options.props ?? {}), ...(options.attributes ?? {}) };
       },
     },
-  };
+  });
 
   return { info, options };
 }
