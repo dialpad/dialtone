@@ -40,8 +40,7 @@ Use in place of manually applying Text Styles. Examples of manual application **
 - Prefer `DtText` over individual typography utility classes to keep implementations aligned with token updates.
 - Use the default slot for rich content. The `text` prop provides a simple fallback string when no slot content is present.
 - Choose the `as` prop to match the semantic HTML element (e.g., `h1`, `label`, `p`).
-- Use the default `body-md` variant for plain body copy; set `variant` when a different complete text composition is needed.
-- Use `size` by itself for a raw font-size override on the default `body-md` variant, or with `variant` when a different composition is needed.
+- Use `variant` for complete text compositions and pair `size` with `variant` only when a raw font-size override is needed.
 - Most properties are optional, as they layer in on top of each other.
 
 <dialtone-usage>
@@ -49,7 +48,7 @@ Use in place of manually applying Text Styles. Examples of manual application **
 
 - Replace multiple `d-` typography classes with a single `dt-text` instance.
 - Pick the smallest `variant` that conveys the desired hierarchy.
-- Use `size` when the composition is right but the font size needs a token-backed override.
+- Pair `size` with `variant` when the composition is right but the font size needs a token-backed override.
 - Use `tone` for semantic color tokens instead of standalone `d-fc-*` classes.
 
 </template>
@@ -66,7 +65,7 @@ Use in place of manually applying Text Styles. Examples of manual application **
 
 ### Variant
 
-Use `variant` to apply a complete text composition, including font family, font size, font weight, and line height. The default variant is `body-md`.
+Use `variant` to apply a complete text composition, including font family, font size, font weight, and line height. Default will inherit styles from the parent.
 
 ```vue demo
 <!-- @wrapper -->
@@ -79,13 +78,13 @@ Use `variant` to apply a complete text composition, including font family, font 
   <dt-text variant="body-md">Body</dt-text>
   <dt-text variant="label-md">Label</dt-text>
   <dt-text variant="code-md">Code</dt-text>
-  <dt-text>Default body-md</dt-text>
+  <dt-text>Default (inherits)</dt-text>
 </dt-stack>
 ```
 
 ### Size
 
-Use `size` to apply a raw font-size token while keeping the rest of the composition. If `variant` is omitted, `size` overrides the default `body-md` variant. With legacy `kind`, `size` keeps its historical composition behavior.
+Use `size` with `variant` to apply a raw font-size token while keeping the rest of the composition. `size` should not be used by itself; pair it with `variant`, or with legacy `kind` while migrating older usages.
 
 <dt-stack class="d-w100p d-ba d-bar-300 d-of-auto">
   <table class="d-w100p d-table">
@@ -102,7 +101,7 @@ Use `size` to apply a raw font-size token while keeping the rest of the composit
         <dt-text variant="body-sm">{{ item.output }}</dt-text>
       </td>
       <td>
-        <dt-text :size="item.size">Text</dt-text>
+        <dt-text variant="body-md" :size="item.size">Text</dt-text>
       </td>
     </tr>
   </table>
@@ -110,8 +109,9 @@ Use `size` to apply a raw font-size token while keeping the rest of the composit
 
 ```vue code-only
 <dt-text
+  variant="body-lg"
   size="300"
->Default body-md composition with a 20px font-size override</dt-text>
+>Body composition with a 20px font-size override</dt-text>
 ```
 
 ### Legacy kind
@@ -126,7 +126,7 @@ The `kind` prop remains supported for backward compatibility. When `kind` is pre
 <dt-text variant="body-md">Body medium composition</dt-text>
 ```
 
-T-shirt sizes such as `xs`, `sm`, `md`, and `lg` belong in `variant` names for new composition usage. Numeric `size` values are raw font-size tokens on the default or explicit `variant`; with legacy `kind`, they keep the historical composition mapping.
+T-shirt sizes such as `xs`, `sm`, `md`, and `lg` belong in `variant` names for new usage. Numeric `size` values are raw font-size tokens when paired with `variant`; with legacy `kind`, they keep the historical composition mapping.
 
 ### Numeric
 

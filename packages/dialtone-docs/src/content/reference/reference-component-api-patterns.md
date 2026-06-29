@@ -18,7 +18,7 @@ keywords:
     dt-text,
   ]
 ai_summary: Cross-component API contract for Dialtone Vue components — standard props, events, slots, and patterns shared by all components.
-last_updated: 2026-06-24
+last_updated: 2026-06-29
 related_packages: [dialtone-vue]
 ---
 
@@ -54,9 +54,9 @@ Most sizable components accept a `size` prop with values: `xs`, `sm`, `md`, `lg`
 Exceptions exist:
 
 - DtModal uses `default` and `full`.
-- DtText uses numeric font-size token stops for raw font-size control against its default or explicit `variant`: `50`, `75`, `100`, `125`, `150`, `200`, `250`, `300`, `350`, `400`, `450`, `500`, `550`, `600`, `650`, `700`, `750`, `800`.
+- DtText uses numeric font-size token stops for raw font-size control when paired with `variant`: `50`, `75`, `100`, `125`, `150`, `200`, `250`, `300`, `350`, `400`, `450`, `500`, `550`, `600`, `650`, `700`, `750`, `800`.
 
-DtText defaults to `variant="body-md"` when neither `variant` nor legacy `kind` is set. It also keeps legacy `kind + size` composition behavior for backward compatibility when `kind` is present and `variant` is not set.
+DtText `size` must be paired with `variant`, or with legacy `kind` while older code migrates. DtText also keeps legacy `kind + size` composition behavior for backward compatibility when `variant` is not set.
 
 ### Kind
 
@@ -73,7 +73,7 @@ For DtText, `kind` is legacy composition syntax. Prefer `variant` for new text c
 
 Visual variant or complete composition. Values vary per component.
 
-DtText uses `variant` for complete typography compositions such as `headline-md`, `body-md`, `label-md`, and `code-sm`. The default is `body-md`. `variant` can be combined with numeric `size` when the composition is correct but the font-size token needs an explicit override.
+DtText uses `variant` for complete typography compositions such as `headline-md`, `body-md`, `label-md`, and `code-sm`. `variant` can be combined with numeric `size` when the composition is correct but the font-size token needs an explicit override.
 
 ### Importance
 

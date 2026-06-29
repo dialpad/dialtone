@@ -6,12 +6,12 @@ Detects usage of deprecated t-shirt size props (`xs`, `sm`, `md`, `lg`, `xl`, `2
 
 Dialtone components now use a numeric ordinal scale for raw size props. T-shirt sizes are supported as deprecated aliases but the current form is preferred.
 
-For `DtText`, t-shirt sizes describe text composition when legacy `kind` is present and should move to `variant` when a supported text composition can be inferred. Without `kind`, `DtText` defaults to `variant="body-md"`, so t-shirt `size` values are migrated to numeric raw font-size overrides.
+For `DtText`, t-shirt sizes describe text composition and should move to `variant` when a supported text composition can be inferred. Numeric `size` remains valid for raw font-size control only when paired with `variant`, or with legacy `kind` while migrating older code.
 
 This rule flags:
 
 - `size="sm"` on most `dt-*` / `Dt*` components → `:size="200"`
-- `size="sm"` on `dt-text` / `DtText` without `variant` or `kind` → `:size="200"`
+- `size="sm"` on `dt-text` / `DtText` without `variant` or `kind` → manual error
 - `kind="body" size="sm"` on `dt-text` / `DtText` → `variant="body-sm"`
 - `kind="headline" size="2xl"` on `dt-text` / `DtText` → `variant="headline-2xl"`
 - `label-size="xs"` on `dt-input`, `dt-select-menu`, etc. → `:label-size="100"`
@@ -43,7 +43,6 @@ No options.
 
 ```vue
 <dt-button :size="200">Click me</dt-button>
-<dt-text :size="200">Body text</dt-text>
 <dt-text variant="headline-xl">Headline</dt-text>
 <dt-input :label-size="100" />
 <dt-motion-text :speed="400" />

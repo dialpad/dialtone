@@ -36,9 +36,6 @@ ruleTester.run('deprecated-tshirt-sizes', rule, {
       code: '<template><dt-text variant="body-md" :size="300" /></template>',
     },
     {
-      code: '<template><dt-text :size="300" /></template>',
-    },
-    {
       code: '<template><dt-text :variant="textVariant" :size="300" /></template>',
     },
     {
@@ -85,11 +82,17 @@ ruleTester.run('deprecated-tshirt-sizes', rule, {
       output: '<template><dt-button :size="100" /></template>',
       errors: [{ messageId: 'deprecatedSize' }],
     },
-    // size alone on dt-text uses the default body-md variant with a raw-size override
+    // size alone on dt-text cannot infer composition
     {
       code: '<template><dt-text size="sm" /></template>',
-      output: '<template><dt-text :size="200" /></template>',
-      errors: [{ messageId: 'deprecatedSize' }],
+      output: null,
+      errors: [{ messageId: 'unpairedDtTextSize' }],
+    },
+    // numeric size alone on dt-text cannot infer composition
+    {
+      code: '<template><dt-text :size="300" /></template>',
+      output: null,
+      errors: [{ messageId: 'unpairedDtTextSize' }],
     },
     // size="sm" on dt-text with explicit kind
     {
@@ -127,11 +130,11 @@ ruleTester.run('deprecated-tshirt-sizes', rule, {
       output: '<template><dt-text variant="headline-2xl" /></template>',
       errors: [{ messageId: 'deprecatedDtTextSize' }],
     },
-    // size="3xl" on dt-text without kind/variant migrates to a raw-size override
+    // size="3xl" on dt-text without headline kind cannot infer composition
     {
       code: '<template><dt-text size="3xl" /></template>',
-      output: '<template><dt-text :size="700" /></template>',
-      errors: [{ messageId: 'deprecatedSize' }],
+      output: null,
+      errors: [{ messageId: 'unpairedDtTextSize' }],
     },
     // size="xl" on body dt-text cannot safely map to a supported body variant
     {
@@ -181,10 +184,10 @@ ruleTester.run('deprecated-tshirt-sizes', rule, {
       code: `<template><dt-button :size="'sm'" /></template>`,
       errors: [{ messageId: 'deprecatedSizeInBinding' }],
     },
-    // Dynamic binding on dt-text needs a manual raw-size migration
+    // Dynamic binding on dt-text without variant/kind cannot infer composition
     {
       code: `<template><dt-text :size="'sm'" /></template>`,
-      errors: [{ messageId: 'deprecatedDtTextSizeInBinding' }],
+      errors: [{ messageId: 'unpairedDtTextSize' }],
     },
     // Dynamic binding on dt-text with variant needs a manual raw-size migration
     {
@@ -199,10 +202,10 @@ ruleTester.run('deprecated-tshirt-sizes', rule, {
         { messageId: 'deprecatedSizeInBinding' },
       ],
     },
-    // Dynamic binding: single t-shirt in ternary needs a manual raw-size migration
+    // Dynamic binding: single t-shirt in ternary without variant/kind cannot infer composition
     {
       code: `<template><dt-text :size="isLarge ? 'xl' : 300" /></template>`,
-      errors: [{ messageId: 'deprecatedDtTextSizeInBinding' }],
+      errors: [{ messageId: 'unpairedDtTextSize' }],
     },
     // Dynamic binding: single t-shirt in ternary with variant needs manual migration
     {

@@ -31,7 +31,7 @@ export const argsData = {
   default: 'The quick brown fox jumps over the lazy dog.',
   as: 'span',
   kind: undefined,
-  variant: undefined,
+  variant: 'body-md',
   size: undefined,
   family: undefined,
   italic: false,

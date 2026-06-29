@@ -11,7 +11,6 @@ import {
   TEXT_STRENGTH_MODIFIERS,
   TEXT_DENSITY_MODIFIERS,
   TEXT_FONT_SIZE_MODIFIERS,
-  TEXT_VARIANT_MODIFIERS,
   TEXT_FAMILY_MODIFIERS,
   TEXT_ITALIC_CLASS,
 } from './TextConstants';
@@ -39,10 +38,10 @@ describe('DtText', () => {
     expect(wrapper.classes()).toContain('d-text');
   });
 
-  it('applies body-md as the default variant', () => {
+  it('does not apply a typography variant by default', () => {
     const wrapper = mountComponent();
 
-    expect(wrapper.classes()).toContain(TEXT_VARIANT_MODIFIERS['body-md']);
+    expect(wrapper.classes()).not.toContain('d-text-body--md');
   });
 
   it('renders slot content', () => {
@@ -61,7 +60,7 @@ describe('DtText', () => {
     const wrapper = mountComponent({ kind: 'headline', size: 'lg' });
 
     expect(wrapper.classes()).toContain('d-text-headline--lg');
-    expect(wrapper.classes()).not.toContain(TEXT_VARIANT_MODIFIERS['body-md']);
+    expect(wrapper.classes()).not.toContain('d-text-body--md');
   });
 
   it('falls back to default size when invalid universal size provided', () => {
@@ -114,15 +113,24 @@ describe('DtText', () => {
       expect(wrapper.classes()).not.toContain(TEXT_FONT_SIZE_MODIFIERS[200]);
     });
 
-    it('applies raw font-size class with the default variant', () => {
+    it('warns when size is set without kind or variant', () => {
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+      mountComponent({ size: 300 });
+
+      expect(warnSpy).toHaveBeenCalledWith(
+        expect.stringContaining(
+          'size must be paired with variant or legacy kind',
+        ),
+      );
+    });
+
+    it('does not apply raw font-size class when size is set without kind or variant', () => {
+      vi.spyOn(console, 'warn').mockImplementation(() => {});
+
       const wrapper = mountComponent({ size: 300 });
 
-      expect(wrapper.classes()).toEqual(
-        expect.arrayContaining([
-          TEXT_VARIANT_MODIFIERS['body-md'],
-          TEXT_FONT_SIZE_MODIFIERS[300],
-        ]),
-      );
+      expect(wrapper.classes()).not.toContain(TEXT_FONT_SIZE_MODIFIERS[300]);
     });
 
     it('applies the raw font-size class for 125', () => {

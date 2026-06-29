@@ -98,6 +98,8 @@ module.exports = {
         'DtText size "{{oldSize}}" is deprecated. Use variant for text composition, or a numeric size token for raw font-size control.',
       deprecatedDtTextSizeInBinding:
         'T-shirt size "{{oldSize}}" in DtText size binding is deprecated. Use variant for text composition, or numeric {{newSize}} only for raw font-size control.',
+      unpairedDtTextSize:
+        "DtText's size must be paired with variant or legacy kind. Prefer variant for typography composition; use size only as a variant override.",
     },
   },
 
@@ -113,6 +115,19 @@ module.exports = {
 
         if (!propName || !ALL_SIZE_PROPS.includes(propName)) return;
         const isDtText = isDtTextComponent(node);
+
+        if (
+          isDtText &&
+          propName === 'size' &&
+          !hasAttribute(node, 'variant') &&
+          !hasAttribute(node, 'kind')
+        ) {
+          context.report({
+            node,
+            messageId: 'unpairedDtTextSize',
+          });
+          return;
+        }
 
         // --- Static attributes: size="sm" → auto-fixable ---
         if (!isDirective && node.value && node.value.value) {
