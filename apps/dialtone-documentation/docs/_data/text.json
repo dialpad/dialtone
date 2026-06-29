@@ -101,6 +101,126 @@
       "description": "Code style, size xs."
     },
     {
+      "class": "d-text--fs-50",
+      "applies": ".d-text",
+      "description": "Font size 50."
+    },
+    {
+      "class": "d-text--fs-75",
+      "applies": ".d-text",
+      "description": "Font size 75."
+    },
+    {
+      "class": "d-text--fs-100",
+      "applies": ".d-text",
+      "description": "Font size 100."
+    },
+    {
+      "class": "d-text--fs-125",
+      "applies": ".d-text",
+      "description": "Font size 125."
+    },
+    {
+      "class": "d-text--fs-150",
+      "applies": ".d-text",
+      "description": "Font size 150."
+    },
+    {
+      "class": "d-text--fs-200",
+      "applies": ".d-text",
+      "description": "Font size 200."
+    },
+    {
+      "class": "d-text--fs-250",
+      "applies": ".d-text",
+      "description": "Font size 250."
+    },
+    {
+      "class": "d-text--fs-300",
+      "applies": ".d-text",
+      "description": "Font size 300."
+    },
+    {
+      "class": "d-text--fs-350",
+      "applies": ".d-text",
+      "description": "Font size 350."
+    },
+    {
+      "class": "d-text--fs-400",
+      "applies": ".d-text",
+      "description": "Font size 400."
+    },
+    {
+      "class": "d-text--fs-450",
+      "applies": ".d-text",
+      "description": "Font size 450."
+    },
+    {
+      "class": "d-text--fs-500",
+      "applies": ".d-text",
+      "description": "Font size 500."
+    },
+    {
+      "class": "d-text--fs-550",
+      "applies": ".d-text",
+      "description": "Font size 550."
+    },
+    {
+      "class": "d-text--fs-600",
+      "applies": ".d-text",
+      "description": "Font size 600."
+    },
+    {
+      "class": "d-text--fs-650",
+      "applies": ".d-text",
+      "description": "Font size 650."
+    },
+    {
+      "class": "d-text--fs-700",
+      "applies": ".d-text",
+      "description": "Font size 700."
+    },
+    {
+      "class": "d-text--fs-750",
+      "applies": ".d-text",
+      "description": "Font size 750."
+    },
+    {
+      "class": "d-text--fs-800",
+      "applies": ".d-text",
+      "description": "Font size 800."
+    },
+    {
+      "class": "d-text--ff-inherit",
+      "applies": ".d-text",
+      "description": "Inherits font family."
+    },
+    {
+      "class": "d-text--ff-custom",
+      "applies": ".d-text",
+      "description": "Applies body font family."
+    },
+    {
+      "class": "d-text--ff-sans",
+      "applies": ".d-text",
+      "description": "Applies sans font family."
+    },
+    {
+      "class": "d-text--ff-mono",
+      "applies": ".d-text",
+      "description": "Applies mono font family."
+    },
+    {
+      "class": "d-text--ff-expressive",
+      "applies": ".d-text",
+      "description": "Applies expressive font family."
+    },
+    {
+      "class": "d-text--italic",
+      "applies": ".d-text",
+      "description": "Applies italic font style."
+    },
+    {
       "class": "d-text--truncate",
       "applies": ".d-text",
       "description": "Truncates text with ellipsis."

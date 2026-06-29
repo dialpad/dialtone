@@ -847,19 +847,48 @@
         "description": "lg / large"
       },
       "350": {
-        "value": "{font.size.root} * 2.4",
+        "value": "{font.size.root} * 2.2",
         "type": "dimension",
-        "description": "mlg / medium-large / milge / marge"
+        "description": "h4"
       },
       "400": {
-        "value": "{font.size.root} * 2.8",
+        "value": "{font.size.root} * 2.6",
         "type": "dimension",
-        "description": "xl / extra large"
+        "description": "h3"
+      },
+      "450": {
+        "value": "{font.size.root} * 2.9",
+        "type": "dimension",
+        "description": "h2"
       },
       "500": {
         "value": "{font.size.root} * 3.2",
         "type": "dimension",
-        "description": "xxl / extra large"
+        "description": "h1"
+      },
+      "550": {
+        "value": "{font.size.root} * 3.6",
+        "type": "dimension"
+      },
+      "600": {
+        "value": "{font.size.root} * 4.2",
+        "type": "dimension"
+      },
+      "650": {
+        "value": "{font.size.root} * 4.6",
+        "type": "dimension"
+      },
+      "700": {
+        "value": "{font.size.root} * 5.2",
+        "type": "dimension"
+      },
+      "750": {
+        "value": "{font.size.root} * 5.8",
+        "type": "dimension"
+      },
+      "800": {
+        "value": "{font.size.root} * 6.6",
+        "type": "dimension"
       }
     },
     "lineHeight": {

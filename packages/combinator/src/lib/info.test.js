@@ -1,56 +1,60 @@
+import { describe, expect, it } from 'vitest';
 import { getComponentInfo } from './info';
-
-import { expect } from 'vitest';
 
 const supportedComponent = { name: 'DtCard', props: {} };
 const unsupportedComponent = { name: 'DtDropdown', props: {} };
 
 describe('info.js test', function () {
-  it('Should support prop default factories that read raw props', function () {
-    const info = getComponentInfo({
-      props: {
-        kind: {
-          type: String,
-          default: null,
+  describe('getComponentInfo', function () {
+    it('supports prop default factories that read raw props', function () {
+      const component = {
+        props: {
+          kind: {
+            type: String,
+            default: null,
+          },
+          variant: {
+            type: String,
+            default: rawProps => rawProps.kind ? null : 'body-md',
+          },
         },
-        variant: {
-          type: String,
-          default: rawProps => rawProps.kind ? null : 'body-md',
-        },
-      },
-    }, {
-      props: [
-        {
-          name: 'kind',
-          type: { name: 'string' },
-        },
-        {
-          name: 'variant',
-          type: { name: 'string' },
-        },
-      ],
+      };
+      const documentation = {
+        props: [
+          {
+            name: 'kind',
+            type: { name: 'string' },
+          },
+          {
+            name: 'variant',
+            type: { name: 'string' },
+          },
+        ],
+      };
+
+      const info = getComponentInfo(component, documentation);
+
+      expect(info.props.find(prop => prop.name === 'variant').initialValue).toBe('body-md');
     });
 
-    expect(info.props.find(prop => prop.name === 'variant').initialValue).toBe('body-md');
-  });
+    it('adds a native class attribute for components that support root class', function () {
+      const info = getComponentInfo(supportedComponent, {
+        displayName: 'DtCard',
+        props: [],
+        tags: {},
+      });
 
-  it('Should add a native class attribute for components that support root class', function () {
-    const info = getComponentInfo(supportedComponent, {
-      displayName: 'DtCard',
-      props: [],
-      tags: {},
+      expect(info.attributes.map(attribute => attribute.name)).toContain('class');
     });
 
-    expect(info.attributes.map(attribute => attribute.name)).toContain('class');
-  });
+    it('does not add a native class attribute for components that do not support root class', function () {
+      const info = getComponentInfo(unsupportedComponent, {
+        displayName: 'DtDropdown',
+        props: [],
+        tags: {},
+      });
 
-  it('Should not add a native class attribute for components that do not support root class', function () {
-    const info = getComponentInfo(unsupportedComponent, {
-      displayName: 'DtDropdown',
-      props: [],
-      tags: {},
+      expect(info.attributes).toBeUndefined();
     });
-
-    expect(info.attributes).toBeUndefined();
   });
 });

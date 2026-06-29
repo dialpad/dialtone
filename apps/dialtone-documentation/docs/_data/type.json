@@ -2,50 +2,19 @@
   "typographyVariants": [
     {
       "category": "headline",
-      "size": [
-        "3xl",
-        "2xl",
-        "xl",
-        "lg",
-        "md",
-        "sm"
-      ]
+      "size": ["3xl", "2xl", "xl", "lg", "md", "sm"]
     },
     {
       "category": "body",
-      "size": [
-        "lg",
-        "md",
-        "sm",
-        "xs"
-      ]
+      "size": ["lg", "md", "sm", "xs"]
     },
     {
       "category": "label",
-      "size": [
-        "lg",
-        "md",
-        "sm",
-        "xs"
-      ]
+      "size": ["lg", "md", "sm", "xs"]
     },
     {
       "category": "code",
-      "size": [
-        "lg",
-        "md",
-        "sm",
-        "xs"
-      ]
-    },
-    {
-      "category": "code",
-      "size": [
-        "lg",
-        "md",
-        "sm",
-        "xs"
-      ]
+      "size": ["lg", "md", "sm", "xs"]
     }
   ],
   "typographyStyles": [
@@ -282,20 +251,62 @@
       },
       {
         "stop": "350",
-        "size": "24",
-        "output": "2.4",
+        "size": "22",
+        "output": "2.2",
         "headline": "no"
       },
       {
         "stop": "400",
-        "size": "28",
-        "output": "2.8",
+        "size": "26",
+        "output": "2.6",
+        "headline": "no"
+      },
+      {
+        "stop": "450",
+        "size": "29",
+        "output": "2.9",
         "headline": "no"
       },
       {
         "stop": "500",
         "size": "32",
         "output": "3.2",
+        "headline": "no"
+      },
+      {
+        "stop": "550",
+        "size": "36",
+        "output": "3.6",
+        "headline": "no"
+      },
+      {
+        "stop": "600",
+        "size": "42",
+        "output": "4.2",
+        "headline": "no"
+      },
+      {
+        "stop": "650",
+        "size": "46",
+        "output": "4.6",
+        "headline": "no"
+      },
+      {
+        "stop": "700",
+        "size": "52",
+        "output": "5.2",
+        "headline": "no"
+      },
+      {
+        "stop": "750",
+        "size": "58",
+        "output": "5.8",
+        "headline": "no"
+      },
+      {
+        "stop": "800",
+        "size": "66",
+        "output": "6.6",
         "headline": "no"
       }
     ],
@@ -476,26 +487,9 @@
       "output": "700"
     }
   ],
-  "decoration": [
-    "none",
-    "underline",
-    "dotted",
-    "line-through",
-    "unset"
-  ],
-  "lists": [
-    "none",
-    "disc",
-    "circle",
-    "content",
-    "decimal",
-    "unset"
-  ],
-  "style": [
-    "normal",
-    "italic",
-    "unset"
-  ],
+  "decoration": ["none", "underline", "dotted", "line-through", "unset"],
+  "lists": ["none", "disc", "circle", "content", "decimal", "unset"],
+  "style": ["normal", "italic", "unset"],
   "align": [
     { "class": "start", "value": "start" },
     { "class": "end", "value": "end" },
@@ -505,19 +499,7 @@
     { "class": "left", "value": "start", "deprecated": true },
     { "class": "right", "value": "end", "deprecated": true }
   ],
-  "lineClamp": [
-    "1",
-    "2",
-    "3",
-    "4",
-    "5",
-    "6",
-    "7",
-    "8",
-    "9",
-    "none",
-    "unset"
-  ],
+  "lineClamp": ["1", "2", "3", "4", "5", "6", "7", "8", "9", "none", "unset"],
   "overflowWrap": [
     {
       "class": "normal",
@@ -635,16 +617,7 @@
       "lh-class": "16"
     }
   ],
-  "opacity": [
-    0,
-    10,
-    25,
-    50,
-    75,
-    90,
-    95,
-    99
-  ],
+  "opacity": [0, 10, 25, 50, 75, 90, 95, 99],
   "fontVariantNumeric": [
     {
       "class": "normal",
