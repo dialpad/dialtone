@@ -93,6 +93,7 @@
           {{ component.name }}
         </dt-text>
         <dt-button
+          ref="viewToggleRef"
           v-dt-tooltip="viewMode === 'grid' ? 'Single view' : 'Spec sheet'"
           aria-label="Toggle spec sheet view"
           :aria-pressed="viewMode === 'grid'"
@@ -208,8 +209,13 @@ import { enumerateGroups } from '@/src/lib/utils';
 import { computed, nextTick, onErrorCaptured, reactive, ref, watch } from 'vue';
 import { cachedRef, computedModel } from '@/src/lib/utils_vue';
 import { clearTokenCache } from '@/src/lib/tokens';
-import { getComponentInfo } from '@/src/lib/info';
-import { cloneInfoMembers, computeDisabledMembers, getInitialValues, mergeVariantData } from '@/src/lib/variant_state';
+import {
+  buildVariantInfo,
+  computeDisabledMembers,
+  getInitialValues,
+  listVariantNames,
+  writeUpdateEvent,
+} from '@/src/lib/variant_state';
 import {
   SETTINGS_BACKGROUND_KEY,
   SETTINGS_INDENT_KEY,
@@ -278,13 +284,12 @@ const activeVariant = ref('default');
 const isFullScreen = ref(false);
 const optionBarWidth = ref(null);
 const viewMode = ref('single');
+const viewToggleRef = ref(null);
 let _presetChanging = false;
 const _forceReset = ref(0);
 
 const variantOptions = computed(() => {
-  return Object.keys(props.variants ?? {})
-    .filter(key => key !== 'exclusions' && key !== 'defaults')
-    .map(key => ({ value: key, label: key }));
+  return listVariantNames(props.variants).map(key => ({ value: key, label: key }));
 });
 
 /**
@@ -413,12 +418,10 @@ watch(() => settings.value.root.theme, clearTokenCache);
  * @param {*} value - The emitted value.
  */
 function onComponentEvent (name, value) {
+  // Guard before assigning options.value: a non-update event must not run the
+  // computedModel setter (which would clear selectedVariant / mark "custom").
   if (!name?.startsWith('update:')) return;
-  const prop = name.slice('update:'.length);
-  options.value = (model) => {
-    if (model.props && prop in model.props) model.props[prop] = value;
-    else if (model.attributes && prop in model.attributes) model.attributes[prop] = value;
-  };
+  options.value = (model) => writeUpdateEvent(model, name, value);
 }
 
 function updateVariant (e) {
@@ -438,20 +441,26 @@ function toggleViewMode () {
 /**
  * Loads a variant from the spec sheet into the editable single view.
  *
+ * Switching to the single view unmounts the spec sheet, destroying the cell
+ * control that was just activated — which would drop focus to <body>. Restore
+ * focus to the persistent view-toggle button so keyboard navigation continues.
+ *
  * @param {string} name - The variant to load.
  */
 function onSelectVariant (name) {
   updateVariant(name);
   viewMode.value = 'single';
+  nextTick(() => {
+    try {
+      viewToggleRef.value?.$el?.focus({ preventScroll: true });
+    } catch {
+      // Element no longer focusable; ignore.
+    }
+  });
 }
 
 const defaultInfo = computed(() => {
-  const info = cloneInfoMembers(
-    getComponentInfo(props.component, props.documentation),
-  );
-  mergeVariantData(info, props.variants?.defaults);
-  mergeVariantData(info, props.variants?.default);
-  return info;
+  return buildVariantInfo(props.component, props.documentation, props.variants, 'default');
 });
 
 /**
@@ -461,16 +470,7 @@ const defaultInfo = computed(() => {
  * @returns {object} The newly instantiated info object.
  */
 function initializeInfo () {
-  const info = cloneInfoMembers(
-    getComponentInfo(props.component, props.documentation),
-  );
-
-  mergeVariantData(info, props.variants?.defaults);
-  mergeVariantData(info, props.variants?.[activeVariant.value]);
-
-  info.exclusions = props.variants?.exclusions ?? [];
-
-  return info;
+  return buildVariantInfo(props.component, props.documentation, props.variants, activeVariant.value);
 }
 
 const hasChanges = computed(() => {

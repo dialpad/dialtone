@@ -1,5 +1,5 @@
 import { expect } from 'vitest';
-import { computeDisabledMembers } from './variant_state';
+import { computeDisabledMembers, listVariantNames, writeUpdateEvent } from './variant_state';
 
 // `link` is a boolean prop, so `linkKind` is inferred as its dependent child
 // (boolean-prefix matching). The first exclusion rule hides target/rel/type
@@ -57,6 +57,49 @@ describe('variant_state', function () {
 
     it('handles an info object with no props or slots', function () {
       expect(computeDisabledMembers({ exclusions: [] }, {}).size).toBe(0);
+    });
+  });
+
+  describe('listVariantNames', function () {
+    it('returns variant keys, excluding the reserved defaults/exclusions keys', function () {
+      const names = listVariantNames({ default: {}, defaults: {}, exclusions: [], primary: {}, danger: {} });
+      expect(names).toEqual(['default', 'primary', 'danger']);
+    });
+
+    it('returns an empty array for nullish input', function () {
+      expect(listVariantNames(undefined)).toEqual([]);
+      expect(listVariantNames(null)).toEqual([]);
+    });
+  });
+
+  describe('writeUpdateEvent', function () {
+    it('writes the value onto a matching prop', function () {
+      const target = { props: { modelValue: '' }, attributes: {} };
+      writeUpdateEvent(target, 'update:modelValue', 'hi');
+      expect(target.props.modelValue).toBe('hi');
+    });
+
+    it('writes to attributes when the member is not a prop', function () {
+      const target = { props: { kind: 'x' }, attributes: { 'data-foo': '' } };
+      writeUpdateEvent(target, 'update:data-foo', 'bar');
+      expect(target.attributes['data-foo']).toBe('bar');
+    });
+
+    it('ignores non-update events', function () {
+      const target = { props: { modelValue: 'a' } };
+      writeUpdateEvent(target, 'click', 'b');
+      expect(target.props.modelValue).toBe('a');
+    });
+
+    it('ignores members the target does not own (no key is created)', function () {
+      const target = { props: { modelValue: 'a' }, attributes: {} };
+      writeUpdateEvent(target, 'update:unknown', 'b');
+      expect('unknown' in target.props).toBe(false);
+      expect('unknown' in target.attributes).toBe(false);
+    });
+
+    it('is a no-op when the target has neither props nor attributes', function () {
+      expect(() => writeUpdateEvent({}, 'update:x', 1)).not.toThrow();
     });
   });
 });

@@ -134,3 +134,32 @@ export function computeDisabledMembers (info, propValues) {
   }
   return disabled;
 }
+
+/**
+ * Lists the selectable variant names in a variant bank — every key except the
+ * reserved `defaults`/`exclusions` keys. Centralizes the reserved-key rule so
+ * the single view and the spec sheet stay in sync.
+ *
+ * @param {object} variants - The variant bank for the component.
+ * @returns {string[]} The variant names.
+ */
+export function listVariantNames (variants) {
+  return Object.keys(variants ?? {}).filter(key => key !== 'exclusions' && key !== 'defaults');
+}
+
+/**
+ * Routes a `update:<prop>` component event into an options-like model by writing
+ * the value onto the matching props or attributes entry. No-op for non-update
+ * events or members the model doesn't own. Shared by the single view and the
+ * spec sheet so both reflect v-model interactions identically.
+ *
+ * @param {object} target - The options-like object (reads/writes `props`, `attributes`).
+ * @param {string} name - The emitted event name (e.g. 'update:modelValue').
+ * @param {*} value - The emitted value.
+ */
+export function writeUpdateEvent (target, name, value) {
+  if (!name?.startsWith('update:')) return;
+  const prop = name.slice('update:'.length);
+  if (target.props && prop in target.props) target.props[prop] = value;
+  else if (target.attributes && prop in target.attributes) target.attributes[prop] = value;
+}
