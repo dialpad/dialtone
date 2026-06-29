@@ -5,7 +5,10 @@
 </template>
 
 <script setup>
-import { capitalize, computed, getCurrentInstance, h, nextTick, onMounted, onUpdated, ref, render, useSlots } from 'vue';
+import {
+  capitalize, computed, getCurrentInstance, h, nextTick,
+  onBeforeUnmount, onMounted, onUpdated, ref, render, useSlots,
+} from 'vue';
 import { DtNotice } from '@dialpad/dialtone-vue';
 
 const ERROR_MESSAGE = 'Invalid combination';
@@ -80,6 +83,19 @@ onMounted(() => {
   nextTick(renderTarget);
 });
 onUpdated(renderTarget);
+
+// Tear down the manually-rendered subtree on unmount so the target component's
+// own teardown (effects, observers, listeners) runs instead of leaking. The
+// render() tree lives in a detached container, so Vue removing our wrapper does
+// not unmount it; only render(null, ...) does. The spec sheet mounts one target
+// per cell and toggles via v-if, so without this each view switch orphans N
+// still-reactive component trees.
+onBeforeUnmount(() => {
+  if (currentContainer) {
+    render(null, currentContainer);
+    currentContainer = null;
+  }
+});
 
 const wrapper = ref();
 

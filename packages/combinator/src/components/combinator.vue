@@ -94,6 +94,8 @@
         </dt-text>
         <dt-button
           v-dt-tooltip="viewMode === 'grid' ? 'Single view' : 'Spec sheet'"
+          aria-label="Toggle spec sheet view"
+          :aria-pressed="viewMode === 'grid'"
           kind="muted"
           importance="clear"
           :size="200"
@@ -163,7 +165,6 @@
         :documentation="documentation"
         :variants="variants"
         :library="library"
-        :settings="settings"
         @select="onSelectVariant"
       />
       <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->

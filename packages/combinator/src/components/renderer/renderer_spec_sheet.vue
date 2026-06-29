@@ -1,8 +1,5 @@
 <template>
-  <div
-    class="dtc-spec-sheet"
-    :dir="previewDirection"
-  >
+  <div class="dtc-spec-sheet">
     <div class="dtc-spec-sheet__grid">
       <!-- Background-click to select is a mouse convenience; the label button is
            the keyboard-accessible control, so these click/key a11y rules don't apply. -->
@@ -96,20 +93,9 @@ const props = defineProps({
     type: Object,
     default: () => ({}),
   },
-  /**
-   * Settings data object (drives the shared direction).
-   */
-  settings: {
-    type: Object,
-    required: true,
-  },
 });
 
 const emit = defineEmits(['select']);
-
-// Mode/contrast/material are inherited from the playground (themed at its root);
-// the sheet only owns direction, flipping every cell at once.
-const previewDirection = computed(() => props.settings?.renderer?.direction ?? 'ltr');
 
 const variantNames = computed(() => {
   return Object.keys(props.variants ?? {})
@@ -225,7 +211,7 @@ export default {
 
     &:focus-visible {
       outline: var(--dt-size-border-200) solid var(--dt-color-border-focus);
-      outline-offset: var(--dt-space-100);
+      outline-offset: var(--dt-spacing-25);
       border-radius: var(--dt-size-radius-200);
     }
   }

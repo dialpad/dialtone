@@ -72,8 +72,7 @@ export function getInitialValues (info) {
 }
 
 /**
- * Builds a renderable `{ info, options }` pair for a single variant, with optional
- * binding overrides applied on top of the variant's authored values. Used by the
+ * Builds a renderable `{ info, options }` pair for a single variant. Used by the
  * spec sheet to render every variant at once; `options` exposes the same
  * `bindings.get()` shape the renderer expects.
  *
@@ -81,14 +80,11 @@ export function getInitialValues (info) {
  * @param {object} documentation - The dialtone-vue documentation.
  * @param {object} variants - The variant bank for the component.
  * @param {string} variantName - The variant to build.
- * @param {object} [overrides] - Global binding overrides ({ props, attributes }) applied on top.
  * @returns {{ info: object, options: object }} The renderable state.
  */
-export function buildVariantState (component, documentation, variants, variantName, overrides = {}) {
+export function buildVariantState (component, documentation, variants, variantName) {
   const info = buildVariantInfo(component, documentation, variants, variantName);
   const values = getInitialValues(info);
-  if (overrides.props) values.props = { ...(values.props ?? {}), ...overrides.props };
-  if (overrides.attributes) values.attributes = { ...(values.attributes ?? {}), ...overrides.attributes };
 
   // `options` is made reactive before the bindings closure captures it, so that
   // `options.props` reads inside `get()` go through Vue's dependency tracking.
