@@ -205,13 +205,11 @@ import DtcOptionBar from './option_bar/option_bar.vue';
 import DtcRenderer from './renderer/renderer.vue';
 import DtcRendererSpecSheet from './renderer/renderer_spec_sheet.vue';
 import { enumerateGroups } from '@/src/lib/utils';
-import { shouldExclude } from '@/src/lib/exclusion_rules';
-import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
 import { computed, nextTick, onErrorCaptured, reactive, ref, watch } from 'vue';
 import { cachedRef, computedModel } from '@/src/lib/utils_vue';
 import { clearTokenCache } from '@/src/lib/tokens';
 import { getComponentInfo } from '@/src/lib/info';
-import { cloneInfoMembers, getInitialValues, mergeVariantData } from '@/src/lib/variant_state';
+import { cloneInfoMembers, computeDisabledMembers, getInitialValues, mergeVariantData } from '@/src/lib/variant_state';
 import {
   SETTINGS_BACKGROUND_KEY,
   SETTINGS_INDENT_KEY,
@@ -526,27 +524,7 @@ function toggleFullScreen () {
  *
  * @type {ComputedRef<Set<string>>}
  */
-const disabledMembers = computed(() => {
-  const disabled = new Set();
-  const exclusions = info.value.exclusions;
-  const propValues = options.value.props;
-  const depMap = buildDependencyMap(info.value.props ?? []);
-
-  for (const member of (info.value.props ?? [])) {
-    if (member.required) continue;
-    if (shouldExclude(member.name, 'props', exclusions, propValues) ||
-      shouldHideProp(member.name, depMap, propValues)) {
-      disabled.add(member.name);
-    }
-  }
-  for (const member of (info.value.slots ?? [])) {
-    if (member.required) continue;
-    if (shouldExclude(member.name, 'slots', exclusions, propValues)) {
-      disabled.add(member.name);
-    }
-  }
-  return disabled;
-});
+const disabledMembers = computed(() => computeDisabledMembers(info.value, options.value.props));
 
 onErrorCaptured((exception) => {
   console.error('Internal vue error: \n', exception);

@@ -32,6 +32,7 @@
               :component="component"
               :bindings="cell.options.bindings.get()"
               :events="cell.info.events"
+              :disabled-members="computeDisabledMembers(cell.info, cell.options.props)"
               @event="(name, value) => onCellEvent(cell, name, value)"
             >
               <template
@@ -60,7 +61,7 @@ import { computed } from 'vue';
 import { DtText } from '@dialpad/dialtone-vue';
 import DtcRendererTarget from '@/src/components/renderer/renderer_target.vue';
 import DtcNode from '@/src/components/tools/node.vue';
-import { buildVariantState } from '@/src/lib/variant_state';
+import { buildVariantState, computeDisabledMembers } from '@/src/lib/variant_state';
 import { nonEmptySlots } from '@/src/lib/utils';
 
 const props = defineProps({

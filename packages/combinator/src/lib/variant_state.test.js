@@ -1,0 +1,62 @@
+import { expect } from 'vitest';
+import { computeDisabledMembers } from './variant_state';
+
+// `link` is a boolean prop, so `linkKind` is inferred as its dependent child
+// (boolean-prefix matching). The first exclusion rule hides target/rel/type
+// when `to` is set; the second hides the `decoration` slot when kind is 'count'.
+// Mirrors the shapes in the real variant banks.
+const INFO = {
+  exclusions: [
+    { when: { to: v => !!v }, hide: { props: ['target', 'rel', 'type'] } },
+    { when: { kind: 'count' }, hide: { slots: ['decoration'] } },
+  ],
+  props: [
+    { name: 'to' },
+    { name: 'target' },
+    { name: 'rel' },
+    { name: 'type', required: true },
+    { name: 'kind' },
+    { name: 'link', types: ['boolean'] },
+    { name: 'linkKind' },
+  ],
+  slots: [
+    { name: 'default' },
+    { name: 'decoration' },
+  ],
+};
+
+describe('variant_state', function () {
+  describe('computeDisabledMembers', function () {
+    it('returns an empty set when no rule matches and dependents are active', function () {
+      expect(computeDisabledMembers(INFO, { to: '', kind: 'body', link: true }).size).toBe(0);
+    });
+
+    it('hides props excluded by a matching exclusion rule', function () {
+      const disabled = computeDisabledMembers(INFO, { to: '/', kind: 'body', link: true });
+      expect(disabled.has('target')).toBe(true);
+      expect(disabled.has('rel')).toBe(true);
+    });
+
+    it('never disables a required member even when a rule would hide it', function () {
+      // `type` is in the hide list but required, so it must stay enabled.
+      const disabled = computeDisabledMembers(INFO, { to: '/', kind: 'body', link: true });
+      expect(disabled.has('type')).toBe(false);
+    });
+
+    it('hides a dependent prop when its boolean parent is falsy', function () {
+      expect(computeDisabledMembers(INFO, { to: '', kind: 'body', link: false }).has('linkKind')).toBe(true);
+    });
+
+    it('shows a dependent prop when its boolean parent is truthy', function () {
+      expect(computeDisabledMembers(INFO, { to: '', kind: 'body', link: true }).has('linkKind')).toBe(false);
+    });
+
+    it('hides slots via matching exclusion rules', function () {
+      expect(computeDisabledMembers(INFO, { to: '', kind: 'count', link: true }).has('decoration')).toBe(true);
+    });
+
+    it('handles an info object with no props or slots', function () {
+      expect(computeDisabledMembers({ exclusions: [] }, {}).size).toBe(0);
+    });
+  });
+});
