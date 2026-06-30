@@ -32,6 +32,10 @@ function mountWrapper (props = {}) {
               type: Boolean,
               default: true,
             },
+            warning: {
+              type: String,
+              default: undefined,
+            },
           },
           template: '<div />',
         },
@@ -71,5 +75,27 @@ describe('control_suggestion.vue test', function () {
     expect(stringControl.props('value')).toBe(null);
     expect(stringControl.props('required')).toBe(true);
     expect(stringControl.props('clearable')).toBe(true);
+  });
+
+  it('Should not warn when the clearable value is empty', function () {
+    const wrapper = mountWrapper({
+      value: null,
+      warn: true,
+    });
+
+    const stringControl = wrapper.findComponent({ name: 'DtcControlString' });
+
+    expect(stringControl.props('warning')).toBeUndefined();
+  });
+
+  it('Should warn when the value is not suggested', function () {
+    const wrapper = mountWrapper({
+      value: 'invalid',
+      warn: true,
+    });
+
+    const stringControl = wrapper.findComponent({ name: 'DtcControlString' });
+
+    expect(stringControl.props('warning')).toBe('Unexpected value');
   });
 });
