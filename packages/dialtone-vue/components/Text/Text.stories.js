@@ -5,7 +5,9 @@ import DtTextDefault from './TextDefault.story.vue';
 import DtTextVariants from './TextVariants.story.vue';
 import {
   TEXT_KIND_MODIFIERS,
-  TEXT_SIZE_MODIFIERS,
+  TEXT_VARIANT_MODIFIERS,
+  TEXT_FONT_SIZE_MODIFIERS,
+  TEXT_FAMILY_MODIFIERS,
   TEXT_ALIGN_MODIFIERS,
   TEXT_TONE_MODIFIERS,
   TEXT_STRENGTH_MODIFIERS,
@@ -14,8 +16,10 @@ import {
   TEXT_BOX_TRIM_MODIFIERS,
 } from './TextConstants';
 
-const kindOptions = Object.keys(TEXT_KIND_MODIFIERS);
-const sizeOptions = Array.from(new Set(Object.values(TEXT_SIZE_MODIFIERS).flat()));
+const kindOptions = [undefined, ...Object.keys(TEXT_KIND_MODIFIERS)];
+const variantOptions = [undefined, ...Object.keys(TEXT_VARIANT_MODIFIERS)];
+const sizeOptions = [undefined, ...Object.keys(TEXT_FONT_SIZE_MODIFIERS)];
+const familyOptions = [undefined, ...Object.keys(TEXT_FAMILY_MODIFIERS)];
 const alignOptions = [undefined, ...Object.keys(TEXT_ALIGN_MODIFIERS)];
 const strengthOptions = [undefined, ...Object.keys(TEXT_STRENGTH_MODIFIERS)];
 const densityOptions = [undefined, ...Object.keys(TEXT_DENSITY_MODIFIERS)];
@@ -26,8 +30,11 @@ const textBoxTrimOptions = [undefined, ...Object.keys(TEXT_BOX_TRIM_MODIFIERS)];
 export const argsData = {
   default: 'The quick brown fox jumps over the lazy dog.',
   as: 'span',
-  kind: 'body',
-  size: 300,
+  kind: undefined,
+  variant: 'body-md',
+  size: undefined,
+  family: undefined,
+  italic: false,
   strength: undefined,
   density: undefined,
   tone: undefined,
@@ -51,10 +58,22 @@ export const argTypesData = {
   kind: {
     options: kindOptions,
     control: { type: 'select' },
+    description: 'Legacy composition prop. Prefer variant for new usage.',
+  },
+  variant: {
+    options: variantOptions,
+    control: { type: 'select' },
   },
   size: {
     options: sizeOptions,
     control: { type: 'select' },
+  },
+  family: {
+    options: familyOptions,
+    control: { type: 'select' },
+  },
+  italic: {
+    control: 'boolean',
   },
   strength: {
     options: strengthOptions,
@@ -84,12 +103,14 @@ export const argTypesData = {
   wrap: {
     options: wrapOptions,
     control: { type: 'select' },
-    description: 'wrap: default | nowrap: prevent wrapping | balance: even line lengths | pretty: avoid orphans/widows',
+    description:
+      'wrap: default | nowrap: prevent wrapping | balance: even line lengths | pretty: avoid orphans/widows',
   },
   textBoxTrim: {
     options: textBoxTrimOptions,
     control: { type: 'select' },
-    description: 'start: trim above | end: trim below | both: trim above and below. CSS text-box-trim for tighter layouts.',
+    description:
+      'start: trim above | end: trim below | both: trim above and below. CSS text-box-trim for tighter layouts.',
   },
   onClick: {
     table: {
@@ -106,15 +127,18 @@ export default {
   parameters: {
     docs: {
       description: {
-        component: 'Dialtone\'s typography primitive. `DtText` maps semantic props (`kind`, `size`, `tone`, `align`) to token-backed classes and supports structural helpers like `as`, truncation, multi-line clamping, and numeric tabular figures. The Variants story enumerates every supported combination validated against `apps/dialtone-documentation/docs/_data/type.json`.',
+        component:
+          'The Dialtone typography primitive. `DtText` maps `variant`, `size`, `tone`, and `align` to token-backed classes and supports structural helpers like `as`, truncation, multi-line clamping, and numeric tabular figures. `kind` remains available as legacy composition syntax.',
       },
     },
   },
   excludeStories: /.*Data$/,
 };
 
-const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTextDefault);
-const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtTextVariants);
+const DefaultTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtTextDefault);
+const VariantsTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtTextVariants);
 
 export const Default = {
   render: DefaultTemplate,
