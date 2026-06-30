@@ -363,6 +363,7 @@ function parseArgs (args) {
     help: args.includes('--help'),
     dryRun: args.includes('--dry-run'),
     autoYes: args.includes('--yes'),
+    noImport: args.includes('--no-import'),
     healthCheck: args.includes('--health-check'),
     all: args.includes('--all'),
     cwd: cwdIndex !== -1 && args[cwdIndex + 1]
@@ -742,8 +743,8 @@ async function runConfigMigration (migration, opts) {
   // Loop until convergence: some config regexes only match one token per
   // property declaration per pass (e.g. border-width with two var(--dt-size-*)).
   for (const entry of matched) {
-    let changed = true;
-    while (changed) {
+    let changed;
+    do {
       changed = false;
       for (const expr of configData.expressions) {
         const before = entry.data;
@@ -757,7 +758,7 @@ async function runConfigMigration (migration, opts) {
           changed = true;
         }
       }
-    }
+    } while (changed && !configData.singlePass);
     if (entry.matches > 0) {
       await fs.writeFile(entry.file, entry.data, 'utf8');
       const shortname = path.relative(opts.cwd, entry.file);
@@ -778,6 +779,7 @@ async function runStandaloneMigration (migration, opts) {
   const args = ['--cwd', opts.cwd];
   if (opts.dryRun) args.push('--dry-run');
   if (opts.autoYes) args.push('--yes');
+  if (opts.noImport) args.push('--no-import');
 
   return new Promise((resolve, reject) => {
     const child = spawn(process.execPath, [scriptPath, ...args], {

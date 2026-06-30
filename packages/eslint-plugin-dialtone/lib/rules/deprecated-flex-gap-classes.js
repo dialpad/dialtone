@@ -29,7 +29,7 @@ module.exports = {
     return sourceCode.parserServices.defineTemplateBodyVisitor({
       // Visitor functions for Vue templates
       VAttribute(node) {
-        if (node.key.name === 'class') {
+        if (node.key.name === 'class' && node.value && typeof node.value.value === 'string') {
           const classes = node.value.value;
           if (classes.match(/d-flg\d{1,2}/)) {
             context.report({

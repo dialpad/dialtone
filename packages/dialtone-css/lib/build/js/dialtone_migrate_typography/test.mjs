@@ -12,6 +12,7 @@ import {
   detectImportPathFor,
   removeMarkersForTest,
   validateDtTextProps,
+  injectComponentImport,
 } from './index.mjs';
 
 function run (input) {
@@ -987,6 +988,26 @@ describe('wrapper safety — positive cases still convert (no false positives)',
   });
 });
 
+describe('dynamic :class flagging — multi-line element', () => {
+  it('marker goes before the opening < of a multi-line element, not between attributes', () => {
+    const input = [
+      '<div',
+      '  v-if="condition"',
+      '  :class="{ \'d-headline--md\': isHeading }"',
+      '>x</div>',
+    ].join('\n');
+    const out = run(input);
+    // Marker must appear on its own line before <div, never inside the tag
+    assert.ok(out.includes('<!-- dt-text-migrate: review dynamic class -->'), 'should emit marker');
+    const markerIdx = out.indexOf('<!-- dt-text-migrate: review dynamic class -->');
+    const divIdx = out.indexOf('<div');
+    assert.ok(markerIdx < divIdx, 'marker must precede the opening <div');
+    // The tag itself must remain structurally intact (comment not injected mid-tag)
+    assert.ok(out.includes('  :class='), ':class line must be unchanged');
+    assert.ok(out.includes('  v-if='), 'v-if line must be unchanged');
+  });
+});
+
 describe('wrapper safety — override path (d-fw-*, d-fc-*, etc.) with component children', () => {
   // Override path mirrors the composed-path safety: if the rewriteable tag
   // wraps a component/block child, skip auto-conversion. Behavior here is a
@@ -1016,5 +1037,154 @@ describe('wrapper safety — override path (d-fw-*, d-fc-*, etc.) with component
       run('<p class="d-fw-bold">Bold paragraph</p>'),
       '<dt-text as="p" strength="bold">Bold paragraph</dt-text>',
     );
+  });
+});
+
+// ---------------------------------------------------------------------------
+// injectComponentImport — auto import insertion
+// ---------------------------------------------------------------------------
+
+describe('injectComponentImport — <script setup>', () => {
+  it('inserts import after the last existing import', () => {
+    const content = [
+      '<script setup>',
+      'import { DtStack } from \'@dialpad/dialtone-vue\';',
+      '</script>',
+      '<template><p>x</p></template>',
+    ].join('\n');
+    const out = injectComponentImport(content, 'DtText', '@dialpad/dialtone-vue');
+    assert.ok(out.includes('import { DtText } from \'@dialpad/dialtone-vue\';'), 'import inserted');
+    const stackIdx = out.indexOf('DtStack');
+    const textIdx = out.indexOf('DtText');
+    assert.ok(textIdx > stackIdx, 'DtText import comes after DtStack import');
+  });
+
+  it('inserts import when no existing imports present', () => {
+    const content = [
+      '<script setup>',
+      'const x = 1;',
+      '</script>',
+    ].join('\n');
+    const out = injectComponentImport(content, 'DtText', '@dialpad/dialtone-vue');
+    assert.ok(out.includes('import { DtText } from \'@dialpad/dialtone-vue\';'), 'import inserted');
+  });
+
+  it('returns null when component is already imported', () => {
+    const content = [
+      '<script setup>',
+      'import { DtText } from \'@dialpad/dialtone-vue\';',
+      '</script>',
+    ].join('\n');
+    assert.equal(injectComponentImport(content, 'DtText', '@dialpad/dialtone-vue'), null);
+  });
+
+  it('does not add to components object (not needed for script setup)', () => {
+    const content = [
+      '<script setup>',
+      'import { DtStack } from \'@dialpad/dialtone-vue\';',
+      '</script>',
+    ].join('\n');
+    const out = injectComponentImport(content, 'DtText', '@dialpad/dialtone-vue');
+    assert.ok(!out.includes('components:'), 'no components object added for script setup');
+  });
+
+  it('handles <script setup lang="ts">', () => {
+    const content = [
+      '<script setup lang="ts">',
+      'import { DtStack } from \'@dialpad/dialtone-vue\';',
+      '</script>',
+    ].join('\n');
+    const out = injectComponentImport(content, 'DtText', '@dialpad/dialtone-vue');
+    assert.ok(out !== null, 'should succeed');
+    assert.ok(out.includes('import { DtText } from \'@dialpad/dialtone-vue\';'));
+  });
+});
+
+describe('injectComponentImport — Options API', () => {
+  it('inserts import and adds to existing components object', () => {
+    const content = [
+      '<script>',
+      'import { DtStack } from \'@dialpad/dialtone-vue\';',
+      'export default {',
+      '  components: {',
+      '    DtStack,',
+      '  },',
+      '};',
+      '</script>',
+    ].join('\n');
+    const out = injectComponentImport(content, 'DtText', '@dialpad/dialtone-vue');
+    assert.ok(out.includes('import { DtText } from \'@dialpad/dialtone-vue\';'), 'import inserted');
+    assert.ok(out.includes('DtText,'), 'DtText added to components');
+    assert.ok(out.includes('DtStack,'), 'existing DtStack preserved');
+  });
+
+  it('returns null when no components object exists', () => {
+    const content = [
+      '<script>',
+      'export default {',
+      '  data () { return {}; },',
+      '};',
+      '</script>',
+    ].join('\n');
+    assert.equal(injectComponentImport(content, 'DtText', '@dialpad/dialtone-vue'), null);
+  });
+
+  it('returns null when no script block found', () => {
+    const content = '<template><p>x</p></template>';
+    assert.equal(injectComponentImport(content, 'DtText', '@dialpad/dialtone-vue'), null);
+  });
+
+  it('returns null when component is already imported', () => {
+    const content = [
+      '<script>',
+      'import { DtText } from \'@dialpad/dialtone-vue\';',
+      'export default { components: { DtText } };',
+      '</script>',
+    ].join('\n');
+    assert.equal(injectComponentImport(content, 'DtText', '@dialpad/dialtone-vue'), null);
+  });
+
+  it('does not corrupt a helper object with components: { before export default', () => {
+    const content = [
+      '<script>',
+      'import { DtStack } from \'@dialpad/dialtone-vue\';',
+      'const editorConfig = { components: { toolbar: true } };',
+      'export default {',
+      '  components: {',
+      '    DtStack,',
+      '  },',
+      '};',
+      '</script>',
+    ].join('\n');
+    const out = injectComponentImport(content, 'DtText', '@dialpad/dialtone-vue');
+    assert.ok(out, 'should return updated content');
+    assert.ok(out.includes('import { DtText } from \'@dialpad/dialtone-vue\';'), 'import inserted');
+    // DtText must be added to export default components, not to the editorConfig object
+    const editorConfigIdx = out.indexOf('editorConfig');
+    const dtTextIdx = out.indexOf('DtText,');
+    const exportDefaultIdx = out.indexOf('export default');
+    assert.ok(dtTextIdx > exportDefaultIdx, 'DtText registered after export default');
+    assert.ok(dtTextIdx > editorConfigIdx, 'DtText not inserted into editorConfig helper');
+    assert.ok(!out.slice(0, exportDefaultIdx).includes('DtText,'), 'DtText not in pre-export-default scope');
+  });
+
+  it('returns null when components: { appears only in a template binding, not in export default', () => {
+    // Simulate a file where the script has no components option but the template
+    // has a :config="{ components: { ... } }" binding — the template is masked
+    // during injectComponentImport (which operates on the full SFC), so the
+    // components: { in the template must not be matched.
+    const content = [
+      '<template>',
+      '  <some-editor :config="{ components: { toolbar: MyBar } }" />',
+      '</template>',
+      '<script>',
+      'import { DtStack } from \'@dialpad/dialtone-vue\';',
+      'export default {',
+      '  data () { return {}; },',
+      '};',
+      '</script>',
+    ].join('\n');
+    // No components: { in export default → should return null (can't auto-register)
+    assert.equal(injectComponentImport(content, 'DtText', '@dialpad/dialtone-vue'), null);
   });
 });

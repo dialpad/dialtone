@@ -1,3 +1,11 @@
+# [1.14.0-next.2](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.14.0-next.1...eslint-plugin-dialtone/v1.14.0-next.2) (2026-06-26)
+
+
+### Bug Fixes
+
+* **Dialtone Css:** DLT-3492 DLT-3493 fix codemod incorrectly mapping large spacing values to wrong tokens ([#1342](https://github.com/dialpad/dialtone/issues/1342)) ([5abbb10](https://github.com/dialpad/dialtone/commit/5abbb105e8fd1ea1e1500815b230d11040ce03b0))
+* **Eslint Plugin Dialtone:** guard against null value on valueless class attributes ([#1336](https://github.com/dialpad/dialtone/issues/1336)) ([dd8e557](https://github.com/dialpad/dialtone/commit/dd8e55728455a03a551653ce1ff3330914ee4aa6))
+
 # [1.14.0-next.1](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.13.0...eslint-plugin-dialtone/v1.14.0-next.1) (2026-06-02)
 
 

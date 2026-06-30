@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.188.0-next.2",
+  "version": "9.187.2",
   "packageManager": "pnpm@9.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
@@ -45,12 +45,15 @@
     "dist"
   ],
   "bin": {
+    "dialtone-migrate": "./dist/js/dialtone_migrate/index.mjs",
     "dialtone-migrate-flex-to-stack": "./dist/js/dialtone_migrate_flex_to_stack/index.mjs"
   },
   "exports": {
     "./CHANGELOG.json": "./CHANGELOG.json",
     "./css": "./dist/css/dialtone.min.css",
     "./css-default-theme": "./dist/css/dialtone-default-theme.min.css",
+    "./css/no-layers": "./dist/css/no-layers/dialtone.min.css",
+    "./css/no-layers/default-theme": "./dist/css/no-layers/dialtone-default-theme.min.css",
     "./tokens/*.css": "./dist/tokens/css/*.css",
     "./tokens/postcss/*": {
       "types": "./dist/tokens/types/postcss/*.d.ts",
@@ -218,7 +221,7 @@
     "access": "public"
   },
   "sideEffects": [
-    "./dist/css/*.css",
+    "./dist/css/**/*.css",
     "./dist/css/fonts.js"
   ],
   "nx": {

@@ -23,6 +23,7 @@
       ],
       "outputs": [
         "{workspaceRoot}/dist/css",
+        "{workspaceRoot}/dist/js",
         "{workspaceRoot}/dist/tokens",
         "{workspaceRoot}/dist/vue3"
       ]

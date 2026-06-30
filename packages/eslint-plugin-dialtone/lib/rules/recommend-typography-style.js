@@ -40,7 +40,7 @@ module.exports = {
     return sourceCode.parserServices.defineTemplateBodyVisitor({
       // Visitor functions for Vue templates
       VAttribute (node) {
-        if (node.key.name === 'class') {
+        if (node.key.name === 'class' && node.value) {
           const classes = node.value.value.split(' ');
 
           // For each class, determine which category it belongs to and track all matches

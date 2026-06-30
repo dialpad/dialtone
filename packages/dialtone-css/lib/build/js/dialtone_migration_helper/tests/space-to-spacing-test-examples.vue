@@ -149,22 +149,18 @@
 }
 
 /* ============================================ */
-/* PERCENT VARIANTS                             */
+/* SKIP CASES (should NOT be modified)          */
 /* ============================================ */
 
-/* space-400-percent → spacing-100-percent */
-.test-percent-400 {
+/* -percent variants — no --dt-spacing-*-percent tokens exist; percent tokens live under
+   --dt-layout-*-percent with a different stop axis, so these are left for manual review */
+.test-skip-percent-400 {
   padding: var(--dt-space-400-percent);
 }
 
-/* space-600-percent → spacing-400-percent */
-.test-percent-600 {
+.test-skip-percent-600 {
   gap: var(--dt-space-600-percent);
 }
-
-/* ============================================ */
-/* SKIP CASES (should NOT be modified)          */
-/* ============================================ */
 
 /* Stops with no --dt-spacing-* equivalent — leave unchanged */
 .test-skip-720 {
