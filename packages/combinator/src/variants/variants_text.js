@@ -16,7 +16,6 @@ export default {
   defaults: {
     props: {
       variant: { tokenCategory: 'typography-variant' },
-      kind: { deprecated: true },
       size: { tokenCategory: 'typography-size' },
       density: { tokenCategory: 'line-height' },
       tone: { tokenCategory: 'color:d-text--tone-:--text-tone' },

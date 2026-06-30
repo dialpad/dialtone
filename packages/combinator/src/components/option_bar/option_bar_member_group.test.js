@@ -104,7 +104,7 @@ describe('option_bar_member_group.vue test', function () {
         props: {
           component: testComponents[0],
           members: [
-            { name: 'kind', label: 'kind', deprecated: true },
+            { name: 'kind', label: 'kind', tags: { deprecated: [{ description: 'Use variant instead' }] } },
             { name: 'variant', label: 'variant' },
           ],
           values: {
@@ -126,7 +126,7 @@ describe('option_bar_member_group.vue test', function () {
         props: {
           component: testComponents[0],
           members: [
-            { name: 'kind', label: 'kind', deprecated: true },
+            { name: 'kind', label: 'kind', tags: { deprecated: [{ description: 'Use variant instead' }] } },
             { name: 'variant', label: 'variant' },
           ],
           values: {

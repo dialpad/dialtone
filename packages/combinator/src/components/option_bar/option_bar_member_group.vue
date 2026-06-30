@@ -285,7 +285,7 @@ function extendMember (member) {
       shouldDisable(key, props.memberGroup, props.exclusionRules, props.propValues, props.slotValues) ||
       (props.memberGroup === 'props' && shouldDisableSlotClassProp(key, props.slotValues))
     );
-  const deprecated = !!member.deprecated || isDocDeprecated;
+  const deprecated = isDocDeprecated;
   const inactive = dynamicHide || isDisabled;
 
   const clearValue = !member.required
