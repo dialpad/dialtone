@@ -40,7 +40,7 @@ The tool is ideal for projects with many text elements using utility classes. Fo
 <div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
 <div>
 
-<strong>Before</strong>
+**Before:**
 
 ```html
 <p class="d-headline--md">Welcome back</p>
@@ -57,7 +57,7 @@ The tool is ideal for projects with many text elements using utility classes. Fo
 </div>
 <div>
 
-<strong>After</strong>
+**After:**
 
 ```html
 <!-- Current migration tool output -->
@@ -92,7 +92,7 @@ The tool is ideal for projects with many text elements using utility classes. Fo
 <div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
 <div>
 
-<strong>Before</strong>
+**Before:**
 
 ```html
 <h2 class="d-headline--lg-compact">
@@ -107,7 +107,7 @@ The tool is ideal for projects with many text elements using utility classes. Fo
 </div>
 <div>
 
-<strong>After</strong>
+**After:**
 
 ```html
 <!-- Current migration tool output -->
