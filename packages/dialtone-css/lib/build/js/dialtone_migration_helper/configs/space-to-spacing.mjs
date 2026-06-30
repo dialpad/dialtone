@@ -28,8 +28,8 @@ export default {
       'eg. var(--dt-space-400) → var(--dt-spacing-100)\n' +
     '- Replaces var(--dt-space-{stop}-negative) with var(--dt-spacing-{newSuffix}-negative)\n\t' +
       'eg. var(--dt-space-400-negative) → var(--dt-spacing-100-negative)\n' +
-    '- Replaces var(--dt-space-{stop}-percent) with var(--dt-spacing-{newSuffix}-percent)\n\t' +
-      'eg. var(--dt-space-400-percent) → var(--dt-spacing-100-percent)\n' +
+    '- var(--dt-space-{stop}-percent) is left unchanged — percent tokens live under\n\t' +
+      '--dt-layout-*-percent (a different stop axis), so there is no safe automated mapping.\n' +
     '- Tokens with no equivalent (720, 730, 750+) are left unchanged for manual review.\n',
   patterns: ['**/*.{css,less,scss,sass,styl,html,vue,md,js,ts,jsx,tsx}'],
   globbyConfig: {
@@ -37,7 +37,10 @@ export default {
   },
   expressions: [
     {
-      from: /var\(--dt-space-([0-9]+)(-negative|-percent)?\)/g,
+      // -percent variants are intentionally excluded: --dt-spacing-*-percent tokens do not
+      // exist. Percent tokens live under --dt-layout-*-percent with a different stop axis
+      // (0/5/10…100 = percentages) and cannot be automatically mapped from space pixel stops.
+      from: /var\(--dt-space-([0-9]+)(-negative)?\)/g,
       to: (match, stop, suffix) => {
         const newSuffix = MAP[Number(stop)];
         if (newSuffix == null) return match;

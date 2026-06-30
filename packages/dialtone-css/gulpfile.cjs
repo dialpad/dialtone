@@ -38,6 +38,7 @@ const postCSS = settings.styles ? require('gulp-postcss') : null;
 const postCSSNano = settings.styles ? require('cssnano')({ preset: ['default', { calc: false }] }) : null;
 const less = settings.styles ? require('gulp-less') : null;
 const postCSSDialtoneGenerator = settings.styles ? require('./postcss/dialtone-generators.cjs') : null;
+const postCSSLayerRemover = settings.styles ? require('./postcss/postcss-layer-remover.cjs') : null;
 const sourcemaps = settings.styles ? require('gulp-sourcemaps') : null;
 const autoprefixer = settings.styles ? require('autoprefixer') : null;
 
@@ -77,6 +78,7 @@ const paths = {
   styles: {
     inputLib: ['./lib/build/less/dialtone.less', './lib/build/less/dialtone-default-theme.less'],
     outputLib: './lib/dist/',
+    outputNoLayers: './lib/dist/no-layers/',
   },
   tokens: {
     input: 'node_modules/@dialpad/dialtone-tokens/dist/css/*.css',
@@ -207,6 +209,20 @@ const libStylesDev = function (done) {
     }))
     .pipe(sourcemaps.write())
     .pipe(dest(paths.styles.outputLib));
+};
+
+const libStylesNoLayers = function (done) {
+  if (!settings.styles) return done();
+
+  // No font URL rewrite needed — output is one level deeper than lib/dist/,
+  // so the compiled ../fonts/ paths already resolve correctly to lib/dist/fonts/.
+  return src(paths.styles.inputLib)
+    .pipe(less({ paths: ['./node_modules'] }))
+    .pipe(postCSS([postCSSDialtoneGenerator, autoprefixer(), postCSSLayerRemover]))
+    .pipe(dest(paths.styles.outputNoLayers))
+    .pipe(postCSS([postCSSNano]))
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(dest(paths.styles.outputNoLayers));
 };
 
 const moveStyleTagsToEOF = function (file, enc, cb) {
@@ -430,6 +446,7 @@ exports.default = series(
   exports.svg,
   tokens,
   libStyles,
+  libStylesNoLayers,
   libFontStyles,
   libFontsJS,
   libDocs,

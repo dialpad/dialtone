@@ -1,7 +1,7 @@
 ---
 title: Text
 description: Consistent typography styling through text variants and raw font-size tokens.
-status: ready
+status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-text--default
 keywords:
@@ -74,7 +74,7 @@ Use `variant` to apply a complete text composition, including font family, font 
   :direction="{ default: 'column', md: 'row' }"
   align="baseline"
 >
-  <dt-text variant="headline-md" as="span">Headline</dt-text>
+  <dt-text variant="headline-md" as="h3">Headline</dt-text>
   <dt-text variant="body-md">Body</dt-text>
   <dt-text variant="label-md">Label</dt-text>
   <dt-text variant="code-md">Code</dt-text>
@@ -84,7 +84,7 @@ Use `variant` to apply a complete text composition, including font family, font 
 
 ### Size
 
-Use `size` with `variant` to apply a raw font-size token while keeping the rest of the composition. `size` should not be used by itself; pair it with `variant`, or with legacy `kind` while migrating older usages.
+Using `size` with `variant` acts as an override of the `font-size` over its composed default. It applies a raw font-size token while keeping the rest of the composition. `size` will not work by itself, as it requires pairing with `variant`, or with legacy `kind` when migrating older usages.
 
 <dt-stack class="d-w100p d-ba d-bar-300 d-of-auto">
   <table class="d-w100p d-table">
@@ -109,14 +109,20 @@ Use `size` with `variant` to apply a raw font-size token while keeping the rest 
 
 ```vue code-only
 <dt-text
-  variant="body-lg"
-  size="300"
->Body composition with a 20px font-size override</dt-text>
+  variant="body-xs"
+  size="125"
+>
+  Body composition with font-size override to fall between "body-xs" and "body-sm"
+</dt-text>
 ```
 
 ### Legacy kind
 
-The `kind` prop remains supported for backward compatibility. When `kind` is present and `variant` is absent, `size` keeps its legacy composition behavior.
+> [!WARNING] Favor using `variant` over `kind/size` combinations. The `kind` prop remains supported for backward compatibility.
+>
+> When `kind` is present and `variant` is absent, `size` keeps its legacy composition behavior.
+>
+> `kind` is ignored if `variant` is present.
 
 ```vue code-only
 <!-- Legacy, still supported -->
@@ -541,27 +547,12 @@ Text box trim will only affect elements with block or inline-block styled contex
 <script setup>
 import { computed, reactive } from 'vue';
 import ExampleProfileCard from '@exampleComponents/ExampleProfileCard.vue';
+import { fontSize } from '@data/type.json';
 
-const textSizeScale = [
-  { size: 50, output: '10px' },
-  { size: 75, output: '11px' },
-  { size: 100, output: '12px' },
-  { size: 125, output: '13px' },
-  { size: 150, output: '14px' },
-  { size: 200, output: '16px' },
-  { size: 250, output: '18px' },
-  { size: 300, output: '20px' },
-  { size: 350, output: '22px' },
-  { size: 400, output: '26px' },
-  { size: 450, output: '29px' },
-  { size: 500, output: '32px' },
-  { size: 550, output: '36px' },
-  { size: 600, output: '42px' },
-  { size: 650, output: '46px' },
-  { size: 700, output: '52px' },
-  { size: 750, output: '58px' },
-  { size: 800, output: '66px' },
-];
+const textSizeScale = fontSize.product.map(({ stop, size }) => ({
+  size: stop,
+  output: `${size}px`,
+}));
 
 const BOUNDS = Object.freeze({ min: 2, max: 10, default: 4 });
 const clampToBounds = (value) => Math.min(Math.max(value ?? BOUNDS.default, BOUNDS.min), BOUNDS.max);

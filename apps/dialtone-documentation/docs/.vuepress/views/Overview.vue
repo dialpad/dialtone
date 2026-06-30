@@ -9,12 +9,12 @@
         >
           <div v-if="page.thumb" class="dialtone-wall__image">
             <img
-              v-if="thumbImgUrl(page.fileName)"
-              :src="thumbImgUrl(page.fileName)"
-              :alt="page.title"
+              v-if="thumbImgUrl(pageThumbName(page))"
+              :src="thumbImgUrl(pageThumbName(page))"
+              :alt="pageTitle(page)"
               class="dialtone-wall__thumb"
             >
-            <svg-loader v-else class="dialtone-wall__thumb" :name="page.fileName" />
+            <svg-loader v-else class="dialtone-wall__thumb" :name="pageThumbName(page)" />
           </div>
           <div class="dialtone-wall__details">
             <div class="dialtone-wall__title">
@@ -101,11 +101,14 @@ const BADGE_KIND_CLASSES = {
 };
 const badgeKindClass = (status) => BADGE_KIND_CLASSES[status] ?? '';
 const pageTitle = (page) => {
+  if (page.cardTitle) return page.cardTitle;
+
   const shortTitle = page.shortTitle
     ? page.shortTitle[0].toUpperCase() + page.shortTitle.slice(1)
     : undefined;
   return shortTitle || page.title;
 };
+const pageThumbName = page => page.thumbName || page.fileName;
 const cardElType = (page) => {
   if (
     page.status !== 'planned' ||

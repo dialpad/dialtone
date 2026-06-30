@@ -187,6 +187,7 @@ ruleTester.run('deprecated-tshirt-sizes', rule, {
     // Dynamic binding on dt-text without variant/kind cannot infer composition
     {
       code: `<template><dt-text :size="'sm'" /></template>`,
+      output: null,
       errors: [{ messageId: 'unpairedDtTextSize' }],
     },
     // Dynamic binding on dt-text with variant needs a manual raw-size migration
@@ -205,6 +206,7 @@ ruleTester.run('deprecated-tshirt-sizes', rule, {
     // Dynamic binding: single t-shirt in ternary without variant/kind cannot infer composition
     {
       code: `<template><dt-text :size="isLarge ? 'xl' : 300" /></template>`,
+      output: null,
       errors: [{ messageId: 'unpairedDtTextSize' }],
     },
     // Dynamic binding: single t-shirt in ternary with variant needs manual migration

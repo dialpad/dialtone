@@ -1,3 +1,15 @@
+# [8.81.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.81.0-next.2...dialtone-css/v8.81.0-next.3) (2026-06-26)
+
+
+### Bug Fixes
+
+* **Dialtone Css:** DLT-3492 DLT-3493 fix codemod incorrectly mapping large spacing values to wrong tokens ([#1342](https://github.com/dialpad/dialtone/issues/1342)) ([5abbb10](https://github.com/dialpad/dialtone/commit/5abbb105e8fd1ea1e1500815b230d11040ce03b0))
+
+
+### Features
+
+* **Dialtone Css:** DLT-3495 add no-layers CSS build ([#1341](https://github.com/dialpad/dialtone/issues/1341)) ([fee1895](https://github.com/dialpad/dialtone/commit/fee1895aaf0d0d466b4589fa652fe04108e541f5))
+
 # [8.81.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.81.0-next.1...dialtone-css/v8.81.0-next.2) (2026-06-22)
 
 

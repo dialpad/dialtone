@@ -43,8 +43,6 @@ const NEGATIVE_SPACING_MAP = {
   32: '400', 48: '600', 64: '800',
 };
 
-const SPACING_LAYOUT_MAP = { 96: '150', 128: '200' };
-
 // Per-category regexes with capture groups. Negative variants precede positive so `d-mtn8`
 // matches the negative pattern (rule order is load-order in `rewriteClassString`).
 const SIZING_RE          = new RegExp(`${START}d-(h|w|hmn|hmx|wmn|wmx)(${SIZING_PIXELS})${END}`, 'g');
@@ -66,10 +64,10 @@ function rewriteClassString (input) {
     .replace(NEGATIVE_MARGIN_RE, (m, dir, px) => NEGATIVE_SPACING_MAP[px] ? `d-m${dir ?? ''}-n${NEGATIVE_SPACING_MAP[px]}` : m)
     .replace(NEGATIVE_POS_RE,    (m, dir, px) => NEGATIVE_SPACING_MAP[px] ? `d-${dir}-n${NEGATIVE_SPACING_MAP[px]}` : m)
     .replace(SIZING_RE,          (m, dir, px) => SIZING_MAP[px] ? `d-${dir}-${SIZING_MAP[px]}` : m)
-    .replace(MARGIN_RE,          (m, dir, px) => { const stop = SPACING_MAP[px] ?? SPACING_LAYOUT_MAP[px]; return stop ? `d-m${dir ?? ''}-${stop}` : m; })
-    .replace(PADDING_RE,         (m, dir, px) => { const stop = SPACING_MAP[px] ?? SPACING_LAYOUT_MAP[px]; return stop ? `d-p${dir ?? ''}-${stop}` : m; })
+    .replace(MARGIN_RE,          (m, dir, px) => { const stop = SPACING_MAP[px]; return stop ? `d-m${dir ?? ''}-${stop}` : m; })
+    .replace(PADDING_RE,         (m, dir, px) => { const stop = SPACING_MAP[px]; return stop ? `d-p${dir ?? ''}-${stop}` : m; })
     .replace(GAP_RE,             (m, dir, px) => SPACING_MAP[px] ? `d-${dir}-${SPACING_MAP[px]}` : m)
-    .replace(POSITION_RE,        (m, dir, px) => { const stop = SPACING_MAP[px] ?? SPACING_LAYOUT_MAP[px]; return stop ? `d-${dir}-${stop}` : m; });
+    .replace(POSITION_RE,        (m, dir, px) => { const stop = SPACING_MAP[px]; return stop ? `d-${dir}-${stop}` : m; });
 }
 
 module.exports = {

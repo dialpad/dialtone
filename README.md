@@ -18,6 +18,22 @@ npm install @dialpad/dialtone @dialpad/i18n
 
 ---
 
+### Import CSS
+
+```js
+import '@dialpad/dialtone/css';
+```
+
+#### No-Layers Build
+
+If your project cannot use CSS Cascade Layers, import the no-layers variant. You will likely need to use the no-layers build if you are upgrading from Dialtone <=9, unless you migrate your application CSS to support layers. See the [CSS Cascade Layers migration guide](https://dialtone.dialpad.com/guides/migration/css-cascade-layers/) for more details.
+
+```js
+import '@dialpad/dialtone/css/no-layers';
+```
+
+---
+
 ### Theming
 
 Dialtone has four theming dimensions: **mode** (light/dark), **brand** (the color palette), **material** (the neutral ramp), and **contrast** (default/high). Each switches at runtime via `@dialpad/dialtone/themes/config`. See the [Theme and Mode guide](https://dialtone.dialpad.com/guides/theme-and-mode/) for the full API.
