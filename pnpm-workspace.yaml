@@ -7,3 +7,56 @@ packages:
   - 'packages/language-server/*'
   # yeoman generator
   - 'generator-dialtone'
+
+engineStrict: true
+
+peerDependencyRules:
+  allowedVersions:
+    mem-fs: '^4.0.0'
+    postcss: '^7.0.39 || ^8.3.3'
+    react: '^18.3.1'
+    typescript: '^5.2'
+    vite: '^8.0.0'
+    vue: '^3.2'
+    vuepress: '^2.0.0-rc.24'
+
+overrides:
+  playwright-core: '>=1.60.0'
+  '@typescript-eslint/utils': '^8.44.1'
+  braces: '>=3.0.3'
+  cross-spawn: '>=7.0.5'
+  nanoid: '>=3.3.8'
+  sass: '^1.70.0'
+  sugarss: '^5.0.0'
+  semver-regex: '3.1.4'
+  stylelint: '^16.25.0'
+  tar-fs: '>=2.1.3'
+  test-exclude: '^7.0.1'
+  trim: '>=0.0.3'
+  trim-newlines: '>=3.0.1'
+
+patchedDependencies:
+  '@tiptap/vue-3@3.19.0': patches/@tiptap__vue-3@3.19.0.patch
+
+minimumReleaseAge: 10080
+minimumReleaseAgeStrict: true
+minimumReleaseAgeIgnoreMissingTime: false
+minimumReleaseAgeExclude:
+  - '@dialpad/*'
+allowBuilds:
+  '@bundled-es-modules/glob': true
+  '@percy/core': true
+  '@swc/core': true
+  core-js: true
+  core-js-pure: true
+  es5-ext: true
+  esbuild: true
+  fsevents: true
+  keytar: true
+  nodent-runtime: true
+  nx: true
+  spawn-sync: true
+  style-dictionary: true
+  unrs-resolver: true
+  vue-demi: true
+  yo: true
