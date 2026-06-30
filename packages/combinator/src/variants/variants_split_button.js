@@ -1,5 +1,9 @@
 /* eslint-disable max-len */
 
+import { disableAndClearProps, hasNoValue, hasValue } from '@/src/lib/exclusion_rules';
+
+const END_ALIAS_PROPS = ['omegaActive', 'omegaAriaLabel', 'omegaDisabled', 'omegaId', 'omegaTooltipText'];
+
 
 export default {
   defaults: {
@@ -12,6 +16,90 @@ export default {
     {
       when: { importance: v => v !== 'clear' },
       hide: { props: ['showDivider'] },
+    },
+    {
+      when: { startActive: true },
+      ...disableAndClearProps(['alphaActive']),
+    },
+    {
+      when: { startAriaLabel: hasValue },
+      ...disableAndClearProps(['alphaAriaLabel']),
+    },
+    {
+      when: { startIconPosition: v => hasValue(v) && v !== 'left' },
+      ...disableAndClearProps(['alphaIconPosition']),
+    },
+    {
+      when: { startLeadingClass: hasValue },
+      ...disableAndClearProps(['alphaLeadingClass']),
+    },
+    {
+      when: { startTrailingClass: hasValue },
+      ...disableAndClearProps(['alphaTrailingClass']),
+    },
+    {
+      when: { startLabelClass: hasValue },
+      ...disableAndClearProps(['alphaLabelClass']),
+    },
+    {
+      when: { startDisabled: true },
+      ...disableAndClearProps(['alphaDisabled']),
+    },
+    {
+      when: { startLoading: true },
+      ...disableAndClearProps(['alphaLoading']),
+    },
+    {
+      when: { startTooltipText: hasValue },
+      ...disableAndClearProps(['alphaTooltipText']),
+    },
+    {
+      when: { endActive: true },
+      ...disableAndClearProps(['omegaActive']),
+    },
+    {
+      when: { endAriaLabel: hasValue },
+      ...disableAndClearProps(['omegaAriaLabel']),
+    },
+    {
+      when: { endDisabled: true },
+      ...disableAndClearProps(['omegaDisabled']),
+    },
+    {
+      when: { endId: hasValue },
+      ...disableAndClearProps(['omegaId']),
+    },
+    {
+      when: { endTooltipText: hasValue },
+      ...disableAndClearProps(['omegaTooltipText']),
+    },
+    {
+      whenSlots: { startIcon: hasNoValue, alphaIcon: hasNoValue },
+      ...disableAndClearProps(['alphaIconPosition']),
+    },
+    {
+      whenSlots: { startEndIcon: hasValue },
+      ...disableAndClearProps(['alphaIconPosition']),
+    },
+    {
+      whenSlots: { leading: hasNoValue },
+      ...disableAndClearProps(['alphaLeadingClass']),
+    },
+    {
+      whenSlots: { trailing: hasNoValue },
+      ...disableAndClearProps(['alphaTrailingClass']),
+    },
+    {
+      whenSlots: { default: hasNoValue },
+      ...disableAndClearProps(['alphaLabelClass']),
+    },
+    {
+      whenSlots: { end: hasValue },
+      ...disableAndClearProps(END_ALIAS_PROPS),
+    },
+    {
+      whenSlots: { omega: hasValue },
+      ...disableAndClearProps(END_ALIAS_PROPS),
     },
     {
       when: { kind: 'muted' },

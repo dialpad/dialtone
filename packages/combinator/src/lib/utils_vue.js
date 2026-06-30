@@ -15,7 +15,8 @@ import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
  * @returns {WritableComputedRef<*>} The cached ref object.
  */
 export function cachedRef (key, defaultValue) {
-  const reference = ref(JSON.parse(window.localStorage.getItem(key)) || defaultValue);
+  const stored = window.localStorage.getItem(key);
+  const reference = ref(stored === null ? defaultValue : JSON.parse(stored));
   return computed({
     get: () => reference.value,
     set (value) {

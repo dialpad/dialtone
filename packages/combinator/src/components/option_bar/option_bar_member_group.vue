@@ -165,6 +165,18 @@ const props = defineProps({
     type: String,
     default: 'props',
   },
+  /**
+   * Settings data object.
+   */
+  settings: {
+    type: Object,
+    default: () => ({
+      controls: {
+        hideDeprecated: true,
+        hideInactive: false,
+      },
+    }),
+  },
 });
 
 const emit = defineEmits([MEMBER_UPDATE_EVENT]);
@@ -273,6 +285,8 @@ function extendMember (member) {
       shouldDisable(key, props.memberGroup, props.exclusionRules, props.propValues, props.slotValues) ||
       (props.memberGroup === 'props' && shouldDisableSlotClassProp(key, props.slotValues))
     );
+  const deprecated = !!member.deprecated || isDocDeprecated;
+  const inactive = dynamicHide || isDisabled;
 
   const clearValue = !member.required
     && shouldClear(key, props.memberGroup, props.exclusionRules, props.propValues, props.slotValues);
@@ -283,11 +297,13 @@ function extendMember (member) {
     ...member,
     control,
     validControls,
-    hideControl: member.hideControl || isDocDeprecated,
+    hideControl: member.hideControl ||
+      (props.settings.controls.hideDeprecated && deprecated) ||
+      (props.settings.controls.hideInactive && inactive),
     clearValue,
     clearable,
-    deprecated: !!member.deprecated || isDocDeprecated,
-    disableControl: dynamicHide || isDisabled,
+    deprecated,
+    disableControl: inactive,
   };
 }
 

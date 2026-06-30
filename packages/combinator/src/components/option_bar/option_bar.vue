@@ -45,19 +45,28 @@
         >
           Class
         </dt-tab>
-        <dt-button
-          v-dt-tooltip="'Search'"
+        <dt-stack
+          direction="row"
+          gap="50"
           class="d-mis-auto"
-          kind="muted"
-          importance="clear"
-          :size="100"
-          :active="showSearch"
-          @click="toggleSearch"
         >
-          <template #icon="{ iconSize }">
-            <dt-icon-search :size="iconSize" />
-          </template>
-        </dt-button>
+          <dtc-option-bar-settings
+            :settings="settings"
+            @update:settings="e => emit(SETTINGS_UPDATE_EVENT, e)"
+          />
+          <dt-button
+            v-dt-tooltip="'Search'"
+            kind="muted"
+            importance="clear"
+            :size="100"
+            :active="showSearch"
+            @click="toggleSearch"
+          >
+            <template #icon="{ iconSize }">
+              <dt-icon-search :size="iconSize" />
+            </template>
+          </dt-button>
+        </dt-stack>
         <dt-input
           v-if="showSearch"
           ref="searchInput"
@@ -114,6 +123,7 @@
                   :exclusion-rules="info.exclusions"
                   :prop-values="options.props"
                   :slot-values="options.slots"
+                  :settings="settings"
                   member-group="props"
                   @update:member="updateProps"
                 />
@@ -135,6 +145,7 @@
                   :exclusion-rules="info.exclusions"
                   :prop-values="options.props"
                   :slot-values="options.slots"
+                  :settings="settings"
                   member-group="slots"
                   @update:member="updateSlots"
                 />
@@ -157,6 +168,7 @@
                   :exclusion-rules="info.exclusions"
                   :prop-values="options.props"
                   :slot-values="options.slots"
+                  :settings="settings"
                   member-group="attributes"
                   @update:member="updateAttributes"
                 />
@@ -169,6 +181,7 @@
                   :exclusion-rules="info.exclusions"
                   :prop-values="options.props"
                   :slot-values="options.slots"
+                  :settings="settings"
                   member-group="props"
                   @update:member="updateProps"
                 />
@@ -184,8 +197,9 @@
 
 <script setup>
 import DtcOptionBarMemberGroup from './option_bar_member_group.vue';
+import DtcOptionBarSettings from './option_bar_settings.vue';
 import { computed, ref, nextTick } from 'vue';
-import { OPTIONS_UPDATE_EVENT } from '@/src/lib/constants';
+import { OPTIONS_UPDATE_EVENT, SETTINGS_UPDATE_EVENT } from '@/src/lib/constants';
 import { getControlByMemberType, getControlByValue } from '@/src/lib/control';
 import { isIconSlot } from '@/src/lib/icons';
 import { isClassProp } from '@/src/lib/utils';
@@ -215,9 +229,16 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  /**
+   * Settings data object.
+   */
+  settings: {
+    type: Object,
+    required: true,
+  },
 });
 
-const emit = defineEmits([OPTIONS_UPDATE_EVENT]);
+const emit = defineEmits([OPTIONS_UPDATE_EVENT, SETTINGS_UPDATE_EVENT]);
 
 const showSearch = ref(false);
 const searchInput = ref(null);

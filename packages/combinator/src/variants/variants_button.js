@@ -1,3 +1,8 @@
+import { disableAndClearProps, hasNoValue, hasValue } from '@/src/lib/exclusion_rules';
+
+const LEGACY_ICON_PROPS = ['iconPosition', 'iconClass'];
+const LINK_DEPRECATED_PROPS = ['underline', 'linkInverted'];
+
 export default {
   defaults: {
     props: {
@@ -12,6 +17,38 @@ export default {
       hide: {
         props: ['importance', 'kind', 'circle', 'loading', 'active', 'type', 'size'],
       },
+    },
+    {
+      when: { link: v => !v },
+      ...disableAndClearProps(LINK_DEPRECATED_PROPS),
+    },
+    {
+      when: { link: true },
+      ...disableAndClearProps(LEGACY_ICON_PROPS),
+    },
+    {
+      when: { link: true, linkUnderline: false },
+      ...disableAndClearProps(['underline']),
+    },
+    {
+      whenSlots: { icon: hasNoValue },
+      ...disableAndClearProps(LEGACY_ICON_PROPS),
+    },
+    {
+      whenSlots: { startIcon: hasValue },
+      ...disableAndClearProps(LEGACY_ICON_PROPS),
+    },
+    {
+      whenSlots: { endIcon: hasValue },
+      ...disableAndClearProps(LEGACY_ICON_PROPS),
+    },
+    {
+      whenSlots: { blockStartIcon: hasValue },
+      ...disableAndClearProps(LEGACY_ICON_PROPS),
+    },
+    {
+      whenSlots: { blockEndIcon: hasValue },
+      ...disableAndClearProps(LEGACY_ICON_PROPS),
     },
     {
       when: { kind: 'muted' },

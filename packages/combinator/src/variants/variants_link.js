@@ -1,9 +1,18 @@
+import { disableAndClearProps, hasValue } from '@/src/lib/exclusion_rules';
+
 export default {
   defaults: {
     props: {
       tone: { tokenCategory: 'color:d-link--:color' },
     },
   },
+
+  exclusions: [
+    {
+      when: { tone: hasValue },
+      ...disableAndClearProps(['kind']),
+    },
+  ],
 
   default: {
     slots: {

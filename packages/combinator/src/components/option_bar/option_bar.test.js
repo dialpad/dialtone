@@ -5,9 +5,17 @@ import { mount } from '@vue/test-utils';
 
 const tabSelector = '[data-qa=option-bar-tab]';
 const searchButtonSelector = '[data-qa=option-bar-search-button]';
+const settingsButtonSelector = '[data-qa=option-bar-settings-button]';
 const searchInputSelector = '[data-qa=option-bar-search-input]';
 
 const component = {};
+
+const settings = {
+  controls: {
+    hideDeprecated: true,
+    hideInactive: false,
+  },
+};
 
 const baseOptions = {
   props: {
@@ -26,6 +34,7 @@ function mountWrapper ({ props = [], slots = [], attributes = [], options = base
     props: {
       component,
       options,
+      settings,
       info: {
         props,
         slots,
@@ -50,6 +59,7 @@ function mountWrapper ({ props = [], slots = [], attributes = [], options = base
             'propValues',
             'slotValues',
             'memberGroup',
+            'settings',
           ],
           template: `
             <div
@@ -64,6 +74,12 @@ function mountWrapper ({ props = [], slots = [], attributes = [], options = base
               </span>
             </div>
           `,
+        },
+        DtcOptionBarSettings: {
+          name: 'DtcOptionBarSettings',
+          props: ['settings'],
+          emits: ['update:settings'],
+          template: '<button data-qa="option-bar-settings-button">Settings</button>',
         },
         DtButton: {
           template: '<button data-qa="option-bar-search-button"><slot /><slot name="icon" :icon-size="100" /></button>',
@@ -319,5 +335,25 @@ describe('option_bar.vue test', function () {
 
     expect(getTabs(wrapper)).toEqual(['Slots']);
     expect(getSelectedPanel(wrapper)).toBe('panel-slots');
+  });
+
+  it('Should render settings before search and re-emit settings updates', async function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'kind' },
+      ],
+    });
+    const settingsUpdate = model => {
+      model.controls.hideDeprecated = false;
+    };
+
+    await wrapper.findComponent({ name: 'DtcOptionBarSettings' }).vm.$emit('update:settings', settingsUpdate);
+
+    expect(wrapper.findComponent({ name: 'DtcOptionBarSettings' }).props('settings')).toEqual(settings);
+    expect(wrapper.emitted('update:settings')).toEqual([[settingsUpdate]]);
+    expect(
+      wrapper.find(settingsButtonSelector).element.compareDocumentPosition(wrapper.find(searchButtonSelector).element) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
   });
 });
