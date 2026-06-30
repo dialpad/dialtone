@@ -1,0 +1,27 @@
+packages/combinator/src/components/controls/control_suggestion.vue
+  s_cbd29f6a5140e8::t_c6a371cf4495cc 103
+packages/combinator/src/components/controls/control_suggestion.test.js
+  s_cbd29f6a5140e8::t_d4bad153fb9f2e 35-38,79-88
+  s_cbd29f6a5140e8::t_c25a6ab2a5d121 89-100
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.5",
+  "base_commit_sha": "b1db7f869e3ead04f9dff2829aeb9c16ad565f1a",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_cbd29f6a5140e8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f1571-d2ad-7572-827a-d391f2dc0ba6",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
