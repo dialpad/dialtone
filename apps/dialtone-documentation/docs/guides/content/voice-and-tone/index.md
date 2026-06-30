@@ -6,7 +6,7 @@ description: Learn how to apply Dialpad's voice and choose the right tone, no ma
 keywords: ["writing style", "brand voice"]
 ---
 
-Voice and tone guidance is moving into [Writing approach](../writing-approach/). Use Writing approach as the main entry point for in-product writing principles, voice, and tone.
+Voice and tone guidance supports [Writing approach](../writing-approach/). Use Writing approach as the main entry point for in-product writing principles, voice, and tone.
 
 This guide is the comprehensive writing resource for product teams. Reference this guide to ensure accuracy, coherence, and consistency throughout the product. Applying the outlined principles in this guide consistently will maintain high writing quality standards across product teams and throughout the product experience.
 

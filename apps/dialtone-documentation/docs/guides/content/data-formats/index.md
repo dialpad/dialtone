@@ -18,9 +18,9 @@ keywords: ["data formats", "dates", "times", "numbers", "currency", "units"]
 
 Use this guidance when product copy includes structured information such as dates, times, numbers, units, currency, file sizes, durations, or counts.
 
-This area will cover how to keep formatted data scannable, consistent, and understandable across product surfaces. It should help teams choose formats that match user context instead of mixing styles across similar workflows.
+Keep formatted data scannable, consistent, and understandable across product surfaces. Choose formats that match user context, and use the same format for the same kind of data within a workflow.
 
-Until this guidance is expanded, use [Grammar and mechanics](../grammar-and-mechanics/) for general style decisions and keep data formats consistent within each product surface.
+Use [Grammar and mechanics](../grammar-and-mechanics/) for general style decisions, and keep data formats consistent within each product surface.
 
 ## Related guidance
 

@@ -19,9 +19,9 @@ keywords:
 
 Use this guidance when writing copy for forms, fields, and validation states.
 
-This area will cover how to write labels, helper text, placeholder text, validation messages, and form-level feedback. It should help teams decide what copy belongs near the field, what belongs in a dedicated error message, and when helper text is unnecessary.
+Write form copy so users know what information is needed, why it is needed, and how to recover from validation problems. Keep labels persistent, helper text contextual, placeholder text supplemental, and field feedback close to the field.
 
-Until this guidance is expanded, use the current [Error messages](../error-messages/) and [Help content](../help-content/) guidance for form-related feedback and supporting text.
+Use [Error messages](../error-messages/) and [Help content](../help-content/) for form-related feedback and supporting text.
 
 ## Related guidance
 

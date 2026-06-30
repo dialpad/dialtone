@@ -11,7 +11,7 @@
             <img
               v-if="thumbImgUrl(pageThumbName(page))"
               :src="thumbImgUrl(pageThumbName(page))"
-              :alt="page.title"
+              :alt="pageTitle(page)"
               class="dialtone-wall__thumb"
             >
             <svg-loader v-else class="dialtone-wall__thumb" :name="pageThumbName(page)" />

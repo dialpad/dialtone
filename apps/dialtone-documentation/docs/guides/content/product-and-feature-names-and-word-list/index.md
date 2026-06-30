@@ -15,7 +15,7 @@ Use this guidance when naming or referring to products, features, settings, acti
 
 This area covers product naming, feature naming, and word-list decisions for in-product copy. It should help teams use the same terms for the same concepts, avoid deprecated or unclear language, and keep names consistent with what users see in the product.
 
-Until this guidance is expanded, use [Inclusive language](../inclusive-language/) for language choices that affect inclusion and [Grammar and mechanics](../grammar-and-mechanics/) for capitalization, punctuation, and style decisions.
+Use [Inclusive language](../inclusive-language/) for language choices that affect inclusion and [Grammar and mechanics](../grammar-and-mechanics/) for capitalization, punctuation, and style decisions.
 
 ## Related guidance
 

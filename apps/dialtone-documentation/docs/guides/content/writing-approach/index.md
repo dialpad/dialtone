@@ -14,7 +14,7 @@ Use this guidance to decide how Dialpad should sound in product experiences and 
 
 This area is the home for voice, tone, and writing principles for in-product copy. It covers how to be clear, direct, helpful, and consistent across product workflows without drifting into marketing or brand copy.
 
-For now, use the existing [Voice and tone](../voice-and-tone/) guidance with the rest of the Content guidelines. This page will become the main entry point for the writing approach as the content guidance is refreshed.
+Start with [Voice and tone](../voice-and-tone/) when choosing how Dialpad should sound. Then use the related guidance below to apply that approach to actions, help content, and error messages.
 
 ## Related guidance
 
