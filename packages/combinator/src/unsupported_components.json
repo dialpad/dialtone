@@ -1,0 +1,13 @@
+{
+  "DtBanner": "Docs currently disable the Combinator for this component; add a representative fixture before enabling.",
+  "DtComboboxMultiSelect": "Composite input and popover behavior needs a stable default dataset and open-state fixture before enabling.",
+  "DtComboboxWithPopover": "Composite input and popover behavior needs a stable default dataset and open-state fixture before enabling.",
+  "DtHovercard": "Hover-triggered overlay behavior needs a stable anchor and interaction fixture before enabling.",
+  "DtListItem": "List item previews need a representative parent/list context before enabling.",
+  "DtModal": "Portal and focus-trap behavior needs a safe embedded docs fixture before enabling.",
+  "DtModeIsland": "Mode scope behavior needs a docs-specific context fixture before enabling.",
+  "DtRootLayout": "Full-page layout primitives are not useful inside the embedded Combinator preview.",
+  "DtScroller": "Scroll container behavior needs constrained content and viewport fixtures before enabling.",
+  "DtSkeleton": "Skeleton previews need a specific rendered skeleton target before enabling.",
+  "DtTooltip": "Tooltip overlay behavior needs a stable anchor and interaction fixture before enabling."
+}

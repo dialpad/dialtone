@@ -1,4 +1,16 @@
 /* eslint-disable max-len */
+import {
+  TEXT_FONT_SIZE_MODIFIERS,
+  TEXT_HEADLINE_ONLY_SIZES,
+  TEXT_SIZE_MODIFIERS,
+} from '@dialpad/dialtone-vue';
+
+// Derive the legacy kind/size exclusions from DtText's own constants so the
+// Combinator's enable/disable state can never drift from what DtText accepts.
+const ALL_FONT_SIZES = Object.keys(TEXT_FONT_SIZE_MODIFIERS);
+const legacyNumericSizes = (kind) => TEXT_SIZE_MODIFIERS[kind].filter((size) => /^\d+$/.test(size));
+const disabledSizesForKind = (kind) => ALL_FONT_SIZES.filter((size) => !legacyNumericSizes(kind).includes(size));
+const headlineOnlyNumericSizes = TEXT_HEADLINE_ONLY_SIZES.filter((size) => /^\d+$/.test(size));
 
 export default {
   defaults: {
@@ -24,14 +36,14 @@ export default {
     },
     {
       when: { variant: v => !v, kind: v => v !== 'headline' },
-      disableValues: { props: { size: ['50', '75', '125', '150', '250', '350', '450', '500', '550', '600', '650', '700', '750', '800' ] } },
+      disableValues: { props: { size: disabledSizesForKind('body') } },
     },
     {
       when: { variant: v => !v, kind: 'headline' },
-      disableValues: { props: { size: ['50', '75', '125', '150', '250', '350', '450', '550', '650', '750', '800' ] } },
+      disableValues: { props: { size: disabledSizesForKind('headline') } },
     },
     {
-      when: { size: v => ['500', '600', '700'].includes(String(v)) },
+      when: { size: v => headlineOnlyNumericSizes.includes(String(v)) },
       disableValues: { props: { kind: ['body', 'label', 'code'] } },
     },
   ],
