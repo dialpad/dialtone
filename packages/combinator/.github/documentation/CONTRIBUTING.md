@@ -41,7 +41,7 @@ pnpm --dir packages/combinator exec eslint src
 - Run ESLint for touched Combinator files.
 - The package builds when the change affects build output or imports.
 - Update documentation when behavior, commands, settings, variants, or
-  supported components change.
+  unsupported-component status changes.
 
 ## Coding guidelines
 

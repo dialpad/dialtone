@@ -117,6 +117,12 @@ lock a control at once.
 The renderer and code editor filter out disabled members so inactive
 members do not appear in the preview or copied template.
 
+The option bar still renders disabled controls by default so users can see why a
+value is unavailable. When `settings.controls.hideInactive` is enabled, disabled
+controls are hidden during normal browsing. Active search can surface matching
+disabled controls again, but they remain disabled and the renderer/code editor
+still suppress them through `disabledMembers`.
+
 ## Prop dependencies
 
 Prop dependencies do not need variant rules. `buildDependencyMap(...)` infers

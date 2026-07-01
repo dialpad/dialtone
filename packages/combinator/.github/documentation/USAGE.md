@@ -98,6 +98,10 @@ Inside the package source, the registry lives at
 - `default`, the default preset and reset target;
 - any number of named presets shown in the preset dropdown.
 
+Member metadata can also add control hints such as `tokenCategory` and
+`searchKeywords`. Search keywords supplement the automatic member-name and
+logical-alias search corpus.
+
 See [internal/EXCLUSIONS.md](internal/EXCLUSIONS.md) for exclusion mechanics.
 
 ## Blueprint mode

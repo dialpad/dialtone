@@ -82,7 +82,8 @@ edits clear the selected variant label.
 
 ## Settings
 
-`settings` stores cached values for root, code, and renderer settings.
+`settings` stores cached values for root, code, renderer, and option-bar control
+display settings.
 `DtcCombinator` initializes the model from `src/settings.json` and
 localStorage-backed refs.
 

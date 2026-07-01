@@ -14,11 +14,23 @@ members. `DtcCombinator` mounts it unless `blueprint` mode is on.
 The Class tab contains the native `class` attribute and props whose names end in
 `Class`. The option bar separates class props from the main Props tab.
 
-The option bar also has a search toggle. Search normalizes member names and
-logical aliases, so physical terms such as `left`, `right`, `top`, and `bottom`
-can find logical names such as `inlineStart` and `blockEnd`.
+The option bar also has a search toggle. Search normalizes member names,
+variant `searchKeywords`, and logical aliases, so physical terms such as
+`left`, `right`, `top`, and `bottom` can find logical names such as
+`inlineStart` and `blockEnd`.
 When search filters out the current tab, the selected panel follows the first
 visible tab so the controls area does not point at a removed panel.
+
+The option bar includes a settings icon button that opens
+`DtcOptionBarSettings`. The popover edits persisted control-display settings:
+
+- `Hide Deprecated`, on by default;
+- `Hide Disabled`, off by default.
+
+During normal browsing, those settings can hide deprecated or disabled controls.
+During active search, matching controls hidden only by those display settings are
+surfaced again. The controls keep their original state: deprecated controls keep
+their badge, and disabled controls remain disabled.
 
 ## Presets
 
@@ -71,6 +83,9 @@ The option bar disables slot-class props when their matching slot is empty.
 `shouldDisableSlotClassProp(...)` defines the mapping.
 
 See [EXCLUSIONS](EXCLUSIONS.md).
+
+Deprecated controls are detected from the component documentation generated from
+JSDoc tags. Variant metadata should not mark a member deprecated.
 
 ## Option bar control
 

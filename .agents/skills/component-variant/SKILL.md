@@ -12,7 +12,8 @@ Create or update the Combinator variant file that represents a Dialtone Vue comp
 ## Trigger
 
 - A Dialtone Vue component prop, slot, supported value, or visual default changes.
-- A new supported component needs a Combinator preset.
+- A component needs a Combinator preset, or an unsupported component is becoming
+  viable.
 - A component-wall thumbnail renders poorly from the current default variant.
 
 ## Required Context
@@ -21,6 +22,7 @@ Create or update the Combinator variant file that represents a Dialtone Vue comp
 - Generated component docs behavior from `scripts/build-dialtone-vue-docs.mjs`.
 - Existing variant file under `packages/combinator/src/variants/`.
 - `packages/combinator/src/variants/variants.js`.
+- `packages/combinator/src/unsupported_components.json`.
 - `.agents/resources/rules/combinator-variants.md`.
 - `.agents/resources/rule-map.md`.
 - `.agents/resources/package-map.md`.
@@ -41,14 +43,17 @@ Create or update the Combinator variant file that represents a Dialtone Vue comp
 3. Load `.agents/resources/rules/combinator-variants.md`.
 4. Update or create `variants_<component>.js`.
 5. Register new files in `variants.js`.
-6. Add defaults, presets, token categories, and exclusions from verified source behavior.
-7. Check whether the `default` preset is a good thumbnail input.
-8. Run focused Combinator tests when rule behavior changed.
+6. Remove or add an `unsupported_components.json` entry if support status
+   changes.
+7. Add defaults, presets, token categories, and exclusions from verified source behavior.
+8. Check whether the `default` preset is a good thumbnail input.
+9. Run focused Combinator tests when rule behavior changed.
 
 ## Done When
 
 - The variant file matches current component API.
-- New supported components are registered.
+- New variant files are registered.
+- Unsupported status is accurate and includes a short reason when present.
 - Invalid combinations are disabled, hidden, cleared, or value-disabled.
 - The default preset is useful for the component-wall thumbnail or an override is planned.
 - Relevant validation commands are run or explicitly skipped.

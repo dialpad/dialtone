@@ -28,4 +28,4 @@ Apply to `packages/dialtone-vue/components/**`.
 ## Artifact Sync
 
 - Check source, constants, tests, Storybook stories/MDX, VuePress docs, component docs JSON, MCP/query data, and public docs impact for public API changes.
-- For prop, slot, valid-value, or visual-state changes, check the Combinator variant file at `packages/combinator/src/variants/variants_<component>.js` and registration in `packages/combinator/src/variants/variants.js`. Load `.agents/resources/rules/combinator-variants.md`.
+- For prop, slot, valid-value, or visual-state changes, check the Combinator variant file at `packages/combinator/src/variants/variants_<component>.js`, registration in `packages/combinator/src/variants/variants.js`, and unsupported status in `packages/combinator/src/unsupported_components.json`. Load `.agents/resources/rules/combinator-variants.md`.

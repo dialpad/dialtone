@@ -6,6 +6,8 @@ Dialtone Combinator is the interactive playground package for Dialtone Vue compo
 
 - Renderer for the selected Dialtone Vue component.
 - Option bar with Props, Slots, and Class tabs.
+- Option-bar search with logical-name aliases and variant keywords.
+- Persisted control-display settings for deprecated and disabled controls.
 - Variant preset picker backed by `packages/combinator/src/variants/**`.
 - Exclusion and dependency handling for invalid prop and slot combinations.
 - Code panel that copies generated Vue template text from the data model.

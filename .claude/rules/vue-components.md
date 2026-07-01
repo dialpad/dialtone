@@ -71,4 +71,4 @@ The root `CLAUDE.md` Documentation Pipeline is the canonical, complete list (it 
 4. Component docs JSON via `scripts/build-dialtone-vue-docs.mjs`
 5. VuePress page in `apps/dialtone-documentation/docs/components/`
 6. MCP server data via `pnpm nx run dialtone-mcp-server:build`
-7. Combinator variant file in `packages/combinator/src/variants/variants_<component>.js`, plus registration in `variants.js` for new supported components. Required when props, slots, valid values, or visual defaults change. See `.claude/rules/combinator-variants.md`.
+7. Combinator variant file in `packages/combinator/src/variants/variants_<component>.js`, registration in `variants.js`, and unsupported status in `unsupported_components.json`. Required when props, slots, valid values, or visual defaults change. See `.claude/rules/combinator-variants.md`.

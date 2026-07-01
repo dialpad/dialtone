@@ -21,6 +21,10 @@ Variant files drive:
 - component-wall thumbnails, unless an override exists in
   `apps/dialtone-documentation/thumbs/<slug>.vue`.
 
+Component support is opt-out. Components with generated documentation are
+eligible for the standalone app unless they appear in
+`packages/combinator/src/unsupported_components.json` with a reason.
+
 ## File shape
 
 Reserved top-level keys:
@@ -83,6 +87,12 @@ defaults: {
 
 `tokenCategory` enables token-aware value previews in controls. Verify category strings against `src/lib/tokens.js` and existing variant files before adding a new form.
 
+## Search keywords
+
+Use `searchKeywords` only when likely user search terms are not already covered
+by the member name or the logical alias map. Prefer a short, stable list. Do not
+add deprecated state here; deprecation comes from generated component docs.
+
 ## Exclusions
 
 Use `exclusions` for invalid or misleading combinations, for example disabling a value that another prop's value makes invalid. Mutual exclusions need a rule in both directions.
@@ -105,10 +115,19 @@ New props and slots use logical names. When you add a new logical axis, the opti
 
 The native `class` attribute and props ending in `Class` appear in the Class tab. A new slot-class relationship needs its mapping updated in `src/lib/utils.js` plus a focused test. See `packages/combinator/.github/documentation/internal/EXCLUSIONS.md` ("Slot-class dependencies") for the current mappings.
 
+## Unsupported components
+
+Use `unsupported_components.json` only for components that cannot produce a
+useful or stable Combinator preview without extra fixture work. Remove entries
+when the component becomes viable, and keep the reason short and user-facing.
+
 ## Review checks
 
-- Variant file exists for new supported components.
+- Variant file exists when a component needs presets, defaults, exclusions, token
+  metadata, or search keywords.
 - Variant file is registered in `variants.js`.
+- Components that should stay unavailable are listed in
+  `unsupported_components.json` with a reason.
 - `default` renders a useful component-wall thumbnail, or an override exists.
 - Presets cover common states without becoming a storybook replacement.
 - Exclusions prevent known invalid combinations.

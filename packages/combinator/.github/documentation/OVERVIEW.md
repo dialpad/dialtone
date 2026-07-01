@@ -78,7 +78,7 @@ packages/combinator/
     variants/                 Component variant files and variant registry
     App.vue                   Standalone playground app
     settings.json             Default settings
-    supported_components.json Supported component list
+    unsupported_components.json Unsupported component reasons
 ```
 
 Latent components are present in the tree, but the live app does not mount them.
@@ -91,7 +91,8 @@ follow-up.
 
 - `info`, derived from Dialtone Vue documentation and variant metadata;
 - `options`, a reactive value map initialized from `info`;
-- `settings`, a localStorage-backed settings model;
+- `settings`, a localStorage-backed settings model for code display and
+  option-bar control display;
 - `disabledMembers`, a computed set from exclusions, prop dependencies, and
   slot-class dependencies.
 
@@ -106,15 +107,17 @@ fullscreen button.
 
 See [SYSTEM](internal/SYSTEM.md).
 
-## Supported components
+## Component support
 
-`src/supported_components.json` lists components that should work in the
-standalone app and package tests. The standalone app can still show unsupported
-Dialtone Vue exports, but it labels them as unsupported in the component picker.
+`src/unsupported_components.json` is the short list of Dialtone Vue exports that
+should not be offered in the standalone app. Each entry stores the reason the
+component is unavailable. Components with generated documentation are otherwise
+treated as supported.
 
-When adding a supported component, add or update its variant file under
-`src/variants/`, register it in `src/variants/variants.js`, and run the package
-tests.
+When enabling a previously unsupported component, remove it from
+`unsupported_components.json`, add or update its variant file under
+`src/variants/`, register the variant in `src/variants/variants.js`, and run the
+package tests.
 
 ## Docgen
 

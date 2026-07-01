@@ -14,13 +14,13 @@ current live app does not mount them:
 Do not document them as working UI. DLT-3498 tracks the follow-up decision to
 rewire or remove them.
 
-## Settings without a mounted settings UI
+## Latent root and renderer settings
 
 The settings model still reads and writes localStorage-backed values for root
 theme/sidebar, code scheme/indent/verbose, and renderer background/positioning.
-Only settings that mounted components consume affect the live UI. The
-`settings_menu` and `renderer_menu` controls are latent until DLT-3498 resolves
-them.
+Only settings that mounted components consume affect the live UI. The option bar
+has a live controls settings popover, but the legacy `settings_menu` and
+`renderer_menu` controls are latent until DLT-3498 resolves them.
 
 ## Small screens
 
