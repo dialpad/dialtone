@@ -121,6 +121,12 @@ const claudeRuleParityAllowlist = new Map([
   ['slot-class-props', 'Defer'],
 ]);
 
+const agentRuleParityAllowlist = new Map([
+  ['codex-tooling', 'Codex-only'],
+  ['general', 'Skip exact-name parity'],
+  ['query-core', 'Skip exact-name parity'],
+]);
+
 function read(relativePath) {
   return readFileSync(join(repoRoot, relativePath), 'utf8');
 }
@@ -136,8 +142,12 @@ function markdownTableCells(row) {
     .map((cell) => cell.trim().replace(/^`(.+)`$/, '$1'));
 }
 
-function getRuleParityDecision(parityBody, ruleName) {
-  const rulePath = `.claude/rules/${ruleName}.md`;
+function getRuleParityDecision(
+  parityBody,
+  ruleName,
+  ruleRoot = '.claude/rules',
+) {
+  const rulePath = `${ruleRoot}/${ruleName}.md`;
   for (const line of parityBody.split('\n')) {
     if (!line.trim().startsWith('|')) continue;
     const cells = markdownTableCells(line);
@@ -193,6 +203,11 @@ function commandsForChangedFiles(files) {
     }
     if (file.startsWith('packages/dialtone-icons/')) {
       commands.add('pnpm nx run dialtone-icons:build');
+    }
+    if (file.startsWith('packages/combinator/')) {
+      commands.add('pnpm --dir packages/combinator test');
+      commands.add('pnpm --dir packages/combinator exec eslint src');
+      commands.add('pnpm nx run dialtone-combinator:build');
     }
     if (file.startsWith('apps/dialtone-documentation/')) {
       commands.add('pnpm nx run dialtone-documentation:lint');
@@ -439,6 +454,7 @@ assert(
 const claudeRuleNames = readdirSync(join(repoRoot, '.claude/rules'))
   .filter((file) => file.endsWith('.md'))
   .map((file) => file.replace(/\.md$/, ''));
+const claudeRuleNameSet = new Set(claudeRuleNames);
 
 const agentRuleNames = new Set(
   readdirSync(join(repoRoot, '.agents/resources/rules'))
@@ -458,9 +474,31 @@ for (const ruleName of claudeRuleNames) {
 
   if (allowlistDecision) {
     assert(
-      getRuleParityDecision(agentToolingParity, ruleName) ===
-        allowlistDecision,
+      getRuleParityDecision(agentToolingParity, ruleName) === allowlistDecision,
       `.agents/resources/agent-tooling-parity.md missing ${allowlistDecision} entry for .claude/rules/${ruleName}.md`,
+      failures,
+    );
+  }
+}
+
+for (const ruleName of agentRuleNames) {
+  const peerExists = claudeRuleNameSet.has(ruleName);
+  const allowlistDecision = agentRuleParityAllowlist.get(ruleName);
+
+  assert(
+    peerExists || allowlistDecision,
+    `.agents/resources/rules/${ruleName}.md is missing .claude/rules/${ruleName}.md and has no Codex-only/Skip entry`,
+    failures,
+  );
+
+  if (allowlistDecision) {
+    assert(
+      getRuleParityDecision(
+        agentToolingParity,
+        ruleName,
+        '.agents/resources/rules',
+      ) === allowlistDecision,
+      `.agents/resources/agent-tooling-parity.md missing ${allowlistDecision} entry for .agents/resources/rules/${ruleName}.md`,
       failures,
     );
   }
@@ -470,6 +508,14 @@ for (const ruleName of claudeRuleParityAllowlist.keys()) {
   assert(
     !agentRuleNames.has(ruleName),
     `.agents/resources/rules/${ruleName}.md now exists; remove ${ruleName} from claudeRuleParityAllowlist`,
+    failures,
+  );
+}
+
+for (const ruleName of agentRuleParityAllowlist.keys()) {
+  assert(
+    !claudeRuleNameSet.has(ruleName),
+    `.claude/rules/${ruleName}.md now exists; remove ${ruleName} from agentRuleParityAllowlist`,
     failures,
   );
 }

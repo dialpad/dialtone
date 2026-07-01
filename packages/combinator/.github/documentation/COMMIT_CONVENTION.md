@@ -56,3 +56,8 @@ explicitly approved the work without a Jira ticket.
 
 The release config uses Conventional Commit types to decide version bumps.
 For this package, the release config treats `refactor` commits as patch releases.
+
+## Breaking changes
+
+Public API removals, renames, or other incompatible changes must include a
+`BREAKING CHANGE:` footer so the release process can classify them correctly.

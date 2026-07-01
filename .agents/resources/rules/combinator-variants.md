@@ -30,7 +30,7 @@ eligible for the standalone app unless they appear in
 Reserved top-level keys:
 
 - `defaults`: metadata applied before every preset.
-- `exclusions`: rules that disable, hide, clear, or disable values.
+- `exclusions`: rules that hide, disable, clear, or disable specific values.
 - `default`: the initial preset and reset target.
 
 Every other top-level key is a named preset shown in the Combinator preset dropdown.
@@ -39,27 +39,27 @@ Every other top-level key is a named preset shown in the Combinator preset dropd
 export default {
   defaults: {
     props: {
-      size: { tokenCategory: "component-size:button" },
+      size: { tokenCategory: 'component-size:button' },
     },
   },
 
   exclusions: [
     {
-      when: { kind: "muted" },
-      disableValues: { props: { importance: ["primary"] } },
+      when: { kind: 'muted' },
+      disableValues: { props: { importance: ['primary'] } },
     },
   ],
 
   default: {
     slots: {
-      default: { initialValue: "Label" },
+      default: { initialValue: 'Label' },
     },
   },
 
-  "with icon": {
+  'with icon': {
     slots: {
       startIcon: { initialValue: '<dt-icon-phone :size="iconSize" />' },
-      default: { initialValue: "Call" },
+      default: { initialValue: 'Call' },
     },
   },
 };

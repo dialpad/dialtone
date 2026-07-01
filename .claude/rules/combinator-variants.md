@@ -33,7 +33,7 @@ eligible for the standalone app unless they appear in
 Reserved top-level keys:
 
 - `defaults`: metadata applied before every preset.
-- `exclusions`: rules that disable, hide, clear, or disable values.
+- `exclusions`: rules that hide, disable, clear, or disable specific values.
 - `default`: the initial preset and reset target.
 
 Every other top-level key is a named preset shown in the Combinator preset dropdown.
