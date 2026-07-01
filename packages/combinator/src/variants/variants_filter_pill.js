@@ -1,6 +1,18 @@
+
 /* eslint-disable max-len */
 
 export default {
+  exclusions: [
+    {
+      when: { useDropdown: true },
+      disable: { props: ['deferSelection'] },
+    },
+    {
+      when: { useDropdown: v => !v },
+      disable: { props: ['dropdownListClass'] },
+    },
+  ],
+
   default: {
     props: {
       label: {

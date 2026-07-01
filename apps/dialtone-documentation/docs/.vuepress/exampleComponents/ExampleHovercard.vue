@@ -1,7 +1,7 @@
 <template>
   <dt-hovercard placement="bottom-start" content-class="d-wmn-500 ">
     <template #anchor>
-      <dt-button>
+      <dt-button kind="muted" importance="outlined" :size="200">
         {{ label }}
       </dt-button>
     </template>
@@ -19,7 +19,7 @@
 
 <script setup>
 defineProps({
-  label: { type: String, default: 'Hover for example' },
+  label: { type: String, default: 'Hover me' },
   content: { type: String, default: 'Content' },
 });
 </script>

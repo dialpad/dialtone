@@ -86,7 +86,7 @@ Use `variant` to apply a complete text composition, including font family, font 
 
 Using `size` with `variant` acts as an override of the `font-size` over its composed default. It applies a raw font-size token while keeping the rest of the composition. `size` will not work by itself, as it requires pairing with `variant`, or with legacy `kind` when migrating older usages.
 
-<dt-stack class="d-w100p d-ba d-bar-300 d-of-auto">
+<dt-stack class="d-w100p d-by d-bar-300 d-of-auto">
   <table class="d-w100p d-table">
     <tr class="d-va-baseline">
       <th>Size</th>
@@ -141,7 +141,7 @@ The `numeric` prop applies styles that ensure that each number is set with consi
 ```vue demo
 <dt-stack direction="row" gap="200">
   <dt-stack>
-    <dt-text kind="label" :size="200" tone="critical">Without numeric</dt-text>
+    <dt-text variant="label-sm" tone="critical">Without numeric</dt-text>
     <dt-text>(913) 555-3170</dt-text>
     <dt-text>(908) 555-1111</dt-text>
     <dt-text>(805) 555-8413</dt-text>
@@ -149,7 +149,7 @@ The `numeric` prop applies styles that ensure that each number is set with consi
     <dt-text>(886) 555-8888</dt-text>
   </dt-stack>
   <dt-stack>
-    <dt-text kind="label" :size="200" tone="positive">With numeric</dt-text>
+    <dt-text variant="label-sm" tone="positive">With numeric</dt-text>
     <dt-text numeric>(913) 555-3170</dt-text>
     <dt-text numeric>(908) 555-1111</dt-text>
     <dt-text numeric>(805) 555-8413</dt-text>
@@ -186,12 +186,30 @@ Override the line-height of the text. Applies to any kind/size combination. If o
 
 ```vue demo
 <dt-stack gap="100">
-  <dt-text kind="body" as="p" density="100" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" :size="200" class="d-bgc-transparent">100</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
-  <dt-text kind="body" as="p" density="200" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" :size="200" class="d-bgc-transparent">200</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
-  <dt-text kind="body" as="p" density="300" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" :size="200" class="d-bgc-transparent">300</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
-  <dt-text kind="body" as="p" density="400" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" :size="200" class="d-bgc-transparent">400</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
-  <dt-text kind="body" as="p" density="500" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" :size="200" class="d-bgc-transparent">500</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
-  <dt-text kind="body" as="p" density="600" class="d-bgc-moderate-opaque"><dt-text kind="code" as="code" :size="200" class="d-bgc-transparent">600</dt-text> The quick brown fox jumped over the lazy dog.</dt-text>
+  <dt-text variant="body-md" as="p" density="100" class="d-bgc-moderate-opaque h:d-bgc-bold-opaque">
+    <dt-text variant="code-sm" tone="tertiary" as="code" class="d-bgc-transparent">100</dt-text>
+    The quick brown fox jumped over the lazy dog.
+  </dt-text>
+  <dt-text variant="body-md" as="p" density="200" class="d-bgc-moderate-opaque h:d-bgc-bold-opaque">
+    <dt-text variant="code-sm" tone="tertiary" as="code" class="d-bgc-transparent">200</dt-text>
+    The quick brown fox jumped over the lazy dog.
+  </dt-text>
+  <dt-text variant="body-md" as="p" density="300" class="d-bgc-moderate-opaque h:d-bgc-bold-opaque">
+    <dt-text variant="code-sm" tone="tertiary" as="code" class="d-bgc-transparent">300</dt-text>
+    The quick brown fox jumped over the lazy dog.
+  </dt-text>
+  <dt-text variant="body-md" as="p" density="400" class="d-bgc-moderate-opaque h:d-bgc-bold-opaque">
+    <dt-text variant="code-sm" tone="tertiary" as="code" class="d-bgc-transparent">400</dt-text>
+    The quick brown fox jumped over the lazy dog.
+  </dt-text>
+  <dt-text variant="body-md" as="p" density="500" class="d-bgc-moderate-opaque h:d-bgc-bold-opaque">
+    <dt-text variant="code-sm" tone="tertiary" as="code" class="d-bgc-transparent">500</dt-text>
+    The quick brown fox jumped over the lazy dog.
+  </dt-text>
+  <dt-text variant="body-md" as="p" density="600" class="d-bgc-moderate-opaque h:d-bgc-bold-opaque">
+    <dt-text variant="code-sm" tone="tertiary" as="code" class="d-bgc-transparent">600</dt-text>
+    The quick brown fox jumped over the lazy dog.
+  </dt-text>
 </dt-stack>
 <!-- @code -->
 <dt-text density="{{density}}">...</dt-text>
@@ -276,21 +294,21 @@ Use `as` to declare the underlying HTML tag that the component should render, in
 ```vue demo
 <dt-stack class="d-w100p" gap="200">
   <dt-stack gap="100">
-    <dt-text kind="headline" as="h1" :size="600">The Complete Agentic AI Platform</dt-text>
-    <dt-text kind="body" as="p" :size="400">Our AI Agents come equipped with the core skills businesses need to deliver seamless customer experiences.</dt-text>
+    <dt-text variant="headline-xl" as="h1">The Complete Agentic AI Platform</dt-text>
+    <dt-text variant="body-md" as="p">Our AI Agents come equipped with the core skills businesses need to deliver seamless customer experiences.</dt-text>
   </dt-stack>
   <dt-stack direction="row" gap="500" align="start">
     <dt-stack gap="100">
-      <dt-text kind="headline" as="h2" :size="500" density="200">Try before you AI</dt-text>
-      <dt-text kind="body" as="p">Build, run and optimize your agents - no code, just your expertise and our built-in intelligence.</dt-text>
+      <dt-text variant="headline-md" as="h2" density="200">Try before you AI</dt-text>
+      <dt-text variant="body-sm" as="p">Build, run and optimize your agents - no code, just your expertise and our built-in intelligence.</dt-text>
     </dt-stack>
     <dt-stack gap="100">
-      <dt-text kind="headline" as="h2" :size="500" density="200">Great minds sync alike</dt-text>
-      <dt-text kind="body" as="p">Our AI learns and balances speed with quality using one data plane that keeps customers coming back.</dt-text>
+      <dt-text variant="headline-md" as="h2" density="200">Great minds sync alike</dt-text>
+      <dt-text variant="body-sm" as="p">Our AI learns and balances speed with quality using one data plane that keeps customers coming back.</dt-text>
     </dt-stack>
     <dt-stack gap="100">
-      <dt-text kind="headline" as="h2" :size="500" density="200">History repeats itself. Customers shouldn't.</dt-text>
-      <dt-text kind="body" as="p">Whatever your customer types or says, our AI and your human agents stay in sync.</dt-text>
+      <dt-text variant="headline-md" as="h2" density="200">History repeats itself. Customers shouldn't.</dt-text>
+      <dt-text variant="body-sm" as="p">Whatever your customer types or says, our AI and your human agents stay in sync.</dt-text>
     </dt-stack>
   </dt-stack>
 </dt-stack>
@@ -337,10 +355,10 @@ Since `DtText`'s default element is a `<span>`, the `truncate` will only work if
 ```vue demo-only
 <dt-stack gap="100">
   <dt-stack direction="row" gap="200" justify="space-between" align="center">
-    <dt-text kind="headline" :size="400" as="h3" tone="secondary">Demo</dt-text>
+    <dt-text variant="headline-xl" as="h3" tone="secondary">Demo</dt-text>
     <dt-stack direction="row" gap="200" align="center">
-      <dt-text v-if="state.isApplied" as="code" kind="code" :size="100" tone="tertiary">
-        max-lines="<strong>{{ state.value }}</strong>"
+      <dt-text v-if="state.isApplied" as="code" variant="code-sm" tone="tertiary">
+        max-lines="<dt-text tone="info">{{ state.value }}</dt-text>"
       </dt-text>
       <dt-stack direction="row" gap="25" align="center">
         <dt-stack direction="row">
@@ -363,7 +381,7 @@ Since `DtText`'s default element is a `<span>`, the `truncate` will only work if
             @click="decrementMaxLines"
           >
             <template #startIcon="{ iconSize }">
-              <dt-icon name="dash" :size="iconSize" />
+              <dt-icon name="minus" :size="iconSize" />
             </template>
           </dt-button>
           <dt-button
@@ -456,13 +474,13 @@ Text box trim will only affect elements with block or inline-block styled contex
 ```vue demo
 <ExampleProfileCard />
 <!-- @code -->
-<dt-stack gap="500">
-  <dt-stack gap="400" justify="space-between">
+<dt-stack gap="200">
+  <dt-stack gap="100" justify="space-between">
     <dt-stack>
-      <dt-text as="h2" kind="headline" :size="500" strength="medium" density="200" class="d-fs-400">
+      <dt-text as="h2" variant="headline-xl" size="400" strength="medium" density="200">
         Katie Rodriguez
       </dt-text>
-      <dt-stack direction="row" gap="350">
+      <dt-stack direction="row" gap="75">
         <dt-text tone="positive">
           Available
         </dt-text>
@@ -472,18 +490,18 @@ Text box trim will only affect elements with block or inline-block styled contex
         </dt-text>
       </dt-stack>
     </dt-stack>
-    <dt-stack gap="200">
-      <dt-text kind="body" :size="300" density="200" strength="semibold" tone="tertiary">
+    <dt-stack gap="25">
+      <dt-text variant="body-md" density="200" strength="semibold" tone="tertiary">
         Chief Customer Success Officer
       </dt-text>
-      <dt-text kind="body" :size="200" density="200">
+      <dt-text variant="body-sm" density="200">
         <dt-text strength="semibold">
           6:19 am
         </dt-text> local time
       </dt-text>
     </dt-stack>
   </dt-stack>
-  <dt-stack gap="400" direction="row" class="d-jc-space-between">
+  <dt-stack gap="100" direction="row" class="d-jc-space-between">
     <dt-button class="d-fl1" kind="muted" importance="outlined">
       <template #startIcon="{ iconSize }">
         <dt-icon-phone :size="iconSize" />
@@ -510,21 +528,21 @@ Text box trim will only affect elements with block or inline-block styled contex
 
 ```vue demo
 <dt-stack gap="100" class="d-w-700">
-  <dt-text as="h2" kind="headline" :size="400">Saturday, May 24, 2025</dt-text>
+  <dt-text as="h2" variant="headline-lg">Saturday, May 24, 2025</dt-text>
   <dt-stack direction="row" gap="150">
     <dt-avatar full-name="Ashanti Trevor" />
     <dt-stack class="d-fl1">
-      <dt-text kind="body" :size="200" strength="bold">Ashanti Trevor</dt-text>
+      <dt-text variant="body-sm" strength="bold">Ashanti Trevor</dt-text>
       <dt-stack direction="row" gap="50">
         <dt-stack direction="row" gap="100">
           <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
-          <dt-text kind="body" :size="100" tone="tertiary">Outgoing call</dt-text>
+          <dt-text variant="body-xs" tone="tertiary">Outgoing call</dt-text>
         </dt-stack>
-        <dt-text kind="body" :size="100" tone="tertiary">&bull;</dt-text>
-        <dt-text kind="body" :size="100" tone="tertiary">2 minutes 10 seconds</dt-text>
+        <dt-text variant="body-xs" tone="tertiary">&bull;</dt-text>
+        <dt-text variant="body-xs" tone="tertiary">2 minutes 10 seconds</dt-text>
       </dt-stack>
     </dt-stack>
-    <dt-text kind="body" :size="200" tone="tertiary">3:23 pm</dt-text>
+    <dt-text variant="body-sm" tone="tertiary">3:23 pm</dt-text>
     <dt-badge kind="count" type="bulletin" text="6" />
   </dt-stack>
 </dt-stack>

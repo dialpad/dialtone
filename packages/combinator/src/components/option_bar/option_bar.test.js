@@ -1,0 +1,437 @@
+import DtcOptionBar from './option_bar.vue';
+
+import { expect } from 'vitest';
+import { mount } from '@vue/test-utils';
+
+const tabSelector = '[data-qa=option-bar-tab]';
+const searchButtonSelector = '[data-qa=option-bar-search-button]';
+const settingsButtonSelector = '[data-qa=option-bar-settings-button]';
+const searchInputSelector = '[data-qa=option-bar-search-input]';
+
+const component = {};
+
+const settings = {
+  controls: {
+    hideDeprecated: true,
+    hideInactive: false,
+  },
+};
+
+const baseOptions = {
+  props: {
+    kind: 'label',
+    type: 'default',
+    labelClass: '',
+    startIconClass: '',
+  },
+  slots: {
+    default: '',
+  },
+};
+
+function mountWrapper ({ props = [], slots = [], attributes = [], options = baseOptions } = {}) {
+  return mount(DtcOptionBar, {
+    props: {
+      component,
+      options,
+      settings,
+      info: {
+        props,
+        slots,
+        attributes,
+        exclusions: [],
+      },
+    },
+    global: {
+      directives: {
+        'dt-scrollbar': {},
+        'dt-tooltip': {},
+      },
+      stubs: {
+        DtcOptionBarMemberGroup: {
+          name: 'DtcOptionBarMemberGroup',
+          props: [
+            'component',
+            'controlSelector',
+            'members',
+            'values',
+            'exclusionRules',
+            'propValues',
+            'slotValues',
+            'memberGroup',
+            'settings',
+            'searchActive',
+          ],
+          template: `
+            <div
+              data-qa="option-bar-member-group"
+              :data-member-group="memberGroup"
+            >
+              <span
+                v-for="member in members"
+                :key="member.name"
+              >
+                {{ member.name }}
+              </span>
+            </div>
+          `,
+        },
+        DtcOptionBarSettings: {
+          name: 'DtcOptionBarSettings',
+          props: ['settings'],
+          emits: ['update:settings'],
+          template: '<button data-qa="option-bar-settings-button">Settings</button>',
+        },
+        DtButton: {
+          template: '<button data-qa="option-bar-search-button"><slot /><slot name="icon" :icon-size="100" /></button>',
+        },
+        DtIcon: {
+          template: '<span />',
+        },
+        DtIconSearch: {
+          template: '<span />',
+        },
+        DtInput: {
+          props: ['modelValue'],
+          emits: ['update:modelValue'],
+          template: `
+            <div>
+              <input
+                data-qa="option-bar-search-input"
+                :value="modelValue"
+                @input="$emit('update:modelValue', $event.target.value)"
+              >
+              <slot name="startIcon" :icon-size="100" />
+              <slot name="endIcon" :clear="() => $emit('update:modelValue', '')" />
+            </div>
+          `,
+        },
+        DtStack: {
+          template: '<div><slot /></div>',
+        },
+        DtTab: {
+          props: ['id', 'panelId', 'selected'],
+          template: `
+            <button
+              data-qa="option-bar-tab"
+              :id="id"
+              :data-panel-id="panelId"
+              :data-selected="selected ? 'true' : undefined"
+            >
+              <slot />
+            </button>
+          `,
+        },
+        DtTabGroup: {
+          props: ['selected'],
+          template: `
+            <div
+              data-qa="option-bar-tab-group"
+              :data-selected-panel="selected"
+            >
+              <slot name="tabs" />
+              <slot />
+            </div>
+          `,
+        },
+        DtTabPanel: {
+          props: ['id', 'tabId'],
+          template: `
+            <section
+              data-qa="option-bar-panel"
+              :id="id"
+              :data-tab-id="tabId"
+            >
+              <slot />
+            </section>
+          `,
+        },
+      },
+    },
+  });
+}
+
+function getTabs (wrapper) {
+  return wrapper.findAll(tabSelector).map(tab => tab.text());
+}
+
+function getMemberGroups (wrapper) {
+  return wrapper.findAllComponents({ name: 'DtcOptionBarMemberGroup' });
+}
+
+function getSelectedPanel (wrapper) {
+  return wrapper.find('[data-qa=option-bar-tab-group]').attributes('data-selected-panel');
+}
+
+describe('option_bar.vue test', function () {
+  it('Should render Props, Slots, and Class tabs in order', function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'kind' },
+        { name: 'labelClass' },
+        { name: 'type' },
+        { name: 'startIconClass' },
+      ],
+      slots: [
+        { name: 'default' },
+      ],
+    });
+
+    const memberGroups = getMemberGroups(wrapper);
+
+    expect(getTabs(wrapper)).toEqual(['Props', 'Slots', 'Class']);
+    expect(memberGroups[0].props('members').map(member => member.name)).toEqual(['kind', 'type']);
+    expect(memberGroups[1].props('members').map(member => member.name)).toEqual(['default']);
+    expect(memberGroups[2].props('members').map(member => member.name)).toEqual(['labelClass', 'startIconClass']);
+    expect(memberGroups[2].props('memberGroup')).toBe('props');
+    expect(memberGroups[2].props('values')).toEqual(baseOptions.props);
+  });
+
+  it('Should render native class before class props in the Class tab', function () {
+    const options = {
+      ...baseOptions,
+      attributes: { class: '' },
+    };
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'kind' },
+        { name: 'labelClass' },
+        { name: 'type' },
+      ],
+      slots: [
+        { name: 'default' },
+      ],
+      attributes: [
+        { name: 'class' },
+      ],
+      options,
+    });
+
+    const memberGroups = getMemberGroups(wrapper);
+
+    expect(getTabs(wrapper)).toEqual(['Props', 'Slots', 'Class']);
+    expect(memberGroups[2].props('memberGroup')).toBe('attributes');
+    expect(memberGroups[2].props('members').map(member => member.name)).toEqual(['class']);
+    expect(memberGroups[2].props('values')).toEqual(options.attributes);
+    expect(memberGroups[3].props('memberGroup')).toBe('props');
+    expect(memberGroups[3].props('members').map(member => member.name)).toEqual(['labelClass']);
+  });
+
+  it('Should render the Class tab for native class without class props', function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'kind' },
+        { name: 'type' },
+      ],
+      slots: [
+        { name: 'default' },
+      ],
+      attributes: [
+        { name: 'class' },
+      ],
+      options: {
+        ...baseOptions,
+        attributes: { class: '' },
+      },
+    });
+
+    const memberGroups = getMemberGroups(wrapper);
+
+    expect(getTabs(wrapper)).toEqual(['Props', 'Slots', 'Class']);
+    expect(memberGroups[2].props('memberGroup')).toBe('attributes');
+    expect(memberGroups[2].props('members').map(member => member.name)).toEqual(['class']);
+  });
+
+  it('Should not render the Class tab when there are no class props', function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'kind' },
+        { name: 'type' },
+      ],
+      slots: [
+        { name: 'default' },
+      ],
+    });
+
+    expect(getTabs(wrapper)).toEqual(['Props', 'Slots']);
+  });
+
+  it('Should emit native class updates through attributes', async function () {
+    const options = {
+      ...baseOptions,
+      attributes: { class: '' },
+    };
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'kind' },
+      ],
+      attributes: [
+        { name: 'class' },
+      ],
+      options,
+    });
+    const classAttributeGroup = getMemberGroups(wrapper)[1];
+
+    await classAttributeGroup.vm.$emit('update:member', {
+      member: 'class',
+      value: 'd-w50p',
+    });
+
+    const update = wrapper.emitted('update:options')[0][0];
+    const updatedOptions = structuredClone(options);
+    update(updatedOptions);
+
+    expect(updatedOptions.attributes.class).toBe('d-w50p');
+    expect(updatedOptions.props.class).toBeUndefined();
+  });
+
+  it('Should emit class prop updates through props', async function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'kind' },
+        { name: 'labelClass' },
+      ],
+    });
+    const classGroup = getMemberGroups(wrapper)[1];
+
+    await classGroup.vm.$emit('update:member', {
+      member: 'labelClass',
+      value: 'd-p-100',
+    });
+
+    const update = wrapper.emitted('update:options')[0][0];
+    const options = structuredClone(baseOptions);
+    update(options);
+
+    expect(options.props.labelClass).toBe('d-p-100');
+  });
+
+  it('Should filter class props through the Class tab', async function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'kind' },
+        { name: 'labelClass' },
+      ],
+    });
+
+    await wrapper.find(searchButtonSelector).trigger('click');
+    await wrapper.find(searchInputSelector).setValue('label class');
+
+    expect(getTabs(wrapper)).toEqual(['Class']);
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['labelClass']);
+  });
+
+  it('Should filter props by search keywords without broad logical token matches', async function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'paddingInline' },
+        { name: 'inlineSize', searchKeywords: ['width'] },
+        { name: 'blockSize', searchKeywords: ['height'] },
+      ],
+    });
+
+    await wrapper.find(searchButtonSelector).trigger('click');
+    await wrapper.find(searchInputSelector).setValue('width');
+
+    expect(getTabs(wrapper)).toEqual(['Props']);
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['inlineSize']);
+  });
+
+  it('Should only mark search active once the query is filtering', async function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'kind' },
+        { name: 'type' },
+      ],
+    });
+
+    await wrapper.find(searchButtonSelector).trigger('click');
+    await wrapper.find(searchInputSelector).setValue('k');
+
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['kind', 'type']);
+    expect(getMemberGroups(wrapper)[0].props('searchActive')).toBe(false);
+
+    await wrapper.find(searchInputSelector).setValue('ki');
+
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['kind']);
+    expect(getMemberGroups(wrapper)[0].props('searchActive')).toBe(true);
+  });
+
+  it('Should filter by existing logical aliases and multi-word search keywords', async function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'paddingInlineStart', searchKeywords: ['padding left'] },
+        { name: 'paddingInlineEnd', searchKeywords: ['padding right'] },
+      ],
+    });
+
+    await wrapper.find(searchButtonSelector).trigger('click');
+    await wrapper.find(searchInputSelector).setValue('left');
+
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['paddingInlineStart']);
+
+    await wrapper.find(searchInputSelector).setValue('padding left');
+
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['paddingInlineStart']);
+  });
+
+  it('Should filter slot and class controls by search keywords', async function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'kind' },
+        { name: 'startClass', searchKeywords: ['left class'] },
+      ],
+      slots: [
+        { name: 'default', searchKeywords: ['children'] },
+      ],
+    });
+
+    await wrapper.find(searchButtonSelector).trigger('click');
+    await wrapper.find(searchInputSelector).setValue('children');
+
+    expect(getTabs(wrapper)).toEqual(['Slots']);
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['default']);
+
+    await wrapper.find(searchInputSelector).setValue('left class');
+
+    expect(getTabs(wrapper)).toEqual(['Class']);
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['startClass']);
+  });
+
+  it('Should keep selected panel synced with filtered tabs', async function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'kind' },
+      ],
+      slots: [
+        { name: 'default' },
+      ],
+    });
+
+    await wrapper.find(searchButtonSelector).trigger('click');
+    await wrapper.find(searchInputSelector).setValue('default');
+
+    expect(getTabs(wrapper)).toEqual(['Slots']);
+    expect(getSelectedPanel(wrapper)).toBe('panel-slots');
+  });
+
+  it('Should render settings before search and re-emit settings updates', async function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'kind' },
+      ],
+    });
+    const settingsUpdate = model => {
+      model.controls.hideDeprecated = false;
+    };
+
+    await wrapper.findComponent({ name: 'DtcOptionBarSettings' }).vm.$emit('update:settings', settingsUpdate);
+
+    expect(wrapper.findComponent({ name: 'DtcOptionBarSettings' }).props('settings')).toEqual(settings);
+    expect(wrapper.emitted('update:settings')).toEqual([[settingsUpdate]]);
+    expect(
+      wrapper.find(settingsButtonSelector).element.compareDocumentPosition(wrapper.find(searchButtonSelector).element) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
+  });
+});

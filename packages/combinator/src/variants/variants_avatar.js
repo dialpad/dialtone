@@ -1,3 +1,5 @@
+import { disableAndClearProps, hasValue } from '@/src/lib/exclusion_rules';
+
 export default {
   defaults: {
     props: {
@@ -12,10 +14,31 @@ export default {
       hide: {
         props: ['family', 'variant', 'color', 'seed', 'fullName', 'imageSrc', 'imageAlt'],
       },
+      clear: { props: ['color'] },
     },
     {
       when: { group: v => v > 1 },
       hide: { props: ['presence', 'presenceProps'] },
+    },
+    {
+      when: { seed: hasValue },
+      ...disableAndClearProps(['color']),
+    },
+    {
+      when: { family: hasValue },
+      ...disableAndClearProps(['color']),
+    },
+    {
+      when: { variant: hasValue },
+      ...disableAndClearProps(['color']),
+    },
+    {
+      whenSlots: { icon: hasValue },
+      ...disableAndClearProps(['color']),
+    },
+    {
+      when: { interactive: true },
+      ...disableAndClearProps(['clickable']),
     },
   ],
 

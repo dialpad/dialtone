@@ -5,7 +5,18 @@
 </template>
 
 <script setup>
-import { capitalize, computed, getCurrentInstance, h, nextTick, onMounted, onUpdated, ref, render, useSlots } from 'vue';
+import {
+  capitalize,
+  computed,
+  getCurrentInstance,
+  h,
+  nextTick,
+  onMounted,
+  onUpdated,
+  ref,
+  render,
+  useSlots,
+} from 'vue';
 import { DtNotice } from '@dialpad/dialtone-vue';
 
 const ERROR_MESSAGE = 'Invalid combination';

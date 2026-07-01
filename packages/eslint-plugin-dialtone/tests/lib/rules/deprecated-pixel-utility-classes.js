@@ -9,7 +9,6 @@ const rule = require('../../../lib/rules/deprecated-pixel-utility-classes'),
 
 const ruleTester = new RuleTester({
   languageOptions: {
-     
     parser: require('vue-eslint-parser'),
     parserOptions: { ecmaVersion: 'latest' },
   },

@@ -60,11 +60,9 @@ The hovercard will appear upon the mouse entering the anchor, with a delay of 30
 
 When focus moves into an open hovercard, focus is trapped within. The user can Tab between focusable elements inside the card without accidentally leaving. Clicking outside the hovercard or keypress of `esc` will dismiss the card and restore focus to the element that had focus before the card opened.
 
-## Variants
+## Many Hovercards
 
-### Many Hovercards
-
-After opening one hovercard, moving to another skips the entrance delay — a "warm-up" pattern for faster navigation between targets.
+After opening one hovercard, quickly moving to another skips the entrance delay. This is a "warm-up" pattern for faster navigation between targets.
 
 ```vue demo-only
 <dt-stack direction="row" gap="200">
@@ -72,19 +70,50 @@ After opening one hovercard, moving to another skips the entrance delay — a "w
 </dt-stack>
 ```
 
+## Examples
+
+```vue demo
+<dt-hovercard placement="top-start">
+  <template #anchor>
+    <dt-button :size="200" kind="muted" importance="outlined">Profile Hovercard</dt-button>
+  </template>
+  <template #content>
+    <ExampleProfileCard />
+  </template>
+</dt-hovercard>
+```
+
 ## Content Mode
 
 Hovercard content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
 
 ```vue demo
-<dt-hovercard content-mode="invert" placement="bottom-start">
-  <template #anchor>
-    <dt-button :size="200" kind="muted" importance="outlined">Hover for Inverted Hovercard</dt-button>
-  </template>
-  <template #content>
-    <dt-text as="p">This hovercard content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
-  </template>
-</dt-hovercard>
+<dt-stack direction="row" gap="100">
+  <dt-hovercard placement="top-start" content-mode="invert">
+    <template #anchor>
+      <dt-button :size="200" kind="muted" importance="outlined">Invert</dt-button>
+    </template>
+    <template #content>
+      <ExampleProfileCard />
+    </template>
+  </dt-hovercard>
+  <dt-hovercard placement="top-start" content-mode="dark">
+    <template #anchor>
+      <dt-button :size="200" kind="muted" importance="outlined">Dark</dt-button>
+    </template>
+    <template #content>
+      <ExampleProfileCard />
+    </template>
+  </dt-hovercard>
+  <dt-hovercard placement="top-start" content-mode="light">
+    <template #anchor>
+      <dt-button :size="200" kind="muted" importance="outlined">Light</dt-button>
+    </template>
+    <template #content>
+      <ExampleProfileCard />
+    </template>
+  </dt-hovercard>
+</dt-stack>
 <!-- @code -->
 <dt-hovercard content-mode="invert">...</dt-hovercard>
 <dt-hovercard content-mode="dark">...</dt-hovercard>
@@ -97,6 +126,7 @@ Hovercard content renders outside the DOM tree. Use the `contentMode` prop to ap
 
 <script setup>
   import ExampleHovercard from '@exampleComponents/ExampleHovercard.vue';
+  import ExampleProfileCard from '@exampleComponents/ExampleProfileCard.vue';
 
   const exampleData = [
     {

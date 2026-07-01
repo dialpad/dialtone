@@ -1,7 +1,11 @@
 <template>
   <dtc-control-string
+    :label="label"
     :value="value?.toString()"
     :disabled="disabled"
+    :required="required"
+    :clearable="clearable"
+    :default-value="defaultValue"
     @update:value="e => emit(VALUE_UPDATE_EVENT, e)"
   >
     <slot />
@@ -13,13 +17,29 @@ import DtcControlString from './control_string.vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 
 defineProps({
+  label: {
+    type: String,
+    default: '',
+  },
   value: {
     type: undefined,
-    default: () => String(),
+    default: '',
   },
   disabled: {
     type: Boolean,
     default: false,
+  },
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  clearable: {
+    type: Boolean,
+    default: true,
+  },
+  defaultValue: {
+    type: undefined,
+    default: '',
   },
 });
 

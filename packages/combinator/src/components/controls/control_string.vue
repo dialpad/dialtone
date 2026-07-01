@@ -1,57 +1,78 @@
 <template>
-  <dt-input
-    :model-value="value"
+  <dtc-control-clearable-shell
+    :label="label"
+    :empty="isEmpty"
+    :expanded="expanded"
     :disabled="disabled"
-    :messages="messages"
-    :size="100"
-    @update:model-value="e => emit(VALUE_UPDATE_EVENT, e)"
+    :required="required"
+    :clearable="clearable"
+    align="end"
+    @add="addValue"
+    @clear="clearValue"
   >
     <template #label>
-      <dt-text
-        kind="label"
-        :size="100"
-        tone="secondary"
-        class="d-input__label-text"
-      >
-        <slot />
-      </dt-text>
+      <slot />
     </template>
-    <template #endIcon="{ iconSize }">
-      <dt-button
-        v-if="isModified && !$slots.icon"
-        kind="muted"
-        importance="clear"
-        :size="100"
-        class="d-p-25"
-        @click.stop="onReset"
+    <dt-input
+      ref="inputRef"
+      class="d-fl1"
+      :model-value="inputValue"
+      :disabled="disabled"
+      :messages="messages"
+      :size="100"
+      @update:model-value="updateValue"
+      @blur="collapseIfEmpty"
+    >
+      <template #label>
+        <dt-text
+          kind="label"
+          :size="100"
+          tone="secondary"
+          class="d-input__label-text"
+        >
+          <slot />
+        </dt-text>
+      </template>
+      <template
+        v-if="$slots.icon"
+        #endIcon="{ iconSize }"
       >
-        <template #icon>
-          <dt-icon-close size="100" />
-        </template>
-      </dt-button>
-      <slot
-        v-else
-        name="icon"
-        :icon-size="iconSize"
-      />
-    </template>
-  </dt-input>
+        <slot
+          name="icon"
+          :icon-size="iconSize"
+        />
+      </template>
+    </dt-input>
+  </dtc-control-clearable-shell>
 </template>
 
 <script setup>
-import { DtButton, DtInput, DtText, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
-import { DtIconClose } from '@dialpad/dialtone-icons/vue';
+import { DtInput, DtText, VALIDATION_MESSAGE_TYPES } from '@dialpad/dialtone-vue';
+import DtcControlClearableShell from './control_clearable_shell.vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed } from 'vue';
+import { useClearableInput } from '@/src/lib/utils_vue';
 
 const props = defineProps({
-  value: {
+  label: {
     type: String,
-    default: () => String(),
+    default: '',
+  },
+  value: {
+    type: undefined,
+    default: '',
   },
   disabled: {
     type: Boolean,
     default: false,
+  },
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  clearable: {
+    type: Boolean,
+    default: true,
   },
   warning: {
     type: String,
@@ -59,13 +80,14 @@ const props = defineProps({
   },
   defaultValue: {
     type: String,
-    default: () => String(),
+    default: '',
   },
 });
 
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
 
-const isModified = computed(() => props.value !== props.defaultValue);
+const { expanded, inputRef, inputValue, isEmpty, updateValue, addValue, collapseIfEmpty, clearValue } =
+  useClearableInput({ props, emit });
 
 const messages = computed(() => {
   const messages = [];
@@ -77,10 +99,6 @@ const messages = computed(() => {
   }
   return messages;
 });
-
-function onReset () {
-  emit(VALUE_UPDATE_EVENT, props.defaultValue);
-}
 </script>
 
 <script>

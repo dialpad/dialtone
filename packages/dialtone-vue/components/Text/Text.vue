@@ -62,6 +62,7 @@ export default {
     /**
      * Typography kind mapping to headline/body/label/code token sets.
      * @values headline, body, label, code
+     * @deprecated Use variant instead
      */
     kind: {
       type: String,

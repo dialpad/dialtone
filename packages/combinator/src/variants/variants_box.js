@@ -1,32 +1,116 @@
 /* eslint-disable max-len */
+const hasNoBorderWidth = v => !v;
+
 export default {
   defaults: {
     props: {
-      surface: { tokenCategory: 'color:d-box--surface-:--box-surface' },
+      as: { searchKeywords: ['tag', 'element'] },
+      surface: {
+        tokenCategory: 'color:d-box--surface-:--box-surface',
+        searchKeywords: ['background color'],
+      },
       borderColor: { tokenCategory: 'color:d-box--bc-:--box-bc' },
       padding: { tokenCategory: 'spacing' },
-      paddingInline: { tokenCategory: 'spacing' },
-      paddingInlineStart: { tokenCategory: 'spacing' },
-      paddingInlineEnd: { tokenCategory: 'spacing' },
-      paddingBlock: { tokenCategory: 'spacing' },
-      paddingBlockStart: { tokenCategory: 'spacing' },
-      paddingBlockEnd: { tokenCategory: 'spacing' },
+      paddingInline: {
+        tokenCategory: 'spacing',
+        searchKeywords: ['horizontal padding'],
+      },
+      paddingInlineStart: {
+        tokenCategory: 'spacing',
+        searchKeywords: ['padding left'],
+      },
+      paddingInlineEnd: {
+        tokenCategory: 'spacing',
+        searchKeywords: ['padding right'],
+      },
+      paddingBlock: {
+        tokenCategory: 'spacing',
+        searchKeywords: ['vertical padding'],
+      },
+      paddingBlockStart: {
+        tokenCategory: 'spacing',
+        searchKeywords: ['padding top'],
+      },
+      paddingBlockEnd: {
+        tokenCategory: 'spacing',
+        searchKeywords: ['padding bottom'],
+      },
       borderWidth: { tokenCategory: 'border-width' },
-      borderWidthInline: { tokenCategory: 'border-width' },
-      borderWidthInlineStart: { tokenCategory: 'border-width' },
-      borderWidthInlineEnd: { tokenCategory: 'border-width' },
-      borderWidthBlock: { tokenCategory: 'border-width' },
-      borderWidthBlockStart: { tokenCategory: 'border-width' },
-      borderWidthBlockEnd: { tokenCategory: 'border-width' },
-      borderRadius: { tokenCategory: 'border-radius' },
-      inlineSize: { tokenCategory: 'layout' },
-      blockSize: { tokenCategory: 'layout' },
-      minInlineSize: { tokenCategory: 'layout' },
-      maxInlineSize: { tokenCategory: 'layout' },
-      minBlockSize: { tokenCategory: 'layout' },
-      maxBlockSize: { tokenCategory: 'layout' },
+      borderWidthInline: {
+        tokenCategory: 'border-width',
+        searchKeywords: ['horizontal border'],
+      },
+      borderWidthInlineStart: {
+        tokenCategory: 'border-width',
+        searchKeywords: ['border left'],
+      },
+      borderWidthInlineEnd: {
+        tokenCategory: 'border-width',
+        searchKeywords: ['border right'],
+      },
+      borderWidthBlock: {
+        tokenCategory: 'border-width',
+        searchKeywords: ['vertical border'],
+      },
+      borderWidthBlockStart: {
+        tokenCategory: 'border-width',
+        searchKeywords: ['border top'],
+      },
+      borderWidthBlockEnd: {
+        tokenCategory: 'border-width',
+        searchKeywords: ['border bottom'],
+      },
+      borderRadius: {
+        tokenCategory: 'border-radius',
+        searchKeywords: ['rounded', 'corner'],
+      },
+      inlineSize: {
+        tokenCategory: 'layout',
+        searchKeywords: ['width'],
+      },
+      blockSize: {
+        tokenCategory: 'layout',
+        searchKeywords: ['height'],
+      },
+      minInlineSize: {
+        tokenCategory: 'layout',
+        searchKeywords: ['min width'],
+      },
+      maxInlineSize: {
+        tokenCategory: 'layout',
+        searchKeywords: ['max width'],
+      },
+      minBlockSize: {
+        tokenCategory: 'layout',
+        searchKeywords: ['min height'],
+      },
+      maxBlockSize: {
+        tokenCategory: 'layout',
+        searchKeywords: ['max height'],
+      },
+      shadow: { searchKeywords: ['elevation', 'box shadow'] },
     },
   },
+
+  exclusions: [
+    {
+      when: {
+        borderWidth: hasNoBorderWidth,
+        borderWidthBlock: hasNoBorderWidth,
+        borderWidthBlockEnd: hasNoBorderWidth,
+        borderWidthBlockStart: hasNoBorderWidth,
+        borderWidthInline: hasNoBorderWidth,
+        borderWidthInlineEnd: hasNoBorderWidth,
+        borderWidthInlineStart: hasNoBorderWidth,
+      },
+      disable: { props: ['borderColor'] },
+      clear: { props: ['borderColor'] },
+    },
+    {
+      when: { scrollbar: v => !v },
+      disable: { props: ['scrollbarContentClass'] },
+    },
+  ],
 
   default: {
     slots: {

@@ -1,3 +1,5 @@
+import { hasNoValue, hasValue } from '@/src/lib/exclusion_rules';
+
 export default {
   defaults: {
     props: {
@@ -23,6 +25,29 @@ export default {
     {
       when: { decoration: v => !!v },
       hide: { slots: ['startIcon', 'endIcon'] },
+    },
+    {
+      whenSlots: { startIcon: hasNoValue, endIcon: hasNoValue },
+      disable: { props: ['iconSize'] },
+    },
+    {
+      whenSlots: { startIcon: hasNoValue },
+      disable: { props: ['startIconClass'] },
+    },
+    {
+      whenSlots: { endIcon: hasNoValue },
+      disable: { props: ['endIconClass'] },
+    },
+    {
+      whenSlots: { default: hasValue },
+      disable: { props: ['text'] },
+      clear: { props: ['text'] },
+    },
+    {
+      when: { text: hasValue },
+      whenSlots: { default: hasNoValue },
+      disable: { slots: ['default'] },
+      clear: { slots: ['default'] },
     },
     {
       when: { kind: 'count' },

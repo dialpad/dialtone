@@ -784,6 +784,10 @@
         "subtract",
         "decrease"
       ],
+      "minus": [
+        "subtract",
+        "decrease"
+      ],
       "multi-line-dept": [
         "selection",
         "line",
@@ -1098,7 +1102,7 @@
       ],
       "dash": [
         "horizontal",
-        "minus"
+        "line"
       ],
       "equal": [
         "calculate",
