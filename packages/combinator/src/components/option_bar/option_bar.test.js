@@ -320,6 +320,63 @@ describe('option_bar.vue test', function () {
     expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['labelClass']);
   });
 
+  it('Should filter props by search keywords without broad logical token matches', async function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'paddingInline' },
+        { name: 'inlineSize', searchKeywords: ['width', 'w'] },
+        { name: 'blockSize', searchKeywords: ['height', 'h'] },
+      ],
+    });
+
+    await wrapper.find(searchButtonSelector).trigger('click');
+    await wrapper.find(searchInputSelector).setValue('width');
+
+    expect(getTabs(wrapper)).toEqual(['Props']);
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['inlineSize']);
+  });
+
+  it('Should filter by existing logical aliases and multi-word search keywords', async function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'paddingInlineStart', searchKeywords: ['padding left', 'left padding'] },
+        { name: 'paddingInlineEnd', searchKeywords: ['padding right', 'right padding'] },
+      ],
+    });
+
+    await wrapper.find(searchButtonSelector).trigger('click');
+    await wrapper.find(searchInputSelector).setValue('left');
+
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['paddingInlineStart']);
+
+    await wrapper.find(searchInputSelector).setValue('padding left');
+
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['paddingInlineStart']);
+  });
+
+  it('Should filter slot and class controls by search keywords', async function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'kind' },
+        { name: 'labelClass', searchKeywords: ['label css'] },
+      ],
+      slots: [
+        { name: 'default', searchKeywords: ['children'] },
+      ],
+    });
+
+    await wrapper.find(searchButtonSelector).trigger('click');
+    await wrapper.find(searchInputSelector).setValue('children');
+
+    expect(getTabs(wrapper)).toEqual(['Slots']);
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['default']);
+
+    await wrapper.find(searchInputSelector).setValue('label css');
+
+    expect(getTabs(wrapper)).toEqual(['Class']);
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['labelClass']);
+  });
+
   it('Should keep selected panel synced with filtered tabs', async function () {
     const wrapper = mountWrapper({
       props: [

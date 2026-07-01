@@ -255,7 +255,7 @@ async function toggleSearch () {
 }
 
 function normalizeForSearch (str) {
-  return str.toLowerCase().replace(/[\s\-_]/g, '');
+  return String(str).toLowerCase().replace(/[\s\-_]/g, '');
 }
 
 // Derived from LOGICAL_ALIASES keys so tokenizeName stays in sync automatically.
@@ -276,27 +276,27 @@ function tokenizeName (name) {
   return tokens;
 }
 
-function getSearchCorpus (name) {
-  const tokens = tokenizeName(name);
+function getSearchCorpus (member) {
+  const tokens = tokenizeName(member.name);
   const aliases = tokens.flatMap(t => LOGICAL_ALIASES[t] ?? []);
-  return [name, ...tokens, ...aliases].map(normalizeForSearch).join(' ');
+  return [member.name, ...tokens, ...aliases, ...(member.searchKeywords ?? [])].map(normalizeForSearch).join(' ');
 }
 
 // Pre-compute corpora once per member list so per-keystroke filtering is just a substring scan.
 const mainPropCorpora = computed(() => (props.info.props ?? [])
   .filter(member => !isClassProp(member))
-  .map(member => ({ member, corpus: getSearchCorpus(member.name) })));
+  .map(member => ({ member, corpus: getSearchCorpus(member) })));
 
 const classPropCorpora = computed(() => (props.info.props ?? [])
   .filter(isClassProp)
-  .map(member => ({ member, corpus: getSearchCorpus(member.name) })));
+  .map(member => ({ member, corpus: getSearchCorpus(member) })));
 
 const nativeClassAttributeCorpora = computed(() => (props.info.attributes ?? [])
   .filter(member => member.name === 'class')
-  .map(member => ({ member, corpus: getSearchCorpus(member.name) })));
+  .map(member => ({ member, corpus: getSearchCorpus(member) })));
 
 const slotCorpora = computed(() => (props.info.slots ?? [])
-  .map(member => ({ member, corpus: getSearchCorpus(member.name) })));
+  .map(member => ({ member, corpus: getSearchCorpus(member) })));
 
 function filterCorpora (corpora) {
   const q = normalizeForSearch(searchQuery.value);
