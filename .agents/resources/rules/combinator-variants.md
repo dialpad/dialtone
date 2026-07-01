@@ -85,7 +85,9 @@ defaults: {
 },
 ```
 
-`tokenCategory` enables token-aware value previews in controls. Verify category strings against `src/lib/tokens.js` and existing variant files before adding a new form.
+`tokenCategory` enables token-aware value previews in controls. Verify category
+strings against `packages/combinator/src/lib/tokens.js` and existing variant
+files before adding a new form.
 
 ## Search keywords
 
@@ -105,7 +107,11 @@ Do not write exclusions for simple parent-off, child-disabled cases. The Combina
 
 ## Control type
 
-Control type is inferred from the prop type and values by `src/lib/control.js`; you do not set it in the variant file. To change which values are selectable, edit the component's prop constants and JSDoc. See `packages/combinator/.github/documentation/internal/CONTROLS.md` for the inference rules.
+Control type is inferred from the prop type and values by
+`packages/combinator/src/lib/control.js`; you do not set it in the variant file.
+To change which values are selectable, edit the component's prop constants and
+JSDoc. See `packages/combinator/.github/documentation/internal/CONTROLS.md` for
+the inference rules.
 
 ## Logical naming
 
@@ -113,7 +119,11 @@ New props and slots use logical names. When you add a new logical axis, the opti
 
 ## Class and slot-class props
 
-The native `class` attribute and props ending in `Class` appear in the Class tab. A new slot-class relationship needs its mapping updated in `src/lib/utils.js` plus a focused test. See `packages/combinator/.github/documentation/internal/EXCLUSIONS.md` ("Slot-class dependencies") for the current mappings.
+The native `class` attribute and props ending in `Class` appear in the Class tab.
+A new slot-class relationship needs its mapping updated in
+`packages/combinator/src/lib/utils.js` plus a focused test. See
+`packages/combinator/.github/documentation/internal/EXCLUSIONS.md` ("Slot-class
+dependencies") for the current mappings.
 
 ## Unsupported components
 
