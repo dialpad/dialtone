@@ -298,7 +298,8 @@ function extendMember (member) {
   const clearValue = !member.required
     && shouldClear(key, props.memberGroup, props.exclusionRules, props.propValues, props.slotValues);
   // clearable = true when the member has no concrete default (prop is optional, user explicitly set it)
-  const clearable = member.clearable ?? (member.defaultValue == null || member.defaultValue === '');
+  const clearable = !member.required
+    && (member.clearable ?? (member.defaultValue == null || member.defaultValue === ''));
   const hiddenBySettings = !props.searchActive && (
     (props.settings.controls.hideDeprecated && deprecated) ||
     (props.settings.controls.hideInactive && inactive)

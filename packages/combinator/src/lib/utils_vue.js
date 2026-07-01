@@ -16,7 +16,17 @@ import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
  */
 export function cachedRef (key, defaultValue) {
   const stored = window.localStorage.getItem(key);
-  const reference = ref(stored === null ? defaultValue : JSON.parse(stored));
+  let initialValue = defaultValue;
+
+  if (stored !== null) {
+    try {
+      initialValue = JSON.parse(stored);
+    } catch {
+      window.localStorage.removeItem(key);
+    }
+  }
+
+  const reference = ref(initialValue);
   return computed({
     get: () => reference.value,
     set (value) {

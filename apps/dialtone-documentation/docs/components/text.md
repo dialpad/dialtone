@@ -474,13 +474,13 @@ Text box trim will only affect elements with block or inline-block styled contex
 ```vue demo
 <ExampleProfileCard />
 <!-- @code -->
-<dt-stack gap="500">
-  <dt-stack gap="400" justify="space-between">
+<dt-stack gap="200">
+  <dt-stack gap="100" justify="space-between">
     <dt-stack>
-      <dt-text as="h2" variant="headline-xl" strength="medium" density="200" class="d-fs-400">
+      <dt-text as="h2" variant="headline-xl" size="400" strength="medium" density="200">
         Katie Rodriguez
       </dt-text>
-      <dt-stack direction="row" gap="350">
+      <dt-stack direction="row" gap="75">
         <dt-text tone="positive">
           Available
         </dt-text>
@@ -490,7 +490,7 @@ Text box trim will only affect elements with block or inline-block styled contex
         </dt-text>
       </dt-stack>
     </dt-stack>
-    <dt-stack gap="200">
+    <dt-stack gap="25">
       <dt-text variant="body-md" density="200" strength="semibold" tone="tertiary">
         Chief Customer Success Officer
       </dt-text>
@@ -501,7 +501,7 @@ Text box trim will only affect elements with block or inline-block styled contex
       </dt-text>
     </dt-stack>
   </dt-stack>
-  <dt-stack gap="400" direction="row" class="d-jc-space-between">
+  <dt-stack gap="100" direction="row" class="d-jc-space-between">
     <dt-button class="d-fl1" kind="muted" importance="outlined">
       <template #startIcon="{ iconSize }">
         <dt-icon-phone :size="iconSize" />

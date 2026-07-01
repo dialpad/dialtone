@@ -64,6 +64,25 @@ describe('option_bar_member_group.vue test', function () {
 
       expect(wrapper.findComponent({ name: 'DtcOptionBarControl' }).props('args').clearable).toBe(true);
     });
+
+    it('Should mark required members as not clearable', function () {
+      wrapper = mount(DtcOptionBarMemberGroup, {
+        props: {
+          component: testComponents[0],
+          members: [{
+            name: 'as',
+            label: 'as',
+            required: true,
+          }],
+          values: {
+            as: 'button',
+          },
+          controlSelector: () => [['selection'], 'selection'],
+        },
+      });
+
+      expect(wrapper.findComponent({ name: 'DtcOptionBarControl' }).props('args').clearable).toBe(false);
+    });
   });
 
   describe('Control ordering', function () {
