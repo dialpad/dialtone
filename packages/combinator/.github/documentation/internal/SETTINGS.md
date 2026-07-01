@@ -63,8 +63,8 @@ menu and renderer styling code are latent in the current app.
 
 ## Live option-bar settings
 
-`components/option_bar/option_bar_settings.vue` is mounted in the option bar. It
-opens a settings popover from the settings icon button and edits only the
+`src/components/option_bar/option_bar_settings.vue` is mounted in the option bar.
+It opens a settings popover from the settings icon button and edits only the
 `controls` settings group.
 
 The live controls settings are:
@@ -81,11 +81,11 @@ deprecated badge, and disabled controls remain disabled.
 
 ## Latent settings UI
 
-`components/settings_menu/settings_menu.vue` can edit theme, scheme, sidebar,
+`src/components/settings_menu/settings_menu.vue` can edit theme, scheme, sidebar,
 indent, and verbose settings, but `DtcCombinator` does not mount it. It is
 separate from the live option-bar control-display settings popover.
 
-`components/renderer/renderer_menu.vue` can edit renderer background and
+`src/components/renderer/renderer_menu.vue` can edit renderer background and
 positioning, but `DtcRenderer` does not mount it.
 
 DLT-3498 tracks whether to rewire or remove these menus.
