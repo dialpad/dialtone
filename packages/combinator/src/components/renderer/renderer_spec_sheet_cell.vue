@@ -113,7 +113,7 @@ const renderedSlots = computed(() => nonEmptySlots(props.options.slots));
  * @param {MouseEvent} e - The click event.
  */
 function onCellClick (e) {
-  if (e.target.closest('.dtc-spec-sheet__component')) return;
+  if (!(e.target instanceof Element) || e.target.closest('.dtc-spec-sheet__component')) return;
   emit('select', props.name);
 }
 
