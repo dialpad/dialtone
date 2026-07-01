@@ -8,6 +8,19 @@ export default {
     props: {
       kind: { tokenCategory: 'color:d-btn--:color' },
       linkKind: { tokenCategory: 'color:d-link--:color' },
+      iconPosition: {
+        searchKeywords: ['icon placement', 'left icon', 'right icon', 'top icon', 'bottom icon'],
+      },
+      startIconClass: { searchKeywords: ['left icon class', 'leading icon class'] },
+      endIconClass: { searchKeywords: ['right icon class', 'trailing icon class'] },
+      blockStartIconClass: { searchKeywords: ['top icon class'] },
+      blockEndIconClass: { searchKeywords: ['bottom icon class'] },
+    },
+    slots: {
+      startIcon: { searchKeywords: ['left icon', 'leading icon'] },
+      endIcon: { searchKeywords: ['right icon', 'trailing icon'] },
+      blockStartIcon: { searchKeywords: ['top icon'] },
+      blockEndIcon: { searchKeywords: ['bottom icon'] },
     },
   },
 

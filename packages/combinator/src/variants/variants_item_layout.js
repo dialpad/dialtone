@@ -2,6 +2,19 @@
 import { disableAndClearProps, hasNoValue, hasValue } from '@/src/lib/exclusion_rules';
 
 export default {
+  defaults: {
+    props: {
+      startClass: { searchKeywords: ['left class', 'leading class'] },
+      endClass: { searchKeywords: ['right class', 'trailing class'] },
+      blockEndClass: { searchKeywords: ['bottom class'] },
+    },
+    slots: {
+      start: { searchKeywords: ['left', 'leading'] },
+      end: { searchKeywords: ['right', 'trailing'] },
+      blockEnd: { searchKeywords: ['bottom'] },
+    },
+  },
+
   exclusions: [
     {
       when: { startClass: hasValue },

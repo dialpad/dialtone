@@ -4,7 +4,11 @@
 export default {
   defaults: {
     props: {
-      gap: { tokenCategory: 'spacing' },
+      direction: { searchKeywords: ['horizontal', 'vertical'] },
+      gap: {
+        tokenCategory: 'spacing',
+        searchKeywords: ['spacing'],
+      },
     },
   },
 

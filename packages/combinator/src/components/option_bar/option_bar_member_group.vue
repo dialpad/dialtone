@@ -177,6 +177,13 @@ const props = defineProps({
       },
     }),
   },
+  /**
+   * True when option-bar search is actively filtering members.
+   */
+  searchActive: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits([MEMBER_UPDATE_EVENT]);
@@ -292,14 +299,16 @@ function extendMember (member) {
     && shouldClear(key, props.memberGroup, props.exclusionRules, props.propValues, props.slotValues);
   // clearable = true when the member has no concrete default (prop is optional, user explicitly set it)
   const clearable = member.clearable ?? (member.defaultValue == null || member.defaultValue === '');
+  const hiddenBySettings = !props.searchActive && (
+    (props.settings.controls.hideDeprecated && deprecated) ||
+    (props.settings.controls.hideInactive && inactive)
+  );
 
   return {
     ...member,
     control,
     validControls,
-    hideControl: member.hideControl ||
-      (props.settings.controls.hideDeprecated && deprecated) ||
-      (props.settings.controls.hideInactive && inactive),
+    hideControl: member.hideControl || hiddenBySettings,
     clearValue,
     clearable,
     deprecated,

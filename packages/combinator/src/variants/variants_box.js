@@ -4,96 +4,91 @@ const hasNoBorderWidth = v => !v;
 export default {
   defaults: {
     props: {
-      as: { searchKeywords: ['tag', 'element', 'html element'] },
-      scrollbar: { searchKeywords: ['scroll', 'scroll bar'] },
+      as: { searchKeywords: ['tag', 'element'] },
       surface: {
         tokenCategory: 'color:d-box--surface-:--box-surface',
-        searchKeywords: ['background', 'background color', 'bg'],
+        searchKeywords: ['background color'],
       },
-      borderColor: {
-        tokenCategory: 'color:d-box--bc-:--box-bc',
-        searchKeywords: ['border colour', 'border color', 'stroke', 'outline color'],
-      },
+      borderColor: { tokenCategory: 'color:d-box--bc-:--box-bc' },
       padding: { tokenCategory: 'spacing' },
       paddingInline: {
         tokenCategory: 'spacing',
-        searchKeywords: ['padding x', 'horizontal padding', 'padding left right'],
+        searchKeywords: ['horizontal padding'],
       },
       paddingInlineStart: {
         tokenCategory: 'spacing',
-        searchKeywords: ['padding left', 'left padding'],
+        searchKeywords: ['padding left'],
       },
       paddingInlineEnd: {
         tokenCategory: 'spacing',
-        searchKeywords: ['padding right', 'right padding'],
+        searchKeywords: ['padding right'],
       },
       paddingBlock: {
         tokenCategory: 'spacing',
-        searchKeywords: ['padding y', 'vertical padding', 'padding top bottom'],
+        searchKeywords: ['vertical padding'],
       },
       paddingBlockStart: {
         tokenCategory: 'spacing',
-        searchKeywords: ['padding top', 'top padding'],
+        searchKeywords: ['padding top'],
       },
       paddingBlockEnd: {
         tokenCategory: 'spacing',
-        searchKeywords: ['padding bottom', 'bottom padding'],
+        searchKeywords: ['padding bottom'],
       },
       borderWidth: { tokenCategory: 'border-width' },
       borderWidthInline: {
         tokenCategory: 'border-width',
-        searchKeywords: ['border x', 'horizontal border', 'border left right'],
+        searchKeywords: ['horizontal border'],
       },
       borderWidthInlineStart: {
         tokenCategory: 'border-width',
-        searchKeywords: ['border left', 'left border'],
+        searchKeywords: ['border left'],
       },
       borderWidthInlineEnd: {
         tokenCategory: 'border-width',
-        searchKeywords: ['border right', 'right border'],
+        searchKeywords: ['border right'],
       },
       borderWidthBlock: {
         tokenCategory: 'border-width',
-        searchKeywords: ['border y', 'vertical border', 'border top bottom'],
+        searchKeywords: ['vertical border'],
       },
       borderWidthBlockStart: {
         tokenCategory: 'border-width',
-        searchKeywords: ['border top', 'top border'],
+        searchKeywords: ['border top'],
       },
       borderWidthBlockEnd: {
         tokenCategory: 'border-width',
-        searchKeywords: ['border bottom', 'bottom border'],
+        searchKeywords: ['border bottom'],
       },
       borderRadius: {
         tokenCategory: 'border-radius',
-        searchKeywords: ['radius', 'rounded', 'corner'],
+        searchKeywords: ['rounded', 'corner'],
       },
       inlineSize: {
         tokenCategory: 'layout',
-        searchKeywords: ['width', 'w'],
+        searchKeywords: ['width'],
       },
       blockSize: {
         tokenCategory: 'layout',
-        searchKeywords: ['height', 'h'],
+        searchKeywords: ['height'],
       },
       minInlineSize: {
         tokenCategory: 'layout',
-        searchKeywords: ['min width', 'minimum width'],
+        searchKeywords: ['min width'],
       },
       maxInlineSize: {
         tokenCategory: 'layout',
-        searchKeywords: ['max width', 'maximum width'],
+        searchKeywords: ['max width'],
       },
       minBlockSize: {
         tokenCategory: 'layout',
-        searchKeywords: ['min height', 'minimum height'],
+        searchKeywords: ['min height'],
       },
       maxBlockSize: {
         tokenCategory: 'layout',
-        searchKeywords: ['max height', 'maximum height'],
+        searchKeywords: ['max height'],
       },
       shadow: { searchKeywords: ['elevation', 'box shadow'] },
-      overflow: { searchKeywords: ['clip', 'scroll', 'hidden'] },
     },
   },
 

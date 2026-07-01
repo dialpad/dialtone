@@ -15,10 +15,27 @@ const headlineOnlyNumericSizes = TEXT_HEADLINE_ONLY_SIZES.filter((size) => /^\d+
 export default {
   defaults: {
     props: {
-      variant: { tokenCategory: 'typography-variant' },
-      size: { tokenCategory: 'typography-size' },
-      density: { tokenCategory: 'line-height' },
-      tone: { tokenCategory: 'color:d-text--tone-:--text-tone' },
+      variant: {
+        tokenCategory: 'typography-variant',
+        searchKeywords: ['typography'],
+      },
+      size: {
+        tokenCategory: 'typography-size',
+        searchKeywords: ['font size'],
+      },
+      density: {
+        tokenCategory: 'line-height',
+        searchKeywords: ['line height'],
+      },
+      tone: {
+        tokenCategory: 'color:d-text--tone-:--text-tone',
+        searchKeywords: ['text color'],
+      },
+      align: { searchKeywords: ['text align'] },
+      truncate: { searchKeywords: ['ellipsis', 'single line'] },
+      maxLines: { searchKeywords: ['line clamp'] },
+      strength: { searchKeywords: ['font weight'] },
+      family: { searchKeywords: ['font family'] },
     },
   },
 

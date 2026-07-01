@@ -124,6 +124,7 @@
                   :prop-values="options.props"
                   :slot-values="options.slots"
                   :settings="settings"
+                  :search-active="isSearchActive"
                   member-group="props"
                   @update:member="updateProps"
                 />
@@ -146,6 +147,7 @@
                   :prop-values="options.props"
                   :slot-values="options.slots"
                   :settings="settings"
+                  :search-active="isSearchActive"
                   member-group="slots"
                   @update:member="updateSlots"
                 />
@@ -169,6 +171,7 @@
                   :prop-values="options.props"
                   :slot-values="options.slots"
                   :settings="settings"
+                  :search-active="isSearchActive"
                   member-group="attributes"
                   @update:member="updateAttributes"
                 />
@@ -182,6 +185,7 @@
                   :prop-values="options.props"
                   :slot-values="options.slots"
                   :settings="settings"
+                  :search-active="isSearchActive"
                   member-group="props"
                   @update:member="updateProps"
                 />
@@ -243,6 +247,7 @@ const emit = defineEmits([OPTIONS_UPDATE_EVENT, SETTINGS_UPDATE_EVENT]);
 const showSearch = ref(false);
 const searchInput = ref(null);
 const searchQuery = ref('');
+const SEARCH_QUERY_MIN_LENGTH = 2;
 
 async function toggleSearch () {
   showSearch.value = !showSearch.value;
@@ -298,12 +303,15 @@ const nativeClassAttributeCorpora = computed(() => (props.info.attributes ?? [])
 const slotCorpora = computed(() => (props.info.slots ?? [])
   .map(member => ({ member, corpus: getSearchCorpus(member) })));
 
+const normalizedQuery = computed(() => normalizeForSearch(searchQuery.value));
+
 function filterCorpora (corpora) {
-  const q = normalizeForSearch(searchQuery.value);
-  if (q.length < 2) return corpora.map(({ member }) => member);
+  const q = normalizedQuery.value;
+  if (q.length < SEARCH_QUERY_MIN_LENGTH) return corpora.map(({ member }) => member);
   return corpora.filter(({ corpus }) => corpus.includes(q)).map(({ member }) => member);
 }
 
+const isSearchActive = computed(() => normalizedQuery.value.length >= SEARCH_QUERY_MIN_LENGTH);
 const filteredMainProps = computed(() => filterCorpora(mainPropCorpora.value));
 const filteredClassProps = computed(() => filterCorpora(classPropCorpora.value));
 const filteredNativeClassAttributes = computed(() => filterCorpora(nativeClassAttributeCorpora.value));

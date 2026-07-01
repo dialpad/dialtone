@@ -149,6 +149,30 @@ describe('option_bar_member_group.vue test', function () {
       expect(controls).toHaveLength(2);
       expect(kindControl.props('deprecated')).toBe(true);
     });
+
+    it('Should show deprecated members with a badge while search is active', function () {
+      wrapper = mount(DtcOptionBarMemberGroup, {
+        props: {
+          component: testComponents[0],
+          members: [
+            { name: 'kind', label: 'kind', tags: { deprecated: [{ description: 'Use variant instead' }] } },
+            { name: 'variant', label: 'variant' },
+          ],
+          values: {
+            kind: 'body',
+            variant: 'body-md',
+          },
+          controlSelector: () => [['base'], 'base'],
+          searchActive: true,
+        },
+      });
+
+      const controls = wrapper.findAllComponents({ name: 'DtcOptionBarControl' });
+      const kindControl = controls.find(control => control.props('label') === 'kind');
+
+      expect(controls).toHaveLength(2);
+      expect(kindControl.props('deprecated')).toBe(true);
+    });
   });
 
   describe('Exclusion rules', function () {
@@ -214,6 +238,66 @@ describe('option_bar_member_group.vue test', function () {
 
       expect(controls).toHaveLength(1);
       expect(controls[0].props('label')).toBe('kind');
+    });
+
+    it('Should show inactive members as disabled while search is active', function () {
+      wrapper = mount(DtcOptionBarMemberGroup, {
+        props: {
+          component: testComponents[0],
+          members: [
+            { name: 'kind', label: 'kind' },
+            { name: 'size', label: 'size' },
+          ],
+          values: {
+            kind: 'count',
+            size: '200',
+          },
+          controlSelector: () => [['base'], 'base'],
+          exclusionRules: [
+            { when: { kind: 'count' }, hide: { props: ['size'] } },
+          ],
+          propValues: {
+            kind: 'count',
+            size: '200',
+          },
+          settings: {
+            controls: {
+              hideDeprecated: true,
+              hideInactive: true,
+            },
+          },
+          searchActive: true,
+        },
+      });
+
+      const controls = wrapper.findAllComponents({ name: 'DtcOptionBarControl' });
+      const sizeControl = controls.find(control => control.props('label') === 'size');
+
+      expect(controls).toHaveLength(2);
+      expect(sizeControl.props('disabled')).toBe(true);
+    });
+
+    it('Should not show explicitly hidden members while search is active', function () {
+      wrapper = mount(DtcOptionBarMemberGroup, {
+        props: {
+          component: testComponents[0],
+          members: [
+            { name: 'kind', label: 'kind', hideControl: true },
+            { name: 'variant', label: 'variant' },
+          ],
+          values: {
+            kind: 'body',
+            variant: 'body-md',
+          },
+          controlSelector: () => [['base'], 'base'],
+          searchActive: true,
+        },
+      });
+
+      const controls = wrapper.findAllComponents({ name: 'DtcOptionBarControl' });
+
+      expect(controls).toHaveLength(1);
+      expect(controls[0].props('label')).toBe('variant');
     });
 
     it('Should disable members with matching disable rules', function () {

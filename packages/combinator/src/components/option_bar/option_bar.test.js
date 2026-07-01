@@ -60,6 +60,7 @@ function mountWrapper ({ props = [], slots = [], attributes = [], options = base
             'slotValues',
             'memberGroup',
             'settings',
+            'searchActive',
           ],
           template: `
             <div
@@ -324,8 +325,8 @@ describe('option_bar.vue test', function () {
     const wrapper = mountWrapper({
       props: [
         { name: 'paddingInline' },
-        { name: 'inlineSize', searchKeywords: ['width', 'w'] },
-        { name: 'blockSize', searchKeywords: ['height', 'h'] },
+        { name: 'inlineSize', searchKeywords: ['width'] },
+        { name: 'blockSize', searchKeywords: ['height'] },
       ],
     });
 
@@ -336,11 +337,31 @@ describe('option_bar.vue test', function () {
     expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['inlineSize']);
   });
 
+  it('Should only mark search active once the query is filtering', async function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'kind' },
+        { name: 'type' },
+      ],
+    });
+
+    await wrapper.find(searchButtonSelector).trigger('click');
+    await wrapper.find(searchInputSelector).setValue('k');
+
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['kind', 'type']);
+    expect(getMemberGroups(wrapper)[0].props('searchActive')).toBe(false);
+
+    await wrapper.find(searchInputSelector).setValue('ki');
+
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['kind']);
+    expect(getMemberGroups(wrapper)[0].props('searchActive')).toBe(true);
+  });
+
   it('Should filter by existing logical aliases and multi-word search keywords', async function () {
     const wrapper = mountWrapper({
       props: [
-        { name: 'paddingInlineStart', searchKeywords: ['padding left', 'left padding'] },
-        { name: 'paddingInlineEnd', searchKeywords: ['padding right', 'right padding'] },
+        { name: 'paddingInlineStart', searchKeywords: ['padding left'] },
+        { name: 'paddingInlineEnd', searchKeywords: ['padding right'] },
       ],
     });
 
@@ -358,7 +379,7 @@ describe('option_bar.vue test', function () {
     const wrapper = mountWrapper({
       props: [
         { name: 'kind' },
-        { name: 'labelClass', searchKeywords: ['label css'] },
+        { name: 'startClass', searchKeywords: ['left class'] },
       ],
       slots: [
         { name: 'default', searchKeywords: ['children'] },
@@ -371,10 +392,10 @@ describe('option_bar.vue test', function () {
     expect(getTabs(wrapper)).toEqual(['Slots']);
     expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['default']);
 
-    await wrapper.find(searchInputSelector).setValue('label css');
+    await wrapper.find(searchInputSelector).setValue('left class');
 
     expect(getTabs(wrapper)).toEqual(['Class']);
-    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['labelClass']);
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['startClass']);
   });
 
   it('Should keep selected panel synced with filtered tabs', async function () {
