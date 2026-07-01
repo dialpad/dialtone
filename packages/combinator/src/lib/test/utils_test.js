@@ -1,19 +1,20 @@
-import supportedComponents from '/src/supported_components.json';
 import * as dialtone from '@dialpad/dialtone-vue';
+import documentation from '@/node_modules/@dialpad/dialtone-vue/dist/component-documentation.json';
 import { mount } from '@vue/test-utils';
+import { isSupportedComponent } from '@/src/lib/component_support';
 
 export const ADD_BUTTON_SELECTOR = '[aria-label^="Add value"]';
 export const REMOVE_BUTTON_SELECTOR = '[aria-label^="Remove value"]';
 
 /**
- * Uses the names of supported components from the 'supported_components.json'
- * file and returns an array of matching Dialtone Vue component objects.
+ * Returns documented Dialtone Vue components that are not explicitly denied
+ * by the Combinator support map.
  *
  * @returns {Array} Array of supported components
  */
 export function getSupportedComponents () {
   return Object.values(dialtone).filter((exportValue) => {
-    return supportedComponents.includes(exportValue?.name);
+    return isSupportedComponent(exportValue?.name, documentation);
   });
 }
 

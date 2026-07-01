@@ -2,7 +2,10 @@
   <dt-text
     :as="$attrs.as"
     :kind="$attrs.kind"
+    :variant="$attrs.variant"
     :size="$attrs.size"
+    :family="$attrs.family"
+    :italic="$attrs.italic"
     :strength="$attrs.strength"
     :density="$attrs.density"
     :tone="$attrs.tone"

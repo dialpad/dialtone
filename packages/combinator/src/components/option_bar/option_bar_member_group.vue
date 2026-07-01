@@ -165,6 +165,25 @@ const props = defineProps({
     type: String,
     default: 'props',
   },
+  /**
+   * Settings data object.
+   */
+  settings: {
+    type: Object,
+    default: () => ({
+      controls: {
+        hideDeprecated: true,
+        hideInactive: false,
+      },
+    }),
+  },
+  /**
+   * True when option-bar search is actively filtering members.
+   */
+  searchActive: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits([MEMBER_UPDATE_EVENT]);
@@ -273,21 +292,28 @@ function extendMember (member) {
       shouldDisable(key, props.memberGroup, props.exclusionRules, props.propValues, props.slotValues) ||
       (props.memberGroup === 'props' && shouldDisableSlotClassProp(key, props.slotValues))
     );
+  const deprecated = isDocDeprecated;
+  const inactive = dynamicHide || isDisabled;
 
   const clearValue = !member.required
     && shouldClear(key, props.memberGroup, props.exclusionRules, props.propValues, props.slotValues);
   // clearable = true when the member has no concrete default (prop is optional, user explicitly set it)
-  const clearable = member.clearable ?? (member.defaultValue == null || member.defaultValue === '');
+  const clearable = !member.required
+    && (member.clearable ?? (member.defaultValue == null || member.defaultValue === ''));
+  const hiddenBySettings = !props.searchActive && (
+    (props.settings.controls.hideDeprecated && deprecated) ||
+    (props.settings.controls.hideInactive && inactive)
+  );
 
   return {
     ...member,
     control,
     validControls,
-    hideControl: member.hideControl || isDocDeprecated,
+    hideControl: member.hideControl || hiddenBySettings,
     clearValue,
     clearable,
-    deprecated: !!member.deprecated || isDocDeprecated,
-    disableControl: dynamicHide || isDisabled,
+    deprecated,
+    disableControl: inactive,
   };
 }
 

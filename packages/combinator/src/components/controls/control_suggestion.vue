@@ -100,7 +100,7 @@ const props = defineProps({
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
 
 const warning = computed(() => {
-  return props.warn && !props.suggestions.includes(props.value)
+  return props.warn && props.value !== null && !props.suggestions.includes(props.value)
     ? WARNING_MESSAGE
     : undefined;
 });

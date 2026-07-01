@@ -1,9 +1,14 @@
 /* eslint-disable max-len */
-
-
-
+import { disableAndClearProps, hasValue } from '@/src/lib/exclusion_rules';
 
 export default {
+  exclusions: [
+    {
+      when: { tabsClass: hasValue },
+      ...disableAndClearProps(['tabListClass']),
+    },
+  ],
+
   default: {
     props: {
       selected: { initialValue: 'panel-1' },

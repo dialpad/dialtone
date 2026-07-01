@@ -133,6 +133,7 @@
       <dtc-option-bar
         v-if="!blueprint"
         v-model:options="options"
+        v-model:settings="settings"
         :component="component"
         :info="info"
         :style="optionBarWidth ? { 'inline-size': optionBarWidth } : {}"
@@ -165,6 +166,8 @@ import { clearTokenCache } from '@/src/lib/tokens';
 import { getComponentInfo } from '@/src/lib/info';
 import {
   SETTINGS_BACKGROUND_KEY,
+  SETTINGS_HIDE_DEPRECATED_KEY,
+  SETTINGS_HIDE_INACTIVE_KEY,
   SETTINGS_INDENT_KEY,
   SETTINGS_POSITIONING_KEY,
   SETTINGS_SCHEME_KEY,
@@ -341,6 +344,16 @@ const settings = computedModel(
         verbose: props.blueprint
           ? false
           : cachedRef(SETTINGS_VERBOSE_KEY, defaultSettings.code['default-verbose']),
+      },
+      controls: {
+        hideDeprecated: cachedRef(
+          SETTINGS_HIDE_DEPRECATED_KEY,
+          defaultSettings.controls['default-hide-deprecated'],
+        ),
+        hideInactive: cachedRef(
+          SETTINGS_HIDE_INACTIVE_KEY,
+          defaultSettings.controls['default-hide-inactive'],
+        ),
       },
     });
   }),

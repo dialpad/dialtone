@@ -16,6 +16,10 @@ describe('combinator.vue test', function () {
 
   let wrapper;
 
+  afterEach(function () {
+    window.localStorage.clear();
+  });
+
   describe(`Supported component tests`, function () {
     testComponents.forEach(component => {
       describe(`When mounted with component '${component.name}'`, function () {
@@ -111,6 +115,46 @@ describe('combinator.vue test', function () {
 
         expect(renderer.props('options').props.modelValue).toBe('hello');
       });
+    });
+  });
+
+  describe('control display settings', function () {
+    beforeEach(function () {
+      wrapper = shallowMount(DtcCombinator, {
+        props: {
+          component: DtToggle,
+          documentation: toggleDoc,
+          variants: {},
+        },
+      });
+    });
+
+    afterEach(function () {
+      wrapper.unmount();
+    });
+
+    it('persists control display settings and passes them to new component views', async function () {
+      const optionBar = wrapper.findComponent({ name: 'DtcOptionBar' });
+
+      expect(optionBar.props('settings').controls.hideDeprecated).toBe(true);
+
+      await optionBar.vm.$emit('update:settings', (model) => {
+        model.controls.hideDeprecated = false;
+      });
+      await nextTick();
+
+      expect(window.localStorage.getItem('dialtoneCombinatorControlsHideDeprecated')).toBe('false');
+
+      const nextWrapper = shallowMount(DtcCombinator, {
+        props: {
+          component: DtInput,
+          documentation: inputDoc,
+          variants: {},
+        },
+      });
+
+      expect(nextWrapper.findComponent({ name: 'DtcOptionBar' }).props('settings').controls.hideDeprecated).toBe(false);
+      nextWrapper.unmount();
     });
   });
 });

@@ -1,4 +1,4 @@
-const hasNoIcon = v => !v;
+import { hasNoValue, hasValue } from '@/src/lib/exclusion_rules';
 
 export default {
   defaults: {
@@ -27,16 +27,27 @@ export default {
       hide: { slots: ['startIcon', 'endIcon'] },
     },
     {
-      whenSlots: { startIcon: hasNoIcon, endIcon: hasNoIcon },
+      whenSlots: { startIcon: hasNoValue, endIcon: hasNoValue },
       disable: { props: ['iconSize'] },
     },
     {
-      whenSlots: { startIcon: hasNoIcon },
+      whenSlots: { startIcon: hasNoValue },
       disable: { props: ['startIconClass'] },
     },
     {
-      whenSlots: { endIcon: hasNoIcon },
+      whenSlots: { endIcon: hasNoValue },
       disable: { props: ['endIconClass'] },
+    },
+    {
+      whenSlots: { default: hasValue },
+      disable: { props: ['text'] },
+      clear: { props: ['text'] },
+    },
+    {
+      when: { text: hasValue },
+      whenSlots: { default: hasNoValue },
+      disable: { slots: ['default'] },
+      clear: { slots: ['default'] },
     },
     {
       when: { kind: 'count' },

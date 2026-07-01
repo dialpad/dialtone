@@ -1,8 +1,8 @@
 ---
-title: Content Guidelines
+title: Content
 shortTitle: content
-next: { link: "/guides/content/action-language/", text: "Action language" }
-description: Guidelines to unify the way we communicate with our users.
+next: { link: "./writing-approach/", text: "Writing approach" }
+description: Guidelines for in-product writing.
 thumb: true
 keywords: ["writing", "copy", "ux writing"]
 ---

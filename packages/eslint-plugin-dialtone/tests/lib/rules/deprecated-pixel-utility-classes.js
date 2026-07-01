@@ -9,7 +9,6 @@ const rule = require('../../../lib/rules/deprecated-pixel-utility-classes'),
 
 const ruleTester = new RuleTester({
   languageOptions: {
-    // eslint-disable-next-line n/no-extraneous-require
     parser: require('vue-eslint-parser'),
     parserOptions: { ecmaVersion: 'latest' },
   },
@@ -154,6 +153,25 @@ ruleTester.run('deprecated-pixel-utility-classes', rule, {
     {
       code: '<template><div class=\'d-p8\' /></template>',
       output: '<template><div class=\'d-p-100\' /></template>',
+      errors: [{ messageId: 'deprecatedPixelClass' }],
+    },
+    // Large spacing values (96px, 128px) — deprecated but no token-stop equivalent in the
+    // spacing scale. Detected so consumers know to migrate manually; no autofix emitted
+    // because the old SPACING_LAYOUT_MAP fallback produced d-mt-150 (~12px) instead of
+    // a layout-backed class, silently regressing 96px/128px to 12px/16px.
+    {
+      code: '<template><div class="d-mt96" /></template>',
+      output: null,
+      errors: [{ messageId: 'deprecatedPixelClass' }],
+    },
+    {
+      code: '<template><div class="d-pt128" /></template>',
+      output: null,
+      errors: [{ messageId: 'deprecatedPixelClass' }],
+    },
+    {
+      code: '<template><div class="d-t96" /></template>',
+      output: null,
       errors: [{ messageId: 'deprecatedPixelClass' }],
     },
   ],

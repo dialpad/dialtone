@@ -45,19 +45,28 @@
         >
           Class
         </dt-tab>
-        <dt-button
-          v-dt-tooltip="'Search'"
+        <dt-stack
+          direction="row"
+          gap="50"
           class="d-mis-auto"
-          kind="muted"
-          importance="clear"
-          :size="100"
-          :active="showSearch"
-          @click="toggleSearch"
         >
-          <template #icon="{ iconSize }">
-            <dt-icon-search :size="iconSize" />
-          </template>
-        </dt-button>
+          <dtc-option-bar-settings
+            :settings="settings"
+            @update:settings="e => emit(SETTINGS_UPDATE_EVENT, e)"
+          />
+          <dt-button
+            v-dt-tooltip="'Search'"
+            kind="muted"
+            importance="clear"
+            :size="100"
+            :active="showSearch"
+            @click="toggleSearch"
+          >
+            <template #icon="{ iconSize }">
+              <dt-icon-search :size="iconSize" />
+            </template>
+          </dt-button>
+        </dt-stack>
         <dt-input
           v-if="showSearch"
           ref="searchInput"
@@ -114,6 +123,8 @@
                   :exclusion-rules="info.exclusions"
                   :prop-values="options.props"
                   :slot-values="options.slots"
+                  :settings="settings"
+                  :search-active="isSearchActive"
                   member-group="props"
                   @update:member="updateProps"
                 />
@@ -135,6 +146,8 @@
                   :exclusion-rules="info.exclusions"
                   :prop-values="options.props"
                   :slot-values="options.slots"
+                  :settings="settings"
+                  :search-active="isSearchActive"
                   member-group="slots"
                   @update:member="updateSlots"
                 />
@@ -157,6 +170,8 @@
                   :exclusion-rules="info.exclusions"
                   :prop-values="options.props"
                   :slot-values="options.slots"
+                  :settings="settings"
+                  :search-active="isSearchActive"
                   member-group="attributes"
                   @update:member="updateAttributes"
                 />
@@ -169,6 +184,8 @@
                   :exclusion-rules="info.exclusions"
                   :prop-values="options.props"
                   :slot-values="options.slots"
+                  :settings="settings"
+                  :search-active="isSearchActive"
                   member-group="props"
                   @update:member="updateProps"
                 />
@@ -184,8 +201,9 @@
 
 <script setup>
 import DtcOptionBarMemberGroup from './option_bar_member_group.vue';
+import DtcOptionBarSettings from './option_bar_settings.vue';
 import { computed, ref, nextTick } from 'vue';
-import { OPTIONS_UPDATE_EVENT } from '@/src/lib/constants';
+import { OPTIONS_UPDATE_EVENT, SETTINGS_UPDATE_EVENT } from '@/src/lib/constants';
 import { getControlByMemberType, getControlByValue } from '@/src/lib/control';
 import { isIconSlot } from '@/src/lib/icons';
 import { isClassProp } from '@/src/lib/utils';
@@ -215,13 +233,21 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  /**
+   * Settings data object.
+   */
+  settings: {
+    type: Object,
+    required: true,
+  },
 });
 
-const emit = defineEmits([OPTIONS_UPDATE_EVENT]);
+const emit = defineEmits([OPTIONS_UPDATE_EVENT, SETTINGS_UPDATE_EVENT]);
 
 const showSearch = ref(false);
 const searchInput = ref(null);
 const searchQuery = ref('');
+const SEARCH_QUERY_MIN_LENGTH = 2;
 
 async function toggleSearch () {
   showSearch.value = !showSearch.value;
@@ -234,7 +260,7 @@ async function toggleSearch () {
 }
 
 function normalizeForSearch (str) {
-  return str.toLowerCase().replace(/[\s\-_]/g, '');
+  return String(str).toLowerCase().replace(/[\s\-_]/g, '');
 }
 
 // Derived from LOGICAL_ALIASES keys so tokenizeName stays in sync automatically.
@@ -255,34 +281,37 @@ function tokenizeName (name) {
   return tokens;
 }
 
-function getSearchCorpus (name) {
-  const tokens = tokenizeName(name);
+function getSearchCorpus (member) {
+  const tokens = tokenizeName(member.name);
   const aliases = tokens.flatMap(t => LOGICAL_ALIASES[t] ?? []);
-  return [name, ...tokens, ...aliases].map(normalizeForSearch).join(' ');
+  return [member.name, ...tokens, ...aliases, ...(member.searchKeywords ?? [])].map(normalizeForSearch).join(' ');
 }
 
 // Pre-compute corpora once per member list so per-keystroke filtering is just a substring scan.
 const mainPropCorpora = computed(() => (props.info.props ?? [])
   .filter(member => !isClassProp(member))
-  .map(member => ({ member, corpus: getSearchCorpus(member.name) })));
+  .map(member => ({ member, corpus: getSearchCorpus(member) })));
 
 const classPropCorpora = computed(() => (props.info.props ?? [])
   .filter(isClassProp)
-  .map(member => ({ member, corpus: getSearchCorpus(member.name) })));
+  .map(member => ({ member, corpus: getSearchCorpus(member) })));
 
 const nativeClassAttributeCorpora = computed(() => (props.info.attributes ?? [])
   .filter(member => member.name === 'class')
-  .map(member => ({ member, corpus: getSearchCorpus(member.name) })));
+  .map(member => ({ member, corpus: getSearchCorpus(member) })));
 
 const slotCorpora = computed(() => (props.info.slots ?? [])
-  .map(member => ({ member, corpus: getSearchCorpus(member.name) })));
+  .map(member => ({ member, corpus: getSearchCorpus(member) })));
+
+const normalizedQuery = computed(() => normalizeForSearch(searchQuery.value));
 
 function filterCorpora (corpora) {
-  const q = normalizeForSearch(searchQuery.value);
-  if (q.length < 2) return corpora.map(({ member }) => member);
+  const q = normalizedQuery.value;
+  if (q.length < SEARCH_QUERY_MIN_LENGTH) return corpora.map(({ member }) => member);
   return corpora.filter(({ corpus }) => corpus.includes(q)).map(({ member }) => member);
 }
 
+const isSearchActive = computed(() => normalizedQuery.value.length >= SEARCH_QUERY_MIN_LENGTH);
 const filteredMainProps = computed(() => filterCorpora(mainPropCorpora.value));
 const filteredClassProps = computed(() => filterCorpora(classPropCorpora.value));
 const filteredNativeClassAttributes = computed(() => filterCorpora(nativeClassAttributeCorpora.value));

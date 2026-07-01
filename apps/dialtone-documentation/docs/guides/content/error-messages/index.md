@@ -1,8 +1,11 @@
 ---
-title: Error Messages
-prev: { link: "/guides/content/action-language/", text: "Action Language" }
-next: { link: "/guides/content/grammar-and-mechanics/", text: "Grammar and Mechanics" }
-description: Errors can be scary and frustrating for users. We aim to make users aware of errors, easy to understand, and provide helpful suggestions (when possible) to correct them.
+title: Error messages
+cardTitle: Errors
+cardOrder: 3
+prev: { link: "../action-language/", text: "Action language" }
+next: { link: "../forms-and-validation/", text: "Forms and validation" }
+description: What happened and how to recover.
+thumb: true
 keywords: ["errors","error copy","validation messages"]
 ---
 Good error messages should:
@@ -192,7 +195,7 @@ If the validation process takes less than a second but not instant, show a spinn
 
 ### Forms
 
-When multiple sources are required to properly validate a form, hold off validating until the user clicks the submit button. Most often the button label is “Save”, but it can be [another label](/guides/content/grammar-and-mechanics/index.md#save-vs-done) at times. Be careful to not validate a form submission when there’s no specific data requirements or data being saved. For example, a search returning no results should display an appropriate empty state—not a validation error.
+When multiple sources are required to properly validate a form, hold off validating until the user clicks the submit button. Most often the button label is “Save”, but it can be [another label](../grammar-and-mechanics/#save-vs-done) at times. Be careful to not validate a form submission when there’s no specific data requirements or data being saved. For example, a search returning no results should display an appropriate empty state—not a validation error.
 
 Form submission errors should be displayed as a list at the top of the page. Make the notice heading instructional, providing guidance on how to proceed. When listing each error, start the list item with the field label and describe the action required to correct it. Each input field should follow content guidelines for [input field validation](#input-fields).
 

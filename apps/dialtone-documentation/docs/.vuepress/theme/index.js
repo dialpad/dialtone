@@ -112,7 +112,7 @@ function _extractFrontmatter (app, path, options, exceptions = []) {
 
   // Filter out the parent page itself (e.g., "Overview" which links to the index page)
   const childPages = children.filter(child => child.link !== path);
-  const sortingArr = childPages.map(child => child.text.toLowerCase().replaceAll(' ', '-'));
+  const sortingArr = childPages.map(child => child.link);
   const indexPage = app.pages.find(page => page.path === path);
 
   if (!indexPage) {
@@ -135,7 +135,12 @@ function _extractFrontmatter (app, path, options, exceptions = []) {
         ...page.frontmatter,
       };
     })
-    .sort((a, b) => sortingArr.indexOf(a.fileName) - sortingArr.indexOf(b.fileName));
+    .sort((a, b) => {
+      const indexA = a.cardOrder ?? sortingArr.indexOf(a.link);
+      const indexB = b.cardOrder ?? sortingArr.indexOf(b.link);
+      return (indexA === -1 ? Number.MAX_SAFE_INTEGER : indexA) -
+        (indexB === -1 ? Number.MAX_SAFE_INTEGER : indexB);
+    });
 }
 
 function _extractComponentStatus (app) {
@@ -258,9 +263,9 @@ function getChildrenPageNames (path, pages) {
 
   // If pages is already an array (from recursive call), search within it
   if (Array.isArray(pages)) {
+    const searchPath = `/${path}`.replace(/\/$/, '');
     const item = pages.find(item => {
       const itemPath = item.link?.replace(/\/$/, '');
-      const searchPath = `/${path}`.replace(/\/$/, '');
       return itemPath === searchPath;
     });
     return item?.children || [];
@@ -346,7 +351,7 @@ export const dialtoneVuepressTheme = (options) => ({
           '/guides/content/inclusive-language/',
           '/guides/content/voice-and-tone/',
         ]);
-      _extractFrontmatter(app, '/guides/content/', options);
+      _extractFrontmatter(app, '/guides/content/', options, ['/guides/content/voice-and-tone/']);
       _extractFrontmatter(app, '/components/', options, ['/components/status/']);
       _extractFrontmatter(app, '/foundations/', options, FOUNDATIONS_OVERVIEW_EXCLUDES);
       _extractFrontmatter(app, '/foundations/colors/', options);

@@ -35,6 +35,9 @@ function isAlreadyMigrated (content) {
 }
 
 export default {
+  // Gap values map directly to new spacing stops; the output of one pass (e.g. 200)
+  // is also a valid old input (200 → 25). A second pass would double-transform.
+  singlePass: true,
   description:
     'Migrates DtStack and DtDescriptionList gap prop values from old size stops to new spacing stops.\n' +
     '- Replaces gap="400" with gap="100" (8px)\n' +

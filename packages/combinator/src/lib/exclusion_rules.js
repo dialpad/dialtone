@@ -1,3 +1,38 @@
+/**
+ * Returns true when a prop/slot value is "set" — a non-blank string, or any
+ * non-null/undefined/false value. Shared predicate for variant exclusion rules.
+ *
+ * @param {*} value - The prop or slot value.
+ * @returns {boolean}
+ */
+export function hasValue (value) {
+  return typeof value === 'string' ? value.trim().length > 0 : value !== null && value !== undefined && value !== false;
+}
+
+/**
+ * Inverse of `hasValue`.
+ *
+ * @param {*} value - The prop or slot value.
+ * @returns {boolean}
+ */
+export function hasNoValue (value) {
+  return !hasValue(value);
+}
+
+/**
+ * Builds an exclusion-rule fragment that both disables a control and clears its
+ * value — the standard gating for a deprecated alias whose replacement is active.
+ *
+ * @param {string[]} props - The prop names to disable and clear.
+ * @returns {{ disable: { props: string[] }, clear: { props: string[] } }}
+ */
+export function disableAndClearProps (props) {
+  return {
+    disable: { props },
+    clear: { props },
+  };
+}
+
 function areConditionEntriesMet (conditions = {}, values = {}) {
   return Object.entries(conditions).every(([key, condition]) =>
     typeof condition === 'function'

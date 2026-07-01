@@ -5,9 +5,17 @@ import { mount } from '@vue/test-utils';
 
 const tabSelector = '[data-qa=option-bar-tab]';
 const searchButtonSelector = '[data-qa=option-bar-search-button]';
+const settingsButtonSelector = '[data-qa=option-bar-settings-button]';
 const searchInputSelector = '[data-qa=option-bar-search-input]';
 
 const component = {};
+
+const settings = {
+  controls: {
+    hideDeprecated: true,
+    hideInactive: false,
+  },
+};
 
 const baseOptions = {
   props: {
@@ -26,6 +34,7 @@ function mountWrapper ({ props = [], slots = [], attributes = [], options = base
     props: {
       component,
       options,
+      settings,
       info: {
         props,
         slots,
@@ -50,6 +59,8 @@ function mountWrapper ({ props = [], slots = [], attributes = [], options = base
             'propValues',
             'slotValues',
             'memberGroup',
+            'settings',
+            'searchActive',
           ],
           template: `
             <div
@@ -64,6 +75,12 @@ function mountWrapper ({ props = [], slots = [], attributes = [], options = base
               </span>
             </div>
           `,
+        },
+        DtcOptionBarSettings: {
+          name: 'DtcOptionBarSettings',
+          props: ['settings'],
+          emits: ['update:settings'],
+          template: '<button data-qa="option-bar-settings-button">Settings</button>',
         },
         DtButton: {
           template: '<button data-qa="option-bar-search-button"><slot /><slot name="icon" :icon-size="100" /></button>',
@@ -304,6 +321,83 @@ describe('option_bar.vue test', function () {
     expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['labelClass']);
   });
 
+  it('Should filter props by search keywords without broad logical token matches', async function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'paddingInline' },
+        { name: 'inlineSize', searchKeywords: ['width'] },
+        { name: 'blockSize', searchKeywords: ['height'] },
+      ],
+    });
+
+    await wrapper.find(searchButtonSelector).trigger('click');
+    await wrapper.find(searchInputSelector).setValue('width');
+
+    expect(getTabs(wrapper)).toEqual(['Props']);
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['inlineSize']);
+  });
+
+  it('Should only mark search active once the query is filtering', async function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'kind' },
+        { name: 'type' },
+      ],
+    });
+
+    await wrapper.find(searchButtonSelector).trigger('click');
+    await wrapper.find(searchInputSelector).setValue('k');
+
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['kind', 'type']);
+    expect(getMemberGroups(wrapper)[0].props('searchActive')).toBe(false);
+
+    await wrapper.find(searchInputSelector).setValue('ki');
+
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['kind']);
+    expect(getMemberGroups(wrapper)[0].props('searchActive')).toBe(true);
+  });
+
+  it('Should filter by existing logical aliases and multi-word search keywords', async function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'paddingInlineStart', searchKeywords: ['padding left'] },
+        { name: 'paddingInlineEnd', searchKeywords: ['padding right'] },
+      ],
+    });
+
+    await wrapper.find(searchButtonSelector).trigger('click');
+    await wrapper.find(searchInputSelector).setValue('left');
+
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['paddingInlineStart']);
+
+    await wrapper.find(searchInputSelector).setValue('padding left');
+
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['paddingInlineStart']);
+  });
+
+  it('Should filter slot and class controls by search keywords', async function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'kind' },
+        { name: 'startClass', searchKeywords: ['left class'] },
+      ],
+      slots: [
+        { name: 'default', searchKeywords: ['children'] },
+      ],
+    });
+
+    await wrapper.find(searchButtonSelector).trigger('click');
+    await wrapper.find(searchInputSelector).setValue('children');
+
+    expect(getTabs(wrapper)).toEqual(['Slots']);
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['default']);
+
+    await wrapper.find(searchInputSelector).setValue('left class');
+
+    expect(getTabs(wrapper)).toEqual(['Class']);
+    expect(getMemberGroups(wrapper)[0].props('members').map(member => member.name)).toEqual(['startClass']);
+  });
+
   it('Should keep selected panel synced with filtered tabs', async function () {
     const wrapper = mountWrapper({
       props: [
@@ -319,5 +413,25 @@ describe('option_bar.vue test', function () {
 
     expect(getTabs(wrapper)).toEqual(['Slots']);
     expect(getSelectedPanel(wrapper)).toBe('panel-slots');
+  });
+
+  it('Should render settings before search and re-emit settings updates', async function () {
+    const wrapper = mountWrapper({
+      props: [
+        { name: 'kind' },
+      ],
+    });
+    const settingsUpdate = model => {
+      model.controls.hideDeprecated = false;
+    };
+
+    await wrapper.findComponent({ name: 'DtcOptionBarSettings' }).vm.$emit('update:settings', settingsUpdate);
+
+    expect(wrapper.findComponent({ name: 'DtcOptionBarSettings' }).props('settings')).toEqual(settings);
+    expect(wrapper.emitted('update:settings')).toEqual([[settingsUpdate]]);
+    expect(
+      wrapper.find(settingsButtonSelector).element.compareDocumentPosition(wrapper.find(searchButtonSelector).element) &
+        Node.DOCUMENT_POSITION_FOLLOWING,
+    ).toBeTruthy();
   });
 });

@@ -89,6 +89,28 @@ describe('utility-class-to-token-stops config', () => {
     });
   });
 
+
+  // ─── Large spacing values (≥ 96px) pass through unchanged ────────────
+  //
+  // Token-stop margin/padding/position classes (d-mt-{stop}, d-pt-{stop}, d-t-{stop})
+  // use spacing tokens only. d-mt-150 = --dt-spacing-150 (12px), not --dt-layout-150 (96px).
+  // These classes must be left for manual review rather than silently changed.
+
+  describe('large margin/padding/position values — pass through unchanged', () => {
+    const unchanged = [
+      'd-mt96', 'd-mb96', 'd-ml96', 'd-mr96', 'd-mx96', 'd-my96', 'd-m96',
+      'd-mt128', 'd-mb128', 'd-ml128', 'd-mr128', 'd-mx128', 'd-my128', 'd-m128',
+      'd-pt96', 'd-pb96', 'd-pl96', 'd-pr96', 'd-px96', 'd-py96', 'd-p96',
+      'd-pt128', 'd-pb128', 'd-pl128', 'd-pr128', 'd-px128', 'd-py128', 'd-p128',
+      'd-t96', 'd-r96', 'd-b96', 'd-l96',
+    ];
+    for (const cls of unchanged) {
+      it(`${cls} is left unchanged`, () => {
+        assert.equal(apply(`<div class="${cls}" />`), `<div class="${cls}" />`);
+      });
+    }
+  });
+
   // ─── Border-radius migration (DLT-3329) ───────────────────────────────
 
   describe('border-radius all-corners — legacy pixel-suffix to token stop', () => {
