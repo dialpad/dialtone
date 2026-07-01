@@ -66,65 +66,59 @@ export default {
       },
     },
     props: {
-      kind: {
-        initialValue: 'headline',
-      },
-      size: {
-        initialValue: '500',
+      variant: {
+        initialValue: 'headline-xl',
       },
       as: {
         initialValue: 'h2',
       },
     },
   },
-  'Medium body': {
+  'Small body': {
     slots: {
       default: {
-        initialValue: 'Medium body',
+        initialValue: 'Small body',
       },
     },
     props: {
-      kind: {
-        initialValue: 'body',
-      },
-      size: {
-        initialValue: '300',
+      variant: {
+        initialValue: 'body-sm',
       },
       as: {
         initialValue: 'p',
       },
     },
   },
-  'Small label': {
+  'Small label, compact density': {
     slots: {
       default: {
         initialValue: 'Small label',
       },
     },
     props: {
-      kind: {
-        initialValue: 'label',
+      variant: {
+        initialValue: 'label-sm',
       },
-      size: {
+      density: {
         initialValue: '200',
       },
     },
   },
-  'Small body, critical tone': {
+  'Medium body, critical tone, semibold': {
     slots: {
       default: {
-        initialValue: 'Critical text',
+        initialValue: 'Critical tone',
       },
     },
     props: {
-      kind: {
-        initialValue: 'body',
+      variant: {
+        initialValue: 'body-md',
       },
       tone: {
         initialValue: 'critical',
       },
-      size: {
-        initialValue: '200',
+      strength: {
+        initialValue: 'semibold',
       },
     },
   },
@@ -135,11 +129,8 @@ export default {
       },
     },
     props: {
-      kind: {
-        initialValue: 'code',
-      },
-      size: {
-        initialValue: '100',
+      variant: {
+        initialValue: 'code-xs',
       },
     },
   },
@@ -150,14 +141,11 @@ export default {
       },
     },
     props: {
-      kind: {
-        initialValue: 'body',
+      variant: {
+        initialValue: 'body-md',
       },
       maxLines: {
         initialValue: '3',
-      },
-      size: {
-        initialValue: '300',
       },
     },
   },
@@ -171,14 +159,8 @@ export default {
       as: {
         initialValue: 'p',
       },
-      kind: {
-        initialValue: 'body',
-      },
       align: {
         initialValue: 'center',
-      },
-      size: {
-        initialValue: '300',
       },
     },
   },
@@ -192,14 +174,11 @@ export default {
       as: {
         initialValue: 'h1',
       },
-      kind: {
-        initialValue: 'headline',
+      variant: {
+        initialValue: 'headline-lg',
       },
       tone: {
-        initialValue: 'tertiary',
-      },
-      size: {
-        initialValue: '400',
+        initialValue: 'secondary',
       },
       align: {
         initialValue: 'center',
@@ -209,7 +188,7 @@ export default {
       },
     },
   },
-  'with numeric (tabular-nums)': {
+  'Numeric (tabular-nums)': {
     slots: {
       default: {
         initialValue: '01:17:19',
@@ -218,6 +197,42 @@ export default {
     props: {
       numeric: {
         initialValue: true,
+      },
+    },
+  },
+  'Truncate single line': {
+    slots: {
+      default: {
+        initialValue: `Welcome to Dialpad, the most modern, AI-powered business communications platform.
+        We have taken every form of communication that you rely on and unified it into one app.`,
+      },
+    },
+    attributes: {
+      class: {
+        initialValue: 'd-w-300',
+      },
+    },
+    props: {
+      as: {
+        initialValue: 'p',
+      },
+      truncate: {
+        initialValue: true,
+      },
+    },
+  },
+  'Extra small body, override to super small': {
+    slots: {
+      default: {
+        initialValue: `Welcome to Dialpad`,
+      },
+    },
+    props: {
+      variant: {
+        initialValue: 'body-xs',
+      },
+      size: {
+        initialValue: '50',
       },
     },
   },
