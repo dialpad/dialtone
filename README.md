@@ -322,11 +322,15 @@ We use PNPM to manage everything related to NPM, **adding, installing, removing 
 
 You will need to install PNPM locally to contribute to this project. <https://pnpm.io/installation>
 
+The repo pins an exact pnpm version via the `packageManager` field in `package.json`. The recommended way to automatically use the correct version per repo is [Corepack](https://nodejs.org/api/corepack.html), which ships with Node.js:
+
 ##### Installation
 
 ```bash
-npm install -g pnpm
+corepack enable
 ```
+
+Corepack reads the `packageManager` field and transparently uses the pinned pnpm version — no manual version switching needed across repos.
 
 ##### Do
 
