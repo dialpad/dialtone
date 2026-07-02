@@ -1,0 +1,48 @@
+{
+  "manifest_version": 3,
+  "name": "Dialtone Migration Helper",
+  "version": "0.3.57",
+  "description": "Inspect Dialtone tokens and apply a safe stable custom-property override for token-backed visual diffs.",
+  "permissions": [
+    "storage",
+    "unlimitedStorage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Dialtone Migration Helper"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": [
+        "rules.js",
+        "structure.js",
+        "token-renames.js",
+        "content.js"
+      ],
+      "run_at": "document_idle",
+      "all_frames": true
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "docs/analysis/dependency-graph.json",
+        "docs/analysis/tokens.json",
+        "docs/analysis/utilities.json"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ]
+}
