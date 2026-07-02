@@ -954,6 +954,9 @@ importers:
       '@dialpad/dialtone-vue':
         specifier: workspace:*
         version: link:../dialtone-vue
+      eslint-plugin-n:
+        specifier: ^17.0.0
+        version: 17.24.0(eslint@9.39.4(jiti@1.21.7))(typescript@5.9.3)
       mocha:
         specifier: ^10.0.0
         version: 10.8.2
