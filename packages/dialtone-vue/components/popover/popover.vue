@@ -361,6 +361,21 @@ export default {
     },
 
     /**
+     * The element used to determine overflow boundaries for the popover.
+     * <a
+     *   class="d-link"
+     *   href="https://popper.js.org/docs/v2/utils/detect-overflow/#boundary"
+     *   target="_blank"
+     * >
+     *   Popper.js docs
+     * </a>
+     */
+    boundary: {
+      type: [String, Element],
+      default: 'clippingParents',
+    },
+
+    /**
      * The direction the popover displays relative to the anchor.
      * <a
      *   class="d-link"
@@ -653,6 +668,10 @@ export default {
       });
     },
 
+    boundary () {
+      this.tip?.setProps({ popperOptions: this.popperOptions() });
+    },
+
     externalAnchorElement () {
       this.updateAnchorEl();
     },
@@ -768,6 +787,7 @@ export default {
         fallbackPlacements: this.fallbackPlacements,
         tether: this.tether,
         hasHideModifierEnabled: true,
+        boundary: this.boundary,
       });
     },
 
