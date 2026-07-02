@@ -241,19 +241,20 @@ We're excited you want to install Dialtone locally as this most likely means you
 
 ### Install Node & npm
 
-To run Dialtone locally, you must have Node and NPM (Node Package Manager) installed. [Click here to download Node](https://nodejs.org/en/). The recommended Node version is fine. NPM is included with Node. If you already have Node installed, you may move onto the next step.
-
-Once Node finishes installing, ensure it is installed properly by typing the following command in your Terminal window:
+To run Dialtone locally, you must have Node installed. The required version is specified in `.nvmrc` at the repo root — use [nvm](https://github.com/nvm-sh/nvm) to install and switch to it automatically:
 
 ```bash
-node -v
+nvm install
+nvm use
 ```
 
-You should see the following response:
+Once Node is installed, enable [Corepack](https://nodejs.org/api/corepack.html) so that the correct pnpm version is used automatically:
 
 ```bash
-v16.x.x
+corepack enable
 ```
+
+Corepack reads the `packageManager` field in `package.json` and uses the pinned pnpm version without any manual version switching.
 
 ### Clone Project
 

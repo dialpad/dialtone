@@ -19,12 +19,6 @@ describe('control_nullish.vue test', function () {
     _mountWrapper();
   });
 
-  describe('When mounted', function () {
-    it('Should render successfully', function () {
-      expect(wrapper.exists()).toBe(true);
-    });
-  });
-
   describe('When a value is provided', function () {
     beforeEach(async function () {
       await wrapper.setProps({ value: inputValue });

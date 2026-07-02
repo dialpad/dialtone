@@ -12,10 +12,6 @@ runs:
       with:
         node-version-file: ".nvmrc"
         cache: "pnpm"
-        registry-url: "https://npm.pkg.github.com"
-        scope: "dialpad"
-      env:
-        NODE_AUTH_TOKEN: ${{ github.token }}
 
     - name: Configure GitHub Packages auth
       shell: bash

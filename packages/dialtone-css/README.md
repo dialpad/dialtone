@@ -25,6 +25,14 @@ npm install @dialpad/dialtone-css@latest
 import '@dialpad/dialtone-css';
 ```
 
+#### No-Layers Build
+
+If your project cannot use CSS Cascade Layers, import the no-layers variant. You will likely need to use the no-layers build if you are upgrading from Dialtone <=9, unless you migrate your application CSS to support layers. See the [CSS Cascade Layers migration guide](https://dialtone.dialpad.com/guides/migration/css-cascade-layers/) for more details.
+
+```js
+import '@dialpad/dialtone-css/no-layers';
+```
+
 ### Add dialtone's theme class to the `<body>`
 
 - Light mode

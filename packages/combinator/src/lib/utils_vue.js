@@ -1,5 +1,6 @@
-import { computed, ref } from 'vue';
+import { computed, nextTick, ref, watch } from 'vue';
 import { getUniqueString } from '@/src/lib/utils';
+import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 
 /**
  * Property that can be used to store persistent data in local storage for a reactive `ref(...)` object.
@@ -14,7 +15,18 @@ import { getUniqueString } from '@/src/lib/utils';
  * @returns {WritableComputedRef<*>} The cached ref object.
  */
 export function cachedRef (key, defaultValue) {
-  const reference = ref(JSON.parse(window.localStorage.getItem(key)) || defaultValue);
+  const stored = window.localStorage.getItem(key);
+  let initialValue = defaultValue;
+
+  if (stored !== null) {
+    try {
+      initialValue = JSON.parse(stored);
+    } catch {
+      window.localStorage.removeItem(key);
+    }
+  }
+
+  const reference = ref(initialValue);
   return computed({
     get: () => reference.value,
     set (value) {
@@ -83,4 +95,81 @@ export function idMap (prefix) {
     removeId: remove,
     getId: get,
   };
+}
+
+/**
+ * Shared emptiness and clear-disabled state for clearable controls. Every clearable
+ * control (input, segmented, selection) derives "is this empty" and "can the remove
+ * button fire" from `value` and the `clearable`/`required`/`disabled` props the same way.
+ *
+ * @param {object} props - Control props exposing `value`, `clearable`, `required`, `disabled`.
+ * @returns {{ isEmpty: import('vue').ComputedRef<boolean>, clearDisabled: import('vue').ComputedRef<boolean> }}
+ */
+export function useClearableState (props) {
+  const isEmpty = computed(() => props.value === null || props.value === undefined || props.value === '');
+  const clearDisabled = computed(() => !props.clearable || props.required || props.disabled || isEmpty.value);
+  return { isEmpty, clearDisabled };
+}
+
+/**
+ * Collapse/expand/clear state machine for the text-style input controls (string,
+ * number, slot). They behave identically and differ only in how the raw input value
+ * is mapped to the emitted value, which the caller supplies via `parse`.
+ *
+ * The `hasInternalUpdate` flag distinguishes a user edit (which must keep the field
+ * expanded even when cleared to empty) from an external reset (which collapses the
+ * control). It is load-bearing for input controls: clearing the field to empty would
+ * otherwise trip the value watcher's collapse branch while the user is still typing.
+ *
+ * @param {object} options
+ * @param {object} options.props - Control props (`value`, `clearable`, `required`, `disabled`).
+ * @param {Function} options.emit - The component's `emit`.
+ * @param {Function} [options.parse] - Maps the raw input value to the emitted value.
+ * @returns {object} State and handlers for the control template.
+ */
+export function useClearableInput ({ props, emit, parse = (value) => value }) {
+  const { isEmpty, clearDisabled } = useClearableState(props);
+  const expanded = ref(false);
+  const inputRef = ref(null);
+  const hasPendingValue = ref(false);
+  const hasInternalUpdate = ref(false);
+
+  const inputValue = computed(() => props.value ?? '');
+
+  function updateValue (rawValue) {
+    const value = parse(rawValue);
+    expanded.value = true;
+    hasInternalUpdate.value = true;
+    hasPendingValue.value = value !== null && value !== undefined && value !== '';
+    emit(VALUE_UPDATE_EVENT, value);
+  }
+
+  async function addValue () {
+    expanded.value = true;
+    await nextTick();
+    inputRef.value?.focus();
+  }
+
+  function collapseIfEmpty () {
+    if (!isEmpty.value || hasPendingValue.value) return;
+    expanded.value = false;
+  }
+
+  function clearValue () {
+    if (clearDisabled.value) return;
+    expanded.value = false;
+    hasPendingValue.value = false;
+    emit(VALUE_UPDATE_EVENT, null);
+  }
+
+  watch(() => props.value, () => {
+    hasPendingValue.value = false;
+    if (hasInternalUpdate.value) {
+      hasInternalUpdate.value = false;
+      return;
+    }
+    if (isEmpty.value) expanded.value = false;
+  });
+
+  return { expanded, inputRef, inputValue, isEmpty, updateValue, addValue, collapseIfEmpty, clearValue };
 }

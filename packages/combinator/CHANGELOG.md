@@ -1,3 +1,10 @@
+# [1.2.0-next.13](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.12...combinator/v1.2.0-next.13) (2026-06-22)
+
+
+### Features
+
+* **Combinator:** DLT-3480 add searchable filter to selection dropdowns ([#1323](https://github.com/dialpad/dialtone/issues/1323)) ([0710d00](https://github.com/dialpad/dialtone/commit/0710d00e55e3b26b576316c61193578d3355ce8c))
+
 # [1.2.0-next.12](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.11...combinator/v1.2.0-next.12) (2026-06-16)
 
 

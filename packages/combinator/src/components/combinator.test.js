@@ -33,6 +33,10 @@ describe('combinator.vue test', function () {
 
   let wrapper;
 
+  afterEach(function () {
+    window.localStorage.clear();
+  });
+
   describe(`Supported component tests`, function () {
     testComponents.forEach(component => {
       describe(`When mounted with component '${component.name}'`, function () {
@@ -195,6 +199,52 @@ describe('combinator.vue test', function () {
 
       expect(fullscreenPlayground).toBeTruthy();
       expect(host.querySelector('.dialtone-playground--fullscreen')).toBeNull();
+    });
+
+    it('keeps the fullscreen shell below modal popover layers', function () {
+      const fullscreenPlayground = document.body.querySelector('.dialtone-playground--fullscreen');
+
+      expect(fullscreenPlayground.classList.contains('d-zi-popover')).toBe(true);
+    });
+  });
+
+  describe('control display settings', function () {
+    beforeEach(function () {
+      wrapper = shallowMountCombinator({
+        props: {
+          component: DtToggle,
+          documentation: toggleDoc,
+          variants: {},
+        },
+      });
+    });
+
+    afterEach(function () {
+      wrapper.unmount();
+    });
+
+    it('persists control display settings and passes them to new component views', async function () {
+      const optionBar = wrapper.findComponent({ name: 'DtcOptionBar' });
+
+      expect(optionBar.props('settings').controls.hideDeprecated).toBe(true);
+
+      await optionBar.vm.$emit('update:settings', (model) => {
+        model.controls.hideDeprecated = false;
+      });
+      await nextTick();
+
+      expect(window.localStorage.getItem('dialtoneCombinatorControlsHideDeprecated')).toBe('false');
+
+      const nextWrapper = shallowMountCombinator({
+        props: {
+          component: DtInput,
+          documentation: inputDoc,
+          variants: {},
+        },
+      });
+
+      expect(nextWrapper.findComponent({ name: 'DtcOptionBar' }).props('settings').controls.hideDeprecated).toBe(false);
+      nextWrapper.unmount();
     });
   });
 });

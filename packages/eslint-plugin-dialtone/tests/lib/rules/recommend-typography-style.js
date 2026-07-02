@@ -25,6 +25,10 @@ const ruleTester = new RuleTester({
 
 ruleTester.run("recommend-typography-style", rule, {
   valid: [
+    // Boolean/valueless class attribute should not crash
+    {
+      code: "<template><div class /></template>",
+    },
     // Composed typography utilities are valid
     {
       code: "<template><div class=\"d-label--md-plain\" /></template>",

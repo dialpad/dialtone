@@ -12,9 +12,12 @@
       <template #input="{ inputProps, onInput }">
         <dtc-control-string
           v-bind="inputProps"
+          :label="label"
           :value="value"
           :warning="warning"
           :disabled="disabled"
+          :required="required"
+          :clearable="clearable"
           @update:value="e => onInputInternal(e, onInput)"
         >
           <template #default>
@@ -59,14 +62,26 @@ import { DtRecipeComboboxWithPopover, DtListItem } from '@dialpad/dialtone-vue';
 
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed, ref } from 'vue';
-import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue';
+import { DtIconChevronDown } from '@dialpad/dialtone-icons/vue';
 
 const WARNING_MESSAGE = 'Unexpected value';
 
 const props = defineProps({
-  value: {
+  label: {
     type: String,
-    required: true,
+    default: '',
+  },
+  value: {
+    type: [String, null],
+    default: null,
+  },
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  clearable: {
+    type: Boolean,
+    default: true,
   },
   disabled: {
     type: Boolean,
@@ -85,7 +100,7 @@ const props = defineProps({
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
 
 const warning = computed(() => {
-  return props.warn && !props.suggestions.includes(props.value)
+  return props.warn && props.value !== null && !props.suggestions.includes(props.value)
     ? WARNING_MESSAGE
     : undefined;
 });

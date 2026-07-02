@@ -1,7 +1,7 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.188.0-next.2",
-  "packageManager": "pnpm@9.9.0",
+  "version": "9.187.2",
+  "packageManager": "pnpm@11.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
     "prepare": "husky install",
@@ -10,47 +10,19 @@
     "clean:dist": "rm -rf packages/dialtone-tokens/dist apps/dialtone-documentation/docs/.vuepress/.cache apps/dialtone-documentation/docs/.vuepress/.temp",
     "clean:cache": "pnpm nx reset --onlyCache"
   },
-  "pnpm": {
-    "peerDependencyRules": {
-      "allowedVersions": {
-        "mem-fs": "^4.0.0",
-        "postcss": "^7.0.39 || ^8.3.3",
-        "react": "^18.3.1",
-        "typescript": "^5.2",
-        "vite": "^8.0.0",
-        "vue": "^3.2",
-        "vuepress": "^2.0.0-rc.24"
-      }
-    },
-    "overrides": {
-      "playwright-core": ">=1.60.0",
-      "@typescript-eslint/utils": "^8.44.1",
-      "braces": ">=3.0.3",
-      "cross-spawn": ">=7.0.5",
-      "nanoid": ">=3.3.8",
-      "sass": "^1.70.0",
-      "sugarss": "^5.0.0",
-      "semver-regex": "3.1.4",
-      "stylelint": "^16.25.0",
-      "tar-fs": ">=2.1.3",
-      "test-exclude": "^7.0.1",
-      "trim": ">=0.0.3",
-      "trim-newlines": ">=3.0.1"
-    },
-    "patchedDependencies": {
-      "@tiptap/vue-3@3.19.0": "patches/@tiptap__vue-3@3.19.0.patch"
-    }
-  },
   "files": [
     "dist"
   ],
   "bin": {
+    "dialtone-migrate": "./dist/js/dialtone_migrate/index.mjs",
     "dialtone-migrate-flex-to-stack": "./dist/js/dialtone_migrate_flex_to_stack/index.mjs"
   },
   "exports": {
     "./CHANGELOG.json": "./CHANGELOG.json",
     "./css": "./dist/css/dialtone.min.css",
     "./css-default-theme": "./dist/css/dialtone-default-theme.min.css",
+    "./css/no-layers": "./dist/css/no-layers/dialtone.min.css",
+    "./css/no-layers/default-theme": "./dist/css/no-layers/dialtone-default-theme.min.css",
     "./tokens/*.css": "./dist/tokens/css/*.css",
     "./tokens/postcss/*": {
       "types": "./dist/tokens/types/postcss/*.d.ts",
@@ -130,11 +102,12 @@
     "vue-tsc": "3.2.6"
   },
   "devDependencies": {
-    "@dialpad/dialtone-cli": "workspace:*",
     "@commitlint/cli": "^18.4.3",
     "@commitlint/config-conventional": "^17.6.6",
     "@dialpad/conventional-changelog-angular": "^1.1.1",
+    "@dialpad/dialtone-cli": "workspace:*",
     "@dialpad/semantic-release-changelog-json": "^1.0.0",
+    "@eslint/js": "^9.0.0",
     "@faker-js/faker": "8.4.1",
     "@percy/cli": "1.30.9",
     "@percy/storybook": "6.0.3",
@@ -195,6 +168,9 @@
     "wait-on": "^7.2.0",
     "yo": "^5.0.0"
   },
+  "engines": {
+    "pnpm": ">=11.9.0"
+  },
   "peerDependencies": {
     "vue": "^3"
   },
@@ -218,7 +194,7 @@
     "access": "public"
   },
   "sideEffects": [
-    "./dist/css/*.css",
+    "./dist/css/**/*.css",
     "./dist/css/fonts.js"
   ],
   "nx": {

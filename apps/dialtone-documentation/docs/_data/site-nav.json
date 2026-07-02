@@ -905,28 +905,40 @@
       "icon": "edit",
       "children": [
         {
-          "text": "Action Language",
+          "text": "Action language",
           "link": "/guides/content/action-language/"
         },
         {
-          "text": "Error Messages",
+          "text": "Data formats",
+          "link": "/guides/content/data-formats/"
+        },
+        {
+          "text": "Error messages",
           "link": "/guides/content/error-messages/"
         },
         {
-          "text": "Grammar and Mechanics",
+          "text": "Forms and validation",
+          "link": "/guides/content/forms-and-validation/"
+        },
+        {
+          "text": "Grammar and mechanics",
           "link": "/guides/content/grammar-and-mechanics/"
         },
         {
-          "text": "Help Content",
+          "text": "Help content",
           "link": "/guides/content/help-content/"
         },
         {
-          "text": "Inclusive Language",
+          "text": "Inclusive language",
           "link": "/guides/content/inclusive-language/"
         },
         {
-          "text": "Voice and Tone",
-          "link": "/guides/content/voice-and-tone/"
+          "text": "Names and word list",
+          "link": "/guides/content/product-and-feature-names-and-word-list/"
+        },
+        {
+          "text": "Writing approach",
+          "link": "/guides/content/writing-approach/"
         }
       ]
     },

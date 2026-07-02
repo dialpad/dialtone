@@ -949,6 +949,7 @@ export default {
     async onShow () {
       if (this.contentWidth === 'anchor') {
         await this.setPopoverContentAnchorWidth();
+        if (this._isUnmounting) return;
       }
 
       if (this.contentWidth === null) {

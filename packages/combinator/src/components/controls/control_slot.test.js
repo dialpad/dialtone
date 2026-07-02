@@ -1,7 +1,11 @@
 import DtcControlSlot from './control_slot.vue';
 
 import { expect } from 'vitest';
-import { mount } from '@vue/test-utils';
+import {
+  mountClearableControl,
+  ADD_BUTTON_SELECTOR as addButtonSelector,
+  REMOVE_BUTTON_SELECTOR as clearButtonSelector,
+} from '@/src/lib/test/utils_test';
 
 const inputSelector = 'textarea';
 
@@ -12,8 +16,9 @@ describe('control_slot.vue test', function () {
   let wrapper;
   let inputWrapper;
 
-  const _mountWrapper = () => {
-    wrapper = mount(DtcControlSlot);
+  const _mountWrapper = (props = {}) => {
+    wrapper?.unmount();
+    wrapper = mountClearableControl(DtcControlSlot, props);
     _setChildWrappers();
   };
 
@@ -21,14 +26,12 @@ describe('control_slot.vue test', function () {
     inputWrapper = wrapper.find(inputSelector);
   };
 
-  beforeAll(function () {
+  beforeEach(function () {
     _mountWrapper();
   });
 
-  describe('When mounted', function () {
-    it('Should render successfully', function () {
-      expect(wrapper.exists()).toBe(true);
-    });
+  afterEach(function () {
+    wrapper?.unmount();
   });
 
   describe('When a value is provided', function () {
@@ -49,8 +52,55 @@ describe('control_slot.vue test', function () {
       _mountWrapper();
     });
 
-    it('Should set the native input to control default', function () {
+    it('Should expand, focus, and collapse on empty blur', async function () {
+      await wrapper.find(addButtonSelector).trigger('click');
+      _setChildWrappers();
+
+      expect(inputWrapper.exists()).toBe(true);
       expect(defaultValue).toBe(inputWrapper.element.value);
+      expect(document.activeElement).toBe(inputWrapper.element);
+
+      await inputWrapper.trigger('blur');
+      _setChildWrappers();
+
+      expect(inputWrapper.exists()).toBe(false);
+      expect(wrapper.find(addButtonSelector).exists()).toBe(true);
+    });
+
+    it('Should stay expanded on blur when a value has been entered', async function () {
+      await wrapper.find(addButtonSelector).trigger('click');
+      _setChildWrappers();
+      await inputWrapper.setValue(inputValue);
+      await wrapper.setProps({ value: inputValue });
+      await inputWrapper.trigger('blur');
+      _setChildWrappers();
+
+      expect(inputWrapper.exists()).toBe(true);
+      expect(inputWrapper.element.value).toBe(inputValue);
+    });
+  });
+
+  describe('When clearing the value', function () {
+    it('Should emit null and collapse after the value is cleared', async function () {
+      _mountWrapper({ value: inputValue });
+      await wrapper.find(clearButtonSelector).trigger('click');
+      await wrapper.setProps({ value: null });
+      _setChildWrappers();
+
+      expect(wrapper.emitted('update:value')[0]).toEqual([null]);
+      expect(inputWrapper.exists()).toBe(false);
+      expect(wrapper.find(addButtonSelector).exists()).toBe(true);
+    });
+
+    it('Should not expose an add action for required values', function () {
+      _mountWrapper({
+        required: true,
+        value: null,
+      });
+
+      expect(wrapper.find(addButtonSelector).exists()).toBe(false);
+      expect(wrapper.find(inputSelector).exists()).toBe(true);
+      expect(wrapper.find(clearButtonSelector).attributes('disabled')).toBeDefined();
     });
   });
 });
