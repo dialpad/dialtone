@@ -263,6 +263,38 @@ describe('DtPopover Tests', () => {
     });
   });
 
+  describe('Popper Options Tests', () => {
+    it('defaults the boundary to "clippingParents"', () => {
+      const flipModifier = wrapper.vm.popperOptions().modifiers.find(modifier => modifier.name === 'flip');
+
+      expect(flipModifier.options.boundary).toBe('clippingParents');
+    });
+
+    describe('When boundary prop is set', () => {
+      beforeEach(() => {
+        mockProps = { boundary: document.body };
+        updateWrapper();
+      });
+
+      it('passes the boundary to the flip modifier options', () => {
+        const flipModifier = wrapper.vm.popperOptions().modifiers.find(modifier => modifier.name === 'flip');
+
+        expect(flipModifier.options.boundary).toBe(document.body);
+      });
+    });
+
+    describe('When boundary prop changes while the popover is open', () => {
+      it('updates the tippy instance with the new popperOptions', async () => {
+        await wrapper.setProps({ open: true });
+        const setPropsSpy = vi.spyOn(wrapper.vm.tip, 'setProps');
+
+        await wrapper.setProps({ boundary: document.body });
+
+        expect(setPropsSpy).toHaveBeenCalledWith({ popperOptions: wrapper.vm.popperOptions() });
+      });
+    });
+  });
+
   describe('Accessibility Tests', () => {
     describe('When popover is open', () => {
       beforeEach(async () => {

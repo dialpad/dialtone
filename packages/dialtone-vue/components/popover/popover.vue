@@ -126,6 +126,7 @@
 /* eslint-disable max-lines */
 import {
   POPOVER_APPEND_TO_VALUES,
+  POPOVER_BOUNDARY_VALUES,
   POPOVER_CONTENT_WIDTHS,
   POPOVER_HEADER_FOOTER_PADDING_CLASSES,
   POPOVER_INITIAL_FOCUS_STRINGS,
@@ -357,6 +358,26 @@ export default {
       type: Array,
       default: () => {
         return ['auto'];
+      },
+    },
+
+    /**
+     * The element used to determine overflow boundaries for the popover.
+     * <a
+     *   class="d-link"
+     *   href="https://popper.js.org/docs/v2/utils/detect-overflow/#boundary"
+     *   target="_blank"
+     * >
+     *   Popper.js docs
+     * </a>
+     * @values clippingParents, viewport, document, HTMLElement
+     */
+    boundary: {
+      type: [String, HTML_ELEMENT_TYPE],
+      default: 'clippingParents',
+      validator: boundary => {
+        return POPOVER_BOUNDARY_VALUES.includes(boundary) ||
+          (boundary instanceof HTMLElement);
       },
     },
 
@@ -653,6 +674,10 @@ export default {
       });
     },
 
+    boundary () {
+      this.tip?.setProps({ popperOptions: this.popperOptions() });
+    },
+
     externalAnchorElement () {
       this.updateAnchorEl();
     },
@@ -768,6 +793,7 @@ export default {
         fallbackPlacements: this.fallbackPlacements,
         tether: this.tether,
         hasHideModifierEnabled: true,
+        boundary: this.boundary,
       });
     },
 
