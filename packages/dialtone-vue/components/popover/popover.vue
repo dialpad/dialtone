@@ -126,6 +126,7 @@
 /* eslint-disable max-lines */
 import {
   POPOVER_APPEND_TO_VALUES,
+  POPOVER_BOUNDARY_VALUES,
   POPOVER_CONTENT_WIDTHS,
   POPOVER_HEADER_FOOTER_PADDING_CLASSES,
   POPOVER_INITIAL_FOCUS_STRINGS,
@@ -369,10 +370,15 @@ export default {
      * >
      *   Popper.js docs
      * </a>
+     * @values clippingParents, viewport, document, HTMLElement
      */
     boundary: {
-      type: [String, Element],
+      type: [String, HTML_ELEMENT_TYPE],
       default: 'clippingParents',
+      validator: boundary => {
+        return POPOVER_BOUNDARY_VALUES.includes(boundary) ||
+          (boundary instanceof HTMLElement);
+      },
     },
 
     /**
