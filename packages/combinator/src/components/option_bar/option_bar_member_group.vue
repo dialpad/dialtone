@@ -3,9 +3,11 @@
     v-for="(member, key) in memberMap"
     :key="key"
   >
-    <div
+    <dt-box
       v-if="!member.hideControl"
       data-qa="dtc-option-bar-member-group-control"
+      min-block-size="24px"
+      class="d-plc-center"
     >
       <dtc-option-bar-control
         :value="values[key]"
@@ -32,7 +34,7 @@
         @update:value="e => updateMember(e, key)"
         @update:control="e => updateControl(e, key)"
       />
-    </div>
+    </dt-box>
   </template>
 </template>
 

@@ -17,7 +17,7 @@
         kind="label"
         :size="100"
         tone="secondary"
-        class="d-input__label-text d-c-default"
+        class="d-mbe-50 d-c-default d-d-block d-c-default"
       >
         <slot />
       </dt-text>

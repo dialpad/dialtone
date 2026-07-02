@@ -67,7 +67,7 @@
           v-dt-tooltip="'Edit as JSON'"
           link
           :link-underline="false"
-          class="d-mis-auto d-fw-normal d-fs-50 d-px-25 d-bar-200 h:d-td-none "
+          class="d-mis-auto d-fw-normal d-fs-50 d-px-25 d-bar-200 h:d-td-none d-w-50 d-mie-25"
           :class="{ 'd-bgc-bold d-fc-secondary h:d-fc-primary': rawMode }"
           @click="toggleRawMode"
         >
