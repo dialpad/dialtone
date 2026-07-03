@@ -47,5 +47,4 @@ jobs:
           source-directory: 'packages/dialtone-tokens/dist_ios'
           destination-repository-name: 'dialtone-tokens-swift'
           destination-github-username: 'dialpad'
-          target-branch: ${{ github.ref_name == 'production' && 'main' || format('prerelease-{0}', github.ref_name) }}
           commit-message: ${{ github.ref_name == 'production' && 'dialtone-tokens-swift release' || format('dialtone-tokens-swift prerelease ({0})', github.ref_name) }}
