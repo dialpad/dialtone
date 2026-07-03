@@ -1,6 +1,5 @@
 ---
 title: Inclusive language
-cardOrder: 6
 prev: { link: "../help-content/", text: "Help content" }
 next: { link: "../grammar-and-mechanics/", text: "Grammar and mechanics" }
 description: Words that respect every user.

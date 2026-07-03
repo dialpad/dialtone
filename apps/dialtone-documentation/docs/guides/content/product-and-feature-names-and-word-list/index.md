@@ -1,7 +1,6 @@
 ---
 title: Names and word list
 cardTitle: Names and word list
-cardOrder: 9
 prev: { link: "../data-formats/", text: "Data formats" }
 next: { link: "../../accessibility/", text: "Accessibility" }
 description: Product names, feature names, and word list.

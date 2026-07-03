@@ -1,7 +1,6 @@
 ---
 title: Grammar and mechanics
 cardTitle: Grammar
-cardOrder: 7
 prev: { link: "../inclusive-language/", text: "Inclusive language" }
 next: { link: "../data-formats/", text: "Data formats" }
 description: Capitalization, punctuation, and style.

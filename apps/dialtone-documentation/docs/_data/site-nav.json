@@ -1019,12 +1019,12 @@
             "icon": "edit",
             "children": [
               {
-                "text": "Action language",
-                "link": "/guides/content/action-language/"
+                "text": "Writing approach",
+                "link": "/guides/content/writing-approach/"
               },
               {
-                "text": "Data formats",
-                "link": "/guides/content/data-formats/"
+                "text": "Action language",
+                "link": "/guides/content/action-language/"
               },
               {
                 "text": "Error messages",
@@ -1035,10 +1035,6 @@
                 "link": "/guides/content/forms-and-validation/"
               },
               {
-                "text": "Grammar and mechanics",
-                "link": "/guides/content/grammar-and-mechanics/"
-              },
-              {
                 "text": "Help content",
                 "link": "/guides/content/help-content/"
               },
@@ -1047,12 +1043,16 @@
                 "link": "/guides/content/inclusive-language/"
               },
               {
-                "text": "Names and word list",
-                "link": "/guides/content/product-and-feature-names-and-word-list/"
+                "text": "Grammar and mechanics",
+                "link": "/guides/content/grammar-and-mechanics/"
               },
               {
-                "text": "Writing approach",
-                "link": "/guides/content/writing-approach/"
+                "text": "Data formats",
+                "link": "/guides/content/data-formats/"
+              },
+              {
+                "text": "Names and word list",
+                "link": "/guides/content/product-and-feature-names-and-word-list/"
               }
             ]
           }
