@@ -1,3 +1,34 @@
+# [10.0.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.188.0-next.4...dialtone/v10.0.0-next.1) (2026-07-03)
+
+
+### Bug Fixes
+
+* **Dialtone Cli:** NO-JIRA wire into release and publish pipelines ([#1321](https://github.com/dialpad/dialtone/issues/1321)) ([84d9c3c](https://github.com/dialpad/dialtone/commit/84d9c3caa6f4f6e1c1eb5258f5e9c7a39ddd518d))
+* **Eslint Plugin Dialtone:** NO-JIRA declare eslint-plugin-n devDependency lost to pnpm 11 hoisting change ([2998ec7](https://github.com/dialpad/dialtone/commit/2998ec7385604ad78fc1686349d29515e3b1b97a))
+* **Modal:** DLT-3476 do not close when drag starts inside dialog and ends on backdrop ([#1322](https://github.com/dialpad/dialtone/issues/1322)) ([4d5726b](https://github.com/dialpad/dialtone/commit/4d5726b0ffd903c4bf7987820e90bc33c01f4f1f))
+* **Popover:** NO-JIRA guard onShow against window access after component unmount ([#1320](https://github.com/dialpad/dialtone/issues/1320)) ([4690585](https://github.com/dialpad/dialtone/commit/4690585c4e5c39d7099969552796c7b9817de5ae))
+* **Rich Text Editor:** DP-190440 strip trailing <br> before </p> on paste ([#1326](https://github.com/dialpad/dialtone/issues/1326)) ([28737c0](https://github.com/dialpad/dialtone/commit/28737c0066cf600eb4ebfffd512056c250de7599))
+* **Scripts:** NO-JIRA improve theme-to-mode migration script ([#1338](https://github.com/dialpad/dialtone/issues/1338)) ([59f220f](https://github.com/dialpad/dialtone/commit/59f220f9866ece44b3d4207f0a6f2ff25a65ba61))
+
+
+### Documentation
+
+* **Content:** DLT-3501 refresh content guidance IA ([#1345](https://github.com/dialpad/dialtone/issues/1345)) ([4085112](https://github.com/dialpad/dialtone/commit/40851126b3fd265bbe0a76847aeab33bfbea3d3f))
+* **Content:** DLT-3502 create writing approach guidance ([#1347](https://github.com/dialpad/dialtone/issues/1347)) ([a0c540d](https://github.com/dialpad/dialtone/commit/a0c540df098094c76742777223e49b171308c62e))
+
+
+### Features
+
+* **Combinator:** DLT-3479 add combinator grid view ([#1337](https://github.com/dialpad/dialtone/issues/1337)) ([b1f5599](https://github.com/dialpad/dialtone/commit/b1f559971b24b25081df33ff1b9c761ad5506ddc))
+* **Combinator:** DLT-3489 DLT-3490 DLT-3491 refine control panel ui ([#1343](https://github.com/dialpad/dialtone/issues/1343)) ([0385c2f](https://github.com/dialpad/dialtone/commit/0385c2f4a3945b176b55322932aaa68c03fc0848))
+* **Dialtone Tokens:** NO-JIRA publish swift prerelease tokens on next ([#1353](https://github.com/dialpad/dialtone/issues/1353)) ([294e1f0](https://github.com/dialpad/dialtone/commit/294e1f02b050a65db97dbcdcdd3ab87c59c4573f))
+* **Text:** DLT-3487 expose full typography size scale ([#1334](https://github.com/dialpad/dialtone/issues/1334)) ([0c8f4c6](https://github.com/dialpad/dialtone/commit/0c8f4c627bc51e5b53e0bde72c832361e38a6137))
+
+
+### BREAKING CHANGES
+
+* **Dialtone Tokens:** Dialtone version 10
+
 ## [9.187.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.187.1...dialtone/v9.187.2) (2026-06-16)
 
 
