@@ -349,7 +349,7 @@ export default {
     },
 
     clearHighlightIndex () {
-      if (this.showList) {
+      if (this.showList && this.getListElement()) {
         this.setHighlightIndex(-1);
       }
     },
@@ -394,8 +394,12 @@ export default {
     setInitialHighlightIndex () {
       if (!this.showList) return;
       this.$nextTick(() => {
-      // When the list's is shown, reset the highlight index.
-      // If the list is loading, set to -1
+        // Re-check inside the tick: the list may have closed, or when rendered
+        // outside its element is unreachable until the popover's enter
+        // transition completes (DLT-3520).
+        if (!this.showList || !this.getListElement()) return;
+        // When the list's is shown, reset the highlight index.
+        // If the list is loading, set to -1
         this.setHighlightIndex(this.loading ? -1 : 0);
       });
     },

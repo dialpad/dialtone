@@ -27,6 +27,11 @@ dist
 out
 coverage
 
+# Generated raw markdown and LLM discovery files #
+apps/dialtone-documentation/docs/.vuepress/public/md/
+apps/dialtone-documentation/docs/.vuepress/public/llms.txt
+apps/dialtone-documentation/docs/.vuepress/public/llms-full.txt
+
 # Dialtone icons #
 packages/dialtone-icons/index.js
 packages/dialtone-icons/src/icons
