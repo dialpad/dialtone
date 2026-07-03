@@ -17,6 +17,7 @@ describe('DialtoneLocalization Tests', () => {
 
     it('falls back to English when the stored locale is not supported by Dialtone', () => {
       window.localStorage.setItem(localeManagerStorageKey, 'ko-KR');
+      vi.stubGlobal('navigator', { language: 'ko-KR' });
 
       expect(DialtoneLocalization.getPreferredLocale()).toBe('en-US');
     });
