@@ -1,7 +1,6 @@
 ---
 title: Writing approach
 cardTitle: Approach
-cardOrder: 1
 prev: { link: "../", text: "Content" }
 next: { link: "../action-language/", text: "Action language" }
 description: How we write in-product copy.

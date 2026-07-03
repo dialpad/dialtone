@@ -1,7 +1,6 @@
 ---
 title: Error messages
 cardTitle: Errors
-cardOrder: 3
 prev: { link: "../action-language/", text: "Action language" }
 next: { link: "../forms-and-validation/", text: "Forms and validation" }
 description: What happened and how to recover.
