@@ -1,7 +1,8 @@
 import { reactive } from 'vue';
 import { getComponentInfo } from '@/src/lib/info';
-import { shouldExclude } from '@/src/lib/exclusion_rules';
+import { shouldDisable } from '@/src/lib/exclusion_rules';
 import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
+import { shouldDisableSlotClassProp } from '@/src/lib/utils';
 
 const MEMBER_GROUPS = ['slots', 'props', 'attributes', 'events'];
 
@@ -105,30 +106,33 @@ export function buildVariantState (component, documentation, variants, variantNa
 
 /**
  * Computes the set of member names that are currently disabled for an info
- * object, given the live prop values. A member is disabled when an exclusion
- * rule hides it, or (props only) a prop-dependency hides it; required members
- * are never disabled. Shared by the single view and the spec sheet so both
- * filter the rendered component identically for a given set of values.
+ * object, given the live prop and slot values. A member is disabled when an
+ * exclusion rule disables/hides it, a prop-dependency hides it (props only), or
+ * it's a class prop for a slot that's currently empty (props only); required
+ * members are never disabled. Shared by the single view and the spec sheet so
+ * both filter the rendered component identically for a given set of values.
  *
  * @param {object} info - The info object (reads `exclusions`, `props`, `slots`).
  * @param {object} propValues - Map of current prop values ({ propName: value }).
+ * @param {object} slotValues - Map of current slot values ({ slotName: value }).
  * @returns {Set<string>} The disabled member names.
  */
-export function computeDisabledMembers (info, propValues) {
+export function computeDisabledMembers (info, propValues, slotValues) {
   const disabled = new Set();
   const exclusions = info.exclusions;
   const depMap = buildDependencyMap(info.props ?? []);
 
   for (const member of (info.props ?? [])) {
     if (member.required) continue;
-    if (shouldExclude(member.name, 'props', exclusions, propValues) ||
-      shouldHideProp(member.name, depMap, propValues)) {
+    if (shouldDisable(member.name, 'props', exclusions, propValues, slotValues) ||
+      shouldHideProp(member.name, depMap, propValues) ||
+      shouldDisableSlotClassProp(member.name, slotValues)) {
       disabled.add(member.name);
     }
   }
   for (const member of (info.slots ?? [])) {
     if (member.required) continue;
-    if (shouldExclude(member.name, 'slots', exclusions, propValues)) {
+    if (shouldDisable(member.name, 'slots', exclusions, propValues, slotValues)) {
       disabled.add(member.name);
     }
   }

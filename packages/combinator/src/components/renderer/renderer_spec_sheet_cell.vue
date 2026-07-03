@@ -102,7 +102,9 @@ const emit = defineEmits(['select']);
 // All three derive from this cell's own reactive options, so only this cell
 // re-renders when its options mutate — interactions don't fan out to siblings.
 const bindings = computed(() => props.options.bindings.get());
-const disabledMembers = computed(() => computeDisabledMembers(props.info, props.options.props));
+const disabledMembers = computed(() => {
+  return computeDisabledMembers(props.info, props.options.props, props.options.slots);
+});
 const renderedSlots = computed(() => nonEmptySlots(props.options.slots));
 
 /**

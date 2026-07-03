@@ -1,8 +1,8 @@
 <template>
   <dt-stack gap="200">
-    <dt-stack gap="100" justify="between">
+    <dt-stack gap="100" justify="space-between">
       <dt-stack>
-        <dt-text as="h2" kind="headline" :size="500" strength="medium" density="200" class="d-fs-400">
+        <dt-text as="h2" variant="headline-xl" size="400" strength="medium" density="200">
           Katie Rodriguez
         </dt-text>
         <dt-stack direction="row" gap="75">
@@ -16,17 +16,17 @@
         </dt-stack>
       </dt-stack>
       <dt-stack gap="25">
-        <dt-text kind="body" :size="300" density="200" strength="semibold" tone="tertiary">
+        <dt-text variant="body-md" density="200" strength="semibold" tone="tertiary">
           Chief Customer Success Officer
         </dt-text>
-        <dt-text kind="body" :size="200" density="200">
-          <dt-text strength="medium">
+        <dt-text variant="body-sm" density="200">
+          <dt-text strength="semibold">
             6:19 am
           </dt-text> local time
         </dt-text>
       </dt-stack>
     </dt-stack>
-    <dt-stack gap="100" direction="row" justify="between">
+    <dt-stack gap="100" direction="row" class="d-jc-space-between">
       <dt-button class="d-fl1" kind="muted" importance="outlined">
         <template #startIcon="{ iconSize }">
           <dt-icon-phone :size="iconSize" />

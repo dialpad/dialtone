@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/eslint-plugin-dialtone",
-  "version": "1.14.0-next.1",
+  "version": "1.14.0-next.2",
   "description": "dialtone eslint plugin",
   "keywords": [
     "Dialpad",
@@ -61,6 +61,7 @@
   },
   "devDependencies": {
     "@dialpad/dialtone-vue": "workspace:*",
+    "eslint-plugin-n": "^17.0.0",
     "mocha": "^10.0.0",
     "proxyquire": "^2.1.3",
     "vue-eslint-parser": ">=9"

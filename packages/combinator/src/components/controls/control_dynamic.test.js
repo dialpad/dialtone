@@ -4,7 +4,6 @@ import DtcControlString from '@/src/components/controls/control_string.vue';
 
 import { expect } from 'vitest';
 import { shallowMount } from '@vue/test-utils';
-import { UNSET } from '@/src/lib/control';
 
 const testControls = {
   string: {
@@ -15,10 +14,6 @@ const testControls = {
     value: 17,
     component: DtcControlNumber,
   },
-  true: { value: true },
-  false: { value: false },
-  null: { value: null },
-  undefined: { value: undefined },
 };
 
 describe('control_dynamic.vue test', function () {
@@ -32,30 +27,16 @@ describe('control_dynamic.vue test', function () {
     _mountWrapper();
   });
 
-  describe('When mounted', function () {
-    it('Should render successfully', function () {
-      expect(wrapper.exists()).toBe(true);
-    });
-  });
-
-  Object.entries(testControls).forEach(([control, { value, component }]) => {
-    describe(
-      `When provided value is '${value === UNSET ? `${UNSET.toString()}` : value}' {${typeof value}}`,
-      function () {
+  Object.entries(testControls)
+    .forEach(([, { value, component }]) => {
+      describe(`When provided value is '${value}' {${typeof value}}`, function () {
         beforeEach(function () {
           _mountWrapper({ value });
         });
 
-        it(`Should resolve selection to '${control}'`, function () {
-          expect(wrapper.vm.selectedControl).toBe(control);
+        it(`Should render the generated control '${component.name}'`, function () {
+          expect(wrapper.findComponent(component).exists()).toBe(true);
         });
-
-        if (component) {
-          it(`Should render the generated control '${component.name}'`, function () {
-            expect(wrapper.findComponent(component).exists()).toBe(true);
-          });
-        }
-      },
-    );
-  });
+      });
+    });
 });

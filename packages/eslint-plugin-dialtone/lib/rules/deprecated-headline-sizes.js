@@ -8,6 +8,15 @@
 // Rule Definition
 // ------------------------------------------------------------------------------
 
+const {
+  findStaticAttribute,
+  getStaticAttributeValue,
+  hasAttribute,
+  hasDirectiveAttribute,
+  isDtTextComponent,
+  removeAttributeFix,
+} = require('../util/vue-attribute-helpers');
+
 const SIZE_MAP = {
   xxxl: '3xl',
   xxl: '2xl',
@@ -24,8 +33,12 @@ module.exports = {
     fixable: 'code',
     schema: [],
     messages: {
-      deprecatedSize: 'Headline size "{{oldSize}}" has been renamed to "{{newSize}}". Update size="{{oldSize}}" to size="{{newSize}}".',
-      deprecatedClass: 'CSS class "{{oldClass}}" has been renamed to "{{newClass}}". Update to use the new class name.',
+      deprecatedSize:
+        'Headline size "{{oldSize}}" has been renamed to "{{newSize}}". Update size="{{oldSize}}" to size="{{newSize}}".',
+      deprecatedDtTextSize:
+        'DtText headline size "{{oldSize}}" has moved to variant="headline-{{newSize}}".',
+      deprecatedClass:
+        'CSS class "{{oldClass}}" has been renamed to "{{newClass}}". Update to use the new class name.',
     },
   },
 
@@ -37,6 +50,48 @@ module.exports = {
         if (node.key.name === 'size' && node.value && node.value.value) {
           const sizeValue = node.value.value;
           if (SIZE_MAP[sizeValue]) {
+            if (isDtTextComponent(node)) {
+              const newSize = SIZE_MAP[sizeValue];
+              const variant = `headline-${newSize}`;
+              const kindAttribute = findStaticAttribute(node, 'kind');
+              const kindValue = getStaticAttributeValue(kindAttribute);
+              const hasVariantAttr = hasAttribute(node, 'variant');
+              const hasDynamicKindAttr = hasDirectiveAttribute(node, 'kind');
+              const canFixToVariant =
+                !hasVariantAttr &&
+                !hasDynamicKindAttr &&
+                kindValue === 'headline';
+
+              context.report({
+                node,
+                messageId: 'deprecatedDtTextSize',
+                data: {
+                  oldSize: sizeValue,
+                  newSize,
+                },
+                ...(canFixToVariant
+                  ? {
+                      fix(fixer) {
+                        const fixes = [
+                          fixer.replaceText(node, `variant="${variant}"`),
+                        ];
+                        if (kindAttribute) {
+                          fixes.push(
+                            removeAttributeFix(
+                              fixer,
+                              sourceCode,
+                              kindAttribute,
+                            ),
+                          );
+                        }
+                        return fixes;
+                      },
+                    }
+                  : {}),
+              });
+              return;
+            }
+
             context.report({
               node,
               messageId: 'deprecatedSize',
@@ -45,7 +100,10 @@ module.exports = {
                 newSize: SIZE_MAP[sizeValue],
               },
               fix(fixer) {
-                return fixer.replaceText(node.value, `"${SIZE_MAP[sizeValue]}"`);
+                return fixer.replaceText(
+                  node.value,
+                  `"${SIZE_MAP[sizeValue]}"`,
+                );
               },
             });
           }

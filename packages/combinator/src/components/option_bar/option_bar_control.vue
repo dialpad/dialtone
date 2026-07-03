@@ -14,11 +14,13 @@
       >
         <dt-stack
           direction="row"
-          gap="300"
+          gap="100"
           align="baseline"
         >
           <dt-text
             v-dt-tooltip="{ message: description, placement: 'left' }"
+            kind="label"
+            :size="100"
             as="span"
             class="d-tt-capitalize"
             :tone="disabled ? 'muted' : undefined"
@@ -32,8 +34,8 @@
           />
           <dt-text
             v-if="required"
-            :size="100"
-            kind="label"
+            variant="label-xs"
+            :size="50"
             strength="normal"
             tone="critical"
             class="d-fs-50"
@@ -45,10 +47,19 @@
             :size="100"
             kind="label"
             strength="normal"
-            tone="muted"
+            tone="disabled"
             class="d-fs-50"
           >
             v-model
+          </dt-text>
+          <dt-text
+            v-if="deprecated"
+            variant="label-xs"
+            :size="50"
+            strength="normal"
+            tone="warning"
+          >
+            Deprecated
           </dt-text>
         </dt-stack>
         <dt-button
@@ -77,7 +88,7 @@
 
 <script setup>
 import DtIconLock from '@dialpad/dialtone-icons/vue/lock';
-import { DtBadge, DtButton, DtInput, DtText } from '@dialpad/dialtone-vue';
+import { DtButton, DtInput, DtText } from '@dialpad/dialtone-vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed, ref, watch } from 'vue';
 import { deserializeControlValue, serializeControlValue } from '@/src/lib/control';
@@ -135,6 +146,13 @@ const props = defineProps({
     default: false,
   },
   /**
+   * If the member is deprecated.
+   */
+  deprecated: {
+    type: Boolean,
+    default: false,
+  },
+  /**
    * Prevent the control from being modified.
    */
   locked: {
@@ -179,15 +197,19 @@ const controlComponent = computed(() => {
  */
 const controlArgs = computed(() => {
   const isInactive = props.disabled && !props.locked;
+  const rawDefault = props.controlData.component.props?.value?.default;
+  const defaultValue = typeof rawDefault === 'function' ? rawDefault() : rawDefault;
   const displayValue = isInactive
-    ? props.controlData.component.props?.value?.default?.() ?? controlValue.value
+    ? defaultValue ?? controlValue.value
     : controlValue.value;
 
   return {
     value: displayValue,
     disabled: props.locked || props.disabled,
     tags: props.tags,
+    label: controlLabel.value,
     ...props.args,
+    required: props.required,
   };
 });
 

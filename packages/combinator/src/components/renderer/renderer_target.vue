@@ -6,8 +6,17 @@
 
 <script setup>
 import {
-  capitalize, computed, getCurrentInstance, h, nextTick,
-  onBeforeUnmount, onMounted, onUpdated, ref, render, useSlots,
+  capitalize,
+  computed,
+  getCurrentInstance,
+  h,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  onUpdated,
+  ref,
+  render,
+  useSlots,
 } from 'vue';
 import { DtNotice } from '@dialpad/dialtone-vue';
 

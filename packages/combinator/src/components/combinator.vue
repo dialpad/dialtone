@@ -39,9 +39,9 @@
             <dt-button
               v-dt-tooltip="'Presets'"
               v-bind="attrs"
-              importance="clear"
+              importance="outlined"
               kind="muted"
-              :size="isFullScreen ? 'lg' : 'md'"
+              :size="isFullScreen ? '400' : '300'"
               leading-class="d-pbs-1 d-pis-150 d-mie-n25"
             >
               <template #leading>
@@ -178,6 +178,7 @@
       <dtc-option-bar
         v-if="!blueprint && viewMode === 'single'"
         v-model:options="options"
+        v-model:settings="settings"
         :component="component"
         :info="info"
         :style="optionBarWidth ? { 'inline-size': optionBarWidth } : {}"
@@ -218,6 +219,8 @@ import {
 } from '@/src/lib/variant_state';
 import {
   SETTINGS_BACKGROUND_KEY,
+  SETTINGS_HIDE_DEPRECATED_KEY,
+  SETTINGS_HIDE_INACTIVE_KEY,
   SETTINGS_INDENT_KEY,
   SETTINGS_POSITIONING_KEY,
   SETTINGS_SCHEME_KEY,
@@ -396,6 +399,16 @@ const settings = computedModel(
           ? false
           : cachedRef(SETTINGS_VERBOSE_KEY, defaultSettings.code['default-verbose']),
       },
+      controls: {
+        hideDeprecated: cachedRef(
+          SETTINGS_HIDE_DEPRECATED_KEY,
+          defaultSettings.controls['default-hide-deprecated'],
+        ),
+        hideInactive: cachedRef(
+          SETTINGS_HIDE_INACTIVE_KEY,
+          defaultSettings.controls['default-hide-inactive'],
+        ),
+      },
     });
   }),
   (e, model) => {
@@ -524,7 +537,9 @@ function toggleFullScreen () {
  *
  * @type {ComputedRef<Set<string>>}
  */
-const disabledMembers = computed(() => computeDisabledMembers(info.value, options.value.props));
+const disabledMembers = computed(() => {
+  return computeDisabledMembers(info.value, options.value.props, options.value.slots);
+});
 
 onErrorCaptured((exception) => {
   console.error('Internal vue error: \n', exception);
@@ -605,7 +620,7 @@ export default {
   }
 
   &__resizer {
-    inline-size: 32px;
+    inline-size: var(--dt-layout-50);
     cursor: col-resize;
     flex-shrink: 0;
     position: relative;
@@ -626,7 +641,7 @@ export default {
   }
 
   &__controls {
-    inline-size: var(--dt-size-900);
+    inline-size: var(--dt-layout-450);
     max-inline-size: var(--dt-size-1000);
     flex-shrink: 0;
     max-block-size: var(--dt-size-950);

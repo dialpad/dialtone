@@ -1,7 +1,7 @@
 ---
 title: Font Size
 description: Utilities to change an element's font-size.
-keywords: ["text size", "type size", "type scale"]
+keywords: ['text size', 'type size', 'type scale']
 ---
 
 > [!WARNING] Use DtText over CSS Utilities
@@ -21,7 +21,14 @@ keywords: ["text size", "type size", "type scale"]
   <div class="d-code--sm d-docsite-code">d-fs-300</div><div><p class="d-lc-1 d-fs-300">The quick brown fox jumps over the lazy dog.</p></div>
   <div class="d-code--sm d-docsite-code">d-fs-350</div><div><p class="d-lc-1 d-fs-350">The quick brown fox jumps over the lazy dog.</p></div>
   <div class="d-code--sm d-docsite-code">d-fs-400</div><div><p class="d-lc-1 d-fs-400">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-450</div><div><p class="d-lc-1 d-fs-450">The quick brown fox jumps over the lazy dog.</p></div>
   <div class="d-code--sm d-docsite-code">d-fs-500</div><div><p class="d-lc-1 d-fs-500">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-550</div><div><p class="d-lc-1 d-fs-550">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-600</div><div><p class="d-lc-1 d-fs-600">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-650</div><div><p class="d-lc-1 d-fs-650">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-700</div><div><p class="d-lc-1 d-fs-700">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-750</div><div><p class="d-lc-1 d-fs-750">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-800</div><div><p class="d-lc-1 d-fs-800">The quick brown fox jumps over the lazy dog.</p></div>
 </div>
 <!-- @code -->
 <p class="d-fs-{stop}">...</p>

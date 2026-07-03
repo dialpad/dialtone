@@ -1,6 +1,7 @@
 import clone from 'just-clone';
 import { controlMap } from '@/src/lib/control';
 import { extendBinding, extendEvent, extendMember } from '@/src/lib/info_extend';
+import { supportsRootClass } from '@/src/lib/utils';
 
 /**
  * Gets component data from the documentation and processing on it
@@ -50,7 +51,8 @@ function extendInfo (info, component) {
 
   renameModelProp(info);
 
-  const attributes = getAttributes(info);
+  const attributes = getAttributes(info) ?? [];
+  addRootClassAttribute(info, attributes);
 
   if (info.slots) {
     info.slots = processMembers(info.slots);
@@ -61,7 +63,7 @@ function extendInfo (info, component) {
     info.props = processMembers(info.props, binding => extendBinding(binding, defaultCache));
   }
 
-  if (attributes) {
+  if (attributes.length) {
     info.attributes = processMembers(attributes);
   }
 
@@ -114,6 +116,28 @@ function getAttributes (info) {
       initialValue: defaultValue,
       defaultValue,
     };
+  });
+}
+
+/**
+ * Adds the native `class` attribute unless the component is known not to apply
+ * class fallthrough directly to its rendered root element.
+ *
+ * @param {object} info - The unprocessed info object.
+ * @param {Array} attributes - Attribute members to mutate.
+ */
+function addRootClassAttribute (info, attributes) {
+  if (!supportsRootClass(info.displayName)) return;
+  if (attributes.some(attribute => attribute.name === 'class')) return;
+
+  attributes.unshift({
+    name: 'class',
+    description: 'Adds a class to the root element of this component',
+    type: {
+      name: 'string',
+    },
+    initialValue: '',
+    defaultValue: '',
   });
 }
 
@@ -174,7 +198,7 @@ function getComponentDefaults (component) {
         return [
           entryKey,
           entryValue.type !== Function && typeof entryDefault === 'function'
-            ? entryDefault()
+            ? entryDefault({})
             : entryDefault,
         ];
       });

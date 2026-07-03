@@ -1,8 +1,26 @@
+import { disableAndClearProps, hasNoValue, hasValue } from '@/src/lib/exclusion_rules';
+
+const LEGACY_ICON_PROPS = ['iconPosition', 'iconClass'];
+const LINK_DEPRECATED_PROPS = ['underline', 'linkInverted'];
+
 export default {
   defaults: {
     props: {
       kind: { tokenCategory: 'color:d-btn--:color' },
       linkKind: { tokenCategory: 'color:d-link--:color' },
+      iconPosition: {
+        searchKeywords: ['icon placement', 'left icon', 'right icon', 'top icon', 'bottom icon'],
+      },
+      startIconClass: { searchKeywords: ['left icon class', 'leading icon class'] },
+      endIconClass: { searchKeywords: ['right icon class', 'trailing icon class'] },
+      blockStartIconClass: { searchKeywords: ['top icon class'] },
+      blockEndIconClass: { searchKeywords: ['bottom icon class'] },
+    },
+    slots: {
+      startIcon: { searchKeywords: ['left icon', 'leading icon'] },
+      endIcon: { searchKeywords: ['right icon', 'trailing icon'] },
+      blockStartIcon: { searchKeywords: ['top icon'] },
+      blockEndIcon: { searchKeywords: ['bottom icon'] },
     },
   },
 
@@ -12,6 +30,38 @@ export default {
       hide: {
         props: ['importance', 'kind', 'circle', 'loading', 'active', 'type', 'size'],
       },
+    },
+    {
+      when: { link: v => !v },
+      ...disableAndClearProps(LINK_DEPRECATED_PROPS),
+    },
+    {
+      when: { link: true },
+      ...disableAndClearProps(LEGACY_ICON_PROPS),
+    },
+    {
+      when: { link: true, linkUnderline: false },
+      ...disableAndClearProps(['underline']),
+    },
+    {
+      whenSlots: { icon: hasNoValue },
+      ...disableAndClearProps(LEGACY_ICON_PROPS),
+    },
+    {
+      whenSlots: { startIcon: hasValue },
+      ...disableAndClearProps(LEGACY_ICON_PROPS),
+    },
+    {
+      whenSlots: { endIcon: hasValue },
+      ...disableAndClearProps(LEGACY_ICON_PROPS),
+    },
+    {
+      whenSlots: { blockStartIcon: hasValue },
+      ...disableAndClearProps(LEGACY_ICON_PROPS),
+    },
+    {
+      whenSlots: { blockEndIcon: hasValue },
+      ...disableAndClearProps(LEGACY_ICON_PROPS),
     },
     {
       when: { kind: 'muted' },

@@ -27,6 +27,17 @@ const _sortAlphabetically = (str1, str2) => {
   if (str1 < str2) return -1;
   return 0;
 };
+const _normalizePagePath = (pagePath) => pagePath?.replace(/\.html$/, '/');
+const _normalizeSidebarPath = (pagePath) => _normalizePagePath(pagePath)?.replace(/\/$/, '');
+
+function _getChildrenFromSidebarItems (items, normalizedPath, useSectionItems = false) {
+  if (!Array.isArray(items)) return null;
+
+  const matchingItem = items.find(item => _normalizeSidebarPath(item.link) === normalizedPath);
+  if (matchingItem) return matchingItem.children || (useSectionItems ? items : []);
+
+  return useSectionItems ? items : null;
+}
 
 // Pages at /foundations/* that should NOT appear as standalone cards on the
 // Foundations wall-of-cards (usually because they're children of another parent).
@@ -112,7 +123,7 @@ function _extractFrontmatter (app, path, options, exceptions = []) {
 
   // Filter out the parent page itself (e.g., "Overview" which links to the index page)
   const childPages = children.filter(child => child.link !== path);
-  const sortingArr = childPages.map(child => child.text.toLowerCase().replaceAll(' ', '-'));
+  const sortingArr = childPages.map(child => _normalizePagePath(child.link));
   const indexPage = app.pages.find(page => page.path === path);
 
   if (!indexPage) {
@@ -135,7 +146,12 @@ function _extractFrontmatter (app, path, options, exceptions = []) {
         ...page.frontmatter,
       };
     })
-    .sort((a, b) => sortingArr.indexOf(a.fileName) - sortingArr.indexOf(b.fileName));
+    .sort((a, b) => {
+      const indexA = a.cardOrder ?? sortingArr.indexOf(_normalizePagePath(a.link));
+      const indexB = b.cardOrder ?? sortingArr.indexOf(_normalizePagePath(b.link));
+      return (indexA === -1 ? Number.MAX_SAFE_INTEGER : indexA) -
+        (indexB === -1 ? Number.MAX_SAFE_INTEGER : indexB);
+    });
 }
 
 function _extractComponentStatus (app) {
@@ -239,6 +255,8 @@ function _injectFrontmatterIntoSidebar (app, options) {
 }
 
 function getChildrenPageNames (path, pages) {
+  const normalizedPath = _normalizeSidebarPath(path);
+
   // Handle new topLevelGroups structure
   if (pages?.topLevelGroups) {
     // Search all top-level groups and merge their sections
@@ -256,37 +274,25 @@ function getChildrenPageNames (path, pages) {
     return [];
   }
 
-  // If pages is already an array (from recursive call), search within it
   if (Array.isArray(pages)) {
-    const item = pages.find(item => {
-      const itemPath = item.link?.replace(/\/$/, '');
-      const searchPath = `/${path}`.replace(/\/$/, '');
-      return itemPath === searchPath;
-    });
-    return item?.children || [];
+    return _getChildrenFromSidebarItems(pages, normalizedPath) || [];
   }
 
-  const [, parent, child] = path.split('/');
-  const page = Object.keys(pages).find(pageKey => {
-    return pageKey === `/${parent}/` || pages[pageKey]?.link?.endsWith(`${path}/`);
-  });
+  const [, parent] = path.split('/');
+  const sectionKey = `/${parent}/`;
+  const directSectionChildren = _getChildrenFromSidebarItems(
+    pages[sectionKey],
+    normalizedPath,
+    _normalizeSidebarPath(sectionKey) === normalizedPath,
+  );
+  if (directSectionChildren) return directSectionChildren;
 
-  // Handle both nested structure (first item has children) and flat structure (array IS the children)
-  let children;
-  if (pages?.[page]) {
-    const pageItems = pages[page];
-    // Check if first item has children property (nested structure)
-    if (pageItems[0]?.children) {
-      children = pageItems[0].children;
-    } else if (Array.isArray(pageItems)) {
-      // Flat structure - the array itself contains the items
-      children = pageItems;
-    }
+  for (const sectionItems of Object.values(pages)) {
+    const children = _getChildrenFromSidebarItems(sectionItems, normalizedPath);
+    if (children) return children;
   }
 
-  if (!child) return children || [];
-
-  return getChildrenPageNames(child, children);
+  return [];
 }
 
 export const dialtoneVuepressTheme = (options) => ({
@@ -346,7 +352,7 @@ export const dialtoneVuepressTheme = (options) => ({
           '/guides/content/inclusive-language/',
           '/guides/content/voice-and-tone/',
         ]);
-      _extractFrontmatter(app, '/guides/content/', options);
+      _extractFrontmatter(app, '/guides/content/', options, ['/guides/content/voice-and-tone/']);
       _extractFrontmatter(app, '/components/', options, ['/components/status/']);
       _extractFrontmatter(app, '/foundations/', options, FOUNDATIONS_OVERVIEW_EXCLUDES);
       _extractFrontmatter(app, '/foundations/colors/', options);

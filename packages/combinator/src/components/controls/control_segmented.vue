@@ -1,37 +1,62 @@
 <template>
-  <dt-text
-    kind="label"
-    :size="100"
-    tone="secondary"
-    class="d-input__label-text d-c-default"
-  >
-    <slot />
-  </dt-text>
-  <dt-segmented-control
-    :model-value="String(value)"
-    :size="100"
+  <dtc-control-clearable-shell
+    :label="label"
+    :empty="isEmpty"
+    :expanded="expanded"
     :disabled="disabled"
-    @change="onInput"
+    :required="required"
+    :clearable="clearable"
+    @add="addValue"
+    @clear="clearValue"
   >
-    <dt-segmented-control-item
-      v-for="option in options"
-      :key="option.value"
-      v-dt-tooltip="option.resolved ?? undefined"
-      :value="String(option.value)"
+    <template #label>
+      <slot />
+    </template>
+    <template #expanded-label>
+      <dt-text
+        kind="label"
+        :size="100"
+        tone="secondary"
+        class="d-input__label-text d-c-default"
+      >
+        <slot />
+      </dt-text>
+    </template>
+    <dt-segmented-control
+      ref="segmentedRef"
+      class="d-fl1"
+      :model-value="selectedValue"
+      :size="100"
+      :disabled="disabled"
+      @change="onInput"
+      @focusout="collapseIfEmpty"
     >
-      {{ option.label }}
-    </dt-segmented-control-item>
-  </dt-segmented-control>
+      <dt-segmented-control-item
+        v-for="option in options"
+        :key="option.value"
+        v-dt-tooltip="option.resolved ?? undefined"
+        :value="String(option.value)"
+      >
+        {{ option.label }}
+      </dt-segmented-control-item>
+    </dt-segmented-control>
+  </dtc-control-clearable-shell>
 </template>
 
 <script setup>
 import { DtSegmentedControl, DtSegmentedControlItem, DtText } from '@dialpad/dialtone-vue';
 
+import DtcControlClearableShell from './control_clearable_shell.vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { resolveTokenValue } from '@/src/lib/tokens';
-import { computed } from 'vue';
+import { useClearableState } from '@/src/lib/utils_vue';
+import { computed, nextTick, ref, watch } from 'vue';
 
 const props = defineProps({
+  label: {
+    type: String,
+    default: '',
+  },
   value: {
     type: undefined,
     required: true,
@@ -43,6 +68,14 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false,
+  },
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  clearable: {
+    type: Boolean,
+    default: true,
   },
   generateLabel: {
     type: Function,
@@ -59,6 +92,10 @@ const props = defineProps({
 });
 
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
+
+const expanded = ref(false);
+const segmentedRef = ref(null);
+const hasPendingValue = ref(false);
 
 const options = computed(() => {
   return props.validValues?.map(v => ({
@@ -79,9 +116,39 @@ const valueMap = computed(() => {
   return map;
 });
 
+const { isEmpty, clearDisabled } = useClearableState(props);
+
+const selectedValue = computed(() => isEmpty.value ? '' : String(props.value));
+
 function onInput (stringValue) {
+  hasPendingValue.value = true;
   emit(VALUE_UPDATE_EVENT, valueMap.value[stringValue]);
 }
+
+async function addValue () {
+  expanded.value = true;
+  await nextTick();
+  segmentedRef.value?.$el?.querySelector('[data-qa="dt-segmented-control-item"]')?.focus();
+}
+
+function collapseIfEmpty (event) {
+  const nextTarget = event?.relatedTarget;
+  if (nextTarget && segmentedRef.value?.$el?.contains(nextTarget)) return;
+  if (!isEmpty.value || hasPendingValue.value) return;
+  expanded.value = false;
+}
+
+function clearValue () {
+  if (clearDisabled.value) return;
+  expanded.value = false;
+  hasPendingValue.value = false;
+  emit(VALUE_UPDATE_EVENT, null);
+}
+
+watch(() => props.value, () => {
+  hasPendingValue.value = false;
+  if (isEmpty.value) expanded.value = false;
+});
 </script>
 
 <script>

@@ -1,6 +1,13 @@
-
+import { disableAndClearProps, hasValue } from '@/src/lib/exclusion_rules';
 
 export default {
+  exclusions: [
+    {
+      when: { externalAnchorElement: hasValue },
+      ...disableAndClearProps(['externalAnchor']),
+    },
+  ],
+
   default: {
     props: {
       open: { initialValue: true },

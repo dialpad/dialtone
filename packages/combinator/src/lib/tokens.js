@@ -64,13 +64,13 @@ function formatPx (pxValue) {
 /**
  * Resolves a token value to a human-readable display string.
  *
- * @param {string} category - The token category (e.g. 'spacing', 'icon-size', 'typography-size')
+ * @param {string} category - The token category (e.g. 'spacing', 'icon-size', 'typography-size', 'typography-variant')
  * @param {string|number} value - The prop value (e.g. '200', '300')
- * @param {object} [propValues] - Current prop values (needed for typography-size to read 'kind')
+ * @param {object} [propValues] - Current prop values (needed for typography-size to read 'kind' and 'variant')
  * @returns {string|null} Display string (e.g. '16px', '14px', '16px / 1.6') or null
  */
 export function resolveTokenValue (category, value, propValues) {
-  const cacheKey = `${category}:${value}:${propValues?.kind ?? ''}`;
+  const cacheKey = `${category}:${value}:${propValues?.kind ?? ''}:${propValues?.variant ?? ''}`;
   if (cache.has(cacheKey)) return cache.get(cacheKey);
 
   let result = null;
@@ -87,6 +87,9 @@ export function resolveTokenValue (category, value, propValues) {
       break;
     case 'typography-size':
       result = resolveTypographySize(value, propValues, categoryArgs[0]);
+      break;
+    case 'typography-variant':
+      result = resolveTypographyVariant(value);
       break;
     case 'line-height':
       result = resolveLineHeight(value);
@@ -232,15 +235,11 @@ function resolveLineHeight (value) {
   return raw;
 }
 
-function resolveTypographySize (value, propValues, kindOverride) {
-  const kind = kindOverride || propValues?.kind || 'body';
-  const suffix = TEXT_SIZE_TO_CSS_SUFFIX[value];
-  if (!suffix) return null;
-
+function resolveTypographyMetrics (className) {
   const el = getMeasureElement();
   let fontSize, lineHeight;
   try {
-    el.className = `d-text-${kind} d-text-${kind}--${suffix}`;
+    el.className = className;
     el.textContent = 'X';
     const styles = getComputedStyle(el);
     fontSize = styles.fontSize;
@@ -262,4 +261,23 @@ function resolveTypographySize (value, propValues, kindOverride) {
     }
   }
   return formattedSize;
+}
+
+function resolveTypographyVariant (value) {
+  const match = String(value).match(/^(headline|body|label|code)-(.+)$/);
+  if (!match) return null;
+
+  return resolveTypographyMetrics(`d-text-${match[1]}--${match[2]}`);
+}
+
+function resolveTypographySize (value, propValues, kindOverride) {
+  if (!kindOverride && (propValues?.variant || !propValues?.kind)) {
+    const px = resolveCssVar(`--dt-font-size-${value}`);
+    return px ? formatPx(px) : null;
+  }
+
+  const kind = kindOverride || propValues?.kind || 'body';
+  const suffix = TEXT_SIZE_TO_CSS_SUFFIX[value];
+  if (!suffix) return null;
+  return resolveTypographyMetrics(`d-text-${kind} d-text-${kind}--${suffix}`);
 }

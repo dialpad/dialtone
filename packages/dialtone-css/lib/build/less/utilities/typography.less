@@ -28,496 +28,913 @@
 //  $   FONT FAMILY
 //  ----------------------------------------------------------------------------
 @layer dialtone.utilities {
-.d-ff-custom { font-family: var(--dt-font-family-body) !important; }
-.d-ff-sans { font-family: var(--dt-font-family-body) !important; }
-.d-ff-mono { font-family: var(--dt-font-family-mono) !important; }
-.d-ff-marketing { font-family: var(--dt-font-family-expressive) !important; }
-.d-ff-unset { font-family: unset !important; }
+  .d-ff-custom {
+    font-family: var(--dt-font-family-body) !important;
+  }
+
+  .d-ff-sans {
+    font-family: var(--dt-font-family-body) !important;
+  }
+
+  .d-ff-mono {
+    font-family: var(--dt-font-family-mono) !important;
+  }
+
+  .d-ff-marketing {
+    font-family: var(--dt-font-family-expressive) !important;
+  }
+
+  .d-ff-unset {
+    font-family: unset !important;
+  }
 }
 
 @layer dialtone.reset {
-//  ============================================================================
-//  $   RESET HEADERS & PARAGRAPH MARGINS
-//  ----------------------------------------------------------------------------
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-ol,
-ul {
+  //  ============================================================================
+  //  $   RESET HEADERS & PARAGRAPH MARGINS
+  //  ----------------------------------------------------------------------------
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  ol,
+  ul {
     margin-block: 0;
-}
+  }
 }
 
 @layer dialtone.base {
-//  ============================================================================
-//  $   HEADLINE STYLES
-//  ----------------------------------------------------------------------------
-//  NOTE: the comma-delimited classes are backwards-compatible,
-//        and will be removed once no longer in use in the product.
-//        e.g. The BEMish `d-[kind]--[var]` replaces the others. If they're
-//        not comma-delimited then they're either new or already were ok.
-.d-headline--eyebrow,
-.d-headline-eyebrow {
+  //  ============================================================================
+  //  $   HEADLINE STYLES
+  //  ----------------------------------------------------------------------------
+  //  NOTE: the comma-delimited classes are backwards-compatible,
+  //        and will be removed once no longer in use in the product.
+  //        e.g. The BEMish `d-[kind]--[var]` replaces the others. If they're
+  //        not comma-delimited then they're either new or already were ok.
+  .d-headline--eyebrow,
+  .d-headline-eyebrow {
     font: var(--dt-typography-headline-eyebrow);
     text-transform: var(--dt-typography-headline-eyebrow-text-case);
-}
+  }
 
-.d-headline--sm,
-.d-headline-small {
+  .d-headline--sm,
+  .d-headline-small {
     font: var(--dt-typography-headline-sm);
-}
+  }
 
-.d-headline--sm-soft,
-.d-headline-soft-small {
+  .d-headline--sm-soft,
+  .d-headline-soft-small {
     font: var(--dt-typography-headline-sm-soft);
-}
+  }
 
-.d-headline--md,
-.d-headline-medium {
+  .d-headline--md,
+  .d-headline-medium {
     font: var(--dt-typography-headline-md);
-}
+  }
 
-.d-headline--sm-compact,
-.d-headline-compact-small {
+  .d-headline--sm-compact,
+  .d-headline-compact-small {
     font: var(--dt-typography-headline-sm-compact);
-}
+  }
 
-.d-headline--sm-soft-compact,
-.d-headline-compact-soft-small {
+  .d-headline--sm-soft-compact,
+  .d-headline-compact-soft-small {
     font: var(--dt-typography-headline-sm-soft-compact);
-}
+  }
 
-.d-headline--md-compact,
-.d-headline-compact-medium {
+  .d-headline--md-compact,
+  .d-headline-compact-medium {
     font: var(--dt-typography-headline-md-compact);
-}
+  }
 
-.d-headline--lg,
-.d-headline-large {
+  .d-headline--lg,
+  .d-headline-large {
     font: var(--dt-typography-headline-lg);
-}
+  }
 
-.d-headline--lg-soft {
+  .d-headline--lg-soft {
     font: var(--dt-typography-headline-lg-soft);
-}
+  }
 
-.d-headline--lg-compact,
-.d-headline-compact-large {
+  .d-headline--lg-compact,
+  .d-headline-compact-large {
     font: var(--dt-typography-headline-lg-compact);
-}
+  }
 
-.d-headline--lg-soft-compact {
+  .d-headline--lg-soft-compact {
     font: var(--dt-typography-headline-lg-soft-compact);
-}
+  }
 
-.d-headline--xl,
-.d-headline-extra-large {
+  .d-headline--xl,
+  .d-headline-extra-large {
     font: var(--dt-typography-headline-xl);
-}
+  }
 
-.d-headline--xl-compact {
+  .d-headline--xl-compact {
     font: var(--dt-typography-headline-xl-compact);
-}
+  }
 
-.d-headline--xxl,
-.d-headline-extra-extra-large {
+  .d-headline--xxl,
+  .d-headline-extra-extra-large {
     font: var(--dt-typography-headline-xxl);
-}
+  }
 
-.d-headline--xxl-compact {
+  .d-headline--xxl-compact {
     font: var(--dt-typography-headline-xxl-compact);
-}
+  }
 
-//  ============================================================================
-//  $   BODY STYLES
-//  ----------------------------------------------------------------------------
-//  NOTE: the comma-delimited classes are backwards-compatible,
-//        and will be removed once no longer in use in the product.
-//        e.g. The BEMish `d-[kind]--[var]` replaces the others. If they're
-//        not comma-delimited then they're either new or already were ok.
-.d-body--md,
-.d-body-base {
+  //  ============================================================================
+  //  $   BODY STYLES
+  //  ----------------------------------------------------------------------------
+  //  NOTE: the comma-delimited classes are backwards-compatible,
+  //        and will be removed once no longer in use in the product.
+  //        e.g. The BEMish `d-[kind]--[var]` replaces the others. If they're
+  //        not comma-delimited then they're either new or already were ok.
+  .d-body--md,
+  .d-body-base {
     font: var(--dt-typography-body-md);
-}
+  }
 
-.d-body--sm,
-.d-body-small  {
+  .d-body--sm,
+  .d-body-small {
     font: var(--dt-typography-body-sm);
-}
+  }
 
-.d-body--md-compact,
-.d-body-compact {
+  .d-body--md-compact,
+  .d-body-compact {
     font: var(--dt-typography-body-md-compact);
-}
+  }
 
-.d-body--sm-compact,
-.d-body-compact-small {
+  .d-body--sm-compact,
+  .d-body-compact-small {
     font: var(--dt-typography-body-sm-compact);
-}
+  }
 
-//  ============================================================================
-//  $   LABEL STYLES
-//  ----------------------------------------------------------------------------
-//  NOTE: the comma-delimited classes are backwards-compatible,
-//        and will be removed once no longer in use in the product.
-//        e.g. The BEMish `d-[kind]--[var]` replaces the others. If they're
-//        not comma-delimited then they're either new or already were ok.
-.d-label--md,
-.d-label-base {
+  //  ============================================================================
+  //  $   LABEL STYLES
+  //  ----------------------------------------------------------------------------
+  //  NOTE: the comma-delimited classes are backwards-compatible,
+  //        and will be removed once no longer in use in the product.
+  //        e.g. The BEMish `d-[kind]--[var]` replaces the others. If they're
+  //        not comma-delimited then they're either new or already were ok.
+  .d-label--md,
+  .d-label-base {
     font: var(--dt-typography-label-md);
-}
+  }
 
-.d-label--sm,
-.d-label-small {
+  .d-label--sm,
+  .d-label-small {
     font: var(--dt-typography-label-sm);
-}
+  }
 
-.d-label--md-compact,
-.d-label-compact {
+  .d-label--md-compact,
+  .d-label-compact {
     font: var(--dt-typography-label-md-compact);
-}
+  }
 
-.d-label--md-plain,
-.d-label-plain {
+  .d-label--md-plain,
+  .d-label-plain {
     font: var(--dt-typography-label-md-plain);
-}
+  }
 
-.d-label--md-plain-compact,
-.d-label-compact-plain {
+  .d-label--md-plain-compact,
+  .d-label-compact-plain {
     font: var(--dt-typography-label-md-plain-compact);
-}
+  }
 
-.d-label--sm-compact,
-.d-label-compact-small {
+  .d-label--sm-compact,
+  .d-label-compact-small {
     font: var(--dt-typography-label-sm-compact);
-}
+  }
 
-.d-label--sm-plain,
-.d-label-plain-small {
+  .d-label--sm-plain,
+  .d-label-plain-small {
     font: var(--dt-typography-label-sm-plain);
-}
+  }
 
-.d-label--sm-plain-compact,
-.d-label-compact-plain-small {
+  .d-label--sm-plain-compact,
+  .d-label-compact-plain-small {
     font: var(--dt-typography-label-sm-plain-compact);
-}
+  }
 
-//  ============================================================================
-//  $   HELPER STYLES
-//  ----------------------------------------------------------------------------
-//  NOTE: the comma-delimited classes are backwards-compatible,
-//        and will be removed once no longer in use in the product.
-//        e.g. The BEMish `d-[kind]--[var]` replaces the others. If they're
-//        not comma-delimited then they're either new or already were ok.
-.d-helper--md,
-.d-helper-base {
+  //  ============================================================================
+  //  $   HELPER STYLES
+  //  ----------------------------------------------------------------------------
+  //  NOTE: the comma-delimited classes are backwards-compatible,
+  //        and will be removed once no longer in use in the product.
+  //        e.g. The BEMish `d-[kind]--[var]` replaces the others. If they're
+  //        not comma-delimited then they're either new or already were ok.
+  .d-helper--md,
+  .d-helper-base {
     font: var(--dt-typography-helper-md);
-}
+  }
 
-.d-helper--sm,
-.d-helper-small {
+  .d-helper--sm,
+  .d-helper-small {
     font: var(--dt-typography-helper-sm);
-}
+  }
 
-//  ============================================================================
-//  $   CODE STYLES
-//  ----------------------------------------------------------------------------
-//  NOTE: the comma-delimited classes are backwards-compatible,
-//        and will be removed once no longer in use in the product.
-//        e.g. The BEMish `d-[kind]--[var]` replaces the others. If they're
-//        not comma-delimited then they're either new or already were ok.
-.d-code--md,
-.d-code-base {
+  //  ============================================================================
+  //  $   CODE STYLES
+  //  ----------------------------------------------------------------------------
+  //  NOTE: the comma-delimited classes are backwards-compatible,
+  //        and will be removed once no longer in use in the product.
+  //        e.g. The BEMish `d-[kind]--[var]` replaces the others. If they're
+  //        not comma-delimited then they're either new or already were ok.
+  .d-code--md,
+  .d-code-base {
     font: var(--dt-typography-code-md);
-}
+  }
 
-.d-code--sm,
-.d-code-small {
+  .d-code--sm,
+  .d-code-small {
     font: var(--dt-typography-code-sm);
-}
+  }
 }
 
 @layer dialtone.utilities {
-//  ============================================================================
-//  $   FONT SIZE
-//  ----------------------------------------------------------------------------
-.d-fs-50 { font-size: var(--dt-font-size-50) !important; }
-.d-fs-75 { font-size: var(--dt-font-size-75) !important; }
-.d-fs-100 { font-size: var(--dt-font-size-100) !important; }
-.d-fs-125 { font-size: var(--dt-font-size-125) !important; }
-.d-fs-150 { font-size: var(--dt-font-size-150) !important; }
-.d-fs-200 { font-size: var(--dt-font-size-200) !important; }
-.d-fs-250 { font-size: var(--dt-font-size-250) !important; }
-.d-fs-300 { font-size: var(--dt-font-size-300) !important; }
-.d-fs-350 { font-size: var(--dt-font-size-350) !important; }
-.d-fs-400 { font-size: var(--dt-font-size-400) !important; }
-.d-fs-500 { font-size: var(--dt-font-size-500) !important; }
-.d-fs-inherit { font-size: inherit !important; }
+  //  ============================================================================
+  //  $   FONT SIZE
+  //  ----------------------------------------------------------------------------
+  .d-fs-50 {
+    font-size: var(--dt-font-size-50) !important;
+  }
 
-.d-fs-100-mobile { font-size: var(--dt-font-size-100-mobile) !important; }
-.d-fs-200-mobile { font-size: var(--dt-font-size-200-mobile) !important; }
-.d-fs-300-mobile { font-size: var(--dt-font-size-300-mobile) !important; }
-.d-fs-400-mobile { font-size: var(--dt-font-size-400-mobile) !important; }
-.d-fs-500-mobile { font-size: var(--dt-font-size-500-mobile) !important; }
+  .d-fs-75 {
+    font-size: var(--dt-font-size-75) !important;
+  }
 
-.d-fs-100-tc8 { font-size: var(--dt-font-size-100-tc8) !important; }
-.d-fs-200-tc8 { font-size: var(--dt-font-size-200-tc8) !important; }
-.d-fs-300-tc8 { font-size: var(--dt-font-size-300-tc8) !important; }
-.d-fs-400-tc8 { font-size: var(--dt-font-size-400-tc8) !important; }
-.d-fs-500-tc8 { font-size: var(--dt-font-size-500-tc8) !important; }
+  .d-fs-100 {
+    font-size: var(--dt-font-size-100) !important;
+  }
 
-.d-fs-100-tv { font-size: var(--dt-font-size-100-tv) !important; }
-.d-fs-200-tv { font-size: var(--dt-font-size-200-tv) !important; }
-.d-fs-300-tv { font-size: var(--dt-font-size-300-tv) !important; }
-.d-fs-400-tv { font-size: var(--dt-font-size-400-tv) !important; }
-.d-fs-500-tv { font-size: var(--dt-font-size-500-tv) !important; }
+  .d-fs-125 {
+    font-size: var(--dt-font-size-125) !important;
+  }
 
-// TODO: deprecate these `d-headline##` classes once no longer in product use
-.d-headline10 {
-  font: var(--dt-typography-headline-eyebrow);
-  text-transform: var(--dt-typography-headline-eyebrow-text-case);
-}
-.d-headline24 { font: var(--dt-typography-headline-lg); }
-.d-headline28 { font: var(--dt-typography-headline-xl); }
-.d-headline32 { font: var(--dt-typography-headline-xl); }
-.d-headline36 { font: var(--dt-typography-headline-xl); }
-.d-headline42 { font: var(--dt-typography-headline-xxl); }
-.d-headline48 { font: var(--dt-typography-headline-xxl); }
-.d-headline54 { font: var(--dt-typography-headline-xxl); }
+  .d-fs-150 {
+    font-size: var(--dt-font-size-150) !important;
+  }
 
-//  ============================================================================
-//  $$  FONT STYLE
-//  ----------------------------------------------------------------------------
-.d-fs-normal { font-style: normal !important; }
-.d-fs-italic { font-style: italic !important; }
-.d-fs-unset { font-style: unset !important; }
+  .d-fs-200 {
+    font-size: var(--dt-font-size-200) !important;
+  }
 
+  .d-fs-250 {
+    font-size: var(--dt-font-size-250) !important;
+  }
 
-//  ============================================================================
-//  $$  FONT WEIGHT
-//  ----------------------------------------------------------------------------
-.d-fw-normal { font-weight: var(--dt-font-weight-normal) !important; }
-.d-fw-medium { font-weight: var(--dt-font-weight-medium) !important; }
-.d-fw-semibold { font-weight: var(--dt-font-weight-semi-bold) !important; }
-.d-fw-bold { font-weight: var(--dt-font-weight-bold) !important; }
-.d-fw-unset { font-weight: unset !important; }
+  .d-fs-300 {
+    font-size: var(--dt-font-size-300) !important;
+  }
 
+  .d-fs-350 {
+    font-size: var(--dt-font-size-350) !important;
+  }
 
-//  ============================================================================
-//  $  LINE HEIGHT
-//  ----------------------------------------------------------------------------
-.d-lh0 { line-height: var(--lh0) !important; }
-.d-lh1 { line-height: var(--lh1) !important; }
-.d-lh2 { line-height: var(--lh2) !important; }
-.d-lh4 { line-height: var(--lh4) !important; }
-.d-lh6 { line-height: var(--lh6) !important; }
-.d-lh8 { line-height: var(--lh8) !important; }
-.d-lh12 { line-height: var(--lh12) !important; }
-.d-lh16 { line-height: var(--lh16) !important; }
-.d-lh20 { line-height: var(--lh20) !important; }
-.d-lh24 { line-height: var(--lh24) !important; }
-.d-lh-100 { line-height: var(--dt-font-line-height-100) !important; }
-.d-lh-200 { line-height: var(--dt-font-line-height-200) !important; }
-.d-lh-300 { line-height: var(--dt-font-line-height-300) !important; }
-.d-lh-400 { line-height: var(--dt-font-line-height-400) !important; }
-.d-lh-500 { line-height: var(--dt-font-line-height-500) !important; }
-.d-lh-600 { line-height: var(--dt-font-line-height-600) !important; }
-.d-lh-unset { line-height: unset !important; }
+  .d-fs-400 {
+    font-size: var(--dt-font-size-400) !important;
+  }
 
+  .d-fs-450 {
+    font-size: var(--dt-font-size-450) !important;
+  }
 
-//  ============================================================================
-//  $   LISTS
-//  ----------------------------------------------------------------------------
-.d-ls-reset {
+  .d-fs-500 {
+    font-size: var(--dt-font-size-500) !important;
+  }
+
+  .d-fs-550 {
+    font-size: var(--dt-font-size-550) !important;
+  }
+
+  .d-fs-600 {
+    font-size: var(--dt-font-size-600) !important;
+  }
+
+  .d-fs-650 {
+    font-size: var(--dt-font-size-650) !important;
+  }
+
+  .d-fs-700 {
+    font-size: var(--dt-font-size-700) !important;
+  }
+
+  .d-fs-750 {
+    font-size: var(--dt-font-size-750) !important;
+  }
+
+  .d-fs-800 {
+    font-size: var(--dt-font-size-800) !important;
+  }
+
+  .d-fs-inherit {
+    font-size: inherit !important;
+  }
+
+  .d-fs-100-mobile {
+    font-size: var(--dt-font-size-100-mobile) !important;
+  }
+
+  .d-fs-200-mobile {
+    font-size: var(--dt-font-size-200-mobile) !important;
+  }
+
+  .d-fs-300-mobile {
+    font-size: var(--dt-font-size-300-mobile) !important;
+  }
+
+  .d-fs-400-mobile {
+    font-size: var(--dt-font-size-400-mobile) !important;
+  }
+
+  .d-fs-500-mobile {
+    font-size: var(--dt-font-size-500-mobile) !important;
+  }
+
+  .d-fs-100-tc8 {
+    font-size: var(--dt-font-size-100-tc8) !important;
+  }
+
+  .d-fs-200-tc8 {
+    font-size: var(--dt-font-size-200-tc8) !important;
+  }
+
+  .d-fs-300-tc8 {
+    font-size: var(--dt-font-size-300-tc8) !important;
+  }
+
+  .d-fs-400-tc8 {
+    font-size: var(--dt-font-size-400-tc8) !important;
+  }
+
+  .d-fs-500-tc8 {
+    font-size: var(--dt-font-size-500-tc8) !important;
+  }
+
+  .d-fs-100-tv {
+    font-size: var(--dt-font-size-100-tv) !important;
+  }
+
+  .d-fs-200-tv {
+    font-size: var(--dt-font-size-200-tv) !important;
+  }
+
+  .d-fs-300-tv {
+    font-size: var(--dt-font-size-300-tv) !important;
+  }
+
+  .d-fs-400-tv {
+    font-size: var(--dt-font-size-400-tv) !important;
+  }
+
+  .d-fs-500-tv {
+    font-size: var(--dt-font-size-500-tv) !important;
+  }
+
+  // TODO: deprecate these `d-headline##` classes once no longer in product use
+  .d-headline10 {
+    font: var(--dt-typography-headline-eyebrow);
+    text-transform: var(--dt-typography-headline-eyebrow-text-case);
+  }
+
+  .d-headline24 {
+    font: var(--dt-typography-headline-lg);
+  }
+
+  .d-headline28 {
+    font: var(--dt-typography-headline-xl);
+  }
+
+  .d-headline32 {
+    font: var(--dt-typography-headline-xl);
+  }
+
+  .d-headline36 {
+    font: var(--dt-typography-headline-xl);
+  }
+
+  .d-headline42 {
+    font: var(--dt-typography-headline-xxl);
+  }
+
+  .d-headline48 {
+    font: var(--dt-typography-headline-xxl);
+  }
+
+  .d-headline54 {
+    font: var(--dt-typography-headline-xxl);
+  }
+
+  //  ============================================================================
+  //  $$  FONT STYLE
+  //  ----------------------------------------------------------------------------
+  .d-fs-normal {
+    font-style: normal !important;
+  }
+
+  .d-fs-italic {
+    font-style: italic !important;
+  }
+
+  .d-fs-unset {
+    font-style: unset !important;
+  }
+
+  //  ============================================================================
+  //  $$  FONT WEIGHT
+  //  ----------------------------------------------------------------------------
+  .d-fw-normal {
+    font-weight: var(--dt-font-weight-normal) !important;
+  }
+
+  .d-fw-medium {
+    font-weight: var(--dt-font-weight-medium) !important;
+  }
+
+  .d-fw-semibold {
+    font-weight: var(--dt-font-weight-semi-bold) !important;
+  }
+
+  .d-fw-bold {
+    font-weight: var(--dt-font-weight-bold) !important;
+  }
+
+  .d-fw-unset {
+    font-weight: unset !important;
+  }
+
+  //  ============================================================================
+  //  $  LINE HEIGHT
+  //  ----------------------------------------------------------------------------
+  .d-lh0 {
+    line-height: var(--lh0) !important;
+  }
+
+  .d-lh1 {
+    line-height: var(--lh1) !important;
+  }
+
+  .d-lh2 {
+    line-height: var(--lh2) !important;
+  }
+
+  .d-lh4 {
+    line-height: var(--lh4) !important;
+  }
+
+  .d-lh6 {
+    line-height: var(--lh6) !important;
+  }
+
+  .d-lh8 {
+    line-height: var(--lh8) !important;
+  }
+
+  .d-lh12 {
+    line-height: var(--lh12) !important;
+  }
+
+  .d-lh16 {
+    line-height: var(--lh16) !important;
+  }
+
+  .d-lh20 {
+    line-height: var(--lh20) !important;
+  }
+
+  .d-lh24 {
+    line-height: var(--lh24) !important;
+  }
+
+  .d-lh-100 {
+    line-height: var(--dt-font-line-height-100) !important;
+  }
+
+  .d-lh-200 {
+    line-height: var(--dt-font-line-height-200) !important;
+  }
+
+  .d-lh-300 {
+    line-height: var(--dt-font-line-height-300) !important;
+  }
+
+  .d-lh-400 {
+    line-height: var(--dt-font-line-height-400) !important;
+  }
+
+  .d-lh-500 {
+    line-height: var(--dt-font-line-height-500) !important;
+  }
+
+  .d-lh-600 {
+    line-height: var(--dt-font-line-height-600) !important;
+  }
+
+  .d-lh-unset {
+    line-height: unset !important;
+  }
+
+  //  ============================================================================
+  //  $   LISTS
+  //  ----------------------------------------------------------------------------
+  .d-ls-reset {
     //  We want to reset everything when applied
     &,
     li,
     ol,
     ul {
-        margin: 0;
-        padding: 0;
-        .d-ls-none();
+      margin: 0;
+      padding: 0;
+      .d-ls-none();
     }
-}
-.d-ls-none { list-style: none !important; }
-.d-lst-disc { list-style-type: disc !important; }
-.d-lst-circle { list-style-type: circle !important; }
-.d-lst-content { list-style-type: var(--ls-content) !important; }
-.d-lst-decimal { list-style-type: decimal !important; }
-.d-lst-none { list-style-type: none !important; }
+  }
 
+  .d-ls-none {
+    list-style: none !important;
+  }
 
-//  ============================================================================
-//  $$  TEXT ALIGN
-//  ----------------------------------------------------------------------------
-.d-ta-start, .d-ta-left { text-align: start !important; }
-.d-ta-end, .d-ta-right { text-align: end !important; }
-.d-ta-center { text-align: center !important; }
-.d-ta-justify { text-align: justify !important; }
-.d-ta-unset { text-align: unset !important; }
+  .d-lst-disc {
+    list-style-type: disc !important;
+  }
 
+  .d-lst-circle {
+    list-style-type: circle !important;
+  }
 
-//  ============================================================================
-//  $$  TEXT DECORATION
-//  ----------------------------------------------------------------------------
-.d-td-none { text-decoration: none !important; }
+  .d-lst-content {
+    list-style-type: var(--ls-content) !important;
+  }
 
-.d-td-underline {
+  .d-lst-decimal {
+    list-style-type: decimal !important;
+  }
+
+  .d-lst-none {
+    list-style-type: none !important;
+  }
+
+  //  ============================================================================
+  //  $$  TEXT ALIGN
+  //  ----------------------------------------------------------------------------
+  .d-ta-start,
+  .d-ta-left {
+    text-align: start !important;
+  }
+
+  .d-ta-end,
+  .d-ta-right {
+    text-align: end !important;
+  }
+
+  .d-ta-center {
+    text-align: center !important;
+  }
+
+  .d-ta-justify {
+    text-align: justify !important;
+  }
+
+  .d-ta-unset {
+    text-align: unset !important;
+  }
+
+  //  ============================================================================
+  //  $$  TEXT DECORATION
+  //  ----------------------------------------------------------------------------
+  .d-td-none {
+    text-decoration: none !important;
+  }
+
+  .d-td-underline {
     text-decoration: underline !important;
     text-underline-offset: var(--dt-spacing-25) !important;
     text-decoration-thickness: var(--dt-size-border-100) !important;
-}
+  }
 
-.d-td-dotted {
+  .d-td-dotted {
     text-decoration: underline dotted !important;
     text-underline-offset: var(--dt-spacing-25) !important;
     text-decoration-thickness: var(--dt-size-border-100) !important;
-}
+  }
 
-.d-td-line-through {
+  .d-td-line-through {
     text-decoration: line-through !important;
     text-decoration-thickness: var(--dt-size-border-100) !important;
-}
-.d-td-unset { text-decoration: unset !important; }
-
-
-//  ============================================================================
-//  $$  TEXT OVERFLOW
-//  ----------------------------------------------------------------------------
-.d-to-ellipsis { text-overflow: ellipsis !important; }
-.d-to-clip { text-overflow: clip !important; }
-.d-to-unset { text-overflow: unset !important; }
-
-
-//  ============================================================================
-//  $$  LINE CLAMP
-//  ----------------------------------------------------------------------------
-//  Base styles for all line-clamp classes
-[class*="d-lc-"] {
-  --lc-lines: initial;
-
-  display: -webkit-box !important;
-  overflow: hidden !important;
-  -webkit-box-orient: vertical !important;
-  -webkit-line-clamp: var(--lc-lines) !important;
-}
-
-//  Individual line-clamp values
-.d-lc {
-  &-1 { --lc-lines: 1; }
-  &-2 { --lc-lines: 2; }
-  &-3 { --lc-lines: 3; }
-  &-4 { --lc-lines: 4; }
-  &-5 { --lc-lines: 5; }
-  &-6 { --lc-lines: 6; }
-  &-7 { --lc-lines: 7; }
-  &-8 { --lc-lines: 8; }
-  &-9 { --lc-lines: 9; }
-
-  //  Reset classes
-  &-none,
-  &-unset {
-    display: initial !important;
-    overflow: initial !important;
-    -webkit-line-clamp: initial !important;
   }
-}
 
-//  $$  OVERFLOW WRAP
-//  ----------------------------------------------------------------------------
-.d-ow-normal { overflow-wrap: normal !important; }
-.d-ow-anywhere { overflow-wrap: anywhere !important; }
-.d-ow-break-word { overflow-wrap: break-word !important; }
-.d-ow-unset { overflow-wrap: unset !important; }
+  .d-td-unset {
+    text-decoration: unset !important;
+  }
 
-//  ============================================================================
-//  $$  TEXT TRANSFORM
-//  ----------------------------------------------------------------------------
-.d-tt-uppercase { text-transform: uppercase !important; }
-.d-tt-lowercase { text-transform: lowercase !important; }
-.d-tt-capitalize { text-transform: capitalize !important; }
-.d-tt-full-width { text-transform: full-width !important; }
-.d-tt-none { text-transform: none !important; }
-.d-tt-unset { text-transform: unset !important; }
+  //  ============================================================================
+  //  $$  TEXT OVERFLOW
+  //  ----------------------------------------------------------------------------
+  .d-to-ellipsis {
+    text-overflow: ellipsis !important;
+  }
 
-//  ============================================================================
-//  $$  TEXT WRAP
-//  ----------------------------------------------------------------------------
+  .d-to-clip {
+    text-overflow: clip !important;
+  }
 
-.d-tw-wrap { text-wrap: wrap !important; }
-.d-tw-nowrap { text-wrap: nowrap !important; }
-.d-tw-balance { text-wrap: balance !important; }
-.d-tw-pretty { text-wrap: pretty !important; }
-.d-tw-unset { text-wrap: unset !important; }
+  .d-to-unset {
+    text-overflow: unset !important;
+  }
 
-//  ============================================================================
-//  $$  VERTICAL ALIGN
-//  ----------------------------------------------------------------------------
-.d-va-baseline { vertical-align: baseline !important; }
-.d-va-top { vertical-align: top !important; }
-.d-va-bottom { vertical-align: bottom !important; }
-.d-va-text-top { vertical-align: text-top !important; }
-.d-va-text-bottom { vertical-align: text-bottom !important; }
-.d-va-middle { vertical-align: middle !important; }
-.d-va-sub { vertical-align: sub !important; }
-.d-va-super { vertical-align: super !important; }
-.d-va-unset { vertical-align: unset !important; }
+  //  ============================================================================
+  //  $$  LINE CLAMP
+  //  ----------------------------------------------------------------------------
+  //  Base styles for all line-clamp classes
+  [class*='d-lc-'] {
+    --lc-lines: initial;
 
+    display: -webkit-box !important;
+    overflow: hidden !important;
+    -webkit-box-orient: vertical !important;
+    -webkit-line-clamp: var(--lc-lines) !important;
+  }
 
-//  ============================================================================
-//  $$  WHITESPACE
-//  ----------------------------------------------------------------------------
-.d-ws-normal { white-space: normal !important; }
-.d-ws-nowrap { white-space: nowrap !important; }
-.d-ws-pre { white-space: pre !important; }
-.d-ws-pre-line { white-space: pre-line !important; }
-.d-ws-pre-wrap { white-space: pre-wrap !important; }
-.d-ws-break-spaces { white-space: break-spaces !important; }
-.d-ws-unset { white-space: unset !important; }
+  //  Individual line-clamp values
+  .d-lc {
+    &-1 {
+      --lc-lines: 1;
+    }
 
+    &-2 {
+      --lc-lines: 2;
+    }
 
-//  ============================================================================
-//  $$  WORD BREAK
-//  ----------------------------------------------------------------------------
-.d-wb-normal { word-break: normal !important; }
-.d-wb-break-all { word-break: break-all !important; }
-.d-wb-break-word { overflow-wrap: break-word !important; }
-.d-wb-keep-all { word-break: keep-all !important; }
-.d-wb-unset { word-break: unset !important; }
+    &-3 {
+      --lc-lines: 3;
+    }
 
-//  ============================================================================
-//  $$  WORD WRAP
-//  ----------------------------------------------------------------------------
-.d-ww-normal { overflow-wrap: normal !important; }
-.d-ww-break-word { overflow-wrap: break-word !important; }
-.d-ww-anywhere { overflow-wrap: anywhere !important; }
-.d-ww-initial { overflow-wrap: initial !important; }
-.d-ww-inherit { overflow-wrap: inherit !important; }
+    &-4 {
+      --lc-lines: 4;
+    }
 
+    &-5 {
+      --lc-lines: 5;
+    }
 
-// Unsure what to do with this
-//  $$  TRUNCATE
-//  ----------------------------------------------------------------------------
-.d-truncate {
+    &-6 {
+      --lc-lines: 6;
+    }
+
+    &-7 {
+      --lc-lines: 7;
+    }
+
+    &-8 {
+      --lc-lines: 8;
+    }
+
+    &-9 {
+      --lc-lines: 9;
+    }
+
+    //  Reset classes
+    &-none,
+    &-unset {
+      display: initial !important;
+      overflow: initial !important;
+      -webkit-line-clamp: initial !important;
+    }
+  }
+
+  //  $$  OVERFLOW WRAP
+  //  ----------------------------------------------------------------------------
+  .d-ow-normal {
+    overflow-wrap: normal !important;
+  }
+
+  .d-ow-anywhere {
+    overflow-wrap: anywhere !important;
+  }
+
+  .d-ow-break-word {
+    overflow-wrap: break-word !important;
+  }
+
+  .d-ow-unset {
+    overflow-wrap: unset !important;
+  }
+
+  //  ============================================================================
+  //  $$  TEXT TRANSFORM
+  //  ----------------------------------------------------------------------------
+  .d-tt-uppercase {
+    text-transform: uppercase !important;
+  }
+
+  .d-tt-lowercase {
+    text-transform: lowercase !important;
+  }
+
+  .d-tt-capitalize {
+    text-transform: capitalize !important;
+  }
+
+  .d-tt-full-width {
+    text-transform: full-width !important;
+  }
+
+  .d-tt-none {
+    text-transform: none !important;
+  }
+
+  .d-tt-unset {
+    text-transform: unset !important;
+  }
+
+  //  ============================================================================
+  //  $$  TEXT WRAP
+  //  ----------------------------------------------------------------------------
+
+  .d-tw-wrap {
+    text-wrap: wrap !important;
+  }
+
+  .d-tw-nowrap {
+    text-wrap: nowrap !important;
+  }
+
+  .d-tw-balance {
+    text-wrap: balance !important;
+  }
+
+  .d-tw-pretty {
+    text-wrap: pretty !important;
+  }
+
+  .d-tw-unset {
+    text-wrap: unset !important;
+  }
+
+  //  ============================================================================
+  //  $$  VERTICAL ALIGN
+  //  ----------------------------------------------------------------------------
+  .d-va-baseline {
+    vertical-align: baseline !important;
+  }
+
+  .d-va-top {
+    vertical-align: top !important;
+  }
+
+  .d-va-bottom {
+    vertical-align: bottom !important;
+  }
+
+  .d-va-text-top {
+    vertical-align: text-top !important;
+  }
+
+  .d-va-text-bottom {
+    vertical-align: text-bottom !important;
+  }
+
+  .d-va-middle {
+    vertical-align: middle !important;
+  }
+
+  .d-va-sub {
+    vertical-align: sub !important;
+  }
+
+  .d-va-super {
+    vertical-align: super !important;
+  }
+
+  .d-va-unset {
+    vertical-align: unset !important;
+  }
+
+  //  ============================================================================
+  //  $$  WHITESPACE
+  //  ----------------------------------------------------------------------------
+  .d-ws-normal {
+    white-space: normal !important;
+  }
+
+  .d-ws-nowrap {
+    white-space: nowrap !important;
+  }
+
+  .d-ws-pre {
+    white-space: pre !important;
+  }
+
+  .d-ws-pre-line {
+    white-space: pre-line !important;
+  }
+
+  .d-ws-pre-wrap {
+    white-space: pre-wrap !important;
+  }
+
+  .d-ws-break-spaces {
+    white-space: break-spaces !important;
+  }
+
+  .d-ws-unset {
+    white-space: unset !important;
+  }
+
+  //  ============================================================================
+  //  $$  WORD BREAK
+  //  ----------------------------------------------------------------------------
+  .d-wb-normal {
+    word-break: normal !important;
+  }
+
+  .d-wb-break-all {
+    word-break: break-all !important;
+  }
+
+  .d-wb-break-word {
+    overflow-wrap: break-word !important;
+  }
+
+  .d-wb-keep-all {
+    word-break: keep-all !important;
+  }
+
+  .d-wb-unset {
+    word-break: unset !important;
+  }
+
+  //  ============================================================================
+  //  $$  WORD WRAP
+  //  ----------------------------------------------------------------------------
+  .d-ww-normal {
+    overflow-wrap: normal !important;
+  }
+
+  .d-ww-break-word {
+    overflow-wrap: break-word !important;
+  }
+
+  .d-ww-anywhere {
+    overflow-wrap: anywhere !important;
+  }
+
+  .d-ww-initial {
+    overflow-wrap: initial !important;
+  }
+
+  .d-ww-inherit {
+    overflow-wrap: inherit !important;
+  }
+
+  // Unsure what to do with this
+  //  $$  TRUNCATE
+  //  ----------------------------------------------------------------------------
+  .d-truncate {
     overflow: hidden !important;
     white-space: nowrap !important;
     text-overflow: ellipsis !important;
-}
+  }
 
-//  ============================================================================
-//  $$  FONT VARIANT NUMERIC
-//  ----------------------------------------------------------------------------
-.d-fvn-normal { font-variant-numeric: normal !important; }
-.d-fvn-ordinal { font-variant-numeric: ordinal !important; }
-.d-fvn-slashed-zero { font-variant-numeric: slashed-zero !important; }
-.d-fvn-lining { font-variant-numeric: lining-nums !important; }
-.d-fvn-proportional { font-variant-numeric: proportional-nums !important; }
-.d-fvn-tabular { font-variant-numeric: tabular-nums !important; }
-.d-fvn-diagonal { font-variant-numeric: diagonal-fractions !important; }
-.d-fvn-stacked { font-variant-numeric: stacked-fractions !important; }
-.d-fvn-unset { font-variant-numeric: unset !important; }
+  //  ============================================================================
+  //  $$  FONT VARIANT NUMERIC
+  //  ----------------------------------------------------------------------------
+  .d-fvn-normal {
+    font-variant-numeric: normal !important;
+  }
+
+  .d-fvn-ordinal {
+    font-variant-numeric: ordinal !important;
+  }
+
+  .d-fvn-slashed-zero {
+    font-variant-numeric: slashed-zero !important;
+  }
+
+  .d-fvn-lining {
+    font-variant-numeric: lining-nums !important;
+  }
+
+  .d-fvn-proportional {
+    font-variant-numeric: proportional-nums !important;
+  }
+
+  .d-fvn-tabular {
+    font-variant-numeric: tabular-nums !important;
+  }
+
+  .d-fvn-diagonal {
+    font-variant-numeric: diagonal-fractions !important;
+  }
+
+  .d-fvn-stacked {
+    font-variant-numeric: stacked-fractions !important;
+  }
+
+  .d-fvn-unset {
+    font-variant-numeric: unset !important;
+  }
 }

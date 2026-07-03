@@ -46,14 +46,14 @@ import { DIALTONE_PREFIX } from '@/src/lib/constants';
 import { DtBadge, DtStack } from '@dialpad/dialtone-vue';
 import * as dialtoneIcons from '@dialpad/dialtone-icons/vue';
 import DtcSuggestion from '@/src/components/controls/control_suggestion.vue';
-import supportedComponentData from '@/src/supported_components.json';
+import { isSupportedComponent as isCombinatorSupportedComponent } from '@/src/lib/component_support';
 import variantBank from '@/src/variants/variants';
 // import { getIcons } from '@/src/lib/utils';
 
 const DEFAULT_COMPONENT = 'DtButton';
 
 function isSupportedComponent (exportName) {
-  return supportedComponentData.includes(exportName);
+  return isCombinatorSupportedComponent(exportName, documentation);
 }
 
 const components = computed(() => {

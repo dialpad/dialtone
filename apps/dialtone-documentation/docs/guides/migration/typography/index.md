@@ -9,13 +9,17 @@ status: ready
 > [!WARNING] Deprecation
 > Legacy typography utility classes on text elements are deprecated in favor of the [`<dt-text>` component](/components/text.html). Use the migration tool to convert them automatically.
 
-- Replace `d-headline--*`, `d-body--*`, `d-label--*`, `d-code--md`, `d-helper--*` on `<p>`, `<span>`, `<div>`, `<h1>`–`<h6>`, and `<label>` with `<dt-text kind="…" size="…">`.
+- Replace `d-headline--*`, `d-body--*`, `d-label--*`, `d-code--md`, `d-helper--*` on `<p>`, `<span>`, `<div>`, `<h1>`–`<h6>`, and `<label>` with `<dt-text>`.
+- The migration tool currently emits legacy-compatible `kind="…" size="…"`. For new manual code, prefer `variant="…"` for complete text compositions.
+- Raw font-size utilities like `d-fs-200` can now be replaced with `variant="…" size="200"` when you need a composed style plus an exact font-size override.
 - Override utilities like `d-fw-*`, `d-fc-*`, `d-lh-*`, `d-truncate`, and `d-ta-*` map to `strength`, `tone`, `density`, `truncate`, and `align` props.
 - One command does the migration: `npx dialtone-migrate-typography`.
 
 ## Overview
 
-[DtText](/components/text.html) is Dialtone's semantic text component. It exposes typography intent through props (`kind`, `size`, `density`, `strength`, `tone`, `truncate`, `align`) rather than utility classes, making typography decisions explicit and easier to validate at build time.
+[DtText](/components/text.html) is Dialtone's semantic text component. It exposes typography intent through props (`variant`, `size`, `density`, `strength`, `tone`, `truncate`, `align`) rather than utility classes, making typography decisions explicit and easier to validate at build time.
+
+For backward compatibility, `kind` remains supported and keeps the historical composed typography behavior when `variant` is not set. That means existing `<dt-text kind="body" size="300">` output from the migration tool is still valid. Prefer `variant` for new manual code and for cleanup you do after running the tool.
 
 A [migration tool](#migration-tool) is available to replace typography utility classes with `<dt-text>` automatically, or you may do so [manually](#manual-migration).
 
@@ -36,7 +40,7 @@ The tool is ideal for projects with many text elements using utility classes. Fo
 <div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
 <div>
 
-**Before**
+**Before:**
 
 ```html
 <p class="d-headline--md">Welcome back</p>
@@ -53,9 +57,10 @@ The tool is ideal for projects with many text elements using utility classes. Fo
 </div>
 <div>
 
-**After**
+**After:**
 
 ```html
+<!-- Current migration tool output -->
 <dt-text as="p" kind="headline" size="300">Welcome back</dt-text>
 
 <dt-text kind="body" size="100" tone="secondary" truncate>
@@ -63,6 +68,17 @@ The tool is ideal for projects with many text elements using utility classes. Fo
 </dt-text>
 
 <dt-text as="label" kind="label" size="300" strength="bold">
+  Display name
+</dt-text>
+
+<!-- Preferred manual form for new code -->
+<dt-text as="p" variant="headline-md">Welcome back</dt-text>
+
+<dt-text variant="body-xs" tone="secondary" truncate>
+  you@example.com
+</dt-text>
+
+<dt-text as="label" variant="label-md" strength="bold">
   Display name
 </dt-text>
 ```
@@ -76,7 +92,7 @@ The tool is ideal for projects with many text elements using utility classes. Fo
 <div class="d-d-grid d-g-200 d-g-cols1 md:d-g-cols2">
 <div>
 
-**Before**
+**Before:**
 
 ```html
 <h2 class="d-headline--lg-compact">
@@ -91,14 +107,24 @@ The tool is ideal for projects with many text elements using utility classes. Fo
 </div>
 <div>
 
-**After**
+**After:**
 
 ```html
+<!-- Current migration tool output -->
 <dt-text as="h2" kind="headline" size="500" density="200">
   Recent calls
 </dt-text>
 
 <dt-text as="div" kind="body" size="300" density="300" align="end" tone="muted">
+  Last updated just now
+</dt-text>
+
+<!-- Preferred manual form for new code -->
+<dt-text as="h2" variant="headline-xl" density="200">
+  Recent calls
+</dt-text>
+
+<dt-text as="div" variant="body-md" density="300" align="end" tone="muted">
   Last updated just now
 </dt-text>
 ```
@@ -112,6 +138,9 @@ The tool is ideal for projects with many text elements using utility classes. Fo
 ## Migration Tool
 
 `dialtone-migrate-typography` scans `.vue` and `.html` files for legacy typography utility classes and converts them to `<dt-text>`. It is included with `@dialpad/dialtone-css`.
+
+> [!INFO] Tool output and the new DtText API
+> The current migration tool emits legacy-compatible `kind + size` props for composed typography classes. That output is intentionally still supported. If you are hand-authoring code or revisiting migrated output, prefer `variant` for composed text styles and use numeric `size` only with `variant` for raw font-size token overrides.
 
 ### What the Tool Migrates
 
@@ -149,8 +178,8 @@ Patterns the tool can't safely auto-migrate are surfaced with an inline `<!-- dt
 | `<!-- dt-text-migrate: review nested span -->` | A child `<span>` with directives, events, or extra attributes that can't be safely collapsed into a nested `<dt-text>` | Migrate the child manually, or keep it as a plain `<span>` inside the parent `<dt-text>` |
 | `<!-- dt-text-migrate: review dynamic class -->` | `:class` / `v-bind:class` bindings containing typography utilities | Convert conditionally bound utilities to conditional props (e.g., `:strength="isBold ? 'bold' : 'normal'"`) |
 | `<!-- dt-text-migrate: review conflicting class -->` | A utility class clashes with an explicit prop already on the element (e.g., `<dt-text strength="bold" class="d-fw-normal">`) | Remove the redundant class; keep the explicit prop |
-| `<!-- dt-text-migrate: review d-fs-N (on-menu — maps to …) -->` | A raw `d-fs-N` font-size class whose size *does* line up with a DtText scale stop. The comment names the suggested `kind`/`size`. | Apply the suggested `size` (and `kind`) to the element, then drop the `d-fs-N` class |
-| `<!-- dt-text-migrate: review d-fs-N (off-menu — no clean DtText equivalent, keep class) -->` | A raw `d-fs-N` whose size has no DtText equivalent | Keep the `d-fs-N` class, or pick the nearest on-menu size if the exact value isn't load-bearing |
+| `<!-- dt-text-migrate: review d-fs-N (on-menu — maps to …) -->` | A raw `d-fs-N` font-size class whose size lines up with the tool's legacy `kind`/`size` mapping. The comment names the suggested legacy props. | Use the suggested legacy `kind + size` props, or combine `variant="…"` with `size="N"` when you need a composed style plus an exact font-size override |
+| `<!-- dt-text-migrate: review d-fs-N (off-menu — no clean DtText equivalent, keep class) -->` | A raw `d-fs-N` outside the tool's legacy composed-style mapping | If `N` is a Dialtone font-size token, choose a `variant` and pair it with `size="N"`. Keep the utility when there is no clear text composition, the value is unsupported, or the class must stay on a non-text wrapper |
 | `<!-- dt-text-migrate: legacy heading — as=… \| kind=… \| size: … \| strength=… \| tone=… -->` | The hand-rolled heading pattern: an element with both `d-fw-*` and `d-fs-N` (no composed class). The comment carries a full proposed migration; `kind` is `headline` for `<h1>`–`<h6>` and `kind=body\|label\|headline (VERIFY)` for ambiguous tags. | Apply the proposed props from the comment; for non-heading tags, confirm the right `kind` before applying |
 
 ### How the Tool Works
@@ -158,6 +187,16 @@ Patterns the tool can't safely auto-migrate are surfaced with an inline `<!-- dt
 #### Composed Class Rewriting
 
 The script matches the full composed class name (e.g., `d-headline--md`) to the mapping table and emits the correct `kind`, `size`, and optional `density`/`strength` props. Unrecognized classes are kept on the element's `class` attribute unchanged.
+
+The emitted `kind + size` form is legacy-compatible. You can leave it as-is, or convert it to the preferred `variant` form during manual cleanup:
+
+```html
+<!-- Tool output, still supported -->
+<dt-text as="p" kind="body" size="300">Body copy</dt-text>
+
+<!-- Preferred manual form -->
+<dt-text as="p" variant="body-md">Body copy</dt-text>
+```
 
 **Non-span tags get an `as` prop:**
 
@@ -345,16 +384,33 @@ npx eslint --fix "./src/**/*.vue"
 1. Find elements with a `d-headline--*`, `d-body--*`, `d-label--*`, or `d-code--md` class
 2. Change the tag to `<dt-text>`
 3. Change the closing tag to `</dt-text>`
-4. Convert classes to props using the [Class-to-Prop Reference](#class-to-prop-reference) below
+4. Convert composed classes to `variant` when possible, or use the legacy-compatible `kind + size` mapping in the [Class-to-Prop Reference](#class-to-prop-reference) below
 5. Add `as="…"` if the original tag is not `<span>`
 6. Keep non-typography classes on the component's `class` attribute
+
+### Raw Font-Size Utilities
+
+Use the `size` prop for raw font-size token replacement only when it is paired with `variant` for a complete text composition, or with legacy `kind` while migrating older code. Do not migrate a raw font-size utility to `<dt-text size="…">` by itself.
+
+```html
+<!-- Before -->
+<p class="d-fs-200">Body text</p>
+
+<!-- After: composed style plus exact font-size token -->
+<dt-text as="p" variant="body-md" size="200">Body text</dt-text>
+
+<!-- After: composed style plus exact font-size override -->
+<dt-text as="p" variant="body-md" size="250">Large body text</dt-text>
+```
+
+Supported raw `size` values are `50`, `75`, `100`, `125`, `150`, `200`, `250`, `300`, `350`, `400`, `450`, `500`, `550`, `600`, `650`, `700`, `750`, and `800`.
 
 ### Custom Components
 
 > [!WARNING]
 > Custom Vue components require manual migration.
 
-**Option 1: Wrap the component**
+#### Option 1: Wrap the component
 
 ```html
 <!-- Before -->
@@ -366,7 +422,15 @@ npx eslint --fix "./src/**/*.vue"
 </dt-text>
 ```
 
-**Option 2: Update the component internally**
+For new manual code, use `variant` instead:
+
+```html
+<dt-text variant="body-md" tone="secondary">
+  <my-component />
+</dt-text>
+```
+
+#### Option 2: Update the component internally
 
 If you own the component, apply the prop directly to the root text element.
 
@@ -390,6 +454,8 @@ If you own the component, apply the prop directly to the root text element.
 ## Class-to-Prop Reference
 
 ### Composed Typography Classes
+
+The table below reflects the migration tool's current legacy-compatible output. For new manual code, prefer `variant` values such as `headline-md`, `body-md`, `label-md`, and `code-sm` when they match the intended composed style.
 
 | Old class | `kind` | `size` | `density` | `strength` | Notes |
 | --- | --- | --- | --- | --- | --- |
@@ -454,7 +520,7 @@ If you own the component, apply the prop directly to the root text element.
 | `d-fc-info-strong` | `tone` | `"info-strong"` |
 | `d-fc-neutral-black` | `tone` | `"neutral-black"` |
 | `d-fc-neutral-white` | `tone` | `"neutral-white"` |
-| `d-truncate` | `truncate` | _(boolean prop — no value)_ |
+| `d-truncate` | `truncate` | *(boolean prop — no value)* |
 | `d-ta-left` | `align` | `"start"` |
 | `d-ta-right` | `align` | `"end"` |
 | `d-ta-center` | `align` | `"center"` |
