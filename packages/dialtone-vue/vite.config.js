@@ -105,7 +105,7 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './tests/setupTests.js',
     exclude: ['common/custom-emoji.test.js'],
-    include: ['./{common,components,directives,recipes}/**/*.test.js'],
+    include: ['./{common,components,directives,recipes,localization}/**/*.test.js'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html', 'json'],
@@ -115,6 +115,7 @@ export default defineConfig({
         'common/**/*.{js,vue}',
         'directives/**/*.{js,vue}',
         'recipes/**/*.{js,vue}',
+        'localization/**/*.{js,vue}',
       ],
       exclude: [
         '**/*.test.js',
