@@ -1,3 +1,11 @@
+## [3.222.3](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.222.2...dialtone-vue/v3.222.3) (2026-07-03)
+
+
+### Bug Fixes
+
+* **Dt Popover:** DLT-3519 added boundary prop ([#1348](https://github.com/dialpad/dialtone/issues/1348)) ([6ef6957](https://github.com/dialpad/dialtone/commit/6ef6957516aceb471fc531a7b8a9137cec3a8d9a))
+* **Editor:** DP-194072 tiptap warning duplicate extension names found ['textStyle'] ([#1346](https://github.com/dialpad/dialtone/issues/1346)) ([4ac8871](https://github.com/dialpad/dialtone/commit/4ac8871d2843d48d945edcb8bc64dfe1c4fc36fb))
+
 ## [3.222.2](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.222.1...dialtone-vue/v3.222.2) (2026-06-16)
 
 
