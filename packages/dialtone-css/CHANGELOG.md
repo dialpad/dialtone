@@ -1,3 +1,15 @@
+# [8.81.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.81.0-next.3...dialtone-css/v8.81.0-next.4) (2026-07-03)
+
+
+### Bug Fixes
+
+* **Scripts:** NO-JIRA improve theme-to-mode migration script ([#1338](https://github.com/dialpad/dialtone/issues/1338)) ([59f220f](https://github.com/dialpad/dialtone/commit/59f220f9866ece44b3d4207f0a6f2ff25a65ba61))
+
+
+### Features
+
+* **Text:** DLT-3487 expose full typography size scale ([#1334](https://github.com/dialpad/dialtone/issues/1334)) ([0c8f4c6](https://github.com/dialpad/dialtone/commit/0c8f4c627bc51e5b53e0bde72c832361e38a6137))
+
 # [8.81.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.81.0-next.2...dialtone-css/v8.81.0-next.3) (2026-06-26)
 
 
