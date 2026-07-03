@@ -1,3 +1,16 @@
+# [2.0.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.20...dialtone-tokens/v2.0.0-next.1) (2026-07-03)
+
+
+### Features
+
+* **Dialtone Tokens:** NO-JIRA publish swift prerelease tokens on next ([#1353](https://github.com/dialpad/dialtone/issues/1353)) ([294e1f0](https://github.com/dialpad/dialtone/commit/294e1f02b050a65db97dbcdcdd3ab87c59c4573f))
+* **Text:** DLT-3487 expose full typography size scale ([#1334](https://github.com/dialpad/dialtone/issues/1334)) ([0c8f4c6](https://github.com/dialpad/dialtone/commit/0c8f4c627bc51e5b53e0bde72c832361e38a6137))
+
+
+### BREAKING CHANGES
+
+* **Dialtone Tokens:** Dialtone version 10
+
 # [1.48.0-next.20](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.19...dialtone-tokens/v1.48.0-next.20) (2026-06-18)
 
 
