@@ -55,14 +55,6 @@ node --check popup.js
 node --check e2e.mjs
 ```
 
-Real authenticated Firespotter validation is documented in `docs/verification/safe-custom-property-override.md`:
-
-```sh
-REAL_PAGE_CDP=http://127.0.0.1:9222 REAL_PAGE_URL='https://localhost.uv-beta.dialpad.net/app/feed/aglzfnV2LWJldGFyGAsSC1VzZXJQcm9maWxlGICA2KiXi8QIDA/aglzfnV2LWJldGFyGAsSC1VzZXJQcm9maWxlGICAmOPRoYoLDA' node e2e.mjs --real-page
-```
-
-Without `REAL_PAGE_CDP`, `--real-page` fails explicitly instead of silently reporting local fixture success.
-
 ## Files
 
 | File | Purpose |

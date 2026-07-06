@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Dialtone Migration Helper",
-  "version": "0.3.57",
+  "version": "0.3.58",
   "description": "Inspect Dialtone tokens and apply a safe stable custom-property override for token-backed visual diffs.",
   "permissions": [
     "storage",

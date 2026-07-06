@@ -1,12 +1,12 @@
 {
   "name": "@dialpad/dialtone-migration-helper",
-  "version": "0.3.57",
+  "version": "0.3.58",
   "description": "Chrome extension for reviewing the Dialtone next migration: swap a live page between next and stable Dialtone (CSS, tokens, and component DOM structure), inspect token diffs on hover.",
   "private": true,
   "type": "module",
   "scripts": {
     "test": "node e2e.mjs",
-    "zip": "rm -f dialtone-migration-helper-*.zip && zip -r \"dialtone-migration-helper-$(node -p 'require(\"./manifest.json\").version').zip\" manifest.json background.js content.js token-renames.js structure.js rules.js popup.html popup.js popup.css docs/analysis && echo 'Share the zip — testers unzip and Load Unpacked in chrome://extensions'"
+    "zip": "rm -f dialtone-migration-helper-*.zip && zip -r \"dialtone-migration-helper-$(node -p 'require(\"./manifest.json\").version').zip\" manifest.json background.js content.js token-renames.js structure.js rules.js popup.html popup.js popup.css docs/analysis && echo 'Share the zip \u2014 testers unzip and Load Unpacked in chrome://extensions'"
   },
   "devDependencies": {
     "playwright": "^1.49.0"

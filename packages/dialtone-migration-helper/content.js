@@ -1,12 +1,18 @@
 // Dialtone Migration Helper — content script.
 //
-// Single toggle (dtInspect) in chrome.storage.local:
+// Four independent toggles, applied via background.js's per-tab
+// getTabState/setTabState (chrome.storage.session, resets on browser/extension
+// restart):
 //   • dtInspect — hover tooltip listing the --dt-* tokens applied to an element,
 //     shown as "next value → stable value" with a changed/new badge, plus the
 //     element's d-* utility classes.
+//   • dtOverride — swaps the page's next token values for stable inline on <html>.
+//   • dtAvatarSwap — swaps Avatar/Presence markup between next and stable.
+//   • dtReplace — in-place substitution of --dt-* values on each dialtone-css-*
+//     tag, preserving structure/mode blocks/names.
 // Theme is auto-detected from data-dt-brand/data-dt-theme with a manual override
-// (dtThemeOverride) as fallback. Runs in every frame (manifest all_frames), so
-// inspect also works in a Storybook iframe.
+// (dtThemeOverride, stored globally in chrome.storage.local) as fallback. Runs
+// in every frame (manifest all_frames), so inspect also works in a Storybook iframe.
 
 (() => {
   'use strict';
