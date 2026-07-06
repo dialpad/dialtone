@@ -4,7 +4,7 @@ Use this resource to lazy-load Codex review guidance. Always start with `.agents
 
 | Changed path                                | Load these rule files                                                                                                                                                                    |
 | ------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `packages/dialtone-vue/components/**`       | `.agents/resources/rules/vue-components.md`; `.agents/resources/rules/vue-tests.md` for tests; `.agents/resources/rules/stories.md` for stories and MDX                                  |
+| `packages/dialtone-vue/components/**`       | `.agents/resources/rules/vue-components.md`; `.agents/resources/rules/logical-naming.md`; `.agents/resources/rules/vue-tests.md` for tests; `.agents/resources/rules/stories.md` for stories and MDX                                  |
 | `packages/dialtone-css/**`                  | `.agents/resources/rules/css-utilities.md`; `.agents/resources/rules/design-tokens.md`; `.agents/resources/rules/postcss-responsive-variations.md` when responsive variants are involved |
 | `packages/dialtone-tokens/**`               | `.agents/resources/rules/design-tokens.md`                                                                                                                                               |
 | `packages/dialtone-icons/**`                | `.agents/resources/rules/icons.md`                                                                                                                                                       |

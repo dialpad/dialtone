@@ -1,5 +1,5 @@
 ---
-description: "CSS utility class creation and updates. Use when adding, modifying, or checking Dialtone CSS utilities (d-* classes). Covers Less file structure, token references, and verification."
+description: 'CSS utility class creation and updates. Use when adding, modifying, or checking Dialtone CSS utilities (d-* classes). Covers Less file structure, token references, and verification.'
 ---
 
 # CSS Utility Skill
@@ -13,23 +13,25 @@ description: "CSS utility class creation and updates. Use when adding, modifying
 
 ## Creating or Updating a Utility
 
+Before adding or recommending a utility, check whether a primitive component already exposes the same concern. For example, use DtBox for token-backed container surface, spacing, sizing, positioning, logical insets, and z-index. Keep utilities for non-DtBox elements, responsive variants, calc coordinates, reset values, arbitrary coordinates, and local escape hatches.
+
 ### 1. Determine the Correct File
 
 Match the CSS property to an existing `.less` file:
 
-| Property Type | File |
-| --- | --- |
-| `display`, `position`, `overflow`, `opacity`, `visibility`, `z-index` | `layout.less` |
-| `margin`, `padding` | `spacing.less` |
-| `flex-*` properties | `flex.less` |
-| `grid-*` properties | `grid.less` |
-| `width`, `height`, `max-*`, `min-*` | `sizing.less` |
-| `font-*`, `text-*`, `line-height` | `typography.less` |
-| `color` | `colors.less` |
-| `background-*` | `backgrounds.less` |
-| `border`, `border-radius` | `borders.less` |
-| `box-shadow`, `transform`, `transition` | `effects.less` |
-| `cursor`, `pointer-events`, `user-select` | `interactivity.less` |
+| Property Type                                                         | File                 |
+| --------------------------------------------------------------------- | -------------------- |
+| `display`, `position`, `overflow`, `opacity`, `visibility`, `z-index` | `layout.less`        |
+| `margin`, `padding`                                                   | `spacing.less`       |
+| `flex-*` properties                                                   | `flex.less`          |
+| `grid-*` properties                                                   | `grid.less`          |
+| `width`, `height`, `max-*`, `min-*`                                   | `sizing.less`        |
+| `font-*`, `text-*`, `line-height`                                     | `typography.less`    |
+| `color`                                                               | `colors.less`        |
+| `background-*`                                                        | `backgrounds.less`   |
+| `border`, `border-radius`                                             | `borders.less`       |
+| `box-shadow`, `transform`, `transition`                               | `effects.less`       |
+| `cursor`, `pointer-events`, `user-select`                             | `interactivity.less` |
 
 All 11 files: `backgrounds.less`, `borders.less`, `colors.less`, `effects.less`, `flex.less`, `grid.less`, `interactivity.less`, `layout.less`, `sizing.less`, `spacing.less`, `typography.less`. Only create a new file if truly needed, and add it to the gulp build pipeline.
 
