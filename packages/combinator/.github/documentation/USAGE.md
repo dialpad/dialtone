@@ -1,221 +1,147 @@
 # Usage
 
-The purpose of this document is to instruct how to implement Dialtone Combinator in an external project.
+This document covers direct use of the Combinator package. The Dialtone
+documentation site and thumbnail tooling already wire these pieces together.
 
-`$COMPONENT$` represents the component you want to combinate™ from Dialtone Vue.
+`$COMPONENT$` below represents the Dialtone Vue component you want to render.
 
-## Combinator
+## Required imports
 
-_Required_
-
-### Import
-
-The combinator, a target component, and the Dialtone Vue component documentation
-must be imported to use the combinator.
-
-The documentation is provided from the consumer's Dialtone Vue so that it is up to
-date with the version they are using.
+Import the Combinator, the target component, and Dialtone Vue's generated
+component documentation:
 
 ```js
-import documentation from '.../node_modules/@dialpad/dialtone-vue/dist/component-documentation.json';
+import documentation from '@dialpad/dialtone-vue/component-documentation.json';
 import { $COMPONENT$ } from '@dialpad/dialtone-vue';
 import { DtcCombinator } from '@dialpad/dialtone-combinator';
 ```
 
-*Ideally component-documentation should be included as an export in dialtone-vue,
-but it isn't currently, so it has to be imported using the node_modules path.
+`@dialpad/dialtone-vue` exports `component-documentation.json`; do not
+import it through a `node_modules` file path.
 
-### Use
+## Basic use
 
 ```vue
 <dtc-combinator
   :component="$COMPONENT$"
-  :documentation="documentation"
+  :documentation="componentDocumentation"
 />
 ```
 
-## Component Library
+```vue
+<script setup>
+import documentation from '@dialpad/dialtone-vue/component-documentation.json';
+import { DtButton } from '@dialpad/dialtone-vue';
 
-_Optional_, _Recommended_
-
-A library _should_ be provided to allow rendering of external components
-in slots, such as Dialtone Vue components or icons.
-
-Without the library, only html content and native Vue components
-can be compiled in the renderer.
-
-The `library` prop requires a single layered object with key-value pairs
-of export name and component definition, respectively.
-
-*Example using DtButton as target component, and Dialtone Vue components
-in the library (no icons).
-
-### Import
-
-```js
-import documentation from '.../node_modules/@dialpad/dialtone-vue/dist/component-documentation.json';
-import * as dialtoneVue from '@dialpad/dialtone-vue';
-import { ref } from 'vue';
+const componentDocumentation = documentation.find(
+  component => component.displayName === DtButton.name,
+);
+</script>
 ```
 
-### Use
+The standalone app in `src/App.vue` is the current package-local example.
+
+## Library components
+
+Pass a `library` object when slot templates need to render external components,
+such as other Dialtone Vue components or Dialtone icons. The renderer uses this
+library when parsing slot template strings.
 
 ```vue
 <dtc-combinator
   :component="dialtoneVue.DtButton"
-  :documentation="documentation"
-  :library="dialtoneVueComponents"
+  :documentation="componentDocumentation"
+  :library="library"
 />
 ```
 
 ```vue
 <script setup>
-  const dialtoneVueComponents = ref(
-    Object.fromEntries(
-      Object.entries(dialtoneVue).filter(([exportName]) => {
-        return exportName.startsWith('Dt');
-      }),
-    ),
-  );
+import * as dialtoneVue from '@dialpad/dialtone-vue';
+import * as dialtoneIcons from '@dialpad/dialtone-icons/vue';
+
+const library = {
+  ...Object.fromEntries(
+    Object.entries(dialtoneVue).filter(([name, value]) => {
+      return name.startsWith('Dt') && typeof value === 'object';
+    }),
+  ),
+  ...dialtoneIcons,
+};
 </script>
 ```
 
-### Caveats
-
-Since dialtone icons are not exported in a bundle, there is some sorcery required
-to provide them as a library. For implementing this, check out 'App.vue' (using require) or
-the dialtone project 'client.js' vuepress config file (import from internal dialtone icon data).
-
 ## Variants
 
-Variants can be used to customize the data for members of a component.
-
-This is passed to the combinator through the `variants` prop.
-
-The default variant will always exist, even if not declared. However, it can be
-overridden by declaring it and setting custom data on members.
-
-<details>
-<summary>Format</summary>
-<pre>
-<code>
-{
-    VARIANT_NAME:
-    {
-        MEMBER_GROUP:
-        {
-            MEMBER:
-            {
-                MEMBER_FIELD: VALUE,
-                ...
-            },
-            ...
-        },
-        ...
-    },
-    ...
-}
-</code>
-</pre>
-</details>
-
-<details>
-<summary>Example</summary>
-<pre>
-<code>
-{
-    default: {
-        slots: {
-            default: {
-                initialValue: 'Place call',
-            },
-        },
-    },
-    primary: {
-        slots: {
-            default: {
-                initialValue: 'Primary',
-            },
-        },
-        props: {
-            importance: {
-                initialValue: 'primary',
-                lockControl: true,
-            },
-        },
-    },
-}
-</code>
-</pre>
-<i>The 'default' and 'primary' variants for 'DtButton'</i>
-</details>
-
-Any data provided will be set on the 'info' object for the member it is provided for.
-Most of the time this is overriding data generated from the Dialtone Vue documentation.
-
-There are some special fields that are intended to be used just by variants:
-
-* hideControl: Hides the control for the member in the sidebar
-* lockControl: Locks the control for the member in the sidebar
-
-A good place to look to see many of the fields that are used by a member is
-'option_bar_member_group.vue', this is where the member data is exposed to the
-underlying control.
-
-## Variant Bank
-
-_Optional_
-
-A storage of shared variants can be imported to use with the combinator.
-
-*Example using DtButton as target component
-
-### Import
-
-```js
-import documentation from '.../node_modules/@dialpad/dialtone-vue/dist/component-documentation.json';
-import { variantBank } from '@dialpad/dialtone-combinator';
-import { DtButton } from '@dialpad/dialtone-vue';
-import { ref } from 'vue';
-```
-
-### Use
+Variants provide initial values and metadata for a target component. Pass one
+component's variant object to the `variants` prop:
 
 ```vue
 <dtc-combinator
   :component="DtButton"
-  :documentation="documentation"
-  :variants="componentVariants"
+  :documentation="componentDocumentation"
+  :variants="buttonVariants"
 />
 ```
 
-```vue
-<script setup>
-  const componentVariants = ref(variantBank.DtButton);
-</script>
+```js
+import { variantBank } from '@dialpad/dialtone-combinator';
+
+const buttonVariants = variantBank().DtButton;
 ```
 
-## Blueprint Mode
+Inside the package source, the registry lives at
+`src/variants/variants.js`. Each component variant file can contain:
 
-Blueprint mode can be activated to remove the sidebar and settings and just show the
-renderer/code panel split view.
+- `defaults`, applied before the selected preset;
+- `exclusions`, evaluated against current prop and slot values;
+- `default`, the default preset and reset target;
+- any number of named presets shown in the preset dropdown.
+
+Member metadata can also add control hints such as `tokenCategory` and
+`searchKeywords`. Search keywords supplement the automatic member-name and
+logical-alias search corpus.
+
+See [internal/EXCLUSIONS.md](internal/EXCLUSIONS.md) for exclusion mechanics.
+
+## Blueprint mode
+
+Blueprint mode hides the option bar and forces code verbose mode off. It keeps
+the renderer and code panel.
 
 ```vue
 <dtc-combinator
-  ...
+  :component="DtButton"
+  :documentation="componentDocumentation"
   :blueprint="true"
 />
 ```
 
-## Styling
+## Dev mode
 
-Additional styling classes can be given to the header and root sections
-of the combinator.
+`dev-mode` enables the code panel's "Copy JSON" button when the current options
+differ from the default preset. The copied text is a variant preset fragment.
 
 ```vue
 <dtc-combinator
-  ...
-  header-class="d-py-400"
-  class="d-px-400"
+  :component="DtButton"
+  :documentation="componentDocumentation"
+  dev-mode
 />
 ```
+
+## Styles
+
+You can pass classes to the root `DtcCombinator` component with normal Vue class
+binding:
+
+```vue
+<dtc-combinator
+  class="d-w100p"
+  :component="DtButton"
+  :documentation="componentDocumentation"
+/>
+```
+
+There is no mounted header slot or `header-class` prop in the current root
+component.

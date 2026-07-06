@@ -1,31 +1,54 @@
-# Releasing
+# Release process
 
-A release is required to update the npm package and provide an update for package users.
+Combinator releases are CI-owned. Do not publish this package manually, and do
+not run an old `release.sh` flow. There is no `release.sh` script in this
+package.
 
-## Access
+## Release target
 
-You must have the access token to write to the npm package.
-Make sure this is sourced before publishing the package.
+Nx exposes the release target:
 
-```
-source TOKEN_PATH
-```
-
-## Publish
-
-The package can be published by running the 'release.sh' script.
-This will increment the version and publish it to the npm registry.
-
-```
-npm run release
+```bash
+pnpm nx run dialtone-combinator:release
 ```
 
-OR
+That target runs:
 
-```
-./release.sh
+```bash
+pnpm semantic-release-plus --extends ./packages/combinator/release-ci.config.cjs
 ```
 
-It will prompt for the release version [major, minor, patch] and
-then build the package locally as well as publish it to the npm package 
-`@dialpad/dialtone-combinator`.
+The config for this package is
+`packages/combinator/release-ci.config.cjs`.
+
+## Semantic-release behavior
+
+The Combinator release config:
+
+- analyzes Conventional Commit messages;
+- treats `refactor` commits as patch releases;
+- updates `packages/combinator/CHANGELOG.md`;
+- updates `packages/combinator/CHANGELOG.json`;
+- creates a GitHub release;
+- uses tag format `combinator/v${version}`;
+- runs `@semantic-release/npm` with `npmPublish: false`.
+
+`npmPublish: false` means the release flow updates release metadata but does not
+publish `@dialpad/dialtone-combinator` to npm from this package config.
+
+## Branches
+
+The package release config currently defines these release branches:
+
+- `staging`
+- `beta`
+- `alpha`
+- `next`
+
+`beta`, `alpha`, and `next` are prerelease branches.
+
+## Manual release work
+
+Limit manual release work to fixing the release configuration, rerunning CI, or
+validating generated changelog output. Never source a local npm token or publish
+the package by hand as part of normal development.

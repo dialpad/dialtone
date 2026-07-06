@@ -1,3 +1,10 @@
+# [4.55.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.55.0-next.1...dialtone-icons/v4.55.0-next.2) (2026-07-03)
+
+
+### Features
+
+* **Combinator:** DLT-3489 DLT-3490 DLT-3491 refine control panel ui ([#1343](https://github.com/dialpad/dialtone/issues/1343)) ([0385c2f](https://github.com/dialpad/dialtone/commit/0385c2f4a3945b176b55322932aaa68c03fc0848))
+
 # [4.55.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.54.0...dialtone-icons/v4.55.0-next.1) (2026-06-16)
 
 

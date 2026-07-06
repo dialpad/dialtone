@@ -1,3 +1,16 @@
+# [1.14.0-next.3](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.14.0-next.2...eslint-plugin-dialtone/v1.14.0-next.3) (2026-07-03)
+
+
+### Bug Fixes
+
+* **Eslint Plugin Dialtone:** NO-JIRA declare eslint-plugin-n devDependency lost to pnpm 11 hoisting change ([2998ec7](https://github.com/dialpad/dialtone/commit/2998ec7385604ad78fc1686349d29515e3b1b97a))
+
+
+### Features
+
+* **Combinator:** DLT-3489 DLT-3490 DLT-3491 refine control panel ui ([#1343](https://github.com/dialpad/dialtone/issues/1343)) ([0385c2f](https://github.com/dialpad/dialtone/commit/0385c2f4a3945b176b55322932aaa68c03fc0848))
+* **Text:** DLT-3487 expose full typography size scale ([#1334](https://github.com/dialpad/dialtone/issues/1334)) ([0c8f4c6](https://github.com/dialpad/dialtone/commit/0c8f4c627bc51e5b53e0bde72c832361e38a6137))
+
 # [1.14.0-next.2](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.14.0-next.1...eslint-plugin-dialtone/v1.14.0-next.2) (2026-06-26)
 
 

@@ -17,6 +17,7 @@ Use this as the routing table for repo-local Codex skills. Keep default context 
 | `pr-complete`     | after PR merge, branch closeout                    | Verify merge state, return to `staging`, and handle `NO-JIRA` closeout safely.                  | `package-map.md`                                                   | fixture  |
 | `doc-sync-check`  | source changes that may affect AI docs             | Report missing/stale `dialtone-docs` updates and offer apply mode.                              | `doc-sync.md`                                                      | fixture  |
 | `component-work`  | component creation/update, component API changes   | Keep Vue component, tests, stories, docs, and downstream data in sync.                          | `package-map.md`, `rule-map.md`, `validation.md`, `doc-sync.md`    | contract |
+| `component-variant` | Combinator variant authoring for component changes | Keep `packages/combinator/src/variants/**` aligned with component props, slots, values, and thumbnails. | `rules/combinator-variants.md`, `package-map.md`, `rule-map.md` | contract |
 
 ## Resources
 

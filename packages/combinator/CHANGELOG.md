@@ -1,3 +1,12 @@
+# [1.2.0-next.14](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.13...combinator/v1.2.0-next.14) (2026-07-03)
+
+
+### Features
+
+* **Combinator:** DLT-3479 add combinator grid view ([#1337](https://github.com/dialpad/dialtone/issues/1337)) ([b1f5599](https://github.com/dialpad/dialtone/commit/b1f559971b24b25081df33ff1b9c761ad5506ddc))
+* **Combinator:** DLT-3489 DLT-3490 DLT-3491 refine control panel ui ([#1343](https://github.com/dialpad/dialtone/issues/1343)) ([0385c2f](https://github.com/dialpad/dialtone/commit/0385c2f4a3945b176b55322932aaa68c03fc0848))
+* **Text:** DLT-3487 expose full typography size scale ([#1334](https://github.com/dialpad/dialtone/issues/1334)) ([0c8f4c6](https://github.com/dialpad/dialtone/commit/0c8f4c627bc51e5b53e0bde72c832361e38a6137))
+
 # [1.2.0-next.13](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.12...combinator/v1.2.0-next.13) (2026-06-22)
 
 

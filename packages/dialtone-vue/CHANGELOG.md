@@ -1,3 +1,18 @@
+# [3.223.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.223.0-next.2...dialtone-vue/v3.223.0-next.3) (2026-07-03)
+
+
+### Bug Fixes
+
+* **Modal:** DLT-3476 do not close when drag starts inside dialog and ends on backdrop ([#1322](https://github.com/dialpad/dialtone/issues/1322)) ([4d5726b](https://github.com/dialpad/dialtone/commit/4d5726b0ffd903c4bf7987820e90bc33c01f4f1f))
+* **Popover:** NO-JIRA guard onShow against window access after component unmount ([#1320](https://github.com/dialpad/dialtone/issues/1320)) ([4690585](https://github.com/dialpad/dialtone/commit/4690585c4e5c39d7099969552796c7b9817de5ae))
+* **Rich Text Editor:** DP-190440 strip trailing <br> before </p> on paste ([#1326](https://github.com/dialpad/dialtone/issues/1326)) ([28737c0](https://github.com/dialpad/dialtone/commit/28737c0066cf600eb4ebfffd512056c250de7599))
+
+
+### Features
+
+* **Combinator:** DLT-3489 DLT-3490 DLT-3491 refine control panel ui ([#1343](https://github.com/dialpad/dialtone/issues/1343)) ([0385c2f](https://github.com/dialpad/dialtone/commit/0385c2f4a3945b176b55322932aaa68c03fc0848))
+* **Text:** DLT-3487 expose full typography size scale ([#1334](https://github.com/dialpad/dialtone/issues/1334)) ([0c8f4c6](https://github.com/dialpad/dialtone/commit/0c8f4c627bc51e5b53e0bde72c832361e38a6137))
+
 ## [3.222.2](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.222.1...dialtone-vue/v3.222.2) (2026-06-16)
 
 

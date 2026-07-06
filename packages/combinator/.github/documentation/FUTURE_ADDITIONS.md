@@ -1,74 +1,62 @@
-# Future Additions
+# Future additions
 
 ## Completed
 
-### Add Supported Components
+### Supported components through the library prop
 
-Components can now be used in slots via the library system. `node.vue` recursively
-renders library components, and 28+ components have variant definitions with slot
-examples demonstrating nested Dialtone Vue components.
+Components can render nested Dialtone Vue components and icons in slots through
+the `library` prop. `DtcNode` recursively renders library components, and the
+standalone app passes all `Dt*` Dialtone Vue exports plus Dialtone icons.
 
-[Original Pull Request](https://github.com/dialpad/dialtone-combinator/pull/14)
+### Icon-slot control
 
-### Icon Control
+`control_icon_slot.vue` provides a searchable icon dropdown. `isIconSlot()`
+detects icon slots by name, matching `icon`, names ending in `Icon`, and names
+ending in `Icons`.
 
-A dedicated icon slot control (`control_icon_slot.vue`) provides a searchable dropdown
-of all Dialtone icons using `dt-recipe-combobox-with-popover`. Icons are detected by
-naming convention (`isIconSlot()` checks for names equal to 'icon' or ending with
-'Icon'/'Icons') rather than the originally proposed `@icon` documentation tag.
+The control converts selected icons to template strings and includes
+`:size="iconSize"` when slot bindings expose an icon-size value.
 
-The control handles icon-to-template conversion, scoped slot bindings (`iconSize`),
-and clear/reset. Icons are passed through the existing `library` prop rather than a
-separate `iconLibrary` prop as originally proposed.
+### Semantic-release config
 
-### Semantic Versioning (CI)
-
-Implemented via `release-ci.config.cjs` with semantic-release-plus. Release branches:
-`staging` (production), `beta`, `alpha`, `next` (prerelease). Tag format:
+`packages/combinator/release-ci.config.cjs` is the release source of truth.
+Release branches are `staging`, `beta`, `alpha`, and `next`. The tag format is
 `combinator/v${version}`.
 
----
+### Code copy from data
 
-## In Progress
+The live code editor copies generated template text from `info` and `options`.
+It does not read DOM text, so code-panel layout does not affect code
+indentation.
 
-### Renderer Node Scoped Slots
+## In progress or planned
 
-Scoped slot data is partially supported. The renderer passes slot bindings through
-`renderer_target.vue`, and specific cases are handled (icon slots extract `iconSize`
-bindings, code generation detects used binding names from slot content).
+### Renderer node scoped slots
 
-The general case — full communication of arbitrary scoped slot data between the target
-component and node components — is not yet complete. The existing icon slot pattern
-(`hasIconSizeBinding`) could be generalized so that any slot with scoped data
-automatically makes those bindings available to its content.
+Specific scoped slot cases work today. Icon slots can use `iconSize`, and code
+generation includes bindings that the slot content references. A general
+model for arbitrary scoped slot data is still incomplete.
 
-[Vue render function slots documentation](https://vuejs.org/guide/extras/render-function.html#rendering-slots)
+### Settings and renderer menus
 
-### Sidebar Theming
+The settings model exists, and latent menu components still exist, but the live
+root component does not mount `settings_menu`, `renderer_menu`, or
+`renderer_button_bar`. DLT-3498 tracks the decision to rewire or remove those
+components.
 
-The settings system supports a light/dark theme toggle, and the code panel and renderer
-respond to it via `dtc-theme--${theme}` classes. The sidebar (option bar) does not yet
-fully respond to theme changes. Extending theming to the sidebar would be mostly CSS
-work to ensure the option bar respects the existing theme classes.
+### Dedicated class control
 
----
+The current UI has a Class tab for the native `class` attribute and `*Class`
+props. Those members still use the normal string or selection controls. A future
+dedicated class control could provide Dialtone utility suggestions while still
+allowing custom classes.
 
-## Future
+### Orphaned component cleanup
 
-### Class Control
+DLT-3498 tracks the follow-up to rewire or remove these latent components:
 
-A control that allows quick selection and suggestions of Dialtone utility classes.
-
-Props with a `Class` suffix (e.g., `labelClass`) are currently treated as regular
-string or selection controls. A dedicated class control using 'combobox with multiselect'
-could replace these, providing a list of Dialtone utility classes as suggestions while
-still allowing custom class input.
-
-#### Implementation
-
-Detection could use naming convention (props ending in `Class`) similar to how icon
-slots are detected, rather than the originally proposed `@class` documentation tag.
-
-This can be implemented using `getBindingControls()` in option_bar.vue. A dedicated
-`getPropControls()` could be added to abstract the logic since this would only apply
-to props.
+- `settings_menu`
+- `header`
+- `event_console`
+- `renderer_menu`
+- `renderer_button_bar`
