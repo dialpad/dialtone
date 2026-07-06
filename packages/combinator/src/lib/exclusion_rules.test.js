@@ -2,6 +2,7 @@ import { expect } from 'vitest';
 import { shouldExclude, shouldDisable, shouldClear, getDisabledValues } from './exclusion_rules';
 import variantsAvatar from '@/src/variants/variants_avatar';
 import variantsBadge from '@/src/variants/variants_badge';
+import variantsBox, { INSET_PROPS } from '@/src/variants/variants_box';
 import variantsButton from '@/src/variants/variants_button';
 import variantsItemLayout from '@/src/variants/variants_item_layout';
 import variantsLink from '@/src/variants/variants_link';
@@ -162,6 +163,17 @@ describe('exclusion_rules', function () {
       expect(shouldClear('iconSize', 'props', [SLOT_CLEAR_RULE], {}, {
         startIcon: '<dt-icon-lock :size="iconSize" />',
       })).toBe(false);
+    });
+  });
+
+  describe('conditional prop exclusions', function () {
+    it('should keep DtBox inset props inactive unless position is set and non-static', function () {
+      expect.hasAssertions();
+      INSET_PROPS.forEach(prop => {
+        expectDisabledAndCleared(prop, variantsBox.exclusions);
+        expectDisabledAndCleared(prop, variantsBox.exclusions, { position: 'static' });
+        expectEnabled(prop, variantsBox.exclusions, { position: 'relative' });
+      });
     });
   });
 
