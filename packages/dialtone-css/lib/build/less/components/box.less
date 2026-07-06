@@ -174,14 +174,17 @@
   border-color: oklch(from var(--box-bc) l c h / var(--bco, alpha));
 
   // Border — always solid, no visible border until borderWidth prop is set.
-  // Width cascade: specific → axis → shorthand → 0
   border-style: solid;
   border-radius: var(--box-br);
 
   // Shadow
   box-shadow: var(--box-shadow, none);
+
+  // Inset
   inset-block: var(--box-ibs, var(--box-inset-block, var(--box-inset, auto))) var(--box-ibe, var(--box-inset-block, var(--box-inset, auto)));
   inset-inline: var(--box-iis, var(--box-inset-inline, var(--box-inset, auto))) var(--box-iie, var(--box-inset-inline, var(--box-inset, auto)));
+
+  // Width cascade: specific → axis → shorthand → 0
   border-block-start-width:  var(--box-bwbs, var(--box-bwbl, var(--box-bw, 0)));
   border-block-end-width:    var(--box-bwbe, var(--box-bwbl, var(--box-bw, 0)));
   border-inline-start-width: var(--box-bwis, var(--box-bwi,  var(--box-bw, 0)));

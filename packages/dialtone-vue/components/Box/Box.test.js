@@ -416,35 +416,37 @@ describe('DtBox', () => {
     expect(wrapper.classes()).toContain(expectedClass);
   });
 
-  it.each(DT_BOX_INSET_VALUES)('does not warn for shorthand inset coordinate %s', (value) => {
-    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+  describe('positioning prop validation', () => {
+    let warnSpy;
 
-    mountComponent({ inset: value });
+    beforeEach(() => {
+      warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    });
 
-    expect(warnSpy).not.toHaveBeenCalled();
-  });
+    it.each(DT_BOX_INSET_VALUES)('does not warn for shorthand inset coordinate %s', (value) => {
+      mountComponent({ inset: value });
 
-  it.each(DT_BOX_INSET_SIDE_VALUES)('does not warn for side-specific inset coordinate %s', (value) => {
-    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+      expect(warnSpy).not.toHaveBeenCalled();
+    });
 
-    mountComponent({ insetInlineEnd: value });
+    it.each(DT_BOX_INSET_SIDE_VALUES)('does not warn for side-specific inset coordinate %s', (value) => {
+      mountComponent({ insetInlineEnd: value });
 
-    expect(warnSpy).not.toHaveBeenCalled();
-  });
+      expect(warnSpy).not.toHaveBeenCalled();
+    });
 
-  it.each([
-    ['position', 'unset'],
-    ['zIndex', 'unset'],
-    ['inset', '50p'],
-    ['insetBlock', '100p'],
-    ['insetInline', 'n50p'],
-    ['insetBlockStart', '100p-calc'],
-  ])('warns when %s receives invalid value %s', (prop, value) => {
-    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    it.each([
+      ['position', 'unset'],
+      ['zIndex', 'unset'],
+      ['inset', '50p'],
+      ['insetBlock', '100p'],
+      ['insetInline', 'n50p'],
+      ['insetBlockStart', '100p-calc'],
+    ])('warns when %s receives invalid value %s', (prop, value) => {
+      mountComponent({ [prop]: value });
 
-    mountComponent({ [prop]: value });
-
-    expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining(`[DtBox] Invalid prop value: "${value}"`));
+      expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining(`[DtBox] Invalid prop value: "${value}"`));
+    });
   });
 
   it.each(DT_BOX_Z_INDEX_VALUES)('applies zIndex modifier class for %s', (zIndex) => {
@@ -453,16 +455,19 @@ describe('DtBox', () => {
     expect(wrapper.classes()).toContain(`d-box--zi-${zIndex}`);
   });
 
-  it('applies multiple positioning classes simultaneously', () => {
+  it.each([
+    ['position', 'sticky', 'd-box--ps-sticky'],
+    ['insetBlockStart', '0', 'd-box--ibs-0'],
+    ['zIndex', 'navigation', 'd-box--zi-navigation'],
+  ])('applies %s class alongside other positioning props', (prop, value, expectedClass) => {
     const wrapper = mountComponent({
       position: 'sticky',
       insetBlockStart: '0',
       zIndex: 'navigation',
+      [prop]: value,
     });
 
-    expect(wrapper.classes()).toContain('d-box--ps-sticky');
-    expect(wrapper.classes()).toContain('d-box--ibs-0');
-    expect(wrapper.classes()).toContain('d-box--zi-navigation');
+    expect(wrapper.classes()).toContain(expectedClass);
   });
 
   it('does not add positioning classes when props are undefined', () => {
