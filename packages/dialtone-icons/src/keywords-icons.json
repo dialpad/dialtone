@@ -229,6 +229,14 @@
       "brand-dialpad": [],
       "bullhorn": [],
       "clockify": [],
+      "compass-color": [
+        "navigation",
+        "direction",
+        "location",
+        "map",
+        "bearing",
+        "orient"
+      ],
       "copper-crm": [],
       "dialbot": [
         "brand"
@@ -1749,6 +1757,14 @@
         "programming",
         "html",
         "xml"
+      ],
+      "compass": [
+        "navigation",
+        "direction",
+        "location",
+        "map",
+        "bearing",
+        "orient"
       ],
       "copy": [
         "clone",
