@@ -1,10 +1,10 @@
 ---
 title: Box
-description: Low-level surface and spacing primitive for building token-constrained containers.
+description: Low-level surface, spacing, sizing, and positioning primitive for building token-constrained containers.
 status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-box--default
-keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius", "sizing", "overflow", "scrollbar", "background", "spacing", "layout", "primitive", "elevation"]
+keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius", "sizing", "overflow", "scrollbar", "background", "spacing", "layout", "primitive", "elevation", "position", "positioning", "inset", "offset", "z-index", "z index", "sticky", "absolute", "relative", "fixed", "top", "right", "bottom", "left"]
 ---
 
 <component-combinator component-name="DtBox" />
@@ -17,24 +17,25 @@ keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius
 
 DtBox complements [DtText](/components/text.html) (typography) and [DtStack](/components/stack.html) (flex layout) to form Dialtone's **primitive triad**:
 
-* **DtBox**: what the container *is* (`surface`, `border`, `padding`, `sizing`)
+* **DtBox**: what the container *is* (`surface`, `border`, `padding`, `sizing`, `positioning`)
 * **DtText**: what the content *looks* like (`font`, `size`, `color`)
 * **DtStack**: how children are *arranged* (`direction`, `gap`, `alignment`)
 
 ### Guidance
 
-* Use DtBox in place of composing multiple surface utility classes (e.g., `d-bgc-*`, `d-bc-*`, `d-bar*`, `d-bs-*`, `d-p-*`).
+* Use DtBox in place of composing multiple surface utility classes (e.g., `d-bgc-*`, `d-bc-*`, `d-bar*`, `d-bs-*`, `d-p-*`, `d-ps-*`).
 * Use the `as` prop to render semantic HTML elements (`section`, `nav`, `article`, `header`, etc.) for accessibility.
-* DtBox is a **passive container** — it does not handle layout (use [DtStack](/components/stack.html)) or typography (use [DtText](/components/text.html)).
+* DtBox is a **passive container** — it does not arrange children (use [DtStack](/components/stack.html)) or handle typography (use [DtText](/components/text.html)).
 * Compose DtBox + DtStack + DtText together for structured UI surface containers.
 
 <dialtone-usage>
 <template #do>
 
 * Use DtBox for card surfaces, info panels, content regions, and any container that needs surface styling.
+* Use DtBox for common token-backed container positioning such as sticky headers, relative anchors, and logical insets.
 * Compose with DtStack for layout: `<dt-box><dt-stack>...</dt-stack></dt-box>`.
 * Use the `as` prop for semantic HTML: `<dt-box as="nav">`, `<dt-box as="section">`.
-* Use `class` for one-off styling outside DtBox's prop surface (e.g., `class="d-ps-sticky"`).
+* Use `class` for one-off styling outside DtBox's prop surface, including responsive, calc, reset, arbitrary, or non-DtBox positioning utilities.
 
 </template>
 <template #dont>
@@ -42,6 +43,7 @@ DtBox complements [DtText](/components/text.html) (typography) and [DtStack](/co
 * Don't use DtBox for flex layout — use [DtStack](/components/stack.html) for direction, gap, alignment.
 * Don't use DtBox for typography — use [DtText](/components/text.html) for font, size, tone.
 * Don't use utility classes for properties DtBox already handles (e.g., avoid `class="d-bgc-primary"` when `surface="primary"` exists).
+* Don't use DtBox positioning props as a replacement for overlay components, teleports, dialogs, or popovers.
 * Don't nest DtBox deeply when a dedicated component (DtCard, DtNotice) better fits the pattern.
 
 </template>
@@ -186,6 +188,124 @@ Maps to Dialtone's **layout token scale** (`--dt-layout-*`). Supports both fixed
   <dt-box padding="200" surface="moderate" border-radius="300" inline-size="500">500 (320px)</dt-box>
   <dt-box padding="200" surface="moderate" border-radius="300" inline-size="50p">50p</dt-box>
 </dt-stack>
+```
+
+## Positioning
+
+Use `position` prop paired with `inset` and `z-index` props to position a box. The `position` prop maps to CSS's `position` property, and the `inset` props map to CSS's logical `inset-*` properties.
+
+Their values map to Dialtone's coordinate value set: spacing values, negative spacing values, and percentage coordinates. For example, `inset-block-start` maps to the block-start edge, aka the physical value `top`.
+
+As a fallback, positioning CSS utilities are available: [position](/utilities/layout/position.md), [coordinates](/utilities/layout/coordinates.md), and [z-index](/utilities/layout/z-index.md).
+
+```vue demo
+<dt-box
+  max-block-size="400"
+  surface="secondary"
+  border-width="100"
+  border-color="subtle"
+  scrollbar="always"
+>
+  <dt-box
+    as="header"
+    position="sticky"
+    inset-block-start="0"
+    z-index="navigation"
+    padding="200"
+    padding-block="100"
+    surface="secondary"
+    border-width-block-end="100"
+    border-color="subtle"
+  >
+    <dt-stack direction="row" justify="space-between" align="center">
+      <dt-text as="h2" kind="headline" :size="300">Sticky header</dt-text>
+    </dt-stack>
+  </dt-box>
+  <dt-box padding="100" padding-inline="200">
+    <dt-stack gap="100">
+      <dt-text v-for="i in 20" :key="i" kind="body" size="sm">Scrollable item {{ i }}</dt-text>
+    </dt-stack>
+  </dt-box>
+</dt-box>
+```
+
+### Logical insets
+
+The inset cascade resolves specific sides over axis shorthands over the all-sides shorthand. `inset` positions the outside edges of a positioned box; use `padding` for internal spacing. Percentage coordinate values apply only to side-specific props.
+
+```vue demo
+<dt-box position="relative" inline-size="100p" block-size="300" border-radius="300" border-width="100" border-color="subtle">
+  <dt-box
+    position="absolute"
+    padding="200"
+    border-radius="300"
+    inset-block-start="100"
+    inset-inline-start="100"
+    surface="moderate-opaque"
+  >
+    <dt-text as="p" variant="body-sm">Top Left</dt-text>
+  </dt-box>
+  <dt-box
+    position="absolute"
+    padding="200"
+    border-radius="300"
+    inset-block-start="100"
+    inset-inline-end="100"
+    surface="moderate-opaque"
+  >
+    <dt-text as="p" variant="body-sm">Top Right</dt-text>
+  </dt-box>
+  <dt-box
+    position="absolute"
+    padding="200"
+    border-radius="300"
+    inset-block-end="100"
+    inset-inline-end="100"
+    surface="moderate-opaque"
+  >
+    <dt-text as="p" variant="body-sm">Bottom Right</dt-text>
+  </dt-box>
+  <dt-box
+    position="absolute"
+    padding="200"
+    border-radius="300"
+    inset-block-end="100"
+    inset-inline-start="100"
+    surface="moderate-opaque"
+  >
+    <dt-text as="p" variant="body-sm">Bottom Left</dt-text>
+  </dt-box>
+</dt-box>
+```
+
+### Z-index
+
+The `z-index` prop maps to Dialtone's semantic z-index tokens. Stacking order depends on the element's layout context, so prefer the lowest layer that fits the container and keep overlay behavior in dedicated overlay components.
+
+```vue demo
+<dt-box position="relative" inline-size="100p" block-size="300" border-radius="300" border-width="100" border-color="subtle">
+  <dt-box
+    position="absolute"
+    padding="200"
+    border-radius="300"
+    inset-block-start="400"
+    inset-inline-start="500"
+    surface="info"
+    z-index="base1"
+  >
+    <dt-text as="p" variant="body-sm">Above</dt-text>
+  </dt-box>
+  <dt-box
+    position="absolute"
+    padding="200"
+    border-radius="300"
+    inset-block-start="100"
+    inset-inline-start="100"
+    surface="moderate"
+  >
+    <dt-text as="p" variant="body-sm">Beneath</dt-text>
+  </dt-box>
+</dt-box>
 ```
 
 ## Overflow

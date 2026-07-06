@@ -4,11 +4,16 @@ description: Utility classes to assign an element’s top, right, bottom, or lef
 keywords: ["top","right","bottom","left","inset","position offset","inset inline start","inset inline end","inset block start","inset block end"]
 ---
 
+> [!WARNING] Use DtBox over CSS Utilities
+> Reach for [DtBox's](/components/box.html#positioning) logical inset props before considering coordinate utilities.
+
 ## Positive Coordinates
 
 ### Examples
 
 Use `d-t-{stop}`, `d-r-{stop}`, `d-b-{stop}`, `d-l-{stop}`, `d-x-{stop}`, `d-y-{stop}`, `d-all-{stop}` to absolutely position elements. Logical property aliases are also available: `d-ibs-{stop}` (inset-block-start), `d-iie-{stop}` (inset-inline-end), `d-ibe-{stop}` (inset-block-end), `d-iis-{stop}` (inset-inline-start).
+
+Use coordinate utilities when you need positioning on non-DtBox elements, responsive modifiers, calc offsets such as `100p-calc`, CSS-wide resets, or coordinate values outside DtBox's prop surface.
 
 ```vue demo
 <!-- @wrapper -->

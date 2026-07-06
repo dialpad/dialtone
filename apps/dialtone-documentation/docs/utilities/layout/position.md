@@ -4,6 +4,9 @@ description: Utility classes to change an element’s position type.
 keywords: ["relative", "absolute", "fixed", "sticky", "static"]
 ---
 
+> [!WARNING] Use DtBox over CSS Utilities
+> Reach for [DtBox's](/components/box.html#positioning) `position` prop before considering positioning utilities.
+
 ## Examples
 
 ```vue demo
