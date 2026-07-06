@@ -106,11 +106,16 @@ function activeTab() {
   );
 }
 
-function sendTab(tabId, msg) {
+// Queries (getDetectedTheme, get*Report) go to the top frame only — they want
+// the main page's answer. Toggles pass { allFrames: true } so the change applies
+// in every injected frame (the content script runs with all_frames), e.g. a
+// Storybook preview iframe where the actual components live.
+function sendTab(tabId, msg, { allFrames = false } = {}) {
   return new Promise((resolve) => {
     const timeout = setTimeout(() => resolve({ ok: false, error: 'tab response timed out' }), 10000);
+    const options = allFrames ? {} : { frameId: 0 };
     try {
-      chrome.tabs.sendMessage(tabId, msg, { frameId: 0 }, (r) => {
+      chrome.tabs.sendMessage(tabId, msg, options, (r) => {
         clearTimeout(timeout);
         resolve(chrome.runtime.lastError
           ? { ok: false, error: friendlyTabError(chrome.runtime.lastError.message) }
@@ -190,7 +195,7 @@ inspectBtn.addEventListener('click', async () => {
     renderOverrideReport(null, 'open target tab');
     return;
   }
-  const response = await sendTab(tab.id, { type: 'setInspect', value: next });
+  const response = await sendTab(tab.id, { type: 'setInspect', value: next }, { allFrames: true });
   if (response?.error) {
     renderOverrideReport(null, response.error);
     return;
@@ -208,9 +213,9 @@ overrideBtn.addEventListener('click', async () => {
     renderOverrideReport(null, 'open target tab');
     return;
   }
-  const response = await sendTab(tab.id, { type: 'setOverride', value: next });
-  if (response?.error) {
-    renderOverrideReport(null, response.error);
+  const response = await sendTab(tab.id, { type: 'setOverride', value: next }, { allFrames: true });
+  if (response?.error || response?.ok === false) {
+    renderOverrideReport(null, response?.error || 'not applied');
     return;
   }
   state.dtOverride = next;
@@ -227,9 +232,9 @@ avatarSwapBtn.addEventListener('click', async () => {
     renderAvatarReport(null, 'open target tab');
     return;
   }
-  const response = await sendTab(tab.id, { type: 'setAvatarSwap', value: next });
-  if (response?.error) {
-    renderAvatarReport(null, response.error);
+  const response = await sendTab(tab.id, { type: 'setAvatarSwap', value: next }, { allFrames: true });
+  if (response?.error || response?.ok === false) {
+    renderAvatarReport(null, response?.error || 'not applied');
     return;
   }
   state.dtAvatarSwap = next;
@@ -245,9 +250,9 @@ replaceBtn.addEventListener('click', async () => {
     renderAvatarReport(null, 'open target tab');
     return;
   }
-  const response = await sendTab(tab.id, { type: 'setReplace', value: next });
-  if (response?.error) {
-    renderAvatarReport(null, response.error);
+  const response = await sendTab(tab.id, { type: 'setReplace', value: next }, { allFrames: true });
+  if (response?.error || response?.ok === false) {
+    renderAvatarReport(null, response?.error || 'not applied');
     return;
   }
   state.dtReplace = next;

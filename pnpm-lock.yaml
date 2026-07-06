@@ -702,6 +702,12 @@ importers:
         specifier: ^5.2
         version: 5.9.3
 
+  packages/dialtone-migration-helper:
+    devDependencies:
+      playwright:
+        specifier: ^1.49.0
+        version: 1.60.0
+
   packages/dialtone-query-core:
     devDependencies:
       '@dialpad/dialtone-css':

@@ -111,7 +111,7 @@
       // layout-* → size-* (base tokens only; -percent handled above, -negative carries through)
       if (!variant || variant === '-negative') {
         const fromLayout = SIZE_FROM_LAYOUT[base];
-        if (fromLayout) for (const s of fromLayout) candidates.push(`--dt-${s}`);
+        if (fromLayout) for (const s of fromLayout) candidates.push(`--dt-${s}${variant}`);
       }
 
       // size-border-N ← size-N

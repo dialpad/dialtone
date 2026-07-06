@@ -526,6 +526,12 @@
   function captureOverrideSnapshot(tokenFilter) {
     const filter = normalizeTokenFilter(tokenFilter);
     return [...document.querySelectorAll('[class*="d-"]')]
+      // Keep only elements with a real Dialtone utility class (a class token
+      // starting with `d-`), not any class merely containing "d-" (e.g.
+      // card-body, id-1). Cheap string filter runs before the layout-forcing
+      // isVisibleElement, so getBoundingClientRect isn't spent on non-Dialtone
+      // elements, and junk can't fill slots in the 80-element cap.
+      .filter((el) => [...el.classList].some((c) => c.startsWith('d-')))
       .filter(isVisibleElement)
       .slice(0, 80)
       .map((el, index) => {
@@ -1044,7 +1050,6 @@
       return null;
     }
     stableMap = res.map;
-    stableTheme = request.theme;
     return res.map;
   }
 

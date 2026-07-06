@@ -12,6 +12,20 @@
 
 const TOKENS_BASE = 'https://unpkg.com/@dialpad/dialtone';
 
+// `latest` is a moving dist-tag — the concrete release it points to changes
+// (stable ships weekly). Pinned versions are immutable and cached forever; a
+// `latest` entry is only trusted for this long before it's re-fetched, so the
+// extension can't keep diffing against a stale release without a manual refresh.
+const LATEST_TTL_MS = 24 * 60 * 60 * 1000; // 1 day
+
+// A cached token entry is usable if it's a pinned version (immutable) or a
+// `latest` entry fetched within the TTL. Entries written before this field
+// existed have no fetchedAt, so they read as stale and re-fetch.
+function isCacheFresh(version, cached) {
+  if (version !== 'latest') return true;
+  return Date.now() - (cached.fetchedAt || 0) < LATEST_TTL_MS;
+}
+
 function tokenUrl(version, brand, mode) {
   return `${TOKENS_BASE}@${version}/dist/tokens/css/tokens-${brand}-${mode}.css`;
 }
@@ -73,7 +87,7 @@ async function getStableTokens({ version = 'latest', brand, mode } = {}) {
   if (!brand || !mode) return { error: 'missing brand/mode' };
   const key = cacheKey(version, brand, mode);
   const cached = (await chrome.storage.local.get(key))[key];
-  if (cached && cached.map && cached.tokenCss) return cached;
+  if (cached && cached.map && cached.tokenCss && isCacheFresh(version, cached)) return cached;
 
   try {
     const res = await fetch(tokenUrl(version, brand, mode));
@@ -98,7 +112,7 @@ async function getStableTokens({ version = 'latest', brand, mode } = {}) {
     const map = { ...parseTokenCss(baseCss), ...parseTokenCss(brandCss) };
     if (!Object.keys(map).length) return { error: 'no tokens parsed' };
     const tokenCss = [baseCss, brandCss].filter(Boolean).join('\n');
-    const value = { resolvedVersion, map, tokenCss };
+    const value = { resolvedVersion, map, tokenCss, fetchedAt: Date.now() };
     await chrome.storage.local.set({ [key]: value });
     return value;
   } catch (e) {

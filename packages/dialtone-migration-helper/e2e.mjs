@@ -955,6 +955,70 @@ const tests = [
       assert.equal(result.finalText, result.origText, 'tag byte-identical to original after rapid toggle');
     });
   }),
+
+  test('TS-ST1 structure reapply merges mutation bursts within one frame (no dropped nodes)', async () => {
+    await withPage(async (page) => {
+      await page.setContent('<body></body>');
+      await installContentScript(page);
+
+      const result = await page.evaluate(async () => {
+        // Take manual control of the animation frame so two mutation bursts can
+        // land before the single scheduled frame runs — the exact timing where
+        // the second burst used to be dropped.
+        const queued = [];
+        window.requestAnimationFrame = (cb) => queued.push(cb);
+        window.cancelAnimationFrame = () => {};
+        const settle = () => new Promise((r) => setTimeout(r, 0));
+
+        globalThis.__dtStructure.enable(globalThis.DT_STRUCTURE_RULES);
+
+        const addChip = (id) => {
+          const el = document.createElement('span');
+          el.className = 'd-chip';
+          el.id = id;
+          document.body.appendChild(el);
+        };
+
+        addChip('burst-a');
+        await settle(); // observer delivers burst A → schedules the frame
+        addChip('burst-b');
+        await settle(); // observer delivers burst B while that frame is still pending
+
+        queued.splice(0).forEach((cb) => cb()); // run the one scheduled frame
+        await settle();
+
+        const tag = (id) => document.getElementById(id)?.tagName || 'MISSING';
+        return { a: tag('burst-a'), b: tag('burst-b') };
+      });
+
+      // Rule chip-span-to-button rewrites span.d-chip → button.
+      assert.equal(result.a, 'BUTTON', 'first burst chip was rewritten');
+      assert.equal(
+        result.b,
+        'BUTTON',
+        'second burst chip (arrived while a frame was pending) was rewritten, not dropped',
+      );
+    });
+  }),
+
+  test('TS-ST2 replaceClass revert restores the exact original class list', async () => {
+    await withPage(async (page) => {
+      // Element already carries BOTH the next (d-fc-positive) and stable
+      // (d-fc-success) class — the case a prefix swap-back can't reconstruct.
+      await page.setContent('<span id="probe" class="d-fc-positive d-fc-success extra"></span>');
+      await installContentScript(page);
+
+      const result = await page.evaluate(() => {
+        const el = document.getElementById('probe');
+        const before = el.className;
+        globalThis.__dtStructure.enable(globalThis.DT_STRUCTURE_RULES);
+        globalThis.__dtStructure.disable();
+        return { before, after: document.getElementById('probe').className };
+      });
+
+      assert.equal(result.after, result.before, 'class list restored byte-identical after toggle off');
+    });
+  }),
 ];
 
 let failures = 0;

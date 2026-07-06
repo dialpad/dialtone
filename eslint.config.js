@@ -56,7 +56,6 @@ export default [
       },
     },
     rules: {
-      'no-undef': 'off',
       complexity: 'off',
       'max-lines': 'off',
       camelcase: 'off',

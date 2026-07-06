@@ -34,6 +34,18 @@
   let applying = false;
   let pendingRaf = 0;
 
+  // Candidates accumulate here across every mutation batch that arrives before
+  // the scheduled frame fires — so a burst that lands while a frame is already
+  // pending is merged in, not dropped. Drained and reset when the frame runs.
+  let pendingCandidates = [];
+  let pendingSeen = new Set();
+  function addPendingCandidate(el) {
+    if (!pendingSeen.has(el)) {
+      pendingSeen.add(el);
+      pendingCandidates.push(el);
+    }
+  }
+
   // ── Op executors ────────────────────────────────────────────────────────────
   // Each returns { inverses: [...], nextEl } where nextEl supports op-chaining
   // through renameTag (subsequent ops in the same rule apply to nextEl).
@@ -42,7 +54,6 @@
     switch (op.type) {
       case 'replaceClass': {
         // Prefix-aware: replaces all classes starting with op.from with op.to + suffix.
-        // One inverse covers all matched variants (e.g. d-fc-success-strong, etc.).
         const snapshot = [...el.classList];
         let changed = false;
         for (const cls of snapshot) {
@@ -53,7 +64,10 @@
           }
         }
         if (!changed) return { inverses: [], nextEl: el };
-        return { inverses: [{ type: 'replaceClass', from: op.to, to: op.from }], nextEl: el };
+        // Revert by replaying the exact pre-change class list, not a prefix
+        // swap-back — a swap-back can't reconstruct an element that already
+        // carried both the old and new class name at once.
+        return { inverses: [{ type: '_restoreClassList', classes: snapshot }], nextEl: el };
       }
 
       case 'addClass':
@@ -220,6 +234,9 @@
           }
           const anchor = nextSibling && nextSibling.parentNode === parent ? nextSibling : null;
           parent.insertBefore(removedEl, anchor);
+        } else if (inv.type === '_restoreClassList') {
+          if (!target.isConnected) continue;
+          target.className = inv.classes.join(' ');
         } else {
           if (!target.isConnected) continue;
           execOp(target, inv);
@@ -246,32 +263,33 @@
   }
 
   function scheduleReapply(mutationsList) {
-    // Both guards checked before scheduling — prevents stacking.
-    if (applying || pendingRaf) return;
+    // Ignore mutations produced by our own apply pass — collecting them would loop.
+    if (applying) return;
 
-    // Collect unique element candidates from added nodes and attribute changes.
-    const seen = new Set();
-    const candidates = [];
+    // Merge this batch's candidates into the shared pending set. Batches that
+    // arrive while a frame is already scheduled accumulate here rather than
+    // early-returning, so nothing added before the rAF fires is dropped.
     for (const m of mutationsList) {
       for (const node of m.addedNodes) {
         if (node.nodeType !== 1) continue; // elements only
-        if (!seen.has(node)) { seen.add(node); candidates.push(node); }
-        for (const child of node.querySelectorAll('*')) {
-          if (!seen.has(child)) { seen.add(child); candidates.push(child); }
-        }
+        addPendingCandidate(node);
+        for (const child of node.querySelectorAll('*')) addPendingCandidate(child);
       }
       if (m.type === 'attributes' && m.target.nodeType === 1) {
-        if (!seen.has(m.target)) { seen.add(m.target); candidates.push(m.target); }
+        addPendingCandidate(m.target);
       }
     }
-    if (!candidates.length) return;
+    if (!pendingCandidates.length || pendingRaf) return;
 
-    // Set pendingRaf BEFORE requestAnimationFrame returns so subsequent observer
-    // callbacks see a non-zero value and early-return without stacking rAFs.
+    // Only one frame is ever in flight; later batches merge into pendingCandidates
+    // above. Set pendingRaf synchronously so intervening callbacks don't stack rAFs.
     pendingRaf = requestAnimationFrame(() => {
       pendingRaf = 0;
+      const batch = pendingCandidates;
+      pendingCandidates = [];
+      pendingSeen = new Set();
       applying = true;
-      applyRulesToCandidates(activeRules, candidates);
+      applyRulesToCandidates(activeRules, batch);
       applying = false;
     });
   }
@@ -311,6 +329,8 @@
         cancelAnimationFrame(pendingRaf);
         pendingRaf = 0;
       }
+      pendingCandidates = [];
+      pendingSeen = new Set();
 
       // Revert doesn't need the applying guard (observer is disconnected).
       revertAll();
