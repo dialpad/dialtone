@@ -101,7 +101,13 @@ export class DialtoneLocalization {
       return fallbackLocale;
     }
 
-    const localStorageLanguage = window.localStorage.getItem(localeManagerStorageKey);
+    // Only trust the stored locale if it's one Dialtone actually ships a bundle for.
+    // Callers (e.g. UC/UV) may allow locales Dialtone doesn't support, which would
+    // otherwise crash the LocaleManager during render.
+    const storedLanguage = window.localStorage.getItem(localeManagerStorageKey);
+    const localStorageLanguage = Object.values(allowedLocales).includes(storedLanguage)
+      ? storedLanguage
+      : null;
 
     // Get the first two letters of the navigator language and check if it's in the allowed locales
     const navigatorLanguage = Object.values(allowedLocales)
