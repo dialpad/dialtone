@@ -9,6 +9,9 @@ Do not introduce physical direction names in new public component API:
 - avoid `left`, `right`, `top`, `bottom`, `alpha`, and `omega`;
 - use `start`, `end`, `blockStart`, `blockEnd`, `inlineStart`, and
   `inlineEnd` where direction matters.
+- use full logical names for CSS geometry props, such as
+  `insetBlockStart`, `insetInlineEnd`, `paddingBlockStart`, and
+  `borderWidthInlineEnd`.
 
 Examples:
 
@@ -18,6 +21,8 @@ Examples:
 - events: `start-clicked`, `end-clicked`.
 
 If touching a component that still has physical-only names, add logical alternatives with deprecated fallbacks instead of extending the physical API.
+
+Do not add deprecated physical aliases for brand-new logical APIs.
 
 ## Deprecated slot fallbacks
 
@@ -87,3 +92,9 @@ Use lowercase `aka`, place the parenthetical before the period, and bridge the f
 The Combinator option-bar search uses `packages/combinator/src/lib/logical_aliases.js` to map logical tokens to physical search aliases. `option_bar.vue` tokenizes camelCase member names and expands logical tokens through that map.
 
 When adding new logical naming vocabulary, update `logical_aliases.js` so users can still search by familiar physical terms.
+
+Single physical words such as `top` and `left` match logical prop names through `logical_aliases.js`. Do not repeat them as per-prop `searchKeywords`.
+
+Search normalization strips spaces and hyphens, so `z index` and `z-index` already match `zIndex` with no keywords.
+
+Add explicit `searchKeywords` only for multi-word phrases the name and aliases cannot derive, such as `padding left` or `sticky top`.

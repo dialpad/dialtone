@@ -32,19 +32,23 @@ function getMeasureElement () {
 }
 
 /**
- * Resolves a CSS custom property to its computed px value
- * by applying it to a hidden element's width.
+ * Resolves a CSS custom property to its computed value by applying it
+ * to a measurable property on a hidden element.
  *
  * @param {string} varName - CSS custom property name (e.g. '--dt-spacing-200')
+ * @param {string} [cssProperty] - CSS property used to resolve the value
  * @returns {string|null} Resolved value (e.g. '16px') or null
  */
-function resolveCssVar (varName) {
+function resolveCssVar (varName, cssProperty = 'width') {
   const SENTINEL = '8739.5px';
   const el = getMeasureElement();
-  el.style.width = `var(${varName}, ${SENTINEL})`;
-  const resolvedWidth = getComputedStyle(el).width;
-  el.style.width = '';
+  el.style[cssProperty] = `var(${varName}, ${SENTINEL})`;
+  const resolvedWidth = getComputedStyle(el)[cssProperty];
+  el.style[cssProperty] = '';
   if (!resolvedWidth || resolvedWidth === 'auto' || resolvedWidth === SENTINEL) return null;
+  // jsdom echoes unresolved var() expressions in computed style (real browsers
+  // always substitute), so fall back to the raw :root text for tests.
+  if (resolvedWidth.startsWith('var(')) return resolveRootVar(varName);
   return resolvedWidth;
 }
 
@@ -55,6 +59,8 @@ function resolveCssVar (varName) {
  * @returns {string} e.g. '16px', '12.8px'
  */
 function formatPx (pxValue) {
+  // Non-px values pass through untouched (e.g. raw :root text from the jsdom fallback).
+  if (!pxValue.endsWith('px')) return pxValue;
   const num = parseFloat(pxValue);
   if (isNaN(num)) return pxValue;
   const rounded = Math.round(num * 10) / 10;
@@ -108,6 +114,12 @@ export function resolveTokenValue (category, value, propValues) {
       break;
     case 'layout':
       result = resolveLayout(value);
+      break;
+    case 'coordinate':
+      result = resolveCoordinate(value);
+      break;
+    case 'z-index':
+      result = resolveZIndex(value);
       break;
   }
 
@@ -210,6 +222,35 @@ function resolveLayout (value) {
   return px ? formatPx(px) : null;
 }
 
+function resolveCoordinate (value) {
+  const stringValue = String(value);
+  const negative = stringValue.startsWith('n');
+  const stop = negative ? stringValue.slice(1) : stringValue;
+
+  const percentMatch = stop.match(LAYOUT_PERCENT_VALUE);
+  if (percentMatch) return `${negative ? '-' : ''}${percentMatch[1]}%`;
+
+  if (negative) {
+    const px = resolveCssVar(`--dt-spacing-${stop}-negative`, 'marginLeft');
+    return px ? formatPx(px) : null;
+  }
+
+  return resolveSpacing(value);
+}
+
+function resolveZIndex (value) {
+  return resolveRootVar(`--zi-${value}`);
+}
+
+// Reads a custom property as raw text off :root — for unitless tokens that
+// resolveCssVar's width-measurement trick cannot handle.
+function resolveRootVar (varName) {
+  const raw = getComputedStyle(document.documentElement)
+    .getPropertyValue(varName)
+    .trim();
+  return raw || null;
+}
+
 function resolveComponentSize (componentClass, value) {
   const el = getMeasureElement();
   try {
@@ -228,11 +269,7 @@ function resolveComponentSize (componentClass, value) {
 }
 
 function resolveLineHeight (value) {
-  const raw = getComputedStyle(document.documentElement)
-    .getPropertyValue(`--dt-font-line-height-${value}`)
-    .trim();
-  if (!raw) return null;
-  return raw;
+  return resolveRootVar(`--dt-font-line-height-${value}`);
 }
 
 function resolveTypographyMetrics (className) {

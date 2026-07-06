@@ -1,5 +1,18 @@
 /* eslint-disable max-len */
+
+import { disableAndClearProps } from '@/src/lib/exclusion_rules';
+
 const hasNoBorderWidth = v => !v;
+const hasNoPositioning = v => !v || v === 'static';
+export const INSET_PROPS = [
+  'inset',
+  'insetBlock',
+  'insetInline',
+  'insetBlockStart',
+  'insetBlockEnd',
+  'insetInlineStart',
+  'insetInlineEnd',
+];
 
 export default {
   defaults: {
@@ -89,10 +102,47 @@ export default {
         searchKeywords: ['max height'],
       },
       shadow: { searchKeywords: ['elevation', 'box shadow'] },
+      position: { searchKeywords: ['css position', 'sticky', 'relative', 'absolute', 'fixed'] },
+      inset: {
+        tokenCategory: 'coordinate',
+        searchKeywords: ['offset', 'inset all', 'all sides', 'position offset'],
+      },
+      insetBlock: {
+        tokenCategory: 'coordinate',
+        searchKeywords: ['vertical inset', 'top bottom', 'vertical offset'],
+      },
+      insetInline: {
+        tokenCategory: 'coordinate',
+        searchKeywords: ['horizontal inset', 'left right', 'horizontal offset'],
+      },
+      insetBlockStart: {
+        tokenCategory: 'coordinate',
+        searchKeywords: ['inset top', 'position top', 'offset top', 'sticky top'],
+      },
+      insetBlockEnd: {
+        tokenCategory: 'coordinate',
+        searchKeywords: ['inset bottom', 'position bottom', 'offset bottom'],
+      },
+      insetInlineStart: {
+        tokenCategory: 'coordinate',
+        searchKeywords: ['inset left', 'position left', 'offset left'],
+      },
+      insetInlineEnd: {
+        tokenCategory: 'coordinate',
+        searchKeywords: ['inset right', 'position right', 'offset right'],
+      },
+      zIndex: {
+        tokenCategory: 'z-index',
+        searchKeywords: ['z index', 'z-index', 'stacking', 'stacking order', 'layer'],
+      },
     },
   },
 
   exclusions: [
+    {
+      when: { position: hasNoPositioning },
+      ...disableAndClearProps(INSET_PROPS),
+    },
     {
       when: {
         borderWidth: hasNoBorderWidth,
@@ -208,6 +258,50 @@ export default {
     },
     slots: {
       default: { initialValue: 'Large shadow' },
+    },
+  },
+
+  'positioned relative with nested positioned element': {
+    props: {
+      position: { initialValue: 'relative' },
+      padding: { initialValue: '150' },
+      paddingInline: { initialValue: '200' },
+      surface: { initialValue: 'moderate-opaque' },
+    },
+    slots: {
+      default: { initialValue: `<dt-text variant="body-sm">Relative container</dt-text>
+<dt-box position="absolute" inset-block-start="n150" inset-inline-end="n100">
+  <dt-badge icon-size="100" type="info">
+    <template #startIcon="{ iconSize }">
+      <dt-icon-lock :size="iconSize" />
+    </template>
+    Locked
+  </dt-badge>
+</dt-box>` },
+    },
+  },
+
+  'position fixed': {
+    props: {
+      as: { initialValue: 'aside' },
+      surface: { initialValue: 'overlay' },
+      borderColor: { initialValue: 'subtle' },
+      borderRadius: { initialValue: '400' },
+      borderWidth: { initialValue: '100' },
+      padding: { initialValue: '200' },
+      inlineSize: { initialValue: '600' },
+      shadow: { initialValue: 'large' },
+      position: { initialValue: 'fixed' },
+      insetBlockStart: { initialValue: '400' },
+      insetInlineEnd: { initialValue: '400' },
+      zIndex: { initialValue: 'notification' },
+    },
+    slots: {
+      default: { initialValue: `<dt-stack gap="50">
+  <dt-text as="h3" variant="headline-md" tone="secondary">Fixed Position DtBox demo</dt-text>
+  <dt-text as="p" variant="body-sm">Scroll the page. This box remains <dt-text as="strong" tone="info">fixed</dt-text>.</dt-text>
+  <dt-text as="p" variant="body-sm">Doloribus iusto iure quis, quidem vitae sint, libero qui nisi mollitia veniam nulla commodi! Qui odit optio doloremque illo eveniet quod voluptate.</dt-text>
+</dt-stack>` },
     },
   },
 

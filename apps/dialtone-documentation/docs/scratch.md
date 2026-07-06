@@ -267,7 +267,8 @@ layout: Blank
   <dt-box
     padding="100"
     surface="secondary"
-    class="d-ps-sticky d-t-0"
+    position="sticky"
+    inset-block-start="0"
   >
     <dt-text kind="body" :size="200">Box demo</dt-text>
   </dt-box>
@@ -330,10 +331,10 @@ layout: Blank
 </dt-box>
 ```
 
-  <dt-text kind="headline" size="md">Utility class escape hatch</dt-text>
+  <dt-text kind="headline" size="md">Positioning props</dt-text>
 
 ```vue demo
-<dt-box padding="200" surface="primary" border-width="100" border-radius="200" class="d-ps-sticky d-t-0">
+<dt-box padding="200" surface="primary" border-width="100" border-radius="200" position="sticky" inset-block-start="0">
   Box demo
 </dt-box>
 ```

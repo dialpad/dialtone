@@ -63,6 +63,9 @@ const PROP_PRIORITY = [
   'paddingBlock', 'paddingBlockEnd', 'paddingBlockStart',
   'inlineSize', 'minInlineSize', 'maxInlineSize', 'blockSize', 'maxBlockSize', 'minBlockSize',
   'shadow', 'overflow',
+  'position',
+  'inset', 'insetBlock', 'insetBlockStart', 'insetBlockEnd', 'insetInline', 'insetInlineStart', 'insetInlineEnd',
+  'zIndex',
 ];
 
 const CLASS_PROP_PRIORITY = [

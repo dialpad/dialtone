@@ -4,9 +4,12 @@ description: Utility classes for setting an element's z-index level.
 keywords: ["stacking", "layer", "overlap"]
 ---
 
+> [!INFO] Prefer DtBox when it fits
+> Reach for [DtBox's](/components/box.html#positioning) `z-index` prop for token-backed container stacking. Use z-index utilities for non-DtBox elements or custom overlay behavior.
+
 ## Classes
 
-Set an element's z-index by using a class (`.d-zi-{level}`>). These classes match up with the variables names listed above. The table below lists the available z-index levels, class names, and the CSS output.
+Set an element's z-index by using a class (`.d-zi-{level}`). These classes match up with the variables names listed above. The table below lists the available z-index levels, class names, and the CSS output.
 
 <utility-class-table>
   <template #content>

@@ -6,11 +6,15 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import {
   DT_BOX_AS_VALUES,
   DT_BOX_SPACING_VALUES,
+  DT_BOX_INSET_VALUES,
+  DT_BOX_INSET_SIDE_VALUES,
   DT_BOX_SURFACE_VALUES,
   DT_BOX_BORDER_COLOR_VALUES,
   DT_BOX_BORDER_WIDTH_VALUES,
   DT_BOX_BORDER_RADIUS_VALUES,
   DT_BOX_SHADOW_VALUES,
+  DT_BOX_POSITION_VALUES,
+  DT_BOX_Z_INDEX_VALUES,
   DT_BOX_LAYOUT_VALUES,
   DT_BOX_OVERFLOW_VALUES,
   DT_BOX_SCROLLBAR_VALUES,
@@ -24,6 +28,9 @@ export const argsData = {
   borderWidth: undefined,
   borderRadius: undefined,
   shadow: undefined,
+  position: undefined,
+  insetBlockStart: undefined,
+  zIndex: undefined,
 };
 
 export const argTypesData = {
@@ -82,6 +89,42 @@ export const argTypesData = {
   shadow: {
     control: 'select',
     options: [undefined, ...DT_BOX_SHADOW_VALUES],
+  },
+  position: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_POSITION_VALUES],
+  },
+  inset: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_INSET_VALUES],
+  },
+  insetBlock: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_INSET_VALUES],
+  },
+  insetInline: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_INSET_VALUES],
+  },
+  insetBlockStart: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_INSET_SIDE_VALUES],
+  },
+  insetBlockEnd: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_INSET_SIDE_VALUES],
+  },
+  insetInlineStart: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_INSET_SIDE_VALUES],
+  },
+  insetInlineEnd: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_INSET_SIDE_VALUES],
+  },
+  zIndex: {
+    control: 'select',
+    options: [undefined, ...DT_BOX_Z_INDEX_VALUES],
   },
   overflow: {
     control: 'select',
@@ -188,6 +231,49 @@ export const PaddingCascade = {
           <dt-text kind="body" :size="200">+ paddingBlock="200" + paddingBlockEnd="500"</dt-text>
         </dt-box>
       </dt-stack>
+    `,
+  }),
+  parameters: { controls: { disable: true } },
+};
+
+export const Positioning = {
+  render: () => ({
+    components: { DtBox, DtStack, DtText },
+    template: `
+      <dt-box
+        block-size="600"
+        overflow="auto"
+        surface="secondary"
+        border-width="100"
+        border-radius="300"
+      >
+        <dt-box
+          as="header"
+          position="sticky"
+          inset-block-start="0"
+          z-index="navigation"
+          padding="200"
+          surface="primary"
+          border-width-block-end="100"
+        >
+          <dt-stack direction="row" justify="space-between" align="center">
+            <dt-text as="h2" kind="headline" size="300">Sticky header</dt-text>
+            <dt-text kind="body" size="200" tone="muted">zIndex="navigation"</dt-text>
+          </dt-stack>
+        </dt-box>
+        <dt-stack gap="200" class="d-p-200">
+          <dt-box
+            v-for="i in 8"
+            :key="i"
+            padding="200"
+            surface="moderate"
+            border-width="100"
+            border-radius="300"
+          >
+            <dt-text kind="body" size="200">Scrollable content {{ i }}</dt-text>
+          </dt-box>
+        </dt-stack>
+      </dt-box>
     `,
   }),
   parameters: { controls: { disable: true } },

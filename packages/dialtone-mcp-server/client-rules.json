@@ -4,8 +4,8 @@
     "order": ["component", "primitive", "utility-class", "token"],
     "details": {
       "component": "Always prefer specific Vue components when one fits the use case (e.g., DtButton over composing a button manually)",
-      "primitive": "When no specific component fits, reach for the primitive triad — DtBox (surface, padding, border, shadow, sizing), DtStack (layout: direction, gap, alignment), DtText (typography) — before composing with utility classes",
-      "utility-class": "Use utility classes for styling concerns the primitives intentionally don't cover (positioning, display, flex-child) or for surgical adjustments (e.g., d-pr2 for padding-right)",
+      "primitive": "When no specific component fits, reach for the primitive triad — DtBox (surface, padding, border, shadow, sizing, simple token-backed positioning), DtStack (layout: direction, gap, alignment), DtText (typography) — before composing with utility classes",
+      "utility-class": "Use utility classes for styling concerns the primitives intentionally don't cover (display, grid, flex-child), for positioning outside DtBox's prop surface (responsive, calc, reset, arbitrary coordinates, non-DtBox elements), or for surgical adjustments (e.g., d-pr2 for padding-right)",
       "token": "Use design tokens for custom CSS implementations when components, primitives, and utilities don't fit"
     }
   },
@@ -16,8 +16,16 @@
       "semantic": "Prefer semantic color tokens (e.g., --dt-color-foreground-primary, --dt-color-surface-positive) over base colors. Components and primitives like DtBox already use semantic tokens internally — these guidelines apply when you're writing raw CSS.",
       "base": "Use base color tokens (e.g., --dt-color-purple-600) only when semantic colors don't fit the use case",
       "examples": {
-        "good": ["--dt-color-foreground-primary", "--dt-color-surface-positive", "--dt-color-border-critical"],
-        "avoid": ["--dt-color-purple-600", "--dt-color-red-700", "--dt-color-blue-300"]
+        "good": [
+          "--dt-color-foreground-primary",
+          "--dt-color-surface-positive",
+          "--dt-color-border-critical"
+        ],
+        "avoid": [
+          "--dt-color-purple-600",
+          "--dt-color-red-700",
+          "--dt-color-blue-300"
+        ]
       }
     }
   },
@@ -29,8 +37,17 @@
       "typography-class": "Use typography utility classes (e.g., d-body--md-compact) or complete typography tokens (e.g., --dt-typography-body-md) for non-Vue HTML or as a class escape hatch when DtText doesn't fit",
       "text-style-token": "Use individual text style tokens (e.g., --dt-font-size-200, --dt-line-height-100) only for fine-tuned control in custom CSS",
       "examples": {
-        "good": ["<dt-text as=\"p\" kind=\"body\" :size=\"200\" tone=\"tertiary\">Body text paragraph</dt-text>", "d-body--md-compact", "--dt-typography-heading-lg", "--dt-typography-body-sm", "--dt-typography-label-md"],
-        "avoid": ["d-fs-200 d-lh-100", "--dt-font-size-300 + --dt-line-height-400 + --dt-font-weight-medium"]
+        "good": [
+          "<dt-text as=\"p\" kind=\"body\" :size=\"200\" tone=\"tertiary\">Body text paragraph</dt-text>",
+          "d-body--md-compact",
+          "--dt-typography-heading-lg",
+          "--dt-typography-body-sm",
+          "--dt-typography-label-md"
+        ],
+        "avoid": [
+          "d-fs-200 d-lh-100",
+          "--dt-font-size-300 + --dt-line-height-400 + --dt-font-weight-medium"
+        ]
       }
     }
   },

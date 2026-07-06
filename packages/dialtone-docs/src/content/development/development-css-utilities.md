@@ -1,9 +1,21 @@
 ---
 type: development
 category: development
-keywords: [css-utilities, less, postcss, gulp, responsive, utility-classes, dialtone-css, naming-convention, generators, breakpoints]
+keywords:
+  [
+    css-utilities,
+    less,
+    postcss,
+    gulp,
+    responsive,
+    utility-classes,
+    dialtone-css,
+    naming-convention,
+    generators,
+    breakpoints,
+  ]
 ai_summary: How CSS utility classes are structured and added in dialtone-css — static LESS files, PostCSS generators, naming conventions, and Gulp build.
-last_updated: 2026-03-04
+last_updated: 2026-07-03
 related_packages: [dialtone-css, dialtone-tokens, postcss-responsive-variations]
 ---
 
@@ -11,9 +23,11 @@ related_packages: [dialtone-css, dialtone-tokens, postcss-responsive-variations]
 
 CSS utility classes in Dialtone live in `packages/dialtone-css/`. They can be defined in two ways depending on whether the class follows a repeating pattern or is a one-off.
 
+Prefer component primitives before adding or recommending utility classes when a primitive already exposes the same concern. For example, DtBox covers token-backed container surface, spacing, sizing, positioning, logical insets, and z-index. Keep utilities for non-component HTML, responsive variants, calc coordinates, reset values, arbitrary coordinates, and highly local adjustments.
+
 ## Package Structure
 
-```
+```text
 packages/dialtone-css/
 ├── lib/
 │   ├── build/
@@ -44,7 +58,7 @@ packages/dialtone-css/
 
 All utility classes follow the pattern: `d-{category-abbreviation}{value}`
 
-```
+```text
 d-mt-100       margin-top with spacing-100 token (8px)
 d-fc-primary   font-color foreground-primary
 d-bgc-surface  background-color surface
@@ -54,6 +68,7 @@ d-t50p         top 50% (position)
 ```
 
 Category abbreviations used:
+
 - `m`, `mt`, `mr`, `mb`, `ml` — margin and directional
 - `p`, `pt`, `pr`, `pb`, `pl` — padding and directional
 - `fc` — font color
@@ -70,6 +85,7 @@ The numeric value suffix maps to the spacing scale token: `0`, `1`, `2`, `4`, `6
 Use this for utility classes that don't follow a generated pattern, or are singletons like `d-m-auto`.
 
 **Choose the right file** based on category:
+
 - Spacing utilities → `lib/build/less/utilities/spacing.less`
 - Layout (display, position, overflow, z-index) → `lib/build/less/utilities/layout.less`
 - Sizing (width, height) → `lib/build/less/utilities/sizing.less`
@@ -80,11 +96,18 @@ Use this for utility classes that don't follow a generated pattern, or are singl
 
 ```less
 // spacing.less
-.d-m-auto { margin: auto !important; }
-.d-mx-auto { margin-left: auto !important; margin-right: auto !important; }
+.d-m-auto {
+  margin: auto !important;
+}
+.d-mx-auto {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
 
 // Using a token variable
-.d-mt8 { margin-top: var(--dt-space-400) !important; }
+.d-mt8 {
+  margin-top: var(--dt-space-400) !important;
+}
 ```
 
 All utility classes use `!important` to ensure they override component styles when applied.
@@ -116,18 +139,20 @@ module.exports = {
 **Step 2 — Create a generator function in `postcss/dialtone-generators.cjs`:**
 
 ```javascript
-function myPropertyUtilities (clonedSource, declaration) {
-  Object.keys(MY_SIZES).forEach(size => {
-    generatedRules.myProperty.push(new Rule({
-      source: clonedSource,
-      selector: `.d-my-${size}`,
-      nodes: [
-        declaration.clone({
-          prop: 'my-property',
-          value: `var(--dt-space-${MY_SIZES[size]}) !important`,
-        }),
-      ],
-    }));
+function myPropertyUtilities(clonedSource, declaration) {
+  Object.keys(MY_SIZES).forEach((size) => {
+    generatedRules.myProperty.push(
+      new Rule({
+        source: clonedSource,
+        selector: `.d-my-${size}`,
+        nodes: [
+          declaration.clone({
+            prop: 'my-property',
+            value: `var(--dt-space-${MY_SIZES[size]}) !important`,
+          }),
+        ],
+      }),
+    );
   });
 }
 ```
@@ -135,10 +160,10 @@ function myPropertyUtilities (clonedSource, declaration) {
 **Step 3 — Register it in `_generateUtilities`:**
 
 ```javascript
-function _generateUtilities (clonedSource, declaration) {
+function _generateUtilities(clonedSource, declaration) {
   colorUtilities(clonedSource, declaration);
   spacingUtilities(clonedSource, declaration);
-  myPropertyUtilities(clonedSource, declaration);   // Add here
+  myPropertyUtilities(clonedSource, declaration); // Add here
 }
 ```
 
@@ -155,28 +180,46 @@ const generatedRules = {
 
 Responsive variants are generated automatically by the `@dialpad/postcss-responsive-variations` package. For any utility class configured to have responsive variants, the plugin creates breakpoint-prefixed versions:
 
-| Prefix | Media Query |
-|--------|------------|
-| `sm:` | `(min-width: 480px)` |
-| `md:` | `(min-width: 640px)` |
-| `lg:` | `(min-width: 960px)` |
-| `xl:` | `(min-width: 1264px)` |
+| Prefix | Media Query           |
+| ------ | --------------------- |
+| `sm:`  | `(min-width: 480px)`  |
+| `md:`  | `(min-width: 640px)`  |
+| `lg:`  | `(min-width: 960px)`  |
+| `xl:`  | `(min-width: 1264px)` |
 
 Example output:
 
 ```css
-.d-mt8             { margin-top: var(--dt-space-400) !important; }
-@media (min-width: 480px)  { .sm\:d-mt8 { margin-top: var(--dt-space-400) !important; } }
-@media (min-width: 640px)  { .md\:d-mt8 { margin-top: var(--dt-space-400) !important; } }
-@media (min-width: 960px)  { .lg\:d-mt8 { margin-top: var(--dt-space-400) !important; } }
-@media (min-width: 1264px) { .xl\:d-mt8 { margin-top: var(--dt-space-400) !important; } }
+.d-mt8 {
+  margin-top: var(--dt-space-400) !important;
+}
+@media (min-width: 480px) {
+  .sm\:d-mt8 {
+    margin-top: var(--dt-space-400) !important;
+  }
+}
+@media (min-width: 640px) {
+  .md\:d-mt8 {
+    margin-top: var(--dt-space-400) !important;
+  }
+}
+@media (min-width: 960px) {
+  .lg\:d-mt8 {
+    margin-top: var(--dt-space-400) !important;
+  }
+}
+@media (min-width: 1264px) {
+  .xl\:d-mt8 {
+    margin-top: var(--dt-space-400) !important;
+  }
+}
 ```
 
 ## Hover and Focus Variants
 
 The generator also appends hover, focus, and focus-visible variants for color-based utility classes:
 
-```
+```text
 h\:d-fc-primary   — applies on :hover
 f\:d-fc-primary   — applies on :focus
 fv\:d-fc-primary  — applies on :focus-visible

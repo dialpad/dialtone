@@ -33,7 +33,7 @@ For the complete set, view [Spacing Tokens](/tokens/#spacing) and [Layout Tokens
 
 You rarely need these tokens directly. The **primitive triad** exposes them through three components:
 
-- **[DtBox](/components/box.md)**: what a container *is* (e.g. surface, border, padding, sizing)
+- **[DtBox](/components/box.md)**: what a container *is* (e.g. surface, border, padding, sizing, positioning)
 - **[DtStack](/components/stack.md)**: how children are *arranged* (e.g. direction, gap, alignment)
 - **[DtText](/components/text.md)**: what the content *looks* like (e.g. font, size, tone)
 
@@ -45,6 +45,7 @@ The primitive triad handles layout and spacing declaratively. For example:
 
 - DtBox's `padding`: space *inside* a container, uses `--dt-spacing-*` design tokens
 - DtBox's `min-inline-size`: container *width*, uses `--dt-layout-*` design tokens
+- DtBox's `inset-block-start`: positioned container offset, uses documented coordinate values such as `--dt-spacing-*`, negative spacing tokens, and side-specific percentage coordinates
 - DtStack's `gap`: space *between* boxes, uses `--dt-spacing-*` design tokens
 
 ```vue demo
@@ -185,6 +186,9 @@ The triad covers most size and space needs. These utility classes remain availab
 | [Flex / grid gap](/utilities/flex/gap.html) | `d-g-*` | [DtStack](/components/stack.md) `gap` |
 | [Width / height](/utilities/sizing/width.html) | `d-w*` / `d-h*` | [DtBox](/components/box.md) `inline-size` / `block-size` |
 | [Min / max width](/utilities/sizing/min-width.html) | `d-wmn-*` / `d-wmx-*` | [DtBox](/components/box.md) `min-inline-size` / `max-inline-size` |
+| [Position](/utilities/layout/position.html) | `d-ps-*` | [DtBox](/components/box.md) `position` |
+| [Coordinates](/utilities/layout/coordinates.html) | `d-ibs-*` / `d-iie-*` | [DtBox](/components/box.md) `inset-block-start` / `inset-inline-end` |
+| [Z-index](/utilities/layout/z-index.html) | `d-zi-*` | [DtBox](/components/box.md) `z-index` |
 | [Enable flex container](/utilities/flex/direction-wrap-flow.html) | `d-d-flex` | [DtStack](/components/stack.md) |
 | [Cross-axis alignment](/utilities/flex/align-items.html) | `d-ai-*` | [DtStack](/components/stack.md) `align` |
 | [Main-axis distribution](/utilities/flex/justify.html) | `d-jc-*` | [DtStack](/components/stack.md) `justify` |
