@@ -7,9 +7,11 @@ import frFR from './fr-FR.ftl?raw';
 import deDE from './de-DE.ftl?raw';
 import itIT from './it-IT.ftl?raw';
 import jaJP from './ja-JP.ftl?raw';
+import koKR from './ko-KR.ftl?raw';
 import ptBR from './pt-BR.ftl?raw';
 import ruRU from './ru-RU.ftl?raw';
 import esLA from './es-LA.ftl?raw';
+import svSE from './sv-SE.ftl?raw';
 
 const dialtoneNamespace = 'dialtone';
 const allowedLocales = {
@@ -20,9 +22,11 @@ const allowedLocales = {
   GERMAN: 'de-DE',
   ITALIAN: 'it-IT',
   JAPANESE: 'ja-JP',
+  KOREAN: 'ko-KR',
   PORTUGUESE: 'pt-BR',
   RUSSIAN: 'ru-RU',
   SPANISH: 'es-LA',
+  SWEDISH: 'sv-SE',
 };
 const fallbackLocale = 'en-US';
 /**
@@ -56,9 +60,11 @@ export class DialtoneLocalization {
         ['de-DE', dialtoneNamespace, deDE],
         ['it-IT', dialtoneNamespace, itIT],
         ['ja-JP', dialtoneNamespace, jaJP],
+        ['ko-KR', dialtoneNamespace, koKR],
         ['pt-BR', dialtoneNamespace, ptBR],
         ['ru-RU', dialtoneNamespace, ruRU],
         ['es-LA', dialtoneNamespace, esLA],
+        ['sv-SE', dialtoneNamespace, svSE],
       ]),
     });
 
