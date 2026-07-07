@@ -1,3 +1,10 @@
+# [4.55.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.54.0...dialtone-icons/v4.55.0) (2026-07-07)
+
+
+### Features
+
+* **Icons:** DP-192348 add compass icons ([#1354](https://github.com/dialpad/dialtone/issues/1354)) ([92a547a](https://github.com/dialpad/dialtone/commit/92a547a569277bb1863c80be3238a6944a33cc70))
+
 # [4.54.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.53.0...dialtone-icons/v4.54.0) (2026-06-08)
 
 
