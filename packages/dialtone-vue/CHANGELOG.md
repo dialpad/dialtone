@@ -1,3 +1,17 @@
+# [3.223.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.222.3...dialtone-vue/v3.223.0) (2026-07-07)
+
+
+### Bug Fixes
+
+* **Combobox:** DLT-3520 prevent list element error during popover transition ([#1351](https://github.com/dialpad/dialtone/issues/1351)) ([aeda99d](https://github.com/dialpad/dialtone/commit/aeda99d48379551bb3975abcea00b6ddd374fe81))
+* **Localization:** DLT-3522 use unsupported locale in fallback tests ([#1356](https://github.com/dialpad/dialtone/issues/1356)) ([e1cd4db](https://github.com/dialpad/dialtone/commit/e1cd4dbb24087a3778ce00acd567d6e15860a4c8))
+* **Localization:** UC-27003 fall back to a supported locale instead of crashing ([#1350](https://github.com/dialpad/dialtone/issues/1350)) ([17d93a3](https://github.com/dialpad/dialtone/commit/17d93a3970de5f293b78a5aedf951f79db3edc1c))
+
+
+### Features
+
+* **Localization:** DLT-3522 add ko-KR and sv-SE as supported locales ([#1352](https://github.com/dialpad/dialtone/issues/1352)) ([566d55d](https://github.com/dialpad/dialtone/commit/566d55d089d138e38635dc6e85e9f448c97b2425))
+
 ## [3.222.3](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.222.2...dialtone-vue/v3.222.3) (2026-07-03)
 
 
