@@ -1,32 +1,39 @@
 <template>
   <dt-box class="d-my-500">
-    <before-after-body
-      v-model:mode="mode"
-      v-model:blend="blend"
-      v-model:split="split"
-      :before="before"
-      :after="after"
-      :alt="alt"
-      :before-label="beforeLabel"
-      :after-label="afterLabel"
+    <dt-card
+      content-class="d-p-400"
+      class="d-w100p"
     >
-      <template #actions>
-        <dt-button
-          importance="clear"
-          kind="muted"
-          size="200"
-          aria-label="Expand comparison"
-          @click="expanded = true"
+      <template #content>
+        <before-after-body
+          v-model:mode="mode"
+          v-model:blend="blend"
+          v-model:split="split"
+          :before="before"
+          :after="after"
+          :alt="alt"
+          :before-label="beforeLabel"
+          :after-label="afterLabel"
         >
-          <template #icon>
-            <dt-icon
-              name="maximize"
+          <template #actions>
+            <dt-button
+              importance="clear"
+              kind="muted"
               size="200"
-            />
+              aria-label="Expand comparison"
+              @click="expanded = true"
+            >
+              <template #icon>
+                <dt-icon
+                  name="maximize"
+                  size="200"
+                />
+              </template>
+            </dt-button>
           </template>
-        </dt-button>
+        </before-after-body>
       </template>
-    </before-after-body>
+    </dt-card>
 
     <dt-modal
       :open="expanded"
@@ -55,8 +62,9 @@ import BeforeAfterBody from './BeforeAfterBody.vue';
 // Neutral before/after image comparison for the visual migration guide.
 // Unlike DialtoneUsage this carries no do/don't semantics — both panels are
 // equally valid renders of the same scene against two Dialtone versions.
-// Offers side-by-side and onion-skin (blend slider) modes, plus a fullscreen
-// modal; mode and blend persist between the inline and expanded views.
+// Offers side-by-side, split-wipe, and onion-skin (blend slider) modes plus
+// a fullscreen modal; comparison state persists between the inline card and
+// the expanded view.
 defineProps({
   before: {
     type: String,
