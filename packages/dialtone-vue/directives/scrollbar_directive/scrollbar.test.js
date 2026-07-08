@@ -94,12 +94,24 @@ describe('DtScrollbarDirective Tests', () => {
     describe('when --os-scroll-percent is already registered', () => {
       beforeEach(() => {
         globalThis.CSS.registerProperty.mockImplementationOnce(() => {
-          throw new DOMException('already registered');
+          throw new DOMException('already registered', 'InvalidModificationError');
         });
       });
 
       it('should not throw', () => {
         expect(() => updateWrapper()).not.toThrow();
+      });
+    });
+
+    describe('when CSS.registerProperty fails for an unrelated reason', () => {
+      beforeEach(() => {
+        globalThis.CSS.registerProperty.mockImplementationOnce(() => {
+          throw new TypeError('invalid property descriptor');
+        });
+      });
+
+      it('should propagate the error', () => {
+        expect(() => updateWrapper()).toThrow(TypeError);
       });
     });
   });

@@ -17,7 +17,15 @@ export const DtScrollbarDirective = {
             inherits: true,
             initialValue: '0',
           });
-        } catch { /* already registered — no-op */ }
+        } catch (error) {
+          // Chrome throws InvalidModificationError when the property is already
+          // registered — that's the expected case on non-web-component pages
+          // where overlayscrollbars.css is loaded globally. Anything else is a
+          // real failure and should not be silently swallowed.
+          if (!(error instanceof DOMException) || error.name !== 'InvalidModificationError') {
+            throw error;
+          }
+        }
 
         const os = OverlayScrollbars({
           target: el,
