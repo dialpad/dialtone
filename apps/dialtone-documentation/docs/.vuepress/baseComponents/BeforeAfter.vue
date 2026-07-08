@@ -1,38 +1,60 @@
 <template>
-  <div class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols2 d-my-500">
-    <figure class="d-m0">
-      <figcaption class="d-fs-100 d-fw-semibold d-fc-secondary d-mbe-200">
-        {{ beforeLabel }}
-      </figcaption>
-      <div class="d-bgc-secondary d-ba d-bc-subtle d-bar-400 d-p-300">
-        <img
-          :src="before"
-          :alt="`${alt} — before migration`"
-          class="d-d-block d-w100p"
-          loading="lazy"
+  <div class="d-my-500">
+    <before-after-body
+      v-model:mode="mode"
+      v-model:blend="blend"
+      :before="before"
+      :after="after"
+      :alt="alt"
+      :before-label="beforeLabel"
+      :after-label="afterLabel"
+    >
+      <template #actions>
+        <dt-button
+          importance="clear"
+          kind="muted"
+          size="200"
+          aria-label="Expand comparison"
+          @click="expanded = true"
         >
-      </div>
-    </figure>
-    <figure class="d-m0">
-      <figcaption class="d-fs-100 d-fw-semibold d-fc-secondary d-mbe-200">
-        {{ afterLabel }}
-      </figcaption>
-      <div class="d-bgc-secondary d-ba d-bc-subtle d-bar-400 d-p-300">
-        <img
-          :src="after"
-          :alt="`${alt} — after migration`"
-          class="d-d-block d-w100p"
-          loading="lazy"
-        >
-      </div>
-    </figure>
+          <template #icon>
+            <dt-icon
+              name="maximize"
+              size="200"
+            />
+          </template>
+        </dt-button>
+      </template>
+    </before-after-body>
+
+    <dt-modal
+      :open="expanded"
+      size="full"
+      :header-text="alt"
+      @update:open="expanded = $event"
+    >
+      <before-after-body
+        v-model:mode="mode"
+        v-model:blend="blend"
+        :before="before"
+        :after="after"
+        :alt="alt"
+        :before-label="beforeLabel"
+        :after-label="afterLabel"
+      />
+    </dt-modal>
   </div>
 </template>
 
 <script setup>
-// Neutral before/after image pair for the visual migration guide. Unlike
-// DialtoneUsage this carries no do/don't semantics — both panels are equally
-// valid renders of the same scene against two Dialtone versions.
+import { ref } from 'vue';
+import BeforeAfterBody from './BeforeAfterBody.vue';
+
+// Neutral before/after image comparison for the visual migration guide.
+// Unlike DialtoneUsage this carries no do/don't semantics — both panels are
+// equally valid renders of the same scene against two Dialtone versions.
+// Offers side-by-side and onion-skin (blend slider) modes, plus a fullscreen
+// modal; mode and blend persist between the inline and expanded views.
 defineProps({
   before: {
     type: String,
@@ -55,4 +77,8 @@ defineProps({
     default: 'After — Dialtone Next',
   },
 });
+
+const mode = ref('side');
+const blend = ref(50);
+const expanded = ref(false);
 </script>
