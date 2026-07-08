@@ -7,6 +7,18 @@ export const DtScrollbarDirective = {
     const instances = new WeakMap();
     app.directive('dt-scrollbar', {
       mounted (el, binding) {
+        // @property inside a shadow DOM stylesheet doesn't register globally.
+        // Without global registration Chrome's WAAPI can't interpolate
+        // --os-scroll-percent as a number and the scrollbar thumb never moves.
+        try {
+          CSS.registerProperty({
+            name: '--os-scroll-percent',
+            syntax: '<number>',
+            inherits: true,
+            initialValue: '0',
+          });
+        } catch { /* already registered — no-op */ }
+
         const os = OverlayScrollbars({
           target: el,
           elements: {

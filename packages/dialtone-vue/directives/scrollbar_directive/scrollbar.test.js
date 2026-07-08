@@ -36,6 +36,7 @@ describe('DtScrollbarDirective Tests', () => {
   beforeEach(() => {
     OverlayScrollbars.mockClear();
     mocks.destroy.mockClear();
+    globalThis.CSS = { registerProperty: vi.fn() };
   });
 
   beforeAll(() => {
@@ -78,6 +79,27 @@ describe('DtScrollbarDirective Tests', () => {
       it('should clean up directive', () => {
         wrapper.unmount();
         expect(mocks.destroy).toHaveBeenCalledTimes(1);
+      });
+
+      it('should register the --os-scroll-percent CSS property globally', () => {
+        expect(globalThis.CSS.registerProperty).toHaveBeenCalledWith({
+          name: '--os-scroll-percent',
+          syntax: '<number>',
+          inherits: true,
+          initialValue: '0',
+        });
+      });
+    });
+
+    describe('when --os-scroll-percent is already registered', () => {
+      beforeEach(() => {
+        globalThis.CSS.registerProperty.mockImplementationOnce(() => {
+          throw new DOMException('already registered');
+        });
+      });
+
+      it('should not throw', () => {
+        expect(() => updateWrapper()).not.toThrow();
       });
     });
   });
