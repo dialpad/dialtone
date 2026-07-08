@@ -3,7 +3,7 @@ title: Migration Guide
 description: Step-by-step guides for migrating to the latest Dialtone major version. Each guide covers what changed, why it changed, and how to update your code — including automated migration tools.
 ---
 
-This guide walks you through every breaking and deprecation change in the upcoming Dialtone major release. Work through each section that applies to your codebase, run the provided migration tools, and verify the results.
+This guide walks you through every breaking and deprecation change in the upcoming Dialtone major release. Work through each section that applies to your codebase, run the provided migration tools, and verify the results. Reviewing a migrated surface as a designer or QA? Start with [Visual Changes for Designers](./visual-changes/) — before/after imagery of every intentional visual change and how to tell a refresh from a regression.
 
 > [!INFO] Automated tooling available
 > Most migrations ship with CLI tools or ESLint auto-fix rules. Run them first, then handle the manual cases flagged in each guide.
