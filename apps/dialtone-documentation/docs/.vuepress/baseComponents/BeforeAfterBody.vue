@@ -29,7 +29,7 @@
         </figcaption>
         <div class="d-bgc-secondary d-ba d-bc-subtle d-bar-400 d-p-300">
           <img
-            :src="before"
+            :src="withBase(before)"
             :alt="`${alt} — before migration`"
             class="d-d-block d-w100p"
             loading="lazy"
@@ -42,7 +42,7 @@
         </figcaption>
         <div class="d-bgc-secondary d-ba d-bc-subtle d-bar-400 d-p-300">
           <img
-            :src="after"
+            :src="withBase(after)"
             :alt="`${alt} — after migration`"
             class="d-d-block d-w100p"
             loading="lazy"
@@ -56,12 +56,12 @@
         <div class="before-after-body__wipe">
           <div class="before-after-body__stack">
             <img
-              :src="before"
+              :src="withBase(before)"
               :alt="`${alt} — before migration`"
               loading="lazy"
             >
             <img
-              :src="after"
+              :src="withBase(after)"
               :alt="`${alt} — after migration`"
               :style="{ clipPath: `inset(0 0 0 ${split}%)` }"
               loading="lazy"
@@ -101,12 +101,12 @@
       <div class="d-bgc-secondary d-ba d-bc-subtle d-bar-400 d-p-300">
         <div class="before-after-body__stack">
           <img
-            :src="before"
+            :src="withBase(before)"
             :alt="`${alt} — before migration`"
             loading="lazy"
           >
           <img
-            :src="after"
+            :src="withBase(after)"
             :alt="`${alt} — after migration`"
             :style="{ opacity: blend / 100 }"
             loading="lazy"
@@ -132,10 +132,15 @@
 </template>
 
 <script setup>
+import { withBase } from 'vuepress/client';
+
 // Presentational half of <before-after>: renders the comparison side-by-side,
 // as a split wipe (draggable divider — before left, after right), or as an
 // onion-skin blend. Mode, split, and blend live in the parent so they survive
 // expanding into the fullscreen modal.
+// Image srcs are passed through withBase(): the site deploys under a
+// subpath (VUEPRESS_BASE_URL, e.g. /next/ or deploy previews), and VuePress
+// only auto-rewrites markdown ![]() images — not component props.
 defineProps({
   before: {
     type: String,
