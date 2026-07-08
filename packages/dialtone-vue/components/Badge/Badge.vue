@@ -61,6 +61,7 @@
 import { BADGE_TYPE_MODIFIERS, BADGE_KIND_MODIFIERS, BADGE_DECORATION_MODIFIERS } from './BadgeConstants';
 import { ICON_SIZE_MODIFIERS } from '@/components/Icon';
 import { hasSlotContent } from '@/common/utils/index.js';
+import { ordinalSizeValidator } from '@/common/validators';
 
 /**
  * A badge is a compact UI element that provides brief, descriptive information about an element.
@@ -76,9 +77,9 @@ export default {
      * @values 100, 200, 300, 400, 500, 600, 700, 800
      */
     iconSize: {
-      type: String,
+      type: [String, Number],
       default: '200',
-      validator: (s) => Object.keys(ICON_SIZE_MODIFIERS).includes(s),
+      validator: ordinalSizeValidator(ICON_SIZE_MODIFIERS),
     },
 
     /**

@@ -5,7 +5,7 @@
     :banner-header-text="bannerTitle"
     :banner-kind="bannerKind"
     :fixed-header-footer="fixedHeaderFooter"
-    :size="size"
+    :fullscreen="fullscreen"
     :copy="copy"
     :transparent-backdrop="transparentBackdrop"
     @update:open="isOpen = $event"
@@ -63,9 +63,9 @@ export default {
       default: false,
     },
 
-    size: {
-      type: String,
-      default: 'default',
+    fullscreen: {
+      type: Boolean,
+      default: false,
     },
 
     transparentBackdrop: {

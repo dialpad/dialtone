@@ -10,7 +10,7 @@
       :class="[
         'd-modal',
         MODAL_KIND_MODIFIERS[kind],
-        MODAL_SIZE_MODIFIERS[size],
+        { 'd-modal--full': fullscreen },
         { 'd-modal--transparent-backdrop': transparentBackdrop },
         modalClass,
       ]"
@@ -137,7 +137,6 @@ import ModeMixin from '@/common/mixins/mode';
 import {
   MODAL_BANNER_KINDS,
   MODAL_KIND_MODIFIERS,
-  MODAL_SIZE_MODIFIERS,
 } from './ModalConstants';
 import { getUniqueString, hasSlotContent, returnFirstEl, disableRootScrolling, enableRootScrolling } from '@/common/utils';
 import { HTML_ELEMENT_TYPE } from '@/common/constants';
@@ -229,13 +228,12 @@ export default {
     },
 
     /**
-     * The size of the modal. size - default or full,
-     * @values default, full
+     * Whether the modal fills the viewport instead of rendering at its default size.
+     * @values true, false
      */
-    size: {
-      type: String,
-      default: 'default',
-      validator: (s) => Object.keys(MODAL_SIZE_MODIFIERS).includes(s),
+    fullscreen: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -404,7 +402,6 @@ export default {
   data () {
     return {
       MODAL_KIND_MODIFIERS,
-      MODAL_SIZE_MODIFIERS,
       MODAL_BANNER_KINDS,
       hasSlotContent,
       i18n: new DialtoneLocalization(),

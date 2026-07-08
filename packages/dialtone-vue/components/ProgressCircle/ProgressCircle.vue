@@ -4,6 +4,7 @@
  * @see https://dialtone.dialpad.com/components/progress-circle.html
  */
 import { PROGRESS_CIRCLE_SIZES, PROGRESS_CIRCLE_KINDS } from './ProgressCircleConstants';
+import { ordinalSizeValidator } from '@/common/validators';
 
 export default {
   name: 'DtProgressCircle',
@@ -22,9 +23,9 @@ export default {
      * @values 100, 200, 300, 400, 500, 600, 700, 800
      */
     size: {
-      type: String,
+      type: [String, Number],
       default: '500',
-      validator: (s) => Object.keys(PROGRESS_CIRCLE_SIZES).includes(s),
+      validator: ordinalSizeValidator(PROGRESS_CIRCLE_SIZES),
     },
 
     /**

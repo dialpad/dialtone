@@ -101,7 +101,7 @@
   <dt-modal
     v-if="selectedIcon"
     :open="isModalOpen"
-    size="full"
+    fullscreen
     content-class="d-wmx100p d-pie-400"
     @update:open="isModalOpen = false"
   >

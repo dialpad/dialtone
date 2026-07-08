@@ -314,6 +314,53 @@ describe('Excluded props (not component scale sizes)', () => {
   });
 });
 
+describe('DtModal size → fullscreen transform', () => {
+  it('transforms size="full" to fullscreen', () => {
+    const input = '<dt-modal size="full" header-text="Title" />';
+    const expected = '<dt-modal fullscreen header-text="Title" />';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, expected);
+    assert.equal(count, 1);
+  });
+
+  it('removes size="default"', () => {
+    const input = '<dt-modal size="default" header-text="Title" />';
+    const expected = '<dt-modal header-text="Title" />';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, expected);
+    assert.equal(count, 1);
+  });
+
+  it('transforms PascalCase DtModal size="full"', () => {
+    const input = '<DtModal size="full">Content</DtModal>';
+    const expected = '<DtModal fullscreen>Content</DtModal>';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, expected);
+    assert.equal(count, 1);
+  });
+
+  it('ignores size="full" on non-modal components', () => {
+    const input = '<dt-button size="full">Click</dt-button>';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, input);
+    assert.equal(count, 0);
+  });
+
+  it('handles multiline dt-modal tags', () => {
+    const input = `<dt-modal
+      size="full"
+      header-text="Title"
+    >`;
+    const expected = `<dt-modal
+      fullscreen
+      header-text="Title"
+    >`;
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, expected);
+    assert.equal(count, 1);
+  });
+});
+
 describe('Edge cases', () => {
   it('does not transform size inside text content', () => {
     const input = '<dt-text>The size="sm" option is deprecated</dt-text>';

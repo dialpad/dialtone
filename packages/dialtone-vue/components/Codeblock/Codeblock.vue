@@ -10,6 +10,7 @@
 
 <script>
 import { CODEBLOCK_SIZES, CODEBLOCK_SIZE_MAP } from './CodeblockConstants';
+import { ordinalSizeValidator } from '@/common/validators';
 
 export default {
   name: 'DtCodeblock',
@@ -38,7 +39,7 @@ export default {
     size: {
       type: [String, Number],
       default: 200,
-      validator: (val) => CODEBLOCK_SIZES.includes(String(val)),
+      validator: ordinalSizeValidator(CODEBLOCK_SIZES),
     },
   },
 

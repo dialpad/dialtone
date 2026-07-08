@@ -5,7 +5,7 @@
       :banner-header-text="$attrs.bannerHeaderText"
       :open="isOpen"
       :kind="$attrs.kind"
-      :size="$attrs.size"
+      :fullscreen="$attrs.fullscreen"
       :copy="$attrs.copy"
       :modal-class="$attrs.modalClass"
       :banner-class="$attrs.bannerClass"

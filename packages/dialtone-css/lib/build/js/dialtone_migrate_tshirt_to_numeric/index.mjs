@@ -4,6 +4,8 @@
  * @fileoverview Migration script to convert t-shirt size props to numeric scale on Dialtone components.
  *
  * Transforms: size="sm" → :size="200", label-size="xs" → :label-size="100", speed="md" → :speed="300"
+ * Also transforms DtModal's `size` prop to the `fullscreen` boolean (DLT-3534):
+ *   size="full" → fullscreen, size="default" → (removed)
  *
  * Usage:
  *   npx dialtone-migrate-tshirt-to-numeric [options]
@@ -56,6 +58,9 @@ const EXCLUDED_PROPS = ['button-width-size', 'buttonWidthSize', 'background-size
 // Use [\s\S] instead of [^>] to match across newlines in multiline tags
 const DT_TAG_PATTERN = /<(dt-[\w-]+|Dt\w+)\b[\s\S]*?>/g;
 
+// DtModal's `size` prop (default | full) became the `fullscreen` boolean (DLT-3534).
+const MODAL_TAG_PATTERN = /<(dt-modal|DtModal)\b[\s\S]*?>/g;
+
 // ---------------------------------------------------------------------------
 // File finder
 // ---------------------------------------------------------------------------
@@ -90,6 +95,21 @@ async function findFiles (dir, extensions, ignore = []) {
 // Transform logic
 // ---------------------------------------------------------------------------
 
+function transformModalSize (tag) {
+  let count = 0;
+  let newTag = tag;
+
+  if (/\ssize="full"/.test(newTag)) {
+    newTag = newTag.replace(/\ssize="full"/, ' fullscreen');
+    count++;
+  } else if (/\ssize="default"/.test(newTag)) {
+    newTag = newTag.replace(/\ssize="default"/, '');
+    count++;
+  }
+
+  return { tag: newTag, count };
+}
+
 function transformContent (content) {
   let transformed = content;
   let count = 0;
@@ -110,6 +130,13 @@ function transformContent (content) {
     });
   });
 
+  // DtModal: size="full"/"default" → fullscreen boolean (DLT-3534)
+  transformed = transformed.replace(MODAL_TAG_PATTERN, (tag) => {
+    const result = transformModalSize(tag);
+    count += result.count;
+    return result.tag;
+  });
+
   return { transformed, count };
 }
 
@@ -128,6 +155,10 @@ Converts t-shirt size props to numeric scale on Dialtone components.
   size="sm"       → :size="200"
   label-size="xs" → :label-size="100"
   speed="md"      → :speed="300"
+
+  DtModal only:
+  size="full"     → fullscreen
+  size="default"  → (removed)
 
 Options:
   --cwd <path>     Working directory (default: current directory)

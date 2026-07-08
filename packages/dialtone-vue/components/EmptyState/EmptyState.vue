@@ -64,6 +64,7 @@ import { useSlots, computed, onMounted } from 'vue';
 import { DtStack } from '@/components/Stack';
 import { DtText } from '@/components/Text';
 import { hasSlotContent } from '@/common/utils';
+import { ordinalSizeValidator } from '@/common/validators';
 import {
   EMPTY_STATE_BODY_DENSITIES,
   EMPTY_STATE_BODY_SIZES,
@@ -87,7 +88,7 @@ const props = defineProps({
   size: {
     type: [String, Number],
     default: 400,
-    validator: (s) => Object.keys(EMPTY_STATE_SIZE_MODIFIERS).includes(String(s)),
+    validator: ordinalSizeValidator(EMPTY_STATE_SIZE_MODIFIERS),
   },
 
   /**

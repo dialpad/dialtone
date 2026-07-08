@@ -8,7 +8,8 @@ description: Component size props move from t-shirt labels (xs, sm, md) to a num
 - Component `size` props now favor numeric values, e.g. `100` (xs), `200` (sm), `300` (md), `400` (lg), `500` (xl).
 - T-shirt aliases still work — this is **not a breaking change**, and are marked to be sunset.
 - Use the [ESLint rule](#eslint-rule) or [migration script](#migration-script) to update your code.
-- **Unchanged**: Icon sizes.
+- Icon-family `size` props (`DtIcon`, `DtLoader`, `DtEmoji`, `DtEmojiTextWrapper`, `DtProgressCircle`, `DtBadge`'s `iconSize`) now also accept a `Number`, matching every other component.
+- `DtModal`'s `size` prop (`default` / `full`) is replaced by a `fullscreen` boolean. See [migration script](#migration-script).
 
 ## Why Numeric?
 
@@ -73,9 +74,27 @@ description: Component size props move from t-shirt labels (xs, sm, md) to a num
 
 ## What's NOT Affected
 
-- **Icon sizes** (`dt-icon`, `dt-loader`, `dt-emoji`, `dt-progress-circle`) — already numeric, unchanged.
+- **Icon sizes** — the `100`-`800` icon scale itself is unchanged; icon-family components just now also accept `Number` values on the same scale (see below).
 - **DtAvatar** — already migrated to numeric in a prior release.
 - **CSS utility classes** — no changes. Numeric prop values map to the same CSS classes as before.
+
+## Icon-Family `size` Props Now Accept `Number`
+
+`DtIcon`, `DtLoader`, `DtEmoji`, `DtEmojiTextWrapper`, `DtProgressCircle`, and `DtBadge`'s `iconSize` prop previously only accepted `size="500"` (a string). They now also accept `:size="500"` (a number), matching every other Dialtone component. Existing string usage is unaffected.
+
+## DtModal: `size` → `fullscreen`
+
+`DtModal`'s `size` prop (`default` / `full`) is replaced by a `fullscreen` boolean:
+
+```vue
+<!-- Before -->
+<dt-modal size="full">...</dt-modal>
+
+<!-- After -->
+<dt-modal fullscreen>...</dt-modal>
+```
+
+The [migration script](#migration-script) below handles this transform alongside the t-shirt-to-numeric conversion.
 
 ## ESLint Rule
 
@@ -134,6 +153,7 @@ npx dialtone-migrate-tshirt-to-numeric --yes --cwd ./src
 - `.vue`, `.md`, `.html`, `.js`, `.ts`, `.jsx`, `.tsx` files
 - Multiline component tags
 - Any prop ending in `size`, `Size`, `speed`, or `Speed` (future-proof)
+- `DtModal`'s `size="full"` → `fullscreen` and `size="default"` → removed
 
 **Skipped:**
 

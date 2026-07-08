@@ -145,6 +145,7 @@
 <script>
 import { warn, resolveComponent } from 'vue';
 import { hasSlotContent } from '@/common/utils';
+import { ordinalSizeValidator } from '@/common/validators';
 import DtLoader from '@/components/Loader/Loader.vue';
 
 import {
@@ -290,7 +291,7 @@ export default {
     size: {
       type: [String, Number],
       default: 300,
-      validator: (s) => Object.keys(BUTTON_SIZE_MODIFIERS).includes(String(s)),
+      validator: ordinalSizeValidator(BUTTON_SIZE_MODIFIERS),
     },
 
     /**

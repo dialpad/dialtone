@@ -185,12 +185,12 @@ A modal style for destructive or irreversible actions.
 To make this modal take up as much of the screen as possible.
 
 ```vue demo
-<example-modal size="full" />
+<example-modal fullscreen />
 <!-- @code -->
 <dt-modal
   header-text="Example title"
   :open="isOpen"
-  size="full"
+  fullscreen
   copy="Sed at orci quis nunc finibus gravida eget vitae est..."
   @update:open="updateOpen"
 >
