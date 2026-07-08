@@ -12,7 +12,9 @@ export const argsData = {
   href: '#',
   to: null,
   replace: false,
-  kind: '',
+  tone: '',
+  kind: undefined,
+  underline: true,
   rel: undefined,
   onClick: action('click'),
   onFocusIn: action('focusin'),
@@ -32,11 +34,19 @@ export const argTypesData = {
   },
 
   // Props
+  tone: {
+    options: LINK_VARIANTS,
+    control: {
+      type: 'select',
+    },
+  },
   kind: {
     options: LINK_VARIANTS,
     control: {
       type: 'select',
     },
+    table: { category: 'Deprecated' },
+    description: 'Deprecated. Use tone instead.',
   },
   inverted: {
     table: { category: 'Deprecated' },
@@ -58,6 +68,10 @@ export const argTypesData = {
   },
   replace: {
     description: 'When true, navigation replaces the current history entry. Only applies when `to` is provided.',
+    control: 'boolean',
+  },
+  underline: {
+    description: 'Determines whether the link should display an underline.',
     control: 'boolean',
   },
 

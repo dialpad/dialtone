@@ -10,12 +10,12 @@
         align="baseline"
       >
         <dt-link
-          v-for="kind in LINK_VARIANTS"
-          :key="kind"
+          v-for="tone in LINK_VARIANTS"
+          :key="tone"
           href="#"
-          :kind="kind"
+          :tone="tone"
         >
-          {{ kind }} link
+          {{ tone || 'default' }} link
         </dt-link>
       </dt-stack>
       <dt-stack
@@ -28,7 +28,7 @@
           href="#"
           :underline="false"
         >
-          No underline {{ kind }} link
+          No underline link
         </dt-link>
       </dt-stack>
     </dt-stack>

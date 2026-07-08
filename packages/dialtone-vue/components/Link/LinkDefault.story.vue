@@ -4,6 +4,7 @@
       :href="$attrs.href"
       :to="$attrs.to"
       :replace="$attrs.replace"
+      :tone="$attrs.tone"
       :kind="$attrs.kind"
       :inverted="$attrs.inverted"
       :underline="$attrs.underline"

@@ -17,6 +17,10 @@ export default {
       when: { tone: hasValue },
       ...disableAndClearProps(['kind']),
     },
+    {
+      when: { tone: 'unstyled' },
+      ...disableAndClearProps(['inverted', 'underline']),
+    },
   ],
 
   default: {
@@ -49,6 +53,16 @@ export default {
     },
     slots: {
       default: { initialValue: 'Mention link' },
+    },
+  },
+
+  unstyled: {
+    props: {
+      href: { initialValue: '#link' },
+      tone: { initialValue: 'unstyled' },
+    },
+    slots: {
+      default: { initialValue: 'Unstyled link' },
     },
   },
 

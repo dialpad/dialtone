@@ -53,6 +53,7 @@ keywords: ["anchor", "hyperlink", "url", "d-link", "DtLink", "dt-link", "text li
   <dt-link href="#link" tone="warning">Warning link</dt-link>
   <dt-link href="#link" tone="info">Info link</dt-link>
   <dt-link href="#link" tone="mention">Mention link</dt-link>
+  <dt-link href="#link" tone="unstyled">Unstyled link</dt-link>
 </DtStack>
 ```
 
