@@ -1,0 +1,42 @@
+/**
+ * Shared scene chrome — layout and labels only. The SUBJECT of every scene
+ * must keep using real Dialtone tokens/classes/components; this chrome is
+ * branch-neutral (hardcoded values + tokens that exist on both branches).
+ */
+.vg-scene {
+  box-sizing: border-box;
+  padding: 36px;
+  background: var(--dt-color-surface-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.vg-scene--well {
+  background: var(--dt-color-surface-secondary);
+}
+
+.vg-heading {
+  margin: 0 0 24px;
+  font-size: 13px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--dt-color-foreground-secondary);
+}
+
+.vg-label {
+  margin: 0 0 14px;
+  font-size: 12px;
+  color: var(--dt-color-foreground-secondary);
+}
+
+.vg-caption {
+  margin: 12px 0 0;
+  font-size: 12px;
+  color: var(--dt-color-foreground-secondary);
+}
+
+.vg-mono {
+  font-family: ui-monospace, monospace;
+  font-size: 10px;
+  color: var(--dt-color-foreground-secondary);
+}
