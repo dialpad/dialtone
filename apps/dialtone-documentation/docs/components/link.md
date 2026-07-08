@@ -57,6 +57,9 @@ keywords: ["anchor", "hyperlink", "url", "d-link", "DtLink", "dt-link", "text li
 </DtStack>
 ```
 
+> [!WARNING]
+> `tone="unstyled"` removes default link color and underline. Use it only when the surrounding UI provides a non-color visual distinction, and keep a visible focus treatment.
+
 ### No underline
 
 This inverts the underline behavior. With `underline="false"`, the link will not have an underline by default, but will show one on hover.

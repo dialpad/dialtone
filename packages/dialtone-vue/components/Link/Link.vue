@@ -110,7 +110,7 @@ export default {
     },
 
     isUnstyled () {
-      return this.tone === UNSTYLED || this.kind === UNSTYLED;
+      return this.resolvedTone === UNSTYLED;
     },
 
     computedTag () {

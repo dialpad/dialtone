@@ -90,8 +90,11 @@ describe('DtLink tests', () => {
     });
 
     describe('When unstyled', () => {
-      it('supports unstyled without adding it as a link kind modifier', () => {
+      it('is a supported tone variant', () => {
         expect(LINK_VARIANTS).toContain(UNSTYLED);
+      });
+
+      it('is not registered as a link kind modifier', () => {
         expect(Object.keys(LINK_KIND_MODIFIERS)).not.toContain(UNSTYLED);
       });
 
@@ -107,7 +110,7 @@ describe('DtLink tests', () => {
         expect(nativeLink.classes()).toEqual([LINK_UNSTYLED_CLASS]);
       });
 
-      it('takes precedence over deprecated kind', () => {
+      it('keeps deprecated kind precedence when both kind and tone are provided', () => {
         mockProps = {
           kind: 'muted',
           tone: UNSTYLED,
@@ -115,7 +118,7 @@ describe('DtLink tests', () => {
 
         updateWrapper();
 
-        expect(nativeLink.classes()).toEqual([LINK_UNSTYLED_CLASS]);
+        expect(nativeLink.classes()).toEqual(['d-link', LINK_KIND_MODIFIERS.muted]);
       });
     });
 
@@ -259,22 +262,32 @@ describe('DtLink tests', () => {
         expect(wrapper.find('[data-qa="dt-link"]').classes()).toContain(LINK_KIND_MODIFIERS.muted);
       });
 
-      it('should apply only unstyled class to the router-link when tone is unstyled', () => {
-        mockProps = {
-          to: '/components/',
-          tone: UNSTYLED,
-          inverted: true,
-          underline: false,
-        };
-        mockGlobal = {
-          stubs: { RouterLink: RouterLinkStub },
-        };
+      describe('When tone is unstyled', () => {
+        let routerLink;
 
-        updateWrapper();
+        beforeEach(() => {
+          mockProps = {
+            to: '/components/',
+            tone: UNSTYLED,
+            inverted: true,
+            underline: false,
+          };
+          mockGlobal = {
+            stubs: { RouterLink: RouterLinkStub },
+          };
 
-        const routerLink = wrapper.findComponent(RouterLinkStub);
-        expect(routerLink.exists()).toBe(true);
-        expect(wrapper.find('[data-qa="dt-link"]').classes()).toEqual([LINK_UNSTYLED_CLASS]);
+          updateWrapper();
+
+          routerLink = wrapper.findComponent(RouterLinkStub);
+        });
+
+        it('should render a router-link', () => {
+          expect(routerLink.exists()).toBe(true);
+        });
+
+        it('should apply only unstyled class to the router-link', () => {
+          expect(nativeLink.classes()).toEqual([LINK_UNSTYLED_CLASS]);
+        });
       });
     });
   });
