@@ -3,6 +3,7 @@
     <before-after-body
       v-model:mode="mode"
       v-model:blend="blend"
+      v-model:split="split"
       :before="before"
       :after="after"
       :alt="alt"
@@ -36,6 +37,7 @@
       <before-after-body
         v-model:mode="mode"
         v-model:blend="blend"
+        v-model:split="split"
         :before="before"
         :after="after"
         :alt="alt"
@@ -80,5 +82,6 @@ defineProps({
 
 const mode = ref('side');
 const blend = ref(50);
+const split = ref(50);
 const expanded = ref(false);
 </script>
