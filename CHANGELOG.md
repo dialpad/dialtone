@@ -1,3 +1,10 @@
+## [9.188.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.188.0...dialtone/v9.188.1) (2026-07-08)
+
+
+### Bug Fixes
+
+* **Scrollbar:** DLT-3494 register --os-scroll-percent globally for shadow DOM support ([#1359](https://github.com/dialpad/dialtone/issues/1359)) ([346b2dc](https://github.com/dialpad/dialtone/commit/346b2dc4855fd22db4b1b88e33416d8a3e47913a))
+
 # [9.188.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.187.3...dialtone/v9.188.0) (2026-07-07)
 
 
