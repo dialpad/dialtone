@@ -144,6 +144,7 @@ empty. Current mappings include:
 - `endIconClass` -> `endIcon`
 - `iconClass` -> `icon`
 - `leadingClass` -> `leading`
+- `markerClass` -> `marker`
 - `startIconClass` -> `startIcon`
 - `trailingClass` -> `trailing`
 

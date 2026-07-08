@@ -590,6 +590,10 @@
                 "link": "/components/text.html"
               },
               {
+                "text": "Text List",
+                "link": "/components/text-list.html"
+              },
+              {
                 "text": "Toast",
                 "link": "/components/toast.html"
               },

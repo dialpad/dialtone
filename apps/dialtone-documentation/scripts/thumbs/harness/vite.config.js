@@ -38,6 +38,8 @@ export default defineConfig({
       vue: 'vue/dist/vue.esm-bundler.js',
       // Reach the Combinator variants files directly from the harness.
       '@variants': fileURLToPath(new URL('../../../../../packages/combinator/src/variants', import.meta.url)),
+      // Combinator variant files use the package-local `@` alias for helpers.
+      '@': fileURLToPath(new URL('../../../../../packages/combinator', import.meta.url)),
     },
   },
   server: {

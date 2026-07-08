@@ -25,6 +25,18 @@ const INFO = {
   ],
 };
 
+const TEXT_LIST_ITEM_INFO = {
+  exclusions: [],
+  props: [
+    { name: 'contentClass' },
+    { name: 'markerClass' },
+  ],
+  slots: [
+    { name: 'default' },
+    { name: 'marker' },
+  ],
+};
+
 describe('variant_state', function () {
   describe('computeDisabledMembers', function () {
     it('returns an empty set when no rule matches and dependents are active', function () {
@@ -53,6 +65,26 @@ describe('variant_state', function () {
 
     it('hides slots via matching exclusion rules', function () {
       expect(computeDisabledMembers(INFO, { to: '', kind: 'count', link: true }).has('decoration')).toBe(true);
+    });
+
+    it('hides TextListItem marker class props when the marker slot is empty', function () {
+      const disabled = computeDisabledMembers(TEXT_LIST_ITEM_INFO, {}, {
+        default: 'List item',
+        marker: '',
+      });
+
+      expect(disabled.has('contentClass')).toBe(false);
+      expect(disabled.has('markerClass')).toBe(true);
+    });
+
+    it('shows TextListItem marker class props when the marker slot has content', function () {
+      const disabled = computeDisabledMembers(TEXT_LIST_ITEM_INFO, {}, {
+        default: 'List item',
+        marker: '<dt-icon-close size="200" />',
+      });
+
+      expect(disabled.has('contentClass')).toBe(false);
+      expect(disabled.has('markerClass')).toBe(false);
     });
 
     it('handles an info object with no props or slots', function () {

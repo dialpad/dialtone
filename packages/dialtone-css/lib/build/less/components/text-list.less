@@ -1,0 +1,152 @@
+@layer dialtone.components {
+.d-text-list {
+  --text-list-gap: var(--dt-spacing-100);
+  --text-list-indent: var(--dt-spacing-250);
+  --text-list-marker-unordered: disc;
+  --text-list-marker-ordered: decimal;
+  --text-list-marker-color: currentColor;
+
+  margin: 0;
+  padding-inline-start: var(--text-list-indent);
+  list-style-type: var(--text-list-marker-unordered);
+
+  & & {
+    --text-list-marker-unordered: circle;
+    --text-list-marker-ordered: lower-alpha;
+  }
+
+  & & & {
+    --text-list-marker-unordered: square;
+    --text-list-marker-ordered: lower-roman;
+  }
+
+  &--ordered {
+    list-style-type: var(--text-list-marker-ordered);
+  }
+
+  &--marker-none {
+    padding-inline-start: 0;
+    list-style-type: none;
+  }
+
+  &--marker-disc { list-style-type: disc; }
+  &--marker-circle { list-style-type: circle; }
+  &--marker-square { list-style-type: square; }
+  &--marker-decimal { list-style-type: decimal; }
+  &--marker-lower-alpha { list-style-type: lower-alpha; }
+  &--marker-upper-alpha { list-style-type: upper-alpha; }
+  &--marker-lower-roman { list-style-type: lower-roman; }
+  &--marker-upper-roman { list-style-type: upper-roman; }
+
+  &--marker-tone-primary,
+  &__item--marker-tone-primary { --text-list-marker-color: var(--dt-color-foreground-primary); }
+
+  &--marker-tone-secondary,
+  &__item--marker-tone-secondary { --text-list-marker-color: var(--dt-color-foreground-secondary); }
+
+  &--marker-tone-tertiary,
+  &__item--marker-tone-tertiary { --text-list-marker-color: var(--dt-color-foreground-tertiary); }
+
+  &--marker-tone-muted,
+  &__item--marker-tone-muted { --text-list-marker-color: var(--dt-color-foreground-muted); }
+
+  &--marker-tone-disabled,
+  &__item--marker-tone-disabled { --text-list-marker-color: var(--dt-color-foreground-disabled); }
+
+  &--marker-tone-placeholder,
+  &__item--marker-tone-placeholder { --text-list-marker-color: var(--dt-color-foreground-placeholder); }
+
+  &--marker-tone-critical,
+  &__item--marker-tone-critical { --text-list-marker-color: var(--dt-color-foreground-critical); }
+
+  &--marker-tone-critical-strong,
+  &__item--marker-tone-critical-strong { --text-list-marker-color: var(--dt-color-foreground-critical-strong); }
+
+  &--marker-tone-positive,
+  &__item--marker-tone-positive { --text-list-marker-color: var(--dt-color-foreground-positive); }
+
+  &--marker-tone-positive-strong,
+  &__item--marker-tone-positive-strong { --text-list-marker-color: var(--dt-color-foreground-positive-strong); }
+
+  &--marker-tone-warning,
+  &__item--marker-tone-warning { --text-list-marker-color: var(--dt-color-foreground-warning); }
+
+  &--marker-tone-info,
+  &__item--marker-tone-info { --text-list-marker-color: var(--dt-color-foreground-info); }
+
+  &--marker-tone-info-strong,
+  &__item--marker-tone-info-strong { --text-list-marker-color: var(--dt-color-foreground-info-strong); }
+
+  &--marker-tone-neutral-black,
+  &__item--marker-tone-neutral-black { --text-list-marker-color: var(--dt-color-neutral-black); }
+
+  &--marker-tone-neutral-white,
+  &__item--marker-tone-neutral-white { --text-list-marker-color: var(--dt-color-neutral-white); }
+
+  // Stop outside both range() sequences: 1 (not a multiple of 25)
+  &--gap-1 { --text-list-gap: var(--dt-spacing-1); }
+
+  each(range(0, 200, 25), {
+    &--gap-@{value} {
+      --text-list-gap: ~"var(--dt-spacing-@{value})";
+    }
+  });
+
+  each(range(250, 400, 50), {
+    &--gap-@{value} {
+      --text-list-gap: ~"var(--dt-spacing-@{value})";
+    }
+  });
+
+  > :where(li)::marker {
+    color: var(--text-list-marker-color);
+  }
+
+  > :where(li) {
+    margin-block: var(--text-list-gap);
+    list-style: inherit;
+  }
+
+  &:not(:where(.d-text-list .d-text-list)) > :where(li:first-child) {
+    margin-block-start: 0;
+  }
+
+  :where(&__item > .d-text-list),
+  :where(&__item-content > .d-text-list) {
+    margin-block: var(--text-list-gap);
+  }
+
+  :where(&__item--custom-marker) {
+    display: flex;
+    gap: var(--dt-spacing-100);
+    list-style-type: none;
+  }
+
+  :where(&:not(&--marker-none) > &__item--custom-marker) {
+    margin-inline-start: calc(var(--text-list-indent) * -1);
+  }
+
+  &__item-marker {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    align-self: flex-start;
+    justify-content: center;
+    color: var(--text-list-marker-color);
+    min-inline-size: var(--text-list-indent);
+    inline-size: 1em;
+    block-size: 1em;
+    margin-block-start: var(--dt-spacing-50);
+  }
+
+  // &__item-marker .d-icon {
+  //   inline-size: 1em;
+  //   block-size: 1em;
+  // }
+
+  &__item-content {
+    flex: 1 1 auto;
+    min-inline-size: 0;
+  }
+}
+}

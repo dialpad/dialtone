@@ -16,9 +16,11 @@ const RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 const ruleTester = new RuleTester({
-  // eslint-disable-next-line n/no-extraneous-require
-  parser: require.resolve('vue-eslint-parser'),
-  parserOptions: { ecmaVersion: 'latest' },
+  languageOptions: {
+     
+    parser: require('vue-eslint-parser'),
+    ecmaVersion: 'latest',
+  },
 });
 
 ruleTester.run('deprecated-success-color-classes', rule, {

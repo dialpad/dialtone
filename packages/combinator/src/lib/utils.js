@@ -133,6 +133,7 @@ const SLOT_CLASS_PROP_DEPENDENCIES = new Map([
   ['endIconClass', 'endIcon'],
   ['iconClass', 'icon'],
   ['leadingClass', 'leading'],
+  ['markerClass', 'marker'],
   ['startIconClass', 'startIcon'],
   ['trailingClass', 'trailing'],
 ]);
