@@ -23,63 +23,163 @@ keywords:
   ]
 ---
 
-<dt-text-list
-  marker-tone="positive"
->
+### Default line height
+
+<dt-text-list>
   <dt-text-list-item>
-  <template #marker>
-    <dt-icon name="check" size="300" />
-  </template>
-  Included in every plan
-</dt-text-list-item>
-<dt-text-list-item marker-tone="warning">
-  <template #marker>
-    <dt-icon name="alert-circle" size="300" />
-  </template>
-  Requires admin approval
-</dt-text-list-item>
-<dt-text-list-item>
-  <template #marker>
-    <dt-icon name="plus" size="300" />
-  </template>
-  Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item
-</dt-text-list-item>
-<dt-text-list-item marker-tone="muted">
-  <template #marker>
-    <dt-icon name="check-circle" size="300" />
-  </template>
-  Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item
-</dt-text-list-item>
-<dt-text-list-item>
-  <template #marker>
-    a
-  </template>
-  Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item
-</dt-text-list-item>
-<dt-text-list-item>
-  <template #marker>
-    <dt-emoji code="❌" size="300" />
-  </template>
-  Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item
-</dt-text-list-item>
-<dt-text-list-item>
-  <template #marker>
-    <dt-emoji code="✅" size="300" />
-  </template>
-  Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item
-</dt-text-list-item>
-<dt-text-list-item>
-  <template #marker>
-    &bull;
-  </template>
-  Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item
-</dt-text-list-item>
-<dt-text-list-item>
-  <template #marker>
-    <dt-box border-width="100" inline-size="8px" block-size="8px" surface="moderate" border-radius="300"></dt-box>
-  </template>
-  Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item
-</dt-text-list-item>
+    <template #marker>
+      <dt-icon name="check" size="300" />
+    </template>
+    Included in every plan
+  </dt-text-list-item>
+  <dt-text-list-item marker-tone="warning">
+    <template #marker>
+      <dt-icon name="alert-circle" size="300" />
+    </template>
+    Requires admin approval
+  </dt-text-list-item>
+  <dt-text-list-item>
+    <template #marker>
+      <dt-icon name="plus" size="300" />
+    </template>
+    Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item
+  </dt-text-list-item>
+  <dt-text-list-item marker-tone="muted">
+    <template #marker>
+      <dt-icon name="check-circle" size="300" />
+    </template>
+    Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item
+  </dt-text-list-item>
+  <dt-text-list-item>
+    <template #marker>
+      a
+    </template>
+    Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item
+  </dt-text-list-item>
+  <dt-text-list-item>
+    <template #marker>
+      <dt-emoji code="❌" size="300" />
+    </template>
+    Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item
+  </dt-text-list-item>
+  <dt-text-list-item>
+    <template #marker>
+      <dt-emoji code="✅" size="300" />
+    </template>
+    Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item
+  </dt-text-list-item>
+  <dt-text-list-item>
+    <template #marker>
+      <dt-icon name="bullet" size="300" />
+    </template>
+    Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item
+  </dt-text-list-item>
+</dt-text-list>
+
+### Tighter line height
+
+<dt-text-list>
+  <dt-text-list-item>
+    <template #marker>
+      <dt-icon name="check" size="300" />
+    </template>
+    <dt-text density="200" as="p">Included in every plan</dt-text>
+  </dt-text-list-item>
+  <dt-text-list-item marker-tone="warning">
+    <template #marker>
+      <dt-icon name="alert-circle" size="300" />
+    </template>
+    <dt-text density="200" as="p">Requires admin approval</dt-text>
+  </dt-text-list-item>
+  <dt-text-list-item>
+    <template #marker>
+      <dt-icon name="plus" size="300" />
+    </template>
+    <dt-text density="200" as="p">Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item</dt-text>
+  </dt-text-list-item>
+  <dt-text-list-item marker-tone="muted">
+    <template #marker>
+      <dt-icon name="check-circle" size="300" />
+    </template>
+    <dt-text density="200" as="p">Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item</dt-text>
+  </dt-text-list-item>
+  <dt-text-list-item>
+    <template #marker>
+      a
+    </template>
+    <dt-text density="200" as="p">Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item</dt-text>
+  </dt-text-list-item>
+  <dt-text-list-item>
+    <template #marker>
+      <dt-emoji code="❌" size="300" />
+    </template>
+    <dt-text density="200" as="p">Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item</dt-text>
+  </dt-text-list-item>
+  <dt-text-list-item>
+    <template #marker>
+      <dt-emoji code="✅" size="300" />
+    </template>
+    <dt-text density="200" as="p">Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item</dt-text>
+  </dt-text-list-item>
+  <dt-text-list-item>
+    <template #marker>
+      <dt-icon name="bullet" size="300" />
+    </template>
+    <dt-text density="200" as="p">Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item</dt-text>
+  </dt-text-list-item>
+</dt-text-list>
+
+### Tightest line height
+
+<dt-text-list>
+  <dt-text-list-item>
+    <template #marker>
+      <dt-icon name="check" size="300" />
+    </template>
+    <dt-text density="100" as="p">Included in every plan</dt-text>
+  </dt-text-list-item>
+  <dt-text-list-item marker-tone="warning">
+    <template #marker>
+      <dt-icon name="alert-circle" size="300" />
+    </template>
+    <dt-text density="100" as="p">Requires admin approval</dt-text>
+  </dt-text-list-item>
+  <dt-text-list-item>
+    <template #marker>
+      <dt-icon name="plus" size="300" />
+    </template>
+    <dt-text density="100" as="p">Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item</dt-text>
+  </dt-text-list-item>
+  <dt-text-list-item marker-tone="muted">
+    <template #marker>
+      <dt-icon name="check-circle" size="300" />
+    </template>
+    <dt-text density="100" as="p">Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item</dt-text>
+  </dt-text-list-item>
+  <dt-text-list-item>
+    <template #marker>
+      a
+    </template>
+    <dt-text density="100" as="p">Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item</dt-text>
+  </dt-text-list-item>
+  <dt-text-list-item>
+    <template #marker>
+      <dt-emoji code="❌" size="300" />
+    </template>
+    <dt-text density="100" as="p">Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item</dt-text>
+  </dt-text-list-item>
+  <dt-text-list-item>
+    <template #marker>
+      <dt-emoji code="✅" size="300" />
+    </template>
+    <dt-text density="100" as="p">Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item</dt-text>
+  </dt-text-list-item>
+  <dt-text-list-item>
+    <template #marker>
+      <dt-icon name="bullet" size="300" />
+    </template>
+    <dt-text density="100" as="p">Can be customized per item  Can be customized per item  Can be customized per item  Can be customized per item</dt-text>
+  </dt-text-list-item>
 </dt-text-list>
 
 <component-combinator component-name="DtTextList" />

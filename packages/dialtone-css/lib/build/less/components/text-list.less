@@ -29,10 +29,10 @@
     list-style-type: none;
   }
 
-  &--marker-disc { list-style-type: disc; }
-  &--marker-circle { list-style-type: circle; }
-  &--marker-square { list-style-type: square; }
-  &--marker-decimal { list-style-type: decimal; }
+  &--marker-disc        { list-style-type: disc; }
+  &--marker-circle      { list-style-type: circle; }
+  &--marker-square      { list-style-type: square; }
+  &--marker-decimal     { list-style-type: decimal; }
   &--marker-lower-alpha { list-style-type: lower-alpha; }
   &--marker-upper-alpha { list-style-type: upper-alpha; }
   &--marker-lower-roman { list-style-type: lower-roman; }
@@ -117,32 +117,72 @@
   }
 
   :where(&__item--custom-marker) {
+    --text-list-marker-block-size: 1em;
+
     display: flex;
     gap: var(--dt-spacing-100);
+    align-items: flex-start;
     list-style-type: none;
+  }
+
+  @supports (block-size: 1lh) {
+    :where(&__item--custom-marker) {
+      --text-list-marker-block-size: 1lh;
+    }
   }
 
   :where(&:not(&--marker-none) > &__item--custom-marker) {
     margin-inline-start: calc(var(--text-list-indent) * -1);
   }
 
+  each(3xl 2xl xl lg md sm xs, {
+    :where(&__item--custom-marker:has(> &__item-content > .d-text-headline--@{value})) {
+      --text-list-marker-font-size: ~"var(--dt-text-headline-@{value}-font-size)";
+      --text-list-marker-line-height: ~"var(--dt-text-headline-@{value}-line-height)";
+    }
+  });
+
+  each(lg md sm xs, {
+    :where(&__item--custom-marker:has(> &__item-content > .d-text-body--@{value})) {
+      --text-list-marker-font-size: ~"var(--dt-text-body-@{value}-font-size)";
+      --text-list-marker-line-height: ~"var(--dt-text-body-@{value}-line-height)";
+    }
+
+    :where(&__item--custom-marker:has(> &__item-content > .d-text-label--@{value})) {
+      --text-list-marker-font-size: ~"var(--dt-text-label-@{value}-font-size)";
+      --text-list-marker-line-height: ~"var(--dt-text-label-@{value}-line-height)";
+    }
+
+    :where(&__item--custom-marker:has(> &__item-content > .d-text-code--@{value})) {
+      --text-list-marker-font-size: ~"var(--dt-text-code-@{value}-font-size)";
+      --text-list-marker-line-height: ~"var(--dt-text-code-@{value}-line-height)";
+    }
+  });
+
+  each(50 75 100 125 150 200 250 300 350 400 450 500 550 600 650 700 750 800, {
+    :where(&__item--custom-marker:has(> &__item-content > .d-text--fs-@{value})) {
+      --text-list-marker-font-size: ~"var(--dt-font-size-@{value})";
+    }
+  });
+
+  each(range(100, 600, 100), {
+    :where(&__item--custom-marker:has(> &__item-content > .d-text--lh-@{value})) {
+      --text-list-marker-line-height: ~"var(--dt-font-line-height-@{value})";
+    }
+  });
+
   &__item-marker {
     display: inline-flex;
     flex: none;
     align-items: center;
-    align-self: flex-start;
     justify-content: center;
     color: var(--text-list-marker-color);
+    font-size: var(--text-list-marker-font-size, inherit);
+    line-height: var(--text-list-marker-line-height, inherit);
     min-inline-size: var(--text-list-indent);
-    inline-size: 1em;
-    block-size: 1em;
-    margin-block-start: var(--dt-spacing-50);
+    // Match native marker alignment by centering custom markers within the first line box.
+    block-size: var(--text-list-marker-block-size);
   }
-
-  // &__item-marker .d-icon {
-  //   inline-size: 1em;
-  //   block-size: 1em;
-  // }
 
   &__item-content {
     flex: 1 1 auto;
