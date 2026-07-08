@@ -129,9 +129,9 @@ Selected/hover colors are re-mapped, and the selected-tab indicator now **slides
 
 A brand-new component (DLT-413) — anywhere you see it is new UI, with no "before" to compare against.
 
-<div class="d-bgc-secondary d-ba d-bc-subtle d-bar-400 d-p-300 d-wmx60p">
+<dt-box surface="secondary" border-width="100" border-color="subtle" border-radius="400" padding="300" class="d-wmx60p">
   <img :src="$withBase('/assets/images/migration-visual/component-segmented-control-after-light.png')" alt="Segmented control, new in Dialtone Next" class="d-d-block d-w100p">
-</div>
+</dt-box>
 
 ### Avatars
 

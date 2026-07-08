@@ -1,5 +1,5 @@
 <template>
-  <div class="d-my-500">
+  <dt-box class="d-my-500">
     <before-after-body
       v-model:mode="mode"
       v-model:blend="blend"
@@ -45,7 +45,7 @@
         :after-label="afterLabel"
       />
     </dt-modal>
-  </div>
+  </dt-box>
 </template>
 
 <script setup>

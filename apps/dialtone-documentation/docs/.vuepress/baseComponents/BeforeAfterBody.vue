@@ -1,6 +1,12 @@
 <template>
   <div>
-    <div class="d-d-flex d-jc-space-between d-ai-center d-mbe-200 d-fw-wrap d-g-200">
+    <dt-stack
+      direction="row"
+      gap="200"
+      align="center"
+      justify="space-between"
+      class="d-mbe-200 d-fw-wrap"
+    >
       <dt-segmented-control
         :model-value="mode"
         aria-label="Comparison mode"
@@ -17,43 +23,67 @@
         </dt-segmented-control-item>
       </dt-segmented-control>
       <slot name="actions" />
-    </div>
+    </dt-stack>
 
     <div
       v-if="mode === 'side'"
       class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols2"
     >
-      <figure class="d-m0">
+      <dt-box
+        as="figure"
+        class="d-m0"
+      >
         <figcaption class="d-fs-100 d-fw-semibold d-fc-secondary d-mbe-200">
           {{ beforeLabel }}
         </figcaption>
-        <div class="d-bgc-secondary d-ba d-bc-subtle d-bar-400 d-p-300">
+        <dt-box
+          surface="secondary"
+          border-width="100"
+          border-color="subtle"
+          border-radius="400"
+          padding="300"
+        >
           <img
             :src="withBase(before)"
             :alt="`${alt} — before migration`"
             class="d-d-block d-w100p"
             loading="lazy"
           >
-        </div>
-      </figure>
-      <figure class="d-m0">
+        </dt-box>
+      </dt-box>
+      <dt-box
+        as="figure"
+        class="d-m0"
+      >
         <figcaption class="d-fs-100 d-fw-semibold d-fc-secondary d-mbe-200">
           {{ afterLabel }}
         </figcaption>
-        <div class="d-bgc-secondary d-ba d-bc-subtle d-bar-400 d-p-300">
+        <dt-box
+          surface="secondary"
+          border-width="100"
+          border-color="subtle"
+          border-radius="400"
+          padding="300"
+        >
           <img
             :src="withBase(after)"
             :alt="`${alt} — after migration`"
             class="d-d-block d-w100p"
             loading="lazy"
           >
-        </div>
-      </figure>
+        </dt-box>
+      </dt-box>
     </div>
 
     <div v-else-if="mode === 'split'">
-      <div class="d-bgc-secondary d-ba d-bc-subtle d-bar-400 d-p-300">
-        <div class="before-after-body__wipe">
+      <dt-box
+        surface="secondary"
+        border-width="100"
+        border-color="subtle"
+        border-radius="400"
+        padding="300"
+      >
+        <dt-box position="relative">
           <div class="before-after-body__stack">
             <img
               :src="withBase(before)"
@@ -89,16 +119,26 @@
             :aria-label="`Split position: before shows left of ${split}%, after to the right`"
             @input="$emit('update:split', Number($event.target.value))"
           >
-        </div>
-      </div>
-      <div class="d-d-flex d-jc-space-between d-mbs-200">
+        </dt-box>
+      </dt-box>
+      <dt-stack
+        direction="row"
+        justify="space-between"
+        class="d-mbs-200"
+      >
         <span class="d-fs-100 d-fw-semibold d-fc-secondary">{{ beforeLabel }}</span>
         <span class="d-fs-100 d-fw-semibold d-fc-secondary">{{ afterLabel }}</span>
-      </div>
+      </dt-stack>
     </div>
 
     <div v-else>
-      <div class="d-bgc-secondary d-ba d-bc-subtle d-bar-400 d-p-300">
+      <dt-box
+        surface="secondary"
+        border-width="100"
+        border-color="subtle"
+        border-radius="400"
+        padding="300"
+      >
         <div class="before-after-body__stack">
           <img
             :src="withBase(before)"
@@ -112,8 +152,13 @@
             loading="lazy"
           >
         </div>
-      </div>
-      <div class="d-d-flex d-ai-center d-g-300 d-mbs-200">
+      </dt-box>
+      <dt-stack
+        direction="row"
+        gap="300"
+        align="center"
+        class="d-mbs-200"
+      >
         <span class="d-fs-100 d-fw-semibold d-fc-secondary">{{ beforeLabel }}</span>
         <input
           :value="blend"
@@ -126,7 +171,7 @@
           @input="$emit('update:blend', Number($event.target.value))"
         >
         <span class="d-fs-100 d-fw-semibold d-fc-secondary">{{ afterLabel }}</span>
-      </div>
+      </dt-stack>
     </div>
   </div>
 </template>
@@ -139,7 +184,7 @@ import { withBase } from 'vuepress/client';
 // onion-skin blend. Mode, split, and blend live in the parent so they survive
 // expanding into the fullscreen modal.
 // Image srcs are passed through withBase(): the site deploys under a
-// subpath (VUEPRESS_BASE_URL, e.g. /next/ or deploy previews), and VuePress
+// subpath (VUEPRESS_BASE_URL, e.g. /next/ and deploy previews), and VuePress
 // only auto-rewrites markdown ![]() images — not component props.
 defineProps({
   before: {
@@ -195,10 +240,6 @@ defineEmits(['update:mode', 'update:blend', 'update:split']);
 
 .before-after-body__slider {
   accent-color: var(--dt-color-foreground-primary);
-}
-
-.before-after-body__wipe {
-  position: relative;
 }
 
 .before-after-body__divider {
