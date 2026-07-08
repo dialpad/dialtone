@@ -48,7 +48,10 @@ const OUT_DIR = resolve(
 );
 
 const VIEWPORT = { width: 1280, height: 800 };
-const DEVICE_SCALE = 2;
+// 4x density: the fullscreen comparison modal stretches images well past
+// their CSS size — 2x looked soft there. Scene layout is in CSS px, so
+// changing density never moves pixels between the before/after pair.
+const DEVICE_SCALE = 4;
 
 const SCENES = [
   // §1 — token-driven ambient changes (one token, every page)

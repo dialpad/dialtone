@@ -35,10 +35,13 @@
       </template>
     </dt-card>
 
+    <!-- d-wmx-unset lifts .d-modal__content's 75ch cap, which size="full"
+         doesn't override — without it the comparison can't use the width. -->
     <dt-modal
       :open="expanded"
       size="full"
       :header-text="alt"
+      content-class="d-wmx-unset"
       @update:open="expanded = $event"
     >
       <before-after-body
