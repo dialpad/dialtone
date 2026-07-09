@@ -1,6 +1,5 @@
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import {
-  DT_TEXT_LIST_DEFAULT_GAP,
   DT_TEXT_LIST_GAP,
   DT_TEXT_LIST_MARKER_TONES,
   DT_TEXT_LIST_MARKERS,
@@ -12,12 +11,13 @@ import DtTextListVariants from './TextListVariants.story.vue';
 
 const markerOptions = [undefined, ...DT_TEXT_LIST_MARKERS];
 const markerToneOptions = [undefined, ...DT_TEXT_LIST_MARKER_TONES];
+const gapOptions = [undefined, ...DT_TEXT_LIST_GAP];
 
 export const argsData = {
   type: 'unordered',
   marker: undefined,
   markerTone: undefined,
-  gap: DT_TEXT_LIST_DEFAULT_GAP,
+  gap: undefined,
   start: undefined,
   reversed: false,
   items: [
@@ -42,7 +42,7 @@ export const argTypesData = {
     control: { type: 'select' },
   },
   gap: {
-    options: DT_TEXT_LIST_GAP,
+    options: gapOptions,
     control: { type: 'select' },
   },
   start: {

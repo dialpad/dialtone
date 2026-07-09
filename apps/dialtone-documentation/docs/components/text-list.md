@@ -98,7 +98,7 @@ Use `type="ordered"` when sequence matters. `start`, `reversed`, and item `value
 
 ### Gap
 
-Use `gap` to add space between items and before nested lists. Values come from the spacing scale up to `400`. The default is `0`: items follow the natural line flow with no added space.
+Use `gap` to add space between items and before nested lists. Values come from the spacing scale up to `400`. There is no default `gap`, effectively `0`.
 
 ```vue demo
 <!-- @wrapper -->

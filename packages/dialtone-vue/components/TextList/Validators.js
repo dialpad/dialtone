@@ -12,4 +12,4 @@ function optionalListValidator (list) {
 export const textListTypeValidator = value => DT_TEXT_LIST_TYPES.includes(String(value));
 export const textListMarkerValidator = optionalListValidator(DT_TEXT_LIST_MARKERS);
 export const textListMarkerToneValidator = optionalListValidator(DT_TEXT_LIST_MARKER_TONES);
-export const textListGapValidator = value => DT_TEXT_LIST_GAP.includes(String(value));
+export const textListGapValidator = optionalListValidator(DT_TEXT_LIST_GAP);

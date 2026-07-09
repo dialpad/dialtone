@@ -27,7 +27,6 @@ import {
 } from 'vue';
 import {
   DT_TEXT_LIST_CONTEXT,
-  DT_TEXT_LIST_DEFAULT_GAP,
   DT_TEXT_LIST_DEFAULT_TYPE,
   DT_TEXT_LIST_ORDERED_MARKERS,
   DT_TEXT_LIST_UNORDERED_MARKERS,
@@ -80,7 +79,7 @@ const props = defineProps({
    */
   gap: {
     type: String,
-    default: DT_TEXT_LIST_DEFAULT_GAP,
+    default: undefined,
     validator: textListGapValidator,
   },
 
@@ -116,7 +115,7 @@ const orderedReversed = computed(() => isOrdered.value && props.reversed ? true 
 
 const textListClasses = computed(() => [
   'd-text-list',
-  props.gap === undefined ? null : `d-text-list--gap-${props.gap}`,
+  props.gap ? `d-text-list--gap-${props.gap}` : null,
   {
     'd-text-list--ordered': isOrdered.value,
   },
