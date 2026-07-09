@@ -277,12 +277,12 @@ Link rendering is stable, with one behavior change: quiet links (previously neve
 
 ### Modals
 
-Modals are now native dialogs rendered in the browser's top layer ([guide](/guides/migration/modal-native-dialog/)). Visually near-identical in light mode; in dark mode the modal surface is lighter than the page (see [overlays](#overlays-are-lighter-than-the-page-in-dark-mode)). Tooltips or popovers rendering **underneath** a modal is a bug.
+Modals are now native dialogs rendered in the browser's top layer ([guide](/guides/migration/modal-native-dialog/)). Light mode is visually near-identical, so the pair below shows **dark mode**, where the change is real: the modal surface is lighter than the page (see [overlays](#overlays-are-lighter-than-the-page-in-dark-mode)). Tooltips or popovers rendering **underneath** a modal is a bug.
 
 <before-after
-  before="/assets/images/migration-visual/component-modal-before-light.png"
-  after="/assets/images/migration-visual/component-modal-after-light.png"
-  alt="Open modal over page content with backdrop"
+  before="/assets/images/migration-visual/component-modal-before-dark.png"
+  after="/assets/images/migration-visual/component-modal-after-dark.png"
+  alt="Open modal over page content with backdrop, in dark mode"
 />
 
 ## What must look identical
