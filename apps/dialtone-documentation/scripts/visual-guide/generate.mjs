@@ -167,12 +167,25 @@ async function renderSet (browser, harnessRoot, branch) {
  * Copy scenes + harness into the worktree so the "before" render uses the SAME
  * scene files. The worktree's own Dialtone build supplies the old token values.
  */
+// Static sample assets referenced by scenes (photos etc.) — these live in the
+// next checkout's public dir but must also exist in the worktree's public dir,
+// which is what the "before" harness serves.
+const SAMPLE_ASSETS = ['sample-person.png'];
+
 function syncIntoWorktree (beforeRoot) {
   const dest = resolve(beforeRoot, REL_SELF);
   rmSync(dest, { recursive: true, force: true });
   mkdirSync(dirname(dest), { recursive: true });
   cpSync(join(__dirname, 'harness'), join(dest, 'harness'), { recursive: true });
   cpSync(join(__dirname, 'scenes'), join(dest, 'scenes'), { recursive: true });
+  const assetDir = resolve(
+    beforeRoot,
+    'apps/dialtone-documentation/docs/.vuepress/public/assets/images/migration-visual',
+  );
+  mkdirSync(assetDir, { recursive: true });
+  for (const asset of SAMPLE_ASSETS) {
+    cpSync(join(OUT_DIR, asset), join(assetDir, asset));
+  }
   return join(dest, 'harness');
 }
 

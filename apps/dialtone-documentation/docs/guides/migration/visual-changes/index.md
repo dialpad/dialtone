@@ -141,7 +141,7 @@ Also new as a core component (DLT-2941; previously only recipe pills existed). F
 
 ### Avatars
 
-Redesigned color system (12 hue families, deterministically assigned per person), and **group avatars render at their real size** instead of being forced tiny. Count badges cap at "9+" on small sizes. Group avatars looking noticeably larger than before is expected (DLT-2942, [guide](/guides/migration/avatar-updates/)).
+Redesigned color system (12 hue families, deterministically assigned per person), and **group avatars now render at full size**. Current Dialtone always draws group avatars at the smallest size, and avatars that small never show initials — so if you can read initials on a group avatar, that's Next working as intended, not a bug (DLT-2942, [guide](/guides/migration/avatar-updates/)). Photo avatars keep their crop; presence indicators move to the new squircle shapes.
 
 <before-after
   before="/assets/images/migration-visual/component-avatar-before-light.png"
