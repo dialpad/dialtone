@@ -29,7 +29,7 @@
     </dt-stack>
 
     <!-- Both images stay mounted (stacked in the same grid cell) and only
-         visibility flips, so the browser keeps both decoded and the toggle
+         visibility flips, so the browser keeps both decoded and switching
          is instantaneous — no request, no reflow. -->
     <div v-if="mode === 'toggle'">
       <dt-box
@@ -43,13 +43,13 @@
           <img
             :src="withBase(before)"
             :alt="`${alt} — before migration`"
-            :style="{ visibility: toggled ? 'hidden' : 'visible' }"
+            :style="{ visibility: shown === 'after' ? 'hidden' : 'visible' }"
             loading="lazy"
           >
           <img
             :src="withBase(after)"
             :alt="`${alt} — after migration`"
-            :style="{ visibility: toggled ? 'visible' : 'hidden' }"
+            :style="{ visibility: shown === 'after' ? 'visible' : 'hidden' }"
             loading="lazy"
           >
         </div>
@@ -59,17 +59,18 @@
         justify="end"
         class="d-mbs-200"
       >
-        <!-- DtToggle's wrapper is a bare flex box with no built-in gap
-             between label and control — d-g-200 supplies it, matching the
-             component's own docs examples. -->
-        <dt-toggle
-          :model-value="toggled"
-          size="200"
-          class="d-g-200"
-          @update:model-value="$emit('update:toggled', $event)"
+        <dt-segmented-control
+          :model-value="shown"
+          aria-label="Version shown"
+          @update:model-value="$emit('update:shown', $event)"
         >
-          Show Dialtone Next
-        </dt-toggle>
+          <dt-segmented-control-item value="before">
+            Before
+          </dt-segmented-control-item>
+          <dt-segmented-control-item value="after">
+            After
+          </dt-segmented-control-item>
+        </dt-segmented-control>
       </dt-stack>
     </div>
 
@@ -228,9 +229,9 @@
 import { withBase } from 'vuepress/client';
 
 // Presentational half of <before-after>: renders the comparison as an
-// instant before/after toggle (default), side-by-side, a split wipe
+// instant before/after switch (default), side-by-side, a split wipe
 // (draggable divider — before left, after right), or an onion-skin blend.
-// Mode, toggled, split, and blend live in the parent so they survive
+// Mode, shown, split, and blend live in the parent so they survive
 // expanding into the fullscreen modal.
 // Image srcs are passed through withBase(): the site deploys under a
 // subpath (VUEPRESS_BASE_URL, e.g. /next/ and deploy previews), and VuePress
@@ -260,9 +261,10 @@ defineProps({
     type: String,
     required: true,
   },
-  toggled: {
-    type: Boolean,
+  shown: {
+    type: String,
     required: true,
+    validator: (v) => ['before', 'after'].includes(v),
   },
   blend: {
     type: Number,
@@ -274,7 +276,7 @@ defineProps({
   },
 });
 
-defineEmits(['update:mode', 'update:toggled', 'update:blend', 'update:split']);
+defineEmits(['update:mode', 'update:shown', 'update:blend', 'update:split']);
 </script>
 
 <style scoped>

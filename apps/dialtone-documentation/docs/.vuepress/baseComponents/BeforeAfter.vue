@@ -11,7 +11,7 @@
     >
       <before-after-body
         v-model:mode="mode"
-        v-model:toggled="toggled"
+        v-model:shown="shown"
         v-model:blend="blend"
         v-model:split="split"
         :before="before"
@@ -52,7 +52,7 @@
     >
       <before-after-body
         v-model:mode="mode"
-        v-model:toggled="toggled"
+        v-model:shown="shown"
         v-model:blend="blend"
         v-model:split="split"
         :before="before"
@@ -99,9 +99,7 @@ defineProps({
 });
 
 const mode = ref('toggle');
-// Toggle mode defaults to showing the Next render — reviewers compare by
-// flipping back to the current-Dialtone side.
-const toggled = ref(true);
+const shown = ref('before');
 const blend = ref(50);
 const split = ref(50);
 const expanded = ref(false);
