@@ -59,7 +59,10 @@ const EXCLUDED_PROPS = ['button-width-size', 'buttonWidthSize', 'background-size
 const DT_TAG_PATTERN = /<(dt-[\w-]+|Dt\w+)\b[\s\S]*?>/g;
 
 // DtModal's `size` prop (default | full) became the `fullscreen` boolean (DLT-3534).
-const MODAL_TAG_PATTERN = /<(dt-modal|DtModal)(?=[\s/>])[\s\S]*?>/g;
+// (?![\w-]) instead of \b: a plain word boundary would still match tags like
+// <dt-modal-header>, since '-' is a non-word char and creates a boundary after "modal".
+const MODAL_TAG_PATTERN = /<(dt-modal|DtModal)(?![\w-])[\s\S]*?>/g;
+
 // ---------------------------------------------------------------------------
 // File finder
 // ---------------------------------------------------------------------------

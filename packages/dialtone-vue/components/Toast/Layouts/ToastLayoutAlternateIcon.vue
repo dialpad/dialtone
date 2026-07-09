@@ -58,7 +58,7 @@ export default {
 
     size: {
       type: [String, Number],
-      default: '400',
+      default: 400,
       validator: ordinalSizeValidator(ICON_SIZE_MODIFIERS),
     },
 

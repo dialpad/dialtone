@@ -78,7 +78,7 @@ export default {
      */
     iconSize: {
       type: [String, Number],
-      default: '200',
+      default: 200,
       validator: ordinalSizeValidator(ICON_SIZE_MODIFIERS),
     },
 

@@ -73,7 +73,7 @@ export default {
      */
     size: {
       type: [String, Number],
-      default: '500',
+      default: 500,
       validator: ordinalSizeValidator(ICON_SIZE_MODIFIERS),
     },
   },

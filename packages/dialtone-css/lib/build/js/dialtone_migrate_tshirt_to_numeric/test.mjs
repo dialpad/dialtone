@@ -346,6 +346,13 @@ describe('DtModal size → fullscreen transform', () => {
     assert.equal(count, 0);
   });
 
+  it('ignores size="full" on tags that merely start with dt-modal', () => {
+    const input = '<dt-modal-header size="full">Content</dt-modal-header>';
+    const { transformed, count } = transformContent(input);
+    assert.equal(transformed, input);
+    assert.equal(count, 0);
+  });
+
   it('handles multiline dt-modal tags', () => {
     const input = `<dt-modal
       size="full"

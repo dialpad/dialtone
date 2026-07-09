@@ -9,7 +9,7 @@ description: Component size props move from t-shirt labels (xs, sm, md) to a num
 - T-shirt aliases still work — this is **not a breaking change**, and are marked to be sunset.
 - Use the [ESLint rule](#eslint-rule) or [migration script](#migration-script) to update your code.
 - Icon-family `size` props (`DtIcon`, `DtLoader`, `DtEmoji`, `DtEmojiTextWrapper`, `DtProgressCircle`, `DtBadge`'s `iconSize`) now also accept a `Number`, matching every other component.
-- `DtModal`'s `size` prop (`default` / `full`) is replaced by a `fullscreen` boolean. See [migration script](#migration-script).
+- **Breaking change**: `DtModal`'s `size` prop (`default` / `full`) is removed and replaced by a `fullscreen` boolean. See [migration script](#migration-script).
 
 ## Why Numeric?
 
@@ -83,6 +83,9 @@ description: Component size props move from t-shirt labels (xs, sm, md) to a num
 `DtIcon`, `DtLoader`, `DtEmoji`, `DtEmojiTextWrapper`, `DtProgressCircle`, and `DtBadge`'s `iconSize` prop previously only accepted `size="500"` (a string). They now also accept `:size="500"` (a number), matching every other Dialtone component. Existing string usage is unaffected.
 
 ## DtModal: `size` → `fullscreen`
+
+> [!CRITICAL] Breaking change
+> `DtModal`'s `size` prop is removed, unlike the t-shirt-to-numeric change above. Update any `size="full"` or `size="default"` usage before upgrading.
 
 `DtModal`'s `size` prop (`default` / `full`) is replaced by a `fullscreen` boolean:
 
