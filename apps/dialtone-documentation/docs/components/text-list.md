@@ -96,6 +96,26 @@ Use `type="ordered"` when sequence matters. `start`, `reversed`, and item `value
 </dt-stack>
 ```
 
+### Gap
+
+Use `gap` to add space between items and before nested lists. Values come from the spacing scale up to `400`. The default is `0`: items follow the natural line flow with no added space.
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="400" direction="row">
+  <dt-text-list>
+    <dt-text-list-item>Default gap</dt-text-list-item>
+    <dt-text-list-item>No added space.</dt-text-list-item>
+    <dt-text-list-item>Natural line flow.</dt-text-list-item>
+  </dt-text-list>
+  <dt-text-list gap="200">
+    <dt-text-list-item>Gap 200</dt-text-list-item>
+    <dt-text-list-item>Space between items.</dt-text-list-item>
+    <dt-text-list-item>None before or after.</dt-text-list-item>
+  </dt-text-list>
+</dt-stack>
+```
+
 ### Marker
 
 Use `marker` for visual marker style. Unset markers progress automatically as lists nest.

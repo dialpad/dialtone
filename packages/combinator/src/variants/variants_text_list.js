@@ -86,11 +86,6 @@ export default {
   },
 
   'custom markers, marker tone, style list items': {
-    props: {
-      gap: {
-        initialValue: '0',
-      },
-    },
     slots: {
       default: {
         initialValue: `<dt-text-list-item class="d-p-200 d-bar-400" marker-tone="secondary">
@@ -125,22 +120,17 @@ export default {
     },
   },
 
-  'small bullet list, no gap': {
-    props: {
-      gap: {
-        initialValue: '0',
-      },
-    },
+  'small bullet list': {
     slots: {
       default: {
         initialValue: `<dt-text-list-item>
-  <dt-text as="p" variant="body-sm">Collaborative inboxes</dt-text>
+  <dt-text as="p" variant="body-xs">Collaborative inboxes</dt-text>
 </dt-text-list-item>
 <dt-text-list-item>
-  <dt-text as="p" variant="body-sm">AI-powered call summaries</dt-text>
+  <dt-text as="p" variant="body-xs">AI-powered call summaries</dt-text>
 </dt-text-list-item>
 <dt-text-list-item>
-  <dt-text as="p" variant="body-sm">Unified customer history</dt-text>
+  <dt-text as="p" variant="body-xs">Unified customer history</dt-text>
 </dt-text-list-item>`,
       },
     },
@@ -199,11 +189,6 @@ export default {
   },
 
   'custom marker ui design': {
-    props: {
-      gap: {
-        initialValue: '0',
-      },
-    },
     slots: {
       default: {
         initialValue: `<dt-text-list-item class="d-g-50">
