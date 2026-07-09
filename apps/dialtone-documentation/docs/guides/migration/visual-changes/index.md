@@ -197,7 +197,7 @@ Restyled in the same pass as inputs (DLT-2959): control height, label typography
 
 ### Notices
 
-Same palette intent, refreshed typography. Two kind names changed — `success` is now `positive` and `error` is now `critical` — with identical colors. In the pair below, each side styles the name it knows; an unstyled gray notice in the product means an un-migrated kind name.
+Same palette intent, refreshed typography — the pair below renders identical copy on both sides (with and without a title line) so the type and tint changes are the only differences. Two kind names also changed, with identical colors: `success` is now `positive` and `error` is now `critical`; an unstyled gray notice in the product means an un-migrated kind name.
 
 <before-after
   before="/assets/images/migration-visual/component-notice-before-light.png"
