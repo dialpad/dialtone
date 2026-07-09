@@ -59,8 +59,7 @@ const EXCLUDED_PROPS = ['button-width-size', 'buttonWidthSize', 'background-size
 const DT_TAG_PATTERN = /<(dt-[\w-]+|Dt\w+)\b[\s\S]*?>/g;
 
 // DtModal's `size` prop (default | full) became the `fullscreen` boolean (DLT-3534).
-const MODAL_TAG_PATTERN = /<(dt-modal|DtModal)\b[\s\S]*?>/g;
-
+const MODAL_TAG_PATTERN = /<(dt-modal|DtModal)(?=[\s/>])[\s\S]*?>/g;
 // ---------------------------------------------------------------------------
 // File finder
 // ---------------------------------------------------------------------------
