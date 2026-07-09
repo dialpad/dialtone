@@ -1,10 +1,9 @@
 <template>
   <!-- Disabled controls in Next are desaturated + translucent (oklch
-       color-mix) instead of the old opacity fade. The backdrop uses
-       Dialtone's own gradient utilities (present on both branches) so the
-       translucency is visible without being garish; the backdrop itself
-       shifts slightly across the pair — the ramps were re-tuned and Next
-       interpolates gradients in OKLCH, which is part of the refresh. -->
+       color-mix) instead of the old opacity fade. The backdrop is the
+       --dt-color-surface-ai gradient token, which resolves to the same
+       stops on both branches — so the backdrop is identical across the
+       pair and only the controls differ. -->
   <div
     class="vg-scene"
     style="width:560px;"
@@ -13,8 +12,8 @@
       Disabled states
     </p>
     <div
-      class="d-bgg-to-r d-bgg-from-purple-400 d-bgg-to-blue-400"
-      style="padding: 28px;
+      style="background: var(--dt-color-surface-ai);
+        padding: 28px;
         border-radius: 12px;
         display: flex;
         flex-direction: column;

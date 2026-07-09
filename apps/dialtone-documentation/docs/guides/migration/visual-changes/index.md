@@ -83,7 +83,7 @@ Modals, popovers, toasts, and menus now sit on a dedicated overlay surface. In l
 
 ### Disabled controls change their translucency treatment
 
-Disabled controls let the background show through on both versions — the pair below renders on a gradient precisely so you can see it. What changes in Next: the fade is now a **desaturating color-mix** rather than a plain opacity drop, so disabled fills read lighter and grayer, and input surfaces shift from fully transparent to a frosted translucent white (DLT-3446). Sharp eyes will notice the backdrop itself differs slightly too — it's Dialtone's own purple→blue gradient, and gradients are part of the refresh ([re-tuned stops, blended in OKLCH](#base-colors-were-re-tuned-not-just-renamed)).
+Disabled controls let the background show through on both versions — the pair below renders on Dialtone's AI-surface gradient (identical on both sides) precisely so you can see it. What changes in Next: the fade is now a **desaturating color-mix** rather than a plain opacity drop, so disabled fills read lighter and grayer, and input surfaces shift from fully transparent to a frosted translucent white (DLT-3446).
 
 <before-after
   before="/assets/images/migration-visual/token-disabled-states-before-light.png"
