@@ -12,6 +12,9 @@
         aria-label="Comparison mode"
         @update:model-value="$emit('update:mode', $event)"
       >
+        <dt-segmented-control-item value="toggle">
+          Before/After
+        </dt-segmented-control-item>
         <dt-segmented-control-item value="side">
           Side by side
         </dt-segmented-control-item>
@@ -25,8 +28,53 @@
       <slot name="actions" />
     </dt-stack>
 
+    <!-- Both images stay mounted (stacked in the same grid cell) and only
+         visibility flips, so the browser keeps both decoded and the toggle
+         is instantaneous — no request, no reflow. -->
+    <div v-if="mode === 'toggle'">
+      <dt-box
+        surface="primary"
+        border-width="100"
+        border-color="subtle"
+        border-radius="400"
+        padding="300"
+      >
+        <div class="before-after-body__stack">
+          <img
+            :src="withBase(before)"
+            :alt="`${alt} — before migration`"
+            :style="{ visibility: toggled ? 'hidden' : 'visible' }"
+            loading="lazy"
+          >
+          <img
+            :src="withBase(after)"
+            :alt="`${alt} — after migration`"
+            :style="{ visibility: toggled ? 'visible' : 'hidden' }"
+            loading="lazy"
+          >
+        </div>
+      </dt-box>
+      <dt-stack
+        direction="row"
+        justify="end"
+        class="d-mbs-200"
+      >
+        <!-- DtToggle's wrapper is a bare flex box with no built-in gap
+             between label and control — d-g-200 supplies it, matching the
+             component's own docs examples. -->
+        <dt-toggle
+          :model-value="toggled"
+          size="200"
+          class="d-g-200"
+          @update:model-value="$emit('update:toggled', $event)"
+        >
+          Show Dialtone Next
+        </dt-toggle>
+      </dt-stack>
+    </div>
+
     <div
-      v-if="mode === 'side'"
+      v-else-if="mode === 'side'"
       class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols2"
     >
       <dt-box
@@ -179,9 +227,10 @@
 <script setup>
 import { withBase } from 'vuepress/client';
 
-// Presentational half of <before-after>: renders the comparison side-by-side,
-// as a split wipe (draggable divider — before left, after right), or as an
-// onion-skin blend. Mode, split, and blend live in the parent so they survive
+// Presentational half of <before-after>: renders the comparison as an
+// instant before/after toggle (default), side-by-side, a split wipe
+// (draggable divider — before left, after right), or an onion-skin blend.
+// Mode, toggled, split, and blend live in the parent so they survive
 // expanding into the fullscreen modal.
 // Image srcs are passed through withBase(): the site deploys under a
 // subpath (VUEPRESS_BASE_URL, e.g. /next/ and deploy previews), and VuePress
@@ -211,6 +260,10 @@ defineProps({
     type: String,
     required: true,
   },
+  toggled: {
+    type: Boolean,
+    required: true,
+  },
   blend: {
     type: Number,
     required: true,
@@ -221,7 +274,7 @@ defineProps({
   },
 });
 
-defineEmits(['update:mode', 'update:blend', 'update:split']);
+defineEmits(['update:mode', 'update:toggled', 'update:blend', 'update:split']);
 </script>
 
 <style scoped>
