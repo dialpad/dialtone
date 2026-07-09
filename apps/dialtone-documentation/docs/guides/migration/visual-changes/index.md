@@ -272,7 +272,7 @@ Patterns from real migration QA (primarily the ubervoice migration, June–July 
 
 | What you see | Likely cause | What to do |
 | --- | --- | --- |
-| Spacing collapsed, elements misaligned, buttons invisible, raw class names visible in the UI, whole pages unstyled | CSS layering conflicts between Dialtone Next and app CSS, the dominant early-migration failure. Dialtone is **removing cascade layers from its main build**, so this cluster should not recur | If you see these symptoms on a current build, escalate in #dialtone-next immediately; don't spend time self-diagnosing |
+| Spacing collapsed, elements misaligned, buttons invisible, raw class names visible in the UI, whole pages unstyled | CSS layering conflicts between Dialtone Next and app CSS, the dominant early-migration failure. Dialtone keeps cascade layers in its main build; apps whose own CSS conflicts with the layered cascade can load the `no-layers` CSS build instead (`@dialpad/dialtone-css/no-layers`) | If you see these symptoms, escalate in #dialtone-next immediately; don't spend time self-diagnosing |
 | Colors don't change when switching theme/mode; "material" setting does nothing | App-level theme tokens not yet migrated to the new theming API (e.g. DP-196839) | File under your team's migration epic, note which theme you switched from/to |
 | Dropdown/popover clipped behind a sidebar or panel | An ancestor gained an overflow-hidden utility; z-index can't save a popup once its container clips it (e.g. DP-197761) | File it with the exact page; note what the popup was anchored to |
 | Charts or embedded content render blank | Downstream code that can't parse OKLCH color values (e.g. DP-194053, analytics charts) | File it; this needs an engineering fix in the embedding code |
