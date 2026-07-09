@@ -9,7 +9,7 @@
       >
         Unordered
       </dt-text>
-      <dt-text-list gap="100">
+      <dt-text-list>
         <dt-text-list-item>Connect voice, meetings, and messaging in one workspace.</dt-text-list-item>
         <dt-text-list-item>Search across conversations without switching tools.</dt-text-list-item>
         <dt-text-list-item>Summarize follow-ups for every customer touchpoint.</dt-text-list-item>
@@ -26,7 +26,6 @@
       </dt-text>
       <dt-text-list
         type="ordered"
-        gap="100"
         marker="decimal"
         :start="3"
       >
@@ -48,7 +47,6 @@
       </dt-text>
       <dt-text-list
         marker-tone="positive"
-        gap="100"
       >
         <dt-text-list-item>
           <template #marker>
@@ -79,7 +77,7 @@
       >
         Nested
       </dt-text>
-      <dt-text-list gap="100">
+      <dt-text-list>
         <dt-text-list-item>
           Prepare the launch workspace.
           <dt-text-list

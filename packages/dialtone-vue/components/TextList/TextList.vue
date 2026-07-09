@@ -109,14 +109,14 @@ provide(DT_TEXT_LIST_CONTEXT, {
 
 const isOrdered = computed(() => props.type === 'ordered');
 const listElement = computed(() => isOrdered.value ? 'ol' : 'ul');
-const hasMarkerlessPresentation = computed(() => props.marker === 'none');
-const role = computed(() => hasMarkerlessPresentation.value ? 'list' : undefined);
+// Safari drops list semantics when list-style is none; restore them explicitly.
+const role = computed(() => props.marker === 'none' ? 'list' : undefined);
 const orderedStart = computed(() => isOrdered.value ? props.start : undefined);
 const orderedReversed = computed(() => isOrdered.value && props.reversed ? true : undefined);
 
 const textListClasses = computed(() => [
   'd-text-list',
-  `d-text-list--gap-${props.gap}`,
+  props.gap === DT_TEXT_LIST_DEFAULT_GAP ? null : `d-text-list--gap-${props.gap}`,
   {
     'd-text-list--ordered': isOrdered.value,
   },

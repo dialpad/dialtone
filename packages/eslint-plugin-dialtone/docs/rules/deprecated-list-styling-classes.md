@@ -4,7 +4,7 @@ Flags `d-ls-*` and `d-lst-*` list styling utility classes and recommends [`<dt-t
 
 ## Rule Details
 
-`d-ls-reset`, `d-ls-none`, and `d-lst-*` require authors to split list behavior across container classes, per-item marker classes, indentation utilities, and sometimes inline marker content. `DtTextList` keeps the native list structure while moving list type, marker, icon marker, marker tone, and spacing into component props.
+`d-ls-reset`, `d-ls-none`, and `d-lst-*` require authors to split list behavior across container classes, per-item marker classes, indentation utilities, and sometimes inline marker content. `DtTextList` keeps the native list structure while moving list type, marker, marker tone, and spacing into component props, with custom marker content via the `marker` slot.
 
 ### Examples of incorrect code
 
@@ -39,14 +39,17 @@ Flags `d-ls-*` and `d-lst-*` list styling utility classes and recommends [`<dt-t
   <dt-text-list-item>Second</dt-text-list-item>
 </dt-text-list>
 
-<dt-text-list icon="plus">
-  <dt-text-list-item>Included</dt-text-list-item>
+<dt-text-list>
+  <dt-text-list-item>
+    <template #marker>+</template>
+    Included
+  </dt-text-list-item>
 </dt-text-list>
 ```
 
 ## Dynamic Bindings
 
-The rule flags deprecated list utility string literals inside `:class` bindings. These require manual migration because the surrounding condition usually needs to move to `type`, `marker`, `icon`, or `gap` props.
+The rule flags deprecated list utility string literals inside `:class` bindings. These require manual migration because the surrounding condition usually needs to move to the `type`, `marker`, or `gap` props, or to the `marker` slot.
 
 ```vue
 <!-- Before -->

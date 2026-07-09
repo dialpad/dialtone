@@ -4,7 +4,6 @@ import DtTextList from './TextList.vue';
 import DtTextListItem from './TextListItem.vue';
 import {
   DT_TEXT_LIST_DEFAULT_GAP,
-  DT_TEXT_LIST_GAP,
   DT_TEXT_LIST_MARKER_TONES,
   DT_TEXT_LIST_MARKERS,
   DT_TEXT_LIST_ORDERED_MARKERS,
@@ -20,14 +19,6 @@ import {
 
 const ITEM_ONE = 'Item one';
 const ITEM_TWO = 'Item two';
-const ORDERED_TYPE = DT_TEXT_LIST_TYPES.find(type => type === 'ordered');
-const MARKER_NONE = DT_TEXT_LIST_MARKERS.find(marker => marker === 'none');
-const MARKER_SQUARE = DT_TEXT_LIST_UNORDERED_MARKERS.find(marker => marker === 'square');
-const MARKER_CRITICAL = DT_TEXT_LIST_MARKER_TONES.find(tone => tone === 'critical');
-const MARKER_POSITIVE = DT_TEXT_LIST_MARKER_TONES.find(tone => tone === 'positive');
-const GAP_200 = '200';
-const GAP_400 = DT_TEXT_LIST_GAP.find(gap => gap === '400');
-const GAP_450 = '450';
 
 const baseProps = {};
 const baseAttrs = {};
@@ -84,8 +75,16 @@ describe('DtTextList', () => {
     it('renders an unordered list by default', () => {
       expect(wrapper.element.tagName).toBe('UL');
       expect(wrapper.classes()).toContain('d-text-list');
-      expect(wrapper.classes()).toContain(`d-text-list--gap-${DT_TEXT_LIST_DEFAULT_GAP}`);
+      expect(wrapper.classes()).not.toContain(`d-text-list--gap-${DT_TEXT_LIST_DEFAULT_GAP}`);
       expect(wrapper.attributes('data-qa')).toBe('dt-text-list');
+    });
+
+    it('does not apply a gap class when gap is explicitly set to the default', () => {
+      mockProps = { gap: DT_TEXT_LIST_DEFAULT_GAP };
+
+      updateWrapper();
+
+      expect(wrapper.classes()).not.toContain(`d-text-list--gap-${DT_TEXT_LIST_DEFAULT_GAP}`);
     });
 
     it('passes class through to the list root', () => {
@@ -107,7 +106,7 @@ describe('DtTextList', () => {
     });
 
     it('renders an ordered list when type is ordered', () => {
-      mockProps = { type: ORDERED_TYPE };
+      mockProps = { type: 'ordered' };
 
       updateWrapper();
 
@@ -117,38 +116,38 @@ describe('DtTextList', () => {
 
     it('applies marker, markerTone, and gap classes', () => {
       mockProps = {
-        marker: MARKER_SQUARE,
-        markerTone: MARKER_CRITICAL,
-        gap: GAP_200,
+        marker: 'square',
+        markerTone: 'critical',
+        gap: '200',
       };
 
       updateWrapper();
 
-      expect(wrapper.classes()).toContain(`d-text-list--marker-${MARKER_SQUARE}`);
-      expect(wrapper.classes()).toContain(`d-text-list--marker-tone-${MARKER_CRITICAL}`);
-      expect(wrapper.classes()).toContain(`d-text-list--gap-${GAP_200}`);
+      expect(wrapper.classes()).toContain('d-text-list--marker-square');
+      expect(wrapper.classes()).toContain('d-text-list--marker-tone-critical');
+      expect(wrapper.classes()).toContain('d-text-list--gap-200');
     });
 
     it('applies markerTone to individual items as an override', () => {
-      mockProps = { markerTone: MARKER_CRITICAL };
+      mockProps = { markerTone: 'critical' };
       mockSlots = {
         default: `
-          <dt-text-list-item marker-tone="${MARKER_POSITIVE}">${ITEM_ONE}</dt-text-list-item>
+          <dt-text-list-item marker-tone="positive">${ITEM_ONE}</dt-text-list-item>
           <dt-text-list-item>${ITEM_TWO}</dt-text-list-item>
         `,
       };
 
       updateWrapper();
 
-      expect(wrapper.classes()).toContain(`d-text-list--marker-tone-${MARKER_CRITICAL}`);
-      expect(textListItems()[0].classes()).toContain(`d-text-list__item--marker-tone-${MARKER_POSITIVE}`);
-      expect(textListItems()[1].classes()).not.toContain(`d-text-list__item--marker-tone-${MARKER_POSITIVE}`);
+      expect(wrapper.classes()).toContain('d-text-list--marker-tone-critical');
+      expect(textListItems()[0].classes()).toContain('d-text-list__item--marker-tone-positive');
+      expect(textListItems()[1].classes()).not.toContain('d-text-list__item--marker-tone-positive');
     });
   });
 
   describe('Accessibility Tests', () => {
     it('applies role="list" when markers are hidden', () => {
-      mockProps = { marker: MARKER_NONE };
+      mockProps = { marker: 'none' };
 
       updateWrapper();
 
@@ -190,7 +189,7 @@ describe('DtTextList', () => {
     });
 
     it('passes ordered-list start and reversed attributes only to ordered lists', () => {
-      mockProps = { type: ORDERED_TYPE, start: 4, reversed: true };
+      mockProps = { type: 'ordered', start: 4, reversed: true };
 
       updateWrapper();
 
@@ -209,7 +208,7 @@ describe('DtTextList', () => {
     });
 
     it('passes item value inside an ordered list', () => {
-      mockProps = { type: ORDERED_TYPE };
+      mockProps = { type: 'ordered' };
       mockSlots = {
         default: '<dt-text-list-item :value="5">Fifth item</dt-text-list-item>',
       };
@@ -236,7 +235,7 @@ describe('DtTextList', () => {
       ['type', textListTypeValidator, DT_TEXT_LIST_TYPES[0], 'invalid'],
       ['marker', textListMarkerValidator, DT_TEXT_LIST_MARKERS[0], 'invalid'],
       ['markerTone', textListMarkerToneValidator, DT_TEXT_LIST_MARKER_TONES[0], 'invalid'],
-      ['gap', textListGapValidator, GAP_400, GAP_450],
+      ['gap', textListGapValidator, '400', '450'],
     ])('validates %s values', (_name, validator, validValue, invalidValue) => {
       expect(validator(validValue)).toBe(true);
       expect(validator(invalidValue)).toBe(false);
@@ -253,8 +252,8 @@ describe('DtTextList', () => {
     });
 
     it.each([
-      [ORDERED_TYPE, DT_TEXT_LIST_UNORDERED_MARKERS[0], 'unordered'],
-      [DT_TEXT_LIST_TYPES[0], DT_TEXT_LIST_ORDERED_MARKERS[0], 'ordered'],
+      ['ordered', DT_TEXT_LIST_UNORDERED_MARKERS[0], 'unordered'],
+      ['unordered', DT_TEXT_LIST_ORDERED_MARKERS[0], 'ordered'],
     ])('warns when %s list uses a %s-family marker', (type, marker, expectedFamily) => {
       const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
       mockProps = { type, marker };
@@ -364,7 +363,7 @@ describe('DtTextList', () => {
         default: `
           <dt-text-list-item>
             Parent
-            <dt-text-list type="${ORDERED_TYPE}">
+            <dt-text-list type="ordered">
               <dt-text-list-item>Nested ordered item</dt-text-list-item>
             </dt-text-list>
           </dt-text-list-item>

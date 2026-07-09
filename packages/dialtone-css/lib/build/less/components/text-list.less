@@ -1,6 +1,6 @@
 @layer dialtone.components {
 .d-text-list {
-  --text-list-gap: var(--dt-spacing-100);
+  --text-list-gap: var(--dt-spacing-50);
   --text-list-indent: var(--dt-spacing-250);
   --text-list-marker-unordered: disc;
   --text-list-marker-ordered: decimal;
@@ -38,44 +38,14 @@
   &--marker-lower-roman { list-style-type: lower-roman; }
   &--marker-upper-roman { list-style-type: upper-roman; }
 
-  &--marker-tone-primary,
-  &__item--marker-tone-primary { --text-list-marker-color: var(--dt-color-foreground-primary); }
-
-  &--marker-tone-secondary,
-  &__item--marker-tone-secondary { --text-list-marker-color: var(--dt-color-foreground-secondary); }
-
-  &--marker-tone-tertiary,
-  &__item--marker-tone-tertiary { --text-list-marker-color: var(--dt-color-foreground-tertiary); }
-
-  &--marker-tone-muted,
-  &__item--marker-tone-muted { --text-list-marker-color: var(--dt-color-foreground-muted); }
-
-  &--marker-tone-disabled,
-  &__item--marker-tone-disabled { --text-list-marker-color: var(--dt-color-foreground-disabled); }
-
-  &--marker-tone-placeholder,
-  &__item--marker-tone-placeholder { --text-list-marker-color: var(--dt-color-foreground-placeholder); }
-
-  &--marker-tone-critical,
-  &__item--marker-tone-critical { --text-list-marker-color: var(--dt-color-foreground-critical); }
-
-  &--marker-tone-critical-strong,
-  &__item--marker-tone-critical-strong { --text-list-marker-color: var(--dt-color-foreground-critical-strong); }
-
-  &--marker-tone-positive,
-  &__item--marker-tone-positive { --text-list-marker-color: var(--dt-color-foreground-positive); }
-
-  &--marker-tone-positive-strong,
-  &__item--marker-tone-positive-strong { --text-list-marker-color: var(--dt-color-foreground-positive-strong); }
-
-  &--marker-tone-warning,
-  &__item--marker-tone-warning { --text-list-marker-color: var(--dt-color-foreground-warning); }
-
-  &--marker-tone-info,
-  &__item--marker-tone-info { --text-list-marker-color: var(--dt-color-foreground-info); }
-
-  &--marker-tone-info-strong,
-  &__item--marker-tone-info-strong { --text-list-marker-color: var(--dt-color-foreground-info-strong); }
+  // Tones mapping 1:1 onto --dt-color-foreground-* tokens. The two neutral
+  // tones map onto --dt-color-neutral-* and are declared separately below.
+  each(primary secondary tertiary muted disabled placeholder critical critical-strong positive positive-strong warning info info-strong, {
+    &--marker-tone-@{value},
+    &__item--marker-tone-@{value} {
+      --text-list-marker-color: ~"var(--dt-color-foreground-@{value})";
+    }
+  });
 
   &--marker-tone-neutral-black,
   &__item--marker-tone-neutral-black { --text-list-marker-color: var(--dt-color-neutral-black); }
@@ -103,73 +73,34 @@
   }
 
   > :where(li) {
-    margin-block: var(--text-list-gap);
     list-style: inherit;
   }
 
-  &:not(:where(.d-text-list .d-text-list)) > :where(li:first-child) {
-    margin-block-start: 0;
+  // Space only BETWEEN items — no leading/trailing margins, no first/last
+  // exceptions, no reliance on margin collapsing.
+  > :where(li + li) {
+    margin-block-start: var(--text-list-gap);
   }
 
-  :where(&__item > .d-text-list),
-  :where(&__item-content > .d-text-list) {
-    margin-block: var(--text-list-gap);
+  // Keep this selector out of :where() so it beats the root margin reset.
+  &__item-content > &,
+  & > :where(li) > & {
+    margin-block-start: var(--text-list-gap);
   }
 
   :where(&__item--custom-marker) {
-    --text-list-marker-block-size: 1em;
-
     display: flex;
     gap: var(--dt-spacing-100);
-    align-items: flex-start;
+    // Baseline-align the marker with the content's FIRST line at layout time —
+    // any nested typography (DtText size/density on a child) aligns without the
+    // marker knowing its metrics. This is how native ::marker boxes behave.
+    align-items: baseline;
     list-style-type: none;
-  }
-
-  @supports (block-size: 1lh) {
-    :where(&__item--custom-marker) {
-      --text-list-marker-block-size: 1lh;
-    }
   }
 
   :where(&:not(&--marker-none) > &__item--custom-marker) {
     margin-inline-start: calc(var(--text-list-indent) * -1);
   }
-
-  each(3xl 2xl xl lg md sm xs, {
-    :where(&__item--custom-marker:has(> &__item-content > .d-text-headline--@{value})) {
-      --text-list-marker-font-size: ~"var(--dt-text-headline-@{value}-font-size)";
-      --text-list-marker-line-height: ~"var(--dt-text-headline-@{value}-line-height)";
-    }
-  });
-
-  each(lg md sm xs, {
-    :where(&__item--custom-marker:has(> &__item-content > .d-text-body--@{value})) {
-      --text-list-marker-font-size: ~"var(--dt-text-body-@{value}-font-size)";
-      --text-list-marker-line-height: ~"var(--dt-text-body-@{value}-line-height)";
-    }
-
-    :where(&__item--custom-marker:has(> &__item-content > .d-text-label--@{value})) {
-      --text-list-marker-font-size: ~"var(--dt-text-label-@{value}-font-size)";
-      --text-list-marker-line-height: ~"var(--dt-text-label-@{value}-line-height)";
-    }
-
-    :where(&__item--custom-marker:has(> &__item-content > .d-text-code--@{value})) {
-      --text-list-marker-font-size: ~"var(--dt-text-code-@{value}-font-size)";
-      --text-list-marker-line-height: ~"var(--dt-text-code-@{value}-line-height)";
-    }
-  });
-
-  each(50 75 100 125 150 200 250 300 350 400 450 500 550 600 650 700 750 800, {
-    :where(&__item--custom-marker:has(> &__item-content > .d-text--fs-@{value})) {
-      --text-list-marker-font-size: ~"var(--dt-font-size-@{value})";
-    }
-  });
-
-  each(range(100, 600, 100), {
-    :where(&__item--custom-marker:has(> &__item-content > .d-text--lh-@{value})) {
-      --text-list-marker-line-height: ~"var(--dt-font-line-height-@{value})";
-    }
-  });
 
   &__item-marker {
     display: inline-flex;
@@ -177,11 +108,15 @@
     align-items: center;
     justify-content: center;
     color: var(--text-list-marker-color);
-    font-size: var(--text-list-marker-font-size, inherit);
-    line-height: var(--text-list-marker-line-height, inherit);
     min-inline-size: var(--text-list-indent);
-    // Match native marker alignment by centering custom markers within the first line box.
-    block-size: var(--text-list-marker-block-size);
+    // Center marker content within one line box anchored on the shared baseline.
+    block-size: 1lh;
+
+    // Zero-width strut: gives the span a real text baseline so flex baseline
+    // alignment works even when the marker content has none (SVG icon, emoji).
+    &::before {
+      content: "\200B";
+    }
   }
 
   &__item-content {
