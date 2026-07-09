@@ -105,12 +105,14 @@ These components changed on purpose (each links back to its ticket or engineerin
 
 ### Buttons
 
-Squarer corners (8px→6px radius), label weight drops from semibold to medium, adjusted label sizes, softer outlined borders, and slightly darker primary hover/active states (DLT-2946). Grouped buttons pick up the same restyle (DLT-2947) — the pair below includes a button group.
+Squarer corners (8px→6px radius), label weight drops from semibold to medium, adjusted label sizes, softer outlined borders, and slightly darker primary hover/active states (DLT-2946). The restyle applies across every kind, size, and icon placement — the pair below covers the severity kinds (the destructive kind is also *renamed*: `danger` is now `critical`), the muted treatment, three sizes, and start/end/icon-only placements.
+
+Grouped buttons pick up the same restyle and gain built-in spacing (DLT-2947) — current Dialtone's button group has no gap of its own, so products added their own spacing. The Confirm/Cancel row below normalizes that spacing to make the chrome changes comparable.
 
 <before-after
   before="/assets/images/migration-visual/component-button-before-light.png"
   after="/assets/images/migration-visual/component-button-after-light.png"
-  alt="Button kinds and importance levels"
+  alt="Button kinds, sizes, icon placements, and a button group"
 />
 
 ### Tabs
