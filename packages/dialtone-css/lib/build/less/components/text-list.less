@@ -82,9 +82,7 @@
     margin-block-start: var(--text-list-gap);
   }
 
-  // Keep this selector out of :where() so it beats the root margin reset.
-  &__item-content > &,
-  & > :where(li) > & {
+  :where(&__item-content) > & {
     margin-block-start: var(--text-list-gap);
   }
 

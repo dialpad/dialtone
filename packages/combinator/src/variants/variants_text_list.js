@@ -42,9 +42,6 @@ export default {
   ],
 
   default: {
-    props: {
-      gap: { initialValue: '100' },
-    },
     slots: {
       default: {
         initialValue: `<dt-text-list-item>Collaborative inboxes</dt-text-list-item>
@@ -153,6 +150,9 @@ export default {
     props: {
       type: {
         initialValue: 'ordered',
+      },
+      gap: {
+        initialValue: '100',
       },
     },
     slots: {

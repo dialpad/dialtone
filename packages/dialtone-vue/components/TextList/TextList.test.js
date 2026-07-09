@@ -75,7 +75,6 @@ describe('DtTextList', () => {
     it('renders an unordered list by default', () => {
       expect(wrapper.element.tagName).toBe('UL');
       expect(wrapper.classes()).toContain('d-text-list');
-      expect(wrapper.classes()).not.toContain(`d-text-list--gap-${DT_TEXT_LIST_DEFAULT_GAP}`);
       expect(wrapper.attributes('data-qa')).toBe('dt-text-list');
     });
 

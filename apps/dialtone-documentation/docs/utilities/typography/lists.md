@@ -1,7 +1,7 @@
 ---
 title: Lists
 description: Utilities for controlling list styling.
-keywords: ["list style","bullet","ordered","unordered list","bullet","ol","ul"]
+keywords: ["list style","bullet","ordered","unordered","ol","ul"]
 ---
 
 > [!WARNING]

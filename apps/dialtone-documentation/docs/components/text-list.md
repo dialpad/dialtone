@@ -22,21 +22,6 @@ keywords:
   ]
 ---
 
-<dt-text-list>
-  <dt-text-list-item>Prepare the launch workspace
-  <dt-text-list type="ordered">
-    <dt-text-list-item>Confirm owners</dt-text-list-item>
-    <dt-text-list-item>Publish onboarding notes</dt-text-list-item>
-  </dt-text-list>
-</dt-text-list-item>
-<dt-text-list-item>Track unresolved tasks
-  <dt-text-list>
-    <dt-text-list-item>Permissions</dt-text-list-item>
-    <dt-text-list-item>Billing handoff</dt-text-list-item>
-  </dt-text-list>
-</dt-text-list-item>
-</dt-text-list>
-
 <component-combinator component-name="DtTextList" />
 
 ## Usage
