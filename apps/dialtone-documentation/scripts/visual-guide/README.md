@@ -20,7 +20,10 @@ pnpm nx run-many -t build -p dialtone-tokens dialtone-css dialtone-vue
 ## Generate
 
 ```sh
-# from the repo root, on next (with tokens/css/vue built):
+# NX target (builds tokens/css/icons/vue first, same pattern as thumbs):
+pnpm nx run dialtone-documentation:visual-guide -- --before-root=../dialtone-staging
+
+# or run the script directly (with tokens/css/vue already built):
 node apps/dialtone-documentation/scripts/visual-guide/generate.mjs --before-root=../dialtone-staging
 
 # iterate on one scene:

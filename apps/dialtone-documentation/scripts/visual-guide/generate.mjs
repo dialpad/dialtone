@@ -12,6 +12,9 @@
  * docs/.vuepress/public/assets/images/migration-visual/.
  *
  * USAGE
+ *   pnpm nx run dialtone-documentation:visual-guide [-- <flags>]
+ *       NX target wrapping this script (builds tokens/css/icons/vue first).
+ *
  *   node apps/dialtone-documentation/scripts/visual-guide/generate.mjs
  *       After-only render from this checkout.
  *

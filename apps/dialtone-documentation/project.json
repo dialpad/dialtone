@@ -17,6 +17,19 @@
         "command": "pnpm exec vite apps/dialtone-documentation/scripts/thumbs/harness --port 5899 --host"
       }
     },
+    "visual-guide": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        "dialtone-tokens:build",
+        "dialtone-css:build",
+        "dialtone-icons:build",
+        "dialtone-vue:build"
+      ],
+      "options": {
+        "cwd": "{workspaceRoot}",
+        "command": "node apps/dialtone-documentation/scripts/visual-guide/generate.mjs"
+      }
+    },
     "generate-token-data": {
       "executor": "nx:run-commands",
       "dependsOn": ["dialtone-tokens:build"],
