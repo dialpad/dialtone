@@ -155,10 +155,12 @@ Redesigned color system (12 hue families, deterministically assigned per person)
 
 Display-only chips no longer look clickable — no hover state, no pointer cursor. Only chips explicitly marked interactive keep the button affordance (DLT-3195, [guide](/guides/migration/chip-interactive/)). A chip that **should** be clickable but looks dead means the migration missed the opt-in — that's a bug.
 
+The pair below is captured with the pointer over the display-only chip: on current Dialtone it lights up like a button; on Next it doesn't react at all — that non-reaction is the intended new behavior.
+
 <before-after
   before="/assets/images/migration-visual/component-chip-before-light.png"
   after="/assets/images/migration-visual/component-chip-after-light.png"
-  alt="Display chip, interactive chip, and chip with close button"
+  alt="Display-only chip with the pointer over it, interactive chip, and chip with close button"
 />
 
 ### Inputs and validation messages

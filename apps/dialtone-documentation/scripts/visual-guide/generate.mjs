@@ -73,7 +73,7 @@ const SCENES = [
   { id: 'component-tabs' },
   { id: 'component-segmented-control', branches: ['after'] }, // new in Next
   { id: 'component-avatar' },
-  { id: 'component-chip' },
+  { id: 'component-chip', hover: '#vg-hover-target' },
   { id: 'component-input' },
   { id: 'component-validation' },
   { id: 'component-notice' },
