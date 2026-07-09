@@ -177,26 +177,6 @@ Input text grows to 14px. Validation messages keep their severity icons and gain
   alt="Validation messages across severities including the new info variant"
 />
 
-### Checkboxes and radios
-
-New control drawing and label typography set with DtText (DLT-2949). States (checked, disabled) read the same — the geometry and text metrics shift.
-
-<before-after
-  before="/assets/images/migration-visual/component-checkbox-radio-before-light.png"
-  after="/assets/images/migration-visual/component-checkbox-radio-after-light.png"
-  alt="Checkbox states and a radio group"
-/>
-
-### Select menus
-
-Restyled in the same pass as inputs (DLT-2959): control height, label typography, and menu text follow the new type scale.
-
-<before-after
-  before="/assets/images/migration-visual/component-select-before-light.png"
-  after="/assets/images/migration-visual/component-select-after-light.png"
-  alt="Select menus with label and description"
-/>
-
 ### Notices
 
 Same palette intent, refreshed typography — the pair below renders identical copy on both sides (with and without a title line) so the type and tint changes are the only differences. Two kind names also changed, with identical colors: `success` is now `positive` and `error` is now `critical`; an unstyled gray notice in the product means an un-migrated kind name.
@@ -277,6 +257,7 @@ Most of the migration is renames. After a **correct** migration, all of the foll
 - **Component sizes** — t-shirt sizes (`sm`/`md`/`lg`) became numeric (`200`/`300`/`400`), mapping to the same rendered sizes.
 - **Severity vocabulary** — `danger` and `error` collapse to `critical`, and `success` becomes `positive`, across `kind`, `tone`, and validation types ([guide](/guides/migration/component-props/)). Same colors, new names.
 - **Breadcrumbs, pagination, and keyboard shortcuts** — touched by the June refresh for DtText integration, but they render near-identically at default sizes; only text metrics shift with the type scale.
+- **Checkboxes, radios, and select menus** — restyle passes landed (DLT-2949, DLT-2959), but the control drawings themselves are unchanged: same checkbox square and check, same radio ring, same select field chrome. Only label typography and spacing shift with the type scale. (The open select menu is drawn by the operating system, not Dialtone.)
 - **Renamed props and events** — `show`→`open`, `title`→`header-text`, `hide-*`→`show-*`, logical naming (`left`→`start`): behavior-preserving renames with no visual surface.
 - **Scrollbar behavior** — "never auto-hide" was renamed to "always visible"; same behavior.
 
