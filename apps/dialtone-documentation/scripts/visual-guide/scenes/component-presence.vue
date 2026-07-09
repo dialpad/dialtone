@@ -15,10 +15,12 @@
         :key="p"
         style="text-align:center;"
       >
-        <dt-presence
-          :presence="p"
-          class="vg-presence-size"
-        />
+        <div style="height:28px;display:flex;align-items:center;justify-content:center;">
+          <dt-presence
+            :presence="p"
+            class="vg-presence-size"
+          />
+        </div>
         <p class="vg-caption">
           {{ p }}
         </p>
