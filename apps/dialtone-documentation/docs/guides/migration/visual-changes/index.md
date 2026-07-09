@@ -107,7 +107,7 @@ These components changed on purpose (each links back to its ticket or engineerin
 
 ### Buttons
 
-Squarer corners (8px→6px radius), label weight drops from semibold to medium, adjusted label sizes, softer outlined borders, and slightly darker primary hover/active states (DLT-2946, DLT-2947, DLT-2965).
+Squarer corners (8px→6px radius), label weight drops from semibold to medium, adjusted label sizes, softer outlined borders, and slightly darker primary hover/active states (DLT-2946). Grouped buttons pick up the same restyle (DLT-2947) — the pair below includes a button group.
 
 <before-after
   before="/assets/images/migration-visual/component-button-before-light.png"
@@ -131,6 +131,14 @@ A brand-new component (DLT-413) — anywhere you see it is new UI, with no "befo
 
 <dt-box surface="secondary" border-width="100" border-color="subtle" border-radius="400" padding="300" class="d-wmx60p">
   <img :src="$withBase('/assets/images/migration-visual/component-segmented-control-after-light.png')" alt="Segmented control, new in Dialtone Next" class="d-d-block d-w100p">
+</dt-box>
+
+### Filter pill
+
+Also new as a core component (DLT-2941; previously only recipe pills existed). Filter pills come with a dropdown single-select, an apply/cancel footer for deferred selection, and a read-only state — all new affordances you'll see appear in filter bars.
+
+<dt-box surface="secondary" border-width="100" border-color="subtle" border-radius="400" padding="300" class="d-wmx60p">
+  <img :src="$withBase('/assets/images/migration-visual/component-filter-pill-after-light.png')" alt="Filter pill with dropdown and read-only variant, new in Dialtone Next" class="d-d-block d-w100p">
 </dt-box>
 
 ### Avatars
@@ -169,6 +177,26 @@ Input text grows to 14px, and validation messages now show a leading severity ic
   alt="Validation messages across severities including the new info variant"
 />
 
+### Checkboxes and radios
+
+New control drawing and label typography set with DtText (DLT-2949). States (checked, disabled) read the same — the geometry and text metrics shift.
+
+<before-after
+  before="/assets/images/migration-visual/component-checkbox-radio-before-light.png"
+  after="/assets/images/migration-visual/component-checkbox-radio-after-light.png"
+  alt="Checkbox states and a radio group"
+/>
+
+### Select menus
+
+Restyled in the same pass as inputs (DLT-2959): control height, label typography, and menu text follow the new type scale.
+
+<before-after
+  before="/assets/images/migration-visual/component-select-before-light.png"
+  after="/assets/images/migration-visual/component-select-after-light.png"
+  alt="Select menus with label and description"
+/>
+
 ### Notices
 
 Same palette intent, refreshed typography. Two kind names changed — `success` is now `positive` and `error` is now `critical` — with identical colors. In the pair below, each side styles the name it knows; an unstyled gray notice in the product means an un-migrated kind name.
@@ -177,6 +205,66 @@ Same palette intent, refreshed typography. Two kind names changed — `success` 
   before="/assets/images/migration-visual/component-notice-before-light.png"
   after="/assets/images/migration-visual/component-notice-after-light.png"
   alt="Notice kinds including the renamed success/positive and error/critical"
+/>
+
+### Banners and toasts
+
+Restyled alongside notices (DLT-2944): stronger info-blue tints, DtText typography, and toasts gain the leading kind icon and larger radius.
+
+<before-after
+  before="/assets/images/migration-visual/component-banner-toast-before-light.png"
+  after="/assets/images/migration-visual/component-banner-toast-after-light.png"
+  alt="Info banner and info toast"
+/>
+
+### Breadcrumbs
+
+Typography and separator treatment updated with the refresh (DLT-2945).
+
+<before-after
+  before="/assets/images/migration-visual/component-breadcrumbs-before-light.png"
+  after="/assets/images/migration-visual/component-breadcrumbs-after-light.png"
+  alt="Breadcrumb trail with current page"
+/>
+
+### Pagination
+
+Inherits the new button styling — the active page is now a filled squircle (DLT-2965).
+
+<before-after
+  before="/assets/images/migration-visual/component-pagination-before-light.png"
+  after="/assets/images/migration-visual/component-pagination-after-light.png"
+  alt="Pagination with active page and overflow ellipses"
+/>
+
+### Empty states
+
+Tighter layout and headline sizes from the new type scale (DLT-2957).
+
+<before-after
+  before="/assets/images/migration-visual/component-empty-state-before-light.png"
+  after="/assets/images/migration-visual/component-empty-state-after-light.png"
+  alt="Empty state with illustration, title, and body"
+/>
+
+### Keyboard shortcuts
+
+Keycap chips restyled (DLT-2960).
+
+<before-after
+  before="/assets/images/migration-visual/component-keyboard-shortcut-before-light.png"
+  after="/assets/images/migration-visual/component-keyboard-shortcut-after-light.png"
+  alt="Keyboard shortcut keycap combinations"
+/>
+
+### Presence
+
+Status indicators change from color-only circles to squircles with **internal shapes** — check for active, dash for busy and do-not-disturb, outline for offline — so statuses are distinguishable by more than color (DLT-3438). The `dnd` value is also new.
+
+<before-after
+  before="/assets/images/migration-visual/component-presence-before-light.png"
+  after="/assets/images/migration-visual/component-presence-after-light.png"
+  alt="Presence indicators across all statuses"
 />
 
 ### Links

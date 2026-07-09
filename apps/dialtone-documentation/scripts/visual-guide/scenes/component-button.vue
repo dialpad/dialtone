@@ -29,6 +29,15 @@
           Muted
         </dt-button>
       </div>
+      <!-- DLT-2947: button group restyled with the new buttons -->
+      <dt-button-group alignment="start">
+        <dt-button importance="primary">
+          Confirm
+        </dt-button>
+        <dt-button importance="outlined">
+          Cancel
+        </dt-button>
+      </dt-button-group>
     </div>
   </div>
 </template>
