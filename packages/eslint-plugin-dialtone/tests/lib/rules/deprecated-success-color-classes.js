@@ -17,7 +17,6 @@ const RuleTester = require('eslint').RuleTester;
 
 const ruleTester = new RuleTester({
   languageOptions: {
-     
     parser: require('vue-eslint-parser'),
     ecmaVersion: 'latest',
   },
