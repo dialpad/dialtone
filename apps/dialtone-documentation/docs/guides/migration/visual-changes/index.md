@@ -215,26 +215,6 @@ Restyled alongside notices (DLT-2944): stronger info-blue tints, DtText typograp
   alt="Info banner and info toast"
 />
 
-### Breadcrumbs
-
-Typography and separator treatment updated with the refresh (DLT-2945).
-
-<before-after
-  before="/assets/images/migration-visual/component-breadcrumbs-before-light.png"
-  after="/assets/images/migration-visual/component-breadcrumbs-after-light.png"
-  alt="Breadcrumb trail with current page"
-/>
-
-### Pagination
-
-Inherits the new button styling — the active page is now a filled squircle (DLT-2965).
-
-<before-after
-  before="/assets/images/migration-visual/component-pagination-before-light.png"
-  after="/assets/images/migration-visual/component-pagination-after-light.png"
-  alt="Pagination with active page and overflow ellipses"
-/>
-
 ### Empty states
 
 Tighter layout and headline sizes from the new type scale (DLT-2957).
@@ -243,16 +223,6 @@ Tighter layout and headline sizes from the new type scale (DLT-2957).
   before="/assets/images/migration-visual/component-empty-state-before-light.png"
   after="/assets/images/migration-visual/component-empty-state-after-light.png"
   alt="Empty state with illustration, title, and body"
-/>
-
-### Keyboard shortcuts
-
-Keycap chips restyled (DLT-2960).
-
-<before-after
-  before="/assets/images/migration-visual/component-keyboard-shortcut-before-light.png"
-  after="/assets/images/migration-visual/component-keyboard-shortcut-after-light.png"
-  alt="Keyboard shortcut keycap combinations"
 />
 
 ### Presence
@@ -294,6 +264,7 @@ Most of the migration is renames. After a **correct** migration, all of the foll
 - **Spacing** — spacing tokens were renamed; every shared stop keeps its exact pixel value.
 - **Component sizes** — t-shirt sizes (`sm`/`md`/`lg`) became numeric (`200`/`300`/`400`), mapping to the same rendered sizes.
 - **Severity vocabulary** — `danger` and `error` collapse to `critical`, and `success` becomes `positive`, across `kind`, `tone`, and validation types ([guide](/guides/migration/component-props/)). Same colors, new names.
+- **Breadcrumbs, pagination, and keyboard shortcuts** — touched by the June refresh for DtText integration, but they render near-identically at default sizes; only text metrics shift with the type scale.
 - **Renamed props and events** — `show`→`open`, `title`→`header-text`, `hide-*`→`show-*`, logical naming (`left`→`start`): behavior-preserving renames with no visual surface.
 - **Scrollbar behavior** — "never auto-hide" was renamed to "always visible"; same behavior.
 

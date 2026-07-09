@@ -65,11 +65,8 @@ const SCENES = [
   // §2 — redesigned components
   { id: 'component-button' },
   { id: 'component-checkbox-radio' },
-  { id: 'component-breadcrumbs' },
   { id: 'component-empty-state' },
-  { id: 'component-keyboard-shortcut' },
   { id: 'component-select' },
-  { id: 'component-pagination' },
   { id: 'component-presence' },
   { id: 'component-banner-toast' },
   { id: 'component-filter-pill', branches: ['after'] }, // core component is new in Next
