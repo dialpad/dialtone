@@ -5,7 +5,7 @@ keywords: ["list style","bullet","ordered","unordered","ol","ul"]
 ---
 
 > [!WARNING]
-> Prefer [DtTextList](/components/text-list.html) for hand-authored Vue text lists. Keep these utilities for non-Vue markup and migration escape hatches.
+> Prefer [DtTextList](/components/text-list.md) for hand-authored Vue text lists. Keep these utilities for non-Vue markup and migration escape hatches.
 
 ## Resetting a List
 

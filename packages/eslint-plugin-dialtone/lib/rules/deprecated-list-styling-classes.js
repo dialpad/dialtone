@@ -7,7 +7,11 @@
 // would match inside `foo-d-ls-reset` (see lib/util/class-attribute-rule.js).
 // Quotes count as boundaries so the same regex works on static class attribute
 // values and on the source text of `:class` binding expressions.
-const DEPRECATED_LIST_CLASS_RE = /(?<=^|[\s'"`])(?:[\w-]+:)?(?:d-ls-(?:reset|none)|d-lst-[\w-]+)(?=$|[\s'"`])/;
+const DEPRECATED_LIST_CLASS_RE = /(?<=^|[\s'"`])(?:[\w-]+:)?(?:d-ls-(?:reset|none)|d-lst-[\w-]+)(?=$|[\s'"`])/g;
+
+function deprecatedListClasses (source) {
+  return Array.from(source.matchAll(DEPRECATED_LIST_CLASS_RE), match => match[0]);
+}
 
 module.exports = {
   meta: {
@@ -34,13 +38,13 @@ module.exports = {
       VAttribute (node) {
         if (!node.directive && node.key.name === 'class') {
           if (!node.value?.value) return;
-          const match = DEPRECATED_LIST_CLASS_RE.exec(node.value.value);
-          if (!match) return;
 
-          context.report({
-            node,
-            messageId: 'preferTextList',
-            data: { className: match[0] },
+          deprecatedListClasses(node.value.value).forEach((className) => {
+            context.report({
+              node,
+              messageId: 'preferTextList',
+              data: { className },
+            });
           });
           return;
         }
@@ -51,13 +55,12 @@ module.exports = {
           node.key.argument?.name === 'class' &&
           node.value
         ) {
-          const match = DEPRECATED_LIST_CLASS_RE.exec(sourceCode.getText(node.value));
-          if (!match) return;
-
-          context.report({
-            node,
-            messageId: 'preferTextListInBinding',
-            data: { className: match[0] },
+          deprecatedListClasses(sourceCode.getText(node.value)).forEach((className) => {
+            context.report({
+              node,
+              messageId: 'preferTextListInBinding',
+              data: { className },
+            });
           });
         }
       },

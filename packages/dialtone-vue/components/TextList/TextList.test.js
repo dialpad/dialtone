@@ -264,14 +264,23 @@ describe('DtTextList', () => {
       );
     });
 
-    it('warns when direct children are not DtTextListItem', () => {
+    it('supports native list item children', () => {
       const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
       mockSlots = { default: '<li>Raw list item</li>' };
 
       updateWrapper();
 
-      expect(warn).toHaveBeenCalledWith('[DtTextList] Use DtTextListItem as the direct child of DtTextList.');
+      expect(warn).not.toHaveBeenCalled();
       expect(wrapper.find('li').text()).toBe('Raw list item');
+    });
+
+    it('warns when direct children do not render list items', () => {
+      const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+      mockSlots = { default: '<div>Raw item</div>' };
+
+      updateWrapper();
+
+      expect(warn).toHaveBeenCalledWith('[DtTextList] Use DtTextListItem or a native li as the direct child of DtTextList.');
     });
 
     it('warns when DtTextListItem value is used outside an ordered list', () => {

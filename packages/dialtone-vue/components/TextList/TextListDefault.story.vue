@@ -9,7 +9,7 @@
   >
     <dt-text-list-item
       v-for="(item, index) in items"
-      :key="item"
+      :key="index"
       :value="itemValues[index]"
     >
       {{ item }}

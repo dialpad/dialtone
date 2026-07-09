@@ -2,6 +2,7 @@
 <template>
   <component
     :is="listElement"
+    ref="listRef"
     data-qa="dt-text-list"
     :class="textListClasses"
     :role="role"
@@ -16,14 +17,11 @@
 <script setup lang="ts">
 // @ts-nocheck
 import {
-  Comment,
-  Fragment,
-  Text,
   computed,
   onMounted,
   provide,
+  ref,
   toRef,
-  useSlots,
 } from 'vue';
 import {
   DT_TEXT_LIST_CONTEXT,
@@ -100,7 +98,7 @@ const props = defineProps({
   },
 });
 
-const slots = useSlots();
+const listRef = ref(null);
 
 provide(DT_TEXT_LIST_CONTEXT, {
   type: toRef(props, 'type'),
@@ -150,38 +148,19 @@ function validateMarkerFamily () {
   }
 }
 
-function isTextListItem (vnode) {
-  const name = typeof vnode.type === 'string' ? vnode.type : (vnode.type.name || vnode.type.__name);
-  return name === 'DtTextListItem' || name === 'dt-text-list-item';
-}
-
-function isIgnorableText (vnode) {
-  return vnode.type === Text && typeof vnode.children === 'string' && vnode.children.trim() === '';
-}
-
-function flattenSlotVNodes (vnodes) {
-  return vnodes.flatMap((vnode) => {
-    if (vnode.type === Fragment && Array.isArray(vnode.children)) {
-      return flattenSlotVNodes(vnode.children);
-    }
-    return [vnode];
-  });
-}
-
 function validateChildren () {
-  const directChildren = flattenSlotVNodes(slots.default?.() ?? []);
-  for (const child of directChildren) {
-    if (child.type === Comment || isIgnorableText(child)) continue;
-    if (isTextListItem(child)) continue;
+  const rootElement = listRef.value?.$el ?? listRef.value;
+  if (!rootElement) return;
 
-    warn('Use DtTextListItem as the direct child of DtTextList.');
+  for (const child of rootElement.children) {
+    if (child.tagName === 'LI') continue;
+
+    warn('Use DtTextListItem or a native li as the direct child of DtTextList.');
     break;
   }
 }
 
 onMounted(() => {
-  // Guard the whole block (not just the warn calls) so production builds
-  // dead-code-eliminate the extra slot render in validateChildren().
   if (process.env.NODE_ENV !== 'production') {
     validateOrderedOnlyProps();
     validateMarkerFamily();

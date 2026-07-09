@@ -46,6 +46,13 @@ ruleTester.run('deprecated-list-styling-classes', rule, {
       errors: [{ messageId: 'preferTextList' }],
     },
     {
+      code: '<template><li class="d-ls-reset d-lst-disc">One</li></template>',
+      errors: [
+        { messageId: 'preferTextList', data: { className: 'd-ls-reset' } },
+        { messageId: 'preferTextList', data: { className: 'd-lst-disc' } },
+      ],
+    },
+    {
       code: '<template><li class="sm:d-lst-decimal">One</li></template>',
       errors: [{
         messageId: 'preferTextList',
@@ -55,6 +62,13 @@ ruleTester.run('deprecated-list-styling-classes', rule, {
     {
       code: '<template><ul :class="[\'d-ls-reset\', listClass]"><li>One</li></ul></template>',
       errors: [{ messageId: 'preferTextListInBinding' }],
+    },
+    {
+      code: '<template><ul :class="[\'d-ls-reset\', \'d-lst-disc\']"><li>One</li></ul></template>',
+      errors: [
+        { messageId: 'preferTextListInBinding', data: { className: 'd-ls-reset' } },
+        { messageId: 'preferTextListInBinding', data: { className: 'd-lst-disc' } },
+      ],
     },
     {
       code: '<template><li :class="{ \'d-lst-disc\': isBulleted }">One</li></template>',
