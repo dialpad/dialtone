@@ -116,7 +116,7 @@ const orderedReversed = computed(() => isOrdered.value && props.reversed ? true 
 
 const textListClasses = computed(() => [
   'd-text-list',
-  props.gap === DT_TEXT_LIST_DEFAULT_GAP ? null : `d-text-list--gap-${props.gap}`,
+  props.gap === undefined ? null : `d-text-list--gap-${props.gap}`,
   {
     'd-text-list--ordered': isOrdered.value,
   },

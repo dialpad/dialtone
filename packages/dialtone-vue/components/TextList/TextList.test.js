@@ -3,7 +3,6 @@ import { vi } from 'vitest';
 import DtTextList from './TextList.vue';
 import DtTextListItem from './TextListItem.vue';
 import {
-  DT_TEXT_LIST_DEFAULT_GAP,
   DT_TEXT_LIST_MARKER_TONES,
   DT_TEXT_LIST_MARKERS,
   DT_TEXT_LIST_ORDERED_MARKERS,
@@ -75,15 +74,8 @@ describe('DtTextList', () => {
     it('renders an unordered list by default', () => {
       expect(wrapper.element.tagName).toBe('UL');
       expect(wrapper.classes()).toContain('d-text-list');
+      expect(wrapper.classes().some(className => className.startsWith('d-text-list--gap-'))).toBe(false);
       expect(wrapper.attributes('data-qa')).toBe('dt-text-list');
-    });
-
-    it('does not apply a gap class when gap is explicitly set to the default', () => {
-      mockProps = { gap: DT_TEXT_LIST_DEFAULT_GAP };
-
-      updateWrapper();
-
-      expect(wrapper.classes()).not.toContain(`d-text-list--gap-${DT_TEXT_LIST_DEFAULT_GAP}`);
     });
 
     it('passes class through to the list root', () => {
@@ -111,6 +103,14 @@ describe('DtTextList', () => {
 
       expect(wrapper.element.tagName).toBe('OL');
       expect(wrapper.classes()).toContain('d-text-list--ordered');
+    });
+
+    it('applies a gap class when gap is explicitly set to 0', () => {
+      mockProps = { gap: '0' };
+
+      updateWrapper();
+
+      expect(wrapper.classes()).toContain('d-text-list--gap-0');
     });
 
     it('applies marker, markerTone, and gap classes', () => {
