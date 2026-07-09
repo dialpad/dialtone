@@ -1,21 +1,59 @@
 <template>
-  <!-- DtLink rendering across branches; Next also underlines quiet links on
-       hover (not capturable statically — covered in guide prose). -->
-  <div class="vg-scene" style="width:520px;">
+  <!-- Quiet links (no rest underline) gained a hover underline in Next: the
+       `underline` prop (:underline="false") shows an underline on hover
+       (link.less &--no-underline), while the old utility-class approach
+       (d-td-none, !important) never underlined. The capture pipeline moves the
+       pointer over #vg-hover-target before shooting (`hover` scene flag), so
+       the second link is a REAL :hover state. The quiet mechanism is
+       branch-adaptive: d-td-none on staging (the old way — it would also kill
+       Next's hover underline via !important), :underline="false" on Next. -->
+  <div
+    class="vg-scene"
+    style="width:520px;"
+  >
     <p class="vg-heading">
-      Link
+      Link — quiet link, rest vs hover
     </p>
-    <div style="display:flex;flex-direction:column;gap:16px;">
-      <p style="margin:0;font-size:15px;color:var(--dt-color-foreground-primary);">
-        Standalone: <dt-link href="#">
+    <div style="display:flex;gap:64px;">
+      <div style="text-align:center;">
+        <p class="vg-label">
+          rest
+        </p>
+        <dt-link
+          href="#"
+          :underline="false"
+          :class="quietClass"
+        >
           View call settings
         </dt-link>
-      </p>
-      <p style="margin:0;font-size:15px;color:var(--dt-color-foreground-primary);">
-        Inline in body copy — you can <dt-link href="#">
-          review the migration guide
-        </dt-link> for the full details of every change.
-      </p>
+      </div>
+      <div style="text-align:center;">
+        <p class="vg-label">
+          hover (pointer over)
+        </p>
+        <dt-link
+          id="vg-hover-target"
+          href="#"
+          :underline="false"
+          :class="quietClass"
+        >
+          View call settings
+        </dt-link>
+      </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+
+// Staging has no `underline` prop — quiet links were authored with the
+// d-td-none utility class there.
+const quietClass = ref('d-td-none');
+
+onMounted(() => {
+  // --dt-color-surface-overlay only exists on Next.
+  const probe = getComputedStyle(document.documentElement).getPropertyValue('--dt-color-surface-overlay');
+  if (probe && probe.trim()) quietClass.value = '';
+});
+</script>

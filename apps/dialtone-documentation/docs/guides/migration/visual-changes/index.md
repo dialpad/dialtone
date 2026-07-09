@@ -237,12 +237,22 @@ Status indicators change from color-only circles to squircles with **internal sh
 
 ### Links
 
-Link rendering is stable, with one behavior change: quiet links (previously never underlined) now show an **underline on hover** ([guide](/guides/migration/link-and-button-navigation/)).
+Link rendering is mostly stable, with two adjustments worth knowing during review.
+
+**Links that hide their underline now show one on hover.** Some links are styled without their usual underline — "quiet" links, done with `:underline="false"` on Dialtone Next (previously with utility classes like `d-td-none`). On current Dialtone these stay underline-free in every state; on Next, the underline appears while the pointer is over the link ([guide](/guides/migration/link-and-button-navigation/)). The right-hand link in each pair below is captured with the pointer over it — an underline appearing on hover is intentional, not a bug.
 
 <before-after
   before="/assets/images/migration-visual/component-link-before-light.png"
   after="/assets/images/migration-visual/component-link-after-light.png"
-  alt="Standalone and inline links"
+  alt="Quiet link at rest and with the pointer over it"
+/>
+
+**Underlines are redrawn.** The line is twice as thick (0.5px → 1px) and sits closer to the text (3px → 2px below the baseline). Because it sits closer, it now overlaps the space descenders occupy, and the browser breaks the line around letters like g, j, p, and y. This is most visible at body-text sizes, where the old hairline ran continuously below the descenders. Gaps in an underline around descenders are expected on Next, not a rendering bug.
+
+<before-after
+  before="/assets/images/migration-visual/component-link-descenders-before-light.png"
+  after="/assets/images/migration-visual/component-link-descenders-after-light.png"
+  alt="Link underline thickness and position, showing how the line breaks around descenders"
 />
 
 ### Modals

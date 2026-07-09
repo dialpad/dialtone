@@ -30,6 +30,8 @@
  *             e.g. brand-new components are after-only)
  *   capture:  'element' shoots the auto-sized #vg-root; 'viewport' shoots the
  *             whole viewport (for scenes with top-layer content like modals)
+ *   hover:    CSS selector to move the pointer over before shooting, so the
+ *             capture includes a real :hover state (e.g. quiet-link underline)
  */
 import { createServer } from 'vite';
 import { chromium } from 'playwright';
@@ -77,7 +79,8 @@ const SCENES = [
   { id: 'component-input' },
   { id: 'component-validation' },
   { id: 'component-notice' },
-  { id: 'component-link' },
+  { id: 'component-link', hover: '#vg-hover-target' },
+  { id: 'component-link-descenders' },
   { id: 'component-modal', capture: 'viewport' },
   // §3 — must-look-identical controls
   { id: 'control-shadows' },
@@ -110,6 +113,10 @@ async function capture (browser, baseUrl, scene, mode, outPath) {
     await page.evaluate(() => new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r))));
     await page.evaluate(() => document.body.classList.add('vg-capturing'));
     await page.waitForTimeout(300);
+    if (scene.hover) {
+      await page.hover(scene.hover);
+      await page.waitForTimeout(120);
+    }
 
     const el = await page.$('#vg-root');
     const box = el && (await el.boundingBox());
