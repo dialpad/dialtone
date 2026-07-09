@@ -37,7 +37,7 @@
           {{ beforeLabel }}
         </figcaption>
         <dt-box
-          surface="secondary"
+          surface="primary"
           border-width="100"
           border-color="subtle"
           border-radius="400"
@@ -59,7 +59,7 @@
           {{ afterLabel }}
         </figcaption>
         <dt-box
-          surface="secondary"
+          surface="primary"
           border-width="100"
           border-color="subtle"
           border-radius="400"
@@ -77,7 +77,7 @@
 
     <div v-else-if="mode === 'split'">
       <dt-box
-        surface="secondary"
+        surface="primary"
         border-width="100"
         border-color="subtle"
         border-radius="400"
@@ -133,7 +133,7 @@
 
     <div v-else>
       <dt-box
-        surface="secondary"
+        surface="primary"
         border-width="100"
         border-color="subtle"
         border-radius="400"
