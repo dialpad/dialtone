@@ -80,10 +80,6 @@ const SCENES = [
   { id: 'component-link', hover: '#vg-hover-target' },
   { id: 'component-link-descenders' },
   { id: 'component-modal', capture: 'viewport' },
-  // §3 — must-look-identical controls
-  { id: 'control-shadows' },
-  { id: 'control-radius' },
-  { id: 'control-spacing' },
 ];
 
 const argv = process.argv.slice(2);

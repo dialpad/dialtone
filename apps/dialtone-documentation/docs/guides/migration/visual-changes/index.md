@@ -263,18 +263,6 @@ Most of the migration is renames. After a **correct** migration, all of the foll
 - **Renamed props and events** — `show`→`open`, `title`→`header-text`, `hide-*`→`show-*`, logical naming (`left`→`start`): behavior-preserving renames with no visual surface.
 - **Scrollbar behavior** — "never auto-hide" was renamed to "always visible"; same behavior.
 
-<before-after
-  before="/assets/images/migration-visual/control-shadows-before-light.png"
-  after="/assets/images/migration-visual/control-shadows-after-light.png"
-  alt="Shadow elevations that must match exactly"
-/>
-
-<before-after
-  before="/assets/images/migration-visual/control-spacing-before-light.png"
-  after="/assets/images/migration-visual/control-spacing-after-light.png"
-  alt="Spacing scale bars that must match exactly"
-/>
-
 > [!CRITICAL] Shadows have not changed
 > A shadow/elevation refresh was designed for Next but is **not shipping in the current release** — it lives on a separate branch. If shadows look softer, harder, or differently layered on a migrated screen today, that is a bug. This section will move to the "expected" list if the elevation refresh lands later.
 
