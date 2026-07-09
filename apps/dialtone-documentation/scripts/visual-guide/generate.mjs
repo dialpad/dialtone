@@ -59,7 +59,7 @@ const SCENES = [
   { id: 'token-neutrals' },
   { id: 'token-color-ramps' },
   { id: 'token-focus-ring' },
-  { id: 'token-size-shifts' },
+  { id: 'token-size-shifts', branches: ['after'] }, // static infographic — deprecated size tokens still resolve on next, so a pair can't show the shift
   { id: 'token-disabled-states' },
   { id: 'token-overlay-surface' },
   // §2 — redesigned components
