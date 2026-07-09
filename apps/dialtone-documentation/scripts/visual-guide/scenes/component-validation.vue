@@ -1,30 +1,47 @@
 <template>
-  <!-- Validation messages in Next show a leading severity icon and gain a new
-       blue `info` variant (DLT-3422/3423). DtValidationMessages renders only
-       the highest-priority type in an array, so each type gets its own
-       instance. On staging the `info` row falls back unstyled — that IS the
-       before state. -->
-  <div class="vg-scene" style="width:520px;">
+  <!-- Validation messages: severity icons are new in Next (DLT-3422) along
+       with the blue `info` variant (DLT-3423), and the severity vocabulary
+       changed (error→critical, success→positive — component-props guide,
+       "Severity vocabulary"). The scene detects the branch and uses its
+       canonical type names so each side renders its true styled states. -->
+  <div
+    class="vg-scene"
+    style="width:520px;"
+  >
     <p class="vg-heading">
-      Validation messages — severity icons + info variant
+      Validation messages
     </p>
     <div style="display:flex;flex-direction:column;gap:14px;">
-      <dt-validation-messages
-        id="vg-vm-info"
-        :validation-messages="[{ message: 'Informational message', type: 'info' }]"
-      />
-      <dt-validation-messages
-        id="vg-vm-positive"
-        :validation-messages="[{ message: 'Positive message', type: 'positive' }]"
-      />
-      <dt-validation-messages
-        id="vg-vm-warning"
-        :validation-messages="[{ message: 'Warning message', type: 'warning' }]"
-      />
-      <dt-validation-messages
-        id="vg-vm-critical"
-        :validation-messages="[{ message: 'Critical message', type: 'critical' }]"
-      />
+      <div
+        v-for="t in types"
+        :key="t"
+        style="display:flex;align-items:center;gap:16px;"
+      >
+        <span
+          class="vg-mono"
+          style="width:64px;flex:none;"
+        >{{ t }}</span>
+        <dt-validation-messages
+          :id="`vg-vm-${t}`"
+          :validation-messages="[{ message: `A ${t} message`, type: t }]"
+        />
+      </div>
     </div>
   </div>
 </template>
+
+<script setup>
+import { ref, onMounted } from 'vue';
+
+// Each branch's canonical severity vocabulary.
+const BEFORE_TYPES = ['error', 'warning', 'success'];
+const AFTER_TYPES = ['critical', 'warning', 'positive', 'info'];
+
+const types = ref(BEFORE_TYPES);
+
+onMounted(() => {
+  // --dt-color-surface-overlay only exists on Next.
+  const probe = getComputedStyle(document.documentElement).getPropertyValue('--dt-color-surface-overlay');
+  if (probe && probe.trim()) types.value = AFTER_TYPES;
+});
+</script>
