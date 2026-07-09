@@ -81,25 +81,23 @@ Modals, popovers, toasts, and menus now sit on a dedicated overlay surface. In l
   alt="Page surface versus overlay surface in dark mode"
 />
 
-### Disabled controls are translucent
+### Disabled controls change their translucency treatment
 
-Disabled buttons, inputs, and chips are desaturated and slightly translucent instead of flat gray.
+Disabled controls let the background show through on both versions — the pair below renders on a gradient precisely so you can see it. What changes in Next: the fade is now a **desaturating color-mix** rather than a plain opacity drop, so disabled fills read lighter and grayer, and input surfaces shift from fully transparent to a frosted translucent white (DLT-3446).
 
 <before-after
   before="/assets/images/migration-visual/token-disabled-states-before-light.png"
   after="/assets/images/migration-visual/token-disabled-states-after-light.png"
-  alt="Enabled and disabled buttons and inputs"
+  alt="Enabled and disabled buttons and inputs over a gradient backdrop"
 />
 
 ### A few fixed sizes move by 4–16px
 
-Nine legacy size tokens have no exact match in the new layout scale and map to the nearest stop. Elements sized with them shift slightly — for example 216px→224px, 332px→320px, 464px→448px. These small moves are sanctioned; see the [full table](/guides/migration/layout-and-spacing-tokens/) if you need exact values.
+Nine legacy size tokens have no exact match in the new layout scale, so **when a surface is migrated** its fixed dimensions shift to the nearest stop — sidebars, panels, and modals move by 4–16px (old size in gray, new in purple, to scale below). These small moves are sanctioned; see the [full table](/guides/migration/layout-and-spacing-tokens/) for every mapping. Note that un-migrated code keeps rendering the old sizes — the deprecated tokens still resolve for now — so this shift marks *migrated* surfaces, not broken ones.
 
-<before-after
-  before="/assets/images/migration-visual/token-size-shifts-before-light.png"
-  after="/assets/images/migration-visual/token-size-shifts-after-light.png"
-  alt="Bars showing the nine nearest-neighbor size token shifts with measured widths"
-/>
+<dt-box surface="secondary" border-width="100" border-color="subtle" border-radius="400" padding="300">
+  <img :src="$withBase('/assets/images/migration-visual/token-size-shifts-after-light.png')" alt="To-scale bars comparing each legacy size token to its nearest layout token, with the pixel delta" class="d-d-block d-w100p">
+</dt-box>
 
 ## Redesigned components
 
@@ -163,7 +161,7 @@ Display-only chips no longer look clickable — no hover state, no pointer curso
 
 ### Inputs and validation messages
 
-Input text grows to 14px, and validation messages now show a leading severity icon plus a new blue **info** variant (DLT-3422, DLT-3423).
+Input text grows to 14px. Validation messages keep their severity icons and gain a new blue **info** variant (DLT-3422, DLT-3423) — and the severity words themselves changed: `error` is now `critical`, `success` is now `positive`, with the same colors. The pairs below show each side rendering its own vocabulary.
 
 <before-after
   before="/assets/images/migration-visual/component-input-before-light.png"
@@ -295,7 +293,7 @@ Most of the migration is renames. After a **correct** migration, all of the foll
 - **Border radius** — utility classes were renamed to logical names; the radius values did not change.
 - **Spacing** — spacing tokens were renamed; every shared stop keeps its exact pixel value.
 - **Component sizes** — t-shirt sizes (`sm`/`md`/`lg`) became numeric (`200`/`300`/`400`), mapping to the same rendered sizes.
-- **Success green / positive green** — same color, new name.
+- **Severity vocabulary** — `danger` and `error` collapse to `critical`, and `success` becomes `positive`, across `kind`, `tone`, and validation types ([guide](/guides/migration/component-props/)). Same colors, new names.
 - **Renamed props and events** — `show`→`open`, `title`→`header-text`, `hide-*`→`show-*`, logical naming (`left`→`start`): behavior-preserving renames with no visual surface.
 - **Scrollbar behavior** — "never auto-hide" was renamed to "always visible"; same behavior.
 
@@ -326,6 +324,7 @@ Patterns from real migration QA (primarily the ubervoice migration, June–July 
 | Charts or embedded content render blank | Downstream code that can't parse OKLCH color values (e.g. DP-194053, analytics charts) | File it — this needs an engineering fix in the embedding code |
 | Close buttons or icons **reappeared** on banners, chips, toasts; modals never open (or never close) | Un-migrated renamed props (`hide-close`→`show-close`, `show`→`open`, `title`→`header-text`) — the old prop is silently ignored ([guide](/guides/migration/component-props/)) | File it; mention which element and what it should look like |
 | A row of buttons or a toolbar collapsed into a vertical stack | Flex-to-stack conversion missing its row direction — the new stack defaults to vertical ([guide](/guides/migration/flex-to-stack/)) | File it — quick, mechanical fix |
+| A destructive button or link lost its red and looks like a default one | Un-migrated severity word — `danger`/`error` were renamed to `critical`, and the old word no longer styles anything ([guide](/guides/migration/component-props/)) | File it — one-word fix |
 | An element lost its background/text color entirely, or a translucent tint disappeared | Reference to a removed color stop or removed per-channel color variable ([color stops](/guides/migration/color-stops/), [HSL to OKLCH](/guides/migration/hsl-to-oklch/)) | File it with a screenshot of the colorless element |
 | A scrollbar auto-hides where it used to stay visible | Un-migrated scrollbar setting ([guide](/guides/migration/scrollbar-always/)) | File it |
 | A button that was styled as borderless/custom now renders wrong | The old implementation "hacked" a component with utility classes; the migration surfaces the workaround (e.g. DP-194338) | File it — the fix is using the proper component API, not restoring the hack |
