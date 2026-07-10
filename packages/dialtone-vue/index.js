@@ -63,6 +63,7 @@ export * from './components/SplitButton';
 export * from './components/Stack';
 export * from './components/Tab';
 export * from './components/Text';
+export * from './components/TextList';
 export * from './components/Toast';
 export * from './components/Toggle';
 export * from './components/Tooltip';

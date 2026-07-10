@@ -53,6 +53,7 @@ import DtSplitButton from './variants_split_button.js';
 import DtStack from './variants_stack.js';
 import DtTabGroup from './variants_tab_group.js';
 import DtText from './variants_text.js';
+import DtTextList from './variants_text_list.js';
 import DtToast from './variants_toast.js';
 import DtToggle from './variants_toggle.js';
 import DtTooltip from './variants_tooltip.js';
@@ -115,6 +116,7 @@ export default function variants () {
     DtStack,
     DtTabGroup,
     DtText,
+    DtTextList,
     DtToast,
     DtToggle,
     DtTooltip,
