@@ -4,7 +4,7 @@ description: What changed visually in Dialtone Next, what should look identical,
 status: ready
 ---
 
-This guide is for **designers and QA reviewing product surfaces that migrated to Dialtone Next**. It shows every visual change that is intentional, lists what must look identical, and catalogs the problems that have actually come up during migrations, so you can tell a refresh from a regression before filing a bug.
+This guide is for **designers and QA reviewing product surfaces that migrated to Dialtone Next**. It shows the most significant intentional visual changes, lists what must look identical, and catalogs the problems that have actually come up during migrations, so you can tell a refresh from a regression before filing a bug. It is not exhaustive: smaller changes aren't pictured, and the guide gets updated as migrations surface more.
 
 > [!WARNING] Do not QA against the Figma library
 > The DT9 Component Library in Figma has **not** been updated to Dialtone Next visuals. Comparing a migrated screen against Figma will flag intentional changes as bugs. The reference is this guide plus the running Next build.
