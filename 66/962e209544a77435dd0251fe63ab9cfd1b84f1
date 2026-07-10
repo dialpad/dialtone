@@ -1,0 +1,24 @@
+apps/dialtone-documentation/docs/.vuepress/theme/composables/useViewportBreakpoints.js
+  s_037f149b31cf7b::t_6aa7a2d58cfd36 41-106
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.7",
+  "base_commit_sha": "66962e209544a77435dd0251fe63ab9cfd1b84f1",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_037f149b31cf7b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019eb75a-1703-7701-b0b6-29b6cf4d3b9e",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.gitignore
+  s_751be0d35ef3b5::t_974c7dd9e8104b 30-34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "8119a05be9c0711f139d1ac8edee025546c595aa",
+  "prompts": {},
+  "sessions": {
+    "s_751be0d35ef3b5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c228162a-7ace-4803-afe4-1340de5c6df6",
+        "model": "claude-fable-5"
+      },
+      "human_author": "ninarepetto <nina.repetto@dialpad.com>"
+    }
+  }
+}
