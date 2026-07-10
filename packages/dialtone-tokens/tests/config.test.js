@@ -40,11 +40,14 @@ describe('themes/config.js', () => {
 
   describe('initDialtoneTheme', () => {
     describe('When called with { layers: false }', () => {
-      it('Should load the no-layers core tokens', () => {
+      it('Should load the no-layers core tokens', async () => {
         initDialtoneTheme(dpStub, 'light', root, { layers: false });
 
-        const coreStyleTag = root.querySelector('#dialtone-css-core');
-        expect(coreStyleTag.innerHTML).toContain('--dt-no-layers-marker');
+        // The no-layers core loads via a dynamic import (not bundled into the
+        // default path), so its content lands a moment after this call returns.
+        await vi.waitFor(() => {
+          expect(root.querySelector('#dialtone-css-core').innerHTML).toContain('--dt-no-layers-marker');
+        });
       });
     });
 

@@ -1,6 +1,9 @@
 /* eslint-disable complexity */
 import Core from '@/themes/core.js';
-import CoreNoLayers from '@/themes/core-no-layers.js';
+// Not statically imported — the no-layers core is only needed when initDialtoneTheme
+// is called with { layers: false }. Dynamically importing it here lets bundlers
+// code-split it out of the default (layers: true) path, so apps that never opt into
+// no-layers don't pay for a second copy of the core token CSS string.
 
 /**
  * Names of all materials, including the default (sandstone). Material switching
@@ -467,6 +470,8 @@ export function setMaterial (name, rootNode = document.documentElement) {
  * @param {boolean} [options.layers=true] - Whether to load core tokens wrapped in `@layer dialtone.base`.
  *   Pass `false` if your app can't use CSS Cascade Layers. Brand, contrast, and material overrides are
  *   already unlayered either way — this only affects the shared core tokens initDialtoneTheme loads.
+ *   The no-layers core is loaded via a dynamic import (not bundled into the default path), so with
+ *   `layers: false` the core token styles apply asynchronously, a moment after this call returns.
  *
  * @example
  * // Standard usage (non-Shadow DOM)
@@ -505,7 +510,6 @@ export function setMaterial (name, rootNode = document.documentElement) {
  */
 export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = document.documentElement, options = {}) {
   const { layers = true } = options;
-  const resolvedCore = layers ? Core : CoreNoLayers;
   // Validation: brandTheme must be an object
   if (!brandTheme || typeof brandTheme !== 'object') {
     throw new TypeError(
@@ -591,11 +595,22 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
   }
 
   // Load core tokens (once per JavaScript instance)
-  _setStyleTag('dialtone-css-core', resolvedCore.core, styleRoot);
+  if (layers) {
+    _setStyleTag('dialtone-css-core', Core.core, styleRoot);
+  } else {
+    // Reserve the tag's DOM position synchronously so the base-colors/brand
+    // tags appended below still land after it, then fill in its content once
+    // the dynamic import resolves.
+    _setStyleTag('dialtone-css-core', '', styleRoot);
+    import('@/themes/core-no-layers.js').then(({ default: CoreNoLayers }) => {
+      _setStyleTag('dialtone-css-core', CoreNoLayers.core, styleRoot);
+    });
+  }
   coreTokensLoaded = true;
 
-  // Load base colors (once)
-  _setStyleTag('dialtone-css-base-colors', resolvedCore.baseColors, styleRoot);
+  // Load base colors (once) — identical CSS whether layers is true or false
+  // (tokens-base-colors.css was never wrapped in @layer), so no branching needed.
+  _setStyleTag('dialtone-css-base-colors', Core.baseColors, styleRoot);
 
   // Set initial mode
   setMode(mode, rootNode);
