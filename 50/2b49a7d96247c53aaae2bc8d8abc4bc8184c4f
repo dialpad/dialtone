@@ -1,0 +1,74 @@
+packages/dialtone-vue/components/TextList/TextList.vue
+  s_2c9bf7a91b8fa5::t_08d7486ce7d49c 112-113
+  s_70bd67c1949733::t_140d90715ee447 119
+apps/dialtone-documentation/docs/utilities/typography/lists.md
+  h_c15b5755534093 4,8
+apps/dialtone-documentation/thumbs/text-list.vue
+  h_c15b5755534093 2,4-5,9-16
+packages/dialtone-vue/components/TextList/TextListConstants.js
+  h_c15b5755534093 5
+packages/dialtone-vue/components/TextList/TextListVariants.story.vue
+  h_c15b5755534093 12,80
+packages/eslint-plugin-dialtone/docs/rules/deprecated-list-styling-classes.md
+  s_2c9bf7a91b8fa5::t_e38943969d7fdb 7
+  s_2c9bf7a91b8fa5::t_869420304d94d1 42-46
+  s_2c9bf7a91b8fa5::t_a7dde5aa01abaf 52
+packages/dialtone-css/lib/build/less/components/text-list.less
+  s_2c9bf7a91b8fa5::t_63a8b30dbe4d06 41-48
+  s_70bd67c1949733::t_ac00731af42558 85
+  s_70bd67c1949733::t_85019d8239218c 86
+  s_2c9bf7a91b8fa5::t_a2f5ddcb75e393 113
+  s_2c9bf7a91b8fa5::t_bba64b659013f1 79-82
+  h_c15b5755534093 3,88
+  s_2c9bf7a91b8fa5::t_126198ff33794a 94-97,112,114-119
+  s_70bd67c1949733::t_066b67dfd36b4e 87
+packages/dialtone-vue/components/TextList/TextList.test.js
+  s_2c9bf7a91b8fa5::t_0d2522439d36fa 119-121,126-128
+  s_70bd67c1949733::t_4e17aaa75ee001 78,82-87
+  s_2c9bf7a91b8fa5::t_f6be5ece699e67 132,135,142-144
+  s_2c9bf7a91b8fa5::t_ba387fb2b75d51 150
+  s_2c9bf7a91b8fa5::t_66ca5d157e6bf1 366
+  s_2c9bf7a91b8fa5::t_41c0a0f8681bf7 109,211
+  s_2c9bf7a91b8fa5::t_b6b3ffd53ba0c7 255-256
+  s_2c9bf7a91b8fa5::t_82be8e0b38e976 192
+  s_2c9bf7a91b8fa5::t_607052b11c28bb 238
+  s_70bd67c1949733::t_dc4af1acce5dea 88-89
+packages/combinator/src/variants/variants_text_list.js
+  h_c15b5755534093 45-47,90,106,209,227,253,279
+  s_70bd67c1949733::t_cc136e7a850a42 73-74,80,86-89,91,93-94,96-105,107-132,134,140-179,181,183,185,187,189,193,195,201,204,210-226,228-233,235-252,254-278,280-285
+  s_70bd67c1949733::t_f8bd6ed2e1fa9b 72
+  s_70bd67c1949733::t_53df5618502d21 75-79
+  s_70bd67c1949733::t_77adffe170095c 81-85
+apps/dialtone-documentation/docs/components/text-list.md
+  s_70bd67c1949733::t_c45770a466a287 68
+  h_c15b5755534093 14-18,26-37,55,58-59,99-101,106-111,119-120,141,149,155,157,161,193-198
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "502b49a7d96247c53aaae2bc8d8abc4bc8184c4f",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_2c9bf7a91b8fa5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "996319e4-ffde-4045-b12a-986ae83372d8",
+        "model": "claude-fable-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_70bd67c1949733": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f3c9e-fb6d-7a13-bf9d-512be21eb336",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
