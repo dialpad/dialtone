@@ -73,14 +73,14 @@ Every focused control shows a more saturated, slightly darker blue ring, in both
   alt="Focus ring color on a button, an input, and an icon button"
 />
 
-### Overlays are lighter than the page in dark mode
+### Layered components sit on a new overlay surface
 
-Modals, popovers, toasts, and menus now sit on a dedicated overlay surface. In light mode the difference is barely perceptible; in dark mode overlay panels are **clearly lighter than the page behind them**: elevation expressed through color. This is the single most-reported "looks like a bug" change.
+Next introduces an `overlay` surface color that did not exist before, and layered components (Popover, Dropdown, Hovercard, Modal, menus, toasts) now render on it. Nothing changes in product code. The point is depth: the layered element reads as nearer than the page behind it. In light mode the difference is barely perceptible; in dark mode the overlay is **clearly lighter than the page**. This is the single most-reported "looks like a bug" change.
 
 <before-after
   before="/assets/images/migration-visual/token-overlay-surface-before-dark.png"
   after="/assets/images/migration-visual/token-overlay-surface-after-dark.png"
-  alt="Page surface versus overlay surface in dark mode"
+  alt="An open popover over page content, and page versus overlay surface swatches, in dark mode"
 />
 
 ### Disabled controls change their translucency treatment
@@ -243,7 +243,7 @@ Link rendering is mostly stable. Two changes matter during review.
 
 ### Modals
 
-Modals are now native dialogs rendered in the browser's top layer ([guide](/guides/migration/modal-native-dialog/)). Light mode is visually near-identical, so the pair below shows **dark mode**, where the change is real: the modal surface is lighter than the page (see [overlays](#overlays-are-lighter-than-the-page-in-dark-mode)). Tooltips or popovers rendering **underneath** a modal is a bug.
+Modals are now native dialogs rendered in the browser's top layer ([guide](/guides/migration/modal-native-dialog/)). Light mode is visually near-identical, so the pair below shows **dark mode**, where the change is real: the modal surface is lighter than the page (see [overlays](#layered-components-sit-on-a-new-overlay-surface)). Tooltips or popovers rendering **underneath** a modal is a bug.
 
 <before-after
   before="/assets/images/migration-visual/component-modal-before-dark.png"
