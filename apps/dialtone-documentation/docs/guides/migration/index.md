@@ -5,6 +5,8 @@ description: Step-by-step guides for migrating to the latest Dialtone major vers
 
 This guide walks you through every breaking and deprecation change in the upcoming Dialtone major release. Work through each section that applies to your codebase, run the provided migration tools, and verify the results. Reviewing a migrated surface as a designer or QA? Start with [Visual Changes for Designers](./visual-changes/) — before/after imagery of every intentional visual change and how to tell a refresh from a regression.
 
+The component pages themselves are a comparison resource: the current docs and the Next preview render the same live examples, so you can put any component and prop combination side by side. For example, compare [DtButton today](https://dialtone.dialpad.com/components/button.html) with [DtButton on Next](https://dialtone.dialpad.com/next/components/button.html). Whenever you need to confirm an intended rendering, the Next docsite is the source of truth.
+
 > [!INFO] Automated tooling available
 > Most migrations ship with CLI tools or ESLint auto-fix rules. Run them first, then handle the manual cases flagged in each guide.
 
