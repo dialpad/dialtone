@@ -72,9 +72,7 @@ const SCENES = [
   { id: 'component-empty-state' },
   { id: 'component-presence' },
   { id: 'component-banner-toast' },
-  { id: 'component-filter-pill', branches: ['after'] }, // core component is new in Next
   { id: 'component-tabs' },
-  { id: 'component-segmented-control', branches: ['after'] }, // new in Next
   { id: 'component-avatar' },
   { id: 'component-chip', hover: '#vg-hover-target' },
   { id: 'component-input' },

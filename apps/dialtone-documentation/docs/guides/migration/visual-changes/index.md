@@ -105,6 +105,16 @@ Nine legacy size tokens have no exact match in the new layout scale, so **when a
 
 These components changed on purpose (each links to its engineering guide where one exists).
 
+### Avatars
+
+Redesigned color system (12 hue families, deterministically assigned per person), and **group avatars now render at full size**. Current Dialtone always draws group avatars at the smallest size, and avatars that small never show initials. If you can read initials on a group avatar, that's Next working as intended, not a bug ([guide](/guides/migration/avatar-updates/)). Photo avatars keep their crop; presence indicators move to the new squircle shapes.
+
+<before-after
+  before="/assets/images/migration-visual/component-avatar-before-light.png"
+  after="/assets/images/migration-visual/component-avatar-after-light.png"
+  alt="Single avatar, seeded avatar colors, and a group avatar"
+/>
+
 ### Buttons
 
 Squarer corners (8px→6px radius), label weight drops from semibold to medium, adjusted label sizes, softer outlined borders, and slightly darker primary hover/active states. The restyle applies across every kind, size, and icon placement. The pair below covers the severity kinds (the destructive kind is also *renamed*: `danger` is now `critical`), the muted treatment, three sizes, and start/end/icon-only placements.
@@ -125,32 +135,6 @@ Selected/hover colors are re-mapped, and the selected-tab indicator now **slides
   before="/assets/images/migration-visual/component-tabs-before-light.png"
   after="/assets/images/migration-visual/component-tabs-after-light.png"
   alt="Tab group with a selected tab"
-/>
-
-### Segmented control
-
-A brand-new component. Anywhere you see it is new UI, with no "before" to compare against.
-
-<dt-box surface="secondary" border-width="100" border-color="subtle" border-radius="400" padding="300" class="d-wmx60p">
-  <img :src="$withBase('/assets/images/migration-visual/component-segmented-control-after-light.png')" alt="Segmented control, new in Dialtone Next" class="d-d-block d-w100p">
-</dt-box>
-
-### Filter pill
-
-Also new as a core component (previously only recipe pills existed). Filter pills come with a dropdown single-select, an apply/cancel footer for deferred selection, and a read-only state. All of these are new, and they'll start showing up in filter bars.
-
-<dt-box surface="secondary" border-width="100" border-color="subtle" border-radius="400" padding="300" class="d-wmx60p">
-  <img :src="$withBase('/assets/images/migration-visual/component-filter-pill-after-light.png')" alt="Filter pill with dropdown and read-only variant, new in Dialtone Next" class="d-d-block d-w100p">
-</dt-box>
-
-### Avatars
-
-Redesigned color system (12 hue families, deterministically assigned per person), and **group avatars now render at full size**. Current Dialtone always draws group avatars at the smallest size, and avatars that small never show initials. If you can read initials on a group avatar, that's Next working as intended, not a bug ([guide](/guides/migration/avatar-updates/)). Photo avatars keep their crop; presence indicators move to the new squircle shapes.
-
-<before-after
-  before="/assets/images/migration-visual/component-avatar-before-light.png"
-  after="/assets/images/migration-visual/component-avatar-after-light.png"
-  alt="Single avatar, seeded avatar colors, and a group avatar"
 />
 
 ### Chips
