@@ -1,9 +1,11 @@
 <template>
-  <!-- Validation messages: severity icons are new in Next (DLT-3422) along
-       with the blue `info` variant (DLT-3423), and the severity vocabulary
+  <!-- Validation messages: colors shift subtly with the re-tuned ramps
+       (icons existed on staging too — DLT-3422 only made them customizable),
+       the blue `info` variant is NEW (DLT-3423), and the severity vocabulary
        changed (error→critical, success→positive — component-props guide,
        "Severity vocabulary"). The scene detects the branch and uses its
-       canonical type names so each side renders its true styled states. -->
+       canonical type names; the info row gets an in-image "new" marker,
+       which only ever renders on the after side. -->
   <div
     class="vg-scene"
     style="width:520px;"
@@ -23,8 +25,13 @@
         >{{ t }}</span>
         <dt-validation-messages
           :id="`vg-vm-${t}`"
-          :validation-messages="[{ message: `A ${t} message`, type: t }]"
+          :validation-messages="[{ message: `Sample ${t} message`, type: t }]"
         />
+        <span
+          v-if="t === 'info'"
+          class="vg-caption"
+          style="margin:0;flex:none;"
+        >new in Next</span>
       </div>
     </div>
   </div>

@@ -141,9 +141,9 @@ Selected/hover colors are re-mapped, and the selected-tab indicator now **slides
 
 DtChip and DtBadge are still being restyled; what renders on Next today is not the final treatment, so this guide doesn't picture them yet. A dedicated section will land here once the new styling ships. One behavior change already applies: display-only chips no longer react to hover or show a pointer cursor, and only chips marked `:interactive="true"` keep the button affordance ([guide](/guides/migration/chip-interactive/)).
 
-### Inputs and validation messages
+### Inputs
 
-Input text grows to 14px. Validation messages keep their severity icons and gain a new blue **info** variant. The severity words themselves also changed: `error` is now `critical`, `success` is now `positive`, with the same colors. The pairs below show each side rendering its own vocabulary.
+Input text grows from 12px to 14px; on dense forms that is the change you'll notice.
 
 <before-after
   before="/assets/images/migration-visual/component-input-before-light.png"
@@ -151,10 +151,14 @@ Input text grows to 14px. Validation messages keep their severity icons and gain
   alt="Inputs with info, warning, and critical validation states"
 />
 
+### Validation messages
+
+Visually, validation messages are almost unchanged: severity colors shift slightly with the re-tuned ramps, and the icons stay. Two things are new rather than restyled. The blue `info` variant is a new addition, with no "before" to compare against. And the severity words changed, with identical colors: `error` is now `critical`, `success` is now `positive`. Each side of the pair renders its own vocabulary.
+
 <before-after
   before="/assets/images/migration-visual/component-validation-before-light.png"
   after="/assets/images/migration-visual/component-validation-after-light.png"
-  alt="Validation messages across severities including the new info variant"
+  alt="Validation messages across severities; the info variant is new"
 />
 
 ### Notices
