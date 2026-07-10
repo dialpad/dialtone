@@ -1,0 +1,44 @@
+.claude/rules/logical-naming.md
+  s_0deedfec899a67::t_d2713c4d17fde7 97
+.agents/resources/rules/logical-naming.md
+  s_0deedfec899a67::t_85ac0c436ba6c8 1-20
+  s_50f595e0683d05::t_2f5f64de00e3da 21-23
+.claude/skills/utility.md
+  s_0deedfec899a67::t_6bc198c145f82f 2,22-34
+  s_0deedfec899a67::t_831662b7493262 17
+  s_0deedfec899a67::t_2e6b242baf5b42 16
+.agents/resources/agent-tooling-parity.md
+  s_0deedfec899a67::t_aa937b564dac6d 13
+.agents/resources/rules/css-utilities.md
+  s_0deedfec899a67::t_2e6b242baf5b42 10
+.agents/resources/rule-map.md
+  s_0deedfec899a67::t_312ab0f4c61298 7
+.claude/rules/css-utilities.md
+  s_0deedfec899a67::t_2e6b242baf5b42 18
+  s_0deedfec899a67::t_6bc198c145f82f 3,33-37,50-52,54-56
+  s_0deedfec899a67::t_5cded11ec96dc0 19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "f9270406ba6e42fda20e77f4904833b9968be301",
+  "prompts": {},
+  "sessions": {
+    "s_0deedfec899a67": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f24dc-c4e6-7560-9f4a-625c9c8673a7",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_50f595e0683d05": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b7af80f7-b71b-47c3-910a-00a197657a6e",
+        "model": "claude-fable-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
