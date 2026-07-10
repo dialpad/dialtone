@@ -137,17 +137,9 @@ Selected/hover colors are re-mapped, and the selected-tab indicator now **slides
   alt="Tab group with a selected tab"
 />
 
-### Chips
+### Chips and badges
 
-Display-only chips no longer look clickable: no hover state, no pointer cursor. Only chips explicitly marked interactive keep the button affordance ([guide](/guides/migration/chip-interactive/)). A chip that **should** be clickable but looks dead means the migration missed the opt-in; that's a bug.
-
-The pair below is captured with the pointer over the display-only chip: on current Dialtone it lights up like a button; on Next it doesn't react at all. That non-reaction is the intended new behavior.
-
-<before-after
-  before="/assets/images/migration-visual/component-chip-before-light.png"
-  after="/assets/images/migration-visual/component-chip-after-light.png"
-  alt="Display-only chip with the pointer over it, interactive chip, and chip with close button"
-/>
+DtChip and DtBadge are still being restyled; what renders on Next today is not the final treatment, so this guide doesn't picture them yet. A dedicated section will land here once the new styling ships. One behavior change already applies: display-only chips no longer react to hover or show a pointer cursor, and only chips marked `:interactive="true"` keep the button affordance ([guide](/guides/migration/chip-interactive/)).
 
 ### Inputs and validation messages
 

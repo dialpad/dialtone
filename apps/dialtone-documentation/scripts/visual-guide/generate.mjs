@@ -74,7 +74,6 @@ const SCENES = [
   { id: 'component-banner-toast' },
   { id: 'component-tabs' },
   { id: 'component-avatar' },
-  { id: 'component-chip', hover: '#vg-hover-target' },
   { id: 'component-input' },
   { id: 'component-validation' },
   { id: 'component-notice' },
