@@ -127,6 +127,16 @@ Grouped buttons pick up the same restyle and gain built-in spacing. Current Dial
   alt="Button kinds, sizes, icon placements, and a button group"
 />
 
+### Paired controls stay aligned
+
+The pass that restyled buttons also covered the form controls that sit next to them: DtInput and DtSelectMenu were updated in step, and all three keep matching heights at matching sizes. The form-field update is quieter than the button restyle: text set with the new type scale, a one-pixel height gain, and input surfaces that go from fully transparent to a frosted translucent white (invisible over white backgrounds, visible over color). The pair below measures a mixed row, with heights printed in-image: every control gains one pixel, and within each row the numbers stay equal. A migrated row where one control stands taller than its neighbors is a bug, usually a size prop that missed the [numeric-size migration](/guides/migration/component-sizes/).
+
+<before-after
+  before="/assets/images/migration-visual/component-control-alignment-before-light.png"
+  after="/assets/images/migration-visual/component-control-alignment-after-light.png"
+  alt="An input, a select menu, and a button in one row, with measured matching heights"
+/>
+
 ### Tabs
 
 Selected/hover colors are re-mapped, and the selected-tab indicator now **slides** between tabs instead of jumping. The animation isn't visible in a static image; watch for it in the product.

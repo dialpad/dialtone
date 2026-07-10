@@ -69,6 +69,7 @@ const SCENES = [
   { id: 'token-overlay-surface' },
   // §2 — redesigned components
   { id: 'component-button' },
+  { id: 'component-control-alignment' },
   { id: 'component-empty-state' },
   { id: 'component-presence' },
   { id: 'component-banner-toast' },
