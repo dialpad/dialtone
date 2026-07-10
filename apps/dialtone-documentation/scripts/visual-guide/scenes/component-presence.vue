@@ -30,9 +30,12 @@
 </template>
 
 <style scoped>
-/* Render presence dots large enough to see the new internal shapes. */
+/* Render presence dots large enough to see the new internal shapes.
+   Size via the component's own --presence-size variable: both branches
+   size the inner dot (and, on next, radius/borders/icon) from it. Forcing
+   width/height on the wrapper instead left staging's wrapper ring at 20px
+   around a native-size dot — the "ghost circle" review finding. */
 .vg-presence-size {
-  inline-size: 20px;
-  block-size: 20px;
+  --presence-size: 20px;
 }
 </style>
