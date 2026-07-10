@@ -39,6 +39,24 @@ describe('themes/config.js', () => {
   });
 
   describe('initDialtoneTheme', () => {
+    describe('When called with { layers: false }', () => {
+      it('Should load the no-layers core tokens', () => {
+        initDialtoneTheme(dpStub, 'light', root, { layers: false });
+
+        const coreStyleTag = root.querySelector('#dialtone-css-core');
+        expect(coreStyleTag.innerHTML).toContain('--dt-no-layers-marker');
+      });
+    });
+
+    describe('When called without options (default)', () => {
+      it('Should load the layered core tokens', () => {
+        initDialtoneTheme(dpStub, 'light', root);
+
+        const coreStyleTag = root.querySelector('#dialtone-css-core');
+        expect(coreStyleTag.innerHTML).not.toContain('--dt-no-layers-marker');
+      });
+    });
+
     describe('When the brand declares a material lock', () => {
       it.each([
         ['iron', melonStub],

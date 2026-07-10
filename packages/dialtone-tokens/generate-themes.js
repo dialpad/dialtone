@@ -22,6 +22,7 @@ export async function generateThemeFiles () {
 
   // Generate core theme file (shared across all brands)
   await generateCoreThemeFile();
+  await generateCoreNoLayersThemeFile();
 
   // Generate DP base theme
   await generateDpThemeFile();
@@ -61,6 +62,29 @@ export default {
 
   fs.writeFileSync(filePath, content);
   console.log('Generated core theme file');
+}
+
+/**
+ * Generate a no-layers variant of the core theme file, consumed by
+ * initDialtoneTheme's `{ layers: false }` option. tokens-core.css is the
+ * only file in the layered token system wrapped in `@layer dialtone.base` —
+ * base colors, brand overrides, contrast, and material files are already
+ * unlayered, so no equivalent no-layers entrypoint is needed for those.
+ */
+async function generateCoreNoLayersThemeFile() {
+  const filePath = path.join(THEMES_OUTPUT_DIR, 'core-no-layers.js');
+
+  const content = `import CoreTokens from '@dialpad/dialtone-tokens/no-layers/layered/tokens-core.css?inline';
+import BaseColors from '@dialpad/dialtone-tokens/layered/tokens-base-colors.css?inline';
+
+export default {
+  core: CoreTokens,
+  baseColors: BaseColors,
+};
+`;
+
+  fs.writeFileSync(filePath, content);
+  console.log('Generated core-no-layers theme file');
 }
 
 /**

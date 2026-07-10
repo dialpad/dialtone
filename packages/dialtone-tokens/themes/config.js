@@ -1,5 +1,6 @@
 /* eslint-disable complexity */
 import Core from '@/themes/core.js';
+import CoreNoLayers from '@/themes/core-no-layers.js';
 
 /**
  * Names of all materials, including the default (sandstone). Material switching
@@ -462,6 +463,10 @@ export function setMaterial (name, rootNode = document.documentElement) {
  * @param {BrandTheme} brandTheme - Initial brand theme to apply
  * @param {Mode} [mode='light'] - Initial color mode ('light' or 'dark')
  * @param {ThemeRootNode} [rootNode=document.documentElement] - Root element for style injection
+ * @param {Object} [options={}]
+ * @param {boolean} [options.layers=true] - Whether to load core tokens wrapped in `@layer dialtone.base`.
+ *   Pass `false` if your app can't use CSS Cascade Layers. Brand, contrast, and material overrides are
+ *   already unlayered either way — this only affects the shared core tokens initDialtoneTheme loads.
  *
  * @example
  * // Standard usage (non-Shadow DOM)
@@ -473,6 +478,10 @@ export function setMaterial (name, rootNode = document.documentElement) {
  * @example
  * // Explicit document.documentElement (optional but clear in config files)
  * initDialtoneTheme(Dp, 'light', document.documentElement);
+ *
+ * @example
+ * // No CSS Cascade Layers support
+ * initDialtoneTheme(Dp, 'light', document.documentElement, { layers: false });
  *
  * @example
  * // ❌ WRONG - In Web Components, forgetting rootNode causes styles to inject into document!
@@ -494,7 +503,9 @@ export function setMaterial (name, rootNode = document.documentElement) {
  *   }
  * }
  */
-export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = document.documentElement) {
+export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = document.documentElement, options = {}) {
+  const { layers = true } = options;
+  const resolvedCore = layers ? Core : CoreNoLayers;
   // Validation: brandTheme must be an object
   if (!brandTheme || typeof brandTheme !== 'object') {
     throw new TypeError(
@@ -580,11 +591,11 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
   }
 
   // Load core tokens (once per JavaScript instance)
-  _setStyleTag('dialtone-css-core', Core.core, styleRoot);
+  _setStyleTag('dialtone-css-core', resolvedCore.core, styleRoot);
   coreTokensLoaded = true;
 
   // Load base colors (once)
-  _setStyleTag('dialtone-css-base-colors', Core.baseColors, styleRoot);
+  _setStyleTag('dialtone-css-base-colors', resolvedCore.baseColors, styleRoot);
 
   // Set initial mode
   setMode(mode, rootNode);
