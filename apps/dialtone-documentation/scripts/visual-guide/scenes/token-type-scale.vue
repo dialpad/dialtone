@@ -2,7 +2,9 @@
   <!-- The type scale was rebuilt in Next: shared stops keep their names but
        change value (e.g. font-size-200, the body default, grows 15px → 16px;
        the largest stops shrink). Sizes are measured at runtime so each branch
-       labels its own real values. -->
+       labels its own real values. Only the stops both versions share are
+       shown (the Next scale adds intermediate stops with no "before"); the
+       caption says so in-image. -->
   <div class="vg-scene vg-scene--well" style="width:640px;">
     <p class="vg-heading">
       Type scale — token values
@@ -22,6 +24,9 @@
         <span class="vg-mono">{{ measured[stop] || '' }}</span>
       </div>
     </div>
+    <p class="vg-caption" style="margin-top:24px;">
+      stops shared by both versions; the new scale adds more
+    </p>
   </div>
 </template>
 

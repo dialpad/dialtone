@@ -29,6 +29,8 @@ The type scale was rebuilt. Default body text grows from 15px to 16px; this alon
   alt="Type scale specimen showing measured pixel sizes per token stop"
 />
 
+The specimen shows the five stops that exist on both versions and how each one moved. It is not the full Next scale: five intermediate stops (75, 125, 150, 250, 350) are new and have no "before" to compare against. The [font size reference](/utilities/typography/font-size.html) lists every stop.
+
 Expect: text wraps differently, rows get slightly taller, dense layouts breathe differently. This is correct. Flag text that becomes **clipped or truncated** because a fixed-height container didn't accommodate the new size.
 
 ### Neutrals are warm now
