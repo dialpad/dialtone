@@ -219,4 +219,17 @@
         }
     }
 }
+
+.d-link--unstyled {
+    /* stylelint-disable-next-line order/properties-order */
+    all: unset; // Must be first!
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+
+    &:focus-visible {
+        outline: none;
+        box-shadow: var(--dt-shadow-focus);
+    }
+}
 }

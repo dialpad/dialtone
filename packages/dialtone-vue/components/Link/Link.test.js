@@ -2,11 +2,13 @@ import { mount } from '@vue/test-utils';
 import DtLink from './Link.vue';
 import {
   LINK_KIND_MODIFIERS,
+  LINK_UNSTYLED_CLASS,
   LINK_VARIANTS,
+  UNSTYLED,
   getLinkKindModifier,
 } from './LinkConstants';
 
-const TONE_VALUES = LINK_VARIANTS.filter(v => v !== '');
+const TONE_VALUES = LINK_VARIANTS.filter(v => v !== '' && v !== UNSTYLED);
 
 const baseProps = {
   href: '#',
@@ -85,6 +87,39 @@ describe('DtLink tests', () => {
       updateWrapper();
 
       expect(nativeLink.classes(getLinkKindModifier(tone, true))).toBe(true);
+    });
+
+    describe('When unstyled', () => {
+      it('is a supported tone variant', () => {
+        expect(LINK_VARIANTS).toContain(UNSTYLED);
+      });
+
+      it('is not registered as a link kind modifier', () => {
+        expect(Object.keys(LINK_KIND_MODIFIERS)).not.toContain(UNSTYLED);
+      });
+
+      it.each(['tone', 'kind'])('renders only the unstyled class when %s is unstyled', (prop) => {
+        mockProps = {
+          [prop]: UNSTYLED,
+          inverted: true,
+          underline: false,
+        };
+
+        updateWrapper();
+
+        expect(nativeLink.classes()).toEqual([LINK_UNSTYLED_CLASS]);
+      });
+
+      it('keeps deprecated kind precedence when both kind and tone are provided', () => {
+        mockProps = {
+          kind: 'muted',
+          tone: UNSTYLED,
+        };
+
+        updateWrapper();
+
+        expect(nativeLink.classes()).toEqual(['d-link', LINK_KIND_MODIFIERS.muted]);
+      });
     });
 
     describe('When underline is false', () => {
@@ -225,6 +260,34 @@ describe('DtLink tests', () => {
         expect(routerLink.exists()).toBe(true);
         expect(wrapper.find('[data-qa="dt-link"]').classes()).toContain('d-link');
         expect(wrapper.find('[data-qa="dt-link"]').classes()).toContain(LINK_KIND_MODIFIERS.muted);
+      });
+
+      describe('When tone is unstyled', () => {
+        let routerLink;
+
+        beforeEach(() => {
+          mockProps = {
+            to: '/components/',
+            tone: UNSTYLED,
+            inverted: true,
+            underline: false,
+          };
+          mockGlobal = {
+            stubs: { RouterLink: RouterLinkStub },
+          };
+
+          updateWrapper();
+
+          routerLink = wrapper.findComponent(RouterLinkStub);
+        });
+
+        it('should render a router-link', () => {
+          expect(routerLink.exists()).toBe(true);
+        });
+
+        it('should apply only unstyled class to the router-link', () => {
+          expect(nativeLink.classes()).toEqual([LINK_UNSTYLED_CLASS]);
+        });
       });
     });
   });
