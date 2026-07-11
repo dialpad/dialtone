@@ -20,7 +20,7 @@ const VALID_MATERIALS_SET = new Set(VALID_MATERIALS);
 let coreTokensLoaded = false;
 
 // Track initialization state for idempotency protection
-// Stores: { brand: string, mode: string, contrast: string } or null
+// Stores: { brand: string, mode: string, contrast: string, material: string, layers: boolean } or null
 // Note: Only one rootNode per instance (per Brad's architecture)
 let initializationState = null;
 
@@ -191,6 +191,27 @@ function _setBrandLayered(theme, rootNode = document.documentElement) {
   if (theme.contrast) {
     _setStyleTag('dialtone-css-contrast', theme.contrast.css, styleRoot);
     rootNode?.setAttribute('data-dt-contrast', theme.contrast.name);
+  }
+}
+
+/**
+ * Load (or reload) the core token stylesheet for the given layers option.
+ * `_setStyleTag` upserts in place, so calling this again after initDialtoneTheme
+ * has already run just swaps the `#dialtone-css-core` tag's content — no DOM
+ * reordering, so it's safe to use both for the initial load and later reloads
+ * when a repeated initDialtoneTheme() call changes the layers option.
+ */
+function _loadCoreTokens (layers, styleRoot) {
+  if (layers) {
+    _setStyleTag('dialtone-css-core', Core.core, styleRoot);
+  } else {
+    // Reserve the tag's DOM position synchronously so the base-colors/brand
+    // tags appended below still land after it, then fill in its content once
+    // the dynamic import resolves.
+    _setStyleTag('dialtone-css-core', '', styleRoot);
+    import('@/themes/core-no-layers.js').then(({ default: CoreNoLayers }) => {
+      _setStyleTag('dialtone-css-core', CoreNoLayers.core, styleRoot);
+    });
   }
 }
 
@@ -577,11 +598,23 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
   const existing = initializationState;
   if (existing) {
     if (existing.brand === brandTheme.brand.name && existing.mode === mode) {
+      if (existing.layers === layers) {
+        console.warn(
+          `[Dialtone] Theme already initialized with brand '${brandTheme.brand.name}' and mode '${mode}'. ` +
+          'Re-applying the same theme may be unnecessary. ' +
+          'If you need to switch themes dynamically, use setBaseBrand() or setMode() instead of calling initDialtoneTheme() again.',
+        );
+        return;
+      }
+
+      // Brand/mode unchanged but layers flipped — swap the core stylesheet in
+      // place instead of silently ignoring the new layers value.
       console.warn(
-        `[Dialtone] Theme already initialized with brand '${brandTheme.brand.name}' and mode '${mode}'. ` +
-        'Re-applying the same theme may be unnecessary. ' +
-        'If you need to switch themes dynamically, use setBaseBrand() or setMode() instead of calling initDialtoneTheme() again.',
+        `[Dialtone] Theme already initialized with brand '${brandTheme.brand.name}' and mode '${mode}' ` +
+        `using layers=${existing.layers}. Reloading core tokens with layers=${layers}.`,
       );
+      _loadCoreTokens(layers, styleRoot);
+      initializationState.layers = layers;
       return;
     } else {
       console.warn(
@@ -595,17 +628,7 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
   }
 
   // Load core tokens (once per JavaScript instance)
-  if (layers) {
-    _setStyleTag('dialtone-css-core', Core.core, styleRoot);
-  } else {
-    // Reserve the tag's DOM position synchronously so the base-colors/brand
-    // tags appended below still land after it, then fill in its content once
-    // the dynamic import resolves.
-    _setStyleTag('dialtone-css-core', '', styleRoot);
-    import('@/themes/core-no-layers.js').then(({ default: CoreNoLayers }) => {
-      _setStyleTag('dialtone-css-core', CoreNoLayers.core, styleRoot);
-    });
-  }
+  _loadCoreTokens(layers, styleRoot);
   coreTokensLoaded = true;
 
   // Load base colors (once) — identical CSS whether layers is true or false
@@ -628,6 +651,7 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
     mode: mode,
     contrast: 'default',
     material: getBrandMaterial(brandTheme) ?? 'sandstone',
+    layers,
   };
 }
 

@@ -60,6 +60,30 @@ describe('themes/config.js', () => {
       });
     });
 
+    describe('When re-initialized with the same brand/mode but a different layers value', () => {
+      it('Should swap layers:false -> layers:true by reloading the layered core', async () => {
+        initDialtoneTheme(dpStub, 'light', root, { layers: false });
+        await vi.waitFor(() => {
+          expect(root.querySelector('#dialtone-css-core').innerHTML).toContain('--dt-no-layers-marker');
+        });
+
+        initDialtoneTheme(dpStub, 'light', root);
+
+        expect(root.querySelector('#dialtone-css-core').innerHTML).not.toContain('--dt-no-layers-marker');
+      });
+
+      it('Should swap layers:true -> layers:false by reloading the no-layers core', async () => {
+        initDialtoneTheme(dpStub, 'light', root);
+        expect(root.querySelector('#dialtone-css-core').innerHTML).not.toContain('--dt-no-layers-marker');
+
+        initDialtoneTheme(dpStub, 'light', root, { layers: false });
+
+        await vi.waitFor(() => {
+          expect(root.querySelector('#dialtone-css-core').innerHTML).toContain('--dt-no-layers-marker');
+        });
+      });
+    });
+
     describe('When the brand declares a material lock', () => {
       it.each([
         ['iron', melonStub],
