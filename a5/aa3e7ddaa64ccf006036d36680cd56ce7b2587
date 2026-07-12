@@ -1,0 +1,27 @@
+packages/dialtone-vue/components/ImageViewer/ImageViewer.vue
+  s_1b0723d23d701b::t_831f9a5852c9ea 184
+  s_1b0723d23d701b::t_f3f27408c9cbf9 21
+  s_1b0723d23d701b::t_7c0ae9ba2ce280 93
+packages/dialtone-vue/components/ImageViewer/ImageViewer.test.js
+  s_1b0723d23d701b::t_3c2946476f556e 2-3
+  s_1b0723d23d701b::t_52eb3052e64a39 54
+  s_1b0723d23d701b::t_e0d1c3d461a643 28,33
+  s_1b0723d23d701b::t_86bc6d32297b77 45
+  s_1b0723d23d701b::t_3f12b36de5ba77 100-116
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.5",
+  "base_commit_sha": "a5aa3e7ddaa64ccf006036d36680cd56ce7b2587",
+  "prompts": {},
+  "sessions": {
+    "s_1b0723d23d701b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9a319ef4-2b39-4342-8916-af92ca8f529a",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    }
+  }
+}
