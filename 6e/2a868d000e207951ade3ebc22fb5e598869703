@@ -1,13 +1,13 @@
 apps/dialtone-documentation/docs/guides/migration/modal-native-dialog/index.md
-  s_1b0723d23d701b::t_69b585de97f0fa 88
   s_1b0723d23d701b::t_269e265f501232 10
+  s_1b0723d23d701b::t_69b585de97f0fa 88
 packages/dialtone-vue/components/Modal/Modal.test.js
-  s_1b0723d23d701b::t_0abb0aa58b5f65 4
   s_1b0723d23d701b::t_aab868bbaf7816 217,229-242
+  s_1b0723d23d701b::t_0abb0aa58b5f65 4
 ---
 {
   "schema_version": "authorship/3.0.0",
-  "git_ai_version": "1.5.5",
+  "git_ai_version": "1.5.6",
   "base_commit_sha": "6e2a868d000e207951ade3ebc22fb5e598869703",
   "prompts": {},
   "sessions": {
