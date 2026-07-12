@@ -1,0 +1,27 @@
+packages/combinator/src/components/controls/control_selection.vue
+  s_c3b12373d86df3::t_5c73300c29a2a7 121-122,127-128
+  s_c3b12373d86df3::t_8163fa7e86f1d9 215-217,219,221,224
+  s_c3b12373d86df3::t_a8ccedfc0b4a00 129
+  s_c3b12373d86df3::t_3dcd040ad88ffc 57-58,60-66,68-73,75,106-115
+  s_c3b12373d86df3::t_0e64195b1895d3 202-214,218,220,222-223,225-239
+  s_c3b12373d86df3::t_09c4cb6d25ed4e 126
+  s_c3b12373d86df3::t_7df08ed36956d1 67
+  s_c3b12373d86df3::t_7671b74aaa8693 15
+  s_c3b12373d86df3::t_0b7b6ec0d1823c 240-257
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "89ed39fa713715d56f4c2199060c627f46e1d39b",
+  "prompts": {},
+  "sessions": {
+    "s_c3b12373d86df3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f1ddcc08-3576-4872-b773-84c8083715f1",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
