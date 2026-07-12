@@ -1,0 +1,28 @@
+packages/dialtone-icons/src/svg/icons/communication/hand.svg
+  h_845b3749ac4e31 1-2
+packages/dialtone-icons/src/keywords-icons.json
+  s_5fa4d462cbe520::t_c052771f8b7333 443-447
+packages/dialtone-icons/src/svg/icons/communication/hand-filled.svg
+  h_845b3749ac4e31 1-3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "f8855e1d5775bef9a80d027030de7b8624832144",
+  "prompts": {},
+  "humans": {
+    "h_845b3749ac4e31": {
+      "author": "Josh Everhart <josh.everhart@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_5fa4d462cbe520": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e9333-2cbd-75b2-93a9-d865fa438ec8",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Josh Everhart <josh.everhart@dialpad.com>"
+    }
+  }
+}
