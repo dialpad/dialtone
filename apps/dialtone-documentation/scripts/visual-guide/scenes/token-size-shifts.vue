@@ -8,7 +8,7 @@
        right-edge offset is the sanctioned shift. Captured after-only. -->
   <div
     class="vg-scene"
-    style="width:1180px;"
+    style="width:1320px;"
   >
     <p class="vg-heading">
       Size tokens — nearest-neighbor shifts (to scale)
@@ -65,5 +65,7 @@ const mappings = [
   { old: '975', new: '700', oldPx: 464, newPx: 448 },
   { old: '1020', new: '1000', oldPx: 628, newPx: 640 },
   { old: '1040', new: '1200', oldPx: 764, newPx: 768 },
+  { old: '1060', new: '1300', oldPx: 828, newPx: 832 },
+  { old: '1080', new: '1400', oldPx: 912, newPx: 896 },
 ];
 </script>
