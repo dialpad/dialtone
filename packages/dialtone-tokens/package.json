@@ -12,6 +12,7 @@
     "dist"
   ],
   "exports": {
+    "./no-layers/*.css": "./dist/css/no-layers/*.css",
     "./*.css": "./dist/css/*.css",
     "./*.less": "./dist/less/*.less",
     "./postcss/*": {
