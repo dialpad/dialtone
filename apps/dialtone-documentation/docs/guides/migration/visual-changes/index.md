@@ -261,17 +261,17 @@ Patterns from real migration QA (primarily the ubervoice migration, June–July 
 | What you see | Likely cause | What to do |
 | --- | --- | --- |
 | Spacing collapsed, elements misaligned, buttons invisible, raw class names visible in the UI, whole pages unstyled | CSS layering conflicts between Dialtone Next and app CSS, the dominant early-migration failure. Dialtone keeps cascade layers in its main build; apps whose own CSS conflicts with the layered cascade can load the `no-layers` CSS build instead (`@dialpad/dialtone-css/no-layers`) | If you see these symptoms, escalate in #dialtone-next immediately; don't spend time self-diagnosing |
-| Colors don't change when switching theme/mode; "material" setting does nothing | App-level theme tokens not yet migrated to the new theming API (e.g. DP-196839) | File under your team's migration epic, note which theme you switched from/to |
-| Dropdown/popover clipped behind a sidebar or panel | An ancestor gained an overflow-hidden utility; z-index can't save a popup once its container clips it (e.g. DP-197761) | File it with the exact page; note what the popup was anchored to |
-| Charts or embedded content render blank | Downstream code that can't parse OKLCH color values (e.g. DP-194053, analytics charts) | File it; this needs an engineering fix in the embedding code |
+| Colors don't change when switching theme/mode; "material" setting does nothing | App-level theme tokens not yet migrated to the new theming API | File under your team's migration epic, note which theme you switched from/to |
+| Dropdown/popover clipped behind a sidebar or panel | An ancestor gained an overflow-hidden utility; z-index can't save a popup once its container clips it | File it with the exact page; note what the popup was anchored to |
+| Charts or embedded content render blank | Downstream code that can't parse OKLCH color values (e.g. analytics charts) | File it; this needs an engineering fix in the embedding code |
 | Close buttons or icons **reappeared** on banners, chips, toasts; modals never open (or never close) | Un-migrated renamed props (`hide-close`→`show-close`, `show`→`open`, `title`→`header-text`); the old prop is silently ignored ([guide](/guides/migration/component-props/)) | File it; mention which element and what it should look like |
 | A row of buttons or a toolbar collapsed into a vertical stack | Flex-to-stack conversion missing its row direction; the new stack defaults to vertical ([guide](/guides/migration/flex-to-stack/)) | File it; quick, mechanical fix |
 | A destructive button or link lost its red and looks like a default one | Un-migrated severity word: `danger`/`error` were renamed to `critical`, and the old word no longer styles anything ([guide](/guides/migration/component-props/)) | File it; one-word fix |
 | An element lost its background/text color entirely, or a translucent tint disappeared | Reference to a removed color stop or removed per-channel color variable ([color stops](/guides/migration/color-stops/), [HSL to OKLCH](/guides/migration/hsl-to-oklch/)) | File it with a screenshot of the colorless element |
 | A scrollbar auto-hides where it used to stay visible | Un-migrated scrollbar setting ([guide](/guides/migration/scrollbar-always/)) | File it |
-| A button that was styled as borderless/custom now renders wrong | The old implementation "hacked" a component with utility classes; the migration surfaces the workaround (e.g. DP-194338) | File it; the fix is using the proper component API, not restoring the hack |
+| A button that was styled as borderless/custom now renders wrong | The old implementation "hacked" a component with utility classes; the migration surfaces the workaround | File it; the fix is using the proper component API, not restoring the hack |
 
-One more pattern: **half-expected, half-bug**. An intentional color shift can coexist with a real defect it exposed (e.g. a hover state that became unreadable after the token alignment, DP-194781). If part of a change matches this guide but something is broken (contrast, readability, overlap), file the broken part and reference the expected part.
+One more pattern: **half-expected, half-bug**. An intentional color shift can coexist with a real defect it exposed (e.g. a hover state that became unreadable after the token alignment). If part of a change matches this guide but something is broken (contrast, readability, overlap), file the broken part and reference the expected part.
 
 ## How to review and file
 
