@@ -200,10 +200,16 @@ function _setBrandLayered(theme, rootNode = document.documentElement) {
  * has already run just swaps the `#dialtone-css-core` tag's content — no DOM
  * reordering, so it's safe to use both for the initial load and later reloads
  * when a repeated initDialtoneTheme() call changes the layers option.
+ *
+ * Sets `coreTokensLoaded` only once the core CSS has actually been applied —
+ * synchronously for the layered core, or after the dynamic import resolves
+ * for the no-layers core — so a failed import doesn't falsely report core
+ * tokens as loaded.
  */
 function _loadCoreTokens (layers, styleRoot) {
   if (layers) {
     _setStyleTag('dialtone-css-core', Core.core, styleRoot);
+    coreTokensLoaded = true;
   } else {
     // Reserve the tag's DOM position synchronously so the base-colors/brand
     // tags appended below still land after it, then fill in its content once
@@ -211,6 +217,9 @@ function _loadCoreTokens (layers, styleRoot) {
     _setStyleTag('dialtone-css-core', '', styleRoot);
     import('@/themes/core-no-layers.js').then(({ default: CoreNoLayers }) => {
       _setStyleTag('dialtone-css-core', CoreNoLayers.core, styleRoot);
+      coreTokensLoaded = true;
+    }).catch((error) => {
+      console.error('[Dialtone] initDialtoneTheme: failed to load no-layers core tokens.', error);
     });
   }
 }
@@ -629,7 +638,6 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
 
   // Load core tokens (once per JavaScript instance)
   _loadCoreTokens(layers, styleRoot);
-  coreTokensLoaded = true;
 
   // Load base colors (once) — identical CSS whether layers is true or false
   // (tokens-base-colors.css was never wrapped in @layer), so no branching needed.
