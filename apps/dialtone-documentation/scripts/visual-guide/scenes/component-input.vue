@@ -35,14 +35,11 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { computed } from 'vue';
+import { useIsNext } from '../harness/use-is-next.js';
 
-const severeType = ref('error');
+// `error` → `critical` on Next.
+const isNext = useIsNext();
+const severeType = computed(() => (isNext.value ? 'critical' : 'error'));
 const severeLabel = computed(() => (severeType.value === 'error' ? 'Error' : 'Critical'));
-
-onMounted(() => {
-  // --dt-color-surface-overlay only exists on Next, where `error` → `critical`.
-  const probe = getComputedStyle(document.documentElement).getPropertyValue('--dt-color-surface-overlay');
-  if (probe && probe.trim()) severeType.value = 'critical';
-});
 </script>

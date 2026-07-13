@@ -36,21 +36,17 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { computed } from 'vue';
+import { useIsNext } from '../harness/use-is-next.js';
 
 // Each branch's canonical kind vocabulary.
 const BEFORE_KINDS = ['base', 'error', 'info', 'success', 'warning'];
 const AFTER_KINDS = ['base', 'critical', 'info', 'positive', 'warning'];
 
-const kinds = ref(BEFORE_KINDS);
+const isNext = useIsNext();
+const kinds = computed(() => (isNext.value ? AFTER_KINDS : BEFORE_KINDS));
 
 function capitalize (word) {
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
-
-onMounted(() => {
-  // --dt-color-surface-overlay only exists on Next.
-  const probe = getComputedStyle(document.documentElement).getPropertyValue('--dt-color-surface-overlay');
-  if (probe && probe.trim()) kinds.value = AFTER_KINDS;
-});
 </script>

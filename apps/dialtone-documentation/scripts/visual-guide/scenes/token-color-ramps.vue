@@ -36,7 +36,8 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { computed } from 'vue';
+import { useIsNext } from '../harness/use-is-next.js';
 
 // Canonical stop lists per branch, verified against each branch's token JSON.
 const STOPS_BEFORE = {
@@ -48,15 +49,10 @@ const STOPS_BEFORE = {
 };
 const STOPS_AFTER_UNIFORM = ['50', '100', '200', '300', '400', '500', '600', '700', '800', '900', '950', '1000'];
 
-const isNext = ref(false);
+// purple-950 only exists on the Next 12-stop scale.
+const isNext = useIsNext('--dt-color-purple-950');
 const ramps = computed(() => {
   if (!isNext.value) return STOPS_BEFORE;
   return Object.fromEntries(Object.keys(STOPS_BEFORE).map(f => [f, STOPS_AFTER_UNIFORM]));
-});
-
-onMounted(() => {
-  // purple-950 only exists on the Next 12-stop scale.
-  const probe = getComputedStyle(document.documentElement).getPropertyValue('--dt-color-purple-950');
-  isNext.value = Boolean(probe && probe.trim());
 });
 </script>

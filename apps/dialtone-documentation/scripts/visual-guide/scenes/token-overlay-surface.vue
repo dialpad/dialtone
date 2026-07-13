@@ -86,14 +86,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { useIsNext } from '../harness/use-is-next.js';
 
 // Staging has no overlay surface — its overlays used the nearest page
 // surface. The swatch caption must not imply the token existed there.
-const isNext = ref(false);
-
-onMounted(() => {
-  const probe = getComputedStyle(document.documentElement).getPropertyValue('--dt-color-surface-overlay');
-  isNext.value = Boolean(probe && probe.trim());
-});
+const isNext = useIsNext();
 </script>

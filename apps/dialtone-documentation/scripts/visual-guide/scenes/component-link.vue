@@ -45,15 +45,11 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { computed } from 'vue';
+import { useIsNext } from '../harness/use-is-next.js';
 
 // Staging has no `underline` prop — quiet links were authored with the
 // d-td-none utility class there.
-const quietClass = ref('d-td-none');
-
-onMounted(() => {
-  // --dt-color-surface-overlay only exists on Next.
-  const probe = getComputedStyle(document.documentElement).getPropertyValue('--dt-color-surface-overlay');
-  if (probe && probe.trim()) quietClass.value = '';
-});
+const isNext = useIsNext();
+const quietClass = computed(() => (isNext.value ? '' : 'd-td-none'));
 </script>

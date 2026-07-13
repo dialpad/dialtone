@@ -38,17 +38,13 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { computed } from 'vue';
+import { useIsNext } from '../harness/use-is-next.js';
 
 // Each branch's canonical severity vocabulary.
 const BEFORE_TYPES = ['error', 'warning', 'success'];
 const AFTER_TYPES = ['critical', 'warning', 'positive', 'info'];
 
-const types = ref(BEFORE_TYPES);
-
-onMounted(() => {
-  // --dt-color-surface-overlay only exists on Next.
-  const probe = getComputedStyle(document.documentElement).getPropertyValue('--dt-color-surface-overlay');
-  if (probe && probe.trim()) types.value = AFTER_TYPES;
-});
+const isNext = useIsNext();
+const types = computed(() => (isNext.value ? AFTER_TYPES : BEFORE_TYPES));
 </script>

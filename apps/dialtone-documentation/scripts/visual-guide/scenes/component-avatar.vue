@@ -84,15 +84,14 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { computed } from 'vue';
+import { useIsNext } from '../harness/use-is-next.js';
 
 // Two component rules explain the before side: tiny (xs) avatars never
 // render initials, and current Dialtone always draws group avatars tiny.
 // The caption explains it in-image, per branch, in plain language.
-const groupCaption = ref('groups always render tiny — too small for initials');
-
-onMounted(() => {
-  const probe = getComputedStyle(document.documentElement).getPropertyValue('--dt-color-surface-overlay');
-  if (probe && probe.trim()) groupCaption.value = 'groups render full size — initials show';
-});
+const isNext = useIsNext();
+const groupCaption = computed(() => (isNext.value
+  ? 'groups render full size — initials show'
+  : 'groups always render tiny — too small for initials'));
 </script>
