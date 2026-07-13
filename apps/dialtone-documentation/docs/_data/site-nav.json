@@ -232,6 +232,10 @@
                 "link": "/guides/migration/",
                 "children": [
                   {
+                    "text": "Visual Changes",
+                    "link": "/guides/migration/visual-changes/"
+                  },
+                  {
                     "text": "Border-Radius Logical Names",
                     "link": "/guides/migration/border-radius/"
                   },
