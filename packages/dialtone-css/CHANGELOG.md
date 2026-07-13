@@ -1,3 +1,18 @@
+# [8.81.0-next.5](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.81.0-next.4...dialtone-css/v8.81.0-next.5) (2026-07-13)
+
+
+### Bug Fixes
+
+* **Avatar:** DLT-3540 suppress bgc when image is present ([31cdd3c](https://github.com/dialpad/dialtone/commit/31cdd3c5e02262d58715fef0d926a63314d65037))
+
+
+### Features
+
+* **Box:** DLT-3523 add positioning props to DtBox ([#1355](https://github.com/dialpad/dialtone/issues/1355)) ([68a6570](https://github.com/dialpad/dialtone/commit/68a65701a8d3ae9c09341d0c80007b7fa8a69441))
+* DLT-3534 align size prop types across components and modal fullscreen ([#1362](https://github.com/dialpad/dialtone/issues/1362)) ([8fb88a1](https://github.com/dialpad/dialtone/commit/8fb88a19400f110e4b36fce8018b27b15bf05d1e))
+* **Link:** DLT-3529 add unstyled variant ([#1360](https://github.com/dialpad/dialtone/issues/1360)) ([b90c2cc](https://github.com/dialpad/dialtone/commit/b90c2ccdfdf014b3157c4f7e3b8b1c8bfe4f8738))
+* **Text List:** DLT-3530 add DtTextList component ([#1363](https://github.com/dialpad/dialtone/issues/1363)) ([9c9fc0d](https://github.com/dialpad/dialtone/commit/9c9fc0d57d6339075982cb6320827c5737fb0696))
+
 # [8.81.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.81.0-next.3...dialtone-css/v8.81.0-next.4) (2026-07-03)
 
 
