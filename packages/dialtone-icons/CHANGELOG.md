@@ -1,3 +1,10 @@
+# [4.55.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.55.0-next.2...dialtone-icons/v4.55.0-next.3) (2026-07-13)
+
+
+### Features
+
+* DLT-3534 align size prop types across components and modal fullscreen ([#1362](https://github.com/dialpad/dialtone/issues/1362)) ([8fb88a1](https://github.com/dialpad/dialtone/commit/8fb88a19400f110e4b36fce8018b27b15bf05d1e))
+
 # [4.55.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.55.0-next.1...dialtone-icons/v4.55.0-next.2) (2026-07-03)
 
 
