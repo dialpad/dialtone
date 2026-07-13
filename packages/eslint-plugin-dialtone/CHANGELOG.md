@@ -1,3 +1,10 @@
+# [1.14.0-next.4](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.14.0-next.3...eslint-plugin-dialtone/v1.14.0-next.4) (2026-07-13)
+
+
+### Features
+
+* **Text List:** DLT-3530 add DtTextList component ([#1363](https://github.com/dialpad/dialtone/issues/1363)) ([9c9fc0d](https://github.com/dialpad/dialtone/commit/9c9fc0d57d6339075982cb6320827c5737fb0696))
+
 # [1.14.0-next.3](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.14.0-next.2...eslint-plugin-dialtone/v1.14.0-next.3) (2026-07-03)
 
 

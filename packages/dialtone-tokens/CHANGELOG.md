@@ -1,3 +1,10 @@
+# [2.0.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.0-next.1...dialtone-tokens/v2.0.0-next.2) (2026-07-13)
+
+
+### Features
+
+* **Dialtone Tokens:** NO-JIRA add no-layers CSS build and initDialtoneTheme layers option ([#1364](https://github.com/dialpad/dialtone/issues/1364)) ([c2b6839](https://github.com/dialpad/dialtone/commit/c2b6839d8c7c14dfabdada747f1968ddbcee59a8))
+
 # [2.0.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.20...dialtone-tokens/v2.0.0-next.1) (2026-07-03)
 
 
