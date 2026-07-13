@@ -18,13 +18,19 @@
       style="display:inline-flex;align-items:center;gap:12px;
       border-block:1px dashed var(--dt-color-border-subtle);"
     >
-      <div style="width:190px;">
+      <div
+        data-vg-measure="input"
+        style="width:190px;"
+      >
         <dt-input
           model-value="Rosa Diaz"
           aria-label="Search people"
         />
       </div>
-      <div style="width:170px;">
+      <div
+        data-vg-measure="select"
+        style="width:170px;"
+      >
         <dt-select-menu
           model-value="all"
           aria-label="Filter by team"
@@ -40,7 +46,10 @@
           </option>
         </dt-select-menu>
       </div>
-      <dt-button importance="primary">
+      <dt-button
+        data-vg-measure="button"
+        importance="primary"
+      >
         Apply
       </dt-button>
     </div>
@@ -59,11 +68,11 @@ import { ref, onMounted } from 'vue';
 const measured = ref('');
 
 onMounted(() => {
-  // Measure the row's direct children (the rendered control boxes), not the
-  // native elements inside them — DtInput's visible box is its wrapper.
-  const names = ['input', 'select', 'button'];
-  const heights = [...document.querySelectorAll('#vg-align > *')]
-    .map((el, i) => `${names[i]} ${Math.round(el.getBoundingClientRect().height)}px`);
+  // Measure the rendered control boxes (not the native elements inside them —
+  // DtInput's visible box is its wrapper). Labels come from data attributes so
+  // reordering the row can't silently mislabel a measurement.
+  const heights = [...document.querySelectorAll('#vg-align [data-vg-measure]')]
+    .map((el) => `${el.dataset.vgMeasure} ${Math.round(el.getBoundingClientRect().height)}px`);
   measured.value = heights.join(' · ');
 });
 </script>

@@ -260,6 +260,7 @@ defineProps({
   mode: {
     type: String,
     required: true,
+    validator: (v) => ['toggle', 'side', 'split', 'onion'].includes(v),
   },
   shown: {
     type: String,

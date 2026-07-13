@@ -69,10 +69,17 @@
           border-radius:12px;
           background:var(--dt-color-surface-overlay, var(--dt-color-surface-secondary));"
         />
-        <p
-          class="vg-caption"
-          v-html="panelCaption"
-        />
+        <p class="vg-caption">
+          overlay panel<br>
+          <code
+            v-if="isNext"
+            style="font-size:10px;"
+          >surface-overlay (new)</code>
+          <code
+            v-else
+            style="font-size:10px;"
+          >surface-secondary (no overlay surface yet)</code>
+        </p>
       </div>
     </div>
   </div>
@@ -83,12 +90,10 @@ import { ref, onMounted } from 'vue';
 
 // Staging has no overlay surface — its overlays used the nearest page
 // surface. The swatch caption must not imply the token existed there.
-const panelCaption = ref('overlay panel<br><code style="font-size:10px;">surface-secondary (no overlay surface yet)</code>');
+const isNext = ref(false);
 
 onMounted(() => {
   const probe = getComputedStyle(document.documentElement).getPropertyValue('--dt-color-surface-overlay');
-  if (probe && probe.trim()) {
-    panelCaption.value = 'overlay panel<br><code style="font-size:10px;">surface-overlay (new)</code>';
-  }
+  isNext.value = Boolean(probe && probe.trim());
 });
 </script>

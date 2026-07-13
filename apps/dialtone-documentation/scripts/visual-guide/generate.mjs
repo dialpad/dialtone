@@ -199,8 +199,14 @@ async function main () {
 
     const beforeRoot = typeof argMap['before-root'] === 'string' ? argMap['before-root'] : null;
     if (beforeRoot) {
-      if (!existsSync(resolve(beforeRoot, 'packages/dialtone-css/lib/dist/dialtone.min.css'))) {
-        console.error(`[visual-guide] no built dialtone-css in --before-root=${beforeRoot} — build it first (see README).`);
+      const required = [
+        'packages/dialtone-css/lib/dist/dialtone.min.css',
+        // The staging harness themes via static token CSS (no theme JS there).
+        'packages/dialtone-tokens/dist/css/tokens-dp-light.css',
+      ];
+      const missing = required.filter(p => !existsSync(resolve(beforeRoot, p)));
+      if (missing.length) {
+        console.error(`[visual-guide] missing in --before-root=${beforeRoot}: ${missing.join(', ')} — build dialtone-tokens/css/vue first (see README).`);
         process.exitCode = 1;
       } else {
         const beforeHarness = syncIntoWorktree(beforeRoot);
