@@ -873,6 +873,9 @@ export default {
         this.allowBackgroundColor ||
         this.allowLineHeight) {
         extensions.push(TextStyleKit.configure({
+          // CustomTextStyle below provides the `textStyle` mark, so disable the
+          // kit's own copy to avoid a duplicate extension name.
+          textStyle: false,
           color: this.allowFontColor,
           backgroundColor: this.allowBackgroundColor,
           fontFamily: this.allowFontFamily,

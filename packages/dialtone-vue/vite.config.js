@@ -88,9 +88,11 @@ export default defineConfig({
         'localization/de-DE': './localization/de-DE.ftl?raw',
         'localization/it-IT': './localization/it-IT.ftl?raw',
         'localization/ja-JP': './localization/ja-JP.ftl?raw',
+        'localization/ko-KR': './localization/ko-KR.ftl?raw',
         'localization/pt-BR': './localization/pt-BR.ftl?raw',
         'localization/ru-RU': './localization/ru-RU.ftl?raw',
         'localization/es-LA': './localization/es-LA.ftl?raw',
+        'localization/sv-SE': './localization/sv-SE.ftl?raw',
       },
       formats: ['es', 'cjs'],
     },
@@ -107,7 +109,7 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './tests/setupTests.js',
     exclude: ['common/custom-emoji.test.js'],
-    include: ['./{common,components,directives,recipes}/**/*.test.js'],
+    include: ['./{common,components,directives,recipes,localization}/**/*.test.js'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html', 'json'],
@@ -117,6 +119,7 @@ export default defineConfig({
         'common/**/*.{js,vue}',
         'directives/**/*.{js,vue}',
         'recipes/**/*.{js,vue}',
+        'localization/**/*.{js,vue}',
       ],
       exclude: [
         '**/*.test.js',

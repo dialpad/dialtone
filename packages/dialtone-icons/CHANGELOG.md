@@ -1,3 +1,11 @@
+# [4.55.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.54.0...dialtone-icons/v4.55.0) (2026-07-07)
+
+
+### Features
+
+* **Icons:** DP-192348 add compass icons ([#1354](https://github.com/dialpad/dialtone/issues/1354)) ([92a547a](https://github.com/dialpad/dialtone/commit/92a547a569277bb1863c80be3238a6944a33cc70))
+
+
 # [4.55.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.55.0-next.2...dialtone-icons/v4.55.0-next.3) (2026-07-13)
 
 
@@ -29,6 +37,7 @@
 
 * **Dialtone Icons:** NO-JIRA add /vue export to dialtone-icon ([#1304](https://github.com/dialpad/dialtone/issues/1304)) ([081b0e9](https://github.com/dialpad/dialtone/commit/081b0e95293d7450f1cff21b285b504d95d52689))
 
+
 # [4.54.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.53.0...dialtone-icons/v4.54.0) (2026-06-08)
 
 
@@ -36,21 +45,6 @@
 
 * **Icons:** DLT-3460 DLT-3461 hand icon update ([#1315](https://github.com/dialpad/dialtone/issues/1315)) ([83ad138](https://github.com/dialpad/dialtone/commit/83ad138665f38e06411fce9ee27585fceb677a2b))
 * **Icons:** DP-192459 add circle and circle-dashed icons ([#1305](https://github.com/dialpad/dialtone/issues/1305)) ([8c41212](https://github.com/dialpad/dialtone/commit/8c41212d49dc1bc7fba2cfc51ffc01ab3896b619))
-
-
-# [4.54.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.53.0...dialtone-icons/v4.54.0-next.1) (2026-06-04)
-
-
-### Documentation
-
-* DLT-1510 DLT-1511 DLT-1512 site redesign and ia ([#968](https://github.com/dialpad/dialtone/issues/968)) ([6ea7eb9](https://github.com/dialpad/dialtone/commit/6ea7eb959f01bfb01c91c3b6a92465ed0c2e0f4b))
-
-
-### Features
-
-* **Dialtone Icons:** NO-JIRA add /vue export to dialtone-icon ([#1304](https://github.com/dialpad/dialtone/issues/1304)) ([081b0e9](https://github.com/dialpad/dialtone/commit/081b0e95293d7450f1cff21b285b504d95d52689))
-* **Icons:** DP-192459 add circle and circle-dashed icons ([#1305](https://github.com/dialpad/dialtone/issues/1305)) ([8c41212](https://github.com/dialpad/dialtone/commit/8c41212d49dc1bc7fba2cfc51ffc01ab3896b619))
-
 
 # [4.53.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.52.0...dialtone-icons/v4.53.0) (2026-06-02)
 

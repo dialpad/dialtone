@@ -51,6 +51,7 @@ export const getPopperOptions = ({
         options: {
           altAxis: !tether,
           tether,
+          boundary,
         },
       },
     ],

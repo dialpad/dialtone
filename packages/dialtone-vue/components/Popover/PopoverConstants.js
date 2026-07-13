@@ -13,6 +13,7 @@ export const POPOVER_HEADER_FOOTER_PADDING_CLASSES = {
   large: 'd-pis-200',
 };
 export const POPOVER_ROLES = ['dialog', 'menu', 'listbox', 'tree', 'grid'];
+export const POPOVER_BOUNDARY_VALUES = ['clippingParents', 'viewport', 'document'];
 export const POPOVER_CONTENT_WIDTHS = ['', 'anchor'];
 export const POPOVER_INITIAL_FOCUS_STRINGS = ['none', 'dialog', 'first'];
 export const POPOVER_APPEND_TO_VALUES = ['parent', 'body', 'root'];
@@ -27,6 +28,7 @@ export default {
   POPOVER_PADDING_CLASSES,
   POPOVER_HEADER_FOOTER_PADDING_CLASSES,
   POPOVER_ROLES,
+  POPOVER_BOUNDARY_VALUES,
   POPOVER_CONTENT_WIDTHS,
   POPOVER_INITIAL_FOCUS_STRINGS,
   POPOVER_APPEND_TO_VALUES,

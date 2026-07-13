@@ -7,9 +7,11 @@ import frFR from './fr-FR.ftl?raw';
 import deDE from './de-DE.ftl?raw';
 import itIT from './it-IT.ftl?raw';
 import jaJP from './ja-JP.ftl?raw';
+import koKR from './ko-KR.ftl?raw';
 import ptBR from './pt-BR.ftl?raw';
 import ruRU from './ru-RU.ftl?raw';
 import esLA from './es-LA.ftl?raw';
+import svSE from './sv-SE.ftl?raw';
 
 const dialtoneNamespace = 'dialtone';
 const allowedLocales = {
@@ -20,9 +22,11 @@ const allowedLocales = {
   GERMAN: 'de-DE',
   ITALIAN: 'it-IT',
   JAPANESE: 'ja-JP',
+  KOREAN: 'ko-KR',
   PORTUGUESE: 'pt-BR',
   RUSSIAN: 'ru-RU',
   SPANISH: 'es-LA',
+  SWEDISH: 'sv-SE',
 };
 const fallbackLocale = 'en-US';
 /**
@@ -56,9 +60,11 @@ export class DialtoneLocalization {
         ['de-DE', dialtoneNamespace, deDE],
         ['it-IT', dialtoneNamespace, itIT],
         ['ja-JP', dialtoneNamespace, jaJP],
+        ['ko-KR', dialtoneNamespace, koKR],
         ['pt-BR', dialtoneNamespace, ptBR],
         ['ru-RU', dialtoneNamespace, ruRU],
         ['es-LA', dialtoneNamespace, esLA],
+        ['sv-SE', dialtoneNamespace, svSE],
       ]),
     });
 
@@ -101,7 +107,13 @@ export class DialtoneLocalization {
       return fallbackLocale;
     }
 
-    const localStorageLanguage = window.localStorage.getItem(localeManagerStorageKey);
+    // Only trust the stored locale if it's one Dialtone actually ships a bundle for.
+    // Callers (e.g. UC/UV) may allow locales Dialtone doesn't support, which would
+    // otherwise crash the LocaleManager during render.
+    const storedLanguage = window.localStorage.getItem(localeManagerStorageKey);
+    const localStorageLanguage = Object.values(allowedLocales).includes(storedLanguage)
+      ? storedLanguage
+      : null;
 
     // Get the first two letters of the navigator language and check if it's in the allowed locales
     const navigatorLanguage = Object.values(allowedLocales)
