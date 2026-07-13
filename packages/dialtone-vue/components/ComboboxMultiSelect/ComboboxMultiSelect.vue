@@ -133,7 +133,7 @@ import DtComboboxWithPopover from '@/components/ComboboxWithPopover/ComboboxWith
 import DtInput from '@/components/Input/Input.vue';
 import DtChip from '@/components/Chip/Chip.vue';
 import DtValidationMessages from '@/components/ValidationMessages/ValidationMessages.vue';
-import { validationMessageValidator } from '@/common/validators';
+import { validationMessageValidator, ordinalSizeValidator } from '@/common/validators';
 import { extractVueListeners, extractNonListeners, hasSlotContent, returnFirstEl, getUniqueString, getValidationState } from '@/common/utils';
 import { HTML_ELEMENT_TYPE } from '@/common/constants';
 import {
@@ -294,7 +294,7 @@ export default {
     size: {
       type: [String, Number],
       default: 300,
-      validator: (t) => Object.keys(CHIP_SIZES).includes(String(t)),
+      validator: ordinalSizeValidator(CHIP_SIZES),
     },
 
     /**

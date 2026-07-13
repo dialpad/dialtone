@@ -34,6 +34,7 @@
 <script>
 import { getUniqueString, hasSlotContent, removeClassStyleAttrs } from '@/common/utils';
 import { TOGGLE_CHECKED_VALUES, TOGGLE_SIZE_MODIFIERS } from '@/components/Toggle/ToggleConstants';
+import { ordinalSizeValidator } from '@/common/validators';
 
 /**
  * A toggle (or "switch") is a button control element that allows the user to make a binary (on/off) selection.
@@ -91,7 +92,7 @@ export default {
     size: {
       type: [String, Number],
       default: 300,
-      validator: (s) => Object.keys(TOGGLE_SIZE_MODIFIERS).includes(String(s)),
+      validator: ordinalSizeValidator(TOGGLE_SIZE_MODIFIERS),
     },
 
     /**

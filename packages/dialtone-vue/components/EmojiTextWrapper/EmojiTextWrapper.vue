@@ -3,6 +3,7 @@ import { DtEmoji } from '../Emoji';
 import { findEmojis, findShortCodes } from '@/common/emoji';
 import { h, resolveDynamicComponent } from 'vue';
 import { ICON_SIZE_MODIFIERS } from '@/components/Icon/IconConstants';
+import { ordinalSizeValidator } from '@/common/validators';
 
 const COMMENT_TYPE = h(resolveDynamicComponent(null)).type;
 
@@ -31,9 +32,9 @@ export default {
      * @values 100, 200, 300, 400, 500, 600, 700, 800
      */
     size: {
-      type: String,
-      default: '500',
-      validator: (t) => Object.keys(ICON_SIZE_MODIFIERS).includes(t),
+      type: [String, Number],
+      default: 500,
+      validator: ordinalSizeValidator(ICON_SIZE_MODIFIERS),
     },
   },
 

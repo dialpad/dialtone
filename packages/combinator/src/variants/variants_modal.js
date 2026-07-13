@@ -29,4 +29,17 @@ export default {
       },
     },
   },
+  fullscreen: {
+    props: {
+      headerText: {
+        initialValue: 'Example title',
+      },
+      copy: {
+        initialValue: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+      },
+      fullscreen: {
+        initialValue: true,
+      },
+    },
+  },
 };

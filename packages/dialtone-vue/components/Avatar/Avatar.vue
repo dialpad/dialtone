@@ -82,6 +82,7 @@
 
 <script>
 import { getUniqueString, hasSlotContent } from '@/common/utils';
+import { ordinalSizeValidator } from '@/common/validators';
 import { DtPresence } from '../Presence';
 import {
   AVATAR_KIND_MODIFIERS,
@@ -173,7 +174,7 @@ export default {
     size: {
       type: [String, Number],
       default: 300,
-      validator: (size) => Object.keys(AVATAR_SIZE_MODIFIERS).includes(String(size)),
+      validator: ordinalSizeValidator(AVATAR_SIZE_MODIFIERS),
     },
 
     /**

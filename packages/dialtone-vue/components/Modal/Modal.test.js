@@ -118,6 +118,24 @@ describe('DtModal Tests', () => {
       expect(overlay.element.showModal).toHaveBeenCalled();
     });
 
+    describe('When fullscreen prop is true', () => {
+      beforeEach(async () => {
+        mockProps = { ...mockProps, fullscreen: true };
+
+        updateWrapper();
+      });
+
+      it('Should apply the fullscreen modifier class', () => {
+        expect(overlay.classes('d-modal--full')).toBe(true);
+      });
+    });
+
+    describe('When fullscreen prop is false', () => {
+      it('Should NOT apply the fullscreen modifier class', () => {
+        expect(overlay.classes('d-modal--full')).toBe(false);
+      });
+    });
+
     describe('When showClose prop is false', () => {
       beforeEach(async () => {
         mockProps = { ...mockProps, showClose: false };

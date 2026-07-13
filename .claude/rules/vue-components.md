@@ -38,7 +38,7 @@ paths:
 - T-shirt aliases (`xs`, `sm`, `md`, `lg`, `xl`) remain in constants for backward compat but are deprecated.
 - `@values` JSDoc: list numeric only (e.g., `@values 100, 200, 300, 400, 500`). Do not list t-shirt aliases.
 - Text headline extends the scale: `500` (xl), `600` (2xl), `700` (3xl).
-- Icons: separate numeric scale `100`–`800` (unchanged, do not modify).
+- Icons: separate numeric scale `100`–`800`, distinct from the `100`-`500` component scale (do not remap icon values onto the component scale). Icon-family `size` props (`Icon`, `Loader`, `Emoji`, `EmojiTextWrapper`, `ProgressCircle`, `ToastLayoutAlternateIcon`) still use `[String, Number]`.
 - Shared scale definition: `packages/dialtone-vue/common/constants/sizes.js`.
 - Export from `*_constants.js`: `COMPONENT_SIZE_MODIFIERS` object with both numeric and t-shirt keys.
 

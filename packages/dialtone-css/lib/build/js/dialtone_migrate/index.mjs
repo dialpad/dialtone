@@ -190,6 +190,18 @@ const MIGRATIONS = [
     ],
     fileExtensions: ['.vue', '.html'],
   },
+  {
+    id: 'modal-fullscreen',
+    name: 'DtModal size → fullscreen',
+    description: 'DtModal size prop (default/full) removed. Use the fullscreen boolean instead.',
+    category: 'required',
+    type: 'standalone',
+    scriptDir: 'dialtone_migrate_tshirt_to_numeric',
+    detectPatterns: [
+      /<(?:dt-modal|DtModal)(?![\w-])[^>]*\bsize="(?:full|default)"/,
+    ],
+    fileExtensions: ['.vue', '.html', '.md'],
+  },
 
   // ── Opt-in (deprecation, best practices) ──────────────────────────
   {

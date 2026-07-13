@@ -20,7 +20,7 @@ keywords:
     logical-props,
   ]
 ai_summary: Cross-component API contract for Dialtone Vue components — standard props, events, slots, and patterns shared by all components.
-last_updated: 2026-07-03
+last_updated: 2026-07-09
 related_packages: [dialtone-vue]
 ---
 
@@ -55,7 +55,7 @@ Most sizable components accept a `size` prop with values: `xs`, `sm`, `md`, `lg`
 
 Exceptions exist:
 
-- DtModal uses `default` and `full`.
+- DtModal has no `size` prop. Use the `fullscreen` boolean instead (`fullscreen: true` for a fullscreen modal, `false` for the default size).
 - DtText uses numeric font-size token stops for raw font-size control when paired with `variant`: `50`, `75`, `100`, `125`, `150`, `200`, `250`, `300`, `350`, `400`, `450`, `500`, `550`, `600`, `650`, `700`, `750`, `800`.
 
 DtText `size` must be paired with `variant`, or with legacy `kind` while older code migrates. DtText also keeps legacy `kind + size` composition behavior for backward compatibility when `variant` is not set.

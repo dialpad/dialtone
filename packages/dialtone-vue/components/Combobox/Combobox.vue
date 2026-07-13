@@ -55,6 +55,7 @@ import { DtKeyboardListNavigationMixin } from '@/common/mixins';
 import { getUniqueString, hasSlotContent } from '@/common/utils';
 import { COMBOBOX_LABEL_SIZES } from '@/components/Combobox';
 import { COMPONENT_SIZES } from '@/common/constants';
+import { ordinalSizeValidator } from '@/common/validators';
 
 /**
  * A combobox is a semantic component that displays an input element combined with a listbox,
@@ -108,7 +109,7 @@ export default {
       default: null,
       validator: (t) => t === null
         || Object.values(COMBOBOX_LABEL_SIZES).includes(t)
-        || Object.keys(COMPONENT_SIZES).includes(String(t)),
+        || ordinalSizeValidator(COMPONENT_SIZES)(t),
     },
 
     /**

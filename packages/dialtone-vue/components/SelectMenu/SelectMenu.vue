@@ -89,6 +89,7 @@
 
 <script>
 import { warn } from 'vue';
+import { ordinalSizeValidator } from '@/common/validators';
 import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/Text';
 import {
   SELECT_SIZE_MODIFIERS,
@@ -169,7 +170,7 @@ export default {
     size: {
       type: [String, Number],
       default: 300,
-      validator: (s) => Object.keys(SELECT_SIZE_MODIFIERS).includes(String(s)),
+      validator: ordinalSizeValidator(SELECT_SIZE_MODIFIERS),
     },
 
     /**

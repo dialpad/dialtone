@@ -54,6 +54,7 @@ import {
 } from './TabsConstants';
 import { ref } from 'vue';
 import { useIndicatorAnimation } from '@/common/composables/useIndicatorAnimation';
+import { ordinalSizeValidator } from '@/common/validators';
 
 /**
  * Tabs allow users to navigation between grouped content in different views while within the same page context.
@@ -145,9 +146,7 @@ export default {
     size: {
       type: [String, Number],
       default: 300,
-      validator (size) {
-        return TAB_LIST_SIZES.includes(String(size));
-      },
+      validator: ordinalSizeValidator(TAB_LIST_SIZES),
     },
 
     /**

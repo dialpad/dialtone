@@ -153,6 +153,7 @@ import SplitButtonStart from './SplitButtonStart.vue';
 import SplitButtonEnd from './SplitButtonEnd.vue';
 import { DtDropdown } from '@/components/Dropdown';
 import { hasSlotContent, warnIfUnmounted, returnFirstEl } from '@/common/utils';
+import { ordinalSizeValidator } from '@/common/validators';
 
 export default {
   name: 'DtSplitButton',
@@ -473,7 +474,7 @@ export default {
     size: {
       type: [String, Number],
       default: 300,
-      validator: (s) => Object.keys(BUTTON_SIZE_MODIFIERS).includes(String(s)),
+      validator: ordinalSizeValidator(BUTTON_SIZE_MODIFIERS),
     },
 
     /**

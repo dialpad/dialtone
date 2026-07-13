@@ -158,9 +158,12 @@ import {
   hasSlotContent,
   removeClassStyleAttrs,
 } from '@/common/utils';
+import { ordinalSizeValidator } from '@/common/validators';
 import { DtValidationMessages } from '@/components/ValidationMessages';
 import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/Text';
 import { MessagesMixin } from '@/common/mixins/input';
+
+const isValidInputSize = ordinalSizeValidator(INPUT_ICON_SIZES);
 
 /**
  * An input field is an input control that allows users to enter alphanumeric information.
@@ -257,7 +260,7 @@ export default {
     size: {
       type: [String, Number],
       default: 300,
-      validator: (t) => Object.keys(INPUT_ICON_SIZES).includes(String(t)),
+      validator: isValidInputSize,
     },
 
     /**
@@ -455,7 +458,7 @@ export default {
     },
 
     isValidSize () {
-      return Object.keys(INPUT_ICON_SIZES).includes(String(this.size));
+      return isValidInputSize(this.size);
     },
 
     isValidDescriptionSize () {

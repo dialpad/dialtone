@@ -21,6 +21,7 @@ import { ref, computed, reactive, watchEffect, watch, provide, onMounted, nextTi
 import { getUniqueString } from '@/common/utils';
 import { DtStack } from '@/components/Stack';
 import { useIndicatorAnimation } from '@/common/composables/useIndicatorAnimation';
+import { ordinalSizeValidator } from '@/common/validators';
 import {
   SEGMENTED_CONTROL_SIZES,
   SEGMENTED_CONTROL_SIZE_DEFAULT,
@@ -84,7 +85,7 @@ const props = defineProps({
   size: {
     type: [String, Number],
     default: SEGMENTED_CONTROL_SIZE_DEFAULT,
-    validator: (v) => SEGMENTED_CONTROL_SIZES.includes(String(v)),
+    validator: ordinalSizeValidator(SEGMENTED_CONTROL_SIZES),
   },
 
   /**
