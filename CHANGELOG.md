@@ -1,3 +1,26 @@
+# [10.0.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.1...dialtone/v10.0.0-next.2) (2026-07-13)
+
+
+### Bug Fixes
+
+* **Avatar:** DLT-3540 suppress bgc when image is present ([31cdd3c](https://github.com/dialpad/dialtone/commit/31cdd3c5e02262d58715fef0d926a63314d65037))
+* **Dialtone Tokens:** NO-JIRA publish swift prerelease tokens to main instead of a separate branch ([8d9f690](https://github.com/dialpad/dialtone/commit/8d9f690556f1555e40bf405cc0a5f73a13ba1d24))
+
+
+### Documentation
+
+* **Combinator:** DLT-3146 add docs and component variants guidance ([#1344](https://github.com/dialpad/dialtone/issues/1344)) ([42825ec](https://github.com/dialpad/dialtone/commit/42825ec87957cacbd7e73a620bf268503d0f46a3))
+* **Migration Guide:** DLT-3469 visual migration guide ([#1358](https://github.com/dialpad/dialtone/issues/1358)) ([cc3a6b5](https://github.com/dialpad/dialtone/commit/cc3a6b5d95922dfcac1c26b34ca5166d52945e64))
+
+
+### Features
+
+* **Box:** DLT-3523 add positioning props to DtBox ([#1355](https://github.com/dialpad/dialtone/issues/1355)) ([68a6570](https://github.com/dialpad/dialtone/commit/68a65701a8d3ae9c09341d0c80007b7fa8a69441))
+* **Dialtone Tokens:** NO-JIRA add no-layers CSS build and initDialtoneTheme layers option ([#1364](https://github.com/dialpad/dialtone/issues/1364)) ([c2b6839](https://github.com/dialpad/dialtone/commit/c2b6839d8c7c14dfabdada747f1968ddbcee59a8))
+* DLT-3534 align size prop types across components and modal fullscreen ([#1362](https://github.com/dialpad/dialtone/issues/1362)) ([8fb88a1](https://github.com/dialpad/dialtone/commit/8fb88a19400f110e4b36fce8018b27b15bf05d1e))
+* **Link:** DLT-3529 add unstyled variant ([#1360](https://github.com/dialpad/dialtone/issues/1360)) ([b90c2cc](https://github.com/dialpad/dialtone/commit/b90c2ccdfdf014b3157c4f7e3b8b1c8bfe4f8738))
+* **Text List:** DLT-3530 add DtTextList component ([#1363](https://github.com/dialpad/dialtone/issues/1363)) ([9c9fc0d](https://github.com/dialpad/dialtone/commit/9c9fc0d57d6339075982cb6320827c5737fb0696))
+
 # [10.0.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.188.0-next.4...dialtone/v10.0.0-next.1) (2026-07-03)
 
 
