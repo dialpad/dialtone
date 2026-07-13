@@ -82,6 +82,21 @@ describe('themes/config.js', () => {
           expect(root.querySelector('#dialtone-css-core').innerHTML).toContain('--dt-no-layers-marker');
         });
       });
+
+      it('Should not let a superseded no-layers import clobber a later layers:true call', async () => {
+        // Fire the no-layers import, then immediately supersede it before it
+        // resolves — the stale resolution must not overwrite the layered core.
+        initDialtoneTheme(dpStub, 'light', root, { layers: false });
+        initDialtoneTheme(dpStub, 'light', root);
+
+        expect(root.querySelector('#dialtone-css-core').innerHTML).not.toContain('--dt-no-layers-marker');
+
+        // Give the superseded import time to settle — if it were going to
+        // (wrongly) apply, it would have by now.
+        await new Promise((resolve) => setTimeout(resolve, 50));
+
+        expect(root.querySelector('#dialtone-css-core').innerHTML).not.toContain('--dt-no-layers-marker');
+      });
     });
 
     describe('When the brand declares a material lock', () => {

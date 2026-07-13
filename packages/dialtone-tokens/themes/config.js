@@ -19,6 +19,12 @@ const VALID_MATERIALS_SET = new Set(VALID_MATERIALS);
 // config.js instance, so this boolean only tracks state within a single app.
 let coreTokensLoaded = false;
 
+// Bumped on every _loadCoreTokens()/resetBrand() call. The no-layers dynamic
+// import captures the generation at call time and checks it before applying
+// its result, so a superseded in-flight import (e.g. layers:false immediately
+// followed by layers:true, or a reset) can't clobber newer core CSS.
+let coreLoadGeneration = 0;
+
 // Track initialization state for idempotency protection
 // Stores: { brand: string, mode: string, contrast: string, material: string, layers: boolean } or null
 // Note: Only one rootNode per instance (per Brad's architecture)
@@ -205,8 +211,13 @@ function _setBrandLayered(theme, rootNode = document.documentElement) {
  * synchronously for the layered core, or after the dynamic import resolves
  * for the no-layers core — so a failed import doesn't falsely report core
  * tokens as loaded.
+ *
+ * Also guards against a stale in-flight no-layers import: if this function
+ * (or resetBrand) runs again before that import resolves, the earlier
+ * generation is discarded instead of clobbering newer core CSS.
  */
 function _loadCoreTokens (layers, styleRoot) {
+  const generation = ++coreLoadGeneration;
   if (layers) {
     _setStyleTag('dialtone-css-core', Core.core, styleRoot);
     coreTokensLoaded = true;
@@ -216,9 +227,11 @@ function _loadCoreTokens (layers, styleRoot) {
     // the dynamic import resolves.
     _setStyleTag('dialtone-css-core', '', styleRoot);
     import('@/themes/core-no-layers.js').then(({ default: CoreNoLayers }) => {
+      if (generation !== coreLoadGeneration) return; // superseded — discard
       _setStyleTag('dialtone-css-core', CoreNoLayers.core, styleRoot);
       coreTokensLoaded = true;
     }).catch((error) => {
+      if (generation !== coreLoadGeneration) return; // superseded — discard
       console.error('[Dialtone] initDialtoneTheme: failed to load no-layers core tokens.', error);
     });
   }
@@ -722,6 +735,9 @@ export function resetBrand(rootNode = document.documentElement) {
   // Clear initialization state (only one instance per app)
   initializationState = null;
   coreTokensLoaded = false;
+  // Invalidate any in-flight no-layers core import so its stale resolution
+  // can't recreate the #dialtone-css-core tag we're about to remove.
+  coreLoadGeneration++;
 
   // Remove all theme style tags. Material no longer injects a style tag
   // (attribute-driven), but resetBrand should still scrub any pre-existing
