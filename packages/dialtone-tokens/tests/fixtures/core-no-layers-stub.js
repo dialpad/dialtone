@@ -4,5 +4,5 @@
 // initDialtoneTheme({ layers: false }) is wired to this file and not the layered core.
 export default {
   core: ':root { --dt-no-layers-marker: 1; }',
-  baseColors: ':root {}',
+  baseColors: ':root { --dt-no-layers-base-marker: 1; }',
 };
