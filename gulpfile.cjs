@@ -38,12 +38,14 @@ const paths = {
       '!./packages/dialtone-tokens/dist/ios/**',
     ],
     vue3: './packages/dialtone-vue/dist/**',
+    entry: './entry/**',
   },
   output: {
     css: './dist/css',
     js: './dist/js',
     tokens: './dist/tokens',
     vue3: './dist/vue3',
+    entry: './dist',
   },
 };
 

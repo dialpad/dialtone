@@ -19,13 +19,17 @@
         "{workspaceRoot}/packages/dialtone-css/dist",
         "{workspaceRoot}/packages/dialtone-tokens/dist",
         "{workspaceRoot}/packages/dialtone-vue/dist",
+        "{workspaceRoot}/entry",
         "{workspaceRoot}/gulpfile.cjs"
       ],
       "outputs": [
         "{workspaceRoot}/dist/css",
         "{workspaceRoot}/dist/js",
         "{workspaceRoot}/dist/tokens",
-        "{workspaceRoot}/dist/vue3"
+        "{workspaceRoot}/dist/vue3",
+        "{workspaceRoot}/dist/index.mjs",
+        "{workspaceRoot}/dist/index.cjs",
+        "{workspaceRoot}/dist/index.d.ts"
       ]
     },
     "publish": {
