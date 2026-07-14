@@ -75,11 +75,15 @@ const cleanDist = () => {
 //  @@ Copy packages files to ./dist
 //  ================================================================================
 const copyFiles = function (done) {
-  Object.keys(paths.input).forEach(name => {
-    src(paths.input[name])
-      .pipe(dest(paths.output[name]));
+  const streamDone = (stream) => new Promise((resolve, reject) => {
+    stream.on('end', resolve).on('error', reject);
   });
-  return done();
+
+  Promise.all(
+    Object.keys(paths.input).map(name => streamDone(
+      src(paths.input[name]).pipe(dest(paths.output[name])),
+    )),
+  ).then(() => done()).catch(done);
 };
 
 //  ================================================================================
