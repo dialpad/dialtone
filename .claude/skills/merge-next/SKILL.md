@@ -4,17 +4,22 @@ description: "Merge staging into next branch following the Dialtone Next Merge G
 
 # /merge-next - Merge staging into next
 
-Executes the Dialtone Next Merge Guide: pulls both branches, merges staging into next, resolves conflicts, runs the color-stops migration, commits, builds, and tests.
+Executes the Dialtone Next Merge Guide: pulls both branches, merges staging into next, resolves conflicts, runs the color-stops migration, regenerates component thumbnails, commits, builds, and tests.
 
 **Important:** This must be run via `git merge` on the CLI, NOT via a GitHub PR (which would squash and destroy historical references).
+
+**Retirement condition:** When `next` has been merged back into `staging` and the weekly staging-to-next synchronization stops, delete this skill, its `.agents/skills/merge-next/` peer, and the peer's routing, parity, and eval entries.
 
 ## Workflow
 
 ### 1. Pull and merge
 
+Confirm the worktree is clean before changing branches. Stop rather than stashing, staging, or discarding user work if any changed or untracked files are listed.
+
 ```bash
+git status --short --branch
 git checkout next
-git pull origin next
+git pull --ff-only origin next
 git fetch origin staging:staging   # update local staging ref without merging
 git merge --no-commit staging
 ```
@@ -82,13 +87,37 @@ Then run for real (pipe `y` to auto-confirm):
 echo "y" | node scripts/merge-migrate-color-stops.mjs --merge-from origin/staging --verbose
 ```
 
-### 5. Verify conflict resolutions
+Review any overlap files reported by the script, resolve them manually, then stage all tracked migration changes:
+
+```bash
+git add -u
+```
+
+### 5. Regenerate component thumbnails
+
+**DO NOT commit yet.** Run one forced, dependency-aware regeneration so the weekly merge cannot reuse thumbnails captured from stale branch assets.
+
+```bash
+pnpm nx run dialtone-documentation:thumbs -- --force
+git add apps/dialtone-documentation/docs/.vuepress/public/assets/images/components
+```
+
+Show the generated artifact count and stat for review:
+
+```bash
+git diff --cached --name-only -- apps/dialtone-documentation/docs/.vuepress/public/assets/images/components | wc -l
+git diff --cached --stat -- apps/dialtone-documentation/docs/.vuepress/public/assets/images/components
+```
+
+If generation fails, stop. Do not continue to review or commit with stale or partial thumbnail output.
+
+### 6. Verify conflict resolutions and generated artifacts
 
 **DO NOT commit yet.** Present a resolution summary to the user for review.
 
 1. Output a structured resolution summary listing every file that had conflicts and what was done:
 
-```
+```text
 Conflict resolution summary:
 - path/to/file.json: <what was chosen and why>
 - path/to/other.vue: <what was combined from each side>
@@ -100,19 +129,21 @@ Conflict resolution summary:
 cat /tmp/merge-conflicted-files.txt | xargs git diff --cached --
 ```
 
+1. Report the thumbnail command result and the number of generated artifacts.
+
 1. **Wait for user confirmation** before proceeding to commit. Do not continue until the user approves.
 
-### 6. Commit the merge
+### 7. Commit the merge
 
 ```bash
 git commit --no-edit
 ```
 
-This uses the default merge commit message and triggers pre-commit hooks (which may rebuild icons, etc.).
+This uses the default merge commit message and triggers pre-commit hooks. Thumbnail generation should be a cache hit because the forced pass already ran against the final staged merge state.
 
 After committing, `git show --cc HEAD` can be used to re-inspect only the conflict resolution decisions at any time.
 
-### 7. Fix any lint issues introduced by the merge
+### 8. Fix any lint issues introduced by the merge
 
 Check for new lint issues and fix them. Common ones:
 
@@ -126,7 +157,7 @@ git add <fixed-files>
 git commit -m "fix(<scope>): NO-JIRA fix lint issues from staging merge"
 ```
 
-### 8. Build, test, and lint
+### 9. Build, test, and lint
 
 Run the full production build:
 
@@ -155,7 +186,7 @@ pnpm nx run dialtone:lint:all
 
 For any failures, determine if they are **pre-existing** (also fail on staging) or **introduced by the merge**. Only fix merge-introduced issues. Report pre-existing failures to the user.
 
-### 9. Push
+### 10. Push
 
 Do NOT push automatically. Report the results to the user and wait for confirmation before pushing.
 
@@ -167,4 +198,5 @@ git push origin next
 
 - Never create a PR for this merge. Always push the merge commit directly to `next`.
 - The color-stops migration script is temporary for the staging-to-next migration period.
-- Pre-commit hooks may trigger icon rebuilds or other builds during the commit step. This is expected and may take a few minutes.
+- The merge-next skills are temporary and must be deleted when their retirement condition is met.
+- Pre-commit hooks may trigger icon rebuilds or other builds during the commit step. The thumbnail pass should use its local cache and skip fresh components.

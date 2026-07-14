@@ -7,6 +7,7 @@ Use this as the routing table for repo-local Codex skills. Keep default context 
 | Skill             | Trigger                                            | Purpose                                                                                         | Key resources                                                      | Eval     |
 | ----------------- | -------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ | -------- |
 | `project-start`   | `$project-start`, starting a task, branch setup    | Decide ticket mode, create/propose a Dialtone-style branch, and record the immediate work path. | `package-map.md`, `agent-tooling-parity.md`                        | behavior |
+| `merge-next`      | `$merge-next`, merge or sync `staging` into `next` | Preserve merge history, resolve conflicts, refresh artifacts, validate, and gate commit/push approval. | `package-map.md`, `agent-tooling-parity.md`                    | behavior |
 | `dialtone-lookup` | Dialtone API, docs, token, utility, or icon lookup | Ground design-system decisions in Dialtone MCP or CLI lookup tools before guessing.             | `dialtone-lookup.md`                                               | contract |
 | `review`          | `$review`, "review my changes", "check this code"  | Report-only local review with lazy rule loading.                                                | `rule-map.md`                                                      | contract |
 | `validate`        | `$validate`, "run checks", before commit/PR        | Map changed files to focused validation commands.                                               | `validation.md`, `package-map.md`                                  | fixture  |
@@ -34,5 +35,6 @@ Use this as the routing table for repo-local Codex skills. Keep default context 
 
 - `node .agents/evals/run-skill-contract-evals.mjs`
 - `node .agents/skills/project-start/evals/run-project-start-evals.mjs`
+- `node .agents/skills/merge-next/evals/run-merge-next-evals.mjs`
 
 All new or materially changed skills need eval coverage scaled to risk: static contract for low-risk skills, fixture behavior for workflows that can affect branches, commits, PRs, docs, or public replies.

@@ -24,6 +24,20 @@ const skills = {
     ],
     patterns: [/NO-JIRA/, /Jira creation is separate/, /chore\/NO-JIRA/],
   },
+  'merge-next': {
+    resources: [
+      '.agents/resources/package-map.md',
+      '.agents/resources/agent-tooling-parity.md',
+    ],
+    patterns: [
+      /git merge --no-commit/,
+      /Do not create a PR/,
+      /dialtone-documentation:thumbs -- --force/,
+      /Retirement condition/,
+      /Wait for user confirmation before committing/,
+      /Do not push automatically/,
+    ],
+  },
   'dialtone-lookup': {
     resources: ['.agents/resources/dialtone-lookup.md'],
     patterns: [
@@ -167,10 +181,14 @@ function commandsForChangedFiles(files) {
 
     if (isAgentToolingFile || isCodexRuntimeFile) {
       commands.add('node .agents/evals/run-skill-contract-evals.mjs');
-      if (file.startsWith('.agents/skills/project-start/')) {
-        commands.add(
-          'node .agents/skills/project-start/evals/run-project-start-evals.mjs',
-        );
+      // Skills with their own behavior-eval runner follow the
+      // .agents/skills/<name>/evals/run-<name>-evals.mjs convention.
+      const skillMatch = file.match(/^\.agents\/skills\/([^/]+)\//);
+      if (skillMatch) {
+        const runner = `.agents/skills/${skillMatch[1]}/evals/run-${skillMatch[1]}-evals.mjs`;
+        if (existsSync(join(repoRoot, runner))) {
+          commands.add(`node ${runner}`);
+        }
       }
     }
     if (isAgentToolingFile) {
