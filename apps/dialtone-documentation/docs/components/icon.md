@@ -29,7 +29,7 @@ import { DtIconUserPlus } from '@dialpad/dialtone-icons/vue';
 ### Without Tree Shaking (Deprecated)
 
 ```js
-import { DtIcon } from '@dialpad/dialtone'
+import { DtIcon } from '@dialpad/dialtone/vue'
 
 <template>
   <dt-icon name="user-plus" size="500" />
