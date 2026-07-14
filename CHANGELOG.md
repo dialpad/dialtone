@@ -1,3 +1,27 @@
+# [10.0.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.2...dialtone/v10.0.0-next.3) (2026-07-14)
+
+
+### Bug Fixes
+
+* **Combobox:** DLT-3520 prevent list element error during popover transition ([#1351](https://github.com/dialpad/dialtone/issues/1351)) ([aeda99d](https://github.com/dialpad/dialtone/commit/aeda99d48379551bb3975abcea00b6ddd374fe81))
+* **Dt Popover:** DLT-3519 added boundary prop ([#1348](https://github.com/dialpad/dialtone/issues/1348)) ([6ef6957](https://github.com/dialpad/dialtone/commit/6ef6957516aceb471fc531a7b8a9137cec3a8d9a))
+* **Editor:** DP-194072 tiptap warning duplicate extension names found ['textStyle'] ([#1346](https://github.com/dialpad/dialtone/issues/1346)) ([4ac8871](https://github.com/dialpad/dialtone/commit/4ac8871d2843d48d945edcb8bc64dfe1c4fc36fb))
+* **Localization:** DLT-3522 use unsupported locale in fallback tests ([#1356](https://github.com/dialpad/dialtone/issues/1356)) ([e1cd4db](https://github.com/dialpad/dialtone/commit/e1cd4dbb24087a3778ce00acd567d6e15860a4c8))
+* **Localization:** UC-27003 fall back to a supported locale instead of crashing ([#1350](https://github.com/dialpad/dialtone/issues/1350)) ([17d93a3](https://github.com/dialpad/dialtone/commit/17d93a3970de5f293b78a5aedf951f79db3edc1c))
+* **Scrollbar:** DLT-3494 register --os-scroll-percent globally for shadow DOM support ([#1359](https://github.com/dialpad/dialtone/issues/1359)) ([346b2dc](https://github.com/dialpad/dialtone/commit/346b2dc4855fd22db4b1b88e33416d8a3e47913a))
+
+
+### Documentation
+
+* NO-JIRA regenerate component preview images ([dc08180](https://github.com/dialpad/dialtone/commit/dc081805db45ffb6e531043cc50032de0e78c7c9))
+
+
+### Features
+
+* **Icons:** DP-192348 add compass icons ([#1354](https://github.com/dialpad/dialtone/issues/1354)) ([92a547a](https://github.com/dialpad/dialtone/commit/92a547a569277bb1863c80be3238a6944a33cc70))
+* **Localization:** DLT-3522 add ko-KR and sv-SE as supported locales ([#1352](https://github.com/dialpad/dialtone/issues/1352)) ([566d55d](https://github.com/dialpad/dialtone/commit/566d55d089d138e38635dc6e85e9f448c97b2425))
+* NO-JIRA add dot export to dialtone package ([#1366](https://github.com/dialpad/dialtone/issues/1366)) ([86c1bbc](https://github.com/dialpad/dialtone/commit/86c1bbc2c123d2d2e51e3ce42b98df97a454525d))
+
 # [10.0.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.1...dialtone/v10.0.0-next.2) (2026-07-13)
 
 
