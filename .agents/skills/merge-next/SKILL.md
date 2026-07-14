@@ -50,7 +50,7 @@ Merge current `origin/staging` into current `next` with a CLI merge commit, pres
 3. Start the CLI merge without committing, then immediately record the original conflict list:
 
    ```bash
-   git merge --no-commit origin/staging
+   git merge --no-commit --no-ff origin/staging
    git diff --name-only --diff-filter=U > /tmp/dialtone-merge-next-conflicts.txt
    ```
 

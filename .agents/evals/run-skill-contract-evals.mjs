@@ -30,7 +30,7 @@ const skills = {
       '.agents/resources/agent-tooling-parity.md',
     ],
     patterns: [
-      /git merge --no-commit/,
+      /git merge --no-commit --no-ff/,
       /Do not create a PR/,
       /dialtone-documentation:thumbs -- --force/,
       /Retirement condition/,

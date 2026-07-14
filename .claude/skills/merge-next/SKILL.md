@@ -21,7 +21,7 @@ git status --short --branch
 git checkout next
 git pull --ff-only origin next
 git fetch origin staging:staging   # update local staging ref without merging
-git merge --no-commit staging
+git merge --no-commit --no-ff staging
 ```
 
 Save the list of conflicted files immediately (needed for the verification step later):

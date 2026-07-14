@@ -44,7 +44,7 @@ if (!existsSync(skillPath)) {
   const body = readFileSync(skillPath, 'utf8');
   const orderedSteps = [
     'git status --short --branch',
-    'git merge --no-commit origin/staging',
+    'git merge --no-commit --no-ff origin/staging',
     'merge-migrate-color-stops.mjs',
     'dialtone-documentation:thumbs -- --force',
     'Wait for user confirmation before committing',
