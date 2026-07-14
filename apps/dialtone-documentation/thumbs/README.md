@@ -59,11 +59,22 @@ Once the override looks right:
 
 ```bash
 # Single component
-node apps/dialtone-documentation/scripts/thumbs/generate.mjs --component=<slug> --force
+pnpm nx run dialtone-documentation:thumbs -- --component=<slug> --force
 
-# All components
+# All stale components
 pnpm nx run dialtone-documentation:thumbs
+
+# Force all components
+pnpm nx run dialtone-documentation:thumbs -- --force
 ```
+
+Use the Nx target rather than invoking `scripts/thumbs/generate.mjs` directly.
+It builds the token, Dialtone CSS, icon, and Vue package outputs that the
+harness imports before rendering thumbnails.
+
+Starting or building the documentation site does not regenerate thumbnails.
+Thumbnail work only runs through the explicit `thumbs` target or the relevant
+pre-commit hook.
 
 ## Available globals in your `.vue` file
 
@@ -123,11 +134,11 @@ an OS/arch switch), install Chromium explicitly. Run:
 pnpm exec playwright install --with-deps chromium
 ```
 
-Less common: `dialtone-tokens` or `dialtone-vue` dist artifacts are out of date:
+The Nx target automatically rebuilds token, Dialtone CSS, icon, and Vue dist
+artifacts. To retry generation outside the commit:
 
 ```bash
-pnpm nx run dialtone-tokens:build
-pnpm nx run dialtone-vue:build
+pnpm nx run dialtone-documentation:thumbs
 ```
 
 Then retry the commit.
