@@ -1,3 +1,22 @@
+# [4.56.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.55.0...dialtone-icons/v4.56.0-next.1) (2026-07-14)
+
+
+### Bug Fixes
+
+* **Dialtone Icons:** NO-JIRA restore vue/dist export paths after staging merge ([d78b4b6](https://github.com/dialpad/dialtone/commit/d78b4b6653793bc0ea201b9cce6bb7b68c49886f))
+
+
+### Documentation
+
+* DLT-1510 DLT-1511 DLT-1512 site redesign and ia ([#968](https://github.com/dialpad/dialtone/issues/968)) ([6ea7eb9](https://github.com/dialpad/dialtone/commit/6ea7eb959f01bfb01c91c3b6a92465ed0c2e0f4b))
+
+
+### Features
+
+* **Combinator:** DLT-3489 DLT-3490 DLT-3491 refine control panel ui ([#1343](https://github.com/dialpad/dialtone/issues/1343)) ([0385c2f](https://github.com/dialpad/dialtone/commit/0385c2f4a3945b176b55322932aaa68c03fc0848))
+* **Dialtone Icons:** NO-JIRA add /vue export to dialtone-icon ([#1304](https://github.com/dialpad/dialtone/issues/1304)) ([081b0e9](https://github.com/dialpad/dialtone/commit/081b0e95293d7450f1cff21b285b504d95d52689))
+* DLT-3534 align size prop types across components and modal fullscreen ([#1362](https://github.com/dialpad/dialtone/issues/1362)) ([8fb88a1](https://github.com/dialpad/dialtone/commit/8fb88a19400f110e4b36fce8018b27b15bf05d1e))
+
 # [4.55.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.54.0...dialtone-icons/v4.55.0) (2026-07-07)
 
 
