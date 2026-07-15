@@ -12,8 +12,11 @@
         aria-label="Comparison mode"
         @update:model-value="$emit('update:mode', $event)"
       >
-        <dt-segmented-control-item value="toggle">
-          Before/After
+        <dt-segmented-control-item value="before">
+          Before
+        </dt-segmented-control-item>
+        <dt-segmented-control-item value="after">
+          After
         </dt-segmented-control-item>
         <dt-segmented-control-item value="side">
           Side by side
@@ -31,7 +34,7 @@
     <!-- Both images stay mounted (stacked in the same grid cell) and only
          visibility flips, so the browser keeps both decoded and switching
          is instantaneous — no request, no reflow. -->
-    <div v-if="mode === 'toggle'">
+    <div v-if="mode === 'before' || mode === 'after'">
       <dt-box
         surface="primary"
         border-width="100"
@@ -43,35 +46,17 @@
           <img
             :src="withBase(before)"
             :alt="`${alt} — before migration`"
-            :style="{ visibility: shown === 'after' ? 'hidden' : 'visible' }"
+            :style="{ visibility: mode === 'after' ? 'hidden' : 'visible' }"
             loading="lazy"
           >
           <img
             :src="withBase(after)"
             :alt="`${alt} — after migration`"
-            :style="{ visibility: shown === 'after' ? 'visible' : 'hidden' }"
+            :style="{ visibility: mode === 'after' ? 'visible' : 'hidden' }"
             loading="lazy"
           >
         </div>
       </dt-box>
-      <dt-stack
-        direction="row"
-        justify="end"
-        class="d-mbs-200"
-      >
-        <dt-segmented-control
-          :model-value="shown"
-          aria-label="Version shown"
-          @update:model-value="$emit('update:shown', $event)"
-        >
-          <dt-segmented-control-item value="before">
-            Before
-          </dt-segmented-control-item>
-          <dt-segmented-control-item value="after">
-            After
-          </dt-segmented-control-item>
-        </dt-segmented-control>
-      </dt-stack>
     </div>
 
     <div
@@ -231,8 +216,9 @@ import { withBase } from 'vuepress/client';
 // Presentational half of <before-after>: renders the comparison as an
 // instant before/after switch (default), side-by-side, a split wipe
 // (draggable divider — before left, after right), or an onion-skin blend.
-// Mode, shown, split, and blend live in the parent so they survive
-// expanding into the fullscreen modal.
+// Mode, split, and blend live in the parent so they survive expanding
+// into the fullscreen modal. The before/after single-image views are modes
+// like any other; both images stay mounted there so switching is instant.
 // Image srcs are passed through withBase(): the site deploys under a
 // subpath (VUEPRESS_BASE_URL, e.g. /next/ and deploy previews), and VuePress
 // only auto-rewrites markdown ![]() images — not component props.
@@ -260,12 +246,7 @@ defineProps({
   mode: {
     type: String,
     required: true,
-    validator: (v) => ['toggle', 'side', 'split', 'onion'].includes(v),
-  },
-  shown: {
-    type: String,
-    required: true,
-    validator: (v) => ['before', 'after'].includes(v),
+    validator: (v) => ['before', 'after', 'side', 'split', 'onion'].includes(v),
   },
   blend: {
     type: Number,
@@ -277,7 +258,7 @@ defineProps({
   },
 });
 
-defineEmits(['update:mode', 'update:shown', 'update:blend', 'update:split']);
+defineEmits(['update:mode', 'update:blend', 'update:split']);
 </script>
 
 <style scoped>
