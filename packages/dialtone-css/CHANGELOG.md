@@ -1,3 +1,10 @@
+# [8.81.0-next.6](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.81.0-next.5...dialtone-css/v8.81.0-next.6) (2026-07-15)
+
+
+### Features
+
+* **Migrate:** DLT-3539 add --package option for custom package name ([#1368](https://github.com/dialpad/dialtone/issues/1368)) ([6879530](https://github.com/dialpad/dialtone/commit/68795307184d7a727098dba410e292c79b741334))
+
 # [8.81.0-next.5](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.81.0-next.4...dialtone-css/v8.81.0-next.5) (2026-07-13)
 
 
