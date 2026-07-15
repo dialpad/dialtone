@@ -798,6 +798,19 @@ describe('--package end-to-end', () => {
     ]);
     assert.match(output, /import \{ DtText \} from '@dialpad\/dialtone-next';/);
   });
+
+  it('rejects --package followed by another option (--package --yes)', () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'dlt-typo-'));
+    try {
+      assert.throws(
+        () => execFileSync(process.execPath, [typographyCli, '--cwd', tmp, '--package', '--yes'],
+          { stdio: ['ignore', 'ignore', 'pipe'] }),
+        err => err.status === 1 && /--package requires a package name/.test(String(err.stderr)),
+      );
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  });
 });
 
 describe('--remove-markers', () => {

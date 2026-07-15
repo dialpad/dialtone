@@ -1346,7 +1346,14 @@ Examples:
       options.removeOutline = true;
     } else if (arg === '--no-import') {
       options.noImport = true;
-    } else if (arg === '--package' && args[i + 1]) {
+    } else if (arg === '--package') {
+      // Reject a missing value or one that is really the next option (e.g.
+      // `--package --yes`) so an invalid alias is never recorded.
+      const value = args[i + 1];
+      if (!value || value.startsWith('-')) {
+        console.error('\n  --package requires a package name (e.g. --package @dialpad/dialtone-next)\n');
+        process.exit(1);
+      }
       options.package = args[++i];
     } else if (arg === '--file' && args[i + 1]) {
       const filePath = args[++i];
