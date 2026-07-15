@@ -19,6 +19,9 @@
  *   --health-check     Report migration status without modifying files
  *   --all              Run all required migrations without selection prompt
  *   --only <ids>       Comma-separated list of migration IDs to run
+ *   --package <name>   Package name to use for injected component imports
+ *                      (default: @dialpad/dialtone-vue). Useful when running
+ *                      Dialtone under a custom package alias (e.g. @dialpad/dialtone-next).
  *   --help             Show help
  *
  * Examples:
@@ -50,6 +53,7 @@ const __dirname = path.dirname(__filename);
  * @property {'config'|'standalone'|'manual'} type
  * @property {string} [configName] - Config filename for migration-helper type
  * @property {string} [scriptDir]  - Directory name for standalone scripts
+ * @property {boolean} [supportsPackageArg] - Forward --package to this standalone script
  * @property {string[]} [extraArgs] - Extra CLI args to forward
  * @property {RegExp[]} detectPatterns - Patterns that indicate migration is still needed
  * @property {string[]} fileExtensions - File extensions to scan during health check
@@ -250,6 +254,8 @@ const MIGRATIONS = [
     category: 'opt-in',
     type: 'standalone',
     scriptDir: 'dialtone_migrate_flex_to_stack',
+    // Injects a DtStack import, so it honors the --package override.
+    supportsPackageArg: true,
     detectPatterns: [
       /class="[^"]*d-d-flex[^"]*"/,
     ],
@@ -304,6 +310,8 @@ const MIGRATIONS = [
     category: 'opt-in',
     type: 'standalone',
     scriptDir: 'dialtone_migrate_typography',
+    // Injects a DtText import, so it honors the --package override.
+    supportsPackageArg: true,
     detectPatterns: [
       /class="[^"]*d-(?:headline|body|label)--(?:sm|md|lg|xl|xxl)/,
       /class="[^"]*d-(?:headline|body|label)-(?:small|medium|large)/,
@@ -371,6 +379,7 @@ async function writeMigrationMarker (cwd, id) {
 function parseArgs (args) {
   const cwdIndex = args.indexOf('--cwd');
   const onlyIndex = args.indexOf('--only');
+  const packageIndex = args.indexOf('--package');
   return {
     help: args.includes('--help'),
     dryRun: args.includes('--dry-run'),
@@ -383,6 +392,9 @@ function parseArgs (args) {
       : process.cwd(),
     only: onlyIndex !== -1 && args[onlyIndex + 1]
       ? args[onlyIndex + 1].split(',').map(s => s.trim())
+      : null,
+    packageName: packageIndex !== -1 && args[packageIndex + 1]
+      ? args[packageIndex + 1]
       : null,
   };
 }
@@ -401,6 +413,9 @@ Options:
   --health-check     Report migration status without modifying files
   --all              Run all required migrations without selection prompt
   --only <ids>       Comma-separated list of migration IDs to run
+  --package <name>   Package name to use for injected component imports
+                     (default: @dialpad/dialtone-vue). Useful when running
+                     Dialtone under a custom package alias (e.g. @dialpad/dialtone-next).
   --help             Show help
 
 Available migration IDs (required):
@@ -792,6 +807,9 @@ async function runStandaloneMigration (migration, opts) {
   if (opts.dryRun) args.push('--dry-run');
   if (opts.autoYes) args.push('--yes');
   if (opts.noImport) args.push('--no-import');
+  if (opts.packageName && migration.supportsPackageArg) {
+    args.push('--package', opts.packageName);
+  }
 
   return new Promise((resolve, reject) => {
     const child = spawn(process.execPath, [scriptPath, ...args], {
@@ -885,6 +903,9 @@ async function main () {
 
   // Confirmation
   console.log(`\n  Target directory: ${opts.cwd}`);
+  if (opts.packageName) {
+    console.log(`  Import package:    ${opts.packageName}`);
+  }
   console.log(`  Migrations to run (${selected.length}):\n`);
   for (const m of selected) {
     const tag = m.category === 'required' ? '[REQUIRED]' : '[OPT-IN]';

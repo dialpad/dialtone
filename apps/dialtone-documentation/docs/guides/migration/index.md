@@ -70,7 +70,13 @@ npx dialtone-migrate --all --dry-run --cwd ./src
 
 # Run specific migrations only
 npx dialtone-migrate --only color-stops,border-radius --cwd ./src
+
+# Run Dialtone under a custom package alias (injected component imports use it)
+npx dialtone-migrate --all --package @dialpad/dialtone-next --cwd ./src
 ```
+
+> [!INFO] Custom package name
+> Some teams run multiple versions of Dialtone side by side during an incremental migration by installing the new version under an alias such as `@dialpad/dialtone-next`. Pass `--package <name>` so migrations that inject component imports (Flex to Stack, Typography) reference that alias instead of `@dialpad/dialtone-vue`.
 
 ### Individual scripts
 

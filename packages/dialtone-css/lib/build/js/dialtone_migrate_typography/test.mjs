@@ -729,6 +729,18 @@ describe('import detection', () => {
     const path = detectImportPathFor(content);
     assert.equal(path, '@/components/text');
   });
+
+  it('uses the explicit package name when provided, overriding detection', () => {
+    const content = `<script>\nimport { DtButton } from '@/components/button';\n</script>`;
+    const path = detectImportPathFor(content, '@dialpad/dialtone-next');
+    assert.equal(path, '@dialpad/dialtone-next');
+  });
+
+  it('explicit package name applies even when no imports are present', () => {
+    const content = `<template><p class="d-headline--md">x</p></template>`;
+    const path = detectImportPathFor(content, '@dialpad/dialtone-next');
+    assert.equal(path, '@dialpad/dialtone-next');
+  });
 });
 
 describe('--remove-markers', () => {

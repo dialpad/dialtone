@@ -1235,11 +1235,20 @@ async function validateAndResolveFiles (filePaths, extensions) {
 // Import detection (ported from flex-to-stack)
 //------------------------------------------------------------------------------
 
-export function detectImportPathFor (content) {
-  return detectImportPattern(content);
+export function detectImportPathFor (content, packageName) {
+  return detectImportPattern(content, packageName);
 }
 
-function detectImportPattern (content) {
+/**
+ * @param {string} content - File content
+ * @param {string} [packageName] - Explicit package name (e.g. @dialpad/dialtone-next).
+ *   When provided, it is used verbatim, overriding the heuristics below. This lets
+ *   consumers running Dialtone under a custom package alias inject the correct import.
+ */
+function detectImportPattern (content, packageName) {
+  // Explicit override: honor the caller-provided package name.
+  if (packageName) return packageName;
+
   if (content.includes('from \'@/components/')) return '@/components/text';
   if (content.includes('from \'./\'')) return './';
   if (content.includes('from \'@dialpad/dialtone-vue') || content.includes('from \'@dialpad/dialtone-icons')) {
@@ -1248,13 +1257,13 @@ function detectImportPattern (content) {
   return '@/components/text';
 }
 
-function detectMissingDtTextImport (content, usesText) {
+function detectMissingDtTextImport (content, usesText, packageName) {
   if (!usesText) return null;
   const hasImport = /import\s+(?:\{[^}]*\bDtText\b[^}]*\}|DtText)\s+from/.test(content);
   if (hasImport) return null;
   return {
     needsImport: true,
-    suggestedPath: detectImportPattern(content),
+    suggestedPath: detectImportPattern(content, packageName),
     hasComponentsObject: /components:\s*\{/.test(content),
   };
 }
@@ -1537,7 +1546,7 @@ async function processFile (filePath, options) {
   const addedDtText = afterCount > beforeCount;
   // Auto-inject DtText import before writing; fall back to manual instructions if needed.
   // Skipped entirely when --no-import is set (e.g. DtText is globally registered).
-  const importCheck = options.noImport ? null : detectMissingDtTextImport(transformed, addedDtText);
+  const importCheck = options.noImport ? null : detectMissingDtTextImport(transformed, addedDtText, options.package);
 
   let finalContent = transformed;
   if (importCheck?.needsImport) {
@@ -1580,6 +1589,7 @@ function parseArgs () {
     removeMarkers: false,
     validate: false,
     noImport: false, // Skip import injection (for apps that globally register DtText)
+    package: null, // Override the package name used for injected DtText imports
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -1600,6 +1610,9 @@ Options:
   --validate          Read-only mode: scan existing <dt-text> for prop bugs
                       (object syntax, invalid values, mixed CSS classes)
   --no-import         Skip import injection (use when DtText is globally registered)
+  --package <name>    Package name for injected DtText imports
+                      (default: @dialpad/dialtone-vue when a Dialtone import is detected).
+                      Use when Dialtone runs under a custom alias, e.g. @dialpad/dialtone-next.
   --help, -h          Show help
 
 Examples:
@@ -1630,6 +1643,8 @@ Post-Migration Steps:
       options.validate = true;
     } else if (arg === '--no-import') {
       options.noImport = true;
+    } else if (arg === '--package' && args[i + 1]) {
+      options.package = args[++i];
     }
   }
 
