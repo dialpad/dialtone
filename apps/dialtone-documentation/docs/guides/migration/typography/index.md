@@ -330,6 +330,7 @@ Strips all `<!-- dt-text-migrate: review … -->` comments after you have review
 | `--yes`, `-y` | Apply all changes without prompting |
 | `--remove-markers` | Strip all `dt-text-migrate` review comments |
 | `--validate` | Read-only: scan existing `<dt-text>` for prop bugs |
+| `--package <name>` | Package name for injected `DtText` imports (e.g. `@dialpad/dialtone-next`). Overrides import-path detection |
 | `--help`, `-h` | Show help |
 
 Files processed: `.vue` and `.html`.
@@ -360,6 +361,12 @@ import { DtText } from '@dialpad/dialtone-vue';
 ```
 
 Projects that import Dialtone components locally will instead see `import { DtText } from '@/components/text';` — use whichever path matches your project's existing imports.
+
+If you run Dialtone under a custom package alias (for example `@dialpad/dialtone-next` while migrating incrementally), pass `--package` to force injected imports to use it:
+
+```bash
+npx dialtone-migrate-typography --package @dialpad/dialtone-next --cwd ./src
+```
 
 ### Remove Review Markers
 

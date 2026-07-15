@@ -65,12 +65,23 @@ npx dialtone-migrate --cwd ./src
 # Run all required migrations non-interactively
 npx dialtone-migrate --all --yes --cwd ./src
 
+# Run required + opt-in migrations non-interactively
+npx dialtone-migrate --all --include-opt-in --yes --cwd ./src
+
 # Dry-run to preview changes first
 npx dialtone-migrate --all --dry-run --cwd ./src
 
 # Run specific migrations only
 npx dialtone-migrate --only color-stops,border-radius --cwd ./src
+
+# Run Dialtone under a custom package alias (injected component imports use it)
+npx dialtone-migrate --only flex-to-stack,typography --package @dialpad/dialtone-next --cwd ./src
 ```
+
+> [!INFO] Custom package name
+> Some teams run multiple versions of Dialtone side by side during an incremental migration by installing the new version under an alias such as `@dialpad/dialtone-next`. Pass `--package <name>` so migrations that inject component imports (Flex to Stack, Typography) reference that alias instead of `@dialpad/dialtone-vue`.
+>
+> Both import-injecting migrations are opt-in, and `--all` runs only the required migrations — so `--all --package …` will not apply the alias. Select them explicitly with `--only flex-to-stack,typography`, add `--include-opt-in` to run every migration, or use the interactive prompt.
 
 ### Individual scripts
 
