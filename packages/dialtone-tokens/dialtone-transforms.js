@@ -285,7 +285,7 @@ export function registerDialtoneTransforms (styleDictionary) {
     name: 'dt/stringify',
     type: 'value',
     filter: function (token) {
-      return ['type', 'textCase'].includes(token.type);
+      return ['type', 'textCase', 'other'].includes(token.type);
     },
     transform: (token) => {
       return `"${token.value}"`;
