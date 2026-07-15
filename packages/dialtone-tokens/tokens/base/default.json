@@ -1683,6 +1683,11 @@
     }
   },
   "layout": {
+    "0": {
+      "value": "{layout.base} * 0",
+      "type": "dimension",
+      "description": "0px"
+    },
     "25": {
       "value": "{layout.base} * 0.25",
       "type": "dimension",
