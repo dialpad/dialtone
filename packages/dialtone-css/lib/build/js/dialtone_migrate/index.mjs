@@ -18,6 +18,7 @@
  *   --yes              Apply all changes without prompting
  *   --health-check     Report migration status without modifying files
  *   --all              Run all required migrations without selection prompt
+ *   --include-opt-in   Also run opt-in migrations (with --all, or on its own = everything)
  *   --only <ids>       Comma-separated list of migration IDs to run
  *   --package <name>   Package name to use for injected component imports
  *                      (default: @dialpad/dialtone-vue). Useful when running
@@ -387,6 +388,7 @@ function parseArgs (args) {
     noImport: args.includes('--no-import'),
     healthCheck: args.includes('--health-check'),
     all: args.includes('--all'),
+    includeOptIn: args.includes('--include-opt-in'),
     cwd: cwdIndex !== -1 && args[cwdIndex + 1]
       ? path.resolve(args[cwdIndex + 1])
       : process.cwd(),
@@ -412,6 +414,7 @@ Options:
   --yes              Apply all changes without prompting
   --health-check     Report migration status without modifying files
   --all              Run all required migrations without selection prompt
+  --include-opt-in   Also run opt-in migrations (with --all, or on its own = everything)
   --only <ids>       Comma-separated list of migration IDs to run
   --package <name>   Package name to use for injected component imports
                      (default: @dialpad/dialtone-vue). Useful when running
@@ -428,6 +431,7 @@ Examples:
   npx dialtone-migrate                              # Interactive selection
   npx dialtone-migrate --health-check --cwd ./src   # Check migration status
   npx dialtone-migrate --all --dry-run               # Dry-run all required
+  npx dialtone-migrate --all --include-opt-in --yes  # Run required + opt-in
   npx dialtone-migrate --only color-stops,hsl-to-oklch --yes
 `);
 }
@@ -890,8 +894,12 @@ async function main () {
       }
       return m;
     });
-  } else if (opts.all) {
-    selected = MIGRATIONS.filter(m => m.category === 'required');
+  } else if (opts.all || opts.includeOptIn) {
+    // --include-opt-in widens the selection to every migration; --all alone stays
+    // required-only. Either flag skips the interactive prompt.
+    selected = opts.includeOptIn
+      ? MIGRATIONS.slice()
+      : MIGRATIONS.filter(m => m.category === 'required');
   } else {
     selected = await selectMigrations(MIGRATIONS);
   }
