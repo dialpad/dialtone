@@ -381,6 +381,16 @@ function parseArgs (args) {
   const cwdIndex = args.indexOf('--cwd');
   const onlyIndex = args.indexOf('--only');
   const packageIndex = args.indexOf('--package');
+
+  // --package must be followed by an actual package name. Reject a missing value
+  // or a value that is really the next option (e.g. `--package --all`) so invalid
+  // input never reaches the alias confirmation or child-migration args.
+  const packageValue = packageIndex !== -1 ? args[packageIndex + 1] : undefined;
+  if (packageIndex !== -1 && (!packageValue || packageValue.startsWith('-'))) {
+    console.error('\n  --package requires a package name (e.g. --package @dialpad/dialtone-next)\n');
+    process.exit(1);
+  }
+
   return {
     help: args.includes('--help'),
     dryRun: args.includes('--dry-run'),
@@ -395,9 +405,7 @@ function parseArgs (args) {
     only: onlyIndex !== -1 && args[onlyIndex + 1]
       ? args[onlyIndex + 1].split(',').map(s => s.trim())
       : null,
-    packageName: packageIndex !== -1 && args[packageIndex + 1]
-      ? args[packageIndex + 1]
-      : null,
+    packageName: packageIndex !== -1 ? packageValue : null,
   };
 }
 

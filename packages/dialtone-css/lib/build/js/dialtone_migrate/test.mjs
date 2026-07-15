@@ -53,3 +53,36 @@ describe('migration selection', () => {
     assert.equal(selectedCount(output), 20);
   });
 });
+
+describe('--package validation', () => {
+  // Run the CLI with the given args and return { status, stderr }; never throws.
+  function run (extraArgs) {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'dlt-master-'));
+    try {
+      execFileSync(process.execPath, [cli, '--dry-run', '--cwd', tmp, ...extraArgs],
+        { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+      return { status: 0, stderr: '' };
+    } catch (err) {
+      return { status: err.status, stderr: String(err.stderr ?? '') };
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  }
+
+  it('rejects --package with no value', () => {
+    const { status, stderr } = run(['--all', '--package']);
+    assert.equal(status, 1);
+    assert.match(stderr, /--package requires a package name/);
+  });
+
+  it('rejects --package followed by another option (--package --all)', () => {
+    const { status, stderr } = run(['--package', '--all']);
+    assert.equal(status, 1);
+    assert.match(stderr, /--package requires a package name/);
+  });
+
+  it('accepts a valid package name', () => {
+    const { status } = run(['--all', '--package', '@dialpad/dialtone-next']);
+    assert.equal(status, 0);
+  });
+});
