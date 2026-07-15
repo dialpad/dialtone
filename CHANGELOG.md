@@ -1,3 +1,15 @@
+# [10.0.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.3...dialtone/v10.0.0-next.4) (2026-07-15)
+
+
+### Bug Fixes
+
+* **Dialtone Tokens:** NO-JIRA add missing zero-width layout design token ([955c5f9](https://github.com/dialpad/dialtone/commit/955c5f9719a28face525300c21b20ef5275e6e51))
+
+
+### Features
+
+* **Migrate:** DLT-3539 add --package option for custom package name ([#1368](https://github.com/dialpad/dialtone/issues/1368)) ([6879530](https://github.com/dialpad/dialtone/commit/68795307184d7a727098dba410e292c79b741334))
+
 # [10.0.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.2...dialtone/v10.0.0-next.3) (2026-07-14)
 
 
