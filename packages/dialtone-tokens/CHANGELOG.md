@@ -1,3 +1,10 @@
+# [2.0.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.0-next.2...dialtone-tokens/v2.0.0-next.3) (2026-07-15)
+
+
+### Bug Fixes
+
+* **Dialtone Tokens:** NO-JIRA add missing zero-width layout design token ([955c5f9](https://github.com/dialpad/dialtone/commit/955c5f9719a28face525300c21b20ef5275e6e51))
+
 # [2.0.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.0-next.1...dialtone-tokens/v2.0.0-next.2) (2026-07-13)
 
 
