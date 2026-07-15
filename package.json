@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "10.0.0-next.4",
+  "version": "10.0.0-next.5",
   "packageManager": "pnpm@11.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {

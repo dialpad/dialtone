@@ -1,3 +1,10 @@
+# [10.0.0-next.5](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.4...dialtone/v10.0.0-next.5) (2026-07-15)
+
+
+### Bug Fixes
+
+* **Dialtone Tokens:** DLT-3538 quote "other"-type token values for iOS output ([#1370](https://github.com/dialpad/dialtone/issues/1370)) ([2e18d6f](https://github.com/dialpad/dialtone/commit/2e18d6f071a5d02b583abe33696483d4eb4af6da))
+
 # [10.0.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.3...dialtone/v10.0.0-next.4) (2026-07-15)
 
 
