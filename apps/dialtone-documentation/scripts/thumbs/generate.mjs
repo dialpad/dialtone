@@ -2,9 +2,9 @@
  * Component thumb generator (PNG screenshot mode).
  *
  * Usage (from repo root):
- *   Single:    node apps/dialtone-documentation/scripts/thumbs/generate.mjs --component=button
- *   All:       node apps/dialtone-documentation/scripts/thumbs/generate.mjs
- *   Force:     node apps/dialtone-documentation/scripts/thumbs/generate.mjs --force
+ *   Single:    pnpm nx run dialtone-documentation:thumbs -- --component=button
+ *   All:       pnpm nx run dialtone-documentation:thumbs
+ *   Force:     pnpm nx run dialtone-documentation:thumbs -- --force
  *
  * Override Chromium binary if Playwright's bundled headless shell isn't installed:
  *   PLAYWRIGHT_CHROMIUM_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" node …

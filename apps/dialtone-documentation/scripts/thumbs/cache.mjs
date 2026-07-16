@@ -8,12 +8,13 @@
  *   - apps/dialtone-documentation/thumbs/<slug>.vue if present (V3 override)
  *   - harness/main.js + harness/App.vue (changing the renderer invalidates)
  *   - dialtone-tokens compiled CSS (token changes invalidate)
+ *   - Dialtone compiled CSS and icon JavaScript (global visual dependencies)
  */
 
 import { createHash } from 'crypto';
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'fs';
 import { fileURLToPath } from 'url';
-import { dirname, resolve } from 'path';
+import { dirname, relative, resolve } from 'path';
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dir, '../../../..');
@@ -25,6 +26,8 @@ const HARNESS_FILES = [
   'harness/index.html',
 ].map(p => resolve(__dir, p));
 const TOKENS_CSS = resolve(REPO_ROOT, 'packages/dialtone-tokens/dist/css/layered/tokens-dp-colors.css');
+const DIALTONE_CSS = resolve(REPO_ROOT, 'packages/dialtone-css/lib/dist/dialtone.min.css');
+const DIALTONE_ICONS_DIST = resolve(REPO_ROOT, 'packages/dialtone-icons/vue/dist');
 
 const HASH_LENGTH = 16; // truncated sha256; collision risk is negligible for ~60 components
 
@@ -49,10 +52,40 @@ function readDirHash (dir) {
     .join('');
 }
 
+function readJavaScriptTreeHash (dir, rootDir = dir) {
+  if (!existsSync(dir)) {
+    throw new Error(`icon JavaScript directory not found: ${dir}`);
+  }
+  return readdirSync(dir, { withFileTypes: true })
+    .sort((left, right) => left.name.localeCompare(right.name))
+    .map(entry => {
+      const path = resolve(dir, entry.name);
+      if (entry.isDirectory()) return readJavaScriptTreeHash(path, rootDir);
+      return entry.isFile() && entry.name.endsWith('.js')
+        ? relative(rootDir, path) + '\0' + readFileSync(path, 'utf8')
+        : '';
+    })
+    .join('');
+}
+
+export function computeSharedRenderHash ({
+  harnessFiles = HARNESS_FILES,
+  tokensCss = TOKENS_CSS,
+  dialtoneCss = DIALTONE_CSS,
+  iconsDist = DIALTONE_ICONS_DIST,
+} = {}) {
+  return sha256(
+    harnessFiles.map(path => readFileSync(path, 'utf8')).join('') +
+    readFileSync(tokensCss, 'utf8') +
+    readFileSync(dialtoneCss, 'utf8') +
+    readJavaScriptTreeHash(iconsDist),
+  );
+}
+
 let _harnessHash = null;
 function harnessHash () {
   if (!_harnessHash) {
-    _harnessHash = sha256(HARNESS_FILES.map(readSafe).join('') + readSafe(TOKENS_CSS));
+    _harnessHash = computeSharedRenderHash();
   }
   return _harnessHash;
 }

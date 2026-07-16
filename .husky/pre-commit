@@ -23,7 +23,10 @@ if ! git diff --staged --quiet -- $THUMB_INPUTS; then
   echo "Detected changes to thumb inputs, regenerating component thumbnails..."
   echo "  This auto-stages updated PNGs. Cache: warm regen ~5–10s, cold ~3 min."
   echo "  Trouble? See apps/dialtone-documentation/thumbs/README.md#pre-commit-hook"
-  pnpm nx run dialtone-documentation:thumbs;
+  if ! pnpm nx run dialtone-documentation:thumbs; then
+    echo "Component thumbnail generation failed; aborting commit."
+    exit 1
+  fi
 
   git add apps/dialtone-documentation/docs/.vuepress/public/assets/images/components;
 fi
