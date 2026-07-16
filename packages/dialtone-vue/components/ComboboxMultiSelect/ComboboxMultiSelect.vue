@@ -19,13 +19,13 @@
     <template #input="{ onInput }">
       <span
         ref="inputSlotWrapper"
-        class="d-recipe-combobox-multi-select__input-wrapper"
+        class="d-combobox-multi-select__input-wrapper"
         @focusin="handleInputFocusIn"
         @focusout="handleInputFocusOut"
       >
         <span
           ref="chipsWrapper"
-          :class="['d-recipe-combobox-multi-select__chip-wrapper', chipWrapperClass]"
+          :class="['d-combobox-multi-select__chip-wrapper', chipWrapperClass]"
         >
           <dt-chip
             v-for="(item, index) in selectedItems"
@@ -34,8 +34,8 @@
             :interactive="true"
             :label-class="['d-chip__label']"
             :class="[
-              'd-recipe-combobox-multi-select__chip',
-              { 'd-recipe-combobox-multi-select__chip--truncate': !!chipMaxWidth },
+              'd-combobox-multi-select__chip',
+              { 'd-combobox-multi-select__chip--truncate': !!chipMaxWidth },
             ]"
             :style="{ maxWidth: chipMaxWidth }"
             :size="CHIP_SIZES[String(size)]"
@@ -51,10 +51,10 @@
         <dt-input
           ref="input"
           v-model="value"
-          class="d-recipe-combobox-multi-select__input"
+          class="d-combobox-multi-select__input"
           :input-class="[
             inputClass, {
-              'd-recipe-combobox-multi-select__input--hidden': hideInputText,
+              'd-combobox-multi-select__input--hidden': hideInputText,
             }]"
           :input-wrapper-class="inputWrapperClass"
           :disabled="disabled"
@@ -96,7 +96,7 @@
     <template #list>
       <div
         ref="list"
-        :class="['d-recipe-combobox-multi-select__list', listClass]"
+        :class="['d-combobox-multi-select__list', listClass]"
         @mousedown.prevent
       >
         <slot
@@ -105,7 +105,7 @@
         />
         <div
           v-else
-          class="d-recipe-combobox-multi-select__list--loading"
+          class="d-combobox-multi-select__list--loading"
         >
           {{ loadingMessage }}
         </div>
@@ -568,7 +568,7 @@ export default {
 
     chipWrapperClass () {
       return {
-        [`d-recipe-combobox-multi-select__chip-wrapper-${COMPONENT_SIZES[String(this.size)] || this.size}--collapsed`]: !this.inputFocused && this.collapseOnFocusOut,
+        [`d-combobox-multi-select__chip-wrapper-${COMPONENT_SIZES[String(this.size)] || this.size}--collapsed`]: !this.inputFocused && this.collapseOnFocusOut,
       };
     },
   },
