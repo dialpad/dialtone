@@ -78,28 +78,6 @@ export * from './directives/mode_directive';
 export * from './directives/focusgroup_directive';
 export * from './directives/focustrap_directive';
 
-/// Recipes
-export * from './recipes/buttons/callbar_button';
-export * from './recipes/buttons/callbar_button_with_popover';
-export * from './recipes/buttons/callbar_button_with_dropdown';
-export * from './recipes/cards/ivr_node';
-export * from './recipes/chips/grouped_chip';
-export * from './recipes/conversation_view/attachment_carousel';
-export * from './recipes/conversation_view/editor';
-export * from './recipes/conversation_view/emoji_row';
-export * from './recipes/conversation_view/feed_item_pill';
-export * from './recipes/conversation_view/feed_item_row';
-export * from './recipes/conversation_view/message_input';
-export * from './recipes/conversation_view/time_pill';
-export * from './recipes/header/settings_menu_button';
-export * from './recipes/item_layout/contact_info';
-export * from './recipes/leftbar/callbox';
-export * from './recipes/leftbar/contact_centers_row';
-export * from './recipes/leftbar/contact_row';
-export * from './recipes/leftbar/general_row';
-export * from './recipes/leftbar/group_row';
-export * from './recipes/leftbar/unread_pill';
 export * from './components/MotionText';
-export * from './recipes/notices/top_banner_info';
 
 export { DialtoneLocalization } from './localization';

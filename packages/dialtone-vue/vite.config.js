@@ -36,7 +36,6 @@ function _getEntries (pathPrefix, globRegex) {
 const commonEntries = _getEntries('common', 'common/*/*.{js,vue}');
 const componentEntries = _getEntries('lib', 'components/*/*.{js,vue}');
 const directiveEntries = _getEntries('lib', 'directives/*/*.{js,vue}');
-const recipeEntries = _getEntries('lib', 'recipes/**/*.{js,vue}');
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -71,7 +70,6 @@ export default defineConfig({
         ...commonEntries,
         ...componentEntries,
         ...directiveEntries,
-        ...recipeEntries,
 
         // Shared components
         'shared/sr_only_close_button': './common/sr_only_close_button.vue',
@@ -109,7 +107,7 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './tests/setupTests.js',
     exclude: ['common/custom-emoji.test.js'],
-    include: ['./{common,components,directives,recipes,localization}/**/*.test.js'],
+    include: ['./{common,components,directives,localization}/**/*.test.js'],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html', 'json'],
@@ -118,7 +116,6 @@ export default defineConfig({
         'components/**/*.{js,vue}',
         'common/**/*.{js,vue}',
         'directives/**/*.{js,vue}',
-        'recipes/**/*.{js,vue}',
         'localization/**/*.{js,vue}',
       ],
       exclude: [

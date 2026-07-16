@@ -17,14 +17,13 @@
     @opened="$attrs.onOpened"
   >
     <template #anchor="slotProps">
-      <dt-recipe-contact-row
-        name="Jaqueline Nackos"
-        avatar-presence="busy"
-        avatar-seed="JN"
-        avatar-alt="Avatar person"
-        :avatar-src="defaultImage"
-        user-status="Working from SF"
-        call-button-tooltip="Call contact"
+      <dt-avatar
+        full-name="Jaqueline Nackos"
+        :image-src="defaultImage"
+        image-alt="Avatar person"
+        seed="JN"
+        presence="busy"
+        avatar-class="d-c-pointer"
         v-bind="slotProps"
       />
     </template>
@@ -122,7 +121,6 @@
 
 <script setup>
 import DtHovercard from './Hovercard.vue';
-import DtRecipeContactRow from '@/recipes/leftbar/contact_row/contact_row.vue';
 import defaultImage from '@/common/assets/avatar2.png';
 import DtStack from '../Stack/Stack.vue';
 import DtIcon from '../Icon/Icon.vue';

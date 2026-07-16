@@ -41,10 +41,7 @@ const deprecatedComponents = {
 const distPath = join(__dirname, `../packages/dialtone-vue/dist`);
 const dialtoneVueRootFolder = join(__dirname, `../packages/dialtone-vue`);
 const outputPath = `${distPath}/component-documentation.json`;
-const fileList = [
-  ...getValidFileList(dialtoneVueRootFolder + '/components'),
-  ...getValidFileList(dialtoneVueRootFolder + '/recipes'),
-];
+const fileList = getValidFileList(dialtoneVueRootFolder + '/components');
 
 function writeDocumentationFile (data) {
   const jsonData = JSON.stringify(data);
