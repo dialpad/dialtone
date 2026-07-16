@@ -11,7 +11,6 @@
     >
       <before-after-body
         v-model:mode="mode"
-        v-model:shown="shown"
         v-model:blend="blend"
         v-model:split="split"
         :before="before"
@@ -52,7 +51,6 @@
     >
       <before-after-body
         v-model:mode="mode"
-        v-model:shown="shown"
         v-model:blend="blend"
         v-model:split="split"
         :before="before"
@@ -72,9 +70,10 @@ import BeforeAfterBody from './BeforeAfterBody.vue';
 // Neutral before/after image comparison for the visual migration guide.
 // Unlike DialtoneUsage this carries no do/don't semantics — both panels are
 // equally valid renders of the same scene against two Dialtone versions.
-// Offers an instant before/after toggle (default), side-by-side, split-wipe,
-// and onion-skin (blend slider) modes plus a fullscreen modal; comparison
-// state persists between the inline container and the expanded view.
+// One segmented control drives every view: instant single-image Before and
+// After modes (Before is the default), side-by-side, split-wipe, and
+// onion-skin (blend slider), plus a fullscreen modal; comparison state
+// persists between the inline container and the expanded view.
 defineProps({
   before: {
     type: String,
@@ -98,8 +97,7 @@ defineProps({
   },
 });
 
-const mode = ref('toggle');
-const shown = ref('before');
+const mode = ref('before');
 const blend = ref(50);
 const split = ref(50);
 const expanded = ref(false);
