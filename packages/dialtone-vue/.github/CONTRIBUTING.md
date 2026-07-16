@@ -187,7 +187,6 @@ change via a blog post on [dialtone.dialpad.com](https://dialtone.dialpad.com/ab
 - **`dist`:** The Dialtone Vue library is output here upon `npm run build`.
 - **`docs`:** Any storybook documentation not directly related to a component.
 - **`functions`:** Contains documentation for any functions we export as part of the library.
-- **`recipes`:** Everything related to recipe components is stored here in a folder with the component name. This includes the component itself, tests, documentation and storybook files.
 - **`scripts`:** - Contains shell scripts.
 - **`tests`:** For utility/helper files to be used in multiple tests and test configuration. Actual tests are stored in the component folder.
 
