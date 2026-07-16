@@ -1,0 +1,19 @@
+apps/dialtone-documentation/docs/components/icon.md
+  s_39230a1a3e649e::t_a94a3ff285fdec 32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "24694090ff278ab0a1021de9cd7a04b6be465b66",
+  "prompts": {},
+  "sessions": {
+    "s_39230a1a3e649e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0d14bb61-9c3d-4f11-a86c-02e6c451eb4c",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

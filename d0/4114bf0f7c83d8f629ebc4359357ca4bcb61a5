@@ -1,0 +1,28 @@
+packages/combinator/src/variants/variants_box.js
+  s_cbd29f6a5140e8::t_d5179dfc3ac4ab 7-16,18-41,43-96
+packages/combinator/src/components/option_bar/option_bar.test.js
+  s_cbd29f6a5140e8::t_084f58d1df1be9 323-379
+packages/combinator/src/components/option_bar/option_bar.vue
+  s_cbd29f6a5140e8::t_e37cdc44023432 258,279-280,282,288,292,296,299
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.5",
+  "base_commit_sha": "d04114bf0f7c83d8f629ebc4359357ca4bcb61a5",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_cbd29f6a5140e8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f1571-d2ad-7572-827a-d391f2dc0ba6",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
