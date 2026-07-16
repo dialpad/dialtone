@@ -46,6 +46,14 @@ test('shared render hash includes CSS and icon output', () => {
     assert.throws(
       () => cache.computeSharedRenderHash({
         ...inputs,
+        dialtoneCss: join(fixtureRoot, 'missing.css'),
+      }),
+      /ENOENT/,
+    );
+
+    assert.throws(
+      () => cache.computeSharedRenderHash({
+        ...inputs,
         iconsDist: join(fixtureRoot, 'missing-icons'),
       }),
       /icon JavaScript directory not found/,

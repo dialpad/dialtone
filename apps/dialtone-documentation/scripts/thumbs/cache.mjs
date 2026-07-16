@@ -75,9 +75,9 @@ export function computeSharedRenderHash ({
   iconsDist = DIALTONE_ICONS_DIST,
 } = {}) {
   return sha256(
-    harnessFiles.map(readSafe).join('') +
-    readSafe(tokensCss) +
-    readSafe(dialtoneCss) +
+    harnessFiles.map(path => readFileSync(path, 'utf8')).join('') +
+    readFileSync(tokensCss, 'utf8') +
+    readFileSync(dialtoneCss, 'utf8') +
     readJavaScriptTreeHash(iconsDist),
   );
 }

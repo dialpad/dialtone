@@ -3,12 +3,7 @@
   "targets": {
     "thumbs": {
       "executor": "nx:run-commands",
-      "dependsOn": [
-        "dialtone-tokens:build",
-        "dialtone-css:build",
-        "dialtone-icons:build",
-        "dialtone-vue:build"
-      ],
+      "dependsOn": ["dialtone-css:build", "dialtone-vue:build"],
       "options": {
         "cwd": "{workspaceRoot}",
         "command": "node apps/dialtone-documentation/scripts/thumbs/generate.mjs"
@@ -16,12 +11,7 @@
     },
     "thumbs:preview": {
       "executor": "nx:run-commands",
-      "dependsOn": [
-        "dialtone-tokens:build",
-        "dialtone-css:build",
-        "dialtone-icons:build",
-        "dialtone-vue:build"
-      ],
+      "dependsOn": ["dialtone-css:build", "dialtone-vue:build"],
       "options": {
         "cwd": "{workspaceRoot}",
         "command": "pnpm exec vite apps/dialtone-documentation/scripts/thumbs/harness --port 5899 --host"
