@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { test } from 'vitest';
@@ -38,6 +38,18 @@ test('shared render hash includes CSS and icon output', () => {
     writeFileSync(dialtoneCss, 'dialtone');
     writeFileSync(iconFile, 'icon changed');
     assert.notEqual(cache.computeSharedRenderHash(inputs), baseline);
+
+    writeFileSync(iconFile, 'icon');
+    renameSync(iconFile, join(iconsDir, 'renamed.js'));
+    assert.notEqual(cache.computeSharedRenderHash(inputs), baseline);
+
+    assert.throws(
+      () => cache.computeSharedRenderHash({
+        ...inputs,
+        iconsDist: join(fixtureRoot, 'missing-icons'),
+      }),
+      /icon JavaScript directory not found/,
+    );
   } finally {
     rmSync(fixtureRoot, { recursive: true, force: true });
   }

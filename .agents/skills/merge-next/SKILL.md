@@ -73,6 +73,8 @@ Merge current `origin/staging` into current `next` with a CLI merge commit, pres
      apps/dialtone-documentation/docs/.vuepress/public/assets/images/components
    ```
 
+   If generation fails, stop. Do not continue to review or commit with stale or partial thumbnail output.
+
 9. Present the conflict-resolution summary, the staged diff for originally conflicted files, and the thumbnail generation result and artifact count. Wait for user confirmation before committing. Do not continue until approval is explicit.
 10. Create the default merge commit:
 

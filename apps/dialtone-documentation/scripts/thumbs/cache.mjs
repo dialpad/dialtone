@@ -14,7 +14,7 @@
 import { createHash } from 'crypto';
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'fs';
 import { fileURLToPath } from 'url';
-import { dirname, resolve } from 'path';
+import { dirname, relative, resolve } from 'path';
 
 const __dir = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = resolve(__dir, '../../../..');
@@ -52,15 +52,17 @@ function readDirHash (dir) {
     .join('');
 }
 
-function readJavaScriptTreeHash (dir) {
-  if (!existsSync(dir)) return '';
+function readJavaScriptTreeHash (dir, rootDir = dir) {
+  if (!existsSync(dir)) {
+    throw new Error(`icon JavaScript directory not found: ${dir}`);
+  }
   return readdirSync(dir, { withFileTypes: true })
     .sort((left, right) => left.name.localeCompare(right.name))
     .map(entry => {
       const path = resolve(dir, entry.name);
-      if (entry.isDirectory()) return readJavaScriptTreeHash(path);
+      if (entry.isDirectory()) return readJavaScriptTreeHash(path, rootDir);
       return entry.isFile() && entry.name.endsWith('.js')
-        ? readFileSync(path, 'utf8')
+        ? relative(rootDir, path) + '\0' + readFileSync(path, 'utf8')
         : '';
     })
     .join('');

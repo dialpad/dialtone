@@ -47,6 +47,7 @@ if (!existsSync(skillPath)) {
     'git merge --no-commit --no-ff origin/staging',
     'merge-migrate-color-stops.mjs',
     'dialtone-documentation:thumbs -- --force',
+    'If generation fails, stop',
     'Wait for user confirmation before committing',
     'git commit --no-edit',
     'pnpm nx run dialtone:build',
