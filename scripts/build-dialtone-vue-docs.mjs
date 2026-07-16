@@ -14,7 +14,7 @@ const __dirname = path.dirname(__filename);
 const deprecatedComponents = {
   'SelectMenu': {
     replacement: 'DtComboboxWithPopover',
-    docs: 'https://dialtone.dialpad.com/vue/?path=/story/recipes-comboboxes-combobox-with-popover--default',
+    docs: 'https://dialtone.dialpad.com/vue/?path=/story/components-combobox-with-popover--default',
   },
   'DropdownMenu': {
     replacement: 'DtSelectMenu',
