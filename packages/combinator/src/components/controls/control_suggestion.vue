@@ -1,6 +1,6 @@
 <template>
   <div>
-    <dt-recipe-combobox-with-popover
+    <dt-combobox-with-popover
       ref="combobox"
       label="Valid values"
       max-height="512px"
@@ -52,13 +52,13 @@
           </dt-list-item>
         </ul>
       </template>
-    </dt-recipe-combobox-with-popover>
+    </dt-combobox-with-popover>
   </div>
 </template>
 
 <script setup>
 import DtcControlString from './control_string.vue';
-import { DtRecipeComboboxWithPopover, DtListItem } from '@dialpad/dialtone-vue';
+import { DtComboboxWithPopover, DtListItem } from '@dialpad/dialtone-vue';
 
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed, ref } from 'vue';
