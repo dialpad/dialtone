@@ -1,7 +1,7 @@
 ---
 type: development
 category: development
-keywords: [vue-component, yeoman, generator, dialtone-vue, storybook, vitest, props, slots, events, jsdoc, constants, recipe]
+keywords: [vue-component, yeoman, generator, dialtone-vue, storybook, vitest, props, slots, events, jsdoc, constants]
 ai_summary: How to create a new Vue component in dialtone-vue using the Yeoman generator, what files are created, and the manual steps required after generation.
 last_updated: 2026-03-04
 related_packages: [dialtone-vue, dialtone-css]
@@ -27,14 +27,11 @@ components/button/
 └── index.js                     # Barrel export for the component and its constants
 ```
 
-Recipe components (built from other Dialtone components) follow the same structure but live under `recipes/{category}/` instead of `components/`.
-
 ## Naming Conventions
 
 | Thing | Convention | Example |
 |-------|-----------|---------|
 | Component class name | PascalCase, `Dt` prefix | `DtButton` |
-| Recipe component class name | PascalCase, `DtRecipe` prefix | `DtRecipeCallbarButton` |
 | Directory and file names | snake_case, no prefix | `button/`, `button.vue` |
 | Template tag | kebab-case, `dt-` prefix | `<dt-button>` |
 | CSS base class | `d-{name}` | `d-btn` |
@@ -52,10 +49,8 @@ pnpm exec yo dialtone
 ```
 
 The generator asks:
-1. **Is this a recipe?** — A recipe is a compound component built from other Dialtone components. Regular components answer No.
-2. **Category** (recipes only) — The sub-folder under `recipes/` (e.g., `Buttons`, `Inputs`, or a custom name).
-3. **Component name** (PascalCase) — Must start with `Dt` (e.g., `DtMyNewComponent`) or `DtRecipe` for recipes.
-4. **Human-readable name** — Used in Storybook labels (e.g., `My New Component`).
+1. **Component name** (PascalCase) — Must start with `Dt` (e.g., `DtMyNewComponent`).
+2. **Human-readable name** — Used in Storybook labels (e.g., `My New Component`).
 
 The generator creates all 8 files with boilerplate already in place: an empty `.vue`, an empty `_constants.js`, a test scaffold, Storybook config, two story templates, MDX docs, and the `index.js` barrel.
 
