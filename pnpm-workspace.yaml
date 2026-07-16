@@ -55,6 +55,7 @@ allowBuilds:
   keytar: true
   nodent-runtime: true
   nx: true
+  protobufjs: true
   spawn-sync: true
   style-dictionary: true
   unrs-resolver: true
