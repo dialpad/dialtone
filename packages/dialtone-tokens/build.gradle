@@ -30,11 +30,6 @@ android {
 }
 
 
-task androidSourcesJar(type: Jar) {
-    archiveClassifier.set('sources')
-    from android.sourceSets.main.java.srcDirs
-}
-
 task setProperties(type: WriteProperties) {
     outputFile = file('gradle.properties')
     property 'android.useAndroidX', true
@@ -46,9 +41,6 @@ afterEvaluate {
         publications {
             release(MavenPublication) {
                 from components.release
-
-                // sources
-                artifact androidSourcesJar
 
                 groupId = 'dialtone.dialpad'
 
@@ -87,10 +79,6 @@ afterEvaluate {
     }
 }
 
-artifacts {
-    archives androidSourcesJar
-}
-
 android {
     compileSdkVersion 31
     defaultConfig {
@@ -108,6 +96,11 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    publishing {
+        singleVariant('release') {
+            withSourcesJar()
+        }
     }
     kotlinOptions {
         jvmTarget = '1.8'
