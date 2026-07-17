@@ -34,7 +34,7 @@
     <dt-checkbox-group
       name="checkbox-group-with-selected-values"
       legend="With Selected Values"
-      :selected-values="['apple', 'other']"
+      :model-value="['apple', 'other']"
     >
       <dt-checkboxes-decorator />
     </dt-checkbox-group>

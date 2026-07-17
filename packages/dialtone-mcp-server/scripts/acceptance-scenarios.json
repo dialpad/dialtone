@@ -7,9 +7,9 @@
   },
   {
     "id": "TS-003",
-    "query": "What's the difference between DtButton kind='primary' and kind='danger'?",
+    "query": "What's the difference between DtButton kind='primary' and kind='critical'?",
     "allowlist": ["button"],
-    "rationale": "Prop value semantics — should match button Variants section describing primary/danger kinds"
+    "rationale": "Prop value semantics — should match button Variants section describing primary/critical kinds"
   },
   {
     "id": "TS-004",

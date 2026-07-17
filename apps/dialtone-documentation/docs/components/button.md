@@ -56,7 +56,7 @@ Button labels should be clear and predictable so users have confidence in their 
 
 ## Variants
 
-Dialtone provides five options for `kind`, with three levels of `importance`. Use `kind="primary"` for the main call to action, `kind="danger"` for destructive actions, `kind="muted"` for secondary actions, `kind="clear"` for low-emphasis actions, and `kind="link"` for navigation-style buttons. The DtButton `kind` prop controls the visual hierarchy and semantic meaning of the action.
+Dialtone provides five options for `kind`, with three levels of `importance`. Use `kind="primary"` for the main call to action, `kind="critical"` for destructive actions, `kind="muted"` for secondary actions, `kind="clear"` for low-emphasis actions, and `kind="link"` for navigation-style buttons. The DtButton `kind` prop controls the visual hierarchy and semantic meaning of the action.
 
 <ButtonVariantsTable></ButtonVariantsTable>
 

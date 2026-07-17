@@ -11,7 +11,7 @@ const fixture: DocumentationRecord[] = [
     docTitle: 'Button',
     category: 'components',
     headingPath: ['Usage'],
-    content: 'A button conveys an action. Use DtButton kind="primary" for the main call to action. Use kind="danger" for destructive actions.',
+    content: 'A button conveys an action. Use DtButton kind="primary" for the main call to action. Use kind="critical" for destructive actions.',
     frontmatter: {
       title: 'Button',
       description: 'Interactive button component',
@@ -27,7 +27,7 @@ const fixture: DocumentationRecord[] = [
     docTitle: 'Button',
     category: 'components',
     headingPath: ['Variants'],
-    content: 'Variants include primary, danger, muted, and clear kinds. Loading spinner shown via loading prop.',
+    content: 'Variants include primary, critical, muted, and clear kinds. Loading spinner shown via loading prop.',
     frontmatter: {
       title: 'Button',
       description: 'Interactive button component',
@@ -175,10 +175,10 @@ describe('searchDocumentation', () => {
   });
 
   test('docTitle match ranks above higher matchCount without title match', () => {
-    // 'modal danger': modal#usage has title match ('modal'==='modal'), matchCount 1.
-    // button#usage has no title match, matchCount 1 (only 'danger' matches).
+    // 'modal critical': modal#usage has title match ('modal'==='modal'), matchCount 1.
+    // button#usage has no title match, matchCount 1 (only 'critical' matches).
     // Title match is evaluated before matchCount — modal must rank first.
-    const { results } = searchDocumentation('modal danger', fixture);
+    const { results } = searchDocumentation('modal critical', fixture);
     expect(results.length).toBeGreaterThan(0);
     expect((results[0].details as any).docId).toBe('modal');
   });
@@ -243,7 +243,7 @@ describe('Acceptance scenarios — real queries against the full corpus', () => 
     },
     {
       id: 'TS-003',
-      query: "What's the difference between DtButton kind='primary' and kind='danger'?",
+      query: "What's the difference between DtButton kind='primary' and kind='critical'?",
       allowlist: ['Button'],
     },
     {

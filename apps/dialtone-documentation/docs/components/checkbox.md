@@ -108,7 +108,7 @@ Checkboxes are an easily understandable way to indicate that users can select on
 ### Stacked Group
 
 ```vue demo
-<dt-checkbox-group legend="Call Blocking & Spam Protection" :selectedValues="[]">
+<dt-checkbox-group legend="Call Blocking & Spam Protection" :model-value="[]">
   <dt-checkbox
     name="option1"
     value="Value"
@@ -130,7 +130,7 @@ Checkboxes are an easily understandable way to indicate that users can select on
 ### With Description Text
 
 ```vue demo
-<dt-checkbox-group legend="Call Blocking & Spam Protection" :selectedValues="[]">
+<dt-checkbox-group legend="Call Blocking & Spam Protection" :model-value="[]">
   <dt-checkbox
     name="option1"
     value="Value"
@@ -155,7 +155,7 @@ Checkboxes are an easily understandable way to indicate that users can select on
 ### With Validation States
 
 ```vue demo
-<dt-checkbox-group legend="Call Blocking & Spam Protection" :selectedValues="[]">
+<dt-checkbox-group legend="Call Blocking & Spam Protection" :model-value="[]">
   <dt-checkbox
     name="option1"
     value="Value"
