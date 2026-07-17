@@ -76,7 +76,7 @@
           <div
             ref="listWrapper"
             :class="[
-              'd-recipe-combobox-with-popover__list',
+              'd-combobox-with-popover__list',
               DROPDOWN_PADDING_CLASSES[padding],
               listClass,
             ]"

@@ -1,16 +1,11 @@
 <template>
   <ul class="d-mbe-50">
-    <dt-recipe-feed-item-row
+    <li
       v-for="data in cardData"
       :key="data.name"
-      :show-header="true"
-      :avatar-image-url="data.src"
-      :display-name="data.name"
-      :time="data.time"
-      :is-active="true"
-      :state="$attrs.state"
+      class="d-d-flex d-gap-100 d-mbe-100"
     >
-      <template #avatar>
+      <div>
         <dt-hovercard
           :id="$attrs.id"
           :placement="$attrs.placement"
@@ -109,29 +104,41 @@
             </dt-stack>
           </template>
         </dt-hovercard>
-      </template>
-      <template v-if="data.default">
-        <span v-html="data.default" />
-      </template>
-      <dt-recipe-emoji-row>
-        <template #picker>
-          <dt-button
-            importance="clear"
-            :size="200"
-            aria-label="Add reaction"
-            data-qa="feed-item-reaction-button"
-            class="d-recipe-emoji-row__reaction d-recipe-emoji-row__picker"
-          >
-            <span class="d-d-inline-flex">
-              <dt-icon
-                size="300"
-                name="satisfied"
-              />
-            </span>
-          </dt-button>
-        </template>
-      </dt-recipe-emoji-row>
-    </dt-recipe-feed-item-row>
+      </div>
+      <dt-stack
+        direction="column"
+        gap="50"
+        class="d-fl-grow1"
+      >
+        <dt-stack
+          direction="row"
+          gap="50"
+          justify="space-between"
+        >
+          <p class="d-body--sm-bold">
+            {{ data.name }}
+          </p>
+          <p class="d-body--sm d-fc-tertiary">
+            {{ data.time }}
+          </p>
+        </dt-stack>
+        <span
+          v-if="data.default"
+          v-html="data.default"
+        />
+        <dt-button
+          importance="clear"
+          :size="200"
+          aria-label="Add reaction"
+          data-qa="feed-item-reaction-button"
+        >
+          <dt-icon
+            size="300"
+            name="satisfied"
+          />
+        </dt-button>
+      </dt-stack>
+    </li>
   </ul>
 </template>
 
@@ -139,8 +146,6 @@
 import DtHovercard from './Hovercard.vue';
 import avatar1 from '@/common/assets/avatar1.png?url';
 import avatar2 from '@/common/assets/avatar2.png?url';
-import { DtRecipeFeedItemRow } from '@/recipes/conversation_view/feed_item_row';
-import { DtRecipeEmojiRow } from '@/recipes/conversation_view/emoji_row';
 import { DtStack } from '@/components/Stack';
 import { DtIcon } from '@/components/Icon';
 import { DtButton } from '@/components/Button';

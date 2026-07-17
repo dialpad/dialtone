@@ -1,4 +1,4 @@
-export { default as DtMotionText, default as DtRecipeMotionText } from './MotionText.vue';
+export { default as DtMotionText } from './MotionText.vue';
 export {
   MOTION_TEXT_ANIMATION_MODES,
   MOTION_TEXT_SPEEDS,

@@ -18,7 +18,7 @@ dialtone-icons ----------------------> dialtone-vue -> dialtone-documentation
 | ------------------------------------------- | ----------------------------- | ---------------------------------------------------------------------- |
 | `packages/dialtone-tokens/**`               | tokens                        | Design token source and platform outputs.                              |
 | `packages/dialtone-css/**`                  | css                           | Less utilities and component styles. Depends on tokens.                |
-| `packages/dialtone-vue/**`                  | vue                           | Vue components, recipes, stories, docs JSON. Depends on icons and CSS. |
+| `packages/dialtone-vue/**`                  | vue                           | Vue components, stories, docs JSON. Depends on icons and CSS.          |
 | `packages/combinator/**`                    | combinator                    | Playground, variants, generated-code UI, and component thumbnail inputs. Depends on Vue, icons, CSS, and tokens. |
 | `apps/dialtone-documentation/**`            | docs-site                     | VuePress documentation site.                                           |
 | `packages/dialtone-docs/**`                 | ai-docs                       | AI-readable docs and public docs JSON.                                 |

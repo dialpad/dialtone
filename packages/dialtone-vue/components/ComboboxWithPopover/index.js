@@ -1,1 +1,1 @@
-export { default as DtComboboxWithPopover, default as DtRecipeComboboxWithPopover } from './ComboboxWithPopover.vue';
+export { default as DtComboboxWithPopover } from './ComboboxWithPopover.vue';

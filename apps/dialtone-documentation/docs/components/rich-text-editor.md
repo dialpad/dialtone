@@ -8,7 +8,7 @@ keywords: ["rte", "wysiwyg", "markdown", "d-rte", "DtRichTextEditor", "dt-rich-t
 ---
 
 > [!INFO]
-> Not a standalone component, please use Message Input recipe instead
+> Not a standalone component. For a complete message input experience, use `DpEditor` / `DpMessageInput` from `@dialpad/chatkit` instead
 
 <component-combinator component-name="DtRichTextEditor" />
 

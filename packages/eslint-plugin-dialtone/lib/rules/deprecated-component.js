@@ -32,7 +32,7 @@ module.exports = {
         fileName: 'select_menu',
         componentName: 'SelectMenu',
         replacement: 'DtComboboxWithPopover',
-        link: 'https://dialtone.dialpad.com/vue/?path=/story/recipes-comboboxes-combobox-with-popover--default'
+        link: 'https://dialtone.dialpad.com/vue/?path=/story/components-combobox-with-popover--default'
       },
       {
         fileName: 'dropdown_menu',

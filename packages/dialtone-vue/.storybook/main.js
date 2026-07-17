@@ -9,8 +9,8 @@ const require = createRequire(import.meta.url);
 /** @type { import('@storybook/vue3-vite').StorybookConfig } */
 const config = {
   stories: [
-    '../@(components|directives|recipes|prototypes|localization)/**/*.stories.@(js|jsx|ts|tsx)',
-    '../@(components|directives|docs|recipes|localization)/**/*.mdx',
+    '../@(components|directives|prototypes|localization)/**/*.stories.@(js|jsx|ts|tsx)',
+    '../@(components|directives|docs|localization)/**/*.mdx',
     '../functions/*.mdx',
   ],
 
