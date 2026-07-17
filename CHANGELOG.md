@@ -1,3 +1,10 @@
+## [9.188.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.188.1...dialtone/v9.188.2) (2026-07-17)
+
+
+### Bug Fixes
+
+* **Tabs:** DP-198400 fix disabled tab styling ([#1372](https://github.com/dialpad/dialtone/issues/1372)) ([2c0d386](https://github.com/dialpad/dialtone/commit/2c0d386bf441172e6a6357e751ce33730ad25b4b))
+
 ## [9.188.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.188.0...dialtone/v9.188.1) (2026-07-08)
 
 
