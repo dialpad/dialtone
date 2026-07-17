@@ -152,13 +152,17 @@
         --tab-color-text: var(--dt-action-color-foreground-base-active);
     }
 
-    &::after,
-    &:hover::after {
+    &:not(:disabled)::after,
+    &:not(:disabled):hover::after {
         --tab-color-background: var(--dt-action-color-foreground-base-default);
 
         .d-tablist--no-border & {
             background-color: var(--tab-color-background);
         }
+    }
+
+    &:disabled::after {
+        --tab-color-background: var(--dt-action-color-foreground-disabled-default);
     }
 }
 
