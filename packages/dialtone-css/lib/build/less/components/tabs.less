@@ -163,6 +163,10 @@
 
     &:disabled::after {
         --tab-color-background: var(--dt-action-color-foreground-disabled-default);
+
+        .d-tablist--no-border & {
+            background-color: var(--tab-color-background);
+        }
     }
 }
 
