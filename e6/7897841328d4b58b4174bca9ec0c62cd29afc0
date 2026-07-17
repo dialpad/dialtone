@@ -1,0 +1,21 @@
+packages/dialtone-vue/components/chip/chip.test.js
+  s_144f824c731e18::t_c33d4b2a807799 277-286
+packages/dialtone-vue/components/chip/chip.vue
+  s_144f824c731e18::t_ba47c2ea1d9584 396
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "e67897841328d4b58b4174bca9ec0c62cd29afc0",
+  "prompts": {},
+  "sessions": {
+    "s_144f824c731e18": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019e463c-6fa5-7672-8ec8-e8e59c053370",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

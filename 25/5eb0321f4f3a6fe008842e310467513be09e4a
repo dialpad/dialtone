@@ -1,0 +1,33 @@
+packages/dialtone-migration-helper/content.js
+  s_6bb5ab4bcdcce9::t_1b2e3b9fa2e77c 3-5,9-12,14-15
+packages/dialtone-migration-helper/e2e.mjs
+  s_6bb5ab4bcdcce9::t_c5ee97708ba7c9 158,161
+packages/dialtone-migration-helper/manifest.json
+  s_bea8357ca2758d::t_3cbd392f21783c 4
+packages/dialtone-migration-helper/package.json
+  s_bea8357ca2758d::t_6897d2daab2896 3,9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "255eb0321f4f3a6fe008842e310467513be09e4a",
+  "prompts": {},
+  "sessions": {
+    "s_6bb5ab4bcdcce9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "adce73fc-348b-4e3a-a5c6-9e4fbaa675c4",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "belumontoya <163597542+belumontoya@users.noreply.github.com>"
+    },
+    "s_bea8357ca2758d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "991c052f-94ac-4f65-8d58-03f928a5fd57",
+        "model": "unknown"
+      },
+      "human_author": "belumontoya <163597542+belumontoya@users.noreply.github.com>"
+    }
+  }
+}
