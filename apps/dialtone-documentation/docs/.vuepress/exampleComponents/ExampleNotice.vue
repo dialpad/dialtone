@@ -2,7 +2,7 @@
   <dt-notice
     :important="important"
     :kind="kind"
-    :title="title"
+    :header-text="title"
   >
     Message body with
     <dt-link

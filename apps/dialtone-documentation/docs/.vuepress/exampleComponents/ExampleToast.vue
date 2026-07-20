@@ -1,7 +1,7 @@
 <template>
   <aside :class="['d-toast-wrapper', { 'd-ps-fixed': fixed }]">
     <dt-toast
-      :title="title"
+      :header-text="title"
       :open="open"
       :important="important"
       :duration="duration"

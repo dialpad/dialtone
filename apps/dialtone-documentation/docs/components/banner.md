@@ -11,7 +11,7 @@ keywords: ["alert","notification","message","d-banner","DtBanner","dt-banner"]
 ```vue demo-only
 <dt-stack gap="200" class="d-w100p" align="center">
   <dt-banner header-text="Example banner" kind="info" class="d-ps-relative d-zi-base">
-    Message body with a <dt-link kind="muted">Link</dt-link>
+    Message body with a <dt-link tone="muted">Link</dt-link>
     <template #action>
       <dt-button :size="200" kind="muted" importance="outlined">Action</dt-button>
     </template>

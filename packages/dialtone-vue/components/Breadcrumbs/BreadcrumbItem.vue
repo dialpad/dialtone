@@ -9,7 +9,7 @@
     :style="$attrs.style"
   >
     <dt-link
-      :kind="linkKind"
+      :tone="linkTone"
       :inverted="linkInverted"
       :aria-current="ariaCurrent"
       :underline="false"
@@ -75,7 +75,7 @@ export default {
   },
 
   computed: {
-    linkKind () {
+    linkTone () {
       return this.inverted ? '' : MUTED;
     },
 

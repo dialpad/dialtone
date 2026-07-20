@@ -4,7 +4,7 @@
     class="d-d-inline-block"
   >
     <dt-link
-      kind="mention"
+      tone="mention"
       @click.prevent="handleClick"
     >
       <dt-stack

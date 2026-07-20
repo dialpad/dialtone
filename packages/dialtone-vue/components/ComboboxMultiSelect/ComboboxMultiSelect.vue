@@ -68,7 +68,7 @@
           :messages="inputMessages"
           :size="size"
           v-bind="inputListeners"
-          @input="onInput"
+          @update:model-value="onInput"
         />
 
         <dt-validation-messages
