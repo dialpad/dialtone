@@ -4,6 +4,7 @@ const {
   IS_SHADOW_REGEX,
   IS_TYPOGRAPHY_REGEX,
   IS_TEXT_REGEX,
+  SHADOW_ALIASES,
   REGEX_OPTIONS,
 } = require('./constants.cjs');
 
@@ -92,16 +93,19 @@ function boxShadows (shadowDeclarations, Declaration) {
       // in css inset shadows are defined by adding the inset keyword
       const isInset = shadowName.includes('inset');
       const times = shadowMap[shadowName];
-      const value = Array(times)
-        .fill(undefined)
-        .map((val, i) => {
-          let shadowNumber = `-${i + 1}`;
-          // tokens no longer get numbered if there is only a single one, so if this is the case, do not number it.
-          if (times === 1) {
-            shadowNumber = '';
-          }
-          return `var(${shadowVar}${shadowNumber}-offset-x) var(${shadowVar}${shadowNumber}-offset-y) var(${shadowVar}${shadowNumber}-blur) var(${shadowVar}${shadowNumber}-spread) var(${shadowVar}${shadowNumber}-color)${isInset ? ' inset' : ''}`;
-        }).join(', ');
+      const alias = SHADOW_ALIASES[shadowName];
+      const value = alias
+        ? `var(--dt-shadow-${alias})`
+        : Array(times)
+          .fill(undefined)
+          .map((val, i) => {
+            let shadowNumber = `-${i + 1}`;
+            // tokens no longer get numbered if there is only a single one, so if this is the case, do not number it.
+            if (times === 1) {
+              shadowNumber = '';
+            }
+            return `var(${shadowVar}${shadowNumber}-offset-x) var(${shadowVar}${shadowNumber}-offset-y) var(${shadowVar}${shadowNumber}-blur) var(${shadowVar}${shadowNumber}-spread) var(${shadowVar}${shadowNumber}-color)${isInset ? ' inset' : ''}`;
+          }).join(', ');
 
       shadowDeclarations.at(0).after(new Declaration({ prop: shadowVar, value }));
       newDocEntries[shadowVar] = formatCompositionTokenForDocs(shadowVar, value);
