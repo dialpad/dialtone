@@ -1,12 +1,12 @@
 ---
 title: Outline
 description: Utilities for controlling an element's outline.
-keywords: ["focus ring", "focus outline", "focus style"]
+keywords: ['focus ring', 'focus outline', 'focus style']
 ---
 
 ## Usage
 
-Use `d-ol-{focusring|focusring-inset|none}` to change an elements' outline.
+Use `d-ol-{focusring|focusring-outset|none}` to change an element's outline.
 
 ```vue demo
 <!-- @wrapper -->
@@ -14,8 +14,8 @@ Use `d-ol-{focusring|focusring-inset|none}` to change an elements' outline.
   <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-code--sm d-ol-focusring">
     .d-ol-focusring
   </dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-code--sm d-ol-focusring-inset">
-    .d-ol-focusring-inset
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-code--sm d-ol-focusring-outset">
+    .d-ol-focusring-outset
   </dt-stack>
   <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-code--sm d-ol-none">
     .d-ol-none
@@ -23,8 +23,51 @@ Use `d-ol-{focusring|focusring-inset|none}` to change an elements' outline.
 </dt-stack>
 ```
 
-* Use `d-ol-focusring` to add a focus ring that will render **outside** of the element.
-* Use `d-ol-focusring-inset` to add a focus ring that renders **within** the edge of the element. This is particularly useful when the containing element bleeds to the edge of its parent or its `overflow` property is set to `hidden`.
+- Use `d-ol-focusring` to add a focus ring within the edge of an element. Use this utility when an element reaches the edge of its parent or its `overflow` property is set to `hidden`.
+- Use `d-ol-focusring-outset` to add a focus ring outside the edge of an element.
+- Use `d-ol-none` to remove an element's focus ring.
+
+## Hover
+
+Use `h:d-ol-{focusring|focusring-outset|none}` to change an element's outline on `:hover`.
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-primary h:d-ol-focusring-outset">outset</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-primary h:d-ol-focusring">inset</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-primary h:d-ol-none">none</dt-button>
+</dt-stack>
+```
+
+## Focus Visible
+
+Use `fv:d-ol-{focusring|focusring-outset|none}` to change an element's outline on `:focus-visible` when focused by keyboard.
+
+> [!INFO]
+> `fv:d-ol-*` applies to elements that are focused via **keyboard navigation**, not mouse or touch.
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-primary fv:d-ol-focusring-outset">outset</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-primary fv:d-ol-focusring">inset</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-primary fv:d-ol-none">none</dt-button>
+</dt-stack>
+```
+
+## Focus
+
+Use `f:d-ol-{focusring|focusring-outset|none}` to change an element's outline on `:focus` and `:focus-within`.
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-primary f:d-ol-focusring-outset">outset</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-primary f:d-ol-focusring">inset</dt-button>
+  <dt-button kind="unstyled" class="d-p-200 d-bar-400 d-bgc-primary f:d-ol-none">none</dt-button>
+</dt-stack>
+```
 
 <script setup>
   import { outline } from '@data/interactivity.json';
