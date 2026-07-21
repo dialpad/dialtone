@@ -1,0 +1,25 @@
+.github/workflows/release.yml
+  s_2e71bb8adef1cd::t_804bd437d09e53 24
+  s_2e71bb8adef1cd::t_18c93b2041bded 122-125
+packages/dialtone-cli/package.json
+  s_2e71bb8adef1cd::t_bd65fa351f4b97 46
+.github/workflows/publish-web.yml
+  s_2e71bb8adef1cd::t_edbec4d1e7b19c 82-83
+  s_2e71bb8adef1cd::t_1ffd2be6a073be 22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "27c3e24367d6a5dbb2fa7ae6aa7b6f63530aedf8",
+  "prompts": {},
+  "sessions": {
+    "s_2e71bb8adef1cd": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "37d4b1ef-0941-4843-8a5f-2e78e304db0c",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

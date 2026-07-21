@@ -1,0 +1,19 @@
+apps/dialtone-documentation/docs/guides/migration/visual-changes/index.md
+  s_93aeca3805a6ee::t_00a63466c9fe52 267
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "5bf434ea765163bd73eb5d4877c57a20969e45f7",
+  "prompts": {},
+  "sessions": {
+    "s_93aeca3805a6ee": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6eac0ba6-144f-46e1-9c25-fb0c29ab1e02",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
