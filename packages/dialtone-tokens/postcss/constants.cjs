@@ -12,6 +12,9 @@ module.exports = {
   IS_SHADOW_REGEX: /--dt.*-shadow/,
   IS_TYPOGRAPHY_REGEX: /--dt.*-typography/,
   IS_TEXT_REGEX: /--dt-text-/,
+  SHADOW_ALIASES: {
+    focus: 'focus-inset',
+  },
   REGEX_OPTIONS: {
     SHADOW_VARIABLES: [
       'small',
@@ -21,6 +24,7 @@ module.exports = {
       'card',
       // keep focus inset above focus or else the regex will capture focus first
       'focus-inset',
+      'focus-outset',
       'focus',
     ].join('|'),
     TYPOGRAPHY_VARIABLES: [

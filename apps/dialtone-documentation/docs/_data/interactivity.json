@@ -84,11 +84,16 @@
   "outline": [
     {
       "class": "d-ol-focusring",
-      "output": "box-shadow: var(--bs-focus-ring) !important;"
+      "output": "box-shadow: var(--dt-shadow-focus) !important;"
     },
     {
       "class": "d-ol-focusring-inset",
-      "output": "box-shadow: var(--bs-focus-ring-inset) !important;"
+      "output": "box-shadow: var(--dt-shadow-focus-inset) !important;",
+      "deprecated": true
+    },
+    {
+      "class": "d-ol-focusring-outset",
+      "output": "box-shadow: var(--dt-shadow-focus-outset) !important;"
     },
     {
       "class": "d-ol-none",
