@@ -1,0 +1,23 @@
+packages/dialtone-vue/components/Hovercard/Hovercard.test.js
+  s_1b0723d23d701b::t_66cd6579916902 255-271
+packages/dialtone-vue/components/Popover/Popover.vue
+  s_1b0723d23d701b::t_df35eee601b632 50-54
+packages/dialtone-vue/components/Popover/Popover.test.js
+  s_1b0723d23d701b::t_e9663c2c4c2101 395-417
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "ddc769934e9fec48adde7887d629e49ebd3e463a",
+  "prompts": {},
+  "sessions": {
+    "s_1b0723d23d701b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9a319ef4-2b39-4342-8916-af92ca8f529a",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
