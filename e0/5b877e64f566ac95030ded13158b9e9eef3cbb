@@ -1,0 +1,20 @@
+apps/dialtone-documentation/docs/guides/migration/extension-test/index.md
+  s_4aa8a9ed398ba2::t_6c2a0eda8b4e86 246
+  s_4aa8a9ed398ba2::t_e867cd04b9eef7 317
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "e05b877e64f566ac95030ded13158b9e9eef3cbb",
+  "prompts": {},
+  "sessions": {
+    "s_4aa8a9ed398ba2": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "de2e538f-bdb5-40d6-b036-a85b80da3de0",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "belumontoya <163597542+belumontoya@users.noreply.github.com>"
+    }
+  }
+}
