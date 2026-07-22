@@ -1,3 +1,11 @@
+# [3.224.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.224.0-next.1...dialtone-vue/v3.224.0-next.2) (2026-07-22)
+
+
+### Code Refactoring
+
+* **Dialtone Vue,dialtone Css:** DLT-3536 clean up remaining legacy prop migration references ([#1374](https://github.com/dialpad/dialtone/issues/1374)) ([0629638](https://github.com/dialpad/dialtone/commit/062963833663ebefcf04799b983cb43efa7d3748))
+* **Dialtone Vue,dialtone Css:** DLT-3537 remove recipes ([#1371](https://github.com/dialpad/dialtone/issues/1371)) ([8611a05](https://github.com/dialpad/dialtone/commit/8611a0513141b3bfc9717124de56cb5107f61a97))
+
 # [3.224.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.223.1...dialtone-vue/v3.224.0-next.1) (2026-07-14)
 
 
