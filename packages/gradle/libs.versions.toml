@@ -1,0 +1,18 @@
+[versions]
+agp = "8.13.2"
+kotlin = "2.3.0"
+gradleIdeaExt = "1.1.7"
+composeBom = "2026.01.01"
+androidCompileSdk = "36"
+androidMinSdk = "28"
+androidTargetSdk = "35"
+
+[libraries]
+composeBom = { module = "androidx.compose:compose-bom", version.ref = "composeBom" }
+composeUi = { module = "androidx.compose.ui:ui" }
+
+[plugins]
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlinComposeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+gradleIdeaExt = { id = "org.jetbrains.gradle.plugin.idea-ext", version.ref = "gradleIdeaExt" }
