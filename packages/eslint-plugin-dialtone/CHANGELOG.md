@@ -1,3 +1,10 @@
+# [1.14.0-next.5](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.14.0-next.4...eslint-plugin-dialtone/v1.14.0-next.5) (2026-07-22)
+
+
+### Code Refactoring
+
+* **Dialtone Vue,dialtone Css:** DLT-3537 remove recipes ([#1371](https://github.com/dialpad/dialtone/issues/1371)) ([8611a05](https://github.com/dialpad/dialtone/commit/8611a0513141b3bfc9717124de56cb5107f61a97))
+
 # [1.14.0-next.4](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.14.0-next.3...eslint-plugin-dialtone/v1.14.0-next.4) (2026-07-13)
 
 
