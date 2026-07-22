@@ -1,3 +1,15 @@
+# [8.81.0-next.7](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.81.0-next.6...dialtone-css/v8.81.0-next.7) (2026-07-22)
+
+
+### Code Refactoring
+
+* **Dialtone Vue,dialtone Css:** DLT-3537 remove recipes ([#1371](https://github.com/dialpad/dialtone/issues/1371)) ([8611a05](https://github.com/dialpad/dialtone/commit/8611a0513141b3bfc9717124de56cb5107f61a97))
+
+
+### Features
+
+* **Dialtone Tokens, Dialtone Css:** DLT-3551 add focus ring variants ([#1375](https://github.com/dialpad/dialtone/issues/1375)) ([bc78543](https://github.com/dialpad/dialtone/commit/bc7854353500ac56c75f486857ac6a9631b24dc6))
+
 # [8.81.0-next.6](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.81.0-next.5...dialtone-css/v8.81.0-next.6) (2026-07-15)
 
 
