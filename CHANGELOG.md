@@ -1,3 +1,22 @@
+# [10.0.0-next.6](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.5...dialtone/v10.0.0-next.6) (2026-07-22)
+
+
+### Bug Fixes
+
+* **Dialtone Documentation:** DLT-3541 build current assets before thumbnail generation ([#1367](https://github.com/dialpad/dialtone/issues/1367)) ([11dbd9b](https://github.com/dialpad/dialtone/commit/11dbd9bdc2b875d101bfba51dedbebd6fa93597a))
+
+
+### Code Refactoring
+
+* **Dialtone Vue,dialtone Css:** DLT-3536 clean up remaining legacy prop migration references ([#1374](https://github.com/dialpad/dialtone/issues/1374)) ([0629638](https://github.com/dialpad/dialtone/commit/062963833663ebefcf04799b983cb43efa7d3748))
+* **Dialtone Vue,dialtone Css:** DLT-3537 remove recipes ([#1371](https://github.com/dialpad/dialtone/issues/1371)) ([8611a05](https://github.com/dialpad/dialtone/commit/8611a0513141b3bfc9717124de56cb5107f61a97))
+* **Documentation:** NO-JIRA merge the before/after switch into the comparison mode control ([#1369](https://github.com/dialpad/dialtone/issues/1369)) ([3cd614f](https://github.com/dialpad/dialtone/commit/3cd614f016f2a567065a6cb64c484261378e50d2))
+
+
+### Features
+
+* **Dialtone Tokens, Dialtone Css:** DLT-3551 add focus ring variants ([#1375](https://github.com/dialpad/dialtone/issues/1375)) ([bc78543](https://github.com/dialpad/dialtone/commit/bc7854353500ac56c75f486857ac6a9631b24dc6))
+
 # [10.0.0-next.5](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.4...dialtone/v10.0.0-next.5) (2026-07-15)
 
 
