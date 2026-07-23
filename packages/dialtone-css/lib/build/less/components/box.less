@@ -289,6 +289,10 @@ each(@box-overflow-values, {
   inline-size: 100%;
   block-size: 100%;
   overflow: auto; // Native scroll fallback when OverlayScrollbars is unavailable
+  &,
+  &:focus-visible {
+    box-shadow: none;
+  }
 }
 
 .d-box:has(> .d-box__scrollbar-content) {
