@@ -1,3 +1,10 @@
+# [2.0.0-next.6](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.0-next.5...dialtone-tokens/v2.0.0-next.6) (2026-07-23)
+
+
+### Bug Fixes
+
+* **Dialtone Tokens:** NO-JIRA removed dead tokens ([78cd1aa](https://github.com/dialpad/dialtone/commit/78cd1aa7fe423149c9fa1fb0bdc085e416e2d255))
+
 # [2.0.0-next.5](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.0-next.4...dialtone-tokens/v2.0.0-next.5) (2026-07-22)
 
 
