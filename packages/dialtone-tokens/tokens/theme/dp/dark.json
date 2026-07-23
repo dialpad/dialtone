@@ -1400,10 +1400,6 @@
         }
       },
       "border": {
-        "base": {
-          "value": "{color.black.1000}",
-          "type": "color"
-        },
         "subtle": {
           "value": "{shell.base.color.border}",
           "type": "color",

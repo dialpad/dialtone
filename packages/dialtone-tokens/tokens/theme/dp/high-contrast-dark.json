@@ -35,7 +35,7 @@
         "value": "{color.blue.900}",
         "type": "color"
       },
-      "info-copy": {
+      "info-strong": {
         "value": "{color.blue.1000}",
         "type": "color"
       }
