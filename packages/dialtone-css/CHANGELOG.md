@@ -1,3 +1,10 @@
+# [8.81.0-next.8](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.81.0-next.7...dialtone-css/v8.81.0-next.8) (2026-07-23)
+
+
+### Bug Fixes
+
+* **Tabs:** DP-198400 fix disabled tab styling ([#1372](https://github.com/dialpad/dialtone/issues/1372)) ([2c0d386](https://github.com/dialpad/dialtone/commit/2c0d386bf441172e6a6357e751ce33730ad25b4b))
+
 ## [8.80.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.80.0...dialtone-css/v8.80.1) (2026-07-17)
 
 
