@@ -1,3 +1,10 @@
+# [2.0.0-next.5](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.0-next.4...dialtone-tokens/v2.0.0-next.5) (2026-07-22)
+
+
+### Features
+
+* **Dialtone Tokens, Dialtone Css:** DLT-3551 add focus ring variants ([#1375](https://github.com/dialpad/dialtone/issues/1375)) ([bc78543](https://github.com/dialpad/dialtone/commit/bc7854353500ac56c75f486857ac6a9631b24dc6))
+
 # [2.0.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.0-next.3...dialtone-tokens/v2.0.0-next.4) (2026-07-15)
 
 

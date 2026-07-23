@@ -9,6 +9,7 @@ import { kebabCaseToPascalCase } from '../../common/utils/client.mjs';
 
 import { registerDialtoneTransforms, registerDialtonePreprocessors, registerRelativeColorWrap, isMaterialNamespaceRef, isFontSizeToken, isLineHeightToken, isPercentToken, isNegativeToken } from './dialtone-transforms.js';
 import { buildDocs } from './build-docs.js';
+import { isShellColorBorderBaseToken } from './dialtone-transforms.js';
 const Root = JSON.parse(readFileSync('./tokens/root.json', 'utf8'));
 const BASE_FONT_SIZE = Root.font.size.root.value;
 
@@ -156,6 +157,7 @@ export async function run () {
               filter: function (token) {
                 if (typeof token.value === 'string' && token.value.startsWith('linear-gradient')) return false;
                 if (token.path.includes('shadow')) return false;
+                if (isShellColorBorderBaseToken(token)) return false;
                 return ['color'].includes(token.type) && token.isSource;
               },
             },
@@ -234,6 +236,7 @@ export async function run () {
               },
 
               filter: function (token) {
+                if (isShellColorBorderBaseToken(token)) return false;
                 if (typeof token.value === 'string' && token.value.startsWith('linear-gradient')) return false;
                 if (token.path.includes('shadow')) return false;
                 if (isPercentToken(token)) return false;

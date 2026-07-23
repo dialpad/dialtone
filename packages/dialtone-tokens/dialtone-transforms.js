@@ -14,6 +14,15 @@ const FONT_SIZE_IDENTIFIERS = ['fontSizes', 'fontSize'];
 const WEIGHT_IDENTIFIERS = ['fontWeights', 'fontWeight'];
 const LINE_HEIGHT_IDENTIFIERS = ['lineHeights', 'lineHeight'];
 
+// shell.color.border.base only exists in tokens/theme/dp/dark.json, with no light-mode
+// counterpart in default.json, and has no consumer anywhere in the repo (unrelated to the
+// similarly-named shell.base.color.border, which is actually used). Flagged to the token
+// owners; excluded from Android output in the meantime.
+export const isShellColorBorderBaseToken = (token) => {
+  const lowerPath = token.path?.map((segment) => segment.toLowerCase()) ?? [];
+  return lowerPath.join('.') === 'shell.color.border.base';
+};
+
 const FALLBACK_FONTS = ['-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Helvetica', 'Arial', 'sans-serif', 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'];
 const FALLBACK_FONTS_MONO = ['SFMono-Regular', 'Consolas', 'Liberation Mono', 'Menlo', 'Courier', 'monospace'];
 
