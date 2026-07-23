@@ -1,3 +1,11 @@
+# [10.0.0-next.7](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.6...dialtone/v10.0.0-next.7) (2026-07-23)
+
+
+### Bug Fixes
+
+* **Dialtone Tokens:** NO-JIRA removed dead tokens ([78cd1aa](https://github.com/dialpad/dialtone/commit/78cd1aa7fe423149c9fa1fb0bdc085e416e2d255))
+* **Tabs:** DP-198400 fix disabled tab styling ([#1372](https://github.com/dialpad/dialtone/issues/1372)) ([2c0d386](https://github.com/dialpad/dialtone/commit/2c0d386bf441172e6a6357e751ce33730ad25b4b))
+
 ## [9.188.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.188.1...dialtone/v9.188.2) (2026-07-17)
 
 
