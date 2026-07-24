@@ -3,46 +3,6 @@ layout: Blank
 ---
 
 <dt-stack class="d-p-400 d-bgc-primary" gap="400">
-  <dt-box padding="300">
-    <dt-stack gap="300" direction="row">
-      <dt-stack direction="row" align="center" gap="100">
-        <dt-presence presence="active" />
-        <dt-presence presence="busy" />
-        <dt-presence presence="away" />
-        <dt-presence presence="offline" />
-      </dt-stack>
-      <dt-stack direction="row" align="center" gap="100">
-        <dt-avatar :size="100" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="100" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="100" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="100" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      </dt-stack>
-      <dt-stack direction="row" align="center" gap="100">
-        <dt-avatar :size="200" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="200" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="200" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="200" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      </dt-stack>
-      <dt-stack direction="row" align="center" gap="100">
-        <dt-avatar :size="300" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="300" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="300" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="300" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      </dt-stack>
-      <dt-stack direction="row" align="center" gap="100">
-        <dt-avatar :size="400" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="400" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="400" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="400" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      </dt-stack>
-      <dt-stack direction="row" align="center" gap="100">
-        <dt-avatar :size="500" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="500" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="500" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="500" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      </dt-stack>
-    </dt-stack>
-  </dt-box>
   <dt-stack direction="row" gap="100">
     <dt-text as="h1" kind="headline" :size="600">
       Scratchpad
@@ -127,6 +87,257 @@ layout: Blank
       </template>
     </dt-dropdown>
   </dt-stack>
+<!-- ============================================================ -->
+
+```html
+<span class="d-chip">
+  <span
+    aria-label=""
+    aria-labelledby="dt195-content"
+    aria-disabled="false"
+    class="d-chip__label d-chip__label--xs"
+    type="false"
+  >
+    <span class="d-chip__text">Chip</span>
+  </span>
+  <button
+    class="d-btn ... d-chip__close d-chip__close--xs"
+    type="button"
+    aria-disabled="false"
+    title="Click to close"
+  >
+    <span class="base-button__icon d-btn__icon d-btn__icon--left">
+      <svg>...</svg>
+    </span>
+  </button>
+</span>
+```
+
+<dt-stack gap="100">
+  <dt-stack direction="row" gap="200">
+    <dt-box class="d-fl1 d-w100p" border-color="subtle" border-width-block-end="50" border-width-block-start="50">
+      <dt-stack
+        direction="row"
+        align="center"
+        gap="50"
+      >
+        <span>
+          <dt-chip size="100">Chip</dt-chip>
+        </span>
+        <span>
+          <dt-chip size="100" :show-close="false">Chip</dt-chip>
+        </span>
+        <span>
+          <dt-chip size="100">
+            <template #icon>
+              <dt-icon name="box-select" size="200" />
+            </template>
+            Chip
+          </dt-chip>
+        </span>
+        <span>
+          <dt-chip size="100">
+            <template #avatar>
+              <dt-avatar image-src="/assets/images/person.png" image-alt="Jaqueline Nackos" full-name="Jaqueline Nackos" />
+            </template>
+            Chip
+          </dt-chip>
+        </span>
+      </dt-stack>
+    </dt-box>
+    <dt-box class="d-fl1 d-w100p" border-color="subtle" border-width-block-end="50" border-width-block-start="50">
+      <dt-stack
+        direction="row"
+        align="center"
+        gap="50"
+      >
+        <span>
+          <dt-chip size="200">Chip</dt-chip>
+        </span>
+        <span>
+          <dt-chip size="200" :show-close="false">Chip</dt-chip>
+        </span>
+        <span>
+          <dt-chip size="200">
+            <template #icon>
+              <dt-icon name="box-select" size="200" />
+            </template>
+            Chip
+          </dt-chip>
+        </span>
+        <span>
+          <dt-chip size="200">
+            <template #avatar>
+              <dt-avatar image-src="/assets/images/person.png" image-alt="Jaqueline Nackos" full-name="Jaqueline Nackos" />
+            </template>
+            Chip
+          </dt-chip>
+        </span>
+      </dt-stack>
+    </dt-box>
+    <dt-box class="d-fl1 d-w100p" border-color="subtle" border-width-block-end="50" border-width-block-start="50">
+      <dt-stack
+        direction="row"
+        align="center"
+        gap="50"
+      >
+        <span>
+          <dt-chip size="300">Chip</dt-chip>
+        </span>
+        <span>
+          <dt-chip size="300" :show-close="false">Chip</dt-chip>
+        </span>
+        <span>
+          <dt-chip size="300">
+            <template #icon>
+              <dt-icon name="box-select" size="200" />
+            </template>
+            Chip
+          </dt-chip>
+        </span>
+        <span>
+          <dt-chip size="300">
+            <template #avatar>
+              <dt-avatar image-src="/assets/images/person.png" image-alt="Jaqueline Nackos" full-name="Jaqueline Nackos" />
+            </template>
+            Chip
+          </dt-chip>
+        </span>
+      </dt-stack>
+    </dt-box>
+  </dt-stack>
+  <dt-box>
+    <dt-stack
+      direction="row"
+      align="center"
+      gap="200"
+    >
+      <div class="d-fl1 d-w100p">
+        <dt-combobox-multi-select
+          label="Label Text"
+          size="100"
+          :selected-items="selectedItems"
+          @update:model-value="onComboboxInput"
+          @select="onComboboxSelect"
+          @remove="onComboboxRemove"
+        >
+          <template #list>
+            <dt-stack as="ul" class="d-ps-relative d-m-50 d-px-0">
+              <dt-list-item
+                v-for="(item, i) in items"
+                :key="item.id"
+                role="option"
+                navigation-type="arrow-keys"
+                @click="onComboboxSelect(i)"
+              >
+                {{ item.value }}
+                <template #right>
+                  <dt-text variant="body-sm" tone="tertiary">{{ item.type }}</dt-text>
+                </template>
+              </dt-list-item>
+            </dt-stack>
+          </template>
+        </dt-combobox-multi-select>
+      </div>
+      <div class="d-fl1 d-w100p">
+        <dt-combobox-multi-select
+          label="Label Text"
+          size="200"
+          :selected-items="selectedItems"
+          @update:model-value="onComboboxInput"
+          @select="onComboboxSelect"
+          @remove="onComboboxRemove"
+        >
+          <template #list>
+            <dt-stack as="ul" class="d-ps-relative d-m-50 d-px-0">
+              <dt-list-item
+                v-for="(item, i) in items"
+                :key="item.id"
+                role="option"
+                navigation-type="arrow-keys"
+                @click="onComboboxSelect(i)"
+              >
+                {{ item.value }}
+                <template #right>
+                  <dt-text variant="body-sm" tone="tertiary">{{ item.type }}</dt-text>
+                </template>
+              </dt-list-item>
+            </dt-stack>
+          </template>
+        </dt-combobox-multi-select>
+      </div>
+      <div class="d-fl1 d-w100p">
+        <dt-combobox-multi-select
+          label="Label Text"
+          size="300"
+          :selected-items="selectedItems"
+          @update:model-value="onComboboxInput"
+          @select="onComboboxSelect"
+          @remove="onComboboxRemove"
+        >
+          <template #list>
+            <dt-stack as="ul" class="d-ps-relative d-m-50 d-px-0">
+              <dt-list-item
+                v-for="(item, i) in items"
+                :key="item.id"
+                role="option"
+                navigation-type="arrow-keys"
+                @click="onComboboxSelect(i)"
+              >
+                {{ item.value }}
+                <template #right>
+                  <dt-text variant="body-sm" tone="tertiary">{{ item.type }}</dt-text>
+                </template>
+              </dt-list-item>
+            </dt-stack>
+          </template>
+        </dt-combobox-multi-select>
+      </div>
+    </dt-stack>
+  </dt-box>
+</dt-stack>
+<!-- ============================================================ -->
+<dt-box padding="300">
+  <dt-stack gap="300" direction="row">
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-presence presence="active" />
+      <dt-presence presence="busy" />
+      <dt-presence presence="away" />
+      <dt-presence presence="offline" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="100" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="100" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="100" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="100" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="200" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="200" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="200" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="200" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="300" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="300" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="300" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="300" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="400" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="400" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="400" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="400" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="500" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="500" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="500" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="500" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+  </dt-stack>
+</dt-box>
+
 <!-- ============================================================ -->
 <!-- DtBox V1 Demos                                                -->
 <!-- ============================================================ -->
@@ -441,8 +652,6 @@ layout: Blank
 
 </dt-stack>
 
-<div class="d-h-1200"></div>
-
 <script setup>
 import { ref, computed } from 'vue';
 import ExampleTabs from '@exampleComponents/ExampleTabs.vue';
@@ -459,6 +668,41 @@ const {
 } = useThemeManager();
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+const ITEMS_LIST_DATA = [
+  { id: 'item1', value: 'item1', type: 'MAINLINE' },
+  { id: 'item2', value: 'item2', type: 'MAINLINE' },
+  { id: 'item3', value: 'item3', type: 'MAINLINE' },
+  { id: 'item4', value: 'item4', type: 'MAINLINE' },
+  { id: 'item5', value: 'item5', type: 'MAINLINE' },
+  { id: 'item6', value: 'item6', type: 'MAINLINE' },
+  { id: 'item7', value: 'item7', type: 'MAINLINE' },
+  { id: 'item8', value: 'item8', type: 'Other' },
+];
+
+const items = ref([...ITEMS_LIST_DATA]);
+const selectedItems = ref([]);
+
+function onComboboxInput (value) {
+  items.value = ITEMS_LIST_DATA.filter(item => item.value.includes(value));
+}
+
+function onComboboxSelect (i) {
+  if (items.value[i]) {
+    const item = items.value[i].value;
+    if (!selectedItems.value.includes(item)) {
+      selectedItems.value.push(item);
+    }
+    items.value = [...ITEMS_LIST_DATA];
+  }
+}
+
+function onComboboxRemove (item) {
+  const index = selectedItems.value.indexOf(item);
+  if (index >= 0) {
+    selectedItems.value.splice(index, 1);
+  }
+}
 
 const proseSize = ref('300');
 const proseDensity = ref('200');
