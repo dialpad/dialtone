@@ -23,11 +23,24 @@
   --chip-close-size: calc(var(--dt-layout-25) * 1.5);
   --chip-icon-size: calc(var(--dt-layout-25) * 1.25);
   --chip-close-padding: calc(var(--dt-spacing-25) + var(--dt-spacing-1));
-  --chip-close-inset-end: var(--dt-spacing-75);
+  --chip-close-inset-end: var(--dt-spacing-50);
 
   position: relative;
   display: inline-flex;
   align-items: center;
+  vertical-align: middle;
+
+  // Set close size on the root so the label spacer and close button inherit the
+  // same value. Keep the close modifier selector for raw HTML compatibility.
+  &:has(> .d-chip__close--xs),
+  &__close--xs {
+    --chip-close-size: var(--dt-layout-25);
+  }
+
+  &:has(> .d-chip__close--sm),
+  &__close--sm {
+    --chip-close-size: calc(var(--dt-layout-25) * 1.125);
+  }
 
   &__label {
     display: inline-flex;
@@ -39,7 +52,7 @@
     color: var(--dt-color-foreground-primary);
     font-size: var(--chip-text-size);
     font-family: inherit;
-    line-height: var(--dt-font-line-height-400);
+    line-height: var(--dt-font-line-height-300);
     background-color: var(--chip-color-background);
     border: none;
     border-radius: var(--dt-size-radius-pill);
@@ -149,6 +162,12 @@
       --button-color-background: var(--dt-action-color-background-muted-active);
     }
 
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--dt-shadow-focus-outset);
+      transition: none;
+    }
+
     // Explicit disabled styling for chip close button.
     // This duplicates the button disabled logic since the ._btn() mixin no longer includes disabled state handling.
     // PLUS it may be simplified with upcoming Chip redesign/refactor
@@ -187,15 +206,13 @@
     //  $$  EXTRA SMALL
     //  ------------------------------------------------------------------------
     &--xs {
-      --chip-close-size: var(--dt-layout-25);
       --chip-close-padding: var(--dt-spacing-1);
-      --chip-close-inset-end: var(--dt-spacing-50);
+      --chip-close-inset-end: var(--dt-spacing-1);
     }
 
     //  $$ SMALL
     //  ------------------------------------------------------------------------
     &--sm {
-      --chip-close-size: calc(var(--dt-layout-25) * 1.125);
       --chip-close-padding: var(--dt-spacing-25);
     }
   }
