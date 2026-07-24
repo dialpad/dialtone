@@ -18,13 +18,39 @@ dependencies {
     implementation libs.composeUi
 }
 
+task cleanFilteredSources(type: Delete) {
+    delete 'dist/android-filtered'
+}
+
+// Filter the output tokens files so we only include base/dp/tmo
+task stageFilteredJavaSources(type: Copy) {
+    dependsOn cleanFilteredSources
+    from('dist/android/java') {
+        include 'tokens-base-light.kt', 'tokens-base-dark.kt',
+            'tokens-dp-light.kt', 'tokens-dp-dark.kt',
+            'tokens-tmo-light.kt', 'tokens-tmo-dark.kt'
+    }
+    into 'dist/android-filtered/java'
+}
+
+task stageFilteredResources(type: Copy) {
+    dependsOn cleanFilteredSources
+    from('dist/android/res') {
+        include 'values/colors-base-light.xml', 'values/colors-base-dark.xml',
+            'values/colors-dp-light.xml', 'values/colors-dp-dark.xml',
+            'values/colors-tmo-light.xml', 'values/colors-tmo-dark.xml',
+            'values/dimens-base.xml', 'values/dimens-theme.xml'
+    }
+    into 'dist/android-filtered/res'
+}
+
 android {
     namespace 'dialtone.dialpad.tokens'
     compileSdkVersion libs.versions.androidCompileSdk.get().toInteger()
     sourceSets {
         main {
-            java.srcDirs = ['dist/android/java']
-            res.srcDirs = ['dist/android/res']
+            java.srcDirs = ['dist/android-filtered/java']
+            res.srcDirs = ['dist/android-filtered/res']
             manifest.srcFile 'dist/android/AndroidManifest.xml'
         }
     }
@@ -49,6 +75,15 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+}
+
+preBuild.dependsOn stageFilteredJavaSources, stageFilteredResources
+
+
+task androidSourcesJar(type: Jar) {
+    dependsOn stageFilteredJavaSources
+    archiveClassifier.set('sources')
+    from android.sourceSets.main.java.srcDirs
 }
 
 
