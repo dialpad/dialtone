@@ -122,13 +122,13 @@ layout: Blank
         gap="50"
       >
         <span>
-          <dt-chip size="100">Chip</dt-chip>
+          <dt-chip interactive size="100">Chip</dt-chip>
         </span>
         <span>
-          <dt-chip size="100" :show-close="false">Chip</dt-chip>
+          <dt-chip interactive size="100" :show-close="false">Chip</dt-chip>
         </span>
         <span>
-          <dt-chip size="100">
+          <dt-chip interactive size="100">
             <template #icon>
               <dt-icon name="box-select" size="200" />
             </template>
@@ -136,7 +136,7 @@ layout: Blank
           </dt-chip>
         </span>
         <span>
-          <dt-chip size="100">
+          <dt-chip interactive size="100">
             <template #avatar>
               <dt-avatar image-src="/assets/images/person.png" image-alt="Jaqueline Nackos" full-name="Jaqueline Nackos" />
             </template>
@@ -152,13 +152,14 @@ layout: Blank
         gap="50"
       >
         <span>
-          <dt-chip size="200">Chip</dt-chip>
+          asdf
+          <dt-chip interactive size="200">Chip</dt-chip>
         </span>
         <span>
-          <dt-chip size="200" :show-close="false">Chip</dt-chip>
+          <dt-chip interactive size="200" :show-close="false">Chip</dt-chip>
         </span>
         <span>
-          <dt-chip size="200">
+          <dt-chip interactive size="200">
             <template #icon>
               <dt-icon name="box-select" size="200" />
             </template>
@@ -166,7 +167,7 @@ layout: Blank
           </dt-chip>
         </span>
         <span>
-          <dt-chip size="200">
+          <dt-chip interactive size="200">
             <template #avatar>
               <dt-avatar image-src="/assets/images/person.png" image-alt="Jaqueline Nackos" full-name="Jaqueline Nackos" />
             </template>
@@ -182,13 +183,13 @@ layout: Blank
         gap="50"
       >
         <span>
-          <dt-chip size="300">Chip</dt-chip>
+          <dt-chip interactive>Chip</dt-chip>
         </span>
         <span>
-          <dt-chip size="300" :show-close="false">Chip</dt-chip>
+          <dt-chip interactive :show-close="false">Chip</dt-chip>
         </span>
         <span>
-          <dt-chip size="300">
+          <dt-chip interactive>
             <template #icon>
               <dt-icon name="box-select" size="200" />
             </template>
@@ -196,7 +197,7 @@ layout: Blank
           </dt-chip>
         </span>
         <span>
-          <dt-chip size="300">
+          <dt-chip interactive>
             <template #avatar>
               <dt-avatar image-src="/assets/images/person.png" image-alt="Jaqueline Nackos" full-name="Jaqueline Nackos" />
             </template>
