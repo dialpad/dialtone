@@ -1,0 +1,21 @@
+packages/eslint-plugin-dialtone/package.json
+  s_17669abb024e03::t_8f5ae881cb0977 64
+pnpm-lock.yaml
+  s_17669abb024e03::t_61aeafb53afe54 957-959
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.8",
+  "base_commit_sha": "2998ec7385604ad78fc1686349d29515e3b1b97a",
+  "prompts": {},
+  "sessions": {
+    "s_17669abb024e03": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "47562b97-5963-4f36-b62a-44fb92bfd54e",
+        "model": "claude-fable-5"
+      },
+      "human_author": "ninarepetto <nina.repetto@dialpad.com>"
+    }
+  }
+}
