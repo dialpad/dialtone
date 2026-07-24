@@ -1,3 +1,10 @@
+# [4.56.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.55.0...dialtone-icons/v4.56.0) (2026-07-24)
+
+
+### Features
+
+* **Icons:** DLT-3553 add fax-inbound and fax-outbound icons ([#1378](https://github.com/dialpad/dialtone/issues/1378)) ([46538f6](https://github.com/dialpad/dialtone/commit/46538f6218366beb85d84a04ee7f20a3f310204b))
+
 # [4.55.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.54.0...dialtone-icons/v4.55.0) (2026-07-07)
 
 
