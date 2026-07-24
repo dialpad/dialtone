@@ -1213,6 +1213,16 @@
       "download-cloud": [
         "import"
       ],
+      "fax-inbound": [
+        "receive",
+        "incoming",
+        "printer"
+      ],
+      "fax-outbound": [
+        "send",
+        "outgoing",
+        "printer"
+      ],
       "file-audio": [
         "music",
         "audio",
