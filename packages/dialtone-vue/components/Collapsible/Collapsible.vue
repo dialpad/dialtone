@@ -29,16 +29,18 @@
           }"
           @click="defaultToggleOpen"
         >
-          <dt-icon-chevron-down
-            v-if="isOpen"
-            class="d-collapsible__icon"
-            size="300"
-          />
-          <dt-icon-chevron-right
-            v-else
-            class="d-collapsible__icon"
-            size="300"
-          />
+          <template #startIcon>
+            <dt-icon-chevron-down
+              v-if="isOpen"
+              class="d-collapsible__icon"
+              size="300"
+            />
+            <dt-icon-chevron-right
+              v-else
+              class="d-collapsible__icon"
+              size="300"
+            />
+          </template>
           <span
             class="d-collapsible__anchor-text"
             :title="anchorText"
