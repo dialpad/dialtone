@@ -42,6 +42,8 @@ export const isLineHeightToken = (token) => {
 
 // percent tokens (e.g. size.100-percent -> "100%")
 export const isPercentToken = (token) => {
+  const originalValue = token.original?.value ?? token.value;
+  if (typeof originalValue === 'string' && originalValue.trim().endsWith('%')) return true;
   const lastSegment = token.path?.[token.path.length - 1]?.toLowerCase() ?? '';
   return lastSegment.includes('percent');
 };
