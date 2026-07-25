@@ -21,6 +21,11 @@
       "description": "Applies extra small size."
     },
     {
+      "class": "d-chip__avatar",
+      "applies": "N/A",
+      "description": "Applies positioning and styling for the chip avatar."
+    },
+    {
       "class": "d-chip__close",
       "applies": "N/A",
       "description": "Applies positioning and styling for the chip close button."
