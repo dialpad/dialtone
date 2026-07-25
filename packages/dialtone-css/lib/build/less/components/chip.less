@@ -17,12 +17,14 @@
 @layer dialtone.components {
 .d-chip {
   //  Component CSS Vars
-  --chip-text-size: var(--dt-font-size-200);
-  --chip-padding-block: var(--dt-spacing-25);
-  --chip-padding-inline: var(--dt-spacing-100);
-  --chip-color-background: var(--dt-action-color-background-muted-hover);
   --chip-close-size: calc(var(--dt-layout-25) * 1.5);
   --chip-icon-size: calc(var(--dt-layout-25) * 1.25);
+  --chip-text-size: var(--dt-font-size-200);
+  --chip-padding-block-start: var(--dt-spacing-25);
+  --chip-padding-block-end: var(--dt-spacing-25);
+  --chip-padding-inline-start: var(--dt-spacing-100);
+  --chip-padding-inline-end: var(--dt-spacing-100);
+  --chip-color-background: var(--dt-action-color-background-muted-hover);
   --chip-close-padding: calc(var(--dt-spacing-25) + var(--dt-spacing-1));
   --chip-close-inset-end: var(--dt-spacing-50);
 
@@ -33,6 +35,10 @@
 
   // Set close size on the root so the label spacer and close button inherit the
   // same value. Keep the close modifier selector for raw HTML compatibility.
+  &:has(> .d-chip__close) {
+    --chip-padding-inline-end: calc(var(--chip-close-size) + var(--dt-spacing-1));
+  }
+
   &:has(> .d-chip__close--xs),
   &__close--xs {
     --chip-close-size: var(--dt-layout-25);
@@ -45,13 +51,12 @@
 
   &__label {
     display: inline-flex;
-    gap: var(--dt-spacing-25);
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
     max-inline-size: var(--dt-layout-100-percent);
-    padding-block: var(--chip-padding-block);
-    padding-inline: var(--chip-padding-inline);
+    padding-block: var(--chip-padding-block-start) var(--chip-padding-block-end);
+    padding-inline: var(--chip-padding-inline-start) var(--chip-padding-inline-end);
     color: var(--dt-color-foreground-primary);
     font-size: var(--chip-text-size);
     font-family: inherit;
@@ -59,15 +64,6 @@
     background-color: var(--chip-color-background);
     border: none;
     border-radius: var(--dt-size-radius-pill);
-
-    // Reserves space within the chip for the close button, since the close button is
-    // not nested within the chip. Only apply if close button exists (more than one child).
-    &:not(:only-child)::after {
-      flex-shrink: 0;
-      inline-size: var(--chip-close-size);
-      block-size: calc(var(--chip-close-size) / 2);
-      content: '';
-    }
 
     // These properties are only set if d-chip is interactive (ex: a button).
     &:is(a),
@@ -97,7 +93,10 @@
     }
 
     .d-avatar {
-      // hold
+      --avatar-size-shape: calc(var(--dt-layout-25) * 1.25); // 20
+
+      overflow: hidden;
+      border-radius: var(--dt-size-radius-circle) !important;
     }
 
     &--active {
@@ -111,11 +110,17 @@
     //  ------------------------------------------------------------------------
     &--xs {
       --chip-text-size: var(--dt-font-size-100);
-      --chip-padding-block: var(--dt-spacing-0);
-      --chip-padding-inline: var(--dt-spacing-75);
+      --chip-padding-block-start: var(--dt-spacing-0);
+      --chip-padding-block-end: var(--dt-spacing-0);
+      --chip-padding-inline-start: var(--dt-spacing-75);
+      --chip-padding-inline-end: var(--dt-spacing-75);
 
       .d-avatar {
-        --avatar-size-shape: var(--dt-layout-25);
+        --avatar-size-shape: var(--dt-layout-25); // 16
+      }
+
+      .d-chip:has(> .d-chip__close--xs) & {
+        --chip-padding-inline-end: calc(var(--chip-close-size) + var(--dt-spacing-25));
       }
     }
 
@@ -123,8 +128,10 @@
     //  ------------------------------------------------------------------------
     &--sm {
       --chip-text-size: var(--dt-font-size-150);
-      --chip-padding-block: var(--dt-spacing-25);
-      --chip-padding-inline: var(--dt-spacing-75);
+      --chip-padding-block-start: var(--dt-spacing-25);
+      --chip-padding-block-end: var(--dt-spacing-25);
+      --chip-padding-inline-start: var(--dt-spacing-75);
+      --chip-padding-inline-end: var(--dt-spacing-75);
 
       .d-chip__close::before {
         inline-size: var(--chip-close-size);
@@ -132,24 +139,33 @@
       }
 
       .d-avatar {
-        --avatar-size-shape: calc(var(--dt-layout-25) * 1.125); // 20
+        --avatar-size-shape: calc(var(--dt-layout-25) * 1.125); // 18
+      }
+
+      .d-chip:has(> .d-chip__close--sm) & {
+        --chip-padding-inline-end: calc(var(--chip-close-size) + var(--dt-spacing-75));
       }
     }
   }
 
   &__close {
+
+
+    // This is unfortunate, and quite legacy, and should be refactored to just
+    // use DtButton component directly. Future task.
     ._btn();
-    ._btn-circle();
+
+    --button-color-text: var(--dt-action-color-foreground-muted-default);
 
     position: absolute;
     inset-inline-end: var(--chip-close-inset-end);
     padding: var(--chip-close-padding);
     border-width: 0;
+    border-radius: var(--dt-size-radius-circle);
 
     &::before {
       position: absolute;
-      inline-size: var(--chip-close-size);
-      block-size: var(--chip-close-size);
+      inset: calc(var(--dt-spacing-25-negative) * 1.15);
       content: '';
     }
 
@@ -220,12 +236,11 @@
   }
 
   &__icon {
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     inline-size: var(--chip-icon-size);
     block-size: var(--chip-icon-size);
-    line-height: 1;
   }
 
   &__text {
