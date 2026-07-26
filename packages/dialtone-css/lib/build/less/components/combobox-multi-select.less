@@ -2,8 +2,16 @@
 .d-combobox-multi-select__chip {
   z-index: var(--zi-base1);
   max-inline-size: var(--dt-layout-100-percent);
-  margin-block-start: var(--dt-spacing-50);
+  margin-block-start: calc(var(--dt-spacing-50));
   margin-inline: var(--dt-spacing-25);
+
+  .d-combobox-multi-select__input-wrapper:has(.d-input--xs) & {
+    margin-block-start: calc(var(--dt-spacing-50-negative));
+  }
+
+  .d-combobox-multi-select__input-wrapper:has(.d-input--sm) & {
+    margin-block-start: 0;
+  }
 }
 
 .d-combobox-multi-select__chip-wrapper {
