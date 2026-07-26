@@ -20,6 +20,7 @@
       <dt-chip>
         <template #avatar>
           <dt-avatar
+            size="200"
             full-name="Jaqueline Nackos"
             :seed="$attrs.avatarSeed"
           />
@@ -30,15 +31,50 @@
       </dt-chip>
     </div>
     <div>
-      <h4>Non interactive</h4>
+      <h4>Interactive</h4>
       <dt-chip
-        :interactive="false"
+        :interactive="true"
         :show-close="false"
       >
         <template #default>
           Chip
         </template>
       </dt-chip>
+    </div>
+    <div>
+      <h4>Sizes</h4>
+      <dt-stack
+        gap="100"
+        direction="row"
+      >
+        <dt-chip
+          size="100"
+          :interactive="true"
+          :show-close="false"
+        >
+          <template #default>
+            Chip 100
+          </template>
+        </dt-chip>
+        <dt-chip
+          size="200"
+          :interactive="true"
+          :show-close="false"
+        >
+          <template #default>
+            Chip 200
+          </template>
+        </dt-chip>
+        <dt-chip
+          size="300"
+          :interactive="true"
+          :show-close="false"
+        >
+          <template #default>
+            Chip 300 (default)
+          </template>
+        </dt-chip>
+      </dt-stack>
     </div>
   </dt-stack>
 </template>

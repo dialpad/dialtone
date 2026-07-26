@@ -79,19 +79,32 @@ Use the `disabled` prop to disable both the Chip and its close button. This sets
 </dt-chip>
 ```
 
-### With Avatar and Close Button
+### With Avatar
 
 ```vue demo
-<dt-chip>
-  <template #avatar>
-    <dt-avatar
-      image-src="/assets/images/person.png"
-      image-alt="Jaqueline Nackos"
-      full-name="Jaqueline Nackos"
-    />
-  </template>
-  Chip
-</dt-chip>
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <dt-chip>
+    <template #avatar>
+      <dt-avatar
+        size="200"
+        image-src="/assets/images/person.png"
+        image-alt="Jaqueline Nackos"
+        full-name="Jaqueline Nackos"
+      />
+    </template>
+    Chip
+  </dt-chip>
+  <dt-chip>
+    <template #avatar>
+      <dt-avatar
+        size="200"
+        full-name="Jaqueline Nackos"
+      />
+    </template>
+    Chip
+  </dt-chip>
+</dt-stack>
 ```
 
 ### Truncated
