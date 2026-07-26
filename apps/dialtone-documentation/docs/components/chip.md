@@ -12,18 +12,29 @@ keywords: ["tag", "pill", "token", "badge", "d-chip", "DtChip", "dt-chip", "filt
 
 ## Variants and Examples
 
-### Non Interactive
-
-Add `:interactive="false"` to make it a read-only, non-interactive Chip. This changes it from a `<button>` to a non-interactive, read-only Chip with no events or hover/active state. Note that this does not effect the interactivity of its `×` remove button.
-
-```vue demo
-<dt-chip :interactive="false">Chip</dt-chip>
-```
-
 ### Default
 
 ```vue demo
 <dt-chip>Chip</dt-chip>
+```
+
+### Sizes
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <dt-chip :size="100">Chip</dt-chip>
+  <dt-chip :size="200">Chip</dt-chip>
+  <dt-chip>Chip</dt-chip>
+</dt-stack>
+```
+
+### Interactive
+
+Add `:interactive="true"` to make it an interactive Chip. This changes it from a non-interactive, read-only Chip to an interactive Chip with events and hover/active state. Note that this does not effect the interactivity of its `×` remove button.
+
+```vue demo
+<dt-chip :interactive="true">Chip</dt-chip>
 ```
 
 ### Disabled
@@ -50,9 +61,7 @@ Use the `disabled` prop to disable both the Chip and its close button. This sets
       size="200"
     />
   </template>
-  <template #default>
-    Chip
-  </template>
+  Chip
 </dt-chip>
 ```
 
@@ -66,9 +75,7 @@ Use the `disabled` prop to disable both the Chip and its close button. This sets
       size="200"
     />
   </template>
-  <template #default>
-    Chip
-  </template>
+  Chip
 </dt-chip>
 ```
 
@@ -83,31 +90,18 @@ Use the `disabled` prop to disable both the Chip and its close button. This sets
       full-name="Jaqueline Nackos"
     />
   </template>
-  <template #default>
-    Chip
-  </template>
+  Chip
 </dt-chip>
 ```
 
 ### Truncated
 
-To truncate text, add `.d-truncate` to the content element, and set the width of the `.d-chip` element.
+To truncate text, use DtText's `truncate` prop, and set the width of the Chip's content with a `content-class` prop.
 
 ```vue demo
 <dt-chip content-class="d-w-150">
-  <span class="d-chip__text d-truncate">Chip loooooong name</span>
+  <dt-text truncate>Chip loooooong name here</dt-text>
 </dt-chip>
-```
-
-### Sizes
-
-```vue demo
-<!-- @wrapper -->
-<dt-stack direction="row" gap="100">
-  <dt-chip :interactive="false" :size="100">Chip</dt-chip>
-  <dt-chip :interactive="false" :size="200">Chip</dt-chip>
-  <dt-chip :interactive="false">Chip</dt-chip>
-</dt-stack>
 ```
 
 ## Vue API
