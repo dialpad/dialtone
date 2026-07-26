@@ -112,6 +112,7 @@
     background-color: var(--chip-color-background);
     border: none;
     border-radius: var(--dt-size-radius-pill);
+    cursor: default;
 
     //  These properties are only set if d-chip is interactive (ex: a button).
     &:is(a, button, [role='button'], [role='link']) {
@@ -248,13 +249,13 @@
 
     &:hover:not(:disabled, .d-btn--disabled) {
       --button-color-text: var(--dt-color-foreground-primary);
-      --button-color-background: var(--dt-action-color-background-muted-hover);
+      --button-color-background: var(--dt-action-color-background-muted-active);
     }
 
     &:active:not(:disabled, .d-btn--disabled),
     &.d-btn--active:not(:disabled, .d-btn--disabled),
     &.d-btn--active:active:not(:disabled, .d-btn--disabled) {
-      --button-color-background: var(--dt-action-color-background-muted-active);
+      --button-color-background: var(--dt-action-color-background-muted-hover);
     }
 
     &:focus-visible {

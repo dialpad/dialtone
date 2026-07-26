@@ -89,29 +89,15 @@ layout: Blank
   </dt-stack>
 <!-- ============================================================ -->
 
-```html
-<span class="d-chip">
-  <span
-    aria-label=""
-    aria-labelledby="dt195-content"
-    aria-disabled="false"
-    class="d-chip__label d-chip__label--xs"
-    type="false"
-  >
-    <span class="d-chip__text">Chip</span>
-  </span>
-  <button
-    class="d-btn ... d-chip__close d-chip__close--xs"
-    type="button"
-    aria-disabled="false"
-    title="Click to close"
-  >
-    <span class="base-button__icon d-btn__icon d-btn__icon--left">
-      <svg>...</svg>
-    </span>
-  </button>
-</span>
-```
+<p>
+  A sentence goes here
+  <dt-chip interactive size="200"> <template #icon> <dt-icon name="box-select" size="200" /> </template> Chip </dt-chip>
+  with an inline
+  <dt-chip interactive size="100"> <template #icon> <dt-icon name="box-select" size="200" /> </template> Chip </dt-chip>
+  and another without actionable parts
+  <dt-chip> Chip </dt-chip>
+  and stuff
+</p>
 
 <dt-stack gap="100">
   <dt-stack direction="row" gap="200">
