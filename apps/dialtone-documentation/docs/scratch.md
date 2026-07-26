@@ -94,7 +94,9 @@ layout: Blank
   <dt-chip interactive size="200"> <template #icon> <dt-icon name="box-select" size="200" /> </template> Chip </dt-chip>
   with an inline
   <dt-chip interactive size="100"> <template #icon> <dt-icon name="box-select" size="200" /> </template> Chip </dt-chip>
-  and another without actionable parts
+  and even an inline
+  <dt-badge>Badge</dt-badge>
+  and a chip without actionable parts
   <dt-chip> Chip </dt-chip>
   and stuff
 </p>

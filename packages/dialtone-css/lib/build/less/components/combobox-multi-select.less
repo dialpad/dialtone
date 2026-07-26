@@ -3,6 +3,15 @@
   z-index: var(--zi-base1);
   max-inline-size: var(--dt-layout-100-percent);
   margin-inline: var(--dt-spacing-25);
+
+  // Force focus styles when focusing with either keyboard or mouse
+  .d-chip__label:focus {
+    outline: none;
+
+    --chip-color-background: var(--dt-action-color-background-muted-hover);
+
+    box-shadow: var(--dt-shadow-focus);
+  }
 }
 
 .d-combobox-multi-select__chip-wrapper {
