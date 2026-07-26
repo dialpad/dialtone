@@ -141,7 +141,6 @@ import {
 } from '@/components/Popover/PopoverConstants';
 import {
   CHIP_SIZES,
-  CHIP_TOP_POSITION,
 } from './ComboboxMultiSelectConstants';
 import { COMPONENT_SIZES, VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 
@@ -761,15 +760,27 @@ export default {
     },
 
     setChipsTopPosition () {
-      // To place the chips in the input box
-      // The chip "top" position should be the same line as the input box
+      // Centers the first row of chips on the input box's first line.
+      // Two offsets have to be measured rather than derived: the input's
+      // position within the slot wrapper (label and description heights vary),
+      // and the chip's position within its own wrapper (the chips are atomic
+      // inline boxes, so line-box metrics — not just the chip margin — decide
+      // where the row starts).
       const input = this.getInput();
-      if (!input) return;
-      const inputSlotWrapper = this.$refs.inputSlotWrapper;
-      const top = input.getBoundingClientRect().top -
-                  inputSlotWrapper.getBoundingClientRect().top;
       const chipsWrapper = this.$refs.chipsWrapper;
-      chipsWrapper.style.top = (top - CHIP_TOP_POSITION[String(this.size)]) + 'px';
+      const firstChip = this.getFirstChip();
+      if (!input || !chipsWrapper || !firstChip) return;
+
+      const inputTop = input.getBoundingClientRect().top -
+                       this.$refs.inputSlotWrapper.getBoundingClientRect().top;
+      // The empty-input height, so chips stay on the first line rather than
+      // recentering on the whole box once it grows to fit wrapped rows.
+      const inputRowHeight = this.initialInputHeight || input.getBoundingClientRect().height;
+      const chipRect = firstChip.getBoundingClientRect();
+      const chipOffsetInWrapper = chipRect.top - chipsWrapper.getBoundingClientRect().top;
+
+      const top = inputTop + (inputRowHeight - chipRect.height) / 2 - chipOffsetInWrapper;
+      chipsWrapper.style.top = top + 'px';
     },
 
     setInputPadding () {
@@ -797,7 +808,19 @@ export default {
       }
 
       const paddingTop = this.getInputPaddingTop(lastChip, spaceLeft > this.reservedRightSpace, isWrapped);
-      if (paddingTop != null) input.style.paddingTop = `${paddingTop}px`;
+      if (paddingTop != null) {
+        input.style.paddingTop = `${paddingTop}px`;
+        this.growInputForWrappedRows(input, paddingTop);
+      }
+    },
+
+    growInputForWrappedRows (input, paddingTop) {
+      // The grown box would otherwise end at the caret line, leaving the last
+      // chip row flush against the block-end border. Extend the height floor
+      // so the last row keeps the same breathing room the first row gets from
+      // centering: its row top (paddingTop - 2) plus the single-row envelope.
+      if (!this.initialInputHeight) return;
+      input.style.minHeight = `${paddingTop - 2 + this.initialInputHeight}px`;
     },
 
     getInputPaddingTop (lastChip, hasSpace, isWrapped) {
@@ -806,16 +829,25 @@ export default {
       // Chip wrapped onto a new row with space remaining; align cursor to it.
       if (hasSpace) return lastChip.offsetTop + 2;
       // No space on the chip's row — predict next-row offsetTop so paddingTop
-      // stays stable when a chip lands there.
-      const chipMarginTop = parseFloat(getComputedStyle(lastChip).marginTop) || 0;
+      // stays stable when a chip lands there. Row spacing belongs to the
+      // wrapper's row-gap, not to the chip.
+      const rowGap = parseFloat(getComputedStyle(this.$refs.chipsWrapper).rowGap) || 0;
       const lastChipHeight = lastChip.getBoundingClientRect().height;
-      return lastChip.offsetTop + lastChipHeight + chipMarginTop + 2;
+      return lastChip.offsetTop + lastChipHeight + rowGap + 2;
     },
 
     revertInputPadding (input) {
       input.style.paddingInlineStart = '';
+      // setInputPadding writes the physical paddingTop slot — clearing only
+      // the logical paddingBlockStart slot leaves it stuck.
+      input.style.paddingTop = '';
       input.style.paddingBlockStart = '';
       input.style.paddingBlockEnd = '';
+      // Restore the single-row height floor that setInitialInputHeight
+      // applies (setInputPadding grows it while rows are wrapped).
+      input.style.minHeight = (this.initialInputHeight && this.size !== 'xs')
+        ? `${this.initialInputHeight}px`
+        : '';
     },
 
     getFullWidth (el) {

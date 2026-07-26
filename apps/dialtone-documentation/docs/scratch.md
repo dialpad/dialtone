@@ -171,26 +171,26 @@ layout: Blank
   <dt-box>
     <dt-stack
       direction="row"
-      align="center"
+      align="start"
       gap="200"
     >
       <div class="d-fl1 d-w100p">
         <dt-combobox-multi-select
-          label="Label Text"
+          label="First name"
           size="100"
-          :selected-items="selectedItems"
-          @update:model-value="onComboboxInput"
-          @select="onComboboxSelect"
-          @remove="onComboboxRemove"
+          :selected-items="selectedFirstNames"
+          @update:model-value="onFirstNameInput"
+          @select="onFirstNameSelect"
+          @remove="onFirstNameRemove"
         >
           <template #list>
             <dt-stack as="ul" class="d-ps-relative d-m-50 d-px-0">
               <dt-list-item
-                v-for="(item, i) in items"
+                v-for="(item, i) in firstNameItems"
                 :key="item.id"
                 role="option"
                 navigation-type="arrow-keys"
-                @click="onComboboxSelect(i)"
+                @click="onFirstNameSelect(i)"
               >
                 {{ item.value }}
                 <template #right>
@@ -203,21 +203,21 @@ layout: Blank
       </div>
       <div class="d-fl1 d-w100p">
         <dt-combobox-multi-select
-          label="Label Text"
+          label="MLB team"
           size="200"
-          :selected-items="selectedItems"
-          @update:model-value="onComboboxInput"
-          @select="onComboboxSelect"
-          @remove="onComboboxRemove"
+          :selected-items="selectedMlbTeams"
+          @update:model-value="onMlbTeamInput"
+          @select="onMlbTeamSelect"
+          @remove="onMlbTeamRemove"
         >
           <template #list>
             <dt-stack as="ul" class="d-ps-relative d-m-50 d-px-0">
               <dt-list-item
-                v-for="(item, i) in items"
+                v-for="(item, i) in mlbTeamItems"
                 :key="item.id"
                 role="option"
                 navigation-type="arrow-keys"
-                @click="onComboboxSelect(i)"
+                @click="onMlbTeamSelect(i)"
               >
                 {{ item.value }}
                 <template #right>
@@ -230,21 +230,21 @@ layout: Blank
       </div>
       <div class="d-fl1 d-w100p">
         <dt-combobox-multi-select
-          label="Label Text"
+          label="Color"
           size="300"
-          :selected-items="selectedItems"
-          @update:model-value="onComboboxInput"
-          @select="onComboboxSelect"
-          @remove="onComboboxRemove"
+          :selected-items="selectedColors"
+          @update:model-value="onColorInput"
+          @select="onColorSelect"
+          @remove="onColorRemove"
         >
           <template #list>
             <dt-stack as="ul" class="d-ps-relative d-m-50 d-px-0">
               <dt-list-item
-                v-for="(item, i) in items"
+                v-for="(item, i) in colorItems"
                 :key="item.id"
                 role="option"
                 navigation-type="arrow-keys"
-                @click="onComboboxSelect(i)"
+                @click="onColorSelect(i)"
               >
                 {{ item.value }}
                 <template #right>
@@ -631,40 +631,155 @@ const {
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 
-const ITEMS_LIST_DATA = [
-  { id: 'item1', value: 'item1', type: 'MAINLINE' },
-  { id: 'item2', value: 'item2', type: 'MAINLINE' },
-  { id: 'item3', value: 'item3', type: 'MAINLINE' },
-  { id: 'item4', value: 'item4', type: 'MAINLINE' },
-  { id: 'item5', value: 'item5', type: 'MAINLINE' },
-  { id: 'item6', value: 'item6', type: 'MAINLINE' },
-  { id: 'item7', value: 'item7', type: 'MAINLINE' },
-  { id: 'item8', value: 'item8', type: 'Other' },
+const FIRST_NAME_ITEMS_DATA = [
+  { id: 'first-name-avery', value: 'Avery', type: 'First name' },
+  { id: 'first-name-jordan', value: 'Jordan', type: 'First name' },
+  { id: 'first-name-maya', value: 'Maya', type: 'First name' },
+  { id: 'first-name-theo', value: 'Theo', type: 'First name' },
+  { id: 'first-name-priya', value: 'Priya', type: 'First name' },
+  { id: 'first-name-mateo', value: 'Mateo', type: 'First name' },
+  { id: 'first-name-amara', value: 'Amara', type: 'First name' },
+  { id: 'first-name-benjamin', value: 'Benjamin', type: 'First name' },
+  { id: 'first-name-chloe', value: 'Chloe', type: 'First name' },
+  { id: 'first-name-diego', value: 'Diego', type: 'First name' },
+  { id: 'first-name-elena', value: 'Elena', type: 'First name' },
+  { id: 'first-name-finn', value: 'Finn', type: 'First name' },
+  { id: 'first-name-grace', value: 'Grace', type: 'First name' },
+  { id: 'first-name-hugo', value: 'Hugo', type: 'First name' },
+  { id: 'first-name-isla', value: 'Isla', type: 'First name' },
+  { id: 'first-name-kai', value: 'Kai', type: 'First name' },
+  { id: 'first-name-leila', value: 'Leila', type: 'First name' },
+  { id: 'first-name-noah', value: 'Noah', type: 'First name' },
+  { id: 'first-name-olivia', value: 'Olivia', type: 'First name' },
+  { id: 'first-name-rafael', value: 'Rafael', type: 'First name' },
+  { id: 'first-name-samira', value: 'Samira', type: 'First name' },
+  { id: 'first-name-wesley', value: 'Wesley', type: 'First name' },
+  { id: 'first-name-yara', value: 'Yara', type: 'First name' },
+  { id: 'first-name-zane', value: 'Zane', type: 'First name' },
 ];
 
-const items = ref([...ITEMS_LIST_DATA]);
-const selectedItems = ref([]);
+const MLB_TEAM_ITEMS_DATA = [
+  { id: 'mlb-baltimore-orioles', value: 'Baltimore Orioles', type: 'AL East' },
+  { id: 'mlb-boston-red-sox', value: 'Boston Red Sox', type: 'AL East' },
+  { id: 'mlb-new-york-yankees', value: 'New York Yankees', type: 'AL East' },
+  { id: 'mlb-tampa-bay-rays', value: 'Tampa Bay Rays', type: 'AL East' },
+  { id: 'mlb-toronto-blue-jays', value: 'Toronto Blue Jays', type: 'AL East' },
+  { id: 'mlb-chicago-white-sox', value: 'Chicago White Sox', type: 'AL Central' },
+  { id: 'mlb-cleveland-guardians', value: 'Cleveland Guardians', type: 'AL Central' },
+  { id: 'mlb-detroit-tigers', value: 'Detroit Tigers', type: 'AL Central' },
+  { id: 'mlb-kansas-city-royals', value: 'Kansas City Royals', type: 'AL Central' },
+  { id: 'mlb-minnesota-twins', value: 'Minnesota Twins', type: 'AL Central' },
+  { id: 'mlb-athletics', value: 'Athletics', type: 'AL West' },
+  { id: 'mlb-houston-astros', value: 'Houston Astros', type: 'AL West' },
+  { id: 'mlb-los-angeles-angels', value: 'Los Angeles Angels', type: 'AL West' },
+  { id: 'mlb-seattle-mariners', value: 'Seattle Mariners', type: 'AL West' },
+  { id: 'mlb-texas-rangers', value: 'Texas Rangers', type: 'AL West' },
+  { id: 'mlb-atlanta-braves', value: 'Atlanta Braves', type: 'NL East' },
+  { id: 'mlb-miami-marlins', value: 'Miami Marlins', type: 'NL East' },
+  { id: 'mlb-new-york-mets', value: 'New York Mets', type: 'NL East' },
+  { id: 'mlb-philadelphia-phillies', value: 'Philadelphia Phillies', type: 'NL East' },
+  { id: 'mlb-washington-nationals', value: 'Washington Nationals', type: 'NL East' },
+  { id: 'mlb-chicago-cubs', value: 'Chicago Cubs', type: 'NL Central' },
+  { id: 'mlb-cincinnati-reds', value: 'Cincinnati Reds', type: 'NL Central' },
+  { id: 'mlb-milwaukee-brewers', value: 'Milwaukee Brewers', type: 'NL Central' },
+  { id: 'mlb-pittsburgh-pirates', value: 'Pittsburgh Pirates', type: 'NL Central' },
+  { id: 'mlb-st-louis-cardinals', value: 'St. Louis Cardinals', type: 'NL Central' },
+  { id: 'mlb-arizona-diamondbacks', value: 'Arizona Diamondbacks', type: 'NL West' },
+  { id: 'mlb-colorado-rockies', value: 'Colorado Rockies', type: 'NL West' },
+  { id: 'mlb-los-angeles-dodgers', value: 'Los Angeles Dodgers', type: 'NL West' },
+  { id: 'mlb-san-diego-padres', value: 'San Diego Padres', type: 'NL West' },
+  { id: 'mlb-san-francisco-giants', value: 'San Francisco Giants', type: 'NL West' },
+];
 
-function onComboboxInput (value) {
-  items.value = ITEMS_LIST_DATA.filter(item => item.value.includes(value));
-}
+const COLOR_ITEMS_DATA = [
+  { id: 'color-crimson', value: 'Crimson', type: 'Warm' },
+  { id: 'color-amber', value: 'Amber', type: 'Warm' },
+  { id: 'color-emerald', value: 'Emerald', type: 'Cool' },
+  { id: 'color-cobalt', value: 'Cobalt', type: 'Cool' },
+  { id: 'color-violet', value: 'Violet', type: 'Cool' },
+  { id: 'color-slate', value: 'Slate', type: 'Neutral' },
+  { id: 'color-indigo', value: 'Indigo', type: 'Cool' },
+  { id: 'color-rose', value: 'Rose', type: 'Warm' },
+  { id: 'color-tangerine', value: 'Tangerine', type: 'Warm' },
+  { id: 'color-lime', value: 'Lime', type: 'Warm' },
+  { id: 'color-teal', value: 'Teal', type: 'Cool' },
+  { id: 'color-sage', value: 'Sage', type: 'Cool' },
+  { id: 'color-azure', value: 'Azure', type: 'Cool' },
+  { id: 'color-plum', value: 'Plum', type: 'Cool' },
+  { id: 'color-mint', value: 'Mint', type: 'Cool' },
+  { id: 'color-coral', value: 'Coral', type: 'Warm' },
+  { id: 'color-saffron', value: 'Saffron', type: 'Warm' },
+  { id: 'color-pearl', value: 'Pearl', type: 'Neutral' },
+  { id: 'color-onyx', value: 'Onyx', type: 'Neutral' },
+  { id: 'color-charcoal', value: 'Charcoal', type: 'Neutral' },
+  { id: 'color-graphite', value: 'Graphite', type: 'Neutral' },
+  { id: 'color-smoke', value: 'Smoke', type: 'Neutral' },
+  { id: 'color-ash', value: 'Ash', type: 'Neutral' },
+  { id: 'color-sand', value: 'Sand', type: 'Neutral' },
+  { id: 'color-dust', value: 'Dust', type: 'Neutral' },
+  { id: 'color-mist', value: 'Mist', type: 'Neutral' },
+  { id: 'color-fog', value: 'Fog', type: 'Neutral' },
+  { id: 'color-moonlight', value: 'Moonlight', type: 'Neutral' },
+];
 
-function onComboboxSelect (i) {
-  if (items.value[i]) {
-    const item = items.value[i].value;
-    if (!selectedItems.value.includes(item)) {
-      selectedItems.value.push(item);
+function createComboboxState (itemsData) {
+  const items = ref([...itemsData]);
+  const selectedItems = ref([]);
+
+  function onInput (value) {
+    const normalizedValue = value.toLowerCase();
+    items.value = itemsData.filter(item => item.value.toLowerCase().includes(normalizedValue));
+  }
+
+  function onSelect (i) {
+    if (items.value[i]) {
+      const item = items.value[i].value;
+      if (!selectedItems.value.includes(item)) {
+        selectedItems.value.push(item);
+      }
+      items.value = [...itemsData];
     }
-    items.value = [...ITEMS_LIST_DATA];
   }
+
+  function onRemove (item) {
+    const index = selectedItems.value.indexOf(item);
+    if (index >= 0) {
+      selectedItems.value.splice(index, 1);
+    }
+  }
+
+  return {
+    items,
+    selectedItems,
+    onInput,
+    onSelect,
+    onRemove,
+  };
 }
 
-function onComboboxRemove (item) {
-  const index = selectedItems.value.indexOf(item);
-  if (index >= 0) {
-    selectedItems.value.splice(index, 1);
-  }
-}
+const {
+  items: firstNameItems,
+  selectedItems: selectedFirstNames,
+  onInput: onFirstNameInput,
+  onSelect: onFirstNameSelect,
+  onRemove: onFirstNameRemove,
+} = createComboboxState(FIRST_NAME_ITEMS_DATA);
+
+const {
+  items: mlbTeamItems,
+  selectedItems: selectedMlbTeams,
+  onInput: onMlbTeamInput,
+  onSelect: onMlbTeamSelect,
+  onRemove: onMlbTeamRemove,
+} = createComboboxState(MLB_TEAM_ITEMS_DATA);
+
+const {
+  items: colorItems,
+  selectedItems: selectedColors,
+  onInput: onColorInput,
+  onSelect: onColorSelect,
+  onRemove: onColorRemove,
+} = createComboboxState(COLOR_ITEMS_DATA);
 
 const proseSize = ref('300');
 const proseDensity = ref('200');

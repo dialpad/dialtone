@@ -2,20 +2,15 @@
 .d-combobox-multi-select__chip {
   z-index: var(--zi-base1);
   max-inline-size: var(--dt-layout-100-percent);
-  margin-block-start: calc(var(--dt-spacing-50));
   margin-inline: var(--dt-spacing-25);
-
-  .d-combobox-multi-select__input-wrapper:has(.d-input--xs) & {
-    margin-block-start: calc(var(--dt-spacing-50-negative));
-  }
-
-  .d-combobox-multi-select__input-wrapper:has(.d-input--sm) & {
-    margin-block-start: 0;
-  }
 }
 
 .d-combobox-multi-select__chip-wrapper {
   position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  row-gap: var(--dt-spacing-50);
   max-inline-size: calc(var(--dt-layout-100-percent) - var(--dt-spacing-50));
   max-block-size: initial;
   margin-inline: var(--dt-spacing-25);
