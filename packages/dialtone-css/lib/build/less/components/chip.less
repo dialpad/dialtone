@@ -129,7 +129,8 @@
         --chip-color-background: var(--dt-action-color-background-muted-hover);
       }
 
-      &:focus-visible {
+      &:focus-visible,
+      &:where(.d-chip__label--focus-always):focus {
         outline: none;
 
         --chip-color-background: var(--dt-action-color-background-muted-hover);

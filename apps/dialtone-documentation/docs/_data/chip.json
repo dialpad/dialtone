@@ -21,6 +21,11 @@
       "description": "Applies extra small size."
     },
     {
+      "class": "d-chip__label--focus-always",
+      "applies": ".d-chip__label",
+      "description": "Shows the focus ring for pointer focus as well as keyboard focus."
+    },
+    {
       "class": "d-chip__avatar",
       "applies": "N/A",
       "description": "Applies positioning and styling for the chip avatar."
