@@ -36,7 +36,7 @@
   --chip-padding-inline-start: var(--dt-spacing-100);
   --chip-padding-inline-end: var(--dt-spacing-125);
   --chip-border-radius: var(--dt-size-radius-pill);
-  //  Icon (label's leading icon; syncs to the close button size below)
+  //  Icon (label's leading icon; sized from the label's size modifier below)
   --chip-icon-size: var(--dt-icon-size-300);
   //  Close button: the inline space the label reserves for it.
   --chip-close-size: calc(var(--dt-layout-25) * 1.75);
@@ -72,18 +72,27 @@
     --chip-padding-inline-end: calc(var(--chip-close-size) + var(--dt-spacing-25));
   }
 
+  //  Icon size follows the label's size modifier, not the close button: the
+  //  label modifier is always present, whereas the close button is optional
+  //  (showClose), and toggling it must not resize the leading icon.
+  &:has(.d-chip__label--xs) {
+    --chip-icon-size: var(--dt-icon-size-100);
+  }
+
+  &:has(.d-chip__label--sm) {
+    --chip-icon-size: var(--dt-icon-size-200);
+  }
+
   //  Close button size modifiers. Set on the root (via :has) so the label's
-  //  reserved space and icon size track the close button's size, and repeated
-  //  on the element itself so a close button that is not a direct child of
-  //  .d-chip still sizes correctly in raw HTML.
+  //  reserved space tracks the close button's size, and repeated on the
+  //  element itself so a close button that is not a direct child of .d-chip
+  //  still sizes correctly in raw HTML.
   &:has(> .d-chip__close--xs) {
     --chip-close-size: var(--dt-layout-25);
-    --chip-icon-size: var(--dt-icon-size-100);
   }
 
   &:has(> .d-chip__close--sm) {
     --chip-close-size: calc(var(--dt-layout-25) * 1.125);
-    --chip-icon-size: var(--dt-icon-size-200);
   }
 
   &:has(> .d-chip__close--xs),

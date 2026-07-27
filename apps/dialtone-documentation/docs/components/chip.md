@@ -25,13 +25,13 @@ keywords: ["tag", "pill", "token", "badge", "d-chip", "DtChip", "dt-chip", "filt
 <dt-stack direction="row" gap="100">
   <dt-chip :size="100">Chip</dt-chip>
   <dt-chip :size="200">Chip</dt-chip>
-  <dt-chip>Chip</dt-chip>
+  <dt-chip :size="300">Chip</dt-chip>
 </dt-stack>
 ```
 
 ### Interactive
 
-Add `:interactive="true"` to make it an interactive Chip. This changes it from a non-interactive, read-only Chip to an interactive Chip with events and hover/active state. Note that this does not effect the interactivity of its `×` remove button.
+Add `:interactive="true"` to make it an interactive Chip. This changes it from a non-interactive, read-only Chip to an interactive Chip with events and hover/active state. Note that this does not affect the interactivity of its `×` remove button.
 
 ```vue demo
 <dt-chip :interactive="true">Chip</dt-chip>
