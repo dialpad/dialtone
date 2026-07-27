@@ -1,0 +1,68 @@
+packages/dialtone-vue/components/rich_text_editor/rich_text_editor.vue
+  s_d5e86a56d4f166::t_4259e010ce1282 1126-1129
+  s_d5e86a56d4f166::t_4bc68e294a1cb3 82
+  s_d5e86a56d4f166::t_e23745e7b08c0f 8
+  s_d5e86a56d4f166::t_16f7f68d489d2f 1116-1119,1121-1122,1139,1142
+  s_d5e86a56d4f166::t_ab224138e06d2a 248-252,255-256
+  s_d5e86a56d4f166::t_81442db348d632 623
+  s_d5e86a56d4f166::t_616f6b4b56c786 254
+  s_d5e86a56d4f166::t_0c8cef0a0be977 1120,1123-1125,1130-1138,1140-1141
+  s_d5e86a56d4f166::t_d0696acd18062f 99
+  s_d5e86a56d4f166::t_e9e69e2e204c95 1111-1115
+  s_d5e86a56d4f166::t_3e309a4cc3cc53 748-749
+  s_d5e86a56d4f166::t_694f172f43b2ba 621
+  s_d5e86a56d4f166::t_4661d5f6fbe589 1018
+  s_d5e86a56d4f166::t_52b5b39653c048 946-949
+  s_d5e86a56d4f166::t_7347473c9b6c63 1325
+  s_d5e86a56d4f166::t_b3a3195b03326f 739-740,746-747
+packages/dialtone-vue/components/rich_text_editor/extensions/custom_link/autolink.js
+  s_d5e86a56d4f166::t_86eed5be57771e 42,44,60,62,67-68,70
+packages/dialtone-vue/components/rich_text_editor/extensions/link_phone_numbers/link_phone_numbers.test.js
+  s_d5e86a56d4f166::t_1b10ded72140dd 7,12,66-68,71,74-76,79-81,85,90-91,93,134
+  s_d5e86a56d4f166::t_6a36a4c9e002dc 10
+  s_d5e86a56d4f166::t_2c7b738fc74760 3,16-23,51-55,92,105
+  s_d5e86a56d4f166::t_13a4675c36eab7 58-59,84,98-104,106,130,132
+  s_d5e86a56d4f166::t_338e8f7a8306ee 145
+  s_d5e86a56d4f166::t_b2cf0f67f379d4 1-2,4-5,8-9,11,13-15,24,26-50,56-57,62-65,69-70,72-73,77-78,82-83,86-89,94-97,107,131,133,135-144,146-159
+  s_d5e86a56d4f166::t_9baae0f5a74fa2 25
+  s_d5e86a56d4f166::t_2a1749a182a8c0 108-129
+packages/dialtone-vue/components/rich_text_editor/rich_text_editor.stories.js
+  s_d5e86a56d4f166::t_2c87a5db218c08 202-210
+  s_d5e86a56d4f166::t_99121c1e667f90 121-125
+  s_d5e86a56d4f166::t_4f486aa2b7ed54 30
+packages/dialtone-vue/components/rich_text_editor/rich_text_editor_default.story.vue
+  s_d5e86a56d4f166::t_db87a98fb4f8ea 31
+  s_d5e86a56d4f166::t_06b648739f3ca1 53
+packages/dialtone-vue/components/rich_text_editor/extensions/link_phone_numbers/link_phone_numbers.js
+  s_d5e86a56d4f166::t_961c03a5c39c76 17
+  s_d5e86a56d4f166::t_3a33d6a5186649 1-3,5-16,19-32,38,40-46
+  s_d5e86a56d4f166::t_b17c176bf8884f 18
+  s_d5e86a56d4f166::t_a9cef8fbad75b4 4
+  s_d5e86a56d4f166::t_1ae37c12ed3d6f 33-37,39
+packages/dialtone-css/lib/build/less/components/rich-text-editor.less
+  s_d5e86a56d4f166::t_bbb13ba273c561 27-34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.5",
+  "base_commit_sha": "20a4fcc3644ecbe5f2036a4f04953be95c5022b2",
+  "prompts": {},
+  "sessions": {
+    "s_216be71a74802d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bd3cd55b-c60e-4dd6-b099-d3bfba432214",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Brian Alonso <brian.alonso@dialpad.com>"
+    },
+    "s_d5e86a56d4f166": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "16963438-69cc-46fa-8f17-4832f0e334a0",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

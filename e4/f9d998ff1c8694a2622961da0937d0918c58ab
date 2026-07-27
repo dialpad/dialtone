@@ -1,0 +1,30 @@
+apps/dialtone-documentation/docs/.vuepress/views/UiKitsOverview.vue
+  h_c15b5755534093 2-48,50-55
+  s_037f149b31cf7b::t_bfce1ea44e01f2 49
+apps/dialtone-documentation/docs/dialtone/index.md
+  h_c15b5755534093 7-34,36,38-48
+apps/dialtone-documentation/docs/components/index.md
+  s_037f149b31cf7b::t_d5f7bbc83d300a 20,33,46,59,72,85
+  h_c15b5755534093 8-19,21-32,34-45,47-58,60-71,73-84,86-92
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "e4f9d998ff1c8694a2622961da0937d0918c58ab",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_037f149b31cf7b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019eb75a-1703-7701-b0b6-29b6cf4d3b9e",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
