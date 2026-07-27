@@ -147,6 +147,8 @@ import { COMPONENT_SIZES, VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 // Nudge that sits the text caret on the same optical line as a chip row.
 // getInputPaddingTop() adds it; growInputForWrappedRows() subtracts it to
 // recover the row top, so the two must stay in step.
+// Deliberately not a --dt-* token: this is an optical correction to a measured
+// value, not a spacing decision, so it is neither themeable nor design-owned.
 const CARET_ROW_OFFSET = 2;
 
 export default {
