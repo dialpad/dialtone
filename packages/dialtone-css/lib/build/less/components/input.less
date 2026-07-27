@@ -100,7 +100,7 @@
         --input-color-background: var(--dt-inputs-color-background-focus);
         --input-color-border: var(--dt-inputs-color-border-focus) !important;
 
-        box-shadow: 0 0 0 var(--dt-size-border-100) var(--dt-inputs-color-border-focus) inset;
+        box-shadow: 0 0 0 var(--dt-size-border-50) var(--dt-inputs-color-border-focus) inset;
     }
     //  --  DISABLED / READ-ONLY
     &[disabled],
@@ -161,6 +161,11 @@
 
 .d-input__length-description {
     margin-block-end: var(--dt-spacing-25);
+}
+
+.d-input__label {
+    display: flex;
+    flex-direction: column;
 }
 
 .d-input--hidden {

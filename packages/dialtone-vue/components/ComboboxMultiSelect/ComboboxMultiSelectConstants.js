@@ -16,7 +16,11 @@ export const CHIP_SIZES = {
   md: 'sm',
 };
 
-// Adjusted in DLT-3409 for sub-pixel offset for sizes sm and md
+/**
+ * @deprecated No longer used. Chip vertical alignment is computed geometrically
+ * in DtComboboxMultiSelect rather than read from this table. Kept only so the
+ * public export does not disappear; it will be removed in the next major.
+ */
 export const CHIP_TOP_POSITION = {
   // Numeric (preferred)
   100: 1.4,

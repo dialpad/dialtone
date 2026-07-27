@@ -3,8 +3,12 @@ import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtComboboxMultiSelect from './ComboboxMultiSelect.vue';
 
 import DtComboboxMultiSelectDefaultTemplate from './ComboboxMultiSelectDefault.story.vue';
-import { MULTI_SELECT_SIZES } from './ComboboxMultiSelectConstants';
+import { CHIP_SIZES } from './ComboboxMultiSelectConstants';
 import { ITEMS_LIST_DATA } from './ComboboxMultiSelectStoryConstants';
+
+const NUMERIC_SIZE_OPTIONS = Object.keys(CHIP_SIZES)
+  .filter(size => !Number.isNaN(Number(size)))
+  .map(Number);
 
 // Default Prop Values
 export const argsData = {
@@ -92,7 +96,7 @@ export const argTypesData = {
     control: {
       type: 'select',
     },
-    options: Object.values(MULTI_SELECT_SIZES),
+    options: NUMERIC_SIZE_OPTIONS,
   },
 
   showLabel: {

@@ -130,7 +130,6 @@ function switchAutoScrolling () {
   display: flex;
   align-items: center;
   :where(div) {
-    background-color: red;
     inline-size: 5px;
     block-size: 5px;
     border-radius: 25px;

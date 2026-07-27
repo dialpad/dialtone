@@ -22,7 +22,7 @@
       </span>
       <span
         v-else-if="hasSlotContent($slots.avatar)"
-        :class="avatarClass"
+        :class="['d-chip__avatar', avatarClass]"
         data-qa="dt-chip-avatar"
       >
         <!-- @slot slot for Chip avatar -->

@@ -6,10 +6,17 @@
 //  For further documentation of these and other classes,
 //  visit https://dialtone.dialpad.com/components/chip
 //
+//  A chip is two sibling elements inside the .d-chip root: the label (the
+//  visible pill, optionally interactive) and an absolutely-positioned close
+//  button overlaying the label's end padding.
+//
 //  TABLE OF CONTENTS
 //  • BASE STYLE
-//  • INTERACTIVITY
-//  • SIZES
+//  • CONTEXT ADJUSTMENTS
+//  • LABEL (+ SIZES)
+//  • CONTENT ELEMENTS
+//  • CLOSE BUTTON
+//  • DISABLED
 //
 //  ============================================================================
 //  $   BASE STYLE
@@ -17,206 +24,288 @@
 @layer dialtone.components {
 .d-chip {
   //  Component CSS Vars
+  //  --------------------------------------------------------------------------
+  //  Every knob is declared once here with its default (md) value. Size
+  //  modifiers and the context rules below override these variables — not the
+  //  properties that consume them — so overrides stay at low specificity.
+  //  Label
+  --chip-color-background: var(--dt-action-color-background-muted-hover);
   --chip-color-text: var(--dt-color-foreground-primary);
   --chip-text-size: var(--dt-font-size-200);
-  --chip-padding: var(--dt-spacing-50) var(--dt-spacing-125);
-  --chip-color-background: var(--dt-color-surface-moderate-opaque);
+  --chip-padding-block: var(--dt-spacing-25);
+  --chip-padding-inline-start: var(--dt-spacing-100);
+  --chip-padding-inline-end: var(--dt-spacing-125);
   --chip-border-radius: var(--dt-size-radius-pill);
-  --chip-close-size: calc(var(--dt-layout-25) * 1.5);
+  //  Icon (label's leading icon; sized from the label's size modifier below)
+  --chip-icon-size: var(--dt-icon-size-300);
+  //  Close button: the inline space the label reserves for it.
+  --chip-close-size: calc(var(--dt-layout-25) * 1.75);
+  --chip-close-padding: var(--dt-spacing-50);
+  --chip-close-inset-end: var(--dt-spacing-25);
 
   position: relative;
   display: inline-flex;
   align-items: center;
-}
 
-.d-chip__label {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  max-inline-size: var(--dt-layout-100-percent);
-  padding: var(--chip-padding);
-  color: var(--chip-color-text);
-  font-size: var(--chip-text-size);
-  font-family: inherit;
-  line-height: var(--dt-font-line-height-400);
-  background-color: var(--chip-color-background);
-  border: none;
-  border-radius: var(--chip-border-radius);
-  transition-timing-function: var(--ttf-out-quint);
-  transition-duration: var(--td200);
-  transition-property: background-color;
+  //  ==========================================================================
+  //  $   CONTEXT ADJUSTMENTS
+  //  --------------------------------------------------------------------------
+  //  The root watches its content with :has() and re-tunes variables, so the
+  //  label, icon, and close button never need to know about each other.
 
-  // Reserves space within the chip for the close button, since the close button is
-  // not nested within the chip. Only apply if close button exists (more than one child).
-  &:not(:only-child)::after {
-    flex-shrink: 0;
-    inline-size: var(--chip-close-size);
-    block-size: var(--chip-close-size);
-    content: '';
+  //  An avatar sits tighter to the edge than text does. (A leading icon needs
+  //  no tuck-in: .d-chip__icon carries its own inline-start spacing.)
+  &:has(.d-chip__avatar) {
+    --chip-padding-inline-start: var(--dt-spacing-25);
   }
 
-  // These properties are only set if d-chip is interactive (ex: a button).
-  &:is(a),
-  &:is(button),
-  &:is([role='button']),
-  &:is([role='link']) {
-    text-decoration: none;
-    cursor: pointer;
+  //  When a close button is present the label reserves space for it. Targets
+  //  the label rather than the root so it beats the size modifiers' own
+  //  end-padding values, which are declared directly on the label.
+  &:has(> .d-chip__close) :where(.d-chip__label) {
+    --chip-padding-inline-end: calc(var(--chip-close-size) - var(--dt-spacing-50));
+  }
 
-    &:hover {
-      --chip-color-background: var(--dt-color-surface-bold-opaque);
+  &:has(> .d-chip__close--xs) :where(.d-chip__label),
+  &:has(> .d-chip__close--sm) :where(.d-chip__label) {
+    --chip-padding-inline-end: calc(var(--chip-close-size) + var(--dt-spacing-25));
+  }
 
+  //  Icon size follows the label's size modifier, not the close button: the
+  //  label modifier is always present, whereas the close button is optional
+  //  (showClose), and toggling it must not resize the leading icon.
+  &:has(.d-chip__label--xs) {
+    --chip-icon-size: var(--dt-icon-size-100);
+  }
+
+  &:has(.d-chip__label--sm) {
+    --chip-icon-size: var(--dt-icon-size-200);
+  }
+
+  //  Close button size modifiers. Set on the root (via :has) so the label's
+  //  reserved space tracks the close button's size, and repeated on the
+  //  element itself so a close button that is not a direct child of .d-chip
+  //  still sizes correctly in raw HTML.
+  &:has(> .d-chip__close--xs) {
+    --chip-close-size: var(--dt-layout-25);
+  }
+
+  &:has(> .d-chip__close--sm) {
+    --chip-close-size: calc(var(--dt-layout-25) * 1.125);
+  }
+
+  &:has(> .d-chip__close--xs),
+  &__close--xs {
+    --chip-close-padding: var(--dt-spacing-1);
+  }
+
+  &:has(> .d-chip__close--sm),
+  &__close--sm {
+    --chip-close-padding: var(--dt-spacing-25);
+  }
+
+  //  ==========================================================================
+  //  $   LABEL
+  //  --------------------------------------------------------------------------
+  &__label {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    max-inline-size: var(--dt-layout-100-percent);
+    padding-block: var(--chip-padding-block);
+    padding-inline: var(--chip-padding-inline-start) var(--chip-padding-inline-end);
+    color: var(--chip-color-text);
+    font-size: var(--chip-text-size);
+    font-family: inherit;
+    line-height: var(--dt-font-line-height-300);
+    background-color: var(--chip-color-background);
+    border: none;
+    border-radius: var(--chip-border-radius);
+    cursor: default;
+
+    //  These properties are only set if d-chip is interactive (ex: a button).
+    &:is(a, button, [role='button'], [role='link']) {
       text-decoration: none;
+      cursor: pointer;
+
+      &:hover {
+        --chip-color-background: var(--dt-action-color-background-muted-active);
+
+        text-decoration: none;
+      }
+
+      &:active {
+        --chip-color-background: var(--dt-action-color-background-muted-hover);
+      }
+
+      &:focus-visible,
+      &:where(.d-chip__label--focus-always):focus {
+        outline: none;
+
+        --chip-color-background: var(--dt-action-color-background-muted-hover);
+
+        box-shadow: var(--dt-shadow-focus);
+      }
     }
 
-    &:active {
-      --chip-color-background: var(--dt-color-surface-moderate-opaque);
+    .d-avatar {
+      --avatar-size-shape: calc(var(--dt-layout-24px) - var(--dt-layout-2px));
+
+      overflow: hidden;
+      border-radius: var(--dt-size-radius-circle) !important;
+    }
+
+    //  Sets the property directly — not --chip-color-background — so the
+    //  active (selected) surface is immune to the hover/active variable
+    //  swaps above.
+    &--active {
+      background-color: var(--dt-color-surface-bold-opaque);
+    }
+
+    //  ========================================================================
+    //  $   SIZES
+    //  ------------------------------------------------------------------------
+    //  Only deltas from the base variables. Anything not overridden here
+    //  (e.g. --sm start padding and its icon/avatar tuck-ins) falls through
+    //  to the base and context values above.
+    //  $$  EXTRA SMALL
+    //  ------------------------------------------------------------------------
+    &--xs {
+      --chip-text-size: var(--dt-font-size-100);
+      --chip-padding-block: var(--dt-spacing-1);
+      --chip-padding-inline-start: var(--dt-spacing-75);
+      --chip-padding-inline-end: var(--dt-spacing-75);
+
+      &:has(.d-chip__avatar) {
+        --chip-padding-inline-start: var(--dt-spacing-25);
+      }
+
+      .d-avatar {
+        --avatar-size-shape: var(--dt-layout-25);
+      }
+    }
+
+    //  $$  SMALL
+    //  ------------------------------------------------------------------------
+    &--sm {
+      --chip-text-size: var(--dt-font-size-150);
+      --chip-padding-inline-end: var(--dt-spacing-100);
+
+      &:has(.d-chip__avatar) {
+        --chip-padding-inline-start: var(--dt-spacing-50);
+      }
+
+      .d-avatar {
+        --avatar-size-shape: calc(var(--dt-layout-20px) - var(--dt-layout-2px));
+      }
+    }
+  }
+
+  //  ==========================================================================
+  //  $   CONTENT ELEMENTS
+  //  --------------------------------------------------------------------------
+  &__avatar {
+    padding-inline-end: var(--dt-spacing-75);
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-inline-end: var(--dt-spacing-50);
+
+    > .d-icon {
+      max-inline-size: var(--chip-icon-size);
+      max-block-size: var(--chip-icon-size);
+    }
+  }
+
+  &__text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  //  ==========================================================================
+  //  $   CLOSE BUTTON
+  //  --------------------------------------------------------------------------
+  &__close {
+    // This is unfortunate, and quite legacy, and should be refactored to just
+    // use DtButton component directly. Future task.
+    ._btn();
+
+    --button-color-text: var(--dt-action-color-foreground-muted-default);
+
+    position: absolute;
+    inset-inline-end: var(--chip-close-inset-end);
+    padding: var(--chip-close-padding);
+    border-width: 0;
+    border-radius: var(--dt-size-radius-circle);
+
+    //  Extends the click target slightly beyond the visible button.
+    &::before {
+      position: absolute;
+      inset: calc(var(--dt-spacing-50-negative) * 1.15);
+      content: '';
+    }
+
+    &:hover:not(:disabled, .d-btn--disabled) {
+      --button-color-text: var(--dt-color-foreground-primary);
+      --button-color-background: var(--dt-action-color-background-muted-active);
+    }
+
+    &:active:not(:disabled, .d-btn--disabled),
+    &.d-btn--active:not(:disabled, .d-btn--disabled),
+    &.d-btn--active:active:not(:disabled, .d-btn--disabled) {
+      --button-color-background: var(--dt-action-color-background-muted-hover);
     }
 
     &:focus-visible {
       outline: none;
-      box-shadow: var(--dt-shadow-focus);
+      box-shadow: var(--dt-shadow-focus-outset);
+      transition: none;
+    }
+
+    // Explicit disabled styling for chip close button.
+    // This duplicates the button disabled logic since the ._btn() mixin no
+    // longer includes disabled state handling. PLUS it may be simplified with
+    // the upcoming Chip redesign/refactor.
+    &:where(.d-chip__close--disabled, :disabled) {
+      --chroma-adjust-text: .08;
+      --chroma-adjust-background: .08;
+      --chroma-adjust-border: .08;
+      --opacity-adjust-text: 65%;
+      --opacity-adjust-background: 65%;
+      --opacity-adjust-border: 40%;
+
+      color: color-mix(in oklch, oklch(from var(--button-color-text) l calc(c - var(--chroma-adjust-text)) h) var(--opacity-adjust-text), transparent);
+      background-color: color-mix(in oklch, oklch(from var(--button-color-background) l calc(c - var(--chroma-adjust-background)) h) var(--opacity-adjust-background), transparent);
+      border-color: color-mix(in oklch, oklch(from var(--button-color-border) l calc(c - var(--chroma-adjust-border)) h) var(--opacity-adjust-border), transparent);
+      cursor: not-allowed;
+      transition: none;
+      pointer-events: none;
+
+      &:where(.d-btn--muted) {
+        --opacity-adjust-text: 50%;
+        --opacity-adjust-border: 60%;
+      }
+
+      &:where(.d-btn--active):where(.d-btn--outlined, .d-btn--muted) {
+        --button-color-background: var(--dt-action-color-background-muted-active);
+      }
     }
   }
 
-  .d-avatar {
-    margin-inline: var(--dt-spacing-25) var(--dt-spacing-50);
+  //  ==========================================================================
+  //  $   DISABLED
+  //  --------------------------------------------------------------------------
+  //  DtChip puts .d-chip--disabled on the label element and
+  //  .d-chip__close--disabled on the close button.
+  &--disabled,
+  &__close--disabled {
+    opacity: var(--dt-opacity-1000);
+    pointer-events: none;
   }
-}
-
-.d-chip__close {
-  ._btn();
-  ._btn-circle();
-
-  --chip-close-padding: calc(var(--dt-spacing-25) + var(--dt-spacing-1));
-  --chip-close-inset-end: var(--dt-spacing-75);
-
-  position: absolute;
-  inset-inline-end: var(--chip-close-inset-end);
-  padding: var(--chip-close-padding);
-  border-width: 0;
-
-  &::before {
-    position: absolute;
-    inline-size: var(--chip-close-size);
-    block-size: var(--chip-close-size);
-    content: '';
-  }
-
-  &:hover:not(:disabled, .d-btn--disabled) {
-    --button-color-background: var(--dt-action-color-background-muted-hover);
-  }
-
-  &:active:not(:disabled, .d-btn--disabled),
-  &.d-btn--active:not(:disabled, .d-btn--disabled),
-  &.d-btn--active:active:not(:disabled, .d-btn--disabled) {
-    --button-color-background: var(--dt-action-color-background-muted-active);
-  }
-}
-
-// Explicit disabled styling for chip close button.
-// This duplicates the button disabled logic since the ._btn() mixin no longer includes disabled state handling.
-// PLUS it may be simplified with upcoming Chip redesign/refactor
-.d-chip__close:where(.d-chip__close--disabled, :disabled) {
-  --chroma-adjust-text: .08;
-  --chroma-adjust-background: .08;
-  --chroma-adjust-border: .08;
-  --opacity-adjust-text: 65%;
-  --opacity-adjust-background: 65%;
-  --opacity-adjust-border: 40%;
-
-  color:            color-mix(in oklch, oklch( from var(--button-color-text)       l calc(c - var(--chroma-adjust-text)) h ) var(--opacity-adjust-text), transparent );
-  background-color: color-mix(in oklch, oklch( from var(--button-color-background) l calc(c - var(--chroma-adjust-background)) h ) var(--opacity-adjust-background), transparent );
-  border-color:     color-mix(in oklch, oklch( from var(--button-color-border)     l calc(c - var(--chroma-adjust-border)) h ) var(--opacity-adjust-border), transparent );
-  cursor: not-allowed;
-  transition: none;
-  pointer-events: none;
-
-  &:where(.d-btn--primary) {
-    --opacity-adjust-text: 80%;
-  }
-
-  &:where(.d-btn--muted) {
-    --opacity-adjust-text: 50%;
-    --opacity-adjust-border: 60%;
-  }
-
-  &:where(.d-btn--active):where(.d-btn--outlined, .d-btn--muted) {
-    --button-color-background: var(--dt-action-color-background-muted-active);
-  }
-}
-
-.d-chip__icon {
-  --chip-icon-size: calc(var(--dt-layout-25) * 1.25);
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  inline-size: var(--chip-icon-size);
-  block-size: var(--chip-icon-size);
-  margin-inline: var(--dt-spacing-25-negative) var(--dt-spacing-25);
-  line-height: 1;
-}
-
-.d-chip__label--active {
-  background-color: var(--dt-color-surface-bold-opaque);
-}
-
-.d-chip__text {
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-
-.d-chip--disabled,
-.d-chip__close--disabled {
-  opacity: var(--dt-opacity-1000);
-  pointer-events: none;
-}
-
-//  ============================================================================
-//  $   SIZES
-//  ----------------------------------------------------------------------------
-//  $$  EXTRA SMALL
-//  ----------------------------------------------------------------------------
-.d-chip__label--xs {
-  --chip-text-size: var(--dt-font-size-100);
-  --chip-padding: var(--dt-spacing-0) var(--dt-spacing-75);
-
-  .d-avatar {
-    --avatar-size-shape: var(--dt-layout-25);
-
-    margin-inline: var(--dt-spacing-50-negative) var(--dt-spacing-75);
-  }
-}
-
-.d-chip__close--xs {
-  --chip-close-size: var(--dt-layout-25);
-  --chip-close-padding: var(--dt-spacing-1);
-  --chip-close-inset-end: var(--dt-spacing-50);
-}
-
-//  $$ SMALL
-//  ----------------------------------------------------------------------------
-.d-chip__label--sm {
-  --chip-text-size: var(--dt-font-size-150);
-  --chip-padding: var(--dt-spacing-25) var(--dt-spacing-75);
-
-  .d-chip__close::before {
-    inline-size: var(--chip-close-size);
-    block-size: var(--chip-close-size);
-  }
-
-  .d-avatar {
-    --avatar-size-shape: calc(var(--dt-layout-25) * 1.125); // 20
-
-    margin-inline-end: var(--dt-spacing-50);
-  }
-}
-
-.d-chip__close--sm {
-  --chip-close-size: calc(var(--dt-layout-25) * 1.125);
-  --chip-close-padding: var(--dt-spacing-25);
 }
 }
