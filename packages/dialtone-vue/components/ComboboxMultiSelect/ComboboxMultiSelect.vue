@@ -144,6 +144,11 @@ import {
 } from './ComboboxMultiSelectConstants';
 import { COMPONENT_SIZES, VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 
+// Nudge that sits the text caret on the same optical line as a chip row.
+// getInputPaddingTop() adds it; growInputForWrappedRows() subtracts it to
+// recover the row top, so the two must stay in step.
+const CARET_ROW_OFFSET = 2;
+
 export default {
   name: 'DtComboboxMultiSelect',
 
@@ -565,6 +570,14 @@ export default {
       return this.showValidationMessages && this.maxSelectedMessage.length > 0 ? this.messagesId : undefined;
     },
 
+    // Sizes other than xs need a height floor so the box can grow for wrapped
+    // chip rows without collapsing back; xs renders correctly without one.
+    inputHeightFloor () {
+      return (this.initialInputHeight && this.size !== 'xs')
+        ? `${this.initialInputHeight}px`
+        : '';
+    },
+
     chipWrapperClass () {
       return {
         [`d-combobox-multi-select__chip-wrapper-${COMPONENT_SIZES[String(this.size)] || this.size}--collapsed`]: !this.inputFocused && this.collapseOnFocusOut,
@@ -818,36 +831,33 @@ export default {
       // The grown box would otherwise end at the caret line, leaving the last
       // chip row flush against the block-end border. Extend the height floor
       // so the last row keeps the same breathing room the first row gets from
-      // centering: its row top (paddingTop - 2) plus the single-row envelope.
+      // centering: its row top plus the single-row envelope.
       if (!this.initialInputHeight) return;
-      input.style.minHeight = `${paddingTop - 2 + this.initialInputHeight}px`;
+      const lastRowTop = paddingTop - CARET_ROW_OFFSET;
+      input.style.minHeight = `${lastRowTop + this.initialInputHeight}px`;
     },
 
     getInputPaddingTop (lastChip, hasSpace, isWrapped) {
       // Chip fits beside the cursor on its row; CSS handles vertical centering.
       if (hasSpace && !isWrapped) return null;
       // Chip wrapped onto a new row with space remaining; align cursor to it.
-      if (hasSpace) return lastChip.offsetTop + 2;
+      if (hasSpace) return lastChip.offsetTop + CARET_ROW_OFFSET;
       // No space on the chip's row — predict next-row offsetTop so paddingTop
       // stays stable when a chip lands there. Row spacing belongs to the
       // wrapper's row-gap, not to the chip.
       const rowGap = parseFloat(getComputedStyle(this.$refs.chipsWrapper).rowGap) || 0;
       const lastChipHeight = lastChip.getBoundingClientRect().height;
-      return lastChip.offsetTop + lastChipHeight + rowGap + 2;
+      return lastChip.offsetTop + lastChipHeight + rowGap + CARET_ROW_OFFSET;
     },
 
     revertInputPadding (input) {
       input.style.paddingInlineStart = '';
-      // setInputPadding writes the physical paddingTop slot — clearing only
-      // the logical paddingBlockStart slot leaves it stuck.
+      // setInputPadding writes the physical paddingTop slot, so that is the
+      // slot to clear — the logical one is a different CSSOM property.
       input.style.paddingTop = '';
-      input.style.paddingBlockStart = '';
-      input.style.paddingBlockEnd = '';
       // Restore the single-row height floor that setInitialInputHeight
       // applies (setInputPadding grows it while rows are wrapped).
-      input.style.minHeight = (this.initialInputHeight && this.size !== 'xs')
-        ? `${this.initialInputHeight}px`
-        : '';
+      input.style.minHeight = this.inputHeightFloor;
     },
 
     getFullWidth (el) {

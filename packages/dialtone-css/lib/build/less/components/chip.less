@@ -30,16 +30,16 @@
   //  properties that consume them — so overrides stay at low specificity.
   //  Label
   --chip-color-background: var(--dt-action-color-background-muted-hover);
+  --chip-color-text: var(--dt-color-foreground-primary);
   --chip-text-size: var(--dt-font-size-200);
   --chip-padding-block: var(--dt-spacing-25);
   --chip-padding-inline-start: var(--dt-spacing-100);
   --chip-padding-inline-end: var(--dt-spacing-125);
+  --chip-border-radius: var(--dt-size-radius-pill);
   //  Icon (label's leading icon; syncs to the close button size below)
   --chip-icon-size: var(--dt-icon-size-300);
-  //  Close button: "size" is the inline space the label reserves for it,
-  //  "gap" is the breathing room between label text and close button.
+  //  Close button: the inline space the label reserves for it.
   --chip-close-size: calc(var(--dt-layout-25) * 1.75);
-  --chip-close-gap: var(--dt-spacing-1);
   --chip-close-padding: var(--dt-spacing-50);
   --chip-close-inset-end: var(--dt-spacing-25);
 
@@ -54,44 +54,46 @@
   //  The root watches its content with :has() and re-tunes variables, so the
   //  label, icon, and close button never need to know about each other.
 
-  //  A leading icon or avatar tucks the label's start padding in.
-  &:has(.d-chip__icon) {
-    --chip-padding-inline-start: var(--dt-spacing-50);
-  }
-
+  //  An avatar sits tighter to the edge than text does. (A leading icon needs
+  //  no tuck-in: .d-chip__icon carries its own inline-start spacing.)
   &:has(.d-chip__avatar) {
     --chip-padding-inline-start: var(--dt-spacing-25);
   }
 
-  //  When a close button is present the label reserves space for it.
+  //  When a close button is present the label reserves space for it. Targets
+  //  the label rather than the root so it beats the size modifiers' own
+  //  end-padding values, which are declared directly on the label.
   &:has(> .d-chip__close) :where(.d-chip__label) {
     --chip-padding-inline-end: calc(var(--chip-close-size) - var(--dt-spacing-50));
   }
 
-  &:has(> .d-chip__close--xs) :where(.d-chip__label) {
-    --chip-padding-inline-end: calc(var(--chip-close-size) + var(--dt-spacing-25));
-  }
-
+  &:has(> .d-chip__close--xs) :where(.d-chip__label),
   &:has(> .d-chip__close--sm) :where(.d-chip__label) {
     --chip-padding-inline-end: calc(var(--chip-close-size) + var(--dt-spacing-25));
   }
 
-  //  Close button size modifiers. Set on the root (via :has) so the reserved
-  //  space and label icon size track the close button's size; duplicated on
-  //  the element itself so raw HTML keeps working when the close button is
-  //  not a direct child of .d-chip.
+  //  Close button size modifiers. Set on the root (via :has) so the label's
+  //  reserved space and icon size track the close button's size, and repeated
+  //  on the element itself so a close button that is not a direct child of
+  //  .d-chip still sizes correctly in raw HTML.
   &:has(> .d-chip__close--xs) {
     --chip-close-size: var(--dt-layout-25);
-    --chip-close-gap: var(--dt-spacing-25);
-    --chip-close-padding: var(--dt-spacing-1);
     --chip-icon-size: var(--dt-icon-size-100);
   }
 
   &:has(> .d-chip__close--sm) {
     --chip-close-size: calc(var(--dt-layout-25) * 1.125);
-    --chip-close-gap: var(--dt-spacing-75);
-    --chip-close-padding: var(--dt-spacing-25);
     --chip-icon-size: var(--dt-icon-size-200);
+  }
+
+  &:has(> .d-chip__close--xs),
+  &__close--xs {
+    --chip-close-padding: var(--dt-spacing-1);
+  }
+
+  &:has(> .d-chip__close--sm),
+  &__close--sm {
+    --chip-close-padding: var(--dt-spacing-25);
   }
 
   //  ==========================================================================
@@ -105,13 +107,13 @@
     max-inline-size: var(--dt-layout-100-percent);
     padding-block: var(--chip-padding-block);
     padding-inline: var(--chip-padding-inline-start) var(--chip-padding-inline-end);
-    color: var(--dt-color-foreground-primary);
+    color: var(--chip-color-text);
     font-size: var(--chip-text-size);
     font-family: inherit;
     line-height: var(--dt-font-line-height-300);
     background-color: var(--chip-color-background);
     border: none;
-    border-radius: var(--dt-size-radius-pill);
+    border-radius: var(--chip-border-radius);
     cursor: default;
 
     //  These properties are only set if d-chip is interactive (ex: a button).
@@ -163,15 +165,10 @@
     //  ------------------------------------------------------------------------
     &--xs {
       --chip-text-size: var(--dt-font-size-100);
-      --chip-padding-block: var(--dt-spacing-25);
       --chip-padding-inline-start: var(--dt-spacing-75);
       --chip-padding-inline-end: var(--dt-spacing-75);
 
       &:has(.d-chip__avatar) {
-        --chip-padding-inline-start: var(--dt-spacing-25);
-      }
-
-      &:has(.d-chip__icon) {
         --chip-padding-inline-start: var(--dt-spacing-25);
       }
 
@@ -187,10 +184,6 @@
       --chip-padding-inline-end: var(--dt-spacing-100);
 
       &:has(.d-chip__avatar) {
-        --chip-padding-inline-start: var(--dt-spacing-50);
-      }
-
-      &:has(.d-chip__icon) {
         --chip-padding-inline-start: var(--dt-spacing-50);
       }
 
@@ -211,7 +204,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-inline: var(--dt-spacing-50);
+    padding-inline-end: var(--dt-spacing-50);
 
     > .d-icon {
       max-inline-size: var(--chip-icon-size);
