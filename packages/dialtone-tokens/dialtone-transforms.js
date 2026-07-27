@@ -40,8 +40,10 @@ export const isLineHeightToken = (token) => {
   return lowerPath.includes('lineheight');
 };
 
-// percent tokens (e.g. size.100-percent -> "100%")
+// percent tokens (e.g. size.100-percent -> "100%", or size.radius.circle -> "50%").
+// excludes lineHeight tokens - those are handled by the lineHeight transform.
 export const isPercentToken = (token) => {
+  if (isLineHeightToken(token)) return false;
   const originalValue = token.original?.value ?? token.value;
   if (typeof originalValue === 'string' && originalValue.trim().endsWith('%')) return true;
   const lastSegment = token.path?.[token.path.length - 1]?.toLowerCase() ?? '';
