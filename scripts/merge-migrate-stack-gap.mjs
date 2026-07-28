@@ -1,15 +1,15 @@
 #!/usr/bin/env node
 /**
- * merge-migrate-color-stops.mjs
+ * merge-migrate-stack-gap.mjs
  *
  * Thin repo-internal wrapper around the published `dialtone-merge-migrate`
  * CLI (packages/dialtone-css/lib/build/js/dialtone_merge_migrate), scoped to
- * the color-stops config and this monorepo's root as --cwd.
+ * the stack-gap-to-spacing config and this monorepo's root as --cwd.
  *
  * Usage:
- *   node scripts/merge-migrate-color-stops.mjs [options]
+ *   node scripts/merge-migrate-stack-gap.mjs [options]
  *
- * Options: same as `dialtone-merge-migrate --config color-stops`, e.g.
+ * Options: same as `dialtone-merge-migrate --config stack-gap-to-spacing`, e.g.
  *   --merge-from <branch>   Source branch (default: staging)
  *   --dry-run               Preview without modifying files
  *   --force                 Skip confirmation prompt
@@ -31,15 +31,15 @@ const REPO_ROOT = path.resolve(__dirname, '..');
 const PINNED_FLAGS = new Set(['--config', '--cwd']);
 
 // Strip any --config/--cwd the caller passed — this wrapper always pins them
-// to color-stops/REPO_ROOT. yargs collects duplicate string flags into an
-// array rather than "last wins", so simply appending the pinned flags after
-// caller args would corrupt parsing instead of overriding it.
+// to stack-gap-to-spacing/REPO_ROOT. yargs collects duplicate string flags
+// into an array rather than "last wins", so simply appending the pinned
+// flags after caller args would corrupt parsing instead of overriding it.
 function stripPinnedFlags (args) {
   const result = [];
   for (let i = 0; i < args.length; i++) {
     const [flag] = args[i].split('=');
     if (PINNED_FLAGS.has(flag)) {
-      if (!args[i].includes('=') && args[i + 1] && !args[i + 1].startsWith('-')) i++;
+      if (!args[i].includes('=')) i++; // also skip the separate value token
       continue;
     }
     result.push(args[i]);
@@ -51,7 +51,7 @@ process.argv = [
   process.argv[0],
   process.argv[1],
   ...stripPinnedFlags(process.argv.slice(2)),
-  '--config', 'color-stops',
+  '--config', 'stack-gap-to-spacing',
   '--cwd', REPO_ROOT,
 ];
 
