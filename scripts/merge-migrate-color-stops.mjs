@@ -39,7 +39,7 @@ function stripPinnedFlags (args) {
   for (let i = 0; i < args.length; i++) {
     const [flag] = args[i].split('=');
     if (PINNED_FLAGS.has(flag)) {
-      if (!args[i].includes('=')) i++; // also skip the separate value token
+      if (!args[i].includes('=') && args[i + 1] && !args[i + 1].startsWith('-')) i++;
       continue;
     }
     result.push(args[i]);
