@@ -101,162 +101,154 @@ layout: Blank
   and stuff
 </p>
 
-<dt-stack gap="100">
-  <dt-stack direction="row" gap="200">
-    <dt-box class="d-fl1 d-w100p" border-color="subtle" border-width-block-end="50" border-width-block-start="50">
-      <dt-stack
-        direction="row"
-        align="center"
-        gap="50"
-      >
-        <dt-chip interactive size="100">Chip</dt-chip>
-        <dt-chip interactive size="100" :show-close="false">Chip</dt-chip>
-        <dt-chip interactive size="100">
-          <template #icon>
-            <dt-icon name="box-select" size="200" />
-          </template>
-          Chip
-        </dt-chip>
-        <dt-chip interactive size="100">
-          <template #avatar>
-            <dt-avatar image-src="/assets/images/person.png" image-alt="Jaqueline Nackos" full-name="Jaqueline Nackos" />
-          </template>
-          Chip
-        </dt-chip>
-      </dt-stack>
-    </dt-box>
-    <dt-box class="d-fl1 d-w100p" border-color="subtle" border-width-block-end="50" border-width-block-start="50">
-      <dt-stack
-        direction="row"
-        align="center"
-        gap="50"
-      >
-        <dt-chip interactive size="200">Chip</dt-chip>
-        <dt-chip interactive size="200" :show-close="false">Chip</dt-chip>
-        <dt-chip interactive size="200">
-          <template #icon>
-            <dt-icon name="box-select" />
-          </template>
-          Chip
-        </dt-chip>
-        <dt-chip interactive size="200">
-          <template #avatar>
-            <dt-avatar image-src="/assets/images/person.png" image-alt="Jaqueline Nackos" full-name="Jaqueline Nackos" />
-          </template>
-          Chip
-        </dt-chip>
-      </dt-stack>
-    </dt-box>
-    <dt-box class="d-fl1 d-w100p" border-color="subtle" border-width-block-end="50" border-width-block-start="50">
-      <dt-stack
-        direction="row"
-        align="center"
-        gap="50"
-      >
-        <dt-chip interactive>Chip</dt-chip>
-        <dt-chip interactive :show-close="false">Chip</dt-chip>
-        <dt-chip interactive>
-          <template #icon>
-            <dt-icon name="box-select" size="200" />
-          </template>
-          Chip
-        </dt-chip>
-        <dt-chip interactive>
-          <template #avatar>
-            <dt-avatar image-src="/assets/images/person.png" image-alt="Jaqueline Nackos" full-name="Jaqueline Nackos" />
-          </template>
-          Chip
-        </dt-chip>
-      </dt-stack>
-    </dt-box>
-  </dt-stack>
-  <dt-box>
-    <dt-stack
-      direction="row"
-      align="start"
-      gap="200"
-    >
-      <div class="d-fl1 d-w100p">
-        <dt-combobox-multi-select
-          label="First name"
-          size="100"
-          :selected-items="selectedFirstNames"
-          @update:model-value="onFirstNameInput"
-          @select="onFirstNameSelect"
-          @remove="onFirstNameRemove"
+<dt-stack direction="row" gap="400" align="start">
+  <dt-box class="d-fl1 d-w100p">
+    <dt-stack gap="200">
+      <dt-box class="d-bas-dashed" padding-inline="200" border-color="subtle" border-width-block-end="50" border-width-block-start="50">
+        <dt-stack
+          direction="row"
+          align="center"
+          gap="50"
         >
-          <template #list>
-            <dt-stack as="ul" class="d-ps-relative d-m-50 d-px-0">
-              <dt-list-item
-                v-for="(item, i) in firstNameItems"
-                :key="item.id"
-                role="option"
-                navigation-type="arrow-keys"
-                @click="onFirstNameSelect(i)"
-              >
-                {{ item.value }}
-                <template #right>
-                  <dt-text variant="body-sm" tone="tertiary">{{ item.type }}</dt-text>
-                </template>
-              </dt-list-item>
-            </dt-stack>
-          </template>
-        </dt-combobox-multi-select>
-      </div>
-      <div class="d-fl1 d-w100p">
-        <dt-combobox-multi-select
-          label="MLB team"
-          size="200"
-          :selected-items="selectedMlbTeams"
-          @update:model-value="onMlbTeamInput"
-          @select="onMlbTeamSelect"
-          @remove="onMlbTeamRemove"
+          <dt-chip interactive size="100">Chip</dt-chip>
+          <dt-chip interactive size="100" :show-close="false">Chip</dt-chip>
+          <dt-chip interactive size="100">
+            <template #icon>
+              <dt-icon name="box-select" size="200" />
+            </template>
+            Chip
+          </dt-chip>
+          <dt-chip interactive size="100">
+            <template #avatar>
+              <dt-avatar image-src="/assets/images/person.png" image-alt="Jaqueline Nackos" full-name="Jaqueline Nackos" />
+            </template>
+            Chip
+          </dt-chip>
+        </dt-stack>
+      </dt-box>
+      <dt-box class="d-bas-dashed" padding-inline="200" border-color="subtle" border-width-block-end="50" border-width-block-start="50">
+        <dt-stack
+          direction="row"
+          align="center"
+          gap="50"
         >
-          <template #list>
-            <dt-stack as="ul" class="d-ps-relative d-m-50 d-px-0">
-              <dt-list-item
-                v-for="(item, i) in mlbTeamItems"
-                :key="item.id"
-                role="option"
-                navigation-type="arrow-keys"
-                @click="onMlbTeamSelect(i)"
-              >
-                {{ item.value }}
-                <template #right>
-                  <dt-text variant="body-sm" tone="tertiary">{{ item.type }}</dt-text>
-                </template>
-              </dt-list-item>
-            </dt-stack>
-          </template>
-        </dt-combobox-multi-select>
-      </div>
-      <div class="d-fl1 d-w100p">
-        <dt-combobox-multi-select
-          label="Color"
-          size="300"
-          :selected-items="selectedColors"
-          @update:model-value="onColorInput"
-          @select="onColorSelect"
-          @remove="onColorRemove"
+          <dt-chip interactive size="200">Chip</dt-chip>
+          <dt-chip interactive size="200" :show-close="false">Chip</dt-chip>
+          <dt-chip interactive size="200">
+            <template #icon>
+              <dt-icon name="box-select" />
+            </template>
+            Chip
+          </dt-chip>
+          <dt-chip interactive size="200">
+            <template #avatar>
+              <dt-avatar image-src="/assets/images/person.png" image-alt="Jaqueline Nackos" full-name="Jaqueline Nackos" />
+            </template>
+            Chip
+          </dt-chip>
+        </dt-stack>
+      </dt-box>
+      <dt-box class="d-bas-dashed" padding-inline="200" border-color="subtle" border-width-block-end="50" border-width-block-start="50">
+        <dt-stack
+          direction="row"
+          align="center"
+          gap="50"
         >
-          <template #list>
-            <dt-stack as="ul" class="d-ps-relative d-m-50 d-px-0">
-              <dt-list-item
-                v-for="(item, i) in colorItems"
-                :key="item.id"
-                role="option"
-                navigation-type="arrow-keys"
-                @click="onColorSelect(i)"
-              >
-                {{ item.value }}
-                <template #right>
-                  <dt-text variant="body-sm" tone="tertiary">{{ item.type }}</dt-text>
-                </template>
-              </dt-list-item>
-            </dt-stack>
-          </template>
-        </dt-combobox-multi-select>
-      </div>
+          <dt-chip interactive>Chip</dt-chip>
+          <dt-chip interactive :show-close="false">Chip</dt-chip>
+          <dt-chip interactive>
+            <template #icon>
+              <dt-icon name="box-select" size="200" />
+            </template>
+            Chip
+          </dt-chip>
+          <dt-chip interactive>
+            <template #avatar>
+              <dt-avatar image-src="/assets/images/person.png" image-alt="Jaqueline Nackos" full-name="Jaqueline Nackos" />
+            </template>
+            Chip
+          </dt-chip>
+        </dt-stack>
+      </dt-box>
+    </dt-stack>
+  </dt-box>
+  <dt-box class="d-fl1 d-w100p">
+    <dt-stack gap="200">
+      <dt-combobox-multi-select
+        label="First name"
+        size="100"
+        :selected-items="selectedFirstNames"
+        @update:model-value="onFirstNameInput"
+        @select="onFirstNameSelect"
+        @remove="onFirstNameRemove"
+      >
+        <template #list>
+          <dt-stack as="ul" class="d-ps-relative d-m-50 d-px-0">
+            <dt-list-item
+              v-for="(item, i) in firstNameItems"
+              :key="item.id"
+              role="option"
+              navigation-type="arrow-keys"
+              @click="onFirstNameSelect(i)"
+            >
+              {{ item.value }}
+              <template #right>
+                <dt-text variant="body-sm" tone="tertiary">{{ item.type }}</dt-text>
+              </template>
+            </dt-list-item>
+          </dt-stack>
+        </template>
+      </dt-combobox-multi-select>
+      <dt-combobox-multi-select
+        label="MLB team"
+        size="200"
+        :selected-items="selectedMlbTeams"
+        @update:model-value="onMlbTeamInput"
+        @select="onMlbTeamSelect"
+        @remove="onMlbTeamRemove"
+      >
+        <template #list>
+          <dt-stack as="ul" class="d-ps-relative d-m-50 d-px-0">
+            <dt-list-item
+              v-for="(item, i) in mlbTeamItems"
+              :key="item.id"
+              role="option"
+              navigation-type="arrow-keys"
+              @click="onMlbTeamSelect(i)"
+            >
+              {{ item.value }}
+              <template #right>
+                <dt-text variant="body-sm" tone="tertiary">{{ item.type }}</dt-text>
+              </template>
+            </dt-list-item>
+          </dt-stack>
+        </template>
+      </dt-combobox-multi-select>
+      <dt-combobox-multi-select
+        label="Color"
+        size="300"
+        :selected-items="selectedColors"
+        @update:model-value="onColorInput"
+        @select="onColorSelect"
+        @remove="onColorRemove"
+      >
+        <template #list>
+          <dt-stack as="ul" class="d-ps-relative d-m-50 d-px-0">
+            <dt-list-item
+              v-for="(item, i) in colorItems"
+              :key="item.id"
+              role="option"
+              navigation-type="arrow-keys"
+              @click="onColorSelect(i)"
+            >
+              {{ item.value }}
+              <template #right>
+                <dt-text variant="body-sm" tone="tertiary">{{ item.type }}</dt-text>
+              </template>
+            </dt-list-item>
+          </dt-stack>
+        </template>
+      </dt-combobox-multi-select>
     </dt-stack>
   </dt-box>
 </dt-stack>

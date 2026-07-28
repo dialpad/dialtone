@@ -29,13 +29,14 @@
   //  modifiers and the context rules below override these variables — not the
   //  properties that consume them — so overrides stay at low specificity.
   //  Label
-  --chip-color-background: var(--dt-action-color-background-muted-hover);
+  --chip-color-background: var(--dt-color-surface-secondary-opaque);
   --chip-color-text: var(--dt-color-foreground-primary);
+  --chip-color-border: var(--dt-color-border-subtle);
   --chip-text-size: var(--dt-font-size-200);
   --chip-padding-block: var(--dt-spacing-25);
-  --chip-padding-inline-start: var(--dt-spacing-100);
+  --chip-padding-inline-start: var(--dt-spacing-75);
   --chip-padding-inline-end: var(--dt-spacing-125);
-  --chip-border-radius: var(--dt-size-radius-pill);
+  --chip-border-radius: var(--dt-size-radius-350);
   //  Icon (label's leading icon; sized from the label's size modifier below)
   --chip-icon-size: var(--dt-icon-size-300);
   //  Close button: the inline space the label reserves for it.
@@ -122,6 +123,7 @@
     background-color: var(--chip-color-background);
     border: none;
     border-radius: var(--chip-border-radius);
+    box-shadow: 0 0 0 var(--dt-size-border-100) var(--chip-color-border) inset;
     cursor: default;
 
     //  These properties are only set if d-chip is interactive (ex: a button).
@@ -130,30 +132,29 @@
       cursor: pointer;
 
       &:hover {
-        --chip-color-background: var(--dt-action-color-background-muted-active);
+        --chip-color-background: var(--dt-color-surface-moderate-opaque);
 
         text-decoration: none;
       }
 
       &:active {
-        --chip-color-background: var(--dt-action-color-background-muted-hover);
+        --chip-color-background: var(--dt-color-surface-secondary-opaque);
       }
 
       &:focus-visible,
       &:where(.d-chip__label--focus-always):focus {
+        --chip-color-border: var(--dt-color-border-focus);
+
+        background-color: var(--dt-color-surface-info-opaque);
         outline: none;
-
-        --chip-color-background: var(--dt-action-color-background-muted-hover);
-
-        box-shadow: var(--dt-shadow-focus);
       }
     }
 
     .d-avatar {
       --avatar-size-shape: calc(var(--dt-layout-24px) - var(--dt-layout-2px));
+      --avatar-border-radius: var(--dt-size-radius-300);
 
       overflow: hidden;
-      border-radius: var(--dt-size-radius-circle) !important;
     }
 
     //  Sets the property directly — not --chip-color-background — so the
@@ -176,13 +177,15 @@
       --chip-padding-block: var(--dt-spacing-1);
       --chip-padding-inline-start: var(--dt-spacing-75);
       --chip-padding-inline-end: var(--dt-spacing-75);
+      --chip-border-radius: var(--dt-size-radius-300);
 
       &:has(.d-chip__avatar) {
-        --chip-padding-inline-start: var(--dt-spacing-25);
+        --chip-padding-inline-start: calc(var(--dt-spacing-1) + calc(var(--dt-spacing-1) * .5));
       }
 
       .d-avatar {
         --avatar-size-shape: var(--dt-layout-25);
+        --avatar-border-radius: var(--dt-size-radius-200);
       }
     }
 
@@ -191,13 +194,15 @@
     &--sm {
       --chip-text-size: var(--dt-font-size-150);
       --chip-padding-inline-end: var(--dt-spacing-100);
+      --chip-border-radius: var(--dt-size-radius-300);
 
       &:has(.d-chip__avatar) {
-        --chip-padding-inline-start: var(--dt-spacing-50);
+        --chip-padding-inline-start: calc(var(--dt-spacing-25) + calc(var(--dt-spacing-25) * .5));
       }
 
       .d-avatar {
         --avatar-size-shape: calc(var(--dt-layout-20px) - var(--dt-layout-2px));
+        --avatar-border-radius: var(--dt-size-radius-200);
       }
     }
   }
@@ -241,7 +246,7 @@
     inset-inline-end: var(--chip-close-inset-end);
     padding: var(--chip-close-padding);
     border-width: 0;
-    border-radius: var(--dt-size-radius-circle);
+    border-radius: var(--dt-size-radius-300);
 
     //  Extends the click target slightly beyond the visible button.
     &::before {
@@ -252,13 +257,13 @@
 
     &:hover:not(:disabled, .d-btn--disabled) {
       --button-color-text: var(--dt-color-foreground-primary);
-      --button-color-background: var(--dt-action-color-background-muted-active);
+      --button-color-background: transparent;
     }
 
     &:active:not(:disabled, .d-btn--disabled),
     &.d-btn--active:not(:disabled, .d-btn--disabled),
     &.d-btn--active:active:not(:disabled, .d-btn--disabled) {
-      --button-color-background: var(--dt-action-color-background-muted-hover);
+      --button-color-background: var(--dt-action-color-background-muted-active);
     }
 
     &:focus-visible {
