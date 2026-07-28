@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
-import { normalize } from 'path';
+import { join, normalize } from 'path';
+import { fileURLToPath, pathToFileURL } from 'url';
 import { hideBin } from 'yargs/helpers';
 import yargs from 'yargs';
 import {
@@ -13,7 +14,7 @@ import {
 } from '../dialtone_migration_helper/helpers.mjs';
 import { runMergeMigration } from './merge-migrate.mjs';
 
-const CONFIG_FOLDER = new URL('../dialtone_migration_helper/configs', import.meta.url).pathname;
+const CONFIG_FOLDER = fileURLToPath(new URL('../dialtone_migration_helper/configs', import.meta.url));
 
 (async () => {
   const argv = yargs(hideBin(process.argv))
@@ -77,8 +78,10 @@ const CONFIG_FOLDER = new URL('../dialtone_migration_helper/configs', import.met
         `Unknown --config '${argv.config}'. Available configs: ` +
         configList.map((c) => c.value.replace(/\.mjs$/, '')).join(', '),
       );
+      return;
     }
-    [configData, configFile] = await readConfigFile(`${CONFIG_FOLDER}/${match.value}`);
+    [configData, configFile] = await readConfigFile(pathToFileURL(join(CONFIG_FOLDER, match.value)).href)
+      .catch((err) => error('readConfigFile: ' + err));
   } else {
     [configData, configFile] = await inquireForFile(CONFIG_FOLDER, configList).catch((err) =>
       error('inquireForFile: ' + err),
@@ -99,4 +102,4 @@ const CONFIG_FOLDER = new URL('../dialtone_migration_helper/configs', import.met
     getAllFileContents,
     modifyFileContents,
   });
-})();
+})().catch((err) => error(err.message || err));

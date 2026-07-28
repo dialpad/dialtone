@@ -1,4 +1,4 @@
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 import { existsSync } from 'fs';
 import { createInterface } from 'readline';
 import path from 'path';
@@ -8,38 +8,39 @@ const RELEVANT_EXTENSIONS = new Set([
   '.js', '.ts', '.jsx', '.tsx',
 ]);
 
+// Large enough that changed-file lists / diffs from big repos or long-lived
+// branches don't overflow execFileSync's default 1MB maxBuffer, which would
+// otherwise throw and (via allowFailure) silently look like "no files".
+const GIT_MAX_BUFFER = 200 * 1024 * 1024;
+
 // ── git helpers ───────────────────────────────────────────────────────────────
 
-function git (cmd, cwd) {
+// Runs `git <args>` via execFileSync (argv array — no shell, no interpolation
+// or manual quoting needed for refs/paths). Failures propagate by default;
+// pass { allowFailure: true } to convert a failed command into an empty
+// string instead (used only for the merge-base existence check).
+function git (args, cwd, { allowFailure = false } = {}) {
   try {
-    return execSync(`git ${cmd}`, { cwd, encoding: 'utf8' }).trim();
-  } catch {
-    return '';
+    return execFileSync('git', args, { cwd, encoding: 'utf8', maxBuffer: GIT_MAX_BUFFER }).trim();
+  } catch (err) {
+    if (allowFailure) return '';
+    throw err;
   }
 }
 
 // returns relative file paths changed between ref1 and ref2
 function getChangedFiles (ref1, ref2, cwd) {
-  const out = git(`diff --name-only --diff-filter=ACMR ${ref1}..${ref2}`, cwd);
+  const out = git(['diff', '--name-only', '--diff-filter=ACMR', `${ref1}..${ref2}`], cwd);
   return out ? out.split('\n').filter(Boolean) : [];
 }
 
 // returns lines added on the source side for a single file
 function getStagingAddedLines (mergeBase, sourceBranch, filePath, cwd) {
-  try {
-    // shell-quote the path to handle spaces/special characters
-    const quoted = `'${filePath.replace(/'/g, '\'\\\'\'')}'`;
-    const diff = execSync(
-      `git diff ${mergeBase}..${sourceBranch} -- ${quoted}`,
-      { cwd, encoding: 'utf8' },
-    );
-    return diff
-      .split('\n')
-      .filter(l => l.startsWith('+') && !l.startsWith('+++'))
-      .map(l => l.slice(1));
-  } catch {
-    return [];
-  }
+  const diff = git(['diff', `${mergeBase}..${sourceBranch}`, '--', filePath], cwd);
+  return diff
+    .split('\n')
+    .filter(l => l.startsWith('+') && !l.startsWith('+++'))
+    .map(l => l.slice(1));
 }
 
 // returns true if applying the migration expressions to `line` would produce a
@@ -181,7 +182,7 @@ export async function runMergeMigration ({
   modifyFileContents,
 }) {
   // 1. Compute merge base ──────────────────────────────────────────────────────
-  const mergeBase = git(`merge-base HEAD ${sourceBranch}`, cwd);
+  const mergeBase = git(['merge-base', 'HEAD', sourceBranch], cwd, { allowFailure: true });
   if (!mergeBase) {
     console.error(`\nError: could not find merge base between HEAD and '${sourceBranch}'.`);
     console.error(`Make sure '${sourceBranch}' is a valid branch and is fetched locally.\n`);

@@ -28,12 +28,31 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const REPO_ROOT = path.resolve(__dirname, '..');
 
+const PINNED_FLAGS = new Set(['--config', '--cwd']);
+
+// Strip any --config/--cwd the caller passed — this wrapper always pins them
+// to stack-gap-to-spacing/REPO_ROOT. yargs collects duplicate string flags
+// into an array rather than "last wins", so simply appending the pinned
+// flags after caller args would corrupt parsing instead of overriding it.
+function stripPinnedFlags (args) {
+  const result = [];
+  for (let i = 0; i < args.length; i++) {
+    const [flag] = args[i].split('=');
+    if (PINNED_FLAGS.has(flag)) {
+      if (!args[i].includes('=')) i++; // also skip the separate value token
+      continue;
+    }
+    result.push(args[i]);
+  }
+  return result;
+}
+
 process.argv = [
   process.argv[0],
   process.argv[1],
+  ...stripPinnedFlags(process.argv.slice(2)),
   '--config', 'stack-gap-to-spacing',
   '--cwd', REPO_ROOT,
-  ...process.argv.slice(2),
 ];
 
 await import(
