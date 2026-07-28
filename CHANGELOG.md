@@ -1,3 +1,16 @@
+# [10.0.0-next.8](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.7...dialtone/v10.0.0-next.8) (2026-07-28)
+
+
+### Bug Fixes
+
+* **Chip, Combobox Multi Select:** DLT-3554 DLT-3555 correct chip spacing and multi-select alignment ([#1380](https://github.com/dialpad/dialtone/issues/1380)) ([bb53556](https://github.com/dialpad/dialtone/commit/bb535565b58c0592c3aba3832fb0d98355a2eb2f))
+* DLT-3552 suppress unintended focus rings in component regions ([#1376](https://github.com/dialpad/dialtone/issues/1376)) ([c792768](https://github.com/dialpad/dialtone/commit/c79276842725585ce6ddccb27a554f703a0f5d5e))
+
+
+### Features
+
+* **Dialtone Css,dialtone:** DLT-3556 add dialtone-merge-migrate CLI ([#1381](https://github.com/dialpad/dialtone/issues/1381)) ([a287572](https://github.com/dialpad/dialtone/commit/a287572f29b59bdfedc2574c6a47ba0b409e85d6))
+
 # [10.0.0-next.7](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.6...dialtone/v10.0.0-next.7) (2026-07-23)
 
 
