@@ -100,7 +100,7 @@ async function migrateSafeFiles ({
 
   if (!force) {
     const answer = await confirm(`\nProceed with ${configLabel} migration on safe files? [y/N] `);
-    if (answer !== 'y') {
+    if (answer !== 'y' && answer !== 'yes') {
       console.log('Cancelled.');
       process.exit(0);
     }
