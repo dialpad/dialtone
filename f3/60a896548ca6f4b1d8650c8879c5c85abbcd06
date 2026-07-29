@@ -1,0 +1,16 @@
+packages/dialtone-css/lib/build/less/components/scrollbar.less
+  h_c15b5755534093 57-62
+packages/dialtone-css/lib/build/less/components/scroller.less
+  h_c15b5755534093 3-4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "f360a896548ca6f4b1d8650c8879c5c85abbcd06",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+packages/dialtone-vue/components/rich_text_editor/rich_text_editor.vue
+  s_3b7290be0fb161::t_5d1b27975e346c 1010-1014
+  s_3b7290be0fb161::t_fbce16a989521b 1015
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "4f43d6fc7fdcd2ee724f9594ab14c67c75346d0b",
+  "prompts": {},
+  "sessions": {
+    "s_3b7290be0fb161": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "32b5b7a7-89dd-495e-b20e-efb4b29a5309",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": null
+    }
+  }
+}
