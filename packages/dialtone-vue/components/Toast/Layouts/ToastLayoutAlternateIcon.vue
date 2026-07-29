@@ -46,7 +46,7 @@ export default {
   props: {
     /**
      * Kind of icon
-     * @values base, critical, info, positive, warning
+     * @values base, critical, info, positive, warning, gradient
      */
     kind: {
       type: String,

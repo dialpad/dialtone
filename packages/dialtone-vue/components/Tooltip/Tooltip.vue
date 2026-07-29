@@ -136,8 +136,7 @@ export default {
      * @values top, top-start, top-end,
      * right, right-start, right-end,
      * left, left-start, left-end,
-     * bottom, bottom-start, bottom-end,
-     * auto, auto-start, auto-end
+     * bottom, bottom-start, bottom-end
      */
     placement: {
       type: String,
@@ -176,7 +175,7 @@ export default {
      * (keeping the tooltip in the browser's top layer), or to the nearest body otherwise.
      * To always append to body regardless of dialog context, pass document.body as an HTMLElement.
      * This prop is not reactive, must be set on initial render.
-     * @values 'body', 'parent', HTMLElement,
+     * @values 'body', 'parent', 'root', HTMLElement,
      */
     appendTo: {
       type: [HTML_ELEMENT_TYPE, String],

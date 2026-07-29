@@ -299,7 +299,7 @@ export default {
     /**
      * Sets the element to which the popover is going to append to.
      * 'body' will append to the nearest body (supports shadow DOM).
-     * @values 'body', 'parent', HTMLElement,
+     * @values 'body', 'parent', 'root', HTMLElement,
      */
     appendTo: {
       type: [HTML_ELEMENT_TYPE, String],

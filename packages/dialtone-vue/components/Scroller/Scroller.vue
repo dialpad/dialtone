@@ -139,9 +139,9 @@ const props = defineProps({
 
 const emits = defineEmits([
   /**
-   * Describe when the scroller changes from start/middle/end
+   * Describe when the scroller changes from top/middle/bottom
    * @param {string} position The position of the scroller.
-   * @values start, middle, end
+   * @values top, middle, bottom
    */
   'user-position',
 ]);
