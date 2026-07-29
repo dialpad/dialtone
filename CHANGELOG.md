@@ -1,3 +1,10 @@
+# [10.0.0-next.9](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.8...dialtone/v10.0.0-next.9) (2026-07-29)
+
+
+### Bug Fixes
+
+* **Dialtone Css:** DLT-3557 remove colliding d-label size classes from components layer ([#1382](https://github.com/dialpad/dialtone/issues/1382)) ([03dcd05](https://github.com/dialpad/dialtone/commit/03dcd05775fa9299e78e61dc01d2a7dc58b93dc1))
+
 # [10.0.0-next.8](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.7...dialtone/v10.0.0-next.8) (2026-07-28)
 
 
