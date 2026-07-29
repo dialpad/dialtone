@@ -9,7 +9,6 @@
 //  TABLE OF CONTENTS
 //  • FIELDSETS
 //  • LABELS
-//    - Sizes
 //  • DESCRIPTIONS
 //    - Sizes
 //  • VALIDATION MESSAGES
@@ -30,8 +29,7 @@ fieldset {
 //  ============================================================================
 //  $  LABELS
 //  ----------------------------------------------------------------------------
-.d-label,
-.d-label--md {
+.d-label {
   display: flex;
   flex: 1 0%;
   align-items: baseline;
@@ -43,24 +41,6 @@ fieldset {
   overflow-wrap: break-word;
 
   legend & { cursor: default; }
-}
-
-//  $$  SIZES
-//  ----------------------------------------------------------------------------
-.d-label--xs {
-  font-size: var(--dt-font-size-100);
-}
-
-.d-label--sm {
-  font-size: var(--dt-font-size-200);
-}
-
-.d-label--lg {
-  font-size: var(--dt-font-size-200);
-}
-
-.d-label--xl {
-  font-size: var(--dt-font-size-300);
 }
 
 //  ============================================================================
