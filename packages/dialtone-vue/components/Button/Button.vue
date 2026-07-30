@@ -371,6 +371,7 @@ export default {
     /**
      * The color of the button.
      * @values default, unstyled, muted, critical, positive, inverted
+     * @deprecated inverted is deprecated. Use v-dt-mode instead.
      */
     kind: {
       type: String,

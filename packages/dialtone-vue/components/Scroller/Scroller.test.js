@@ -58,13 +58,22 @@ describe('DtScroller Tests', () => {
 
   describe('Interactivity Tests', () => {
     describe('Should emit', () => {
-      it('`top` event when scroll reach the top of the component', () => {
+      it('`blockStart` event when scroll reach the block-start (aka top) of the component', () => {
         defaultContent.element.scrollTop = 25;
         wrapper.trigger('scroll');
         defaultContent.element.scrollTop = 0;
         wrapper.trigger('scroll');
 
-        expect(wrapper.emitted()['user-position'][1]).toEqual(['top']);
+        expect(wrapper.emitted()['user-position'][1]).toEqual(['blockStart']);
+      });
+
+      it('`top` deprecated event when scroll reach the block-start (aka top) of the component', () => {
+        defaultContent.element.scrollTop = 25;
+        wrapper.trigger('scroll');
+        defaultContent.element.scrollTop = 0;
+        wrapper.trigger('scroll');
+
+        expect(wrapper.emitted()['user-position'][2]).toEqual(['top']);
       });
 
       it('`middle` on scroll', () => {
@@ -74,11 +83,18 @@ describe('DtScroller Tests', () => {
         expect(wrapper.emitted()['user-position'][0]).toEqual(['middle']);
       });
 
-      it('`bottom` event when scroll reach the bottom of the component', () => {
+      it('`blockEnd` event when scroll reach the block-end (aka bottom) of the component', () => {
         defaultContent.element.scrollTop = defaultContent.element.scrollHeight - defaultContent.element.clientHeight;
         wrapper.trigger('scroll');
 
-        expect(wrapper.emitted()['user-position'][2]).toEqual(['bottom']);
+        expect(wrapper.emitted()['user-position'][3]).toEqual(['blockEnd']);
+      });
+
+      it('`bottom` deprecated event when scroll reach the block-end (aka bottom) of the component', () => {
+        defaultContent.element.scrollTop = defaultContent.element.scrollHeight - defaultContent.element.clientHeight;
+        wrapper.trigger('scroll');
+
+        expect(wrapper.emitted()['user-position'][4]).toEqual(['bottom']);
       });
     });
 

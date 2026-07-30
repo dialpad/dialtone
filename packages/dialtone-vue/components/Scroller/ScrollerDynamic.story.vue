@@ -98,7 +98,7 @@ function switchAutoScrolling () {
     if (!autoScrolling.value) return;
     addItem();
     nextTick(() => {
-      if (userPosition.value === 'bottom') {
+      if (userPosition.value === 'blockEnd') {
         scroller.value.scrollToBottom();
       }
     });
