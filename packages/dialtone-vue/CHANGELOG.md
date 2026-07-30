@@ -1,3 +1,10 @@
+## [3.223.2](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.223.1...dialtone-vue/v3.223.2) (2026-07-30)
+
+
+### Bug Fixes
+
+* **Message Input:** DP-200077 disable text-align when rich-text is false ([#1384](https://github.com/dialpad/dialtone/issues/1384)) ([6474c8e](https://github.com/dialpad/dialtone/commit/6474c8e2fa1c2b1ffd3ff0a960b7dcb9a9e93866))
+
 ## [3.223.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.223.0...dialtone-vue/v3.223.1) (2026-07-08)
 
 
