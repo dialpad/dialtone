@@ -84,8 +84,9 @@ export default {
      * All the undefined breakpoints will have the 'default' value.
      * You can override the default justify with 'default' key.
      * In case of string, it will be applied to all the breakpoints.
+     * The around, between, and evenly values are deprecated and will ideally be removed in the next major version.
+     * Please use space-around, space-between, and space-evenly instead.
      * @values start, center, end, space-around, space-between, space-evenly, around, between, evenly
-     * @deprecated around, between, evenly are deprecated. Use space-around, space-between, space-evenly instead.
      */
     justify: {
       type: [String, Object],
