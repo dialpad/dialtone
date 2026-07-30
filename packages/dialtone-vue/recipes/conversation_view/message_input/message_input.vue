@@ -54,6 +54,7 @@
         :allow-codeblock="richText"
         :allow-italic="richText"
         :allow-strike="richText"
+        :allow-text-align="richText"
         :allow-underline="richText"
         :paste-rich-text="richText"
         :editable="editable"
