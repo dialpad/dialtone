@@ -72,7 +72,7 @@ const props = defineProps({
   /**
    * Border color. Maps to --dt-color-border-* tokens.
    * Defaults to 'default'. Visible when any border-width prop is set.
-   * @values transparent, subtle, default, moderate, bold, positive, positive-subtle, positive-strong, warning, warning-subtle, warning-strong, critical, critical-subtle, critical-strong, info, info-subtle, info-strong, focus, brand, brand-subtle, brand-strong
+   * @values transparent, subtle, default, moderate, bold, accent, positive, positive-subtle, positive-strong, warning, warning-subtle, warning-strong, critical, critical-subtle, critical-strong, info, info-subtle, info-strong, focus, brand, brand-subtle, brand-strong
    */
   borderColor: { type: String, default: 'default', validator: borderColorValidator },
 

@@ -370,7 +370,9 @@ export default {
 
     /**
      * The color of the button.
-     * @values default, unstyled, muted, critical, positive
+     * The inverted value is deprecated and will be removed in the next major version.
+     * Please use the v-dt-mode directive instead.
+     * @values default, unstyled, muted, critical, positive, inverted
      */
     kind: {
       type: String,

@@ -166,7 +166,7 @@ const pool = ref([]);
 const hoverKey = ref(null);
 const ready = ref(false);
 const scroller = ref(null);
-const userPosition = ref('top');
+const userPosition = ref('blockStart');
 
 let startIndex = 0;
 let endIndex = 0;
@@ -570,15 +570,17 @@ const handleScroll = () => {
     emit('user-position', 'middle');
   }
 
-  // Check if the scroll is at the top of the container
+  // Check if the scroll is at the block-start (aka top) of the container
   if (container.scrollTop === 0) {
-    userPosition.value = 'top';
+    userPosition.value = 'blockStart';
+    emit('user-position', 'blockStart');
     emit('user-position', 'top');
   }
 
-  // Check if the scroll is at the bottom of the container
+  // Check if the scroll is at the block-end (aka bottom) of the container
   if (container.scrollTop + container.clientHeight === container.scrollHeight) {
-    userPosition.value = 'bottom';
+    userPosition.value = 'blockEnd';
+    emit('user-position', 'blockEnd');
     emit('user-position', 'bottom');
   }
 

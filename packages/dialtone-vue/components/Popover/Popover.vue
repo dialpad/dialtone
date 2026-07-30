@@ -411,8 +411,7 @@ export default {
      * @values top, top-start, top-end,
      * right, right-start, right-end,
      * left, left-start, left-end,
-     * bottom, bottom-start, bottom-end,
-     * auto, auto-start, auto-end
+     * bottom, bottom-start, bottom-end
      */
     placement: {
       type: String,

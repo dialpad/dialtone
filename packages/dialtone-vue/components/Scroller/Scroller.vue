@@ -139,9 +139,11 @@ const props = defineProps({
 
 const emits = defineEmits([
   /**
-   * Describe when the scroller changes from start/middle/end
+   * Describe when the scroller changes from block-start (aka top) / middle / block-end (aka bottom).
+   * The top and bottom values are deprecated and will ideally be removed in the next major version.
+   * Please use blockStart and blockEnd instead.
    * @param {string} position The position of the scroller.
-   * @values start, middle, end
+   * @values blockStart, middle, blockEnd, top, bottom
    */
   'user-position',
 ]);
