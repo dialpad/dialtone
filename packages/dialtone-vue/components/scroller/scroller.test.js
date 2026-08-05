@@ -92,8 +92,15 @@ describe('DtScroller Tests', () => {
         updateWrapper();
       });
 
-      it('passes the buffer down to the underlying scroller', () => {
+      it('declares buffer as its own prop and passes it to the underlying scroller', () => {
+        expect(wrapper.props('buffer')).toBe(500);
         expect(wrapper.findComponent(CoreScroller).props('buffer')).toBe(500);
+      });
+    });
+
+    describe('When no buffer is provided', () => {
+      it('defaults the buffer to 200', () => {
+        expect(wrapper.props('buffer')).toBe(200);
       });
     });
   });
