@@ -156,7 +156,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['user-position']);
+const emit = defineEmits(['user-position', 'scroll-start', 'scroll-end']);
 
 const views = reactive(new Map());
 // const reactiveItems = reactive(props.items);
@@ -461,7 +461,7 @@ const _updateVisibleItems = (checkItem, checkPositionDiff = false) => {
     type = item.type;
 
     let unusedPool = _unusedViews.get(type);
-    // let newlyUsedView = false;
+    let newlyUsedView = false;
 
     // No view assigned to item
     if (!view) {
@@ -496,12 +496,12 @@ const _updateVisibleItems = (checkItem, checkPositionDiff = false) => {
       view.nr.type = type;
       _views.set(key, view);
 
-      // newlyUsedView = true;
+      newlyUsedView = true;
     } else {
       // View already assigned to item
       if (!view.nr.used) {
         view.nr.used = true;
-        // newlyUsedView = true;
+        newlyUsedView = true;
         if (unusedPool) {
           const index = unusedPool.indexOf(view);
           if (index !== -1) unusedPool.splice(index, 1);
@@ -512,11 +512,10 @@ const _updateVisibleItems = (checkItem, checkPositionDiff = false) => {
     // Always set item in case it's a new object with the same key
     view.item = item;
 
-    // if (newlyUsedView) {
-    //   if (items.length === 0) return;
-    //   if (i === items.length - 1) emit('scroll-end');
-    //   if (i === 0) emit('scroll-start');
-    // }
+    if (newlyUsedView) {
+      if (i === items.length - 1) emit('scroll-end');
+      if (i === 0) emit('scroll-start');
+    }
 
     // Update position
     if (itemSize === null) {

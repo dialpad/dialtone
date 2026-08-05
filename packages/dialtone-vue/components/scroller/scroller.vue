@@ -13,6 +13,8 @@
     :style="computedStyle"
     tabindex="0"
     @user-position="$emit('user-position', $event)"
+    @scroll-start="$emit('scroll-start')"
+    @scroll-end="$emit('scroll-end')"
   >
     <template
       #default="{ item, index, active }"
@@ -144,6 +146,18 @@ const emits = defineEmits([
    * @values start, middle, end
    */
   'user-position',
+
+  /**
+   * Emitted when the first item enters the rendered view pool. Fires one `buffer` length
+   * before the top of the viewport is reached, so callers can prepend items ahead of time.
+   */
+  'scroll-start',
+
+  /**
+   * Emitted when the last item enters the rendered view pool. Fires one `buffer` length
+   * before the bottom of the viewport is reached, so callers can append items ahead of time.
+   */
+  'scroll-end',
 ]);
 
 provide('emit', emits);

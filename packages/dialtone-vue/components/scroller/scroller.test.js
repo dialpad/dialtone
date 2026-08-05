@@ -6,6 +6,32 @@ const MOCK_ITEMS = Array.from({ length: 20 }, (_, i) => ({
   name: `User ${i}`,
 }));
 
+// jsdom doesn't compute layout — mock the scroll dimensions the props imply
+// (20 items x itemSize 30 = 600 of content in a 60px viewport) so the render
+// pool can actually reach the last item.
+const originalClientHeight = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'clientHeight');
+const originalScrollHeight = Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'scrollHeight');
+
+function mockScrollDimensions () {
+  Object.defineProperty(HTMLElement.prototype, 'clientHeight', {
+    configurable: true,
+    get () { return 60; },
+  });
+  Object.defineProperty(HTMLElement.prototype, 'scrollHeight', {
+    configurable: true,
+    get () { return 600; },
+  });
+}
+
+function restoreScrollDimensions () {
+  if (originalClientHeight) {
+    Object.defineProperty(HTMLElement.prototype, 'clientHeight', originalClientHeight);
+  }
+  if (originalScrollHeight) {
+    Object.defineProperty(HTMLElement.prototype, 'scrollHeight', originalScrollHeight);
+  }
+}
+
 const baseProps = {
   items: MOCK_ITEMS,
   itemSize: 30,
@@ -79,6 +105,44 @@ describe('DtScroller Tests', () => {
         wrapper.trigger('scroll');
 
         expect(wrapper.emitted()['user-position'][2]).toEqual(['bottom']);
+      });
+    });
+
+    describe('Should emit scroll boundary events', () => {
+      beforeEach(() => {
+        // Must be mocked before mounting — the pool is first computed in onMounted.
+        mockScrollDimensions();
+        updateWrapper();
+      });
+
+      afterEach(() => {
+        restoreScrollDimensions();
+      });
+
+      it('`scroll-end` when the last item enters the render pool', () => {
+        expect(wrapper.emitted()['scroll-end']).toBeUndefined();
+
+        defaultContent.element.scrollTop =
+          defaultContent.element.scrollHeight - defaultContent.element.clientHeight;
+        wrapper.trigger('scroll');
+
+        expect(wrapper.emitted()['scroll-end']).toBeTruthy();
+      });
+
+      it('`scroll-start` when the first item re-enters the render pool', () => {
+        // 240 is chosen so the window starts at index 1 (240 - buffer 200 = 40, over
+        // itemSize 30) while still overlapping the mount window — the algorithm only
+        // releases off-window views on a continuous move, and a view must be released
+        // before it can count as newly used again.
+        defaultContent.element.scrollTop = 240;
+        wrapper.trigger('scroll');
+
+        const beforeReturn = wrapper.emitted()['scroll-start'].length;
+
+        defaultContent.element.scrollTop = 0;
+        wrapper.trigger('scroll');
+
+        expect(wrapper.emitted()['scroll-start'].length).toBeGreaterThan(beforeReturn);
       });
     });
 
