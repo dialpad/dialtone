@@ -37,10 +37,17 @@
       :item-tag="$attrs.itemTag"
       :direction="$attrs.direction"
       @user-position="$attrs.onUserPosition($event); userPosition = $event"
+      @scroll-start="$attrs.onScrollStart()"
+      @scroll-end="$attrs.onScrollEnd()"
     >
       <template #default="{ item }">
         <div class="user">
           {{ item.name }}
+        </div>
+      </template>
+      <template #after>
+        <div class="loading">
+          Loading more…
         </div>
       </template>
     </dt-scroller>
@@ -117,6 +124,12 @@ function switchAutoScrolling () {
   display: flex;
   align-items: center;
   border-bottom: 1px solid #eee;
+}
+
+.loading {
+  padding: 8px 12px;
+  color: #666;
+  font-style: italic;
 }
 
 .autoscrolling{
