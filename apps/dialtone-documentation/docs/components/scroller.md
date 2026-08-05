@@ -219,7 +219,7 @@ length before the viewport floor — so the fetch starts before the user runs ou
    </div>
  </template>
  <template #after>
-   <spinner v-if="isFetching" />
+   <dt-loader v-if="isFetching" />
  </template>
 </dt-scroller>
 ```
