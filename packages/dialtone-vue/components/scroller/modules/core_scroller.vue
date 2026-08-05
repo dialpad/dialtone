@@ -9,6 +9,14 @@
     }"
     @scroll.passive="handleScroll"
   >
+    <div
+      v-if="$slots.before"
+      class="vue-recycle-scroller__slot"
+    >
+      <!-- @slot Content rendered before the items, inside the scroll viewport. Scrolls with the list. -->
+      <slot name="before" />
+    </div>
+
     <component
       :is="listTag"
       ref="wrapper"
@@ -43,7 +51,18 @@
           :active="view.nr.used"
         />
       </component>
+
+      <!-- @slot Content rendered inside the list wrapper, after the items. Use for an empty state. -->
+      <slot name="empty" />
     </component>
+
+    <div
+      v-if="$slots.after"
+      class="vue-recycle-scroller__slot"
+    >
+      <!-- @slot Content rendered after the items, inside the scroll viewport. Scrolls with the list. -->
+      <slot name="after" />
+    </div>
   </div>
 </template>
 

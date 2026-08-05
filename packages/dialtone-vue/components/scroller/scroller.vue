@@ -27,6 +27,30 @@
         }"
       />
     </template>
+
+    <template
+      v-if="$slots.before"
+      #before
+    >
+      <!-- @slot Content rendered before the items, inside the scroll viewport. Scrolls with the list. -->
+      <slot name="before" />
+    </template>
+
+    <template
+      v-if="$slots.empty"
+      #empty
+    >
+      <!-- @slot Content rendered inside the list wrapper, after the items. Use for an empty state. -->
+      <slot name="empty" />
+    </template>
+
+    <template
+      v-if="$slots.after"
+      #after
+    >
+      <!-- @slot Content rendered after the items, inside the scroll viewport. Scrolls with the list. -->
+      <slot name="after" />
+    </template>
   </component>
 </template>
 

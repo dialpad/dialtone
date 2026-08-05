@@ -30,6 +30,27 @@
         />
       </dt-scroller-item>
     </template>
+
+    <template
+      v-if="$slots.before"
+      #before
+    >
+      <slot name="before" />
+    </template>
+
+    <template
+      v-if="$slots.empty"
+      #empty
+    >
+      <slot name="empty" />
+    </template>
+
+    <template
+      v-if="$slots.after"
+      #after
+    >
+      <slot name="after" />
+    </template>
   </core-scroller>
 </template>
 

@@ -163,4 +163,56 @@ describe('DtScroller Tests', () => {
       });
     });
   });
+
+  describe('Slot Tests', () => {
+    describe('When before, after and empty slots are provided', () => {
+      beforeEach(() => {
+        mockSlots = {
+          before: '<div class="before-content">Before</div>',
+          after: '<div class="after-content">After</div>',
+          empty: '<div class="empty-content">Empty</div>',
+        };
+        updateWrapper();
+      });
+
+      it('renders the before slot in a scroller slot wrapper', () => {
+        const before = wrapper.find('.before-content');
+
+        expect(before.exists()).toBe(true);
+        expect(before.element.parentElement.classList.contains('vue-recycle-scroller__slot')).toBe(true);
+      });
+
+      it('renders the after slot in a scroller slot wrapper', () => {
+        const after = wrapper.find('.after-content');
+
+        expect(after.exists()).toBe(true);
+        expect(after.element.parentElement.classList.contains('vue-recycle-scroller__slot')).toBe(true);
+      });
+
+      it('renders the empty slot inside the item wrapper', () => {
+        const empty = wrapper.find('.empty-content');
+
+        expect(empty.exists()).toBe(true);
+        expect(empty.element.closest('.vue-recycle-scroller__item-wrapper')).not.toBeNull();
+      });
+    });
+
+    describe('When no before or after slot is provided', () => {
+      it('renders no empty slot wrapper', () => {
+        expect(wrapper.find('.vue-recycle-scroller__slot').exists()).toBe(false);
+      });
+    });
+
+    describe('When in dynamic mode', () => {
+      beforeEach(() => {
+        mockProps = { dynamic: true, minItemSize: 54, itemSize: undefined };
+        mockSlots = { after: '<div class="after-content">After</div>' };
+        updateWrapper();
+      });
+
+      it('forwards the after slot', () => {
+        expect(wrapper.find('.after-content').exists()).toBe(true);
+      });
+    });
+  });
 });
