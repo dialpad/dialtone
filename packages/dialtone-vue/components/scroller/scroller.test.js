@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
 import DtScroller from './scroller.vue';
+import CoreScroller from './modules/core_scroller.vue';
 
 const MOCK_ITEMS = Array.from({ length: 20 }, (_, i) => ({
   id: i,
@@ -82,6 +83,17 @@ describe('DtScroller Tests', () => {
 
       it('scroller content should render correctly', () => {
         expect(defaultContent.exists()).toBe(true);
+      });
+    });
+
+    describe('When a buffer is provided', () => {
+      beforeEach(() => {
+        mockProps = { buffer: 500 };
+        updateWrapper();
+      });
+
+      it('passes the buffer down to the underlying scroller', () => {
+        expect(wrapper.findComponent(CoreScroller).props('buffer')).toBe(500);
       });
     });
   });

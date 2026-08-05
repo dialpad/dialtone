@@ -6,6 +6,7 @@
     :items="items"
     :item-size="itemSize"
     :min-item-size="minItemSize"
+    :buffer="buffer"
     :direction="direction"
     :key-field="keyField"
     :list-tag="listTag"
@@ -64,6 +65,16 @@ defineOptions({
 });
 
 const props = defineProps({
+  /**
+      * Amount of pixels added to each edge of the scroll viewport, so items are rendered
+      * before they scroll into view. Also controls how early `scroll-start` and `scroll-end`
+      * fire relative to the viewport edges.
+     */
+  buffer: {
+    type: Number,
+    default: 200,
+  },
+
   /**
       * The direction of the scroller.
       * @values vertical, horizontal
