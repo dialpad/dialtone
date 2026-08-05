@@ -26,9 +26,13 @@ function mockScrollDimensions () {
 function restoreScrollDimensions () {
   if (originalClientHeight) {
     Object.defineProperty(HTMLElement.prototype, 'clientHeight', originalClientHeight);
+  } else {
+    delete HTMLElement.prototype.clientHeight;
   }
   if (originalScrollHeight) {
     Object.defineProperty(HTMLElement.prototype, 'scrollHeight', originalScrollHeight);
+  } else {
+    delete HTMLElement.prototype.scrollHeight;
   }
 }
 
@@ -117,6 +121,10 @@ describe('DtScroller Tests', () => {
 
       afterEach(() => {
         restoreScrollDimensions();
+
+        // Confirm the mock actually came off, rather than trusting the delete/restore
+        // logic silently — a leaked mock would make every later test see clientHeight 60.
+        expect(document.createElement('div').clientHeight).toBe(0);
       });
 
       it('`scroll-end` when the last item enters the render pool', () => {
