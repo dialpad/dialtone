@@ -224,13 +224,28 @@ describe('DtScroller Tests', () => {
 
     describe('When in dynamic mode', () => {
       beforeEach(() => {
-        mockProps = { dynamic: true, minItemSize: 54, itemSize: undefined };
+        mockProps = { dynamic: true, minItemSize: 54, itemSize: undefined, buffer: 350 };
         mockSlots = { after: '<div class="after-content">After</div>' };
         updateWrapper();
       });
 
       it('forwards the after slot', () => {
         expect(wrapper.find('.after-content').exists()).toBe(true);
+      });
+
+      it('forwards the buffer prop to the inner CoreScroller', () => {
+        expect(wrapper.findComponent(CoreScroller).props('buffer')).toBe(350);
+      });
+    });
+
+    describe('When in dynamic mode with no before, empty or after slots provided', () => {
+      beforeEach(() => {
+        mockProps = { dynamic: true, minItemSize: 54, itemSize: undefined };
+        updateWrapper();
+      });
+
+      it('renders no empty slot wrapper', () => {
+        expect(wrapper.find('.vue-recycle-scroller__slot').exists()).toBe(false);
       });
     });
   });
