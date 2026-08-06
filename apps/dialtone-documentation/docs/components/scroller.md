@@ -200,10 +200,11 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-scroller--de
 #### Infinite Scroll
 
 Use the `after` slot for a loading indicator that scrolls with the list, and `scroll-end` to fetch
-the next page. `scroll-end` fires when the last item enters the rendered view pool — one `buffer`
-length before the viewport floor — so the fetch starts before the user runs out of content.
+the next page. `scroll-end` fires when the last item enters the rendered view pool — at least one
+`buffer` length before the viewport's end edge, earlier still if `before`/`after` slot content adds
+to the window — so the fetch starts before the user runs out of content.
 
-`scroll-start` is the mirror image, for prepending older items.
+`scroll-start` is the mirror image, for prepending older items ahead of the viewport's start edge.
 
 The scroller recomputes its rendered window on mount and on scroll. It does not watch
 `items`, so after you append a page call `updateItems()` on the component ref — otherwise

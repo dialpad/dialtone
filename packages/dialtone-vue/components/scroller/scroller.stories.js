@@ -107,16 +107,17 @@ export const argTypesData = {
   },
 
   'scroll-start': {
-    description: 'Emitted when the first item enters the rendered view pool, one buffer length ' +
-      'before the top of the viewport is reached.',
+    description: 'Emitted when the first item enters the rendered view pool, at least one buffer ' +
+      'length before the viewport\'s start edge (earlier still with `before` slot content).',
     table: {
       type: { summary: 'event' },
     },
   },
 
   'scroll-end': {
-    description: 'Emitted when the last item enters the rendered view pool, one buffer length ' +
-      'before the bottom of the viewport is reached. Use it to append more items.',
+    description: 'Emitted when the last item enters the rendered view pool, at least one buffer ' +
+      'length before the viewport\'s end edge (earlier still with `after` slot content). Use it ' +
+      'to append more items.',
     table: {
       type: { summary: 'event' },
     },

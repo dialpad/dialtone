@@ -183,14 +183,16 @@ const emits = defineEmits([
   'user-position',
 
   /**
-   * Emitted when the first item enters the rendered view pool. Fires one `buffer` length
-   * before the top of the viewport is reached, so callers can prepend items ahead of time.
+   * Emitted when the first item enters the rendered view pool. Fires at least one `buffer`
+   * length before the viewport's start edge is reached (earlier still with `before` slot
+   * content), so callers can prepend items ahead of time.
    */
   'scroll-start',
 
   /**
-   * Emitted when the last item enters the rendered view pool. Fires one `buffer` length
-   * before the bottom of the viewport is reached, so callers can append items ahead of time.
+   * Emitted when the last item enters the rendered view pool. Fires at least one `buffer`
+   * length before the viewport's end edge is reached (earlier still with `after` slot
+   * content), so callers can append items ahead of time.
    */
   'scroll-end',
 ]);
