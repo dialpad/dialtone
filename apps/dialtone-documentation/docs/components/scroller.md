@@ -209,6 +209,10 @@ The scroller recomputes its rendered window on mount and on scroll. It does not 
 `items`, so after you append a page call `updateItems()` on the component ref — otherwise
 the new rows will not appear until the next scroll.
 
+Assign a new array rather than mutating the existing one in place. The scroller itself does not
+mind either way, but watching `items` by reference is the usual way a wrapper component triggers
+the `updateItems()` call for you, and a reference watcher never sees an in-place `push`.
+
 ```html
 <dt-scroller
  ref="scroller"
@@ -232,7 +236,8 @@ the new rows will not appear until the next scroll.
 ```js
 async function fetchNextPage () {
   isFetching.value = true;
-  items.value.push(...await fetchMore());
+  const page = await fetchMore();
+  items.value = [...items.value, ...page];
   isFetching.value = false;
   await nextTick();
   scroller.value.updateItems();
