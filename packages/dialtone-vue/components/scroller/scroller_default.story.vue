@@ -36,6 +36,7 @@
       :list-tag="$attrs.listTag"
       :item-tag="$attrs.itemTag"
       :direction="$attrs.direction"
+      :buffer="$attrs.buffer"
       @user-position="$attrs.onUserPosition($event); userPosition = $event"
       @scroll-start="$attrs.onScrollStart()"
       @scroll-end="$attrs.onScrollEnd()"
@@ -46,7 +47,10 @@
         </div>
       </template>
       <template #after>
-        <div class="loading">
+        <div
+          v-if="isFetching"
+          class="loading"
+        >
           Loading more…
         </div>
       </template>
@@ -68,6 +72,10 @@ const scroller = ref('scroller');
 const autoScrolling = ref(false);
 
 const userPosition = ref(null);
+
+// Demonstrates the documented pattern for the `after` slot: guard it with your
+// own flag rather than relying on the scroller to show or hide it for you.
+const isFetching = ref(true);
 
 let intervalId;
 

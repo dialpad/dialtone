@@ -205,8 +205,13 @@ length before the viewport floor — so the fetch starts before the user runs ou
 
 `scroll-start` is the mirror image, for prepending older items.
 
+The scroller recomputes its rendered window on mount and on scroll. It does not watch
+`items`, so after you append a page call `updateItems()` on the component ref — otherwise
+the new rows will not appear until the next scroll.
+
 ```html
 <dt-scroller
+ ref="scroller"
  :items="items"
  :item-size="32"
  :buffer="400"
@@ -223,6 +228,19 @@ length before the viewport floor — so the fetch starts before the user runs ou
  </template>
 </dt-scroller>
 ```
+
+```js
+async function fetchNextPage () {
+  isFetching.value = true;
+  items.value.push(...await fetchMore());
+  isFetching.value = false;
+  await nextTick();
+  scroller.value.updateItems();
+}
+```
+
+The `empty` slot renders unconditionally whenever it is provided, so guard its contents with
+your own `v-if` if it should only appear once the list is confirmed empty.
 
 ## Vue API
 

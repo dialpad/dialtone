@@ -11,6 +11,7 @@ export const argsData = {
   itemSize: 32,
   scrollerWidth: 300,
   scrollerHeight: 200,
+  buffer: 200,
   onScrollStart: action('scroll-start'),
   onScrollEnd: action('scroll-end'),
   onUserPosition: action('user-position'),
