@@ -222,6 +222,41 @@ describe('DtScroller Tests', () => {
       });
     });
 
+    describe('When a before slot occupies space in the scroll viewport', () => {
+      beforeEach(() => {
+        // Must be mocked before mounting — the pool is first computed in onMounted.
+        mockScrollDimensions();
+        mockSlots = {
+          before: '<div class="before-content">Before</div>',
+        };
+        updateWrapper();
+      });
+
+      afterEach(() => {
+        restoreScrollDimensions();
+
+        // Confirm the mock actually came off, rather than trusting the delete/restore
+        // logic silently — a leaked mock would make every later test see clientHeight 60.
+        expect(document.createElement('div').clientHeight).toBe(0);
+      });
+
+      it('renders the first item once the before slot size is accounted for', async () => {
+        // The mocked before wrapper reports the same 600px scrollHeight as the mocked
+        // clientHeight/scrollHeight of every element, so scrolling to 300 only keeps the
+        // first item (index 0) in the render pool if its size is subtracted from the
+        // window. Otherwise the window starts further down the list and index 0 gets
+        // recycled away to represent a later item instead.
+        defaultContent.element.scrollTop = 300;
+        await wrapper.trigger('scroll');
+
+        const firstItem = wrapper.findAll('.vue-recycle-scroller__item-view')
+          .find((item) => item.text().trim() === 'User 0');
+
+        expect(firstItem).toBeTruthy();
+        expect(firstItem.element.style.transform).toContain('translateY(0px)');
+      });
+    });
+
     describe('When in dynamic mode', () => {
       beforeEach(() => {
         mockProps = { dynamic: true, minItemSize: 54, itemSize: undefined, buffer: 350 };

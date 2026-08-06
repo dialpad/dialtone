@@ -11,6 +11,7 @@
   >
     <div
       v-if="$slots.before"
+      ref="before"
       class="vue-recycle-scroller__slot"
     >
       <!-- @slot Content rendered before the items, inside the scroll viewport. Scrolls with the list. -->
@@ -58,6 +59,7 @@
 
     <div
       v-if="$slots.after"
+      ref="after"
       class="vue-recycle-scroller__slot"
     >
       <!-- @slot Content rendered after the items, inside the scroll viewport. Scrolls with the list. -->
@@ -185,6 +187,8 @@ const pool = ref([]);
 const hoverKey = ref(null);
 const ready = ref(false);
 const scroller = ref(null);
+const before = ref(null);
+const after = ref(null);
 const userPosition = ref('top');
 
 let startIndex = 0;
@@ -353,6 +357,12 @@ const _updateVisibleItems = (checkItem, checkPositionDiff = false) => {
     const _buffer = props.buffer;
     scroll.start -= _buffer;
     scroll.end += _buffer;
+
+    // The leading and trailing slots sit in normal flow inside the viewport, so the item
+    // wrapper does not start at offset 0. Widen the window by their measured size.
+    const slotSize = props.direction === 'vertical' ? 'scrollHeight' : 'scrollWidth';
+    if (before.value) scroll.start -= before.value[slotSize];
+    if (after.value) scroll.end += after.value[slotSize];
 
     // Variable size mode
     if (itemSize === null) {
