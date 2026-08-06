@@ -49,7 +49,7 @@
       <template #after>
         <div
           v-if="isFetching"
-          class="loading"
+          class="d-p8 d-fc-muted d-helper--md"
         >
           Loading more…
         </div>
@@ -132,12 +132,6 @@ function switchAutoScrolling () {
   display: flex;
   align-items: center;
   border-bottom: 1px solid #eee;
-}
-
-.loading {
-  padding: 8px 12px;
-  color: #666;
-  font-style: italic;
 }
 
 .autoscrolling{

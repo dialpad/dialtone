@@ -235,12 +235,16 @@ the `updateItems()` call for you, and a reference watcher never sees an in-place
 
 ```js
 async function fetchNextPage () {
+  if (isFetching.value) return;
   isFetching.value = true;
-  const page = await fetchMore();
-  items.value = [...items.value, ...page];
-  isFetching.value = false;
-  await nextTick();
-  scroller.value.updateItems();
+  try {
+    const page = await fetchMore();
+    items.value = [...items.value, ...page];
+    await nextTick();
+    scroller.value.updateItems();
+  } finally {
+    isFetching.value = false;
+  }
 }
 ```
 
