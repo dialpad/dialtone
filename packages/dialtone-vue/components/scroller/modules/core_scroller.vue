@@ -55,8 +55,11 @@
         />
       </component>
 
-      <!-- @slot Content rendered inside the list wrapper, after the items. Use for an empty state. -->
-      <slot name="empty" />
+      <!-- @slot Content rendered inside the list wrapper only while the list is empty. -->
+      <slot
+        v-if="!items.length"
+        name="empty"
+      />
     </component>
 
     <div

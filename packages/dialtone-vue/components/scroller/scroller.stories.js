@@ -141,7 +141,7 @@ export const argTypesData = {
 
   empty: {
     control: { type: null },
-    description: 'Content rendered inside the list wrapper, after the items. Use for an empty state.',
+    description: 'Content rendered inside the list wrapper only while the list is empty.',
     table: {
       type: { summary: 'VNode' },
     },

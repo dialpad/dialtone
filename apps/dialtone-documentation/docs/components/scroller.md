@@ -249,8 +249,7 @@ async function fetchNextPage () {
 }
 ```
 
-The `empty` slot renders unconditionally whenever it is provided, so guard its contents with
-your own `v-if` if it should only appear once the list is confirmed empty.
+The `empty` slot only renders while the list is empty.
 
 ## Vue API
 

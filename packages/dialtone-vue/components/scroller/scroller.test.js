@@ -207,12 +207,31 @@ describe('DtScroller Tests', () => {
         expect(after.exists()).toBe(true);
         expect(after.element.parentElement.getAttribute('data-qa')).toBe('dt-scroller-after');
       });
+    });
 
-      it('renders the empty slot inside the item wrapper', () => {
+    describe('When the empty slot is provided and the list is empty', () => {
+      beforeEach(() => {
+        mockProps = { items: [] };
+        mockSlots = { empty: '<div class="empty-content">Empty</div>' };
+        updateWrapper();
+      });
+
+      it('renders the empty slot content inside the item wrapper', () => {
         const empty = wrapper.find('.empty-content');
 
         expect(empty.exists()).toBe(true);
         expect(empty.element.closest('.vue-recycle-scroller__item-wrapper')).not.toBeNull();
+      });
+    });
+
+    describe('When the empty slot is provided and the list is populated', () => {
+      beforeEach(() => {
+        mockSlots = { empty: '<div class="empty-content">Empty</div>' };
+        updateWrapper();
+      });
+
+      it('does not render the empty slot content', () => {
+        expect(wrapper.find('.empty-content').exists()).toBe(false);
       });
     });
 

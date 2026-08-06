@@ -41,7 +41,7 @@
       v-if="$slots.empty"
       #empty
     >
-      <!-- @slot Content rendered inside the list wrapper, after the items. Use for an empty state. -->
+      <!-- @slot Content rendered inside the list wrapper only while the list is empty. -->
       <slot name="empty" />
     </template>
 
