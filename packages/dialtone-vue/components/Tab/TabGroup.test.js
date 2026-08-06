@@ -239,6 +239,11 @@ describe('DtTabGroup Tests', () => {
       it('should emitted on click', () => {
         expect(wrapper.emitted('before-change').length).toBe(1);
       });
+
+      it('should emit the target panel id as the second argument', () => {
+        const [, payload] = wrapper.emitted('before-change')[0];
+        expect(payload).toEqual({ selected: optionTabs[1].panelId });
+      });
     });
 
     describe('Correct key navigation', () => {
