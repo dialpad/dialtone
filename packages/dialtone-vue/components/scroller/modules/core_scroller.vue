@@ -23,6 +23,7 @@
       :is="listTag"
       ref="wrapper"
       :style="{ [direction === 'vertical' ? 'minHeight' : 'minWidth']: `${totalSize}px` }"
+      data-qa="dt-scroller-item-wrapper"
       class="vue-recycle-scroller__item-wrapper"
       :class="listClass"
     >

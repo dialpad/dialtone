@@ -220,7 +220,7 @@ describe('DtScroller Tests', () => {
         const empty = wrapper.find('.empty-content');
 
         expect(empty.exists()).toBe(true);
-        expect(empty.element.closest('.vue-recycle-scroller__item-wrapper')).not.toBeNull();
+        expect(empty.element.closest('[data-qa="dt-scroller-item-wrapper"]')).not.toBeNull();
       });
     });
 
