@@ -12,6 +12,7 @@
     <div
       v-if="$slots.before"
       ref="before"
+      data-qa="dt-scroller-before"
       class="vue-recycle-scroller__slot"
     >
       <!-- @slot Content rendered before the items, inside the scroll viewport. Scrolls with the list. -->
@@ -29,6 +30,7 @@
         :is="itemTag"
         v-for="view in pool"
         :key="view.nr.id"
+        data-qa="dt-scroller-item"
         :style="ready ? {
           transform: `translate${direction === 'vertical' ? 'Y' : 'X'}(${view.position}px) translate${direction === 'vertical' ? 'X' : 'Y'}(${view.offset}px)`,
           width: undefined,
@@ -60,6 +62,7 @@
     <div
       v-if="$slots.after"
       ref="after"
+      data-qa="dt-scroller-after"
       class="vue-recycle-scroller__slot"
     >
       <!-- @slot Content rendered after the items, inside the scroll viewport. Scrolls with the list. -->

@@ -198,14 +198,14 @@ describe('DtScroller Tests', () => {
         const before = wrapper.find('.before-content');
 
         expect(before.exists()).toBe(true);
-        expect(before.element.parentElement.classList.contains('vue-recycle-scroller__slot')).toBe(true);
+        expect(before.element.parentElement.getAttribute('data-qa')).toBe('dt-scroller-before');
       });
 
       it('renders the after slot in a scroller slot wrapper', () => {
         const after = wrapper.find('.after-content');
 
         expect(after.exists()).toBe(true);
-        expect(after.element.parentElement.classList.contains('vue-recycle-scroller__slot')).toBe(true);
+        expect(after.element.parentElement.getAttribute('data-qa')).toBe('dt-scroller-after');
       });
 
       it('renders the empty slot inside the item wrapper', () => {
@@ -218,7 +218,8 @@ describe('DtScroller Tests', () => {
 
     describe('When no before or after slot is provided', () => {
       it('renders no empty slot wrapper', () => {
-        expect(wrapper.find('.vue-recycle-scroller__slot').exists()).toBe(false);
+        expect(wrapper.find('[data-qa="dt-scroller-before"]').exists()).toBe(false);
+        expect(wrapper.find('[data-qa="dt-scroller-after"]').exists()).toBe(false);
       });
     });
 
@@ -249,7 +250,7 @@ describe('DtScroller Tests', () => {
         defaultContent.element.scrollTop = 300;
         await wrapper.trigger('scroll');
 
-        const firstItem = wrapper.findAll('.vue-recycle-scroller__item-view')
+        const firstItem = wrapper.findAll('[data-qa="dt-scroller-item"]')
           .find((item) => item.text().trim() === 'User 0');
 
         expect(firstItem).toBeTruthy();
@@ -280,7 +281,8 @@ describe('DtScroller Tests', () => {
       });
 
       it('renders no empty slot wrapper', () => {
-        expect(wrapper.find('.vue-recycle-scroller__slot').exists()).toBe(false);
+        expect(wrapper.find('[data-qa="dt-scroller-before"]').exists()).toBe(false);
+        expect(wrapper.find('[data-qa="dt-scroller-after"]').exists()).toBe(false);
       });
     });
   });
