@@ -36,7 +36,10 @@
       :list-tag="$attrs.listTag"
       :item-tag="$attrs.itemTag"
       :direction="$attrs.direction"
+      :buffer="$attrs.buffer"
       @user-position="$attrs.onUserPosition($event); userPosition = $event"
+      @scroll-start="$attrs.onScrollStart()"
+      @scroll-end="$attrs.onScrollEnd()"
     >
       <template #default="{ item }">
         <div class="user">
@@ -46,6 +49,14 @@
             :full-name="item.name"
           />
           {{ item.name }}
+        </div>
+      </template>
+      <template #after>
+        <div
+          v-if="isFetching"
+          class="d-p8 d-fc-muted d-helper--md"
+        >
+          Loading more…
         </div>
       </template>
     </dt-scroller>
@@ -67,6 +78,10 @@ const scroller = ref('scroller');
 const autoScrolling = ref(false);
 
 const userPosition = ref(null);
+
+// Demonstrates the documented pattern for the `after` slot: guard it with your
+// own flag rather than relying on the scroller to show or hide it for you.
+const isFetching = ref(true);
 
 let intervalId;
 
