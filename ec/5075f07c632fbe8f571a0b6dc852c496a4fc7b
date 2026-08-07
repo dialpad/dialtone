@@ -1,0 +1,26 @@
+packages/combinator/src/lib/tokens.js
+  s_30aae87b3e19ec::t_7a6842221144f4 67,69,73,91-93,238,242,265-283
+packages/combinator/src/variants/variants_text.js
+  s_30aae87b3e19ec::t_7a6842221144f4 6-7,16-31,46-47
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "ec5075f07c632fbe8f571a0b6dc852c496a4fc7b",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_30aae87b3e19ec": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "019ef122-867f-71f2-bacd-0ea0fd649d67",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
