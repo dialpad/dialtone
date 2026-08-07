@@ -89,6 +89,129 @@ layout: Blank
   </dt-stack>
 <!-- ============================================================ -->
 
+<dt-stack gap="100">
+  <dt-stack direction="row" align="start" gap="100">
+    <dt-stack align="center" gap="50">
+      <dt-text variant="body-xs" size="50">200</dt-text>
+      <dt-avatar :size="200" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack align="center" gap="50">
+      <dt-text variant="body-xs" size="50">200</dt-text>
+      <dt-avatar :size="200" presence="away" seed="user-2" full-name="Marshall Mathers" />
+    </dt-stack>
+    <dt-stack align="center" gap="50">
+      <dt-text variant="body-xs" size="50">250</dt-text>
+      <dt-avatar :size="250" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack align="center" gap="50">
+      <dt-text variant="body-xs" size="50">250</dt-text>
+      <dt-avatar :size="250" presence="away" seed="user-2" full-name="Marshall Mathers" />
+    </dt-stack>
+    <dt-stack align="center" gap="50">
+      <dt-text variant="body-xs" size="50">300</dt-text>
+      <dt-avatar :size="300" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack align="center" gap="50">
+      <dt-text variant="body-xs" size="50">300</dt-text>
+      <dt-avatar :size="300" presence="busy" seed="user-3" full-name="Marshall Mathers" />
+    </dt-stack>
+    <dt-stack align="center" gap="50">
+      <dt-text variant="body-xs" size="50">400</dt-text>
+      <dt-avatar :size="400" presence="dnd" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack align="center" gap="50">
+      <dt-text variant="body-xs" size="50">400</dt-text>
+      <dt-avatar :size="400" presence="dnd" seed="user-4" full-name="Marshall Mathers" />
+    </dt-stack>
+    <dt-stack align="center" gap="50">
+      <dt-text variant="body-xs" size="50">500</dt-text>
+      <dt-avatar :size="500" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack align="center" gap="50">
+      <dt-text variant="body-xs" size="50">500</dt-text>
+      <dt-avatar :size="500" presence="offline" seed="user-5" full-name="Marshall Mathers" />
+    </dt-stack>
+  </dt-stack>
+</dt-stack>
+<dt-stack gap="200">
+  <dt-stack gap="300" direction="row" align="start">
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-presence presence="active" />
+      <dt-presence presence="busy" />
+      <dt-presence presence="away" />
+      <dt-presence presence="offline" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="200" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="200" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="200" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="200" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="250" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="250" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="250" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="250" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="300" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="300" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="300" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="300" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="400" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="400" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="400" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="400" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="500" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="500" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="500" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="500" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+  </dt-stack>
+  <dt-stack gap="300" direction="row" align="start">
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-presence presence="active" />
+      <dt-presence presence="busy" />
+      <dt-presence presence="away" />
+      <dt-presence presence="offline" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="200" presence="active" full-name="Layla El-Sayed" />
+      <dt-avatar :size="200" presence="busy" full-name="Luca Ferrari" />
+      <dt-avatar :size="200" presence="away" full-name="Nia Griffiths" />
+      <dt-avatar :size="200" presence="offline" full-name="Hana Horvat" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="250" presence="active" full-name="Layla El-Sayed" />
+      <dt-avatar :size="250" presence="busy" full-name="Luca Ferrari" />
+      <dt-avatar :size="250" presence="away" full-name="Nia Griffiths" />
+      <dt-avatar :size="250" presence="offline" full-name="Hana Horvat" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="300" presence="active" full-name="Arjun Iyer" />
+      <dt-avatar :size="300" presence="busy" full-name="Min-jun Jeong" />
+      <dt-avatar :size="300" presence="away" full-name="Zofia Kowalska" />
+      <dt-avatar :size="300" presence="offline" full-name="Mateo López" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="400" presence="active" full-name="Zanele Mbeki" />
+      <dt-avatar :size="400" presence="busy" full-name="Chidi Nwosu" />
+      <dt-avatar :size="400" presence="away" full-name="Aoife O'Sullivan" />
+      <dt-avatar :size="400" presence="offline" full-name="Inês Pereira" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="500" presence="active" full-name="Lian Qiao" />
+      <dt-avatar :size="500" presence="busy" full-name="Priya Raman" />
+      <dt-avatar :size="500" presence="away" full-name="Leila Saleh" />
+      <dt-avatar :size="500" presence="offline" full-name="Sione Tui" />
+    </dt-stack>
+  </dt-stack>
+</dt-stack>
+
 <p>
   A sentence goes here
   <dt-chip interactive size="200"> <template #icon> <dt-icon name="box-select" size="200" /> </template> Chip </dt-chip>
@@ -260,47 +383,6 @@ layout: Blank
     </dt-stack>
   </dt-box>
 </dt-stack>
-<!-- ============================================================ -->
-<dt-box padding="300">
-  <dt-stack gap="300" direction="row">
-    <dt-stack direction="row" align="center" gap="100">
-      <dt-presence presence="active" />
-      <dt-presence presence="busy" />
-      <dt-presence presence="away" />
-      <dt-presence presence="offline" />
-    </dt-stack>
-    <dt-stack direction="row" align="center" gap="100">
-      <dt-avatar :size="100" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      <dt-avatar :size="100" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      <dt-avatar :size="100" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      <dt-avatar :size="100" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-    </dt-stack>
-    <dt-stack direction="row" align="center" gap="100">
-      <dt-avatar :size="200" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      <dt-avatar :size="200" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      <dt-avatar :size="200" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      <dt-avatar :size="200" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-    </dt-stack>
-    <dt-stack direction="row" align="center" gap="100">
-      <dt-avatar :size="300" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      <dt-avatar :size="300" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      <dt-avatar :size="300" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      <dt-avatar :size="300" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-    </dt-stack>
-    <dt-stack direction="row" align="center" gap="100">
-      <dt-avatar :size="400" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      <dt-avatar :size="400" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      <dt-avatar :size="400" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      <dt-avatar :size="400" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-    </dt-stack>
-    <dt-stack direction="row" align="center" gap="100">
-      <dt-avatar :size="500" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      <dt-avatar :size="500" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      <dt-avatar :size="500" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      <dt-avatar :size="500" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-    </dt-stack>
-  </dt-stack>
-</dt-box>
 
 <!-- ============================================================ -->
 <!-- DtBox V1 Demos                                                -->
