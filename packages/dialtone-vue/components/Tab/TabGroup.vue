@@ -228,10 +228,11 @@ export default {
     'change',
 
     /**
-     * Before change tab event with the event argument, useful to perform validations and prevent changing tabs if neccessary.
+     * Before change tab event, useful to perform validations and prevent changing tabs if necessary.
      *
      * @event before-change
-     * @type {Event}
+     * @property {Event} event The originating DOM event; call `event.preventDefault()` to cancel the change.
+     * @property {Object} payload Contains the target tab's panel id as `selected`.
      */
     'before-change',
   ],
@@ -473,7 +474,8 @@ export default {
       if (this.tabItems[index]?.isDisabled) return;
       if (this.provideObj.selected === this.tabItems[index]?.panelId) return;
 
-      this.$emit('before-change', event);
+      const { panelId } = this.tabItems[index];
+      this.$emit('before-change', event, { selected: panelId });
       if (event.defaultPrevented) return;
 
       // Prevent keyboard defaults (Space scroll, Enter form submit)
