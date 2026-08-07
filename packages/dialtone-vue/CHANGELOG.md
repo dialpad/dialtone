@@ -1,3 +1,11 @@
+# [3.224.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.224.0-next.3...dialtone-vue/v3.224.0-next.4) (2026-08-07)
+
+
+### Bug Fixes
+
+* **Docs:** DLT-3558 correct out-of-sync [@values](https://github.com/values) JSDoc annotations ([#1383](https://github.com/dialpad/dialtone/issues/1383)) ([0ef001b](https://github.com/dialpad/dialtone/commit/0ef001bde3623cdf1b0c10564f88f84d0c44c27c))
+* **Tab Group:** DLT-3564 emit target panel id on before-change ([#1386](https://github.com/dialpad/dialtone/issues/1386)) ([0c7b5c6](https://github.com/dialpad/dialtone/commit/0c7b5c6d70ec35c622e0a14ae2281640d898e92c))
+
 # [3.224.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.224.0-next.2...dialtone-vue/v3.224.0-next.3) (2026-07-28)
 
 
