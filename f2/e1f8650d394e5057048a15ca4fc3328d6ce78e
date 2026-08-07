@@ -1,0 +1,101 @@
+packages/dialtone-vue/components/scroller/modules/core_scroller.vue
+  s_5a1867feab3270::t_a5b87d97af2f92 551-554
+  s_5a1867feab3270::t_4b8f50f748d2b9 187
+  s_5a1867feab3270::t_cde552ca5eb0f3 535,540
+  s_5a1867feab3270::t_78656e582b9d0e 500
+  s_5a1867feab3270::t_6df6ae8bd01ee7 12-13,16-21,58,65-67,70-74
+  s_5a1867feab3270::t_538cb9faeec752 14
+  s_5a1867feab3270::t_698b0341851c24 68
+  s_5a1867feab3270::t_0cb5cf0ba0b1a6 197-198
+  s_5a1867feab3270::t_112a0d34c3e9ed 368-373
+  s_5a1867feab3270::t_237537d0d24915 34
+  s_5a1867feab3270::t_1d4a8086deea38 15
+  s_5a1867feab3270::t_aedb83142754a5 69
+  s_5a1867feab3270::t_8240f51b43a2cd 59
+  s_5a1867feab3270::t_f86bbd1f9335e2 60-63
+  s_5a1867feab3270::t_1fcec025915939 26
+packages/dialtone-vue/components/scroller/scroller.vue
+  s_5a1867feab3270::t_e9bac122f3e8a7 184-185,189-192,196-197
+  s_5a1867feab3270::t_52861fc0b079a3 17-18
+  s_5a1867feab3270::t_f9fc82c4f47e59 31-43,45-54
+  s_5a1867feab3270::t_5b1d97631b933b 69-77
+  s_5a1867feab3270::t_6a40859f1d5c15 9
+  s_5a1867feab3270::t_74b94c92c926dc 68
+  s_5a1867feab3270::t_7adce26502f28e 186-188,193-195
+  s_5a1867feab3270::t_7fae13318c5dbc 44
+packages/dialtone-vue/components/scroller/scroller.test.js
+  s_5a1867feab3270::t_b8fef4ece87e1b 135-142,147-148,150-151
+  s_5a1867feab3270::t_4a0670b7e00757 10-29,32-34,37-39
+  s_5a1867feab3270::t_2e4aacd3186236 134,149,152-159,165,169-171
+  s_5a1867feab3270::t_54cd76053540ec 160-164,166-168,172
+  s_5a1867feab3270::t_83552cd5cdd437 173-175
+  s_5a1867feab3270::t_261c7cab37d7bb 143-146
+  s_5a1867feab3270::t_4285f87866ce78 30-31,35-36
+  s_5a1867feab3270::t_906a972c509bb0 185-200,202-207,217-218,220-222,235-239,277-281,283-289,306-307
+  s_5a1867feab3270::t_31ffc05a9b95cf 3
+  s_5a1867feab3270::t_7a48f5f7263f39 88-94,97-99
+  s_5a1867feab3270::t_cdd3ac567962ef 95-96,100-103
+  s_5a1867feab3270::t_36472d8000d942 104-105
+  s_5a1867feab3270::t_5dd70b20b6ceb7 293,295-302,305
+  s_5a1867feab3270::t_a6e3ef8a87e593 282,290-292
+  s_41eb69a7fcf8e1::t_eef9361942cee0 294
+  s_5a1867feab3270::t_86dd4dca1f3abb 270
+  s_5a1867feab3270::t_1c7c1957598d6d 269
+  s_5a1867feab3270::t_efb55ceea096e4 263-268,273-276
+  s_5a1867feab3270::t_d1a585a36ab962 245-262,271,277-279
+  s_5a1867feab3270::t_2ff4996e715385 201,208
+  s_5a1867feab3270::t_11addd151a6efb 240-241
+  s_5a1867feab3270::t_f17fab36eb6774 272
+  s_5a1867feab3270::t_628305f992c5cd 303-304
+  s_5a1867feab3270::t_060eb85eca28e2 210-217,219,227-236
+  s_5a1867feab3270::t_25c961ee6dc096 237
+  s_5a1867feab3270::t_f7080a6000f8a8 223
+packages/dialtone-vue/components/scroller/modules/dynamic_scroller.vue
+  s_5a1867feab3270::t_c1379720ee1e24 33-53
+apps/dialtone-documentation/docs/components/scroller.md
+  s_5a1867feab3270::t_c3d55924016a12 200-202,206,216-218,220-231,233-236
+  s_5a1867feab3270::t_4c3bd7e7c2520a 232
+  s_5a1867feab3270::t_a016339a635b08 209-212,219,237-238,240,249-251
+  s_5a1867feab3270::t_b1c12b01310bf0 253
+  s_5a1867feab3270::t_9df1ff50a96035 213-216
+  s_5a1867feab3270::t_a79887c9e863a2 239,241-248
+  s_5a1867feab3270::t_1557ba3378c174 203-205,207
+  s_5a1867feab3270::t_b5b96f06452065 252
+packages/dialtone-vue/components/scroller/scroller.stories.js
+  s_5a1867feab3270::t_974771292024a1 108-109,112-117,121-143,145-153
+  s_5a1867feab3270::t_4daf2d8a168522 14
+  s_5a1867feab3270::t_6c7995e6f58921 110-111,118-120
+  s_5a1867feab3270::t_3f34417e48dd2f 144
+packages/dialtone-vue/components/scroller/scroller_default.story.vue
+  s_5a1867feab3270::t_a947e2bd4f29de 41-42,49,54
+  s_41eb69a7fcf8e1::t_27eac396f9552b 55-56
+  s_5a1867feab3270::t_3aa11d582be3c9 76-78
+  s_5a1867feab3270::t_be78a2b057d666 50-51,53
+  s_5a1867feab3270::t_89cf7560539da3 39
+  s_5a1867feab3270::t_6b88ec8fb2fcf6 79
+  s_5a1867feab3270::t_50a103cef8db5e 52
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "f2e1f8650d394e5057048a15ca4fc3328d6ce78e",
+  "prompts": {},
+  "sessions": {
+    "s_41eb69a7fcf8e1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2dac3001-8ceb-4d12-8f9a-a654cd077eba",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Joan <joan.gil@dialpad.com>"
+    },
+    "s_5a1867feab3270": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8881ae73-72ba-41b0-b287-e0c0b653a64e",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Joan <joan.gil@dialpad.com>"
+    }
+  }
+}
