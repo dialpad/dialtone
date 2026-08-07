@@ -1,3 +1,10 @@
+# [3.224.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.223.2...dialtone-vue/v3.224.0) (2026-08-07)
+
+
+### Features
+
+* **Scroller:** DLT-2624 add before/after/empty slots and scroll-end events ([#1385](https://github.com/dialpad/dialtone/issues/1385)) ([f2e1f86](https://github.com/dialpad/dialtone/commit/f2e1f8650d394e5057048a15ca4fc3328d6ce78e))
+
 ## [3.223.2](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.223.1...dialtone-vue/v3.223.2) (2026-07-30)
 
 
