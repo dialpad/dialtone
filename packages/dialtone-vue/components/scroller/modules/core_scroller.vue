@@ -9,10 +9,21 @@
     }"
     @scroll.passive="handleScroll"
   >
+    <div
+      v-if="$slots.before"
+      ref="before"
+      data-qa="dt-scroller-before"
+      class="vue-recycle-scroller__slot"
+    >
+      <!-- @slot Content rendered before the items, inside the scroll viewport. Scrolls with the list. -->
+      <slot name="before" />
+    </div>
+
     <component
       :is="listTag"
       ref="wrapper"
       :style="{ [direction === 'vertical' ? 'minHeight' : 'minWidth']: `${totalSize}px` }"
+      data-qa="dt-scroller-item-wrapper"
       class="vue-recycle-scroller__item-wrapper"
       :class="listClass"
     >
@@ -20,6 +31,7 @@
         :is="itemTag"
         v-for="view in pool"
         :key="view.nr.id"
+        data-qa="dt-scroller-item"
         :style="ready ? {
           transform: `translate${direction === 'vertical' ? 'Y' : 'X'}(${view.position}px) translate${direction === 'vertical' ? 'X' : 'Y'}(${view.offset}px)`,
           width: undefined,
@@ -43,7 +55,23 @@
           :active="view.nr.used"
         />
       </component>
+
+      <!-- @slot Content rendered inside the list wrapper only while the list is empty. -->
+      <slot
+        v-if="!items.length"
+        name="empty"
+      />
     </component>
+
+    <div
+      v-if="$slots.after"
+      ref="after"
+      data-qa="dt-scroller-after"
+      class="vue-recycle-scroller__slot"
+    >
+      <!-- @slot Content rendered after the items, inside the scroll viewport. Scrolls with the list. -->
+      <slot name="after" />
+    </div>
   </div>
 </template>
 
@@ -156,7 +184,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['user-position']);
+const emit = defineEmits(['user-position', 'scroll-start', 'scroll-end']);
 
 const views = reactive(new Map());
 // const reactiveItems = reactive(props.items);
@@ -166,6 +194,8 @@ const pool = ref([]);
 const hoverKey = ref(null);
 const ready = ref(false);
 const scroller = ref(null);
+const before = ref(null);
+const after = ref(null);
 const userPosition = ref('top');
 
 let startIndex = 0;
@@ -335,6 +365,12 @@ const _updateVisibleItems = (checkItem, checkPositionDiff = false) => {
     scroll.start -= _buffer;
     scroll.end += _buffer;
 
+    // The leading and trailing slots sit in normal flow inside the viewport, so the item
+    // wrapper does not start at offset 0. Widen the window by their measured size.
+    const slotSize = props.direction === 'vertical' ? 'scrollHeight' : 'scrollWidth';
+    if (before.value) scroll.start -= before.value[slotSize];
+    if (after.value) scroll.end += after.value[slotSize];
+
     // Variable size mode
     if (itemSize === null) {
       let h;
@@ -461,7 +497,7 @@ const _updateVisibleItems = (checkItem, checkPositionDiff = false) => {
     type = item.type;
 
     let unusedPool = _unusedViews.get(type);
-    // let newlyUsedView = false;
+    let newlyUsedView = false;
 
     // No view assigned to item
     if (!view) {
@@ -496,12 +532,12 @@ const _updateVisibleItems = (checkItem, checkPositionDiff = false) => {
       view.nr.type = type;
       _views.set(key, view);
 
-      // newlyUsedView = true;
+      newlyUsedView = true;
     } else {
       // View already assigned to item
       if (!view.nr.used) {
         view.nr.used = true;
-        // newlyUsedView = true;
+        newlyUsedView = true;
         if (unusedPool) {
           const index = unusedPool.indexOf(view);
           if (index !== -1) unusedPool.splice(index, 1);
@@ -512,11 +548,10 @@ const _updateVisibleItems = (checkItem, checkPositionDiff = false) => {
     // Always set item in case it's a new object with the same key
     view.item = item;
 
-    // if (newlyUsedView) {
-    //   if (items.length === 0) return;
-    //   if (i === items.length - 1) emit('scroll-end');
-    //   if (i === 0) emit('scroll-start');
-    // }
+    if (newlyUsedView) {
+      if (i === items.length - 1) emit('scroll-end');
+      if (i === 0) emit('scroll-start');
+    }
 
     // Update position
     if (itemSize === null) {

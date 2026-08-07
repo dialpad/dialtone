@@ -6,6 +6,7 @@
     :items="items"
     :item-size="itemSize"
     :min-item-size="minItemSize"
+    :buffer="buffer"
     :direction="direction"
     :key-field="keyField"
     :list-tag="listTag"
@@ -13,6 +14,8 @@
     :style="computedStyle"
     tabindex="0"
     @user-position="$emit('user-position', $event)"
+    @scroll-start="$emit('scroll-start')"
+    @scroll-end="$emit('scroll-end')"
   >
     <template
       #default="{ item, index, active }"
@@ -24,6 +27,30 @@
           active,
         }"
       />
+    </template>
+
+    <template
+      v-if="$slots.before"
+      #before
+    >
+      <!-- @slot Content rendered before the items, inside the scroll viewport. Scrolls with the list. -->
+      <slot name="before" />
+    </template>
+
+    <template
+      v-if="$slots.empty"
+      #empty
+    >
+      <!-- @slot Content rendered inside the list wrapper only while the list is empty. -->
+      <slot name="empty" />
+    </template>
+
+    <template
+      v-if="$slots.after"
+      #after
+    >
+      <!-- @slot Content rendered after the items, inside the scroll viewport. Scrolls with the list. -->
+      <slot name="after" />
     </template>
   </component>
 </template>
@@ -38,6 +65,16 @@ defineOptions({
 });
 
 const props = defineProps({
+  /**
+      * Amount of pixels added to each edge of the scroll viewport, so items are rendered
+      * before they scroll into view. Also controls how early `scroll-start` and `scroll-end`
+      * fire relative to the viewport edges.
+     */
+  buffer: {
+    type: Number,
+    default: 200,
+  },
+
   /**
       * The direction of the scroller.
       * @values vertical, horizontal
@@ -144,6 +181,20 @@ const emits = defineEmits([
    * @values start, middle, end
    */
   'user-position',
+
+  /**
+   * Emitted when the first item enters the rendered view pool. Fires at least one `buffer`
+   * length before the viewport's start edge is reached (earlier still with `before` slot
+   * content), so callers can prepend items ahead of time.
+   */
+  'scroll-start',
+
+  /**
+   * Emitted when the last item enters the rendered view pool. Fires at least one `buffer`
+   * length before the viewport's end edge is reached (earlier still with `after` slot
+   * content), so callers can append items ahead of time.
+   */
+  'scroll-end',
 ]);
 
 provide('emit', emits);
