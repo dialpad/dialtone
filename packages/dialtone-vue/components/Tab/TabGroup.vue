@@ -228,11 +228,11 @@ export default {
     'change',
 
     /**
-     * Before change tab event, useful to perform validations and prevent changing tabs if neccessary.
-     * Emits the originating DOM event, followed by an object with the target tab's panel id as `selected`.
+     * Before change tab event, useful to perform validations and prevent changing tabs if necessary.
      *
      * @event before-change
-     * @type {Event}
+     * @property {Event} event The originating DOM event; call `event.preventDefault()` to cancel the change.
+     * @property {Object} payload Contains the target tab's panel id as `selected`.
      */
     'before-change',
   ],

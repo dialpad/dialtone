@@ -232,16 +232,21 @@ describe('DtTabGroup Tests', () => {
     });
 
     describe('Correct before-change event', () => {
+      let clickEvent;
+
       beforeEach(() => {
-        returnFirstEl(tabs.at(1).vm.$el).click();
+        const tabEl = returnFirstEl(tabs.at(1).vm.$el);
+        tabEl.addEventListener('click', (event) => { clickEvent = event; });
+        tabEl.click();
       });
 
       it('should emitted on click', () => {
         expect(wrapper.emitted('before-change').length).toBe(1);
       });
 
-      it('should emit the target panel id as the second argument', () => {
-        const [, payload] = wrapper.emitted('before-change')[0];
+      it('should emit the originating event and the target panel id, in order', () => {
+        const [event, payload] = wrapper.emitted('before-change')[0];
+        expect(event).toBe(clickEvent);
         expect(payload).toEqual({ selected: optionTabs[1].panelId });
       });
     });
