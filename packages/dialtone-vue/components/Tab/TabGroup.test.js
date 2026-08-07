@@ -245,9 +245,7 @@ describe('DtTabGroup Tests', () => {
       });
 
       it('should emit the originating event and the target panel id, in order', () => {
-        const [event, payload] = wrapper.emitted('before-change')[0];
-        expect(event).toBe(clickEvent);
-        expect(payload).toEqual({ selected: optionTabs[1].panelId });
+        expect(wrapper.emitted('before-change')[0]).toEqual([clickEvent, { selected: optionTabs[1].panelId }]);
       });
     });
 
