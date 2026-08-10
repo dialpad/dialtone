@@ -1,3 +1,17 @@
+# [10.0.0-next.11](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.10...dialtone/v10.0.0-next.11) (2026-08-10)
+
+
+### Bug Fixes
+
+* **Avatar:** DP-200415 prevent presence indicators from clipping avatar content ([#1387](https://github.com/dialpad/dialtone/issues/1387)) ([e693f80](https://github.com/dialpad/dialtone/commit/e693f809aa7b39874331f215eb7e4819607d61e2))
+* **Message Input:** DP-200077 disable text-align when rich-text is false ([#1384](https://github.com/dialpad/dialtone/issues/1384)) ([6474c8e](https://github.com/dialpad/dialtone/commit/6474c8e2fa1c2b1ffd3ff0a960b7dcb9a9e93866))
+
+
+### Features
+
+* **Icons:** DLT-3553 add fax-inbound and fax-outbound icons ([#1378](https://github.com/dialpad/dialtone/issues/1378)) ([46538f6](https://github.com/dialpad/dialtone/commit/46538f6218366beb85d84a04ee7f20a3f310204b))
+* **Scroller:** DLT-2624 add before/after/empty slots and scroll-end events ([#1385](https://github.com/dialpad/dialtone/issues/1385)) ([f2e1f86](https://github.com/dialpad/dialtone/commit/f2e1f8650d394e5057048a15ca4fc3328d6ce78e))
+
 # [9.190.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.189.1...dialtone/v9.190.0) (2026-08-07)
 
 
