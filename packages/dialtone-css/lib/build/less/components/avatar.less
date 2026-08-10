@@ -191,10 +191,10 @@
         position: absolute;
         background-color: var(--dt-color-neutral-white);
         border-radius: var(--avatar-border-radius);
-        opacity: 0.5;
+        opacity: var(--dt-opacity-700);
         content: '';
         pointer-events: none;
-        inset: 0;
+        inset: var(--dt-spacing-0);
       }
     }
   }
@@ -304,7 +304,7 @@
   &--clickable {
     --avatar-color-border: var(--dt-color-neutral-transparent);
 
-    padding: 0;
+    padding: var(--dt-spacing-0);
     background-color: var(--dt-color-neutral-transparent);
     border: var(--dt-size-border-0) solid var(--avatar-color-border);
     border-radius: var(--avatar-border-radius);
@@ -395,8 +395,8 @@
     --avatar-size-shape: calc(var(--dt-layout-100) * 0.75);
     --avatar-presence-shape: calc(var(--avatar-size-shape) * 0.32);
     --avatar-size-text: var(--dt-font-size-300);
-    --avatar-presence-position-right: 0;
-    --avatar-presence-position-bottom: 0;
+    --avatar-presence-position-right: var(--dt-spacing-0);
+    --avatar-presence-position-bottom: var(--dt-spacing-0);
     --avatar-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 48 48'%3E%3Cpath fill='white' d='M42 0C45.3137 0 48 2.68629 48 6V30.5377H34.8C32.149 30.5377 30 32.6867 30 35.3377V48H6C2.68629 48 0 45.3137 0 42V6C0 2.68629 2.68629 0 6 0H42Z'/%3E%3C/svg%3E");
   }
 
