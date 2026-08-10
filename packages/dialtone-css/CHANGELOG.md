@@ -1,3 +1,10 @@
+# [8.81.0-next.11](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.81.0-next.10...dialtone-css/v8.81.0-next.11) (2026-08-10)
+
+
+### Bug Fixes
+
+* **Avatar:** DP-200415 prevent presence indicators from clipping avatar content ([#1387](https://github.com/dialpad/dialtone/issues/1387)) ([e693f80](https://github.com/dialpad/dialtone/commit/e693f809aa7b39874331f215eb7e4819607d61e2))
+
 # [8.81.0-next.10](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.81.0-next.9...dialtone-css/v8.81.0-next.10) (2026-07-29)
 
 
