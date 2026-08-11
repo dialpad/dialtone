@@ -60,6 +60,10 @@
 
   &__tabset-list {
       gap: var(--dt-spacing-0);
+      // The tabset sits flush above the emoji list, so it does not need the
+      // standalone tablist's underline gap that would otherwise add height here.
+      --tablist-padding-bottom: var(--dt-spacing-0);
+
 
       &::after {
         background-color: var(--dt-color-neutral-transparent) !important;
