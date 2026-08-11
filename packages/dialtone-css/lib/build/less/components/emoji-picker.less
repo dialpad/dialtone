@@ -38,7 +38,8 @@
     // !important to default value to override popover dialog box-sizing: border-box style
     box-sizing: content-box !important;
     inline-size: auto;
-    max-inline-size: calc(var(--dt-layout-500) + var(--dt-spacing-100));
+    // 340px fits 9 emojis per row (9 × 36px + 8 × 2px gap)
+    max-inline-size: calc(var(--dt-layout-500) + var(--dt-spacing-250));
     margin: 0 var(--dt-spacing-200);
   }
 
@@ -127,7 +128,8 @@
   }
 
   &__selector {
-    min-block-size: calc(var(--dt-layout-450) + var(--dt-spacing-1));
+    // 297px keeps the list tall enough to show a full grid of emoji rows
+    min-block-size: calc(var(--dt-layout-450) + var(--dt-spacing-100) + var(--dt-spacing-1));
 
     p {
       padding-block-end: var(--dt-spacing-50);
@@ -149,7 +151,8 @@
   &__list {
     position: relative;
     block-size: 100%;
-    max-block-size: calc(var(--dt-layout-450) + var(--dt-spacing-1));
+    // 297px keeps the list tall enough to show a full grid of emoji rows
+    max-block-size: calc(var(--dt-layout-450) + var(--dt-spacing-100) + var(--dt-spacing-1));
     padding-block-end: calc(var(--dt-spacing-50) + var(--dt-spacing-1));
     overflow: hidden auto;
 
@@ -173,7 +176,8 @@
     flex-wrap: wrap;
     gap: var(--dt-spacing-25);
     inline-size: calc(100% + calc(var(--dt-layout-25) - var(--dt-spacing-1)));
-    max-inline-size: calc(var(--dt-layout-500) + var(--dt-spacing-100));
+    // 340px fits 9 emojis per row (9 × 36px + 8 × 2px gap)
+    max-inline-size: calc(var(--dt-layout-500) + var(--dt-spacing-250));
     // We use this margin left to align the emoji list with the tabset label
     margin-inline-start: var(--dt-spacing-75-negative);
     padding-block-start: var(--dt-spacing-50);
