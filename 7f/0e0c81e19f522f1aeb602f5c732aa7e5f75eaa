@@ -1,0 +1,51 @@
+packages/combinator/.github/documentation/USAGE.md
+  s_cbd29f6a5140e8::t_94500a701c9c24 101-104
+.agents/resources/rules/combinator-variants.md
+  s_cbd29f6a5140e8::t_9120d8aaa60b3e 24-27,118-123,126-127,129-130
+  s_cbd29f6a5140e8::t_99725a8eb5dab2 90-95
+packages/combinator/.github/documentation/CONTRIBUTING.md
+  s_cbd29f6a5140e8::t_9120d8aaa60b3e 44
+.claude/rules/combinator-variants.md
+  s_cbd29f6a5140e8::t_99725a8eb5dab2 93-98
+  s_cbd29f6a5140e8::t_9120d8aaa60b3e 27-30,121-126,129-130,132-133
+.agents/resources/rules/vue-components.md
+  s_cbd29f6a5140e8::t_9120d8aaa60b3e 31
+packages/combinator/.github/documentation/internal/OPTION_BAR.md
+  s_cbd29f6a5140e8::t_94500a701c9c24 17-20
+  s_cbd29f6a5140e8::t_9120d8aaa60b3e 24-34,87-88
+  s_cbd29f6a5140e8::t_6cb1bbfc1b4428 89
+packages/combinator/README.md
+  s_cbd29f6a5140e8::t_9120d8aaa60b3e 9-10
+.claude/rules/vue-components.md
+  s_cbd29f6a5140e8::t_9120d8aaa60b3e 74
+packages/combinator/.github/documentation/internal/SETTINGS.md
+  s_cbd29f6a5140e8::t_9120d8aaa60b3e 22-25,42-43,53-57,64-81,85-86
+packages/combinator/.github/documentation/internal/EXCLUSIONS.md
+  s_cbd29f6a5140e8::t_9120d8aaa60b3e 120-125
+.claude/skills/component-variant.md
+  s_cbd29f6a5140e8::t_9120d8aaa60b3e 14-15,24,41-45,50-51
+packages/combinator/.github/documentation/internal/SYSTEM.md
+  s_cbd29f6a5140e8::t_94500a701c9c24 85-86
+packages/combinator/.github/documentation/KNOWN_ISSUES.md
+  s_cbd29f6a5140e8::t_94500a701c9c24 17,21-23
+packages/combinator/.github/documentation/OVERVIEW.md
+  s_cbd29f6a5140e8::t_9120d8aaa60b3e 81,94-95,110,112-115,117-120
+.agents/skills/component-variant/SKILL.md
+  s_cbd29f6a5140e8::t_9120d8aaa60b3e 15-16,25,46-50,55-56
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.8",
+  "base_commit_sha": "7f0e0c81e19f522f1aeb602f5c732aa7e5f75eaa",
+  "prompts": {},
+  "sessions": {
+    "s_cbd29f6a5140e8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f1571-d2ad-7572-827a-d391f2dc0ba6",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
