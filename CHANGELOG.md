@@ -1,3 +1,10 @@
+# [10.0.0-next.12](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.11...dialtone/v10.0.0-next.12) (2026-08-12)
+
+
+### Bug Fixes
+
+* NO-JIRA emoji-picker spacing issue ([#1388](https://github.com/dialpad/dialtone/issues/1388)) ([fdf835b](https://github.com/dialpad/dialtone/commit/fdf835b7c73a4b31cca5157f598c5a3972b2c75b))
+
 # [10.0.0-next.11](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.10...dialtone/v10.0.0-next.11) (2026-08-10)
 
 
