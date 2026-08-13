@@ -1,0 +1,14 @@
+packages/dialtone-css/lib/build/less/components/box.less
+  h_c15b5755534093 292-295
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "29b31fd5ec9083bb7281938c1bdc262dfa7ef98b",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

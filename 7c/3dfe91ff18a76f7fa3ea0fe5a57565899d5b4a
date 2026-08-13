@@ -1,0 +1,141 @@
+apps/dialtone-documentation/docs/components/modal.md
+  s_e29a672f6e8027::t_9b09e305a93ab3 188,193
+packages/dialtone-vue/components/Toast/Layouts/ToastLayoutAlternateIcon.vue
+  s_e29a672f6e8027::t_6643beefc22a42 25
+  s_e29a672f6e8027::t_377bbd0ba006e7 60,62
+packages/dialtone-vue/components/Modal/index.js
+  s_e29a672f6e8027::t_3bdeb9eceba231 2
+packages/dialtone-vue/components/Modal/ModalDefault.story.vue
+  s_e29a672f6e8027::t_cc4794e2007ec5 8
+packages/dialtone-vue/components/Codeblock/Codeblock.vue
+  s_e29a672f6e8027::t_f5d1f90617f942 13
+  s_e29a672f6e8027::t_5b916d04e6d214 42
+packages/dialtone-icons/src/IconTemplate.vue
+  s_e29a672f6e8027::t_d86dcd2faf2080 18,20
+packages/dialtone-vue/components/Emoji/Emoji.vue
+  s_e29a672f6e8027::t_0df16648d301e7 120
+  s_e29a672f6e8027::t_2b5b2ee30c217b 25
+  s_e29a672f6e8027::t_a70f6d8b231291 64,66
+packages/dialtone-vue/components/SegmentedControl/SegmentedControl.vue
+  s_e29a672f6e8027::t_78221c0478ffcf 24
+  s_e29a672f6e8027::t_8f325f78098e22 88
+packages/dialtone-vue/components/Avatar/Avatar.vue
+  s_e29a672f6e8027::t_22a75e302031a3 177
+  s_e29a672f6e8027::t_fccef252b0d5ba 85
+packages/dialtone-vue/components/FilterPill/FilterPill.vue
+  s_e29a672f6e8027::t_757c79218b560f 211
+  s_e29a672f6e8027::t_19f6fcd27ba409 460
+packages/dialtone-vue/components/Input/Input.vue
+  s_e29a672f6e8027::t_e3a71afb75931e 166-167
+  s_e29a672f6e8027::t_32805572cb9b0d 461
+  s_e29a672f6e8027::t_6c1c673b217cb0 161
+  s_e29a672f6e8027::t_fc5ed134ef9888 263
+packages/combinator/src/variants/variants_modal.js
+  s_e29a672f6e8027::t_b4d96f4033ce2e 32-44
+packages/dialtone-vue/components/SplitButton/SplitButton.vue
+  s_e29a672f6e8027::t_27cd72410bd10a 156
+  s_e29a672f6e8027::t_db435294068e7e 477
+packages/dialtone-vue/components/Combobox/Combobox.vue
+  s_e29a672f6e8027::t_e46ed0be211746 58
+  s_e29a672f6e8027::t_7085d2e7511796 112
+packages/dialtone-vue/components/EmojiTextWrapper/EmojiTextWrapper.vue
+  s_e29a672f6e8027::t_3132855d65b2b2 35,37
+  s_e29a672f6e8027::t_6ef7804e7c065c 6
+packages/dialtone-vue/components/SelectMenu/SelectMenu.vue
+  s_e29a672f6e8027::t_9ff8c0def85e40 173
+  s_e29a672f6e8027::t_09ad0a2f637de8 92
+packages/dialtone-vue/components/ComboboxMultiSelect/ComboboxMultiSelect.vue
+  s_e29a672f6e8027::t_a86c9b04ed8a21 136
+  s_e29a672f6e8027::t_9ef481a4ca5d73 297
+packages/dialtone-vue/components/Button/Button.vue
+  s_e29a672f6e8027::t_6738f27e7eb86f 294
+  s_e29a672f6e8027::t_0f6d7e82535282 148
+packages/dialtone-vue/components/Loader/Loader.vue
+  s_e29a672f6e8027::t_adabea55e23be5 55
+  s_e29a672f6e8027::t_f719b4304980c8 75,77
+packages/dialtone-vue/components/Icon/Icon.vue
+  s_e29a672f6e8027::t_98e984f92f5821 31,33
+  s_e29a672f6e8027::t_04e0331e9a573a 14
+packages/dialtone-vue/components/Modal/Modal.test.js
+  s_e29a672f6e8027::t_7977a5115144c9 121-138
+.claude/rules/vue-components.md
+  h_9e2c5818b2d2f6 41
+packages/dialtone-vue/components/ProgressCircle/ProgressCircle.vue
+  s_e29a672f6e8027::t_4c32f48f0f0cba 7
+  s_e29a672f6e8027::t_4a9e088a67839a 26,28
+packages/dialtone-vue/components/Modal/Modal.vue
+  s_e29a672f6e8027::t_3103fec593669b 13
+  s_e29a672f6e8027::t_cff206884890bd 231-232,234-236
+packages/dialtone-vue/components/Toggle/Toggle.vue
+  s_e29a672f6e8027::t_df068bc7215a1c 95
+  s_e29a672f6e8027::t_bbd9c91841ffa4 37
+packages/dialtone-css/lib/build/js/dialtone_migrate_tshirt_to_numeric/test.mjs
+  s_e29a672f6e8027::t_c7a6f3584763a3 317-363
+packages/dialtone-vue/components/Chip/Chip.vue
+  s_e29a672f6e8027::t_767e53b4df909c 69
+  s_e29a672f6e8027::t_112142f185424e 112
+packages/dialtone-css/lib/build/js/dialtone_migrate_tshirt_to_numeric/index.mjs
+  s_e29a672f6e8027::t_45f6bb2744468f 7-8
+  s_e29a672f6e8027::t_687fd87e18641c 159-162
+  s_e29a672f6e8027::t_e6e804808311d7 98-112,133-137
+  s_e29a672f6e8027::t_c0d168f39a4c72 61-63
+  s_e29a672f6e8027::t_2c241cf15a5ea2 138-139
+packages/dialtone-vue/common/validators/index.js
+  s_e29a672f6e8027::t_0c05ebff61ff32 23-24,29,33-34,37
+  s_e29a672f6e8027::t_2ec18e6486bfcf 25-28,30-32
+packages/dialtone-vue/components/Prose/Prose.vue
+  s_e29a672f6e8027::t_e1cb97e911b248 17
+  s_e29a672f6e8027::t_a6bd3a3917cce6 36
+packages/dialtone-vue/common/validators.test.js
+  s_e29a672f6e8027::t_4b0aefe82a9571 106-141,158
+  s_e29a672f6e8027::t_9eadbaffe966ac 2
+  s_e29a672f6e8027::t_832b20900fa47b 142-157
+packages/dialtone-vue/components/Tab/TabGroup.vue
+  s_e29a672f6e8027::t_21e6a3fcf42fc3 149
+  s_e29a672f6e8027::t_ce553bae72236e 57
+packages/dialtone-vue/components/Badge/Badge.vue
+  s_e29a672f6e8027::t_a618065cebd7f2 64
+  s_e29a672f6e8027::t_d0b7103b6b6473 80,82
+packages/dialtone-vue/components/Modal/Modal.stories.js
+  s_e29a672f6e8027::t_2dd9b0f49dc900 12
+  s_e29a672f6e8027::t_660fff4cd1524e 71,73
+  s_e29a672f6e8027::t_bcf48e96643acc 4
+  s_e29a672f6e8027::t_870cb5d7649c2e 217,221
+packages/dialtone-vue/components/ComboboxWithPopover/ComboboxWithPopover.vue
+  s_e29a672f6e8027::t_bd0cfea3772b95 173
+  s_e29a672f6e8027::t_6e06ea3558f400 126
+apps/dialtone-documentation/docs/guides/migration/component-sizes/index.md
+  s_e29a672f6e8027::t_c969e96b8fb872 77,81-97
+  s_e29a672f6e8027::t_8d45242e288fd9 156
+  s_e29a672f6e8027::t_2ea331075b5eb2 11-12
+  s_e29a672f6e8027::t_f2366d7673c7c2 98
+packages/dialtone-vue/components/EmptyState/EmptyState.vue
+  s_e29a672f6e8027::t_a93f740a84dd28 67
+  s_e29a672f6e8027::t_584e22dfa8698b 91
+apps/dialtone-documentation/docs/.vuepress/exampleComponents/ExampleModal.vue
+  s_e29a672f6e8027::t_3e532d4af729dc 66-68
+  s_e29a672f6e8027::t_8d079dee7b0b3f 8
+apps/dialtone-documentation/docs/.vuepress/views/IconCatalog.vue
+  s_e29a672f6e8027::t_ecd141bdb84600 104
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "7c3dfe91ff18a76f7fa3ea0fe5a57565899d5b4a",
+  "prompts": {},
+  "humans": {
+    "h_9e2c5818b2d2f6": {
+      "author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_e29a672f6e8027": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "70c05a53-9304-4e92-bae7-9a74889bacd3",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}
