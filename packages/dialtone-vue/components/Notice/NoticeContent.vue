@@ -19,6 +19,7 @@
       </slot>
     </dt-text>
     <dt-text
+      v-if="hasSlotContent($slots.default)"
       :id="contentId"
       kind="body"
       :size="200"
