@@ -28,9 +28,7 @@
       <slot name="header" />
     </template>
     <!-- @slot the main textual content of the toast -->
-    <slot>
-      {{ message }}
-    </slot>
+    <slot />
     <!-- @slot Enter a possible action for the user to take, such as a link to another page -->
     <template #action>
       <slot name="action" />

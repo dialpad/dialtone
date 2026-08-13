@@ -20,7 +20,7 @@
       </slot>
     </dt-text>
     <dt-text
-      v-if="hasSlotContent($slots.default)"
+      v-if="message || hasSlotContent($slots.default)"
       :id="contentId"
       kind="body"
       :size="200"
@@ -30,7 +30,9 @@
       data-qa="notice-content-message"
     >
       <!-- @slot Slot for main content -->
-      <slot />
+      <slot>
+        {{ message }}
+      </slot>
     </dt-text>
   </div>
 </template>
@@ -50,6 +52,16 @@ export default {
      * Can also be overridden with the header slot.
      */
     headerText: {
+      type: String,
+      default: undefined,
+    },
+
+    /**
+     * The main textual content of the notice. Rendered as the fallback of the default slot so
+     * that, like headerText, an absent or empty value leaves the slot empty and the message
+     * paragraph is not rendered at all.
+     */
+    message: {
       type: String,
       default: undefined,
     },
