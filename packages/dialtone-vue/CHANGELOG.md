@@ -1,3 +1,17 @@
+# [3.225.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0-next.1...dialtone-vue/v3.225.0-next.2) (2026-08-13)
+
+
+### Bug Fixes
+
+* **Dialtone Vue:** DP-203134 hide empty message paragraph in DtNoticeContent ([#1390](https://github.com/dialpad/dialtone/issues/1390)) ([1e0810c](https://github.com/dialpad/dialtone/commit/1e0810c802a3523d328a5a7b61074daf05863b5b))
+* **Mode Island:** NO-JIRA fix tag order on Mode Island story ([#1389](https://github.com/dialpad/dialtone/issues/1389)) ([7a4d73a](https://github.com/dialpad/dialtone/commit/7a4d73a8853d89b72dc99dc7e0c2e78cd33dd0af))
+* **Popover:** NO-JIRA don't hide dialog from assistive tech while it still holds focus on close ([#1392](https://github.com/dialpad/dialtone/issues/1392)) ([f871496](https://github.com/dialpad/dialtone/commit/f8714962c60740f3eef58f9ab95c82f742ff404b))
+
+
+### Features
+
+* **Notice, Toast:** NO-JIRA pretty wrap headline ([#1393](https://github.com/dialpad/dialtone/issues/1393)) ([7a36b89](https://github.com/dialpad/dialtone/commit/7a36b89f861b1b7ef1c722a54f76d51e94dce147))
+
 # [3.225.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.224.0...dialtone-vue/v3.225.0-next.1) (2026-08-10)
 
 
