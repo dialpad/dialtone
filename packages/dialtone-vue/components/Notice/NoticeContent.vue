@@ -9,6 +9,7 @@
       kind="headline"
       :size="300"
       density="200"
+      wrap="pretty"
       as="p"
       :class="['d-notice__title', headerClass]"
       data-qa="notice-content-title"
