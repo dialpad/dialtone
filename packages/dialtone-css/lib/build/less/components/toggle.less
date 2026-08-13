@@ -151,8 +151,11 @@
   //  $$  FOCUSED TOGGLE
   //  ----------------------------------------------------------------------------
   &:focus-visible {
-    outline: none;
-    box-shadow: var(--dt-shadow-focus);
+    box-shadow: none;
+
+    &::after {
+      box-shadow: var(--dt-shadow-focus);
+    }
   }
 
   //  $$  DISABLED TOGGLE
