@@ -54,7 +54,7 @@
         }"
         :role="role"
         :data-qa="$attrs['data-qa'] ? `${$attrs['data-qa']}__dialog` : 'dt-popover'"
-        :aria-hidden="`${!isOpen}`"
+        :aria-hidden="`${isDialogAriaHidden}`"
         :aria-labelledby="labelledBy"
         :aria-label="ariaLabel"
         :aria-modal="`${!modal}`"
@@ -640,6 +640,9 @@ export default {
       mutationObserver: null,
       isOutsideViewport: false,
       isOpen: false,
+      // Only true once the leave transition (and any focus restoration in onLeaveTransitionComplete) has
+      // finished, so aria-hidden is never applied while the dialog still holds focus or is still visible.
+      isDialogAriaHidden: true,
       toAppear: false,
       anchorEl: null,
       popoverContentEl: null,
@@ -754,6 +757,7 @@ export default {
 
     isOpen (isOpen, isPrev) {
       if (isOpen) {
+        this.isDialogAriaHidden = false;
         this.initTippyInstance();
         this.tip?.show();
       } else if (!isOpen && isPrev !== isOpen) {
@@ -995,6 +999,9 @@ export default {
         this.enableScrolling();
       }
       if (this._isUnmounting) return;
+      // Focus has been moved off the dialog (or was never trapped in it) by this point, so it's now
+      // safe to hide it from assistive technology without triggering a focused-descendant violation.
+      this.isDialogAriaHidden = true;
       this.tip?.unmount();
       this.$emit('opened', false);
       if (this.open !== null) {
