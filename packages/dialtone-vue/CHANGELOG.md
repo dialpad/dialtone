@@ -1,3 +1,10 @@
+# [3.225.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0-next.2...dialtone-vue/v3.225.0-next.3) (2026-08-13)
+
+
+### Bug Fixes
+
+* **Notice, Toast:** DP-203134 render message paragraph only when there is a message ([#1394](https://github.com/dialpad/dialtone/issues/1394)) ([a112d6d](https://github.com/dialpad/dialtone/commit/a112d6d4d11cfb3d0f9b492250ac55eeb04e5d4e))
+
 # [3.225.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0-next.1...dialtone-vue/v3.225.0-next.2) (2026-08-13)
 
 
