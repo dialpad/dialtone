@@ -373,6 +373,29 @@ describe('DtPopover Tests', () => {
 
         expect(document.activeElement).toBe(last);
       });
+
+      it('does not mark the dialog aria-hidden merely because isOpen became false', () => {
+        // closePopover() flips isOpen synchronously; per the fix, that alone must not hide
+        // the dialog from assistive technology, since a descendant may still hold focus and
+        // the leave transition hasn't restored it yet. Only onLeaveTransitionComplete may do
+        // that, once focus has actually moved off the dialog.
+        expect(wrapper.vm.isDialogAriaHidden).toBe(false);
+
+        wrapper.vm.closePopover();
+
+        expect(wrapper.vm.isDialogAriaHidden).toBe(false);
+      });
+
+      it('marks the dialog aria-hidden only after onLeaveTransitionComplete restores focus', async () => {
+        const last = popoverWindow.find('[data-qa="trap-last"]').element;
+        last.focus();
+
+        wrapper.vm.closePopover();
+        await wrapper.vm.onLeaveTransitionComplete();
+
+        expect(document.activeElement).toBe(button.element);
+        expect(wrapper.vm.isDialogAriaHidden).toBe(true);
+      });
     });
 
     describe('When not modal', () => {
