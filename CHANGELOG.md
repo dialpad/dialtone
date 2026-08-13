@@ -1,3 +1,18 @@
+# [10.0.0-next.13](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.12...dialtone/v10.0.0-next.13) (2026-08-13)
+
+
+### Bug Fixes
+
+* **Dialtone Vue:** DP-203134 hide empty message paragraph in DtNoticeContent ([#1390](https://github.com/dialpad/dialtone/issues/1390)) ([1e0810c](https://github.com/dialpad/dialtone/commit/1e0810c802a3523d328a5a7b61074daf05863b5b))
+* **Mode Island:** NO-JIRA fix tag order on Mode Island story ([#1389](https://github.com/dialpad/dialtone/issues/1389)) ([7a4d73a](https://github.com/dialpad/dialtone/commit/7a4d73a8853d89b72dc99dc7e0c2e78cd33dd0af))
+* **Popover:** NO-JIRA don't hide dialog from assistive tech while it still holds focus on close ([#1392](https://github.com/dialpad/dialtone/issues/1392)) ([f871496](https://github.com/dialpad/dialtone/commit/f8714962c60740f3eef58f9ab95c82f742ff404b))
+
+
+### Features
+
+* **Icon:** DLT-3570 update `dialbot` and `dialpad-analytics-ai` to squircle ([#1391](https://github.com/dialpad/dialtone/issues/1391)) ([725fd81](https://github.com/dialpad/dialtone/commit/725fd8189f429e48faa3812cf99c389b800a8b9c))
+* **Notice, Toast:** NO-JIRA pretty wrap headline ([#1393](https://github.com/dialpad/dialtone/issues/1393)) ([7a36b89](https://github.com/dialpad/dialtone/commit/7a36b89f861b1b7ef1c722a54f76d51e94dce147))
+
 # [10.0.0-next.12](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.11...dialtone/v10.0.0-next.12) (2026-08-12)
 
 
