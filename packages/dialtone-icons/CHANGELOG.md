@@ -1,3 +1,10 @@
+# [4.57.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.57.0-next.1...dialtone-icons/v4.57.0-next.2) (2026-08-13)
+
+
+### Features
+
+* **Icon:** DLT-3570 update `dialbot` and `dialpad-analytics-ai` to squircle ([#1391](https://github.com/dialpad/dialtone/issues/1391)) ([725fd81](https://github.com/dialpad/dialtone/commit/725fd8189f429e48faa3812cf99c389b800a8b9c))
+
 # [4.57.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.56.0...dialtone-icons/v4.57.0-next.1) (2026-08-10)
 
 
