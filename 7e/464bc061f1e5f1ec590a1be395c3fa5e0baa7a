@@ -1,0 +1,21 @@
+packages/dialtone-vue/components/Notice/NoticeContent.test.js
+  s_d3197e9f60dc10::t_c292b816690559 67-82
+packages/dialtone-vue/components/Notice/NoticeContent.vue
+  s_d3197e9f60dc10::t_1f8b0ec3a1b70a 22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "7e464bc061f1e5f1ec590a1be395c3fa5e0baa7a",
+  "prompts": {},
+  "sessions": {
+    "s_d3197e9f60dc10": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ac1b0886-fd42-4967-bff8-23132ca58d6d",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "belumontoya <163597542+belumontoya@users.noreply.github.com>"
+    }
+  }
+}
