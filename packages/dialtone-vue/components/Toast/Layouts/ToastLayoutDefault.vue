@@ -25,6 +25,7 @@
         :header-id="headerId"
         :content-id="contentId"
         :header-text="headerText"
+        :message="message"
         :header-class="headerClass"
         :content-class="contentClass"
         :role="role"
@@ -35,9 +36,7 @@
           <slot name="header" />
         </template>
         <!-- @slot the main textual content of the toast -->
-        <slot>
-          {{ message }}
-        </slot>
+        <slot />
       </dt-notice-content>
       <dt-notice-action
         :show-action="showAction"
