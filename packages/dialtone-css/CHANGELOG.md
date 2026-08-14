@@ -1,3 +1,10 @@
+# [8.81.0-next.13](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.81.0-next.12...dialtone-css/v8.81.0-next.13) (2026-08-14)
+
+
+### Bug Fixes
+
+* **Checkbox, Radio, Toggle:** DLT-3571 improve focus style ([#1395](https://github.com/dialpad/dialtone/issues/1395)) ([4fe1a25](https://github.com/dialpad/dialtone/commit/4fe1a255403a6b9c8e2e373b5065de22dcaea954))
+
 # [8.81.0-next.12](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.81.0-next.11...dialtone-css/v8.81.0-next.12) (2026-08-12)
 
 
