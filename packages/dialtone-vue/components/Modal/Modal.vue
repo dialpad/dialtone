@@ -15,6 +15,7 @@
         modalClass,
       ]"
       data-qa="dt-modal"
+      aria-modal="true"
       :aria-describedby="describedById || undefined"
       :aria-labelledby="labelledById"
       v-bind="modeAttrs"
@@ -146,6 +147,33 @@ import { DialtoneLocalization } from '@/localization';
 
 const focusableSelector = 'button:not(:disabled),[href],input:not(:disabled),select:not(:disabled),' +
   'textarea:not(:disabled),details,[tabindex]:not([tabindex="-1"]):not(:disabled):not([aria-disabled="true"])';
+
+/**
+ * How many open dialogs currently need each element to stay inert. Shared across
+ * instances so stacked dialogs cannot clear inertness another one still needs,
+ * whichever order they close in.
+ */
+const inertClaims = new WeakMap();
+
+function claimInert (el) {
+  const claim = inertClaims.get(el);
+  if (claim) {
+    claim.count++;
+    return;
+  }
+  // Remember state owned by something other than a dialog so it survives release.
+  inertClaims.set(el, { count: 1, wasInert: !!el.inert });
+  el.inert = true;
+}
+
+function releaseInert (el) {
+  const claim = inertClaims.get(el);
+  if (!claim) return;
+  claim.count--;
+  if (claim.count > 0) return;
+  el.inert = claim.wasInert;
+  inertClaims.delete(el);
+}
 
 /**
  * Modals focus the user's attention exclusively on one task or piece of information
@@ -370,6 +398,23 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * When true, the dialog opens with showModal(), which promotes it to the browser
+     * top layer. Nothing outside the top layer can paint above it regardless of
+     * z-index, so application surfaces such as toasts and call notifications end up
+     * behind it. When false, it opens with show() and stays in the normal stacking
+     * order, where the Dialtone z-index scale applies and --zi-notification (700)
+     * outranks --zi-modal (600) as documented.
+     *
+     * Focus trapping, background inertness, scroll locking and Esc-to-close behave
+     * identically in both modes; only top-layer promotion differs.
+     * @values true, false
+     */
+    modal: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -450,6 +495,8 @@ export default {
       dialogEl.close();
       enableRootScrolling(this.getScrollRoot());
     }
+    // Unconditional: leaking inert onto the page would leave the app unusable.
+    this.releaseBackgroundInert();
     this.previousActiveElement = null;
   },
 
@@ -465,14 +512,63 @@ export default {
       if (isShowing) {
         this.previousActiveElement = document.activeElement;
         if (!dialogEl.open) {
-          dialogEl.showModal();
+          // show() leaves the dialog in the normal stacking order instead of the
+          // top layer, where the z-index scale still applies.
+          if (this.modal) dialogEl.showModal(); else dialogEl.show();
+        }
+        if (!this.modal) {
+          // The browser only makes the page inert for top-layer dialogs, so that is
+          // reproduced here. Re-applied on every show rather than only on open:
+          // reopening before the leave transition finishes leaves the dialog open,
+          // skipping the branch above, while inertness has already been released.
+          this.applyBackgroundInert();
         }
         disableRootScrolling(this.getScrollRoot());
       } else if (dialogEl.open) {
         // Leave transition plays via v-show on inner content.
         // close() is called in onAfterLeave when transition completes.
+        this.releaseBackgroundInert();
         enableRootScrolling(this.getScrollRoot());
       }
+    },
+
+    /**
+     * Marks everything outside the dialog inert while it is open, mirroring what the
+     * browser does for a modal dialog in the top layer.
+     */
+    applyBackgroundInert () {
+      const dialogEl = returnFirstEl(this.$refs.dialogEl);
+      if (!dialogEl) return;
+
+      // Idempotent: drop any claims from a previous open before taking new ones,
+      // so repeated calls cannot orphan a claim and leak inert onto the page.
+      this.releaseBackgroundInert();
+
+      const root = dialogEl.getRootNode();
+      const container = root === document ? document.body : root;
+      this.inertedElements = [];
+
+      // The dialog is only teleported when appendTo or a shadow root is in play, so
+      // by default it renders wherever the consumer placed it. Walking up and
+      // inerting the siblings at every level is what reaches the elements between
+      // the dialog and the container; only its own ancestor chain stays reachable.
+      let node = dialogEl;
+      while (node && node !== container) {
+        const parent = node.parentNode;
+        if (!parent?.children) break;
+        [...parent.children].forEach((el) => {
+          if (el === node) return;
+          claimInert(el);
+          this.inertedElements.push(el);
+        });
+        node = parent;
+      }
+    },
+
+    /** Gives up this dialog's claim on the elements it inerted. */
+    releaseBackgroundInert () {
+      this.inertedElements?.forEach(releaseInert);
+      this.inertedElements = [];
     },
 
     close () {
@@ -487,6 +583,14 @@ export default {
     },
 
     onKeydown (event) {
+      // The native cancel event only fires for dialogs opened with showModal(), so
+      // Esc has to be handled explicitly to keep dismissal identical in both modes.
+      // defaultPrevented means a nested widget (dropdown, combobox) already consumed
+      // it to close itself, and the modal must not close out from under it.
+      if (!this.modal && event.key === 'Escape' && !event.defaultPrevented) {
+        event.preventDefault();
+        this.close();
+      }
       this.$emit('keydown', event);
     },
 
@@ -500,6 +604,7 @@ export default {
       if (dialogEl?.open) {
         dialogEl.close();
       }
+      this.releaseBackgroundInert();
       this.previousActiveElement?.focus();
       this.previousActiveElement = null;
     },
