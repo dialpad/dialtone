@@ -30,6 +30,9 @@ beforeAll(() => {
   HTMLDialogElement.prototype.showModal = vi.fn(function () {
     this.setAttribute('open', '');
   });
+  HTMLDialogElement.prototype.show = vi.fn(function () {
+    this.setAttribute('open', '');
+  });
   HTMLDialogElement.prototype.close = vi.fn(function () {
     this.removeAttribute('open');
   });
@@ -37,6 +40,7 @@ beforeAll(() => {
 
 afterAll(() => {
   delete HTMLDialogElement.prototype.showModal;
+  delete HTMLDialogElement.prototype.show;
   delete HTMLDialogElement.prototype.close;
 });
 
@@ -114,8 +118,127 @@ describe('DtModal Tests', () => {
       expect(banner.classes(MODAL_BANNER_KINDS[DtModal.props.bannerKind.default])).toBe(true);
     });
 
-    it('Should call showModal when show is true', () => {
-      expect(overlay.element.showModal).toHaveBeenCalled();
+    it('Should open without entering the top layer when show is true', () => {
+      expect(overlay.element.show).toHaveBeenCalled();
+      expect(overlay.element.showModal).not.toHaveBeenCalled();
+    });
+
+    it('Should make the rest of the page inert while open', () => {
+      const sibling = [...document.body.children].find(el => !el.contains(overlay.element));
+      expect(sibling?.inert).toBe(true);
+    });
+
+    it('Should inert siblings between the dialog and the body, not just body children', () => {
+      // The dialog only teleports when appendTo or a shadow root is set, so by
+      // default it renders in place and background content sits below body level.
+      const host = document.createElement('div');
+      const background = document.createElement('button');
+      host.appendChild(background);
+      overlay.element.parentNode.appendChild(host);
+
+      wrapper.vm.releaseBackgroundInert();
+      wrapper.vm.applyBackgroundInert();
+
+      expect(host.inert).toBe(true);
+
+      wrapper.vm.releaseBackgroundInert();
+      host.remove();
+    });
+
+    it('Should keep an element inert until every dialog holding it has released it', () => {
+      const background = document.createElement('div');
+      document.body.appendChild(background);
+
+      const second = mount(DtModal, {
+        props: { ...baseProps },
+        global: { plugins: [DtFocustrapDirective] },
+        attachTo: document.body,
+      });
+
+      expect(background.inert).toBe(true);
+
+      // The outer dialog closing first must not release what the inner one still holds.
+      wrapper.vm.releaseBackgroundInert();
+      expect(background.inert).toBe(true);
+
+      second.unmount();
+      expect(background.inert).toBe(false);
+
+      background.remove();
+    });
+
+    it('Should keep the background inert when reopened before the leave transition finishes', async () => {
+      const background = [...document.body.children].find(el => !el.contains(overlay.element));
+
+      // close() only runs in onAfterLeave, so the dialog is still open at this point.
+      await wrapper.setProps({ open: false });
+      await wrapper.setProps({ open: true });
+
+      expect(background?.inert).toBe(true);
+    });
+
+    it('Should not close on Escape when a nested widget already handled it', async () => {
+      // Models a dropdown or combobox inside the modal closing its own popup on
+      // Escape: it calls preventDefault but lets the event keep bubbling.
+      const nested = document.createElement('button');
+      overlay.element.appendChild(nested);
+      nested.addEventListener('keydown', event => event.preventDefault());
+
+      const before = wrapper.emitted(SYNC_EVENT_NAME)?.length ?? 0;
+      nested.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }));
+      await flushPromises();
+
+      expect(wrapper.emitted(SYNC_EVENT_NAME)?.length ?? 0).toBe(before);
+      nested.remove();
+    });
+
+    it('Should not leave a newly opened dialog inert behind an earlier one', async () => {
+      // Both must already be in the DOM before the first opens, otherwise the
+      // second simply misses that pass and is never inerted in the first place.
+      const mountClosed = () => mount(DtModal, {
+        props: { ...baseProps, open: false },
+        global: { plugins: [DtFocustrapDirective] },
+        attachTo: document.body,
+      });
+      const first = mountClosed();
+      const second = mountClosed();
+
+      await first.setProps({ open: true });
+      await second.setProps({ open: true });
+
+      const secondDialog = second.find('[data-qa="dt-modal"]').element;
+      const inertAncestors = [];
+      for (let node = secondDialog; node && node !== document.body; node = node.parentElement) {
+        if (node.inert) inertAncestors.push(node.tagName);
+      }
+
+      expect(inertAncestors).toEqual([]);
+      first.unmount();
+      second.unmount();
+    });
+
+    it('Should close on Escape even though the native cancel event does not fire', async () => {
+      await overlay.trigger('keydown', { key: 'Escape' });
+
+      expect(wrapper.emitted('update:open').at(-1)).toEqual([false]);
+    });
+
+    describe('When modal prop is true', () => {
+      beforeEach(async () => {
+        mockProps = { ...mockProps, modal: true };
+
+        // The outer beforeEach already mounted a default (non-modal) instance, whose
+        // show() call would otherwise still be recorded on the shared prototype mock.
+        vi.clearAllMocks();
+        updateWrapper();
+      });
+
+      // Inertness is not asserted here: for a top-layer dialog the browser provides
+      // it, and JSDOM implements neither the top layer nor its inertness.
+      it('Should enter the top layer via showModal', () => {
+        expect(overlay.element.showModal).toHaveBeenCalled();
+        expect(overlay.element.show).not.toHaveBeenCalled();
+      });
     });
 
     describe('When fullscreen prop is true', () => {
