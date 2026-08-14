@@ -192,7 +192,7 @@ describe('DtModal Tests', () => {
       nested.remove();
     });
 
-    it('Should not leave a newly opened dialog inert behind an earlier one', () => {
+    it('Should not leave a newly opened dialog inert behind an earlier one', async () => {
       // Both must already be in the DOM before the first opens, otherwise the
       // second simply misses that pass and is never inerted in the first place.
       const mountClosed = () => mount(DtModal, {
@@ -203,10 +203,8 @@ describe('DtModal Tests', () => {
       const first = mountClosed();
       const second = mountClosed();
 
-      first.vm.$props.open = true;
-      first.vm.syncDialogState(true);
-      second.vm.$props.open = true;
-      second.vm.syncDialogState(true);
+      await first.setProps({ open: true });
+      await second.setProps({ open: true });
 
       const secondDialog = second.find('[data-qa="dt-modal"]').element;
       const inertAncestors = [];
