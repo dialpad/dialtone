@@ -3,6 +3,76 @@ layout: Blank
 ---
 
 <dt-stack class="d-p-400 d-bgc-primary" gap="400">
+  <dt-stack gap="100">
+    <dt-box>
+      <dt-toggle label-class="d-pie-100" size="200">Label</dt-toggle>
+    </dt-box>
+    <dt-stack direction="row" gap="100" align="start">
+      <dt-box>
+        <dt-input
+          label="Label"
+          placeholder="Placeholder"
+        />
+      </dt-box>
+      <dt-box>
+        <dt-select-menu
+          :options="[
+                { value: ``, label: `Please select one` },
+                { value: `1`, label: `Option 1` },
+                { value: `2`, label: `Option 2` },
+                { value: `3`, label: `Option 3` },
+              ]"
+          label="Label"
+          :model-value="modelValue"
+          @update:model-value="onInput"
+        />
+      </dt-box>
+    </dt-stack>
+    <dt-box>
+      <dt-stack gap="100">
+        <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
+          <dt-button :disabled="isDisabled"> Place Call </dt-button>
+          <dt-button :disabled="isDisabled" importance="outlined"> Place Call </dt-button>
+          <dt-button :disabled="isDisabled" importance="clear"> Place Call </dt-button>
+        </dt-stack>
+        <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
+          <dt-button :disabled="isDisabled" kind="critical"> Place Call </dt-button>
+          <dt-button :disabled="isDisabled" kind="critical" importance="outlined"> Place Call </dt-button>
+          <dt-button :disabled="isDisabled" kind="critical" importance="clear"> Place Call </dt-button>
+        </dt-stack>
+        <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
+          <dt-button :disabled="isDisabled" kind="positive">Place Call</dt-button>
+          <dt-button :disabled="isDisabled" kind="positive" importance="outlined">Place Call</dt-button>
+          <dt-button :disabled="isDisabled" kind="positive" importance="clear">Place Call</dt-button>
+        </dt-stack>
+        <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
+          <dt-button :disabled="isDisabled" kind="muted" importance="clear"> Place Call </dt-button>
+          <dt-button :disabled="isDisabled" kind="muted" importance="outlined"> Place Call </dt-button>
+        </dt-stack>
+      </dt-stack>
+    </dt-box>
+    <dt-box>
+      <dt-checkbox-group
+        name="fruits-checkbox-group"
+        legend="Fruits"
+      >
+        <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>
+        <dt-checkbox value="banana" checked><span>Banana</span></dt-checkbox>
+        <dt-checkbox value="orange"><span>Orange</span></dt-checkbox>
+        <dt-checkbox value="other" indeterminate><span>Other</span></dt-checkbox>
+      </dt-checkbox-group>
+    </dt-box>
+    <dt-box>
+      <dt-radio-group
+        name="fruits-radio-group"
+        legend="Fruits"
+      >
+        <dt-radio checked value="apple"><span>Apple</span></dt-radio>
+        <dt-radio value="banana"><span>Banana</span></dt-radio>
+        <dt-radio value="other"><span>Other</span></dt-radio>
+      </dt-radio-group>
+    </dt-box>
+  </dt-stack>
   <dt-stack direction="row" gap="100">
     <dt-text as="h1" kind="headline" :size="600">
       Scratchpad
