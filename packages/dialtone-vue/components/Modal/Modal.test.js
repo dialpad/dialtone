@@ -140,6 +140,13 @@ describe('DtModal Tests', () => {
       overlaySurface.remove();
     });
 
+    it('Should not claim aria-modal when the page outside stays reachable', () => {
+      // aria-modal="true" tells assistive technology to ignore everything outside
+      // the dialog. Claiming it while the page is deliberately left reachable would
+      // block screen reader users from the very overlays this mode exists to serve.
+      expect(overlay.attributes('aria-modal')).toBeUndefined();
+    });
+
     it('Should not close on Escape when a nested widget already handled it', async () => {
       // Models a dropdown or combobox inside the modal closing its own popup on
       // Escape: it calls preventDefault but lets the event keep bubbling.
@@ -177,6 +184,10 @@ describe('DtModal Tests', () => {
       it('Should enter the top layer via showModal', () => {
         expect(overlay.element.showModal).toHaveBeenCalled();
         expect(overlay.element.show).not.toHaveBeenCalled();
+      });
+
+      it('Should claim aria-modal, since the browser does make the page inert', () => {
+        expect(overlay.attributes('aria-modal')).toBe('true');
       });
     });
 

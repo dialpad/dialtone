@@ -15,7 +15,7 @@
         modalClass,
       ]"
       data-qa="dt-modal"
-      aria-modal="true"
+      :aria-modal="modal ? 'true' : undefined"
       :aria-describedby="describedById || undefined"
       :aria-labelledby="labelledById"
       v-bind="modeAttrs"
