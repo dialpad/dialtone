@@ -123,58 +123,21 @@ describe('DtModal Tests', () => {
       expect(overlay.element.showModal).not.toHaveBeenCalled();
     });
 
-    it('Should make the rest of the page inert while open', () => {
-      const sibling = [...document.body.children].find(el => !el.contains(overlay.element));
-      expect(sibling?.inert).toBe(true);
-    });
+    it('Should leave the page outside the dialog reachable while open', () => {
+      // An application overlay rendered as a sibling of the dialog — a toast, or a
+      // call notification with its own controls — has to stay interactive, which is
+      // the whole reason this mode exists. Marking it inert would render it visible
+      // but dead, which is the failure this asserts against.
+      const overlaySurface = document.createElement('div');
+      const action = document.createElement('button');
+      overlaySurface.appendChild(action);
+      overlay.element.parentNode.appendChild(overlaySurface);
 
-    it('Should inert siblings between the dialog and the body, not just body children', () => {
-      // The dialog only teleports when appendTo or a shadow root is set, so by
-      // default it renders in place and background content sits below body level.
-      const host = document.createElement('div');
-      const background = document.createElement('button');
-      host.appendChild(background);
-      overlay.element.parentNode.appendChild(host);
+      expect(overlaySurface.inert).toBeFalsy();
+      expect(action.inert).toBeFalsy();
+      expect([...document.body.children].some(el => el.inert)).toBe(false);
 
-      wrapper.vm.releaseBackgroundInert();
-      wrapper.vm.applyBackgroundInert();
-
-      expect(host.inert).toBe(true);
-
-      wrapper.vm.releaseBackgroundInert();
-      host.remove();
-    });
-
-    it('Should keep an element inert until every dialog holding it has released it', () => {
-      const background = document.createElement('div');
-      document.body.appendChild(background);
-
-      const second = mount(DtModal, {
-        props: { ...baseProps },
-        global: { plugins: [DtFocustrapDirective] },
-        attachTo: document.body,
-      });
-
-      expect(background.inert).toBe(true);
-
-      // The outer dialog closing first must not release what the inner one still holds.
-      wrapper.vm.releaseBackgroundInert();
-      expect(background.inert).toBe(true);
-
-      second.unmount();
-      expect(background.inert).toBe(false);
-
-      background.remove();
-    });
-
-    it('Should keep the background inert when reopened before the leave transition finishes', async () => {
-      const background = [...document.body.children].find(el => !el.contains(overlay.element));
-
-      // close() only runs in onAfterLeave, so the dialog is still open at this point.
-      await wrapper.setProps({ open: false });
-      await wrapper.setProps({ open: true });
-
-      expect(background?.inert).toBe(true);
+      overlaySurface.remove();
     });
 
     it('Should not close on Escape when a nested widget already handled it', async () => {
@@ -192,30 +155,6 @@ describe('DtModal Tests', () => {
       nested.remove();
     });
 
-    it('Should not leave a newly opened dialog inert behind an earlier one', async () => {
-      // Both must already be in the DOM before the first opens, otherwise the
-      // second simply misses that pass and is never inerted in the first place.
-      const mountClosed = () => mount(DtModal, {
-        props: { ...baseProps, open: false },
-        global: { plugins: [DtFocustrapDirective] },
-        attachTo: document.body,
-      });
-      const first = mountClosed();
-      const second = mountClosed();
-
-      await first.setProps({ open: true });
-      await second.setProps({ open: true });
-
-      const secondDialog = second.find('[data-qa="dt-modal"]').element;
-      const inertAncestors = [];
-      for (let node = secondDialog; node && node !== document.body; node = node.parentElement) {
-        if (node.inert) inertAncestors.push(node.tagName);
-      }
-
-      expect(inertAncestors).toEqual([]);
-      first.unmount();
-      second.unmount();
-    });
 
     it('Should close on Escape even though the native cancel event does not fire', async () => {
       await overlay.trigger('keydown', { key: 'Escape' });
