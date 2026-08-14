@@ -1,3 +1,15 @@
+# [10.0.0-next.15](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.14...dialtone/v10.0.0-next.15) (2026-08-14)
+
+
+### Bug Fixes
+
+* **Checkbox, Radio, Toggle:** DLT-3571 improve focus style ([#1395](https://github.com/dialpad/dialtone/issues/1395)) ([4fe1a25](https://github.com/dialpad/dialtone/commit/4fe1a255403a6b9c8e2e373b5065de22dcaea954))
+
+
+### Features
+
+* **Modal:** NO-JIRA add modal prop to keep dialogs out of the browser top layer ([#1396](https://github.com/dialpad/dialtone/issues/1396)) ([8d28ebc](https://github.com/dialpad/dialtone/commit/8d28ebc08973d53626e64ccde2f6a82f84a73bd1))
+
 # [10.0.0-next.14](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.13...dialtone/v10.0.0-next.14) (2026-08-13)
 
 
