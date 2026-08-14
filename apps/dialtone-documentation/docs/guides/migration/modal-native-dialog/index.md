@@ -67,7 +67,7 @@ If you targeted `.d-modal[aria-hidden='false']` in your CSS, those selectors sti
 ### Focus management
 
 - **Focus trapping** — while the modal is open, keyboard focus stays inside the dialog: Tab from the last focusable element wraps to the first, and Shift+Tab from the first wraps to the last. This is enforced by the `v-dt-focustrap` directive, independently of `modal`.
-- **Background inertness** — everything outside the dialog is inert while it is open. With `modal` set, the browser provides this; otherwise `DtModal` applies `inert` itself, walking up from the dialog and marking siblings at each level. Behaviour is the same either way.
+- **Background inertness** — only the top layer provides this, so it applies when `modal` is set and not otherwise. Without it the page outside the dialog stays reachable, which is deliberate: see [Top layer and the `modal` prop](#top-layer-and-the-modal-prop).
 - **Escape key** — pressing Escape closes the modal. The native `cancel` event only fires for top-layer dialogs, so it is used when `modal` is `true` and a keydown handler covers the default case.
 - **Initial focus** still works via the `initialFocusElement` prop (`'first'`, `'#id'`, or an `HTMLElement`).
 
@@ -87,12 +87,12 @@ That broke Dialtone's own published contract: `--zi-notification` (700) is defin
 <dt-modal :open="open" modal header-text="Confirm deletion" />
 ```
 
-Dim overlay, positioning, focus trap, background inertness, scroll lock and Escape all behave the same in both modes. Most of them are DtModal's own work regardless of the prop — focus trapping comes from `v-dt-focustrap`, scroll locking from `disableRootScrolling()`, and the dim from `.d-modal`'s own background. Only two things change hands: top-layer promotion, and who applies background inertness. Two consequences follow:
+Dim overlay, positioning, focus trap and scroll lock are DtModal's own work regardless of the prop — focus trapping comes from `v-dt-focustrap`, scroll locking from `disableRootScrolling()`, and the dim from `.d-modal`'s own background — so the modal looks and behaves the same either way. Two things do differ:
 
-- **Background inertness is applied when the dialog opens, not continuously.** Content inserted into the background *after* that point is not inerted. For the surfaces this mode exists to serve — toasts, notifications — that is the intent. For late-mounting application chrome it is a gap the top layer would not have.
+- **The background is not inert, and `aria-modal` is not set.** Only the top layer makes the rest of the page inert, so with `modal` unset it stays reachable — and `aria-modal="true"` is omitted to match, since claiming it would tell assistive technology to ignore the very overlays this mode exists to serve. This is the point of the mode, not an oversight: an application overlay rendered above a modal has to be usable, and a call notification you can see but cannot answer is worse than one hidden behind the modal. Keyboard focus is still contained by the focus trap; what remains reachable is pointer and assistive-technology access to the rest of the page. Pass `modal` if you need the page fully sealed — you then get the browser's inertness and `aria-modal="true"` together.
 - **Escape is handled on `keydown` rather than the native `cancel` event**, and is skipped when a nested widget has already called `preventDefault()` on it, so a dropdown inside the modal closes itself first without taking the modal with it.
 
-**Use `modal` when** the dialog must out-rank another top-layer element, such as a `<dialog>` opened by a third-party library or a fullscreen element.
+**Use `modal` when** the dialog must out-rank another top-layer element — a `<dialog>` opened by a third-party library, or a fullscreen element — or when the rest of the page must genuinely be inert while it is open.
 
 **Leave it off when** your application has overlays of its own — toasts, call notifications, update banners — that need to reach the user while a modal is open.
 
