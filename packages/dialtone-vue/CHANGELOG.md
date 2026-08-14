@@ -1,3 +1,10 @@
+# [3.225.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0-next.3...dialtone-vue/v3.225.0-next.4) (2026-08-14)
+
+
+### Features
+
+* **Modal:** NO-JIRA add modal prop to keep dialogs out of the browser top layer ([#1396](https://github.com/dialpad/dialtone/issues/1396)) ([8d28ebc](https://github.com/dialpad/dialtone/commit/8d28ebc08973d53626e64ccde2f6a82f84a73bd1))
+
 # [3.225.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0-next.2...dialtone-vue/v3.225.0-next.3) (2026-08-13)
 
 
