@@ -1,3 +1,10 @@
+# [10.0.0-next.16](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.15...dialtone/v10.0.0-next.16) (2026-08-14)
+
+
+### Bug Fixes
+
+* **Modal:** NO-JIRA stop inerting the background when the dialog is not modal ([#1397](https://github.com/dialpad/dialtone/issues/1397)) ([ab9b823](https://github.com/dialpad/dialtone/commit/ab9b823d28963ce729d3009fdaa00dee13b0115f))
+
 # [10.0.0-next.15](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.14...dialtone/v10.0.0-next.15) (2026-08-14)
 
 
