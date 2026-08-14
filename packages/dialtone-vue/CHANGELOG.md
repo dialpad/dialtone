@@ -1,3 +1,10 @@
+# [3.225.0-next.5](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0-next.4...dialtone-vue/v3.225.0-next.5) (2026-08-14)
+
+
+### Bug Fixes
+
+* **Modal:** NO-JIRA stop inerting the background when the dialog is not modal ([#1397](https://github.com/dialpad/dialtone/issues/1397)) ([ab9b823](https://github.com/dialpad/dialtone/commit/ab9b823d28963ce729d3009fdaa00dee13b0115f))
+
 # [3.225.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0-next.3...dialtone-vue/v3.225.0-next.4) (2026-08-14)
 
 
