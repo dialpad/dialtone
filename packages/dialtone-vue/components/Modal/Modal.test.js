@@ -192,6 +192,33 @@ describe('DtModal Tests', () => {
       nested.remove();
     });
 
+    it('Should not leave a newly opened dialog inert behind an earlier one', () => {
+      // Both must already be in the DOM before the first opens, otherwise the
+      // second simply misses that pass and is never inerted in the first place.
+      const mountClosed = () => mount(DtModal, {
+        props: { ...baseProps, open: false },
+        global: { plugins: [DtFocustrapDirective] },
+        attachTo: document.body,
+      });
+      const first = mountClosed();
+      const second = mountClosed();
+
+      first.vm.$props.open = true;
+      first.vm.syncDialogState(true);
+      second.vm.$props.open = true;
+      second.vm.syncDialogState(true);
+
+      const secondDialog = second.find('[data-qa="dt-modal"]').element;
+      const inertAncestors = [];
+      for (let node = secondDialog; node && node !== document.body; node = node.parentElement) {
+        if (node.inert) inertAncestors.push(node.tagName);
+      }
+
+      expect(inertAncestors).toEqual([]);
+      first.unmount();
+      second.unmount();
+    });
+
     it('Should close on Escape even though the native cancel event does not fire', async () => {
       await overlay.trigger('keydown', { key: 'Escape' });
 

@@ -112,7 +112,7 @@ Most likely **no**. These are internal implementation changes. You are affected 
 
 1. **Target `.d-modal__backdrop` or other internal class selectors** in your CSS — review and update those selectors.
 2. **Apply `::backdrop` pseudo-element styles** — the native backdrop is now transparent; the `.d-modal` element is the visual overlay.
-3. **Had custom `focusin` or `keydown.tab` handlers** wired around the old DOM structure — focus trapping is now handled by the native `<dialog>` together with the `v-dt-focustrap` directive, and Escape via the native `cancel` event.
+3. **Had custom `focusin` or `keydown.tab` handlers** wired around the old DOM structure — focus trapping is now handled by the `v-dt-focustrap` directive. Escape is handled on `keydown` by default, and via the native `cancel` event only when `modal` is set.
 4. **Relied on `DtLazyShow` transition events** wrapping the dialog — those no longer fire.
 5. **Relied on `appendTo="body"` for popovers/tooltips inside modals** to append to `<body>` — they now append to the `<dialog>`. Pass `document.body` explicitly if you need the old behavior.
 6. **Depend on the modal out-ranking another top-layer element** — a `<dialog>` from a third-party library, or a fullscreen element. Pass `modal` to opt back into the top layer.

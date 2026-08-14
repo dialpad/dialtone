@@ -149,30 +149,57 @@ const focusableSelector = 'button:not(:disabled),[href],input:not(:disabled),sel
   'textarea:not(:disabled),details,[tabindex]:not([tabindex="-1"]):not(:disabled):not([aria-disabled="true"])';
 
 /**
- * How many open dialogs currently need each element to stay inert. Shared across
- * instances so stacked dialogs cannot clear inertness another one still needs,
- * whichever order they close in.
+ * Open non-modal dialogs, oldest first, shared across instances. Only the topmost
+ * one decides what is inert, which mirrors the browser: a dialog stacked above
+ * another leaves the one below inert too, and whichever closes first the result is
+ * recomputed from the remaining stack rather than unwound per instance.
  */
-const inertClaims = new WeakMap();
+const openDialogs = [];
 
-function claimInert (el) {
-  const claim = inertClaims.get(el);
-  if (claim) {
-    claim.count++;
-    return;
+/** Elements we set inert, mapped to the value to restore when they are released. */
+const inertedByDialtone = new Map();
+
+function refreshInertForTopDialog () {
+  inertedByDialtone.forEach((wasInert, el) => { el.inert = wasInert; });
+  inertedByDialtone.clear();
+
+  const top = openDialogs[openDialogs.length - 1];
+  if (!top) return;
+
+  const root = top.getRootNode();
+  const container = root === document ? document.body : root;
+
+  // The dialog only teleports when appendTo or a shadow root is in play, so by
+  // default it renders wherever the consumer placed it. Walking up and inerting the
+  // siblings at every level is what reaches the elements between the dialog and the
+  // container; the dialog's own ancestor chain stays reachable.
+  let node = top;
+  while (node && node !== container) {
+    const parent = node.parentNode;
+    if (!parent?.children) break;
+    [...parent.children].forEach((el) => {
+      if (el === node || inertedByDialtone.has(el)) return;
+      inertedByDialtone.set(el, !!el.inert);
+      el.inert = true;
+    });
+    node = parent;
   }
-  // Remember state owned by something other than a dialog so it survives release.
-  inertClaims.set(el, { count: 1, wasInert: !!el.inert });
-  el.inert = true;
 }
 
-function releaseInert (el) {
-  const claim = inertClaims.get(el);
-  if (!claim) return;
-  claim.count--;
-  if (claim.count > 0) return;
-  el.inert = claim.wasInert;
-  inertClaims.delete(el);
+function pushOpenDialog (el) {
+  removeFromStack(el);
+  openDialogs.push(el);
+  refreshInertForTopDialog();
+}
+
+function removeOpenDialog (el) {
+  removeFromStack(el);
+  refreshInertForTopDialog();
+}
+
+function removeFromStack (el) {
+  const index = openDialogs.indexOf(el);
+  if (index !== -1) openDialogs.splice(index, 1);
 }
 
 /**
@@ -540,35 +567,15 @@ export default {
       const dialogEl = returnFirstEl(this.$refs.dialogEl);
       if (!dialogEl) return;
 
-      // Idempotent: drop any claims from a previous open before taking new ones,
-      // so repeated calls cannot orphan a claim and leak inert onto the page.
-      this.releaseBackgroundInert();
-
-      const root = dialogEl.getRootNode();
-      const container = root === document ? document.body : root;
-      this.inertedElements = [];
-
-      // The dialog is only teleported when appendTo or a shadow root is in play, so
-      // by default it renders wherever the consumer placed it. Walking up and
-      // inerting the siblings at every level is what reaches the elements between
-      // the dialog and the container; only its own ancestor chain stays reachable.
-      let node = dialogEl;
-      while (node && node !== container) {
-        const parent = node.parentNode;
-        if (!parent?.children) break;
-        [...parent.children].forEach((el) => {
-          if (el === node) return;
-          claimInert(el);
-          this.inertedElements.push(el);
-        });
-        node = parent;
-      }
+      // Becomes the topmost dialog, so inertness is recomputed around it. This also
+      // clears any inert an earlier dialog had applied to this one before it opened.
+      pushOpenDialog(dialogEl);
     },
 
     /** Gives up this dialog's claim on the elements it inerted. */
     releaseBackgroundInert () {
-      this.inertedElements?.forEach(releaseInert);
-      this.inertedElements = [];
+      const dialogEl = returnFirstEl(this.$refs.dialogEl);
+      if (dialogEl) removeOpenDialog(dialogEl);
     },
 
     close () {
