@@ -159,11 +159,23 @@ const openDialogs = [];
 /** Elements we set inert, mapped to the value to restore when they are released. */
 const inertedByDialtone = new Map();
 
+/**
+ * Drops dialogs torn out of the DOM without a teardown pass; a detached one must
+ * not keep deciding what the rest of the page can reach.
+ * @return {HTMLElement|undefined} the topmost dialog still in the document
+ */
+function topConnectedDialog () {
+  for (let i = openDialogs.length - 1; i >= 0; i--) {
+    if (!openDialogs[i].isConnected) openDialogs.splice(i, 1);
+  }
+  return openDialogs[openDialogs.length - 1];
+}
+
 function refreshInertForTopDialog () {
   inertedByDialtone.forEach((wasInert, el) => { el.inert = wasInert; });
   inertedByDialtone.clear();
 
-  const top = openDialogs[openDialogs.length - 1];
+  const top = topConnectedDialog();
   if (!top) return;
 
   const root = top.getRootNode();

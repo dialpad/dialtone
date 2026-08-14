@@ -10,7 +10,8 @@ description: DtModal now uses a native <dialog> element. This changes the DOM st
 - Focus stays trapped within the dialog and Escape closes it — handled by the `v-dt-focustrap` directive and DtModal's own key handling.
 - Popovers and tooltips inside modals now auto-append to the nearest `<dialog>`.
 - **The dialog no longer enters the browser top layer by default.** The new `modal` prop controls this and defaults to `false`, so surfaces such as toasts and notifications can render above a modal again via the z-index scale. See [Top layer and the `modal` prop](#top-layer-and-the-modal-prop).
-- We are **not** considering this a breaking change since consumers should not be targeting internal DOM structure. This guide is provided in case you are.
+- The **DOM structure changes** above are **not** considered breaking, since consumers should not be targeting internal DOM structure. This guide is provided in case you are.
+- The **`modal` default is a behaviour change**, not just an internal one: modals that previously entered the top layer no longer do unless you pass `modal`. Nothing needs to change for most consumers, but see [Do I Need to Do Anything?](#do-i-need-to-do-anything) for who is affected.
 
 ## What Changed
 
@@ -86,7 +87,7 @@ That broke Dialtone's own published contract: `--zi-notification` (700) is defin
 <dt-modal :open="open" modal header-text="Confirm deletion" />
 ```
 
-Dim overlay, positioning, focus trap, background inertness, scroll lock and Escape all behave the same in both modes. What differs is who provides them: with `modal` the browser does, and without it `DtModal` does. Two consequences are worth knowing:
+Dim overlay, positioning, focus trap, background inertness, scroll lock and Escape all behave the same in both modes. Most of them are DtModal's own work regardless of the prop — focus trapping comes from `v-dt-focustrap`, scroll locking from `disableRootScrolling()`, and the dim from `.d-modal`'s own background. Only two things change hands: top-layer promotion, and who applies background inertness. Two consequences follow:
 
 - **Background inertness is applied when the dialog opens, not continuously.** Content inserted into the background *after* that point is not inerted. For the surfaces this mode exists to serve — toasts, notifications — that is the intent. For late-mounting application chrome it is a gap the top layer would not have.
 - **Escape is handled on `keydown` rather than the native `cancel` event**, and is skipped when a nested widget has already called `preventDefault()` on it, so a dropdown inside the modal closes itself first without taking the modal with it.
