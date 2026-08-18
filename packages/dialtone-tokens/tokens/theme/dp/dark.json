@@ -146,8 +146,8 @@
         "$extensions": {
           "studio.tokens": {
             "modify": {
-              "type": "alpha",
-              "value": ".15",
+              "type": "lighten",
+              "value": ".33",
               "space": "oklch"
             }
           }
@@ -159,8 +159,8 @@
         "$extensions": {
           "studio.tokens": {
             "modify": {
-              "type": "alpha",
-              "value": ".25",
+              "type": "lighten",
+              "value": ".433",
               "space": "oklch"
             }
           }
@@ -168,6 +168,14 @@
       },
       "muted": {
         "value": "{color.black.700}",
+        "type": "color"
+      },
+      "info": {
+        "value": "{color.blue.700}",
+        "type": "color"
+      },
+      "info-hover": {
+        "value": "{color.blue.800}",
         "type": "color"
       }
     },
