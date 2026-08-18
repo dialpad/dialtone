@@ -3,6 +3,7 @@ apps/dialtone-documentation/docs/_data/site-nav.json
 packages/dialtone-vue/components/Slider/Slider.vue
   s_47197bf9a2952a::t_b359c1480aad15 509-519
   s_47197bf9a2952a::t_56e176352adcfa 214-230
+  s_18547bca72b16a::t_ff91b310f0d068 1-213,231-508,520-676
 packages/dialtone-vue/components/SliderAlt/index.js
   s_47197bf9a2952a::t_1e8f3bcb09f88c 1
 packages/dialtone-vue/components/SliderAlt/SliderAltVariants.story.vue
@@ -10,17 +11,20 @@ packages/dialtone-vue/components/SliderAlt/SliderAltVariants.story.vue
   s_47197bf9a2952a::t_668a1c489fdb0e 58-60,62-63,75-76
   s_47197bf9a2952a::t_80e707bdad3afc 61,64-74
   s_47197bf9a2952a::t_00481af5ce6a5e 274
+  s_18547bca72b16a::t_ff91b310f0d068 1-57,77-272,275-284
 packages/dialtone-vue/components/SliderAlt/SliderAlt.mdx
   s_47197bf9a2952a::t_a779538059f537 1-99
 packages/dialtone-vue/components/SliderAlt/SliderAlt.vue
   s_47197bf9a2952a::t_a146f6d102f4bb 219-235
   s_47197bf9a2952a::t_c8abc4f09ac042 535-552
+  s_18547bca72b16a::t_ff91b310f0d068 1-218,236-534,553-709
 packages/dialtone-vue/components/Slider/SliderVariants.story.vue
   s_47197bf9a2952a::t_371bbcd116fd97 345
   s_47197bf9a2952a::t_e630f8ff263b4c 145,148-158
   s_47197bf9a2952a::t_41d7e5962607a0 142-144,146-147,159-160
   s_47197bf9a2952a::t_c626ec44ecee05 346
   s_47197bf9a2952a::t_7314f8ec2e61d7 111
+  s_18547bca72b16a::t_ff91b310f0d068 1-110,112-141,161-344,347-357
 packages/dialtone-vue/components/SliderAlt/SliderAltConstants.ts
   s_47197bf9a2952a::t_7fb15683ef6124 1-14
 packages/dialtone-vue/package.json
@@ -30,8 +34,10 @@ packages/dialtone-vue/components/SliderAlt/SliderAlt.stories.js
   s_47197bf9a2952a::t_17202d3c15f276 117-130
   s_47197bf9a2952a::t_a9ad28fdaf4e1e 27
   s_47197bf9a2952a::t_5ba9d031aa486c 26
+  s_18547bca72b16a::t_ff91b310f0d068 1-25,28-116,131-200,210-291
 apps/dialtone-documentation/docs/components/slider.md
   s_47197bf9a2952a::t_99d2c029f9ce7b 149-167
+  s_18547bca72b16a::t_ff91b310f0d068 1-148,168-247
 common/components_list.js
   h_65afbd07a56b87 57-58
 packages/dialtone-css/lib/build/less/dialtone.less
@@ -47,10 +53,22 @@ packages/dialtone-vue/components/Slider/Slider.stories.js
   s_47197bf9a2952a::t_4c9cabe3080cf5 26
   s_47197bf9a2952a::t_a37f9a71b1503e 27
   s_47197bf9a2952a::t_8e4b939d891506 201-209
+  s_18547bca72b16a::t_ff91b310f0d068 1-25,28-116,131-200,210-291
 packages/dialtone-vue/components/Slider/Slider.test.js
   s_47197bf9a2952a::t_56f3e9197f7487 541-623
+  s_18547bca72b16a::t_ff91b310f0d068 1-540,624
 packages/dialtone-vue/components/Slider/index.js
   s_47197bf9a2952a::t_e03414371f6437 1
+packages/dialtone-vue/components/Slider/Slider.mdx
+  s_18547bca72b16a::t_ff91b310f0d068 1-115
+packages/dialtone-vue/components/Slider/SliderDefault.story.vue
+  s_18547bca72b16a::t_ff91b310f0d068 1-54
+packages/dialtone-vue/components/SliderAlt/SliderAltDefault.story.vue
+  s_18547bca72b16a::t_ff91b310f0d068 1-54
+packages/dialtone-css/lib/build/less/components/slider.less
+  s_18547bca72b16a::t_ff91b310f0d068 1-343
+packages/dialtone-css/lib/build/less/components/slider-alt.less
+  s_18547bca72b16a::t_ff91b310f0d068 1-343
 ---
 {
   "schema_version": "authorship/3.0.0",
@@ -63,6 +81,14 @@ packages/dialtone-vue/components/Slider/index.js
     }
   },
   "sessions": {
+    "s_18547bca72b16a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "34090d3c-5c78-4979-93a5-69ff10aaa88a",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
     "s_47197bf9a2952a": {
       "agent_id": {
         "tool": "claude",
