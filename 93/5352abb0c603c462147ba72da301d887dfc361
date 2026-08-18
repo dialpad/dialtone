@@ -1,0 +1,75 @@
+apps/dialtone-documentation/docs/_data/site-nav.json
+  s_47197bf9a2952a::t_c0cf0442bfca52 577-579
+packages/dialtone-vue/components/Slider/Slider.vue
+  s_47197bf9a2952a::t_b359c1480aad15 509-519
+  s_47197bf9a2952a::t_56e176352adcfa 214-230
+packages/dialtone-vue/components/SliderAlt/index.js
+  s_47197bf9a2952a::t_1e8f3bcb09f88c 1
+packages/dialtone-vue/components/SliderAlt/SliderAltVariants.story.vue
+  s_47197bf9a2952a::t_b897b7e4aa2f24 273
+  s_47197bf9a2952a::t_668a1c489fdb0e 58-60,62-63,75-76
+  s_47197bf9a2952a::t_80e707bdad3afc 61,64-74
+  s_47197bf9a2952a::t_00481af5ce6a5e 274
+packages/dialtone-vue/components/SliderAlt/SliderAlt.mdx
+  s_47197bf9a2952a::t_a779538059f537 1-99
+packages/dialtone-vue/components/SliderAlt/SliderAlt.vue
+  s_47197bf9a2952a::t_a146f6d102f4bb 219-235
+  s_47197bf9a2952a::t_c8abc4f09ac042 535-552
+packages/dialtone-vue/components/Slider/SliderVariants.story.vue
+  s_47197bf9a2952a::t_371bbcd116fd97 345
+  s_47197bf9a2952a::t_e630f8ff263b4c 145,148-158
+  s_47197bf9a2952a::t_41d7e5962607a0 142-144,146-147,159-160
+  s_47197bf9a2952a::t_c626ec44ecee05 346
+  s_47197bf9a2952a::t_7314f8ec2e61d7 111
+packages/dialtone-vue/components/SliderAlt/SliderAltConstants.ts
+  s_47197bf9a2952a::t_7fb15683ef6124 1-14
+packages/dialtone-vue/package.json
+  s_47197bf9a2952a::t_f048f396642f3f 71
+packages/dialtone-vue/components/SliderAlt/SliderAlt.stories.js
+  s_47197bf9a2952a::t_016393aee1347a 201-209
+  s_47197bf9a2952a::t_17202d3c15f276 117-130
+  s_47197bf9a2952a::t_a9ad28fdaf4e1e 27
+  s_47197bf9a2952a::t_5ba9d031aa486c 26
+apps/dialtone-documentation/docs/components/slider.md
+  s_47197bf9a2952a::t_99d2c029f9ce7b 149-167
+common/components_list.js
+  h_65afbd07a56b87 57-58
+packages/dialtone-css/lib/build/less/dialtone.less
+  h_65afbd07a56b87 67-68
+packages/dialtone-vue/index.js
+  h_65afbd07a56b87 62-63
+packages/dialtone-vue/components/Slider/SliderConstants.ts
+  s_47197bf9a2952a::t_87f8579fb23af8 1-16
+packages/combinator/src/components/option_bar/option_bar_control.vue
+  s_47197bf9a2952a::t_7ec3f9466ccb8c 248-250
+packages/dialtone-vue/components/Slider/Slider.stories.js
+  s_47197bf9a2952a::t_553041b4194716 117-130
+  s_47197bf9a2952a::t_4c9cabe3080cf5 26
+  s_47197bf9a2952a::t_a37f9a71b1503e 27
+  s_47197bf9a2952a::t_8e4b939d891506 201-209
+packages/dialtone-vue/components/Slider/Slider.test.js
+  s_47197bf9a2952a::t_56f3e9197f7487 541-623
+packages/dialtone-vue/components/Slider/index.js
+  s_47197bf9a2952a::t_e03414371f6437 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "935352abb0c603c462147ba72da301d887dfc361",
+  "prompts": {},
+  "humans": {
+    "h_65afbd07a56b87": {
+      "author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_47197bf9a2952a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5bc05b7a-239b-44ec-bffd-699a94285996",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
