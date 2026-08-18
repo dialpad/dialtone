@@ -1,3 +1,11 @@
+# [2.0.0-next.7](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.0-next.6...dialtone-tokens/v2.0.0-next.7) (2026-08-18)
+
+
+### Bug Fixes
+
+* **Input, Selectmenu:** NO-JIRA update focus surface color ([eaad020](https://github.com/dialpad/dialtone/commit/eaad02055cba1dc9cc4169da251ec30c58d60303))
+* **Link:** NO-JIRA correct mention link style ([#1398](https://github.com/dialpad/dialtone/issues/1398)) ([36810ce](https://github.com/dialpad/dialtone/commit/36810ce128553c63efe7af6f5a4ab9ece07f21dc))
+
 # [2.0.0-next.6](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.0-next.5...dialtone-tokens/v2.0.0-next.6) (2026-07-23)
 
 
