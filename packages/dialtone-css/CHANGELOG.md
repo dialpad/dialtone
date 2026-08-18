@@ -1,3 +1,10 @@
+# [8.81.0-next.14](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.81.0-next.13...dialtone-css/v8.81.0-next.14) (2026-08-18)
+
+
+### Bug Fixes
+
+* **Link:** NO-JIRA correct mention link style ([#1398](https://github.com/dialpad/dialtone/issues/1398)) ([36810ce](https://github.com/dialpad/dialtone/commit/36810ce128553c63efe7af6f5a4ab9ece07f21dc))
+
 # [8.81.0-next.13](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.81.0-next.12...dialtone-css/v8.81.0-next.13) (2026-08-14)
 
 
