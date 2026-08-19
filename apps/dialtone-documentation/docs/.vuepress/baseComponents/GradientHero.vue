@@ -14,19 +14,6 @@
             </dt-box>
           </dt-link>
         </dt-box>
-        <!-- <dt-text
-          as="p"
-          variant="headline-md"
-          strength="medium"
-          :size="viewport.pick({
-            default: '200',
-            lg: '300',
-          })"
-          align="center"
-          class="d-tt-uppercase d-px-200 d-o75"
-        >
-          Dialpad's design system
-        </dt-text> -->
         <dt-text
           as="h1"
           kind="headline"
@@ -96,7 +83,7 @@ const viewport = useViewportBreakpoints();
 
 .home-gradient-hero-btn {
   --button-color-text: var(--dt-color-neutral-white);
-  --button-color-background: var(--dt-color-purple-100);
+  --button-color-background: var(--dt-color-purple-50);
 }
 .home-gradient-hero-content {
   transform: translateY(var(--text-translate-y, 0px));

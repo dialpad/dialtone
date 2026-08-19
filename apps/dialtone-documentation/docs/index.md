@@ -5,7 +5,7 @@ pageClass: dialpad-design-home
 
 <dt-box position="relative">
   <dt-box
-    v-if="viewport.above('md')"
+    v-if="viewport.above('md') && isMigrationBannerVisible"
     position="absolute"
     inset-block-start="200"
     inset-inline="200"
@@ -15,7 +15,7 @@ pageClass: dialpad-design-home
     shadow="small"
     class="d-of-hidden"
   >
-    <migration-banner />
+    <migration-banner class="d-baw0" v-model:visible="isMigrationBannerVisible" />
   </dt-box>
   <gradient-hero />
 </dt-box>
@@ -31,11 +31,6 @@ pageClass: dialpad-design-home
     })"
   >
     <dt-stack gap="550" align="center">
-      <!-- <dt-link to="/dialtone/">
-        <dt-box inline-size="200" style="filter: drop-shadow(rgba(0, 0, 0, 0.25) 0px 25px 30px);">
-          <svg-loader name="home--dialtone-badge" />
-        </dt-box>
-      </dt-link> -->
       <dt-box max-inline-size="1200">
         <dt-text as="h2" kind="headline" wrap="balance" align="center" strength="normal" density="200" class="home-section-title">Setting the tone</dt-text>
       </dt-box>
@@ -260,7 +255,7 @@ pageClass: dialpad-design-home
 </style>
 
 <script setup>
-import { onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted } from 'vue';
 import { parse, compareDesc, format } from 'date-fns';
 import ShowcaseCarousel from '../../baseComponents/ShowcaseCarousel.vue';
 import GradientHero from '../../baseComponents/GradientHero.vue';
@@ -268,6 +263,7 @@ import HeaderOverlay from '../../baseComponents/HeaderOverlay.vue';
 import { useViewportBreakpoints } from '../../theme/composables/useViewportBreakpoints.js';
 
 const viewport = useViewportBreakpoints();
+const isMigrationBannerVisible = ref(true);
 
 const sortHandler = (a, b) => compareDesc(
   parse(a.posted, 'y-M-d', new Date()),

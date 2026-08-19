@@ -28,8 +28,16 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
+
+const props = defineProps({
+  visible: {
+    type: Boolean,
+    default: true,
+  },
+});
+const emit = defineEmits(['update:visible']);
 
 const STORAGE_KEY = 'dt-migration-banner-dismissed';
 const route = useRoute();
@@ -41,8 +49,15 @@ const isOnMigrationGuide = computed(() => {
 });
 
 const shouldShow = computed(() => {
-  return !dismissed.value && !permanentlyDismissed.value && !isOnMigrationGuide.value;
+  return props.visible &&
+    !dismissed.value &&
+    !permanentlyDismissed.value &&
+    !isOnMigrationGuide.value;
 });
+
+watch(shouldShow, (visible) => {
+  emit('update:visible', visible);
+}, { immediate: true });
 
 onMounted(() => {
   try {
