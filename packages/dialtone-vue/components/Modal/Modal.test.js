@@ -30,6 +30,9 @@ beforeAll(() => {
   HTMLDialogElement.prototype.showModal = vi.fn(function () {
     this.setAttribute('open', '');
   });
+  HTMLDialogElement.prototype.show = vi.fn(function () {
+    this.setAttribute('open', '');
+  });
   HTMLDialogElement.prototype.close = vi.fn(function () {
     this.removeAttribute('open');
   });
@@ -37,6 +40,7 @@ beforeAll(() => {
 
 afterAll(() => {
   delete HTMLDialogElement.prototype.showModal;
+  delete HTMLDialogElement.prototype.show;
   delete HTMLDialogElement.prototype.close;
 });
 
@@ -114,8 +118,77 @@ describe('DtModal Tests', () => {
       expect(banner.classes(MODAL_BANNER_KINDS[DtModal.props.bannerKind.default])).toBe(true);
     });
 
-    it('Should call showModal when show is true', () => {
-      expect(overlay.element.showModal).toHaveBeenCalled();
+    it('Should open without entering the top layer when show is true', () => {
+      expect(overlay.element.show).toHaveBeenCalled();
+      expect(overlay.element.showModal).not.toHaveBeenCalled();
+    });
+
+    it('Should leave the page outside the dialog reachable while open', () => {
+      // An application overlay rendered as a sibling of the dialog — a toast, or a
+      // call notification with its own controls — has to stay interactive, which is
+      // the whole reason this mode exists. Marking it inert would render it visible
+      // but dead, which is the failure this asserts against.
+      const overlaySurface = document.createElement('div');
+      const action = document.createElement('button');
+      overlaySurface.appendChild(action);
+      overlay.element.parentNode.appendChild(overlaySurface);
+
+      expect(overlaySurface.inert).toBeFalsy();
+      expect(action.inert).toBeFalsy();
+      expect([...document.body.children].some(el => el.inert)).toBe(false);
+
+      overlaySurface.remove();
+    });
+
+    it('Should not claim aria-modal when the page outside stays reachable', () => {
+      // aria-modal="true" tells assistive technology to ignore everything outside
+      // the dialog. Claiming it while the page is deliberately left reachable would
+      // block screen reader users from the very overlays this mode exists to serve.
+      expect(overlay.attributes('aria-modal')).toBeUndefined();
+    });
+
+    it('Should not close on Escape when a nested widget already handled it', async () => {
+      // Models a dropdown or combobox inside the modal closing its own popup on
+      // Escape: it calls preventDefault but lets the event keep bubbling.
+      const nested = document.createElement('button');
+      overlay.element.appendChild(nested);
+      nested.addEventListener('keydown', event => event.preventDefault());
+
+      const before = wrapper.emitted(SYNC_EVENT_NAME)?.length ?? 0;
+      nested.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape', bubbles: true, cancelable: true }));
+      await flushPromises();
+
+      expect(wrapper.emitted(SYNC_EVENT_NAME)?.length ?? 0).toBe(before);
+      nested.remove();
+    });
+
+
+    it('Should close on Escape even though the native cancel event does not fire', async () => {
+      await overlay.trigger('keydown', { key: 'Escape' });
+
+      expect(wrapper.emitted('update:open').at(-1)).toEqual([false]);
+    });
+
+    describe('When modal prop is true', () => {
+      beforeEach(async () => {
+        mockProps = { ...mockProps, modal: true };
+
+        // The outer beforeEach already mounted a default (non-modal) instance, whose
+        // show() call would otherwise still be recorded on the shared prototype mock.
+        vi.clearAllMocks();
+        updateWrapper();
+      });
+
+      // Inertness is not asserted here: for a top-layer dialog the browser provides
+      // it, and JSDOM implements neither the top layer nor its inertness.
+      it('Should enter the top layer via showModal', () => {
+        expect(overlay.element.showModal).toHaveBeenCalled();
+        expect(overlay.element.show).not.toHaveBeenCalled();
+      });
+
+      it('Should claim aria-modal, since the browser does make the page inert', () => {
+        expect(overlay.attributes('aria-modal')).toBe('true');
+      });
     });
 
     describe('When fullscreen prop is true', () => {

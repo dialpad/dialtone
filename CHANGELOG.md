@@ -1,3 +1,37 @@
+# [10.0.0-next.17](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.16...dialtone/v10.0.0-next.17) (2026-08-18)
+
+
+### Bug Fixes
+
+* **Input, Selectmenu:** NO-JIRA update focus surface color ([eaad020](https://github.com/dialpad/dialtone/commit/eaad02055cba1dc9cc4169da251ec30c58d60303))
+* **Link:** NO-JIRA correct mention link style ([#1398](https://github.com/dialpad/dialtone/issues/1398)) ([36810ce](https://github.com/dialpad/dialtone/commit/36810ce128553c63efe7af6f5a4ab9ece07f21dc))
+
+# [10.0.0-next.16](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.15...dialtone/v10.0.0-next.16) (2026-08-14)
+
+
+### Bug Fixes
+
+* **Modal:** NO-JIRA stop inerting the background when the dialog is not modal ([#1397](https://github.com/dialpad/dialtone/issues/1397)) ([ab9b823](https://github.com/dialpad/dialtone/commit/ab9b823d28963ce729d3009fdaa00dee13b0115f))
+
+# [10.0.0-next.15](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.14...dialtone/v10.0.0-next.15) (2026-08-14)
+
+
+### Bug Fixes
+
+* **Checkbox, Radio, Toggle:** DLT-3571 improve focus style ([#1395](https://github.com/dialpad/dialtone/issues/1395)) ([4fe1a25](https://github.com/dialpad/dialtone/commit/4fe1a255403a6b9c8e2e373b5065de22dcaea954))
+
+
+### Features
+
+* **Modal:** NO-JIRA add modal prop to keep dialogs out of the browser top layer ([#1396](https://github.com/dialpad/dialtone/issues/1396)) ([8d28ebc](https://github.com/dialpad/dialtone/commit/8d28ebc08973d53626e64ccde2f6a82f84a73bd1))
+
+# [10.0.0-next.14](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.13...dialtone/v10.0.0-next.14) (2026-08-13)
+
+
+### Bug Fixes
+
+* **Notice, Toast:** DP-203134 render message paragraph only when there is a message ([#1394](https://github.com/dialpad/dialtone/issues/1394)) ([a112d6d](https://github.com/dialpad/dialtone/commit/a112d6d4d11cfb3d0f9b492250ac55eeb04e5d4e))
+
 # [10.0.0-next.13](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.12...dialtone/v10.0.0-next.13) (2026-08-13)
 
 

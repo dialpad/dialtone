@@ -39,6 +39,32 @@ describe('DtToast Tests', () => {
     mockSlots = {};
   });
 
+  describe('When only headerText is provided (no message, no default slot)', () => {
+    beforeEach(() => {
+      mockProps = { headerText: 'Copied to clipboard' };
+      updateWrapper();
+    });
+
+    it('does not render an empty message paragraph', () => {
+      expect(wrapper.find('[data-qa="notice-content-message"]').exists()).toBe(false);
+    });
+
+    it('still renders the title', () => {
+      expect(wrapper.find('[data-qa="notice-content-title"]').text()).toBe('Copied to clipboard');
+    });
+  });
+
+  describe('When a message is provided', () => {
+    beforeEach(() => {
+      mockProps = { headerText: 'Title', message: 'Real message' };
+      updateWrapper();
+    });
+
+    it('renders the message paragraph with the message text', () => {
+      expect(wrapper.find('[data-qa="notice-content-message"]').text()).toBe('Real message');
+    });
+  });
+
   describe('Presentation Tests', () => {
     describe('When the toast renders', () => {
       it('should exist', () => {

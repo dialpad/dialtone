@@ -1,3 +1,24 @@
+# [3.225.0-next.5](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0-next.4...dialtone-vue/v3.225.0-next.5) (2026-08-14)
+
+
+### Bug Fixes
+
+* **Modal:** NO-JIRA stop inerting the background when the dialog is not modal ([#1397](https://github.com/dialpad/dialtone/issues/1397)) ([ab9b823](https://github.com/dialpad/dialtone/commit/ab9b823d28963ce729d3009fdaa00dee13b0115f))
+
+# [3.225.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0-next.3...dialtone-vue/v3.225.0-next.4) (2026-08-14)
+
+
+### Features
+
+* **Modal:** NO-JIRA add modal prop to keep dialogs out of the browser top layer ([#1396](https://github.com/dialpad/dialtone/issues/1396)) ([8d28ebc](https://github.com/dialpad/dialtone/commit/8d28ebc08973d53626e64ccde2f6a82f84a73bd1))
+
+# [3.225.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0-next.2...dialtone-vue/v3.225.0-next.3) (2026-08-13)
+
+
+### Bug Fixes
+
+* **Notice, Toast:** DP-203134 render message paragraph only when there is a message ([#1394](https://github.com/dialpad/dialtone/issues/1394)) ([a112d6d](https://github.com/dialpad/dialtone/commit/a112d6d4d11cfb3d0f9b492250ac55eeb04e5d4e))
+
 # [3.225.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0-next.1...dialtone-vue/v3.225.0-next.2) (2026-08-13)
 
 
