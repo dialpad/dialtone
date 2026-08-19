@@ -339,6 +339,8 @@ export const dialtoneVuepressTheme = (options) => ({
   },
 
   extendsPage: (page) => {
+    page.data.filePathRelative = page.filePathRelative;
+
     switch (page.path) {
       case '/':
         page.data.blogPosts = [];

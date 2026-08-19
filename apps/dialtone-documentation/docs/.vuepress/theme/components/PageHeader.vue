@@ -52,6 +52,7 @@
             kind="muted"
             importance="outlined"
             :size="200"
+            hidden
           >
             <template #startIcon="{ iconSize }">
               <dt-icon-figma :size="iconSize" />
@@ -142,6 +143,16 @@
                   @click="openInAiChat(close, 'chatgpt')"
                 >
                   Open in ChatGPT
+                </dt-list-item>
+              </dt-list-item-group>
+              <dt-dropdown-separator v-if="githubMarkdownUrl" />
+              <dt-list-item-group v-if="githubMarkdownUrl">
+                <dt-list-item
+                  role="menuitem"
+                  navigation-type="arrow-keys"
+                  @click="onViewInGitHub(close)"
+                >
+                  View in GitHub
                 </dt-list-item>
               </dt-list-item-group>
             </template>
@@ -262,6 +273,7 @@ async function onCopyAsMarkdown (close) {
 const SLUG_OVERRIDES = { tabs: 'tab' };
 const EXCLUDED_SLUGS = new Set(['scrollbar', 'table']);
 const GITHUB_BASE = 'https://github.com/dialpad/dialtone/tree/staging/packages/dialtone-vue/components';
+const GITHUB_DOCS_BASE = 'https://github.com/dialpad/dialtone/blob/staging/apps/dialtone-documentation/docs';
 
 const RAW_SECTIONS = [
   '/components/',
@@ -302,6 +314,18 @@ function onViewAsMarkdown (close) {
   close?.();
   if (rawMarkdownUrl.value) {
     window.open(rawMarkdownUrl.value, '_blank', 'noopener,noreferrer');
+  }
+}
+
+const githubMarkdownUrl = computed(() => {
+  const filePath = page.value.filePathRelative?.replaceAll('\\', '/');
+  return filePath ? `${GITHUB_DOCS_BASE}/${filePath}` : null;
+});
+
+function onViewInGitHub (close) {
+  close?.();
+  if (githubMarkdownUrl.value) {
+    window.open(githubMarkdownUrl.value, '_blank', 'noopener,noreferrer');
   }
 }
 
