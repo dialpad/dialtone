@@ -7,12 +7,8 @@ next:
   link: /dialtone/whats-new/
 ---
 
-<DtBox class="d-box d-box--bc-default d-d-grid d-g-300 md:d-g-cols3 d-mbe-400">
-  <DtLink
-    to="/dialtone/whats-new/"
-    :underline="false"
-    class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary"
-  >
+<DtBox class="d-d-grid d-g-300 md:d-g-cols3 d-mbe-400">
+  <DtLink to="/dialtone/whats-new/"  tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
     <DtStack direction="row" gap="200">
       <DtBox
         :padding="viewport.pick({ default: '100', md: '200' })"
@@ -31,7 +27,7 @@ next:
       </DtStack>
     </DtStack>
   </DtLink>
-  <DtLink to="/guides/migration/" :underline="false" class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary">
+  <DtLink to="/guides/migration/"  tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
     <DtStack direction="row" gap="200">
       <DtBox
         :padding="viewport.pick({ default: '100', md: '200' })"
@@ -50,7 +46,7 @@ next:
       </DtStack>
     </DtStack>
   </DtLink>
-  <DtLink to="/guides/getting-started/" :underline="false" class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary">
+  <DtLink to="/guides/getting-started/"  tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
     <DtStack direction="row" gap="200">
       <DtBox
         :padding="viewport.pick({ default: '100', md: '200' })"

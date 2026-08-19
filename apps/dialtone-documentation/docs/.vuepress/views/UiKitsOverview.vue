@@ -1,10 +1,6 @@
 <template>
-  <DtBox class="d-box d-box--bc-default d-d-grid d-g-300 md:d-g-cols3 d-mbe-400">
-    <DtLink
-      to="/ui-kits/what-are-ui-kits/"
-      :underline="false"
-      class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary"
-    >
+  <DtBox class="d-d-grid d-g-300 md:d-g-cols3 d-mbe-400">
+    <DtLink to="/ui-kits/what-are-ui-kits/" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
       <DtStack direction="row" gap="200">
         <DtBox
           :padding="viewport.pick({ default: '100', md: '200' })"
@@ -27,11 +23,7 @@
         </DtStack>
       </DtStack>
     </DtLink>
-    <DtLink
-      to="/ui-kits/where-to-start/"
-      :underline="false"
-      class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary"
-    >
+    <DtLink to="/ui-kits/where-to-start/" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
       <DtStack direction="row" gap="200">
         <DtBox
           :padding="viewport.pick({ default: '100', md: '200' })"
@@ -54,11 +46,7 @@
         </DtStack>
       </DtStack>
     </DtLink>
-    <DtLink
-      to="/ui-kits/how-to-contribute/"
-      :underline="false"
-      class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary"
-    >
+    <DtLink to="/ui-kits/how-to-contribute/" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
       <DtStack direction="row" gap="200">
         <DtBox
           :padding="viewport.pick({ default: '100', md: '200' })"
