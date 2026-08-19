@@ -7,7 +7,10 @@
     >
       <DtBox
         id="page-sticky-header"
-        padding-block-start="300"
+        :padding-block-start="viewport.pick({
+          default: '300',
+          lg: '500',
+        })"
         surface="primary"
         :class="viewport.pick({
           default: false,
@@ -150,7 +153,7 @@
       v-if="includeToc && viewport.pick(rightRailTocViewportValues)"
       max-inline-size="300"
       min-inline-size="300"
-      padding-block-start="200"
+      padding-block-start="400"
       class="d-ps-sticky d-ibs-300"
     >
       <dt-text
