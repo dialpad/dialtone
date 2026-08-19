@@ -11,13 +11,11 @@
       <dt-button
         :id="labelId"
         v-bind="attrs"
-        :to="item.link || undefined"
-        :active="isActiveLink(item.link, true)"
+        :active="!searchActive && isActiveLink(item.link, true)"
         importance="clear"
         kind="muted"
         label-class="d-jc-flex-start d-ta-left d-fw-normal d-tw-pretty"
         :size="depth === 0 ? 'lg' : undefined"
-        :tabindex="actionableTabIndex"
         :class="[
           'd-w100p dialtone-shell-btn',
           {
@@ -29,6 +27,7 @@
           },
         ]"
         :data-sidebar-link="item.link"
+        :data-sidebar-path="itemPath"
         @click.capture="handleClick"
       >
         <dt-icon
@@ -40,7 +39,6 @@
         {{ item.text }}
         <template #endIcon="{ iconSize }">
           <dt-icon
-            v-if="item.link"
             :name="isOpen ? 'chevron-down' : 'chevron-right'"
             :size="iconSize"
           />
@@ -65,8 +63,12 @@
             :item="subItem"
             :depth="depth + 1"
             :open-items="openItems"
+            :item-path="`${itemPath}.${index}`"
+            :peer-keys="subItemKeys"
+            :active-item-path="activeItemPath"
+            :search-active="searchActive"
             nested
-            @toggle="(itemKey, shouldOpen) => $emit('toggle', itemKey, shouldOpen)"
+            @toggle="forwardToggle"
           />
           <div
             v-else-if="subItem.status === 'planned'"
@@ -80,17 +82,20 @@
           </div>
           <dt-button
             v-else-if="isExternalUrl(subItem.link)"
+            :id="getResultId(`${itemPath}.${index}`)"
             :href="subItem.link"
             target="_blank"
             rel="noopener noreferrer"
             importance="clear"
             kind="muted"
+            :active="isItemActive(subItem.link, `${itemPath}.${index}`)"
             label-class="d-jc-flex-start d-ta-left d-fw-normal d-tw-pretty"
             :class="[
               'dialtone-shell-btn d-w100p d-tw-pretty',
               { 'd-pis-600': depth === 0 },
               { 'd-pis-800': depth === 1 },
             ]"
+            :data-sidebar-path="`${itemPath}.${index}`"
           >
             <dt-stack as="span" direction="row" justify="space-between" class="d-w100p">
               {{ subItem.text }}
@@ -99,12 +104,14 @@
           </dt-button>
           <dt-button
             v-else
+            :id="getResultId(`${itemPath}.${index}`)"
             :to="subItem.link"
-            :active="isActiveLink(subItem.link)"
+            :active="isItemActive(subItem.link, `${itemPath}.${index}`)"
             importance="clear"
             kind="muted"
             label-class="d-jc-flex-start d-tw-pretty"
             :data-sidebar-link="subItem.link"
+            :data-sidebar-path="`${itemPath}.${index}`"
             :class="[
               'd-w100p d-fw-normal dialtone-shell-btn',
               { 'd-pis-600': depth === 0 },
@@ -136,8 +143,9 @@
   <!-- Item without children - render as simple link -->
   <li v-else>
     <dt-button
+      :id="getResultId(itemPath)"
       :to="item.link || undefined"
-      :active="isActiveLink(item.link)"
+      :active="isItemActive(item.link, itemPath)"
       importance="clear"
       kind="muted"
       label-class="d-jc-flex-start d-ta-left d-fw-normal d-tw-pretty"
@@ -149,6 +157,7 @@
         },
       ]"
       :data-sidebar-link="item.link"
+      :data-sidebar-path="itemPath"
     >
       <dt-icon
         v-if="depth === 0 && item.icon"
@@ -202,6 +211,22 @@ const props = defineProps({
     type: Set,
     required: true,
   },
+  itemPath: {
+    type: String,
+    required: true,
+  },
+  peerKeys: {
+    type: Array,
+    default: () => [],
+  },
+  activeItemPath: {
+    type: String,
+    default: null,
+  },
+  searchActive: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(['toggle']);
@@ -209,13 +234,15 @@ const emit = defineEmits(['toggle']);
 const subItems = computed(() => {
   return props.item?.children || [];
 });
+const subItemKeys = computed(() => {
+  return subItems.value
+    .filter(item => item.children?.length)
+    .map(item => item.link || item.text);
+});
 const labelId = computed(() => {
   return `sidebar-label-${props.item?.text?.toLowerCase().replace(/\s+/g, '-')}`;
 });
-const actionableTabIndex = computed(() => {
-  // Items without links are not actionable and should be removed from tab order
-  return props.item.link ? undefined : -1;
-});
+const getResultId = (itemPath) => `dialtone-sidebar-search-result-${itemPath}`;
 
 const route = useRoute();
 
@@ -224,11 +251,6 @@ const isOpen = computed(() => {
   const key = props.item.link || props.item.text;
   return props.openItems.has(key);
 });
-
-// True when the route targets this item or any descendant. Reuses isActiveLink
-// for the per-node check so the What's New → posts special case lives in one place.
-const isRouteMatch = (item) =>
-  isActiveLink(item.link) || (item.children?.some(isRouteMatch) ?? false);
 
 const isActiveLink = (link, isParentButton = false) => {
   if (!link) return false;
@@ -250,16 +272,20 @@ const isActiveLink = (link, isParentButton = false) => {
 
   return route.path === link;
 };
+const isItemActive = (link, itemPath) => {
+  return props.searchActive
+    ? props.activeItemPath === itemPath
+    : isActiveLink(link);
+};
 
 function handleClick (event) {
   const itemKey = props.item.link || props.item.text;
 
-  // Runs in the capture phase to decide toggle-vs-navigate before the button's
-  // router-link fires: toggle when already open, link-less, or browsing within
-  // this item's tree; otherwise let the click navigate in.
-  if (isOpen.value || !props.item.link || isRouteMatch(props.item)) {
-    event.preventDefault();
-    emit('toggle', itemKey, !isOpen.value);
-  }
+  event.preventDefault();
+  emit('toggle', itemKey, !isOpen.value, props.peerKeys);
+}
+
+function forwardToggle (itemKey, shouldOpen, peerKeys) {
+  emit('toggle', itemKey, shouldOpen, peerKeys);
 }
 </script>

@@ -36,8 +36,8 @@
         :underline="false"
         to="/"
       >
-        <svg-loader class="d-h-50" name="dialtone-logo" />
-        <!-- <DtIllustration name="dialpad-logo" class="d-h-50 d-w-auto" /> -->
+        <!-- <svg-loader class="d-h-50" name="dialtone-logo" /> -->
+        <DtIllustration name="dialpad-logo" class="d-w-125" />
       </dt-link>
       <DtStack class="d-w100p">
         <navbar class="d-mis-auto" />

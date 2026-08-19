@@ -18,6 +18,10 @@
           "link": "/guides/migration/",
           "children": [
             {
+              "text": "Overview",
+              "link": "/guides/migration/"
+            },
+            {
               "text": "Visual Changes",
               "link": "/guides/migration/visual-changes/"
             },
@@ -107,6 +111,10 @@
           "text": "Getting Started",
           "link": "/guides/getting-started/",
           "children": [
+            {
+              "text": "Overview",
+              "link": "/guides/getting-started/"
+            },
             {
               "text": "Theme and Mode",
               "link": "/guides/theme-and-mode/"
