@@ -3,6 +3,7 @@
     <migration-banner />
     <doc-header
       :mobile-menu-open="isMobileMenuOpen"
+      hidden
       @toggle-mobile-menu="toggleMobileMenu"
     />
     <DtBox

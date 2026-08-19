@@ -1,17 +1,16 @@
 <template>
-  <dt-stack direction="row" align="stretch" gap="250" class="d-h100p">
+  <dt-stack direction="row" align="stretch" gap="400" class="d-h100p">
     <DtBox
       v-if="viewport.above('lg') && !$frontmatter.home && !$frontmatter.noSidebar"
       padding-block-end="400"
-      :padding-inline-start="300"
-      :padding-inline-end="viewport.pick({
-        default: '200',
-        xxxl: '300',
-      })"
+      padding-inline="200"
       min-inline-size="450"
       max-inline-size="450"
       block-size="100p"
       scrollbar="move"
+      surface="secondary"
+      border-width-inline-end="100"
+      border-color="subtle"
     >
       <sidebar />
     </DtBox>
@@ -29,8 +28,9 @@
       scrollbar="move"
       scrollbar-content-class="dialtone-doc-page-scroll-container"
       :padding-inline-end="viewport.pick({
-        default: '250',
-        lg: '300',
+        default: '300',
+        lg: '400',
+        xl: '0',
       })"
       padding-block-end="400"
       :padding-inline-start="viewport.pick({

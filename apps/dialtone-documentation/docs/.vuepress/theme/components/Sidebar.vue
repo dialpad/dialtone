@@ -6,43 +6,53 @@
   >
     <DtBox
       padding-block-end="100"
-      padding-block-start="300"
-      class="d-ps-sticky d-bgc-primary d-ibs-0 d-zi-navigation-fixed"
+      padding-block-start="200"
+      surface="secondary"
+      position="sticky"
+      inset-block-start="0"
+      z-index="navigation-fixed"
     >
-      <dt-input
-        ref="searchInput"
-        v-model="inputValue"
-        aria-label="Search"
-        placeholder="Search"
-        type="search"
-        end-icon-class="d-pie-25"
-        @update:model-value="focusedIndex = -1"
-      >
-        <template #startIcon="{ iconSize }">
-          <dt-icon name="search" :size="iconSize" />
-        </template>
-        <template #endIcon="{ clear }">
-          <dt-button
-            v-if="inputValue.length !== 0"
-            v-dt-tooltip="'Clear search'"
-            kind="muted"
-            importance="clear"
-            :size="100"
-            aria-label="Clear search"
-            @click="clear"
-          >
-            <template #startIcon="{ iconSize }">
-              <dt-icon name="close" :size="iconSize" />
-            </template>
-          </dt-button>
-          <dt-keyboard-shortcut
-            v-else-if="viewport.above('lg')"
-            class="d-mie-n75"
-            shortcut="/"
-            screen-reader-text="Slash"
-          />
-        </template>
-      </dt-input>
+      <DtStack gap="150">
+        <DtBox border-width="100" padding="100" border-radius="400">
+          <DtText as="p" variant="body-sm" align="center" tone="muted">
+            Logo
+          </DtText>
+        </DtBox>
+        <dt-input
+          ref="searchInput"
+          v-model="inputValue"
+          aria-label="Search"
+          placeholder="Search"
+          type="search"
+          end-icon-class="d-pie-25"
+          @update:model-value="focusedIndex = -1"
+        >
+          <template #startIcon="{ iconSize }">
+            <dt-icon name="search" :size="iconSize" />
+          </template>
+          <template #endIcon="{ clear }">
+            <dt-button
+              v-if="inputValue.length !== 0"
+              v-dt-tooltip="'Clear search'"
+              kind="muted"
+              importance="clear"
+              :size="100"
+              aria-label="Clear search"
+              @click="clear"
+            >
+              <template #startIcon="{ iconSize }">
+                <dt-icon name="close" :size="iconSize" />
+              </template>
+            </dt-button>
+            <dt-keyboard-shortcut
+              v-else-if="viewport.above('lg')"
+              class="d-mie-n75"
+              shortcut="/"
+              screen-reader-text="Slash"
+            />
+          </template>
+        </dt-input>
+      </DtStack>
     </DtBox>
     <DtStack
       ref="listRef"
