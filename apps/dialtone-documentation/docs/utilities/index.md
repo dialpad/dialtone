@@ -8,8 +8,6 @@ next:
   link: /utilities/backgrounds/attachment.html
 ---
 
-## Introduction
-
 Utilities – also known as "trumps," "helper classes," or "alterations" – are high-specificity selectors for making very targeted alterations to existing elements or components.
 
 Each utility is a small, <a class="d-link" href="https://css-tricks.com/lets-define-exactly-atomic-css/" target="_blank">atomic style</a> declaration that, when chained together, should mitigate most situations in which custom CSS must be written. Just write these classes right in your mark-up and you're all set!

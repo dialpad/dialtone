@@ -3,6 +3,9 @@ title: Graphic System
 description: Abstract graphics and illustrations used across Dialpad's brand and product surfaces.
 thumb: true
 keywords: ["visual", "brand", "image"]
+next:
+  text: Abstract Graphics
+  link: /foundations/graphic-system/abstract-graphics.html
 ---
 
 <dt-stack gap="600" class="d-mbs-600">

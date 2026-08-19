@@ -6,6 +6,9 @@ download_url: /downloads/#icon
 no_preview: true
 thumb: true
 keywords: ["brand", "branding", "identity", "mark", "dialpad logo"]
+next:
+  text: Using our Logo
+  link: /foundations/brand/using-our-logo/
 ---
 
 

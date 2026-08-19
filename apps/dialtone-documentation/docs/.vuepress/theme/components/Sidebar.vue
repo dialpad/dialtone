@@ -16,8 +16,9 @@
           direction="row"
           justify="space-between"
           gap="200"
+          class="d-pis-150 d-pie-100"
         >
-          <DtBox padding-inline-start="75" padding-block-start="50">
+          <DtBox padding-block-start="50">
             <dt-link
               title="Dialtone homepage"
               :underline="false"

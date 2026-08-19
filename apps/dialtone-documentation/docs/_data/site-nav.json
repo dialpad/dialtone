@@ -145,6 +145,10 @@
           "link": "/foundations/brand/",
           "children": [
             {
+              "text": "Overview",
+              "link": "/foundations/brand/"
+            },
+            {
               "text": "Using our Logo",
               "link": "/foundations/brand/using-our-logo/"
             },
@@ -162,6 +166,10 @@
           "text": "Color",
           "link": "/foundations/colors/",
           "children": [
+            {
+              "text": "Overview",
+              "link": "/foundations/colors/"
+            },
             {
               "text": "Color in Marketing",
               "link": "/foundations/colors/marketing/"
@@ -189,6 +197,10 @@
           "link": "/foundations/type/",
           "children": [
             {
+              "text": "Overview",
+              "link": "/foundations/type/"
+            },
+            {
               "text": "Type in Marketing",
               "link": "/foundations/typography/marketing.html"
             },
@@ -207,6 +219,10 @@
           "link": "/foundations/icons/",
           "children": [
             {
+              "text": "Catalog",
+              "link": "/foundations/icons/"
+            },
+            {
               "text": "Usage",
               "link": "/foundations/icons/usage/"
             },
@@ -220,6 +236,10 @@
           "text": "Gradient",
           "link": "/foundations/gradient/",
           "children": [
+            {
+              "text": "Overview",
+              "link": "/foundations/gradient/"
+            },
             {
               "text": "Gradient in Marketing",
               "link": "/foundations/gradient/marketing.html"
@@ -238,6 +258,10 @@
           "text": "Graphic System",
           "link": "/foundations/graphic-system/",
           "children": [
+            {
+              "text": "Overview",
+              "link": "/foundations/graphic-system/"
+            },
             {
               "text": "Abstract Graphics",
               "link": "/foundations/graphic-system/abstract-graphics.html"
