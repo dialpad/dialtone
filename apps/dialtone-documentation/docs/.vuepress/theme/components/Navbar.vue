@@ -10,7 +10,6 @@
       </dt-stack>
     </DtBox>
     <dt-button
-      v-if="viewport.above('lg')"
       v-dt-tooltip:bottom="'Storybook'"
       href="https://dialtone.dialpad.com/vue"
       target="_blank"

@@ -24,8 +24,7 @@
               :underline="false"
               to="/"
             >
-              <svg-loader name="dialtone-logo" class="d-w-150" />
-              <!-- <DtIllustration name="dialpad-logo" class="d-h-50 d-w-auto" /> -->
+              <DtIllustration name="dialpad-logo" class="d-h-50 d-w-auto" />
             </dt-link>
           </DtBox>
           <dt-button
@@ -106,10 +105,62 @@
     </DtBox>
     <DtBox
       v-if="viewport.above('lg')"
-      padding-block-start="200"
-      padding-block-end="50"
     >
       <DtStack gap="100">
+        <DtBox padding-inline-start="100" padding-inline-end="50" padding-block-start="100">
+          <DtStack direction="row" gap="100" justify="space-between">
+            <svg-loader name="dialtone-logo" class="d-w72" />
+            <DtStack gap="25" direction="row">
+              <dt-button
+                v-dt-tooltip="'Storybook'"
+                href="https://dialtone.dialpad.com/vue"
+                target="_blank"
+                rel="noreferrer noopener"
+                kind="muted"
+                importance="clear"
+                aria-label="Open Storybook"
+              >
+                <template #startIcon="{ iconSize }">
+                  <dt-icon name="storybook" :size="iconSize" />
+                </template>
+              </dt-button>
+              <dt-button
+                v-dt-tooltip="'Github Repository'"
+                href="https://github.com/dialpad/dialtone"
+                target="_blank"
+                rel="noreferrer noopener"
+                kind="muted"
+                importance="clear"
+                aria-label="Open GitHub repository"
+              >
+                <template #startIcon="{ iconSize }">
+                  <dt-icon name="github" :size="iconSize" />
+                </template>
+              </dt-button>
+            </DtStack>
+          </DtStack>
+        </DtBox>
+        <dt-segmented-control
+          :model-value="currentMode"
+          aria-label="Appearance mode"
+          @update:model-value="setMode"
+        >
+          <dt-segmented-control-item v-dt-tooltip="`Mode: System`" value="system" label="System">
+            <template #startIcon="{ iconSize }">
+              <dt-icon name="laptop-2" :size="iconSize" />
+            </template>
+          </dt-segmented-control-item>
+          <dt-segmented-control-item v-dt-tooltip="`Mode: Light`" value="light" label="Light">
+            <template #startIcon="{ iconSize }">
+              <dt-icon name="sun" :size="iconSize" />
+            </template>
+          </dt-segmented-control-item>
+          <dt-segmented-control-item v-dt-tooltip="`Mode: Dark`" value="dark" label="Dark">
+            <template #startIcon="{ iconSize }">
+              <dt-icon name="moon" :size="iconSize" />
+            </template>
+          </dt-segmented-control-item>
+        </dt-segmented-control>
         <DtStack direction="row" gap="1">
           <dt-button
             class="d-w100p"
@@ -165,27 +216,6 @@
             </template>
           </dt-button>
         </DtStack>
-        <dt-segmented-control
-          :model-value="currentMode"
-          aria-label="Appearance mode"
-          @update:model-value="setMode"
-        >
-          <dt-segmented-control-item v-dt-tooltip="`Mode: System`" value="system" label="System">
-            <template #startIcon="{ iconSize }">
-              <dt-icon name="laptop-2" :size="iconSize" />
-            </template>
-          </dt-segmented-control-item>
-          <dt-segmented-control-item v-dt-tooltip="`Mode: Light`" value="light" label="Light">
-            <template #startIcon="{ iconSize }">
-              <dt-icon name="sun" :size="iconSize" />
-            </template>
-          </dt-segmented-control-item>
-          <dt-segmented-control-item v-dt-tooltip="`Mode: Dark`" value="dark" label="Dark">
-            <template #startIcon="{ iconSize }">
-              <dt-icon name="moon" :size="iconSize" />
-            </template>
-          </dt-segmented-control-item>
-        </dt-segmented-control>
       </DtStack>
     </DtBox>
   </dt-stack>

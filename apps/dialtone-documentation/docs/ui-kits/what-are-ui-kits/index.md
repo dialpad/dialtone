@@ -8,7 +8,7 @@ prev:
 ---
 
 > [!INFO]
-> UI Kit component details are currently being developed. For the most up-to-date details and proposals, see the #dialpad-uikits channel.
+> UI Kit component details are currently being developed. For the most up-to-date details and proposals, see the [#dialpad-uikits](https://dialpad.com/app/messages/agxzfnViZXItdm9pY2VyGAsSC1RleHRNZXNzYWdlGIDAsMXFoLwLDA) channel.
 
 ## Overview
 

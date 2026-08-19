@@ -31,7 +31,6 @@
         :prev="$frontmatter.prev || prev"
         :next="$frontmatter.next || next"
         :component-combinator-name="componentCombinatorName"
-        :full-bleed="props.fullBleed"
       />
     </DtBox>
   </dt-stack>
@@ -61,13 +60,6 @@ import {
   scrollRouteToTop,
   shouldScrollRouteToTop,
 } from '../utils/pageToc.js';
-
-const props = defineProps({
-  fullBleed: {
-    type: Boolean,
-    default: false,
-  },
-});
 
 const route = useRoute();
 const prev = ref(null);

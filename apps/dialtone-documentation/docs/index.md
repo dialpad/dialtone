@@ -12,16 +12,16 @@ pageClass: dialpad-design-home
   </dt-box>
   <dt-box as="article" padding-block="800" padding-inline="800">
     <dt-stack gap="550" align="center">
-      <dt-link to="/dialtone/">
+      <!-- <dt-link to="/dialtone/">
         <dt-box inline-size="200" style="filter: drop-shadow(rgba(0, 0, 0, 0.25) 0px 25px 30px);">
           <svg-loader name="home--dialtone-badge" />
         </dt-box>
-      </dt-link>
+      </dt-link> -->
       <dt-box max-inline-size="1200">
         <dt-text as="h2" kind="headline" wrap="balance" align="center" strength="normal" density="200" class="home-section-title">Setting the tone</dt-text>
       </dt-box>
       <dt-box max-inline-size="1200">
-        <dt-text as="p" align="center" wrap="balance" kind="headline" size="500" strength="normal">Dialtone is Dialpad’s shared design language, shaping everything from our product interfaces to our marketing. It defines how our brand looks, feels, and behaves across every touchpoint. Built on principles of clarity, consistency, and accessibility, Dialtone keeps our visual identity cohesive and unmistakably Dialpad.</dt-text>
+        <dt-text as="p" align="center" wrap="balance" kind="headline" size="500" strength="normal">A shared design language shaping everything from our product interfaces to our marketing. It defines how our brand looks, feels, and behaves across every touchpoint. Built on principles of clarity, consistency, and accessibility, Dialtone keeps our visual identity cohesive and unmistakably Dialpad.</dt-text>
       </dt-box>
     </dt-stack>
   </dt-box>
@@ -56,7 +56,7 @@ pageClass: dialpad-design-home
       <dt-stack class="home-section-inline" gap="550" align="center" justify="center">
         <dt-text as="h2" kind="headline" wrap="balance" align="center" density="200" strength="normal" class="home-section-title">Foundations</dt-text>
         <dt-box max-inline-size="1200">
-          <dt-text as="p" align="center" wrap="balance" kind="body" size="300" class="d-fs-350">The building blocks of Dialtone... Color, Type, Icons, and more.</dt-text>
+          <dt-text as="p" align="center" wrap="balance" kind="body" size="300" class="d-fs-350">The building blocks of Dialtone... Color, Type, Layout & Spacing, Icons, and more.</dt-text>
         </dt-box>
         <dt-button size="400" to="./foundations/">
           View all Foundations
@@ -116,12 +116,6 @@ pageClass: dialpad-design-home
         <dt-box max-inline-size="1200">
           <dt-text as="p" align="center" wrap="balance" kind="body" size="300" class="d-fs-350">The latest from Dialpad Design.</dt-text>
         </dt-box>
-        <dt-button :size="400" to="./dialtone/whats-new/">
-          View all
-          <template #endIcon>
-            <dt-icon name="arrow-right" size="300" />
-          </template>
-        </dt-button>
         <dt-box class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3 d-ai-stretch home-section-blog-preview">
           <dt-link
             v-for="post in $page.blogPosts.sort(sortHandler).slice(0, 3)"
@@ -138,6 +132,12 @@ pageClass: dialpad-design-home
             </dt-stack>
           </dt-link>
         </dt-box>
+        <dt-button :size="400" to="./dialtone/whats-new/">
+          View all
+          <template #endIcon>
+            <dt-icon name="arrow-right" size="300" />
+          </template>
+        </dt-button>
       </dt-stack>
     </dt-stack>
   </dt-box>
@@ -223,7 +223,6 @@ import { parse, compareDesc, format } from 'date-fns';
 import ShowcaseCarousel from '../../baseComponents/ShowcaseCarousel.vue';
 import GradientHero from '../../baseComponents/GradientHero.vue';
 import HeaderOverlay from '../../baseComponents/HeaderOverlay.vue';
-import { findPageScrollContainer } from '../../theme/utils/pageToc.js';
 
 const sortHandler = (a, b) => compareDesc(
   parse(a.posted, 'y-M-d', new Date()),
@@ -293,15 +292,14 @@ onMounted(() => {
 onMounted(() => {
   const gradientOverlay = document.querySelector('.gradient-overlay');
   const header = document.querySelector('.dialtone-header--home');
-  const scrollContainer = findPageScrollContainer();
-  let lastScrollY = scrollContainer.scrollTop;
+  let lastScrollY = window.scrollY;
   let ticking = false;
 
   if (!gradientOverlay) return;
 
   const update = () => {
     const overlayHeight = gradientOverlay.offsetHeight;
-    const scrollY = scrollContainer.scrollTop;
+    const scrollY = window.scrollY;
 
     // Overlay fades in across its scroll range: 0 at top → 1 when fully scrolled past.
     const overlayOpacity = Math.min(Math.max(scrollY / overlayHeight, 0), 1);
@@ -341,18 +339,17 @@ onMounted(() => {
     requestAnimationFrame(update);
   };
 
-  scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('scroll', handleScroll, { passive: true });
   update(); // Set initial state (e.g. when loaded at a non-zero scroll position).
 
   onUnmounted(() => {
-    scrollContainer.removeEventListener('scroll', handleScroll);
+    window.removeEventListener('scroll', handleScroll);
   });
 });
 
 // Footer gradient parallax — rAF-throttled alongside the main scroll handler.
 onMounted(() => {
   const footerGradient = document.querySelector('.gradient-overlay--footer');
-  const scrollContainer = findPageScrollContainer();
 
   if (!footerGradient) return;
 
@@ -360,7 +357,7 @@ onMounted(() => {
 
   const update = () => {
     const rect = footerGradient.getBoundingClientRect();
-    const scrollViewportBottom = scrollContainer.getBoundingClientRect().bottom;
+    const scrollViewportBottom = window.innerHeight;
 
     // scrollProgress: 0 when footer's top touches bottom of viewport, 1 when fully in view.
     const visibleTop = Math.max(0, scrollViewportBottom - rect.top);
@@ -379,11 +376,11 @@ onMounted(() => {
     requestAnimationFrame(update);
   };
 
-  scrollContainer.addEventListener('scroll', handleFooterScroll, { passive: true });
+  window.addEventListener('scroll', handleFooterScroll, { passive: true });
   update(); // Set initial state.
 
   onUnmounted(() => {
-    scrollContainer.removeEventListener('scroll', handleFooterScroll);
+    window.removeEventListener('scroll', handleFooterScroll);
   });
 });
 </script>

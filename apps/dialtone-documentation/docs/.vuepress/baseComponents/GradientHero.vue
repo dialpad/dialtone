@@ -3,30 +3,37 @@
     <div class="gradient-overlay__overlay" />
     <DtBox
       block-size="100p"
-      padding-block-end="700"
+      padding-block-end="800"
       class="d-plc-center"
     >
       <DtBox class="home-gradient-hero-content">
-        <dt-text
+        <dt-box class="d-d-flex d-plc-center d-mbe-600">
+          <dt-link to="/dialtone/">
+            <dt-box inline-size="200" style="filter: drop-shadow(rgba(0, 0, 0, 0.25) 0px 25px 30px);">
+              <svg-loader name="home--dialtone-badge" />
+            </dt-box>
+          </dt-link>
+        </dt-box>
+        <!-- <dt-text
           as="p"
           variant="headline-md"
-          strength="semibold"
+          strength="medium"
           :size="viewport.pick({
             default: '200',
             lg: '300',
           })"
           align="center"
-          class="d-tt-uppercase d-px-200 d-o80"
+          class="d-tt-uppercase d-px-200 d-o75"
         >
           Dialpad's design system
-        </dt-text>
+        </dt-text> -->
         <dt-text
           as="h1"
           kind="headline"
           strength="medium"
           density="200"
           align="center"
-          class="d-p-400 home-gradient-hero-title"
+          class="d-p-400 home-gradient-hero-title d-wmx-1300 d-mx-auto"
         >
           Start with the system. The fastest way to build Dialpad.
         </dt-text>
@@ -39,10 +46,11 @@
           })"
           align="center"
           strength="medium"
-          class="d-px-500 d-o80"
+          class="d-px-500 d-o80 d-wmx-800 d-mx-auto"
           wrap="balance"
         >
-          Built on clarity, consistency, and accessibility: components, design tokens, and guidance that make good design the default.
+          <!-- Built on clarity, consistency, and accessibility:  -->
+          Components, design tokens, and guidance that make good design the default.
         </dt-text>
         <dt-stack direction="row" justify="center" gap="300" class="d-pbs-500">
           <dt-button
