@@ -1,6 +1,7 @@
 <template>
   <div>
     <dt-button
+      ref="previewButton"
       data-qa="dt-image-viewer-preview"
       class="d-image-viewer__preview-button"
       :aria-label="ariaLabel"
@@ -15,7 +16,7 @@
     </dt-button>
     <Teleport
       v-if="isOpen"
-      :to="appendTo"
+      :to="resolvedAppendTo"
     >
       <div
         v-dt-focustrap="{ active: isOpen, initialFocus: false, restoreFocus: false }"
@@ -94,9 +95,11 @@ export default {
 
   props: {
     /**
-     * By default the portal appends to the body of the root parent. We can modify
-     * this behaviour by passing an appendTo prop that points to an id or an html tag from the root of the parent.
-     * The appendTo prop expects a CSS selector string or an actual DOM node.
+     * By default the portal appends to the nearest ancestor <dialog> element when inside
+     * one (keeping the image viewer in the browser's top layer), or to the body otherwise.
+     * We can modify this behaviour by passing an appendTo prop that points to an id or an
+     * html tag from the root of the parent. The appendTo prop expects a CSS selector string
+     * or an actual DOM node.
      * type: string | HTMLElement, default: 'body'
      */
     appendTo: {
@@ -194,6 +197,17 @@ export default {
 
     closeButtonTitle () {
       return this.i18n.$t('DIALTONE_CLOSE_BUTTON');
+    },
+
+    // Mirrors Tooltip/Popover's dialog-detection: without this, an image viewer nested in
+    // a native <dialog>-based DtModal teleports straight to document.body and renders behind
+    // the ancestor dialog's top layer, hidden despite matching z-index.
+    resolvedAppendTo () {
+      if (this.appendTo !== 'body') {
+        return this.appendTo;
+      }
+      const buttonEl = returnFirstEl(this.$refs.previewButton?.$el);
+      return buttonEl?.closest('dialog') ?? buttonEl?.getRootNode()?.querySelector('body') ?? document.body;
     },
   },
 

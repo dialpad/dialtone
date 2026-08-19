@@ -3,7 +3,7 @@
   <div>
     <Teleport
       v-if="modal && isOpen"
-      to="body"
+      :to="scrimAppendTarget"
     >
       <div
         class="d-modal--transparent"
@@ -679,6 +679,26 @@ export default {
       // there is no aria-label and the labelledby should point to the anchor.
       return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtPopover__anchor'));
     },
+
+    // The scrim must land in the same top-layer context as the popover's own content
+    // (the nearest ancestor <dialog> when nested in one). Otherwise, inside a native
+    // <dialog>-based DtModal, a plain document.body scrim can't block clicks on the
+    // rest of the dialog since top-layer content always paints above it regardless
+    // of z-index — the "modal" behavior silently does nothing when nested.
+    scrimAppendTarget () {
+      if (this.appendTo instanceof HTMLElement) {
+        return this.appendTo;
+      }
+
+      switch (this.appendTo) {
+        case 'parent':
+          return this.resolveParentScrimTarget();
+        case 'root':
+          return this.resolveRootScrimTarget();
+        default:
+          return this.resolveBodyScrimTarget();
+      }
+    },
   },
 
   watch: {
@@ -1086,6 +1106,22 @@ export default {
         // if there are no focusable elements at all focus the dialog itself
         returnFirstEl(this.$refs.content?.$el).focus();
       }
+    },
+
+    resolveParentScrimTarget () {
+      return this.anchorEl?.parentElement ?? document.body;
+    },
+
+    resolveRootScrimTarget () {
+      try {
+        return window.parent.document.body;
+      } catch {
+        return document.body;
+      }
+    },
+
+    resolveBodyScrimTarget () {
+      return this.anchorEl?.closest('dialog') ?? this.anchorEl?.getRootNode()?.querySelector('body') ?? document.body;
     },
 
     /**
