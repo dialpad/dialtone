@@ -243,5 +243,28 @@ describe('DtImageViewer Tests', () => {
         document.body.removeChild(dialogEl);
       });
     });
+
+    describe('when appendTo changes after mount', () => {
+      it('recomputes resolvedAppendToTarget', async () => {
+        const customTarget = document.createElement('div');
+        customTarget.id = 'custom-target-2';
+        document.body.appendChild(customTarget);
+
+        const localWrapper = mount(DtImageViewer, {
+          props: { ...baseProps },
+          global: { plugins: [DtFocustrapDirective] },
+          attachTo: document.body,
+        });
+
+        expect(localWrapper.vm.resolvedAppendToTarget).toBe(document.body);
+
+        await localWrapper.setProps({ appendTo: '#custom-target-2' });
+
+        expect(localWrapper.vm.resolvedAppendToTarget).toBe('#custom-target-2');
+
+        localWrapper.unmount();
+        document.body.removeChild(customTarget);
+      });
+    });
   });
 });

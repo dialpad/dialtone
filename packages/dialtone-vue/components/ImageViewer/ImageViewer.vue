@@ -233,6 +233,10 @@ export default {
 
       immediate: true,
     },
+
+    appendTo () {
+      this.updateResolvedAppendToTarget();
+    },
   },
 
   mounted () {
