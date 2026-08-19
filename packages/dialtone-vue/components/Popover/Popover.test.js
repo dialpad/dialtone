@@ -619,6 +619,107 @@ describe('DtPopover Tests', () => {
         document.body.removeChild(dialogEl);
       });
     });
+
+    describe('scrim target (modal=true)', () => {
+      const mountModalPopover = async (extraProps, attachTo) => {
+        const localWrapper = mount(DtPopover, {
+          props: { ...baseProps, open: true, modal: true, ...extraProps },
+          slots: { ...baseSlots },
+          global: { plugins: [DtFocustrapDirective], stubs: { transition: false } },
+          attachTo,
+        });
+        await flushPromises();
+        return localWrapper;
+      };
+
+      describe('when appendTo is "body" (default) and anchor is inside a <dialog>', () => {
+        it('places the scrim in the dialog, matching the content target', async () => {
+          const dialogEl = document.createElement('dialog');
+          document.body.appendChild(dialogEl);
+
+          const localWrapper = await mountModalPopover({}, dialogEl);
+          const scrim = dialogEl.querySelector('.d-modal--transparent');
+
+          expect(scrim.parentElement).toBe(dialogEl);
+          expect(localWrapper.vm.tip.popper.parentElement).toBe(dialogEl);
+
+          localWrapper.unmount();
+          document.body.removeChild(dialogEl);
+        });
+      });
+
+      describe('when appendTo is "body" (default) and anchor is NOT inside a <dialog>', () => {
+        it('places the scrim in document.body, matching the content target', async () => {
+          const localWrapper = await mountModalPopover({}, document.body);
+          const scrim = document.body.querySelector('.d-modal--transparent');
+
+          expect(scrim.parentElement).toBe(document.body);
+          expect(localWrapper.vm.tip.popper.parentElement).toBe(document.body);
+
+          localWrapper.unmount();
+        });
+      });
+
+      describe('when appendTo is "parent"', () => {
+        it('places the scrim under the anchor\'s parent element', async () => {
+          const container = document.createElement('div');
+          document.body.appendChild(container);
+
+          const localWrapper = await mountModalPopover({ appendTo: 'parent' }, container);
+          const scrim = container.querySelector('.d-modal--transparent');
+
+          expect(scrim.parentElement).toBe(localWrapper.vm.anchorEl.parentElement);
+
+          localWrapper.unmount();
+          document.body.removeChild(container);
+        });
+      });
+
+      describe('when appendTo is "root"', () => {
+        it('places the scrim in window.parent.document.body when same-origin', async () => {
+          const localWrapper = await mountModalPopover({ appendTo: 'root' }, document.body);
+          const scrim = document.body.querySelector('.d-modal--transparent');
+
+          expect(scrim.parentElement).toBe(window.parent.document.body);
+
+          localWrapper.unmount();
+        });
+
+        it('falls back to document.body when the parent window is cross-origin', async () => {
+          const originalParentDescriptor = Object.getOwnPropertyDescriptor(window, 'parent');
+          Object.defineProperty(window, 'parent', {
+            configurable: true,
+            get () {
+              throw new Error('cross-origin');
+            },
+          });
+
+          const localWrapper = await mountModalPopover({ appendTo: 'root' }, document.body);
+          const scrim = document.body.querySelector('.d-modal--transparent');
+
+          expect(scrim.parentElement).toBe(document.body);
+
+          localWrapper.unmount();
+          Object.defineProperty(window, 'parent', originalParentDescriptor);
+        });
+      });
+
+      describe('when appendTo is an explicit HTMLElement', () => {
+        it('places the scrim in that element, matching the content target', async () => {
+          const customTarget = document.createElement('div');
+          document.body.appendChild(customTarget);
+
+          const localWrapper = await mountModalPopover({ appendTo: customTarget }, document.body);
+          const scrim = customTarget.querySelector('.d-modal--transparent');
+
+          expect(scrim.parentElement).toBe(customTarget);
+          expect(localWrapper.vm.tip.popper.parentElement).toBe(customTarget);
+
+          localWrapper.unmount();
+          document.body.removeChild(customTarget);
+        });
+      });
+    });
   });
 
   describe('When anchor slot content changes', () => {

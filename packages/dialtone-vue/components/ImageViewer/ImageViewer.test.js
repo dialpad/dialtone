@@ -161,4 +161,87 @@ describe('DtImageViewer Tests', () => {
       });
     });
   });
+
+  describe('appendTo behavior', () => {
+    // These tests need the real Teleport (not the module-level `teleport: true` stub)
+    // to observe where the viewer actually lands in the DOM.
+    describe('when anchor is inside a <dialog> element and appendTo is "body"', () => {
+      it('resolves to the dialog element, not document.body', async () => {
+        const dialogEl = document.createElement('dialog');
+        document.body.appendChild(dialogEl);
+
+        const localWrapper = mount(DtImageViewer, {
+          props: { ...baseProps },
+          global: { plugins: [DtFocustrapDirective] },
+          attachTo: dialogEl,
+        });
+
+        await localWrapper.find('[data-qa="dt-image-viewer-preview"]').trigger('click');
+
+        expect(localWrapper.vm.resolvedAppendToTarget).toBe(dialogEl);
+        expect(dialogEl.querySelector('[data-qa="dt-modal"]')).not.toBeNull();
+
+        localWrapper.unmount();
+        document.body.removeChild(dialogEl);
+      });
+
+      it('resolves to the dialog even when open=true is already set on mount', () => {
+        // Regression: resolvedAppendToTarget must be resolved in mounted() and stored in
+        // reactive data, not computed from $refs — a computed reading $refs directly would
+        // evaluate before the ref is assigned and permanently cache the wrong target.
+        const dialogEl = document.createElement('dialog');
+        document.body.appendChild(dialogEl);
+
+        const localWrapper = mount(DtImageViewer, {
+          props: { ...baseProps, open: true },
+          global: { plugins: [DtFocustrapDirective] },
+          attachTo: dialogEl,
+        });
+
+        expect(localWrapper.vm.resolvedAppendToTarget).toBe(dialogEl);
+
+        localWrapper.unmount();
+        document.body.removeChild(dialogEl);
+      });
+    });
+
+    describe('when anchor is NOT inside a <dialog> element and appendTo is "body"', () => {
+      it('resolves to document.body', async () => {
+        const localWrapper = mount(DtImageViewer, {
+          props: { ...baseProps },
+          global: { plugins: [DtFocustrapDirective] },
+          attachTo: document.body,
+        });
+
+        await localWrapper.find('[data-qa="dt-image-viewer-preview"]').trigger('click');
+
+        expect(localWrapper.vm.resolvedAppendToTarget).toBe(document.body);
+
+        localWrapper.unmount();
+      });
+    });
+
+    describe('when anchor is inside a <dialog> but appendTo is explicitly set', () => {
+      it('uses the explicit appendTo target, bypassing dialog detection', async () => {
+        const dialogEl = document.createElement('dialog');
+        const customTarget = document.createElement('div');
+        customTarget.id = 'custom-target';
+        dialogEl.appendChild(customTarget);
+        document.body.appendChild(dialogEl);
+
+        const localWrapper = mount(DtImageViewer, {
+          props: { ...baseProps, appendTo: '#custom-target' },
+          global: { plugins: [DtFocustrapDirective] },
+          attachTo: dialogEl,
+        });
+
+        await localWrapper.find('[data-qa="dt-image-viewer-preview"]').trigger('click');
+
+        expect(localWrapper.vm.resolvedAppendToTarget).toBe('#custom-target');
+
+        localWrapper.unmount();
+        document.body.removeChild(dialogEl);
+      });
+    });
+  });
 });
