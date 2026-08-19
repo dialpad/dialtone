@@ -77,10 +77,31 @@
         </li>
       </DtStack>
     </DtBox>
-    <DtBox border-width="100" padding="100" border-radius="400">
-      <DtText as="p" variant="body-sm" align="center" tone="muted">
-        meta
-      </DtText>
+    <DtBox
+      v-if="viewport.above('lg')"
+      padding-block-start="100"
+    >
+      <dt-segmented-control
+        :model-value="currentMode"
+        aria-label="Appearance mode"
+        @update:model-value="setMode"
+      >
+        <dt-segmented-control-item v-dt-tooltip="`Mode: System`" value="system" label="System">
+          <template #startIcon="{ iconSize }">
+            <dt-icon name="laptop-2" :size="iconSize" />
+          </template>
+        </dt-segmented-control-item>
+        <dt-segmented-control-item v-dt-tooltip="`Mode: Light`" value="light" label="Light">
+          <template #startIcon="{ iconSize }">
+            <dt-icon name="sun" :size="iconSize" />
+          </template>
+        </dt-segmented-control-item>
+        <dt-segmented-control-item v-dt-tooltip="`Mode: Dark`" value="dark" label="Dark">
+          <template #startIcon="{ iconSize }">
+            <dt-icon name="moon" :size="iconSize" />
+          </template>
+        </dt-segmented-control-item>
+      </dt-segmented-control>
     </DtBox>
   </dt-stack>
 </template>
@@ -91,6 +112,7 @@ import { useRoute, useRouter } from 'vue-router';
 import SidebarItem from './SidebarItem.vue';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import { useSidebarItems } from '../composables/useSidebarItems';
+import { useThemeManager } from '../composables/useThemeManager';
 import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
 import {
   canReceiveCharacterInput,
@@ -102,6 +124,7 @@ const router = useRouter();
 const items = useThemeLocaleData().value.sidebar;
 const sidebarItems = useSidebarItems(items);
 const viewport = useViewportBreakpoints();
+const { currentMode, setMode } = useThemeManager();
 
 // Track which items are open (by their link or text as key)
 const openItems = ref(new Set());

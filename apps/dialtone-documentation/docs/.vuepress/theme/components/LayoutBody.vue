@@ -2,7 +2,7 @@
   <dt-stack direction="row" align="stretch" gap="400" class="d-h100p">
     <DtBox
       v-if="viewport.above('lg') && !$frontmatter.home && !$frontmatter.noSidebar"
-      padding-block-end="400"
+      padding-block-end="250"
       padding-inline="200"
       min-inline-size="450"
       max-inline-size="450"

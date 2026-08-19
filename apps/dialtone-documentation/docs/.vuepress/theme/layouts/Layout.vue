@@ -2,8 +2,11 @@
   <dt-stack class="d-ps-fixed d-all-0 d-of-hidden">
     <migration-banner />
     <doc-header
+      v-if="viewport.pick({
+        default: true,
+        lg: false,
+      })"
       :mobile-menu-open="isMobileMenuOpen"
-      hidden
       @toggle-mobile-menu="toggleMobileMenu"
     />
     <DtBox
