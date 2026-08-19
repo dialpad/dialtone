@@ -296,9 +296,7 @@
 
 <script setup>
 import { useThemeManager } from '../composables/useThemeManager';
-import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
 
-const showThemeSwitcher = __VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__;
 const branchName = __DIALTONE_BRANCH_NAME__;
 const showBranchBadge = branchName && (__VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__);
 
@@ -322,7 +320,6 @@ const {
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
 const formatMaterial = (m) => m === 'sandstone' ? 'Sandstone (default)' : capitalize(m);
-const viewport = useViewportBreakpoints();
 </script>
 
 <style scoped>

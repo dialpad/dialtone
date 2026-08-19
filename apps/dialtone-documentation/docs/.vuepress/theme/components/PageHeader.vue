@@ -181,7 +181,7 @@
 </template>
 
 <script setup>
-import { DtIconStorybookColor, DtIconFigma, DtIconGithub } from '@dialpad/dialtone-icons/vue';
+import { DtIconStorybookColor, DtIconFigma } from '@dialpad/dialtone-icons/vue';
 import { computed, onUnmounted, ref } from 'vue';
 import { usePageData, withBase } from 'vuepress/client';
 import { isExternalUrl } from '../utils/isExternalUrl';

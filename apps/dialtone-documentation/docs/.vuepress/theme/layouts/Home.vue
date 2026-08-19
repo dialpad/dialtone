@@ -1,5 +1,5 @@
 <template>
-  <DtStack
+  <dt-stack
     v-if="viewport.above('lg')"
     direction="row"
     align="start"
@@ -24,9 +24,9 @@
     >
       <content />
     </DtBox>
-  </DtStack>
+  </dt-stack>
   <template v-else>
-    <DtStack
+    <dt-stack
       v-if="isMobileMenuOpen"
       class="d-ps-fixed d-all-0 d-of-hidden d-zi-navigation-fixed d-bgc-primary"
     >
@@ -44,7 +44,7 @@
       >
         <sidebar />
       </DtBox>
-    </DtStack>
+    </dt-stack>
     <template v-else>
       <doc-header
         class="d-ps-sticky d-ibs-0 d-zi-navigation-fixed"

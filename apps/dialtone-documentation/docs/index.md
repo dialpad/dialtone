@@ -3,7 +3,20 @@ layout: Home
 pageClass: dialpad-design-home
 ---
 
-<dt-box>
+<dt-box position="relative">
+  <dt-box
+    v-if="viewport.above('md')"
+    position="absolute"
+    inset-block-start="200"
+    inset-inline="200"
+    z-index="navigation"
+    border-width="100"
+    border-radius="400"
+    shadow="small"
+    class="d-of-hidden"
+  >
+    <migration-banner />
+  </dt-box>
   <gradient-hero />
 </dt-box>
 <dt-box as="section" class="d-m-auto">
@@ -223,6 +236,9 @@ import { parse, compareDesc, format } from 'date-fns';
 import ShowcaseCarousel from '../../baseComponents/ShowcaseCarousel.vue';
 import GradientHero from '../../baseComponents/GradientHero.vue';
 import HeaderOverlay from '../../baseComponents/HeaderOverlay.vue';
+import { useViewportBreakpoints } from '../../theme/composables/useViewportBreakpoints.js';
+
+const viewport = useViewportBreakpoints();
 
 const sortHandler = (a, b) => compareDesc(
   parse(a.posted, 'y-M-d', new Date()),

@@ -8,7 +8,7 @@
     <template #icon>
       <dt-icon name="rocket" />
     </template>
-    Dialtone's next major version includes breaking changes.
+    Dialtone v10+ includes breaking changes.
     View the
     <dt-link to="/guides/migration/" tone="muted">
       Migration Guide
@@ -16,7 +16,7 @@
     <template #action>
       <dt-button
         kind="muted"
-        importance="clear"
+        importance="outlined"
         size="200"
         label-class="d-tw-nowrap"
         @click="permanentDismiss"

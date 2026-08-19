@@ -52,8 +52,10 @@
           <!-- Built on clarity, consistency, and accessibility:  -->
           Components, design tokens, and guidance that make good design the default.
         </dt-text>
-        <dt-stack direction="row" justify="center" gap="300" class="d-pbs-500">
+        <dt-stack direction="row" justify="center" gap="250" class="d-pbs-500">
           <dt-button
+            v-dt-mode:dark
+            class="home-gradient-hero-btn"
             to="/dialtone/"
             :size="400"
             @click="sendAnalyticsEvent()"
@@ -92,6 +94,10 @@ const viewport = useViewportBreakpoints();
 /* Styles are inherited from parent page's .gradient-overlay definitions */
 /* Unscoped to allow parent's dynamic CSS variable updates to work */
 
+.home-gradient-hero-btn {
+  --button-color-text: var(--dt-color-neutral-white);
+  --button-color-background: var(--dt-color-purple-100);
+}
 .home-gradient-hero-content {
   transform: translateY(var(--text-translate-y, 0px));
   opacity: var(--text-opacity);

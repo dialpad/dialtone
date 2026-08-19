@@ -1,6 +1,5 @@
 <template>
   <dt-stack class="d-ps-fixed d-all-0 d-of-hidden">
-    <!-- <migration-banner /> -->
     <doc-header
       v-if="viewport.pick({
         default: true,
@@ -9,6 +8,7 @@
       :mobile-menu-open="isMobileMenuOpen"
       @toggle-mobile-menu="toggleMobileMenu"
     />
+    <migration-banner v-if="viewport.above('md')" />
     <DtBox
       v-if="isMobileMenuOpen && !viewport.above('lg')"
       id="sidebar-mobile"
@@ -47,7 +47,6 @@ import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js
 import DocHeader from '../components/Header.vue';
 import LayoutBody from '../components/LayoutBody.vue';
 import Sidebar from '../components/Sidebar.vue';
-import MigrationBanner from '../../baseComponents/MigrationBanner.vue';
 import { getComponentCombinatorName } from '../utils/componentCombinator.js';
 import { isExternalUrl } from '../utils/isExternalUrl';
 import { computed, nextTick, ref, watch } from 'vue';
