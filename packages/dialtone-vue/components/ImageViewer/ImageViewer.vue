@@ -16,7 +16,7 @@
     </dt-button>
     <Teleport
       v-if="isOpen"
-      :to="resolvedAppendTo"
+      :to="resolvedAppendToTarget"
     >
       <div
         v-dt-focustrap="{ active: isOpen, initialFocus: false, restoreFocus: false }"
@@ -173,6 +173,13 @@ export default {
       showCloseButton: true,
       isOpen: false,
       i18n: new DialtoneLocalization(),
+      // Mirrors Tooltip/Popover's dialog-detection: without this, an image viewer nested in
+      // a native <dialog>-based DtModal teleports straight to document.body and renders behind
+      // the ancestor dialog's top layer, hidden despite matching z-index. Resolved imperatively
+      // in mounted() rather than as a computed, since $refs aren't tracked as a reactive
+      // dependency and a computed reading $refs.previewButton would permanently cache the
+      // pre-mount (wrong) value when isOpen is already true on initial render.
+      resolvedAppendToTarget: document.body,
     };
   },
 
@@ -197,17 +204,6 @@ export default {
 
     closeButtonTitle () {
       return this.i18n.$t('DIALTONE_CLOSE_BUTTON');
-    },
-
-    // Mirrors Tooltip/Popover's dialog-detection: without this, an image viewer nested in
-    // a native <dialog>-based DtModal teleports straight to document.body and renders behind
-    // the ancestor dialog's top layer, hidden despite matching z-index.
-    resolvedAppendTo () {
-      if (this.appendTo !== 'body') {
-        return this.appendTo;
-      }
-      const buttonEl = returnFirstEl(this.$refs.previewButton?.$el);
-      return buttonEl?.closest('dialog') ?? buttonEl?.getRootNode()?.querySelector('body') ?? document.body;
     },
   },
 
@@ -237,7 +233,21 @@ export default {
     },
   },
 
+  mounted () {
+    this.updateResolvedAppendToTarget();
+  },
+
   methods: {
+    updateResolvedAppendToTarget () {
+      if (this.appendTo !== 'body') {
+        this.resolvedAppendToTarget = this.appendTo;
+        return;
+      }
+      const buttonEl = returnFirstEl(this.$refs.previewButton?.$el);
+      this.resolvedAppendToTarget = buttonEl?.closest('dialog') ??
+        buttonEl?.getRootNode()?.querySelector('body') ?? document.body;
+    },
+
     openModal () {
       // Has custom control passed in
       if (this.open !== null) {
