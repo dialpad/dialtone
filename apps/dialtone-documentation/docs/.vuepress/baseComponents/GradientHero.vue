@@ -7,7 +7,7 @@
       class="d-plc-center"
     >
       <DtBox class="home-gradient-hero-content">
-        <dt-box class="d-d-flex d-plc-center d-mbe-600">
+        <dt-box v-if="viewport.above('lg')" class="d-d-flex d-plc-center d-mbe-600">
           <dt-link to="/dialtone/">
             <dt-box inline-size="200" style="filter: drop-shadow(rgba(0, 0, 0, 0.25) 0px 25px 30px);">
               <svg-loader name="home--dialtone-badge" />
@@ -42,7 +42,7 @@
           variant="body-md"
           :size="viewport.pick({
             default: '200',
-            lg: '350',
+            md: '350',
           })"
           align="center"
           strength="medium"
@@ -113,7 +113,7 @@ const viewport = useViewportBreakpoints();
   background-clip: text;
   -webkit-text-fill-color: transparent;
 
-  @media screen and (min-width: 960px) {
+  @media screen and (min-width: 768px) {
     font-size: 64px;
   }
 

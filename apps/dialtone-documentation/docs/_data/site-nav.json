@@ -1014,35 +1014,30 @@
               "link": "https://uikits.dialpad.com/chatkit/",
               "github_url": "https://github.com/dialpad/dialpad-uikits/tree/main/packages/chatkit",
               "description": "Components for conversation feeds and chatbots. Includes message rows, composers, action sheets, and more.",
-              "status": "beta"
             },
             {
               "text": "FormKit",
               "link": "https://uikits.dialpad.com/formkit/",
               "github_url": "https://github.com/dialpad/dialpad-uikits/tree/main/packages/formkit",
               "description": "Fieldsets for settings and admin pages. Includes text inputs, textareas, and repeating multi-field variants.",
-              "status": "beta"
             },
             {
               "text": "CallbarKit",
               "link": "https://uikits.dialpad.com/callbarkit/",
               "github_url": "https://github.com/dialpad/dialpad-uikits/tree/main/packages/callbarkit",
               "description": "Specialized building blocks for meeting and telephony controls. Includes callbar buttons, banners, and timers.",
-              "status": "beta"
             },
             {
               "text": "NavigationKit",
               "link": "https://uikits.dialpad.com/navigationkit/",
               "github_url": "https://github.com/dialpad/dialpad-uikits/tree/main/packages/navigationkit",
               "description": "Components appearing in the application shell (top and left navigation). Houses contact rows, unread pills, and menu buttons.",
-              "status": "beta"
             },
             {
               "text": "WorkflowKit",
               "link": "https://uikits.dialpad.com/workflowkit/",
               "github_url": "https://github.com/dialpad/dialpad-uikits/tree/main/packages/workflowkit",
               "description": "Visual workflow builder components. Currently used for card-based steps in the IVR Workflow configuration.",
-              "status": "beta"
             },
             {
               "text": "AnalyticsKit",

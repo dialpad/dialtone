@@ -23,7 +23,13 @@ pageClass: dialpad-design-home
   <dt-box as="article" padding-block="800">
     <showcase-carousel />
   </dt-box>
-  <dt-box as="article" padding-block="800" padding-inline="800">
+  <dt-box
+    as="article"
+    padding-block="800"
+    :padding-inline="viewport.pick({
+      default: '500', md: '800',
+    })"
+  >
     <dt-stack gap="550" align="center">
       <!-- <dt-link to="/dialtone/">
         <dt-box inline-size="200" style="filter: drop-shadow(rgba(0, 0, 0, 0.25) 0px 25px 30px);">
@@ -38,7 +44,13 @@ pageClass: dialpad-design-home
       </dt-box>
     </dt-stack>
   </dt-box>
-  <dt-box as="article" padding-block="800" padding-inline="800">
+  <dt-box
+    as="article"
+    padding-block="800"
+    :padding-inline="viewport.pick({
+      default: '500', md: '800',
+    })"
+  >
     <dt-stack gap="700" align="center">
       <dt-stack class="home-section-inline" :direction="{ 'default': 'column', 'md': 'row' }" gap="600" justify="center">
         <dt-link to="./foundations/brand/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
@@ -80,7 +92,13 @@ pageClass: dialpad-design-home
       </dt-stack>
     </dt-stack>
   </dt-box>
-  <dt-box as="article" padding-block="800" padding-inline="800">
+  <dt-box
+    as="article"
+    padding-block="800"
+    :padding-inline="viewport.pick({
+      default: '500', md: '800',
+    })"
+  >
     <dt-stack gap="700" align="center">
       <dt-stack class="home-section-inline" :direction="{ 'default': 'column', 'md': 'row' }" gap="600" justify="center">
         <dt-link to="./components/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
@@ -122,7 +140,13 @@ pageClass: dialpad-design-home
       </dt-stack>
     </dt-stack>
   </dt-box>
-  <dt-box as="article" padding-block="800" padding-inline="800">
+  <dt-box
+    as="article"
+    padding-block="800"
+    :padding-inline="viewport.pick({
+      default: '500', md: '800',
+    })"
+  >
     <dt-stack gap="700" align="center">
       <dt-stack class="home-section-inline" gap="550" align="center">
         <dt-text as="h2" kind="headline" wrap="balance" align="center" density="200" strength="normal" class="home-section-title">What's New</dt-text>
@@ -171,11 +195,16 @@ pageClass: dialpad-design-home
 <style lang="less">
 [data-dt-mode="dark"] .dialpad-design-home {
   /* --dt-shell-color-surface-default: var(--dt-color-purple-50); */
+  background-color: var(--dt-color-purple-50);
 }
 
 .home-section-title {
-  font-size: 48px;
+  font-size: 36px;
   font-family: var(--dt-font-family-expressive);
+
+  @media screen and (min-width: 640px) {
+    font-size: 48px;
+  }
 }
 
 .home-section-inline {
