@@ -638,7 +638,7 @@ describe('DtPopover Tests', () => {
           document.body.appendChild(dialogEl);
 
           const localWrapper = await mountModalPopover({}, dialogEl);
-          const scrim = dialogEl.querySelector('.d-modal--transparent');
+          const scrim = dialogEl.querySelector('[data-qa="dt-popover-scrim"]');
 
           expect(scrim.parentElement).toBe(dialogEl);
           expect(localWrapper.vm.tip.popper.parentElement).toBe(dialogEl);
@@ -651,7 +651,7 @@ describe('DtPopover Tests', () => {
       describe('when appendTo is "body" (default) and anchor is NOT inside a <dialog>', () => {
         it('places the scrim in document.body, matching the content target', async () => {
           const localWrapper = await mountModalPopover({}, document.body);
-          const scrim = document.body.querySelector('.d-modal--transparent');
+          const scrim = document.body.querySelector('[data-qa="dt-popover-scrim"]');
 
           expect(scrim.parentElement).toBe(document.body);
           expect(localWrapper.vm.tip.popper.parentElement).toBe(document.body);
@@ -666,7 +666,7 @@ describe('DtPopover Tests', () => {
           document.body.appendChild(container);
 
           const localWrapper = await mountModalPopover({ appendTo: 'parent' }, container);
-          const scrim = container.querySelector('.d-modal--transparent');
+          const scrim = container.querySelector('[data-qa="dt-popover-scrim"]');
 
           expect(scrim.parentElement).toBe(localWrapper.vm.anchorEl.parentElement);
 
@@ -678,7 +678,7 @@ describe('DtPopover Tests', () => {
       describe('when appendTo is "root"', () => {
         it('places the scrim in window.parent.document.body when same-origin', async () => {
           const localWrapper = await mountModalPopover({ appendTo: 'root' }, document.body);
-          const scrim = document.body.querySelector('.d-modal--transparent');
+          const scrim = document.body.querySelector('[data-qa="dt-popover-scrim"]');
 
           expect(scrim.parentElement).toBe(window.parent.document.body);
 
@@ -696,13 +696,18 @@ describe('DtPopover Tests', () => {
             },
           });
 
-          const localWrapper = await mountModalPopover({ appendTo: 'root' }, document.body);
-          const scrim = document.body.querySelector('.d-modal--transparent');
+          // window.parent is shared global state — restore it in finally so a failed
+          // mount/assertion here can't leave every later test unable to access window.parent.
+          let localWrapper;
+          try {
+            localWrapper = await mountModalPopover({ appendTo: 'root' }, document.body);
+            const scrim = document.body.querySelector('[data-qa="dt-popover-scrim"]');
 
-          expect(scrim.parentElement).toBe(localWrapper.vm.anchorEl.parentElement);
-
-          localWrapper.unmount();
-          Object.defineProperty(window, 'parent', originalParentDescriptor);
+            expect(scrim.parentElement).toBe(localWrapper.vm.anchorEl.parentElement);
+          } finally {
+            localWrapper?.unmount();
+            Object.defineProperty(window, 'parent', originalParentDescriptor);
+          }
         });
       });
 
@@ -712,7 +717,7 @@ describe('DtPopover Tests', () => {
           document.body.appendChild(customTarget);
 
           const localWrapper = await mountModalPopover({ appendTo: customTarget }, document.body);
-          const scrim = customTarget.querySelector('.d-modal--transparent');
+          const scrim = customTarget.querySelector('[data-qa="dt-popover-scrim"]');
 
           expect(scrim.parentElement).toBe(customTarget);
           expect(localWrapper.vm.tip.popper.parentElement).toBe(customTarget);

@@ -7,6 +7,7 @@
     >
       <div
         class="d-modal--transparent"
+        data-qa="dt-popover-scrim"
         aria-hidden="false"
         @click.prevent.stop
       />
