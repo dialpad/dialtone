@@ -5,7 +5,7 @@
       :banner-header-text="$attrs.bannerHeaderText"
       :open="isOpen"
       :kind="$attrs.kind"
-      :size="$attrs.size"
+      :fullscreen="$attrs.fullscreen"
       :copy="$attrs.copy"
       :modal-class="$attrs.modalClass"
       :banner-class="$attrs.bannerClass"
@@ -21,6 +21,7 @@
       :append-to="$attrs.appendTo"
       :content-mode="$attrs.contentMode"
       :transparent-backdrop="$attrs.transparentBackdrop"
+      :modal="$attrs.modal"
       @update:open="close"
     >
       <template

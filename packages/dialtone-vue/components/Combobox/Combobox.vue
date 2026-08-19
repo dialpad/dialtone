@@ -55,6 +55,7 @@ import { DtKeyboardListNavigationMixin } from '@/common/mixins';
 import { getUniqueString, hasSlotContent } from '@/common/utils';
 import { COMBOBOX_LABEL_SIZES } from '@/components/Combobox';
 import { COMPONENT_SIZES } from '@/common/constants';
+import { ordinalSizeValidator } from '@/common/validators';
 
 /**
  * A combobox is a semantic component that displays an input element combined with a listbox,
@@ -108,7 +109,7 @@ export default {
       default: null,
       validator: (t) => t === null
         || Object.values(COMBOBOX_LABEL_SIZES).includes(t)
-        || Object.keys(COMPONENT_SIZES).includes(String(t)),
+        || ordinalSizeValidator(COMPONENT_SIZES)(t),
     },
 
     /**
@@ -351,7 +352,7 @@ export default {
     },
 
     clearHighlightIndex () {
-      if (this.showList) {
+      if (this.showList && this.getListElement()) {
         this.setHighlightIndex(-1);
       }
     },
@@ -396,8 +397,12 @@ export default {
     setInitialHighlightIndex () {
       if (!this.showList) return;
       this.$nextTick(() => {
-      // When the list's is shown, reset the highlight index.
-      // If the list is loading, set to -1
+        // Re-check inside the tick: the list may have closed, or when rendered
+        // outside its element is unreachable until the popover's enter
+        // transition completes (DLT-3520).
+        if (!this.showList || !this.getListElement()) return;
+        // When the list's is shown, reset the highlight index.
+        // If the list is loading, set to -1
         this.setHighlightIndex(this.loading ? -1 : 0);
       });
     },

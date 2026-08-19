@@ -210,13 +210,28 @@
         --link-color-default-hover: var(--dt-color-link-mention-hover);
         --link-padding: var(--dt-spacing-1) var(--dt-spacing-25);
         --link-background-color: var(--dt-color-link-mention-background);
+        --link-text-decoration: none;
 
         line-height: var(--dt-font-line-height-200);
         border-radius: var(--dt-size-radius-300);
 
         &:hover {
             --link-background-color: var(--dt-color-link-mention-background-hover);
+            --link-text-decoration: underline;
         }
+    }
+}
+
+.d-link--unstyled {
+    /* stylelint-disable-next-line order/properties-order */
+    all: unset; // Must be first!
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+
+    &:focus-visible {
+        outline: none;
+        box-shadow: var(--dt-shadow-focus);
     }
 }
 }

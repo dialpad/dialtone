@@ -1,8 +1,11 @@
 ---
 title: Lists
 description: Utilities for controlling list styling.
-keywords: ["list style","ordered list","unordered list","bullets","ol","ul"]
+keywords: ["list style","bullet","ordered","unordered","ol","ul"]
 ---
+
+> [!WARNING]
+> Prefer [DtTextList](/components/text-list.md) for hand-authored Vue text lists. Keep these utilities for non-Vue markup and migration escape hatches.
 
 ## Resetting a List
 

@@ -30,7 +30,7 @@ Used in most scenarios when the message should be noticeable but not dominate.
 </dt-stack>
 <!-- @code -->
 <dt-notice
-  title="Base title (optional)"
+  header-text="Base title (optional)"
 >
   <span>
     Message body with
@@ -52,7 +52,7 @@ Used in most scenarios when the message should be noticeable but not dominate.
   </template>
 </dt-notice>
 <dt-notice
-  title="Info title (optional)"
+  header-text="Info title (optional)"
   kind="info"
 >
   <span>
@@ -75,7 +75,7 @@ Used in most scenarios when the message should be noticeable but not dominate.
   </template>
 </dt-notice>
 <dt-notice
-  title="Critical title (optional)"
+  header-text="Critical title (optional)"
   kind="critical"
 >
   <span>
@@ -98,7 +98,7 @@ Used in most scenarios when the message should be noticeable but not dominate.
   </template>
 </dt-notice>
 <dt-notice
-  title="Positive title (optional)"
+  header-text="Positive title (optional)"
   kind="positive"
 >
   <span>
@@ -121,7 +121,7 @@ Used in most scenarios when the message should be noticeable but not dominate.
   </template>
 </dt-notice>
 <dt-notice
-  title="Warning title (optional)"
+  header-text="Warning title (optional)"
   kind="warning"
 >
   <span>
@@ -159,7 +159,7 @@ Used occasionally in scenarios when the message needs to dominate.
 </dt-stack>
 <!-- @code -->
 <dt-notice
-  title="Base title (optional)"
+  header-text="Base title (optional)"
   important
 >
   <span>
@@ -182,7 +182,7 @@ Used occasionally in scenarios when the message needs to dominate.
   </template>
 </dt-notice>
 <dt-notice
-  title="Info title (optional)"
+  header-text="Info title (optional)"
   kind="info"
   important
 >
@@ -206,7 +206,7 @@ Used occasionally in scenarios when the message needs to dominate.
   </template>
 </dt-notice>
 <dt-notice
-  title="Critical title (optional)"
+  header-text="Critical title (optional)"
   kind="critical"
   important
 >
@@ -230,7 +230,7 @@ Used occasionally in scenarios when the message needs to dominate.
   </template>
 </dt-notice>
 <dt-notice
-  title="Positive title (optional)"
+  header-text="Positive title (optional)"
   kind="positive"
   important
 >
@@ -254,7 +254,7 @@ Used occasionally in scenarios when the message needs to dominate.
   </template>
 </dt-notice>
 <dt-notice
-  title="Warning title (optional)"
+  header-text="Warning title (optional)"
   kind="warning"
   important
 >
@@ -287,7 +287,7 @@ Truncates the text instead of wrapping it. Useful when the Notice needs to have 
 <!-- @bg d-bgc-primary -->
 <dt-notice
   :truncate-text="true"
-  title="Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+  header-text="Lorem ipsum dolor sit amet, consectetur adipiscing elit,
     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 >
   <span>

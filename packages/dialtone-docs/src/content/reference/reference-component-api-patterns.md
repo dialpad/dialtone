@@ -16,9 +16,11 @@ keywords:
     data-qa,
     icon-sizes,
     dt-text,
+    dt-box,
+    logical-props,
   ]
 ai_summary: Cross-component API contract for Dialtone Vue components — standard props, events, slots, and patterns shared by all components.
-last_updated: 2026-06-29
+last_updated: 2026-07-09
 related_packages: [dialtone-vue]
 ---
 
@@ -53,10 +55,23 @@ Most sizable components accept a `size` prop with values: `xs`, `sm`, `md`, `lg`
 
 Exceptions exist:
 
-- DtModal uses `default` and `full`.
+- DtModal has no `size` prop. Use the `fullscreen` boolean instead (`fullscreen: true` for a fullscreen modal, `false` for the default size).
 - DtText uses numeric font-size token stops for raw font-size control when paired with `variant`: `50`, `75`, `100`, `125`, `150`, `200`, `250`, `300`, `350`, `400`, `450`, `500`, `550`, `600`, `650`, `700`, `750`, `800`.
 
 DtText `size` must be paired with `variant`, or with legacy `kind` while older code migrates. DtText also keeps legacy `kind + size` composition behavior for backward compatibility when `variant` is not set.
+
+### Logical Geometry Props
+
+Primitive container APIs use logical CSS naming for directional props. DtBox uses this pattern for padding, border widths, sizing, and positioning:
+
+- `paddingBlockStart`, `paddingBlockEnd`, `paddingInlineStart`, `paddingInlineEnd`
+- `borderWidthBlockStart`, `borderWidthBlockEnd`, `borderWidthInlineStart`, `borderWidthInlineEnd`
+- `blockSize`, `inlineSize`, `minBlockSize`, `maxInlineSize`
+- `insetBlockStart`, `insetBlockEnd`, `insetInlineStart`, `insetInlineEnd`
+
+Use logical names in public component APIs. Documentation may mention physical equivalents such as top, right, bottom, and left for discoverability, but do not add physical prop aliases when logical props exist.
+
+DtBox positioning props cover container positioning: `position`, logical inset props, and `zIndex`. Logical inset props accept documented coordinate values, including negative spacing coordinates and side-specific `50p` / `100p` percentage coordinates. Keep CSS utility classes available for responsive modifiers, calc coordinates, CSS-wide reset values, arbitrary coordinates, and non-DtBox elements.
 
 ### Kind
 

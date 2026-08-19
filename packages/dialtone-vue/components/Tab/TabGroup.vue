@@ -54,6 +54,7 @@ import {
 } from './TabsConstants';
 import { ref } from 'vue';
 import { useIndicatorAnimation } from '@/common/composables/useIndicatorAnimation';
+import { ordinalSizeValidator } from '@/common/validators';
 
 /**
  * Tabs allow users to navigation between grouped content in different views while within the same page context.
@@ -145,9 +146,7 @@ export default {
     size: {
       type: [String, Number],
       default: 300,
-      validator (size) {
-        return TAB_LIST_SIZES.includes(String(size));
-      },
+      validator: ordinalSizeValidator(TAB_LIST_SIZES),
     },
 
     /**
@@ -229,10 +228,11 @@ export default {
     'change',
 
     /**
-     * Before change tab event with the event argument, useful to perform validations and prevent changing tabs if neccessary.
+     * Before change tab event, useful to perform validations and prevent changing tabs if necessary.
      *
      * @event before-change
-     * @type {Event}
+     * @property {Event} event The originating DOM event; call `event.preventDefault()` to cancel the change.
+     * @property {Object} payload Contains the target tab's panel id as `selected`.
      */
     'before-change',
   ],
@@ -474,7 +474,8 @@ export default {
       if (this.tabItems[index]?.isDisabled) return;
       if (this.provideObj.selected === this.tabItems[index]?.panelId) return;
 
-      this.$emit('before-change', event);
+      const { panelId } = this.tabItems[index];
+      this.$emit('before-change', event, { selected: panelId });
       if (event.defaultPrevented) return;
 
       // Prevent keyboard defaults (Space scroll, Enter form submit)

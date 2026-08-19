@@ -53,6 +53,13 @@
       inset-inline: var(--dt-scrollbar-offset-inline-start, 0) var(--dt-scrollbar-offset-inline-end, 0);
     }
   }
+
+  :where([data-overlayscrollbars-viewport]) {
+    &,
+    &:focus-visible {
+      box-shadow: none !important;
+    }
+  }
 }
 
 // put this class on html element to disable the scrollbar on body (useful for modals)

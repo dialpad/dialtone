@@ -4,7 +4,9 @@ export const WARNING = 'warning';
 export const INFO = 'info';
 export const MUTED = 'muted';
 export const MENTION = 'mention';
-export const LINK_VARIANTS = ['', CRITICAL, WARNING, POSITIVE, INFO, MUTED, MENTION];
+export const UNSTYLED = 'unstyled';
+export const LINK_UNSTYLED_CLASS = 'd-link--unstyled';
+export const LINK_VARIANTS = ['', CRITICAL, WARNING, POSITIVE, INFO, MUTED, MENTION, UNSTYLED];
 
 export const LINK_KIND_MODIFIERS = {
   default: '',
@@ -36,5 +38,6 @@ export const getLinkKindModifier = (kind, inverted) => {
 export default {
   LINK_VARIANTS,
   LINK_KIND_MODIFIERS,
+  LINK_UNSTYLED_CLASS,
   getLinkKindModifier,
 };

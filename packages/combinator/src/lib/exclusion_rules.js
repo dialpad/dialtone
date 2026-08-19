@@ -21,7 +21,9 @@ export function hasNoValue (value) {
 
 /**
  * Builds an exclusion-rule fragment that both disables a control and clears its
- * value — the standard gating for a deprecated alias whose replacement is active.
+ * value — the standard gating for a control that is inert in the current state,
+ * e.g. a deprecated alias whose replacement is active, or inset props while
+ * position is static.
  *
  * @param {string[]} props - The prop names to disable and clear.
  * @returns {{ disable: { props: string[] }, clear: { props: string[] } }}

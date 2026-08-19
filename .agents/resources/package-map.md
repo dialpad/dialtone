@@ -18,7 +18,8 @@ dialtone-icons ----------------------> dialtone-vue -> dialtone-documentation
 | ------------------------------------------- | ----------------------------- | ---------------------------------------------------------------------- |
 | `packages/dialtone-tokens/**`               | tokens                        | Design token source and platform outputs.                              |
 | `packages/dialtone-css/**`                  | css                           | Less utilities and component styles. Depends on tokens.                |
-| `packages/dialtone-vue/**`                  | vue                           | Vue components, recipes, stories, docs JSON. Depends on icons and CSS. |
+| `packages/dialtone-vue/**`                  | vue                           | Vue components, stories, docs JSON. Depends on icons and CSS.          |
+| `packages/combinator/**`                    | combinator                    | Playground, variants, generated-code UI, and component thumbnail inputs. Depends on Vue, icons, CSS, and tokens. |
 | `apps/dialtone-documentation/**`            | docs-site                     | VuePress documentation site.                                           |
 | `packages/dialtone-docs/**`                 | ai-docs                       | AI-readable docs and public docs JSON.                                 |
 | `packages/dialtone-query-core/**`           | query-core                    | Shared search/data layer for MCP, CLI, and language-server consumers.  |
@@ -36,5 +37,6 @@ dialtone-icons ----------------------> dialtone-vue -> dialtone-documentation
 
 - Upstream changes should consider downstream builds. Token changes can affect CSS, Vue, docs, query data, and platform outputs.
 - Vue component API changes should consider tests, Storybook, VuePress docs, component docs JSON, MCP/query data, and public docs.
+- Vue component API changes should also consider Combinator variant files and component-wall thumbnail output.
 - Query-core changes can affect MCP server, CLI, language-server, and documentation search behavior.
 - Generated outputs should stay out of commits unless the package workflow explicitly requires them.

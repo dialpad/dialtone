@@ -145,6 +145,7 @@
 <script>
 import { warn, resolveComponent } from 'vue';
 import { hasSlotContent } from '@/common/utils';
+import { ordinalSizeValidator } from '@/common/validators';
 import DtLoader from '@/components/Loader/Loader.vue';
 
 import {
@@ -214,7 +215,7 @@ export default {
 
     /**
      * The color of the link and button if the button is styled as a link.
-     * @values default, critical, warning, positive, muted
+     * @values default, critical, warning, positive, muted, info, mention
      * @see DtLink
      */
     linkKind: {
@@ -290,7 +291,7 @@ export default {
     size: {
       type: [String, Number],
       default: 300,
-      validator: (s) => Object.keys(BUTTON_SIZE_MODIFIERS).includes(String(s)),
+      validator: ordinalSizeValidator(BUTTON_SIZE_MODIFIERS),
     },
 
     /**
@@ -369,7 +370,9 @@ export default {
 
     /**
      * The color of the button.
-     * @values default, unstyled, muted, critical, positive
+     * The inverted value is deprecated and will be removed in the next major version.
+     * Please use the v-dt-mode directive instead.
+     * @values default, unstyled, muted, critical, positive, inverted
      */
     kind: {
       type: String,

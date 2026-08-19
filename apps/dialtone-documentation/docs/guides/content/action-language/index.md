@@ -1,7 +1,6 @@
 ---
 title: Action language
 cardTitle: Actions
-cardOrder: 2
 prev: { link: "../writing-approach/", text: "Writing approach" }
 next: { link: "../error-messages/", text: "Error messages" }
 description: Labels, links, headings, and navigation.

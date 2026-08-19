@@ -64,5 +64,21 @@ describe('DtNoticeContent tests', () => {
         expect(header.text()).toBe(slotsData.header);
       });
     });
+
+    describe('When no message content is provided', () => {
+      beforeEach(() => {
+        props = baseProps;
+        slotsData = {};
+        wrapper = mount(DtNoticeContent, {
+          props,
+          slots: slotsData,
+        });
+        _setChildWrappers();
+      });
+
+      it('does not render the message element', () => {
+        expect(content.exists()).toBe(false);
+      });
+    });
   });
 });

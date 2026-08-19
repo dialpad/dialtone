@@ -11,6 +11,7 @@
 <script>
 import { icons } from '@dialpad/dialtone-icons/vue';
 import { ICON_SIZE_MODIFIERS, ICON_NAMES } from './IconConstants';
+import { ordinalSizeValidator } from '@/common/validators';
 // import { DialtoneLocalization } from '@/localization';
 // import { toFluentKeyString } from '@/common/utils';
 
@@ -27,9 +28,9 @@ export default {
      * @values 100, 200, 300, 400, 500, 600, 700, 800
      */
     size: {
-      type: String,
-      default: '500',
-      validator: (s) => Object.keys(ICON_SIZE_MODIFIERS).includes(s),
+      type: [String, Number],
+      default: 500,
+      validator: ordinalSizeValidator(ICON_SIZE_MODIFIERS),
     },
 
     /**

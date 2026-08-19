@@ -10,11 +10,12 @@
       :class="[
         'd-modal',
         MODAL_KIND_MODIFIERS[kind],
-        MODAL_SIZE_MODIFIERS[size],
+        { 'd-modal--full': fullscreen },
         { 'd-modal--transparent-backdrop': transparentBackdrop },
         modalClass,
       ]"
       data-qa="dt-modal"
+      :aria-modal="modal ? 'true' : undefined"
       :aria-describedby="describedById || undefined"
       :aria-labelledby="labelledById"
       v-bind="modeAttrs"
@@ -137,7 +138,6 @@ import ModeMixin from '@/common/mixins/mode';
 import {
   MODAL_BANNER_KINDS,
   MODAL_KIND_MODIFIERS,
-  MODAL_SIZE_MODIFIERS,
 } from './ModalConstants';
 import { getUniqueString, hasSlotContent, returnFirstEl, disableRootScrolling, enableRootScrolling } from '@/common/utils';
 import { HTML_ELEMENT_TYPE } from '@/common/constants';
@@ -229,13 +229,12 @@ export default {
     },
 
     /**
-     * The size of the modal. size - default or full,
-     * @values default, full
+     * Whether the modal fills the viewport instead of rendering at its default size.
+     * @values true, false
      */
-    size: {
-      type: String,
-      default: 'default',
-      validator: (s) => Object.keys(MODAL_SIZE_MODIFIERS).includes(s),
+    fullscreen: {
+      type: Boolean,
+      default: false,
     },
 
     /**
@@ -372,6 +371,26 @@ export default {
       type: Boolean,
       default: false,
     },
+
+    /**
+     * When true, the dialog opens with showModal(), which promotes it to the browser
+     * top layer. Nothing outside the top layer can paint above it regardless of
+     * z-index, so application surfaces such as toasts and call notifications end up
+     * behind it. When false, it opens with show() and stays in the normal stacking
+     * order, where the Dialtone z-index scale applies and --zi-notification (700)
+     * outranks --zi-modal (600) as documented.
+     *
+     * Focus trapping, scroll locking and Esc-to-close behave identically in both
+     * modes. Background inertness does not: only the top layer provides it, so with
+     * modal unset the page outside the dialog stays reachable. That is deliberate —
+     * it is what lets an application's own overlays remain usable above a modal —
+     * and keyboard containment still comes from the focus trap.
+     * @values true, false
+     */
+    modal: {
+      type: Boolean,
+      default: false,
+    },
   },
 
   emits: [
@@ -404,7 +423,6 @@ export default {
   data () {
     return {
       MODAL_KIND_MODIFIERS,
-      MODAL_SIZE_MODIFIERS,
       MODAL_BANNER_KINDS,
       hasSlotContent,
       i18n: new DialtoneLocalization(),
@@ -468,7 +486,9 @@ export default {
       if (isShowing) {
         this.previousActiveElement = document.activeElement;
         if (!dialogEl.open) {
-          dialogEl.showModal();
+          // show() leaves the dialog in the normal stacking order instead of the
+          // top layer, where the z-index scale still applies.
+          if (this.modal) dialogEl.showModal(); else dialogEl.show();
         }
         disableRootScrolling(this.getScrollRoot());
       } else if (dialogEl.open) {
@@ -477,6 +497,8 @@ export default {
         enableRootScrolling(this.getScrollRoot());
       }
     },
+
+
 
     close () {
       this.$emit('update:open', false);
@@ -490,6 +512,14 @@ export default {
     },
 
     onKeydown (event) {
+      // The native cancel event only fires for dialogs opened with showModal(), so
+      // Esc has to be handled explicitly to keep dismissal identical in both modes.
+      // defaultPrevented means a nested widget (dropdown, combobox) already consumed
+      // it to close itself, and the modal must not close out from under it.
+      if (!this.modal && event.key === 'Escape' && !event.defaultPrevented) {
+        event.preventDefault();
+        this.close();
+      }
       this.$emit('keydown', event);
     },
 

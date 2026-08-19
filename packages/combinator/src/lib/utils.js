@@ -1,6 +1,17 @@
 import { DEFAULT_PREFIX } from '@/src/lib/constants';
 
 /**
+ * Returns the non-empty entries of a slots object, suitable for `v-for` over
+ * named slot templates.
+ *
+ * @param {object|null|undefined} slots - The slot values map.
+ * @returns {object} A new object containing only entries whose value is truthy.
+ */
+export function nonEmptySlots (slots) {
+  return Object.fromEntries(Object.entries(slots ?? {}).filter(([, slot]) => slot));
+}
+
+/**
  * Copy all the entries of an object into a new object.
  *
  * @param {object} obj - The target object.
@@ -122,6 +133,7 @@ const SLOT_CLASS_PROP_DEPENDENCIES = new Map([
   ['endIconClass', 'endIcon'],
   ['iconClass', 'icon'],
   ['leadingClass', 'leading'],
+  ['markerClass', 'marker'],
   ['startIconClass', 'startIcon'],
   ['trailingClass', 'trailing'],
 ]);

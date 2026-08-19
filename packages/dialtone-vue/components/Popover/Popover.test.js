@@ -266,6 +266,38 @@ describe('DtPopover Tests', () => {
     });
   });
 
+  describe('Popper Options Tests', () => {
+    it('defaults the boundary to "clippingParents"', () => {
+      const flipModifier = wrapper.vm.popperOptions().modifiers.find(modifier => modifier.name === 'flip');
+
+      expect(flipModifier.options.boundary).toBe('clippingParents');
+    });
+
+    describe('When boundary prop is set', () => {
+      beforeEach(() => {
+        mockProps = { boundary: document.body };
+        updateWrapper();
+      });
+
+      it('passes the boundary to the flip modifier options', () => {
+        const flipModifier = wrapper.vm.popperOptions().modifiers.find(modifier => modifier.name === 'flip');
+
+        expect(flipModifier.options.boundary).toBe(document.body);
+      });
+    });
+
+    describe('When boundary prop changes while the popover is open', () => {
+      it('updates the tippy instance with the new popperOptions', async () => {
+        await wrapper.setProps({ open: true });
+        const setPropsSpy = vi.spyOn(wrapper.vm.tip, 'setProps');
+
+        await wrapper.setProps({ boundary: document.body });
+
+        expect(setPropsSpy).toHaveBeenCalledWith({ popperOptions: wrapper.vm.popperOptions() });
+      });
+    });
+  });
+
   describe('Accessibility Tests', () => {
     describe('When popover is open', () => {
       beforeEach(async () => {
@@ -340,6 +372,29 @@ describe('DtPopover Tests', () => {
         await popoverWindow.trigger('keydown', { key: 'Tab', shiftKey: true });
 
         expect(document.activeElement).toBe(last);
+      });
+
+      it('does not mark the dialog aria-hidden merely because isOpen became false', () => {
+        // closePopover() flips isOpen synchronously; per the fix, that alone must not hide
+        // the dialog from assistive technology, since a descendant may still hold focus and
+        // the leave transition hasn't restored it yet. Only onLeaveTransitionComplete may do
+        // that, once focus has actually moved off the dialog.
+        expect(wrapper.vm.isDialogAriaHidden).toBe(false);
+
+        wrapper.vm.closePopover();
+
+        expect(wrapper.vm.isDialogAriaHidden).toBe(false);
+      });
+
+      it('marks the dialog aria-hidden only after onLeaveTransitionComplete restores focus', async () => {
+        const last = popoverWindow.find('[data-qa="trap-last"]').element;
+        last.focus();
+
+        wrapper.vm.closePopover();
+        await wrapper.vm.onLeaveTransitionComplete();
+
+        expect(document.activeElement).toBe(button.element);
+        expect(wrapper.vm.isDialogAriaHidden).toBe(true);
       });
     });
 

@@ -30,14 +30,25 @@ describe('utils.js test', function () {
       expect(shouldDisableSlotClassProp('startIconClass', { startIcon: '' })).toBe(true);
     });
 
+    it('Should disable TextListItem marker class props when the marker slot is empty', function () {
+      expect(shouldDisableSlotClassProp('markerClass', { marker: ' ' })).toBe(true);
+    });
+
     it('Should not disable direct slot class props when their slot has content', function () {
       expect(shouldDisableSlotClassProp('startIconClass', {
         startIcon: '<dt-icon-phone :size="iconSize" />',
       })).toBe(false);
     });
 
+    it('Should not disable TextListItem marker class props when the marker slot has content', function () {
+      expect(shouldDisableSlotClassProp('markerClass', {
+        marker: '<dt-icon-close size="200" />',
+      })).toBe(false);
+    });
+
     it('Should ignore class props without a direct slot dependency', function () {
       expect(shouldDisableSlotClassProp('labelClass', { label: '' })).toBe(false);
+      expect(shouldDisableSlotClassProp('contentClass', { marker: '' })).toBe(false);
     });
 
     it('Should ignore direct slot class props when the slot is not available', function () {

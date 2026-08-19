@@ -120,6 +120,24 @@ import '@dialpad/dialtone/css/no-layers/default-theme'; // optional theme
 
 This build is identical in output — all the same classes — but no `@layer` wrappers are present.
 
+If you import token CSS directly from `@dialpad/dialtone-tokens` (rather than through `@dialpad/dialtone-css` or `@dialpad/dialtone`), use its own no-layers variant instead:
+
+```js
+import '@dialpad/dialtone-tokens/no-layers/tokens-base-light.css';
+import '@dialpad/dialtone-tokens/no-layers/tokens-dp-light.css';
+```
+
+If you theme at runtime with `initDialtoneTheme` from `@dialpad/dialtone-tokens/themes/config`, pass `{ layers: false }` to load the no-layers core tokens instead:
+
+```js
+import { initDialtoneTheme } from '@dialpad/dialtone/themes/config';
+import Dp from '@dialpad/dialtone/themes/dp';
+
+initDialtoneTheme(Dp, 'light', document.documentElement, { layers: false });
+```
+
+`setBrand`, `setContrast`, and `setMaterial` need no equivalent option — brand, contrast, and material overrides were never wrapped in `@layer` to begin with.
+
 > [!WARNING] `!important` behavior differs in the no-layers build
 > In the layered build, Dialtone's `!important` utility declarations beat your unlayered `!important` (because `!important` priority reverses across layers). In the no-layers build, both sides are unlayered, so your `!important` can beat Dialtone's through normal cascade. However, your non-`!important` rules will lose to Dialtone utility `!important` — you will need `!important` in your own overrides to beat utilities.
 

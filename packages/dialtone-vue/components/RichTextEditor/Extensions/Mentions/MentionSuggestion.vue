@@ -103,10 +103,10 @@ export default {
 
     presenceFontColorClass () {
       const presenceFontColors = {
-        active: 'd-recipe-contact-row--active',
-        busy: 'd-recipe-contact-row--busy',
-        away: 'd-recipe-contact-row--away',
-        offline: 'd-recipe-contact-row--busy',
+        active: 'd-mention-suggestion__presence--active',
+        busy: 'd-mention-suggestion__presence--busy',
+        away: 'd-mention-suggestion__presence--away',
+        offline: 'd-mention-suggestion__presence--busy',
       };
 
       return presenceFontColors[this.presence];

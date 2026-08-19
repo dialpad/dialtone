@@ -326,9 +326,9 @@
         "$extensions": {
           "studio.tokens": {
             "modify": {
-              "type": "lighten",
-              "value": ".1",
-              "space": "lch"
+              "type": "alpha",
+              "value": ".25",
+              "space": "oklch"
             }
           }
         }
@@ -340,7 +340,7 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".15",
+              "value": ".5",
               "space": "oklch"
             }
           }
@@ -3746,7 +3746,7 @@
           "type": "color"
         },
         "focus": {
-          "value": "{color.black.100}",
+          "value": "{color.surface.secondary-opaque}",
           "type": "color"
         },
         "disabled": {

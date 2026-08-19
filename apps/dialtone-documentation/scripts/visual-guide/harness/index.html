@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Visual Guide Capture Harness</title>
+  <style>
+    /* Layout only — dialtone-css handles all typography, colors, component styles.
+       Scenes size themselves; the generator screenshots the #vg-root element
+       (auto-sized to content) unless the scene is flagged for viewport capture. */
+    html, body { margin: 0; padding: 0; }
+    #vg-root { display: inline-block; }
+
+    /* Suppress focus rings during capture so a freshly-mounted component doesn't
+       paint a stray focus outline into the image. Scenes that deliberately show
+       focus styling opt out by setting data-vg-keep-focus on any element. */
+    body.vg-capturing:not(:has([data-vg-keep-focus])) {
+      --dt-shadow-focus: none;
+    }
+    body.vg-capturing:not(:has([data-vg-keep-focus])) :focus,
+    body.vg-capturing:not(:has([data-vg-keep-focus])) :focus-visible,
+    body.vg-capturing:not(:has([data-vg-keep-focus])) :focus-within {
+      outline: none !important;
+    }
+  </style>
+</head>
+<body>
+  <div id="vg-root"></div>
+  <script type="module" src="./main.js"></script>
+</body>
+</html>

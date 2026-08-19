@@ -98,7 +98,7 @@ function switchAutoScrolling () {
     if (!autoScrolling.value) return;
     addItem();
     nextTick(() => {
-      if (userPosition.value === 'bottom') {
+      if (userPosition.value === 'blockEnd') {
         scroller.value.scrollToBottom();
       }
     });
@@ -127,7 +127,6 @@ function replaceItems () {
   display: flex;
   align-items: center;
   :where(div) {
-    background-color: red;
     inline-size: 5px;
     block-size: 5px;
     border-radius: 25px;

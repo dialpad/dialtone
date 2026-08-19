@@ -25,6 +25,37 @@ const ANDROID_WEIGHTS = {
   700: 'Bold',
 };
 
+// font size tokens are now 'dimension' type so must check path to distinguish
+export const isFontSizeToken = (token) => {
+  const lowerPath = token.path?.map((segment) => segment.toLowerCase()) ?? [];
+  return lowerPath.includes('fontsize') ||
+    (lowerPath.includes('font') && lowerPath.includes('size'));
+};
+
+// line height tokens are now 'dimension' type but DTCG still has a reference to a 'lineHeight' type so
+// keeping that check as well as path
+export const isLineHeightToken = (token) => {
+  if (LINE_HEIGHT_IDENTIFIERS.includes(token.type)) return true;
+  const lowerPath = token.path?.map((segment) => segment.toLowerCase()) ?? [];
+  return lowerPath.includes('lineheight');
+};
+
+// percent tokens (e.g. size.100-percent -> "100%", or size.radius.circle -> "50%").
+// excludes lineHeight tokens - those are handled by the lineHeight transform.
+export const isPercentToken = (token) => {
+  if (isLineHeightToken(token)) return false;
+  const originalValue = token.original?.value ?? token.value;
+  if (typeof originalValue === 'string' && originalValue.trim().endsWith('%')) return true;
+  const lastSegment = token.path?.[token.path.length - 1]?.toLowerCase() ?? '';
+  return lastSegment.includes('percent');
+};
+
+// negative tokens (e.g. size.100-negative -> "-1px")
+export const isNegativeToken = (token) => {
+  const lastSegment = token.path?.[token.path.length - 1]?.toLowerCase() ?? '';
+  return lastSegment.includes('negative');
+};
+
 const pxToRemTransformer = (token, options) => {
   if (token.value.toString().endsWith('%')) { return token.value; }
   const baseFont = (options && options.basePxFontSize) || 16;
@@ -87,7 +118,7 @@ export function registerDialtoneTransforms (styleDictionary) {
     transform: (token) => {
       // replace unmathable characters with empty string
       const mathString = token.value.replace(/dp|sp|em|px|%/g, '');
-       
+
       const result = eval(mathString).toFixed(2);
       return `${result}dp`;
     },
@@ -180,12 +211,11 @@ export function registerDialtoneTransforms (styleDictionary) {
     type: 'value',
     transitive: true,
     filter: function (token) {
-      // Exclude lineHeight dimension tokens - they're handled by lineHeight transform
-      if (token.type === 'dimension' && token.path?.includes('lineHeight')) return false;
-      return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS].includes(token.type) &&
-        // The fontSize token in typography tokens is a 'dimension' type for some reason,
-        // so have this special case to exclude it from this transform.
-        !FONT_SIZE_IDENTIFIERS.includes(token.name);
+      // Exclude lineHeight tokens - they're handled by lineHeight transform
+      if (isLineHeightToken(token)) return false;
+      // Exclude font size tokens - they're handled by pxToSp transform
+      if (isFontSizeToken(token)) return false;
+      return token.type === 'dimension';
     },
     transform: (token) => {
       const floatVal = parseFloat(token.value);
@@ -204,10 +234,7 @@ export function registerDialtoneTransforms (styleDictionary) {
     type: 'value',
     transitive: true,
     filter: function (token) {
-      return [...FONT_SIZE_IDENTIFIERS].includes(token.type) ||
-        // The fontSize token in typography tokens is a 'dimension' type for some reason,
-        // so have this special case to include it in this transform.
-        FONT_SIZE_IDENTIFIERS.includes(token.name);
+      return isFontSizeToken(token);
     },
     transform: (token) => {
       const floatVal = parseFloat(token.value);
@@ -225,7 +252,7 @@ export function registerDialtoneTransforms (styleDictionary) {
     type: 'value',
     transitive: true,
     filter: function (token) {
-      return [...SPACING_IDENTIFIERS, ...SIZE_IDENTIFIERS, ...FONT_SIZE_IDENTIFIERS].includes(token.type);
+      return token.type === 'dimension';
     },
     transform: (token) => {
       // replace unmathable characters with empty string
@@ -234,7 +261,7 @@ export function registerDialtoneTransforms (styleDictionary) {
       if (token.value.includes('.sp')) unit = 'sp';
       if (token.value.includes('.em')) unit = 'em';
       const mathString = token.value.replace(/\.dp|\.sp|\.em|px|%/g, '');
-       
+
       const result = eval(mathString);
       return `${result}.${unit}`;
     },
@@ -244,9 +271,7 @@ export function registerDialtoneTransforms (styleDictionary) {
     name: 'dt/android/compose/lineHeight/percentToDecimal',
     type: 'value',
     filter: function (token) {
-      // Match by type (legacy tokens) or path (DTCG-compliant tokens with type: dimension)
-      return LINE_HEIGHT_IDENTIFIERS.includes(token.type) ||
-        (token.type === 'dimension' && token.path?.includes('lineHeight'));
+      return isLineHeightToken(token);
     },
     transform: (token) => {
       const floatVal = parseFloat(token.value);
@@ -265,16 +290,16 @@ export function registerDialtoneTransforms (styleDictionary) {
 
   // Sp is for font sizes only
   styleDictionary.registerTransform({
-    name: 'dt/android/compose/opacity/percentToFloat',
+    name: 'dt/android/compose/number/toFloat',
     type: 'value',
     filter: function (token) {
-      return ['opacity'].includes(token.type);
+      return token.type === 'number';
     },
     transform: (token) => {
       const floatVal = parseFloat(token.value);
 
       if (isNaN(floatVal)) {
-        throwSizeError(token.path, token.value, '%');
+        throwSizeError(token.path, token.value, 'F');
       }
 
       return `${floatVal}F`;
@@ -285,7 +310,7 @@ export function registerDialtoneTransforms (styleDictionary) {
     name: 'dt/stringify',
     type: 'value',
     filter: function (token) {
-      return ['type', 'textCase'].includes(token.type);
+      return ['type', 'textCase', 'other'].includes(token.type);
     },
     transform: (token) => {
       return `"${token.value}"`;

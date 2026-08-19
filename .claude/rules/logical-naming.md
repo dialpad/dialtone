@@ -94,6 +94,6 @@ Rules:
 
 ## Combinator Filter
 
-The Combinator prop/slot search uses `packages/combinator/src/lib/logical_aliases.js` as its canonical alias map. In `option_bar.vue`, `tokenizeName` splits each prop/slot name on camelCase boundaries and recognizes compound tokens (`block-start`, `inline-end`, etc.) derived from the alias map keys. `getSearchCorpus` expands those tokens via `logical_aliases.js` to build a precomputed search corpus. `filterCorpora` matches the user's query against that corpus. Searching `"top"` finds `borderWidthBlockStart`, `paddingBlockStart`, etc. automatically.
+The Combinator prop/slot search uses `packages/combinator/src/lib/logical_aliases.js` as its canonical alias map. In `option_bar.vue`, `tokenizeName` splits each prop/slot name on camelCase boundaries and recognizes compound tokens (`block-start`, `inline-end`, etc.) derived from the alias map keys. `getSearchCorpus` expands those tokens via `logical_aliases.js` to build a precomputed search corpus. `filterCorpora` matches the user's query against that corpus. Searching `"top"` finds `borderWidthBlockStart`, `paddingBlockStart`, `insetBlockStart`, etc. automatically.
 
 **When adding new logical-naming vocabulary** (e.g. a new axis concept beyond `block`/`inline`), add the new token and its physical aliases to `logical_aliases.js`. No per-component or per-prop changes needed — the filter picks it up automatically for any component that uses the new token in its prop/slot names.

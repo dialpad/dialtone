@@ -229,6 +229,14 @@
       "brand-dialpad": [],
       "bullhorn": [],
       "clockify": [],
+      "compass-color": [
+        "navigation",
+        "direction",
+        "location",
+        "map",
+        "bearing",
+        "orient"
+      ],
       "copper-crm": [],
       "dialbot": [
         "brand"
@@ -1209,6 +1217,16 @@
       "download-cloud": [
         "import"
       ],
+      "fax-inbound": [
+        "receive",
+        "incoming",
+        "printer"
+      ],
+      "fax-outbound": [
+        "send",
+        "outgoing",
+        "printer"
+      ],
       "file-audio": [
         "music",
         "audio",
@@ -1431,7 +1449,6 @@
         "brackets",
         "code",
         "json",
-        "code",
         "token",
         "curly",
         "data",
@@ -1601,7 +1618,6 @@
       ],
       "unlink-2": [
         "url",
-        "unchain",
         "unchain"
       ]
     },
@@ -1759,6 +1775,14 @@
         "html",
         "xml"
       ],
+      "compass": [
+        "navigation",
+        "direction",
+        "location",
+        "map",
+        "bearing",
+        "orient"
+      ],
       "component": [
         "design",
         "element",
@@ -1827,8 +1851,7 @@
       "hash-bold": [
         "number",
         "pound",
-        "hashtag",
-        "number"
+        "hashtag"
       ],
       "hash": [
         "hashtag",
@@ -1996,7 +2019,6 @@
       "shield-off": [
         "security",
         "secure",
-        "security",
         "insecure"
       ],
       "shield": [

@@ -58,7 +58,7 @@ export default {
 
     /**
      * Heading height
-     * @values sm, md, lg
+     * @values 200, 300, 400, sm, md, lg
      */
     headingHeight: {
       type: String,

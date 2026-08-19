@@ -18,7 +18,11 @@
  *   --yes              Apply all changes without prompting
  *   --health-check     Report migration status without modifying files
  *   --all              Run all required migrations without selection prompt
+ *   --include-opt-in   Also run opt-in migrations (with --all, or on its own = everything)
  *   --only <ids>       Comma-separated list of migration IDs to run
+ *   --package <name>   Package name to use for injected component imports
+ *                      (default: @dialpad/dialtone-vue). Useful when running
+ *                      Dialtone under a custom package alias (e.g. @dialpad/dialtone-next).
  *   --help             Show help
  *
  * Examples:
@@ -50,6 +54,7 @@ const __dirname = path.dirname(__filename);
  * @property {'config'|'standalone'|'manual'} type
  * @property {string} [configName] - Config filename for migration-helper type
  * @property {string} [scriptDir]  - Directory name for standalone scripts
+ * @property {boolean} [supportsPackageArg] - Forward --package to this standalone script
  * @property {string[]} [extraArgs] - Extra CLI args to forward
  * @property {RegExp[]} detectPatterns - Patterns that indicate migration is still needed
  * @property {string[]} fileExtensions - File extensions to scan during health check
@@ -190,6 +195,18 @@ const MIGRATIONS = [
     ],
     fileExtensions: ['.vue', '.html'],
   },
+  {
+    id: 'modal-fullscreen',
+    name: 'DtModal size → fullscreen',
+    description: 'DtModal size prop (default/full) removed. Use the fullscreen boolean instead.',
+    category: 'required',
+    type: 'standalone',
+    scriptDir: 'dialtone_migrate_tshirt_to_numeric',
+    detectPatterns: [
+      /<(?:dt-modal|DtModal)(?![\w-])[^>]*\bsize="(?:full|default)"/,
+    ],
+    fileExtensions: ['.vue', '.html', '.md'],
+  },
 
   // ── Opt-in (deprecation, best practices) ──────────────────────────
   {
@@ -238,6 +255,8 @@ const MIGRATIONS = [
     category: 'opt-in',
     type: 'standalone',
     scriptDir: 'dialtone_migrate_flex_to_stack',
+    // Injects a DtStack import, so it honors the --package override.
+    supportsPackageArg: true,
     detectPatterns: [
       /class="[^"]*d-d-flex[^"]*"/,
     ],
@@ -292,6 +311,8 @@ const MIGRATIONS = [
     category: 'opt-in',
     type: 'standalone',
     scriptDir: 'dialtone_migrate_typography',
+    // Injects a DtText import, so it honors the --package override.
+    supportsPackageArg: true,
     detectPatterns: [
       /class="[^"]*d-(?:headline|body|label)--(?:sm|md|lg|xl|xxl)/,
       /class="[^"]*d-(?:headline|body|label)-(?:small|medium|large)/,
@@ -359,6 +380,17 @@ async function writeMigrationMarker (cwd, id) {
 function parseArgs (args) {
   const cwdIndex = args.indexOf('--cwd');
   const onlyIndex = args.indexOf('--only');
+  const packageIndex = args.indexOf('--package');
+
+  // --package must be followed by an actual package name. Reject a missing value
+  // or a value that is really the next option (e.g. `--package --all`) so invalid
+  // input never reaches the alias confirmation or child-migration args.
+  const packageValue = packageIndex !== -1 ? args[packageIndex + 1] : undefined;
+  if (packageIndex !== -1 && (!packageValue || packageValue.startsWith('-'))) {
+    console.error('\n  --package requires a package name (e.g. --package @dialpad/dialtone-next)\n');
+    process.exit(1);
+  }
+
   return {
     help: args.includes('--help'),
     dryRun: args.includes('--dry-run'),
@@ -366,12 +398,14 @@ function parseArgs (args) {
     noImport: args.includes('--no-import'),
     healthCheck: args.includes('--health-check'),
     all: args.includes('--all'),
+    includeOptIn: args.includes('--include-opt-in'),
     cwd: cwdIndex !== -1 && args[cwdIndex + 1]
       ? path.resolve(args[cwdIndex + 1])
       : process.cwd(),
     only: onlyIndex !== -1 && args[onlyIndex + 1]
       ? args[onlyIndex + 1].split(',').map(s => s.trim())
       : null,
+    packageName: packageIndex !== -1 ? packageValue : null,
   };
 }
 
@@ -388,7 +422,11 @@ Options:
   --yes              Apply all changes without prompting
   --health-check     Report migration status without modifying files
   --all              Run all required migrations without selection prompt
+  --include-opt-in   Also run opt-in migrations (with --all, or on its own = everything)
   --only <ids>       Comma-separated list of migration IDs to run
+  --package <name>   Package name to use for injected component imports
+                     (default: @dialpad/dialtone-vue). Useful when running
+                     Dialtone under a custom package alias (e.g. @dialpad/dialtone-next).
   --help             Show help
 
 Available migration IDs (required):
@@ -401,6 +439,7 @@ Examples:
   npx dialtone-migrate                              # Interactive selection
   npx dialtone-migrate --health-check --cwd ./src   # Check migration status
   npx dialtone-migrate --all --dry-run               # Dry-run all required
+  npx dialtone-migrate --all --include-opt-in --yes  # Run required + opt-in
   npx dialtone-migrate --only color-stops,hsl-to-oklch --yes
 `);
 }
@@ -780,6 +819,9 @@ async function runStandaloneMigration (migration, opts) {
   if (opts.dryRun) args.push('--dry-run');
   if (opts.autoYes) args.push('--yes');
   if (opts.noImport) args.push('--no-import');
+  if (opts.packageName && migration.supportsPackageArg) {
+    args.push('--package', opts.packageName);
+  }
 
   return new Promise((resolve, reject) => {
     const child = spawn(process.execPath, [scriptPath, ...args], {
@@ -860,8 +902,12 @@ async function main () {
       }
       return m;
     });
-  } else if (opts.all) {
-    selected = MIGRATIONS.filter(m => m.category === 'required');
+  } else if (opts.all || opts.includeOptIn) {
+    // --include-opt-in widens the selection to every migration; --all alone stays
+    // required-only. Either flag skips the interactive prompt.
+    selected = opts.includeOptIn
+      ? MIGRATIONS.slice()
+      : MIGRATIONS.filter(m => m.category === 'required');
   } else {
     selected = await selectMigrations(MIGRATIONS);
   }
@@ -873,6 +919,9 @@ async function main () {
 
   // Confirmation
   console.log(`\n  Target directory: ${opts.cwd}`);
+  if (opts.packageName) {
+    console.log(`  Import package:    ${opts.packageName}`);
+  }
   console.log(`  Migrations to run (${selected.length}):\n`);
   for (const m of selected) {
     const tag = m.category === 'required' ? '[REQUIRED]' : '[OPT-IN]';

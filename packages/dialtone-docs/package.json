@@ -10,7 +10,7 @@
     "test:watch": "vitest"
   },
   "devDependencies": {
-    "glob": "^11.0.3",
+    "glob": "^13.0.6",
     "gray-matter": "^4.0.3",
     "vitest": "^4.1.0"
   },

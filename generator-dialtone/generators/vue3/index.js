@@ -1,47 +1,12 @@
-/* eslint-disable complexity */
+ 
 const Generator = require('yeoman-generator');
 const _ = require('lodash');
 
 module.exports = class extends Generator {
   async prompting () {
     let valid;
+    const prefix = 'Dt';
     do {
-      this.inputValues = await this.prompt([
-        {
-          type: 'confirm',
-          name: 'isRecipe',
-          message: 'Is this component a recipe? (Is it built using other dialtone components?) (Y/n):',
-          default: true,
-        },
-      ]);
-      this.isRecipe = this.inputValues.isRecipe;
-      const prefix = this.inputValues.isRecipe ? 'DtRecipe' : 'Dt';
-
-      if (this.isRecipe) {
-        this.inputValues = await this.prompt([
-          {
-            type: 'list',
-            name: 'category',
-            message: 'Does your component belong in one of these categories?',
-            choices: ['No', 'Avatars', 'Badges', 'Buttons', 'Checkboxes', 'Comboboxes', 'Conversation View',
-              'Dropdowns', 'Inputs', 'Leftbar', 'List Items', 'Modals', 'Notices', 'Popovers', 'Radios', 'Skeletons',
-              'Tabs', 'Toasts', 'Toggles', 'Tooltips'],
-          },
-        ]);
-        if (this.inputValues.category === 'No') {
-          this.inputValues = await this.prompt([
-            {
-              type: 'input',
-              name: 'category',
-              message: 'enter the name of the new category it should belong in, or skip to put it in the root: ',
-              default: '',
-            },
-          ]);
-        }
-        this.category = this.inputValues.category;
-        this.subfolder = this.inputValues.category ? _.snakeCase(this.inputValues.category) : '';
-      }
-
       this.inputValues = await this.prompt([
         {
           type: 'input',
@@ -77,12 +42,10 @@ module.exports = class extends Generator {
     } while (!valid);
 
     // convert to snake case and remove the 'dt' as we don't use it in the filename
-    this.fileName = _.snakeCase(this.componentName.slice(this.isRecipe ? 8 : 2));
+    this.fileName = _.snakeCase(this.componentName.slice(2));
     this.componentNameKebab = _.kebabCase(this.componentName);
 
-    this.destinationFolder = this.isRecipe
-      ? `./recipes/${this.subfolder}${this.subfolder ? '/' : ''}${this.fileName}`
-      : `./components/${this.fileName}`;
+    this.destinationFolder = `./components/${this.fileName}`;
   }
 
   writing () {
@@ -91,8 +54,6 @@ module.exports = class extends Generator {
       readableComponentName: this.readableComponentName,
       componentNameKebab: this.componentNameKebab,
       fileName: this.fileName,
-      isRecipe: this.isRecipe,
-      category: this.category,
     };
     this.fs.copyTpl(
       this.templatePath('component.ejs'),

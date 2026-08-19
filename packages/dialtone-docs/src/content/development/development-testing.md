@@ -22,7 +22,7 @@ test: {
   globals: true,                    // describe, it, expect, vi available globally
   environment: 'jsdom',             // Browser DOM simulation
   setupFiles: './tests/setupTests.js',
-  include: ['./{common,components,directives,recipes}/**/*.test.js'],
+  include: ['./{common,components,directives}/**/*.test.js'],
   coverage: {
     provider: 'v8',
     reporter: ['text', 'html', 'json'],

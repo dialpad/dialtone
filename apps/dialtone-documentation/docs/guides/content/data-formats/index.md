@@ -1,6 +1,5 @@
 ---
 title: Data formats
-cardOrder: 8
 prev:
   {
     link: "../grammar-and-mechanics/",

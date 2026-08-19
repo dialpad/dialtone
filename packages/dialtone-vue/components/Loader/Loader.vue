@@ -52,6 +52,7 @@
 
 <script>
 import { ICON_SIZE_MODIFIERS } from '@/components/Icon';
+import { ordinalSizeValidator } from '@/common/validators';
 
 export default {
   name: 'DtLoader',
@@ -71,9 +72,9 @@ export default {
      * @values 100, 200, 300, 400, 500, 600, 700, 800
      */
     size: {
-      type: String,
-      default: '500',
-      validator: (s) => Object.keys(ICON_SIZE_MODIFIERS).includes(s),
+      type: [String, Number],
+      default: 500,
+      validator: ordinalSizeValidator(ICON_SIZE_MODIFIERS),
     },
   },
 };

@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-css",
-  "version": "8.81.0-next.3",
+  "version": "8.81.0-next.14",
   "description": "Dialpad's design system",
   "keywords": [
     "Dialpad",
@@ -52,7 +52,8 @@
     "dialtone-health-check": "./lib/dist/js/dialtone_health_check/index.cjs",
     "dialtone-migrate": "./lib/dist/js/dialtone_migrate/index.mjs",
     "dialtone-migration-helper": "./lib/dist/js/dialtone_migration_helper/index.mjs",
-    "dialtone-migrate-flex-to-stack": "./lib/dist/js/dialtone_migrate_flex_to_stack/index.mjs"
+    "dialtone-migrate-flex-to-stack": "./lib/dist/js/dialtone_migrate_flex_to_stack/index.mjs",
+    "dialtone-merge-migrate": "./lib/dist/js/dialtone_merge_migrate/index.mjs"
   },
   "type": "module",
   "scripts": {

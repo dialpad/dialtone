@@ -7,7 +7,7 @@ import { readdirSync } from 'node:fs';
 
 /**
  * Scans recursively through the provided path
- * and gets the valid contained Vue components and recipes.
+ * and gets the valid contained Vue components.
  * @param {PathLike} folder
  * @returns {PathLike[]}
  */

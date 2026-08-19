@@ -1,5 +1,9 @@
 /* eslint-disable complexity */
 import Core from '@/themes/core.js';
+// Not statically imported — the no-layers core is only needed when initDialtoneTheme
+// is called with { layers: false }. Dynamically importing it here lets bundlers
+// code-split it out of the default (layers: true) path, so apps that never opt into
+// no-layers don't pay for a second copy of the core token CSS string.
 
 /**
  * Names of all materials, including the default (sandstone). Material switching
@@ -15,8 +19,14 @@ const VALID_MATERIALS_SET = new Set(VALID_MATERIALS);
 // config.js instance, so this boolean only tracks state within a single app.
 let coreTokensLoaded = false;
 
+// Bumped on every _loadCoreTokens()/resetBrand() call. The no-layers dynamic
+// import captures the generation at call time and checks it before applying
+// its result, so a superseded in-flight import (e.g. layers:false immediately
+// followed by layers:true, or a reset) can't clobber newer core CSS.
+let coreLoadGeneration = 0;
+
 // Track initialization state for idempotency protection
-// Stores: { brand: string, mode: string, contrast: string } or null
+// Stores: { brand: string, mode: string, contrast: string, material: string, layers: boolean } or null
 // Note: Only one rootNode per instance (per Brad's architecture)
 let initializationState = null;
 
@@ -187,6 +197,43 @@ function _setBrandLayered(theme, rootNode = document.documentElement) {
   if (theme.contrast) {
     _setStyleTag('dialtone-css-contrast', theme.contrast.css, styleRoot);
     rootNode?.setAttribute('data-dt-contrast', theme.contrast.name);
+  }
+}
+
+/**
+ * Load (or reload) the core token stylesheet for the given layers option.
+ * `_setStyleTag` upserts in place, so calling this again after initDialtoneTheme
+ * has already run just swaps the `#dialtone-css-core` tag's content — no DOM
+ * reordering, so it's safe to use both for the initial load and later reloads
+ * when a repeated initDialtoneTheme() call changes the layers option.
+ *
+ * Sets `coreTokensLoaded` only once the core CSS has actually been applied —
+ * synchronously for the layered core, or after the dynamic import resolves
+ * for the no-layers core — so a failed import doesn't falsely report core
+ * tokens as loaded.
+ *
+ * Also guards against a stale in-flight no-layers import: if this function
+ * (or resetBrand) runs again before that import resolves, the earlier
+ * generation is discarded instead of clobbering newer core CSS.
+ */
+function _loadCoreTokens (layers, styleRoot) {
+  const generation = ++coreLoadGeneration;
+  if (layers) {
+    _setStyleTag('dialtone-css-core', Core.core, styleRoot);
+    coreTokensLoaded = true;
+  } else {
+    // Reserve the tag's DOM position synchronously so the base-colors/brand
+    // tags appended below still land after it, then fill in its content once
+    // the dynamic import resolves.
+    _setStyleTag('dialtone-css-core', '', styleRoot);
+    import('@/themes/core-no-layers.js').then(({ default: CoreNoLayers }) => {
+      if (generation !== coreLoadGeneration) return; // superseded — discard
+      _setStyleTag('dialtone-css-core', CoreNoLayers.core, styleRoot);
+      coreTokensLoaded = true;
+    }).catch((error) => {
+      if (generation !== coreLoadGeneration) return; // superseded — discard
+      console.error('[Dialtone] initDialtoneTheme: failed to load no-layers core tokens.', error);
+    });
   }
 }
 
@@ -462,6 +509,12 @@ export function setMaterial (name, rootNode = document.documentElement) {
  * @param {BrandTheme} brandTheme - Initial brand theme to apply
  * @param {Mode} [mode='light'] - Initial color mode ('light' or 'dark')
  * @param {ThemeRootNode} [rootNode=document.documentElement] - Root element for style injection
+ * @param {Object} [options={}]
+ * @param {boolean} [options.layers=true] - Whether to load core tokens wrapped in `@layer dialtone.base`.
+ *   Pass `false` if your app can't use CSS Cascade Layers. Brand, contrast, and material overrides are
+ *   already unlayered either way — this only affects the shared core tokens initDialtoneTheme loads.
+ *   The no-layers core is loaded via a dynamic import (not bundled into the default path), so with
+ *   `layers: false` the core token styles apply asynchronously, a moment after this call returns.
  *
  * @example
  * // Standard usage (non-Shadow DOM)
@@ -473,6 +526,10 @@ export function setMaterial (name, rootNode = document.documentElement) {
  * @example
  * // Explicit document.documentElement (optional but clear in config files)
  * initDialtoneTheme(Dp, 'light', document.documentElement);
+ *
+ * @example
+ * // No CSS Cascade Layers support
+ * initDialtoneTheme(Dp, 'light', document.documentElement, { layers: false });
  *
  * @example
  * // ❌ WRONG - In Web Components, forgetting rootNode causes styles to inject into document!
@@ -494,7 +551,8 @@ export function setMaterial (name, rootNode = document.documentElement) {
  *   }
  * }
  */
-export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = document.documentElement) {
+export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = document.documentElement, options = {}) {
+  const { layers = true } = options;
   // Validation: brandTheme must be an object
   if (!brandTheme || typeof brandTheme !== 'object') {
     throw new TypeError(
@@ -562,11 +620,23 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
   const existing = initializationState;
   if (existing) {
     if (existing.brand === brandTheme.brand.name && existing.mode === mode) {
+      if (existing.layers === layers) {
+        console.warn(
+          `[Dialtone] Theme already initialized with brand '${brandTheme.brand.name}' and mode '${mode}'. ` +
+          'Re-applying the same theme may be unnecessary. ' +
+          'If you need to switch themes dynamically, use setBaseBrand() or setMode() instead of calling initDialtoneTheme() again.',
+        );
+        return;
+      }
+
+      // Brand/mode unchanged but layers flipped — swap the core stylesheet in
+      // place instead of silently ignoring the new layers value.
       console.warn(
-        `[Dialtone] Theme already initialized with brand '${brandTheme.brand.name}' and mode '${mode}'. ` +
-        'Re-applying the same theme may be unnecessary. ' +
-        'If you need to switch themes dynamically, use setBaseBrand() or setMode() instead of calling initDialtoneTheme() again.',
+        `[Dialtone] Theme already initialized with brand '${brandTheme.brand.name}' and mode '${mode}' ` +
+        `using layers=${existing.layers}. Reloading core tokens with layers=${layers}.`,
       );
+      _loadCoreTokens(layers, styleRoot);
+      initializationState.layers = layers;
       return;
     } else {
       console.warn(
@@ -580,10 +650,10 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
   }
 
   // Load core tokens (once per JavaScript instance)
-  _setStyleTag('dialtone-css-core', Core.core, styleRoot);
-  coreTokensLoaded = true;
+  _loadCoreTokens(layers, styleRoot);
 
-  // Load base colors (once)
+  // Load base colors (once) — identical CSS whether layers is true or false
+  // (tokens-base-colors.css was never wrapped in @layer), so no branching needed.
   _setStyleTag('dialtone-css-base-colors', Core.baseColors, styleRoot);
 
   // Set initial mode
@@ -602,6 +672,7 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
     mode: mode,
     contrast: 'default',
     material: getBrandMaterial(brandTheme) ?? 'sandstone',
+    layers,
   };
 }
 
@@ -664,6 +735,9 @@ export function resetBrand(rootNode = document.documentElement) {
   // Clear initialization state (only one instance per app)
   initializationState = null;
   coreTokensLoaded = false;
+  // Invalidate any in-flight no-layers core import so its stale resolution
+  // can't recreate the #dialtone-css-core tag we're about to remove.
+  coreLoadGeneration++;
 
   // Remove all theme style tags. Material no longer injects a style tag
   // (attribute-driven), but resetBrand should still scrub any pre-existing

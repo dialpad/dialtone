@@ -22,7 +22,7 @@
       </span>
       <span
         v-else-if="hasSlotContent($slots.avatar)"
-        :class="avatarClass"
+        :class="['d-chip__avatar', avatarClass]"
         data-qa="dt-chip-avatar"
       >
         <!-- @slot slot for Chip avatar -->
@@ -66,6 +66,7 @@ import {
   CHIP_ICON_SIZES,
 } from './ChipConstants';
 import { getUniqueString, hasSlotContent } from '@/common/utils';
+import { ordinalSizeValidator } from '@/common/validators';
 import { DialtoneLocalization } from '@/localization';
 
 /**
@@ -108,7 +109,7 @@ export default {
     size: {
       type: [String, Number],
       default: 300,
-      validator: (s) => Object.keys(CHIP_SIZE_MODIFIERS).includes(String(s)),
+      validator: ordinalSizeValidator(CHIP_SIZE_MODIFIERS),
     },
 
     /**

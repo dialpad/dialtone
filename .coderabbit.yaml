@@ -213,6 +213,24 @@ reviews:
 
         Follow the conventions in .claude/rules/dialtone-cli.md.
 
+    # Combinator variants
+    - path: 'packages/combinator/src/variants/**'
+      instructions: >
+        - Variant files drive Combinator presets, documentation examples, and
+          component-wall thumbnail input.
+
+        - Match component docgen member names exactly. Unknown prop, slot, or
+          attribute names are ignored.
+
+        - Use exclusions only for invalid or misleading combinations; simple
+          parent-off child-disabled cases should come from component JSDoc when
+          possible.
+
+        - New variant files must be registered in
+          packages/combinator/src/variants/variants.js.
+
+        Follow the conventions in .claude/rules/combinator-variants.md.
+
     # ESLint plugin
     - path: 'packages/eslint-plugin-dialtone/**'
       instructions: >

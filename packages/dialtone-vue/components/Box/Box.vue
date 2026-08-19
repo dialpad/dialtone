@@ -31,11 +31,15 @@ import { computed, onMounted } from 'vue';
 import {
   asValidator,
   spacingValidator,
+  insetValidator,
+  insetSideValidator,
   surfaceValidator,
   borderColorValidator,
   borderWidthValidator,
   borderRadiusValidator,
   shadowValidator,
+  positionValidator,
+  zIndexValidator,
   layoutValidator,
   overflowValidator,
   scrollbarValidator,
@@ -68,7 +72,7 @@ const props = defineProps({
   /**
    * Border color. Maps to --dt-color-border-* tokens.
    * Defaults to 'default'. Visible when any border-width prop is set.
-   * @values transparent, subtle, default, moderate, bold, positive, positive-subtle, positive-strong, warning, warning-subtle, warning-strong, critical, critical-subtle, critical-strong, info, info-subtle, info-strong, focus, brand, brand-subtle, brand-strong
+   * @values transparent, subtle, default, moderate, bold, accent, positive, positive-subtle, positive-strong, warning, warning-subtle, warning-strong, critical, critical-subtle, critical-strong, info, info-subtle, info-strong, focus, brand, brand-subtle, brand-strong
    */
   borderColor: { type: String, default: 'default', validator: borderColorValidator },
 
@@ -217,6 +221,66 @@ const props = defineProps({
   shadow: { type: String, default: undefined, validator: shadowValidator },
 
   /**
+   * CSS position value.
+   * @values static, relative, absolute, fixed, sticky
+   */
+  position: { type: String, default: undefined, validator: positionValidator },
+
+  /**
+   * Inset on all sides. Accepts spacing coordinate values and negative spacing coordinate values.
+   * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800, n1, n25, n50, n75, n100, n125, n150, n175, n200, n250, n300, n350, n400, n450, n500, n525, n550, n600, n650, n700, n750, n800
+   */
+  inset: { type: String, default: undefined, validator: insetValidator },
+
+  /**
+   * Inset on the block axis (aka top/bottom).
+   * Overrides `inset` for the block axis.
+   * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800, n1, n25, n50, n75, n100, n125, n150, n175, n200, n250, n300, n350, n400, n450, n500, n525, n550, n600, n650, n700, n750, n800
+   */
+  insetBlock: { type: String, default: undefined, validator: insetValidator },
+
+  /**
+   * Inset on the block-start side (aka top).
+   * Overrides `insetBlock` and `inset` for block-start. Also supports documented percentage coordinates.
+   * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800, n1, n25, n50, n75, n100, n125, n150, n175, n200, n250, n300, n350, n400, n450, n500, n525, n550, n600, n650, n700, n750, n800, 50p, 100p, n50p, n100p
+   */
+  insetBlockStart: { type: String, default: undefined, validator: insetSideValidator },
+
+  /**
+   * Inset on the block-end side (aka bottom).
+   * Overrides `insetBlock` and `inset` for block-end. Also supports documented percentage coordinates.
+   * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800, n1, n25, n50, n75, n100, n125, n150, n175, n200, n250, n300, n350, n400, n450, n500, n525, n550, n600, n650, n700, n750, n800, 50p, 100p, n50p, n100p
+   */
+  insetBlockEnd: { type: String, default: undefined, validator: insetSideValidator },
+
+  /**
+   * Inset on the inline axis (aka left/right).
+   * Overrides `inset` for the inline axis.
+   * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800, n1, n25, n50, n75, n100, n125, n150, n175, n200, n250, n300, n350, n400, n450, n500, n525, n550, n600, n650, n700, n750, n800
+   */
+  insetInline: { type: String, default: undefined, validator: insetValidator },
+
+  /**
+   * Inset on the inline-start side (aka left).
+   * Overrides `insetInline` and `inset` for inline-start. Also supports documented percentage coordinates.
+   * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800, n1, n25, n50, n75, n100, n125, n150, n175, n200, n250, n300, n350, n400, n450, n500, n525, n550, n600, n650, n700, n750, n800, 50p, 100p, n50p, n100p
+   */
+  insetInlineStart: { type: String, default: undefined, validator: insetSideValidator },
+
+  /**
+   * Inset on the inline-end side (aka right).
+   * Overrides `insetInline` and `inset` for inline-end. Also supports documented percentage coordinates.
+   * @values 0, 1, 25, 50, 75, 100, 125, 150, 175, 200, 250, 300, 350, 400, 450, 500, 525, 550, 600, 650, 700, 750, 800, n1, n25, n50, n75, n100, n125, n150, n175, n200, n250, n300, n350, n400, n450, n500, n525, n550, n600, n650, n700, n750, n800, 50p, 100p, n50p, n100p
+   */
+  insetInlineEnd: { type: String, default: undefined, validator: insetSideValidator },
+
+  /**
+   * Z-index layer. Maps to --zi-* tokens.
+   * @values hide, base, base1, selected, active, navigation, navigation-fixed, dropdown, popover, tooltip, drawer, modal, modal-element, notification
+   */
+  zIndex: { type: String, default: undefined, validator: zIndexValidator },
+
+  /**
    * Overflow behavior.
    * @values hidden, scroll, auto, clip, visible
    */
@@ -289,10 +353,25 @@ function sizingClasses (p) {
   ];
 }
 
+function positioningClasses (p) {
+  return [
+    modifierClass('d-box--ps', p.position),
+    modifierClass('d-box--inset', p.inset),
+    modifierClass('d-box--inset-block', p.insetBlock),
+    modifierClass('d-box--inset-inline', p.insetInline),
+    modifierClass('d-box--ibs', p.insetBlockStart),
+    modifierClass('d-box--ibe', p.insetBlockEnd),
+    modifierClass('d-box--iis', p.insetInlineStart),
+    modifierClass('d-box--iie', p.insetInlineEnd),
+    modifierClass('d-box--zi', p.zIndex),
+  ];
+}
+
 const boxClasses = computed(() => [
   'd-box',
   ...paddingClasses(props),
   ...visualClasses(props),
   ...sizingClasses(props),
+  ...positioningClasses(props),
 ]);
 </script>

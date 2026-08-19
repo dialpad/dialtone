@@ -76,7 +76,7 @@
           <div
             ref="listWrapper"
             :class="[
-              'd-recipe-combobox-with-popover__list',
+              'd-combobox-with-popover__list',
               DROPDOWN_PADDING_CLASSES[padding],
               listClass,
             ]"
@@ -123,6 +123,7 @@ import { DtCombobox, COMBOBOX_LABEL_SIZES } from '@/components/Combobox';
 import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_CONTENT_WIDTHS } from '@/components/Popover';
 import { getUniqueString, hasSlotContent } from '@/common/utils';
 import { COMPONENT_SIZES, HTML_ELEMENT_TYPE } from '@/common/constants';
+import { ordinalSizeValidator } from '@/common/validators';
 import { DROPDOWN_PADDING_CLASSES } from '@/components/Dropdown';
 import { CONTENT_MODE_PROP } from '@/common/mode_constants';
 
@@ -169,7 +170,7 @@ export default {
       default: null,
       validator: (t) => t === null
         || Object.values(COMBOBOX_LABEL_SIZES).includes(t)
-        || Object.keys(COMPONENT_SIZES).includes(String(t)),
+        || ordinalSizeValidator(COMPONENT_SIZES)(t),
     },
 
     /**
@@ -349,7 +350,7 @@ export default {
     /**
      * Sets the element to which the popover is going to append to.
      * 'body' will append to the nearest body (supports shadow DOM).
-     * @values 'body', 'parent', HTMLElement,
+     * @values 'body', 'parent', 'root', HTMLElement,
      */
     appendTo: {
       type: [HTML_ELEMENT_TYPE, String],

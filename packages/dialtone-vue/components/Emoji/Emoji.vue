@@ -22,6 +22,7 @@
 
 <script>
 import { ICON_SIZE_MODIFIERS } from '@/components/Icon';
+import { ordinalSizeValidator } from '@/common/validators';
 import {
   codeToEmojiData,
   stringToUnicode,
@@ -60,9 +61,9 @@ export default {
      * @values 100, 200, 300, 400, 500, 600, 700, 800
      */
     size: {
-      type: String,
-      default: '500',
-      validator: (t) => Object.keys(ICON_SIZE_MODIFIERS).includes(t),
+      type: [String, Number],
+      default: 500,
+      validator: ordinalSizeValidator(ICON_SIZE_MODIFIERS),
     },
 
     /**
@@ -116,7 +117,7 @@ export default {
         return this.emojiData.image;
       }
 
-      if (['100', '200'].includes(this.size)) {
+      if (['100', '200'].includes(String(this.size))) {
         return emojiImageUrlSmall + this.emojiData.key + emojiFileExtensionSmall;
       } else {
         return emojiImageUrlLarge + this.emojiData.key + emojiFileExtensionLarge;

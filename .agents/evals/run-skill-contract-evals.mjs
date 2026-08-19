@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -23,6 +23,20 @@ const skills = {
       '.agents/resources/agent-tooling-parity.md',
     ],
     patterns: [/NO-JIRA/, /Jira creation is separate/, /chore\/NO-JIRA/],
+  },
+  'merge-next': {
+    resources: [
+      '.agents/resources/package-map.md',
+      '.agents/resources/agent-tooling-parity.md',
+    ],
+    patterns: [
+      /git merge --no-commit --no-ff/,
+      /Do not create a PR/,
+      /dialtone-documentation:thumbs -- --force/,
+      /Retirement condition/,
+      /Wait for user confirmation before committing/,
+      /Do not push automatically/,
+    ],
   },
   'dialtone-lookup': {
     resources: ['.agents/resources/dialtone-lookup.md'],
@@ -94,10 +108,38 @@ const skills = {
       '.agents/resources/validation.md',
       '.agents/resources/doc-sync.md',
       '.agents/resources/package-map.md',
+      '.agents/resources/rules/combinator-variants.md',
     ],
     patterns: [/Use `validator`, never `validate`/, /downstream data/],
   },
+  'component-variant': {
+    resources: [
+      '.agents/resources/rules/combinator-variants.md',
+      '.agents/resources/rule-map.md',
+      '.agents/resources/package-map.md',
+    ],
+    patterns: [
+      /variants_<component>\.js/,
+      /component-wall thumbnail/,
+      /Do not rely on repo-external personal variant skills/,
+    ],
+  },
 };
+
+const claudeRuleParityAllowlist = new Map([
+  ['claude-config', 'Skip'],
+  ['css-specificity', 'Defer'],
+  ['dialtone-query-core', 'Skip exact-name parity'],
+  ['general-rules', 'Skip exact-name parity'],
+  ['link-and-button-navigation', 'Defer'],
+  ['slot-class-props', 'Defer'],
+]);
+
+const agentRuleParityAllowlist = new Map([
+  ['codex-tooling', 'Codex-only'],
+  ['general', 'Skip exact-name parity'],
+  ['query-core', 'Skip exact-name parity'],
+]);
 
 function read(relativePath) {
   return readFileSync(join(repoRoot, relativePath), 'utf8');
@@ -105,6 +147,27 @@ function read(relativePath) {
 
 function assert(condition, message, failures) {
   if (!condition) failures.push(message);
+}
+
+function markdownTableCells(row) {
+  return row
+    .split('|')
+    .slice(1, -1)
+    .map((cell) => cell.trim().replace(/^`(.+)`$/, '$1'));
+}
+
+function getRuleParityDecision(
+  parityBody,
+  ruleName,
+  ruleRoot = '.claude/rules',
+) {
+  const rulePath = `${ruleRoot}/${ruleName}.md`;
+  for (const line of parityBody.split('\n')) {
+    if (!line.trim().startsWith('|')) continue;
+    const cells = markdownTableCells(line);
+    if (cells[0] === rulePath) return cells[2] ?? null;
+  }
+  return null;
 }
 
 function commandsForChangedFiles(files) {
@@ -118,10 +181,14 @@ function commandsForChangedFiles(files) {
 
     if (isAgentToolingFile || isCodexRuntimeFile) {
       commands.add('node .agents/evals/run-skill-contract-evals.mjs');
-      if (file.startsWith('.agents/skills/project-start/')) {
-        commands.add(
-          'node .agents/skills/project-start/evals/run-project-start-evals.mjs',
-        );
+      // Skills with their own behavior-eval runner follow the
+      // .agents/skills/<name>/evals/run-<name>-evals.mjs convention.
+      const skillMatch = file.match(/^\.agents\/skills\/([^/]+)\//);
+      if (skillMatch) {
+        const runner = `.agents/skills/${skillMatch[1]}/evals/run-${skillMatch[1]}-evals.mjs`;
+        if (existsSync(join(repoRoot, runner))) {
+          commands.add(`node ${runner}`);
+        }
       }
     }
     if (isAgentToolingFile) {
@@ -154,6 +221,11 @@ function commandsForChangedFiles(files) {
     }
     if (file.startsWith('packages/dialtone-icons/')) {
       commands.add('pnpm nx run dialtone-icons:build');
+    }
+    if (file.startsWith('packages/combinator/')) {
+      commands.add('pnpm --dir packages/combinator test');
+      commands.add('pnpm --dir packages/combinator exec eslint src');
+      commands.add('pnpm nx run dialtone-combinator:build');
     }
     if (file.startsWith('apps/dialtone-documentation/')) {
       commands.add('pnpm nx run dialtone-documentation:lint');
@@ -353,6 +425,13 @@ for (const [skillName, config] of Object.entries(skills)) {
 
 const ruleMap = read('.agents/resources/rule-map.md');
 const codexToolingRules = read('.agents/resources/rules/codex-tooling.md');
+const agentToolingParity = read('.agents/resources/agent-tooling-parity.md');
+const badRuleParityFixture = `
+| Claude rule | Codex peer or status | Decision | Rationale |
+| --- | --- | --- | --- |
+| \`.claude/rules/css-specificity.md\` | No exact Codex peer yet | Skip | Wrong decision for this row. |
+| \`.claude/rules/slot-class-props.md\` | No exact Codex peer yet | Defer | Correct decision for a different row. |
+`;
 const claudeRulesPath = ['.claude', 'rules'].join('/');
 assert(
   !ruleMap.includes(claudeRulesPath),
@@ -383,6 +462,81 @@ assert(
   '.agents/resources/rules/codex-tooling.md must document Codex and Claude harness coexistence',
   failures,
 );
+
+assert(
+  getRuleParityDecision(badRuleParityFixture, 'css-specificity') !== 'Defer',
+  'rule parity decision checks must match the decision on the same row as the Claude rule',
+  failures,
+);
+
+const claudeRuleNames = readdirSync(join(repoRoot, '.claude/rules'))
+  .filter((file) => file.endsWith('.md'))
+  .map((file) => file.replace(/\.md$/, ''));
+const claudeRuleNameSet = new Set(claudeRuleNames);
+
+const agentRuleNames = new Set(
+  readdirSync(join(repoRoot, '.agents/resources/rules'))
+    .filter((file) => file.endsWith('.md'))
+    .map((file) => file.replace(/\.md$/, '')),
+);
+
+for (const ruleName of claudeRuleNames) {
+  const peerExists = agentRuleNames.has(ruleName);
+  const allowlistDecision = claudeRuleParityAllowlist.get(ruleName);
+
+  assert(
+    peerExists || allowlistDecision,
+    `.claude/rules/${ruleName}.md is missing .agents/resources/rules/${ruleName}.md and has no Defer/Skip entry`,
+    failures,
+  );
+
+  if (allowlistDecision) {
+    assert(
+      getRuleParityDecision(agentToolingParity, ruleName) === allowlistDecision,
+      `.agents/resources/agent-tooling-parity.md missing ${allowlistDecision} entry for .claude/rules/${ruleName}.md`,
+      failures,
+    );
+  }
+}
+
+for (const ruleName of agentRuleNames) {
+  const peerExists = claudeRuleNameSet.has(ruleName);
+  const allowlistDecision = agentRuleParityAllowlist.get(ruleName);
+
+  assert(
+    peerExists || allowlistDecision,
+    `.agents/resources/rules/${ruleName}.md is missing .claude/rules/${ruleName}.md and has no Codex-only/Skip entry`,
+    failures,
+  );
+
+  if (allowlistDecision) {
+    assert(
+      getRuleParityDecision(
+        agentToolingParity,
+        ruleName,
+        '.agents/resources/rules',
+      ) === allowlistDecision,
+      `.agents/resources/agent-tooling-parity.md missing ${allowlistDecision} entry for .agents/resources/rules/${ruleName}.md`,
+      failures,
+    );
+  }
+}
+
+for (const ruleName of claudeRuleParityAllowlist.keys()) {
+  assert(
+    !agentRuleNames.has(ruleName),
+    `.agents/resources/rules/${ruleName}.md now exists; remove ${ruleName} from claudeRuleParityAllowlist`,
+    failures,
+  );
+}
+
+for (const ruleName of agentRuleParityAllowlist.keys()) {
+  assert(
+    !claudeRuleNameSet.has(ruleName),
+    `.claude/rules/${ruleName}.md now exists; remove ${ruleName} from agentRuleParityAllowlist`,
+    failures,
+  );
+}
 
 assert(
   existsSync(join(repoRoot, '.codex/config.toml')),

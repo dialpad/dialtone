@@ -3,46 +3,76 @@ layout: Blank
 ---
 
 <dt-stack class="d-p-400 d-bgc-primary" gap="400">
-  <dt-box padding="300">
-    <dt-stack gap="300" direction="row">
-      <dt-stack direction="row" align="center" gap="100">
-        <dt-presence presence="active" />
-        <dt-presence presence="busy" />
-        <dt-presence presence="away" />
-        <dt-presence presence="offline" />
-      </dt-stack>
-      <dt-stack direction="row" align="center" gap="100">
-        <dt-avatar :size="100" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="100" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="100" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="100" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      </dt-stack>
-      <dt-stack direction="row" align="center" gap="100">
-        <dt-avatar :size="200" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="200" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="200" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="200" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      </dt-stack>
-      <dt-stack direction="row" align="center" gap="100">
-        <dt-avatar :size="300" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="300" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="300" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="300" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      </dt-stack>
-      <dt-stack direction="row" align="center" gap="100">
-        <dt-avatar :size="400" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="400" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="400" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="400" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      </dt-stack>
-      <dt-stack direction="row" align="center" gap="100">
-        <dt-avatar :size="500" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="500" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="500" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-        <dt-avatar :size="500" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
-      </dt-stack>
+  <dt-stack gap="100">
+    <dt-box>
+      <dt-toggle label-class="d-pie-100" size="200">Label</dt-toggle>
+    </dt-box>
+    <dt-stack direction="row" gap="100" align="start">
+      <dt-box>
+        <dt-input
+          label="Label"
+          placeholder="Placeholder"
+        />
+      </dt-box>
+      <dt-box>
+        <dt-select-menu
+          :options="[
+                { value: ``, label: `Please select one` },
+                { value: `1`, label: `Option 1` },
+                { value: `2`, label: `Option 2` },
+                { value: `3`, label: `Option 3` },
+              ]"
+          label="Label"
+          :model-value="modelValue"
+          @update:model-value="onInput"
+        />
+      </dt-box>
     </dt-stack>
-  </dt-box>
+    <dt-box>
+      <dt-stack gap="100">
+        <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
+          <dt-button :disabled="isDisabled"> Place Call </dt-button>
+          <dt-button :disabled="isDisabled" importance="outlined"> Place Call </dt-button>
+          <dt-button :disabled="isDisabled" importance="clear"> Place Call </dt-button>
+        </dt-stack>
+        <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
+          <dt-button :disabled="isDisabled" kind="critical"> Place Call </dt-button>
+          <dt-button :disabled="isDisabled" kind="critical" importance="outlined"> Place Call </dt-button>
+          <dt-button :disabled="isDisabled" kind="critical" importance="clear"> Place Call </dt-button>
+        </dt-stack>
+        <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
+          <dt-button :disabled="isDisabled" kind="positive">Place Call</dt-button>
+          <dt-button :disabled="isDisabled" kind="positive" importance="outlined">Place Call</dt-button>
+          <dt-button :disabled="isDisabled" kind="positive" importance="clear">Place Call</dt-button>
+        </dt-stack>
+        <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
+          <dt-button :disabled="isDisabled" kind="muted" importance="clear"> Place Call </dt-button>
+          <dt-button :disabled="isDisabled" kind="muted" importance="outlined"> Place Call </dt-button>
+        </dt-stack>
+      </dt-stack>
+    </dt-box>
+    <dt-box>
+      <dt-checkbox-group
+        name="fruits-checkbox-group"
+        legend="Fruits"
+      >
+        <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>
+        <dt-checkbox value="banana" checked><span>Banana</span></dt-checkbox>
+        <dt-checkbox value="orange"><span>Orange</span></dt-checkbox>
+        <dt-checkbox value="other" indeterminate><span>Other</span></dt-checkbox>
+      </dt-checkbox-group>
+    </dt-box>
+    <dt-box>
+      <dt-radio-group
+        name="fruits-radio-group"
+        legend="Fruits"
+      >
+        <dt-radio checked value="apple"><span>Apple</span></dt-radio>
+        <dt-radio value="banana"><span>Banana</span></dt-radio>
+        <dt-radio value="other"><span>Other</span></dt-radio>
+      </dt-radio-group>
+    </dt-box>
+  </dt-stack>
   <dt-stack direction="row" gap="100">
     <dt-text as="h1" kind="headline" :size="600">
       Scratchpad
@@ -127,6 +157,303 @@ layout: Blank
       </template>
     </dt-dropdown>
   </dt-stack>
+<!-- ============================================================ -->
+
+<dt-stack gap="100">
+  <dt-stack direction="row" align="start" gap="100">
+    <dt-stack align="center" gap="50">
+      <dt-text variant="body-xs" size="50">200</dt-text>
+      <dt-avatar :size="200" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack align="center" gap="50">
+      <dt-text variant="body-xs" size="50">200</dt-text>
+      <dt-avatar :size="200" presence="away" seed="user-2" full-name="Marshall Mathers" />
+    </dt-stack>
+    <dt-stack align="center" gap="50">
+      <dt-text variant="body-xs" size="50">250</dt-text>
+      <dt-avatar :size="250" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack align="center" gap="50">
+      <dt-text variant="body-xs" size="50">250</dt-text>
+      <dt-avatar :size="250" presence="away" seed="user-2" full-name="Marshall Mathers" />
+    </dt-stack>
+    <dt-stack align="center" gap="50">
+      <dt-text variant="body-xs" size="50">300</dt-text>
+      <dt-avatar :size="300" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack align="center" gap="50">
+      <dt-text variant="body-xs" size="50">300</dt-text>
+      <dt-avatar :size="300" presence="busy" seed="user-3" full-name="Marshall Mathers" />
+    </dt-stack>
+    <dt-stack align="center" gap="50">
+      <dt-text variant="body-xs" size="50">400</dt-text>
+      <dt-avatar :size="400" presence="dnd" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack align="center" gap="50">
+      <dt-text variant="body-xs" size="50">400</dt-text>
+      <dt-avatar :size="400" presence="dnd" seed="user-4" full-name="Marshall Mathers" />
+    </dt-stack>
+    <dt-stack align="center" gap="50">
+      <dt-text variant="body-xs" size="50">500</dt-text>
+      <dt-avatar :size="500" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack align="center" gap="50">
+      <dt-text variant="body-xs" size="50">500</dt-text>
+      <dt-avatar :size="500" presence="offline" seed="user-5" full-name="Marshall Mathers" />
+    </dt-stack>
+  </dt-stack>
+</dt-stack>
+<dt-stack gap="200">
+  <dt-stack gap="300" direction="row" align="start">
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-presence presence="active" />
+      <dt-presence presence="busy" />
+      <dt-presence presence="away" />
+      <dt-presence presence="offline" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="200" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="200" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="200" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="200" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="250" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="250" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="250" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="250" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="300" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="300" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="300" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="300" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="400" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="400" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="400" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="400" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="500" presence="active" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="500" presence="busy" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="500" presence="away" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+      <dt-avatar :size="500" presence="offline" image-src="/assets/images/person.png" image-alt="Person Avatar" />
+    </dt-stack>
+  </dt-stack>
+  <dt-stack gap="300" direction="row" align="start">
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-presence presence="active" />
+      <dt-presence presence="busy" />
+      <dt-presence presence="away" />
+      <dt-presence presence="offline" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="200" presence="active" full-name="Layla El-Sayed" />
+      <dt-avatar :size="200" presence="busy" full-name="Luca Ferrari" />
+      <dt-avatar :size="200" presence="away" full-name="Nia Griffiths" />
+      <dt-avatar :size="200" presence="offline" full-name="Hana Horvat" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="250" presence="active" full-name="Layla El-Sayed" />
+      <dt-avatar :size="250" presence="busy" full-name="Luca Ferrari" />
+      <dt-avatar :size="250" presence="away" full-name="Nia Griffiths" />
+      <dt-avatar :size="250" presence="offline" full-name="Hana Horvat" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="300" presence="active" full-name="Arjun Iyer" />
+      <dt-avatar :size="300" presence="busy" full-name="Min-jun Jeong" />
+      <dt-avatar :size="300" presence="away" full-name="Zofia Kowalska" />
+      <dt-avatar :size="300" presence="offline" full-name="Mateo López" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="400" presence="active" full-name="Zanele Mbeki" />
+      <dt-avatar :size="400" presence="busy" full-name="Chidi Nwosu" />
+      <dt-avatar :size="400" presence="away" full-name="Aoife O'Sullivan" />
+      <dt-avatar :size="400" presence="offline" full-name="Inês Pereira" />
+    </dt-stack>
+    <dt-stack direction="row" align="center" gap="100">
+      <dt-avatar :size="500" presence="active" full-name="Lian Qiao" />
+      <dt-avatar :size="500" presence="busy" full-name="Priya Raman" />
+      <dt-avatar :size="500" presence="away" full-name="Leila Saleh" />
+      <dt-avatar :size="500" presence="offline" full-name="Sione Tui" />
+    </dt-stack>
+  </dt-stack>
+</dt-stack>
+
+<p>
+  A sentence goes here
+  <dt-chip interactive size="200"> <template #icon> <dt-icon name="box-select" size="200" /> </template> Chip </dt-chip>
+  with an inline
+  <dt-chip interactive size="100"> <template #icon> <dt-icon name="box-select" size="200" /> </template> Chip </dt-chip>
+  and even an inline
+  <dt-badge>Badge</dt-badge>
+  and a chip without actionable parts
+  <dt-chip> Chip </dt-chip>
+  and stuff
+</p>
+
+<dt-stack gap="100">
+  <dt-stack direction="row" gap="200">
+    <dt-box class="d-fl1 d-w100p" border-color="subtle" border-width-block-end="50" border-width-block-start="50">
+      <dt-stack
+        direction="row"
+        align="center"
+        gap="50"
+      >
+        <dt-chip interactive size="100">Chip</dt-chip>
+        <dt-chip interactive size="100" :show-close="false">Chip</dt-chip>
+        <dt-chip interactive size="100">
+          <template #icon>
+            <dt-icon name="box-select" size="200" />
+          </template>
+          Chip
+        </dt-chip>
+        <dt-chip interactive size="100">
+          <template #avatar>
+            <dt-avatar image-src="/assets/images/person.png" image-alt="Jaqueline Nackos" full-name="Jaqueline Nackos" />
+          </template>
+          Chip
+        </dt-chip>
+      </dt-stack>
+    </dt-box>
+    <dt-box class="d-fl1 d-w100p" border-color="subtle" border-width-block-end="50" border-width-block-start="50">
+      <dt-stack
+        direction="row"
+        align="center"
+        gap="50"
+      >
+        <dt-chip interactive size="200">Chip</dt-chip>
+        <dt-chip interactive size="200" :show-close="false">Chip</dt-chip>
+        <dt-chip interactive size="200">
+          <template #icon>
+            <dt-icon name="box-select" />
+          </template>
+          Chip
+        </dt-chip>
+        <dt-chip interactive size="200">
+          <template #avatar>
+            <dt-avatar image-src="/assets/images/person.png" image-alt="Jaqueline Nackos" full-name="Jaqueline Nackos" />
+          </template>
+          Chip
+        </dt-chip>
+      </dt-stack>
+    </dt-box>
+    <dt-box class="d-fl1 d-w100p" border-color="subtle" border-width-block-end="50" border-width-block-start="50">
+      <dt-stack
+        direction="row"
+        align="center"
+        gap="50"
+      >
+        <dt-chip interactive>Chip</dt-chip>
+        <dt-chip interactive :show-close="false">Chip</dt-chip>
+        <dt-chip interactive>
+          <template #icon>
+            <dt-icon name="box-select" size="200" />
+          </template>
+          Chip
+        </dt-chip>
+        <dt-chip interactive>
+          <template #avatar>
+            <dt-avatar image-src="/assets/images/person.png" image-alt="Jaqueline Nackos" full-name="Jaqueline Nackos" />
+          </template>
+          Chip
+        </dt-chip>
+      </dt-stack>
+    </dt-box>
+  </dt-stack>
+  <dt-box>
+    <dt-stack
+      direction="row"
+      align="start"
+      gap="200"
+    >
+      <div class="d-fl1 d-w100p">
+        <dt-combobox-multi-select
+          label="First name"
+          size="100"
+          :selected-items="selectedFirstNames"
+          @update:model-value="onFirstNameInput"
+          @select="onFirstNameSelect"
+          @remove="onFirstNameRemove"
+        >
+          <template #list>
+            <dt-stack as="ul" class="d-ps-relative d-m-50 d-px-0">
+              <dt-list-item
+                v-for="(item, i) in firstNameItems"
+                :key="item.id"
+                role="option"
+                navigation-type="arrow-keys"
+                @click="onFirstNameSelect(i)"
+              >
+                {{ item.value }}
+                <template #right>
+                  <dt-text variant="body-sm" tone="tertiary">{{ item.type }}</dt-text>
+                </template>
+              </dt-list-item>
+            </dt-stack>
+          </template>
+        </dt-combobox-multi-select>
+      </div>
+      <div class="d-fl1 d-w100p">
+        <dt-combobox-multi-select
+          label="MLB team"
+          size="200"
+          :selected-items="selectedMlbTeams"
+          @update:model-value="onMlbTeamInput"
+          @select="onMlbTeamSelect"
+          @remove="onMlbTeamRemove"
+        >
+          <template #list>
+            <dt-stack as="ul" class="d-ps-relative d-m-50 d-px-0">
+              <dt-list-item
+                v-for="(item, i) in mlbTeamItems"
+                :key="item.id"
+                role="option"
+                navigation-type="arrow-keys"
+                @click="onMlbTeamSelect(i)"
+              >
+                {{ item.value }}
+                <template #right>
+                  <dt-text variant="body-sm" tone="tertiary">{{ item.type }}</dt-text>
+                </template>
+              </dt-list-item>
+            </dt-stack>
+          </template>
+        </dt-combobox-multi-select>
+      </div>
+      <div class="d-fl1 d-w100p">
+        <dt-combobox-multi-select
+          label="Color"
+          size="300"
+          :selected-items="selectedColors"
+          @update:model-value="onColorInput"
+          @select="onColorSelect"
+          @remove="onColorRemove"
+        >
+          <template #list>
+            <dt-stack as="ul" class="d-ps-relative d-m-50 d-px-0">
+              <dt-list-item
+                v-for="(item, i) in colorItems"
+                :key="item.id"
+                role="option"
+                navigation-type="arrow-keys"
+                @click="onColorSelect(i)"
+              >
+                {{ item.value }}
+                <template #right>
+                  <dt-text variant="body-sm" tone="tertiary">{{ item.type }}</dt-text>
+                </template>
+              </dt-list-item>
+            </dt-stack>
+          </template>
+        </dt-combobox-multi-select>
+      </div>
+    </dt-stack>
+  </dt-box>
+</dt-stack>
+
 <!-- ============================================================ -->
 <!-- DtBox V1 Demos                                                -->
 <!-- ============================================================ -->
@@ -267,7 +594,8 @@ layout: Blank
   <dt-box
     padding="100"
     surface="secondary"
-    class="d-ps-sticky d-t-0"
+    position="sticky"
+    inset-block-start="0"
   >
     <dt-text kind="body" :size="200">Box demo</dt-text>
   </dt-box>
@@ -330,10 +658,10 @@ layout: Blank
 </dt-box>
 ```
 
-  <dt-text kind="headline" size="md">Utility class escape hatch</dt-text>
+  <dt-text kind="headline" size="md">Positioning props</dt-text>
 
 ```vue demo
-<dt-box padding="200" surface="primary" border-width="100" border-radius="200" class="d-ps-sticky d-t-0">
+<dt-box padding="200" surface="primary" border-width="100" border-radius="200" position="sticky" inset-block-start="0">
   Box demo
 </dt-box>
 ```
@@ -440,8 +768,6 @@ layout: Blank
 
 </dt-stack>
 
-<div class="d-h-1200"></div>
-
 <script setup>
 import { ref, computed } from 'vue';
 import ExampleTabs from '@exampleComponents/ExampleTabs.vue';
@@ -458,6 +784,156 @@ const {
 } = useThemeManager();
 
 const capitalize = (str) => str.charAt(0).toUpperCase() + str.slice(1);
+
+const FIRST_NAME_ITEMS_DATA = [
+  { id: 'first-name-avery', value: 'Avery', type: 'First name' },
+  { id: 'first-name-jordan', value: 'Jordan', type: 'First name' },
+  { id: 'first-name-maya', value: 'Maya', type: 'First name' },
+  { id: 'first-name-theo', value: 'Theo', type: 'First name' },
+  { id: 'first-name-priya', value: 'Priya', type: 'First name' },
+  { id: 'first-name-mateo', value: 'Mateo', type: 'First name' },
+  { id: 'first-name-amara', value: 'Amara', type: 'First name' },
+  { id: 'first-name-benjamin', value: 'Benjamin', type: 'First name' },
+  { id: 'first-name-chloe', value: 'Chloe', type: 'First name' },
+  { id: 'first-name-diego', value: 'Diego', type: 'First name' },
+  { id: 'first-name-elena', value: 'Elena', type: 'First name' },
+  { id: 'first-name-finn', value: 'Finn', type: 'First name' },
+  { id: 'first-name-grace', value: 'Grace', type: 'First name' },
+  { id: 'first-name-hugo', value: 'Hugo', type: 'First name' },
+  { id: 'first-name-isla', value: 'Isla', type: 'First name' },
+  { id: 'first-name-kai', value: 'Kai', type: 'First name' },
+  { id: 'first-name-leila', value: 'Leila', type: 'First name' },
+  { id: 'first-name-noah', value: 'Noah', type: 'First name' },
+  { id: 'first-name-olivia', value: 'Olivia', type: 'First name' },
+  { id: 'first-name-rafael', value: 'Rafael', type: 'First name' },
+  { id: 'first-name-samira', value: 'Samira', type: 'First name' },
+  { id: 'first-name-wesley', value: 'Wesley', type: 'First name' },
+  { id: 'first-name-yara', value: 'Yara', type: 'First name' },
+  { id: 'first-name-zane', value: 'Zane', type: 'First name' },
+];
+
+const MLB_TEAM_ITEMS_DATA = [
+  { id: 'mlb-baltimore-orioles', value: 'Baltimore Orioles', type: 'AL East' },
+  { id: 'mlb-boston-red-sox', value: 'Boston Red Sox', type: 'AL East' },
+  { id: 'mlb-new-york-yankees', value: 'New York Yankees', type: 'AL East' },
+  { id: 'mlb-tampa-bay-rays', value: 'Tampa Bay Rays', type: 'AL East' },
+  { id: 'mlb-toronto-blue-jays', value: 'Toronto Blue Jays', type: 'AL East' },
+  { id: 'mlb-chicago-white-sox', value: 'Chicago White Sox', type: 'AL Central' },
+  { id: 'mlb-cleveland-guardians', value: 'Cleveland Guardians', type: 'AL Central' },
+  { id: 'mlb-detroit-tigers', value: 'Detroit Tigers', type: 'AL Central' },
+  { id: 'mlb-kansas-city-royals', value: 'Kansas City Royals', type: 'AL Central' },
+  { id: 'mlb-minnesota-twins', value: 'Minnesota Twins', type: 'AL Central' },
+  { id: 'mlb-athletics', value: 'Athletics', type: 'AL West' },
+  { id: 'mlb-houston-astros', value: 'Houston Astros', type: 'AL West' },
+  { id: 'mlb-los-angeles-angels', value: 'Los Angeles Angels', type: 'AL West' },
+  { id: 'mlb-seattle-mariners', value: 'Seattle Mariners', type: 'AL West' },
+  { id: 'mlb-texas-rangers', value: 'Texas Rangers', type: 'AL West' },
+  { id: 'mlb-atlanta-braves', value: 'Atlanta Braves', type: 'NL East' },
+  { id: 'mlb-miami-marlins', value: 'Miami Marlins', type: 'NL East' },
+  { id: 'mlb-new-york-mets', value: 'New York Mets', type: 'NL East' },
+  { id: 'mlb-philadelphia-phillies', value: 'Philadelphia Phillies', type: 'NL East' },
+  { id: 'mlb-washington-nationals', value: 'Washington Nationals', type: 'NL East' },
+  { id: 'mlb-chicago-cubs', value: 'Chicago Cubs', type: 'NL Central' },
+  { id: 'mlb-cincinnati-reds', value: 'Cincinnati Reds', type: 'NL Central' },
+  { id: 'mlb-milwaukee-brewers', value: 'Milwaukee Brewers', type: 'NL Central' },
+  { id: 'mlb-pittsburgh-pirates', value: 'Pittsburgh Pirates', type: 'NL Central' },
+  { id: 'mlb-st-louis-cardinals', value: 'St. Louis Cardinals', type: 'NL Central' },
+  { id: 'mlb-arizona-diamondbacks', value: 'Arizona Diamondbacks', type: 'NL West' },
+  { id: 'mlb-colorado-rockies', value: 'Colorado Rockies', type: 'NL West' },
+  { id: 'mlb-los-angeles-dodgers', value: 'Los Angeles Dodgers', type: 'NL West' },
+  { id: 'mlb-san-diego-padres', value: 'San Diego Padres', type: 'NL West' },
+  { id: 'mlb-san-francisco-giants', value: 'San Francisco Giants', type: 'NL West' },
+];
+
+const COLOR_ITEMS_DATA = [
+  { id: 'color-crimson', value: 'Crimson', type: 'Warm' },
+  { id: 'color-amber', value: 'Amber', type: 'Warm' },
+  { id: 'color-emerald', value: 'Emerald', type: 'Cool' },
+  { id: 'color-cobalt', value: 'Cobalt', type: 'Cool' },
+  { id: 'color-violet', value: 'Violet', type: 'Cool' },
+  { id: 'color-slate', value: 'Slate', type: 'Neutral' },
+  { id: 'color-indigo', value: 'Indigo', type: 'Cool' },
+  { id: 'color-rose', value: 'Rose', type: 'Warm' },
+  { id: 'color-tangerine', value: 'Tangerine', type: 'Warm' },
+  { id: 'color-lime', value: 'Lime', type: 'Warm' },
+  { id: 'color-teal', value: 'Teal', type: 'Cool' },
+  { id: 'color-sage', value: 'Sage', type: 'Cool' },
+  { id: 'color-azure', value: 'Azure', type: 'Cool' },
+  { id: 'color-plum', value: 'Plum', type: 'Cool' },
+  { id: 'color-mint', value: 'Mint', type: 'Cool' },
+  { id: 'color-coral', value: 'Coral', type: 'Warm' },
+  { id: 'color-saffron', value: 'Saffron', type: 'Warm' },
+  { id: 'color-pearl', value: 'Pearl', type: 'Neutral' },
+  { id: 'color-onyx', value: 'Onyx', type: 'Neutral' },
+  { id: 'color-charcoal', value: 'Charcoal', type: 'Neutral' },
+  { id: 'color-graphite', value: 'Graphite', type: 'Neutral' },
+  { id: 'color-smoke', value: 'Smoke', type: 'Neutral' },
+  { id: 'color-ash', value: 'Ash', type: 'Neutral' },
+  { id: 'color-sand', value: 'Sand', type: 'Neutral' },
+  { id: 'color-dust', value: 'Dust', type: 'Neutral' },
+  { id: 'color-mist', value: 'Mist', type: 'Neutral' },
+  { id: 'color-fog', value: 'Fog', type: 'Neutral' },
+  { id: 'color-moonlight', value: 'Moonlight', type: 'Neutral' },
+];
+
+function createComboboxState (itemsData) {
+  const items = ref([...itemsData]);
+  const selectedItems = ref([]);
+
+  function onInput (value) {
+    const normalizedValue = value.toLowerCase();
+    items.value = itemsData.filter(item => item.value.toLowerCase().includes(normalizedValue));
+  }
+
+  function onSelect (i) {
+    if (items.value[i]) {
+      const item = items.value[i].value;
+      if (!selectedItems.value.includes(item)) {
+        selectedItems.value.push(item);
+      }
+      items.value = [...itemsData];
+    }
+  }
+
+  function onRemove (item) {
+    const index = selectedItems.value.indexOf(item);
+    if (index >= 0) {
+      selectedItems.value.splice(index, 1);
+    }
+  }
+
+  return {
+    items,
+    selectedItems,
+    onInput,
+    onSelect,
+    onRemove,
+  };
+}
+
+const {
+  items: firstNameItems,
+  selectedItems: selectedFirstNames,
+  onInput: onFirstNameInput,
+  onSelect: onFirstNameSelect,
+  onRemove: onFirstNameRemove,
+} = createComboboxState(FIRST_NAME_ITEMS_DATA);
+
+const {
+  items: mlbTeamItems,
+  selectedItems: selectedMlbTeams,
+  onInput: onMlbTeamInput,
+  onSelect: onMlbTeamSelect,
+  onRemove: onMlbTeamRemove,
+} = createComboboxState(MLB_TEAM_ITEMS_DATA);
+
+const {
+  items: colorItems,
+  selectedItems: selectedColors,
+  onInput: onColorInput,
+  onSelect: onColorSelect,
+  onRemove: onColorRemove,
+} = createComboboxState(COLOR_ITEMS_DATA);
 
 const proseSize = ref('300');
 const proseDensity = ref('200');

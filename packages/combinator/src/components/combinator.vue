@@ -1,8 +1,5 @@
 <template>
-  <Teleport
-    to="body"
-    :disabled="!isFullScreen"
-  >
+  <Teleport to="body" :disabled="!isFullScreen">
     <div
       v-bind="$attrs"
       :class="[
@@ -17,12 +14,7 @@
         direction="row"
         gap="500"
         justify="between"
-        class="
-          d-p-100
-          d-pie-200
-          d-bb
-          d-bc-subtle
-        "
+        class="d-p-100 d-pie-200 d-bb d-bc-subtle"
         :class="variantOptions.length > 1 ? 'd-g-cols3' : 'd-g-cols2'"
       >
         <dt-text
@@ -36,62 +28,92 @@
         >
           {{ component.name }}
         </dt-text>
-        <dt-dropdown
-          v-else
-          navigation-type="arrow-keys"
-          placement="bottom-start"
-          content-class="d-wmn-500"
-        >
-          <template #anchor="{ attrs }">
-            <dt-button
-              v-dt-tooltip="'Presets'"
-              v-bind="attrs"
-              importance="outlined"
-              kind="muted"
-              :size="isFullScreen ? '400' : '300'"
-              leading-class="d-pbs-1 d-pis-150 d-mie-n25"
-            >
-              <template #leading>
-                <dt-text
-                  kind="code"
-                  tone="primary"
-                  strength="semibold"
-                  class="d-fs-inherit"
-                >
-                  {{ component.name }}:
-                </dt-text>
-              </template>
-              {{ selectedVariant || 'custom' }}
-              <template #endIcon="{ iconSize }">
-                <dt-icon-chevrons-up-down
-                  class="d-fc-muted"
-                  :size="iconSize"
-                />
-              </template>
-            </dt-button>
-          </template>
-          <template #list="{ close }">
-            <dt-list-item
-              v-for="option in variantOptions"
-              :key="option.value"
-              role="menuitem"
-              navigation-type="arrow-keys"
-              @click="updateVariant(option.value); close()"
-            >
-              {{ option.label }}
-              <template #end>
-                <dt-icon-check
-                  size="200"
-                  :class="option.value === selectedVariant ? 'd-o100' : 'd-o0'"
-                />
-              </template>
-            </dt-list-item>
-          </template>
-        </dt-dropdown>
-        <dt-stack
-          gap="100"
-          direction="row"
-        >
+        <dt-stack v-else direction="row" gap="100" class="d-ai-center">
+          <dt-dropdown
+            v-if="viewMode === 'single'"
+            navigation-type="arrow-keys"
+            placement="bottom-start"
+            content-class="d-wmn-500"
+          >
+            <template #anchor="{ attrs }">
+              <dt-button
+                v-dt-tooltip="'Presets'"
+                v-bind="attrs"
+                importance="outlined"
+                kind="muted"
+                :size="isFullScreen ? '400' : '300'"
+                leading-class="d-pbs-1 d-pis-150 d-mie-n25"
+              >
+                <template #leading>
+                  <dt-text
+                    kind="code"
+                    tone="primary"
+                    strength="semibold"
+                    class="d-fs-inherit"
+                  >
+                    {{ component.name }}:
+                  </dt-text>
+                </template>
+                {{ selectedVariant || 'custom' }}
+                <template #endIcon="{ iconSize }">
+                  <dt-icon-chevrons-up-down
+                    class="d-fc-muted"
+                    :size="iconSize"
+                  />
+                </template>
+              </dt-button>
+            </template>
+            <template #list="{ close }">
+              <dt-list-item
+                v-for="option in variantOptions"
+                :key="option.value"
+                role="menuitem"
+                navigation-type="arrow-keys"
+                @click="
+                  updateVariant(option.value);
+                  close();
+                "
+              >
+                {{ option.label }}
+                <template #end>
+                  <dt-icon-check
+                    size="200"
+                    :class="
+                      option.value === selectedVariant ? 'd-o100' : 'd-o0'
+                    "
+                  />
+                </template>
+              </dt-list-item>
+            </template>
+          </dt-dropdown>
+          <dt-text
+            v-else
+            kind="code"
+            tone="primary"
+            strength="semibold"
+            :size="300"
+            as="div"
+            class="d-px-150 d-py-100"
+          >
+            {{ component.name }}
+          </dt-text>
+          <dt-button
+            ref="viewToggleRef"
+            v-dt-tooltip="viewMode === 'grid' ? 'Single view' : 'Spec sheet'"
+            aria-label="Toggle spec sheet view"
+            :aria-pressed="viewMode === 'grid'"
+            kind="muted"
+            importance="clear"
+            :size="200"
+            :active="viewMode === 'grid'"
+            @click="toggleViewMode"
+          >
+            <template #icon="{ iconSize }">
+              <dt-icon-layout-grid :size="iconSize" />
+            </template>
+          </dt-button>
+        </dt-stack>
+        <dt-stack gap="100" direction="row">
           <dt-button
             v-if="hasChanges"
             v-dt-tooltip="`Reset`"
@@ -101,9 +123,7 @@
             @click="resetOptions"
           >
             <template #icon="{ iconSize }">
-              <dt-icon-refresh
-                :size="iconSize"
-              />
+              <dt-icon-refresh :size="iconSize" />
             </template>
           </dt-button>
           <dt-button
@@ -114,20 +134,15 @@
             @click="toggleFullScreen"
           >
             <template #icon="{ iconSize }">
-              <dt-icon-minimize
-                v-if="isFullScreen"
-                :size="iconSize"
-              />
-              <dt-icon-expand
-                v-else
-                :size="iconSize"
-              />
+              <dt-icon-minimize v-if="isFullScreen" :size="iconSize" />
+              <dt-icon-expand v-else :size="iconSize" />
             </template>
           </dt-button>
         </dt-stack>
       </dt-stack>
       <div class="dialtone-playground__start">
         <dtc-renderer
+          v-if="viewMode === 'single'"
           v-model:settings="settings"
           class="dialtone-playground__component"
           :component="component"
@@ -137,14 +152,23 @@
           :disabled-members="disabledMembers"
           @event="onComponentEvent"
         />
+        <dtc-renderer-spec-sheet
+          v-else
+          :component="component"
+          :documentation="documentation"
+          :variants="variants"
+          :library="library"
+          @select="onSelectVariant"
+        />
         <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
         <div
+          v-if="viewMode === 'single'"
           class="dialtone-playground__resizer"
           @pointerdown="startResize"
           @dblclick="optionBarWidth = null"
         />
         <dtc-option-bar
-          v-if="!blueprint"
+          v-if="!blueprint && viewMode === 'single'"
           v-model:options="options"
           v-model:settings="settings"
           :component="component"
@@ -152,7 +176,7 @@
           :style="optionBarWidth ? { 'inline-size': optionBarWidth } : {}"
         />
       </div>
-      <div class="dialtone-playground__end">
+      <div v-if="viewMode === 'single'" class="dialtone-playground__end">
         <dtc-code-panel
           :info="info"
           :options="options"
@@ -161,7 +185,7 @@
           :dev-mode="devMode"
           :has-changes="hasChanges"
           :full-screen="isFullScreen"
-          @update:options="e => e(options)"
+          @update:options="(e) => e(options)"
         />
       </div>
     </div>
@@ -171,13 +195,26 @@
 <script setup>
 import DtcOptionBar from './option_bar/option_bar.vue';
 import DtcRenderer from './renderer/renderer.vue';
-import { enumerateGroups, shouldDisableSlotClassProp } from '@/src/lib/utils';
-import { shouldDisable } from '@/src/lib/exclusion_rules';
-import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
-import { computed, nextTick, onErrorCaptured, onUnmounted, reactive, ref, watch } from 'vue';
+import DtcRendererSpecSheet from './renderer/renderer_spec_sheet.vue';
+import { enumerateGroups } from '@/src/lib/utils';
+import {
+  computed,
+  nextTick,
+  onErrorCaptured,
+  onUnmounted,
+  reactive,
+  ref,
+  watch,
+} from 'vue';
 import { cachedRef, computedModel } from '@/src/lib/utils_vue';
 import { clearTokenCache } from '@/src/lib/tokens';
-import { getComponentInfo } from '@/src/lib/info';
+import {
+  buildVariantInfo,
+  computeDisabledMembers,
+  getInitialValues,
+  listVariantNames,
+  writeUpdateEvent,
+} from '@/src/lib/variant_state';
 import {
   SETTINGS_BACKGROUND_KEY,
   SETTINGS_HIDE_DEPRECATED_KEY,
@@ -196,6 +233,7 @@ import DtIconExpand from '@dialpad/dialtone-icons/vue/expand';
 import DtIconRefresh from '@dialpad/dialtone-icons/vue/refresh';
 import DtIconChevronsUpDown from '@dialpad/dialtone-icons/vue/chevrons-up-down';
 import DtIconCheck from '@dialpad/dialtone-icons/vue/check';
+import DtIconLayoutGrid from '@dialpad/dialtone-icons/vue/layout-grid';
 
 const props = defineProps({
   /**
@@ -250,27 +288,31 @@ defineOptions({
 });
 
 const emit = defineEmits(['update:fullScreen']);
+
 const selectedVariant = ref('default');
 const activeVariant = ref('default');
 const internalFullScreen = ref(false);
 const optionBarWidth = ref(null);
+const viewMode = ref('single');
+const viewToggleRef = ref(null);
 let _presetChanging = false;
 const _forceReset = ref(0);
 
 const isFullScreen = computed({
-  get () {
+  get() {
     return props.fullScreen ?? internalFullScreen.value;
   },
-  set (value) {
+  set(value) {
     internalFullScreen.value = value;
     emit('update:fullScreen', value);
   },
 });
 
 const variantOptions = computed(() => {
-  return Object.keys(props.variants ?? {})
-    .filter(key => key !== 'exclusions' && key !== 'defaults')
-    .map(key => ({ value: key, label: key }));
+  return listVariantNames(props.variants).map((key) => ({
+    value: key,
+    label: key,
+  }));
 });
 
 /**
@@ -283,7 +325,7 @@ const info = computed(() => {
   return Object.freeze({
     ...initializeInfo(),
     members: {
-      enumerate (handler) {
+      enumerate(handler) {
         enumerateGroups(handler, {
           slots: info.value.slots,
           props: info.value.props,
@@ -293,15 +335,15 @@ const info = computed(() => {
       },
     },
     bindings: {
-      get () {
+      get() {
         const bindings = [];
         this.enumerate((_, binding) => bindings.push(binding));
         return bindings;
       },
-      enumerate (handler) {
+      enumerate(handler) {
         enumerateGroups(handler, {
           props: info.value.props,
-          attributes: info.value.attributes?.filter(attribute => attribute),
+          attributes: info.value.attributes?.filter((attribute) => attribute),
         });
       },
     },
@@ -320,15 +362,19 @@ const options = computedModel(
     return reactive({
       ...getInitialValues(info.value),
       bindings: {
-        get () {
+        get() {
           const bindings = [];
           this.enumerate((_, binding) => bindings.push(binding));
           return Object.fromEntries(bindings);
         },
-        enumerate (handler) {
+        enumerate(handler) {
           enumerateGroups(handler, {
-            props: options.value.props ? Object.entries(options.value.props) : null,
-            attributes: options.value.attributes ? Object.entries(options.value.attributes) : null,
+            props: options.value.props
+              ? Object.entries(options.value.props)
+              : null,
+            attributes: options.value.attributes
+              ? Object.entries(options.value.attributes)
+              : null,
           });
         },
       },
@@ -363,19 +409,40 @@ const settings = computedModel(
   computed(() => {
     return reactive({
       root: {
-        theme: cachedRef(SETTINGS_THEME_KEY, defaultSettings.root['default-theme']),
-        sidebar: cachedRef(SETTINGS_SIDEBAR_KEY, defaultSettings.root['default-sidebar']),
+        theme: cachedRef(
+          SETTINGS_THEME_KEY,
+          defaultSettings.root['default-theme'],
+        ),
+        sidebar: cachedRef(
+          SETTINGS_SIDEBAR_KEY,
+          defaultSettings.root['default-sidebar'],
+        ),
       },
       renderer: {
-        positioning: cachedRef(SETTINGS_POSITIONING_KEY, defaultSettings.renderer['default-positioning']),
-        background: cachedRef(SETTINGS_BACKGROUND_KEY, defaultSettings.renderer['default-background']),
+        positioning: cachedRef(
+          SETTINGS_POSITIONING_KEY,
+          defaultSettings.renderer['default-positioning'],
+        ),
+        background: cachedRef(
+          SETTINGS_BACKGROUND_KEY,
+          defaultSettings.renderer['default-background'],
+        ),
       },
       code: {
-        scheme: cachedRef(SETTINGS_SCHEME_KEY, defaultSettings.code['default-scheme']),
-        indent: cachedRef(SETTINGS_INDENT_KEY, defaultSettings.code['default-indent-spaces']),
+        scheme: cachedRef(
+          SETTINGS_SCHEME_KEY,
+          defaultSettings.code['default-scheme'],
+        ),
+        indent: cachedRef(
+          SETTINGS_INDENT_KEY,
+          defaultSettings.code['default-indent-spaces'],
+        ),
         verbose: props.blueprint
           ? false
-          : cachedRef(SETTINGS_VERBOSE_KEY, defaultSettings.code['default-verbose']),
+          : cachedRef(
+              SETTINGS_VERBOSE_KEY,
+              defaultSettings.code['default-verbose'],
+            ),
       },
       controls: {
         hideDeprecated: cachedRef(
@@ -408,69 +475,60 @@ watch(() => settings.value.root.theme, clearTokenCache);
  * @param {string} name - The emitted event name (e.g. 'update:modelValue').
  * @param {*} value - The emitted value.
  */
-function onComponentEvent (name, value) {
+function onComponentEvent(name, value) {
+  // Guard before assigning options.value: a non-update event must not run the
+  // computedModel setter (which would clear selectedVariant / mark "custom").
   if (!name?.startsWith('update:')) return;
-  const prop = name.slice('update:'.length);
-  options.value = (model) => {
-    if (model.props && prop in model.props) model.props[prop] = value;
-    else if (model.attributes && prop in model.attributes) model.attributes[prop] = value;
-  };
+  options.value = (model) => writeUpdateEvent(model, name, value);
 }
 
-function updateVariant (e) {
+function updateVariant(e) {
   _presetChanging = true;
   selectedVariant.value = e;
   if (e !== '') {
     activeVariant.value = e;
     _forceReset.value++;
   }
-  nextTick(() => { _presetChanging = false; });
+  nextTick(() => {
+    _presetChanging = false;
+  });
 }
 
 watch(() => props.component.name, resetOptions);
 
+function toggleViewMode() {
+  viewMode.value = viewMode.value === 'grid' ? 'single' : 'grid';
+}
+
 /**
- * Merges variant override data into an info object.
+ * Loads a variant from the spec sheet into the editable single view.
  *
- * @param {object} info - The info object to merge into.
- * @param {object} variantData - The variant data to merge.
+ * Switching to the single view unmounts the spec sheet, destroying the cell
+ * control that was just activated — which would drop focus to <body>. Restore
+ * focus to the persistent view-toggle button so keyboard navigation continues.
+ *
+ * @param {string} name - The variant to load.
  */
-function mergeVariantData (info, variantData) {
-  if (!variantData) return;
-  Object.entries(variantData).forEach(([memberGroup, members]) => {
-    if (memberGroup === 'exclusions') return;
-    Object.entries(members).forEach(([memberName, member]) => {
-      const infoMember = info[memberGroup]?.find(m => m.name === memberName);
-      if (infoMember) Object.assign(infoMember, member);
-    });
+function onSelectVariant(name) {
+  updateVariant(name);
+  viewMode.value = 'single';
+  nextTick(() => {
+    try {
+      viewToggleRef.value?.$el?.focus({ preventScroll: true });
+    } catch {
+      // Element no longer focusable; ignore.
+    }
   });
 }
 
 const defaultInfo = computed(() => {
-  const info = cloneInfoMembers(
-    getComponentInfo(props.component, props.documentation),
+  return buildVariantInfo(
+    props.component,
+    props.documentation,
+    props.variants,
+    'default',
   );
-  mergeVariantData(info, props.variants?.defaults);
-  mergeVariantData(info, props.variants?.default);
-  return info;
 });
-
-/**
- * Shallow-clones member arrays and their objects so that variant overrides
- * never mutate the shared documentation prop.
- *
- * @param {object} info - The info object to clone.
- * @returns {object} A cloned info object.
- */
-function cloneInfoMembers (info) {
-  const cloned = { ...info };
-  for (const group of ['props', 'slots', 'attributes', 'events']) {
-    if (cloned[group]) {
-      cloned[group] = cloned[group].map(m => ({ ...m }));
-    }
-  }
-  return cloned;
-}
 
 /**
  * Gets a new instantiation of an info object.
@@ -478,33 +536,14 @@ function cloneInfoMembers (info) {
  *
  * @returns {object} The newly instantiated info object.
  */
-function initializeInfo () {
-  const info = cloneInfoMembers(
-    getComponentInfo(props.component, props.documentation),
+function initializeInfo() {
+  return buildVariantInfo(
+    props.component,
+    props.documentation,
+    props.variants,
+    activeVariant.value,
   );
-
-  mergeVariantData(info, props.variants?.defaults);
-  mergeVariantData(info, props.variants?.[activeVariant.value]);
-
-  info.exclusions = props.variants?.exclusions ?? [];
-
-  return info;
 }
-
-/**
- * Gets the values for a given 'options' member group with the provided defaults.
- *
- * @param info
- */
-function getInitialValues (info) {
-  const options = {};
-  info.members.enumerate((memberGroup, member) => {
-    options[memberGroup] = options[memberGroup] || {};
-    options[memberGroup][member.name] = member.initialValue;
-  });
-  return options;
-}
-
 
 const hasChanges = computed(() => {
   const referenceInfo = defaultInfo.value ?? info.value;
@@ -513,27 +552,29 @@ const hasChanges = computed(() => {
     const members = referenceInfo[group];
     if (!members) continue;
     for (const member of members) {
-      if (options.value[group]?.[member.name] !== member.initialValue) return true;
+      if (options.value[group]?.[member.name] !== member.initialValue)
+        return true;
     }
   }
   return false;
 });
 
-function resetOptions () {
+function resetOptions() {
   updateVariant('default');
 }
 
-function startResize (e) {
+function startResize(e) {
   e.preventDefault();
   const startX = e.clientX;
-  const startWidth = document.querySelector('.dialtone-playground__controls')?.offsetWidth ?? 0;
+  const startWidth =
+    document.querySelector('.dialtone-playground__controls')?.offsetWidth ?? 0;
 
-  function onMove (e) {
+  function onMove(e) {
     const delta = startX - e.clientX;
     optionBarWidth.value = Math.max(200, startWidth + delta) + 'px';
   }
 
-  function onUp () {
+  function onUp() {
     document.removeEventListener('pointermove', onMove);
     document.removeEventListener('pointerup', onUp);
   }
@@ -542,11 +583,11 @@ function startResize (e) {
   document.addEventListener('pointerup', onUp);
 }
 
-function toggleFullScreen () {
+function toggleFullScreen() {
   isFullScreen.value = !isFullScreen.value;
 }
 
-function updateBodyFullScreenState (value) {
+function updateBodyFullScreenState(value) {
   if (typeof document === 'undefined') return;
 
   if (value) {
@@ -569,27 +610,11 @@ onUnmounted(() => {
  * @type {ComputedRef<Set<string>>}
  */
 const disabledMembers = computed(() => {
-  const disabled = new Set();
-  const exclusions = info.value.exclusions;
-  const propValues = options.value.props;
-  const slotValues = options.value.slots;
-  const depMap = buildDependencyMap(info.value.props ?? []);
-
-  for (const member of (info.value.props ?? [])) {
-    if (member.required) continue;
-    if (shouldDisable(member.name, 'props', exclusions, propValues, slotValues) ||
-      shouldHideProp(member.name, depMap, propValues) ||
-      shouldDisableSlotClassProp(member.name, slotValues)) {
-      disabled.add(member.name);
-    }
-  }
-  for (const member of (info.value.slots ?? [])) {
-    if (member.required) continue;
-    if (shouldDisable(member.name, 'slots', exclusions, propValues, slotValues)) {
-      disabled.add(member.name);
-    }
-  }
-  return disabled;
+  return computeDisabledMembers(
+    info.value,
+    options.value.props,
+    options.value.slots,
+  );
 });
 
 onErrorCaptured((exception) => {
@@ -611,7 +636,7 @@ export default {
 <style lang="less">
 .dialtone-playground {
   & {
-    display:none;
+    display: none;
     flex-direction: column;
     margin-block-end: var(--dt-spacing-200);
     background-color: var(--dt-color-surface-secondary);
@@ -642,12 +667,14 @@ export default {
     }
 
     :where(.dialtone-playground--fullscreen) & {
-      border-block-end: var(--dt-size-border-100) solid var(--dt-color-border-subtle)
+      border-block-end: var(--dt-size-border-100) solid
+        var(--dt-color-border-subtle);
     }
   }
 
   &__end {
-    border-block-start: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
+    border-block-start: var(--dt-size-border-100) solid
+      var(--dt-color-border-subtle);
 
     :where(.dialtone-playground--fullscreen) & {
       block-size: 33vh;
@@ -706,7 +733,6 @@ export default {
         max-block-size: 100%;
       }
     }
-
   }
 }
 </style>

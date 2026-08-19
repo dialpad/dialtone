@@ -1,3 +1,59 @@
+# [2.0.0-next.7](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.0-next.6...dialtone-tokens/v2.0.0-next.7) (2026-08-18)
+
+
+### Bug Fixes
+
+* **Input, Selectmenu:** NO-JIRA update focus surface color ([eaad020](https://github.com/dialpad/dialtone/commit/eaad02055cba1dc9cc4169da251ec30c58d60303))
+* **Link:** NO-JIRA correct mention link style ([#1398](https://github.com/dialpad/dialtone/issues/1398)) ([36810ce](https://github.com/dialpad/dialtone/commit/36810ce128553c63efe7af6f5a4ab9ece07f21dc))
+
+# [2.0.0-next.6](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.0-next.5...dialtone-tokens/v2.0.0-next.6) (2026-07-23)
+
+
+### Bug Fixes
+
+* **Dialtone Tokens:** NO-JIRA removed dead tokens ([78cd1aa](https://github.com/dialpad/dialtone/commit/78cd1aa7fe423149c9fa1fb0bdc085e416e2d255))
+
+# [2.0.0-next.5](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.0-next.4...dialtone-tokens/v2.0.0-next.5) (2026-07-22)
+
+
+### Features
+
+* **Dialtone Tokens, Dialtone Css:** DLT-3551 add focus ring variants ([#1375](https://github.com/dialpad/dialtone/issues/1375)) ([bc78543](https://github.com/dialpad/dialtone/commit/bc7854353500ac56c75f486857ac6a9631b24dc6))
+
+# [2.0.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.0-next.3...dialtone-tokens/v2.0.0-next.4) (2026-07-15)
+
+
+### Bug Fixes
+
+* **Dialtone Tokens:** DLT-3538 quote "other"-type token values for iOS output ([#1370](https://github.com/dialpad/dialtone/issues/1370)) ([2e18d6f](https://github.com/dialpad/dialtone/commit/2e18d6f071a5d02b583abe33696483d4eb4af6da))
+
+# [2.0.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.0-next.2...dialtone-tokens/v2.0.0-next.3) (2026-07-15)
+
+
+### Bug Fixes
+
+* **Dialtone Tokens:** NO-JIRA add missing zero-width layout design token ([955c5f9](https://github.com/dialpad/dialtone/commit/955c5f9719a28face525300c21b20ef5275e6e51))
+
+# [2.0.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.0-next.1...dialtone-tokens/v2.0.0-next.2) (2026-07-13)
+
+
+### Features
+
+* **Dialtone Tokens:** NO-JIRA add no-layers CSS build and initDialtoneTheme layers option ([#1364](https://github.com/dialpad/dialtone/issues/1364)) ([c2b6839](https://github.com/dialpad/dialtone/commit/c2b6839d8c7c14dfabdada747f1968ddbcee59a8))
+
+# [2.0.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.20...dialtone-tokens/v2.0.0-next.1) (2026-07-03)
+
+
+### Features
+
+* **Dialtone Tokens:** NO-JIRA publish swift prerelease tokens on next ([#1353](https://github.com/dialpad/dialtone/issues/1353)) ([294e1f0](https://github.com/dialpad/dialtone/commit/294e1f02b050a65db97dbcdcdd3ab87c59c4573f))
+* **Text:** DLT-3487 expose full typography size scale ([#1334](https://github.com/dialpad/dialtone/issues/1334)) ([0c8f4c6](https://github.com/dialpad/dialtone/commit/0c8f4c627bc51e5b53e0bde72c832361e38a6137))
+
+
+### BREAKING CHANGES
+
+* **Dialtone Tokens:** Dialtone version 10
+
 # [1.48.0-next.20](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.48.0-next.19...dialtone-tokens/v1.48.0-next.20) (2026-06-18)
 
 

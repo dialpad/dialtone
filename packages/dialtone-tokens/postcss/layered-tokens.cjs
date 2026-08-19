@@ -1,6 +1,7 @@
 const {
   IS_SHADOW_REGEX,
   IS_TYPOGRAPHY_REGEX,
+  SHADOW_ALIASES,
   REGEX_OPTIONS,
 } = require('./constants.cjs');
 
@@ -49,15 +50,18 @@ function boxShadows (shadowDeclarations, Declaration, parentRule) {
     const shadowVar = `--dt-shadow-${shadowName}`;
     const isInset = shadowName.includes('inset');
     const times = shadowMap[shadowName];
-    const value = Array(times)
-      .fill(undefined)
-      .map((val, i) => {
-        let shadowNumber = `-${i + 1}`;
-        if (times === 1) {
-          shadowNumber = '';
-        }
-        return `var(${shadowVar}${shadowNumber}-offset-x) var(${shadowVar}${shadowNumber}-offset-y) var(${shadowVar}${shadowNumber}-blur) var(${shadowVar}${shadowNumber}-spread) var(${shadowVar}${shadowNumber}-color)${isInset ? ' inset' : ''}`;
-      }).join(', ');
+    const alias = SHADOW_ALIASES[shadowName];
+    const value = alias
+      ? `var(--dt-shadow-${alias})`
+      : Array(times)
+        .fill(undefined)
+        .map((val, i) => {
+          let shadowNumber = `-${i + 1}`;
+          if (times === 1) {
+            shadowNumber = '';
+          }
+          return `var(${shadowVar}${shadowNumber}-offset-x) var(${shadowVar}${shadowNumber}-offset-y) var(${shadowVar}${shadowNumber}-blur) var(${shadowVar}${shadowNumber}-spread) var(${shadowVar}${shadowNumber}-color)${isInset ? ' inset' : ''}`;
+        }).join(', ');
 
     parentRule.append(new Declaration({ prop: shadowVar, value }));
   });

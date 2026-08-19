@@ -37,7 +37,7 @@
         v-model="value"
         placeholder="Select one or start typing"
         v-bind="inputProps"
-        @input="onInput"
+        @update:model-value="onInput"
       />
     </template>
     <template #list="{ listProps }">

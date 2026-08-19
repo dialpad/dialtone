@@ -380,62 +380,6 @@
       </tbody>
     </table>
 
-    <!-- ── Inbox with DtRecipeContactRow ─────────────────── -->
-    <dt-text
-      as="h3"
-      kind="headline"
-      :size="400"
-    >
-      Inbox
-    </dt-text>
-    <dt-text
-      kind="body"
-      class="d-fc-tertiary"
-    >
-      Vertical list using <code>DtRecipeContactRow</code>. Up/Down cycles all focusable elements.
-    </dt-text>
-    <dt-stack
-      v-dt-focusgroup="'vertical'"
-      role="list"
-      aria-label="Contacts"
-      class="d-p-200 d-bgc-secondary d-w-400"
-    >
-      <dt-recipe-contact-row
-        role="listitem"
-        tabindex="0"
-        name="Ashanti Trevor"
-        avatar-presence="active"
-        user-status="Good morning!"
-        has-call-button
-      />
-      <dt-recipe-contact-row
-        role="listitem"
-        tabindex="0"
-        name="Marcus Chen"
-        avatar-presence="away"
-        presence-text="Away"
-        user-status="Out for a bit"
-        has-call-button
-      />
-      <dt-recipe-contact-row
-        role="listitem"
-        tabindex="0"
-        name="Priya Sharma"
-        avatar-presence="busy"
-        presence-text="In a meeting"
-        user-status="Meetings all day"
-        has-call-button
-      />
-      <dt-recipe-contact-row
-        role="listitem"
-        tabindex="0"
-        name="Jordan Kim"
-        unread-count="3"
-        :has-unreads="true"
-        has-call-button
-      />
-    </dt-stack>
-
     <!-- ── Contact list with rich content ────────────────── -->
     <dt-text
       as="h3"
@@ -679,7 +623,6 @@ import DtCollapsible from '@/components/Collapsible/Collapsible.vue';
 import DtAvatar from '@/components/Avatar/Avatar.vue';
 import DtIcon from '@/components/Icon/Icon.vue';
 import DtBadge from '@/components/Badge/Badge.vue';
-import { DtRecipeContactRow } from '@/recipes/leftbar/contact_row';
 
 export default {
   name: 'DtFocusgroupDirectiveRecipes',
@@ -692,7 +635,6 @@ export default {
     DtAvatar,
     DtIcon,
     DtBadge,
-    DtRecipeContactRow,
   },
 
   data () {

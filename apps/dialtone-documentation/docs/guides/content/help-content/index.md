@@ -1,7 +1,6 @@
 ---
 title: Help content
 cardTitle: Help
-cardOrder: 5
 prev: { link: "../forms-and-validation/", text: "Forms and validation" }
 next: { link: "../inclusive-language/", text: "Inclusive language" }
 description: Guidance that supports decisions.

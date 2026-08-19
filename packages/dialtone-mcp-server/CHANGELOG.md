@@ -1,3 +1,17 @@
+# [1.5.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.5.0-next.2...dialtone-mcp-server/v1.5.0-next.3) (2026-07-22)
+
+
+### Code Refactoring
+
+* **Dialtone Vue,dialtone Css:** DLT-3536 clean up remaining legacy prop migration references ([#1374](https://github.com/dialpad/dialtone/issues/1374)) ([0629638](https://github.com/dialpad/dialtone/commit/062963833663ebefcf04799b983cb43efa7d3748))
+
+# [1.5.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.5.0-next.1...dialtone-mcp-server/v1.5.0-next.2) (2026-07-13)
+
+
+### Features
+
+* **Box:** DLT-3523 add positioning props to DtBox ([#1355](https://github.com/dialpad/dialtone/issues/1355)) ([68a6570](https://github.com/dialpad/dialtone/commit/68a65701a8d3ae9c09341d0c80007b7fa8a69441))
+
 # [1.5.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-mcp-server/v1.4.0...dialtone-mcp-server/v1.5.0-next.1) (2026-06-04)
 
 

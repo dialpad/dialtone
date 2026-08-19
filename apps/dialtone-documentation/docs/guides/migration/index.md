@@ -4,7 +4,9 @@ description: Step-by-step guides for migrating to the latest Dialtone major vers
 keywords: ["upgrade", "breaking changes", "deprecations", "codemod", "automated tooling"]
 ---
 
-This guide walks you through every breaking and deprecation change in the upcoming Dialtone major release. Work through each section that applies to your codebase, run the provided migration tools, and verify the results.
+This guide walks you through every breaking and deprecation change in the upcoming Dialtone major release. Work through each section that applies to your codebase, run the provided migration tools, and verify the results. Reviewing a migrated surface as a designer or QA? Start with [Visual Changes for Designers](./visual-changes/) — before/after imagery of the most significant intentional visual changes and how to tell a refresh from a regression.
+
+The component pages themselves are a comparison resource: the current docs and the Next preview render the same live examples, so you can put any component and prop combination side by side. For example, compare [DtButton today](https://dialtone.dialpad.com/components/button.html) with [DtButton on Next](https://dialtone.dialpad.com/next/components/button.html). Whenever you need to confirm an intended rendering, the Next docsite is the source of truth.
 
 > [!INFO] Automated tooling available
 > Most migrations ship with CLI tools or ESLint auto-fix rules. Run them first, then handle the manual cases flagged in each guide.
@@ -64,12 +66,23 @@ npx dialtone-migrate --cwd ./src
 # Run all required migrations non-interactively
 npx dialtone-migrate --all --yes --cwd ./src
 
+# Run required + opt-in migrations non-interactively
+npx dialtone-migrate --all --include-opt-in --yes --cwd ./src
+
 # Dry-run to preview changes first
 npx dialtone-migrate --all --dry-run --cwd ./src
 
 # Run specific migrations only
 npx dialtone-migrate --only color-stops,border-radius --cwd ./src
+
+# Run Dialtone under a custom package alias (injected component imports use it)
+npx dialtone-migrate --only flex-to-stack,typography --package @dialpad/dialtone-next --cwd ./src
 ```
+
+> [!INFO] Custom package name
+> Some teams run multiple versions of Dialtone side by side during an incremental migration by installing the new version under an alias such as `@dialpad/dialtone-next`. Pass `--package <name>` so migrations that inject component imports (Flex to Stack, Typography) reference that alias instead of `@dialpad/dialtone-vue`.
+>
+> Both import-injecting migrations are opt-in, and `--all` runs only the required migrations — so `--all --package …` will not apply the alias. Select them explicitly with `--only flex-to-stack,typography`, add `--include-opt-in` to run every migration, or use the interactive prompt.
 
 ### Individual scripts
 

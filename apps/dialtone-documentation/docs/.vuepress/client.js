@@ -20,6 +20,7 @@ import CodeExampleTabs from './baseComponents/CodeExampleTabs.vue';
 import CodeExample from './baseComponents/CodeExample.vue';
 import SvgLoader from './baseComponents/SvgLoader.vue';
 import DialtoneUsage from './baseComponents/DialtoneUsage.vue';
+import BeforeAfter from './baseComponents/BeforeAfter.vue';
 import UiKitsComparisonTable from './baseComponents/UiKitsComparisonTable.vue';
 import MigrationBanner from './baseComponents/MigrationBanner.vue';
 
@@ -44,6 +45,7 @@ export default defineClientConfig({
     app.component('CodeExample', CodeExample);
     app.component('SvgLoader', SvgLoader);
     app.component('DialtoneUsage', DialtoneUsage);
+    app.component('BeforeAfter', BeforeAfter);
     app.component('UiKitsComparisonTable', UiKitsComparisonTable);
     app.component('MigrationBanner', MigrationBanner);
   },

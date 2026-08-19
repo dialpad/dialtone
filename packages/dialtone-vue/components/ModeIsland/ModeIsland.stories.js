@@ -105,8 +105,8 @@ export const NestedIslands = {
               <p class="d-body--md">Explicit Light Island (Always Light)</p>
             </dt-mode-island>
           </dt-mode-island>
-        </div>
         </dt-stack>
+      </div>
     `,
   }),
 };

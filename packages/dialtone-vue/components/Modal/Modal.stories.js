@@ -1,7 +1,7 @@
 import DtModal from './Modal.vue';
 
 import DtModalDefaultTemplate from './ModalDefault.story.vue';
-import { MODAL_KIND_MODIFIERS, MODAL_SIZE_MODIFIERS } from './ModalConstants';
+import { MODAL_KIND_MODIFIERS } from './ModalConstants';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from 'storybook/actions';
 import { NOTICE_KINDS } from '@/components/Notice';
@@ -9,7 +9,7 @@ import { CONTENT_MODE_ARG_TYPE } from '@/common/mode_constants';
 
 // Default Props for all variations
 export const argsData = {
-  size: 'default',
+  fullscreen: false,
   kind: 'default',
   bannerKind: 'warning',
   copy: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed eget lacus quis velit \
@@ -68,10 +68,9 @@ export const argTypesData = {
     },
   },
   contentMode: CONTENT_MODE_ARG_TYPE,
-  size: {
-    options: Object.keys(MODAL_SIZE_MODIFIERS),
+  fullscreen: {
     control: {
-      type: 'select',
+      type: 'boolean',
     },
   },
   kind: {
@@ -215,11 +214,11 @@ export const WithCriticalStyle = {
   parameters: { ...Default.parameters },
 };
 
-export const WithFullSize = {
+export const WithFullscreen = {
   render: DefaultTemplate,
 
   args: {
-    size: 'full',
+    fullscreen: true,
     showFooter: true,
   },
 

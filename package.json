@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "9.187.2",
+  "version": "10.0.0-next.17",
   "packageManager": "pnpm@11.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
@@ -15,9 +15,15 @@
   ],
   "bin": {
     "dialtone-migrate": "./dist/js/dialtone_migrate/index.mjs",
-    "dialtone-migrate-flex-to-stack": "./dist/js/dialtone_migrate_flex_to_stack/index.mjs"
+    "dialtone-migrate-flex-to-stack": "./dist/js/dialtone_migrate_flex_to_stack/index.mjs",
+    "dialtone-merge-migrate": "./dist/js/dialtone_merge_migrate/index.mjs"
   },
   "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
     "./CHANGELOG.json": "./CHANGELOG.json",
     "./css": "./dist/css/dialtone.min.css",
     "./css-default-theme": "./dist/css/dialtone-default-theme.min.css",
@@ -90,16 +96,20 @@
     "@tiptap/extensions": "3.19",
     "@tiptap/pm": "3.19.0",
     "@tiptap/suggestion": "3.19.0",
+    "chalk": "^5.2.0",
     "date-fns": "4.1.0",
     "deep-equal": "2.2.3",
     "docopt": "0.6.2",
     "emoji-toolkit": "9.0.1",
     "globals": "16.3.0",
+    "globby": "^13.1.4",
+    "inquirer": "^9.1.5",
     "linkifyjs": "4.3.2",
     "overlayscrollbars": "2.10.0",
     "regex-combined-emojis": "1.6.0",
     "tippy.js": "6.3.7",
-    "vue-tsc": "3.2.6"
+    "vue-tsc": "3.2.6",
+    "yargs": "^17.7.2"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.4.3",
@@ -109,7 +119,7 @@
     "@dialpad/semantic-release-changelog-json": "^1.0.0",
     "@eslint/js": "^9.0.0",
     "@faker-js/faker": "8.4.1",
-    "@percy/cli": "1.30.9",
+    "@percy/cli": "1.32.3",
     "@percy/storybook": "6.0.3",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/exec": "^6.0.3",
@@ -132,7 +142,7 @@
     "eslint-plugin-vitest": "^0.5.4",
     "eslint-plugin-vue": "^10.4.0",
     "eslint-plugin-vuejs-accessibility": "^2.4.1",
-    "glob": "^11.0.3",
+    "glob": "^13.0.6",
     "gulp": "^4.0.2",
     "gulp-rename": "^2.0.0",
     "gulp-replace": "^1.1.4",
@@ -143,7 +153,7 @@
     "jsdom": "^24.0.0",
     "lint-staged": "^15.2.0",
     "markdownlint": "^0.38.0",
-    "markdownlint-cli": "^0.45.0",
+    "markdownlint-cli": "^0.49.0",
     "npm-run-all": "^4.1.5",
     "nx": "19.8.0",
     "playwright": "^1.60.0",

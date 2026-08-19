@@ -7,6 +7,11 @@
 
 import { describe, it } from 'node:test';
 import assert from 'node:assert/strict';
+import { execFileSync } from 'node:child_process';
+import fs from 'node:fs';
+import os from 'node:os';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import {
   transformContent,
   detectImportPathFor,
@@ -728,6 +733,83 @@ describe('import detection', () => {
     const content = `<template><p class="d-headline--md">x</p></template>`;
     const path = detectImportPathFor(content);
     assert.equal(path, '@/components/text');
+  });
+
+  it('uses the explicit package name when provided, overriding detection', () => {
+    const content = `<script>\nimport { DtButton } from '@/components/button';\n</script>`;
+    const path = detectImportPathFor(content, '@dialpad/dialtone-next');
+    assert.equal(path, '@dialpad/dialtone-next');
+  });
+
+  it('explicit package name applies even when no imports are present', () => {
+    const content = `<template><p class="d-headline--md">x</p></template>`;
+    const path = detectImportPathFor(content, '@dialpad/dialtone-next');
+    assert.equal(path, '@dialpad/dialtone-next');
+  });
+});
+
+// ---------------------------------------------------------------------------
+// --package end-to-end: prove the flag reaches the injected import, both via
+// the standalone CLI and forwarded through the master orchestrator.
+// ---------------------------------------------------------------------------
+
+describe('--package end-to-end', () => {
+  const dir = path.dirname(fileURLToPath(import.meta.url));
+  const typographyCli = path.join(dir, 'index.mjs');
+  const masterCli = path.join(dir, '..', 'dialtone_migrate', 'index.mjs');
+
+  // Uses <script setup> so the import auto-injects, a local @/components import so
+  // that without --package detection would resolve to @/components/text (not the
+  // package), and a d-headline-- class so a <dt-text> is added (triggering the import).
+  const SOURCE = [
+    '<script setup>',
+    `import { DtButton } from '@/components/button';`,
+    '</script>',
+    '<template>',
+    '  <p class="d-headline--md">Title</p>',
+    '</template>',
+    '',
+  ].join('\n');
+
+  function migrate (argv) {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'dlt-typo-'));
+    const file = path.join(tmp, 'Sample.vue');
+    fs.writeFileSync(file, SOURCE, 'utf8');
+    try {
+      execFileSync(process.execPath, argv(tmp), { stdio: 'ignore' });
+      return fs.readFileSync(file, 'utf8');
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  }
+
+  it('standalone CLI injects the explicit package into the generated import', () => {
+    const output = migrate(tmp => [
+      typographyCli, '--cwd', tmp, '--yes', '--package', '@dialpad/dialtone-next',
+    ]);
+    assert.match(output, /import \{ DtText \} from '@dialpad\/dialtone-next';/);
+  });
+
+  it('master orchestrator forwards --package to the typography child', () => {
+    // The import lands on @dialpad/dialtone-next only if the master forwarded the
+    // flag; otherwise detection would pick @/components/text from the existing import.
+    const output = migrate(tmp => [
+      masterCli, '--only', 'typography', '--yes', '--cwd', tmp, '--package', '@dialpad/dialtone-next',
+    ]);
+    assert.match(output, /import \{ DtText \} from '@dialpad\/dialtone-next';/);
+  });
+
+  it('rejects --package followed by another option (--package --yes)', () => {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'dlt-typo-'));
+    try {
+      assert.throws(
+        () => execFileSync(process.execPath, [typographyCli, '--cwd', tmp, '--package', '--yes'],
+          { stdio: ['ignore', 'ignore', 'pipe'] }),
+        err => err.status === 1 && /--package requires a package name/.test(String(err.stderr)),
+      );
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
   });
 });
 

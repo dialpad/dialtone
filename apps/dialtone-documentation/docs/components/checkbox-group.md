@@ -18,7 +18,7 @@ Checkbox Groups are typically paired with a legend which identifies the group. I
 <dt-checkbox-group
   name="fruits-checkbox-group"
   legend="Fruits"
-  :selectedValues="[]"
+  :model-value="[]"
 >
   <dt-checkbox value="apple"><span>Apple</span></dt-checkbox>
   <dt-checkbox value="banana"><span>Banana</span></dt-checkbox>
@@ -32,7 +32,7 @@ Checkbox Groups are typically paired with a legend which identifies the group. I
 <dt-checkbox-group
   name="my-group-name"
   legend="My Legend"
-  :selected-values="['option1']"
+  :model-value="['option1']"
 >
   <dt-checkbox
     value="option1"

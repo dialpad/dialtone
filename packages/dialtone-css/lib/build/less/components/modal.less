@@ -101,11 +101,9 @@
     --modal-dialog-color-text: var(--dt-color-foreground-primary);
     --modal-header-color-text: var(--dt-color-foreground-primary);
     --modal-dialog-shadow: var(--dt-shadow-large);
+    --modal-root-shadow: none;
 
-    // If we don't set this the native app header region will override all click events on the modal overlay
-    -webkit-app-region: no-drag;
     position: fixed;
-    inset: 0;
     z-index: var(--zi-hide);
     display: flex;
     flex-direction: column;
@@ -113,10 +111,15 @@
     justify-content: center;
     padding: var(--dt-spacing-400); // 32
     background-color: var(--modal-backdrop-color-background);
+    box-shadow: var(--modal-root-shadow);
     backface-visibility: hidden;
     visibility: hidden;
     opacity: 0;
     will-change: visibility, z-index, opacity;
+
+    // If we don't set this the native app header region will override all click events on the modal overlay
+    -webkit-app-region: no-drag;
+    inset: 0;
 }
 
 //  $$  DIALOG ELEMENT RESET

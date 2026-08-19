@@ -176,6 +176,60 @@ Defaults to `vertical`. Set to `horizontal` for a horizontal scroller.
 </div>
 ```
 
+#### Infinite Scroll
+
+Use the `after` slot for a loading indicator that scrolls with the list, and `scroll-end` to fetch
+the next page. `scroll-end` fires when the last item enters the rendered view pool — at least one
+`buffer` length before the viewport's end edge, earlier still if `before`/`after` slot content adds
+to the window — so the fetch starts before the user runs out of content.
+
+`scroll-start` is the mirror image, for prepending older items ahead of the viewport's start edge.
+
+The scroller recomputes its rendered window on mount and on scroll. It does not watch
+`items`, so after you append a page call `updateItems()` on the component ref — otherwise
+the new rows will not appear until the next scroll.
+
+Assign a new array rather than mutating the existing one in place. The scroller itself does not
+mind either way, but watching `items` by reference is the usual way a wrapper component triggers
+the `updateItems()` call for you, and a reference watcher never sees an in-place `push`.
+
+```html
+<dt-scroller
+ ref="scroller"
+ :items="items"
+ :item-size="32"
+ :buffer="400"
+ :scroller-height="200"
+ @scroll-end="fetchNextPage"
+ >
+ <template #default="{ item }">
+   <div class="user">
+     {{ item.name }}
+   </div>
+ </template>
+ <template #after>
+   <dt-loader v-if="isFetching" />
+ </template>
+</dt-scroller>
+```
+
+```js
+async function fetchNextPage () {
+  if (isFetching.value) return;
+  isFetching.value = true;
+  try {
+    const page = await fetchMore();
+    items.value = [...items.value, ...page];
+    await nextTick();
+    scroller.value.updateItems();
+  } finally {
+    isFetching.value = false;
+  }
+}
+```
+
+The `empty` slot only renders while the list is empty.
+
 ## Vue API
 
 <component-vue-api component-name="scroller" />

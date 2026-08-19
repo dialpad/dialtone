@@ -153,6 +153,7 @@ import SplitButtonStart from './SplitButtonStart.vue';
 import SplitButtonEnd from './SplitButtonEnd.vue';
 import { DtDropdown } from '@/components/Dropdown';
 import { hasSlotContent, warnIfUnmounted, returnFirstEl } from '@/common/utils';
+import { ordinalSizeValidator } from '@/common/validators';
 
 export default {
   name: 'DtSplitButton',
@@ -369,7 +370,9 @@ export default {
 
     /**
      * The color of the button.
-     * @values default, unstyled, muted, critical, positive
+     * The inverted value is deprecated and will be removed in the next major version.
+     * Please use the v-dt-mode directive instead.
+     * @values default, unstyled, muted, critical, positive, inverted
      */
     kind: {
       type: String,
@@ -473,7 +476,7 @@ export default {
     size: {
       type: [String, Number],
       default: 300,
-      validator: (s) => Object.keys(BUTTON_SIZE_MODIFIERS).includes(String(s)),
+      validator: ordinalSizeValidator(BUTTON_SIZE_MODIFIERS),
     },
 
     /**

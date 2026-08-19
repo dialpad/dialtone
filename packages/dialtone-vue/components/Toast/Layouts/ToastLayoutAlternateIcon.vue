@@ -22,6 +22,7 @@ import {
 } from '@dialpad/dialtone-icons/vue';
 import { TOAST_ALTERNATE_KINDS } from '../ToastConstants.js';
 import { ICON_SIZE_MODIFIERS } from '@/components/Icon/IconConstants.js';
+import { ordinalSizeValidator } from '@/common/validators';
 
 const kindToIcon = new Map([
   ['info', DtIconInfo],
@@ -45,7 +46,7 @@ export default {
   props: {
     /**
      * Kind of icon
-     * @values base, critical, info, positive, warning
+     * @values base, critical, info, positive, warning, gradient
      */
     kind: {
       type: String,
@@ -56,9 +57,9 @@ export default {
     },
 
     size: {
-      type: String,
-      default: '400',
-      validator: (s) => Object.keys(ICON_SIZE_MODIFIERS).includes(s),
+      type: [String, Number],
+      default: 400,
+      validator: ordinalSizeValidator(ICON_SIZE_MODIFIERS),
     },
 
     /**

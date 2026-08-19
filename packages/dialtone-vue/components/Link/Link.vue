@@ -12,7 +12,13 @@
 
 <script>
 import { resolveComponent } from 'vue';
-import { LINK_VARIANTS, LINK_KIND_MODIFIERS, getLinkKindModifier } from './LinkConstants';
+import {
+  LINK_VARIANTS,
+  LINK_KIND_MODIFIERS,
+  LINK_UNSTYLED_CLASS,
+  UNSTYLED,
+  getLinkKindModifier,
+} from './LinkConstants';
 
 /**
  * A link is a navigational element that can be found on its own, within other text, or directly following content.
@@ -25,7 +31,7 @@ export default {
   props: {
     /**
      * Applies the link variant styles
-     * @values null, critical, warning, positive, info, muted, mention
+     * @values null, critical, warning, positive, info, muted, mention, unstyled
      */
     tone: {
       type: String,
@@ -103,6 +109,10 @@ export default {
       return this.kind ?? this.tone;
     },
 
+    isUnstyled () {
+      return this.resolvedTone === UNSTYLED;
+    },
+
     computedTag () {
       if (this.to) {
         return resolveComponent('RouterLink');
@@ -125,6 +135,10 @@ export default {
 
   methods: {
     getLinkClasses () {
+      if (this.isUnstyled) {
+        return [LINK_UNSTYLED_CLASS];
+      }
+
       return [
         'd-link',
         getLinkKindModifier(this.resolvedTone, this.inverted),

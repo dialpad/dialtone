@@ -19,4 +19,13 @@ pluginManagement {
         mavenCentral()
     }
 }
+
+dependencyResolutionManagement {
+    versionCatalogs {
+        libs {
+            from(files("${rootDir}/../../gradle/libs.versions.toml"))
+        }
+    }
+}
+
 rootProject.name = 'icons'

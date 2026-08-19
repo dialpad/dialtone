@@ -19,23 +19,23 @@
     <template #input="{ onInput }">
       <span
         ref="inputSlotWrapper"
-        class="d-recipe-combobox-multi-select__input-wrapper"
+        class="d-combobox-multi-select__input-wrapper"
         @focusin="handleInputFocusIn"
         @focusout="handleInputFocusOut"
       >
         <span
           ref="chipsWrapper"
-          :class="['d-recipe-combobox-multi-select__chip-wrapper', chipWrapperClass]"
+          :class="['d-combobox-multi-select__chip-wrapper', chipWrapperClass]"
         >
           <dt-chip
             v-for="(item, index) in selectedItems"
             ref="chips"
             :key="`${index}-${item}`"
             :interactive="true"
-            :label-class="['d-chip__label']"
+            :label-class="['d-chip__label--focus-always']"
             :class="[
-              'd-recipe-combobox-multi-select__chip',
-              { 'd-recipe-combobox-multi-select__chip--truncate': !!chipMaxWidth },
+              'd-combobox-multi-select__chip',
+              { 'd-combobox-multi-select__chip--truncate': !!chipMaxWidth },
             ]"
             :style="{ maxWidth: chipMaxWidth }"
             :size="CHIP_SIZES[String(size)]"
@@ -51,10 +51,10 @@
         <dt-input
           ref="input"
           v-model="value"
-          class="d-recipe-combobox-multi-select__input"
+          class="d-combobox-multi-select__input"
           :input-class="[
             inputClass, {
-              'd-recipe-combobox-multi-select__input--hidden': hideInputText,
+              'd-combobox-multi-select__input--hidden': hideInputText,
             }]"
           :input-wrapper-class="inputWrapperClass"
           :disabled="disabled"
@@ -68,7 +68,7 @@
           :messages="inputMessages"
           :size="size"
           v-bind="inputListeners"
-          @input="onInput"
+          @update:model-value="onInput"
         />
 
         <dt-validation-messages
@@ -96,7 +96,7 @@
     <template #list>
       <div
         ref="list"
-        :class="['d-recipe-combobox-multi-select__list', listClass]"
+        :class="['d-combobox-multi-select__list', listClass]"
         @mousedown.prevent
       >
         <slot
@@ -105,7 +105,7 @@
         />
         <div
           v-else
-          class="d-recipe-combobox-multi-select__list--loading"
+          class="d-combobox-multi-select__list--loading"
         >
           {{ loadingMessage }}
         </div>
@@ -133,7 +133,7 @@ import DtComboboxWithPopover from '@/components/ComboboxWithPopover/ComboboxWith
 import DtInput from '@/components/Input/Input.vue';
 import DtChip from '@/components/Chip/Chip.vue';
 import DtValidationMessages from '@/components/ValidationMessages/ValidationMessages.vue';
-import { validationMessageValidator } from '@/common/validators';
+import { validationMessageValidator, ordinalSizeValidator } from '@/common/validators';
 import { extractVueListeners, extractNonListeners, hasSlotContent, returnFirstEl, getUniqueString, getValidationState } from '@/common/utils';
 import { HTML_ELEMENT_TYPE } from '@/common/constants';
 import {
@@ -141,7 +141,6 @@ import {
 } from '@/components/Popover/PopoverConstants';
 import {
   CHIP_SIZES,
-  CHIP_TOP_POSITION,
 } from './ComboboxMultiSelectConstants';
 import { COMPONENT_SIZES, VALIDATION_MESSAGE_TYPES } from '@/common/constants';
 
@@ -294,13 +293,13 @@ export default {
     size: {
       type: [String, Number],
       default: 300,
-      validator: (t) => Object.keys(CHIP_SIZES).includes(String(t)),
+      validator: ordinalSizeValidator(CHIP_SIZES),
     },
 
     /**
      * Sets the element to which the popover is going to append to.
      * 'body' will append to the nearest body (supports shadow DOM).
-     * @values 'body', 'parent', HTMLElement,
+     * @values 'body', 'parent', 'root', HTMLElement,
      */
     appendTo: {
       type: [HTML_ELEMENT_TYPE, String],
@@ -566,10 +565,24 @@ export default {
       return this.showValidationMessages && this.maxSelectedMessage.length > 0 ? this.messagesId : undefined;
     },
 
+    // Sizes other than xs need a height floor so the box can grow for wrapped
+    // chip rows without collapsing back; xs renders correctly without one.
+    inputHeightFloor () {
+      return (this.initialInputHeight && this.size !== 'xs')
+        ? `${this.initialInputHeight}px`
+        : '';
+    },
+
     chipWrapperClass () {
-      return {
-        [`d-recipe-combobox-multi-select__chip-wrapper-${COMPONENT_SIZES[String(this.size)] || this.size}--collapsed`]: !this.inputFocused && this.collapseOnFocusOut,
-      };
+      const size = COMPONENT_SIZES[String(this.size)] || this.size;
+      return [
+        // Always emitted so the CSS can size the row rhythm without reaching
+        // sideways into DtInput's markup to discover the size.
+        `d-combobox-multi-select__chip-wrapper--${size}`,
+        {
+          [`d-combobox-multi-select__chip-wrapper-${size}--collapsed`]: !this.inputFocused && this.collapseOnFocusOut,
+        },
+      ];
     },
   },
 
@@ -761,15 +774,27 @@ export default {
     },
 
     setChipsTopPosition () {
-      // To place the chips in the input box
-      // The chip "top" position should be the same line as the input box
+      // Centers the first row of chips on the input box's first line.
+      // Two offsets have to be measured rather than derived: the input's
+      // position within the slot wrapper (label and description heights vary),
+      // and the chip's position within its own wrapper (the chips are atomic
+      // inline boxes, so line-box metrics — not just the chip margin — decide
+      // where the row starts).
       const input = this.getInput();
-      if (!input) return;
-      const inputSlotWrapper = this.$refs.inputSlotWrapper;
-      const top = input.getBoundingClientRect().top -
-                  inputSlotWrapper.getBoundingClientRect().top;
       const chipsWrapper = this.$refs.chipsWrapper;
-      chipsWrapper.style.top = (top - CHIP_TOP_POSITION[String(this.size)]) + 'px';
+      const firstChip = this.getFirstChip();
+      if (!input || !chipsWrapper || !firstChip) return;
+
+      const inputTop = input.getBoundingClientRect().top -
+                       this.$refs.inputSlotWrapper.getBoundingClientRect().top;
+      // The empty-input height, so chips stay on the first line rather than
+      // recentering on the whole box once it grows to fit wrapped rows.
+      const inputRowHeight = this.initialInputHeight || input.getBoundingClientRect().height;
+      const chipRect = firstChip.getBoundingClientRect();
+      const chipOffsetInWrapper = chipRect.top - chipsWrapper.getBoundingClientRect().top;
+
+      const top = inputTop + (inputRowHeight - chipRect.height) / 2 - chipOffsetInWrapper;
+      chipsWrapper.style.top = top + 'px';
     },
 
     setInputPadding () {
@@ -782,6 +807,10 @@ export default {
       // Avoid adding extra padding when the input is not focused if collapseOnFocusOut is true
       // This ensures the input returns to its original state when resizing
       if (this.collapseOnFocusOut && !this.inputFocused) return;
+
+      // Read while revertInputPadding() above has the inline override cleared,
+      // so this is the input's own padding rather than a previous run's value.
+      const inputPaddingTop = this.getComputedPx(input, 'paddingTop');
 
       // Get the position of the last chip
       // The input cursor should be the same "top" as that chip and next besides it
@@ -796,26 +825,52 @@ export default {
         input.style.paddingInlineStart = '4px';
       }
 
-      const paddingTop = this.getInputPaddingTop(lastChip, spaceLeft > this.reservedRightSpace, isWrapped);
-      if (paddingTop != null) input.style.paddingTop = `${paddingTop}px`;
+      const caretRowTop = this.getCaretRowTop(lastChip, firstChip, spaceLeft > this.reservedRightSpace, isWrapped);
+      if (caretRowTop != null) {
+        // Adding the input's own padding reproduces the single-row layout on
+        // the caret's row, so the typed text keeps the same baseline relative
+        // to the chips beside it no matter how many rows have accumulated.
+        input.style.paddingTop = `${caretRowTop + inputPaddingTop}px`;
+        this.growInputForWrappedRows(input, caretRowTop);
+      }
     },
 
-    getInputPaddingTop (lastChip, hasSpace, isWrapped) {
-      // Chip fits beside the cursor on its row; CSS handles vertical centering.
+    growInputForWrappedRows (input, caretRowTop) {
+      // The grown box would otherwise end at the caret line, leaving the last
+      // chip row flush against the block-end border. Extend the height floor
+      // so the last row keeps the same breathing room the first row gets from
+      // centering: its row top plus the single-row envelope.
+      if (!this.initialInputHeight) return;
+      input.style.minHeight = `${caretRowTop + this.initialInputHeight}px`;
+    },
+
+    getComputedPx (el, property) {
+      return parseFloat(getComputedStyle(el)[property]) || 0;
+    },
+
+    // Distance from the first chip row to the row the caret belongs on.
+    getCaretRowTop (lastChip, firstChip, hasSpace, isWrapped) {
+      // Chip fits beside the cursor on the first row; CSS centers it already.
       if (hasSpace && !isWrapped) return null;
-      // Chip wrapped onto a new row with space remaining; align cursor to it.
-      if (hasSpace) return lastChip.offsetTop + 2;
-      // No space on the chip's row — predict next-row offsetTop so paddingTop
-      // stays stable when a chip lands there.
-      const chipMarginTop = parseFloat(getComputedStyle(lastChip).marginTop) || 0;
-      const lastChipHeight = lastChip.getBoundingClientRect().height;
-      return lastChip.offsetTop + lastChipHeight + chipMarginTop + 2;
+      // Measured rather than offsetTop, which rounds to whole pixels and drifts
+      // further out of alignment with every row added.
+      const rowTop = lastChip.getBoundingClientRect().top - firstChip.getBoundingClientRect().top;
+      // Chip wrapped onto a new row with space remaining; share that row.
+      if (hasSpace) return rowTop;
+      // No space left on that row — predict the next one. Row spacing belongs
+      // to the wrapper's row-gap, not to the chip.
+      const rowGap = this.getComputedPx(this.$refs.chipsWrapper, 'rowGap');
+      return rowTop + lastChip.getBoundingClientRect().height + rowGap;
     },
 
     revertInputPadding (input) {
       input.style.paddingInlineStart = '';
-      input.style.paddingBlockStart = '';
-      input.style.paddingBlockEnd = '';
+      // setInputPadding writes the physical paddingTop slot, so that is the
+      // slot to clear — the logical one is a different CSSOM property.
+      input.style.paddingTop = '';
+      // Restore the single-row height floor that setInitialInputHeight
+      // applies (setInputPadding grows it while rows are wrapped).
+      input.style.minHeight = this.inputHeightFloor;
     },
 
     getFullWidth (el) {

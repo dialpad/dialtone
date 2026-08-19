@@ -10,6 +10,12 @@ const MAP = {
 };
 
 export default {
+  // Old and new stop numbers overlap (e.g. purple 250→300, but 300 is itself
+  // an old key that maps to 400, which maps to 600, then 950). The master
+  // migration script re-applies expressions to already-rewritten content
+  // until nothing changes; without singlePass that convergence loop cascades
+  // a single value through the whole chain in one run.
+  singlePass: true,
   description:
     'Migrates base color stops from old irregular numbering to the standard 12-stop scale.\n' +
     '- Renames var(--dt-color-{color}-{oldStop}) to var(--dt-color-{color}-{newStop})\n\t' +
@@ -17,7 +23,9 @@ export default {
     '- Renames d-{prefix}-{color}-{oldStop} utility classes\n\t' +
       'eg. d-bgc-purple-350 to d-bgc-purple-500\n' +
     '- Includes HSL variants (-h, -s, -l, -a, -hsl, -hsla) and OKLCH variants (-h, -c, -l, -a, -oklch, -oklcha)\n' +
-    '- Colors affected: purple, blue, magenta, gold, green, red. Other colors were already 12-stop.\n',
+    '- Colors affected: purple, blue, magenta, gold, green, red. Other colors were already 12-stop.\n' +
+    '- SAFE TO RE-RUN: singlePass prevents the master script\'s convergence loop from\n' +
+      'cascading a value through multiple stop hops in the same run.\n',
   patterns: ['**/*.{css,less,html,vue,md,js,ts,jsx,tsx}'],
   expressions: [
     // CSS custom properties: var(--dt-color-{color}-{stop}) with optional HSL/OKLCH suffix

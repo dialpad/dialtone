@@ -39,7 +39,7 @@ function mountWrapper (props = {}) {
           },
           template: '<div />',
         },
-        DtRecipeComboboxWithPopover: {
+        DtComboboxWithPopover: {
           template: `
             <div>
               <slot

@@ -7,7 +7,7 @@ import StyleDictionary from 'style-dictionary';
 import { promises, readFileSync } from 'fs';
 import { kebabCaseToPascalCase } from '../../common/utils/client.mjs';
 
-import { registerDialtoneTransforms, registerDialtonePreprocessors, registerRelativeColorWrap, isMaterialNamespaceRef } from './dialtone-transforms.js';
+import { registerDialtoneTransforms, registerDialtonePreprocessors, registerRelativeColorWrap, isMaterialNamespaceRef, isFontSizeToken, isLineHeightToken, isPercentToken, isNegativeToken } from './dialtone-transforms.js';
 import { buildDocs } from './build-docs.js';
 const Root = JSON.parse(readFileSync('./tokens/root.json', 'utf8'));
 const BASE_FONT_SIZE = Root.font.size.root.value;
@@ -159,16 +159,49 @@ export async function run () {
                 return ['color'].includes(token.type) && token.isSource;
               },
             },
-            {
-              destination: 'dimens.xml',
+          ],
+        },
+        // Separate processor for android xml dimensions so we only get one dimens-base.xml file and
+        // one dimens-theme.xml file.
+        android_xml_dimens: {
+          transforms: [
+            'attribute/cti',
+            'name/snake',
+            'dt/android/xml/size/resolveMath',
+            'dt/android/xml/size/pxToDp',
+          ],
+          prefix: 'dt',
+          theme: themeName,
+          buildPath: 'dist/android/res/values/',
+          files: [
+            ...(themeName === 'base-light' ? [{
+              destination: 'dimens-base.xml',
               format: 'android/resources',
               resourceType: 'dimen',
               filter: function (token) {
                 if (typeof token.value === 'string' && token.value.startsWith('linear-gradient')) return false;
                 if (token.path.includes('shadow')) return false;
+                if (isFontSizeToken(token)) return false;
+                if (isLineHeightToken(token)) return false;
+                if (isPercentToken(token)) return false;
+                if (isNegativeToken(token)) return false;
                 return ['dimension'].includes(token.type) && token.isSource;
               },
-            },
+            }] : []),
+            ...(themeName === 'dp-light' ? [{
+              destination: 'dimens-theme.xml',
+              format: 'android/resources',
+              resourceType: 'dimen',
+              filter: function (token) {
+                if (typeof token.value === 'string' && token.value.startsWith('linear-gradient')) return false;
+                if (token.path.includes('shadow')) return false;
+                if (isFontSizeToken(token)) return false;
+                if (isLineHeightToken(token)) return false;
+                if (isPercentToken(token)) return false;
+                if (isNegativeToken(token)) return false;
+                return ['dimension'].includes(token.type) && token.isSource;
+              },
+            }] : []),
           ],
         },
         android_compose: {
@@ -177,7 +210,7 @@ export async function run () {
             'dt/android/compose/fonts/transformToStack',
             'dt/android/compose/fonts/weight',
             'dt/android/compose/lineHeight/percentToDecimal',
-            'dt/android/compose/opacity/percentToFloat',
+            'dt/android/compose/number/toFloat',
             'dt/android/compose/size/pxToDp',
             'dt/android/compose/size/pxToSp',
             'dt/android/compose/color',
@@ -203,6 +236,8 @@ export async function run () {
               filter: function (token) {
                 if (typeof token.value === 'string' && token.value.startsWith('linear-gradient')) return false;
                 if (token.path.includes('shadow')) return false;
+                if (isPercentToken(token)) return false;
+                if (isNegativeToken(token)) return false;
                 return token.isSource;
               },
             },

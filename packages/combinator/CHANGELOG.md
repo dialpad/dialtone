@@ -1,3 +1,35 @@
+# [1.2.0-next.16](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.15...combinator/v1.2.0-next.16) (2026-07-22)
+
+
+### Code Refactoring
+
+* **Dialtone Vue,dialtone Css:** DLT-3536 clean up remaining legacy prop migration references ([#1374](https://github.com/dialpad/dialtone/issues/1374)) ([0629638](https://github.com/dialpad/dialtone/commit/062963833663ebefcf04799b983cb43efa7d3748))
+* **Dialtone Vue,dialtone Css:** DLT-3537 remove recipes ([#1371](https://github.com/dialpad/dialtone/issues/1371)) ([8611a05](https://github.com/dialpad/dialtone/commit/8611a0513141b3bfc9717124de56cb5107f61a97))
+
+# [1.2.0-next.15](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.14...combinator/v1.2.0-next.15) (2026-07-13)
+
+
+### Documentation
+
+* **Combinator:** DLT-3146 add docs and component variants guidance ([#1344](https://github.com/dialpad/dialtone/issues/1344)) ([42825ec](https://github.com/dialpad/dialtone/commit/42825ec87957cacbd7e73a620bf268503d0f46a3))
+
+
+### Features
+
+* **Box:** DLT-3523 add positioning props to DtBox ([#1355](https://github.com/dialpad/dialtone/issues/1355)) ([68a6570](https://github.com/dialpad/dialtone/commit/68a65701a8d3ae9c09341d0c80007b7fa8a69441))
+* DLT-3534 align size prop types across components and modal fullscreen ([#1362](https://github.com/dialpad/dialtone/issues/1362)) ([8fb88a1](https://github.com/dialpad/dialtone/commit/8fb88a19400f110e4b36fce8018b27b15bf05d1e))
+* **Link:** DLT-3529 add unstyled variant ([#1360](https://github.com/dialpad/dialtone/issues/1360)) ([b90c2cc](https://github.com/dialpad/dialtone/commit/b90c2ccdfdf014b3157c4f7e3b8b1c8bfe4f8738))
+* **Text List:** DLT-3530 add DtTextList component ([#1363](https://github.com/dialpad/dialtone/issues/1363)) ([9c9fc0d](https://github.com/dialpad/dialtone/commit/9c9fc0d57d6339075982cb6320827c5737fb0696))
+
+# [1.2.0-next.14](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.13...combinator/v1.2.0-next.14) (2026-07-03)
+
+
+### Features
+
+* **Combinator:** DLT-3479 add combinator grid view ([#1337](https://github.com/dialpad/dialtone/issues/1337)) ([b1f5599](https://github.com/dialpad/dialtone/commit/b1f559971b24b25081df33ff1b9c761ad5506ddc))
+* **Combinator:** DLT-3489 DLT-3490 DLT-3491 refine control panel ui ([#1343](https://github.com/dialpad/dialtone/issues/1343)) ([0385c2f](https://github.com/dialpad/dialtone/commit/0385c2f4a3945b176b55322932aaa68c03fc0848))
+* **Text:** DLT-3487 expose full typography size scale ([#1334](https://github.com/dialpad/dialtone/issues/1334)) ([0c8f4c6](https://github.com/dialpad/dialtone/commit/0c8f4c627bc51e5b53e0bde72c832361e38a6137))
+
 # [1.2.0-next.13](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0-next.12...combinator/v1.2.0-next.13) (2026-06-22)
 
 

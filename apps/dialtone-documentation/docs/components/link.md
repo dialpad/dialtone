@@ -51,9 +51,13 @@ combinator: DtLink
   <dt-link href="#link" tone="positive">Positive link</dt-link>
   <dt-link href="#link" tone="warning">Warning link</dt-link>
   <dt-link href="#link" tone="info">Info link</dt-link>
-  <dt-link href="#link" tone="mention">Mention link</dt-link>
+  <dt-link href="#link" tone="mention">@Mention link</dt-link>
+  <dt-link href="#link" tone="unstyled">Unstyled link</dt-link>
 </DtStack>
 ```
+
+> [!WARNING]
+> `tone="unstyled"` removes default link color and underline. Use it only when the surrounding UI provides a non-color visual distinction, and keep a visible focus treatment.
 
 ### No underline
 
@@ -78,7 +82,7 @@ In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#
   <dt-link v-dt-mode:invert href="#link" tone="warning">Warning link</dt-link>
   <dt-link v-dt-mode:invert href="#link" tone="info">Info link</dt-link>
   <dt-link v-dt-mode:invert href="#link" tone="muted">Muted link</dt-link>
-  <dt-link v-dt-mode:invert href="#link" tone="mention">Mention link</dt-link>
+  <dt-link v-dt-mode:invert href="#link" tone="mention">@Mention link</dt-link>
 </DtStack>
 <!-- @code -->
 <dt-link v-dt-mode:invert {props}>Link</dt-link>

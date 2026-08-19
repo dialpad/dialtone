@@ -119,7 +119,3 @@ new: true
 ```
 
 This badge indicates the component was recently added. It is independent of lifecycle status — a component can be `ready` and also `new` immediately after graduating from beta.
-
-## Recipes vs. Regular Components
-
-Recipe components (compound components built from other Dialtone components) follow the same lifecycle model but live under `packages/dialtone-vue/recipes/` and have their own documentation pages. Their `status` field works identically.

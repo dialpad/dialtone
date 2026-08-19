@@ -1,104 +1,113 @@
-# Option Bar
+# Option bar
 
-The option bar is responsible for providing a user interface to interact and change the state of the target component.
+The option bar lets users edit the target component's props, slots, and class
+members. `DtcCombinator` mounts it unless `blueprint` mode is on.
 
-It consists of multiple 'section' components containing 'member group' components
-that generate controls for each member.
+## Mounted layout
 
-The primary task for the option bar is to handle input and output between the 'member group' components
-and reflect the state in the **options** object.
+`DtcOptionBar` renders a `DtTabGroup` with up to three tabs:
 
-### Control Map
+- Props
+- Slots
+- Class
 
-See [CONTROL_MAP](CONTROLS.md#control-map)
+The Class tab contains the native `class` attribute and props whose names end in
+`Class`. The option bar separates class props from the main Props tab.
 
-### Extending Member Controls
+The option bar also has a search toggle. Search normalizes member names,
+variant `searchKeywords`, and logical aliases, so physical terms such as
+`left`, `right`, `top`, and `bottom` can find logical names such as
+`inlineStart` and `blockEnd`.
+When search filters out the current tab, the selected panel follows the first
+visible tab so the controls area does not point at a removed panel.
 
-The 'member group' component provides the `controlSelector` prop to allow the 'option bar' component to define
-what controls are available for each member.
+The option bar includes a settings icon button that opens
+`DtcOptionBarSettings`. The popover edits persisted control-display settings:
 
-It is important to abstract this functionality to the parent because for certain member groups we want to enforce
-a single control (Slots, events). However, for other member groups we want to allow multiple controls based on
-member data such a valid types (Props, attributes).
+- `Hide Deprecated`, on by default;
+- `Hide Disabled`, off by default.
 
-The `controlSelector` prop is a function that provides a parameter for the current member, and expects an array
-with the first item as the initial control string, and the second item is an array of string values for all
-the possible controls based on this member as a return value. The string values
-represent a key for a control in the 'control map'.
+During normal browsing, those settings can hide deprecated or disabled controls.
+During active search, matching controls hidden only by those display settings are
+surfaced again. The controls keep their original state: deprecated controls keep
+their badge, and disabled controls remain disabled.
 
-Example:
+## Presets
 
-```vue
-<dtc-option-bar-member-group
-  :control-selector="getMemberControls"
-  ...
-/>
-```
+`DtcCombinator` owns the preset dropdown, not `DtcOptionBar`. The root toolbar
+shows it when the `variants` prop has more than one selectable preset. The
+dropdown does not show `defaults` and `exclusions` as preset options.
 
-```js
-function getMemberControls (member) {
-    return [
-        'string',
-        [
-            'null',
-            'string',
-            member.specialControlType,
-        ]
-    ];
-}
-```
+Selecting a preset resets `options` from the active variant metadata. Manual
+edits clear the selected preset label and show the state as custom.
 
-_Example of a member group that will generate a control for 'null', 'string' and
-a variable control for each member based on its `specialControlType` value. The initial
-control will be the 'string' control._
+## Member groups
 
-## Member Group
+Each tab renders `DtcOptionBarMemberGroup` for the relevant member list. Member
+groups receive:
 
-The member group receives a group of members and their respective values. It is responsible
-for rendering 'option bar control' components for each member. It also renders the 'option bar control selector'
-for each member.
+- members from `info`;
+- current values from `options`;
+- exclusion rules from `info.exclusions`;
+- current prop values;
+- current slot values;
+- a control selector function.
 
-### Member Map
+The member group sorts controls so common props and slots appear first. It also
+groups inferred dependent props after their parent, except class props stay in
+the trailing class tier.
 
-The member map is a reactive data object that wraps each member and can provide additional data that the
-'option bar control' component needs without affecting the original member data object.
+## Control selection
 
-It adds an additional `validControls` field that is created based on the `controlSelector` prop. Most importantly,
-it adds an additional `control` field to that is the determining value for what control is currently active
-for the member.
+Props and attributes use `getBindingControls(...)`, which maps member types and
+valid values to controls through `src/lib/control.js`.
 
-The `control` field is passed as a prop to the 'option bar control' component and
-updated when the `@update:control` event is emitted from the 'option bar control selector' component.
+Slots use:
 
-### Member Values
+- `icon-slot` when `isIconSlot(member)` is true;
+- `slot` for all other slots.
 
-The `values` prop contains a collection of key-value pairs representing the state of the member.
-The member map uses the `getMemberKey(...)` function to match the members to their respective values.
+See [CONTROLS](CONTROLS.md).
 
-### Control Args
+## Exclusions and dependencies
 
-Each member sends a lot of data to the 'option bar control' component through props. Each explicitly defined prop
-is used directly by the 'option bar control' except the `args` object prop.
+The option bar reads exclusion rules through `src/lib/exclusion_rules.js`.
+Rules can disable a control, hide a control through the compatibility path,
+clear a value, or disable specific enum values.
 
-The args prop is an object that contains data to be directly attached to the underlying control using `v-bind`.
+`src/lib/prop_dependencies.js` infers prop dependencies separately.
+When a child prop depends on a falsy parent prop, the option bar disables the
+child control.
 
-## Control Selector
+The option bar disables slot-class props when their matching slot is empty.
+`shouldDisableSlotClassProp(...)` defines the mapping.
 
-The option bar control selector creates buttons above the control based on the `validControls` prop to allow
-selection of a control from a variety of control selections for a single member.
+See [EXCLUSIONS](EXCLUSIONS.md).
 
-## Option Bar Control
+Deprecated controls are detected from the component documentation generated from
+JSDoc tags. Variant metadata should not mark a member deprecated.
 
-The option bar control wraps an underlying 'control' component to provide extended functionality
-and decouple the reliance on the option bar and members from individual 'control' components.
+## Option bar control
 
-### Control Component
+`DtcOptionBarControl` wraps the underlying control component and adds the label,
+badges, lock icon, RAW toggle for object/array controls, and tooltip from
+member descriptions.
 
-The option bar control receives a 'control' as a prop and finds the corresponding 'control' component
-in the 'control map'. It renders the component with a dynamic component (`<component />`).
+It only binds args that exist as props on the selected control component. Common
+args include:
 
-### Extended Args
+- `defaultValue`
+- `validValues`
+- `validTypes`
+- `tags`
+- `bindings`
+- `tokenCategory`
+- `propValues`
+- `disabledValues`
+- `clearable`
 
-The `args` prop is used to pass data to bind directly to the underlying control using `v-bind`.
-However, some explicitly declared props on this component are required as well.
-The `controlArgs` computed value introduces some additional values to pass to the control.
+## Updates
+
+Member value updates emit `update:member` from `DtcOptionBarMemberGroup`, then
+`DtcOptionBar` writes into the correct `options` group through the root
+`update:options` function.

@@ -1,3 +1,131 @@
+# [10.0.0-next.17](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.16...dialtone/v10.0.0-next.17) (2026-08-18)
+
+
+### Bug Fixes
+
+* **Input, Selectmenu:** NO-JIRA update focus surface color ([eaad020](https://github.com/dialpad/dialtone/commit/eaad02055cba1dc9cc4169da251ec30c58d60303))
+* **Link:** NO-JIRA correct mention link style ([#1398](https://github.com/dialpad/dialtone/issues/1398)) ([36810ce](https://github.com/dialpad/dialtone/commit/36810ce128553c63efe7af6f5a4ab9ece07f21dc))
+
+# [10.0.0-next.16](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.15...dialtone/v10.0.0-next.16) (2026-08-14)
+
+
+### Bug Fixes
+
+* **Modal:** NO-JIRA stop inerting the background when the dialog is not modal ([#1397](https://github.com/dialpad/dialtone/issues/1397)) ([ab9b823](https://github.com/dialpad/dialtone/commit/ab9b823d28963ce729d3009fdaa00dee13b0115f))
+
+# [10.0.0-next.15](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.14...dialtone/v10.0.0-next.15) (2026-08-14)
+
+
+### Bug Fixes
+
+* **Checkbox, Radio, Toggle:** DLT-3571 improve focus style ([#1395](https://github.com/dialpad/dialtone/issues/1395)) ([4fe1a25](https://github.com/dialpad/dialtone/commit/4fe1a255403a6b9c8e2e373b5065de22dcaea954))
+
+
+### Features
+
+* **Modal:** NO-JIRA add modal prop to keep dialogs out of the browser top layer ([#1396](https://github.com/dialpad/dialtone/issues/1396)) ([8d28ebc](https://github.com/dialpad/dialtone/commit/8d28ebc08973d53626e64ccde2f6a82f84a73bd1))
+
+# [10.0.0-next.14](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.13...dialtone/v10.0.0-next.14) (2026-08-13)
+
+
+### Bug Fixes
+
+* **Notice, Toast:** DP-203134 render message paragraph only when there is a message ([#1394](https://github.com/dialpad/dialtone/issues/1394)) ([a112d6d](https://github.com/dialpad/dialtone/commit/a112d6d4d11cfb3d0f9b492250ac55eeb04e5d4e))
+
+# [10.0.0-next.13](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.12...dialtone/v10.0.0-next.13) (2026-08-13)
+
+
+### Bug Fixes
+
+* **Dialtone Vue:** DP-203134 hide empty message paragraph in DtNoticeContent ([#1390](https://github.com/dialpad/dialtone/issues/1390)) ([1e0810c](https://github.com/dialpad/dialtone/commit/1e0810c802a3523d328a5a7b61074daf05863b5b))
+* **Mode Island:** NO-JIRA fix tag order on Mode Island story ([#1389](https://github.com/dialpad/dialtone/issues/1389)) ([7a4d73a](https://github.com/dialpad/dialtone/commit/7a4d73a8853d89b72dc99dc7e0c2e78cd33dd0af))
+* **Popover:** NO-JIRA don't hide dialog from assistive tech while it still holds focus on close ([#1392](https://github.com/dialpad/dialtone/issues/1392)) ([f871496](https://github.com/dialpad/dialtone/commit/f8714962c60740f3eef58f9ab95c82f742ff404b))
+
+
+### Features
+
+* **Icon:** DLT-3570 update `dialbot` and `dialpad-analytics-ai` to squircle ([#1391](https://github.com/dialpad/dialtone/issues/1391)) ([725fd81](https://github.com/dialpad/dialtone/commit/725fd8189f429e48faa3812cf99c389b800a8b9c))
+* **Notice, Toast:** NO-JIRA pretty wrap headline ([#1393](https://github.com/dialpad/dialtone/issues/1393)) ([7a36b89](https://github.com/dialpad/dialtone/commit/7a36b89f861b1b7ef1c722a54f76d51e94dce147))
+
+# [10.0.0-next.12](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.11...dialtone/v10.0.0-next.12) (2026-08-12)
+
+
+### Bug Fixes
+
+* NO-JIRA emoji-picker spacing issue ([#1388](https://github.com/dialpad/dialtone/issues/1388)) ([fdf835b](https://github.com/dialpad/dialtone/commit/fdf835b7c73a4b31cca5157f598c5a3972b2c75b))
+
+# [10.0.0-next.11](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.10...dialtone/v10.0.0-next.11) (2026-08-10)
+
+
+### Bug Fixes
+
+* **Avatar:** DP-200415 prevent presence indicators from clipping avatar content ([#1387](https://github.com/dialpad/dialtone/issues/1387)) ([e693f80](https://github.com/dialpad/dialtone/commit/e693f809aa7b39874331f215eb7e4819607d61e2))
+* **Message Input:** DP-200077 disable text-align when rich-text is false ([#1384](https://github.com/dialpad/dialtone/issues/1384)) ([6474c8e](https://github.com/dialpad/dialtone/commit/6474c8e2fa1c2b1ffd3ff0a960b7dcb9a9e93866))
+
+
+### Features
+
+* **Icons:** DLT-3553 add fax-inbound and fax-outbound icons ([#1378](https://github.com/dialpad/dialtone/issues/1378)) ([46538f6](https://github.com/dialpad/dialtone/commit/46538f6218366beb85d84a04ee7f20a3f310204b))
+* **Scroller:** DLT-2624 add before/after/empty slots and scroll-end events ([#1385](https://github.com/dialpad/dialtone/issues/1385)) ([f2e1f86](https://github.com/dialpad/dialtone/commit/f2e1f8650d394e5057048a15ca4fc3328d6ce78e))
+
+# [9.190.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.189.1...dialtone/v9.190.0) (2026-08-07)
+
+
+### Features
+
+* **Scroller:** DLT-2624 add before/after/empty slots and scroll-end events ([#1385](https://github.com/dialpad/dialtone/issues/1385)) ([f2e1f86](https://github.com/dialpad/dialtone/commit/f2e1f8650d394e5057048a15ca4fc3328d6ce78e))
+
+## [9.189.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.189.0...dialtone/v9.189.1) (2026-07-30)
+
+
+### Bug Fixes
+
+* **Message Input:** DP-200077 disable text-align when rich-text is false ([#1384](https://github.com/dialpad/dialtone/issues/1384)) ([6474c8e](https://github.com/dialpad/dialtone/commit/6474c8e2fa1c2b1ffd3ff0a960b7dcb9a9e93866))
+
+# [9.189.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.188.2...dialtone/v9.189.0) (2026-07-24)
+
+
+### Features
+
+* **Icons:** DLT-3553 add fax-inbound and fax-outbound icons ([#1378](https://github.com/dialpad/dialtone/issues/1378)) ([46538f6](https://github.com/dialpad/dialtone/commit/46538f6218366beb85d84a04ee7f20a3f310204b))
+
+## [9.188.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.188.1...dialtone/v9.188.2) (2026-07-17)
+
+
+### Bug Fixes
+
+* **Tabs:** DP-198400 fix disabled tab styling ([#1372](https://github.com/dialpad/dialtone/issues/1372)) ([2c0d386](https://github.com/dialpad/dialtone/commit/2c0d386bf441172e6a6357e751ce33730ad25b4b))
+
+## [9.188.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.188.0...dialtone/v9.188.1) (2026-07-08)
+
+
+### Bug Fixes
+
+* **Scrollbar:** DLT-3494 register --os-scroll-percent globally for shadow DOM support ([#1359](https://github.com/dialpad/dialtone/issues/1359)) ([346b2dc](https://github.com/dialpad/dialtone/commit/346b2dc4855fd22db4b1b88e33416d8a3e47913a))
+
+# [9.188.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.187.3...dialtone/v9.188.0) (2026-07-07)
+
+
+### Bug Fixes
+
+* **Combobox:** DLT-3520 prevent list element error during popover transition ([#1351](https://github.com/dialpad/dialtone/issues/1351)) ([aeda99d](https://github.com/dialpad/dialtone/commit/aeda99d48379551bb3975abcea00b6ddd374fe81))
+* **Localization:** DLT-3522 use unsupported locale in fallback tests ([#1356](https://github.com/dialpad/dialtone/issues/1356)) ([e1cd4db](https://github.com/dialpad/dialtone/commit/e1cd4dbb24087a3778ce00acd567d6e15860a4c8))
+* **Localization:** UC-27003 fall back to a supported locale instead of crashing ([#1350](https://github.com/dialpad/dialtone/issues/1350)) ([17d93a3](https://github.com/dialpad/dialtone/commit/17d93a3970de5f293b78a5aedf951f79db3edc1c))
+
+
+### Features
+
+* **Icons:** DP-192348 add compass icons ([#1354](https://github.com/dialpad/dialtone/issues/1354)) ([92a547a](https://github.com/dialpad/dialtone/commit/92a547a569277bb1863c80be3238a6944a33cc70))
+* **Localization:** DLT-3522 add ko-KR and sv-SE as supported locales ([#1352](https://github.com/dialpad/dialtone/issues/1352)) ([566d55d](https://github.com/dialpad/dialtone/commit/566d55d089d138e38635dc6e85e9f448c97b2425))
+
+## [9.187.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.187.2...dialtone/v9.187.3) (2026-07-03)
+
+
+### Bug Fixes
+
+* **Dt Popover:** DLT-3519 added boundary prop ([#1348](https://github.com/dialpad/dialtone/issues/1348)) ([6ef6957](https://github.com/dialpad/dialtone/commit/6ef6957516aceb471fc531a7b8a9137cec3a8d9a))
+* **Editor:** DP-194072 tiptap warning duplicate extension names found ['textStyle'] ([#1346](https://github.com/dialpad/dialtone/issues/1346)) ([4ac8871](https://github.com/dialpad/dialtone/commit/4ac8871d2843d48d945edcb8bc64dfe1c4fc36fb))
+
 ## [9.187.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.187.1...dialtone/v9.187.2) (2026-06-16)
 
 
@@ -78,6 +206,986 @@
 ### Documentation
 
 * **Tabs, Skeleton, Rich Text Editor, Emoji, Avatar:** DLT-3347 update doc page code examples ([#1221](https://github.com/dialpad/dialtone/issues/1221)) ([c80061f](https://github.com/dialpad/dialtone/commit/c80061f922b868a20c82987644414766ebe3f086))
+
+## [9.182.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.182.0...dialtone/v9.182.1) (2026-05-01)
+
+
+### Bug Fixes
+
+* NO-JIRA correct types paths in package.json exports ([#1239](https://github.com/dialpad/dialtone/issues/1239)) ([a133411](https://github.com/dialpad/dialtone/commit/a133411d52e5be53cf49970e75b6bcf8cafeaa27))
+
+# [9.182.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.181.0...dialtone/v9.182.0) (2026-05-01)
+
+
+### Bug Fixes
+
+* **Popover, Collapsible:** DP-185811 cancel transitions on unmount ([#1241](https://github.com/dialpad/dialtone/issues/1241)) ([6883a0e](https://github.com/dialpad/dialtone/commit/6883a0e528c553e0f5baebb6e787ee080d086298))
+* **Rich Text Editor:** NO-JIRA fix multiple rich text issues ([#1240](https://github.com/dialpad/dialtone/issues/1240)) ([f285a3e](https://github.com/dialpad/dialtone/commit/f285a3ed7c8cd409e0e59bd269282723b85003e6))
+
+
+### Features
+
+* DLT-3352 refresh GEO standard, publish llms.txt, add freshness check ([#1235](https://github.com/dialpad/dialtone/issues/1235)) ([e43643d](https://github.com/dialpad/dialtone/commit/e43643dff727c61af48424013f3c3646b84b5380))
+
+# [9.181.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.180.0...dialtone/v9.181.0) (2026-04-24)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DP-185735 fix arrow key navigation broken near links ([#1217](https://github.com/dialpad/dialtone/issues/1217)) ([8e272e9](https://github.com/dialpad/dialtone/commit/8e272e921efa07bbc1ab9edad7a739a892db55ca))
+
+
+### Documentation
+
+* **Tabs, Popover, Dropdown, Button Group:** DLT-3342 fix code example inaccuracies ([#1213](https://github.com/dialpad/dialtone/issues/1213)) ([2621363](https://github.com/dialpad/dialtone/commit/26213635d4428864cd730113078274323e377cf1))
+
+
+### Features
+
+* **Dialtone Docs:** DLT-3109 add markdown-to-JSON generator for AI docs ([#1178](https://github.com/dialpad/dialtone/issues/1178)) ([2317b8e](https://github.com/dialpad/dialtone/commit/2317b8e3ca830381eb9419bca93de92520816d81))
+
+# [9.180.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.179.0...dialtone/v9.180.0) (2026-04-17)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DP-179947 use URL as display text when inserting link without text ([#1202](https://github.com/dialpad/dialtone/issues/1202)) ([30f2504](https://github.com/dialpad/dialtone/commit/30f25049c22132f3b0a35a91ded852d1f2d07781))
+
+
+### Documentation
+
+* **Modal:** NO-JIRA fix code examples ([#1207](https://github.com/dialpad/dialtone/issues/1207)) ([aedd4a1](https://github.com/dialpad/dialtone/commit/aedd4a107ba8cc06fd9aeb51c72f847bb97fceef))
+
+
+### Features
+
+* **Eslint Plugin Dialtone:** DLT-3314 add deprecated-dialtone-component rule ([#1200](https://github.com/dialpad/dialtone/issues/1200)) ([c73b7ee](https://github.com/dialpad/dialtone/commit/c73b7ee32e15296adbe99181ea8e1910795eb62a))
+
+# [9.179.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.178.0...dialtone/v9.179.0) (2026-04-14)
+
+
+### Bug Fixes
+
+* **Ci:** NO-JIRA use daily cleanup PR instead of direct push to staging ([#1185](https://github.com/dialpad/dialtone/issues/1185)) ([bb00654](https://github.com/dialpad/dialtone/commit/bb0065415b98ddbc02923463e25ebf237068765d))
+* **Workflow:** NO-JIRA prevent permission denials in claude-review ([#1189](https://github.com/dialpad/dialtone/issues/1189)) ([0d18635](https://github.com/dialpad/dialtone/commit/0d186356542966ba09e6c2470a64b019a6fe5786))
+* **Workflow:** NO-JIRA restore id-token permission and fix concurrency race in claude-review ([#1143](https://github.com/dialpad/dialtone/issues/1143)) ([34cb68d](https://github.com/dialpad/dialtone/commit/34cb68d4e7a7a1857d81ead7317704759b220ddc))
+
+
+### Features
+
+* **Button:** DLT-3269 improve disabled styles ([#1180](https://github.com/dialpad/dialtone/issues/1180)) ([00a75f2](https://github.com/dialpad/dialtone/commit/00a75f2c8d958a2ea43d571df272bf6dce08b2de))
+
+# [9.178.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.177.2...dialtone/v9.178.0) (2026-04-07)
+
+
+### Features
+
+* **Resizable:** DLT-2097 add DtResizable panel layout component ([#1162](https://github.com/dialpad/dialtone/issues/1162)) ([c6bd3bc](https://github.com/dialpad/dialtone/commit/c6bd3bcbae65634015f3fa29bbe9043ae40baa90))
+
+## [9.177.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.177.1...dialtone/v9.177.2) (2026-04-06)
+
+
+### Bug Fixes
+
+* NO-JIRA include static-renderer ([e698bf4](https://github.com/dialpad/dialtone/commit/e698bf44619e20a5b14c4dc9ceacc7a8352332db))
+
+## [9.177.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.177.0...dialtone/v9.177.1) (2026-04-06)
+
+
+### Bug Fixes
+
+* NO-JIRA fix pnpm lock and add missing permissions ([#1175](https://github.com/dialpad/dialtone/issues/1175)) ([b355291](https://github.com/dialpad/dialtone/commit/b3552919edc6f48580421154453353ceaaeac88f))
+* NO-JIRA make dialtone-cli private ([cf555f2](https://github.com/dialpad/dialtone/commit/cf555f2a0c8562a949ec3c5b28e10185612b441a))
+
+# [9.177.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.176.0...dialtone/v9.177.0) (2026-04-02)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DP-179946 fix suggestion list positioning ([#1155](https://github.com/dialpad/dialtone/issues/1155)) ([fdbe45b](https://github.com/dialpad/dialtone/commit/fdbe45bb61ef2264f7535e6e1d2325ba641d445d))
+
+
+### Features
+
+* **Icons:** DP-182525 add filter-filled icon ([#1161](https://github.com/dialpad/dialtone/issues/1161)) ([ee25905](https://github.com/dialpad/dialtone/commit/ee25905b4d1a7a1c6cfbfc9643d952e772b37daa))
+
+# [9.176.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.175.2...dialtone/v9.176.0) (2026-03-31)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-3190 replace custom JSON-to-markdown converter with @tiptap/static-renderer ([#1148](https://github.com/dialpad/dialtone/issues/1148)) ([9629c70](https://github.com/dialpad/dialtone/commit/9629c70e8898cac5d79df0229f83f3671d739b83))
+
+
+### Documentation
+
+* DLT-3151 blog post for ui-kits migration and script ([#1156](https://github.com/dialpad/dialtone/issues/1156)) ([069ad3c](https://github.com/dialpad/dialtone/commit/069ad3cbf2c9fd2e9b56f8db8b05be41121323ce))
+* **Editor:** DLT-3050 updated editor docs with recent changes ([#1139](https://github.com/dialpad/dialtone/issues/1139)) ([04bfabb](https://github.com/dialpad/dialtone/commit/04bfabbd9e01ca47ba0fe236d8e3af74e6747cdd))
+* **Icons:** DLT-3220 update contributing and add claude rules and skill ([#1151](https://github.com/dialpad/dialtone/issues/1151)) ([296a83d](https://github.com/dialpad/dialtone/commit/296a83d082ba6d12d69a7592b8d89b988d60804c))
+
+
+### Features
+
+* **Dialtone Cli,dialtone Query Core:** DLT-3163 extract query core and add CLI ([#1142](https://github.com/dialpad/dialtone/issues/1142)) ([65090e6](https://github.com/dialpad/dialtone/commit/65090e6dc215084677e05fa50eb1ba0de72c61d8))
+* DLT-3049 add code review rules, skill, agent, and command ([#1154](https://github.com/dialpad/dialtone/issues/1154)) ([6bdef46](https://github.com/dialpad/dialtone/commit/6bdef465e50017369a5d94bbcde8b3c077eb5777))
+* **Icons:** DLT-3219 align star/sparkle icons with dp brand star ([#1152](https://github.com/dialpad/dialtone/issues/1152)) ([ef39afc](https://github.com/dialpad/dialtone/commit/ef39afc90c1d77330c121b3a010b7b0b959beddb))
+
+## [9.175.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.175.1...dialtone/v9.175.2) (2026-03-24)
+
+
+### Bug Fixes
+
+* **Input:** DP-180970 ime composition bug ([#1146](https://github.com/dialpad/dialtone/issues/1146)) ([af6afdd](https://github.com/dialpad/dialtone/commit/af6afddfa04a13bf63885972797bece8815e2a5d))
+
+## [9.175.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.175.0...dialtone/v9.175.1) (2026-03-20)
+
+
+### Bug Fixes
+
+* **Input:** revert DP-173960 handle composition events ([#1082](https://github.com/dialpad/dialtone/issues/1082)) ([ba81d87](https://github.com/dialpad/dialtone/commit/ba81d87b1a2e64672aab5d22d2b8f4e3774994b2))
+
+# [9.175.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.174.1...dialtone/v9.175.0) (2026-03-20)
+
+
+### Features
+
+* **Editor:** DP-181154 replacing 0 width tables with full width ([#1145](https://github.com/dialpad/dialtone/issues/1145)) ([6aa8a1d](https://github.com/dialpad/dialtone/commit/6aa8a1d0a06531a5abf2691138b331c2d241702e))
+
+## [9.174.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.174.0...dialtone/v9.174.1) (2026-03-19)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** DP-180791 cursor position ([#1141](https://github.com/dialpad/dialtone/issues/1141)) ([bbf4cd1](https://github.com/dialpad/dialtone/commit/bbf4cd11c91a7e06f40f3bb9fea23171f52e4945))
+
+# [9.174.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.173.0...dialtone/v9.174.0) (2026-03-19)
+
+
+### Bug Fixes
+
+* **Deprecated Component:** NO-JIRA fix deprecated component regex ([#1140](https://github.com/dialpad/dialtone/issues/1140)) ([6d1a76f](https://github.com/dialpad/dialtone/commit/6d1a76fc672335eac2172e9a1323f9752c22db07))
+* **Editor:** NO-JIRA empty div issue with nested block elements ([#1121](https://github.com/dialpad/dialtone/issues/1121)) ([a9bb763](https://github.com/dialpad/dialtone/commit/a9bb763285440a7c8352767eee6980c1b44b0942))
+* **Workflow:** SEC-2156 claude-review ([#1138](https://github.com/dialpad/dialtone/issues/1138)) ([d8483ba](https://github.com/dialpad/dialtone/commit/d8483bad8d99dc962558be00aa3b15e82bfd0b3e))
+
+
+### Features
+
+* **Dialtone Docs:** DDT-1622 add AI documentation package — content, validation, and templates ([#1051](https://github.com/dialpad/dialtone/issues/1051)) ([633c331](https://github.com/dialpad/dialtone/commit/633c331cb2d2e45a7010721b9d2834ea8bd19654))
+* DLT-3144 support truncation within message input bottom btns ([#1134](https://github.com/dialpad/dialtone/issues/1134)) ([22175f5](https://github.com/dialpad/dialtone/commit/22175f59d8b6e270f30992a31cd8604aaeed4984))
+
+# [9.173.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.172.0...dialtone/v9.173.0) (2026-03-17)
+
+
+### Bug Fixes
+
+* **Docs:** NO-JIRA fix dt-select-menu value on modal docs page ([#1132](https://github.com/dialpad/dialtone/issues/1132)) ([1be6fe0](https://github.com/dialpad/dialtone/commit/1be6fe025b7aab5c388c05c327772944f9f73240))
+
+
+### Features
+
+* **Editor:** DP-175912 extend table extension for table styling ([#1130](https://github.com/dialpad/dialtone/issues/1130)) ([b3793e7](https://github.com/dialpad/dialtone/commit/b3793e7976baba98ca84ada303c87e8e0935c1de))
+* **Loader:** DLT-2963 add track to loader ([#1133](https://github.com/dialpad/dialtone/issues/1133)) ([48a7a52](https://github.com/dialpad/dialtone/commit/48a7a527432f5e450d6dd9b12b4d64f8ef86bd2c))
+
+# [9.172.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.171.1...dialtone/v9.172.0) (2026-03-17)
+
+
+### Features
+
+* **Icon:** DLT-3136 convert docs inline svgs to components ([#1123](https://github.com/dialpad/dialtone/issues/1123)) ([8bae326](https://github.com/dialpad/dialtone/commit/8bae326eda78aaee3632464068113a748d6c3e69))
+
+## [9.171.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.171.0...dialtone/v9.171.1) (2026-03-12)
+
+
+### Bug Fixes
+
+* **Editor:** DP-179668 some toolbar buttons not returning focus to editor ([#1117](https://github.com/dialpad/dialtone/issues/1117)) ([67a2a64](https://github.com/dialpad/dialtone/commit/67a2a64a0ca8a8cdd5b291f4f756ca6d348f006c))
+* **Popover:** DP-175009 revert visibility CSS that caused tippy-box click stealing ([#1119](https://github.com/dialpad/dialtone/issues/1119)) ([82ffcb6](https://github.com/dialpad/dialtone/commit/82ffcb64c3dbd4d80a170385cdcc4aa4b5218a83))
+
+# [9.171.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.170.0...dialtone/v9.171.0) (2026-03-10)
+
+
+### Documentation
+
+* DLT-3087 improve SEO meta tags, OG, canonical, robots.txt ([#1114](https://github.com/dialpad/dialtone/issues/1114)) ([16730b5](https://github.com/dialpad/dialtone/commit/16730b5778865aab4a3833322fa83347ba52c1f4))
+
+
+### Features
+
+* **Editor:** NO-JIRA add preserveWhitespace prop ([#1115](https://github.com/dialpad/dialtone/issues/1115)) ([aad7f29](https://github.com/dialpad/dialtone/commit/aad7f299d88dd72effdd958248b2d58a1aca4e60))
+
+# [9.170.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.169.0...dialtone/v9.170.0) (2026-03-09)
+
+
+### Features
+
+* **Hovercard:** DP-175404 expose functions to control hide/show ([#1113](https://github.com/dialpad/dialtone/issues/1113)) ([03c5524](https://github.com/dialpad/dialtone/commit/03c552453cb79318f2aaa9282764025a0e7af21b))
+
+# [9.169.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.168.0...dialtone/v9.169.0) (2026-03-09)
+
+
+### Bug Fixes
+
+* **Editor:** NO-JIRA fixed shadow dom issues with editor ([#1107](https://github.com/dialpad/dialtone/issues/1107)) ([82f8c72](https://github.com/dialpad/dialtone/commit/82f8c72e915ba2fec1209f1de9f5b9eb34165217))
+
+
+### Features
+
+* **Button:** DLT-3086 update loading state to use dt-loader component ([#1111](https://github.com/dialpad/dialtone/issues/1111)) ([621c49a](https://github.com/dialpad/dialtone/commit/621c49a451dd653ad24bb4641f5cff36501670e3))
+
+# [9.168.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.167.0...dialtone/v9.168.0) (2026-03-07)
+
+
+### Features
+
+* **Popover,hovercard:** DP-175404 support externalAnchorElement ([#1108](https://github.com/dialpad/dialtone/issues/1108)) ([bc23ca8](https://github.com/dialpad/dialtone/commit/bc23ca84adbbc05f33cc9b591d27d826886e5244))
+
+# [9.167.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.166.0...dialtone/v9.167.0) (2026-03-06)
+
+
+### Bug Fixes
+
+* **Combobox:** DLT-3057 combobox errors when hovering over dt-dropdown-separator ([#1097](https://github.com/dialpad/dialtone/issues/1097)) ([4798e0e](https://github.com/dialpad/dialtone/commit/4798e0eaf24d9ce1043257f922f0d4563f193c1c))
+* **Tooltip:** NO-JIRA add Shadow DOM support for DtTooltipDirective ([#1100](https://github.com/dialpad/dialtone/issues/1100)) ([121ffa2](https://github.com/dialpad/dialtone/commit/121ffa2b6269e1a79e80517f4e77f19104cb4e0c))
+
+
+### Code Refactoring
+
+* **Progress Circle:** NO-JIRA update ai gradient with css variables and fewer stops ([#1105](https://github.com/dialpad/dialtone/issues/1105)) ([8dd19ea](https://github.com/dialpad/dialtone/commit/8dd19ead3a1a969bc39e5a7582e4da7dd175a820))
+
+
+### Features
+
+* **Editor:** NO-JIRA added props allowBackgroundColor & allowLineHeight ([#1103](https://github.com/dialpad/dialtone/issues/1103)) ([7c90308](https://github.com/dialpad/dialtone/commit/7c90308dad6576accd241152cb8ea2a8a7e00d62))
+* **Loader,progress Circle:** NO-JIRA polish DtProgressCircle visual and align DtLoader visual with DtProgressCircle ([#1102](https://github.com/dialpad/dialtone/issues/1102)) ([7b9e9b6](https://github.com/dialpad/dialtone/commit/7b9e9b6d699515805bec979c7ffdf5b5f737b316))
+* **Progress Circle:** DLT-2983 add progress-circle component ([#1098](https://github.com/dialpad/dialtone/issues/1098)) ([c0f0e40](https://github.com/dialpad/dialtone/commit/c0f0e403acfd76d8db7dbe002862330d71571d5f))
+
+
+### Reverts
+
+* NO-JIRA revert progress circle polish commits for re-PR ([#1101](https://github.com/dialpad/dialtone/issues/1101)) ([a212c41](https://github.com/dialpad/dialtone/commit/a212c41e5c857ebabfacc9670e7a7054dcd9c6de))
+
+
+# [10.0.0-next.10](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.9...dialtone/v10.0.0-next.10) (2026-08-07)
+
+
+### Bug Fixes
+
+* **Docs:** DLT-3558 correct out-of-sync [@values](https://github.com/values) JSDoc annotations ([#1383](https://github.com/dialpad/dialtone/issues/1383)) ([0ef001b](https://github.com/dialpad/dialtone/commit/0ef001bde3623cdf1b0c10564f88f84d0c44c27c))
+* **Tab Group:** DLT-3564 emit target panel id on before-change ([#1386](https://github.com/dialpad/dialtone/issues/1386)) ([0c7b5c6](https://github.com/dialpad/dialtone/commit/0c7b5c6d70ec35c622e0a14ae2281640d898e92c))
+
+# [10.0.0-next.9](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.8...dialtone/v10.0.0-next.9) (2026-07-29)
+
+
+### Bug Fixes
+
+* **Dialtone Css:** DLT-3557 remove colliding d-label size classes from components layer ([#1382](https://github.com/dialpad/dialtone/issues/1382)) ([03dcd05](https://github.com/dialpad/dialtone/commit/03dcd05775fa9299e78e61dc01d2a7dc58b93dc1))
+
+# [10.0.0-next.8](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.7...dialtone/v10.0.0-next.8) (2026-07-28)
+
+
+### Bug Fixes
+
+* **Chip, Combobox Multi Select:** DLT-3554 DLT-3555 correct chip spacing and multi-select alignment ([#1380](https://github.com/dialpad/dialtone/issues/1380)) ([bb53556](https://github.com/dialpad/dialtone/commit/bb535565b58c0592c3aba3832fb0d98355a2eb2f))
+* DLT-3552 suppress unintended focus rings in component regions ([#1376](https://github.com/dialpad/dialtone/issues/1376)) ([c792768](https://github.com/dialpad/dialtone/commit/c79276842725585ce6ddccb27a554f703a0f5d5e))
+
+
+### Features
+
+* **Dialtone Css,dialtone:** DLT-3556 add dialtone-merge-migrate CLI ([#1381](https://github.com/dialpad/dialtone/issues/1381)) ([a287572](https://github.com/dialpad/dialtone/commit/a287572f29b59bdfedc2574c6a47ba0b409e85d6))
+
+# [10.0.0-next.7](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.6...dialtone/v10.0.0-next.7) (2026-07-23)
+
+
+### Bug Fixes
+
+* **Dialtone Tokens:** NO-JIRA removed dead tokens ([78cd1aa](https://github.com/dialpad/dialtone/commit/78cd1aa7fe423149c9fa1fb0bdc085e416e2d255))
+* **Tabs:** DP-198400 fix disabled tab styling ([#1372](https://github.com/dialpad/dialtone/issues/1372)) ([2c0d386](https://github.com/dialpad/dialtone/commit/2c0d386bf441172e6a6357e751ce33730ad25b4b))
+
+## [9.188.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.188.1...dialtone/v9.188.2) (2026-07-17)
+
+
+### Bug Fixes
+
+* **Tabs:** DP-198400 fix disabled tab styling ([#1372](https://github.com/dialpad/dialtone/issues/1372)) ([2c0d386](https://github.com/dialpad/dialtone/commit/2c0d386bf441172e6a6357e751ce33730ad25b4b))
+
+## [9.188.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.188.0...dialtone/v9.188.1) (2026-07-08)
+
+
+### Bug Fixes
+
+* **Scrollbar:** DLT-3494 register --os-scroll-percent globally for shadow DOM support ([#1359](https://github.com/dialpad/dialtone/issues/1359)) ([346b2dc](https://github.com/dialpad/dialtone/commit/346b2dc4855fd22db4b1b88e33416d8a3e47913a))
+
+# [9.188.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.187.3...dialtone/v9.188.0) (2026-07-07)
+
+
+### Bug Fixes
+
+* **Combobox:** DLT-3520 prevent list element error during popover transition ([#1351](https://github.com/dialpad/dialtone/issues/1351)) ([aeda99d](https://github.com/dialpad/dialtone/commit/aeda99d48379551bb3975abcea00b6ddd374fe81))
+* **Localization:** DLT-3522 use unsupported locale in fallback tests ([#1356](https://github.com/dialpad/dialtone/issues/1356)) ([e1cd4db](https://github.com/dialpad/dialtone/commit/e1cd4dbb24087a3778ce00acd567d6e15860a4c8))
+* **Localization:** UC-27003 fall back to a supported locale instead of crashing ([#1350](https://github.com/dialpad/dialtone/issues/1350)) ([17d93a3](https://github.com/dialpad/dialtone/commit/17d93a3970de5f293b78a5aedf951f79db3edc1c))
+
+
+### Features
+
+* **Icons:** DP-192348 add compass icons ([#1354](https://github.com/dialpad/dialtone/issues/1354)) ([92a547a](https://github.com/dialpad/dialtone/commit/92a547a569277bb1863c80be3238a6944a33cc70))
+* **Localization:** DLT-3522 add ko-KR and sv-SE as supported locales ([#1352](https://github.com/dialpad/dialtone/issues/1352)) ([566d55d](https://github.com/dialpad/dialtone/commit/566d55d089d138e38635dc6e85e9f448c97b2425))
+
+## [9.187.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.187.2...dialtone/v9.187.3) (2026-07-03)
+
+
+### Bug Fixes
+
+* **Dt Popover:** DLT-3519 added boundary prop ([#1348](https://github.com/dialpad/dialtone/issues/1348)) ([6ef6957](https://github.com/dialpad/dialtone/commit/6ef6957516aceb471fc531a7b8a9137cec3a8d9a))
+* **Editor:** DP-194072 tiptap warning duplicate extension names found ['textStyle'] ([#1346](https://github.com/dialpad/dialtone/issues/1346)) ([4ac8871](https://github.com/dialpad/dialtone/commit/4ac8871d2843d48d945edcb8bc64dfe1c4fc36fb))
+
+## [9.187.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.187.1...dialtone/v9.187.2) (2026-06-16)
+
+
+### Bug Fixes
+
+* **Dialtone Cli:** NO-JIRA wire into release and publish pipelines ([#1321](https://github.com/dialpad/dialtone/issues/1321)) ([84d9c3c](https://github.com/dialpad/dialtone/commit/84d9c3caa6f4f6e1c1eb5258f5e9c7a39ddd518d))
+* **Modal:** DLT-3476 do not close when drag starts inside dialog and ends on backdrop ([#1322](https://github.com/dialpad/dialtone/issues/1322)) ([4d5726b](https://github.com/dialpad/dialtone/commit/4d5726b0ffd903c4bf7987820e90bc33c01f4f1f))
+* **Popover:** NO-JIRA guard onShow against window access after component unmount ([#1320](https://github.com/dialpad/dialtone/issues/1320)) ([4690585](https://github.com/dialpad/dialtone/commit/4690585c4e5c39d7099969552796c7b9817de5ae))
+* **Rich Text Editor:** DP-190440 strip trailing <br> before </p> on paste ([#1326](https://github.com/dialpad/dialtone/issues/1326)) ([28737c0](https://github.com/dialpad/dialtone/commit/28737c0066cf600eb4ebfffd512056c250de7599))
+
+## [9.187.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.187.0...dialtone/v9.187.1) (2026-06-10)
+
+
+### Bug Fixes
+
+* **Docs:** NO-JIRA actually static render the docs ([#1319](https://github.com/dialpad/dialtone/issues/1319)) ([0107a8e](https://github.com/dialpad/dialtone/commit/0107a8ebb20dce64efe0c29f883300bce08bc56a))
+
+# [9.187.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.186.0...dialtone/v9.187.0) (2026-06-08)
+
+
+### Features
+
+* **Icons:** DLT-3460 DLT-3461 hand icon update ([#1315](https://github.com/dialpad/dialtone/issues/1315)) ([83ad138](https://github.com/dialpad/dialtone/commit/83ad138665f38e06411fce9ee27585fceb677a2b))
+* **Icons:** DP-192459 add circle and circle-dashed icons ([#1305](https://github.com/dialpad/dialtone/issues/1305)) ([8c41212](https://github.com/dialpad/dialtone/commit/8c41212d49dc1bc7fba2cfc51ffc01ab3896b619))
+* **Rich Text Editor:** DP-190415 implement phone number linking ([#1297](https://github.com/dialpad/dialtone/issues/1297)) ([20a4fcc](https://github.com/dialpad/dialtone/commit/20a4fcc3644ecbe5f2036a4f04953be95c5022b2))
+
+# [9.186.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.185.0...dialtone/v9.186.0) (2026-06-02)
+
+
+### Features
+
+* **Dialtone Icons:** NO-JIRA add /vue export to dialtone-icon ([#1304](https://github.com/dialpad/dialtone/issues/1304)) ([f7ca6d4](https://github.com/dialpad/dialtone/commit/f7ca6d438cc7c644d7e95bc963bd303ea2259b4d))
+
+# [9.185.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.184.0...dialtone/v9.185.0) (2026-05-26)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** DLT-3409 stop input from shrinking when chips are added ([#1257](https://github.com/dialpad/dialtone/issues/1257)) ([7f54cff](https://github.com/dialpad/dialtone/commit/7f54cffe7937c7200ccfdb79cf4ee621c0927315))
+* **Modal:** DLT-3442 fix focus snapping back to first button on click ([#1276](https://github.com/dialpad/dialtone/issues/1276)) ([37ec398](https://github.com/dialpad/dialtone/commit/37ec398fb671ee1d22dccea78158d405d4558047))
+
+
+### Features
+
+* **Mcp Server, Query Core, Dialtone Docs, Dialtone Cli:** DLT-3416 add search_documentation tool ([#1259](https://github.com/dialpad/dialtone/issues/1259)) ([ef1d5a8](https://github.com/dialpad/dialtone/commit/ef1d5a897df670200c8a7f0c34ed47c430e3ed35))
+
+# [9.184.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.183.0...dialtone/v9.184.0) (2026-05-19)
+
+
+### Features
+
+* **Combobox Multi Select:** DLT-3366 forward input-level escape, enter, keydown events ([#1253](https://github.com/dialpad/dialtone/issues/1253)) ([a635301](https://github.com/dialpad/dialtone/commit/a635301168a096fe9b741d5f5a74925874237024))
+* **Dialtone Icons:** NO-JIRA add agent-assist-color brand-full-color icon ([#1265](https://github.com/dialpad/dialtone/issues/1265)) ([d159d78](https://github.com/dialpad/dialtone/commit/d159d7842e5f5f8b21b6ed314cb9b7f1e4c206b7))
+* **Eslint Plugin:** DLT-3281 add deprecated-class-props rule ([#1258](https://github.com/dialpad/dialtone/issues/1258)) ([3c5925e](https://github.com/dialpad/dialtone/commit/3c5925e38f340ddae01ebd59079b185a49f81304))
+
+# [9.183.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.182.3...dialtone/v9.183.0) (2026-05-12)
+
+
+### Features
+
+* **Combobox With Popover, Combobox Multi Select:** DLT-3395 forward dialogClass to popover dialog ([#1254](https://github.com/dialpad/dialtone/issues/1254)) ([0059451](https://github.com/dialpad/dialtone/commit/0059451c0ce901cd47eb1498d8dfc28e5282a73c))
+
+## [9.182.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.182.2...dialtone/v9.182.3) (2026-05-05)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA fix bubble menu not displaying ([d2c097f](https://github.com/dialpad/dialtone/commit/d2c097f94087dfad967fe7022fad784999a1969b))
+
+## [9.182.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.182.1...dialtone/v9.182.2) (2026-05-05)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA fix bubble menu error ([df37b06](https://github.com/dialpad/dialtone/commit/df37b06af1339026d0c6b7d1da55b13169bdf6bd))
+
+
+### Documentation
+
+* **Tabs, Skeleton, Rich Text Editor, Emoji, Avatar:** DLT-3347 update doc page code examples ([#1221](https://github.com/dialpad/dialtone/issues/1221)) ([c80061f](https://github.com/dialpad/dialtone/commit/c80061f922b868a20c82987644414766ebe3f086))
+
+## [9.182.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.182.0...dialtone/v9.182.1) (2026-05-01)
+
+
+### Bug Fixes
+
+* NO-JIRA correct types paths in package.json exports ([#1239](https://github.com/dialpad/dialtone/issues/1239)) ([a133411](https://github.com/dialpad/dialtone/commit/a133411d52e5be53cf49970e75b6bcf8cafeaa27))
+
+# [9.182.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.181.0...dialtone/v9.182.0) (2026-05-01)
+
+
+### Bug Fixes
+
+* **Popover, Collapsible:** DP-185811 cancel transitions on unmount ([#1241](https://github.com/dialpad/dialtone/issues/1241)) ([6883a0e](https://github.com/dialpad/dialtone/commit/6883a0e528c553e0f5baebb6e787ee080d086298))
+* **Rich Text Editor:** NO-JIRA fix multiple rich text issues ([#1240](https://github.com/dialpad/dialtone/issues/1240)) ([f285a3e](https://github.com/dialpad/dialtone/commit/f285a3ed7c8cd409e0e59bd269282723b85003e6))
+
+
+### Features
+
+* DLT-3352 refresh GEO standard, publish llms.txt, add freshness check ([#1235](https://github.com/dialpad/dialtone/issues/1235)) ([e43643d](https://github.com/dialpad/dialtone/commit/e43643dff727c61af48424013f3c3646b84b5380))
+
+# [9.181.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.180.0...dialtone/v9.181.0) (2026-04-24)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DP-185735 fix arrow key navigation broken near links ([#1217](https://github.com/dialpad/dialtone/issues/1217)) ([8e272e9](https://github.com/dialpad/dialtone/commit/8e272e921efa07bbc1ab9edad7a739a892db55ca))
+
+
+### Documentation
+
+* **Tabs, Popover, Dropdown, Button Group:** DLT-3342 fix code example inaccuracies ([#1213](https://github.com/dialpad/dialtone/issues/1213)) ([2621363](https://github.com/dialpad/dialtone/commit/26213635d4428864cd730113078274323e377cf1))
+
+
+### Features
+
+* **Dialtone Docs:** DLT-3109 add markdown-to-JSON generator for AI docs ([#1178](https://github.com/dialpad/dialtone/issues/1178)) ([2317b8e](https://github.com/dialpad/dialtone/commit/2317b8e3ca830381eb9419bca93de92520816d81))
+
+# [9.180.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.179.0...dialtone/v9.180.0) (2026-04-17)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DP-179947 use URL as display text when inserting link without text ([#1202](https://github.com/dialpad/dialtone/issues/1202)) ([30f2504](https://github.com/dialpad/dialtone/commit/30f25049c22132f3b0a35a91ded852d1f2d07781))
+
+
+### Documentation
+
+* **Modal:** NO-JIRA fix code examples ([#1207](https://github.com/dialpad/dialtone/issues/1207)) ([aedd4a1](https://github.com/dialpad/dialtone/commit/aedd4a107ba8cc06fd9aeb51c72f847bb97fceef))
+
+
+### Features
+
+* **Eslint Plugin Dialtone:** DLT-3314 add deprecated-dialtone-component rule ([#1200](https://github.com/dialpad/dialtone/issues/1200)) ([c73b7ee](https://github.com/dialpad/dialtone/commit/c73b7ee32e15296adbe99181ea8e1910795eb62a))
+
+# [9.179.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.178.0...dialtone/v9.179.0) (2026-04-14)
+
+
+### Bug Fixes
+
+* **Ci:** NO-JIRA use daily cleanup PR instead of direct push to staging ([#1185](https://github.com/dialpad/dialtone/issues/1185)) ([bb00654](https://github.com/dialpad/dialtone/commit/bb0065415b98ddbc02923463e25ebf237068765d))
+* **Workflow:** NO-JIRA prevent permission denials in claude-review ([#1189](https://github.com/dialpad/dialtone/issues/1189)) ([0d18635](https://github.com/dialpad/dialtone/commit/0d186356542966ba09e6c2470a64b019a6fe5786))
+* **Workflow:** NO-JIRA restore id-token permission and fix concurrency race in claude-review ([#1143](https://github.com/dialpad/dialtone/issues/1143)) ([34cb68d](https://github.com/dialpad/dialtone/commit/34cb68d4e7a7a1857d81ead7317704759b220ddc))
+
+
+### Features
+
+* **Button:** DLT-3269 improve disabled styles ([#1180](https://github.com/dialpad/dialtone/issues/1180)) ([00a75f2](https://github.com/dialpad/dialtone/commit/00a75f2c8d958a2ea43d571df272bf6dce08b2de))
+
+# [9.178.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.177.2...dialtone/v9.178.0) (2026-04-07)
+
+
+### Features
+
+* **Resizable:** DLT-2097 add DtResizable panel layout component ([#1162](https://github.com/dialpad/dialtone/issues/1162)) ([c6bd3bc](https://github.com/dialpad/dialtone/commit/c6bd3bcbae65634015f3fa29bbe9043ae40baa90))
+
+## [9.177.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.177.1...dialtone/v9.177.2) (2026-04-06)
+
+
+### Bug Fixes
+
+* NO-JIRA include static-renderer ([e698bf4](https://github.com/dialpad/dialtone/commit/e698bf44619e20a5b14c4dc9ceacc7a8352332db))
+
+## [9.177.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.177.0...dialtone/v9.177.1) (2026-04-06)
+
+
+### Bug Fixes
+
+* NO-JIRA fix pnpm lock and add missing permissions ([#1175](https://github.com/dialpad/dialtone/issues/1175)) ([b355291](https://github.com/dialpad/dialtone/commit/b3552919edc6f48580421154453353ceaaeac88f))
+* NO-JIRA make dialtone-cli private ([cf555f2](https://github.com/dialpad/dialtone/commit/cf555f2a0c8562a949ec3c5b28e10185612b441a))
+
+# [9.177.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.176.0...dialtone/v9.177.0) (2026-04-02)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DP-179946 fix suggestion list positioning ([#1155](https://github.com/dialpad/dialtone/issues/1155)) ([fdbe45b](https://github.com/dialpad/dialtone/commit/fdbe45bb61ef2264f7535e6e1d2325ba641d445d))
+
+
+### Features
+
+* **Icons:** DP-182525 add filter-filled icon ([#1161](https://github.com/dialpad/dialtone/issues/1161)) ([ee25905](https://github.com/dialpad/dialtone/commit/ee25905b4d1a7a1c6cfbfc9643d952e772b37daa))
+
+# [9.176.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.175.2...dialtone/v9.176.0) (2026-03-31)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-3190 replace custom JSON-to-markdown converter with @tiptap/static-renderer ([#1148](https://github.com/dialpad/dialtone/issues/1148)) ([9629c70](https://github.com/dialpad/dialtone/commit/9629c70e8898cac5d79df0229f83f3671d739b83))
+
+
+### Documentation
+
+* DLT-3151 blog post for ui-kits migration and script ([#1156](https://github.com/dialpad/dialtone/issues/1156)) ([069ad3c](https://github.com/dialpad/dialtone/commit/069ad3cbf2c9fd2e9b56f8db8b05be41121323ce))
+* **Editor:** DLT-3050 updated editor docs with recent changes ([#1139](https://github.com/dialpad/dialtone/issues/1139)) ([04bfabb](https://github.com/dialpad/dialtone/commit/04bfabbd9e01ca47ba0fe236d8e3af74e6747cdd))
+* **Icons:** DLT-3220 update contributing and add claude rules and skill ([#1151](https://github.com/dialpad/dialtone/issues/1151)) ([296a83d](https://github.com/dialpad/dialtone/commit/296a83d082ba6d12d69a7592b8d89b988d60804c))
+
+
+### Features
+
+* **Dialtone Cli,dialtone Query Core:** DLT-3163 extract query core and add CLI ([#1142](https://github.com/dialpad/dialtone/issues/1142)) ([65090e6](https://github.com/dialpad/dialtone/commit/65090e6dc215084677e05fa50eb1ba0de72c61d8))
+* DLT-3049 add code review rules, skill, agent, and command ([#1154](https://github.com/dialpad/dialtone/issues/1154)) ([6bdef46](https://github.com/dialpad/dialtone/commit/6bdef465e50017369a5d94bbcde8b3c077eb5777))
+* **Icons:** DLT-3219 align star/sparkle icons with dp brand star ([#1152](https://github.com/dialpad/dialtone/issues/1152)) ([ef39afc](https://github.com/dialpad/dialtone/commit/ef39afc90c1d77330c121b3a010b7b0b959beddb))
+
+## [9.175.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.175.1...dialtone/v9.175.2) (2026-03-24)
+
+
+### Bug Fixes
+
+* **Input:** DP-180970 ime composition bug ([#1146](https://github.com/dialpad/dialtone/issues/1146)) ([af6afdd](https://github.com/dialpad/dialtone/commit/af6afddfa04a13bf63885972797bece8815e2a5d))
+
+## [9.175.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.175.0...dialtone/v9.175.1) (2026-03-20)
+
+
+### Bug Fixes
+
+* **Input:** revert DP-173960 handle composition events ([#1082](https://github.com/dialpad/dialtone/issues/1082)) ([ba81d87](https://github.com/dialpad/dialtone/commit/ba81d87b1a2e64672aab5d22d2b8f4e3774994b2))
+
+# [9.175.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.174.1...dialtone/v9.175.0) (2026-03-20)
+
+
+### Features
+
+* **Editor:** DP-181154 replacing 0 width tables with full width ([#1145](https://github.com/dialpad/dialtone/issues/1145)) ([6aa8a1d](https://github.com/dialpad/dialtone/commit/6aa8a1d0a06531a5abf2691138b331c2d241702e))
+
+## [9.174.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.174.0...dialtone/v9.174.1) (2026-03-19)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** DP-180791 cursor position ([#1141](https://github.com/dialpad/dialtone/issues/1141)) ([bbf4cd1](https://github.com/dialpad/dialtone/commit/bbf4cd11c91a7e06f40f3bb9fea23171f52e4945))
+
+# [9.174.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.173.0...dialtone/v9.174.0) (2026-03-19)
+
+
+### Bug Fixes
+
+* **Deprecated Component:** NO-JIRA fix deprecated component regex ([#1140](https://github.com/dialpad/dialtone/issues/1140)) ([6d1a76f](https://github.com/dialpad/dialtone/commit/6d1a76fc672335eac2172e9a1323f9752c22db07))
+* **Editor:** NO-JIRA empty div issue with nested block elements ([#1121](https://github.com/dialpad/dialtone/issues/1121)) ([a9bb763](https://github.com/dialpad/dialtone/commit/a9bb763285440a7c8352767eee6980c1b44b0942))
+* **Workflow:** SEC-2156 claude-review ([#1138](https://github.com/dialpad/dialtone/issues/1138)) ([d8483ba](https://github.com/dialpad/dialtone/commit/d8483bad8d99dc962558be00aa3b15e82bfd0b3e))
+
+
+### Features
+
+* **Dialtone Docs:** DDT-1622 add AI documentation package — content, validation, and templates ([#1051](https://github.com/dialpad/dialtone/issues/1051)) ([633c331](https://github.com/dialpad/dialtone/commit/633c331cb2d2e45a7010721b9d2834ea8bd19654))
+* DLT-3144 support truncation within message input bottom btns ([#1134](https://github.com/dialpad/dialtone/issues/1134)) ([22175f5](https://github.com/dialpad/dialtone/commit/22175f59d8b6e270f30992a31cd8604aaeed4984))
+
+# [9.173.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.172.0...dialtone/v9.173.0) (2026-03-17)
+
+
+### Bug Fixes
+
+* **Docs:** NO-JIRA fix dt-select-menu value on modal docs page ([#1132](https://github.com/dialpad/dialtone/issues/1132)) ([1be6fe0](https://github.com/dialpad/dialtone/commit/1be6fe025b7aab5c388c05c327772944f9f73240))
+
+
+### Features
+
+* **Editor:** DP-175912 extend table extension for table styling ([#1130](https://github.com/dialpad/dialtone/issues/1130)) ([b3793e7](https://github.com/dialpad/dialtone/commit/b3793e7976baba98ca84ada303c87e8e0935c1de))
+* **Loader:** DLT-2963 add track to loader ([#1133](https://github.com/dialpad/dialtone/issues/1133)) ([48a7a52](https://github.com/dialpad/dialtone/commit/48a7a527432f5e450d6dd9b12b4d64f8ef86bd2c))
+
+# [9.172.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.171.1...dialtone/v9.172.0) (2026-03-17)
+
+
+### Features
+
+* **Icon:** DLT-3136 convert docs inline svgs to components ([#1123](https://github.com/dialpad/dialtone/issues/1123)) ([8bae326](https://github.com/dialpad/dialtone/commit/8bae326eda78aaee3632464068113a748d6c3e69))
+
+## [9.171.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.171.0...dialtone/v9.171.1) (2026-03-12)
+
+
+### Bug Fixes
+
+* **Editor:** DP-179668 some toolbar buttons not returning focus to editor ([#1117](https://github.com/dialpad/dialtone/issues/1117)) ([67a2a64](https://github.com/dialpad/dialtone/commit/67a2a64a0ca8a8cdd5b291f4f756ca6d348f006c))
+* **Popover:** DP-175009 revert visibility CSS that caused tippy-box click stealing ([#1119](https://github.com/dialpad/dialtone/issues/1119)) ([82ffcb6](https://github.com/dialpad/dialtone/commit/82ffcb64c3dbd4d80a170385cdcc4aa4b5218a83))
+
+# [9.171.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.170.0...dialtone/v9.171.0) (2026-03-10)
+
+
+### Documentation
+
+* DLT-3087 improve SEO meta tags, OG, canonical, robots.txt ([#1114](https://github.com/dialpad/dialtone/issues/1114)) ([16730b5](https://github.com/dialpad/dialtone/commit/16730b5778865aab4a3833322fa83347ba52c1f4))
+
+
+### Features
+
+* **Editor:** NO-JIRA add preserveWhitespace prop ([#1115](https://github.com/dialpad/dialtone/issues/1115)) ([aad7f29](https://github.com/dialpad/dialtone/commit/aad7f299d88dd72effdd958248b2d58a1aca4e60))
+
+# [9.170.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.169.0...dialtone/v9.170.0) (2026-03-09)
+
+
+### Features
+
+* **Hovercard:** DP-175404 expose functions to control hide/show ([#1113](https://github.com/dialpad/dialtone/issues/1113)) ([03c5524](https://github.com/dialpad/dialtone/commit/03c552453cb79318f2aaa9282764025a0e7af21b))
+
+# [9.169.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.168.0...dialtone/v9.169.0) (2026-03-09)
+
+
+### Bug Fixes
+
+* **Editor:** NO-JIRA fixed shadow dom issues with editor ([#1107](https://github.com/dialpad/dialtone/issues/1107)) ([82f8c72](https://github.com/dialpad/dialtone/commit/82f8c72e915ba2fec1209f1de9f5b9eb34165217))
+
+
+### Features
+
+* **Button:** DLT-3086 update loading state to use dt-loader component ([#1111](https://github.com/dialpad/dialtone/issues/1111)) ([621c49a](https://github.com/dialpad/dialtone/commit/621c49a451dd653ad24bb4641f5cff36501670e3))
+
+# [9.168.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.167.0...dialtone/v9.168.0) (2026-03-07)
+
+
+### Features
+
+* **Popover,hovercard:** DP-175404 support externalAnchorElement ([#1108](https://github.com/dialpad/dialtone/issues/1108)) ([bc23ca8](https://github.com/dialpad/dialtone/commit/bc23ca84adbbc05f33cc9b591d27d826886e5244))
+
+# [9.167.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.166.0...dialtone/v9.167.0) (2026-03-06)
+
+
+### Bug Fixes
+
+* **Combobox:** DLT-3057 combobox errors when hovering over dt-dropdown-separator ([#1097](https://github.com/dialpad/dialtone/issues/1097)) ([4798e0e](https://github.com/dialpad/dialtone/commit/4798e0eaf24d9ce1043257f922f0d4563f193c1c))
+* **Tooltip:** NO-JIRA add Shadow DOM support for DtTooltipDirective ([#1100](https://github.com/dialpad/dialtone/issues/1100)) ([121ffa2](https://github.com/dialpad/dialtone/commit/121ffa2b6269e1a79e80517f4e77f19104cb4e0c))
+
+
+### Code Refactoring
+
+* **Progress Circle:** NO-JIRA update ai gradient with css variables and fewer stops ([#1105](https://github.com/dialpad/dialtone/issues/1105)) ([8dd19ea](https://github.com/dialpad/dialtone/commit/8dd19ead3a1a969bc39e5a7582e4da7dd175a820))
+
+
+### Features
+
+* **Editor:** NO-JIRA added props allowBackgroundColor & allowLineHeight ([#1103](https://github.com/dialpad/dialtone/issues/1103)) ([7c90308](https://github.com/dialpad/dialtone/commit/7c90308dad6576accd241152cb8ea2a8a7e00d62))
+* **Loader,progress Circle:** NO-JIRA polish DtProgressCircle visual and align DtLoader visual with DtProgressCircle ([#1102](https://github.com/dialpad/dialtone/issues/1102)) ([7b9e9b6](https://github.com/dialpad/dialtone/commit/7b9e9b6d699515805bec979c7ffdf5b5f737b316))
+* **Progress Circle:** DLT-2983 add progress-circle component ([#1098](https://github.com/dialpad/dialtone/issues/1098)) ([c0f0e40](https://github.com/dialpad/dialtone/commit/c0f0e403acfd76d8db7dbe002862330d71571d5f))
+
+
+### Reverts
+
+* NO-JIRA revert progress circle polish commits for re-PR ([#1101](https://github.com/dialpad/dialtone/issues/1101)) ([a212c41](https://github.com/dialpad/dialtone/commit/a212c41e5c857ebabfacc9670e7a7054dcd9c6de))
+
+
+# [10.0.0-next.6](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.5...dialtone/v10.0.0-next.6) (2026-07-22)
+
+
+### Bug Fixes
+
+* **Dialtone Documentation:** DLT-3541 build current assets before thumbnail generation ([#1367](https://github.com/dialpad/dialtone/issues/1367)) ([11dbd9b](https://github.com/dialpad/dialtone/commit/11dbd9bdc2b875d101bfba51dedbebd6fa93597a))
+
+
+### Code Refactoring
+
+* **Dialtone Vue,dialtone Css:** DLT-3536 clean up remaining legacy prop migration references ([#1374](https://github.com/dialpad/dialtone/issues/1374)) ([0629638](https://github.com/dialpad/dialtone/commit/062963833663ebefcf04799b983cb43efa7d3748))
+* **Dialtone Vue,dialtone Css:** DLT-3537 remove recipes ([#1371](https://github.com/dialpad/dialtone/issues/1371)) ([8611a05](https://github.com/dialpad/dialtone/commit/8611a0513141b3bfc9717124de56cb5107f61a97))
+* **Documentation:** NO-JIRA merge the before/after switch into the comparison mode control ([#1369](https://github.com/dialpad/dialtone/issues/1369)) ([3cd614f](https://github.com/dialpad/dialtone/commit/3cd614f016f2a567065a6cb64c484261378e50d2))
+
+
+### Features
+
+* **Dialtone Tokens, Dialtone Css:** DLT-3551 add focus ring variants ([#1375](https://github.com/dialpad/dialtone/issues/1375)) ([bc78543](https://github.com/dialpad/dialtone/commit/bc7854353500ac56c75f486857ac6a9631b24dc6))
+
+# [10.0.0-next.5](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.4...dialtone/v10.0.0-next.5) (2026-07-15)
+
+
+### Bug Fixes
+
+* **Dialtone Tokens:** DLT-3538 quote "other"-type token values for iOS output ([#1370](https://github.com/dialpad/dialtone/issues/1370)) ([2e18d6f](https://github.com/dialpad/dialtone/commit/2e18d6f071a5d02b583abe33696483d4eb4af6da))
+
+# [10.0.0-next.4](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.3...dialtone/v10.0.0-next.4) (2026-07-15)
+
+
+### Bug Fixes
+
+* **Dialtone Tokens:** NO-JIRA add missing zero-width layout design token ([955c5f9](https://github.com/dialpad/dialtone/commit/955c5f9719a28face525300c21b20ef5275e6e51))
+
+
+### Features
+
+* **Migrate:** DLT-3539 add --package option for custom package name ([#1368](https://github.com/dialpad/dialtone/issues/1368)) ([6879530](https://github.com/dialpad/dialtone/commit/68795307184d7a727098dba410e292c79b741334))
+
+# [10.0.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.2...dialtone/v10.0.0-next.3) (2026-07-14)
+
+
+### Bug Fixes
+
+* **Combobox:** DLT-3520 prevent list element error during popover transition ([#1351](https://github.com/dialpad/dialtone/issues/1351)) ([aeda99d](https://github.com/dialpad/dialtone/commit/aeda99d48379551bb3975abcea00b6ddd374fe81))
+* **Dt Popover:** DLT-3519 added boundary prop ([#1348](https://github.com/dialpad/dialtone/issues/1348)) ([6ef6957](https://github.com/dialpad/dialtone/commit/6ef6957516aceb471fc531a7b8a9137cec3a8d9a))
+* **Editor:** DP-194072 tiptap warning duplicate extension names found ['textStyle'] ([#1346](https://github.com/dialpad/dialtone/issues/1346)) ([4ac8871](https://github.com/dialpad/dialtone/commit/4ac8871d2843d48d945edcb8bc64dfe1c4fc36fb))
+* **Localization:** DLT-3522 use unsupported locale in fallback tests ([#1356](https://github.com/dialpad/dialtone/issues/1356)) ([e1cd4db](https://github.com/dialpad/dialtone/commit/e1cd4dbb24087a3778ce00acd567d6e15860a4c8))
+* **Localization:** UC-27003 fall back to a supported locale instead of crashing ([#1350](https://github.com/dialpad/dialtone/issues/1350)) ([17d93a3](https://github.com/dialpad/dialtone/commit/17d93a3970de5f293b78a5aedf951f79db3edc1c))
+* **Scrollbar:** DLT-3494 register --os-scroll-percent globally for shadow DOM support ([#1359](https://github.com/dialpad/dialtone/issues/1359)) ([346b2dc](https://github.com/dialpad/dialtone/commit/346b2dc4855fd22db4b1b88e33416d8a3e47913a))
+
+
+### Documentation
+
+* NO-JIRA regenerate component preview images ([dc08180](https://github.com/dialpad/dialtone/commit/dc081805db45ffb6e531043cc50032de0e78c7c9))
+
+
+### Features
+
+* **Icons:** DP-192348 add compass icons ([#1354](https://github.com/dialpad/dialtone/issues/1354)) ([92a547a](https://github.com/dialpad/dialtone/commit/92a547a569277bb1863c80be3238a6944a33cc70))
+* **Localization:** DLT-3522 add ko-KR and sv-SE as supported locales ([#1352](https://github.com/dialpad/dialtone/issues/1352)) ([566d55d](https://github.com/dialpad/dialtone/commit/566d55d089d138e38635dc6e85e9f448c97b2425))
+* NO-JIRA add dot export to dialtone package ([#1366](https://github.com/dialpad/dialtone/issues/1366)) ([86c1bbc](https://github.com/dialpad/dialtone/commit/86c1bbc2c123d2d2e51e3ce42b98df97a454525d))
+
+# [10.0.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.1...dialtone/v10.0.0-next.2) (2026-07-13)
+
+
+### Bug Fixes
+
+* **Avatar:** DLT-3540 suppress bgc when image is present ([31cdd3c](https://github.com/dialpad/dialtone/commit/31cdd3c5e02262d58715fef0d926a63314d65037))
+* **Dialtone Tokens:** NO-JIRA publish swift prerelease tokens to main instead of a separate branch ([8d9f690](https://github.com/dialpad/dialtone/commit/8d9f690556f1555e40bf405cc0a5f73a13ba1d24))
+
+
+### Documentation
+
+* **Combinator:** DLT-3146 add docs and component variants guidance ([#1344](https://github.com/dialpad/dialtone/issues/1344)) ([42825ec](https://github.com/dialpad/dialtone/commit/42825ec87957cacbd7e73a620bf268503d0f46a3))
+* **Migration Guide:** DLT-3469 visual migration guide ([#1358](https://github.com/dialpad/dialtone/issues/1358)) ([cc3a6b5](https://github.com/dialpad/dialtone/commit/cc3a6b5d95922dfcac1c26b34ca5166d52945e64))
+
+
+### Features
+
+* **Box:** DLT-3523 add positioning props to DtBox ([#1355](https://github.com/dialpad/dialtone/issues/1355)) ([68a6570](https://github.com/dialpad/dialtone/commit/68a65701a8d3ae9c09341d0c80007b7fa8a69441))
+* **Dialtone Tokens:** NO-JIRA add no-layers CSS build and initDialtoneTheme layers option ([#1364](https://github.com/dialpad/dialtone/issues/1364)) ([c2b6839](https://github.com/dialpad/dialtone/commit/c2b6839d8c7c14dfabdada747f1968ddbcee59a8))
+* DLT-3534 align size prop types across components and modal fullscreen ([#1362](https://github.com/dialpad/dialtone/issues/1362)) ([8fb88a1](https://github.com/dialpad/dialtone/commit/8fb88a19400f110e4b36fce8018b27b15bf05d1e))
+* **Link:** DLT-3529 add unstyled variant ([#1360](https://github.com/dialpad/dialtone/issues/1360)) ([b90c2cc](https://github.com/dialpad/dialtone/commit/b90c2ccdfdf014b3157c4f7e3b8b1c8bfe4f8738))
+* **Text List:** DLT-3530 add DtTextList component ([#1363](https://github.com/dialpad/dialtone/issues/1363)) ([9c9fc0d](https://github.com/dialpad/dialtone/commit/9c9fc0d57d6339075982cb6320827c5737fb0696))
+
+# [10.0.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.188.0-next.4...dialtone/v10.0.0-next.1) (2026-07-03)
+
+
+### Bug Fixes
+
+* **Dialtone Cli:** NO-JIRA wire into release and publish pipelines ([#1321](https://github.com/dialpad/dialtone/issues/1321)) ([84d9c3c](https://github.com/dialpad/dialtone/commit/84d9c3caa6f4f6e1c1eb5258f5e9c7a39ddd518d))
+* **Eslint Plugin Dialtone:** NO-JIRA declare eslint-plugin-n devDependency lost to pnpm 11 hoisting change ([2998ec7](https://github.com/dialpad/dialtone/commit/2998ec7385604ad78fc1686349d29515e3b1b97a))
+* **Modal:** DLT-3476 do not close when drag starts inside dialog and ends on backdrop ([#1322](https://github.com/dialpad/dialtone/issues/1322)) ([4d5726b](https://github.com/dialpad/dialtone/commit/4d5726b0ffd903c4bf7987820e90bc33c01f4f1f))
+* **Popover:** NO-JIRA guard onShow against window access after component unmount ([#1320](https://github.com/dialpad/dialtone/issues/1320)) ([4690585](https://github.com/dialpad/dialtone/commit/4690585c4e5c39d7099969552796c7b9817de5ae))
+* **Rich Text Editor:** DP-190440 strip trailing <br> before </p> on paste ([#1326](https://github.com/dialpad/dialtone/issues/1326)) ([28737c0](https://github.com/dialpad/dialtone/commit/28737c0066cf600eb4ebfffd512056c250de7599))
+* **Scripts:** NO-JIRA improve theme-to-mode migration script ([#1338](https://github.com/dialpad/dialtone/issues/1338)) ([59f220f](https://github.com/dialpad/dialtone/commit/59f220f9866ece44b3d4207f0a6f2ff25a65ba61))
+
+
+### Documentation
+
+* **Content:** DLT-3501 refresh content guidance IA ([#1345](https://github.com/dialpad/dialtone/issues/1345)) ([4085112](https://github.com/dialpad/dialtone/commit/40851126b3fd265bbe0a76847aeab33bfbea3d3f))
+* **Content:** DLT-3502 create writing approach guidance ([#1347](https://github.com/dialpad/dialtone/issues/1347)) ([a0c540d](https://github.com/dialpad/dialtone/commit/a0c540df098094c76742777223e49b171308c62e))
+
+
+### Features
+
+* **Combinator:** DLT-3479 add combinator grid view ([#1337](https://github.com/dialpad/dialtone/issues/1337)) ([b1f5599](https://github.com/dialpad/dialtone/commit/b1f559971b24b25081df33ff1b9c761ad5506ddc))
+* **Combinator:** DLT-3489 DLT-3490 DLT-3491 refine control panel ui ([#1343](https://github.com/dialpad/dialtone/issues/1343)) ([0385c2f](https://github.com/dialpad/dialtone/commit/0385c2f4a3945b176b55322932aaa68c03fc0848))
+* **Dialtone Tokens:** NO-JIRA publish swift prerelease tokens on next ([#1353](https://github.com/dialpad/dialtone/issues/1353)) ([294e1f0](https://github.com/dialpad/dialtone/commit/294e1f02b050a65db97dbcdcdd3ab87c59c4573f))
+* **Text:** DLT-3487 expose full typography size scale ([#1334](https://github.com/dialpad/dialtone/issues/1334)) ([0c8f4c6](https://github.com/dialpad/dialtone/commit/0c8f4c627bc51e5b53e0bde72c832361e38a6137))
+
+
+### BREAKING CHANGES
+
+* **Dialtone Tokens:** Dialtone version 10
+
+## [9.187.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.187.1...dialtone/v9.187.2) (2026-06-16)
+
+
+### Bug Fixes
+
+* **Dialtone Cli:** NO-JIRA wire into release and publish pipelines ([#1321](https://github.com/dialpad/dialtone/issues/1321)) ([84d9c3c](https://github.com/dialpad/dialtone/commit/84d9c3caa6f4f6e1c1eb5258f5e9c7a39ddd518d))
+* **Modal:** DLT-3476 do not close when drag starts inside dialog and ends on backdrop ([#1322](https://github.com/dialpad/dialtone/issues/1322)) ([4d5726b](https://github.com/dialpad/dialtone/commit/4d5726b0ffd903c4bf7987820e90bc33c01f4f1f))
+* **Popover:** NO-JIRA guard onShow against window access after component unmount ([#1320](https://github.com/dialpad/dialtone/issues/1320)) ([4690585](https://github.com/dialpad/dialtone/commit/4690585c4e5c39d7099969552796c7b9817de5ae))
+* **Rich Text Editor:** DP-190440 strip trailing <br> before </p> on paste ([#1326](https://github.com/dialpad/dialtone/issues/1326)) ([28737c0](https://github.com/dialpad/dialtone/commit/28737c0066cf600eb4ebfffd512056c250de7599))
+
+## [9.187.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.187.0...dialtone/v9.187.1) (2026-06-10)
+
+
+### Bug Fixes
+
+* **Docs:** NO-JIRA actually static render the docs ([#1319](https://github.com/dialpad/dialtone/issues/1319)) ([0107a8e](https://github.com/dialpad/dialtone/commit/0107a8ebb20dce64efe0c29f883300bce08bc56a))
+
+# [9.187.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.186.0...dialtone/v9.187.0) (2026-06-08)
+
+
+### Features
+
+* **Icons:** DLT-3460 DLT-3461 hand icon update ([#1315](https://github.com/dialpad/dialtone/issues/1315)) ([83ad138](https://github.com/dialpad/dialtone/commit/83ad138665f38e06411fce9ee27585fceb677a2b))
+* **Icons:** DP-192459 add circle and circle-dashed icons ([#1305](https://github.com/dialpad/dialtone/issues/1305)) ([8c41212](https://github.com/dialpad/dialtone/commit/8c41212d49dc1bc7fba2cfc51ffc01ab3896b619))
+* **Rich Text Editor:** DP-190415 implement phone number linking ([#1297](https://github.com/dialpad/dialtone/issues/1297)) ([20a4fcc](https://github.com/dialpad/dialtone/commit/20a4fcc3644ecbe5f2036a4f04953be95c5022b2))
+
+# [9.186.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.185.0...dialtone/v9.186.0) (2026-06-02)
+
+
+### Features
+
+* **Dialtone Icons:** NO-JIRA add /vue export to dialtone-icon ([#1304](https://github.com/dialpad/dialtone/issues/1304)) ([f7ca6d4](https://github.com/dialpad/dialtone/commit/f7ca6d438cc7c644d7e95bc963bd303ea2259b4d))
+
+# [9.185.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.184.0...dialtone/v9.185.0) (2026-05-26)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** DLT-3409 stop input from shrinking when chips are added ([#1257](https://github.com/dialpad/dialtone/issues/1257)) ([7f54cff](https://github.com/dialpad/dialtone/commit/7f54cffe7937c7200ccfdb79cf4ee621c0927315))
+* **Modal:** DLT-3442 fix focus snapping back to first button on click ([#1276](https://github.com/dialpad/dialtone/issues/1276)) ([37ec398](https://github.com/dialpad/dialtone/commit/37ec398fb671ee1d22dccea78158d405d4558047))
+
+
+### Features
+
+* **Mcp Server, Query Core, Dialtone Docs, Dialtone Cli:** DLT-3416 add search_documentation tool ([#1259](https://github.com/dialpad/dialtone/issues/1259)) ([ef1d5a8](https://github.com/dialpad/dialtone/commit/ef1d5a897df670200c8a7f0c34ed47c430e3ed35))
+
+# [9.184.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.183.0...dialtone/v9.184.0) (2026-05-19)
+
+
+### Features
+
+* **Combobox Multi Select:** DLT-3366 forward input-level escape, enter, keydown events ([#1253](https://github.com/dialpad/dialtone/issues/1253)) ([a635301](https://github.com/dialpad/dialtone/commit/a635301168a096fe9b741d5f5a74925874237024))
+* **Dialtone Icons:** NO-JIRA add agent-assist-color brand-full-color icon ([#1265](https://github.com/dialpad/dialtone/issues/1265)) ([d159d78](https://github.com/dialpad/dialtone/commit/d159d7842e5f5f8b21b6ed314cb9b7f1e4c206b7))
+* **Eslint Plugin:** DLT-3281 add deprecated-class-props rule ([#1258](https://github.com/dialpad/dialtone/issues/1258)) ([3c5925e](https://github.com/dialpad/dialtone/commit/3c5925e38f340ddae01ebd59079b185a49f81304))
+
+# [9.183.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.182.3...dialtone/v9.183.0) (2026-05-12)
+
+
+### Features
+
+* **Combobox With Popover, Combobox Multi Select:** DLT-3395 forward dialogClass to popover dialog ([#1254](https://github.com/dialpad/dialtone/issues/1254)) ([0059451](https://github.com/dialpad/dialtone/commit/0059451c0ce901cd47eb1498d8dfc28e5282a73c))
+
+## [9.182.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.182.2...dialtone/v9.182.3) (2026-05-05)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA fix bubble menu not displaying ([d2c097f](https://github.com/dialpad/dialtone/commit/d2c097f94087dfad967fe7022fad784999a1969b))
+
+## [9.182.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.182.1...dialtone/v9.182.2) (2026-05-05)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA fix bubble menu error ([df37b06](https://github.com/dialpad/dialtone/commit/df37b06af1339026d0c6b7d1da55b13169bdf6bd))
+
+
+### Documentation
+
+* **Tabs, Skeleton, Rich Text Editor, Emoji, Avatar:** DLT-3347 update doc page code examples ([#1221](https://github.com/dialpad/dialtone/issues/1221)) ([c80061f](https://github.com/dialpad/dialtone/commit/c80061f922b868a20c82987644414766ebe3f086))
+
+
+## [9.188.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.188.0...dialtone/v9.188.1) (2026-07-08)
+
+
+### Bug Fixes
+
+* **Scrollbar:** DLT-3494 register --os-scroll-percent globally for shadow DOM support ([#1359](https://github.com/dialpad/dialtone/issues/1359)) ([346b2dc](https://github.com/dialpad/dialtone/commit/346b2dc4855fd22db4b1b88e33416d8a3e47913a))
+
+# [9.188.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.187.3...dialtone/v9.188.0) (2026-07-07)
+
+
+### Bug Fixes
+
+* **Combobox:** DLT-3520 prevent list element error during popover transition ([#1351](https://github.com/dialpad/dialtone/issues/1351)) ([aeda99d](https://github.com/dialpad/dialtone/commit/aeda99d48379551bb3975abcea00b6ddd374fe81))
+* **Localization:** DLT-3522 use unsupported locale in fallback tests ([#1356](https://github.com/dialpad/dialtone/issues/1356)) ([e1cd4db](https://github.com/dialpad/dialtone/commit/e1cd4dbb24087a3778ce00acd567d6e15860a4c8))
+* **Localization:** UC-27003 fall back to a supported locale instead of crashing ([#1350](https://github.com/dialpad/dialtone/issues/1350)) ([17d93a3](https://github.com/dialpad/dialtone/commit/17d93a3970de5f293b78a5aedf951f79db3edc1c))
+
+
+### Features
+
+* **Icons:** DP-192348 add compass icons ([#1354](https://github.com/dialpad/dialtone/issues/1354)) ([92a547a](https://github.com/dialpad/dialtone/commit/92a547a569277bb1863c80be3238a6944a33cc70))
+* **Localization:** DLT-3522 add ko-KR and sv-SE as supported locales ([#1352](https://github.com/dialpad/dialtone/issues/1352)) ([566d55d](https://github.com/dialpad/dialtone/commit/566d55d089d138e38635dc6e85e9f448c97b2425))
+
+## [9.187.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.187.2...dialtone/v9.187.3) (2026-07-03)
+
+
+### Bug Fixes
+
+* **Dt Popover:** DLT-3519 added boundary prop ([#1348](https://github.com/dialpad/dialtone/issues/1348)) ([6ef6957](https://github.com/dialpad/dialtone/commit/6ef6957516aceb471fc531a7b8a9137cec3a8d9a))
+* **Editor:** DP-194072 tiptap warning duplicate extension names found ['textStyle'] ([#1346](https://github.com/dialpad/dialtone/issues/1346)) ([4ac8871](https://github.com/dialpad/dialtone/commit/4ac8871d2843d48d945edcb8bc64dfe1c4fc36fb))
+
+## [9.187.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.187.1...dialtone/v9.187.2) (2026-06-16)
+
+
+### Bug Fixes
+
+* **Dialtone Cli:** NO-JIRA wire into release and publish pipelines ([#1321](https://github.com/dialpad/dialtone/issues/1321)) ([84d9c3c](https://github.com/dialpad/dialtone/commit/84d9c3caa6f4f6e1c1eb5258f5e9c7a39ddd518d))
+* **Modal:** DLT-3476 do not close when drag starts inside dialog and ends on backdrop ([#1322](https://github.com/dialpad/dialtone/issues/1322)) ([4d5726b](https://github.com/dialpad/dialtone/commit/4d5726b0ffd903c4bf7987820e90bc33c01f4f1f))
+* **Popover:** NO-JIRA guard onShow against window access after component unmount ([#1320](https://github.com/dialpad/dialtone/issues/1320)) ([4690585](https://github.com/dialpad/dialtone/commit/4690585c4e5c39d7099969552796c7b9817de5ae))
+* **Rich Text Editor:** DP-190440 strip trailing <br> before </p> on paste ([#1326](https://github.com/dialpad/dialtone/issues/1326)) ([28737c0](https://github.com/dialpad/dialtone/commit/28737c0066cf600eb4ebfffd512056c250de7599))
+
+## [9.187.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.187.0...dialtone/v9.187.1) (2026-06-10)
+
+
+### Bug Fixes
+
+* **Docs:** NO-JIRA actually static render the docs ([#1319](https://github.com/dialpad/dialtone/issues/1319)) ([0107a8e](https://github.com/dialpad/dialtone/commit/0107a8ebb20dce64efe0c29f883300bce08bc56a))
+
+# [9.187.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.186.0...dialtone/v9.187.0) (2026-06-08)
+
+
+### Features
+
+* **Icons:** DLT-3460 DLT-3461 hand icon update ([#1315](https://github.com/dialpad/dialtone/issues/1315)) ([83ad138](https://github.com/dialpad/dialtone/commit/83ad138665f38e06411fce9ee27585fceb677a2b))
+* **Icons:** DP-192459 add circle and circle-dashed icons ([#1305](https://github.com/dialpad/dialtone/issues/1305)) ([8c41212](https://github.com/dialpad/dialtone/commit/8c41212d49dc1bc7fba2cfc51ffc01ab3896b619))
+* **Rich Text Editor:** DP-190415 implement phone number linking ([#1297](https://github.com/dialpad/dialtone/issues/1297)) ([20a4fcc](https://github.com/dialpad/dialtone/commit/20a4fcc3644ecbe5f2036a4f04953be95c5022b2))
+
+# [9.186.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.185.0...dialtone/v9.186.0) (2026-06-02)
+
+
+### Features
+
+* **Dialtone Icons:** NO-JIRA add /vue export to dialtone-icon ([#1304](https://github.com/dialpad/dialtone/issues/1304)) ([f7ca6d4](https://github.com/dialpad/dialtone/commit/f7ca6d438cc7c644d7e95bc963bd303ea2259b4d))
+
+# [9.185.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.184.0...dialtone/v9.185.0) (2026-05-26)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** DLT-3409 stop input from shrinking when chips are added ([#1257](https://github.com/dialpad/dialtone/issues/1257)) ([7f54cff](https://github.com/dialpad/dialtone/commit/7f54cffe7937c7200ccfdb79cf4ee621c0927315))
+* **Modal:** DLT-3442 fix focus snapping back to first button on click ([#1276](https://github.com/dialpad/dialtone/issues/1276)) ([37ec398](https://github.com/dialpad/dialtone/commit/37ec398fb671ee1d22dccea78158d405d4558047))
+
+
+### Features
+
+* **Mcp Server, Query Core, Dialtone Docs, Dialtone Cli:** DLT-3416 add search_documentation tool ([#1259](https://github.com/dialpad/dialtone/issues/1259)) ([ef1d5a8](https://github.com/dialpad/dialtone/commit/ef1d5a897df670200c8a7f0c34ed47c430e3ed35))
+
+# [9.184.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.183.0...dialtone/v9.184.0) (2026-05-19)
+
+
+### Features
+
+* **Combobox Multi Select:** DLT-3366 forward input-level escape, enter, keydown events ([#1253](https://github.com/dialpad/dialtone/issues/1253)) ([a635301](https://github.com/dialpad/dialtone/commit/a635301168a096fe9b741d5f5a74925874237024))
+* **Dialtone Icons:** NO-JIRA add agent-assist-color brand-full-color icon ([#1265](https://github.com/dialpad/dialtone/issues/1265)) ([d159d78](https://github.com/dialpad/dialtone/commit/d159d7842e5f5f8b21b6ed314cb9b7f1e4c206b7))
+* **Eslint Plugin:** DLT-3281 add deprecated-class-props rule ([#1258](https://github.com/dialpad/dialtone/issues/1258)) ([3c5925e](https://github.com/dialpad/dialtone/commit/3c5925e38f340ddae01ebd59079b185a49f81304))
+
+# [9.183.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.182.3...dialtone/v9.183.0) (2026-05-12)
+
+
+### Features
+
+* **Combobox With Popover, Combobox Multi Select:** DLT-3395 forward dialogClass to popover dialog ([#1254](https://github.com/dialpad/dialtone/issues/1254)) ([0059451](https://github.com/dialpad/dialtone/commit/0059451c0ce901cd47eb1498d8dfc28e5282a73c))
+
+## [9.182.3](https://github.com/dialpad/dialtone/compare/dialtone/v9.182.2...dialtone/v9.182.3) (2026-05-05)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA fix bubble menu not displaying ([d2c097f](https://github.com/dialpad/dialtone/commit/d2c097f94087dfad967fe7022fad784999a1969b))
+
+## [9.182.2](https://github.com/dialpad/dialtone/compare/dialtone/v9.182.1...dialtone/v9.182.2) (2026-05-05)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** NO-JIRA fix bubble menu error ([df37b06](https://github.com/dialpad/dialtone/commit/df37b06af1339026d0c6b7d1da55b13169bdf6bd))
+
+
+### Documentation
+
+* **Tabs, Skeleton, Rich Text Editor, Emoji, Avatar:** DLT-3347 update doc page code examples ([#1221](https://github.com/dialpad/dialtone/issues/1221)) ([c80061f](https://github.com/dialpad/dialtone/commit/c80061f922b868a20c82987644414766ebe3f086))
+
 
 ## [9.182.1](https://github.com/dialpad/dialtone/compare/dialtone/v9.182.0...dialtone/v9.182.1) (2026-05-01)
 

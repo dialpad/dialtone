@@ -1030,7 +1030,7 @@ async function processFile(filePath, options) {
 
     // Auto-inject DtStack import before writing; fall back to manual instructions if needed.
     // Skipped entirely when --no-import is set (e.g. DtStack is globally registered).
-    const importCheck = options.noImport ? null : detectMissingStackImport(newContent, changes > 0);
+    const importCheck = options.noImport ? null : detectMissingStackImport(newContent, changes > 0, options.package);
     let finalContent = newContent;
     if (importCheck?.needsImport) {
       const injected = injectComponentImport(newContent, 'DtStack', importCheck.suggestedPath);
@@ -1102,9 +1102,10 @@ async function cleanupMarkers(filePath, options) {
  * Check if a file needs DtStack import
  * @param {string} content - Full file content
  * @param {boolean} usesStack - Whether file has <dt-stack> in template
+ * @param {string} [packageName] - Explicit package to import from (overrides detection)
  * @returns {object|null} - Detection result with suggested import path, or null if import exists
  */
-function detectMissingStackImport(content, usesStack) {
+function detectMissingStackImport(content, usesStack, packageName) {
   if (!usesStack) return null;
 
   // Check if DtStack is already imported
@@ -1112,7 +1113,7 @@ function detectMissingStackImport(content, usesStack) {
   if (hasImport) return null;
 
   // Analyze existing imports to suggest appropriate path
-  const importPath = detectImportPattern(content);
+  const importPath = detectImportPattern(content, packageName);
 
   return {
     needsImport: true,
@@ -1124,9 +1125,17 @@ function detectMissingStackImport(content, usesStack) {
 /**
  * Detect import pattern from existing imports in file
  * @param {string} content - File content
+ * @param {string} [packageName] - Explicit package name (e.g. @dialpad/dialtone-next).
+ *   When provided, it is used verbatim, overriding the heuristics below. This lets
+ *   consumers running Dialtone under a custom package alias inject the correct import.
  * @returns {string} - Suggested import path
  */
-function detectImportPattern(content) {
+function detectImportPattern(content, packageName) {
+  // Explicit override: honor the caller-provided package name.
+  if (packageName) {
+    return packageName;
+  }
+
   // Check for @/ alias (absolute from package root)
   if (content.includes('from \'@/components/')) {
     return '@/components/stack';
@@ -1257,6 +1266,7 @@ function parseArgs() {
     showOutline: false, // Add migration marker for visual debugging
     removeOutline: false, // Remove migration markers (cleanup mode)
     noImport: false, // Skip import injection (for apps that globally register DtStack)
+    package: null, // Override the package name used for injected DtStack imports
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -1285,6 +1295,9 @@ Options:
   --show-outline   Add data-migrate-outline attribute for visual debugging
   --remove-outline Remove data-migrate-outline attributes after review
   --no-import      Skip import injection (use when DtStack is globally registered)
+  --package <name> Package name for injected DtStack imports
+                   (default: @dialpad/dialtone-vue when a Dialtone import is detected).
+                   Use when Dialtone runs under a custom alias, e.g. @dialpad/dialtone-next.
   --help, -h       Show help
 
 Post-Migration Steps:
@@ -1333,6 +1346,15 @@ Examples:
       options.removeOutline = true;
     } else if (arg === '--no-import') {
       options.noImport = true;
+    } else if (arg === '--package') {
+      // Reject a missing value or one that is really the next option (e.g.
+      // `--package --yes`) so an invalid alias is never recorded.
+      const value = args[i + 1];
+      if (!value || value.startsWith('-')) {
+        console.error('\n  --package requires a package name (e.g. --package @dialpad/dialtone-next)\n');
+        process.exit(1);
+      }
+      options.package = args[++i];
     } else if (arg === '--file' && args[i + 1]) {
       const filePath = args[++i];
       options.files.push(filePath);
@@ -1430,6 +1452,7 @@ async function main() {
         showOutline: options.showOutline,
         validate: options.validate,
         noImport: options.noImport,
+        package: options.package,
       });
     }
 

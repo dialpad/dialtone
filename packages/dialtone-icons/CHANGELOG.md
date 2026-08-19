@@ -1,4 +1,11 @@
-# [4.55.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.54.0...dialtone-icons/v4.55.0-next.1) (2026-06-16)
+# [4.57.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.57.0-next.1...dialtone-icons/v4.57.0-next.2) (2026-08-13)
+
+
+### Features
+
+* **Icon:** DLT-3570 update `dialbot` and `dialpad-analytics-ai` to squircle ([#1391](https://github.com/dialpad/dialtone/issues/1391)) ([725fd81](https://github.com/dialpad/dialtone/commit/725fd8189f429e48faa3812cf99c389b800a8b9c))
+
+# [4.57.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.56.0...dialtone-icons/v4.57.0-next.1) (2026-08-10)
 
 
 ### Bug Fixes
@@ -13,18 +20,26 @@
 
 ### Features
 
+* **Combinator:** DLT-3489 DLT-3490 DLT-3491 refine control panel ui ([#1343](https://github.com/dialpad/dialtone/issues/1343)) ([0385c2f](https://github.com/dialpad/dialtone/commit/0385c2f4a3945b176b55322932aaa68c03fc0848))
 * **Dialtone Icons:** NO-JIRA add /vue export to dialtone-icon ([#1304](https://github.com/dialpad/dialtone/issues/1304)) ([081b0e9](https://github.com/dialpad/dialtone/commit/081b0e95293d7450f1cff21b285b504d95d52689))
+* DLT-3534 align size prop types across components and modal fullscreen ([#1362](https://github.com/dialpad/dialtone/issues/1362)) ([8fb88a1](https://github.com/dialpad/dialtone/commit/8fb88a19400f110e4b36fce8018b27b15bf05d1e))
 
-# [4.54.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.53.0...dialtone-icons/v4.54.0) (2026-06-08)
+# [4.56.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.55.0...dialtone-icons/v4.56.0) (2026-07-24)
 
 
 ### Features
 
-* **Icons:** DLT-3460 DLT-3461 hand icon update ([#1315](https://github.com/dialpad/dialtone/issues/1315)) ([83ad138](https://github.com/dialpad/dialtone/commit/83ad138665f38e06411fce9ee27585fceb677a2b))
-* **Icons:** DP-192459 add circle and circle-dashed icons ([#1305](https://github.com/dialpad/dialtone/issues/1305)) ([8c41212](https://github.com/dialpad/dialtone/commit/8c41212d49dc1bc7fba2cfc51ffc01ab3896b619))
+* **Icons:** DLT-3553 add fax-inbound and fax-outbound icons ([#1378](https://github.com/dialpad/dialtone/issues/1378)) ([46538f6](https://github.com/dialpad/dialtone/commit/46538f6218366beb85d84a04ee7f20a3f310204b))
 
 
-# [4.54.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.53.0...dialtone-icons/v4.54.0-next.1) (2026-06-04)
+# [4.56.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.56.0-next.1...dialtone-icons/v4.56.0-next.2) (2026-07-23)
+
+# [4.56.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.55.0...dialtone-icons/v4.56.0-next.1) (2026-07-14)
+
+
+### Bug Fixes
+
+* **Dialtone Icons:** NO-JIRA restore vue/dist export paths after staging merge ([d78b4b6](https://github.com/dialpad/dialtone/commit/d78b4b6653793bc0ea201b9cce6bb7b68c49886f))
 
 
 ### Documentation
@@ -34,9 +49,25 @@
 
 ### Features
 
+* **Combinator:** DLT-3489 DLT-3490 DLT-3491 refine control panel ui ([#1343](https://github.com/dialpad/dialtone/issues/1343)) ([0385c2f](https://github.com/dialpad/dialtone/commit/0385c2f4a3945b176b55322932aaa68c03fc0848))
 * **Dialtone Icons:** NO-JIRA add /vue export to dialtone-icon ([#1304](https://github.com/dialpad/dialtone/issues/1304)) ([081b0e9](https://github.com/dialpad/dialtone/commit/081b0e95293d7450f1cff21b285b504d95d52689))
-* **Icons:** DP-192459 add circle and circle-dashed icons ([#1305](https://github.com/dialpad/dialtone/issues/1305)) ([8c41212](https://github.com/dialpad/dialtone/commit/8c41212d49dc1bc7fba2cfc51ffc01ab3896b619))
+* DLT-3534 align size prop types across components and modal fullscreen ([#1362](https://github.com/dialpad/dialtone/issues/1362)) ([8fb88a1](https://github.com/dialpad/dialtone/commit/8fb88a19400f110e4b36fce8018b27b15bf05d1e))
 
+
+# [4.55.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.54.0...dialtone-icons/v4.55.0) (2026-07-07)
+
+
+### Features
+
+* **Icons:** DP-192348 add compass icons ([#1354](https://github.com/dialpad/dialtone/issues/1354)) ([92a547a](https://github.com/dialpad/dialtone/commit/92a547a569277bb1863c80be3238a6944a33cc70))
+
+# [4.54.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.53.0...dialtone-icons/v4.54.0) (2026-06-08)
+
+
+### Features
+
+* **Icons:** DLT-3460 DLT-3461 hand icon update ([#1315](https://github.com/dialpad/dialtone/issues/1315)) ([83ad138](https://github.com/dialpad/dialtone/commit/83ad138665f38e06411fce9ee27585fceb677a2b))
+* **Icons:** DP-192459 add circle and circle-dashed icons ([#1305](https://github.com/dialpad/dialtone/issues/1305)) ([8c41212](https://github.com/dialpad/dialtone/commit/8c41212d49dc1bc7fba2cfc51ffc01ab3896b619))
 
 # [4.53.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.52.0...dialtone-icons/v4.53.0) (2026-06-02)
 

@@ -7,8 +7,6 @@
     "directives/**/*",
     "components/**/*",
     "components/**/*.vue",
-    "recipes/**/*",
-    "recipes/**/*.vue",
     "index.js"
   ],
   "exclude": [

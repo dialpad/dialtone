@@ -14,6 +14,7 @@
 defineOptions({ name: 'DtProse' });
 
 import { computed, ref, onMounted, onUpdated } from 'vue';
+import { ordinalSizeValidator } from '@/common/validators';
 import {
   PROSE_DISALLOWED_ELEMENTS,
   PROSE_ALLOWED_ATTRIBUTES,
@@ -32,7 +33,7 @@ const props = defineProps({
   size: {
     type: [String, Number],
     default: 300,
-    validator: (s) => Object.keys(PROSE_SIZE_MODIFIERS).includes(String(s)),
+    validator: ordinalSizeValidator(PROSE_SIZE_MODIFIERS),
   },
 
   /**

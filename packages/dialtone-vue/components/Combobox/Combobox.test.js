@@ -515,5 +515,39 @@ describe('DtCombobox Tests', () => {
         expect(wrapper.vm.highlightIndex).toBe(-1);
       });
     });
+
+    // When the list is rendered outside (e.g. in a popover), the list element is
+    // unreachable until the popover's enter transition completes (DLT-3520).
+    describe('When the list is rendered outside and its element is not reachable', () => {
+      let consoleErrorSpy;
+
+      beforeEach(() => {
+        mockProps = { listRenderedOutside: true };
+        mockSlots = { list: '<div data-qa="popover-stub"></div>' };
+
+        updateWrapper();
+
+        consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {});
+      });
+
+      describe('When mouseleave is detected on the list wrapper', () => {
+        it('should not log an error', async () => {
+          await listWrapper.trigger('mouseleave');
+
+          expect(consoleErrorSpy).not.toHaveBeenCalled();
+        });
+      });
+
+      describe('When loading changes', () => {
+        it('should not log an error', async () => {
+          await wrapper.setProps({ loading: true });
+          await wrapper.setProps({ loading: false });
+          await wrapper.vm.$nextTick();
+          await wrapper.vm.$nextTick();
+
+          expect(consoleErrorSpy).not.toHaveBeenCalled();
+        });
+      });
+    });
   });
 });

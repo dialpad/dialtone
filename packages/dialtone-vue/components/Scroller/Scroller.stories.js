@@ -11,6 +11,7 @@ export const argsData = {
   itemSize: 32,
   scrollerWidth: 300,
   scrollerHeight: 200,
+  buffer: 200,
   onScrollStart: action('scroll-start'),
   onScrollEnd: action('scroll-end'),
   onUserPosition: action('user-position'),
@@ -103,6 +104,52 @@ export const argTypesData = {
     table: {
       type: { summary: 'event' },
     },
+  },
+
+  'scroll-start': {
+    description: 'Emitted when the first item enters the rendered view pool, at least one buffer ' +
+      'length before the viewport\'s start edge (earlier still with `before` slot content).',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+
+  'scroll-end': {
+    description: 'Emitted when the last item enters the rendered view pool, at least one buffer ' +
+      'length before the viewport\'s end edge (earlier still with `after` slot content). Use it ' +
+      'to append more items.',
+    table: {
+      type: { summary: 'event' },
+    },
+  },
+
+  before: {
+    control: { type: null },
+    description: 'Content rendered before the items, inside the scroll viewport. Scrolls with the list.',
+    table: {
+      type: { summary: 'VNode' },
+    },
+  },
+
+  after: {
+    control: { type: null },
+    description: 'Content rendered after the items, inside the scroll viewport. Scrolls with the list.',
+    table: {
+      type: { summary: 'VNode' },
+    },
+  },
+
+  empty: {
+    control: { type: null },
+    description: 'Content rendered inside the list wrapper only while the list is empty.',
+    table: {
+      type: { summary: 'VNode' },
+    },
+  },
+
+  buffer: {
+    control: { type: 'number' },
+    defaultValue: 200,
   },
 };
 

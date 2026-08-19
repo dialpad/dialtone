@@ -6,6 +6,10 @@
       "icon": "info",
       "children": [
         {
+          "text": "Introduction",
+          "link": "/dialtone/"
+        },
+        {
           "text": "What's New",
           "link": "/dialtone/whats-new/"
         },
@@ -13,6 +17,10 @@
           "text": "Migration Guide",
           "link": "/guides/migration/",
           "children": [
+            {
+              "text": "Visual Changes",
+              "link": "/guides/migration/visual-changes/"
+            },
             {
               "text": "Border-Radius Logical Names",
               "link": "/guides/migration/border-radius/"
@@ -128,6 +136,10 @@
       "link": "/foundations/",
       "icon": "book-open",
       "children": [
+        {
+          "text": "Introduction",
+          "link": "/foundations/"
+        },
         {
           "text": "Logo",
           "link": "/foundations/brand/",
@@ -251,6 +263,10 @@
       "link": "/components/",
       "icon": "component",
       "children": [
+        {
+          "text": "Introduction",
+          "link": "/components/"
+        },
         {
           "text": "Component Status",
           "link": "/components/status/"
@@ -492,6 +508,10 @@
           "link": "/components/text.html"
         },
         {
+          "text": "Text List",
+          "link": "/components/text-list.html"
+        },
+        {
           "text": "Toast",
           "link": "/components/toast.html"
         },
@@ -514,6 +534,10 @@
       "link": "/utilities/",
       "icon": "tools",
       "children": [
+        {
+          "text": "Introduction",
+          "link": "/utilities/"
+        },
         {
           "text": "Backgrounds",
           "link": "/utilities/backgrounds/attachment.html",
@@ -905,12 +929,16 @@
       "icon": "edit",
       "children": [
         {
-          "text": "Action language",
-          "link": "/guides/content/action-language/"
+          "text": "Introduction",
+          "link": "/guides/content/"
         },
         {
-          "text": "Data formats",
-          "link": "/guides/content/data-formats/"
+          "text": "Writing approach",
+          "link": "/guides/content/writing-approach/"
+        },
+        {
+          "text": "Action language",
+          "link": "/guides/content/action-language/"
         },
         {
           "text": "Error messages",
@@ -921,10 +949,6 @@
           "link": "/guides/content/forms-and-validation/"
         },
         {
-          "text": "Grammar and mechanics",
-          "link": "/guides/content/grammar-and-mechanics/"
-        },
-        {
           "text": "Help content",
           "link": "/guides/content/help-content/"
         },
@@ -933,12 +957,16 @@
           "link": "/guides/content/inclusive-language/"
         },
         {
-          "text": "Names and word list",
-          "link": "/guides/content/product-and-feature-names-and-word-list/"
+          "text": "Grammar and mechanics",
+          "link": "/guides/content/grammar-and-mechanics/"
         },
         {
-          "text": "Writing approach",
-          "link": "/guides/content/writing-approach/"
+          "text": "Data formats",
+          "link": "/guides/content/data-formats/"
+        },
+        {
+          "text": "Names and word list",
+          "link": "/guides/content/product-and-feature-names-and-word-list/"
         }
       ]
     },
@@ -953,8 +981,9 @@
       "icon": "package",
       "children": [
         {
-          "text": "Meet the Kits",
+          "text": "Introduction",
           "link": "/ui-kits/",
+          "hideChildrenInSidebar": true,
           "children": [
             {
               "text": "ChatKit",

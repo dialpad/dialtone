@@ -54,7 +54,7 @@
         }"
         :role="role"
         :data-qa="$attrs['data-qa'] ? `${$attrs['data-qa']}__dialog` : 'dt-popover'"
-        :aria-hidden="`${!isOpen}`"
+        :aria-hidden="`${isDialogAriaHidden}`"
         :aria-labelledby="labelledBy"
         :aria-label="ariaLabel"
         :aria-modal="`${!modal}`"
@@ -133,6 +133,7 @@
 /* eslint-disable max-lines */
 import {
   POPOVER_APPEND_TO_VALUES,
+  POPOVER_BOUNDARY_VALUES,
   POPOVER_CONTENT_WIDTHS,
   POPOVER_HEADER_FOOTER_PADDING_CLASSES,
   POPOVER_INITIAL_FOCUS_STRINGS,
@@ -379,6 +380,26 @@ export default {
     },
 
     /**
+     * The element used to determine overflow boundaries for the popover.
+     * <a
+     *   class="d-link"
+     *   href="https://popper.js.org/docs/v2/utils/detect-overflow/#boundary"
+     *   target="_blank"
+     * >
+     *   Popper.js docs
+     * </a>
+     * @values clippingParents, viewport, document, HTMLElement
+     */
+    boundary: {
+      type: [String, HTML_ELEMENT_TYPE],
+      default: 'clippingParents',
+      validator: boundary => {
+        return POPOVER_BOUNDARY_VALUES.includes(boundary) ||
+          (boundary instanceof HTMLElement);
+      },
+    },
+
+    /**
      * The direction the popover displays relative to the anchor.
      * <a
      *   class="d-link"
@@ -390,8 +411,7 @@ export default {
      * @values top, top-start, top-end,
      * right, right-start, right-end,
      * left, left-start, left-end,
-     * bottom, bottom-start, bottom-end,
-     * auto, auto-start, auto-end
+     * bottom, bottom-start, bottom-end
      */
     placement: {
       type: String,
@@ -620,6 +640,9 @@ export default {
       mutationObserver: null,
       isOutsideViewport: false,
       isOpen: false,
+      // Only true once the leave transition (and any focus restoration in onLeaveTransitionComplete) has
+      // finished, so aria-hidden is never applied while the dialog still holds focus or is still visible.
+      isDialogAriaHidden: true,
       toAppear: false,
       anchorEl: null,
       popoverContentEl: null,
@@ -697,6 +720,10 @@ export default {
       });
     },
 
+    boundary () {
+      this.tip?.setProps({ popperOptions: this.popperOptions() });
+    },
+
     externalAnchorElement () {
       this.updateAnchorEl();
     },
@@ -730,6 +757,7 @@ export default {
 
     isOpen (isOpen, isPrev) {
       if (isOpen) {
+        this.isDialogAriaHidden = false;
         this.initTippyInstance();
         this.tip?.show();
       } else if (!isOpen && isPrev !== isOpen) {
@@ -816,6 +844,7 @@ export default {
         fallbackPlacements: this.fallbackPlacements,
         tether: this.tether,
         hasHideModifierEnabled: true,
+        boundary: this.boundary,
       });
     },
 
@@ -970,6 +999,9 @@ export default {
         this.enableScrolling();
       }
       if (this._isUnmounting) return;
+      // Focus has been moved off the dialog (or was never trapped in it) by this point, so it's now
+      // safe to hide it from assistive technology without triggering a focused-descendant violation.
+      this.isDialogAriaHidden = true;
       this.tip?.unmount();
       this.$emit('opened', false);
       if (this.open !== null) {

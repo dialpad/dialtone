@@ -694,7 +694,7 @@ code {
   &__details {
     display: flex;
     flex-direction: column;
-    gap: var(--dt-spacing-100);
+    gap: var(--dt-spacing-25);
     padding: var(--dt-spacing-300);
   }
 
@@ -715,12 +715,16 @@ code {
   }
 
   &__title-text {
+    text-box-trim: trim-start;
+    text-box-edge: cap alphabetic;
     flex: 1;
   }
 
   &__description {
     display: none;
     font: var(--dt-text-body-md);
+    text-box-trim: trim-end;
+    text-box-edge: cap alphabetic;
 
     @media screen and (min-width: 1024px) {
       display: block;

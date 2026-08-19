@@ -93,18 +93,19 @@ chore: NO-JIRA update dependencies
 
 Detailed conventions are in path-scoped rules (`.claude/rules/vue-components.md`) that activate automatically when editing component files.
 
-## Documentation Pipeline (7 Artifacts)
+## Documentation Pipeline (9 Artifacts)
 
 When creating or updating a component, ALL must stay in sync:
 
-1. **Vue source** — `packages/dialtone-vue/components/`
-2. **Tests** — `.test.js` using Vitest + @vue/test-utils
-3. **Storybook stories** — `.stories.js` + `.mdx`
-4. **Component docs JSON** — via `scripts/build-dialtone-vue-docs.mjs`
-5. **VuePress documentation** — `apps/dialtone-documentation/docs/`, sidebar in `_data/site-nav.json`. Use fenced ` ```vue demo ` blocks for code examples (see `.claude/rules/documentation-writing.md`)
-6. **MCP server data** — `packages/dialtone-mcp-server/src/data.ts`
-7. **Component wall thumbnail** — auto-generated PNG at `apps/dialtone-documentation/docs/.vuepress/public/assets/images/components/<slug>-{light,dark}.png`. Run `pnpm nx run dialtone-documentation:thumbs` to regen (pre-commit hook fires automatically on relevant staged changes). If the Combinator default doesn't render well as a thumbnail, author an override at `apps/dialtone-documentation/thumbs/<slug>.vue` — see `apps/dialtone-documentation/thumbs/README.md`. Preview live at `pnpm nx run dialtone-documentation:thumbs:preview` (picker at `/`, full grid at `/?gallery`).
-7. **Public docs JSON** — `packages/dialtone-docs/dist/public-docs.json`, built by `packages/dialtone-docs/src/generators/build-public-docs.mjs` from `apps/dialtone-documentation/docs/**/*.md`. Consumed by `dialtone-mcp-server` (`search_documentation` tool) and `dialtone-cli` (`dialtone docs`) via `@dialpad/dialtone-query-core`. Rebuilt automatically when `pnpm nx run dialtone-docs:build` runs (NX watches `apps/dialtone-documentation/docs/**/*.md` as an input).
+1. **Vue source**: `packages/dialtone-vue/components/`
+2. **Tests**: `.test.js` using Vitest + @vue/test-utils
+3. **Storybook stories**: `.stories.js` + `.mdx`
+4. **Component docs JSON**: via `scripts/build-dialtone-vue-docs.mjs`
+5. **VuePress documentation**: `apps/dialtone-documentation/docs/`, sidebar in `_data/site-nav.json`. Use fenced ` ```vue demo ` blocks for code examples (see `.claude/rules/documentation-writing.md`)
+6. **MCP server data**: `packages/dialtone-mcp-server/src/data.ts`
+7. **Combinator variant file**: `packages/combinator/src/variants/variants_<component>.js` plus registration in `packages/combinator/src/variants/variants.js`. Required for prop, slot, value, and visual-state changes. See `.claude/rules/combinator-variants.md`.
+8. **Component wall thumbnail**: auto-generated PNG at `apps/dialtone-documentation/docs/.vuepress/public/assets/images/components/<slug>-{light,dark}.png`. Run `pnpm nx run dialtone-documentation:thumbs` to regen (pre-commit hook fires automatically on relevant staged changes). If the Combinator default doesn't render well as a thumbnail, author an override at `apps/dialtone-documentation/thumbs/<slug>.vue`; see `apps/dialtone-documentation/thumbs/README.md`. Preview live at `pnpm nx run dialtone-documentation:thumbs:preview` (picker at `/`, full grid at `/?gallery`).
+9. **Public docs JSON**: `packages/dialtone-docs/dist/public-docs.json`, built by `packages/dialtone-docs/src/generators/build-public-docs.mjs` from `apps/dialtone-documentation/docs/**/*.md`. Consumed by `dialtone-mcp-server` (`search_documentation` tool) and `dialtone-cli` (`dialtone docs`) via `@dialpad/dialtone-query-core`. Rebuilt automatically when `pnpm nx run dialtone-docs:build` runs (NX watches `apps/dialtone-documentation/docs/**/*.md` as an input).
 
 ## Release Process
 
@@ -137,6 +138,7 @@ Hooks and tools that keep `packages/dialtone-docs/src/content/` in sync with sou
 ### Session cache
 
 All tracking data lives in `.claude/tsc-cache/<session>/` (gitignored):
+
 - `edited-files.log` — tab-separated: `timestamp\tfilepath\trepo`
 - `affected-repos.txt` — one package per line
 - `commands.txt` — NX build/test commands for affected packages
@@ -156,8 +158,9 @@ Run locally: `pnpm nx run dialtone-docs:check-freshness`
 `.coderabbit.yaml` controls path filters, reviewer routing, and per-path review guidance.
 
 Keep it in sync when:
+
 - A new package is added → add a `path_instructions` entry and any `path_filters` exclusion for build output
-- A `.claude/rules/*.md` file is added/renamed → update the `Follow the conventions in …` reference in the matching `path_instructions` entry
+- A `.claude/rules/*.md` file is added/renamed → update the `Follow the conventions in …` reference in the matching `path_instructions` entry, and add the peer `.agents/resources/rules/*.md` file or record an explicit Defer/Skip decision in `.agents/resources/agent-tooling-parity.md` and the `claudeRuleParityAllowlist` in `.agents/evals/run-skill-contract-evals.mjs` (that allowlist is the gate the parity eval enforces)
 - Team member joins → add handle to `reviews.suggested_reviewers_instructions` and `.github/CODEOWNERS`
 - Team member leaves → remove handle from both `reviews.suggested_reviewers_instructions` and `.github/CODEOWNERS`
 - A new cross-repo relationship is established → add to `knowledge_base.linked_repositories`

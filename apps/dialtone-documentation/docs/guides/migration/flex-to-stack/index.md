@@ -338,6 +338,8 @@ Options:
 - `--yes` or `-y`: Auto-apply all changes
 - `--show-outline`: Add attribute for visual debugging
 - `--remove-outline`: Remove attributes after review
+- `--no-import`: Skip import injection (use when `DtStack` is globally registered)
+- `--package <name>`: Package name for injected `DtStack` imports (e.g. `@dialpad/dialtone-next`). Overrides import-path detection
 - `--help` or `-h`: Show help
 
 **Process specific file extensions:**

@@ -39,6 +39,66 @@ describe('themes/config.js', () => {
   });
 
   describe('initDialtoneTheme', () => {
+    describe('When called with { layers: false }', () => {
+      it('Should load the no-layers core tokens', async () => {
+        initDialtoneTheme(dpStub, 'light', root, { layers: false });
+
+        // The no-layers core loads via a dynamic import (not bundled into the
+        // default path), so its content lands a moment after this call returns.
+        await vi.waitFor(() => {
+          expect(root.querySelector('#dialtone-css-core').innerHTML).toContain('--dt-no-layers-marker');
+        });
+      });
+    });
+
+    describe('When called without options (default)', () => {
+      it('Should load the layered core tokens', () => {
+        initDialtoneTheme(dpStub, 'light', root);
+
+        const coreStyleTag = root.querySelector('#dialtone-css-core');
+        expect(coreStyleTag.innerHTML).not.toContain('--dt-no-layers-marker');
+      });
+    });
+
+    describe('When re-initialized with the same brand/mode but a different layers value', () => {
+      it('Should swap layers:false -> layers:true by reloading the layered core', async () => {
+        initDialtoneTheme(dpStub, 'light', root, { layers: false });
+        await vi.waitFor(() => {
+          expect(root.querySelector('#dialtone-css-core').innerHTML).toContain('--dt-no-layers-marker');
+        });
+
+        initDialtoneTheme(dpStub, 'light', root);
+
+        expect(root.querySelector('#dialtone-css-core').innerHTML).not.toContain('--dt-no-layers-marker');
+      });
+
+      it('Should swap layers:true -> layers:false by reloading the no-layers core', async () => {
+        initDialtoneTheme(dpStub, 'light', root);
+        expect(root.querySelector('#dialtone-css-core').innerHTML).not.toContain('--dt-no-layers-marker');
+
+        initDialtoneTheme(dpStub, 'light', root, { layers: false });
+
+        await vi.waitFor(() => {
+          expect(root.querySelector('#dialtone-css-core').innerHTML).toContain('--dt-no-layers-marker');
+        });
+      });
+
+      it('Should not let a superseded no-layers import clobber a later layers:true call', async () => {
+        // Fire the no-layers import, then immediately supersede it before it
+        // resolves — the stale resolution must not overwrite the layered core.
+        initDialtoneTheme(dpStub, 'light', root, { layers: false });
+        initDialtoneTheme(dpStub, 'light', root);
+
+        expect(root.querySelector('#dialtone-css-core').innerHTML).not.toContain('--dt-no-layers-marker');
+
+        // Give the superseded import time to settle — if it were going to
+        // (wrongly) apply, it would have by now.
+        await new Promise((resolve) => setTimeout(resolve, 50));
+
+        expect(root.querySelector('#dialtone-css-core').innerHTML).not.toContain('--dt-no-layers-marker');
+      });
+    });
+
     describe('When the brand declares a material lock', () => {
       it.each([
         ['iron', melonStub],

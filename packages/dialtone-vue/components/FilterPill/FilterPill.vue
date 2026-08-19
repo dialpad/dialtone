@@ -208,6 +208,7 @@
 import { DtPopover, POPOVER_APPEND_TO_VALUES, POPOVER_PADDING_CLASSES } from '@/components/Popover';
 import { HTML_ELEMENT_TYPE } from '@/common/constants';
 import { CONTENT_MODE_PROP } from '@/common/mode_constants';
+import { ordinalSizeValidator } from '@/common/validators';
 import { BUTTON_SIZE_MODIFIERS, BUTTON_ICON_SIZES, DtButton } from '@/components/Button';
 import { DtIconChevronDown, DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { DialtoneLocalization } from '@/localization';
@@ -456,7 +457,7 @@ export default {
     size: {
       type: [String, Number],
       default: 200,
-      validator: (s) => Object.keys(BUTTON_SIZE_MODIFIERS).includes(String(s)),
+      validator: ordinalSizeValidator(BUTTON_SIZE_MODIFIERS),
     },
   },
 

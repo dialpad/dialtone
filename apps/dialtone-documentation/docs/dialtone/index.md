@@ -2,6 +2,9 @@
 title: Dialtone Design System
 description: Dialpad's design system for building consistent, accessible product experiences
 keywords: ["design system", "components", "css utilities", "design tokens", "content guidelines", "vue utilities", "ui kits", "downloads"]
+next:
+  text: What's New
+  link: /dialtone/whats-new/
 ---
 
 <DtBox class="d-box d-box--bc-default d-d-grid d-g-300 md:d-g-cols3 d-mbe-400">
@@ -10,7 +13,7 @@ keywords: ["design system", "components", "css utilities", "design tokens", "con
     :underline="false"
     class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary"
   >
-    <DtStack direction="row" gap="150">
+    <DtStack direction="row" gap="200">
       <DtBox
         :padding="viewport.pick({ default: '100', md: '200' })"
         border-width="100"
@@ -24,12 +27,12 @@ keywords: ["design system", "components", "css utilities", "design tokens", "con
       </DtBox>
       <DtStack>
         <dt-text as="h3" kind="headline" size="200">What's New</dt-text>
-        <dt-text as="p" kind="body" size="200">Updates, progress and planning for all things Dialtone.</dt-text>
+        <dt-text as="p" kind="body" size="200" wrap="pretty">Updates, progress and planning for all things Dialtone.</dt-text>
       </DtStack>
     </DtStack>
   </DtLink>
   <DtLink to="/guides/migration/" :underline="false" class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary">
-    <DtStack direction="row" gap="150">
+    <DtStack direction="row" gap="200">
       <DtBox
         :padding="viewport.pick({ default: '100', md: '200' })"
         border-width="100"
@@ -43,12 +46,12 @@ keywords: ["design system", "components", "css utilities", "design tokens", "con
       </DtBox>
       <DtStack>
         <dt-text as="h3" kind="headline" size="200">Migration Guide</dt-text>
-        <dt-text as="p" kind="body" size="200">Codemods and Linting for Dialtone Next</dt-text>
+        <dt-text as="p" kind="body" size="200" wrap="pretty">Codemods and Linting for Dialtone Next</dt-text>
       </DtStack>
     </DtStack>
   </DtLink>
   <DtLink to="/guides/getting-started/" :underline="false" class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary">
-    <DtStack direction="row" gap="150">
+    <DtStack direction="row" gap="200">
       <DtBox
         :padding="viewport.pick({ default: '100', md: '200' })"
         border-width="100"
@@ -62,7 +65,7 @@ keywords: ["design system", "components", "css utilities", "design tokens", "con
       </DtBox>
       <DtStack>
         <dt-text as="h3" kind="headline" size="200">Getting Started</dt-text>
-        <dt-text as="p" kind="body" size="200">Quick start guidelines for using Dialtone in your project.</dt-text>
+        <dt-text as="p" kind="body" size="200" wrap="pretty">Quick start guidelines for using Dialtone in your project.</dt-text>
       </DtStack>
     </DtStack>
   </DtLink>

@@ -5,7 +5,7 @@
       :underline="false"
       class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary"
     >
-      <DtStack direction="row" gap="150">
+      <DtStack direction="row" gap="200">
         <DtBox
           :padding="viewport.pick({ default: '100', md: '200' })"
           border-width="100"
@@ -21,7 +21,7 @@
           <dt-text as="h3" kind="headline" size="200">
             What are UI Kits?
           </dt-text>
-          <dt-text as="p" kind="body" size="200">
+          <dt-text as="p" kind="body" size="200" wrap="pretty">
             Domain-specific components built with Dialtone.
           </dt-text>
         </DtStack>
@@ -32,7 +32,7 @@
       :underline="false"
       class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary"
     >
-      <DtStack direction="row" gap="150">
+      <DtStack direction="row" gap="200">
         <DtBox
           :padding="viewport.pick({ default: '100', md: '200' })"
           border-width="100"
@@ -48,7 +48,7 @@
           <dt-text as="h3" kind="headline" size="200">
             Where to Start
           </dt-text>
-          <dt-text as="p" kind="body" size="200">
+          <dt-text as="p" kind="body" size="200" wrap="pretty">
             Adding a UI Kit component to your project.
           </dt-text>
         </DtStack>
@@ -59,7 +59,7 @@
       :underline="false"
       class="d-d-block d-bar-400 d-fc-secondary h:d-td-none h:d-fc-primary"
     >
-      <DtStack direction="row" gap="150">
+      <DtStack direction="row" gap="200">
         <DtBox
           :padding="viewport.pick({ default: '100', md: '200' })"
           border-width="100"
@@ -75,7 +75,7 @@
           <dt-text as="h3" kind="headline" size="200">
             How to Contribute
           </dt-text>
-          <dt-text as="p" kind="body" size="200">
+          <dt-text as="p" kind="body" size="200" wrap="pretty">
             How to propose, build, and contribute Dialpad UI Kits.
           </dt-text>
         </DtStack>

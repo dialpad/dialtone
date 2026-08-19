@@ -21,7 +21,7 @@ combinator: DtToast
 </dt-stack>
 <!-- @code -->
 <dt-toast
-  title="Title"
+  header-text="Title"
   :open="showToast"
   :important="important"
   :kind="selectedKind"
@@ -69,7 +69,7 @@ If the duration is not provided the toast won't disappear automatically.
 />
 <!-- @code -->
 <dt-toast
-  title="Title"
+  header-text="Title"
   :open="showDurationToast"
   @close="closeEvent"
   :duration="7500"
@@ -97,7 +97,7 @@ If you need to self-position the toast at the top center, use the `d-toast-wrapp
 ```vue code-only
 <aside class="d-toast-wrapper">
   <dt-toast
-    :title="title"
+    :header-text="title"
     :message="message"
     :open="isShown"
   ></dt-toast>
