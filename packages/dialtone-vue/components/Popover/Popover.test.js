@@ -685,7 +685,9 @@ describe('DtPopover Tests', () => {
           localWrapper.unmount();
         });
 
-        it('falls back to document.body when the parent window is cross-origin', async () => {
+        it('falls back to the anchor\'s parent element when the parent window is cross-origin', async () => {
+          // Matches the content's own fallback: initTippyInstance falls back to Tippy's
+          // 'parent' sentinel (the anchor's parentElement) when window.parent throws.
           const originalParentDescriptor = Object.getOwnPropertyDescriptor(window, 'parent');
           Object.defineProperty(window, 'parent', {
             configurable: true,
@@ -697,7 +699,7 @@ describe('DtPopover Tests', () => {
           const localWrapper = await mountModalPopover({ appendTo: 'root' }, document.body);
           const scrim = document.body.querySelector('.d-modal--transparent');
 
-          expect(scrim.parentElement).toBe(document.body);
+          expect(scrim.parentElement).toBe(localWrapper.vm.anchorEl.parentElement);
 
           localWrapper.unmount();
           Object.defineProperty(window, 'parent', originalParentDescriptor);

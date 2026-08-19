@@ -1116,7 +1116,10 @@ export default {
       try {
         return window.parent.document.body;
       } catch {
-        return document.body;
+        // Matches the content's own fallback: when the parent frame is cross-origin,
+        // initTippyInstance falls back to Tippy's 'parent' sentinel (the anchor's own
+        // parentElement) rather than document.body.
+        return this.resolveParentScrimTarget();
       }
     },
 
