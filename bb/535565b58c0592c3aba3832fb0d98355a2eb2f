@@ -1,0 +1,97 @@
+packages/dialtone-css/lib/build/less/components/chip.less
+  s_15cf27efeb3a97::t_355cceb7a996ec 110-115,119-120,122-123,129-130,132,135-136,138,140,144,148-149,152,157,162-164,166-168,172-175,184-185,186-187,190-192,197,199,201-202,233,236,240-243,245,247-248,250-251,253,256,258-260,268,270,274-281,285-288,289-297,305-308
+  s_15cf27efeb3a97::t_3752b42f107885 309
+  s_15cf27efeb3a97::t_140917d795166b 97-98,100-103,105
+  h_c15b5755534093 35,36,37,43-44,59,66,71-73,83-84,95-96,121,125,133,139,146,153,154,180-183,182-183,193,195-196,200,219-220,223,229,235,249,254,255,261,264-269
+  s_15cf27efeb3a97::t_f2a0bb897a2c67 116
+  s_15cf27efeb3a97::t_5f767e6cfddd25 117
+  s_15cf27efeb3a97::t_e6646c5b885024 34
+  s_cad58711a60fb4::t_eac119b97dff9c 9-12,15-19,27-32,40,42,50-55,58,60-61,65,89,104,107-109,116,127-128,159-161,169-171,185,189,205-210,212-215,217-218,222-228,230-233,246,271-273,282-284,300-304
+  s_cad58711a60fb4::t_971f6f10771bcc 184
+  s_cad58711a60fb4::t_9ddb88473f4165 142-143
+  s_cad58711a60fb4::t_5dedbc2d11b37c 33,38,41
+  s_cad58711a60fb4::t_eb7f99ea7bda88 118,124
+  s_cad58711a60fb4::t_7c3066ddc94587 56-57,62-64,69,85,97-105
+  s_cad58711a60fb4::t_4016cc1bf1e64e 216
+  s_cad58711a60fb4::t_b468ecfdb7f835 106
+  s_cad58711a60fb4::t_9a81c65adccf18 39
+  s_cad58711a60fb4::t_a6f945a0ec3eca 74-84,86-88
+  s_cad58711a60fb4::t_60b689ed8f113e 176
+apps/dialtone-documentation/docs/scratch.md
+  s_15cf27efeb3a97::t_7e8c5f81cb8dea 661-662,695,730,743,744,745,751,760
+  h_c15b5755534093 91,92-96,97-99,100-102,103-111,126-133,148-155,170-175,176,177-180,182,187-190,192-194,196-207,209,214-217,219-221,223-234,236,241-244,246-248,250-263,303-304,665,667,669-673,678,703-724
+  s_15cf27efeb3a97::t_476301afd5c5ba 761
+  s_15cf27efeb3a97::t_a60ac9ab5a052e 643-660,664,666,668,674-677,679-693
+  s_15cf27efeb3a97::t_c0a4183f59bc4d 181,183-186,191,195,208,210-213,218,222,235,237-240,245,249,636-642,663,694,696-702,725-729,731-742,746-750,752-759,762-784
+  s_15cf27efeb3a97::t_8a78977b67b538 785
+packages/dialtone-vue/components/Chip/Chip.vue
+  h_c15b5755534093 25
+apps/dialtone-documentation/docs/_data/chip.json
+  h_c15b5755534093 26,29-32
+  s_cad58711a60fb4::t_cd37f0cb77e1ab 24-25,27
+  s_cad58711a60fb4::t_10ebbfd1c06a3c 23
+apps/dialtone-documentation/docs/components/chip.md
+  h_c15b5755534093 21,26-27,32-33,37,64,78,85-87,90-91,93-101,106-107,112,116
+  s_cad58711a60fb4::t_eb06b5fe08fffa 28
+  s_cad58711a60fb4::t_6f84f3b044cc49 34
+packages/dialtone-vue/components/Chip/ChipVariants.story.vue
+  h_c15b5755534093 23,34,36,44-78
+packages/dialtone-css/lib/build/less/components/combobox-multi-select.less
+  s_cad58711a60fb4::t_3181be3af466d7 10-13
+  s_cad58711a60fb4::t_6fa3b412641dbb 19,21-22
+  s_cad58711a60fb4::t_34123cfa7a35ae 20
+packages/dialtone-css/lib/build/less/components/input.less
+  h_c15b5755534093 103,166-170
+packages/dialtone-vue/components/ComboboxMultiSelect/ComboboxMultiSelect.vue
+  s_cad58711a60fb4::t_fd561a216f5460 870,871-872
+  s_cad58711a60fb4::t_c74228f5c0ba70 792
+  s_cad58711a60fb4::t_e3a509663c43fd 777-782,785-791,793-797
+  s_cad58711a60fb4::t_a0fec27a973087 835
+  s_cad58711a60fb4::t_d57720bcc204ea 836-837,839-841,843
+  s_cad58711a60fb4::t_b19f81271fe95b 35
+  s_cad58711a60fb4::t_7aac5c7b1e091c 842,868-869,873
+  s_cad58711a60fb4::t_70393dc4890af3 568-575
+  s_cad58711a60fb4::t_04dcb3405d9ca5 813
+  s_cad58711a60fb4::t_e944a54fd8086f 577-585
+  s_cad58711a60fb4::t_7a9e2a6f003a12 828-834,838,844,851-853,855-861,863
+  s_cad58711a60fb4::t_46f478e12ec662 811-812,814
+  s_cad58711a60fb4::t_d3fbd322f871b6 847-848
+  s_cad58711a60fb4::t_ec784a1035b396 862
+  s_cad58711a60fb4::t_b3defeb8e44324 845-846
+packages/dialtone-vue/components/ComboboxMultiSelect/ComboboxMultiSelect.stories.js
+  s_15cf27efeb3a97::t_7f191b94fd7958 6
+  s_15cf27efeb3a97::t_61637005d4f339 9-12,99
+packages/dialtone-vue/components/ComboboxMultiSelect/ComboboxMultiSelectConstants.js
+  s_cad58711a60fb4::t_cb097410218bec 19-34,38
+packages/dialtone-vue/components/ComboboxMultiSelect/index.js
+  s_cad58711a60fb4::t_7cc195bdefaed1 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "bb535565b58c0592c3aba3832fb0d98355a2eb2f",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_15cf27efeb3a97": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f9467-f3fb-7fe3-8f43-93e4dad7fd5a",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_cad58711a60fb4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5f249bec-6234-4933-a26d-5736a26495c0",
+        "model": "claude-fable-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,18 @@
+apps/dialtone-documentation/docs/.vuepress/exampleComponents/ExampleProfileCard.vue
+  h_c15b5755534093 3,5,19,22-23,29
+apps/dialtone-documentation/docs/.vuepress/exampleComponents/ExampleHovercard.vue
+  h_c15b5755534093 4,22
+apps/dialtone-documentation/docs/components/hovercard.md
+  h_c15b5755534093 65,73,76,78,81,84-85,91-116,129
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.8",
+  "base_commit_sha": "af5636ecbc6d75b45dbff90bb9132bed5fcdb3ed",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
