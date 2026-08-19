@@ -27,16 +27,20 @@
       inline-size="100p"
       scrollbar="move"
       scrollbar-content-class="dialtone-doc-page-scroll-container"
+      :padding-inline-start="viewport.pick({
+        default: '250',
+        lg: false,
+      })"
       :padding-inline-end="viewport.pick({
         default: '300',
         lg: '400',
         xl: '0',
       })"
-      padding-block-end="400"
-      :padding-inline-start="viewport.pick({
-        default: '250',
-        lg: false,
+      :padding-block-start="viewport.pick({
+        default: false,
+        lg: '200',
       })"
+      padding-block-end="400"
     >
       <page
         :prev="props.prev"

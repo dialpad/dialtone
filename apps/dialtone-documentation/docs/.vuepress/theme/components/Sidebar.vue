@@ -1,19 +1,43 @@
 <template>
   <dt-stack
     class="dialtone-sidebar__list d-h100p"
-    gap="50"
     @keydown="handleKeydown"
   >
     <DtBox
+      padding-block-start="450"
       padding-block-end="100"
-      padding-block-start="200"
     >
-      <DtStack gap="150">
-        <DtBox border-width="100" padding="100" border-radius="400">
-          <DtText as="p" variant="body-sm" align="center" tone="muted">
-            Logo
-          </DtText>
-        </DtBox>
+      <DtStack gap="100">
+        <DtStack
+          v-if="viewport.pick({
+            default: false,
+            lg: true,
+          })"
+          direction="row"
+          justify="space-between"
+          gap="200"
+        >
+          <DtBox padding-inline-start="75" padding-block-start="50">
+            <dt-link
+              title="Dialtone homepage"
+              :underline="false"
+              to="/"
+            >
+              <svg-loader name="dialtone-logo" class="d-w-150" />
+              <!-- <DtIllustration name="dialpad-logo" class="d-h-50 d-w-auto" /> -->
+            </dt-link>
+          </DtBox>
+          <dt-button
+            v-dt-tooltip:bottom="'Toggle Navigation'"
+            kind="muted"
+            importance="clear"
+            aria-label="Toggle Navigation"
+          >
+            <template #startIcon="{ iconSize }">
+              <dt-icon name="sidebar-close" :size="iconSize" />
+            </template>
+          </dt-button>
+        </DtStack>
         <dt-input
           ref="searchInput"
           v-model="inputValue"
@@ -24,7 +48,9 @@
           @update:model-value="focusedIndex = -1"
         >
           <template #startIcon="{ iconSize }">
-            <dt-icon name="search" :size="iconSize" />
+            <DtBox class="d-d-flex" padding-inline-start="50">
+              <dt-icon name="search" :size="iconSize" />
+            </DtBox>
           </template>
           <template #endIcon="{ clear }">
             <dt-button
@@ -42,9 +68,9 @@
             </dt-button>
             <dt-keyboard-shortcut
               v-else-if="viewport.above('lg')"
-              class="d-mie-n75"
-              shortcut="/"
-              screen-reader-text="Slash"
+              class="d-mie-n75 d-px-100 d-bgc-moderate d-baw0"
+              shortcut="∕"
+              screen-reader-text="Type / (slash) to focus search field"
             />
           </template>
         </dt-input>
@@ -79,29 +105,87 @@
     </DtBox>
     <DtBox
       v-if="viewport.above('lg')"
-      padding-block-start="100"
+      padding-block-start="200"
+      padding-block-end="50"
     >
-      <dt-segmented-control
-        :model-value="currentMode"
-        aria-label="Appearance mode"
-        @update:model-value="setMode"
-      >
-        <dt-segmented-control-item v-dt-tooltip="`Mode: System`" value="system" label="System">
-          <template #startIcon="{ iconSize }">
-            <dt-icon name="laptop-2" :size="iconSize" />
-          </template>
-        </dt-segmented-control-item>
-        <dt-segmented-control-item v-dt-tooltip="`Mode: Light`" value="light" label="Light">
-          <template #startIcon="{ iconSize }">
-            <dt-icon name="sun" :size="iconSize" />
-          </template>
-        </dt-segmented-control-item>
-        <dt-segmented-control-item v-dt-tooltip="`Mode: Dark`" value="dark" label="Dark">
-          <template #startIcon="{ iconSize }">
-            <dt-icon name="moon" :size="iconSize" />
-          </template>
-        </dt-segmented-control-item>
-      </dt-segmented-control>
+      <DtStack gap="100">
+        <DtStack direction="row" gap="1">
+          <dt-button
+            class="d-w100p"
+            href="https://dialpad.com/app/messages/agxzfnViZXItdm9pY2VyGAsSC1RleHRNZXNzYWdlGIDA3KvmyP0IDA"
+            target="_blank"
+            rel="noreferrer noopener"
+            kind="muted"
+            importance="clear"
+            size="200"
+          >
+            dialtone
+            <template #startIcon="{ iconSize }">
+              <dt-icon name="hash-bold" :size="iconSize" />
+            </template>
+          </dt-button>
+          <dt-button
+            class="d-w100p"
+            href="https://dialpad.atlassian.net/servicedesk/customer/portal/123/create/465"
+            target="_blank"
+            rel="noreferrer noopener"
+            kind="muted"
+            importance="clear"
+            size="200"
+          >
+            Request
+            <template #startIcon="{ iconSize }">
+              <dt-icon name="hand-filled" :size="iconSize" />
+            </template>
+          </dt-button>
+          <dt-button
+            class="d-w100p"
+            href="https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=1&pid=12508"
+            target="_blank"
+            rel="noreferrer noopener"
+            kind="muted"
+            importance="clear"
+            size="200"
+          >
+            Bug
+            <template #startIcon="{ iconSize }">
+              <svg
+                class="d-icon--size-200 d-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ><path d="M12 20v-9" /><path d="M14 7a4 4 0 0 1 4 4v3a6 6 0 0 1-12 0v-3a4 4 0 0 1 4-4z" /><path d="M14.12 3.88 16 2" /><path d="M21 21a4 4 0 0 0-3.81-4" /><path d="M21 5a4 4 0 0 1-3.55 3.97" /><path d="M22 13h-4" /><path d="M3 21a4 4 0 0 1 3.81-4" /><path d="M3 5a4 4 0 0 0 3.55 3.97" /><path d="M6 13H2" /><path d="m8 2 1.88 1.88" /><path d="M9 7.13V6a3 3 0 1 1 6 0v1.13" /></svg>
+            </template>
+          </dt-button>
+        </DtStack>
+        <dt-segmented-control
+          :model-value="currentMode"
+          aria-label="Appearance mode"
+          @update:model-value="setMode"
+        >
+          <dt-segmented-control-item v-dt-tooltip="`Mode: System`" value="system" label="System">
+            <template #startIcon="{ iconSize }">
+              <dt-icon name="laptop-2" :size="iconSize" />
+            </template>
+          </dt-segmented-control-item>
+          <dt-segmented-control-item v-dt-tooltip="`Mode: Light`" value="light" label="Light">
+            <template #startIcon="{ iconSize }">
+              <dt-icon name="sun" :size="iconSize" />
+            </template>
+          </dt-segmented-control-item>
+          <dt-segmented-control-item v-dt-tooltip="`Mode: Dark`" value="dark" label="Dark">
+            <template #startIcon="{ iconSize }">
+              <dt-icon name="moon" :size="iconSize" />
+            </template>
+          </dt-segmented-control-item>
+        </dt-segmented-control>
+      </DtStack>
     </DtBox>
   </dt-stack>
 </template>

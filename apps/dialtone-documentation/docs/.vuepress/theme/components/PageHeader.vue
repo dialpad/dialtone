@@ -83,9 +83,9 @@
             :size="200"
           >
             <template #startIcon="{ iconSize }">
-              <dt-icon-github :size="iconSize" />
+              <dt-icon name="code" :size="iconSize" />
             </template>
-            GitHub
+            Source
           </dt-button>
           <dt-split-button
             :size="200"

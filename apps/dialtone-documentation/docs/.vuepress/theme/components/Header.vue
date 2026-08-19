@@ -1,55 +1,48 @@
 <template>
   <DtBox
-    :padding="viewport.pick({
-      default: '0',
-      lg: '300',
+    padding="100"
+    padding-block-start="125"
+    padding-inline="150"
+    surface="secondary"
+    border-color="subtle"
+    :border-width-block-end="viewport.pick({
+      default: '100',
+      lg: false,
     })"
-    padding-block-end="0"
+    :border-radius="viewport.pick({
+      lg: '400',
+    })"
   >
-    <DtBox
-      padding="200"
-      padding-inline="250"
-      surface="secondary"
-      border-color="subtle"
-      :border-width-block-end="viewport.pick({
-        default: '100',
-        lg: false,
-      })"
-      :border-radius="viewport.pick({
-        lg: '400',
-      })"
-    >
-      <dt-stack direction="row" justify="space-between" gap="400">
-        <dt-stack direction="row" gap="150">
-          <dt-button
-            v-if="!viewport.above('lg')"
-            v-dt-tooltip:bottom-start="mobileMenuOpen ? 'Close menu' : 'View menu'"
-            kind="muted"
-            importance="outlined"
-            aria-controls="sidebar-mobile"
-            :active="mobileMenuOpen"
-            :aria-expanded="mobileMenuOpen ? 'true' : 'false'"
-            :aria-label="mobileMenuOpen ? 'Close menu' : 'Open menu'"
-            @click="emit('toggle-mobile-menu')"
-          >
-            <template #startIcon="{ iconSize }">
-              <dt-icon name="menu" :size="iconSize" />
-            </template>
-          </dt-button>
-          <dt-link
-            title="Dialtone homepage"
-            :underline="false"
-            to="/"
-            class="d-bar-200"
-          >
-            <DtIllustration name="dialpad-logo" class="d-h-50 d-w-auto" />
-          </dt-link>
-        </dt-stack>
-        <DtBox>
-          <navbar />
-        </DtBox>
+    <dt-stack direction="row" justify="space-between" gap="400">
+      <dt-stack direction="row" gap="150" class="d-w100p">
+        <dt-button
+          v-if="!viewport.above('lg')"
+          v-dt-tooltip:bottom-start="mobileMenuOpen ? 'Close menu' : 'View menu'"
+          kind="muted"
+          importance="clear"
+          aria-controls="sidebar-mobile"
+          :active="mobileMenuOpen"
+          :aria-expanded="mobileMenuOpen ? 'true' : 'false'"
+          :aria-label="mobileMenuOpen ? 'Close menu' : 'Open menu'"
+          @click="emit('toggle-mobile-menu')"
+        >
+          <template #startIcon="{ iconSize }">
+            <dt-icon name="menu" :size="iconSize" />
+          </template>
+        </dt-button>
       </dt-stack>
-    </DtBox>
+      <dt-link
+        title="Dialtone homepage"
+        :underline="false"
+        to="/"
+      >
+        <svg-loader class="d-h-50" name="dialtone-logo" />
+        <!-- <DtIllustration name="dialpad-logo" class="d-h-50 d-w-auto" /> -->
+      </dt-link>
+      <DtStack class="d-w100p">
+        <navbar class="d-mis-auto" />
+      </DtStack>
+    </dt-stack>
   </DtBox>
 </template>
 
