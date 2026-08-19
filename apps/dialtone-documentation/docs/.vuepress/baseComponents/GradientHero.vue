@@ -50,7 +50,7 @@
             :size="400"
             @click="sendAnalyticsEvent()"
           >
-            Get Started
+            Docs
           </dt-button>
           <dt-button
             to="/about/whats-new/"
