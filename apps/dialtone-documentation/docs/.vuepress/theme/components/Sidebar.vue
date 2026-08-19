@@ -1,16 +1,12 @@
 <template>
   <dt-stack
-    class="dialtone-sidebar__list"
+    class="dialtone-sidebar__list d-h100p"
     gap="50"
     @keydown="handleKeydown"
   >
     <DtBox
       padding-block-end="100"
       padding-block-start="200"
-      surface="secondary"
-      position="sticky"
-      inset-block-start="0"
-      z-index="navigation-fixed"
     >
       <DtStack gap="150">
         <DtBox border-width="100" padding="100" border-radius="400">
@@ -54,31 +50,38 @@
         </dt-input>
       </DtStack>
     </DtBox>
-    <DtStack
-      ref="listRef"
-      as="ul"
-      gap="50"
-    >
-      <sidebar-item
-        v-for="item in filteredItems"
-        :key="item.link || item.text"
-        :item="item"
-        :depth="0"
-        :open-items="openItems"
-        @toggle="handleToggle"
-      />
-      <li v-if="filteredItems.length === 0 && inputValue.trim()">
-        <dt-empty-state
-          :size="200"
-          :header-text="`No results found for &quot;${inputValue}&quot;`"
-          class="d-w100p"
-        >
-          <template #icon>
-            <dt-icon name="search" size="500" />
-          </template>
-        </dt-empty-state>
-      </li>
-    </DtStack>
+    <DtBox class="d-fl1" scrollbar="move">
+      <DtStack
+        ref="listRef"
+        as="ul"
+        gap="50"
+      >
+        <sidebar-item
+          v-for="item in filteredItems"
+          :key="item.link || item.text"
+          :item="item"
+          :depth="0"
+          :open-items="openItems"
+          @toggle="handleToggle"
+        />
+        <li v-if="filteredItems.length === 0 && inputValue.trim()">
+          <dt-empty-state
+            :size="200"
+            :header-text="`No results found for &quot;${inputValue}&quot;`"
+            class="d-w100p"
+          >
+            <template #icon>
+              <dt-icon name="search" size="500" />
+            </template>
+          </dt-empty-state>
+        </li>
+      </DtStack>
+    </DtBox>
+    <DtBox border-width="100" padding="100" border-radius="400">
+      <DtText as="p" variant="body-sm" align="center" tone="muted">
+        meta
+      </DtText>
+    </DtBox>
   </dt-stack>
 </template>
 
