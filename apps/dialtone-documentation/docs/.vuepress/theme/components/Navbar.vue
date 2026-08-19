@@ -10,17 +10,6 @@
       </dt-stack>
     </DtBox>
     <dt-button
-      hidden
-      to="/dialtone/whats-new/"
-      class="d-mie-100"
-      size="100"
-    >
-      What's New
-      <template #startIcon="{ iconSize }">
-        <dt-icon name="megaphone" :size="iconSize" />
-      </template>
-    </dt-button>
-    <dt-button
       v-if="viewport.above('lg')"
       v-dt-tooltip:bottom="'Storybook'"
       href="https://dialtone.dialpad.com/vue"
@@ -48,13 +37,11 @@
       </template>
     </dt-button>
     <dt-dropdown
-      v-if="viewport.above('lg')"
       id="theme-toggle-dropdown"
       navigation-type="arrow-keys"
       placement="bottom-end"
       class="theme-toggle-dropdown"
       max-height="33vh"
-      :hidden="!showThemeSwitcher"
     >
       <template #anchor>
         <dt-button

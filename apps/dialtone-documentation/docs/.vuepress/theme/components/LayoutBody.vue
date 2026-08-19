@@ -8,9 +8,9 @@
       max-inline-size="450"
       block-size="100p"
       scrollbar="move"
-      surface="secondary"
       border-width-inline-end="100"
       border-color="subtle"
+      class="dialtone-shell-sidebar"
     >
       <sidebar />
     </DtBox>
