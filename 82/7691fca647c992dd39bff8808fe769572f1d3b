@@ -1,0 +1,31 @@
+apps/dialtone-documentation/docs/foundations/colors/index.md
+  s_fb74aa28f644ee::t_678d251b833fee 6-8
+apps/dialtone-documentation/docs/foundations/graphic-system/index.md
+  s_fb74aa28f644ee::t_678d251b833fee 6-8
+apps/dialtone-documentation/docs/foundations/brand/index.md
+  s_fb74aa28f644ee::t_678d251b833fee 9-11
+apps/dialtone-documentation/docs/_data/site-nav.json
+  s_fb74aa28f644ee::t_678d251b833fee 147-150,169-172,199-202,221-224,239-242,261-264
+apps/dialtone-documentation/docs/foundations/type/index.md
+  s_fb74aa28f644ee::t_678d251b833fee 7-9
+apps/dialtone-documentation/docs/foundations/gradient/index.md
+  s_fb74aa28f644ee::t_678d251b833fee 7-9
+apps/dialtone-documentation/docs/foundations/icons/index.md
+  s_fb74aa28f644ee::t_678d251b833fee 8-10
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "827691fca647c992dd39bff8808fe769572f1d3b",
+  "prompts": {},
+  "sessions": {
+    "s_fb74aa28f644ee": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a016c1-4534-7332-9095-8e18310eed6e",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

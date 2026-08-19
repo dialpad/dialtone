@@ -1,0 +1,26 @@
+apps/dialtone-documentation/docs/.vuepress/theme/components/Header.vue
+  h_c15b5755534093 3-13,16-32,34-45
+apps/dialtone-documentation/docs/.vuepress/theme/components/LayoutBody.vue
+  h_c15b5755534093 30-33,39-41,43
+apps/dialtone-documentation/docs/.vuepress/theme/components/Navbar.vue
+  h_c15b5755534093 4
+apps/dialtone-documentation/docs/.vuepress/theme/components/PageHeader.vue
+  h_c15b5755534093 86,88
+apps/dialtone-documentation/docs/.vuepress/theme/components/Sidebar.vue
+  h_c15b5755534093 7,10-40,51-53,71-73,108-109,111-188
+packages/dialtone-css/lib/build/less/components/breadcrumbs.less
+  h_c15b5755534093 55-58
+packages/dialtone-css/lib/build/less/components/keyboard-shortcut.less
+  h_c15b5755534093 25
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "eee7a18a8d0eb43a8849a42b8f7d543718eefd45",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
