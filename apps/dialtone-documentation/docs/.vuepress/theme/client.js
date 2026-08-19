@@ -30,10 +30,12 @@ import '@dialpad/dialtone-tokens/layered/tokens-dp-colors.css';
 
 import { VALID_MATERIALS } from '@dialpad/dialtone-tokens/themes/config';
 
+const DEFAULT_MODE = 'dark';
+
 // Normalize stale localStorage values from removed/renamed entries (e.g.
 // bronze → sandstone). preferredTheme has its own force-reset in onBeforeMount.
 const VALID_PREFS = {
-  preferredMode: { valid: ['system', 'light', 'dark'], fallback: 'system' },
+  preferredMode: { valid: ['system', 'light', 'dark'], fallback: DEFAULT_MODE },
   preferredContrast: { valid: ['default', 'high'], fallback: 'default' },
   preferredMaterial: { valid: [...VALID_MATERIALS], fallback: 'sandstone' },
 };
@@ -68,10 +70,10 @@ import { setMode } from '@dialpad/dialtone-tokens/themes/config';
 
 // Apply default theme immediately to prevent FOUC (Flash of Unstyled Content)
 if (typeof document !== 'undefined') {
-  // Set default mode (light/dark) based on system preference or localStorage
+  // Apply the stored preference immediately, defaulting new users to dark mode.
   const preferredMode = typeof localStorage !== 'undefined'
-    ? localStorage.getItem('preferredMode') || 'system'
-    : 'system';
+    ? localStorage.getItem('preferredMode') || DEFAULT_MODE
+    : DEFAULT_MODE;
 
   let actualMode = preferredMode;
   if (preferredMode === 'system') {
@@ -170,7 +172,7 @@ export default defineClientConfig({
     }
   },
   setup () {
-    const currentMode = ref('system');
+    const currentMode = ref(DEFAULT_MODE);
     const currentTheme = ref('dp');
     const currentContrast = ref('default');
     const currentMaterial = ref('sandstone');
@@ -183,7 +185,7 @@ export default defineClientConfig({
       // Keep localStorage in sync with the canonical theme (dp is the only brand).
       localStorage.setItem('preferredTheme', 'dp');
 
-      currentMode.value = localStorage.getItem('preferredMode') || 'system';
+      currentMode.value = localStorage.getItem('preferredMode') || DEFAULT_MODE;
       currentContrast.value = localStorage.getItem('preferredContrast') || 'default';
       currentMaterial.value = localStorage.getItem('preferredMaterial') || 'sandstone';
     });

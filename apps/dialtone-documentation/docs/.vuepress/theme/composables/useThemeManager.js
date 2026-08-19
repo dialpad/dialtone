@@ -11,6 +11,7 @@ import {
 } from '@dialpad/dialtone-tokens/themes/config';
 
 const DEFAULT_MATERIAL = 'sandstone';
+const DEFAULT_MODE = 'dark';
 const MATERIALS = Object.freeze([DEFAULT_MATERIAL, 'steel', 'graphite', 'iron', 'amethyst', 'jade']);
 
 /**
@@ -211,7 +212,7 @@ export function useThemeManager(options = {}) {
 
     // Validate mode
     if (!modes.includes(currentMode.value)) {
-      currentMode.value = 'system';
+      currentMode.value = DEFAULT_MODE;
       if (typeof localStorage !== 'undefined') {
         localStorage.setItem('preferredMode', currentMode.value);
       }
