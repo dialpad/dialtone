@@ -47,6 +47,7 @@ import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js
 import DocHeader from '../components/Header.vue';
 import LayoutBody from '../components/LayoutBody.vue';
 import Sidebar from '../components/Sidebar.vue';
+import MigrationBanner from '../../baseComponents/MigrationBanner.vue';
 import { getComponentCombinatorName } from '../utils/componentCombinator.js';
 import { isExternalUrl } from '../utils/isExternalUrl';
 import { computed, nextTick, ref, watch } from 'vue';
