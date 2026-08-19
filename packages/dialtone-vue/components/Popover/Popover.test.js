@@ -726,6 +726,51 @@ describe('DtPopover Tests', () => {
           document.body.removeChild(customTarget);
         });
       });
+
+      describe('when appendTo changes while the popover is already open', () => {
+        it('does not move the scrim independently of the content (both stay put until reopened)', async () => {
+          // The scrim target is resolved in initTippyInstance() at the same moment as the
+          // content's target, not as a live computed off appendTo -- otherwise the scrim would
+          // reactively follow a mid-open appendTo change while the already-rendered Tippy
+          // content (which only re-resolves on open) stayed behind, drifting apart.
+          const container = document.createElement('div');
+          document.body.appendChild(container);
+
+          const localWrapper = await mountModalPopover({}, document.body);
+          const scrimParentBefore = document.body.querySelector('[data-qa="dt-popover-scrim"]').parentElement;
+          const contentParentBefore = localWrapper.vm.tip.popper.parentElement;
+
+          await localWrapper.setProps({ appendTo: 'parent' });
+
+          const scrim = document.body.querySelector('[data-qa="dt-popover-scrim"]');
+
+          expect(scrim.parentElement).toBe(scrimParentBefore);
+          expect(localWrapper.vm.tip.popper.parentElement).toBe(contentParentBefore);
+
+          localWrapper.unmount();
+          document.body.removeChild(container);
+        });
+
+        it('resolves both scrim and content to the new target on the next open', async () => {
+          const container = document.createElement('div');
+          document.body.appendChild(container);
+
+          const localWrapper = await mountModalPopover({}, container);
+
+          await localWrapper.setProps({ open: false });
+          await flushPromises();
+          await localWrapper.setProps({ appendTo: 'parent', open: true });
+          await flushPromises();
+
+          const scrim = container.querySelector('[data-qa="dt-popover-scrim"]');
+
+          expect(scrim.parentElement).toBe(localWrapper.vm.anchorEl.parentElement);
+          expect(localWrapper.vm.tip.popper.parentElement).toBe(localWrapper.vm.anchorEl.parentElement);
+
+          localWrapper.unmount();
+          document.body.removeChild(container);
+        });
+      });
     });
   });
 

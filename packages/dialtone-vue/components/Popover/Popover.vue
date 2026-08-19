@@ -3,7 +3,7 @@
   <div>
     <Teleport
       v-if="modal && isOpen"
-      :to="scrimAppendTarget"
+      :to="scrimTarget"
     >
       <div
         class="d-modal--transparent"
@@ -648,6 +648,13 @@ export default {
       anchorEl: null,
       popoverContentEl: null,
       hasSlotContent,
+      // Resolved in initTippyInstance(), the same moment the content's own target is resolved,
+      // rather than left as a live computed — otherwise the scrim could drift from the content
+      // if appendTo changes while already open, since content resolution isn't reactive to that.
+      // Starts as the string 'body' (a valid Teleport target, matching the original hardcoded
+      // default) rather than null or document.body -- Teleport needs a valid target from the
+      // first render, and document.body would break SSR where document doesn't exist.
+      scrimTarget: 'body',
     };
   },
 
@@ -681,25 +688,6 @@ export default {
       return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtPopover__anchor'));
     },
 
-    // The scrim must land in the same top-layer context as the popover's own content
-    // (the nearest ancestor <dialog> when nested in one). Otherwise, inside a native
-    // <dialog>-based DtModal, a plain document.body scrim can't block clicks on the
-    // rest of the dialog since top-layer content always paints above it regardless
-    // of z-index — the "modal" behavior silently does nothing when nested.
-    scrimAppendTarget () {
-      if (this.appendTo instanceof HTMLElement) {
-        return this.appendTo;
-      }
-
-      switch (this.appendTo) {
-        case 'parent':
-          return this.resolveParentScrimTarget();
-        case 'root':
-          return this.resolveRootScrimTarget();
-        default:
-          return this.resolveBodyScrimTarget();
-      }
-    },
   },
 
   watch: {
@@ -1128,6 +1116,26 @@ export default {
       return this.anchorEl?.closest('dialog') ?? this.anchorEl?.getRootNode()?.querySelector('body') ?? document.body;
     },
 
+    // The scrim must land in the same top-layer context as the popover's own content
+    // (the nearest ancestor <dialog> when nested in one). Otherwise, inside a native
+    // <dialog>-based DtModal, a plain document.body scrim can't block clicks on the
+    // rest of the dialog since top-layer content always paints above it regardless
+    // of z-index — the "modal" behavior silently does nothing when nested.
+    resolveScrimTarget () {
+      if (this.appendTo instanceof HTMLElement) {
+        return this.appendTo;
+      }
+
+      switch (this.appendTo) {
+        case 'parent':
+          return this.resolveParentScrimTarget();
+        case 'root':
+          return this.resolveRootScrimTarget();
+        default:
+          return this.resolveBodyScrimTarget();
+      }
+    },
+
     /**
      * Return's the anchor ClientRect object relative to the window.
      * Refer to: https://atomiks.github.io/tippyjs/v6/all-props/#getreferenceclientrect for more information
@@ -1157,6 +1165,8 @@ export default {
     },
 
     initTippyInstance () {
+      this.scrimTarget = this.resolveScrimTarget();
+
       let internalAppendTo = null;
       let iFrameError = false;
 

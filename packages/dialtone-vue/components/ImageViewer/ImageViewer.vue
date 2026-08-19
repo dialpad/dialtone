@@ -76,7 +76,7 @@
 <script>
 import ModeMixin from '@/common/mixins/mode';
 import { returnFirstEl } from '@/common/utils';
-import { EVENT_KEYNAMES } from '@/common/constants';
+import { EVENT_KEYNAMES, HTML_ELEMENT_TYPE } from '@/common/constants';
 import { DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { DtButton } from '@/components/Button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
@@ -103,7 +103,7 @@ export default {
      * type: string | HTMLElement, default: 'body'
      */
     appendTo: {
-      type: String,
+      type: [String, HTML_ELEMENT_TYPE],
       default: 'body',
     },
 

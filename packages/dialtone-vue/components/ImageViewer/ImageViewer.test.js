@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import { DtFocustrapDirective } from '@/directives/focustrap_directive';
 import { flushPromises } from '@/common/utils';
+import { HTML_ELEMENT_TYPE } from '@/common/constants';
 import DtImageViewer from './ImageViewer.vue';
 
 const baseProps = {
@@ -244,8 +245,48 @@ describe('DtImageViewer Tests', () => {
       });
     });
 
+    describe('when appendTo is an explicit HTMLElement', () => {
+      it('declares appendTo as accepting HTMLElement, matching its documented contract', () => {
+        // Vue's dev-mode prop type warning doesn't fire in this test environment, so assert
+        // the declared contract directly rather than relying on a warning that can't be observed.
+        expect(DtImageViewer.props.appendTo.type).toContain(HTML_ELEMENT_TYPE);
+      });
+
+      it('teleports into the given DOM node', async () => {
+        const customTarget = document.createElement('div');
+        document.body.appendChild(customTarget);
+
+        const localWrapper = mount(DtImageViewer, {
+          props: { ...baseProps, appendTo: customTarget },
+          global: { plugins: [DtFocustrapDirective] },
+          attachTo: document.body,
+        });
+
+        await localWrapper.find('[data-qa="dt-image-viewer-preview"]').trigger('click');
+
+        expect(customTarget.querySelector('[data-qa="dt-modal"]')).not.toBeNull();
+
+        localWrapper.unmount();
+        document.body.removeChild(customTarget);
+      });
+    });
+
     describe('when appendTo changes after mount', () => {
-      it('recomputes resolvedAppendToTarget', async () => {
+      it('renders the viewer as a direct child of document.body initially', async () => {
+        const localWrapper = mount(DtImageViewer, {
+          props: { ...baseProps },
+          global: { plugins: [DtFocustrapDirective] },
+          attachTo: document.body,
+        });
+
+        await localWrapper.find('[data-qa="dt-image-viewer-preview"]').trigger('click');
+
+        expect(document.body.querySelector('[data-qa="dt-modal"]')?.parentElement).toBe(document.body);
+
+        localWrapper.unmount();
+      });
+
+      it('moves the viewer into the new target when appendTo changes', async () => {
         const customTarget = document.createElement('div');
         customTarget.id = 'custom-target-2';
         document.body.appendChild(customTarget);
@@ -256,11 +297,10 @@ describe('DtImageViewer Tests', () => {
           attachTo: document.body,
         });
 
-        expect(localWrapper.vm.resolvedAppendToTarget).toBe(document.body);
-
+        await localWrapper.find('[data-qa="dt-image-viewer-preview"]').trigger('click');
         await localWrapper.setProps({ appendTo: '#custom-target-2' });
 
-        expect(localWrapper.vm.resolvedAppendToTarget).toBe('#custom-target-2');
+        expect(customTarget.querySelector('[data-qa="dt-modal"]')).not.toBeNull();
 
         localWrapper.unmount();
         document.body.removeChild(customTarget);
