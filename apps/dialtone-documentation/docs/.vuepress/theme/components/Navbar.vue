@@ -42,6 +42,7 @@
       placement="bottom-end"
       class="theme-toggle-dropdown"
       max-height="33vh"
+      hidden
     >
       <template #anchor>
         <dt-button

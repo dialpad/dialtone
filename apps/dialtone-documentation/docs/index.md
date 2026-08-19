@@ -1,11 +1,8 @@
 ---
-layout: Blank
+layout: Home
 pageClass: dialpad-design-home
 ---
 
-<dt-box>
-  <header-overlay />
-</dt-box>
 <dt-box>
   <gradient-hero />
 </dt-box>
@@ -21,7 +18,7 @@ pageClass: dialpad-design-home
         </dt-box>
       </dt-link>
       <dt-box max-inline-size="1200">
-        <dt-text as="h2" kind="headline" wrap="balance" strength="normal" class="home-section-title">Setting the tone</dt-text>
+        <dt-text as="h2" kind="headline" wrap="balance" align="center" strength="normal" density="200" class="home-section-title">Setting the tone</dt-text>
       </dt-box>
       <dt-box max-inline-size="1200">
         <dt-text as="p" align="center" wrap="balance" kind="headline" size="500" strength="normal">Dialtone is Dialpad’s shared design language, shaping everything from our product interfaces to our marketing. It defines how our brand looks, feels, and behaves across every touchpoint. Built on principles of clarity, consistency, and accessibility, Dialtone keeps our visual identity cohesive and unmistakably Dialpad.</dt-text>
@@ -57,7 +54,7 @@ pageClass: dialpad-design-home
         </dt-link>
       </dt-stack>
       <dt-stack class="home-section-inline" gap="550" align="center" justify="center">
-        <dt-text as="h2" kind="headline" wrap="balance" strength="normal" class="home-section-title">Foundations</dt-text>
+        <dt-text as="h2" kind="headline" wrap="balance" align="center" density="200" strength="normal" class="home-section-title">Foundations</dt-text>
         <dt-box max-inline-size="1200">
           <dt-text as="p" align="center" wrap="balance" kind="body" size="300" class="d-fs-350">The building blocks of Dialtone... Color, Type, Icons, and more.</dt-text>
         </dt-box>
@@ -99,7 +96,7 @@ pageClass: dialpad-design-home
         </dt-link>
       </dt-stack>
       <dt-stack class="home-section-inline" gap="550" align="center" justify="center">
-        <dt-text as="h2" kind="headline" wrap="balance" strength="normal" class="home-section-title">Design System</dt-text>
+        <dt-text as="h2" kind="headline" wrap="balance" strength="normal" align="center" density="200" class="home-section-title">Design System</dt-text>
         <dt-box max-inline-size="1200">
           <dt-text as="p" align="center" wrap="balance" kind="body" size="300" class="d-fs-350">Build with Dialtone Components, Design Tokens, CSS Utilities, and more.</dt-text>
         </dt-box>
@@ -115,7 +112,7 @@ pageClass: dialpad-design-home
   <dt-box as="article" padding-block="800" padding-inline="800">
     <dt-stack gap="700" align="center">
       <dt-stack class="home-section-inline" gap="550" align="center">
-        <dt-text as="h2" kind="headline" wrap="balance" strength="normal" class="home-section-title">What's New</dt-text>
+        <dt-text as="h2" kind="headline" wrap="balance" align="center" density="200" strength="normal" class="home-section-title">What's New</dt-text>
         <dt-box max-inline-size="1200">
           <dt-text as="p" align="center" wrap="balance" kind="body" size="300" class="d-fs-350">The latest from Dialpad Design.</dt-text>
         </dt-box>
@@ -160,7 +157,7 @@ pageClass: dialpad-design-home
 
 <style lang="less">
 [data-dt-mode="dark"] .dialpad-design-home {
-  --dt-shell-color-surface-default: var(--dt-color-purple-50);
+  /* --dt-shell-color-surface-default: var(--dt-color-purple-50); */
 }
 
 .home-section-title {
@@ -226,6 +223,7 @@ import { parse, compareDesc, format } from 'date-fns';
 import ShowcaseCarousel from '../../baseComponents/ShowcaseCarousel.vue';
 import GradientHero from '../../baseComponents/GradientHero.vue';
 import HeaderOverlay from '../../baseComponents/HeaderOverlay.vue';
+import { findPageScrollContainer } from '../../theme/utils/pageToc.js';
 
 const sortHandler = (a, b) => compareDesc(
   parse(a.posted, 'y-M-d', new Date()),
@@ -291,24 +289,25 @@ onMounted(() => {
   });
 });
 
-// Scroll-driven effects — rAF-throttled so the two window scroll handlers don't thrash layout.
+// Scroll-driven effects — rAF-throttled so the two page scroll handlers don't thrash layout.
 onMounted(() => {
   const gradientOverlay = document.querySelector('.gradient-overlay');
   const header = document.querySelector('.dialtone-header--home');
-  let lastScrollY = window.scrollY;
+  const scrollContainer = findPageScrollContainer();
+  let lastScrollY = scrollContainer.scrollTop;
   let ticking = false;
 
   if (!gradientOverlay) return;
 
   const update = () => {
     const overlayHeight = gradientOverlay.offsetHeight;
-    const scrollY = window.scrollY;
+    const scrollY = scrollContainer.scrollTop;
 
     // Overlay fades in across its scroll range: 0 at top → 1 when fully scrolled past.
     const overlayOpacity = Math.min(Math.max(scrollY / overlayHeight, 0), 1);
 
     // Text starts at 0.6 and fades out twice as fast — done by 50% scroll.
-    const textOpacity = Math.max(0.6 - (scrollY / (overlayHeight * 0.5)) * 0.6, 0);
+    const textOpacity = Math.max(.8 - (scrollY / (overlayHeight * 0.5)) * 0.6, 0);
 
     // Text slides down 0–325px over the overlay's scroll range.
     const scrollProgress = Math.min(scrollY / overlayHeight, 1);
@@ -342,17 +341,18 @@ onMounted(() => {
     requestAnimationFrame(update);
   };
 
-  window.addEventListener('scroll', handleScroll, { passive: true });
+  scrollContainer.addEventListener('scroll', handleScroll, { passive: true });
   update(); // Set initial state (e.g. when loaded at a non-zero scroll position).
 
   onUnmounted(() => {
-    window.removeEventListener('scroll', handleScroll);
+    scrollContainer.removeEventListener('scroll', handleScroll);
   });
 });
 
 // Footer gradient parallax — rAF-throttled alongside the main scroll handler.
 onMounted(() => {
   const footerGradient = document.querySelector('.gradient-overlay--footer');
+  const scrollContainer = findPageScrollContainer();
 
   if (!footerGradient) return;
 
@@ -360,9 +360,10 @@ onMounted(() => {
 
   const update = () => {
     const rect = footerGradient.getBoundingClientRect();
+    const scrollViewportBottom = scrollContainer.getBoundingClientRect().bottom;
 
     // scrollProgress: 0 when footer's top touches bottom of viewport, 1 when fully in view.
-    const visibleTop = Math.max(0, window.innerHeight - rect.top);
+    const visibleTop = Math.max(0, scrollViewportBottom - rect.top);
     const scrollProgress = Math.min(Math.max(visibleTop / rect.height, 0), 1);
 
     // Interpolate Y from 150% down to 100% as the footer scrolls in.
@@ -378,11 +379,11 @@ onMounted(() => {
     requestAnimationFrame(update);
   };
 
-  window.addEventListener('scroll', handleFooterScroll, { passive: true });
+  scrollContainer.addEventListener('scroll', handleFooterScroll, { passive: true });
   update(); // Set initial state.
 
   onUnmounted(() => {
-    window.removeEventListener('scroll', handleFooterScroll);
+    scrollContainer.removeEventListener('scroll', handleFooterScroll);
   });
 });
 </script>

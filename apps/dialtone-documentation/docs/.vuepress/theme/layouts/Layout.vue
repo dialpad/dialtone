@@ -1,6 +1,6 @@
 <template>
   <dt-stack class="d-ps-fixed d-all-0 d-of-hidden">
-    <migration-banner />
+    <!-- <migration-banner /> -->
     <doc-header
       v-if="viewport.pick({
         default: true,
@@ -31,6 +31,7 @@
         :prev="$frontmatter.prev || prev"
         :next="$frontmatter.next || next"
         :component-combinator-name="componentCombinatorName"
+        :full-bleed="props.fullBleed"
       />
     </DtBox>
   </dt-stack>
@@ -60,6 +61,13 @@ import {
   scrollRouteToTop,
   shouldScrollRouteToTop,
 } from '../utils/pageToc.js';
+
+const props = defineProps({
+  fullBleed: {
+    type: Boolean,
+    default: false,
+  },
+});
 
 const route = useRoute();
 const prev = ref(null);

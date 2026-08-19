@@ -1,6 +1,7 @@
 
 import { defineClientConfig } from 'vuepress/client';
 import Layout from './layouts/Layout.vue';
+import Home from './layouts/Home.vue';
 import NotFound from './layouts/NotFound.vue';
 import Blank from './layouts/Blank.vue';
 import customEmojis from '@data/custom-emoji';
@@ -193,6 +194,7 @@ export default defineClientConfig({
   },
   layouts: {
     Layout,
+    Home,
     NotFound,
     Blank,
   },

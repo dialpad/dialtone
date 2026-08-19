@@ -1,5 +1,10 @@
 <template>
-  <dt-stack direction="row" align="stretch" gap="400" class="d-h100p">
+  <dt-stack
+    direction="row"
+    align="stretch"
+    :gap="props.fullBleed ? '0' : '400'"
+    class="d-h100p"
+  >
     <DtBox
       v-if="viewport.above('lg') && !$frontmatter.home && !$frontmatter.noSidebar"
       padding-block-end="250"
@@ -20,6 +25,15 @@
       padding-inline-end="250"
     >
       <home />
+    </DtBox>
+    <DtBox
+      v-else-if="props.fullBleed"
+      min-inline-size="0"
+      inline-size="100p"
+      scrollbar="move"
+      scrollbar-content-class="dialtone-doc-page-scroll-container"
+    >
+      <content />
     </DtBox>
     <DtBox
       v-else
@@ -82,6 +96,7 @@ import Sidebar from '../components/Sidebar.vue';
 import Home from '../components/Home.vue';
 import Page from '../components/Page.vue';
 import { computed, ref, watch } from 'vue';
+import { Content } from 'vuepress/client';
 
 const props = defineProps({
   prev: {
@@ -95,6 +110,10 @@ const props = defineProps({
   componentCombinatorName: {
     type: String,
     default: null,
+  },
+  fullBleed: {
+    type: Boolean,
+    default: false,
   },
 });
 
