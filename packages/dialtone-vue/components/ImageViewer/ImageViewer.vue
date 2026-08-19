@@ -179,7 +179,9 @@ export default {
       // in mounted() rather than as a computed, since $refs aren't tracked as a reactive
       // dependency and a computed reading $refs.previewButton would permanently cache the
       // pre-mount (wrong) value when isOpen is already true on initial render.
-      resolvedAppendToTarget: document.body,
+      // Initialized to the string 'body' (not document.body) so data() stays SSR-safe;
+      // mounted() resolves the real DOM target on the client.
+      resolvedAppendToTarget: 'body',
     };
   },
 
@@ -211,7 +213,7 @@ export default {
     isOpen: {
       immediate: true,
       handler (isShowing) {
-        if (isShowing) {
+        if (isShowing && typeof document !== 'undefined') {
           // Set a reference to the previously-active element, to which we'll return focus on modal close.
           this.previousActiveElement = document.activeElement;
         } else {
