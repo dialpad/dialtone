@@ -106,10 +106,20 @@
     <DtBox
       v-if="viewport.above('lg')"
     >
-      <DtStack gap="100">
+      <DtStack gap="125">
         <DtBox padding-inline-start="100" padding-inline-end="50" padding-block-start="100">
           <DtStack direction="row" gap="100" justify="space-between">
-            <svg-loader name="dialtone-logo" class="d-w72" />
+            <DtBox
+              v-dt-mode:light
+              surface="secondary"
+              border-radius="450"
+              border-width="100"
+              border-color="subtle"
+              padding-block="1"
+              class="d-d-flex d-of-hidden"
+            >
+              <svg-loader name="dialtone-logo" class="d-w-125" />
+            </DtBox>
             <DtStack gap="25" direction="row">
               <dt-button
                 v-dt-tooltip="'Storybook'"
