@@ -1,6 +1,9 @@
 <template>
   <dt-box
-    padding-block-start="450"
+    :padding-block-start="viewport.pick({
+      default: '200',
+      lg: '450',
+    })"
     padding-block-end="100"
   >
     <dt-stack gap="100">

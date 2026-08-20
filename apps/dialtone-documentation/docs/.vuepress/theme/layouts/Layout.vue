@@ -12,8 +12,8 @@
     <DtBox
       v-if="isMobileMenuOpen && !viewport.above('lg')"
       id="sidebar-mobile"
-      padding-inline="300"
-      surface="primary"
+      padding-inline="150"
+      surface="secondary"
       scrollbar="always"
       min-block-size="0"
       class="d-fl1"
