@@ -29,15 +29,14 @@ import '@dialpad/dialtone-tokens/layered/material/tokens-jade.css';
 import '@dialpad/dialtone-tokens/layered/tokens-dp-colors.css';
 
 import { VALID_MATERIALS } from '@dialpad/dialtone-tokens/themes/config';
-
-const DEFAULT_MODE = 'dark';
+import { DEFAULT_MATERIAL, DEFAULT_MODE, MODES } from './constants/themes.js';
 
 // Normalize stale localStorage values from removed/renamed entries (e.g.
 // bronze → sandstone). preferredTheme has its own force-reset in onBeforeMount.
 const VALID_PREFS = {
-  preferredMode: { valid: ['system', 'light', 'dark'], fallback: DEFAULT_MODE },
+  preferredMode: { valid: [...MODES], fallback: DEFAULT_MODE },
   preferredContrast: { valid: ['default', 'high'], fallback: 'default' },
-  preferredMaterial: { valid: [...VALID_MATERIALS], fallback: 'sandstone' },
+  preferredMaterial: { valid: [...VALID_MATERIALS], fallback: DEFAULT_MATERIAL },
 };
 if (typeof localStorage !== 'undefined') {
   for (const [key, { valid, fallback }] of Object.entries(VALID_PREFS)) {
@@ -175,7 +174,7 @@ export default defineClientConfig({
     const currentMode = ref(DEFAULT_MODE);
     const currentTheme = ref('dp');
     const currentContrast = ref('default');
-    const currentMaterial = ref('sandstone');
+    const currentMaterial = ref(DEFAULT_MATERIAL);
     provide('currentMode', currentMode);
     provide('currentTheme', currentTheme);
     provide('currentContrast', currentContrast);
@@ -187,7 +186,7 @@ export default defineClientConfig({
 
       currentMode.value = localStorage.getItem('preferredMode') || DEFAULT_MODE;
       currentContrast.value = localStorage.getItem('preferredContrast') || 'default';
-      currentMaterial.value = localStorage.getItem('preferredMaterial') || 'sandstone';
+      currentMaterial.value = localStorage.getItem('preferredMaterial') || DEFAULT_MATERIAL;
     });
     onMounted(() => {
       // Reveal the app now that Vue has hydrated and components are registered

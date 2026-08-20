@@ -13,7 +13,6 @@
         })"
         surface="primary"
         :class="viewport.pick({
-          default: false,
           lg: 'd-ps-sticky d-ibs-0 d-zi-navigation-fixed',
         })"
       >

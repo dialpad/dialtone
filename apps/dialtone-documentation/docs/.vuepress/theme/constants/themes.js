@@ -12,17 +12,6 @@
  */
 
 /**
- * Color assistive themes for accessibility
- * Optimized for color vision deficiencies
- *
- * @constant {string[]} COLOR_ASSISTIVE_THEMES
- */
-export const COLOR_ASSISTIVE_THEMES = [
-  'prota-deuter',
-  'trita',
-];
-
-/**
  * Named themes that have official marketing names (alphabetical order)
  * Used for UI grouping in theme selection dropdowns
  *
@@ -54,32 +43,6 @@ export const NUMBERED_THEMES = [
 ];
 
 /**
- * Complete list of theme IDs in display order.
- * This order must match the import sequence in client.js for proper theme loading.
- *
- * Structure:
- * 1. Base theme (dp) - Foundation for all other themes
- * 2. Partner themes (tmo) - Brand partner customizations
- * 3. Color assistive themes (prota-deuter, trita) - Accessibility variants
- * 4. Named themes - Production-ready themes with marketing names (alphabetical)
- * 5. Numbered themes (101-137) - Experimental themes awaiting final names
- *
- * @constant {string[]} ALL_THEME_IDS
- */
-export const ALL_THEME_IDS = [
-  // Base theme
-  'dp',
-  // Partner themes
-  'tmo',
-  // Color assistive themes (accessibility)
-  ...COLOR_ASSISTIVE_THEMES,
-  // Named themes (alphabetical)
-  ...NAMED_THEMES,
-  // Numbered themes (experimental - not yet named)
-  ...NUMBERED_THEMES,
-];
-
-/**
  * Display names for themes that require special formatting
  * If a theme ID is not in this map, formatThemeName will auto-generate a title-case name
  *
@@ -93,15 +56,23 @@ export const THEME_DISPLAY_NAMES = {
 };
 
 /**
- * Categorized theme groups for UI organization
- * Used to structure theme selection dropdowns with logical groupings
+ * Appearance-mode options offered by the docs UI, in display order.
  *
- * @constant {Object} THEME_CATEGORIES
+ * @constant {string[]} MODES
  */
-export const THEME_CATEGORIES = {
-  base: ['dp'],
-  partner: ['tmo'],
-  accessibility: COLOR_ASSISTIVE_THEMES,
-  named: NAMED_THEMES,
-  experimental: NUMBERED_THEMES,
-};
+export const MODES = Object.freeze(['system', 'light', 'dark']);
+
+/**
+ * Mode applied to first-time visitors, before any stored preference exists.
+ *
+ * @constant {string} DEFAULT_MODE
+ */
+export const DEFAULT_MODE = 'dark';
+
+/**
+ * Material applied when none is stored. `setMaterial(null)` is the token API's way
+ * of expressing this one, since no `[data-dt-material="sandstone"]` selector exists.
+ *
+ * @constant {string} DEFAULT_MATERIAL
+ */
+export const DEFAULT_MATERIAL = 'sandstone';

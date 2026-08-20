@@ -1,5 +1,11 @@
 import { inject, computed, onMounted, onUnmounted, ref } from 'vue';
-import { NAMED_THEMES, NUMBERED_THEMES, ALL_THEME_IDS } from '../constants/themes.js';
+import {
+  DEFAULT_MATERIAL,
+  DEFAULT_MODE,
+  MODES,
+  NAMED_THEMES,
+  NUMBERED_THEMES,
+} from '../constants/themes.js';
 import { formatThemeName } from '../utils/formatThemeName.js';
 import { syncBrowserThemeColor } from '../utils/browserThemeColor.js';
 import {
@@ -8,11 +14,11 @@ import {
   setContrast as setContrastConfig,
   setMaterial as setMaterialConfig,
   getBrandMaterial,
+  VALID_MATERIALS,
 } from '@dialpad/dialtone-tokens/themes/config';
 
-const DEFAULT_MATERIAL = 'sandstone';
-const DEFAULT_MODE = 'dark';
-const MATERIALS = Object.freeze([DEFAULT_MATERIAL, 'steel', 'graphite', 'iron', 'amethyst', 'jade']);
+// Derived from the tokens package so adding a material never needs a second edit here.
+const MATERIALS = Object.freeze([...VALID_MATERIALS]);
 
 /**
  * Composable for managing theme, mode, and contrast settings across the documentation site.
@@ -37,9 +43,6 @@ export function useThemeManager(options = {}) {
   const currentContrast = inject('currentContrast');
   const currentMaterial = inject('currentMaterial');
   const themes = inject('themes');
-
-  // Constants
-  const modes = ['system', 'light', 'dark'];
 
   // SSR-safe: Initialize media query in onMounted
   let prefersDarkMediaQuery = null;
@@ -211,7 +214,7 @@ export function useThemeManager(options = {}) {
     if (typeof document === 'undefined') return;
 
     // Validate mode
-    if (!modes.includes(currentMode.value)) {
+    if (!MODES.includes(currentMode.value)) {
       currentMode.value = DEFAULT_MODE;
       if (typeof localStorage !== 'undefined') {
         localStorage.setItem('preferredMode', currentMode.value);
@@ -289,11 +292,10 @@ export function useThemeManager(options = {}) {
     // Theme utilities (only when includeThemes is enabled)
     namedThemes: computed(() => NAMED_THEMES),
     numberedThemes: computed(() => NUMBERED_THEMES),
-    allThemeIds: computed(() => ALL_THEME_IDS),
     formatThemeName,
 
     // Constants
-    modes,
+    modes: MODES,
     materials: MATERIALS,
   };
 }

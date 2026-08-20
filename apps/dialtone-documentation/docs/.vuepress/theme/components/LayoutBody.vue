@@ -42,7 +42,6 @@
         xl: '0',
       })"
       :padding-block-start="viewport.pick({
-        default: false,
         lg: '0',
       })"
       padding-block-end="400"

@@ -1,6 +1,13 @@
 <template>
   <dt-box class="d-d-grid d-g-300 md:d-g-cols3 d-mbe-400">
-    <dt-link to="/ui-kits/what-are-ui-kits/" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
+    <dt-link
+      v-for="section in sections"
+      :key="section.to"
+      :to="section.to"
+      tone="muted"
+      :underline="false"
+      class="d-d-block d-bar-400"
+    >
       <dt-stack direction="row" gap="200">
         <dt-box
           :padding="viewport.pick({ default: '100', md: '200' })"
@@ -15,56 +22,10 @@
         </dt-box>
         <dt-stack>
           <dt-text as="h3" kind="headline" size="200">
-            What are UI Kits?
+            {{ section.title }}
           </dt-text>
           <dt-text as="p" kind="body" size="200" wrap="pretty">
-            Domain-specific components built with Dialtone.
-          </dt-text>
-        </dt-stack>
-      </dt-stack>
-    </dt-link>
-    <dt-link to="/ui-kits/where-to-start/" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
-      <dt-stack direction="row" gap="200">
-        <dt-box
-          :padding="viewport.pick({ default: '100', md: '200' })"
-          border-width="100"
-          border-color="subtle"
-          border-radius="400"
-          surface="secondary"
-        >
-          <dt-stack>
-            <dt-icon class="d-fc-tertiary" name="file-text" :size="viewport.pick({ default: '300', md: '500' })" />
-          </dt-stack>
-        </dt-box>
-        <dt-stack>
-          <dt-text as="h3" kind="headline" size="200">
-            Where to Start
-          </dt-text>
-          <dt-text as="p" kind="body" size="200" wrap="pretty">
-            Adding a UI Kit component to your project.
-          </dt-text>
-        </dt-stack>
-      </dt-stack>
-    </dt-link>
-    <dt-link to="/ui-kits/how-to-contribute/" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
-      <dt-stack direction="row" gap="200">
-        <dt-box
-          :padding="viewport.pick({ default: '100', md: '200' })"
-          border-width="100"
-          border-color="subtle"
-          border-radius="400"
-          surface="secondary"
-        >
-          <dt-stack>
-            <dt-icon class="d-fc-tertiary" name="file-text" :size="viewport.pick({ default: '300', md: '500' })" />
-          </dt-stack>
-        </dt-box>
-        <dt-stack>
-          <dt-text as="h3" kind="headline" size="200">
-            How to Contribute
-          </dt-text>
-          <dt-text as="p" kind="body" size="200" wrap="pretty">
-            How to propose, build, and contribute Dialpad UI Kits.
+            {{ section.blurb }}
           </dt-text>
         </dt-stack>
       </dt-stack>
@@ -129,6 +90,25 @@ import { useViewportBreakpoints } from '../theme/composables/useViewportBreakpoi
 const themeData = useThemeLocaleData();
 
 const viewport = useViewportBreakpoints();
+
+// The three UI Kits explainer pages, rendered as identical link cards.
+const sections = [
+  {
+    to: '/ui-kits/what-are-ui-kits/',
+    title: 'What are UI Kits?',
+    blurb: 'Domain-specific components built with Dialtone.',
+  },
+  {
+    to: '/ui-kits/where-to-start/',
+    title: 'Where to Start',
+    blurb: 'Adding a UI Kit component to your project.',
+  },
+  {
+    to: '/ui-kits/how-to-contribute/',
+    title: 'How to Contribute',
+    blurb: 'How to propose, build, and contribute Dialpad UI Kits.',
+  },
+];
 
 const kits = computed(() => {
   // 'UI Kits' (top level) and its 'Meet the Kits' child both link to /ui-kits/;
