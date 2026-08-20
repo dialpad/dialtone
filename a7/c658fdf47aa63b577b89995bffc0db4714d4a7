@@ -1,0 +1,18 @@
+apps/dialtone-documentation/docs/.vuepress/theme/components/SidebarFooter.vue
+  h_c15b5755534093 2-4,15,17,19-21,26,29,33-35,40,43-80
+apps/dialtone-documentation/docs/.vuepress/theme/components/SidebarHeader.vue
+  h_c15b5755534093 23-52,63
+apps/dialtone-documentation/docs/.vuepress/theme/layouts/Layout.vue
+  h_c15b5755534093 40,44-45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "a7c658fdf47aa63b577b89995bffc0db4714d4a7",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
