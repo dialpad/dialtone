@@ -1,6 +1,6 @@
 <template>
   <dt-banner
-    v-if="shouldShow"
+    v-if="viewport.above('md') && shouldShow"
     kind="info"
     class="d-ps-relative d-zi-base"
     @close="sessionDismiss"
@@ -30,6 +30,9 @@
 <script setup>
 import { ref, computed, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
+import { useViewportBreakpoints } from '../theme/composables/useViewportBreakpoints.js';
+
+const viewport = useViewportBreakpoints();
 
 const props = defineProps({
   visible: {
