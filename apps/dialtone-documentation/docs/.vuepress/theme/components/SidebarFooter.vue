@@ -1,5 +1,5 @@
 <template>
-  <dt-stack gap="125">
+  <dt-stack v-if="viewport.above('lg')" gap="125">
     <dt-box padding-inline-start="100" padding-inline-end="50" padding-block-start="100">
       <dt-stack direction="row" gap="100" justify="space-between">
         <dt-box
@@ -136,6 +136,10 @@
 
 <script setup>
 import { useThemeManager } from '../composables/useThemeManager';
+import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
 
+// Appearance controls plus the external links under the sidebar nav. Desktop chrome
+// only, like SidebarHeader — the narrow shell has no room for it.
+const viewport = useViewportBreakpoints();
 const { currentMode, setMode } = useThemeManager();
 </script>

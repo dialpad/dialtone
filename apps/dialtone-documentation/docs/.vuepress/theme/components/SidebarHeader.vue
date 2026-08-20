@@ -5,6 +5,7 @@
   >
     <dt-stack gap="100">
       <dt-stack
+        v-if="viewport.above('lg')"
         direction="row"
         justify="space-between"
         gap="200"
@@ -40,7 +41,6 @@
         placeholder="Search"
         type="search"
         end-icon-class="d-pie-25"
-        @update:model-value="highlightIndex = -1"
       >
         <template #startIcon="{ iconSize }">
           <dt-box class="d-d-flex" padding-inline-start="50">
@@ -62,6 +62,7 @@
             </template>
           </dt-button>
           <dt-keyboard-shortcut
+            v-else-if="viewport.above('lg')"
             class="d-mie-n75 d-px-100 d-bgc-moderate d-baw0"
             shortcut="∕"
             screen-reader-text="Type / (slash) to focus search field"
@@ -74,9 +75,11 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
 
-// Brand row plus the search field at the top of the sidebar. Owns no search state —
-// the term is a model, and clearing the keyboard highlight is the parent's job.
+// Brand row plus the search field at the top of the sidebar. The field renders at every
+// width; the brand/toggle row and the "/" hint are desktop-only. Owns no search state:
+// the term is a model, and the parent's filteredItems watch clears the keyboard highlight.
 defineProps({
   // id of the results list this field controls, for aria-controls.
   resultsId: {
@@ -89,6 +92,8 @@ defineProps({
     default: undefined,
   },
 });
+
+const viewport = useViewportBreakpoints();
 
 const inputValue = defineModel({ type: String, required: true });
 
