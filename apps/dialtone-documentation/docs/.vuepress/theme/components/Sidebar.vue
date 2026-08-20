@@ -3,79 +3,12 @@
     class="dialtone-sidebar__list d-h100p"
     @keydown="handleKeydown"
   >
-    <dt-box
-      padding-block-start="450"
-      padding-block-end="100"
-    >
-      <dt-stack gap="100">
-        <dt-stack
-          v-if="viewport.above('lg')"
-          direction="row"
-          justify="space-between"
-          gap="200"
-          class="d-pis-150 d-pie-100"
-        >
-          <dt-box padding-block-start="50">
-            <dt-link
-              title="Dialtone homepage"
-              :underline="false"
-              to="/"
-            >
-              <dt-illustration name="dialpad-logo" class="d-h-50 d-w-auto" />
-            </dt-link>
-          </dt-box>
-          <dt-button
-            v-dt-tooltip:bottom="'Toggle Navigation'"
-            kind="muted"
-            importance="clear"
-            aria-label="Toggle Navigation"
-          >
-            <template #startIcon="{ iconSize }">
-              <dt-icon name="sidebar-close" :size="iconSize" />
-            </template>
-          </dt-button>
-        </dt-stack>
-        <dt-input
-          ref="searchInput"
-          v-model="inputValue"
-          aria-label="Search"
-          aria-autocomplete="list"
-          :aria-controls="SIDEBAR_SEARCH_RESULTS_ID"
-          :aria-activedescendant="activeResultId"
-          placeholder="Search"
-          type="search"
-          end-icon-class="d-pie-25"
-          @update:model-value="highlightIndex = -1"
-        >
-          <template #startIcon="{ iconSize }">
-            <dt-box class="d-d-flex" padding-inline-start="50">
-              <dt-icon name="search" :size="iconSize" />
-            </dt-box>
-          </template>
-          <template #endIcon="{ clear }">
-            <dt-button
-              v-if="inputValue.length !== 0"
-              v-dt-tooltip="'Clear search'"
-              kind="muted"
-              importance="clear"
-              :size="100"
-              aria-label="Clear search"
-              @click="clear"
-            >
-              <template #startIcon="{ iconSize }">
-                <dt-icon name="close" :size="iconSize" />
-              </template>
-            </dt-button>
-            <dt-keyboard-shortcut
-              v-else-if="viewport.above('lg')"
-              class="d-mie-n75 d-px-100 d-bgc-moderate d-baw0"
-              shortcut="∕"
-              screen-reader-text="Type / (slash) to focus search field"
-            />
-          </template>
-        </dt-input>
-      </dt-stack>
-    </dt-box>
+    <sidebar-header
+      ref="searchInput"
+      v-model="inputValue"
+      :results-id="SIDEBAR_SEARCH_RESULTS_ID"
+      :active-result-id="activeResultId"
+    />
     <dt-box class="d-fl1" scrollbar="move">
       <dt-stack
         :id="SIDEBAR_SEARCH_RESULTS_ID"
@@ -108,7 +41,7 @@
         </li>
       </dt-stack>
     </dt-box>
-    <sidebar-footer v-if="viewport.above('lg')" />
+    <sidebar-footer />
   </dt-stack>
 </template>
 
@@ -117,9 +50,9 @@ import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue';
 import { useRoute } from 'vue-router';
 import SidebarItem from './SidebarItem.vue';
 import SidebarFooter from './SidebarFooter.vue';
+import SidebarHeader from './SidebarHeader.vue';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import { useSidebarItems } from '../composables/useSidebarItems';
-import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
 import {
   canReceiveCharacterInput,
   isSidebarSearchShortcut,
@@ -137,7 +70,6 @@ const SIDEBAR_SEARCH_RESULTS_ID = 'dialtone-sidebar-search-results';
 const SIDEBAR_SEARCH_RESULT_ID_PREFIX = 'dialtone-sidebar-search-result-';
 const items = useThemeLocaleData().value.sidebar;
 const sidebarItems = useSidebarItems(items);
-const viewport = useViewportBreakpoints();
 
 // Track which items are open (by their link or text as key)
 const openItems = ref(new Set());
@@ -270,7 +202,8 @@ watch(inputValue, (newValue) => {
   }
 });
 
-// Reset keyboard highlight when filtered results change
+// Reset keyboard highlight whenever the result set changes — this is the only
+// place that does it, including on every keystroke (filterNavItems returns a new array).
 watch(filteredItems, () => {
   highlightIndex.value = -1;
 });
