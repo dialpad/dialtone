@@ -252,23 +252,28 @@ const isOpen = computed(() => {
   return props.openItems.has(key);
 });
 
+// A parent row whose link equals its first child's link exists only to group — the child
+// row highlights instead, so the parent never shows itself as active.
+const isGroupingOnlyParent = (link) => {
+  const children = props.item.children;
+  if (!children?.length) return false;
+
+  return link === children[0].link;
+};
+
+// Links that stay active while viewing their descendant routes. Keyed by link, because
+// isActiveLink is called with sub-item links too, where props.item is still the parent.
+// Add an entry here rather than another branch below.
+const DESCENDANT_ACTIVE_PREFIXES = new Map([
+  ['/dialtone/whats-new/', '/dialtone/whats-new/posts/'],
+]);
+
 const isActiveLink = (link, isParentButton = false) => {
   if (!link) return false;
+  if (isParentButton && isGroupingOnlyParent(link)) return false;
 
-  // Check if this is a grouping-only parent (link matches first child)
-  // Only apply this check when evaluating the parent button itself, not child buttons
-  if (isParentButton && props.item.children && props.item.children.length > 0) {
-    const firstChildLink = props.item.children[0].link;
-    if (link === firstChildLink) {
-      // This is a grouping-only parent - don't show as active
-      return false;
-    }
-  }
-
-  // Special case: Highlight What's New when viewing blog posts
-  if (link === '/dialtone/whats-new/' && route.path.startsWith('/dialtone/whats-new/posts/')) {
-    return true;
-  }
+  const descendantPrefix = DESCENDANT_ACTIVE_PREFIXES.get(link);
+  if (descendantPrefix && route.path.startsWith(descendantPrefix)) return true;
 
   return route.path === link;
 };

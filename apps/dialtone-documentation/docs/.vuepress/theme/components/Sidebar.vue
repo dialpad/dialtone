@@ -458,6 +458,15 @@ const moveHighlight = (index, step) => {
   return (index + step + count) % count;
 };
 
+// Clicking the highlighted row's button routes through its own handler, so Enter and
+// mouse activation stay in sync.
+const activateHighlightedItem = (event) => {
+  if (isModifiedKeypress(event) || highlightIndex.value < 0) return;
+
+  event.preventDefault();
+  getSidebarButton(flattenedFilteredItems.value[highlightIndex.value])?.click();
+};
+
 // Combobox-style result navigation keeps DOM focus in the search input.
 const handleKeydown = (event) => {
   if (!isSearchActive.value) {
@@ -486,12 +495,7 @@ const handleKeydown = (event) => {
       break;
 
     case 'Enter':
-      if (!isModifiedKeypress(event) && highlightIndex.value >= 0) {
-        event.preventDefault();
-        const highlightedItemPath = flattenedFilteredItems.value[highlightIndex.value];
-        const button = getSidebarButton(highlightedItemPath);
-        if (button) button.click();
-      }
+      activateHighlightedItem(event);
       break;
   }
 };
