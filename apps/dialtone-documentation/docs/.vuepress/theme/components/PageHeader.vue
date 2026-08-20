@@ -1,7 +1,7 @@
 <template>
-  <DtBox as="header">
+  <dt-box as="header">
     <slot name="content-top" />
-    <DtBox
+    <dt-box
       :gap="{ default: '25', lg: '200' }"
     >
       <dt-stack
@@ -175,9 +175,9 @@
       >
         {{ $frontmatter.description }}
       </dt-text>
-    </DtBox>
+    </dt-box>
     <slot name="content-bottom" />
-  </DtBox>
+  </dt-box>
 </template>
 
 <script setup>

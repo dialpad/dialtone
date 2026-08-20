@@ -9,7 +9,7 @@
       @toggle-mobile-menu="toggleMobileMenu"
     />
     <migration-banner v-if="viewport.above('md')" />
-    <DtBox
+    <dt-box
       v-if="isMobileMenuOpen && !viewport.above('lg')"
       id="sidebar-mobile"
       padding-inline="300"
@@ -19,8 +19,8 @@
       class="d-fl1"
     >
       <sidebar />
-    </DtBox>
-    <DtBox
+    </dt-box>
+    <dt-box
       v-else
       id="layout-body"
       padding-block-end="0"
@@ -32,7 +32,7 @@
         :next="$frontmatter.next || next"
         :component-combinator-name="componentCombinatorName"
       />
-    </DtBox>
+    </dt-box>
   </dt-stack>
 </template>
 

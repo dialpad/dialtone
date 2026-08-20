@@ -1,75 +1,75 @@
 <template>
-  <DtBox class="d-d-grid d-g-300 md:d-g-cols3 d-mbe-400">
-    <DtLink to="/ui-kits/what-are-ui-kits/" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
-      <DtStack direction="row" gap="200">
-        <DtBox
+  <dt-box class="d-d-grid d-g-300 md:d-g-cols3 d-mbe-400">
+    <dt-link to="/ui-kits/what-are-ui-kits/" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
+      <dt-stack direction="row" gap="200">
+        <dt-box
           :padding="viewport.pick({ default: '100', md: '200' })"
           border-width="100"
           border-color="subtle"
           border-radius="400"
           surface="secondary"
         >
-          <DtStack>
+          <dt-stack>
             <dt-icon class="d-fc-tertiary" name="file-text" :size="viewport.pick({ default: '300', md: '500' })" />
-          </DtStack>
-        </DtBox>
-        <DtStack>
+          </dt-stack>
+        </dt-box>
+        <dt-stack>
           <dt-text as="h3" kind="headline" size="200">
             What are UI Kits?
           </dt-text>
           <dt-text as="p" kind="body" size="200" wrap="pretty">
             Domain-specific components built with Dialtone.
           </dt-text>
-        </DtStack>
-      </DtStack>
-    </DtLink>
-    <DtLink to="/ui-kits/where-to-start/" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
-      <DtStack direction="row" gap="200">
-        <DtBox
+        </dt-stack>
+      </dt-stack>
+    </dt-link>
+    <dt-link to="/ui-kits/where-to-start/" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
+      <dt-stack direction="row" gap="200">
+        <dt-box
           :padding="viewport.pick({ default: '100', md: '200' })"
           border-width="100"
           border-color="subtle"
           border-radius="400"
           surface="secondary"
         >
-          <DtStack>
+          <dt-stack>
             <dt-icon class="d-fc-tertiary" name="file-text" :size="viewport.pick({ default: '300', md: '500' })" />
-          </DtStack>
-        </DtBox>
-        <DtStack>
+          </dt-stack>
+        </dt-box>
+        <dt-stack>
           <dt-text as="h3" kind="headline" size="200">
             Where to Start
           </dt-text>
           <dt-text as="p" kind="body" size="200" wrap="pretty">
             Adding a UI Kit component to your project.
           </dt-text>
-        </DtStack>
-      </DtStack>
-    </DtLink>
-    <DtLink to="/ui-kits/how-to-contribute/" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
-      <DtStack direction="row" gap="200">
-        <DtBox
+        </dt-stack>
+      </dt-stack>
+    </dt-link>
+    <dt-link to="/ui-kits/how-to-contribute/" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
+      <dt-stack direction="row" gap="200">
+        <dt-box
           :padding="viewport.pick({ default: '100', md: '200' })"
           border-width="100"
           border-color="subtle"
           border-radius="400"
           surface="secondary"
         >
-          <DtStack>
+          <dt-stack>
             <dt-icon class="d-fc-tertiary" name="file-text" :size="viewport.pick({ default: '300', md: '500' })" />
-          </DtStack>
-        </DtBox>
-        <DtStack>
+          </dt-stack>
+        </dt-box>
+        <dt-stack>
           <dt-text as="h3" kind="headline" size="200">
             How to Contribute
           </dt-text>
           <dt-text as="p" kind="body" size="200" wrap="pretty">
             How to propose, build, and contribute Dialpad UI Kits.
           </dt-text>
-        </DtStack>
-      </DtStack>
-    </DtLink>
-  </DtBox>
+        </dt-stack>
+      </dt-stack>
+    </dt-link>
+  </dt-box>
 
   <div class="dialtone-wall dialtone-wall--ui-kits">
     <template v-for="kit in kits" :key="kit.text">

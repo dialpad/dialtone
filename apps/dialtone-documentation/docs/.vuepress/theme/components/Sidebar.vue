@@ -3,30 +3,27 @@
     class="dialtone-sidebar__list d-h100p"
     @keydown="handleKeydown"
   >
-    <DtBox
+    <dt-box
       padding-block-start="450"
       padding-block-end="100"
     >
-      <DtStack gap="100">
-        <DtStack
-          v-if="viewport.pick({
-            default: false,
-            lg: true,
-          })"
+      <dt-stack gap="100">
+        <dt-stack
+          v-if="viewport.above('lg')"
           direction="row"
           justify="space-between"
           gap="200"
           class="d-pis-150 d-pie-100"
         >
-          <DtBox padding-block-start="50">
+          <dt-box padding-block-start="50">
             <dt-link
               title="Dialtone homepage"
               :underline="false"
               to="/"
             >
-              <DtIllustration name="dialpad-logo" class="d-h-50 d-w-auto" />
+              <dt-illustration name="dialpad-logo" class="d-h-50 d-w-auto" />
             </dt-link>
-          </DtBox>
+          </dt-box>
           <dt-button
             v-dt-tooltip:bottom="'Toggle Navigation'"
             kind="muted"
@@ -37,7 +34,7 @@
               <dt-icon name="sidebar-close" :size="iconSize" />
             </template>
           </dt-button>
-        </DtStack>
+        </dt-stack>
         <dt-input
           ref="searchInput"
           v-model="inputValue"
@@ -51,9 +48,9 @@
           @update:model-value="highlightIndex = -1"
         >
           <template #startIcon="{ iconSize }">
-            <DtBox class="d-d-flex" padding-inline-start="50">
+            <dt-box class="d-d-flex" padding-inline-start="50">
               <dt-icon name="search" :size="iconSize" />
-            </DtBox>
+            </dt-box>
           </template>
           <template #endIcon="{ clear }">
             <dt-button
@@ -77,10 +74,10 @@
             />
           </template>
         </dt-input>
-      </DtStack>
-    </DtBox>
-    <DtBox class="d-fl1" scrollbar="move">
-      <DtStack
+      </dt-stack>
+    </dt-box>
+    <dt-box class="d-fl1" scrollbar="move">
+      <dt-stack
         :id="SIDEBAR_SEARCH_RESULTS_ID"
         ref="listRef"
         as="ul"
@@ -109,15 +106,15 @@
             </template>
           </dt-empty-state>
         </li>
-      </DtStack>
-    </DtBox>
-    <DtBox
+      </dt-stack>
+    </dt-box>
+    <dt-box
       v-if="viewport.above('lg')"
     >
-      <DtStack gap="125">
-        <DtBox padding-inline-start="100" padding-inline-end="50" padding-block-start="100">
-          <DtStack direction="row" gap="100" justify="space-between">
-            <DtBox
+      <dt-stack gap="125">
+        <dt-box padding-inline-start="100" padding-inline-end="50" padding-block-start="100">
+          <dt-stack direction="row" gap="100" justify="space-between">
+            <dt-box
               v-dt-mode:light
               surface="secondary"
               border-radius="450"
@@ -127,8 +124,8 @@
               class="d-d-flex d-of-hidden"
             >
               <svg-loader name="dialtone-logo" class="d-w-125" />
-            </DtBox>
-            <DtStack gap="25" direction="row">
+            </dt-box>
+            <dt-stack gap="25" direction="row">
               <dt-button
                 v-dt-tooltip="'Storybook'"
                 href="https://dialtone.dialpad.com/vue"
@@ -155,9 +152,9 @@
                   <dt-icon name="github" :size="iconSize" />
                 </template>
               </dt-button>
-            </DtStack>
-          </DtStack>
-        </DtBox>
+            </dt-stack>
+          </dt-stack>
+        </dt-box>
         <dt-segmented-control
           :model-value="currentMode"
           aria-label="Appearance mode"
@@ -179,7 +176,7 @@
             </template>
           </dt-segmented-control-item>
         </dt-segmented-control>
-        <DtStack direction="row" gap="1">
+        <dt-stack direction="row" gap="1">
           <dt-button
             class="d-w100p"
             href="https://dialpad.com/app/messages/agxzfnViZXItdm9pY2VyGAsSC1RleHRNZXNzYWdlGIDA3KvmyP0IDA"
@@ -245,9 +242,9 @@
               </svg>
             </template>
           </dt-button>
-        </DtStack>
-      </DtStack>
-    </DtBox>
+        </dt-stack>
+      </dt-stack>
+    </dt-box>
   </dt-stack>
 </template>
 
@@ -452,6 +449,15 @@ const computeOpenItems = (items, routePath) => {
   return open;
 };
 
+// Step the highlight by one, wrapping at both ends. An unset highlight (-1)
+// enters the list at the first item going down, the last going up.
+const moveHighlight = (index, step) => {
+  const count = flattenedFilteredItems.value.length;
+  if (index < 0) return step > 0 ? 0 : count - 1;
+
+  return (index + step + count) % count;
+};
+
 // Combobox-style result navigation keeps DOM focus in the search input.
 const handleKeydown = (event) => {
   if (!isSearchActive.value) {
@@ -471,20 +477,12 @@ const handleKeydown = (event) => {
   switch (event.key) {
     case 'ArrowDown':
       event.preventDefault();
-      if (highlightIndex.value < flattenedFilteredItems.value.length - 1) {
-        highlightIndex.value++;
-      } else {
-        highlightIndex.value = 0;
-      }
+      highlightIndex.value = moveHighlight(highlightIndex.value, 1);
       break;
 
     case 'ArrowUp':
       event.preventDefault();
-      if (highlightIndex.value > 0) {
-        highlightIndex.value--;
-      } else {
-        highlightIndex.value = flattenedFilteredItems.value.length - 1;
-      }
+      highlightIndex.value = moveHighlight(highlightIndex.value, -1);
       break;
 
     case 'Enter':

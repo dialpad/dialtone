@@ -5,7 +5,7 @@
     gap="400"
     class="d-h100p"
   >
-    <DtBox
+    <dt-box
       v-if="viewport.above('lg') && !$frontmatter.home && !$frontmatter.noSidebar"
       padding-block-end="250"
       padding-inline="200"
@@ -18,15 +18,15 @@
       class="dialtone-shell-sidebar"
     >
       <sidebar />
-    </DtBox>
-    <DtBox
+    </dt-box>
+    <dt-box
       v-if="$frontmatter.home"
       inline-size="100p"
       padding-inline-end="250"
     >
       <home />
-    </DtBox>
-    <DtBox
+    </dt-box>
+    <dt-box
       v-else
       min-inline-size="0"
       inline-size="100p"
@@ -52,8 +52,8 @@
         :next="props.next"
         :component-combinator-name="props.componentCombinatorName"
       />
-    </DtBox>
-    <DtBox
+    </dt-box>
+    <dt-box
       v-if="props.componentCombinatorName"
       v-show="showWideCombinator"
       id="combinator-wide-target"

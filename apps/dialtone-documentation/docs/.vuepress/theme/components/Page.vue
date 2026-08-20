@@ -1,11 +1,11 @@
 <template>
-  <DtStack direction="row" align="start" gap="250">
-    <DtBox
+  <dt-stack direction="row" align="start" gap="250">
+    <dt-box
       class="d-fl1 d-mx-auto"
       min-inline-size="0"
       max-inline-size="1600"
     >
-      <DtBox
+      <dt-box
         id="page-sticky-header"
         :padding-block-start="viewport.pick({
           default: '300',
@@ -17,7 +17,7 @@
           lg: 'd-ps-sticky d-ibs-0 d-zi-navigation-fixed',
         })"
       >
-        <DtBox border-width-block-end="100" padding-block-end="200" border-color="subtle">
+        <dt-box border-width-block-end="100" padding-block-end="200" border-color="subtle">
           <page-header />
           <dt-dropdown
             v-if="includeToc && viewport.pick({
@@ -80,18 +80,18 @@
             </template>
           </dt-tab-group>
           -->
-        </DtBox>
-      </DtBox>
-      <DtBox padding-block-start="250">
-        <DtBox
+        </dt-box>
+      </dt-box>
+      <dt-box padding-block-start="250">
+        <dt-box
           v-if="props.componentCombinatorName"
           id="combinator-inline-target"
         />
-      </DtBox>
+      </dt-box>
       <!-- eslint-disable-next-line vue/no-undef-components -->
       <content class="d-docsite-article" />
-      <DtStack gap="300">
-        <DtStack
+      <dt-stack gap="300">
+        <dt-stack
           as="nav"
           direction="row"
           :justify="prev ? 'between' : 'end'"
@@ -137,8 +137,8 @@
               <span>{{ next.text }}</span>
             </dt-stack>
           </dt-button>
-        </DtStack>
-        <DtBox>
+        </dt-stack>
+        <dt-box>
           <dt-text as="p" kind="body" :size="300" tone="muted">
             <dt-text v-if="$frontmatter.title">
               {{ $frontmatter.title }}
@@ -146,10 +146,10 @@
             documentation last updated
             <dt-text>{{ lastUpdated }}</dt-text>
           </dt-text>
-        </DtBox>
-      </DtStack>
-    </DtBox>
-    <DtBox
+        </dt-box>
+      </dt-stack>
+    </dt-box>
+    <dt-box
       v-if="includeToc && viewport.pick(rightRailTocViewportValues)"
       max-inline-size="300"
       min-inline-size="300"
@@ -171,8 +171,8 @@
         :active-hash="activeHash"
         @navigate="handleNavigate"
       />
-    </DtBox>
-  </DtStack>
+    </dt-box>
+  </dt-stack>
 </template>
 
 <script setup>

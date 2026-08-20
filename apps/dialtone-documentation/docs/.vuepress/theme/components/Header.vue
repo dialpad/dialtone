@@ -1,5 +1,5 @@
 <template>
-  <DtBox
+  <dt-box
     padding="100"
     padding-block-start="125"
     padding-inline="150"
@@ -36,14 +36,13 @@
         :underline="false"
         to="/"
       >
-        <!-- <svg-loader class="d-h-50" name="dialtone-logo" /> -->
-        <DtIllustration name="dialpad-logo" class="d-w-125" />
+        <dt-illustration name="dialpad-logo" class="d-w-125" />
       </dt-link>
-      <DtStack class="d-w100p">
+      <dt-stack class="d-w100p">
         <navbar class="d-mis-auto" />
-      </DtStack>
+      </dt-stack>
     </dt-stack>
-  </DtBox>
+  </dt-box>
 </template>
 
 <script setup>

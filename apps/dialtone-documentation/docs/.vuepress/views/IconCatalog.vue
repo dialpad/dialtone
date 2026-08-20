@@ -62,8 +62,8 @@
       </div>
     </div>
   </div>
-  <DtStack gap="300">
-    <DtBox
+  <dt-stack gap="300">
+    <dt-box
       v-for="(icons, category) in filteredIconsList"
       :key="category"
       :padding-inline="200"
@@ -88,8 +88,8 @@
           @click="selectIcon({ name, keywords, category })"
         />
       </div>
-    </DtBox>
-  </DtStack>
+    </dt-box>
+  </dt-stack>
   <dt-empty-state
     v-if="!hasSearchResults"
     :size="200"

@@ -6,7 +6,7 @@
     gap="0"
     class="d-w100p"
   >
-    <DtBox
+    <dt-box
       padding-block-end="250"
       padding-inline="200"
       min-inline-size="450"
@@ -16,14 +16,14 @@
       class="dialtone-shell-sidebar d-ps-sticky d-ibs-0 d-h100vh"
     >
       <sidebar />
-    </DtBox>
-    <DtBox
+    </dt-box>
+    <dt-box
       min-inline-size="0"
       inline-size="100p"
       class="d-fl1"
     >
       <content />
-    </DtBox>
+    </dt-box>
   </dt-stack>
   <template v-else>
     <dt-stack
@@ -34,7 +34,7 @@
         :mobile-menu-open="isMobileMenuOpen"
         @toggle-mobile-menu="toggleMobileMenu"
       />
-      <DtBox
+      <dt-box
         id="sidebar-mobile"
         padding-inline="300"
         surface="primary"
@@ -43,7 +43,7 @@
         class="d-fl1"
       >
         <sidebar />
-      </DtBox>
+      </dt-box>
     </dt-stack>
     <template v-else>
       <doc-header

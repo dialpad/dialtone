@@ -1,12 +1,12 @@
 <template>
   <div class="gradient-overlay" style="--overlay-opacity: 0; --text-opacity: 1;">
     <div class="gradient-overlay__overlay" />
-    <DtBox
+    <dt-box
       block-size="100p"
       padding-block-end="800"
       class="d-plc-center"
     >
-      <DtBox class="home-gradient-hero-content">
+      <dt-box class="home-gradient-hero-content">
         <dt-box class="d-d-flex d-plc-center d-mbe-600">
           <dt-link to="/dialtone/">
             <dt-box
@@ -71,8 +71,8 @@
             </dt-text>
           </dt-button>
         </dt-stack>
-      </DtBox>
-    </DtBox>
+      </dt-box>
+    </dt-box>
   </div>
 </template>
 
