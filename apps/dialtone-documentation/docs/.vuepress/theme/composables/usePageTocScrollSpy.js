@@ -1,10 +1,12 @@
-import { nextTick, onMounted, onUnmounted, ref, unref, watch } from 'vue';
+import { computed, nextTick, onMounted, onUnmounted, ref, unref, watch } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import {
   createRouteHashScrollGuard,
   findPageScrollContainer,
+  findPageStickyHeader,
   getActiveHeaderLink,
   getCurrentBrowserHash,
+  getLinkedHeaders,
   getHashScrollBehavior,
   getScrollOffset,
   getTargetScrollTop,
@@ -24,6 +26,9 @@ export function usePageTocScrollSpy (headers) {
   const route = useRoute();
   const router = useRouter();
   const scrollContainer = ref(null);
+  const stickyHeader = ref(null);
+  // Flattening the header tree per scroll frame was the hot path; memoize it instead.
+  const linkedHeaders = computed(() => getLinkedHeaders(unref(headers) || []));
   const activeHash = ref(getCurrentBrowserHash(route.hash));
   const routeHashScrollGuard = createRouteHashScrollGuard();
 
@@ -38,6 +43,9 @@ export function usePageTocScrollSpy (headers) {
 
   function syncScrollContainer () {
     const nextScrollContainer = findPageScrollContainer();
+    // Refresh even when the container is unchanged — the sticky header can come and go
+    // between pages.
+    stickyHeader.value = findPageStickyHeader(nextScrollContainer);
     if (scrollContainer.value === nextScrollContainer) return;
 
     removeScrollListener?.();
@@ -66,7 +74,8 @@ export function usePageTocScrollSpy (headers) {
     if (!currentHeaders.length) return;
 
     const nextActiveHash = getActiveHeaderLink(currentHeaders, scrollContainer.value, {
-      offset: getScrollOffset(scrollContainer.value),
+      offset: getScrollOffset(scrollContainer.value, stickyHeader.value),
+      linkedHeaders: linkedHeaders.value,
     });
 
     if (nextActiveHash === activeHash.value) return;
@@ -86,8 +95,10 @@ export function usePageTocScrollSpy (headers) {
 
     startProgrammaticScroll(behavior);
 
+    const offset = getScrollOffset(scrollContainer.value, stickyHeader.value);
+
     scrollContainer.value.scrollTo({
-      top: Math.max(0, getTargetScrollTop(scrollContainer.value, target, getScrollOffset(scrollContainer.value))),
+      top: Math.max(0, getTargetScrollTop(scrollContainer.value, target, offset)),
       behavior,
     });
   }

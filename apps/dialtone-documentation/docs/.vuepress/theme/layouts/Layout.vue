@@ -1,5 +1,6 @@
 <template>
   <dt-stack class="d-ps-fixed d-all-0 d-of-hidden">
+    <migration-banner />
     <doc-header
       v-if="viewport.pick({
         default: true,
@@ -8,8 +9,7 @@
       :mobile-menu-open="isMobileMenuOpen"
       @toggle-mobile-menu="toggleMobileMenu"
     />
-    <migration-banner v-if="viewport.above('md')" />
-    <dt-box
+    <DtBox
       v-if="isMobileMenuOpen && !viewport.above('lg')"
       id="sidebar-mobile"
       padding-inline="300"
@@ -19,8 +19,8 @@
       class="d-fl1"
     >
       <sidebar />
-    </dt-box>
-    <dt-box
+    </DtBox>
+    <DtBox
       v-else
       id="layout-body"
       padding-block-end="0"
@@ -31,7 +31,38 @@
         :prev="$frontmatter.prev || prev"
         :next="$frontmatter.next || next"
         :component-combinator-name="componentCombinatorName"
+        :full-bleed="props.fullBleed"
       />
+    </DtBox>
+    <dt-box
+      v-if="showBranchBadge"
+      padding-block="25"
+      padding-inline="50"
+      padding-inline-end="75"
+      border-width="100"
+      position="fixed"
+      max-inline-size="30"
+      inset-block-end="75"
+      inset-inline-end="75"
+      z-index="notification"
+      border-radius="300"
+      shadow="card"
+      surface="overlay"
+    >
+      <dt-stack :title="branchName" direction="row" gap="50">
+        <dt-icon name="branch" class="d-fc-muted" :size="100" />
+        <dt-text
+          as="p"
+          kind="body"
+          size="100"
+          tone="muted"
+          class="d-c-default"
+          :title="branchName"
+          truncate
+        >
+          {{ branchName }}
+        </dt-text>
+      </dt-stack>
     </dt-box>
   </dt-stack>
 </template>
@@ -60,6 +91,16 @@ import {
   scrollRouteToTop,
   shouldScrollRouteToTop,
 } from '../utils/pageToc.js';
+
+const props = defineProps({
+  fullBleed: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const branchName = __DIALTONE_BRANCH_NAME__;
+const showBranchBadge = branchName && (__VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__);
 
 const route = useRoute();
 const prev = ref(null);

@@ -1,13 +1,5 @@
 <template>
   <dt-stack direction="row" gap="50">
-    <dt-box hidden padding-inline-end="100">
-      <dt-stack v-if="showBranchBadge" :title="branchName" direction="row" gap="50">
-        <dt-icon name="branch" class="d-fc-muted" :size="100" />
-        <dt-text as="p" kind="body" size="100" tone="muted" class="d-wmx-250 d-c-default" :title="branchName" truncate>
-          {{ branchName }}
-        </dt-text>
-      </dt-stack>
-    </dt-box>
     <dt-button
       v-dt-tooltip:bottom="'Storybook'"
       href="https://dialtone.dialpad.com/vue"
@@ -34,6 +26,7 @@
         <dt-icon name="github" :size="iconSize" />
       </template>
     </dt-button>
+    <!-- Intentionally hidden, don't remove -->
     <dt-dropdown
       id="theme-toggle-dropdown"
       navigation-type="arrow-keys"
@@ -295,9 +288,6 @@
 
 <script setup>
 import { useThemeManager } from '../composables/useThemeManager';
-
-const branchName = __DIALTONE_BRANCH_NAME__;
-const showBranchBadge = branchName && (__VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__);
 
 // Use theme manager composable with theme switching enabled
 const {

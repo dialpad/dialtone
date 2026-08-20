@@ -185,6 +185,7 @@
 <script setup>
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+import { isDescendantOfNavCollection } from '../utils/navRoutes.js';
 import { isExternalUrl } from '../utils/isExternalUrl';
 
 const STATUS_BADGES = {
@@ -261,19 +262,13 @@ const isGroupingOnlyParent = (link) => {
   return link === children[0].link;
 };
 
-// Links that stay active while viewing their descendant routes. Keyed by link, because
-// isActiveLink is called with sub-item links too, where props.item is still the parent.
-// Add an entry here rather than another branch below.
-const DESCENDANT_ACTIVE_PREFIXES = new Map([
-  ['/dialtone/whats-new/', '/dialtone/whats-new/posts/'],
-]);
-
 const isActiveLink = (link, isParentButton = false) => {
   if (!link) return false;
   if (isParentButton && isGroupingOnlyParent(link)) return false;
 
-  const descendantPrefix = DESCENDANT_ACTIVE_PREFIXES.get(link);
-  if (descendantPrefix && route.path.startsWith(descendantPrefix)) return true;
+  // Keyed on `link`, not props.item — isActiveLink is called with sub-item links too,
+  // where props.item is still the parent.
+  if (isDescendantOfNavCollection(link, route.path)) return true;
 
   return route.path === link;
 };

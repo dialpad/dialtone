@@ -108,143 +108,7 @@
         </li>
       </dt-stack>
     </dt-box>
-    <dt-box
-      v-if="viewport.above('lg')"
-    >
-      <dt-stack gap="125">
-        <dt-box padding-inline-start="100" padding-inline-end="50" padding-block-start="100">
-          <dt-stack direction="row" gap="100" justify="space-between">
-            <dt-box
-              v-dt-mode:light
-              surface="secondary"
-              border-radius="450"
-              border-width="100"
-              border-color="subtle"
-              padding-block="1"
-              class="d-d-flex d-of-hidden"
-            >
-              <svg-loader name="dialtone-logo" class="d-w-125" />
-            </dt-box>
-            <dt-stack gap="25" direction="row">
-              <dt-button
-                v-dt-tooltip="'Storybook'"
-                href="https://dialtone.dialpad.com/vue"
-                target="_blank"
-                rel="noreferrer noopener"
-                kind="muted"
-                importance="clear"
-                aria-label="Open Storybook"
-              >
-                <template #startIcon="{ iconSize }">
-                  <dt-icon name="storybook" :size="iconSize" />
-                </template>
-              </dt-button>
-              <dt-button
-                v-dt-tooltip="'Github Repository'"
-                href="https://github.com/dialpad/dialtone"
-                target="_blank"
-                rel="noreferrer noopener"
-                kind="muted"
-                importance="clear"
-                aria-label="Open GitHub repository"
-              >
-                <template #startIcon="{ iconSize }">
-                  <dt-icon name="github" :size="iconSize" />
-                </template>
-              </dt-button>
-            </dt-stack>
-          </dt-stack>
-        </dt-box>
-        <dt-segmented-control
-          :model-value="currentMode"
-          aria-label="Appearance mode"
-          @update:model-value="setMode"
-        >
-          <dt-segmented-control-item v-dt-tooltip="`Mode: System`" value="system" label="System">
-            <template #startIcon="{ iconSize }">
-              <dt-icon name="laptop-2" :size="iconSize" />
-            </template>
-          </dt-segmented-control-item>
-          <dt-segmented-control-item v-dt-tooltip="`Mode: Light`" value="light" label="Light">
-            <template #startIcon="{ iconSize }">
-              <dt-icon name="sun" :size="iconSize" />
-            </template>
-          </dt-segmented-control-item>
-          <dt-segmented-control-item v-dt-tooltip="`Mode: Dark`" value="dark" label="Dark">
-            <template #startIcon="{ iconSize }">
-              <dt-icon name="moon" :size="iconSize" />
-            </template>
-          </dt-segmented-control-item>
-        </dt-segmented-control>
-        <dt-stack direction="row" gap="1">
-          <dt-button
-            class="d-w100p"
-            href="https://dialpad.com/app/messages/agxzfnViZXItdm9pY2VyGAsSC1RleHRNZXNzYWdlGIDA3KvmyP0IDA"
-            target="_blank"
-            rel="noreferrer noopener"
-            kind="muted"
-            importance="clear"
-            size="200"
-          >
-            dialtone
-            <template #startIcon="{ iconSize }">
-              <dt-icon name="hash-bold" :size="iconSize" />
-            </template>
-          </dt-button>
-          <dt-button
-            class="d-w100p"
-            href="https://dialpad.atlassian.net/servicedesk/customer/portal/123/create/465"
-            target="_blank"
-            rel="noreferrer noopener"
-            kind="muted"
-            importance="clear"
-            size="200"
-          >
-            Request
-            <template #startIcon="{ iconSize }">
-              <dt-icon name="hand-filled" :size="iconSize" />
-            </template>
-          </dt-button>
-          <dt-button
-            class="d-w100p"
-            href="https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=1&pid=12508"
-            target="_blank"
-            rel="noreferrer noopener"
-            kind="muted"
-            importance="clear"
-            size="200"
-          >
-            Bug
-            <template #startIcon>
-              <svg
-                class="d-icon--size-200 d-icon"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M12 20v-9" />
-                <path d="M14 7a4 4 0 0 1 4 4v3a6 6 0 0 1-12 0v-3a4 4 0 0 1 4-4z" />
-                <path d="M14.12 3.88 16 2" />
-                <path d="M21 21a4 4 0 0 0-3.81-4" />
-                <path d="M21 5a4 4 0 0 1-3.55 3.97" />
-                <path d="M22 13h-4" />
-                <path d="M3 21a4 4 0 0 1 3.81-4" />
-                <path d="M3 5a4 4 0 0 0 3.55 3.97" />
-                <path d="M6 13H2" />
-                <path d="m8 2 1.88 1.88" />
-                <path d="M9 7.13V6a3 3 0 1 1 6 0v1.13" />
-              </svg>
-            </template>
-          </dt-button>
-        </dt-stack>
-      </dt-stack>
-    </dt-box>
+    <sidebar-footer v-if="viewport.above('lg')" />
   </dt-stack>
 </template>
 
@@ -252,14 +116,21 @@
 import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue';
 import { useRoute } from 'vue-router';
 import SidebarItem from './SidebarItem.vue';
+import SidebarFooter from './SidebarFooter.vue';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import { useSidebarItems } from '../composables/useSidebarItems';
-import { useThemeManager } from '../composables/useThemeManager';
 import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
 import {
   canReceiveCharacterInput,
   isSidebarSearchShortcut,
 } from '../utils/sidebarShortcuts';
+import {
+  collectOpenItemKeys,
+  collectOpenItemKeysForRoute,
+  filterNavItems,
+  flattenNavigableItemPaths,
+  wrapHighlightIndex,
+} from '../utils/sidebarSearch.js';
 
 const route = useRoute();
 const SIDEBAR_SEARCH_RESULTS_ID = 'dialtone-sidebar-search-results';
@@ -267,7 +138,6 @@ const SIDEBAR_SEARCH_RESULT_ID_PREFIX = 'dialtone-sidebar-search-result-';
 const items = useThemeLocaleData().value.sidebar;
 const sidebarItems = useSidebarItems(items);
 const viewport = useViewportBreakpoints();
-const { currentMode, setMode } = useThemeManager();
 
 // Track which items are open (by their link or text as key)
 const openItems = ref(new Set());
@@ -304,53 +174,12 @@ const handleSearchShortcut = (event) => {
   nextTick(focusSearchInput);
 };
 
-// Strip separators and case for fuzzy matching.
-const normalize = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, '');
-
-// Recursive filter function for sidebar items
-const filterItems = (items, searchTerm) => {
-  if (!searchTerm) return items;
-
-  const term = searchTerm.trim();
-  if (!term) return items;
-
-  const normalizedTerm = normalize(term);
-  if (!normalizedTerm) return [];
-
-  const filtered = [];
-
-  items.forEach(item => {
-    // Check if current item matches (text or keywords)
-    const itemMatches = normalize(item.text).includes(normalizedTerm) ||
-      (item.keywords?.some(keyword =>
-        normalize(keyword).includes(normalizedTerm),
-      ) ?? false);
-
-    // Recursively filter children if they exist
-    const filteredChildren = item.children
-      ? filterItems(item.children, searchTerm)
-      : [];
-
-    // Include item if:
-    // 1. Item text matches, OR
-    // 2. Any children match (filteredChildren.length > 0)
-    if (itemMatches || filteredChildren.length > 0) {
-      filtered.push({
-        ...item,
-        children: filteredChildren.length > 0 ? filteredChildren : item.children,
-      });
-    }
-  });
-
-  return filtered;
-};
-
 // Computed property for filtered sidebar items
 const filteredItems = computed(() => {
   if (!inputValue.value || !inputValue.value.trim()) {
     return sidebarItems.value;
   }
-  return filterItems(sidebarItems.value, inputValue.value);
+  return filterNavItems(sidebarItems.value, inputValue.value);
 });
 const isSearchActive = computed(() => Boolean(inputValue.value.trim()));
 const filteredItemKeys = computed(() => {
@@ -359,27 +188,8 @@ const filteredItemKeys = computed(() => {
     .map(item => item.link || item.text);
 });
 
-// Flatten filtered items into a sequential list for keyboard navigation
-const flattenedFilteredItems = computed(() => {
-  const flattened = [];
-
-  const traverse = (items, parentPath = '') => {
-    items.forEach((item, index) => {
-      const itemPath = parentPath ? `${parentPath}.${index}` : String(index);
-
-      if (item.link && !item.children?.length) {
-        flattened.push(itemPath);
-      }
-
-      if (item.children && item.children.length > 0) {
-        traverse(item.children, itemPath);
-      }
-    });
-  };
-
-  traverse(filteredItems.value);
-  return flattened;
-});
+// Item paths of the leaf links, in the order arrow keys walk them.
+const flattenedFilteredItems = computed(() => flattenNavigableItemPaths(filteredItems.value));
 const activeItemPath = computed(() => {
   return flattenedFilteredItems.value[highlightIndex.value];
 });
@@ -388,75 +198,6 @@ const activeResultId = computed(() => {
     ? `${SIDEBAR_SEARCH_RESULT_ID_PREFIX}${activeItemPath.value}`
     : undefined;
 });
-
-// Compute which items should be open during search
-const computeOpenItemsForSearch = (items) => {
-  const open = new Set();
-
-  const traverse = (itemsList) => {
-    itemsList.forEach(item => {
-      // If item has children, it should be opened to show them
-      if (item.children && item.children.length > 0) {
-        open.add(item.link || item.text);
-        // Recursively process children
-        traverse(item.children);
-      }
-    });
-  };
-
-  traverse(items);
-  return open;
-};
-
-// Check if current route is within an item's tree
-const isRouteInTree = (item, routePath) => {
-  if (!item.children) return false;
-  if (routePath === item.link) return true;
-
-  const checkChildren = (children) => {
-    return children.some(child => {
-      if (routePath === child.link) return true;
-
-      // Special case: Treat blog posts as children of What's New
-      if (child.link === '/dialtone/whats-new/' && routePath.startsWith('/dialtone/whats-new/posts/')) {
-        return true;
-      }
-
-      if (child.children) return checkChildren(child.children);
-      return false;
-    });
-  };
-
-  return checkChildren(item.children);
-};
-
-// Find all items that should be open based on route
-const computeOpenItems = (items, routePath) => {
-  const open = new Set();
-
-  const traverse = (itemsList) => {
-    itemsList.forEach(item => {
-      if (item.children) {
-        if (isRouteInTree(item, routePath)) {
-          open.add(item.link || item.text);
-        }
-        traverse(item.children);
-      }
-    });
-  };
-
-  traverse(items);
-  return open;
-};
-
-// Step the highlight by one, wrapping at both ends. An unset highlight (-1)
-// enters the list at the first item going down, the last going up.
-const moveHighlight = (index, step) => {
-  const count = flattenedFilteredItems.value.length;
-  if (index < 0) return step > 0 ? 0 : count - 1;
-
-  return (index + step + count) % count;
-};
 
 // Clicking the highlighted row's button routes through its own handler, so Enter and
 // mouse activation stay in sync.
@@ -486,12 +227,12 @@ const handleKeydown = (event) => {
   switch (event.key) {
     case 'ArrowDown':
       event.preventDefault();
-      highlightIndex.value = moveHighlight(highlightIndex.value, 1);
+      highlightIndex.value = wrapHighlightIndex(highlightIndex.value, 1, flattenedFilteredItems.value.length);
       break;
 
     case 'ArrowUp':
       event.preventDefault();
-      highlightIndex.value = moveHighlight(highlightIndex.value, -1);
+      highlightIndex.value = wrapHighlightIndex(highlightIndex.value, -1, flattenedFilteredItems.value.length);
       break;
 
     case 'Enter':
@@ -502,7 +243,7 @@ const handleKeydown = (event) => {
 
 // Initialize open items after mount
 onMounted(() => {
-  openItems.value = computeOpenItems(sidebarItems.value, route.path);
+  openItems.value = collectOpenItemKeysForRoute(sidebarItems.value, route.path);
   document.addEventListener('keydown', handleSearchShortcut);
 });
 
@@ -515,17 +256,17 @@ watch(() => route.path, (newPath) => {
   // Clear search and keyboard highlight when navigating to a different page
   inputValue.value = '';
   highlightIndex.value = -1;
-  openItems.value = computeOpenItems(sidebarItems.value, newPath);
+  openItems.value = collectOpenItemKeysForRoute(sidebarItems.value, newPath);
 });
 
 // Watch search input to control expansion state
 watch(inputValue, (newValue) => {
   if (newValue && newValue.trim()) {
     // Search is active - expand all parents containing matches
-    openItems.value = computeOpenItemsForSearch(filteredItems.value);
+    openItems.value = collectOpenItemKeys(filteredItems.value);
   } else {
     // Search cleared - revert to route-based expansion
-    openItems.value = computeOpenItems(sidebarItems.value, route.path);
+    openItems.value = collectOpenItemKeysForRoute(sidebarItems.value, route.path);
   }
 });
 

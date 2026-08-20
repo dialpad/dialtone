@@ -136,8 +136,13 @@ export function findPageScrollContainer () {
     document.documentElement;
 }
 
-export function getScrollOffset (scrollContainer) {
-  const stickyHeader = scrollContainer?.querySelector?.(PAGE_STICKY_HEADER_SELECTOR);
+// `stickyHeader` may be passed in by callers that already hold it — the scroll path
+// runs this every frame and the element only changes between pages.
+export function findPageStickyHeader (scrollContainer) {
+  return scrollContainer?.querySelector?.(PAGE_STICKY_HEADER_SELECTOR) ?? null;
+}
+
+export function getScrollOffset (scrollContainer, stickyHeader = findPageStickyHeader(scrollContainer)) {
   if (!stickyHeader || !scrollContainer?.getBoundingClientRect) return 0;
 
   const scrollContainerTop = scrollContainer.getBoundingClientRect().top;
@@ -153,8 +158,13 @@ export function getTargetScrollTop (scrollContainer, target, offset = 0) {
   return scrollContainer.scrollTop + targetTop - scrollContainerTop - offset;
 }
 
-export function getActiveHeaderLink (headers, scrollContainer, { offset = 0, getTarget = getElementById } = {}) {
-  const linkedHeaders = getLinkedHeaders(headers);
+// `linkedHeaders` may be passed in pre-flattened; the scroll path memoizes it rather
+// than rebuilding the whole tree on every frame.
+export function getActiveHeaderLink (headers, scrollContainer, {
+  offset = 0,
+  getTarget = getElementById,
+  linkedHeaders = getLinkedHeaders(headers),
+} = {}) {
   if (!linkedHeaders.length || !scrollContainer) return '';
 
   if (isScrolledToBottom(scrollContainer)) {
@@ -164,7 +174,7 @@ export function getActiveHeaderLink (headers, scrollContainer, { offset = 0, get
   return getPassedHeaderLink(linkedHeaders, scrollContainer.getBoundingClientRect().top + offset, getTarget);
 }
 
-function getLinkedHeaders (headers) {
+export function getLinkedHeaders (headers) {
   return flattenHeaders(headers).filter(header => header.link);
 }
 

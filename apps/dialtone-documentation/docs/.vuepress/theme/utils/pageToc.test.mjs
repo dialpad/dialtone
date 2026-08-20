@@ -10,6 +10,8 @@ import {
   getCurrentBrowserHash,
   getRightRailTocViewportValues,
   getRouteScrollToTopBehavior,
+  findPageStickyHeader,
+  getLinkedHeaders,
   getScrollOffset,
   getTargetScrollTop,
   hashToId,
@@ -189,6 +191,36 @@ describe('pageToc utilities', () => {
     assert.equal(hashToId('/components/button.html#writing%20guidelines'), 'writing guidelines');
   });
 
+  it('accepts a pre-resolved sticky header, skipping the lookup', () => {
+    // The scroll path caches the element and passes it in; result must match the
+    // version that queries for it.
+    const stickyHeader = { getBoundingClientRect: () => ({ bottom: 220 }) };
+    const queried = {
+      getBoundingClientRect: () => ({ top: 100 }),
+      querySelector: () => stickyHeader,
+    };
+    const noQuery = {
+      getBoundingClientRect: () => ({ top: 100 }),
+      querySelector: () => { throw new Error('should not query when passed in'); },
+    };
+
+    assert.equal(getScrollOffset(noQuery, stickyHeader), getScrollOffset(queried));
+  });
+
+  it('findPageStickyHeader returns null when there is no sticky header', () => {
+    assert.equal(findPageStickyHeader({ querySelector: () => null }), null);
+    assert.equal(findPageStickyHeader(undefined), null);
+  });
+
+  it('getLinkedHeaders flattens the tree and drops headers with no link', () => {
+    const headers = [
+      { link: '#usage', children: [{ children: [] }, { link: '#nested', children: [] }] },
+      { children: [] },
+    ];
+
+    assert.deepEqual(getLinkedHeaders(headers).map(h => h.link), ['#usage', '#nested']);
+  });
+
   it('uses the sticky header bottom as the scroll offset', () => {
     const scrollContainer = {
       getBoundingClientRect: () => ({ top: 100 }),
@@ -242,6 +274,33 @@ describe('pageToc utilities', () => {
         getTarget: id => targets[id],
       }),
       '#variants',
+    );
+  });
+
+  it('accepts pre-flattened linkedHeaders, matching the derived result', () => {
+    const headers = [
+      { link: '#usage', children: [{ link: '#variants', children: [] }] },
+      { link: '#classes', children: [] },
+    ];
+    const scrollContainer = {
+      scrollTop: 600,
+      clientHeight: 500,
+      scrollHeight: 2000,
+      getBoundingClientRect: () => ({ top: 100 }),
+    };
+    const targets = {
+      usage: { getBoundingClientRect: () => ({ top: 80 }) },
+      variants: { getBoundingClientRect: () => ({ top: 260 }) },
+      classes: { getBoundingClientRect: () => ({ top: 900 }) },
+    };
+    const options = { offset: 180, getTarget: id => targets[id] };
+
+    assert.equal(
+      getActiveHeaderLink(headers, scrollContainer, {
+        ...options,
+        linkedHeaders: getLinkedHeaders(headers),
+      }),
+      getActiveHeaderLink(headers, scrollContainer, options),
     );
   });
 

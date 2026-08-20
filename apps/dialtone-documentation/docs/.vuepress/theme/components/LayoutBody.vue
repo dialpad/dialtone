@@ -6,7 +6,7 @@
     class="d-h100p"
   >
     <dt-box
-      v-if="viewport.above('lg') && !$frontmatter.home && !$frontmatter.noSidebar"
+      v-if="viewport.above('lg') && !$frontmatter.noSidebar"
       padding-block-end="250"
       padding-inline="200"
       min-inline-size="450"
@@ -20,14 +20,6 @@
       <sidebar />
     </dt-box>
     <dt-box
-      v-if="$frontmatter.home"
-      inline-size="100p"
-      padding-inline-end="250"
-    >
-      <home />
-    </dt-box>
-    <dt-box
-      v-else
       min-inline-size="0"
       inline-size="100p"
       scrollbar="move"
@@ -83,7 +75,6 @@
 <script setup>
 import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
 import Sidebar from '../components/Sidebar.vue';
-import Home from '../components/Home.vue';
 import Page from '../components/Page.vue';
 import { computed, ref, watch } from 'vue';
 
