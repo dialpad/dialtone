@@ -191,76 +191,53 @@ function _extractComponentStatus(app) {
     .sort((a, b) => _sortAlphabetically(a.name, b.name));
 }
 
+// Frontmatter fields copied onto matching sidebar nav items. `overwrite` fields
+// always win; the rest only fill a gap site-nav.json left empty.
+const INJECTED_NAV_FIELDS = [
+  { key: 'keywords', overwrite: true, isValid: Array.isArray },
+  { key: 'status' },
+  { key: 'description' },
+];
+
+// Distinct from _normalizePagePath above: strips both suffixes so a nav link and a
+// page path collapse to the same lookup key.
+const _navLookupKey = (path) => path.replace(/\/$/, '').replace(/\.html$/, '');
+
 function _injectFrontmatterIntoSidebar(app, options) {
-  // Create maps of page paths to frontmatter data for faster lookup
-  const pageKeywords = new Map();
-  const pageStatus = new Map();
-  const pageDescription = new Map();
+  // field -> (page path -> value), keyed by both normalized and raw path for faster lookup.
+  const lookups = new Map(INJECTED_NAV_FIELDS.map(({ key }) => [key, new Map()]));
+
   app.pages.forEach((page) => {
-    const normalizedPath = page.path.replace(/\/$/, '').replace(/\.html$/, '');
+    INJECTED_NAV_FIELDS.forEach(({ key, isValid }) => {
+      const value = page.frontmatter?.[key];
+      if (!value || (isValid && !isValid(value))) return;
 
-    if (
-      page.frontmatter?.keywords &&
-      Array.isArray(page.frontmatter.keywords)
-    ) {
-      pageKeywords.set(normalizedPath, page.frontmatter.keywords);
-      pageKeywords.set(page.path, page.frontmatter.keywords);
-    }
-
-    if (page.frontmatter?.status) {
-      pageStatus.set(normalizedPath, page.frontmatter.status);
-      pageStatus.set(page.path, page.frontmatter.status);
-    }
-
-    if (page.frontmatter?.description) {
-      pageDescription.set(normalizedPath, page.frontmatter.description);
-      pageDescription.set(page.path, page.frontmatter.description);
-    }
+      const byPath = lookups.get(key);
+      byPath.set(_navLookupKey(page.path), value);
+      byPath.set(page.path, value);
+    });
   });
 
-  // Recursive function to inject frontmatter data into sidebar items
   const injectData = (items) => {
-    if (!items || !Array.isArray(items)) return;
+    if (!Array.isArray(items)) return;
 
     items.forEach((item) => {
       if (item.link) {
-        const normalizedLink = item.link
-          .replace(/\/$/, '')
-          .replace(/\.html$/, '');
+        const normalizedLink = _navLookupKey(item.link);
 
-        const keywords =
-          pageKeywords.get(normalizedLink) || pageKeywords.get(item.link);
-        if (keywords) {
-          item.keywords = keywords;
-        }
+        INJECTED_NAV_FIELDS.forEach(({ key, overwrite }) => {
+          if (!overwrite && item[key]) return;
 
-        // Only inject status from frontmatter if not already set in site-nav.json
-        if (!item.status) {
-          const status =
-            pageStatus.get(normalizedLink) || pageStatus.get(item.link);
-          if (status) {
-            item.status = status;
-          }
-        }
-
-        if (!item.description) {
-          const description =
-            pageDescription.get(normalizedLink) ||
-            pageDescription.get(item.link);
-          if (description) {
-            item.description = description;
-          }
-        }
+          const byPath = lookups.get(key);
+          const value = byPath.get(normalizedLink) || byPath.get(item.link);
+          if (value) item[key] = value;
+        });
       }
 
-      // Recursively process children
-      if (item.children && Array.isArray(item.children)) {
-        injectData(item.children);
-      }
+      if (Array.isArray(item.children)) injectData(item.children);
     });
   };
 
-  // Process the nav tree
   if (options.sidebar?.nav) {
     injectData(options.sidebar.nav);
   }
