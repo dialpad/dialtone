@@ -12,11 +12,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": ".claude/hooks/commit-format.sh"
+            "command": "${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel)}/.claude/hooks/commit-format.sh"
           },
           {
             "type": "command",
-            "command": ".claude/hooks/pre-push-pr-guard.sh"
+            "command": "${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel)}/.claude/hooks/pre-push-pr-guard.sh"
           }
         ]
       },
@@ -25,7 +25,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": ".claude/hooks/branch-protection.sh"
+            "command": "${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel)}/.claude/hooks/branch-protection.sh"
           }
         ]
       }
@@ -36,12 +36,12 @@
         "hooks": [
           {
             "type": "command",
-            "command": ".claude/hooks/shaping-ripple.sh",
+            "command": "${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel)}/.claude/hooks/shaping-ripple.sh",
             "timeout": 1000
           },
           {
             "type": "command",
-            "command": ".claude/hooks/post-tool-use-tracker.sh"
+            "command": "${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel)}/.claude/hooks/post-tool-use-tracker.sh"
           }
         ]
       }
