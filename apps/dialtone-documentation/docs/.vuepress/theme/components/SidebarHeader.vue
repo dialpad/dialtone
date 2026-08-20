@@ -20,6 +20,36 @@
             <dt-illustration name="dialpad-logo" class="d-h-50 d-w-auto" />
           </dt-link>
         </dt-box>
+        <dt-stack gap="25" direction="row">
+          <dt-button
+            v-dt-tooltip="'Storybook'"
+            href="https://dialtone.dialpad.com/vue"
+            target="_blank"
+            rel="noreferrer noopener"
+            kind="muted"
+            importance="clear"
+            aria-label="Open Storybook"
+          >
+            <template #startIcon="{ iconSize }">
+              <dt-icon name="storybook" :size="iconSize" />
+            </template>
+          </dt-button>
+          <dt-button
+            v-dt-tooltip="'Github Repository'"
+            href="https://github.com/dialpad/dialtone"
+            target="_blank"
+            rel="noreferrer noopener"
+            kind="muted"
+            importance="clear"
+            aria-label="Open GitHub repository"
+          >
+            <template #startIcon="{ iconSize }">
+              <dt-icon name="github" :size="iconSize" />
+            </template>
+          </dt-button>
+        </dt-stack>
+        <!--
+        Future Feature: do not remove
         <dt-button
           v-dt-tooltip:bottom="'Toggle Navigation'"
           kind="muted"
@@ -30,6 +60,7 @@
             <dt-icon name="sidebar-close" :size="iconSize" />
           </template>
         </dt-button>
+        -->
       </dt-stack>
       <dt-input
         ref="inputRef"
