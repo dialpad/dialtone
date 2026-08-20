@@ -1,6 +1,12 @@
 // sm/md/lg/xl mirror the canonical scale in packages/postcss-responsive-variations
 // (defaultBreakpoints) and must stay in sync with it — there is no shared breakpoint
-// token yet. xs/xxl/xxxl are docs-only extensions with no CSS-utility counterpart.
+// token yet. xs/xxl/xxxl/xxxxl are docs-only extensions with no CSS-utility counterpart.
+//
+// Breakpoints resolve through `(min-width: Npx)` media queries — the same form those
+// CSS utility prefixes compile to — so a breakpoint is active here exactly when its
+// `lg:`-style classes are active in the stylesheet, boundary width included. Anything
+// that compares widths by hand will disagree with CSS by a pixel; go through
+// getViewportBreakpointMediaQuery instead.
 
 /**
  * @typedef {'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl' | 'xxxl' | 'xxxxl'} ViewportBreakpointName
@@ -30,7 +36,8 @@ export const VIEWPORT_BREAKPOINTS = Object.freeze({
 /** @type {Readonly<ViewportBreakpointName[]>} */
 export const VIEWPORT_BREAKPOINT_NAMES = Object.freeze(Object.keys(VIEWPORT_BREAKPOINTS));
 
-// Largest → smallest, so pickViewportValue returns the highest matching breakpoint.
+// Largest → smallest, so resolveActiveViewportBreakpoint and
+// pickViewportValueByBreakpointName return the highest matching breakpoint.
 const VIEWPORT_BREAKPOINT_NAMES_DESC = [...VIEWPORT_BREAKPOINT_NAMES].reverse();
 
 const PICK_DEFAULT_KEY = 'default';
@@ -60,7 +67,7 @@ const assertKnownActiveBreakpoint = (activeName) => {
  * @param {ViewportPickValues<T>} values
  * @returns {void}
  */
-export const assertKnownViewportValueKeys = (values) => {
+const assertKnownViewportValueKeys = (values) => {
   Object.keys(values).forEach((key) => {
     if (key === PICK_DEFAULT_KEY) return;
 
@@ -69,12 +76,30 @@ export const assertKnownViewportValueKeys = (values) => {
 };
 
 /**
- * @param {number} width
+ * The media query a breakpoint is active for.
+ *
+ * @param {ViewportBreakpointName} name
+ * @returns {string}
+ */
+export const getViewportBreakpointMediaQuery = (name) => {
+  assertKnownBreakpoint(name);
+
+  return `(min-width: ${VIEWPORT_BREAKPOINTS[name]}px)`;
+};
+
+/**
+ * Highest breakpoint whose media query currently matches, or '' when none do
+ * (i.e. narrower than the smallest breakpoint).
+ *
+ * Takes a predicate rather than a width so the caller owns the matching — the live
+ * path asks MediaQueryList.matches, and tests can answer without a DOM.
+ *
+ * @param {(name: ViewportBreakpointName) => boolean} isMatch
  * @returns {ActiveViewportBreakpointName}
  */
-export const getActiveViewportBreakpoint = (width) => {
+export const resolveActiveViewportBreakpoint = (isMatch) => {
   for (const name of VIEWPORT_BREAKPOINT_NAMES_DESC) {
-    if (width > VIEWPORT_BREAKPOINTS[name]) return name;
+    if (isMatch(name)) return name;
   }
 
   return '';
@@ -95,15 +120,6 @@ export const isAboveViewportBreakpointName = (activeName, name) => {
 };
 
 /**
- * @param {number} width
- * @param {ViewportBreakpointName} name
- * @returns {boolean}
- */
-export const isAboveViewportBreakpoint = (width, name) => {
-  return isAboveViewportBreakpointName(getActiveViewportBreakpoint(width), name);
-};
-
-/**
  * @template T
  * @param {ActiveViewportBreakpointName} activeName
  * @param {ViewportPickValues<T>} values
@@ -120,14 +136,4 @@ export const pickViewportValueByBreakpointName = (activeName, values) => {
   }
 
   return values[PICK_DEFAULT_KEY];
-};
-
-/**
- * @template T
- * @param {number} width
- * @param {ViewportPickValues<T>} values
- * @returns {T | undefined}
- */
-export const pickViewportValue = (width, values) => {
-  return pickViewportValueByBreakpointName(getActiveViewportBreakpoint(width), values);
 };

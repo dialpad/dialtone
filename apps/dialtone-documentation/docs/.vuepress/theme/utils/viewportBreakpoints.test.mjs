@@ -1,27 +1,52 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import {
-  getActiveViewportBreakpoint,
-  isAboveViewportBreakpoint,
+  getViewportBreakpointMediaQuery,
   isAboveViewportBreakpointName,
-  pickViewportValue,
   pickViewportValueByBreakpointName,
+  resolveActiveViewportBreakpoint,
   VIEWPORT_BREAKPOINTS,
 } from './viewportBreakpoints.js';
 
+// Stands in for MediaQueryList.matches: `(min-width: Npx)` matches at N and above.
+const matchesAtWidth = (width) => (name) => width >= VIEWPORT_BREAKPOINTS[name];
+
+const activeAtWidth = (width) => resolveActiveViewportBreakpoint(matchesAtWidth(width));
+
 describe('viewportBreakpoints', () => {
-  it('uses strict greater-than breakpoint semantics', () => {
-    assert.equal(isAboveViewportBreakpoint(VIEWPORT_BREAKPOINTS.md, 'md'), false);
-    assert.equal(isAboveViewportBreakpoint(VIEWPORT_BREAKPOINTS.md + 1, 'md'), true);
+  it('builds min-width queries matching the CSS utility scale', () => {
+    // sm/md/lg/xl must stay identical to defaultBreakpoints in
+    // packages/postcss-responsive-variations, which compiles the `sm:`/`md:`/… prefixes.
+    assert.equal(getViewportBreakpointMediaQuery('sm'), '(min-width: 480px)');
+    assert.equal(getViewportBreakpointMediaQuery('md'), '(min-width: 640px)');
+    assert.equal(getViewportBreakpointMediaQuery('lg'), '(min-width: 960px)');
+    assert.equal(getViewportBreakpointMediaQuery('xl'), '(min-width: 1264px)');
   });
 
-  it('resolves the active breakpoint using strict greater-than semantics', () => {
-    assert.equal(getActiveViewportBreakpoint(0), '');
-    assert.equal(getActiveViewportBreakpoint(VIEWPORT_BREAKPOINTS.xs), '');
-    assert.equal(getActiveViewportBreakpoint(VIEWPORT_BREAKPOINTS.xs + 1), 'xs');
-    assert.equal(getActiveViewportBreakpoint(VIEWPORT_BREAKPOINTS.md), 'sm');
-    assert.equal(getActiveViewportBreakpoint(VIEWPORT_BREAKPOINTS.md + 1), 'md');
-    assert.equal(getActiveViewportBreakpoint(VIEWPORT_BREAKPOINTS.xxxxl + 1), 'xxxxl');
+  it('treats the boundary width as inside the breakpoint', () => {
+    // The whole point of resolving through media queries: at exactly 640px the `md:`
+    // utility classes apply, so md must be active here too.
+    assert.equal(activeAtWidth(VIEWPORT_BREAKPOINTS.md), 'md');
+    assert.equal(activeAtWidth(VIEWPORT_BREAKPOINTS.md - 1), 'sm');
+  });
+
+  it('resolves the highest matching breakpoint', () => {
+    assert.equal(activeAtWidth(0), '');
+    assert.equal(activeAtWidth(VIEWPORT_BREAKPOINTS.xs - 1), '');
+    assert.equal(activeAtWidth(VIEWPORT_BREAKPOINTS.xs), 'xs');
+    assert.equal(activeAtWidth(1000), 'lg');
+    assert.equal(activeAtWidth(VIEWPORT_BREAKPOINTS.xxxxl + 1), 'xxxxl');
+  });
+
+  it('short-circuits on the first matching breakpoint, largest first', () => {
+    const asked = [];
+    const active = resolveActiveViewportBreakpoint((name) => {
+      asked.push(name);
+      return name === 'lg';
+    });
+
+    assert.equal(active, 'lg');
+    assert.deepEqual(asked, ['xxxxl', 'xxxl', 'xxl', 'xl', 'lg']);
   });
 
   it('checks above semantics from an active breakpoint name', () => {
@@ -32,7 +57,7 @@ describe('viewportBreakpoints', () => {
   });
 
   it('picks the largest matching breakpoint value', () => {
-    const value = pickViewportValue(1000, {
+    const value = pickViewportValueByBreakpointName(activeAtWidth(1000), {
       default: '100p',
       xs: '100',
       md: '300',
@@ -56,7 +81,7 @@ describe('viewportBreakpoints', () => {
   });
 
   it('uses default when no breakpoint value matches', () => {
-    const value = pickViewportValue(320, {
+    const value = pickViewportValueByBreakpointName(activeAtWidth(VIEWPORT_BREAKPOINTS.xs - 1), {
       default: '100p',
       xs: '100',
     });
@@ -65,7 +90,7 @@ describe('viewportBreakpoints', () => {
   });
 
   it('returns undefined when no default or matching breakpoint exists', () => {
-    const value = pickViewportValue(320, {
+    const value = pickViewportValueByBreakpointName(activeAtWidth(VIEWPORT_BREAKPOINTS.xs), {
       sm: '200',
     });
 
@@ -74,15 +99,11 @@ describe('viewportBreakpoints', () => {
 
   it('throws for unknown breakpoint names', () => {
     assert.throws(
-      () => isAboveViewportBreakpoint(1000, 'tablet'),
+      () => getViewportBreakpointMediaQuery('tablet'),
       /Unknown viewport breakpoint "tablet"/,
     );
     assert.throws(
       () => isAboveViewportBreakpointName('lg', 'tablet'),
-      /Unknown viewport breakpoint "tablet"/,
-    );
-    assert.throws(
-      () => pickViewportValue(1000, { tablet: '400' }),
       /Unknown viewport breakpoint "tablet"/,
     );
     assert.throws(

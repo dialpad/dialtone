@@ -1,8 +1,10 @@
 import { onMounted, onUnmounted, readonly, ref } from 'vue';
 import {
-  getActiveViewportBreakpoint,
+  getViewportBreakpointMediaQuery,
   isAboveViewportBreakpointName,
   pickViewportValueByBreakpointName,
+  resolveActiveViewportBreakpoint,
+  VIEWPORT_BREAKPOINT_NAMES,
   VIEWPORT_BREAKPOINTS,
 } from '../utils/viewportBreakpoints.js';
 
@@ -23,9 +25,20 @@ import {
 const activeBreakpoint = ref('');
 let activeConsumers = 0;
 
-const updateActiveBreakpoint = () => {
-  const nextActiveBreakpoint = getActiveViewportBreakpoint(window.innerWidth);
+// Shared by every consumer: one MediaQueryList per breakpoint, created on the first
+// mount and torn down after the last unmount.
+/** @type {Record<ViewportBreakpointName, MediaQueryList> | null} */
+let mediaQueryLists = null;
 
+const updateActiveBreakpoint = () => {
+  if (!mediaQueryLists) return;
+
+  const nextActiveBreakpoint = resolveActiveViewportBreakpoint(
+    (name) => mediaQueryLists[name].matches,
+  );
+
+  // Crossing several thresholds in one resize fires one `change` per query; the
+  // equality check collapses those into a single reactive write.
   if (nextActiveBreakpoint !== activeBreakpoint.value) {
     activeBreakpoint.value = nextActiveBreakpoint;
   }
@@ -33,8 +46,18 @@ const updateActiveBreakpoint = () => {
 
 const startTracking = () => {
   if (activeConsumers === 0) {
+    // Each query fires only when its own threshold is crossed, so resizing within a
+    // band costs nothing — unlike a `resize` listener, which ran on every frame.
+    mediaQueryLists = Object.fromEntries(VIEWPORT_BREAKPOINT_NAMES.map((name) => [
+      name,
+      window.matchMedia(getViewportBreakpointMediaQuery(name)),
+    ]));
+
+    Object.values(mediaQueryLists).forEach((mediaQueryList) => {
+      mediaQueryList.addEventListener('change', updateActiveBreakpoint);
+    });
+
     updateActiveBreakpoint();
-    window.addEventListener('resize', updateActiveBreakpoint, { passive: true });
   }
 
   activeConsumers += 1;
@@ -44,7 +67,11 @@ const stopTracking = () => {
   activeConsumers = Math.max(activeConsumers - 1, 0);
   if (activeConsumers > 0) return;
 
-  window.removeEventListener('resize', updateActiveBreakpoint);
+  Object.values(mediaQueryLists ?? {}).forEach((mediaQueryList) => {
+    mediaQueryList.removeEventListener('change', updateActiveBreakpoint);
+  });
+
+  mediaQueryLists = null;
   activeBreakpoint.value = '';
 };
 
