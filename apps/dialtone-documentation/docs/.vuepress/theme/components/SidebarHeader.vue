@@ -2,7 +2,7 @@
   <dt-box
     :padding-block-start="viewport.pick({
       default: '200',
-      lg: '450',
+      lg: '350',
     })"
     padding-block-end="200"
   >

@@ -2,8 +2,17 @@
 title: Dialtone MCP Server
 description: Search Dialtone's design system with AI assistants using the Model Context Protocol
 status: new
-keywords: ["model context protocol", "ai assistant", "documentation search", "agent", "tools"]
+keywords:
+  [
+    "model context protocol",
+    "ai assistant",
+    "documentation search",
+    "agent",
+    "tools",
+  ]
 ---
+
+The Dialtone MCP Server lets compatible AI clients search Dialtone through Model Context Protocol (MCP) tools. Use the [Dialtone CLI](/guides/cli/) for direct terminal queries, shell scripts, or lookups that should match the Dialtone version installed in your project.
 
 ## What It Does
 
@@ -238,6 +247,15 @@ Result: bell, bell-ring, bell-off, bell-plus, bell-minus
         Import: import { IconBell } from '@dialpad/dialtone-icons/vue'
 ```
 
+## CLI or MCP Server
+
+The MCP server and [Dialtone CLI](/guides/cli/) use the same Dialtone search engine. Choose the interface that fits the task:
+
+- Use the MCP server when you want an AI client to choose and run Dialtone searches during a conversation.
+- Use the CLI when you want to run an explicit terminal query, use Dialtone data in a script, or inspect the version installed in your project.
+
+You can install both. The MCP server handles tool calls from an AI client, while the CLI handles commands that you run directly.
+
 ## Configuration
 
 ### Updating the Server
@@ -411,6 +429,7 @@ If you're developing or testing locally:
 
 Now that you have the MCP server installed, explore these resources:
 
+- [Dialtone CLI](/guides/cli/) - Search Dialtone from your terminal or a script
 - [Getting Started with Dialtone](/guides/getting-started/) - Learn Dialtone basics
 - [Utility Classes](/utilities/) - Browse all utility classes
 - [Design Tokens](/tokens/) - Explore design tokens

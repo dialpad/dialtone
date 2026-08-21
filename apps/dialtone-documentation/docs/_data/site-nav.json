@@ -106,8 +106,18 @@
           ]
         },
         {
-          "text": "MCP Server",
-          "link": "/guides/mcp-server/"
+          "text": "Tooling",
+          "link": "/guides/mcp-server/",
+          "children": [
+            {
+              "text": "Dialtone CLI",
+              "link": "/guides/cli/"
+            },
+            {
+              "text": "Dialtone MCP Server",
+              "link": "/guides/mcp-server/"
+            }
+          ]
         },
         {
           "text": "Getting Started",

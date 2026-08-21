@@ -163,7 +163,7 @@
       v-if="includeToc && viewport.pick(rightRailTocViewportValues)"
       max-inline-size="300"
       min-inline-size="300"
-      padding-block-start="400"
+      padding-block-start="650"
       class="d-ps-sticky d-ibs-300"
     >
       <dt-text
