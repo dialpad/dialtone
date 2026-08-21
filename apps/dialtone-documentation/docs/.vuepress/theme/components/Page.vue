@@ -17,11 +17,18 @@
         })"
       >
         <dt-box border-width-block-end="100" padding-block-end="200" border-color="subtle">
-          <dt-breadcrumbs
-            v-if="pageBreadcrumbs.length"
-            :breadcrumbs="pageBreadcrumbs"
-          />
-          <page-header />
+          <page-header>
+            <template #content-top>
+              <dt-breadcrumbs v-if="pageBreadcrumbs.length">
+                <dt-breadcrumb-item
+                  v-for="item in pageBreadcrumbs"
+                  :key="item.to"
+                  :label="item.label"
+                  :to="item.to"
+                />
+              </dt-breadcrumbs>
+            </template>
+          </page-header>
           <dt-dropdown
             v-if="includeToc && viewport.pick({
               default: true,
@@ -189,7 +196,7 @@ import { getRightRailTocViewportValues } from '../utils/pageToc.js';
 import { computed, inject, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
-import { usePageData, withBase } from 'vuepress/client';
+import { usePageData } from 'vuepress/client';
 
 const props = defineProps({
   prev: {
@@ -226,7 +233,7 @@ const route = useRoute();
 const pageBreadcrumbs = computed(() => {
   return getNavBreadcrumbs(themeData.value.sidebar?.nav, route.path).map(item => ({
     label: item.text,
-    href: withBase(item.link),
+    to: item.link,
   }));
 });
 
