@@ -3,8 +3,12 @@ import { computed } from 'vue';
 function toSidebarItem (item, isTopLevel = false) {
   const sidebarItem = {
     ...item,
+    text: item.sidebarText ?? item.text,
     ...(isTopLevel ? { icon: item.icon ?? 'box-select' } : {}),
   };
+
+  delete sidebarItem.promoteChildrenInSidebar;
+  delete sidebarItem.sidebarText;
 
   if (item.hideChildrenInSidebar) {
     delete sidebarItem.children;
@@ -16,12 +20,30 @@ function toSidebarItem (item, isTopLevel = false) {
 }
 
 /*
- * Returns the unified left-nav tree from site-nav.json (`nav` array).
- * The tree is route-independent — every page renders the full nav.
- * Top-level items without an icon get the `box-select` placeholder.
+ * Projects the route-independent `site-nav.json` tree into promoted and primary
+ * sidebar presentation groups. Top-level primary items without an icon get the
+ * `box-select` placeholder.
  */
 export function useSidebarItems (items) {
   return computed(() => {
-    return (items.nav || []).map(item => toSidebarItem(item, true));
+    const navItems = items.nav || [];
+    const promotedParent = navItems.find(item => (
+      item.promoteChildrenInSidebar && item.children?.length
+    ));
+
+    return [
+      {
+        key: 'promoted',
+        presentation: 'promoted',
+        items: promotedParent?.children.map(item => toSidebarItem(item)) || [],
+      },
+      {
+        key: 'primary',
+        presentation: 'primary',
+        items: navItems
+          .filter(item => item !== promotedParent)
+          .map(item => toSidebarItem(item, true)),
+      },
+    ];
   });
 }

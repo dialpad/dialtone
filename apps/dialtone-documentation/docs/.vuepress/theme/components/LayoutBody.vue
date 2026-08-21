@@ -8,7 +8,7 @@
     <dt-box
       v-if="viewport.above('lg') && !$frontmatter.noSidebar"
       padding-block-end="250"
-      padding-inline="200"
+      padding-inline="75"
       min-inline-size="450"
       max-inline-size="450"
       block-size="100p"

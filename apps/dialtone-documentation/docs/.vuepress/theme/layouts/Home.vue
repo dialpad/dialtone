@@ -8,7 +8,7 @@
   >
     <dt-box
       padding-block-end="250"
-      padding-inline="200"
+      padding-inline="75"
       min-inline-size="450"
       max-inline-size="450"
       border-width-inline-end="100"

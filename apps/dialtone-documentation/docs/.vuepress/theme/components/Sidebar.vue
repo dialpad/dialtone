@@ -12,33 +12,29 @@
     <dt-box class="d-fl1" scrollbar="move">
       <dt-stack
         :id="SIDEBAR_SEARCH_RESULTS_ID"
-        ref="listRef"
-        as="ul"
-        gap="50"
+        gap="150"
       >
-        <sidebar-item
-          v-for="(item, index) in filteredItems"
-          :key="item.link || item.text"
-          :item="item"
-          :depth="0"
+        <sidebar-group
+          v-for="group in visibleGroups"
+          :key="group.key"
+          :items="group.items"
+          :presentation="group.presentation"
+          :path-prefix="group.key"
           :open-items="openItems"
-          :item-path="String(index)"
-          :peer-keys="filteredItemKeys"
           :active-item-path="activeItemPath"
           :search-active="isSearchActive"
           @toggle="handleToggle"
         />
-        <li v-if="filteredItems.length === 0 && inputValue.trim()">
-          <dt-empty-state
-            :size="200"
-            :header-text="`No results found for &quot;${inputValue}&quot;`"
-            class="d-w100p"
-          >
-            <template #icon>
-              <dt-icon name="search" size="500" />
-            </template>
-          </dt-empty-state>
-        </li>
+        <dt-empty-state
+          v-if="visibleGroups.length === 0 && inputValue.trim()"
+          :size="200"
+          :header-text="`No results found for &quot;${inputValue}&quot;`"
+          class="d-w100p"
+        >
+          <template #icon>
+            <dt-icon name="search" size="500" />
+          </template>
+        </dt-empty-state>
       </dt-stack>
     </dt-box>
     <sidebar-footer />
@@ -47,8 +43,8 @@
 
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue';
-import { useRoute } from 'vue-router';
-import SidebarItem from './SidebarItem.vue';
+import { useRoute, useRouter } from 'vue-router';
+import SidebarGroup from './SidebarGroup.vue';
 import SidebarFooter from './SidebarFooter.vue';
 import SidebarHeader from './SidebarHeader.vue';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
@@ -61,15 +57,17 @@ import {
   collectOpenItemKeys,
   collectOpenItemKeysForRoute,
   filterNavItems,
-  flattenNavigableItemPaths,
+  flattenNavigableItems,
   wrapHighlightIndex,
 } from '../utils/sidebarSearch.js';
+import { isExternalUrl } from '../utils/isExternalUrl';
 
 const route = useRoute();
+const router = useRouter();
 const SIDEBAR_SEARCH_RESULTS_ID = 'dialtone-sidebar-search-results';
 const SIDEBAR_SEARCH_RESULT_ID_PREFIX = 'dialtone-sidebar-search-result-';
 const items = useThemeLocaleData().value.sidebar;
-const sidebarItems = useSidebarItems(items);
+const sidebarGroups = useSidebarItems(items);
 
 // Track which items are open (by their link or text as key)
 const openItems = ref(new Set());
@@ -83,18 +81,10 @@ const highlightIndex = ref(-1);
 // Ref to the search input element
 const searchInput = ref(null);
 
-// Ref to the list element wrapping the sidebar items — scopes DOM lookups to
-// this instance's subtree.
-const listRef = ref(null);
-
 const focusSearchInput = () => searchInput.value?.focus();
 const isModifiedKeypress = (event) => {
   return event.altKey || event.ctrlKey || event.metaKey || event.shiftKey;
 };
-const getSidebarButton = (itemPath) => listRef.value?.$el?.querySelector(
-  `[data-sidebar-path="${itemPath}"]`,
-);
-
 const handleSearchShortcut = (event) => {
   if (!isSidebarSearchShortcut(event)) return;
 
@@ -106,24 +96,24 @@ const handleSearchShortcut = (event) => {
   nextTick(focusSearchInput);
 };
 
-// Computed property for filtered sidebar items
-const filteredItems = computed(() => {
-  if (!inputValue.value || !inputValue.value.trim()) {
-    return sidebarItems.value;
-  }
-  return filterNavItems(sidebarItems.value, inputValue.value);
-});
+const filteredGroups = computed(() => sidebarGroups.value.map(group => ({
+  ...group,
+  items: inputValue.value.trim()
+    ? filterNavItems(group.items, inputValue.value)
+    : group.items,
+})));
+const visibleGroups = computed(() => filteredGroups.value.filter(group => group.items.length));
+const displayItems = computed(() => sidebarGroups.value.flatMap(group => group.items));
+const filteredDisplayItems = computed(() => filteredGroups.value.flatMap(group => group.items));
 const isSearchActive = computed(() => Boolean(inputValue.value.trim()));
-const filteredItemKeys = computed(() => {
-  return filteredItems.value
-    .filter(item => item.children?.length)
-    .map(item => item.link || item.text);
-});
 
-// Item paths of the leaf links, in the order arrow keys walk them.
-const flattenedFilteredItems = computed(() => flattenNavigableItemPaths(filteredItems.value));
+// Leaf links in the order arrow keys walk them.
+const flattenedFilteredItems = computed(() => filteredGroups.value.flatMap(group => (
+  flattenNavigableItems(group.items, group.key)
+)));
+const activeItem = computed(() => flattenedFilteredItems.value[highlightIndex.value]);
 const activeItemPath = computed(() => {
-  return flattenedFilteredItems.value[highlightIndex.value];
+  return activeItem.value?.itemPath;
 });
 const activeResultId = computed(() => {
   return activeItemPath.value
@@ -131,13 +121,17 @@ const activeResultId = computed(() => {
     : undefined;
 });
 
-// Clicking the highlighted row's button routes through its own handler, so Enter and
-// mouse activation stay in sync.
 const activateHighlightedItem = (event) => {
-  if (isModifiedKeypress(event) || highlightIndex.value < 0) return;
+  const link = activeItem.value?.item.link;
+  if (isModifiedKeypress(event) || !link) return;
 
   event.preventDefault();
-  getSidebarButton(flattenedFilteredItems.value[highlightIndex.value])?.click();
+  if (isExternalUrl(link)) {
+    window.open(link, '_blank', 'noopener,noreferrer');
+    return;
+  }
+
+  router.push(link);
 };
 
 // Combobox-style result navigation keeps DOM focus in the search input.
@@ -175,7 +169,7 @@ const handleKeydown = (event) => {
 
 // Initialize open items after mount
 onMounted(() => {
-  openItems.value = collectOpenItemKeysForRoute(sidebarItems.value, route.path);
+  openItems.value = collectOpenItemKeysForRoute(displayItems.value, route.path);
   document.addEventListener('keydown', handleSearchShortcut);
 });
 
@@ -188,43 +182,24 @@ watch(() => route.path, (newPath) => {
   // Clear search and keyboard highlight when navigating to a different page
   inputValue.value = '';
   highlightIndex.value = -1;
-  openItems.value = collectOpenItemKeysForRoute(sidebarItems.value, newPath);
+  openItems.value = collectOpenItemKeysForRoute(displayItems.value, newPath);
 });
 
 // Watch search input to control expansion state
 watch(inputValue, (newValue) => {
   if (newValue && newValue.trim()) {
     // Search is active - expand all parents containing matches
-    openItems.value = collectOpenItemKeys(filteredItems.value);
+    openItems.value = collectOpenItemKeys(filteredDisplayItems.value);
   } else {
     // Search cleared - revert to route-based expansion
-    openItems.value = collectOpenItemKeysForRoute(sidebarItems.value, route.path);
+    openItems.value = collectOpenItemKeysForRoute(displayItems.value, route.path);
   }
 });
 
 // Reset keyboard highlight whenever the result set changes — this is the only
 // place that does it, including on every keystroke (filterNavItems returns a new array).
-watch(filteredItems, () => {
+watch(filteredGroups, () => {
   highlightIndex.value = -1;
-});
-
-// Scroll the highlighted item into view without moving focus from the input.
-watch(highlightIndex, async (newIndex) => {
-  if (newIndex >= 0 && newIndex < flattenedFilteredItems.value.length) {
-    // Wait for DOM to update
-    await nextTick();
-
-    const targetItemPath = flattenedFilteredItems.value[newIndex];
-    const button = getSidebarButton(targetItemPath);
-
-    if (button) {
-      button.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'nearest',
-      });
-    }
-  }
 });
 
 // Handle toggle from child components

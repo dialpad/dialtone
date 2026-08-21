@@ -4,9 +4,11 @@
       "text": "Overview",
       "link": "/dialtone/",
       "icon": "info",
+      "promoteChildrenInSidebar": true,
       "children": [
         {
           "text": "Introduction",
+          "sidebarText": "Dialtone Overview",
           "link": "/dialtone/"
         },
         {

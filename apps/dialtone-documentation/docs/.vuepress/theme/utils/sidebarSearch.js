@@ -62,13 +62,14 @@ export const filterNavItems = (items, searchTerm) => {
 };
 
 /**
- * Item paths of every leaf link, depth-first — the sequential list arrow keys walk.
- * Parents are skipped: they toggle rather than navigate.
+ * Every navigable leaf and its item path, depth-first. Parents are skipped:
+ * they toggle rather than navigate.
  *
  * @param {object[]} items
- * @returns {string[]}
+ * @param {string} pathPrefix
+ * @returns {{ item: object, itemPath: string }[]}
  */
-export const flattenNavigableItemPaths = (items) => {
+export const flattenNavigableItems = (items, pathPrefix = '') => {
   const flattened = [];
 
   const traverse = (itemsList, parentPath = '') => {
@@ -76,7 +77,7 @@ export const flattenNavigableItemPaths = (items) => {
       const itemPath = parentPath ? `${parentPath}.${index}` : String(index);
 
       if (item.link && !item.children?.length) {
-        flattened.push(itemPath);
+        flattened.push({ item, itemPath });
       }
 
       if (item.children && item.children.length > 0) {
@@ -85,10 +86,14 @@ export const flattenNavigableItemPaths = (items) => {
     });
   };
 
-  traverse(items);
+  traverse(items, pathPrefix);
 
   return flattened;
 };
+
+export const flattenNavigableItemPaths = (items, pathPrefix = '') => (
+  flattenNavigableItems(items, pathPrefix).map(({ itemPath }) => itemPath)
+);
 
 /**
  * Keys of every item with children — during search everything expands so matches

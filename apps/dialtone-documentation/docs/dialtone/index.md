@@ -1,5 +1,5 @@
 ---
-title: Dialtone Design System
+title: Dialtone Overview
 description: Dialpad's design system for building consistent, accessible product experiences
 keywords: ["design system", "components", "css utilities", "design tokens", "content guidelines", "vue utilities", "ui kits", "downloads"]
 next:

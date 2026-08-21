@@ -113,6 +113,12 @@ describe('flattenNavigableItemPaths', () => {
     ]);
   });
 
+  it('prefixes paths when multiple visual groups share one result sequence', () => {
+    assert.deepEqual(flattenNavigableItemPaths(navTree().slice(0, 1), 'promoted'), [
+      'promoted.0.0', 'promoted.0.1',
+    ]);
+  });
+
   it('skips parents, which toggle rather than navigate', () => {
     const paths = flattenNavigableItemPaths(navTree());
 
