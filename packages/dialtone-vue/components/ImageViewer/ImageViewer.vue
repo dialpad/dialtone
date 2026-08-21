@@ -1,6 +1,7 @@
 <template>
   <div>
     <dt-button
+      ref="previewButton"
       data-qa="dt-image-viewer-preview"
       class="d-image-viewer__preview-button"
       :aria-label="ariaLabel"
@@ -15,7 +16,7 @@
     </dt-button>
     <Teleport
       v-if="isOpen"
-      :to="appendTo"
+      :to="resolvedAppendToTarget"
     >
       <div
         v-dt-focustrap="{ active: isOpen, initialFocus: false, restoreFocus: false }"
@@ -75,7 +76,7 @@
 <script>
 import ModeMixin from '@/common/mixins/mode';
 import { returnFirstEl } from '@/common/utils';
-import { EVENT_KEYNAMES } from '@/common/constants';
+import { EVENT_KEYNAMES, HTML_ELEMENT_TYPE } from '@/common/constants';
 import { DtIconClose } from '@dialpad/dialtone-icons/vue';
 import { DtButton } from '@/components/Button';
 import SrOnlyCloseButton from '@/common/sr_only_close_button.vue';
@@ -94,13 +95,15 @@ export default {
 
   props: {
     /**
-     * By default the portal appends to the body of the root parent. We can modify
-     * this behaviour by passing an appendTo prop that points to an id or an html tag from the root of the parent.
-     * The appendTo prop expects a CSS selector string or an actual DOM node.
+     * By default the portal appends to the nearest ancestor <dialog> element when inside
+     * one (keeping the image viewer in the browser's top layer), or to the body otherwise.
+     * We can modify this behaviour by passing an appendTo prop that points to an id or an
+     * html tag from the root of the parent. The appendTo prop expects a CSS selector string
+     * or an actual DOM node.
      * type: string | HTMLElement, default: 'body'
      */
     appendTo: {
-      type: String,
+      type: [String, HTML_ELEMENT_TYPE],
       default: 'body',
     },
 
@@ -170,6 +173,15 @@ export default {
       showCloseButton: true,
       isOpen: false,
       i18n: new DialtoneLocalization(),
+      // Mirrors Tooltip/Popover's dialog-detection: without this, an image viewer nested in
+      // a native <dialog>-based DtModal teleports straight to document.body and renders behind
+      // the ancestor dialog's top layer, hidden despite matching z-index. Resolved imperatively
+      // in mounted() rather than as a computed, since $refs aren't tracked as a reactive
+      // dependency and a computed reading $refs.previewButton would permanently cache the
+      // pre-mount (wrong) value when isOpen is already true on initial render.
+      // Initialized to the string 'body' (not document.body) so data() stays SSR-safe;
+      // mounted() resolves the real DOM target on the client.
+      resolvedAppendToTarget: 'body',
     };
   },
 
@@ -201,7 +213,7 @@ export default {
     isOpen: {
       immediate: true,
       handler (isShowing) {
-        if (isShowing) {
+        if (isShowing && typeof document !== 'undefined') {
           // Set a reference to the previously-active element, to which we'll return focus on modal close.
           this.previousActiveElement = document.activeElement;
         } else {
@@ -221,9 +233,27 @@ export default {
 
       immediate: true,
     },
+
+    appendTo () {
+      this.updateResolvedAppendToTarget();
+    },
+  },
+
+  mounted () {
+    this.updateResolvedAppendToTarget();
   },
 
   methods: {
+    updateResolvedAppendToTarget () {
+      if (this.appendTo !== 'body') {
+        this.resolvedAppendToTarget = this.appendTo;
+        return;
+      }
+      const buttonEl = returnFirstEl(this.$refs.previewButton?.$el);
+      this.resolvedAppendToTarget = buttonEl?.closest('dialog') ??
+        buttonEl?.getRootNode()?.querySelector('body') ?? document.body;
+    },
+
     openModal () {
       // Has custom control passed in
       if (this.open !== null) {

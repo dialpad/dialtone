@@ -1,6 +1,7 @@
 import DtModal from './Modal.vue';
 
 import DtModalDefaultTemplate from './ModalDefault.story.vue';
+import DtModalWithOverlaysTemplate from './ModalWithOverlays.story.vue';
 import { MODAL_KIND_MODIFIERS } from './ModalConstants';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { action } from 'storybook/actions';
@@ -157,6 +158,8 @@ export default {
 
 // Templates
 const DefaultTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, DtModalDefaultTemplate);
+const WithOverlaysTemplate = (args, { argTypes }) =>
+  createTemplateFromVueFile(args, argTypes, DtModalWithOverlaysTemplate);
 
 export const Default = {
   render: DefaultTemplate,
@@ -234,6 +237,21 @@ export const WithTransparentBackdrop = {
   },
 
   parameters: { ...Default.parameters },
+};
+
+export const WithOverlays = {
+  render: WithOverlaysTemplate,
+
+  args: {},
+
+  parameters: {
+    options: { showPanel: false },
+    percy: {
+      args: {
+        open: true,
+      },
+    },
+  },
 };
 
 export const WithCustomHeaderAndContent = {
