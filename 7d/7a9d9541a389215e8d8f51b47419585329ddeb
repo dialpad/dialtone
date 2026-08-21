@@ -1,0 +1,51 @@
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/lh-600.svg
+  s_fb74aa28f644ee::t_27f18e2a3da8e7 2-7
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/fs16.svg
+  s_fb74aa28f644ee::t_10dc94551b2929 2-6
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/fs32.svg
+  s_fb74aa28f644ee::t_10dc94551b2929 2-6
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/lh-300.svg
+  s_fb74aa28f644ee::t_27f18e2a3da8e7 2-7
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/ff-windows.svg
+  s_fb74aa28f644ee::t_68c30ac84e91e1 2-7
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/ff-linux.svg
+  s_fb74aa28f644ee::t_68c30ac84e91e1 2-7
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/fw-bold.svg
+  s_fb74aa28f644ee::t_153d07e6d19f80 3-5,7
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/ff-roboto.svg
+  s_fb74aa28f644ee::t_68c30ac84e91e1 2-7
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/lh-200.svg
+  s_fb74aa28f644ee::t_27f18e2a3da8e7 2-7
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/fs14.svg
+  s_fb74aa28f644ee::t_10dc94551b2929 2-6
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/fw-semibold.svg
+  s_fb74aa28f644ee::t_153d07e6d19f80 3-5,7
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/fw-medium.svg
+  s_fb74aa28f644ee::t_153d07e6d19f80 3-5,7
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/fs28.svg
+  s_fb74aa28f644ee::t_10dc94551b2929 2-6
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/lh-500.svg
+  s_fb74aa28f644ee::t_27f18e2a3da8e7 2-7
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/lh-400.svg
+  s_fb74aa28f644ee::t_27f18e2a3da8e7 2-7
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/fs20.svg
+  s_fb74aa28f644ee::t_10dc94551b2929 2-6
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/fs18.svg
+  s_fb74aa28f644ee::t_10dc94551b2929 2-6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "7d7a9d9541a389215e8d8f51b47419585329ddeb",
+  "prompts": {},
+  "sessions": {
+    "s_fb74aa28f644ee": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a016c1-4534-7332-9095-8e18310eed6e",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
