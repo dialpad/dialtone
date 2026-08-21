@@ -185,6 +185,7 @@ import { DtIconStorybookColor, DtIconFigma } from '@dialpad/dialtone-icons/vue';
 import { computed, onUnmounted, ref } from 'vue';
 import { usePageData, withBase } from 'vuepress/client';
 import { isExternalUrl } from '../utils/isExternalUrl';
+import { findNavCollectionForRoute } from '../utils/navRoutes.js';
 import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
 
 const viewport = useViewportBreakpoints();
@@ -197,14 +198,11 @@ const STATUS_BADGES = {
 };
 const statusBadge = computed(() => STATUS_BADGES[page.value.frontmatter?.status]);
 
-// Detail pages get a "back to <parent>" affordance above the title row.
-// Add new entries as detail-page sections appear.
-const BACK_LINKS = [
-  { match: /^\/dialtone\/whats-new\/posts\//, to: '/dialtone/whats-new/', text: 'Back to What\'s New' },
-];
-
 const backLink = computed(() => {
-  return BACK_LINKS.find(l => l.match.test(page.value.path)) ?? null;
+  const collection = findNavCollectionForRoute(page.value.path);
+  if (!collection) return null;
+
+  return { to: collection.link, text: collection.text };
 });
 
 // External download URLs open in a new tab; internal paths route via <router-link>

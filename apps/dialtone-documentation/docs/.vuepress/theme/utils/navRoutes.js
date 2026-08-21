@@ -14,7 +14,7 @@
 const NAV_COLLECTIONS = new Map([
   ['/dialtone/whats-new/', {
     descendantPrefix: '/dialtone/whats-new/posts/',
-    backLabel: 'Back to what\'s new',
+    backLabel: 'Back to What\'s New',
   }],
 ]);
 

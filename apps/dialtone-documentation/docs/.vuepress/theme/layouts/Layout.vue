@@ -80,6 +80,7 @@ import Sidebar from '../components/Sidebar.vue';
 import MigrationBanner from '../../baseComponents/MigrationBanner.vue';
 import { getComponentCombinatorName } from '../utils/componentCombinator.js';
 import { isExternalUrl } from '../utils/isExternalUrl';
+import { findNavCollectionForRoute } from '../utils/navRoutes.js';
 import { computed, nextTick, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
@@ -171,8 +172,9 @@ const findCurrent = () => {
   prev.value = null;
   next.value = null;
 
-  if (route.path.includes('/dialtone/whats-new/posts/')) {
-    prev.value = { link: '/dialtone/whats-new/', text: 'Back to what\'s new' };
+  const collectionBackLink = findNavCollectionForRoute(route.path);
+  if (collectionBackLink) {
+    prev.value = collectionBackLink;
     return;
   }
 

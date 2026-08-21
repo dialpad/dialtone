@@ -37,7 +37,7 @@ describe('findNavCollectionForRoute', () => {
   it('returns the owning collection shaped as a nav item', () => {
     assert.deepEqual(findNavCollectionForRoute('/dialtone/whats-new/posts/some-post.html'), {
       link: '/dialtone/whats-new/',
-      text: 'Back to what\'s new',
+      text: 'Back to What\'s New',
     });
   });
 
