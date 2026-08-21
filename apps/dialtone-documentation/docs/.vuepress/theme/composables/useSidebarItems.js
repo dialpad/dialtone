@@ -10,6 +10,11 @@ function toSidebarItem (item, isTopLevel = false) {
   delete sidebarItem.promoteChildrenInSidebar;
   delete sidebarItem.sidebarText;
 
+  if (item.hideStatusInSidebar) {
+    delete sidebarItem.status;
+  }
+  delete sidebarItem.hideStatusInSidebar;
+
   if (item.hideChildrenInSidebar) {
     delete sidebarItem.children;
   } else if (item.children) {

@@ -1017,6 +1017,7 @@
         {
           "text": "Introduction",
           "link": "/ui-kits/",
+          "hideStatusInSidebar": true,
           "hideChildrenInSidebar": true,
           "children": [
             {
