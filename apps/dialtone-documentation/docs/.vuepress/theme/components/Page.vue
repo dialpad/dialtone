@@ -17,6 +17,10 @@
         })"
       >
         <dt-box border-width-block-end="100" padding-block-end="200" border-color="subtle">
+          <dt-breadcrumbs
+            v-if="pageBreadcrumbs.length"
+            :breadcrumbs="pageBreadcrumbs"
+          />
           <page-header />
           <dt-dropdown
             v-if="includeToc && viewport.pick({
@@ -180,10 +184,12 @@ import PageToc from '../components/PageToc.vue';
 import PageTocDropdown from '../components/PageTocDropdown.vue';
 import { usePageTocScrollSpy } from '../composables/usePageTocScrollSpy.js';
 import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
+import { getNavBreadcrumbs } from '../utils/navBreadcrumbs.js';
 import { getRightRailTocViewportValues } from '../utils/pageToc.js';
 import { computed, inject, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import { usePageData } from 'vuepress/client';
+import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
+import { usePageData, withBase } from 'vuepress/client';
 
 const props = defineProps({
   prev: {
@@ -214,13 +220,20 @@ const lastUpdated = computed(() => {
 const { headers } = inject('headers');
 const viewport = useViewportBreakpoints();
 const { activeHash, handleNavigate } = usePageTocScrollSpy(headers);
+const themeData = useThemeLocaleData();
+const route = useRoute();
+
+const pageBreadcrumbs = computed(() => {
+  return getNavBreadcrumbs(themeData.value.sidebar?.nav, route.path).map(item => ({
+    label: item.text,
+    href: withBase(item.link),
+  }));
+});
 
 async function handleDropdownNavigate (event, item, close) {
   await handleNavigate(event, item);
   close();
 }
-
-const route = useRoute();
 
 const includeToc = computed(() => {
   return headers.value && headers.value.length > 0;
