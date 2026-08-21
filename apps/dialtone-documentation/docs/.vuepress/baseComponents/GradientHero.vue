@@ -29,7 +29,7 @@
           align="center"
           class="d-p-400 home-gradient-hero-title d-wmx-1300 d-mx-auto"
         >
-          Start with the system. The fastest way to build Dialpad.
+          The fastest way to build Dialpad.
         </dt-text>
         <dt-text
           as="p"
@@ -43,8 +43,7 @@
           class="d-px-500 d-o80 d-wmx-800 d-mx-auto"
           wrap="balance"
         >
-          <!-- Built on clarity, consistency, and accessibility:  -->
-          Components, design tokens, and guidance that make good design the default.
+          Start with the system of components, design tokens, and guidance that make good design the default.
         </dt-text>
         <dt-stack direction="row" justify="center" gap="250" class="d-pbs-500">
           <dt-button
