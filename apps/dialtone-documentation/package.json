@@ -42,7 +42,7 @@
   "scripts": {
     "lint": "run-s lint:docs lint:code lint:examples",
     "lint:code": "eslint '**/*.{js,vue}'",
-    "lint:docs": "markdownlint '**/*.md'",
+    "lint:docs": "markdownlint --ignore node_modules '**/*.md'",
     "lint:examples": "node ../../scripts/lint-doc-examples.mjs"
   },
   "type": "module",
