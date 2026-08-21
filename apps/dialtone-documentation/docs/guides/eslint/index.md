@@ -65,37 +65,42 @@ For an eslintrc configuration:
 
 ## Rules
 
-| Rule | What it checks | Autofix |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ------- |
-| [custom-implementation](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/custom-implementation.md) | Custom implementations of Dialtone icons. | No |
-| [deprecated-base-color-classes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-base-color-classes.md) | Deprecated base-color utility classes. | No |
-| [deprecated-class-props](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-class-props.md) | Removed structural class props on Dialtone Vue components. | Yes |
-| [deprecated-component](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-component.md) | Deprecated components that should be replaced with Dialtone Vue components. | No |
-| [deprecated-dialtone-component](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-dialtone-component.md) | Deprecated Dialtone components that have newer alternatives. | No |
-| [deprecated-directive](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-directive.md) | Deprecated Vue directives that have Dialtone replacements. | No |
-| [deprecated-flex-gap-classes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/lib/rules/deprecated-flex-gap-classes.js) | Deprecated `d-flg*` flex-gap utilities. | No |
-| [deprecated-grid-gap-classes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/lib/rules/deprecated-grid-gap-classes.js) | Deprecated `d-gg*`, `d-grg*`, and `d-gcg*` grid-gap utilities. | No |
-| [deprecated-headline-sizes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-headline-sizes.md) | Headline sizes renamed from `xxl` and `xxxl` to `2xl` and `3xl`. | Yes |
-| [deprecated-icons](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-icons.md) | Deprecated SVG and Vue icon imports. | No |
-| [deprecated-link-styling-classes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-link-styling-classes.md) | Legacy link and button classes that should use `DtButton` or `DtLink` props. | No |
-| [deprecated-list-styling-classes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-list-styling-classes.md) | Legacy list utilities that should use `DtTextList`. | No |
-| [deprecated-physical-naming](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-physical-naming.md) | Physical direction names in Dialtone slots, props, prop values, and events. | No |
-| [deprecated-pixel-utility-classes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-pixel-utility-classes.md) | Pixel-named utilities that have token-stop equivalents. | Yes |
-| [deprecated-radius-utility-classes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-radius-utility-classes.md) | Legacy border-radius utilities that have logical, token-stop names. | Yes |
-| [deprecated-stack-alignment-classes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-stack-alignment-classes.md) | Alignment utilities on `DtStack` that should be component props. | No |
-| [deprecated-stack-flow-classes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-stack-flow-classes.md) | Sibling-margin utilities that should use the `DtStack` `gap` prop. | No |
-| [deprecated-success-color-classes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-success-color-classes.md) | Success color utilities renamed to positive. | No |
-| [deprecated-tshirt-sizes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-tshirt-sizes.md) | T-shirt component sizes that have numeric or current typography values. | Yes |
-| [focusgroup-requires-label](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/focusgroup-requires-label.md) | `v-dt-focusgroup` elements without an accessible label. | No |
-| [focusgroup-requires-role](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/focusgroup-requires-role.md) | `v-dt-focusgroup` elements without a role. | No |
-| [prefer-stack-over-flex](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/prefer-stack-over-flex.md) | Flex utility layouts that should use `DtStack`. | No |
-| [recommend-typography-style](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/recommend-typography-style.md) | Separate typography utilities that should use a composed typography utility. | No |
+<!-- GENERATED:eslint-rules:start -->
+<!-- Do not edit this section manually. Run `pnpm nx run dialtone-documentation:generate-tooling-docs` to update it. -->
+
+| Rule                                                                                                                                                                    | What it checks                                                                                 | Autofix |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ------- |
+| [custom-implementation](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/custom-implementation.md)                           | Detects custom implementations of Dialtone icons.                                              | No      |
+| [deprecated-base-color-classes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-base-color-classes.md)           | Detects usage of deprecated base-color utility classes.                                        | No      |
+| [deprecated-class-props](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-class-props.md)                         | Detects usage of removed structural class props on Dialtone Vue components.                    | Yes     |
+| [deprecated-component](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-component.md)                             | Detects usage of deprecated components that should be replaced with Dialtone Vue components.   | No      |
+| [deprecated-dialtone-component](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-dialtone-component.md)           | Detects usage of deprecated Dialtone components that have newer alternatives.                  | No      |
+| [deprecated-directive](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-directive.md)                             | Detects usage of deprecated Vue directives that have Dialtone replacements.                    | No      |
+| [deprecated-flex-gap-classes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/lib/rules/deprecated-flex-gap-classes.js)                | Detects usage of deprecated `d-flg*` flex-gap utilities.                                       | No      |
+| [deprecated-grid-gap-classes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/lib/rules/deprecated-grid-gap-classes.js)                | Detects usage of deprecated `d-gg*`, `d-grg*`, and `d-gcg*` grid-gap utilities.                | No      |
+| [deprecated-headline-sizes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-headline-sizes.md)                   | Detects deprecated `xxl` and `xxxl` headline sizes.                                            | Yes     |
+| [deprecated-icons](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-icons.md)                                     | Detects deprecated SVG and Vue icon imports.                                                   | No      |
+| [deprecated-link-styling-classes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-link-styling-classes.md)       | Detects legacy link and button classes that should use `DtButton` or `DtLink` props.           | No      |
+| [deprecated-list-styling-classes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-list-styling-classes.md)       | Detects legacy list utilities that should use `DtTextList`.                                    | No      |
+| [deprecated-physical-naming](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-physical-naming.md)                 | Detects deprecated physical direction names in Dialtone slots, props, prop values, and events. | No      |
+| [deprecated-pixel-utility-classes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-pixel-utility-classes.md)     | Detects deprecated pixel-named utilities that have token-stop equivalents.                     | Yes     |
+| [deprecated-radius-utility-classes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-radius-utility-classes.md)   | Detects legacy border-radius utilities that have logical, token-stop names.                    | Yes     |
+| [deprecated-stack-alignment-classes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-stack-alignment-classes.md) | Detects alignment utilities on `DtStack` that should be component props.                       | No      |
+| [deprecated-stack-flow-classes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-stack-flow-classes.md)           | Detects sibling-margin utilities that should use the `DtStack` `gap` prop.                     | No      |
+| [deprecated-success-color-classes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-success-color-classes.md)     | Detects deprecated success color utilities that have positive replacements.                    | No      |
+| [deprecated-tshirt-sizes](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-tshirt-sizes.md)                       | Detects deprecated T-shirt component sizes that have numeric or current typography values.     | Yes     |
+| [focusgroup-requires-label](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/focusgroup-requires-label.md)                   | Detects `v-dt-focusgroup` elements without an accessible label.                                | No      |
+| [focusgroup-requires-role](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/focusgroup-requires-role.md)                     | Detects `v-dt-focusgroup` elements without a role.                                             | No      |
+| [prefer-stack-over-flex](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/prefer-stack-over-flex.md)                         | Detects flex utility layouts that should use `DtStack`.                                        | No      |
+| [recommend-typography-style](https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/recommend-typography-style.md)                 | Detects separate typography utilities that should use a composed typography utility.           | No      |
+
+<!-- GENERATED:eslint-rules:end -->
 
 Open a rule's link for its accepted patterns, reported failures, and migration examples.
 
 ## Apply available fixes
 
-Five rules provide automatic fixes: `deprecated-class-props`, `deprecated-headline-sizes`, `deprecated-pixel-utility-classes`, `deprecated-radius-utility-classes`, and `deprecated-tshirt-sizes`.
+Rules marked **Yes** in the Autofix column provide automatic fixes.
 
 Run ESLint with `--fix` to apply them:
 

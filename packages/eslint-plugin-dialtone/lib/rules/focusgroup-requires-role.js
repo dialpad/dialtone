@@ -8,9 +8,7 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description:
-        'Warns when v-dt-focusgroup is used on an element without a role attribute. ' +
-        'Screen readers need a role to announce the widget correctly.',
+      description: 'Detects `v-dt-focusgroup` elements without a role.',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/focusgroup-requires-role.md',
     },

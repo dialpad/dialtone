@@ -15,6 +15,7 @@ const messages = ruleMessages(ruleName, {
 });
 
 const meta = {
+  description: 'Detects deprecated size and space tokens that should use layout or spacing tokens.',
   url: 'https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/no-deprecated-size-tokens.md',
 };
 

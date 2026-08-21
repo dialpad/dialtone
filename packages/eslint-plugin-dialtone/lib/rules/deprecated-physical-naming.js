@@ -97,7 +97,7 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'Detect deprecated physical direction names in Dialtone component slots, props, prop values, and events',
+      description: 'Detects deprecated physical direction names in Dialtone slots, props, prop values, and events.',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-physical-naming.md',
     },

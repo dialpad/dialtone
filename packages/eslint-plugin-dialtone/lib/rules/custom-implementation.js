@@ -13,7 +13,7 @@ module.exports = {
   meta: {
     type: 'suggestion', // `problem`, `suggestion`, or `layout`
     docs: {
-      description: "Detects custom dialtone icons implementations",
+      description: "Detects custom implementations of Dialtone icons.",
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/custom-implementation.md', // URL to the documentation page for this rule
     },

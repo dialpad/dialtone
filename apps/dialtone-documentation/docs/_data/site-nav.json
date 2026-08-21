@@ -38,6 +38,33 @@
           ]
         },
         {
+          "text": "Tooling",
+          "link": "/guides/mcp-server/",
+          "status": "new",
+          "children": [
+            {
+              "text": "Dialtone CLI",
+              "link": "/guides/cli/"
+            },
+            {
+              "text": "Dialtone MCP Server",
+              "link": "/guides/mcp-server/"
+            },
+            {
+              "text": "VS Code extension",
+              "link": "/guides/vscode-extension/"
+            },
+            {
+              "text": "ESLint",
+              "link": "/guides/eslint/"
+            },
+            {
+              "text": "Stylelint",
+              "link": "/guides/stylelint/"
+            }
+          ]
+        },
+        {
           "text": "Migration Guide",
           "link": "/guides/migration/",
           "children": [
@@ -124,33 +151,6 @@
             {
               "text": "Vue 2 Removal",
               "link": "/guides/migration/vue2-removal/"
-            }
-          ]
-        },
-        {
-          "text": "Tooling",
-          "link": "/guides/mcp-server/",
-          "status": "new",
-          "children": [
-            {
-              "text": "Dialtone CLI",
-              "link": "/guides/cli/"
-            },
-            {
-              "text": "Dialtone MCP Server",
-              "link": "/guides/mcp-server/"
-            },
-            {
-              "text": "VS Code extension",
-              "link": "/guides/vscode-extension/"
-            },
-            {
-              "text": "ESLint",
-              "link": "/guides/eslint/"
-            },
-            {
-              "text": "Stylelint",
-              "link": "/guides/stylelint/"
             }
           ]
         },

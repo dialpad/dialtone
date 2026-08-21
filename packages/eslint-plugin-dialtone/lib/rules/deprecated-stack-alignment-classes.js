@@ -30,7 +30,7 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'Recommend using props instead of CSS utilities on Stack component',
+      description: 'Detects alignment utilities on `DtStack` that should be component props.',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-stack-alignment-classes.md',
     },

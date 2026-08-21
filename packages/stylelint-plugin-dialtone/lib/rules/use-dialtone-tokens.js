@@ -20,6 +20,7 @@ const pxToRem = (value) => {
 }
 
 const meta = {
+  description: 'Detects pixel and rem values that should use Dialtone tokens.',
   url: 'https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/use-dialtone-tokens.md',
 };
 

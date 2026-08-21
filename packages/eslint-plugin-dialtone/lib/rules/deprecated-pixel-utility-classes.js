@@ -74,7 +74,7 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'Pixel-based utility classes (d-h16, d-p8, d-m8) are deprecated. Use token-stop-based equivalents (d-h-25, d-p-100, d-m-100).',
+      description: 'Detects deprecated pixel-named utilities that have token-stop equivalents.',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-pixel-utility-classes.md',
     },

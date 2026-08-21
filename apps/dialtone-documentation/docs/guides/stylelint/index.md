@@ -44,19 +44,22 @@ Use `null` to turn off a rule inherited from a shared configuration.
 
 ## Rules
 
-| Rule                                                                                                                                                             | What it checks                                                             |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
-| [no-base-color-tokens](https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/no-base-color-tokens.md)                 | Raw base-color tokens that should use a semantic color token.              |
-| [no-deprecated-size-tokens](https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/lib/rules/no-deprecated-size-tokens.js)        | Deprecated size and space tokens that should use layout or spacing tokens. |
-| [no-deprecated-space-tokens](https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/no-deprecated-space-tokens.md)     | Legacy space tokens, using the older space-to-size migration path.         |
-| [no-deprecated-success-tokens](https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/no-deprecated-success-tokens.md) | Success color tokens renamed to positive.                                  |
-| [no-mixins](https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/no-mixins.md)                                       | Less mixins.                                                               |
-| [recommend-font-style-tokens](https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/recommend-font-style-tokens.md)   | Separate font declarations that should use a composed font token.          |
-| [use-dialtone-tokens](https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/use-dialtone-tokens.md)                   | Pixel and rem values that should use Dialtone tokens.                      |
+<!-- GENERATED:stylelint-rules:start -->
+<!-- Do not edit this section manually. Run `pnpm nx run dialtone-documentation:generate-tooling-docs` to update it. -->
+
+| Rule                                                                                                                                                           | What it checks                                                                     | Autofix |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------- |
+| [no-base-color-tokens](https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/no-base-color-tokens.md)                 | Detects raw base-color tokens that should use a semantic color token.              | No      |
+| [no-deprecated-size-tokens](https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/lib/rules/no-deprecated-size-tokens.js)        | Detects deprecated size and space tokens that should use layout or spacing tokens. | No      |
+| [no-deprecated-space-tokens](https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/no-deprecated-space-tokens.md)     | Detects legacy space tokens that use the older space-to-size migration path.       | No      |
+| [no-deprecated-success-tokens](https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/no-deprecated-success-tokens.md) | Detects success color tokens that have been renamed to positive.                   | No      |
+| [no-mixins](https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/no-mixins.md)                                       | Detects Less mixins.                                                               | No      |
+| [recommend-font-style-tokens](https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/recommend-font-style-tokens.md)   | Detects separate font declarations that should use a composed font token.          | No      |
+| [use-dialtone-tokens](https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/use-dialtone-tokens.md)                   | Detects pixel and rem values that should use Dialtone tokens.                      | No      |
+
+<!-- GENERATED:stylelint-rules:end -->
 
 Do not enable `no-deprecated-space-tokens` and `no-deprecated-size-tokens` together. Both report `--dt-space-*`, but the older space rule points to the intermediate `--dt-size-*` tokens. Use `no-deprecated-size-tokens` for the current migration to `--dt-spacing-*` and `--dt-layout-*`.
-
-The Dialtone rules report problems but do not apply automatic fixes.
 
 ## Logical properties
 

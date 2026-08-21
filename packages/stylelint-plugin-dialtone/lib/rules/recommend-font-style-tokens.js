@@ -16,6 +16,7 @@ const messages = ruleMessages(ruleName, {
 });
 
 const meta = {
+  description: 'Detects separate font declarations that should use a composed font token.',
   url: 'https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/recommend-font-style-tokens.md',
 };
 

@@ -17,7 +17,7 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'Detect deprecated `d-ls-*` / `d-lst-*` list styling utilities; prefer `<dt-text-list>`',
+      description: 'Detects legacy list utilities that should use `DtTextList`.',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-list-styling-classes.md',
     },

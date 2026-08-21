@@ -13,6 +13,7 @@ const messages = ruleMessages(ruleName, {
 });
 
 const meta = {
+  description: 'Detects legacy space tokens that use the older space-to-size migration path.',
   url: 'https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/no-deprecated-space-tokens.md',
 };
 

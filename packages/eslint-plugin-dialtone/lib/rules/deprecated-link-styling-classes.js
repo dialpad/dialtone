@@ -43,7 +43,7 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'Detect legacy d-btn / d-link / d-td-* class usage that should migrate to DtButton/DtLink props',
+      description: 'Detects legacy link and button classes that should use `DtButton` or `DtLink` props.',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-link-styling-classes.md',
     },

@@ -45,7 +45,7 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'Legacy border-radius utility classes (d-bar6, d-btr8, d-bbr-pill) are deprecated. Use token-stop-indexed logical names (d-bar-350, d-bbsr-400, d-bber-pill).',
+      description: 'Detects legacy border-radius utilities that have logical, token-stop names.',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-radius-utility-classes.md',
     },

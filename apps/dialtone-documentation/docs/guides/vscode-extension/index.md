@@ -27,6 +27,10 @@ The extension is currently distributed as a VS Code extension package (`.vsix`).
 
 The language server is included in the extension. You do not need to install it separately.
 
+### VS Code-based editors
+
+The extension is highly likely to work in VS Code-derived IDEs, such as Cursor and the Devin IDE, but compatibility is not guaranteed. Dialtone currently validates it in VS Code only.
+
 ## Component completions
 
 In a Vue template, start typing a Dialtone component to see matching components:

@@ -13,6 +13,7 @@ const messages = ruleMessages(ruleName, {
 });
 
 const meta = {
+  description: 'Detects success color tokens that have been renamed to positive.',
   url: 'https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/no-deprecated-success-tokens.md',
 };
 
