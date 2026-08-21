@@ -60,11 +60,9 @@
             :size="400"
             kind="muted"
             importance="outlined"
-            class="d-fc-primary d-bc-moderate"
+            class="d-fc-primary d-bc-bold"
           >
-            <dt-text>
-              What's New
-            </dt-text>
+            What's New
           </dt-button>
         </dt-stack>
       </dt-box>
