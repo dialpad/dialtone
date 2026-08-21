@@ -69,8 +69,8 @@ const props = defineProps({
 const emit = defineEmits(['navigate']);
 
 function isHeaderActive (header) {
-  const links = [header.link, ...(header.children || []).map(child => child.link)];
-  return links.some(link => link === props.activeHash);
+  return header.link === props.activeHash ||
+    (header.children ?? []).some(child => child.link === props.activeHash);
 }
 
 function isItemActive (item) {

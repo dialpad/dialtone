@@ -138,8 +138,7 @@ function replaceGeneratedSection(content, markers, generatedContent, pagePath) {
   return `${before}${markers.start}\n${GENERATED_NOTICE}\n\n${generatedContent}\n\n${markers.end}${after}`;
 }
 
-async function expectedPage(pagePath, markers, generatedContent) {
-  const current = readFileSync(pagePath, 'utf-8');
+async function expectedPage(pagePath, current, markers, generatedContent) {
   const replaced = replaceGeneratedSection(
     current,
     markers,
@@ -159,7 +158,7 @@ async function generatePage(name, rows) {
   const pagePath = PAGES[name];
   const current = readFileSync(pagePath, 'utf-8');
   const table = renderTable(['Rule', 'What it checks', 'Autofix'], rows);
-  const expected = await expectedPage(pagePath, MARKERS[name], table);
+  const expected = await expectedPage(pagePath, current, MARKERS[name], table);
 
   if (current === expected) {
     console.info(`generate-tooling-docs: ${name} is current`);

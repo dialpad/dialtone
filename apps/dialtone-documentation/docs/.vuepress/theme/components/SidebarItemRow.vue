@@ -85,13 +85,7 @@
 <script setup>
 import { computed, ref, watch } from 'vue';
 import { isExternalUrl } from '../utils/isExternalUrl';
-
-const STATUS_BADGES = {
-  beta: { type: 'info', text: 'Beta' },
-  new: { type: 'bulletin', text: 'New' },
-  planned: { text: 'Planned' },
-};
-const getBadge = (status) => STATUS_BADGES[status];
+import { getStatusBadge as getBadge } from '../constants/statusBadges.js';
 
 const props = defineProps({
   id: {

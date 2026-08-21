@@ -87,7 +87,7 @@ import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import { usePageData } from 'vuepress/client';
 import { DtStack } from '@dialpad/dialtone-vue';
 import {
-  PAGE_SCROLL_CONTAINER_SELECTOR,
+  findPageScrollContainer,
   scrollRouteToTop,
   shouldScrollRouteToTop,
 } from '../utils/pageToc.js';
@@ -178,11 +178,11 @@ const findCurrent = () => {
     return;
   }
 
-  const parentIndex = currentItems.value.findIndex(item => item.find(child => child.link === route.path));
+  const parentIndex = currentItems.value.findIndex(item => item.some(child => child.link === route.path));
   if (parentIndex === -1) return;
 
   const filteredItems = currentItems.value[parentIndex];
-  const childIndex = Object.values(filteredItems).findIndex(child => child.link === route.path);
+  const childIndex = filteredItems.findIndex(child => child.link === route.path);
   const isFirstItem = childIndex === 0;
   const isLastItem = childIndex === filteredItems.length - 1;
   const prevItems = currentItems.value[parentIndex - 1];
@@ -209,7 +209,7 @@ watch(
     if (!shouldScrollRouteToTop(to, from)) return;
 
     await nextTick();
-    scrollRouteToTop(document.querySelector(PAGE_SCROLL_CONTAINER_SELECTOR));
+    scrollRouteToTop(findPageScrollContainer());
   },
   { flush: 'post' },
 );

@@ -58,6 +58,7 @@ import {
   collectOpenItemKeysForRoute,
   filterNavItems,
   flattenNavigableItems,
+  getSearchResultId,
   wrapHighlightIndex,
 } from '../utils/sidebarSearch.js';
 import { isExternalUrl } from '../utils/isExternalUrl';
@@ -65,7 +66,6 @@ import { isExternalUrl } from '../utils/isExternalUrl';
 const route = useRoute();
 const router = useRouter();
 const SIDEBAR_SEARCH_RESULTS_ID = 'dialtone-sidebar-search-results';
-const SIDEBAR_SEARCH_RESULT_ID_PREFIX = 'dialtone-sidebar-search-result-';
 const items = useThemeLocaleData().value.sidebar;
 const sidebarGroups = useSidebarItems(items);
 
@@ -117,7 +117,7 @@ const activeItemPath = computed(() => {
 });
 const activeResultId = computed(() => {
   return activeItemPath.value
-    ? `${SIDEBAR_SEARCH_RESULT_ID_PREFIX}${activeItemPath.value}`
+    ? getSearchResultId(activeItemPath.value)
     : undefined;
 });
 

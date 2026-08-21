@@ -109,13 +109,6 @@ export function replaceBrowserHash (hash, {
   );
 }
 
-export function flattenHeaders (headers = []) {
-  return headers.flatMap(header => [
-    header,
-    ...flattenHeaders(header.children || []),
-  ]);
-}
-
 export function flattenHeadersWithDepth (headers = [], depth = 0) {
   return headers.flatMap(header => [
     { ...header, depth },
@@ -175,7 +168,7 @@ export function getActiveHeaderLink (headers, scrollContainer, {
 }
 
 export function getLinkedHeaders (headers) {
-  return flattenHeaders(headers).filter(header => header.link);
+  return flattenHeadersWithDepth(headers).filter(header => header.link);
 }
 
 function getPassedHeaderLink (headers, activationTop, getTarget) {

@@ -92,12 +92,10 @@
           -->
         </dt-box>
       </dt-box>
-      <dt-box padding-block-start="250">
-        <dt-box
-          v-if="props.componentCombinatorName"
-          id="combinator-inline-target"
-        />
-      </dt-box>
+      <dt-box
+        v-if="props.componentCombinatorName"
+        id="combinator-inline-target"
+      />
       <!-- eslint-disable-next-line vue/no-undef-components -->
       <content class="d-docsite-article" />
       <dt-stack gap="300">
@@ -253,7 +251,7 @@ const rightRailTocViewportValues = computed(() => {
 // rather than extracted from markdown — skip the default clobber for these routes.
 const selfManagedHeaderPaths = ['/tokens/', '/downloads/'];
 
-watch(route, () => {
+watch(() => route.path, () => {
   if (selfManagedHeaderPaths.some(p => route.path.includes(p))) return;
 
   try {
@@ -261,5 +259,5 @@ watch(route, () => {
   } catch( e ) {
     console.log('Error getting page headers', e)
   }
-}, { flush: 'pre', immediate: true, deep: true })
+}, { flush: 'pre', immediate: true })
 </script>

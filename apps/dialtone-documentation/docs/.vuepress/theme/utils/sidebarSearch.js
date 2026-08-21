@@ -21,6 +21,34 @@ import { isDescendantOfNavCollection } from './navRoutes.js';
 export const normalizeSearchTerm = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, '');
 
 /**
+ * The sidebar's item-key convention. Used both as a render `:key` and as the key for
+ * open/closed state, so it has to be derived the same way everywhere.
+ *
+ * @param {object} item
+ * @returns {string}
+ */
+export const getNavItemKey = (item) => item.link || item.text;
+
+/**
+ * Keys of the collapsible items among `items` — the peers that close when one opens.
+ *
+ * @param {object[]} items
+ * @returns {string[]}
+ */
+export const collectPeerKeys = (items) => items
+  .filter((item) => item.children?.length)
+  .map(getNavItemKey);
+
+/**
+ * DOM id of a search result row. Paired with the `aria-activedescendant` that
+ * Sidebar.vue sets, so both sides must build it here.
+ *
+ * @param {string} itemPath
+ * @returns {string}
+ */
+export const getSearchResultId = (itemPath) => `dialtone-sidebar-search-result-${itemPath}`;
+
+/**
  * Nav items whose text or keywords match `searchTerm`, keeping any ancestor whose
  * descendants matched. Returns `items` unchanged for an empty term.
  *
@@ -108,7 +136,7 @@ export const collectOpenItemKeys = (items) => {
   const traverse = (itemsList) => {
     itemsList.forEach((item) => {
       if (item.children && item.children.length > 0) {
-        open.add(item.link || item.text);
+        open.add(getNavItemKey(item));
         traverse(item.children);
       }
     });
@@ -161,7 +189,7 @@ export const collectOpenItemKeysForRoute = (items, routePath) => {
     itemsList.forEach((item) => {
       if (item.children) {
         if (isRouteInTree(item, routePath)) {
-          open.add(item.link || item.text);
+          open.add(getNavItemKey(item));
         }
         traverse(item.children);
       }

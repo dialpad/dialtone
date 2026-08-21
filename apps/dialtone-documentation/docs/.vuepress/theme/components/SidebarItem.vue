@@ -65,6 +65,7 @@ import { computed } from 'vue';
 import { useRoute } from 'vue-router';
 import SidebarItemRow from './SidebarItemRow.vue';
 import { isDescendantOfNavCollection } from '../utils/navRoutes.js';
+import { collectPeerKeys, getNavItemKey, getSearchResultId } from '../utils/sidebarSearch.js';
 
 const props = defineProps({
   item: {
@@ -114,10 +115,8 @@ const route = useRoute();
 
 const subItems = computed(() => props.item.children || []);
 const hasChildren = computed(() => subItems.value.length > 0);
-const subItemKeys = computed(() => subItems.value
-  .filter(item => item.children?.length)
-  .map(item => item.link || item.text));
-const itemKey = computed(() => props.item.link || props.item.text);
+const subItemKeys = computed(() => collectPeerKeys(subItems.value));
+const itemKey = computed(() => getNavItemKey(props.item));
 const isOpen = computed(() => props.openItems.has(itemKey.value));
 const isHighlighted = computed(() => (
   props.searchActive && props.activeItemPath === props.itemPath
@@ -135,7 +134,7 @@ const isActive = computed(() => (
   props.searchActive ? isHighlighted.value : isRouteActive.value
 ));
 const labelId = computed(() => `sidebar-label-${props.itemPath.replace(/\./g, '-')}`);
-const resultId = computed(() => `dialtone-sidebar-search-result-${props.itemPath}`);
+const resultId = computed(() => getSearchResultId(props.itemPath));
 
 function handleClick (event) {
   event.preventDefault();

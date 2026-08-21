@@ -23,6 +23,7 @@
 <script setup>
 import { computed } from 'vue';
 import SidebarItem from './SidebarItem.vue';
+import { collectPeerKeys } from '../utils/sidebarSearch.js';
 
 const props = defineProps({
   items: {
@@ -54,9 +55,7 @@ const props = defineProps({
 const emit = defineEmits(['toggle']);
 
 const groupGap = computed(() => props.presentation === 'promoted' ? '0' : '50');
-const peerKeys = computed(() => props.items
-  .filter(item => item.children?.length)
-  .map(item => item.link || item.text));
+const peerKeys = computed(() => collectPeerKeys(props.items));
 
 function forwardToggle (itemKey, shouldOpen, peerKeys) {
   emit('toggle', itemKey, shouldOpen, peerKeys);
