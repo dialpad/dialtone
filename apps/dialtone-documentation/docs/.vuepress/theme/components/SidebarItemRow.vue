@@ -57,7 +57,11 @@
       class="d-w100p"
     >
       {{ item.text }}
-      <dt-badge v-bind="getBadge(item.status)" class="d-mis-50" />
+      <dt-badge
+        v-bind="getBadge(item.status)"
+        class="d-mis-50"
+        :class="{ 'd-mie-300': !collapsible && depth === 0 }"
+      />
     </dt-stack>
     <template v-else>
       {{ item.text }}

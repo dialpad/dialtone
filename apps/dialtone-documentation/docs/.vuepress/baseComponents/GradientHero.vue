@@ -57,7 +57,7 @@
             Docs
           </dt-button>
           <dt-button
-            to="/about/whats-new/"
+            to="/dialtone/whats-new/"
             link
             link-kind="muted"
             class="d-fc-primary"
