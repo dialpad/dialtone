@@ -67,7 +67,7 @@ next:
   </DtLink>
 </DtBox>
 
-<overview :pages="$page.overviewPages" />
+<overview :pages="$page.overviewPages" :show-thumbnails="false" />
 
 <script setup>
 import { useViewportBreakpoints } from '@composables/useViewportBreakpoints.js';
