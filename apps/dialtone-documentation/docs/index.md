@@ -195,7 +195,7 @@ pageClass: dialpad-design-home
 
 .home-section-title {
   font-size: 36px;
-  font-family: var(--dt-font-family-expressive);
+  font-family: "Season Sans", var(--dt-font-family-body);
 
   @media screen and (min-width: 640px) {
     font-size: 48px;

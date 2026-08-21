@@ -40,12 +40,12 @@
           })"
           align="center"
           strength="medium"
-          class="d-px-500 d-o80 d-wmx-800 d-mx-auto"
+          class="d-px-500 d-o80 d-wmx-1000 d-mx-auto"
           wrap="balance"
         >
           Start with the system of components, design tokens, and guidance that make good design the default.
         </dt-text>
-        <dt-stack direction="row" justify="center" gap="250" class="d-pbs-500">
+        <dt-stack direction="row" justify="center" gap="200" class="d-pbs-500">
           <dt-button
             v-dt-mode:dark
             class="home-gradient-hero-btn"
@@ -57,16 +57,13 @@
           </dt-button>
           <dt-button
             to="/dialtone/whats-new/"
-            link
-            link-kind="muted"
-            class="d-fc-primary"
+            :size="400"
+            kind="muted"
+            importance="outlined"
+            class="d-fc-primary d-bc-moderate"
           >
-            <dt-text
-              variant="body-lg"
-              size="300"
-              strength="semibold"
-            >
-              What's New?
+            <dt-text>
+              What's New
             </dt-text>
           </dt-button>
         </dt-stack>
@@ -98,7 +95,7 @@ const viewport = useViewportBreakpoints();
 
 .home-gradient-hero-title {
   font-size: 32px;
-  font-family: var(--dt-font-family-expressive);
+  font-family: "Season Sans", var(--dt-font-family-body);
   text-wrap: balance;
   transition: none;
   background: linear-gradient(180deg, var(--dt-color-purple-900), var(--dt-color-purple-1000));
@@ -110,11 +107,5 @@ const viewport = useViewportBreakpoints();
     font-size: 46px;
   }
 
-  @media screen and (min-width: 960px) {
-    font-size: 64px;
-  }
-
-  &__text {
-  }
 }
 </style>
