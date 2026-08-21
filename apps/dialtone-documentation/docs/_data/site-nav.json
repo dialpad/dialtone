@@ -16,6 +16,28 @@
           "link": "/dialtone/whats-new/"
         },
         {
+          "text": "Getting Started",
+          "link": "/guides/getting-started/",
+          "children": [
+            {
+              "text": "Overview",
+              "link": "/guides/getting-started/"
+            },
+            {
+              "text": "Theme and Mode",
+              "link": "/guides/theme-and-mode/"
+            },
+            {
+              "text": "CSS Cascade Layers",
+              "link": "/guides/css-layers/"
+            },
+            {
+              "text": "Contributing",
+              "link": "/guides/contributing/"
+            }
+          ]
+        },
+        {
           "text": "Migration Guide",
           "link": "/guides/migration/",
           "children": [
@@ -108,6 +130,7 @@
         {
           "text": "Tooling",
           "link": "/guides/mcp-server/",
+          "status": "new",
           "children": [
             {
               "text": "Dialtone CLI",
@@ -116,28 +139,18 @@
             {
               "text": "Dialtone MCP Server",
               "link": "/guides/mcp-server/"
-            }
-          ]
-        },
-        {
-          "text": "Getting Started",
-          "link": "/guides/getting-started/",
-          "children": [
-            {
-              "text": "Overview",
-              "link": "/guides/getting-started/"
             },
             {
-              "text": "Theme and Mode",
-              "link": "/guides/theme-and-mode/"
+              "text": "VS Code extension",
+              "link": "/guides/vscode-extension/"
             },
             {
-              "text": "CSS Cascade Layers",
-              "link": "/guides/css-layers/"
+              "text": "ESLint",
+              "link": "/guides/eslint/"
             },
             {
-              "text": "Contributing",
-              "link": "/guides/contributing/"
+              "text": "Stylelint",
+              "link": "/guides/stylelint/"
             }
           ]
         },

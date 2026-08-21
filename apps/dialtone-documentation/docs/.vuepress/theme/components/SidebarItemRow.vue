@@ -35,7 +35,7 @@
       {
         'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
         'd-pie-200': collapsible && depth === 1,
-        'd-pis-400': presentation === 'promoted' && depth === 1,
+        'd-pis-350': presentation === 'promoted' && depth === 1,
         'd-pis-600': presentation !== 'promoted' && depth === 1,
         'd-pis-800': depth === 2,
         'd-mbs-25': firstNestedChild,
@@ -63,7 +63,7 @@
       {{ item.text }}
     </template>
     <template v-if="collapsible" #endIcon="{ iconSize }">
-      <dt-box v-if="presentation === 'promoted'" padding-inline-end="75">
+      <dt-box v-if="presentation === 'promoted'" padding-inline-end="75" class="d-d-flex">
         <dt-icon
           :name="open ? 'chevron-up' : 'chevron-down'"
           :size="iconSize"
