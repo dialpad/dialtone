@@ -110,7 +110,7 @@ export const resolveActiveViewportBreakpoint = (isMatch) => {
  * @param {ViewportBreakpointName} name
  * @returns {boolean}
  */
-export const isAboveViewportBreakpointName = (activeName, name) => {
+export const isAtLeastViewportBreakpointName = (activeName, name) => {
   assertKnownBreakpoint(name);
   if (activeName === '') return false;
 
@@ -130,7 +130,7 @@ export const pickViewportValueByBreakpointName = (activeName, values) => {
   assertKnownViewportValueKeys(values);
 
   for (const name of VIEWPORT_BREAKPOINT_NAMES_DESC) {
-    if (Object.hasOwn(values, name) && isAboveViewportBreakpointName(activeName, name)) {
+    if (Object.hasOwn(values, name) && isAtLeastViewportBreakpointName(activeName, name)) {
       return values[name];
     }
   }

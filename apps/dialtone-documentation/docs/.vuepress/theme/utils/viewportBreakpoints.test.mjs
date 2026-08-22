@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
 import {
   getViewportBreakpointMediaQuery,
-  isAboveViewportBreakpointName,
+  isAtLeastViewportBreakpointName,
   pickViewportValueByBreakpointName,
   resolveActiveViewportBreakpoint,
   VIEWPORT_BREAKPOINTS,
@@ -49,11 +49,11 @@ describe('viewportBreakpoints', () => {
     assert.deepEqual(asked, ['xxxxl', 'xxxl', 'xxl', 'xl', 'lg']);
   });
 
-  it('checks above semantics from an active breakpoint name', () => {
-    assert.equal(isAboveViewportBreakpointName('', 'xs'), false);
-    assert.equal(isAboveViewportBreakpointName('sm', 'md'), false);
-    assert.equal(isAboveViewportBreakpointName('md', 'md'), true);
-    assert.equal(isAboveViewportBreakpointName('lg', 'md'), true);
+  it('checks at-least semantics from an active breakpoint name', () => {
+    assert.equal(isAtLeastViewportBreakpointName('', 'xs'), false);
+    assert.equal(isAtLeastViewportBreakpointName('sm', 'md'), false);
+    assert.equal(isAtLeastViewportBreakpointName('md', 'md'), true);
+    assert.equal(isAtLeastViewportBreakpointName('lg', 'md'), true);
   });
 
   it('picks the largest matching breakpoint value', () => {
@@ -103,7 +103,7 @@ describe('viewportBreakpoints', () => {
       /Unknown viewport breakpoint "tablet"/,
     );
     assert.throws(
-      () => isAboveViewportBreakpointName('lg', 'tablet'),
+      () => isAtLeastViewportBreakpointName('lg', 'tablet'),
       /Unknown viewport breakpoint "tablet"/,
     );
     assert.throws(
