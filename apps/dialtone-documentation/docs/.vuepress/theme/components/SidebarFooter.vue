@@ -1,6 +1,6 @@
 <template>
   <dt-box padding-inline="100">
-    <dt-stack v-if="viewport.above('lg')" gap="75">
+    <dt-stack v-if="viewport.atLeast('lg')" gap="75">
       <dt-box border-width-block-start="100" border-color="subtle" class="d-mx-n150" />
       <dt-box padding-inline-start="50" padding-inline-end="50" padding-block-start="150" padding-block-end="100">
         <dt-stack direction="row" gap="100" justify="space-between">

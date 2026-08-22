@@ -10,7 +10,7 @@
       @toggle-mobile-menu="toggleMobileMenu"
     />
     <DtBox
-      v-if="isMobileMenuOpen && !viewport.above('lg')"
+      v-if="isMobileMenuOpen && !viewport.atLeast('lg')"
       id="sidebar-mobile"
       padding-inline="100"
       surface="secondary"

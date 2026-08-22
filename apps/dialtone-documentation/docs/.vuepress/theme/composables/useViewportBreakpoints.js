@@ -1,7 +1,7 @@
 import { onMounted, onUnmounted, readonly, ref } from 'vue';
 import {
   getViewportBreakpointMediaQuery,
-  isAboveViewportBreakpointName,
+  isAtLeastViewportBreakpointName,
   pickViewportValueByBreakpointName,
   resolveActiveViewportBreakpoint,
   VIEWPORT_BREAKPOINT_NAMES,
@@ -86,26 +86,26 @@ const stopTracking = () => {
  *     <dt-box>
  *       Show this by default
  *     </dt-box>
- *     <dt-box v-if="viewport.above('xs')">
- *       Show this element above xs
+ *     <dt-box v-if="viewport.atLeast('xs')">
+ *       Show this element at xs or wider
  *     </dt-box>
- *     <dt-box v-if="viewport.above('sm')">
- *       Show this element above sm
+ *     <dt-box v-if="viewport.atLeast('sm')">
+ *       Show this element at sm or wider
  *     </dt-box>
- *     <dt-box v-if="viewport.above('md')">
- *       Show this element above md
+ *     <dt-box v-if="viewport.atLeast('md')">
+ *       Show this element at md or wider
  *     </dt-box>
- *     <dt-box v-if="viewport.above('lg')">
- *       Show this element above lg
+ *     <dt-box v-if="viewport.atLeast('lg')">
+ *       Show this element at lg or wider
  *     </dt-box>
- *     <dt-box v-if="viewport.above('xl')">
- *       Show this element above xl
+ *     <dt-box v-if="viewport.atLeast('xl')">
+ *       Show this element at xl or wider
  *     </dt-box>
- *     <dt-box v-if="viewport.above('xxl')">
- *       Show this element above xxl
+ *     <dt-box v-if="viewport.atLeast('xxl')">
+ *       Show this element at xxl or wider
  *     </dt-box>
- *     <dt-box v-if="viewport.above('xxxl')">
- *       Show this element above xxxl
+ *     <dt-box v-if="viewport.atLeast('xxxl')">
+ *       Show this element at xxxl or wider
  *     </dt-box>
  *     <dt-box
  *       surface="critical"
@@ -155,8 +155,8 @@ export function useViewportBreakpoints () {
    * @param {ViewportBreakpointName} name
    * @returns {boolean}
    */
-  const above = (name) => {
-    return isAboveViewportBreakpointName(activeBreakpoint.value, name);
+  const atLeast = (name) => {
+    return isAtLeastViewportBreakpointName(activeBreakpoint.value, name);
   };
 
   /**
@@ -171,7 +171,7 @@ export function useViewportBreakpoints () {
   return {
     activeBreakpoint: readonly(activeBreakpoint),
     breakpoints: VIEWPORT_BREAKPOINTS,
-    above,
+    atLeast,
     pick,
   };
 }

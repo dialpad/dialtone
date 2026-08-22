@@ -16,7 +16,7 @@
     <dt-stack direction="row" justify="space-between" gap="400">
       <dt-stack direction="row" gap="150" class="d-w100p">
         <dt-button
-          v-if="!viewport.above('lg')"
+          v-if="!viewport.atLeast('lg')"
           v-dt-tooltip:bottom-start="mobileMenuOpen ? 'Close menu' : 'View menu'"
           kind="muted"
           importance="clear"

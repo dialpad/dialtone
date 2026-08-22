@@ -1,6 +1,6 @@
 <template>
   <dt-banner
-    v-if="viewport.above('md') && shouldShow"
+    v-if="viewport.atLeast('md') && shouldShow"
     kind="info"
     class="d-ps-relative d-zi-base"
     @close="sessionDismiss"

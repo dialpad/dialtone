@@ -1,6 +1,6 @@
 <template>
   <dt-stack
-    v-if="viewport.above('lg')"
+    v-if="viewport.atLeast('lg')"
     direction="row"
     align="start"
     gap="0"

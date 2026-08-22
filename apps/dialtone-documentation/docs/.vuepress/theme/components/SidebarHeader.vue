@@ -8,7 +8,7 @@
   >
     <dt-stack gap="100">
       <dt-stack
-        v-if="viewport.above('lg')"
+        v-if="viewport.atLeast('lg')"
         direction="row"
         justify="space-between"
         gap="200"
@@ -97,7 +97,7 @@
               </template>
             </dt-button>
             <dt-keyboard-shortcut
-              v-else-if="viewport.above('lg')"
+              v-else-if="viewport.atLeast('lg')"
               class="d-mie-n75 d-px-100 d-bgc-moderate d-baw0"
               shortcut="∕"
               screen-reader-text="Type / (slash) to focus search field"

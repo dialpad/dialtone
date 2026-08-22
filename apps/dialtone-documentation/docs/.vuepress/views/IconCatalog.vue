@@ -137,7 +137,7 @@ const isModalOpen = ref(false);
 const isPopoverOpen = ref({});
 const filteredIconsList = ref({});
 const selectedIcon = ref(undefined);
-const usesIconModal = computed(() => !viewport.above('lg'));
+const usesIconModal = computed(() => !viewport.atLeast('lg'));
 const excludedIcons = [
   'brand-dialpad-meetings',
   'brand-dialpad',

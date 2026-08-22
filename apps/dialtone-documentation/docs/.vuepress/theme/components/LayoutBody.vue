@@ -6,7 +6,7 @@
     class="d-h100p"
   >
     <dt-box
-      v-if="viewport.above('lg') && !$frontmatter.noSidebar"
+      v-if="viewport.atLeast('lg') && !$frontmatter.noSidebar"
       padding-block-end="250"
       padding-inline="75"
       min-inline-size="450"
@@ -95,7 +95,7 @@ const props = defineProps({
 
 const viewport = useViewportBreakpoints();
 const isCombinatorFullScreen = ref(false);
-const showWideCombinator = computed(() => viewport.above('xxxl'));
+const showWideCombinator = computed(() => viewport.atLeast('xxxl'));
 const combinatorDockTarget = computed(() => {
   return showWideCombinator.value ? '#combinator-wide-target' : '#combinator-inline-target';
 });

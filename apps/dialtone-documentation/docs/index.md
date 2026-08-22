@@ -5,7 +5,7 @@ pageClass: dialpad-design-home
 
 <dt-box position="relative">
   <dt-box
-    v-if="viewport.above('md') && isMigrationBannerVisible"
+    v-if="viewport.atLeast('md') && isMigrationBannerVisible"
     position="absolute"
     inset-block-start="200"
     inset-inline="200"
