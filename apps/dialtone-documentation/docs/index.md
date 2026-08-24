@@ -205,11 +205,6 @@ pageClass: dialpad-design-home
   max-inline-size: 1200px;
 }
 
-.home-halftone-footer {
-  --halftone-parallax-overflow: 120%;
-  --halftone-parallax-travel: 0.5;
-}
-
 .home-halftone-footer__content {
   position: relative;
   z-index: 1;
@@ -248,25 +243,20 @@ onUnmounted(() => {
   document.body.classList.remove('dialpad-design-home');
 });
 
-// Hero and footer scroll-driven effects — one rAF keeps their reads and writes together.
+// Hero scroll-driven effects share one rAF so their reads and writes stay together.
 onMounted(() => {
   const hero = document.querySelector('.home-gradient-hero');
   const heroShaderLayer = hero?.querySelector('.halftone-surface__shader');
-  const footer = document.querySelector('.home-halftone-footer');
-  const footerShaderLayer = footer?.querySelector('.halftone-surface__shader');
   let ticking = false;
 
   if (!hero) return;
 
-  // Measured on resize rather than per frame. Neither height changes while scrolling, and
-  // reading them mid-frame is expensive here specifically: the custom properties written
+  // Measured on resize rather than per frame. The height does not change while scrolling,
+  // and reading it mid-frame is expensive here specifically: the custom properties written
   // below feed a transform on the shader layer, so any read after a write forces a
   // synchronous style-and-layout pass.
   let heroHeight = 0;
   let heroParallaxRange = 0;
-  let footerHeight = 0;
-  let footerParallaxRange = 0;
-  let footerParallaxTravel = 1;
 
   const measure = () => {
     heroHeight = hero.offsetHeight;
@@ -277,25 +267,12 @@ onMounted(() => {
     heroParallaxRange = heroShaderLayer
       ? Math.max(heroShaderLayer.offsetHeight - heroHeight, 0)
       : 0;
-
-    footerHeight = footer?.offsetHeight ?? 0;
-    footerParallaxRange = footerShaderLayer
-      ? Math.max(footerShaderLayer.offsetHeight - footerHeight, 0)
-      : 0;
-
-    const configuredFooterParallaxTravel = footer
-      ? Number.parseFloat(getComputedStyle(footer).getPropertyValue('--halftone-parallax-travel'))
-      : 1;
-    footerParallaxTravel = Number.isFinite(configuredFooterParallaxTravel)
-      ? configuredFooterParallaxTravel
-      : 1;
   };
 
   const update = () => {
     // Every read first, every write after. Interleaving them re-invalidates layout part
     // way through the frame and costs a forced reflow per switch.
     const scrollY = window.scrollY;
-    const footerRect = footer?.getBoundingClientRect();
 
     // One clamped progress value drives all four properties. Two of them used to derive it
     // separately, one clamped and one not, which disagreed during overscroll — the
@@ -305,19 +282,12 @@ onMounted(() => {
     // Overlay fades in across the hero's scroll range: 0 at top → 1 once scrolled past.
     // Text fades faster, starting at 0.8 and reaching 0 at about two thirds of the range.
     const textOpacity = Math.max(0.8 - scrollProgress * 1.2, 0);
-    const footerProgress = footerRect
-      ? clamp01((window.innerHeight - footerRect.top) / (footerHeight || 1))
-      : 0;
 
     hero.style.setProperty('--overlay-opacity', scrollProgress);
     hero.style.setProperty('--text-opacity', textOpacity);
     // Text slides down 0–325px over the same range.
     hero.style.setProperty('--text-translate-y', `${scrollProgress * 325}px`);
     hero.style.setProperty('--halftone-translate-y', `${-scrollProgress * heroParallaxRange}px`);
-    footer?.style.setProperty(
-      '--halftone-translate-y',
-      `${-footerProgress * footerParallaxRange * footerParallaxTravel}px`,
-    );
 
     ticking = false;
   };
