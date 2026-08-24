@@ -10,6 +10,7 @@ import {
   getHashScrollBehavior,
   getScrollOffset,
   getTargetScrollTop,
+  resolveHeaderTargets,
   hashToId,
   replaceBrowserHash,
   shouldSyncActiveHeaderFromRouteWatch,
@@ -29,6 +30,10 @@ export function usePageTocScrollSpy (headers) {
   const stickyHeader = ref(null);
   // Flattening the header tree per scroll frame was the hot path; memoize it instead.
   const linkedHeaders = computed(() => getLinkedHeaders(unref(headers) || []));
+  // Resolved heading elements, refreshed alongside the scroll container. Not a computed:
+  // it depends on the DOM rather than on reactive state, so it has to be recomputed at
+  // known-good moments rather than whenever something reads it.
+  const linkedHeaderTargets = ref([]);
   const activeHash = ref(getCurrentBrowserHash(route.hash));
   const routeHashScrollGuard = createRouteHashScrollGuard();
 
@@ -44,8 +49,9 @@ export function usePageTocScrollSpy (headers) {
   function syncScrollContainer () {
     const nextScrollContainer = findPageScrollContainer();
     // Refresh even when the container is unchanged — the sticky header can come and go
-    // between pages.
+    // between pages, and the headings are re-rendered on navigation.
     stickyHeader.value = findPageStickyHeader(nextScrollContainer);
+    linkedHeaderTargets.value = resolveHeaderTargets(linkedHeaders.value);
     if (scrollContainer.value === nextScrollContainer) return;
 
     removeScrollListener?.();
@@ -76,6 +82,7 @@ export function usePageTocScrollSpy (headers) {
     const nextActiveHash = getActiveHeaderLink(currentHeaders, scrollContainer.value, {
       offset: getScrollOffset(scrollContainer.value, stickyHeader.value),
       linkedHeaders: linkedHeaders.value,
+      targets: linkedHeaderTargets.value,
     });
 
     if (nextActiveHash === activeHash.value) return;

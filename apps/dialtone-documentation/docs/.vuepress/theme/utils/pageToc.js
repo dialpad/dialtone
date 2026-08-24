@@ -153,33 +153,58 @@ export function getTargetScrollTop (scrollContainer, target, offset = 0) {
 
 // `linkedHeaders` may be passed in pre-flattened; the scroll path memoizes it rather
 // than rebuilding the whole tree on every frame.
-export function getActiveHeaderLink (headers, scrollContainer, {
-  offset = 0,
-  getTarget = getElementById,
-  linkedHeaders = getLinkedHeaders(headers),
-} = {}) {
+/**
+ * Pairs each linked header with its heading element.
+ *
+ * Worth doing once rather than per frame: the scroll path previously resolved every
+ * header by id on every animation frame, so a long page cost dozens of `getElementById`
+ * calls sixty times a second. The elements only change when the page's headers do, which
+ * is exactly when the scroll-spy re-syncs.
+ *
+ * @param {{ link: string }[]} linkedHeaders
+ * @param {(id: string) => (Element | null)} [getTarget]
+ * @returns {{ link: string, element: Element | null }[]}
+ */
+export function resolveHeaderTargets (linkedHeaders, getTarget = getElementById) {
+  return linkedHeaders.map(header => ({
+    link: header.link,
+    element: getTarget(hashToId(header.link)),
+  }));
+}
+
+export function getActiveHeaderLink (headers, scrollContainer, options = {}) {
+  const linkedHeaders = options.linkedHeaders ?? getLinkedHeaders(headers);
   if (!linkedHeaders.length || !scrollContainer) return '';
 
   if (isScrolledToBottom(scrollContainer)) {
     return linkedHeaders[linkedHeaders.length - 1].link;
   }
 
-  return getPassedHeaderLink(linkedHeaders, scrollContainer.getBoundingClientRect().top + offset, getTarget);
+  // `targets` is the memoized path the scroll loop uses; `getTarget` is the per-call
+  // fallback, which resolveHeaderTargets defaults for us.
+  const targets = options.targets ?? resolveHeaderTargets(linkedHeaders, options.getTarget);
+  const activationTop = scrollContainer.getBoundingClientRect().top + (options.offset ?? 0);
+
+  return getPassedHeaderLink(targets, activationTop);
 }
 
 export function getLinkedHeaders (headers) {
   return flattenHeadersWithDepth(headers).filter(header => header.link);
 }
 
-function getPassedHeaderLink (headers, activationTop, getTarget) {
+function getPassedHeaderLink (targets, activationTop) {
   let activeLink = '';
 
-  for (const header of headers) {
-    const target = getTarget(hashToId(header.link));
-    if (!target?.getBoundingClientRect) continue;
-    if (target.getBoundingClientRect().top > activationTop) break;
+  for (const { link, element } of targets) {
+    if (!element?.getBoundingClientRect) continue;
+    // A cached element Vue has since replaced reports a zero rect, which would read as
+    // "already scrolled past" and drag the active header to the end of the list. Compared
+    // explicitly against false so plain test doubles, which have no such property, still
+    // participate.
+    if (element.isConnected === false) continue;
+    if (element.getBoundingClientRect().top > activationTop) break;
 
-    activeLink = header.link;
+    activeLink = link;
   }
 
   return activeLink;

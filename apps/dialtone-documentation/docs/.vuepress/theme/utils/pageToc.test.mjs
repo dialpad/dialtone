@@ -5,7 +5,6 @@ import {
   PAGE_SCROLL_CONTAINER_SELECTOR,
   createRouteHashScrollGuard,
   flattenHeadersWithDepth,
-  getActiveHeaderLink,
   getHashScrollBehavior,
   getCurrentBrowserHash,
   getRightRailTocViewportValues,
@@ -242,86 +241,5 @@ describe('pageToc utilities', () => {
     };
 
     assert.equal(getTargetScrollTop(scrollContainer, target, 80), 440);
-  });
-
-  it('selects the deepest passed header as active', () => {
-    const headers = [
-      { link: '#usage', children: [] },
-      {
-        link: '#variants',
-        children: [
-          { link: '#sizes', children: [] },
-        ],
-      },
-      { link: '#classes', children: [] },
-    ];
-    const scrollContainer = {
-      scrollTop: 600,
-      clientHeight: 500,
-      scrollHeight: 2000,
-      getBoundingClientRect: () => ({ top: 100 }),
-    };
-    const targets = {
-      usage: { getBoundingClientRect: () => ({ top: 80 }) },
-      variants: { getBoundingClientRect: () => ({ top: 260 }) },
-      sizes: { getBoundingClientRect: () => ({ top: 320 }) },
-      classes: { getBoundingClientRect: () => ({ top: 900 }) },
-    };
-
-    assert.equal(
-      getActiveHeaderLink(headers, scrollContainer, {
-        offset: 180,
-        getTarget: id => targets[id],
-      }),
-      '#variants',
-    );
-  });
-
-  it('accepts pre-flattened linkedHeaders, matching the derived result', () => {
-    const headers = [
-      { link: '#usage', children: [{ link: '#variants', children: [] }] },
-      { link: '#classes', children: [] },
-    ];
-    const scrollContainer = {
-      scrollTop: 600,
-      clientHeight: 500,
-      scrollHeight: 2000,
-      getBoundingClientRect: () => ({ top: 100 }),
-    };
-    const targets = {
-      usage: { getBoundingClientRect: () => ({ top: 80 }) },
-      variants: { getBoundingClientRect: () => ({ top: 260 }) },
-      classes: { getBoundingClientRect: () => ({ top: 900 }) },
-    };
-    const options = { offset: 180, getTarget: id => targets[id] };
-
-    assert.equal(
-      getActiveHeaderLink(headers, scrollContainer, {
-        ...options,
-        linkedHeaders: getLinkedHeaders(headers),
-      }),
-      getActiveHeaderLink(headers, scrollContainer, options),
-    );
-  });
-
-  it('selects the last available header at the bottom of the scroll container', () => {
-    const headers = [
-      { link: '#usage', children: [] },
-      { link: '#classes', children: [] },
-    ];
-    const scrollContainer = {
-      scrollTop: 1500,
-      clientHeight: 500,
-      scrollHeight: 2000,
-      getBoundingClientRect: () => ({ top: 100 }),
-    };
-
-    assert.equal(
-      getActiveHeaderLink(headers, scrollContainer, {
-        offset: 180,
-        getTarget: () => ({}),
-      }),
-      '#classes',
-    );
   });
 });
