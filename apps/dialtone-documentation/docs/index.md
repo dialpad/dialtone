@@ -174,7 +174,7 @@ pageClass: dialpad-design-home
     </dt-stack>
   </dt-box>
 </dt-box>
-<halftone-surface flip-x class="home-halftone-footer d-h-1000">
+<halftone-surface flip-x class="home-halftone-footer d-h-500 d-pbs-800">
   <dt-stack align="center" justify="center" class="d-h50p home-halftone-footer__content">
     <dt-box inline-size="1200" max-inline-size="100p" padding-inline-end="200">
       <svg-loader name="footer-dialpad-design" />
