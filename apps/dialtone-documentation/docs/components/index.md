@@ -63,7 +63,7 @@ next:
       </DtStack>
     </DtStack>
   </DtLink>
-  <DtLink to="/components/motion-text" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
+  <DtLink to="/components/resizable" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
     <DtStack direction="row" gap="200">
       <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
         <DtStack>

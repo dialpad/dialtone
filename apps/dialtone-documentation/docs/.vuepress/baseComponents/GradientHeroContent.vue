@@ -41,7 +41,6 @@
     </dt-text>
     <dt-stack direction="row" justify="center" gap="200" class="d-pbs-500">
       <dt-button
-        class="home-gradient-hero-btn"
         to="/dialtone/"
         :size="400"
       >
@@ -79,11 +78,6 @@ const viewport = useViewportBreakpoints();
   transform: translateY(var(--text-translate-y, 0px));
   opacity: var(--text-opacity);
 }
-
-// .home-gradient-hero-btn {
-//   --button-color-text: var(--dt-color-neutral-white);
-//   --button-color-background: var(--dt-color-purple-50);
-// }
 
 .home-gradient-hero-title {
   font-size: 32px;

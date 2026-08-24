@@ -41,6 +41,8 @@
           </template>
           {{ $frontmatter.download_url_label || 'Download' }}
         </dt-button>
+        <!--
+        DON'T REMOVE. HOLDING FOR FUTURE POSSIBLE RESURRECTION
         <dt-button
           v-if="$frontmatter.figma_url && viewport.atLeast('md')"
           :href="$frontmatter.figma_url"
@@ -49,13 +51,13 @@
           kind="muted"
           importance="outlined"
           :size="200"
-          hidden
         >
           <template #startIcon="{ iconSize }">
             <dt-icon-figma :size="iconSize" />
           </template>
           Figma
         </dt-button>
+        -->
         <dt-button
           v-if="$frontmatter.storybook && $frontmatter.storybook !== 'planned'"
           :href="$frontmatter.storybook"

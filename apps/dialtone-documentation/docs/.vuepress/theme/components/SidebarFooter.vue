@@ -55,6 +55,7 @@
               size="200"
             >
               <template #startIcon>
+                <!-- TODO: possible Dialtone icon addition. Intentionally embedded for now. -->
                 <svg
                   class="d-icon--size-200 d-icon"
                   xmlns="http://www.w3.org/2000/svg"
