@@ -4,7 +4,7 @@
       default: '200',
       lg: '350',
     })"
-    padding-block-end="200"
+    padding-block-end="250"
   >
     <dt-stack gap="100">
       <dt-stack

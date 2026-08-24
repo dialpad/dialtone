@@ -51,7 +51,7 @@
     />
     <dt-box
       id="sidebar-mobile"
-      padding-inline="300"
+      padding-inline="50"
       surface="primary"
       scrollbar="always"
       min-block-size="0"
