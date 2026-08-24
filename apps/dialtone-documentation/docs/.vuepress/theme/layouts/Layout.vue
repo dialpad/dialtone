@@ -9,8 +9,14 @@
       :mobile-menu-open="isMobileMenuOpen"
       @toggle-mobile-menu="toggleMobileMenu"
     />
+    <!--
+      `v-if` on the drawer so the narrow shell's sidebar is only instantiated while it is
+      open, never alongside the rail's copy in LayoutBody. `v-show` on the body so opening
+      the drawer hides the page instead of unmounting it — the two share the same flex
+      slot, so only one may be displayed at a time.
+    -->
     <DtBox
-      v-if="isMobileMenuOpen && !viewport.atLeast('lg')"
+      v-if="isMobileDrawerOpen"
       id="sidebar-mobile"
       padding-inline="100"
       surface="secondary"
@@ -21,7 +27,7 @@
       <sidebar />
     </DtBox>
     <DtBox
-      v-else
+      v-show="!isMobileDrawerOpen"
       id="layout-body"
       padding-block-end="0"
       min-block-size="0"
@@ -110,6 +116,10 @@ const pageData = usePageData();
 const componentCombinatorName = computed(() => getComponentCombinatorName(pageData.value?.frontmatter));
 const viewport = useViewportBreakpoints();
 const isMobileMenuOpen = ref(false);
+
+// The drawer only exists in the narrow shell; crossing to the rail breakpoint with it
+// still flagged open must not render a second sidebar.
+const isMobileDrawerOpen = computed(() => isMobileMenuOpen.value && !viewport.atLeast('lg'));
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value;

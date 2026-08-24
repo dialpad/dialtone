@@ -1,12 +1,18 @@
 <template>
+  <!--
+    Chrome switches on the viewport; `<content />` does not. The page sits outside every
+    breakpoint and drawer branch so it mounts once per navigation. It previously lived in
+    two `v-if` arms, which meant a desktop load built the page, threw it away, and rebuilt
+    it once the breakpoint resolved — and opening the mobile drawer unmounted it outright.
+  -->
   <dt-stack
-    v-if="viewport.atLeast('lg')"
-    direction="row"
-    align="start"
+    :direction="viewport.atLeast('lg') ? 'row' : 'column'"
+    :align="viewport.atLeast('lg') ? 'start' : 'stretch'"
     gap="0"
     class="d-w100p"
   >
     <dt-box
+      v-if="viewport.atLeast('lg')"
       padding-block-end="250"
       padding-inline="75"
       min-inline-size="450"
@@ -17,6 +23,12 @@
     >
       <sidebar />
     </dt-box>
+    <doc-header
+      v-else
+      class="d-ps-sticky d-ibs-0 d-zi-navigation-fixed"
+      :mobile-menu-open="isMobileMenuOpen"
+      @toggle-mobile-menu="toggleMobileMenu"
+    />
     <dt-box
       min-inline-size="0"
       inline-size="100p"
@@ -25,35 +37,29 @@
       <content />
     </dt-box>
   </dt-stack>
-  <template v-else>
-    <dt-stack
-      v-if="isMobileMenuOpen"
-      class="d-ps-fixed d-all-0 d-of-hidden d-zi-navigation-fixed d-bgc-primary"
+  <!--
+    Fixed and opaque, so it covers the page rather than replacing it in the tree. It
+    carries its own header because it hides the one above.
+  -->
+  <dt-stack
+    v-if="isMobileDrawerOpen"
+    class="d-ps-fixed d-all-0 d-of-hidden d-zi-navigation-fixed d-bgc-primary"
+  >
+    <doc-header
+      :mobile-menu-open="isMobileMenuOpen"
+      @toggle-mobile-menu="toggleMobileMenu"
+    />
+    <dt-box
+      id="sidebar-mobile"
+      padding-inline="300"
+      surface="primary"
+      scrollbar="always"
+      min-block-size="0"
+      class="d-fl1"
     >
-      <doc-header
-        :mobile-menu-open="isMobileMenuOpen"
-        @toggle-mobile-menu="toggleMobileMenu"
-      />
-      <dt-box
-        id="sidebar-mobile"
-        padding-inline="300"
-        surface="primary"
-        scrollbar="always"
-        min-block-size="0"
-        class="d-fl1"
-      >
-        <sidebar />
-      </dt-box>
-    </dt-stack>
-    <template v-else>
-      <doc-header
-        class="d-ps-sticky d-ibs-0 d-zi-navigation-fixed"
-        :mobile-menu-open="isMobileMenuOpen"
-        @toggle-mobile-menu="toggleMobileMenu"
-      />
-      <content />
-    </template>
-  </template>
+      <sidebar />
+    </dt-box>
+  </dt-stack>
 </template>
 
 <script setup>
@@ -61,7 +67,7 @@
 import '@dialpad/dialtone-tokens/tokens-base-light.css';
 import '@dialpad/dialtone-tokens/tokens-dp-light.css';
 import { DtStack } from '@dialpad/dialtone-vue';
-import { ref, watch } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { Content } from 'vuepress/client';
 import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
@@ -71,6 +77,10 @@ import Sidebar from '../components/Sidebar.vue';
 const route = useRoute();
 const viewport = useViewportBreakpoints();
 const isMobileMenuOpen = ref(false);
+
+// Gates the drawer's own mount, so the narrow shell's sidebar is never instantiated
+// alongside the desktop rail's copy.
+const isMobileDrawerOpen = computed(() => isMobileMenuOpen.value && !viewport.atLeast('lg'));
 
 const toggleMobileMenu = () => {
   isMobileMenuOpen.value = !isMobileMenuOpen.value;
