@@ -47,8 +47,7 @@ function isCommandKShortcut (event) {
     !event.defaultPrevented &&
     !event.isComposing &&
     !event.altKey &&
-    !event.ctrlKey &&
-    event.metaKey &&
+    (event.metaKey || event.ctrlKey) &&
     !event.shiftKey;
 }
 

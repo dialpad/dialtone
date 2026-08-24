@@ -30,12 +30,7 @@
             </template>
           </page-header>
           <dt-dropdown
-            v-if="includeToc && viewport.pick({
-              default: true,
-              xl: false,
-              xxxl: true,
-              xxxxl: false,
-            })"
+            v-if="includeToc && !viewport.pick(rightRailTocViewportValues)"
             placement="bottom-start"
             class="d-mis-auto"
             padding="small"
@@ -259,8 +254,8 @@ watch(() => route.path, () => {
 
   try {
     headers.value = route.meta._pageChunk.data.headers;
-  } catch( e ) {
-    console.log('Error getting page headers', e)
+  } catch (e) {
+    console.error('Error getting page headers', e);
   }
-}, { flush: 'pre', immediate: true })
+}, { flush: 'pre', immediate: true });
 </script>

@@ -161,6 +161,13 @@ function _extractComponentStatus(app) {
   const indexPage = app.pages.find(
     (page) => page.path === '/components/status/',
   );
+  if (!indexPage) {
+    console.warn(
+      '[extractComponentStatus] No index page found for path: /components/status/',
+    );
+    return;
+  }
+
   indexPage.data.componentsStatus = app.pages
     .filter(
       (page) =>

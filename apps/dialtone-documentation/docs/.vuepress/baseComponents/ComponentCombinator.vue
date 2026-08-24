@@ -33,11 +33,6 @@ export default {
       type: Boolean,
       default: undefined,
     },
-
-    showBlueprints: {
-      type: Boolean,
-      default: false,
-    },
   },
 
   emits: ['update:fullScreen'],

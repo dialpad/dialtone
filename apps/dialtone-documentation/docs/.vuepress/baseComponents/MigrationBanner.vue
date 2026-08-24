@@ -1,6 +1,6 @@
 <template>
   <dt-banner
-    v-if="viewport.atLeast('md') && shouldShow"
+    v-if="shouldShow"
     kind="info"
     class="d-ps-relative d-zi-base"
     @close="sessionDismiss"
@@ -52,7 +52,8 @@ const isOnMigrationGuide = computed(() => {
 });
 
 const shouldShow = computed(() => {
-  return props.visible &&
+  return viewport.atLeast('md') &&
+    props.visible &&
     !dismissed.value &&
     !permanentlyDismissed.value &&
     !isOnMigrationGuide.value;

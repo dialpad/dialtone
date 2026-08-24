@@ -1,6 +1,7 @@
 ---
 title: Dialtone CLI
 description: Search the Dialtone version installed in your project from the command line.
+status: ready
 keywords:
   [
     "command line",

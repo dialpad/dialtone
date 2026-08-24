@@ -175,6 +175,17 @@ export function createDotColorSampler (palette) {
   };
 }
 
+// Under about a quarter of an 8-bit step, so a skipped push can never be visible.
+const CHANNEL_EPSILON = 1 / 1024;
+
+const hasVisibleChange = (previous, next) => {
+  if (!previous) return true;
+
+  return Math.abs(previous[0] - next[0]) > CHANNEL_EPSILON ||
+    Math.abs(previous[1] - next[1]) > CHANNEL_EPSILON ||
+    Math.abs(previous[2] - next[2]) > CHANNEL_EPSILON;
+};
+
 /**
  * Drives the dot colour around the palette loop.
  *
@@ -195,17 +206,6 @@ export function createDotColorSampler (palette) {
  *   dispose: () => void,
  * }}
  */
-// Under about a quarter of an 8-bit step, so a skipped push can never be visible.
-const CHANNEL_EPSILON = 1 / 1024;
-
-const hasVisibleChange = (previous, next) => {
-  if (!previous) return true;
-
-  return Math.abs(previous[0] - next[0]) > CHANNEL_EPSILON ||
-    Math.abs(previous[1] - next[1]) > CHANNEL_EPSILON ||
-    Math.abs(previous[2] - next[2]) > CHANNEL_EPSILON;
-};
-
 export function createDotColorLoop ({ periodMs, onColor }) {
   let sampler = null;
   let animated = false;

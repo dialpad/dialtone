@@ -1,9 +1,6 @@
 {
   "permissions": {
-    "allow": [
-      "Skill(doc-sync-enforcer)",
-      "Agent(doc-janitor)"
-    ]
+    "allow": ["Skill(doc-sync-enforcer)", "Agent(doc-janitor)"]
   },
   "hooks": {
     "PreToolUse": [
@@ -12,11 +9,11 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel)}/.claude/hooks/commit-format.sh"
+            "command": "\"${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel)}/.claude/hooks/commit-format.sh\""
           },
           {
             "type": "command",
-            "command": "${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel)}/.claude/hooks/pre-push-pr-guard.sh"
+            "command": "\"${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel)}/.claude/hooks/pre-push-pr-guard.sh\""
           }
         ]
       },
@@ -25,7 +22,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel)}/.claude/hooks/branch-protection.sh"
+            "command": "\"${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel)}/.claude/hooks/branch-protection.sh\""
           }
         ]
       }
@@ -36,12 +33,12 @@
         "hooks": [
           {
             "type": "command",
-            "command": "${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel)}/.claude/hooks/shaping-ripple.sh",
+            "command": "\"${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel)}/.claude/hooks/shaping-ripple.sh\"",
             "timeout": 1000
           },
           {
             "type": "command",
-            "command": "${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel)}/.claude/hooks/post-tool-use-tracker.sh"
+            "command": "\"${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel)}/.claude/hooks/post-tool-use-tracker.sh\""
           }
         ]
       }

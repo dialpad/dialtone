@@ -1,6 +1,7 @@
 ---
 title: Graphic System
 description: Abstract graphics and illustrations used across Dialpad's brand and product surfaces.
+status: ready
 thumb: true
 keywords: ["visual", "brand", "image"]
 next:

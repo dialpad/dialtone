@@ -1,6 +1,7 @@
 ---
 title: Color
 description: A systematic and accessible color palette that supports both functional needs and personalized experiences within our products.
+status: ready
 thumb: true
 keywords: ["colour", "colors", "palette", "theme", "purple", "red", "blue", "green", "gold", "magenta", "white", "black", "berry", "coral", "indigo", "olive", "tan" ]
 next:

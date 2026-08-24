@@ -225,6 +225,7 @@ onMounted(() => {
     reducedMotionQuery = window.matchMedia(REDUCED_MOTION_QUERY);
     reducedMotionQuery.addEventListener('change', syncMotionState);
     finePointerQuery = window.matchMedia(FINE_POINTER_QUERY);
+    finePointerQuery.addEventListener('change', syncMotionState);
   }
 
   initShader().catch((error) => {
@@ -243,6 +244,7 @@ onBeforeUnmount(() => {
 
   reducedMotionQuery?.removeEventListener('change', syncMotionState);
   reducedMotionQuery = null;
+  finePointerQuery?.removeEventListener('change', syncMotionState);
   finePointerQuery = null;
 
   flushUniforms.cancel();

@@ -5,7 +5,7 @@
         v-for="header in headers"
         :key="header.slug"
       >
-        <li v-if="!header.children.length">
+        <li v-if="!header.children?.length">
           <toc-item
             :active="isItemActive(header)"
             :to="header.link"
@@ -28,7 +28,7 @@
             />
           </template>
           <template
-            v-if="header.children.length"
+            v-if="header.children?.length"
             #content
           >
             <ul class="d-pis-100 ">

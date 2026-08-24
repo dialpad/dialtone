@@ -1,6 +1,7 @@
 ---
 title: Release Notes
 description: Dialtone release history and version information.
+status: ready
 keywords: ["changelog", "version", "releases", "github releases", "updates"]
 ---
 

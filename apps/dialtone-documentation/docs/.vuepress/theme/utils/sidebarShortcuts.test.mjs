@@ -34,15 +34,15 @@ const element = ({
 });
 
 describe('sidebar shortcut utilities', () => {
-  it('recognizes slash and command-k as search shortcuts', () => {
+  it('recognizes slash, command-k, and control-k as search shortcuts', () => {
     assert.equal(isSidebarSearchShortcut(keyboardEvent({ key: '/' })), true);
     assert.equal(isSidebarSearchShortcut(keyboardEvent({ key: 'k', metaKey: true })), true);
     assert.equal(isSidebarSearchShortcut(keyboardEvent({ key: 'K', metaKey: true })), true);
+    assert.equal(isSidebarSearchShortcut(keyboardEvent({ key: 'k', ctrlKey: true })), true);
   });
 
   it('ignores modified slash and non-command-k key chords', () => {
     assert.equal(isSidebarSearchShortcut(keyboardEvent({ key: '/', metaKey: true })), false);
-    assert.equal(isSidebarSearchShortcut(keyboardEvent({ key: 'k', ctrlKey: true })), false);
     assert.equal(isSidebarSearchShortcut(keyboardEvent({ key: 'k', metaKey: true, shiftKey: true })), false);
     assert.equal(isSidebarSearchShortcut(keyboardEvent({ key: 'k', metaKey: true, defaultPrevented: true })), false);
     assert.equal(isSidebarSearchShortcut(keyboardEvent({ key: 'k', metaKey: true, isComposing: true })), false);
