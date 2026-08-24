@@ -174,7 +174,7 @@ pageClass: dialpad-design-home
     </dt-stack>
   </dt-box>
 </dt-box>
-<halftone-surface class="home-halftone-footer d-h-1000">
+<halftone-surface flip-x class="home-halftone-footer d-h-1000">
   <dt-stack align="center" justify="center" class="d-h50p home-halftone-footer__content">
     <dt-box inline-size="1200" max-inline-size="100p" padding-inline-end="200">
       <svg-loader name="footer-dialpad-design" />
@@ -207,6 +207,7 @@ pageClass: dialpad-design-home
 
 .home-halftone-footer {
   --halftone-parallax-overflow: 120%;
+  --halftone-parallax-travel: 0.5;
 }
 
 .home-halftone-footer__content {
@@ -265,6 +266,7 @@ onMounted(() => {
   let heroParallaxRange = 0;
   let footerHeight = 0;
   let footerParallaxRange = 0;
+  let footerParallaxTravel = 1;
 
   const measure = () => {
     heroHeight = hero.offsetHeight;
@@ -280,6 +282,13 @@ onMounted(() => {
     footerParallaxRange = footerShaderLayer
       ? Math.max(footerShaderLayer.offsetHeight - footerHeight, 0)
       : 0;
+
+    const configuredFooterParallaxTravel = footer
+      ? Number.parseFloat(getComputedStyle(footer).getPropertyValue('--halftone-parallax-travel'))
+      : 1;
+    footerParallaxTravel = Number.isFinite(configuredFooterParallaxTravel)
+      ? configuredFooterParallaxTravel
+      : 1;
   };
 
   const update = () => {
@@ -307,7 +316,7 @@ onMounted(() => {
     hero.style.setProperty('--halftone-translate-y', `${-scrollProgress * heroParallaxRange}px`);
     footer?.style.setProperty(
       '--halftone-translate-y',
-      `${-footerProgress * footerParallaxRange}px`,
+      `${-footerProgress * footerParallaxRange * footerParallaxTravel}px`,
     );
 
     ticking = false;

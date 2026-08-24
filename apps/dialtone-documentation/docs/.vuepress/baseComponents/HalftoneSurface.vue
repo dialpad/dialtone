@@ -2,6 +2,7 @@
   <div
     ref="surfaceEl"
     class="halftone-surface"
+    :class="{ 'halftone-surface--flip-x': flipX }"
   >
     <!--
       Always render the empty host so server markup and the first client render match.
@@ -29,6 +30,10 @@ import {
 } from './gradientHeroColors.js';
 
 const props = defineProps({
+  flipX: {
+    type: Boolean,
+    default: false,
+  },
   geometry: {
     type: Object,
     default: () => ({}),
@@ -80,6 +85,21 @@ const prefersReducedMotion = () => Boolean(reducedMotionQuery?.matches);
 const prefersFinePointer = () => Boolean(finePointerQuery?.matches);
 const currentSpeed = () => (prefersReducedMotion() || !isVisible ? 0 : 1);
 const shouldTrackPointer = () => isVisible && prefersFinePointer() && !prefersReducedMotion();
+const mirrorCursorX = (state) => {
+  if (!props.flipX || !state) return state;
+
+  return {
+    ...state,
+    x: 1 - state.x,
+    prevX: 1 - state.prevX,
+    trail: state.trail.map(([x, y, intensity, padding]) => [
+      1 - x,
+      y,
+      intensity,
+      padding,
+    ]),
+  };
+};
 
 const buildUniforms = (surface) => {
   const settings = geometry.value;
@@ -152,7 +172,10 @@ const attachControllers = (surface) => {
     element: surface,
     rectElement: shaderHostEl.value,
     onChange: (state) => {
-      queueUniforms(getCursorUniforms(state, geometry.value.cursorStrength));
+      queueUniforms(getCursorUniforms(
+        mirrorCursorX(state),
+        geometry.value.cursorStrength,
+      ));
     },
   });
 
@@ -256,7 +279,9 @@ onBeforeUnmount(() => {
   z-index: 0;
   pointer-events: none;
   block-size: calc(100% + var(--halftone-parallax-overflow, 0%));
-  transform: translate3d(0, var(--halftone-translate-y, 0px), 0);
+  transform:
+    translate3d(0, var(--halftone-translate-y, 0px), 0)
+    scaleX(var(--halftone-scale-x, 1));
   will-change: transform;
 
   canvas {
@@ -267,5 +292,9 @@ onBeforeUnmount(() => {
     inline-size: 100%;
     block-size: 100%;
   }
+}
+
+.halftone-surface--flip-x {
+  --halftone-scale-x: -1;
 }
 </style>
