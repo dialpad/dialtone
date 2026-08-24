@@ -31,10 +31,17 @@ const getWindow = (windowOverride) => {
 };
 
 /**
+ * Where the probe element gets mounted. This matters for correctness, not just tidiness:
+ * a custom property declared on some element deeper than <body> does not exist in the
+ * cascade at <body>, so a probe mounted there resolves it to nothing. Pass `container`
+ * to read a variable that is scoped to a subtree.
+ *
  * @param {Document | undefined} doc
+ * @param {HTMLElement} [containerOverride]
  * @returns {HTMLElement | null}
  */
-const getProbeContainer = (doc) => {
+const getProbeContainer = (doc, containerOverride) => {
+  if (containerOverride) return containerOverride;
   if (!doc) return null;
 
   return doc.body ?? doc.documentElement;
@@ -112,6 +119,8 @@ const ensureThemeColorMeta = (doc) => {
  * @param {Window} [options.window]
  * @param {string} [options.cssVariableName]
  * @param {string} [options.fallback]
+ * @param {HTMLElement} [options.container] Element to mount the probe inside. Required
+ *   when `cssVariableName` is scoped to a subtree rather than declared on the root.
  * @returns {string}
  */
 export const resolveBrowserThemeColor = (options = {}) => {
@@ -121,7 +130,7 @@ export const resolveBrowserThemeColor = (options = {}) => {
   } = options;
   const doc = getDocument(options.document);
   const win = getWindow(options.window);
-  const container = getProbeContainer(doc);
+  const container = getProbeContainer(doc, options.container);
 
   if (!doc) return fallback;
   if (!container) return fallback;

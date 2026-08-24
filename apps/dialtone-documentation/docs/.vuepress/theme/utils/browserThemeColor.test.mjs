@@ -166,6 +166,62 @@ describe('resolveBrowserThemeColor', () => {
   });
 });
 
+describe('resolveBrowserThemeColor probe placement', () => {
+  // Records which element the probe was mounted in at the moment it was measured. Where
+  // the probe lives decides which custom properties are in scope for it: a variable
+  // declared on a subtree does not exist in the cascade at <body>, so probing there
+  // resolves it to transparent and the caller silently gets the fallback.
+  const createProbeSpyWindow = (backgroundColor) => {
+    const parents = [];
+
+    return {
+      parents,
+      window: {
+        getComputedStyle: (element) => {
+          parents.push(element.parent);
+
+          return { backgroundColor };
+        },
+      },
+    };
+  };
+
+  it('mounts the probe in document.body by default', () => {
+    const doc = createFakeDocument();
+    const spy = createProbeSpyWindow('rgb(1, 2, 3)');
+
+    resolveBrowserThemeColor({ document: doc, window: spy.window });
+
+    assert.equal(spy.parents[0], doc.body);
+  });
+
+  it('mounts the probe inside `container` so subtree-scoped variables resolve', () => {
+    const doc = createFakeDocument();
+    const scope = createNode('div');
+    const spy = createProbeSpyWindow('rgb(1, 2, 3)');
+
+    resolveBrowserThemeColor({
+      document: doc,
+      window: spy.window,
+      container: scope,
+      cssVariableName: '--scoped-only-variable',
+    });
+
+    assert.equal(spy.parents[0], scope);
+  });
+
+  it('removes the probe from `container` afterwards', () => {
+    const doc = createFakeDocument();
+    const scope = createNode('div');
+    const spy = createProbeSpyWindow('rgb(1, 2, 3)');
+
+    resolveBrowserThemeColor({ document: doc, window: spy.window, container: scope });
+
+    assert.equal(scope.children.length, 0);
+  });
+});
+
+
 describe('syncBrowserThemeColor', () => {
   it('creates the meta tag when none exists', () => {
     const doc = createFakeDocument();
