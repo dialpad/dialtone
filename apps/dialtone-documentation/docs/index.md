@@ -174,7 +174,7 @@ pageClass: dialpad-design-home
     </dt-stack>
   </dt-box>
 </dt-box>
-<dt-stack align="center" justify="center" class="gradient-overlay gradient-overlay--footer d-h-1000">
+<dt-stack align="center" justify="center" class="gradient-overlay--footer d-h-1000">
   <dt-stack class="d-w-1200 d-wmx100p d-pie-200">
     <div class="footer-dialpad-design">
       <div class="footer-dialpad-design__light">
@@ -188,9 +188,9 @@ pageClass: dialpad-design-home
 </dt-stack>
 
 <style lang="less">
-[data-dt-mode="dark"] .dialpad-design-home {
-  /* --dt-shell-color-surface-default: var(--dt-color-purple-50); */
-  background-color: var(--dt-color-purple-50);
+.dialpad-design-home {
+  /* Matches the hero's own background so the canvas has no visible seam below it. */
+  background-color: var(--dt-color-surface-primary);
 }
 
 .home-section-title {
@@ -210,46 +210,18 @@ pageClass: dialpad-design-home
   max-inline-size: 1200px;
 }
 
-.gradient-overlay {
-  --grad-position-x: 50%;
-  --grad-position-y: 100%;
-  --grad: radial-gradient(circle at var(--grad-position-x) var(--grad-position-y), rgb(218, 163, 255) 0%, rgb(230, 170, 250) 10%, rgb(240, 170, 235) 15%, rgb(255, 177, 207) 25%, rgba(255, 195, 210, 0.95) 35%, rgba(255, 210, 212, 0.9) 45%, rgba(255, 218, 215, 0.8) 60%, rgba(250, 230, 220, 0.7) 75%, var(--dt-shell-color-surface-default) 100%);
-  --overlay-color-surface: var(--dt-shell-color-surface-default);
-  --overlay-opacity: 0;
+/* Footer gradient. Owns everything it needs directly: it used to be a modifier nested
+   inside a shared `.gradient-overlay` block that the hero also used, and the hero's half
+   of that block is gone. Its height comes from the `d-h-1000` utility on the element. */
+.gradient-overlay--footer {
+  --footer-grad-y: 200%;
+  --grad: radial-gradient(50% 75% at 50% var(--footer-grad-y), #DAA3FF 0%, #FFB1CF 33%, #FFDAD7 66%, rgba(248, 247, 246, 0.00) 100%);
 
   position: relative;
-  transition: --grad-position-x 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
   background-image: var(--grad);
-  background-attachment: fixed;
-  block-size: 100vh;
-  overflow: clip;
-
-  @media (hover: none) and (pointer: coarse) {
-    background-attachment: scroll;
-  }
 
   [data-dt-mode="dark"] & {
-    --grad: radial-gradient(circle at var(--grad-position-x) var(--grad-position-y), rgb(246, 100, 55) 0%, rgb(223, 38, 110) 30%, rgb(191, 10, 128) 44%, rgb(81, 30, 118) 71%, var(--dt-color-purple-50) 100%);
-    --overlay-color-surface: var(--dt-color-purple-50);
-  }
-
-  &--footer {
-    --footer-grad-y: 200%;
-    --grad: radial-gradient(50% 75% at 50% var(--footer-grad-y), #DAA3FF 0%, #FFB1CF 33%, #FFDAD7 66%, rgba(248, 247, 246, 0.00) 100%);
-    background-attachment: initial;
-
-    [data-dt-mode="dark"] & {
-      --grad: radial-gradient(50% 75% at 50% var(--footer-grad-y), rgb(246, 100, 55) 0%, rgb(223, 38, 110) 30%, rgb(191, 10, 128) 44%, rgb(81, 30, 118) 71%, transparent 100%);
-      --overlay-color-surface: transparent;
-    }
-  }
-
-  &__overlay {
-    position: absolute;
-    inset: 0;
-    background-color: var(--overlay-color-surface);
-    opacity: var(--overlay-opacity);
+    --grad: radial-gradient(50% 75% at 50% var(--footer-grad-y), rgb(246, 100, 55) 0%, rgb(223, 38, 110) 30%, rgb(191, 10, 128) 44%, rgb(81, 30, 118) 71%, transparent 100%);
   }
 }
 
@@ -288,78 +260,32 @@ onUnmounted(() => {
   document.body.classList.remove('dialpad-design-home');
 });
 
-// Mouse-driven gradient position with eased interpolation.
-onMounted(() => {
-  let currentPositionX = 50; // Start at center
-  let targetPositionX = 50;
-  let currentPositionY = 100; // Start at bottom
-  let targetPositionY = 100;
-  let animationId;
-
-  const gradientOverlay = document.querySelector('.gradient-overlay');
-
-  const animate = () => {
-    // Ease current toward target at 10% per frame (on both axes).
-    currentPositionX += (targetPositionX - currentPositionX) * 0.1;
-    currentPositionY += (targetPositionY - currentPositionY) * 0.1;
-
-    if (gradientOverlay) {
-      gradientOverlay.style.setProperty('--grad-position-x', `${currentPositionX}%`);
-      gradientOverlay.style.setProperty('--grad-position-y', `${currentPositionY}%`);
-    }
-
-    animationId = requestAnimationFrame(animate);
-  };
-
-  const handleMouseMove = (e) => {
-    const mouseX = (e.clientX / window.innerWidth) * 100;
-
-    // Subtle parallax — gradient tracks at 10% of mouse offset from center.
-    // (0.1 = very subtle, 0.5 = more responsive.)
-    const parallaxFactor = 0.1;
-    const offsetFromCenter = mouseX - 50;
-    targetPositionX = 50 + (offsetFromCenter * parallaxFactor);
-
-    // Y lifts from 100% at center up to 120% at the viewport edges.
-    const distanceFromCenter = Math.abs(mouseX - 50) / 50; // 0 at center, 1 at edge
-    targetPositionY = 100 + (distanceFromCenter * 20);
-  };
-
-  animate();
-  window.addEventListener('mousemove', handleMouseMove);
-
-  onUnmounted(() => {
-    window.removeEventListener('mousemove', handleMouseMove);
-    cancelAnimationFrame(animationId);
-  });
-});
-
 // Scroll-driven effects — rAF-throttled so the two page scroll handlers don't thrash layout.
 onMounted(() => {
-  const gradientOverlay = document.querySelector('.gradient-overlay');
+  const hero = document.querySelector('.home-gradient-hero');
   const header = document.querySelector('.dialtone-header--home');
   let lastScrollY = window.scrollY;
   let ticking = false;
 
-  if (!gradientOverlay) return;
+  if (!hero) return;
 
   const update = () => {
-    const overlayHeight = gradientOverlay.offsetHeight;
+    const heroHeight = hero.offsetHeight;
     const scrollY = window.scrollY;
 
     // Overlay fades in across its scroll range: 0 at top → 1 when fully scrolled past.
-    const overlayOpacity = Math.min(Math.max(scrollY / overlayHeight, 0), 1);
+    const overlayOpacity = Math.min(Math.max(scrollY / heroHeight, 0), 1);
 
     // Text starts at 0.6 and fades out twice as fast — done by 50% scroll.
-    const textOpacity = Math.max(.8 - (scrollY / (overlayHeight * 0.5)) * 0.6, 0);
+    const textOpacity = Math.max(.8 - (scrollY / (heroHeight * 0.5)) * 0.6, 0);
 
     // Text slides down 0–325px over the overlay's scroll range.
-    const scrollProgress = Math.min(scrollY / overlayHeight, 1);
+    const scrollProgress = Math.min(scrollY / heroHeight, 1);
     const textTranslateY = scrollProgress * 325;
 
-    gradientOverlay.style.setProperty('--overlay-opacity', overlayOpacity);
-    gradientOverlay.style.setProperty('--text-opacity', textOpacity);
-    gradientOverlay.style.setProperty('--text-translate-y', `${textTranslateY}px`);
+    hero.style.setProperty('--overlay-opacity', overlayOpacity);
+    hero.style.setProperty('--text-opacity', textOpacity);
+    hero.style.setProperty('--text-translate-y', `${textTranslateY}px`);
 
     if (header) {
       const isScrollingUp = scrollY < lastScrollY;
@@ -367,7 +293,7 @@ onMounted(() => {
         header.classList.remove('dialtone-header--off-canvas');
       } else {
         // Only hide the header when scrolling DOWN and the gradient is out of view.
-        const gradientRect = gradientOverlay.getBoundingClientRect();
+        const gradientRect = hero.getBoundingClientRect();
         const isGradientInView = gradientRect.bottom > 0;
         if (!isGradientInView) {
           header.classList.add('dialtone-header--off-canvas');
