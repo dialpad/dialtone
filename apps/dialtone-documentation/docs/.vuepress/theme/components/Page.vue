@@ -97,7 +97,10 @@
         id="combinator-inline-target"
       />
       <!-- eslint-disable-next-line vue/no-undef-components -->
-      <content class="d-docsite-article" />
+      <content
+        class="d-docsite-article"
+        :class="{ 'd-pbs-300': !props.componentCombinatorName }"
+      />
       <dt-stack gap="300">
         <dt-stack
           as="nav"

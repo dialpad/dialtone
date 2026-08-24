@@ -31,7 +31,6 @@
       :padding-inline-end="viewport.pick({
         default: '300',
         lg: '400',
-        xl: '0',
       })"
       :padding-block-start="viewport.pick({
         lg: '0',
@@ -64,7 +63,7 @@
         v-model:full-screen="isCombinatorFullScreen"
         :class="{
           'd-h100p': showWideCombinator,
-          'd-hmx-900': !showWideCombinator && !isCombinatorFullScreen,
+          'd-hmx-900 d-mbe-350': !showWideCombinator && !isCombinatorFullScreen,
         }"
         :component-name="props.componentCombinatorName"
       />
