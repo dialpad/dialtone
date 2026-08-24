@@ -1,6 +1,5 @@
 import { themeDataPlugin } from '@vuepress/plugin-theme-data';
 import { prismjsPlugin } from '@vuepress/plugin-prismjs';
-import { backToTopPlugin } from '@vuepress/plugin-back-to-top';
 import { gitPlugin } from '@vuepress/plugin-git';
 import { sitemapPlugin } from 'vuepress-plugin-sitemap2';
 import markdownItClass from '@toycode/markdown-it-class';
@@ -261,7 +260,6 @@ export const dialtoneVuepressTheme = (options) => ({
     prismjsPlugin({
       lineNumbers: 'disable',
     }),
-    backToTopPlugin(),
     gitPlugin({
       // options
     }),
