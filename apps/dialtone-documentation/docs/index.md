@@ -19,7 +19,7 @@ pageClass: dialpad-design-home
   </dt-box>
   <gradient-hero />
 </dt-box>
-<dt-box as="section" class="d-m-auto">
+<dt-box as="section" padding-block-end="800" class="d-m-auto">
   <dt-box as="article" padding-block="800">
     <showcase-carousel />
   </dt-box>
@@ -174,18 +174,13 @@ pageClass: dialpad-design-home
     </dt-stack>
   </dt-box>
 </dt-box>
-<dt-stack align="center" justify="center" class="gradient-overlay--footer d-h-1000">
-  <dt-stack class="d-w-1200 d-wmx100p d-pie-200">
-    <div class="footer-dialpad-design">
-      <div class="footer-dialpad-design__light">
-        <svg-loader name="footer-dialpad-design--light" />
-      </div>
-      <div class="footer-dialpad-design__dark">
-        <svg-loader name="footer-dialpad-design--dark" />
-      </div>
-    </div>
+<halftone-surface class="home-halftone-footer d-h-1000">
+  <dt-stack align="center" justify="center" class="d-h50p home-halftone-footer__content">
+    <dt-box inline-size="1200" max-inline-size="100p" padding-inline-end="200">
+      <svg-loader name="footer-dialpad-design" />
+    </dt-box>
   </dt-stack>
-</dt-stack>
+</halftone-surface>
 
 <style lang="less">
 .dialpad-design-home {
@@ -210,25 +205,16 @@ pageClass: dialpad-design-home
   max-inline-size: 1200px;
 }
 
-/* Footer gradient. Owns everything it needs directly: it used to be a modifier nested
-   inside a shared `.gradient-overlay` block that the hero also used, and the hero's half
-   of that block is gone. Its height comes from the `d-h-1000` utility on the element. */
-.gradient-overlay--footer {
-  --footer-grad-y: 200%;
-  --grad: radial-gradient(50% 75% at 50% var(--footer-grad-y), #DAA3FF 0%, #FFB1CF 33%, #FFDAD7 66%, rgba(248, 247, 246, 0.00) 100%);
+.home-halftone-footer {
+  --halftone-parallax-overflow: 120%;
+}
 
+.home-halftone-footer__content {
   position: relative;
-  background-image: var(--grad);
-
-  [data-dt-mode="dark"] & {
-    --grad: radial-gradient(50% 75% at 50% var(--footer-grad-y), rgb(246, 100, 55) 0%, rgb(223, 38, 110) 30%, rgb(191, 10, 128) 44%, rgb(81, 30, 118) 71%, transparent 100%);
-  }
+  z-index: 1;
+  opacity: .4;
 }
 
-[data-dt-mode="dark"] .footer-dialpad-design__light,
-[data-dt-mode="light"] .footer-dialpad-design__dark {
-  display: none;
-}
 </style>
 
 <script setup>
@@ -236,6 +222,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { parse, compareDesc, format } from 'date-fns';
 import ShowcaseCarousel from '../../baseComponents/ShowcaseCarousel.vue';
 import GradientHero from '../../baseComponents/GradientHero.vue';
+import HalftoneSurface from '../../baseComponents/HalftoneSurface.vue';
 import { useViewportBreakpoints } from '../../theme/composables/useViewportBreakpoints.js';
 import { clamp01 } from '../../theme/utils/math.js';
 
@@ -260,10 +247,12 @@ onUnmounted(() => {
   document.body.classList.remove('dialpad-design-home');
 });
 
-// Scroll-driven effects — rAF-throttled so the two page scroll handlers don't thrash layout.
+// Hero and footer scroll-driven effects — one rAF keeps their reads and writes together.
 onMounted(() => {
   const hero = document.querySelector('.home-gradient-hero');
-  const shaderLayer = hero?.querySelector('.home-gradient-hero__shader');
+  const heroShaderLayer = hero?.querySelector('.halftone-surface__shader');
+  const footer = document.querySelector('.home-halftone-footer');
+  const footerShaderLayer = footer?.querySelector('.halftone-surface__shader');
   let ticking = false;
 
   if (!hero) return;
@@ -273,7 +262,9 @@ onMounted(() => {
   // below feed a transform on the shader layer, so any read after a write forces a
   // synchronous style-and-layout pass.
   let heroHeight = 0;
-  let parallaxRange = 0;
+  let heroParallaxRange = 0;
+  let footerHeight = 0;
+  let footerParallaxRange = 0;
 
   const measure = () => {
     heroHeight = hero.offsetHeight;
@@ -281,13 +272,21 @@ onMounted(() => {
     // the hero's scroll range, so it arrives flush at the bottom instead of uncovering it.
     // Measured off the element rather than repeating the CSS value, so the two cannot
     // drift apart.
-    parallaxRange = shaderLayer ? Math.max(shaderLayer.offsetHeight - heroHeight, 0) : 0;
+    heroParallaxRange = heroShaderLayer
+      ? Math.max(heroShaderLayer.offsetHeight - heroHeight, 0)
+      : 0;
+
+    footerHeight = footer?.offsetHeight ?? 0;
+    footerParallaxRange = footerShaderLayer
+      ? Math.max(footerShaderLayer.offsetHeight - footerHeight, 0)
+      : 0;
   };
 
   const update = () => {
     // Every read first, every write after. Interleaving them re-invalidates layout part
     // way through the frame and costs a forced reflow per switch.
     const scrollY = window.scrollY;
+    const footerRect = footer?.getBoundingClientRect();
 
     // One clamped progress value drives all four properties. Two of them used to derive it
     // separately, one clamped and one not, which disagreed during overscroll — the
@@ -297,12 +296,19 @@ onMounted(() => {
     // Overlay fades in across the hero's scroll range: 0 at top → 1 once scrolled past.
     // Text fades faster, starting at 0.8 and reaching 0 at about two thirds of the range.
     const textOpacity = Math.max(0.8 - scrollProgress * 1.2, 0);
+    const footerProgress = footerRect
+      ? clamp01((window.innerHeight - footerRect.top) / (footerHeight || 1))
+      : 0;
 
     hero.style.setProperty('--overlay-opacity', scrollProgress);
     hero.style.setProperty('--text-opacity', textOpacity);
     // Text slides down 0–325px over the same range.
     hero.style.setProperty('--text-translate-y', `${scrollProgress * 325}px`);
-    hero.style.setProperty('--shader-translate-y', `${-scrollProgress * parallaxRange}px`);
+    hero.style.setProperty('--halftone-translate-y', `${-scrollProgress * heroParallaxRange}px`);
+    footer?.style.setProperty(
+      '--halftone-translate-y',
+      `${-footerProgress * footerParallaxRange}px`,
+    );
 
     ticking = false;
   };
@@ -329,40 +335,4 @@ onMounted(() => {
   });
 });
 
-// Footer gradient parallax — rAF-throttled alongside the main scroll handler.
-onMounted(() => {
-  const footerGradient = document.querySelector('.gradient-overlay--footer');
-
-  if (!footerGradient) return;
-
-  let ticking = false;
-
-  const update = () => {
-    const rect = footerGradient.getBoundingClientRect();
-    const scrollViewportBottom = window.innerHeight;
-
-    // scrollProgress: 0 when footer's top touches bottom of viewport, 1 when fully in view.
-    const visibleTop = Math.max(0, scrollViewportBottom - rect.top);
-    const scrollProgress = clamp01(visibleTop / rect.height);
-
-    // Interpolate Y from 150% down to 100% as the footer scrolls in.
-    const footerGradY = 150 - (scrollProgress * 50);
-    footerGradient.style.setProperty('--footer-grad-y', `${footerGradY}%`);
-
-    ticking = false;
-  };
-
-  const handleFooterScroll = () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(update);
-  };
-
-  window.addEventListener('scroll', handleFooterScroll, { passive: true });
-  update(); // Set initial state.
-
-  onUnmounted(() => {
-    window.removeEventListener('scroll', handleFooterScroll);
-  });
-});
 </script>

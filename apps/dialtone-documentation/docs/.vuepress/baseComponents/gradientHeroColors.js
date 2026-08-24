@@ -3,7 +3,7 @@ import { resolveBrowserThemeColor } from '../theme/utils/browserThemeColor.js';
 import { clamp01, smoothstep } from '../theme/utils/math.js';
 
 /**
- * Bridges Dialtone theme colours into the hero shader's uniforms, including the dot
+ * Bridges Dialtone theme colours into a halftone shader's uniforms, including the dot
  * colour loop.
  *
  * WebGL cannot read CSS custom properties, so values are resolved in JS and pushed as
@@ -14,20 +14,20 @@ import { clamp01, smoothstep } from '../theme/utils/math.js';
  * (`oklch(from … l c h / .07)`) that the bundled colorjs.io cannot parse. Letting the
  * browser compute a real property sidesteps both.
  *
- * The probe is mounted inside the hero element, not <body>, because these variables are
- * declared on the hero and a custom property does not exist in the cascade above the
- * element that declares it.
+ * The probe is mounted inside the surface element, not <body>, because these variables
+ * are declared on the surface and a custom property does not exist in the cascade above
+ * the element that declares it.
  *
  * @module baseComponents/gradientHeroColors
  */
 
-const BACKGROUND_CSS_VARIABLE = '--home-gradient-hero-color-background';
+const BACKGROUND_CSS_VARIABLE = '--halftone-color-background';
 
 /** Single-colour form, used when no numbered palette is declared. */
-const DOT_CSS_VARIABLE = '--home-gradient-hero-color-dot';
+const DOT_CSS_VARIABLE = '--halftone-color-dot';
 
-/** Numbered palette form: `--home-gradient-hero-color-dot-1`, `-2`, and so on. */
-const DOT_PALETTE_CSS_VARIABLE_PREFIX = '--home-gradient-hero-color-dot-';
+/** Numbered palette form: `--halftone-color-dot-1`, `-2`, and so on. */
+const DOT_PALETTE_CSS_VARIABLE_PREFIX = '--halftone-color-dot-';
 
 /** Upper bound on the scan for numbered palette entries. */
 const DOT_PALETTE_MAX = 8;
@@ -89,10 +89,10 @@ const isVariableDeclared = (scopeElement, cssVariableName) => {
 /**
  * Background colour as shader channels.
  *
- * @param {HTMLElement} scopeElement Element the hero variables are declared on.
+ * @param {HTMLElement} scopeElement Element the halftone variables are declared on.
  * @returns {[number, number, number, number]}
  */
-export function resolveHeroBackground (scopeElement) {
+export function resolveHalftoneBackground (scopeElement) {
   const resolved = resolveVariable(BACKGROUND_CSS_VARIABLE, scopeElement);
 
   try {
@@ -112,7 +112,7 @@ export function resolveHeroBackground (scopeElement) {
  * @param {HTMLElement} scopeElement
  * @returns {string[]}
  */
-export function resolveHeroDotPalette (scopeElement) {
+export function resolveHalftoneDotPalette (scopeElement) {
   const stops = [];
 
   for (let index = 1; index <= DOT_PALETTE_MAX; index += 1) {
