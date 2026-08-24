@@ -19,89 +19,44 @@
       padding-block-end="800"
       class="d-plc-center home-gradient-hero__content"
     >
-      <dt-box class="home-gradient-hero-content">
-        <dt-box class="d-d-flex d-plc-center d-mbe-600">
-          <dt-link to="/dialtone/">
-            <dt-box
-              :inline-size="viewport.pick({
-                default: '125',
-                md: '150',
-                lg: '200',
-              })"
-              style="filter: drop-shadow(rgba(0, 0, 0, 0.25) 0px 25px 30px);"
-            >
-              <svg-loader name="home--dialtone-badge" />
-            </dt-box>
-          </dt-link>
-        </dt-box>
-        <dt-text
-          as="h1"
-          kind="headline"
-          strength="medium"
-          density="200"
-          align="center"
-          class="d-p-400 home-gradient-hero-title d-wmx-1300 d-mx-auto"
-        >
-          The fastest way to build Dialpad.
-        </dt-text>
-        <dt-text
-          as="p"
-          variant="body-md"
-          :size="viewport.pick({
-            default: '200',
-            md: '350',
-          })"
-          align="center"
-          strength="medium"
-          class="d-px-500 d-o80 d-wmx-1000 d-mx-auto"
-          wrap="balance"
-        >
-          Start with the system of components, design tokens, and guidance that make good design the default.
-        </dt-text>
-        <dt-stack direction="row" justify="center" gap="200" class="d-pbs-500">
-          <dt-button
-            v-dt-mode:dark
-            class="home-gradient-hero-btn"
-            to="/dialtone/"
-            :size="400"
-          >
-            Docs
-          </dt-button>
-          <dt-button
-            to="/dialtone/whats-new/"
-            :size="400"
-            kind="muted"
-            importance="outlined"
-            class="d-fc-primary d-bc-bold"
-          >
-            What's New
-          </dt-button>
-        </dt-stack>
-      </dt-box>
+      <gradient-hero-content />
     </dt-box>
   </div>
 </template>
 
 <script setup>
 import { onBeforeUnmount, onMounted, ref } from 'vue';
-import { useViewportBreakpoints } from '../theme/composables/useViewportBreakpoints.js';
+import GradientHeroContent from './GradientHeroContent.vue';
 import { gradientHeroFragmentShader, HERO_GEOMETRY } from './gradientHeroShader.js';
 import { createGradientHeroCursor, getCursorUniforms } from './gradientHeroCursor.js';
-import { observeThemeChanges, resolveHeroColors } from './gradientHeroColors.js';
+import {
+  createDotColorLoop,
+  observeThemeChanges,
+  resolveHeroBackground,
+  resolveHeroDotPalette,
+} from './gradientHeroColors.js';
 
-// Scroll-driven overlay and text fading are still driven by the homepage's scroll handler
-// writing CSS custom properties onto this element.
-const viewport = useViewportBreakpoints();
+// Scroll-driven overlay fading and canvas parallax are driven by the homepage's scroll
+// handler writing CSS custom properties onto this element.
 
 const heroEl = ref(null);
 const shaderHostEl = ref(null);
 
-// Caps the shader's backing buffer. Well below Paper's default because this fragment
-// shader searches a lattice per pixel, so it is far heavier than Paper's own presets, and
-// because the hero is only the content column on wide viewports.
-const MAX_PIXEL_COUNT = 1_000_000;
-// Paper defaults to 2, which would render every 1x display at twice the necessary size.
-const MIN_PIXEL_RATIO = 1;
+// Both match Paper's defaults, which is what the reference implementation runs at.
+//
+// They are stated rather than left implicit because getting them wrong is invisible in
+// code review and obvious on screen: a tighter pixel cap makes Paper render the canvas
+// *below* CSS resolution and stretch it up, which softens every dot edge and smears the
+// pointer trail. Dot geometry is expressed in CSS pixels and scaled by u_pixelRatio, so
+// raising these changes sharpness only — not the size or spacing of anything.
+//
+// Lower MAX_PIXEL_COUNT if frame timing becomes a problem, and expect the field to go
+// soft as it drops below the viewport's own pixel count.
+const MIN_PIXEL_RATIO = 2;
+const MAX_PIXEL_COUNT = 1920 * 1080 * 4;
+
+// One full pass through the dot palette, matching the reference's colour period.
+const DOT_COLOR_PERIOD_MS = 14_000;
 
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
 // A carry effect that follows a pointer has nothing to follow on touch.
@@ -115,6 +70,11 @@ let reducedMotionQuery = null;
 let finePointerQuery = null;
 let isDisposed = false;
 let isVisible = true;
+
+const dotColorLoop = createDotColorLoop({
+  periodMs: DOT_COLOR_PERIOD_MS,
+  onColor: (channels) => shaderMount?.setUniforms({ u_dotColor: channels }),
+});
 
 const prefersReducedMotion = () => Boolean(reducedMotionQuery?.matches);
 const prefersFinePointer = () => Boolean(finePointerQuery?.matches);
@@ -135,22 +95,44 @@ const buildUniforms = (hero) => ({
   u_coreScale: HERO_GEOMETRY.coreScale,
   u_breatheAmount: HERO_GEOMETRY.breatheAmount,
   u_breathePeriod: HERO_GEOMETRY.breathePeriod,
+  u_edgeFadeAmount: HERO_GEOMETRY.edgeFadeAmount,
+  u_floorLuminance: HERO_GEOMETRY.floorLuminance,
   u_cursorRadiusFrac: HERO_GEOMETRY.cursorRadiusFrac,
   // Paper's shared vertex shader divides by u_scale; unset it defaults to 0. This shader
   // reads only gl_FragCoord so the resulting NaN never reaches a pixel, but there is no
   // reason to leave it that way.
   u_scale: 1,
-  ...resolveHeroColors(hero),
+  u_bgColor: resolveHeroBackground(hero),
+  u_dotColor: dotColorLoop.current(),
   ...getCursorUniforms(null, HERO_GEOMETRY.cursorStrength),
 });
 
+// Re-read on every theme change: the stops are tokens, so mode, material, brand and
+// contrast can all move them.
+const refreshColors = (hero) => {
+  dotColorLoop.setPalette(resolveHeroDotPalette(hero));
+
+  shaderMount?.setUniforms({
+    u_bgColor: resolveHeroBackground(hero),
+    u_dotColor: dotColorLoop.current(),
+  });
+};
+
 const syncMotionState = () => {
-  shaderMount?.setSpeed(currentSpeed());
+  const speed = currentSpeed();
+  shaderMount?.setSpeed(speed);
 
   if (shouldTrackPointer()) {
     cursor?.start();
   } else {
     cursor?.stop();
+  }
+
+  // A parked mount does not render, so advancing the colour would be invisible work.
+  if (speed !== 0) {
+    dotColorLoop.start();
+  } else {
+    dotColorLoop.stop();
   }
 };
 
@@ -168,6 +150,9 @@ const canMountShader = (host) => {
 const attachControllers = (hero) => {
   cursor = createGradientHeroCursor({
     element: hero,
+    // The canvas layer overhangs the hero and slides for parallax, and the shader maps
+    // cursor uv over the canvas — so coordinates must be measured against it, not the hero.
+    rectElement: shaderHostEl.value,
     onChange: (state) => {
       // Pushed straight to the GPU. Routing per-frame values through reactivity would
       // re-render the hero at pointer frequency.
@@ -176,7 +161,8 @@ const attachControllers = (hero) => {
   });
 
   disposeThemeObserver = observeThemeChanges(() => {
-    shaderMount?.setUniforms(resolveHeroColors(hero));
+    refreshColors(hero);
+    syncMotionState();
   });
 
   if (typeof IntersectionObserver !== 'undefined') {
@@ -198,6 +184,9 @@ const initShader = async () => {
 
   // The import is async, so the component may already be gone.
   if (isDisposed || shaderHostEl.value !== host) return;
+
+  // buildUniforms samples the palette, so the loop needs its stops first.
+  dotColorLoop.setPalette(resolveHeroDotPalette(hero));
 
   // Arguments are positional in this version, not an options object.
   shaderMount = new ShaderMount(
@@ -244,6 +233,8 @@ onBeforeUnmount(() => {
   reducedMotionQuery = null;
   finePointerQuery = null;
 
+  dotColorLoop.dispose();
+
   cursor?.dispose();
   cursor = null;
 
@@ -259,10 +250,27 @@ onBeforeUnmount(() => {
   --overlay-color-surface: var(--home-gradient-hero-color-background);
   --overlay-opacity: 0;
 
+  /* How far the canvas layer extends past the hero, and therefore how far it can travel.
+     The homepage's scroll handler reads the real overflow off the element rather than
+     duplicating this number. */
+  --shader-parallax-overflow: 70%;
+
   /* Single source for the canvas colours; read back through a probe element and pushed
      to the shader as uniforms, since WebGL cannot consume custom properties. */
   --home-gradient-hero-color-background: var(--dt-color-surface-primary);
-  --home-gradient-hero-color-dot: var(--dt-color-purple-300);
+
+  /* Loop stops, in order, wrapping from the last back to the first. Add, remove or reorder
+     them and nothing else changes; declare a single `--home-gradient-hero-color-dot`
+     instead for a static field. Repeat a stop to pass through it twice per loop.
+
+     Stop 1 is what renders first, before the loop starts moving. The neutral stop sits
+     much closer to the background than the chromatic ones, so the field deliberately fades
+     toward invisible as the loop passes through it and swells back on the way out. Being
+     on the neutral ramp, it is also the one stop the active material retints. */
+  --home-gradient-hero-color-dot-1: var(--dt-color-purple-300);
+  --home-gradient-hero-color-dot-2: var(--dt-color-black-300);
+  --home-gradient-hero-color-dot-3: var(--dt-color-magenta-300);
+  --home-gradient-hero-color-dot-4: var(--dt-color-red-200);
 
   position: relative;
   isolation: isolate;
@@ -273,9 +281,20 @@ onBeforeUnmount(() => {
 
 .home-gradient-hero__shader {
   position: absolute;
-  inset: 0;
+  inset-block-start: 0;
+  inset-inline: 0;
   z-index: 0;
   pointer-events: none;
+
+  /* Deliberately overhangs the hero. Two jobs: the strip below the fold is what the
+     parallax translate slides up into, so the hero never uncovers; and because the burst's
+     focal point is positioned as a percentage of the canvas, a taller canvas carries that
+     point further below the viewport, keeping its dark core out of frame. The centre and
+     the burst radius scale together, so the field's appearance at the top of the hero is
+     unchanged by this. */
+  block-size: calc(100% + var(--shader-parallax-overflow));
+  transform: translate3d(0, var(--shader-translate-y, 0px), 0);
+  will-change: transform;
 
   /* Paper sets its own stacking on the canvas it appends. */
   canvas {
@@ -299,31 +318,5 @@ onBeforeUnmount(() => {
 .home-gradient-hero__content {
   position: relative;
   z-index: 2;
-}
-
-.home-gradient-hero-btn {
-  --button-color-text: var(--dt-color-neutral-white);
-  --button-color-background: var(--dt-color-purple-50);
-}
-
-.home-gradient-hero-content {
-  transform: translateY(var(--text-translate-y, 0px));
-  opacity: var(--text-opacity);
-}
-
-.home-gradient-hero-title {
-  font-size: 32px;
-  font-family: "Season Sans", var(--dt-font-family-body);
-  text-wrap: balance;
-  transition: none;
-  background: linear-gradient(180deg, var(--dt-color-purple-900), var(--dt-color-purple-1000));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-
-  @media screen and (min-width: 640px) {
-    font-size: 46px;
-  }
-
 }
 </style>

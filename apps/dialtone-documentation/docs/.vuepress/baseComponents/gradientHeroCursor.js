@@ -14,17 +14,19 @@ import { TRAIL_LENGTH } from './gradientHeroShader.js';
  * `intensity` is a separate envelope that rises while moving and decays when still;
  * decoupling it from position is what gives the "stays affected, then fades" behaviour.
  *
- * Positions are normalized against the host element's own box, not the viewport, because
- * the shader multiplies them by the canvas resolution and the hero is not full-width on
- * wide viewports.
+ * Positions are normalized against the canvas box rather than the viewport, because the
+ * shader multiplies them by the canvas resolution. That box is not the same element the
+ * pointer is listened on: the canvas layer is taller than the hero and slides for
+ * parallax, so `element` is where events come from and `rectElement` is the coordinate
+ * space they are measured in.
  *
  * @module baseComponents/gradientHeroCursor
  */
 
 // Per-frame easing constants, assuming ~60fps.
-const CURSOR_LAG = 0.02; // trailing sample point
+const CURSOR_LAG = 0.10; // trailing sample point
 const CURSOR_HOLD = 0.03; // second-order trail, so the patch lingers
-const CURSOR_ATTACK = 0.16; // rise while the pointer is moving
+const CURSOR_ATTACK = 0.1; // rise while the pointer is moving
 
 // Decay is speed-dependent: a slow drift fades quickly, a fast flick leaves a long-lived
 // streak. Per-frame retention factors at each end of the speed range.
@@ -62,13 +64,15 @@ const clamp01 = (value) => Math.min(1, Math.max(0, value));
 
 /**
  * @param {object} options
- * @param {HTMLElement} options.element Element pointer coordinates are relative to.
+ * @param {HTMLElement} options.element Element pointer events are listened on.
+ * @param {HTMLElement} [options.rectElement] Box coordinates are normalized against.
+ *   Defaults to `element`. Pass the canvas layer when it does not share the hero's box.
  * @param {(state: GradientHeroCursorState | null) => void} options.onChange
  *   Called with the current state each frame, and once with `null` when the effect has
  *   fully decayed or tracking stops.
  * @returns {{ start: () => void, stop: () => void, dispose: () => void }}
  */
-export function createGradientHeroCursor ({ element, onChange }) {
+export function createGradientHeroCursor ({ element, rectElement, onChange }) {
   const target = { x: -1, y: -1 };
   const lagged = { x: -1, y: -1 };
   const held = { x: -1, y: -1 };
@@ -159,7 +163,8 @@ export function createGradientHeroCursor ({ element, onChange }) {
   };
 
   const onPointerMove = (event) => {
-    const rect = element.getBoundingClientRect();
+    // Read live rather than cached: the canvas layer translates as the page scrolls.
+    const rect = (rectElement ?? element).getBoundingClientRect();
     if (rect.width === 0 || rect.height === 0) return;
 
     const nx = (event.clientX - rect.left) / rect.width;

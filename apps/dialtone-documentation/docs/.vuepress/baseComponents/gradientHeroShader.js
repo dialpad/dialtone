@@ -25,7 +25,7 @@ export const TRAIL_LENGTH = 20;
  */
 export const HERO_GEOMETRY = Object.freeze({
   dotSpacingCss: 20,
-  maxDotSizeCss: 3.25,
+  maxDotSizeCss: 4,
   // Percent of the canvas, y-down. Below the bottom edge, so the burst radiates upward.
   center: Object.freeze([50, 104]),
   burstRadiusFrac: 1.07,
@@ -34,6 +34,14 @@ export const HERO_GEOMETRY = Object.freeze({
   breatheAmount: 0.065,
   breathePeriod: 10,
   sizeVariation: 2,
+  // How much of the corner-emptying edge fade to apply, 0-1. The reference ramps this in
+  // from scroll and sits at 0 while the hero is at rest, which is why its dots reach into
+  // the far corners; 1 is its fully-scrolled state, which empties them.
+  edgeFadeAmount: 0,
+  // Luminance floor outside the burst's reach. Sets how big the far-field dots are, so it
+  // is the companion to edgeFadeAmount: without some floor there is nothing out there to
+  // reach with.
+  floorLuminance: 0.06,
   cursorRadiusFrac: 0.42,
   cursorStrength: 0.85,
 });
@@ -74,6 +82,8 @@ uniform float u_burstScale;
 uniform float u_coreScale;
 uniform float u_breatheAmount;
 uniform float u_breathePeriod;
+uniform float u_edgeFadeAmount;
+uniform float u_floorLuminance;
 
 // Normalized 0-1, y-down, relative to the hero box — not pixels, so they do not depend
 // on the backing buffer's scale. (-1, -1) means the pointer is absent.
@@ -110,7 +120,7 @@ float computeSizeFactor (float lum, float sizeVariation) {
 // persist instead of ending on a hard cutoff.
 float burstLuminance (vec2 p, vec2 centerPx, float burstRadiusPx) {
   float radialFrac = length(p - centerPx) / max(burstRadiusPx, 0.0001);
-  float floorLum = 0.05;
+  float floorLum = clamp(u_floorLuminance, 0.0, 1.0);
   float peak = 0.275 * u_coreScale;
   // Hold the core at the floor out to half the peak radius before ramping. Ramping from
   // dead centre instead leaves the core a slow gradient with no perceptible boundary.
@@ -218,9 +228,12 @@ void main () {
   float coverage = 1.0 - smoothstep(closestDotRadius - feather, closestDotRadius + feather, closestDotDist);
 
   // Empties the far corners by fading dot visibility (not dot size) once the fragment
-  // itself sits past the burst's reach.
+  // itself sits past the burst's reach. Mixed rather than applied outright: at 0 the field
+  // carries its floor luminance all the way into the corners, which is how the reference
+  // looks before any scroll has happened.
   float fragRadialFrac = dist / max(burstRadiusPx, 0.0001);
-  coverage *= 1.0 - smoothstep(0.5, 1.35, fragRadialFrac);
+  float burstEdgeFade = 1.0 - smoothstep(0.5, 1.35, fragRadialFrac);
+  coverage *= mix(1.0, burstEdgeFade, clamp(u_edgeFadeAmount, 0.0, 1.0));
 
   fragColor = vec4(mix(u_bgColor.rgb, u_dotColor.rgb, coverage), 1.0);
 }

@@ -263,6 +263,7 @@ onUnmounted(() => {
 // Scroll-driven effects — rAF-throttled so the two page scroll handlers don't thrash layout.
 onMounted(() => {
   const hero = document.querySelector('.home-gradient-hero');
+  const shaderLayer = hero?.querySelector('.home-gradient-hero__shader');
   const header = document.querySelector('.dialtone-header--home');
   let lastScrollY = window.scrollY;
   let ticking = false;
@@ -286,6 +287,15 @@ onMounted(() => {
     hero.style.setProperty('--overlay-opacity', overlayOpacity);
     hero.style.setProperty('--text-opacity', textOpacity);
     hero.style.setProperty('--text-translate-y', `${textTranslateY}px`);
+
+    // Canvas parallax: the shader layer overhangs the hero, and it travels up by exactly
+    // that overhang across the hero's scroll range — so it arrives flush at the bottom
+    // instead of uncovering it. The distance is measured off the element rather than
+    // repeating the CSS value, so the two cannot drift apart.
+    if (shaderLayer) {
+      const parallaxRange = Math.max(shaderLayer.offsetHeight - heroHeight, 0);
+      hero.style.setProperty('--shader-translate-y', `${-scrollProgress * parallaxRange}px`);
+    }
 
     if (header) {
       const isScrollingUp = scrollY < lastScrollY;
