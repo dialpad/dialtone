@@ -6,7 +6,7 @@ import {
 } from './pageToc.js';
 
 describe('pageToc route hash utilities', () => {
-  it('writes route hash changes with push by default and restores router scroll behavior', async () => {
+  it('writes route hash changes with push by default, leaving router scroll behavior alone', async () => {
     const scrollBehavior = () => {};
     const calls = [];
     const skippedHashes = [];
@@ -38,7 +38,9 @@ describe('pageToc route hash utilities', () => {
           query: { theme: 'dp' },
           hash: '#classes',
         },
-        scrollBehavior: undefined,
+        // Untouched during navigation: hash scrolling is owned by the scroll-spy, so
+        // there is no router handler to suppress any more.
+        scrollBehavior,
       },
     ]);
     assert.equal(router.options.scrollBehavior, scrollBehavior);
@@ -76,7 +78,7 @@ describe('pageToc route hash utilities', () => {
           query: {},
           hash: '',
         },
-        scrollBehavior: undefined,
+        scrollBehavior,
       },
     ]);
     assert.equal(router.options.scrollBehavior, scrollBehavior);

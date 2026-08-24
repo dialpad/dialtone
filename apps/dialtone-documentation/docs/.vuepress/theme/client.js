@@ -152,22 +152,16 @@ export default defineClientConfig({
         resolveViewTransition?.();
       });
 
-      router.options.scrollBehavior = async (to) => {
-        if (to.hash) {
-          const html = document.querySelector('html');
-          // vue-router does not incorporate scroll-padding-top on its own.
-          if (html) {
-            const top = parseFloat(getComputedStyle(html).scrollPaddingTop);
-            await flushPromises();
-            return {
-              el: to.hash,
-              behavior: 'smooth',
-              top,
-            };
-          }
-        }
-        return { top: 0 };
-      };
+      // Hash scrolling belongs to usePageTocScrollSpy, not here. Page.vue mounts it on
+      // every page the Layout renders, and it measures the sticky header's real height
+      // and scrolls the actual scroll container — which on doc pages is an inner
+      // overflow element, not the document. A router-level handler can only scroll the
+      // document, so it could not do the job anyway, and having both meant
+      // writeRouteHash had to blank this out and restore it on every TOC click.
+      //
+      // Non-hash navigation still resets the document here; the inner container is reset
+      // by Layout.vue's own route watcher.
+      router.options.scrollBehavior = (to) => (to.hash ? false : { top: 0 });
     }
   },
   setup () {

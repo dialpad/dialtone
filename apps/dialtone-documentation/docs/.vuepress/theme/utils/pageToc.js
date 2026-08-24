@@ -80,20 +80,16 @@ export async function writeRouteHash (
 ) {
   if (currentHash === hash) return;
 
-  const scrollBehavior = router.options.scrollBehavior;
   const method = replace ? 'replace' : 'push';
+  // Marks the hash as self-written so the composable's own route.hash watcher does not
+  // scroll again on top of the scroll the caller is about to perform.
   routeHashScrollGuard.skip(hash);
-  router.options.scrollBehavior = undefined;
 
-  try {
-    await router[method]({
-      path: route.path,
-      query: route.query,
-      hash,
-    });
-  } finally {
-    router.options.scrollBehavior = scrollBehavior;
-  }
+  await router[method]({
+    path: route.path,
+    query: route.query,
+    hash,
+  });
 }
 
 export function replaceBrowserHash (hash, {
