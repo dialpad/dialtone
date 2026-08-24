@@ -20,6 +20,60 @@ import {
 // Derived from the tokens package so adding a material never needs a second edit here.
 const MATERIALS = Object.freeze([...VALID_MATERIALS]);
 
+// Shared across every consumer, refcounted, mirroring useViewportBreakpoints.
+//
+// The theme state itself is already a singleton — it is provided by client.js and reached
+// with inject() — so each consumer's DOM-application step produces byte-identical output.
+// Before this, every consumer ran a full setCss() on mount (Navbar, SidebarFooter and any
+// markdown page that switches modes, so three or more on some pages), and a system
+// light/dark flip re-ran it once per live instance.
+//
+// `systemPrefersDark` belongs here rather than per-instance for the same reason: it
+// describes the OS, so every consumer must agree on it.
+/** @type {MediaQueryList | null} */
+let prefersDarkMediaQuery = null;
+const systemPrefersDark = ref(false);
+/** @type {Set<() => void>} Each consumer's setCss, in mount order. */
+const themeConsumers = new Set();
+
+const handleSystemPreferenceChange = () => {
+  systemPrefersDark.value = prefersDarkMediaQuery?.matches ?? false;
+  // One representative call. Every consumer writes the same attributes from the same
+  // injected refs, so invoking all of them would repaint identically N times.
+  themeConsumers.values().next().value?.();
+};
+
+/**
+ * @param {() => void} applyCss This consumer's setCss.
+ */
+const startTracking = (applyCss) => {
+  const isFirstConsumer = themeConsumers.size === 0;
+  themeConsumers.add(applyCss);
+
+  if (!isFirstConsumer) return;
+
+  if (typeof window !== 'undefined') {
+    prefersDarkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    systemPrefersDark.value = prefersDarkMediaQuery.matches;
+    prefersDarkMediaQuery.addEventListener('change', handleSystemPreferenceChange);
+  }
+
+  // Applied once, by whoever mounted first. Later consumers find the document already
+  // correct, so re-applying would be pure repetition.
+  applyCss();
+};
+
+/**
+ * @param {() => void} applyCss
+ */
+const stopTracking = (applyCss) => {
+  themeConsumers.delete(applyCss);
+  if (themeConsumers.size > 0) return;
+
+  prefersDarkMediaQuery?.removeEventListener('change', handleSystemPreferenceChange);
+  prefersDarkMediaQuery = null;
+};
+
 /**
  * Composable for managing theme, mode, and contrast settings across the documentation site.
  * Provides centralized theme management logic that can be used in Navbar, markdown pages, and components.
@@ -43,12 +97,6 @@ export function useThemeManager(options = {}) {
   const currentContrast = inject('currentContrast');
   const currentMaterial = inject('currentMaterial');
   const themes = inject('themes');
-
-  // SSR-safe: Initialize media query in onMounted
-  let prefersDarkMediaQuery = null;
-
-  // Reactive ref for system preference (for resolvedMode)
-  const systemPrefersDark = ref(false);
 
   /**
    * Computed icon name based on current mode
@@ -243,28 +291,12 @@ export function useThemeManager(options = {}) {
     syncBrowserThemeColor();
   };
 
-  // Handler to update both CSS and reactive ref when system preference changes
-  const handleSystemPreferenceChange = () => {
-    systemPrefersDark.value = prefersDarkMediaQuery?.matches ?? false;
-    setCss();
-  };
-
-  // Lifecycle: Initialize and listen for system theme changes
   onMounted(() => {
-    // Initialize media query listener (client-side only)
-    if (typeof window !== 'undefined') {
-      prefersDarkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-      systemPrefersDark.value = prefersDarkMediaQuery.matches;
-      prefersDarkMediaQuery.addEventListener('change', handleSystemPreferenceChange);
-    }
-    setCss();
+    startTracking(setCss);
   });
 
   onUnmounted(() => {
-    // Clean up media query listener
-    if (prefersDarkMediaQuery) {
-      prefersDarkMediaQuery.removeEventListener('change', handleSystemPreferenceChange);
-    }
+    stopTracking(setCss);
   });
 
   // Return public API
