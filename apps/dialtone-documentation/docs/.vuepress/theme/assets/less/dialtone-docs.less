@@ -89,59 +89,6 @@ body {
   }
 }
 
-.dialtone-content {
-  background-color: var(--dt-color-surface-primary);
-  border-block: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
-
-  @media (min-width: 980px) {
-    margin-block-end: var(--dt-spacing-100);
-    border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
-    border-radius: var(--dt-size-radius-500);
-    margin-inline: var(--dt-spacing-200);
-  }
-}
-
-.dialtone-content__article > div {
-  // the div is hard coded into vuepress
-  > table:not([class]) {
-    color: var(--dt-color-foreground-tertiary);
-    border-collapse: collapse;
-    margin: var(--dt-spacing-200) 0;
-    inline-size: 100%;
-    font: var(--dt-text-body-sm);
-
-    :where(th) {
-      font: var(--dt-text-label-xs);
-      color: var(--dt-color-foreground-secondary);
-      line-height: var(--dt-font-line-height-100);
-    }
-
-
-    :where(th, td) {
-      text-align: start;
-      border-block-end: var(--dt-size-border-100) solid var(--dt-color-border-default);
-      border-inline: 0;
-      padding: var(--dt-spacing-200);
-      vertical-align: baseline;
-    }
-
-    :where(thead th) {
-      border-block-end-width: var(--dt-size-border-200);
-    }
-
-    :where(tbody tr:last-of-type) :where(td, th) {
-      border-block-end: none;
-    }
-
-    :where(code, kbd) {
-      background-color: var(--dt-color-background-default);
-      color: var(--dt-color-foreground-info-strong);
-      font: var(--dt-text-code-xs);
-      font-size: 85%;
-    }
-  }
-}
-
 .dialtone-doc-notice {
   :where(code) {
     font: var(--dt-text-code-xs);
@@ -197,29 +144,6 @@ a.header-anchor {
   }
 }
 
-.d-ga-toc {
-  grid-area: toc !important;
-}
-
-.d-gl-docsite {
-  grid-template-areas: "content";
-  grid-template-columns: [content] minmax(32rem, 104rem);
-}
-
-.d-gl-docsite-toc,
-.d-gl-docsite.tokens-page {
-  grid-template-areas: "content toc";
-  grid-template-columns: [content] minmax(32rem, 99rem) [toc] minmax(
-      min-content,
-      21.6rem
-    );
-
-  @media (max-width: 1264px) {
-    grid-template-areas: "content";
-    grid-template-columns: [content] minmax(32rem, 99rem);
-  }
-}
-
 .d-docsite--paragraph {
   font: var(--dt-text-body-md);
   max-inline-size: 75ch;
@@ -236,8 +160,7 @@ code {
   .d-docsite--paragraph &,
   .d-docsite--unordered-list &,
   .d-docsite--ordered-list &,
-  .d-docsite--list-element &,
-  .d-docsite--preview-header & {
+  .d-docsite--list-element & {
     font-size: 85%;
   }
 
@@ -306,7 +229,7 @@ code {
   }
 }
 
-:where(:is(.d-docsite--paragraph, .d-docsite--unordered-list, .d-docsite--ordered-list, .d-docsite--list-element, .d-docsite--preview-header) code) {
+:where(:is(.d-docsite--paragraph, .d-docsite--unordered-list, .d-docsite--ordered-list, .d-docsite--list-element) code) {
   font: var(--dt-text-code-sm);
   padding: var(--dt-spacing-25) var(--dt-spacing-50);
   color: var(--dt-color-foreground-info-strong);
@@ -322,10 +245,6 @@ code {
   border-radius: var(--dt-size-radius-300);
   font-weight: inherit;
   font-size: 94%;
-}
-
-.d-docsite--preview-header {
-  margin-block: var(--dt-spacing-400) var(--dt-spacing-50);
 }
 
 .d-docsite-code {
@@ -513,58 +432,6 @@ code {
 //  $   HOME PAGE
 //      Styles the site's home page
 //  ----------------------------------------------------------------------------
-
-.hero {
-  position: relative;
-  background-color: var(--dt-color-surface-primary);
-
-  &__inner-wrapper {
-    padding-block: calc(var(--dt-spacing-100) * 16);
-    text-wrap: balance;
-
-    @media (max-width: 640px) {
-      flex-direction: column;
-    }
-  }
-
-  &__content {
-    align-items: flex-start;
-    max-inline-size: 40%;
-
-    @media (max-width: 640px) {
-      align-items: unset;
-      max-inline-size: 100%;
-      text-align: center;
-    }
-  }
-
-  &__image {
-    @media (max-width: 640px) {
-      display: none;
-    }
-  }
-
-  @media (max-width: 640px) {
-    padding-inline: var(--dt-spacing-100) var(--dt-spacing-200);
-  }
-}
-
-.links {
-  padding-block: var(--dt-spacing-600);
-  text-wrap: balance;
-
-  @media (max-width: 640px) {
-    display: block !important;
-  }
-}
-
-.link {
-  @media (max-width: 640px) {
-    display: block;
-    grid-column: 1 / -1 !important;
-    margin-block-end: calc(var(--dt-spacing-100) * 9);
-  }
-}
 
 //  ============================================================================
 //  $   DOC PAGE TITLE
