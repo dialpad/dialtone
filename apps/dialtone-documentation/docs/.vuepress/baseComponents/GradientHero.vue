@@ -97,6 +97,14 @@ const buildUniforms = (hero) => ({
   u_breathePeriod: HERO_GEOMETRY.breathePeriod,
   u_edgeFadeAmount: HERO_GEOMETRY.edgeFadeAmount,
   u_floorLuminance: HERO_GEOMETRY.floorLuminance,
+  u_fieldMix: HERO_GEOMETRY.fieldMix,
+  u_meshPeriod: HERO_GEOMETRY.meshPeriod,
+  u_meshDark1: [...HERO_GEOMETRY.meshDarkPoles[0]],
+  u_meshDark2: [...HERO_GEOMETRY.meshDarkPoles[1]],
+  u_meshLight1: [...HERO_GEOMETRY.meshLightPoles[0]],
+  u_meshLight2: [...HERO_GEOMETRY.meshLightPoles[1]],
+  u_meshPointSize: HERO_GEOMETRY.meshPointSize,
+  u_meshSmoothness: HERO_GEOMETRY.meshSmoothness,
   u_cursorRadiusFrac: HERO_GEOMETRY.cursorRadiusFrac,
   // Paper's shared vertex shader divides by u_scale; unset it defaults to 0. This shader
   // reads only gl_FragCoord so the resulting NaN never reaches a pixel, but there is no
@@ -253,7 +261,7 @@ onBeforeUnmount(() => {
   /* How far the canvas layer extends past the hero, and therefore how far it can travel.
      The homepage's scroll handler reads the real overflow off the element rather than
      duplicating this number. */
-  --shader-parallax-overflow: 70%;
+  --shader-parallax-overflow: 20%;
 
   /* Single source for the canvas colours; read back through a probe element and pushed
      to the shader as uniforms, since WebGL cannot consume custom properties. */

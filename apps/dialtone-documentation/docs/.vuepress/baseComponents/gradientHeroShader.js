@@ -33,6 +33,33 @@ export const HERO_GEOMETRY = Object.freeze({
   coreScale: 1,
   breatheAmount: 0.065,
   breathePeriod: 10,
+  // Which luminance field drives dot size: 0 = the drifting four-pole mesh, 1 = the radial
+  // burst. The burst is rotationally symmetric by construction, so only the mesh can make
+  // one corner emptier than another. The reference crossfades this on scroll; here it is a
+  // static choice.
+  fieldMix: 0,
+  // Seconds for the mesh's poles to travel out and back.
+  meshPeriod: 7,
+  // Mesh pole travel, in canvas percent, y-down. Each entry is [fromX, fromY, toX, toY]
+  // and the pole eases between the two across half the period, then back.
+  //
+  // Dark poles push dots away; light poles pull them in. So the density of any region is
+  // really "how far is it from a light pole relative to a dark one" — to populate a
+  // corner, either move a light pole toward it or move a dark pole off it.
+  meshDarkPoles: Object.freeze([
+    Object.freeze([-10, 20, 2, 100]), // left edge, descends the full height
+    Object.freeze([64, 6, 38, 72]), // upper-right, sweeps down and left
+  ]),
+  meshLightPoles: Object.freeze([
+    Object.freeze([14, 108, 44, 90]), // below the bottom edge, drifts inward
+    Object.freeze([94, 100, 62, 114]), // bottom-right, converges toward centre
+  ]),
+  // Divides pole distance before the falloff: larger spreads each pole's reach, so the
+  // field reads as one wash; smaller keeps them as distinct lobes.
+  meshPointSize: 5.5,
+  // Falloff exponent. Higher makes poles more local, which raises the contrast between
+  // empty and dense regions; lower flattens the whole field.
+  meshSmoothness: 5,
   sizeVariation: 2,
   // How much of the corner-emptying edge fade to apply, 0-1. The reference ramps this in
   // from scroll and sits at 0 while the hero is at rest, which is why its dots reach into
@@ -84,6 +111,15 @@ uniform float u_breatheAmount;
 uniform float u_breathePeriod;
 uniform float u_edgeFadeAmount;
 uniform float u_floorLuminance;
+uniform float u_fieldMix;
+uniform float u_meshPeriod;
+// Each vec4 is one pole's travel: xy = start, zw = end, in canvas percent.
+uniform vec4 u_meshDark1;
+uniform vec4 u_meshDark2;
+uniform vec4 u_meshLight1;
+uniform vec4 u_meshLight2;
+uniform float u_meshPointSize;
+uniform float u_meshSmoothness;
 
 // Normalized 0-1, y-down, relative to the hero box — not pixels, so they do not depend
 // on the backing buffer's scale. (-1, -1) means the pointer is absent.
@@ -129,6 +165,67 @@ float burstLuminance (vec2 p, vec2 centerPx, float burstRadiusPx) {
   float bump = clamp(min(inner, outer), 0.0, 1.0);
 
   return floorLum + (1.0 - floorLum) * bump;
+}
+
+// Four-pole mesh: two dark poles and two light ones drift out and back on a ping-pong
+// loop, and each fragment takes an inverse-distance-weighted blend of them. Because the
+// poles sit at asymmetric positions the field is asymmetric — dark regions read as empty
+// and light ones as dense, and which corner is which changes across the loop.
+//
+// Approximated from the reference, which notes it is itself an approximation rather than
+// the original source shader.
+//
+// The distances and weights are explicitly highp and the distance is floored well above
+// zero. 1/d^smoothness climbs fast: at the floor a weight reaches ~8.8e5, past the fp16
+// mediump ceiling of 65504. On a GPU with true fp16 that goes Inf, the sum goes Inf and
+// the blend goes NaN, blanking every dot near a pole. Desktop drivers promote mediump to
+// fp32 and hide it entirely.
+float meshLuminance (vec2 uvPct, float t) {
+  float period = max(u_meshPeriod, 0.0001);
+  float halfPeriod = period * 0.5;
+  float loopT = mod(t, period);
+  float segT = loopT < halfPeriod
+    ? smoothstep(0.0, 1.0, loopT / halfPeriod)
+    : 1.0 - smoothstep(0.0, 1.0, (loopT - halfPeriod) / halfPeriod);
+
+  vec2 dark1 = mix(u_meshDark1.xy, u_meshDark1.zw, segT);
+  vec2 dark2 = mix(u_meshDark2.xy, u_meshDark2.zw, segT);
+  vec2 light1 = mix(u_meshLight1.xy, u_meshLight1.zw, segT);
+  vec2 light2 = mix(u_meshLight2.xy, u_meshLight2.zw, segT);
+
+  float pointSize = max(u_meshPointSize, 0.0001);
+  float smoothness = max(u_meshSmoothness, 0.0001);
+
+  vec2 uv = (uvPct - 50.0) / 100.0;
+  highp float d1 = max(distance(uv, (dark1 - 50.0) / 100.0) / pointSize, 0.02);
+  highp float d2 = max(distance(uv, (dark2 - 50.0) / 100.0) / pointSize, 0.02);
+  highp float d3 = max(distance(uv, (light1 - 50.0) / 100.0) / pointSize, 0.02);
+  highp float d4 = max(distance(uv, (light2 - 50.0) / 100.0) / pointSize, 0.02);
+
+  highp float w1 = 1.0 / pow(d1, smoothness);
+  highp float w2 = 1.0 / pow(d2, smoothness);
+  highp float w3 = 1.0 / pow(d3, smoothness);
+  highp float w4 = 1.0 / pow(d4, smoothness);
+
+  // The reference blends black and white vec3s and takes their luma. The luma
+  // coefficients sum to 1 and the colour is grey, so this is the same number: the light
+  // poles' share of the total weight.
+  return (w3 + w4) / max(w1 + w2 + w3 + w4, 0.0001);
+}
+
+// Blends between the two fields. The reference sweeps the handover outward from the focal
+// point because it is animating the transition; a plain mix is used here since this is a
+// fixed setting, and the endpoints resolve to pure mesh / pure burst either way.
+float fieldLuminance (vec2 posPx, vec2 dims, vec2 centerPx, float burstRadiusPx) {
+  float t = clamp(u_fieldMix, 0.0, 1.0);
+  if (t <= 0.0) return meshLuminance(posPx / dims * 100.0, u_time);
+  if (t >= 1.0) return burstLuminance(posPx, centerPx, burstRadiusPx);
+
+  return mix(
+    meshLuminance(posPx / dims * 100.0, u_time),
+    burstLuminance(posPx, centerPx, burstRadiusPx),
+    t
+  );
 }
 
 // Union of every live trail sample's influence at this fragment. Evaluated once per
@@ -183,7 +280,7 @@ void main () {
 
   vec2 cursorPrevPx = u_cursorPrevUv * dims;
   float cursorRadiusPx = u_cursorRadiusFrac * dims.y;
-  float carryLum = burstLuminance(cursorPrevPx, centerPx, burstRadiusPx);
+  float carryLum = fieldLuminance(cursorPrevPx, dims, centerPx, burstRadiusPx);
   float cursorInfluence = cursorTrailInfluence(px, dims, cursorRadiusPx);
 
   highp vec2 rel = px - centerPx;
@@ -220,7 +317,7 @@ void main () {
 
   // Luminance is evaluated once, for the winning dot only. Sampling inside the loop would
   // re-run it on every improvement to the running minimum and discard all but the last.
-  float lum = burstLuminance(closestDotPx, centerPx, burstRadiusPx);
+  float lum = fieldLuminance(closestDotPx, dims, centerPx, burstRadiusPx);
   lum = applyCursorCarry(lum, cursorInfluence, carryLum);
   float closestDotRadius = min(maxDotSize * computeSizeFactor(lum, u_sizeVariation), dotSpacing * 0.45);
 
