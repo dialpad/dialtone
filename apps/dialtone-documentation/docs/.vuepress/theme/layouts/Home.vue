@@ -8,6 +8,7 @@
   <dt-stack
     :direction="viewport.atLeast('lg') ? 'row' : 'column'"
     :align="viewport.atLeast('lg') ? 'start' : 'stretch'"
+    :inert="isMobileDrawerOpen"
     gap="0"
     class="d-w100p"
   >
@@ -43,9 +44,14 @@
   -->
   <dt-stack
     v-if="isMobileDrawerOpen"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Site navigation"
     class="d-ps-fixed d-all-0 d-of-hidden d-zi-navigation-fixed d-bgc-primary"
+    @keydown="handleMobileDrawerKeydown"
   >
     <doc-header
+      ref="mobileDrawerHeader"
       :mobile-menu-open="isMobileMenuOpen"
       @toggle-mobile-menu="toggleMobileMenu"
     />
@@ -67,7 +73,7 @@
 import '@dialpad/dialtone-tokens/tokens-base-light.css';
 import '@dialpad/dialtone-tokens/tokens-dp-light.css';
 import { DtStack } from '@dialpad/dialtone-vue';
-import { computed, ref, watch } from 'vue';
+import { computed, nextTick, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { Content } from 'vuepress/client';
 import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
@@ -77,14 +83,41 @@ import Sidebar from '../components/Sidebar.vue';
 const route = useRoute();
 const viewport = useViewportBreakpoints();
 const isMobileMenuOpen = ref(false);
+const mobileDrawerHeader = ref(null);
+let mobileMenuTrigger = null;
 
 // Gates the drawer's own mount, so the narrow shell's sidebar is never instantiated
 // alongside the desktop rail's copy.
 const isMobileDrawerOpen = computed(() => isMobileMenuOpen.value && !viewport.atLeast('lg'));
 
 const toggleMobileMenu = () => {
+  if (!isMobileDrawerOpen.value && typeof document !== 'undefined') {
+    mobileMenuTrigger = document.activeElement;
+  }
+
   isMobileMenuOpen.value = !isMobileMenuOpen.value;
 };
+
+const handleMobileDrawerKeydown = (event) => {
+  if (event.key !== 'Escape' || event.defaultPrevented) return;
+
+  event.preventDefault();
+  isMobileMenuOpen.value = false;
+};
+
+watch(isMobileDrawerOpen, async (isOpen, wasOpen) => {
+  await nextTick();
+
+  if (isOpen) {
+    mobileDrawerHeader.value?.focusMobileMenuButton();
+    return;
+  }
+
+  if (wasOpen && mobileMenuTrigger?.isConnected) {
+    mobileMenuTrigger.focus({ preventScroll: true });
+  }
+  mobileMenuTrigger = null;
+});
 
 watch(
   () => route.path,

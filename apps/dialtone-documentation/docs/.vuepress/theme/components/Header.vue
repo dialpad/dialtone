@@ -17,6 +17,7 @@
       <dt-stack direction="row" gap="150" class="d-w100p">
         <dt-button
           v-if="!viewport.atLeast('lg')"
+          ref="mobileMenuButton"
           v-dt-tooltip:bottom-start="mobileMenuOpen ? 'Close menu' : 'View menu'"
           kind="muted"
           importance="clear"
@@ -46,6 +47,7 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
 import Navbar from '../components/Navbar.vue';
 
@@ -58,4 +60,12 @@ defineProps({
 
 const emit = defineEmits(['toggle-mobile-menu']);
 const viewport = useViewportBreakpoints();
+const mobileMenuButton = ref(null);
+
+const focusMobileMenuButton = () => {
+  const button = mobileMenuButton.value?.$el ?? mobileMenuButton.value;
+  button?.focus({ preventScroll: true });
+};
+
+defineExpose({ focusMobileMenuButton });
 </script>
