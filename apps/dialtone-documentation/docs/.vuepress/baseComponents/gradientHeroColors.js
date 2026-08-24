@@ -1,5 +1,6 @@
 import Color from 'colorjs.io';
 import { resolveBrowserThemeColor } from '../theme/utils/browserThemeColor.js';
+import { clamp01, smoothstep } from '../theme/utils/math.js';
 
 /**
  * Bridges Dialtone theme colours into the hero shader's uniforms, including the dot
@@ -48,9 +49,8 @@ const THEME_ATTRIBUTE_PREFIX = 'data-dt-';
  */
 const toChannels = (color) => {
   const [r, g, b] = new Color(color).to('srgb').coords;
-  const clamp = (value) => Math.min(1, Math.max(0, value));
 
-  return [clamp(r), clamp(g), clamp(b), 1];
+  return [clamp01(r), clamp01(g), clamp01(b), 1];
 };
 
 /**
@@ -132,8 +132,6 @@ export function resolveHeroDotPalette (scopeElement) {
   return [single ?? DOT_FALLBACK];
 }
 
-const smoothstep = (t) => t * t * (3 - 2 * t);
-
 /**
  * Samples a looping dot colour.
  *
@@ -197,12 +195,24 @@ export function createDotColorSampler (palette) {
  *   dispose: () => void,
  * }}
  */
+// Under about a quarter of an 8-bit step, so a skipped push can never be visible.
+const CHANNEL_EPSILON = 1 / 1024;
+
+const hasVisibleChange = (previous, next) => {
+  if (!previous) return true;
+
+  return Math.abs(previous[0] - next[0]) > CHANNEL_EPSILON ||
+    Math.abs(previous[1] - next[1]) > CHANNEL_EPSILON ||
+    Math.abs(previous[2] - next[2]) > CHANNEL_EPSILON;
+};
+
 export function createDotColorLoop ({ periodMs, onColor }) {
   let sampler = null;
   let animated = false;
   let phase = 0;
   let frame = 0;
   let lastFrameTime = 0;
+  let lastReported = null;
 
   const step = (now) => {
     // Skip the first frame's delta so a resume does not advance by however long it spent
@@ -210,7 +220,16 @@ export function createDotColorLoop ({ periodMs, onColor }) {
     if (lastFrameTime !== 0) phase += (now - lastFrameTime) / periodMs;
     lastFrameTime = now;
 
-    if (sampler) onColor(sampler(phase));
+    if (sampler) {
+      const next = sampler(phase);
+      // Reporting an imperceptible change is not free: downstream each push costs a
+      // full-canvas redraw. Over a 14s loop most frames land on the same 8-bit colour as
+      // the last, so gating here removes the majority of those redraws.
+      if (hasVisibleChange(lastReported, next)) {
+        lastReported = next;
+        onColor(next);
+      }
+    }
 
     frame = requestAnimationFrame(step);
   };
@@ -227,6 +246,9 @@ export function createDotColorLoop ({ periodMs, onColor }) {
     setPalette (stops) {
       sampler = createDotColorSampler(stops);
       animated = stops.length > 1;
+      // The gate compares against the last colour pushed; a new palette must be allowed
+      // through even if it happens to start near where the old one was.
+      lastReported = null;
       if (!animated) stop();
     },
 
@@ -252,6 +274,7 @@ export function createDotColorLoop ({ periodMs, onColor }) {
       stop();
       sampler = null;
       animated = false;
+      lastReported = null;
     },
   };
 }

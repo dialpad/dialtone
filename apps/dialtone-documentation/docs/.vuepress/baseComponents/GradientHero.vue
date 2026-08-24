@@ -29,6 +29,7 @@ import { onBeforeUnmount, onMounted, ref } from 'vue';
 import GradientHeroContent from './GradientHeroContent.vue';
 import { gradientHeroFragmentShader, HERO_GEOMETRY } from './gradientHeroShader.js';
 import { createGradientHeroCursor, getCursorUniforms } from './gradientHeroCursor.js';
+import { createFrameCoalescer } from '../theme/utils/frameCoalescer.js';
 import {
   createDotColorLoop,
   observeThemeChanges,
@@ -71,9 +72,31 @@ let finePointerQuery = null;
 let isDisposed = false;
 let isVisible = true;
 
+// Every setUniforms call ends in a synchronous full-canvas draw — ShaderMount.setUniforms
+// finishes with `this.render(...)`. So each per-frame source that pushed on its own bought
+// its own redundant draw of the most expensive shader on the page: Paper's own loop drew
+// once, the colour loop drew again, and the cursor drew a third time, with the first two
+// composited over and thrown away.
+//
+// The two sources now stage their values here and one coalesced push per frame flushes
+// them, which is a single extra draw instead of two. Their timing and parking are
+// untouched — only the number of identical draws changes.
+let pendingUniforms = null;
+
+const flushUniforms = createFrameCoalescer(() => {
+  const patch = pendingUniforms;
+  pendingUniforms = null;
+  if (patch && shaderMount) shaderMount.setUniforms(patch);
+});
+
+const queueUniforms = (patch) => {
+  pendingUniforms = pendingUniforms ? Object.assign(pendingUniforms, patch) : { ...patch };
+  flushUniforms.schedule();
+};
+
 const dotColorLoop = createDotColorLoop({
   periodMs: DOT_COLOR_PERIOD_MS,
-  onColor: (channels) => shaderMount?.setUniforms({ u_dotColor: channels }),
+  onColor: (channels) => queueUniforms({ u_dotColor: channels }),
 });
 
 const prefersReducedMotion = () => Boolean(reducedMotionQuery?.matches);
@@ -120,7 +143,7 @@ const buildUniforms = (hero) => ({
 const refreshColors = (hero) => {
   dotColorLoop.setPalette(resolveHeroDotPalette(hero));
 
-  shaderMount?.setUniforms({
+  queueUniforms({
     u_bgColor: resolveHeroBackground(hero),
     u_dotColor: dotColorLoop.current(),
   });
@@ -162,9 +185,9 @@ const attachControllers = (hero) => {
     // cursor uv over the canvas — so coordinates must be measured against it, not the hero.
     rectElement: shaderHostEl.value,
     onChange: (state) => {
-      // Pushed straight to the GPU. Routing per-frame values through reactivity would
-      // re-render the hero at pointer frequency.
-      shaderMount?.setUniforms(getCursorUniforms(state, HERO_GEOMETRY.cursorStrength));
+      // Staged, not pushed: see the note on queueUniforms. Never routed through
+      // reactivity, which would re-render the hero at pointer frequency.
+      queueUniforms(getCursorUniforms(state, HERO_GEOMETRY.cursorStrength));
     },
   });
 
@@ -240,6 +263,9 @@ onBeforeUnmount(() => {
   reducedMotionQuery?.removeEventListener('change', syncMotionState);
   reducedMotionQuery = null;
   finePointerQuery = null;
+
+  flushUniforms.cancel();
+  pendingUniforms = null;
 
   dotColorLoop.dispose();
 

@@ -236,8 +236,8 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { parse, compareDesc, format } from 'date-fns';
 import ShowcaseCarousel from '../../baseComponents/ShowcaseCarousel.vue';
 import GradientHero from '../../baseComponents/GradientHero.vue';
-import HeaderOverlay from '../../baseComponents/HeaderOverlay.vue';
 import { useViewportBreakpoints } from '../../theme/composables/useViewportBreakpoints.js';
+import { clamp01 } from '../../theme/utils/math.js';
 
 const viewport = useViewportBreakpoints();
 const isMigrationBannerVisible = ref(true);
@@ -264,54 +264,46 @@ onUnmounted(() => {
 onMounted(() => {
   const hero = document.querySelector('.home-gradient-hero');
   const shaderLayer = hero?.querySelector('.home-gradient-hero__shader');
-  const header = document.querySelector('.dialtone-header--home');
-  let lastScrollY = window.scrollY;
   let ticking = false;
 
   if (!hero) return;
 
+  // Measured on resize rather than per frame. Neither height changes while scrolling, and
+  // reading them mid-frame is expensive here specifically: the custom properties written
+  // below feed a transform on the shader layer, so any read after a write forces a
+  // synchronous style-and-layout pass.
+  let heroHeight = 0;
+  let parallaxRange = 0;
+
+  const measure = () => {
+    heroHeight = hero.offsetHeight;
+    // The shader layer overhangs the hero, and travels up by exactly that overhang across
+    // the hero's scroll range, so it arrives flush at the bottom instead of uncovering it.
+    // Measured off the element rather than repeating the CSS value, so the two cannot
+    // drift apart.
+    parallaxRange = shaderLayer ? Math.max(shaderLayer.offsetHeight - heroHeight, 0) : 0;
+  };
+
   const update = () => {
-    const heroHeight = hero.offsetHeight;
+    // Every read first, every write after. Interleaving them re-invalidates layout part
+    // way through the frame and costs a forced reflow per switch.
     const scrollY = window.scrollY;
 
-    // Overlay fades in across its scroll range: 0 at top → 1 when fully scrolled past.
-    const overlayOpacity = Math.min(Math.max(scrollY / heroHeight, 0), 1);
+    // One clamped progress value drives all four properties. Two of them used to derive it
+    // separately, one clamped and one not, which disagreed during overscroll — the
+    // unclamped one went negative and drove the text and the parallax backwards.
+    const scrollProgress = clamp01(scrollY / (heroHeight || 1));
 
-    // Text starts at 0.6 and fades out twice as fast — done by 50% scroll.
-    const textOpacity = Math.max(.8 - (scrollY / (heroHeight * 0.5)) * 0.6, 0);
+    // Overlay fades in across the hero's scroll range: 0 at top → 1 once scrolled past.
+    // Text fades faster, starting at 0.8 and reaching 0 at about two thirds of the range.
+    const textOpacity = Math.max(0.8 - scrollProgress * 1.2, 0);
 
-    // Text slides down 0–325px over the overlay's scroll range.
-    const scrollProgress = Math.min(scrollY / heroHeight, 1);
-    const textTranslateY = scrollProgress * 325;
-
-    hero.style.setProperty('--overlay-opacity', overlayOpacity);
+    hero.style.setProperty('--overlay-opacity', scrollProgress);
     hero.style.setProperty('--text-opacity', textOpacity);
-    hero.style.setProperty('--text-translate-y', `${textTranslateY}px`);
+    // Text slides down 0–325px over the same range.
+    hero.style.setProperty('--text-translate-y', `${scrollProgress * 325}px`);
+    hero.style.setProperty('--shader-translate-y', `${-scrollProgress * parallaxRange}px`);
 
-    // Canvas parallax: the shader layer overhangs the hero, and it travels up by exactly
-    // that overhang across the hero's scroll range — so it arrives flush at the bottom
-    // instead of uncovering it. The distance is measured off the element rather than
-    // repeating the CSS value, so the two cannot drift apart.
-    if (shaderLayer) {
-      const parallaxRange = Math.max(shaderLayer.offsetHeight - heroHeight, 0);
-      hero.style.setProperty('--shader-translate-y', `${-scrollProgress * parallaxRange}px`);
-    }
-
-    if (header) {
-      const isScrollingUp = scrollY < lastScrollY;
-      if (isScrollingUp) {
-        header.classList.remove('dialtone-header--off-canvas');
-      } else {
-        // Only hide the header when scrolling DOWN and the gradient is out of view.
-        const gradientRect = hero.getBoundingClientRect();
-        const isGradientInView = gradientRect.bottom > 0;
-        if (!isGradientInView) {
-          header.classList.add('dialtone-header--off-canvas');
-        }
-      }
-    }
-
-    lastScrollY = scrollY;
     ticking = false;
   };
 
@@ -321,11 +313,19 @@ onMounted(() => {
     requestAnimationFrame(update);
   };
 
+  const handleResize = () => {
+    measure();
+    handleScroll();
+  };
+
   window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('resize', handleResize, { passive: true });
+  measure();
   update(); // Set initial state (e.g. when loaded at a non-zero scroll position).
 
   onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
+    window.removeEventListener('resize', handleResize);
   });
 });
 
@@ -343,7 +343,7 @@ onMounted(() => {
 
     // scrollProgress: 0 when footer's top touches bottom of viewport, 1 when fully in view.
     const visibleTop = Math.max(0, scrollViewportBottom - rect.top);
-    const scrollProgress = Math.min(Math.max(visibleTop / rect.height, 0), 1);
+    const scrollProgress = clamp01(visibleTop / rect.height);
 
     // Interpolate Y from 150% down to 100% as the footer scrolls in.
     const footerGradY = 150 - (scrollProgress * 50);

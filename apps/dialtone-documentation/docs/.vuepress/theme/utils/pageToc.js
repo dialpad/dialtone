@@ -5,14 +5,6 @@ export const PAGE_SCROLL_CONTAINER_NO_SMOOTH_CLASS = 'dialtone-doc-page-scroll-c
 export const PAGE_STICKY_HEADER_SELECTOR = '#page-sticky-header';
 export const TOC_SCROLL_OFFSET_GAP = 16;
 
-// Scroll behavior for hash navigation — kept as a function (not a const) as a seam
-// for a future prefers-reduced-motion check. Visual smoothness is owned by CSS
-// (.dialtone-doc-page-scroll-container); this value also arms the scroll-spy guard
-// (see startProgrammaticScroll in usePageTocScrollSpy.js).
-export function getHashScrollBehavior () {
-  return 'smooth';
-}
-
 export function getRightRailTocViewportValues (hasCombinator = false) {
   return {
     default: false,
@@ -24,10 +16,6 @@ export function getRightRailTocViewportValues (hasCombinator = false) {
 
 export function getCurrentBrowserHash (fallback = '', location = typeof window === 'undefined' ? null : window.location) {
   return location?.hash || fallback;
-}
-
-export function getRouteScrollToTopBehavior () {
-  return 'auto';
 }
 
 export function shouldScrollRouteToTop (to, from) {
@@ -47,7 +35,7 @@ export function scrollRouteToTop (scrollContainer, scheduleRestore = scheduleScr
   scrollContainer.classList?.add(PAGE_SCROLL_CONTAINER_NO_SMOOTH_CLASS);
   scrollContainer.scrollTo({
     top: 0,
-    behavior: getRouteScrollToTopBehavior(),
+    behavior: 'auto',
   });
   scheduleRestore(() => {
     scrollContainer.classList?.remove(PAGE_SCROLL_CONTAINER_NO_SMOOTH_CLASS);

@@ -5,10 +5,8 @@ import {
   PAGE_SCROLL_CONTAINER_SELECTOR,
   createRouteHashScrollGuard,
   flattenHeadersWithDepth,
-  getHashScrollBehavior,
   getCurrentBrowserHash,
   getRightRailTocViewportValues,
-  getRouteScrollToTopBehavior,
   findPageStickyHeader,
   getLinkedHeaders,
   getScrollOffset,
@@ -22,10 +20,6 @@ import {
 describe('pageToc utilities', () => {
   it('uses a docs-owned page scroll container selector', () => {
     assert.equal(PAGE_SCROLL_CONTAINER_SELECTOR, '.dialtone-doc-page-scroll-container');
-  });
-
-  it('uses smooth scrolling for hash changes including deep links', () => {
-    assert.equal(getHashScrollBehavior(), 'smooth');
   });
 
   it('shows the right-rail TOC at xxxl only when no combinator uses that space', () => {
@@ -113,8 +107,6 @@ describe('pageToc utilities', () => {
   });
 
   it('scrolls to top only when navigating to a different route without a hash', () => {
-    assert.equal(getRouteScrollToTopBehavior(), 'auto');
-
     assert.equal(
       shouldScrollRouteToTop(
         { path: '/components/card.html', hash: '' },

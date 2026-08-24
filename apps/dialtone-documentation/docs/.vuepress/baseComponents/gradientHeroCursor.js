@@ -1,4 +1,5 @@
 import { TRAIL_LENGTH } from './gradientHeroShader.js';
+import { approach, clamp01 } from '../theme/utils/math.js';
 
 /**
  * Pointer-carry controller for the homepage hero's halftone burst.
@@ -50,8 +51,6 @@ const MOVE_EPSILON = 0.0005;
 const SPEED_SMOOTHING = 0.7;
 const SPEED_DECAY_WHEN_STILL = 0.9;
 
-const clamp01 = (value) => Math.min(1, Math.max(0, value));
-
 /**
  * @typedef {object} GradientHeroCursorState
  * @property {number} x Normalized pointer x within the host element (0-1).
@@ -86,6 +85,11 @@ export function createGradientHeroCursor ({ element, rectElement, onChange }) {
   let speed = 0;
   let frame = 0;
   let running = false;
+  // Invalidated at the top of every frame. Pointermove can fire well above display rate,
+  // and getBoundingClientRect is a forced layout whenever the hero's custom properties
+  // have been written since the last one — which, while scrolling, is every frame. One
+  // read per frame instead of one per event; at worst a frame stale, which is sub-pixel.
+  let cachedRect = null;
 
   // Lays down a new segment (or refreshes the head while inching along), then decays
   // every sample — head included, since exempting it leaves a permanent spot under a
@@ -109,6 +113,8 @@ export function createGradientHeroCursor ({ element, rectElement, onChange }) {
   };
 
   const tick = () => {
+    cachedRect = null;
+
     if (!running) {
       frame = 0;
 
@@ -122,10 +128,10 @@ export function createGradientHeroCursor ({ element, rectElement, onChange }) {
       return;
     }
 
-    lagged.x += (target.x - lagged.x) * CURSOR_LAG;
-    lagged.y += (target.y - lagged.y) * CURSOR_LAG;
-    held.x += (lagged.x - held.x) * CURSOR_HOLD;
-    held.y += (lagged.y - held.y) * CURSOR_HOLD;
+    lagged.x = approach(lagged.x, target.x, CURSOR_LAG);
+    lagged.y = approach(lagged.y, target.y, CURSOR_LAG);
+    held.x = approach(held.x, lagged.x, CURSOR_HOLD);
+    held.y = approach(held.y, lagged.y, CURSOR_HOLD);
 
     if (!movedThisFrame) speed *= SPEED_DECAY_WHEN_STILL;
 
@@ -163,8 +169,8 @@ export function createGradientHeroCursor ({ element, rectElement, onChange }) {
   };
 
   const onPointerMove = (event) => {
-    // Read live rather than cached: the canvas layer translates as the page scrolls.
-    const rect = (rectElement ?? element).getBoundingClientRect();
+    cachedRect ??= (rectElement ?? element).getBoundingClientRect();
+    const rect = cachedRect;
     if (rect.width === 0 || rect.height === 0) return;
 
     const nx = (event.clientX - rect.left) / rect.width;
@@ -202,6 +208,8 @@ export function createGradientHeroCursor ({ element, rectElement, onChange }) {
 
   const stop = () => {
     if (!running) return;
+
+    cachedRect = null;
 
     running = false;
     element.removeEventListener('pointermove', onPointerMove);

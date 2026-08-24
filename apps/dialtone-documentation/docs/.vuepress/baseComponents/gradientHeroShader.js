@@ -2,16 +2,29 @@
  * Fragment shader for the homepage hero's halftone burst, plus the constants the
  * component and cursor controller share with it.
  *
- * The technique: a phyllotaxis (sunflower) lattice of candidate dot centres, where each
- * fragment finds its nearest dot analytically and sizes that dot from a radial luminance
- * curve. The curve floors near the focal point, peaks in a band partway out, and falls
- * away past the burst radius, so the field reads as a burst radiating from a point just
- * below the bottom edge. A pointer trail locally carries luminance from where the cursor
- * has been into where it is now.
+ * The technique: a phyllotaxis (sunflower) lattice of candidate dot centres radiating from
+ * `center`, where each fragment finds its nearest dot analytically and sizes it from a
+ * luminance field sampled at that dot. A pointer trail locally carries luminance from
+ * where the cursor has been into where it is now, and the dot colour animates around a
+ * palette of theme tokens.
  *
- * Adapted from the Dialpad marketing site's implementation, reduced to the resolved
- * radial state. The mesh-gradient layer, its crossfade, and the animated dot palette are
- * intentionally absent: this renders one static pair of theme colours.
+ * Two luminance fields exist and `fieldMix` chooses between them:
+ *
+ * - the four-pole mesh (`fieldMix: 0`, the current setting) — dark poles push dots away and
+ *   light poles pull them in, drifting on a ping-pong loop. Asymmetric, so one corner can
+ *   be emptier than another.
+ * - the radial burst (`fieldMix: 1`) — floors near the focal point, peaks in a band partway
+ *   out, falls away past the burst radius. Rotationally symmetric by construction.
+ *
+ * IMPORTANT while `fieldMix` is 0: the burst path is unreachable, so every knob that only
+ * feeds it does nothing. That is `floorLuminance`, `coreScale`, `burstRadiusFrac` and
+ * `burstScale` — and, because the breathe factor only scales the burst radius,
+ * `breatheAmount` and `breathePeriod` too. `edgeFadeAmount` is likewise inert at 0, and
+ * setting it above 0 has no effect while the burst radius it measures against is unused.
+ * `center` DOES still matter: it is the lattice origin, not just the burst's focal point.
+ *
+ * Adapted from the Dialpad marketing site's implementation. Its scroll-driven crossfade
+ * between the two fields is deliberately not ported — `fieldMix` is a fixed choice here.
  *
  * @module baseComponents/gradientHeroShader
  */
@@ -239,13 +252,19 @@ float cursorTrailInfluence (vec2 posPx, vec2 dims, float radiusPx) {
   for (int i = 0; i < TRAIL_N; i++) {
     // NB: "sample" is a reserved word in GLSL ES 3.00, so this cannot be named that.
     vec4 node = u_trail[i];
-    if (node.z <= 0.0) continue;
+    // getCursorUniforms packs live samples from index 0 and zero-fills the tail, so the
+    // first empty slot means every later one is empty too.
+    if (node.z <= 0.0) break;
 
     float d = distance(posPx, node.xy * dims);
+    float shoulder = 1.0 - smoothstep(0.0, max(radiusPx, 1.0), d);
+    // Samples further away than the radius contribute nothing, and pow is two SFU ops —
+    // not worth spending on a base of zero.
+    if (shoulder <= 0.0) continue;
+
     // The exponent softens the shoulder so the streak's edge dissolves instead of ending
     // on a defined rim.
-    float falloff = pow(1.0 - smoothstep(0.0, max(radiusPx, 1.0), d), 1.7);
-    best = max(best, falloff * node.z);
+    best = max(best, pow(shoulder, 1.7) * node.z);
   }
 
   return best * u_cursorStrength;
@@ -280,8 +299,14 @@ void main () {
 
   vec2 cursorPrevPx = u_cursorPrevUv * dims;
   float cursorRadiusPx = u_cursorRadiusFrac * dims.y;
-  float carryLum = fieldLuminance(cursorPrevPx, dims, centerPx, burstRadiusPx);
+  // Order matters: applyCursorCarry ignores carryLum entirely when influence is zero, so
+  // evaluating the field a second time for it is wasted work. That is the common case —
+  // every touch device, reduced motion, and any moment before the first pointer move —
+  // and there the branch is uniform across the draw, so it costs nothing.
   float cursorInfluence = cursorTrailInfluence(px, dims, cursorRadiusPx);
+  float carryLum = cursorInfluence > 0.0
+    ? fieldLuminance(cursorPrevPx, dims, centerPx, burstRadiusPx)
+    : 0.0;
 
   highp vec2 rel = px - centerPx;
   highp float dist = length(rel);

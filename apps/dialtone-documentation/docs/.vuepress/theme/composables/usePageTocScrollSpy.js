@@ -7,7 +7,6 @@ import {
   getActiveHeaderLink,
   getCurrentBrowserHash,
   getLinkedHeaders,
-  getHashScrollBehavior,
   getScrollOffset,
   getTargetScrollTop,
   resolveHeaderTargets,
@@ -111,8 +110,8 @@ export function usePageTocScrollSpy (headers) {
   }
 
   // Only smooth scrolls animate over time, so only they need scroll-spy paused until
-  // they finish; an instant scroll lands immediately. (The smoothness itself is CSS,
-  // not this argument -- see getHashScrollBehavior.)
+  // they finish; an instant scroll lands immediately. The smoothness itself comes from
+  // CSS, not from this argument — it only decides whether to suppress the spy.)
   function startProgrammaticScroll (behavior) {
     if (behavior !== 'smooth') return;
 
@@ -159,7 +158,7 @@ export function usePageTocScrollSpy (headers) {
     syncScrollContainer();
 
     if (route.hash) {
-      scrollToHash(route.hash, getHashScrollBehavior());
+      scrollToHash(route.hash);
     } else {
       updateActiveHeaderFromScroll();
     }
@@ -179,7 +178,7 @@ export function usePageTocScrollSpy (headers) {
 
       await nextTick();
       syncScrollContainer();
-      scrollToHash(hash, getHashScrollBehavior());
+      scrollToHash(hash);
     },
     { flush: 'post' },
   );
@@ -192,7 +191,7 @@ export function usePageTocScrollSpy (headers) {
 
       if (route.hash) {
         activeHash.value = route.hash;
-        scrollToHash(route.hash, getHashScrollBehavior());
+        scrollToHash(route.hash);
         return;
       }
 
