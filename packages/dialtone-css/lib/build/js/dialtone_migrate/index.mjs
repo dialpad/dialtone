@@ -57,6 +57,9 @@ const __dirname = path.dirname(__filename);
  * @property {boolean} [supportsPackageArg] - Forward --package to this standalone script
  * @property {string[]} [extraArgs] - Extra CLI args to forward
  * @property {RegExp[]} detectPatterns - Patterns that indicate migration is still needed
+ * @property {RegExp[]} [skipIfPatterns] - If any of these match a file, skip detectPatterns
+ *   for that file — used when detectPatterns values are ambiguous with the post-migration
+ *   scale and a new-scale-only marker means the file has already been migrated.
  * @property {string[]} fileExtensions - File extensions to scan during health check
  */
 
@@ -162,7 +165,7 @@ const MIGRATIONS = [
     type: 'standalone',
     scriptDir: 'dialtone_migrate_props',
     detectPatterns: [
-      /(?:show|hide-close|hide-icon|label-visible|selected-values)(?:=|[\s>])/,
+      /<(?:dt-[\w-]+|Dt\w+)\b[^>]*\b(?:show|hide-close|hide-icon|label-visible|selected-values)(?:=|[\s>])/,
       /<(?:dt-(?:banner|notice|toast|modal)|Dt(?:Banner|Notice|Toast|Modal))\b[^>]*\btitle(?:=|[\s>])/,
       /<(?:dt-[\w-]+|Dt\w+)\b[^>]*@(?:input|change)(?:=|\.)/,
       /kind="(?:danger|error)"/,
@@ -245,6 +248,14 @@ const MIGRATIONS = [
     detectPatterns: [
       /gap="(?:50|100|200|300|350|400|450|500|525|550|600|625|650|700)"/,
       /d-stack--gap-(?:50|100|200|300|350|400|450|500|525|550|600|625|650|700)/,
+    ],
+    // Old and new gap scales share numeric stops (e.g. "100"), so a bare match doesn't
+    // prove pending work. Mirrors dialtone_migration_helper/configs/stack-gap-to-spacing.mjs's
+    // isAlreadyMigrated check: new-scale-only stops indicate the file was already migrated.
+    skipIfPatterns: [
+      /gap="(?:25|75|150|250)"/,
+      /d-stack--gap-(?:25|75|150|250)/,
+      /d-description-list--gap-(?:25|75|150|250)/,
     ],
     fileExtensions: ['.vue', '.html', '.js', '.ts', '.jsx', '.tsx', '.md'],
   },
@@ -546,6 +557,7 @@ async function healthCheck (cwd) {
 
     for (const [file, content] of fileContents) {
       if (!migration.fileExtensions.some(ext => file.endsWith(ext))) continue;
+      if (migration.skipIfPatterns?.some(pattern => pattern.test(content))) continue;
       for (const pattern of migration.detectPatterns) {
         // Reset lastIndex for global patterns
         const re = new RegExp(pattern.source, pattern.flags.replace('g', ''));

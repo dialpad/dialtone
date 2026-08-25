@@ -86,3 +86,46 @@ describe('--package validation', () => {
     assert.equal(status, 0);
   });
 });
+
+describe('--health-check', () => {
+  function runHealthCheck (files) {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'dlt-health-'));
+    try {
+      for (const [name, contents] of Object.entries(files)) {
+        fs.writeFileSync(path.join(tmp, name), contents);
+      }
+      return execFileSync(process.execPath, [cli, '--health-check', '--cwd', tmp],
+        { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  }
+
+  it('does not flag native v-show on non-Dialtone elements as component-props', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><div v-show="isReady">Ready</div></template>',
+    });
+    assert.match(output, /\[DONE\].*Component Props & Events \(component-props\)/);
+  });
+
+  it('still flags show= on a Dialtone component as component-props', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-modal show="isOpen"></dt-modal></template>',
+    });
+    assert.match(output, /\[PENDING\].*Component Props & Events \(component-props\)/);
+  });
+
+  it('does not flag an already-migrated file for stack-gap-to-spacing', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-stack gap="100"></dt-stack><dt-stack gap="25"></dt-stack></template>',
+    });
+    assert.match(output, /\[DONE\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+
+  it('still flags an unmigrated file for stack-gap-to-spacing', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-stack gap="625"></dt-stack></template>',
+    });
+    assert.match(output, /\[PENDING\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+});
