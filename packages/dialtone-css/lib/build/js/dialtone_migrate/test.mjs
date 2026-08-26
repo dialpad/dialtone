@@ -108,6 +108,13 @@ describe('--health-check', () => {
     assert.match(output, /\[DONE\].*Component Props & Events \(component-props\)/);
   });
 
+  it('does not flag native v-show on a Dialtone element as component-props', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-modal v-show="isOpen"></dt-modal></template>',
+    });
+    assert.match(output, /\[DONE\].*Component Props & Events \(component-props\)/);
+  });
+
   it('still flags show= on a Dialtone component as component-props', () => {
     const output = runHealthCheck({
       'App.vue': '<template><dt-modal show="isOpen"></dt-modal></template>',

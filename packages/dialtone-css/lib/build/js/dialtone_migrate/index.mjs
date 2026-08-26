@@ -174,7 +174,9 @@ const MIGRATIONS = [
     type: 'standalone',
     scriptDir: 'dialtone_migrate_props',
     detectPatterns: [
-      new RegExp(`<(?:dt-[\\w-]+|Dt\\w+)\\b${DT_TAG_ATTRS}\\b(?:show|hide-close|hide-icon|label-visible|selected-values)(?:=|[\\s>])`),
+      // (?<!-) blocks a hyphen immediately before the prop name — \b alone still matches
+      // there (- is a non-word char), which would treat native v-show as the show prop.
+      new RegExp(`<(?:dt-[\\w-]+|Dt\\w+)\\b${DT_TAG_ATTRS}\\b(?<!-)(?:show|hide-close|hide-icon|label-visible|selected-values)(?:=|[\\s>])`),
       new RegExp(`<(?:dt-(?:banner|notice|toast|modal)|Dt(?:Banner|Notice|Toast|Modal))\\b${DT_TAG_ATTRS}\\btitle(?:=|[\\s>])`),
       new RegExp(`<(?:dt-[\\w-]+|Dt\\w+)\\b${DT_TAG_ATTRS}@(?:input|change)(?:=|\\.)`),
       /kind="(?:danger|error)"/,
