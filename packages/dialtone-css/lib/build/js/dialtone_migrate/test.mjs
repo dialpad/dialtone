@@ -115,6 +115,13 @@ describe('--health-check', () => {
     assert.match(output, /\[PENDING\].*Component Props & Events \(component-props\)/);
   });
 
+  it('still flags :show= on a Dialtone component when a quoted attribute earlier in the tag contains a literal >', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-modal :disabled="count > 0" :show="isOpen"></dt-modal></template>',
+    });
+    assert.match(output, /\[PENDING\].*Component Props & Events \(component-props\)/);
+  });
+
   it('does not flag an already-migrated file for stack-gap-to-spacing', () => {
     const output = runHealthCheck({
       'App.vue': '<template><dt-stack gap="100"></dt-stack><dt-stack gap="25"></dt-stack></template>',

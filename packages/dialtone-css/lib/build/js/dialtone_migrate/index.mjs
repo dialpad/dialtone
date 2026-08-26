@@ -69,6 +69,10 @@ const __dirname = path.dirname(__filename);
  */
 
 /** @type {Migration[]} */
+// Consumes a Dialtone tag's attribute soup, treating quoted attribute values as opaque so a
+// literal > inside one (e.g. :disabled="count > 0") doesn't truncate the match early.
+const DT_TAG_ATTRS = '(?:[^>"\']|"[^"]*"|\'[^\']*\')*';
+
 const MIGRATIONS = [
   // ── Required (breaking) ────────────────────────────────────────────
   {
@@ -170,9 +174,9 @@ const MIGRATIONS = [
     type: 'standalone',
     scriptDir: 'dialtone_migrate_props',
     detectPatterns: [
-      /<(?:dt-[\w-]+|Dt\w+)\b[^>]*\b(?:show|hide-close|hide-icon|label-visible|selected-values)(?:=|[\s>])/,
-      /<(?:dt-(?:banner|notice|toast|modal)|Dt(?:Banner|Notice|Toast|Modal))\b[^>]*\btitle(?:=|[\s>])/,
-      /<(?:dt-[\w-]+|Dt\w+)\b[^>]*@(?:input|change)(?:=|\.)/,
+      new RegExp(`<(?:dt-[\\w-]+|Dt\\w+)\\b${DT_TAG_ATTRS}\\b(?:show|hide-close|hide-icon|label-visible|selected-values)(?:=|[\\s>])`),
+      new RegExp(`<(?:dt-(?:banner|notice|toast|modal)|Dt(?:Banner|Notice|Toast|Modal))\\b${DT_TAG_ATTRS}\\btitle(?:=|[\\s>])`),
+      new RegExp(`<(?:dt-[\\w-]+|Dt\\w+)\\b${DT_TAG_ATTRS}@(?:input|change)(?:=|\\.)`),
       /kind="(?:danger|error)"/,
       /validation-state="(?:error|success)"/,
     ],
