@@ -178,6 +178,27 @@ describe('--health-check', () => {
     assert.match(output, /\[PENDING\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
   });
 
+  it('does not flag an @gap event-listener value as a pending gap prop', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-stack @gap="625"></dt-stack></template>',
+    });
+    assert.match(output, /\[DONE\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+
+  it('does not let an @gap or v-on:gap event-listener value suppress a real ambiguous pending gap', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-stack @gap="25"></dt-stack><dt-stack v-on:gap="75"></dt-stack><dt-stack gap="100"></dt-stack></template>',
+    });
+    assert.match(output, /\[PENDING\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+
+  it('still flags a bound :gap= and v-bind:gap= as pending', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-stack :gap="625"></dt-stack><dt-stack v-bind:gap="625"></dt-stack></template>',
+    });
+    assert.match(output, /\[PENDING\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+
   it('does not flag gap="525" for stack-gap-to-spacing', () => {
     const output = runHealthCheck({
       'App.vue': '<template><dt-stack gap="525"></dt-stack></template>',

@@ -73,6 +73,11 @@ const __dirname = path.dirname(__filename);
 // literal > inside one (e.g. :disabled="count > 0") doesn't truncate the match early.
 const DT_TAG_ATTRS = '(?:[^>"\']|"[^"]*"|\'[^\']*\')*';
 
+// Requires a real attribute-name boundary before "gap": blocks a word char or hyphen
+// (data-gap), an event-listener "@" (@gap), and a trailing "on:" from v-on:gap — but still
+// allows a bare gap=, a bound :gap=, or v-bind:gap= (neither ends in "on:" or starts with @).
+const GAP_ATTR_BOUNDARY = '(?<!@)(?<!on:)(?<![\\w-])';
+
 const MIGRATIONS = [
   // ── Required (breaking) ────────────────────────────────────────────
   {
@@ -258,11 +263,9 @@ const MIGRATIONS = [
     category: 'opt-in',
     type: 'config',
     configName: 'stack-gap-to-spacing',
-    // (?<![\w-]) requires a non-word, non-hyphen boundary before "gap" (e.g. whitespace,
-    // quote, or a leading :), so unrelated attributes like data-gap aren't mistaken for it.
     // Old-only stops (never valid post-migration values) — always flagged as pending.
     detectPatterns: [
-      /(?<![\w-])gap="(?:350|450|500|550|625|650|700)"/,
+      new RegExp(`${GAP_ATTR_BOUNDARY}gap="(?:350|450|500|550|625|650|700)"`),
       /d-stack--gap-(?:350|450|500|550|625|650|700)/,
     ],
     // Old and new gap scales share some numeric stops (e.g. "100"), so a bare match on
@@ -270,15 +273,15 @@ const MIGRATIONS = [
     // marker (skipIfPatterns) — an unambiguous detectPatterns match elsewhere in the same
     // (partially migrated) file is still flagged regardless.
     ambiguousDetectPatterns: [
-      /(?<![\w-])gap="(?:50|100|200|300|400|525|600)"/,
+      new RegExp(`${GAP_ATTR_BOUNDARY}gap="(?:50|100|200|300|400|525|600)"`),
       /d-stack--gap-(?:50|100|200|300|400|525|600)/,
     ],
     // Mirrors dialtone_migration_helper/configs/stack-gap-to-spacing.mjs's isAlreadyMigrated
     // check: new-scale-only stops indicate the file was already migrated.
     skipIfPatterns: [
-      /(?<![\w-])gap="(?:25|75|150|250|525)"/,
-      /(?<![\w-])gap='(?:25|75|150|250|525)'/,
-      /(?<![\w-])gap="'(?:25|75|150|250|525)'"/,
+      new RegExp(`${GAP_ATTR_BOUNDARY}gap="(?:25|75|150|250|525)"`),
+      new RegExp(`${GAP_ATTR_BOUNDARY}gap='(?:25|75|150|250|525)'`),
+      new RegExp(`${GAP_ATTR_BOUNDARY}gap="'(?:25|75|150|250|525)'"`),
       /d-stack--gap-(?:25|75|150|250|525)/,
       /d-description-list--gap-(?:25|75|150|250|525)/,
     ],
