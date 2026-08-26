@@ -19,9 +19,15 @@
       :class="['d-slider__label', { 'sr-only': labelHidden }, labelClass]"
       data-qa="dt-slider-label"
     >
-      <!-- @slot Slot for the label, defaults to the label prop.
-           Required for accessibility; use labelHidden to hide it visually. -->
-      <slot name="label">
+      <!-- @slot Slot for the label, defaults to the label prop. Scoped with
+           :value (Number, or Number[] in range mode) — the live value(s),
+           updating as the thumb is dragged — for labels that echo the
+           current value. Required for accessibility; use labelHidden to
+           hide it visually. -->
+      <slot
+        name="label"
+        :value="currentValue"
+      >
         <dt-text
           v-if="label"
           kind="label"
@@ -84,22 +90,30 @@
         <div
           v-for="(val, i) in internalValues"
           :key="`thumb-hit-${i}`"
-          :ref="el => setThumbHitRef(el, i)"
           class="d-slider__thumb-hit"
           :style="{ ...thumbPositionStyle(val), touchAction: isVertical ? 'pan-x' : 'pan-y' }"
           data-qa="dt-slider-thumb-hit"
-        />
-        <template v-if="showTooltip && thumbHitRefsReady">
-          <dt-tooltip
-            v-for="(val, i) in internalValues"
-            :key="`thumb-tooltip-${i}`"
-            :external-anchor-element="thumbHitRefs[i]"
-            :message="getAriaValueText ? getAriaValueText(val, i) : String(val)"
-            :open="true"
-            :placement="isRange ? (i === 0 ? 'left' : 'right') : 'top'"
-            :fallback-placements="isRange ? (i === 0 ? ['top', 'right'] : ['top', 'left']) : ['bottom']"
-          />
-        </template>
+          @pointerenter="onThumbHitPointerEnter(i)"
+          @pointerleave="onThumbHitPointerLeave(i)"
+        >
+          <!-- Plain, CSS-positioned value bubble — deliberately NOT DtTooltip/Popper.
+               It's anchored to this hit-target box the same way the thumb itself is
+               positioned by thumbPositionStyle(), so there's no JS measurement, no
+               document.body portal, and no async reposition loop that can desync
+               from the thumb while scrolling (see DLT-1974 investigation notes). -->
+          <div
+            v-if="tooltip !== 'never'"
+            :class="[
+              'd-tooltip',
+              'd-slider__thumb-tooltip',
+              thumbTooltipDirectionClass(i),
+              isTooltipOpen(i) ? 'd-tooltip--show' : 'd-tooltip--hide',
+            ]"
+            data-qa="dt-slider-thumb-tooltip"
+          >
+            {{ getAriaValueText ? getAriaValueText(val, i) : String(val) }}
+          </div>
+        </div>
         <input
           v-for="(val, i) in internalValues"
           :key="`thumb-input-${i}`"
@@ -147,11 +161,11 @@
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue';
 import { DtText } from '@/components/Text';
-import { DtTooltip } from '@/components/Tooltip';
 import { getUniqueString } from '@/common/utils';
 import {
   SLIDER_ORIENTATIONS,
   SLIDER_SIZE_MODIFIERS,
+  SLIDER_TOOLTIP_MODES,
   SLIDER_DEFAULT_LARGE_STEP,
 } from './SliderConstants';
 
@@ -336,13 +350,15 @@ const props = defineProps({
   },
 
   /**
-   * When true, shows a tooltip above (aka on top of) each thumb displaying its current value.
+   * Controls the value tooltip shown above (aka on top of) each thumb: always visible,
+   * never shown, or shown only while hovering, dragging, or focusing that thumb.
    * Uses getAriaValueText for the label when provided, otherwise falls back to the raw number.
-   * @values true, false
+   * @values always, never, interaction
    */
-  showTooltip: {
-    type: Boolean,
-    default: false,
+  tooltip: {
+    type: String,
+    default: 'never',
+    validator: (v) => SLIDER_TOOLTIP_MODES.includes(v),
   },
 
   /**
@@ -397,18 +413,23 @@ const thumbRefs = ref([]);
 const isDragging = ref(false);
 const activeThumbIndex = ref(null);
 const focusedThumbIndex = ref(null);
-const thumbHitRefs = ref([]);
-const thumbHitRefsReady = ref(false);
-
-function setThumbHitRef (el, i) {
-  thumbHitRefs.value[i] = el ?? null;
-}
+const hoveredThumbIndex = ref(null);
 
 const isRange = computed(() => Array.isArray(props.modelValue));
 
+// The low thumb's value can never exceed the high thumb's — swap rather than
+// clamp so an inverted pair (e.g. a consumer-supplied [70, 30]) still keeps
+// its intended width instead of collapsing to a single point.
+function normalizeRangeValues(values) {
+  if (values.length === 2 && values[0] > values[1]) {
+    return [values[1], values[0]];
+  }
+  return values;
+}
+
 const internalValues = ref(
   Array.isArray(props.modelValue)
-    ? [...props.modelValue]
+    ? normalizeRangeValues([...props.modelValue])
     : props.modelValue !== undefined
       ? [props.modelValue]
       : [props.min],
@@ -419,13 +440,17 @@ const lastCommittedValues = ref([...internalValues.value]);
 const isVertical = computed(() => props.orientation === 'vertical');
 const sizeClass = computed(() => SLIDER_SIZE_MODIFIERS[String(props.size)] ?? '');
 
+// Mirrors the update:modelValue payload shape (Number, or Number[] in range
+// mode) so a custom #label slot can render the live value while dragging.
+const currentValue = computed(() => (isRange.value ? [...internalValues.value] : internalValues.value[0]));
+
 // ─── Sync controlled modelValue → internalValues ──────────────────────────────
 
 watch(
   () => props.modelValue,
   (newVal) => {
     if (newVal === undefined || newVal === null) return;
-    const next = Array.isArray(newVal) ? [...newVal] : [newVal];
+    const next = Array.isArray(newVal) ? normalizeRangeValues([...newVal]) : [newVal];
     const current = internalValues.value;
     if (next.length !== current.length || next.some((v, i) => v !== current[i])) {
       internalValues.value = next;
@@ -535,7 +560,10 @@ function updateThumbValue(thumbIndex, newVal) {
 
   const next = [...internalValues.value];
 
-  if (isRange.value && props.minStepsBetweenValues > 0) {
+  if (isRange.value) {
+    // The low thumb can never pass the high thumb (and vice versa) — they
+    // may only meet. minStepsBetweenValues, when set, widens this into a
+    // larger required gap instead of a bare touch.
     const gap = props.minStepsBetweenValues * props.step;
     if (thumbIndex === 0) {
       clamped = Math.min(clamped, (next[1] ?? props.max) - gap);
@@ -605,6 +633,16 @@ function onPointerDown(event) {
 
 function onPointerMove(event) {
   if (!isDragging.value || activeThumbIndex.value === null) return;
+
+  // The primary button can be released outside this document (e.g. over a
+  // parent frame, or outside the OS window) without a pointerup ever
+  // reaching us, leaving isDragging stuck true. event.buttons reflects the
+  // actual current button state, so this self-heals on the next move.
+  if (event.buttons === 0) {
+    onPointerUp();
+    return;
+  }
+
   updateThumbValue(activeThumbIndex.value, getValueFromPointerEvent(event));
 }
 
@@ -645,10 +683,30 @@ function onThumbBlur(i, event) {
   emit('blur', event);
 }
 
+function onThumbHitPointerEnter(i) {
+  hoveredThumbIndex.value = i;
+}
+
+function onThumbHitPointerLeave(i) {
+  if (hoveredThumbIndex.value === i) hoveredThumbIndex.value = null;
+}
+
+function isTooltipOpen(i) {
+  if (props.tooltip === 'always') return true;
+  return activeThumbIndex.value === i || focusedThumbIndex.value === i || hoveredThumbIndex.value === i;
+}
+
+// Which side the value bubble sits on, relative to its thumb-hit box. Single-thumb
+// mode always sits above (block-start); range mode splits thumbs to either inline
+// side so the two bubbles don't collide near the middle of the track.
+function thumbTooltipDirectionClass(i) {
+  if (!isRange.value) return 'd-slider__thumb-tooltip--block-start';
+  return i === 0 ? 'd-slider__thumb-tooltip--inline-start' : 'd-slider__thumb-tooltip--inline-end';
+}
+
 // ─── Dev warnings ─────────────────────────────────────────────────────────────
 
 onMounted(() => {
-  thumbHitRefsReady.value = true;
   if (!props.label && !props.labelHidden) return; // will have visible label
   if (isRange.value && !props.getAriaValueText) {
     console.info(

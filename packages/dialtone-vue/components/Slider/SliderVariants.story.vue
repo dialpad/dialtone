@@ -115,15 +115,27 @@
       />
     </section>
 
-    <!-- Value tooltip -->
+    <!-- Value tooltip: always -->
     <section>
       <p class="d-body--sm-compact d-mbe-300 d-fc-tertiary">
-        Value tooltip
+        Value tooltip — always
       </p>
       <dt-slider
-        v-model="tooltipValue"
+        v-model="tooltipAlwaysValue"
         label="Volume"
-        show-tooltip
+        tooltip="always"
+      />
+    </section>
+
+    <!-- Value tooltip: on interaction -->
+    <section>
+      <p class="d-body--sm-compact d-mbe-300 d-fc-tertiary">
+        Value tooltip — on interaction (hover, drag, or focus)
+      </p>
+      <dt-slider
+        v-model="tooltipInteractionValue"
+        label="Volume"
+        tooltip="interaction"
       />
     </section>
 
@@ -304,6 +316,108 @@
             🐇
           </template>
         </dt-slider>
+
+        <!-- Zoom level — discrete steps with ticks and marks -->
+        <dt-slider
+          v-model="zoomLevel"
+          :min="50"
+          :max="200"
+          :step="25"
+          show-ticks
+          :tick-interval="25"
+          :marks="[50, 100, 150, 200]"
+        >
+          <template #label>
+            Zoom level &middot; {{ zoomLevel }}%
+          </template>
+          <template #start>
+            <dt-icon
+              name="zoom-out"
+              size="200"
+            />
+          </template>
+          <template #end>
+            <dt-icon
+              name="zoom-in"
+              size="200"
+            />
+          </template>
+        </dt-slider>
+
+        <!-- Mic sensitivity — single thumb, percentage output -->
+        <dt-slider
+          v-model="micSensitivity"
+          :min="0"
+          :max="100"
+          :step="5"
+        >
+          <template #label>
+            Mic sensitivity &middot; {{ micSensitivity }}%
+          </template>
+          <template #start>
+            <dt-icon
+              name="mic-off"
+              size="200"
+            />
+          </template>
+          <template #end>
+            <dt-icon
+              name="mic"
+              size="200"
+            />
+          </template>
+        </dt-slider>
+
+        <!-- Auto-delete recordings after — range mode, day-count output -->
+        <dt-slider
+          v-model="retentionRange"
+          :min="1"
+          :max="90"
+          :step="1"
+          :marks="[1, 30, 60, 90]"
+        >
+          <template #label>
+            Auto-delete recordings after &middot; {{ retentionRange[0] }}–{{ retentionRange[1] }} days
+          </template>
+          <template #start>
+            <dt-icon
+              name="calendar-range"
+              size="200"
+            />
+          </template>
+          <template #end>
+            <dt-icon
+              name="trash"
+              size="200"
+            />
+          </template>
+        </dt-slider>
+
+        <!-- Battery saver threshold — single thumb, low-end warning range -->
+        <dt-slider
+          v-model="batteryThreshold"
+          :min="5"
+          :max="50"
+          :step="5"
+          show-ticks
+          :tick-interval="5"
+        >
+          <template #label>
+            Battery saver threshold &middot; {{ batteryThreshold }}%
+          </template>
+          <template #start>
+            <dt-icon
+              name="battery-low"
+              size="200"
+            />
+          </template>
+          <template #end>
+            <dt-icon
+              name="battery-full"
+              size="200"
+            />
+          </template>
+        </dt-slider>
       </div>
     </section>
 
@@ -340,7 +454,8 @@ export default {
       tickValue: ref(7),
       labelsWithBoundariesValue: ref(10),
       midpointValue: ref(0),
-      tooltipValue: ref(48),
+      tooltipAlwaysValue: ref(48),
+      tooltipInteractionValue: ref(48),
       invertedValue: ref(40),
       panValue: ref(50),
       percentageValue: ref(0),
@@ -351,6 +466,10 @@ export default {
       fontSize: ref(16),
       noiseCancellation: ref(2),
       playbackSpeed: ref(100),
+      zoomLevel: ref(100),
+      micSensitivity: ref(65),
+      retentionRange: ref([14, 60]),
+      batteryThreshold: ref(20),
     };
   },
 };

@@ -1,5 +1,7 @@
 export const SLIDER_ORIENTATIONS = ['horizontal', 'vertical'] as const;
 
+export const SLIDER_TOOLTIP_MODES = ['always', 'never', 'interaction'] as const;
+
 export const SLIDER_SIZE_MODIFIERS: Record<string, string> = {
   100: 'd-slider--xs',
   200: 'd-slider--sm',

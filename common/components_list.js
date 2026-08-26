@@ -55,7 +55,6 @@ module.exports = [
   'select_menu.vue',
   'skeleton.vue',
   'slider.vue',
-  'slider_alt.vue',
   'split_button.vue',
   'stack.vue',
   'tab.vue',
