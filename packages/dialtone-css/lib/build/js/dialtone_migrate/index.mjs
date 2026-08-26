@@ -56,11 +56,29 @@ const __dirname = path.dirname(__filename);
  * @property {string} [scriptDir]  - Directory name for standalone scripts
  * @property {boolean} [supportsPackageArg] - Forward --package to this standalone script
  * @property {string[]} [extraArgs] - Extra CLI args to forward
- * @property {RegExp[]} detectPatterns - Patterns that indicate migration is still needed
+ * @property {RegExp[]} detectPatterns - Patterns that unambiguously indicate migration is
+ *   still needed. Always evaluated, regardless of skipIfPatterns.
+ * @property {RegExp[]} [ambiguousDetectPatterns] - Patterns that overlap with valid
+ *   post-migration values. Only evaluated when skipIfPatterns does not match, so a file
+ *   already containing a new-scale-only marker isn't flagged on these alone — but an
+ *   unambiguous detectPatterns match elsewhere in the same (partially migrated) file
+ *   still counts.
+ * @property {RegExp[]} [skipIfPatterns] - New-scale-only markers that gate
+ *   ambiguousDetectPatterns — their presence means the file has already been migrated.
  * @property {string[]} fileExtensions - File extensions to scan during health check
  */
 
 /** @type {Migration[]} */
+// Consumes a Dialtone tag's attribute soup, treating quoted attribute values as opaque so a
+// literal > inside one (e.g. :disabled="count > 0") doesn't truncate the match early.
+const DT_TAG_ATTRS = '(?:[^>"\']|"[^"]*"|\'[^\']*\')*';
+
+// Allowlist (not denylist) of what may immediately precede "gap": whitespace (bare gap=),
+// whitespace+":" (shorthand :gap=), or whitespace+"v-bind:" (long form). This rejects
+// data-gap, @gap, v-on:gap, v-model:gap, v-slot:gap, and any other directive namespace,
+// without having to enumerate every prefix that isn't the real gap prop/attribute.
+const GAP_ATTR_LEAD = '(?:(?<=\\s)|(?<=\\s:)|(?<=\\sv-bind:))';
+
 const MIGRATIONS = [
   // ── Required (breaking) ────────────────────────────────────────────
   {
@@ -162,9 +180,13 @@ const MIGRATIONS = [
     type: 'standalone',
     scriptDir: 'dialtone_migrate_props',
     detectPatterns: [
-      /(?:show|hide-close|hide-icon|label-visible|selected-values)(?:=|[\s>])/,
-      /<(?:dt-(?:banner|notice|toast|modal)|Dt(?:Banner|Notice|Toast|Modal))\b[^>]*\btitle(?:=|[\s>])/,
-      /<(?:dt-[\w-]+|Dt\w+)\b[^>]*@(?:input|change)(?:=|\.)/,
+      // (?<!-) blocks a hyphen immediately before the prop name — \b alone still matches
+      // there (- is a non-word char), which would treat native v-show as the show prop.
+      new RegExp(`<(?:dt-[\\w-]+|Dt\\w+)\\b${DT_TAG_ATTRS}\\b(?<!-)(?:show|hide-close|hide-icon|label-visible|selected-values)(?:=|[\\s>])`),
+      // (?<!-) blocks a hyphen immediately before "title" so data-title (and any other
+      // custom -title attribute) isn't mistaken for the title prop.
+      new RegExp(`<(?:dt-(?:banner|notice|toast|modal)|Dt(?:Banner|Notice|Toast|Modal))\\b${DT_TAG_ATTRS}\\b(?<!-)title(?:=|[\\s>])`),
+      new RegExp(`<(?:dt-[\\w-]+|Dt\\w+)\\b${DT_TAG_ATTRS}@(?:input|change)(?:=|\\.)`),
       /kind="(?:danger|error)"/,
       /validation-state="(?:error|success)"/,
     ],
@@ -242,9 +264,27 @@ const MIGRATIONS = [
     category: 'opt-in',
     type: 'config',
     configName: 'stack-gap-to-spacing',
+    // Old-only stops (never valid post-migration values) — always flagged as pending.
     detectPatterns: [
-      /gap="(?:50|100|200|300|350|400|450|500|525|550|600|625|650|700)"/,
-      /d-stack--gap-(?:50|100|200|300|350|400|450|500|525|550|600|625|650|700)/,
+      new RegExp(`${GAP_ATTR_LEAD}gap="(?:350|450|500|550|625|650|700)"`),
+      /d-stack--gap-(?:350|450|500|550|625|650|700)/,
+    ],
+    // Old and new gap scales share some numeric stops (e.g. "100"), so a bare match on
+    // these doesn't prove pending work. Only counted when the file has no new-scale-only
+    // marker (skipIfPatterns) — an unambiguous detectPatterns match elsewhere in the same
+    // (partially migrated) file is still flagged regardless.
+    ambiguousDetectPatterns: [
+      new RegExp(`${GAP_ATTR_LEAD}gap="(?:50|100|200|300|400|525|600)"`),
+      /d-stack--gap-(?:50|100|200|300|400|525|600)/,
+    ],
+    // Mirrors dialtone_migration_helper/configs/stack-gap-to-spacing.mjs's isAlreadyMigrated
+    // check: new-scale-only stops indicate the file was already migrated.
+    skipIfPatterns: [
+      new RegExp(`${GAP_ATTR_LEAD}gap="(?:25|75|150|250|525)"`),
+      new RegExp(`${GAP_ATTR_LEAD}gap='(?:25|75|150|250|525)'`),
+      new RegExp(`${GAP_ATTR_LEAD}gap="'(?:25|75|150|250|525)'"`),
+      /d-stack--gap-(?:25|75|150|250|525)/,
+      /d-description-list--gap-(?:25|75|150|250|525)/,
     ],
     fileExtensions: ['.vue', '.html', '.js', '.ts', '.jsx', '.tsx', '.md'],
   },
@@ -546,7 +586,14 @@ async function healthCheck (cwd) {
 
     for (const [file, content] of fileContents) {
       if (!migration.fileExtensions.some(ext => file.endsWith(ext))) continue;
-      for (const pattern of migration.detectPatterns) {
+
+      let patterns = migration.detectPatterns;
+      const alreadyMigrated = migration.skipIfPatterns?.some(pattern => pattern.test(content));
+      if (!alreadyMigrated && migration.ambiguousDetectPatterns) {
+        patterns = [...patterns, ...migration.ambiguousDetectPatterns];
+      }
+
+      for (const pattern of patterns) {
         // Reset lastIndex for global patterns
         const re = new RegExp(pattern.source, pattern.flags.replace('g', ''));
         if (re.test(content)) {
