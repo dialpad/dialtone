@@ -177,7 +177,9 @@ const MIGRATIONS = [
       // (?<!-) blocks a hyphen immediately before the prop name — \b alone still matches
       // there (- is a non-word char), which would treat native v-show as the show prop.
       new RegExp(`<(?:dt-[\\w-]+|Dt\\w+)\\b${DT_TAG_ATTRS}\\b(?<!-)(?:show|hide-close|hide-icon|label-visible|selected-values)(?:=|[\\s>])`),
-      new RegExp(`<(?:dt-(?:banner|notice|toast|modal)|Dt(?:Banner|Notice|Toast|Modal))\\b${DT_TAG_ATTRS}\\btitle(?:=|[\\s>])`),
+      // (?<!-) blocks a hyphen immediately before "title" so data-title (and any other
+      // custom -title attribute) isn't mistaken for the title prop.
+      new RegExp(`<(?:dt-(?:banner|notice|toast|modal)|Dt(?:Banner|Notice|Toast|Modal))\\b${DT_TAG_ATTRS}\\b(?<!-)title(?:=|[\\s>])`),
       new RegExp(`<(?:dt-[\\w-]+|Dt\\w+)\\b${DT_TAG_ATTRS}@(?:input|change)(?:=|\\.)`),
       /kind="(?:danger|error)"/,
       /validation-state="(?:error|success)"/,

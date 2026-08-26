@@ -115,9 +115,30 @@ describe('--health-check', () => {
     assert.match(output, /\[DONE\].*Component Props & Events \(component-props\)/);
   });
 
+  it('does not flag v-show on dt-button as component-props', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-button v-show="visible">Go</dt-button></template>',
+    });
+    assert.match(output, /\[DONE\].*Component Props & Events \(component-props\)/);
+  });
+
+  it('does not flag data-title or v-title on a Dialtone element as component-props', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-modal data-title="tooltip" v-title="x"></dt-modal></template>',
+    });
+    assert.match(output, /\[DONE\].*Component Props & Events \(component-props\)/);
+  });
+
   it('still flags show= on a Dialtone component as component-props', () => {
     const output = runHealthCheck({
       'App.vue': '<template><dt-modal show="isOpen"></dt-modal></template>',
+    });
+    assert.match(output, /\[PENDING\].*Component Props & Events \(component-props\)/);
+  });
+
+  it('still flags title= on a Dialtone component as component-props', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-modal title="isOpen"></dt-modal></template>',
     });
     assert.match(output, /\[PENDING\].*Component Props & Events \(component-props\)/);
   });
