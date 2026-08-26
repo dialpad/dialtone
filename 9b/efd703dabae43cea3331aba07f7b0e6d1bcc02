@@ -1,0 +1,19 @@
+packages/dialtone-vue/vite.config.js
+  s_84d670ab6252e6::t_c8dcf86fbf605c 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "9befd703dabae43cea3331aba07f7b0e6d1bcc02",
+  "prompts": {},
+  "sessions": {
+    "s_84d670ab6252e6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "20253a5e-95fe-4af2-9c52-518963a05832",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,14 @@
+apps/dialtone-documentation/docs/components/chip.md
+  h_c15b5755534093 21,26-28,32-34,37,64,78,93,99,103
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "52806f40f3d6ea5e944e60f9eb3f73a694f7a214",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

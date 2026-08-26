@@ -1,0 +1,21 @@
+apps/dialtone-documentation/scripts/visual-guide/scenes/token-disabled-states.vue
+  s_93aeca3805a6ee::t_dc536caed4d6ac 3-6,15-16
+apps/dialtone-documentation/docs/guides/migration/visual-changes/index.md
+  s_93aeca3805a6ee::t_adec196db1fd87 86
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "dd7f329edbf1061cc816aeade3e0d4673dc01100",
+  "prompts": {},
+  "sessions": {
+    "s_93aeca3805a6ee": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6eac0ba6-144f-46e1-9c25-fb0c29ab1e02",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

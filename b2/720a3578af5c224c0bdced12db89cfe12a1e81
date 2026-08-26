@@ -1,0 +1,24 @@
+packages/combinator/src/components/combinator.test.js
+  s_3e2c0f28cfe374::t_d99da88abb0569 5,8-11,42,53-54,58,62,65,78-79,94,97
+  s_3e2c0f28cfe374::t_61dc9a450d4e67 95
+  s_3e2c0f28cfe374::t_d5e7f078e11d4e 7,12,43-52,55-57,59-61,63-64,66-77,80-93,96,98-113
+packages/combinator/src/components/combinator.vue
+  s_3e2c0f28cfe374::t_5a54c89a6037dc 125
+  s_3e2c0f28cfe374::t_a6eff9f19243dc 358-374
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "b2720a3578af5c224c0bdced12db89cfe12a1e81",
+  "prompts": {},
+  "sessions": {
+    "s_3e2c0f28cfe374": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0394ab9d-28e6-4caa-bad8-31bff3bb09cf",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": null
+    }
+  }
+}

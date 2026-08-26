@@ -1,0 +1,20 @@
+packages/dialtone-vue/components/Popover/Popover.test.js
+  s_1b0723d23d701b::t_e0bc5a3934e178 538
+  s_1b0723d23d701b::t_5cf62fc6153ff7 459,478,499
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "e57e2270e93916049193c95746f51288515f4ba5",
+  "prompts": {},
+  "sessions": {
+    "s_1b0723d23d701b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9a319ef4-2b39-4342-8916-af92ca8f529a",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
