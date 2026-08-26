@@ -164,6 +164,20 @@ describe('--health-check', () => {
     assert.match(output, /\[PENDING\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
   });
 
+  it('does not flag an unrelated data-gap attribute for stack-gap-to-spacing', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><div data-gap="625"></div></template>',
+    });
+    assert.match(output, /\[DONE\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+
+  it('does not let an unrelated data-gap new-scale value suppress a real ambiguous pending gap', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><div data-gap="25"></div><dt-stack gap="100"></dt-stack></template>',
+    });
+    assert.match(output, /\[PENDING\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+
   it('does not flag gap="525" for stack-gap-to-spacing', () => {
     const output = runHealthCheck({
       'App.vue': '<template><dt-stack gap="525"></dt-stack></template>',

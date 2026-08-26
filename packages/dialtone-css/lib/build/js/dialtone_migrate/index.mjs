@@ -258,9 +258,11 @@ const MIGRATIONS = [
     category: 'opt-in',
     type: 'config',
     configName: 'stack-gap-to-spacing',
+    // (?<![\w-]) requires a non-word, non-hyphen boundary before "gap" (e.g. whitespace,
+    // quote, or a leading :), so unrelated attributes like data-gap aren't mistaken for it.
     // Old-only stops (never valid post-migration values) — always flagged as pending.
     detectPatterns: [
-      /gap="(?:350|450|500|550|625|650|700)"/,
+      /(?<![\w-])gap="(?:350|450|500|550|625|650|700)"/,
       /d-stack--gap-(?:350|450|500|550|625|650|700)/,
     ],
     // Old and new gap scales share some numeric stops (e.g. "100"), so a bare match on
@@ -268,15 +270,15 @@ const MIGRATIONS = [
     // marker (skipIfPatterns) — an unambiguous detectPatterns match elsewhere in the same
     // (partially migrated) file is still flagged regardless.
     ambiguousDetectPatterns: [
-      /gap="(?:50|100|200|300|400|525|600)"/,
+      /(?<![\w-])gap="(?:50|100|200|300|400|525|600)"/,
       /d-stack--gap-(?:50|100|200|300|400|525|600)/,
     ],
     // Mirrors dialtone_migration_helper/configs/stack-gap-to-spacing.mjs's isAlreadyMigrated
     // check: new-scale-only stops indicate the file was already migrated.
     skipIfPatterns: [
-      /gap="(?:25|75|150|250|525)"/,
-      /gap='(?:25|75|150|250|525)'/,
-      /gap="'(?:25|75|150|250|525)'"/,
+      /(?<![\w-])gap="(?:25|75|150|250|525)"/,
+      /(?<![\w-])gap='(?:25|75|150|250|525)'/,
+      /(?<![\w-])gap="'(?:25|75|150|250|525)'"/,
       /d-stack--gap-(?:25|75|150|250|525)/,
       /d-description-list--gap-(?:25|75|150|250|525)/,
     ],
