@@ -70,6 +70,10 @@ A slider is appropriate when the exact value is less important than the relative
 
 ### With ticks
 
+`tickInterval` is independent of `step` — ticks are purely a visual overlay along the track and don't constrain where the thumb can actually stop. The two often match, but they don't have to.
+
+When `tickInterval` equals `step`, every value the thumb can land on gets its own tick:
+
 ```vue demo
 <dt-slider
   :model-value="7"
@@ -78,6 +82,20 @@ A slider is appropriate when the exact value is less important than the relative
   :max="10"
   :step="1"
   :tick-interval="1"
+  show-ticks
+/>
+```
+
+When they differ, ticks become checkpoints along a finer scale rather than a mark for every stop — the thumb still moves by `step`, ticks just call out the notable positions:
+
+```vue demo
+<dt-slider
+  :model-value="42"
+  label="Volume"
+  :min="0"
+  :max="100"
+  :step="1"
+  :tick-interval="25"
   show-ticks
 />
 ```
@@ -105,11 +123,35 @@ Pass an array of numbers to label positions automatically:
 </dt-slider>
 ```
 
-Pass `{ value, text }` objects for custom label text, or combine with ticks for fully annotated steps:
+Pass `{ value, text }` objects when the label at a position isn't just the number itself — `value` still positions the mark on the track, but `text` can be any string:
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack gap="300">
+<dt-stack gap="300" class="d-w100p">
+  <dt-slider
+    :model-value="2"
+    label="Noise cancellation"
+    :min="0"
+    :max="4"
+    :step="1"
+    :marks="[{ value: 0, text: 'Off' }, { value: 1, text: 'Low' }, { value: 2, text: 'Medium' }, { value: 3, text: 'High' }, { value: 4, text: 'Max' }]"
+  />
+  <dt-slider
+    :model-value="45"
+    label="Trial length"
+    :min="0"
+    :max="90"
+    :step="1"
+    :marks="[{ value: 0, text: 'No trial' }, { value: 30, text: '30 days' }, { value: 60, text: '60 days' }, { value: 90, text: '90 days' }]"
+  />
+</dt-stack>
+```
+
+Combine marks with ticks for fully annotated steps — the two are independent, so a mark doesn't need a tick at the same position and vice versa:
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="300" class="d-w100p">
   <dt-slider
     :model-value="0"
     label="Balance"
@@ -134,10 +176,18 @@ Pass `{ value, text }` objects for custom label text, or combine with ticks for 
 
 ### Value tooltip
 
-Enable `show-tooltip` to display a floating label above each thumb showing its current value. Useful when the track context alone isn't enough to communicate the exact value.
+Set `tooltip` to display a floating label above each thumb showing its current value. Useful when the track context alone isn't enough to communicate the exact value.
+
+- `always` — the tooltip is always visible.
+- `never` (default) — no tooltip.
+- `interaction` — the tooltip appears only while that thumb is hovered, dragged, or focused.
 
 ```vue demo
-<dt-slider :model-value="48" label="Volume" show-tooltip />
+<!-- @wrapper -->
+<dt-stack gap="300" class="d-w100p">
+  <dt-slider :model-value="48" label="Volume" tooltip="always" />
+  <dt-slider :model-value="48" label="Volume" tooltip="interaction" />
+</dt-stack>
 ```
 
 ### Inverted fill direction
@@ -152,7 +202,7 @@ Set `fill-origin` to a value within `[min, max]` and the indicator grows outward
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack gap="300">
+<dt-stack gap="300" class="d-w100p">
   <dt-slider :model-value="65" label="Audio pan" :fill-origin="50" />
   <dt-slider
     :model-value="20"
@@ -169,7 +219,7 @@ Set `fill-origin` to a value within `[min, max]` and the indicator grows outward
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack gap="300">
+<dt-stack gap="300" class="d-w100p">
   <dt-slider :model-value="30" label="Volume (disabled)" disabled />
   <dt-slider :model-value="[20, 80]" label="Price range (disabled)" disabled />
 </dt-stack>
@@ -205,7 +255,7 @@ Use `label-hidden` when you have a visually obvious context but still need acces
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack gap="300">
+<dt-stack gap="300" class="d-w100p">
   <dt-slider :model-value="50" label="Extra small (100)" :size="100" />
   <dt-slider :model-value="50" label="Small (200)" :size="200" />
   <dt-slider :model-value="50" label="Medium / default (300)" :size="300" />
