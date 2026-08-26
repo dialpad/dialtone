@@ -19,9 +19,15 @@
       :class="['d-slider__label', { 'sr-only': labelHidden }, labelClass]"
       data-qa="dt-slider-label"
     >
-      <!-- @slot Slot for the label, defaults to the label prop.
-           Required for accessibility; use labelHidden to hide it visually. -->
-      <slot name="label">
+      <!-- @slot Slot for the label, defaults to the label prop. Scoped with
+           :value (Number, or Number[] in range mode) — the live value(s),
+           updating as the thumb is dragged — for labels that echo the
+           current value. Required for accessibility; use labelHidden to
+           hide it visually. -->
+      <slot
+        name="label"
+        :value="currentValue"
+      >
         <dt-text
           v-if="label"
           kind="label"
@@ -88,14 +94,16 @@
           class="d-slider__thumb-hit"
           :style="{ ...thumbPositionStyle(val), touchAction: isVertical ? 'pan-x' : 'pan-y' }"
           data-qa="dt-slider-thumb-hit"
+          @pointerenter="onThumbHitPointerEnter(i)"
+          @pointerleave="onThumbHitPointerLeave(i)"
         />
-        <template v-if="showTooltip && thumbHitRefsReady">
+        <template v-if="tooltip !== 'never' && thumbHitRefsReady">
           <dt-tooltip
             v-for="(val, i) in internalValues"
             :key="`thumb-tooltip-${i}`"
             :external-anchor-element="thumbHitRefs[i]"
             :message="getAriaValueText ? getAriaValueText(val, i) : String(val)"
-            :open="true"
+            :open="isTooltipOpen(i)"
             :placement="isRange ? (i === 0 ? 'left' : 'right') : 'top'"
             :fallback-placements="isRange ? (i === 0 ? ['top', 'right'] : ['top', 'left']) : ['bottom']"
           />
@@ -152,6 +160,7 @@ import { getUniqueString } from '@/common/utils';
 import {
   SLIDER_ORIENTATIONS,
   SLIDER_SIZE_MODIFIERS,
+  SLIDER_TOOLTIP_MODES,
   SLIDER_DEFAULT_LARGE_STEP,
 } from './SliderConstants';
 
@@ -336,13 +345,15 @@ const props = defineProps({
   },
 
   /**
-   * When true, shows a tooltip above (aka on top of) each thumb displaying its current value.
+   * Controls the value tooltip shown above (aka on top of) each thumb: always visible,
+   * never shown, or shown only while hovering, dragging, or focusing that thumb.
    * Uses getAriaValueText for the label when provided, otherwise falls back to the raw number.
-   * @values true, false
+   * @values always, never, interaction
    */
-  showTooltip: {
-    type: Boolean,
-    default: false,
+  tooltip: {
+    type: String,
+    default: 'never',
+    validator: (v) => SLIDER_TOOLTIP_MODES.includes(v),
   },
 
   /**
@@ -397,6 +408,7 @@ const thumbRefs = ref([]);
 const isDragging = ref(false);
 const activeThumbIndex = ref(null);
 const focusedThumbIndex = ref(null);
+const hoveredThumbIndex = ref(null);
 const thumbHitRefs = ref([]);
 const thumbHitRefsReady = ref(false);
 
@@ -406,9 +418,19 @@ function setThumbHitRef (el, i) {
 
 const isRange = computed(() => Array.isArray(props.modelValue));
 
+// The low thumb's value can never exceed the high thumb's — swap rather than
+// clamp so an inverted pair (e.g. a consumer-supplied [70, 30]) still keeps
+// its intended width instead of collapsing to a single point.
+function normalizeRangeValues(values) {
+  if (values.length === 2 && values[0] > values[1]) {
+    return [values[1], values[0]];
+  }
+  return values;
+}
+
 const internalValues = ref(
   Array.isArray(props.modelValue)
-    ? [...props.modelValue]
+    ? normalizeRangeValues([...props.modelValue])
     : props.modelValue !== undefined
       ? [props.modelValue]
       : [props.min],
@@ -419,13 +441,17 @@ const lastCommittedValues = ref([...internalValues.value]);
 const isVertical = computed(() => props.orientation === 'vertical');
 const sizeClass = computed(() => SLIDER_SIZE_MODIFIERS[String(props.size)] ?? '');
 
+// Mirrors the update:modelValue payload shape (Number, or Number[] in range
+// mode) so a custom #label slot can render the live value while dragging.
+const currentValue = computed(() => (isRange.value ? [...internalValues.value] : internalValues.value[0]));
+
 // ─── Sync controlled modelValue → internalValues ──────────────────────────────
 
 watch(
   () => props.modelValue,
   (newVal) => {
     if (newVal === undefined || newVal === null) return;
-    const next = Array.isArray(newVal) ? [...newVal] : [newVal];
+    const next = Array.isArray(newVal) ? normalizeRangeValues([...newVal]) : [newVal];
     const current = internalValues.value;
     if (next.length !== current.length || next.some((v, i) => v !== current[i])) {
       internalValues.value = next;
@@ -535,7 +561,10 @@ function updateThumbValue(thumbIndex, newVal) {
 
   const next = [...internalValues.value];
 
-  if (isRange.value && props.minStepsBetweenValues > 0) {
+  if (isRange.value) {
+    // The low thumb can never pass the high thumb (and vice versa) — they
+    // may only meet. minStepsBetweenValues, when set, widens this into a
+    // larger required gap instead of a bare touch.
     const gap = props.minStepsBetweenValues * props.step;
     if (thumbIndex === 0) {
       clamped = Math.min(clamped, (next[1] ?? props.max) - gap);
@@ -605,6 +634,16 @@ function onPointerDown(event) {
 
 function onPointerMove(event) {
   if (!isDragging.value || activeThumbIndex.value === null) return;
+
+  // The primary button can be released outside this document (e.g. over a
+  // parent frame, or outside the OS window) without a pointerup ever
+  // reaching us, leaving isDragging stuck true. event.buttons reflects the
+  // actual current button state, so this self-heals on the next move.
+  if (event.buttons === 0) {
+    onPointerUp();
+    return;
+  }
+
   updateThumbValue(activeThumbIndex.value, getValueFromPointerEvent(event));
 }
 
@@ -643,6 +682,19 @@ function onThumbBlur(i, event) {
   focusedThumbIndex.value = null;
   commitIfChanged();
   emit('blur', event);
+}
+
+function onThumbHitPointerEnter(i) {
+  hoveredThumbIndex.value = i;
+}
+
+function onThumbHitPointerLeave(i) {
+  if (hoveredThumbIndex.value === i) hoveredThumbIndex.value = null;
+}
+
+function isTooltipOpen(i) {
+  if (props.tooltip === 'always') return true;
+  return activeThumbIndex.value === i || focusedThumbIndex.value === i || hoveredThumbIndex.value === i;
 }
 
 // ─── Dev warnings ─────────────────────────────────────────────────────────────

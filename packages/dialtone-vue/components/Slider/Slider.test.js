@@ -1,5 +1,7 @@
+import { h, nextTick } from 'vue';
 import { mount } from '@vue/test-utils';
 import DtSlider from './Slider.vue';
+import { DtTooltip } from '@/components/Tooltip';
 
 const baseProps = {
   label: 'Volume',
@@ -26,6 +28,10 @@ describe('DtSlider Tests', () => {
       props: { ...baseProps, ...mockProps },
       attrs: { ...baseAttrs, ...mockAttrs },
       slots: { ...baseSlots, ...mockSlots },
+      // DtTooltip's real mounted() hook drives tippy.js, which relies on
+      // layout APIs jsdom doesn't implement. Stub it so the open prop is
+      // still observable without instantiating the real tooltip engine.
+      global: { stubs: { DtTooltip: true } },
     });
 
     root = wrapper.find('[data-qa="dt-slider"]');
@@ -149,6 +155,48 @@ describe('DtSlider Tests', () => {
       });
     });
 
+    describe('Tooltip', () => {
+      it('renders no tooltip by default (never)', async () => {
+        await nextTick();
+        expect(wrapper.findComponent(DtTooltip).exists()).toBe(false);
+      });
+
+      it('renders an always-open tooltip when tooltip is "always"', async () => {
+        mockProps = { tooltip: 'always' };
+        updateWrapper();
+        await nextTick();
+        const tooltip = wrapper.findComponent(DtTooltip);
+        expect(tooltip.exists()).toBe(true);
+        expect(tooltip.props('open')).toBe(true);
+      });
+
+      it('keeps the tooltip closed at rest when tooltip is "interaction"', async () => {
+        mockProps = { tooltip: 'interaction' };
+        updateWrapper();
+        await nextTick();
+        expect(wrapper.findComponent(DtTooltip).props('open')).toBe(false);
+      });
+
+      it('opens the tooltip while the thumb is focused when tooltip is "interaction"', async () => {
+        mockProps = { tooltip: 'interaction' };
+        updateWrapper();
+        await nextTick();
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        await thumbInputs[0].trigger('focus');
+        expect(wrapper.findComponent(DtTooltip).props('open')).toBe(true);
+      });
+
+      it('closes the tooltip again once the thumb blurs when tooltip is "interaction"', async () => {
+        mockProps = { tooltip: 'interaction' };
+        updateWrapper();
+        await nextTick();
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        await thumbInputs[0].trigger('focus');
+        await thumbInputs[0].trigger('blur');
+        expect(wrapper.findComponent(DtTooltip).props('open')).toBe(false);
+      });
+    });
+
     describe('When labelHidden is true', () => {
       beforeEach(() => {
         mockProps = { labelHidden: true };
@@ -200,6 +248,28 @@ describe('DtSlider Tests', () => {
         mockSlots = { label: '<span data-testid="custom-label">Custom</span>' };
         updateWrapper();
         expect(label.find('[data-testid="custom-label"]').exists()).toBe(true);
+      });
+
+      it('exposes the live value via the label slot scope, updating as the thumb moves', async () => {
+        mockSlots = {
+          label: (scope) => h('span', { 'data-testid': 'live-label' }, String(scope.value)),
+        };
+        updateWrapper();
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        expect(label.find('[data-testid="live-label"]').text()).toBe('50');
+
+        thumbInputs[0].element.value = '75';
+        await thumbInputs[0].trigger('input');
+        expect(label.find('[data-testid="live-label"]').text()).toBe('75');
+      });
+
+      it('exposes the value as an array via the label slot scope in range mode', () => {
+        mockProps = { modelValue: [20, 70] };
+        mockSlots = {
+          label: (scope) => h('span', { 'data-testid': 'live-label' }, scope.value.join('-')),
+        };
+        updateWrapper();
+        expect(label.find('[data-testid="live-label"]').text()).toBe('20-70');
       });
     });
 
@@ -294,6 +364,46 @@ describe('DtSlider Tests', () => {
       expect(wrapper.emitted('blur')).toBeTruthy();
     });
 
+    describe('Pointer drag', () => {
+      let control;
+
+      beforeEach(() => {
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        // jsdom does not implement the Pointer Capture API.
+        control.element.setPointerCapture = () => {};
+      });
+
+      it('adds the active class to the thumb on pointerdown', async () => {
+        await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 0, buttons: 1 });
+        thumbVisuals = wrapper.findAll('[data-qa="dt-slider-thumb-visual"]');
+        expect(thumbVisuals[0].classes()).toContain('d-slider__thumb-visual--active');
+      });
+
+      it('removes the active class on pointerup', async () => {
+        await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 0, buttons: 1 });
+        await control.trigger('pointerup', { pointerId: 1 });
+        thumbVisuals = wrapper.findAll('[data-qa="dt-slider-thumb-visual"]');
+        expect(thumbVisuals[0].classes()).not.toContain('d-slider__thumb-visual--active');
+      });
+
+      it('keeps dragging while a pointermove still reports the button held', async () => {
+        await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 0, buttons: 1 });
+        await control.trigger('pointermove', { pointerId: 1, clientX: 10, buttons: 1 });
+        thumbVisuals = wrapper.findAll('[data-qa="dt-slider-thumb-visual"]');
+        expect(thumbVisuals[0].classes()).toContain('d-slider__thumb-visual--active');
+      });
+
+      it('stops dragging when a pointermove reports the button released, even without a matching pointerup', async () => {
+        // Simulates the button being released outside this document (e.g. a
+        // parent frame, or outside the OS window), where no pointerup ever
+        // reaches us.
+        await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 0, buttons: 1 });
+        await control.trigger('pointermove', { pointerId: 1, clientX: 10, buttons: 0 });
+        thumbVisuals = wrapper.findAll('[data-qa="dt-slider-thumb-visual"]');
+        expect(thumbVisuals[0].classes()).not.toContain('d-slider__thumb-visual--active');
+      });
+    });
+
     describe('Keyboard: PageUp / PageDown', () => {
       it('increases value by largeStep on PageUp', async () => {
         await thumbInputs[0].trigger('keydown', { key: 'PageUp' });
@@ -324,6 +434,67 @@ describe('DtSlider Tests', () => {
         const emitted = wrapper.emitted('update:modelValue');
         // Should be clamped to 50 (60 - 10*1)
         expect(emitted[emitted.length - 1][0][0]).toBe(50);
+      });
+    });
+
+    describe('Range: thumbs cannot cross (no minStepsBetweenValues set)', () => {
+      beforeEach(() => {
+        mockProps = { modelValue: [40, 60] };
+        updateWrapper();
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      });
+
+      it('stops the lower thumb at the upper thumb\'s value instead of crossing it', async () => {
+        thumbInputs[0].element.value = '90';
+        await thumbInputs[0].trigger('input');
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toEqual([60, 60]);
+      });
+
+      it('stops the upper thumb at the lower thumb\'s value instead of crossing it', async () => {
+        thumbInputs[1].element.value = '10';
+        await thumbInputs[1].trigger('input');
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toEqual([40, 40]);
+      });
+
+      it('lets the two thumbs meet exactly (equal values are allowed)', async () => {
+        thumbInputs[0].element.value = '60';
+        await thumbInputs[0].trigger('input');
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toEqual([60, 60]);
+      });
+
+      it('enforces the same constraint via PageUp/PageDown (largeStep)', async () => {
+        // Lower thumb PageUp by the default largeStep (10) from 40 would reach 50 — fine —
+        // but repeated presses should still stop it at the upper thumb's value.
+        await thumbInputs[0].trigger('keydown', { key: 'PageUp' });
+        await thumbInputs[0].trigger('keydown', { key: 'PageUp' });
+        await thumbInputs[0].trigger('keydown', { key: 'PageUp' });
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toEqual([60, 60]);
+      });
+    });
+
+    describe('Range: an inverted modelValue is normalized, not left crossed', () => {
+      it('swaps an inverted initial modelValue on mount', () => {
+        mockProps = { modelValue: [70, 30] };
+        updateWrapper();
+        expect(wrapper.props('modelValue')).toEqual([70, 30]); // prop itself is untouched
+        thumbVisuals = wrapper.findAll('[data-qa="dt-slider-thumb-visual"]');
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        // internal rendering is swapped to [30, 70] so low <= high internally
+        expect(Number(thumbInputs[0].element.value)).toBe(30);
+        expect(Number(thumbInputs[1].element.value)).toBe(70);
+      });
+
+      it('swaps an inverted modelValue pushed in later via prop update', async () => {
+        mockProps = { modelValue: [20, 80] };
+        updateWrapper();
+        await wrapper.setProps({ modelValue: [90, 10] });
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        expect(Number(thumbInputs[0].element.value)).toBe(10);
+        expect(Number(thumbInputs[1].element.value)).toBe(90);
       });
     });
   });

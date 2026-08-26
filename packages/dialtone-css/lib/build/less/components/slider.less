@@ -26,15 +26,13 @@
 .d-slider {
     //  Component CSS vars — override these for size/state modifiers
     --slider-track-height: var(--dt-size-border-300);         // 4px
-    --slider-track-color: var(--dt-color-surface-strong);
-    --slider-indicator-color: var(--dt-color-brand-purple);
+    --slider-track-color: var(--dt-color-black-250);
+    --slider-indicator-color: var(--dt-color-purple-500);
     --slider-thumb-size: var(--dt-spacing-350);               // 28px — controls control area + hit target
-    --slider-thumb-visual-size: calc(var(--slider-thumb-size) * 0.8); // 20% smaller than the hit target
+    --slider-thumb-visual-size: calc(var(--slider-thumb-size) * 0.65); // 35% smaller than the hit target
     --slider-thumb-color: var(--dt-color-surface-primary);
-    --slider-thumb-border-color: var(--dt-color-border-subtle);
+    --slider-thumb-border-color: var(--dt-color-black-350);
     --slider-thumb-border-width: var(--dt-size-border-100);
-    --slider-thumb-dot-color: var(--dt-color-brand-purple);
-    --slider-thumb-dot-size: 35%;
     --slider-thumb-shadow: var(--dt-shadow-small);
     --slider-focus-shadow: var(--dt-shadow-focus);
     --slider-disabled-track-color: var(--dt-inputs-color-background-disabled);
@@ -42,6 +40,7 @@
     --slider-disabled-thumb-color: var(--dt-inputs-color-foreground-disabled);
     --slider-disabled-border-color: var(--dt-inputs-color-border-disabled);
     --slider-tick-color: var(--dt-color-border-bold);
+    --slider-tick-width: calc(var(--dt-size-border-100) * 1.5); // 1.5px
     --slider-boundary-color: var(--dt-color-foreground-tertiary);
     --slider-track-length: var(--dt-layout-300);               // 192px — used as block-size in vertical mode
 
@@ -114,7 +113,7 @@
     pointer-events: none;
 
     @media (prefers-reduced-motion: no-preference) {
-        transition: width 0.1s ease, left 0.1s ease, right 0.1s ease;
+        transition: width 0.1s ease, left 0.1s ease, right 0.1s ease, background-color 0.1s ease;
     }
 }
 
@@ -123,12 +122,7 @@
 .d-slider__thumb-visual {
     position: absolute;
     z-index: 1;
-    background: radial-gradient(
-        circle at center,
-        var(--slider-thumb-dot-color) 0%,
-        var(--slider-thumb-dot-color) var(--slider-thumb-dot-size),
-        var(--slider-thumb-color) var(--slider-thumb-dot-size)
-    );
+    background-color: var(--slider-thumb-color);
     border: var(--slider-thumb-border-width) solid var(--slider-thumb-border-color);
     border-radius: 50%;
     box-shadow: var(--slider-thumb-shadow);
@@ -138,12 +132,25 @@
     inset-block-start: 50%;
 
     @media (prefers-reduced-motion: no-preference) {
-        transition: box-shadow 0.1s ease;
+        transition: box-shadow 0.15s ease, inline-size 0.15s ease, block-size 0.15s ease;
     }
 }
 
 .d-slider__thumb-visual--focused {
     box-shadow: var(--slider-thumb-shadow), var(--slider-focus-shadow);
+}
+
+//  $$  ACTIVE (grabbed/dragging) STATE
+//  Lifts the thumb slightly, as if picked up off the track.
+//  ----------------------------------------------------------------------------
+.d-slider__thumb-visual--active {
+    inline-size: calc(var(--slider-thumb-visual-size) * 1.2);
+    block-size: calc(var(--slider-thumb-visual-size) * 1.2);
+    box-shadow: var(--dt-shadow-medium);
+}
+
+.d-slider__thumb-visual--active.d-slider__thumb-visual--focused {
+    box-shadow: var(--dt-shadow-medium), var(--slider-focus-shadow);
 }
 
 //  $$  THUMB HIT AREA (min 44×44px transparent touch target per thumb)
@@ -189,7 +196,7 @@
 //  ----------------------------------------------------------------------------
 .d-slider__tick {
     position: absolute;
-    inline-size: var(--dt-size-border-200);
+    inline-size: var(--slider-tick-width);
     block-size: var(--dt-spacing-50);
     background-color: var(--slider-tick-color);
     inset-block-start: 50%;
@@ -237,7 +244,6 @@
 
     .d-slider__thumb-visual {
         --slider-thumb-color: var(--dt-inputs-color-background-disabled);
-        --slider-thumb-dot-color: var(--slider-disabled-thumb-color);
 
         border-color: var(--slider-disabled-border-color);
     }
@@ -249,25 +255,45 @@
 // .d-slider--inverted {}
 
 //  $$  SIZES
+//  Thumb size steps linearly in 10px increments across xs–xl (8, 18, 28,
+//  38, 48px — md/28px is the unmodified root default). sm and lg fall
+//  between named spacing tokens, so they're expressed directly off
+//  --dt-spacing-base rather than snapping to an off-ramp token.
+//  Tick width steps linearly too, in 0.25px increments (1, 1.25, 1.5,
+//  1.75, 2px) — md/1.5px is slightly narrower than the old flat 2px.
+//  Thumb border width scales in 3 tiers rather than 5 linear steps:
+//  browsers snap `border-width` used values to the nearest device pixel
+//  (e.g. 0.5px increments at 2x DPR), so a 0.25px cadence like tick-width's
+//  collapses adjacent sizes into identical rendered borders. xs/sm share a
+//  thinner border, lg/xl share a thicker one, md/1px is the unmodified
+//  root default — every tier still renders as a distinct, non-zero width.
 //  ----------------------------------------------------------------------------
 .d-slider--xs {
     --slider-track-height: var(--dt-size-border-200);
-    --slider-thumb-size: var(--dt-spacing-150);
+    --slider-thumb-size: var(--dt-spacing-100); // 8px
+    --slider-tick-width: var(--dt-size-border-100); // 1px
+    --slider-thumb-border-width: calc(var(--dt-size-border-100) * 0.5); // 0.5px
 }
 
 .d-slider--sm {
     --slider-track-height: var(--dt-size-border-200);
-    --slider-thumb-size: var(--dt-spacing-175);
+    --slider-thumb-size: calc(var(--dt-spacing-base) * 2.25); // 18px
+    --slider-tick-width: calc(var(--dt-size-border-100) * 1.25); // 1.25px
+    --slider-thumb-border-width: calc(var(--dt-size-border-100) * 0.5); // 0.5px
 }
 
 .d-slider--lg {
     --slider-track-height: var(--dt-size-border-400);
-    --slider-thumb-size: var(--dt-spacing-700);
+    --slider-thumb-size: calc(var(--dt-spacing-base) * 4.75); // 38px
+    --slider-tick-width: calc(var(--dt-size-border-100) * 1.75); // 1.75px
+    --slider-thumb-border-width: calc(var(--dt-size-border-100) * 1.5); // 1.5px
 }
 
 .d-slider--xl {
     --slider-track-height: var(--dt-size-border-400);
-    --slider-thumb-size: var(--dt-spacing-700);
+    --slider-thumb-size: var(--dt-spacing-600); // 48px
+    --slider-tick-width: var(--dt-size-border-200); // 2px
+    --slider-thumb-border-width: calc(var(--dt-size-border-100) * 1.5); // 1.5px
 }
 
 //  $$  VERTICAL ORIENTATION
@@ -307,7 +333,7 @@
         inset-inline-start: 50%;
         inset-block-start: unset;
         transform: translateX(-50%);
-        transition: height 0.1s ease, bottom 0.1s ease, top 0.1s ease;
+        transition: height 0.1s ease, bottom 0.1s ease, top 0.1s ease, background-color 0.1s ease;
     }
 
     .d-slider__thumb-visual {

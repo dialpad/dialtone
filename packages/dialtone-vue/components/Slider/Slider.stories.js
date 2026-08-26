@@ -1,7 +1,7 @@
 import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtSlider from './Slider.vue';
-import { SLIDER_SIZE_MODIFIERS, SLIDER_ORIENTATIONS } from './SliderConstants';
+import { SLIDER_SIZE_MODIFIERS, SLIDER_ORIENTATIONS, SLIDER_TOOLTIP_MODES } from './SliderConstants';
 
 import SliderDefaultTemplate from './SliderDefault.story.vue';
 import SliderVariantsTemplate from './SliderVariants.story.vue';
@@ -15,8 +15,8 @@ export const argsData = {
   disabled: false,
   orientation: 'horizontal',
   inverted: false,
-  showTicks: false,
-  tickInterval: null,
+  showTicks: true,
+  tickInterval: 10,
   minStepsBetweenValues: 0,
   size: 300,
   label: 'Slider label',
@@ -25,6 +25,7 @@ export const argsData = {
   largeStep: 10,
   marks: false,
   fillOrigin: null,
+  tooltip: 'never',
   'onUpdate:modelValue': action('update:modelValue'),
   onChange: action('change'),
   onFocus: action('focus'),
@@ -128,6 +129,16 @@ export const argTypesData = {
       category: 'props',
       type: { summary: 'Number' },
       defaultValue: { summary: 'null' },
+    },
+  },
+  tooltip: {
+    description: 'Controls the value tooltip: always visible, never shown, or shown only while hovering, dragging, or focusing that thumb.',
+    control: { type: 'select' },
+    options: SLIDER_TOOLTIP_MODES,
+    table: {
+      category: 'props',
+      type: { summary: 'String' },
+      defaultValue: { summary: 'never' },
     },
   },
   showTicks: {
