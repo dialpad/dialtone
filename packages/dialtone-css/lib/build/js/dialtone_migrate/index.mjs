@@ -73,10 +73,11 @@ const __dirname = path.dirname(__filename);
 // literal > inside one (e.g. :disabled="count > 0") doesn't truncate the match early.
 const DT_TAG_ATTRS = '(?:[^>"\']|"[^"]*"|\'[^\']*\')*';
 
-// Requires a real attribute-name boundary before "gap": blocks a word char or hyphen
-// (data-gap), an event-listener "@" (@gap), and a trailing "on:" from v-on:gap — but still
-// allows a bare gap=, a bound :gap=, or v-bind:gap= (neither ends in "on:" or starts with @).
-const GAP_ATTR_BOUNDARY = '(?<!@)(?<!on:)(?<![\\w-])';
+// Allowlist (not denylist) of what may immediately precede "gap": whitespace (bare gap=),
+// whitespace+":" (shorthand :gap=), or whitespace+"v-bind:" (long form). This rejects
+// data-gap, @gap, v-on:gap, v-model:gap, v-slot:gap, and any other directive namespace,
+// without having to enumerate every prefix that isn't the real gap prop/attribute.
+const GAP_ATTR_LEAD = '(?:(?<=\\s)|(?<=\\s:)|(?<=\\sv-bind:))';
 
 const MIGRATIONS = [
   // ── Required (breaking) ────────────────────────────────────────────
@@ -265,7 +266,7 @@ const MIGRATIONS = [
     configName: 'stack-gap-to-spacing',
     // Old-only stops (never valid post-migration values) — always flagged as pending.
     detectPatterns: [
-      new RegExp(`${GAP_ATTR_BOUNDARY}gap="(?:350|450|500|550|625|650|700)"`),
+      new RegExp(`${GAP_ATTR_LEAD}gap="(?:350|450|500|550|625|650|700)"`),
       /d-stack--gap-(?:350|450|500|550|625|650|700)/,
     ],
     // Old and new gap scales share some numeric stops (e.g. "100"), so a bare match on
@@ -273,15 +274,15 @@ const MIGRATIONS = [
     // marker (skipIfPatterns) — an unambiguous detectPatterns match elsewhere in the same
     // (partially migrated) file is still flagged regardless.
     ambiguousDetectPatterns: [
-      new RegExp(`${GAP_ATTR_BOUNDARY}gap="(?:50|100|200|300|400|525|600)"`),
+      new RegExp(`${GAP_ATTR_LEAD}gap="(?:50|100|200|300|400|525|600)"`),
       /d-stack--gap-(?:50|100|200|300|400|525|600)/,
     ],
     // Mirrors dialtone_migration_helper/configs/stack-gap-to-spacing.mjs's isAlreadyMigrated
     // check: new-scale-only stops indicate the file was already migrated.
     skipIfPatterns: [
-      new RegExp(`${GAP_ATTR_BOUNDARY}gap="(?:25|75|150|250|525)"`),
-      new RegExp(`${GAP_ATTR_BOUNDARY}gap='(?:25|75|150|250|525)'`),
-      new RegExp(`${GAP_ATTR_BOUNDARY}gap="'(?:25|75|150|250|525)'"`),
+      new RegExp(`${GAP_ATTR_LEAD}gap="(?:25|75|150|250|525)"`),
+      new RegExp(`${GAP_ATTR_LEAD}gap='(?:25|75|150|250|525)'`),
+      new RegExp(`${GAP_ATTR_LEAD}gap="'(?:25|75|150|250|525)'"`),
       /d-stack--gap-(?:25|75|150|250|525)/,
       /d-description-list--gap-(?:25|75|150|250|525)/,
     ],

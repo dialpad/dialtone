@@ -199,6 +199,13 @@ describe('--health-check', () => {
     assert.match(output, /\[PENDING\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
   });
 
+  it('does not flag v-model:gap and still detects a real ambiguous gap alongside it', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-stack v-model:gap="someRef"></dt-stack><dt-stack gap="100"></dt-stack></template>',
+    });
+    assert.match(output, /\[PENDING\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+
   it('does not flag gap="525" for stack-gap-to-spacing', () => {
     const output = runHealthCheck({
       'App.vue': '<template><dt-stack gap="525"></dt-stack></template>',
