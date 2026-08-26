@@ -56,10 +56,15 @@ const __dirname = path.dirname(__filename);
  * @property {string} [scriptDir]  - Directory name for standalone scripts
  * @property {boolean} [supportsPackageArg] - Forward --package to this standalone script
  * @property {string[]} [extraArgs] - Extra CLI args to forward
- * @property {RegExp[]} detectPatterns - Patterns that indicate migration is still needed
- * @property {RegExp[]} [skipIfPatterns] - If any of these match a file, skip detectPatterns
- *   for that file — used when detectPatterns values are ambiguous with the post-migration
- *   scale and a new-scale-only marker means the file has already been migrated.
+ * @property {RegExp[]} detectPatterns - Patterns that unambiguously indicate migration is
+ *   still needed. Always evaluated, regardless of skipIfPatterns.
+ * @property {RegExp[]} [ambiguousDetectPatterns] - Patterns that overlap with valid
+ *   post-migration values. Only evaluated when skipIfPatterns does not match, so a file
+ *   already containing a new-scale-only marker isn't flagged on these alone — but an
+ *   unambiguous detectPatterns match elsewhere in the same (partially migrated) file
+ *   still counts.
+ * @property {RegExp[]} [skipIfPatterns] - New-scale-only markers that gate
+ *   ambiguousDetectPatterns — their presence means the file has already been migrated.
  * @property {string[]} fileExtensions - File extensions to scan during health check
  */
 
@@ -245,13 +250,21 @@ const MIGRATIONS = [
     category: 'opt-in',
     type: 'config',
     configName: 'stack-gap-to-spacing',
+    // Old-only stops (never valid post-migration values) — always flagged as pending.
     detectPatterns: [
-      /gap="(?:50|100|200|300|350|400|450|500|525|550|600|625|650|700)"/,
-      /d-stack--gap-(?:50|100|200|300|350|400|450|500|525|550|600|625|650|700)/,
+      /gap="(?:350|450|500|550|625|650|700)"/,
+      /d-stack--gap-(?:350|450|500|550|625|650|700)/,
     ],
-    // Old and new gap scales share numeric stops (e.g. "100"), so a bare match doesn't
-    // prove pending work. Mirrors dialtone_migration_helper/configs/stack-gap-to-spacing.mjs's
-    // isAlreadyMigrated check: new-scale-only stops indicate the file was already migrated.
+    // Old and new gap scales share some numeric stops (e.g. "100"), so a bare match on
+    // these doesn't prove pending work. Only counted when the file has no new-scale-only
+    // marker (skipIfPatterns) — an unambiguous detectPatterns match elsewhere in the same
+    // (partially migrated) file is still flagged regardless.
+    ambiguousDetectPatterns: [
+      /gap="(?:50|100|200|300|400|525|600)"/,
+      /d-stack--gap-(?:50|100|200|300|400|525|600)/,
+    ],
+    // Mirrors dialtone_migration_helper/configs/stack-gap-to-spacing.mjs's isAlreadyMigrated
+    // check: new-scale-only stops indicate the file was already migrated.
     skipIfPatterns: [
       /gap="(?:25|75|150|250|525)"/,
       /gap="'(?:25|75|150|250|525)'"/,
@@ -558,8 +571,14 @@ async function healthCheck (cwd) {
 
     for (const [file, content] of fileContents) {
       if (!migration.fileExtensions.some(ext => file.endsWith(ext))) continue;
-      if (migration.skipIfPatterns?.some(pattern => pattern.test(content))) continue;
-      for (const pattern of migration.detectPatterns) {
+
+      let patterns = migration.detectPatterns;
+      const alreadyMigrated = migration.skipIfPatterns?.some(pattern => pattern.test(content));
+      if (!alreadyMigrated && migration.ambiguousDetectPatterns) {
+        patterns = [...patterns, ...migration.ambiguousDetectPatterns];
+      }
+
+      for (const pattern of patterns) {
         // Reset lastIndex for global patterns
         const re = new RegExp(pattern.source, pattern.flags.replace('g', ''));
         if (re.test(content)) {
