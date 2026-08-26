@@ -253,9 +253,10 @@ const MIGRATIONS = [
     // prove pending work. Mirrors dialtone_migration_helper/configs/stack-gap-to-spacing.mjs's
     // isAlreadyMigrated check: new-scale-only stops indicate the file was already migrated.
     skipIfPatterns: [
-      /gap="(?:25|75|150|250)"/,
-      /d-stack--gap-(?:25|75|150|250)/,
-      /d-description-list--gap-(?:25|75|150|250)/,
+      /gap="(?:25|75|150|250|525)"/,
+      /gap="'(?:25|75|150|250|525)'"/,
+      /d-stack--gap-(?:25|75|150|250|525)/,
+      /d-description-list--gap-(?:25|75|150|250|525)/,
     ],
     fileExtensions: ['.vue', '.html', '.js', '.ts', '.jsx', '.tsx', '.md'],
   },

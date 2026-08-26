@@ -128,4 +128,18 @@ describe('--health-check', () => {
     });
     assert.match(output, /\[PENDING\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
   });
+
+  it('does not flag gap="525" for stack-gap-to-spacing', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-stack gap="525"></dt-stack></template>',
+    });
+    assert.match(output, /\[DONE\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+
+  it('does not flag an old stack class alongside a bound gap="\'25\'" for stack-gap-to-spacing', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-stack class="d-stack--gap-100" :gap="\'25\'"></dt-stack></template>',
+    });
+    assert.match(output, /\[DONE\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
 });
