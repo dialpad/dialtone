@@ -271,6 +271,7 @@ const MIGRATIONS = [
     // check: new-scale-only stops indicate the file was already migrated.
     skipIfPatterns: [
       /gap="(?:25|75|150|250|525)"/,
+      /gap='(?:25|75|150|250|525)'/,
       /gap="'(?:25|75|150|250|525)'"/,
       /d-stack--gap-(?:25|75|150|250|525)/,
       /d-description-list--gap-(?:25|75|150|250|525)/,

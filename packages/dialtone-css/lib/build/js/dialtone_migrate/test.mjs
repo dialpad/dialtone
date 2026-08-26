@@ -143,6 +143,13 @@ describe('--health-check', () => {
     assert.match(output, /\[DONE\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
   });
 
+  it('does not flag a mix of single-quoted gap=\'25\' and double-quoted gap="100" for stack-gap-to-spacing', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-stack gap=\'25\'></dt-stack><dt-stack gap="100"></dt-stack></template>',
+    });
+    assert.match(output, /\[DONE\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+
   it('still flags an unmigrated stop in a partially migrated (mixed) file for stack-gap-to-spacing', () => {
     const output = runHealthCheck({
       'App.vue': '<template><dt-stack gap="25"></dt-stack><dt-stack gap="625"></dt-stack></template>',
