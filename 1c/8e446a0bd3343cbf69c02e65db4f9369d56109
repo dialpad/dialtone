@@ -1,0 +1,116 @@
+apps/dialtone-documentation/docs/ui-kits/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/guides/migration/color-stops/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/guides/migration/hsl-to-oklch/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/utilities/typography/text-align.md
+  s_037f149b31cf7b::t_db462562195b25 4
+apps/dialtone-documentation/docs/guides/css-layers/index.md
+  s_037f149b31cf7b::t_3a7f4f7f92607a 4
+apps/dialtone-documentation/docs/utilities/grid/justify-items.md
+  s_037f149b31cf7b::t_e1b2c8740d7d73 4
+apps/dialtone-documentation/docs/dialtone/index.md
+  s_037f149b31cf7b::t_ce927de12ef3ae 4
+apps/dialtone-documentation/docs/components/emoji-picker.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 5
+apps/dialtone-documentation/docs/guides/migration/theme-to-mode/index.md
+  s_037f149b31cf7b::t_5e2ec854ffeb7b 4
+apps/dialtone-documentation/docs/components/motion-text.md
+  s_037f149b31cf7b::t_5e2ec854ffeb7b 4
+apps/dialtone-documentation/docs/components/progress-circle.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/ui-kits/how-to-contribute/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/components/combobox-multi-select.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/components/combobox-with-popover.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/components/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/guides/migration/link-and-button-navigation/index.md
+  s_037f149b31cf7b::t_5e2ec854ffeb7b 4
+apps/dialtone-documentation/docs/guides/getting-started/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/guides/migration/component-sizes/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/guides/migration/scrollbar-always/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/guides/migration/layout-and-spacing-tokens/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/utilities/typography/text-wrap.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/guides/migration/vue2-removal/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/guides/migration/component-props/index.md
+  s_037f149b31cf7b::t_5e2ec854ffeb7b 4
+apps/dialtone-documentation/docs/guides/migration/flex-to-stack/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/utilities/spacing/padding.md
+  s_037f149b31cf7b::t_e1b2c8740d7d73 4
+apps/dialtone-documentation/docs/utilities/grid/justify-self.md
+  s_037f149b31cf7b::t_e1b2c8740d7d73 4
+apps/dialtone-documentation/docs/components/scroller.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/utilities/borders/width.md
+  s_037f149b31cf7b::t_e1b2c8740d7d73 4
+apps/dialtone-documentation/docs/guides/migration/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/guides/migration/success-to-positive/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/components/resizable.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/guides/migration/logical-naming/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/guides/migration/typography/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/dialtone/release-notes/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/ui-kits/what-are-ui-kits/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/guides/migration/border-radius/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/components/status/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/utilities/borders/radius.md
+  s_037f149b31cf7b::t_e1b2c8740d7d73 4
+apps/dialtone-documentation/docs/utilities/spacing/margin.md
+  s_037f149b31cf7b::t_e1b2c8740d7d73 4
+apps/dialtone-documentation/docs/foundations/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/guides/migration/css-cascade-layers/index.md
+  s_037f149b31cf7b::t_5e2ec854ffeb7b 4
+apps/dialtone-documentation/docs/ui-kits/where-to-start/index.md
+  s_037f149b31cf7b::t_3a7f4f7f92607a 4
+apps/dialtone-documentation/docs/guides/migration/chip-interactive/index.md
+  s_037f149b31cf7b::t_5e2ec854ffeb7b 4
+apps/dialtone-documentation/docs/guides/migration/modal-native-dialog/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+apps/dialtone-documentation/docs/guides/migration/avatar-updates/index.md
+  s_037f149b31cf7b::t_5e2ec854ffeb7b 4
+apps/dialtone-documentation/docs/guides/migration/recipes-to-ui-kits/index.md
+  s_037f149b31cf7b::t_c634f5cb83fc4d 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "1c8e446a0bd3343cbf69c02e65db4f9369d56109",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_037f149b31cf7b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019eb75a-1703-7701-b0b6-29b6cf4d3b9e",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,47 @@
+packages/combinator/src/components/controls/control_selection.vue
+  s_c3b12373d86df3::t_f4767af5eeca3c 127
+  s_c3b12373d86df3::t_8163fa7e86f1d9 222-224,226,228,231
+  s_c3b12373d86df3::t_8ad0cea092b92b 211
+  s_c3b12373d86df3::t_7671b74aaa8693 15
+  s_c3b12373d86df3::t_952a37043ad5d7 77
+  s_c3b12373d86df3::t_7df08ed36956d1 71
+  s_c3b12373d86df3::t_5c73300c29a2a7 128,133-134
+  s_c3b12373d86df3::t_72f84a28a8276b 57,59-63
+  s_c3b12373d86df3::t_fcd0e0f39814e0 78
+  s_c3b12373d86df3::t_a8ccedfc0b4a00 135
+  s_c3b12373d86df3::t_0e64195b1895d3 208-210,212-221,225,227,229-230,232-246
+  s_c3b12373d86df3::t_f11d9fc6f40c68 111
+  s_c3b12373d86df3::t_9e5f394a3372f1 261-263
+  s_c3b12373d86df3::t_0b7b6ec0d1823c 247-260,264-267
+  s_c3b12373d86df3::t_844e6919807fb9 79-92,94-110
+  s_c3b12373d86df3::t_3dcd040ad88ffc 58,65-70,73-76,112-121
+  s_c3b12373d86df3::t_09c4cb6d25ed4e 132
+packages/combinator/src/components/controls/control_selection.test.js
+  h_65afbd07a56b87 6,45,47-48,71,80,90,123,132,140,149,160
+  s_c3b12373d86df3::t_014afbe186e69d 157-159,161
+  s_c3b12373d86df3::t_aea8b0b9bf210a 121-122,124
+  s_c3b12373d86df3::t_ccafb11dedfcac 8-15,23,28,60-67,73-76,82-87,92-95,97-120,125-131,133-139,141-148,150-156,162-171
+  s_c3b12373d86df3::t_e7eee33401faaf 68-70,72,77-79,81
+  s_c3b12373d86df3::t_977c3edae7d1b8 88-89,91,96
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.7",
+  "base_commit_sha": "f19fe8c3c64f13906176cea9b89846aad42ceb04",
+  "prompts": {},
+  "humans": {
+    "h_65afbd07a56b87": {
+      "author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_c3b12373d86df3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f1ddcc08-3576-4872-b773-84c8083715f1",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": null
+    }
+  }
+}

@@ -1,0 +1,22 @@
+apps/dialtone-documentation/docs/guides/content/writing-approach/index.md
+  s_8529c05b1210f5::t_5108cb92e1c6d8 17
+  s_8529c05b1210f5::t_0a94ba4dca951a 7,13,15,18-84,89,91-95
+apps/dialtone-documentation/docs/guides/content/voice-and-tone/index.md
+  s_8529c05b1210f5::t_0a94ba4dca951a 9,11,13-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.8",
+  "base_commit_sha": "2ed3bdb9a8406826202f40cebeb35f1f5b29d348",
+  "prompts": {},
+  "sessions": {
+    "s_8529c05b1210f5": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f0454-7b64-7423-a0b2-a3b838dc6e19",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

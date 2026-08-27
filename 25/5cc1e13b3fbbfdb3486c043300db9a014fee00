@@ -1,0 +1,130 @@
+packages/dialtone-css/lib/build/less/utilities/interactivity.less
+  h_c15b5755534093 56-60
+packages/dialtone-tokens/tokens/base/default.json
+  h_c15b5755534093 1039,1045,1052-1056
+apps/dialtone-documentation/docs/utilities/interactivity/outline.md
+  s_be0c6411b4addc::t_97c0f4ad2dc0b1 9,26,32
+  s_be0c6411b4addc::t_f7ad12dcbb5e9e 27-31,33-34,41-42,44,49-50,57-60,62-63,70
+  h_c15b5755534093 17-18,35-40,43,45-48,51-56,61,64-69
+  s_be0c6411b4addc::t_ad7a342504b8be 4
+apps/dialtone-documentation/docs/_data/interactivity.json
+  h_c15b5755534093 87,91-96
+packages/dialtone-tokens/postcss/constants.cjs
+  s_be0c6411b4addc::t_b609383a08d7de 15-17
+  h_c15b5755534093 27
+packages/dialtone-tokens/postcss/layered-tokens.cjs
+  s_be0c6411b4addc::t_b609383a08d7de 4,53-64
+packages/dialtone-tokens/postcss/dialtone-tokens.cjs
+  s_be0c6411b4addc::t_b609383a08d7de 7,96-108
+packages/dialtone-css/postcss/dialtone-generators.cjs
+  s_be0c6411b4addc::t_f7ad12dcbb5e9e 1173
+  s_be0c6411b4addc::t_97c0f4ad2dc0b1 1164
+apps/dialtone-documentation/docs/.vuepress/baseComponents/tokens/TokenExample.vue
+  h_c15b5755534093 71
+packages/dialtone-tokens/AndroidManifest.xml
+  s_700242684bb16b::t_9cfd5f1ed4242c 2
+packages/dialtone-tokens/build.gradle
+  s_700242684bb16b::t_7ad949a3477db6 48
+  s_eb1192028efe82::t_820b4457d50630 2-4,8
+  s_eb1192028efe82::t_f5722263c48b52 17-18,49
+  s_eb1192028efe82::t_ea87ccc87c6f0e 57-77
+  s_eb1192028efe82::t_294d5292158ece 91
+  s_76db24c87a0be0::t_6ff65a1a158394 39-42
+  s_76db24c87a0be0::t_e3c074f6ceb5da 29-31
+  s_76db24c87a0be0::t_014bd76420d3ea 26-28
+  s_76db24c87a0be0::t_8184fb600437a8 32-34,36-38
+  s_76db24c87a0be0::t_3fd5bcc603cf95 43-45
+packages/dialtone-icons/android/src/AndroidManifest.xml
+  s_700242684bb16b::t_89dae4572a3d6f 2
+packages/dialtone-icons/android/build.gradle
+  s_700242684bb16b::t_7452fa2a683e20 31
+  s_eb1192028efe82::t_b06d9c6b905c7e 26-27,32
+  s_eb1192028efe82::t_ae5b2f2b39082b 17
+  s_eb1192028efe82::t_dad0496786f583 2-4,6
+  s_eb1192028efe82::t_3ada3d96c15419 65
+  s_eb1192028efe82::t_13de88ccbc5e67 40-60
+packages/dialtone-icons/android/gradlew.bat
+  s_700242684bb16b::t_6d694f05141ae3 1-15,18-30,32-47,53-61,67-72,74-76,78-94
+  s_eb1192028efe82::t_a7107a61396d6f 16-17,31,48-52,62-66,73,77
+packages/dialtone-icons/android/gradlew
+  s_eb1192028efe82::t_a7107a61396d6f 4,18-19,60,85-86,88-89,117,136-138,142,149-150,157-158,203-211,216
+packages/gradle/libs.versions.toml
+  s_eb1192028efe82::t_f679c6bf2856b5 1-18
+packages/dialtone-tokens/gradle/wrapper/gradle-wrapper.properties
+  s_eb1192028efe82::t_98b3cd8beda3fb 3-5
+packages/dialtone-tokens/settings.gradle
+  s_eb1192028efe82::t_58c8e2067a813a 22-30
+packages/dialtone-icons/android/settings.gradle
+  s_eb1192028efe82::t_6f8102500bc968 22-30
+packages/dialtone-tokens/gradlew.bat
+  s_eb1192028efe82::t_77913d2f8a732e 16-17,31,48-52,62-66,73,77
+packages/dialtone-icons/android/gradle/wrapper/gradle-wrapper.properties
+  s_eb1192028efe82::t_f4ae3a314ae6c3 3-5
+packages/dialtone-tokens/gradlew
+  s_eb1192028efe82::t_77913d2f8a732e 4,18-19,60,85-86,88-89,117,136-138,142,149-150,157-158,203-211,216
+packages/dialtone-tokens/dialtone-transforms.js
+  s_76db24c87a0be0::t_1ff881872b1992 213
+  s_76db24c87a0be0::t_b2d545a76b2380 253
+  s_76db24c87a0be0::t_f55b03a9e2427d 272
+  s_76db24c87a0be0::t_9fdfc5a55a70a1 35,42,44,47-54
+  s_76db24c87a0be0::t_3e2b3a4adb7483 235
+  s_76db24c87a0be0::t_a0d467acb4ad5e 43
+  s_76db24c87a0be0::t_b851f5882f28d9 294
+  s_76db24c87a0be0::t_cb35a642f72f46 32-34
+  s_76db24c87a0be0::t_6bf5c0f9e4fcd9 36-41
+  s_76db24c87a0be0::t_5f11e5e1d83e0a 55-56
+  s_76db24c87a0be0::t_deab77c6084481 212
+  s_76db24c87a0be0::t_1780faf91d4d8c 214-216
+  s_76db24c87a0be0::t_59252665916906 46
+  s_76db24c87a0be0::t_0013f23dc9f7f7 45
+packages/dialtone-tokens/build-sd-transforms.js
+  s_76db24c87a0be0::t_93946424a9d1c4 10
+  s_76db24c87a0be0::t_f9f7f81124c31d 196-197
+  s_76db24c87a0be0::t_103ebfa2dddbcb 193-195
+  s_76db24c87a0be0::t_7f2b91447ab973 198-200
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "255cc1e13b3fbbfdb3486c043300db9a014fee00",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_700242684bb16b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5b1bc7f7-9ffa-4c08-8152-33c92b2ac712",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    },
+    "s_76db24c87a0be0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c38a60be-b056-423f-99cc-5d709fa6900e",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "John Parker <john.parker@dialpad.com>"
+    },
+    "s_be0c6411b4addc": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f80b4-22bf-7f21-8386-5ab135d7ea3d",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_eb1192028efe82": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a4ee5a28-7ff1-42e4-9e67-0db4191a0360",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "John Parker <john.parker@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,40 @@
+packages/dialtone-vue/components/rich_text_editor/extensions/link_phone_numbers/link_phone_numbers.test.js
+  s_d5e86a56d4f166::t_2c7b738fc74760 3,15-23,55-59,67-70,99-101,109-111,118-121
+  s_d5e86a56d4f166::t_b2cf0f67f379d4 1-2,4-14,24-54,60-66,71-98,102-108,112-117,122-149
+packages/dialtone-vue/components/rich_text_editor/extensions/custom_link/custom_link.js
+  s_d5e86a56d4f166::t_7bd4c657eaf6e8 43
+packages/dialtone-vue/components/rich_text_editor/extensions/link_phone_numbers/link_phone_numbers.js
+  s_d5e86a56d4f166::t_c4b964eb6c7958 42-47
+  s_d5e86a56d4f166::t_3a33d6a5186649 1-41,48-163
+packages/dialtone-vue/components/rich_text_editor/extensions/custom_link/autolink.js
+  s_d5e86a56d4f166::t_86eed5be57771e 42,44,60,62,67-68,70
+packages/dialtone-vue/components/rich_text_editor/extensions/custom_link/utils.js
+  s_d5e86a56d4f166::t_6a3576b8cbe265 137,191
+packages/dialtone-vue/components/rich_text_editor/rich_text_editor.vue
+  s_d5e86a56d4f166::t_e23745e7b08c0f 8
+  s_d5e86a56d4f166::t_616f6b4b56c786 248-252,254-256
+  s_d5e86a56d4f166::t_d0696acd18062f 99
+  s_d5e86a56d4f166::t_4661d5f6fbe589 1025
+  s_d5e86a56d4f166::t_4bc68e294a1cb3 82
+  s_d5e86a56d4f166::t_694f172f43b2ba 621,623
+  s_d5e86a56d4f166::t_e9e69e2e204c95 1118-1122
+  s_d5e86a56d4f166::t_b3a3195b03326f 739-740,746-750
+  s_d5e86a56d4f166::t_0051320bb54aa0 963
+  s_d5e86a56d4f166::t_7fd04b64aec0bf 1305
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "66c5f8a64b62cbc8ef4fcb2e93f4c234ec1e7e2e",
+  "prompts": {},
+  "sessions": {
+    "s_d5e86a56d4f166": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "16963438-69cc-46fa-8f17-4832f0e334a0",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}
