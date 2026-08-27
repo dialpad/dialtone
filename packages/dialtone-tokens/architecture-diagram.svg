@@ -63,7 +63,7 @@
   <rect x="100" y="440" width="1000" height="100" rx="8" class="layer-box-theme"/>
   <text x="120" y="470" class="layer-title">Layer 4: Theme Overrides (Optional)</text>
   <text x="120" y="490" class="layer-subtitle">themes/tokens-{brand}-colors.css (0.3-5KB)</text>
-  <text x="120" y="510" class="layer-detail">TMO: 0.54KB • Sunflower: 4.15KB • 122: 4.13KB • 50+ themes available</text>
+  <text x="120" y="510" class="layer-detail">TMO: 0.54KB • Sunflower: 4.15KB • Seashell: 4.13KB • 49 brand themes available</text>
   <rect x="950" y="450" width="130" height="24" rx="4" style="fill: #FF8C42; stroke: #F87E7E;"/>
   <text x="1015" y="467" text-anchor="middle" class="badge-text">ON DEMAND</text>
 
@@ -84,7 +84,7 @@
   <!-- Dimension 1: Brand -->
   <rect x="100" y="710" width="300" height="60" rx="6" style="fill: #FFD646; stroke: #FFBE41; stroke-width: 2;"/>
   <text x="250" y="735" text-anchor="middle" class="layer-title">Brand (data-dt-brand)</text>
-  <text x="250" y="755" text-anchor="middle" class="layer-detail">dp, tmo, sunflower, 101-137... (50+)</text>
+  <text x="250" y="755" text-anchor="middle" class="layer-detail">dp, tmo, sunflower, paprika... (49)</text>
 
   <!-- Dimension 2: Mode -->
   <rect x="450" y="710" width="300" height="60" rx="6" style="fill: #A38FF9; stroke: #7C52FF; stroke-width: 2;"/>
