@@ -7,6 +7,7 @@ import '@dialpad/dialtone-tokens/layered/tokens-base-colors.css';
 import '@dialpad/dialtone-tokens/layered/tokens-dp-colors.css';
 import { addons } from 'storybook/preview-api';
 import { setMode, setBrand, setContrast, initDialtoneTheme } from '@dialpad/dialtone-tokens/themes/config';
+import { createThemeController } from './theme-controller.js';
 
 // Storybook shows a representative subset of the full Dialtone theme set, not
 // all of it. This list is the only place to edit when that subset changes — the
@@ -44,21 +45,6 @@ const brandTitle = (id) => BRAND_TITLES[id] ??
   id.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
 
 const highContrastImport = import('@dialpad/dialtone-tokens/themes/high-contrast');
-
-let layeredThemes = {};
-let HighContrast;
-
-(async () => {
-  layeredThemes = Object.fromEntries(await Promise.all(
-    BRAND_IMPORTS.map(async ([id, module]) => [id, (await module).default]),
-  ));
-  HighContrast = (await highContrastImport).default;
-
-  // Initialize layered theming once themes are loaded
-  if (layeredThemes.dp) {
-    initDialtoneTheme(layeredThemes.dp, 'light', document.documentElement);
-  }
-})();
 import { MINIMAL_VIEWPORTS } from 'storybook/viewport';
 import { setup } from '@storybook/vue3-vite';
 import React, { useState, useEffect } from 'react';
@@ -93,6 +79,14 @@ let currentDarkMode = (() => {
 })();
 let currentBrandTheme = 'dp';
 
+const themeController = createThemeController({
+  brandImports: BRAND_IMPORTS,
+  highContrastImport,
+  initialize: theme => initDialtoneTheme(theme, 'light', document.documentElement),
+  applyMode: mode => setMode(mode, document.documentElement),
+  applyBrand: theme => setBrand(theme, document.documentElement),
+  applyContrast: theme => setContrast(theme, document.documentElement),
+});
 
 const channel = addons.getChannel();
 
@@ -101,22 +95,11 @@ const updateTheme = (isDark, isHighContrast, brandTheme = 'dp') => {
   currentContrast = isHighContrast ? 'high' : 'default';
   currentBrandTheme = brandTheme;
 
-  // Use layered theming system with data-dt-mode
-  setMode(isDark ? 'dark' : 'light', document.documentElement);
-
-  // `layeredThemes` is empty until the imports at the top of this file resolve.
-  if (layeredThemes[brandTheme]) {
-    setBrand(layeredThemes[brandTheme], document.documentElement);
-  } else {
-    // Themes might still be loading, try again
-    setTimeout(() => {
-      if (layeredThemes[brandTheme]) {
-        setBrand(layeredThemes[brandTheme], document.documentElement);
-      }
-    }, 100);
-  }
-
-  setContrast(isHighContrast ? HighContrast : null, document.documentElement);
+  void themeController.update({
+    mode: isDark ? 'dark' : 'light',
+    brand: brandTheme,
+    highContrast: isHighContrast,
+  });
 };
 
 channel.on(DARK_MODE_EVENT_NAME, (isDark) => {
