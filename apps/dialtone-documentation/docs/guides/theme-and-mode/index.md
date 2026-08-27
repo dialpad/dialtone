@@ -40,10 +40,10 @@ Controls the light/dark appearance of your interface:
 
 Controls the color palette and identity layer applied on top of the base tokens:
 
-- Base themes: `dp` (Dialpad), `tmo` (T-Mobile)
-- Named themes: `aegean`, `botany`, `buttercream`, `melon`, `plum`, etc.
+- Base theme: `dp` (Dialpad) — every other theme layers on top of it
+- Partner theme: `tmo` (T-Mobile)
+- Standard themes: 45 brand themes, see [Available Themes](#available-themes)
 - Accessibility themes: `prota-deuter`, `trita`
-- Experimental themes: `101` through `137`
 
 ### 3. Material
 
@@ -135,22 +135,21 @@ setMaterial(null);    // Reset to sandstone (the default)
 
 ## Available Themes
 
-Dialtone provides 51+ themes. Import any theme from `@dialpad/dialtone/themes/{theme-name}`:
+Dialtone provides 50 themes. Import any theme from `@dialpad/dialtone/themes/{theme-name}`:
+
+**Base and partner themes:**
+
+- `dp` - Dialpad. The base theme; every other theme layers on top of it.
+- `tmo` - T-Mobile
 
 **Standard themes:**
 
-- `dp` - Dialpad (base theme)
-- `tmo` - T-Mobile
-- `aegean`, `botany`, `buttercream`, `high-desert`, `melon`, `plum`, `sunflower`, `verdant-haze`
+- `aegean`, `alpine`, `arctic`, `aurora`, `autumn`, `blue-hour`, `botany`, `brick`, `buttercream`, `cactus-bloom`, `cayenne`, `cedar-grove`, `cobalt`, `copper`, `coral-reef`, `dragonfruit`, `eucalyptus`, `fjord`, `high-desert`, `inkberry`, `kiln`, `lavender`, `marigold`, `melon`, `mulberry`, `mushroom`, `nightshade`, `paprika`, `peach-blossom`, `plum`, `poppy-field`, `raincloud`, `rhubarb`, `rust-harbor`, `sea-glow`, `seashell`, `solstice`, `storm`, `sunflower`, `tropical-night`, `verdant-haze`, `wildflower`, `wineberry`, `winter-gold`, `woodland`
 
 **Accessibility themes:**
 
 - `prota-deuter` - Optimized for protanopia/deuteranopia color blindness
 - `trita` - Optimized for tritanopia color blindness
-
-**Experimental themes:**
-
-- `101` through `137` - Themes awaiting final names
 
 **Contrast:**
 
@@ -163,7 +162,7 @@ Dialtone provides 51+ themes. Import any theme from `@dialpad/dialtone/themes/{t
 
 Materials are passed to `setMaterial` by string name — there are no per-material modules to import.
 
-Most brands declare a locked material in their token JSON. Switching to a locked brand auto-applies its material; the [Material picker in the navbar](#brand-locked-materials) disables on those brands. Free-choice brands (`dp`, `tmo`, `prota-deuter`, `trita`) keep the picker enabled.
+Most brands declare a locked material in their token JSON. Switching to a locked brand auto-applies its material; the [material picker](#brand-locked-materials) disables on those brands. Free-choice brands (`dp`, `tmo`, `prota-deuter`, `trita`) keep the picker enabled.
 
 **Brand import pattern:**
 

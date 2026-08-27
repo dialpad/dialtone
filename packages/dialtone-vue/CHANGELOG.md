@@ -1,3 +1,18 @@
+# [3.225.0-next.7](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0-next.6...dialtone-vue/v3.225.0-next.7) (2026-08-27)
+
+
+### Features
+
+* **Tokens:** DLT-3587 rename experimental numbered themes ([#1402](https://github.com/dialpad/dialtone/issues/1402)) ([f6265d5](https://github.com/dialpad/dialtone/commit/f6265d556acecc516cebf845f4d6794ae6f5d78b))
+
+# [3.225.0-next.6](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0-next.5...dialtone-vue/v3.225.0-next.6) (2026-08-21)
+
+
+### Bug Fixes
+
+* **Channel Suggestion:** NO-JIRA correct gap ([#1400](https://github.com/dialpad/dialtone/issues/1400)) ([f9b8263](https://github.com/dialpad/dialtone/commit/f9b8263e514648fe96bd4fa0b521942f1b567bfe))
+* **Popover:** DLT-3574 keep nested overlay content and scrim in the ancestor dialog's top layer ([#1399](https://github.com/dialpad/dialtone/issues/1399)) ([55aa197](https://github.com/dialpad/dialtone/commit/55aa1979656e06e92aa7fe23800a3bec37694fb2))
+
 # [3.225.0-next.5](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0-next.4...dialtone-vue/v3.225.0-next.5) (2026-08-14)
 
 

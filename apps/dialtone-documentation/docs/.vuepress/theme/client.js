@@ -285,10 +285,13 @@ async function importDocumentation (app) {
 
 async function importDialtoneThemes (app) {
   try {
-    console.info('Importing layered theme system - ALL 51 THEMES!');
+    // Kicked off before the await below so all 50 modules load concurrently.
+    const highContrastImport = import('@dialpad/dialtone-tokens/themes/high-contrast');
 
-    // Import all themes explicitly (Vite doesn't like dynamic imports)
-    const themeModules = await Promise.all([
+    // Keep every import path literal so Vite can resolve the complete theme set.
+    // Material overrides are not theme modules — material switching is
+    // attribute-driven against pre-bundled CSS imported at the top of this file.
+    const brandModules = await Promise.all([
       // Base theme
       import('@dialpad/dialtone-tokens/themes/dp'),
       // Partner themes
@@ -296,117 +299,63 @@ async function importDialtoneThemes (app) {
       // Color assistive themes
       import('@dialpad/dialtone-tokens/themes/prota-deuter'),
       import('@dialpad/dialtone-tokens/themes/trita'),
-      // Named themes
+      // Standard themes (alphabetical)
       import('@dialpad/dialtone-tokens/themes/aegean'),
+      import('@dialpad/dialtone-tokens/themes/alpine'),
+      import('@dialpad/dialtone-tokens/themes/arctic'),
+      import('@dialpad/dialtone-tokens/themes/aurora'),
+      import('@dialpad/dialtone-tokens/themes/autumn'),
+      import('@dialpad/dialtone-tokens/themes/blue-hour'),
       import('@dialpad/dialtone-tokens/themes/botany'),
+      import('@dialpad/dialtone-tokens/themes/brick'),
       import('@dialpad/dialtone-tokens/themes/buttercream'),
-      import('@dialpad/dialtone-tokens/themes/ceruleo'),
+      import('@dialpad/dialtone-tokens/themes/cactus-bloom'),
+      import('@dialpad/dialtone-tokens/themes/cayenne'),
+      import('@dialpad/dialtone-tokens/themes/cedar-grove'),
+      import('@dialpad/dialtone-tokens/themes/cobalt'),
+      import('@dialpad/dialtone-tokens/themes/copper'),
+      import('@dialpad/dialtone-tokens/themes/coral-reef'),
+      import('@dialpad/dialtone-tokens/themes/dragonfruit'),
+      import('@dialpad/dialtone-tokens/themes/eucalyptus'),
+      import('@dialpad/dialtone-tokens/themes/fjord'),
       import('@dialpad/dialtone-tokens/themes/high-desert'),
+      import('@dialpad/dialtone-tokens/themes/inkberry'),
+      import('@dialpad/dialtone-tokens/themes/kiln'),
+      import('@dialpad/dialtone-tokens/themes/lavender'),
+      import('@dialpad/dialtone-tokens/themes/marigold'),
       import('@dialpad/dialtone-tokens/themes/melon'),
+      import('@dialpad/dialtone-tokens/themes/mulberry'),
+      import('@dialpad/dialtone-tokens/themes/mushroom'),
+      import('@dialpad/dialtone-tokens/themes/nightshade'),
+      import('@dialpad/dialtone-tokens/themes/paprika'),
+      import('@dialpad/dialtone-tokens/themes/peach-blossom'),
       import('@dialpad/dialtone-tokens/themes/plum'),
+      import('@dialpad/dialtone-tokens/themes/poppy-field'),
+      import('@dialpad/dialtone-tokens/themes/raincloud'),
+      import('@dialpad/dialtone-tokens/themes/rhubarb'),
+      import('@dialpad/dialtone-tokens/themes/rust-harbor'),
+      import('@dialpad/dialtone-tokens/themes/sea-glow'),
+      import('@dialpad/dialtone-tokens/themes/seashell'),
+      import('@dialpad/dialtone-tokens/themes/solstice'),
+      import('@dialpad/dialtone-tokens/themes/storm'),
       import('@dialpad/dialtone-tokens/themes/sunflower'),
+      import('@dialpad/dialtone-tokens/themes/tropical-night'),
       import('@dialpad/dialtone-tokens/themes/verdant-haze'),
-      // Numbered themes (not yet named)
-      import('@dialpad/dialtone-tokens/themes/101'),
-      import('@dialpad/dialtone-tokens/themes/102'),
-      import('@dialpad/dialtone-tokens/themes/103'),
-      import('@dialpad/dialtone-tokens/themes/104'),
-      import('@dialpad/dialtone-tokens/themes/105'),
-      import('@dialpad/dialtone-tokens/themes/106'),
-      import('@dialpad/dialtone-tokens/themes/107'),
-      import('@dialpad/dialtone-tokens/themes/108'),
-      import('@dialpad/dialtone-tokens/themes/109'),
-      import('@dialpad/dialtone-tokens/themes/110'),
-      import('@dialpad/dialtone-tokens/themes/111'),
-      import('@dialpad/dialtone-tokens/themes/112'),
-      import('@dialpad/dialtone-tokens/themes/113'),
-      import('@dialpad/dialtone-tokens/themes/114'),
-      import('@dialpad/dialtone-tokens/themes/115'),
-      import('@dialpad/dialtone-tokens/themes/116'),
-      import('@dialpad/dialtone-tokens/themes/117'),
-      import('@dialpad/dialtone-tokens/themes/118'),
-      import('@dialpad/dialtone-tokens/themes/119'),
-      import('@dialpad/dialtone-tokens/themes/120'),
-      import('@dialpad/dialtone-tokens/themes/121'),
-      import('@dialpad/dialtone-tokens/themes/122'),
-      import('@dialpad/dialtone-tokens/themes/123'),
-      import('@dialpad/dialtone-tokens/themes/124'),
-      import('@dialpad/dialtone-tokens/themes/125'),
-      import('@dialpad/dialtone-tokens/themes/126'),
-      import('@dialpad/dialtone-tokens/themes/127'),
-      import('@dialpad/dialtone-tokens/themes/128'),
-      import('@dialpad/dialtone-tokens/themes/129'),
-      import('@dialpad/dialtone-tokens/themes/130'),
-      import('@dialpad/dialtone-tokens/themes/131'),
-      import('@dialpad/dialtone-tokens/themes/132'),
-      import('@dialpad/dialtone-tokens/themes/133'),
-      import('@dialpad/dialtone-tokens/themes/134'),
-      import('@dialpad/dialtone-tokens/themes/135'),
-      import('@dialpad/dialtone-tokens/themes/136'),
-      import('@dialpad/dialtone-tokens/themes/137'),
-      // High contrast
-      import('@dialpad/dialtone-tokens/themes/high-contrast'),
-      // Material overrides are not theme modules — material switching is
-      // attribute-driven against pre-bundled CSS imported at the top of this file.
+      import('@dialpad/dialtone-tokens/themes/wildflower'),
+      import('@dialpad/dialtone-tokens/themes/wineberry'),
+      import('@dialpad/dialtone-tokens/themes/winter-gold'),
+      import('@dialpad/dialtone-tokens/themes/woodland'),
     ]);
+    const highContrast = (await highContrastImport).default;
 
-    // Build themes object with same order as in Navbar
+    // Each brand module carries its own id at brand.name, so there is no
+    // separate list of ids to keep in sync with the imports above.
     const themes = {
-      'dp': themeModules[0].default,
-      'tmo': themeModules[1].default,
-      'prota-deuter': themeModules[2].default,
-      'trita': themeModules[3].default,
-      'aegean': themeModules[4].default,
-      'botany': themeModules[5].default,
-      'buttercream': themeModules[6].default,
-      'ceruleo': themeModules[7].default,
-      'high-desert': themeModules[8].default,
-      'melon': themeModules[9].default,
-      'plum': themeModules[10].default,
-      'sunflower': themeModules[11].default,
-      'verdant-haze': themeModules[12].default,
-      '101': themeModules[13].default,
-      '102': themeModules[14].default,
-      '103': themeModules[15].default,
-      '104': themeModules[16].default,
-      '105': themeModules[17].default,
-      '106': themeModules[18].default,
-      '107': themeModules[19].default,
-      '108': themeModules[20].default,
-      '109': themeModules[21].default,
-      '110': themeModules[22].default,
-      '111': themeModules[23].default,
-      '112': themeModules[24].default,
-      '113': themeModules[25].default,
-      '114': themeModules[26].default,
-      '115': themeModules[27].default,
-      '116': themeModules[28].default,
-      '117': themeModules[29].default,
-      '118': themeModules[30].default,
-      '119': themeModules[31].default,
-      '120': themeModules[32].default,
-      '121': themeModules[33].default,
-      '122': themeModules[34].default,
-      '123': themeModules[35].default,
-      '124': themeModules[36].default,
-      '125': themeModules[37].default,
-      '126': themeModules[38].default,
-      '127': themeModules[39].default,
-      '128': themeModules[40].default,
-      '129': themeModules[41].default,
-      '130': themeModules[42].default,
-      '131': themeModules[43].default,
-      '132': themeModules[44].default,
-      '133': themeModules[45].default,
-      '134': themeModules[46].default,
-      '135': themeModules[47].default,
-      '136': themeModules[48].default,
-      '137': themeModules[49].default,
-      'high-contrast': themeModules[50].default,
+      ...Object.fromEntries(brandModules.map(({ default: theme }) => [theme.brand.name, theme])),
+      'high-contrast': highContrast,
     };
 
-    const brandCount = Object.keys(themes).length - 1; // minus high-contrast
-    console.info(`Successfully loaded ${brandCount} themes + high contrast`);
+    console.info(`Loaded ${brandModules.length} brand themes + high contrast`);
 
     app.provide('themes', themes);
   } catch (error) {

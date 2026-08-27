@@ -131,14 +131,14 @@ layout: Blank
     >
       <template #anchor>
         <dt-button
-          v-dt-tooltip:bottom="`Theme: ${capitalize(currentTheme)}`"
+          v-dt-tooltip:bottom="`Theme: ${formatThemeName(currentTheme)}`"
           class="theme-toggle-button"
           importance="outlined"
           kind="muted"
           :size="200"
         >
           <dt-stack direction="row" gap="50">
-            Theme: {{ currentTheme }}
+            Theme: {{ formatThemeName(currentTheme) }}
           </dt-stack>
           <template #endIcon>
             <dt-icon name="chevron-down" size="200" />
@@ -206,10 +206,10 @@ layout: Blank
         <dt-dropdown-separator />
         <dt-list-item-group
           heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
-          heading="Named Themes"
+          heading="Standard Themes"
         >
           <dt-list-item
-            v-for="themeName in namedThemes"
+            v-for="themeName in standardThemes"
             :key="themeName"
             role="menuitem"
             navigation-type="arrow-keys"
@@ -218,24 +218,6 @@ layout: Blank
             {{ formatThemeName(themeName) }}
             <template #end>
               <dt-icon :class="{ 'd-o0': currentTheme !== themeName }" name="check" size="200" />
-            </template>
-          </dt-list-item>
-        </dt-list-item-group>
-        <dt-dropdown-separator />
-        <dt-list-item-group
-          heading-class="d-py-50 d-px-100 d-c-default d-fc-tertiary d-label--sm"
-          heading="Experimental (37 themes)"
-        >
-          <dt-list-item
-            v-for="themeNum in numberedThemes"
-            :key="themeNum"
-            role="menuitem"
-            navigation-type="arrow-keys"
-            @click="setTheme(themeNum)"
-          >
-            Theme {{ themeNum }}
-            <template #end>
-              <dt-icon :class="{ 'd-o0': currentTheme !== themeNum }" name="check" size="200" />
             </template>
           </dt-list-item>
         </dt-list-item-group>
@@ -411,8 +393,7 @@ const {
   setMaterial,
   currentTheme,
   setTheme,
-  namedThemes,
-  numberedThemes,
+  standardThemes,
   formatThemeName,
   materials,
 } = useThemeManager({ includeThemes: true });

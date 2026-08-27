@@ -17,6 +17,10 @@ export default [
   ...vueAccessibility.configs['flat/recommended'],
   {
     files: ['**/*.stories.js', '**/*.story.js', '**/*.stories.vue', '**/*.story.vue', '.storybook/**'],
+    ignores: [
+      '.storybook/**/*.test.js',
+      '.storybook/theme-controller.js',
+    ],
     plugins: {
       storybook,
     },

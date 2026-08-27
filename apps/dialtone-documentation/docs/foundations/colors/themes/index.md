@@ -107,29 +107,6 @@ A theme represents the core color scheme. It applies a unique set of colors to t
       </tr>
       <tr>
         <td>
-          <dt-text kind="code" as="code" size="200">Ceruleo</dt-text>
-        </td>
-        <td>
-          <dt-stack direction="row" gap="100">
-            <div class="color-swatch" style="background-color: #003165;" title="Background"></div>
-            <div class="color-swatch" style="background-color: #98DCFF;" title="Sidebar"></div>
-            <div class="color-swatch" style="background-color: #E8E9E9;" title="Border"></div>
-            <div class="color-swatch" style="background-color: #FF1356;" title="Brand"></div>
-            <div class="color-swatch" style="background-color: #999999;" title="Text"></div>
-          </dt-stack>
-        </td>
-        <td>
-          <dt-stack direction="row" gap="100">
-            <div class="color-swatch" style="background-color: #052133;" title="Background"></div>
-            <div class="color-swatch" style="background-color: #5FC4F9;" title="Sidebar"></div>
-            <div class="color-swatch" style="background-color: #F5F9FD;" title="Border"></div>
-            <div class="color-swatch" style="background-color: #FF716F;" title="Brand"></div>
-            <div class="color-swatch" style="background-color: #FFFFFF;" title="Text"></div>
-          </dt-stack>
-        </td>
-      </tr>
-      <tr>
-        <td>
           <dt-text kind="code" as="code" size="200">Melon</dt-text>
         </td>
         <td>

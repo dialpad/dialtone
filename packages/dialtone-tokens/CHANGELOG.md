@@ -1,3 +1,10 @@
+# [2.0.0-next.8](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.0-next.7...dialtone-tokens/v2.0.0-next.8) (2026-08-27)
+
+
+### Features
+
+* **Tokens:** DLT-3587 rename experimental numbered themes ([#1402](https://github.com/dialpad/dialtone/issues/1402)) ([f6265d5](https://github.com/dialpad/dialtone/commit/f6265d556acecc516cebf845f4d6794ae6f5d78b))
+
 # [2.0.0-next.7](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.0-next.6...dialtone-tokens/v2.0.0-next.7) (2026-08-18)
 
 

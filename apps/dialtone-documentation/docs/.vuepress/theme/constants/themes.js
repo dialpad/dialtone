@@ -12,34 +12,68 @@
  */
 
 /**
- * Named themes that have official marketing names (alphabetical order)
- * Used for UI grouping in theme selection dropdowns
+ * Color assistive themes for accessibility
+ * Optimized for color vision deficiencies
  *
- * @constant {string[]} NAMED_THEMES
+ * @constant {string[]} COLOR_ASSISTIVE_THEMES
  */
-export const NAMED_THEMES = [
-  'aegean',
-  'botany',
-  'buttercream',
-  // 'ceruleo',
-  'high-desert',
-  'melon',
-  'plum',
-  'sunflower',
-  'verdant-haze',
+export const COLOR_ASSISTIVE_THEMES = [
+  'prota-deuter',
+  'trita',
 ];
 
 /**
- * Numbered experimental themes (101-137)
- * These themes are awaiting final marketing names
+ * Standard brand themes (alphabetical order)
+ * Used for UI grouping in theme selection dropdowns
  *
- * @constant {string[]} NUMBERED_THEMES
+ * @constant {string[]} STANDARD_THEMES
  */
-export const NUMBERED_THEMES = [
-  '101', '102', '103', '104', '105', '106', '107', '108', '109', '110',
-  '111', '112', '113', '114', '115', '116', '117', '118', '119', '120',
-  '121', '122', '123', '124', '125', '126', '127', '128', '129', '130',
-  '131', '132', '133', '134', '135', '136', '137',
+export const STANDARD_THEMES = [
+  'aegean',
+  'alpine',
+  'arctic',
+  'aurora',
+  'autumn',
+  'blue-hour',
+  'botany',
+  'brick',
+  'buttercream',
+  'cactus-bloom',
+  'cayenne',
+  'cedar-grove',
+  'cobalt',
+  'copper',
+  'coral-reef',
+  'dragonfruit',
+  'eucalyptus',
+  'fjord',
+  'high-desert',
+  'inkberry',
+  'kiln',
+  'lavender',
+  'marigold',
+  'melon',
+  'mulberry',
+  'mushroom',
+  'nightshade',
+  'paprika',
+  'peach-blossom',
+  'plum',
+  'poppy-field',
+  'raincloud',
+  'rhubarb',
+  'rust-harbor',
+  'sea-glow',
+  'seashell',
+  'solstice',
+  'storm',
+  'sunflower',
+  'tropical-night',
+  'verdant-haze',
+  'wildflower',
+  'wineberry',
+  'winter-gold',
+  'woodland',
 ];
 
 /**

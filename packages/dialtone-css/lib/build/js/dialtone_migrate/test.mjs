@@ -86,3 +86,151 @@ describe('--package validation', () => {
     assert.equal(status, 0);
   });
 });
+
+describe('--health-check', () => {
+  function runHealthCheck (files) {
+    const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'dlt-health-'));
+    try {
+      for (const [name, contents] of Object.entries(files)) {
+        fs.writeFileSync(path.join(tmp, name), contents);
+      }
+      return execFileSync(process.execPath, [cli, '--health-check', '--cwd', tmp],
+        { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
+    } finally {
+      fs.rmSync(tmp, { recursive: true, force: true });
+    }
+  }
+
+  it('does not flag native v-show on non-Dialtone elements as component-props', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><div v-show="isReady">Ready</div></template>',
+    });
+    assert.match(output, /\[DONE\].*Component Props & Events \(component-props\)/);
+  });
+
+  it('does not flag native v-show on a Dialtone element as component-props', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-modal v-show="isOpen"></dt-modal></template>',
+    });
+    assert.match(output, /\[DONE\].*Component Props & Events \(component-props\)/);
+  });
+
+  it('does not flag v-show on dt-button as component-props', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-button v-show="visible">Go</dt-button></template>',
+    });
+    assert.match(output, /\[DONE\].*Component Props & Events \(component-props\)/);
+  });
+
+  it('does not flag data-title or v-title on a Dialtone element as component-props', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-modal data-title="tooltip" v-title="x"></dt-modal></template>',
+    });
+    assert.match(output, /\[DONE\].*Component Props & Events \(component-props\)/);
+  });
+
+  it('still flags show= on a Dialtone component as component-props', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-modal show="isOpen"></dt-modal></template>',
+    });
+    assert.match(output, /\[PENDING\].*Component Props & Events \(component-props\)/);
+  });
+
+  it('still flags title= on a Dialtone component as component-props', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-modal title="isOpen"></dt-modal></template>',
+    });
+    assert.match(output, /\[PENDING\].*Component Props & Events \(component-props\)/);
+  });
+
+  it('still flags :show= on a Dialtone component when a quoted attribute earlier in the tag contains a literal >', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-modal :disabled="count > 0" :show="isOpen"></dt-modal></template>',
+    });
+    assert.match(output, /\[PENDING\].*Component Props & Events \(component-props\)/);
+  });
+
+  it('does not flag an already-migrated file for stack-gap-to-spacing', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-stack gap="100"></dt-stack><dt-stack gap="25"></dt-stack></template>',
+    });
+    assert.match(output, /\[DONE\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+
+  it('still flags an unmigrated file for stack-gap-to-spacing', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-stack gap="625"></dt-stack></template>',
+    });
+    assert.match(output, /\[PENDING\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+
+  it('does not flag an unrelated data-gap attribute for stack-gap-to-spacing', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><div data-gap="625"></div></template>',
+    });
+    assert.match(output, /\[DONE\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+
+  it('does not let an unrelated data-gap new-scale value suppress a real ambiguous pending gap', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><div data-gap="25"></div><dt-stack gap="100"></dt-stack></template>',
+    });
+    assert.match(output, /\[PENDING\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+
+  it('does not flag an @gap event-listener value as a pending gap prop', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-stack @gap="625"></dt-stack></template>',
+    });
+    assert.match(output, /\[DONE\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+
+  it('does not let an @gap or v-on:gap event-listener value suppress a real ambiguous pending gap', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-stack @gap="25"></dt-stack><dt-stack v-on:gap="75"></dt-stack><dt-stack gap="100"></dt-stack></template>',
+    });
+    assert.match(output, /\[PENDING\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+
+  it('still flags a bound :gap= and v-bind:gap= as pending', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-stack :gap="625"></dt-stack><dt-stack v-bind:gap="625"></dt-stack></template>',
+    });
+    assert.match(output, /\[PENDING\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+
+  it('does not flag v-model:gap and still detects a real ambiguous gap alongside it', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-stack v-model:gap="someRef"></dt-stack><dt-stack gap="100"></dt-stack></template>',
+    });
+    assert.match(output, /\[PENDING\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+
+  it('does not flag gap="525" for stack-gap-to-spacing', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-stack gap="525"></dt-stack></template>',
+    });
+    assert.match(output, /\[DONE\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+
+  it('does not flag a mix of single-quoted gap=\'25\' and double-quoted gap="100" for stack-gap-to-spacing', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-stack gap=\'25\'></dt-stack><dt-stack gap="100"></dt-stack></template>',
+    });
+    assert.match(output, /\[DONE\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+
+  it('still flags an unmigrated stop in a partially migrated (mixed) file for stack-gap-to-spacing', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-stack gap="25"></dt-stack><dt-stack gap="625"></dt-stack></template>',
+    });
+    assert.match(output, /\[PENDING\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+
+  it('does not flag an old stack class alongside a bound gap="\'25\'" for stack-gap-to-spacing', () => {
+    const output = runHealthCheck({
+      'App.vue': '<template><dt-stack class="d-stack--gap-100" :gap="\'25\'"></dt-stack></template>',
+    });
+    assert.match(output, /\[DONE\].*Stack Gap to Spacing \(stack-gap-to-spacing\)/);
+  });
+});

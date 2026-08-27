@@ -1,3 +1,23 @@
+# [10.0.0-next.19](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.18...dialtone/v10.0.0-next.19) (2026-08-27)
+
+
+### Bug Fixes
+
+* **Scripts:** DLT-3586 fix false positives in dialtone-migrate health check ([#1401](https://github.com/dialpad/dialtone/issues/1401)) ([9e82fc6](https://github.com/dialpad/dialtone/commit/9e82fc6f4c67b398dfac5dc0c5d03dafc1e7d4f3))
+
+
+### Features
+
+* **Tokens:** DLT-3587 rename experimental numbered themes ([#1402](https://github.com/dialpad/dialtone/issues/1402)) ([f6265d5](https://github.com/dialpad/dialtone/commit/f6265d556acecc516cebf845f4d6794ae6f5d78b))
+
+# [10.0.0-next.18](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.17...dialtone/v10.0.0-next.18) (2026-08-21)
+
+
+### Bug Fixes
+
+* **Channel Suggestion:** NO-JIRA correct gap ([#1400](https://github.com/dialpad/dialtone/issues/1400)) ([f9b8263](https://github.com/dialpad/dialtone/commit/f9b8263e514648fe96bd4fa0b521942f1b567bfe))
+* **Popover:** DLT-3574 keep nested overlay content and scrim in the ancestor dialog's top layer ([#1399](https://github.com/dialpad/dialtone/issues/1399)) ([55aa197](https://github.com/dialpad/dialtone/commit/55aa1979656e06e92aa7fe23800a3bec37694fb2))
+
 # [10.0.0-next.17](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.16...dialtone/v10.0.0-next.17) (2026-08-18)
 
 
