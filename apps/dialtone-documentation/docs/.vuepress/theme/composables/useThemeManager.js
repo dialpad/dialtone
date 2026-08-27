@@ -1,5 +1,5 @@
 import { inject, computed, onMounted, onUnmounted, ref } from 'vue';
-import { NAMED_THEMES, NUMBERED_THEMES, ALL_THEME_IDS } from '../constants/themes.js';
+import { STANDARD_THEMES, COLOR_ASSISTIVE_THEMES } from '../constants/themes.js';
 import { formatThemeName } from '../utils/formatThemeName.js';
 import {
   setMode as setModeConfig,
@@ -121,7 +121,7 @@ export function useThemeManager(options = {}) {
   };
 
   /**
-   * Sets the brand theme (dp, tmo, numbered themes, etc.)
+   * Sets the brand theme (dp, tmo, standard themes, etc.)
    * Only functional when includeThemes is true
    * @param {string} theme - The theme to set
    */
@@ -284,9 +284,9 @@ export function useThemeManager(options = {}) {
     setTheme,
 
     // Theme utilities (only when includeThemes is enabled)
-    namedThemes: computed(() => NAMED_THEMES),
-    numberedThemes: computed(() => NUMBERED_THEMES),
-    allThemeIds: computed(() => ALL_THEME_IDS),
+    // Static module constants — no computed wrapper, same as `materials` below.
+    standardThemes: STANDARD_THEMES,
+    colorAssistiveThemes: COLOR_ASSISTIVE_THEMES,
     formatThemeName,
 
     // Constants

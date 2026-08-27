@@ -4,19 +4,19 @@
  * Builds the ios tokens to the correct final package format (output to dist_ios)
  */
 import fs from 'fs';
+import path from 'path';
 import { glob } from 'glob';
 
-const THEMES = glob.sync('dist/ios/tokens-*.swift');
+const OUTPUT_DIRECTORY = 'dist_ios/Sources/DialtoneTokens';
 
-if (!fs.existsSync('dist_ios/Sources/DialtoneTokens')) {
-  fs.mkdirSync('dist_ios/Sources/DialtoneTokens', { recursive: true });
+// Reset the directory rather than unlinking a filename pattern, so themes that
+// were renamed or removed can't survive a rebuild. Everything under Sources/ is
+// generated; the package's tracked files (Package.swift, VERSION) sit above it.
+fs.rmSync(OUTPUT_DIRECTORY, { recursive: true, force: true });
+fs.mkdirSync(OUTPUT_DIRECTORY, { recursive: true });
+
+for (const source of glob.sync('dist/ios/tokens-*.swift')) {
+  const themeName = path.basename(source);
+  fs.copyFileSync(source, path.join(OUTPUT_DIRECTORY, themeName));
+  console.log(`Copied ${themeName} to dist_ios`);
 }
-
-THEMES
-  .map(theme => theme.replace('dist/ios/', ''))
-  .forEach(themeName => {
-    fs.copyFile(`dist/ios/${themeName}`, `dist_ios/Sources/DialtoneTokens/${themeName}`, (err) => {
-      if (err) throw err;
-      console.log(`Copied ${themeName} to dist_ios`);
-    });
-  });

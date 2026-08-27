@@ -7,35 +7,44 @@ import '@dialpad/dialtone-tokens/layered/tokens-base-colors.css';
 import '@dialpad/dialtone-tokens/layered/tokens-dp-colors.css';
 import { addons } from 'storybook/preview-api';
 import { setMode, setBrand, setContrast, initDialtoneTheme } from '@dialpad/dialtone-tokens/themes/config';
+import { createThemeController } from './theme-controller.js';
 
-// Layered theme imports
-let Dp, Tmo, Aegean, Botany, Buttercream, HighDesert, Melon, Plum, Sunflower, VerdantHaze;
-let ProtaDeuter, Trita, Theme101, Theme102, Theme103, Theme137, HighContrast;
+// Storybook shows a representative subset of the full Dialtone theme set, not
+// all of it. This list is the only place to edit when that subset changes — the
+// toolbar options and the loaded theme map are both derived from it. Paths stay
+// literal so Vite can resolve them, and every import starts here at module
+// scope, so they load concurrently rather than one after another.
+const BRAND_IMPORTS = [
+  ['dp', import('@dialpad/dialtone-tokens/themes/dp')],
+  ['tmo', import('@dialpad/dialtone-tokens/themes/tmo')],
+  ['aegean', import('@dialpad/dialtone-tokens/themes/aegean')],
+  ['botany', import('@dialpad/dialtone-tokens/themes/botany')],
+  ['buttercream', import('@dialpad/dialtone-tokens/themes/buttercream')],
+  ['eucalyptus', import('@dialpad/dialtone-tokens/themes/eucalyptus')],
+  ['high-desert', import('@dialpad/dialtone-tokens/themes/high-desert')],
+  ['melon', import('@dialpad/dialtone-tokens/themes/melon')],
+  ['mulberry', import('@dialpad/dialtone-tokens/themes/mulberry')],
+  ['paprika', import('@dialpad/dialtone-tokens/themes/paprika')],
+  ['plum', import('@dialpad/dialtone-tokens/themes/plum')],
+  ['raincloud', import('@dialpad/dialtone-tokens/themes/raincloud')],
+  ['sunflower', import('@dialpad/dialtone-tokens/themes/sunflower')],
+  ['verdant-haze', import('@dialpad/dialtone-tokens/themes/verdant-haze')],
+  ['prota-deuter', import('@dialpad/dialtone-tokens/themes/prota-deuter')],
+  ['trita', import('@dialpad/dialtone-tokens/themes/trita')],
+];
 
-(async () => {
-  Dp = (await import('@dialpad/dialtone-tokens/themes/dp')).default;
-  Tmo = (await import('@dialpad/dialtone-tokens/themes/tmo')).default;
-  Aegean = (await import('@dialpad/dialtone-tokens/themes/aegean')).default;
-  Botany = (await import('@dialpad/dialtone-tokens/themes/botany')).default;
-  Buttercream = (await import('@dialpad/dialtone-tokens/themes/buttercream')).default;
-  HighDesert = (await import('@dialpad/dialtone-tokens/themes/high-desert')).default;
-  Melon = (await import('@dialpad/dialtone-tokens/themes/melon')).default;
-  Plum = (await import('@dialpad/dialtone-tokens/themes/plum')).default;
-  Sunflower = (await import('@dialpad/dialtone-tokens/themes/sunflower')).default;
-  VerdantHaze = (await import('@dialpad/dialtone-tokens/themes/verdant-haze')).default;
-  ProtaDeuter = (await import('@dialpad/dialtone-tokens/themes/prota-deuter')).default;
-  Trita = (await import('@dialpad/dialtone-tokens/themes/trita')).default;
-  Theme101 = (await import('@dialpad/dialtone-tokens/themes/101')).default;
-  Theme102 = (await import('@dialpad/dialtone-tokens/themes/102')).default;
-  Theme103 = (await import('@dialpad/dialtone-tokens/themes/103')).default;
-  Theme137 = (await import('@dialpad/dialtone-tokens/themes/137')).default;
-  HighContrast = (await import('@dialpad/dialtone-tokens/themes/high-contrast')).default;
+// Titles that title-casing the id can't derive.
+const BRAND_TITLES = {
+  'dp': 'Dialpad',
+  'tmo': 'T-Mobile',
+  'prota-deuter': 'Protanopia/Deuteranopia',
+  'trita': 'Tritanopia',
+};
 
-  // Initialize layered theming once themes are loaded
-  if (Dp) {
-    initDialtoneTheme(Dp, 'light', document.documentElement);
-  }
-})();
+const brandTitle = (id) => BRAND_TITLES[id] ??
+  id.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+
+const highContrastImport = import('@dialpad/dialtone-tokens/themes/high-contrast');
 import { MINIMAL_VIEWPORTS } from 'storybook/viewport';
 import { setup } from '@storybook/vue3-vite';
 import React, { useState, useEffect } from 'react';
@@ -70,54 +79,27 @@ let currentDarkMode = (() => {
 })();
 let currentBrandTheme = 'dp';
 
+const themeController = createThemeController({
+  brandImports: BRAND_IMPORTS,
+  highContrastImport,
+  initialize: theme => initDialtoneTheme(theme, 'light', document.documentElement),
+  applyMode: mode => setMode(mode, document.documentElement),
+  applyBrand: theme => setBrand(theme, document.documentElement),
+  applyContrast: theme => setContrast(theme, document.documentElement),
+});
 
 const channel = addons.getChannel();
-
-// Function to get layered themes (ensures async imports have completed)
-const getLayeredThemes = () => ({
-  'dp': Dp,
-  'tmo': Tmo,
-  'aegean': Aegean,
-  'botany': Botany,
-  'buttercream': Buttercream,
-  'high-desert': HighDesert,
-  'melon': Melon,
-  'plum': Plum,
-  'sunflower': Sunflower,
-  'verdant-haze': VerdantHaze,
-  'prota-deuter': ProtaDeuter,
-  'trita': Trita,
-  '101': Theme101,
-  '102': Theme102,
-  '103': Theme103,
-  '137': Theme137,
-});
 
 const updateTheme = (isDark, isHighContrast, brandTheme = 'dp') => {
   currentDarkMode = isDark;
   currentContrast = isHighContrast ? 'high' : 'default';
   currentBrandTheme = brandTheme;
 
-  // Use layered theming system with data-dt-mode
-  setMode(isDark ? 'dark' : 'light', document.documentElement);
-
-  // Get current layered themes
-  const layeredThemes = getLayeredThemes();
-
-  // Wait for layered themes to load
-  if (layeredThemes[brandTheme]) {
-    setBrand(layeredThemes[brandTheme], document.documentElement);
-  } else {
-    // Themes might still be loading, try again
-    setTimeout(() => {
-      const themes = getLayeredThemes();
-      if (themes[brandTheme]) {
-        setBrand(themes[brandTheme], document.documentElement);
-      }
-    }, 100);
-  }
-
-  setContrast(isHighContrast ? HighContrast : null, document.documentElement);
+  void themeController.update({
+    mode: isDark ? 'dark' : 'light',
+    brand: brandTheme,
+    highContrast: isHighContrast,
+  });
 };
 
 channel.on(DARK_MODE_EVENT_NAME, (isDark) => {
@@ -153,24 +135,7 @@ export default {
       toolbar: {
         title: 'Theme',
         icon: 'paintbrush',
-        items: [
-          { value: 'dp', title: 'Dialpad' },
-          { value: 'tmo', title: 'T-Mobile' },
-          { value: 'aegean', title: 'Aegean' },
-          { value: 'botany', title: 'Botany' },
-          { value: 'buttercream', title: 'Buttercream' },
-          { value: 'high-desert', title: 'High Desert' },
-          { value: 'melon', title: 'Melon' },
-          { value: 'plum', title: 'Plum' },
-          { value: 'sunflower', title: 'Sunflower' },
-          { value: 'verdant-haze', title: 'Verdant Haze' },
-          { value: 'prota-deuter', title: 'Protanopia/Deuteranopia' },
-          { value: 'trita', title: 'Tritanopia' },
-          { value: '101', title: 'Theme 101' },
-          { value: '102', title: 'Theme 102' },
-          { value: '103', title: 'Theme 103' },
-          { value: '137', title: 'Theme 137' },
-        ],
+        items: BRAND_IMPORTS.map(([value]) => ({ value, title: brandTitle(value) })),
         dynamicTitle: true,
       },
     },

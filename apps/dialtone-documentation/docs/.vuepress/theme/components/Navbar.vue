@@ -83,7 +83,7 @@
     >
       <template #anchor>
         <dt-button
-          v-dt-tooltip:bottom="`Theme: ${capitalize(currentTheme)}`"
+          v-dt-tooltip:bottom="`Theme: ${formatThemeName(currentTheme)}`"
           class="theme-toggle-button dialtone-shell-btn"
           importance="clear"
           kind="muted"
@@ -111,7 +111,7 @@
             navigation-type="arrow-keys"
             @click="setTheme('dp')"
           >
-            Dialpad (DP)
+            {{ formatThemeName('dp') }}
             <template #end>
               <dt-icon :class="{ 'd-o0': currentTheme !== 'dp' }" name="check" size="200" />
             </template>
@@ -132,7 +132,7 @@
             navigation-type="arrow-keys"
             @click="setTheme('tmo')"
           >
-            T-Mobile (TMO)
+            {{ formatThemeName('tmo') }}
             <template #end>
               <dt-icon :class="{ 'd-o0': currentTheme !== 'tmo' }" name="check" size="200" />
             </template>
@@ -149,38 +149,7 @@
             </dt-text>
           </template>
           <dt-list-item
-            role="menuitem"
-            navigation-type="arrow-keys"
-            @click="setTheme('prota-deuter')"
-          >
-            Prota-Deuter
-            <template #end>
-              <dt-icon :class="{ 'd-o0': currentTheme !== 'prota-deuter' }" name="check" size="200" />
-            </template>
-          </dt-list-item>
-          <dt-list-item
-            role="menuitem"
-            navigation-type="arrow-keys"
-            @click="setTheme('trita')"
-          >
-            Trita
-            <template #end>
-              <dt-icon :class="{ 'd-o0': currentTheme !== 'trita' }" name="check" size="200" />
-            </template>
-          </dt-list-item>
-        </dt-list-item-group>
-        <dt-dropdown-separator />
-        <dt-list-item-group
-          heading=" "
-          heading-class="d-px-100"
-        >
-          <template #heading>
-            <dt-text as="label" kind="label" size="100" tone="tertiary">
-              Named Themes
-            </dt-text>
-          </template>
-          <dt-list-item
-            v-for="themeName in namedThemes"
+            v-for="themeName in colorAssistiveThemes"
             :key="themeName"
             role="menuitem"
             navigation-type="arrow-keys"
@@ -199,19 +168,19 @@
         >
           <template #heading>
             <dt-text as="label" kind="label" size="100" tone="tertiary">
-              Experimental (37 themes)
+              Standard Themes
             </dt-text>
           </template>
           <dt-list-item
-            v-for="themeNum in numberedThemes"
-            :key="themeNum"
+            v-for="themeName in standardThemes"
+            :key="themeName"
             role="menuitem"
             navigation-type="arrow-keys"
-            @click="setTheme(themeNum)"
+            @click="setTheme(themeName)"
           >
-            Theme {{ themeNum }}
+            {{ formatThemeName(themeName) }}
             <template #end>
-              <dt-icon :class="{ 'd-o0': currentTheme !== themeNum }" name="check" size="200" />
+              <dt-icon :class="{ 'd-o0': currentTheme !== themeName }" name="check" size="200" />
             </template>
           </dt-list-item>
         </dt-list-item-group>
@@ -440,8 +409,8 @@ const {
   setContrast,
   setMaterial,
   setTheme,
-  namedThemes,
-  numberedThemes,
+  standardThemes,
+  colorAssistiveThemes,
   formatThemeName,
   materials,
   currentMaterial,

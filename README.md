@@ -100,13 +100,13 @@ Use these getters to drive picker UI (disable material options on locked brands)
 
 ##### Available Themes
 
-50+ themes total. Pass theme modules to `initDialtoneTheme()` or `setBrand()`.
+50 themes total. Pass theme modules to `initDialtoneTheme()` or `setBrand()`.
 
-**Standard:** dp, tmo, aegean, botany, buttercream, high-desert, melon, plum, sunflower, verdant-haze
+**Base:** dp (Dialpad — every other theme layers on top of it) · **Partner:** tmo
+
+**Standard:** aegean, alpine, arctic, aurora, autumn, blue-hour, botany, brick, buttercream, cactus-bloom, cayenne, cedar-grove, cobalt, copper, coral-reef, dragonfruit, eucalyptus, fjord, high-desert, inkberry, kiln, lavender, marigold, melon, mulberry, mushroom, nightshade, paprika, peach-blossom, plum, poppy-field, raincloud, rhubarb, rust-harbor, sea-glow, seashell, solstice, storm, sunflower, tropical-night, verdant-haze, wildflower, wineberry, winter-gold, woodland
 
 **Accessibility:** prota-deuter, trita
-
-**Experimental:** 101 through 137
 
 **Contrast:** high-contrast
 

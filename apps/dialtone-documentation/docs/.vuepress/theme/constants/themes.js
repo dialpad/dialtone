@@ -23,60 +23,57 @@ export const COLOR_ASSISTIVE_THEMES = [
 ];
 
 /**
- * Named themes that have official marketing names (alphabetical order)
+ * Standard brand themes (alphabetical order)
  * Used for UI grouping in theme selection dropdowns
  *
- * @constant {string[]} NAMED_THEMES
+ * @constant {string[]} STANDARD_THEMES
  */
-export const NAMED_THEMES = [
+export const STANDARD_THEMES = [
   'aegean',
+  'alpine',
+  'arctic',
+  'aurora',
+  'autumn',
+  'blue-hour',
   'botany',
+  'brick',
   'buttercream',
-  // 'ceruleo',
+  'cactus-bloom',
+  'cayenne',
+  'cedar-grove',
+  'cobalt',
+  'copper',
+  'coral-reef',
+  'dragonfruit',
+  'eucalyptus',
+  'fjord',
   'high-desert',
+  'inkberry',
+  'kiln',
+  'lavender',
+  'marigold',
   'melon',
+  'mulberry',
+  'mushroom',
+  'nightshade',
+  'paprika',
+  'peach-blossom',
   'plum',
+  'poppy-field',
+  'raincloud',
+  'rhubarb',
+  'rust-harbor',
+  'sea-glow',
+  'seashell',
+  'solstice',
+  'storm',
   'sunflower',
+  'tropical-night',
   'verdant-haze',
-];
-
-/**
- * Numbered experimental themes (101-137)
- * These themes are awaiting final marketing names
- *
- * @constant {string[]} NUMBERED_THEMES
- */
-export const NUMBERED_THEMES = [
-  '101', '102', '103', '104', '105', '106', '107', '108', '109', '110',
-  '111', '112', '113', '114', '115', '116', '117', '118', '119', '120',
-  '121', '122', '123', '124', '125', '126', '127', '128', '129', '130',
-  '131', '132', '133', '134', '135', '136', '137',
-];
-
-/**
- * Complete list of theme IDs in display order.
- * This order must match the import sequence in client.js for proper theme loading.
- *
- * Structure:
- * 1. Base theme (dp) - Foundation for all other themes
- * 2. Partner themes (tmo) - Brand partner customizations
- * 3. Color assistive themes (prota-deuter, trita) - Accessibility variants
- * 4. Named themes - Production-ready themes with marketing names (alphabetical)
- * 5. Numbered themes (101-137) - Experimental themes awaiting final names
- *
- * @constant {string[]} ALL_THEME_IDS
- */
-export const ALL_THEME_IDS = [
-  // Base theme
-  'dp',
-  // Partner themes
-  'tmo',
-  // Color assistive themes (accessibility)
-  ...COLOR_ASSISTIVE_THEMES,
-  // Named themes (alphabetical)
-  ...NAMED_THEMES,
-  // Numbered themes (experimental - not yet named)
-  ...NUMBERED_THEMES,
+  'wildflower',
+  'wineberry',
+  'winter-gold',
+  'woodland',
 ];
 
 /**
@@ -90,18 +87,4 @@ export const THEME_DISPLAY_NAMES = {
   'tmo': 'T-Mobile',
   'prota-deuter': 'Protanopia/Deuteranopia',
   'trita': 'Tritanopia',
-};
-
-/**
- * Categorized theme groups for UI organization
- * Used to structure theme selection dropdowns with logical groupings
- *
- * @constant {Object} THEME_CATEGORIES
- */
-export const THEME_CATEGORIES = {
-  base: ['dp'],
-  partner: ['tmo'],
-  accessibility: COLOR_ASSISTIVE_THEMES,
-  named: NAMED_THEMES,
-  experimental: NUMBERED_THEMES,
 };
