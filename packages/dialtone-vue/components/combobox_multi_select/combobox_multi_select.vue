@@ -495,6 +495,7 @@ export default {
       return {
         ...extractVueListeners(this.$attrs),
         onInput: event => {
+          if (event instanceof InputEvent && event.isComposing) return;
           this.$emit('input', event);
           if (this.hasSuggestionList) {
             this.showComboboxList();
@@ -502,7 +503,7 @@ export default {
         },
 
         onKeydown: event => {
-          if (this.disabled) return;
+          if (this.disabled || event.isComposing) return;
           this.onInputKeyDown(event);
           this.$emit('keydown', event);
           // Use event.key (not event.code) so NumpadEnter normalizes to 'Enter'
