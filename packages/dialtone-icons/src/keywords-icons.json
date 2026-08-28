@@ -1449,7 +1449,6 @@
         "brackets",
         "code",
         "json",
-        "code",
         "token",
         "curly",
         "data",
@@ -1619,7 +1618,6 @@
       ],
       "unlink-2": [
         "url",
-        "unchain",
         "unchain"
       ]
     },
@@ -1785,6 +1783,14 @@
         "bearing",
         "orient"
       ],
+      "component": [
+        "design",
+        "element",
+        "group",
+        "module",
+        "part",
+        "symbol"
+      ],
       "copy": [
         "clone",
         "duplicate"
@@ -1845,8 +1851,7 @@
       "hash-bold": [
         "number",
         "pound",
-        "hashtag",
-        "number"
+        "hashtag"
       ],
       "hash": [
         "hashtag",
@@ -2014,7 +2019,6 @@
       "shield-off": [
         "security",
         "secure",
-        "security",
         "insecure"
       ],
       "shield": [
@@ -2241,6 +2245,11 @@
       ],
       "file-pdf": [
         "document"
+      ],
+      "file-text": [
+        "document",
+        "txt",
+        "data"
       ],
       "file": [
         "document"

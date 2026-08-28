@@ -4,12 +4,29 @@ import { expect } from 'vitest';
 import { shallowMount } from '@vue/test-utils';
 import { nextTick } from 'vue';
 import { getSupportedComponents } from '@/src/lib/test/utils_test';
-import { DtInput, DtToggle } from '@dialpad/dialtone-vue';
+import { DtButton, DtCard, DtInput, DtToggle } from '@dialpad/dialtone-vue';
 import allDocs from '@/node_modules/@dialpad/dialtone-vue/dist/component-documentation.json';
+import variants from '@/src/variants/variants';
 
 const documentation = allDocs;
+const buttonDoc = allDocs.find(d => d.displayName === 'DtButton');
+const cardDoc = allDocs.find(d => d.displayName === 'DtCard');
 const toggleDoc = allDocs.find(d => d.displayName === 'DtToggle');
 const inputDoc = allDocs.find(d => d.displayName === 'DtInput');
+const variantBank = variants();
+
+function shallowMountCombinator (options) {
+  return shallowMount(DtcCombinator, {
+    ...options,
+    global: {
+      ...options.global,
+      stubs: {
+        ...options.global?.stubs,
+        teleport: false,
+      },
+    },
+  });
+}
 
 describe('combinator.vue test', function () {
   const testComponents = getSupportedComponents();
@@ -24,7 +41,7 @@ describe('combinator.vue test', function () {
     testComponents.forEach(component => {
       describe(`When mounted with component '${component.name}'`, function () {
         beforeEach(function () {
-          wrapper = shallowMount(DtcCombinator, {
+          wrapper = shallowMountCombinator({
             props: {
               component,
               documentation,
@@ -47,7 +64,7 @@ describe('combinator.vue test', function () {
   describe('v-model writeback', function () {
     describe('boolean modelValue (DtToggle)', function () {
       beforeEach(function () {
-        wrapper = shallowMount(DtcCombinator, {
+        wrapper = shallowMountCombinator({
           props: {
             component: DtToggle,
             documentation: toggleDoc,
@@ -83,7 +100,7 @@ describe('combinator.vue test', function () {
 
     describe('string modelValue (DtInput)', function () {
       beforeEach(function () {
-        wrapper = shallowMount(DtcCombinator, {
+        wrapper = shallowMountCombinator({
           props: {
             component: DtInput,
             documentation: inputDoc,
@@ -118,9 +135,82 @@ describe('combinator.vue test', function () {
     });
   });
 
+  describe('component changes', function () {
+    beforeEach(function () {
+      wrapper = shallowMountCombinator({
+        props: {
+          component: DtButton,
+          documentation: buttonDoc,
+          variants: variantBank.DtButton,
+        },
+      });
+    });
+
+    afterEach(function () {
+      wrapper.unmount();
+    });
+
+    it('resets the active preset and options when the target component changes', async function () {
+      wrapper.vm.updateVariant('icon only');
+      await nextTick();
+
+      await wrapper.setProps({
+        component: DtCard,
+        documentation: cardDoc,
+        variants: variantBank.DtCard,
+      });
+      await nextTick();
+
+      const renderer = wrapper.findComponent({ name: 'DtcRenderer' });
+
+      expect(wrapper.vm.selectedVariant).toBe('default');
+      expect(renderer.props('options').slots.content).toBe(
+        variantBank.DtCard.default.slots.content.initialValue,
+      );
+    });
+  });
+
+  describe('fullscreen layout', function () {
+    let host;
+
+    beforeEach(function () {
+      host = document.createElement('div');
+      document.body.appendChild(host);
+      wrapper = shallowMountCombinator({
+        attachTo: host,
+        props: {
+          component: DtButton,
+          documentation: buttonDoc,
+          fullScreen: true,
+          variants: {},
+        },
+      });
+    });
+
+    afterEach(function () {
+      wrapper.unmount();
+      host.remove();
+    });
+
+    it('teleports the fullscreen playground to the document body', function () {
+      const fullscreenPlayground = Array.from(document.body.children).find(child => {
+        return child.classList.contains('dialtone-playground--fullscreen');
+      });
+
+      expect(fullscreenPlayground).toBeTruthy();
+      expect(host.querySelector('.dialtone-playground--fullscreen')).toBeNull();
+    });
+
+    it('keeps the fullscreen shell below modal popover layers', function () {
+      const fullscreenPlayground = document.body.querySelector('.dialtone-playground--fullscreen');
+
+      expect(fullscreenPlayground.classList.contains('d-zi-popover')).toBe(true);
+    });
+  });
+
   describe('control display settings', function () {
     beforeEach(function () {
-      wrapper = shallowMount(DtcCombinator, {
+      wrapper = shallowMountCombinator({
         props: {
           component: DtToggle,
           documentation: toggleDoc,
@@ -145,7 +235,7 @@ describe('combinator.vue test', function () {
 
       expect(window.localStorage.getItem('dialtoneCombinatorControlsHideDeprecated')).toBe('false');
 
-      const nextWrapper = shallowMount(DtcCombinator, {
+      const nextWrapper = shallowMountCombinator({
         props: {
           component: DtInput,
           documentation: inputDoc,
