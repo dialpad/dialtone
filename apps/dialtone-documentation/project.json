@@ -46,6 +46,13 @@
         "command": "node apps/dialtone-documentation/scripts/generate-tooling-docs.mjs"
       }
     },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{workspaceRoot}",
+        "command": "vitest run apps/dialtone-documentation/scripts"
+      }
+    },
     "build": {
       "executor": "nx:run-commands",
       "dependsOn": [

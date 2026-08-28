@@ -4,7 +4,7 @@
  * Each handler defines { match, handle, closingTags } to detect and
  * transform a specific Vue component tag into markdown output.
  *
- * Also provides shared helpers: consumeUntilClose and parseFrontmatterField.
+ * Also provides the shared consumeUntilClose helper.
  */
 
 import { transformVueApi } from './transform-vue-api.mjs';
@@ -43,19 +43,6 @@ export function consumeUntilClose (lines, i, trimmed, ...closingTags) {
     }
   }
   return i;
-}
-
-/**
- * Extract a frontmatter field value, stripping surrounding quotes.
- *
- * @param {string} trimmed - A trimmed frontmatter line
- * @param {string} field - Field name (e.g. 'title', 'description')
- * @returns {string|null} - Extracted value or null if no match
- */
-export function parseFrontmatterField (trimmed, field) {
-  const match = trimmed.match(new RegExp(`^${field}:\\s*(.+)`));
-  if (!match) return null;
-  return match[1].replace(/^['"]|['"]$/g, '').trim();
 }
 
 /**
