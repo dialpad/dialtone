@@ -86,4 +86,4 @@ Run Stylelint against the stylesheet types used by your project:
 npx stylelint "**/*.{css,less,vue}"
 ```
 
-Projects that lint Less or Vue style blocks may need a compatible Stylelint custom syntax. Keep that setup in the consuming project's Stylelint configuration.
+Projects that lint Less or Vue style blocks may need a Stylelint-compatible custom syntax. Keep that setup in the consuming project's Stylelint configuration.

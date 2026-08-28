@@ -100,7 +100,7 @@ export function createGradientHeroCursor ({ element, rectElement, onChange }) {
       ? Math.hypot(target.x - head[0], target.y - head[1])
       : Infinity;
 
-    if (gap > TRAIL_MIN_STEP) {
+    if (movedThisFrame && gap > TRAIL_MIN_STEP) {
       trail.unshift([target.x, target.y, gain, 0]);
     } else if (head && movedThisFrame) {
       head[2] = Math.max(head[2], gain);
@@ -177,10 +177,13 @@ export function createGradientHeroCursor ({ element, rectElement, onChange }) {
     const ny = (event.clientY - rect.top) / rect.height;
 
     if (!seen) {
-      // First sighting — seed both trails at the pointer so the effect does not drag a
+      // First sighting — seed the cursor positions at the pointer so the effect does not drag a
       // stale value in from wherever it previously was.
       lagged.x = held.x = nx;
       lagged.y = held.y = ny;
+      target.x = nx;
+      target.y = ny;
+      movedThisFrame = true;
       seen = true;
     }
 

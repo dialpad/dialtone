@@ -11,7 +11,7 @@ next:
 ## Newest Components
 
 <DtBox class="d-d-grid d-g-300 md:d-g-cols3 d-mbe-400">
-  <DtLink to="/components/box" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
+  <DtLink to="/components/box.html" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
     <DtStack direction="row" gap="200">
       <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
         <DtStack>
@@ -24,7 +24,7 @@ next:
       </DtStack>
     </DtStack>
   </DtLink>
-  <DtLink to="/components/filter-pill" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
+  <DtLink to="/components/filter-pill.html" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
     <DtStack direction="row" gap="200">
       <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
         <DtStack>
@@ -37,7 +37,7 @@ next:
       </DtStack>
     </DtStack>
   </DtLink>
-  <DtLink to="/components/mode-island" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
+  <DtLink to="/components/mode-island.html" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
     <DtStack direction="row" gap="200">
       <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
         <DtStack>
@@ -50,7 +50,7 @@ next:
       </DtStack>
     </DtStack>
   </DtLink>
-  <DtLink to="/components/motion-text" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
+  <DtLink to="/components/motion-text.html" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
     <DtStack direction="row" gap="200">
       <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
         <DtStack>
@@ -63,7 +63,7 @@ next:
       </DtStack>
     </DtStack>
   </DtLink>
-  <DtLink to="/components/resizable" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
+  <DtLink to="/components/resizable.html" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
     <DtStack direction="row" gap="200">
       <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
         <DtStack>
@@ -76,7 +76,7 @@ next:
       </DtStack>
     </DtStack>
   </DtLink>
-  <DtLink to="/components/segmented-control" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
+  <DtLink to="/components/segmented-control.html" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
     <DtStack direction="row" gap="200">
       <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
         <DtStack>
@@ -89,7 +89,7 @@ next:
       </DtStack>
     </DtStack>
   </DtLink>
-  <DtLink to="/components/text" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
+  <DtLink to="/components/text.html" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
     <DtStack direction="row" gap="200">
       <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
         <DtStack>
@@ -102,7 +102,7 @@ next:
       </DtStack>
     </DtStack>
   </DtLink>
-  <DtLink to="/components/text-list" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
+  <DtLink to="/components/text-list.html" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
     <DtStack direction="row" gap="200">
       <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
         <DtStack>

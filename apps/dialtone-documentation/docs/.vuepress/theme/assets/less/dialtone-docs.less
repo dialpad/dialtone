@@ -35,6 +35,10 @@ html[data-app-ready] #app {
 
 html {
   scroll-behavior: smooth;
+
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
 }
 
 body {
@@ -43,6 +47,10 @@ body {
 
 .dialtone-doc-page-scroll-container {
   scroll-behavior: smooth;
+
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
 
   // Instant scrolls defeat the smooth default via this modifier — see
   // scrollRouteToTop() in pageToc.js. Toggle it rather than inventing another opt-out.
@@ -56,10 +64,6 @@ body {
 //      Because the doc site needs layout specifications that aren't
 //      appropriate to ship as part of Dialtone.
 //  ----------------------------------------------------------------------------
-.dialtone-header {
-  // keep
-}
-
 .dialtone-shell-sidebar {
   background-color: var(--dt-shell-color-surface-default);
 }
@@ -475,14 +479,6 @@ code {
     gap: var(--dt-spacing-400);
   }
 
-  // xs: 320,
-  // sm: 480,
-  // md: 640,
-  // lg: 960,
-  // xl: 1264,
-  // xxl: 1536,
-  // xxxl: 1764,
-
   &__item {
     display: block;
     overflow: hidden;
@@ -693,27 +689,6 @@ code {
   &:hover {
     background-color: var(--primary-color-hover);
   }
-}
-
-//  ============================================================================
-//  $   DEBUGGING / TEST
-//  ----------------------------------------------------------------------------
-
-[outline] {
-  outline: var(--dt-spacing-25) solid orangered;
-  outline-offset: var(--dt-spacing-25-negative);
-}
-[outline\:green] {
-  outline: var(--dt-spacing-25) solid green;
-  outline-offset: var(--dt-spacing-25-negative);
-}
-[outline\:blue] {
-  outline: var(--dt-spacing-25) solid rgb(0, 33, 166);
-  outline-offset: var(--dt-spacing-25-negative);
-}
-[outline\:cyan] {
-  outline: var(--dt-spacing-25) solid cyan;
-  outline-offset: var(--dt-spacing-25-negative);
 }
 
 // ============================================================================

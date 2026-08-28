@@ -60,7 +60,9 @@
               <template #startIcon>
                 <!-- TODO: possible Dialtone icon addition. Intentionally embedded for now. -->
                 <svg
+                  aria-hidden="true"
                   class="d-icon--size-200 d-icon"
+                  focusable="false"
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
                   height="24"

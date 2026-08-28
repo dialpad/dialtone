@@ -217,7 +217,6 @@ const handleToggle = (itemKey, shouldOpen, peerKeys = []) => {
 
 <style>
 .dialtone-sidebar__list .dialtone-shell-btn:focus-visible {
-  box-shadow: none;
   --button-color-background: var(--dt-shell-action-color-background-secondary-hover);
 }
 </style>

@@ -134,13 +134,17 @@ defineEmits(['click']);
 
 const buttonRef = ref(null);
 const isExternal = computed(() => isExternalUrl(props.item.link));
+const prefersReducedMotion = () => (
+  typeof window !== 'undefined' &&
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches
+);
 
 watch(() => props.highlighted, (highlighted) => {
   if (!highlighted) return;
 
   const element = buttonRef.value?.$el || buttonRef.value;
   element?.scrollIntoView({
-    behavior: 'smooth',
+    behavior: prefersReducedMotion() ? 'auto' : 'smooth',
     block: 'nearest',
     inline: 'nearest',
   });

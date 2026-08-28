@@ -6,7 +6,7 @@
   >
     <sidebar-item
       v-for="(item, index) in items"
-      :key="item.link || item.text"
+      :key="getNavItemKey(item)"
       :item="item"
       :depth="0"
       :open-items="openItems"
@@ -23,7 +23,7 @@
 <script setup>
 import { computed } from 'vue';
 import SidebarItem from './SidebarItem.vue';
-import { collectPeerKeys } from '../utils/sidebarSearch.js';
+import { collectPeerKeys, getNavItemKey } from '../utils/sidebarSearch.js';
 
 const props = defineProps({
   items: {
@@ -57,7 +57,7 @@ const emit = defineEmits(['toggle']);
 const groupGap = computed(() => props.presentation === 'promoted' ? '0' : '50');
 const peerKeys = computed(() => collectPeerKeys(props.items));
 
-function forwardToggle (itemKey, shouldOpen, peerKeys) {
-  emit('toggle', itemKey, shouldOpen, peerKeys);
+function forwardToggle (itemKey, shouldOpen, childPeerKeys) {
+  emit('toggle', itemKey, shouldOpen, childPeerKeys);
 }
 </script>

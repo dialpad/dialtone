@@ -122,7 +122,8 @@ export function resolveHalftoneDotPalette (scopeElement) {
     if (!isVariableDeclared(scopeElement, name)) break;
 
     const resolved = resolveVariable(name, scopeElement);
-    if (resolved) stops.push(resolved);
+    if (!resolved) break;
+    stops.push(resolved);
   }
 
   if (stops.length > 0) return stops;

@@ -469,12 +469,12 @@
           "link": "/components/loader.html"
         },
         {
-          "text": "Mode",
-          "link": "/components/mode-island.html"
-        },
-        {
           "text": "Modal",
           "link": "/components/modal.html"
+        },
+        {
+          "text": "Mode",
+          "link": "/components/mode-island.html"
         },
         {
           "text": "Motion Text",
@@ -493,12 +493,12 @@
           "link": "/components/popover.html"
         },
         {
-          "text": "Progress Circle",
-          "link": "/components/progress-circle.html"
-        },
-        {
           "text": "Presence",
           "link": "/components/presence.html"
+        },
+        {
+          "text": "Progress Circle",
+          "link": "/components/progress-circle.html"
         },
         {
           "text": "Prose",

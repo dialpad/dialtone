@@ -30,7 +30,7 @@
       >
         <sidebar-item
           v-for="(subItem, index) in subItems"
-          :key="subItem.link || subItem.text"
+          :key="getNavItemKey(subItem)"
           :item="subItem"
           :depth="depth + 1"
           :open-items="openItems"
@@ -122,7 +122,7 @@ const isHighlighted = computed(() => (
   props.searchActive && props.activeItemPath === props.itemPath
 ));
 const isGroupingOnlyParent = computed(() => (
-  hasChildren.value && props.item.link === subItems.value[0].link
+  hasChildren.value && subItems.value.some(child => child.link === props.item.link)
 ));
 const isRouteActive = computed(() => {
   if (!props.item.link || isGroupingOnlyParent.value) return false;
@@ -141,7 +141,7 @@ function handleClick (event) {
   emit('toggle', itemKey.value, !isOpen.value, props.peerKeys);
 }
 
-function forwardToggle (itemKey, shouldOpen, peerKeys) {
-  emit('toggle', itemKey, shouldOpen, peerKeys);
+function forwardToggle (childKey, shouldOpen, childPeerKeys) {
+  emit('toggle', childKey, shouldOpen, childPeerKeys);
 }
 </script>

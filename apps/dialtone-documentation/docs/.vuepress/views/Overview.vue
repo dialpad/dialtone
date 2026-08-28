@@ -7,7 +7,7 @@
           :to="page.link"
           class="dialtone-wall__item"
         >
-          <div v-if="showThumbnails && page.thumb" class="dialtone-wall__image">
+          <div v-if="showThumbnails && pageThumbName(page)" class="dialtone-wall__image">
             <img
               v-if="thumbImgUrl(pageThumbName(page))"
               :src="thumbImgUrl(pageThumbName(page))"

@@ -144,8 +144,10 @@ const refreshColors = (surface) => {
 };
 
 const syncMotionState = () => {
+  if (!shaderMount) return;
+
   const speed = currentSpeed();
-  shaderMount?.setSpeed(speed);
+  shaderMount.setSpeed(speed);
 
   if (shouldTrackPointer()) {
     cursor?.start();
