@@ -174,6 +174,7 @@ describe('combinator.vue test', function () {
     let host;
 
     beforeEach(function () {
+      document.documentElement.setAttribute('data-overlayscrollbars', '');
       host = document.createElement('div');
       document.body.appendChild(host);
       wrapper = shallowMountCombinator({
@@ -190,6 +191,8 @@ describe('combinator.vue test', function () {
     afterEach(function () {
       wrapper.unmount();
       host.remove();
+      document.documentElement.removeAttribute('data-overlayscrollbars');
+      document.documentElement.classList.remove('d-scrollbar-disabled', 'd-of-hidden');
     });
 
     it('teleports the fullscreen playground to the document body', function () {
@@ -205,6 +208,14 @@ describe('combinator.vue test', function () {
       const fullscreenPlayground = document.body.querySelector('.dialtone-playground--fullscreen');
 
       expect(fullscreenPlayground.classList.contains('d-zi-popover')).toBe(true);
+    });
+
+    it('locks the OverlayScrollbars root while fullscreen', async function () {
+      expect(document.documentElement.classList.contains('d-scrollbar-disabled')).toBe(true);
+
+      await wrapper.setProps({ fullScreen: false });
+
+      expect(document.documentElement.classList.contains('d-scrollbar-disabled')).toBe(false);
     });
   });
 

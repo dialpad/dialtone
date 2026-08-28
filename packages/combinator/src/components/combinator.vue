@@ -234,6 +234,7 @@ import DtIconRefresh from '@dialpad/dialtone-icons/vue/refresh';
 import DtIconChevronsUpDown from '@dialpad/dialtone-icons/vue/chevrons-up-down';
 import DtIconCheck from '@dialpad/dialtone-icons/vue/check';
 import DtIconLayoutGrid from '@dialpad/dialtone-icons/vue/layout-grid';
+import { disableRootScrolling, enableRootScrolling } from '@dialpad/dialtone-vue';
 
 const props = defineProps({
   /**
@@ -591,9 +592,9 @@ function updateBodyFullScreenState(value) {
   if (typeof document === 'undefined') return;
 
   if (value) {
-    document.body.classList.add('d-of-hidden', 'd-h100vh');
+    disableRootScrolling();
   } else {
-    document.body.classList.remove('d-of-hidden', 'd-h100vh');
+    enableRootScrolling();
   }
 }
 
