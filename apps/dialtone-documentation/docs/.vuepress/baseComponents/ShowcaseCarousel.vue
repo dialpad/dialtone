@@ -169,10 +169,11 @@ onMounted(() => {
   transition: none;
   block-size: 66vh;
   user-select: none;
+}
 
-  @media screen and (min-width: 640px) {
+@media screen and (min-width: 640px) {
+  .showcase-carousel__track {
     block-size: 768px;
   }
-
 }
 </style>
