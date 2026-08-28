@@ -3,9 +3,11 @@
     v-for="(member, key) in memberMap"
     :key="key"
   >
-    <div
+    <dt-box
       v-if="!member.hideControl"
       data-qa="dtc-option-bar-member-group-control"
+      min-block-size="24px"
+      class="d-plc-center"
     >
       <dtc-option-bar-control
         :value="values[key]"
@@ -32,7 +34,7 @@
         @update:value="e => updateMember(e, key)"
         @update:control="e => updateControl(e, key)"
       />
-    </div>
+    </dt-box>
   </template>
 </template>
 
@@ -50,7 +52,7 @@ import { isClassProp, shouldDisableSlotClassProp } from '@/src/lib/utils';
 const ICON_SLOT_ORDER = ['startIcon', 'endIcon', 'blockStartIcon', 'blockEndIcon', 'icon'];
 
 const PROP_PRIORITY = [
-  'title', 'as', 'variant', 'kind', 'size', 'family', 'label', 'importance', 'presence',
+  'title', 'as', 'variant', 'kind', 'importance', 'size', 'family', 'label', 'presence',
   'placement', 'tone', 'density', 'strength', 'align',
   'type', 'underline', 'selected', 'active', 'disabled',
   'deferSelection', 'readOnly', 'showClear', 'useDropdown',

@@ -10,7 +10,7 @@
       kind="label"
       :size="100"
       tone="secondary"
-      class="d-input__label-text d-c-default d-mbe-0"
+      class="d-c-default d-d-block"
     >
       <slot name="label" />
     </dt-text>

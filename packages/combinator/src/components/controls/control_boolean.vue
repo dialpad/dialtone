@@ -8,7 +8,6 @@
       <dt-toggle
         :model-value="toggleValue"
         :disabled="disabled"
-        label-class="d-label--sm d-fc-secondary"
         :size="200"
         class="d-jc-space-between d-fl1"
         data-qa="dtc-control-boolean-input"
@@ -18,7 +17,6 @@
           kind="label"
           :size="100"
           tone="secondary"
-          class="d-input__label-text d-mbe-0"
         >
           <slot />
         </dt-text>

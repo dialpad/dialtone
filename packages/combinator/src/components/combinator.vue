@@ -1,88 +1,24 @@
 <template>
-  <div :class="['dialtone-playground', { 'dialtone-playground--fullscreen': isFullScreen }]">
-    <dt-stack
-      direction="row"
-      gap="500"
-      justify="between"
-      class="
-        d-p-100
-        d-pie-200
-        d-bb
-        d-bc-subtle
-      "
-      :class="variantOptions.length > 1 ? 'd-g-cols3' : 'd-g-cols2'"
+  <Teleport to="body" :disabled="!isFullScreen">
+    <div
+      v-bind="$attrs"
+      :class="[
+        'dialtone-playground',
+        {
+          'dialtone-playground--fullscreen': isFullScreen,
+          'd-zi-popover': isFullScreen,
+        },
+      ]"
     >
-      <dt-text
-        v-if="variantOptions.length < 2"
-        kind="code"
-        tone="primary"
-        strength="semibold"
-        :size="300"
-        as="div"
-        class="d-px-150 d-py-100"
-      >
-        {{ component.name }}
-      </dt-text>
       <dt-stack
-        v-else
         direction="row"
-        gap="100"
-        class="d-ai-center"
+        gap="500"
+        justify="between"
+        class="d-p-100 d-pie-200 d-bb d-bc-subtle"
+        :class="variantOptions.length > 1 ? 'd-g-cols3' : 'd-g-cols2'"
       >
-        <dt-dropdown
-          v-if="viewMode === 'single'"
-          navigation-type="arrow-keys"
-          placement="bottom-start"
-          content-class="d-wmn-500"
-        >
-          <template #anchor="{ attrs }">
-            <dt-button
-              v-dt-tooltip="'Presets'"
-              v-bind="attrs"
-              importance="outlined"
-              kind="muted"
-              :size="isFullScreen ? '400' : '300'"
-              leading-class="d-pbs-1 d-pis-150 d-mie-n25"
-            >
-              <template #leading>
-                <dt-text
-                  kind="code"
-                  tone="primary"
-                  strength="semibold"
-                  class="d-fs-inherit"
-                >
-                  {{ component.name }}:
-                </dt-text>
-              </template>
-              {{ selectedVariant || 'custom' }}
-              <template #endIcon="{ iconSize }">
-                <dt-icon-chevrons-up-down
-                  class="d-fc-muted"
-                  :size="iconSize"
-                />
-              </template>
-            </dt-button>
-          </template>
-          <template #list="{ close }">
-            <dt-list-item
-              v-for="option in variantOptions"
-              :key="option.value"
-              role="menuitem"
-              navigation-type="arrow-keys"
-              @click="updateVariant(option.value); close()"
-            >
-              {{ option.label }}
-              <template #end>
-                <dt-icon-check
-                  size="200"
-                  :class="option.value === selectedVariant ? 'd-o100' : 'd-o0'"
-                />
-              </template>
-            </dt-list-item>
-          </template>
-        </dt-dropdown>
         <dt-text
-          v-else
+          v-if="variantOptions.length < 2"
           kind="code"
           tone="primary"
           strength="semibold"
@@ -92,114 +28,168 @@
         >
           {{ component.name }}
         </dt-text>
-        <dt-button
-          ref="viewToggleRef"
-          v-dt-tooltip="viewMode === 'grid' ? 'Single view' : 'Spec sheet'"
-          aria-label="Toggle spec sheet view"
-          :aria-pressed="viewMode === 'grid'"
-          kind="muted"
-          importance="clear"
-          :size="200"
-          :active="viewMode === 'grid'"
-          @click="toggleViewMode"
-        >
-          <template #icon="{ iconSize }">
-            <dt-icon-layout-grid
-              :size="iconSize"
-            />
-          </template>
-        </dt-button>
+        <dt-stack v-else direction="row" gap="100" class="d-ai-center">
+          <dt-dropdown
+            v-if="viewMode === 'single'"
+            navigation-type="arrow-keys"
+            placement="bottom-start"
+            content-class="d-wmn-500"
+          >
+            <template #anchor="{ attrs }">
+              <dt-button
+                v-dt-tooltip="'Presets'"
+                v-bind="attrs"
+                importance="outlined"
+                kind="muted"
+                :size="isFullScreen ? '400' : '300'"
+                leading-class="d-pbs-1 d-pis-150 d-mie-n25"
+              >
+                <template #leading>
+                  <dt-text
+                    kind="code"
+                    tone="primary"
+                    strength="semibold"
+                    class="d-fs-inherit"
+                  >
+                    {{ component.name }}:
+                  </dt-text>
+                </template>
+                {{ selectedVariant || 'custom' }}
+                <template #endIcon="{ iconSize }">
+                  <dt-icon-chevrons-up-down
+                    class="d-fc-muted"
+                    :size="iconSize"
+                  />
+                </template>
+              </dt-button>
+            </template>
+            <template #list="{ close }">
+              <dt-list-item
+                v-for="option in variantOptions"
+                :key="option.value"
+                role="menuitem"
+                navigation-type="arrow-keys"
+                @click="
+                  updateVariant(option.value);
+                  close();
+                "
+              >
+                {{ option.label }}
+                <template #end>
+                  <dt-icon-check
+                    size="200"
+                    :class="
+                      option.value === selectedVariant ? 'd-o100' : 'd-o0'
+                    "
+                  />
+                </template>
+              </dt-list-item>
+            </template>
+          </dt-dropdown>
+          <dt-text
+            v-else
+            kind="code"
+            tone="primary"
+            strength="semibold"
+            :size="300"
+            as="div"
+            class="d-px-150 d-py-100"
+          >
+            {{ component.name }}
+          </dt-text>
+          <dt-button
+            ref="viewToggleRef"
+            v-dt-tooltip="viewMode === 'grid' ? 'Single view' : 'Spec sheet'"
+            aria-label="Toggle spec sheet view"
+            :aria-pressed="viewMode === 'grid'"
+            kind="muted"
+            importance="clear"
+            :size="200"
+            :active="viewMode === 'grid'"
+            @click="toggleViewMode"
+          >
+            <template #icon="{ iconSize }">
+              <dt-icon-layout-grid :size="iconSize" />
+            </template>
+          </dt-button>
+        </dt-stack>
+        <dt-stack gap="100" direction="row">
+          <dt-button
+            v-if="hasChanges"
+            v-dt-tooltip="`Reset`"
+            kind="muted"
+            importance="clear"
+            :size="200"
+            @click="resetOptions"
+          >
+            <template #icon="{ iconSize }">
+              <dt-icon-refresh :size="iconSize" />
+            </template>
+          </dt-button>
+          <dt-button
+            v-dt-tooltip="`Fullscreen`"
+            kind="muted"
+            importance="clear"
+            :size="200"
+            @click="toggleFullScreen"
+          >
+            <template #icon="{ iconSize }">
+              <dt-icon-minimize v-if="isFullScreen" :size="iconSize" />
+              <dt-icon-expand v-else :size="iconSize" />
+            </template>
+          </dt-button>
+        </dt-stack>
       </dt-stack>
-      <dt-stack
-        gap="100"
-        direction="row"
-      >
-        <dt-button
-          v-if="hasChanges"
-          v-dt-tooltip="`Reset`"
-          kind="muted"
-          importance="clear"
-          :size="200"
-          @click="resetOptions"
-        >
-          <template #icon="{ iconSize }">
-            <dt-icon-refresh
-              :size="iconSize"
-            />
-          </template>
-        </dt-button>
-        <dt-button
-          v-dt-tooltip="`Fullscreen`"
-          kind="muted"
-          importance="clear"
-          :size="200"
-          @click="toggleFullScreen"
-        >
-          <template #icon="{ iconSize }">
-            <dt-icon-minimize
-              v-if="isFullScreen"
-              :size="iconSize"
-            />
-            <dt-icon-expand
-              v-else
-              :size="iconSize"
-            />
-          </template>
-        </dt-button>
-      </dt-stack>
-    </dt-stack>
-    <div class="dialtone-playground__start">
-      <dtc-renderer
-        v-if="viewMode === 'single'"
-        v-model:settings="settings"
-        class="dialtone-playground__component"
-        :component="component"
-        :info="info"
-        :options="options"
-        :library="library"
-        :disabled-members="disabledMembers"
-        @event="onComponentEvent"
-      />
-      <dtc-renderer-spec-sheet
-        v-else
-        :component="component"
-        :documentation="documentation"
-        :variants="variants"
-        :library="library"
-        @select="onSelectVariant"
-      />
-      <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
-      <div
-        v-if="viewMode === 'single'"
-        class="dialtone-playground__resizer"
-        @pointerdown="startResize"
-        @dblclick="optionBarWidth = null"
-      />
-      <dtc-option-bar
-        v-if="!blueprint && viewMode === 'single'"
-        v-model:options="options"
-        v-model:settings="settings"
-        :component="component"
-        :info="info"
-        :style="optionBarWidth ? { 'inline-size': optionBarWidth } : {}"
-      />
+      <div class="dialtone-playground__start">
+        <dtc-renderer
+          v-if="viewMode === 'single'"
+          v-model:settings="settings"
+          class="dialtone-playground__component"
+          :component="component"
+          :info="info"
+          :options="options"
+          :library="library"
+          :disabled-members="disabledMembers"
+          @event="onComponentEvent"
+        />
+        <dtc-renderer-spec-sheet
+          v-else
+          :component="component"
+          :documentation="documentation"
+          :variants="variants"
+          :library="library"
+          @select="onSelectVariant"
+        />
+        <!-- eslint-disable-next-line vuejs-accessibility/no-static-element-interactions -->
+        <div
+          v-if="viewMode === 'single'"
+          class="dialtone-playground__resizer"
+          @pointerdown="startResize"
+          @dblclick="optionBarWidth = null"
+        />
+        <dtc-option-bar
+          v-if="!blueprint && viewMode === 'single'"
+          v-model:options="options"
+          v-model:settings="settings"
+          :component="component"
+          :info="info"
+          :style="optionBarWidth ? { 'inline-size': optionBarWidth } : {}"
+        />
+      </div>
+      <div v-if="viewMode === 'single'" class="dialtone-playground__end">
+        <dtc-code-panel
+          :info="info"
+          :options="options"
+          :settings="settings"
+          :disabled-members="disabledMembers"
+          :dev-mode="devMode"
+          :has-changes="hasChanges"
+          :full-screen="isFullScreen"
+          @update:options="(e) => e(options)"
+        />
+      </div>
     </div>
-    <div
-      v-if="viewMode === 'single'"
-      class="dialtone-playground__end"
-    >
-      <dtc-code-panel
-        :info="info"
-        :options="options"
-        :settings="settings"
-        :disabled-members="disabledMembers"
-        :dev-mode="devMode"
-        :has-changes="hasChanges"
-        :full-screen="isFullScreen"
-        @update:options="e => e(options)"
-      />
-    </div>
-  </div>
+  </Teleport>
 </template>
 
 <script setup>
@@ -207,7 +197,15 @@ import DtcOptionBar from './option_bar/option_bar.vue';
 import DtcRenderer from './renderer/renderer.vue';
 import DtcRendererSpecSheet from './renderer/renderer_spec_sheet.vue';
 import { enumerateGroups } from '@/src/lib/utils';
-import { computed, nextTick, onErrorCaptured, reactive, ref, watch } from 'vue';
+import {
+  computed,
+  nextTick,
+  onErrorCaptured,
+  onUnmounted,
+  reactive,
+  ref,
+  watch,
+} from 'vue';
 import { cachedRef, computedModel } from '@/src/lib/utils_vue';
 import { clearTokenCache } from '@/src/lib/tokens';
 import {
@@ -236,6 +234,7 @@ import DtIconRefresh from '@dialpad/dialtone-icons/vue/refresh';
 import DtIconChevronsUpDown from '@dialpad/dialtone-icons/vue/chevrons-up-down';
 import DtIconCheck from '@dialpad/dialtone-icons/vue/check';
 import DtIconLayoutGrid from '@dialpad/dialtone-icons/vue/layout-grid';
+import { disableRootScrolling, enableRootScrolling } from '@dialpad/dialtone-vue';
 
 const props = defineProps({
   /**
@@ -280,19 +279,41 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  fullScreen: {
+    type: Boolean,
+    default: undefined,
+  },
 });
+defineOptions({
+  inheritAttrs: false,
+});
+
+const emit = defineEmits(['update:fullScreen']);
 
 const selectedVariant = ref('default');
 const activeVariant = ref('default');
-const isFullScreen = ref(false);
+const internalFullScreen = ref(false);
 const optionBarWidth = ref(null);
 const viewMode = ref('single');
 const viewToggleRef = ref(null);
 let _presetChanging = false;
 const _forceReset = ref(0);
 
+const isFullScreen = computed({
+  get() {
+    return props.fullScreen ?? internalFullScreen.value;
+  },
+  set(value) {
+    internalFullScreen.value = value;
+    emit('update:fullScreen', value);
+  },
+});
+
 const variantOptions = computed(() => {
-  return listVariantNames(props.variants).map(key => ({ value: key, label: key }));
+  return listVariantNames(props.variants).map((key) => ({
+    value: key,
+    label: key,
+  }));
 });
 
 /**
@@ -305,7 +326,7 @@ const info = computed(() => {
   return Object.freeze({
     ...initializeInfo(),
     members: {
-      enumerate (handler) {
+      enumerate(handler) {
         enumerateGroups(handler, {
           slots: info.value.slots,
           props: info.value.props,
@@ -315,15 +336,15 @@ const info = computed(() => {
       },
     },
     bindings: {
-      get () {
+      get() {
         const bindings = [];
         this.enumerate((_, binding) => bindings.push(binding));
         return bindings;
       },
-      enumerate (handler) {
+      enumerate(handler) {
         enumerateGroups(handler, {
           props: info.value.props,
-          attributes: info.value.attributes?.filter(attribute => attribute),
+          attributes: info.value.attributes?.filter((attribute) => attribute),
         });
       },
     },
@@ -342,15 +363,19 @@ const options = computedModel(
     return reactive({
       ...getInitialValues(info.value),
       bindings: {
-        get () {
+        get() {
           const bindings = [];
           this.enumerate((_, binding) => bindings.push(binding));
           return Object.fromEntries(bindings);
         },
-        enumerate (handler) {
+        enumerate(handler) {
           enumerateGroups(handler, {
-            props: options.value.props ? Object.entries(options.value.props) : null,
-            attributes: options.value.attributes ? Object.entries(options.value.attributes) : null,
+            props: options.value.props
+              ? Object.entries(options.value.props)
+              : null,
+            attributes: options.value.attributes
+              ? Object.entries(options.value.attributes)
+              : null,
           });
         },
       },
@@ -385,19 +410,40 @@ const settings = computedModel(
   computed(() => {
     return reactive({
       root: {
-        theme: cachedRef(SETTINGS_THEME_KEY, defaultSettings.root['default-theme']),
-        sidebar: cachedRef(SETTINGS_SIDEBAR_KEY, defaultSettings.root['default-sidebar']),
+        theme: cachedRef(
+          SETTINGS_THEME_KEY,
+          defaultSettings.root['default-theme'],
+        ),
+        sidebar: cachedRef(
+          SETTINGS_SIDEBAR_KEY,
+          defaultSettings.root['default-sidebar'],
+        ),
       },
       renderer: {
-        positioning: cachedRef(SETTINGS_POSITIONING_KEY, defaultSettings.renderer['default-positioning']),
-        background: cachedRef(SETTINGS_BACKGROUND_KEY, defaultSettings.renderer['default-background']),
+        positioning: cachedRef(
+          SETTINGS_POSITIONING_KEY,
+          defaultSettings.renderer['default-positioning'],
+        ),
+        background: cachedRef(
+          SETTINGS_BACKGROUND_KEY,
+          defaultSettings.renderer['default-background'],
+        ),
       },
       code: {
-        scheme: cachedRef(SETTINGS_SCHEME_KEY, defaultSettings.code['default-scheme']),
-        indent: cachedRef(SETTINGS_INDENT_KEY, defaultSettings.code['default-indent-spaces']),
+        scheme: cachedRef(
+          SETTINGS_SCHEME_KEY,
+          defaultSettings.code['default-scheme'],
+        ),
+        indent: cachedRef(
+          SETTINGS_INDENT_KEY,
+          defaultSettings.code['default-indent-spaces'],
+        ),
         verbose: props.blueprint
           ? false
-          : cachedRef(SETTINGS_VERBOSE_KEY, defaultSettings.code['default-verbose']),
+          : cachedRef(
+              SETTINGS_VERBOSE_KEY,
+              defaultSettings.code['default-verbose'],
+            ),
       },
       controls: {
         hideDeprecated: cachedRef(
@@ -430,24 +476,28 @@ watch(() => settings.value.root.theme, clearTokenCache);
  * @param {string} name - The emitted event name (e.g. 'update:modelValue').
  * @param {*} value - The emitted value.
  */
-function onComponentEvent (name, value) {
+function onComponentEvent(name, value) {
   // Guard before assigning options.value: a non-update event must not run the
   // computedModel setter (which would clear selectedVariant / mark "custom").
   if (!name?.startsWith('update:')) return;
   options.value = (model) => writeUpdateEvent(model, name, value);
 }
 
-function updateVariant (e) {
+function updateVariant(e) {
   _presetChanging = true;
   selectedVariant.value = e;
   if (e !== '') {
     activeVariant.value = e;
     _forceReset.value++;
   }
-  nextTick(() => { _presetChanging = false; });
+  nextTick(() => {
+    _presetChanging = false;
+  });
 }
 
-function toggleViewMode () {
+watch(() => props.component.name, resetOptions);
+
+function toggleViewMode() {
   viewMode.value = viewMode.value === 'grid' ? 'single' : 'grid';
 }
 
@@ -460,7 +510,7 @@ function toggleViewMode () {
  *
  * @param {string} name - The variant to load.
  */
-function onSelectVariant (name) {
+function onSelectVariant(name) {
   updateVariant(name);
   viewMode.value = 'single';
   nextTick(() => {
@@ -473,7 +523,12 @@ function onSelectVariant (name) {
 }
 
 const defaultInfo = computed(() => {
-  return buildVariantInfo(props.component, props.documentation, props.variants, 'default');
+  return buildVariantInfo(
+    props.component,
+    props.documentation,
+    props.variants,
+    'default',
+  );
 });
 
 /**
@@ -482,8 +537,13 @@ const defaultInfo = computed(() => {
  *
  * @returns {object} The newly instantiated info object.
  */
-function initializeInfo () {
-  return buildVariantInfo(props.component, props.documentation, props.variants, activeVariant.value);
+function initializeInfo() {
+  return buildVariantInfo(
+    props.component,
+    props.documentation,
+    props.variants,
+    activeVariant.value,
+  );
 }
 
 const hasChanges = computed(() => {
@@ -493,27 +553,29 @@ const hasChanges = computed(() => {
     const members = referenceInfo[group];
     if (!members) continue;
     for (const member of members) {
-      if (options.value[group]?.[member.name] !== member.initialValue) return true;
+      if (options.value[group]?.[member.name] !== member.initialValue)
+        return true;
     }
   }
   return false;
 });
 
-function resetOptions () {
+function resetOptions() {
   updateVariant('default');
 }
 
-function startResize (e) {
+function startResize(e) {
   e.preventDefault();
   const startX = e.clientX;
-  const startWidth = document.querySelector('.dialtone-playground__controls')?.offsetWidth ?? 0;
+  const startWidth =
+    document.querySelector('.dialtone-playground__controls')?.offsetWidth ?? 0;
 
-  function onMove (e) {
+  function onMove(e) {
     const delta = startX - e.clientX;
     optionBarWidth.value = Math.max(200, startWidth + delta) + 'px';
   }
 
-  function onUp () {
+  function onUp() {
     document.removeEventListener('pointermove', onMove);
     document.removeEventListener('pointerup', onUp);
   }
@@ -522,14 +584,25 @@ function startResize (e) {
   document.addEventListener('pointerup', onUp);
 }
 
-function toggleFullScreen () {
+function toggleFullScreen() {
   isFullScreen.value = !isFullScreen.value;
-  if (isFullScreen.value) {
-    document.body.classList.add('d-of-hidden', 'd-h100vh');
+}
+
+function updateBodyFullScreenState(value) {
+  if (typeof document === 'undefined') return;
+
+  if (value) {
+    disableRootScrolling();
   } else {
-    document.body.classList.remove('d-of-hidden', 'd-h100vh');
+    enableRootScrolling();
   }
 }
+
+watch(isFullScreen, updateBodyFullScreenState, { immediate: true });
+
+onUnmounted(() => {
+  updateBodyFullScreenState(false);
+});
 
 /**
  * Set of member names that are currently disabled via exclusion rules or prop dependencies.
@@ -538,7 +611,11 @@ function toggleFullScreen () {
  * @type {ComputedRef<Set<string>>}
  */
 const disabledMembers = computed(() => {
-  return computeDisabledMembers(info.value, options.value.props, options.value.slots);
+  return computeDisabledMembers(
+    info.value,
+    options.value.props,
+    options.value.slots,
+  );
 });
 
 onErrorCaptured((exception) => {
@@ -560,9 +637,9 @@ export default {
 <style lang="less">
 .dialtone-playground {
   & {
-    display:none;
+    display: none;
     flex-direction: column;
-    margin-block: var(--dt-spacing-200);
+    margin-block-end: var(--dt-spacing-200);
     background-color: var(--dt-color-surface-secondary);
     border-radius: var(--dt-size-radius-400);
 
@@ -572,11 +649,13 @@ export default {
   }
 
   &--fullscreen {
+    max-block-size: none;
+    max-inline-size: none;
     margin-block: 0;
     position: fixed;
     inset: 0;
-    z-index: var(--zi-popover);
     background-color: var(--dt-color-surface-secondary);
+    border-radius: 0;
   }
 
   &__start {
@@ -589,12 +668,14 @@ export default {
     }
 
     :where(.dialtone-playground--fullscreen) & {
-      border-block-end: var(--dt-size-border-100) solid var(--dt-color-border-subtle)
+      border-block-end: var(--dt-size-border-100) solid
+        var(--dt-color-border-subtle);
     }
   }
 
   &__end {
-    border-block-start: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
+    border-block-start: var(--dt-size-border-100) solid
+      var(--dt-color-border-subtle);
 
     :where(.dialtone-playground--fullscreen) & {
       block-size: 33vh;
@@ -653,7 +734,6 @@ export default {
         max-block-size: 100%;
       }
     }
-
   }
 }
 </style>
