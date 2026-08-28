@@ -423,6 +423,9 @@ importers:
       date-fns:
         specifier: ^4.1.0
         version: 4.1.0
+      gray-matter:
+        specifier: ^4.0.3
+        version: 4.0.3
       markdown-it:
         specifier: ^13.0.2
         version: 13.0.2
