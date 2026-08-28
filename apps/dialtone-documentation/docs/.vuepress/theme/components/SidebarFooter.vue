@@ -17,18 +17,18 @@
           </dt-box>
           <dt-stack direction="row" gap="1">
             <dt-button
-              v-dt-tooltip="`#dialtone channel`"
+              v-dt-tooltip="`Dialtone on GitHub`"
               class="d-w100p"
               href="https://github.com/dialpad/dialtone"
               target="_blank"
               rel="noreferrer noopener"
-              aria-label="#dialtone channel"
+              aria-label="Dialtone on GitHub"
               kind="muted"
               importance="clear"
               size="200"
             >
               <template #startIcon="{ iconSize }">
-                <dt-icon name="hash" :size="iconSize" />
+                <dt-icon name="github" :size="iconSize" />
               </template>
             </dt-button>
             <dt-button
