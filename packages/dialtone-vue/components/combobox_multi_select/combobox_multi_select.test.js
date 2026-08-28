@@ -428,6 +428,45 @@ describe('DtComboboxMultiSelect Tests', () => {
     });
   });
 
+  describe('IME Composition', () => {
+    beforeEach(async () => {
+      await input.trigger('focus');
+    });
+
+    it('should not emit keydown/enter during IME composition', async () => {
+      await input.trigger('compositionstart');
+      await input.trigger('keydown', { key: 'Enter', code: 'Enter', isComposing: true });
+      expect(wrapper.emitted('keydown')).toBeUndefined();
+      expect(wrapper.emitted('enter')).toBeUndefined();
+    });
+
+    it('should not emit keydown/escape during IME composition', async () => {
+      await input.trigger('compositionstart');
+      await input.trigger('keydown', { key: 'Escape', code: 'Escape', isComposing: true });
+      expect(wrapper.emitted('keydown')).toBeUndefined();
+      expect(wrapper.emitted('escape')).toBeUndefined();
+    });
+
+    it('should emit enter after composition ends', async () => {
+      await input.trigger('compositionstart');
+      await input.trigger('compositionend');
+      await input.trigger('keydown', { key: 'Enter', code: 'Enter' });
+      expect(wrapper.emitted('enter').length).toBe(1);
+    });
+
+    it('should not emit input when native InputEvent has isComposing true', async () => {
+      await input.trigger('compositionstart');
+      const inputEvent = new InputEvent('input', {
+        data: 'あ',
+        inputType: 'insertCompositionText',
+        isComposing: true,
+        bubbles: true,
+      });
+      input.element.dispatchEvent(inputEvent);
+      expect(wrapper.emitted('input')).toBeUndefined();
+    });
+  });
+
   describe('Duplicate Items Tests', () => {
     beforeEach(async () => {
       await wrapper.setProps({ selectedItems: ['item1', 'item1', 'item1'] });
