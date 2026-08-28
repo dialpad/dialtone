@@ -1,13 +1,12 @@
 ---
 title: Loader
-description: A loader is a visual indicator that a task is in progress.
+description: Animated indicator for indeterminate loading or progress.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-loader--default
 keywords: ["spinner", "loading", "progress", "d-loader", "DtLoader", "dt-loader", "activity indicator", "spin"]
+combinator: DtLoader
 ---
-
-<component-combinator component-name="DtLoader" />
 
 ## Loader vs Skeleton
 
@@ -57,11 +56,11 @@ The base loader size is 24px and should be used in most cases.
 <dt-loader size="100|200|300|400|500|600|700|800"></dt-loader>
 ```
 
-## Vue API
-
-<component-vue-api component-name="loader" />
-
 ## Accessibility
 
 - You can add an `aria-label` attribute to the loader to indicate a custom label.
 - If no `aria-label` is provided, the default value is "loading".
+
+## Vue API
+
+<component-vue-api component-name="loader" />

@@ -80,8 +80,7 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description:
-        'T-shirt sizes (xs, sm, md, lg, xl) are deprecated. Use the current numeric or DtText variant API instead.',
+      description: 'Detects deprecated T-shirt component sizes that have numeric or current typography values.',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-tshirt-sizes.md',
     },

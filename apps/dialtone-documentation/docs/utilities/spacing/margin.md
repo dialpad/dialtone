@@ -1,7 +1,7 @@
 ---
 title: Margins
 description: Utilities to adjust an element's exterior spacing between other objects.
-keywords: ["outer spacing", "gap", "offset", "margin inline start", "margin inline end", "margin block start", "margin block end"]
+keywords: ["outer spacing", "gap", "offset", "margin top", "margin right", "margin bottom", "margin left", "margin inline start", "margin inline end", "margin block start", "margin block end"]
 ---
 
 > [!INFO] Consider DtStack first

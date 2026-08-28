@@ -99,8 +99,7 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description:
-        '`d-bgc-success*`, `d-bc-success*`, and `d-fc-success*` utility classes are deprecated. Use the `positive`-named replacements.',
+      description: 'Detects deprecated success color utilities that have positive replacements.',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-success-color-classes.md',
     },

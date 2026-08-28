@@ -1,14 +1,13 @@
 ---
 title: Chip
-description: A Chip is a compact UI element that provides brief, descriptive information about an element. It is terse, ideally one word.
+description: Compact token for selected values, filters, or dismissible items.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-chip--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=9937-64802
 keywords: ["tag", "pill", "token", "badge", "d-chip", "DtChip", "dt-chip", "filter chip", "choice chip"]
+combinator: DtChip
 ---
-
-<component-combinator component-name="DtChip" />
 
 ## Variants and Examples
 

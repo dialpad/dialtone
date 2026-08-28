@@ -1,22 +1,12 @@
 ---
 title: Segmented Control
-description: Single-select, all-options-visible control for switching views, scopes, or modes within the same context.
+description: Single-select control for switching views, scopes, or modes.
 status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-segmented-control--default
 keywords: ["segmented control", "toggle group", "button toggle", "radio group", "d-segmented-control", "DtSegmentedControl", "dt-segmented-control", "select", "scope", "content switcher"]
+combinator: DtSegmentedControl
 ---
-
-```vue demo-only
-<dt-segmented-control v-model="selected" aria-label="View filter">
-  <dt-segmented-control-item value="all">All</dt-segmented-control-item>
-  <dt-segmented-control-item value="favorites">Favorites</dt-segmented-control-item>
-  <dt-segmented-control-item value="recent">Recent</dt-segmented-control-item>
-  <dt-segmented-control-item value="groups">Groups</dt-segmented-control-item>
-</dt-segmented-control>
-```
-
-<component-combinator component-name="DtSegmentedControl" />
 
 ## Usage
 
@@ -381,20 +371,6 @@ By default, items select immediately on focus via arrow keys, following the <a c
 </dt-segmented-control>
 ```
 
-## Vue API
-
-### Segmented Control
-
-<component-vue-api component-name="segmentedcontrol" :also-import="['segmentedcontrolitem']" />
-
-### Segmented Control Item
-
-<component-vue-api component-name="segmentedcontrolitem" :show-import="false" />
-
-## Classes
-
-<component-class-table component-name="segmented-control" />
-
 ## Accessibility
 
 The segmented control implements the <a class="d-link" href="https://www.w3.org/WAI/ARIA/apg/patterns/radio/" target="_blank">WAI-ARIA Radio Group pattern</a> with roving tabindex for keyboard navigation.
@@ -410,3 +386,17 @@ const iconSelected = ref('compact');
 const iconOnlySelected = ref('system');
 const trailingSelected = ref('apples');
 </script>
+
+## Vue API
+
+### Segmented Control
+
+<component-vue-api component-name="segmentedcontrol" :also-import="['segmentedcontrolitem']" />
+
+### Segmented Control Item
+
+<component-vue-api component-name="segmentedcontrolitem" :show-import="false" />
+
+## Classes
+
+<component-class-table component-name="segmented-control" />

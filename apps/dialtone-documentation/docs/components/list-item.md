@@ -1,6 +1,6 @@
 ---
 title: List item
-description: A list item is an element that can be used to represent individual items in a list.
+description: Structured row for choices, navigation, or actions.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-list-item--default
@@ -28,8 +28,6 @@ keywords: ["list element", "d-list-item", "DtListItem", "dt-list-item"]
   </dt-list-item>
 </ul>
 ```
-
-<!-- <component-combinator component-name="DtListItem" /> -->
 
 ## Base Style
 

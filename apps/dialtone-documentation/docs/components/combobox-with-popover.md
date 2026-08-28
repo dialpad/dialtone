@@ -1,6 +1,7 @@
 ---
 title: Combobox With Popover
-description: A combobox that renders the listbox inside a popover therefore the listbox is rendered at the root of the document.
+description: Searchable input paired with popover-rendered option content.
+keywords: ["dropdown", "select", "autocomplete", "listbox", "append to body", "DtComboboxWithPopover", "dt-combobox-with-popover"]
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-with-popover--default
@@ -41,8 +42,6 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-wit
   </template>
 </dt-combobox-with-popover>
 ```
-
-<!-- <component-combinator component-name="DtComboboxWithPopover" /> -->
 
 ## Usage
 
@@ -138,10 +137,6 @@ Combobox popover content renders outside the DOM tree. Use the `contentMode` pro
 <dt-combobox-with-popover content-mode="light">...</dt-combobox-with-popover>
 ```
 
-## Vue API
-
-<component-vue-api component-name="comboboxwithpopover" />
-
 ## Accessibility
 
 A screen reader visible only close button is added by default.
@@ -189,3 +184,7 @@ function onOpenedHeaderFooter (opened) {
   }
 }
 </script>
+
+## Vue API
+
+<component-vue-api component-name="comboboxwithpopover" />

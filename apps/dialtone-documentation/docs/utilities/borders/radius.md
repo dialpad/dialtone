@@ -1,7 +1,7 @@
 ---
 title: Border Radius
 description: Utilities for controlling an element's border radius.
-keywords: ["rounded", "corner", "pill", "circle", "radius start", "radius end", "block-start", "block-end", "inline-start", "inline-end", "single corner"]
+keywords: ["rounded", "corner", "pill", "circle", "top left radius", "top right radius", "bottom right radius", "bottom left radius", "border start start radius", "border start end radius", "border end end radius", "border end start radius", "single corner"]
 ---
 
 <script setup>

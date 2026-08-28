@@ -1,6 +1,7 @@
 ---
 title: Where to Start
 description: Adding a UI Kit component to your project.
+keywords: ["ui kits", "getting started", "choose a kit", "adoption", "product design", "implementation"]
 ---
 
 ## 1. Install and add Dialtone

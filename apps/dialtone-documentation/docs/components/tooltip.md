@@ -2,7 +2,7 @@
 title: Tooltip
 status: ready
 thumb: true
-description: A tooltip is a floating label that briefly explains an action, function, or an element. Its content is exclusively text and shouldn't be vital information for users. If richer media is desired, consider using a popover instead.
+description: Brief helper text shown when an element receives hover or focus.
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-tooltip--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=261-0
 keywords: ["hint", "help text", "d-tooltip", "DtTooltip", "dt-tooltip"]
@@ -11,8 +11,6 @@ keywords: ["hint", "help text", "d-tooltip", "DtTooltip", "dt-tooltip"]
 ```vue demo-only
 <dt-button v-dt-tooltip="`Simple tooltip`">Hover me</dt-button>
 ```
-
-<!-- <component-combinator component-name="DtTooltip" /> -->
 
 ## Tooltip as a Directive
 
@@ -158,14 +156,6 @@ Tooltip content renders outside the DOM tree via Tippy.js. Use the `contentMode`
 </dt-tooltip>
 ```
 
-## Vue API
-
-<component-vue-api component-name="tooltip" />
-
-## Classes
-
-<component-class-table component-name="tooltip" />
-
 ## Accessibility
 
 Reads out the tooltip content as a supplementary description for its trigger when the trigger is focused.
@@ -196,3 +186,11 @@ import ExampleTooltipDirections from '@exampleComponents/ExampleTooltipDirection
 const dialtoneConstants = inject('dialtoneConstants', {});
 const directions = dialtoneConstants.TOOLTIP_DIRECTIONS;
 </script>
+
+## Vue API
+
+<component-vue-api component-name="tooltip" />
+
+## Classes
+
+<component-class-table component-name="tooltip" />

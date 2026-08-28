@@ -1,14 +1,13 @@
 ---
 title: Select menu
-description: A select menu is an input control that allows users to choose one option from a list.
+description: Dropdown field for choosing one option from a list.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-select-menu--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=25737-2711
 keywords: ["dropdown", "picker", "d-select-menu", "DtSelectMenu", "dt-select-menu", "native select", "listbox"]
+combinator: DtSelectMenu
 ---
-
-<component-combinator component-name="DtSelectMenu" />
 
 ## Usage
 

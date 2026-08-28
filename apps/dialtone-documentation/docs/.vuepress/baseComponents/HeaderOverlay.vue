@@ -9,19 +9,12 @@
         <dt-illustration name="dialpad-logo" />
       </dt-stack>
     </router-link>
-    <navbar @search="handleSearch" />
+    <navbar />
   </div>
 </template>
 
 <script setup>
 import Navbar from '../theme/components/Navbar.vue';
-
-// Emit search event to parent
-const emit = defineEmits(['search']);
-
-const handleSearch = () => {
-  emit('search');
-};
 </script>
 
 <style lang="less">

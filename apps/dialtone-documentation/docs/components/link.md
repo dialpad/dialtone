@@ -1,14 +1,13 @@
 ---
 title: Link
-description: A link is a navigational element that can be found on its own, within other text, or directly following content.
+description: Navigation element for inline text or adjacent content.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-link--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=5531-26862
 keywords: ["anchor", "hyperlink", "url", "d-link", "DtLink", "dt-link", "text link", "href"]
+combinator: DtLink
 ---
-
-<component-combinator component-name="DtLink" />
 
 ## Usage
 

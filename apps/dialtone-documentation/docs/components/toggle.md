@@ -2,12 +2,12 @@
 title: Toggle
 status: ready
 thumb: true
-description: A toggle, or "switch", is a button control element that allows the user to make a binary selection.
+description: Switch control for turning a setting on or off.
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-toggle--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=8272-20496
 keywords: ["switch", "checkbox", "on off", "d-toggle", "DtToggle", "dt-toggle", "flip switch"]
+combinator: DtToggle
 ---
-<component-combinator component-name="DtToggle" />
 
 ## Usage
 
@@ -67,14 +67,6 @@ The Toggle component acts as a way to allow the User to switch between two mutua
 <dt-toggle v-model="checked" class="d-g-200">Toggle</dt-toggle>
 ```
 
-## Vue API
-
-<component-vue-api component-name="toggle" />
-
-## Classes
-
-<component-class-table component-name="toggle" />
-
 ## Accessibility
 
 This component uses a native button element under the hood that has a role `switch` and type `button` to improve accessibility.
@@ -105,3 +97,11 @@ import { ref } from 'vue'
 
 const checked = ref(false)
 </script>
+
+## Vue API
+
+<component-vue-api component-name="toggle" />
+
+## Classes
+
+<component-class-table component-name="toggle" />

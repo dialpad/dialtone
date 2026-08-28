@@ -1,14 +1,13 @@
 ---
 title: Breadcrumbs
-description: Breadcrumbs are links used to provide context for the currently-viewed page and where it is located within the overall site structure.
+description: Navigation trail that shows the current page location.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-breadcrumbs--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=2455-0
 keywords: ["navigation", "path", "d-breadcrumbs", "DtBreadcrumbs", "dt-breadcrumbs", "trail", "path navigation"]
+combinator: DtBreadcrumbs
 ---
-
-<component-combinator component-name="DtBreadcrumbs" />
 
 ## Usage
 
@@ -61,6 +60,12 @@ In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#
 </div>
 ```
 
+## Accessibility
+
+HTML doesn't provide dedicated semantic elements for breadcrumbs, so we need to add a few ARIA attributes to make them accessible.
+
+<component-accessible-table component-name="breadcrumbs"></component-accessible-table>
+
 ## Vue API
 
 <component-vue-api component-name="breadcrumbs" />
@@ -68,9 +73,3 @@ In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#
 ## Classes
 
 <component-class-table component-name="breadcrumbs"></component-class-table>
-
-## Accessibility
-
-HTML doesn't provide dedicated semantic elements for breadcrumbs, so we need to add a few ARIA attributes to make them accessible.
-
-<component-accessible-table component-name="breadcrumbs"></component-accessible-table>

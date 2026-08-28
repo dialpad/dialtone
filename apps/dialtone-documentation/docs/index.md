@@ -1,40 +1,51 @@
 ---
-layout: Blank
+layout: Home
 pageClass: dialpad-design-home
 ---
-<div
-  id="docsearch"
-  ref="docSearchBtn"
-  class="d-d-none"
-  options=""
-/>
 
-<dt-box>
-  <header-overlay @search="openSearch" />
-</dt-box>
-<dt-box>
+<dt-box position="relative">
+  <dt-box
+    v-if="viewport.atLeast('md') && isMigrationBannerVisible"
+    position="absolute"
+    inset-block-start="200"
+    inset-inline="200"
+    z-index="navigation"
+    border-width="100"
+    border-radius="400"
+    shadow="small"
+    class="d-of-hidden"
+  >
+    <migration-banner class="d-baw0" v-model:visible="isMigrationBannerVisible" />
+  </dt-box>
   <gradient-hero />
 </dt-box>
-<dt-box as="section" class="d-m-auto">
+<dt-box as="section" padding-block-end="800" class="d-m-auto">
   <dt-box as="article" padding-block="800">
     <showcase-carousel />
   </dt-box>
-  <dt-box as="article" padding-block="800" padding-inline="800">
+  <dt-box
+    as="article"
+    padding-block="800"
+    :padding-inline="viewport.pick({
+      default: '500', md: '800',
+    })"
+  >
     <dt-stack gap="550" align="center">
-      <dt-link to="/dialtone/">
-        <dt-box inline-size="200" style="filter: drop-shadow(rgba(0, 0, 0, 0.25) 0px 25px 30px);">
-          <svg-loader name="home--dialtone-badge" />
-        </dt-box>
-      </dt-link>
       <dt-box max-inline-size="1200">
-        <dt-text as="h2" kind="headline" wrap="balance" strength="normal" class="home-section-title">Setting the tone</dt-text>
+        <dt-text as="h2" kind="headline" wrap="balance" align="center" strength="normal" density="200" class="home-section-title">Setting the tone</dt-text>
       </dt-box>
       <dt-box max-inline-size="1200">
-        <dt-text as="p" align="center" wrap="balance" kind="headline" size="500" strength="normal">Dialtone is Dialpad’s shared design language, shaping everything from our product interfaces to our marketing. It defines how our brand looks, feels, and behaves across every touchpoint. Built on principles of clarity, consistency, and accessibility, Dialtone keeps our visual identity cohesive and unmistakably Dialpad.</dt-text>
+        <dt-text as="p" align="center" wrap="balance" kind="headline" size="500" strength="normal">A shared design language shaping everything from our product interfaces to our marketing. It defines how our brand looks, feels, and behaves across every touchpoint. Built on principles of clarity, consistency, and accessibility, Dialtone keeps our visual identity cohesive and unmistakably Dialpad.</dt-text>
       </dt-box>
     </dt-stack>
   </dt-box>
-  <dt-box as="article" padding-block="800" padding-inline="800">
+  <dt-box
+    as="article"
+    padding-block="800"
+    :padding-inline="viewport.pick({
+      default: '500', md: '800',
+    })"
+  >
     <dt-stack gap="700" align="center">
       <dt-stack class="home-section-inline" :direction="{ 'default': 'column', 'md': 'row' }" gap="600" justify="center">
         <dt-link to="./foundations/brand/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
@@ -63,9 +74,9 @@ pageClass: dialpad-design-home
         </dt-link>
       </dt-stack>
       <dt-stack class="home-section-inline" gap="550" align="center" justify="center">
-        <dt-text as="h2" kind="headline" wrap="balance" strength="normal" class="home-section-title">Foundations</dt-text>
+        <dt-text as="h2" kind="headline" wrap="balance" align="center" density="200" strength="normal" class="home-section-title">Foundations</dt-text>
         <dt-box max-inline-size="1200">
-          <dt-text as="p" align="center" wrap="balance" kind="body" size="300" class="d-fs-350">The building blocks of Dialtone... Color, Type, Icons, and more.</dt-text>
+          <dt-text as="p" align="center" wrap="balance" kind="body" size="300" class="d-fs-350">The building blocks of Dialtone... Color, Type, Layout & Spacing, Icons, and more.</dt-text>
         </dt-box>
         <dt-button size="400" to="./foundations/">
           View all Foundations
@@ -76,7 +87,13 @@ pageClass: dialpad-design-home
       </dt-stack>
     </dt-stack>
   </dt-box>
-  <dt-box as="article" padding-block="800" padding-inline="800">
+  <dt-box
+    as="article"
+    padding-block="800"
+    :padding-inline="viewport.pick({
+      default: '500', md: '800',
+    })"
+  >
     <dt-stack gap="700" align="center">
       <dt-stack class="home-section-inline" :direction="{ 'default': 'column', 'md': 'row' }" gap="600" justify="center">
         <dt-link to="./components/" class="d-d-block d-td-none d-fc-primary d-fco75 h:d-fco95">
@@ -105,7 +122,7 @@ pageClass: dialpad-design-home
         </dt-link>
       </dt-stack>
       <dt-stack class="home-section-inline" gap="550" align="center" justify="center">
-        <dt-text as="h2" kind="headline" wrap="balance" strength="normal" class="home-section-title">Design System</dt-text>
+        <dt-text as="h2" kind="headline" wrap="balance" strength="normal" align="center" density="200" class="home-section-title">Design System</dt-text>
         <dt-box max-inline-size="1200">
           <dt-text as="p" align="center" wrap="balance" kind="body" size="300" class="d-fs-350">Build with Dialtone Components, Design Tokens, CSS Utilities, and more.</dt-text>
         </dt-box>
@@ -118,19 +135,19 @@ pageClass: dialpad-design-home
       </dt-stack>
     </dt-stack>
   </dt-box>
-  <dt-box as="article" padding-block="800" padding-inline="800">
+  <dt-box
+    as="article"
+    padding-block="800"
+    :padding-inline="viewport.pick({
+      default: '500', md: '800',
+    })"
+  >
     <dt-stack gap="700" align="center">
       <dt-stack class="home-section-inline" gap="550" align="center">
-        <dt-text as="h2" kind="headline" wrap="balance" strength="normal" class="home-section-title">What's New</dt-text>
+        <dt-text as="h2" kind="headline" wrap="balance" align="center" density="200" strength="normal" class="home-section-title">What's New</dt-text>
         <dt-box max-inline-size="1200">
           <dt-text as="p" align="center" wrap="balance" kind="body" size="300" class="d-fs-350">The latest from Dialpad Design.</dt-text>
         </dt-box>
-        <dt-button :size="400" to="./dialtone/whats-new/">
-          View all
-          <template #endIcon>
-            <dt-icon name="arrow-right" size="300" />
-          </template>
-        </dt-button>
         <dt-box class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3 d-ai-stretch home-section-blog-preview">
           <dt-link
             v-for="post in $page.blogPosts.sort(sortHandler).slice(0, 3)"
@@ -147,31 +164,37 @@ pageClass: dialpad-design-home
             </dt-stack>
           </dt-link>
         </dt-box>
+        <dt-button :size="400" to="./dialtone/whats-new/">
+          View all
+          <template #endIcon>
+            <dt-icon name="arrow-right" size="300" />
+          </template>
+        </dt-button>
       </dt-stack>
     </dt-stack>
   </dt-box>
 </dt-box>
-<dt-stack align="center" justify="center" class="gradient-overlay gradient-overlay--footer d-h-1000">
-  <dt-stack class="d-w-1200 d-wmx100p d-pie-200">
-    <div class="footer-dialpad-design">
-      <div class="footer-dialpad-design__light">
-        <svg-loader name="footer-dialpad-design--light" />
-      </div>
-      <div class="footer-dialpad-design__dark">
-        <svg-loader name="footer-dialpad-design--dark" />
-      </div>
-    </div>
+<halftone-surface flip-x class="home-halftone-footer d-h-500 d-pbs-800">
+  <dt-stack align="center" justify="center" class="d-h50p home-halftone-footer__content">
+    <dt-box inline-size="1200" max-inline-size="80p" padding-inline-end="200">
+      <svg-loader name="footer-dialpad-design" />
+    </dt-box>
   </dt-stack>
-</dt-stack>
+</halftone-surface>
 
 <style lang="less">
-[data-dt-mode="dark"] .dialpad-design-home {
-  --dt-shell-color-surface-default: var(--dt-color-purple-50);
+.dialpad-design-home {
+  /* Matches the hero's own background so the canvas has no visible seam below it. */
+  background-color: var(--dt-color-surface-primary);
 }
 
 .home-section-title {
-  font-size: 48px;
-  font-family: var(--dt-font-family-expressive);
+  font-size: 36px;
+  font-family: "Season Sans", var(--dt-font-family-body);
+
+  @media screen and (min-width: 640px) {
+    font-size: 48px;
+  }
 }
 
 .home-section-inline {
@@ -182,48 +205,12 @@ pageClass: dialpad-design-home
   max-inline-size: 1200px;
 }
 
-.gradient-overlay {
-  --grad-position-x: 50%;
-  --grad-position-y: 100%;
-  --grad: radial-gradient(circle at var(--grad-position-x) var(--grad-position-y), rgb(218, 163, 255) 0%, rgb(230, 170, 250) 10%, rgb(240, 170, 235) 15%, rgb(255, 177, 207) 25%, rgba(255, 195, 210, 0.95) 35%, rgba(255, 210, 212, 0.9) 45%, rgba(255, 218, 215, 0.8) 60%, rgba(250, 230, 220, 0.7) 75%, var(--dt-shell-color-surface-default) 100%);
-  --overlay-color-surface: var(--dt-shell-color-surface-default);
-  --overlay-opacity: 0;
-
+.home-halftone-footer__content {
   position: relative;
-  transition: --grad-position-x 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-
-  background-image: var(--grad);
-  background-attachment: fixed;
-  block-size: 100vh;
-
-  [data-dt-mode="dark"] & {
-    --grad: radial-gradient(circle at var(--grad-position-x) var(--grad-position-y), rgb(246, 100, 55) 0%, rgb(223, 38, 110) 30%, rgb(191, 10, 128) 44%, rgb(81, 30, 118) 71%, var(--dt-color-purple-50) 100%);
-    --overlay-color-surface: var(--dt-color-purple-50);
-  }
-
-  &--footer {
-    --footer-grad-y: 200%;
-    --grad: radial-gradient(50% 75% at 50% var(--footer-grad-y), #DAA3FF 0%, #FFB1CF 33%, #FFDAD7 66%, rgba(248, 247, 246, 0.00) 100%);
-    background-attachment: initial;
-
-    [data-dt-mode="dark"] & {
-      --grad: radial-gradient(50% 75% at 50% var(--footer-grad-y), rgb(246, 100, 55) 0%, rgb(223, 38, 110) 30%, rgb(191, 10, 128) 44%, rgb(81, 30, 118) 71%, transparent 100%);
-      --overlay-color-surface: transparent;
-    }
-  }
-
-  &__overlay {
-    position: absolute;
-    inset: 0;
-    background-color: var(--overlay-color-surface);
-    opacity: var(--overlay-opacity);
-  }
+  z-index: 1;
+  opacity: .4;
 }
 
-[data-dt-mode="dark"] .footer-dialpad-design__light,
-[data-dt-mode="light"] .footer-dialpad-design__dark {
-  display: none;
-}
 </style>
 
 <script setup>
@@ -231,9 +218,12 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { parse, compareDesc, format } from 'date-fns';
 import ShowcaseCarousel from '../../baseComponents/ShowcaseCarousel.vue';
 import GradientHero from '../../baseComponents/GradientHero.vue';
-import HeaderOverlay from '../../baseComponents/HeaderOverlay.vue';
+import HalftoneSurface from '../../baseComponents/HalftoneSurface.vue';
+import { useViewportBreakpoints } from '../../theme/composables/useViewportBreakpoints.js';
+import { clamp01 } from '../../theme/utils/math.js';
 
-const docSearchBtn = ref(null);
+const viewport = useViewportBreakpoints();
+const isMigrationBannerVisible = ref(true);
 
 const sortHandler = (a, b) => compareDesc(
   parse(a.posted, 'y-M-d', new Date()),
@@ -242,10 +232,6 @@ const sortHandler = (a, b) => compareDesc(
 
 const formatDate = (dateStr) => {
   return format(parse(dateStr, 'y-M-d', new Date()), 'MMMM do, y');
-};
-
-const openSearch = () => {
-  docSearchBtn.value?.children[0]?.click();
 };
 
 // Mirror the pageClass frontmatter onto <body> for global styles.
@@ -257,94 +243,52 @@ onUnmounted(() => {
   document.body.classList.remove('dialpad-design-home');
 });
 
-// Mouse-driven gradient position with eased interpolation.
+// Hero scroll-driven effects share one rAF so their reads and writes stay together.
 onMounted(() => {
-  let currentPositionX = 50; // Start at center
-  let targetPositionX = 50;
-  let currentPositionY = 100; // Start at bottom
-  let targetPositionY = 100;
-  let animationId;
-
-  const gradientOverlay = document.querySelector('.gradient-overlay');
-
-  const animate = () => {
-    // Ease current toward target at 10% per frame (on both axes).
-    currentPositionX += (targetPositionX - currentPositionX) * 0.1;
-    currentPositionY += (targetPositionY - currentPositionY) * 0.1;
-
-    if (gradientOverlay) {
-      gradientOverlay.style.setProperty('--grad-position-x', `${currentPositionX}%`);
-      gradientOverlay.style.setProperty('--grad-position-y', `${currentPositionY}%`);
-    }
-
-    animationId = requestAnimationFrame(animate);
-  };
-
-  const handleMouseMove = (e) => {
-    const mouseX = (e.clientX / window.innerWidth) * 100;
-
-    // Subtle parallax — gradient tracks at 10% of mouse offset from center.
-    // (0.1 = very subtle, 0.5 = more responsive.)
-    const parallaxFactor = 0.1;
-    const offsetFromCenter = mouseX - 50;
-    targetPositionX = 50 + (offsetFromCenter * parallaxFactor);
-
-    // Y lifts from 100% at center up to 120% at the viewport edges.
-    const distanceFromCenter = Math.abs(mouseX - 50) / 50; // 0 at center, 1 at edge
-    targetPositionY = 100 + (distanceFromCenter * 20);
-  };
-
-  animate();
-  window.addEventListener('mousemove', handleMouseMove);
-
-  onUnmounted(() => {
-    window.removeEventListener('mousemove', handleMouseMove);
-    cancelAnimationFrame(animationId);
-  });
-});
-
-// Scroll-driven effects — rAF-throttled so the two window scroll handlers don't thrash layout.
-onMounted(() => {
-  const gradientOverlay = document.querySelector('.gradient-overlay');
-  const header = document.querySelector('.dialtone-header--home');
-  let lastScrollY = window.scrollY;
+  const hero = document.querySelector('.home-gradient-hero');
+  const heroShaderLayer = hero?.querySelector('.halftone-surface__shader');
   let ticking = false;
 
-  if (!gradientOverlay) return;
+  if (!hero) return;
+
+  // Measured on resize rather than per frame. The height does not change while scrolling,
+  // and reading it mid-frame is expensive here specifically: the custom properties written
+  // below feed a transform on the shader layer, so any read after a write forces a
+  // synchronous style-and-layout pass.
+  let heroHeight = 0;
+  let heroParallaxRange = 0;
+
+  const measure = () => {
+    heroHeight = hero.offsetHeight;
+    // The shader layer overhangs the hero, and travels up by exactly that overhang across
+    // the hero's scroll range, so it arrives flush at the bottom instead of uncovering it.
+    // Measured off the element rather than repeating the CSS value, so the two cannot
+    // drift apart.
+    heroParallaxRange = heroShaderLayer
+      ? Math.max(heroShaderLayer.offsetHeight - heroHeight, 0)
+      : 0;
+  };
 
   const update = () => {
-    const overlayHeight = gradientOverlay.offsetHeight;
+    // Every read first, every write after. Interleaving them re-invalidates layout part
+    // way through the frame and costs a forced reflow per switch.
     const scrollY = window.scrollY;
 
-    // Overlay fades in across its scroll range: 0 at top → 1 when fully scrolled past.
-    const overlayOpacity = Math.min(Math.max(scrollY / overlayHeight, 0), 1);
+    // One clamped progress value drives all four properties. Two of them used to derive it
+    // separately, one clamped and one not, which disagreed during overscroll — the
+    // unclamped one went negative and drove the text and the parallax backwards.
+    const scrollProgress = clamp01(scrollY / (heroHeight || 1));
 
-    // Text starts at 0.6 and fades out twice as fast — done by 50% scroll.
-    const textOpacity = Math.max(0.6 - (scrollY / (overlayHeight * 0.5)) * 0.6, 0);
+    // Overlay fades in across the hero's scroll range: 0 at top → 1 once scrolled past.
+    // Text fades faster, starting at 0.8 and reaching 0 at about two thirds of the range.
+    const textOpacity = Math.max(0.8 - scrollProgress * 1.2, 0);
 
-    // Text slides down 0–325px over the overlay's scroll range.
-    const scrollProgress = Math.min(scrollY / overlayHeight, 1);
-    const textTranslateY = scrollProgress * 325;
+    hero.style.setProperty('--overlay-opacity', scrollProgress);
+    hero.style.setProperty('--text-opacity', textOpacity);
+    // Text slides down 0–325px over the same range.
+    hero.style.setProperty('--text-translate-y', `${scrollProgress * 325}px`);
+    hero.style.setProperty('--halftone-translate-y', `${-scrollProgress * heroParallaxRange}px`);
 
-    gradientOverlay.style.setProperty('--overlay-opacity', overlayOpacity);
-    gradientOverlay.style.setProperty('--text-opacity', textOpacity);
-    gradientOverlay.style.setProperty('--text-translate-y', `${textTranslateY}px`);
-
-    if (header) {
-      const isScrollingUp = scrollY < lastScrollY;
-      if (isScrollingUp) {
-        header.classList.remove('dialtone-header--off-canvas');
-      } else {
-        // Only hide the header when scrolling DOWN and the gradient is out of view.
-        const gradientRect = gradientOverlay.getBoundingClientRect();
-        const isGradientInView = gradientRect.bottom > 0;
-        if (!isGradientInView) {
-          header.classList.add('dialtone-header--off-canvas');
-        }
-      }
-    }
-
-    lastScrollY = scrollY;
     ticking = false;
   };
 
@@ -354,47 +298,20 @@ onMounted(() => {
     requestAnimationFrame(update);
   };
 
+  const handleResize = () => {
+    measure();
+    handleScroll();
+  };
+
   window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('resize', handleResize, { passive: true });
+  measure();
   update(); // Set initial state (e.g. when loaded at a non-zero scroll position).
 
   onUnmounted(() => {
     window.removeEventListener('scroll', handleScroll);
+    window.removeEventListener('resize', handleResize);
   });
 });
 
-// Footer gradient parallax — rAF-throttled alongside the main scroll handler.
-onMounted(() => {
-  const footerGradient = document.querySelector('.gradient-overlay--footer');
-
-  if (!footerGradient) return;
-
-  let ticking = false;
-
-  const update = () => {
-    const rect = footerGradient.getBoundingClientRect();
-
-    // scrollProgress: 0 when footer's top touches bottom of viewport, 1 when fully in view.
-    const visibleTop = Math.max(0, window.innerHeight - rect.top);
-    const scrollProgress = Math.min(Math.max(visibleTop / rect.height, 0), 1);
-
-    // Interpolate Y from 150% down to 100% as the footer scrolls in.
-    const footerGradY = 150 - (scrollProgress * 50);
-    footerGradient.style.setProperty('--footer-grad-y', `${footerGradY}%`);
-
-    ticking = false;
-  };
-
-  const handleFooterScroll = () => {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(update);
-  };
-
-  window.addEventListener('scroll', handleFooterScroll, { passive: true });
-  update(); // Set initial state.
-
-  onUnmounted(() => {
-    window.removeEventListener('scroll', handleFooterScroll);
-  });
-});
 </script>

@@ -1,6 +1,6 @@
 ---
 title: Root layout
-description: A root layout provides a standardized group of containers to display content at the root level.
+description: Page-level container structure for consistent root content layout.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-root-layout--default
@@ -31,8 +31,6 @@ class="d-w100p d-h-500"
 </template>
 </dt-root-layout>
 ```
-
-<!-- <component-combinator component-name="DtRootLayout" /> -->
 
 ## Base Style
 
@@ -103,10 +101,6 @@ class="d-w100p d-h-500"
 Root Layout should be used as the top level component for a route. All other components on the page should be nested
 within one of the root layout's slots. The root layout should not be nested within any other elements or components.
 
-## Vue API
-
-<component-vue-api component-name="rootlayout" />
-
 ## Accessibility
 
 The RootLayout component uses
@@ -121,3 +115,7 @@ The RootLayout component will not do this for you.
 
 The sidebar will not automatically wrap to be above the main content by default.
 This can be changed via the `responsiveBreakpoint` prop if desired.
+
+## Vue API
+
+<component-vue-api component-name="rootlayout" />

@@ -1,13 +1,12 @@
 ---
 title: Radio Group
-description: Radio groups are control elements that allow the user to make a single selection from a list of options.
+description: Related radio options for choosing a single value.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-radio-group--default
 keywords: ["radio buttons","radio options","form fields","d-radio-group","DtRadioGroup","dt-radio-group"]
+combinator: DtRadioGroup
 ---
-
-<component-combinator component-name="DtRadioGroup" />
 
 ## Variants
 
@@ -132,10 +131,6 @@ The event handler is only needed if you need to do additional processing. The v-
 </dt-stack>
 ```
 
-## Vue API
-
-<component-vue-api component-name="radiogroup" />
-
 ## Accessibility
 
 Radio Groups are typically paired with a legend which identifies the group. If no legend is provided then it is expected
@@ -153,3 +148,7 @@ const selectedFruits = ref('apple');
 const onInput = () => {};
 
 </script>
+
+## Vue API
+
+<component-vue-api component-name="radiogroup" />

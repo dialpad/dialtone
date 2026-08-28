@@ -1,14 +1,13 @@
 ---
 title: Avatar
-description: An avatar is a visual representation of a user or object.
+description: Visual identifier for a user, object, or participant group.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-avatar--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=5413-13176
 keywords: ["profile picture", "user image", "profile image", "d-avatar", "DtAvatar", "dt-avatar", "initials", "user icon", "persona"]
+combinator: DtAvatar
 ---
-
-<component-combinator component-name="DtAvatar" />
 
 ## Usage
 
@@ -232,14 +231,6 @@ Use the `deactivated` prop to render the avatar in a desaturated/washed-out stat
 </dt-stack>
 ```
 
-## Vue API
-
-<component-vue-api component-name="avatar" />
-
-## Classes
-
-<component-class-table component-name="avatar"></component-class-table>
-
 ## Accessibility
 
 Initials avatars use background and text color pairings that meet WCAG AA minimum contrast requirements. Variants 0–5 use light text on dark backgrounds, and variants 6–9 use dark text on light backgrounds.
@@ -256,3 +247,11 @@ import { DtIconUser, DtIconHear } from '@dialpad/dialtone-icons/vue';
 const seeds = ['alice', 'bob', 'carol', 'david', 'eve', 'frank', 'grace', 'henry', 'iris', 'jack', 'kate', 'leo', 'mia', 'noah', 'olive', 'paul', 'quinn', 'ruby'];
 const sizes = ['100', '150', '200', '250', '300', '400', '500', '600', '700', '800', '900'];
 </script>
+
+## Vue API
+
+<component-vue-api component-name="avatar" />
+
+## Classes
+
+<component-class-table component-name="avatar"></component-class-table>

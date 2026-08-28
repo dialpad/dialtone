@@ -1,6 +1,7 @@
 ---
 title: "DtChip: interactive defaults to false"
 description: "DtChip's interactive prop default changed from true to false. Chips now render as non-interactive <span> elements by default. Chips that are meant to be clickable must opt in with :interactive=\"true\"."
+keywords: ["clickable", "selection", "span", "non-interactive", "default false"]
 ---
 
 ## TLDR

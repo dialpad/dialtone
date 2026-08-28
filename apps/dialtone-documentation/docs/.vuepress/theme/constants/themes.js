@@ -88,3 +88,25 @@ export const THEME_DISPLAY_NAMES = {
   'prota-deuter': 'Protanopia/Deuteranopia',
   'trita': 'Tritanopia',
 };
+
+/**
+ * Appearance-mode options offered by the docs UI, in display order.
+ *
+ * @constant {string[]} MODES
+ */
+export const MODES = Object.freeze(['system', 'light', 'dark']);
+
+/**
+ * Mode applied to first-time visitors, before any stored preference exists.
+ *
+ * @constant {string} DEFAULT_MODE
+ */
+export const DEFAULT_MODE = 'dark';
+
+/**
+ * Material applied when none is stored. `setMaterial(null)` is the token API's way
+ * of expressing this one, since no `[data-dt-material="sandstone"]` selector exists.
+ *
+ * @constant {string} DEFAULT_MATERIAL
+ */
+export const DEFAULT_MATERIAL = 'sandstone';

@@ -1,6 +1,7 @@
 ---
 title: Removal of Dialtone Recipes
 description: All Dialtone recipe components have been removed. Use the standalone UI-Kit packages instead.
+keywords: ["ui kits", "replacement", "patterns", "packages"]
 ---
 
 ## TLDR

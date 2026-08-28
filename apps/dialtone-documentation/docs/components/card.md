@@ -1,14 +1,13 @@
 ---
 title: Card
-description: A card contains summary content and actions about a single subject. It can be used by itself or within a list, and is generally interactive.
+description: Container for related content, metadata, and actions.
 status: ready
 thumb: true
 figma: planned
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-card--default
 keywords: ["panel", "container", "box", "d-card", "DtCard", "dt-card", "tile", "surface"]
+combinator: DtCard
 ---
-
-<component-combinator component-name="DtCard" />
 
 ## Usage
 

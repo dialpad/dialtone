@@ -16,6 +16,7 @@ import { resolve, basename, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { parseSourceMarkdown } from './lib/parse-source-markdown.mjs';
+import { parseMarkdownFrontmatter } from './lib/frontmatter.mjs';
 import { codeCell, escapeTableCell, rewriteAbsoluteLinks, resolveRawLink } from './lib/utils.mjs';
 import { setComponentDocs } from './lib/transform-vue-api.mjs';
 import { setUtilityClassDocs } from './lib/transform-utility-class-table.mjs';
@@ -23,6 +24,7 @@ import { setTokenDocs } from './lib/transform-tokens.mjs';
 import { setIconKeywords, setIllustrationData } from './lib/transform-icon-catalog.mjs';
 import { setTokensDocs, setColorUtilityClassDocs } from './lib/transform-color-tables.mjs';
 import { SECTION_META, generateLlmsTxt, generateLlmsFullTxt } from './lib/generate-llms.mjs';
+import { findNavItemByLink } from '../docs/.vuepress/theme/utils/findNavItemByLink.js';
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url));
 const ROOT = resolve(__dirname, '..');
@@ -108,22 +110,6 @@ function mapOutputPath (relPath) {
     return dir + '.md';
   }
   return relPath;
-}
-
-/**
- * Extract a flat set of frontmatter field values from a markdown source string.
- * Returns an object keyed by requested field names; missing fields are omitted.
- */
-function parseFrontmatter (content, fields) {
-  const match = content.match(/^---\n([\s\S]*?)\n---/);
-  if (!match) return {};
-  const fm = match[1];
-  const result = {};
-  for (const field of fields) {
-    const fieldMatch = fm.match(new RegExp(`^${field}:\\s*(.+)$`, 'm'));
-    if (fieldMatch) result[field] = fieldMatch[1].trim();
-  }
-  return result;
 }
 
 /**
@@ -263,10 +249,9 @@ function generateFlatIndex (section, sourceDir, outputBase) {
   const srcIndex = resolve(sourceDir, 'index.md');
   try {
     const srcContent = readFileSync(srcIndex, 'utf-8');
-    const titleMatch = srcContent.match(/^title:\s*(.+)$/m);
-    const descMatch = srcContent.match(/^description:\s*(.+)$/m);
-    const title = titleMatch?.[1] ?? section.name;
-    const desc = descMatch?.[1] ?? '';
+    const { data } = parseMarkdownFrontmatter(srcContent, { filePath: srcIndex });
+    const title = data.title ?? section.name;
+    const desc = data.description ?? '';
 
     const links = listMdFiles(outputBase).map(f => buildLinkFromFile(resolve(outputBase, f), f));
 
@@ -305,10 +290,9 @@ function buildOverviewLink (linkPath, currentRawDir) {
   const rawLink = resolveRawLink(linkPath, currentRawDir);
   try {
     const content = readFileSync(srcFile, 'utf-8');
-    const titleMatch = content.match(/^title:\s*(.+)$/m);
-    const descMatch = content.match(/^description:\s*(.+)$/m);
-    const title = titleMatch?.[1] ?? srcDir;
-    const desc = descMatch?.[1] ?? '';
+    const { data } = parseMarkdownFrontmatter(content, { filePath: srcFile });
+    const title = data.title ?? srcDir;
+    const desc = data.description ?? '';
     return desc ? `- [${title}](${rawLink}) — ${desc}` : `- [${title}](${rawLink})`;
   } catch {
     return `- [${srcDir}](${rawLink})`;
@@ -320,7 +304,7 @@ function buildOverviewLink (linkPath, currentRawDir) {
  * Returns the category children array, or null if not found.
  */
 function loadNavCategories (navSection) {
-  return _navData?.topLevelGroups?.dialtone?.sections?.[navSection]?.[0]?.children ?? null;
+  return findNavItemByLink(_navData?.nav, navSection)?.children ?? null;
 }
 
 /**
@@ -399,8 +383,9 @@ function generateComponentStatusPage (sourceDir, outputBase) {
     .sort();
 
   const rows = files.map(f => {
-    const content = readFileSync(resolve(sourceDir, f), 'utf-8');
-    const fm = parseFrontmatter(content, ['title', 'status', 'storybook', 'figma_url', 'figma']);
+    const sourcePath = resolve(sourceDir, f);
+    const content = readFileSync(sourcePath, 'utf-8');
+    const { data: fm } = parseMarkdownFrontmatter(content, { filePath: sourcePath });
     const title = fm.title || basename(f, '.md');
     const css = componentStatus(fm.status);
     const vue = componentStatus(fm.storybook);
@@ -510,7 +495,7 @@ function buildDownloadsSectionLines (section) {
  */
 function postProcessDownloads (sourcePath, outputPath, data) {
   const source = readFileSync(sourcePath, 'utf-8');
-  const { title, description } = parseFrontmatter(source, ['title', 'description']);
+  const { data: { title, description } } = parseMarkdownFrontmatter(source, { filePath: sourcePath });
 
   const lines = [`# ${title || 'Downloads'}`, ''];
   if (description) lines.push(description, '');
@@ -617,7 +602,7 @@ function tryAppendNavChildren (entry, rawBase) {
  * Skips pages that already have a "## Pages" section from filesystem-based linking.
  */
 function appendNavChildLinks (rawBase) {
-  if (!_navData) return;
+  if (!_navData?.nav) return;
 
   function walk (entries) {
     if (!entries) return;
@@ -627,11 +612,7 @@ function appendNavChildLinks (rawBase) {
     }
   }
 
-  const sections = _navData?.topLevelGroups?.dialtone?.sections;
-  if (!sections) return;
-  for (const sectionEntries of Object.values(sections)) {
-    walk(sectionEntries);
-  }
+  walk(_navData.nav);
 }
 
 function main () {

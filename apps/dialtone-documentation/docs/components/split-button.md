@@ -1,14 +1,13 @@
 ---
 title: Split Button
-description: A Split Button offers a default action paired with a secondary action to reveal alternate or related actions.
+description: Primary action paired with a menu for related actions.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-split-button--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=19800-32233
 keywords: ["dropdown button", "button with menu", "d-split-button", "DtSplitButton", "dt-split-button", "menu button", "combo button"]
+combinator: DtSplitButton
 ---
-
-<component-combinator component-name="DtSplitButton" />
 
 ## Usage
 
@@ -351,16 +350,16 @@ The `#leading` and `#trailing` slots are forwarded to the alpha button. Use `alp
 </dt-stack>
 ```
 
-## Vue API
-
-<component-vue-api component-name="splitButton" />
-
 ## Accessibility
 
 In addition to the [Button component's](button.md#accessibility) accessibility documentation:
 
 - An icon-only primary action and the secondary action require a [Tooltip](tooltip.md) to indicate its function.
 - While the secondary action is focused, pressing `Enter` or `Space` triggers its action, displaying a [Dropdown component](dropdown.md) or [Popover component](popover.md).
+
+## Vue API
+
+<component-vue-api component-name="splitButton" />
 
 ## Classes
 

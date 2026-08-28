@@ -1,14 +1,13 @@
 ---
 title: Radio
-description: A radio is an input control that allows users to select only one option from a number of choices.
+description: Form control for choosing one option from a set.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-radio--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=24935-9743
 keywords: ["radio button", "option", "form field", "d-radio", "DtRadio", "dt-radio", "option selector"]
+combinator: DtRadio
 ---
-
-<component-combinator component-name="DtRadio" />
 
 ## Usage
 
@@ -128,10 +127,6 @@ Use the `label-size` prop to override the default label size.
 </dt-stack>
 ```
 
-## Classes
-
-<component-class-table component-name="radio" />
-
 ## Accessibility
 
 The best accessibility is semantic HTML. Most screen readers understand how to parse inputs if they're correctly formatted. When it comes to radio input, there are a few things to keep in mind:
@@ -146,3 +141,7 @@ The best accessibility is semantic HTML. Most screen readers understand how to p
 ## Vue API
 
 <component-vue-api component-name="radio" />
+
+## Classes
+
+<component-class-table component-name="radio" />

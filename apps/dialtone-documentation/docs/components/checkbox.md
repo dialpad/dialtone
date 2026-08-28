@@ -1,14 +1,13 @@
 ---
 title: Checkbox
-description: A checkbox is an input control that allows users to select zero, one, or more options from a number of choices.
+description: Form control for selecting zero, one, or many options.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-checkbox--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=24943-2447
 keywords: ["tick", "select", "form field", "d-checkbox", "DtCheckbox", "dt-checkbox"]
+combinator: DtCheckbox
 ---
-
-<component-combinator component-name="DtCheckbox" />
 
 ## Usage
 
@@ -194,14 +193,6 @@ Use the `label-size` prop to override the default label size.
 </dt-stack>
 ```
 
-## Vue API
-
-<component-vue-api component-name="checkbox" />
-
-## Classes
-
-<component-class-table component-name="checkbox"></component-class-table>
-
 ## Accessibility
 
 The best accessibility is semantic HTML. Most screen readers understand how to parse inputs if they're correctly formatted. When it comes to checkboxes, there are a few things to keep in mind:
@@ -212,3 +203,11 @@ The best accessibility is semantic HTML. Most screen readers understand how to p
 - Input with description text should have `aria-describedby` with the `id` of the description text.
 - If the input is a required field, use the `aria-required` property and use the validation message for input errors.
 - Input with validation errors should have `aria-describedby` with the `id` of the validation message.
+
+## Vue API
+
+<component-vue-api component-name="checkbox" />
+
+## Classes
+
+<component-class-table component-name="checkbox"></component-class-table>

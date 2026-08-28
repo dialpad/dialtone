@@ -8,9 +8,7 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description:
-        'Warns when v-dt-focusgroup is used on an element without aria-label or aria-labelledby. ' +
-        'Screen readers need an accessible name to identify the widget.',
+      description: 'Detects `v-dt-focusgroup` elements without an accessible label.',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/focusgroup-requires-label.md',
     },

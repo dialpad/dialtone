@@ -2,13 +2,12 @@
 title: Tabs
 status: ready
 thumb: true
-description: Tabs allow users to navigation between grouped content in different views while within the same page context.
+description: Navigation for switching between related panels on one page.
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-tabs--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=2129-4760
 keywords: ["tab panel", "tab navigation", "d-tabs", "DtTabs", "dt-tabs", "segmented control", "tabbar"]
+combinator: DtTabGroup
 ---
-
-<component-combinator component-name="DtTabGroup" />
 
 ## Variants
 
@@ -388,6 +387,16 @@ If you need to do some validation before changing tabs, you can use the `before-
 </script>
 ```
 
+## Accessibility
+
+To create accessible tabs, be sure to implement the <a class="d-link" href="https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-2/tabs.html" target="_blank">proper keyboard navigation</a> and utilize the following ARIA roles to properly declare element roles, content relationships, and current status:
+
+<component-accessible-table component-name="tabs" />
+
+<script setup>
+  import ExampleTabs from "@exampleComponents/ExampleTabs.vue";
+</script>
+
 ## Vue API
 
 ### Tab Group
@@ -405,13 +414,3 @@ If you need to do some validation before changing tabs, you can use the `before-
 ## Classes
 
 <component-class-table component-name="tabs" />
-
-## Accessibility
-
-To create accessible tabs, be sure to implement the <a class="d-link" href="https://www.w3.org/TR/wai-aria-practices-1.1/examples/tabs/tabs-2/tabs.html" target="_blank">proper keyboard navigation</a> and utilize the following ARIA roles to properly declare element roles, content relationships, and current status:
-
-<component-accessible-table component-name="tabs" />
-
-<script setup>
-  import ExampleTabs from "@exampleComponents/ExampleTabs.vue";
-</script>

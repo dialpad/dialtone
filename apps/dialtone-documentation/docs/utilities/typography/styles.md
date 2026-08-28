@@ -4,7 +4,7 @@ keywords: ["headline", "body", "label", "caption"]
 ---
 
 > [!WARNING]
-> Typography Styles have been moved to [Design Language > Typography](/design/typography/).
+> Typography Styles have been moved to [Foundations > Type](/foundations/typography/).
 
 Typography styles combine multiple typography properties – e.g. `font-family`, `font-size`, `line-height`,`font-weight` into a single class rather than combine multiple CSS Utilities.
 

@@ -8,16 +8,15 @@
     <template #icon>
       <dt-icon name="rocket" />
     </template>
-    Dialtone's next major version includes breaking changes.
-    The
-    <dt-link to="/guides/migration/">
+    Dialtone v10+ includes breaking changes.
+    View the
+    <dt-link to="/guides/migration/" tone="muted">
       Migration Guide
-    </dt-link>
-    includes step by step instructions and automated tooling.
+    </dt-link>.
     <template #action>
       <dt-button
         kind="muted"
-        importance="clear"
+        importance="outlined"
         size="200"
         label-class="d-tw-nowrap"
         @click="permanentDismiss"
@@ -29,8 +28,19 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted } from 'vue';
+import { ref, computed, onMounted, watch } from 'vue';
 import { useRoute } from 'vue-router';
+import { useViewportBreakpoints } from '../theme/composables/useViewportBreakpoints.js';
+
+const viewport = useViewportBreakpoints();
+
+const props = defineProps({
+  visible: {
+    type: Boolean,
+    default: true,
+  },
+});
+const emit = defineEmits(['update:visible']);
 
 const STORAGE_KEY = 'dt-migration-banner-dismissed';
 const route = useRoute();
@@ -42,8 +52,16 @@ const isOnMigrationGuide = computed(() => {
 });
 
 const shouldShow = computed(() => {
-  return !dismissed.value && !permanentlyDismissed.value && !isOnMigrationGuide.value;
+  return viewport.atLeast('md') &&
+    props.visible &&
+    !dismissed.value &&
+    !permanentlyDismissed.value &&
+    !isOnMigrationGuide.value;
 });
+
+watch(shouldShow, (visible) => {
+  emit('update:visible', visible);
+}, { immediate: true });
 
 onMounted(() => {
   try {

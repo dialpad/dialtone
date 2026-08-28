@@ -1,7 +1,7 @@
 ---
 title: Padding
 description: Utilities for setting an element's interior spacing between child elements and the element's box edge.
-keywords: ["inner spacing", "inset", "padding inline start", "padding inline end", "padding block start", "padding block end"]
+keywords: ["inner spacing", "inset", "padding top", "padding right", "padding bottom", "padding left", "padding inline start", "padding inline end", "padding block start", "padding block end"]
 ---
 
 > [!INFO] Consider DtBox and DtStack first

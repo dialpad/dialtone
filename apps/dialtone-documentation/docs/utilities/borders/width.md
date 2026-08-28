@@ -1,7 +1,7 @@
 ---
 title: Border Widths
 description: Utilities for controlling an element's border width.
-keywords: ["border size", "border thickness", "border inline size", "border block size"]
+keywords: ["border size", "border thickness", "border top width", "border right width", "border bottom width", "border left width", "border block start width", "border block end width", "border inline start width", "border inline end width"]
 ---
 
 ## All Sides

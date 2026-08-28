@@ -1,14 +1,13 @@
 ---
 title: Dropdown
-description: A Dropdown presents a list of options or actions.
+description: Triggerable menu for actions or choices.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-dropdown--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=10732-69099
 keywords: ["select","menu","picker","d-dropdown","DtDropdown","dt-dropdown"]
+combinator: DtDropdown
 ---
-
-<component-combinator component-name="DtDropdown" />
 
 ## Usage
 
@@ -145,10 +144,6 @@ Dropdown content renders outside the DOM tree. Use the `contentMode` prop to app
 <dt-dropdown content-mode="light">...</dt-dropdown>
 ```
 
-## Vue API
-
-<component-vue-api component-name="dropdown" :also-import="['dropdownseparator']" />
-
 ## Accessibility
 
 A screen reader visible only close button is added by default.
@@ -174,3 +169,7 @@ const items = [
   { name: 'Another menu item 2', id: 5 },
 ];
 </script>
+
+## Vue API
+
+<component-vue-api component-name="dropdown" :also-import="['dropdownseparator']" />

@@ -1,14 +1,13 @@
 ---
 title: Datepicker
 thumb: true
-description: Datepicker component will provide a calendar to select a date.
+description: Calendar control for selecting a date.
 status: ready
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-datepicker--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=13998-86
 keywords: ["date picker", "calendar", "date selector", "d-datepicker", "DtDatepicker", "dt-datepicker", "date input", "schedule"]
+combinator: DtDatepicker
 ---
-
-<component-combinator component-name="DtDatepicker" />
 
 ## Usage
 
@@ -86,10 +85,6 @@ const maxDate = new Date(today.getFullYear(), today.getMonth(), today.getDate() 
   :max-date="maxDate"
 />
 ```
-
-## Vue API
-
-<component-vue-api component-name="datepicker"></component-vue-api>
 
 ## Date Formats
 
@@ -286,3 +281,7 @@ const toggleDatepicker = () => {
 };
 
 </script>
+
+## Vue API
+
+<component-vue-api component-name="datepicker"></component-vue-api>

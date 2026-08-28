@@ -6,7 +6,6 @@
  *
  * States:
  *   NORMAL          — default, pass-through for standard markdown
- *   FRONTMATTER     — inside YAML --- block
  *   FENCED_CODE     — inside ``` fenced code block (highest priority)
  *   FENCED_DEMO     — inside ```vue demo block (transforms directives to clean code)
  *   CODE_WELL_HEADER — inside <code-well-header>...</code-well-header> (remove)
@@ -26,12 +25,12 @@ import { transformUsage } from './transform-usage.mjs';
 import { transformHtmlTable } from './transform-html-table.mjs';
 import { transformNewUtilityClassTable, transformOldUtilityClassTable } from './transform-utility-class-table.mjs';
 import { isStandaloneVueComponentLine, cleanupOutput, PASSTHROUGH_COMPONENTS } from './utils.mjs';
-import { INLINE_HANDLERS, consumeUntilClose, parseFrontmatterField } from './component-handlers.mjs';
+import { INLINE_HANDLERS, consumeUntilClose } from './component-handlers.mjs';
+import { parseMarkdownFrontmatter } from './frontmatter.mjs';
 import { parseDirectives, trimBlankLines } from '../../docs/.vuepress/plugins/fenced-demo-shared.js';
 
 const S = {
   NORMAL: 'NORMAL',
-  FRONTMATTER: 'FRONTMATTER',
   FENCED_CODE: 'FENCED_CODE',
   FENCED_DEMO: 'FENCED_DEMO',
   CODE_WELL_HEADER: 'CODE_WELL_HEADER',
@@ -70,14 +69,14 @@ function extractScriptSetup (lines) {
   return scriptLines.join('\n');
 }
 
-/**
- * Process a frontmatter line, extracting known fields.
- */
-function extractFrontmatterFields (trimmed, fm) {
-  for (const field of ['title', 'heading', 'description', 'author', 'posted', 'status', 'storybook', 'keywords']) {
-    const val = parseFrontmatterField(trimmed, field);
-    if (val !== null) fm[field] = val;
-  }
+function formatFrontmatterValue (value) {
+  if (value instanceof Date) return value.toISOString().slice(0, 10);
+  return String(value);
+}
+
+function formatKeywords (keywords) {
+  const values = Array.isArray(keywords) ? keywords : [keywords];
+  return values.map(formatFrontmatterValue).filter(Boolean).join(', ');
 }
 
 /**
@@ -86,19 +85,19 @@ function extractFrontmatterFields (trimmed, fm) {
 function emitFrontmatter (fm, output) {
   const displayTitle = fm.title || fm.heading;
   if (displayTitle) {
-    output.push(`# ${displayTitle}`);
+    output.push(`# ${formatFrontmatterValue(displayTitle)}`);
     output.push('');
   }
   if (fm.description) {
-    output.push(fm.description);
+    output.push(formatFrontmatterValue(fm.description));
     output.push('');
   }
   const meta = [];
-  if (fm.status) meta.push(`- **Status**: ${fm.status}`);
-  if (fm.storybook) meta.push(`- **Storybook**: ${fm.storybook}`);
-  if (fm.keywords) meta.push(`- **Keywords**: ${fm.keywords.replace(/^\[|]$/g, '').replace(/"/g, '').replace(/,(?!\s)/g, ', ')}`);
-  if (fm.author) meta.push(`- **Author**: ${fm.author}`);
-  if (fm.posted) meta.push(`- **Posted**: ${fm.posted}`);
+  if (fm.status) meta.push(`- **Status**: ${formatFrontmatterValue(fm.status)}`);
+  if (fm.storybook) meta.push(`- **Storybook**: ${formatFrontmatterValue(fm.storybook)}`);
+  if (fm.keywords) meta.push(`- **Keywords**: ${formatKeywords(fm.keywords)}`);
+  if (fm.author) meta.push(`- **Author**: ${formatFrontmatterValue(fm.author)}`);
+  if (fm.posted) meta.push(`- **Posted**: ${formatFrontmatterValue(fm.posted)}`);
   if (meta.length > 0) {
     output.push(...meta);
     output.push('');
@@ -255,16 +254,6 @@ function stripWrapperElement (lines) {
   while (childLines.length > 0 && childLines[childLines.length - 1].trim() === '') childLines.pop();
 
   return childLines;
-}
-
-// ── State handler: FRONTMATTER ───────────────────────────────────
-function handleFrontmatter (ctx) {
-  if (ctx.trimmed === '---') {
-    ctx.state = S.NORMAL;
-    emitFrontmatter(ctx.fm, ctx.output);
-  } else {
-    extractFrontmatterFields(ctx.trimmed, ctx.fm);
-  }
 }
 
 // ── State handler: skip-until-close states ────────────────────────
@@ -477,13 +466,6 @@ function tryInlineHandlers (ctx) {
   return false;
 }
 
-function tryDetectFrontmatterStart (ctx) {
-  if (ctx.i !== 0 || ctx.trimmed !== '---' || ctx.frontmatterSeen) return false;
-  ctx.state = S.FRONTMATTER;
-  ctx.frontmatterSeen = true;
-  return true;
-}
-
 // ── Kind → GFM alert mapping for dt-notice ───────────────────────
 // Uses DtNotice kind values directly (uppercase) to match the
 // > [!KIND] convention used in the VuePress source files.
@@ -668,7 +650,6 @@ function tryRemoveVueComponent (ctx) {
  */
 const NORMAL_DETECTORS = [
   tryDetectFencedCode,
-  tryDetectFrontmatterStart,
   tryDetectComment,
   tryDetectScriptOrStyle,
   tryDetectCodeWellHeader,
@@ -700,7 +681,6 @@ function processNormalLine (ctx) {
 const STATE_HANDLERS = {
   [S.FENCED_CODE]: handleFencedCode,
   [S.FENCED_DEMO]: handleFencedDemoState,
-  [S.FRONTMATTER]: handleFrontmatter,
   [S.HTML_COMMENT]: (ctx) => handleSkipUntilClose(ctx, '-->', S.NORMAL),
   [S.SCRIPT_SETUP]: (ctx) => handleSkipUntilClose(ctx, '</script>', S.NORMAL),
   [S.STYLE_BLOCK]: (ctx) => handleSkipUntilClose(ctx, '</style>', S.NORMAL),
@@ -736,19 +716,20 @@ function convertRouterLinks (line) {
  * @returns {string} - Clean GFM markdown
  */
 export function parseSourceMarkdown (source, { dataDir, filePath, utilitiesDir }) {
-  const lines = source.split('\n');
+  const { data: frontmatter, content } = parseMarkdownFrontmatter(source, { filePath });
+  const lines = content.split('\n');
   const scriptSetupContent = extractScriptSetup(lines);
+  const output = [];
+  emitFrontmatter(frontmatter, output);
   const ctx = {
     lines,
-    output: [],
+    output,
     state: S.NORMAL,
     accumulator: [],
     fencedCodeMarker: '',
     inSingleQuoteAttr: false,
-    frontmatterSeen: false,
     tableNestDepth: 0,
     utilityTableIsNew: false,
-    fm: { title: '', heading: '', description: '', author: '', posted: '', status: '', storybook: '', keywords: '' },
     scriptSetupContent,
     filePath,
     utilitiesDir,

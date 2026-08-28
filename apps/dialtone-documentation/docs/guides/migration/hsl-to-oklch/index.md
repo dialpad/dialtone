@@ -1,6 +1,7 @@
 ---
 title: Migrating Colors from HSL to OKLCH
 description: Dialtone color tokens and CSS have moved from HSL to OKLCH. Per-channel breakout variables are removed, cutting CSS bundle over 30%, and removing over 3,200 CSS Variables. Migration scripts included.
+keywords: ["color format", "color tokens", "css variables", "channels", "bundle size"]
 ---
 
 > [!WARNING] Breaking change

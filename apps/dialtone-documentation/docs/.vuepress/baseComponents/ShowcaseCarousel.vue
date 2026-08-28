@@ -167,6 +167,13 @@ onMounted(() => {
 .showcase-carousel__track {
   will-change: transform;
   transition: none;
-  block-size: 732px;
+  block-size: 66vh;
+  user-select: none;
+}
+
+@media screen and (min-width: 640px) {
+  .showcase-carousel__track {
+    block-size: 768px;
+  }
 }
 </style>

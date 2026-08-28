@@ -1,6 +1,7 @@
 
 import { defineClientConfig } from 'vuepress/client';
 import Layout from './layouts/Layout.vue';
+import Home from './layouts/Home.vue';
 import NotFound from './layouts/NotFound.vue';
 import Blank from './layouts/Blank.vue';
 import customEmojis from '@data/custom-emoji';
@@ -8,9 +9,7 @@ import 'overlayscrollbars/overlayscrollbars.css';
 import { OverlayScrollbars, ClickScrollPlugin } from 'overlayscrollbars';
 import { onBeforeMount, provide, ref, onMounted } from 'vue';
 import { flushPromises } from '@workspaceRoot/common/utils/client.mjs';
-
-// CSS
-import '@docsearch/css';
+import { syncBrowserThemeColor } from './utils/browserThemeColor.js';
 
 // Layered Theming System - Base layers (always loaded). Material override CSS
 // loads here so all materials are available for attribute-driven switching;
@@ -30,13 +29,14 @@ import '@dialpad/dialtone-tokens/layered/material/tokens-jade.css';
 import '@dialpad/dialtone-tokens/layered/tokens-dp-colors.css';
 
 import { VALID_MATERIALS } from '@dialpad/dialtone-tokens/themes/config';
+import { DEFAULT_MATERIAL, DEFAULT_MODE, MODES } from './constants/themes.js';
 
 // Normalize stale localStorage values from removed/renamed entries (e.g.
 // bronze → sandstone). preferredTheme has its own force-reset in onBeforeMount.
 const VALID_PREFS = {
-  preferredMode: { valid: ['system', 'light', 'dark'], fallback: 'system' },
+  preferredMode: { valid: [...MODES], fallback: DEFAULT_MODE },
   preferredContrast: { valid: ['default', 'high'], fallback: 'default' },
-  preferredMaterial: { valid: [...VALID_MATERIALS], fallback: 'sandstone' },
+  preferredMaterial: { valid: [...VALID_MATERIALS], fallback: DEFAULT_MATERIAL },
 };
 if (typeof localStorage !== 'undefined') {
   for (const [key, { valid, fallback }] of Object.entries(VALID_PREFS)) {
@@ -69,10 +69,10 @@ import { setMode } from '@dialpad/dialtone-tokens/themes/config';
 
 // Apply default theme immediately to prevent FOUC (Flash of Unstyled Content)
 if (typeof document !== 'undefined') {
-  // Set default mode (light/dark) based on system preference or localStorage
+  // Apply the stored preference immediately, defaulting new users to dark mode.
   const preferredMode = typeof localStorage !== 'undefined'
-    ? localStorage.getItem('preferredMode') || 'system'
-    : 'system';
+    ? localStorage.getItem('preferredMode') || DEFAULT_MODE
+    : DEFAULT_MODE;
 
   let actualMode = preferredMode;
   if (preferredMode === 'system') {
@@ -85,6 +85,8 @@ if (typeof document !== 'undefined') {
 
   // Set data attributes immediately
   document.documentElement.setAttribute('data-dt-brand', 'dp');
+
+  syncBrowserThemeColor();
 }
 
 // The default scrollbar exists outside of the vue instance on the body so
@@ -107,14 +109,6 @@ const initOverlayScrollbars = () => {
       },
     });
   });
-};
-
-const DOCSEARCH_CONFIG = {
-  apiKey: '6436ebddb959748daeec411eb388a99d',
-  indexName: 'dialpad',
-  appId: 'Y5HG9UX6KM',
-  placeholder: 'Search',
-  container: '#docsearch',
 };
 
 export default defineClientConfig({
@@ -156,38 +150,25 @@ export default defineClientConfig({
       router.afterEach(async () => {
         await flushPromises();
         resolveViewTransition?.();
-
-        // Re-initialize docsearch when layout switch recreates the #docsearch container
-        const container = document.querySelector('#docsearch');
-        if (container && !container.children.length) {
-          const docsearchModule = await import('@docsearch/js');
-          docsearchModule.default(DOCSEARCH_CONFIG);
-        }
       });
 
-      router.options.scrollBehavior = async (to) => {
-        if (to.hash) {
-          const html = document.querySelector('html');
-          // vue-router does not incorporate scroll-padding-top on its own.
-          if (html) {
-            const top = parseFloat(getComputedStyle(html).scrollPaddingTop);
-            await flushPromises();
-            return {
-              el: to.hash,
-              behavior: 'smooth',
-              top,
-            };
-          }
-        }
-        return { top: 0 };
-      };
+      // Hash scrolling belongs to usePageTocScrollSpy, not here. Page.vue mounts it on
+      // every page the Layout renders, and it measures the sticky header's real height
+      // and scrolls the actual scroll container — which on doc pages is an inner
+      // overflow element, not the document. A router-level handler can only scroll the
+      // document, so it could not do the job anyway, and having both meant
+      // writeRouteHash had to blank this out and restore it on every TOC click.
+      //
+      // Non-hash navigation still resets the document here; the inner container is reset
+      // by Layout.vue's own route watcher.
+      router.options.scrollBehavior = (to) => (to.hash ? false : { top: 0 });
     }
   },
   setup () {
-    const currentMode = ref('system');
+    const currentMode = ref(DEFAULT_MODE);
     const currentTheme = ref('dp');
     const currentContrast = ref('default');
-    const currentMaterial = ref('sandstone');
+    const currentMaterial = ref(DEFAULT_MATERIAL);
     provide('currentMode', currentMode);
     provide('currentTheme', currentTheme);
     provide('currentContrast', currentContrast);
@@ -197,20 +178,18 @@ export default defineClientConfig({
       // Keep localStorage in sync with the canonical theme (dp is the only brand).
       localStorage.setItem('preferredTheme', 'dp');
 
-      currentMode.value = localStorage.getItem('preferredMode') || 'system';
+      currentMode.value = localStorage.getItem('preferredMode') || DEFAULT_MODE;
       currentContrast.value = localStorage.getItem('preferredContrast') || 'default';
-      currentMaterial.value = localStorage.getItem('preferredMaterial') || 'sandstone';
+      currentMaterial.value = localStorage.getItem('preferredMaterial') || DEFAULT_MATERIAL;
     });
-    onMounted(async () => {
+    onMounted(() => {
       // Reveal the app now that Vue has hydrated and components are registered
       document.documentElement.setAttribute('data-app-ready', '');
-
-      const docsearch = (await import('@docsearch/js'))?.default;
-      docsearch(DOCSEARCH_CONFIG);
     });
   },
   layouts: {
     Layout,
+    Home,
     NotFound,
     Blank,
   },

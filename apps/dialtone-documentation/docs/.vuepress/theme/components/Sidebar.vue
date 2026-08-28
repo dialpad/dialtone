@@ -1,75 +1,73 @@
 <template>
-  <h2 class="d-vi-visible-sr">
-    Local navigation
-  </h2>
   <dt-stack
-    v-if="sidebarItems.length"
-    as="ul"
-    class="dialtone-sidebar__list"
-    gap="50"
+    class="dialtone-sidebar__list d-h100p"
+    @keydown="handleKeydown"
   >
-    <div class="d-pbe-100">
-      <dt-input
-        ref="searchInput"
-        v-model="inputValue"
-        aria-label="Search"
-        placeholder="Search"
-        type="search"
-        @update:model-value="focusedIndex = -1"
-      >
-        <template #startIcon="{ iconSize }">
-          <dt-icon name="search" :size="iconSize" />
-        </template>
-        <template v-if="inputValue.length !== 0" #endIcon="{ clear }">
-          <dt-button
-            v-dt-tooltip="'Clear search'"
-            kind="muted"
-            importance="clear"
-            :size="100"
-            aria-label="Clear search"
-            @click="clear"
-          >
-            <template #startIcon="{ iconSize }">
-              <dt-icon name="close" :size="iconSize" />
-            </template>
-          </dt-button>
-        </template>
-      </dt-input>
-    </div>
-    <sidebar-item
-      v-for="item in filteredItems"
-      :key="item.link || item.text"
-      :item="item"
-      :is-single-page="item.isSinglePage"
-      :depth="0"
-      :open-items="openItems"
-      @toggle="handleToggle"
+    <sidebar-header
+      ref="searchInput"
+      v-model="inputValue"
+      :results-id="SIDEBAR_SEARCH_RESULTS_ID"
+      :active-result-id="activeResultId"
     />
-    <li v-if="filteredItems.length === 0 && inputValue.trim()">
-      <dt-empty-state
-        :size="200"
-        :header-text="`No results found for &quot;${inputValue}&quot;`"
-        class="d-w100p"
+    <dt-box class="d-fl1" scrollbar="move">
+      <dt-stack
+        :id="SIDEBAR_SEARCH_RESULTS_ID"
+        gap="150"
       >
-        <template #icon>
-          <dt-icon name="search" size="500" />
-        </template>
-      </dt-empty-state>
-    </li>
+        <sidebar-group
+          v-for="group in visibleGroups"
+          :key="group.key"
+          :items="group.items"
+          :presentation="group.presentation"
+          :path-prefix="group.key"
+          :open-items="openItems"
+          :active-item-path="activeItemPath"
+          :search-active="isSearchActive"
+          @toggle="handleToggle"
+        />
+        <dt-empty-state
+          v-if="visibleGroups.length === 0 && inputValue.trim()"
+          :size="200"
+          :header-text="`No results found for &quot;${inputValue}&quot;`"
+          class="d-w100p"
+        >
+          <template #icon>
+            <dt-icon name="search" size="500" />
+          </template>
+        </dt-empty-state>
+      </dt-stack>
+    </dt-box>
+    <sidebar-footer />
   </dt-stack>
 </template>
 
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import SidebarItem from './SidebarItem.vue';
+import SidebarGroup from './SidebarGroup.vue';
+import SidebarFooter from './SidebarFooter.vue';
+import SidebarHeader from './SidebarHeader.vue';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import { useSidebarItems } from '../composables/useSidebarItems';
+import {
+  canReceiveCharacterInput,
+  isSidebarSearchShortcut,
+} from '../utils/sidebarShortcuts';
+import {
+  collectOpenItemKeys,
+  collectOpenItemKeysForRoute,
+  filterNavItems,
+  flattenNavigableItems,
+  getSearchResultId,
+  wrapHighlightIndex,
+} from '../utils/sidebarSearch.js';
+import { isExternalUrl } from '../utils/isExternalUrl';
 
 const route = useRoute();
 const router = useRouter();
+const SIDEBAR_SEARCH_RESULTS_ID = 'dialtone-sidebar-search-results';
 const items = useThemeLocaleData().value.sidebar;
-const sidebarItems = useSidebarItems(items);
+const sidebarGroups = useSidebarItems(items);
 
 // Track which items are open (by their link or text as key)
 const openItems = ref(new Set());
@@ -77,259 +75,138 @@ const openItems = ref(new Set());
 // Track search input value
 const inputValue = ref('');
 
-// Track which item is focused via keyboard navigation (-1 means no focus)
-const focusedIndex = ref(-1);
+// Track which search result is highlighted while focus remains in the input.
+const highlightIndex = ref(-1);
 
 // Ref to the search input element
 const searchInput = ref(null);
 
-// Strip separators and case for fuzzy matching.
-const normalize = (str) => str.toLowerCase().replace(/[^a-z0-9]/g, '');
+const focusSearchInput = () => searchInput.value?.focus();
+const isModifiedKeypress = (event) => {
+  return event.altKey || event.ctrlKey || event.metaKey || event.shiftKey;
+};
+const handleSearchShortcut = (event) => {
+  if (!isSidebarSearchShortcut(event)) return;
 
-// Recursive filter function for sidebar items
-const filterItems = (items, searchTerm) => {
-  if (!searchTerm) return items;
+  const target = event.target instanceof Element ? event.target : document.activeElement;
 
-  const term = searchTerm.trim();
-  if (!term) return items;
+  if (canReceiveCharacterInput(target)) return;
 
-  const normalizedTerm = normalize(term);
-  if (!normalizedTerm) return [];
-
-  const filtered = [];
-
-  items.forEach(item => {
-    // Check if current item matches (text or keywords)
-    const itemMatches = normalize(item.text).includes(normalizedTerm) ||
-      (item.keywords?.some(keyword =>
-        normalize(keyword).includes(normalizedTerm),
-      ) ?? false);
-
-    // Recursively filter children if they exist
-    const filteredChildren = item.children
-      ? filterItems(item.children, searchTerm)
-      : [];
-
-    // Include item if:
-    // 1. Item text matches, OR
-    // 2. Any children match (filteredChildren.length > 0)
-    if (itemMatches || filteredChildren.length > 0) {
-      filtered.push({
-        ...item,
-        children: filteredChildren.length > 0 ? filteredChildren : item.children,
-      });
-    }
-  });
-
-  return filtered;
+  event.preventDefault();
+  nextTick(focusSearchInput);
 };
 
-// Computed property for filtered sidebar items
-const filteredItems = computed(() => {
-  if (!inputValue.value || !inputValue.value.trim()) {
-    return sidebarItems.value;
-  }
-  return filterItems(sidebarItems.value, inputValue.value);
+const filteredGroups = computed(() => sidebarGroups.value.map(group => ({
+  ...group,
+  items: inputValue.value.trim()
+    ? filterNavItems(group.items, inputValue.value)
+    : group.items,
+})));
+const visibleGroups = computed(() => filteredGroups.value.filter(group => group.items.length));
+const displayItems = computed(() => sidebarGroups.value.flatMap(group => group.items));
+const filteredDisplayItems = computed(() => filteredGroups.value.flatMap(group => group.items));
+const isSearchActive = computed(() => Boolean(inputValue.value.trim()));
+
+// Leaf links in the order arrow keys walk them.
+const flattenedFilteredItems = computed(() => filteredGroups.value.flatMap(group => (
+  flattenNavigableItems(group.items, group.key)
+)));
+const activeItem = computed(() => flattenedFilteredItems.value[highlightIndex.value]);
+const activeItemPath = computed(() => {
+  return activeItem.value?.itemPath;
+});
+const activeResultId = computed(() => {
+  return activeItemPath.value
+    ? getSearchResultId(activeItemPath.value)
+    : undefined;
 });
 
-// Flatten filtered items into a sequential list for keyboard navigation
-const flattenedFilteredItems = computed(() => {
-  const flattened = [];
+const activateHighlightedItem = (event) => {
+  const link = activeItem.value?.item.link;
+  if (isModifiedKeypress(event) || !link) return;
 
-  const traverse = (items) => {
-    items.forEach(item => {
-      // Add items that have links (navigable items)
-      if (item.link) {
-        flattened.push(item);
-      }
-      // Recursively traverse children if they exist
-      if (item.children && item.children.length > 0) {
-        traverse(item.children);
-      }
-    });
-  };
-
-  traverse(filteredItems.value);
-  return flattened;
-});
-
-// Compute which items should be open during search
-const computeOpenItemsForSearch = (items) => {
-  const open = new Set();
-
-  const traverse = (itemsList) => {
-    itemsList.forEach(item => {
-      // If item has children, it should be opened to show them
-      if (item.children && item.children.length > 0) {
-        open.add(item.link || item.text);
-        // Recursively process children
-        traverse(item.children);
-      }
-    });
-  };
-
-  traverse(items);
-  return open;
-};
-
-// Check if current route is within an item's tree
-const isRouteInTree = (item, routePath) => {
-  if (!item.children) return false;
-  if (routePath === item.link) return true;
-
-  const checkChildren = (children) => {
-    return children.some(child => {
-      if (routePath === child.link) return true;
-
-      // Special case: Treat blog posts as children of What's New
-      if (child.link === '/dialtone/whats-new/' && routePath.startsWith('/dialtone/whats-new/posts/')) {
-        return true;
-      }
-
-      if (child.children) return checkChildren(child.children);
-      return false;
-    });
-  };
-
-  return checkChildren(item.children);
-};
-
-// Find all items that should be open based on route
-const computeOpenItems = (items, routePath) => {
-  const open = new Set();
-
-  const traverse = (itemsList) => {
-    itemsList.forEach(item => {
-      if (item.children) {
-        if (isRouteInTree(item, routePath)) {
-          open.add(item.link || item.text);
-        }
-        traverse(item.children);
-      }
-    });
-  };
-
-  traverse(items);
-  return open;
-};
-
-// Global keyboard event handler for sidebar navigation
-const handleKeydown = (event) => {
-  // Only handle keyboard navigation when search is active with results
-  if (!inputValue.value.trim() || flattenedFilteredItems.value.length === 0) {
+  event.preventDefault();
+  if (isExternalUrl(link)) {
+    window.open(link, '_blank', 'noopener,noreferrer');
     return;
   }
+
+  router.push(link);
+};
+
+// Combobox-style result navigation keeps DOM focus in the search input.
+const handleKeydown = (event) => {
+  if (!isSearchActive.value) {
+    return;
+  }
+
+  if (event.key === 'Escape') {
+    event.preventDefault();
+    inputValue.value = '';
+    highlightIndex.value = -1;
+    nextTick(focusSearchInput);
+    return;
+  }
+
+  if (flattenedFilteredItems.value.length === 0) return;
 
   switch (event.key) {
     case 'ArrowDown':
       event.preventDefault();
-      if (focusedIndex.value < flattenedFilteredItems.value.length - 1) {
-        focusedIndex.value++;
-      } else {
-        focusedIndex.value = 0;
-      }
+      highlightIndex.value = wrapHighlightIndex(highlightIndex.value, 1, flattenedFilteredItems.value.length);
       break;
 
     case 'ArrowUp':
       event.preventDefault();
-      if (focusedIndex.value > 0) {
-        focusedIndex.value--;
-      } else {
-        focusedIndex.value = -1;
-        nextTick(() => {
-          const inputElement = searchInput.value?.$el?.querySelector('input');
-          inputElement?.focus();
-        });
-      }
+      highlightIndex.value = wrapHighlightIndex(highlightIndex.value, -1, flattenedFilteredItems.value.length);
       break;
 
     case 'Enter':
-      event.preventDefault();
-      if (focusedIndex.value >= 0 && focusedIndex.value < flattenedFilteredItems.value.length) {
-        const focusedItem = flattenedFilteredItems.value[focusedIndex.value];
-        if (focusedItem.link) {
-          router.push(focusedItem.link);
-        }
-      }
-      break;
-
-    case 'Escape':
-      event.preventDefault();
-      inputValue.value = '';
-      focusedIndex.value = -1;
-      // Return focus to search input
-      nextTick(() => {
-        if (searchInput.value?.$el) {
-          const inputElement = searchInput.value.$el.querySelector('input');
-          if (inputElement) {
-            inputElement.focus();
-          }
-        }
-      });
+      activateHighlightedItem(event);
       break;
   }
 };
 
-// Initialize open items and set up keyboard handling after mount
+// Initialize open items after mount
 onMounted(() => {
-  openItems.value = computeOpenItems(sidebarItems.value, route.path);
-  // Add global keyboard listener
-  document.addEventListener('keydown', handleKeydown);
+  openItems.value = collectOpenItemKeysForRoute(displayItems.value, route.path);
+  document.addEventListener('keydown', handleSearchShortcut);
 });
 
-// Clean up keyboard listener on unmount
 onUnmounted(() => {
-  document.removeEventListener('keydown', handleKeydown);
+  document.removeEventListener('keydown', handleSearchShortcut);
 });
 
 // Update open items when route changes
 watch(() => route.path, (newPath) => {
-  // Clear search and keyboard focus when navigating to a different page
+  // Clear search and keyboard highlight when navigating to a different page
   inputValue.value = '';
-  focusedIndex.value = -1;
-  openItems.value = computeOpenItems(sidebarItems.value, newPath);
+  highlightIndex.value = -1;
+  openItems.value = collectOpenItemKeysForRoute(displayItems.value, newPath);
 });
 
 // Watch search input to control expansion state
 watch(inputValue, (newValue) => {
   if (newValue && newValue.trim()) {
     // Search is active - expand all parents containing matches
-    openItems.value = computeOpenItemsForSearch(filteredItems.value);
+    openItems.value = collectOpenItemKeys(filteredDisplayItems.value);
   } else {
     // Search cleared - revert to route-based expansion
-    openItems.value = computeOpenItems(sidebarItems.value, route.path);
+    openItems.value = collectOpenItemKeysForRoute(displayItems.value, route.path);
   }
 });
 
-// Reset keyboard focus when filtered results change
-watch(filteredItems, () => {
-  focusedIndex.value = -1;
-});
-
-// Focus and scroll item when keyboard focus changes
-watch(focusedIndex, async (newIndex) => {
-  if (newIndex >= 0 && newIndex < flattenedFilteredItems.value.length) {
-    // Wait for DOM to update
-    await nextTick();
-
-    const targetItem = flattenedFilteredItems.value[newIndex];
-    const button = document.querySelector(`.dialtone-sidebar__list [data-sidebar-link="${targetItem.link}"]`);
-
-    if (button) {
-      button.focus();
-      button.scrollIntoView({
-        behavior: 'smooth',
-        block: 'nearest',
-        inline: 'nearest',
-      });
-    }
-  }
+// Reset keyboard highlight whenever the result set changes — this is the only
+// place that does it, including on every keystroke (filterNavItems returns a new array).
+watch(filteredGroups, () => {
+  highlightIndex.value = -1;
 });
 
 // Handle toggle from child components
-const handleToggle = (itemKey, shouldOpen) => {
+const handleToggle = (itemKey, shouldOpen, peerKeys = []) => {
   const newSet = new Set(openItems.value);
   if (shouldOpen) {
+    peerKeys.forEach(peerKey => newSet.delete(peerKey));
     newSet.add(itemKey);
   } else {
     newSet.delete(itemKey);
@@ -340,6 +217,7 @@ const handleToggle = (itemKey, shouldOpen) => {
 
 <style>
 .dialtone-sidebar__list .dialtone-shell-btn:focus-visible {
-  box-shadow: var(--dt-shadow-focus-inset);
+  box-shadow: none;
+  --button-color-background: var(--dt-shell-action-color-background-secondary-hover);
 }
 </style>

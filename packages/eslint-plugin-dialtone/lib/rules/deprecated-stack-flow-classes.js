@@ -43,7 +43,7 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'Detect deprecated `d-stack*` / `d-flow*` sibling-margin utilities; prefer `<dt-stack>` with the equivalent `gap` prop',
+      description: 'Detects sibling-margin utilities that should use the `DtStack` `gap` prop.',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-stack-flow-classes.md',
     },

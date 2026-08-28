@@ -1,42 +1,48 @@
 <template>
-  <div class="gradient-overlay" style="--overlay-opacity: 0; --text-opacity: .6;">
-    <div class="gradient-overlay__overlay" />
-    <dt-text
-      as="h1"
-      kind="headline"
-      :size="600"
-      strength="medium"
-      class="d-h100p d-w100p d-d-grid d-plc-center d-ta-center d-wmx-1600 d-m-auto d-p-400 home-gradient-hero-title"
+  <halftone-surface
+    class="home-gradient-hero"
+    style="--overlay-opacity: 0; --text-opacity: 1;"
+  >
+    <div class="home-gradient-hero__overlay" />
+    <dt-box
+      block-size="100p"
+      padding-block-end="800"
+      class="d-plc-center home-gradient-hero__content"
     >
-      <div class="home-gradient-hero-title__text">
-        Making every business, a better business through design.
-      </div>
-    </dt-text>
-  </div>
+      <gradient-hero-content />
+    </dt-box>
+  </halftone-surface>
 </template>
 
 <script setup>
-// Component handles gradient overlay hero section with scroll-driven animations
-// Animations are controlled by parent page's scroll handler that updates CSS variables
+import GradientHeroContent from './GradientHeroContent.vue';
+import HalftoneSurface from './HalftoneSurface.vue';
 </script>
 
 <style lang="less">
-/* Styles are inherited from parent page's .gradient-overlay definitions */
-/* Unscoped to allow parent's dynamic CSS variable updates to work */
+/* Unscoped so the homepage's scroll handler can drive the custom properties below. */
 
-.home-gradient-hero-title {
-  font-size: 64px;
-  font-family: var(--dt-font-family-expressive);
-  text-wrap: balance;
-  opacity: var(--text-opacity);
-  transform: translateY(var(--text-translate-y, 0px));
-  transition: none;
+.home-gradient-hero {
+  --overlay-color-surface: var(--halftone-color-background);
+  --overlay-opacity: 0;
 
-  &__text {
-    background: linear-gradient(180deg, var(--dt-color-purple-900), var(--dt-color-purple-1000));
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+  /* The overhang gives the scroll-driven canvas parallax room to travel without
+     uncovering the bottom of the hero. */
+  --halftone-parallax-overflow: 20%;
+
+  block-size: 100vh;
+}
+
+.home-gradient-hero__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-color: var(--overlay-color-surface);
+  opacity: var(--overlay-opacity);
+}
+
+.home-gradient-hero__content {
+  position: relative;
+  z-index: 2;
 }
 </style>

@@ -1,4 +1,37 @@
 <template>
+  <dt-box class="d-d-grid d-g-300 md:d-g-cols3 d-mbe-400">
+    <dt-link
+      v-for="section in sections"
+      :key="section.to"
+      :to="section.to"
+      tone="muted"
+      :underline="false"
+      class="d-d-block d-bar-400"
+    >
+      <dt-stack direction="row" gap="200">
+        <dt-box
+          :padding="viewport.pick({ default: '100', md: '200' })"
+          border-width="100"
+          border-color="subtle"
+          border-radius="400"
+          surface="secondary"
+        >
+          <dt-stack>
+            <dt-icon class="d-fc-tertiary" name="file-text" :size="viewport.pick({ default: '300', md: '500' })" />
+          </dt-stack>
+        </dt-box>
+        <dt-stack>
+          <dt-text as="h3" kind="headline" size="200">
+            {{ section.title }}
+          </dt-text>
+          <dt-text as="p" kind="body" size="200" wrap="pretty">
+            {{ section.blurb }}
+          </dt-text>
+        </dt-stack>
+      </dt-stack>
+    </dt-link>
+  </dt-box>
+
   <div class="dialtone-wall dialtone-wall--ui-kits">
     <template v-for="kit in kits" :key="kit.text">
       <a
@@ -52,15 +85,38 @@
 <script setup>
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
 import { computed } from 'vue';
+import { useViewportBreakpoints } from '../theme/composables/useViewportBreakpoints.js';
 
 const themeData = useThemeLocaleData();
 
+const viewport = useViewportBreakpoints();
+
+// The three UI Kits explainer pages, rendered as identical link cards.
+const sections = [
+  {
+    to: '/ui-kits/what-are-ui-kits/',
+    title: 'What are UI Kits?',
+    blurb: 'Domain-specific components built with Dialtone.',
+  },
+  {
+    to: '/ui-kits/where-to-start/',
+    title: 'Where to Start',
+    blurb: 'Adding a UI Kit component to your project.',
+  },
+  {
+    to: '/ui-kits/how-to-contribute/',
+    title: 'How to Contribute',
+    blurb: 'How to propose, build, and contribute Dialpad UI Kits.',
+  },
+];
+
 const kits = computed(() => {
-  return (
-    themeData.value.sidebar?.topLevelGroups?.['ui-kits']?.sections?.[
-      '/ui-kits/'
-    ]?.[0]?.children || []
-  );
+  // 'UI Kits' (top level) and its 'Meet the Kits' child both link to /ui-kits/;
+  // the kit entries are the children of 'Meet the Kits'.
+  const nav = themeData.value.sidebar?.nav || [];
+  const uiKits = nav.find(item => item.link === '/ui-kits/');
+  const meetTheKits = uiKits?.children?.find(child => child.link === '/ui-kits/');
+  return meetTheKits?.children || [];
 });
 
 const badgeKindClass = (status) => {

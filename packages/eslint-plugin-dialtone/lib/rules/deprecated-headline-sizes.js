@@ -26,7 +26,7 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'Headline sizes xxl/xxxl have been renamed to 2xl/3xl.',
+      description: 'Detects deprecated `xxl` and `xxxl` headline sizes.',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-headline-sizes.md',
     },

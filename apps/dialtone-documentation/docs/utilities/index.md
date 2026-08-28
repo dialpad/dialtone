@@ -3,9 +3,10 @@ title: CSS Utilities
 description: A utility-first CSS framework for building user interfaces.
 keywords: ["utility classes", "helper classes", "css helpers"]
 thumb: true
+next:
+  text: Backgrounds
+  link: /utilities/backgrounds/attachment.html
 ---
-
-## Introduction
 
 Utilities – also known as "trumps," "helper classes," or "alterations" – are high-specificity selectors for making very targeted alterations to existing elements or components.
 

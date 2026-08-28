@@ -1,14 +1,13 @@
 ---
 title: Notice
-description: A notice is an informational and assistive message that appears inline with content.
+description: Inline message for guidance, feedback, or status.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-notice--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=4492-7076
 keywords: ["alert", "message", "notification", "d-notice", "DtNotice", "dt-notice", "callout", "inline alert"]
+combinator: DtNotice
 ---
-
-<component-combinator component-name="DtNotice" />
 
 ## Usage
 
@@ -298,14 +297,6 @@ Truncates the text instead of wrapping it. Useful when the Notice needs to have 
 </dt-notice>
 ```
 
-## Vue API
-
-<component-vue-api component-name="notice" />
-
-## Classes
-
-<component-class-table component-name="notice" />
-
 ## Accessibility
 
 <component-accessible-table component-name="notice" />
@@ -313,3 +304,11 @@ Truncates the text instead of wrapping it. Useful when the Notice needs to have 
 <script setup>
   import ExampleNotice from '@exampleComponents/ExampleNotice.vue';
 </script>
+
+## Vue API
+
+<component-vue-api component-name="notice" />
+
+## Classes
+
+<component-class-table component-name="notice" />

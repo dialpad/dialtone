@@ -1,10 +1,11 @@
 ---
 title: Input Group
-description: Input Groups are convenience components for a grouping of related inputs. While each input within the group could be independent, the v-model on the group provides a convenient interface for determining the current state of the group.
+description: Related inputs grouped with shared state or context.
 status: deprecated
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-input-group--default
 keywords: ["input addon", "input prefix", "input suffix", "d-input-group", "DtInputGroup", "dt-input-group", "compound input", "prepend append"]
+combinator: DtInputGroup
 ---
 
 ```vue demo-only
@@ -17,8 +18,6 @@ keywords: ["input addon", "input prefix", "input suffix", "d-input-group", "DtIn
   <dt-radio value="other"><span>Other</span></dt-radio>
 </dt-input-group>
 ```
-
-<component-combinator component-name="DtInputGroup" />
 
 ## Default
 

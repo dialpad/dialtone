@@ -1,13 +1,14 @@
 ---
 title: What are UI Kits?
 description: An introduction to UI Kits -- domain-specific components built with Dialtone.
+keywords: ["design kits", "product patterns", "composition", "templates", "domain components"]
 prev:
   text: Meet the Kits
   link: /ui-kits/
 ---
 
 > [!INFO]
-> UI Kit component details are currently being developed. For the most up-to-date details and proposals, see the #dialpad-uikits channel.
+> UI Kit component details are currently being developed. For the most up-to-date details and proposals, see the `#dialpad-uikits` channel.
 
 ## Overview
 

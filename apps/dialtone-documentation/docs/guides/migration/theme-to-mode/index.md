@@ -1,6 +1,7 @@
 ---
 title: "Theme: setTheme deprecated, layered API replaces it"
 description: "The legacy setTheme() function and data-dt-theme attribute have been deprecated in favor of the new layered API: initDialtoneTheme, setMode, setBrand, setContrast, and setMaterial."
+keywords: ["dark mode", "light mode", "setTheme", "setMode", "brand", "contrast", "layered API"]
 ---
 
 ## TLDR

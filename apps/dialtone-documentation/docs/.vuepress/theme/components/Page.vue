@@ -1,92 +1,198 @@
 <template>
-  <div
-    class="d-d-grid d-jc-center"
-    :class="gridClass"
-  >
-    <div class="d-p-600">
-      <page-header />
-      <article class="dialtone-content__article">
-        <div
-          v-if="$page.path.startsWith('/components') && !$frontmatter.no_preview"
-          id="preview-header"
-        >
-          <h2 class="d-vi-visible-sr">
-            Preview
-          </h2>
-        </div>
-        <!-- eslint-disable-next-line vue/no-undef-components -->
-        <content class="d-docsite-article" />
-      </article>
-      <dt-stack
-        direction="row"
-        :justify="prev ? 'between' : 'end'"
-        align="center"
-        class="d-pbs-400"
-        as="nav"
-        gap="400"
+  <dt-stack direction="row" align="start" gap="250">
+    <dt-box
+      class="d-fl1 d-mx-auto"
+      min-inline-size="0"
+      max-inline-size="1600"
+    >
+      <dt-box
+        id="page-sticky-header"
+        :padding-block-start="viewport.pick({
+          default: '300',
+          lg: '500',
+        })"
+        surface="primary"
+        :class="viewport.pick({
+          lg: 'd-ps-sticky d-ibs-0 d-zi-navigation-fixed',
+        })"
       >
-        <dt-button
-          v-if="prev"
-          :to="prev.link"
-          class="d-wmn40p"
-          label-class="d-jc-space-between"
-          importance="outlined"
-          kind="muted"
-          :size="400"
+        <dt-box border-width-block-end="100" padding-block-end="200" border-color="subtle">
+          <page-header>
+            <template #content-top>
+              <dt-breadcrumbs v-if="pageBreadcrumbs.length">
+                <dt-breadcrumb-item
+                  v-for="item in pageBreadcrumbs"
+                  :key="item.to"
+                  :label="item.label"
+                  :to="item.to"
+                />
+              </dt-breadcrumbs>
+            </template>
+          </page-header>
+          <dt-dropdown
+            v-if="includeToc && !viewport.pick(rightRailTocViewportValues)"
+            placement="bottom-start"
+            class="d-mis-auto"
+            padding="small"
+            list-class="d-w-300"
+            max-height="52vh"
+          >
+            <template #anchor="{ attrs }">
+              <dt-button
+                v-bind="attrs"
+                importance="outlined"
+                kind="muted"
+                :size="200"
+              >
+                On this page
+                <template #endIcon="{ iconSize }">
+                  <dt-icon name="chevron-down" :size="iconSize" />
+                </template>
+              </dt-button>
+            </template>
+            <template #list="{ close }">
+              <page-toc-dropdown
+                :headers="headers"
+                :active-hash="activeHash"
+                @navigate="(event, item) => handleDropdownNavigate(event, item, close)"
+              />
+            </template>
+          </dt-dropdown>
+          <!--
+          DO NOT REMOVE. Future posibility
+          <dt-tab-group
+            v-if="$frontmatter.status"
+            :size="viewport.pick({
+              default: '200',
+              md: '300',
+            })"
+            selected="panel-1"
+            borderless
+          >
+            <template #tabs>
+              <dt-tab id="tab-1" panel-id="panel-1" selected>
+                <template #startIcon="{ iconSize }">
+                  <dt-icon name="file" :size="iconSize" />
+                </template>
+                Documentation
+              </dt-tab>
+              <dt-tab id="tab-2" panel-id="panel-2">
+                <template #startIcon="{ iconSize }">
+                  <dt-icon name="code" :size="iconSize" />
+                </template>
+                Properties
+              </dt-tab>
+            </template>
+          </dt-tab-group>
+          -->
+        </dt-box>
+      </dt-box>
+      <dt-box
+        v-if="props.componentCombinatorName"
+        id="combinator-inline-target"
+      />
+      <!-- eslint-disable-next-line vue/no-undef-components -->
+      <content
+        class="d-docsite-article"
+        :class="{ 'd-pbs-300': !props.componentCombinatorName }"
+      />
+      <dt-stack gap="300">
+        <dt-stack
+          as="nav"
+          direction="row"
+          :justify="prev ? 'between' : 'end'"
+          align="center"
+          class="d-pbs-400"
+          gap="400"
         >
-          <template #startIcon>
-            <dt-icon name="arrow-left" />
-          </template>
-          <dt-stack as="span" class="d-p-100">
-            <dt-text as="span" kind="body" :size="300" tone="muted">
-              Previous
+          <dt-button
+            v-if="prev"
+            :to="prev.link"
+            class="d-wmn40p"
+            label-class="d-jc-space-between"
+            importance="outlined"
+            kind="muted"
+            :size="400"
+          >
+            <template #startIcon>
+              <dt-icon name="arrow-left" />
+            </template>
+            <dt-stack as="span" class="d-p-100">
+              <dt-text as="span" kind="body" :size="300" tone="muted">
+                Previous
+              </dt-text>
+              <span>{{ prev.text }}</span>
+            </dt-stack>
+          </dt-button>
+          <dt-button
+            v-if="next"
+            :to="next.link"
+            class="d-wmn40p"
+            label-class="d-jc-space-between"
+            importance="outlined"
+            kind="muted"
+            :size="400"
+          >
+            <template #endIcon>
+              <dt-icon name="arrow-right" />
+            </template>
+            <dt-stack as="span" class="d-p-100">
+              <dt-text as="span" kind="body" :size="300" tone="muted">
+                Next
+              </dt-text>
+              <span>{{ next.text }}</span>
+            </dt-stack>
+          </dt-button>
+        </dt-stack>
+        <dt-box>
+          <dt-text as="p" kind="body" :size="300" tone="muted">
+            <dt-text v-if="$frontmatter.title">
+              {{ $frontmatter.title }}
             </dt-text>
-            <span>{{ prev.text }}</span>
-          </dt-stack>
-        </dt-button>
-        <dt-button
-          v-if="next"
-          :to="next.link"
-          class="d-wmn40p"
-          label-class="d-jc-space-between"
-          importance="outlined"
-          kind="muted"
-          :size="400"
-        >
-          <template #endIcon>
-            <dt-icon name="arrow-right" />
-          </template>
-          <dt-stack as="span" class="d-p-100">
-            <dt-text as="span" kind="body" :size="300" tone="muted">
-              Next
-            </dt-text>
-            <span>{{ next.text }}</span>
-          </dt-stack>
-        </dt-button>
-      </dt-stack>
-      <footer class="d-mbs-200 d-mbe-200">
-        <dt-text as="p" kind="body" :size="200" tone="muted">
-          <dt-text v-if="$frontmatter.title">
-            {{ $frontmatter.title }}
+            documentation last updated
+            <dt-text>{{ lastUpdated }}</dt-text>
           </dt-text>
-          documentation last updated
-          <dt-text>{{ lastUpdated }}</dt-text>
-        </dt-text>
-      </footer>
-    </div>
-    <div class="d-ps-relative d-ga-toc">
-      <page-toc v-if="!isMobile && includeToc" :headers="headers" />
-    </div>
-  </div>
+        </dt-box>
+      </dt-stack>
+    </dt-box>
+    <dt-box
+      v-if="includeToc && viewport.pick(rightRailTocViewportValues)"
+      max-inline-size="300"
+      min-inline-size="300"
+      padding-block-start="650"
+      class="d-ps-sticky d-ibs-300"
+    >
+      <dt-text
+        as="h2"
+        kind="headline"
+        :size="100"
+        strength="semibold"
+        tone="secondary"
+        class="d-tt-uppercase d-px-100 d-pbe-50 "
+      >
+        On this page
+      </dt-text>
+      <page-toc
+        :headers="headers"
+        :active-hash="activeHash"
+        @navigate="handleNavigate"
+      />
+    </dt-box>
+  </dt-stack>
 </template>
 
 <script setup>
 import PageHeader from '../components/PageHeader.vue';
 import PageToc from '../components/PageToc.vue';
-import { computed, watch, inject } from 'vue';
+import PageTocDropdown from '../components/PageTocDropdown.vue';
+import { usePageTocScrollSpy } from '../composables/usePageTocScrollSpy.js';
+import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
+import { getNavBreadcrumbs } from '../utils/navBreadcrumbs.js';
+import { getRightRailTocViewportValues } from '../utils/pageToc.js';
+import { computed, inject, watch } from 'vue';
 import { useRoute } from 'vue-router';
-import { usePageData } from 'vuepress/client';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
+import { usePageData } from 'vuepress/client';
 
 const props = defineProps({
   prev: {
@@ -99,9 +205,9 @@ const props = defineProps({
     default: () => {
     },
   },
-  isMobile: {
-    type: Boolean,
-    required: true,
+  componentCombinatorName: {
+    type: String,
+    default: null,
   },
 });
 const pageData = usePageData();
@@ -114,84 +220,42 @@ const lastUpdated = computed(() => {
 
   return new Intl.DateTimeFormat('en-US', { dateStyle: 'full' }).format(date);
 });
-const gridClass = computed(() => {
-  if (props.isMobile || !includeToc.value) return 'd-gl-docsite';
-  return 'd-gl-docsite-toc';
-});
 const { headers } = inject('headers');
-
-const items = useThemeLocaleData().value.sidebar;
+const viewport = useViewportBreakpoints();
+const { activeHash, handleNavigate } = usePageTocScrollSpy(headers);
+const themeData = useThemeLocaleData();
 const route = useRoute();
 
-/**
- * Determine which top-level group the current route belongs to
- * @param {string} path Current route path
- * @returns {string} The top-level group key
- */
-function detectTopLevelGroup(path) {
-  // Map routes to top-level groups
-  const designSystemPaths = ['/components/', '/utilities/', '/tokens/', '/guides/', '/about/', '/functions-and-utilities/'];
+const pageBreadcrumbs = computed(() => {
+  return getNavBreadcrumbs(themeData.value.sidebar?.nav, route.path).map(item => ({
+    label: item.text,
+    to: item.link,
+  }));
+});
 
-  if (designSystemPaths.some(p => path.includes(p))) {
-    return 'dialtone';
-  }
-  if (path.includes('/foundations/')) {
-    return 'foundations';
-  }
-  if (path.includes('/ui-kits/')) {
-    return 'ui-kits';
-  }
-  if (path.includes('/careers/')) {
-    return 'careers';
-  }
-  if (path.includes('/articles/')) {
-    return 'articles';
-  }
-  if (path.includes('/dialtone/')) {
-    return 'dialtone';
-  }
-
-  // Default to dialtone for any unknown paths
-  return 'dialtone';
+async function handleDropdownNavigate (event, item, close) {
+  await handleNavigate(event, item);
+  close();
 }
 
 const includeToc = computed(() => {
-  // Check if using new top-level groups structure
-  if (items.topLevelGroups) {
-    const topLevelGroup = detectTopLevelGroup(route.path);
-    const sections = items.topLevelGroups[topLevelGroup]?.sections || {};
-
-    // For dialtone group, check if any section has content
-    if (topLevelGroup === 'dialtone') {
-      const hasContent = Object.values(sections).some(section => section && section.length > 0);
-      if (!hasContent) return false;
-    } else {
-      // For other groups, check if specific section exists
-      const sectionKey = Object.keys(sections).find(key =>
-        route.path.includes(key.replace(/\/$/, '')),
-      );
-      if (!sections[sectionKey]) return false;
-    }
-  } else {
-    // Fallback to old flat structure (for backwards compatibility)
-    const key = Object.keys(items).filter(item => route.path.includes(item.replace(/\/$/, '')));
-    if (!items[key] || !Array.isArray(items[key])) return false;
-  }
-
   return headers.value && headers.value.length > 0;
+});
+const rightRailTocViewportValues = computed(() => {
+  return getRightRailTocViewportValues(Boolean(props.componentCombinatorName));
 });
 
 // Pages whose headers are populated by their own Vue component via inject('headers')
 // rather than extracted from markdown — skip the default clobber for these routes.
 const selfManagedHeaderPaths = ['/tokens/', '/downloads/'];
 
-watch(route, () => {
+watch(() => route.path, () => {
   if (selfManagedHeaderPaths.some(p => route.path.includes(p))) return;
 
   try {
     headers.value = route.meta._pageChunk.data.headers;
-  } catch( e ) {
-    console.log('Error getting page headers', e)
+  } catch (e) {
+    console.error('Error getting page headers', e);
   }
-}, { flush: 'pre', immediate: true, deep: true })
+}, { flush: 'pre', immediate: true });
 </script>

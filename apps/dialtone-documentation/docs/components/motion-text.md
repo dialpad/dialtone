@@ -1,6 +1,7 @@
 ---
 title: Motion Text
-description: A versatile, accessible text animation component with multiple animation modes, full accessibility support, and comprehensive customization options.
+description: Animated text for reveal, shimmer, and loading moments.
+keywords: ["animated text", "typing", "loading text", "animation", "DtMotionText", "dt-motion-text"]
 status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-motion-text--default
@@ -151,10 +152,6 @@ You can also use the default slot instead of the text prop:
 </dt-motion-text>
 ```
 
-## Vue API
-
-<component-vue-api component-name="motiontext" />
-
 ## Accessibility
 
 The Motion Text component is built with accessibility as a core principle.
@@ -218,3 +215,7 @@ async function playMode (mode) {
   animDemoRef.value.start();
 }
 </script>
+
+## Vue API
+
+<component-vue-api component-name="motiontext" />

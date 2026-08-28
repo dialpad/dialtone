@@ -1,7 +1,7 @@
 ---
 title: Text Align
 description: Utilities for controlling an element's text alignment.
-keywords: ["start", "end", "left", "center", "right", "justify"]
+keywords: ["align start", "align end", "align left", "align center", "align right", "text align start", "text align end", "text align left", "text align center", "text align right", "text justify"]
 ---
 
 > [!WARNING] Use DtText over CSS Utilities

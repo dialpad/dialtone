@@ -1,6 +1,7 @@
 ---
 title: DtModal Native Dialog Migration
 description: DtModal now uses a native <dialog> element. This changes the DOM structure, backdrop behavior, and focus management. Popovers and tooltips inside modals also auto-append to the dialog.
+keywords: ["backdrop", "focus trap", "popover", "tooltip", "native element"]
 ---
 
 ## TLDR

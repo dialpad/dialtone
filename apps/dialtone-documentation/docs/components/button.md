@@ -1,14 +1,13 @@
 ---
 title: Button
-description: A button is an UI element which signals key actions to take an action throughout an app. It is important a button is identifiable, consistent, communicates its actions clearly, and is appropriately sized to its action.
+description: Interactive element for single-step actions.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-button--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=19800-32233
-keywords: ["btn","click","action","cta","d-button","DtButton","dt-button"]
+keywords: ["btn","click","action","cta","d-button","DtButton","dt-button","clear","outline","ghost","muted"]
+combinator: DtButton
 ---
-
-<component-combinator component-name="DtButton" />
 
 ## Usage
 
@@ -213,6 +212,36 @@ This inverts the underline behavior. With `underline="false"`, the link will not
   <dt-button link linkKind="critical" :underline="false">Place Call</dt-button>
 </dt-stack>
 ```
+
+<!--
+<DtLink
+  to="/components/link.md"
+  :underline="false"
+  class="
+    d-d-block
+    d-ba
+    d-bc-subtle
+    d-bar-400
+    d-fc-secondary
+    h:d-td-none
+    h:d-fc-primary
+    d-py-100
+    d-px-200
+    h:d-bgc-secondary-opaque
+    d-wmx-500
+    d-my-100
+  "
+>
+  <DtStack direction="row" gap="150">
+    <dt-icon class="d-fc-muted" name="component" :size="viewport.pick({ default: '300', md: '400' })" />
+    <DtStack class="d-fl1">
+      <dt-text as="h3" kind="headline" size="200">DtLink</dt-text>
+      <dt-text as="p" kind="body" size="200">Related component</dt-text>
+    </DtStack>
+    <dt-icon class="d-fc-muted" name="arrow-right" size="400" />
+  </DtStack>
+</DtLink>
+-->
 
 ### Unstyled
 
@@ -830,10 +859,6 @@ We provide the following branded buttons for log-in and sign-up workflows.
 </dt-stack>
 ```
 
-## Vue API
-
-<component-vue-api component-name="button" />
-
 ## Accessibility
 
 - Choosing between Link and Button elements is paramount for screenreaders to inform the user what will occur. For example: will it go somewhere (Link) or will something happen (Button)?
@@ -847,6 +872,10 @@ We provide the following branded buttons for log-in and sign-up workflows.
   - Pressing the `Shift+Tab` key moves focus to the previous focusable element.
 - When using DtButton with `href` or `to`, the component automatically handles Spacebar activation and disabled state (`aria-disabled`, `tabindex="-1"`). Navigating elements keep their native link role — `role="button"` is not added because the element navigates rather than performing an in-page action.
 
+## Vue API
+
+<component-vue-api component-name="button" />
+
 ## Classes
 
 <component-class-table component-name="button"></component-class-table>
@@ -854,7 +883,9 @@ We provide the following branded buttons for log-in and sign-up workflows.
 <script setup>
 import { ref } from 'vue';
 import ButtonVariantsTable from '@baseComponents/ButtonVariantsTable.vue';
+import { useViewportBreakpoints } from '@composables/useViewportBreakpoints.js';
 
+const viewport = useViewportBreakpoints();
 const isDisabled = ref(true);
 const loading = ref(true);
 const isInverted = ref(true);
