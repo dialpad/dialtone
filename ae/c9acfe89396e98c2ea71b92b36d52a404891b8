@@ -1,0 +1,19 @@
+package.json
+  s_2cb558ee9aae8c::t_3f8d4676aed70f 26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "aec9acfe89396e98c2ea71b92b36d52a404891b8",
+  "prompts": {},
+  "sessions": {
+    "s_2cb558ee9aae8c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ffab39a3-cc8e-4b92-8dac-9fd8634994dd",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

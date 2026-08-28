@@ -1,0 +1,21 @@
+apps/dialtone-documentation/docs/.vuepress/theme/components/SidebarHeader.vue
+  s_183be30c77d6b5::t_c84ab51d2f8f33 7
+pnpm-lock.yaml
+  s_183be30c77d6b5::t_906ae18cb37dc9 293,396-398,1380,1384,1389,1393,1399,2548,2553,2558,2897-2899,14344-14345,15226-15227,17078-17079,18483,25910,25912,25925,25987,26320,30915
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "1c750e0c0620f6f81c919792e14957f4a1435604",
+  "prompts": {},
+  "sessions": {
+    "s_183be30c77d6b5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "89e35caf-c3fd-4daa-9b7f-4c1ed53c3ffc",
+        "model": "claude-opus-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

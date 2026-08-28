@@ -1,0 +1,46 @@
+apps/dialtone-documentation/docs/_data/site-nav.json
+  h_c15b5755534093 1019-1021
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/vue-utilities.svg
+  s_037f149b31cf7b::t_848f0efc6fa070 1,3
+  h_c15b5755534093 2
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/ui-kits.svg
+  s_037f149b31cf7b::t_848f0efc6fa070 1,3
+  h_c15b5755534093 2
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/content-guidelines.svg
+  h_c15b5755534093 2
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/foundations.svg
+  h_c15b5755534093 2
+  s_037f149b31cf7b::t_848f0efc6fa070 1,3
+apps/dialtone-documentation/docs/.vuepress/theme/index.js
+  s_037f149b31cf7b::t_33984358f3c1e1 100
+  s_037f149b31cf7b::t_85d471c3b8f8b6 83
+  s_037f149b31cf7b::t_4d8a06e0ba6a37 71-78,80-81,84,86-88,90-92,96,98-99,101,279
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/content.svg
+  h_c15b5755534093 1-2
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/downloads.svg
+  s_037f149b31cf7b::t_848f0efc6fa070 1,3
+  h_c15b5755534093 2
+apps/dialtone-documentation/docs/downloads/index.md
+  s_037f149b31cf7b::t_bbb825fafb8c2c 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "d387731d2c195b94742d50f2c809e5e64239a636",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_037f149b31cf7b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019eb75a-1703-7701-b0b6-29b6cf4d3b9e",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

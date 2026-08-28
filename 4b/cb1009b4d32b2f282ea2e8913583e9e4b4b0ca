@@ -1,0 +1,45 @@
+packages/combinator/src/variants/variants_badge.js
+  s_9f61fa9161643f::t_93cb5750e913d9 1-2,29,31
+  s_9f61fa9161643f::t_fad19a4bf2eec8 32-40
+  s_9f61fa9161643f::t_2d190046938e48 30
+packages/combinator/src/components/option_bar/option_bar.vue
+  h_c15b5755534093 10-20,90
+  s_9f61fa9161643f::t_926e89c9e6ba7f 109,133
+packages/combinator/src/components/controls/control_boolean.vue
+  h_c15b5755534093 26-27,40
+packages/combinator/src/lib/exclusion_rules.test.js
+  s_9f61fa9161643f::t_83bd39d666865e 95-98,100
+  s_9f61fa9161643f::t_02484de153e9d0 3,90-94,99,101-103
+  s_9f61fa9161643f::t_636cdea6b49f8c 104-123
+packages/combinator/src/components/option_bar/option_bar_member_group.vue
+  s_9f61fa9161643f::t_a23de93a1c3e65 139
+  s_9f61fa9161643f::t_101aac4c89f8a5 29,134-138,140,250,253
+  h_c15b5755534093 59,61,63,66-67
+packages/combinator/src/lib/exclusion_rules.js
+  s_9f61fa9161643f::t_f63fe4dd17fa6a 10-12
+  s_9f61fa9161643f::t_a8f332463eed7a 1-2,4-5,9,13-15,18,34-35,50,53,71-72,85,89
+  s_9f61fa9161643f::t_63f9a005896cc7 25,31,40,47,62,68,77,82
+packages/combinator/src/components/combinator.vue
+  s_9f61fa9161643f::t_ef1f99ac7b6a9a 517,522,529
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.10",
+  "base_commit_sha": "4bcb1009b4d32b2f282ea2e8913583e9e4b4b0ca",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_9f61fa9161643f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ef122-867f-71f2-bacd-0ea0fd649d67",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
