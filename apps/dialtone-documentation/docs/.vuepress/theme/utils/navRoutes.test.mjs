@@ -1,6 +1,22 @@
 import assert from 'node:assert/strict';
 import { describe, it } from 'node:test';
-import { findNavCollectionForRoute, isDescendantOfNavCollection } from './navRoutes.js';
+import {
+  dedupeNavItemsByLink,
+  findNavCollectionForRoute,
+  isDescendantOfNavCollection,
+} from './navRoutes.js';
+
+describe('dedupeNavItemsByLink', () => {
+  it('keeps the child page when a grouping parent shares its link', () => {
+    const items = [
+      { text: 'Tooling', link: '/guides/mcp-server/' },
+      { text: 'Dialtone CLI', link: '/guides/cli/' },
+      { text: 'Dialtone MCP Server', link: '/guides/mcp-server/' },
+    ];
+
+    assert.deepEqual(dedupeNavItemsByLink(items), [items[1], items[2]]);
+  });
+});
 
 describe('isDescendantOfNavCollection', () => {
   it('matches a page the collection owns', () => {

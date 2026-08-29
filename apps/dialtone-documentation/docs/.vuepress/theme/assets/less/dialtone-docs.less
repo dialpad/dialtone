@@ -574,8 +574,8 @@ code {
       }
     }
 
-    // Override default 3-column at 768px, keep at 2 columns
-    @media screen and (min-width: 768px) {
+    // Override the default 3-column switch, keep at 2 columns
+    @media screen and (min-width: 640px) {
       grid-template-columns: [full-start] repeat(
           2,
           [col-start] var(--col-width, minmax(0, 1fr)) [col-end]

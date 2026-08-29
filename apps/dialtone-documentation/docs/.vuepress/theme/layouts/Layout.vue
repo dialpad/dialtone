@@ -86,7 +86,7 @@ import Sidebar from '../components/Sidebar.vue';
 import MigrationBanner from '../../baseComponents/MigrationBanner.vue';
 import { getComponentCombinatorName } from '../utils/componentCombinator.js';
 import { isExternalUrl } from '../utils/isExternalUrl';
-import { findNavCollectionForRoute } from '../utils/navRoutes.js';
+import { dedupeNavItemsByLink, findNavCollectionForRoute } from '../utils/navRoutes.js';
 import { computed, nextTick, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
@@ -161,7 +161,7 @@ function extractLeafNodes(items) {
     }
 
     if (group.length > 0) {
-      groups.push(group);
+      groups.push(dedupeNavItemsByLink(group));
     }
   });
 

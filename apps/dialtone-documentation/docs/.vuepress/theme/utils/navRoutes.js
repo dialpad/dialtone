@@ -19,6 +19,20 @@ const NAV_COLLECTIONS = new Map([
 ]);
 
 /**
+ * Remove repeated page links while keeping the deepest nav item as the page label.
+ * Grouping parents appear before their children, so the final occurrence is the
+ * actual linked page.
+ *
+ * @param {Array<{ link: string }>} items
+ * @returns {Array<{ link: string }>}
+ */
+export const dedupeNavItemsByLink = (items) => {
+  const lastIndexByLink = new Map(items.map((item, index) => [item.link, index]));
+
+  return items.filter((item, index) => lastIndexByLink.get(item.link) === index);
+};
+
+/**
  * Whether `routePath` is a page owned by the collection at `link`.
  *
  * @param {string | undefined} link - a nav item's own link
