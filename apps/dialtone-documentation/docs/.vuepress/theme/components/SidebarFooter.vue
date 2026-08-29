@@ -34,7 +34,7 @@
             <dt-button
               v-dt-tooltip="`Make a request`"
               class="d-w100p"
-              href="https://github.com/dialpad/dialtone/issues/new"
+              href="https://dialpad.atlassian.net/servicedesk/customer/portal/123/create/465"
               target="_blank"
               rel="noreferrer noopener"
               aria-label="Make a request"
@@ -49,7 +49,7 @@
             <dt-button
               v-dt-tooltip="`Report a bug`"
               class="d-w100p"
-              href="https://github.com/dialpad/dialtone/issues/new"
+              href="https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=1&pid=12508"
               target="_blank"
               rel="noreferrer noopener"
               aria-label="Report a bug"
