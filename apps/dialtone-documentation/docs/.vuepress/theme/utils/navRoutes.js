@@ -18,6 +18,11 @@ const NAV_COLLECTIONS = new Map([
   }],
 ]);
 
+const containsRoute = (items, routePath) => Boolean(routePath && items?.some(item => (
+  item.link === routePath ||
+  containsRoute(item.children, routePath)
+)));
+
 /**
  * The route opened alongside a marked collapsible in the persistent sidebar.
  *
@@ -25,11 +30,14 @@ const NAV_COLLECTIONS = new Map([
  *   children?: Array<{ link?: string }>,
  *   navigateToFirstChildWhenPersistent?: boolean,
  * }} item
- * @param {{ persistent: boolean, open: boolean }} options
+ * @param {{ persistent: boolean, open: boolean, routePath?: string }} options
  * @returns {string | null}
  */
-export const getCollapsibleNavigationTarget = (item, { persistent, open }) => (
-  persistent && !open && item.navigateToFirstChildWhenPersistent
+export const getCollapsibleNavigationTarget = (item, { persistent, open, routePath }) => (
+  persistent &&
+  !open &&
+  item.navigateToFirstChildWhenPersistent &&
+  !containsRoute(item.children, routePath)
     ? item.children?.[0]?.link ?? null
     : null
 );

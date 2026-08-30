@@ -150,6 +150,7 @@ function handleClick (event) {
   const navigationTarget = getCollapsibleNavigationTarget(props.item, {
     persistent: props.persistent,
     open: isOpen.value,
+    routePath: route.path,
   });
 
   emit('toggle', itemKey.value, !isOpen.value, props.peerKeys);

@@ -17,6 +17,7 @@ describe('getCollapsibleNavigationTarget', () => {
     assert.equal(getCollapsibleNavigationTarget(item, {
       persistent: true,
       open: false,
+      routePath: '/components/',
     }), '/foundations/');
     assert.equal(getCollapsibleNavigationTarget(item, {
       persistent: false,
@@ -32,6 +33,30 @@ describe('getCollapsibleNavigationTarget', () => {
       persistent: true,
       open: false,
     }), null);
+  });
+
+  it('only reopens a marked group when the current route is one of its descendants', () => {
+    const item = {
+      navigateToFirstChildWhenPersistent: true,
+      children: [
+        { link: '/guides/content/' },
+        { link: '/guides/content/forms-and-validation/' },
+        {
+          children: [{ link: '/guides/content/nested/page.html' }],
+        },
+      ],
+    };
+
+    for (const routePath of [
+      '/guides/content/forms-and-validation/',
+      '/guides/content/nested/page.html',
+    ]) {
+      assert.equal(getCollapsibleNavigationTarget(item, {
+        persistent: true,
+        open: false,
+        routePath,
+      }), null);
+    }
   });
 });
 
