@@ -4,9 +4,9 @@ description: Understanding and working with Dialtone's CSS cascade layer archite
 keywords: ["css layers", "cascade layers", "@layer", "imports", "specificity", "overrides"]
 ---
 
-Dialtone uses CSS Cascade Layers (`@layer`) to organize all styles into a predictable hierarchy. This ensures utilities always override components, eliminates specificity wars, and makes it easy to integrate custom styles.
-
 ## Understanding Dialtone's Layers
+
+Dialtone uses CSS Cascade Layers (`@layer`) to organize all styles into a predictable hierarchy. This ensures utilities always override components, eliminates specificity wars, and makes it easy to integrate custom styles.
 
 Dialtone defines four cascade layers in priority order:
 

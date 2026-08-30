@@ -31,8 +31,6 @@ The hovercard will appear upon the mouse entering the anchor, with a delay of 30
 </dt-hovercard>
 ```
 
-<!-- <component-combinator component-name="DtHovercard" /> -->
-
 ## Usage
 
 - Hovercard is a **progressive enhancement**. It surfaces supplementary information about an entity or provides convenience shortcuts on hover, without navigating away from the current view. Its content or functionality **must also be reachable by another route** (a dedicated page, a menu, or an inline button).

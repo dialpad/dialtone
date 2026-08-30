@@ -12,6 +12,7 @@
           lg: '500',
         })"
         surface="primary"
+        class="d-mbe-400"
         :class="viewport.pick({
           lg: 'd-ps-sticky d-ibs-0 d-zi-navigation-fixed',
         })"
@@ -94,7 +95,6 @@
       <!-- eslint-disable-next-line vue/no-undef-components -->
       <content
         class="d-docsite-article"
-        :class="{ 'd-pbs-300': !props.componentCombinatorName }"
       />
       <dt-stack gap="300">
         <dt-stack

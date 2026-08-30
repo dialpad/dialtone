@@ -20,9 +20,8 @@ keywords:
     "ol",
     "li",
   ]
+combinator: DtTextList
 ---
-
-<component-combinator component-name="DtTextList" />
 
 ## Usage
 
