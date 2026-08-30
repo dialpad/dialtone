@@ -15,7 +15,7 @@ next:
     to="/ui-kits/what-are-ui-kits/"
     tone="muted"
     :underline="false"
-    class="d-d-block d-bar-400"
+    class="d-d-block d-bar-400 h:d-td-none"
   >
     <DtStack direction="row" gap="200">
       <DtBox
@@ -40,7 +40,7 @@ next:
     to="/ui-kits/where-to-start/"
     tone="muted"
     :underline="false"
-    class="d-d-block d-bar-400"
+    class="d-d-block d-bar-400 h:d-td-none"
   >
     <DtStack direction="row" gap="200">
       <DtBox
@@ -65,7 +65,7 @@ next:
     to="/ui-kits/how-to-contribute/"
     tone="muted"
     :underline="false"
-    class="d-d-block d-bar-400"
+    class="d-d-block d-bar-400 h:d-td-none"
   >
     <DtStack direction="row" gap="200">
       <DtBox
