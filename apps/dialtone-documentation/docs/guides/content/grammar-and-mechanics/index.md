@@ -441,47 +441,14 @@ Relative timestamps are best used in situations where specific timestamps would 
 
 When using relative timestamps, use these formats:
 
-<table class="d-table">
-  <thead>
-    <tr>
-      <th scope="col">Duration</th>
-      <th scope="col" style="width: calc(100% / 3);">Format</th>
-      <th scope="col" style="width: calc(100% / 3);">Example</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Less than 60 seconds</td>
-      <td></td>
-      <td>Just now</td>
-    </tr>
-    <tr>
-      <td>Less than 60 minutes</td>
-      <td>[ N ] minutes ago</td>
-      <td>5 minutes ago</td>
-    </tr>
-    <tr>
-      <td>Less than 24 hours</td>
-      <td>[ N ] hours ago</td>
-      <td>5 hours ago</td>
-    </tr>
-    <tr>
-      <td>Less than 24 hours</td>
-      <td>[ N ] hours ago</td>
-      <td>5 hours ago</td>
-    </tr>
-    <tr>
-      <td>Less than 48 hours</td>
-      <td></td>
-      <td>Yesterday</td>
-    </tr>
-    <tr>
-      <td>Less than 1 week</td>
-      <td>[ Weekday ]</td>
-      <td>Thursday</td>
-    </tr>
-  </tbody>
-</table>
+| Duration | Format | Example |
+| --- | --- | --- |
+| Less than 60 seconds | - | Just now |
+| Less than 60 minutes | [ N ] minutes ago | 5 minutes ago |
+| Less than 24 hours | [ N ] hours ago | 5 hours ago |
+| Less than 24 hours | [ N ] hours ago | 5 hours ago |
+| Less than 48 hours | - | Yesterday |
+| Less than 1 week | [ Weekday ] | Thursday |
 
 #### Absolute Timestamps
 
@@ -495,72 +462,21 @@ Absolute timestamps are used in situations where specific timestamps are importa
 
 When using absolute timestamps, use these formats:
 
-<table class="d-table">
-  <thead>
-    <tr>
-      <th scope="col">Duration</th>
-      <th scope="col" style="width: calc(100% / 3);">Format</th>
-      <th scope="col" style="width: calc(100% / 3);">Example</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Less than 1 week</td>
-      <td>[ Weekday ]</td>
-      <td>Thursday</td>
-    </tr>
-    <tr>
-      <td>Less than 1 year</td>
-      <td>[ Weekday ], [ Mon (abbrev if necessary) ] [ Day ]</td>
-      <td>Thursday, October 12</td>
-    </tr>
-    <tr>
-      <td>Equal to or greater than 1 year</td>
-      <td>[ Mon (abbrev if necessary) ] [ Day ], [ Year ]</td>
-      <td>May 16, 2023</td>
-    </tr>
-  </tbody>
-</table>
+| Duration | Format | Example |
+| --- | --- | --- |
+| Less than 1 week | [ Weekday ] | Thursday |
+| Less than 1 year | [ Weekday ], [ Mon (abbrev if necessary) ] [ Day ] | Thursday, October 12 |
+| Equal to or greater than 1 year | [ Mon (abbrev if necessary) ] [ Day ], [ Year ] | May 16, 2023 |
 
 #### Durations
 
 For calls, meetings, or any other session-based interaction, we show the duration amount. Both duration groupings (“hours”, “minutes”, “seconds”) and specific duration values should be separated by [non-breaking spaces](https://practicaltypography.com/nonbreaking-spaces.html).
 
-<table class="d-table">
-  <thead>
-    <tr>
-      <th scope="col">Available Space</th>
-      <th scope="col" style="width: calc(100% / 3);">Format</th>
-      <th scope="col" style="width: calc(100% / 3);">Example</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>
-        <p class="d-mbe-25"><b>Maximum space</b></p>
-        <p>Write out the time identifiers fully when space allows.</p>
-      </td>
-      <td>[ NN hour(s) NN minutes ]</td>
-      <td>1 hour 34 minutes</td>
-    </tr>
-    <tr>
-      <td>
-        <p class="d-mbe-25"><b>Limited space</b></p>
-        <p>When space is somewhat limited, abbreviate the time identifiers.</p>
-      </td>
-      <td>[ NN hr NN min ]</td>
-      <td>1 hr 34 min</td>
-    </tr>
-    <tr>
-      <td>
-        <p class="d-mbe-25"><b>Minimal space</b></p>
-        <p>For tabular data instances, durations can be represented in absolute numerical values. Leading zeros must be present.</p>
-      </td>
-      <td>[ DD : HH : MM : SS ]</td>
-      <td>01:04:05:30</td>
-    </tr>
-  </tbody>
-</table>
+| Available Space | Format | Example |
+| --- | --- | --- |
+| **Maximum space**<br>Write out the time identifiers fully when space allows. | [ NN hour(s) NN minutes ] | 1 hour 34 minutes |
+| **Limited space**<br>When space is somewhat limited, abbreviate the time identifiers. | [ NN hr NN min ] | 1 hr 34 min |
+| **Minimal space**<br>For tabular data instances, durations can be represented in absolute numerical values. Leading zeros must be present. | [ DD : HH : MM : SS ] | 01:04:05:30 |
 
 Use common day, hour, minute, and second amounts when rendering durations (i.e., “1 hr 2 min” versus “62 min”).
 
