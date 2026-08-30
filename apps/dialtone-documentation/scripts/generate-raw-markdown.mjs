@@ -17,7 +17,7 @@ import { fileURLToPath } from 'node:url';
 
 import { parseSourceMarkdown } from './lib/parse-source-markdown.mjs';
 import { parseMarkdownFrontmatter } from './lib/frontmatter.mjs';
-import { codeCell, escapeTableCell, rewriteAbsoluteLinks, resolveRawLink } from './lib/utils.mjs';
+import { rewriteAbsoluteLinks, resolveRawLink } from './lib/utils.mjs';
 import { setComponentDocs } from './lib/transform-vue-api.mjs';
 import { setUtilityClassDocs } from './lib/transform-utility-class-table.mjs';
 import { setTokenDocs } from './lib/transform-tokens.mjs';
@@ -41,7 +41,6 @@ const ILLUSTRATION_JSON = resolve(ROOT, 'docs/_data/svg-spot.json');
 const TOKENS_DOCS_JSON = resolve(ROOT, '../../packages/dialtone-css/lib/dist/tokens-docs.json');
 const TYPE_JSON = resolve(DATA_DIR, 'type.json');
 const DOWNLOADS_JSON = resolve(DATA_DIR, 'downloads.json');
-const VUE_UTILITIES_JSON = resolve(DATA_DIR, 'vue-utilities.json');
 
 /** Cached site-nav.json data — loaded once in loadAllDataSources(). */
 let _navData = null;
@@ -510,44 +509,6 @@ function postProcessDownloads (sourcePath, outputPath, data) {
 }
 
 /**
- * Build markdown rows for one vue-utilities table.
- */
-function buildVueUtilitiesRows (items, codeNames) {
-  return (items || []).map((item) => {
-    const name = codeNames ? `\`${codeCell(item.name)}\`` : escapeTableCell(item.name);
-    const storybook = item.storybook ? `[Storybook](${item.storybook})` : '';
-    return `| ${name} | ${escapeTableCell(item.description)} | ${storybook} |`;
-  }).join('\n');
-}
-
-/**
- * Post-process the generated functions-and-utilities/index.md: the standard
- * pipeline renders each v-for table as a single placeholder row, so replace
- * that row with real rows from vue-utilities.json. Patching the generated
- * file (rather than rebuilding from the source page) keeps the pipeline's
- * frontmatter, section prose, and appended links intact.
- */
-function postProcessVueUtilities (filePath, data) {
-  let content = readFileSync(filePath, 'utf-8');
-
-  const tables = [
-    { column: 'Directive', items: data.directives, codeNames: true },
-    { column: 'Function', items: data.functions, codeNames: false },
-    { column: 'Utility', items: data.utilities, codeNames: false },
-  ];
-  for (const { column, items, codeNames } of tables) {
-    const header = `| ${column} | Description | Docs |\n| --- | --- | --- |`;
-    const placeholder = `${header}\n| {{ item.name }} | {{ item.description }} | Storybook |`;
-    if (!content.includes(placeholder)) {
-      throw new Error(`placeholder table for "${column}" not found`);
-    }
-    content = content.replace(placeholder, () => `${header}\n${buildVueUtilitiesRows(items, codeNames)}`);
-  }
-
-  writeFileSync(filePath, content, 'utf-8');
-}
-
-/**
  * Normalize a nav link to the corresponding raw .md path stem.
  * Strips leading/trailing slashes and .html extension.
  * e.g. "/utilities/backgrounds/attachment.html" → "utilities/backgrounds/attachment"
@@ -697,16 +658,6 @@ function main () {
         );
       } catch (err) {
         console.error(`[generate-raw-markdown] downloads post-process: ${err.message}`);
-        errorCount++;
-      }
-    }
-
-    if (section.name === 'functions-and-utilities') {
-      try {
-        const vueUtilitiesData = JSON.parse(readFileSync(VUE_UTILITIES_JSON, 'utf-8'));
-        postProcessVueUtilities(resolve(outputBase, 'index.md'), vueUtilitiesData);
-      } catch (err) {
-        console.error(`[generate-raw-markdown] functions-and-utilities post-process: ${err.message}`);
         errorCount++;
       }
     }

@@ -10,65 +10,27 @@ keywords: ["directive", "function", "utility", "utilities", "plugin", "v-dt-focu
 
 Behavioral plugins that attach to any element — add keyboard navigation, color modes, tooltips, and more.
 
-<table class="d-table dialtone-doc-table">
-  <thead>
-    <tr>
-      <th>Directive</th>
-      <th>Description</th>
-      <th class="d-ta-right">Docs</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="item in directives" :key="item.name" valign="baseline">
-      <th scope="row"><dt-text as="code" kind="code" size="100" class="d-docsite-code">{{ item.name }}</dt-text></th>
-      <td>{{ item.description }}</td>
-      <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="sm" target="_blank" :href="item.storybook"><template #startIcon="{ iconSize }"><dt-icon name="storybook-color" :size="iconSize" /></template>Storybook</dt-button></td>
-    </tr>
-  </tbody>
-</table>
+| Directive | Description |
+| --- | --- |
+| [`v-dt-focusgroup`](https://dialtone.dialpad.com/vue/?path=/docs/directives-focusgroup--docs) | Roving tabindex for composite widgets — arrow-key cycling, looping, memory, and disabled-item handling |
+| [`v-dt-focustrap`](https://dialtone.dialpad.com/vue/?path=/docs/directives-focustrap--docs) | Trap Tab/Shift+Tab within a container — initial focus, boundary wrapping, and focus restoration for dialogs and overlays |
+| [`v-dt-mode`](https://dialtone.dialpad.com/vue/?path=/docs/directives-mode--docs) | Scope descendant design tokens to a light, dark, or inverted color palette |
+| [`v-dt-tooltip`](https://dialtone.dialpad.com/vue/?path=/docs/directives-tooltip--docs) | Attach a tooltip to any element without a wrapper component |
+| [`v-dt-scrollbar`](https://dialtone.dialpad.com/vue/?path=/docs/directives-scrollbar--docs) | Replace native scrollbars with a styled overlay that auto-hides |
 
 ## Functions
 
 Stateless helpers for formatting and transforming data.
 
-<table class="d-table dialtone-doc-table">
-  <thead>
-    <tr>
-      <th>Function</th>
-      <th>Description</th>
-      <th class="d-ta-right">Docs</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="item in functions" :key="item.name" valign="baseline">
-      <th scope="row">{{ item.name }}</th>
-      <td>{{ item.description }}</td>
-      <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="sm" target="_blank" :href="item.storybook"><template #startIcon="{ iconSize }"><dt-icon name="storybook-color" :size="iconSize" /></template>Storybook</dt-button></td>
-    </tr>
-  </tbody>
-</table>
+| Function | Description |
+| --- | --- |
+| [Date and Time](https://dialtone.dialpad.com/vue/?path=/docs/functions-date-and-time--docs) | Format dates, relative timestamps, and durations with i18n locale support |
 
 ## Utilities
 
 Foundational modules for rendering optimization and internationalization.
 
-<table class="d-table dialtone-doc-table">
-  <thead>
-    <tr>
-      <th>Utility</th>
-      <th>Description</th>
-      <th class="d-ta-right">Docs</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="item in utilities" :key="item.name" valign="baseline">
-      <th scope="row">{{ item.name }}</th>
-      <td>{{ item.description }}</td>
-      <td class="d-ta-right"><dt-button kind="muted" importance="outlined" size="sm" target="_blank" :href="item.storybook"><template #startIcon="{ iconSize }"><dt-icon name="storybook-color" :size="iconSize" /></template>Storybook</dt-button></td>
-    </tr>
-  </tbody>
-</table>
-
-<script setup>
-import { directives, functions, utilities } from '@data/vue-utilities.json';
-</script>
+| Utility | Description |
+| --- | --- |
+| [DtLazyShow](https://dialtone.dialpad.com/vue/?path=/docs/utilities-lazy-show--docs) | Defer child rendering until first shown — reduces initial mount cost for popovers and modals |
+| [Localization](https://dialtone.dialpad.com/vue/?path=/docs/utilities-localization--docs) | Singleton i18n manager that localizes strings across all Dialtone components |
