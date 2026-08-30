@@ -4,7 +4,6 @@ import { provide, shallowRef } from 'vue';
 // Common views
 import Icons from './views/Icons.vue';
 import Overview from './views/Overview.vue';
-import UiKitsOverview from './views/UiKitsOverview.vue';
 import DownloadsCatalog from './views/DownloadsCatalog.vue';
 
 // Base components
@@ -21,7 +20,6 @@ import CodeExample from './baseComponents/CodeExample.vue';
 import SvgLoader from './baseComponents/SvgLoader.vue';
 import DialtoneUsage from './baseComponents/DialtoneUsage.vue';
 import BeforeAfter from './baseComponents/BeforeAfter.vue';
-import UiKitsComparisonTable from './baseComponents/UiKitsComparisonTable.vue';
 import MigrationBanner from './baseComponents/MigrationBanner.vue';
 
 export default defineClientConfig({
@@ -29,7 +27,6 @@ export default defineClientConfig({
     // Common views
     app.component('Icons', Icons);
     app.component('Overview', Overview);
-    app.component('UiKitsOverview', UiKitsOverview);
     app.component('DownloadsCatalog', DownloadsCatalog);
 
     // Base components
@@ -46,7 +43,6 @@ export default defineClientConfig({
     app.component('SvgLoader', SvgLoader);
     app.component('DialtoneUsage', DialtoneUsage);
     app.component('BeforeAfter', BeforeAfter);
-    app.component('UiKitsComparisonTable', UiKitsComparisonTable);
     app.component('MigrationBanner', MigrationBanner);
   },
   setup () {

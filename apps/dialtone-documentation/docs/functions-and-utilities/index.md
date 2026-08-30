@@ -8,15 +8,15 @@ keywords: ["directive", "function", "utility", "utilities", "plugin", "v-dt-focu
 
 ## Directives
 
-Behavioral plugins that attach to any element — add keyboard navigation, color modes, tooltips, and more.
+Behavioral plugins that attach to any element. Add keyboard navigation, color modes, tooltips, and more.
 
 | Directive | Description |
 | --- | --- |
-| [`v-dt-focusgroup`](https://dialtone.dialpad.com/vue/?path=/docs/directives-focusgroup--docs) | Roving tabindex for composite widgets — arrow-key cycling, looping, memory, and disabled-item handling |
-| [`v-dt-focustrap`](https://dialtone.dialpad.com/vue/?path=/docs/directives-focustrap--docs) | Trap Tab/Shift+Tab within a container — initial focus, boundary wrapping, and focus restoration for dialogs and overlays |
-| [`v-dt-mode`](https://dialtone.dialpad.com/vue/?path=/docs/directives-mode--docs) | Scope descendant design tokens to a light, dark, or inverted color palette |
-| [`v-dt-tooltip`](https://dialtone.dialpad.com/vue/?path=/docs/directives-tooltip--docs) | Attach a tooltip to any element without a wrapper component |
-| [`v-dt-scrollbar`](https://dialtone.dialpad.com/vue/?path=/docs/directives-scrollbar--docs) | Replace native scrollbars with a styled overlay that auto-hides |
+| [v-dt-focusgroup](https://dialtone.dialpad.com/vue/?path=/docs/directives-focusgroup--docs) | Roving tabindex for composite widgets — arrow-key cycling, looping, memory, and disabled-item handling |
+| [v-dt-focustrap](https://dialtone.dialpad.com/vue/?path=/docs/directives-focustrap--docs) | Trap Tab/Shift+Tab within a container — initial focus, boundary wrapping, and focus restoration for dialogs and overlays |
+| [v-dt-mode](https://dialtone.dialpad.com/vue/?path=/docs/directives-mode--docs) | Scope descendant design tokens to a light, dark, or inverted color palette |
+| [v-dt-tooltip](https://dialtone.dialpad.com/vue/?path=/docs/directives-tooltip--docs) | Attach a tooltip to any element without a wrapper component |
+| [v-dt-scrollbar](https://dialtone.dialpad.com/vue/?path=/docs/directives-scrollbar--docs) | Replace native scrollbars with a styled overlay that auto-hides |
 
 ## Functions
 
