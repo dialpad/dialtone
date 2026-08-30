@@ -275,7 +275,7 @@ One more pattern: **half-expected, half-bug**. An intentional color shift can co
 
 ## How to review and file
 
-**Source of truth**: this guide + the running Next build. Not the Figma library (pre-Next), not screenshots from before June 2026. The [Next docsite](https://dialtone.dialpad.com/next/) shows every component's intended rendering. To see a specific delta live, open a component's page there next to its [current-Dialtone page](https://dialtone.dialpad.com/components/): the same examples render on both.
+**Source of truth**: this guide + the running Next build. Not the Figma library (pre-Next), not screenshots from before June 2026. The Dialtone doc site shows every component's intended rendering.
 
 **Priorities** while migration QA is running: critical visual breakage first (unstyled, invisible, unusable), behavior-affecting changes second, pixel nits last. Small spacing/wrapping differences are mostly the type-scale change doing its job.
 

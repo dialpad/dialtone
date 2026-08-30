@@ -7,7 +7,7 @@
       <p>
         <!-- eslint-disable max-len -->
         <dt-link
-          href="https://github.com/dialpad/dialtone/blob/next/packages/dialtone-vue/directives/focusgroup_directive/focusgroup_directive_events.story.vue"
+          href="https://github.com/dialpad/dialtone/blob/packages/dialtone-vue/directives/focusgroup_directive/focusgroup_directive_events.story.vue"
           target="_blank"
           rel="noopener noreferrer"
         >
