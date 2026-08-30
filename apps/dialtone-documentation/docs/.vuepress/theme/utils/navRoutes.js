@@ -19,6 +19,22 @@ const NAV_COLLECTIONS = new Map([
 ]);
 
 /**
+ * The route opened alongside a marked collapsible in the persistent sidebar.
+ *
+ * @param {{
+ *   children?: Array<{ link?: string }>,
+ *   navigateToFirstChildWhenPersistent?: boolean,
+ * }} item
+ * @param {{ persistent: boolean, open: boolean }} options
+ * @returns {string | null}
+ */
+export const getCollapsibleNavigationTarget = (item, { persistent, open }) => (
+  persistent && !open && item.navigateToFirstChildWhenPersistent
+    ? item.children?.[0]?.link ?? null
+    : null
+);
+
+/**
  * Remove repeated page links while keeping the deepest nav item as the page label.
  * Grouping parents appear before their children, so the final occurrence is the
  * actual linked page.

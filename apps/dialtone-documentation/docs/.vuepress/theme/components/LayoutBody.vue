@@ -17,7 +17,7 @@
       border-color="subtle"
       class="dialtone-shell-sidebar"
     >
-      <sidebar />
+      <sidebar persistent />
     </dt-box>
     <dt-box
       min-inline-size="0"

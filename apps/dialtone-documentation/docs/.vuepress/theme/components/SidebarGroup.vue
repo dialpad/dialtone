@@ -15,6 +15,7 @@
       :active-item-path="activeItemPath"
       :search-active="searchActive"
       :presentation="presentation"
+      :persistent="persistent"
       @toggle="forwardToggle"
     />
   </dt-stack>
@@ -47,6 +48,10 @@ const props = defineProps({
     default: null,
   },
   searchActive: {
+    type: Boolean,
+    default: false,
+  },
+  persistent: {
     type: Boolean,
     default: false,
   },

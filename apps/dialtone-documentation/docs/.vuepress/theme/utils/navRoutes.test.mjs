@@ -3,8 +3,37 @@ import { describe, it } from 'node:test';
 import {
   dedupeNavItemsByLink,
   findNavCollectionForRoute,
+  getCollapsibleNavigationTarget,
   isDescendantOfNavCollection,
 } from './navRoutes.js';
+
+describe('getCollapsibleNavigationTarget', () => {
+  it('navigates only from marked, closed items in the persistent sidebar', () => {
+    const item = {
+      navigateToFirstChildWhenPersistent: true,
+      children: [{ link: '/foundations/' }],
+    };
+
+    assert.equal(getCollapsibleNavigationTarget(item, {
+      persistent: true,
+      open: false,
+    }), '/foundations/');
+    assert.equal(getCollapsibleNavigationTarget(item, {
+      persistent: false,
+      open: false,
+    }), null);
+    assert.equal(getCollapsibleNavigationTarget(item, {
+      persistent: true,
+      open: true,
+    }), null);
+    assert.equal(getCollapsibleNavigationTarget({
+      children: [{ link: '/utilities/backgrounds/attachment.html' }],
+    }, {
+      persistent: true,
+      open: false,
+    }), null);
+  });
+});
 
 describe('dedupeNavItemsByLink', () => {
   it('keeps the child page when a grouping parent shares its link', () => {

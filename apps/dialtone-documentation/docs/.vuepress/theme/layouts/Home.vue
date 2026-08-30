@@ -22,7 +22,7 @@
       border-color="subtle"
       class="dialtone-shell-sidebar d-ps-sticky d-ibs-0 d-h100vh"
     >
-      <sidebar />
+      <sidebar persistent />
     </dt-box>
     <doc-header
       v-else

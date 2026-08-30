@@ -23,6 +23,7 @@
           :open-items="openItems"
           :active-item-path="activeItemPath"
           :search-active="isSearchActive"
+          :persistent="props.persistent"
           @toggle="handleToggle"
         />
         <dt-empty-state
@@ -62,6 +63,13 @@ import {
   wrapHighlightIndex,
 } from '../utils/sidebarSearch.js';
 import { isExternalUrl } from '../utils/isExternalUrl';
+
+const props = defineProps({
+  persistent: {
+    type: Boolean,
+    default: false,
+  },
+});
 
 const route = useRoute();
 const router = useRouter();

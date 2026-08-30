@@ -18,6 +18,7 @@
         {
           "text": "Getting Started",
           "link": "/guides/getting-started/",
+          "navigateToFirstChildWhenPersistent": true,
           "children": [
             {
               "text": "Overview",
@@ -67,6 +68,7 @@
         {
           "text": "Migration Guide",
           "link": "/guides/migration/",
+          "navigateToFirstChildWhenPersistent": true,
           "children": [
             {
               "text": "Overview",
@@ -167,6 +169,7 @@
     {
       "text": "Foundations",
       "link": "/foundations/",
+      "navigateToFirstChildWhenPersistent": true,
       "icon": "book-open",
       "children": [
         {
@@ -176,6 +179,7 @@
         {
           "text": "Logo",
           "link": "/foundations/brand/",
+          "navigateToFirstChildWhenPersistent": true,
           "children": [
             {
               "text": "Overview",
@@ -198,6 +202,7 @@
         {
           "text": "Color",
           "link": "/foundations/colors/",
+          "navigateToFirstChildWhenPersistent": true,
           "children": [
             {
               "text": "Overview",
@@ -228,6 +233,7 @@
         {
           "text": "Type",
           "link": "/foundations/type/",
+          "navigateToFirstChildWhenPersistent": true,
           "children": [
             {
               "text": "Overview",
@@ -250,6 +256,7 @@
         {
           "text": "Icons",
           "link": "/foundations/icons/",
+          "navigateToFirstChildWhenPersistent": true,
           "children": [
             {
               "text": "Catalog",
@@ -268,6 +275,7 @@
         {
           "text": "Gradient",
           "link": "/foundations/gradient/",
+          "navigateToFirstChildWhenPersistent": true,
           "children": [
             {
               "text": "Overview",
@@ -290,6 +298,7 @@
         {
           "text": "Graphic System",
           "link": "/foundations/graphic-system/",
+          "navigateToFirstChildWhenPersistent": true,
           "children": [
             {
               "text": "Overview",
@@ -318,6 +327,7 @@
     {
       "text": "Components",
       "link": "/components/",
+      "navigateToFirstChildWhenPersistent": true,
       "icon": "component",
       "children": [
         {
@@ -589,6 +599,7 @@
     {
       "text": "CSS Utilities",
       "link": "/utilities/",
+      "navigateToFirstChildWhenPersistent": true,
       "icon": "tools",
       "children": [
         {
@@ -983,6 +994,7 @@
     {
       "text": "Content",
       "link": "/guides/content/",
+      "navigateToFirstChildWhenPersistent": true,
       "icon": "edit",
       "children": [
         {
@@ -1035,6 +1047,7 @@
     {
       "text": "UI Kits",
       "link": "/ui-kits/",
+      "navigateToFirstChildWhenPersistent": true,
       "icon": "package",
       "children": [
         {

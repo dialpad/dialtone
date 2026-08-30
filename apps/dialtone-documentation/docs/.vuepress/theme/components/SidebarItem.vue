@@ -41,6 +41,7 @@
           :presentation="presentation"
           :nested="Boolean(subItem.children?.length)"
           :first-nested-child="nested && index === 0 && !subItem.children?.length"
+          :persistent="persistent"
           @toggle="forwardToggle"
         />
       </dt-stack>
@@ -62,9 +63,12 @@
 
 <script setup>
 import { computed } from 'vue';
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import SidebarItemRow from './SidebarItemRow.vue';
-import { isDescendantOfNavCollection } from '../utils/navRoutes.js';
+import {
+  getCollapsibleNavigationTarget,
+  isDescendantOfNavCollection,
+} from '../utils/navRoutes.js';
 import { collectPeerKeys, getNavItemKey, getSearchResultId } from '../utils/sidebarSearch.js';
 
 const props = defineProps({
@@ -108,10 +112,15 @@ const props = defineProps({
     type: String,
     default: 'primary',
   },
+  persistent: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(['toggle']);
 const route = useRoute();
+const router = useRouter();
 
 const subItems = computed(() => props.item.children || []);
 const hasChildren = computed(() => subItems.value.length > 0);
@@ -138,7 +147,13 @@ const resultId = computed(() => getSearchResultId(props.itemPath));
 
 function handleClick (event) {
   event.preventDefault();
+  const navigationTarget = getCollapsibleNavigationTarget(props.item, {
+    persistent: props.persistent,
+    open: isOpen.value,
+  });
+
   emit('toggle', itemKey.value, !isOpen.value, props.peerKeys);
+  if (navigationTarget) router.push(navigationTarget);
 }
 
 function forwardToggle (childKey, shouldOpen, childPeerKeys) {
