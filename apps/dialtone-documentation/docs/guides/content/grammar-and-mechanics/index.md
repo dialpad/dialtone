@@ -446,7 +446,6 @@ When using relative timestamps, use these formats:
 | Less than 60 seconds | - | Just now |
 | Less than 60 minutes | [ N ] minutes ago | 5 minutes ago |
 | Less than 24 hours | [ N ] hours ago | 5 hours ago |
-| Less than 24 hours | [ N ] hours ago | 5 hours ago |
 | Less than 48 hours | - | Yesterday |
 | Less than 1 week | [ Weekday ] | Thursday |
 

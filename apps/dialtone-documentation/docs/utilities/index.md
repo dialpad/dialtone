@@ -158,7 +158,7 @@ Add a border between each item with `d-divide-x`. Its default color is `currentC
 
 ### 8. And Change the Border Color
 
-Since the border color inherits the color of the parent's foreground (implicitly `currentColor`), let's soften it with a bold inverted border color `d-divide-bold`.
+Since the border color inherits the color of the parent's foreground (implicitly `currentColor`), let's soften it with a bold border color `d-divide-bold`.
 
 ```vue demo
 <!-- @wrapper -->
