@@ -1560,6 +1560,79 @@ describe('DtRichTextEditor tests', () => {
       });
     });
 
+    describe('Link click functionality', () => {
+      const HREF = 'https://example.com/app/messages/123';
+
+      const _insertLink = async () => {
+        await wrapper.setProps({ link: true });
+        const editorInstance = wrapper.vm.editor;
+        editorInstance.commands.setContent({
+          type: 'doc',
+          content: [{
+            type: 'paragraph',
+            content: [{
+              type: 'text',
+              text: 'a link',
+              marks: [{ type: 'link', attrs: { href: HREF } }],
+            }],
+          }],
+        });
+        await wrapper.vm.$nextTick();
+      };
+
+      const _findLinkMarkPos = (state) => {
+        let pos = null;
+        state.doc.descendants((node, nodePos) => {
+          if (node.isText && node.marks.some(m => m.type.name === 'link')) {
+            pos = nodePos + 1;
+          }
+        });
+        return pos;
+      };
+
+      it('emits link-click with the href when a link is clicked', async () => {
+        await _insertLink();
+
+        const { state, view } = wrapper.vm.editor;
+        const pos = _findLinkMarkPos(state);
+        // Invoke the click handler directly — dispatchEvent does not work in
+        // JSDOM because ProseMirror resolves positions via getBoundingClientRect.
+        view.someProp('handleClick', (fn) => fn(view, pos, new MouseEvent('click')));
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.emitted('link-click')).toBeTruthy();
+        expect(wrapper.emitted('link-click')[0][0]).toMatchObject({ href: HREF, text: 'a link' });
+        expect(wrapper.emitted('link-click')[0][0].event).toBeInstanceOf(MouseEvent);
+      });
+
+      it('does not emit link-click when no link mark is at the clicked position', async () => {
+        await wrapper.setProps({ link: true });
+        await wrapper.vm.$nextTick();
+
+        const { view } = wrapper.vm.editor;
+        view.someProp('handleClick', (fn) => fn(view, 1, new MouseEvent('click')));
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.emitted('link-click')).toBeFalsy();
+      });
+
+      it('lets the consumer suppress default navigation via preventDefault', async () => {
+        await _insertLink();
+
+        const { state, view } = wrapper.vm.editor;
+        const pos = _findLinkMarkPos(state);
+        // A consumer that intercepts the link would preventDefault on the event;
+        // the click handler then reports it as handled so the browser does not
+        // follow the anchor's target="_blank".
+        const event = new MouseEvent('click', { cancelable: true });
+        event.preventDefault();
+        const handled = view.someProp('handleClick', (fn) => fn(view, pos, event));
+        await wrapper.vm.$nextTick();
+
+        expect(handled).toBe(true);
+      });
+    });
+
     describe('Mention hover functionality', () => {
       const mentionData = {
         id: 'john.doe',

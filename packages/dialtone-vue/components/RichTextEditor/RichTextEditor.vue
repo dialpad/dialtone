@@ -56,7 +56,8 @@
 /* eslint-disable max-lines */
 import { Editor, EditorContent } from '@tiptap/vue-3';
 import { BubbleMenu } from '@tiptap/vue-3/menus';
-import { Extension } from '@tiptap/core';
+import { Extension, getMarkRange } from '@tiptap/core';
+import { Plugin, PluginKey } from '@tiptap/pm/state';
 import { DtButton } from '../Button';
 import { DtStack } from '../Stack';
 import Blockquote from '@tiptap/extension-blockquote';
@@ -617,6 +618,18 @@ export default {
      * @type {Object}
      */
     'phone-click',
+
+    /**
+     * Event fired when a link is clicked.
+     * Payload: { href: string, text: string, event: MouseEvent } — the link's
+     * href, its text content, and the originating click event. Call
+     * event.preventDefault() to suppress the default navigation (e.g. to route
+     * same-origin URLs in-app instead of opening a new tab).
+     * Requires the `link` prop to be set.
+     * @event link-click
+     * @type {Object}
+     */
+    'link-click',
   ],
 
   data () {
@@ -722,6 +735,30 @@ export default {
                 return true;
               },
             };
+          },
+          addProseMirrorPlugins () {
+            const markType = this.type;
+            // Emit `link-click` so consumers can intercept links (e.g. to
+            // navigate same-origin URLs in-app instead of opening a new tab).
+            // The listener may call event.preventDefault() to suppress the
+            // default navigation; otherwise the anchor behaves normally.
+            const linkClickPlugin = new Plugin({
+              key: new PluginKey('linkClick'),
+              props: {
+                handleClick (view, pos, event) {
+                  const { state } = view;
+                  const $pos = state.doc.resolve(pos);
+                  const linkMark = $pos.marks().find(m => m.type === markType);
+                  if (!linkMark) return false;
+                  const range = getMarkRange($pos, markType);
+                  const text = range ? state.doc.textBetween(range.from, range.to) : '';
+                  self.editor.emit('link-click', { href: linkMark.attrs.href, text, event });
+                  return event.defaultPrevented;
+                },
+              },
+            });
+
+            return [...(this.parent?.() ?? []), linkClickPlugin];
           },
         }).configure({
           HTMLAttributes: {
@@ -1324,6 +1361,11 @@ export default {
       // Phone number link is clicked — only emitted by the LinkPhoneNumbers extension
       this.editor.on('phone-click', (phoneData) => {
         this.$emit('phone-click', phoneData);
+      });
+
+      // A link is clicked — only emitted when the built-in `link` extension is active
+      this.editor.on('link-click', (linkData) => {
+        this.$emit('link-click', linkData);
       });
     },
 
