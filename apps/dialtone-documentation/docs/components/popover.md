@@ -1,14 +1,13 @@
 ---
 title: Popover
-description: A Popover displays a content overlay when its anchor element is activated.
+description: Floating surface for supplemental content or controls.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-popover--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=7298-20354
 keywords: ["popup", "overlay", "floating", "d-popover", "DtPopover", "dt-popover", "flyout", "tooltip panel"]
+combinator: DtPopover
 ---
-
-<component-combinator component-name="DtPopover" />
 
 ## Usage
 
@@ -297,16 +296,6 @@ Popover content renders outside the DOM tree. Use the `contentMode` prop to appl
 <dt-popover content-mode="light">...</dt-popover>
 ```
 
-## Vue API
-
-<component-vue-api component-name="popover" />
-
-## Classes
-
-Popover must contain an anchor and content element. d-modal--transparent can be used as a sibling before the popover container if you wish to make the popover modal.
-
-<component-class-table component-name="popover" />
-
 ## Accessibility
 
 If your popover is modal, please see the accessibility section of this page regarding "focus trapping": [Modal Accessibility](/components/modal.md#accessibility). The same rules will apply here if your popover is modal.
@@ -358,3 +347,13 @@ Additionally you must use the "initialFocusElement" prop to set which element is
 <script setup>
   import ExamplePopover from '@exampleComponents/ExamplePopover.vue';
 </script>
+
+## Vue API
+
+<component-vue-api component-name="popover" />
+
+## Classes
+
+Popover must contain an anchor and content element. d-modal--transparent can be used as a sibling before the popover container if you wish to make the popover modal.
+
+<component-class-table component-name="popover" />

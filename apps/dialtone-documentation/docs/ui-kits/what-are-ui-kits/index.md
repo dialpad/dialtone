@@ -1,13 +1,14 @@
 ---
 title: What are UI Kits?
 description: An introduction to UI Kits -- domain-specific components built with Dialtone.
+keywords: ["design kits", "product patterns", "composition", "templates", "domain components"]
 prev:
   text: Meet the Kits
   link: /ui-kits/
 ---
 
 > [!INFO]
-> UI Kit component details are currently being developed. For the most up-to-date details and proposals, see the #dialpad-uikits channel.
+> UI Kit component details are currently being developed. For the most up-to-date details and proposals, see the `#dialpad-uikits` channel.
 
 ## Overview
 
@@ -34,7 +35,18 @@ Product teams are encouraged to treat kits an an incubator for domain-specific c
 - Does it combine many atoms + HTML + domain logic? → UI Kit.
 - Has it spread across multiple teams and have a stabilized API? → Consider promoting to Dialtone.
 
-<UiKitsComparisonTable />
+| Criteria | Design System Component | UI Kit Component |
+| --- | --- | --- |
+| **Token & theming dependency** | Fully token-driven; adapts to themes/brands. | May extend tokens with product-specific styles. |
+| **Level of abstraction** | Atomic or small molecule (Button, Input, Modal). | Composite pattern (Message Composer, Callbar Row). |
+| **Scope of applicability** | Broad, cross-product and cross-platform usage. | Specific to one feature, product, or surface. |
+| **Reusability** | Reusable across many contexts by design. | Reusable across some teams/features, not universal. |
+| **API stability** | Stable, minimal, generic API; rare breaking changes. | APIs evolve quickly with product needs. |
+| **Behavioral independence** | Presentation-level only, no business logic. | Encodes domain/feature-specific behaviors. |
+| **Surface area** | Singular control or simple combination. | Large composition of atoms + HTML + logic. |
+| **Cross-platform support** | Exists or planned across Web, Mobile, Desktop. | Only relevant on one platform or channel. |
+| **Adoption signal** | Adopted or requested by multiple teams. | Primarily used by one team/feature until proven. |
+| **Accessibility & i18n** | Meets full accessibility and internationalization standards. | Accessibility handled contextually, may be lighter. |
 
 ## History & Benefits
 

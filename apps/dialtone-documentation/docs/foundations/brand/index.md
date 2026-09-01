@@ -1,11 +1,15 @@
 ---
 title: Logo
 description: The Dialpad logo puts our brand name at the forefront, complemented by our visual symbol "the Spark."
+status: ready
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=17330-1170
 download_url: /downloads/#icon
 no_preview: true
 thumb: true
 keywords: ["brand", "branding", "identity", "mark", "dialpad logo"]
+next:
+  text: Using our Logo
+  link: /foundations/brand/using-our-logo/
 ---
 
 

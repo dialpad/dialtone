@@ -1,14 +1,13 @@
 ---
 title: Input
-description: An input field is an input control that allows users to enter alphanumeric information. It can have a range of options and supports single line and multi-line lengths, as well as varying formats, including numbers, masked passwords, etc.
+description: Text field for entering short or long-form values.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-input--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=25665-5366
 keywords: ["text field", "form field", "textbox", "d-input", "DtInput", "dt-input", "text input", "form input"]
+combinator: DtInput
 ---
-
-<component-combinator component-name="DtInput" />
 
 ## Usage
 
@@ -329,14 +328,6 @@ Override the label font weight independently of the label size. Valid values are
 <dt-input label="Label" placeholder="Placeholder" label-strength="bold|semibold|medium|normal" />
 ```
 
-## Vue API
-
-<component-vue-api component-name="input" />
-
-## Classes
-
-<component-class-table component-name="input"></component-class-table>
-
 ## Accessibility
 
 - Make sure the `label` `for` attribute match the input `id`.
@@ -392,3 +383,11 @@ const validate = () => {
   };
 };
 </script>
+
+## Vue API
+
+<component-vue-api component-name="input" />
+
+## Classes
+
+<component-class-table component-name="input"></component-class-table>

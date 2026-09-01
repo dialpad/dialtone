@@ -1,0 +1,237 @@
+import { describe, it } from 'node:test';
+import assert from 'node:assert/strict';
+import {
+  PAGE_SCROLL_CONTAINER_NO_SMOOTH_CLASS,
+  PAGE_SCROLL_CONTAINER_SELECTOR,
+  createRouteHashScrollGuard,
+  flattenHeadersWithDepth,
+  getCurrentBrowserHash,
+  getRightRailTocViewportValues,
+  findPageStickyHeader,
+  getLinkedHeaders,
+  getScrollOffset,
+  getTargetScrollTop,
+  hashToId,
+  scrollRouteToTop,
+  shouldSyncActiveHeaderFromRouteWatch,
+  shouldScrollRouteToTop,
+} from './pageToc.js';
+
+describe('pageToc utilities', () => {
+  it('uses a docs-owned page scroll container selector', () => {
+    assert.equal(PAGE_SCROLL_CONTAINER_SELECTOR, '.dialtone-doc-page-scroll-container');
+  });
+
+  it('shows the right-rail TOC at xxxl only when no combinator uses that space', () => {
+    assert.deepEqual(getRightRailTocViewportValues(false), {
+      default: false,
+      xl: true,
+      xxxl: true,
+      xxxxl: true,
+    });
+    assert.deepEqual(getRightRailTocViewportValues(true), {
+      default: false,
+      xl: true,
+      xxxl: false,
+      xxxxl: true,
+    });
+  });
+
+  it('uses the browser hash when available for lazily mounted TOCs', () => {
+    assert.equal(getCurrentBrowserHash('#usage', { hash: '#classes' }), '#classes');
+    assert.equal(getCurrentBrowserHash('#usage', { hash: '' }), '#usage');
+    assert.equal(getCurrentBrowserHash('#usage', null), '#usage');
+  });
+
+  it('flattens headers with depth for dropdown rendering', () => {
+    const headers = [
+      { title: 'Usage', link: '#usage', children: [] },
+      {
+        title: 'Variants',
+        link: '#variants',
+        children: [
+          { title: 'Size', link: '#size', children: [] },
+          {
+            title: 'Kind',
+            link: '#kind',
+            children: [
+              { title: 'Muted', link: '#muted', children: [] },
+            ],
+          },
+        ],
+      },
+    ];
+
+    assert.deepEqual(flattenHeadersWithDepth(headers), [
+      { title: 'Usage', link: '#usage', children: [], depth: 0 },
+      {
+        title: 'Variants',
+        link: '#variants',
+        children: [
+          { title: 'Size', link: '#size', children: [] },
+          {
+            title: 'Kind',
+            link: '#kind',
+            children: [
+              { title: 'Muted', link: '#muted', children: [] },
+            ],
+          },
+        ],
+        depth: 0,
+      },
+      { title: 'Size', link: '#size', children: [], depth: 1 },
+      {
+        title: 'Kind',
+        link: '#kind',
+        children: [
+          { title: 'Muted', link: '#muted', children: [] },
+        ],
+        depth: 1,
+      },
+      { title: 'Muted', link: '#muted', children: [], depth: 2 },
+    ]);
+  });
+
+  it('skips scroll for route hash changes written by TOC navigation', () => {
+    const guard = createRouteHashScrollGuard();
+
+    guard.skip('#split-button');
+
+    assert.equal(guard.shouldSkip('#classes'), false);
+    assert.equal(guard.shouldSkip('#split-button'), true);
+    assert.equal(guard.shouldSkip('#split-button'), false);
+
+    guard.skip('');
+
+    assert.equal(guard.shouldSkip(''), true);
+  });
+
+  it('scrolls to top only when navigating to a different route without a hash', () => {
+    assert.equal(
+      shouldScrollRouteToTop(
+        { path: '/components/card.html', hash: '' },
+        { path: '/components/button.html', hash: '#classes' },
+      ),
+      true,
+    );
+    assert.equal(
+      shouldScrollRouteToTop(
+        { path: '/components/card.html', hash: '#usage' },
+        { path: '/components/button.html', hash: '#classes' },
+      ),
+      false,
+    );
+    assert.equal(
+      shouldScrollRouteToTop(
+        { path: '/components/button.html', hash: '#classes' },
+        { path: '/components/button.html', hash: '#usage' },
+      ),
+      false,
+    );
+  });
+
+  it('does not sync active headers during cross-route watcher updates', () => {
+    assert.equal(shouldSyncActiveHeaderFromRouteWatch('/components/button.html', undefined), true);
+    assert.equal(
+      shouldSyncActiveHeaderFromRouteWatch('/components/button.html', '/components/button.html'),
+      true,
+    );
+    assert.equal(
+      shouldSyncActiveHeaderFromRouteWatch('/components/box.html', '/components/button.html'),
+      false,
+    );
+  });
+
+  it('temporarily toggles the no-smooth class when route-scrolling to top', () => {
+    const classes = new Set();
+    const scrollCalls = [];
+    let restoreScrollBehavior;
+    const scrollContainer = {
+      classList: {
+        add: className => classes.add(className),
+        remove: className => classes.delete(className),
+        contains: className => classes.has(className),
+      },
+      scrollTo (options) {
+        scrollCalls.push({
+          options,
+          noSmooth: this.classList.contains(PAGE_SCROLL_CONTAINER_NO_SMOOTH_CLASS),
+        });
+      },
+    };
+
+    scrollRouteToTop(scrollContainer, callback => {
+      restoreScrollBehavior = callback;
+    });
+
+    assert.deepEqual(scrollCalls, [
+      {
+        options: { top: 0, behavior: 'auto' },
+        noSmooth: true,
+      },
+    ]);
+    assert.equal(classes.has(PAGE_SCROLL_CONTAINER_NO_SMOOTH_CLASS), true);
+
+    restoreScrollBehavior();
+
+    assert.equal(classes.has(PAGE_SCROLL_CONTAINER_NO_SMOOTH_CLASS), false);
+  });
+
+  it('decodes a header link to its target id', () => {
+    assert.equal(hashToId('#icon-support'), 'icon-support');
+    assert.equal(hashToId('/components/button.html#writing%20guidelines'), 'writing guidelines');
+  });
+
+  it('accepts a pre-resolved sticky header, skipping the lookup', () => {
+    // The scroll path caches the element and passes it in; result must match the
+    // version that queries for it.
+    const stickyHeader = { getBoundingClientRect: () => ({ bottom: 220 }) };
+    const queried = {
+      getBoundingClientRect: () => ({ top: 100 }),
+      querySelector: () => stickyHeader,
+    };
+    const noQuery = {
+      getBoundingClientRect: () => ({ top: 100 }),
+      querySelector: () => { throw new Error('should not query when passed in'); },
+    };
+
+    assert.equal(getScrollOffset(noQuery, stickyHeader), getScrollOffset(queried));
+  });
+
+  it('findPageStickyHeader returns null when there is no sticky header', () => {
+    assert.equal(findPageStickyHeader({ querySelector: () => null }), null);
+    assert.equal(findPageStickyHeader(undefined), null);
+  });
+
+  it('getLinkedHeaders flattens the tree and drops headers with no link', () => {
+    const headers = [
+      { link: '#usage', children: [{ children: [] }, { link: '#nested', children: [] }] },
+      { children: [] },
+    ];
+
+    assert.deepEqual(getLinkedHeaders(headers).map(h => h.link), ['#usage', '#nested']);
+  });
+
+  it('uses the sticky header bottom as the scroll offset', () => {
+    const scrollContainer = {
+      getBoundingClientRect: () => ({ top: 100 }),
+      querySelector: () => ({
+        getBoundingClientRect: () => ({ bottom: 220 }),
+      }),
+    };
+
+    assert.equal(getScrollOffset(scrollContainer), 136);
+  });
+
+  it('computes the nested scroll position for a heading', () => {
+    const scrollContainer = {
+      scrollTop: 120,
+      getBoundingClientRect: () => ({ top: 100 }),
+    };
+    const target = {
+      getBoundingClientRect: () => ({ top: 500 }),
+    };
+
+    assert.equal(getTargetScrollTop(scrollContainer, target, 80), 440);
+  });
+});

@@ -19,9 +19,8 @@ keywords:
     'strength',
     'primitive',
   ]
+combinator: DtText
 ---
-
-<component-combinator component-name="DtText" />
 
 ## Usage
 

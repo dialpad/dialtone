@@ -1,6 +1,6 @@
 ---
 title: Mode
-description: Directive to apply light, dark, or inverted color mode to any element or region.
+description: Directive for scoping light, dark, or inverted color mode.
 status: new
 thumb: true
 keywords: ["theme island","mode island","mode override","v-dt-mode","directive","light","dark","invert","v-dt"]
@@ -114,8 +114,6 @@ keywords: ["theme island","mode island","mode override","v-dt-mode","directive",
   </dt-stack>
 </dt-stack>
 ```
-
-<!-- <component-combinator component-name="DtModeIsland" /> -->
 
 ## Usage
 
@@ -594,19 +592,6 @@ The `<dt-mode-island>` component is the underlying abstraction that the directiv
 </dt-mode-island>
 ```
 
-## Vue API
-
-### Directive
-
-```js
-import { DtModeDirective } from '@dialpad/dialtone-vue';
-app.use(DtModeDirective);
-```
-
-### Component
-
-<component-vue-api component-name="modeisland" />
-
 ## Accessibility
 
 Purely visual. No semantic HTML impact. Supports high contrast mode via auto contrast inheritance.
@@ -633,3 +618,16 @@ const items = ref([
 ]);
 
 </script>
+
+## Vue API
+
+### Directive
+
+```js
+import { DtModeDirective } from '@dialpad/dialtone-vue';
+app.use(DtModeDirective);
+```
+
+### Component
+
+<component-vue-api component-name="modeisland" />

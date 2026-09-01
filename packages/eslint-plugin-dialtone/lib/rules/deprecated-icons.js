@@ -13,7 +13,7 @@ module.exports = {
     meta: {
         type: 'suggestion', // `problem`, `suggestion`, or `layout`
         docs: {
-            description: 'Finds deprecated svg and vue icon imports from dialtone',
+            description: 'Detects deprecated SVG and Vue icon imports.',
             recommended: false,
             url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-icons.md', // URL to the documentation page for this rule
         },

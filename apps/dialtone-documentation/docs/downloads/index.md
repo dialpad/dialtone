@@ -1,6 +1,7 @@
 ---
 title: Downloads
-noSidebar: true
+description: Download Dialtone brand, design, and product resources.
+status: new
 keywords: ["download", "assets", "files", "resources", "brand", "logo", "icon", "illustration", "gradient", "dam", "digital"]
 ---
 

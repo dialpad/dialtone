@@ -162,7 +162,7 @@ Dialtone provides 50 themes. Import any theme from `@dialpad/dialtone/themes/{th
 
 Materials are passed to `setMaterial` by string name — there are no per-material modules to import.
 
-Most brands declare a locked material in their token JSON. Switching to a locked brand auto-applies its material; the [Material picker in the navbar](#brand-locked-materials) disables on those brands. Free-choice brands (`dp`, `tmo`, `prota-deuter`, `trita`) keep the picker enabled.
+Most brands declare a locked material in their token JSON. Switching to a locked brand auto-applies its material; the [material picker](#brand-locked-materials) disables on those brands. Free-choice brands (`dp`, `tmo`, `prota-deuter`, `trita`) keep the picker enabled.
 
 **Brand import pattern:**
 

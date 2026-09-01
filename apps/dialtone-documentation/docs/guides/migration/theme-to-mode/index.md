@@ -1,6 +1,7 @@
 ---
 title: "Theme: setTheme deprecated, layered API replaces it"
 description: "The legacy setTheme() function and data-dt-theme attribute have been deprecated in favor of the new layered API: initDialtoneTheme, setMode, setBrand, setContrast, and setMaterial."
+keywords: ["dark mode", "light mode", "setTheme", "setMode", "brand", "contrast", "layered API"]
 ---
 
 ## TLDR
@@ -219,7 +220,7 @@ app.use(DtModeDirective);
 <dt-mode-island mode="invert">Inverted region with surface color</dt-mode-island>
 ```
 
-For full directive documentation see the [v-dt-mode Storybook page](https://dialtone.dialpad.com/vue/next/?path=/docs/directives-mode--docs). For `DtModeIsland`, see the [Mode Island component page](/components/mode-island.html).
+For full directive documentation see the [v-dt-mode Storybook page](https://dialtone.dialpad.com/vue/?path=/docs/directives-mode--docs). For `DtModeIsland`, see the [Mode Island component page](/components/mode-island.html).
 
 > [!INFO] Dynamic bindings and template literals
 > The script only rewrites static `data-dt-theme="invert"` string literals. Vue dynamic bindings (`:data-dt-theme="expr"`) and JavaScript template literals are not covered. After running the script, grep your codebase for any remaining `data-dt-theme` references: `grep -r 'data-dt-theme' ./src`.

@@ -1,16 +1,15 @@
 ---
 title: Rich Text Editor
-description: A rich text editor is a component that allows users to format text with a variety of styles. It enables also mixing text with custom components built as extensions, such as links and user mentions.
+description: Text editing surface with formatting, links, and mention support.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-rich-text-editor--default
 keywords: ["rte", "wysiwyg", "markdown", "d-rte", "DtRichTextEditor", "dt-rich-text-editor", "content editor", "rich editor"]
+combinator: DtRichTextEditor
 ---
 
 > [!INFO]
 > Not a standalone component. For a complete message input experience, use `DpEditor` / `DpMessageInput` from `@dialpad/chatkit` instead
-
-<component-combinator component-name="DtRichTextEditor" />
 
 ## Base Style
 

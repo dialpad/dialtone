@@ -14,7 +14,7 @@ module.exports = {
   meta: {
     type: 'suggestion', // `problem`, `suggestion`, or `layout`
     docs: {
-      description,
+      description: 'Detects usage of deprecated base-color utility classes.',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-base-color-classes.md', // URL to the documentation page for this rule
     },

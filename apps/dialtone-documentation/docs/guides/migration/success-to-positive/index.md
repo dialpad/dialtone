@@ -1,6 +1,7 @@
 ---
 title: Migrating Success Tokens, Utility Classes, and Lint Rules to Positive
 description: "\"Success\"-named design tokens and utility classes have been renamed to \"positive\". A migration helper, ESLint rule, and Stylelint rule are available. Non-breaking at the CSS / token layer."
+keywords: ["status color", "semantic color", "token rename", "lint rules", "stylelint", "eslint"]
 ---
 
 > [!INFO] Non-breaking at the CSS / token layer

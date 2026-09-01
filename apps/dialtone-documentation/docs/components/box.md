@@ -1,13 +1,12 @@
 ---
 title: Box
-description: Low-level surface, spacing, sizing, and positioning primitive for building token-constrained containers.
+description: Primitive container for surface, border, spacing, sizing, and positioning.
 status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-box--default
 keywords: ["box", "container", "surface", "padding", "border", "shadow", "radius", "sizing", "overflow", "scrollbar", "background", "spacing", "layout", "primitive", "elevation", "position", "positioning", "inset", "offset", "z-index", "z index", "sticky", "absolute", "relative", "fixed", "top", "right", "bottom", "left"]
+combinator: DtBox
 ---
-
-<component-combinator component-name="DtBox" />
 
 ## Usage
 

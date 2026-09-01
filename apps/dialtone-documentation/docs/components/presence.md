@@ -1,14 +1,13 @@
 ---
 title: Presence
-description: A visual control element indicating the current status of a user.
+description: Status indicator for user availability.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-presence--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=9628-58458
 keywords: ["status", "online", "availability", "d-presence", "DtPresence", "dt-presence", "status indicator", "status dot"]
+combinator: DtPresence
 ---
-
-<component-combinator component-name="DtPresence" />
 
 ## Usage
 
@@ -89,14 +88,6 @@ Pass `:show-icon="false"` for a dot-only treatment across all states. The `offli
 <dt-presence presence="offline" :show-icon="false" />
 ```
 
-## Vue API
-
-<component-vue-api component-name="presence" />
-
-## Classes
-
-<component-class-table component-name="presence" />
-
 ## Accessibility
 
 You may wish to announce any live changes to this component via the screen reader since this is only a visual indicator.
@@ -118,3 +109,11 @@ Example:
 ```
 
 Abbreviations / symbols should be read out in full for voiceover / screen readers.
+
+## Vue API
+
+<component-vue-api component-name="presence" />
+
+## Classes
+
+<component-class-table component-name="presence" />

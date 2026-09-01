@@ -38,10 +38,26 @@
         "command": "node apps/dialtone-documentation/scripts/generate-data.mjs"
       }
     },
+    "generate-tooling-docs": {
+      "executor": "nx:run-commands",
+      "cache": false,
+      "options": {
+        "cwd": "{workspaceRoot}",
+        "command": "node apps/dialtone-documentation/scripts/generate-tooling-docs.mjs"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{workspaceRoot}",
+        "command": "vitest run apps/dialtone-documentation/scripts"
+      }
+    },
     "build": {
       "executor": "nx:run-commands",
       "dependsOn": [
         "generate-token-data",
+        "generate-tooling-docs",
         "dialtone-css:build",
         "dialtone-icons:build",
         "dialtone-tokens:build",
@@ -64,16 +80,14 @@
       "executor": "nx:run-commands",
       "dependsOn": [
         "generate-token-data",
+        "generate-tooling-docs",
         "dialtone-css:build",
         "dialtone-icons:build",
         "dialtone-tokens:build",
         "dialtone-vue:build",
         "dialtone-combinator:build"
       ],
-      "inputs": [
-        "{projectRoot}/docs/**/*",
-        "{projectRoot}/package.json"
-      ],
+      "inputs": ["{projectRoot}/docs/**/*", "{projectRoot}/package.json"],
       "outputs": [],
       "options": {
         "cwd": "{projectRoot}",
@@ -85,7 +99,7 @@
             "command": "nx watch --projects=dialtone-tokens,dialtone-vue,dialtone-combinator -- nx run \\$NX_PROJECT_NAME:build"
           },
           {
-            "command": "node scripts/generate-raw-markdown.mjs && vuepress dev docs"
+            "command": "node scripts/generate-raw-markdown.mjs && vuepress dev docs --clean-temp"
           }
         ]
       }

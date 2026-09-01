@@ -1,13 +1,12 @@
 ---
 title: Lazy Show
-description: Lazy show is a utility component that prevents its children from being rendered until the first time it is shown.
+description: Defers rendering child content until it is first shown.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/utilities-lazy-show--default
 keywords: ["lazy load","conditional render","d-lazy-show","DtLazyShow","dt-lazy-show"]
+combinator: DtLazyShow
 ---
-
-<component-combinator component-name="DtLazyShow" />
 
 `DtLazyShow` is essentially a combination of a `v-if` and `v-show`. This means that the child slot will not be rendered/initialized until the first time `show` is `true`, after which the slot will stay in the DOM and be hidden/shown with the `v-show` directive. This is useful to prevent elements which are hidden from being rendered immediately, but keeping them alive when toggled later.
 

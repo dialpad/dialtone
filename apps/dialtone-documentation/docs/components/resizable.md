@@ -1,6 +1,7 @@
 ---
 title: Resizable
-description: A layout component that lets users resize adjacent panels by dragging a handle between them.
+description: Layout primitive for adjustable panels and split views.
+keywords: ["resize", "split pane", "panel", "drag handle", "DtResizable", "dt-resizable"]
 status: beta
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-resizable--default
@@ -345,48 +346,16 @@ Alternatively, use `offset-amount` for an explicit pixel value without measuring
 
 Each resize handle has `role="separator"` with `aria-orientation`, `aria-valuenow`, `aria-valuemin`, `aria-valuemax`, `aria-controls`, and `aria-valuetext` reflecting the current layout. Handles are always focusable (`tabindex="0"`) and follow the [W3C ARIA separator pattern](https://www.w3.org/WAI/ARIA/apg/patterns/windowsplitter/).
 
-<table class="d-table dialtone-doc-table">
-<thead>
-<tr>
-<th scope="col">Key</th>
-<th scope="col">Action</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Arrow keys</td>
-<td>Resize by 8px</td>
-</tr>
-<tr>
-<td>Shift + Arrow</td>
-<td>Resize by 24px</td>
-</tr>
-<tr>
-<td>Ctrl/Cmd + Arrow</td>
-<td>Resize by 1px</td>
-</tr>
-<tr>
-<td>Enter</td>
-<td>Collapse or expand the adjacent panel (if collapsible)</td>
-</tr>
-<tr>
-<td>Home</td>
-<td>Set panel to minimum size</td>
-</tr>
-<tr>
-<td>End</td>
-<td>Set panel to maximum size</td>
-</tr>
-<tr>
-<td>R</td>
-<td>Reset adjacent panels to initial sizes</td>
-</tr>
-<tr>
-<td>Escape</td>
-<td>Remove focus from the handle</td>
-</tr>
-</tbody>
-</table>
+| Key | Action |
+| --- | --- |
+| Arrow keys | Resize by 8px |
+| Shift + Arrow | Resize by 24px |
+| Ctrl/Cmd + Arrow | Resize by 1px |
+| Enter | Collapse or expand the adjacent panel (if collapsible) |
+| Home | Set panel to minimum size |
+| End | Set panel to maximum size |
+| R | Reset adjacent panels to initial sizes |
+| Escape | Remove focus from the handle |
 
 Size changes are announced to screen readers via an `aria-live` region. All announcement strings are configurable via the `messages` prop on `DtResizable` for i18n.
 

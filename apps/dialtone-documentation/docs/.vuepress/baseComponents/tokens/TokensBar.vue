@@ -48,14 +48,17 @@
         :options="MODES"
         @update:model-value="updateMode"
       />
-      <dt-select-menu
-        name="theme-select"
-        label="Theme"
-        select-class="d-w-200"
-        :model-value="theme"
-        :options="THEMES"
-        @update:model-value="updateTheme"
-      />
+      <!-- hidden intetionally. keep. will revisit its role here. -->
+      <div hidden>
+        <dt-select-menu
+          name="theme-select"
+          label="Theme"
+          select-class="d-w-200"
+          :model-value="theme"
+          :options="THEMES"
+          @update:model-value="updateTheme"
+        />
+      </div>
       <dt-button
         v-dt-tooltip:top-end="shareLinkTooltip"
         importance="clear"

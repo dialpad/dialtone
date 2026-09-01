@@ -17,7 +17,7 @@ import { FOCUSTRAP_DEFAULTS, FOCUSTRAP_STATE_KEY } from './focustrap_constants.j
  * // Always active (no binding value)
  * <div role="alertdialog" v-dt-focustrap aria-label="Confirm">
  *
- * @see https://dialtone.dialpad.com/vue/next/?path=/docs/directives-focustrap--docs
+ * @see https://dialtone.dialpad.com/vue/?path=/docs/directives-focustrap--docs
  */
 export const DtFocustrapDirective = {
   name: 'dt-focustrap-directive',

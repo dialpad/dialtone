@@ -1,6 +1,7 @@
 ---
 title: Migrating Layout and Spacing Tokens
 description: The --dt-size-* and --dt-space-* token families are being replaced by two purpose-built systems — --dt-layout-* for structural sizing and --dt-spacing-* for whitespace.
+keywords: ["size tokens", "dimension tokens", "css variables", "whitespace", "structural sizing"]
 ---
 
 > [!WARNING] Breaking change

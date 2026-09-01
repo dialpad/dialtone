@@ -1,6 +1,7 @@
 ---
 title: Typography Utilities to DtText
 description: Guide and migration tool for replacing legacy typography utility classes (d-headline--*, d-body--*, d-label--*, d-code--md, d-fw-*, d-fc-*, d-lh-*, d-truncate, d-ta-*) with the DtText component. Covers automatic migration, edge cases, and class-to-prop mapping.
+keywords: ["text utilities", "font", "type scale", "truncate", "d-headline", "d-body"]
 status: ready
 ---
 

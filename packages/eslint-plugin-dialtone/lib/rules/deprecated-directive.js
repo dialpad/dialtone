@@ -12,8 +12,7 @@ module.exports = {
   meta: {
     type: 'suggestion', // `problem`, `suggestion`, or `layout`
     docs: {
-      description:
-        'Detects usages of deprecated vue directives that should be replaced by Dialtone Vue directives',
+      description: 'Detects usage of deprecated Vue directives that have Dialtone replacements.',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-directive.md', // URL to the documentation page for this rule
     },

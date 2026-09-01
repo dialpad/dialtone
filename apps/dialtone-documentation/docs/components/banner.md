@@ -1,6 +1,6 @@
 ---
 title: Banner
-description: A banner is a type of Notice, delivering system and engagement messaging. It is highly intrusive and should be used sparingly and appropriately.
+description: High-visibility message for system or engagement updates.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-banner--default
@@ -21,8 +21,6 @@ keywords: ["alert","notification","message","d-banner","DtBanner","dt-banner"]
   </dt-stack>
 </dt-stack>
 ```
-
-<!-- <component-combinator component-name="DtBanner" /> -->
 
 ## Usage
 
@@ -101,14 +99,6 @@ Pins the banner to the top of the window.
 </dt-banner>
 ```
 
-## Vue API
-
-<component-vue-api component-name="banner" />
-
-## Classes
-
-<component-class-table component-name="banner"></component-class-table>
-
 ## Accessibility
 
 ### Focus management
@@ -152,3 +142,11 @@ function closeBanner () {
   shownBanner.value = null;
 }
 </script>
+
+## Vue API
+
+<component-vue-api component-name="banner" />
+
+## Classes
+
+<component-class-table component-name="banner"></component-class-table>

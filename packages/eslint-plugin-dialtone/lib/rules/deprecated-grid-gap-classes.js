@@ -12,7 +12,7 @@ module.exports = {
   meta: {
     type: 'suggestion', // `problem`, `suggestion`, or `layout`
     docs: {
-      description: "Usage of d-gg*, d-grg*, d-gcg* utility classes are deprecated and will be removed in the future.",
+      description: "Detects usage of deprecated `d-gg*`, `d-grg*`, and `d-gcg*` grid-gap utilities.",
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-grid-gap-classes.md', // URL to the documentation page for this rule
     },

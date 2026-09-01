@@ -1,6 +1,7 @@
 ---
 title: Vue 2 Removal
 description: Dialtone drops Vue 2 support — all consumers are already on Vue 3. Last Vue 2 version is 9.154.0.
+keywords: ["Vue 3", "compat", "composition api", "breaking change", "support"]
 ---
 
 ## TLDR

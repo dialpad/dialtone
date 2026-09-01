@@ -15,10 +15,6 @@
 //  • HOME PAGE
 //  ----------------------------------------------------------------------------
 
-:root {
-  --docsearch-primary-color: #7c52ff;
-}
-
 // Prevent flash of empty content before Vue hydrates.
 // The app starts invisible; once Vue mounts it adds [data-app-ready]
 // which fades the content in.
@@ -39,242 +35,27 @@ html[data-app-ready] #app {
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-block-start: 7.2rem;
+
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
+  }
 }
 
 body {
-  background-color: var(--dt-shell-color-surface-default);
+  min-block-size: 100vh;
 }
 
-//  ============================================================================
-//  $   SEARCH (Algolia)
-//      Override
-//  ----------------------------------------------------------------------------
-html body {
-  --docsearch-primary-color: var(--dt-color-brand-purple);
-  --docsearch-text-color: var(--dt-color-foreground-primary);
-  --docsearch-spacing: var(--dt-spacing-300);
-  // --docsearch-icon-stroke-width
-  --docsearch-highlight-color: var(--docsearch-primary-color);
-  --docsearch-muted-color: var(--dt-color-foreground-tertiary);
-  --docsearch-container-background: var(--dt-color-surface-backdrop);
-  // --docsearch-logo-color
-  --docsearch-modal-width: var(--dt-layout-800);
-  --docsearch-modal-height: auto;
-  --docsearch-modal-background: var(--dt-color-surface-secondary);
-  --docsearch-modal-shadow: var(--dt-shadow-large);
-  /* stylelint-disable-next-line meowtec/no-px */
-  --docsearch-searchbox-height: 40px;
-  /* stylelint-disable-next-line meowtec/no-px */
-  --docsearch-searchbox-initial-height: 40px;
-  // --docsearch-searchbox-background
-  --docsearch-searchbox-focus-background: var(
-    --dt-inputs-color-background-default
-  );
-  --docsearch-searchbox-shadow: inset 0 0 0 var(--dt-size-border-100)
-    var(--dt-inputs-color-border-default);
-  --docsearch-hit-height: var(--dt-layout-75);
-  --docsearch-hit-color: var(--dt-color-foreground-tertiary);
-  --docsearch-hit-active-color: var(--dt-color-neutral-white);
-  --docsearch-hit-background: var(--dt-color-surface-primary);
-  --docsearch-hit-shadow: inset 0 0 0 var(--dt-size-border-100)
-    var(--dt-color-border-subtle);
-  --docsearch-key-gradient: linear-gradient(
-    -225deg,
-    var(--dt-color-surface-primary),
-    var(--dt-color-surface-secondary)
-  );
-  --docsearch-key-shadow: inset 0 0 0 var(--dt-size-border-100)
-    var(--dt-color-border-default);
-  --docsearch-footer-height: var(--dt-layout-75);
-  --docsearch-footer-background: var(--dt-color-surface-primary);
-  /* stylelint-disable-next-line meowtec/no-px */
-  --docsearch-footer-shadow: 0 var(--dt-spacing-100-negative) 0 0
-      var(--dt-color-border-subtle),
-    0 var(--dt-spacing-100-negative) 3px 0 rgb(0, 0, 0, 0.2);
+.dialtone-doc-page-scroll-container {
+  scroll-behavior: smooth;
 
-  .DocSearch-Modal {
-    margin-block-start: 15vh;
-    background-clip: padding-box;
-    border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
-    border-radius: var(--dt-size-radius-500);
-    box-shadow: var(--dt-shadow-large);
+  @media (prefers-reduced-motion: reduce) {
+    scroll-behavior: auto;
   }
 
-  // Override 'overflow: hidden' when algolia modal is showing because we are using
-  // dialtone scrollbar
-  &.DocSearch--active {
-    overflow: unset !important;
-  }
-
-  .DocSearch-SearchBar {
-    padding: var(--docsearch-spacing);
-    border-block-end: 1px solid var(--dt-color-border-subtle);
-  }
-
-  .DocSearch-Form {
-    padding: 0 var(--docsearch-spacing);
-    border: none;
-    border-radius: var(--dt-size-radius-400);
-    box-shadow: var(--docsearch-searchbox-shadow);
-    padding-inline: var(--dt-spacing-150);
-  }
-
-  .DocSearch-MagnifierLabel svg,
-  .DocSearch-Close svg {
-    color: var(--dt-color-foreground-muted);
-  }
-
-  .DocSearch-Input {
-    font-size: var(--dt-font-size-300);
-    padding-inline-start: var(--dt-spacing-100);
-
-    &:focus-visible {
-      box-shadow: none;
-    }
-
-    &::placeholder {
-      color: var(--dt-inputs-color-foreground-placeholder);
-    }
-  }
-
-  .DocSearch-LoadingIndicator svg,
-  .DocSearch-MagnifierLabel svg,
-  .DocSearch-Search-Icon {
-    inline-size: var(--dt-icon-size-300) !important;
-    block-size: var(--dt-icon-size-300) !important;
-  }
-
-  .DocSearch-Reset:hover {
-    color: var(--dt-color-foreground-primary);
-  }
-
-  .DocSearch-Cancel {
-    // no overrides
-  }
-
-  .DocSearch-Dropdown {
-    max-block-size: var(--dt-layout-800);
-  }
-
-  .DocSearch-Dropdown-Container {
-    // no overrides
-  }
-
-  .DocSearch-Hits {
-    // no overrides
-  }
-
-  .DocSearch-Hit-source {
-    padding: var(--dt-spacing-100) var(--dt-spacing-50) 0;
-    color: var(--dt-color-foreground-primary);
-    font-weight: var(--dt-font-weight-bold);
-    font-size: var(--dt-font-size-200);
-  }
-
-  .DocSearch-Title {
-    color: var(--dt-color-foreground-secondary);
-    font-size: var(--dt-font-size-300);
-
-    :where(strong) {
-      color: var(--dt-color-foreground-primary);
-    }
-  }
-
-  .DocSearch-Hit-Container {
-    padding-inline-end: 0;
-  }
-
-  .DocSearch-Hit {
-    padding-block-end: var(--dt-spacing-100);
-  }
-
-  .DocSearch-Hits :where(mark) {
-    padding: var(--dt-spacing-25);
-    color: var(--dt-color-foreground-primary);
-    background: var(--dt-color-surface-warning);
-  }
-
-  .DocSearch-Hit :where(a) {
-    padding-inline: var(--dt-spacing-150) var(--dt-spacing-150);
-    border-radius: var(--dt-size-radius-300);
-  }
-
-  .DocSearch-Hit-action :where(svg),
-  .DocSearch-Hit-icon :where(svg) {
-    inline-size: var(--dt-icon-size-200);
-    block-size: var(--dt-icon-size-200);
-  }
-
-  .DocSearch-Hit-content-wrapper {
-    margin: 0 var(--dt-spacing-25);
-    font-weight: var(--dt-font-weight-normal);
-    line-height: var(--dt-font-line-height-200);
-  }
-
-  .DocSearch-Hit-action {
-    // no overrides
-  }
-
-  .DocSearch-Hit[aria-selected="true"] :where(mark) {
-    color: var(--dt-color-foreground-primary) !important;
-    text-decoration: none;
-  }
-
-  .DocSearch-Hit-title {
-    font-size: var(--dt-font-size-200);
-  }
-
-  .DocSearch-Hit-path {
-    color: var(--dt-color-foreground-muted);
-    font-size: var(--dt-font-size-100);
-  }
-
-  .DocSearch-HitsFooter {
-    // no overrides
-  }
-
-  .DocSearch-Footer {
-    border-radius: 0 0 var(--dt-size-radius-500) var(--dt-size-radius-500);
-  }
-
-  .DocSearch-Logo {
-    // no overrides
-  }
-
-  .DocSearch-Logo :where(svg) {
-    filter: saturate(0) contrast(.25);
-  }
-
-  .DocSearch-Commands {
-    // no overrides
-  }
-
-  .DocSearch-Commands-Key {
-    border-radius: var(--dt-size-radius-300);
-  }
-
-  .DocSearch-Label {
-    font-size: var(--dt-font-size-100);
-  }
-
-  .DocSearch-Help {
-    margin-block-start: var(--dt-spacing-100);
-    color: var(--dt-color-foreground-secondary);
-    font-size: var(--dt-font-size-100);
-  }
-
-  .DocSearch-NoResults {
-    padding: var(--dt-spacing-300) 0;
-    font-size: var(--dt-font-size-200);
-  }
-
-  .DocSearch-Prefill {
-    color: var(--dt-color-link-primary);
-  }
-
-  .DocSearch-NoResults-Prefill-List :where(li) {
-    list-style-type: none;
+  // Instant scrolls defeat the smooth default via this modifier — see
+  // scrollRouteToTop() in pageToc.js. Toggle it rather than inventing another opt-out.
+  &--no-smooth {
+    scroll-behavior: auto;
   }
 }
 
@@ -283,52 +64,8 @@ html body {
 //      Because the doc site needs layout specifications that aren't
 //      appropriate to ship as part of Dialtone.
 //  ----------------------------------------------------------------------------
-.dialtone-header {
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  padding: var(--dt-spacing-200) var(--dt-spacing-300) var(--dt-spacing-200) var(--dt-spacing-200);
-  color: var(--dt-shell-color-foreground-primary);
+.dialtone-shell-sidebar {
   background-color: var(--dt-shell-color-surface-default);
-  view-transition-name: dialtone-header;
-
-  > :where(:first-child) {
-    justify-self: start;
-  }
-
-  > :where(:nth-child(2)) {
-    justify-self: center;
-  }
-
-  > :where(:last-child) {
-    justify-self: end;
-  }
-
-  &--home {
-    --position-top: var(--dt-spacing-200);
-
-    position: fixed;
-    z-index: 1;
-    max-inline-size: calc(var(--dt-layout-1100) * 2);
-    border-radius: var(--dt-size-radius-450);
-    /* stylelint-disable-next-line meowtec/no-px */
-    box-shadow:
-      0 255.043px 71.487px 0 rgba(0, 0, 0, 0),
-      0 163.131px 65.306px 0 rgba(0, 0, 0, 0.01),
-      0 91.912px 55.094px 0 rgba(0, 0, 0, 0.03),
-      0 40.85px 40.85px 0 rgba(0, 0, 0, 0.05),
-      0 10.212px 22.306px 0 rgba(0, 0, 0, 0.05);
-    -webkit-backdrop-filter: blur(var(--dt-spacing-100));
-    backdrop-filter: blur(var(--dt-spacing-100));
-    transition: inset cubic-bezier(0.4, 0, 0.2, 1) 0.66s;
-    will-change: inset;
-    inset: var(--position-top) var(--dt-spacing-200);
-    inset-block-end: auto;
-  }
-
-  &--off-canvas {
-    --position-top: -105%;
-  }
 }
 
 .dialtone-shell-btn {
@@ -356,75 +93,6 @@ html body {
   }
 }
 
-.dialtone-sidebar {
-  position: sticky;
-  overflow-y: auto;
-  color: var(--dt-shell-color-foreground-primary);
-  inset-block-start: var(--dt-layout-100);
-  // TODO: redo 😜
-  block-size: calc(100vh - var(--dt-layout-100));
-
-  &__list {
-    padding: var(--dt-spacing-300) 0 calc(var(--dt-spacing-100) * 12) var(--dt-spacing-200);
-    padding-block-start: var(--dt-spacing-700);
-    inset-block: var(--dt-layout-100) 0;
-    inline-size: var(--dt-layout-400);
-  }
-}
-
-.dialtone-content {
-  background-color: var(--dt-color-surface-primary);
-  border-block: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
-
-  @media (min-width: 980px) {
-    margin-block-end: var(--dt-spacing-100);
-    border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
-    border-radius: var(--dt-size-radius-500);
-    margin-inline: var(--dt-spacing-200);
-  }
-}
-
-.dialtone-content__article > div {
-  // the div is hard coded into vuepress
-  > table:not([class]) {
-    color: var(--dt-color-foreground-tertiary);
-    border-collapse: collapse;
-    margin: var(--dt-spacing-200) 0;
-    inline-size: 100%;
-    font: var(--dt-text-body-sm);
-
-    :where(th) {
-      font: var(--dt-text-label-xs);
-      color: var(--dt-color-foreground-secondary);
-      line-height: var(--dt-font-line-height-100);
-    }
-
-
-    :where(th, td) {
-      text-align: start;
-      border-block-end: var(--dt-size-border-100) solid var(--dt-color-border-default);
-      border-inline: 0;
-      padding: var(--dt-spacing-200);
-      vertical-align: baseline;
-    }
-
-    :where(thead th) {
-      border-block-end-width: var(--dt-size-border-200);
-    }
-
-    :where(tbody tr:last-of-type) :where(td, th) {
-      border-block-end: none;
-    }
-
-    :where(code, kbd) {
-      background-color: var(--dt-color-background-default);
-      color: var(--dt-color-foreground-info-strong);
-      font: var(--dt-text-code-xs);
-      font-size: 85%;
-    }
-  }
-}
-
 .dialtone-doc-notice {
   :where(code) {
     font: var(--dt-text-code-xs);
@@ -441,9 +109,11 @@ html body {
 a.header-anchor {
   float: inline-start;
   margin-inline-start: -0.87em;
+  padding-block-start: 0.1em;
   padding-inline-end: 0.23em;
-  font-size: inherit;
+  font-size: 86%;
   text-decoration: none;
+  font-weight: var(--dt-font-weight-normal);
   opacity: 0;
 
   &:focus-visible {
@@ -459,7 +129,7 @@ a.header-anchor {
 
 .d-docsite--header-3 {
   font: var(--dt-text-headline-xl);
-  margin-block: var(--dt-spacing-200) var(--dt-spacing-50);
+  margin-block: var(--dt-spacing-300) var(--dt-spacing-50);
 }
 
 .d-docsite--header-4 {
@@ -471,29 +141,6 @@ a.header-anchor {
 .d-docsite--header-3 {
   &:hover :where(a).header-anchor {
     opacity: 1;
-  }
-}
-
-.d-ga-toc {
-  grid-area: toc !important;
-}
-
-.d-gl-docsite {
-  grid-template-areas: "content";
-  grid-template-columns: [content] minmax(32rem, 104rem);
-}
-
-.d-gl-docsite-toc,
-.d-gl-docsite.tokens-page {
-  grid-template-areas: "content toc";
-  grid-template-columns: [content] minmax(32rem, 99rem) [toc] minmax(
-      min-content,
-      21.6rem
-    );
-
-  @media (max-width: 1264px) {
-    grid-template-areas: "content";
-    grid-template-columns: [content] minmax(32rem, 99rem);
   }
 }
 
@@ -513,8 +160,7 @@ code {
   .d-docsite--paragraph &,
   .d-docsite--unordered-list &,
   .d-docsite--ordered-list &,
-  .d-docsite--list-element &,
-  .d-docsite--preview-header & {
+  .d-docsite--list-element & {
     font-size: 85%;
   }
 
@@ -529,7 +175,7 @@ code {
     font: var(--dt-text-body-sm);
 
     :where(th) {
-      font: var(--dt-text-label-xs);
+      font: var(--dt-text-label-sm);
       color: var(--dt-color-foreground-secondary);
       line-height: var(--dt-font-line-height-100);
     }
@@ -583,7 +229,7 @@ code {
   }
 }
 
-:where(:is(.d-docsite--paragraph, .d-docsite--unordered-list, .d-docsite--ordered-list, .d-docsite--list-element, .d-docsite--preview-header) code) {
+:where(:is(.d-docsite--paragraph, .d-docsite--unordered-list, .d-docsite--ordered-list, .d-docsite--list-element) code) {
   font: var(--dt-text-code-sm);
   padding: var(--dt-spacing-25) var(--dt-spacing-50);
   color: var(--dt-color-foreground-info-strong);
@@ -599,10 +245,6 @@ code {
   border-radius: var(--dt-size-radius-300);
   font-weight: inherit;
   font-size: 94%;
-}
-
-.d-docsite--preview-header {
-  margin-block: var(--dt-spacing-400) var(--dt-spacing-50);
 }
 
 .d-docsite-code {
@@ -791,58 +433,6 @@ code {
 //      Styles the site's home page
 //  ----------------------------------------------------------------------------
 
-.hero {
-  position: relative;
-  background-color: var(--dt-color-surface-primary);
-
-  &__inner-wrapper {
-    padding-block: calc(var(--dt-spacing-100) * 16);
-    text-wrap: balance;
-
-    @media (max-width: 640px) {
-      flex-direction: column;
-    }
-  }
-
-  &__content {
-    align-items: flex-start;
-    max-inline-size: 40%;
-
-    @media (max-width: 640px) {
-      align-items: unset;
-      max-inline-size: 100%;
-      text-align: center;
-    }
-  }
-
-  &__image {
-    @media (max-width: 640px) {
-      display: none;
-    }
-  }
-
-  @media (max-width: 640px) {
-    padding-inline: var(--dt-spacing-100) var(--dt-spacing-200);
-  }
-}
-
-.links {
-  padding-block: var(--dt-spacing-600);
-  text-wrap: balance;
-
-  @media (max-width: 640px) {
-    display: block !important;
-  }
-}
-
-.link {
-  @media (max-width: 640px) {
-    display: block;
-    grid-column: 1 / -1 !important;
-    margin-block-end: calc(var(--dt-spacing-100) * 9);
-  }
-}
-
 //  ============================================================================
 //  $   DOC PAGE TITLE
 //      The <h1> element
@@ -862,24 +452,26 @@ code {
 .dialtone-wall {
   display: grid;
   gap: var(--dt-spacing-200);
-  margin-block-start: var(--dt-spacing-200);
+
+  grid-template-columns: [full-start] repeat(
+      2,
+      [col-start] var(--col-width, minmax(0, 1fr)) [col-end]
+    ) [full-end] !important
+  ;
 
   @media screen and (min-width: 640px) {
     grid-template-columns: [full-start] repeat(
-        2,
-        [col-start] var(--col-width, minmax(0, 1fr)) [col-end]
-      ) [full-end] !important;
-    gap: var(--dt-spacing-400);
-  }
-
-  @media screen and (min-width: 768px) {
-    grid-template-columns: [full-start] repeat(
         3,
         [col-start] var(--col-width, minmax(0, 1fr)) [col-end]
-      ) [full-end] !important;
+      ) [full-end] !important
+    ;
   }
 
-  @media screen and (min-width: 1354px) {
+  @media screen and (min-width: 960px) {
+    gap: var(--dt-spacing-300);
+  }
+
+  @media screen and (min-width: 1264px) {
     gap: var(--dt-spacing-400);
   }
 
@@ -917,20 +509,15 @@ code {
   }
 
   &__thumb {
-    inline-size: auto;
-    block-size: var(--dt-layout-150);
-
-    @media screen and (min-width: 640px) {
-      display: block;
-      inline-size: 100%;
-      block-size: auto;
-    }
+    inline-size: 100%;
+    block-size: auto;
+    display: block;
   }
 
   &__details {
     display: flex;
     flex-direction: column;
-    gap: var(--dt-spacing-100);
+    gap: var(--dt-spacing-25);
     padding: var(--dt-spacing-300);
   }
 
@@ -939,17 +526,28 @@ code {
     gap: var(--dt-spacing-100);
     align-items: center;
     color: var(--dt-color-foreground-secondary);
-    font: var(--dt-text-headline-xl);
+    font: var(--dt-text-headline-md);
     line-height: var(--dt-font-line-height-200);
+
+    @media screen and (min-width: 640px) {
+      font: var(--dt-text-headline-lg);
+    }
+    @media screen and (min-width: 960px) {
+      font: var(--dt-text-headline-xl);
+    }
   }
 
   &__title-text {
+    text-box-trim: trim-start;
+    text-box-edge: cap alphabetic;
     flex: 1;
   }
 
   &__description {
     display: none;
     font: var(--dt-text-body-md);
+    text-box-trim: trim-end;
+    text-box-edge: cap alphabetic;
 
     @media screen and (min-width: 1024px) {
       display: block;
@@ -972,8 +570,8 @@ code {
       }
     }
 
-    // Override default 3-column at 768px, keep at 2 columns
-    @media screen and (min-width: 768px) {
+    // Override the default 3-column switch, keep at 2 columns
+    @media screen and (min-width: 640px) {
       grid-template-columns: [full-start] repeat(
           2,
           [col-start] var(--col-width, minmax(0, 1fr)) [col-end]
@@ -1087,14 +685,6 @@ code {
   &:hover {
     background-color: var(--primary-color-hover);
   }
-}
-
-//  ============================================================================
-//  $   DEBUGGING / TEST
-//  ----------------------------------------------------------------------------
-
-[outline] {
-  outline: var(--dt-spacing-25) solid orangered;
 }
 
 // ============================================================================

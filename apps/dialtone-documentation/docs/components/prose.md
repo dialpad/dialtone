@@ -1,14 +1,13 @@
 ---
 title: Prose
-description: A container that applies typographic defaults to raw HTML content, restoring margins, list styles, heading sizes, and other block-level formatting that the Dialtone reset strips away.
+description: Typographic wrapper for rich HTML content affected by reset styles.
 status: beta
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-prose--default
 figma_url: planned
 keywords: ["typography", "markdown", "content", "article", "html", "rich content", "d-prose", "DtProse", "dt-prose"]
+combinator: DtProse
 ---
-
-<component-combinator component-name="DtProse" />
 
 ## Usage
 

@@ -71,7 +71,7 @@ Use `d-pls-center{-n}` to align a grid item along the center of their block and/
             <span v-if="i !== c">.d-pls-{{ c }}-{{ i }}</span>
             <span v-else>.d-pls-{{ c }}</span>
           </th>
-          <td class="d-code--sm" outline>
+          <td class="d-code--sm">
             <span v-if="i !== c">place-self: {{ c }} {{ i }} !important;</span>
             <span v-else>place-self: {{ c }} !important;</span>
           </td>

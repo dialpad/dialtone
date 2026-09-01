@@ -1,14 +1,13 @@
 ---
 title: Emoji
-description: "Renders an emoji from a shortcode such as :smile: or unicode character such as 😄."
+description: Renderer for emoji shortcodes and Unicode characters.
 status: ready
 thumb: true
 figma: planned
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji--default
 keywords: ["emoticon","smiley","d-emoji","DtEmoji","dt-emoji"]
+combinator: DtEmoji
 ---
-
-<component-combinator component-name="DtEmoji" />
 
 ## Variants and Examples
 
@@ -39,10 +38,6 @@ keywords: ["emoticon","smiley","d-emoji","DtEmoji","dt-emoji"]
 <!-- @code -->
 <dt-emoji size="100|200|300|400|500|600|700|800" code=":smile:" />
 ```
-
-## Vue API
-
-<component-vue-api component-name="emoji" />
 
 ## Assets
 
@@ -166,3 +161,7 @@ By default the emoji will be rendered with an aria-label attribute describing th
 const sizes = ['100', '200', '300', '400', '500', '600', '700', '800'];
 
 </script>
+
+## Vue API
+
+<component-vue-api component-name="emoji" />

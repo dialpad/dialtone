@@ -19,7 +19,7 @@ module.exports = {
   meta: {
     type: 'suggestion', // `problem`, `suggestion`, or `layout`
     docs: {
-      description: 'Combining multiple typography utility categories is discouraged in favor of composed typography utilities',
+      description: 'Detects separate typography utilities that should use a composed typography utility.',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/recommend-typography-style.md', // URL to the documentation page for this rule
     },

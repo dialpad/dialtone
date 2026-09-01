@@ -1,6 +1,6 @@
 ---
 title: Modal
-description: A modal focuses the user's attention on a single task or message.
+description: Blocking dialog for focused tasks or decisions.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-modal--default
@@ -10,8 +10,6 @@ keywords: ["dialog", "popup", "overlay", "lightbox", "d-modal", "DtModal", "dt-m
 ```vue demo-only
 <example-modal />
 ```
-
-<!-- <component-combinator component-name="DtModal" /> -->
 
 ## Usage
 

@@ -1,209 +1,86 @@
 <template>
-  <!-- Item with children - render as collapsible -->
   <dt-collapsible
-    v-if="subItems.length > 0"
-    v-model:open="isOpen"
+    v-if="hasChildren"
+    :open="isOpen"
     element-type="li"
-    class="dt-sidebar-item"
+    class="d-w100p"
+    anchor-class="d-w100p"
   >
-    <template #anchor="{ attrs, listeners }">
-      <dt-stack
-        direction="row"
-        class="d-ps-relative"
-      >
-        <dt-button
-          :id="labelId"
-          v-bind="attrs"
-          :to="item.link || undefined"
-          :active="isActiveLink(item.link, true)"
-          importance="clear"
-          kind="muted"
-          label-class="d-jc-flex-start d-ta-left d-fw-normal d-tw-pretty"
-          :size="depth === 0 ? 'lg' : undefined"
-          :tabindex="actionableTabIndex"
-          :class="[
-            'd-w100p dialtone-shell-btn',
-            {
-              'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
-              'd-pie-200': depth === 1,
-            },
-            {
-              'd-pis-600': depth === 1,
-            },
-          ]"
-          :data-sidebar-link="item.link"
-          @click="handleClick($event, listeners, item.link)"
-        >
-          <dt-icon
-            v-if="depth === 0 && item.icon"
-            :name="item.icon"
-            size="400"
-            class="d-mie-150 d-fc-muted"
-          />
-          {{ item.text }}
-          <template #endIcon="{ iconSize }">
-            <dt-icon
-              v-if="item.link"
-              :name="isOpen ? 'chevron-down' : 'chevron-right'"
-              :size="iconSize"
-            />
-          </template>
-        </dt-button>
-      </dt-stack>
+    <template #anchor="{ attrs }">
+      <sidebar-item-row
+        :id="labelId"
+        :item="item"
+        :depth="depth"
+        :presentation="presentation"
+        :active="isActive"
+        :highlighted="isHighlighted"
+        :collapsible-attrs="attrs"
+        :open="isOpen"
+        :first-nested-child="firstNestedChild"
+        collapsible
+        @click="handleClick"
+      />
     </template>
     <template #content>
-      <div v-dt-scrollbar class="d-hmx-700">
-        <dt-stack
-          as="ul"
-          :aria-labelledby="labelId"
-          gap="25"
-          :class="{
-            'd-pbs-50': depth === 0 || depth === 1,
-          }"
-        >
-          <li
-            v-for="(subItem, index) in subItems"
-            :key="subItem.text"
-          >
-            <sidebar-item
-              v-if="subItem.children"
-              :item="subItem"
-              :depth="depth + 1"
-              :open-items="openItems"
-              nested
-              @toggle="(itemKey, shouldOpen) => $emit('toggle', itemKey, shouldOpen)"
-            />
-            <div
-              v-else-if="subItem.status === 'planned'"
-              class="d-btn d-w100p d-jc-flex-start d-ta-left d-fw-normal d-fc-muted h:d-bgc-transparent d-c-default"
-              :class="[{ 'd-pis-600': depth === 0 }, { 'd-pis-800': depth === 1 }]"
-            >
-              <dt-stack as="span" direction="row" justify="space-between" class="d-w100p">
-                {{ subItem.text }}
-                <dt-badge v-bind="getBadge(subItem.status)" class="d-mis-50" />
-              </dt-stack>
-            </div>
-            <dt-button
-              v-else-if="isExternalUrl(subItem.link)"
-              :href="subItem.link"
-              target="_blank"
-              rel="noopener noreferrer"
-              importance="clear"
-              kind="muted"
-              label-class="d-jc-flex-start d-ta-left d-fw-normal d-tw-pretty"
-              :class="[
-                'dialtone-shell-btn d-w100p d-tw-pretty',
-                { 'd-pis-600': depth === 0 },
-                { 'd-pis-800': depth === 1 },
-              ]"
-            >
-              <dt-stack as="span" direction="row" justify="space-between" class="d-w100p">
-                {{ subItem.text }}
-                <dt-badge v-if="getBadge(subItem.status)" v-bind="getBadge(subItem.status)" class="d-mis-50" />
-              </dt-stack>
-            </dt-button>
-            <dt-button
-              v-else
-              :to="subItem.link"
-              :active="isActiveLink(subItem.link)"
-              importance="clear"
-              kind="muted"
-              label-class="d-jc-flex-start d-tw-pretty"
-              :data-sidebar-link="subItem.link"
-              :class="[
-                'd-w100p d-fw-normal dialtone-shell-btn',
-                { 'd-pis-600': depth === 0 },
-                { 'd-pis-800': depth === 1 },
-                {
-                  'd-mbs-25': (index === 0 && nested), // add margin top to first nested item
-                },
-              ]"
-            >
-              <dt-stack
-                v-if="getBadge(subItem.status)"
-                as="span"
-                direction="row"
-                justify="space-between"
-                class="d-w100p"
-              >
-                {{ subItem.text }}
-                <dt-badge v-bind="getBadge(subItem.status)" class="d-mis-50" />
-              </dt-stack>
-              <template v-else>
-                {{ subItem.text }}
-              </template>
-            </dt-button>
-          </li>
-        </dt-stack>
-      </div>
+      <dt-stack
+        as="ul"
+        :aria-labelledby="labelId"
+        gap="25"
+        :class="{ 'd-pbs-50': depth === 0 || depth === 1 }"
+      >
+        <sidebar-item
+          v-for="(subItem, index) in subItems"
+          :key="getNavItemKey(subItem)"
+          :item="subItem"
+          :depth="depth + 1"
+          :open-items="openItems"
+          :item-path="`${itemPath}.${index}`"
+          :peer-keys="subItemKeys"
+          :active-item-path="activeItemPath"
+          :search-active="searchActive"
+          :presentation="presentation"
+          :nested="Boolean(subItem.children?.length)"
+          :first-nested-child="nested && index === 0 && !subItem.children?.length"
+          :persistent="persistent"
+          @toggle="forwardToggle"
+        />
+      </dt-stack>
     </template>
   </dt-collapsible>
 
-  <!-- Item without children - render as simple link -->
-  <li
-    v-else
-    class="dt-sidebar-item"
-  >
-    <dt-button
-      :to="item.link || undefined"
-      :active="isActiveLink(item.link)"
-      importance="clear"
-      kind="muted"
-      label-class="d-jc-flex-start d-ta-left d-fw-normal d-tw-pretty"
-      :size="depth === 0 ? 'lg' : undefined"
-      :class="[
-        'd-w100p dialtone-shell-btn',
-        {
-          'd-headline--eyebrow d-fw-semibold d-bgc-transparent d-c-default': !item.link,
-        },
-      ]"
-      :data-sidebar-link="item.link"
-    >
-      <dt-icon
-        v-if="depth === 0 && item.icon"
-        :name="item.icon"
-        size="400"
-        class="d-mie-150 d-fc-muted"
-      />
-      <dt-stack
-        v-if="getBadge(item.status)"
-        as="span"
-        direction="row"
-        justify="space-between"
-        class="d-w100p"
-      >
-        {{ item.text }}
-        <dt-badge v-bind="getBadge(item.status)" class="d-mis-50" />
-      </dt-stack>
-      <template v-else>
-        {{ item.text }}
-      </template>
-    </dt-button>
+  <li v-else>
+    <sidebar-item-row
+      :id="resultId"
+      :item="item"
+      :depth="depth"
+      :presentation="presentation"
+      :active="isActive"
+      :highlighted="isHighlighted"
+      :first-nested-child="firstNestedChild"
+    />
   </li>
 </template>
 
 <script setup>
-import { computed, ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
-const isExternalUrl = (link) => /^https?:\/\//.test(link);
-
-const STATUS_BADGES = {
-  beta: { type: 'info', text: 'Beta' },
-  new: { type: 'bulletin', text: 'New' },
-  planned: { text: 'Planned' },
-};
-const getBadge = (status) => STATUS_BADGES[status];
+import { computed } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import SidebarItemRow from './SidebarItemRow.vue';
+import {
+  getCollapsibleNavigationTarget,
+  isDescendantOfNavCollection,
+} from '../utils/navRoutes.js';
+import { collectPeerKeys, getNavItemKey, getSearchResultId } from '../utils/sidebarSearch.js';
 
 const props = defineProps({
-  isSinglePage: {
+  item: {
+    type: Object,
+    required: true,
+  },
+  nested: {
     type: Boolean,
     default: false,
   },
-  item: {
-    type: Object,
-    default: () => {},
-  },
-  nested: {
+  firstNestedChild: {
     type: Boolean,
     default: false,
   },
@@ -215,80 +92,72 @@ const props = defineProps({
     type: Set,
     required: true,
   },
+  itemPath: {
+    type: String,
+    required: true,
+  },
+  peerKeys: {
+    type: Array,
+    default: () => [],
+  },
+  activeItemPath: {
+    type: String,
+    default: null,
+  },
+  searchActive: {
+    type: Boolean,
+    default: false,
+  },
+  presentation: {
+    type: String,
+    default: 'primary',
+  },
+  persistent: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(['toggle']);
-
-const subItems = computed(() => {
-  return props.item?.children || [];
-});
-const labelId = computed(() => {
-  return `sidebar-label-${props.item?.text?.toLowerCase().replace(/\s+/g, '-')}`;
-});
-const actionableTabIndex = computed(() => {
-  // Items without links are not actionable and should be removed from tab order
-  return props.item.link ? undefined : -1;
-});
-
 const route = useRoute();
-const hash = ref(route.hash);
+const router = useRouter();
 
-// Controlled component - open state comes from parent via openItems Set
-const isOpen = computed(() => {
-  const key = props.item.link || props.item.text;
-  return props.openItems.has(key);
+const subItems = computed(() => props.item.children || []);
+const hasChildren = computed(() => subItems.value.length > 0);
+const subItemKeys = computed(() => collectPeerKeys(subItems.value));
+const itemKey = computed(() => getNavItemKey(props.item));
+const isOpen = computed(() => props.openItems.has(itemKey.value));
+const isHighlighted = computed(() => (
+  props.searchActive && props.activeItemPath === props.itemPath
+));
+const isGroupingOnlyParent = computed(() => (
+  hasChildren.value && subItems.value.some(child => child.link === props.item.link)
+));
+const isRouteActive = computed(() => {
+  if (!props.item.link || isGroupingOnlyParent.value) return false;
+  if (isDescendantOfNavCollection(props.item.link, route.path)) return true;
+
+  return route.path === props.item.link;
 });
+const isActive = computed(() => (
+  props.searchActive ? isHighlighted.value : isRouteActive.value
+));
+const labelId = computed(() => `sidebar-label-${props.itemPath.replace(/\./g, '-')}`);
+const resultId = computed(() => getSearchResultId(props.itemPath));
 
-watch(route, (newRoute) => {
-  hash.value = newRoute.hash;
-});
+function handleClick (event) {
+  event.preventDefault();
+  const navigationTarget = getCollapsibleNavigationTarget(props.item, {
+    persistent: props.persistent,
+    open: isOpen.value,
+    routePath: route.path,
+  });
 
-// isExactActive from router-link doesn't work with hashes,
-// that's why we need to check for the hash if it's a single page.
-// Now computed from route directly instead of router-link's scoped slot.
-const isActiveLink = (link, isParentButton = false) => {
-  if (!link) return false;
+  emit('toggle', itemKey.value, !isOpen.value, props.peerKeys);
+  if (navigationTarget) router.push(navigationTarget);
+}
 
-  // Check if this is a grouping-only parent (link matches first child)
-  // Only apply this check when evaluating the parent button itself, not child buttons
-  if (isParentButton && props.item.children && props.item.children.length > 0) {
-    const firstChildLink = props.item.children[0].link;
-    if (link === firstChildLink) {
-      // This is a grouping-only parent - don't show as active
-      return false;
-    }
-  }
-
-  // Special case: Highlight What's New when viewing blog posts
-  if (link === '/dialtone/whats-new/' && route.path.startsWith('/dialtone/whats-new/posts/')) {
-    return true;
-  }
-
-  const isExactActive = route.path === link;
-  return props.isSinglePage ? hash.value === link : isExactActive;
-};
-
-function handleClick (event, listeners, link) {
-  const itemKey = props.item.link || props.item.text;
-
-  // If we're already on this exact page, just toggle the collapsible
-  if (link && route.path === link) {
-    event.preventDefault();
-    // Only emit toggle to parent - don't call listeners to avoid double toggle
-    emit('toggle', itemKey, !isOpen.value);
-    return;
-  }
-
-  // If no link, just toggle
-  if (!link) {
-    event.preventDefault();
-    emit('toggle', itemKey, !isOpen.value);
-  }
+function forwardToggle (childKey, shouldOpen, childPeerKeys) {
+  emit('toggle', childKey, shouldOpen, childPeerKeys);
 }
 </script>
-
-<style lang="less" scoped>
-.dt-sidebar-item {
-  inline-size: var(--dt-layout-100-percent);
-}
-</style>

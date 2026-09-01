@@ -1,12 +1,11 @@
 ---
 title: Scroller
-description: A virtualized list that renders only what's visible, so large datasets scroll without slowing down the page.
+description: Virtualized list for efficiently rendering large datasets.
+keywords: ["virtualized list", "large list", "overflow", "infinite scroll", "DtScroller", "dt-scroller"]
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-scroller--default
 ---
-
-<!-- <component-combinator component-name="DtScroller" /> -->
 
 ## Usage
 

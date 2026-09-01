@@ -5,6 +5,8 @@
     :documentation="componentDocumentation"
     :variants="componentVariants"
     :dev-mode="isDev"
+    :full-screen="fullScreen"
+    @update:full-screen="$emit('update:fullScreen', $event)"
   />
 </template>
 
@@ -27,11 +29,13 @@ export default {
       required: true,
     },
 
-    showBlueprints: {
+    fullScreen: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
   },
+
+  emits: ['update:fullScreen'],
 
   computed: {
     component () {

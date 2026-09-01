@@ -1,6 +1,7 @@
 ---
 title: Migrating to Logical Naming for Slots, Props, and Events
 description: Vue component APIs now use logical direction names (start/end/blockStart/blockEnd) instead of physical names (left/right/top/bottom/alpha/omega). Backward-compatible, with ESLint rule and migration script.
+keywords: ["logical properties", "inline", "block", "start", "end", "rtl", "alpha omega"]
 ---
 
 ## TLDR

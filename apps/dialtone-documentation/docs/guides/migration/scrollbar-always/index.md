@@ -1,6 +1,7 @@
 ---
 title: "Scrollbar: :never renamed to :always"
 description: "The v-dt-scrollbar directive argument :never and the DtBox scrollbar=\"never\" prop value have been renamed to :always and scrollbar=\"always\" to reflect their actual meaning."
+keywords: ["DtScrollbar", "v-dt-scrollbar", "DtBox", "overflow", "directive", "prop"]
 ---
 
 ## TLDR

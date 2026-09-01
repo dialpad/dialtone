@@ -1,13 +1,12 @@
 ---
 title: Combobox Multi-Select
-description: Select allows users to make a single selection or multiple selections from a list of options.
+description: Searchable input for selecting multiple options.
+keywords: ["filter", "dropdown", "listbox", "DtComboboxMultiSelect", "dt-combobox-multi-select"]
 status: ready
 thumb: true
 # image: assets/images/components/combobox-multi-select.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-multi-select--default
 ---
-
-<!-- <component-combinator component-name="DtComboboxMultiSelect" /> -->
 
 ```vue demo
 <!-- @class d-d-block -->
@@ -148,10 +147,6 @@ Adds validation for max selection. Make sure to provide the following props:
 </dt-combobox-multi-select>
 ```
 
-## Vue API
-
-<component-vue-api component-name="comboboxmultiselect" />
-
 ## Accessibility
 
 A screen reader visible only close button is added by default.
@@ -233,3 +228,7 @@ function onMaxSelected () {
   console.log('Max selected reached');
 }
 </script>
+
+## Vue API
+
+<component-vue-api component-name="comboboxmultiselect" />

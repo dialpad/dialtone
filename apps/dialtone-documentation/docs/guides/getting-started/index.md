@@ -1,6 +1,7 @@
 ---
 title: Getting Started
 description: A quick start guide to add Dialtone to your project.
+keywords: ["install", "npm", "setup", "import", "less", "css"]
 ---
 
 ## Adding Dialtone to Your Project

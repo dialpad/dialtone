@@ -12,7 +12,7 @@ module.exports = {
   meta: {
     type: 'suggestion', // `problem`, `suggestion`, or `layout`
     docs: {
-      description: "Usage of d-flg* utility classes are deprecated and will be removed in the future.",
+      description: "Detects usage of deprecated `d-flg*` flex-gap utilities.",
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-flex-gap-classes.md', // URL to the documentation page for this rule
     },

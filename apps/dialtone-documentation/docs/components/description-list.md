@@ -1,14 +1,13 @@
 ---
 title: Description List
-description: Description lists are a way to group and clarify associated ideas. They are notably useful when outlining and explaining terms, like those in a glossary.
+description: Structured label-value pairs for terms, metadata, and details.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-description-list--default
 figma: planned
 keywords: ["definition list", "key value", "dl", "d-description-list", "DtDescriptionList", "dt-description-list", "metadata list", "property list"]
+combinator: DtDescriptionList
 ---
-
-<component-combinator component-name="DtDescriptionList" />
 
 ## Variants and Examples
 

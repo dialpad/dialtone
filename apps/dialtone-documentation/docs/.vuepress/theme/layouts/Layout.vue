@@ -1,64 +1,75 @@
 <template>
-  <migration-banner />
-  <dt-root-layout
-    :fixed="false"
-    :header-sticky="true"
-    header-class="d-ol-none"
-    sidebar-class="dialtone-sidebar d-d-none lg:d-d-block d-ol-none"
-    footer-class="d-text-right d-ol-none"
-    content-class="d-ol-none dialtone-content"
-  >
-    <template #header>
-      <div class="dialtone-header">
-        <!-- <dialtone-logo /> -->
-        <router-link
-          class="d-pis-100 d-td-none"
-          title="Dialtone homepage"
-          to="/"
-        >
-          <DtStack direction="row" gap="200">
-            <DtIllustration name="dialpad-logo" />
-            <DtBox v-if="showBranchBadge" padding-block-start="200" :title="branchName">
-              <DtStack direction="row" gap="50">
-                <dt-icon-branch class="d-fc-muted" :size="100" />
-                <DtText as="p" kind="body" size="100" tone="muted" class="d-wmx-250" truncate>
-                  {{ branchName }}
-                </DtText>
-              </DtStack>
-            </DtBox>
-          </DtStack>
-        </router-link>
-        <navbar
-          @search="openSearch"
-        />
-        <mobile-sidebar
-          v-if="isMobile && route.path !== '/'"
-        />
-      </div>
-      <!-- eslint-disable-next-line vue/no-undef-components -->
-      <div
-        id="docsearch"
-        ref="docSearchBtn"
-        class="d-d-none"
-        options=""
-      />
-    </template>
-    <template
-      v-if="!$frontmatter.home && !$frontmatter.noSidebar"
-      #sidebar
+  <dt-stack class="d-ps-fixed d-all-0 d-of-hidden">
+    <migration-banner />
+    <doc-header
+      v-if="viewport.pick({
+        default: true,
+        lg: false,
+      })"
+      :mobile-menu-open="isMobileMenuOpen"
+      @toggle-mobile-menu="toggleMobileMenu"
+    />
+    <!--
+      `v-if` on the drawer so the narrow shell's sidebar is only instantiated while it is
+      open, never alongside the rail's copy in LayoutBody. `v-show` on the body so opening
+      the drawer hides the page instead of unmounting it — the two share the same flex
+      slot, so only one may be displayed at a time.
+    -->
+    <DtBox
+      v-if="isMobileDrawerOpen"
+      id="sidebar-mobile"
+      padding-inline="100"
+      surface="secondary"
+      scrollbar="always"
+      min-block-size="0"
+      class="d-fl1"
     >
       <sidebar />
-    </template>
-    <template #default>
-      <home v-if="$frontmatter.home" />
-      <page
-        v-else
+    </DtBox>
+    <DtBox
+      v-show="!isMobileDrawerOpen"
+      id="layout-body"
+      padding-block-end="0"
+      min-block-size="0"
+      class="d-fl1"
+    >
+      <layout-body
         :prev="$frontmatter.prev || prev"
         :next="$frontmatter.next || next"
-        :is-mobile="isMobile"
+        :component-combinator-name="componentCombinatorName"
+        :full-bleed="props.fullBleed"
       />
-    </template>
-  </dt-root-layout>
+    </DtBox>
+    <dt-box
+      v-if="showBranchBadge"
+      padding-block="25"
+      padding-inline="75"
+      border-width="100"
+      position="fixed"
+      max-inline-size="30"
+      inset-block-end="100"
+      inset-inline-end="100"
+      z-index="notification"
+      border-radius="300"
+      shadow="card"
+      surface="overlay"
+    >
+      <dt-stack :title="branchName" direction="row" gap="50">
+        <dt-icon name="branch" class="d-fc-muted" :size="100" />
+        <dt-text
+          as="p"
+          kind="body"
+          size="100"
+          tone="muted"
+          class="d-c-default"
+          :title="branchName"
+          truncate
+        >
+          {{ branchName }}
+        </dt-text>
+      </dt-stack>
+    </dt-box>
+  </dt-stack>
 </template>
 
 <script setup>
@@ -68,79 +79,64 @@
 // neither is tracked by VuePress's head management system.
 import '@dialpad/dialtone-tokens/tokens-base-light.css';
 import '@dialpad/dialtone-tokens/tokens-dp-light.css';
-import Navbar from '../components/Navbar.vue';
+import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
+import DocHeader from '../components/Header.vue';
+import LayoutBody from '../components/LayoutBody.vue';
 import Sidebar from '../components/Sidebar.vue';
-import Home from '../components/Home.vue';
-import Page from '../components/Page.vue';
-import MobileSidebar from '../components/MobileSidebar.vue';
 import MigrationBanner from '../../baseComponents/MigrationBanner.vue';
-import { computed, ref, watch, onMounted, onUnmounted } from 'vue';
+import { getComponentCombinatorName } from '../utils/componentCombinator.js';
+import { isExternalUrl } from '../utils/isExternalUrl';
+import { dedupeNavItemsByLink, findNavCollectionForRoute } from '../utils/navRoutes.js';
+import { computed, nextTick, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { useThemeLocaleData } from '@vuepress/plugin-theme-data/client';
-import { disableRootScrolling, enableRootScrolling } from '@dialpad/dialtone-vue';
-import { DtIconBranch } from '@dialpad/dialtone-icons/vue';
+import { usePageData } from 'vuepress/client';
+import { DtStack } from '@dialpad/dialtone-vue';
+import {
+  findPageScrollContainer,
+  scrollRouteToTop,
+  shouldScrollRouteToTop,
+} from '../utils/pageToc.js';
+
+const props = defineProps({
+  fullBleed: {
+    type: Boolean,
+    default: false,
+  },
+});
+
+const branchName = __DIALTONE_BRANCH_NAME__;
+const showBranchBadge = branchName && (__VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__);
 
 const route = useRoute();
 const prev = ref(null);
 const next = ref(null);
-const docSearchBtn = ref(null);
 const items = useThemeLocaleData().value.sidebar;
-const mobileBreakpoint = 980;
-const branchName = __DIALTONE_BRANCH_NAME__;
-const showBranchBadge = branchName && (__VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__);
-const evaluateWindowWidth = () => {
-  isMobile.value = window.innerWidth <= mobileBreakpoint;
+const pageData = usePageData();
+const componentCombinatorName = computed(() => getComponentCombinatorName(pageData.value?.frontmatter));
+const viewport = useViewportBreakpoints();
+const isMobileMenuOpen = ref(false);
+
+// The drawer only exists in the narrow shell; crossing to the rail breakpoint with it
+// still flagged open must not render a second sidebar.
+const isMobileDrawerOpen = computed(() => isMobileMenuOpen.value && !viewport.atLeast('lg'));
+
+const toggleMobileMenu = () => {
+  isMobileMenuOpen.value = !isMobileMenuOpen.value;
 };
-let observer = null;
-
-const isMobile = ref(false);
-
-/**
- * Determine which top-level group the current route belongs to
- * @param {string} path Current route path
- * @returns {string} The top-level group key
- */
-function detectTopLevelGroup(path) {
-  // Map routes to top-level groups
-  const designSystemPaths = ['/components/', '/utilities/', '/tokens/', '/guides/', '/about/', '/functions-and-utilities/'];
-
-  if (designSystemPaths.some(p => path.includes(p))) {
-    return 'dialtone';
-  }
-  if (path.includes('/foundations/')) {
-    return 'foundations';
-  }
-  if (path.includes('/ui-kits/')) {
-    return 'ui-kits';
-  }
-  if (path.includes('/careers/')) {
-    return 'careers';
-  }
-  if (path.includes('/articles/')) {
-    return 'articles';
-  }
-  if (path.includes('/dialtone/')) {
-    return 'dialtone';
-  }
-
-  // Default to dialtone for any unknown paths
-  return 'dialtone';
-}
 
 /**
  * Recursively extract all navigable pages from a tree structure
  * Groups them by their parent category for pagination purposes
  * Includes both parent pages with children AND leaf nodes
  */
-function extractLeafNodes(items, planned = false) {
+function extractLeafNodes(items) {
   const groups = [];
 
   function traverse(itemsList, currentGroup = []) {
     itemsList.forEach(item => {
-      if (item.planned && !planned) return;
-
       // Include this item if it has a link (it's a navigable page)
-      if (item.link) {
+      if (item.link && !isExternalUrl(item.link)) {
         currentGroup.push(item);
       }
 
@@ -155,7 +151,7 @@ function extractLeafNodes(items, planned = false) {
     const group = [];
 
     // Include parent if it has a link
-    if (parentItem.link && (!parentItem.planned || planned)) {
+    if (parentItem.link && !isExternalUrl(parentItem.link)) {
       group.push(parentItem);
     }
 
@@ -165,32 +161,17 @@ function extractLeafNodes(items, planned = false) {
     }
 
     if (group.length > 0) {
-      groups.push(group);
+      groups.push(dedupeNavItemsByLink(group));
     }
   });
 
   return groups;
 }
 
-// Remove "planned" items to avoid errors
+// Flatten the nav tree into per-section page groups for prev/next pagination.
 const currentItems = computed(() => {
-  // Check if using new top-level groups structure
-  if (items.topLevelGroups) {
-    const topLevelGroup = detectTopLevelGroup(route.path);
-    const sections = items.topLevelGroups[topLevelGroup]?.sections || {};
-
-    // Flatten all sections into a single array
-    const allSections = Object.values(sections).flat();
-    if (!allSections.length) return null;
-
-    // Extract all leaf nodes (actual pages) recursively
-    return extractLeafNodes(allSections);
-  }
-
-  // Fallback to old flat structure (for backwards compatibility)
-  const key = Object.keys(items).filter(item => route.path.includes(item));
-  if (!Array.isArray(items[key])) return null;
-  return items[key].map(item => item.children.filter(child => !child.planned));
+  if (!items.nav?.length) return null;
+  return extractLeafNodes(items.nav);
 });
 
 // Finds the current item
@@ -201,16 +182,17 @@ const findCurrent = () => {
   prev.value = null;
   next.value = null;
 
-  if (route.path.includes('/dialtone/whats-new/posts/')) {
-    prev.value = { link: '/dialtone/whats-new/', text: 'Back to what\'s new' };
+  const collectionBackLink = findNavCollectionForRoute(route.path);
+  if (collectionBackLink) {
+    prev.value = collectionBackLink;
     return;
   }
 
-  const parentIndex = currentItems.value.findIndex(item => item.find(child => child.link === route.path));
+  const parentIndex = currentItems.value.findIndex(item => item.some(child => child.link === route.path));
   if (parentIndex === -1) return;
 
   const filteredItems = currentItems.value[parentIndex];
-  const childIndex = Object.values(filteredItems).findIndex(child => child.link === route.path);
+  const childIndex = filteredItems.findIndex(child => child.link === route.path);
   const isFirstItem = childIndex === 0;
   const isLastItem = childIndex === filteredItems.length - 1;
   const prevItems = currentItems.value[parentIndex - 1];
@@ -219,38 +201,26 @@ const findCurrent = () => {
   prev.value = isFirstItem && prevItems ? prevItems[prevItems.length - 1] : filteredItems[childIndex - 1];
   next.value = isLastItem && nextItems ? nextItems[0] : filteredItems[childIndex + 1];
 };
-const openSearch = () => {
-  docSearchBtn.value?.children[0]?.click();
-};
 
 watch(
   () => route.path,
   () => {
+    isMobileMenuOpen.value = false;
+
     if (route.path === '/') return;
     findCurrent();
   },
   { immediate: true },
 );
 
-onMounted(() => {
-  evaluateWindowWidth();
-  window.addEventListener('resize', evaluateWindowWidth);
+watch(
+  () => ({ path: route.path, hash: route.hash }),
+  async (to, from) => {
+    if (!shouldScrollRouteToTop(to, from)) return;
 
-  observer = new MutationObserver((mutationList) => {
-    for (const mutation of mutationList) {
-      if (mutation.type === 'attributes') {
-        mutation.target.classList.contains('DocSearch--active')
-          ? disableRootScrolling()
-          : enableRootScrolling();
-      }
-    }
-  });
-
-  observer.observe(document.body, { attributes: true });
-});
-
-onUnmounted(() => {
-  window.removeEventListener('resize', evaluateWindowWidth);
-  observer?.disconnect();
-});
+    await nextTick();
+    scrollRouteToTop(findPageScrollContainer());
+  },
+  { flush: 'post' },
+);
 </script>

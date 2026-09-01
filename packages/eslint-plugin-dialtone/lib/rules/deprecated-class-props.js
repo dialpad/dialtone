@@ -135,7 +135,7 @@ module.exports = {
   meta: {
     type: "suggestion",
     docs: {
-      description: "Detects usage of removed structural class props on Dialtone Vue components",
+      description: "Detects usage of removed structural class props on Dialtone Vue components.",
       recommended: false,
       url: "https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-class-props.md",
     },

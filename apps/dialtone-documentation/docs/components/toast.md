@@ -2,13 +2,12 @@
 title: Toast
 status: ready
 thumb: true
-description: A toast notice, sometimes called a snackbar, is a time-based message that appears based on users' actions. It contains at-a-glance information about outcomes and can be paired with actions.
+description: Temporary notification shown above page content after an action.
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-toast--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=233-3758
 keywords: ["notification", "snackbar", "alert", "message", "d-toast", "DtToast", "dt-toast", "flash message"]
+combinator: DtToast
 ---
-
-<component-combinator component-name="DtToast" />
 
 ## Variants and Examples
 
@@ -105,14 +104,6 @@ If you need to self-position the toast at the top center, use the `d-toast-wrapp
 </aside>
 ```
 
-## Vue API
-
-<component-vue-api component-name="toast" />
-
-## Classes
-
-<component-class-table component-name="toast" />
-
 ## Accessibility
 
 Avoid using toast for critical information since toast disappears automatically and make sure
@@ -168,3 +159,11 @@ function togglePinned () {
   pinned.value = !pinned.value;
 }
 </script>
+
+## Vue API
+
+<component-vue-api component-name="toast" />
+
+## Classes
+
+<component-class-table component-name="toast" />

@@ -1,5 +1,8 @@
 <template>
-  <Teleport to="body" :disabled="!isFullScreen">
+  <Teleport
+    to="body"
+    :disabled="!isFullScreen"
+  >
     <div
       v-bind="$attrs"
       :class="[
@@ -28,7 +31,12 @@
         >
           {{ component.name }}
         </dt-text>
-        <dt-stack v-else direction="row" gap="100" class="d-ai-center">
+        <dt-stack
+          v-else
+          direction="row"
+          gap="100"
+          class="d-ai-center"
+        >
           <dt-dropdown
             v-if="viewMode === 'single'"
             navigation-type="arrow-keys"
@@ -113,7 +121,10 @@
             </template>
           </dt-button>
         </dt-stack>
-        <dt-stack gap="100" direction="row">
+        <dt-stack
+          gap="100"
+          direction="row"
+        >
           <dt-button
             v-if="hasChanges"
             v-dt-tooltip="`Reset`"
@@ -134,8 +145,14 @@
             @click="toggleFullScreen"
           >
             <template #icon="{ iconSize }">
-              <dt-icon-minimize v-if="isFullScreen" :size="iconSize" />
-              <dt-icon-expand v-else :size="iconSize" />
+              <dt-icon-minimize
+                v-if="isFullScreen"
+                :size="iconSize"
+              />
+              <dt-icon-expand
+                v-else
+                :size="iconSize"
+              />
             </template>
           </dt-button>
         </dt-stack>
@@ -176,7 +193,10 @@
           :style="optionBarWidth ? { 'inline-size': optionBarWidth } : {}"
         />
       </div>
-      <div v-if="viewMode === 'single'" class="dialtone-playground__end">
+      <div
+        v-if="viewMode === 'single'"
+        class="dialtone-playground__end"
+      >
         <dtc-code-panel
           :info="info"
           :options="options"
@@ -725,7 +745,6 @@ export default {
     inline-size: var(--dt-layout-450);
     max-inline-size: var(--dt-size-1000);
     flex-shrink: 0;
-    max-block-size: var(--dt-size-950);
     font: var(--dt-text-body-sm);
 
     :where(.dialtone-playground--fullscreen) & {

@@ -1,12 +1,12 @@
 ---
 title: Emoji Picker
 thumb: true
-description: A emoji picker component that allows you to view and select an emoji from a list.
+description: Searchable picker for browsing and selecting emoji.
+keywords: ["reaction", "emoticon", "smiley", "DtEmojiPicker", "dt-emoji-picker"]
 status: ready
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji-picker--default
+combinator: DtEmojiPicker
 ---
-
-<component-combinator component-name="DtEmojiPicker" />
 
 ## Variants and Examples
 
@@ -109,10 +109,6 @@ storybook: https://dialtone.dialpad.com/vue/?path=/story/components-emoji-picker
 </dt-popover>
 ```
 
-## Vue API
-
-<component-vue-api component-name="emoji_picker" />
-
 ## Usage
 
 We recommend to wrap the emoji picker in a `dt-popover` component.
@@ -212,3 +208,7 @@ const recentlyUsedEmojis = [
 ];
 
 </script>
+
+## Vue API
+
+<component-vue-api component-name="emoji_picker" />

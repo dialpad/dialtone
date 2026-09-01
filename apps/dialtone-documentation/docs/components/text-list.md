@@ -1,6 +1,6 @@
 ---
 title: Text List
-description: Semantic text lists for bulleted, numbered, nested, and custom-marker content.
+description: Semantic bullet, numbered, nested, and custom-marker lists.
 status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-text-list--default
@@ -20,9 +20,8 @@ keywords:
     "ol",
     "li",
   ]
+combinator: DtTextList
 ---
-
-<component-combinator component-name="DtTextList" />
 
 ## Usage
 
