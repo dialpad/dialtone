@@ -11,6 +11,14 @@
     >
       <gradient-hero-content />
     </dt-box>
+    <dt-box
+      aria-hidden="true"
+      position="absolute"
+      inset-block-end="0"
+      inset-inline="0"
+      z-index="base1"
+      class="home-gradient-hero__bottom-fade-out"
+    />
   </halftone-surface>
 </template>
 
@@ -25,12 +33,13 @@ import HalftoneSurface from './HalftoneSurface.vue';
 .home-gradient-hero {
   --overlay-color-surface: var(--halftone-color-background);
   --overlay-opacity: 0;
+  --fadeout-block-size: var(--dt-layout-75);
 
   /* The overhang gives the scroll-driven canvas parallax room to travel without
      uncovering the bottom of the hero. */
   --halftone-parallax-overflow: 20%;
 
-  block-size: 100vh;
+  block-size: calc(100vh + var(--fadeout-block-size));
 }
 
 .home-gradient-hero__overlay {
@@ -44,5 +53,12 @@ import HalftoneSurface from './HalftoneSurface.vue';
 .home-gradient-hero__content {
   position: relative;
   z-index: 2;
+}
+
+.home-gradient-hero__bottom-fade-out {
+  pointer-events: none;
+  block-size: var(--fadeout-block-size);
+  background-color: var(--halftone-color-background);
+  mask-image: linear-gradient(to bottom, transparent, black);
 }
 </style>

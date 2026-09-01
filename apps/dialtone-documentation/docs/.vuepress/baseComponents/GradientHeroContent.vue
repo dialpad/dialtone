@@ -1,5 +1,5 @@
 <template>
-  <dt-box class="home-gradient-hero-content">
+  <dt-box class="home-gradient-hero-content" padding-block-end="500">
     <dt-box class="d-d-flex d-plc-center d-mbe-600">
       <dt-link to="/dialtone/">
         <dt-box
