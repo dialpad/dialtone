@@ -1,0 +1,24 @@
+packages/dialtone-vue/components/scroller/scroller.test.js
+  s_5a1867feab3270::t_31ffc05a9b95cf 3
+  s_5a1867feab3270::t_7a48f5f7263f39 88-98
+packages/dialtone-vue/components/scroller/scroller.vue
+  s_5a1867feab3270::t_5b1d97631b933b 69-77
+  s_5a1867feab3270::t_6a40859f1d5c15 9
+  s_5a1867feab3270::t_74b94c92c926dc 68
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "ec7a9523a99f7c2f54fdbd5aa429a002062e0e5a",
+  "prompts": {},
+  "sessions": {
+    "s_5a1867feab3270": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8881ae73-72ba-41b0-b287-e0c0b653a64e",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Joan <joan.gil@dialpad.com>"
+    }
+  }
+}

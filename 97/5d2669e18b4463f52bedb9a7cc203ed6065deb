@@ -1,0 +1,19 @@
+packages/dialtone-vue/localization/index.test.js
+  s_ecf283357df4de::t_b547e921a6a28a 19-20,26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "975d2669e18b4463f52bedb9a7cc203ed6065deb",
+  "prompts": {},
+  "sessions": {
+    "s_ecf283357df4de": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "419998bb-a704-4d72-b6f6-fbc9a975d55c",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

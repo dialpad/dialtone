@@ -1,0 +1,36 @@
+packages/dialtone-vue/components/ComboboxMultiSelect/ComboboxMultiSelect.vue
+  s_cad58711a60fb4::t_7aac5c7b1e091c 834,836-837,844,850,855-856,860
+  s_cad58711a60fb4::t_e75bd022276b3b 147-151
+  s_cad58711a60fb4::t_70393dc4890af3 573-580
+packages/dialtone-vue/components/ComboboxMultiSelect/ComboboxMultiSelectConstants.js
+  s_cad58711a60fb4::t_cb097410218bec 19-34,38
+packages/dialtone-css/lib/build/less/components/chip.less
+  s_cad58711a60fb4::t_5dedbc2d11b37c 33,38,41
+  s_cad58711a60fb4::t_eb7f99ea7bda88 110,116
+  s_cad58711a60fb4::t_7c3066ddc94587 57-58,63-65,70,75-78,89-97
+  s_cad58711a60fb4::t_4016cc1bf1e64e 207
+  s_cad58711a60fb4::t_b468ecfdb7f835 98
+packages/dialtone-vue/components/ComboboxMultiSelect/index.js
+  s_cad58711a60fb4::t_7cc195bdefaed1 2
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "b9a62a2962c1b748c59641566d55fc1192832ca7",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_cad58711a60fb4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5f249bec-6234-4933-a26d-5736a26495c0",
+        "model": "claude-opus-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

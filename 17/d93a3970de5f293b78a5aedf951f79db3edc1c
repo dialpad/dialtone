@@ -1,0 +1,23 @@
+packages/dialtone-vue/localization/index.test.js
+  s_06bbbfe4ffca14::t_bdb83ff72ac70f 1-19,21-32
+packages/dialtone-vue/vite.config.js
+  s_06bbbfe4ffca14::t_9020a1144d588b 108,118
+packages/dialtone-vue/localization/index.js
+  s_06bbbfe4ffca14::t_f713f837e1e0d8 104-110
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.5",
+  "base_commit_sha": "17d93a3970de5f293b78a5aedf951f79db3edc1c",
+  "prompts": {},
+  "sessions": {
+    "s_06bbbfe4ffca14": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e78e6d1b-427f-4124-93a7-df2b0e2fc0c5",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}
