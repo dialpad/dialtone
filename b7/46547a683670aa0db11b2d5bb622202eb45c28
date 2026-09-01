@@ -1,0 +1,19 @@
+.nvmrc
+  s_84d670ab6252e6::t_3d7b07570c01cc 1
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "b746547a683670aa0db11b2d5bb622202eb45c28",
+  "prompts": {},
+  "sessions": {
+    "s_84d670ab6252e6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "20253a5e-95fe-4af2-9c52-518963a05832",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

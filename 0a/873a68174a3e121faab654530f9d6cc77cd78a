@@ -1,0 +1,22 @@
+apps/dialtone-documentation/docs/.vuepress/theme/components/Navbar.vue
+  h_c15b5755534093 3,12
+apps/dialtone-documentation/docs/.vuepress/theme/components/Page.vue
+  h_c15b5755534093 2-9,11-23,25-26,28-31,67-69,77-80,82-85,93-96,98-99
+apps/dialtone-documentation/docs/.vuepress/theme/layouts/Layout.vue
+  h_c15b5755534093 2-27,29-39,42-43,46-47,52,54,61-62,72
+apps/dialtone-documentation/docs/utilities/grid/place-self.md
+  h_c15b5755534093 74
+apps/dialtone-documentation/docs/.vuepress/theme/components/PageToc.vue
+  h_c15b5755534093 9
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "0a873a68174a3e121faab654530f9d6cc77cd78a",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

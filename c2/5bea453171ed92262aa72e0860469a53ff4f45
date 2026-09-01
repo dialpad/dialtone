@@ -1,0 +1,35 @@
+apps/dialtone-documentation/scripts/visual-guide/scenes/component-validation.vue
+  s_93aeca3805a6ee::t_fe420f228adc6a 41-42,48-49
+apps/dialtone-documentation/scripts/visual-guide/harness/use-is-next.js
+  s_93aeca3805a6ee::t_597382622b5a02 1-19
+apps/dialtone-documentation/scripts/visual-guide/scenes/token-overlay-surface.vue
+  s_93aeca3805a6ee::t_fe420f228adc6a 89,93
+apps/dialtone-documentation/scripts/visual-guide/scenes/component-button.vue
+  s_93aeca3805a6ee::t_fe420f228adc6a 125-126,128-130
+apps/dialtone-documentation/scripts/visual-guide/scenes/component-input.vue
+  s_93aeca3805a6ee::t_fe420f228adc6a 38-39,41-43
+apps/dialtone-documentation/scripts/visual-guide/scenes/component-notice.vue
+  s_93aeca3805a6ee::t_fe420f228adc6a 39-40,46-47
+apps/dialtone-documentation/scripts/visual-guide/scenes/token-color-ramps.vue
+  s_93aeca3805a6ee::t_fe420f228adc6a 39-40,52-53
+apps/dialtone-documentation/scripts/visual-guide/scenes/component-link.vue
+  s_93aeca3805a6ee::t_fe420f228adc6a 48-49,53-54
+apps/dialtone-documentation/scripts/visual-guide/scenes/component-avatar.vue
+  s_93aeca3805a6ee::t_fe420f228adc6a 87-88,93-96
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "c25bea453171ed92262aa72e0860469a53ff4f45",
+  "prompts": {},
+  "sessions": {
+    "s_93aeca3805a6ee": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6eac0ba6-144f-46e1-9c25-fb0c29ab1e02",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
