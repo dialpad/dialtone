@@ -36,6 +36,7 @@
         title="Dialtone homepage"
         :underline="false"
         to="/"
+        class="d-pie-150"
       >
         <dt-illustration name="dialpad-logo" class="d-w-125" />
       </dt-link>
