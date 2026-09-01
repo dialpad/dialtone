@@ -17,6 +17,7 @@
       :presentation="presentation"
       :persistent="persistent"
       @toggle="forwardToggle"
+      @opened="$emit('opened')"
     />
   </dt-stack>
 </template>
@@ -57,7 +58,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['toggle']);
+const emit = defineEmits(['toggle', 'opened']);
 
 const groupGap = computed(() => props.presentation === 'promoted' ? '0' : '50');
 const peerKeys = computed(() => collectPeerKeys(props.items));

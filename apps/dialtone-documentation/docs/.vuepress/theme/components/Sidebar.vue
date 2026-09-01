@@ -1,5 +1,6 @@
 <template>
   <dt-stack
+    ref="sidebar"
     class="dialtone-sidebar__list d-h100p"
     @keydown="handleKeydown"
   >
@@ -25,6 +26,7 @@
           :search-active="isSearchActive"
           :persistent="props.persistent"
           @toggle="handleToggle"
+          @opened="revealActiveRouteItem"
         />
         <dt-empty-state
           v-if="visibleGroups.length === 0 && inputValue.trim()"
@@ -88,8 +90,18 @@ const highlightIndex = ref(-1);
 
 // Ref to the search input element
 const searchInput = ref(null);
+const sidebar = ref(null);
 
 const focusSearchInput = () => searchInput.value?.focus();
+const revealActiveRouteItem = async () => {
+  await nextTick();
+  const sidebarElement = sidebar.value?.$el || sidebar.value;
+  sidebarElement?.querySelector('[aria-current="page"]')?.scrollIntoView({
+    behavior: 'auto',
+    block: 'nearest',
+    inline: 'nearest',
+  });
+};
 const isModifiedKeypress = (event) => {
   return event.altKey || event.ctrlKey || event.metaKey || event.shiftKey;
 };
@@ -176,8 +188,9 @@ const handleKeydown = (event) => {
 };
 
 // Initialize open items after mount
-onMounted(() => {
+onMounted(async () => {
   openItems.value = collectOpenItemKeysForRoute(displayItems.value, route.path);
+  await revealActiveRouteItem();
   document.addEventListener('keydown', handleSearchShortcut);
 });
 
@@ -186,11 +199,12 @@ onUnmounted(() => {
 });
 
 // Update open items when route changes
-watch(() => route.path, (newPath) => {
+watch(() => route.path, async (newPath) => {
   // Clear search and keyboard highlight when navigating to a different page
   inputValue.value = '';
   highlightIndex.value = -1;
   openItems.value = collectOpenItemKeysForRoute(displayItems.value, newPath);
+  await revealActiveRouteItem();
 });
 
 // Watch search input to control expansion state

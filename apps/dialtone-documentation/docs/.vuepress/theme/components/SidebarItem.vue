@@ -5,6 +5,7 @@
     element-type="li"
     class="d-w100p"
     anchor-class="d-w100p"
+    @opened="handleOpened"
   >
     <template #anchor="{ attrs }">
       <sidebar-item-row
@@ -43,6 +44,7 @@
           :first-nested-child="nested && index === 0 && !subItem.children?.length"
           :persistent="persistent"
           @toggle="forwardToggle"
+          @opened="forwardOpened"
         />
       </dt-stack>
     </template>
@@ -118,7 +120,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['toggle']);
+const emit = defineEmits(['toggle', 'opened']);
 const route = useRoute();
 const router = useRouter();
 
@@ -159,5 +161,13 @@ function handleClick (event) {
 
 function forwardToggle (childKey, shouldOpen, childPeerKeys) {
   emit('toggle', childKey, shouldOpen, childPeerKeys);
+}
+
+function handleOpened (opened) {
+  if (opened) emit('opened');
+}
+
+function forwardOpened () {
+  emit('opened');
 }
 </script>
