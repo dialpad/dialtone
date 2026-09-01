@@ -1093,7 +1093,7 @@ export default {
         this.$refs.popover__header?.focusCloseButton();
       } else {
         // if there are no focusable elements at all focus the dialog itself
-        returnFirstEl(this.$refs.content?.$el).focus();
+        returnFirstEl(this.$refs.content?.$el)?.focus();
       }
     },
 

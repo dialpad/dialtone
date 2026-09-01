@@ -471,6 +471,24 @@ describe('DtPopover Tests', () => {
         expect(document.activeElement).toBe(button.element);
       });
     });
+
+    describe('When there are no focusable elements and the content ref is unset (DLT-3550)', () => {
+      beforeEach(async () => {
+        mockProps = { showCloseButton: false, initialFocusElement: 'first' };
+        mockSlots = { content: 'No focusable elements here' };
+
+        updateWrapper();
+        await wrapper.setProps({ open: true });
+        await flushPromises();
+      });
+
+      it('does not throw when a delayed after-enter callback fires against a stale content ref', () => {
+        const domEl = wrapper.vm.$refs.popover__content;
+        wrapper.vm.$refs.content = null;
+
+        expect(() => wrapper.vm.focusFirstElementIfNeeded(domEl)).not.toThrow();
+      });
+    });
   });
 
   describe('Pass-through class props', () => {
