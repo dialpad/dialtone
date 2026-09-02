@@ -2,15 +2,15 @@
 <template>
   <div ref="carouselContainerRef" class="showcase-carousel">
     <dt-stack ref="carouselTrackRef" direction="row" gap="800" class="showcase-carousel__track">
-      <img style="align-self: flex-start; width: 468px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--01.jpg" alt="">
-      <img style="align-self: flex-end; width: 546px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--02.jpg" alt="">
-      <img style="align-self: flex-start; width: 352px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--03.jpg" alt="">
-      <img style="align-self: center; width: 400px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--04.jpg" alt="">
-      <img style="align-self: flex-end; width: 480px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--05.jpg" alt="">
-      <img style="align-self: flex-start; width: 628px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--06.jpg" alt="">
-      <img style="align-self: center; width: 438px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--07.jpg" alt="">
-      <img style="align-self: flex-end; width: 404px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--08.jpg" alt="">
-      <img style="align-self: flex-start; width: 438px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--09.jpg" alt="">
+      <img style="align-self: flex-start; width: 468px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--01.jpg" alt="" draggable="false">
+      <img style="align-self: flex-end; width: 546px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--02.jpg" alt="" draggable="false">
+      <img style="align-self: flex-start; width: 352px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--03.jpg" alt="" draggable="false">
+      <img style="align-self: center; width: 400px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--04.jpg" alt="" draggable="false">
+      <img style="align-self: flex-end; width: 480px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--05.jpg" alt="" draggable="false">
+      <img style="align-self: flex-start; width: 628px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--06.jpg" alt="" draggable="false">
+      <img style="align-self: center; width: 438px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--07.jpg" alt="" draggable="false">
+      <img style="align-self: flex-end; width: 404px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--08.jpg" alt="" draggable="false">
+      <img style="align-self: flex-start; width: 438px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--09.jpg" alt="" draggable="false">
     </dt-stack>
   </div>
 </template>
@@ -18,157 +18,320 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
 
+import {
+  canUseHoverSteering,
+  getCarouselPeriod,
+  getHoverVelocity,
+  getLoopedScrollPosition,
+  smoothCarouselVelocity,
+} from './showcaseCarouselMotion.js';
+
+const DEFAULT_VELOCITY = 0.12;
+const DEAD_ZONE = 0.01;
+const MAX_HOVER_VELOCITY = 1.2;
+const CURVE_EXPONENT = 2.5;
+const SMOOTHING_ACTIVE = 0.5;
+const SMOOTHING_INACTIVE = 0.15;
+const MAX_FRAME_DURATION = 50;
+const TOUCH_SCROLL_IDLE_FALLBACK = 200;
+
 const carouselContainerRef = ref(null);
 const carouselTrackRef = ref(null);
 
-// Configuration constants
-const DEFAULT_SPEED = -2;          // Slow leftward scroll when not hovering
-const MAX_SPEED = 20;              // Maximum speed at edges (px/frame)
-const DEAD_ZONE = 0.01;             // Center 20% has zero movement
-const CURVE_EXPONENT = 2.5;         // Exponential acceleration curve
-const SMOOTHING_ACTIVE = 0.5;       // Fast response when hovering
-const SMOOTHING_INACTIVE = 0.15;    // Smooth transition when leaving
+let cleanupCarousel = () => {};
 
 onMounted(() => {
   const carouselContainer = carouselContainerRef.value;
   const carousel = carouselTrackRef.value?.$el;
 
   if (carousel && carouselContainer) {
-    // Clone images multiple times for seamless infinite scrolling
     const images = carousel.querySelectorAll('img');
-    // Clone twice more for smoother infinite scroll (3 total sets)
+    const imagesPerSet = images.length;
+
     for (let i = 0; i < 2; i++) {
-      images.forEach(img => {
-        const clone = img.cloneNode(true);
-        carousel.appendChild(clone);
-      });
+      images.forEach(img => carousel.appendChild(img.cloneNode(true)));
     }
 
-    // Track carousel state
-    let currentPosition = 0;
-    let targetSpeed = 0;
-    let currentSpeed = 0;
+    const fineHoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const usesCompositorAutoplay = !fineHoverQuery.matches;
+    const supportsScrollEnd = 'onscrollend' in carouselContainer;
+
+    let carouselPeriod = 0;
+    let maxScrollPosition = 0;
     let animationId = null;
+    let lastFrameTime = null;
+    let targetVelocity = DEFAULT_VELOCITY;
+    let currentVelocity = DEFAULT_VELOCITY;
     let isHovering = false;
+    let isTouchScrolling = false;
+    let hasTouchScrolled = false;
+    let isNativeScrolling = false;
+    let activeTouchCount = 0;
+    let isVisible = false;
+    let scrollIdleTimer = null;
+    let visibilityObserver = null;
 
-    // Get total width of one set of images
-    const getTrackWidth = () => {
-      const allImages = carousel.querySelectorAll('img');
-      const imagesPerSet = allImages.length / 3; // We have 3 sets now
-      let width = 0;
-      for (let i = 0; i < imagesPerSet; i++) {
-        width += allImages[i].offsetWidth;
+    const recenterCarousel = () => {
+      const position = getLoopedScrollPosition(
+        carouselContainer.scrollLeft,
+        carouselPeriod,
+        maxScrollPosition,
+      );
+
+      if (position !== carouselContainer.scrollLeft) {
+        carouselContainer.scrollLeft = position;
       }
-      // Add gaps (700 units from dt-stack)
-      width += (imagesPerSet - 1) * 28; // Assuming 700 units = ~28px
-      return width;
     };
 
-    // Animation loop
-    const animate = () => {
-      const trackWidth = getTrackWidth();
-
-      // Adaptive smoothing based on hover state
-      const smoothingFactor = isHovering ? SMOOTHING_ACTIVE : SMOOTHING_INACTIVE;
-      currentSpeed += (targetSpeed - currentSpeed) * smoothingFactor;
-
-      // Update position
-      currentPosition += currentSpeed;
-
-      // Reset position for infinite loop
-      if (currentPosition > 0) {
-        currentPosition -= trackWidth;
-      } else if (currentPosition < -trackWidth) {
-        currentPosition += trackWidth;
-      }
-
-      // Apply transform
-      carousel.style.transform = `translateX(${currentPosition}px)`;
-
-      animationId = requestAnimationFrame(animate);
+    const measureCarouselPeriod = () => {
+      carouselPeriod = getCarouselPeriod(carousel.querySelectorAll('img'), imagesPerSet);
+      maxScrollPosition = carouselContainer.scrollWidth - carouselContainer.clientWidth;
+      carousel.style.setProperty('--showcase-carousel-autoplay-distance', `${-carouselPeriod}px`);
+      carousel.style.setProperty(
+        '--showcase-carousel-autoplay-duration',
+        `${carouselPeriod / DEFAULT_VELOCITY}ms`,
+      );
+      recenterCarousel();
     };
 
-    // Start default animation (slow leftward scroll)
-    targetSpeed = DEFAULT_SPEED;
-    animate();
+    const stopAnimation = () => {
+      if (animationId !== null) cancelAnimationFrame(animationId);
+      animationId = null;
+      lastFrameTime = null;
 
-    // Mouse interaction handlers
-    const handleMouseEnter = () => {
+      if (usesCompositorAutoplay) {
+        carousel.classList.add('showcase-carousel__track--autoplay-paused');
+      }
+    };
+
+    const animateCarousel = (timestamp) => {
+      if (!isVisible || isTouchScrolling) {
+        stopAnimation();
+        return;
+      }
+
+      if (lastFrameTime !== null) {
+        const elapsedTime = Math.min(timestamp - lastFrameTime, MAX_FRAME_DURATION);
+        const smoothingFactor = isHovering ? SMOOTHING_ACTIVE : SMOOTHING_INACTIVE;
+        currentVelocity = smoothCarouselVelocity(
+          currentVelocity,
+          targetVelocity,
+          smoothingFactor,
+          elapsedTime,
+        );
+        carouselContainer.scrollLeft = getLoopedScrollPosition(
+          carouselContainer.scrollLeft + currentVelocity * elapsedTime,
+          carouselPeriod,
+          maxScrollPosition,
+        );
+      }
+
+      lastFrameTime = timestamp;
+      animationId = requestAnimationFrame(animateCarousel);
+    };
+
+    const startAnimation = () => {
+      if (!isVisible || isTouchScrolling) return;
+
+      if (usesCompositorAutoplay) {
+        carousel.classList.remove('showcase-carousel__track--autoplay-paused');
+        return;
+      }
+
+      if (animationId !== null) return;
+      animationId = requestAnimationFrame(animateCarousel);
+    };
+
+    const handlePointerEnter = (event) => {
+      if (!canUseHoverSteering(event.pointerType, fineHoverQuery.matches)) return;
       isHovering = true;
+      targetVelocity = 0;
+      startAnimation();
     };
 
-    const handleMouseLeave = () => {
-      isHovering = false;
-      targetSpeed = DEFAULT_SPEED;
-    };
-
-    carouselContainer.addEventListener('mouseenter', handleMouseEnter);
-    carouselContainer.addEventListener('mouseleave', handleMouseLeave);
-
-    const handleMouseMove = (e) => {
-      if (!isHovering) return;
+    const handlePointerMove = (event) => {
+      if (!isHovering || !canUseHoverSteering(event.pointerType, fineHoverQuery.matches)) return;
 
       const rect = carouselContainer.getBoundingClientRect();
-      const containerWidth = rect.width;
-      const mouseX = e.clientX - rect.left;
-      const centerX = containerWidth / 2;
+      const relativePosition = (event.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+      targetVelocity = getHoverVelocity(
+        relativePosition,
+        DEAD_ZONE,
+        MAX_HOVER_VELOCITY,
+        CURVE_EXPONENT,
+      );
+    };
 
-      // Calculate relative position from center (-1 to 1)
-      const relativeX = (mouseX - centerX) / centerX;
+    const handlePointerLeave = (event) => {
+      if (!canUseHoverSteering(event.pointerType, fineHoverQuery.matches)) return;
+      isHovering = false;
+      targetVelocity = DEFAULT_VELOCITY;
+    };
 
-      // Apply dead zone: center 10% has zero movement
-      let adjustedX = 0;
-      if (Math.abs(relativeX) > DEAD_ZONE) {
-        // Scale from dead zone edge to container edge
-        // Maps [DEAD_ZONE, 1.0] → [0, 1.0]
-        const beyondDeadZone = (Math.abs(relativeX) - DEAD_ZONE) / (1 - DEAD_ZONE);
-        adjustedX = beyondDeadZone * Math.sign(relativeX);
-      }
+    const clearScrollIdleTimer = () => {
+      if (scrollIdleTimer === null) return;
+      window.clearTimeout(scrollIdleTimer);
+      scrollIdleTimer = null;
+    };
 
-      // Calculate speed with exponential curve for dramatic acceleration
-      const speedMultiplier = Math.pow(Math.abs(adjustedX), CURVE_EXPONENT);
-      const calculatedSpeed = speedMultiplier * MAX_SPEED;
+    const finishTouchScroll = () => {
+      if (!isTouchScrolling) return;
+      clearScrollIdleTimer();
+      recenterCarousel();
+      isTouchScrolling = false;
+      isNativeScrolling = false;
+      currentVelocity = 0;
+      targetVelocity = DEFAULT_VELOCITY;
+      startAnimation();
+    };
 
-      // Set direction (reversed for intuitive control)
-      if (relativeX < 0) {
-        // Left half - scroll right (reversed)
-        targetSpeed = calculatedSpeed;
-      } else if (relativeX > 0) {
-        // Right half - scroll left (reversed)
-        targetSpeed = -calculatedSpeed;
-      } else {
-        // Exact center in dead zone
-        targetSpeed = 0;
+    const scheduleTouchScrollEnd = () => {
+      clearScrollIdleTimer();
+      scrollIdleTimer = window.setTimeout(() => {
+        isNativeScrolling = false;
+        finishTouchScroll();
+      }, TOUCH_SCROLL_IDLE_FALLBACK);
+    };
+
+    const handleTouchStart = (event) => {
+      activeTouchCount = event.touches.length;
+      if (isTouchScrolling) return;
+
+      clearScrollIdleTimer();
+      isTouchScrolling = true;
+      hasTouchScrolled = false;
+      isNativeScrolling = false;
+      isHovering = false;
+      currentVelocity = 0;
+      targetVelocity = DEFAULT_VELOCITY;
+      stopAnimation();
+    };
+
+    const handleTouchEnd = (event) => {
+      activeTouchCount = event.touches.length;
+      if (!isTouchScrolling || activeTouchCount > 0) return;
+
+      if (!hasTouchScrolled || !isNativeScrolling) {
+        finishTouchScroll();
+      } else if (!supportsScrollEnd) {
+        scheduleTouchScrollEnd();
       }
     };
 
-    carouselContainer.addEventListener('mousemove', handleMouseMove);
+    const handleScroll = () => {
+      if (!isTouchScrolling) return;
+      hasTouchScrolled = true;
+      isNativeScrolling = true;
+      if (!supportsScrollEnd && activeTouchCount === 0) scheduleTouchScrollEnd();
+    };
 
-    // Cleanup on unmount
-    onUnmounted(() => {
-      if (animationId) {
-        cancelAnimationFrame(animationId);
+    const handleScrollEnd = () => {
+      isNativeScrolling = false;
+      if (activeTouchCount === 0) finishTouchScroll();
+    };
+
+    const handleVisibilityChange = ([entry]) => {
+      isVisible = entry.isIntersecting;
+      if (isVisible) {
+        startAnimation();
+      } else {
+        isHovering = false;
+        targetVelocity = DEFAULT_VELOCITY;
+        stopAnimation();
       }
-      carouselContainer.removeEventListener('mouseenter', handleMouseEnter);
-      carouselContainer.removeEventListener('mouseleave', handleMouseLeave);
-      carouselContainer.removeEventListener('mousemove', handleMouseMove);
-    });
+    };
+
+    if (usesCompositorAutoplay) {
+      carousel.classList.add(
+        'showcase-carousel__track--compositor-autoplay',
+        'showcase-carousel__track--autoplay-paused',
+      );
+    }
+
+    measureCarouselPeriod();
+
+    carouselContainer.addEventListener('pointerenter', handlePointerEnter);
+    carouselContainer.addEventListener('pointermove', handlePointerMove);
+    carouselContainer.addEventListener('pointerleave', handlePointerLeave);
+    carouselContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
+    carouselContainer.addEventListener('touchend', handleTouchEnd, { passive: true });
+    carouselContainer.addEventListener('touchcancel', handleTouchEnd, { passive: true });
+    carouselContainer.addEventListener('scroll', handleScroll, { passive: true });
+    carouselContainer.addEventListener('scrollend', handleScrollEnd);
+    window.addEventListener('resize', measureCarouselPeriod);
+
+    if ('IntersectionObserver' in window) {
+      visibilityObserver = new IntersectionObserver(handleVisibilityChange);
+      visibilityObserver.observe(carouselContainer);
+    } else {
+      isVisible = true;
+      startAnimation();
+    }
+
+    cleanupCarousel = () => {
+      stopAnimation();
+      clearScrollIdleTimer();
+      visibilityObserver?.disconnect();
+      carouselContainer.removeEventListener('pointerenter', handlePointerEnter);
+      carouselContainer.removeEventListener('pointermove', handlePointerMove);
+      carouselContainer.removeEventListener('pointerleave', handlePointerLeave);
+      carouselContainer.removeEventListener('touchstart', handleTouchStart);
+      carouselContainer.removeEventListener('touchend', handleTouchEnd);
+      carouselContainer.removeEventListener('touchcancel', handleTouchEnd);
+      carouselContainer.removeEventListener('scroll', handleScroll);
+      carouselContainer.removeEventListener('scrollend', handleScrollEnd);
+      window.removeEventListener('resize', measureCarouselPeriod);
+    };
   }
 });
+
+onUnmounted(() => cleanupCarousel());
 </script>
 
 <style scoped>
 .showcase-carousel {
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   inline-size: 100%;
   max-inline-size: 100vw;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: none;
+  scroll-behavior: auto;
+  touch-action: pan-x pan-y;
+  user-select: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+.showcase-carousel::-webkit-scrollbar {
+  display: none;
 }
 
 .showcase-carousel__track {
-  will-change: transform;
-  transition: none;
   block-size: 66vh;
+  inline-size: max-content;
   user-select: none;
+}
+
+.showcase-carousel__track--compositor-autoplay {
+  animation: showcase-carousel-autoplay
+    var(--showcase-carousel-autoplay-duration)
+    linear
+    infinite;
+  will-change: transform;
+}
+
+.showcase-carousel__track--autoplay-paused {
+  animation-play-state: paused;
+}
+
+@keyframes showcase-carousel-autoplay {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(var(--showcase-carousel-autoplay-distance), 0, 0);
+  }
 }
 
 @media screen and (min-width: 640px) {
