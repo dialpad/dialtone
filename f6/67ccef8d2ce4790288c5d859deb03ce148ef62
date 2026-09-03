@@ -1,0 +1,27 @@
+packages/dialtone-css/lib/build/less/components/empty-state.less
+  h_c15b5755534093 43-46
+packages/combinator/src/components/controls/control_selection.vue
+  h_c15b5755534093 29,87,92,96-102,127-130,133-134,147-151,166-171,175-176,182
+  s_9f61fa9161643f::t_64b71e7ee182d4 140-142
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.10",
+  "base_commit_sha": "f667ccef8d2ce4790288c5d859deb03ce148ef62",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_9f61fa9161643f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ef122-867f-71f2-bacd-0ea0fd649d67",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
