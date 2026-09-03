@@ -1,0 +1,4980 @@
+{
+  "summary": {
+    "classesWithTokenRefs": 195,
+    "distinctTokensReferenced": 541,
+    "refPrefixFamilies": {
+      "--dt": 367,
+      "--avatar": 39,
+      "--button": 16,
+      "--notice": 12,
+      "--badge": 11,
+      "--tab": 11,
+      "--icon": 9,
+      "--zi": 8,
+      "--modal": 8,
+      "--presence": 7,
+      "--input": 6,
+      "--table": 5,
+      "--toggle": 4,
+      "--stack": 3,
+      "--link": 3,
+      "--select": 3,
+      "--ttf": 2,
+      "--chroma": 2,
+      "--opacity": 2,
+      "--validation": 2,
+      "--popover": 2,
+      "--tablist": 2,
+      "--os": 2,
+      "--text": 1,
+      "--fco": 1,
+      "--td200": 1,
+      "--td100": 1,
+      "--brand": 1,
+      "--td300": 1,
+      "--lh4": 1,
+      "--banner": 1,
+      "--placeholder": 1,
+      "--leftbar": 1,
+      "--lh8": 1,
+      "--lh12": 1,
+      "--bgo": 1,
+      "--general": 1,
+      "--lh0": 1
+    }
+  },
+  "classToTokens": {
+    "d-stack": [
+      "--dt-spacing-0",
+      "--dt-spacing-1",
+      "--dt-spacing-100",
+      "--dt-spacing-125",
+      "--dt-spacing-150",
+      "--dt-spacing-175",
+      "--dt-spacing-200",
+      "--dt-spacing-25",
+      "--dt-spacing-250",
+      "--dt-spacing-300",
+      "--dt-spacing-350",
+      "--dt-spacing-400",
+      "--dt-spacing-450",
+      "--dt-spacing-50",
+      "--dt-spacing-500",
+      "--dt-spacing-525",
+      "--dt-spacing-550",
+      "--dt-spacing-600",
+      "--dt-spacing-650",
+      "--dt-spacing-700",
+      "--dt-spacing-75",
+      "--dt-spacing-750",
+      "--dt-spacing-800",
+      "--stack-align",
+      "--stack-direction",
+      "--stack-justify"
+    ],
+    "d-stack--gap-1": [
+      "--dt-spacing-1",
+      "--dt-spacing-100",
+      "--dt-spacing-125",
+      "--dt-spacing-150",
+      "--dt-spacing-175"
+    ],
+    "d-stack--gap-0": [
+      "--dt-spacing-0"
+    ],
+    "d-stack--gap-150": [
+      "--dt-spacing-150"
+    ],
+    "d-stack--gap-200": [
+      "--dt-spacing-200"
+    ],
+    "d-stack--gap-300": [
+      "--dt-spacing-300"
+    ],
+    "d-stack--gap-400": [
+      "--dt-spacing-400"
+    ],
+    "d-text": [
+      "--dt-color-foreground-critical",
+      "--dt-color-foreground-critical-strong",
+      "--dt-color-foreground-disabled",
+      "--dt-color-foreground-info",
+      "--dt-color-foreground-info-strong",
+      "--dt-color-foreground-muted",
+      "--dt-color-foreground-placeholder",
+      "--dt-color-foreground-positive",
+      "--dt-color-foreground-positive-strong",
+      "--dt-color-foreground-primary",
+      "--dt-color-foreground-primary-inverted",
+      "--dt-color-foreground-secondary",
+      "--dt-color-foreground-tertiary",
+      "--dt-color-foreground-tertiary-inverted",
+      "--dt-color-foreground-warning",
+      "--dt-color-neutral-black",
+      "--dt-color-neutral-white",
+      "--dt-font-line-height-100",
+      "--dt-font-line-height-200",
+      "--dt-font-line-height-300",
+      "--dt-font-line-height-400",
+      "--dt-font-line-height-500",
+      "--dt-font-line-height-600",
+      "--dt-font-weight-bold",
+      "--dt-font-weight-medium",
+      "--dt-font-weight-normal",
+      "--dt-font-weight-semi-bold",
+      "--dt-icon-size-100",
+      "--dt-icon-size-200",
+      "--dt-icon-size-400",
+      "--dt-icon-size-500",
+      "--dt-inputs-color-background-default",
+      "--dt-inputs-color-background-disabled",
+      "--dt-inputs-color-background-focus",
+      "--dt-inputs-color-border-critical",
+      "--dt-inputs-color-border-default",
+      "--dt-inputs-color-border-disabled",
+      "--dt-inputs-color-border-focus",
+      "--dt-inputs-color-border-hover",
+      "--dt-inputs-color-foreground-default",
+      "--dt-inputs-color-foreground-disabled",
+      "--dt-inputs-color-foreground-placeholder",
+      "--dt-inputs-size-radius-lg",
+      "--dt-inputs-size-radius-md",
+      "--dt-inputs-size-radius-sm",
+      "--dt-inputs-size-radius-xl",
+      "--dt-inputs-size-radius-xs",
+      "--dt-layout-125",
+      "--dt-layout-25",
+      "--dt-layout-75",
+      "--dt-size-border-100",
+      "--dt-size-radius-400",
+      "--dt-spacing-1",
+      "--dt-spacing-100",
+      "--dt-spacing-150",
+      "--dt-spacing-175",
+      "--dt-spacing-25",
+      "--dt-spacing-50",
+      "--dt-spacing-50-negative",
+      "--dt-spacing-75",
+      "--dt-text-line-clamp",
+      "--dt-typography-inputs-lg",
+      "--dt-typography-inputs-md",
+      "--dt-typography-inputs-sm",
+      "--dt-typography-inputs-xl",
+      "--dt-typography-inputs-xs",
+      "--fco",
+      "--input-border-width",
+      "--input-color-background",
+      "--input-color-border-hover",
+      "--input-color-text",
+      "--input-padding-y",
+      "--text-tone"
+    ],
+    "d-text--fw-medium": [
+      "--dt-font-weight-medium"
+    ],
+    "d-text--lh-100": [
+      "--dt-font-line-height-100"
+    ],
+    "d-text--tone-secondary": [
+      "--dt-color-foreground-secondary"
+    ],
+    "d-text--tone-tertiary": [
+      "--dt-color-foreground-tertiary"
+    ],
+    "d-link": [
+      "--dt-action-color-background-base-default",
+      "--dt-action-color-foreground-base-default",
+      "--dt-color-foreground-secondary",
+      "--dt-color-link-critical",
+      "--dt-color-link-critical-hover",
+      "--dt-color-link-critical-inverted",
+      "--dt-color-link-critical-inverted-hover",
+      "--dt-color-link-disabled",
+      "--dt-color-link-disabled-hover",
+      "--dt-color-link-disabled-inverted",
+      "--dt-color-link-disabled-inverted-hover",
+      "--dt-color-link-info",
+      "--dt-color-link-info-hover",
+      "--dt-color-link-info-inverted",
+      "--dt-color-link-info-inverted-hover",
+      "--dt-color-link-mention",
+      "--dt-color-link-mention-background",
+      "--dt-color-link-mention-background-hover",
+      "--dt-color-link-mention-hover",
+      "--dt-color-link-mention-inverted-background",
+      "--dt-color-link-mention-inverted-background-hover",
+      "--dt-color-link-muted",
+      "--dt-color-link-muted-hover",
+      "--dt-color-link-muted-inverted",
+      "--dt-color-link-muted-inverted-hover",
+      "--dt-color-link-positive",
+      "--dt-color-link-positive-hover",
+      "--dt-color-link-positive-inverted",
+      "--dt-color-link-positive-inverted-hover",
+      "--dt-color-link-primary",
+      "--dt-color-link-primary-hover",
+      "--dt-color-link-primary-inverted",
+      "--dt-color-link-primary-inverted-hover",
+      "--dt-color-link-warning",
+      "--dt-color-link-warning-hover",
+      "--dt-color-link-warning-inverted",
+      "--dt-color-link-warning-inverted-hover",
+      "--dt-font-line-height-200",
+      "--dt-font-weight-medium",
+      "--dt-shadow-focus",
+      "--dt-size-border-100",
+      "--dt-spacing-1",
+      "--dt-spacing-25",
+      "--link-background-color",
+      "--link-color-default",
+      "--link-color-default-hover",
+      "--td200",
+      "--ttf-out-quint"
+    ],
+    "d-link--muted": [
+      "--dt-color-link-muted",
+      "--dt-color-link-muted-hover"
+    ],
+    "d-item-layout__content": [
+      "--dt-color-foreground-tertiary",
+      "--dt-font-size-100",
+      "--dt-spacing-25",
+      "--dt-spacing-25-negative",
+      "--dt-spacing-400"
+    ],
+    "d-item-layout__left": [
+      "--dt-layout-50",
+      "--dt-spacing-0",
+      "--dt-spacing-100",
+      "--dt-spacing-50"
+    ],
+    "d-avatar": [
+      "--avatar-border-radius",
+      "--avatar-c",
+      "--avatar-c-0",
+      "--avatar-c-1",
+      "--avatar-c-2",
+      "--avatar-c-3",
+      "--avatar-c-4",
+      "--avatar-c-5",
+      "--avatar-c-6",
+      "--avatar-c-7",
+      "--avatar-c-8",
+      "--avatar-c-9",
+      "--avatar-canvas-size",
+      "--avatar-color-background",
+      "--avatar-color-text",
+      "--avatar-count-block-size",
+      "--avatar-count-font-size",
+      "--avatar-count-inline-size",
+      "--avatar-count-position",
+      "--avatar-hue-offset",
+      "--avatar-icon-size",
+      "--avatar-l",
+      "--avatar-l-0",
+      "--avatar-l-1",
+      "--avatar-l-2",
+      "--avatar-l-3",
+      "--avatar-l-4",
+      "--avatar-l-5",
+      "--avatar-l-6",
+      "--avatar-l-7",
+      "--avatar-l-8",
+      "--avatar-l-9",
+      "--avatar-mask",
+      "--avatar-presence-position-bottom",
+      "--avatar-presence-position-right",
+      "--avatar-presence-shape",
+      "--avatar-size-image",
+      "--avatar-size-shape",
+      "--avatar-size-text",
+      "--dt-avatar-anchor-hue",
+      "--dt-avatar-color-background-000",
+      "--dt-avatar-color-foreground-dark",
+      "--dt-avatar-color-foreground-light",
+      "--dt-color-border-focus",
+      "--dt-color-foreground-primary-inverted",
+      "--dt-color-neutral-black",
+      "--dt-color-neutral-transparent",
+      "--dt-color-neutral-white",
+      "--dt-color-surface-contrast-opaque",
+      "--dt-color-surface-secondary-inverted",
+      "--dt-font-line-height-100",
+      "--dt-font-line-height-600",
+      "--dt-font-size-100",
+      "--dt-font-size-150",
+      "--dt-font-size-200",
+      "--dt-font-size-300",
+      "--dt-font-size-350",
+      "--dt-font-size-400",
+      "--dt-font-size-50",
+      "--dt-font-size-500",
+      "--dt-font-size-75",
+      "--dt-font-weight-bold",
+      "--dt-layout-100",
+      "--dt-layout-100-percent",
+      "--dt-layout-150",
+      "--dt-layout-200",
+      "--dt-layout-25",
+      "--dt-layout-400",
+      "--dt-opacity-900",
+      "--dt-shell-action-color-background-primary-selected",
+      "--dt-shell-color-surface-default",
+      "--dt-size-border-focus",
+      "--dt-spacing-0",
+      "--dt-spacing-1",
+      "--dt-spacing-1-negative",
+      "--dt-spacing-150",
+      "--dt-spacing-200",
+      "--dt-spacing-25",
+      "--dt-spacing-250",
+      "--dt-spacing-300",
+      "--dt-spacing-300-negative",
+      "--dt-spacing-350",
+      "--dt-spacing-400",
+      "--dt-spacing-50",
+      "--dt-spacing-50-negative",
+      "--dt-spacing-500",
+      "--dt-spacing-75",
+      "--zi-base"
+    ],
+    "d-avatar__canvas": [
+      "--avatar-canvas-size",
+      "--avatar-color-background",
+      "--avatar-mask",
+      "--avatar-size-shape",
+      "--dt-color-neutral-transparent",
+      "--dt-color-neutral-white"
+    ],
+    "d-avatar__canvas-inner": [
+      "--avatar-canvas-size",
+      "--avatar-color-background"
+    ],
+    "d-avatar__image": [
+      "--avatar-size-image"
+    ],
+    "d-avatar--image-loaded": [
+      "--dt-color-neutral-transparent"
+    ],
+    "d-avatar__initials": [
+      "--avatar-size-text",
+      "--dt-font-line-height-100",
+      "--dt-font-weight-bold",
+      "--zi-base"
+    ],
+    "d-icon": [
+      "--avatar-icon-size",
+      "--dt-color-foreground-muted",
+      "--dt-color-foreground-muted-inverted",
+      "--dt-color-foreground-tertiary",
+      "--dt-color-purple-950",
+      "--dt-icon-size-100",
+      "--dt-icon-size-200",
+      "--dt-icon-size-300",
+      "--dt-icon-size-400",
+      "--dt-icon-size-500",
+      "--dt-icon-size-600",
+      "--dt-icon-size-700",
+      "--dt-icon-size-800",
+      "--dt-size-0",
+      "--dt-spacing-25",
+      "--dt-spacing-300",
+      "--icon-size",
+      "--icon-size-100",
+      "--icon-size-200",
+      "--icon-size-300",
+      "--icon-size-400",
+      "--icon-size-500",
+      "--icon-size-600",
+      "--icon-size-700",
+      "--icon-size-800",
+      "--validation-color-text",
+      "--validation-size-icon"
+    ],
+    "d-avatar__icon": [
+      "--avatar-icon-size"
+    ],
+    "d-avatar__presence": [
+      "--avatar-presence-position-bottom",
+      "--avatar-presence-position-right",
+      "--avatar-presence-shape",
+      "--dt-spacing-0",
+      "--zi-base"
+    ],
+    "d-presence": [
+      "--avatar-presence-shape",
+      "--dt-color-black-200",
+      "--dt-color-foreground-primary-inverted",
+      "--dt-color-neutral-transparent",
+      "--dt-color-surface-primary",
+      "--dt-color-surface-secondary",
+      "--dt-layout-100-percent",
+      "--dt-presence-color-available",
+      "--dt-presence-color-busy",
+      "--dt-presence-color-offline",
+      "--dt-presence-color-unavailable",
+      "--dt-shell-action-color-background-primary-hover",
+      "--dt-shell-presence-color-available",
+      "--dt-shell-presence-color-busy",
+      "--dt-shell-presence-color-offline",
+      "--dt-shell-presence-color-unavailable",
+      "--dt-spacing-0",
+      "--dt-spacing-150",
+      "--presence-color-background-active",
+      "--presence-color-background-away",
+      "--presence-color-background-busy",
+      "--presence-color-border-dnd",
+      "--presence-icon-color",
+      "--presence-icon-size",
+      "--presence-size"
+    ],
+    "d-avatar--sm": [
+      "--dt-font-size-100",
+      "--dt-font-size-75",
+      "--dt-layout-100"
+    ],
+    "d-avatar--size-200": [
+      "--dt-font-size-100",
+      "--dt-font-size-75",
+      "--dt-layout-100"
+    ],
+    "d-avatar--md": [
+      "--dt-font-size-100",
+      "--dt-font-size-200",
+      "--dt-spacing-300"
+    ],
+    "d-avatar--presence": [
+      "--avatar-mask",
+      "--dt-color-neutral-transparent",
+      "--dt-spacing-1-negative"
+    ],
+    "d-btn": [
+      "--brand-color",
+      "--button-border-radius",
+      "--button-border-width",
+      "--button-color-background",
+      "--button-color-text",
+      "--button-padding-x",
+      "--button-padding-x-lg",
+      "--button-padding-x-md",
+      "--button-padding-x-sm",
+      "--button-padding-x-xl",
+      "--button-padding-x-xs",
+      "--button-padding-y",
+      "--button-padding-y-lg",
+      "--button-padding-y-md",
+      "--button-padding-y-sm",
+      "--button-padding-y-xl",
+      "--button-padding-y-xs",
+      "--chroma-adjust-background",
+      "--chroma-adjust-text",
+      "--dt-action-color-background-base-active",
+      "--dt-action-color-background-base-default",
+      "--dt-action-color-background-base-hover",
+      "--dt-action-color-background-base-primary-active",
+      "--dt-action-color-background-base-primary-default",
+      "--dt-action-color-background-base-primary-hover",
+      "--dt-action-color-background-critical-active",
+      "--dt-action-color-background-critical-default",
+      "--dt-action-color-background-critical-hover",
+      "--dt-action-color-background-critical-primary-active",
+      "--dt-action-color-background-critical-primary-default",
+      "--dt-action-color-background-critical-primary-hover",
+      "--dt-action-color-background-inverted-active",
+      "--dt-action-color-background-inverted-default",
+      "--dt-action-color-background-inverted-hover",
+      "--dt-action-color-background-inverted-primary-active",
+      "--dt-action-color-background-inverted-primary-default",
+      "--dt-action-color-background-inverted-primary-hover",
+      "--dt-action-color-background-muted-active",
+      "--dt-action-color-background-muted-hover",
+      "--dt-action-color-background-positive-active",
+      "--dt-action-color-background-positive-default",
+      "--dt-action-color-background-positive-hover",
+      "--dt-action-color-background-positive-primary-active",
+      "--dt-action-color-background-positive-primary-default",
+      "--dt-action-color-background-positive-primary-hover",
+      "--dt-action-color-border-base-default",
+      "--dt-action-color-border-base-outlined-default",
+      "--dt-action-color-border-critical-default",
+      "--dt-action-color-border-critical-outlined-default",
+      "--dt-action-color-border-inverted-default",
+      "--dt-action-color-border-inverted-outlined-default",
+      "--dt-action-color-border-muted-default",
+      "--dt-action-color-border-muted-outlined-default",
+      "--dt-action-color-border-positive-default",
+      "--dt-action-color-border-positive-outlined-default",
+      "--dt-action-color-foreground-base-active",
+      "--dt-action-color-foreground-base-default",
+      "--dt-action-color-foreground-base-hover",
+      "--dt-action-color-foreground-base-primary-default",
+      "--dt-action-color-foreground-critical-active",
+      "--dt-action-color-foreground-critical-default",
+      "--dt-action-color-foreground-critical-hover",
+      "--dt-action-color-foreground-critical-primary-default",
+      "--dt-action-color-foreground-inverted-active",
+      "--dt-action-color-foreground-inverted-default",
+      "--dt-action-color-foreground-inverted-hover",
+      "--dt-action-color-foreground-inverted-primary-active",
+      "--dt-action-color-foreground-inverted-primary-default",
+      "--dt-action-color-foreground-inverted-primary-hover",
+      "--dt-action-color-foreground-muted-active",
+      "--dt-action-color-foreground-muted-default",
+      "--dt-action-color-foreground-muted-hover",
+      "--dt-action-color-foreground-positive-active",
+      "--dt-action-color-foreground-positive-default",
+      "--dt-action-color-foreground-positive-hover",
+      "--dt-action-color-foreground-positive-primary-default",
+      "--dt-button-size-radius-lg",
+      "--dt-button-size-radius-md",
+      "--dt-button-size-radius-sm",
+      "--dt-button-size-radius-xl",
+      "--dt-button-size-radius-xs",
+      "--dt-color-black-100",
+      "--dt-color-foreground-primary-inverted",
+      "--dt-color-foreground-tertiary",
+      "--dt-color-neutral-white",
+      "--dt-color-surface-moderate",
+      "--dt-color-surface-primary",
+      "--dt-color-surface-secondary",
+      "--dt-font-size-200",
+      "--dt-font-weight-medium",
+      "--dt-icon-size-100",
+      "--dt-icon-size-200",
+      "--dt-icon-size-400",
+      "--dt-icon-size-500",
+      "--dt-layout-1px",
+      "--dt-layout-25",
+      "--dt-opacity-300",
+      "--dt-opacity-600",
+      "--dt-opacity-700",
+      "--dt-opacity-800",
+      "--dt-shadow-focus",
+      "--dt-shell-mention-color-surface-primary",
+      "--dt-size-border-100",
+      "--dt-size-radius-circle",
+      "--dt-space-850",
+      "--dt-spacing-1",
+      "--dt-spacing-1-negative",
+      "--dt-spacing-100",
+      "--dt-spacing-150",
+      "--dt-spacing-200",
+      "--dt-spacing-25",
+      "--dt-spacing-25-negative",
+      "--dt-spacing-300",
+      "--dt-spacing-50",
+      "--dt-spacing-50-negative",
+      "--dt-spacing-75",
+      "--dt-spacing-75-negative",
+      "--dt-typography-button-lg",
+      "--dt-typography-button-md",
+      "--dt-typography-button-sm",
+      "--dt-typography-button-xl",
+      "--dt-typography-button-xs",
+      "--notice-color-text",
+      "--opacity-adjust-background",
+      "--opacity-adjust-text",
+      "--td100",
+      "--ttf-out-quint",
+      "--zi-base1"
+    ],
+    "d-bt": [
+      "--brand-color",
+      "--button-border-radius",
+      "--button-border-width",
+      "--button-color-background",
+      "--button-color-text",
+      "--button-padding-x",
+      "--button-padding-x-lg",
+      "--button-padding-x-md",
+      "--button-padding-x-sm",
+      "--button-padding-x-xl",
+      "--button-padding-x-xs",
+      "--button-padding-y",
+      "--button-padding-y-lg",
+      "--button-padding-y-md",
+      "--button-padding-y-sm",
+      "--button-padding-y-xl",
+      "--button-padding-y-xs",
+      "--chroma-adjust-background",
+      "--chroma-adjust-text",
+      "--dt-action-color-background-base-active",
+      "--dt-action-color-background-base-default",
+      "--dt-action-color-background-base-hover",
+      "--dt-action-color-background-base-primary-active",
+      "--dt-action-color-background-base-primary-default",
+      "--dt-action-color-background-base-primary-hover",
+      "--dt-action-color-background-critical-active",
+      "--dt-action-color-background-critical-default",
+      "--dt-action-color-background-critical-hover",
+      "--dt-action-color-background-critical-primary-active",
+      "--dt-action-color-background-critical-primary-default",
+      "--dt-action-color-background-critical-primary-hover",
+      "--dt-action-color-background-inverted-active",
+      "--dt-action-color-background-inverted-default",
+      "--dt-action-color-background-inverted-hover",
+      "--dt-action-color-background-inverted-primary-active",
+      "--dt-action-color-background-inverted-primary-default",
+      "--dt-action-color-background-inverted-primary-hover",
+      "--dt-action-color-background-muted-active",
+      "--dt-action-color-background-muted-hover",
+      "--dt-action-color-background-positive-active",
+      "--dt-action-color-background-positive-default",
+      "--dt-action-color-background-positive-hover",
+      "--dt-action-color-background-positive-primary-active",
+      "--dt-action-color-background-positive-primary-default",
+      "--dt-action-color-background-positive-primary-hover",
+      "--dt-action-color-border-base-default",
+      "--dt-action-color-border-base-outlined-default",
+      "--dt-action-color-border-critical-default",
+      "--dt-action-color-border-critical-outlined-default",
+      "--dt-action-color-border-inverted-default",
+      "--dt-action-color-border-inverted-outlined-default",
+      "--dt-action-color-border-muted-default",
+      "--dt-action-color-border-muted-outlined-default",
+      "--dt-action-color-border-positive-default",
+      "--dt-action-color-border-positive-outlined-default",
+      "--dt-action-color-foreground-base-active",
+      "--dt-action-color-foreground-base-default",
+      "--dt-action-color-foreground-base-hover",
+      "--dt-action-color-foreground-base-primary-default",
+      "--dt-action-color-foreground-critical-active",
+      "--dt-action-color-foreground-critical-default",
+      "--dt-action-color-foreground-critical-hover",
+      "--dt-action-color-foreground-critical-primary-default",
+      "--dt-action-color-foreground-inverted-active",
+      "--dt-action-color-foreground-inverted-default",
+      "--dt-action-color-foreground-inverted-hover",
+      "--dt-action-color-foreground-inverted-primary-active",
+      "--dt-action-color-foreground-inverted-primary-default",
+      "--dt-action-color-foreground-inverted-primary-hover",
+      "--dt-action-color-foreground-muted-active",
+      "--dt-action-color-foreground-muted-default",
+      "--dt-action-color-foreground-muted-hover",
+      "--dt-action-color-foreground-positive-active",
+      "--dt-action-color-foreground-positive-default",
+      "--dt-action-color-foreground-positive-hover",
+      "--dt-action-color-foreground-positive-primary-default",
+      "--dt-button-size-radius-lg",
+      "--dt-button-size-radius-md",
+      "--dt-button-size-radius-sm",
+      "--dt-button-size-radius-xl",
+      "--dt-button-size-radius-xs",
+      "--dt-color-black-100",
+      "--dt-color-foreground-primary-inverted",
+      "--dt-color-foreground-tertiary",
+      "--dt-color-neutral-white",
+      "--dt-color-surface-moderate",
+      "--dt-color-surface-primary",
+      "--dt-color-surface-secondary",
+      "--dt-font-size-200",
+      "--dt-font-weight-medium",
+      "--dt-icon-size-100",
+      "--dt-icon-size-200",
+      "--dt-icon-size-400",
+      "--dt-icon-size-500",
+      "--dt-layout-1px",
+      "--dt-layout-25",
+      "--dt-opacity-300",
+      "--dt-opacity-600",
+      "--dt-opacity-700",
+      "--dt-opacity-800",
+      "--dt-shadow-focus",
+      "--dt-shell-mention-color-surface-primary",
+      "--dt-size-border-0",
+      "--dt-size-border-100",
+      "--dt-size-border-200",
+      "--dt-size-border-300",
+      "--dt-size-radius-0",
+      "--dt-size-radius-100",
+      "--dt-size-radius-200",
+      "--dt-size-radius-300",
+      "--dt-size-radius-350",
+      "--dt-size-radius-400",
+      "--dt-size-radius-450",
+      "--dt-size-radius-500",
+      "--dt-size-radius-550",
+      "--dt-size-radius-600",
+      "--dt-size-radius-circle",
+      "--dt-size-radius-pill",
+      "--dt-space-850",
+      "--dt-spacing-1",
+      "--dt-spacing-1-negative",
+      "--dt-spacing-100",
+      "--dt-spacing-150",
+      "--dt-spacing-200",
+      "--dt-spacing-25",
+      "--dt-spacing-25-negative",
+      "--dt-spacing-300",
+      "--dt-spacing-50",
+      "--dt-spacing-50-negative",
+      "--dt-spacing-75",
+      "--dt-spacing-75-negative",
+      "--dt-typography-button-lg",
+      "--dt-typography-button-md",
+      "--dt-typography-button-sm",
+      "--dt-typography-button-xl",
+      "--dt-typography-button-xs",
+      "--notice-color-text",
+      "--opacity-adjust-background",
+      "--opacity-adjust-text",
+      "--td100",
+      "--ttf-out-quint",
+      "--zi-base1"
+    ],
+    "d-btn--outlined": [
+      "--dt-action-color-background-muted-active",
+      "--dt-action-color-border-base-outlined-default",
+      "--dt-action-color-border-critical-outlined-default",
+      "--dt-action-color-border-inverted-outlined-default",
+      "--dt-action-color-border-muted-outlined-default",
+      "--dt-action-color-border-positive-outlined-default",
+      "--dt-opacity-300",
+      "--dt-opacity-600",
+      "--dt-size-border-100",
+      "--dt-spacing-1",
+      "--dt-spacing-1-negative"
+    ],
+    "d-btn--muted": [
+      "--dt-action-color-background-muted-active",
+      "--dt-action-color-background-muted-hover",
+      "--dt-action-color-border-muted-default",
+      "--dt-action-color-border-muted-outlined-default",
+      "--dt-action-color-foreground-muted-active",
+      "--dt-action-color-foreground-muted-default",
+      "--dt-action-color-foreground-muted-hover",
+      "--dt-opacity-300"
+    ],
+    "d-btn--xs": [
+      "--button-padding-x-xs",
+      "--button-padding-y-xs",
+      "--dt-button-size-radius-xs",
+      "--dt-typography-button-xs"
+    ],
+    "d-btn--sm": [
+      "--button-padding-x-sm",
+      "--button-padding-y-sm",
+      "--dt-button-size-radius-sm",
+      "--dt-typography-button-sm"
+    ],
+    "d-btn--lg": [
+      "--button-padding-x-lg",
+      "--button-padding-y-lg",
+      "--dt-button-size-radius-lg",
+      "--dt-spacing-1",
+      "--dt-typography-button-lg"
+    ],
+    "d-btn__label": [
+      "--dt-color-foreground-primary-inverted",
+      "--dt-color-foreground-tertiary",
+      "--dt-font-size-200",
+      "--dt-spacing-100",
+      "--zi-base1"
+    ],
+    "d-btn__icon": [
+      "--dt-color-neutral-white",
+      "--dt-icon-size-100",
+      "--dt-icon-size-200",
+      "--dt-icon-size-400",
+      "--dt-icon-size-500",
+      "--dt-opacity-600",
+      "--dt-spacing-100",
+      "--dt-spacing-25-negative",
+      "--dt-spacing-300",
+      "--dt-spacing-50-negative",
+      "--zi-base1"
+    ],
+    "d-btn__icon--left": [
+      "--dt-spacing-25-negative"
+    ],
+    "d-btn--circle": [
+      "--button-padding-y-lg",
+      "--button-padding-y-md",
+      "--button-padding-y-sm",
+      "--button-padding-y-xl",
+      "--button-padding-y-xs",
+      "--dt-action-color-background-muted-active",
+      "--dt-action-color-background-muted-hover",
+      "--dt-action-color-border-muted-outlined-default",
+      "--dt-action-color-foreground-muted-active",
+      "--dt-action-color-foreground-muted-default",
+      "--dt-action-color-foreground-muted-hover",
+      "--dt-size-radius-circle",
+      "--dt-spacing-1",
+      "--dt-spacing-50"
+    ],
+    "d-btn--primary": [
+      "--dt-action-color-background-base-primary-active",
+      "--dt-action-color-background-base-primary-default",
+      "--dt-action-color-background-base-primary-hover",
+      "--dt-action-color-background-critical-primary-active",
+      "--dt-action-color-background-critical-primary-default",
+      "--dt-action-color-background-critical-primary-hover",
+      "--dt-action-color-background-inverted-primary-active",
+      "--dt-action-color-background-inverted-primary-default",
+      "--dt-action-color-background-inverted-primary-hover",
+      "--dt-action-color-background-positive-primary-active",
+      "--dt-action-color-background-positive-primary-default",
+      "--dt-action-color-background-positive-primary-hover",
+      "--dt-action-color-border-base-default",
+      "--dt-action-color-foreground-base-primary-default",
+      "--dt-action-color-foreground-critical-primary-default",
+      "--dt-action-color-foreground-inverted-primary-active",
+      "--dt-action-color-foreground-inverted-primary-default",
+      "--dt-action-color-foreground-inverted-primary-hover",
+      "--dt-action-color-foreground-positive-primary-default",
+      "--dt-color-surface-primary",
+      "--dt-opacity-600",
+      "--dt-shell-mention-color-surface-primary",
+      "--dt-spacing-1",
+      "--dt-spacing-1-negative"
+    ],
+    "d-btn--inverted": [
+      "--dt-action-color-background-inverted-active",
+      "--dt-action-color-background-inverted-default",
+      "--dt-action-color-background-inverted-hover",
+      "--dt-action-color-background-inverted-primary-active",
+      "--dt-action-color-background-inverted-primary-default",
+      "--dt-action-color-background-inverted-primary-hover",
+      "--dt-action-color-border-inverted-default",
+      "--dt-action-color-border-inverted-outlined-default",
+      "--dt-action-color-foreground-inverted-active",
+      "--dt-action-color-foreground-inverted-default",
+      "--dt-action-color-foreground-inverted-hover",
+      "--dt-action-color-foreground-inverted-primary-active",
+      "--dt-action-color-foreground-inverted-primary-default",
+      "--dt-action-color-foreground-inverted-primary-hover",
+      "--dt-color-surface-primary",
+      "--dt-opacity-300",
+      "--dt-shell-mention-color-surface-primary"
+    ],
+    "d-btn--icon-only": [
+      "--button-padding-y-lg",
+      "--button-padding-y-md",
+      "--button-padding-y-sm",
+      "--button-padding-y-xl",
+      "--button-padding-y-xs",
+      "--dt-spacing-1",
+      "--dt-spacing-100",
+      "--dt-spacing-150",
+      "--dt-spacing-50",
+      "--dt-spacing-75"
+    ],
+    "d-badge": [
+      "--badge-color-background",
+      "--badge-color-outline",
+      "--badge-color-text",
+      "--badge-decorative-color",
+      "--badge-font-size",
+      "--badge-font-weight",
+      "--badge-label-padding-x",
+      "--badge-letter-spacing",
+      "--badge-line-height",
+      "--badge-size",
+      "--badge-text-case",
+      "--dt-badge-color-background-ai",
+      "--dt-badge-color-background-bulletin",
+      "--dt-badge-color-background-bulletin-subtle",
+      "--dt-badge-color-background-critical",
+      "--dt-badge-color-background-default",
+      "--dt-badge-color-background-info",
+      "--dt-badge-color-background-positive",
+      "--dt-badge-color-background-warning",
+      "--dt-badge-color-border-bulletin-subtle",
+      "--dt-badge-color-border-default",
+      "--dt-badge-color-foreground-ai",
+      "--dt-badge-color-foreground-bulletin",
+      "--dt-badge-color-foreground-bulletin-subtle",
+      "--dt-badge-color-foreground-default",
+      "--dt-color-black-400",
+      "--dt-color-black-500",
+      "--dt-color-black-900",
+      "--dt-color-blue-200",
+      "--dt-color-blue-300",
+      "--dt-color-blue-400",
+      "--dt-color-brand-magenta",
+      "--dt-color-gold-300",
+      "--dt-color-gold-400",
+      "--dt-color-gold-500",
+      "--dt-color-green-300",
+      "--dt-color-green-400",
+      "--dt-color-green-500",
+      "--dt-color-magenta-200",
+      "--dt-color-magenta-300",
+      "--dt-color-magenta-400",
+      "--dt-color-neutral-black",
+      "--dt-color-purple-200",
+      "--dt-color-purple-300",
+      "--dt-color-purple-400",
+      "--dt-color-purple-500",
+      "--dt-color-red-200",
+      "--dt-color-red-300",
+      "--dt-color-red-400",
+      "--dt-color-surface-brand-strong",
+      "--dt-font-size-100",
+      "--dt-font-weight-semi-bold",
+      "--dt-layout-25",
+      "--dt-shell-mention-color-foreground-primary",
+      "--dt-shell-mention-color-surface-primary",
+      "--dt-size-border-100",
+      "--dt-size-radius-300",
+      "--dt-size-radius-pill",
+      "--dt-spacing-0",
+      "--dt-spacing-1",
+      "--dt-spacing-100",
+      "--dt-spacing-200",
+      "--dt-spacing-25",
+      "--dt-spacing-50",
+      "--general-row-unread-badge-display",
+      "--leftbar-row-unread-badge-display"
+    ],
+    "d-badge--outlined": [
+      "--badge-color-outline",
+      "--dt-size-border-100"
+    ],
+    "d-badge__label": [
+      "--badge-label-padding-x"
+    ],
+    "d-tab": [
+      "--dt-action-color-background-base-active",
+      "--dt-action-color-background-base-default",
+      "--dt-action-color-background-base-hover",
+      "--dt-action-color-background-inverted-active",
+      "--dt-action-color-background-inverted-hover",
+      "--dt-action-color-background-muted-active",
+      "--dt-action-color-background-muted-hover",
+      "--dt-action-color-foreground-base-active",
+      "--dt-action-color-foreground-base-default",
+      "--dt-action-color-foreground-base-hover",
+      "--dt-action-color-foreground-disabled-default",
+      "--dt-action-color-foreground-inverted-active",
+      "--dt-action-color-foreground-inverted-default",
+      "--dt-action-color-foreground-inverted-hover",
+      "--dt-action-color-foreground-muted-active",
+      "--dt-action-color-foreground-muted-default",
+      "--dt-action-color-foreground-muted-hover",
+      "--dt-button-size-radius-lg",
+      "--dt-button-size-radius-md",
+      "--dt-button-size-radius-xl",
+      "--dt-button-size-radius-xs",
+      "--dt-color-border-default",
+      "--dt-color-border-default-inverted",
+      "--dt-color-foreground-primary-inverted",
+      "--dt-color-foreground-secondary",
+      "--dt-color-foreground-secondary-inverted",
+      "--dt-color-foreground-tertiary",
+      "--dt-color-foreground-tertiary-inverted",
+      "--dt-color-surface-contrast",
+      "--dt-color-surface-primary",
+      "--dt-color-surface-secondary-opaque",
+      "--dt-font-line-height-100",
+      "--dt-font-line-height-200",
+      "--dt-font-size-100",
+      "--dt-font-size-200",
+      "--dt-font-weight-bold",
+      "--dt-shadow-focus-inset",
+      "--dt-size-border-100",
+      "--dt-size-border-200",
+      "--dt-size-radius-400",
+      "--dt-spacing-1",
+      "--dt-spacing-1-negative",
+      "--dt-spacing-100",
+      "--dt-spacing-150",
+      "--dt-spacing-200",
+      "--dt-spacing-25",
+      "--dt-spacing-75",
+      "--dt-typography-button-lg",
+      "--dt-typography-button-md",
+      "--dt-typography-button-xl",
+      "--dt-typography-button-xs",
+      "--tab-after-bg",
+      "--tab-border-radius",
+      "--tab-color-background",
+      "--tab-color-background-active",
+      "--tab-color-background-hover",
+      "--tab-color-text",
+      "--tab-color-text-active",
+      "--tab-color-text-disabled",
+      "--tab-color-text-hover",
+      "--tab-color-text-selected",
+      "--tab-selected-indicator",
+      "--table-font-size",
+      "--table-line-height",
+      "--table-td-color-text",
+      "--table-th-color-text",
+      "--table-th-font-size",
+      "--tablist-border-opacity",
+      "--tablist-padding-bottom",
+      "--td300",
+      "--ttf-ease",
+      "--zi-base1",
+      "--zi-selected"
+    ],
+    "d-toggle": [
+      "--dt-action-color-background-base-active",
+      "--dt-action-color-background-muted-default",
+      "--dt-action-color-foreground-base-active",
+      "--dt-action-color-foreground-muted-default",
+      "--dt-checkbox-color-background-checked",
+      "--dt-color-foreground-muted",
+      "--dt-color-neutral-white",
+      "--dt-color-surface-bold",
+      "--dt-color-surface-contrast",
+      "--dt-color-surface-primary",
+      "--dt-icon-size-200",
+      "--dt-icon-size-400",
+      "--dt-layout-25",
+      "--dt-layout-50",
+      "--dt-layout-75",
+      "--dt-shadow-focus",
+      "--dt-spacing-1",
+      "--dt-spacing-200",
+      "--dt-spacing-25",
+      "--dt-spacing-300",
+      "--dt-spacing-50",
+      "--dt-spacing-50-negative",
+      "--dt-spacing-75",
+      "--lh4",
+      "--td200",
+      "--td300",
+      "--toggle-color-background",
+      "--toggle-size-height",
+      "--toggle-size-icon",
+      "--toggle-size-width",
+      "--ttf-out-quint"
+    ],
+    "d-toggle__inner": [
+      "--dt-spacing-1",
+      "--dt-spacing-200",
+      "--dt-spacing-25",
+      "--dt-spacing-300",
+      "--dt-spacing-50",
+      "--dt-spacing-75",
+      "--toggle-size-icon"
+    ],
+    "d-presence__inner": [
+      "--presence-color-background-active",
+      "--presence-color-background-away",
+      "--presence-color-background-busy",
+      "--presence-color-border-dnd",
+      "--presence-size"
+    ],
+    "d-presence__inner--active": [
+      "--presence-color-background-active"
+    ],
+    "d-presence__icon": [
+      "--presence-icon-color",
+      "--presence-icon-size"
+    ],
+    "d-icon--size-600": [
+      "--icon-size-600"
+    ],
+    "d-icon--size-500": [
+      "--icon-size-500"
+    ],
+    "d-icon--size-400": [
+      "--icon-size-400"
+    ],
+    "d-icon--size-300": [
+      "--icon-size-300"
+    ],
+    "d-icon--size-200": [
+      "--icon-size-200"
+    ],
+    "d-icon--size-100": [
+      "--icon-size-100"
+    ],
+    "d-list-item": [
+      "--dt-action-color-background-muted-active",
+      "--dt-action-color-background-muted-default",
+      "--dt-action-color-background-muted-hover",
+      "--dt-color-foreground-tertiary",
+      "--dt-font-line-height-300",
+      "--dt-font-size-100",
+      "--dt-font-size-200",
+      "--dt-layout-0",
+      "--dt-layout-25",
+      "--dt-layout-50",
+      "--dt-shadow-focus",
+      "--dt-spacing-0",
+      "--dt-spacing-25",
+      "--dt-spacing-25-negative",
+      "--dt-spacing-50"
+    ],
+    "d-description": [
+      "--dt-color-foreground-primary",
+      "--dt-color-foreground-tertiary",
+      "--dt-font-line-height-300",
+      "--dt-font-size-150",
+      "--dt-font-size-200",
+      "--dt-font-size-75",
+      "--dt-spacing-0",
+      "--dt-spacing-1",
+      "--dt-spacing-100",
+      "--dt-spacing-125",
+      "--dt-spacing-150",
+      "--dt-spacing-175",
+      "--dt-spacing-200",
+      "--dt-spacing-25",
+      "--dt-spacing-250",
+      "--dt-spacing-300",
+      "--dt-spacing-350",
+      "--dt-spacing-400",
+      "--dt-spacing-450",
+      "--dt-spacing-50",
+      "--dt-spacing-50-negative",
+      "--dt-spacing-500",
+      "--dt-spacing-525",
+      "--dt-spacing-550",
+      "--dt-spacing-600",
+      "--dt-spacing-650",
+      "--dt-spacing-700",
+      "--dt-spacing-75",
+      "--dt-spacing-750",
+      "--dt-spacing-800"
+    ],
+    "d-input__wrapper": [
+      "--dt-icon-size-100",
+      "--dt-icon-size-200",
+      "--dt-icon-size-400",
+      "--dt-icon-size-500",
+      "--dt-inputs-color-background-default",
+      "--dt-inputs-color-background-disabled",
+      "--dt-inputs-color-background-focus",
+      "--dt-inputs-color-border-critical",
+      "--dt-inputs-color-border-default",
+      "--dt-inputs-color-border-disabled",
+      "--dt-inputs-color-border-focus",
+      "--dt-inputs-color-border-hover",
+      "--dt-inputs-color-foreground-default",
+      "--dt-inputs-color-foreground-disabled",
+      "--dt-inputs-color-foreground-placeholder",
+      "--dt-inputs-size-radius-lg",
+      "--dt-inputs-size-radius-md",
+      "--dt-inputs-size-radius-sm",
+      "--dt-inputs-size-radius-xl",
+      "--dt-inputs-size-radius-xs",
+      "--dt-layout-25",
+      "--dt-shadow-card",
+      "--dt-size-border-100",
+      "--dt-size-radius-400",
+      "--dt-spacing-1",
+      "--dt-spacing-100",
+      "--dt-spacing-150",
+      "--dt-spacing-25",
+      "--dt-spacing-50",
+      "--dt-spacing-75",
+      "--dt-typography-inputs-lg",
+      "--dt-typography-inputs-md",
+      "--dt-typography-inputs-sm",
+      "--dt-typography-inputs-xl",
+      "--dt-typography-inputs-xs",
+      "--input-border-width",
+      "--input-color-background",
+      "--input-color-border-hover",
+      "--input-color-text",
+      "--input-padding-y",
+      "--zi-base1"
+    ],
+    "d-input": [
+      "--dt-color-foreground-secondary",
+      "--dt-font-line-height-300",
+      "--dt-font-size-100",
+      "--dt-font-size-200",
+      "--dt-font-weight-semi-bold",
+      "--dt-icon-size-100",
+      "--dt-icon-size-200",
+      "--dt-icon-size-400",
+      "--dt-icon-size-500",
+      "--dt-inputs-color-background-default",
+      "--dt-inputs-color-background-disabled",
+      "--dt-inputs-color-background-focus",
+      "--dt-inputs-color-border-critical",
+      "--dt-inputs-color-border-default",
+      "--dt-inputs-color-border-disabled",
+      "--dt-inputs-color-border-focus",
+      "--dt-inputs-color-border-hover",
+      "--dt-inputs-color-border-positive",
+      "--dt-inputs-color-border-warning",
+      "--dt-inputs-color-foreground-default",
+      "--dt-inputs-color-foreground-disabled",
+      "--dt-inputs-color-foreground-placeholder",
+      "--dt-inputs-size-radius-lg",
+      "--dt-inputs-size-radius-md",
+      "--dt-inputs-size-radius-sm",
+      "--dt-inputs-size-radius-xl",
+      "--dt-inputs-size-radius-xs",
+      "--dt-layout-25",
+      "--dt-shadow-card",
+      "--dt-size-border-100",
+      "--dt-size-radius-400",
+      "--dt-spacing-0",
+      "--dt-spacing-1",
+      "--dt-spacing-100",
+      "--dt-spacing-150",
+      "--dt-spacing-25",
+      "--dt-spacing-400",
+      "--dt-spacing-50",
+      "--dt-spacing-50-negative",
+      "--dt-spacing-75",
+      "--dt-spacing-75-negative",
+      "--dt-typography-inputs-lg",
+      "--dt-typography-inputs-md",
+      "--dt-typography-inputs-sm",
+      "--dt-typography-inputs-xl",
+      "--dt-typography-inputs-xs",
+      "--input-border-width",
+      "--input-color-background",
+      "--input-color-border-hover",
+      "--input-color-text",
+      "--input-padding-y",
+      "--lh4",
+      "--zi-base1"
+    ],
+    "d-textarea": [
+      "--dt-icon-size-100",
+      "--dt-icon-size-200",
+      "--dt-icon-size-400",
+      "--dt-icon-size-500",
+      "--dt-inputs-color-background-default",
+      "--dt-inputs-color-background-disabled",
+      "--dt-inputs-color-background-focus",
+      "--dt-inputs-color-border-critical",
+      "--dt-inputs-color-border-default",
+      "--dt-inputs-color-border-disabled",
+      "--dt-inputs-color-border-focus",
+      "--dt-inputs-color-border-hover",
+      "--dt-inputs-color-foreground-default",
+      "--dt-inputs-color-foreground-disabled",
+      "--dt-inputs-color-foreground-placeholder",
+      "--dt-inputs-size-radius-lg",
+      "--dt-inputs-size-radius-md",
+      "--dt-inputs-size-radius-sm",
+      "--dt-inputs-size-radius-xl",
+      "--dt-inputs-size-radius-xs",
+      "--dt-layout-125",
+      "--dt-layout-25",
+      "--dt-layout-75",
+      "--dt-size-border-100",
+      "--dt-size-radius-400",
+      "--dt-spacing-1",
+      "--dt-spacing-100",
+      "--dt-spacing-150",
+      "--dt-spacing-175",
+      "--dt-spacing-25",
+      "--dt-spacing-50",
+      "--dt-spacing-75",
+      "--dt-typography-inputs-lg",
+      "--dt-typography-inputs-md",
+      "--dt-typography-inputs-sm",
+      "--dt-typography-inputs-xl",
+      "--dt-typography-inputs-xs",
+      "--input-border-width",
+      "--input-color-background",
+      "--input-color-border-hover",
+      "--input-color-text",
+      "--input-padding-y"
+    ],
+    "d-input--sm": [
+      "--dt-icon-size-200",
+      "--dt-inputs-size-radius-sm",
+      "--dt-layout-25",
+      "--dt-spacing-50",
+      "--dt-spacing-75",
+      "--dt-typography-inputs-sm",
+      "--input-border-width"
+    ],
+    "d-input-icon": [
+      "--dt-icon-size-100",
+      "--dt-icon-size-200",
+      "--dt-icon-size-400",
+      "--dt-icon-size-500",
+      "--dt-inputs-size-radius-lg",
+      "--dt-inputs-size-radius-sm",
+      "--dt-inputs-size-radius-xl",
+      "--dt-inputs-size-radius-xs",
+      "--dt-layout-25",
+      "--dt-spacing-1",
+      "--dt-spacing-100",
+      "--dt-spacing-150",
+      "--dt-spacing-25",
+      "--dt-spacing-50",
+      "--dt-spacing-75",
+      "--dt-spacing-75-negative",
+      "--dt-typography-inputs-lg",
+      "--dt-typography-inputs-sm",
+      "--dt-typography-inputs-xl",
+      "--dt-typography-inputs-xs",
+      "--input-border-width",
+      "--input-padding-y"
+    ],
+    "d-input-icon--right": [
+      "--dt-spacing-100",
+      "--dt-spacing-150",
+      "--dt-spacing-75-negative"
+    ],
+    "d-input-icon--left": [
+      "--dt-spacing-100"
+    ],
+    "d-select": [
+      "--dt-color-foreground-primary",
+      "--dt-color-foreground-primary-inverted",
+      "--dt-color-foreground-secondary",
+      "--dt-color-surface-secondary",
+      "--dt-color-surface-strong",
+      "--dt-font-line-height-500",
+      "--dt-font-size-100",
+      "--dt-font-size-200",
+      "--dt-font-weight-bold",
+      "--dt-icon-size-100",
+      "--dt-icon-size-200",
+      "--dt-icon-size-400",
+      "--dt-icon-size-500",
+      "--dt-inputs-color-background-default",
+      "--dt-inputs-color-background-disabled",
+      "--dt-inputs-color-background-focus",
+      "--dt-inputs-color-border-critical",
+      "--dt-inputs-color-border-default",
+      "--dt-inputs-color-border-disabled",
+      "--dt-inputs-color-border-focus",
+      "--dt-inputs-color-border-hover",
+      "--dt-inputs-color-border-positive",
+      "--dt-inputs-color-border-warning",
+      "--dt-inputs-color-foreground-default",
+      "--dt-inputs-color-foreground-disabled",
+      "--dt-inputs-color-foreground-placeholder",
+      "--dt-inputs-size-radius-lg",
+      "--dt-inputs-size-radius-md",
+      "--dt-inputs-size-radius-sm",
+      "--dt-inputs-size-radius-xl",
+      "--dt-inputs-size-radius-xs",
+      "--dt-layout-25",
+      "--dt-layout-350",
+      "--dt-layout-500",
+      "--dt-size-border-100",
+      "--dt-spacing-1",
+      "--dt-spacing-100",
+      "--dt-spacing-150",
+      "--dt-spacing-25",
+      "--dt-spacing-300",
+      "--dt-spacing-450",
+      "--dt-spacing-50",
+      "--dt-spacing-50-negative",
+      "--dt-spacing-75",
+      "--dt-typography-inputs-lg",
+      "--dt-typography-inputs-md",
+      "--dt-typography-inputs-sm",
+      "--dt-typography-inputs-xl",
+      "--dt-typography-inputs-xs",
+      "--input-border-width",
+      "--input-color-background",
+      "--input-color-border",
+      "--input-color-border-hover",
+      "--input-color-text",
+      "--lh0",
+      "--select-arrow-size",
+      "--select-notch-padding-right",
+      "--select-notch-position-right"
+    ],
+    "d-select__input": [
+      "--dt-color-foreground-secondary",
+      "--dt-color-surface-secondary",
+      "--dt-icon-size-100",
+      "--dt-icon-size-200",
+      "--dt-icon-size-400",
+      "--dt-icon-size-500",
+      "--dt-inputs-color-background-default",
+      "--dt-inputs-color-background-disabled",
+      "--dt-inputs-color-background-focus",
+      "--dt-inputs-color-border-critical",
+      "--dt-inputs-color-border-default",
+      "--dt-inputs-color-border-disabled",
+      "--dt-inputs-color-border-focus",
+      "--dt-inputs-color-border-hover",
+      "--dt-inputs-color-border-positive",
+      "--dt-inputs-color-border-warning",
+      "--dt-inputs-color-foreground-default",
+      "--dt-inputs-color-foreground-disabled",
+      "--dt-inputs-color-foreground-placeholder",
+      "--dt-inputs-size-radius-lg",
+      "--dt-inputs-size-radius-md",
+      "--dt-inputs-size-radius-sm",
+      "--dt-inputs-size-radius-xl",
+      "--dt-inputs-size-radius-xs",
+      "--dt-layout-25",
+      "--dt-size-border-100",
+      "--dt-spacing-1",
+      "--dt-spacing-100",
+      "--dt-spacing-150",
+      "--dt-spacing-25",
+      "--dt-spacing-300",
+      "--dt-spacing-450",
+      "--dt-spacing-50",
+      "--dt-spacing-75",
+      "--dt-typography-inputs-lg",
+      "--dt-typography-inputs-md",
+      "--dt-typography-inputs-sm",
+      "--dt-typography-inputs-xl",
+      "--dt-typography-inputs-xs",
+      "--input-border-width",
+      "--input-color-background",
+      "--input-color-border",
+      "--input-color-border-hover",
+      "--input-color-text",
+      "--select-notch-padding-right"
+    ],
+    "d-select--sm": [
+      "--dt-icon-size-200",
+      "--dt-inputs-size-radius-sm",
+      "--dt-layout-25",
+      "--dt-spacing-50",
+      "--dt-spacing-75",
+      "--dt-typography-inputs-sm",
+      "--input-border-width"
+    ],
+    "d-label": [
+      "--dt-color-foreground-secondary",
+      "--dt-font-size-100",
+      "--dt-font-size-200",
+      "--dt-font-size-300",
+      "--dt-spacing-50",
+      "--dt-spacing-50-negative"
+    ],
+    "d-select__label-text": [
+      "--dt-spacing-50",
+      "--dt-spacing-50-negative"
+    ],
+    "d-input__label": [
+      "--dt-font-size-100",
+      "--dt-spacing-50",
+      "--dt-spacing-50-negative"
+    ],
+    "d-input__label-text": [
+      "--dt-font-size-100",
+      "--dt-spacing-50",
+      "--dt-spacing-50-negative"
+    ],
+    "d-modal": [
+      "--dt-color-border-default",
+      "--dt-color-border-subtle",
+      "--dt-color-foreground-primary",
+      "--dt-color-neutral-transparent",
+      "--dt-color-neutral-white",
+      "--dt-color-surface-backdrop",
+      "--dt-color-surface-critical",
+      "--dt-color-surface-info",
+      "--dt-color-surface-overlay",
+      "--dt-color-surface-positive",
+      "--dt-color-surface-secondary",
+      "--dt-color-surface-warning",
+      "--dt-font-line-height-100",
+      "--dt-font-line-height-300",
+      "--dt-font-line-height-400",
+      "--dt-font-size-200",
+      "--dt-font-size-400",
+      "--dt-font-weight-medium",
+      "--dt-layout-1000",
+      "--dt-layout-1300",
+      "--dt-layout-250",
+      "--dt-shadow-card",
+      "--dt-shadow-extra-large",
+      "--dt-shadow-large",
+      "--dt-spacing-100",
+      "--dt-spacing-200",
+      "--dt-spacing-25",
+      "--dt-spacing-250",
+      "--dt-spacing-300",
+      "--dt-spacing-400",
+      "--dt-spacing-800",
+      "--modal-backdrop-color-background",
+      "--modal-banner-color-background",
+      "--modal-banner-padding-y",
+      "--modal-dialog-color-background",
+      "--modal-dialog-color-text",
+      "--modal-dialog-shadow",
+      "--modal-header-color-text",
+      "--modal-header-padding",
+      "--td100",
+      "--td300",
+      "--zi-hide",
+      "--zi-modal",
+      "--zi-modal-element"
+    ],
+    "d-modal__dialog": [
+      "--dt-font-line-height-400",
+      "--dt-font-size-200",
+      "--dt-layout-1000",
+      "--dt-layout-1300",
+      "--modal-dialog-color-background",
+      "--modal-dialog-color-text",
+      "--modal-dialog-shadow",
+      "--zi-hide",
+      "--zi-modal"
+    ],
+    "d-modal__footer": [
+      "--dt-spacing-300"
+    ],
+    "d-modal__header": [
+      "--dt-color-border-default",
+      "--dt-font-line-height-100",
+      "--dt-font-size-400",
+      "--dt-font-weight-medium",
+      "--dt-layout-250",
+      "--dt-shadow-card",
+      "--dt-spacing-200",
+      "--dt-spacing-25",
+      "--dt-spacing-300",
+      "--dt-spacing-400",
+      "--dt-spacing-800",
+      "--modal-header-color-text",
+      "--modal-header-padding",
+      "--td300"
+    ],
+    "d-modal__close": [
+      "--dt-color-neutral-white",
+      "--dt-shadow-extra-large",
+      "--dt-spacing-100",
+      "--dt-spacing-200",
+      "--dt-spacing-25",
+      "--dt-spacing-250",
+      "--dt-spacing-300",
+      "--td100"
+    ],
+    "d-modal__content": [
+      "--dt-spacing-400"
+    ],
+    "d-modal--critical": [
+      "--dt-color-foreground-primary"
+    ],
+    "d-banner": [
+      "--banner-line-height",
+      "--dt-color-border-default",
+      "--dt-color-border-subtle",
+      "--dt-color-foreground-critical",
+      "--dt-color-foreground-info",
+      "--dt-color-foreground-positive",
+      "--dt-color-foreground-primary",
+      "--dt-color-foreground-primary-inverted",
+      "--dt-color-foreground-warning",
+      "--dt-color-neutral-black",
+      "--dt-color-surface-critical",
+      "--dt-color-surface-critical-strong",
+      "--dt-color-surface-info",
+      "--dt-color-surface-info-strong",
+      "--dt-color-surface-positive",
+      "--dt-color-surface-positive-strong",
+      "--dt-color-surface-primary-inverted",
+      "--dt-color-surface-secondary",
+      "--dt-color-surface-warning",
+      "--dt-color-surface-warning-strong",
+      "--dt-font-line-height-200",
+      "--dt-font-line-height-300",
+      "--dt-layout-1000",
+      "--dt-layout-75",
+      "--dt-size-border-100",
+      "--dt-size-radius-400",
+      "--dt-spacing-0",
+      "--dt-spacing-100",
+      "--dt-spacing-200",
+      "--dt-spacing-25",
+      "--dt-spacing-75",
+      "--notice-box-shadow",
+      "--notice-color-background",
+      "--notice-color-shadow",
+      "--notice-color-text",
+      "--notice-line-height",
+      "--zi-navigation-fixed"
+    ],
+    "d-notice__content": [
+      "--dt-font-size-100",
+      "--dt-spacing-150",
+      "--dt-spacing-200",
+      "--notice-content-align",
+      "--notice-content-direction"
+    ],
+    "d-notice__actions": [
+      "--dt-action-color-foreground-muted-default",
+      "--dt-color-foreground-primary-inverted",
+      "--notice-actions-align",
+      "--notice-actions-button-offset",
+      "--notice-color-text"
+    ],
+    "d-notice__icon": [
+      "--dt-color-foreground-secondary-inverted",
+      "--dt-color-foreground-tertiary",
+      "--dt-color-magenta-400",
+      "--dt-icon-size-300",
+      "--dt-spacing-0",
+      "--dt-spacing-100",
+      "--dt-spacing-150",
+      "--dt-spacing-25",
+      "--notice-color-icon",
+      "--notice-icon-block-offset",
+      "--notice-icon-gap"
+    ],
+    "d-banner--info": [
+      "--dt-color-foreground-info",
+      "--dt-color-foreground-primary-inverted",
+      "--dt-color-surface-info",
+      "--dt-color-surface-info-strong"
+    ],
+    "d-toast-wrapper": [
+      "--dt-spacing-400",
+      "--zi-notification"
+    ],
+    "d-banner__dialog": [
+      "--dt-layout-75",
+      "--dt-spacing-0",
+      "--dt-spacing-25",
+      "--dt-spacing-75"
+    ],
+    "d-popover": [
+      "--dt-color-border-subtle",
+      "--dt-color-foreground-primary",
+      "--dt-color-foreground-primary-inverted",
+      "--dt-color-surface-overlay",
+      "--dt-font-size-200",
+      "--dt-font-weight-normal",
+      "--dt-font-weight-semi-bold",
+      "--dt-shadow-card",
+      "--dt-size-border-100",
+      "--dt-size-radius-400",
+      "--dt-spacing-150",
+      "--dt-spacing-400",
+      "--dt-spacing-75",
+      "--popover-color-background",
+      "--popover-shadow",
+      "--zi-modal-element"
+    ],
+    "d-popover__dialog": [
+      "--dt-color-border-subtle",
+      "--dt-color-foreground-primary",
+      "--dt-color-surface-overlay",
+      "--dt-shadow-card",
+      "--dt-size-border-100",
+      "--dt-size-radius-400",
+      "--popover-color-background",
+      "--popover-shadow",
+      "--zi-modal-element"
+    ],
+    "d-popover__dialog--modal": [
+      "--zi-modal-element"
+    ],
+    "d-text-label--sm": [
+      "--dt-spacing-1"
+    ],
+    "d-skeleton-placeholder": [
+      "--dt-color-surface-bold-opaque",
+      "--dt-color-surface-moderate-opaque",
+      "--placeholder-from-color"
+    ],
+    "d-tab-neux": [
+      "--dt-spacing-100",
+      "--dt-spacing-75",
+      "--tablist-padding-bottom"
+    ],
+    "d-tablist": [
+      "--dt-action-color-background-base-default",
+      "--dt-action-color-background-inverted-active",
+      "--dt-action-color-background-inverted-hover",
+      "--dt-action-color-background-muted-active",
+      "--dt-action-color-background-muted-hover",
+      "--dt-action-color-foreground-base-default",
+      "--dt-action-color-foreground-disabled-default",
+      "--dt-action-color-foreground-inverted-active",
+      "--dt-action-color-foreground-inverted-default",
+      "--dt-action-color-foreground-inverted-hover",
+      "--dt-action-color-foreground-muted-active",
+      "--dt-action-color-foreground-muted-default",
+      "--dt-action-color-foreground-muted-hover",
+      "--dt-button-size-radius-lg",
+      "--dt-button-size-radius-md",
+      "--dt-button-size-radius-xl",
+      "--dt-button-size-radius-xs",
+      "--dt-color-border-default",
+      "--dt-color-foreground-primary-inverted",
+      "--dt-size-border-100",
+      "--dt-size-border-200",
+      "--dt-spacing-1",
+      "--dt-spacing-1-negative",
+      "--dt-spacing-100",
+      "--dt-spacing-150",
+      "--dt-spacing-200",
+      "--dt-spacing-25",
+      "--dt-spacing-75",
+      "--dt-typography-button-lg",
+      "--dt-typography-button-md",
+      "--dt-typography-button-xl",
+      "--dt-typography-button-xs",
+      "--tab-border-radius",
+      "--tab-color-background",
+      "--tablist-border-opacity",
+      "--tablist-padding-bottom",
+      "--td300",
+      "--ttf-ease",
+      "--zi-base1"
+    ],
+    "d-tablist__item": [
+      "--dt-size-border-100",
+      "--dt-size-border-200",
+      "--dt-spacing-1",
+      "--dt-spacing-75"
+    ],
+    "d-tab--selected": [
+      "--dt-action-color-background-base-active",
+      "--dt-action-color-background-base-hover",
+      "--dt-action-color-foreground-base-active",
+      "--dt-action-color-foreground-base-hover",
+      "--dt-color-surface-contrast",
+      "--dt-size-border-200",
+      "--tab-color-text-selected",
+      "--tab-selected-indicator",
+      "--zi-selected"
+    ],
+    "d-tab--is-selected": [
+      "--dt-spacing-1",
+      "--dt-spacing-1-negative",
+      "--dt-spacing-25",
+      "--dt-spacing-75",
+      "--tab-selected-indicator",
+      "--tablist-padding-bottom",
+      "--zi-selected"
+    ],
+    "d-scrollbar": [
+      "--dt-color-surface-contrast",
+      "--dt-opacity-1100",
+      "--dt-opacity-700",
+      "--dt-opacity-900",
+      "--dt-scrollbar-offset-block-end",
+      "--dt-scrollbar-offset-block-start",
+      "--dt-scrollbar-offset-inline-end",
+      "--dt-scrollbar-offset-inline-start",
+      "--dt-spacing-150",
+      "--dt-spacing-25",
+      "--os-handle-color",
+      "--os-handle-perpendicular-size"
+    ],
+    "d-emoji": [
+      "--dt-color-border-subtle",
+      "--dt-color-foreground-secondary",
+      "--dt-color-foreground-tertiary",
+      "--dt-color-neutral-transparent",
+      "--dt-color-surface-overlay",
+      "--dt-color-surface-secondary",
+      "--dt-font-size-100",
+      "--dt-layout-100",
+      "--dt-layout-25",
+      "--dt-layout-450",
+      "--dt-layout-50",
+      "--dt-layout-500",
+      "--dt-layout-550",
+      "--dt-layout-75",
+      "--dt-shadow-focus",
+      "--dt-size-border-100",
+      "--dt-size-border-200",
+      "--dt-spacing-1",
+      "--dt-spacing-100",
+      "--dt-spacing-200",
+      "--dt-spacing-25",
+      "--dt-spacing-50",
+      "--dt-spacing-50-negative",
+      "--dt-spacing-75",
+      "--dt-spacing-75-negative",
+      "--dt-typography-headline-eyebrow-text-case",
+      "--icon-size"
+    ],
+    "d-recipe-contact-info": [
+      "--dt-color-foreground-tertiary",
+      "--dt-color-surface-primary",
+      "--dt-font-line-height-300",
+      "--dt-font-size-100",
+      "--dt-layout-100-percent",
+      "--dt-spacing-100",
+      "--dt-spacing-25",
+      "--dt-spacing-25-negative",
+      "--dt-spacing-300-negative",
+      "--dt-spacing-50-negative"
+    ],
+    "d-recipe-contact-info__left": [
+      "--dt-layout-100-percent"
+    ],
+    "d-recipe-contact-info__content": [
+      "--dt-font-line-height-300"
+    ],
+    "d-recipe-contact-info__subtitle": [
+      "--dt-color-foreground-tertiary",
+      "--dt-font-size-100",
+      "--dt-spacing-25-negative"
+    ],
+    "d-bb": [
+      "--dt-size-border-0",
+      "--dt-size-border-100",
+      "--dt-size-border-200",
+      "--dt-size-border-300",
+      "--dt-size-radius-0",
+      "--dt-size-radius-100",
+      "--dt-size-radius-200",
+      "--dt-size-radius-300",
+      "--dt-size-radius-350",
+      "--dt-size-radius-400",
+      "--dt-size-radius-450",
+      "--dt-size-radius-500",
+      "--dt-size-radius-550",
+      "--dt-size-radius-600",
+      "--dt-size-radius-circle",
+      "--dt-size-radius-pill"
+    ],
+    "d-bbw1": [
+      "--dt-size-border-100"
+    ],
+    "d-bl": [
+      "--dt-size-border-0",
+      "--dt-size-border-100",
+      "--dt-size-border-200",
+      "--dt-size-border-300",
+      "--dt-size-radius-0",
+      "--dt-size-radius-100",
+      "--dt-size-radius-200",
+      "--dt-size-radius-300",
+      "--dt-size-radius-350",
+      "--dt-size-radius-400",
+      "--dt-size-radius-450",
+      "--dt-size-radius-500",
+      "--dt-size-radius-550",
+      "--dt-size-radius-600",
+      "--dt-size-radius-circle",
+      "--dt-size-radius-pill"
+    ],
+    "d-zi-base1": [
+      "--zi-base1"
+    ],
+    "d-zi-modal-element": [
+      "--zi-modal-element"
+    ],
+    "d-zi-notification": [
+      "--zi-notification"
+    ],
+    "d-flow24": [
+      "--dt-spacing-300"
+    ],
+    "d-ff-sans": [
+      "--dt-font-family-body"
+    ],
+    "d-fs-100": [
+      "--dt-font-size-100",
+      "--dt-font-size-100-mobile",
+      "--dt-font-size-100-tc8",
+      "--dt-font-size-100-tv"
+    ],
+    "d-fs-200": [
+      "--dt-font-size-200",
+      "--dt-font-size-200-mobile",
+      "--dt-font-size-200-tc8",
+      "--dt-font-size-200-tv"
+    ],
+    "d-fs-300": [
+      "--dt-font-size-300",
+      "--dt-font-size-300-mobile",
+      "--dt-font-size-300-tc8",
+      "--dt-font-size-300-tv"
+    ],
+    "d-fw-bold": [
+      "--dt-font-weight-bold"
+    ],
+    "d-lh4": [
+      "--lh4"
+    ],
+    "d-lh8": [
+      "--lh8"
+    ],
+    "d-lh12": [
+      "--lh12"
+    ],
+    "d-lh-300": [
+      "--dt-font-line-height-300"
+    ],
+    "d-fc-primary": [
+      "--dt-color-foreground-primary",
+      "--dt-color-foreground-primary-inverted",
+      "--fco"
+    ],
+    "d-fc-secondary": [
+      "--dt-color-foreground-secondary",
+      "--dt-color-foreground-secondary-inverted",
+      "--fco"
+    ],
+    "d-fc-tertiary": [
+      "--dt-color-foreground-tertiary",
+      "--dt-color-foreground-tertiary-inverted",
+      "--fco"
+    ],
+    "d-fc-muted": [
+      "--dt-color-foreground-muted",
+      "--dt-color-foreground-muted-inverted",
+      "--fco"
+    ],
+    "d-bgc-neutral-white": [
+      "--bgo",
+      "--dt-color-neutral-white"
+    ],
+    "d-bgc-primary": [
+      "--bgo",
+      "--dt-color-surface-primary",
+      "--dt-color-surface-primary-inverted",
+      "--dt-color-surface-primary-opaque",
+      "--dt-color-surface-primary-opaque-inverted"
+    ],
+    "d-bgc-secondary": [
+      "--bgo",
+      "--dt-color-surface-secondary",
+      "--dt-color-surface-secondary-inverted",
+      "--dt-color-surface-secondary-opaque",
+      "--dt-color-surface-secondary-opaque-inverted"
+    ],
+    "d-brr0": [
+      "--dt-size-radius-0"
+    ],
+    "d-blr0": [
+      "--dt-size-radius-0"
+    ],
+    "d-h32": [
+      "--dt-layout-50",
+      "--dt-layout-500"
+    ],
+    "d-h332": [
+      "--dt-size-925"
+    ],
+    "d-hmx216": [
+      "--dt-size-875"
+    ],
+    "d-hmn332": [
+      "--dt-size-925"
+    ],
+    "d-hmn464": [
+      "--dt-size-975"
+    ],
+    "d-w164": [
+      "--dt-size-825"
+    ],
+    "d-w464": [
+      "--dt-size-975"
+    ],
+    "d-w628": [
+      "--dt-size-1020"
+    ],
+    "d-wmn216": [
+      "--dt-size-875"
+    ],
+    "d-wmn764": [
+      "--dt-size-1040"
+    ],
+    "d-mtn1": [
+      "--dt-spacing-1-negative",
+      "--dt-spacing-125-negative",
+      "--dt-spacing-150-negative",
+      "--dt-spacing-175-negative",
+      "--dt-spacing-200-negative"
+    ],
+    "d-ml4": [
+      "--dt-spacing-50",
+      "--dt-spacing-600"
+    ],
+    "d-px2": [
+      "--dt-spacing-25",
+      "--dt-spacing-250",
+      "--dt-spacing-300"
+    ],
+    "d-px6": [
+      "--dt-spacing-75",
+      "--dt-spacing-800"
+    ],
+    "d-px24": [
+      "--dt-spacing-300"
+    ],
+    "d-py4": [
+      "--dt-spacing-50",
+      "--dt-spacing-600"
+    ],
+    "d-pt16": [
+      "--dt-spacing-200"
+    ],
+    "d-pl12": [
+      "--dt-layout-200",
+      "--dt-spacing-150"
+    ],
+    "d-h-24px": [
+      "--dt-layout-24px"
+    ],
+    "d-h-50": [
+      "--dt-layout-50",
+      "--dt-layout-500"
+    ],
+    "d-h-75": [
+      "--dt-layout-75",
+      "--dt-layout-750"
+    ],
+    "d-w-2px": [
+      "--dt-layout-2px"
+    ],
+    "d-w-24px": [
+      "--dt-layout-24px"
+    ],
+    "d-w-50": [
+      "--dt-layout-50",
+      "--dt-layout-500"
+    ],
+    "d-wmx-1000": [
+      "--dt-layout-1000"
+    ],
+    "d-mx-50": [
+      "--dt-spacing-50",
+      "--dt-spacing-500"
+    ],
+    "d-my-100": [
+      "--dt-spacing-100"
+    ],
+    "d-my-200": [
+      "--dt-spacing-200"
+    ],
+    "d-mt-100": [
+      "--dt-spacing-100"
+    ],
+    "d-mt-150": [
+      "--dt-spacing-150"
+    ],
+    "d-mr-50": [
+      "--dt-spacing-50",
+      "--dt-spacing-500"
+    ],
+    "d-mr-100": [
+      "--dt-spacing-100"
+    ],
+    "d-mr-150": [
+      "--dt-spacing-150"
+    ],
+    "d-mr-200": [
+      "--dt-spacing-200"
+    ],
+    "d-mb-0": [
+      "--dt-spacing-0"
+    ],
+    "d-mb-25": [
+      "--dt-spacing-25",
+      "--dt-spacing-250"
+    ],
+    "d-mb-200": [
+      "--dt-spacing-200"
+    ],
+    "d-ml-75": [
+      "--dt-spacing-75",
+      "--dt-spacing-750"
+    ],
+    "d-ml-100": [
+      "--dt-spacing-100"
+    ],
+    "d-ml-n300": [
+      "--dt-spacing-300-negative"
+    ],
+    "d-ml-n600": [
+      "--dt-spacing-600-negative"
+    ],
+    "d-px-25": [
+      "--dt-spacing-25",
+      "--dt-spacing-250"
+    ],
+    "d-px-50": [
+      "--dt-spacing-50",
+      "--dt-spacing-500"
+    ],
+    "d-px-100": [
+      "--dt-spacing-100"
+    ],
+    "d-px-150": [
+      "--dt-spacing-150"
+    ],
+    "d-px-200": [
+      "--dt-spacing-200"
+    ],
+    "d-px-400": [
+      "--dt-spacing-400"
+    ],
+    "d-py-0": [
+      "--dt-spacing-0"
+    ],
+    "d-py-50": [
+      "--dt-spacing-50",
+      "--dt-spacing-500"
+    ],
+    "d-py-100": [
+      "--dt-spacing-100"
+    ],
+    "d-py-200": [
+      "--dt-spacing-200"
+    ],
+    "d-pt-25": [
+      "--dt-spacing-25",
+      "--dt-spacing-250"
+    ],
+    "d-pt-150": [
+      "--dt-spacing-150"
+    ],
+    "d-pr-50": [
+      "--dt-spacing-50",
+      "--dt-spacing-500"
+    ],
+    "d-pr-800": [
+      "--dt-spacing-800"
+    ],
+    "d-pb-1": [
+      "--dt-spacing-1",
+      "--dt-spacing-100",
+      "--dt-spacing-125",
+      "--dt-spacing-150",
+      "--dt-spacing-175"
+    ],
+    "d-pb-200": [
+      "--dt-spacing-200"
+    ],
+    "d-pb-300": [
+      "--dt-spacing-300"
+    ],
+    "d-pb-400": [
+      "--dt-spacing-400"
+    ],
+    "d-pl-50": [
+      "--dt-spacing-50",
+      "--dt-spacing-500"
+    ],
+    "d-pl-175": [
+      "--dt-spacing-175"
+    ],
+    "d-b-0": [
+      "--dt-spacing-0"
+    ],
+    "d-l-25": [
+      "--dt-spacing-25",
+      "--dt-spacing-250"
+    ],
+    "d-item-layout--custom": [
+      "--dt-spacing-0",
+      "--dt-spacing-50"
+    ],
+    "d-input__input": [
+      "--dt-spacing-0",
+      "--dt-spacing-100"
+    ]
+  },
+  "tokenToClasses": {
+    "--stack-direction": [
+      "d-stack"
+    ],
+    "--stack-align": [
+      "d-stack"
+    ],
+    "--stack-justify": [
+      "d-stack"
+    ],
+    "--dt-spacing-1": [
+      "d-avatar",
+      "d-badge",
+      "d-bt",
+      "d-btn",
+      "d-btn--circle",
+      "d-btn--icon-only",
+      "d-btn--lg",
+      "d-btn--outlined",
+      "d-btn--primary",
+      "d-description",
+      "d-emoji",
+      "d-input",
+      "d-input-icon",
+      "d-input__wrapper",
+      "d-link",
+      "d-pb-1",
+      "d-select",
+      "d-select__input",
+      "d-stack",
+      "d-stack--gap-1",
+      "d-tab",
+      "d-tab--is-selected",
+      "d-tablist",
+      "d-tablist__item",
+      "d-text",
+      "d-text-label--sm",
+      "d-textarea",
+      "d-toggle",
+      "d-toggle__inner"
+    ],
+    "--dt-spacing-525": [
+      "d-description",
+      "d-stack"
+    ],
+    "--dt-spacing-0": [
+      "d-avatar",
+      "d-avatar__presence",
+      "d-b-0",
+      "d-badge",
+      "d-banner",
+      "d-banner__dialog",
+      "d-description",
+      "d-input",
+      "d-input__input",
+      "d-item-layout--custom",
+      "d-item-layout__left",
+      "d-list-item",
+      "d-mb-0",
+      "d-notice__icon",
+      "d-presence",
+      "d-py-0",
+      "d-stack",
+      "d-stack--gap-0"
+    ],
+    "--dt-spacing-25": [
+      "d-avatar",
+      "d-badge",
+      "d-banner",
+      "d-banner__dialog",
+      "d-bt",
+      "d-btn",
+      "d-description",
+      "d-emoji",
+      "d-icon",
+      "d-input",
+      "d-input-icon",
+      "d-input__wrapper",
+      "d-item-layout__content",
+      "d-l-25",
+      "d-link",
+      "d-list-item",
+      "d-mb-25",
+      "d-modal",
+      "d-modal__close",
+      "d-modal__header",
+      "d-notice__icon",
+      "d-pt-25",
+      "d-px-25",
+      "d-px2",
+      "d-recipe-contact-info",
+      "d-scrollbar",
+      "d-select",
+      "d-select__input",
+      "d-stack",
+      "d-tab",
+      "d-tab--is-selected",
+      "d-tablist",
+      "d-text",
+      "d-textarea",
+      "d-toggle",
+      "d-toggle__inner"
+    ],
+    "--dt-spacing-50": [
+      "d-avatar",
+      "d-badge",
+      "d-bt",
+      "d-btn",
+      "d-btn--circle",
+      "d-btn--icon-only",
+      "d-description",
+      "d-emoji",
+      "d-input",
+      "d-input--sm",
+      "d-input-icon",
+      "d-input__label",
+      "d-input__label-text",
+      "d-input__wrapper",
+      "d-item-layout--custom",
+      "d-item-layout__left",
+      "d-label",
+      "d-list-item",
+      "d-ml4",
+      "d-mr-50",
+      "d-mx-50",
+      "d-pl-50",
+      "d-pr-50",
+      "d-px-50",
+      "d-py-50",
+      "d-py4",
+      "d-select",
+      "d-select--sm",
+      "d-select__input",
+      "d-select__label-text",
+      "d-stack",
+      "d-text",
+      "d-textarea",
+      "d-toggle",
+      "d-toggle__inner"
+    ],
+    "--dt-spacing-75": [
+      "d-avatar",
+      "d-banner",
+      "d-banner__dialog",
+      "d-bt",
+      "d-btn",
+      "d-btn--icon-only",
+      "d-description",
+      "d-emoji",
+      "d-input",
+      "d-input--sm",
+      "d-input-icon",
+      "d-input__wrapper",
+      "d-ml-75",
+      "d-popover",
+      "d-px6",
+      "d-select",
+      "d-select--sm",
+      "d-select__input",
+      "d-stack",
+      "d-tab",
+      "d-tab--is-selected",
+      "d-tab-neux",
+      "d-tablist",
+      "d-tablist__item",
+      "d-text",
+      "d-textarea",
+      "d-toggle",
+      "d-toggle__inner"
+    ],
+    "--dt-spacing-100": [
+      "d-badge",
+      "d-banner",
+      "d-bt",
+      "d-btn",
+      "d-btn--icon-only",
+      "d-btn__icon",
+      "d-btn__label",
+      "d-description",
+      "d-emoji",
+      "d-input",
+      "d-input-icon",
+      "d-input-icon--left",
+      "d-input-icon--right",
+      "d-input__input",
+      "d-input__wrapper",
+      "d-item-layout__left",
+      "d-ml-100",
+      "d-modal",
+      "d-modal__close",
+      "d-mr-100",
+      "d-mt-100",
+      "d-my-100",
+      "d-notice__icon",
+      "d-pb-1",
+      "d-px-100",
+      "d-py-100",
+      "d-recipe-contact-info",
+      "d-select",
+      "d-select__input",
+      "d-stack",
+      "d-stack--gap-1",
+      "d-tab",
+      "d-tab-neux",
+      "d-tablist",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-spacing-125": [
+      "d-description",
+      "d-pb-1",
+      "d-stack",
+      "d-stack--gap-1"
+    ],
+    "--dt-spacing-150": [
+      "d-avatar",
+      "d-bt",
+      "d-btn",
+      "d-btn--icon-only",
+      "d-description",
+      "d-input",
+      "d-input-icon",
+      "d-input-icon--right",
+      "d-input__wrapper",
+      "d-mr-150",
+      "d-mt-150",
+      "d-notice__content",
+      "d-notice__icon",
+      "d-pb-1",
+      "d-pl12",
+      "d-popover",
+      "d-presence",
+      "d-pt-150",
+      "d-px-150",
+      "d-scrollbar",
+      "d-select",
+      "d-select__input",
+      "d-stack",
+      "d-stack--gap-1",
+      "d-stack--gap-150",
+      "d-tab",
+      "d-tablist",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-spacing-175": [
+      "d-description",
+      "d-pb-1",
+      "d-pl-175",
+      "d-stack",
+      "d-stack--gap-1",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-spacing-200": [
+      "d-avatar",
+      "d-badge",
+      "d-banner",
+      "d-bt",
+      "d-btn",
+      "d-description",
+      "d-emoji",
+      "d-mb-200",
+      "d-modal",
+      "d-modal__close",
+      "d-modal__header",
+      "d-mr-200",
+      "d-my-200",
+      "d-notice__content",
+      "d-pb-200",
+      "d-pt16",
+      "d-px-200",
+      "d-py-200",
+      "d-stack",
+      "d-stack--gap-200",
+      "d-tab",
+      "d-tablist",
+      "d-toggle",
+      "d-toggle__inner"
+    ],
+    "--dt-spacing-250": [
+      "d-avatar",
+      "d-description",
+      "d-l-25",
+      "d-mb-25",
+      "d-modal",
+      "d-modal__close",
+      "d-pt-25",
+      "d-px-25",
+      "d-px2",
+      "d-stack"
+    ],
+    "--dt-spacing-300": [
+      "d-avatar",
+      "d-avatar--md",
+      "d-bt",
+      "d-btn",
+      "d-btn__icon",
+      "d-description",
+      "d-flow24",
+      "d-icon",
+      "d-modal",
+      "d-modal__close",
+      "d-modal__footer",
+      "d-modal__header",
+      "d-pb-300",
+      "d-px2",
+      "d-px24",
+      "d-select",
+      "d-select__input",
+      "d-stack",
+      "d-stack--gap-300",
+      "d-toggle",
+      "d-toggle__inner"
+    ],
+    "--dt-spacing-350": [
+      "d-avatar",
+      "d-description",
+      "d-stack"
+    ],
+    "--dt-spacing-400": [
+      "d-avatar",
+      "d-description",
+      "d-input",
+      "d-item-layout__content",
+      "d-modal",
+      "d-modal__content",
+      "d-modal__header",
+      "d-pb-400",
+      "d-popover",
+      "d-px-400",
+      "d-stack",
+      "d-stack--gap-400",
+      "d-toast-wrapper"
+    ],
+    "--dt-spacing-450": [
+      "d-description",
+      "d-select",
+      "d-select__input",
+      "d-stack"
+    ],
+    "--dt-spacing-500": [
+      "d-avatar",
+      "d-description",
+      "d-mr-50",
+      "d-mx-50",
+      "d-pl-50",
+      "d-pr-50",
+      "d-px-50",
+      "d-py-50",
+      "d-stack"
+    ],
+    "--dt-spacing-550": [
+      "d-description",
+      "d-stack"
+    ],
+    "--dt-spacing-600": [
+      "d-description",
+      "d-ml4",
+      "d-py4",
+      "d-stack"
+    ],
+    "--dt-spacing-650": [
+      "d-description",
+      "d-stack"
+    ],
+    "--dt-spacing-700": [
+      "d-description",
+      "d-stack"
+    ],
+    "--dt-spacing-750": [
+      "d-description",
+      "d-ml-75",
+      "d-stack"
+    ],
+    "--dt-spacing-800": [
+      "d-description",
+      "d-modal",
+      "d-modal__header",
+      "d-pr-800",
+      "d-px6",
+      "d-stack"
+    ],
+    "--text-tone": [
+      "d-text"
+    ],
+    "--fco": [
+      "d-fc-muted",
+      "d-fc-primary",
+      "d-fc-secondary",
+      "d-fc-tertiary",
+      "d-text"
+    ],
+    "--dt-text-line-clamp": [
+      "d-text"
+    ],
+    "--dt-font-weight-bold": [
+      "d-avatar",
+      "d-avatar__initials",
+      "d-fw-bold",
+      "d-select",
+      "d-tab",
+      "d-text"
+    ],
+    "--dt-font-weight-semi-bold": [
+      "d-badge",
+      "d-input",
+      "d-popover",
+      "d-text"
+    ],
+    "--dt-font-weight-medium": [
+      "d-bt",
+      "d-btn",
+      "d-link",
+      "d-modal",
+      "d-modal__header",
+      "d-text",
+      "d-text--fw-medium"
+    ],
+    "--dt-font-weight-normal": [
+      "d-popover",
+      "d-text"
+    ],
+    "--dt-font-line-height-100": [
+      "d-avatar",
+      "d-avatar__initials",
+      "d-modal",
+      "d-modal__header",
+      "d-tab",
+      "d-text",
+      "d-text--lh-100"
+    ],
+    "--dt-font-line-height-200": [
+      "d-banner",
+      "d-link",
+      "d-tab",
+      "d-text"
+    ],
+    "--dt-font-line-height-300": [
+      "d-banner",
+      "d-description",
+      "d-input",
+      "d-lh-300",
+      "d-list-item",
+      "d-modal",
+      "d-recipe-contact-info",
+      "d-recipe-contact-info__content",
+      "d-text"
+    ],
+    "--dt-font-line-height-400": [
+      "d-modal",
+      "d-modal__dialog",
+      "d-text"
+    ],
+    "--dt-font-line-height-500": [
+      "d-select",
+      "d-text"
+    ],
+    "--dt-font-line-height-600": [
+      "d-avatar",
+      "d-text"
+    ],
+    "--dt-color-foreground-primary": [
+      "d-banner",
+      "d-description",
+      "d-fc-primary",
+      "d-modal",
+      "d-modal--critical",
+      "d-popover",
+      "d-popover__dialog",
+      "d-select",
+      "d-text"
+    ],
+    "--dt-color-foreground-secondary": [
+      "d-emoji",
+      "d-fc-secondary",
+      "d-input",
+      "d-label",
+      "d-link",
+      "d-select",
+      "d-select__input",
+      "d-tab",
+      "d-text",
+      "d-text--tone-secondary"
+    ],
+    "--dt-color-foreground-tertiary": [
+      "d-bt",
+      "d-btn",
+      "d-btn__label",
+      "d-description",
+      "d-emoji",
+      "d-fc-tertiary",
+      "d-icon",
+      "d-item-layout__content",
+      "d-list-item",
+      "d-notice__icon",
+      "d-recipe-contact-info",
+      "d-recipe-contact-info__subtitle",
+      "d-tab",
+      "d-text",
+      "d-text--tone-tertiary"
+    ],
+    "--dt-color-foreground-muted": [
+      "d-fc-muted",
+      "d-icon",
+      "d-text",
+      "d-toggle"
+    ],
+    "--dt-color-foreground-disabled": [
+      "d-text"
+    ],
+    "--dt-color-foreground-placeholder": [
+      "d-text"
+    ],
+    "--dt-color-foreground-critical": [
+      "d-banner",
+      "d-text"
+    ],
+    "--dt-color-foreground-critical-strong": [
+      "d-text"
+    ],
+    "--dt-color-foreground-positive": [
+      "d-banner",
+      "d-text"
+    ],
+    "--dt-color-foreground-positive-strong": [
+      "d-text"
+    ],
+    "--dt-color-foreground-warning": [
+      "d-banner",
+      "d-text"
+    ],
+    "--dt-color-foreground-info": [
+      "d-banner",
+      "d-banner--info",
+      "d-text"
+    ],
+    "--dt-color-foreground-info-strong": [
+      "d-text"
+    ],
+    "--dt-color-neutral-black": [
+      "d-avatar",
+      "d-badge",
+      "d-banner",
+      "d-text"
+    ],
+    "--dt-color-neutral-white": [
+      "d-avatar",
+      "d-avatar__canvas",
+      "d-bgc-neutral-white",
+      "d-bt",
+      "d-btn",
+      "d-btn__icon",
+      "d-modal",
+      "d-modal__close",
+      "d-text",
+      "d-toggle"
+    ],
+    "--dt-color-link-primary": [
+      "d-link"
+    ],
+    "--dt-color-link-primary-hover": [
+      "d-link"
+    ],
+    "--link-color-default": [
+      "d-link"
+    ],
+    "--dt-size-border-100": [
+      "d-badge",
+      "d-badge--outlined",
+      "d-banner",
+      "d-bb",
+      "d-bbw1",
+      "d-bl",
+      "d-bt",
+      "d-btn",
+      "d-btn--outlined",
+      "d-emoji",
+      "d-input",
+      "d-input__wrapper",
+      "d-link",
+      "d-popover",
+      "d-popover__dialog",
+      "d-select",
+      "d-select__input",
+      "d-tab",
+      "d-tablist",
+      "d-tablist__item",
+      "d-text",
+      "d-textarea"
+    ],
+    "--link-background-color": [
+      "d-link"
+    ],
+    "--ttf-out-quint": [
+      "d-bt",
+      "d-btn",
+      "d-link",
+      "d-toggle"
+    ],
+    "--td200": [
+      "d-link",
+      "d-toggle"
+    ],
+    "--link-color-default-hover": [
+      "d-link"
+    ],
+    "--dt-shadow-focus": [
+      "d-bt",
+      "d-btn",
+      "d-emoji",
+      "d-link",
+      "d-list-item",
+      "d-toggle"
+    ],
+    "--dt-color-link-warning": [
+      "d-link"
+    ],
+    "--dt-color-link-warning-hover": [
+      "d-link"
+    ],
+    "--dt-color-link-critical": [
+      "d-link"
+    ],
+    "--dt-color-link-critical-hover": [
+      "d-link"
+    ],
+    "--dt-color-link-positive": [
+      "d-link"
+    ],
+    "--dt-color-link-positive-hover": [
+      "d-link"
+    ],
+    "--dt-color-link-info": [
+      "d-link"
+    ],
+    "--dt-color-link-info-hover": [
+      "d-link"
+    ],
+    "--dt-color-link-muted": [
+      "d-link",
+      "d-link--muted"
+    ],
+    "--dt-color-link-muted-hover": [
+      "d-link",
+      "d-link--muted"
+    ],
+    "--dt-color-link-disabled": [
+      "d-link"
+    ],
+    "--dt-color-link-disabled-hover": [
+      "d-link"
+    ],
+    "--dt-color-link-primary-inverted": [
+      "d-link"
+    ],
+    "--dt-color-link-primary-inverted-hover": [
+      "d-link"
+    ],
+    "--dt-color-link-disabled-inverted": [
+      "d-link"
+    ],
+    "--dt-color-link-disabled-inverted-hover": [
+      "d-link"
+    ],
+    "--dt-color-link-critical-inverted": [
+      "d-link"
+    ],
+    "--dt-color-link-critical-inverted-hover": [
+      "d-link"
+    ],
+    "--dt-color-link-positive-inverted": [
+      "d-link"
+    ],
+    "--dt-color-link-positive-inverted-hover": [
+      "d-link"
+    ],
+    "--dt-color-link-warning-inverted": [
+      "d-link"
+    ],
+    "--dt-color-link-warning-inverted-hover": [
+      "d-link"
+    ],
+    "--dt-color-link-info-inverted": [
+      "d-link"
+    ],
+    "--dt-color-link-info-inverted-hover": [
+      "d-link"
+    ],
+    "--dt-color-link-muted-inverted": [
+      "d-link"
+    ],
+    "--dt-color-link-muted-inverted-hover": [
+      "d-link"
+    ],
+    "--dt-color-link-mention-inverted-background": [
+      "d-link"
+    ],
+    "--dt-color-link-mention-inverted-background-hover": [
+      "d-link"
+    ],
+    "--dt-color-link-mention": [
+      "d-link"
+    ],
+    "--dt-color-link-mention-hover": [
+      "d-link"
+    ],
+    "--dt-color-link-mention-background": [
+      "d-link"
+    ],
+    "--dt-color-link-mention-background-hover": [
+      "d-link"
+    ],
+    "--dt-font-size-100": [
+      "d-avatar",
+      "d-avatar--md",
+      "d-avatar--size-200",
+      "d-avatar--sm",
+      "d-badge",
+      "d-emoji",
+      "d-fs-100",
+      "d-input",
+      "d-input__label",
+      "d-input__label-text",
+      "d-item-layout__content",
+      "d-label",
+      "d-list-item",
+      "d-notice__content",
+      "d-recipe-contact-info",
+      "d-recipe-contact-info__subtitle",
+      "d-select",
+      "d-tab"
+    ],
+    "--dt-spacing-25-negative": [
+      "d-bt",
+      "d-btn",
+      "d-btn__icon",
+      "d-btn__icon--left",
+      "d-item-layout__content",
+      "d-list-item",
+      "d-recipe-contact-info",
+      "d-recipe-contact-info__subtitle"
+    ],
+    "--dt-layout-50": [
+      "d-emoji",
+      "d-h-50",
+      "d-h32",
+      "d-item-layout__left",
+      "d-list-item",
+      "d-toggle",
+      "d-w-50"
+    ],
+    "--dt-avatar-color-background-000": [
+      "d-avatar"
+    ],
+    "--dt-layout-100-percent": [
+      "d-avatar",
+      "d-presence",
+      "d-recipe-contact-info",
+      "d-recipe-contact-info__left"
+    ],
+    "--dt-font-size-200": [
+      "d-avatar",
+      "d-avatar--md",
+      "d-bt",
+      "d-btn",
+      "d-btn__label",
+      "d-description",
+      "d-fs-200",
+      "d-input",
+      "d-label",
+      "d-list-item",
+      "d-modal",
+      "d-modal__dialog",
+      "d-popover",
+      "d-select",
+      "d-tab"
+    ],
+    "--avatar-size-shape": [
+      "d-avatar",
+      "d-avatar__canvas"
+    ],
+    "--avatar-border-radius": [
+      "d-avatar"
+    ],
+    "--dt-shell-color-surface-default": [
+      "d-avatar"
+    ],
+    "--avatar-color-text": [
+      "d-avatar"
+    ],
+    "--avatar-l-0": [
+      "d-avatar"
+    ],
+    "--avatar-c-0": [
+      "d-avatar"
+    ],
+    "--dt-avatar-color-foreground-light": [
+      "d-avatar"
+    ],
+    "--avatar-l-1": [
+      "d-avatar"
+    ],
+    "--avatar-c-1": [
+      "d-avatar"
+    ],
+    "--avatar-l-2": [
+      "d-avatar"
+    ],
+    "--avatar-c-2": [
+      "d-avatar"
+    ],
+    "--avatar-l-3": [
+      "d-avatar"
+    ],
+    "--avatar-c-3": [
+      "d-avatar"
+    ],
+    "--avatar-l-4": [
+      "d-avatar"
+    ],
+    "--avatar-c-4": [
+      "d-avatar"
+    ],
+    "--avatar-l-5": [
+      "d-avatar"
+    ],
+    "--avatar-c-5": [
+      "d-avatar"
+    ],
+    "--avatar-l-6": [
+      "d-avatar"
+    ],
+    "--avatar-c-6": [
+      "d-avatar"
+    ],
+    "--dt-avatar-color-foreground-dark": [
+      "d-avatar"
+    ],
+    "--avatar-l-7": [
+      "d-avatar"
+    ],
+    "--avatar-c-7": [
+      "d-avatar"
+    ],
+    "--avatar-l-8": [
+      "d-avatar"
+    ],
+    "--avatar-c-8": [
+      "d-avatar"
+    ],
+    "--avatar-l-9": [
+      "d-avatar"
+    ],
+    "--avatar-c-9": [
+      "d-avatar"
+    ],
+    "--avatar-l": [
+      "d-avatar"
+    ],
+    "--avatar-c": [
+      "d-avatar"
+    ],
+    "--dt-avatar-anchor-hue": [
+      "d-avatar"
+    ],
+    "--avatar-hue-offset": [
+      "d-avatar"
+    ],
+    "--dt-color-neutral-transparent": [
+      "d-avatar",
+      "d-avatar--image-loaded",
+      "d-avatar--presence",
+      "d-avatar__canvas",
+      "d-emoji",
+      "d-modal",
+      "d-presence"
+    ],
+    "--avatar-canvas-size": [
+      "d-avatar",
+      "d-avatar__canvas",
+      "d-avatar__canvas-inner"
+    ],
+    "--avatar-color-background": [
+      "d-avatar",
+      "d-avatar__canvas",
+      "d-avatar__canvas-inner"
+    ],
+    "--avatar-size-image": [
+      "d-avatar",
+      "d-avatar__image"
+    ],
+    "--zi-base": [
+      "d-avatar",
+      "d-avatar__initials",
+      "d-avatar__presence"
+    ],
+    "--avatar-size-text": [
+      "d-avatar",
+      "d-avatar__initials"
+    ],
+    "--avatar-icon-size": [
+      "d-avatar",
+      "d-avatar__icon",
+      "d-icon"
+    ],
+    "--avatar-presence-position-right": [
+      "d-avatar",
+      "d-avatar__presence"
+    ],
+    "--avatar-presence-position-bottom": [
+      "d-avatar",
+      "d-avatar__presence"
+    ],
+    "--avatar-presence-shape": [
+      "d-avatar",
+      "d-avatar__presence",
+      "d-presence"
+    ],
+    "--avatar-count-block-size": [
+      "d-avatar"
+    ],
+    "--dt-font-size-50": [
+      "d-avatar"
+    ],
+    "--dt-color-foreground-primary-inverted": [
+      "d-avatar",
+      "d-banner",
+      "d-banner--info",
+      "d-bt",
+      "d-btn",
+      "d-btn__label",
+      "d-fc-primary",
+      "d-notice__actions",
+      "d-popover",
+      "d-presence",
+      "d-select",
+      "d-tab",
+      "d-tablist",
+      "d-text"
+    ],
+    "--avatar-count-font-size": [
+      "d-avatar"
+    ],
+    "--dt-color-surface-secondary-inverted": [
+      "d-avatar",
+      "d-bgc-secondary"
+    ],
+    "--avatar-count-position": [
+      "d-avatar"
+    ],
+    "--avatar-count-inline-size": [
+      "d-avatar"
+    ],
+    "--dt-size-border-focus": [
+      "d-avatar"
+    ],
+    "--dt-color-border-focus": [
+      "d-avatar"
+    ],
+    "--dt-color-surface-contrast-opaque": [
+      "d-avatar"
+    ],
+    "--dt-opacity-900": [
+      "d-avatar",
+      "d-scrollbar"
+    ],
+    "--dt-layout-100": [
+      "d-avatar",
+      "d-avatar--size-200",
+      "d-avatar--sm",
+      "d-emoji"
+    ],
+    "--dt-font-size-300": [
+      "d-avatar",
+      "d-fs-300",
+      "d-label"
+    ],
+    "--dt-font-size-350": [
+      "d-avatar"
+    ],
+    "--dt-layout-150": [
+      "d-avatar"
+    ],
+    "--dt-font-size-400": [
+      "d-avatar",
+      "d-modal",
+      "d-modal__header"
+    ],
+    "--dt-layout-200": [
+      "d-avatar",
+      "d-pl12"
+    ],
+    "--dt-font-size-500": [
+      "d-avatar"
+    ],
+    "--dt-layout-400": [
+      "d-avatar"
+    ],
+    "--avatar-mask": [
+      "d-avatar",
+      "d-avatar--presence",
+      "d-avatar__canvas"
+    ],
+    "--dt-spacing-1-negative": [
+      "d-avatar",
+      "d-avatar--presence",
+      "d-bt",
+      "d-btn",
+      "d-btn--outlined",
+      "d-btn--primary",
+      "d-mtn1",
+      "d-tab",
+      "d-tab--is-selected",
+      "d-tablist"
+    ],
+    "--dt-font-size-75": [
+      "d-avatar",
+      "d-avatar--size-200",
+      "d-avatar--sm",
+      "d-description"
+    ],
+    "--dt-font-size-150": [
+      "d-avatar",
+      "d-description"
+    ],
+    "--dt-action-color-foreground-base-default": [
+      "d-bt",
+      "d-btn",
+      "d-link",
+      "d-tab",
+      "d-tablist"
+    ],
+    "--dt-action-color-background-base-default": [
+      "d-bt",
+      "d-btn",
+      "d-link",
+      "d-tab",
+      "d-tablist"
+    ],
+    "--dt-action-color-border-base-default": [
+      "d-bt",
+      "d-btn",
+      "d-btn--primary"
+    ],
+    "--button-padding-x": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-button-size-radius-md": [
+      "d-bt",
+      "d-btn",
+      "d-tab",
+      "d-tablist"
+    ],
+    "--dt-typography-button-md": [
+      "d-bt",
+      "d-btn",
+      "d-tab",
+      "d-tablist"
+    ],
+    "--button-border-width": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--button-padding-y-md": [
+      "d-bt",
+      "d-btn",
+      "d-btn--circle",
+      "d-btn--icon-only"
+    ],
+    "--button-padding-x-md": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--button-color-text": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--button-color-background": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--td100": [
+      "d-bt",
+      "d-btn",
+      "d-modal",
+      "d-modal__close"
+    ],
+    "--dt-action-color-foreground-base-hover": [
+      "d-bt",
+      "d-btn",
+      "d-tab",
+      "d-tab--selected"
+    ],
+    "--dt-action-color-background-base-hover": [
+      "d-bt",
+      "d-btn",
+      "d-tab",
+      "d-tab--selected"
+    ],
+    "--dt-action-color-foreground-base-active": [
+      "d-bt",
+      "d-btn",
+      "d-tab",
+      "d-tab--selected",
+      "d-toggle"
+    ],
+    "--dt-action-color-background-base-active": [
+      "d-bt",
+      "d-btn",
+      "d-tab",
+      "d-tab--selected",
+      "d-toggle"
+    ],
+    "--chroma-adjust-text": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--opacity-adjust-text": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--chroma-adjust-background": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--opacity-adjust-background": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-action-color-background-muted-active": [
+      "d-bt",
+      "d-btn",
+      "d-btn--circle",
+      "d-btn--muted",
+      "d-btn--outlined",
+      "d-list-item",
+      "d-tab",
+      "d-tablist"
+    ],
+    "--dt-typography-button-xs": [
+      "d-bt",
+      "d-btn",
+      "d-btn--xs",
+      "d-tab",
+      "d-tablist"
+    ],
+    "--button-padding-y-xs": [
+      "d-bt",
+      "d-btn",
+      "d-btn--circle",
+      "d-btn--icon-only",
+      "d-btn--xs"
+    ],
+    "--button-padding-x-xs": [
+      "d-bt",
+      "d-btn",
+      "d-btn--xs"
+    ],
+    "--dt-button-size-radius-xs": [
+      "d-bt",
+      "d-btn",
+      "d-btn--xs",
+      "d-tab",
+      "d-tablist"
+    ],
+    "--dt-typography-button-sm": [
+      "d-bt",
+      "d-btn",
+      "d-btn--sm"
+    ],
+    "--button-padding-y-sm": [
+      "d-bt",
+      "d-btn",
+      "d-btn--circle",
+      "d-btn--icon-only",
+      "d-btn--sm"
+    ],
+    "--button-padding-x-sm": [
+      "d-bt",
+      "d-btn",
+      "d-btn--sm"
+    ],
+    "--dt-button-size-radius-sm": [
+      "d-bt",
+      "d-btn",
+      "d-btn--sm"
+    ],
+    "--dt-typography-button-lg": [
+      "d-bt",
+      "d-btn",
+      "d-btn--lg",
+      "d-tab",
+      "d-tablist"
+    ],
+    "--button-padding-y-lg": [
+      "d-bt",
+      "d-btn",
+      "d-btn--circle",
+      "d-btn--icon-only",
+      "d-btn--lg"
+    ],
+    "--button-padding-x-lg": [
+      "d-bt",
+      "d-btn",
+      "d-btn--lg"
+    ],
+    "--dt-button-size-radius-lg": [
+      "d-bt",
+      "d-btn",
+      "d-btn--lg",
+      "d-tab",
+      "d-tablist"
+    ],
+    "--dt-typography-button-xl": [
+      "d-bt",
+      "d-btn",
+      "d-tab",
+      "d-tablist"
+    ],
+    "--button-padding-y-xl": [
+      "d-bt",
+      "d-btn",
+      "d-btn--circle",
+      "d-btn--icon-only"
+    ],
+    "--button-padding-x-xl": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-button-size-radius-xl": [
+      "d-bt",
+      "d-btn",
+      "d-tab",
+      "d-tablist"
+    ],
+    "--zi-base1": [
+      "d-bt",
+      "d-btn",
+      "d-btn__icon",
+      "d-btn__label",
+      "d-input",
+      "d-input__wrapper",
+      "d-tab",
+      "d-tablist",
+      "d-zi-base1"
+    ],
+    "--button-padding-y": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-opacity-800": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--button-border-radius": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-layout-1px": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-opacity-600": [
+      "d-bt",
+      "d-btn",
+      "d-btn--outlined",
+      "d-btn--primary",
+      "d-btn__icon"
+    ],
+    "--dt-action-color-foreground-muted-default": [
+      "d-bt",
+      "d-btn",
+      "d-btn--circle",
+      "d-btn--muted",
+      "d-notice__actions",
+      "d-tab",
+      "d-tablist",
+      "d-toggle"
+    ],
+    "--dt-size-radius-circle": [
+      "d-bb",
+      "d-bl",
+      "d-bt",
+      "d-btn",
+      "d-btn--circle"
+    ],
+    "--dt-action-color-foreground-muted-hover": [
+      "d-bt",
+      "d-btn",
+      "d-btn--circle",
+      "d-btn--muted",
+      "d-tab",
+      "d-tablist"
+    ],
+    "--dt-action-color-background-muted-hover": [
+      "d-bt",
+      "d-btn",
+      "d-btn--circle",
+      "d-btn--muted",
+      "d-list-item",
+      "d-tab",
+      "d-tablist"
+    ],
+    "--dt-action-color-foreground-muted-active": [
+      "d-bt",
+      "d-btn",
+      "d-btn--circle",
+      "d-btn--muted",
+      "d-tab",
+      "d-tablist"
+    ],
+    "--dt-action-color-border-muted-outlined-default": [
+      "d-bt",
+      "d-btn",
+      "d-btn--circle",
+      "d-btn--muted",
+      "d-btn--outlined"
+    ],
+    "--dt-action-color-border-base-outlined-default": [
+      "d-bt",
+      "d-btn",
+      "d-btn--outlined"
+    ],
+    "--dt-action-color-foreground-base-primary-default": [
+      "d-bt",
+      "d-btn",
+      "d-btn--primary"
+    ],
+    "--dt-action-color-background-base-primary-default": [
+      "d-bt",
+      "d-btn",
+      "d-btn--primary"
+    ],
+    "--dt-action-color-background-base-primary-hover": [
+      "d-bt",
+      "d-btn",
+      "d-btn--primary"
+    ],
+    "--dt-action-color-background-base-primary-active": [
+      "d-bt",
+      "d-btn",
+      "d-btn--primary"
+    ],
+    "--dt-action-color-border-muted-default": [
+      "d-bt",
+      "d-btn",
+      "d-btn--muted"
+    ],
+    "--dt-action-color-foreground-critical-default": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-action-color-background-critical-default": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-action-color-border-critical-default": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-action-color-foreground-critical-hover": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-action-color-background-critical-hover": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-action-color-foreground-critical-active": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-action-color-background-critical-active": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-action-color-border-critical-outlined-default": [
+      "d-bt",
+      "d-btn",
+      "d-btn--outlined"
+    ],
+    "--dt-action-color-foreground-critical-primary-default": [
+      "d-bt",
+      "d-btn",
+      "d-btn--primary"
+    ],
+    "--dt-action-color-background-critical-primary-default": [
+      "d-bt",
+      "d-btn",
+      "d-btn--primary"
+    ],
+    "--dt-action-color-background-critical-primary-hover": [
+      "d-bt",
+      "d-btn",
+      "d-btn--primary"
+    ],
+    "--dt-action-color-background-critical-primary-active": [
+      "d-bt",
+      "d-btn",
+      "d-btn--primary"
+    ],
+    "--dt-action-color-foreground-positive-default": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-action-color-background-positive-default": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-action-color-border-positive-default": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-action-color-foreground-positive-hover": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-action-color-background-positive-hover": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-action-color-foreground-positive-active": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-action-color-background-positive-active": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-action-color-border-positive-outlined-default": [
+      "d-bt",
+      "d-btn",
+      "d-btn--outlined"
+    ],
+    "--dt-action-color-foreground-positive-primary-default": [
+      "d-bt",
+      "d-btn",
+      "d-btn--primary"
+    ],
+    "--dt-action-color-background-positive-primary-default": [
+      "d-bt",
+      "d-btn",
+      "d-btn--primary"
+    ],
+    "--dt-action-color-background-positive-primary-hover": [
+      "d-bt",
+      "d-btn",
+      "d-btn--primary"
+    ],
+    "--dt-action-color-background-positive-primary-active": [
+      "d-bt",
+      "d-btn",
+      "d-btn--primary"
+    ],
+    "--dt-action-color-foreground-inverted-default": [
+      "d-bt",
+      "d-btn",
+      "d-btn--inverted",
+      "d-tab",
+      "d-tablist"
+    ],
+    "--dt-action-color-background-inverted-default": [
+      "d-bt",
+      "d-btn",
+      "d-btn--inverted"
+    ],
+    "--dt-action-color-border-inverted-default": [
+      "d-bt",
+      "d-btn",
+      "d-btn--inverted"
+    ],
+    "--dt-action-color-foreground-inverted-hover": [
+      "d-bt",
+      "d-btn",
+      "d-btn--inverted",
+      "d-tab",
+      "d-tablist"
+    ],
+    "--dt-action-color-background-inverted-hover": [
+      "d-bt",
+      "d-btn",
+      "d-btn--inverted",
+      "d-tab",
+      "d-tablist"
+    ],
+    "--dt-action-color-foreground-inverted-active": [
+      "d-bt",
+      "d-btn",
+      "d-btn--inverted",
+      "d-tab",
+      "d-tablist"
+    ],
+    "--dt-action-color-background-inverted-active": [
+      "d-bt",
+      "d-btn",
+      "d-btn--inverted",
+      "d-tab",
+      "d-tablist"
+    ],
+    "--dt-action-color-border-inverted-outlined-default": [
+      "d-bt",
+      "d-btn",
+      "d-btn--inverted",
+      "d-btn--outlined"
+    ],
+    "--dt-action-color-foreground-inverted-primary-default": [
+      "d-bt",
+      "d-btn",
+      "d-btn--inverted",
+      "d-btn--primary"
+    ],
+    "--dt-action-color-background-inverted-primary-default": [
+      "d-bt",
+      "d-btn",
+      "d-btn--inverted",
+      "d-btn--primary"
+    ],
+    "--dt-action-color-foreground-inverted-primary-hover": [
+      "d-bt",
+      "d-btn",
+      "d-btn--inverted",
+      "d-btn--primary"
+    ],
+    "--dt-action-color-background-inverted-primary-hover": [
+      "d-bt",
+      "d-btn",
+      "d-btn--inverted",
+      "d-btn--primary"
+    ],
+    "--dt-action-color-foreground-inverted-primary-active": [
+      "d-bt",
+      "d-btn",
+      "d-btn--inverted",
+      "d-btn--primary"
+    ],
+    "--dt-action-color-background-inverted-primary-active": [
+      "d-bt",
+      "d-btn",
+      "d-btn--inverted",
+      "d-btn--primary"
+    ],
+    "--dt-layout-25": [
+      "d-avatar",
+      "d-badge",
+      "d-bt",
+      "d-btn",
+      "d-emoji",
+      "d-input",
+      "d-input--sm",
+      "d-input-icon",
+      "d-input__wrapper",
+      "d-list-item",
+      "d-select",
+      "d-select--sm",
+      "d-select__input",
+      "d-text",
+      "d-textarea",
+      "d-toggle"
+    ],
+    "--brand-color": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-spacing-50-negative": [
+      "d-avatar",
+      "d-bt",
+      "d-btn",
+      "d-btn__icon",
+      "d-description",
+      "d-emoji",
+      "d-input",
+      "d-input__label",
+      "d-input__label-text",
+      "d-label",
+      "d-recipe-contact-info",
+      "d-select",
+      "d-select__label-text",
+      "d-text",
+      "d-toggle"
+    ],
+    "--dt-opacity-300": [
+      "d-bt",
+      "d-btn",
+      "d-btn--inverted",
+      "d-btn--muted",
+      "d-btn--outlined"
+    ],
+    "--dt-badge-color-foreground-default": [
+      "d-badge"
+    ],
+    "--dt-badge-color-background-default": [
+      "d-badge"
+    ],
+    "--dt-badge-color-border-default": [
+      "d-badge"
+    ],
+    "--dt-size-radius-300": [
+      "d-badge",
+      "d-bb",
+      "d-bl",
+      "d-bt"
+    ],
+    "--dt-color-black-900": [
+      "d-badge"
+    ],
+    "--badge-color-text": [
+      "d-badge"
+    ],
+    "--badge-font-weight": [
+      "d-badge"
+    ],
+    "--badge-font-size": [
+      "d-badge"
+    ],
+    "--badge-line-height": [
+      "d-badge"
+    ],
+    "--badge-letter-spacing": [
+      "d-badge"
+    ],
+    "--badge-text-case": [
+      "d-badge"
+    ],
+    "--badge-color-background": [
+      "d-badge"
+    ],
+    "--dt-size-radius-pill": [
+      "d-badge",
+      "d-bb",
+      "d-bl",
+      "d-bt"
+    ],
+    "--dt-badge-color-background-info": [
+      "d-badge"
+    ],
+    "--dt-badge-color-background-positive": [
+      "d-badge"
+    ],
+    "--dt-badge-color-background-warning": [
+      "d-badge"
+    ],
+    "--dt-badge-color-background-critical": [
+      "d-badge"
+    ],
+    "--dt-badge-color-foreground-bulletin": [
+      "d-badge"
+    ],
+    "--dt-badge-color-background-bulletin": [
+      "d-badge"
+    ],
+    "--dt-badge-color-foreground-bulletin-subtle": [
+      "d-badge"
+    ],
+    "--dt-badge-color-background-bulletin-subtle": [
+      "d-badge"
+    ],
+    "--dt-badge-color-border-bulletin-subtle": [
+      "d-badge"
+    ],
+    "--dt-badge-color-foreground-ai": [
+      "d-badge"
+    ],
+    "--dt-color-brand-magenta": [
+      "d-badge"
+    ],
+    "--dt-badge-color-background-ai": [
+      "d-badge"
+    ],
+    "--badge-color-outline": [
+      "d-badge",
+      "d-badge--outlined"
+    ],
+    "--dt-color-black-400": [
+      "d-badge"
+    ],
+    "--dt-color-black-500": [
+      "d-badge"
+    ],
+    "--dt-color-red-200": [
+      "d-badge"
+    ],
+    "--dt-color-red-300": [
+      "d-badge"
+    ],
+    "--dt-color-red-400": [
+      "d-badge"
+    ],
+    "--dt-color-purple-200": [
+      "d-badge"
+    ],
+    "--dt-color-purple-300": [
+      "d-badge"
+    ],
+    "--dt-color-purple-400": [
+      "d-badge"
+    ],
+    "--dt-color-purple-500": [
+      "d-badge"
+    ],
+    "--dt-color-blue-200": [
+      "d-badge"
+    ],
+    "--dt-color-blue-300": [
+      "d-badge"
+    ],
+    "--dt-color-blue-400": [
+      "d-badge"
+    ],
+    "--dt-color-green-300": [
+      "d-badge"
+    ],
+    "--dt-color-green-400": [
+      "d-badge"
+    ],
+    "--dt-color-green-500": [
+      "d-badge"
+    ],
+    "--dt-color-gold-300": [
+      "d-badge"
+    ],
+    "--dt-color-gold-400": [
+      "d-badge"
+    ],
+    "--dt-color-gold-500": [
+      "d-badge"
+    ],
+    "--dt-color-magenta-200": [
+      "d-badge"
+    ],
+    "--dt-color-magenta-300": [
+      "d-badge"
+    ],
+    "--dt-color-magenta-400": [
+      "d-badge",
+      "d-notice__icon"
+    ],
+    "--badge-size": [
+      "d-badge"
+    ],
+    "--badge-decorative-color": [
+      "d-badge"
+    ],
+    "--badge-label-padding-x": [
+      "d-badge",
+      "d-badge__label"
+    ],
+    "--dt-color-foreground-muted-inverted": [
+      "d-fc-muted",
+      "d-icon"
+    ],
+    "--dt-color-border-default": [
+      "d-banner",
+      "d-modal",
+      "d-modal__header",
+      "d-tab",
+      "d-tablist"
+    ],
+    "--table-font-size": [
+      "d-tab"
+    ],
+    "--table-line-height": [
+      "d-tab"
+    ],
+    "--table-th-color-text": [
+      "d-tab"
+    ],
+    "--table-th-font-size": [
+      "d-tab"
+    ],
+    "--table-td-color-text": [
+      "d-tab"
+    ],
+    "--dt-color-foreground-secondary-inverted": [
+      "d-fc-secondary",
+      "d-notice__icon",
+      "d-tab"
+    ],
+    "--dt-color-foreground-tertiary-inverted": [
+      "d-fc-tertiary",
+      "d-tab",
+      "d-text"
+    ],
+    "--dt-color-border-default-inverted": [
+      "d-tab"
+    ],
+    "--dt-color-surface-secondary-opaque": [
+      "d-bgc-secondary",
+      "d-tab"
+    ],
+    "--dt-color-surface-primary": [
+      "d-bgc-primary",
+      "d-bt",
+      "d-btn",
+      "d-btn--inverted",
+      "d-btn--primary",
+      "d-presence",
+      "d-recipe-contact-info",
+      "d-tab",
+      "d-toggle"
+    ],
+    "--td300": [
+      "d-modal",
+      "d-modal__header",
+      "d-tab",
+      "d-tablist",
+      "d-toggle"
+    ],
+    "--dt-color-surface-bold": [
+      "d-toggle"
+    ],
+    "--dt-layout-75": [
+      "d-banner",
+      "d-banner__dialog",
+      "d-emoji",
+      "d-h-75",
+      "d-text",
+      "d-textarea",
+      "d-toggle"
+    ],
+    "--toggle-size-width": [
+      "d-toggle"
+    ],
+    "--toggle-size-height": [
+      "d-toggle"
+    ],
+    "--lh4": [
+      "d-input",
+      "d-lh4",
+      "d-toggle"
+    ],
+    "--toggle-color-background": [
+      "d-toggle"
+    ],
+    "--toggle-size-icon": [
+      "d-toggle",
+      "d-toggle__inner"
+    ],
+    "--dt-icon-size-400": [
+      "d-bt",
+      "d-btn",
+      "d-btn__icon",
+      "d-icon",
+      "d-input",
+      "d-input-icon",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea",
+      "d-toggle"
+    ],
+    "--dt-icon-size-200": [
+      "d-bt",
+      "d-btn",
+      "d-btn__icon",
+      "d-icon",
+      "d-input",
+      "d-input--sm",
+      "d-input-icon",
+      "d-input__wrapper",
+      "d-select",
+      "d-select--sm",
+      "d-select__input",
+      "d-text",
+      "d-textarea",
+      "d-toggle"
+    ],
+    "--dt-checkbox-color-background-checked": [
+      "d-toggle"
+    ],
+    "--dt-color-surface-secondary": [
+      "d-banner",
+      "d-bgc-secondary",
+      "d-bt",
+      "d-btn",
+      "d-emoji",
+      "d-modal",
+      "d-presence",
+      "d-select",
+      "d-select__input"
+    ],
+    "--dt-presence-color-offline": [
+      "d-presence"
+    ],
+    "--dt-presence-color-available": [
+      "d-presence"
+    ],
+    "--dt-presence-color-unavailable": [
+      "d-presence"
+    ],
+    "--dt-presence-color-busy": [
+      "d-presence"
+    ],
+    "--presence-size": [
+      "d-presence",
+      "d-presence__inner"
+    ],
+    "--dt-shell-action-color-background-primary-hover": [
+      "d-presence"
+    ],
+    "--presence-color-background-active": [
+      "d-presence",
+      "d-presence__inner",
+      "d-presence__inner--active"
+    ],
+    "--presence-color-background-busy": [
+      "d-presence",
+      "d-presence__inner"
+    ],
+    "--presence-color-background-away": [
+      "d-presence",
+      "d-presence__inner"
+    ],
+    "--presence-color-border-dnd": [
+      "d-presence",
+      "d-presence__inner"
+    ],
+    "--presence-icon-color": [
+      "d-presence",
+      "d-presence__icon"
+    ],
+    "--presence-icon-size": [
+      "d-presence",
+      "d-presence__icon"
+    ],
+    "--dt-icon-size-100": [
+      "d-bt",
+      "d-btn",
+      "d-btn__icon",
+      "d-icon",
+      "d-input",
+      "d-input-icon",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-icon-size-300": [
+      "d-icon",
+      "d-notice__icon"
+    ],
+    "--dt-icon-size-500": [
+      "d-bt",
+      "d-btn",
+      "d-btn__icon",
+      "d-icon",
+      "d-input",
+      "d-input-icon",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-icon-size-600": [
+      "d-icon"
+    ],
+    "--dt-icon-size-700": [
+      "d-icon"
+    ],
+    "--dt-icon-size-800": [
+      "d-icon"
+    ],
+    "--icon-size-500": [
+      "d-icon",
+      "d-icon--size-500"
+    ],
+    "--icon-size": [
+      "d-emoji",
+      "d-icon"
+    ],
+    "--icon-size-800": [
+      "d-icon"
+    ],
+    "--icon-size-700": [
+      "d-icon"
+    ],
+    "--icon-size-600": [
+      "d-icon",
+      "d-icon--size-600"
+    ],
+    "--icon-size-400": [
+      "d-icon",
+      "d-icon--size-400"
+    ],
+    "--icon-size-300": [
+      "d-icon",
+      "d-icon--size-300"
+    ],
+    "--icon-size-200": [
+      "d-icon",
+      "d-icon--size-200"
+    ],
+    "--icon-size-100": [
+      "d-icon",
+      "d-icon--size-100"
+    ],
+    "--dt-inputs-color-border-default": [
+      "d-input",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-inputs-color-border-hover": [
+      "d-input",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-inputs-color-background-default": [
+      "d-input",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-inputs-color-background-disabled": [
+      "d-input",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-inputs-color-foreground-default": [
+      "d-input",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-inputs-size-radius-md": [
+      "d-input",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--input-border-width": [
+      "d-input",
+      "d-input--sm",
+      "d-input-icon",
+      "d-input__wrapper",
+      "d-select",
+      "d-select--sm",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-typography-inputs-md": [
+      "d-input",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--input-color-text": [
+      "d-input",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--input-color-background": [
+      "d-input",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-inputs-size-radius-xs": [
+      "d-input",
+      "d-input-icon",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-inputs-size-radius-sm": [
+      "d-input",
+      "d-input--sm",
+      "d-input-icon",
+      "d-input__wrapper",
+      "d-select",
+      "d-select--sm",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-inputs-size-radius-lg": [
+      "d-input",
+      "d-input-icon",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-inputs-size-radius-xl": [
+      "d-input",
+      "d-input-icon",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-inputs-color-foreground-placeholder": [
+      "d-input",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--input-color-border-hover": [
+      "d-input",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-inputs-color-border-focus": [
+      "d-input",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-inputs-color-background-focus": [
+      "d-input",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-inputs-color-border-disabled": [
+      "d-input",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-inputs-color-foreground-disabled": [
+      "d-input",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--input-padding-y": [
+      "d-input",
+      "d-input-icon",
+      "d-input__wrapper",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-typography-inputs-xs": [
+      "d-input",
+      "d-input-icon",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-typography-inputs-sm": [
+      "d-input",
+      "d-input--sm",
+      "d-input-icon",
+      "d-input__wrapper",
+      "d-select",
+      "d-select--sm",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-typography-inputs-lg": [
+      "d-input",
+      "d-input-icon",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-typography-inputs-xl": [
+      "d-input",
+      "d-input-icon",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-layout-125": [
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-inputs-color-border-warning": [
+      "d-input",
+      "d-select",
+      "d-select__input"
+    ],
+    "--dt-inputs-color-border-critical": [
+      "d-input",
+      "d-input__wrapper",
+      "d-select",
+      "d-select__input",
+      "d-text",
+      "d-textarea"
+    ],
+    "--dt-inputs-color-border-positive": [
+      "d-input",
+      "d-select",
+      "d-select__input"
+    ],
+    "--dt-spacing-75-negative": [
+      "d-bt",
+      "d-btn",
+      "d-emoji",
+      "d-input",
+      "d-input-icon",
+      "d-input-icon--right"
+    ],
+    "--select-notch-position-right": [
+      "d-select"
+    ],
+    "--select-arrow-size": [
+      "d-select"
+    ],
+    "--input-color-border": [
+      "d-select",
+      "d-select__input"
+    ],
+    "--select-notch-padding-right": [
+      "d-select",
+      "d-select__input"
+    ],
+    "--validation-size-icon": [
+      "d-icon"
+    ],
+    "--validation-color-text": [
+      "d-icon"
+    ],
+    "--dt-action-color-background-muted-default": [
+      "d-list-item",
+      "d-toggle"
+    ],
+    "--dt-layout-0": [
+      "d-list-item"
+    ],
+    "--dt-color-surface-backdrop": [
+      "d-modal"
+    ],
+    "--dt-color-surface-overlay": [
+      "d-emoji",
+      "d-modal",
+      "d-popover",
+      "d-popover__dialog"
+    ],
+    "--dt-color-border-subtle": [
+      "d-banner",
+      "d-emoji",
+      "d-modal",
+      "d-popover",
+      "d-popover__dialog"
+    ],
+    "--dt-shadow-large": [
+      "d-modal"
+    ],
+    "--zi-hide": [
+      "d-modal",
+      "d-modal__dialog"
+    ],
+    "--modal-backdrop-color-background": [
+      "d-modal"
+    ],
+    "--dt-layout-1000": [
+      "d-banner",
+      "d-modal",
+      "d-modal__dialog",
+      "d-wmx-1000"
+    ],
+    "--modal-dialog-color-text": [
+      "d-modal",
+      "d-modal__dialog"
+    ],
+    "--modal-dialog-color-background": [
+      "d-modal",
+      "d-modal__dialog"
+    ],
+    "--modal-dialog-shadow": [
+      "d-modal",
+      "d-modal__dialog"
+    ],
+    "--zi-modal": [
+      "d-modal",
+      "d-modal__dialog"
+    ],
+    "--modal-header-padding": [
+      "d-modal",
+      "d-modal__header"
+    ],
+    "--modal-header-color-text": [
+      "d-modal",
+      "d-modal__header"
+    ],
+    "--dt-color-surface-warning": [
+      "d-banner",
+      "d-modal"
+    ],
+    "--modal-banner-color-background": [
+      "d-modal"
+    ],
+    "--dt-color-surface-info": [
+      "d-banner",
+      "d-banner--info",
+      "d-modal"
+    ],
+    "--dt-color-surface-critical": [
+      "d-banner",
+      "d-modal"
+    ],
+    "--dt-color-surface-positive": [
+      "d-banner",
+      "d-modal"
+    ],
+    "--zi-modal-element": [
+      "d-modal",
+      "d-popover",
+      "d-popover__dialog",
+      "d-popover__dialog--modal",
+      "d-zi-modal-element"
+    ],
+    "--modal-banner-padding-y": [
+      "d-modal"
+    ],
+    "--notice-color-text": [
+      "d-banner",
+      "d-bt",
+      "d-btn",
+      "d-notice__actions"
+    ],
+    "--dt-size-radius-400": [
+      "d-banner",
+      "d-bb",
+      "d-bl",
+      "d-bt",
+      "d-input",
+      "d-input__wrapper",
+      "d-popover",
+      "d-popover__dialog",
+      "d-tab",
+      "d-text",
+      "d-textarea"
+    ],
+    "--notice-color-shadow": [
+      "d-banner"
+    ],
+    "--notice-line-height": [
+      "d-banner"
+    ],
+    "--notice-color-background": [
+      "d-banner"
+    ],
+    "--notice-box-shadow": [
+      "d-banner"
+    ],
+    "--notice-content-direction": [
+      "d-notice__content"
+    ],
+    "--notice-content-align": [
+      "d-notice__content"
+    ],
+    "--notice-actions-align": [
+      "d-notice__actions"
+    ],
+    "--notice-actions-button-offset": [
+      "d-notice__actions"
+    ],
+    "--notice-color-icon": [
+      "d-notice__icon"
+    ],
+    "--notice-icon-gap": [
+      "d-notice__icon"
+    ],
+    "--notice-icon-block-offset": [
+      "d-notice__icon"
+    ],
+    "--dt-color-surface-primary-inverted": [
+      "d-banner",
+      "d-bgc-primary"
+    ],
+    "--dt-color-surface-critical-strong": [
+      "d-banner"
+    ],
+    "--dt-color-surface-info-strong": [
+      "d-banner",
+      "d-banner--info"
+    ],
+    "--dt-color-surface-positive-strong": [
+      "d-banner"
+    ],
+    "--dt-color-surface-warning-strong": [
+      "d-banner"
+    ],
+    "--zi-notification": [
+      "d-toast-wrapper",
+      "d-zi-notification"
+    ],
+    "--zi-navigation-fixed": [
+      "d-banner"
+    ],
+    "--banner-line-height": [
+      "d-banner"
+    ],
+    "--dt-shadow-card": [
+      "d-input",
+      "d-input__wrapper",
+      "d-modal",
+      "d-modal__header",
+      "d-popover",
+      "d-popover__dialog"
+    ],
+    "--popover-color-background": [
+      "d-popover",
+      "d-popover__dialog"
+    ],
+    "--popover-shadow": [
+      "d-popover",
+      "d-popover__dialog"
+    ],
+    "--dt-color-surface-bold-opaque": [
+      "d-skeleton-placeholder"
+    ],
+    "--dt-color-surface-moderate-opaque": [
+      "d-skeleton-placeholder"
+    ],
+    "--placeholder-from-color": [
+      "d-skeleton-placeholder"
+    ],
+    "--tablist-padding-bottom": [
+      "d-tab",
+      "d-tab--is-selected",
+      "d-tab-neux",
+      "d-tablist"
+    ],
+    "--tab-color-background": [
+      "d-tab",
+      "d-tablist"
+    ],
+    "--dt-action-color-foreground-disabled-default": [
+      "d-tab",
+      "d-tablist"
+    ],
+    "--ttf-ease": [
+      "d-tab",
+      "d-tablist"
+    ],
+    "--tablist-border-opacity": [
+      "d-tab",
+      "d-tablist"
+    ],
+    "--tab-border-radius": [
+      "d-tab",
+      "d-tablist"
+    ],
+    "--tab-color-text": [
+      "d-tab"
+    ],
+    "--dt-size-border-200": [
+      "d-bb",
+      "d-bl",
+      "d-bt",
+      "d-emoji",
+      "d-tab",
+      "d-tab--selected",
+      "d-tablist",
+      "d-tablist__item"
+    ],
+    "--tab-after-bg": [
+      "d-tab"
+    ],
+    "--dt-shadow-focus-inset": [
+      "d-tab"
+    ],
+    "--tab-color-text-disabled": [
+      "d-tab"
+    ],
+    "--tab-color-background-hover": [
+      "d-tab"
+    ],
+    "--tab-color-text-hover": [
+      "d-tab"
+    ],
+    "--tab-color-background-active": [
+      "d-tab"
+    ],
+    "--tab-color-text-active": [
+      "d-tab"
+    ],
+    "--tab-color-text-selected": [
+      "d-tab",
+      "d-tab--selected"
+    ],
+    "--tab-selected-indicator": [
+      "d-tab",
+      "d-tab--is-selected",
+      "d-tab--selected"
+    ],
+    "--zi-selected": [
+      "d-tab",
+      "d-tab--is-selected",
+      "d-tab--selected"
+    ],
+    "--dt-color-surface-contrast": [
+      "d-scrollbar",
+      "d-tab",
+      "d-tab--selected",
+      "d-toggle"
+    ],
+    "--os-handle-color": [
+      "d-scrollbar"
+    ],
+    "--os-handle-perpendicular-size": [
+      "d-scrollbar"
+    ],
+    "--dt-opacity-700": [
+      "d-bt",
+      "d-btn",
+      "d-scrollbar"
+    ],
+    "--dt-opacity-1100": [
+      "d-scrollbar"
+    ],
+    "--dt-scrollbar-offset-block-start": [
+      "d-scrollbar"
+    ],
+    "--dt-scrollbar-offset-inline-end": [
+      "d-scrollbar"
+    ],
+    "--dt-scrollbar-offset-block-end": [
+      "d-scrollbar"
+    ],
+    "--dt-scrollbar-offset-inline-start": [
+      "d-scrollbar"
+    ],
+    "--dt-layout-550": [
+      "d-emoji"
+    ],
+    "--dt-layout-500": [
+      "d-emoji",
+      "d-h-50",
+      "d-h32",
+      "d-select",
+      "d-w-50"
+    ],
+    "--dt-layout-450": [
+      "d-emoji"
+    ],
+    "--dt-typography-headline-eyebrow-text-case": [
+      "d-emoji"
+    ],
+    "--dt-spacing-300-negative": [
+      "d-avatar",
+      "d-ml-n300",
+      "d-recipe-contact-info"
+    ],
+    "--dt-shell-presence-color-offline": [
+      "d-presence"
+    ],
+    "--dt-shell-presence-color-available": [
+      "d-presence"
+    ],
+    "--dt-shell-presence-color-unavailable": [
+      "d-presence"
+    ],
+    "--dt-shell-presence-color-busy": [
+      "d-presence"
+    ],
+    "--dt-color-black-200": [
+      "d-presence"
+    ],
+    "--dt-shell-action-color-background-primary-selected": [
+      "d-avatar"
+    ],
+    "--dt-shell-mention-color-surface-primary": [
+      "d-badge",
+      "d-bt",
+      "d-btn",
+      "d-btn--inverted",
+      "d-btn--primary"
+    ],
+    "--leftbar-row-unread-badge-display": [
+      "d-badge"
+    ],
+    "--dt-shell-mention-color-foreground-primary": [
+      "d-badge"
+    ],
+    "--dt-size-border-0": [
+      "d-bb",
+      "d-bl",
+      "d-bt"
+    ],
+    "--dt-size-border-300": [
+      "d-bb",
+      "d-bl",
+      "d-bt"
+    ],
+    "--dt-font-family-body": [
+      "d-ff-sans"
+    ],
+    "--dt-font-size-100-mobile": [
+      "d-fs-100"
+    ],
+    "--dt-font-size-200-mobile": [
+      "d-fs-200"
+    ],
+    "--dt-font-size-300-mobile": [
+      "d-fs-300"
+    ],
+    "--dt-font-size-100-tc8": [
+      "d-fs-100"
+    ],
+    "--dt-font-size-200-tc8": [
+      "d-fs-200"
+    ],
+    "--dt-font-size-300-tc8": [
+      "d-fs-300"
+    ],
+    "--dt-font-size-100-tv": [
+      "d-fs-100"
+    ],
+    "--dt-font-size-200-tv": [
+      "d-fs-200"
+    ],
+    "--dt-font-size-300-tv": [
+      "d-fs-300"
+    ],
+    "--lh8": [
+      "d-lh8"
+    ],
+    "--lh12": [
+      "d-lh12"
+    ],
+    "--bgo": [
+      "d-bgc-neutral-white",
+      "d-bgc-primary",
+      "d-bgc-secondary"
+    ],
+    "--dt-color-surface-primary-opaque": [
+      "d-bgc-primary"
+    ],
+    "--dt-color-surface-primary-opaque-inverted": [
+      "d-bgc-primary"
+    ],
+    "--dt-color-surface-secondary-opaque-inverted": [
+      "d-bgc-secondary"
+    ],
+    "--dt-size-radius-0": [
+      "d-bb",
+      "d-bl",
+      "d-blr0",
+      "d-brr0",
+      "d-bt"
+    ],
+    "--dt-size-radius-100": [
+      "d-bb",
+      "d-bl",
+      "d-bt"
+    ],
+    "--dt-size-radius-200": [
+      "d-bb",
+      "d-bl",
+      "d-bt"
+    ],
+    "--dt-size-radius-350": [
+      "d-bb",
+      "d-bl",
+      "d-bt"
+    ],
+    "--dt-size-radius-450": [
+      "d-bb",
+      "d-bl",
+      "d-bt"
+    ],
+    "--dt-size-radius-500": [
+      "d-bb",
+      "d-bl",
+      "d-bt"
+    ],
+    "--dt-size-radius-550": [
+      "d-bb",
+      "d-bl",
+      "d-bt"
+    ],
+    "--dt-size-radius-600": [
+      "d-bb",
+      "d-bl",
+      "d-bt"
+    ],
+    "--dt-size-925": [
+      "d-h332",
+      "d-hmn332"
+    ],
+    "--dt-size-875": [
+      "d-hmx216",
+      "d-wmn216"
+    ],
+    "--dt-size-975": [
+      "d-hmn464",
+      "d-w464"
+    ],
+    "--dt-size-825": [
+      "d-w164"
+    ],
+    "--dt-size-1020": [
+      "d-w628"
+    ],
+    "--dt-size-1040": [
+      "d-wmn764"
+    ],
+    "--dt-spacing-125-negative": [
+      "d-mtn1"
+    ],
+    "--dt-spacing-150-negative": [
+      "d-mtn1"
+    ],
+    "--dt-spacing-175-negative": [
+      "d-mtn1"
+    ],
+    "--dt-spacing-200-negative": [
+      "d-mtn1"
+    ],
+    "--dt-layout-24px": [
+      "d-h-24px",
+      "d-w-24px"
+    ],
+    "--dt-layout-750": [
+      "d-h-75"
+    ],
+    "--dt-layout-2px": [
+      "d-w-2px"
+    ],
+    "--dt-spacing-600-negative": [
+      "d-ml-n600"
+    ],
+    "--general-row-unread-badge-display": [
+      "d-badge"
+    ],
+    "--dt-color-black-100": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-shadow-extra-large": [
+      "d-modal",
+      "d-modal__close"
+    ],
+    "--dt-space-850": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-color-surface-moderate": [
+      "d-bt",
+      "d-btn"
+    ],
+    "--dt-color-surface-brand-strong": [
+      "d-badge"
+    ],
+    "--dt-layout-250": [
+      "d-modal",
+      "d-modal__header"
+    ],
+    "--dt-color-purple-950": [
+      "d-icon"
+    ],
+    "--dt-size-0": [
+      "d-icon"
+    ],
+    "--lh0": [
+      "d-select"
+    ],
+    "--dt-color-surface-strong": [
+      "d-select"
+    ],
+    "--dt-layout-350": [
+      "d-select"
+    ],
+    "--dt-layout-1300": [
+      "d-modal",
+      "d-modal__dialog"
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <div class="header">
+      <h1>Dialtone Migration Helper</h1>
+    </div>
+
+    <button id="inspect" class="toggle">Enable inspector</button>
+    <button id="override" class="toggle">Apply stable tokens</button>
+    <button id="avatarSwap" class="toggle secondary">Apply stable components</button>
+    <button id="replace" class="toggle secondary">Replace next CSS entirely</button>
+
+    <div class="panel">
+      <div class="line">Theme: <span id="theme">…</span></div>
+      <div class="line">Stable: <span id="version">…</span></div>
+      <div class="line">Changes: <span id="changes">—</span></div>
+      <div class="line">Scope: <span id="scope">—</span></div>
+      <div class="line">Components: <span id="avatarStatus">—</span></div>
+    </div>
+
+    <div class="controls">
+      <label class="ctl" for="versionInput">Version</label>
+      <input id="versionInput" type="text" placeholder="latest" autocomplete="off" />
+      <button id="refresh" class="mini">Refresh</button>
+    </div>
+
+    <div class="controls">
+      <label class="ctl" for="themeSelect">Theme</label>
+      <select id="themeSelect">
+        <option value="">Auto-detect</option>
+        <option value="dp-light">dp / light</option>
+        <option value="dp-dark">dp / dark</option>
+        <option value="tmo-light">tmo / light</option>
+        <option value="tmo-dark">tmo / dark</option>
+      </select>
+    </div>
+
+    <script src="popup.js"></script>
+  </body>
+</html>

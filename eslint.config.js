@@ -47,6 +47,21 @@ export default [
     },
   },
   {
+    // Chrome extension — needs browser + chrome globals; complexity/line limits don't apply
+    files: ['packages/dialtone-migration-helper/**/*.{js,mjs}'],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        chrome: 'readonly',
+      },
+    },
+    rules: {
+      complexity: 'off',
+      'max-lines': 'off',
+      camelcase: 'off',
+    },
+  },
+  {
     ignores: [
       'dist',
       'node_modules',
