@@ -56,7 +56,7 @@
 /* eslint-disable max-lines */
 import { Editor, EditorContent } from '@tiptap/vue-3';
 import { BubbleMenu } from '@tiptap/vue-3/menus';
-import { Extension, getMarkRange } from '@tiptap/core';
+import { Extension } from '@tiptap/core';
 import { Plugin, PluginKey } from '@tiptap/pm/state';
 import { DtButton } from '../Button';
 import { DtStack } from '../Stack';
@@ -225,6 +225,18 @@ export default {
      */
     link: {
       type: [Boolean, Object],
+      default: false,
+    },
+
+    /**
+     * When true, a `link-click` event is emitted whenever a link (from the
+     * `link` extension) is clicked, letting the consumer handle navigation
+     * (e.g. route same-origin URLs in-app). The listener may call
+     * event.preventDefault() to suppress the default navigation. Defaults to
+     * false to preserve the standard anchor behavior.
+     */
+    emitLinkClick: {
+      type: Boolean,
       default: false,
     },
 
@@ -737,7 +749,12 @@ export default {
             };
           },
           addProseMirrorPlugins () {
-            const markType = this.type;
+            const parentPlugins = this.parent?.() ?? [];
+            // Opt-in: only intercept clicks when the consumer wants the event.
+            if (!self.emitLinkClick) {
+              return parentPlugins;
+            }
+
             // Emit `link-click` so consumers can intercept links (e.g. to
             // navigate same-origin URLs in-app instead of opening a new tab).
             // The listener may call event.preventDefault() to suppress the
@@ -746,19 +763,20 @@ export default {
               key: new PluginKey('linkClick'),
               props: {
                 handleClick (view, pos, event) {
-                  const { state } = view;
-                  const $pos = state.doc.resolve(pos);
-                  const linkMark = $pos.marks().find(m => m.type === markType);
-                  if (!linkMark) return false;
-                  const range = getMarkRange($pos, markType);
-                  const text = range ? state.doc.textBetween(range.from, range.to) : '';
-                  self.editor.emit('link-click', { href: linkMark.attrs.href, text, event });
+                  if (event.button !== 0) return false;
+                  const anchor = event.target?.closest?.('a');
+                  if (!anchor) return false;
+                  self.editor.emit('link-click', {
+                    href: anchor.href,
+                    text: anchor.textContent,
+                    event,
+                  });
                   return event.defaultPrevented;
                 },
               },
             });
 
-            return [...(this.parent?.() ?? []), linkClickPlugin];
+            return [...parentPlugins, linkClickPlugin];
           },
         }).configure({
           HTMLAttributes: {

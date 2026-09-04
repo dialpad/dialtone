@@ -1563,8 +1563,8 @@ describe('DtRichTextEditor tests', () => {
     describe('Link click functionality', () => {
       const HREF = 'https://example.com/app/messages/123';
 
-      const _insertLink = async () => {
-        await wrapper.setProps({ link: true });
+      const _insertLink = async (props = {}) => {
+        await wrapper.setProps({ link: true, ...props });
         const editorInstance = wrapper.vm.editor;
         editorInstance.commands.setContent({
           type: 'doc',
@@ -1580,24 +1580,19 @@ describe('DtRichTextEditor tests', () => {
         await wrapper.vm.$nextTick();
       };
 
-      const _findLinkMarkPos = (state) => {
-        let pos = null;
-        state.doc.descendants((node, nodePos) => {
-          if (node.isText && node.marks.some(m => m.type.name === 'link')) {
-            pos = nodePos + 1;
-          }
-        });
-        return pos;
+      // The click handler reads the anchor from event.target.closest('a'), so
+      // build an event whose target is the rendered link element.
+      const _clickLink = (view, { cancelable = false } = {}) => {
+        const anchor = wrapper.find('a.d-link').element;
+        const event = new MouseEvent('click', { button: 0, cancelable });
+        Object.defineProperty(event, 'target', { value: anchor });
+        return view.someProp('handleClick', (fn) => fn(view, 1, event));
       };
 
       it('emits link-click with the href when a link is clicked', async () => {
-        await _insertLink();
+        await _insertLink({ emitLinkClick: true });
 
-        const { state, view } = wrapper.vm.editor;
-        const pos = _findLinkMarkPos(state);
-        // Invoke the click handler directly — dispatchEvent does not work in
-        // JSDOM because ProseMirror resolves positions via getBoundingClientRect.
-        view.someProp('handleClick', (fn) => fn(view, pos, new MouseEvent('click')));
+        _clickLink(wrapper.vm.editor.view);
         await wrapper.vm.$nextTick();
 
         expect(wrapper.emitted('link-click')).toBeTruthy();
@@ -1605,28 +1600,39 @@ describe('DtRichTextEditor tests', () => {
         expect(wrapper.emitted('link-click')[0][0].event).toBeInstanceOf(MouseEvent);
       });
 
-      it('does not emit link-click when no link mark is at the clicked position', async () => {
-        await wrapper.setProps({ link: true });
+      it('does not emit link-click when emitLinkClick is false (default)', async () => {
+        await _insertLink();
+
+        _clickLink(wrapper.vm.editor.view);
         await wrapper.vm.$nextTick();
 
+        expect(wrapper.emitted('link-click')).toBeFalsy();
+      });
+
+      it('does not emit link-click when the click is not on a link', async () => {
+        await _insertLink({ emitLinkClick: true });
+
         const { view } = wrapper.vm.editor;
-        view.someProp('handleClick', (fn) => fn(view, 1, new MouseEvent('click')));
+        const event = new MouseEvent('click', { button: 0 });
+        Object.defineProperty(event, 'target', { value: document.createElement('div') });
+        view.someProp('handleClick', (fn) => fn(view, 1, event));
         await wrapper.vm.$nextTick();
 
         expect(wrapper.emitted('link-click')).toBeFalsy();
       });
 
       it('lets the consumer suppress default navigation via preventDefault', async () => {
-        await _insertLink();
+        await _insertLink({ emitLinkClick: true });
 
-        const { state, view } = wrapper.vm.editor;
-        const pos = _findLinkMarkPos(state);
         // A consumer that intercepts the link would preventDefault on the event;
         // the click handler then reports it as handled so the browser does not
         // follow the anchor's target="_blank".
-        const event = new MouseEvent('click', { cancelable: true });
+        const view = wrapper.vm.editor.view;
+        const anchor = wrapper.find('a.d-link').element;
+        const event = new MouseEvent('click', { button: 0, cancelable: true });
+        Object.defineProperty(event, 'target', { value: anchor });
         event.preventDefault();
-        const handled = view.someProp('handleClick', (fn) => fn(view, pos, event));
+        const handled = view.someProp('handleClick', (fn) => fn(view, 1, event));
         await wrapper.vm.$nextTick();
 
         expect(handled).toBe(true);
