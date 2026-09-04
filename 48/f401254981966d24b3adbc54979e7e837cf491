@@ -1,0 +1,51 @@
+.github/workflows/publish-web.yml
+  s_c828dbc85b3273::t_723c0c6bb1a852 22,82-83
+.github/workflows/release.yml
+  s_c828dbc85b3273::t_9481744645c4c0 24,122-125
+CHANGELOG.json
+  s_c828dbc85b3273::t_063821c8f3c8c3 1-8842
+CHANGELOG.md
+  s_c828dbc85b3273::t_675d66d8ee10a8 1-339
+packages/dialtone-cli/CHANGELOG.json
+  s_c828dbc85b3273::t_04c7618e63bbff 1
+packages/dialtone-cli/CHANGELOG.md
+  s_c828dbc85b3273::t_956d827a386d08 1-13
+packages/dialtone-cli/package.json
+  s_c828dbc85b3273::t_cfd141a0a1f90d 46
+packages/dialtone-vue/CHANGELOG.json
+  s_c828dbc85b3273::t_3e1247a93c84e5 1-9072
+packages/dialtone-vue/CHANGELOG.md
+  s_c828dbc85b3273::t_b40ad4422debee 1-222
+packages/dialtone-vue/components/Popover/Popover.vue
+  s_c828dbc85b3273::t_da201f8af124bf 952
+packages/dialtone-vue/components/RichTextEditor/RichTextEditor.vue
+  s_c828dbc85b3273::t_f733fd64450154 1002-1007
+package.json
+  s_e8492a04428b38::t_928347b366ff29 3
+packages/dialtone-vue/package.json
+  s_e8492a04428b38::t_e2eeafd578585f 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "48f401254981966d24b3adbc54979e7e837cf491",
+  "prompts": {},
+  "sessions": {
+    "s_c828dbc85b3273": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7a966231-8fd4-4148-aee4-64530dce36a2",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "belumontoya <163597542+belumontoya@users.noreply.github.com>"
+    },
+    "s_e8492a04428b38": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ee1cb464-be85-452a-8462-eb032e428cdc",
+        "model": "unknown"
+      },
+      "human_author": "belumontoya <163597542+belumontoya@users.noreply.github.com>"
+    }
+  }
+}

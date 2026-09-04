@@ -1,0 +1,67 @@
+apps/dialtone-documentation/docs/.vuepress/theme/layouts/Layout.vue
+  s_b67efc5818670a::t_a7e0b479de8e88 66
+packages/dialtone-tokens/tests/config.test.js
+  s_b67efc5818670a::t_14073b183a6477 4,86,89,113,170
+  s_b67efc5818670a::t_b01e50388da95a 296-313
+  s_b67efc5818670a::t_78d72bfeeda1b2 196,238-239
+  s_b67efc5818670a::t_fe8a6f9f3ca0fc 221-226,228-229,232-237,240-244,247-248,251-259,262-263,266-271,314-315
+  s_b67efc5818670a::t_076cbc12cadebd 272-293
+  s_b67efc5818670a::t_09235177dc32de 230-231,249-250,264-265
+  s_b67efc5818670a::t_d374abf59582d5 7,11,34,220,227,245-246,260-261,316,320
+  s_b67efc5818670a::t_e4fbb070861719 16
+apps/dialtone-documentation/docs/.vuepress/theme/composables/useThemeManager.js
+  s_b67efc5818670a::t_988100fd23be0b 145,147
+packages/dialtone-tokens/tests/fixtures/theme-stubs.js
+  s_b67efc5818670a::t_1859349aff20a3 2,8-9
+packages/dialtone-tokens/themes/config.js
+  s_b67efc5818670a::t_019a1778603705 514,516
+  s_b67efc5818670a::t_4a7d9186f5de0c 152,154-155,172,174-175,177,179,181,183
+  s_b67efc5818670a::t_2a92a7bb8e7878 620
+  s_b67efc5818670a::t_dbd96ba30032d3 106
+  s_b67efc5818670a::t_66545407835e19 330-338
+  s_b67efc5818670a::t_78c796768a9a01 651-652
+  h_9e2c5818b2d2f6 67,74
+  s_b67efc5818670a::t_0434998c3d0254 66,80,85-87,95,99,103,122,125,132,157,636,638,645,653,669
+  s_b67efc5818670a::t_7d6317138dac67 326,674
+  s_b67efc5818670a::t_e1850342785754 111
+  s_b67efc5818670a::t_d6cb7996277ffa 604
+  s_b67efc5818670a::t_077d7989c3911d 153,176,180,675
+  s_b67efc5818670a::t_4538ace0c6ce33 182
+  s_b67efc5818670a::t_a14b779c578368 109,114
+  s_b67efc5818670a::t_de22a00627c1b4 69,171,282,284,290,294,298,306,319,345,355,568,576,592,597
+  s_b67efc5818670a::t_664b23ffe4732f 178
+  s_b67efc5818670a::t_7d367d128683d6 310,312
+  s_b67efc5818670a::t_fb2d31ef0e1bca 649-650
+  s_b67efc5818670a::t_cb484bf8b7e0f5 64,70-73,79,81-82,84,90,110,112-113,115-119
+  s_b67efc5818670a::t_c211f715cdf003 133-134
+  s_b67efc5818670a::t_f992cfb3c41f91 222
+  s_b67efc5818670a::t_95d4ef3e086680 654-661
+apps/dialtone-documentation/docs/guides/theme-and-mode/index.md
+  s_b67efc5818670a::t_705db37afd2387 72,308,311,314,318
+  s_b67efc5818670a::t_a314fb3377da35 99-100,104-109
+  s_b67efc5818670a::t_6cd9b7c7c4ba47 324,327
+  s_b67efc5818670a::t_438de234a17a88 66-67
+  s_b67efc5818670a::t_ed0b20ab67eb63 357
+  s_b67efc5818670a::t_537e0f516cc82b 200
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.5",
+  "base_commit_sha": "011afc2c73e8b9364a42cd54d0d862c185090dc8",
+  "prompts": {},
+  "humans": {
+    "h_9e2c5818b2d2f6": {
+      "author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_b67efc5818670a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7951d319-31d5-497a-8585-78f8eb0d8b39",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

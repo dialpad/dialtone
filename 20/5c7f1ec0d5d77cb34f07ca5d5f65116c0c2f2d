@@ -1,0 +1,14 @@
+packages/dialtone-vue/components/RichTextEditor/Extensions/Channels/ChannelSuggestion.vue
+  h_c15b5755534093 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "205c7f1ec0d5d77cb34f07ca5d5f65116c0c2f2d",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

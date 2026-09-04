@@ -1,0 +1,22 @@
+.claude/rules/combinator-variants.md
+  s_cbd29f6a5140e8::t_8e71acc1b1ac36 3
+  s_cbd29f6a5140e8::t_93c3b0cd73cbf0 91-93,113-117,125-129
+.agents/resources/rules/combinator-variants.md
+  s_cbd29f6a5140e8::t_93c3b0cd73cbf0 88-90,110-114,122-126
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.8",
+  "base_commit_sha": "86a48e5c01af9fd358bd0076ac7045e47f1c1065",
+  "prompts": {},
+  "sessions": {
+    "s_cbd29f6a5140e8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f1571-d2ad-7572-827a-d391f2dc0ba6",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
