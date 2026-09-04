@@ -1,3 +1,10 @@
+# [8.81.0-next.16](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.81.0-next.15...dialtone-css/v8.81.0-next.16) (2026-09-04)
+
+
+### Features
+
+* DLT-3590 add package support for redesigned docs ([#1404](https://github.com/dialpad/dialtone/issues/1404)) ([8aa6b0b](https://github.com/dialpad/dialtone/commit/8aa6b0bd64e8cf7481a8d56e11d1ec1978d0445b))
+
 # [8.81.0-next.15](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.81.0-next.14...dialtone-css/v8.81.0-next.15) (2026-08-27)
 
 
