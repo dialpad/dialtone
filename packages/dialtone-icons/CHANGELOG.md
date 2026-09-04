@@ -1,3 +1,10 @@
+# [4.57.0-next.3](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.57.0-next.2...dialtone-icons/v4.57.0-next.3) (2026-09-04)
+
+
+### Features
+
+* DLT-3590 add package support for redesigned docs ([#1404](https://github.com/dialpad/dialtone/issues/1404)) ([8aa6b0b](https://github.com/dialpad/dialtone/commit/8aa6b0bd64e8cf7481a8d56e11d1ec1978d0445b))
+
 # [4.57.0-next.2](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.57.0-next.1...dialtone-icons/v4.57.0-next.2) (2026-08-13)
 
 
