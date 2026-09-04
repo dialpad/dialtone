@@ -1,3 +1,21 @@
+# [10.0.0-next.20](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.19...dialtone/v10.0.0-next.20) (2026-09-04)
+
+
+### Bug Fixes
+
+* **Popover:** DLT-3550 guard focusFirstElementIfNeeded against unset content ref ([#1407](https://github.com/dialpad/dialtone/issues/1407)) ([7ebddf4](https://github.com/dialpad/dialtone/commit/7ebddf475982cc9d19157608f5ec895e02dc0a67))
+
+
+### Documentation
+
+* DLT-3431 redesign next doc site ([#1405](https://github.com/dialpad/dialtone/issues/1405)) ([7f4e798](https://github.com/dialpad/dialtone/commit/7f4e79894176ce4f4b491d2df52e31220bf0d83a))
+* NO-JIRA ensure deep-linked active side within view ([#1409](https://github.com/dialpad/dialtone/issues/1409)) ([9618ddd](https://github.com/dialpad/dialtone/commit/9618ddd1dc98a3f94f54582d9b9dd6738b23a1cd))
+
+
+### Features
+
+* DLT-3590 add package support for redesigned docs ([#1404](https://github.com/dialpad/dialtone/issues/1404)) ([8aa6b0b](https://github.com/dialpad/dialtone/commit/8aa6b0bd64e8cf7481a8d56e11d1ec1978d0445b))
+
 # [10.0.0-next.19](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.18...dialtone/v10.0.0-next.19) (2026-08-27)
 
 
