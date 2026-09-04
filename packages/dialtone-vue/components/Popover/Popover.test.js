@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils';
 import { DtPopover } from '@/components/Popover';
+import { POPOVER_MODAL_ELEMENT_Z_INDEX, POPOVER_Z_INDEX } from '@/components/Popover/PopoverConstants';
 import { DtFocustrapDirective } from '@/directives/focustrap_directive';
 import { flushPromises } from '@/common/utils';
 import SrOnlyCloseButtonComponent from '@/common/sr_only_close_button.vue';
@@ -294,6 +295,69 @@ describe('DtPopover Tests', () => {
         await wrapper.setProps({ boundary: document.body });
 
         expect(setPropsSpy).toHaveBeenCalledWith({ popperOptions: wrapper.vm.popperOptions() });
+      });
+    });
+  });
+
+  describe('Z-index Tests', () => {
+    let modal;
+
+    const createOpenModal = () => {
+      const el = document.createElement('div');
+      el.classList.add('d-modal');
+      el.setAttribute('open', '');
+      document.body.appendChild(el);
+      return el;
+    };
+
+    beforeEach(async () => {
+      await wrapper.setProps({ open: true });
+    });
+
+    afterEach(() => {
+      modal?.remove();
+      modal = null;
+    });
+
+    it('renders at the popover layer when no modal is open', () => {
+      expect(wrapper.vm.calculateAnchorZindex()).toBe(POPOVER_Z_INDEX);
+    });
+
+    describe('When the anchor is inside an open modal', () => {
+      beforeEach(() => {
+        modal = createOpenModal();
+        // Move the whole anchor container, not the anchor itself: the component's
+        // MutationObserver re-reads $refs.anchor.children[0] and would blank anchorEl.
+        modal.appendChild(wrapper.vm.$refs.anchor);
+      });
+
+      it('renders above the modal layer', () => {
+        expect(wrapper.vm.calculateAnchorZindex()).toBe(POPOVER_MODAL_ELEMENT_Z_INDEX);
+      });
+    });
+
+    describe('When an unrelated modal is open elsewhere on the page', () => {
+      beforeEach(() => {
+        modal = createOpenModal();
+      });
+
+      it('stays at the popover layer rather than painting over the unrelated overlay', () => {
+        expect(wrapper.vm.calculateAnchorZindex()).toBe(POPOVER_Z_INDEX);
+      });
+    });
+
+    describe('When the anchor is inside a drawer', () => {
+      beforeEach(() => {
+        modal = document.createElement('div');
+        modal.classList.add('d-zi-drawer');
+        document.body.appendChild(modal);
+        // Move the whole anchor container, not the anchor itself: the component's
+        // MutationObserver re-reads $refs.anchor.children[0] and would blank anchorEl.
+        modal.appendChild(wrapper.vm.$refs.anchor);
+      });
+
+      it('renders above the modal layer', () => {
+        expect(wrapper.vm.calculateAnchorZindex()).toBe(POPOVER_MODAL_ELEMENT_Z_INDEX);
       });
     });
   });

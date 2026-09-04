@@ -133,14 +133,17 @@
 <script>
 /* eslint-disable max-lines */
 import {
+  OPEN_MODAL_SELECTOR,
   POPOVER_APPEND_TO_VALUES,
   POPOVER_BOUNDARY_VALUES,
   POPOVER_CONTENT_WIDTHS,
   POPOVER_HEADER_FOOTER_PADDING_CLASSES,
   POPOVER_INITIAL_FOCUS_STRINGS,
+  POPOVER_MODAL_ELEMENT_Z_INDEX,
   POPOVER_PADDING_CLASSES,
   POPOVER_ROLES,
   POPOVER_STICKY_VALUES,
+  POPOVER_Z_INDEX,
 } from './PopoverConstants';
 import { getUniqueString, hasSlotContent, isOutOfViewPort, warnIfUnmounted, disableRootScrolling, enableRootScrolling, returnFirstEl } from '@/common/utils';
 import { HTML_ELEMENT_TYPE } from '@/common/constants';
@@ -701,7 +704,7 @@ export default {
 
     modal (modal) {
       this.tip?.setProps({
-        zIndex: modal ? 650 : this.calculateAnchorZindex(),
+        zIndex: modal ? POPOVER_MODAL_ELEMENT_Z_INDEX : this.calculateAnchorZindex(),
       });
     },
 
@@ -865,16 +868,20 @@ export default {
     },
 
     calculateAnchorZindex () {
-      // if a modal is currently active render at modal-element z-index, otherwise at popover z-index
-      if (returnFirstEl(this.$el).getRootNode()
-        .querySelector('.d-modal[aria-hidden="false"], .d-modal--transparent[aria-hidden="false"], .d-modal[open], .d-modal--transparent[open]') ||
-        // Special case because we don't have any dialtone drawer component yet. Render at 650 when
-        // anchor of popover is within a drawer.
-        this.anchorEl?.closest('.d-zi-drawer')) {
-        return 650;
-      } else {
-        return 300;
-      }
+      // Only outrank the modal layer when this popover actually belongs to an open modal,
+      // i.e. its anchor lives inside one. Testing for "any open modal in the document"
+      // also promotes popovers anchored elsewhere on the page — global chrome such as a
+      // profile menu — so they paint above the overlay of a modal they have nothing to do
+      // with, which is not the intent of the modal-element layer.
+      const isAnchoredInModal = !!this.anchorEl?.closest(OPEN_MODAL_SELECTOR);
+
+      // Special case because we don't have any dialtone drawer component yet. Render at
+      // modal-element z-index when anchor of popover is within a drawer.
+      const isAnchoredInDrawer = !!this.anchorEl?.closest('.d-zi-drawer');
+
+      return isAnchoredInModal || isAnchoredInDrawer
+        ? POPOVER_MODAL_ELEMENT_Z_INDEX
+        : POPOVER_Z_INDEX;
     },
 
     defaultToggleOpen (e) {
@@ -1209,7 +1216,7 @@ export default {
         // We have to manage hideOnClick functionality manually to handle
         // popover within popover situations.
         hideOnClick: false,
-        zIndex: this.modal ? 650 : this.calculateAnchorZindex(),
+        zIndex: this.modal ? POPOVER_MODAL_ELEMENT_Z_INDEX : this.calculateAnchorZindex(),
         onClickOutside: this.onClickOutside,
         onShow: this.onShow,
       });
