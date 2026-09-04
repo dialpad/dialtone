@@ -1580,17 +1580,19 @@ describe('DtRichTextEditor tests', () => {
         await wrapper.vm.$nextTick();
       };
 
-      // The click handler reads the anchor from event.target.closest('a'), so
-      // build an event whose target is the rendered link element.
-      const _clickLink = (view, { cancelable = false } = {}) => {
-        const anchor = wrapper.find('a.d-link').element;
+      // The link click is handled via a DOM `click` event (handleDOMEvents.click)
+      // rather than ProseMirror's handleClick, so that it also fires on a
+      // non-editable (read-only) editor. Build an event whose target is the
+      // rendered link element and dispatch it through the registered handler.
+      const _clickLink = (view, { cancelable = false, target } = {}) => {
+        const anchor = target ?? wrapper.find('a.d-link').element;
         const event = new MouseEvent('click', { button: 0, cancelable });
         Object.defineProperty(event, 'target', { value: anchor });
-        return view.someProp('handleClick', (fn) => fn(view, 1, event));
+        return view.someProp('handleDOMEvents', (handlers) => handlers.click?.(view, event));
       };
 
       it('emits link-click with the href when a link is clicked', async () => {
-        await _insertLink({ emitLinkClick: true });
+        await _insertLink();
 
         _clickLink(wrapper.vm.editor.view);
         await wrapper.vm.$nextTick();
@@ -1600,29 +1602,30 @@ describe('DtRichTextEditor tests', () => {
         expect(wrapper.emitted('link-click')[0][0].event).toBeInstanceOf(MouseEvent);
       });
 
-      it('does not emit link-click when emitLinkClick is false (default)', async () => {
+      it('does not emit link-click when the click is not on a link', async () => {
         await _insertLink();
 
-        _clickLink(wrapper.vm.editor.view);
+        _clickLink(wrapper.vm.editor.view, { target: document.createElement('div') });
         await wrapper.vm.$nextTick();
 
         expect(wrapper.emitted('link-click')).toBeFalsy();
       });
 
-      it('does not emit link-click when the click is not on a link', async () => {
-        await _insertLink({ emitLinkClick: true });
+      it('preserves default navigation when the consumer does not preventDefault', async () => {
+        await _insertLink();
 
-        const { view } = wrapper.vm.editor;
-        const event = new MouseEvent('click', { button: 0 });
-        Object.defineProperty(event, 'target', { value: document.createElement('div') });
-        view.someProp('handleClick', (fn) => fn(view, 1, event));
+        const handled = _clickLink(wrapper.vm.editor.view, { cancelable: true });
         await wrapper.vm.$nextTick();
 
-        expect(wrapper.emitted('link-click')).toBeFalsy();
+        // The event still emits, but without preventDefault the handler reports
+        // not-handled (someProp returns undefined for a falsy result), so the
+        // anchor's default behavior (target="_blank") proceeds as before.
+        expect(handled).toBeFalsy();
+        expect(wrapper.emitted('link-click')).toBeTruthy();
       });
 
       it('lets the consumer suppress default navigation via preventDefault', async () => {
-        await _insertLink({ emitLinkClick: true });
+        await _insertLink();
 
         // A consumer that intercepts the link would preventDefault on the event;
         // the click handler then reports it as handled so the browser does not
@@ -1632,7 +1635,7 @@ describe('DtRichTextEditor tests', () => {
         const event = new MouseEvent('click', { button: 0, cancelable: true });
         Object.defineProperty(event, 'target', { value: anchor });
         event.preventDefault();
-        const handled = view.someProp('handleClick', (fn) => fn(view, 1, event));
+        const handled = view.someProp('handleDOMEvents', (handlers) => handlers.click?.(view, event));
         await wrapper.vm.$nextTick();
 
         expect(handled).toBe(true);

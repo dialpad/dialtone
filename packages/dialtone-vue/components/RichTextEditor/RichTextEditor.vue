@@ -228,18 +228,6 @@ export default {
     },
 
     /**
-     * When true, a `link-click` event is emitted whenever a link (from the
-     * `link` extension) is clicked, letting the consumer handle navigation
-     * (e.g. route same-origin URLs in-app). The listener may call
-     * event.preventDefault() to suppress the default navigation. Defaults to
-     * false to preserve the standard anchor behavior.
-     */
-    emitLinkClick: {
-      type: Boolean,
-      default: false,
-    },
-
-    /**
      * Enables the Custom Link extension and optionally passes configurations to it
      *
      * It is not recommended to use this and the built in TipTap link extension at the same time.
@@ -1003,19 +991,25 @@ export default {
 
           // Emit `link-click` so consumers can intercept links (e.g. to
           // navigate same-origin URLs in-app instead of opening a new tab).
-          // The listener may call event.preventDefault() to suppress the
-          // default navigation; otherwise the anchor behaves normally.
-          // Opt-in: only intercept clicks when the consumer wants the event.
-          handleClick: (view, pos, event) => {
-            if (!this.emitLinkClick || event.button !== 0) return false;
-            const anchor = event.target?.closest?.('a');
-            if (!anchor) return false;
-            this.editor.emit('link-click', {
-              href: anchor.href,
-              text: anchor.textContent,
-              event,
-            });
-            return event.defaultPrevented;
+          // The default anchor behavior is preserved; a listener may call
+          // event.preventDefault() to suppress the default navigation.
+          //
+          // Uses a DOM click handler rather than ProseMirror's handleClick:
+          // handleClick is not invoked on a non-editable view (e.g. a read-only
+          // editor rendering a message), whereas handleDOMEvents fires for real
+          // DOM clicks regardless of editable state.
+          handleDOMEvents: {
+            click: (view, event) => {
+              if (event.button !== 0) return false;
+              const anchor = event.target?.closest?.('a');
+              if (!anchor) return false;
+              this.editor.emit('link-click', {
+                href: anchor.href,
+                text: anchor.textContent,
+                event,
+              });
+              return event.defaultPrevented;
+            },
           },
 
           handleKeyDown: (view, event) => {
