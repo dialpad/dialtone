@@ -12,6 +12,20 @@ export const POPOVER_HEADER_FOOTER_PADDING_CLASSES = {
   medium: 'd-pis-100',
   large: 'd-pis-200',
 };
+// Mirrors the --zi-popover and --zi-modal-element design tokens. Tippy takes a raw
+// number for zIndex, so the values cannot be referenced as CSS custom properties.
+export const POPOVER_Z_INDEX = 300;
+export const POPOVER_MODAL_ELEMENT_Z_INDEX = 650;
+
+// An open DtModal, in either the legacy div-based form ([aria-hidden="false"]) or the
+// native <dialog> form ([open]).
+export const OPEN_MODAL_SELECTOR = [
+  '.d-modal[aria-hidden="false"]',
+  '.d-modal--transparent[aria-hidden="false"]',
+  '.d-modal[open]',
+  '.d-modal--transparent[open]',
+].join(', ');
+
 export const POPOVER_ROLES = ['dialog', 'menu', 'listbox', 'tree', 'grid'];
 export const POPOVER_BOUNDARY_VALUES = ['clippingParents', 'viewport', 'document'];
 export const POPOVER_CONTENT_WIDTHS = ['', 'anchor'];
@@ -27,6 +41,9 @@ export const POPOVER_DIRECTIONS = [
 export default {
   POPOVER_PADDING_CLASSES,
   POPOVER_HEADER_FOOTER_PADDING_CLASSES,
+  POPOVER_Z_INDEX,
+  POPOVER_MODAL_ELEMENT_Z_INDEX,
+  OPEN_MODAL_SELECTOR,
   POPOVER_ROLES,
   POPOVER_BOUNDARY_VALUES,
   POPOVER_CONTENT_WIDTHS,
