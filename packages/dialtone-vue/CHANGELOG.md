@@ -1,3 +1,15 @@
+# [3.225.0-next.8](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0-next.7...dialtone-vue/v3.225.0-next.8) (2026-09-04)
+
+
+### Bug Fixes
+
+* **Popover:** DLT-3550 guard focusFirstElementIfNeeded against unset content ref ([#1407](https://github.com/dialpad/dialtone/issues/1407)) ([7ebddf4](https://github.com/dialpad/dialtone/commit/7ebddf475982cc9d19157608f5ec895e02dc0a67))
+
+
+### Documentation
+
+* DLT-3431 redesign next doc site ([#1405](https://github.com/dialpad/dialtone/issues/1405)) ([7f4e798](https://github.com/dialpad/dialtone/commit/7f4e79894176ce4f4b491d2df52e31220bf0d83a))
+
 # [3.225.0-next.7](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0-next.6...dialtone-vue/v3.225.0-next.7) (2026-08-27)
 
 
