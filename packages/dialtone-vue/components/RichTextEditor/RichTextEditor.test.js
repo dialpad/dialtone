@@ -1560,6 +1560,107 @@ describe('DtRichTextEditor tests', () => {
       });
     });
 
+    describe('Link click functionality', () => {
+      const HREF = 'https://example.com/app/messages/123';
+
+      const _insertLink = async (props = {}) => {
+        await wrapper.setProps({ link: true, ...props });
+        const editorInstance = wrapper.vm.editor;
+        editorInstance.commands.setContent({
+          type: 'doc',
+          content: [{
+            type: 'paragraph',
+            content: [{
+              type: 'text',
+              text: 'a link',
+              marks: [{ type: 'link', attrs: { href: HREF } }],
+            }],
+          }],
+        });
+        await wrapper.vm.$nextTick();
+      };
+
+      // The link click is handled via a DOM `click` event (handleDOMEvents.click)
+      // rather than ProseMirror's handleClick, so that it also fires on a
+      // non-editable (read-only) editor. Build an event whose target is the
+      // rendered link element and dispatch it through the registered handler.
+      const _clickLink = (view, { cancelable = false, target } = {}) => {
+        const anchor = target ?? wrapper.find('a.d-link').element;
+        const event = new MouseEvent('click', { button: 0, cancelable });
+        Object.defineProperty(event, 'target', { value: anchor });
+        return view.someProp('handleDOMEvents', (handlers) => handlers.click?.(view, event));
+      };
+
+      it('emits link-click with the href when a link is clicked', async () => {
+        await _insertLink();
+
+        _clickLink(wrapper.vm.editor.view);
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.emitted('link-click')).toBeTruthy();
+        expect(wrapper.emitted('link-click')[0][0]).toMatchObject({ href: HREF, text: 'a link' });
+        expect(wrapper.emitted('link-click')[0][0].event).toBeInstanceOf(MouseEvent);
+      });
+
+      it('does not emit link-click when the click is not on a link', async () => {
+        await _insertLink();
+
+        _clickLink(wrapper.vm.editor.view, { target: document.createElement('div') });
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.emitted('link-click')).toBeFalsy();
+      });
+
+      it('preserves default navigation when the consumer does not preventDefault', async () => {
+        await _insertLink();
+
+        const handled = _clickLink(wrapper.vm.editor.view, { cancelable: true });
+        await wrapper.vm.$nextTick();
+
+        // The event still emits, but without preventDefault the handler reports
+        // not-handled (someProp returns undefined for a falsy result), so the
+        // anchor's default behavior (target="_blank") proceeds as before.
+        expect(handled).toBeFalsy();
+        expect(wrapper.emitted('link-click')).toBeTruthy();
+      });
+
+      it('lets the consumer suppress default navigation via preventDefault', async () => {
+        await _insertLink();
+
+        // A consumer that intercepts the link would preventDefault on the event;
+        // the click handler then reports it as handled so the browser does not
+        // follow the anchor's target="_blank".
+        const view = wrapper.vm.editor.view;
+        const anchor = wrapper.find('a.d-link').element;
+        const event = new MouseEvent('click', { button: 0, cancelable: true });
+        Object.defineProperty(event, 'target', { value: anchor });
+        event.preventDefault();
+        const handled = view.someProp('handleDOMEvents', (handlers) => handlers.click?.(view, event));
+        await wrapper.vm.$nextTick();
+
+        expect(handled).toBe(true);
+      });
+
+      it('does not emit link-click when the built-in link extension is disabled', async () => {
+        // The event is scoped to the built-in `link` extension. With link
+        // disabled, anchors from other extensions (e.g. customLink) must not
+        // emit link-click, matching the documented contract.
+        await wrapper.setProps({ link: false });
+        await wrapper.vm.$nextTick();
+
+        const view = wrapper.vm.editor.view;
+        const anchor = document.createElement('a');
+        anchor.href = HREF;
+        anchor.textContent = 'a link';
+        const event = new MouseEvent('click', { button: 0, cancelable: true });
+        Object.defineProperty(event, 'target', { value: anchor });
+        view.someProp('handleDOMEvents', (handlers) => handlers.click?.(view, event));
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.emitted('link-click')).toBeFalsy();
+      });
+    });
+
     describe('Mention hover functionality', () => {
       const mentionData = {
         id: 'john.doe',

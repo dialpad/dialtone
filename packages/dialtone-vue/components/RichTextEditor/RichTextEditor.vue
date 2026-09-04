@@ -617,6 +617,18 @@ export default {
      * @type {Object}
      */
     'phone-click',
+
+    /**
+     * Event fired when a link is clicked.
+     * Payload: { href: string, text: string, event: MouseEvent } — the link's
+     * href, its text content, and the originating click event. Call
+     * event.preventDefault() to suppress the default navigation (e.g. to route
+     * same-origin URLs in-app instead of opening a new tab).
+     * Requires the `link` prop to be set.
+     * @event link-click
+     * @type {Object}
+     */
+    'link-click',
   ],
 
   data () {
@@ -977,6 +989,32 @@ export default {
             class: this.inputClass,
           },
 
+          // Emit `link-click` for anchors from the built-in `link` extension so
+          // consumers can intercept links (e.g. to navigate same-origin URLs
+          // in-app instead of opening a new tab). The default anchor behavior is
+          // preserved; a listener may call event.preventDefault() to suppress
+          // the default navigation. Scoped to the `link` extension to match the
+          // event's documented contract (the custom link extension is out of
+          // scope and does not emit this event).
+          //
+          // Uses a DOM click handler rather than ProseMirror's handleClick:
+          // handleClick is not invoked on a non-editable view (e.g. a read-only
+          // editor rendering a message), whereas handleDOMEvents fires for real
+          // DOM clicks regardless of editable state.
+          handleDOMEvents: {
+            click: (view, event) => {
+              if (!this.link || event.button !== 0) return false;
+              const anchor = event.target?.closest?.('a');
+              if (!anchor) return false;
+              this.editor.emit('link-click', {
+                href: anchor.href,
+                text: anchor.textContent,
+                event,
+              });
+              return event.defaultPrevented;
+            },
+          },
+
           handleKeyDown: (view, event) => {
             if (this.allowTyping) return false;
 
@@ -1324,6 +1362,11 @@ export default {
       // Phone number link is clicked — only emitted by the LinkPhoneNumbers extension
       this.editor.on('phone-click', (phoneData) => {
         this.$emit('phone-click', phoneData);
+      });
+
+      // A link is clicked — only emitted when the built-in `link` extension is active
+      this.editor.on('link-click', (linkData) => {
+        this.$emit('link-click', linkData);
       });
     },
 
