@@ -57,7 +57,6 @@
 import { Editor, EditorContent } from '@tiptap/vue-3';
 import { BubbleMenu } from '@tiptap/vue-3/menus';
 import { Extension } from '@tiptap/core';
-import { Plugin, PluginKey } from '@tiptap/pm/state';
 import { DtButton } from '../Button';
 import { DtStack } from '../Stack';
 import Blockquote from '@tiptap/extension-blockquote';
@@ -748,36 +747,6 @@ export default {
               },
             };
           },
-          addProseMirrorPlugins () {
-            const parentPlugins = this.parent?.() ?? [];
-            // Opt-in: only intercept clicks when the consumer wants the event.
-            if (!self.emitLinkClick) {
-              return parentPlugins;
-            }
-
-            // Emit `link-click` so consumers can intercept links (e.g. to
-            // navigate same-origin URLs in-app instead of opening a new tab).
-            // The listener may call event.preventDefault() to suppress the
-            // default navigation; otherwise the anchor behaves normally.
-            const linkClickPlugin = new Plugin({
-              key: new PluginKey('linkClick'),
-              props: {
-                handleClick (view, pos, event) {
-                  if (event.button !== 0) return false;
-                  const anchor = event.target?.closest?.('a');
-                  if (!anchor) return false;
-                  self.editor.emit('link-click', {
-                    href: anchor.href,
-                    text: anchor.textContent,
-                    event,
-                  });
-                  return event.defaultPrevented;
-                },
-              },
-            });
-
-            return [...parentPlugins, linkClickPlugin];
-          },
         }).configure({
           HTMLAttributes: {
             class: 'd-link d-wb-break-all',
@@ -1030,6 +999,23 @@ export default {
           attributes: {
             ...this.inputAttrs,
             class: this.inputClass,
+          },
+
+          // Emit `link-click` so consumers can intercept links (e.g. to
+          // navigate same-origin URLs in-app instead of opening a new tab).
+          // The listener may call event.preventDefault() to suppress the
+          // default navigation; otherwise the anchor behaves normally.
+          // Opt-in: only intercept clicks when the consumer wants the event.
+          handleClick: (view, pos, event) => {
+            if (!this.emitLinkClick || event.button !== 0) return false;
+            const anchor = event.target?.closest?.('a');
+            if (!anchor) return false;
+            this.editor.emit('link-click', {
+              href: anchor.href,
+              text: anchor.textContent,
+              event,
+            });
+            return event.defaultPrevented;
           },
 
           handleKeyDown: (view, event) => {
