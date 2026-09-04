@@ -1,0 +1,39 @@
+packages/dialtone-vue/components/RichTextEditor/RichTextEditor.test.js
+  s_c13f2db55938c9::t_639d05493766d7 1563-1565,1568-1582,1592-1596,1598-1604,1607,1609-1613,1627-1629,1630-1632,1637,1639-1642,1662-1663
+  s_c13f2db55938c9::t_83709beaec589f 1566-1567,1589-1590,1597,1606-1607,1611-1613,1616,1633-1636
+  s_c13f2db55938c9::t_c8b91d2cf63d2d 1595,1605,1608,1614-1615,1617,1628
+  s_c13f2db55938c9::t_56e98defc20959 1583-1588,1591,1638
+  s_c13f2db55938c9::t_a3889913889a86 1620-1624
+  s_c13f2db55938c9::t_77f6f9cc8e56c8 1643-1661
+packages/dialtone-vue/components/RichTextEditor/RichTextEditor.vue
+  s_c13f2db55938c9::t_d27d2df6acb056 620-631
+  s_c13f2db55938c9::t_b4e177b54caf3a 1366-1370
+  s_c13f2db55938c9::t_78d30e835258ff 59
+  s_2436873d8da844::t_f3208550de035b 1016-1017
+  s_c13f2db55938c9::t_e8c3f7998fbf80 999-1005,1007-1015
+  s_c13f2db55938c9::t_fc8c4328410a71 992-998,1006
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "dd945650a141c46698d8a8f46d3762ce6e6c29f2",
+  "prompts": {},
+  "sessions": {
+    "s_2436873d8da844": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a083f570-3604-4dc1-943a-afdc03654f21",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    },
+    "s_c13f2db55938c9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "95037797-3625-433c-b08e-d4952d040b33",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "iropolo <ignacio.ropolo@dialpad.com>"
+    }
+  }
+}
