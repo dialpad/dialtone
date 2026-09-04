@@ -1640,6 +1640,25 @@ describe('DtRichTextEditor tests', () => {
 
         expect(handled).toBe(true);
       });
+
+      it('does not emit link-click when the built-in link extension is disabled', async () => {
+        // The event is scoped to the built-in `link` extension. With link
+        // disabled, anchors from other extensions (e.g. customLink) must not
+        // emit link-click, matching the documented contract.
+        await wrapper.setProps({ link: false });
+        await wrapper.vm.$nextTick();
+
+        const view = wrapper.vm.editor.view;
+        const anchor = document.createElement('a');
+        anchor.href = HREF;
+        anchor.textContent = 'a link';
+        const event = new MouseEvent('click', { button: 0, cancelable: true });
+        Object.defineProperty(event, 'target', { value: anchor });
+        view.someProp('handleDOMEvents', (handlers) => handlers.click?.(view, event));
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.emitted('link-click')).toBeFalsy();
+      });
     });
 
     describe('Mention hover functionality', () => {

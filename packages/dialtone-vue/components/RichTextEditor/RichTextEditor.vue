@@ -989,10 +989,13 @@ export default {
             class: this.inputClass,
           },
 
-          // Emit `link-click` so consumers can intercept links (e.g. to
-          // navigate same-origin URLs in-app instead of opening a new tab).
-          // The default anchor behavior is preserved; a listener may call
-          // event.preventDefault() to suppress the default navigation.
+          // Emit `link-click` for anchors from the built-in `link` extension so
+          // consumers can intercept links (e.g. to navigate same-origin URLs
+          // in-app instead of opening a new tab). The default anchor behavior is
+          // preserved; a listener may call event.preventDefault() to suppress
+          // the default navigation. Scoped to the `link` extension to match the
+          // event's documented contract (the custom link extension is out of
+          // scope and does not emit this event).
           //
           // Uses a DOM click handler rather than ProseMirror's handleClick:
           // handleClick is not invoked on a non-editable view (e.g. a read-only
@@ -1000,7 +1003,7 @@ export default {
           // DOM clicks regardless of editable state.
           handleDOMEvents: {
             click: (view, event) => {
-              if (event.button !== 0) return false;
+              if (!this.link || event.button !== 0) return false;
               const anchor = event.target?.closest?.('a');
               if (!anchor) return false;
               this.editor.emit('link-click', {
