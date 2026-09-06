@@ -1,0 +1,1136 @@
+{
+  "totalDClasses": 325,
+  "utilitiesInDom": 96,
+  "componentFamilies": 95,
+  "components": {
+    "d-fd-column": {
+      "elementCount": 5,
+      "variants": [
+        "d-fd-column"
+      ]
+    },
+    "d-ac-center": {
+      "elementCount": 1,
+      "variants": [
+        "d-ac-center"
+      ]
+    },
+    "d-fd-row": {
+      "elementCount": 1,
+      "variants": [
+        "d-fd-row"
+      ]
+    },
+    "d-link": {
+      "elementCount": 5,
+      "variants": [
+        "d-link",
+        "d-link--muted"
+      ]
+    },
+    "d-icon": {
+      "elementCount": 366,
+      "variants": [
+        "d-icon",
+        "d-icon--arrow-down",
+        "d-icon--arrow-left",
+        "d-icon--arrow-right",
+        "d-icon--arrow-up",
+        "d-icon--calendar",
+        "d-icon--calendar-clock",
+        "d-icon--chevron-down",
+        "d-icon--chevron-right",
+        "d-icon--close",
+        "d-icon--contacts",
+        "d-icon--dialbot",
+        "d-icon--dialpad-logo",
+        "d-icon--hash",
+        "d-icon--headphones",
+        "d-icon--inbox",
+        "d-icon--info",
+        "d-icon--lock",
+        "d-icon--message",
+        "d-icon--more-vertical",
+        "d-icon--phone",
+        "d-icon--plus-circle",
+        "d-icon--power-dialer-off",
+        "d-icon--refresh",
+        "d-icon--search",
+        "d-icon--settings",
+        "d-icon--size-100",
+        "d-icon--size-200",
+        "d-icon--size-300",
+        "d-icon--size-400",
+        "d-icon--size-500",
+        "d-icon--size-600",
+        "d-icon--thread",
+        "d-icon--user",
+        "d-icon--users",
+        "d-icon--video"
+      ]
+    },
+    "d-fco75": {
+      "elementCount": 1,
+      "variants": [
+        "d-fco75"
+      ]
+    },
+    "d-btn": {
+      "elementCount": 449,
+      "variants": [
+        "d-btn",
+        "d-btn--circle",
+        "d-btn--icon-only",
+        "d-btn--inverted",
+        "d-btn--lg",
+        "d-btn--muted",
+        "d-btn--outlined",
+        "d-btn--primary",
+        "d-btn--sm",
+        "d-btn--xs",
+        "d-btn__icon",
+        "d-btn__icon--left",
+        "d-btn__label"
+      ]
+    },
+    "d-gg4": {
+      "elementCount": 1,
+      "variants": [
+        "d-gg4"
+      ]
+    },
+    "d-w100p": {
+      "elementCount": 34,
+      "variants": [
+        "d-w100p"
+      ]
+    },
+    "d-ps-relative": {
+      "elementCount": 4,
+      "variants": [
+        "d-ps-relative"
+      ]
+    },
+    "d-popover": {
+      "elementCount": 62,
+      "variants": [
+        "d-popover",
+        "d-popover__dialog",
+        "d-popover__dialog--modal"
+      ]
+    },
+    "d-ps-fixed": {
+      "elementCount": 1,
+      "variants": [
+        "d-ps-fixed"
+      ]
+    },
+    "d-l50p": {
+      "elementCount": 1,
+      "variants": [
+        "d-l50p"
+      ]
+    },
+    "d-w464": {
+      "elementCount": 1,
+      "variants": [
+        "d-w464"
+      ]
+    },
+    "d-wmn216": {
+      "elementCount": 1,
+      "variants": [
+        "d-wmn216"
+      ]
+    },
+    "d-w80p": {
+      "elementCount": 1,
+      "variants": [
+        "d-w80p"
+      ]
+    },
+    "d-of-hidden": {
+      "elementCount": 4,
+      "variants": [
+        "d-of-hidden"
+      ]
+    },
+    "d-lh8": {
+      "elementCount": 1,
+      "variants": [
+        "d-lh8"
+      ]
+    },
+    "d-of-visible": {
+      "elementCount": 1,
+      "variants": [
+        "d-of-visible"
+      ]
+    },
+    "d-avatar": {
+      "elementCount": 151,
+      "variants": [
+        "d-avatar",
+        "d-avatar--image-loaded",
+        "d-avatar--md",
+        "d-avatar--presence",
+        "d-avatar--size-200",
+        "d-avatar--sm",
+        "d-avatar__canvas",
+        "d-avatar__canvas-inner",
+        "d-avatar__icon",
+        "d-avatar__image",
+        "d-avatar__initials",
+        "d-avatar__presence",
+        "d-avatar__presence--200",
+        "d-avatar__presence--md"
+      ]
+    },
+    "d-presence": {
+      "elementCount": 48,
+      "variants": [
+        "d-presence",
+        "d-presence__icon",
+        "d-presence__inner",
+        "d-presence__inner--active"
+      ]
+    },
+    "d-hmx100p": {
+      "elementCount": 1,
+      "variants": [
+        "d-hmx100p"
+      ]
+    },
+    "d-wmx100p": {
+      "elementCount": 1,
+      "variants": [
+        "d-wmx100p"
+      ]
+    },
+    "d-px24": {
+      "elementCount": 1,
+      "variants": [
+        "d-px24"
+      ]
+    },
+    "d-py4": {
+      "elementCount": 1,
+      "variants": [
+        "d-py4"
+      ]
+    },
+    "d-h100p": {
+      "elementCount": 15,
+      "variants": [
+        "d-h100p"
+      ]
+    },
+    "d-flow24": {
+      "elementCount": 2,
+      "variants": [
+        "d-flow24"
+      ]
+    },
+    "d-c-pointer": {
+      "elementCount": 1,
+      "variants": [
+        "d-c-pointer"
+      ]
+    },
+    "d-banner": {
+      "elementCount": 6,
+      "variants": [
+        "d-banner",
+        "d-banner--info",
+        "d-banner__dialog"
+      ]
+    },
+    "d-ps-static": {
+      "elementCount": 2,
+      "variants": [
+        "d-ps-static"
+      ]
+    },
+    "d-body": {
+      "elementCount": 5,
+      "variants": [
+        "d-body--md",
+        "d-body--sm"
+      ]
+    },
+    "d-notice": {
+      "elementCount": 8,
+      "variants": [
+        "d-notice__actions",
+        "d-notice__content",
+        "d-notice__icon",
+        "d-notice__message"
+      ]
+    },
+    "d-text": {
+      "elementCount": 70,
+      "variants": [
+        "d-text",
+        "d-text--fw-medium",
+        "d-text--lh-100",
+        "d-text--tone-secondary",
+        "d-text--tone-tertiary",
+        "d-text--trim-start",
+        "d-text--wrap-pretty"
+      ]
+    },
+    "d-text-body": {
+      "elementCount": 4,
+      "variants": [
+        "d-text-body--md",
+        "d-text-body--sm",
+        "d-text-body--xs"
+      ]
+    },
+    "d-ws-nowrap": {
+      "elementCount": 13,
+      "variants": [
+        "d-ws-nowrap"
+      ]
+    },
+    "d-scrollbar": {
+      "elementCount": 2,
+      "variants": [
+        "d-scrollbar"
+      ]
+    },
+    "d-stack": {
+      "elementCount": 114,
+      "variants": [
+        "d-stack",
+        "d-stack--align-center",
+        "d-stack--gap-0",
+        "d-stack--gap-1",
+        "d-stack--gap-150",
+        "d-stack--gap-200",
+        "d-stack--gap-300",
+        "d-stack--gap-400",
+        "d-stack--justify-between",
+        "d-stack--justify-center",
+        "d-stack--justify-end",
+        "d-stack--justify-start",
+        "d-stack--row"
+      ]
+    },
+    "d-emoji-text-wrapper": {
+      "elementCount": 41,
+      "variants": [
+        "d-emoji-text-wrapper",
+        "d-emoji-text-wrapper__text"
+      ]
+    },
+    "d-baw0": {
+      "elementCount": 7,
+      "variants": [
+        "d-baw0"
+      ]
+    },
+    "d-truncate": {
+      "elementCount": 16,
+      "variants": [
+        "d-truncate"
+      ]
+    },
+    "d-lh12": {
+      "elementCount": 5,
+      "variants": [
+        "d-lh12"
+      ]
+    },
+    "d-headline": {
+      "elementCount": 10,
+      "variants": [
+        "d-headline--lg",
+        "d-headline--lg-compact",
+        "d-headline--sm",
+        "d-headline--xl"
+      ]
+    },
+    "d-emoji": {
+      "elementCount": 14,
+      "variants": [
+        "d-emoji"
+      ]
+    },
+    "d-skeleton-placeholder": {
+      "elementCount": 28,
+      "variants": [
+        "d-skeleton-placeholder",
+        "d-skeleton-placeholder--animate"
+      ]
+    },
+    "d-ps-absolute": {
+      "elementCount": 5,
+      "variants": [
+        "d-ps-absolute"
+      ]
+    },
+    "d-of-auto": {
+      "elementCount": 3,
+      "variants": [
+        "d-of-auto"
+      ]
+    },
+    "d-bb": {
+      "elementCount": 2,
+      "variants": [
+        "d-bb"
+      ]
+    },
+    "d-bbw1": {
+      "elementCount": 1,
+      "variants": [
+        "d-bbw1"
+      ]
+    },
+    "d-tablist": {
+      "elementCount": 4,
+      "variants": [
+        "d-tablist",
+        "d-tablist__item"
+      ]
+    },
+    "d-pt16": {
+      "elementCount": 1,
+      "variants": [
+        "d-pt16"
+      ]
+    },
+    "d-pl12": {
+      "elementCount": 1,
+      "variants": [
+        "d-pl12"
+      ]
+    },
+    "d-tab": {
+      "elementCount": 13,
+      "variants": [
+        "d-tab",
+        "d-tab--is-selected",
+        "d-tab--selected"
+      ]
+    },
+    "d-lh4": {
+      "elementCount": 10,
+      "variants": [
+        "d-lh4"
+      ]
+    },
+    "d-h32": {
+      "elementCount": 10,
+      "variants": [
+        "d-h32"
+      ]
+    },
+    "d-brr0": {
+      "elementCount": 9,
+      "variants": [
+        "d-brr0"
+      ]
+    },
+    "d-px6": {
+      "elementCount": 9,
+      "variants": [
+        "d-px6"
+      ]
+    },
+    "d-mtn1": {
+      "elementCount": 9,
+      "variants": [
+        "d-mtn1"
+      ]
+    },
+    "d-px2": {
+      "elementCount": 9,
+      "variants": [
+        "d-px2"
+      ]
+    },
+    "d-blr0": {
+      "elementCount": 9,
+      "variants": [
+        "d-blr0"
+      ]
+    },
+    "d-ml4": {
+      "elementCount": 4,
+      "variants": [
+        "d-ml4"
+      ]
+    },
+    "d-badge": {
+      "elementCount": 12,
+      "variants": [
+        "d-badge",
+        "d-badge--outlined",
+        "d-badge__label"
+      ]
+    },
+    "d-fd-row-reverse": {
+      "elementCount": 1,
+      "variants": [
+        "d-fd-row-reverse"
+      ]
+    },
+    "d-bl": {
+      "elementCount": 2,
+      "variants": [
+        "d-bl"
+      ]
+    },
+    "d-fl1": {
+      "elementCount": 4,
+      "variants": [
+        "d-fl1"
+      ]
+    },
+    "d-bt": {
+      "elementCount": 1,
+      "variants": [
+        "d-bt"
+      ]
+    },
+    "d-w0": {
+      "elementCount": 1,
+      "variants": [
+        "d-w0"
+      ]
+    },
+    "d-modal": {
+      "elementCount": 102,
+      "variants": [
+        "d-modal",
+        "d-modal--critical",
+        "d-modal__close",
+        "d-modal__content",
+        "d-modal__dialog",
+        "d-modal__dialog--scrollable",
+        "d-modal__footer",
+        "d-modal__header"
+      ]
+    },
+    "d-text-headline": {
+      "elementCount": 11,
+      "variants": [
+        "d-text-headline--2xl"
+      ]
+    },
+    "d-gg16": {
+      "elementCount": 1,
+      "variants": [
+        "d-gg16"
+      ]
+    },
+    "d-hmn332": {
+      "elementCount": 1,
+      "variants": [
+        "d-hmn332"
+      ]
+    },
+    "d-list-item": {
+      "elementCount": 2,
+      "variants": [
+        "d-list-item",
+        "d-list-item--static"
+      ]
+    },
+    "d-item-layout": {
+      "elementCount": 6,
+      "variants": [
+        "d-item-layout--custom",
+        "d-item-layout--subtitle",
+        "d-item-layout--subtitle--with-title",
+        "d-item-layout__content",
+        "d-item-layout__left",
+        "d-item-layout__title"
+      ]
+    },
+    "d-recipe-contact-info": {
+      "elementCount": 5,
+      "variants": [
+        "d-recipe-contact-info",
+        "d-recipe-contact-info__content",
+        "d-recipe-contact-info__header",
+        "d-recipe-contact-info__left",
+        "d-recipe-contact-info__subtitle"
+      ]
+    },
+    "d-w164": {
+      "elementCount": 1,
+      "variants": [
+        "d-w164"
+      ]
+    },
+    "d-ff-sans": {
+      "elementCount": 1,
+      "variants": [
+        "d-ff-sans"
+      ]
+    },
+    "d-tab-neux": {
+      "elementCount": 1,
+      "variants": [
+        "d-tab-neux"
+      ]
+    },
+    "d-w628": {
+      "elementCount": 2,
+      "variants": [
+        "d-w628"
+      ]
+    },
+    "d-illustration": {
+      "elementCount": 2,
+      "variants": [
+        "d-illustration",
+        "d-illustration--new-meeting"
+      ]
+    },
+    "d-wmn764": {
+      "elementCount": 1,
+      "variants": [
+        "d-wmn764"
+      ]
+    },
+    "d-hmn464": {
+      "elementCount": 1,
+      "variants": [
+        "d-hmn464"
+      ]
+    },
+    "d-toast-wrapper": {
+      "elementCount": 1,
+      "variants": [
+        "d-toast-wrapper"
+      ]
+    },
+    "d-w40p": {
+      "elementCount": 1,
+      "variants": [
+        "d-w40p"
+      ]
+    },
+    "d-text-label": {
+      "elementCount": 11,
+      "variants": [
+        "d-text-label--md",
+        "d-text-label--sm"
+      ]
+    },
+    "d-select": {
+      "elementCount": 8,
+      "variants": [
+        "d-select",
+        "d-select--sm",
+        "d-select__input",
+        "d-select__label-text"
+      ]
+    },
+    "d-hmx216": {
+      "elementCount": 2,
+      "variants": [
+        "d-hmx216"
+      ]
+    },
+    "d-validation-message": {
+      "elementCount": 13,
+      "variants": [
+        "d-validation-message__container"
+      ]
+    },
+    "d-input": {
+      "elementCount": 71,
+      "variants": [
+        "d-input",
+        "d-input--sm",
+        "d-input__description",
+        "d-input__input",
+        "d-input__label",
+        "d-input__label-text",
+        "d-input__root",
+        "d-input__wrapper"
+      ]
+    },
+    "d-input-icon": {
+      "elementCount": 47,
+      "variants": [
+        "d-input-icon",
+        "d-input-icon--left",
+        "d-input-icon--right"
+      ]
+    },
+    "d-description": {
+      "elementCount": 1,
+      "variants": [
+        "d-description"
+      ]
+    },
+    "d-textarea": {
+      "elementCount": 1,
+      "variants": [
+        "d-textarea"
+      ]
+    },
+    "d-label": {
+      "elementCount": 1,
+      "variants": [
+        "d-label"
+      ]
+    },
+    "d-toggle-wrapper": {
+      "elementCount": 1,
+      "variants": [
+        "d-toggle-wrapper"
+      ]
+    },
+    "d-toggle": {
+      "elementCount": 2,
+      "variants": [
+        "d-toggle",
+        "d-toggle__inner"
+      ]
+    },
+    "d-h60p": {
+      "elementCount": 2,
+      "variants": [
+        "d-h60p"
+      ]
+    },
+    "d-h332": {
+      "elementCount": 2,
+      "variants": [
+        "d-h332"
+      ]
+    }
+  },
+  "allClasses": [
+    "d-ac-center",
+    "d-ai-center",
+    "d-ai-stretch",
+    "d-avatar",
+    "d-avatar--image-loaded",
+    "d-avatar--md",
+    "d-avatar--presence",
+    "d-avatar--size-200",
+    "d-avatar--sm",
+    "d-avatar__canvas",
+    "d-avatar__canvas-inner",
+    "d-avatar__icon",
+    "d-avatar__image",
+    "d-avatar__initials",
+    "d-avatar__presence",
+    "d-avatar__presence--200",
+    "d-avatar__presence--md",
+    "d-b-0",
+    "d-badge",
+    "d-badge--outlined",
+    "d-badge__label",
+    "d-banner",
+    "d-banner--info",
+    "d-banner__dialog",
+    "d-bar-0",
+    "d-bar-300",
+    "d-bar-400",
+    "d-bar-450",
+    "d-bar-500",
+    "d-bar-circle",
+    "d-bar-pill",
+    "d-baw0",
+    "d-bb",
+    "d-bbw1",
+    "d-bc-default",
+    "d-bc-subtle",
+    "d-bgc-neutral-white",
+    "d-bgc-primary",
+    "d-bgc-secondary",
+    "d-bl",
+    "d-blr0",
+    "d-body--md",
+    "d-body--sm",
+    "d-brr0",
+    "d-bt",
+    "d-btn",
+    "d-btn--circle",
+    "d-btn--icon-only",
+    "d-btn--inverted",
+    "d-btn--lg",
+    "d-btn--muted",
+    "d-btn--outlined",
+    "d-btn--primary",
+    "d-btn--sm",
+    "d-btn--xs",
+    "d-btn__icon",
+    "d-btn__icon--left",
+    "d-btn__label",
+    "d-c-pointer",
+    "d-d-block",
+    "d-d-flex",
+    "d-d-inline-block",
+    "d-d-inline-flex",
+    "d-d-none",
+    "d-description",
+    "d-emoji",
+    "d-emoji-text-wrapper",
+    "d-emoji-text-wrapper__text",
+    "d-fc-muted",
+    "d-fc-primary",
+    "d-fc-secondary",
+    "d-fc-tertiary",
+    "d-fco75",
+    "d-fd-column",
+    "d-fd-row",
+    "d-fd-row-reverse",
+    "d-ff-sans",
+    "d-fl-center",
+    "d-fl-grow0",
+    "d-fl-grow1",
+    "d-fl-shrink0",
+    "d-fl1",
+    "d-flow24",
+    "d-fs-100",
+    "d-fs-200",
+    "d-fs-300",
+    "d-fw-bold",
+    "d-fw-nowrap",
+    "d-gg16",
+    "d-gg4",
+    "d-h-24px",
+    "d-h-50",
+    "d-h-75",
+    "d-h-auto",
+    "d-h100p",
+    "d-h32",
+    "d-h332",
+    "d-h60p",
+    "d-headline--lg",
+    "d-headline--lg-compact",
+    "d-headline--sm",
+    "d-headline--xl",
+    "d-hmn332",
+    "d-hmn464",
+    "d-hmx100p",
+    "d-hmx216",
+    "d-icon",
+    "d-icon--arrow-down",
+    "d-icon--arrow-left",
+    "d-icon--arrow-right",
+    "d-icon--arrow-up",
+    "d-icon--calendar",
+    "d-icon--calendar-clock",
+    "d-icon--chevron-down",
+    "d-icon--chevron-right",
+    "d-icon--close",
+    "d-icon--contacts",
+    "d-icon--dialbot",
+    "d-icon--dialpad-logo",
+    "d-icon--hash",
+    "d-icon--headphones",
+    "d-icon--inbox",
+    "d-icon--info",
+    "d-icon--lock",
+    "d-icon--message",
+    "d-icon--more-vertical",
+    "d-icon--phone",
+    "d-icon--plus-circle",
+    "d-icon--power-dialer-off",
+    "d-icon--refresh",
+    "d-icon--search",
+    "d-icon--settings",
+    "d-icon--size-100",
+    "d-icon--size-200",
+    "d-icon--size-300",
+    "d-icon--size-400",
+    "d-icon--size-500",
+    "d-icon--size-600",
+    "d-icon--thread",
+    "d-icon--user",
+    "d-icon--users",
+    "d-icon--video",
+    "d-illustration",
+    "d-illustration--new-meeting",
+    "d-input",
+    "d-input--sm",
+    "d-input-icon",
+    "d-input-icon--left",
+    "d-input-icon--right",
+    "d-input__description",
+    "d-input__input",
+    "d-input__label",
+    "d-input__label-text",
+    "d-input__root",
+    "d-input__wrapper",
+    "d-item-layout--custom",
+    "d-item-layout--subtitle",
+    "d-item-layout--subtitle--with-title",
+    "d-item-layout__content",
+    "d-item-layout__left",
+    "d-item-layout__title",
+    "d-jc-center",
+    "d-jc-flex-start",
+    "d-jc-normal",
+    "d-jc-space-between",
+    "d-l-25",
+    "d-l50p",
+    "d-label",
+    "d-lh-300",
+    "d-lh12",
+    "d-lh4",
+    "d-lh8",
+    "d-link",
+    "d-link--muted",
+    "d-list-item",
+    "d-list-item--static",
+    "d-m-0",
+    "d-mb-0",
+    "d-mb-200",
+    "d-mb-25",
+    "d-mb-auto",
+    "d-ml-100",
+    "d-ml-75",
+    "d-ml-auto",
+    "d-ml-n300",
+    "d-ml-n600",
+    "d-ml4",
+    "d-modal",
+    "d-modal--critical",
+    "d-modal__close",
+    "d-modal__content",
+    "d-modal__dialog",
+    "d-modal__dialog--scrollable",
+    "d-modal__footer",
+    "d-modal__header",
+    "d-mr-100",
+    "d-mr-150",
+    "d-mr-200",
+    "d-mr-50",
+    "d-mr-auto",
+    "d-mt-100",
+    "d-mt-150",
+    "d-mtn1",
+    "d-mx-50",
+    "d-mx-auto",
+    "d-my-100",
+    "d-my-200",
+    "d-notice__actions",
+    "d-notice__content",
+    "d-notice__icon",
+    "d-notice__message",
+    "d-of-auto",
+    "d-of-hidden",
+    "d-of-visible",
+    "d-p-0",
+    "d-p-100",
+    "d-pb-1",
+    "d-pb-200",
+    "d-pb-300",
+    "d-pb-400",
+    "d-pe-none",
+    "d-pl-175",
+    "d-pl-50",
+    "d-pl12",
+    "d-popover",
+    "d-popover__dialog",
+    "d-popover__dialog--modal",
+    "d-pr-50",
+    "d-pr-800",
+    "d-presence",
+    "d-presence__icon",
+    "d-presence__inner",
+    "d-presence__inner--active",
+    "d-ps-absolute",
+    "d-ps-fixed",
+    "d-ps-relative",
+    "d-ps-static",
+    "d-pt-150",
+    "d-pt-25",
+    "d-pt16",
+    "d-px-100",
+    "d-px-150",
+    "d-px-200",
+    "d-px-25",
+    "d-px-400",
+    "d-px-50",
+    "d-px2",
+    "d-px24",
+    "d-px6",
+    "d-py-0",
+    "d-py-100",
+    "d-py-200",
+    "d-py-50",
+    "d-py4",
+    "d-recipe-contact-info",
+    "d-recipe-contact-info__content",
+    "d-recipe-contact-info__header",
+    "d-recipe-contact-info__left",
+    "d-recipe-contact-info__subtitle",
+    "d-scrollbar",
+    "d-select",
+    "d-select--sm",
+    "d-select__input",
+    "d-select__label-text",
+    "d-skeleton-placeholder",
+    "d-skeleton-placeholder--animate",
+    "d-stack",
+    "d-stack--align-center",
+    "d-stack--gap-0",
+    "d-stack--gap-1",
+    "d-stack--gap-150",
+    "d-stack--gap-200",
+    "d-stack--gap-300",
+    "d-stack--gap-400",
+    "d-stack--justify-between",
+    "d-stack--justify-center",
+    "d-stack--justify-end",
+    "d-stack--justify-start",
+    "d-stack--row",
+    "d-ta-left",
+    "d-tab",
+    "d-tab--is-selected",
+    "d-tab--selected",
+    "d-tab-neux",
+    "d-tablist",
+    "d-tablist__item",
+    "d-text",
+    "d-text--fw-medium",
+    "d-text--lh-100",
+    "d-text--tone-secondary",
+    "d-text--tone-tertiary",
+    "d-text--trim-start",
+    "d-text--wrap-pretty",
+    "d-text-body--md",
+    "d-text-body--sm",
+    "d-text-body--xs",
+    "d-text-headline--2xl",
+    "d-text-label--md",
+    "d-text-label--sm",
+    "d-textarea",
+    "d-toast-wrapper",
+    "d-toggle",
+    "d-toggle-wrapper",
+    "d-toggle__inner",
+    "d-truncate",
+    "d-validation-message__container",
+    "d-w-24px",
+    "d-w-2px",
+    "d-w-50",
+    "d-w0",
+    "d-w100p",
+    "d-w164",
+    "d-w40p",
+    "d-w464",
+    "d-w628",
+    "d-w80p",
+    "d-wmn216",
+    "d-wmn764",
+    "d-wmx-1000",
+    "d-wmx-unset",
+    "d-wmx100p",
+    "d-ws-nowrap",
+    "d-zi-base1",
+    "d-zi-modal-element",
+    "d-zi-notification"
+  ],
+  "utilitiesFound": [
+    "d-ai-center",
+    "d-ai-stretch",
+    "d-b-0",
+    "d-bar-0",
+    "d-bar-300",
+    "d-bar-400",
+    "d-bar-450",
+    "d-bar-500",
+    "d-bar-circle",
+    "d-bar-pill",
+    "d-bc-default",
+    "d-bc-subtle",
+    "d-bgc-neutral-white",
+    "d-bgc-primary",
+    "d-bgc-secondary",
+    "d-d-block",
+    "d-d-flex",
+    "d-d-inline-block",
+    "d-d-inline-flex",
+    "d-d-none",
+    "d-fc-muted",
+    "d-fc-primary",
+    "d-fc-secondary",
+    "d-fc-tertiary",
+    "d-fl-center",
+    "d-fl-grow0",
+    "d-fl-grow1",
+    "d-fl-shrink0",
+    "d-fs-100",
+    "d-fs-200",
+    "d-fs-300",
+    "d-fw-bold",
+    "d-fw-nowrap",
+    "d-h-24px",
+    "d-h-50",
+    "d-h-75",
+    "d-h-auto",
+    "d-jc-center",
+    "d-jc-flex-start",
+    "d-jc-normal",
+    "d-jc-space-between",
+    "d-l-25",
+    "d-lh-300",
+    "d-m-0",
+    "d-mb-0",
+    "d-mb-200",
+    "d-mb-25",
+    "d-mb-auto",
+    "d-ml-100",
+    "d-ml-75",
+    "d-ml-auto",
+    "d-ml-n300",
+    "d-ml-n600",
+    "d-mr-100",
+    "d-mr-150",
+    "d-mr-200",
+    "d-mr-50",
+    "d-mr-auto",
+    "d-mt-100",
+    "d-mt-150",
+    "d-mx-50",
+    "d-mx-auto",
+    "d-my-100",
+    "d-my-200",
+    "d-p-0",
+    "d-p-100",
+    "d-pb-1",
+    "d-pb-200",
+    "d-pb-300",
+    "d-pb-400",
+    "d-pe-none",
+    "d-pl-175",
+    "d-pl-50",
+    "d-pr-50",
+    "d-pr-800",
+    "d-pt-150",
+    "d-pt-25",
+    "d-px-100",
+    "d-px-150",
+    "d-px-200",
+    "d-px-25",
+    "d-px-400",
+    "d-px-50",
+    "d-py-0",
+    "d-py-100",
+    "d-py-200",
+    "d-py-50",
+    "d-ta-left",
+    "d-w-24px",
+    "d-w-2px",
+    "d-w-50",
+    "d-wmx-1000",
+    "d-wmx-unset",
+    "d-zi-base1",
+    "d-zi-modal-element",
+    "d-zi-notification"
+  ]
+}
