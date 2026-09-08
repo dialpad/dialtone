@@ -34,6 +34,7 @@ const SMOOTHING_ACTIVE = 0.5;
 const SMOOTHING_INACTIVE = 0.15;
 const MAX_FRAME_DURATION = 50;
 const TOUCH_SCROLL_IDLE_FALLBACK = 200;
+const RESIZE_DEBOUNCE = 150;
 
 const carouselContainerRef = ref(null);
 const carouselTrackRef = ref(null);
@@ -46,10 +47,14 @@ onMounted(() => {
 
   if (carousel && carouselContainer) {
     const images = carousel.querySelectorAll('img');
-    const imagesPerSet = images.length;
+    let firstCloneImage = null;
 
-    for (let i = 0; i < 2; i++) {
-      images.forEach(img => carousel.appendChild(img.cloneNode(true)));
+    for (let setIndex = 0; setIndex < 2; setIndex++) {
+      images.forEach((img, index) => {
+        const clone = img.cloneNode(true);
+        carousel.appendChild(clone);
+        if (setIndex === 0 && index === 0) firstCloneImage = clone;
+      });
     }
 
     const fineHoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
@@ -63,12 +68,13 @@ onMounted(() => {
     let targetVelocity = DEFAULT_VELOCITY;
     let currentVelocity = DEFAULT_VELOCITY;
     let isHovering = false;
+    let hoverRect = null;
     let isTouchScrolling = false;
-    let hasTouchScrolled = false;
     let isNativeScrolling = false;
-    let activeTouchCount = 0;
+    let isTouchActive = false;
     let isVisible = false;
     let scrollIdleTimer = null;
+    let resizeTimer = null;
     let visibilityObserver = null;
 
     const recenterCarousel = () => {
@@ -84,7 +90,7 @@ onMounted(() => {
     };
 
     const measureCarouselPeriod = () => {
-      carouselPeriod = getCarouselPeriod(carousel.querySelectorAll('img'), imagesPerSet);
+      carouselPeriod = getCarouselPeriod(images[0], firstCloneImage);
       maxScrollPosition = carouselContainer.scrollWidth - carouselContainer.clientWidth;
       carousel.style.setProperty('--showcase-carousel-autoplay-distance', `${-carouselPeriod}px`);
       carousel.style.setProperty(
@@ -92,6 +98,14 @@ onMounted(() => {
         `${carouselPeriod / DEFAULT_VELOCITY}ms`,
       );
       recenterCarousel();
+    };
+
+    const handleResize = () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        measureCarouselPeriod();
+        if (isHovering) hoverRect = carouselContainer.getBoundingClientRect();
+      }, RESIZE_DEBOUNCE);
     };
 
     const stopAnimation = () => {
@@ -146,14 +160,14 @@ onMounted(() => {
       if (!canUseHoverSteering(event.pointerType, fineHoverQuery.matches)) return;
       isHovering = true;
       targetVelocity = 0;
+      hoverRect = carouselContainer.getBoundingClientRect();
       startAnimation();
     };
 
     const handlePointerMove = (event) => {
       if (!isHovering || !canUseHoverSteering(event.pointerType, fineHoverQuery.matches)) return;
 
-      const rect = carouselContainer.getBoundingClientRect();
-      const relativePosition = (event.clientX - rect.left - rect.width / 2) / (rect.width / 2);
+      const relativePosition = (event.clientX - hoverRect.left - hoverRect.width / 2) / (hoverRect.width / 2);
       targetVelocity = getHoverVelocity(
         relativePosition,
         DEAD_ZONE,
@@ -194,12 +208,11 @@ onMounted(() => {
     };
 
     const handleTouchStart = (event) => {
-      activeTouchCount = event.touches.length;
+      isTouchActive = event.touches.length > 0;
       if (isTouchScrolling) return;
 
       clearScrollIdleTimer();
       isTouchScrolling = true;
-      hasTouchScrolled = false;
       isNativeScrolling = false;
       isHovering = false;
       currentVelocity = 0;
@@ -208,10 +221,10 @@ onMounted(() => {
     };
 
     const handleTouchEnd = (event) => {
-      activeTouchCount = event.touches.length;
-      if (!isTouchScrolling || activeTouchCount > 0) return;
+      isTouchActive = event.touches.length > 0;
+      if (!isTouchScrolling || isTouchActive) return;
 
-      if (!hasTouchScrolled || !isNativeScrolling) {
+      if (!isNativeScrolling) {
         finishTouchScroll();
       } else if (!supportsScrollEnd) {
         scheduleTouchScrollEnd();
@@ -220,14 +233,13 @@ onMounted(() => {
 
     const handleScroll = () => {
       if (!isTouchScrolling) return;
-      hasTouchScrolled = true;
       isNativeScrolling = true;
-      if (!supportsScrollEnd && activeTouchCount === 0) scheduleTouchScrollEnd();
+      if (!supportsScrollEnd && !isTouchActive) scheduleTouchScrollEnd();
     };
 
     const handleScrollEnd = () => {
       isNativeScrolling = false;
-      if (activeTouchCount === 0) finishTouchScroll();
+      if (!isTouchActive) finishTouchScroll();
     };
 
     const handleVisibilityChange = ([entry]) => {
@@ -258,7 +270,7 @@ onMounted(() => {
     carouselContainer.addEventListener('touchcancel', handleTouchEnd, { passive: true });
     carouselContainer.addEventListener('scroll', handleScroll, { passive: true });
     carouselContainer.addEventListener('scrollend', handleScrollEnd);
-    window.addEventListener('resize', measureCarouselPeriod);
+    window.addEventListener('resize', handleResize);
 
     if ('IntersectionObserver' in window) {
       visibilityObserver = new IntersectionObserver(handleVisibilityChange);
@@ -271,6 +283,7 @@ onMounted(() => {
     cleanupCarousel = () => {
       stopAnimation();
       clearScrollIdleTimer();
+      window.clearTimeout(resizeTimer);
       visibilityObserver?.disconnect();
       carouselContainer.removeEventListener('pointerenter', handlePointerEnter);
       carouselContainer.removeEventListener('pointermove', handlePointerMove);
@@ -280,7 +293,7 @@ onMounted(() => {
       carouselContainer.removeEventListener('touchcancel', handleTouchEnd);
       carouselContainer.removeEventListener('scroll', handleScroll);
       carouselContainer.removeEventListener('scrollend', handleScrollEnd);
-      window.removeEventListener('resize', measureCarouselPeriod);
+      window.removeEventListener('resize', handleResize);
     };
   }
 });

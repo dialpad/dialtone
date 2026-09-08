@@ -4,10 +4,7 @@ export function canUseHoverSteering (pointerType, supportsFineHover) {
   return pointerType === 'mouse' && supportsFineHover;
 }
 
-export function getCarouselPeriod (items, itemsPerSet) {
-  const firstOriginal = items[0];
-  const firstClone = items[itemsPerSet];
-
+export function getCarouselPeriod (firstOriginal, firstClone) {
   if (!firstOriginal || !firstClone) return 0;
   return firstClone.offsetLeft - firstOriginal.offsetLeft;
 }
