@@ -4,7 +4,6 @@
     "build": {
       "executor": "nx:run-commands",
       "inputs": [
-        "{projectRoot}/figma_tokens/*",
         "{projectRoot}/postcss/*",
         "{projectRoot}/themes/*",
         "{projectRoot}/tokens/**/*",
