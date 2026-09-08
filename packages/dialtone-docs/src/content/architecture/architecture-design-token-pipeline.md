@@ -14,11 +14,11 @@ Design tokens are the single source of truth for all visual decisions in Dialton
 ## Overview
 
 ```
-Figma (Tokens Studio)
+tokens/*.json              — source of truth (base / theme / components)
   ↓
-figma_tokens/*.json        — raw sync format from Figma
-  ↓
-tokens/*.json              — organized source files (base / theme / components)
+Style Dictionary resolve   — set composition, expressions, transforms
+  ↓                     ↘
+  ↓                       Figma variables    — sync-scripts/, code to Figma only
   ↓
 Style Dictionary build     — transforms + multi-platform output
   ↓
@@ -31,40 +31,20 @@ dialtone-vue               — applies compiled CSS classes + runtime theme swit
 
 ## Stage 1 — Figma Sync
 
-The `figma_tokens/` directory holds exports from the **Tokens Studio** Figma plugin:
+**Code is the source of truth.** The token files in `tokens/` decide what the Figma variables collection contains, and the sync only runs in that direction.
 
-```
-figma_tokens/
-├── base.global.json      # Spacing, color palette, typography base
-├── root.value.json       # Calculation references and root values
-└── components.global.json # Component-specific token overrides
-```
+`sync-scripts/` resolves the token sets through Style Dictionary, using the same set composition and transforms as the CSS build so a value in Figma cannot drift from what Dialtone ships, then writes the difference to a Figma collection over the REST API. Aliases survive at any depth, so a semantic variable arrives in Figma as a reference to the primitive underneath rather than a copy of its value.
 
-These files use Tokens Studio's format with `$` prefixed fields and Figma-specific metadata including multi-platform code syntax hints:
-
-```json
-{
-  "space": {
-    "100": {
-      "$type": "number",
-      "$value": "{100}",
-      "$extensions": {
-        "com.figma": {
-          "codeSyntax": {
-            "WEB": "var(--dt-space-100)",
-            "ANDROID": "dtSpace100",
-            "iOS": "dtSpace100"
-          }
-        }
-      }
-    }
-  }
-}
+```bash
+cd packages/dialtone-tokens
+pnpm sync:variables:check      # resolved values against the built CSS, no Figma access
+pnpm sync:variables -- --dry-run
+pnpm sync:variables
 ```
 
-Two sync scripts in `sync-scripts/` handle the Figma ↔ repo exchange:
-- `sync_figma_to_tokens.ts` — pulls updated tokens from Figma into the repo
-- `sync_tokens_to_figma.ts` — pushes repo changes back to Figma
+Triggered in CI by a push to `next` touching `tokens/**`, or by a `/sync-tokens` comment on a pull request, which writes to a separate preview file. See [workflow-figma-sync](../workflows/workflow-figma-sync.md) for the detail, including what cannot cross and why.
+
+`sync_figma_to_tokens.ts` still exists and pulls the other way, but it is **not** authoritative. Running both directions risks whichever ran last winning.
 
 ## Stage 2 — Token Source Files
 
