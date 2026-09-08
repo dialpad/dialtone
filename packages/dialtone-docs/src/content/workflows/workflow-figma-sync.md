@@ -1,155 +1,132 @@
 ---
 type: workflow
 category: workflows
-keywords: [figma, tokens-studio, figma-sync, sync-scripts, design-tokens, figma-variables, style-dictionary, figma-api, personal-access-token]
-ai_summary: How the Dialtone Figma ↔ token sync works — the two sync scripts, what each does, required environment variables, and when to run each direction.
-last_updated: 2026-03-04
+keywords: [figma, figma-sync, sync-scripts, design-tokens, figma-variables, style-dictionary, figma-api, personal-access-token, tokens-studio]
+ai_summary: How Dialtone tokens reach Figma variables — the resolver, the scope policy, the CSS check, how to run it locally, and how CI triggers it.
+last_updated: 2026-08-27
 related_packages: [dialtone-tokens]
 ---
 
 # Figma Sync Workflow
 
-The `dialtone-tokens` package keeps Figma and the token source files in sync via two scripts in `packages/dialtone-tokens/sync-scripts/`. Both directions are manually triggered — there is no automatic sync on commit.
+Design tokens are written from the repo into a Figma variables collection. **Code is the source of truth**: the tokens in `packages/dialtone-tokens/tokens/` decide what Figma contains, not the other way round.
 
-## Two Directions
+## Where Tokens Studio fits
 
-| Script | Direction | When to use |
-|--------|-----------|-------------|
-| `sync_figma_to_tokens.ts` | Figma → repo | A designer updated tokens in Figma and you need to pull those changes into the codebase |
-| `sync_tokens_to_figma.ts` | repo → Figma | Token changes were made in the repo and need to be pushed back to Figma to keep the Figma file current |
+`tokens/` is in Tokens Studio format, and the plugin's own bookkeeping lives there: `$themes.json`, `$metadata.json`, `{reference}` values, and `$extensions["studio.tokens"]` modifiers. **The plugin still works for authoring and nothing here changes that.**
 
-## Required Environment Variables
+What this replaces is only the plugin's *push to Figma variables*. Tokens Studio flattens references past a couple of hops, which is why so many semantic variables in Figma today hold a hard-coded value instead of a link. `sync:variables` keeps the reference at any depth.
 
-Both scripts need these two environment variables:
+The directory that was removed, `figma_tokens/`, was never a plugin sync target. It had no `$themes.json`, and it was the output of `sync_figma_to_tokens.ts`.
+
+## Editing or adding a token
+
+`tokens/` is JSON, so editing it by hand is a normal path and needs no plugin. Use whatever you use for the rest of the repo.
+
+The Tokens Studio plugin is an alternative for the same job, and it earns its place in one specific case: adding a whole new **set** or **theme** means updating `tokens/$metadata.json` (which holds `tokenSetOrder`, and decides precedence) and `tokens/$themes.json` (which says which sets each theme uses, and whether each is emitted or reference-only). The plugin maintains both. Adding a token to a set that already exists touches neither, so a plain edit is fine.
+
+Either way the change lands as a pull request and gets reviewed like anything else.
+
+### Getting it into Figma, today
+
+Run it yourself after the change is in:
+
+```bash
+cd packages/dialtone-tokens
+pnpm sync:variables
+```
+
+The sync resolves the token sets itself, so it does not need `dialtone-tokens:build` first. The checks do: `sync:variables:check` compares the resolved values against the built CSS, so build before you run it. It needs no Figma access, which makes it the quickest way to tell a resolution problem apart from a Figma one.
+
+### Getting it into Figma, once CI is set up
+
+The push trigger takes over. Open the pull request, and if you want to see the change in Figma before it merges, comment `/sync-tokens` on it: that syncs to a separate preview file. Merging to `next` syncs the main file.
+
+At that point the local command becomes a debugging tool rather than the normal path. `sync:variables:check` stays useful for the same reason as before.
+
+### What stays manual either way
+
+**Publishing the library.** Figma's REST API has no endpoint that publishes one. Someone has to click publish before any consuming file sees the change, and again after every update. CI writing variables does not put them in front of anyone on its own.
+
+**Pruning.** Deleting a variable whose token is gone is deliberate rather than automatic, because a rename is indistinguishable from a delete plus an add. See [Renaming a token needs care](#renaming-a-token-needs-care).
+
+## Two things to avoid
+
+**Do not use the plugin to push variables.** Use it to author, then let `sync:variables` write. The plugin's own push flattens references.
+
+**Do not edit variables in Figma.** The sync diffs against the file and overwrites anything that differs from the token source, so a hand-edit lasts until the next run and no longer.
+
+## Renaming a token needs care
+
+The sync matches variables to tokens **by name**. Rename `color.surface.bold` to `color.surface.emphasis` and the sync sees one variable gone and one new, which with pruning on is a delete plus a create. Every Figma binding to the old name breaks, silently.
+
+A rename in code is indistinguishable from a delete plus an add, so treat it as a breaking change: check what would be removed before running a prune, and expect to rebind in Figma.
+
+## The pieces
+
+Everything lives in `packages/dialtone-tokens/sync-scripts/`.
+
+| File | What it does |
+|------|--------------|
+| `resolve_tokens.ts` | Runs Style Dictionary over the token sets to produce a per-mode list of variables. Uses the same set composition and transforms as the CSS build, so a value cannot drift from what Dialtone ships |
+| `variable_policy.ts` | Two tables: which tokens are excluded, and which Figma pickers each variable appears in |
+| `build_variables.ts` | Converts the resolved tokens into a Figma payload, diffs it against the file, and posts the difference |
+| `check_against_css.ts` | Compares every resolved value against the built CSS. Needs no Figma access |
+| `figma_api.ts` | The REST client. Two calls: read local variables, write variables |
+
+## Flags
+
+| Flag | Effect |
+|------|--------|
+| `--dry-run` | Report what would change and post nothing |
+| `--file-key KEY` | Override `FILE_KEY`, for pointing at a scratch file |
+| `--out FILE` | Also write the payload to a file, for inspection |
+
+The sync is idempotent. It reads the file first and sends only the difference, so a second run reports nothing to post.
+
+## Credentials
 
 | Variable | Description |
 |----------|-------------|
-| `PERSONAL_ACCESS_TOKEN` | Figma personal access token for API authentication. Generate at figma.com → Account → Personal access tokens. |
-| `FILE_KEY` | The unique identifier for the Figma file. Found in the Figma file URL: `figma.com/file/{FILE_KEY}/...` |
+| `PERSONAL_ACCESS_TOKEN` | Figma personal access token. Needs both `file_variables:read` and `file_variables:write`, which are Enterprise-only, and the account needs an Editor seat |
+| `FILE_KEY` | From the Figma URL: `figma.com/design/{FILE_KEY}/...` |
 
-Set them in a `.env` file in `packages/dialtone-tokens/` (loaded automatically via `dotenv/config`) or pass them as environment variables. In GitHub Actions, `PERSONAL_ACCESS_TOKEN` comes from the `GH_ACTION_VARIABLES_SYNC_FIGMA_TOKEN` secret.
+Locally, put both in `packages/dialtone-tokens/.env`, which is gitignored and loaded via `dotenv/config`.
 
-## Figma → Repo (`sync_figma_to_tokens.ts`)
+In CI they come from a GitHub environment rather than a plain repo secret, so a run started from a pull request cannot reach the token without approval.
 
-### What It Does
+## CI, in detail
 
-1. Calls the Figma REST API: `GET /v1/files/{fileKey}/variables/local`
-2. Converts the response to **Tokens Studio JSON format** and writes files to `figma_tokens/`:
-   - `figma_tokens/base.global.json` — Base and global variables
-   - `figma_tokens/components.global.json` — Component-specific variables
-   - `figma_tokens/root.value.json` — Root/primitive values
-3. Transforms the Tokens Studio format into **Style Dictionary format** and merges the result into `tokens/base/default.json`
+`.github/workflows/sync-variables-to-figma.yml`, once it is set up:
 
-### What Changes in the Repo
+| Trigger | Writes to | Environment |
+|---------|-----------|-------------|
+| Push to `next` touching `tokens/**` | the main file | `figma-sync-main` |
+| A `/sync-tokens` comment on a pull request | the preview file | `figma-sync-preview` |
 
-After running `sync_figma_to_tokens`, three files may be modified:
-- `packages/dialtone-tokens/figma_tokens/base.global.json`
-- `packages/dialtone-tokens/figma_tokens/components.global.json`
-- `packages/dialtone-tokens/figma_tokens/root.value.json`
-- `packages/dialtone-tokens/tokens/base/default.json`
+The comment trigger requires write access to the repo, so an outside pull request cannot start a run that holds a Figma token, and the workflow definition is read from the base branch rather than the pull request.
 
-These changes need to be committed and a token rebuild needs to run before the updated values reach CSS output.
+**Preview runs share one Figma file.** The REST API has no endpoint that creates a file, so there is no way to give each pull request its own. Two people syncing different branches will overwrite each other; the run log names the commit that wrote last.
 
-### How to Run
+## What does not cross
 
-```bash
-# From the monorepo root
-pnpm nx run dialtone-tokens:sync:figma-to-tokens -- --output tokens
+Not everything in the token source can be a Figma variable.
 
-# From inside packages/dialtone-tokens
-npm run sync:figma-to-tokens -- --output directory_name
-```
+| Excluded | Why |
+|----------|-----|
+| Tokens marked `$deprecated` | The source names its own retirements. A new collection should not be seeded with them |
+| `space.*` and the `size.*` numeric ladder | Deprecated in favour of `spacing.*` and `layout.*`. `size.radius.*` and `size.border.*` are kept: they are current and have no equivalent on either scale |
+| Negative dimensions | Nothing in Figma consumes one |
+| Percentages | A Figma variable holds a number, not a percentage |
+| Gradients | A Figma `COLOR` variable holds one solid value |
+| `avatar.hue`, `.lightness`, `.chroma`, `.anchor` | Inputs to a colour computation, not design properties |
+| Shadow composites | Light and dark have different numbers of layers, and a variable needs a value in every mode |
 
-The `--output` flag specifies the destination directory (default: `figma_tokens`). Using `--output tokens` writes directly into the Style Dictionary source directory.
+Two more things change on the way across:
 
-### Via GitHub Actions
+- **Font families.** A token holds a CSS stack. Figma needs one resolvable family, so the stack is mapped to the face it renders as on macOS.
+- **Colours outside sRGB.** Tokens are authored in OKLCH, which is wider than the sRGB a Figma variable stores. Those values are gamut-mapped by reducing chroma while holding lightness and hue, which is what a browser does on an sRGB display.
 
-The `sync-figma-to-tokens.yml` workflow exposes this as a manual `workflow_dispatch` with a required `file_key` input. It runs the script and opens a PR with the resulting token file changes. This is the recommended path when pulling designer changes, as it creates a reviewable PR rather than committing directly.
+## The other direction
 
-## Repo → Figma (`sync_tokens_to_figma.ts`)
-
-### What It Does
-
-1. Reads all JSON files from `figma_tokens/`
-2. Flattens the nested token structure into forward-slash-delimited keys (e.g., `color/primary/main`)
-3. Calls the Figma REST API: `GET /v1/files/{fileKey}/variables/local` to get the current Figma state
-4. Computes a diff between the local tokens and the Figma variables
-5. If differences exist, sends a `POST /v1/files/{fileKey}/variables` request with the update payload (create/update/delete actions for collections, modes, variables, and mode values)
-6. If no differences exist, exits without making any API call
-
-### How to Run
-
-```bash
-# From the monorepo root
-pnpm nx run dialtone-tokens:sync:tokens-to-figma
-
-# From inside packages/dialtone-tokens
-npm run sync:tokens-to-figma
-```
-
-No additional flags needed — it always reads from `figma_tokens/`.
-
-### Via GitHub Actions
-
-The `sync-tokens-to-figma.yml` workflow exposes this as a manual `workflow_dispatch` with a required `file_key` input. Both Figma sync workflows are manual-only — there is no automated trigger on token file changes.
-
-## Token Format Comparison
-
-The two formats used in this pipeline are structurally different:
-
-**Tokens Studio format** (lives in `figma_tokens/`) — Closer to the W3C Design Tokens spec. Uses `$`-prefixed metadata keys. Preserves Figma-specific metadata in `$extensions.com.figma`:
-
-```json
-{
-  "space": {
-    "100": {
-      "$type": "number",
-      "$value": 4,
-      "$extensions": {
-        "com.figma": {
-          "scopes": ["GAP", "WIDTH_HEIGHT"],
-          "codeSyntax": { "WEB": "--dt-space-100" }
-        }
-      }
-    }
-  }
-}
-```
-
-**Style Dictionary format** (lives in `tokens/`) — The format Style Dictionary builds from. Plain keys without `$` prefix. Pixel/rem values as strings. No Figma metadata:
-
-```json
-{
-  "space": {
-    "100": {
-      "value": "4px",
-      "type": "spacing"
-    }
-  }
-}
-```
-
-The sync scripts handle the transformation between these formats automatically. When working directly on tokens in the repo without a Figma sync, edit the Style Dictionary format files in `tokens/` — not the `figma_tokens/` files.
-
-## Typical Workflow
-
-**Designer updates tokens in Figma:**
-1. Designer notifies the team that Figma variables have changed
-2. Team member triggers `sync-figma-to-tokens` workflow in GitHub Actions with the correct `file_key`
-3. The workflow opens a PR with the token file changes
-4. PR is reviewed, merged
-5. `pnpm nx run dialtone-tokens:build` regenerates CSS/LESS/JS outputs
-6. `pnpm nx run dialtone-css:build` picks up new token CSS files
-
-**Developer updates tokens in the repo:**
-1. Edit `tokens/base/default.json` or theme files under `tokens/theme/`
-2. Run `pnpm nx run dialtone-tokens:build` to verify the output
-3. Merge the changes to `staging`
-4. Trigger `sync-tokens-to-figma` workflow in GitHub Actions to push the changes back to Figma
-
-## What the Sync Does NOT Do
-
-- Does not sync component documentation (`.md` files in `apps/dialtone-documentation/docs/`)
-- Does not sync Storybook stories or Vue component files
-- Does not automatically run on every commit or merge — both directions are always manually triggered
-- Does not modify `tokens/theme/` files — only `tokens/base/default.json` is written by `sync_figma_to_tokens`
+`sync_figma_to_tokens.ts` still exists and pulls Figma variables back into the repo. Since code owns tokens, it is **not** authoritative, and running both directions risks whichever ran last winning. Treat it as a migration tool rather than part of the normal workflow.
