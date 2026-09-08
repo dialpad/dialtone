@@ -1,3 +1,5 @@
+import { vi } from 'vitest'
+
 import { ApiGetLocalVariablesResponse } from './figma_api.js'
 import {
   FlattenedTokensByFile,
@@ -5,7 +7,7 @@ import {
   readJsonFiles,
 } from './token_import.js'
 
-jest.mock('fs', () => {
+vi.mock('fs', () => {
   const MOCK_FILE_INFO: { [fileName: string]: string } = {
     'tokens/collection1.mode1.json': JSON.stringify({
       spacing: {
