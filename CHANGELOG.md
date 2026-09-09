@@ -1,3 +1,10 @@
+# [10.0.0-next.21](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.20...dialtone/v10.0.0-next.21) (2026-09-09)
+
+
+### Code Refactoring
+
+* **Rich Text Editor:** DLT-3602 update rich text styles ([#1412](https://github.com/dialpad/dialtone/issues/1412)) ([5d20823](https://github.com/dialpad/dialtone/commit/5d208236703b4d9262b73363ec80ccf49080a52b))
+
 # [10.0.0-next.20](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.19...dialtone/v10.0.0-next.20) (2026-09-04)
 
 
