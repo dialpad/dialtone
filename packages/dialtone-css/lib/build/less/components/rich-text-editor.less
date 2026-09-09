@@ -1,18 +1,25 @@
 @layer dialtone.components {
 .d-rich-text-editor {
+  font: var(--dt-typography-body-md-compact);
+
   &__code-block {
-    padding: var(--dt-spacing-100);
+    padding: var(--dt-spacing-100) var(--dt-spacing-150);
+    color: var(--dt-color-foreground-secondary);
     font: var(--dt-typography-code-md);
-    background: var(--dt-color-surface-secondary);
+    font-size: var(--dt-font-size-125);
+    line-height: var(--dt-font-line-height-400);
+    background-color: var(--dt-color-surface-secondary-opaque);
+    border-radius: var(--dt-size-radius-300);
   }
 
   code:not(.d-rich-text-editor__code-block > code) {
     padding: var(--dt-spacing-25);
-    color: var(--dt-color-foreground-warning);
+    color: var(--dt-color-foreground-warning-strong);
     font: var(--dt-typography-code-md);
+    font-size: var(--dt-font-size-125);
     background-color: var(--dt-color-surface-secondary-opaque);
     border: var(--dt-size-border-100) solid var(--dt-color-border-subtle);
-    border-radius: var(--dt-size-radius-200);
+    border-radius: var(--dt-size-radius-300);
   }
 
   > .ProseMirror {
@@ -41,46 +48,51 @@
       pointer-events: none;
     }
 
-    ul, ol {
+    :where(ul, ol) {
       padding-inline-start: var(--dt-spacing-250);
     }
 
-    ul > li {
+    ul > li,
+    ul ul ul ul > li,
+    ul ul ul ul ul ul ul > li {
       list-style-type: disc;
     }
 
-    ul ul > li {
+    ul ul > li,
+    ul ul ul ul ul > li,
+    ul ul ul ul ul ul ul ul > li {
       list-style-type: circle;
     }
 
-    ul ul ul > li {
+    ul ul ul > li,
+    ul ul ul ul ul ul > li,
+    ul ul ul ul ul ul ul ul ul > li {
       list-style-type: square;
     }
 
-    ul ul ul ul > li {
-      list-style-type: disc;
-    }
-
-    ol > li {
+    ol > li,
+    ol ol ol ol > li,
+    ol ol ol ol ol ol ol > li {
       list-style-type: decimal;
     }
 
-    ol ol > li {
+    ol ol > li,
+    ol ol ol ol ol > li,
+    ol ol ol ol ol ol ol ol > li {
       list-style-type: lower-alpha;
     }
 
-    ol ol ol > li {
+    ol ol ol > li,
+    ol ol ol ol ol ol > li,
+    ol ol ol ol ol ol ol ol ol > li {
       list-style-type: lower-roman;
-    }
-
-    ol ol ol ol > li {
-      list-style-type: decimal;
     }
 
     blockquote {
       margin-inline-start: 0;
       padding-inline-start: var(--dt-spacing-100);
       border-inline-start: var(--dt-size-border-300) solid var(--dt-color-border-subtle);
+      color: var(--dt-color-foreground-secondary);
     }
 
     table {
