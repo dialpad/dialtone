@@ -1,0 +1,23 @@
+packages/dialtone-vue/components/ComboboxMultiSelect/ComboboxMultiSelect.test.js
+  s_e326b140f2c30f::t_7321ae54b994fa 497-498,536-539,543,546-548,550-561
+  s_e326b140f2c30f::t_657e17b1b1061e 496,499-535,540-542,544-545,549
+packages/dialtone-vue/components/ComboboxMultiSelect/ComboboxMultiSelect.vue
+  s_e326b140f2c30f::t_a628e49d7e84a4 637-658,664
+  s_e326b140f2c30f::t_11baacd80d2e21 504
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "9af80e2918ca9019cd10cc761edae568bfa75d74",
+  "prompts": {},
+  "sessions": {
+    "s_e326b140f2c30f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7645d4cf-42b8-4718-93cb-a233f0f988f6",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": null
+    }
+  }
+}
