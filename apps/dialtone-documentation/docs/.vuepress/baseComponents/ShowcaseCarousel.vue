@@ -31,6 +31,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue';
+import { withBase } from 'vuepress/client';
 
 import {
   canUseHoverSteering,
@@ -50,7 +51,7 @@ const createShowcaseImage = ({
   candidateWidths,
 }) => {
   const createSrcset = format => candidateWidths
-    .map(width => `${SHOWCASE_IMAGE_ROOT}/home-showcase/home-showcase--${name}-${width}w.${format} ${width}w`)
+    .map(width => `${withBase(`${SHOWCASE_IMAGE_ROOT}/home-showcase/home-showcase--${name}-${width}w.${format}`)} ${width}w`)
     .join(', ');
 
   return {
@@ -59,7 +60,7 @@ const createShowcaseImage = ({
     sourceWidth,
     sourceHeight,
     sizes: `${renderedWidth}px`,
-    fallbackSrc: `${SHOWCASE_IMAGE_ROOT}/home-showcase--${name}.jpg`,
+    fallbackSrc: withBase(`${SHOWCASE_IMAGE_ROOT}/home-showcase--${name}.jpg`),
     avifSrcset: createSrcset('avif'),
     webpSrcset: createSrcset('webp'),
   };
