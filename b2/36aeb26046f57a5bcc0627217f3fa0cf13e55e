@@ -1,0 +1,45 @@
+apps/dialtone-documentation/docs/.vuepress/theme/constants/statusBadges.js
+  s_183be30c77d6b5::t_b734da015a3de6 1-11
+apps/dialtone-documentation/docs/.vuepress/theme/utils/pageToc.js
+  s_183be30c77d6b5::t_efd07d8b827f11 171
+apps/dialtone-documentation/docs/.vuepress/theme/components/SidebarItemRow.vue
+  s_183be30c77d6b5::t_b55d8c99aa8517 88
+apps/dialtone-documentation/docs/.vuepress/theme/utils/sidebarSearch.js
+  s_183be30c77d6b5::t_ac07ea88490e63 192
+  s_183be30c77d6b5::t_69dd84bb5c8187 23-50,139
+apps/dialtone-documentation/docs/.vuepress/theme/components/PageHeader.vue
+  s_183be30c77d6b5::t_55b2045a43c020 192-199
+  s_183be30c77d6b5::t_6ce70e87a74bb7 185
+apps/dialtone-documentation/docs/.vuepress/theme/components/Sidebar.vue
+  s_183be30c77d6b5::t_bdcc0c01ac764d 61,120
+apps/dialtone-documentation/docs/.vuepress/theme/components/SidebarGroup.vue
+  s_183be30c77d6b5::t_e3d335044571ec 26
+  s_183be30c77d6b5::t_bdcc0c01ac764d 58
+apps/dialtone-documentation/docs/.vuepress/theme/components/PageToc.vue
+  s_183be30c77d6b5::t_efd07d8b827f11 72-73
+apps/dialtone-documentation/docs/.vuepress/theme/layouts/Layout.vue
+  s_183be30c77d6b5::t_163746a6eb57cb 90,181,185,212
+apps/dialtone-documentation/scripts/generate-tooling-docs.mjs
+  s_183be30c77d6b5::t_e5dc8ca62c0783 141,161
+apps/dialtone-documentation/docs/.vuepress/theme/components/Page.vue
+  s_183be30c77d6b5::t_efd07d8b827f11 254,262
+apps/dialtone-documentation/docs/.vuepress/theme/components/SidebarItem.vue
+  s_183be30c77d6b5::t_bdcc0c01ac764d 118-119,137
+  s_183be30c77d6b5::t_e3d335044571ec 68
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "b236aeb26046f57a5bcc0627217f3fa0cf13e55e",
+  "prompts": {},
+  "sessions": {
+    "s_183be30c77d6b5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "89e35caf-c3fd-4daa-9b7f-4c1ed53c3ffc",
+        "model": "claude-opus-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

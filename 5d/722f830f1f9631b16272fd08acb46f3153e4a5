@@ -1,0 +1,49 @@
+packages/combinator/src/components/option_bar/option_bar.vue
+  s_53ce6bf944760d::t_784aba86da9518 10,299
+  s_53ce6bf944760d::t_dcbb8ba38742bd 300
+packages/combinator/src/components/controls/control_base.vue
+  s_53ce6bf944760d::t_784aba86da9518 3,20-23
+packages/combinator/src/components/option_bar/option_bar_member_group.test.js
+  s_53ce6bf944760d::t_9f203c26085ce5 159-220
+packages/combinator/src/components/option_bar/option_bar.test.js
+  s_53ce6bf944760d::t_9f203c26085ce5 109-118,145-148,306-321
+  s_53ce6bf944760d::t_eaa0ea4d85c799 322
+packages/combinator/src/components/option_bar/option_bar_member_group.vue
+  s_53ce6bf944760d::t_784aba86da9518 313
+packages/combinator/src/components/controls/control_suggestion.test.js
+  s_53ce6bf944760d::t_9f203c26085ce5 1-65,67-72,74-75
+  s_53ce6bf944760d::t_10560638dfbe24 66,73
+packages/combinator/src/lib/utils.js
+  s_53ce6bf944760d::t_784aba86da9518 110,116
+packages/combinator/src/lib/utils.test.js
+  s_53ce6bf944760d::t_9f203c26085ce5 1,20-25
+  s_53ce6bf944760d::t_1a0b05ec63d9de 26-27
+packages/combinator/src/lib/exclusion_rules.test.js
+  s_53ce6bf944760d::t_9f203c26085ce5 2,9-10,128-147
+  s_53ce6bf944760d::t_e9672edc8a26c8 148
+packages/combinator/src/components/option_bar/option_bar_control.test.js
+  s_53ce6bf944760d::t_9f203c26085ce5 38-68
+packages/combinator/src/components/controls/control_suggestion.vue
+  s_53ce6bf944760d::t_784aba86da9518 19-20,75-84
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "5d722f830f1f9631b16272fd08acb46f3153e4a5",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_53ce6bf944760d": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f0592-371a-7cc2-9cb7-97b530325041",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+apps/dialtone-documentation/docs/components/scroller.md
+  s_5a1867feab3270::t_9df1ff50a96035 212-215
+  s_5a1867feab3270::t_5ef35e746b0cc4 239-240
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "080c70895ae0a2e41bdf96249fa52f927e0e4508",
+  "prompts": {},
+  "sessions": {
+    "s_5a1867feab3270": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8881ae73-72ba-41b0-b287-e0c0b653a64e",
+        "model": "claude-opus-5"
+      },
+      "human_author": "Joan <joan.gil@dialpad.com>"
+    }
+  }
+}

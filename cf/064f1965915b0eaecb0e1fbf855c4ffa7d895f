@@ -1,0 +1,67 @@
+apps/dialtone-documentation/scripts/data/token-values.mjs
+  s_35758a979f0a53::t_3c53a0da30dba6 1-12,14-22,27-31,39-48,137-144
+  s_35758a979f0a53::t_a5c12bff2b8ecd 13,23-24,32-36
+  s_35758a979f0a53::t_17581a7f4c6d80 25-26
+  s_35758a979f0a53::t_2bdb2e0c2d11f3 49-50,52-73,136
+  s_35758a979f0a53::t_81007322a05f75 75-85,96-130
+  s_35758a979f0a53::t_5ab9c2ae8a114f 86-95
+  s_35758a979f0a53::t_efdc7291246c52 131-135
+apps/dialtone-documentation/scripts/generate-data.mjs
+  s_35758a979f0a53::t_4f63d262d93692 1-10,12-17,22-23,25-30,32-35,37-38
+  s_35758a979f0a53::t_8d6bfc4a7aa744 11,31,36
+  s_35758a979f0a53::t_a990b67033ed37 18
+  s_35758a979f0a53::t_8f45e2639d3133 19
+  s_35758a979f0a53::t_a635c1b965a61e 20
+  s_35758a979f0a53::t_f512607f4db139 21,24
+apps/dialtone-documentation/scripts/data/metadata.mjs
+  s_35758a979f0a53::t_d95b465705f035 1-17,107-122
+  s_35758a979f0a53::t_275c659ce93231 18-25
+  s_35758a979f0a53::t_62cf145d82178a 26-43
+  s_35758a979f0a53::t_1f59755d0afd35 44-51,54-87,89,94,98-106
+  s_35758a979f0a53::t_ed1a0c4b38b8ff 52-53
+  s_35758a979f0a53::t_fcb18afa4d8842 88,90-93,95-97
+.github/workflows/docs-data-freshness.yml
+  s_35758a979f0a53::t_aa3e49e3369107 1-2,4-6,8,14-26,30-31,33-35,37,40,54,56-58,60-62,64-68
+  s_35758a979f0a53::t_4a93ef25c9da6c 3,7,9-13,27-28,32,41-53,55,59,63
+  s_35758a979f0a53::t_e3030dcbc4b386 29,36,38-39
+apps/dialtone-documentation/docs/_data/width-height.json
+  s_35758a979f0a53::t_c23e2f0557d49b 2-103,105-211
+apps/dialtone-documentation/project.json
+  s_35758a979f0a53::t_6e19f8abc8f8fb 20,31,53
+  s_35758a979f0a53::t_1c2be0cd999696 21-27
+apps/dialtone-documentation/scripts/data/emit-spacing.mjs
+  s_35758a979f0a53::t_ed260777c7dd69 1-4,8-9,11-21,29,31-32,34-35,37-47
+  s_35758a979f0a53::t_9e38a25b6b40ca 5-7,10
+  s_35758a979f0a53::t_68888ee07437e3 22-24
+  s_35758a979f0a53::t_b76a71f98fdceb 25-28,30,33,36
+apps/dialtone-documentation/docs/_data/spacing.json
+  s_35758a979f0a53::t_30c2cb61feb40f 3-27
+  s_35758a979f0a53::t_d9e76def41228e 241,253,259,265,271,283,289,295
+  s_35758a979f0a53::t_819b717c439bc0 242-245,254-258,260-264,266-270,272-275,284-288,290-294,296-299
+apps/dialtone-documentation/scripts/data/emit-gap.mjs
+  s_35758a979f0a53::t_54d57c8440e50c 1-22
+apps/dialtone-documentation/scripts/data/emit-width-height.mjs
+  s_35758a979f0a53::t_aef708bf9d51eb 1-29
+apps/dialtone-documentation/scripts/data/emit-icons-sizes.mjs
+  s_35758a979f0a53::t_19e3eaf0532b3b 1-18
+apps/dialtone-documentation/scripts/data/emit-z-index.mjs
+  s_35758a979f0a53::t_0e1bf66ed110d5 1-23
+.husky/pre-commit
+  s_35758a979f0a53::t_7ee00e16321583 31-44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.1",
+  "base_commit_sha": "cf064f1965915b0eaecb0e1fbf855c4ffa7d895f",
+  "prompts": {},
+  "sessions": {
+    "s_35758a979f0a53": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e95815f4-bd6d-4938-b966-268ab186f0b7",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    }
+  }
+}

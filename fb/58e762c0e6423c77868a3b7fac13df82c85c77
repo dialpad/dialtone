@@ -1,0 +1,19 @@
+packages/dialtone-tokens/themes/config.js
+  s_033a569552a13d::t_255484f1e8e293 203-207,212,220-222
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "fb58e762c0e6423c77868a3b7fac13df82c85c77",
+  "prompts": {},
+  "sessions": {
+    "s_033a569552a13d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bf0a60c6-23ea-47ed-9a88-c642277fc453",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

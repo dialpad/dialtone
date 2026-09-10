@@ -1,0 +1,22 @@
+apps/dialtone-documentation/scripts/visual-guide/scenes/token-type-scale.vue
+  s_93aeca3805a6ee::t_637351e1eeca3a 5-7,27-29
+apps/dialtone-documentation/docs/guides/migration/visual-changes/index.md
+  s_93aeca3805a6ee::t_23a404c1f8a891 33
+  s_93aeca3805a6ee::t_6b6a36b7d49c78 32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.11",
+  "base_commit_sha": "4f3ba45d5471de4f6e5cb9ac808c78aca5d1a53e",
+  "prompts": {},
+  "sessions": {
+    "s_93aeca3805a6ee": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6eac0ba6-144f-46e1-9c25-fb0c29ab1e02",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
