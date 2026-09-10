@@ -1,12 +1,10 @@
 /**
- * Fragment shader for the homepage hero's halftone burst, plus the constants the
- * component and cursor controller share with it.
+ * Fragment shader for the homepage hero's halftone burst, plus its geometry constants.
  *
  * The technique: a phyllotaxis (sunflower) lattice of candidate dot centres radiating from
  * `center`, where each fragment finds its nearest dot analytically and sizes it from a
- * luminance field sampled at that dot. A pointer trail locally carries luminance from
- * where the cursor has been into where it is now, and the dot colour animates around a
- * palette of theme tokens.
+ * luminance field sampled at that dot. The dot colour animates around a palette of theme
+ * tokens.
  *
  * Two luminance fields exist and `fieldMix` chooses between them:
  *
@@ -28,9 +26,6 @@
  *
  * @module baseComponents/gradientHeroShader
  */
-
-/** Pointer-trail samples the shader unions together. Must match the uniform array size. */
-export const TRAIL_LENGTH = 20;
 
 /**
  * Geometry defaults. Lengths suffixed `Css` are CSS pixels and are scaled to the backing
@@ -82,8 +77,6 @@ export const HERO_GEOMETRY = Object.freeze({
   // is the companion to edgeFadeAmount: without some floor there is nothing out there to
   // reach with.
   floorLuminance: 0.06,
-  cursorRadiusFrac: 0.42,
-  cursorStrength: 0.85,
 });
 
 /*
@@ -133,19 +126,6 @@ uniform vec4 u_meshLight1;
 uniform vec4 u_meshLight2;
 uniform float u_meshPointSize;
 uniform float u_meshSmoothness;
-
-// Normalized 0-1, y-down, relative to the hero box — not pixels, so they do not depend
-// on the backing buffer's scale. (-1, -1) means the pointer is absent.
-uniform vec2 u_cursorUv;
-uniform vec2 u_cursorPrevUv;
-uniform float u_cursorRadiusFrac;
-uniform float u_cursorStrength;
-
-// Recent pointer path, newest first: xy = normalized position, z = that sample's
-// remaining intensity (0 = unused slot). Unioning these makes the effect a streak along
-// where the pointer travelled rather than an orb pinned to it.
-#define TRAIL_N ${TRAIL_LENGTH}
-uniform vec4 u_trail[TRAIL_N];
 
 out vec4 fragColor;
 
@@ -241,43 +221,6 @@ float fieldLuminance (vec2 posPx, vec2 dims, vec2 centerPx, float burstRadiusPx)
   );
 }
 
-// Union of every live trail sample's influence at this fragment. Evaluated once per
-// fragment, deliberately outside the dot search — a TRAIL_N loop nested inside that
-// search would multiply out to thousands of iterations per pixel.
-float cursorTrailInfluence (vec2 posPx, vec2 dims, float radiusPx) {
-  if (u_cursorUv.x < 0.0) return 0.0;
-
-  float best = 0.0;
-
-  for (int i = 0; i < TRAIL_N; i++) {
-    // NB: "sample" is a reserved word in GLSL ES 3.00, so this cannot be named that.
-    vec4 node = u_trail[i];
-    // getCursorUniforms packs live samples from index 0 and zero-fills the tail, so the
-    // first empty slot means every later one is empty too.
-    if (node.z <= 0.0) break;
-
-    float d = distance(posPx, node.xy * dims);
-    float shoulder = 1.0 - smoothstep(0.0, max(radiusPx, 1.0), d);
-    // Samples further away than the radius contribute nothing, and pow is two SFU ops —
-    // not worth spending on a base of zero.
-    if (shoulder <= 0.0) continue;
-
-    // The exponent softens the shoulder so the streak's edge dissolves instead of ending
-    // on a defined rim.
-    best = max(best, pow(shoulder, 1.7) * node.z);
-  }
-
-  return best * u_cursorStrength;
-}
-
-// Blends toward the luminance the cursor is carrying in from where it just was. Clamped
-// because u_cursorStrength may exceed 1 to let the effect overshoot.
-float applyCursorCarry (float lum, float influence, float carryLum) {
-  if (influence <= 0.0) return lum;
-
-  return clamp(mix(lum, carryLum, influence), 0.0, 1.0);
-}
-
 void main () {
   highp vec2 dims = vec2(max(u_resolution, vec2(1.0)));
   highp vec2 px = gl_FragCoord.xy;
@@ -296,17 +239,6 @@ void main () {
   // CSS pixels across displays.
   float dotSpacing = max(u_dotSpacingCss * u_pixelRatio, 1.0);
   float maxDotSize = u_maxDotSizeCss * u_pixelRatio;
-
-  vec2 cursorPrevPx = u_cursorPrevUv * dims;
-  float cursorRadiusPx = u_cursorRadiusFrac * dims.y;
-  // Order matters: applyCursorCarry ignores carryLum entirely when influence is zero, so
-  // evaluating the field a second time for it is wasted work. That is the common case —
-  // every touch device, reduced motion, and any moment before the first pointer move —
-  // and there the branch is uniform across the draw, so it costs nothing.
-  float cursorInfluence = cursorTrailInfluence(px, dims, cursorRadiusPx);
-  float carryLum = cursorInfluence > 0.0
-    ? fieldLuminance(cursorPrevPx, dims, centerPx, burstRadiusPx)
-    : 0.0;
 
   highp vec2 rel = px - centerPx;
   highp float dist = length(rel);
@@ -343,7 +275,6 @@ void main () {
   // Luminance is evaluated once, for the winning dot only. Sampling inside the loop would
   // re-run it on every improvement to the running minimum and discard all but the last.
   float lum = fieldLuminance(closestDotPx, dims, centerPx, burstRadiusPx);
-  lum = applyCursorCarry(lum, cursorInfluence, carryLum);
   float closestDotRadius = min(maxDotSize * computeSizeFactor(lum, u_sizeVariation), dotSpacing * 0.45);
 
   float feather = min(0.5, closestDotRadius * 0.3);
