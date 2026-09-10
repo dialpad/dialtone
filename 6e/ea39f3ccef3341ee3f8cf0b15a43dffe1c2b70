@@ -1,0 +1,21 @@
+packages/dialtone-vue/components/RichTextEditor/RichTextEditor.test.js
+  s_c13f2db55938c9::t_77f6f9cc8e56c8 1643-1661
+packages/dialtone-vue/components/RichTextEditor/RichTextEditor.vue
+  s_c13f2db55938c9::t_fc8c4328410a71 992-998,1006
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "6eea39f3ccef3341ee3f8cf0b15a43dffe1c2b70",
+  "prompts": {},
+  "sessions": {
+    "s_c13f2db55938c9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "95037797-3625-433c-b08e-d4952d040b33",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "iropolo <ignacio.ropolo@dialpad.com>"
+    }
+  }
+}

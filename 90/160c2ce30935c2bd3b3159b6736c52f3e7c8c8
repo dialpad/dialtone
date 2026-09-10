@@ -1,0 +1,29 @@
+packages/dialtone-vue/components/Modal/Modal.test.js
+  s_b007f3976ebd62::t_3b4f4c1787176f 195,200-202,210-217,219-221
+  s_b007f3976ebd62::t_a8e2b886d70c90 196-199,203-209
+  s_b007f3976ebd62::t_fc07adca8a39f0 218
+packages/dialtone-vue/components/Modal/Modal.vue
+  s_b007f3976ebd62::t_7780b257de0971 570-572
+  s_b007f3976ebd62::t_af4e9b4d53cdca 152-155,157-185,189-202
+  s_b007f3976ebd62::t_f379d1c9f1f348 577-578
+apps/dialtone-documentation/docs/guides/migration/modal-native-dialog/index.md
+  s_b007f3976ebd62::t_db2a06def7b0b2 115
+packages/dialtone-vue/components/Modal/ModalDefault.story.vue
+  s_b007f3976ebd62::t_bbce5a2fedb90b 24
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "90160c2ce30935c2bd3b3159b6736c52f3e7c8c8",
+  "prompts": {},
+  "sessions": {
+    "s_b007f3976ebd62": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2b3ae57f-2175-41e8-9a71-42894bdfcac2",
+        "model": "claude-opus-5"
+      },
+      "human_author": "belumontoya <163597542+belumontoya@users.noreply.github.com>"
+    }
+  }
+}

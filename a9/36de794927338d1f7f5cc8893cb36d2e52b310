@@ -1,0 +1,26 @@
+apps/dialtone-documentation/docs/.vuepress/theme/utils/viewportBreakpoints.js
+  s_037f149b31cf7b::t_2bc668ce64e86f 4-14,26,34-37,44-48,57-61,68-73
+apps/dialtone-documentation/docs/.vuepress/theme/composables/useViewportBreakpoints.js
+  s_037f149b31cf7b::t_969a5cac6d8928 8-16,50-53,58-62
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.7",
+  "base_commit_sha": "a936de794927338d1f7f5cc8893cb36d2e52b310",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_037f149b31cf7b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019eb75a-1703-7701-b0b6-29b6cf4d3b9e",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

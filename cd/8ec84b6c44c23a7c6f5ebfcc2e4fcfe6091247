@@ -1,0 +1,20 @@
+packages/dialtone-tokens/tokens/theme/dp/default.json
+  h_c15b5755534093 329-331,343
+apps/dialtone-documentation/docs/components/link.md
+  h_c15b5755534093 55,86
+packages/dialtone-css/lib/build/less/components/link.less
+  h_c15b5755534093 213,220
+packages/dialtone-tokens/tokens/theme/dp/dark.json
+  h_c15b5755534093 149-150,162-163,172-179
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "cd8ec84b6c44c23a7c6f5ebfcc2e4fcfe6091247",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
