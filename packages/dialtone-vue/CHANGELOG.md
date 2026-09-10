@@ -1,3 +1,10 @@
+# [3.225.0-next.9](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0-next.8...dialtone-vue/v3.225.0-next.9) (2026-09-10)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** NO-JIRA recover input height once it actually becomes visible ([#1414](https://github.com/dialpad/dialtone/issues/1414)) ([9af80e2](https://github.com/dialpad/dialtone/commit/9af80e2918ca9019cd10cc761edae568bfa75d74))
+
 # [3.225.0-next.8](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0-next.7...dialtone-vue/v3.225.0-next.8) (2026-09-04)
 
 
