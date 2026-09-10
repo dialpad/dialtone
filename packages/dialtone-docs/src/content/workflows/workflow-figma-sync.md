@@ -39,7 +39,7 @@ pnpm sync:variables
 pnpm sync:materials
 ```
 
-The sync resolves the token sets itself, so it does not need `dialtone-tokens:build` first. The checks do: `sync:variables:check` compares the resolved values against the built CSS, and `sync:materials:check` does the same per material, so build before you run either. Neither needs Figma access, which makes them the quickest way to tell a resolution problem apart from a Figma one.
+The sync resolves the token sets itself, so it does not need `dialtone-tokens:build` first. Both checks do, since they read the built CSS. `sync:variables:check` compares every resolved value against it and needs no Figma access, which makes it the quickest way to tell a resolution problem apart from a Figma one. `sync:materials:check` also reads the file to verify what a frame pinned to a material actually sees, so it needs the same credentials as the sync.
 
 `sync:materials` writes the five material collections, which extend the main one. It reads the main collection to find the variables it overrides, so run it after `sync:variables`, never before.
 

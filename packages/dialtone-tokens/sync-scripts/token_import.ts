@@ -123,6 +123,7 @@ function variableValueFromToken(
     [variableCollectionId: string]: { [variableName: string]: Variable }
   },
   targetCollectionId?: string,
+  targetPayloadNames?: Set<string>,
 ): VariableValue {
   if (typeof token.$value === 'string' && isAlias(token.$value)) {
     // Assume aliases are in the format {group.subgroup.token} with any number of optional groups/subgroups
@@ -134,9 +135,9 @@ function variableValueFromToken(
 
     // The collection being written wins, so a file that already holds another
     // collection using the same token names cannot capture our aliases. Without
-    // this, semantics in a newly created collection alias into the old one's
-    // primitives, and every later update to ours stops propagating — including
-    // the material overrides, which only touch our own variables.
+    // this, semantics alias into the old collection's primitives and every
+    // later update to ours stops propagating — the material overrides included,
+    // since those only touch our own variables.
     const target = targetCollectionId
       ? localVariablesByCollectionAndName[targetCollectionId]
       : undefined
@@ -144,6 +145,18 @@ function variableValueFromToken(
       return {
         type: 'VARIABLE_ALIAS',
         id: target[value].id,
+      }
+    }
+
+    // A variable this payload is about to create in the target collection. Its
+    // temporary id is its token name, which the API resolves within the payload.
+    // Checked before the fallback, and not only when the collection is new: a
+    // collection that exists can still be gaining the alias target in this same
+    // run, and a namesake elsewhere must not win that race either.
+    if (targetPayloadNames?.has(value)) {
+      return {
+        type: 'VARIABLE_ALIAS',
+        id: value,
       }
     }
 
@@ -310,6 +323,25 @@ export function generatePostVariablesPayload(
     variableModeValues: [],
   }
 
+  // Every token name each collection will hold once this payload is applied,
+  // whether the variable already exists or is being created here.
+  //
+  // Needed because a collection that does not exist yet has no entry in
+  // `localVariablesByCollectionAndName`, so on a first sync there is nothing to
+  // prefer and alias resolution would fall through to whatever namesake the
+  // file already holds in another collection. Which is the case that matters:
+  // the first write into a file that already has a hand-built collection using
+  // the same token names.
+  const payloadNamesByCollection: { [variableCollectionId: string]: Set<string> } = {}
+  Object.entries(tokensByFile).forEach(([fileName, tokens]) => {
+    const { collectionName } = collectionAndModeFromFileName(fileName)
+    const collectionId = localVariableCollectionsByName[collectionName]?.id ?? collectionName
+    payloadNamesByCollection[collectionId] ??= new Set()
+    for (const tokenName of Object.keys(tokens)) {
+      payloadNamesByCollection[collectionId].add(tokenName)
+    }
+  })
+
   Object.entries(tokensByFile).forEach(([fileName, tokens]) => {
     const { collectionName, modeName } = collectionAndModeFromFileName(fileName)
 
@@ -389,7 +421,10 @@ export function generatePostVariablesPayload(
       const newVariableValue = variableValueFromToken(
         token,
         localVariablesByCollectionAndName,
-        variableCollection?.id,
+        // The temporary id when the collection is new, so the payload-name
+        // lookup below is keyed the same way either way.
+        variableCollectionId,
+        payloadNamesByCollection[variableCollectionId],
       )
 
       // Only include the variable mode value in the payload if it's different from the existing value
