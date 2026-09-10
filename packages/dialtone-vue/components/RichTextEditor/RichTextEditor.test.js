@@ -480,6 +480,30 @@ describe('DtRichTextEditor tests', () => {
             const output = await getMarkdownOutput(jsonInput);
             expect(output).toBe('Check out <!-- @channel: {"id": "general", "channelKey": "channel-456", "name": "general", "locked": "false"} --> channel');
           });
+
+          it('should convert emoji stored as a shortcode to a unicode character', async () => {
+            const jsonInput = jsonInputBase([
+              { type: 'text', text: 'Hello ' },
+              {
+                type: 'emoji',
+                attrs: { code: ':cat:' },
+              },
+            ]);
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('Hello 🐱');
+          });
+
+          it('should convert emoji stored as a unicode character to a unicode character', async () => {
+            const jsonInput = jsonInputBase([
+              { type: 'text', text: 'Hello ' },
+              {
+                type: 'emoji',
+                attrs: { code: '🐱' },
+              },
+            ]);
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('Hello 🐱');
+          });
         });
       });
     });
