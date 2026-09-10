@@ -110,6 +110,7 @@ onMounted(() => {
     }
 
     const fineHoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
     const usesCompositorAutoplay = !fineHoverQuery.matches;
     const supportsScrollEnd = 'onscrollend' in carouselContainer;
 
@@ -144,12 +145,19 @@ onMounted(() => {
     const measureCarouselPeriod = () => {
       carouselPeriod = getCarouselPeriod(carouselItems[0], firstCloneItem);
       maxScrollPosition = carouselContainer.scrollWidth - carouselContainer.clientWidth;
+
+      if (carouselPeriod <= 0) {
+        stopAnimation();
+        return;
+      }
+
       carousel.style.setProperty('--showcase-carousel-autoplay-distance', `${-carouselPeriod}px`);
       carousel.style.setProperty(
         '--showcase-carousel-autoplay-duration',
         `${carouselPeriod / DEFAULT_VELOCITY}ms`,
       );
       recenterCarousel();
+      startAnimation();
     };
 
     const handleResize = () => {
@@ -197,7 +205,12 @@ onMounted(() => {
     };
 
     const startAnimation = () => {
-      if (!isVisible || isTouchScrolling) return;
+      if (
+        !isVisible ||
+        isTouchScrolling ||
+        reducedMotionQuery.matches ||
+        carouselPeriod <= 0
+      ) return;
 
       if (usesCompositorAutoplay) {
         carousel.classList.remove('showcase-carousel__track--autoplay-paused');
@@ -206,6 +219,14 @@ onMounted(() => {
 
       if (animationId !== null) return;
       animationId = requestAnimationFrame(animateCarousel);
+    };
+
+    const handleReducedMotionChange = () => {
+      if (reducedMotionQuery.matches) {
+        stopAnimation();
+      } else {
+        startAnimation();
+      }
     };
 
     const handlePointerEnter = (event) => {
@@ -322,6 +343,7 @@ onMounted(() => {
     carouselContainer.addEventListener('touchcancel', handleTouchEnd, { passive: true });
     carouselContainer.addEventListener('scroll', handleScroll, { passive: true });
     carouselContainer.addEventListener('scrollend', handleScrollEnd);
+    reducedMotionQuery.addEventListener('change', handleReducedMotionChange);
     window.addEventListener('resize', handleResize);
 
     if ('IntersectionObserver' in window) {
@@ -345,6 +367,7 @@ onMounted(() => {
       carouselContainer.removeEventListener('touchcancel', handleTouchEnd);
       carouselContainer.removeEventListener('scroll', handleScroll);
       carouselContainer.removeEventListener('scrollend', handleScrollEnd);
+      reducedMotionQuery.removeEventListener('change', handleReducedMotionChange);
       window.removeEventListener('resize', handleResize);
     };
   }
@@ -397,6 +420,12 @@ onUnmounted(() => cleanupCarousel());
 
 .showcase-carousel__track--autoplay-paused {
   animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .showcase-carousel__track--compositor-autoplay {
+    animation: none;
+  }
 }
 
 @keyframes showcase-carousel-autoplay {

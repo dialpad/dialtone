@@ -11,6 +11,7 @@ export function getCarouselPeriod (firstOriginal, firstClone) {
 
 export function getLoopedScrollPosition (position, period, maxPosition) {
   if (period <= 0) return position;
+  if (maxPosition < period * 2) return position;
 
   const edgeBuffer = period / 2;
 
