@@ -42,7 +42,7 @@ pnpm sync:variables -- --dry-run
 pnpm sync:variables
 ```
 
-Triggered in CI by a push to `next` touching `tokens/**`, or by a `/sync-tokens` comment on a pull request, which writes to a separate preview file. See [workflow-figma-sync](../workflows/workflow-figma-sync.md) for the detail, including what cannot cross and why.
+Run it yourself for now. A follow-up adds the CI workflow, after which a push to `next` touching `tokens/**` syncs the main file and a `/sync-tokens` comment on a pull request syncs a separate preview file. See [workflow-figma-sync](../workflows/workflow-figma-sync.md) for the detail, including the limitations.
 
 `sync_figma_to_tokens.ts` still exists and pulls the other way, but it is **not** authoritative. Running both directions risks whichever ran last winning.
 

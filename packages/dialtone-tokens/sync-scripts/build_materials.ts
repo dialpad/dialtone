@@ -206,28 +206,87 @@ async function main (): Promise<void> {
     const existing = (collection as { variableOverrides?: Record<string, Record<string, unknown>> })
       .variableOverrides ?? {};
 
-    const payload = overrides.flatMap(o => {
+    // Every override this material should have, addressed the way Figma stores
+    // them. Kept apart from the write list because a key can be wanted and
+    // already correct, which is the common case on a repeat run.
+    const wanted = new Map<string, { variableId: string; modeId: string; value: unknown }>();
+    const unaddressable: string[] = [];
+    for (const o of overrides) {
       const variableId = byName.get(o.name.split('.').join('/'));
       const modeId = modeIdFor.get(MODES[o.mode]);
-      if (!variableId || !modeId) return [];
+      if (!variableId || !modeId) { unaddressable.push(`${o.name} [${o.mode}]`); continue; }
+      wanted.set(`${variableId}/${modeId}`, { variableId, modeId, value: o.value });
+    }
+
+    const payload = [...wanted.values()]
       // Already overridden with the same value: leave it alone, so a repeat run
       // is a no-op the way the main sync is.
-      if (sameValue(existing[variableId]?.[modeId], o.value)) return [];
-      return [{ variableId, modeId, value: o.value }];
-    });
+      .filter(o => !sameValue(existing[o.variableId]?.[o.modeId], o.value));
+
+    // An override Figma still holds that this material no longer wants, because
+    // the token now agrees with the parent. Nothing in the payload above would
+    // touch it, so without this the run reports "up to date" while Figma keeps
+    // showing the old value.
+    //
+    // REST has no way to delete an override — the plugin API's
+    // `removeOverridesForVariable` has no counterpart here — so the next best
+    // thing is to write the parent's own value, which is what the material
+    // resolves to now. The entry survives as an override that happens to match,
+    // and every run rewrites the full desired state, so a later parent change
+    // is picked up on the following run rather than propagating on its own.
+    const nameById = new Map<string, string>();
+    for (const [n, id] of byName) nameById.set(id, n);
+    const modeNameById = new Map<string, string>(
+      collection.modes.map(m => [m.modeId, m.name]));
+    const modeKeyFor = new Map<string, keyof typeof MODES>(
+      (Object.keys(MODES) as (keyof typeof MODES)[]).map(k => [MODES[k], k]));
+
+    const stale: { variableId: string; modeId: string; value: unknown }[] = [];
+    const unresettable: string[] = [];
+    for (const [variableId, byMode] of Object.entries(existing)) {
+      for (const modeId of Object.keys(byMode)) {
+        if (wanted.has(`${variableId}/${modeId}`)) continue;
+        const tokenName = nameById.get(variableId)?.split('/').join('.');
+        const modeKey = modeKeyFor.get(modeNameById.get(modeId) ?? '');
+        const token = tokenName ? parent.get(tokenName) : undefined;
+        const figmaType = tokenName ? types.get(tokenName) : undefined;
+        if (!token || !modeKey || figmaType === undefined) {
+          unresettable.push(`${tokenName ?? variableId} [${modeId}]`);
+          continue;
+        }
+        const value = figmaValue(figmaType, token.modes[modeKey].resolved);
+        if (value === null) { unresettable.push(`${tokenName} [${modeKey}]`); continue; }
+        if (sameValue(byMode[modeId], value)) continue;
+        stale.push({ variableId, modeId, value });
+      }
+    }
+
+    // Said out loud rather than dropped. A silent skip here reads as a clean
+    // run while Figma holds a value nothing in the tokens asks for.
+    const report = (label: string, items: string[]) => {
+      if (items.length === 0) return;
+      console.log(`${name}: ${items.length} ${label}`);
+      for (const item of items.slice(0, 10)) console.log(`    ${item}`);
+      if (items.length > 10) console.log(`    … and ${items.length - 10} more`);
+    };
+    report('overrides could not be addressed, no such variable or mode', unaddressable);
+    report('stale overrides could not be reset', unresettable);
 
     if (dryRun) {
-      console.log(`${name}: ${overrides.length} overrides, ${payload.length} to write`);
+      console.log(`${name}: ${wanted.size} overrides, ${payload.length} to write, ${stale.length} stale to reset`);
       continue;
     }
 
-    if (payload.length === 0) {
+    const writes = [...payload, ...stale];
+    if (writes.length === 0) {
       console.log(`${name}: up to date`);
       continue;
     }
 
-    await api.postVariables(fileKey, { variableModeValues: payload } as never);
-    console.log(`${name}: wrote ${payload.length} overrides`);
+    await api.postVariables(fileKey, { variableModeValues: writes } as never);
+    console.log(
+      `${name}: wrote ${payload.length} overrides` +
+      (stale.length ? `, reset ${stale.length} stale` : ''));
     local = await api.getLocalVariables(fileKey);
   }
 }

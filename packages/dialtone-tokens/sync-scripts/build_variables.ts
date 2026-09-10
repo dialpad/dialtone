@@ -14,7 +14,6 @@
  * Options:
  *   --dry-run        report what would change, post nothing
  *   --file-key KEY   override FILE_KEY from .env
- *   --collection N   override the collection name
  *   --out FILE       also write the payload to a file, for inspection
  */
 

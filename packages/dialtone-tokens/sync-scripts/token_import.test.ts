@@ -627,6 +627,80 @@ describe('generatePostVariablesPayload', () => {
     })
   })
 
+  it('aliases within the collection being written, not a namesake in another', () => {
+    // A file can already hold an unrelated collection using the same token
+    // names — the hand-built Dialtone layer in a team file, for instance. The
+    // lookup used to scan every collection and take the first hit, so a
+    // semantic in our collection aliased into the old one's primitives. Every
+    // later update to ours then stopped propagating, material overrides
+    // included, since those only touch our own variables.
+    const localVariablesResponse: ApiGetLocalVariablesResponse = {
+      status: 200,
+      error: false,
+      meta: {
+        variableCollections: {
+          'VariableCollectionId:1:1': {
+            id: 'VariableCollectionId:1:1',
+            name: 'old',
+            modes: [{ modeId: '1:0', name: 'mode1' }],
+            defaultModeId: '1:0',
+            remote: false,
+            hiddenFromPublishing: false,
+          },
+          'VariableCollectionId:2:1': {
+            id: 'VariableCollectionId:2:1',
+            name: 'primitives',
+            modes: [{ modeId: '2:0', name: 'mode1' }],
+            defaultModeId: '2:0',
+            remote: false,
+            hiddenFromPublishing: false,
+          },
+        },
+        variables: {
+          // Same name in both collections. The old one is listed first, which
+          // is what the previous lookup would have returned.
+          'VariableID:1:2': {
+            id: 'VariableID:1:2',
+            name: 'color/brand/radish',
+            key: 'old_key',
+            variableCollectionId: 'VariableCollectionId:1:1',
+            resolvedType: 'COLOR',
+            valuesByMode: { '1:0': { r: 0, g: 0, b: 0, a: 1 } },
+            remote: false,
+            description: '',
+            hiddenFromPublishing: false,
+            scopes: ['ALL_SCOPES'],
+            codeSyntax: {},
+          },
+          'VariableID:2:2': {
+            id: 'VariableID:2:2',
+            name: 'color/brand/radish',
+            key: 'ours_key',
+            variableCollectionId: 'VariableCollectionId:2:1',
+            resolvedType: 'COLOR',
+            valuesByMode: { '2:0': { r: 1, g: 0.75, b: 0.09, a: 1 } },
+            remote: false,
+            description: '',
+            hiddenFromPublishing: false,
+            scopes: ['ALL_SCOPES'],
+            codeSyntax: {},
+          },
+        },
+      },
+    }
+
+    const tokensByFile: FlattenedTokensByFile = {
+      'primitives.mode1.json': {
+        'color/brand/radish': { $type: 'color', $value: '#ffbe16' },
+        'surface/brand': { $type: 'color', $value: '{color.brand.radish}' },
+      },
+    }
+
+    const result = generatePostVariablesPayload(tokensByFile, localVariablesResponse)
+    const alias = result.variableModeValues!.find(v => v.variableId === 'surface/brand')
+    expect(alias!.value).toEqual({ type: 'VARIABLE_ALIAS', id: 'VariableID:2:2' })
+  })
+
   it('ignores remote collections and variables', () => {
     const localVariablesResponse: ApiGetLocalVariablesResponse = {
       status: 200,
