@@ -493,6 +493,72 @@ describe('DtComboboxMultiSelect Tests', () => {
     });
   });
 
+  describe('Input Visibility Recovery Tests', () => {
+    // jsdom never lays anything out, so getBoundingClientRect() returns 0 for every element by
+    // default — exactly the "input had a zero layout box at mount" condition this recovers from.
+    // The real ResizeObserver is mocked out globally as a no-op (tests/setupTests.js), so a local
+    // stub is installed here to capture the callback the component registers on the input itself,
+    // letting the test invoke it directly to simulate the input actually gaining layout later.
+    let inputEl;
+    let inputObserverCallback;
+    let OriginalResizeObserver;
+
+    beforeEach(() => {
+      wrapper.unmount();
+      OriginalResizeObserver = global.ResizeObserver;
+      global.ResizeObserver = class {
+        constructor (callback) {
+          this.callback = callback;
+        }
+
+        observe (target) {
+          if (target?.classList?.contains('d-input__input')) {
+            inputObserverCallback = this.callback;
+          }
+        }
+
+        disconnect () {}
+        unobserve () {}
+      };
+
+      // selectedItems is populated *before* mount, matching a real "mounted hidden with
+      // preselected items" case: initSelectedItems() runs at mount too, but only ever reads
+      // whatever height the initial (still-hidden) measurement found.
+      props = { ...baseProps, selectedItems: ['item1'] };
+      _setWrappers();
+      inputEl = wrapper.find('[data-qa="dt-input-input"]').element;
+    });
+
+    afterEach(() => {
+      global.ResizeObserver = OriginalResizeObserver;
+    });
+
+    it('should have a falsy initialInputHeight before the input has ever had real layout', () => {
+      expect(wrapper.vm.initialInputHeight).toBeFalsy();
+    });
+
+    it('should register a visibility observer on the input itself', () => {
+      expect(inputObserverCallback).toBeInstanceOf(Function);
+    });
+
+    describe('When the input later gains real layout on its own, with no other trigger', () => {
+      beforeEach(() => {
+        vi.spyOn(inputEl, 'getBoundingClientRect').mockReturnValue({
+          top: 0, left: 0, width: 300, height: 40, bottom: 40, right: 300,
+        });
+        inputObserverCallback();
+      });
+
+      it('should recover a non-zero initialInputHeight instead of staying stuck at 0', () => {
+        expect(wrapper.vm.initialInputHeight).toBe(40);
+      });
+
+      it('should set a min-height on the input so wrapped rows have room to grow into', () => {
+        expect(inputEl.style.minHeight).toBe('40px');
+      });
+    });
+  });
+
   describe('Validation Tests', () => {
     beforeEach(async () => {
       await wrapper.setProps({

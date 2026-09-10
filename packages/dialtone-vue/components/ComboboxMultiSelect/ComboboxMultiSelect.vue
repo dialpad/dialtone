@@ -501,6 +501,7 @@ export default {
       popoverOffset: [0, 4],
       showValidationMessages: false,
       resizeWindowObserver: null,
+      inputVisibilityObserver: null,
       initialInputHeight: null,
       CHIP_SIZES,
       hasSlotContent,
@@ -633,11 +634,34 @@ export default {
     });
     this.resizeWindowObserver.observe(document.body);
 
+    // The measurement above can land on a zero-size input — for example it's inside a collapsed
+    // panel or a not-yet-visible tab. Nothing else is guaranteed to react once the input later
+    // becomes visible: revealing it doesn't necessarily resize document.body, and with the
+    // default collapseOnFocusOut: false, focusing the input doesn't recompute anything either.
+    // Watch the input's own box directly so we can recover the instant it actually gets real
+    // layout, instead of depending on some other call site to happen to run again.
+    if (!this.initialInputHeight) {
+      const input = this.getInput();
+      if (input) {
+        this.inputVisibilityObserver = new ResizeObserver(() => {
+          if (this.initialInputHeight) return;
+          this.setInitialInputHeight();
+          if (!this.initialInputHeight) return;
+          this.setInputPadding();
+          this.setChipsTopPosition();
+          this.inputVisibilityObserver?.disconnect();
+          this.inputVisibilityObserver = null;
+        });
+        this.inputVisibilityObserver.observe(input);
+      }
+    }
+
     await this.initSelectedItems();
   },
 
   beforeUnmount () {
     this.resizeWindowObserver?.unobserve(document.body);
+    this.inputVisibilityObserver?.disconnect();
   },
 
   methods: {
