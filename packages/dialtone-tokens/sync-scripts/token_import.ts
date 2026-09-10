@@ -122,6 +122,7 @@ function variableValueFromToken(
   localVariablesByCollectionAndName: {
     [variableCollectionId: string]: { [variableName: string]: Variable }
   },
+  targetCollectionId?: string,
 ): VariableValue {
   if (typeof token.$value === 'string' && isAlias(token.$value)) {
     // Assume aliases are in the format {group.subgroup.token} with any number of optional groups/subgroups
@@ -131,9 +132,28 @@ function variableValueFromToken(
       .replace(/\./g, '/')
       .replace(/[\{\}]/g, '')
 
-    // When mapping aliases to existing local variables, we assume that variable names
-    // are unique *across all collections* in the Figma file
-    for (const localVariablesByName of Object.values(localVariablesByCollectionAndName)) {
+    // The collection being written wins, so a file that already holds another
+    // collection using the same token names cannot capture our aliases. Without
+    // this, semantics in a newly created collection alias into the old one's
+    // primitives, and every later update to ours stops propagating — including
+    // the material overrides, which only touch our own variables.
+    const target = targetCollectionId
+      ? localVariablesByCollectionAndName[targetCollectionId]
+      : undefined
+    if (target?.[value]) {
+      return {
+        type: 'VARIABLE_ALIAS',
+        id: target[value].id,
+      }
+    }
+
+    // Only then fall back to the rest of the file. Kept because a token set may
+    // legitimately reference a variable that lives in another collection, and
+    // the name is all we have to find it by.
+    for (const [collectionId, localVariablesByName] of Object.entries(
+      localVariablesByCollectionAndName,
+    )) {
+      if (collectionId === targetCollectionId) continue
       if (localVariablesByName[value]) {
         return {
           type: 'VARIABLE_ALIAS',
@@ -366,7 +386,11 @@ export function generatePostVariablesPayload(
       }
 
       const existingVariableValue = variable && variableMode ? variable.valuesByMode[modeId] : null
-      const newVariableValue = variableValueFromToken(token, localVariablesByCollectionAndName)
+      const newVariableValue = variableValueFromToken(
+        token,
+        localVariablesByCollectionAndName,
+        variableCollection?.id,
+      )
 
       // Only include the variable mode value in the payload if it's different from the existing value
       if (
