@@ -12,6 +12,8 @@
     gap="0"
     class="d-w100p"
   >
+    <!-- Hover only pauses decorative motion; no content or interaction is mouse-exclusive. -->
+    <!-- eslint-disable vuejs-accessibility/mouse-events-have-key-events -->
     <dt-box
       v-if="viewport.atLeast('lg')"
       padding-block-end="250"
@@ -21,9 +23,12 @@
       border-width-inline-end="100"
       border-color="subtle"
       class="dialtone-shell-sidebar d-ps-sticky d-ibs-0 d-h100vh"
+      @mouseenter="handleSidebarMouseEnter"
+      @mouseleave="handleSidebarMouseLeave"
     >
       <sidebar persistent />
     </dt-box>
+    <!-- eslint-enable vuejs-accessibility/mouse-events-have-key-events -->
     <doc-header
       v-else
       class="d-ps-sticky d-ibs-0 d-zi-navigation-fixed"
@@ -73,7 +78,7 @@
 import '@dialpad/dialtone-tokens/tokens-base-light.css';
 import '@dialpad/dialtone-tokens/tokens-dp-light.css';
 import { DtStack } from '@dialpad/dialtone-vue';
-import { computed, nextTick, ref, watch } from 'vue';
+import { computed, nextTick, provide, ref, watch } from 'vue';
 import { useRoute } from 'vue-router';
 import { Content } from 'vuepress/client';
 import { useViewportBreakpoints } from '../composables/useViewportBreakpoints.js';
@@ -83,12 +88,24 @@ import Sidebar from '../components/Sidebar.vue';
 const route = useRoute();
 const viewport = useViewportBreakpoints();
 const isMobileMenuOpen = ref(false);
+const isSidebarHovered = ref(false);
 const mobileDrawerHeader = ref(null);
 let mobileMenuTrigger = null;
 
 // Gates the drawer's own mount, so the narrow shell's sidebar is never instantiated
 // alongside the desktop rail's copy.
 const isMobileDrawerOpen = computed(() => isMobileMenuOpen.value && !viewport.atLeast('lg'));
+const isHalftonePaused = computed(() => viewport.atLeast('lg') && isSidebarHovered.value);
+
+provide('halftonePaused', isHalftonePaused);
+
+const handleSidebarMouseEnter = () => {
+  isSidebarHovered.value = true;
+};
+
+const handleSidebarMouseLeave = () => {
+  isSidebarHovered.value = false;
+};
 
 const toggleMobileMenu = () => {
   if (!isMobileDrawerOpen.value && typeof document !== 'undefined') {
@@ -123,6 +140,13 @@ watch(
   () => route.path,
   () => {
     isMobileMenuOpen.value = false;
+  },
+);
+
+watch(
+  () => viewport.atLeast('lg'),
+  (isDesktop) => {
+    if (!isDesktop) isSidebarHovered.value = false;
   },
 );
 </script>

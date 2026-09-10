@@ -18,10 +18,8 @@
 </template>
 
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { computed, inject, onBeforeUnmount, onMounted, ref, watch } from 'vue';
 import { gradientHeroFragmentShader, HERO_GEOMETRY } from './gradientHeroShader.js';
-import { createGradientHeroCursor, getCursorUniforms } from './gradientHeroCursor.js';
-import { createFrameCoalescer } from '../theme/utils/frameCoalescer.js';
 import {
   createDotColorLoop,
   observeThemeChanges,
@@ -43,9 +41,10 @@ const props = defineProps({
 const surfaceEl = ref(null);
 const shaderHostEl = ref(null);
 const geometry = computed(() => ({ ...HERO_GEOMETRY, ...props.geometry }));
+const isHalftonePaused = inject('halftonePaused', ref(false));
 
 // Both match Paper's defaults. A tighter pixel cap renders the canvas below CSS
-// resolution and stretches it up, softening the dots and pointer trail.
+// resolution and stretches it up, softening the dots.
 const MIN_PIXEL_RATIO = 2;
 const MAX_PIXEL_COUNT = 1920 * 1080 * 4;
 const DOT_COLOR_PERIOD_MS = 14_000;
@@ -55,7 +54,6 @@ const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
 const FINE_POINTER_QUERY = '(hover: hover) and (pointer: fine)';
 
 let shaderMount = null;
-let cursor = null;
 let disposeThemeObserver = null;
 let intersectionObserver = null;
 let reducedMotionQuery = null;
@@ -65,47 +63,23 @@ let isVisible = true;
 let isTouchActive = false;
 let isTouchScrolling = false;
 let touchScrollIdleTimer = null;
-let pendingUniforms = null;
-
-// Every setUniforms call ends in a synchronous full-canvas draw. Stage concurrent
-// colour and cursor updates so they produce at most one additional draw per frame.
-const flushUniforms = createFrameCoalescer(() => {
-  const patch = pendingUniforms;
-  pendingUniforms = null;
-  if (patch && shaderMount) shaderMount.setUniforms(patch);
-});
-
-const queueUniforms = (patch) => {
-  pendingUniforms = pendingUniforms ? Object.assign(pendingUniforms, patch) : { ...patch };
-  flushUniforms.schedule();
-};
 
 const dotColorLoop = createDotColorLoop({
   periodMs: DOT_COLOR_PERIOD_MS,
-  onColor: (channels) => queueUniforms({ u_dotColor: channels }),
+  onColor: (channels) => shaderMount?.setUniforms({ u_dotColor: channels }),
 });
 
 const prefersReducedMotion = () => Boolean(reducedMotionQuery?.matches);
 const prefersFinePointer = () => Boolean(finePointerQuery?.matches);
 const currentSpeed = () => (
-  prefersReducedMotion() || !isVisible || isTouchActive || isTouchScrolling ? 0 : 1
+  prefersReducedMotion() ||
+  !isVisible ||
+  isTouchActive ||
+  isTouchScrolling ||
+  isHalftonePaused.value
+    ? 0
+    : 1
 );
-const shouldTrackPointer = () => isVisible && prefersFinePointer() && !prefersReducedMotion();
-const mirrorCursorX = (state) => {
-  if (!props.flipX || !state) return state;
-
-  return {
-    ...state,
-    x: 1 - state.x,
-    prevX: 1 - state.prevX,
-    trail: state.trail.map(([x, y, intensity, padding]) => [
-      1 - x,
-      y,
-      intensity,
-      padding,
-    ]),
-  };
-};
 
 const buildUniforms = (surface) => {
   const settings = geometry.value;
@@ -130,20 +104,18 @@ const buildUniforms = (surface) => {
     u_meshLight2: [...settings.meshLightPoles[1]],
     u_meshPointSize: settings.meshPointSize,
     u_meshSmoothness: settings.meshSmoothness,
-    u_cursorRadiusFrac: settings.cursorRadiusFrac,
     // Paper's shared vertex shader divides by u_scale. This fragment shader reads only
     // gl_FragCoord, but supplying a valid value avoids leaving NaN in the vertex stage.
     u_scale: 1,
     u_bgColor: resolveHalftoneBackground(surface),
     u_dotColor: dotColorLoop.current(),
-    ...getCursorUniforms(null, settings.cursorStrength),
   };
 };
 
 const refreshColors = (surface) => {
   dotColorLoop.setPalette(resolveHalftoneDotPalette(surface));
 
-  queueUniforms({
+  shaderMount?.setUniforms({
     u_bgColor: resolveHalftoneBackground(surface),
     u_dotColor: dotColorLoop.current(),
   });
@@ -153,13 +125,9 @@ const syncMotionState = () => {
   if (!shaderMount) return;
 
   const speed = currentSpeed();
+  // Both animation clocks retain their accumulated phase while stopped, so resuming continues
+  // from the parked frame instead of jumping forward by the elapsed wall-clock time.
   shaderMount.setSpeed(speed);
-
-  if (shouldTrackPointer()) {
-    cursor?.start();
-  } else {
-    cursor?.stop();
-  }
 
   if (speed !== 0) {
     dotColorLoop.start();
@@ -205,18 +173,7 @@ const canMountShader = (host) => {
   return !('paperShaderMount' in host);
 };
 
-const attachControllers = (surface) => {
-  cursor = createGradientHeroCursor({
-    element: surface,
-    rectElement: shaderHostEl.value,
-    onChange: (state) => {
-      queueUniforms(getCursorUniforms(
-        mirrorCursorX(state),
-        geometry.value.cursorStrength,
-      ));
-    },
-  });
-
+const attachObservers = (surface) => {
   disposeThemeObserver = observeThemeChanges(() => {
     refreshColors(surface);
     syncMotionState();
@@ -230,6 +187,8 @@ const attachControllers = (surface) => {
     intersectionObserver.observe(surface);
   }
 };
+
+watch(isHalftonePaused, syncMotionState);
 
 const initShader = async () => {
   const host = shaderHostEl.value;
@@ -255,7 +214,7 @@ const initShader = async () => {
   );
   shaderMount.canvasElement.classList.add('halftone-surface__canvas');
 
-  attachControllers(surface);
+  attachObservers(surface);
   syncMotionState();
 };
 
@@ -264,7 +223,6 @@ onMounted(() => {
     reducedMotionQuery = window.matchMedia(REDUCED_MOTION_QUERY);
     reducedMotionQuery.addEventListener('change', syncMotionState);
     finePointerQuery = window.matchMedia(FINE_POINTER_QUERY);
-    finePointerQuery.addEventListener('change', syncMotionState);
     window.addEventListener('scroll', handleTouchScroll, { passive: true });
     window.addEventListener('touchstart', handleTouchStart, { passive: true });
     window.addEventListener('touchend', handleTouchEnd, { passive: true });
@@ -287,7 +245,6 @@ onBeforeUnmount(() => {
 
   reducedMotionQuery?.removeEventListener('change', syncMotionState);
   reducedMotionQuery = null;
-  finePointerQuery?.removeEventListener('change', syncMotionState);
   finePointerQuery = null;
 
   if (typeof window !== 'undefined') {
@@ -298,13 +255,7 @@ onBeforeUnmount(() => {
     window.clearTimeout(touchScrollIdleTimer);
   }
 
-  flushUniforms.cancel();
-  pendingUniforms = null;
-
   dotColorLoop.dispose();
-
-  cursor?.dispose();
-  cursor = null;
 
   shaderMount?.dispose();
   shaderMount = null;
