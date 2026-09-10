@@ -1,4 +1,5 @@
 import { renderToMarkdown } from '@tiptap/static-renderer/pm/markdown';
+import { codeToEmojiData, stringToUnicode } from '@/common/emoji';
 
 // The pm/markdown renderer passes children as string[] (one entry per child node),
 // not as a pre-joined string. Normalize to a string before processing.
@@ -69,7 +70,12 @@ export function renderEditorToMarkdown (jsonContent, extensions) {
         },
 
         emoji ({ node }) {
-          return node.attrs?.code || '';
+          const code = node.attrs?.code;
+          if (!code) return '';
+          // Always output emoji as unicode characters rather than shortcodes, matching
+          // renderText's backwards-compatibility behavior with our backend (see Emoji.js).
+          const emojiData = codeToEmojiData(code);
+          return emojiData ? stringToUnicode(emojiData.unicode_output) : code;
         },
 
         variable ({ node }) {
