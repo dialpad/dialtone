@@ -85,7 +85,11 @@ const viewport = useViewportBreakpoints();
   transition: none;
 
   @media screen and (min-width: 640px) {
-    font-size: 4.6rem;
+    font-size: var(--dt-font-size-650);
+  }
+
+  @media screen and (min-width: 640px) {
+    font-size: var(--dt-font-size-650);
   }
 }
 </style>

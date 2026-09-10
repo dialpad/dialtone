@@ -297,9 +297,6 @@ onBeforeUnmount(() => {
     window.removeEventListener('touchcancel', handleTouchEnd);
     window.clearTimeout(touchScrollIdleTimer);
   }
-  touchScrollIdleTimer = null;
-  isTouchActive = false;
-  isTouchScrolling = false;
 
   flushUniforms.cancel();
   pendingUniforms = null;
