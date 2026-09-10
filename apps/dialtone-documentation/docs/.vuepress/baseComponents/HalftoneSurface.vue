@@ -49,6 +49,7 @@ const geometry = computed(() => ({ ...HERO_GEOMETRY, ...props.geometry }));
 const MIN_PIXEL_RATIO = 2;
 const MAX_PIXEL_COUNT = 1920 * 1080 * 4;
 const DOT_COLOR_PERIOD_MS = 14_000;
+const TOUCH_SCROLL_IDLE_MS = 100;
 
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
 const FINE_POINTER_QUERY = '(hover: hover) and (pointer: fine)';
@@ -61,6 +62,9 @@ let reducedMotionQuery = null;
 let finePointerQuery = null;
 let isDisposed = false;
 let isVisible = true;
+let isTouchActive = false;
+let isTouchScrolling = false;
+let touchScrollIdleTimer = null;
 let pendingUniforms = null;
 
 // Every setUniforms call ends in a synchronous full-canvas draw. Stage concurrent
@@ -83,7 +87,9 @@ const dotColorLoop = createDotColorLoop({
 
 const prefersReducedMotion = () => Boolean(reducedMotionQuery?.matches);
 const prefersFinePointer = () => Boolean(finePointerQuery?.matches);
-const currentSpeed = () => (prefersReducedMotion() || !isVisible ? 0 : 1);
+const currentSpeed = () => (
+  prefersReducedMotion() || !isVisible || isTouchActive || isTouchScrolling ? 0 : 1
+);
 const shouldTrackPointer = () => isVisible && prefersFinePointer() && !prefersReducedMotion();
 const mirrorCursorX = (state) => {
   if (!props.flipX || !state) return state;
@@ -162,6 +168,36 @@ const syncMotionState = () => {
   }
 };
 
+const handleTouchScroll = () => {
+  if (prefersFinePointer()) return;
+
+  if (!isTouchScrolling) {
+    isTouchScrolling = true;
+    syncMotionState();
+  }
+
+  window.clearTimeout(touchScrollIdleTimer);
+  touchScrollIdleTimer = window.setTimeout(() => {
+    touchScrollIdleTimer = null;
+    isTouchScrolling = false;
+    syncMotionState();
+  }, TOUCH_SCROLL_IDLE_MS);
+};
+
+const handleTouchStart = () => {
+  if (prefersFinePointer() || isTouchActive) return;
+
+  isTouchActive = true;
+  syncMotionState();
+};
+
+const handleTouchEnd = (event) => {
+  if (event.touches.length > 0 || !isTouchActive) return;
+
+  isTouchActive = false;
+  if (!isTouchScrolling) syncMotionState();
+};
+
 const canMountShader = (host) => {
   if (!host || host.clientWidth === 0 || host.clientHeight === 0) return false;
 
@@ -217,6 +253,7 @@ const initShader = async () => {
     MIN_PIXEL_RATIO,
     MAX_PIXEL_COUNT,
   );
+  shaderMount.canvasElement.classList.add('halftone-surface__canvas');
 
   attachControllers(surface);
   syncMotionState();
@@ -228,6 +265,10 @@ onMounted(() => {
     reducedMotionQuery.addEventListener('change', syncMotionState);
     finePointerQuery = window.matchMedia(FINE_POINTER_QUERY);
     finePointerQuery.addEventListener('change', syncMotionState);
+    window.addEventListener('scroll', handleTouchScroll, { passive: true });
+    window.addEventListener('touchstart', handleTouchStart, { passive: true });
+    window.addEventListener('touchend', handleTouchEnd, { passive: true });
+    window.addEventListener('touchcancel', handleTouchEnd, { passive: true });
   }
 
   initShader().catch((error) => {
@@ -248,6 +289,14 @@ onBeforeUnmount(() => {
   reducedMotionQuery = null;
   finePointerQuery?.removeEventListener('change', syncMotionState);
   finePointerQuery = null;
+
+  if (typeof window !== 'undefined') {
+    window.removeEventListener('scroll', handleTouchScroll);
+    window.removeEventListener('touchstart', handleTouchStart);
+    window.removeEventListener('touchend', handleTouchEnd);
+    window.removeEventListener('touchcancel', handleTouchEnd);
+    window.clearTimeout(touchScrollIdleTimer);
+  }
 
   flushUniforms.cancel();
   pendingUniforms = null;
@@ -274,21 +323,25 @@ onBeforeUnmount(() => {
   isolation: isolate;
   overflow: clip;
   background-color: var(--halftone-color-background);
-}
 
-.halftone-surface__shader {
-  position: absolute;
-  inset-block-start: 0;
-  inset-inline: 0;
-  z-index: 0;
-  pointer-events: none;
-  block-size: calc(100% + var(--halftone-parallax-overflow, 0%));
-  transform:
-    translate3d(0, var(--halftone-translate-y, 0px), 0)
-    scaleX(var(--halftone-scale-x, 1));
-  will-change: transform;
+  &--flip-x {
+    --halftone-scale-x: -1;
+  }
 
-  canvas {
+  &__shader {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline: 0;
+    z-index: 0;
+    pointer-events: none;
+    block-size: calc(100% + var(--halftone-parallax-overflow, 0%));
+    transform:
+      translate3d(0, var(--halftone-translate-y, 0px), 0)
+      scaleX(var(--halftone-scale-x, 1));
+    will-change: transform;
+  }
+
+  &__canvas {
     position: absolute;
     inset: 0;
     z-index: 0;
@@ -296,9 +349,5 @@ onBeforeUnmount(() => {
     inline-size: 100%;
     block-size: 100%;
   }
-}
-
-.halftone-surface--flip-x {
-  --halftone-scale-x: -1;
 }
 </style>

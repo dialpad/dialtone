@@ -1,11 +1,10 @@
 <template>
-  <dt-box class="home-gradient-hero-content">
+  <dt-box class="home-gradient-hero-content" padding-block="500">
     <dt-box class="d-d-flex d-plc-center d-mbe-600">
       <dt-link to="/dialtone/">
         <dt-box
           :inline-size="viewport.pick({
-            default: '125',
-            md: '150',
+            default: '150',
             lg: '200',
           })"
           style="filter: drop-shadow(rgba(0, 0, 0, 0.25) 0px 25px 30px);"
@@ -39,7 +38,7 @@
     >
       Start with the system of components, design tokens, and guidance that make good design the default.
     </dt-text>
-    <dt-stack direction="row" justify="center" gap="200" class="d-pbs-500">
+    <dt-stack direction="row" justify="center" gap="200" class="d-pbs-500 d-pbe-800">
       <dt-button
         to="/dialtone/"
         :size="400"
@@ -80,17 +79,13 @@ const viewport = useViewportBreakpoints();
 }
 
 .home-gradient-hero-title {
-  font-size: 32px;
+  font-size: var(--dt-text-headline-3xl-font-size);
   font-family: "Season Sans", var(--dt-font-family-body);
   text-wrap: balance;
   transition: none;
-  background: linear-gradient(180deg, var(--dt-color-purple-900), var(--dt-color-purple-1000));
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
 
   @media screen and (min-width: 640px) {
-    font-size: 46px;
+    font-size: var(--dt-font-size-650);
   }
 }
 </style>
