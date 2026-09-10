@@ -1,0 +1,39 @@
+packages/dialtone-vue/components/Text/Text.test.js
+  s_5c2995026e6cb7::t_d3b3d24231d469 41,44,63,116-119,121-124,128-133
+  s_5c2995026e6cb7::t_e282f794999ad9 134-135
+packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md
+  s_5c2995026e6cb7::t_d3b3d24231d469 21,57,59,76
+packages/dialtone-vue/components/Text/Text.vue
+  s_5c2995026e6cb7::t_d3b3d24231d469 78,83,93,408-412
+  s_5c2995026e6cb7::t_c2dc1270e756d6 413-415
+packages/eslint-plugin-dialtone/docs/rules/deprecated-tshirt-sizes.md
+  s_5c2995026e6cb7::t_d3b3d24231d469 9,14
+apps/dialtone-documentation/docs/guides/migration/typography/index.md
+  s_5c2995026e6cb7::t_9ea94e016474ea 181-182
+  s_5c2995026e6cb7::t_d3b3d24231d469 14,143,393,399-400
+apps/dialtone-documentation/docs/components/text.md
+  s_5c2995026e6cb7::t_d3b3d24231d469 43,51,68,81,87,104,112,114,129
+packages/dialtone-vue/components/Text/Text.stories.js
+  s_5c2995026e6cb7::t_d3b3d24231d469 34
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-tshirt-sizes.js
+  s_5c2995026e6cb7::t_d3b3d24231d469 85,88-95,133,136-137,187,190,205,208
+packages/eslint-plugin-dialtone/lib/rules/deprecated-tshirt-sizes.js
+  s_5c2995026e6cb7::t_d3b3d24231d469 101-102,119-130
+  s_5c2995026e6cb7::t_0e79cb7969ec82 131
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "f39812929316733a3ba9c330f3a4ccc836b25664",
+  "prompts": {},
+  "sessions": {
+    "s_5c2995026e6cb7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019eef70-8249-79a3-8adc-6396d473def8",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

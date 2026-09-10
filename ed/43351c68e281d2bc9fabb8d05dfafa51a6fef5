@@ -1,0 +1,21 @@
+packages/dialtone-vue/components/ImageViewer/ImageViewer.vue
+  s_b93b519d657e1f::t_4ce2a6a4aefb59 236-239,241-250
+  s_b93b519d657e1f::t_6c99b8554ac429 19
+  s_b93b519d657e1f::t_ec39b2a5dd1916 176-182
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "ed43351c68e281d2bc9fabb8d05dfafa51a6fef5",
+  "prompts": {},
+  "sessions": {
+    "s_b93b519d657e1f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5a784a33-91fd-4aa2-b8fd-2a4b9f8d093d",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

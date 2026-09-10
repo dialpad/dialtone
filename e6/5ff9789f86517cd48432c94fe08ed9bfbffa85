@@ -1,0 +1,50 @@
+packages/dialtone-vue/components/Text/Text.vue
+  h_c15b5755534093 65
+packages/combinator/src/lib/test/utils_test.js
+  s_cbd29f6a5140e8::t_a94d8d08495efc 2,4,10-11,17
+packages/combinator/src/variants/variants_text.js
+  s_42d457a6803b9f::t_54f2ccac3027d4 39
+  s_42d457a6803b9f::t_33f82e9d99d5f7 2-13
+  s_42d457a6803b9f::t_2d5778c5421609 43
+  s_42d457a6803b9f::t_f74f66abd378c0 46
+packages/combinator/src/lib/component_support.js
+  s_cbd29f6a5140e8::t_a94d8d08495efc 1-6,8-16
+  s_42d457a6803b9f::t_d49c13826b1d65 7
+packages/combinator/src/App.vue
+  s_cbd29f6a5140e8::t_a94d8d08495efc 49,56
+packages/combinator/src/lib/component_support.test.js
+  s_cbd29f6a5140e8::t_30a5df1f8588d1 1-2,4-5,7-9,11-46,53,55-64
+  s_cbd29f6a5140e8::t_c11fc7986e254b 6,47-52,54
+  s_cbd29f6a5140e8::t_4a97abd090f7a2 3,10
+packages/combinator/src/unsupported_components.json
+  s_cbd29f6a5140e8::t_a94d8d08495efc 1-13
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.5",
+  "base_commit_sha": "e65ff9789f86517cd48432c94fe08ed9bfbffa85",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_42d457a6803b9f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a2d8975c-326c-4d31-bdf7-e28916e5f145",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_cbd29f6a5140e8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f1571-d2ad-7572-827a-d391f2dc0ba6",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

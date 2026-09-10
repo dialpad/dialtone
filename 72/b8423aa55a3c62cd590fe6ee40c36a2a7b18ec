@@ -1,0 +1,40 @@
+package.json
+  s_2cb558ee9aae8c::t_3f8d4676aed70f 26
+  s_84d670ab6252e6::t_08fe3137dd00d8 177
+packages/eslint-plugin-dialtone/package.json
+  s_a82105f5865b72::t_9565f995e2fcff 63
+packages/dialtone-vue/package.json
+  s_84d670ab6252e6::t_4e62e83525a0de 66
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.1",
+  "base_commit_sha": "72b8423aa55a3c62cd590fe6ee40c36a2a7b18ec",
+  "prompts": {},
+  "sessions": {
+    "s_2cb558ee9aae8c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ffab39a3-cc8e-4b92-8dac-9fd8634994dd",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    },
+    "s_84d670ab6252e6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "20253a5e-95fe-4af2-9c52-518963a05832",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_a82105f5865b72": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aaa0b4c0-ced5-4274-8c37-8ab345772e34",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

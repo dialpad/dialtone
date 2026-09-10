@@ -1,0 +1,23 @@
+packages/dialtone-icons/src/svg/icons/general/circle.svg
+  s_65713884737ac4::t_5d729dc3592a48 1-3
+packages/dialtone-icons/src/svg/icons/general/circle-dashed.svg
+  s_65713884737ac4::t_5d729dc3592a48 1-3
+packages/dialtone-icons/src/keywords-icons.json
+  s_65713884737ac4::t_0386b96b9928a3 1705-1713,1718-1723
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "8c3fb5b035ab22b659fa27fcb297239ebbab3ae8",
+  "prompts": {},
+  "sessions": {
+    "s_65713884737ac4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3e290ad0-61b8-4d1e-a025-3b72aa3eeeca",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "bhawkins-dialpad <bradley.hawkins@dialpad.com>"
+    }
+  }
+}

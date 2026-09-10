@@ -1,0 +1,35 @@
+apps/dialtone-documentation/docs/.vuepress/theme/utils/viewportBreakpoints.test.mjs
+  s_037f149b31cf7b::t_c444f76fd8808a 4,6,8,18-33,46-57,80-83,88-89
+  s_037f149b31cf7b::t_a728cbffad03b9 92-95
+apps/dialtone-documentation/docs/.vuepress/theme/composables/useViewportBreakpoints.js
+  s_037f149b31cf7b::t_ad603e2ec9340a 57-58
+  s_037f149b31cf7b::t_b4da6448b96b4c 3-5,13-16,23-24,28-35,53,137,146,151
+apps/dialtone-documentation/docs/.vuepress/views/IconCatalog.vue
+  s_037f149b31cf7b::t_127fa89d65f712 106
+  h_c15b5755534093 139
+  s_037f149b31cf7b::t_58bb38a64452f8 128,130,225,230
+apps/dialtone-documentation/docs/.vuepress/theme/utils/viewportBreakpoints.js
+  s_037f149b31cf7b::t_157c9854c02277 10-12,73-84,88,90,93-94,99-108,112,117,124-132
+  s_037f149b31cf7b::t_edd641398f9ddf 49-57,92,113
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "1d900551d9240ba5586abad1a9b9ad604174cebe",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_037f149b31cf7b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019eb75a-1703-7701-b0b6-29b6cf4d3b9e",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

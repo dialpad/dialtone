@@ -1,0 +1,16 @@
+packages/combinator/src/variants/variants_card.js
+  h_c15b5755534093 32,34-35
+packages/combinator/src/variants/variants_text.js
+  h_c15b5755534093 69-70,77,80,84-85,92,99-100,102,107,110,114-115,120-121,132-133,144-145,177-178,181,191,203-238
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.5",
+  "base_commit_sha": "ec1599133d18eef2c9fdc024d7cf03a888a82065",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

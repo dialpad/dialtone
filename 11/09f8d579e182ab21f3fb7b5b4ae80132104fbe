@@ -1,0 +1,63 @@
+packages/combinator/src/components/controls/control_segmented.vue
+  s_9f61fa9161643f::t_1068608c492706 2-9,11-23,25,31,42,46,48,51,90-93,115,120,124-136,139-140,143-146
+packages/combinator/src/components/controls/control_number.test.js
+  s_9f61fa9161643f::t_832e244c2db0c8 105
+  s_9f61fa9161643f::t_ec4d3beb080ff9 18,20,33,37-40,70-73,75-76,78-79,81,83,94
+  s_9f61fa9161643f::t_0a3cf17204a650 7,77
+packages/combinator/src/components/controls/control_selection.test.js
+  s_9f61fa9161643f::t_c1d0107d3597c2 4-5,8-10,202-244
+packages/combinator/src/components/controls/control_number.vue
+  s_9f61fa9161643f::t_899e78ab015559 2-7,9-10,12-14,16,23,36,40-41,66-67,80-88,90,95
+  s_9f61fa9161643f::t_59de1debc7f11a 43,68-69,77-79,89,96,99-102
+packages/combinator/src/components/controls/control_clearable_shell.test.js
+  s_9f61fa9161643f::t_cc45c8bfed7889 41-50,61
+  s_9f61fa9161643f::t_e334e1b8a27bfa 1-6,8-40,62
+  s_9f61fa9161643f::t_cc2b81a33c35b9 7,51-60
+packages/combinator/src/components/controls/control_string.test.js
+  s_9f61fa9161643f::t_fa708a26063397 7-8,17,19,32,36-39,64-68,73,75
+packages/combinator/src/components/controls/control_slot.vue
+  s_9f61fa9161643f::t_cef0be293f882c 44,73-74,83,94,101,104-107
+  s_9f61fa9161643f::t_77791c152864da 2-9,11-13,15,24,37,41-42,71-72,87-93,95-97,100
+packages/combinator/src/components/controls/control_selection.vue
+  s_9f61fa9161643f::t_c1423b5222ccdb 2-9,11-23,33,167,172,174,177
+  s_9f61fa9161643f::t_6a0215b447dfaf 231-234,244-246,300-303,310-320,335-336,340-342
+packages/combinator/src/components/controls/control_suggestion.vue
+  s_9f61fa9161643f::t_e8e2476221eb24 18
+  s_9f61fa9161643f::t_08b4178a3ad9d4 63
+packages/combinator/src/components/controls/control_slot.test.js
+  s_9f61fa9161643f::t_34c1458e09e140 7-8,20,37-40,65-69,73-81,83-84,87-93,95-96,98,103-105,108-109,112,115,118-120
+  s_9f61fa9161643f::t_379b2d3b7ba847 72,101,107
+  s_9f61fa9161643f::t_0457d858729b4e 18,33
+packages/combinator/src/components/controls/control_clearable_shell.vue
+  s_9f61fa9161643f::t_09dab7efb0472a 1-12,14-95,99-105
+  s_9f61fa9161643f::t_b5d4b78b462a89 96-98
+  h_c15b5755534093 13
+packages/combinator/src/components/controls/control_segmented.test.js
+  s_9f61fa9161643f::t_a816d8b1a6f9ab 1-46,48-62
+  s_9f61fa9161643f::t_6b1978949c04ba 47
+packages/combinator/src/components/controls/control_string.vue
+  s_9f61fa9161643f::t_c231abbff73ec2 22
+  s_9f61fa9161643f::t_170a9d20476700 2-7,9-10,12-14,16,23,45,49-50,83-84,86,109-115,117-119,122
+  s_9f61fa9161643f::t_baa83a9da9d01c 52,85,104-108,116,123,126-129
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.10",
+  "base_commit_sha": "1109f8d579e182ab21f3fb7b5b4ae80132104fbe",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_9f61fa9161643f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ef122-867f-71f2-bacd-0ea0fd649d67",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

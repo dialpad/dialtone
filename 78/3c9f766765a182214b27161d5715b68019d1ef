@@ -1,0 +1,25 @@
+apps/dialtone-documentation/docs/.vuepress/baseComponents/gradientHeroShader.js
+  s_183be30c77d6b5::t_58497d50d539e4 43-62,116-122,191-194,196-197
+  s_183be30c77d6b5::t_ac1456c77d198a 185,187-189
+  s_183be30c77d6b5::t_4e2d987ed4407c 36-42,114-115,170-184,186,190,195,198-230,283,320
+apps/dialtone-documentation/docs/.vuepress/baseComponents/GradientHero.vue
+  s_183be30c77d6b5::t_f018b027f999d2 100-101
+  s_183be30c77d6b5::t_58497d50d539e4 102-107
+  s_183be30c77d6b5::t_6c4a79c362d1cd 264
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "783c9f766765a182214b27161d5715b68019d1ef",
+  "prompts": {},
+  "sessions": {
+    "s_183be30c77d6b5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "89e35caf-c3fd-4daa-9b7f-4c1ed53c3ffc",
+        "model": "claude-opus-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

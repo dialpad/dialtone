@@ -1,0 +1,25 @@
+packages/dialtone-css/lib/build/less/components/tabs.less
+  s_ef117ccbc6498d::t_a110932d00514b 203
+  s_ef117ccbc6498d::t_fa0b1634f08150 103
+  s_ef117ccbc6498d::t_6d8343f7cb376e 155-156,163-165
+  s_ef117ccbc6498d::t_ac96ac6af1dd43 170
+  s_ef117ccbc6498d::t_64341cdc2fc556 204
+  s_ef117ccbc6498d::t_ec47b55a46f215 104
+  s_ef117ccbc6498d::t_049df19fb9f18f 166-169
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "801e06f742acddc6fbeea2fad3b3678961474b8c",
+  "prompts": {},
+  "sessions": {
+    "s_ef117ccbc6498d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e0d6c6f1-f226-48b1-bce8-23aac71289a6",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Josh Everhart <josh.everhart@dialpad.com>"
+    }
+  }
+}

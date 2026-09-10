@@ -1,0 +1,16 @@
+packages/combinator/src/components/combinator.test.js
+  s_c8bb1bc8e0154a::t_d5795b6c12a404 66
+  s_c8bb1bc8e0154a::t_79604724f53843 76
+  s_3e2c0f28cfe374::t_d5e7f078e11d4e 7,12,43-52,55-57,59-61,63-64,67-75,77,80-93,96,98-100,102-111,113
+  s_3e2c0f28cfe374::t_61dc9a450d4e67 95
+  s_c8bb1bc8e0154a::t_35cbb8fe995030 101,112
+  s_3e2c0f28cfe374::t_d99da88abb0569 5,8-11,42,53-54,58,62,65,78-79,94,97
+packages/combinator/src/lib/info.js
+  s_c8bb1bc8e0154a::t_3dce5d347f6c3d 1,17-26
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "332b3cc03aec33b0f80a1db7b873a9150435276f",
+  "prompts": {}
+}
