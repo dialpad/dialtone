@@ -2,15 +2,29 @@
 <template>
   <div ref="carouselContainerRef" class="showcase-carousel">
     <dt-stack ref="carouselTrackRef" direction="row" gap="800" class="showcase-carousel__track">
-      <img style="align-self: flex-start; width: 468px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--01.jpg" alt="" draggable="false">
-      <img style="align-self: flex-end; width: 546px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--02.jpg" alt="" draggable="false">
-      <img style="align-self: flex-start; width: 352px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--03.jpg" alt="" draggable="false">
-      <img style="align-self: center; width: 400px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--04.jpg" alt="" draggable="false">
-      <img style="align-self: flex-end; width: 480px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--05.jpg" alt="" draggable="false">
-      <img style="align-self: flex-start; width: 628px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--06.jpg" alt="" draggable="false">
-      <img style="align-self: center; width: 438px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--07.jpg" alt="" draggable="false">
-      <img style="align-self: flex-end; width: 404px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--08.jpg" alt="" draggable="false">
-      <img style="align-self: flex-start; width: 438px;" class="d-bar-500 d-d-block" src="/assets/images/home-showcase--09.jpg" alt="" draggable="false">
+      <picture
+        v-for="image in showcaseImages"
+        :key="image.name"
+        :style="{
+          alignSelf: image.alignSelf,
+          inlineSize: image.sizes,
+        }"
+        class="showcase-carousel__item"
+      >
+        <source :srcset="image.avifSrcset" :sizes="image.sizes" type="image/avif">
+        <source :srcset="image.webpSrcset" :sizes="image.sizes" type="image/webp">
+        <img
+          :src="image.fallbackSrc"
+          :width="image.sourceWidth"
+          :height="image.sourceHeight"
+          class="d-bar-500 d-d-block showcase-carousel__image"
+          alt=""
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
+          draggable="false"
+        >
+      </picture>
     </dt-stack>
   </div>
 </template>
@@ -25,6 +39,43 @@ import {
   getLoopedScrollPosition,
   smoothCarouselVelocity,
 } from './showcaseCarouselMotion.js';
+
+const SHOWCASE_IMAGE_ROOT = '/assets/images';
+const createShowcaseImage = ({
+  name,
+  alignSelf,
+  renderedWidth,
+  sourceWidth,
+  sourceHeight,
+  candidateWidths,
+}) => {
+  const createSrcset = format => candidateWidths
+    .map(width => `${SHOWCASE_IMAGE_ROOT}/home-showcase/home-showcase--${name}-${width}w.${format} ${width}w`)
+    .join(', ');
+
+  return {
+    name,
+    alignSelf,
+    sourceWidth,
+    sourceHeight,
+    sizes: `${renderedWidth}px`,
+    fallbackSrc: `${SHOWCASE_IMAGE_ROOT}/home-showcase--${name}.jpg`,
+    avifSrcset: createSrcset('avif'),
+    webpSrcset: createSrcset('webp'),
+  };
+};
+
+const showcaseImages = [
+  createShowcaseImage({ name: '01', alignSelf: 'flex-start', renderedWidth: 468, sourceWidth: 1068, sourceHeight: 736, candidateWidths: [468, 936, 1068] }),
+  createShowcaseImage({ name: '02', alignSelf: 'flex-end', renderedWidth: 546, sourceWidth: 1258, sourceHeight: 926, candidateWidths: [546, 1092, 1258] }),
+  createShowcaseImage({ name: '03', alignSelf: 'flex-start', renderedWidth: 352, sourceWidth: 1180, sourceHeight: 1284, candidateWidths: [352, 704, 1180] }),
+  createShowcaseImage({ name: '04', alignSelf: 'center', renderedWidth: 400, sourceWidth: 1180, sourceHeight: 782, candidateWidths: [400, 800, 1180] }),
+  createShowcaseImage({ name: '05', alignSelf: 'flex-end', renderedWidth: 480, sourceWidth: 1270, sourceHeight: 964, candidateWidths: [480, 960, 1270] }),
+  createShowcaseImage({ name: '06', alignSelf: 'flex-start', renderedWidth: 628, sourceWidth: 1882, sourceHeight: 1220, candidateWidths: [628, 1256, 1882] }),
+  createShowcaseImage({ name: '07', alignSelf: 'center', renderedWidth: 438, sourceWidth: 722, sourceHeight: 453, candidateWidths: [438, 722] }),
+  createShowcaseImage({ name: '08', alignSelf: 'flex-end', renderedWidth: 404, sourceWidth: 1212, sourceHeight: 1162, candidateWidths: [404, 808, 1212] }),
+  createShowcaseImage({ name: '09', alignSelf: 'flex-start', renderedWidth: 438, sourceWidth: 1440, sourceHeight: 1344, candidateWidths: [438, 876, 1440] }),
+];
 
 const DEFAULT_VELOCITY = 0.12;
 const DEAD_ZONE = 0.01;
@@ -46,14 +97,14 @@ onMounted(() => {
   const carousel = carouselTrackRef.value?.$el;
 
   if (carousel && carouselContainer) {
-    const images = carousel.querySelectorAll('img');
-    let firstCloneImage = null;
+    const carouselItems = Array.from(carousel.children);
+    let firstCloneItem = null;
 
     for (let setIndex = 0; setIndex < 2; setIndex++) {
-      images.forEach((img, index) => {
-        const clone = img.cloneNode(true);
+      carouselItems.forEach((item, index) => {
+        const clone = item.cloneNode(true);
         carousel.appendChild(clone);
-        if (setIndex === 0 && index === 0) firstCloneImage = clone;
+        if (setIndex === 0 && index === 0) firstCloneItem = clone;
       });
     }
 
@@ -90,7 +141,7 @@ onMounted(() => {
     };
 
     const measureCarouselPeriod = () => {
-      carouselPeriod = getCarouselPeriod(images[0], firstCloneImage);
+      carouselPeriod = getCarouselPeriod(carouselItems[0], firstCloneItem);
       maxScrollPosition = carouselContainer.scrollWidth - carouselContainer.clientWidth;
       carousel.style.setProperty('--showcase-carousel-autoplay-distance', `${-carouselPeriod}px`);
       carousel.style.setProperty(
@@ -323,6 +374,16 @@ onUnmounted(() => cleanupCarousel());
   block-size: 66vh;
   inline-size: max-content;
   user-select: none;
+}
+
+.showcase-carousel__item {
+  display: block;
+  flex: none;
+}
+
+.showcase-carousel__image {
+  block-size: auto;
+  inline-size: 100%;
 }
 
 .showcase-carousel__track--compositor-autoplay {
