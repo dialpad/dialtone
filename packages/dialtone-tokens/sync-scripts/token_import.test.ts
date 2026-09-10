@@ -701,6 +701,104 @@ describe('generatePostVariablesPayload', () => {
     expect(alias!.value).toEqual({ type: 'VARIABLE_ALIAS', id: 'VariableID:2:2' })
   })
 
+  it('aliases within the collection it is creating, not a namesake already in the file', () => {
+    // The initial sync into a file that already holds a hand-built collection
+    // using the same token names. There is nothing local to prefer, because the
+    // collection does not exist yet, so an earlier version fell straight
+    // through to the namesake and bound every semantic to the old primitives.
+    const localVariablesResponse: ApiGetLocalVariablesResponse = {
+      status: 200,
+      error: false,
+      meta: {
+        variableCollections: {
+          'VariableCollectionId:1:1': {
+            id: 'VariableCollectionId:1:1',
+            name: 'hand-built',
+            modes: [{ modeId: '1:0', name: 'mode1' }],
+            defaultModeId: '1:0',
+            remote: false,
+            hiddenFromPublishing: false,
+          },
+        },
+        variables: {
+          'VariableID:1:2': {
+            id: 'VariableID:1:2',
+            name: 'color/brand/radish',
+            key: 'old_key',
+            variableCollectionId: 'VariableCollectionId:1:1',
+            resolvedType: 'COLOR',
+            valuesByMode: { '1:0': { r: 0, g: 0, b: 0, a: 1 } },
+            remote: false,
+            description: '',
+            hiddenFromPublishing: false,
+            scopes: ['ALL_SCOPES'],
+            codeSyntax: {},
+          },
+        },
+      },
+    }
+
+    const tokensByFile: FlattenedTokensByFile = {
+      'primitives.mode1.json': {
+        'color/brand/radish': { $type: 'color', $value: '#ffbe16' },
+        'surface/brand': { $type: 'color', $value: '{color.brand.radish}' },
+      },
+    }
+
+    const result = generatePostVariablesPayload(tokensByFile, localVariablesResponse)
+    const alias = result.variableModeValues!.find(v => v.variableId === 'surface/brand')
+    // The temporary id, which the API resolves against the variable being
+    // created in the same payload.
+    expect(alias!.value).toEqual({ type: 'VARIABLE_ALIAS', id: 'color/brand/radish' })
+  })
+
+  it('still reaches a variable that only exists in another collection', () => {
+    // The fallback has to survive: a token set may legitimately alias something
+    // this payload does not create, and the name is all there is to find it by.
+    const localVariablesResponse: ApiGetLocalVariablesResponse = {
+      status: 200,
+      error: false,
+      meta: {
+        variableCollections: {
+          'VariableCollectionId:1:1': {
+            id: 'VariableCollectionId:1:1',
+            name: 'elsewhere',
+            modes: [{ modeId: '1:0', name: 'mode1' }],
+            defaultModeId: '1:0',
+            remote: false,
+            hiddenFromPublishing: false,
+          },
+        },
+        variables: {
+          'VariableID:1:2': {
+            id: 'VariableID:1:2',
+            name: 'color/brand/radish',
+            key: 'other_key',
+            variableCollectionId: 'VariableCollectionId:1:1',
+            resolvedType: 'COLOR',
+            valuesByMode: { '1:0': { r: 1, g: 0.75, b: 0.09, a: 1 } },
+            remote: false,
+            description: '',
+            hiddenFromPublishing: false,
+            scopes: ['ALL_SCOPES'],
+            codeSyntax: {},
+          },
+        },
+      },
+    }
+
+    const tokensByFile: FlattenedTokensByFile = {
+      // Aliases a name this payload never defines.
+      'primitives.mode1.json': {
+        'surface/brand': { $type: 'color', $value: '{color.brand.radish}' },
+      },
+    }
+
+    const result = generatePostVariablesPayload(tokensByFile, localVariablesResponse)
+    const alias = result.variableModeValues!.find(v => v.variableId === 'surface/brand')
+    expect(alias!.value).toEqual({ type: 'VARIABLE_ALIAS', id: 'VariableID:1:2' })
+  })
+
   it('ignores remote collections and variables', () => {
     const localVariablesResponse: ApiGetLocalVariablesResponse = {
       status: 200,

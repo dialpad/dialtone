@@ -269,11 +269,18 @@ async function main (): Promise<void> {
   console.log(`unresolved font : ${unresolvedFonts.length}`);
   for (const f of unresolvedFonts.slice(0, 5)) console.log(`  ${f.name} = ${f.value.slice(0, 60)}`);
 
+  // Fatal rather than reported. `convert()` omits the mode value it could not
+  // parse, so carrying on posts a payload that leaves an existing variable at
+  // its stale value, or creates one missing a mode — and exits 0 either way.
   if (unconvertible.length) {
-    console.log('\nunconvertible values:');
+    console.error('\nunconvertible values, nothing posted:');
     for (const u of unconvertible.slice(0, 10)) {
-      console.log(`  ${u.name} [${u.mode}] = ${u.value}`);
+      console.error(`  ${u.name} [${u.mode}] = ${u.value}`);
     }
+    if (unconvertible.length > 10) {
+      console.error(`  … and ${unconvertible.length - 10} more`);
+    }
+    process.exit(1);
   }
 
   const api = new FigmaApi(pat);
