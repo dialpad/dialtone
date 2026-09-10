@@ -34,15 +34,20 @@ Run it yourself after the change is in:
 ```bash
 cd packages/dialtone-tokens
 pnpm sync:variables
+
+# Only if the change touched tokens/base/material/*
+pnpm sync:materials
 ```
 
-The sync resolves the token sets itself, so it does not need `dialtone-tokens:build` first. The checks do: `sync:variables:check` compares the resolved values against the built CSS, so build before you run it. It needs no Figma access, which makes it the quickest way to tell a resolution problem apart from a Figma one.
+The sync resolves the token sets itself, so it does not need `dialtone-tokens:build` first. The checks do: `sync:variables:check` compares the resolved values against the built CSS, and `sync:materials:check` does the same per material, so build before you run either. Neither needs Figma access, which makes them the quickest way to tell a resolution problem apart from a Figma one.
+
+`sync:materials` writes the five material collections, which extend the main one. It reads the main collection to find the variables it overrides, so run it after `sync:variables`, never before.
 
 ### Getting it into Figma, once CI is set up
 
 The push trigger takes over. Open the pull request, and if you want to see the change in Figma before it merges, comment `/sync-tokens` on it: that syncs to a separate preview file. Merging to `next` syncs the main file.
 
-At that point the local command becomes a debugging tool rather than the normal path. `sync:variables:check` stays useful for the same reason as before.
+At that point the local commands become debugging tools rather than the normal path. The checks stay useful for the same reason as before.
 
 ### What stays manual either way
 
@@ -71,7 +76,9 @@ Everything lives in `packages/dialtone-tokens/sync-scripts/`.
 | `resolve_tokens.ts` | Runs Style Dictionary over the token sets to produce a per-mode list of variables. Uses the same set composition and transforms as the CSS build, so a value cannot drift from what Dialtone ships |
 | `variable_policy.ts` | Two tables: which tokens are excluded, and which Figma pickers each variable appears in |
 | `build_variables.ts` | Converts the resolved tokens into a Figma payload, diffs it against the file, and posts the difference |
+| `build_materials.ts` | Writes the five material palettes as collections extending the main one |
 | `check_against_css.ts` | Compares every resolved value against the built CSS. Needs no Figma access |
+| `check_materials.ts` | Same per material, including what a frame pinned to one actually sees |
 | `figma_api.ts` | The REST client. Two calls: read local variables, write variables |
 
 ## Flags
