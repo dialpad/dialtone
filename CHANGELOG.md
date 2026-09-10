@@ -1,3 +1,15 @@
+# [10.0.0-next.22](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.21...dialtone/v10.0.0-next.22) (2026-09-10)
+
+
+### Bug Fixes
+
+* **Combobox Multi Select:** NO-JIRA recover input height once it actually becomes visible ([#1414](https://github.com/dialpad/dialtone/issues/1414)) ([9af80e2](https://github.com/dialpad/dialtone/commit/9af80e2918ca9019cd10cc761edae568bfa75d74))
+
+
+### Documentation
+
+* DLT-3603 improve homepage hero and carousel performance ([#1413](https://github.com/dialpad/dialtone/issues/1413)) ([8484817](https://github.com/dialpad/dialtone/commit/8484817eb3b756ae32c0d875088cbc9909c5cad8))
+
 # [10.0.0-next.21](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.20...dialtone/v10.0.0-next.21) (2026-09-09)
 
 
