@@ -2136,6 +2136,14 @@
         "delta",
         "shape"
       ],
+      "variables": [
+        "variable",
+        "brackets",
+        "code",
+        "parameter",
+        "data",
+        "curly braces"
+      ],
       "very-dissatisfied-filled": [
         "sad",
         "frown",
