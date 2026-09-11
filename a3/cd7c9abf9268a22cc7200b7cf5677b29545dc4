@@ -1,0 +1,38 @@
+packages/combinator/src/components/combinator.vue
+  s_037f149b31cf7b::t_b2e096af708e69 605-606,612
+  s_037f149b31cf7b::t_f02e0cc43d3c44 170,234-237,243,246,251-260,528-533,540-544
+  s_037f149b31cf7b::t_b2e152d8c3b91b 2-8,10-20,22-88,90-91,93-95,97-98,103-108,110-117,120-121,123-159,161,238-240
+  h_c15b5755534093 610
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ComponentCombinator.vue
+  s_037f149b31cf7b::t_faba8b5594e7f1 34
+  s_037f149b31cf7b::t_e868aebaed6bc3 8-9,32-33
+  s_037f149b31cf7b::t_3663d68f5f8645 43
+packages/combinator/src/components/combinator.test.js
+  s_037f149b31cf7b::t_f662fa60d5bb24 18-30,40,63,99,136,175
+  s_037f149b31cf7b::t_61412b0eb3e52f 168-174,176-199
+apps/dialtone-documentation/docs/.vuepress/theme/components/Page.vue
+  s_037f149b31cf7b::t_609b28e045d1ef 86-87,186,204,232-233
+apps/dialtone-documentation/docs/.vuepress/baseComponents/MigrationBanner.vue
+  h_c15b5755534093 12,15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "a3cd7c9abf9268a22cc7200b7cf5677b29545dc4",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_037f149b31cf7b": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019eb75a-1703-7701-b0b6-29b6cf4d3b9e",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

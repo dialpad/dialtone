@@ -1,0 +1,24 @@
+packages/dialtone-vue/components/Popover/Popover.test.js
+  s_1b0723d23d701b::t_aabded9bc1b344 43
+  s_1b0723d23d701b::t_f0392a500b598c 311-366
+  s_1b0723d23d701b::t_b95310f1d2ef0e 3-4
+packages/dialtone-vue/components/Popover/Popover.vue
+  s_1b0723d23d701b::t_5d10ff6a556e53 50
+  s_1b0723d23d701b::t_e2fe6457a001b8 1016
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "f5fc904d3fdb2712d2ff04ee35a811d5197d71a4",
+  "prompts": {},
+  "sessions": {
+    "s_1b0723d23d701b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9a319ef4-2b39-4342-8916-af92ca8f529a",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    }
+  }
+}

@@ -1,0 +1,30 @@
+packages/dialtone-css/lib/build/less/components/chip.less
+  h_c15b5755534093 34,36,43-44,59,63,68,71-78,87,94,141,164,168-173,185,187-188,191-192,196,212,215-216,245
+  s_cad58711a60fb4::t_eac119b97dff9c 9-12,15-19,27-32,37-42,51-58,60-62,64-67,79-83,85-86,92-93,97-99,106,116-117,147-149,157-159,177,181,201-206,208-211,213-214,218-224,226-229,242,267-269,278-280,296-300
+  s_cad58711a60fb4::t_971f6f10771bcc 176
+packages/dialtone-vue/components/Chip/Chip.vue
+  h_c15b5755534093 25
+apps/dialtone-documentation/docs/_data/chip.json
+  h_c15b5755534093 24-27
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "ef1ed544983c556d74a409e2fbabe00eed8683a9",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_cad58711a60fb4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5f249bec-6234-4933-a26d-5736a26495c0",
+        "model": "claude-fable-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

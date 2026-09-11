@@ -1,0 +1,34 @@
+packages/combinator/src/components/renderer/renderer_spec_sheet.vue
+  s_c3b12373d86df3::t_923dc8eab4f830 4
+  s_c3b12373d86df3::t_80d084a3648d35 107-109
+  s_c3b12373d86df3::t_1ad9c941232041 52
+packages/combinator/src/components/combinator.vue
+  s_c3b12373d86df3::t_1acfdc401c598c 2-5
+  s_c3b12373d86df3::t_7dddb3a0ca466e 117-120
+  s_c3b12373d86df3::t_02e5b1fc7e924d 521-524,527-528
+  s_c3b12373d86df3::t_e6213f114a6d23 294
+  s_c3b12373d86df3::t_56fe60ec0aee25 425-429
+  s_c3b12373d86df3::t_e2d2a72daad27a 221
+packages/combinator/src/lib/use_theme_island.js
+  s_c3b12373d86df3::t_d3b1a34f339ed3 1,6-10,12-13,15,17-18,20,24-32,34-39,41-47,52-58
+packages/combinator/src/components/renderer/renderer.vue
+  s_c3b12373d86df3::t_b347fb913007db 96-100,102
+  s_c3b12373d86df3::t_800ea2e05f9bd2 4
+  s_c3b12373d86df3::t_ede4fe073a733d 29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "a4876edae24bed73874b6cc25ee19b9e2ac8c6cd",
+  "prompts": {},
+  "sessions": {
+    "s_c3b12373d86df3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f1ddcc08-3576-4872-b773-84c8083715f1",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

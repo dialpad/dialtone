@@ -1,0 +1,39 @@
+packages/dialtone-vue/components/rich_text_editor/extensions/custom_link/utils.js
+  s_216be71a74802d::t_51a5dfd306f76a 198-201
+  s_216be71a74802d::t_bd1ceb0e2aa7c7 139-140,142
+  s_216be71a74802d::t_bd65f8812b9029 196-197,205-215
+packages/dialtone-vue/components/rich_text_editor/extensions/custom_link/autolink.js
+  s_216be71a74802d::t_8ea546fd172389 25,49,69,80,104
+  s_216be71a74802d::t_e0905e7c77d682 74-79,81-83
+  s_216be71a74802d::t_c90004cf12f7e8 45-48,50-51,65-68,70-71
+  s_216be71a74802d::t_433e7e3306bee5 23-24
+packages/dialtone-vue/components/rich_text_editor/rich_text_editor.vue
+  s_216be71a74802d::t_8ccfe55623985c 1119-1121
+  s_216be71a74802d::t_c49aaa7810fa6d 252-254,256-257
+  s_216be71a74802d::t_8900e12d59ab16 1117-1118,1122-1124,1126-1129,1133-1134,1136-1142,1145-1150,1152,1157-1163
+  s_216be71a74802d::t_a66010b6b8bd67 738-741
+  s_216be71a74802d::t_5e698fa18a0865 1151
+  s_216be71a74802d::t_8415f6948fc731 1125
+  s_216be71a74802d::t_be02ccd9bab85e 1153-1156
+  s_216be71a74802d::t_7c2f9a82f55066 959-968
+  s_216be71a74802d::t_b87da9792288f4 1135,1143
+  s_216be71a74802d::t_fa313a842ec5a2 1144
+  s_216be71a74802d::t_58c21b8581bf18 746-749
+  s_216be71a74802d::t_fedf0dae12b4e2 1164
+  s_216be71a74802d::t_0d451d512303ad 98
+  s_216be71a74802d::t_fef1270ffd90ef 247-251,255
+  s_216be71a74802d::t_d96b1d40f38c7d 1130-1132
+packages/dialtone-vue/components/rich_text_editor/extensions/custom_link/custom_link.js
+  s_216be71a74802d::t_f1eb79ce960756 30-34,37,39-41
+  s_216be71a74802d::t_985a1b7a8847e0 84
+  s_216be71a74802d::t_7612d6d3150b0f 87
+  s_216be71a74802d::t_2bbe9b67053596 35-36,38
+packages/dialtone-vue/components/rich_text_editor/extensions/custom_link/custom_link.test.js
+  s_216be71a74802d::t_e18078b796b79f 353-365
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "3e200f6982f5f554a979290b4a3d742575a5ca76",
+  "prompts": {}
+}

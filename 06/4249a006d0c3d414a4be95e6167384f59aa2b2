@@ -1,0 +1,27 @@
+generator-dialtone/generators/vue3/templates/stories.ejs
+  s_f1e475b2b85669::t_723a8de868ff4e 74
+.github/workflows/deploy.yml
+  s_f1e475b2b85669::t_0e024c7a2445e4 89
+generator-dialtone/generators/vue3/index.js
+  s_f1e475b2b85669::t_40673697b1df38 45,48
+  s_f1e475b2b85669::t_7d4afcc1665f62 8
+  s_f1e475b2b85669::t_24f14f80dfd7c0 1
+generator-dialtone/generators/vue2/templates/stories.ejs
+  s_f1e475b2b85669::t_5275dabb892e79 75
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "064249a006d0c3d414a4be95e6167384f59aa2b2",
+  "prompts": {},
+  "sessions": {
+    "s_f1e475b2b85669": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "98b44e92-f9e2-44b0-a503-6f36763110f8",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,117 @@
+apps/dialtone-documentation/docs/.vuepress/theme/components/SidebarItem.vue
+  s_a879b146818e9c::t_673f603f566238 8,47,123,165-172
+apps/dialtone-documentation/docs/.vuepress/theme/components/Sidebar.vue
+  s_a879b146818e9c::t_42c9542d70e7c9 99-103
+  s_a879b146818e9c::t_2f5e3e1950ebac 3,93,96-98,104,191,193,202,207
+  s_a879b146818e9c::t_673f603f566238 29
+apps/dialtone-documentation/docs/.vuepress/theme/components/SidebarGroup.vue
+  s_a879b146818e9c::t_673f603f566238 20,61
+apps/dialtone-documentation/docs/.vuepress/baseComponents/GradientHero.vue
+  s_c53fc7e8528985::t_bc2cd862a220ae 15-21,36,42,57-62
+  s_c53fc7e8528985::t_453bde765669b2 14
+  s_c53fc7e8528985::t_4ec33eeaf36482 63
+apps/dialtone-documentation/docs/.vuepress/baseComponents/showcaseCarouselMotion.js
+  s_c53fc7e8528985::t_4066d542352bac 31-38
+  s_c53fc7e8528985::t_813f679baf3079 10-11,30
+  s_c53fc7e8528985::t_b6370f5029be46 13,20
+  s_c53fc7e8528985::t_c85dce720a025d 12,15-19
+  s_c53fc7e8528985::t_b86fa30dddb700 1-2
+  s_c53fc7e8528985::t_e41ffd8d8eace4 21-22
+  s_c53fc7e8528985::t_307e61fe51b2ee 3-6,23-29
+  s_c53fc7e8528985::t_45f8350ac350c0 8-9
+  s_7d5235cebc230d::t_598c90cdd3bc45 7
+  s_c53fc7e8528985::t_7f15ca56b80bc7 14
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ShowcaseCarousel.vue
+  s_c53fc7e8528985::t_53f28484f398d3 181-183,189-195,204,207,221-223,235,237,244,255,264-266,268,270-273,275,279,281,286-288,290-292,294-295,305-307,311,313,318-321,323-325
+  s_c53fc7e8528985::t_83ec97b27b57be 118,137,147,198-200,293
+  s_c53fc7e8528985::t_f6c4d8c1672aba 41,81,85-86
+  s_c53fc7e8528985::t_9513901cc87348 114,196-197
+  s_c53fc7e8528985::t_55f26a40fd7fe3 121-122,125,128,131
+  s_c53fc7e8528985::t_58fb9bbf685ce3 126,269,278,282-283,285,289,296,309,314,341-343,365-367
+  s_c53fc7e8528985::t_e098e719bdd774 36-39,42-43,82-84,87,90,94,112,116-117,120,129,133,135-136,138-141,145,159,169,172-174,184,187-188,201,203,232-233,240-242,245-253,258-262,276-277,316-317,336-340,352,355-357,359,362-364,368,372,375-376,381-382,385-388,390-394,399,439-440
+  s_c53fc7e8528985::t_c9befc4d8e87ea 88,115,280,299,301-303,308
+  s_c53fc7e8528985::t_0d6b1abbd1997c 171,179,267
+  s_c53fc7e8528985::t_a4c86d53f332f4 344-345,348-351,353-354,358,361,369
+  s_c53fc7e8528985::t_c85dce720a025d 40,134,220
+  s_c53fc7e8528985::t_bef431d3ff3561 154-158,176-178,214-218,329-334,413-424,431-438
+  s_c53fc7e8528985::t_c0270ed028cd95 389
+  s_7d5235cebc230d::t_199b2d3d35ecd0 284,297-298,300,310,315
+  s_7d5235cebc230d::t_18dc61af421997 163-168
+  s_7d5235cebc230d::t_25a7948b6f029f 169-170
+  s_7d5235cebc230d::t_5f34660ec7e162 103-104,107,109,124,127,130
+  s_7d5235cebc230d::t_143f8986972bb4 360,371
+  s_7d5235cebc230d::t_10ccfff5f5c084 236,243
+  s_7d5235cebc230d::t_26d14a6b0dfc09 89
+  s_7d5235cebc230d::t_c3dc8fd5c04d53 347
+  s_c53fc7e8528985::t_ef3c9042cf3096 5-27,44,69,80,101-102,105-106,108,146,403-411
+  s_c53fc7e8528985::t_9338f54c361f3d 45-53,55-62,64-68,70-79
+  s_c53fc7e8528985::t_1d6a042d6ddb89 412
+  s_c53fc7e8528985::t_352a2cc06d113a 34,54,63
+  s_c53fc7e8528985::t_7f15ca56b80bc7 113,148-153,160,208-213,224-231,346,370,425-428
+  s_c53fc7e8528985::t_7e2e39c4b397b2 429-430
+apps/dialtone-documentation/docs/.vuepress/baseComponents/HalftoneSurface.vue
+  s_c53fc7e8528985::t_5643c7bc58460f 215,280,289-294
+  s_c53fc7e8528985::t_b74350f718612b 51,64-65,74,82,139-154,226,250-251,255-256
+  s_c53fc7e8528985::t_5a0bd3cf8d52fa 63,155-168,227-229,252-254
+  s_c53fc7e8528985::t_88f66e81512623 257
+  s_c53fc7e8528985::t_e99d4c097ebdd5 278-279
+  s_c53fc7e8528985::t_356d4f4dae8953 281-283,286-288
+  s_c53fc7e8528985::t_c81d62577eaa39 295
+  s_ad2f275ec3cca4::t_0b3ff06566a0cc 128
+  s_ad2f275ec3cca4::t_97447e58a8d1b7 129
+  s_ad2f275ec3cca4::t_1f943c5bcc2dcb 176,217
+  s_ad2f275ec3cca4::t_1ed7368b1f009a 21,47,191-192
+  s_ad2f275ec3cca4::t_7a64cbe7db361f 44,69,75-81,118
+apps/dialtone-documentation/docs/.vuepress/baseComponents/GradientHeroContent.vue
+  s_7d5235cebc230d::t_e9fcc6ddddb59b 88
+  s_7d5235cebc230d::t_cc1476c461ecfd 89
+apps/dialtone-documentation/docs/.vuepress/baseComponents/gradientHeroShader.js
+  s_ad2f275ec3cca4::t_8a18336d7a7ef2 2,6-7
+apps/dialtone-documentation/docs/.vuepress/theme/layouts/Home.vue
+  s_ad2f275ec3cca4::t_8c6f84cb7771c3 81,91,98,145-149
+  s_ad2f275ec3cca4::t_7a64cbe7db361f 100
+  s_ad2f275ec3cca4::t_6fd21a509a8010 15-16,26-27,31,102-103,106-107
+  s_ad2f275ec3cca4::t_119de50e012000 101,104-105,108
+  s_ad2f275ec3cca4::t_f4800058000929 99
+  s_ad2f275ec3cca4::t_994ce4282a7086 150-151
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "15da45a6b8237c4067323cc20498402a1f87712c",
+  "prompts": {},
+  "sessions": {
+    "s_7d5235cebc230d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "715021af-5bad-4eb4-8db2-71628c97799d",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_a879b146818e9c": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a05d62-b558-7ae1-9816-f1104d55ed77",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_ad2f275ec3cca4": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a08d38-9c0f-7a61-ba9c-4e6215af68d4",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_c53fc7e8528985": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a05e6f-6ef5-7743-adce-1046368a8659",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

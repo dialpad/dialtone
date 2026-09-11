@@ -1,0 +1,40 @@
+packages/eslint-plugin-dialtone/docs/rules/deprecated-headline-sizes.md
+  s_5c2995026e6cb7::t_53b7eb59ffcecd 49-50
+  s_5c2995026e6cb7::t_ed1f708bed8146 1-48
+packages/eslint-plugin-dialtone/lib/rules/deprecated-tshirt-sizes.js
+  s_5c2995026e6cb7::t_a3c6e260a9e663 3,24,29-30,42,44-45,52-53,57-58,60-65,67-70,72-74,83-93,96-97,100-102,147,155,157-158,160-161,163,166-167,169-170,181-185,187-189,191-198,252-253,255-262
+  s_5c2995026e6cb7::t_53b7eb59ffcecd 6,13-19,25-28,32,35,41,43,46,48,50-51,54,56,59,66,71,75-82,94-95,98-99,111,113-114,116,118,121-130,134,137,143,153,159,164,172-178,186,190,201,207,225,227-231,236,238,240-242,251,254,265
+  s_5c2995026e6cb7::t_670e7631a28adc 55,103-106,154,156,162,165,168,171,179-180
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-tshirt-sizes.js
+  s_5c2995026e6cb7::t_4d9430dd78bc80 35-40,76,79,81-85,87-91,112,114-115,118,121,123-127,129-133,158-161
+  s_5c2995026e6cb7::t_447cafad018cc1 12-13,20-23
+  s_5c2995026e6cb7::t_53b7eb59ffcecd 5,11,26,74,80,86,92,98,104,110,116,122,128,134,140,146,152,157,162,168-169,175
+packages/eslint-plugin-dialtone/docs/rules/deprecated-tshirt-sizes.md
+  s_5c2995026e6cb7::t_ed1f708bed8146 3,7-9,13-15,35,44
+  s_5c2995026e6cb7::t_53b7eb59ffcecd 52-59
+packages/eslint-plugin-dialtone/lib/rules/deprecated-headline-sizes.js
+  s_5c2995026e6cb7::t_747fe51d3454dd 109,127
+  s_5c2995026e6cb7::t_53b7eb59ffcecd 5,12-13,16,18,20-21,24,26,29,36,41,45-49,52,66,68,70,72,75-80,89,95,97-100,104,111-126,134,140-143,151,160
+  s_5c2995026e6cb7::t_0a7122b776be2f 17,19,22-23,27-28,30-35,37-40,42-44,50-51,53-63,92-94,96,101-103,105-108,128-131
+  s_5c2995026e6cb7::t_670e7631a28adc 25,110
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-headline-sizes.js
+  s_5c2995026e6cb7::t_447cafad018cc1 12-13,20-23
+  s_5c2995026e6cb7::t_50a0782e4134bb 28,30,33,35,37,56,59,62,64-65,67-71,73-77,79-83,85-89
+  s_5c2995026e6cb7::t_53b7eb59ffcecd 60,66,72,78,84,90,96,102,107-109
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "8f375d1fcd214b552f2b1bbe228f48938bd98287",
+  "prompts": {},
+  "sessions": {
+    "s_5c2995026e6cb7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019eef70-8249-79a3-8adc-6396d473def8",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}
