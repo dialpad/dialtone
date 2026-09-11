@@ -69,7 +69,8 @@ import Paragraph from '@tiptap/extension-paragraph';
 import Bold from '@tiptap/extension-bold';
 import { BulletList, OrderedList, ListItem } from '@tiptap/extension-list';
 import Italic from '@tiptap/extension-italic';
-import TipTapLink from '@tiptap/extension-link';
+import TipTapLink, { isAllowedUri } from '@tiptap/extension-link';
+import { autolinkFix } from './Extensions/Link/Autolink';
 import Strike from '@tiptap/extension-strike';
 import Underline from '@tiptap/extension-underline';
 import Text from '@tiptap/extension-text';
@@ -735,19 +736,46 @@ export default {
               },
             };
           },
+          // The built-in extension's autolink is always disabled (see `autolink:
+          // false` below) in favor of the fixed plugin pushed here. Upstream's
+          // isValidLinkStructure() silently drops the whole match when a typed
+          // URL is followed by a single unmatched bracket (e.g. "(see
+          // https://example.com)") — DLT-3610. A pnpm patch on
+          // @tiptap/extension-link doesn't reach consumers of the published
+          // dialtone-vue package since Vite externalizes @tiptap/* deps, so the
+          // fix ships as Dialtone source in ./Extensions/Link/Autolink.js
+          // instead. Drop this override once upstream fixes it and the
+          // dependency bumps.
+          addProseMirrorPlugins () {
+            const plugins = this.parent?.() ?? [];
+
+            // Disable autolink when customLink is active — customLink handles
+            // URL/IP autolinking and the two autolink plugins can conflict on
+            // the same text.
+            if (self.customLink) {
+              return plugins;
+            }
+
+            return [
+              ...plugins,
+              autolinkFix({
+                type: this.type,
+                defaultProtocol: this.options.defaultProtocol,
+                validate: url => this.options.isAllowedUri(url, {
+                  defaultValidate: href => !!isAllowedUri(href, this.options.protocols),
+                  protocols: this.options.protocols,
+                  defaultProtocol: this.options.defaultProtocol,
+                }),
+                shouldAutoLink: this.options.shouldAutoLink,
+              }),
+            ];
+          },
         }).configure({
           HTMLAttributes: {
             class: 'd-link d-wb-break-all',
           },
           openOnClick: false,
-          // Disable autolink when customLink is active — customLink handles URL/IP
-          // autolinking and the two autolink plugins can conflict on the same text.
-          //
-          // autolink relies on @tiptap/extension-link's isValidLinkStructure(), which
-          // silently drops the whole match when a typed URL is followed by a single
-          // unmatched bracket (e.g. "(see https://example.com)") — see patches/@tiptap__extension-link@3.19.0.patch,
-          // which loosens that check. Remove the patch once upstream fixes this.
-          autolink: !this.customLink,
+          autolink: false,
           protocols: RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
         }));
       }
