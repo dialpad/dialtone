@@ -56,7 +56,7 @@ After creating or updating tokens:
 ## Important Notes
 
 - Tokens are the single source of truth for all design values across platforms (Web, iOS, Android)
-- If tokens are edited manually (not via Figma sync), `sync:tokens-to-figma` may be needed to push changes back to Figma
+- After editing tokens, `pnpm sync:variables` (in `packages/dialtone-tokens`) pushes them to the Figma variables collection. Code is the source of truth; the Figma-to-code direction is not authoritative
 - The `$metadata.json` file defines the build order for 137 token sets — do not modify this without understanding the dependency chain
 - Component tokens should reference semantic tokens, not base palette tokens directly, to ensure theme compatibility
 - Base color token values use OKLCH format (`oklch(L C H)`), not hex or HSL. HSL channel decomposition (`-h`, `-s`, `-l` suffix variables) was removed — tokens output only the base variable now.
