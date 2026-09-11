@@ -1612,6 +1612,14 @@
         "url",
         "unchain",
         "unchain"
+      ],
+      "variables": [
+        "brackets",
+        "code",
+        "parameter",
+        "data",
+        "curly",
+        "braces"
       ]
     },
     "general": {
@@ -2135,14 +2143,6 @@
       "triangle": [
         "delta",
         "shape"
-      ],
-      "variable": [
-        "brackets",
-        "code",
-        "parameter",
-        "data",
-        "curly",
-        "braces"
       ],
       "very-dissatisfied-filled": [
         "sad",
