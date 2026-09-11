@@ -67,9 +67,10 @@ export const Emoji = Node.create({
 
   renderText ({ node }) {
     // output emoji in text as unicode character rather than shortname for backwards compatibility with
-    // our backend.
-    const unicodeEmoji = stringToUnicode(codeToEmojiData(node.attrs.code).unicode_output);
-    return unicodeEmoji;
+    // our backend. Fall back to the original code when it isn't recognized, matching
+    // the emoji mapping in MarkdownRenderer.js.
+    const emojiData = codeToEmojiData(node.attrs.code);
+    return emojiData ? stringToUnicode(emojiData.unicode_output) : node.attrs.code;
   },
 
   renderHTML ({ HTMLAttributes }) {
