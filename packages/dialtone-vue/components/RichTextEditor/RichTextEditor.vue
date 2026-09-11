@@ -742,6 +742,11 @@ export default {
           openOnClick: false,
           // Disable autolink when customLink is active — customLink handles URL/IP
           // autolinking and the two autolink plugins can conflict on the same text.
+          //
+          // autolink relies on @tiptap/extension-link's isValidLinkStructure(), which
+          // silently drops the whole match when a typed URL is followed by a single
+          // unmatched bracket (e.g. "(see https://example.com)") — see patches/@tiptap__extension-link@3.19.0.patch,
+          // which loosens that check. Remove the patch once upstream fixes this.
           autolink: !this.customLink,
           protocols: RICH_TEXT_EDITOR_SUPPORTED_LINK_PROTOCOLS,
         }));

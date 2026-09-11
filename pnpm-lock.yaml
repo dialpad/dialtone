@@ -20,6 +20,7 @@ overrides:
   trim-newlines: '>=3.0.1'
 
 patchedDependencies:
+  '@tiptap/extension-link@3.19.0': d57b9ef4bfbe83d21501cafb5103a4bd2c1f4f07fcffb2c15c0f3a22d5579223
   '@tiptap/vue-3@3.19.0': 65d98f737afae097542c692b176a81069e1b7b8d577d1d7e222a94436e128ea9
 
 importers:
@@ -85,7 +86,7 @@ importers:
         version: 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))
       '@tiptap/extension-link':
         specifier: 3.19.0
-        version: 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0)
+        version: 3.19.0(patch_hash=d57b9ef4bfbe83d21501cafb5103a4bd2c1f4f07fcffb2c15c0f3a22d5579223)(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0)
       '@tiptap/extension-list':
         specifier: '3.19'
         version: 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0)
@@ -840,7 +841,7 @@ importers:
         version: 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))
       '@tiptap/extension-link':
         specifier: 3.19.0
-        version: 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0)
+        version: 3.19.0(patch_hash=d57b9ef4bfbe83d21501cafb5103a4bd2c1f4f07fcffb2c15c0f3a22d5579223)(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0)
       '@tiptap/extension-list':
         specifier: '3.19'
         version: 3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0)
@@ -18652,7 +18653,7 @@ snapshots:
     dependencies:
       '@tiptap/core': 3.19.0(@tiptap/pm@3.19.0)
 
-  '@tiptap/extension-link@3.19.0(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0)':
+  '@tiptap/extension-link@3.19.0(patch_hash=d57b9ef4bfbe83d21501cafb5103a4bd2c1f4f07fcffb2c15c0f3a22d5579223)(@tiptap/core@3.19.0(@tiptap/pm@3.19.0))(@tiptap/pm@3.19.0)':
     dependencies:
       '@tiptap/core': 3.19.0(@tiptap/pm@3.19.0)
       '@tiptap/pm': 3.19.0

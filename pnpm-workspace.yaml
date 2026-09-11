@@ -36,6 +36,7 @@ overrides:
   trim-newlines: '>=3.0.1'
 
 patchedDependencies:
+  '@tiptap/extension-link@3.19.0': patches/@tiptap__extension-link@3.19.0.patch
   '@tiptap/vue-3@3.19.0': patches/@tiptap__vue-3@3.19.0.patch
 
 minimumReleaseAge: 10080
