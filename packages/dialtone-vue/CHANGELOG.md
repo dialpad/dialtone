@@ -1,3 +1,10 @@
+# [3.225.0-next.10](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0-next.9...dialtone-vue/v3.225.0-next.10) (2026-09-11)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-3609 normalize emoji to unicode in markdown output ([#1418](https://github.com/dialpad/dialtone/issues/1418)) ([ae2b1dd](https://github.com/dialpad/dialtone/commit/ae2b1dd00e0d8b0bdb87a5060e00f63c17c6d56d))
+
 # [3.225.0-next.9](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0-next.8...dialtone-vue/v3.225.0-next.9) (2026-09-10)
 
 
