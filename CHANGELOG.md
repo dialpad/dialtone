@@ -1,3 +1,15 @@
+# [10.0.0-next.23](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.22...dialtone/v10.0.0-next.23) (2026-09-11)
+
+
+### Bug Fixes
+
+* **Rich Text Editor:** DLT-3609 normalize emoji to unicode in markdown output ([#1418](https://github.com/dialpad/dialtone/issues/1418)) ([ae2b1dd](https://github.com/dialpad/dialtone/commit/ae2b1dd00e0d8b0bdb87a5060e00f63c17c6d56d))
+
+
+### Documentation
+
+* DLT-3608 streamline halftone performance and remove cursor logic ([#1415](https://github.com/dialpad/dialtone/issues/1415)) ([15da45a](https://github.com/dialpad/dialtone/commit/15da45a6b8237c4067323cc20498402a1f87712c))
+
 # [10.0.0-next.22](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.21...dialtone/v10.0.0-next.22) (2026-09-10)
 
 
