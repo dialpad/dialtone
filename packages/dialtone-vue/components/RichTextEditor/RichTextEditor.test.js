@@ -480,6 +480,33 @@ describe('DtRichTextEditor tests', () => {
             const output = await getMarkdownOutput(jsonInput);
             expect(output).toBe('Check out <!-- @channel: {"id": "general", "channelKey": "channel-456", "name": "general", "locked": "false"} --> channel');
           });
+
+          it.each([
+            [':cat:'],
+            ['🐱'],
+          ])('should convert emoji code "%s" to a unicode character', async (code) => {
+            const jsonInput = jsonInputBase([
+              { type: 'text', text: 'Hello ' },
+              {
+                type: 'emoji',
+                attrs: { code },
+              },
+            ]);
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('Hello 🐱');
+          });
+
+          it('should preserve the original code for an unrecognized emoji shortcode', async () => {
+            const jsonInput = jsonInputBase([
+              { type: 'text', text: 'Hello ' },
+              {
+                type: 'emoji',
+                attrs: { code: ':unknown:' },
+              },
+            ]);
+            const output = await getMarkdownOutput(jsonInput);
+            expect(output).toBe('Hello :unknown:');
+          });
         });
       });
     });
