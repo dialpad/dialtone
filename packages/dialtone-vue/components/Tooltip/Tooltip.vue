@@ -349,6 +349,11 @@ export default {
 
     tippyProps: 'setProps',
 
+    // tippyProps only tracks the offset/fallbackPlacements array references, so in-place
+    // mutations (e.g. offset[1] = 8) need their own deep watchers to trigger setProps.
+    offset: { handler: 'setProps', deep: true },
+    fallbackPlacements: { handler: 'setProps', deep: true },
+
     open: {
       handler: function (open) {
         if (open !== null && this.enabled) {
