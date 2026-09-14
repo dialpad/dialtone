@@ -1,0 +1,28 @@
+packages/combinator/src/components/option_bar/option_bar_control.vue
+  h_c15b5755534093 70
+packages/combinator/src/components/option_bar/option_bar_member_group.vue
+  h_c15b5755534093 6,9-10,37
+packages/combinator/src/components/controls/control_slot.vue
+  h_c15b5755534093 32
+packages/combinator/src/components/controls/control_selection.vue
+  h_c15b5755534093 20
+packages/combinator/src/components/controls/control_clearable_shell.vue
+  h_c15b5755534093 13
+packages/combinator/src/components/controls/control_string.vue
+  h_c15b5755534093 31
+packages/combinator/src/components/controls/control_segmented.vue
+  h_c15b5755534093 20
+packages/combinator/src/components/controls/control_number.vue
+  h_c15b5755534093 31
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.9",
+  "base_commit_sha": "24019c09e8404d5312232fd41771e4214a775090",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,33 @@
+apps/dialtone-documentation/scripts/thumbs/cache.mjs
+  s_6071117341a43e::t_a6e474302bb668 17,55,63,65
+  s_6071117341a43e::t_136550d049085a 56-58
+apps/dialtone-documentation/scripts/thumbs/cache.test.mjs
+  s_6071117341a43e::t_4fb9c18c5dd6b9 45-52
+  s_6071117341a43e::t_12cdeeb3323e5c 2,41-43
+  s_6071117341a43e::t_1c48d42b89d27a 44
+.agents/skills/merge-next/SKILL.md
+  s_6071117341a43e::t_a6e474302bb668 76-77
+.agents/skills/merge-next/evals/run-merge-next-evals.mjs
+  s_6071117341a43e::t_12cdeeb3323e5c 50
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "28d1107b76f93b61a1dc63c419d730368cdd6a75",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_6071117341a43e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f4d8b-397b-7102-a4c6-dc4cb5f84ffd",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

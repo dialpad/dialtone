@@ -1,0 +1,53 @@
+apps/dialtone-documentation/docs/guides/cli/index.md
+  s_fb74aa28f644ee::t_5f95b57cec7677 4
+apps/dialtone-documentation/docs/.vuepress/baseComponents/HalftoneSurface.vue
+  s_fb74aa28f644ee::t_5f95b57cec7677 228,247
+apps/dialtone-documentation/docs/foundations/graphic-system/index.md
+  s_fb74aa28f644ee::t_5f95b57cec7677 4
+apps/dialtone-documentation/docs/.vuepress/theme/components/Page.vue
+  s_fb74aa28f644ee::t_5f95b57cec7677 33,257-258,260
+apps/dialtone-documentation/docs/foundations/brand/index.md
+  s_fb74aa28f644ee::t_5f95b57cec7677 4
+apps/dialtone-documentation/docs/.vuepress/baseComponents/gradientHeroColors.js
+  s_fb74aa28f644ee::t_5f95b57cec7677 178-188
+apps/dialtone-documentation/docs/.vuepress/theme/utils/sidebarShortcuts.test.mjs
+  s_fb74aa28f644ee::t_5f95b57cec7677 37,41
+apps/dialtone-documentation/docs/dialtone/release-notes/index.md
+  s_fb74aa28f644ee::t_5f95b57cec7677 4
+.claude/settings.json
+  s_fb74aa28f644ee::t_d8bb0fc2c6facf 3
+  s_fb74aa28f644ee::t_5f95b57cec7677 12,16,25,36,41
+apps/dialtone-documentation/docs/.vuepress/theme/components/PageToc.vue
+  s_fb74aa28f644ee::t_5f95b57cec7677 8,31
+apps/dialtone-documentation/docs/foundations/gradient/index.md
+  s_fb74aa28f644ee::t_5f95b57cec7677 4
+apps/dialtone-documentation/docs/foundations/icons/index.md
+  s_fb74aa28f644ee::t_5f95b57cec7677 4
+apps/dialtone-documentation/docs/.vuepress/theme/components/SidebarFooter.vue
+  s_fb74aa28f644ee::t_5f95b57cec7677 25,40,55
+apps/dialtone-documentation/docs/.vuepress/theme/utils/sidebarShortcuts.js
+  s_fb74aa28f644ee::t_5f95b57cec7677 50
+apps/dialtone-documentation/docs/.vuepress/baseComponents/MigrationBanner.vue
+  s_fb74aa28f644ee::t_5f95b57cec7677 3,55-56
+apps/dialtone-documentation/docs/.vuepress/theme/index.js
+  s_fb74aa28f644ee::t_5f95b57cec7677 164,168-170
+  s_fb74aa28f644ee::t_2d9d35f0f9e223 165-167
+apps/dialtone-documentation/docs/foundations/colors/index.md
+  s_fb74aa28f644ee::t_5f95b57cec7677 4
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "bcd0469eb86d17d758b33a681cfd32c8d90eddd4",
+  "prompts": {},
+  "sessions": {
+    "s_fb74aa28f644ee": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a016c1-4534-7332-9095-8e18310eed6e",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,44 @@
+packages/combinator/src/components/controls/control_suggestion.vue
+  s_9f61fa9161643f::t_b18c88d17d0e1c 15,69-72
+packages/combinator/src/lib/test/utils_test.js
+  s_9f61fa9161643f::t_7f1f113ae2b2a0 5-6
+packages/combinator/src/components/controls/control_segmented.vue
+  s_9f61fa9161643f::t_2b9750d34ecd66 3,56-59
+packages/combinator/src/components/controls/control_clearable_shell.test.js
+  s_9f61fa9161643f::t_7ec3c02bde04ae 20,57-65
+  s_9f61fa9161643f::t_a253bb4662408a 66
+packages/combinator/src/components/controls/control_number.vue
+  s_9f61fa9161643f::t_efec2b3f89febf 3,47-50
+packages/combinator/src/components/controls/control_selection.vue
+  s_9f61fa9161643f::t_219177beecf833 3,203-206
+packages/combinator/src/components/controls/control_clearable_shell.vue
+  s_9f61fa9161643f::t_acc98a7cd8cadb 24,54,76-79,114-118
+  s_9f61fa9161643f::t_aaa497a7194ed9 119
+packages/combinator/src/components/option_bar/option_bar_control.vue
+  s_9f61fa9161643f::t_5a34ce0cbab33f 210
+packages/combinator/src/components/controls/control_slot.vue
+  s_9f61fa9161643f::t_0c0f63f3026cd9 3,48-51
+packages/combinator/src/components/controls/control_string.vue
+  s_9f61fa9161643f::t_e761aadbb3cab3 3,57-60
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "268a64b3965da42f239983c83d931330bd5eb831",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_9f61fa9161643f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ef122-867f-71f2-bacd-0ea0fd649d67",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

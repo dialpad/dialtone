@@ -1,0 +1,33 @@
+packages/eslint-plugin-dialtone/lib/rules/recommend-typography-style.js
+  s_3985cb90fb6e4b::t_ac2526c5be7ccc 43
+packages/eslint-plugin-dialtone/lib/rules/deprecated-flex-gap-classes.js
+  s_3985cb90fb6e4b::t_2daa34c2f487e6 32
+packages/eslint-plugin-dialtone/tests/lib/rules/recommend-typography-style.js
+  s_3985cb90fb6e4b::t_6740c864a47e38 28-31
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-base-color-classes.js
+  s_3985cb90fb6e4b::t_95f1b8385ae876 23
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-flex-gap-classes.js
+  s_3985cb90fb6e4b::t_edce2870b265a5 29-30
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-grid-gap-classes.js
+  s_3985cb90fb6e4b::t_edf9d3a4297d69 29-30
+packages/eslint-plugin-dialtone/lib/rules/deprecated-base-color-classes.js
+  s_3985cb90fb6e4b::t_ad7ce299929496 36
+packages/eslint-plugin-dialtone/lib/rules/deprecated-grid-gap-classes.js
+  s_3985cb90fb6e4b::t_51bf3c26b32e28 32
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.10",
+  "base_commit_sha": "cd6abc7b01c623b0d87e9de46e3ae58b65d7cbf0",
+  "prompts": {},
+  "sessions": {
+    "s_3985cb90fb6e4b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8d82665d-cfce-4b1a-a965-2bf0b5435c6e",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}
