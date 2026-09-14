@@ -296,6 +296,37 @@ describe('DtPopover Tests', () => {
         expect(setPropsSpy).toHaveBeenCalledWith({ popperOptions: wrapper.vm.popperOptions() });
       });
     });
+
+    describe('When offset or fallbackPlacements are mutated in place', () => {
+      it('passes the mutated offset to the tippy instance', async () => {
+        mockProps = { open: true, offset: [0, 4] };
+        updateWrapper();
+        await flushPromises();
+
+        const setPropsSpy = vi.spyOn(wrapper.vm.tip, 'setProps');
+        wrapper.vm.offset[1] = 20;
+        await wrapper.vm.$nextTick();
+
+        expect(setPropsSpy).toHaveBeenCalledWith(expect.objectContaining({
+          offset: [0, 20],
+        }));
+      });
+
+      it('passes the mutated fallbackPlacements to the tippy instance', async () => {
+        mockProps = { open: true, fallbackPlacements: ['auto'] };
+        updateWrapper();
+        await flushPromises();
+
+        const setPropsSpy = vi.spyOn(wrapper.vm.tip, 'setProps');
+        wrapper.vm.fallbackPlacements.push('bottom');
+        await wrapper.vm.$nextTick();
+
+        const { popperOptions } = setPropsSpy.mock.calls[0][0];
+        const flipModifier = popperOptions.modifiers.find(modifier => modifier.name === 'flip');
+
+        expect(flipModifier.options.fallbackPlacements).toEqual(['auto', 'bottom']);
+      });
+    });
   });
 
   describe('Accessibility Tests', () => {
