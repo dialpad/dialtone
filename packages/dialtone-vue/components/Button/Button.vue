@@ -561,13 +561,14 @@ export default {
     loaderSize () {
       return BUTTON_ICON_SIZES[String(this.size)];
     },
+
+    propCombination () {
+      return [this.circle, this.kind, this.importance, this.link];
+    },
   },
 
   watch: {
-    circle: { handler: 'validatePropCombination', immediate: true },
-    kind: { handler: 'validatePropCombination', immediate: true },
-    importance: { handler: 'validatePropCombination', immediate: true },
-    link: { handler: 'validatePropCombination', immediate: true },
+    propCombination: { handler: 'validatePropCombination', immediate: true },
   },
 
   methods: {
