@@ -347,10 +347,7 @@ export default {
 
   watch: {
 
-    tippyProps: {
-      handler: 'setProps',
-      deep: true,
-    },
+    tippyProps: 'setProps',
 
     open: {
       handler: function (open) {

@@ -691,18 +691,16 @@ export default {
   },
 
   watch: {
-    $props: {
-      immediate: true,
-      deep: true,
-      handler () {
-        this.validateProps();
-      },
-    },
+    initialFocusElement: { handler: 'validateProps', immediate: true },
 
-    modal (modal) {
-      this.tip?.setProps({
-        zIndex: modal ? 650 : this.calculateAnchorZindex(),
-      });
+    modal: {
+      immediate: true,
+      handler (modal) {
+        this.validateProps();
+        this.tip?.setProps({
+          zIndex: modal ? 650 : this.calculateAnchorZindex(),
+        });
+      },
     },
 
     offset (offset) {

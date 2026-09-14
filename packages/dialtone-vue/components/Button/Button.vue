@@ -564,22 +564,23 @@ export default {
   },
 
   watch: {
-    $props: {
-      deep: true,
-      immediate: true,
-      handler () {
-        if (process.env.NODE_ENV === 'production') return;
-
-        if (this.circle && this.link) {
-          warn('You cannot enable circle and link at the same time', this);
-        }
-
-        this.isInvalidPropCombination(this.circle, this.kind, this.importance);
-      },
-    },
+    circle: { handler: 'validatePropCombination', immediate: true },
+    kind: { handler: 'validatePropCombination', immediate: true },
+    importance: { handler: 'validatePropCombination', immediate: true },
+    link: { handler: 'validatePropCombination', immediate: true },
   },
 
   methods: {
+    validatePropCombination () {
+      if (process.env.NODE_ENV === 'production') return;
+
+      if (this.circle && this.link) {
+        warn('You cannot enable circle and link at the same time', this);
+      }
+
+      this.isInvalidPropCombination(this.circle, this.kind, this.importance);
+    },
+
     resolveRouterLink () {
       try {
         return resolveComponent('RouterLink');
