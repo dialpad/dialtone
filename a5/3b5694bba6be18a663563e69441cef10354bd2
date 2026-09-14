@@ -1,0 +1,14 @@
+apps/dialtone-documentation/docs/.vuepress/baseComponents/GradientHero.vue
+  h_c15b5755534093 53
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "a53b5694bba6be18a663563e69441cef10354bd2",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

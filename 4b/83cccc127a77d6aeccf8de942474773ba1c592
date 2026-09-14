@@ -1,0 +1,25 @@
+packages/eslint-plugin-dialtone/lib/rules/deprecated-pixel-utility-classes.js
+  s_174f16b6f74b57::t_354a107911b110 67-68,70
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/space-to-spacing-test-examples.vue
+  s_174f16b6f74b57::t_a73a11d5349563 152,155-157,161
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/space-to-spacing.mjs
+  s_174f16b6f74b57::t_b709b671719f39 31-32,40-43
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-pixel-utility-classes.js
+  s_174f16b6f74b57::t_a1575b287dc23c 12,159-177
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "4b83cccc127a77d6aeccf8de942474773ba1c592",
+  "prompts": {},
+  "sessions": {
+    "s_174f16b6f74b57": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "da5c15f2-3676-457c-85ab-2c7a27604e88",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

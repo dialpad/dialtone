@@ -1,0 +1,21 @@
+packages/dialtone-tokens/dialtone-transforms.js
+  s_76db24c87a0be0::t_be36c2be4b3b47 17-25
+packages/dialtone-tokens/build-sd-transforms.js
+  s_76db24c87a0be0::t_a0f476df0a7514 160,239
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "8073bbb732978404d7279042bc4892e790cc9110",
+  "prompts": {},
+  "sessions": {
+    "s_76db24c87a0be0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c38a60be-b056-423f-99cc-5d709fa6900e",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "John Parker <john.parker@dialpad.com>"
+    }
+  }
+}
