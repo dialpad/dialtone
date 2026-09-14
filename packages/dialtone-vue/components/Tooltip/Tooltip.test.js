@@ -144,7 +144,7 @@ describe('DtTooltip tests', () => {
       });
 
       describe('When offset or fallbackPlacements are mutated in place', () => {
-        it('should update the tippy instance when offset is mutated', async () => {
+        it('should pass the mutated offset to the tippy instance', async () => {
           wrapper.unmount();
           mockProps = { open: true, offset: [0, 12] };
           updateWrapper();
@@ -154,10 +154,12 @@ describe('DtTooltip tests', () => {
           wrapper.vm.offset[1] = 20;
           await wrapper.vm.$nextTick();
 
-          expect(setPropsSpy).toHaveBeenCalled();
+          expect(setPropsSpy).toHaveBeenCalledWith(expect.objectContaining({
+            offset: [0, 20],
+          }));
         });
 
-        it('should update the tippy instance when fallbackPlacements is mutated', async () => {
+        it('should pass the mutated fallbackPlacements to the tippy instance', async () => {
           wrapper.unmount();
           mockProps = { open: true, fallbackPlacements: ['auto'] };
           updateWrapper();
@@ -167,7 +169,10 @@ describe('DtTooltip tests', () => {
           wrapper.vm.fallbackPlacements.push('bottom');
           await wrapper.vm.$nextTick();
 
-          expect(setPropsSpy).toHaveBeenCalled();
+          const { popperOptions } = setPropsSpy.mock.calls[0][0];
+          const flipModifier = popperOptions.modifiers.find(modifier => modifier.name === 'flip');
+
+          expect(flipModifier.options.fallbackPlacements).toEqual(['auto', 'bottom']);
         });
       });
     });
