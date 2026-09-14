@@ -688,27 +688,31 @@ export default {
       return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtPopover__anchor'));
     },
 
+    modalValidationState () {
+      return [this.modal, this.initialFocusElement];
+    },
+
   },
 
   watch: {
-    $props: {
+    modalValidationState: { handler: 'validateProps', immediate: true },
+
+    modal: {
       immediate: true,
-      deep: true,
-      handler () {
-        this.validateProps();
+      handler (modal) {
+        this.tip?.setProps({
+          zIndex: modal ? 650 : this.calculateAnchorZindex(),
+        });
       },
     },
 
-    modal (modal) {
-      this.tip?.setProps({
-        zIndex: modal ? 650 : this.calculateAnchorZindex(),
-      });
-    },
-
-    offset (offset) {
-      this.tip?.setProps({
-        offset,
-      });
+    offset: {
+      deep: true,
+      handler (offset) {
+        this.tip?.setProps({
+          offset,
+        });
+      },
     },
 
     sticky (sticky) {
@@ -717,10 +721,13 @@ export default {
       });
     },
 
-    fallbackPlacements () {
-      this.tip?.setProps({
-        popperOptions: this.popperOptions(),
-      });
+    fallbackPlacements: {
+      deep: true,
+      handler () {
+        this.tip?.setProps({
+          popperOptions: this.popperOptions(),
+        });
+      },
     },
 
     tether () {

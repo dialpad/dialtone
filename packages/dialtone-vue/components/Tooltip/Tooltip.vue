@@ -347,9 +347,25 @@ export default {
 
   watch: {
 
-    tippyProps: {
-      handler: 'setProps',
+    tippyProps: 'setProps',
+
+    // tippyProps only tracks the offset/fallbackPlacements array references, so in-place
+    // mutations (e.g. offset[1] = 8) need their own deep watchers to trigger setProps.
+    // Reference replacements are already handled by the tippyProps watcher above; skip
+    // those here (newValue === oldValue only when the array was mutated in place) to
+    // avoid calling setProps twice for the same change.
+    offset: {
       deep: true,
+      handler (newValue, oldValue) {
+        if (newValue === oldValue) this.setProps();
+      },
+    },
+
+    fallbackPlacements: {
+      deep: true,
+      handler (newValue, oldValue) {
+        if (newValue === oldValue) this.setProps();
+      },
     },
 
     open: {
