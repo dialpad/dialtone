@@ -703,10 +703,13 @@ export default {
       },
     },
 
-    offset (offset) {
-      this.tip?.setProps({
-        offset,
-      });
+    offset: {
+      deep: true,
+      handler (offset) {
+        this.tip?.setProps({
+          offset,
+        });
+      },
     },
 
     sticky (sticky) {
@@ -715,10 +718,13 @@ export default {
       });
     },
 
-    fallbackPlacements () {
-      this.tip?.setProps({
-        popperOptions: this.popperOptions(),
-      });
+    fallbackPlacements: {
+      deep: true,
+      handler () {
+        this.tip?.setProps({
+          popperOptions: this.popperOptions(),
+        });
+      },
     },
 
     tether () {
