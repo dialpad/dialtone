@@ -688,15 +688,18 @@ export default {
       return this.ariaLabelledby || (!this.ariaLabel && getUniqueString('DtPopover__anchor'));
     },
 
+    modalValidationState () {
+      return [this.modal, this.initialFocusElement];
+    },
+
   },
 
   watch: {
-    initialFocusElement: { handler: 'validateProps', immediate: true },
+    modalValidationState: { handler: 'validateProps', immediate: true },
 
     modal: {
       immediate: true,
       handler (modal) {
-        this.validateProps();
         this.tip?.setProps({
           zIndex: modal ? 650 : this.calculateAnchorZindex(),
         });
