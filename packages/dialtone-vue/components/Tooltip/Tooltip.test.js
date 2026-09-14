@@ -142,6 +142,34 @@ describe('DtTooltip tests', () => {
 
         expect(tippyBox.getAttribute('data-placement')).toBe(placement);
       });
+
+      describe('When offset or fallbackPlacements are mutated in place', () => {
+        it('should update the tippy instance when offset is mutated', async () => {
+          wrapper.unmount();
+          mockProps = { open: true, offset: [0, 12] };
+          updateWrapper();
+          await flushPromises();
+
+          const setPropsSpy = vi.spyOn(wrapper.vm.tip, 'setProps');
+          wrapper.vm.offset[1] = 20;
+          await wrapper.vm.$nextTick();
+
+          expect(setPropsSpy).toHaveBeenCalled();
+        });
+
+        it('should update the tippy instance when fallbackPlacements is mutated', async () => {
+          wrapper.unmount();
+          mockProps = { open: true, fallbackPlacements: ['auto'] };
+          updateWrapper();
+          await flushPromises();
+
+          const setPropsSpy = vi.spyOn(wrapper.vm.tip, 'setProps');
+          wrapper.vm.fallbackPlacements.push('bottom');
+          await wrapper.vm.$nextTick();
+
+          expect(setPropsSpy).toHaveBeenCalled();
+        });
+      });
     });
   });
 
