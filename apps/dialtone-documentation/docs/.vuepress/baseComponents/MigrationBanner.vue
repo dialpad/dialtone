@@ -8,10 +8,9 @@
     <template #icon>
       <dt-icon name="rocket" />
     </template>
-    Dialtone v10+ includes breaking changes.
-    View the
-    <dt-link to="/guides/migration/" tone="muted">
-      Migration Guide
+    <strong>Dialtone 10</strong> is available.
+    <dt-link to="/dialtone/whats-new/posts/2026-9-16.html" tone="muted">
+      Read the announcement
     </dt-link>.
     <template #action>
       <dt-button
