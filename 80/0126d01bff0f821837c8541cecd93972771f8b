@@ -1,0 +1,29 @@
+packages/combinator/src/components/controls/control_segmented.vue
+  s_9f61fa9161643f::t_a5f774c4cbf855 146
+packages/combinator/src/components/controls/control_selection.test.js
+  s_9f61fa9161643f::t_db84dff6062788 245-257
+packages/combinator/src/components/controls/control_string.vue
+  s_9f61fa9161643f::t_8275e125bee9cc 129
+packages/combinator/src/components/controls/control_slot.vue
+  s_9f61fa9161643f::t_0b431896808cd6 107
+packages/combinator/src/components/controls/control_selection.vue
+  s_9f61fa9161643f::t_809b1ddb5490c0 342
+packages/combinator/src/components/controls/control_number.vue
+  s_9f61fa9161643f::t_c821b832156b9d 102
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.10",
+  "base_commit_sha": "800126d01bff0f821837c8541cecd93972771f8b",
+  "prompts": {},
+  "sessions": {
+    "s_9f61fa9161643f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ef122-867f-71f2-bacd-0ea0fd649d67",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
