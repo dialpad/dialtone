@@ -84,6 +84,32 @@ export async function getSpacingStops () {
 }
 
 /**
+ * Legacy pixel-named margin/padding utility maps, directly from the CSS generator.
+ *
+ * These classes are deprecated but remain supported. Keeping the raw maps here lets the
+ * spacing emitter derive its deprecated docs rows from the same data that generates the CSS.
+ */
+export async function getLegacySpacingUtilityMaps () {
+  const {
+    MARGIN_SIZES_SPACING,
+    MARGIN_SIZES_LAYOUT,
+    PADDING_SIZES_SPACING,
+    PADDING_SIZES_LAYOUT,
+  } = await importCjs(CSS_CONSTANTS);
+
+  return {
+    margin: {
+      spacing: MARGIN_SIZES_SPACING,
+      layout: MARGIN_SIZES_LAYOUT,
+    },
+    padding: {
+      spacing: PADDING_SIZES_SPACING,
+      layout: PADDING_SIZES_LAYOUT,
+    },
+  };
+}
+
+/**
  * Layout-scale stops, in declaration order, from `LAYOUT_STOPS` in
  * dialtone-css/postcss/constants.cjs. Mixed type, exactly as declared: bare numbers are
  * layout-token stops (`25` → `--dt-layout-25`); `"Npx"` strings are off-scale pixel exceptions.

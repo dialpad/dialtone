@@ -2,18 +2,36 @@
  * Emitter for docs/_data/spacing.json.
  *
  * - `values`: one row per spacing stop (`SPACING_STOPS`), `output` = rem (px/10) of the spacing token.
+ * - `legacy*Values`: deprecated pixel-named margin/padding utilities, derived from the same maps
+ *   used by the CSS generator.
  * - `coordinates`: every spacing stop (same scale as `values` and as the generated `d-ibs-*`
  *   inset utilities), each with its hand-maintained `negative`/`combo` flags + `value` (rem; the
  *   `0` stop is the literal `"0"`), then the literal percentage/calc coordinates appended.
  * - `directions` / `coordinateDirections`: hand-maintained docs metadata.
  */
-import { getSpacingStops, getTokenPx, pxToRem } from './token-values.mjs';
+import {
+  getLegacySpacingUtilityMaps,
+  getSpacingStops,
+  getTokenPx,
+  pxToRem,
+} from './token-values.mjs';
 import { spacing } from './metadata.mjs';
 
 export const file = 'spacing.json';
 
+function legacyValues (map, category, negative) {
+  return Object.entries(map)
+    .filter(([value]) => value.startsWith('n') === negative)
+    .map(([value, stop]) => ({
+      value: negative ? value.slice(1) : value,
+      variable: `--dt-${category}-${stop}`,
+      output: pxToRem(getTokenPx(category, stop)),
+    }));
+}
+
 export async function build () {
   const spacingStops = await getSpacingStops();
+  const legacyMaps = await getLegacySpacingUtilityMaps();
   const values = spacingStops.map((stop) => ({
     value: String(stop),
     output: pxToRem(getTokenPx('spacing', String(stop))),
@@ -38,9 +56,28 @@ export async function build () {
   });
   coordinates.push(...spacing.extraCoordinates);
 
+  const legacyMarginValues = [
+    ...legacyValues(legacyMaps.margin.spacing, 'spacing', false),
+    ...legacyValues(legacyMaps.margin.layout, 'layout', false),
+  ];
+  const legacyNegativeMarginValues = [
+    ...legacyValues(legacyMaps.margin.spacing, 'spacing', true),
+    ...legacyValues(legacyMaps.margin.layout, 'layout', true),
+  ];
+  const legacyPaddingValues = [
+    ...legacyValues(legacyMaps.padding.spacing, 'spacing', false),
+    ...legacyValues(legacyMaps.padding.layout, 'layout', false),
+  ];
+
   return {
     directions: spacing.directions,
+    legacyDirections: spacing.directions.filter(
+      ({ supportsLegacy }) => supportsLegacy,
+    ),
     values,
+    legacyMarginValues,
+    legacyNegativeMarginValues,
+    legacyPaddingValues,
     coordinateDirections: spacing.coordinateDirections,
     coordinates,
   };

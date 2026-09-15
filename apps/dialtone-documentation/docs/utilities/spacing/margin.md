@@ -74,12 +74,12 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
 <utility-class-table show-rendered>
   <template #content>
     <!-- Positive margins -->
-    <tbody v-for="{ name: dir, deprecated } in directions">
+    <tbody v-for="{ name: dir, suffix, deprecated } in directions">
       <tr v-for="{ value: val, output } in values">
         <th scope="row">
           <dt-stack gap="50">
             <span class="d-code--sm d-docsite-code">
-              <span v-if="dir !== 'All'">d-m{{ dir[0] }}-{{ val }}</span>
+              <span v-if="dir !== 'All'">d-m{{ suffix }}-{{ val }}</span>
               <span v-else>d-m-{{ val }}</span>
             </span>
             <span>
@@ -104,12 +104,12 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
       </tr>
     </tbody>
     <!-- Negative margins -->
-    <tbody v-for="{ name: dir, deprecated } in directions">
+    <tbody v-for="{ name: dir, suffix, deprecated } in directions">
       <tr v-for="{ value: val, output } in values.slice(1)">
         <th scope="row">
           <dt-stack gap="50">
             <span class="d-code--sm d-docsite-code">
-              <span v-if="dir !== 'All'">d-m{{ dir[0] }}-n{{ val }}</span>
+              <span v-if="dir !== 'All'">d-m{{ suffix }}-n{{ val }}</span>
               <span v-else>d-m-n{{ val }}</span>
             </span>
             <span>
@@ -135,9 +135,9 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
     </tbody>
     <!-- Auto margins -->
     <tbody>
-      <tr v-for="{ name: dir, deprecated } in directions">
+      <tr v-for="{ name: dir, suffix, deprecated } in directions">
         <th scope="row" class="d-code--sm d-docsite-code">
-          <span v-if="dir !== 'All'">d-m{{ dir[0] }}-auto</span>
+          <span v-if="dir !== 'All'">d-m{{ suffix }}-auto</span>
           <span v-else>d-m-auto</span>
           <dt-badge v-if="deprecated" type="critical" kind="label" text="Deprecated" />
         </th>
@@ -159,9 +159,9 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
     </tbody>
     <!-- Unset margins -->
     <tbody>
-      <tr v-for="{ name: dir, deprecated } in directions">
+      <tr v-for="{ name: dir, suffix, deprecated } in directions">
         <th scope="row" class="d-code--sm d-docsite-code">
-          <span v-if="dir !== 'All'">d-m{{ dir[0] }}-unset</span>
+          <span v-if="dir !== 'All'">d-m{{ suffix }}-unset</span>
           <span v-else>d-m-unset</span>
           <dt-badge v-if="deprecated" type="critical" kind="label" text="Deprecated" />
         </th>
@@ -181,9 +181,63 @@ It is highly recommended to use the [DtStack component](/components/stack.md) pr
         <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
       </tr>
     </tbody>
+    <!-- Deprecated pixel-named positive margins -->
+    <tbody v-for="{ name: dir, suffix } in legacyDirections">
+      <tr v-for="{ value: val, variable, output } in legacyMarginValues">
+        <th scope="row">
+          <dt-stack gap="50">
+            <span class="d-code--sm d-docsite-code">d-m{{ suffix }}{{ val }}</span>
+            <span>
+              <dt-badge type="critical" kind="label" text="Deprecated" />
+            </span>
+          </dt-stack>
+        </th>
+        <td class="d-code--sm">
+          <span v-if="dir == 'y'">
+            margin-block: var({{ variable }}) !important;
+          </span>
+          <span v-else-if="dir == 'x'">
+            margin-inline: var({{ variable }}) !important;
+          </span>
+          <span v-else>
+            <span v-if="dir !== 'All'">margin-{{ dir === 'top' ? 'block-start' : dir === 'bottom' ? 'block-end' : dir === 'left' ? 'inline-start' : 'inline-end' }}: var({{ variable }}) !important; </span>
+            <span v-else>margin: var({{ variable }}) !important</span>
+          </span>
+        </td>
+        <td class="d-code--sm d-fc-tertiary d-ta-right">{{ output }}</td>
+        <td class="d-code--sm d-fc-tertiary d-ta-right">{{ parseFloat(output) * 10 }}px</td>
+      </tr>
+    </tbody>
+    <!-- Deprecated pixel-named negative margins -->
+    <tbody v-for="{ name: dir, suffix } in legacyDirections">
+      <tr v-for="{ value: val, variable, output } in legacyNegativeMarginValues">
+        <th scope="row">
+          <dt-stack gap="50">
+            <span class="d-code--sm d-docsite-code">d-m{{ suffix }}n{{ val }}</span>
+            <span>
+              <dt-badge type="critical" kind="label" text="Deprecated" />
+            </span>
+          </dt-stack>
+        </th>
+        <td class="d-code--sm">
+          <span v-if="dir == 'y'">
+            margin-block: var({{ variable }}) !important;
+          </span>
+          <span v-else-if="dir == 'x'">
+            margin-inline: var({{ variable }}) !important;
+          </span>
+          <span v-else>
+            <span v-if="dir !== 'All'">margin-{{ dir === 'top' ? 'block-start' : dir === 'bottom' ? 'block-end' : dir === 'left' ? 'inline-start' : 'inline-end' }}: var({{ variable }}) !important; </span>
+            <span v-else>margin: var({{ variable }}) !important</span>
+          </span>
+        </td>
+        <td class="d-code--sm d-fc-tertiary d-ta-right">{{ output }}</td>
+        <td class="d-code--sm d-fc-tertiary d-ta-right">{{ parseFloat(output) * 10 }}px</td>
+      </tr>
+    </tbody>
   </template>
 </utility-class-table>
 
 <script setup>
-  import { directions, values } from '@data/spacing.json';
+  import { directions, legacyDirections, legacyMarginValues, legacyNegativeMarginValues, values } from '@data/spacing.json';
 </script>
