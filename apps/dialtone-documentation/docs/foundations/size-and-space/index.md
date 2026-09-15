@@ -11,21 +11,28 @@ Dialtone uses a unified set of `layout` and `spacing` design tokens for all dime
 
 ### Layout and Spacing Tokens
 
-Layout and spacing tokens are CSS custom properties (a.k.a. CSS variables) generated from two base units:
+Layout and spacing tokens are CSS custom properties (a.k.a. CSS variables) generated from two fixed Dialtone base units:
 
 - **Spacing**: base `8px`
 - **Layout**: base `64px`
+
+These are system values, not project-level settings. Use the published scale stops rather than overriding `--dt-spacing-base` or `--dt-layout-base`.
+
+Most stops express a multiple of their base. Fractional stops provide values between whole multiples, such as `--dt-spacing-25` at 2px. `--dt-spacing-1` is the supported 1px exception and is named directly for its value. The layout scale uses explicit `px` suffixes for its off-scale exceptions, such as `--dt-layout-1px`.
 
 #### Samples:
 
 | Token | Math | Value |
 | --- | --- | --- |
+| `--dt-spacing-1` | Explicit exception | 1px |
+| `--dt-spacing-25` | 0.25 × 8px | 2px |
 | `--dt-spacing-100` | 1 × 8px | 8px |
 | `--dt-spacing-400` | 4 × 8px | 32px |
+| `--dt-layout-1px` | Explicit exception | 1px |
 | `--dt-layout-100` | 1 × 64px | 64px |
 | `--dt-layout-400` | 4 × 64px | 256px |
 
-Because the formula is deterministic, tools and code-generation assistants (including LLMs) can resolve any stop without needing the full reference table in context.
+Multiplier stops, including fractional stops, can be resolved from their base without a lookup. Use the complete token tables for the full scale and its pixel-specific exceptions.
 
 For the complete set, view [Spacing Tokens](/tokens/#spacing) and [Layout Tokens](/tokens/#layout). For the story behind why layout and spacing live in separate families, see [New Layout and Spacing Token Systems](/guides/migration/layout-and-spacing-tokens/).
 

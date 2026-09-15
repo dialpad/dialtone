@@ -1,6 +1,6 @@
 ---
 title: Text List
-description: Semantic bullet, numbered, nested, and custom-marker lists.
+description: Semantic lists authored in Vue, with ordered, nested, and custom-marker options.
 status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-text-list--default
@@ -32,7 +32,17 @@ combinator: DtTextList
 </dt-text-list>
 ```
 
-Use `DtTextList` for hand-authored text or content lists. It renders native `ul`, `ol`, and `li` elements, keeps marker styling in component props, and avoids the clunky `d-ls-*`, `d-lst-*`, and indentation utility class combinations.
+Use `DtTextList` when you author a list in Vue and need component-level control over its semantics, markers, spacing, tone, or nesting. It renders native `ul`, `ol`, and `li` elements and replaces combinations of `d-ls-*`, `d-lst-*`, and indentation utilities.
+
+When a list is part of rendered HTML, such as Markdown output, keep its native `ul`, `ol`, and `li` elements inside `DtProse`. Do not convert it to `DtTextList` solely for styling.
+
+### Choose a text component
+
+| Content ownership | Use |
+| --- | --- |
+| You author an individual text element in a Vue template. | [DtText](/components/text.md) |
+| You author a list and its items in a Vue template. | [DtTextList](/components/text-list.md) |
+| A renderer supplies a block of native HTML. | [DtProse](/components/prose.md) |
 
 ### Guidance
 
@@ -47,6 +57,7 @@ Use `DtTextList` for hand-authored text or content lists. It renders native `ul`
 <template #do>
 
 - Prefer `DtTextList` over `d-ls-*` and `d-lst-*` utilities in Vue.
+- Use `DtTextList` when the Vue template owns the list structure and items.
 - Use `gap` for item spacing up to `400`.
 - Use `markerTone` for semantic marker color.
 - Use `DtText` within each `DtTextListItem` when customizing list item typography.
@@ -55,6 +66,7 @@ Use `DtTextList` for hand-authored text or content lists. It renders native `ul`
 <template #dont>
 
 - Use raw `li` children directly under `DtTextList`.
+- Convert a native `ul` or `ol` from rendered HTML into `DtTextList` solely for styling.
 - Use `marker` to imply ordered or unordered semantics.
 - Use custom markers as the only source of meaning.
 

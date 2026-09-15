@@ -1,6 +1,6 @@
 ---
 title: Prose
-description: Typographic wrapper for rich HTML content affected by reset styles.
+description: Typography for rendered native HTML such as Markdown, CMS content, and assistant output.
 status: beta
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-prose--default
@@ -11,26 +11,38 @@ combinator: DtProse
 
 ## Usage
 
-Prose is a container for pre-rendered HTML content that needs sensible typographic defaults — markdown output, CMS pages, AI-generated responses, help articles, or any block of "raw" HTML that was not authored with Dialtone components, styles, or utility classes.
+Use `DtProse` to style a block of rendered native HTML that your application does not author element by element. Common sources include sanitized HTML produced from Markdown, CMS content, help articles, and assistant output. `DtProse` applies coordinated typography and spacing to the document as a whole.
 
-Style is stripped down and scoped so that elements start from a clean slate. Prose restores those defaults within a scoped container, so content reads naturally without requiring classes on any inner element.
+`DtProse` does not parse Markdown. Convert Markdown to sanitized HTML before rendering it. Native lists produced by that renderer remain `ul`, `ol`, and `li` elements; `DtProse` styles them automatically, so they do not need to be converted to `DtTextList`.
+
+Dialtone reset styles remove the browser's default typography from native elements. `DtProse` restores a scoped type and spacing treatment without requiring classes on each descendant.
+
+### Choose a text component
+
+| Content ownership | Use |
+| --- | --- |
+| You author an individual text element in a Vue template. | [DtText](/components/text.md) |
+| You author a list and its items in a Vue template. | [DtTextList](/components/text-list.md) |
+| A renderer supplies a block of native HTML. | [DtProse](/components/prose.md) |
 
 <dialtone-usage>
 <template #do>
 
-- Wrap rendered markdown, CMS output, or any pre-rendered HTML that you do not control.
-- Use for long-form prose-like content blocks: help articles, changelogs, etc.
-- Let Prose handle all inner styling — pass plain HTML with no classes or inline styles.
+- Render sanitized HTML produced by a Markdown renderer, CMS, or similar content source.
+- Use for long-form document content such as help articles and changelogs.
+- Keep native headings, paragraphs, lists, tables, and other document elements as native HTML.
+- Let `DtProse` handle descendant styling. Pass plain HTML without classes or inline styles.
 
 </template>
 
 <template #dont>
 
-- Wrap Dialtone components or interactive UI — Prose is purely for static and raw HTML structures.
-- Add `class` or `style` attributes to elements inside Prose — they will be stripped.
-- Place form elements (`<input>`, `<select>`, `<button>`) inside Prose — use proper Dialtone form components instead.
+- Place `DtText`, `DtTextList`, or other Vue and Dialtone components inside `DtProse`.
+- Add `class` or `style` attributes to elements inside Prose. `DtProse` strips them.
+- Place form elements (`<input>`, `<select>`, `<button>`) inside Prose. Use the corresponding Dialtone components instead.
+- Expect `DtProse` to parse Markdown or sanitize unsafe HTML.
 - Nest a Prose container inside another Prose container.
-- Use Prose as a general-purpose "reset" — it is specifically designed for article-like content.
+- Use Prose as a general-purpose layout container or reset. It is for document content, not application UI.
 
 </template>
 
@@ -38,13 +50,13 @@ Style is stripped down and scoped so that elements start from a clean slate. Pro
 
 ### Content validation
 
-DtProse enforces that slot content stays "pure" HTML:
+DtProse keeps descendant content within its native HTML contract:
 
-- **Disallowed elements** — Form controls (`<input>`, `<select>`, `<textarea>`, `<button>`, etc.) and custom elements (any hyphenated tag name like `<dt-button>`) produce a `console.error`. The one exception is `<input type="checkbox">` inside `<li>` for task-list patterns.
-- **Dialtone components** — Any Vue component inside the slot will have their attributes stripped and trigger a console error. DtProse is designed for **plain HTML only** — use Dialtone components outside of Prose.
-- **Attribute stripping** — On elements inside the slot, non-essential attributes (`class`, `style`, `data-*`, event handlers) are silently removed. Structural and accessibility attributes (`id`, `href`, `src`, `alt`, `scope`, `lang`, `dir`, etc.) are preserved. Attributes on `<dt-prose>` itself are unaffected.
+- **Disallowed elements:** Form controls (`<input>`, `<select>`, `<textarea>`, `<button>`, etc.) and custom elements (any hyphenated tag name like `<dt-button>`) produce a `console.error`. The one exception is `<input type="checkbox">` inside `<li>` for task-list patterns.
+- **Vue and Dialtone components:** Components are not supported inside the slot. `DtProse` removes unsupported attributes from every rendered descendant, so nested components can lose classes and attributes they require. Keep components outside `DtProse`.
+- **Attribute stripping:** On elements inside the slot, non-essential attributes (`class`, `style`, `data-*`, event handlers) are silently removed. Structural and accessibility attributes (`id`, `href`, `src`, `alt`, `scope`, `lang`, `dir`, etc.) are preserved. Attributes on `<dt-prose>` itself are unaffected.
 
-This is a development-time guardrail, not a security boundary. XSS protection is the responsibility of whoever produces the HTML.
+Console errors are development-time guardrails. Attribute stripping also runs in production, but it is not a security boundary. Whoever produces the HTML remains responsible for XSS protection.
 
 ### Supported elements
 

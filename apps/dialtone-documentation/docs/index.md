@@ -148,16 +148,19 @@ pageClass: dialpad-design-home
         <dt-box max-inline-size="1200">
           <dt-text as="p" align="center" wrap="balance" kind="body" size="300" class="d-fs-350">The latest from Dialpad Design.</dt-text>
         </dt-box>
-        <dt-box class="d-d-grid d-g-300 d-g-cols1 md:d-g-cols3 d-ai-stretch home-section-blog-preview">
+        <dt-box class="d-d-grid d-g-300 d-g-cols1 xl:d-g-cols3 d-ai-stretch home-section-blog-preview">
           <dt-link
             v-for="post in $page.blogPosts.sort(sortHandler).slice(0, 3)"
             :key="post.posted"
             :to="`/dialtone/whats-new/posts/${post.posted}`"
-            class="d-d-block d-bar-500 d-td-none d-p-300 h:d-box-secondary-opaque d-ba d-bc-transparent h:d-bc-subtle h:d-bs-card"
+            class="d-d-block d-bar-500 d-td-none d-ba d-bc-transparent"
+            :class="viewport.pick({
+              xl: 'd-p-300 h:d-box-secondary-opaque h:d-bc-subtle h:d-bs-card',
+            })"
           >
             <dt-stack gap="100">
               <dt-link class="d-d-inline">
-                <dt-text as="h3" kind="headline" :size="400" strength="semibold">{{ post.heading }}</dt-text>
+                <dt-text as="h3" kind="headline" :size="400" strength="semibold" wrap="pretty">{{ post.heading }}</dt-text>
               </dt-link>
               <dt-text as="time" kind="body" :size="200" tone="tertiary">{{ post.author }} &middot; {{ formatDate(post.posted) }}</dt-text>
               <dt-text as="p" kind="body" :size="300" tone="primary" wrap="pretty">{{ post.excerpt }}</dt-text>

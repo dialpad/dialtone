@@ -77,7 +77,7 @@ Product UI text can be characterized as one of **Headline**, **Body**, **Label**
  The DtText component provides a semantic, prop-driven API that's easier to maintain and ensures consistent usage across your application.
 
 ```vue code-only
-<dt-text kind="headline|body|label|code" size="{size}" {{props}}>...</dt-text>
+<dt-text variant="headline--XX|body--XX|label--XX|code--XX" {{props}}>...</dt-text>
 ```
 
 ### CSS Utility
