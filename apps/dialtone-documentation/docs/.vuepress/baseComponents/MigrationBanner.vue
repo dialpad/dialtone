@@ -8,7 +8,7 @@
     <template #icon>
       <dt-icon name="rocket" />
     </template>
-    <strong>Dialtone 10</strong> is available.
+    Introducing <strong>Dialtone 10</strong>.
     <dt-link to="/dialtone/whats-new/posts/2026-9-16.html" tone="muted">
       Read the announcement
     </dt-link>.
