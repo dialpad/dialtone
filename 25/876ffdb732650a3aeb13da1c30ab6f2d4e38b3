@@ -1,0 +1,33 @@
+packages/dialtone-tokens/themes/config.js
+  s_b67efc5818670a::t_c211f715cdf003 132-133
+  s_b67efc5818670a::t_2076fc24d55d2e 229
+  s_b67efc5818670a::t_fb2d31ef0e1bca 658-659
+  s_b67efc5818670a::t_4538ace0c6ce33 180
+apps/dialtone-documentation/docs/guides/theme-and-mode/index.md
+  s_b67efc5818670a::t_6cd9b7c7c4ba47 324,327
+  s_b67efc5818670a::t_a314fb3377da35 99-100,104-109
+  s_b67efc5818670a::t_438de234a17a88 66-67
+  s_b67efc5818670a::t_ed0b20ab67eb63 357
+  s_b67efc5818670a::t_537e0f516cc82b 200
+  s_b67efc5818670a::t_705db37afd2387 72,308,311,314,318
+apps/dialtone-documentation/docs/.vuepress/theme/composables/useThemeManager.js
+  s_b67efc5818670a::t_988100fd23be0b 145,147
+apps/dialtone-documentation/docs/.vuepress/theme/layouts/Layout.vue
+  s_b67efc5818670a::t_a7e0b479de8e88 66
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "25876ffdb732650a3aeb13da1c30ab6f2d4e38b3",
+  "prompts": {},
+  "sessions": {
+    "s_b67efc5818670a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "7951d319-31d5-497a-8585-78f8eb0d8b39",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

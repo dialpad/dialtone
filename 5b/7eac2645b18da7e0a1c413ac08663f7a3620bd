@@ -1,0 +1,19 @@
+apps/dialtone-documentation/scripts/visual-guide/scenes/token-size-shifts.vue
+  s_93aeca3805a6ee::t_678895122e4b59 11,68-69
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "5b7eac2645b18da7e0a1c413ac08663f7a3620bd",
+  "prompts": {},
+  "sessions": {
+    "s_93aeca3805a6ee": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6eac0ba6-144f-46e1-9c25-fb0c29ab1e02",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

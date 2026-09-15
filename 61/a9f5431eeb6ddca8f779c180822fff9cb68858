@@ -1,0 +1,24 @@
+apps/dialtone-documentation/docs/guides/migration/typography/index.md
+  s_5c2995026e6cb7::t_0541db8855b49b 43,60,95,110
+apps/dialtone-documentation/docs/components/text.md
+  s_5c2995026e6cb7::t_08a78f68ac049c 87,114-116,552-555
+  s_5c2995026e6cb7::t_ca50c2c88e94e7 4,77,112-113,121-125,550
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-tshirt-sizes.js
+  s_5c2995026e6cb7::t_ca50c2c88e94e7 190,209
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "61a9f5431eeb6ddca8f779c180822fff9cb68858",
+  "prompts": {},
+  "sessions": {
+    "s_5c2995026e6cb7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019eef70-8249-79a3-8adc-6396d473def8",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    }
+  }
+}

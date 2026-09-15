@@ -1,0 +1,43 @@
+packages/dialtone-vue/components/Hovercard/Hovercard.test.js
+  s_1b0723d23d701b::t_bc0f3087687210 1,4
+  s_1b0723d23d701b::t_c00d9a57522bbd 34
+  s_1b0723d23d701b::t_058a9fe455811b 239-240,242,244-245,246,249-250,254-255,259,269,271-272
+  s_1b0723d23d701b::t_8593a8f5b86fb2 3
+  s_1b0723d23d701b::t_3e15789ffd90dd 243
+  s_1b0723d23d701b::t_5babf259937462 241,247-248,252
+  s_1b0723d23d701b::t_e1941ae90db6ef 251,253
+  s_1b0723d23d701b::t_66cd6579916902 255-271
+apps/dialtone-documentation/docs/components/hovercard.md
+  s_1b0723d23d701b::t_bb05111357bde2 36-37,42-53,55-58
+  h_65afbd07a56b87 40-41,54,59-60,62
+packages/dialtone-vue/components/Popover/Popover.vue
+  s_1b0723d23d701b::t_6cd02edbf87a8d 1033
+  s_1b0723d23d701b::t_8f72cccd48b08a 352-362
+  s_1b0723d23d701b::t_df35eee601b632 50-54
+packages/dialtone-vue/components/Popover/Popover.test.js
+  s_1b0723d23d701b::t_514c8d12d55580 365-394,418
+  s_1b0723d23d701b::t_e9663c2c4c2101 395-417
+packages/dialtone-vue/components/Hovercard/Hovercard.vue
+  s_1b0723d23d701b::t_47e293baf7d647 16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.8",
+  "base_commit_sha": "b5aa6154319f80d4528c3450be0b18b56c788a11",
+  "prompts": {},
+  "humans": {
+    "h_65afbd07a56b87": {
+      "author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_1b0723d23d701b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9a319ef4-2b39-4342-8916-af92ca8f529a",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": null
+    }
+  }
+}
