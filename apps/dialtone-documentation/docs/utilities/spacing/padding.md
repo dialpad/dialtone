@@ -42,7 +42,7 @@ Use `d-p-{stop}` to set padding using spacing token stops. The number references
 ```
 
 <script setup>
-  import { directions, values } from '@data/spacing.json';
+  import { directions, legacyDirections, legacyPaddingValues, values } from '@data/spacing.json';
 </script>
 
 ## Classes
@@ -54,12 +54,12 @@ It is highly recommended to use the [DtBox component](/components/box.md) before
 <utility-class-table show-rendered>
   <template #content>
     <!-- Positive paddings -->
-    <tbody v-for="{ name: dir, deprecated } in directions">
+    <tbody v-for="{ name: dir, suffix, deprecated } in directions">
         <tr v-for="{ value: val, output } in values">
             <th scope="row">
               <dt-stack gap="50">
                 <span class="d-code--sm d-docsite-code">
-                  <span v-if="dir !== 'All'">d-p{{ dir[0] }}-{{ val }}</span>
+                  <span v-if="dir !== 'All'">d-p{{ suffix }}-{{ val }}</span>
                   <span v-else>d-p-{{ val }}</span>
                 </span>
                 <span>
@@ -85,11 +85,11 @@ It is highly recommended to use the [DtBox component](/components/box.md) before
     </tbody>
     <!-- Unset paddings -->
     <tbody>
-      <tr v-for="{ name: dir, deprecated } in directions">
+      <tr v-for="{ name: dir, suffix, deprecated } in directions">
         <th scope="row">
           <dt-stack gap="50">
             <span class="d-code--sm d-docsite-code">
-              <span v-if="dir !== 'All'">d-p{{ dir[0] }}-unset</span>
+              <span v-if="dir !== 'All'">d-p{{ suffix }}-unset</span>
               <span v-else>d-p-unset</span>
             </span>
             <span>
@@ -111,6 +111,33 @@ It is highly recommended to use the [DtBox component](/components/box.md) before
         </td>
         <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
         <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
+      </tr>
+    </tbody>
+    <!-- Deprecated pixel-named paddings -->
+    <tbody v-for="{ name: dir, suffix } in legacyDirections">
+      <tr v-for="{ value: val, variable, output } in legacyPaddingValues">
+        <th scope="row">
+          <dt-stack gap="50">
+            <span class="d-code--sm d-docsite-code">d-p{{ suffix }}{{ val }}</span>
+            <span>
+              <dt-badge type="critical" kind="label" text="Deprecated" />
+            </span>
+          </dt-stack>
+        </th>
+        <td class="d-code--sm">
+          <span v-if="dir == 'y'">
+            padding-block: var({{ variable }}) !important;
+          </span>
+          <span v-else-if="dir == 'x'">
+            padding-inline: var({{ variable }}) !important;
+          </span>
+          <span v-else>
+            <span v-if="dir !== 'All'">padding-{{ dir === 'top' ? 'block-start' : dir === 'bottom' ? 'block-end' : dir === 'left' ? 'inline-start' : 'inline-end' }}: var({{ variable }}) !important; </span>
+            <span v-else>padding: var({{ variable }}) !important</span>
+          </span>
+        </td>
+        <td class="d-code--sm d-fc-tertiary d-ta-right">{{ output }}</td>
+        <td class="d-code--sm d-fc-tertiary d-ta-right">{{ parseFloat(output) * 10 }}px</td>
       </tr>
     </tbody>
   </template>

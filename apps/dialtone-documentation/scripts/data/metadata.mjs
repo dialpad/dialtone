@@ -46,7 +46,8 @@ export const widthHeight = {
  *
  * The `values` array and the coordinate stop list + `value` are token-derived (see emit-spacing.mjs);
  * everything here is non-derivable docs metadata:
- *  - `directions`: padding/margin direction suffixes, with deprecated physical names flagged.
+ *  - `directions`: padding/margin direction suffixes, with deprecated physical names and the
+ *    directions supported by deprecated pixel-named utilities flagged.
  *  - `coordinateDirections`: the inset utility axes (logical property, physical display name,
  *    class prefix, and whether percentage offsets apply).
  *  - `coordinateFlags`: per-coordinate `negative`/`combo` flags (docs-only). Keys MUST cover every
@@ -55,13 +56,17 @@ export const widthHeight = {
  */
 export const spacing = {
   directions: [
-    { name: 'All' },
-    { name: 'top', deprecated: true },
-    { name: 'right', deprecated: true },
-    { name: 'bottom', deprecated: true },
-    { name: 'left', deprecated: true },
-    { name: 'x' },
-    { name: 'y' },
+    { name: 'All', suffix: '', supportsLegacy: true },
+    { name: 'top', suffix: 't', deprecated: true, supportsLegacy: true },
+    { name: 'right', suffix: 'r', deprecated: true, supportsLegacy: true },
+    { name: 'bottom', suffix: 'b', deprecated: true, supportsLegacy: true },
+    { name: 'left', suffix: 'l', deprecated: true, supportsLegacy: true },
+    { name: 'block-start', suffix: 'bs' },
+    { name: 'block-end', suffix: 'be' },
+    { name: 'inline-start', suffix: 'is' },
+    { name: 'inline-end', suffix: 'ie' },
+    { name: 'x', suffix: 'x', supportsLegacy: true },
+    { name: 'y', suffix: 'y', supportsLegacy: true },
   ],
   coordinateDirections: [
     { direction: 'inset-block-start', directionPhysical: 'Top', prefix: 'ibs', percent: 'yes' },

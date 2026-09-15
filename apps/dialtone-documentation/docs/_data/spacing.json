@@ -1,29 +1,100 @@
 {
   "directions": [
     {
-      "name": "All"
+      "name": "All",
+      "suffix": "",
+      "supportsLegacy": true
     },
     {
       "name": "top",
-      "deprecated": true
+      "suffix": "t",
+      "deprecated": true,
+      "supportsLegacy": true
     },
     {
       "name": "right",
-      "deprecated": true
+      "suffix": "r",
+      "deprecated": true,
+      "supportsLegacy": true
     },
     {
       "name": "bottom",
-      "deprecated": true
+      "suffix": "b",
+      "deprecated": true,
+      "supportsLegacy": true
     },
     {
       "name": "left",
-      "deprecated": true
+      "suffix": "l",
+      "deprecated": true,
+      "supportsLegacy": true
     },
     {
-      "name": "x"
+      "name": "block-start",
+      "suffix": "bs"
     },
     {
-      "name": "y"
+      "name": "block-end",
+      "suffix": "be"
+    },
+    {
+      "name": "inline-start",
+      "suffix": "is"
+    },
+    {
+      "name": "inline-end",
+      "suffix": "ie"
+    },
+    {
+      "name": "x",
+      "suffix": "x",
+      "supportsLegacy": true
+    },
+    {
+      "name": "y",
+      "suffix": "y",
+      "supportsLegacy": true
+    }
+  ],
+  "legacyDirections": [
+    {
+      "name": "All",
+      "suffix": "",
+      "supportsLegacy": true
+    },
+    {
+      "name": "top",
+      "suffix": "t",
+      "deprecated": true,
+      "supportsLegacy": true
+    },
+    {
+      "name": "right",
+      "suffix": "r",
+      "deprecated": true,
+      "supportsLegacy": true
+    },
+    {
+      "name": "bottom",
+      "suffix": "b",
+      "deprecated": true,
+      "supportsLegacy": true
+    },
+    {
+      "name": "left",
+      "suffix": "l",
+      "deprecated": true,
+      "supportsLegacy": true
+    },
+    {
+      "name": "x",
+      "suffix": "x",
+      "supportsLegacy": true
+    },
+    {
+      "name": "y",
+      "suffix": "y",
+      "supportsLegacy": true
     }
   ],
   "values": [
@@ -118,6 +189,247 @@
     {
       "value": "800",
       "output": "6.4rem"
+    }
+  ],
+  "legacyMarginValues": [
+    {
+      "value": "0",
+      "variable": "--dt-spacing-0",
+      "output": "0rem"
+    },
+    {
+      "value": "1",
+      "variable": "--dt-spacing-1",
+      "output": "0.1rem"
+    },
+    {
+      "value": "2",
+      "variable": "--dt-spacing-25",
+      "output": "0.2rem"
+    },
+    {
+      "value": "4",
+      "variable": "--dt-spacing-50",
+      "output": "0.4rem"
+    },
+    {
+      "value": "6",
+      "variable": "--dt-spacing-75",
+      "output": "0.6rem"
+    },
+    {
+      "value": "8",
+      "variable": "--dt-spacing-100",
+      "output": "0.8rem"
+    },
+    {
+      "value": "10",
+      "variable": "--dt-spacing-125",
+      "output": "1rem"
+    },
+    {
+      "value": "12",
+      "variable": "--dt-spacing-150",
+      "output": "1.2rem"
+    },
+    {
+      "value": "14",
+      "variable": "--dt-spacing-175",
+      "output": "1.4rem"
+    },
+    {
+      "value": "16",
+      "variable": "--dt-spacing-200",
+      "output": "1.6rem"
+    },
+    {
+      "value": "20",
+      "variable": "--dt-spacing-250",
+      "output": "2rem"
+    },
+    {
+      "value": "24",
+      "variable": "--dt-spacing-300",
+      "output": "2.4rem"
+    },
+    {
+      "value": "32",
+      "variable": "--dt-spacing-400",
+      "output": "3.2rem"
+    },
+    {
+      "value": "48",
+      "variable": "--dt-spacing-600",
+      "output": "4.8rem"
+    },
+    {
+      "value": "64",
+      "variable": "--dt-spacing-800",
+      "output": "6.4rem"
+    },
+    {
+      "value": "96",
+      "variable": "--dt-layout-150",
+      "output": "9.6rem"
+    },
+    {
+      "value": "128",
+      "variable": "--dt-layout-200",
+      "output": "12.8rem"
+    }
+  ],
+  "legacyNegativeMarginValues": [
+    {
+      "value": "1",
+      "variable": "--dt-spacing-1-negative",
+      "output": "-0.1rem"
+    },
+    {
+      "value": "2",
+      "variable": "--dt-spacing-25-negative",
+      "output": "-0.2rem"
+    },
+    {
+      "value": "4",
+      "variable": "--dt-spacing-50-negative",
+      "output": "-0.4rem"
+    },
+    {
+      "value": "6",
+      "variable": "--dt-spacing-75-negative",
+      "output": "-0.6rem"
+    },
+    {
+      "value": "8",
+      "variable": "--dt-spacing-100-negative",
+      "output": "-0.8rem"
+    },
+    {
+      "value": "10",
+      "variable": "--dt-spacing-125-negative",
+      "output": "-1rem"
+    },
+    {
+      "value": "12",
+      "variable": "--dt-spacing-150-negative",
+      "output": "-1.2rem"
+    },
+    {
+      "value": "14",
+      "variable": "--dt-spacing-175-negative",
+      "output": "-1.4rem"
+    },
+    {
+      "value": "16",
+      "variable": "--dt-spacing-200-negative",
+      "output": "-1.6rem"
+    },
+    {
+      "value": "24",
+      "variable": "--dt-spacing-300-negative",
+      "output": "-2.4rem"
+    },
+    {
+      "value": "32",
+      "variable": "--dt-spacing-400-negative",
+      "output": "-3.2rem"
+    },
+    {
+      "value": "48",
+      "variable": "--dt-spacing-600-negative",
+      "output": "-4.8rem"
+    },
+    {
+      "value": "64",
+      "variable": "--dt-spacing-800-negative",
+      "output": "-6.4rem"
+    }
+  ],
+  "legacyPaddingValues": [
+    {
+      "value": "0",
+      "variable": "--dt-spacing-0",
+      "output": "0rem"
+    },
+    {
+      "value": "1",
+      "variable": "--dt-spacing-1",
+      "output": "0.1rem"
+    },
+    {
+      "value": "2",
+      "variable": "--dt-spacing-25",
+      "output": "0.2rem"
+    },
+    {
+      "value": "4",
+      "variable": "--dt-spacing-50",
+      "output": "0.4rem"
+    },
+    {
+      "value": "6",
+      "variable": "--dt-spacing-75",
+      "output": "0.6rem"
+    },
+    {
+      "value": "8",
+      "variable": "--dt-spacing-100",
+      "output": "0.8rem"
+    },
+    {
+      "value": "10",
+      "variable": "--dt-spacing-125",
+      "output": "1rem"
+    },
+    {
+      "value": "12",
+      "variable": "--dt-spacing-150",
+      "output": "1.2rem"
+    },
+    {
+      "value": "14",
+      "variable": "--dt-spacing-175",
+      "output": "1.4rem"
+    },
+    {
+      "value": "16",
+      "variable": "--dt-spacing-200",
+      "output": "1.6rem"
+    },
+    {
+      "value": "20",
+      "variable": "--dt-spacing-250",
+      "output": "2rem"
+    },
+    {
+      "value": "24",
+      "variable": "--dt-spacing-300",
+      "output": "2.4rem"
+    },
+    {
+      "value": "32",
+      "variable": "--dt-spacing-400",
+      "output": "3.2rem"
+    },
+    {
+      "value": "48",
+      "variable": "--dt-spacing-600",
+      "output": "4.8rem"
+    },
+    {
+      "value": "64",
+      "variable": "--dt-spacing-800",
+      "output": "6.4rem"
+    },
+    {
+      "value": "96",
+      "variable": "--dt-layout-150",
+      "output": "9.6rem"
+    },
+    {
+      "value": "128",
+      "variable": "--dt-layout-200",
+      "output": "12.8rem"
     }
   ],
   "coordinateDirections": [
