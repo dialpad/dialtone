@@ -310,7 +310,7 @@ The background surface of a Mode Island defaults to the root surface color. To o
 A real-world pattern: the callbar container already exists as a semantic element. The directive applies mode theming directly — no wrapper needed.
 
 ```vue demo
-<dt-stack v-dt-mode class="d-ba d-bc-subtle d-bgc-secondary d-p-75 d-py-50 d-bar-450 d-bs-md d-w100p" direction="row" gap="400">
+<dt-stack v-dt-mode class="d-ba d-bc-subtle d-bgc-secondary d-p-100 d-pis-125 d-py-100 d-bar-450 d-bs-md d-w100p" direction="row" gap="400">
   <dt-stack gap="100" direction="row">
     <dt-avatar
       full-name="TA"
@@ -349,7 +349,7 @@ A real-world pattern: the callbar container already exists as a semantic element
     </dt-button>
   </dt-stack>
   <dt-stack>
-    <dt-button class="d-p-150" circle :size="400" kind="critical">
+    <dt-button class="d-p-150" :size="400" kind="critical">
       <template #startIcon> <dt-icon name="phone-hang-up" size="500" /> </template>
     </dt-button>
   </dt-stack>

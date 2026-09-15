@@ -15,6 +15,8 @@ keywords: ["size tokens", "dimension tokens", "css variables", "whitespace", "st
 - Migration tool available: `npx dialtone-migration-helper`
 - The previous `space-to-size` config has been **removed** — use the new configs instead
 
+The 8px and 64px bases are fixed Dialtone values. Migration changes which scale a value uses; it does not configure either scale per project.
+
 ## Why Two Systems?
 
 Spacing and layout have fundamentally different size requirements, and a single token scale can't serve both well at the same time.
@@ -30,7 +32,7 @@ The old `--dt-size-*` and `--dt-space-*` tokens were the same values shared acro
 
 Use layout tokens for `width`, `height`, `min-width`, `max-width`, `min-height`, `max-height`, and similar structural properties.
 
-**Base unit:** `--dt-layout-base` = 64px. Scale stops multiply the base (e.g., `layout-100` = 64px, `layout-200` = 128px).
+**Fixed Dialtone base:** `--dt-layout-base` = 64px. Scale stops multiply the base (e.g., `layout-100` = 64px, `layout-200` = 128px).
 
 ### Mapping from `--dt-size-*`
 
@@ -84,7 +86,7 @@ If you need a token at one of these sizes, [open a request](https://github.com/d
 
 Use spacing tokens for `padding`, `margin`, `gap`, `inset`, and similar whitespace properties.
 
-**Base unit:** `--dt-spacing-base` = 8px. Scale stops multiply the base (e.g., `spacing-100` = 8px, `spacing-200` = 16px).
+**Fixed Dialtone base:** `--dt-spacing-base` = 8px. Scale stops multiply the base (e.g., `spacing-100` = 8px, `spacing-200` = 16px).
 
 ### Mapping from `--dt-space-*`
 

@@ -11,10 +11,12 @@ Dialtone uses a unified set of `layout` and `spacing` design tokens for all dime
 
 ### Layout and Spacing Tokens
 
-Layout and spacing tokens are CSS custom properties (a.k.a. CSS variables) generated from two base units:
+Layout and spacing tokens are CSS custom properties (a.k.a. CSS variables) generated from two fixed Dialtone base units:
 
 - **Spacing**: base `8px`
 - **Layout**: base `64px`
+
+These are system values, not project-level settings. Use the published scale stops rather than overriding `--dt-spacing-base` or `--dt-layout-base`.
 
 #### Samples:
 
