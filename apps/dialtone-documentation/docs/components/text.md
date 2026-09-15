@@ -1,6 +1,6 @@
 ---
 title: Text
-description: Consistent typography styling through text variants and raw font-size tokens.
+description: Semantic typography for individual text elements authored in Vue.
 status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-text--default
@@ -28,7 +28,17 @@ combinator: DtText
 <dt-text> ... </dt-text>
 ```
 
-Use in place of manually applying Text Styles. Examples of manual application **you should avoid** include:
+Use `DtText` for individual text elements that you author in a Vue template, such as a heading, paragraph, label, caption, or code value. Its props control the element's semantic tag and typography.
+
+### Choose a text component
+
+| Content ownership | Use |
+| --- | --- |
+| You author an individual text element in a Vue template. | [DtText](/components/text.md) |
+| You author a list and its items in a Vue template. | [DtTextList](/components/text-list.md) |
+| A renderer supplies a block of native HTML. | [DtProse](/components/prose.md) |
+
+Use `DtText` in place of manually applying Text Styles. Avoid:
 
 - Applying Text Styles classes, e.g. `class="d-text-body--md"`
 - Combinations of CSS Utilities, e.g. `class="d-fs-300 d-fw-semibold d-lh-300"`
@@ -37,7 +47,7 @@ Use in place of manually applying Text Styles. Examples of manual application **
 ### Guidance
 
 - Prefer `DtText` over individual typography utility classes to keep implementations aligned with token updates.
-- Use the default slot for rich content. The `text` prop provides a simple fallback string when no slot content is present.
+- Use the default slot for inline formatting or inline components within one text element. The `text` prop provides a simple fallback string when no slot content is present.
 - Choose the `as` prop to match the semantic HTML element (e.g., `h1`, `label`, `p`).
 - Use `variant` for complete text compositions and pair `size` with `variant` only when a raw font-size override is needed.
 - Most properties are optional, as they layer in on top of each other.
@@ -49,6 +59,7 @@ Use in place of manually applying Text Styles. Examples of manual application **
 - Pick the smallest `variant` that conveys the desired hierarchy.
 - Pair `size` with `variant` when the composition is right but the font size needs a token-backed override.
 - Use `tone` for semantic color tokens instead of standalone `d-fc-*` classes.
+- Use the default slot for inline links, emphasis, icons, or other content within the text element.
 
 </template>
 <template #dont>
@@ -56,6 +67,8 @@ Use in place of manually applying Text Styles. Examples of manual application **
 - Mix `DtText` with conflicting typography utilities (e.g., `d-fs-*`).
 - Render headings with non-heading tags (e.g., avoid `as="div"` for top-level titles).
 - Depend on the `text` prop when the content requires inline formatting; slot it instead.
+- Wrap a block of rendered HTML or Markdown output in `DtText`. Use `DtProse` instead.
+- Render an authored list through `DtText`. Use `DtTextList` and place `DtText` inside individual items when needed.
 
 </template>
 </dialtone-usage>
