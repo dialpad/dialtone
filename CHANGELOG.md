@@ -1,3 +1,10 @@
+# [9.191.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.190.0...dialtone/v9.191.0) (2026-09-15)
+
+
+### Features
+
+* **Icons:** NO-JIRA add variables icon ([#1421](https://github.com/dialpad/dialtone/issues/1421)) ([07784d4](https://github.com/dialpad/dialtone/commit/07784d4c60c94aaa6119758dc52d4c53384bfe6e))
+
 # [9.190.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.189.1...dialtone/v9.190.0) (2026-08-07)
 
 
