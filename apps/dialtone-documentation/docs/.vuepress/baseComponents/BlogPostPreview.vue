@@ -4,7 +4,8 @@
     class="d-fc-unset d-d-block d-bar-400 d-td-none"
   >
     <dt-card
-      class="d-my-100 d-bgc-primary d-bs-none h:d-bs-sm d-bar-500 d-bbw1 d-bc-transparent h:d-bc-subtle d-p-100 d-py-50"
+      class="d-my-100 d-bgc-primary d-p-100 d-py-0 d-bs-none d-bar-500 d-bc-transparent"
+      :class="viewport.pick({ xxl: 'h:d-bs-sm h:d-bc-subtle' })"
     >
       <template #content>
         <blog-post
@@ -22,6 +23,9 @@
 <script setup>
 import { format } from 'date-fns';
 import BlogPost from '@baseComponents/BlogPost.vue';
+import { useViewportBreakpoints } from '@composables/useViewportBreakpoints.js';
+
+const viewport = useViewportBreakpoints();
 
 defineProps({
   posted: {
