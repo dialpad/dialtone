@@ -32,7 +32,7 @@ The old `--dt-size-*` and `--dt-space-*` tokens were the same values shared acro
 
 Use layout tokens for `width`, `height`, `min-width`, `max-width`, `min-height`, `max-height`, and similar structural properties.
 
-**Fixed Dialtone base:** `--dt-layout-base` = 64px. Scale stops multiply the base (e.g., `layout-100` = 64px, `layout-200` = 128px).
+**Fixed Dialtone base:** `--dt-layout-base` = 64px. Numbered stops multiply the base (e.g., `layout-100` = 64px, `layout-200` = 128px). Off-scale exceptions include the unit in their names, such as `layout-1px`.
 
 ### Mapping from `--dt-size-*`
 
@@ -86,7 +86,7 @@ If you need a token at one of these sizes, [open a request](https://github.com/d
 
 Use spacing tokens for `padding`, `margin`, `gap`, `inset`, and similar whitespace properties.
 
-**Fixed Dialtone base:** `--dt-spacing-base` = 8px. Scale stops multiply the base (e.g., `spacing-100` = 8px, `spacing-200` = 16px).
+**Fixed Dialtone base:** `--dt-spacing-base` = 8px. Most stops multiply the base, including fractional in-between stops such as `spacing-25` = 2px. `spacing-1` is the supported 1px exception and is named directly for its value.
 
 ### Mapping from `--dt-space-*`
 
