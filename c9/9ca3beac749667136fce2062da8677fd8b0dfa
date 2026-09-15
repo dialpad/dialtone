@@ -1,0 +1,19 @@
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/color-stops.mjs
+  s_beaa14e40bfe96::t_544ad06919b676 13-18,26-28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "c99ca3beac749667136fce2062da8677fd8b0dfa",
+  "prompts": {},
+  "sessions": {
+    "s_beaa14e40bfe96": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e33aab3c-0c6c-4342-864b-6c4e60ea7c9b",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

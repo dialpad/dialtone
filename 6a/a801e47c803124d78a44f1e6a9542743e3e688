@@ -1,0 +1,22 @@
+packages/dialtone-icons/src/svg/icons/brand-full-color/compass-color.svg
+  s_4c20fe6a998dc4::t_e7b88cf8a7a429 1-32
+packages/dialtone-icons/src/keywords-icons.json
+  s_4c20fe6a998dc4::t_547f68580557e2 232-240
+  s_4c20fe6a998dc4::t_a43d986f89c726 241
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "6aa801e47c803124d78a44f1e6a9542743e3e688",
+  "prompts": {},
+  "sessions": {
+    "s_4c20fe6a998dc4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "d6570f8d-60ab-43fa-a713-b702e211b6b0",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Axel Lew <axel.lew@dialpad.com>"
+    }
+  }
+}
