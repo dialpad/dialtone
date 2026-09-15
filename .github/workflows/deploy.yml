@@ -9,6 +9,7 @@ on:
       - production
       - staging
       - next
+      - version9
     paths:
       - 'apps/dialtone-documentation/docs/**'
       - 'packages/dialtone-css/**/*.less'
@@ -119,7 +120,7 @@ jobs:
     name: Deploy sites
     if: ${{ needs.filter-actions.outputs.packages != '[]' }}
     env:
-      BUCKET_CLEANUP_EXCLUDE: '/alpha/|/beta/|/deploy-previews/|/staging/|/next/|/vue/'
+      BUCKET_CLEANUP_EXCLUDE: '/alpha/|/beta/|/deploy-previews/|/staging/|/next/|/vue/|/version9/'
     strategy:
       fail-fast: false
       matrix:

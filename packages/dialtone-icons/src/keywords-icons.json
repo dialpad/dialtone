@@ -1619,6 +1619,14 @@
       "unlink-2": [
         "url",
         "unchain"
+      ],
+      "variable": [
+        "brackets",
+        "code",
+        "parameter",
+        "data",
+        "curly",
+        "braces"
       ]
     },
     "general": {
