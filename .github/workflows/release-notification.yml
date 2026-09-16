@@ -29,12 +29,12 @@ jobs:
         id: sanitize-notes
         env:
           EXTRACTED_NOTES: ${{ steps.extract-release-notes.outputs.release_notes }}
-        run: >
-          echo "RELEASE_NOTES=$(
-            echo ${EXTRACTED_NOTES//$'\n'/\\n} |
-            sed -e 's/[(][^)]*[)]//g' -e 's/"/\\"/g' |
-            tr -d '()'
-          )" >> $GITHUB_ENV;
+        run: |
+          {
+            echo 'RELEASE_NOTES<<EOF'
+            echo "$EXTRACTED_NOTES" | sed -e 's/[(][^)]*[)]//g' -e 's/[()]//g'
+            echo 'EOF'
+          } >> "$GITHUB_ENV"
 
       - id: get-released-version
         name: Get released version from tag
@@ -52,9 +52,13 @@ jobs:
 
       - name: Send sms
         run: |
-          curl -m 70 -X POST ${{ env.API_URL }} \
-          -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
-          -H "Content-Type: application/json" \
-          -d '{
-            "message": "Dialtone ${{ env.RELEASE_VERSION }} has been published 🎉. Included changes:\n```markdown\n${{ env.RELEASE_NOTES }}```\nRead the full changelog: ${{ env.RELEASE_URL }}"
-          }'
+          set -euo pipefail
+          jq -n \
+            --arg version "$RELEASE_VERSION" \
+            --arg notes "$RELEASE_NOTES" \
+            --arg url "$RELEASE_URL" \
+            '{message: ("Dialtone " + $version + " has been published 🎉. Included changes:\n```markdown\n" + $notes + "```\nRead the full changelog: " + $url)}' | \
+          curl -m 70 -X POST "$API_URL" \
+            -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
+            -H "Content-Type: application/json" \
+            -d @- --fail-with-body
