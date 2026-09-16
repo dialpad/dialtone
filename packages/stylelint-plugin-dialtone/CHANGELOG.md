@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/dialpad/dialtone/compare/stylelint-plugin-dialtone/v1.3.0...stylelint-plugin-dialtone/v1.4.0) (2026-09-16)
+
+
+### Features
+
+* DLT-2979 dialtone version 10 upgrade ([#1426](https://github.com/dialpad/dialtone/issues/1426)) ([21b5032](https://github.com/dialpad/dialtone/commit/21b50328e54a528fc961fc62b27b0460e4f3bf80))
+
 # [1.4.0-next.3](https://github.com/dialpad/dialtone/compare/stylelint-plugin-dialtone/v1.4.0-next.2...stylelint-plugin-dialtone/v1.4.0-next.3) (2026-04-30)
 
 
