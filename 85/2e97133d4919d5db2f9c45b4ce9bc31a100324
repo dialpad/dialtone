@@ -1,0 +1,2846 @@
+packages/dialtone-vue/components/Text/TextConstants.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-100
+packages/dialtone-css/lib/build/less/variables/visual-styles.less
+  s_06a181a7d7b694::t_9cbaded6daa308 19-20,22
+scripts/migrate-code-examples.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-321
+apps/dialtone-documentation/docs/components/checkbox-group.md
+  s_06a181a7d7b694::t_9cbaded6daa308 7,10,12,18,22,28,32,36,47,51,66,70-71,73-81,84-92,95-103,105-106,110-111,130-131,137,141,145,157
+apps/dialtone-documentation/docs/components/lazy-show.md
+  s_06a181a7d7b694::t_9cbaded6daa308 7,10-11,16,24,26
+packages/dialtone-vue/.storybook/main.js
+  s_06a181a7d7b694::t_9cbaded6daa308 5,32-36
+apps/dialtone-documentation/docs/components/button.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,28,37,40,59,67-74,76,78,80-87,89,91,93-100,106,108-114,118-139,142-143,145-163,169-181,185,187-215,221,223-259,273,275,280,282,287,293-294,297,303,320,324,326,336,339,341,343,345-378,380-382,384,386-387,389,391,393-424,426,428-455,461-483,485-564,570-661,663,666-668,676,685-687,695,705-723,727-733,737-743,747-753,757-762,765,767,769,771-772,774,776-780,783-791,793-794,797,799,801-812,814-815,821-830,860
+apps/dialtone-documentation/docs/foundations/brand/our-icon/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-59
+packages/dialtone-vue/directives/scrollbar_directive/scrollbar.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-28
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/size-and-spacing.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-4
+apps/dialtone-documentation/docs/guides/migration/scrollbar-always/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-42
+packages/dialtone-vue/recipes/conversation_view/emoji_row/emoji_row.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 32,65-68
+apps/dialtone-documentation/docs/components/image-viewer.md
+  s_06a181a7d7b694::t_9cbaded6daa308 7,10,16,18,20,24,28,30,32,36
+packages/dialtone-css/lib/build/js/dialtone_migrate_link_rendering/underline-test-examples.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-57
+packages/dialtone-css/lib/build/less/components/dropdown.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,3,8-9,12
+packages/dialtone-tokens/tokens/theme/plum/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 10,14,18,26-34
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/fs12.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-6
+apps/dialtone-documentation/docs/guides/migration/chip-interactive/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-60
+packages/language-server/vscode/package.json
+  s_06a181a7d7b694::t_9cbaded6daa308 4
+apps/dialtone-documentation/docs/utilities/sizing/max-height.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7,9,11-12,14-32,36-47,49,58,60-61,65-67,71-73,77,79
+packages/dialtone-vue/recipes/conversation_view/message_input/message_input.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 104-123
+packages/dialtone-vue/recipes/leftbar/contact_centers_row/contact_centers_row.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 6,8,44,47-56,73,91-95,138,140,142
+packages/dialtone-vue/recipes/leftbar/contact_centers_row/contact_centers_row_default.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 7,12-13,15,19,22,25,30,39-40
+apps/dialtone-documentation/docs/components/collapsible.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,17-19,21-24,27,30-34,36,39-42,44-45,58
+packages/dialtone-css/lib/build/js/dialtone_migrate_tshirt_to_numeric/index.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-233
+packages/eslint-plugin-dialtone/tests/lib/rules/recommend-typography-style.js
+  s_06a181a7d7b694::t_9cbaded6daa308 20-23
+packages/dialtone-vue/components/Codeblock/CodeblockConstants.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-10
+apps/dialtone-documentation/docs/utilities/backgrounds/size.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-33
+packages/combinator/src/variants/variants_card.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-44
+packages/dialtone-vue/components/Radio/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/logo--primary-color-light.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-12
+apps/dialtone-documentation/docs/components/avatar.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,15-17,26,28,43-44,53,79,81-82,85,89-96,98-99,101,107-113,117-144,147,151-164,168-178,180-188,192-202,204,206,208-213,216,218,220,222-233,245-247,249,251,254,256-257
+apps/dialtone-documentation/docs/guides/migration/layout-and-spacing-tokens/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-132
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-physical-naming.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-395
+.github/workflows/deploy.yml
+  s_06a181a7d7b694::t_9cbaded6daa308 28,47,90
+packages/dialtone-vue/recipes/chips/grouped_chip/grouped_chip.mdx
+  s_06a181a7d7b694::t_9cbaded6daa308 18,20,22,24,26,42,46,49,54,57
+packages/dialtone-docs/tests/fixtures/public-docs/complete.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-45
+apps/dialtone-documentation/docs/_data/spacing.json
+  s_06a181a7d7b694::t_9cbaded6daa308 2-28,32,36,39-40,43-44,47-48,51-52,55-59,63-67,71-72,75,79-83,87-103,107-108,111-112,115-120,125-127,131-133,137-139,143-145,149-150,155-156,161-162,172,178-184,187,190,193,196,199,202,205,208,211,214,217,220,223,226,229,232,235,238,241,244,247,250-304,319,322
+apps/dialtone-documentation/thumbs/notice.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3-4,6-13
+packages/dialtone-tokens/postcss/layered-tokens.cjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-91
+packages/dialtone-tokens/tokens/base/material/iron.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-26
+packages/dialtone-vue/recipes/leftbar/general_row/leftbar_general_row_icon.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 39
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/base-shell-token.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 11,19,27,35
+apps/dialtone-documentation/thumbs/root-layout.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+packages/dialtone-vue/components/ButtonGroup/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+packages/combinator/src/components/controls/control_segmented.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-94
+packages/combinator/src/variants/variants_badge.js
+  s_06a181a7d7b694::t_9cbaded6daa308 2-36,44-92
+packages/combinator/src/variants/variants_item_layout.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-25
+packages/dialtone-docs/project.json
+  s_06a181a7d7b694::t_9cbaded6daa308 6-11
+packages/dialtone-css/lib/build/js/dialtone_migrate_chip_interactive/test.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-244
+packages/dialtone-css/lib/build/less/components/card.less
+  s_06a181a7d7b694::t_9cbaded6daa308 20,42,48-49,56,58-59
+apps/dialtone-documentation/docs/utilities/typography/word-wrap.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-14,21-24,31-34,41-44,51-54
+packages/dialtone-css/lib/build/less/utilities/layout.less
+  s_06a181a7d7b694::t_9cbaded6daa308 18-24,28,38-43,47-52,56-61,65-70,91-93,100-109,129,132-135,161
+packages/dialtone-vue/components/ComboboxMultiSelect/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-3
+packages/dialtone-vue/recipes/item_layout/contact_info/contact_info_variants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-4,23,27,42-43,62,66,75,83-84,109,113,124,134,138,140,143,151-152,171,175,186,196,200,202,205,215-216,227,245,255,259,261,264,271-272,291,295,298,311,323,328,339-340,351,366,373-374,385,403,415-418,422
+packages/dialtone-vue/components/InputGroup/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/typography.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-5
+apps/dialtone-documentation/docs/utilities/backgrounds/clip.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-17,24-25
+packages/dialtone-vue/components/Emoji/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-icons/package.json
+  s_06a181a7d7b694::t_9cbaded6daa308 3,7,10-14,16-32,36-37,40-41,44-45
+packages/dialtone-vue/recipes/leftbar/contact_centers_row/contact_centers_row.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 72-95
+packages/stylelint-plugin-dialtone/lib/rules/use-dialtone-tokens.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1,23
+packages/dialtone-vue/directives/focusgroup_directive/focusgroup_directive_events.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-169
+packages/combinator/src/components/controls/control_dynamic.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 5-6,18-21,27-28,31,37,46,49-50,54-55
+apps/dialtone-documentation/docs/utilities/borders/divide-width.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11,13-15,18-20,28-29,31-33,35,37-39,41,43-45,53-57,73,78,85,90
+scripts/lint-doc-examples.test.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-472
+apps/dialtone-documentation/thumbs/emoji-text-wrapper.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-7
+packages/dialtone-css/lib/build/less/components/combobox.less
+  s_06a181a7d7b694::t_9cbaded6daa308 16,18,24,34-38
+packages/dialtone-css/lib/build/less/themes/example.less
+  s_06a181a7d7b694::t_9cbaded6daa308 36
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/fs28.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-7
+apps/dialtone-documentation/docs/guides/migration/hsl-to-oklch/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-263
+packages/dialtone-tokens/tokens/theme/aegean/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 14-25,28
+packages/dialtone-vue/directives/tooltip_directive/tooltip.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 20,136-151
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/base-color-migration-test-examples.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-197
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/success-to-positive.test.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-287
+packages/dialtone-vue/docs/components.js
+  s_06a181a7d7b694::t_9cbaded6daa308 4-5,9,13,17-18
+packages/dialtone-tokens/tokens/theme/120/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/hsl-to-oklch.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-77
+packages/dialtone-tokens/tokens/$metadata.json
+  s_06a181a7d7b694::t_9cbaded6daa308 6-12,15-16,29-32,41-42,48,54-126
+apps/dialtone-documentation/docs/components/split-button.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,8,11,26,42-102,106-113,117-123,127-136,140-172,176-185,189-232,238-275,278-279,283-291,294-295,299,303-352
+packages/dialtone-vue/components/RichTextEditor/Extensions/CustomLink/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-vue/recipes/leftbar/callbox/callbox.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 14-25,29,35,68-69
+packages/combinator/src/variants/variants_emoji.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-28
+apps/dialtone-documentation/docs/components/illustration.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11-13
+apps/dialtone-documentation/docs/utilities/flex/align-self.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-8,14-18,26-30,38-42,50-54,67-68
+packages/dialtone-vue/prototypes/dialpad/leftbar/dialpad_leftbar.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-3,11,15,40,50,53,67,82,107-109
+packages/combinator/src/variants/variants_checkbox.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1,3-8,16-28
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/logo--positioning.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-93
+apps/dialtone-documentation/docs/components/item-layout.md
+  s_06a181a7d7b694::t_9cbaded6daa308 7,10-11,16-21,30-31,34,36,38,46-65,67-68
+packages/combinator/src/components/controls/control_suggestion.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 7-8,18,23,25-26,33,62
+packages/combinator/src/components/option_bar/option_bar_control_selector.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 14
+packages/dialtone-vue/components/FilterPill/FilterPillDefault.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-48
+.claude/skills/vue-conventions.md
+  s_06a181a7d7b694::t_9cbaded6daa308 18,23
+packages/dialtone-vue/components/FilterPill/FilterPill.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-750
+packages/language-server/vscode/CHANGELOG.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-3
+packages/combinator/tests/setupTests.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-20
+packages/combinator/src/variants/variants_chip.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2,5-8,15-36
+packages/combinator/src/variants/variants_modal.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+packages/dialtone-tokens/tokens/theme/melon/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 4-7,22,32
+apps/dialtone-documentation/docs/_data/banner.json
+  s_06a181a7d7b694::t_9cbaded6daa308 14,16,24,26
+packages/dialtone-vue/directives/focusgroup_directive/focusgroup_constants.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-64
+apps/dialtone-documentation/thumbs/badge.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-9
+apps/dialtone-documentation/docs/.vuepress/baseComponents/UiKitsComparisonTable.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-145
+packages/dialtone-css/CHANGELOG.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/eslint-plugin-dialtone/docs/rules/deprecated-class-props.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-105
+packages/stylelint-plugin-dialtone/docs/rules/no-deprecated-space-tokens.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-46
+apps/dialtone-documentation/docs/utilities/backgrounds/attachment.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-22,29-40,49-60
+packages/eslint-plugin-dialtone/lib/rules/focusgroup-requires-role.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-46
+packages/dialtone-vue/common/constants/layout.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-42
+packages/dialtone-vue/recipes/leftbar/contact_centers_row/contact_centers_row_off_duty.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 7,12-13,15,19,22,25,30,40,46,58-60
+packages/dialtone-docs/src/generators/build-public-docs.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-243
+packages/dialtone-vue/components/FilterPill/FilterPillVariants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-399
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/theme-to-mode-test-examples.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-24
+packages/combinator/src/variants/variants_input.js
+  s_06a181a7d7b694::t_9cbaded6daa308 2-14,27-176
+packages/dialtone-vue/components/SplitButton/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+apps/dialtone-documentation/docs/utilities/layout/visibility.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,9-14
+apps/dialtone-documentation/thumbs/combobox-with-popover.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-5
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/gradient.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-5,9-12,14-27
+packages/dialtone-tokens/tokens/base/material/amethyst.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-26
+packages/dialtone-vue/components/Box/BoxConstants.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-79
+packages/dialtone-vue/recipes/item_layout/contact_info/contact_info.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 114,116,121-124,139-184
+packages/dialtone-tokens/tokens/theme/121/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+packages/dialtone-vue/components/Dropdown/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-3
+packages/dialtone-vue/recipes/chips/grouped_chip/grouped_chip.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 3,8-11,75,79,83,87,91-119
+apps/dialtone-documentation/docs/.vuepress/exampleComponents/ExamplePopover.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 33
+packages/dialtone-css/lib/build/js/dialtone_migrate_link_rendering/index.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-1041
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/download-product-storytelling.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-126
+packages/combinator/src/components/option_bar/option_bar_control.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 4-5,8-18,20-31,33-61,63-73,79-80,82,84-85,144-150,181-185,187-188,223-260
+packages/combinator/src/components/renderer/renderer.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 6,12,17,64-70
+packages/dialtone-vue/components/SegmentedControl/SegmentedControlDefault.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-43
+apps/dialtone-documentation/docs/guides/content/voice-and-tone/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 6
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/space-to-spacing-test-examples.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-193
+packages/dialtone-vue/components/Badge/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+packages/eslint-plugin-dialtone/lib/rules/deprecated-stack-flow-classes.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-104
+packages/dialtone-css/lib/build/less/recipes/time_pill.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,3
+common/utils/server.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 17
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/content.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-17
+apps/dialtone-documentation/docs/.vuepress/plugins/fenced-demo-shared.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-88
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/download-logo--primary-2-dark.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-12
+packages/dialtone-tokens/tokens/theme/109/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+apps/dialtone-documentation/docs/.vuepress/theme/components/Sidebar.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 6,9,11-38,40,44-46,48-58,63-64,69-70,73-338,340-345
+packages/dialtone-vue/eslint.config.js
+  s_06a181a7d7b694::t_9cbaded6daa308 210
+packages/combinator/src/components/controls/control_number.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 3,24,30,43,53
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/interaction.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-17
+packages/eslint-plugin-dialtone/CHANGELOG.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-50,58-86,94-95,103-108
+apps/dialtone-documentation/docs/.vuepress/baseComponents/IconPopoverContent.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2,9,14,27-32,35,41-46,49-54,63,68,73,80,85,97,101-105,110,115
+packages/combinator/src/components/controls/control_object.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 3,38,44,57-58,69,76
+packages/dialtone-vue/recipes/conversation_view/editor/EditorToolbarDropdownButton.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 20,42-43
+apps/dialtone-documentation/docs/components/pagination.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,17,22,26,31
+packages/dialtone-vue/common/sr_only_close_button.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 16-17
+packages/dialtone-vue/components/SegmentedControl/SegmentedControl.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-132
+apps/dialtone-documentation/docs/components/input.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,20,41-55,57,65-73,75,79-85,89-99,101,105,107,134,136,141-142,149,153,155,160,196,201,203,206-220,223,227-265,267,273-330,357-358,362-364
+packages/combinator/src/variants/variants_progress_circle.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-64
+packages/dialtone-tokens/tokens/theme/102/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+apps/dialtone-documentation/docs/downloads/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-7
+apps/dialtone-documentation/docs/.vuepress/views/DialtoneChangelog.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3
+packages/dialtone-css/lib/build/less/components/avatar.less
+  s_06a181a7d7b694::t_9cbaded6daa308 11,19,24-27,29-34,41-55,57-200,211-219,222,229,249-252,257-258,261-265,269-274,277,281,284-285,288-298,308-309,312,315,325-326,328,332,337,347-351,353-356,359-361,363-369,372-373,375-386,388-410,419-420,433,435,458-464,473-476,479-489,493-498,502-514,517-559,561-604
+packages/dialtone-vue/css/dialtone-globals.less
+  s_06a181a7d7b694::t_9cbaded6daa308 16-17,33
+apps/dialtone-documentation/docs/components/toast.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,15-18,20-23,26,37,45-54,61-71,74,84,92,98,103,143,145,160,164-165
+packages/combinator/src/components/settings_menu/settings_menu.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 21-22,26-27,37,41-42,52,56-57,67,72-73,76,78-79,90
+apps/dialtone-documentation/docs/_data/presence.json
+  s_06a181a7d7b694::t_9cbaded6daa308 32-36
+packages/dialtone-tokens/tokens/theme/verdant-haze/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 6,10,14,18,22-34,43,50
+packages/dialtone-css/lib/build/less/recipes/leftbar_row.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,8,11-12,22,24,33,108,146,150,153-154,160-161,208,218,224,241-242,259-261,268,273-274,276,297-298,304-305,315,320-321,330,334,340,347-348,353-355,436-439
+packages/dialtone-query-core/src/types.ts
+  s_06a181a7d7b694::t_9cbaded6daa308 81-99
+apps/dialtone-documentation/docs/_data/modal.json
+  s_06a181a7d7b694::t_9cbaded6daa308 19,24,29,34,36,39,74
+packages/dialtone-vue/recipes/leftbar/group_row/group_row.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 32
+apps/dialtone-documentation/docs/components/radio-group.md
+  s_06a181a7d7b694::t_9cbaded6daa308 7,10,16,26,32,46,52,60,66,76,82,87,92,96-98,101-103,114,123-125,132-133
+packages/dialtone-vue/package.json
+  s_06a181a7d7b694::t_9cbaded6daa308 3,66,68,72
+apps/dialtone-documentation/scripts/lib/transform-icon-catalog.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-95
+packages/combinator/src/variants/variants_validation_messages.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-33
+packages/dialtone-tokens/tokens/theme/130/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+packages/combinator/src/components/option_bar/option_bar.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3,5-25,27-28,30-31,34-36,39-53,57-78,80-132,138,141-144,146,170-174,176-184,186-187,190-226,240,242,246-250,253,257-260
+packages/stylelint-plugin-dialtone/CHANGELOG.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-29
+packages/dialtone-css/lib/build/less/recipes/callbar_button_with_popover.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,8-13,21,41,55,60
+packages/dialtone-vue/components/Scroller/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-vue/directives/focustrap_directive/focustrap.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-154
+packages/combinator/.github/documentation/USAGE.md
+  s_06a181a7d7b694::t_9cbaded6daa308 218-219
+packages/dialtone-vue/recipes/buttons/callbar_button_with_dropdown/callbar_button_with_dropdown_default.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 40,61,78-81
+packages/dialtone-css/lib/build/less/recipes/contact_info.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,5-6,14,27,33,39,45,49,53
+packages/dialtone-cli/src/data-resolver.ts
+  s_06a181a7d7b694::t_9cbaded6daa308 23,25,32,42-43,79,112
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/download-logo--meetings-light.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-42
+apps/dialtone-documentation/docs/.vuepress/theme/assets/less/dialtone-syntax.less
+  s_06a181a7d7b694::t_9cbaded6daa308 6-13,15-16,18,20,22,24,32-33,38-39,47-48,51-52,62-66,76,82,90-91,95,109,118,126,132,137,143,161,165,172-174,176-177,182,188,190,197-198,200-201,206,208,213,217,221,225
+apps/dialtone-documentation/docs/.vuepress/baseComponents/CodeWellHeader.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3-10,12,42,44
+packages/dialtone-vue/prototypes/dialpad/leftbar/components/options_dropdown.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 11,14,49-52
+apps/dialtone-documentation/docs/_data/segmented-control.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-101
+apps/dialtone-documentation/docs/guides/migration/logical-naming/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-4,6,8-11,13,15-17,19,21,23-24,26,28-43,45-46,48,50-65,67-68,70,72-73,75,78-83,85-142,144-163,165-192,194-209,212-217,219,221,223,225,227-229,231-241,243,245-247,249,251,253-255,257,259
+packages/dialtone-tokens/tokens/components/checkbox/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 6,10,14,50
+apps/dialtone-documentation/docs/utilities/grid/gap.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7,9,11,13-18,24,26-36,46,49,51-53,56-57,59-80
+packages/combinator/.github/documentation/internal/OPTION_BAR.md
+  s_06a181a7d7b694::t_9cbaded6daa308 5,25,30,37,50-51,58,63,70,87,97,102-103
+packages/combinator/src/variants/variants_lazy_show.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-26
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ButtonVariantsTable.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 4,13-15,23,32,34,37,39,45-46,49,51
+packages/dialtone-css/lib/build/less/recipes/settings_menu_button.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,3-5,20-24,28-29
+apps/dialtone-documentation/docs/_data/breadcrumbs.json
+  s_06a181a7d7b694::t_9cbaded6daa308 9-12,18-21
+packages/dialtone-vue/directives/mode_directive/mode.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-181
+packages/dialtone-css/lib/build/less/components/list-item.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,22,26,28,31,38-40,57,61,67-68
+packages/dialtone-vue/components/Breadcrumbs/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-3
+apps/dialtone-documentation/docs/utilities/typography/font-color.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-29,31-34,40-41,48-49,56-57,64-66,68-101,104-120,126-135
+packages/combinator/src/variants/variants_filter_pill.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-148
+apps/dialtone-documentation/docs/foundations/icons/usage/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 2-5,8,10,12,14-18,20,22,24,28-33,39,41-44,46,48-51,53,55,57,62-63,65-94,98-100,102,104-109,111-112,114-116,118-120
+packages/dialtone-css/lib/build/less/utilities/backgrounds.less
+  s_06a181a7d7b694::t_9cbaded6daa308 18-29,33,57,59-61,63-65,114,118-121
+apps/dialtone-documentation/docs/.vuepress/views/UiKitsOverview.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-78
+apps/dialtone-documentation/docs/components/radio.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,28-29,40,46-53,57-62,66-90,94,101,105,115-129,137,141
+.claude/rules/postcss-responsive-variations.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-84
+apps/dialtone-documentation/docs/.vuepress/theme/components/DialtoneLogo.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3
+apps/dialtone-documentation/docs/utilities/grid/justify-items.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-16,24-29,37-42,50-55,64-82
+.claude/rules/logical-naming.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-99
+apps/dialtone-documentation/docs/components/prose.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-356
+apps/dialtone-documentation/thumbs/mode-island.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-19
+packages/dialtone-query-core/tests/tools/docs.test.ts
+  s_06a181a7d7b694::t_9cbaded6daa308 1-319
+packages/dialtone-css/lib/build/js/dialtone_migrate_link_rendering/button-nav-test-examples.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-92
+packages/dialtone-icons/CHANGELOG.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-42,50-82,109-116
+packages/dialtone-tokens/tokens/components/avatar/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 3-49,52-61,65,69,73,77,81,85,89,93,97,101,105,109,113,117,121,125,129,133,137-139,144
+packages/language-server/vscode/CHANGELOG.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-css/lib/build/less/components/keyboard-shortcut.less
+  s_06a181a7d7b694::t_9cbaded6daa308 13,16,20,22,24,39-40,48,63-64
+packages/dialtone-vue/components/EmptyState/EmptyStateVariants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-71
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/logo--negative-space.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-23
+packages/stylelint-plugin-dialtone/lib/rules/no-deprecated-size-tokens.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-63
+packages/combinator/src/variants/variants_rich_text_editor.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-20
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-grid-gap-classes.js
+  s_06a181a7d7b694::t_9cbaded6daa308 20-23
+packages/dialtone-vue/components/Tab/Tab.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 5,7-9,11-14,19-22,24,28-69,76,142-165,200-208,212-243,251-259
+packages/dialtone-vue/recipes/leftbar/unread_pill/unread_pill_variants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2,19,24,28
+packages/dialtone-vue/common/mode_constants.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-39
+packages/dialtone-vue/components/KitchenSink/KitchenSink.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-37
+packages/dialtone-vue/directives/scrollbar_directive/scrollbar.mdx
+  s_06a181a7d7b694::t_9cbaded6daa308 1-58
+packages/dialtone-tokens/tokens/theme/buttercream/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 6,14,18,22-34,43
+.claude/rules/documentation-writing.md
+  s_06a181a7d7b694::t_9cbaded6daa308 9,16,22,26-219,221
+packages/dialtone-vue/directives/focustrap_directive/focustrap_constants.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-14
+packages/dialtone-tokens/tokens/theme/103/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+apps/dialtone-documentation/docs/foundations/colors/marketing/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-136
+apps/dialtone-documentation/scripts/data/emit-spacing.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-47
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-class-props.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-338
+packages/dialtone-vue/directives/scrollbar_directive/scrollbar_directive_default.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-112
+packages/dialtone-css/lib/build/less/utilities/typography.less
+  s_06a181a7d7b694::t_9cbaded6daa308 30,36,38,51-52,55,242,244,248-249,251-252,254,256,259,280-290,357-358,371-372,377,523
+apps/dialtone-documentation/docs/utilities/typography/font-family.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-8,14-15,22-23,30-31,44,46-47,65,67-68
+packages/dialtone-mcp-server/package.json
+  s_06a181a7d7b694::t_9cbaded6daa308 3,17,27
+packages/dialtone-vue/directives/mode_directive/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-icons/README.md
+  s_06a181a7d7b694::t_9cbaded6daa308 22,24,28,30,37,44
+packages/dialtone-tokens/tokens/theme/prota-deuter/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-27
+scripts/lint-doc-examples.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-346
+packages/dialtone-vue/recipes/leftbar/contact_row/contact_row.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 71,73,78-81
+packages/eslint-plugin-dialtone/docs/rules/deprecated-physical-naming.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-63
+packages/dialtone-css/postcss/dialtone-generators.cjs
+  s_06a181a7d7b694::t_9cbaded6daa308 7,11,15-28,52-63,107-145,179-184,186,231,233,342,353,366-379,381-395,400-418,420-427,502-570,574-578,583-652,656-659,664-727,736-737,742,749,756,763,770,777,784,787-798,808-1121,1141-1145,1190-1203,1209-1215
+packages/dialtone-vue/CHANGELOG.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-css/lib/build/less/components/tooltip.less
+  s_06a181a7d7b694::t_9cbaded6daa308 33,48-49,53,59,67,134-135,138-140,152-153,156-158,168,171,182-183,193,196,208-209,212-214,226-227,230-232,242,245,256-257,267,270-271,274-289
+apps/dialtone-documentation/docs/.vuepress/exampleComponents/ExampleProfileCard.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-54
+apps/dialtone-documentation/docs/components/list-item.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11-32,38,40,42,50-51,54-55,64-65,69,77-78,84-89,93-98,100-101,105,107-108,113-114,118,121,126-127,131,134,139,142
+packages/combinator/src/components/tools/node.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 15-18,23
+apps/dialtone-documentation/docs/utilities/borders/color.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-8,14-24,31-40,47-56,64-73,80-92,98-113,116-118,125
+packages/dialtone-docs/tests/fixtures/public-docs/planned.md
+  s_06a181a7d7b694::t_9cbaded6daa308 2-3,6-9
+packages/dialtone-css/lib/build/less/components/emoji-text-wrapper.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,5
+packages/dialtone-css/lib/build/less/themes/default.less
+  s_06a181a7d7b694::t_9cbaded6daa308 27-29,31,42
+packages/dialtone-vue/recipes/conversation_view/attachment_carousel/media_components/image_carousel.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 32,49-51,54
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ComponentAccessibleTable.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 5,9,11,17,19,25,27,37,39-62
+packages/dialtone-vue/recipes/conversation_view/feed_item_pill/feed_item_pill.mdx
+  s_06a181a7d7b694::t_9cbaded6daa308 48,51,68
+.github/workflows/unit_tests.yml
+  s_06a181a7d7b694::t_9cbaded6daa308 7-8,14-15,25-46,48-49,62-95
+packages/dialtone-css/lib/build/js/dialtone_migrate_flex_to_stack/index.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 145,147-187,189-202
+packages/dialtone-tokens/tokens/theme/128/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+packages/dialtone-vue/recipes/conversation_view/editor/EditorToolbarButton.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 11,28
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/components.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-5
+packages/eslint-plugin-dialtone/CHANGELOG.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+apps/dialtone-documentation/docs/components/datepicker.md
+  s_06a181a7d7b694::t_9cbaded6daa308 5,8,11,30-32,36,46,52,64,70-78,88,98,109,111,113-143,246-269
+apps/dialtone-documentation/thumbs/item-layout.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-20
+apps/dialtone-documentation/docs/utilities/interactivity/outline.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-15,17-23
+packages/combinator/src/lib/info_extend.js
+  s_06a181a7d7b694::t_9cbaded6daa308 21,58-81
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/chart-dondont-1-1.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 11-12
+packages/dialtone-vue/components/Codeblock/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+stylelint.config.cjs
+  s_06a181a7d7b694::t_9cbaded6daa308 21,42,46,62-74,80-81,84-87
+apps/dialtone-documentation/docs/components/chip.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,19-21,25-27,33-35,39-41,45-46,57,61,73,77,90,96-97,100,104-111
+packages/dialtone-css/postcss/validate-layers.cjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-87
+packages/dialtone-css/lib/build/less/components/resizable.less
+  s_06a181a7d7b694::t_9cbaded6daa308 19-20,46-47,65-66,72
+packages/dialtone-css/lib/build/js/dialtone_migrate_typography/index.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-1628
+packages/dialtone-tokens/postcss/dialtone-tokens.cjs
+  s_06a181a7d7b694::t_9cbaded6daa308 6,10-15,26,45-71,81,118-121,203,225-226,230-236
+packages/dialtone-tokens/tests/fixtures/theme-stubs.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-24
+packages/combinator/src/variants/variants_split_button.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-148
+packages/dialtone-tokens/tokens/theme/110/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+packages/dialtone-tokens/tests/config.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-235
+packages/dialtone-vue/recipes/chips/grouped_chip/grouped_chip_default.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3,5-6,9,13-14,16,18-19,22,27-28,30,37
+packages/dialtone-docs/tests/fixtures/public-docs/no-status.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-8
+packages/dialtone-vue/recipes/notices/top_banner_info/top_banner_info_variants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 6,11-16,20,22,25,37-42,44-47,49-55,62-65,67-70,72,78-81,83-86,88,93-100,102-108,137,149,152,154,156-158,163,168-171,179-180
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ShowcaseCarousel.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-172
+packages/dialtone-vue/recipes/conversation_view/message_input/message_input.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 6-7,14-22,74,79,81,99,107,144,189,227,244,287,289,291-296,299,372,374,376,382,412,804,908,934,1031
+apps/dialtone-documentation/.lintstagedrc.cjs
+  s_06a181a7d7b694::t_9cbaded6daa308 9-11
+packages/dialtone-tokens/tokens/theme/109/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+packages/dialtone-vue/components/SegmentedControl/SegmentedControlVariants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-681
+packages/dialtone-tokens/tokens/theme/high-desert/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 4-7,10,14,18,22,26
+packages/dialtone-vue/recipes/leftbar/contact_centers_row/contact_centers_row.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 17-19,29-34,72
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/icon--billboard.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-6,9-22
+apps/dialtone-documentation/docs/utilities/layout/overflow.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-8,12-67,82,84-86
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/logo--how-to-use.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-25
+packages/dialtone-vue/recipes/conversation_view/message_input/extensions/meeting_pill/MeetingPill.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 7,15,20,39-41
+packages/dialtone-vue/components/Stack/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+packages/dialtone-vue/directives/focustrap_directive/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-vue/recipes/leftbar/contact_row/contact_row_variants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2,112
+packages/dialtone-vue/tsconfig.json
+  s_06a181a7d7b694::t_9cbaded6daa308 21
+apps/dialtone-documentation/docs/_data/flex.json
+  s_06a181a7d7b694::t_9cbaded6daa308 126-150,203-212,250-259,302-311
+packages/dialtone-docs/src/content/development/development-icons.md
+  s_06a181a7d7b694::t_9cbaded6daa308 160,164,167,170,182
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/fs14.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-7
+apps/dialtone-documentation/thumbs/box.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-10
+packages/dialtone-tokens/tokens/theme/131/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+apps/dialtone-documentation/docs/components/badge.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,42,44,48,50,54,82,85,87,90,129,135,138,145,149,153-167,173-181,185-207,213-238,240-259,264-265,295-327,329-340,344-363,365-366,384
+packages/dialtone-css/lib/build/less/components/button.less
+  s_06a181a7d7b694::t_9cbaded6daa308 16,18-19,24,30,34,38,42,46,50,54,58,62,66,81,116,118-122,124-127,129-211,277-307,312,327,330-332,347,351,360,373,399,418,420,424,481,539,620-621,625-626,640,646-649,671,675-677,682-683,687,693-695,707,711,715,725,729-735,739-741,749-750,752-765,768-769,773-775,783-785,790-792,798-803,812,816,819-821,823-827,829-836,839-841,845-847,850-852,855-857,860-862,865-867,877
+packages/combinator/src/components/option_bar/option_bar_member_group.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-8,10-34,43-81,113-133,138-139,148-177,180,229-237,242-243
+packages/dialtone-docs/tests/fixtures/public-docs/multiline-directive.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-22
+packages/dialtone-css/lib/build/js/dialtone_migrate_link_rendering/helpers.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-25
+apps/dialtone-documentation/docs/components/loader.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4-5,7,10,34-36,42-58
+packages/dialtone-tokens/tokens/theme/101/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+packages/dialtone-tokens/tokens/theme/trita/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-54
+apps/dialtone-documentation/docs/foundations/brand/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 2-3,5-8,12-15,17,19-20,22-24,26-28,30-33
+packages/dialtone-vue/recipes/buttons/callbar_button_with_dropdown/callbar_button_with_dropdown.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 9
+packages/combinator/src/components/renderer/renderer_menu.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 5,9,15,30,35-36,40,43,47,64
+packages/dialtone-tokens/package.json
+  s_06a181a7d7b694::t_9cbaded6daa308 3,8-9,45
+packages/dialtone-vue/recipes/conversation_view/message_input/message_input_button.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 9,30-33
+pnpm-lock.yaml
+  s_06a181a7d7b694::t_9cbaded6daa308 8,211,291-292,369,371-373,377-379,413-415,462,492-494,498-506,527,641,650-655,675,710-712,717,722-724,728-730,753-755,915,920-921,924-927,937-939,956-958,962-967,994,1033-1035,1389-1403,3631-3633,4065-4066,4070,4781-4793,6531-6532,6604-6607,7738-7741,8906-8908,10507-10508,11564-11565,11569-11570,12027-12029,13234-13239,13987,14250-14251,15138-15153,15602,15643,15651,15658,15695,15733,15760,15800,15929,16198,17780-17781,18228,18231,18252,18254,18257,18263,18270,18286,18296,18303,18305-18306,18320,18322,18327,18342,18714,18720,18835,18837,18854,19023-19027,19054-19067,19561,19563-19564,19566-19567,19569-19570,19577,19579-19580,19588,19593,19598,19600-19601,19613,19622,19630,19640,19646,19648-19649,19651-19652,19736,19781,19791,20068,20075,20079,20584,20724-20725,20929-20930,21301,21303,21305,21316-21317,21780,22182-22192,22219,22311-22312,22629-22633,22781,23050-23051,23615,23618,23630,24052-24053,24345,24384,24386,24392,24434,24460-24461,24518,24544,24620,24721,24777,24862,24886,24890,24912,24924,24935,24953,24955,24958,25348-25349,25357,25359,26303,27388,27390,27392,27871-27875,27877-27878,28601,28987,29380-29383,29608,29616,29815-29835,30457-30476,30635,30783,30795-30796,30831
+packages/dialtone-tokens/tokens/theme/137/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+apps/dialtone-documentation/.github/CONTRIBUTING.md
+  s_06a181a7d7b694::t_9cbaded6daa308 42-43
+packages/dialtone-tokens/tokens/theme/119/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+apps/dialtone-documentation/docs/utilities/layout/box-sizing.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-17
+apps/dialtone-documentation/docs/.vuepress/theme/assets/less/dialtone-docs.less
+  s_06a181a7d7b694::t_9cbaded6daa308 19-31,42-46,56,62,68,71-76,80-89,92-94,97-99,112,120,125,130,144-145,149,157,169,179,185,189,192-193,198-199,203-206,210,219,245,262,268,276,287-288,290-356,362-365,368-383,387-440,442-444,455-457,461-462,466-467,472,482,488-492,495,501-503,512-562,566,572-573,577-579,582,586-603,605,609,619,623-627,664-665,671-672,675,677-678,688-689,693,702,715,728,743-745,747-749,754,756-758,766,770-771,780,786,799,809,813,825,830,842,852-854,864-865,868-872,876-883,890-893,904,914-915,920-921,925-926,933-934,939,942,951-989,999-1000,1004-1005,1009,1021-1022,1026-1027,1035,1038-1040,1045,1055,1062-1064,1066,1069,1097,1106,1109-1123
+packages/dialtone-vue/components/EmptyState/EmptyStateConstants.js
+  s_06a181a7d7b694::t_9cbaded6daa308 2-6,13-17,23-31,34-64,70-73
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ClampedTableWrapper.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-3,9,12,15-16,21,25,32-37,40,42,59,66,70,101,113-114,136,165-191,223,272-274,410-414,424-426,467
+packages/combinator/src/variants/variants_avatar.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-107
+apps/dialtone-documentation/scripts/lib/generate-llms.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-271
+packages/dialtone-tokens/tokens/root.json
+  s_06a181a7d7b694::t_9cbaded6daa308 6,12-13,19-33,36
+packages/dialtone-vue/directives/focustrap_directive/focustrap.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-205
+packages/dialtone-vue/recipes/leftbar/contact_row/contact_row.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 15,21,67-68,70,98,100
+packages/dialtone-css/lib/build/less/recipes/unread_pill.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,4,7
+apps/dialtone-documentation/thumbs/text.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-36
+scripts/migrate-utility-doc-examples.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-407
+packages/dialtone-vue/components/SplitButton/SplitButtonDefault.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3-8,14-18,20-24,26-27,36-37,40,45-46,49,65-66,68,74-76
+.claude/rules/css-specificity.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-97
+packages/combinator/CHANGELOG.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-172
+packages/dialtone-tokens/build-sd-transforms-layered.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-370
+apps/dialtone-documentation/docs/utilities/borders/divide-color.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11,13-15,23,25-27,35
+packages/dialtone-vue/components/ItemLayout/ItemLayout.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 2,7,18,34,39,43,56,58,68,72,74,84,120-148,160-346
+apps/dialtone-documentation/docs/utilities/backgrounds/position.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-53
+apps/dialtone-documentation/docs/foundations/typography/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 2,5-6,15,26,37-48,55-56,61,70,72,74-77,80-128,130-141,143-147,151-181,185-214,221-229,231-282,284-292,294-295,297-303,306,309-311,313-314,316,318-319,322-323,326-327,331-332,341,343-344,358,362,364-367,370-405,418,420
+packages/dialtone-tokens/tokens/theme/trita/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-164
+apps/dialtone-documentation/docs/components/icon.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,13,22,24-26,34-36,41,46-53,64,69-74,76-77,79,81-82,84,91,96-107,115-126,128-129,136,141-146,148-151,153,156,175,190-191,204,216,228
+apps/dialtone-documentation/scripts/lib/parse-source-markdown.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-778
+apps/dialtone-documentation/docs/.vuepress/exampleComponents/ExampleNotice.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 15
+packages/dialtone-vue/components/Modal/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+packages/dialtone-tokens/tokens/theme/125/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+packages/combinator/src/components/tools/button_bar.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3,10
+packages/dialtone-vue/CHANGELOG.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-265,274-316,324-386,394,402,410,423,431,439,447,455,468,477,486,494,502,515,523,549,558,571,579,593,601,619,627,643,661,669,677,685,701,719,732,746,754,762,770,778,787,796,804,812,825,839,847,863,871,879,887,905,918,931,942,950,968,977,985,1003,1016,1024,1042,1050,1058,1066,1074,1082,1090,1103,1111,1120,1128,1136,1151,1159,1168,1183,1191,1199,1207,1215,1224,1232,1240,1248,1256,1264,1272,1286,1294,1307,1315,1324,1332,1340,1348,1357,1366,1379,1387,1395,1403,1411,1424,1432,1440,1453,1467,1475,1489,1502,1516,1524,1532,1540,1548,1561,1569,1578,1586,1594,1610,1623,1631,1639,1647,1660,1668,1676,1684,1692,1705,1713,1721,1729,1737,1747,1756,1770,1783,1800,1809,1818,1831,1840,1848,1861,1869,1887,1896,1904,1912,1920,1934,1942,1950,1964,1972,1996,2009,2018,2027,2035,2044,2066,2079,2087,2101,2109,2122,2131,2144,2152,2160,2174,2184,2193,2201,2214,2239,2248,2262,2280,2288,2296,2309,2322,2336,2352,2362,2370,2379,2387,2395,2408,2416,2424,2438,2446,2459,2472,2487,2496,2504,2518,2526,2537,2552,2569,2578,2591,2601,2610,2624,2638,2651,2664,2677,2688,2701,2717,2725,2734,2742,2750,2760,2773,2781,2789,2797,2810,2826,2834,2843,2851,2864,2872,2880,2893,2906,2919,2927,2935,2954,2967,2980,2988,2996,3009,3022,3030,3050,3058,3066,3074,3082,3108,3122,3138,3146,3161,3175,3183,3196,3214,3227,3241,3249,3257,3268,3276,3284,3292,3311,3324,3339,3348,3361,3381,3402,3410,3418,3426,3475,3520,3531,3542,3583,3592,3607,3624,3643,3651,3660,3678,3696,3713,3730,3746,3762,3777,3802,3810-3823,3831,3847,3855,3863,3872,3887,3900,3922,3938,3946,3954,3963,3976,3990,3998,4006,4017,4025,4040,4048,4063,4071,4079,4087,4101,4112,4122,4131,4156,4164,4175,4183,4191,4199,4207,4216,4224,4232,4240,4248,4257,4271,4279,4293,4302,4310,4319,4327,4341,4349,4357,4365,4380,4393,4408,4422,4439,4453,4475,4483,4491,4505,4518,4527,4535,4550,4563,4572,4581,4596,4599,4613,4621,4636,4644,4657,4666,4669,4682,4696,4711,4724,4732,4740,4753,4761,4769,4782,4795,4808,4816,4829,4837,4845,4858,4868,4886,4899,4907,4925,4933,4957,4970,4978,4986,4994,5007,5025,5038,5052,5061,5069,5078,5088,5097,5112,5128,5136,5149,5165,5173,5181,5189,5230,5238,5270,5280,5297,5313,5329,5343,5351,5365,5378,5391,5405,5419,5427,5435,5450,5459,5467,5475,5489,5503,5511,5519,5533,5546,5555,5568,5584
+packages/dialtone-css/lib/build/less/components/segmented-control.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1-131
+packages/dialtone-icons/android/gradle.properties
+  s_06a181a7d7b694::t_9cbaded6daa308 2
+apps/dialtone-documentation/docs/.vuepress/exampleComponents/ExampleRichTextEditor.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 10,26
+packages/dialtone-css/lib/build/less/variables/sizes.less
+  s_06a181a7d7b694::t_9cbaded6daa308 14-15,20-21,28-29,34-35,42-43,48-49,56-57,62-63
+packages/dialtone-css/lib/build/less/components/combobox-multi-select.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,4-6,11-15,19-20,25-26,48,53
+packages/dialtone-tokens/postcss/constants.cjs
+  s_06a181a7d7b694::t_9cbaded6daa308 3,14,51-64
+packages/dialtone-css/lib/build/js/dialtone_migrate_scrollbar_always/index.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-225
+packages/dialtone-css/lib/build/less/components/icon.less
+  s_06a181a7d7b694::t_9cbaded6daa308 15,28-29
+packages/combinator/src/components/event_console/event_console.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 20,34
+apps/dialtone-documentation/docs/.vuepress/exampleComponents/ExampleResizableOffset.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2,4,6-11,13-22,25-30,33
+packages/dialtone-tokens/build-docs.js
+  s_06a181a7d7b694::t_9cbaded6daa308 22,35,56
+.lintstagedrc.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-4,12-16
+apps/dialtone-documentation/scripts/lib/transform-tokens.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-98
+packages/combinator/src/variants/variants_image_viewer.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-36
+apps/dialtone-documentation/docs/.vuepress/theme/components/PageToc.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-10,12,17,43,47,88-90
+packages/eslint-plugin-dialtone/lib/rules/deprecated-link-styling-classes.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-96
+apps/dialtone-documentation/docs/.vuepress/baseComponents/BlogPostPreview.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3-4,7,15-16,39-41
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ThemeColorTable.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 5,7-8,12-13,17-18,22-23,27-28,62,76,78,80-82,84-85,88-91,99-117
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/color--expanded.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-146
+packages/dialtone-query-core/src/tools/icons.ts
+  s_06a181a7d7b694::t_9cbaded6daa308 105
+scripts/resolve-changelog-conflicts.py
+  s_06a181a7d7b694::t_9cbaded6daa308 1-210
+packages/dialtone-tokens/tokens/theme/117/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+packages/dialtone-vue/recipes/conversation_view/editor/editor_signature.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 6,41
+packages/combinator/src/variants/variants_collapsible.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-41
+apps/dialtone-documentation/thumbs/list-item.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-10
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/sub-brand--non-product-examples.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-66
+apps/dialtone-documentation/docs/utilities/interactivity/resize.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,9-16,28-29
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/color--focused.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-12,15-16
+packages/dialtone-tokens/tokens/theme/126/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+.claude/rules/stories.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-203
+apps/dialtone-documentation/docs/_data/text.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-224
+packages/combinator/src/variants/variants_radio.js
+  s_06a181a7d7b694::t_9cbaded6daa308 2-7,15-48
+packages/dialtone-tokens/architecture-diagram.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-98
+packages/combinator/src/variants/variants_breadcrumbs.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+packages/dialtone-vue/components/Combobox/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+apps/dialtone-documentation/docs/foundations/icons/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-14
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/motion--curve-animate-out.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+packages/dialtone-vue/recipes/item_layout/contact_info/contact_info.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 7,12,96-97,103-112,117-118,121-130,137-138,225-226
+packages/dialtone-vue/common/mixins/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 24-27
+apps/dialtone-documentation/docs/_data/input.json
+  s_06a181a7d7b694::t_9cbaded6daa308 34,36,39,41
+packages/dialtone-tokens/tokens/theme/sunflower/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 14-25,28
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/design-tokens.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-15
+apps/dialtone-documentation/eslint.config.js
+  s_06a181a7d7b694::t_9cbaded6daa308 20-22
+packages/dialtone-css/lib/build/less/components/description-list.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1-5,13-25,27,43
+packages/dialtone-cli/src/commands/search.ts
+  s_06a181a7d7b694::t_9cbaded6daa308 3,10,16,21,23,28,30
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/physical-to-logical.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-86
+packages/dialtone-vue/components/Avatar/AvatarConstants.js
+  s_06a181a7d7b694::t_9cbaded6daa308 2-14,29-39,50,54-66,74-86,89-122,126-221,228-232,234-237
+apps/dialtone-documentation/docs/utilities/layout/coordinates.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-25,31,37-39,44-56,59-60,62,73-86,96,102-104,109-121,124-125,127
+packages/combinator/src/components/tools/section.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 32
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/logo--primary-color-dark.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-12
+packages/dialtone-vue/components/DescriptionList/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+packages/dialtone-vue/components/RichTextEditor/Extensions/Emoji/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1,3
+packages/eslint-plugin-dialtone/docs/rules/deprecated-radius-utility-classes.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-68
+packages/dialtone-vue/recipes/cards/ivr_node/ivr_node.mdx
+  s_06a181a7d7b694::t_9cbaded6daa308 108,248
+packages/dialtone-vue/components/SegmentedControl/SegmentedControlConstants.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-48
+apps/dialtone-documentation/docs/utilities/typography/font-style.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-9,14-15,22-23,30-31
+apps/dialtone-documentation/docs/.vuepress/exampleComponents/ExampleResizableNested.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-37
+apps/dialtone-documentation/docs/utilities/typography/styles.md
+  s_06a181a7d7b694::t_9cbaded6daa308 2-3,6-7,9,11
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/platform.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-4
+packages/dialtone-css/lib/build/less/components/list-group.less
+  s_06a181a7d7b694::t_9cbaded6daa308 10,21,37,42,46
+packages/dialtone-vue/directives/focusgroup_directive/focusgroup.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-269
+packages/dialtone-vue/recipes/conversation_view/message_input/message_input.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 6-8,12,70,78-82,239,349
+packages/dialtone-vue/components/SegmentedControl/SegmentedControl.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-317
+packages/combinator/src/components/tools/node.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-62
+packages/dialtone-vue/components/SplitButton/SplitButton.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 4-5,7-10,12-51,53,58-71,74-83,91-92,94,97-103,105,110,121,123-124,127-133,135,140-141,151-154,161,163,170,173,179-180,182-190,196,198-207,214-215,217-250,256-272,278-286,288-296,302,307,311,314-321,340,372,381,384,390-391,393-401,407-415,421,426-434,439-446,453,456-463,471,474-476,492-494,496-544,550,555-559,563,568-572,583,585-586,588-593,597-602,608,610-613,617,637-646,648-650,653,656-658,662-668,670-675
+packages/stylelint-plugin-dialtone/package.json
+  s_06a181a7d7b694::t_9cbaded6daa308 3,47-49,51-52,61-62
+apps/dialtone-documentation/docs/utilities/effects/box-shadow.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-19,26-27,34-37,44-47,54-57
+packages/dialtone-vue/components/SegmentedControl/SegmentedControlItem.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-151
+packages/dialtone-vue/recipes/buttons/callbar_button/callbar_button.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 5-6,8,27-37,50-52,106
+packages/dialtone-tokens/tokens/theme/131/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+packages/dialtone-tokens/tokens/theme/sunflower/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 4-7,18,22,32
+packages/combinator/src/variants/variants_prose.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-314
+packages/postcss-responsive-variations/CHANGELOG.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-vue/components/ValidationMessages/ValidationMessages.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 3,10-11,37,42-43,47-48,63,76-83,114-115,120-121,137,163,166,170-171,212-217,225-302,304-340,342-369,379,387-398
+packages/dialtone-css/lib/build/js/dialtone_migrate_border_radius/test.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-422
+apps/dialtone-documentation/docs/components/resizable.md
+  s_06a181a7d7b694::t_9cbaded6daa308 13,15,17,21-38,41-61,63-78,81,85-106,109,115,122,129,131,135,139-151,154,162-172,175,177-179,183-206,208,220,225,229-248,251,255-265,268,272-277,290-295,300,309-311,315-337,411
+packages/dialtone-vue/recipes/notices/top_banner_info/top_banner_info.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 8-17,28-37,67-68
+apps/dialtone-documentation/docs/_data/badge.json
+  s_06a181a7d7b694::t_9cbaded6daa308 19
+packages/dialtone-css/CHANGELOG.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-81,152-634
+.claude/skills/component.md
+  s_06a181a7d7b694::t_9cbaded6daa308 34
+packages/dialtone-css/lib/build/less/components/empty-state.less
+  s_06a181a7d7b694::t_9cbaded6daa308 13,19,21-22,34,38,42-43,49-50,54,58
+apps/dialtone-documentation/docs/scratch.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-516
+packages/dialtone-css/lib/build/less/utilities/flex.less
+  s_06a181a7d7b694::t_9cbaded6daa308 25-90,109-139,154-184,202-212,219-236,353
+packages/dialtone-vue/components/Icon/IconVariants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11-31,39-40,44,48,51-58
+apps/dialtone-documentation/docs/guides/content/grammar-and-mechanics/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 6,538,546,554
+packages/dialtone-tokens/tokens/theme/117/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+packages/dialtone-tokens/tokens/theme/127/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+apps/dialtone-documentation/docs/.vuepress/theme/components/Home.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,13-14,17-18,31,34,41,52-57,59,62,64-65,71-75,77,80,82-83,92-96,98,101,103-104,110-114,116,119,121-122,136-138,140,147,157
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/home-foundations-04.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+apps/dialtone-documentation/docs/_data/tabs.json
+  s_06a181a7d7b694::t_9cbaded6daa308 24-32
+apps/dialtone-documentation/docs/_data/avatar.json
+  s_06a181a7d7b694::t_9cbaded6daa308 9,11,14,16,19,21,24,26,29,31,34,36,39,41,44,46,49,51,54,56,59,61,64,66,69,71,74,76,79,81,84,86,89,91,94,96
+.claude/rules/scripts.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-78
+packages/combinator/src/variants/variants_radio_group.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-31
+packages/dialtone-tokens/tokens/theme/melon/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 10,18-29,32
+packages/dialtone-css/lib/build/less/components/codeblock.less
+  s_06a181a7d7b694::t_9cbaded6daa308 14,16-51
+packages/dialtone-emojis/CHANGELOG.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2,4
+packages/dialtone-vue/recipes/buttons/callbar_button/callbar_button_callbar.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3,5-10,99,102-106,211-212,217-218,225
+apps/dialtone-documentation/docs/utilities/borders/width.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-18,25-32,44
+packages/combinator/src/components/controls/control_object.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 15-22,30-31,44
+packages/combinator/src/components/controls/control_slot.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3,5-6,8-9,11-17,19-33,39-40,42,44,53-56,61-62,67-69
+apps/dialtone-documentation/docs/utilities/interactivity/pointer-events.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,9-15,22-43
+packages/dialtone-tokens/transform-util.js
+  s_06a181a7d7b694::t_9cbaded6daa308 5,66,71,120,130-141,143-149
+apps/dialtone-documentation/docs/components/validation-messages.md
+  s_06a181a7d7b694::t_9cbaded6daa308 5,8,11,19,21,24,26,28,30,33,35,39,42-51,53
+apps/dialtone-documentation/docs/utilities/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4-5,10,14,24-27,34-37,44-47,56-59,66-69,76-79,84,86-89,96-97,99-110,118-119,121-132,140-141,143-154,162-163,165-176,184-185,187,189,191,193,195,197,199,201,210-213,215,217,219,221,223,228-230,232-235,237,239,241,243,245,252,254-257,259,261,263,265,267,274,276-279,281,283,285,287,289
+packages/dialtone-css/lib/build/js/dialtone_migrate_border_radius/index.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-273
+packages/dialtone-vue/.github/CONTRIBUTING.md
+  s_06a181a7d7b694::t_9cbaded6daa308 207-213
+apps/dialtone-documentation/docs/components/root-layout.md
+  s_06a181a7d7b694::t_9cbaded6daa308 7,10-11,13-14,16-31,33-35,43-44,46-47,49-50,52-64,66,72-73,75,79,84,89,95,99
+packages/combinator/src/lib/exclusion_rules.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-75
+packages/dialtone-vue/recipes/leftbar/callbox/callbox.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 30,43,49,74,78-87,91,95-104,112-114,170,172,174
+apps/dialtone-documentation/docs/utilities/flex/direction-wrap-flow.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-8,14-18,20-23,29,32,34-36,54-58,64,67,69-71,89-93,99,102,104-106
+packages/dialtone-vue/components/Illustration/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+packages/dialtone-vue/recipes/leftbar/group_row/group_row.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 14,24
+packages/dialtone-css/.lintstagedrc.cjs
+  s_06a181a7d7b694::t_9cbaded6daa308 2-4,9
+packages/dialtone-tokens/tokens/theme/dp/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 4-15,23-24,38,42,45-50,53-61,63,66-67,70-74,88,95-96,99-100,102-111,116,120,124,128,132,142-171,175-178,184,188,192,196,200,208-209,212,216,219-220,223-227,229,233,244,250,256-257,263,269-270,276,282-283,289,295-296,302,308-309,315,321-322,334-335,340,347-348,353-357,359,365-366,372,378-379,392,404-418,431,434-435,445,458,476,480,488,499,512,525,531,538,544,551,557,564,583,596,609,622,628,632,635-639,643-647,649,657,660-665,668-672,674,678,681-682,685-689,691-695,699,710,723,736,749,755,759,762-763,766-770,772,776,780,783-784,787-791,793,801,804,808-812,814,818,837,841,845,849,853,857,869,873,877,881,889,893,933,937,941,970,974,978,982,986,990,994,998,1002,1010,1014,1024,1032,1040,1048,1056,1088,1119,1123,1139,1145,1152,1161,1165,1173-1176,1185,1197-1207,1212-1219,1233,1254,1271,1290,1303,1320,1332,1336,1340,1349,1370,1383,1396,1415,1428,1455
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/utility-class-to-token-stops-radius-examples.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-66
+packages/dialtone-vue/components/ModeIsland/ModeIslandConstants.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-9
+.claude/rules/dialtone-cli.md
+  s_06a181a7d7b694::t_9cbaded6daa308 36-41
+CHANGELOG.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-220,478-2818
+packages/combinator/src/lib/icons.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-55
+packages/eslint-plugin-dialtone/lib/rules/deprecated-radius-utility-classes.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-64
+packages/dialtone-docs/tests/tests/build-public-docs.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-214
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/footer-dialpad-design--dark.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-19
+packages/dialtone-vue/directives/focusgroup_directive/focusgroup.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-734
+packages/dialtone-css/lib/build/less/components/notice.less
+  s_06a181a7d7b694::t_9cbaded6daa308 13,23,25-26,28,31-32,35,42-50,59-63,71,73-77,90-91,93-94,102-104,108-110,121,127,129-131,151,161,163-165,169-170,175,198-207
+packages/dialtone-css/lib/build/less/components/tabs.less
+  s_06a181a7d7b694::t_9cbaded6daa308 10-12,14-53,61-84,89-91,97,104,107-206,209,213,221-222,226,230,234,238,240-241,250,256-257,261-262,270-274,276,279-280,284-285,289-292,295-310,314-315
+packages/dialtone-query-core/project.json
+  s_06a181a7d7b694::t_9cbaded6daa308 6,17-20
+apps/dialtone-documentation/scripts/data/token-values.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-144
+packages/dialtone-css/lib/build/less/utilities/sizing.less
+  s_06a181a7d7b694::t_9cbaded6daa308 22-168,174-189,193-208,212-227,231-251,259-274,278-293,297-312,316-349
+packages/dialtone-mcp-server/src/index.ts
+  s_06a181a7d7b694::t_9cbaded6daa308 8,13,128-141,183,189,225,243-263,303-305
+packages/dialtone-tokens/tokens/components/icon/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 6,10,14,18,22,26,30,34,39,43,47,51,55,59,63,67,72
+.claude/rules/github-workflows.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-125
+packages/combinator/src/components/controls/control_selection.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-6,8-87,89,93-94,97,105-108,121-132,137-148,150-167,169-170
+apps/dialtone-documentation/docs/.vuepress/common/utilities.js
+  s_06a181a7d7b694::t_9cbaded6daa308 74-77
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/chart-dondont-4-1.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 14-15
+apps/dialtone-documentation/docs/guides/content/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 6-7
+packages/dialtone-vue/components/Notice/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-5
+packages/combinator/src/supported_components.json
+  s_06a181a7d7b694::t_9cbaded6daa308 4,9,11-20,22,29-31,37
+packages/dialtone-vue/components/ModeIsland/ModeIsland.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-230
+packages/postcss-responsive-variations/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 93-102
+packages/eslint-plugin-dialtone/lib/rules/deprecated-tshirt-sizes.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-136
+apps/dialtone-documentation/docs/.vuepress/baseComponents/tokens/TokenExample.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 7,10-18,21,25,28,33,37,41,74,77-82,84,139,157,161,177,179,183,198,210,215,218,222,224,233-234,241-243,246-247,254
+packages/dialtone-css/lib/build/less/recipes/callbar_button.less
+  s_06a181a7d7b694::t_9cbaded6daa308 13,15
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-pixel-utility-classes.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-160
+packages/dialtone-tokens/tokens/$themes.json
+  s_06a181a7d7b694::t_9cbaded6daa308 7-8,29-36,43-48,53-60,66-72,78-84,90-96,193-200,207-212,217-224,230-236,242-248,254-260,352-354,373-380,387-392,397-404,410-416,422-428,434-440,519-759,787-790,795,798-800,804-805,809-810,814-815,1396,1398,1747-1750,1755,1758-1760,1764-1765,1769-1770,1774-1775,2138,2140-2142,2736-2739,2744,2747-2749,2753-2754,2758-2759,2763-2764,2813,2815,3113-3115,3345-3361,3372,3374-3380,3389,3671-3673,3906-3922,4200-4203,4208,4211-4213,4217-4218,4222-4223,4227-4228,4280,4300,4302-4305,4311-4312,4324-4327,4333,4345,4347-4351,4358,4368-4372,4379,4389-4397,4416-4420,4427,4433-4434,4437-4446,4448,4453-4463,4466,4468-4475,4485-4493,4502,4512-4516,4523,4533-4541,4550,4560-4564,4571,4583,4585,4589,4598,4601,4610,4631,4633,4644,4657,4678,4680,4691,4704,4725,4727,4738,4751,4753,4760,4772,4774,4785,4790-6624,6626
+apps/dialtone-documentation/docs/.vuepress/theme/components/PageHeader.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 5-21,27-55,62-63,65,71-72,76-77,79-80,82,84-146,148-155,162-291
+packages/dialtone-css/lib/build/less/components/radio-checkbox.less
+  s_06a181a7d7b694::t_9cbaded6daa308 23,40-41,93-94,112,127,140,160,162-163,165-168,173-174,209,237,255,287,298
+packages/dialtone-css/lib/build/less/components/table.less
+  s_06a181a7d7b694::t_9cbaded6daa308 15,28-29,37-38,42,46-47,50,52,57,63,68-71,75,77-78,83,85-86,105,111-112
+packages/dialtone-tokens/tokens/theme/136/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+apps/dialtone-documentation/thumbs/skeleton.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-17
+packages/dialtone-vue/components/Codeblock/CodeblockVariants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-52
+packages/dialtone-vue/components/Avatar/Avatar.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3,6-8,10,21-44,67-68,71,84-85,92-101,121-123,131-160,168-171,174-176,206-207,227,271,273,279-280,282-284,288,292,303-321,343,348-351,356-359,364-405,413-415,417-418,423-437,451-457,462,504-507,522,524-525,527-528,535-546,566
+packages/dialtone-vue/components/Codeblock/CodeblockDefault.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-6,10
+apps/dialtone-documentation/docs/guides/migration/success-to-positive/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-442
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ComponentClassTable.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 5,8,11,16,19,24,27,37,41-55,57-63
+packages/dialtone-vue/components/Icon/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+packages/dialtone-vue/recipes/conversation_view/message_input/message_input_topbar.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 4,143,153
+packages/dialtone-vue/recipes/leftbar/general_row/general_row.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 81-95,99
+.claude/rules/vue-tests.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,16-18,21-46,48,51-53,56,61,65,69,73,75,78
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/fs16.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-7
+packages/dialtone-docs/src/utils/strip-markdown.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 5
+packages/dialtone-mcp-server/interactive-search.ts
+  s_06a181a7d7b694::t_9cbaded6daa308 44
+packages/dialtone-css/lib/build/less/components/rich-text-editor.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,4,10,29-30,37,73-84,90,94,99-101,105,115,119,123-124,132
+packages/dialtone-vue/recipes/conversation_view/feed_item_pill/feed_item_pill_default.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11,14,21,24,43,54-55
+packages/combinator/src/components/controls/control_icon_slot.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-171
+packages/stylelint-plugin-dialtone/CHANGELOG.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-css/package.json
+  s_06a181a7d7b694::t_9cbaded6daa308 3,52,55-62
+packages/dialtone-mcp-server/scripts/acceptance-scenarios.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-62
+apps/dialtone-documentation/docs/.vuepress/baseComponents/tokens/TokensBar.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3,14,17,21,24,28,34,38,41,46,49,54,57,63,67
+apps/dialtone-documentation/docs/utilities/backgrounds/gradients.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-12,19-20,27-28,35-36,43-44,51-60,88,106,114
+packages/dialtone-css/lib/build/less/components/pagination.less
+  s_06a181a7d7b694::t_9cbaded6daa308 11,16,20,28-40,51
+apps/dialtone-documentation/docs/utilities/backgrounds/patterns.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-13,29
+packages/combinator/src/components/combinator.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3-115,124-131,138,142-151,160-162,164,176-181,203,212,222-224,229,231-239,284,313-315,356-426,435-442,462-476,479-500,507-534,554,556-570,582,588-590,592,597-599,602,609-611,613-630,632-639,641,643
+packages/dialtone-vue/recipes/leftbar/callbox/callbox.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 8,23,119-120,151-161,171-181
+packages/eslint-plugin-dialtone/lib/rules/prefer-stack-over-flex.js
+  s_06a181a7d7b694::t_9cbaded6daa308 31-32,59-64,68-70
+packages/dialtone-css/lib/build/less/components/list-item-group.less
+  s_06a181a7d7b694::t_9cbaded6daa308 13,16-17
+apps/dialtone-documentation/docs/_data/radio.json
+  s_06a181a7d7b694::t_9cbaded6daa308 39,41,44,46
+apps/dialtone-documentation/docs/utilities/typography/font-size.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-8,12-27,42,44-46,74,76-78,106,108-110,138,140-142
+packages/dialtone-vue/components/Box/Box.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-461
+apps/dialtone-documentation/thumbs/modal.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-7
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/base-to-semantic.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-118
+packages/dialtone-vue/components/Presence/modules/presence_dnd_icon.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-18
+packages/dialtone-css/lib/build/less/recipes/callbar_button_with_dropdown.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,3-8,15,42,47
+apps/dialtone-documentation/docs/.vuepress/theme/utils/formatThemeName.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-36
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/voice-and-tone.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-4
+apps/dialtone-documentation/docs/utilities/typography/text-align.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-9,14-27,40-44
+apps/dialtone-documentation/docs/.vuepress/theme/components/SidebarItem.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2,4-5,9,18,21-22,25,27-31,34-35,37-42,44,55-62,64-66,68-79,81-138,141-182,186,188-195,210-217,219-221,232,235-240,249,251-266,268,271-286,292
+.claude/skills/review/SKILL.md
+  s_06a181a7d7b694::t_9cbaded6daa308 2,7,11,13,17,19-23,25,27,29-33,35,37,39-40,42,44,46,48-52,54,56,62-63,66,72,78-81
+packages/dialtone-css/lib/build/less/components/emoji-picker.less
+  s_06a181a7d7b694::t_9cbaded6daa308 13,18-20,25,29-32,40-42,50-52,61,64,67-69,73,82,84,89-90,94-95,105,113-114,116,118,124,130,133,142-143,145-146,151-153,158,164,168,174-176,178-179,185-186,213,228,230-231
+apps/dialtone-documentation/docs/utilities/typography/whitespace.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-14,21-24,31-34,41-44,51-54,61-64
+packages/dialtone-vue/recipes/leftbar/general_row/general_row_variants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2,4,13,19,29,112
+packages/combinator/src/components/controls/control_event.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 3,9,15
+packages/dialtone-css/lib/build/less/components/text.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1-240
+packages/combinator/src/components/code_example/code_example.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 31,36,46,64,70,188,190
+packages/dialtone-tokens/build-layered.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-463
+packages/dialtone-vue/components/Text/Text.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-341
+apps/dialtone-documentation/docs/_data/borders.json
+  s_06a181a7d7b694::t_9cbaded6daa308 2-70
+packages/language-server/server/package.json
+  s_06a181a7d7b694::t_9cbaded6daa308 3,26
+packages/dialtone-vue/components/Text/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-15
+apps/dialtone-documentation/docs/_data/select.json
+  s_06a181a7d7b694::t_9cbaded6daa308 39,41,44,46
+packages/dialtone-docs/src/content/workflows/workflow-component-lifecycle.md
+  s_06a181a7d7b694::t_9cbaded6daa308 56
+apps/dialtone-documentation/docs/components/presence.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,10-11,15-17,25-29,33,35-37,39-49,55-57,59,65-67,69-90,113
+packages/dialtone-docs/package.json
+  s_06a181a7d7b694::t_9cbaded6daa308 7,17-18
+packages/dialtone-vue/components/Box/BoxVariants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-6,8-14,16-17,20,22-35,37-40,42-43,46,48-53,55-61,63-66,68-69,72,74-79,81-87,89-92,94-95,98,100-113,115-124,127,129-134,136-142,145-228,232-240,243-256
+apps/dialtone-documentation/docs/.vuepress/plugins/markdown-it-fenced-demo.test.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-250
+apps/dialtone-documentation/scripts/thumbs/harness/main.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-36
+packages/dialtone-tokens/tokens/theme/127/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+packages/eslint-plugin-dialtone/lib/rules/deprecated-class-props.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-262
+apps/dialtone-documentation/docs/utilities/grid/row-start-end-span.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-16,26-31
+packages/dialtone-css/lib/build/less/utilities/colors.less
+  s_06a181a7d7b694::t_9cbaded6daa308 17-24,27,49
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/download-logo--meetings-dark.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-7,10-39,41-42,44-45
+apps/dialtone-documentation/docs/articles/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-15
+apps/dialtone-documentation/docs/components/modal.md
+  s_06a181a7d7b694::t_9cbaded6daa308 3,8,10-14,18,27,32,34,46,50,56-57,60-61,69-71,73-76,83,88-93,101,107-109,111-114,123,128-133,141,143,147-149,151-153,155,162,167-173,181,187-189,191-192,195,200-206,213-238,241,246-251,259,265-275,277-278,280,282,289,294-299,307,317-318,320-321,324,328,337-338,340-341,344,348,352-373,390-391,402
+packages/dialtone-icons/src/svg/icons/brand-full-color/agent-assist-color.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-46
+apps/dialtone-documentation/docs/components/scrollbar.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,6,13-14,21,28,31,46-51,55,59,61-68,75-82,85-91,97-104,111-214,217-272,274-321,329-332,358-359,361
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/icons.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-11
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/base-to-semantic-test-examples.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-188
+packages/dialtone-css/lib/build/js/dialtone_migrate_props/test.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-959
+apps/dialtone-documentation/docs/.vuepress/baseComponents/CopyButton.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-7,9-14,16-20,30,34-36
+packages/dialtone-vue/components/Toggle/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1,5
+apps/dialtone-documentation/docs/utilities/sizing/height.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7,9,11-21,24-27,30,32,34-40,42-48,52,54,56-58,60-64,67,69,71,73-76,80,89,91-92,95-100,104,108-110,114,116
+packages/combinator/src/variants/variants_combobox.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-23
+packages/dialtone-vue/components/ModeIsland/Utils.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-59
+packages/dialtone-docs/src/content/architecture/architecture-design-token-pipeline.md
+  s_06a181a7d7b694::t_9cbaded6daa308 5-6,86,172,179,217,220-236,238,240-243,245,251-253
+apps/dialtone-documentation/docs/utilities/layout/position.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,9-18,20
+packages/dialtone-tokens/tokens/theme/dp/high-contrast-dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-98
+apps/dialtone-documentation/docs/utilities/sizing/min-height.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7,9,11-12,14-23,26-41,43,45,47-52,56,65,67-68,72-74,78-80,84,86
+packages/dialtone-tokens/tests/fixtures/core-stub.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-6
+packages/combinator/src/components/controls/control_iterable.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 3,9,20
+packages/dialtone-tokens/tokens/theme/124/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+apps/dialtone-documentation/docs/utilities/typography/text-overflow.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-14,21-24,31-34
+packages/dialtone-vue/components/Skeleton/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-5,12
+apps/dialtone-documentation/docs/components/combobox-multi-select.md
+  s_06a181a7d7b694::t_9cbaded6daa308 10-38,43,48,61,64,68,89-119,126-127,133,146,149
+packages/combinator/src/variants/variants_input_group.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-18
+packages/dialtone-vue/recipes/conversation_view/feed_item_row/feed_item_row_variants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3,6,32,36,43,48,55,82,101,118,134,165,195,219,221,236,242,261,268,275,294-299,312,321
+packages/dialtone-vue/recipes/conversation_view/attachment_carousel/attachment_carousel.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 31,47,61-62
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-stack-alignment-classes.js
+  s_06a181a7d7b694::t_9cbaded6daa308 19-22,177
+apps/dialtone-documentation/docs/dialtone/release-notes/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-24
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-radius-utility-classes.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-113
+packages/dialtone-vue/.storybook/preview.js
+  s_06a181a7d7b694::t_9cbaded6daa308 4-7,9-38,41,44,51-54,57-72,76-122,124,127-129,139-141,149-189,256,276-283
+apps/dialtone-documentation/docs/.vuepress/baseComponents/BaseIcon.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 35-37,40-41,43-45,47-49,67-70,72,82,87,99,104,121
+packages/dialtone-icons/project.json
+  s_06a181a7d7b694::t_9cbaded6daa308 28,36
+packages/dialtone-vue/components/Prose/Prose.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-144
+packages/combinator/src/variants/variants_notice.js
+  s_06a181a7d7b694::t_9cbaded6daa308 2-10,14,18-19,23-40
+apps/dialtone-documentation/docs/components/link.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,32,38,46-65,69-86,96,101,107,110-111,117,119
+packages/dialtone-tokens/tokens/theme/expressive/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 360,369,374,379,384,389,394-402,406
+packages/dialtone-css/lib/build/less/recipes/ivr_node.less
+  s_06a181a7d7b694::t_9cbaded6daa308 4,9,13,17-20,24-25,34,45,51,57,62,68,79,91-95,100,104-106,111,130
+packages/dialtone-icons/src/svg/icons/editing/paint-bucket.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-6
+apps/dialtone-documentation/docs/utilities/flex/justify.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-8,14-18,26-30,38-42,50-54,62-66,74-78,87-88
+apps/dialtone-documentation/docs/guides/migration/avatar-updates/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-170
+packages/dialtone-vue/components/Prose/ProseDefault.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-268
+packages/dialtone-vue/components/RichTextEditor/Extensions/Div/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/combinator/src/components/controls/control_boolean.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-8,10,12-19
+packages/dialtone-tokens/tokens/theme/106/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+packages/combinator/src/components/controls/control_boolean.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 3,14-15,18,24,30,33-34,43-44
+packages/dialtone-vue/tests/fixtures/radios.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 13
+packages/dialtone-css/lib/build/less/components/badge.less
+  s_06a181a7d7b694::t_9cbaded6daa308 20,27-28,31-35,46,62-66,75,77,103,139-140,142-143,145-146,161,165
+apps/dialtone-documentation/docs/guides/migration/component-props/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-664
+packages/dialtone-tokens/tokens/theme/aegean/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 4-7,32
+apps/dialtone-documentation/docs/.vuepress/exampleComponents/ExampleHovercard.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2
+packages/combinator/src/variants/variants_combobox_with_popover.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+packages/combinator/src/components/option_bar/option_bar_member_group.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 3,16,38,52,56
+packages/combinator/src/lib/tokens.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-265
+packages/dialtone-css/lib/build/less/components/toggle.less
+  s_06a181a7d7b694::t_9cbaded6daa308 22,28-31,38-40,45,54-57,60-61,72,80-83,87,94-96,100,106-107,116,119,126,130,134,146,173
+packages/combinator/src/components/controls/control_number.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-7,9-14,16-19,23,26
+packages/dialtone-tokens/tokens/theme/128/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+.github/actions/setup-environment/action.yml
+  s_06a181a7d7b694::t_9cbaded6daa308 20-25
+packages/combinator/src/variants/variants_keyboard_shortcut.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-18
+apps/dialtone-documentation/docs/.vuepress/baseComponents/HeaderOverlay.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-28
+apps/dialtone-documentation/docs/.vuepress/baseComponents/UtilityClassTable.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 5,7-8,12-13,17-26,41-46
+apps/dialtone-documentation/docs/.vuepress/views/MaterialsCatalog.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-80
+apps/dialtone-documentation/docs/components/tooltip.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11-15,25,27,33,41,43,45-55,77-79,88,96,100-102,113,117,129,138-159
+apps/dialtone-documentation/docs/components/hovercard.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,13-15,32-34,40-65
+apps/dialtone-documentation/thumbs/presence.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-8
+apps/dialtone-documentation/docs/.vuepress/exampleComponents/ExampleResizableThreePanel.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2,4-9,13-17,20-25,28
+packages/dialtone-tokens/tokens/theme/111/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-link-styling-classes.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-97
+packages/dialtone-tokens/tokens/theme/buttercream/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 4-7,10,18,22,26,35
+packages/dialtone-vue/common/mixins/input_group.js
+  s_06a181a7d7b694::t_9cbaded6daa308 2,123,125-126,128,171
+packages/dialtone-css/lib/build/less/components/combobox-with-popover.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,3-4
+packages/dialtone-vue/directives/focusgroup_directive/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-tokens/gradle.properties
+  s_06a181a7d7b694::t_9cbaded6daa308 2
+packages/dialtone-vue/recipes/chips/grouped_chip/grouped_chip.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 15,17,26-27,29,44,46,55-56,58,72-92,112-113,116-117
+apps/dialtone-documentation/thumbs/rich-text-editor.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-42
+apps/dialtone-documentation/docs/foundations/graphic-system/data-visualizations.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-16
+packages/dialtone-tokens/tokens/components/badge/default-prota-deuter.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-12
+apps/dialtone-documentation/docs/.vuepress/exampleComponents/ExampleModal.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3-5,7,10-11,61-65,71-75,88
+packages/dialtone-tokens/tokens/theme/plum/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 4-7,14,18,22,26
+packages/dialtone-vue/components/ListItem/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1,5
+packages/eslint-plugin-dialtone/lib/rules/focusgroup-requires-label.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-52
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/color-stops.test.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-239
+apps/dialtone-documentation/docs/scratch-color.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-422
+packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md
+  s_06a181a7d7b694::t_9cbaded6daa308 45-48,78,82-86,96,149,155
+packages/dialtone-css/lib/build/less/components/toast.less
+  s_06a181a7d7b694::t_9cbaded6daa308 12,15-16,20,31,35,41,61-62,65,108,111,127-128,135,138,147-148,160,178,200,207-208,211,216,221,223,235,237,239
+apps/dialtone-documentation/docs/guides/content/action-language/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 6
+packages/dialtone-vue/components/Notice/NoticeContent.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3,6-13,16-18,20-21,23-26,32,38,43-44,47-48,50,52,56-57,59,72-87
+apps/dialtone-documentation/scripts/thumbs/harness/App.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-113
+packages/dialtone-vue/components/Presence/PresenceVariants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3-4,6-24,26-27,29-47,49-50,52-70,72-73,75-116,121,125
+packages/dialtone-vue/components/Loader/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-vue/recipes/leftbar/callbox/callbox_default.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 8,39-40,43,47-48,50
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ComponentVueApiTable.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 10,12,16,18,23,25,27-28,33,35-36,43-45,47-55,58-65,69-76,78,80-82,84-86,88-94,96-118,159-160,162-166
+apps/dialtone-documentation/thumbs/stack.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-19
+packages/dialtone-css/lib/build/less/dialtone-transitions.less
+  s_06a181a7d7b694::t_9cbaded6daa308 2-3,52,56,60,64,105,109,113,117,121-122
+scripts/merge-migrate-color-stops.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-250
+apps/dialtone-documentation/docs/utilities/typography/line-clamp.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-9,14-31,36-37,41,53,67,69
+apps/dialtone-documentation/scripts/thumbs/harness/GalleryApp.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-185
+packages/dialtone-tokens/dialtone-transforms.js
+  s_06a181a7d7b694::t_9cbaded6daa308 8,48-59,90,183-184,237,247-249,333-334,352-356,373-375,408-410,412,414,416-417,420-431,433-518,520-523,525-538,540-544,546-577
+packages/dialtone-vue/recipes/chips/grouped_chip/grouped_chip.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 7,9,14,18,21-30,35,38-47,52,54,56,62,65-74,79,82-91,99
+apps/dialtone-documentation/thumbs/scroller.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-5
+packages/combinator/src/variants/variants_tooltip.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-37
+apps/dialtone-documentation/thumbs/pagination.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-3
+apps/dialtone-documentation/docs/.vuepress/theme/components/Navbar.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 5,7-63,65,67-69,71-73,76-82,84-97,99-217,219-234,236-332,334,336-337,341,344,352,354-355,360-361,363-383,386-398,400-405,407-417,420-422,424-431,433-449,451-452,454-458,460-461,465
+docs/plans/2026-05-19-dt-text-migration-script.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-241
+packages/dialtone-css/project.json
+  s_06a181a7d7b694::t_9cbaded6daa308 36-49
+apps/dialtone-documentation/docs/guides/migration/theme-to-mode/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-229
+packages/dialtone-emojis/package.json
+  s_06a181a7d7b694::t_9cbaded6daa308 3
+apps/dialtone-documentation/docs/components/combobox.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11-12,15,23-24,45,54,65,69-70,88,91
+packages/dialtone-vue/prototypes/dialpad/leftbar/components/leftbar_section.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 10,17,28,42-44,62-63
+packages/dialtone-vue/recipes/notices/top_banner_info/top_banner_info_default.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 10-11,13,17,19-21,26-29,31,33-34,36,40,42-44,51,55
+apps/dialtone-documentation/docs/components/input-group.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7,10-21,27,35,89,100-109,116,120-129,138,142-152,160,164-194,196-198,210-212,216,220-231,233-235,240
+apps/dialtone-documentation/docs/components/text.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-518
+packages/dialtone-vue/components/ListItemGroup/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+packages/dialtone-vue/recipes/item_layout/contact_info/contact_info.mdx
+  s_06a181a7d7b694::t_9cbaded6daa308 16,23,25,59,65,73-75,78,91-92,111-112,138-139,146,154-156,159,173-174,181,189-191,194,210,221,229-231,234,257-261,266
+packages/combinator/src/lib/exclusion_rules.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-45
+packages/dialtone-css/lib/build/less/components/scroller.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,7,11,31-32,37,41,45,49-50
+packages/combinator/src/variants/variants_illustration.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-11
+packages/dialtone-vue/components/Text/TextDefault.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-30
+packages/dialtone-vue/recipes/leftbar/callbox/callbox_variants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3,7,13,15-16,18,20-21,25,28,30-31,37,43,45,48,50-51,55,58,60-61,65,68,70-71,77,90,92,95,97-98,102,105,107-108,112,115,117-118,126,134,136-137,139,141-142,146,149,151-152,160,166,173,175,180-181,185-186,188,190-191,195,198,200-201,208,215,222,224,227,229-230,239,246,254,278,280,285-286,290,293,295-296,304,310,317,319-320,322,324-325,329,332,334-335,339,341,348-349,352,354,359,361,364,378,384,391,393,396,398-399,404,409,419-421,458,460,464
+packages/dialtone-vue/prototypes/dialpad/dialpad_layout.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 15,24-25,31-32
+packages/dialtone-tokens/tokens/theme/114/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+packages/dialtone-css/lib/build/less/components/loader.less
+  s_06a181a7d7b694::t_9cbaded6daa308 15
+packages/combinator/project.json
+  s_06a181a7d7b694::t_9cbaded6daa308 41-49
+packages/dialtone-css/lib/build/less/recipes/message_input.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,17,22,31,35,39,45,50-51,57-58,71,82,94,96,98-99,108,122-124,137-138,140
+apps/dialtone-documentation/scripts/lib/component-handlers.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-151
+packages/combinator/src/variants/variants_emoji_text_wrapper.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-15
+packages/dialtone-tokens/tokens/theme/112/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+packages/dialtone-vue/recipes/buttons/callbar_button/callbar_button_variants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2,6-9,50,55-59,108,116-120,169,174-178,238,243-247,312-313,318-319,326
+packages/dialtone-vue/components/Codeblock/Codeblock.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 2,4-5,14-21,33-37,44-53
+apps/dialtone-documentation/docs/utilities/flex/align-items.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-8,14-18,26-30,38-42,50-54,67-68
+packages/dialtone-css/lib/build/less/components/popover.less
+  s_06a181a7d7b694::t_9cbaded6daa308 20,28-30,74-75,81,86-87,94,99
+apps/dialtone-documentation/docs/.vuepress/theme/composables/useSidebarItems.js
+  s_06a181a7d7b694::t_9cbaded6daa308 5-36,41-42,47-79
+packages/dialtone-vue/recipes/conversation_view/feed_item_pill/feed_item_pill.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-5,27,37-43,60-61,64-73,77-78,81-90,111-113
+packages/dialtone-vue/recipes/buttons/callbar_button_with_popover/callbar_button_with_popover_variants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2,6-10,65,70-74,133-134,139-140,147
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/space.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-3
+apps/dialtone-documentation/docs/foundations/graphic-system/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-38
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 11,14,49-50,91-92,105,108,121,127,169,202,236,377-378,418-419
+packages/dialtone-css/lib/build/js/dialtone_migrate_link_rendering/underline.test.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-161
+packages/combinator/src/lib/info.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1,17-26,98
+.claude/rules/css-utilities.md
+  s_06a181a7d7b694::t_9cbaded6daa308 9,13,18-37,39,50,54
+apps/dialtone-documentation/docs/components/select-menu.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,15-16,28,36-37,47-50,52,62,74,76,80-82,93,95,101-114,116,124,127,136,139,151,153,157-175,183,186,196,199,212,215,219-225,234,240,244-250,259,265,269-278,281,293,297-307,316,318,320-333,335,337-338,340-353,355,357,359
+packages/dialtone-vue/components/Card/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-css/lib/build/js/dialtone_migrate/index.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-882
+packages/dialtone-vue/recipes/leftbar/callbox/callbox.mdx
+  s_06a181a7d7b694::t_9cbaded6daa308 39,79
+packages/dialtone-vue/recipes/buttons/callbar_button_with_popover/callbar_button_with_popover.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 11,221
+apps/dialtone-documentation/docs/foundations/brand/sub-brands-and-co-branding/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-60
+packages/dialtone-tokens/postcss/debug-mode.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1,13-14
+packages/dialtone-vue/components/RichTextEditor/Extensions/LinkPhoneNumbers/LinkPhoneNumbers.js
+  h_9e2c5818b2d2f6 19
+packages/dialtone-vue/recipes/leftbar/group_row/group_row_variants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2,43
+packages/dialtone-vue/components/Prose/Prose.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-46
+packages/dialtone-vue/common/utils.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 122,138,148,184,187,203,206,213,216,222,225,252,258,264,271,301,309,319,322-324,339,343,346-367
+packages/eslint-plugin-dialtone/package.json
+  s_06a181a7d7b694::t_9cbaded6daa308 3,63-66,72-79
+packages/eslint-plugin-dialtone/tests/lib/rules/custom-implementation.js
+  s_06a181a7d7b694::t_9cbaded6daa308 19
+packages/combinator/src/variants/variants_list_item.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-16
+apps/dialtone-documentation/docs/utilities/sizing/size.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-116
+packages/dialtone-tokens/tokens/theme/dp/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 10,15,27,43,48,52-61,63,65,69,71,75,77-92,117,143-152,154,156-157,160,162-163,166,169-178,183,187,198-206,208,210,214,222-230,234,238,250,265-266,269-270,273-282,291-298,314-373,377-381,422,427-432,453,456-461,475,480,484-488,490,492,496,501,506,512-513,520,526-527,534,540-541,548,554-555,562,569,582-583,596-597,610-611,617,624-625,629-634,644-645,658-659,673,686-687,693-694,701,705-710,714,721,728,734-735,772,777,781,786-791,793,798,812,815-820,843-844,849,854,866,880,894,908,922,936,943,950,957,964,970-971,978,982-987,991,998,1005,1012,1026,1040,1046,1054,1058-1063,1074,1088,1102,1122,1135,1148,1161,1167,1170-1171,1174-1178,1180-1184,1195,1199-1203,1208-1211,1213,1217,1220-1221,1224-1228,1230-1234,1238,1249,1262,1275,1288,1297-1298,1301-1305,1307-1311,1315,1319,1322-1326,1328-1330,1333-1337,1341,1348-1349,1352-1356,1361-1364,1370,1400,1414,1428,1442,1456,1470,1484,1498,1512,1526,1540,1554,1568,1582,1596,1610,1624,1638,1652,1659,1663,1667,1671,1675,1679,1683,1687,1691,1695,1699,1703,1707,1711,1715,1755,1759,1763,1782,1795,1808,1821,1834,1847,1860,1873,1886,1899,1912,1925,1938,1951,1964,1977,1990,2003,2016,2029,2042,2055,2068,2081,2094,2107,2120,2133,2146,2159,2172,2185,2198,2211,2224,2237,2250,2263,2276,2289,2326,2331,2336,2341,2346,2351,2356,2361,2366,2371,2376,2381,2404,2419,2434,2449,2464,2479,2494,2509,2524,2539,2554,2569,2584,2599,2614,2629,2644,2659,2674,2689,2704,2719,2734,2749,2764,2779,2794,2809,2833,2843,2853,2863,2873,2913,2942-2943,2954-2955,2966-2967,2978-2979,2992-2993,3004-3005,3016-3017,3028-3029,3040-3041,3052-3053,3064-3065,3076-3077,3088-3089,3100-3101,3112-3113,3118,3124-3125,3130,3136-3137,3142,3148-3149,3154-3155,3160-3161,3174-3175,3186-3187,3198-3199,3210-3211,3222-3223,3234-3235,3246-3247,3258-3259,3272-3273,3284-3285,3294,3298-3299,3306,3310-3311,3367-3566,3571,3580,3584,3590,3593-3594,3598,3602,3606,3613,3617-3618,3623,3628,3633,3641,3645-3646,3651,3656,3660-3661,3668,3673,3678,3683,3688,3725-3726,3729-3733,3852,3856,3878,3889,3896,3900,3904,3915,3926,3933,3937,3941,3990-3991,4009,4019-4020,4027,4032,4036-4037,4044-4047,4056-4059,4068-4071,4080-4083,4092-4095,4098,4123,4143,4156,4169,4182,4195,4208,4221,4238,4255,4268,4281,4302,4315,4328,4341,4354,4403,4416,4429,4450,4470,4474,4478,4482,4503,4533,4537,4541,4582,4595,4608,4621,4634,4647,4660,4673,4694,4707,4753,4770,4785,4798,4811,4824,4837,4850,4863,4876,4889,4902,4915,4928,4951,4972,4984,4988,4992,4996,5002
+packages/dialtone-tokens/tokens/base/refs/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-578
+packages/dialtone-tokens/tokens/theme/113/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+apps/dialtone-documentation/docs/.vuepress/views/IconCatalog.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3,16,19,23,26,30,68,70-77,93,95,103,105-106,279
+apps/dialtone-documentation/docs/components/mode-island.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-635
+apps/dialtone-documentation/scripts/data/emit-width-height.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-29
+packages/dialtone-vue/components/FilterPill/FilterPill.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-149
+packages/dialtone-query-core/package.json
+  s_06a181a7d7b694::t_9cbaded6daa308 12-13,17,19,21-23
+apps/dialtone-documentation/docs/.vuepress/exampleComponents/ExampleResizableVertical.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2,5-9,13-17,20
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/logo--alignment.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-33
+packages/dialtone-vue/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 10-71,76-78,101
+packages/dialtone-tokens/tokens/base/refs/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-578
+packages/dialtone-vue/components/Box/Box.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-241
+packages/dialtone-vue/recipes/conversation_view/message_input/extensions/meeting_pill/MeetingPill.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 28
+.github/workflows/docs-data-freshness.yml
+  s_06a181a7d7b694::t_9cbaded6daa308 1,3-13,15-22,25,27-29,32-33,35-36,39,41-43,45-68
+packages/dialtone-css/lib/build/js/dialtone_migrate_typography/test.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-1020
+apps/dialtone-documentation/scripts/thumbs/harness/index.html
+  s_06a181a7d7b694::t_9cbaded6daa308 1-77
+packages/combinator/src/components/renderer/renderer_target.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,37-44,53-57,75-81,87-88,92-95,97-99,105-108,111-119,122-123,125-128,131-132,144-146
+packages/dialtone-docs/tests/fixtures/public-docs/long-fence.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-16
+packages/dialtone-tokens/tokens/base/material/graphite.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-26
+packages/dialtone-vue/recipes/conversation_view/message_input/message_input_default.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2,18,42,80-81,83,124
+apps/dialtone-documentation/docs/utilities/grid/place-content.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-16,24-29,37-42,50-55,63-68,76-81,89-94,107,118
+CLAUDE.md
+  s_06a181a7d7b694::t_9cbaded6daa308 92,96,104,106-107,178-180
+apps/dialtone-documentation/docs/.vuepress/config.js
+  s_06a181a7d7b694::t_9cbaded6daa308 7,13-27,30-33,57-60,70-85,149
+apps/dialtone-documentation/docs/.vuepress/views/Overview.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 4-15,17,19-32,34-35,41,51-100,102
+packages/dialtone-vue/vite.config.js
+  s_06a181a7d7b694::t_9cbaded6daa308 16,26-28,134
+packages/dialtone-vue/recipes/conversation_view/message_input/message_input_markdown_output.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 19,43,63-64,68
+packages/dialtone-css/.github/CONTRIBUTING.md
+  s_06a181a7d7b694::t_9cbaded6daa308 33,36-114,121,123,127,137
+packages/dialtone-vue/recipes/conversation_view/editor/editor.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 4-5,14,20,40,46,50,53,56,60,125,129,144,147-148,150,152,155,176,182,186,189,192,196,204,249,276,313,320,330,338,367,384,396,402-412,438,516,826,1338,1456-1457
+apps/dialtone-documentation/docs/utilities/sizing/max-width.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-12,14-26,28,30-37,40,42,44-52,54-59,63,72,74-75,78-83,87,91,93,97,99
+packages/dialtone-vue/components/Pagination/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-docs/tests/fixtures/public-docs/no-headings.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-10
+apps/dialtone-documentation/thumbs/hovercard.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-12
+packages/combinator/src/main.js
+  s_06a181a7d7b694::t_9cbaded6daa308 3-4,9-13,17-18,20-38
+apps/dialtone-documentation/scripts/thumbs/cache.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-97
+packages/dialtone-tokens/vite.config.js
+  s_06a181a7d7b694::t_9cbaded6daa308 10,29-32
+apps/dialtone-documentation/docs/components/breadcrumbs.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,15,21,25,31,34-41,45-62
+apps/dialtone-documentation/docs/.vuepress/theme/constants/themes.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-107
+apps/dialtone-documentation/docs/.vuepress/theme/components/Page.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 6,8-19,24,26,31-35,37,40-45,50-54,56,59-64,67-74,107,109-114,125-157,159-179,184-187,189
+apps/dialtone-documentation/docs/foundations/space/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-15
+.claude/rules/claude-config.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-132
+packages/combinator/vite.config.js
+  s_06a181a7d7b694::t_9cbaded6daa308 32-37
+packages/dialtone-vue/recipes/leftbar/contact_row/contact_row.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 7,37,39,71
+apps/dialtone-documentation/docs/utilities/backgrounds/color.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-8,14-19,26-27,36-37,46-47,56-81,89
+packages/dialtone-tokens/tokens/theme/botany/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 10,14,18
+packages/combinator/src/variants/variants_icon.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-18
+packages/dialtone-tokens/build-sd-transforms.js
+  s_06a181a7d7b694::t_9cbaded6daa308 10,18-19,33,72,92,157,167,204,235
+apps/dialtone-documentation/thumbs/combobox-multi-select.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-5
+apps/dialtone-documentation/thumbs/button.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-43
+packages/dialtone-cli/package.json
+  s_06a181a7d7b694::t_9cbaded6daa308 26
+packages/combinator/CHANGELOG.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-headline-sizes.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-84
+packages/dialtone-vue/components/CheckboxGroup/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/home-billboard.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 84,136-139,154,173
+apps/dialtone-documentation/docs/guides/migration/color-stops/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-368
+packages/dialtone-vue/components/EmojiPicker/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+apps/dialtone-documentation/docs/.vuepress/baseComponents/CodeExampleTabs.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-7,9,41,54,58,64,71,75,151,207,211,216
+apps/dialtone-documentation/docs/.vuepress/baseComponents/GradientHero.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-42
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/cobrand--examples.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-110
+packages/dialtone-vue/directives/scrollbar_directive/scrollbar.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 5,7-11,14-15,18-24,32-35,47-50,55-60,70,72,79,81-86,88,91,96-359
+packages/dialtone-vue/common/constants/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 12,14-15,26-34,42-48,79,84-86
+packages/combinator/src/variants/variants_box.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-180
+packages/dialtone-vue/components/Text/Text.mdx
+  s_06a181a7d7b694::t_9cbaded6daa308 1-9
+packages/combinator/src/components/controls/control_iterable.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-16,18-29,31,33-34,36,38-40,42-55,57-63,67-68
+apps/dialtone-documentation/docs/utilities/typography/lists.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-13,38-41,43,51,54,61-63,74-90
+packages/dialtone-css/postcss/dialtone-generators.test.cjs
+  s_06a181a7d7b694::t_9cbaded6daa308 2,4-11,13-14,16-95
+apps/dialtone-documentation/docs/.vuepress/theme/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 8-10,31-50,52-53,61-101,105-115,117-123,130,138,169-240,242-268,273-285,322-324,326-331,336,351-352,354,359-365,370
+packages/dialtone-vue/recipes/conversation_view/feed_item_row/feed_item_row_default.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 50,54,61,66,73,89,117,137-141
+packages/dialtone-css/lib/build/js/dialtone_migrate_link_rendering/button-nav.test.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-272
+apps/dialtone-documentation/docs/utilities/grid/place-items.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-16,24-29,37-42,50-55,68,79
+packages/dialtone-tokens/tokens/theme/133/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+apps/dialtone-documentation/docs/_data/filter-pill.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-19
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/home-foundations-01.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-19
+packages/dialtone-css/lib/build/less/utilities/borders.less
+  s_06a181a7d7b694::t_9cbaded6daa308 20,22-26,28,31,33,35-42,45-46,49-50,53-54,57-58,61-62,65-67,69-70,72,74,80-91,93-96,99-102,105-108,111-114,117-137,148-149,155-156,162-163,169-170,179-180,186-187,193-194,200-201,214-215,219-221
+packages/dialtone-tokens/tokens/theme/112/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+apps/dialtone-documentation/docs/utilities/flex/flex-grow-shrink.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-8,15-19,23,26,28-30,53-57,61,64,66-68,72,74-75,77,79-80,91-95,99,102,104-106,110,112-113,115,117-118
+packages/dialtone-vue/components/ImageViewer/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-css/lib/build/less/components/selects.less
+  s_06a181a7d7b694::t_9cbaded6daa308 19,24,27,31,40-48,56,59,62,73,116,120-121,129,133-134,140,142,144,147,149
+apps/dialtone-documentation/scripts/lib/transform-utility-class-table.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-114
+packages/combinator/src/variants/variants_checkbox_group.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+apps/dialtone-documentation/docs/components/motion-text.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,9-18,28-42,44-47,49-58,62-91,97-106,108-112,114-127,134,139,141,147,152,194,199-220
+packages/dialtone-vue/components/RichTextEditor/Extensions/Variable/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+.claude/skills/token.md
+  s_06a181a7d7b694::t_9cbaded6daa308 62
+packages/combinator/src/components/option_bar/option_bar_control.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 3,19,34,38
+packages/eslint-plugin-dialtone/tests/lib/rules/focusgroup-requires-role.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-55
+packages/dialtone-tokens/tokens/theme/high-desert/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 14,26-37,40
+apps/dialtone-documentation/docs/.vuepress/plugins/markdown-it-fenced-demo.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-120
+packages/dialtone-icons/CHANGELOG.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+apps/dialtone-documentation/docs/tokens/for-developers/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 5,7-18
+packages/combinator/src/variants/variants_toggle.js
+  s_06a181a7d7b694::t_9cbaded6daa308 8-20
+packages/dialtone-vue/common/constants/layout.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-15
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-icons.js
+  s_06a181a7d7b694::t_9cbaded6daa308 18
+packages/postcss-responsive-variations/package.json
+  s_06a181a7d7b694::t_9cbaded6daa308 3
+packages/dialtone-vue/components/ModeIsland/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+apps/dialtone-documentation/docs/_data/checkbox.json
+  s_06a181a7d7b694::t_9cbaded6daa308 44,46,49,51
+packages/dialtone-vue/components/Avatar/AvatarVariants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2,5-9,19,23-27,35,39-43,51-52,55-144,148-152,157,163,167-170,173,185,191,194-198,202,207,209-210,218,220,223-228,230-231,233,235-236,239-245,247-248,250-262,264-265,267,271,273-322,324,328-340,344-356,360
+packages/dialtone-css/lib/build/less/recipes/top_banner_info.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,11-12,17,19,24,27-29,32,34,51-52
+apps/dialtone-documentation/docs/_data/site-nav.json
+  s_06a181a7d7b694::t_9cbaded6daa308 2-17,19-140,142-213,215-1056,1058-1062,1064-1068,1070
+packages/dialtone-tokens/tokens/components/badge/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 13,17-21,48-51,57,78,86
+apps/dialtone-documentation/docs/ui-kits/what-are-ui-kits/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-45
+packages/dialtone-vue/directives/focusgroup_directive/focusgroup.mdx
+  s_06a181a7d7b694::t_9cbaded6daa308 1-383
+packages/combinator/src/variants/variants_link.js
+  s_06a181a7d7b694::t_9cbaded6daa308 2-7,20-67
+packages/dialtone-tokens/dist_ios/VERSION
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-vue/recipes/buttons/callbar_button_with_popover/callbar_button_with_popover.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 4
+apps/dialtone-documentation/docs/guides/content/help-content/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 6
+packages/dialtone-vue/recipes/item_layout/contact_info/contact_info_default.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 38-39,41,45-46,48,55
+packages/dialtone-css/lib/build/less/components/motion_text.less
+  s_06a181a7d7b694::t_9cbaded6daa308 21-26,28-57,59-69,71-73,75-77,79-82,84-88,90-92,94-98,100-102,105-108,110-112,115-118,120-122,125-129,131-133,136-139,141-143,146-156,159-163,165-168,171-175,178-180,182-184,186-188,190-195,197-199,201-203,205-207,209-214,216-218,220-222,224-226,228-234,236-244,246-260,262-266,268-275,277-279,281-283,285-296
+apps/dialtone-documentation/docs/dialtone/whats-new/posts/2026-4-21.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-125
+packages/combinator/src/components/code_panel/code_panel.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 10-24,34,70-88,115,117-121,127
+packages/dialtone-tokens/tokens/components/button/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 7,11-12,17,22,26-27,34,39,43-44,49,54,62,66-67,72,77,82,90,94-95,100,105,110,170
+packages/dialtone-vue/common/constants/sizes.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-31
+packages/dialtone-docs/tests/fixtures/public-docs/indented-fence.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-16
+packages/combinator/eslint.config.js
+  s_06a181a7d7b694::t_9cbaded6daa308 5,45,47,53,57
+apps/dialtone-documentation/docs/foundations/icons/crafting-an-icon/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-29
+packages/dialtone-vue/components/Button/ButtonVariants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-298
+apps/dialtone-documentation/scripts/data/emit-icons-sizes.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-18
+packages/combinator/src/components/controls/control_selection.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 3-4,18,26,32,36-37,39-40,46-47
+packages/dialtone-tokens/tokens/theme/110/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+packages/dialtone-vue/directives/focustrap_directive/focustrap_utils.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-51
+packages/combinator/src/components/event_console/event_console.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 3,15
+packages/dialtone-tokens/tokens/theme/135/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+.claude/rules/language-server.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-75
+packages/dialtone-tokens/tokens/base/material/steel.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-26
+packages/dialtone-css/lib/build/less/recipes/feed_item_pill.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,7,12-13,26-28,35-36,51,56,62,68-69,77
+packages/dialtone-css/lib/build/js/dialtone_migrate_chip_interactive/index.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-367
+packages/dialtone-css/lib/build/less/components/item-layout.less
+  s_06a181a7d7b694::t_9cbaded6daa308 15,19-20,29,37,41,49-50,55,60
+packages/dialtone-vue/components/Resizable/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-5
+packages/dialtone-vue/recipes/item_layout/contact_info/contact_info.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 8-9,53,55,94-95,104-108,110-111,121-126,175-177,180,198,201,203-206,245-247,250-251,258-259,262-263,267,271-272,280,284,288-291,297-298,300,303,307-310,316-317,320,327,331-334,339-340,347-349,354,359,362
+apps/dialtone-documentation/scripts/lib/transform-vue-api.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-133
+apps/dialtone-documentation/docs/components/skeleton.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11-17,42-43,45,63-68,72-77,83-94,98-108,116-126,130-140,144-154,160-165,169-176,180-193,197-212,218
+packages/dialtone-css/lib/build/less/components/modal.less
+  s_06a181a7d7b694::t_9cbaded6daa308 21-87,93,98-99,114,122-145,147,152,154-157,161-166,174,176-178,180,185-186,202-205,217,221,232,235,245,254-255,264-265,270-271,277-279,294,296,306-307,309,315-317,337-338,344,348,352-353,357-358,371,375,377,387,391,396,400,404-405
+apps/dialtone-documentation/docs/utilities/grid/place-self.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-16,24-29,37-42,50-55,68,74,79
+packages/stylelint-plugin-dialtone/tests/lib/rules/use-dialtone-tokens.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 18,31-32,40
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/chart-dondont-4-2.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 15-16
+packages/dialtone-css/lib/build/less/components/chip.less
+  s_06a181a7d7b694::t_9cbaded6daa308 17,21-22,25,37-38,40,42,54-55,84,89-93,96-97,102-103,118-149,151-158,184-185,188,190,195-197,203-204,206-208,212,214,219-221
+packages/dialtone-css/lib/build/less/components/collapsible.less
+  s_06a181a7d7b694::t_9cbaded6daa308 15,17,23-25,30,39-40
+packages/dialtone-vue/components/Hovercard/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+apps/dialtone-documentation/docs/utilities/effects/opacity.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-19,26-27,34-35,42-43
+packages/postcss-responsive-variations/CHANGELOG.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-7
+apps/dialtone-documentation/docs/components/combobox-with-popover.md
+  s_06a181a7d7b694::t_9cbaded6daa308 9,12,16,23,27,32,35-38,43-45,71,74-78,81,84-89,92,97-98,100-103,108,111-139
+apps/dialtone-documentation/docs/foundations/brand/samples/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-7
+packages/dialtone-vue/components/ValidationMessages/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/type-billboard.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-12
+packages/dialtone-mcp-server/CHANGELOG.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+.claude/rules/link-and-button-navigation.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-41
+packages/combinator/src/variants/variants_button_group.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-15
+packages/combinator/src/App.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3-4,13,16-17,31,47,93,101
+packages/dialtone-tokens/tokens/theme/124/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/base-to-semantic.test.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-198
+apps/dialtone-documentation/thumbs/scrollbar.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-20
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-stack-flow-classes.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-114
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/size.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-base-color-classes.js
+  s_06a181a7d7b694::t_9cbaded6daa308 15-18,25
+packages/dialtone-css/lib/build/less/components/image-viewer.less
+  s_06a181a7d7b694::t_9cbaded6daa308 13,15,21-23,27-28,35-36
+packages/dialtone-css/lib/build/js/dialtone_migrate_link_rendering/link-nav-test-examples.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-97
+packages/dialtone-css/lib/build/less/components/skeleton.less
+  s_06a181a7d7b694::t_9cbaded6daa308 21,30,71,77,85,88,91,100
+apps/dialtone-documentation/docs/.vuepress/exampleComponents/ExampleResizable.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2,4-9,13-17,20
+packages/combinator/src/lib/prop_dependencies.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-93
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/footer-dialpad-design--light.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-19
+packages/dialtone-tokens/tokens/theme/ceruleo/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 4-7,10,22,46,50
+packages/dialtone-tokens/tokens/theme/121/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+packages/dialtone-vue/components/KeyboardShortcut/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+packages/dialtone-vue/.storybook/dialtone-themes.js
+  s_06a181a7d7b694::t_9cbaded6daa308 27,41
+packages/dialtone-css/lib/build/js/dialtone_migrate_flex_to_stack/examples-edge-cases.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 295-320
+apps/dialtone-documentation/docs/guides/theme-and-mode/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-494
+apps/dialtone-documentation/thumbs/README.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-145
+packages/dialtone-css/lib/build/less/components/presence.less
+  s_06a181a7d7b694::t_9cbaded6daa308 9,15,18-22,35,37-38,41,58,60-74
+packages/dialtone-vue/prototypes/dialpad/leftbar/components/mark_all_as_read_button.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 5,8,20-21
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-dialtone-component.js
+  s_06a181a7d7b694::t_9cbaded6daa308 18
+packages/dialtone-vue/components/Banner/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-cli/src/index.ts
+  s_06a181a7d7b694::t_9cbaded6daa308 10,52
+packages/dialtone-mcp-server/scripts/run-acceptance-scenarios.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-86
+packages/dialtone-tokens/tests/fixtures/dom-helpers.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-9
+packages/dialtone-vue/components/SplitButton/SplitButton.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 2-5,8-11,15,28-31,43-44,52-55,86-88,93-94,98-100,104-105,115-116,120,122,126,130-132,136-137,141-143,147-148,158-159,163,165,169,173,175,179,189-190,194,196,202,206,209,211,215,220,222-244,250,254,256,259,263,267,269,272,276-308,314,316,320,324-328,331,336,338,342,346-350,353,359-658,660-662,669-716
+apps/dialtone-documentation/docs/components/banner.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11-25,40-46,52,59-64,66-68,74-78,82,88,92,95,99,102,122,124,141-142
+apps/dialtone-documentation/docs/guides/getting-started/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 26,28,30-32,34-47,50-73,77-100,105-112,119-128,176,181,185
+packages/dialtone-vue/recipes/buttons/callbar_button_with_popover/callbar_button_with_popover_default.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 62
+apps/dialtone-documentation/docs/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 2-3,5-400
+apps/dialtone-documentation/docs/.vuepress/theme/components/TocItem.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2,4-9,12
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/css-utilities.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-15
+packages/dialtone-css/lib/build/js/dialtone_migrate_tshirt_to_numeric/test.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-336
+packages/eslint-plugin-dialtone/docs/rules/deprecated-pixel-utility-classes.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-55
+apps/dialtone-documentation/docs/guides/content/error-messages/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 6
+packages/combinator/src/variants/variants_description_list.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-38
+packages/combinator/src/lib/control.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-45
+packages/dialtone-css/lib/build/less/dialtone-globals.less
+  s_06a181a7d7b694::t_9cbaded6daa308 21,43-77
+packages/dialtone-tokens/vitest.config.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-22
+packages/dialtone-vue/docs/storybook/writing_storybook.mdx
+  s_06a181a7d7b694::t_9cbaded6daa308 3,21,23,27,45-47,68,108-109,118,125,225,295-296,313,358
+apps/dialtone-documentation/postcss.config.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 5-6,13
+apps/dialtone-documentation/docs/.vuepress/baseComponents/tokens/constants.js
+  s_06a181a7d7b694::t_9cbaded6daa308 29-31,57,60,63,66,69,77,80,86,89,92,102,109-111,114,117,121-122,125,128
+packages/dialtone-css/lib/build/less/recipes/grouped_chip.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,18,20-21,25,27-29
+packages/combinator/src/components/code_editor/code_editor_tag_attributes.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 65-71,100-101
+packages/language-server/server/CHANGELOG.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-3
+packages/eslint-plugin-dialtone/docs/rules/deprecated-stack-alignment-classes.md
+  s_06a181a7d7b694::t_9cbaded6daa308 30,36,48,50,54,101-106,129
+apps/dialtone-documentation/docs/utilities/flex/order.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-8,14-18
+packages/dialtone-vue/components/ModeIsland/Validators.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-9
+apps/dialtone-documentation/thumbs/prose.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-12
+packages/eslint-plugin-dialtone/docs/rules/deprecated-tshirt-sizes.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-55
+packages/combinator/src/variants/variants_scroller.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-60
+packages/stylelint-plugin-dialtone/bin/fix-logical-properties.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-306
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/type--sample-01.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-20
+packages/eslint-plugin-dialtone/lib/rules/deprecated-success-color-classes.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-180
+CHANGELOG.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-tokens/project.json
+  s_06a181a7d7b694::t_9cbaded6daa308 16-17,64-68
+packages/dialtone-query-core/src/tools/docs.ts
+  s_06a181a7d7b694::t_9cbaded6daa308 1-220
+apps/dialtone-documentation/docs/design/icons/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 15,19,21-23,29,35,45,58,62-95,98-132,141,159-160
+packages/dialtone-vue/common/mixins/skeleton.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/combinator/src/variants/variants_button.js
+  s_06a181a7d7b694::t_9cbaded6daa308 2-57,65-71,74-77,80-82,85-88,93-96,99-101,105-110,115-121,124-126,128-130,136-137,140-142,144-145,150,153-155,157-158,163,165-166,170-180,182-183,185-187,189-194,197-202,204,206-208,210-253
+packages/dialtone-vue/recipes/leftbar/contact_centers_row/contact_centers_row_variants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2,4,10,17-18,21,28,36,43,50-51,54,61,69,78,85-86,89,96,104,113,120-121,124,131,139,145,147,154-155,158,165,176-178
+packages/combinator/src/lib/control.js
+  s_06a181a7d7b694::t_9cbaded6daa308 16-17,21-23,65-68,90-93,111-117,119-131
+apps/dialtone-documentation/thumbs/empty-state.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-21
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/hsl-to-oklch.test.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-210
+apps/dialtone-documentation/docs/components/list-item-group.md
+  s_06a181a7d7b694::t_9cbaded6daa308 5,7,10,12,14
+apps/dialtone-documentation/docs/components/box.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-297
+packages/dialtone-css/lib/build/js/dialtone_migrate_props/index.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-795
+apps/dialtone-documentation/docs/_data/interactivity.json
+  s_06a181a7d7b694::t_9cbaded6daa308 112-114,130-131,134-135,140-149
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/logo--secondary-color-light.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-13
+packages/dialtone-query-core/src/data.ts
+  s_06a181a7d7b694::t_9cbaded6daa308 5,11,17
+apps/dialtone-documentation/docs/_data/toast.json
+  s_06a181a7d7b694::t_9cbaded6daa308 14,16,24,26
+apps/dialtone-documentation/docs/utilities/flex/align-content.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-8,14-21,28-35,42-49,56-63,70-77,84-92,104-105
+packages/dialtone-tokens/tokens/theme/108/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+apps/dialtone-documentation/docs/components/keyboard-shortcut.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,17,19,25,32-33,35,37-41,43,45-48,50,54,56,58,62-63,70-71
+apps/dialtone-documentation/docs/foundations/graphic-system/abstract-graphics.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-36
+packages/combinator/src/variants/variants_presence.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-43
+packages/dialtone-css/lib/build/less/components/progress_circle.less
+  s_06a181a7d7b694::t_9cbaded6daa308 7-15,35,40
+packages/combinator/src/variants/variants_text.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-205
+packages/combinator/src/variants/variants_popover.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-82
+apps/dialtone-documentation/docs/components/dropdown.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,8,11,26,38,45,49,58,79,92,98,103,113,120-146,150
+packages/dialtone-vue/components/ModeIsland/ModeIsland.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-136
+docs/prd/2026-05-07-eslint-deprecated-class-props.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-131
+packages/dialtone-css/lib/build/less/recipes/emoji_row.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,5,13,18,21,24,43-44,52,101
+packages/dialtone-docs/tests/fixtures/public-docs/nested-headings.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-21
+packages/dialtone-css/lib/build/less/components/stack.less
+  s_06a181a7d7b694::t_9cbaded6daa308 19,43-57,202-210
+.claude/skills/merge-next/SKILL.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-170
+packages/combinator/.github/documentation/FUTURE_ADDITIONS.md
+  s_06a181a7d7b694::t_9cbaded6daa308 3,5,7-9,11,13,15-18,20-22,24,26-28,30,32,34,36-38,40-43,45,47,49-52,54,56,58,60,62-65,67,69-70,72-74
+packages/dialtone-tokens/generate-themes.js
+  s_06a181a7d7b694::t_9cbaded6daa308 2-6,12,16,23-27,29-34,36-38,41-44,48,50-51,53-54,56-64,66-72,75-77,79-115,117-138,144,146
+packages/dialtone-tokens/tokens/components/presence/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 5,9,13,18
+apps/dialtone-documentation/docs/components/emoji.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,17-19,23,25,29,31,35-41,76,78
+packages/dialtone-docs/tests/fixtures/public-docs/info-text-fence.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-15
+packages/dialtone-vue/components/Box/Validators.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+packages/eslint-plugin-dialtone/lib/util/class-attribute-rule.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-49
+packages/language-server/server/CHANGELOG.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-vue/components/RichTextEditor/Extensions/LinkPhoneNumbers/LinkPhoneNumbers.test.js
+  h_9e2c5818b2d2f6 2
+packages/dialtone-tokens/tokens/components/badge/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 8-15,27,35,42,50
+packages/dialtone-vue/components/FilterPill/FilterPill.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-662
+packages/dialtone-vue/components/ModeIsland/ModeIslandDefault.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-61
+packages/dialtone-tokens/tokens/theme/111/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+packages/dialtone-tokens/tokens/theme/129/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+packages/dialtone-vue/recipes/buttons/callbar_button/callbar_button.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 3,106-131
+packages/combinator/postcss.config.js
+  s_06a181a7d7b694::t_9cbaded6daa308 9
+apps/dialtone-documentation/docs/.vuepress/theme/utils/isExternalUrl.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/combinator/src/components/code_editor/code_editor.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2,4-7,10,21,25-34,36-38,42-45,47-85,92-93,95-96,98,136-150,165-173,180-181,183-272,274-277,279-313,315-317,319-325,327-329,344-348,350
+packages/dialtone-vue/directives/mode_directive/mode_directive_default.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-221
+apps/dialtone-documentation/docs/utilities/backgrounds/repeat.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-37
+packages/dialtone-tokens/tokens/theme/115/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+apps/dialtone-documentation/scripts/data/metadata.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-122
+packages/dialtone-vue/components/Tab/Tab.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 2,11,90-153,155-199,202,206-226,228-229,232,235,237,240,243,245-254,259,262-270,272-273,279-341,392-437
+apps/dialtone-documentation/scripts/thumbs/harness/vite.config.js
+  s_06a181a7d7b694::t_5da63915c09ca1 50-57
+packages/dialtone-css/stylelint.config.cjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-vue/components/Datepicker/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+packages/dialtone-tokens/tokens/theme/132/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+packages/dialtone-css/lib/build/less/utilities/interactivity.less
+  s_06a181a7d7b694::t_9cbaded6daa308 18,70,80-85,87
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/illustrations.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-43
+packages/dialtone-vue/recipes/leftbar/general_row/general_row.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 148-171
+packages/dialtone-vue/recipes/leftbar/unread_pill/unread_pill.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 58
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/motion.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-33
+apps/dialtone-documentation/docs/utilities/grid/column-start-end-span.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-21,29-37
+apps/dialtone-documentation/docs/guides/contributing/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,19-27
+packages/dialtone-vue/components/SegmentedControl/SegmentedControl.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-352
+packages/combinator/src/components/code_example/copy_button.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 10,29
+apps/dialtone-documentation/docs/utilities/typography/font-weight.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-8,14-26,34,36-37
+packages/dialtone-vue/components/Text/TextVariants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-559
+apps/dialtone-documentation/docs/.vuepress/theme/components/MobileSidebar.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 8,12-13,16,26,38,42-43,61-62,66,81-86,99-100,102-103,112-113,117-119
+apps/dialtone-documentation/thumbs/datepicker.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-6
+apps/dialtone-documentation/docs/.vuepress/theme/layouts/Layout.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2,9,13-30,38-44,47,70-71,75,83-84,92-168,171-184,198-199,217,231,245-248
+packages/combinator/src/variants/variants_stack.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-82
+packages/eslint-plugin-dialtone/docs/rules/deprecated-success-color-classes.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-80
+packages/dialtone-css/lib/build/less/components/scrollbar.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2,14,18,26,30,33-53
+packages/dialtone-vue/percy.config.cjs
+  s_06a181a7d7b694::t_9cbaded6daa308 23,46
+apps/dialtone-documentation/docs/guides/migration/link-and-button-navigation/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-245
+packages/eslint-plugin-dialtone/tests/lib/rules/prefer-stack-over-flex.js
+  s_06a181a7d7b694::t_9cbaded6daa308 19-22,63-69
+packages/dialtone-vue/components/Badge/BadgeVariants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-30,34-36
+packages/combinator/src/components/controls/control_slot.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 3,24,30,43,53
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-tshirt-sizes.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-141
+apps/dialtone-documentation/docs/.vuepress/composables/useDocExpandable.js
+  s_06a181a7d7b694::t_9cbaded6daa308 9,15,34-36,38-39,41-46,48,95-96
+packages/dialtone-css/lib/build/less/recipes/editor.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,8,13-15,20-21,29,33,37,43-44,50-51
+packages/dialtone-vue/directives/mode_directive/mode.mdx
+  s_06a181a7d7b694::t_9cbaded6daa308 1-95
+packages/dialtone-vue/directives/tooltip_directive/tooltip_directive_default.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 4-5,11,37-39
+packages/dialtone-tokens/tokens/theme/129/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+packages/stylelint-plugin-dialtone/docs/rules/recommend-font-style-tokens.md
+  s_06a181a7d7b694::t_9cbaded6daa308 13-16,23
+apps/dialtone-documentation/scripts/lib/utils.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-209
+packages/dialtone-vue/common/mixins/input.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 24
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/download-logo--dark-icon.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-42
+apps/dialtone-documentation/docs/.vuepress/client.js
+  s_06a181a7d7b694::t_9cbaded6daa308 7-8,20,23-24,31-32,44,47-48
+firebase-debug.log
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/download-logo--secondary-1-color-dark.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-12
+packages/combinator/src/variants/variants.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1,3,5-6,8,10,12-26,28-31,33-37,39-43,45-49,51-55,58-59,63,65,67-68,70,72,74-88,90-93,95-99,101-105,107-111,113-117,120-121
+apps/dialtone-documentation/docs/components/progress-circle.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,9,33-40,42-43,49-52,54-55,57,63-66,68-69,71,77-80,82-83,85
+packages/dialtone-icons/src/svg/icons/general/circle.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+packages/dialtone-vue/components/SegmentedControl/SegmentedControlItem.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-55
+apps/dialtone-documentation/docs/foundations/gradient/marketing.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-45
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/size-to-layout.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-222
+packages/stylelint-plugin-dialtone/lib/rules/recommend-font-style-tokens.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1,19
+apps/dialtone-documentation/docs/foundations/colors/palette/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 2,4,6,16,21,38,43,60,70,74,78,93-95,98-168,171,175-178,184-188,200-201,204-213
+packages/dialtone-vue/components/ValidationMessages/ValidationMessages.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1,4-15,21,39-41,67,75-79,105-327
+packages/combinator/src/base.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1,4,9
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/color-table.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 31,33,35,37,39,41,43,45,57,59,61,63,65,67,84,86,88,90,92,94,96,98,108,110,112,114,116,118,120,134,136,138,140,142,144,146,160,162,164,166,168,170,172
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/download-logo--gradient-icon.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-42
+packages/dialtone-css/lib/build/less/components/mode-island.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1-9
+packages/dialtone-tokens/tokens/theme/132/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+apps/dialtone-documentation/docs/.vuepress/theme/layouts/Blank.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-7
+packages/dialtone-vue/components/Collapsible/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+apps/dialtone-documentation/docs/foundations/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 2-3
+apps/dialtone-documentation/docs/_data/downloads.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-16,18-20,23-25,28-30,33-45,47-49,52-54,57-59,62-74,76-87,89-108
+.claude/rules/slot-class-props.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-70
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/hsl-to-oklch-test-examples.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-154
+packages/dialtone-css/lib/build/less/utilities/grid.less
+  s_06a181a7d7b694::t_9cbaded6daa308 10-12,18-34,38,40-41,48-62,72-73,135
+packages/dialtone-vue/components/Checkbox/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-query-core/src/tools/tokens.ts
+  s_06a181a7d7b694::t_9cbaded6daa308 115
+packages/stylelint-plugin-dialtone/lib/rules/no-mixins.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1,15
+packages/dialtone-css/lib/build/less/dialtone-reset.less
+  s_06a181a7d7b694::t_9cbaded6daa308 3,47-48,62,84-85,90-91,102-103,155,159,256-257,269,308
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/color.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-11
+packages/dialtone-vue/recipes/conversation_view/feed_item_pill/feed_item_pill.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 3,75-87,98-143
+apps/dialtone-documentation/docs/.vuepress/theme/client.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1,5,14-60,66-89,112-119,122,124-131,133-150,152-183,192-193,197-198,202-203,206-207,209-210,216,224-226,259,261-262,293,295-356,358-417
+apps/dialtone-documentation/docs/utilities/borders/style.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-19,26-34,52
+apps/dialtone-documentation/docs/foundations/type/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-34
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/sub-brand--product-examples.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-80
+packages/dialtone-css/lib/build/less/components/link.less
+  s_06a181a7d7b694::t_9cbaded6daa308 16,26,35-36,44,68-77,85,87,93,95,97-105,151,153,159,161,163-164,174-180,193-194,197-201,206-207,209-212,215,218
+apps/dialtone-documentation/docs/foundations/product-storytelling/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-34
+apps/dialtone-documentation/docs/.vuepress/baseComponents/tokens/TokenValue.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2,5-8,16
+.codegraph/.gitignore
+  s_06a181a7d7b694::t_9cbaded6daa308 1-16
+packages/dialtone-tokens/tokens/theme/116/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+apps/dialtone-documentation/docs/.vuepress/theme/composables/useThemeManager.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-301
+packages/dialtone-docs/src/content/development/development-css-utilities.md
+  s_06a181a7d7b694::t_9cbaded6daa308 48-53
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/size-to-layout-test-examples.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-291
+apps/dialtone-documentation/docs/guides/migration/component-sizes/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-235
+packages/stylelint-plugin-dialtone/lib/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1,3-10,12-21
+packages/dialtone-vue/components/EmojiTextWrapper/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+apps/dialtone-documentation/scripts/lib/transform-code-example-tabs.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-34
+apps/dialtone-documentation/docs/utilities/effects/transition.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,9,11-12,19-28,35-43,50-59,70,81-83
+packages/dialtone-css/lib/build/less/components/prose.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1-512
+packages/dialtone-vue/components/Input/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/icon--in-product.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-349
+apps/dialtone-documentation/docs/utilities/typography/text-opacity.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,12,28,30,35-36,45,50-51
+apps/dialtone-documentation/docs/tokens/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4-5,8,10
+packages/dialtone-vue/components/ModeIsland/ModeIsland.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-232
+apps/dialtone-documentation/docs/.vuepress/baseComponents/BaseColor.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-24,26-55,57,75-82,85-104,107
+packages/dialtone-vue/components/Presence/modules/presence_active_icon.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-18
+apps/dialtone-documentation/docs/.vuepress/baseComponents/DialtoneUsage.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3,14
+apps/dialtone-documentation/docs/.vuepress/baseComponents/IconPopover.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 15,21,27-29,34-36,38
+packages/dialtone-tokens/tokens/theme/122/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+.claude/rules/dialtone-query-core.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-168
+packages/dialtone-vue/recipes/notices/top_banner_info/top_banner_info.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 58-59,68-75,84-86
+packages/stylelint-plugin-dialtone/tests/lib/rules/no-deprecated-success-tokens.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-122
+apps/dialtone-documentation/docs/components/button-group.md
+  s_06a181a7d7b694::t_9cbaded6daa308 6,9,19-21,25,31-33,37,43-45,49
+apps/dialtone-documentation/docs/utilities/typography/line-height.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-8,14-44,51-55,57-113,121,123-124
+packages/combinator/src/variants/variants_loader.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-28
+apps/dialtone-documentation/docs/guides/migration/css-cascade-layers/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-204
+packages/dialtone-tokens/themes/config.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-3,5-8,10-103,105-121,123-163,168-169,171-172,177-180,182,185-197,205-656
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/gradient--billboard.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-5,9-12,14-27
+packages/dialtone-tokens/CHANGELOG.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-101
+packages/dialtone-tokens/tokens/theme/107/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+packages/dialtone-tokens/tokens/theme/134/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+packages/dialtone-vue/components/RichTextEditor/Extensions/Image/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+apps/dialtone-documentation/docs/components/card.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,36,42-43,54,58-59,61-74,77,80,84-85,87,92,98,102-103,105,108,112-113,115-128,131,136,142
+apps/dialtone-documentation/docs/utilities/interactivity/cursor.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,8-31
+packages/dialtone-vue/components/KitchenSink/KitchenSinkView.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-262
+.claude/rules/design-tokens.md
+  s_06a181a7d7b694::t_9cbaded6daa308 9,13,17,22-30,32,36,38,42,46,50
+scripts/convert-tokens-to-oklch.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-84
+packages/dialtone-query-core/src/index.ts
+  s_06a181a7d7b694::t_9cbaded6daa308 20-21,26,53-54
+.claude/rules/vue-components.md
+  s_06a181a7d7b694::t_9cbaded6daa308 9-11,15,19,22,24,27,30,33-41,44,50
+packages/dialtone-tokens/tokens/theme/106/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/size-to-layout.test.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-87
+packages/dialtone-vue/components/Chip/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+apps/dialtone-documentation/docs/utilities/responsive/breakpoints.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,143,165-178,188,190-192
+packages/dialtone-tokens/tokens/theme/116/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/download-gradient.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-7,9-24
+apps/dialtone-documentation/scripts/lib/transform-html-table.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-149
+packages/combinator/src/variants/variants_banner.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-19
+packages/dialtone-css/lib/build/less/components/breadcrumbs.less
+  s_06a181a7d7b694::t_9cbaded6daa308 14,16,33,49-50,52-53,57,63-64,81-90
+packages/combinator/src/components/controls/control_string.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 3,28,34,47,57
+.claude/rules/general-rules.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1,3,5,7-9,11,14-15
+packages/dialtone-css/lib/build/less/components/emoji.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,9
+packages/dialtone-css/postcss/dialtone-docs.cjs
+  s_06a181a7d7b694::t_9cbaded6daa308 52-55,82,110-133,156-167,185-191
+.gitignore
+  s_06a181a7d7b694::t_9cbaded6daa308 30-34,90-96
+apps/dialtone-documentation/docs/components/empty-state.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,15-18,24,70,72,79-80,84,86,93-94,98,100,107-108,112,114,121-122,131,134,140,146,155,159,165,174,178,180,185,194,198,200,205,214,218,220,225,234,240,249,253,261,265,271,280,284,286,291-293,300,336,377
+packages/dialtone-vue/components/Popover/PopoverInsideDialog.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-99
+packages/stylelint-plugin-dialtone/lib/rules/no-deprecated-success-tokens.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-58
+apps/dialtone-documentation/docs/careers/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-15
+packages/dialtone-tokens/tokens/theme/135/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+apps/dialtone-documentation/docs/components/table.md
+  s_06a181a7d7b694::t_9cbaded6daa308 7,10,16-20,23-26,30-34,42-43,47-51,54-57,61-65
+packages/stylelint-plugin-dialtone/docs/rules/use-dialtone-tokens.md
+  s_06a181a7d7b694::t_9cbaded6daa308 21
+packages/dialtone-vue/components/Text/Text.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-131
+apps/dialtone-documentation/docs/utilities/typography/text-transform.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-12,19-20,27-28
+packages/dialtone-vue/components/Toast/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+apps/dialtone-documentation/docs/utilities/grid/understanding.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-success-color-classes.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-118
+apps/dialtone-documentation/docs/.vuepress/views/Icons.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-4,8,33
+packages/combinator/src/components/renderer/renderer_button_bar.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3,10
+apps/dialtone-documentation/thumbs/table.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-64
+packages/eslint-plugin-dialtone/docs/rules/prefer-stack-over-flex.md
+  s_06a181a7d7b694::t_9cbaded6daa308 28,50,59,87-92,112,114,121,123,132,134,140,142,150,152,159,161
+apps/dialtone-documentation/docs/_data/button.json
+  s_06a181a7d7b694::t_9cbaded6daa308 24,26
+packages/dialtone-vue/components/LazyShow/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-vue/components/Tab/TabGroup.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 2-4,6-7,150-178,245,248-249,258,261-263,275-276,285,288-290,303,316,326-486,506-638,642,655,660-661,672,675-676,694,712,728-888
+apps/dialtone-documentation/docs/components/rich-text-editor.md
+  s_06a181a7d7b694::t_9cbaded6daa308 5,7,10-13,19-21,31,35-39,105-110,121
+packages/dialtone-query-core/vitest.config.ts
+  s_06a181a7d7b694::t_9cbaded6daa308 1-11
+packages/dialtone-tokens/tokens/theme/119/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+packages/dialtone-tokens/tokens/theme/136/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+apps/dialtone-documentation/docs/guides/migration/border-radius/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-349
+apps/dialtone-documentation/scripts/generate-raw-markdown.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-700
+packages/dialtone-tokens/tokens/base/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 3,5,9,13,17,21,25,29,33,37,41,45,49,53,55,59,63,67,71,75,79,82-83,86-87,90-91,94-95,99,105,109,113,117,121,124-125,128-129,132-133,136-137,141-145,149,155,159,163,167,171,175,179,183-187,191-195,199,205,209,213,217,221,224-225,228-229,232-233,236-237,241-245,249,255,259,263,267,271,275,279,283-287,291-295,299,305,309,313,317,321,325,329,333,337,341,345,349,355,359,363,367,371,375,379,383,387,391,395,399,405,409,413,417,421,425,429,433,437,441,445,449,455,459,463,467,471,475,479,483,487,491,495,499,505,509,513,517,521,525,529,533,537,541,545,549,555,559,563,567,571,575,579,583,587,591,595,599,605,618,663,708,753,798,806,814
+apps/dialtone-documentation/docs/utilities/typography/font-variant-numeric.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-9,16-17,24,32-58,65-91,98,106-107,132
+packages/combinator/src/components/controls/control_dynamic.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-21,30,94-96
+apps/dialtone-documentation/docs/.vuepress/baseComponents/NewUtilityClassTable.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 5,7-8,12-13,21,24-38,50,63-88
+packages/dialtone-docs/tests/fixtures/public-docs/beta.md
+  s_06a181a7d7b694::t_9cbaded6daa308 2-4,6-9
+apps/dialtone-documentation/docs/.vuepress/plugins/markdown-it-notice.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-138
+apps/dialtone-documentation/docs/.vuepress/baseComponents/tokens/utilities.js
+  s_06a181a7d7b694::t_9cbaded6daa308 27-29,47-73,79,81,123,149-154,161-174,178-179,183-184,188,208-209
+apps/dialtone-documentation/docs/utilities/typography/text-decoration.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-12,19-20,27-28,35-36,47,57,67
+apps/dialtone-documentation/docs/components/checkbox.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,15,21,37-38,40,50-82,86-106,110-111,127-128,132-133,152-153,157-158,170-171,177-178,180-193,195,207,211
+packages/dialtone-vue/components/Tab/TabGroup.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-13,18,23-29,31-32,48-56,100,117-140,143,146-149,156,161-169,177-219,240-247,253-258,261,265-266,270-275,286,288-325,346-351,355-357,361,369,379-400,404-405,408,412-454,458,460-464,468-475,480-482,489-490,495-497,504,508
+packages/dialtone-vue/recipes/buttons/callbar_button/callbar_button_default.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 42
+packages/stylelint-plugin-dialtone/tests/lib/rules/recommend-font-style-tokens.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 30,43-46
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/header-typo.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 5-7,11-13,15,17,22-24,26-29,34
+apps/dialtone-documentation/thumbs/segmented-control.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-22
+packages/dialtone-tokens/tokens/theme/ceruleo/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 18,22,26,30,34,40
+packages/combinator/src/variants/variants_dropdown.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-57
+packages/dialtone-tokens/tokens/theme/tmo/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 6,12
+packages/dialtone-vue/recipes/conversation_view/editor/EditorToolbarPopoverButton.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 21,43-44
+packages/dialtone-vue/components/RootLayout/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+packages/dialtone-vue/components/Box/Box.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-298
+apps/dialtone-documentation/scripts/data/emit-gap.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-22
+packages/dialtone-css/lib/build/less/components/forms.less
+  s_06a181a7d7b694::t_9cbaded6daa308 21,23,40,73,75,77-91,95,98-107,110-113,121-122,125,127,130,134-135,137-140,142,150-156,164,167,170,173,175-177,179-182
+apps/dialtone-documentation/docs/utilities/borders/direction.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-18,25-35,51-52,55-56,59,62
+apps/dialtone-documentation/docs/utilities/flex/gap.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-10,14-21,27-34,40-47,53-58,68,71,73-75,78-79,81-102
+packages/combinator/src/components/event_console/event_console_lazy_load.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 6-7,21-22,41
+packages/stylelint-plugin-dialtone/eslint.config.js
+  s_06a181a7d7b694::t_9cbaded6daa308 22
+packages/dialtone-vue/components/Text/Text.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-344
+packages/dialtone-vue/recipes/leftbar/unread_pill/unread_pill.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 25
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/layout-and-spacing.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-9,12-13
+packages/dialtone-tokens/tokens/theme/120/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+apps/dialtone-documentation/docs/utilities/spacing/auto-spacing.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-8,12-16,22-26,42,44-46
+packages/combinator/src/variants/variants_toast.js
+  s_06a181a7d7b694::t_9cbaded6daa308 2-7,11,15,18,23-42
+packages/combinator/src/variants/variants_pagination.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-25
+packages/dialtone-vue/components/Presence/modules/presence_busy_icon.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-18
+apps/dialtone-documentation/docs/components/stack.md
+  s_06a181a7d7b694::t_9cbaded6daa308 7,10,18-21,23-24,26-27,29,31-36,38,44-45,47,50,52-53,55-56,58,60-61,63,66-68,70,74-75,77,80,82-83,85-86,88,90-91,93,96-100,104-105,107,110,112-113,115-116,118,120-121,123,126-128,130,132,144-145,148,150-152,154-155,158,160-162,164,170-171,175,177-179,181-182,186,188-190,192,196-223,225-226,228-230,233-242,247-253,258,260,262-263,265-266,268-269,271-272,277-281,285,298-302,304-305,307-332,334-338,341-342,345-346,349-350,352,358-362,364-366,368-377,379-397,399,402-403,406-407,411,414-415,418-419,421,427-431,433-435,437-446,448-466,469,472-473,476-477,479,485-489,491-493,495-504,506-524,526,529-530,533-534,538,541-542,545-546,548,554-558,560-562,564-573,575-593,596,599-600,603-604,606,612-629,632,635-637,639,651-657,659-661,663-665,667-682,684,690-695,697-699,701-703,705-720,722,728-733,735-737,739-741,743-758,760,766-771,773-775,777-779,781-796,798,804-809,811-813,815-817,819-830,833,837-839,841,847-852,854-856,858-870,873-879,887,889-891,893,895-896,898-899,901,903-918,922-941,943,949-952,954-959,963-964,968,973-974,977,979-980,984,990-991,993-995,997-1009,1012,1015-1016,1019-1020,1022,1026-1037,1043-1045,1047,1053-1134,1145,1147-1148,1150,1152-1154,1157-1158,1161-1162,1167-1168,1207-1209,1213-1214,1216-1217,1221-1223,1228-1230,1234-1236,1242-1244,1249-1250,1252-1253,1258-1260,1266-1268,1273-1275,1282-1284
+apps/dialtone-documentation/docs/utilities/spacing/padding.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-10,12,14,16-17,22-29,34-35,40-41,50-52,54,57,59-68,71-72,74-75,78-79,82-83,88-98,101-102,104-105,108,112-113
+apps/dialtone-documentation/docs/_data/link.json
+  s_06a181a7d7b694::t_9cbaded6daa308 9,11,24,26
+apps/dialtone-documentation/docs/foundations/illustrations/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 5-7,10-21
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/success-to-positive.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-73
+packages/dialtone-tokens/tokens/theme/107/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+apps/dialtone-documentation/docs/dialtone/whats-new/posts/2026-1-13.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-138
+packages/dialtone-vue/components/ValidationMessages/ValidationMessages.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2,4-5,9-35,46-58,62,68-69,83,100-105,107,109,124-127,130,132-133
+packages/dialtone-tokens/tokens/theme/114/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+packages/dialtone-tokens/tokens/theme/expressive/sm.json
+  s_06a181a7d7b694::t_9cbaded6daa308 6,11,16,21,26,31,35
+packages/combinator/src/components/combinator.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 3,5,7-12,37-87,90-112
+packages/dialtone-tokens/tokens/theme/113/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+apps/dialtone-documentation/docs/utilities/typography/vertical-align.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-15,17-18,25-29,31-32,39-43,45-46,53-57,59-60,67-71,73-74,81-85,87-88
+packages/combinator/src/variants/variants_skeleton.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-31
+packages/dialtone-tokens/tokens/base/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 5,10,22,26-30,34-38,42-46,50-54,58-62,66-70,74-78,82-86,90,94,98,104,108,112,115-116,119-120,123-124,127-128,131-132,135-136,139-140,143-144,148,154,158,162,166,170,173-174,177-178,181-182,185-186,189-190,193-194,198,204,208,212,216,220,223-224,227-228,231-232,235-236,240-244,248,254,258,262,266,270,274,278,282-286,290-294,298,304,308,312,316,320,323-324,327-328,331-332,335-336,340-344,348,354,358,362,366,370,374,378,382-386,390-394,398,404,408,412,416,420,424,428,432,436,440,444,448,454,458,462,466,470,474,478,482,486,490,494,498,504,508,512,516,520,524,528,532,536,540,544,548,554,558,562,566,570,574,578,582,586,590,594,598,604,608,612,616,620,624,628,632,636,640,644,648,654,658,662,666,670,674,678,682,686,690,694,698,709,716,721,726,731,740,743-744,747-748,751-752,755-756,759-760,763-764,767-768,771-772,775-776,779-780,783-784,787-788,792,811-820,823-833,836-842,845-852,855-857,860-862,868,872,876,880,884,888,936,949,962,975,988,996,1004,1025,1038-1039,1047-1048,1051-1052,1055-1056,1059-1060,1063-1064,1067-1068,1071-1072,1075-1076,1079-1080,1083-1084,1087-1088,1091-1092,1095-1096,1099-1100,1103-1104,1107-1108,1111-1112,1115-1116,1119-1120,1123-1124,1127-1128,1131-1132,1135-1136,1139-1140,1143-1144,1147-1148,1151-1152,1155-1156,1159-1160,1163-1164,1167-1168,1171-1172,1175-1176,1179-1180,1183-1184,1187-1188,1191-1192,1195-1196,1199-1200,1203-1204,1207-1208,1211-1212,1215-1216,1219-1220,1223-1224,1227-1228,1231-1232,1235-1236,1239-1240,1243-1244,1247-1248,1251-1252,1255-1256,1259-1260,1263-1264,1267-1268,1271-1272,1275-1276,1279-1280,1283-1284,1287-1288,1291-1292,1295-1296,1299-1300,1303-1304,1307-1308,1311-1312,1315-1316,1319-1320,1323-1324,1327-1328,1331-1332,1335-1336,1339-1340,1343-1344,1347-1348,1351-1352,1355-1356,1359-1360,1363-1364,1367-1368,1371-1372,1375-1376,1379-1380,1383-1384,1387-1388,1391-1392,1395-1396,1399-1400,1403-1404,1407-1408,1411-1412,1415-1416,1419-1420,1423-1424,1427-1428,1431-1432,1435-1436,1439-1440,1443-1928,1934,1938,1942,1946,1950,1954,1958,1962,1966,1970,1974,1978,1982,1986,1990,1994,1998,2002,2006,2010,2014,2018,2022,2026,2030,2034,2038,2042,2046,2050,2054,2058,2062,2066,2070,2074,2078,2082,2086,2090,2094,2098,2103,2107,2111,2115,2119,2123,2127,2132,2136,2140,2144,2148,2152,2156,2160,2164,2168,2172,2176,2180,2184,2188,2192,2196,2200,2204,2208,2212,2216,2220,2224,2228,2232,2236,2240,2244,2248,2252,2256,2260,2264,2268,2272,2276,2280,2284,2288,2292,2296,2300,2304,2308,2312,2316,2320,2324,2328,2332,2336,2340,2344,2348,2352,2356,2360,2365,2369,2373,2377-2381,2385,2389,2393-2397,2401,2405,2409
+apps/dialtone-documentation/docs/components/filter-pill.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-518
+apps/dialtone-documentation/docs/utilities/typography/word-break.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-14,23-26,35-38,46-49
+apps/dialtone-documentation/docs/.vuepress/views/ColorsCatalog.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-8,17,23,34,38-52,55-75
+packages/dialtone-vue/common/composables/useIndicatorAnimation.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-120
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/fs32.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-7
+packages/dialtone-vue/common/mixins/mode.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-134
+packages/dialtone-vue/recipes/conversation_view/message_input/message_input_link.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 29,38,49,66-67,75,82,89,105-109
+packages/dialtone-tokens/tokens/theme/tmo/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 6-18,24
+docs/prd/2026-05-19-dt-text-migration-script.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-134
+packages/dialtone-vue/directives/scrollbar_directive/scrollbar.js
+  s_06a181a7d7b694::t_9cbaded6daa308 3-45,53-54,62,64,69-70,73-86,88-90
+apps/dialtone-documentation/docs/_data/gap.json
+  s_06a181a7d7b694::t_9cbaded6daa308 2-6,9-10,13-14,17-18,21-22,25-26,29-30,33-34,37-38,41-42,45-46,49-50,53-54,57-98
+packages/dialtone-tokens/tokens/theme/123/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/vue3-to-vue-imports.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-5,8-11,13-18
+packages/dialtone-vue/localization/en-US.ftl
+  s_06a181a7d7b694::t_9cbaded6daa308 94-98
+packages/dialtone-tokens/tokens/theme/108/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-component.js
+  s_06a181a7d7b694::t_9cbaded6daa308 18
+packages/dialtone-tokens/tokens/theme/101/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+apps/dialtone-documentation/scripts/thumbs/harness/composables.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-65
+packages/combinator/src/components/header/header.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 5,10,16,23,25-26
+apps/dialtone-documentation/docs/utilities/grid/layouts.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,13-16,20-26,35-38,42-49,52,74-88,104-109
+packages/dialtone-tokens/tokens/theme/prota-deuter/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 3-5,8-9,12-13,16-18,20-21,24-25,28-29,32-33,36-37,40-42,44-45,48-49,53-55,58-59,62-63,66-67,70-71,74-75,78-79,82-83,86-87,90-91,94-95,98-106,108-110,112-114,116-118,120-121,127-128,133-134,140-141,146-147,153-154,159-160,166-167,174
+apps/dialtone-documentation/docs/components/scroller.md
+  s_06a181a7d7b694::t_9cbaded6daa308 3-4,9-136,139-171,173-177
+packages/dialtone-css/lib/build/less/recipes/callbox.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,43,48,50,54,61-63,71,74,78-79,87-88,102
+apps/dialtone-documentation/docs/.vuepress/exampleComponents/ExampleTooltipDirections.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3,14
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/chart-dondont-1-2.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 11-12
+packages/dialtone-vue/components/Prose/Prose.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-331
+packages/dialtone-vue/components/EmptyState/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ComponentVueApi.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-4,24,32-49,59-95,100-102,106-133,137-144,154-155
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-directive.js
+  s_06a181a7d7b694::t_9cbaded6daa308 18-22
+packages/dialtone-docs/tests/fixtures/public-docs/unknown-status.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-7
+packages/dialtone-tokens/tokens/theme/118/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+packages/dialtone-vue/directives/focustrap_directive/focustrap.mdx
+  s_06a181a7d7b694::t_9cbaded6daa308 1-258
+apps/dialtone-documentation/docs/utilities/layout/display.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,9-20,22-26,29-40,45-46,50,52,54,56,59,62
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/functions.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-3
+apps/dialtone-documentation/project.json
+  s_06a181a7d7b694::t_9cbaded6daa308 4-27,31,47,53,69-72,75
+packages/dialtone-tokens/tokens/theme/105/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+packages/dialtone-css/lib/build/less/components/input.less
+  s_06a181a7d7b694::t_9cbaded6daa308 21-22,32-33,40-41,152-161,163,174,178,187,194,201,208,215,255,257,266,272,278,284,293-297,302-306,308,323,326,331
+apps/dialtone-documentation/docs/utilities/flex/columns-layouts.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-8,14-19,21-154,161-169,171-259,268-272
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/fs18.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-7
+apps/dialtone-documentation/docs/foundations/size-and-space/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-228
+packages/dialtone-icons/src/svg/icons/general/circle-dashed.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-3
+packages/dialtone-tokens/tokens/components/radio/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 6,10,14,50
+packages/dialtone-vue/recipes/conversation_view/editor/editor.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1,104,107
+packages/stylelint-plugin-dialtone/tests/lib/rules/no-deprecated-size-tokens.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-59
+package.json
+  s_06a181a7d7b694::t_9cbaded6daa308 3,26,48-50,177
+packages/combinator/src/variants/variants_emoji_picker.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1,4-20
+apps/dialtone-documentation/scripts/lib/transform-usage.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-72
+apps/dialtone-documentation/docs/components/popover.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,10-11,20-21,66-73,81,92,96-98,100,103-104,112,123,127-138,151,162,166-177,185,201,210-212,214,217-218,226,237,243-245,247,250-251,259,270,281-297
+packages/combinator/src/components/code_editor/code_editor_slot.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 11,39-40,57-79
+apps/dialtone-documentation/docs/foundations/typography/marketing.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-35
+packages/dialtone-css/lib/build/less/utilities/spacing.less
+  s_06a181a7d7b694::t_9cbaded6daa308 26-45,50-68,76-77,79-80,82-83,85-86,89,93-94,98-99,102-103,112,114,116,118,121-122,126-127,139
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ComponentCombinator.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 6-7,12-13,47-50,58-61
+packages/dialtone-docs/tests/fixtures/public-docs/uppercase-status.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-9
+apps/dialtone-documentation/docs/.vuepress/views/DownloadsCatalog.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-105
+packages/dialtone-vue/recipes/conversation_view/feed_item_row/feed_item_row.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 11,86,127-130,132
+apps/dialtone-documentation/scripts/generate-data.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-38
+packages/dialtone-tokens/tokens/components/presence/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 5,9,13,22
+packages/combinator/package.json
+  s_06a181a7d7b694::t_9cbaded6daa308 3,7,14,34,44,46-48
+packages/dialtone-css/gulpfile.cjs
+  s_06a181a7d7b694::t_9cbaded6daa308 38,374,378,422-423
+packages/dialtone-tokens/tokens/theme/105/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+packages/dialtone-vue/directives/focusgroup_directive/focusgroup_utils.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-102
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/utility-class-to-token-stops.test.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-170
+packages/dialtone-vue/directives/mode_directive/mode.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-28
+packages/dialtone-vue/recipes/conversation_view/editor/editor_default.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 6,41
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/helpers.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-13
+packages/stylelint-plugin-dialtone/lib/rules/no-deprecated-space-tokens.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-52
+packages/dialtone-vue/recipes/cards/ivr_node/ivr_node_default.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 14-15,42,51,107,120,146-151
+packages/dialtone-tokens/tokens/theme/botany/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 4-7,10,14,18,22
+apps/dialtone-documentation/docs/components/toggle.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,10,43-53,57-62,66-68,84,88,101
+.claude/skills/dt-migrate.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-77
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/theme-to-mode.test.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-177
+apps/dialtone-documentation/thumbs/motion-text.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-3
+packages/eslint-plugin-dialtone/lib/rules/deprecated-pixel-utility-classes.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-95
+packages/dialtone-tokens/tokens/theme/126/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+apps/dialtone-documentation/scripts/data/emit-z-index.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-23
+apps/dialtone-documentation/docs/utilities/grid/justify-self.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,11-15,23-27,35-39,47-51,60-78
+apps/dialtone-documentation/docs/_data/width-height.json
+  s_06a181a7d7b694::t_9cbaded6daa308 2-211
+packages/dialtone-vue/recipes/conversation_view/emoji_row/emoji_row.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 7
+.claude/rules/stylelint-plugin.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,10-47
+packages/dialtone-vue/components/Box/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-13
+packages/dialtone-vue/components/RadioGroup/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-mcp-server/test-search.js
+  s_06a181a7d7b694::t_9cbaded6daa308 130-135,140,193-196
+packages/combinator/src/components/controls/control_string.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3,6-7,9-15,17,19-36,42-43,60-63,68-69,80-83
+apps/dialtone-documentation/docs/.vuepress/plugins/markdown-it-code-example-source.test.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-60
+apps/dialtone-documentation/docs/.vuepress/exampleComponents/ExampleTabs.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 5-6,10-13,38,47-49,55-57,63-65,81-90,110-123
+apps/dialtone-documentation/docs/guides/migration/typography/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-462
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/size-img.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+apps/dialtone-documentation/thumbs/tooltip.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-9
+apps/dialtone-documentation/docs/ui-kits/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-11
+apps/dialtone-documentation/docs/foundations/colors/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+packages/dialtone-css/lib/build/less/recipes/feed_item_row.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,5-6,15,20,26,47,51,56-59,66,72,91,95,108-110
+scripts/cleanup-redundant-code-separator.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-183
+packages/dialtone-tokens/tokens/theme/dp/high-contrast.json
+  s_06a181a7d7b694::t_9cbaded6daa308 4-15,17,21,25-26,29-30,33-34,37-38,41-42,45-55,57-68,74-75,80-81,87-88,93-94,100-101,106-107,113-114,118-120,122,125-126,129-141,143-147,149-153,155-165,168-189,191-198,203
+packages/dialtone-vue/components/Presence/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+packages/dialtone-css/lib/build/less/dialtone.less
+  s_06a181a7d7b694::t_9cbaded6daa308 10-11,18,20-21,25,27-34,43-49,67,70,95-107,113-117,120,123-133,136-141
+apps/dialtone-documentation/docs/dialtone/whats-new/posts/2026-4-22.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-138
+packages/combinator/src/lib/logical_aliases.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-16
+packages/dialtone-vue/components/Prose/ProseConstants.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-47
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/colors.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 2
+apps/dialtone-documentation/docs/utilities/typography/text-wrap.md
+  s_06a181a7d7b694::t_9cbaded6daa308 10-13,20-23,30-33,40-43,50-53
+packages/dialtone-tokens/tokens/theme/134/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+apps/dialtone-documentation/docs/guides/content/inclusive-language/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 6
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/success-to-positive-test-examples.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-166
+apps/dialtone-documentation/docs/components/segmented-control.md
+  s_06a181a7d7b694::t_9cbaded6daa308 2-7,10-17,19,21,23,25,27,29-35,37,39-40,42-47,49,51,53-57,59,61,63,65,67-77,79,81,83-91,93-109,111-115,117,119,121-135,137,139,141-148,150-166,168,170-205,207-237,239-264,266-282,284-285,287-312,314-340,342-386,388,390,392,394,396,398-402,406-411
+packages/dialtone-vue/components/Codeblock/Codeblock.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-8,12-13,18-20,25-48
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/styles.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-17
+packages/dialtone-tokens/tokens/theme/130/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+packages/combinator/src/variants/variants_hovercard.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-22
+packages/dialtone-vue/components/Presence/modules/presence_away_icon.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-17
+.claude/rules/eslint-plugin.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,10-41
+packages/combinator/src/components/tools/tab_panel.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 4,30
+packages/dialtone-tokens/CHANGELOG.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/logo--clear-space.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-46
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/space-to-spacing.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-48
+apps/dialtone-documentation/docs/about/dialtone.md
+  s_06a181a7d7b694::t_9cbaded6daa308 10
+apps/dialtone-documentation/docs/.vuepress/baseComponents/tokens/TokenTable.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-5,9,11,17,19,26,28,35,37,45,53,62,65-67,69,71-72,82-83,90-93,95-96,98,196,205
+packages/dialtone-tokens/tokens/theme/122/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+apps/dialtone-documentation/docs/dialtone/whats-new/posts/2026-4-15.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-210
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/theme-to-mode.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-108
+apps/dialtone-documentation/docs/.vuepress/exampleComponents/ExampleToast.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 5,10,20,41,67
+packages/dialtone-tokens/tokens/theme/104/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+packages/dialtone-vue/directives/focusgroup_directive/focusgroup.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-163
+.github/pull_request_template.md
+  s_06a181a7d7b694::t_9cbaded6daa308 81
+packages/dialtone-vue/components/Tab/TabsConstants.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1,4-11,13-17,28-42
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/graphic.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-43
+apps/dialtone-documentation/docs/components/description-list.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,17-26,30-39,43-52,56-67
+packages/dialtone-vue/components/RichTextEditor/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1,6
+apps/dialtone-documentation/docs/foundations/gradient/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-36
+apps/dialtone-documentation/docs/.vuepress/baseComponents/SvgLoader.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 4-9,13-19,58-63,78-94
+packages/dialtone-vue/directives/focusgroup_directive/focusgroup_directive_recipes.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-742
+packages/dialtone-vue/components/ItemLayout/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-vue/recipes/conversation_view/feed_item_pill/feed_item_pill.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 10,12-13,18,30-34,43,51-56,64-66
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/color-stops.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-11,14-21,23,25-30,32,34-39
+packages/dialtone-tokens/tokens/theme/103/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+packages/dialtone-vue/recipes/conversation_view/feed_item_row/feed_item_row.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 174
+apps/dialtone-documentation/docs/utilities/layout/z-index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,34,36-38
+packages/eslint-plugin-dialtone/lib/rules/deprecated-headline-sizes.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-77
+common/components_list.js
+  s_06a181a7d7b694::t_9cbaded6daa308 6,24,38,44,53-54,62
+.coderabbit.yaml
+  s_06a181a7d7b694::t_9cbaded6daa308 140-142,144-146,195-198,203
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/sub-brand--single-product-card.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-16
+packages/dialtone-mcp-server/README.md
+  s_06a181a7d7b694::t_9cbaded6daa308 101,112
+packages/combinator/src/components/controls/control_array.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 3,31,37,50,58
+packages/dialtone-vue/directives/mode_directive/mode.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-365
+packages/dialtone-tokens/tokens/base/material/jade.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-26
+packages/dialtone-vue/localization/localization_default.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-3,26,33
+packages/dialtone-vue/recipes/buttons/callbar_button_with_popover/callbar_button_with_popover.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3-4,21-30,61,67,89-91,93,229
+packages/eslint-plugin-dialtone/lib/rules/deprecated-physical-naming.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-228
+scripts/build-dialtone-vue-docs.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 36,62-72,80-82,86-93,95
+apps/dialtone-documentation/docs/_data/notice.json
+  s_06a181a7d7b694::t_9cbaded6daa308 9,11,19,21
+packages/dialtone-vue/recipes/notices/top_banner_info/top_banner_info.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 73,88-133
+apps/dialtone-documentation/docs/components/notice.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,23-25,27,29,31-32,46,69,79-80,92,102-103,115,138,147,153-154,156,158,160-161,176,200,210-211,224,234-235,248,272,281,287-288,299
+apps/dialtone-documentation/docs/.vuepress/exampleComponents/ExampleResizableCollapsible.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2,7,11-13,15,18-20,22,26,31,33,35,38-40,42,45
+packages/dialtone-vue/directives/tooltip_directive/tooltip.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1,5,122-124
+packages/dialtone-mcp-server/CHANGELOG.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-46,57-114
+.claude/rules/mcp-server.md
+  s_06a181a7d7b694::t_9cbaded6daa308 37-43
+apps/dialtone-documentation/docs/components/emoji-picker.md
+  s_06a181a7d7b694::t_9cbaded6daa308 5,9,15-35,62,66,75,80,93-101,110
+.mcp.json
+  s_06a181a7d7b694::t_9cbaded6daa308 4-5
+apps/dialtone-documentation/docs/.vuepress/common/contrast.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-147
+apps/dialtone-documentation/stylelint.config.cjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/combinator/src/variants/variants_list_item_group.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-25
+packages/dialtone-vue/recipes/conversation_view/feed_item_pill/feed_item_pill_variants.story.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 5,11,15,24,43,50,57,64,70,74,80,100,105,109,118,138,144,148,154,175,179,184-185,190,199,202,221,228,235,242,248-249,253,262,265,290-292,300
+packages/dialtone-css/postcss/helpers.cjs
+  s_06a181a7d7b694::t_9cbaded6daa308 38-44
+apps/dialtone-documentation/docs/.vuepress/baseComponents/tokens/AllTokens.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 11,13
+packages/dialtone-vue/components/Prose/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1,3-7
+apps/dialtone-documentation/docs/utilities/sizing/min-width.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-12,14-26,28,30-33,36,38,40-48,50-55,59,68,70-71,74-79,83,87,89,93,95
+packages/dialtone-vue/recipes/buttons/callbar_button_with_dropdown/callbar_button_with_dropdown.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3-4,21-30,57,63,82-84,86,202
+apps/dialtone-documentation/docs/.vuepress/baseComponents/MigrationBanner.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-68
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/utility-class-to-token-stops.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-215
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/content-guidelines.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+apps/dialtone-documentation/docs/.vuepress/baseComponents/BlogPost.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-8,10,13-17,19-33,36-48,51,77-80,87-130
+packages/dialtone-mcp-server/client-rules.json
+  s_06a181a7d7b694::t_9cbaded6daa308 4,6-9,14,16-17,19-20,26,28-30,32,40-41,43
+packages/dialtone-vue/components/Presence/Presence.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 15,21,23-30,35-40,47-53,58-59,78-86
+packages/dialtone-tokens/tokens/theme/118/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+apps/dialtone-documentation/docs/dialtone/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-6
+packages/dialtone-vue/components/SplitButton/SplitButton.stories.js
+  s_06a181a7d7b694::t_9cbaded6daa308 3-5,11-12,18-20,23-25,30,49,55,74-87,104,112,116,120,125,129,133-157,173-222,224,230,235-244,274-308
+apps/dialtone-documentation/docs/.vuepress/baseComponents/CodeExample.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-94
+packages/stylelint-plugin-dialtone/tests/lib/rules/no-deprecated-space-tokens.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-55
+.github/workflows/send-blog-communications.yml
+  s_06a181a7d7b694::t_9cbaded6daa308 62
+apps/dialtone-documentation/package.json
+  s_06a181a7d7b694::t_9cbaded6daa308 43,45-46,54-55,57,74
+packages/dialtone-tokens/tokens/theme/137/dark.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-40
+packages/dialtone-vue/components/SegmentedControl/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-16
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/logo.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-18
+packages/dialtone-vue/components/SelectMenu/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1,5
+packages/dialtone-emojis/CHANGELOG.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+apps/dialtone-documentation/docs/foundations/motion/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-163
+apps/dialtone-documentation/docs/guides/css-layers/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-344
+README.md
+  s_06a181a7d7b694::t_9cbaded6daa308 19,21,23,25,27-30,33,36-39,42,44,46,48-62,65,67,69,71,74-78,81-93,95,97,100,103-105,107,109,111-115,118-126,129-137,140-145,148-149,154-155,158-159,557-558
+apps/dialtone-documentation/docs/utilities/sizing/width.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-9,11-12,14-19,22-26,29,31,33-49,52,54,56-58,60-64,67-75,77,79,81,83-86,90,99,101-102,105-110,114,118-120,124-126,128-130,132
+packages/combinator/src/variants/variants_segmented_control.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-202
+apps/dialtone-documentation/docs/components/tabs.md
+  s_06a181a7d7b694::t_9cbaded6daa308 8,11,17-21,24-26,29,33-43,45,47-54,56-58,61,63,65,67-72,74-76,78-79,81-95,97,101,103-104,106-109,111-112,114-124,126,128,130-131,133,135-142,144-145,148-186,188,190-340,342-344,347,351-366,371-374,376-378,389,395,399,403
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/stack-gap-to-spacing.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-88
+apps/dialtone-documentation/docs/.vuepress/plugins/markdown-it-code-example-source.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-192
+packages/dialtone-css/lib/build/less/components/datepicker.less
+  s_06a181a7d7b694::t_9cbaded6daa308 13,15-16,19-20,23,28,35,41-42,53,59,63,68-69
+packages/dialtone-css/lib/build/less/components/box.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1-238
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-flex-gap-classes.js
+  s_06a181a7d7b694::t_9cbaded6daa308 20-23
+apps/dialtone-documentation/docs/foundations/size/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-15
+apps/dialtone-documentation/docs/tokens/for-designers/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 5,7-18
+packages/combinator/src/components/controls/control_nullish.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 3-4,14-15,18,24,30,33-34,43-44
+packages/dialtone-cli/src/commands/docs.ts
+  s_06a181a7d7b694::t_9cbaded6daa308 1-41
+docs/plans/future/ai-discoverability.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-302
+packages/dialtone-vue/directives/focustrap_directive/focustrap.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-564
+packages/dialtone-vue/components/Avatar/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1,9-17
+apps/dialtone-documentation/docs/foundations/gradient/product.md
+  s_06a181a7d7b694::t_9cbaded6daa308 1-34
+apps/dialtone-documentation/thumbs/resizable.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-24
+packages/combinator/src/variants/variants_empty_state.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-45
+packages/dialtone-css/lib/build/less/utilities/effects.less
+  s_06a181a7d7b694::t_9cbaded6daa308 24,40-41,46-47,52-53,58,64,70,76-77,83-84,92-93,98-99,104-105,110-111,117,123,129-130,136-137,192-193,196,213
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ComponentHealthStatusTable.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2-3,5,9-11,13,19-21,23,29-31,33,39-41,67,69,117
+apps/dialtone-documentation/scripts/lib/transform-color-tables.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-197
+packages/dialtone-cli/src/context.ts
+  s_06a181a7d7b694::t_9cbaded6daa308 6,14
+.claude/skills/utility.md
+  s_06a181a7d7b694::t_9cbaded6daa308 73
+packages/dialtone-vue/recipes/header/settings_menu_button/settings_menu_button.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 4,6,12,21,38-39
+packages/dialtone-tokens/build.js
+  s_06a181a7d7b694::t_9cbaded6daa308 23-30,33-35,54,59-61,73-89
+packages/eslint-plugin-dialtone/tests/lib/rules/focusgroup-requires-label.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-55
+apps/dialtone-documentation/docs/_data/type.json
+  s_06a181a7d7b694::t_9cbaded6daa308 6-7,9-11,17-18,20,26-27,29,33,35-36,38,44-45,47,53-54,57-58,61-62,65-66,69-70,73-74,77-78,81-82,85-86,89-90,93-94,97-98,101-102,105-106,109-110,113-114,117-118,121-122,125-126,235-246,253-264,267-274,279-286,291-292,297-298,500-506
+.claude/commands/review.md
+  s_06a181a7d7b694::t_9cbaded6daa308 5
+apps/dialtone-documentation/docs/.vuepress/theme/components/MobileNavbar.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 2,9,22,35,45,50-51,53,58,62,67,73-74,78,91,93-99
+packages/combinator/src/variants/variants_select_menu.js
+  s_06a181a7d7b694::t_9cbaded6daa308 2-14,34-73
+packages/combinator/src/variants/variants_datepicker.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-11
+packages/stylelint-plugin-dialtone/release-ci.config.cjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+packages/dialtone-vue/common/validators.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 54,71
+packages/combinator/src/components/controls/control_base.test.js
+  s_06a181a7d7b694::t_9cbaded6daa308 3,9,15
+packages/dialtone-tokens/figma_tokens/base.global.json
+  s_06a181a7d7b694::t_9cbaded6daa308 14,33,52,71,90,109,128,147,166,185,204,223,242,261,280,299,318,337,356,375,394,413,432,451,470,489,508,527,546,565,584,603,622,641,660,679,698,717,736,755,774,793,812,831,850,869,888,907,926,945,964,983,1002,1021,1040,1059,1078,1097,1116,1135,1154,1173,1192,1211,1230,1249,1268,1287,1306,1325,1344,1363,1382,1401,1420,1439,1458,1477,1496,1515,1534,1553,1572,1591,1610,1629,1648,1667,1686,1705,1724,1743,1762,1781,1800,1819,1838,1857,1876,1895
+packages/dialtone-vue/recipes/cards/ivr_node/ivr_node.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 89-91,104
+packages/dialtone-css/lib/build/less/components/banner.less
+  s_06a181a7d7b694::t_9cbaded6daa308 13,19-22,25-26,28,31,55-59,63-64
+packages/combinator/src/variants/variants_mode_island.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-35
+packages/dialtone-tokens/tokens/theme/verdant-haze/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 4-7,10,14,18,22,26,35,42
+apps/dialtone-documentation/docs/utilities/spacing/margin.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-9,11,13,15-16,21-28,33-34,39-45,47-52,59-65,70,72,74,77,79-88,91-92,94-95,98-99,102-103,107,109-118,121-122,124-125,128-129,132-133,138,140-142,145-146,148-149,152,156-157,162,164-166,169-170,172-173,176,180-181
+packages/combinator/src/components/code_editor/code_editor_input.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 6,13-14,16-50,61-67
+packages/dialtone-vue/recipes/leftbar/general_row/general_row.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 3-4,26-44,47-63,154,182-205,207,210-226,238-239,426-449
+apps/dialtone-documentation/docs/.vuepress/baseComponents/DesignColorTable.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 45-51,72,75,77-78,82-83,87-88,96-97,103-105,107-116
+apps/dialtone-documentation/docs/.vuepress/public/assets/images/home--dialtone-badge.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-12
+apps/dialtone-documentation/thumbs/avatar.vue
+  s_06a181a7d7b694::t_9cbaded6daa308 1-25
+packages/dialtone-tokens/tokens/theme/104/default.json
+  s_06a181a7d7b694::t_9cbaded6daa308 1-32
+packages/dialtone-css/lib/build/js/dialtone_migrate_link_rendering/link-nav.test.mjs
+  s_06a181a7d7b694::t_9cbaded6daa308 1-194
+apps/dialtone-documentation/docs/utilities/borders/radius.md
+  s_06a181a7d7b694::t_9cbaded6daa308 4,7-20,23-38,43-60,62-80,85,87-93,98,100-104,106,109-112,115,117-149,152-154,156-157
+packages/dialtone-css/postcss/constants.cjs
+  s_06a181a7d7b694::t_9cbaded6daa308 9,11,25-42,58-75,110-153,171-193,224-278,374-448
+packages/dialtone-css/lib/build/less/components/root-layout.less
+  s_06a181a7d7b694::t_9cbaded6daa308 15,26,29,37,44,55,85,107,130,153
+packages/dialtone-icons/src/svg/icons/general/circle-half-filled.svg
+  s_06a181a7d7b694::t_9cbaded6daa308 1-2
+packages/combinator/src/variants/variants_root_layout.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-24
+packages/dialtone-css/lib/build/less/recipes/attachment_carousel.less
+  s_06a181a7d7b694::t_9cbaded6daa308 1,4-5,11-12,21,24,26,39,43,52-53,68-69,71,73,79-80,85-86,88
+packages/dialtone-vue/components/FilterPill/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1
+apps/dialtone-documentation/docs/guides/accessibility/index.md
+  s_06a181a7d7b694::t_9cbaded6daa308 5,16
+packages/combinator/src/variants/variants_tab_group.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-173
+packages/dialtone-vue/common/utils/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 107-109,116-117,122-126,242-245,369,536
+apps/dialtone-documentation/docs/components/emoji-text-wrapper.md
+  s_06a181a7d7b694::t_9cbaded6daa308 7,14-15,19-20,24-27,29,31-32,36-37,39,41-42,46-47,51-53
+packages/dialtone-vue/components/Tab/index.js
+  s_06a181a7d7b694::t_9cbaded6daa308 1-3,8-12
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "852e97133d4919d5db2f9c45b4ce9bc31a100324",
+  "prompts": {},
+  "humans": {
+    "h_9e2c5818b2d2f6": {
+      "author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_06a181a7d7b694": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f111dfe0-c6d7-4e59-b291-0d0029ec6fa8",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}
