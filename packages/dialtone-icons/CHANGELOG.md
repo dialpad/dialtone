@@ -1,3 +1,10 @@
+# [4.59.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.58.0...dialtone-icons/v4.59.0) (2026-09-16)
+
+
+### Features
+
+* DLT-2979 promote dialtone, dialtone-vue, dialtone-tokens, dialtone-css, dialtone-icons to v10 ([#1427](https://github.com/dialpad/dialtone/issues/1427)) ([41fccb9](https://github.com/dialpad/dialtone/commit/41fccb92f46281fc68bae67d5ff5effb2eabfb6b))
+
 # [4.58.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.57.0...dialtone-icons/v4.58.0) (2026-09-16)
 
 
