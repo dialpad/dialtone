@@ -107,7 +107,8 @@ jobs:
       - name: Get heading from blog post
         id: get-heading
         run: |
-          echo "BLOG_POST_HEADING=$(sed -n 's/^heading: *"\{0,1\}\(.*[^"]\)"\{0,1\} *$/\1/p' $FILE_PATH)" >> $GITHUB_ENV
+          HEADING=$(sed -n 's/^heading: *//p' $FILE_PATH | sed -e 's/[[:space:]]*$//' -e 's/^"//' -e 's/"$//')
+          echo "BLOG_POST_HEADING=$HEADING" >> $GITHUB_ENV
 
       # This will do the following:
       # - Remove frontmatter.
@@ -189,7 +190,8 @@ jobs:
       - name: Get heading from blog post
         id: get-heading
         run: |
-          echo "BLOG_POST_HEADING=$(sed -n 's/^heading: *"\{0,1\}\(.*[^"]\)"\{0,1\} *$/\1/p' $FILE_PATH)" >> $GITHUB_ENV
+          HEADING=$(sed -n 's/^heading: *//p' $FILE_PATH | sed -e 's/[[:space:]]*$//' -e 's/^"//' -e 's/"$//')
+          echo "BLOG_POST_HEADING=$HEADING" >> $GITHUB_ENV
 
       - id: auth
         name: Authenticate to Google Cloud
