@@ -107,7 +107,7 @@ jobs:
       - name: Get heading from blog post
         id: get-heading
         run: |
-          echo "BLOG_POST_HEADING=$(sed -n 's/^heading: *//p' $FILE_PATH)" >> $GITHUB_ENV
+          echo "BLOG_POST_HEADING=$(sed -n 's/^heading: *"\{0,1\}\(.*[^"]\)"\{0,1\} *$/\1/p' $FILE_PATH)" >> $GITHUB_ENV
 
       # This will do the following:
       # - Remove frontmatter.
@@ -149,15 +149,16 @@ jobs:
 
       - name: Send email
         run: |
+          set -euo pipefail
           jq -n \
-            --arg to "${{ env.TO_MAIL }}" \
-            --arg subject "[dialtone] New blog post: ${{ env.BLOG_POST_HEADING }}" \
+            --arg to "$TO_MAIL" \
+            --arg subject "[dialtone] New blog post: $BLOG_POST_HEADING" \
             --rawfile message "$FILE_PATH" \
             '{to: $to, subject: $subject, message: $message}' | \
-          curl -m 70 -X POST ${{ env.API_URL }} \
+          curl -m 70 -X POST "$API_URL" \
             -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
             -H "Content-Type: application/json" \
-            -d @-
+            -d @- --fail-with-body
 
   send-sms:
     name: Send SMS
@@ -188,7 +189,7 @@ jobs:
       - name: Get heading from blog post
         id: get-heading
         run: |
-          echo "BLOG_POST_HEADING=$(sed -n 's/^heading: *//p' $FILE_PATH)" >> $GITHUB_ENV
+          echo "BLOG_POST_HEADING=$(sed -n 's/^heading: *"\{0,1\}\(.*[^"]\)"\{0,1\} *$/\1/p' $FILE_PATH)" >> $GITHUB_ENV
 
       - id: auth
         name: Authenticate to Google Cloud
@@ -201,10 +202,11 @@ jobs:
 
       - name: Send sms
         run: |
+          set -euo pipefail
           jq -n \
-            --arg message "New blog post: ${{ env.BLOG_POST_HEADING }}. Read full article: ${{ env.POST_URL }}" \
+            --arg message "New blog post: $BLOG_POST_HEADING. Read full article: $POST_URL" \
             '{message: $message}' | \
-          curl -m 70 -X POST ${{ env.API_URL }} \
+          curl -m 70 -X POST "$API_URL" \
             -H "Authorization: bearer ${{ steps.auth.outputs.id_token }}" \
             -H "Content-Type: application/json" \
-            -d @-
+            -d @- --fail-with-body
