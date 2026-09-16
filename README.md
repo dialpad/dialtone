@@ -2,6 +2,8 @@
 
 The monorepo for Dialpad's design system Dialtone.
 
+> **Dialtone v10:** see [DLT-2979](https://dialpad.atlassian.net/browse/DLT-2979) / [#1426](https://github.com/dialpad/dialtone/pull/1426) for the v10 upgrade and its breaking changes.
+
 All separate packages of dialtone are also deployed individually.
 If you would like to use an individual package rather than the combined Dialtone package,
 you can find documentation for each package in the following table.
