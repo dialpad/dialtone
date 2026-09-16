@@ -11,7 +11,7 @@
           "type": "color"
         },
         "border": {
-          "value": "{color.gold.700}",
+          "value": "{color.gold.900}",
           "type": "color"
         },
         "accent": {
@@ -20,6 +20,18 @@
         },
         "action": {
           "value": "{color.olive.700}",
+          "type": "color"
+        }
+      }
+    },
+    "logo": {
+      "color": {
+        "star": {
+          "value": "{color.purple.1000}",
+          "type": "color"
+        },
+        "wordmark": {
+          "value": "{color.purple.1000}",
           "type": "color"
         }
       }

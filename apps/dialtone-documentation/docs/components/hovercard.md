@@ -1,51 +1,18 @@
 ---
 title: Hovercard
-description: A Hovercard toggles a content overlay when its anchor element is hovered for a minimum amount of time.
+description: Contextual preview revealed from a hover or focus target.
 status: ready
 thumb: true
-image: assets/images/components/hovercard.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-hovercard--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=14395-441
+keywords: ["hover tooltip", "popover", "card overlay", "d-hovercard", "DtHovercard", "dt-hovercard", "preview card", "user card"]
 ---
 
 The hovercard will appear upon the mouse entering the anchor, with a delay of 300 milliseconds. It will remain open as long as the mouse cursor is over either the open card or the anchor.
 
-<code-well-header>
-  <example-hovercard />
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div data-qa="dt-hovercard">
-  <div class="d-popover d-popover__anchor--opened" data-qa="dt-popover-container">
-    <div id="DtPopover__anchor21" data-qa="dt-hovercard-anchor">
-      <button class="base-button__button d-btn d-btn--outlined d-btn--muted" data-qa="dt-button" type="button" aria-expanded="true">
-        <span data-qa="dt-button-label" class="d-btn__label base-button__label">
-          Hover over me
-        </span>
-      </button>
-    </div>
-  </div>
-</div>
-<div class="tippy-box d-ps-absolute" data-tippy-root="" id="tippy-11" style="z-index: 300; position: absolute; inset: 0px auto auto 0px; margin: 0px; transform: translate3d(874px, 365px, 0px);" data-popper-placement="bottom-start">
-  <div id="dt20" role="dialog" data-qa="dt-hovercard__dialog" aria-hidden="false" aria-labelledby="DtPopover__anchor21" aria-modal="true" class="d-popover__dialog" tabindex="-1" style="">
-    <div data-qa="dt-popover-header-footer" class="d-popover__header d-pl16">
-      <div data-qa="dt-popover-header-footer-content" class="d-popover__header__content">
-        <div>Header</div>
-      </div>
-    </div>
-    <div data-qa="dt-hovercard-content" class="d-popover__content d-p16">
-      <div>Content</div>
-    </div>
-    <div data-qa="dt-popover-header-footer" class="d-popover__footer d-pl16">
-      <div data-qa="dt-popover-header-footer-content" class="d-popover__footer__content">
-        <div>Footer</div>
-      </div>
-    </div>
-  </div>
-</div>
-'
-vueCode='
+```vue demo
+<example-hovercard />
+<!-- @code -->
 <dt-hovercard placement="bottom-start">
   <template #anchor>
     <dt-button kind="muted" importance="outlined">
@@ -62,18 +29,94 @@ vueCode='
     <div>Footer</div>
   </template>
 </dt-hovercard>
-'
-showHtmlWarning />
+```
 
-## Variants
+## Usage
 
-### Many Hovercards
+- Hovercard is a **progressive enhancement**. It surfaces supplementary information about an entity or provides convenience shortcuts on hover, without navigating away from the current view. Its content or functionality **must also be reachable by another route** (a dedicated page, a menu, or an inline button).
+- Keep content concise. Hovercards are transient overlays, and are not appropriate for deep interactions, multi-step flows, or extensive content.
+- Use Hovercard for contextual content with structure or actions. Use [Tooltip](tooltip.md) for brief, text-only descriptions of a control. Use [Popover](popover.md) when the content is triggered by a deliberate click and should persist until dismissed.
+- `enterDelay` is used to prevent the card from triggering on accidental cursor passes. The default delay of 300 ms is recommended for most contexts.
 
-<code-well-header>
-  <dt-stack direction="row" gap="500">
-    <example-hovercard v-for="data in exampleData" :label="data.label" :content="data.content" />
-  </dt-stack>
-</code-well-header>
+<dialtone-usage>
+<template #do>
+
+- Surface contextual details like a user's status, avatar, and quick-action shortcuts.
+- Treat hovercard actions as shortcuts — ensure the same actions are reachable elsewhere in the UI.
+
+</template>
+<template #dont>
+
+- Use Hovercard as the only way to reach content or perform an action.
+- Place critical or destructive actions exclusively inside a hovercard.
+- Use for deep interactions or lengthy content — prefer a dedicated UI or a [Modal](modal.md).
+
+</template>
+</dialtone-usage>
+
+## Accessibility
+
+When focus moves into an open hovercard, focus is trapped within. The user can Tab between focusable elements inside the card without accidentally leaving. Clicking outside the hovercard or keypress of `esc` will dismiss the card and restore focus to the element that had focus before the card opened.
+
+## Many Hovercards
+
+After opening one hovercard, quickly moving to another skips the entrance delay. This is a "warm-up" pattern for faster navigation between targets.
+
+```vue demo-only
+<dt-stack direction="row" gap="200">
+  <example-hovercard v-for="data in exampleData" :label="data.label" :content="data.content" />
+</dt-stack>
+```
+
+## Examples
+
+```vue demo
+<dt-hovercard placement="top-start">
+  <template #anchor>
+    <dt-button :size="200" kind="muted" importance="outlined">Profile Hovercard</dt-button>
+  </template>
+  <template #content>
+    <ExampleProfileCard />
+  </template>
+</dt-hovercard>
+```
+
+## Content Mode
+
+Hovercard content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
+
+```vue demo
+<dt-stack direction="row" gap="100">
+  <dt-hovercard placement="top-start" content-mode="invert">
+    <template #anchor>
+      <dt-button :size="200" kind="muted" importance="outlined">Invert</dt-button>
+    </template>
+    <template #content>
+      <ExampleProfileCard />
+    </template>
+  </dt-hovercard>
+  <dt-hovercard placement="top-start" content-mode="dark">
+    <template #anchor>
+      <dt-button :size="200" kind="muted" importance="outlined">Dark</dt-button>
+    </template>
+    <template #content>
+      <ExampleProfileCard />
+    </template>
+  </dt-hovercard>
+  <dt-hovercard placement="top-start" content-mode="light">
+    <template #anchor>
+      <dt-button :size="200" kind="muted" importance="outlined">Light</dt-button>
+    </template>
+    <template #content>
+      <ExampleProfileCard />
+    </template>
+  </dt-hovercard>
+</dt-stack>
+<!-- @code -->
+<dt-hovercard content-mode="invert">...</dt-hovercard>
+<dt-hovercard content-mode="dark">...</dt-hovercard>
+<dt-hovercard content-mode="light">...</dt-hovercard>
+```
 
 ## Vue API
 
@@ -81,6 +124,7 @@ showHtmlWarning />
 
 <script setup>
   import ExampleHovercard from '@exampleComponents/ExampleHovercard.vue';
+  import ExampleProfileCard from '@exampleComponents/ExampleProfileCard.vue';
 
   const exampleData = [
     {

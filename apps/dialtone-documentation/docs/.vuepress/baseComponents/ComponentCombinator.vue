@@ -3,10 +3,16 @@
     :component="component"
     :library="library"
     :documentation="componentDocumentation"
+    :variants="componentVariants"
+    :dev-mode="isDev"
+    :full-screen="fullScreen"
+    @update:full-screen="$emit('update:fullScreen', $event)"
   />
 </template>
 
 <script>
+import { variantBank } from '@dialpad/dialtone-combinator';
+
 export default {
   name: 'ComponentCombinator',
 
@@ -23,11 +29,13 @@ export default {
       required: true,
     },
 
-    showBlueprints: {
+    fullScreen: {
       type: Boolean,
-      default: false,
+      default: undefined,
     },
   },
+
+  emits: ['update:fullScreen'],
 
   computed: {
     component () {
@@ -40,12 +48,21 @@ export default {
       );
     },
 
+    componentVariants () {
+      return variantBank()[this.componentName] ?? {};
+    },
+
     library () {
       return {
         ...this.dialtoneComponents,
         ...this.dialtoneIcons,
         ...this.dialtoneIllustrations,
       };
+    },
+
+    isDev () {
+      return typeof __VUEPRESS_DEV__ !== 'undefined'
+        && (__VUEPRESS_DEV__ || __DIALTONE_DEPLOY_PREVIEW__);
     },
   },
 };

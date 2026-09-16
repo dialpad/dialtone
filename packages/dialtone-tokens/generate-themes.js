@@ -1,69 +1,170 @@
 /**
- * Script to automatically generate theme files based on the tokens/theme directory structure.
- * This script scans the tokens/theme directory and generates light and dark theme files for each theme.
+ * Generate per-theme `.js` entrypoints that re-export the layered CSS as inline
+ * strings. Each entrypoint is consumed by the runtime setMode/setBrand/
+ * setContrast APIs in `themes/config.js`. Material switching is attribute-only
+ * (driven by `data-dt-material` against pre-bundled per-material CSS) and does
+ * not generate JS entrypoints.
  */
 
 import fs from 'fs';
 import path from 'path';
 
-const TOKENS_THEME_DIR = './tokens/theme';
+const LAYERED_CSS_DIR = './dist/css/layered';
 const THEMES_OUTPUT_DIR = './themes';
 
-/**
- * Generate theme files for all themes in the tokens/theme directory
- */
 export async function generateThemeFiles () {
-  console.log('Generating theme files...');
+  console.log('Generating layered theme files...');
 
   // Ensure themes directory exists
   if (!fs.existsSync(THEMES_OUTPUT_DIR)) {
     fs.mkdirSync(THEMES_OUTPUT_DIR, { recursive: true });
   }
 
-  // Get all theme directories
-  const themeDirs = fs.readdirSync(TOKENS_THEME_DIR, { withFileTypes: true })
-    .filter(dirent => dirent.isDirectory())
-    .map(dirent => dirent.name);
+  // Generate core theme file (shared across all brands)
+  await generateCoreThemeFile();
+  await generateCoreNoLayersThemeFile();
 
-  console.log(`Found ${themeDirs.length} themes: ${themeDirs.join(', ')}`);
+  // Generate DP base theme
+  await generateDpThemeFile();
 
-  // Generate theme files for each theme
-  for (const theme of themeDirs) {
-    await generateThemeFile(theme, 'dark');
-    await generateThemeFile(theme, 'light');
+  // Generate brand override themes
+  const themesDir = path.join(LAYERED_CSS_DIR, 'themes');
+  if (fs.existsSync(themesDir)) {
+    const themeFiles = fs.readdirSync(themesDir)
+      .filter(f => f.endsWith('-colors.css'))
+      .map(f => f.replace('tokens-', '').replace('-colors.css', ''));
+
+    for (const themeName of themeFiles) {
+      await generateBrandThemeFile(themeName);
+    }
   }
 
-  console.log('Theme files generation completed.');
+  // Generate high contrast theme
+  await generateHighContrastTheme();
+
+  console.log('Layered theme files generated');
 }
 
 /**
- * Generate a theme file for a specific theme and mode
- * @param {string} theme - The theme name
- * @param {string} mode - The mode (light or dark)
+ * Generate core theme file (contains core tokens + base colors)
  */
-async function generateThemeFile (theme, mode) {
-  let fileName = `${theme}-${mode}.js`;
+async function generateCoreThemeFile() {
+  const filePath = path.join(THEMES_OUTPUT_DIR, 'core.js');
 
-  // Backwards compatibility to avoid breaking changes.
-  if (theme === 'deca') fileName = 'dp-' + fileName;
-
-  const filePath = path.join(THEMES_OUTPUT_DIR, fileName);
-
-  const content = `import Base from '@dialpad/dialtone-tokens/tokens-base-${mode}.css?inline';
-import Brand from '@dialpad/dialtone-tokens/tokens-${theme}-${mode}.css?inline';
+  const content = `import CoreTokens from '@dialpad/dialtone-tokens/layered/tokens-core.css?inline';
+import BaseColors from '@dialpad/dialtone-tokens/layered/tokens-base-colors.css?inline';
 
 export default {
-  base: {
-    css: Base,
-    name: '${mode}',
-  },
+  core: CoreTokens,
+  baseColors: BaseColors,
+};
+`;
+
+  fs.writeFileSync(filePath, content);
+  console.log('Generated core theme file');
+}
+
+/**
+ * Generate a no-layers variant of the core theme file, consumed by
+ * initDialtoneTheme's `{ layers: false }` option. tokens-core.css is the
+ * only file in the layered token system wrapped in `@layer dialtone.base` —
+ * base colors, brand overrides, contrast, and material files are already
+ * unlayered, so no equivalent no-layers entrypoint is needed for those.
+ */
+async function generateCoreNoLayersThemeFile() {
+  const filePath = path.join(THEMES_OUTPUT_DIR, 'core-no-layers.js');
+
+  const content = `import CoreTokens from '@dialpad/dialtone-tokens/no-layers/layered/tokens-core.css?inline';
+import BaseColors from '@dialpad/dialtone-tokens/layered/tokens-base-colors.css?inline';
+
+export default {
+  core: CoreTokens,
+  baseColors: BaseColors,
+};
+`;
+
+  fs.writeFileSync(filePath, content);
+  console.log('Generated core-no-layers theme file');
+}
+
+/**
+ * Generate DP base theme file
+ */
+async function generateDpThemeFile() {
+  const filePath = path.join(THEMES_OUTPUT_DIR, 'dp.js');
+
+  const content = `import DpColors from '@dialpad/dialtone-tokens/layered/tokens-dp-colors.css?inline';
+
+export default {
   brand: {
-    css: Brand,
-    name: '${theme}',
+    css: DpColors,
+    name: 'dp',
   },
 };
 `;
 
   fs.writeFileSync(filePath, content);
-  console.log(`Generated ${fileName.replace('.js', '')} theme`);
+  console.log('Generated dp theme file');
 }
+
+/**
+ * Read the declared material lock for a brand from its source token JSON.
+ * Returns the material name string (e.g. "sandstone") or null if the brand
+ * does not declare a lock OR has no source JSON (e.g. CSS-only variants like
+ * `expressive-sm` whose CSS is generated from a parent brand).
+ * @param {string} brandName
+ * @returns {string|null}
+ */
+function readBrandMaterial(brandName) {
+  const jsonPath = `./tokens/theme/${brandName}/default.json`;
+  if (!fs.existsSync(jsonPath)) return null;
+  return JSON.parse(fs.readFileSync(jsonPath, 'utf8')).shell?.base?.material?.value ?? null;
+}
+
+/**
+ * Generate a brand override theme file
+ * @param {string} brandName - The brand name (e.g., 'tmo', 'sunflower')
+ */
+async function generateBrandThemeFile(brandName) {
+  const fileName = `${brandName}.js`;
+  const filePath = path.join(THEMES_OUTPUT_DIR, fileName);
+
+  const materialName = readBrandMaterial(brandName);
+  const materialExport = materialName
+    ? `  material: {\n    name: '${materialName}',\n  },\n`
+    : '';
+
+  const content = `import BrandColors from '@dialpad/dialtone-tokens/layered/themes/tokens-${brandName}-colors.css?inline';
+
+export default {
+  brand: {
+    css: BrandColors,
+    name: '${brandName}',
+  },
+${materialExport}};
+`;
+
+  fs.writeFileSync(filePath, content);
+  console.log(`Generated ${brandName} theme`);
+}
+
+/**
+ * Generate high contrast theme file
+ */
+async function generateHighContrastTheme() {
+  const filePath = path.join(THEMES_OUTPUT_DIR, 'high-contrast.js');
+
+  const content = `import HighContrast from '@dialpad/dialtone-tokens/layered/contrast/tokens-high-contrast.css?inline';
+
+export default {
+  contrast: {
+    css: HighContrast,
+    name: 'high',
+  },
+};
+`;
+
+  fs.writeFileSync(filePath, content);
+  console.log('Generated high-contrast theme');
+}
+

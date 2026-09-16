@@ -1,13 +1,13 @@
 <template>
   <aside :class="['d-toast-wrapper', { 'd-ps-fixed': fixed }]">
     <dt-toast
-      :title="title"
-      :show="show"
+      :header-text="title"
+      :open="open"
       :important="important"
       :duration="duration"
       :kind="kind"
       @close="$emit('close')"
-      @update:show="$emit('update:show', $event)"
+      @update:open="$emit('update:open', $event)"
     >
       Message body with
       <dt-link
@@ -17,7 +17,7 @@
       </dt-link>
       <template #action>
         <dt-button
-          size="sm"
+          :size="200"
           importance="outlined"
           :kind="important ? 'inverted' : 'muted'"
           :class="{ 'd-bc-neutral-black': important && kind === 'warning' }"
@@ -38,7 +38,7 @@ export default {
       default: '',
     },
 
-    show: {
+    open: {
       type: Boolean,
       default: false,
     },
@@ -64,7 +64,7 @@ export default {
     },
   },
 
-  emits: ['close', 'update:show'],
+  emits: ['close', 'update:open'],
   computed: {
     linkClass () {
       if (this.kind === 'warning' && this.important) return 'd-fc-neutral-black';

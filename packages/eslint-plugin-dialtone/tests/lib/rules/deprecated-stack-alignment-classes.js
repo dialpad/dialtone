@@ -174,7 +174,7 @@ ruleTester.run("deprecated-stack-alignment-classes", rule, {
       code: `<template>
   <dt-stack
     direction="row"
-    gap="600"
+    gap="400"
     class="d-ai-flex-start"
   >
     ...

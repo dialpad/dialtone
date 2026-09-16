@@ -31,34 +31,19 @@
       "description": "Styles radio group in a disabled state."
     },
     {
-      "class": "d-radio--error",
-      "applies": ".d-radio",
-      "description": "Styles radio's input in an error state."
-    },
-    {
-      "class": "d-radio--success",
-      "applies": ".d-radio",
-      "description": "Styles radio's input in a success state."
-    },
-    {
-      "class": "d-radio--warning",
-      "applies": ".d-radio",
-      "description": "Styles radio's input in a warning state."
-    },
-    {
       "class": "d-validation-message",
       "applies": "N/A",
       "description": "Applies base styles to radio's validation message."
     },
     {
-      "class": "d-validation-message--error",
+      "class": "d-validation-message--critical",
       "applies": ".d-validation-message",
-      "description": "Styles radio's validation message in an error state."
+      "description": "Styles radio's validation message in a critical state."
     },
     {
-      "class": "d-validation-message--success",
+      "class": "d-validation-message--positive",
       "applies": ".d-validation-message",
-      "description": "Styles radio's validation message in a success state."
+      "description": "Styles radio's validation message in a positive state."
     },
     {
       "class": "d-validation-message--warning",

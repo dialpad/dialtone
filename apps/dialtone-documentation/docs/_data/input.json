@@ -31,14 +31,14 @@
       "description": "Styles input in a warning state."
     },
     {
-      "class": "d-input--error",
+      "class": "d-input--critical",
       "applies": ".d-input",
-      "description": "Styles input in a error state."
+      "description": "Styles input in a critical state."
     },
     {
-      "class": "d-input--success",
+      "class": "d-input--positive",
       "applies": ".d-input",
-      "description": "Styles input in a success state."
+      "description": "Styles input in a positive state."
     },
     {
       "class": "d-input-icon",
@@ -89,21 +89,6 @@
       "class": "d-textarea--xl",
       "applies": ".d-textarea",
       "description": "Applies extra large size."
-    },
-    {
-      "class": "d-textarea--warning",
-      "applies": ".d-textarea",
-      "description": "Styles textarea in a warning state."
-    },
-    {
-      "class": "d-textarea--error",
-      "applies": ".d-textarea",
-      "description": "Styles textarea in a error state."
-    },
-    {
-      "class": "d-textarea--success",
-      "applies": ".d-textarea",
-      "description": "Styles textarea in a success state."
     }
   ]
 }

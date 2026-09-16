@@ -1,151 +1,173 @@
 <template>
   <dt-collapsible
+    v-if="hasChildren"
+    :open="isOpen"
     element-type="li"
-    max-width="100%"
-    :open="item.link ? isOpen : true"
-    class="dt-sidebar-item"
+    class="d-w100p"
+    anchor-class="d-w100p"
+    @opened="handleOpened"
   >
     <template #anchor="{ attrs }">
-      <dt-stack
-        direction="row"
-        class="d-ps-relative"
-      >
-        <dt-button
-          :id="labelId"
-          v-bind="attrs"
-          :to="item.link || undefined"
-          :active="isActiveLink(item.link)"
-          importance="clear"
-          kind="muted"
-          label-class="d-jc-flex-start"
-          icon-position="right"
-          :tabindex="actionableTabIndex"
-          :class="[
-            'd-w100p d-fw-normal',
-            {
-              'd-headline--eyebrow d-fw-semibold d-fc-secondary d-bgc-transparent d-c-default': !item.link,
-            },
-          ]"
-          @click="handleAnchorClick"
-        >
-          {{ item.text }}
-          <template #icon="{ iconSize }">
-            <dt-icon
-              v-if="item.link"
-              :name="isOpen ? 'chevron-down' : 'chevron-right'"
-              :size="iconSize"
-            />
-          </template>
-        </dt-button>
-      </dt-stack>
+      <sidebar-item-row
+        :id="labelId"
+        :item="item"
+        :depth="depth"
+        :presentation="presentation"
+        :active="isActive"
+        :highlighted="isHighlighted"
+        :collapsible-attrs="attrs"
+        :open="isOpen"
+        :first-nested-child="firstNestedChild"
+        collapsible
+        @click="handleClick"
+      />
     </template>
     <template #content>
       <dt-stack
         as="ul"
         :aria-labelledby="labelId"
-        :class="{ 'd-pl8': nested }"
-        gap="200"
+        gap="25"
+        :class="{ 'd-pbs-50': depth === 0 || depth === 1 }"
       >
-        <li
+        <sidebar-item
           v-for="(subItem, index) in subItems"
-          :key="subItem.text"
-        >
-          <sidebar-item v-if="subItem.children" :item="subItem" nested />
-          <dt-button
-            v-else-if="!subItem.planned"
-            :to="subItem.link"
-            :active="isActiveLink(subItem.link)"
-            importance="clear"
-            kind="muted"
-            label-class="d-jc-flex-start"
-            :class="[
-              'd-w100p d-fw-normal',
-              {
-                'd-mt2': (index === 0 && nested), // add margin top to first nested item
-              },
-            ]"
-          >
-            {{ subItem.text }}
-          </dt-button>
-          <div
-            v-else
-            class="d-btn d-w100p d-jc-flex-start d-fw-normal d-fc-disabled h:d-bgc-transparent d-c-default"
-          >
-            {{ subItem.text }}
-            <dt-badge
-              v-if="subItem.planned"
-              class="d-fw-normal d-ml4"
-            >
-              Planned
-            </dt-badge>
-          </div>
-        </li>
+          :key="getNavItemKey(subItem)"
+          :item="subItem"
+          :depth="depth + 1"
+          :open-items="openItems"
+          :item-path="`${itemPath}.${index}`"
+          :peer-keys="subItemKeys"
+          :active-item-path="activeItemPath"
+          :search-active="searchActive"
+          :presentation="presentation"
+          :nested="Boolean(subItem.children?.length)"
+          :first-nested-child="nested && index === 0 && !subItem.children?.length"
+          :persistent="persistent"
+          @toggle="forwardToggle"
+          @opened="forwardOpened"
+        />
       </dt-stack>
     </template>
   </dt-collapsible>
+
+  <li v-else>
+    <sidebar-item-row
+      :id="resultId"
+      :item="item"
+      :depth="depth"
+      :presentation="presentation"
+      :active="isActive"
+      :highlighted="isHighlighted"
+      :first-nested-child="firstNestedChild"
+    />
+  </li>
 </template>
 
 <script setup>
-import { computed, onMounted, ref, watch } from 'vue';
-import { useRoute } from 'vue-router';
+import { computed } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import SidebarItemRow from './SidebarItemRow.vue';
+import {
+  getCollapsibleNavigationTarget,
+  isDescendantOfNavCollection,
+} from '../utils/navRoutes.js';
+import { collectPeerKeys, getNavItemKey, getSearchResultId } from '../utils/sidebarSearch.js';
 
 const props = defineProps({
-  isSinglePage: {
-    type: Boolean,
-    default: false,
-  },
   item: {
     type: Object,
-    default: () => {},
+    required: true,
   },
   nested: {
     type: Boolean,
     default: false,
   },
+  firstNestedChild: {
+    type: Boolean,
+    default: false,
+  },
+  depth: {
+    type: Number,
+    default: 0,
+  },
+  openItems: {
+    type: Set,
+    required: true,
+  },
+  itemPath: {
+    type: String,
+    required: true,
+  },
+  peerKeys: {
+    type: Array,
+    default: () => [],
+  },
+  activeItemPath: {
+    type: String,
+    default: null,
+  },
+  searchActive: {
+    type: Boolean,
+    default: false,
+  },
+  presentation: {
+    type: String,
+    default: 'primary',
+  },
+  persistent: {
+    type: Boolean,
+    default: false,
+  },
 });
-const subItems = computed(() => {
-  return props.item?.children || [];
-});
-const labelId = computed(() => {
-  return `sidebar-label-${props.item?.text?.toLowerCase().replace(/\s+/g, '-')}`;
-});
-const actionableTabIndex = computed(() => {
-  // Items without links are not actionable and should be removed from tab order
-  return props.item.link ? undefined : -1;
-});
+
+const emit = defineEmits(['toggle', 'opened']);
 const route = useRoute();
-const hash = ref(route.hash);
-const isOpen = ref(false);
+const router = useRouter();
 
-watch(route, (newRoute) => {
-  hash.value = newRoute.hash;
-  isOpen.value = false;
-}, { flush: 'pre', immediate: true, deep: true });
+const subItems = computed(() => props.item.children || []);
+const hasChildren = computed(() => subItems.value.length > 0);
+const subItemKeys = computed(() => collectPeerKeys(subItems.value));
+const itemKey = computed(() => getNavItemKey(props.item));
+const isOpen = computed(() => props.openItems.has(itemKey.value));
+const isHighlighted = computed(() => (
+  props.searchActive && props.activeItemPath === props.itemPath
+));
+const isGroupingOnlyParent = computed(() => (
+  hasChildren.value && subItems.value.some(child => child.link === props.item.link)
+));
+const isRouteActive = computed(() => {
+  if (!props.item.link || isGroupingOnlyParent.value) return false;
+  if (isDescendantOfNavCollection(props.item.link, route.path)) return true;
 
-onMounted(() => {
-  if (route.path === props.item.link) {
-    isOpen.value = true;
-  }
+  return route.path === props.item.link;
 });
+const isActive = computed(() => (
+  props.searchActive ? isHighlighted.value : isRouteActive.value
+));
+const labelId = computed(() => `sidebar-label-${props.itemPath.replace(/\./g, '-')}`);
+const resultId = computed(() => getSearchResultId(props.itemPath));
 
-// isExactActive from router-link doesn't work with hashes,
-// that's why we need to check for the hash if it's a single page.
-// Now computed from route directly instead of router-link's scoped slot.
-const isActiveLink = (link) => {
-  if (!link) return false;
-  const isExactActive = route.path === link;
-  const active = props.isSinglePage ? hash.value === link : isExactActive;
-  if (isExactActive) { isOpen.value = active; }
-  return active;
-};
+function handleClick (event) {
+  event.preventDefault();
+  const navigationTarget = getCollapsibleNavigationTarget(props.item, {
+    persistent: props.persistent,
+    open: isOpen.value,
+    routePath: route.path,
+  });
 
-function handleAnchorClick () {
-  isOpen.value = true;
+  emit('toggle', itemKey.value, !isOpen.value, props.peerKeys);
+  if (navigationTarget) router.push(navigationTarget);
+}
+
+function forwardToggle (childKey, shouldOpen, childPeerKeys) {
+  emit('toggle', childKey, shouldOpen, childPeerKeys);
+}
+
+function handleOpened (opened) {
+  if (opened) emit('opened');
+}
+
+function forwardOpened () {
+  emit('opened');
 }
 </script>
-
-<style lang="less" scoped>
-.dt-sidebar-item {
-  width: var(--dt-size-100-percent);
-}
-</style>

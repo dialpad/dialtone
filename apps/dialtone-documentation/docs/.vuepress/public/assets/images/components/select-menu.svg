@@ -1,8 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 107" fill="none">
-<rect x="52" y="46" width="160" height="32" rx="8" fill="var(--dt-color-surface-primary)" id="button-bg"/>
-<rect x="52.5" y="46.5" width="159" height="31" rx="7.5" stroke="var(--dt-color-border-bold)" stroke-opacity="0.5" id="button-bg"/>
-<rect x="64" y="58" width="88" height="8" rx="4" fill="var(--dt-color-foreground-placeholder)" id="Rectangle 494"/>
-<rect x="64" y="30" width="55" height="8" rx="4" fill="var(--dt-color-surface-moderate)" id="Rectangle 499"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M199.862 64.1392C200.046 64.3248 200.046 64.6258 199.862 64.8114L196.834 67.8608C196.649 68.0464 196.351 68.0464 196.166 67.8608L193.138 64.8114C192.954 64.6258 192.954 64.3248 193.138 64.1392C193.323 63.9536 193.621 63.9536 193.806 64.1392L196.5 66.8525L199.194 64.1392C199.379 63.9536 199.677 63.9536 199.862 64.1392Z" fill="var(--dt-color-border-brand)" id="Vector (Stroke)"/>
-<path fill-rule="evenodd" clip-rule="evenodd" d="M199.862 59.8608C200.046 59.6752 200.046 59.3742 199.862 59.1886L196.834 56.1392C196.649 55.9536 196.351 55.9536 196.166 56.1392L193.138 59.1886C192.954 59.3742 192.954 59.6752 193.138 59.8608C193.323 60.0464 193.621 60.0464 193.806 59.8608L196.5 57.1475L199.194 59.8608C199.379 60.0464 199.677 60.0464 199.862 59.8608Z" fill="var(--dt-color-border-brand)" id="Vector (Stroke)"/>
-</svg>

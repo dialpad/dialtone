@@ -1,144 +1,160 @@
 ---
 title: Border Radius
 description: Utilities for controlling an element's border radius.
+keywords: ["rounded", "corner", "pill", "circle", "top left radius", "top right radius", "bottom right radius", "bottom left radius", "border start start radius", "border start end radius", "border end end radius", "border end start radius", "single corner"]
 ---
+
+<script setup>
+  import { radius } from '@data/borders.json';
+
+  // Skip legacy rows when the constructed class equals the logical one (e.g. .d-bar-pill,
+  // .d-bar-circle where legacyPrefix == logicalPrefix and legacyPx is the keyword).
+  function hasDistinctLegacy (scope, val) {
+    if (val.legacyPx == null) return false;
+    const infix = (val.legacyPx === 'pill' || val.legacyPx === 'circle') ? '-' : '';
+    const legacyClass = `d-${scope.legacyPrefix}${infix}${val.legacyPx}`;
+    const logicalClass = `d-${scope.logicalPrefix}-${val.stop}`;
+    return legacyClass !== logicalClass;
+  }
+</script>
 
 ## All Corners
 
-Use `d-bar{n}` to change the border radius on all corners of your element.
+Use `d-bar-{stop}` to change the border radius on all four corners. The stop references the matching `--dt-size-radius-{stop}` token.
 
-<code-well-header>
-  <dt-stack
-    gap="400"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <div
-      v-for="r in [0, 1, 2, 4, 8, 12, 16, 24, 32]"
-      class="d-p16 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap"
-      :class="`d-bar${r}`"
-    >
-      d-bar{{ r }}
-    </div>
-  </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-bar0">...</div>
-<div class="d-bar1">...</div>
-<div class="d-bar2">...</div>
-<div class="d-bar4">...</div>
-<div class="d-bar8">...</div>
-<div class="d-bar12">...</div>
-<div class="d-bar16">...</div>
-<div class="d-bar24">...</div>
-<div class="d-bar32">...</div>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="100" direction="row" justify="center" class="d-fw-wrap">
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-0">  <dt-text kind="code" size="xs">d-bar-0</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-100"><dt-text kind="code" size="xs">d-bar-100</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-200"><dt-text kind="code" size="xs">d-bar-200</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-300"><dt-text kind="code" size="xs">d-bar-300</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-350"><dt-text kind="code" size="xs">d-bar-350</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-400"><dt-text kind="code" size="xs">d-bar-400</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-450"><dt-text kind="code" size="xs">d-bar-450</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-500"><dt-text kind="code" size="xs">d-bar-500</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-550"><dt-text kind="code" size="xs">d-bar-550</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-600"><dt-text kind="code" size="xs">d-bar-600</dt-text></div>
+</dt-stack>
 ```
 
 ## Rounded Sides
 
-Use `d-b{t|r|b|l}r{n}` to change the border radius on a side of your element.
+Use a side-pair class to round the two corners on a single side. Class roots are the first-letter compression of the matching CSS logical property.
 
-<code-well-header>
-  <dt-stack
-    gap="400"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <div
-      v-for="r in [4, 8, 12, 16]"
-      class="d-p16 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap"
-      :class="`d-btr${r}`"
-    >
-      d-btr{{ r }}
-    </div>
-  </dt-stack>
-</code-well-header>
+| Class root | CSS properties set                                      | Visible in LTR |
+| ---------- | ------------------------------------------------------- | -------------- |
+| `d-bbsr-*` | `border-start-start-radius` + `border-start-end-radius` | top            |
+| `d-bier-*` | `border-start-end-radius` + `border-end-end-radius`     | right          |
+| `d-bber-*` | `border-end-start-radius` + `border-end-end-radius`     | bottom         |
+| `d-bisr-*` | `border-start-start-radius` + `border-end-start-radius` | left           |
 
-```html
-<div class="d-btr4">...</div>
-<div class="d-brr8">...</div>
-<div class="d-bbr12">...</div>
-<div class="d-blr16">...</div>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="100" direction="row" justify="center" class="d-fw-wrap">
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bbsr-450"><dt-text kind="code" size="xs">d-bbsr-450</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bier-450"><dt-text kind="code" size="xs">d-bier-450</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bber-450"><dt-text kind="code" size="xs">d-bber-450</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bisr-450"><dt-text kind="code" size="xs">d-bisr-450</dt-text></div>
+</dt-stack>
+```
+
+## Individual Corners
+
+Use a single-corner class to round exactly one corner. Class roots match the CSS logical corner properties.
+
+| Class root | CSS property set            | Visible in LTR |
+| ---------- | --------------------------- | -------------- |
+| `d-bssr-*` | `border-start-start-radius` | top-left       |
+| `d-bser-*` | `border-start-end-radius`   | top-right      |
+| `d-beer-*` | `border-end-end-radius`     | bottom-right   |
+| `d-besr-*` | `border-end-start-radius`   | bottom-left    |
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="100" direction="row" justify="center" class="d-fw-wrap">
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bssr-500"><dt-text kind="code" size="xs">d-bssr-500</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bser-500"><dt-text kind="code" size="xs">d-bser-500</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-beer-500"><dt-text kind="code" size="xs">d-beer-500</dt-text></div>
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-besr-500"><dt-text kind="code" size="xs">d-besr-500</dt-text></div>
+</dt-stack>
 ```
 
 ## Pills
 
-Use `d-b{a|t|r|b|l}r-pill` to change the border radius of your element to a pill shape.
+Use `d-bar-pill` for a pill-shaped radius on all four corners. The same `-pill` suffix is available on every scope (`d-bbsr-pill`, `d-bssr-pill`, etc.).
 
-<code-well-header>
-  <dt-stack
-    gap="400"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <div class="d-p16 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap d-bar-pill">
-      d-bar-pill
-    </div>
-  </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-bar-pill">...</div>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="100" direction="row" justify="center" class="d-fw-wrap">
+  <div class="d-p-100 d-ba d-baw2 d-bgc-primary d-ws-nowrap d-bar-pill">
+    <dt-text kind="code" size="xs">d-bar-pill</dt-text>
+  </div>
+</dt-stack>
 ```
 
 ## Circles
 
-Use `d-b{a|t|r|b|l}r-circle` to change the border radius of your element to a circle shape.
+Use `d-bar-circle` for a fully circular radius. Best paired with a square element.
 
-<code-well-header>
-  <dt-stack
-    gap="400"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-   >
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-h128 d-w128 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap d-bar-circle">
-      d-bar-circle
-    </dt-stack>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="100" direction="row" justify="center" class="d-fw-wrap">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-100 d-size-200 d-ba d-baw2 d-bc-default d-bgc-primary d-ws-nowrap d-bar-circle">
+    <dt-text kind="code" size="xs">d-bar-circle</dt-text>
   </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-bar-circle">...</div>
+</dt-stack>
 ```
+
+## Reset
+
+Use `d-bar-unset` to reset the border-radius on all four corners to `unset`.
 
 ## Classes
 
-<utility-class-table>
+<utility-class-table show-rendered>
   <template #content>
+    <tbody v-for="scope in radius.scopes" :key="scope.logicalPrefix">
+      <tr v-for="val in radius.values" :key="`${scope.logicalPrefix}-${val.stop}`">
+        <th scope="row">
+          <dt-text as="span" kind="code" :size="100" class="d-docsite-code">.d-{{ scope.logicalPrefix }}-{{ val.stop }}</dt-text>
+        </th>
+        <td class="d-code--sm">
+          <span v-for="prop in scope.cssProperties" :key="prop">
+            {{ prop }}: var(--dt-size-radius-{{ val.stop }}) !important;<br/>
+          </span>
+        </td>
+        <td class="d-code--sm d-fc-tertiary d-ta-right">{{ val.rem }}</td>
+        <td class="d-code--sm d-fc-tertiary d-ta-right">{{ val.px }}</td>
+      </tr>
+      <template v-if="scope.legacyPrefix">
+        <tr v-for="val in radius.values.filter(v => hasDistinctLegacy(scope, v))" :key="`legacy-${scope.legacyPrefix}-${val.legacyPx}`">
+          <th scope="row">
+            <dt-stack gap="50">
+              <dt-text as="span" kind="code" :size="100" class="d-docsite-code">
+                .d-{{ scope.legacyPrefix }}<template v-if="val.legacyPx === 'pill' || val.legacyPx === 'circle'">-</template>{{ val.legacyPx }}
+              </dt-text>
+              <dt-badge type="critical" kind="label" text="Deprecated" />
+            </dt-stack>
+          </th>
+          <td class="d-code--sm">
+            <span v-for="prop in scope.cssProperties" :key="prop">
+              {{ prop }}: var(--dt-size-radius-{{ val.stop }}) !important;<br/>
+            </span>
+          </td>
+          <td class="d-code--sm d-fc-tertiary d-ta-right">{{ val.rem }}</td>
+          <td class="d-code--sm d-fc-tertiary d-ta-right">{{ val.px }}</td>
+        </tr>
+      </template>
+    </tbody>
     <tbody>
       <tr>
-        <th scope="row" class="d-code--sm d-docsite-code">.d-bar-unset</th>
+        <th scope="row">
+          <dt-text as="span" kind="code" :size="100" class="d-docsite-code">.d-bar-unset</dt-text>
+        </th>
         <td class="d-code--sm">border-radius: unset !important;</td>
-      </tr>
-    </tbody>
-    <tbody v-for="i in ['a', 't', 'r', 'b', 'l']">
-      <tr v-for="(val, token) in {'--dt-size-radius-0': '0', '--dt-size-radius-100': '1', '--dt-size-radius-200': '2', '--dt-size-radius-300': '4', '--dt-size-radius-400': '8', '--dt-size-radius-450': '12', '--dt-size-radius-500': '16', '--dt-size-550': '24', '--dt-size-radius-600': '32', '--dt-size-radius-circle': '-circle', '--dt-size-radius-pill': '-pill'}">
-        <th scope="row" class="d-code--sm d-docsite-code">.d-b{{ i }}r{{ val }}</th>
-        <td>
-          <dt-stack direction="row" justify="between" align="center">
-            <div class="d-fl-grow1 d-code--sm">
-              <span v-if="i === 'a'">border-radius: var({{ token }}) !important;</span>
-              <span v-else-if="i === 't'">
-                border-top-left-radius: var({{ token }}) !important;<br/>
-                border-top-right-radius: var({{ token }}) !important;
-              </span>
-              <span v-else-if="i === 'r'">
-                border-top-right-radius: var({{ token }}) !important;<br/>
-                border-bottom-right-radius: var({{ token }}) !important;
-              </span>
-              <span v-else-if="i === 'b'">
-                border-bottom-left-radius: var({{ token }}) !important;<br/>
-                border-bottom-right-radius: var({{ token }}) !important;
-              </span>
-              <span v-else-if="i === 'l'">
-                border-bottom-left-radius: var({{ token }}) !important;
-                border-top-left-radius: var({{ token }}) !important;<br/>
-              </span>
-            </div>
-            <div
-              class="d-fl-shrink0 d-m4 d-ml16 d-h32 d-bgc-black-300"
-              :class="[val === '-circle' ? 'd-w32' : 'd-w64', `d-b${i}r${val}`]"
-            >
-            </div>
-          </dt-stack>
-        </td>
+        <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
+        <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
       </tr>
     </tbody>
   </template>

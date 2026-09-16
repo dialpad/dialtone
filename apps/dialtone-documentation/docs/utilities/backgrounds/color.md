@@ -1,48 +1,30 @@
 ---
 title: Background Color
 description: Utilities for setting the background color.
+keywords: ["bg color","background colour","bgc"]
 ---
 
-<dt-notice kind="warning" class="d-wmx100p d-mt24" hideClose>
-  Before using background color utilities, first consider <dt-link to="/design/colors/palette/#surface" kind="muted">semantic surface colors</dt-link>.
-</dt-notice>
+> [!WARNING]
+> Before using background color utilities, first consider [semantic surface colors](/design/colors/palette/#surface).
 
 ## Usage
 
 Use `d-bgc-{color}` to set an element's background color.
 
-<code-well-header>
-  <dt-stack
-    gap="500"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <div
-      v-for="color in ['primary', 'critical']"
-      class="d-p16 d-bar4"
-      :class="`d-bgc-${color}`"
-    >
-      {{ color.charAt(0).toUpperCase() + color.slice(1) }}
-    </div>
-  </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-bgc-primary">...</div>
-<div class="d-bgc-critical">...</div>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }">
+  <div class="d-p-200 d-bar-300 d-bgc-primary">Primary</div>
+  <div class="d-p-200 d-bar-300 d-bgc-critical">Critical</div>
+</dt-stack>
 ```
 
 ## Hover
 
 Use `h:d-bgc-{color}` to change an element's `:hover` state background color.
 
-<code-well-header>
-  <dt-button kind="unstyled" class="d-p16 d-bgc-primary h:d-bgc-critical">
-    Hover over me
-  </dt-button>
-</code-well-header>
-
-```html
-<dt-button kind="unstyled" class="d-p16 d-bgc-primary h:d-bgc-critical">
+```vue demo
+<dt-button kind="unstyled" class="d-p-200 d-bgc-primary h:d-bgc-critical">
   Hover over me
 </dt-button>
 ```
@@ -51,14 +33,8 @@ Use `h:d-bgc-{color}` to change an element's `:hover` state background color.
 
 Use `f:d-bgc-{color}` to change an element's `:focus` and `:focus-within` state background color.
 
-<code-well-header>
-  <dt-button kind="unstyled" class="d-p16 d-bgc-primary f:d-bgc-critical">
-    Focus me
-  </dt-button>
-</code-well-header>
-
-```html
-<dt-button kind="unstyled" class="d-p16 d-bgc-primary f:d-bgc-critical">
+```vue demo
+<dt-button kind="unstyled" class="d-p-200 d-bgc-primary f:d-bgc-critical">
   Focus me
 </dt-button>
 ```
@@ -67,14 +43,8 @@ Use `f:d-bgc-{color}` to change an element's `:focus` and `:focus-within` state 
 
 Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background color [only when focused by keyboard].
 
-<code-well-header>
-  <dt-button kind="unstyled" class="d-p16 d-bgc-primary fv:d-bgc-critical">
-    Keyboard focus me
-  </dt-button>
-</code-well-header>
-
-```html
-<dt-button kind="unstyled" class="d-p16 d-bgc-primary fv:d-bgc-critical">
+```vue demo
+<dt-button kind="unstyled" class="d-p-200 d-bgc-primary fv:d-bgc-critical">
   Keyboard focus me
 </dt-button>
 ```
@@ -83,31 +53,32 @@ Use `fv:d-bgc-{color}` to change an element's `:focus-visible` state background 
 
 Use `d-bgo{stop}` to change an element's background color opacity. You can also change the background color opacity on `:hover`, `:focus`, `:focus-visible` by using the respective `h:d-bgo{stop}`, `f:d-bgo{stop}`, `fv:d-bgo{stop}` prefixes.
 
-<code-well-header>
-  <dt-stack
-    gap="500"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <div
-      v-for="opacity in [100, 99, 95, 90, 75, 50, 25, 10, 0]"
-      class="d-p8 d-bgc-critical d-bar4"
-      :class="`d-bgo${opacity}`"
-    >
-      {{ opacity }}%
-    </div>
-  </dt-stack>
-</code-well-header>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }">
+  <div class="d-p-100 d-bgc-critical d-bar-300 d-bgo100">100%</div>
+  <div class="d-p-100 d-bgc-critical d-bar-300 d-bgo99">99%</div>
+  <div class="d-p-100 d-bgc-critical d-bar-300 d-bgo95">95%</div>
+  <div class="d-p-100 d-bgc-critical d-bar-300 d-bgo90">90%</div>
+  <div class="d-p-100 d-bgc-critical d-bar-300 d-bgo75">75%</div>
+  <div class="d-p-100 d-bgc-critical d-bar-300 d-bgo50">50%</div>
+  <div class="d-p-100 d-bgc-critical d-bar-300 d-bgo25">25%</div>
+  <div class="d-p-100 d-bgc-critical d-bar-300 d-bgo10">10%</div>
+  <div class="d-p-100 d-bgc-critical d-bar-300 d-bgo0">0%</div>
+</dt-stack>
+```
 
-```html
-<p class="d-bgc-critical">...</p>
-<p class="d-bgc-critical d-bgo99">...</p>
-<p class="d-bgc-critical d-bgo95">...</p>
-<p class="d-bgc-critical d-bgo90">...</p>
-<p class="d-bgc-critical d-bgo75">...</p>
-<p class="d-bgc-critical d-bgo50">...</p>
-<p class="d-bgc-critical d-bgo25">...</p>
-<p class="d-bgc-critical d-bgo10">...</p>
-<p class="d-bgc-critical d-bgo0">...</p>
+## Inverted
+
+> [!INFO] Tip
+> Avoid `-inverted` utility variants. Use the [v-dt-mode directive](/components/mode-island.html#inverting) with base classes instead -- it automatically resolves the correct colors for the current mode.
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }">
+  <div v-dt-mode:invert class="d-p-200 d-bar-300 d-bgc-primary">Primary</div>
+  <div v-dt-mode:invert class="d-p-200 d-bar-300 d-bgc-critical">Critical</div>
+</dt-stack>
 ```
 
 ## Classes
@@ -115,7 +86,7 @@ Use `d-bgo{stop}` to change an element's background color opacity. You can also 
 <new-utility-class-table :classes="backgroundColors">
   <template #example="{ className }">
     <div
-      class="d-fl-shrink0 d-h42 d-w42 d-bar-circle d-ba d-bc-moderate"
+      class="d-fl-shrink0 d-size-75 d-bar-circle d-ba d-bc-moderate"
       :class="className"
     />
   </template>

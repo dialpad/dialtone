@@ -1,0 +1,99 @@
+<template>
+  <dt-stack
+    direction="row"
+    align="center"
+    class="d-hmn-400 d-p-300"
+  >
+    <dt-motion-text
+      ref="motionText"
+      :text="text"
+      :animation-mode="animationMode"
+      :speed="speed"
+      :auto-start="autoStart"
+      :loop="loop"
+      :respects-reduced-motion="respectsReducedMotion"
+      :screen-reader-text="screenReaderText"
+      class="d-headline--lg"
+      @start="onStart"
+      @complete="onComplete"
+      @progress="onProgress"
+      @pause="onPause"
+      @resume="onResume"
+    />
+  </dt-stack>
+</template>
+
+<script>
+import { DtMotionText } from '@/components/MotionText';
+import { DtStack } from '@/components/Stack';
+
+export default {
+  name: 'DtMotionTextDefaultStory',
+  components: {
+    DtMotionText,
+    DtStack,
+  },
+
+  props: {
+    text: {
+      type: String,
+      default: 'Welcome to Dialtone Motion Text',
+    },
+
+    animationMode: {
+      type: String,
+      default: 'gradient-in',
+    },
+
+    speed: {
+      type: String,
+      default: 'md',
+    },
+
+    autoStart: {
+      type: Boolean,
+      default: true,
+    },
+
+    loop: {
+      type: Boolean,
+      default: false,
+    },
+
+    respectsReducedMotion: {
+      type: Boolean,
+      default: true,
+    },
+
+    screenReaderText: {
+      type: String,
+      default: '',
+    },
+
+    onStart: {
+      type: Function,
+      default: () => {},
+    },
+
+    onComplete: {
+      type: Function,
+      default: () => {},
+    },
+
+    onProgress: {
+      type: Function,
+      default: () => {},
+    },
+
+    onPause: {
+      type: Function,
+      default: () => {},
+    },
+
+    onResume: {
+      type: Function,
+      default: () => {},
+    },
+  },
+};
+</script>

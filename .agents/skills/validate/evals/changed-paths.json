@@ -47,6 +47,15 @@
     ]
   },
   {
+    "id": "combinator",
+    "changedFiles": ["packages/combinator/src/variants/variants_button.js"],
+    "expectedCommands": [
+      "pnpm --dir packages/combinator test",
+      "pnpm --dir packages/combinator exec eslint src",
+      "pnpm nx run dialtone-combinator:build"
+    ]
+  },
+  {
     "id": "query_core",
     "changedFiles": ["packages/dialtone-query-core/src/tools/docs.ts"],
     "expectedCommands": [

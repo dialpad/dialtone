@@ -137,9 +137,13 @@ reviews:
         - Token naming: camelCase with category prefix (dtColor*, dtSpace*,
           dtFontSize*, dtFontWeight*, dtShadow*, dtRadius*, dtSize*).
 
-        - New tokens must have dark mode overrides in dark.json.
+        - New tokens may inherit from default.json when the same value is correct
+          in dark mode. Add a dark.json override only when the dark theme value
+          must differ from the default.
 
-        - Component tokens must reference semantic tokens, not base palette.
+        - Prefer semantic tokens when a suitable mapping exists, but direct
+          base-palette references are valid when they are the correct source of
+          truth (e.g., a token tied to a specific palette stop).
 
         - Flag any circular references or references to non-existent tokens.
 
@@ -208,6 +212,24 @@ reviews:
           or the prompt command's LLM context generation.
 
         Follow the conventions in .claude/rules/dialtone-cli.md.
+
+    # Combinator variants
+    - path: 'packages/combinator/src/variants/**'
+      instructions: >
+        - Variant files drive Combinator presets, documentation examples, and
+          component-wall thumbnail input.
+
+        - Match component docgen member names exactly. Unknown prop, slot, or
+          attribute names are ignored.
+
+        - Use exclusions only for invalid or misleading combinations; simple
+          parent-off child-disabled cases should come from component JSDoc when
+          possible.
+
+        - New variant files must be registered in
+          packages/combinator/src/variants/variants.js.
+
+        Follow the conventions in .claude/rules/combinator-variants.md.
 
     # ESLint plugin
     - path: 'packages/eslint-plugin-dialtone/**'

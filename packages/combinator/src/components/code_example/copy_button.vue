@@ -7,7 +7,7 @@
       <dt-button
         :aria-label="ariaLabel"
         :circle="!$slots.default"
-        size="xs"
+        :size="100"
         importance="clear"
         kind="muted"
         @click="copyToClipboard"
@@ -26,7 +26,7 @@
 <script setup>
 import { ref } from 'vue';
 import { DtButton, DtTooltip } from '@dialpad/dialtone-vue';
-import DtIconCopy from '@dialpad/dialtone-icons/vue3/copy';
+import DtIconCopy from '@dialpad/dialtone-icons/vue/copy';
 
 const props = defineProps({
   text: { type: String, required: true },

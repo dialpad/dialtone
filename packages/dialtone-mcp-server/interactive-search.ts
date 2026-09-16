@@ -41,7 +41,7 @@ function showHelp(): void {
   console.log();
   console.log('Design Tokens:');
   console.log('  "color foreground"     → --dt-color-foreground-primary, ...');
-  console.log('  "space 400"            → --dt-space-400');
+  console.log('  "spacing 100"          → --dt-spacing-100');
   console.log('  "font family"          → --dt-font-family-body, ...');
   console.log();
   console.log('Components:');

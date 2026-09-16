@@ -1,34 +1,39 @@
 <template>
   <div>
-    <dt-recipe-combobox-with-popover
+    <dt-combobox-with-popover
       ref="combobox"
       label="Valid values"
       max-height="512px"
+      list-class="d-hmx-350"
+      append-to="body"
       @select="e => onUpdate(suggestions[e])"
       @opened="onOpen"
     >
       <template #input="{ inputProps, onInput }">
         <dtc-control-string
           v-bind="inputProps"
+          :label="label"
           :value="value"
           :warning="warning"
           :disabled="disabled"
-          @input="e => onInputInternal(e, onInput)"
+          :required="required"
+          :clearable="clearable"
+          @update:value="e => onInputInternal(e, onInput)"
         >
           <template #default>
             <slot />
           </template>
-          <template #icon="{ iconSize }">
+          <template #icon>
             <component
-              :is="open ? DtIconChevronDown : DtIconChevronRight"
-              :size="iconSize"
+              :is="DtIconChevronDown"
+              size="200"
             />
           </template>
         </dtc-control-string>
       </template>
       <template #list="{ listProps }">
         <ul
-          class="d-p0"
+          class="d-p-0"
           v-bind="listProps"
         >
           <dt-list-item
@@ -47,24 +52,36 @@
           </dt-list-item>
         </ul>
       </template>
-    </dt-recipe-combobox-with-popover>
+    </dt-combobox-with-popover>
   </div>
 </template>
 
 <script setup>
 import DtcControlString from './control_string.vue';
-import { DtRecipeComboboxWithPopover, DtListItem } from '@dialpad/dialtone-vue';
+import { DtComboboxWithPopover, DtListItem } from '@dialpad/dialtone-vue';
 
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed, ref } from 'vue';
-import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue3';
+import { DtIconChevronDown } from '@dialpad/dialtone-icons/vue';
 
 const WARNING_MESSAGE = 'Unexpected value';
 
 const props = defineProps({
-  value: {
+  label: {
     type: String,
-    required: true,
+    default: '',
+  },
+  value: {
+    type: [String, null],
+    default: null,
+  },
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  clearable: {
+    type: Boolean,
+    default: true,
   },
   disabled: {
     type: Boolean,
@@ -83,7 +100,7 @@ const props = defineProps({
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
 
 const warning = computed(() => {
-  return props.warn && !props.suggestions.includes(props.value)
+  return props.warn && props.value !== null && !props.suggestions.includes(props.value)
     ? WARNING_MESSAGE
     : undefined;
 });

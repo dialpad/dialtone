@@ -1,14 +1,15 @@
+@layer dialtone.components {
 .d-context-menu-list {
-  width: var(--dt-size-850);
+  inline-size: var(--dt-layout-300);
 }
 
 .d-dropdown-list {
   position: relative;
-  margin: var(--dt-space-300);
-  padding-right: var(--dt-space-0);
-  padding-left: var(--dt-space-0);
+  margin: var(--dt-spacing-50);
+  padding-inline: var(--dt-spacing-0) var(--dt-spacing-0);
 
   >.d-list-item {
-    margin-top: var(--dt-space-200);
+    margin-block-start: var(--dt-spacing-25);
   }
+}
 }

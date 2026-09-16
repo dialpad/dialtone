@@ -35,9 +35,10 @@ const path = require('path');
 //  @@ STYLES
 const postCSS = settings.styles ? require('gulp-postcss') : null;
 // crawls .less dependencies for incremental building
-const postCSSNano = settings.styles ? require('cssnano') : null;
+const postCSSNano = settings.styles ? require('cssnano')({ preset: ['default', { calc: false }] }) : null;
 const less = settings.styles ? require('gulp-less') : null;
 const postCSSDialtoneGenerator = settings.styles ? require('./postcss/dialtone-generators.cjs') : null;
+const postCSSLayerRemover = settings.styles ? require('./postcss/postcss-layer-remover.cjs') : null;
 const sourcemaps = settings.styles ? require('gulp-sourcemaps') : null;
 const autoprefixer = settings.styles ? require('autoprefixer') : null;
 
@@ -77,6 +78,7 @@ const paths = {
   styles: {
     inputLib: ['./lib/build/less/dialtone.less', './lib/build/less/dialtone-default-theme.less'],
     outputLib: './lib/dist/',
+    outputNoLayers: './lib/dist/no-layers/',
   },
   tokens: {
     input: 'node_modules/@dialpad/dialtone-tokens/dist/css/*.css',
@@ -207,6 +209,20 @@ const libStylesDev = function (done) {
     }))
     .pipe(sourcemaps.write())
     .pipe(dest(paths.styles.outputLib));
+};
+
+const libStylesNoLayers = function (done) {
+  if (!settings.styles) return done();
+
+  // No font URL rewrite needed — output is one level deeper than lib/dist/,
+  // so the compiled ../fonts/ paths already resolve correctly to lib/dist/fonts/.
+  return src(paths.styles.inputLib)
+    .pipe(less({ paths: ['./node_modules'] }))
+    .pipe(postCSS([postCSSDialtoneGenerator, autoprefixer(), postCSSLayerRemover]))
+    .pipe(dest(paths.styles.outputNoLayers))
+    .pipe(postCSS([postCSSNano]))
+    .pipe(rename({ suffix: '.min' }))
+    .pipe(dest(paths.styles.outputNoLayers));
 };
 
 const moveStyleTagsToEOF = function (file, enc, cb) {
@@ -363,6 +379,37 @@ const buildNewSVGIcons = function (done) {
 };
 
 //  ================================================================================
+//  @@  FONTS CSS + JS ENTRY POINT
+//      Extract @font-face declarations into a standalone CSS file and a JS entry
+//      point so consumers can import '@dialpad/dialtone/fonts' via a bundler.
+//      Webpack resolves the woff2 url() paths relative to dialtone-fonts.css in
+//      dist/css/, which is where the font files live — no symlinks needed.
+//  ================================================================================
+const libFontStyles = function (done) {
+  if (!settings.styles) return done();
+
+  const fs = require('fs');
+  const css = fs.readFileSync('./lib/dist/dialtone.css', 'utf8');
+
+  const fontFaceBlocks = [];
+  const regex = /@font-face\s*\{[^}]+\}/g;
+  let match;
+  while ((match = regex.exec(css)) !== null) {
+    fontFaceBlocks.push(match[0]);
+  }
+
+  fs.writeFileSync('./lib/dist/dialtone-fonts.css', fontFaceBlocks.join('\n') + '\n');
+  done();
+};
+
+const libFontsJS = function (done) {
+  const fs = require('fs');
+  // eslint-disable-next-line quotes
+  fs.writeFileSync('./lib/dist/fonts.js', "import './dialtone-fonts.css';\n");
+  done();
+};
+
+//  ================================================================================
 //  @@  BUILD DOCS
 //      Process files and generate documentation
 //  ================================================================================
@@ -371,10 +418,11 @@ const libDocs = function (done) {
   if (!settings.documentation) return done();
 
   const postCSSDialtoneDocs = require('./postcss/dialtone-docs.cjs');
+  const postCSSValidateLayers = require('./postcss/validate-layers.cjs');
 
   //  Generate documentation
   return src('./lib/dist/dialtone-default-theme.css')
-    .pipe(postCSS([postCSSDialtoneDocs]));
+    .pipe(postCSS([postCSSDialtoneDocs, postCSSValidateLayers]));
 };
 
 //  ================================================================================
@@ -398,6 +446,9 @@ exports.default = series(
   exports.svg,
   tokens,
   libStyles,
+  libStylesNoLayers,
+  libFontStyles,
+  libFontsJS,
   libDocs,
   libScripts,
 );
@@ -417,6 +468,9 @@ exports.watch = series(
   exports.buildWatch,
   watchFiles,
 );
+
+// start watching without a prior clean or full build (assumes build already ran).
+exports.startWatch = series(watchFiles);
 
 //  --  CONVERT WEBFONTS
 exports.fonts = series(

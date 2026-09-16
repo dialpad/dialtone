@@ -1,0 +1,334 @@
+import { inject, computed, onMounted, onUnmounted, ref } from 'vue';
+import {
+  COLOR_ASSISTIVE_THEMES,
+  DEFAULT_MATERIAL,
+  DEFAULT_MODE,
+  MODES,
+  STANDARD_THEMES,
+} from '../constants/themes.js';
+import { formatThemeName } from '../utils/formatThemeName.js';
+import { syncBrowserThemeColor } from '../utils/browserThemeColor.js';
+import {
+  setMode as setModeConfig,
+  setBrand,
+  setContrast as setContrastConfig,
+  setMaterial as setMaterialConfig,
+  getBrandMaterial,
+  VALID_MATERIALS,
+} from '@dialpad/dialtone-tokens/themes/config';
+
+// Derived from the tokens package so adding a material never needs a second edit here.
+const MATERIALS = Object.freeze([...VALID_MATERIALS]);
+
+// Shared across every consumer, refcounted, mirroring useViewportBreakpoints.
+//
+// The theme state itself is already a singleton — it is provided by client.js and reached
+// with inject() — so each consumer's DOM-application step produces byte-identical output.
+// Before this, every consumer ran a full setCss() on mount (Navbar, SidebarFooter and any
+// markdown page that switches modes, so three or more on some pages), and a system
+// light/dark flip re-ran it once per live instance.
+//
+// `systemPrefersDark` belongs here rather than per-instance for the same reason: it
+// describes the OS, so every consumer must agree on it.
+/** @type {MediaQueryList | null} */
+let prefersDarkMediaQuery = null;
+const systemPrefersDark = ref(false);
+/** @type {Set<() => void>} Each consumer's setCss, in mount order. */
+const themeConsumers = new Set();
+
+const handleSystemPreferenceChange = () => {
+  systemPrefersDark.value = prefersDarkMediaQuery?.matches ?? false;
+  // One representative call. Every consumer writes the same attributes from the same
+  // injected refs, so invoking all of them would repaint identically N times.
+  themeConsumers.values().next().value?.();
+};
+
+/**
+ * @param {() => void} applyCss This consumer's setCss.
+ */
+const startTracking = (applyCss) => {
+  const isFirstConsumer = themeConsumers.size === 0;
+  themeConsumers.add(applyCss);
+
+  if (!isFirstConsumer) return;
+
+  if (typeof window !== 'undefined') {
+    prefersDarkMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    systemPrefersDark.value = prefersDarkMediaQuery.matches;
+    prefersDarkMediaQuery.addEventListener('change', handleSystemPreferenceChange);
+  }
+
+  // Applied once, by whoever mounted first. Later consumers find the document already
+  // correct, so re-applying would be pure repetition.
+  applyCss();
+};
+
+/**
+ * @param {() => void} applyCss
+ */
+const stopTracking = (applyCss) => {
+  themeConsumers.delete(applyCss);
+  if (themeConsumers.size > 0) return;
+
+  prefersDarkMediaQuery?.removeEventListener('change', handleSystemPreferenceChange);
+  prefersDarkMediaQuery = null;
+};
+
+/**
+ * Composable for managing theme, mode, and contrast settings across the documentation site.
+ * Provides centralized theme management logic that can be used in Navbar, markdown pages, and components.
+ *
+ * This composable wraps the shared theme management functions from @dialpad/dialtone-tokens/themes/config
+ * and adds documentation-site-specific features like system mode detection, localStorage persistence,
+ * and Vue reactive state management.
+ *
+ * @param {Object} options - Configuration options
+ * @param {boolean} [options.includeThemes=false] - Whether to enable theme switching functionality
+ * @returns {Object} Theme management state and methods
+ */
+export function useThemeManager(options = {}) {
+  const {
+    includeThemes = false,
+  } = options;
+
+  // Inject global state from client.js
+  const currentMode = inject('currentMode');
+  const currentTheme = inject('currentTheme');
+  const currentContrast = inject('currentContrast');
+  const currentMaterial = inject('currentMaterial');
+  const themes = inject('themes');
+
+  /**
+   * Computed icon name based on current mode
+   * @returns {string} Icon name for current mode
+   */
+  const currentModeIconName = computed(() => {
+    switch (currentMode.value) {
+      case 'dark':
+        return 'moon';
+      case 'light':
+        return 'sun';
+      default:
+        return 'circle-half-filled';
+    }
+  });
+
+  // `themes` is provided synchronously in `enhance` (client.js), before any
+  // component mounts — so it's safe to read non-reactively here.
+  const activeBrandModule = computed(() => themes?.[currentTheme.value] ?? null);
+  const lockedMaterial = computed(() => getBrandMaterial(activeBrandModule.value));
+  const isMaterialLocked = computed(() => lockedMaterial.value !== null);
+  const displayedMaterial = computed(() => lockedMaterial.value ?? currentMaterial.value);
+
+  /**
+   * Computed resolved mode that converts 'system' to actual 'light' or 'dark'
+   * Reactively updates when system preference changes
+   * @returns {string} 'light' or 'dark'
+   */
+  const resolvedMode = computed(() => {
+    if (currentMode.value === 'system') {
+      return systemPrefersDark.value ? 'dark' : 'light';
+    }
+    return currentMode.value;
+  });
+
+  /**
+   * Sets the color mode (system, light, or dark)
+   * @param {string} mode - The mode to set
+   */
+  const setMode = (mode) => {
+    currentMode.value = mode;
+    setCss();
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('preferredMode', mode);
+    }
+  };
+
+  /**
+   * Sets the contrast level (default or high)
+   * @param {string} contrast - The contrast level to set
+   */
+  const setContrast = (contrast) => {
+    currentContrast.value = contrast;
+    setCss();
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('preferredContrast', contrast);
+    }
+  };
+
+  /**
+   * Sets the active material (sandstone, steel, graphite, iron).
+   * Sandstone is the default — passing 'sandstone' (or anything unrecognized) removes any override.
+   * @param {string} material - The material name
+   */
+  const setMaterial = (material) => {
+    if (!MATERIALS.includes(material)) {
+      console.warn(`[useThemeManager] Unknown material '${material}'. Falling back to '${DEFAULT_MATERIAL}'.`);
+      material = DEFAULT_MATERIAL;
+    }
+    currentMaterial.value = material;
+    setCss();
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('preferredMaterial', material);
+    }
+  };
+
+  /**
+   * Sets the brand theme (dp, tmo, standard themes, etc.)
+   * Only functional when includeThemes is true
+   * @param {string} theme - The theme to set
+   */
+  const setTheme = (theme) => {
+    if (!includeThemes) {
+      console.warn('[useThemeManager] Theme switching disabled. Use includeThemes: true to enable.');
+      return;
+    }
+    currentTheme.value = theme;
+    setCss();
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('preferredTheme', theme);
+    }
+  };
+
+  /**
+   * Applies brand theme using shared config.js function
+   * @param {string} brandName - The brand theme name
+   */
+  const applyBrandTheme = (brandName) => {
+    // DP is the base brand — clearing the overlay reverts to it.
+    if (brandName === 'dp') {
+      setBrand(null, document.documentElement);
+      return;
+    }
+
+    const theme = themes && themes[brandName];
+
+    if (!theme) {
+      console.warn(`[useThemeManager] Theme "${brandName}" not found in loaded themes`);
+      return;
+    }
+
+    if (!theme.brand?.css) {
+      console.warn(`[useThemeManager] Theme "${brandName}" missing brand.css property`);
+      return;
+    }
+
+    setBrand(theme, document.documentElement);
+  };
+
+  /**
+   * Applies the selected material via the shared setMaterial config function.
+   * Material switching is attribute-only — `setMaterialConfig` toggles
+   * `data-dt-material` and the pre-bundled per-material CSS handles the rest.
+   * @param {string} material - The material name
+   */
+  const applyMaterialTheme = (material) => {
+    setMaterialConfig(material === DEFAULT_MATERIAL ? null : material, document.documentElement);
+  };
+
+  /**
+   * Applies contrast theme using shared config.js function
+   * @param {string} contrast - The contrast level (default or high)
+   */
+  const applyContrastTheme = (contrast) => {
+    if (contrast === 'high') {
+      const contrastTheme = themes && themes['high-contrast'];
+
+      if (!contrastTheme) {
+        console.warn('[useThemeManager] High contrast theme not found in loaded themes');
+        return;
+      }
+
+      if (!contrastTheme.contrast?.css) {
+        console.warn('[useThemeManager] High contrast theme missing contrast.css property');
+        return;
+      }
+
+      // Use shared setContrast function from config.js
+      setContrastConfig(contrastTheme, document.documentElement);
+    } else {
+      // Remove contrast by passing null (shared function handles cleanup)
+      setContrastConfig(null, document.documentElement);
+    }
+  };
+
+  /**
+   * Applies current theme/mode/contrast settings to the DOM
+   * Uses shared config.js functions for theme management
+   */
+  // eslint-disable-next-line complexity
+  const setCss = () => {
+    // SSR guard - do nothing during server-side rendering
+    if (typeof document === 'undefined') return;
+
+    // Validate mode
+    if (!MODES.includes(currentMode.value)) {
+      currentMode.value = DEFAULT_MODE;
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem('preferredMode', currentMode.value);
+      }
+    }
+
+    // Resolve system mode to actual light/dark
+    const mode = currentMode.value === 'system'
+      ? (prefersDarkMediaQuery?.matches ? 'dark' : 'light')
+      : currentMode.value;
+
+    const brandName = currentTheme.value || 'dp';
+    const contrast = currentContrast.value || 'default';
+    // displayedMaterial supersedes currentMaterial on locked brands, so the
+    // user's saved preference is preserved for round-trip back to dp/tmo.
+    const material = displayedMaterial.value || DEFAULT_MATERIAL;
+
+    // Use shared setMode function from config.js (handles attribute setting)
+    setModeConfig(mode, document.documentElement);
+
+    if (!isMaterialLocked.value) {
+      applyMaterialTheme(material);
+    }
+    applyBrandTheme(brandName);
+    applyContrastTheme(contrast);
+    syncBrowserThemeColor();
+  };
+
+  onMounted(() => {
+    startTracking(setCss);
+  });
+
+  onUnmounted(() => {
+    stopTracking(setCss);
+  });
+
+  // Return public API
+  return {
+    // State (refs from inject)
+    currentMode,
+    currentTheme,
+    currentContrast,
+    currentMaterial,
+    themes,
+
+    // Computed
+    currentModeIconName,
+    resolvedMode,
+    isMaterialLocked,
+    lockedMaterial,
+    displayedMaterial,
+
+    // Methods
+    setMode,
+    setContrast,
+    setMaterial,
+    setTheme,
+
+    // Theme utilities (only when includeThemes is enabled)
+    // Static module constants — no computed wrapper, same as `materials` below.
+    standardThemes: STANDARD_THEMES,
+    colorAssistiveThemes: COLOR_ASSISTIVE_THEMES,
+    formatThemeName,
+
+    // Constants
+    modes: MODES,
+    materials: MATERIALS,
+  };
+}

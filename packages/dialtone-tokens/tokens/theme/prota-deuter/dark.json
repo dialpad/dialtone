@@ -1,0 +1,27 @@
+{
+  "color": {
+    "surface": {
+      "critical": { "value": "{color.red.200}", "type": "color" },
+      "info-opaque": {
+        "value": "{color.blue.300}",
+        "type": "color",
+        "$extensions": { "studio.tokens": { "modify": { "type": "alpha", "value": "0.6", "space": "oklch" } } }
+      },
+      "positive-opaque": {
+        "value": "{color.green.300}",
+        "type": "color",
+        "$extensions": { "studio.tokens": { "modify": { "type": "alpha", "value": "0.6", "space": "oklch" } } }
+      },
+      "positive-subtle-opaque": {
+        "value": "{color.green.200}",
+        "type": "color",
+        "$extensions": { "studio.tokens": { "modify": { "type": "alpha", "value": "0.3", "space": "oklch" } } }
+      },
+      "critical-opaque": {
+        "value": "{color.magenta.300}",
+        "type": "color",
+        "$extensions": { "studio.tokens": { "modify": { "type": "alpha", "value": "0.65", "space": "oklch" } } }
+      }
+    }
+  }
+}

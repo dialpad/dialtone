@@ -7,12 +7,12 @@
         "description": "Default text color throughout the UI."
       },
       "secondary": {
-        "value": "{color.black.700}",
+        "value": "{color.black.750}",
         "type": "color",
         "description": "Example uses include introduction paragraphs, labels, and descriptions paired with form elements."
       },
       "tertiary": {
-        "value": "{color.black.600}",
+        "value": "{color.black.650}",
         "type": "color",
         "description": "Used to imply visual hierarchy relative to primary and secondary text colors, e.g. headlines and labels."
       },
@@ -24,7 +24,7 @@
             "modify": {
               "type": "alpha",
               "value": ".5",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -40,29 +40,56 @@
         "description": "Used for text paired with disabled content or components, like the form elements."
       },
       "critical": {
-        "value": "{color.red.450}",
+        "value": "{color.red.600}",
         "type": "color",
         "description": "Expresses an error, danger, or otherwise critical state."
       },
       "critical-strong": {
-        "value": "{color.red.500}",
+        "value": "{color.red.700}",
         "type": "color",
         "description": "Expresses an error, danger, or otherwise critical state on surfaces that require a stronger contrast."
       },
-      "success": {
-        "value": "{color.green.500}",
+      "positive": {
+        "value": "{color.green.700}",
         "type": "color",
         "description": "Indicates a positive state."
       },
-      "success-strong": {
-        "value": "{color.green.600}",
+      "positive-strong": {
+        "value": "{color.green.800}",
         "type": "color",
         "description": "Indicates a strong positive state on surfaces that require a stronger contrast."
       },
-      "warning": {
-        "value": "{color.gold.600}",
+      "success": {
+        "value": "{color.foreground.positive}",
         "type": "color",
-        "description": "Indicates information that requires user’s attention and further action may be necessary."
+        "$deprecated": "Use positive instead.",
+        "description": "Indicates a positive state."
+      },
+      "success-strong": {
+        "value": "{color.foreground.positive-strong}",
+        "type": "color",
+        "$deprecated": "Use positive-strong instead.",
+        "description": "Indicates a strong positive state on surfaces that require a stronger contrast."
+      },
+      "warning": {
+        "value": "{color.gold.700}",
+        "type": "color",
+        "description": "Indicates a warning state."
+      },
+      "warning-strong": {
+        "value": "{color.gold.800}",
+        "type": "color",
+        "description": "Indicates a strong warning state on surfaces that require a stronger contrast."
+      },
+      "info": {
+        "value": "{color.blue.700}",
+        "type": "color",
+        "description": "Indicates a generally informational state."
+      },
+      "info-strong": {
+        "value": "{color.blue.800}",
+        "type": "color",
+        "description": "Indicates a generally informational state on surfaces that require a stronger contrast."
       },
       "primary-inverted": {
         "value": "{color.black.100}",
@@ -87,7 +114,7 @@
             "modify": {
               "type": "alpha",
               "value": ".65",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         },
@@ -113,29 +140,51 @@
         "type": "color",
         "description": "Critical strong text that sits on high-contrast surfaces or backgrounds"
       },
-      "success-inverted": {
-        "value": "{color.green.350}",
-        "type": "color",
-        "description": "Success text that sits on high-contrast surfaces or backgrounds"
-      },
-      "success-strong-inverted": {
+      "positive-inverted": {
         "value": "{color.green.200}",
         "type": "color",
-        "description": "Success strong text that sits on high-contrast surfaces or backgrounds"
+        "description": "Positive text that sits on high-contrast surfaces or backgrounds."
+      },
+      "positive-strong-inverted": {
+        "value": "{color.green.50}",
+        "type": "color",
+        "description": "Positive strong text that sits on high-contrast surfaces or backgrounds."
+      },
+      "success-inverted": {
+        "value": "{color.foreground.positive-inverted}",
+        "type": "color",
+        "$deprecated": "Use positive-inverted instead.",
+        "description": "Success text that sits on high-contrast surfaces or backgrounds."
+      },
+      "success-strong-inverted": {
+        "value": "{color.foreground.positive-strong-inverted}",
+        "type": "color",
+        "$deprecated": "Use positive-strong-inverted instead.",
+        "description": "Success strong text that sits on high-contrast surfaces or backgrounds."
       },
       "warning-inverted": {
-        "value": "{color.gold.400}",
+        "value": "{color.gold.500}",
         "type": "color",
         "description": "Warning text that sits on high-contrast surfaces or backgrounds"
+      },
+      "info-inverted": {
+        "value": "{color.blue.300}",
+        "type": "color",
+        "description": "Info text that sits on high-contrast surfaces or backgrounds."
+      },
+      "info-strong-inverted": {
+        "value": "{color.blue.200}",
+        "type": "color",
+        "description": "Info strong text that sits on high-contrast surfaces or backgrounds."
       }
     },
     "link": {
       "primary": {
-        "value": "{color.purple.400}",
+        "value": "{color.purple.500}",
         "type": "color"
       },
       "primary-hover": {
-        "value": "{color.purple.500}",
+        "value": "{color.purple.700}",
         "type": "color"
       },
       "critical": {
@@ -146,13 +195,23 @@
         "value": "{color.foreground.critical-strong}",
         "type": "color"
       },
-      "success": {
-        "value": "{color.foreground.success}",
+      "positive": {
+        "value": "{color.foreground.positive}",
         "type": "color",
         "description": "positive"
       },
+      "positive-hover": {
+        "value": "{color.foreground.positive-strong}",
+        "type": "color"
+      },
+      "success": {
+        "value": "{color.foreground.positive}",
+        "type": "color",
+        "$deprecated": "Use positive instead.",
+        "description": "positive"
+      },
       "success-hover": {
-        "value": "{color.foreground.success-strong}",
+        "value": "{color.foreground.positive-strong}",
         "type": "color"
       },
       "warning": {
@@ -160,15 +219,23 @@
         "type": "color"
       },
       "warning-hover": {
-        "value": "{color.gold.700}",
+        "value": "{color.gold.900}",
+        "type": "color"
+      },
+      "info": {
+        "value": "{color.blue.600}",
+        "type": "color"
+      },
+      "info-hover": {
+        "value": "{color.blue.700}",
         "type": "color"
       },
       "muted": {
-        "value": "{color.foreground.secondary}",
+        "value": "{color.foreground.tertiary}",
         "type": "color"
       },
       "muted-hover": {
-        "value": "{color.foreground.primary}",
+        "value": "{color.foreground.secondary}",
         "type": "color"
       },
       "disabled": {
@@ -180,7 +247,7 @@
         "type": "color"
       },
       "primary-inverted": {
-        "value": "{color.purple.250}",
+        "value": "{color.purple.200}",
         "type": "color"
       },
       "primary-inverted-hover": {
@@ -195,13 +262,23 @@
         "value": "{color.foreground.critical-strong-inverted}",
         "type": "color"
       },
-      "success-inverted": {
-        "value": "{color.foreground.success-inverted}",
+      "positive-inverted": {
+        "value": "{color.foreground.positive-inverted}",
         "type": "color"
       },
-      "success-inverted-hover": {
-        "value": "{color.foreground.success-strong-inverted}",
+      "positive-inverted-hover": {
+        "value": "{color.foreground.positive-strong-inverted}",
         "type": "color"
+      },
+      "success-inverted": {
+        "value": "{color.foreground.positive-inverted}",
+        "type": "color",
+        "$deprecated": "Use positive-inverted instead."
+      },
+      "success-inverted-hover": {
+        "value": "{color.foreground.positive-strong-inverted}",
+        "type": "color",
+        "$deprecated": "Use positive-inverted-hover instead."
       },
       "warning-inverted": {
         "value": "{color.foreground.warning-inverted}",
@@ -209,6 +286,14 @@
       },
       "warning-inverted-hover": {
         "value": "{color.gold.300}",
+        "type": "color"
+      },
+      "info-inverted": {
+        "value": "{color.foreground.info-inverted}",
+        "type": "color"
+      },
+      "info-inverted-hover": {
+        "value": "{color.foreground.info-strong-inverted}",
         "type": "color"
       },
       "muted-inverted": {
@@ -226,9 +311,74 @@
       "disabled-inverted-hover": {
         "value": "{color.foreground.disabled-inverted}",
         "type": "color"
+      },
+      "mention": {
+        "value": "{color.link.primary}",
+        "type": "color"
+      },
+      "mention-hover": {
+        "value": "{color.link.primary-hover}",
+        "type": "color"
+      },
+      "mention-background": {
+        "value": "{color.surface.brand-opaque}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".25",
+              "space": "oklch"
+            }
+          }
+        }
+      },
+      "mention-background-hover": {
+        "value": "{color.surface.brand-opaque}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".5",
+              "space": "oklch"
+            }
+          }
+        }
+      },
+      "mention-inverted-background": {
+        "value": "{color.surface.brand-opaque}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".3",
+              "space": "oklch"
+            }
+          }
+        }
+      },
+      "mention-inverted-background-hover": {
+        "value": "{color.surface.brand-opaque}",
+        "type": "color",
+        "$extensions": {
+          "studio.tokens": {
+            "modify": {
+              "type": "alpha",
+              "value": ".2",
+              "space": "oklch"
+            }
+          }
+        }
       }
     },
     "surface": {
+      "overlay": {
+        "value": "{color.black.50}",
+        "type": "color",
+        "description": "For overlay surfaces like modals, popovers, and dialogs."
+      },
       "primary": {
         "value": "{color.black.50}",
         "type": "color",
@@ -269,9 +419,15 @@
         "type": "color",
         "description": "Background surface color highlighting messaging or elements that may require user's attention."
       },
-      "success": {
+      "positive": {
         "value": "{color.green.100}",
         "type": "color",
+        "description": "Background surface color containing messaging or elements expressing a positive or successful state."
+      },
+      "success": {
+        "value": "{color.surface.positive}",
+        "type": "color",
+        "$deprecated": "Use positive instead.",
         "description": "Background surface color containing messaging or elements expressing a positive or successful state."
       },
       "info": {
@@ -294,9 +450,15 @@
         "type": "color",
         "description": "A softer version of the default warning surface."
       },
-      "success-subtle": {
+      "positive-subtle": {
         "value": "{color.green.50}",
         "type": "color",
+        "description": "A softer version of the default positive surface."
+      },
+      "success-subtle": {
+        "value": "{color.surface.positive-subtle}",
+        "type": "color",
+        "$deprecated": "Use positive-subtle instead.",
         "description": "A softer version of the default success surface."
       },
       "info-subtle": {
@@ -310,95 +472,101 @@
         "description": "A softer version of the default informational surface."
       },
       "critical-strong": {
-        "value": "{color.red.450}",
+        "value": "{color.red.600}",
         "type": "color",
         "description": "A contrasting critical surface, most likely paired with inverted foreground colors."
       },
       "warning-strong": {
-        "value": "{color.gold.350}",
+        "value": "{color.gold.500}",
         "type": "color",
         "description": "A contrasting warning surface, most likely paired with inverted foreground colors."
       },
-      "success-strong": {
-        "value": "{color.green.500}",
+      "positive-strong": {
+        "value": "{color.green.600}",
         "type": "color",
         "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
       },
+      "success-strong": {
+        "value": "{color.surface.positive-strong}",
+        "type": "color",
+        "$deprecated": "Use positive-strong instead.",
+        "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
+      },
       "info-strong": {
-        "value": "{color.blue.500}",
+        "value": "{color.blue.600}",
         "type": "color",
         "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
       },
       "brand-strong": {
-        "value": "{color.purple.400}",
+        "value": "{color.purple.500}",
         "type": "color",
         "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
       },
       "primary-opaque": {
-        "value": "{color.surface.primary}",
+        "value": "{color.surface.secondary}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".96",
-              "space": "hsl"
+              "value": ".07",
+              "space": "oklch"
             }
           }
         },
         "description": "Primary surface as opaque background color."
       },
       "secondary-opaque": {
-        "value": "{color.black.900}",
+        "value": "{color.surface.moderate}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".02",
-              "space": "hsl"
+              "value": ".3",
+              "space": "oklch"
             }
           }
         },
         "description": "Secondary surface as opaque background color."
       },
       "moderate-opaque": {
-        "value": "{color.black.900}",
+        "value": "{color.surface.bold}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".10",
-              "space": "hsl"
+              "value": ".45",
+              "space": "oklch"
             }
           }
         },
         "description": "Moderate surface as opaque background color."
       },
       "bold-opaque": {
-        "value": "{color.black.900}",
+        "value": "{color.surface.strong}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".19",
-              "space": "hsl"
+              "value": ".3",
+              "space": "oklch"
             }
           }
         },
         "description": "Bold surface as opaque background color."
       },
       "strong-opaque": {
-        "value": "{color.black.900}",
+        "value": "{color.surface.contrast}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
               "value": ".76",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         },
@@ -411,8 +579,8 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".94",
-              "space": "hsl"
+              "value": ".92",
+              "space": "oklch"
             }
           }
         },
@@ -425,8 +593,8 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".31",
-              "space": "hsl"
+              "value": ".67",
+              "space": "oklch"
             }
           }
         },
@@ -439,25 +607,31 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".50",
-              "space": "hsl"
+              "value": ".52",
+              "space": "oklch"
             }
           }
         },
         "description": "Warning surface as opaque background color"
       },
-      "success-opaque": {
+      "positive-opaque": {
         "value": "{color.green.200}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".25",
-              "space": "hsl"
+              "value": ".45",
+              "space": "oklch"
             }
           }
         },
+        "description": "Positive surface as opaque background color."
+      },
+      "success-opaque": {
+        "value": "{color.surface.positive-opaque}",
+        "type": "color",
+        "$deprecated": "Use positive-opaque instead. ",
         "description": "Success surface as opaque background color."
       },
       "info-opaque": {
@@ -467,8 +641,8 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".35",
-              "space": "hsl"
+              "value": ".6",
+              "space": "oklch"
             }
           }
         },
@@ -481,8 +655,8 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".27",
-              "space": "hsl"
+              "value": ".66",
+              "space": "oklch"
             }
           }
         },
@@ -496,7 +670,7 @@
             "modify": {
               "type": "alpha",
               "value": ".5",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         },
@@ -509,50 +683,56 @@
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".50",
-              "space": "hsl"
+              "value": ".30",
+              "space": "oklch"
             }
           }
         },
         "description": "Warning subtle surface as opaque background color"
       },
-      "success-subtle-opaque": {
-        "value": "{color.green.100}",
+      "positive-subtle-opaque": {
+        "value": "{color.surface.positive}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
               "value": ".50",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         },
+        "description": "Positive subtle surface as opaque background color."
+      },
+      "success-subtle-opaque": {
+        "value": "{color.surface.positive-subtle-opaque}",
+        "type": "color",
+        "$deprecated": "Use positive-subtle-opaque instead.",
         "description": "Success subtle surface as opaque background color."
       },
       "info-subtle-opaque": {
-        "value": "{color.blue.100}",
+        "value": "{color.surface.info}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
               "value": ".50",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         },
         "description": "Info surface as opaque background color."
       },
       "brand-subtle-opaque": {
-        "value": "{color.purple.200}",
+        "value": "{color.surface.brand}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
-              "value": ".20",
-              "space": "hsl"
+              "value": ".5",
+              "space": "oklch"
             }
           }
         },
@@ -589,27 +769,33 @@
         "description": "An inverted surface for lightened content and elements, most likely paired with inverted foreground colors."
       },
       "critical-inverted": {
-        "value": "{color.red.900}",
+        "value": "{color.red.950}",
         "type": "color",
         "description": "Background surface color containing error, danger, or otherwise critical messaging or elements."
       },
       "warning-inverted": {
-        "value": "{color.gold.900}",
+        "value": "{color.gold.950}",
         "type": "color",
         "description": "Background surface color highlighting messaging or elements that may require user's attention."
       },
-      "success-inverted": {
+      "positive-inverted": {
         "value": "{color.green.900}",
         "type": "color",
         "description": "Background surface color containing messaging or elements expressing a positive or successful state."
       },
+      "success-inverted": {
+        "value": "{color.surface.positive-inverted}",
+        "type": "color",
+        "$deprecated": "Use positive-inverted instead.",
+        "description": "Background surface color containing messaging or elements expressing a positive or successful state."
+      },
       "info-inverted": {
-        "value": "{color.blue.900}",
+        "value": "{color.blue.950}",
         "type": "color",
         "description": "Background surface color containing messaging or elements communicated as generally informational."
       },
       "brand-inverted": {
-        "value": "{color.purple.600}",
+        "value": "{color.purple.950}",
         "type": "color",
         "description": "Background surface color containing messaging or elements communicated as generally informational."
       },
@@ -623,9 +809,15 @@
         "type": "color",
         "description": "A softer version of the default warning surface."
       },
-      "success-subtle-inverted": {
+      "positive-subtle-inverted": {
         "value": "{color.green.1000}",
         "type": "color",
+        "description": "A softer version of the default positive surface."
+      },
+      "success-subtle-inverted": {
+        "value": "{color.surface.positive-subtle-inverted}",
+        "type": "color",
+        "$deprecated": "Use positive-subtle-inverted instead.",
         "description": "A softer version of the default success surface."
       },
       "info-subtle-inverted": {
@@ -648,18 +840,18 @@
         "type": "color",
         "description": "A contrasting warning surface, most likely paired with inverted foreground colors."
       },
-      "success-strong-inverted": {
-        "value": "{color.green.350}",
+      "positive-strong-inverted": {
+        "value": "{color.green.950}",
         "type": "color",
         "description": "A contrasting positive state surface, most likely paired with inverted foreground colors."
       },
       "info-strong-inverted": {
-        "value": "{color.blue.425}",
+        "value": "{color.blue.400}",
         "type": "color",
         "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
       },
       "brand-strong-inverted": {
-        "value": "{color.purple.250}",
+        "value": "{color.purple.200}",
         "type": "color",
         "description": "A contrasting informational surface, most likely paired with inverted foreground colors."
       },
@@ -671,7 +863,7 @@
             "modify": {
               "type": "alpha",
               "value": ".85",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         },
@@ -685,7 +877,7 @@
             "modify": {
               "type": "alpha",
               "value": ".15",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         },
@@ -699,7 +891,7 @@
             "modify": {
               "type": "alpha",
               "value": ".23",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         },
@@ -713,7 +905,7 @@
             "modify": {
               "type": "alpha",
               "value": ".32",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         },
@@ -727,7 +919,7 @@
             "modify": {
               "type": "alpha",
               "value": ".67",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         },
@@ -741,77 +933,83 @@
             "modify": {
               "type": "alpha",
               "value": ".97",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         },
         "description": "Contrast surface as opaque background color."
       },
       "critical-opaque-inverted": {
-        "value": "{color.red.700}",
+        "value": "{color.red.900}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
               "value": ".50",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         },
         "description": "Critical surface as opaque background color."
       },
       "warning-opaque-inverted": {
-        "value": "{color.gold.700}",
+        "value": "{color.gold.900}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
               "value": ".35",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         },
         "description": "Warning surface as opaque background color"
       },
-      "success-opaque-inverted": {
-        "value": "{color.green.600}",
+      "positive-opaque-inverted": {
+        "value": "{color.green.900}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
               "value": ".30",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         },
+        "description": "Positive surface as opaque background color."
+      },
+      "success-opaque-inverted": {
+        "value": "{color.surface.positive-opaque-inverted}",
+        "type": "color",
+        "$deprecated": "Use positive-opaque-inverted instead.",
         "description": "Success surface as opaque background color."
       },
       "info-opaque-inverted": {
-        "value": "{color.blue.900}",
+        "value": "{color.blue.950}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
               "value": ".6",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         },
         "description": "Info surface as opaque background color."
       },
       "brand-opaque-inverted": {
-        "value": "{color.purple.600}",
+        "value": "{color.purple.950}",
         "type": "color",
         "$extensions": {
           "studio.tokens": {
             "modify": {
               "type": "alpha",
               "value": ".8",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         },
@@ -825,7 +1023,7 @@
             "modify": {
               "type": "alpha",
               "value": ".6",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         },
@@ -839,13 +1037,13 @@
             "modify": {
               "type": "alpha",
               "value": ".3",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         },
         "description": "Warning subtle surface as opaque background color"
       },
-      "success-subtle-opaque-inverted": {
+      "positive-subtle-opaque-inverted": {
         "value": "{color.green.1000}",
         "type": "color",
         "$extensions": {
@@ -853,10 +1051,16 @@
             "modify": {
               "type": "alpha",
               "value": ".66",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         },
+        "description": "Positive subtle surface as opaque background color."
+      },
+      "success-subtle-opaque-inverted": {
+        "value": "{color.surface.positive-subtle-opaque-inverted}",
+        "type": "color",
+        "$deprecated": "Use positive-subtle-opaque-inverted instead.",
         "description": "Success subtle surface as opaque background color."
       },
       "info-subtle-opaque-inverted": {
@@ -867,7 +1071,7 @@
             "modify": {
               "type": "alpha",
               "value": ".66",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         },
@@ -881,7 +1085,7 @@
             "modify": {
               "type": "alpha",
               "value": ".66",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         },
@@ -895,7 +1099,7 @@
             "modify": {
               "type": "alpha",
               "value": ".65",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         },
@@ -915,7 +1119,7 @@
             "modify": {
               "type": "alpha",
               "value": ".11",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -928,7 +1132,7 @@
             "modify": {
               "type": "alpha",
               "value": ".17",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -941,7 +1145,7 @@
             "modify": {
               "type": "alpha",
               "value": ".3",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -954,21 +1158,30 @@
             "modify": {
               "type": "alpha",
               "value": ".5",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
       },
       "critical": {
-        "value": "{color.red.450}",
+        "value": "{color.red.600}",
+        "type": "color"
+      },
+      "positive": {
+        "value": "{color.green.700}",
         "type": "color"
       },
       "success": {
-        "value": "{color.green.475}",
-        "type": "color"
+        "value": "{color.border.positive}",
+        "type": "color",
+        "$deprecated": "Use positive instead."
       },
       "warning": {
-        "value": "{color.gold.400}",
+        "value": "{color.gold.500}",
+        "type": "color"
+      },
+      "info": {
+        "value": "{color.blue.600}",
         "type": "color"
       },
       "brand": {
@@ -979,32 +1192,50 @@
         "value": "{color.red.300}",
         "type": "color"
       },
-      "success-subtle": {
+      "positive-subtle": {
         "value": "{color.green.300}",
         "type": "color"
+      },
+      "success-subtle": {
+        "value": "{color.border.positive-subtle}",
+        "type": "color",
+        "$deprecated": "Use positive-subtle instead."
       },
       "warning-subtle": {
         "value": "{color.gold.300}",
         "type": "color"
       },
+      "info-subtle": {
+        "value": "{color.blue.300}",
+        "type": "color"
+      },
       "brand-subtle": {
-        "value": "{color.purple.250}",
+        "value": "{color.purple.300}",
         "type": "color"
       },
       "critical-strong": {
-        "value": "{color.red.600}",
+        "value": "{color.red.800}",
+        "type": "color"
+      },
+      "positive-strong": {
+        "value": "{color.green.900}",
         "type": "color"
       },
       "success-strong": {
-        "value": "{color.green.600}",
-        "type": "color"
+        "value": "{color.border.positive-strong}",
+        "type": "color",
+        "$deprecated": "Use positive-strong instead."
       },
       "warning-strong": {
-        "value": "{color.gold.500}",
+        "value": "{color.gold.700}",
+        "type": "color"
+      },
+      "info-strong": {
+        "value": "{color.blue.800}",
         "type": "color"
       },
       "brand-strong": {
-        "value": "{color.purple.500}",
+        "value": "{color.purple.800}",
         "type": "color"
       },
       "subtle-inverted": {
@@ -1015,7 +1246,7 @@
             "modify": {
               "type": "alpha",
               "value": ".12",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -1028,7 +1259,7 @@
             "modify": {
               "type": "alpha",
               "value": ".2",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -1041,7 +1272,7 @@
             "modify": {
               "type": "alpha",
               "value": ".35",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -1054,7 +1285,7 @@
             "modify": {
               "type": "alpha",
               "value": ".5",
-              "space": "hsl"
+              "space": "oklch"
             }
           }
         }
@@ -1063,44 +1294,72 @@
         "value": "{color.red.300}",
         "type": "color"
       },
-      "success-inverted": {
-        "value": "{color.green.425}",
+      "positive-inverted": {
+        "value": "{color.green.500}",
         "type": "color"
       },
+      "success-inverted": {
+        "value": "{color.border.positive-inverted}",
+        "type": "color",
+        "$deprecated": "Use positive-inverted instead."
+      },
       "warning-inverted": {
-        "value": "{color.gold.450}",
+        "value": "{color.gold.500}",
+        "type": "color"
+      },
+      "info-inverted": {
+        "value": "{color.blue.300}",
         "type": "color"
       },
       "brand-inverted": {
-        "value": "{color.purple.300}",
+        "value": "{color.purple.400}",
         "type": "color"
       },
       "critical-subtle-inverted": {
-        "value": "{color.red.700}",
+        "value": "{color.red.900}",
         "type": "color"
+      },
+      "positive-subtle-inverted": {
+        "value": "{color.green.900}",
+        "type": "color",
+        "$deprecated": "Use positive-subtle-inverted instead."
       },
       "success-subtle-inverted": {
-        "value": "{color.green.600}",
-        "type": "color"
+        "value": "{color.border.positive-subtle-inverted}",
+        "type": "color",
+        "$deprecated": "Use positive-subtle-inverted instead."
       },
       "warning-subtle-inverted": {
-        "value": "{color.gold.600}",
+        "value": "{color.gold.800}",
+        "type": "color"
+      },
+      "info-subtle-inverted": {
+        "value": "{color.blue.900}",
         "type": "color"
       },
       "brand-subtle-inverted": {
-        "value": "{color.purple.400}",
+        "value": "{color.purple.600}",
         "type": "color"
       },
       "critical-strong-inverted": {
         "value": "{color.red.200}",
         "type": "color"
       },
-      "success-strong-inverted": {
-        "value": "{color.green.400}",
+      "positive-strong-inverted": {
+        "value": "{color.green.500}",
         "type": "color"
+      },
+      "success-strong-inverted": {
+        "value": "{color.border.positive-strong-inverted}",
+        "type": "color",
+        "$deprecated": "Use positive-strong-inverted instead."
       },
       "warning-strong-inverted": {
         "value": "{color.gold.300}",
+        "type": "color"
+      },
+      "info-strong-inverted": {
+        "value": "{color.blue.200}",
         "type": "color"
       },
       "brand-strong-inverted": {
@@ -1108,7 +1367,7 @@
         "type": "color"
       },
       "focus": {
-        "value": "{color.blue.425}",
+        "value": "{color.blue.500}",
         "type": "color"
       },
       "ai": {
@@ -1138,7 +1397,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.categorical.04} "
               }
             }
@@ -1152,7 +1411,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.categorical.05} "
               }
             }
@@ -1166,7 +1425,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.categorical.06} "
               }
             }
@@ -1180,7 +1439,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".2",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.categorical.01} "
               }
             }
@@ -1194,7 +1453,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.categorical.08} "
               }
             }
@@ -1208,7 +1467,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.categorical.09} "
               }
             }
@@ -1222,7 +1481,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.categorical.10} "
               }
             }
@@ -1236,7 +1495,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".9",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.categorical.03} "
               }
             }
@@ -1250,7 +1509,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".2",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.categorical.06} "
               }
             }
@@ -1264,7 +1523,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".5",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.categorical.13}"
               }
             }
@@ -1278,7 +1537,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".4",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.categorical.14}"
               }
             }
@@ -1292,7 +1551,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.categorical.15} "
               }
             }
@@ -1306,7 +1565,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.categorical.04} "
               }
             }
@@ -1320,7 +1579,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.categorical.18} "
               }
             }
@@ -1334,7 +1593,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.categorical.01} "
               }
             }
@@ -1348,7 +1607,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.categorical.03} "
               }
             }
@@ -1362,7 +1621,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".2",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.categorical.06} "
               }
             }
@@ -1376,7 +1635,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.categorical.23} "
               }
             }
@@ -1390,70 +1649,70 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.categorical.10} "
               }
             }
           }
         },
         "01": {
-          "value": "{color.purple.350}",
-          "type": "color"
-        },
-        "01-hover": {
-          "value": "{color.purple.400}",
-          "type": "color"
-        },
-        "01-selected": {
           "value": "{color.purple.500}",
           "type": "color"
         },
-        "02": {
-          "value": "{color.magenta.300}",
+        "01-hover": {
+          "value": "{color.purple.600}",
           "type": "color"
         },
-        "02-hover": {
+        "01-selected": {
+          "value": "{color.purple.800}",
+          "type": "color"
+        },
+        "02": {
           "value": "{color.magenta.400}",
           "type": "color"
         },
+        "02-hover": {
+          "value": "{color.magenta.500}",
+          "type": "color"
+        },
         "02-selected": {
-          "value": "{color.magenta.475}",
+          "value": "{color.magenta.700}",
           "type": "color"
         },
         "03": {
-          "value": "{color.blue.425}",
-          "type": "color"
-        },
-        "03-hover": {
-          "value": "{color.blue.450}",
-          "type": "color"
-        },
-        "03-selected": {
           "value": "{color.blue.500}",
           "type": "color"
         },
+        "03-hover": {
+          "value": "{color.blue.600}",
+          "type": "color"
+        },
+        "03-selected": {
+          "value": "{color.blue.800}",
+          "type": "color"
+        },
         "04": {
-          "value": "{color.gold.400}",
+          "value": "{color.gold.500}",
           "type": "color"
         },
         "04-hover": {
-          "value": "{color.gold.450}",
-          "type": "color"
-        },
-        "04-selected": {
           "value": "{color.gold.600}",
           "type": "color"
         },
+        "04-selected": {
+          "value": "{color.gold.800}",
+          "type": "color"
+        },
         "05": {
-          "value": "{color.green.425}",
+          "value": "{color.green.600}",
           "type": "color"
         },
         "05-hover": {
-          "value": "{color.green.475}",
+          "value": "{color.green.700}",
           "type": "color"
         },
         "05-selected": {
-          "value": "{color.green.600}",
+          "value": "{color.green.900}",
           "type": "color"
         },
         "06": {
@@ -1493,15 +1752,15 @@
           "type": "color"
         },
         "09": {
-          "value": "{color.red.350}",
-          "type": "color"
-        },
-        "09-hover": {
           "value": "{color.red.400}",
           "type": "color"
         },
+        "09-hover": {
+          "value": "{color.red.500}",
+          "type": "color"
+        },
         "09-selected": {
-          "value": "{color.red.600}",
+          "value": "{color.red.800}",
           "type": "color"
         },
         "10-hover": {
@@ -1520,7 +1779,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1533,7 +1792,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".3",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1546,7 +1805,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1559,7 +1818,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".3",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1572,7 +1831,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1585,7 +1844,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".3",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1598,7 +1857,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1611,7 +1870,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".3",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1624,7 +1883,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1637,7 +1896,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".3",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1650,7 +1909,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1663,7 +1922,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".3",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1676,7 +1935,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1689,7 +1948,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".3",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1702,7 +1961,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1715,7 +1974,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".3",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1728,7 +1987,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1741,7 +2000,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".3",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1754,7 +2013,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1767,7 +2026,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".3",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1780,7 +2039,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1793,7 +2052,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".3",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1806,7 +2065,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1819,7 +2078,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".3",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1832,7 +2091,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1845,7 +2104,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".3",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1858,7 +2117,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1871,7 +2130,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".3",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1884,7 +2143,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1897,7 +2156,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".3",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1910,7 +2169,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1923,7 +2182,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".3",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1936,7 +2195,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1949,7 +2208,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".3",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1962,7 +2221,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1975,7 +2234,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".3",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -1988,7 +2247,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -2001,7 +2260,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".3",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -2014,7 +2273,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -2027,7 +2286,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".3",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -2064,62 +2323,62 @@
         "description": "Selected state for accent chart elements."
       },
       "positive": {
-        "value": "{color.green.425}",
+        "value": "{color.green.600}",
         "type": "color",
         "description": "Used for positive values, growth, or success indicators in charts, aka success."
       },
       "positive-hover": {
-        "value": "{color.green.475}",
+        "value": "{color.green.700}",
         "type": "color",
         "description": "Hover state for positive chart elements, aka success."
       },
       "positive-selected": {
-        "value": "{color.green.600}",
+        "value": "{color.green.900}",
         "type": "color",
         "description": "Selected state for positive chart elements, aka success."
       },
       "critical": {
-        "value": "{color.red.400}",
+        "value": "{color.red.500}",
         "type": "color",
         "description": "Used for negative values, errors, or critical indicators in charts, aka danger."
       },
       "critical-hover": {
-        "value": "{color.red.450}",
+        "value": "{color.red.600}",
         "type": "color",
         "description": "Hover state for critical chart elements, aka danger."
       },
       "critical-selected": {
-        "value": "{color.red.600}",
+        "value": "{color.red.800}",
         "type": "color",
         "description": "Selected state for critical chart elements, aka danger."
       },
       "warning-hover": {
-        "value": "{color.gold.500}",
+        "value": "{color.gold.700}",
         "type": "color",
         "description": "Hover state for warning chart elements."
       },
       "warning": {
-        "value": "{color.gold.400}",
+        "value": "{color.gold.500}",
         "type": "color",
         "description": "Used for cautionary or warning indicators in charts."
       },
       "warning-selected": {
-        "value": "{color.gold.600}",
+        "value": "{color.gold.800}",
         "type": "color",
         "description": "Selected state for warning chart elements."
       },
       "info": {
-        "value": "{color.blue.425}",
+        "value": "{color.blue.500}",
         "type": "color",
         "description": "Used for informational or neutral data points in charts."
       },
       "info-hover": {
-        "value": "{color.blue.450}",
+        "value": "{color.blue.600}",
         "type": "color",
         "description": "Hover state for info chart elements."
       },
       "info-selected": {
-        "value": "{color.blue.500}",
+        "value": "{color.blue.800}",
         "type": "color",
         "description": "Selected state for info chart elements."
       },
@@ -2142,7 +2401,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".15",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.surface.primary-inverted}"
               }
             }
@@ -2157,7 +2416,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.surface.primary-inverted}"
               }
             }
@@ -2172,7 +2431,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".1",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.sequential.10}"
               }
             }
@@ -2187,7 +2446,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".15",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.surface.primary-inverted}"
               }
             }
@@ -2202,7 +2461,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.surface.primary-inverted}"
               }
             }
@@ -2217,7 +2476,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".21",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.sequential.10}"
               }
             }
@@ -2232,7 +2491,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".15",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.surface.primary-inverted}"
               }
             }
@@ -2247,7 +2506,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.surface.primary-inverted}"
               }
             }
@@ -2262,7 +2521,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".33",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.sequential.10}"
               }
             }
@@ -2277,7 +2536,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".15",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.surface.primary-inverted}"
               }
             }
@@ -2292,7 +2551,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.surface.primary-inverted}"
               }
             }
@@ -2307,7 +2566,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".44",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.sequential.10}"
               }
             }
@@ -2322,7 +2581,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".15",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.surface.primary-inverted}"
               }
             }
@@ -2337,7 +2596,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.surface.primary-inverted}"
               }
             }
@@ -2352,7 +2611,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".56",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.sequential.10}"
               }
             }
@@ -2367,7 +2626,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".15",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.surface.primary-inverted}"
               }
             }
@@ -2382,7 +2641,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.surface.primary-inverted}"
               }
             }
@@ -2397,7 +2656,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".67",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.sequential.10}"
               }
             }
@@ -2412,7 +2671,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".15",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.surface.primary-inverted}"
               }
             }
@@ -2427,7 +2686,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.surface.primary-inverted}"
               }
             }
@@ -2442,7 +2701,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".79",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.sequential.10}"
               }
             }
@@ -2457,7 +2716,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".15",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.surface.primary-inverted}"
               }
             }
@@ -2472,7 +2731,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.surface.primary-inverted}"
               }
             }
@@ -2487,7 +2746,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".9",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.chart.sequential.10}"
               }
             }
@@ -2502,7 +2761,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".15",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.surface.primary-inverted}"
               }
             }
@@ -2517,7 +2776,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.surface.primary-inverted}"
               }
             }
@@ -2532,7 +2791,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".15",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.surface.primary-inverted}"
               }
             }
@@ -2547,7 +2806,7 @@
               "modify": {
                 "type": "mix",
                 "value": ".3",
-                "space": "hsl",
+                "space": "oklch",
                 "color": "{color.surface.primary-inverted}"
               }
             }
@@ -2571,7 +2830,7 @@
             "description": "Start color value for first sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
           },
           "01-end": {
-            "value": "{color.purple.550}",
+            "value": "{color.purple.900}",
             "type": "color",
             "description": "Ending color for first sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
           },
@@ -2581,7 +2840,7 @@
             "description": "Start color for second sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
           },
           "02-end": {
-            "value": "{color.magenta.600}",
+            "value": "{color.magenta.900}",
             "type": "color",
             "description": "End color for second sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
           },
@@ -2591,7 +2850,7 @@
             "description": "Start color for third sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
           },
           "03-end": {
-            "value": "{color.blue.600}",
+            "value": "{color.blue.900}",
             "type": "color",
             "description": "End color for third sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
           },
@@ -2601,7 +2860,7 @@
             "description": "Start color for fourth sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
           },
           "04-end": {
-            "value": "{color.gold.600}",
+            "value": "{color.gold.800}",
             "type": "color",
             "description": "End color for fourth sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
           },
@@ -2611,7 +2870,7 @@
             "description": "Start color for fifth sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
           },
           "05-end": {
-            "value": "{color.green.600}",
+            "value": "{color.green.900}",
             "type": "color",
             "description": "End color for fifth sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
           },
@@ -2651,7 +2910,7 @@
             "description": "Start color for ninth sequential range. Use to create a dynamically generated sequential series, must be paired with an end color."
           },
           "09-end": {
-            "value": "{color.red.700}",
+            "value": "{color.red.900}",
             "type": "color",
             "description": "End color for ninth sequential range. Use to create a dynamically generated sequential series, must be paired with an start color."
           },
@@ -2680,7 +2939,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Base default medium text style for main content."
+        "description": "Base default medium text style for main content.",
+        "$deprecated": "Use text tokens instead."
       },
       "md-compact": {
         "value": {
@@ -2691,7 +2951,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of medium body style."
+        "description": "A tighter-spaced version of medium body style.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm": {
         "value": {
@@ -2702,7 +2963,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Reduced small text style for less prominent or adjacent content."
+        "description": "Reduced small text style for less prominent or adjacent content.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm-compact": {
         "value": {
@@ -2713,7 +2975,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of small body style."
+        "description": "A tighter-spaced version of small body style.",
+        "$deprecated": "Use text tokens instead."
       }
     },
     "headline": {
@@ -2726,7 +2989,8 @@
           "textCase": "{font.text-case.uppercase}"
         },
         "type": "typography",
-        "description": "Visually concise and uppercase title text used above a paired headline. Also known as a kicker or overline."
+        "description": "Visually concise and uppercase title text used above a paired headline. Also known as a kicker or overline.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm": {
         "value": {
@@ -2737,7 +3001,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Smaller text size for secondary information or subheadings."
+        "description": "Smaller text size for secondary information or subheadings.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm-compact": {
         "value": {
@@ -2748,7 +3013,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of small headline style."
+        "description": "A tighter-spaced version of small headline style.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm-soft": {
         "value": {
@@ -2759,7 +3025,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A softer font weight version of small headline style."
+        "description": "A softer font weight version of small headline style.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm-soft-compact": {
         "value": {
@@ -2770,7 +3037,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A softer font weight, tighter-spaced version of small headline style."
+        "description": "A softer font weight, tighter-spaced version of small headline style.",
+        "$deprecated": "Use text tokens instead."
       },
       "md": {
         "value": {
@@ -2781,7 +3049,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Medium-sized base text style for headlines."
+        "description": "Medium-sized base text style for headlines.",
+        "$deprecated": "Use text tokens instead."
       },
       "md-compact": {
         "value": {
@@ -2792,7 +3061,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of medium headline style."
+        "description": "A tighter-spaced version of medium headline style.",
+        "$deprecated": "Use text tokens instead."
       },
       "lg": {
         "value": {
@@ -2803,7 +3073,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Large text style for headlines to attract attention."
+        "description": "Large text style for headlines to attract attention.",
+        "$deprecated": "Use text tokens instead."
       },
       "lg-soft": {
         "value": {
@@ -2814,7 +3085,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A softer font weight version of large headline style."
+        "description": "A softer font weight version of large headline style.",
+        "$deprecated": "Use text tokens instead."
       },
       "lg-compact": {
         "value": {
@@ -2825,7 +3097,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of large body style."
+        "description": "A tighter-spaced version of large body style.",
+        "$deprecated": "Use text tokens instead."
       },
       "lg-soft-compact": {
         "value": {
@@ -2836,51 +3109,56 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A softer font weight, tighter spaced version of large headline style."
+        "description": "A softer font weight, tighter spaced version of large headline style.",
+        "$deprecated": "Use text tokens instead."
       },
       "xl": {
         "value": {
           "fontFamily": "{font.family.body}",
-          "fontWeight": "{font.weight.medium}",
+          "fontWeight": "{font.weight.bold}",
           "lineHeight": "{font.lineHeight.200}",
           "fontSize": "{font.size.400}",
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Extra large text style for high importance headlines."
+        "description": "Extra large text style for high importance headlines.",
+        "$deprecated": "Use text tokens instead."
       },
       "xl-compact": {
         "value": {
           "fontFamily": "{font.family.body}",
-          "fontWeight": "{font.weight.medium}",
+          "fontWeight": "{font.weight.bold}",
           "lineHeight": "{font.lineHeight.100}",
           "fontSize": "{font.size.400}",
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of extra large headline style."
+        "description": "A tighter-spaced version of extra large headline style.",
+        "$deprecated": "Use text tokens instead."
       },
       "xxl": {
         "value": {
           "fontFamily": "{font.family.body}",
-          "fontWeight": "{font.weight.medium}",
+          "fontWeight": "{font.weight.bold}",
           "lineHeight": "{font.lineHeight.200}",
           "fontSize": "{font.size.500}",
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Largest text style for extra extra large content."
+        "description": "Largest text style for extra extra large content.",
+        "$deprecated": "Use text tokens instead."
       },
       "xxl-compact": {
         "value": {
           "fontFamily": "{font.family.body}",
-          "fontWeight": "{font.weight.medium}",
-          "lineHeight": "{font.lineHeight.100}",
+          "fontWeight": "{font.weight.bold}",
+          "lineHeight": "{font.lineHeight.200}",
           "fontSize": "{font.size.500}",
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of extra extra large headline style."
+        "description": "A tighter-spaced version of extra extra large headline style.",
+        "$deprecated": "Use text tokens instead."
       }
     },
     "label": {
@@ -2893,7 +3171,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Base default medium-sized text style for labels, providing clear identification and categorization."
+        "description": "Base default medium-sized text style for labels, providing clear identification and categorization.",
+        "$deprecated": "Use text tokens instead."
       },
       "md-compact": {
         "value": {
@@ -2904,7 +3183,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of medium label style."
+        "description": "A tighter-spaced version of medium label style.",
+        "$deprecated": "Use text tokens instead."
       },
       "md-plain": {
         "value": {
@@ -2915,7 +3195,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A non-bold version of medium label style."
+        "description": "A non-bold version of medium label style.",
+        "$deprecated": "Use text tokens instead."
       },
       "md-plain-compact": {
         "value": {
@@ -2926,7 +3207,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A non-bolded, tighter-spaced version of medium label style."
+        "description": "A non-bolded, tighter-spaced version of medium label style.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm": {
         "value": {
@@ -2937,7 +3219,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Smaller text style for labels when space is limited or for secondary information or to convey a slightly lower hierachy."
+        "description": "Smaller text style for labels when space is limited or for secondary information or to convey a slightly lower hierachy.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm-compact": {
         "value": {
@@ -2948,7 +3231,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A tighter-spaced version of small label style."
+        "description": "A tighter-spaced version of small label style.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm-plain": {
         "value": {
@@ -2959,7 +3243,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A non-bold version of small label style."
+        "description": "A non-bold version of small label style.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm-plain-compact": {
         "value": {
@@ -2970,7 +3255,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "A non-bolded, tighter-spaced version of small label style."
+        "description": "A non-bolded, tighter-spaced version of small label style.",
+        "$deprecated": "Use text tokens instead."
       }
     },
     "helper": {
@@ -2983,7 +3269,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Base default medium-sized text style for supplementary contextual information."
+        "description": "Base default medium-sized text style for supplementary contextual information.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm": {
         "value": {
@@ -2994,7 +3281,8 @@
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Smaller text size for subtle guidance or additional context, minimizing visual disruption."
+        "description": "Smaller text size for subtle guidance or additional context, minimizing visual disruption.",
+        "$deprecated": "Use text tokens instead."
       }
     },
     "code": {
@@ -3003,22 +3291,24 @@
           "fontFamily": "{font.family.mono}",
           "fontWeight": "{font.weight.normal}",
           "lineHeight": "{font.lineHeight.200}",
-          "fontSize": "{font.size.200}",
+          "fontSize": "{font.size.150}",
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Base default medium-sized text style for monospace code snippets of technical content."
+        "description": "Base default medium-sized text style for monospace code snippets of technical content.",
+        "$deprecated": "Use text tokens instead."
       },
       "sm": {
         "value": {
           "fontFamily": "{font.family.mono}",
           "fontWeight": "{font.weight.normal}",
           "lineHeight": "{font.lineHeight.200}",
-          "fontSize": "{font.size.100}",
+          "fontSize": "{font.size.75}",
           "textCase": "{font.text-case.none}"
         },
         "type": "typography",
-        "description": "Smaller text size for monospace code, suitable for inline references or less prominent code examples."
+        "description": "Smaller text size for monospace code, suitable for inline references or less prominent code examples.",
+        "$deprecated": "Use text tokens instead."
       }
     },
     "inputs": {
@@ -3074,11 +3364,211 @@
       }
     }
   },
+  "text": {
+    "headline": {
+      "3xl": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "fontSize": "{font.size.500}",
+          "lineHeight": "{font.lineHeight.200}"
+        },
+        "type": "typography",
+        "description": "XXXL headline style"
+      },
+      "2xl": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "fontSize": "{font.size.400}",
+          "lineHeight": "{font.lineHeight.200}"
+        },
+        "type": "typography",
+        "description": "XXL headline style"
+      },
+      "xl": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "fontSize": "{font.size.300}",
+          "lineHeight": "{font.lineHeight.400}"
+        },
+        "type": "typography",
+        "description": "XL headline style"
+      },
+      "lg": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "fontSize": "{font.size.250}",
+          "lineHeight": "{font.lineHeight.300}"
+        },
+        "type": "typography",
+        "description": "Large headline style"
+      },
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "fontSize": "{font.size.200}",
+          "lineHeight": "{font.lineHeight.400}"
+        },
+        "type": "typography",
+        "description": "Medium headline style"
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "fontSize": "{font.size.150}",
+          "lineHeight": "{font.lineHeight.300}"
+        },
+        "type": "typography",
+        "description": "Small headline style"
+      },
+      "xs": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.bold}",
+          "fontSize": "{font.size.100}",
+          "lineHeight": "{font.lineHeight.300}"
+        },
+        "type": "typography",
+        "description": "Extra small headline style"
+      }
+    },
+    "body": {
+      "lg": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "fontSize": "{font.size.250}",
+          "lineHeight": "{font.lineHeight.400}"
+        },
+        "type": "typography",
+        "description": "Large body style"
+      },
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "fontSize": "{font.size.200}",
+          "lineHeight": "{font.lineHeight.400}"
+        },
+        "type": "typography",
+        "description": "Medium (default) body style"
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "fontSize": "{font.size.150}",
+          "lineHeight": "{font.lineHeight.300}"
+        },
+        "type": "typography",
+        "description": "Small body style"
+      },
+      "xs": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.normal}",
+          "fontSize": "{font.size.100}",
+          "lineHeight": "{font.lineHeight.300}"
+        },
+        "type": "typography",
+        "description": "Extra small body style"
+      }
+    },
+    "label": {
+      "lg": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.semiBold}",
+          "fontSize": "{font.size.250}",
+          "lineHeight": "{font.lineHeight.300}"
+        },
+        "type": "typography",
+        "description": "Large label style"
+      },
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.semiBold}",
+          "fontSize": "{font.size.200}",
+          "lineHeight": "{font.lineHeight.400}"
+        },
+        "type": "typography",
+        "description": "Medium (default) label style"
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.semiBold}",
+          "fontSize": "{font.size.150}",
+          "lineHeight": "{font.lineHeight.400}"
+        },
+        "type": "typography",
+        "description": "Small label style"
+      },
+      "xs": {
+        "value": {
+          "fontFamily": "{font.family.body}",
+          "fontWeight": "{font.weight.semiBold}",
+          "fontSize": "{font.size.100}",
+          "lineHeight": "{font.lineHeight.300}"
+        },
+        "type": "typography",
+        "description": "Extra small label style"
+      }
+    },
+    "code": {
+      "lg": {
+        "value": {
+          "fontFamily": "{font.family.mono}",
+          "fontWeight": "{font.weight.normal}",
+          "fontSize": "{font.size.250}",
+          "lineHeight": "{font.lineHeight.200}"
+        },
+        "type": "typography",
+        "description": "Large code style"
+      },
+      "md": {
+        "value": {
+          "fontFamily": "{font.family.mono}",
+          "fontWeight": "{font.weight.normal}",
+          "fontSize": "{font.size.200}",
+          "lineHeight": "{font.lineHeight.200}"
+        },
+        "type": "typography",
+        "description": "Medium (default) code style"
+      },
+      "sm": {
+        "value": {
+          "fontFamily": "{font.family.mono}",
+          "fontWeight": "{font.weight.normal}",
+          "fontSize": "{font.size.150}",
+          "lineHeight": "{font.lineHeight.200}"
+        },
+        "type": "typography",
+        "description": "Small code style"
+      },
+      "xs": {
+        "value": {
+          "fontFamily": "{font.family.mono}",
+          "fontWeight": "{font.weight.normal}",
+          "fontSize": "{font.size.100}",
+          "lineHeight": "{font.lineHeight.200}"
+        },
+        "type": "typography",
+        "description": "Extra small code style"
+      }
+    }
+  },
   "size": {
     "border": {
       "focus": {
         "value": "{size.border.200} + {size.border.100}",
-        "type": "borderWidth"
+        "type": "dimension"
       }
     }
   },
@@ -3087,60 +3577,60 @@
       "border": {
         "default": {
           "value": "{size.border.150}",
-          "type": "borderWidth"
+          "type": "dimension"
         },
         "status": {
           "value": "{size.border.200}",
-          "type": "borderWidth"
+          "type": "dimension"
         }
       },
       "radius": {
         "xs": {
           "value": "{size.radius.300}",
-          "type": "borderRadius"
+          "type": "dimension"
         },
         "sm": {
-          "value": "{size.radius.400}",
-          "type": "borderRadius"
+          "value": "{size.radius.350}",
+          "type": "dimension"
         },
         "md": {
           "value": "{size.radius.400}",
-          "type": "borderRadius"
+          "type": "dimension"
         },
         "lg": {
           "value": "{size.radius.450}",
-          "type": "borderRadius"
+          "type": "dimension"
         },
         "xl": {
           "value": "{size.radius.500}",
-          "type": "borderRadius"
+          "type": "dimension"
         }
       }
     },
     "lineHeight": {
       "xs": {
         "value": "{font.lineHeight.200}",
-        "type": "lineHeights",
+        "type": "dimension",
         "description": "Line height for extra small inputs (e.g. input and textarea)"
       },
       "sm": {
-        "value": "{font.lineHeight.200}",
-        "type": "lineHeights",
+        "value": "{font.lineHeight.300}",
+        "type": "dimension",
         "description": "Line height for small inputs (e.g. input and textarea)"
       },
       "md": {
         "value": "{font.lineHeight.200}",
-        "type": "lineHeights",
+        "type": "dimension",
         "description": "Line height for medium inputs (e.g. input and textarea)"
       },
       "lg": {
         "value": "{font.lineHeight.200}",
-        "type": "lineHeights",
+        "type": "dimension",
         "description": "Line height for large inputs (e.g. input and textarea)"
       },
       "xl": {
         "value": "{font.lineHeight.200}",
-        "type": "lineHeights",
+        "type": "dimension",
         "description": "Line height for extra large inputs (e.g. input and textarea)"
       }
     },
@@ -3148,54 +3638,54 @@
       "size": {
         "xs": {
           "value": "{font.size.100}",
-          "type": "fontSizes",
+          "type": "dimension",
           "description": "Font size for extra small inputs (e.g. input and textarea)"
         },
         "sm": {
-          "value": "{font.size.100}",
-          "type": "fontSizes",
+          "value": "{font.size.125}",
+          "type": "dimension",
           "description": "Font size for small inputs (e.g. input and textarea)"
         },
         "md": {
           "value": "{font.size.200}",
-          "type": "fontSizes",
+          "type": "dimension",
           "description": "Font size for medium inputs (e.g. input and textarea)"
         },
         "lg": {
           "value": "{font.size.300}",
-          "type": "fontSizes",
+          "type": "dimension",
           "description": "Font size for large inputs (e.g. input and textarea)"
         },
         "xl": {
-          "value": "{font.size.400}",
-          "type": "fontSizes",
+          "value": "{font.size.350}",
+          "type": "dimension",
           "description": "Font size for extra large inputs (e.g. input and textarea)"
         }
       },
       "weight": {
         "xs": {
           "value": "{font.weight.normal}",
-          "type": "fontWeights",
+          "type": "fontWeight",
           "description": "Font weight for extra small inputs (e.g. input and textarea)"
         },
         "sm": {
           "value": "{font.weight.normal}",
-          "type": "fontWeights",
+          "type": "fontWeight",
           "description": "Font weight for small inputs (e.g. input and textarea)"
         },
         "md": {
           "value": "{font.weight.normal}",
-          "type": "fontWeights",
+          "type": "fontWeight",
           "description": "Font weight for medium inputs (e.g. input and textarea)"
         },
         "lg": {
           "value": "{font.weight.normal}",
-          "type": "fontWeights",
+          "type": "fontWeight",
           "description": "Font weight for large inputs (e.g. input and textarea)"
         },
         "xl": {
           "value": "{font.weight.normal}",
-          "type": "fontWeights",
+          "type": "fontWeight",
           "description": "Font weight for extra large inputs (e.g. input and textarea)"
         }
       }
@@ -3232,9 +3722,14 @@
           "value": "{color.border.critical}",
           "type": "color"
         },
-        "success": {
-          "value": "{color.border.success}",
+        "positive": {
+          "value": "{color.border.positive}",
           "type": "color"
+        },
+        "success": {
+          "value": "{inputs.color.border.positive}",
+          "type": "color",
+          "$deprecated": "Use positive instead."
         },
         "warning": {
           "value": "{color.border.warning}",
@@ -3251,7 +3746,7 @@
           "type": "color"
         },
         "focus": {
-          "value": "{color.black.100}",
+          "value": "{color.surface.secondary-opaque}",
           "type": "color"
         },
         "disabled": {
@@ -3354,11 +3849,11 @@
         },
         "positive": {
           "default": {
-            "value": "{color.link.success}",
+            "value": "{color.link.positive}",
             "type": "color"
           },
           "hover": {
-            "value": "{color.link.success-hover}",
+            "value": "{color.link.positive-hover}",
             "type": "color"
           },
           "active": {
@@ -3380,7 +3875,7 @@
             "type": "color"
           },
           "hover": {
-            "value": "{color.surface.brand-opaque}",
+            "value": "{color.surface.brand-subtle-opaque}",
             "type": "color"
           },
           "active": {
@@ -3391,22 +3886,22 @@
                 "modify": {
                   "type": "darken",
                   "value": ".11",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
           },
           "primary": {
             "default": {
-              "value": "{color.purple.400}",
+              "value": "{color.purple.500}",
               "type": "color"
             },
             "hover": {
-              "value": "{color.purple.450}",
+              "value": "{color.purple.600}",
               "type": "color"
             },
             "active": {
-              "value": "{color.purple.500}",
+              "value": "{color.purple.700}",
               "type": "color"
             }
           }
@@ -3417,7 +3912,7 @@
             "type": "color"
           },
           "hover": {
-            "value": "{color.surface.critical-opaque}",
+            "value": "{color.surface.critical-subtle-opaque}",
             "type": "color"
           },
           "active": {
@@ -3428,22 +3923,22 @@
                 "modify": {
                   "type": "darken",
                   "value": ".11",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
           },
           "primary": {
             "default": {
-              "value": "{color.red.400}",
+              "value": "{color.red.500}",
               "type": "color"
             },
             "hover": {
-              "value": "{color.red.450}",
+              "value": "{color.red.600}",
               "type": "color"
             },
             "active": {
-              "value": "{color.red.500}",
+              "value": "{color.red.700}",
               "type": "color"
             }
           }
@@ -3492,8 +3987,8 @@
               "studio.tokens": {
                 "modify": {
                   "type": "alpha",
-                  "value": ".14",
-                  "space": "hsl"
+                  "value": ".6",
+                  "space": "lch"
                 }
               }
             }
@@ -3511,7 +4006,7 @@
             "type": "color"
           },
           "hover": {
-            "value": "{color.surface.success-opaque}",
+            "value": "{color.surface.positive-opaque}",
             "type": "color"
           },
           "active": {
@@ -3521,40 +4016,35 @@
               "studio.tokens": {
                 "modify": {
                   "type": "darken",
-                  "value": ".3",
-                  "space": "hsl"
+                  "value": ".11",
+                  "space": "oklch"
                 }
               }
             }
           },
           "primary": {
             "default": {
-              "value": "{color.green.475}",
+              "value": "{color.green.600}",
               "type": "color",
               "description": "Postive, accepting, or success actions."
             },
             "hover": {
-              "value": "{color.green.500}",
+              "value": "{color.green.700}",
               "type": "color"
             },
             "active": {
-              "value": "{action.color.background.positive.primary.hover}",
-              "type": "color",
-              "$extensions": {
-                "studio.tokens": {
-                  "modify": {
-                    "type": "darken",
-                    "value": ".11",
-                    "space": "hsl"
-                  }
-                }
-              }
+              "value": "{color.green.800}",
+              "type": "color"
             }
           }
         }
       },
       "border": {
         "base": {
+          "default": {
+            "value": "transparent",
+            "type": "color"
+          },
           "outlined": {
             "default": {
               "value": "{color.border.brand}",
@@ -3563,6 +4053,10 @@
           }
         },
         "critical": {
+          "default": {
+            "value": "transparent",
+            "type": "color"
+          },
           "outlined": {
             "default": {
               "value": "{color.border.critical}",
@@ -3571,6 +4065,10 @@
           }
         },
         "inverted": {
+          "default": {
+            "value": "transparent",
+            "type": "color"
+          },
           "outlined": {
             "default": {
               "value": "{color.border.default-inverted}",
@@ -3579,6 +4077,10 @@
           }
         },
         "muted": {
+          "default": {
+            "value": "transparent",
+            "type": "color"
+          },
           "outlined": {
             "default": {
               "value": "{color.border.default}",
@@ -3587,9 +4089,13 @@
           }
         },
         "positive": {
+          "default": {
+            "value": "transparent",
+            "type": "color"
+          },
           "outlined": {
             "default": {
-              "value": "{color.border.success}",
+              "value": "{color.border.positive}",
               "type": "color"
             }
           }
@@ -3614,7 +4120,7 @@
               "modify": {
                 "type": "alpha",
                 "value": ".8",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -3634,7 +4140,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".5",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -3647,7 +4153,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".75",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -3660,7 +4166,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".05",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -3673,7 +4179,7 @@
                 "modify": {
                   "type": "lighten",
                   "value": "1",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -3686,7 +4192,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": "0",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -3699,7 +4205,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".1",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -3712,7 +4218,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".2",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -3729,7 +4235,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".65",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -3746,7 +4252,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": "0",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -3759,7 +4265,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".05",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -3772,7 +4278,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".1",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -3793,7 +4299,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".75",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -3806,7 +4312,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".05",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -3819,7 +4325,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".75",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -3832,7 +4338,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".10",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -3845,7 +4351,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".14",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -3894,7 +4400,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": "0",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -3907,7 +4413,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": "0.11",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -3920,7 +4426,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".15",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -3941,7 +4447,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".09",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -3961,19 +4467,19 @@
       "color": {
         "background": {
           "available": {
-            "value": "{color.green.425}",
+            "value": "{presence.color.available}",
             "type": "color"
           },
           "busy-unavailable": {
-            "value": "{color.red.500}",
+            "value": "{presence.color.unavailable}",
             "type": "color"
           },
           "busy": {
-            "value": "{color.gold.500}",
+            "value": "{presence.color.busy}",
             "type": "color"
           },
           "offline": {
-            "value": "{color.black.500}",
+            "value": "{presence.color.offline}",
             "type": "color"
           }
         }
@@ -3994,7 +4500,7 @@
           "type": "color"
         },
         "background-strong": {
-          "value": "{color.purple.550}",
+          "value": "{color.purple.900}",
           "type": "color"
         }
       }
@@ -4024,15 +4530,15 @@
           "type": "color"
         },
         "status-positive": {
-          "value": "{color.green.425}",
+          "value": "{color.foreground.positive}",
           "type": "color"
         },
         "status-critical": {
-          "value": "{color.red.500}",
+          "value": "{color.foreground.critical}",
           "type": "color"
         },
         "status-warning": {
-          "value": "{color.gold.500}",
+          "value": "{color.foreground.warning}",
           "type": "color"
         },
         "status-away": {
@@ -4073,7 +4579,7 @@
               "modify": {
                 "type": "alpha",
                 "value": ".86",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -4086,7 +4592,7 @@
               "modify": {
                 "type": "alpha",
                 "value": ".72",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -4099,7 +4605,7 @@
               "modify": {
                 "type": "alpha",
                 "value": "1",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -4112,7 +4618,7 @@
               "modify": {
                 "type": "alpha",
                 "value": ".60",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -4125,7 +4631,7 @@
               "modify": {
                 "type": "alpha",
                 "value": ".57",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -4138,7 +4644,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".15",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -4151,7 +4657,7 @@
               "modify": {
                 "type": "darken",
                 "value": ".2",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -4164,7 +4670,7 @@
               "modify": {
                 "type": "darken",
                 "value": "0.25",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -4185,7 +4691,7 @@
               "modify": {
                 "type": "alpha",
                 "value": "0.10",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -4198,7 +4704,7 @@
               "modify": {
                 "type": "alpha",
                 "value": ".17",
-                "space": "hsl"
+                "space": "oklch"
               }
             }
           }
@@ -4244,7 +4750,7 @@
                 "modify": {
                   "type": "darken",
                   "value": ".4",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -4261,7 +4767,7 @@
                 "modify": {
                   "type": "darken",
                   "value": "0.6",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -4276,7 +4782,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": "0",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -4289,7 +4795,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".10",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -4302,7 +4808,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".16",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -4315,7 +4821,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".13",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -4328,7 +4834,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": "0",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -4341,7 +4847,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".10",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -4354,7 +4860,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".16",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -4367,7 +4873,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".13",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -4380,7 +4886,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": "0.05",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -4393,7 +4899,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".10",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -4406,7 +4912,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": ".07",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -4419,7 +4925,7 @@
                 "modify": {
                   "type": "alpha",
                   "value": "0.07",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -4442,7 +4948,7 @@
                 "modify": {
                   "type": "darken",
                   "value": ".55",
-                  "space": "hsl"
+                  "space": "oklch"
                 }
               }
             }
@@ -4463,7 +4969,7 @@
     "logo": {
       "color": {
         "star": {
-          "value": "{color.purple.400}",
+          "value": "{color.surface.brand-strong}",
           "type": "color"
         },
         "wordmark": {
@@ -4475,19 +4981,19 @@
     "presence": {
       "color": {
         "available": {
-          "value": "{shell.base.color.status-positive}",
+          "value": "{presence.color.available}",
           "type": "color"
         },
         "unavailable": {
-          "value": "{shell.base.color.status-critical}",
+          "value": "{presence.color.unavailable}",
           "type": "color"
         },
         "busy": {
-          "value": "{shell.base.color.status-warning}",
+          "value": "{presence.color.busy}",
           "type": "color"
         },
         "offline": {
-          "value": "{shell.base.color.status-away}",
+          "value": "{presence.color.offline}",
           "type": "color"
         }
       }

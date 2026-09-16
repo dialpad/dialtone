@@ -1,18 +1,13 @@
 ---
 title: Button
-description: A button is an UI element which signals key actions to take an action throughout an app. It is important a button is identifiable, consistent, communicates its actions clearly, and is appropriately sized to its action.
+description: Interactive element for single-step actions.
 status: ready
 thumb: true
-image: assets/images/components/button.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-button--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=19800-32233
+keywords: ["btn","click","action","cta","d-button","DtButton","dt-button","clear","outline","ghost","muted"]
+combinator: DtButton
 ---
-
-<code-well-header>
-  <dt-button> Place Call </dt-button>
-</code-well-header>
-
-<!-- <component-combinator component-name="DtButton" /> -->
 
 ## Usage
 
@@ -29,7 +24,7 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 </template>
 <template #dont>
 
-- Avoid using to navigate between destinations, deferring to a [Link](link.md) instead. Exception: use DtButton with `href` or `to` when button styling is intentional (e.g. CTAs, toolbar actions).
+- Avoid using to navigate between destinations, deferring to a [DtLink](link.md) instead. Exception: use DtButton with `href` or `to` when button styling is intentional (e.g. CTAs, toolbar actions).
 
 </template>
 </dialtone-usage>
@@ -38,10 +33,10 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 
 Button labels should be clear and predictable so users have confidence in their actions.
 
-- Lead with a strong verb and use **verb + noun** structure except for common actions like “Done,” “Close,” “Cancel,” or “OK”
+- Lead with a strong verb and use **verb + noun** structure except for common actions like "Done," "Close," "Cancel," or "OK"
 - Should be sentence case
 - Do not use punctuation
-- Avoid unnecessary articles such as “the,” “an,” and “a.”
+- Avoid unnecessary articles such as "the," "an," and "a."
 
 <dialtone-usage>
 <template #do>
@@ -60,7 +55,7 @@ Button labels should be clear and predictable so users have confidence in their 
 
 ## Variants
 
-Dialtone provides five options for `kind`, with three levels of `importance`. Use `kind="primary"` for the main call to action, `kind="danger"` for destructive actions, `kind="muted"` for secondary actions, `kind="clear"` for low-emphasis actions, and `kind="link"` for navigation-style buttons. The DtButton `kind` prop controls the visual hierarchy and semantic meaning of the action.
+Dialtone provides five options for `kind`, with three levels of `importance`. Use `kind="primary"` for the main call to action, `kind="critical"` for destructive actions, `kind="muted"` for secondary actions, `kind="clear"` for low-emphasis actions, and `kind="link"` for navigation-style buttons. The DtButton `kind` prop controls the visual hierarchy and semantic meaning of the action.
 
 <ButtonVariantsTable></ButtonVariantsTable>
 
@@ -68,256 +63,229 @@ Dialtone provides five options for `kind`, with three levels of `importance`. Us
 
 The base button should be the go-to button for most of your needs. When in doubt, use this style. To help provide clarity to users, it is generally recommended to use only one primary button style within a section or page.
 
-<code-well-header>
-  <dt-stack direction="row" gap="400">
-      <button class="d-btn d-btn--primary" type="button"><span class="d-btn__label">Place Call</span></button>
-      <button class="d-btn d-btn--outlined" type="button"><span class="d-btn__label">Place Call</span></button>
-      <button class="d-btn" type="button"><span class="d-btn__label">Place Call</span></button>
-  </dt-stack>
-</code-well-header>
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <dt-button> Place Call </dt-button>
+  <dt-button importance="outlined"> Place Call </dt-button>
+  <dt-button importance="clear"> Place Call </dt-button>
+</dt-stack>
+```
 
-<code-example-tabs
-htmlCode='
-<button class="d-btn d-btn--primary" type="button"><span class="d-btn__label">...</span></button>
-<button class="d-btn d-btn--outlined" type="button"><span class="d-btn__label">...</span></button>
-<button class="d-btn" type="button"><span class="d-btn__label">...</span></button>
-'
-vueCode='
-<dt-button> Place Call </dt-button>
-<dt-button importance="outlined"> Place Call </dt-button>
-<dt-button importance="clear"> Place Call </dt-button>
-'
-showHtmlWarning />
+### Critical
 
-### Danger
+The critical button style is used to communicate critical or destructive actions such as deleting content, accounts, or canceling services.
 
-The danger button style is used to communicate critical or destructive actions such as deleting content, accounts, or canceling services.
-
-<code-well-header>
-  <dt-stack direction="row" gap="400">
-    <button class="d-btn d-btn--danger d-btn--primary" type="button"><span class="d-btn__label">Place Call</span></button>
-    <button class="d-btn d-btn--danger d-btn--outlined" type="button"><span class="d-btn__label">Place Call</span></button>
-    <button class="d-btn d-btn--danger" type="button"><span class="d-btn__label">Place Call</span></button>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<button class="d-btn d-btn--danger d-btn--primary" type="button"><span class="d-btn__label">...</span></button>
-<button class="d-btn d-btn--danger d-btn--outlined" type="button"><span class="d-btn__label">...</span></button>
-<button class="d-btn d-btn--danger" type="button"><span class="d-btn__label">...</span></button>
-'
-vueCode='
-<dt-button kind="danger"> Place Call </dt-button>
-<dt-button kind="danger" importance="outlined"> Place Call </dt-button>
-<dt-button kind="danger" importance="clear"> Place Call </dt-button>
-'
-showHtmlWarning />
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <dt-button kind="critical"> Place Call </dt-button>
+  <dt-button kind="critical" importance="outlined"> Place Call </dt-button>
+  <dt-button kind="critical" importance="clear"> Place Call </dt-button>
+</dt-stack>
+```
 
 ### Positive
 
-The positive button style is used to communicate positive actions.
+The positive button style is used to communicate positive, confirmatory, or success-related actions.
 
-<code-well-header>
-  <dt-stack direction="row" gap="400">
-    <dt-button kind="positive">Place Call</dt-button>
-    <dt-button kind="positive" importance="outlined">Place Call</dt-button>
-    <dt-button kind="positive" importance="clear">Place Call</dt-button>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<button class="d-btn d-btn--positive d-btn--primary" type="button"><span class="d-btn__label">...</span></button>
-<button class="d-btn d-btn--positive d-btn--outlined" type="button"><span class="d-btn__label">...</span></button>
-<button class="d-btn d-btn--positive" type="button"><span class="d-btn__label">...</span></button>
-'
-vueCode='
-<dt-button kind="positive"> Place Call </dt-button>
-<dt-button kind="positive" importance="outlined"> Place Call </dt-button>
-<dt-button kind="positive" importance="clear"> Place Call </dt-button>
-'
-showHtmlWarning />
-
-### Inverted
-
-The inverted button style is used to visually separate buttons set on darker backgrounds.
-
-<code-well-header bgclass="d-bgc-contrast">
-  <dt-stack direction="row" gap="400">
-    <button class="d-btn d-btn--inverted d-btn--primary" type="button"><span class="d-btn__label">Place Call</span></button>
-    <button class="d-btn d-btn--inverted d-btn--outlined" type="button"><span class="d-btn__label">Place Call</span></button>
-    <button class="d-btn d-btn--inverted" type="button"><span class="d-btn__label">Place Call</span></button>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<button class="d-btn d-btn--inverted d-btn--primary" type="button"><span class="d-btn__label">...</span></button>
-<button class="d-btn d-btn--inverted d-btn--outlined" type="button"><span class="d-btn__label">...</span></button>
-<button class="d-btn d-btn--inverted" type="button"><span class="d-btn__label">...</span></button>
-'
-vueCode='
-<dt-button kind="inverted"> Place Call </dt-button>
-<dt-button kind="inverted" importance="outlined"> Place Call </dt-button>
-<dt-button kind="inverted" importance="clear"> Place Call </dt-button>
-'
-showHtmlWarning />
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <dt-button kind="positive">Place Call</dt-button>
+  <dt-button kind="positive" importance="outlined">Place Call</dt-button>
+  <dt-button kind="positive" importance="clear">Place Call</dt-button>
+</dt-stack>
+```
 
 ### Muted
 
 The muted button style is used to communicate non-primary actions for contexts in which the base style may not work
 (e.g. colored backgrounds, validation components, etc).
-This style’s use should be rare. When in doubt, use the [default button style](#default).
+This style's use should be rare. When in doubt, use the [default button style](#default).
 
-<code-well-header>
-  <dt-stack direction="row" gap="400">
-    <button class="d-btn d-btn--muted" type="button"><span class="d-btn__label">Place Call</span></button>
-    <button class="d-btn d-btn--muted d-btn--outlined" type="button"><span class="d-btn__label">Place Call</span></button>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<button class="d-btn d-btn--muted" type="button"><span class="d-btn__label">...</span></button>
-<button class="d-btn d-btn--muted d-btn--outlined" type="button"><span class="d-btn__label">...</span></button>
-'
-vueCode='
-<dt-button kind="muted" importance="clear"> Place Call </dt-button>
-<dt-button kind="muted" importance="outlined"> Place Call </dt-button>
-'
-showHtmlWarning />
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <dt-button kind="muted" importance="clear"> Place Call </dt-button>
+  <dt-button kind="muted" importance="outlined"> Place Call </dt-button>
+</dt-stack>
+```
 
 ### Disabled
 
-Buttons can be disabled using the `disabled` attribute or the Dialtone class, `d-btn--disabled`. Use the attribute when a button should appear disabled and not receive focus; use the class when a button should appear disabled but still receive focus (i.e. a disabled button with a tooltip).
-
-When using the raw HTML instead of the Vue component , it requires `aria-disabled`, and additional javascript implementation is required to prevent events.
-
-<code-well-header>
-  <dt-stack gap="500">
-    <dt-toggle v-model="isDisabled" size="sm" wrapperClass="d-g8 d-m-auto">Disabled</dt-toggle>
-    <dt-stack gap="400" ref="disabledButtons">
-      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-        <dt-button :disabled="isDisabled"> Place Call </dt-button>
-        <dt-button :disabled="isDisabled" importance="outlined"> Place Call </dt-button>
-        <dt-button :disabled="isDisabled" importance="clear"> Place Call </dt-button>
-      </dt-stack>
-      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-        <dt-button :disabled="isDisabled" kind="danger"> Place Call </dt-button>
-        <dt-button :disabled="isDisabled" kind="danger" importance="outlined"> Place Call </dt-button>
-        <dt-button :disabled="isDisabled" kind="danger" importance="clear"> Place Call </dt-button>
-      </dt-stack>
-      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-        <dt-button :disabled="isDisabled" kind="positive">Place Call</dt-button>
-        <dt-button :disabled="isDisabled" kind="positive" importance="outlined">Place Call</dt-button>
-        <dt-button :disabled="isDisabled" kind="positive" importance="clear">Place Call</dt-button>
-      </dt-stack>
-      <dt-stack gap="400" :direction="{ 'default': 'column', 'md': 'row' }">
-        <dt-button :disabled="isDisabled" kind="muted" importance="clear"> Place Call </dt-button>
-        <dt-button :disabled="isDisabled" kind="muted" importance="outlined"> Place Call </dt-button>
-      </dt-stack>
+```vue demo
+<dt-stack gap="100">
+  <dt-toggle v-model="isDisabled" :size="200" class="d-g-100 d-m-auto d-pbe-100">Disabled</dt-toggle>
+  <dt-stack gap="100">
+    <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button :disabled="isDisabled"> Place Call </dt-button>
+      <dt-button :disabled="isDisabled" importance="outlined"> Place Call </dt-button>
+      <dt-button :disabled="isDisabled" importance="clear"> Place Call </dt-button>
+    </dt-stack>
+    <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button :disabled="isDisabled" kind="critical"> Place Call </dt-button>
+      <dt-button :disabled="isDisabled" kind="critical" importance="outlined"> Place Call </dt-button>
+      <dt-button :disabled="isDisabled" kind="critical" importance="clear"> Place Call </dt-button>
+    </dt-stack>
+    <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button :disabled="isDisabled" kind="positive">Place Call</dt-button>
+      <dt-button :disabled="isDisabled" kind="positive" importance="outlined">Place Call</dt-button>
+      <dt-button :disabled="isDisabled" kind="positive" importance="clear">Place Call</dt-button>
+    </dt-stack>
+    <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button :disabled="isDisabled" kind="muted" importance="clear"> Place Call </dt-button>
+      <dt-button :disabled="isDisabled" kind="muted" importance="outlined"> Place Call </dt-button>
     </dt-stack>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.disabledButtons'
-vueCode='
+</dt-stack>
+<!-- @code -->
 <dt-button disabled {props}>Place Call</dt-button>
-'
-showHtmlWarning />
+```
+
+Buttons can be disabled using the `disabled` attribute or the Dialtone class, `d-btn--disabled`. Use the attribute when a button should appear disabled and not receive focus; use the class when a button should appear disabled but still receive focus (i.e. a disabled button with a tooltip).
+
+Using the class also requires `aria-disabled`, and additional javascript implementation is required to prevent events.
+
+```vue demo
+<dt-stack
+  gap="100"
+  :direction="{ 'default': 'column', 'md': 'row' }"
+>
+  <!-- disabled attribute -->
+  <dt-button disabled>Place Call (disabled attribute)</dt-button>
+  <!-- disabled class -->
+  <span v-dt-tooltip="`Tooltip example`" tabindex="0">
+    <dt-button class="d-btn--disabled" aria-disabled="true" tabindex="-1">Place Call (disabled class)</dt-button>
+  </span>
+</dt-stack>
+```
 
 ### Active
 
 Buttons can be set to active state using the `active` prop or `.d-btn--active` Dialtone class.
 
-<code-well-header>
-  <dt-stack
-    gap="400"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <dt-button importance="clear" active>Place Call</dt-button>
-    <dt-button active>Place Call</dt-button>
-    <dt-button kind="danger" importance="clear" active>Place Call</dt-button>
-    <dt-button kind="positive" importance="clear" active>Place Call</dt-button>
-    <dt-button kind="inverted" active>Place Call</dt-button>
-    <dt-button kind="muted" active>Place Call</dt-button>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<button class="d-btn d-btn--active" type="button"><span class="d-btn__label">...</span></button>
-<button class="d-btn d-btn--primary d-btn--active" type="button"><span class="d-btn__label">...</span></button>
-<button class="d-btn d-btn--danger d-btn--active" type="button"><span class="d-btn__label">...</span></button>
-<button class="d-btn d-btn--positive d-btn--active" type="button"><span class="d-btn__label">...</span></button>
-<button class="d-btn d-btn--inverted d-btn--primary d-btn--active" type="button"><span class="d-btn__label">...</span></button>
-<button class="d-btn d-btn--primary d-btn--muted d-btn--active" type="button"><span class="d-btn__label">...</span></button>
-'
-vueCode='
-<dt-button importance="clear" active>Place Call</dt-button>
-<dt-button active>Place Call</dt-button>
-<dt-button kind="danger" importance="clear" active>Place Call</dt-button>
-<dt-button kind="positive" importance="clear" active>Place Call</dt-button>
-<dt-button kind="inverted" active>Place Call</dt-button>
-<dt-button kind="muted" active>Place Call</dt-button>
-'
-showHtmlWarning />
+```vue demo
+<!-- @wrapper -->
+<dt-stack
+  gap="100"
+  :direction="{ 'default': 'column', 'md': 'row' }"
+>
+  <dt-button importance="clear" active>Place Call</dt-button>
+  <dt-button active>Place Call</dt-button>
+  <dt-button kind="critical" importance="clear" active>Place Call</dt-button>
+  <dt-button kind="positive" importance="clear" active>Place Call</dt-button>
+  <dt-button kind="muted" active>Place Call</dt-button>
+</dt-stack>
+```
 
 ### Link
 
-Buttons can be styled as a [Link](link.md) in situations for which you need the appearance of a link but behavior of a button. Using the `button` element provides a better accessibility experience.
+Buttons can be styled to match the appearance of a [DtLink](link.md) in situations for which you need the appearance of a link but require the behavior of a button. Using the `button` element provides a better accessibility experience.
 
-<code-well-header>
-  <dt-stack
-    gap="400"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <dt-button link>Place Call</dt-button>
-    <dt-button link linkKind="warning">Place Call</dt-button>
-    <dt-button link linkKind="danger">Place Call</dt-button>
-    <dt-button link linkKind="success">Place Call</dt-button>
-    <dt-button link linkKind="muted">Place Call</dt-button>
-    <dt-button link disabled>Place Call</dt-button>
-  </dt-stack>
-</code-well-header>
+```vue demo
+<!-- @wrapper -->
+<dt-stack
+  gap="100"
+  :direction="{ 'default': 'column', 'md': 'row' }"
+>
+  <dt-button link>Place Call</dt-button>
+  <dt-button link linkKind="warning">Place Call</dt-button>
+  <dt-button link linkKind="critical">Place Call</dt-button>
+  <dt-button link linkKind="positive">Place Call</dt-button>
+  <dt-button link linkKind="muted">Place Call</dt-button>
+  <dt-button link disabled>Place Call</dt-button>
+</dt-stack>
+```
 
-<code-example-tabs
-htmlCode='
-<button class="d-link" type="button"> <span class="d-btn__label">Place Call</span></button>
-<button class="d-link d-link--warning" type="button"> <span class="d-btn__label">Place Call</span></button>
-<button class="d-link d-link--danger" type="button"> <span class="d-btn__label">Place Call</span></button>
-<button class="d-link d-link--success" type="button"> <span class="d-btn__label">Place Call</span></button>
-<button class="d-link d-link--muted" type="button"> <span class="d-btn__label">Place Call</span></button>
-<button class="d-link" type="button" disabled=""> <span class="d-btn__label">Place Call</span></button>
-'
-vueCode='
-<dt-button link>Place Call</dt-button>
-<dt-button link linkKind="warning">Place Call</dt-button>
-<dt-button link linkKind="danger">Place Call</dt-button>
-<dt-button link linkKind="success">Place Call</dt-button>
-<dt-button link linkKind="muted">Place Call</dt-button>
-<dt-button link disabled>Place Call</dt-button>
-'
-showHtmlWarning />
+### Link no underline
+
+This inverts the underline behavior. With `underline="false"`, the link will not have an underline by default, but will show one on hover.
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack
+  gap="100"
+  :direction="{ 'default': 'column', 'md': 'row' }"
+>
+  <dt-button link :underline="false">Place Call</dt-button>
+  <dt-button link linkKind="critical" :underline="false">Place Call</dt-button>
+</dt-stack>
+```
+
+<!--
+<DtLink
+  to="/components/link.md"
+  :underline="false"
+  class="
+    d-d-block
+    d-ba
+    d-bc-subtle
+    d-bar-400
+    d-fc-secondary
+    h:d-td-none
+    h:d-fc-primary
+    d-py-100
+    d-px-200
+    h:d-bgc-secondary-opaque
+    d-wmx-500
+    d-my-100
+  "
+>
+  <DtStack direction="row" gap="150">
+    <dt-icon class="d-fc-muted" name="component" :size="viewport.pick({ default: '300', md: '400' })" />
+    <DtStack class="d-fl1">
+      <dt-text as="h3" kind="headline" size="200">DtLink</dt-text>
+      <dt-text as="p" kind="body" size="200">Related component</dt-text>
+    </DtStack>
+    <dt-icon class="d-fc-muted" name="arrow-right" size="400" />
+  </DtStack>
+</DtLink>
+-->
 
 ### Unstyled
 
 The unstyled button removes all default Dialtone styling while preserving the semantic HTML `<button>` element and maintaining proper button behavior and accessibility.
 
-<code-well-header>
-    <dt-button kind="unstyled">Place Call</dt-button>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<button class="d-btn--unstyled" type="button">Place Call</button>
-'
-vueCode='
+```vue demo
 <dt-button kind="unstyled">Place Call</dt-button>
-'
-showHtmlWarning />
+```
+
+### Inverted
+
+> [!WARNING] Deprecated
+> `kind="inverted"` has been deprecated. Use the [v-dt-mode directive](mode-island.html#inverting) instead, or [DtModeIsland](mode-island.html#dtmodeisland-component).
+
+Use the [v-dt-mode directive](mode-island.html#inverting) in place of `kind="inverted"` on the component element. The previous `inverted` variant of DtButton was limited to a single presentation style. The directive now makes every combination available as an inverted style.
+
+```vue demo
+<dt-stack gap="100">
+  <dt-toggle v-model="isInverted" :size="200" class="d-g-100 d-m-auto d-pbe-100">Inverted</dt-toggle>
+  <dt-stack gap="100">
+    <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button v-dt-mode:invert="isInverted"> Place Call </dt-button>
+      <dt-button v-dt-mode:invert="isInverted" importance="outlined"> Place Call </dt-button>
+      <dt-button v-dt-mode:invert="isInverted" importance="clear"> Place Call </dt-button>
+    </dt-stack>
+    <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button v-dt-mode:invert="isInverted" kind="critical"> Place Call </dt-button>
+      <dt-button v-dt-mode:invert="isInverted" kind="critical" importance="outlined"> Place Call </dt-button>
+      <dt-button v-dt-mode:invert="isInverted" kind="critical" importance="clear"> Place Call </dt-button>
+    </dt-stack>
+    <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button v-dt-mode:invert="isInverted" kind="positive">Place Call</dt-button>
+      <dt-button v-dt-mode:invert="isInverted" kind="positive" importance="outlined">Place Call</dt-button>
+      <dt-button v-dt-mode:invert="isInverted" kind="positive" importance="clear">Place Call</dt-button>
+    </dt-stack>
+    <dt-stack gap="100" :direction="{ 'default': 'column', 'md': 'row' }">
+      <dt-button v-dt-mode:invert="isInverted" kind="muted" importance="clear"> Place Call </dt-button>
+      <dt-button v-dt-mode:invert="isInverted" kind="muted" importance="outlined"> Place Call </dt-button>
+    </dt-stack>
+  </dt-stack>
+</dt-stack>
+<!-- @code -->
+<dt-button v-dt-mode:invert {props}>Place Call</dt-button>
+```
 
 ## Navigation
 
@@ -331,69 +299,37 @@ DtButton can render as an `<a>` or `<router-link>` for cases where you need butt
 
 Pass `href` to render as an `<a>` element. Use `target="_blank"` and `rel="noopener noreferrer"` for external links.
 
-<code-well-header>
-  <dt-button
-    href="https://dialtone.dialpad.com"
-    target="_blank"
-    rel="noopener noreferrer"
-    kind="muted"
-    importance="outlined"
-    size="sm"
-    icon-position="right"
-    ref="hrefExample1"
-  >
-    <template #icon="{ iconSize }">
-      <dt-icon name="external-link" :size="iconSize" />
-    </template>
-    Dialtone
-  </dt-button>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.hrefExample1'
-vueCode='
+```vue demo
 <dt-button
-  href="<https://dialtone.dialpad.com>"
+  href="https://dialtone.dialpad.com"
   target="_blank"
   rel="noopener noreferrer"
   kind="muted"
   importance="outlined"
-  size="sm"
-  icon-position="right"
+  :size="200"
 >
-  <template #icon="{ iconSize }">
+  <template #endIcon="{ iconSize }">
     <dt-icon name="external-link" :size="iconSize" />
   </template>
   Dialtone
 </dt-button>
-'
-showHtmlWarning />
+```
 
 ### to
 
 Pass `to` to render as `<router-link>` for internal client-side SPA navigation. Use `replace` to navigate without adding a history entry.
 
-<code-well-header>
-  <dt-button to="/" kind="default" size="xs" ref="toExample2">
-    Home
-  </dt-button>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.toExample1'
-vueCode='
-<dt-button to="/" kind="default" size="xs">
+```vue demo
+<dt-button to="/" kind="default" :size="100">
   Home
 </dt-button>
-'
-/>
+```
 
 ### Migration
 
 If you have existing `<a class="d-btn">` or `<router-link class="d-btn">` workarounds, replace them with DtButton props:
 
-<code-example-tabs
-vueCode='
+```vue code-only
 <!-- Before: raw <a> with manual d-btn classes -->
 <a
   class="d-btn d-btn--primary d-btn--outlined d-btn--sm"
@@ -410,15 +346,13 @@ vueCode='
   target="_blank"
   rel="noopener noreferrer"
   importance="outlined"
-  size="sm"
+  :size="200"
 >
   Link Text
 </dt-button>
-'
-/>
+```
 
-<code-example-tabs
-vueCode='
+```vue code-only
 <!-- Before: raw <router-link> with manual d-btn classes -->
 <router-link
   class="d-btn d-btn--primary d-btn--sm"
@@ -428,646 +362,318 @@ vueCode='
 </router-link>
 
 <!-- After: DtButton with to prop -->
-<dt-button :to="roomPath" size="sm">
+<dt-button :to="roomPath" :size="200">
   Join Room
 </dt-button>
-'
-/>
-
-## Split Button
-
-The [Split Button](split-button.md) is its own component containing multiple buttons.
-
-<code-well-header>
-  <dt-split-button
-    omega-tooltip-text="More calling options"
-  >
-    Place call
-    <template #dropdownList>
-      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
-      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
-      <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
-    </template>
-  </dt-split-button>
-</code-well-header>
+```
 
 ## Sizes
 
-The default button size is `md`, but does not need to be explicitly specified.
+The default button size is `300`, but does not need to be explicitly specified.
 
-<code-well-header>
-  <dt-stack
-    gap="400"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <span>
-      <dt-button size="xs"> Place Call </dt-button>
-    </span>
-    <span>
-      <dt-button size="sm"> Place Call </dt-button>
-    </span>
-    <span>
-      <dt-button> Place Call </dt-button>
-    </span>
-    <span>
-      <dt-button size="lg"> Place Call </dt-button>
-    </span>
-    <span>
-      <dt-button size="xl"> Place Call </dt-button>
-    </span>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<button class="d-btn d-btn--primary d-btn--xs" type="button"><span class="d-btn__label">...</span></button>
-<button class="d-btn d-btn--primary d-btn--sm" type="button"><span class="d-btn__label">...</span></button>
-<button class="d-btn d-btn--primary" type="button"><span class="d-btn__label">...</span></button>
-<button class="d-btn d-btn--primary d-btn--lg" type="button"><span class="d-btn__label">...</span></button>
-<button class="d-btn d-btn--primary d-btn--xl" type="button"><span class="d-btn__label">...</span></button>
-'
-vueCode='
-<dt-button size="xs"> Place Call </dt-button>
-<dt-button size="sm"> Place Call </dt-button>
-<dt-button> Place Call </dt-button>
-<dt-button size="lg"> Place Call </dt-button>
-<dt-button size="xl"> Place Call </dt-button>
-'
-showHtmlWarning />
+```vue demo
+<!-- @wrapper -->
+<dt-stack
+  gap="100"
+  :direction="{ 'default': 'column', 'md': 'row' }"
+>
+  <dt-button :size="100" kind="muted" importance="outlined">
+    Call
+    <template #startIcon="{ iconSize }">
+      <dt-icon name="phone" :size="iconSize" />
+    </template>
+  </dt-button>
+  <dt-button :size="200" kind="muted" importance="outlined">
+    Call
+    <template #startIcon="{ iconSize }">
+      <dt-icon name="phone" :size="iconSize" />
+    </template>
+  </dt-button>
+  <dt-button kind="muted" importance="outlined">
+    Call
+    <template #startIcon="{ iconSize }">
+      <dt-icon name="phone" :size="iconSize" />
+    </template>
+  </dt-button>
+  <dt-button :size="400" kind="muted" importance="outlined">
+    Call
+    <template #startIcon="{ iconSize }">
+      <dt-icon name="phone" :size="iconSize" />
+    </template>
+  </dt-button>
+  <dt-button :size="500" kind="muted" importance="outlined">
+    Call
+    <template #startIcon="{ iconSize }">
+      <dt-icon name="phone" :size="iconSize" />
+    </template>
+  </dt-button>
+</dt-stack>
+```
 
 ## Icon Support
 
-### Icon and Label
+> [!INFO] Note
+> `startIcon` and `endIcon` slots replace the previous `icon` slot and `icon-position` prop, which are deprecated and will be sunset.
 
-Button labels can include an icon next to the text. Every button style can accept icon classes, though we only provide a few possible examples. `icon-position` can be `left` (default), `right`, `top`, `bottom`.
+### Start and End
 
-<code-well-header>
-  <dt-stack
-    gap="400"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <span>
-      <dt-button importance="outlined">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-        Label
-      </dt-button>
-    </span>
-    <span>
-      <dt-button importance="outlined" icon-position="top">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-        Label
-      </dt-button>
-    </span>
-    <span>
-      <dt-button importance="outlined" icon-position="bottom">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-        Label
-      </dt-button>
-    </span>
-    <span>
-      <dt-button importance="outlined" icon-position="right">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-        Label
-      </dt-button>
-    </span>
-  </dt-stack>
-</code-well-header>
+Place icons before and/or after inline of the label with `startIcon` and `endIcon` slots.
 
-<code-example-tabs
-htmlCode='
-<button class="d-btn d-btn--outlined" type="button">
-  <span class="d-btn__icon d-btn__icon--left">...</span>
-  <span class="d-btn__label">...</span>
-</button>
-<button class="d-btn d-btn--vertical d-btn--outlined" type="button">
-  <span class="d-btn__icon d-btn__icon--top">...</span>
-  <span class="d-btn__label">...</span>
-</button>
-<button class="d-btn d-btn--outlined" type="button">
-  <span class="d-btn__icon d-btn__icon--right">...</span>
-  <span class="d-btn__label">...</span>
-</button>
-'
-vueCode='
-<dt-button importance="outlined">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-  Label
-</dt-button>
-<dt-button importance="outlined" icon-position="top">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-  Label
-</dt-button>
-<dt-button importance="outlined" icon-position="bottom">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-  Label
-</dt-button>
-<dt-button importance="outlined" icon-position="right">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-  Label
-</dt-button>
-'
-showHtmlWarning />
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <span>
+    <dt-button importance="outlined">
+      <template #startIcon="{ iconSize }">
+        <dt-icon name="phone" :size="iconSize" />
+      </template>
+      Label
+    </dt-button>
+  </span>
+  <span>
+    <dt-button importance="outlined">
+      Label
+      <template #endIcon="{ iconSize }">
+        <dt-icon name="arrow-right" :size="iconSize" />
+      </template>
+    </dt-button>
+  </span>
+  <span>
+    <dt-button importance="outlined">
+      <template #startIcon="{ iconSize }">
+        <dt-icon name="phone" :size="iconSize" />
+      </template>
+      Label
+      <template #endIcon="{ iconSize }">
+        <dt-icon name="arrow-right" :size="iconSize" />
+      </template>
+    </dt-button>
+  </span>
+</dt-stack>
+```
+
+### Top and Bottom
+
+Place icons above or below the label with `blockStartIcon` and `blockEndIcon` slots.
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack
+  gap="100"
+  :direction="{ 'default': 'column', 'md': 'row' }"
+>
+  <dt-button importance="outlined">
+    <template #blockStartIcon="{ iconSize }">
+      <dt-icon
+        name="phone"
+        :size="iconSize"
+      />
+    </template>
+    Label
+  </dt-button>
+  <dt-button importance="outlined">
+    <template #blockEndIcon="{ iconSize }">
+      <dt-icon
+        name="phone"
+        :size="iconSize"
+      />
+    </template>
+    Label
+  </dt-button>
+</dt-stack>
+```
 
 ### Icon Only
 
 Icon-only buttons are commonly used for toggling actions, navigation, or closing UI elements.
 
-<code-well-header>
-  <dt-stack
-    gap="600"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <dt-stack direction="row" gap="400">
-      <dt-button v-dt-tooltip="`Tooltip`" kind="muted" importance="clear">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" kind="muted" importance="outlined">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-    </dt-stack>
-    <dt-stack direction="row" gap="400">
-      <dt-button v-dt-tooltip="`Tooltip`" importance="clear">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" importance="outlined">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-    </dt-stack>
-    <dt-stack direction="row" gap="400">
-      <dt-button v-dt-tooltip="`Tooltip`" kind="danger" importance="clear">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" kind="danger" importance="outlined">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" kind="danger">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-    </dt-stack>
-    <dt-stack direction="row" gap="400">
-      <dt-button v-dt-tooltip="`Tooltip`" importance="clear" kind="positive">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" importance="outlined" kind="positive">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" kind="positive">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-    </dt-stack>
-    <dt-stack direction="row" gap="400" class="d-bgc-contrast d-p8">
-      <dt-button v-dt-tooltip="`Tooltip`" kind="inverted" importance="clear">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" kind="inverted" importance="outlined">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" kind="inverted">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-    </dt-stack>
+```vue demo
+<!-- @wrapper -->
+<dt-stack
+  gap="300"
+  :direction="{ 'default': 'column', 'md': 'row' }"
+>
+  <dt-stack direction="row" gap="100">
+    <dt-button v-dt-tooltip="`Tooltip`" kind="muted" importance="clear">
+      <template #startIcon="{ iconSize }">
+        <dt-icon
+          name="phone"
+          :size="iconSize"
+        />
+      </template>
+    </dt-button>
+    <dt-button v-dt-tooltip="`Tooltip`" kind="muted" importance="outlined">
+      <template #startIcon="{ iconSize }">
+        <dt-icon
+          name="phone"
+          :size="iconSize"
+        />
+      </template>
+    </dt-button>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<button class="d-btn d-btn--icon-only" type="button">...</button>
-<button class="d-btn d-btn--icon-only d-btn--outlined" type="button">...</button>
-'
-vueCode='
-<dt-button v-dt-tooltip="`Tooltip`" kind="muted" importance="clear">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" kind="muted" importance="outlined">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" importance="clear">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" importance="outlined">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" kind="danger" importance="clear">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" kind="danger" importance="outlined">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" kind="danger">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" importance="clear" kind="positive">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" importance="outlined" kind="positive">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" kind="positive">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" kind="inverted" importance="clear">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" kind="inverted" importance="outlined">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" kind="inverted">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-'
-showHtmlWarning />
+  <dt-stack direction="row" gap="100">
+    <dt-button v-dt-tooltip="`Tooltip`" importance="clear">
+      <template #startIcon="{ iconSize }">
+        <dt-icon
+          name="phone"
+          :size="iconSize"
+        />
+      </template>
+    </dt-button>
+    <dt-button v-dt-tooltip="`Tooltip`" importance="outlined">
+      <template #startIcon="{ iconSize }">
+        <dt-icon
+          name="phone"
+          :size="iconSize"
+        />
+      </template>
+    </dt-button>
+    <dt-button v-dt-tooltip="`Tooltip`">
+      <template #startIcon="{ iconSize }">
+        <dt-icon
+          name="phone"
+          :size="iconSize"
+        />
+      </template>
+    </dt-button>
+  </dt-stack>
+  <dt-stack direction="row" gap="100">
+    <dt-button v-dt-tooltip="`Tooltip`" kind="critical" importance="clear">
+      <template #startIcon="{ iconSize }">
+        <dt-icon
+          name="phone"
+          :size="iconSize"
+        />
+      </template>
+    </dt-button>
+    <dt-button v-dt-tooltip="`Tooltip`" kind="critical" importance="outlined">
+      <template #startIcon="{ iconSize }">
+        <dt-icon
+          name="phone"
+          :size="iconSize"
+        />
+      </template>
+    </dt-button>
+    <dt-button v-dt-tooltip="`Tooltip`" kind="critical">
+      <template #startIcon="{ iconSize }">
+        <dt-icon
+          name="phone"
+          :size="iconSize"
+        />
+      </template>
+    </dt-button>
+  </dt-stack>
+  <dt-stack direction="row" gap="100">
+    <dt-button v-dt-tooltip="`Tooltip`" importance="clear" kind="positive">
+      <template #startIcon="{ iconSize }">
+        <dt-icon
+          name="phone"
+          :size="iconSize"
+        />
+      </template>
+    </dt-button>
+    <dt-button v-dt-tooltip="`Tooltip`" importance="outlined" kind="positive">
+      <template #startIcon="{ iconSize }">
+        <dt-icon
+          name="phone"
+          :size="iconSize"
+        />
+      </template>
+    </dt-button>
+    <dt-button v-dt-tooltip="`Tooltip`" kind="positive">
+      <template #startIcon="{ iconSize }">
+        <dt-icon
+          name="phone"
+          :size="iconSize"
+        />
+      </template>
+    </dt-button>
+  </dt-stack>
+</dt-stack>
+```
 
 #### Circle
 
 The following styles are available as a circle shape.
 
-<code-well-header>
-  <dt-stack
-    gap="600"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <dt-stack direction="row" gap="400">
-      <dt-button v-dt-tooltip="`Tooltip`" circle kind="muted" importance="clear">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" circle kind="muted" importance="outlined">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-    </dt-stack>
-    <dt-stack direction="row" gap="400">
-      <dt-button v-dt-tooltip="`Tooltip`" circle kind="danger" importance="clear">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" circle kind="danger" importance="outlined">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" circle kind="danger">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-    </dt-stack>
-    <dt-stack direction="row" gap="400">
-      <dt-button v-dt-tooltip="`Tooltip`" circle importance="clear" kind="positive">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" circle importance="outlined" kind="positive">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" circle kind="positive">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-    </dt-stack>
-    <dt-stack direction="row" gap="400" class="d-bgc-contrast d-p8">
-      <dt-button v-dt-tooltip="`Tooltip`" circle kind="inverted" importance="clear">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" circle kind="inverted" importance="outlined">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-      <dt-button v-dt-tooltip="`Tooltip`" circle kind="inverted">
-        <template #icon>
-          <dt-icon
-            name="phone"
-            size="300"
-          />
-        </template>
-      </dt-button>
-    </dt-stack>
+```vue demo
+<!-- @wrapper -->
+<dt-stack
+  gap="300"
+  :direction="{ 'default': 'column', 'md': 'row' }"
+>
+  <dt-stack direction="row" gap="100">
+    <dt-button v-dt-tooltip="`Tooltip`" circle kind="muted" importance="clear">
+      <template #startIcon="{ iconSize }">
+        <dt-icon
+          name="phone"
+          :size="iconSize"
+        />
+      </template>
+    </dt-button>
+    <dt-button v-dt-tooltip="`Tooltip`" circle kind="muted" importance="outlined">
+      <template #startIcon="{ iconSize }">
+        <dt-icon
+          name="phone"
+          :size="iconSize"
+        />
+      </template>
+    </dt-button>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<button class="d-btn d-btn--circle btn--inverted" type="button">...</button>
-<button class="d-btn d-btn--circle btn--inverted d-btn--outlined" type="button">...</button>
-<button class="d-btn d-btn--circle btn--inverted d-btn--primary" type="button">...</button>
-'
-vueCode='
-<dt-button v-dt-tooltip="`Tooltip`" circle kind="muted" importance="clear">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" circle kind="muted" importance="outlined">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" circle kind="danger" importance="clear">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" circle kind="danger" importance="outlined">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" circle kind="danger">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" circle importance="clear" kind="positive">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" circle importance="outlined" kind="positive">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" circle kind="positive">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" circle kind="inverted" importance="clear">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" circle kind="inverted" importance="outlined">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" circle kind="inverted">
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-'
-showHtmlWarning />
+  <dt-stack direction="row" gap="100">
+    <dt-button v-dt-tooltip="`Tooltip`" circle kind="critical" importance="clear">
+      <template #startIcon="{ iconSize }">
+        <dt-icon
+          name="phone"
+          :size="iconSize"
+        />
+      </template>
+    </dt-button>
+    <dt-button v-dt-tooltip="`Tooltip`" circle kind="critical" importance="outlined">
+      <template #startIcon="{ iconSize }">
+        <dt-icon
+          name="phone"
+          :size="iconSize"
+        />
+      </template>
+    </dt-button>
+    <dt-button v-dt-tooltip="`Tooltip`" circle kind="critical">
+      <template #startIcon="{ iconSize }">
+        <dt-icon
+          name="phone"
+          :size="iconSize"
+        />
+      </template>
+    </dt-button>
+  </dt-stack>
+  <dt-stack direction="row" gap="100">
+    <dt-button v-dt-tooltip="`Tooltip`" circle importance="clear" kind="positive">
+      <template #startIcon="{ iconSize }">
+        <dt-icon
+          name="phone"
+          :size="iconSize"
+        />
+      </template>
+    </dt-button>
+    <dt-button v-dt-tooltip="`Tooltip`" circle importance="outlined" kind="positive">
+      <template #startIcon="{ iconSize }">
+        <dt-icon
+          name="phone"
+          :size="iconSize"
+        />
+      </template>
+    </dt-button>
+    <dt-button v-dt-tooltip="`Tooltip`" circle kind="positive">
+      <template #startIcon="{ iconSize }">
+        <dt-icon
+          name="phone"
+          :size="iconSize"
+        />
+      </template>
+    </dt-button>
+  </dt-stack>
+</dt-stack>
+```
 
 ## Loading
 
@@ -1077,213 +683,181 @@ Loading buttons are useful for communicating a delay between the button interact
 
 The width of the button remains determined by the length of the label, which is visually hidden in this state.
 
-<code-well-header>
-  <dt-stack gap="500" align="center">
-    <dt-toggle size="sm" v-model="loading" wrapperClass="d-g8">
-      Loading
-    </dt-toggle>
-    <dt-stack
-      gap="600"
-      :direction="{ 'default': 'column', 'md': 'row' }"
-    >
-      <dt-stack direction="row" gap="400">
-        <dt-button :loading="loading"> Place Call </dt-button>
-        <dt-button v-dt-tooltip="`Tooltip`" :loading="loading">
-          <template #icon>
-            <dt-icon
-              name="phone"
-              size="300"
-            />
-          </template>
-        </dt-button>
-        <dt-button v-dt-tooltip="`Tooltip`" circle :loading="loading">
-          <template #icon>
-            <dt-icon
-              name="phone"
-              size="300"
-            />
-          </template>
-        </dt-button>
-      </dt-stack>
-      <dt-stack direction="row" gap="400">
-        <dt-button kind="muted" importance="outlined" :loading="loading"> Place Call </dt-button>
-        <dt-button kind="muted" importance="outlined" v-dt-tooltip="`Tooltip`" :loading="loading">
-          <template #icon>
-            <dt-icon
-              name="phone"
-              size="300"
-            />
-          </template>
-        </dt-button>
-        <dt-button kind="muted" importance="outlined" v-dt-tooltip="`Tooltip`" circle :loading="loading">
-          <template #icon>
-            <dt-icon
-              name="phone"
-              size="300"
-            />
-          </template>
-        </dt-button>
-      </dt-stack>
+```vue demo
+<dt-stack gap="200" align="center">
+  <dt-toggle :size="200" v-model="loading" class="d-g-100">
+    Loading
+  </dt-toggle>
+  <dt-stack
+    gap="300"
+    :direction="{ 'default': 'column', 'md': 'row' }"
+  >
+    <dt-stack direction="row" gap="100">
+      <dt-button :loading="loading"> Place Call </dt-button>
+      <dt-button v-dt-tooltip="`Tooltip`" :loading="loading">
+        <template #icon>
+          <dt-icon
+            name="phone"
+            size="300"
+          />
+        </template>
+      </dt-button>
+      <dt-button v-dt-tooltip="`Tooltip`" circle :loading="loading">
+        <template #icon>
+          <dt-icon
+            name="phone"
+            size="300"
+          />
+        </template>
+      </dt-button>
+    </dt-stack>
+    <dt-stack direction="row" gap="100">
+      <dt-button kind="muted" importance="outlined" :loading="loading"> Place Call </dt-button>
+      <dt-button kind="muted" importance="outlined" v-dt-tooltip="`Tooltip`" :loading="loading">
+        <template #icon>
+          <dt-icon
+            name="phone"
+            size="300"
+          />
+        </template>
+      </dt-button>
+      <dt-button kind="muted" importance="outlined" v-dt-tooltip="`Tooltip`" circle :loading="loading">
+        <template #icon>
+          <dt-icon
+            name="phone"
+            size="300"
+          />
+        </template>
+      </dt-button>
     </dt-stack>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<button class="d-btn d-btn--loading d-btn--primary" type="button"><span class="d-btn__label">Place Call</span></button>
-<button class="d-btn d-btn--loading d-btn--outlined" type="button"><span class="d-btn__label">Place Call</span></button>
-<button class="d-btn d-btn--danger d-btn--loading" type="button"><span class="d-btn__label">Place Call</span></button>
-'
-vueCode='
+</dt-stack>
+<!-- @code -->
 <dt-button loading> Place Call </dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" loading>
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button v-dt-tooltip="`Tooltip`" circle loading>
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button kind="muted" importance="outlined" loading> Place Call </dt-button>
-<dt-button kind="muted" importance="outlined" v-dt-tooltip="`Tooltip`" loading>
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-<dt-button kind="muted" importance="outlined" v-dt-tooltip="`Tooltip`" circle loading>
-  <template #icon>
-    <dt-icon
-      name="phone"
-      size="300"
-    />
-  </template>
-</dt-button>
-'
-showHtmlWarning />
+```
 
 ### With label
 
-<code-well-header>
-  <dt-stack
-    gap="400"
-    direction="row"
-  >
-  <dt-button
-    icon-position="right"
-    size="xs"
-  >
-    Validating
-    <template #icon="{ iconSize }">
-      <dt-loader
-        :size="iconSize"
-      />
-    </template>
-  </dt-button>
-  <dt-button
-    icon-position="right"
-    size="sm"
-  >
-    Validating
-    <template #icon="{ iconSize }">
-      <dt-loader
-        :size="iconSize"
-      />
-    </template>
-  </dt-button>
-  <dt-button
-    icon-position="right"
-    size="md"
-  >
-    Validating
-    <template #icon="{ iconSize }">
-      <dt-loader
-        :size="iconSize"
-      />
-    </template>
-  </dt-button>
-  <dt-button
-    icon-position="right"
-    size="lg"
-  >
-    Validating
-    <template #icon="{ iconSize }">
-      <dt-loader
-        :size="iconSize"
-      />
-    </template>
-  </dt-button>
-</dt-stack>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<button class="d-btn d-btn--primary d-btn--sm" type="button">
-  <span class="d-btn__icon d-btn__icon--right">
-    <div class="d-loader" aria-label="loading">
-      <svg class="d-icon--size-200 d-icon d-icon--loading d-loader__icon" ...>
-        ...
-      </svg>
-    </div>
-  </span>
-  <span class="d-btn__label">
-    Validating
-  </span>
-</button>
-'
-vueCode='
-<dt-button icon-position="right">
+```vue demo
+<dt-stack
+  gap="100"
+  direction="row"
+>
+<dt-button
+  :size="100"
+>
   Validating
-  <template #icon="{ iconSize }">
+  <template #endIcon="{ iconSize }">
+    <dt-loader
+      :size="iconSize"
+    />
+  </template>
+</dt-button>
+<dt-button
+  :size="200"
+>
+  Validating
+  <template #endIcon="{ iconSize }">
+    <dt-loader
+      :size="iconSize"
+    />
+  </template>
+</dt-button>
+<dt-button
+  :size="300"
+>
+  Validating
+  <template #endIcon="{ iconSize }">
+    <dt-loader
+      :size="iconSize"
+    />
+  </template>
+</dt-button>
+<dt-button
+  :size="400"
+>
+  Validating
+  <template #endIcon="{ iconSize }">
+    <dt-loader
+      :size="iconSize"
+    />
+  </template>
+</dt-button>
+</dt-stack>
+<!-- @code -->
+<dt-button>
+  Validating
+  <template #endIcon="{ iconSize }">
     <dt-loader :size="iconSize" />
   </template>
 </dt-button>
-'
-showHtmlWarning />
+```
+
+## Leading & Trailing
+
+Use the `#leading` and `#trailing` slots to render freeform content at the start or end of a button — outside the label area but inside the button's border. Common use cases include badges, count indicators, or keyboard shortcut hints. Use `leading-class` and `trailing-class` to add padding or styling to the slot containers.
+
+> [!INFO] Info
+> This is not to be confused with `#icon` slots, which are specifically for icons. `leading` and `trailing` are essentially freeform.
+
+### Leading
+
+```vue demo
+<dt-button kind="muted" importance="outlined" leading-class="d-pis-150">
+  Caution
+  <template #leading>
+    <span class="d-bgc-critical-strong d-bar-300 d-w12 d-h12"></span>
+  </template>
+</dt-button>
+```
+
+### Trailing
+
+```vue demo
+<dt-button :size="200" kind="muted" importance="outlined" trailing-class="d-pie-25">
+  Copy
+  <template #startIcon="{ iconSize }">
+    <dt-icon name="copy" :size="iconSize" />
+  </template>
+  <template #trailing>
+    <dt-keyboard-shortcut shortcut="{cmd}+C" />
+  </template>
+</dt-button>
+```
+
+## Split Button
+
+> [!INFO]
+> [DtSplitButton](split-button.html) is its own component containing multiple DtButtons.
+
+```vue demo-only
+<dt-split-button
+  omega-tooltip-text="More calling options"
+>
+  Place call
+  <template #dropdownList>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 1 </dt-list-item>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 2 </dt-list-item>
+    <dt-list-item role="menuitem" navigation-type="arrow-keys"> Option 3 </dt-list-item>
+  </template>
+</dt-split-button>
+```
 
 ## Branded
 
 We provide the following branded buttons for log-in and sign-up workflows.
 
-<code-well-header>
-  <dt-stack
-    gap="400"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <span><button class="d-btn d-btn--brand d-btn--google d-w100p" type="button"><span class="d-btn__icon"><dt-icon name="google-glyph" /></span><span class="d-btn__label">Log in with Google</span></button></span>
-    <span><button class="d-btn d-btn--brand d-btn--o365 d-w100p" type="button"><span class="d-btn__icon"><dt-icon name="office-365" /></span><span class="d-btn__label">Log in with Office365</span></button></span>
-    <span><button class="d-btn d-btn--brand d-btn--linkedin d-w100p" type="button"><span class="d-btn__icon"><dt-icon name="linkedin" /></span><span class="d-btn__label">Log in with LinkedIn</span></button></span>
-  </dt-stack>
-</code-well-header>
-
-```html
-<button class="d-btn d-btn--brand d-btn--google" type="button">
-  <span class="d-btn__icon"><icon-google-glyph /></span>
-  <span class="d-btn__label">Log in with Google</span>
-</button>
-<button class="d-btn d-btn--brand d-btn--o365" type="button">
-  <span class="d-btn__icon"><icon-google-glyph /></span>
-  <span class="d-btn__label">Log in with Office365</span>
-</button>
-<button class="d-btn d-btn--brand d-btn--linkedin" type="button">
-  <span class="d-btn__icon"><icon-google-glyph /></span>
-  <span class="d-btn__label">Log in with LinkedIn</span>
-</button>
+```vue demo
+<!-- @wrapper -->
+<dt-stack
+  gap="100"
+  :direction="{ 'default': 'column', 'md': 'row' }"
+>
+  <button class="d-btn d-btn--brand d-btn--google d-w100p" type="button"><span class="d-btn__icon"><dt-icon name="google-glyph" /></span><span class="d-btn__label">Log in with Google</span></button>
+  <button class="d-btn d-btn--brand d-btn--o365 d-w100p" type="button"><span class="d-btn__icon"><dt-icon name="office-365" /></span><span class="d-btn__label">Log in with Office365</span></button>
+  <button class="d-btn d-btn--brand d-btn--linkedin d-w100p" type="button"><span class="d-btn__icon"><dt-icon name="linkedin" /></span><span class="d-btn__label">Log in with LinkedIn</span></button>
+</dt-stack>
 ```
-
-## Vue API
-
-<component-vue-api component-name="button" />
 
 ## Accessibility
 
@@ -1298,6 +872,10 @@ We provide the following branded buttons for log-in and sign-up workflows.
   - Pressing the `Shift+Tab` key moves focus to the previous focusable element.
 - When using DtButton with `href` or `to`, the component automatically handles Spacebar activation and disabled state (`aria-disabled`, `tabindex="-1"`). Navigating elements keep their native link role — `role="button"` is not added because the element navigates rather than performing an in-page action.
 
+## Vue API
+
+<component-vue-api component-name="button" />
+
 ## Classes
 
 <component-class-table component-name="button"></component-class-table>
@@ -1305,7 +883,10 @@ We provide the following branded buttons for log-in and sign-up workflows.
 <script setup>
 import { ref } from 'vue';
 import ButtonVariantsTable from '@baseComponents/ButtonVariantsTable.vue';
+import { useViewportBreakpoints } from '@composables/useViewportBreakpoints.js';
 
+const viewport = useViewportBreakpoints();
 const isDisabled = ref(true);
 const loading = ref(true);
+const isInverted = ref(true);
 </script>

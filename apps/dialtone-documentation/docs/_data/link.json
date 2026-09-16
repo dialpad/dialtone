@@ -6,9 +6,9 @@
       "description": "Base link style."
     },
     {
-      "class": "d-link--danger",
+      "class": "d-link--critical",
       "applies": ".d-link",
-      "description": "Danger link style. Used for potentially destructive actions."
+      "description": "Critical link style. Used for potentially destructive actions."
     },
     {
       "class": "d-link--inverted",
@@ -21,9 +21,9 @@
       "description": "A darker, muted link style that mirrors our muted button style."
     },
     {
-      "class": "d-link--success",
+      "class": "d-link--positive",
       "applies": ".d-link",
-      "description": "Success link style. Used to alert users to successful actions."
+      "description": "Positive link style. Used to alert users to successful actions."
     },
     {
       "class": "d-link--warning",

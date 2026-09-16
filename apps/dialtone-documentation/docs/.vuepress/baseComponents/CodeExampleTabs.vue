@@ -1,7 +1,12 @@
 <template>
-  <dt-tab-group class="code-example-tab-group" @change="selectedPanelId = $event.selected">
+  <dt-tab-group
+    class="code-example-tab-group"
+    activation-mode="auto"
+    :size="100"
+    @change="selectedPanelId = $event.selected"
+  >
     <template #tabs>
-      <dt-stack direction="row" justify="between" align="start" class="d-w100p">
+      <dt-stack direction="row" justify="between" align="center" class="d-w100p">
         <div>
           <dt-tab
             :id="vueTabId"
@@ -33,7 +38,7 @@
       :id="vuePanelId"
       :tab-id="vueTabId"
     >
-      <div ref="vuePanelRef" v-dt-scrollbar class="language-html d-hmx332" data-ext="html">
+      <div ref="vuePanelRef" v-dt-scrollbar class="language-html d-hmx-250" data-ext="html">
         <pre class="language-html" v-html="highlightedVue" />
       </div>
     </dt-tab-panel>
@@ -46,29 +51,28 @@
         v-if="showHtmlWarning"
         class="d-ps-static"
         kind="warning"
-        hide-close
+        :show-close="false"
       >
         Raw HTML renders visuals only. You may need to add JS to replicate its functionality.
       </dt-banner>
-      <div ref="htmlPanelRef" v-dt-scrollbar class="language-html d-hmx332" data-ext="html">
+      <div ref="htmlPanelRef" v-dt-scrollbar class="language-html d-hmx-250" data-ext="html">
         <pre class="language-html" v-html="highlightedHtml" />
       </div>
     </dt-tab-panel>
     <div
       v-if="shouldShowButton"
-      class="code-example-tab-group__more d-ps-absolute d-bn16 d-l50p"
+      class="code-example-tab-group__more d-ps-absolute d-ibe-n100 d-l50p"
       aria-hidden="true"
     >
       <dt-button
         class="code-example-tab-group__more-btn d-bgc-secondary d-bs-sm"
         kind="muted"
         importance="outlined"
-        icon-position="right"
-        size="sm"
+        :size="100"
         @click="expandCodeBlocks"
       >
         Show all
-        <template #icon="{ iconSize }">
+        <template #endIcon="{ iconSize }">
           <dt-icon name="arrow-down" :size="iconSize" />
         </template>
       </dt-button>
@@ -144,7 +148,7 @@ const selectedPanelId = ref(vuePanelId);
 const vuePanelRef = ref(null);
 const htmlPanelRef = ref(null);
 const { shouldShowButton, handleExpand, initExpandable } = useDocExpandable({
-  maxHeightClass: 'd-hmx332',
+  maxHeightClass: 'd-hmx-250',
 });
 
 /**
@@ -200,16 +204,16 @@ const formatHTML = async (elementHTML) => {
 
 <style scoped lang="less">
 .code-example-tab-group {
-  margin-top: var(--dt-space-500);
+  margin-block-start: var(--dt-spacing-200);
   position: relative;
 
   .language-html {
-    margin-top: 0;
+    margin-block-start: 0;
     position: relative;
   }
 
   &__more {
-    transform: translateX(calc(var(--dt-size-50-percent) * -1));
+    transform: translateX(calc(var(--dt-layout-50-percent) * -1));
   }
 }
 </style>

@@ -12,6 +12,7 @@ const messages = ruleMessages(ruleName, {
 });
 
 const meta = {
+  description: 'Detects raw base-color tokens that should use a semantic color token.',
   url: 'https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/no-base-color-tokens.md',
 };
 

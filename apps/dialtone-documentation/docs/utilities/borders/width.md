@@ -1,58 +1,35 @@
 ---
 title: Border Widths
 description: Utilities for controlling an element's border width.
+keywords: ["border size", "border thickness", "border top width", "border right width", "border bottom width", "border left width", "border block start width", "border block end width", "border inline start width", "border inline end width"]
 ---
 
 ## All Sides
 
 Use `d-baw{n}` to change the border width on your element.
 
-<code-well-header>
-  <dt-stack
-    gap="500"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <div
-      v-for="r in [0, 1, 2, 4]"
-      class="d-p16 d-ba d-bc-default"
-      :class="`d-baw${r}`"
-    >
-      d-baw{{r}}
-    </div>
-  </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-ba d-baw0">...</div>
-<div class="d-ba d-baw1">...</div>
-<div class="d-ba d-baw2">...</div>
-<div class="d-ba d-baw4">...</div>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }">
+  <div class="d-p-200 d-ba d-baw0">d-baw0</div>
+  <div class="d-p-200 d-ba d-baw1">d-baw1</div>
+  <div class="d-p-200 d-ba d-baw2">d-baw2</div>
+  <div class="d-p-200 d-ba d-baw4">d-baw4</div>
+</dt-stack>
 ```
 
 ## Individual Sides
 
 Use `d-b{a|t|r|b|l}w{n}` to change the border width of your direction on your element.
 
-<code-well-header>
-  <dt-stack
-    gap="500"
-    :direction="{ 'default': 'column', 'md': 'row' }"
-  >
-    <div
-      v-for="r in [0, 1, 2, 4]"
-      class="d-p16 d-ba d-baw0 d-bc-default d-bgc-primary"
-      :class="`d-btw${r}`"
-    >
-      d-btw{{r}}
-    </div>
-  </dt-stack>
-</code-well-header>
-
-```html
-
-<div class="d-bt d-btw1">...</div>
-<div class="d-br d-btw2">...</div>
-<div class="d-bb d-btw4">...</div>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="200" :direction="{ 'default': 'column', 'md': 'row' }">
+  <div class="d-p-200 d-ba d-baw0 d-bgc-primary d-btw0">d-btw0</div>
+  <div class="d-p-200 d-ba d-baw0 d-bgc-primary d-btw1">d-btw1</div>
+  <div class="d-p-200 d-ba d-baw0 d-bgc-primary d-btw2">d-btw2</div>
+  <div class="d-p-200 d-ba d-baw0 d-bgc-primary d-btw4">d-btw4</div>
+</dt-stack>
 ```
 
 ## Classes
@@ -64,7 +41,7 @@ Use `d-b{a|t|r|b|l}w{n}` to change the border width of your direction on your el
         <th scope="row" class="d-code--sm d-docsite-code">.d-b{{ i[0] }}w{{ key }}</th>
         <td class="d-code--sm">
           <span v-if="i === 'all'">border-width: var(--dt-size-border-{{ val }}) !important;</span>
-          <span v-else>border-{{i}}-width: var(--dt-size-border-{{ val }}) !important;</span>
+          <span v-else>border-{{ i === 'top' ? 'block-start' : i === 'bottom' ? 'block-end' : i === 'left' ? 'inline-start' : i === 'right' ? 'inline-end' : i }}-width: var(--dt-size-border-{{ val }}) !important;</span>
         </td>
       </tr>
     </tbody>

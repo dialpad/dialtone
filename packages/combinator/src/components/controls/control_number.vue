@@ -1,63 +1,75 @@
 <template>
-  <dt-stack
-    direction="row"
+  <dtc-control-clearable-shell
+    :label="label"
+    :empty="isEmpty"
+    :expanded="expanded"
+    :disabled="disabled"
+    :required="required"
+    :clearable="clearable"
     align="end"
+    @add="addValue"
+    @clear="clearValue"
   >
-    <div class="d-fl-grow1">
-      <dt-input
-        :value="inputValue"
-        :disabled="disabled || isNaN(value)"
-        type="number"
-        size="sm"
-        @input="e => emit(VALUE_UPDATE_EVENT, parseInt(e))"
-      >
-        <template #labelSlot>
-          <span class="d-input__label-text d-label--sm">
-            <slot />
-          </span>
-        </template>
-      </dt-input>
-    </div>
-    <div class="d-pl6">
-      <dt-checkbox
-        label="NaN"
-        :checked="isNaN(value)"
-        :disabled="disabled"
-        @input="toggleNaN"
-      />
-    </div>
-  </dt-stack>
+    <template #label>
+      <slot />
+    </template>
+    <dt-input
+      ref="inputRef"
+      class="d-fl1"
+      :model-value="inputValue"
+      :disabled="disabled"
+      type="number"
+      :size="100"
+      @update:model-value="updateValue"
+      @blur="collapseIfEmpty"
+    >
+      <template #label>
+        <dt-text
+          kind="label"
+          :size="100"
+          tone="secondary"
+          class="d-mbe-50 d-c-default d-d-block"
+        >
+          <slot />
+        </dt-text>
+      </template>
+    </dt-input>
+  </dtc-control-clearable-shell>
 </template>
 
 <script setup>
-import { DtInput, DtCheckbox } from '@dialpad/dialtone-vue';
+import { DtInput, DtText } from '@dialpad/dialtone-vue';
+import DtcControlClearableShell from './control_clearable_shell.vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
-import { computed } from 'vue';
+import { useClearableInput } from '@/src/lib/utils_vue';
 
 const props = defineProps({
+  label: {
+    type: String,
+    default: '',
+  },
   value: {
-    type: Number,
-    default: () => Number(),
+    type: undefined,
+    default: 0,
   },
   disabled: {
     type: Boolean,
     default: false,
   },
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  clearable: {
+    type: Boolean,
+    default: true,
+  },
 });
-
-function isNaN (value) {
-  return Number.isNaN(value);
-}
-
-const inputValue = computed(() => {
-  return isNaN(props.value) ? null : props.value;
-});
-
-function toggleNaN (e) {
-  emit(VALUE_UPDATE_EVENT, e ? NaN : 0);
-}
 
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
+
+const { expanded, inputRef, inputValue, isEmpty, updateValue, addValue, collapseIfEmpty, clearValue } =
+  useClearableInput({ props, emit, parse: (e) => (e === '' ? null : parseInt(e)) });
 </script>
 
 <script>

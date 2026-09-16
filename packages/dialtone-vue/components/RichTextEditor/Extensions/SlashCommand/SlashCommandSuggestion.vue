@@ -1,0 +1,50 @@
+<template>
+  <div>
+    <dt-text
+      kind="body"
+      :size="300"
+      :density="300"
+      as="div"
+    >
+      <span>/{{ command }}</span><span v-if="parametersExample"> {{ parametersExample }}</span>
+    </dt-text>
+    <dt-text
+      kind="body"
+      :size="200"
+      tone="tertiary"
+      as="div"
+    >
+      {{ description }}
+    </dt-text>
+  </div>
+</template>
+
+<script>
+import { DtText } from '@/components/Text';
+
+export default {
+  name: 'SlashCommandSuggestion',
+  components: { DtText },
+
+  props: {
+    item: {
+      type: Object,
+      required: true,
+    },
+  },
+
+  computed: {
+    command () {
+      return this.item.command;
+    },
+
+    description () {
+      return this.item.description;
+    },
+
+    parametersExample () {
+      return this.item.parametersExample;
+    },
+  },
+};
+</script>

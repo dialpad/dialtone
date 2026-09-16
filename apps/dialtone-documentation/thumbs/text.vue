@@ -1,0 +1,36 @@
+<template>
+  <dt-stack gap="300" align="center">
+    <dt-text
+      density="100"
+      as="h2"
+      kind="headline"
+      size="500"
+    >
+      Headline
+    </dt-text>
+    <dt-text
+      density="100"
+      as="p"
+      kind="body"
+      size="300"
+    >
+      Body
+    </dt-text>
+    <dt-text
+      density="100"
+      as="p"
+      kind="label"
+      size="400"
+    >
+      Label
+    </dt-text>
+    <dt-text
+      density="100"
+      as="code"
+      kind="code"
+      size="300"
+    >
+      Code
+    </dt-text>
+  </dt-stack>
+</template>

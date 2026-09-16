@@ -6,9 +6,9 @@
       "description": "Base parent notice class. This defaults to the system notice style."
     },
     {
-      "class": "d-notice--error",
+      "class": "d-notice--critical",
       "applies": ".d-notice",
-      "description": "Applies error visual style."
+      "description": "Applies critical visual style."
     },
     {
       "class": "d-notice--info",
@@ -16,9 +16,9 @@
       "description": "Applies info visual style."
     },
     {
-      "class": "d-notice--success",
+      "class": "d-notice--positive",
       "applies": ".d-notice",
-      "description": "Applies success visual style."
+      "description": "Applies positive visual style."
     },
     {
       "class": "d-notice--warning",

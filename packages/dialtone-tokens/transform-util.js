@@ -2,7 +2,7 @@
  * Utility functions for custom transforms
  */
 
-import Color from 'tinycolor2';
+import Color from 'colorjs.io';
 import { transformColorModifiers } from '@tokens-studio/sd-transforms';
 
 export const DeviceObjectFormat = Object.freeze({
@@ -63,12 +63,12 @@ export function tokenColorToDeviceColor (color, deviceObjectFormat) {
   switch (deviceObjectFormat) {
     case DeviceObjectFormat.ANDROID_COMPOSE: {
       // To Compose argb hex8 e.g. Color(0xff000000)
-      const hex8 = Color(color).toHex8();
+      const hex8 = toHex8(color);
       return `Color(0x${hex8.slice(6) + hex8.slice(0, 6)})`;
     }
     case DeviceObjectFormat.ANDROID_XML: {
       // To argb hex8 e.g. #ff000000
-      const hex8 = Color(color).toHex8();
+      const hex8 = toHex8(color);
       return '#' + hex8.slice(6) + hex8.slice(0, 6);
     }
     case DeviceObjectFormat.IOS_SWIFT: {
@@ -117,7 +117,7 @@ export function deviceTransformColorModifiers (token, deviceObjectFormat) {
   }
 
   // Log a warning if there are new color modifier params we have not tested in mobile yet
-  if (!['hsl', 'lch'].includes(modifier.space) || modifier.format || modifier.type === 'mix') {
+  if (!['hsl', 'lch', 'oklch'].includes(modifier.space) || modifier.format || modifier.type === 'mix') {
     console.log('\x1b[1;33m%s\x1b[0m', `Color modifier not tested on mobile: ${token.name}, ${modifier.type}, ${modifier.space}, format=${modifier.format}`);
   }
 
@@ -127,11 +127,26 @@ export function deviceTransformColorModifiers (token, deviceObjectFormat) {
 const swiftUIColorRegExp =
   /UIColor\(red: (?<red>[\d.]+?), green: (?<green>[\d.]+?), blue: (?<blue>[\d.]+?), alpha: (?<alpha>[\d.]+?)\)/;
 
+/**
+ * Converts any CSS color string to an 8-character hex string (RRGGBBAA, lowercase, no #).
+ * Drop-in replacement for tinycolor2's toHex8().
+ */
+function toHex8 (color) {
+  const c = new Color(color).to('srgb');
+  const clamp = (v) => Math.min(1, Math.max(0, v));
+  const [r, g, b] = c.coords.map(v => Math.round(clamp(v) * 255));
+  const a = Math.round(clamp(c.alpha) * 255);
+  return [r, g, b, a].map(v => v.toString(16).padStart(2, '0')).join('');
+}
+
 function tokenColorToSwiftUIColor (color) {
-  const { r, g, b, a } = Color(color).toRgb();
-  const rFixed = (r / 255.0).toFixed(3);
-  const gFixed = (g / 255.0).toFixed(3);
-  const bFixed = (b / 255.0).toFixed(3);
+  const c = new Color(color).to('srgb');
+  const clamp = (v) => Math.min(1, Math.max(0, v));
+  const [r, g, b] = c.coords.map(v => clamp(v));
+  const a = c.alpha;
+  const rFixed = r.toFixed(3);
+  const gFixed = g.toFixed(3);
+  const bFixed = b.toFixed(3);
   const aFixed = a > 0 && a < 1 ? a.toFixed(3) : a;
   return `UIColor(red: ${rFixed}, green: ${gFixed}, blue: ${bFixed}, alpha: ${aFixed})`;
 }

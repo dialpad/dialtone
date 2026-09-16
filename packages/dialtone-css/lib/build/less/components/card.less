@@ -17,6 +17,7 @@
 //  ============================================================================
 //  $$  WRAPPER
 //  ----------------------------------------------------------------------------
+@layer dialtone.components {
 .d-card {
   display: flex;
   flex-direction: column;
@@ -38,20 +39,22 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding: var(--dt-size-500) var(--dt-size-500) 0;
+  padding: var(--dt-spacing-200) var(--dt-spacing-200) 0;
 }
 
 //  $$  CONTENT
 //  ----------------------------------------------------------------------------
 .d-card__content {
-  padding: var(--dt-space-500);
-  overflow-y: auto;
+  padding: var(--dt-spacing-200);
+  overflow-block: auto;
 }
 
 //  $$  FOOTER
 //  ----------------------------------------------------------------------------
 .d-card__footer {
   display: flex;
+  gap: var(--dt-spacing-100);
   align-items: center;
-  padding: 0 var(--dt-space-500) var(--dt-space-500);
+  padding: 0 var(--dt-spacing-200) var(--dt-spacing-200);
+}
 }

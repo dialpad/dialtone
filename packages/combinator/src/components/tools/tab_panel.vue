@@ -1,7 +1,7 @@
 <template>
   <dt-tab-group
     class="d-d-flex d-fd-column d-of-y-auto d-h100p"
-    tab-list-class="dtc-theme__tabs d-zi-base1 d-ps-sticky d-t0"
+    tab-list-class="dtc-theme__tabs d-zi-base1 d-ps-sticky d-ibs-0"
     :selected="getId(selected)"
     borderless
   >
@@ -27,7 +27,7 @@
       <dt-tab-panel
         :id="getId(slot)"
         :tab-id="getId(slot)"
-        class="d-d-flex d-fl-grow1 d-py8 d-px16"
+        class="d-d-flex d-fl-grow1 d-py-100 d-px-200"
       >
         <slot :name="slot" />
       </dt-tab-panel>

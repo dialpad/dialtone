@@ -21,6 +21,16 @@
       "description": "Inverts the tablist to work on dark backgrounds."
     },
     {
+      "class": "d-tablist--spread-grow",
+      "applies": ".d-tablist",
+      "description": "Tabs grow proportionally to fill available space. Longer labels get more room."
+    },
+    {
+      "class": "d-tablist--spread-equal",
+      "applies": ".d-tablist",
+      "description": "All tabs are the same width regardless of content length."
+    },
+    {
       "class": "d-tab",
       "applies": "N/A",
       "description": "Styles each tab."

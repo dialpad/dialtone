@@ -21,7 +21,7 @@ describe('Input Mixin Tests', () => {
         });
 
         describe('When validation state is in VALIDATION_MESSAGE_TYPES', () => {
-          itBehavesLikePassesCustomPropValidation(prop, VALIDATION_MESSAGE_TYPES.SUCCESS);
+          itBehavesLikePassesCustomPropValidation(prop, VALIDATION_MESSAGE_TYPES.POSITIVE);
         });
 
         describe('When validation state is not in VALIDATION_MESSAGE_TYPES', () => {

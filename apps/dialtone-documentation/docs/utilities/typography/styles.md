@@ -1,18 +1,11 @@
 ---
-title: Typography Styles
-description: Core Typographic Styles for Body Text and Headlines.
+title: Text Styles
+keywords: ["headline", "body", "label", "caption"]
 ---
 
-Typography styles combine multiple typography properties – e.g. `font-family`, `font-size`, `line-height`,`font-weight` into a single class. Rather than declare multiple CSS Utilities for each property.
+> [!WARNING]
+> Typography Styles have been moved to [Foundations > Type](/foundations/typography/).
 
-For example, instead of `class="d-fs-200 d-lh-100"` you would declare `class="d-body--md-compact"`.
+Typography styles combine multiple typography properties – e.g. `font-family`, `font-size`, `line-height`,`font-weight` into a single class rather than combine multiple CSS Utilities.
 
-<dt-notice
-  kind="warning"
-  :hideClose="true"
-  class="d-wmx100p d-mt24"
->
-  <template #default>
-    <p class="d-body--md-compact"> Typography Styles have been moved to <dt-link to="/design/typography/" kind="muted" class="d-fw-semibold">Design Language > Typography</dt-link>.</p>
-  </template>
-</dt-notice>
+For example, instead of `class="d-fs-200 d-lh-100"` you would apply `class="d-text-body--md"`.

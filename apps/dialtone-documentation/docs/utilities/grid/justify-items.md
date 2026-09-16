@@ -1,27 +1,19 @@
 ---
 title: Justify Items
 description: Utilities for controlling how grid items align along their inline axis.
+keywords: ["css grid", "inline axis", "justify start", "justify end", "justify left", "justify right", "inline start", "inline end"]
 ---
 
 ## Auto
 
 Use `d-ji-auto` to justify grid items automatically along their inline axis. This is the default value.
 
-<code-well-header>
-  <div class="d-d-grid d-g16 d-g-cols2 d-ji-auto d-w100p d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4">4</dt-stack>
-  </div>
-</code-well-header>
-
-```html
-<div class="d-d-grid d-g-cols2 d-ji-auto">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-  <div>4</div>
+```vue demo
+<div class="d-d-grid d-g-200 d-g-cols2 d-ji-auto d-w100p d-bar-400 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-wmn-100 d-bgc-moderate-opaque d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-wmn-100 d-bgc-moderate-opaque d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-wmn-100 d-bgc-moderate-opaque d-bar-300">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-wmn-100 d-bgc-moderate-opaque d-bar-300">4</dt-stack>
 </div>
 ```
 
@@ -29,21 +21,12 @@ Use `d-ji-auto` to justify grid items automatically along their inline axis. Thi
 
 Use `d-ji-start` to justify items against the start of their inline axis. Note that this does not work on flexed objects, only grid objects.
 
-<code-well-header>
-  <div class="d-d-grid d-g16 d-g-cols2 d-ji-start d-w100p d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4">4</dt-stack>
-  </div>
-</code-well-header>
-
-```html
-<div class="d-d-grid d-g-cols2 d-ji-start">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-  <div>4</div>
+```vue demo
+<div class="d-d-grid d-g-200 d-g-cols2 d-ji-start d-w100p d-bar-400 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-wmn-100 d-bgc-moderate-opaque d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-wmn-100 d-bgc-moderate-opaque d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-wmn-100 d-bgc-moderate-opaque d-bar-300">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-wmn-100 d-bgc-moderate-opaque d-bar-300">4</dt-stack>
 </div>
 ```
 
@@ -51,21 +34,12 @@ Use `d-ji-start` to justify items against the start of their inline axis. Note t
 
 Use `d-ji-end` to justify items against the end of their inline axis. Note that this does not work on flexed objects, only grid objects.
 
-<code-well-header>
-  <div class="d-d-grid d-g16 d-g-cols2 d-ji-end d-w100p d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4">4</dt-stack>
-  </div>
-</code-well-header>
-
-```html
-<div class="d-d-grid d-g-cols2 d-ji-end">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-  <div>4</div>
+```vue demo
+<div class="d-d-grid d-g-200 d-g-cols2 d-ji-end d-w100p d-bar-400 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-wmn-100 d-bgc-moderate-opaque d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-wmn-100 d-bgc-moderate-opaque d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-wmn-100 d-bgc-moderate-opaque d-bar-300">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-wmn-100 d-bgc-moderate-opaque d-bar-300">4</dt-stack>
 </div>
 ```
 
@@ -73,21 +47,12 @@ Use `d-ji-end` to justify items against the end of their inline axis. Note that 
 
 Use `d-ji-center` to justify items to the center of their inline axis.
 
-<code-well-header>
-  <div class="d-d-grid d-g16 d-g-cols2 d-ji-center d-w100p d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-wmn64 d-bgc-moderate-opaque d-bar4">4</dt-stack>
-  </div>
-</code-well-header>
-
-```html
-<div class="d-d-grid d-g-cols2 d-ji-center">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
-  <div>4</div>
+```vue demo
+<div class="d-d-grid d-g-200 d-g-cols2 d-ji-center d-w100p d-bar-400 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-wmn-100 d-bgc-moderate-opaque d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-wmn-100 d-bgc-moderate-opaque d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-wmn-100 d-bgc-moderate-opaque d-bar-300">3</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-wmn-100 d-bgc-moderate-opaque d-bar-300">4</dt-stack>
 </div>
 ```
 
@@ -96,9 +61,25 @@ Use `d-ji-center` to justify items to the center of their inline axis.
 <utility-class-table>
   <template #content>
     <tbody>
-      <tr v-for="i in ['center', 'end', 'start', 'left', 'right', 'baseline', 'first-baseline', 'last-baseline', 'stretch', 'safe', 'unsafe', 'normal', 'legacy', 'auto', 'unset']">
-        <th scope="row" class="d-code--sm d-docsite-code">.d-ji-{{ i }}</th>
-        <td class="d-code--sm">justify-items: {{ i }} !important;</td>
+      <tr v-for="{ class: cls, deprecated } in [
+        { class: 'center' },
+        { class: 'end' },
+        { class: 'start' },
+        { class: 'left', deprecated: true },
+        { class: 'right', deprecated: true },
+        { class: 'baseline' },
+        { class: 'first-baseline' },
+        { class: 'last-baseline' },
+        { class: 'stretch' },
+        { class: 'safe' },
+        { class: 'unsafe' },
+        { class: 'normal' },
+        { class: 'legacy' },
+        { class: 'auto' },
+        { class: 'unset' },
+      ]">
+        <th scope="row" class="d-code--sm d-docsite-code">.d-ji-{{ cls }} <dt-badge v-if="deprecated" type="critical" class="d-ff-sans">Deprecated</dt-badge></th>
+        <td class="d-code--sm">justify-items: {{ cls }} !important;</td>
       </tr>
     </tbody>
   </template>

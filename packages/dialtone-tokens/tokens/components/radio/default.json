@@ -3,15 +3,15 @@
     "size": {
       "width": {
         "value": "{size.500}",
-        "type": "sizing"
+        "type": "dimension"
       },
       "height": {
         "value": "{radio.size.width}",
-        "type": "sizing"
+        "type": "dimension"
       },
       "radius": {
         "value": "50%",
-        "type": "borderRadius"
+        "type": "dimension"
       }
     },
     "color": {

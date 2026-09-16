@@ -1,6 +1,10 @@
 {
   "shell": {
     "base": {
+      "material": {
+        "value": "sandstone",
+        "type": "other"
+      },
       "color": {
         "surface": {
           "value": "{color.olive.50}",
@@ -11,11 +15,11 @@
           "type": "color"
         },
         "border": {
-          "value": "{color.red.900}",
+          "value": "{color.red.950}",
           "type": "color"
         },
         "accent": {
-          "value": "{color.red.600}",
+          "value": "{color.red.800}",
           "type": "color"
         },
         "action": {

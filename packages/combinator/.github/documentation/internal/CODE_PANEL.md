@@ -1,65 +1,71 @@
-# Code Panel
+# Code panel
 
-The code panel is responsible for providing technical information about the target component in its current state.
-It consists of the 'code editor' and 'event console' and also provides an overlay for external components
-such as 'settings'.
+The code panel shows generated Vue template code for the current target
+component state. In the live app, it mounts `DtcCodeEditor` inside
+`DtcCodePanel`.
 
-## Code Editor
+The old event console components still exist under `components/event_console/`,
+but `DtcCodePanel` and `DtcCombinator` do not mount them.
 
-The code editor displays the vue template code required to reproduce 
-the component in its current state in an external project.
+## Mounted structure
 
-It provides functionality for directly editing slot content for the current component.
+`DtcCodePanel` receives:
 
-### Element
+- `info`
+- `options`
+- `settings`
+- `disabledMembers`
+- `devMode`
+- `hasChanges`
+- `fullScreen`
 
-The code editor renders an 'element' component at the root level to represent the target component.
-This is the representation of the tag to use in a vue template.
+It passes the relevant data into `DtcCodeEditor` and exposes an `overlay` slot
+for callers. The current root component does not pass any overlay content.
 
-### Attributes
+## Code editor
 
-The code editor renders an 'attributes' component inside the 'element' component's opening slot.
-This generates all the attribute fields to be included on the element tag.
+`DtcCodeEditor` renders one root element for the target component. It derives the
+tag name from `info.displayName` with `paramCase`.
 
-The members are filtered and determined how they will be displayed based on their value.
-Any member with a value matching its default value will be hidden, unless the 'verbose' prop is true.
+The editor shows:
 
-### Slots
+- visible props and attributes in the opening tag;
+- slot content for non-empty slots;
+- scoped slot bindings when the slot content references those bindings;
+- a Copy button;
+- in dev mode, a Copy JSON button when `hasChanges` is true.
 
-The code editor renders a 'slot' component inside the 'element' component's default slot for each
-slot that has content.
+## Visible attributes
 
-The slot is represented by displaying the content wrapped by 'template' tags that match the slot name.
-The default slot is not wrapped by 'template' tags.
+`code_editor_tag_attributes.vue` hides bindings when:
 
-Slots content is rendered in an editable field that will update **options** data for the slot.
+- the value is `null`;
+- the value is `NaN`;
+- the value matches the member default and verbose mode is off;
+- the member name is in `disabledMembers`.
 
-## Event Console
+Verbose mode shows default-value bindings but still respects disabled members.
 
-The event console displays data about events captured from the target component. 
-It allows exploration of complex objects by storing them in a list and providing an interactive interface.
-Each triggered event will create a console entry represented by a 'pair' component.
+## Slots
 
-### Pair
+`DtcCodeEditor` reads slot content from `options.slots`. It renders the default
+slot as direct content and wraps named slots in `<template #name>`.
 
-The pair component represents a key-value pair and allows recursive exploration of objects.
-A pair contains a name (key) and a value. Based on the data type of the value it will display a 
-component to represent a value.
+For scoped slots, `DtcCodeEditor` checks which documented bindings appear in the
+slot template string and writes the matching scope expression.
 
-There are a variety of event console components for different value types:
-* String
-* Value (Boolean, Number, null...)
-* Array
-* Object
-* Function
-* Element (HTML Element)
+## Copy behavior
 
-Other components such as objects and array can render more 'pair' components allowing for
- exploration at unlimited depth.
+The Copy button writes `copyText`, a plain-text template built from `info` and
+`options`. It does not read DOM text, so layout or flex indentation does not
+change clipboard output.
 
-### Lazy Load
+The Copy JSON button writes a variant preset fragment from non-empty current
+options. It skips disabled members.
 
-The lazy load component provides generic functionality to not render content until the expand button is pressed.
-It is used by the 'object', 'array' and 'element' components for two reasons:
-* Prevent visual clutter
-* Improve performance by preventing over-rendering
+## Latent event console
+
+`components/event_console/**` can still display captured event payloads and
+recursively inspect arrays, objects, functions, strings, elements, and primitive
+values. The live code panel no longer mounts it. DLT-3498 tracks whether to
+rewire or remove this latent subsystem.

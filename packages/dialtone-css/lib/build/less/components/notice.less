@@ -10,6 +10,7 @@
 //  $   BASE WRAPPER
 //  ----------------------------------------------------------------------------
 
+@layer dialtone.components {
 .d-notice,
 .d-banner,
 .d-toast {
@@ -19,26 +20,32 @@
     --notice-color-text: var(--dt-color-foreground-primary);
     --notice-color-icon: var(--notice-color-text);
     --notice-color-shadow: var(--dt-color-border-subtle);
-    --notice-padding: var(--dt-space-500);
-    --notice-font-size: var(--dt-font-size-200);
+    --notice-padding: var(--dt-spacing-200);
     --notice-line-height: var(--dt-font-line-height-300);
-    --notice-border-radius: var(--dt-size-400);
-    --notice-box-shadow: 0 0 0 var(--dt-size-100) var(--notice-color-shadow) inset;
+    --notice-border-radius: var(--dt-size-radius-400);
+    --notice-box-shadow: 0 0 0 var(--dt-size-border-100) var(--notice-color-shadow) inset;
 
-    //  Base Styles
+    //  Shared Styles
     //  ------------------------------------------------------------------------
-    display: flex;
-    align-items: center;
     box-sizing: border-box;
-    width: 100%;
-    max-width: var(--dt-size-1020);
+    inline-size: 100%;
+    max-inline-size: var(--dt-layout-1000);
     padding: var(--notice-padding);
     color: var(--notice-color-text);
-    font-size: var(--notice-font-size);
+    font: var(--dt-text-body-md);
     line-height: var(--notice-line-height);
     background-color: var(--notice-color-background);
     border-radius: var(--notice-border-radius);
     box-shadow: var(--notice-box-shadow);
+}
+
+.d-notice {
+    display: flex;
+    align-items: start;
+}
+
+.d-toast {
+    --notice-color-background: var(--dt-color-surface-overlay);
 }
 
 //  ============================================================================
@@ -49,8 +56,11 @@
 .d-notice__content {
     display: flex;
     flex: 1 auto;
-    flex-direction: column;
-    margin-right: var(--dt-space-500);
+    flex-direction: var(--notice-content-direction, column);
+    margin-inline-end: var(--dt-spacing-200);
+    gap: var(--notice-content-gap, var(--dt-spacing-100));
+    align-items: var(--notice-content-align, normal);
+    align-self: center;
 }
 
 //  $$  ACTIONS
@@ -58,8 +68,13 @@
 .d-notice__actions {
     display: flex;
     flex: 0 auto;
-    gap: var(--dt-space-400);
+    gap: var(--dt-spacing-100);
     align-items: center;
+    align-self: var(--notice-actions-align, start);
+
+    :where(button:first-child) {
+        margin-inline-start: var(--notice-actions-button-offset, 0);
+    }
 
     .d-btn {
         color: var(--notice-color-text);
@@ -71,11 +86,12 @@
 .d-notice__icon {
     display: flex;
     flex: 0 auto;
-    margin-right: var(--dt-space-450);
     color: var(--notice-color-icon);
+    margin-inline-end: var(--notice-icon-gap, var(--dt-spacing-150));
+    margin-block-start: var(--notice-icon-block-offset, var(--dt-spacing-25));
 
-    .d-banner & {
-        margin-right: var(--dt-space-400);
+    &--has-title {
+        margin-block-start: var(--dt-spacing-0);
     }
 }
 
@@ -83,14 +99,15 @@
 //  $   COPY STYLES
 //  ============================================================================
 .d-notice__title {
-    font-weight: var(--dt-font-weight-bold);
-    font-size: inherit;
+    font: var(--dt-text-headline-md);
+    line-height: var(--dt-font-line-height-200);
+    text-box-trim: trim-both;
 }
 
 .d-notice__message {
-    .d-notice__title:not([hidden]) + & {
-        font-size: var(--dt-font-size-100);
-    }
+    font: var(--dt-text-body-sm);
+    text-wrap: pretty;
+    text-box-trim: trim-both;
 }
 
 //  ============================================================================
@@ -101,14 +118,17 @@
 .d-notice.d-notice--important,
 .d-banner.d-banner--important,
 .d-toast.d-toast--important {
-    --notice-color-background: var(--dt-color-surface-strong);
+    --notice-color-background: var(--dt-color-surface-primary-inverted);
     --notice-color-text: var(--dt-color-foreground-primary-inverted);
     --notice-color-icon: var(--notice-color-text);
     --notice-color-shadow: transparent;
 }
 
-//  $$  ERROR
+//  $$  CRITICAL / ERROR
 //  ----------------------------------------------------------------------------
+.d-notice--critical,
+.d-banner--critical,
+.d-toast--critical,
 .d-notice--error,
 .d-banner--error,
 .d-toast--error {
@@ -128,7 +148,7 @@
 .d-banner--info,
 .d-toast--info {
     --notice-color-background: var(--dt-color-surface-info);
-    --notice-color-icon: var(--dt-color-blue-500);
+    --notice-color-icon: var(--dt-color-foreground-info);
 
     &.d-notice--important,
     &.d-banner--important,
@@ -138,18 +158,21 @@
     }
 }
 
-//  $$  SUCCESS
+//  $$  POSITIVE / SUCCESS
 //  ----------------------------------------------------------------------------
+.d-notice--positive,
+.d-banner--positive,
+.d-toast--positive,
 .d-notice--success,
 .d-banner--success,
 .d-toast--success {
-    --notice-color-background: var(--dt-color-surface-success);
-    --notice-color-icon: var(--dt-color-foreground-success);
+    --notice-color-background: var(--dt-color-surface-positive);
+    --notice-color-icon: var(--dt-color-foreground-positive);
 
     &.d-notice--important,
     &.d-banner--important,
     &.d-toast--important {
-        --notice-color-background: var(--dt-color-surface-success-strong);
+        --notice-color-background: var(--dt-color-surface-positive-strong);
         --notice-color-text: var(--dt-color-foreground-primary-inverted);
     }
 }
@@ -172,15 +195,14 @@
 
 //  $$  TRUNCATE TEXT
 //  ----------------------------------------------------------------------------
-.d-notice.d-notice--truncate {
-    .d-notice__content {
-        overflow: hidden;
+.d-notice--truncate :where(.d-notice__content) {
+    overflow: hidden;
+}
 
-        .d-notice__title,
-        .d-notice__message {
-            overflow: hidden;
-            white-space: nowrap;
-            text-overflow: ellipsis;
-        }
-    }
+.d-notice--truncate :where(.d-notice__title),
+.d-notice--truncate :where(.d-notice__message) {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
 }

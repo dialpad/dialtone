@@ -1,0 +1,57 @@
+<template>
+  <dt-item-layout
+    :as="$attrs.as"
+    :unstyled="$attrs.unstyled"
+    :start-class="$attrs.startClass"
+    :content-class="$attrs.contentClass"
+    :title-class="$attrs.titleClass"
+    :subtitle-class="$attrs.subtitleClass"
+    :block-end-class="$attrs.blockEndClass"
+    :end-class="$attrs.endClass"
+    :selected-class="$attrs.selectedClass"
+  >
+    <template #start>
+      <span
+        v-if="$attrs.start"
+        v-html="$attrs.start"
+      />
+    </template>
+    <span
+      v-if="defaultSlot"
+      v-html="defaultSlot"
+    />
+    <template #subtitle>
+      <span
+        v-if="$attrs.subtitle"
+        v-html="$attrs.subtitle"
+      />
+    </template>
+    <template #blockEnd>
+      <span
+        v-if="$attrs.blockEnd"
+        v-html="$attrs.blockEnd"
+      />
+    </template>
+    <template #end>
+      <span
+        v-if="$attrs.end"
+        v-html="$attrs.end"
+      />
+    </template>
+    <template #selected>
+      <span
+        v-if="$attrs.selected"
+        v-html="$attrs.selected"
+      />
+    </template>
+  </dt-item-layout>
+</template>
+
+<script>
+import DtItemLayout from './ItemLayout.vue';
+
+export default {
+  name: 'DtItemLayoutDefault',
+  components: { DtItemLayout },
+};
+</script>

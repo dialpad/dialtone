@@ -17,6 +17,10 @@ export default [
   ...vueAccessibility.configs['flat/recommended'],
   {
     files: ['**/*.stories.js', '**/*.story.js', '**/*.stories.vue', '**/*.story.vue', '.storybook/**'],
+    ignores: [
+      '.storybook/**/*.test.js',
+      '.storybook/theme-controller.js',
+    ],
     plugins: {
       storybook,
     },
@@ -185,7 +189,7 @@ export default [
         nonwords: false,
       }],
       'vue/template-curly-spacing': ['error', 'never'],
-      'vue/no-restricted-class': ['error', `/^d-(?!(recipe|${componentsNames.join('|')})).*/`],
+      'vue/no-restricted-class': ['error', `/^d-(?!(${componentsNames.join('|')})).*/`],
     },
   },
   {
@@ -207,6 +211,7 @@ export default [
     rules: {
       'max-lines': 'off',
       'no-console': 'off',
+      'vue/no-restricted-class': 'off',
     },
   },
   {

@@ -1,34 +1,19 @@
 ---
 title: Lists
 description: Utilities for controlling list styling.
+keywords: ["list style","bullet","ordered","unordered","ol","ul"]
 ---
+
+> [!WARNING]
+> Prefer [DtTextList](/components/text-list.md) for hand-authored Vue text lists. Keep these utilities for non-Vue markup and migration escape hatches.
 
 ## Resetting a List
 
 Use `d-ls-reset` to reset the margin, padding, and list-style-type of a list. Reseting a list applies to the parent `ol` or `ul`, any child `li` elements, and any child `ol` or `ul` elements.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <ul class="d-ls-reset">
-    <li>An unordered list item</li>
-    <li>
-      An unordered list item
-      <ol>
-        <li>A nested ordered list item</li>
-        <li>A nested ordered list item</li>
-      </ol>
-    </li>
-    <li>An unordered list item</li>
-    <li>
-      An unordered list item
-      <ul>
-        <li>A nested unordered list item</li>
-        <li>A nested unordered list item</li>
-      </ul>
-    </li>
-  </ul>
-</code-well-header>
-
-```html
+```vue demo
+<!-- @custom -->
+<!-- @class d-d-flex d-jc-center d-fd-column d-p-300 d-bgc-secondary d-w100p d-hmn102 -->
 <ul class="d-ls-reset">
   <li>An unordered list item</li>
   <li>
@@ -53,40 +38,12 @@ Use `d-ls-reset` to reset the margin, padding, and list-style-type of a list. Re
 
 Use `d-lst-{none|disc|circle|decimal|content|none}` to change a list item's bullet styling.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <dt-stack gap="400">
-    <p>Paragraph of text.</p>
-    <ul class="d-pl16">
-      <li class="d-lst-disc"><strong>disc</strong> list item</li>
-      <li class="d-lst-circle"><strong>circle</strong> list item</li>
-      <li class="d-lst-decimal"><strong>decimal</strong> list item</li>
-      <li class="d-lst-content" style="--ls-content: '🫠'"><strong>content</strong> list item</li>
-      <li class="d-lst-none"><strong>none</strong> list item</li>
-    </ul>
-    <p>Paragraph of text.</p>
-    <ul class="d-pl16">
-      <li class="d-lst-disc">
-        An unordered list item
-        <ul class="d-pl16">
-          <li class="d-lst-circle">A nested unordered list item</li>
-          <li class="d-lst-circle">A nested unordered list item</li>
-        </ul>
-      </li>
-      <li class="d-lst-disc">
-        An unordered list item
-        <ul class="d-pl16">
-          <li class="d-pl8 d-lst-content" style="--ls-content: '✅'">A nested unordered list item</li>
-          <li class="d-pl8 d-lst-content" style="--ls-content: '❌'">A nested unordered list item</li>
-        </ul>
-      </li>
-    </ul>
-  </dt-stack>
-</code-well-header>
-
-```html
-<dt-stack gap="400">
+```vue demo
+<!-- @custom -->
+<!-- @class d-d-flex d-jc-center d-fd-column d-p-300 d-bgc-secondary d-w100p d-hmn102 -->
+<dt-stack gap="100">
   <p>Paragraph of text.</p>
-  <ul class="d-pl16">
+  <ul class="d-pis-200">
     <li class="d-lst-disc"><strong>disc</strong> list item</li>
     <li class="d-lst-circle"><strong>circle</strong> list item</li>
     <li class="d-lst-decimal"><strong>decimal</strong> list item</li>
@@ -94,19 +51,19 @@ Use `d-lst-{none|disc|circle|decimal|content|none}` to change a list item's bull
     <li class="d-lst-none"><strong>none</strong> list item</li>
   </ul>
   <p>Paragraph of text.</p>
-  <ul class="d-pl16">
+  <ul class="d-pis-200">
     <li class="d-lst-disc">
       An unordered list item
-      <ul class="d-pl16">
+      <ul class="d-pis-200">
         <li class="d-lst-circle">A nested unordered list item</li>
         <li class="d-lst-circle">A nested unordered list item</li>
       </ul>
     </li>
     <li class="d-lst-disc">
       An unordered list item
-      <ul class="d-pl16">
-        <li class="d-pl8 d-lst-content" style="--ls-content: '✅'">A nested unordered list item</li>
-        <li class="d-pl8 d-lst-content" style="--ls-content: '❌'">A nested unordered list item</li>
+      <ul class="d-pis-200">
+        <li class="d-pis-100 d-lst-content" style="--ls-content: '✅'">A nested unordered list item</li>
+        <li class="d-pis-100 d-lst-content" style="--ls-content: '❌'">A nested unordered list item</li>
       </ul>
     </li>
   </ul>
@@ -117,40 +74,23 @@ Use `d-lst-{none|disc|circle|decimal|content|none}` to change a list item's bull
 
 Use the `start` attribute for an `<ol>` to set its starting number.
 
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <dt-stack gap="400">
-    <p>Paragraph of text.</p>
-    <ol class="d-pl24">
-      <li class="d-lst-decimal">Decimal list item</li>
-      <li class="d-lst-decimal">Decimal list item</li>
-      <li class="d-lst-decimal">Decimal list item</li>
-    </ol>
-    <p>Paragraph of text. The list below starts at 4.</p>
-    <ol class="d-pl24" start="4">
-      <li class="d-lst-decimal">Decimal list item</li>
-      <li class="d-lst-decimal">Decimal list item</li>
-      <li class="d-lst-decimal">Decimal list item</li>
-    </ol>
-  </dt-stack>
-</code-well-header>
-
-```html
-<code-well-header class="d-d-flex d-jc-center d-fd-column d-p24 d-bgc-secondary d-w100p d-hmn102" custom>
-  <dt-stack gap="400">
-    <p>Paragraph of text.</p>
-    <ol class="d-pl24">
-      <li class="d-lst-decimal">Decimal list item</li>
-      <li class="d-lst-decimal">Decimal list item</li>
-      <li class="d-lst-decimal">Decimal list item</li>
-    </ol>
-    <p>Paragraph of text. The list below starts at 4.</p>
-    <ol class="d-pl24" start="4">
-      <li class="d-lst-decimal">Decimal list item</li>
-      <li class="d-lst-decimal">Decimal list item</li>
-      <li class="d-lst-decimal">Decimal list item</li>
-    </ol>
-  </dt-stack>
-</code-well-header>
+```vue demo
+<!-- @custom -->
+<!-- @class d-d-flex d-jc-center d-fd-column d-p-300 d-bgc-secondary d-w100p d-hmn102 -->
+<dt-stack gap="100">
+  <p>Paragraph of text.</p>
+  <ol class="d-pis-300">
+    <li class="d-lst-decimal">Decimal list item</li>
+    <li class="d-lst-decimal">Decimal list item</li>
+    <li class="d-lst-decimal">Decimal list item</li>
+  </ol>
+  <p>Paragraph of text. The list below starts at 4.</p>
+  <ol class="d-pis-300" start="4">
+    <li class="d-lst-decimal">Decimal list item</li>
+    <li class="d-lst-decimal">Decimal list item</li>
+    <li class="d-lst-decimal">Decimal list item</li>
+  </ol>
+</dt-stack>
 ```
 
 <script setup>

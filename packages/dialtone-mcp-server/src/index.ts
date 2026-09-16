@@ -180,13 +180,13 @@ async function main() {
         },
         {
           name: "search_tokens",
-          description: "Search for design tokens (CSS variables) from Dialtone's design system. Use when query mentions token categories (color, space, font, size, shadow) or semantic names (primary, success, critical, foreground, background). Returns tokens like --dt-color-foreground-primary, --dt-space-400.",
+          description: "Search for design tokens (CSS variables) from Dialtone's design system. Use when query mentions token categories (color, spacing, layout, font, size, shadow) or semantic names (primary, positive, critical, warning, info, foreground, background). Returns tokens like --dt-color-foreground-primary, --dt-spacing-100.",
           inputSchema: {
             type: "object",
             properties: {
               query: {
                 type: "string",
-                description: "Token category, name, or value (e.g., 'color primary', 'space 400', 'font family', '#1C1C1C')"
+                description: "Token category, name, or value (e.g., 'color primary', 'space 400', 'layout 200', 'font family', '#1C1C1C')"
               },
               limit: {
                 type: "number",
@@ -222,7 +222,7 @@ async function main() {
         },
         {
           name: "search_icons",
-          description: "Search for icons from Dialtone's icon library and learn how to use icon components. Use when query mentions icon names (bell, arrow, calendar), categories (alerts, communication, time), visual concepts (notification, warning, email), or when user asks how to use/implement icons. Icons are imported from @dialpad/dialtone-icons/vue3, not @dialpad/dialtone-vue. Returns icon names like 'alert-circle', 'bell-ring', 'calendar-plus' with tree-shakable usage examples.",
+          description: "Search for icons from Dialtone's icon library and learn how to use icon components. Use when query mentions icon names (bell, arrow, calendar), categories (alerts, communication, time), visual concepts (notification, warning, email), or when user asks how to use/implement icons. Icons are imported from @dialpad/dialtone-icons/vue, not @dialpad/dialtone-vue. Returns icon names like 'alert-circle', 'bell-ring', 'calendar-plus' with tree-shakable usage examples.",
           inputSchema: {
             type: "object",
             properties: {

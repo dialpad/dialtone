@@ -19,7 +19,7 @@ export default [
     },
     rules: {
       'n/no-missing-import': ['warn'],
-      "n/no-extraneous-import": ['off']
+      'n/no-extraneous-import': ['off'],
     },
   },
 ];

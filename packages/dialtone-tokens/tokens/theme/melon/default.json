@@ -1,6 +1,10 @@
 {
   "shell": {
     "base": {
+      "material": {
+        "value": "iron",
+        "type": "other"
+      },
       "color": {
         "surface": {
           "value": "{color.berry.50}",
@@ -15,7 +19,7 @@
           "type": "color"
         },
         "accent": {
-          "value": "{color.magenta.500}",
+          "value": "{color.magenta.800}",
           "type": "color"
         },
         "action": {

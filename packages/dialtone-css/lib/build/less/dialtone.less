@@ -7,20 +7,32 @@
 //
 //
 //  ============================================================================
+@layer dialtone.reset, dialtone.base, dialtone.components, dialtone.utilities;
+
 @import 'dialtone-reset';
 @import 'dialtone-variables';
 @import 'dialtone-transitions';
 
 //  --  COMPONENTS
 @import 'components/root-layout';
+@import 'components/box';
 @import 'components/stack';
+@import 'components/text';
+@import 'components/text-list';
+@import 'components/link';
 @import 'components/item-layout';
 @import 'components/avatar';
-@import 'components/badge';
-@import 'components/breadcrumbs';
 @import 'components/button';
-@import 'components/card';
+@import 'components/badge';
 @import 'components/chip';
+@import 'components/keyboard-shortcut';
+@import 'components/mode-island';
+@import 'components/table';
+@import 'components/toggle';
+@import 'components/presence';
+@import 'components/icon';
+@import 'components/emoji';
+@import 'components/emoji-text-wrapper';
 @import 'components/codeblock';
 @import 'components/collapsible';
 @import 'components/combobox';
@@ -28,11 +40,14 @@
 @import 'components/dropdown';
 @import 'components/description-list';
 @import 'components/empty-state';
-@import 'components/forms';
-@import 'components/image-viewer';
 @import 'components/input';
-@import 'components/keyboard-shortcut';
-@import 'components/link';
+@import 'components/segmented-control';
+@import 'components/selects';
+@import 'components/image-viewer';
+@import 'components/forms';
+@import 'components/tooltip';
+@import 'components/card';
+@import 'components/breadcrumbs';
 @import 'components/list-group'; // Dialtone 5 shim
 @import 'components/list-item-group';
 @import 'components/list-item';
@@ -48,18 +63,12 @@
 @import 'components/resizable';
 @import 'components/rich-text-editor';
 @import 'components/scroller';
-@import 'components/selects';
 @import 'components/skeleton';
-@import 'components/table';
 @import 'components/tabs';
-@import 'components/tooltip';
-@import 'components/toggle';
-@import 'components/presence';
-@import 'components/icon';
+@import 'components/prose';
 @import 'components/scrollbar';
-@import 'components/emoji';
-@import 'components/emoji-text-wrapper';
 @import 'components/emoji-picker';
+@import 'components/filter-pill';
 @import 'components/motion_text';
 @import 'components/combobox-with-popover';
 @import 'components/combobox-multi-select';
@@ -77,49 +86,38 @@
 @import 'utilities/spacing';
 @import 'utilities/typography';
 
-//  --  RECIPES
-@import 'recipes/attachment_carousel';
-@import 'recipes/callbar_button';
-@import 'recipes/callbar_button_with_popover';
-@import 'recipes/callbar_button_with_dropdown';
-@import 'recipes/callbox';
-@import 'recipes/contact_info';
-@import 'recipes/editor';
-@import 'recipes/emoji_row';
-@import 'recipes/feed_item_pill';
-@import 'recipes/feed_item_row';
-@import 'recipes/grouped_chip';
-@import 'recipes/ivr_node';
-@import 'recipes/leftbar_row';
-@import 'recipes/message_input';
-@import 'recipes/settings_menu_button';
-@import 'recipes/time_pill';
-@import 'recipes/top_banner_info';
-@import 'recipes/unread_pill';
-
 //  --  THEMES & GLOBAL SETTINGS
 @import 'dialtone-globals';
 @import 'themes/default';
 
 //  --  DEBUG
-[data-migrate-outline] {
-  --outline-color: orangered;
-  --outline-size: var(--dt-size-200);
-  --outline-offset: calc(var(--outline-size) * -1);
+@layer dialtone.utilities {
+  [data-migrate-outline] {
+    --outline-color: orangered;
+    --outline-size: var(--dt-spacing-25);
+    --outline-offset: var(--dt-spacing-25-negative);
 
-  /* stylelint-disable-next-line meowtec/no-px */
-  outline: var(--outline-size) solid var(--outline-color) !important;
-  /* stylelint-disable-next-line meowtec/no-px */
-  outline-offset: var(--outline-offset);
-
-  &:hover {
-    --outline-color: transparent;
-  }
-  /* stylelint-disable-next-line meowtec/no-px */
-  > * {
     /* stylelint-disable-next-line meowtec/no-px */
-    outline: var(--outline-size) dotted var(--outline-color);
+    outline: var(--outline-size) solid var(--outline-color) !important;
     /* stylelint-disable-next-line meowtec/no-px */
     outline-offset: var(--outline-offset);
+
+    &:hover {
+      --outline-color: transparent;
+    }
+    /* stylelint-disable-next-line meowtec/no-px */
+    > * {
+      /* stylelint-disable-next-line meowtec/no-px */
+      outline: var(--outline-size) dotted var(--outline-color);
+      /* stylelint-disable-next-line meowtec/no-px */
+      outline-offset: var(--outline-offset);
+    }
   }
+}
+
+@layer dialtone.utilities {
+  /*
+  [data-dt-brand="prota-deuter"]                      { --dt-color-surface-info-opaque: oklch(from var(--dt-color-blue-300) l c h / 0.5) !important; }
+  [data-dt-brand="prota-deuter"][data-dt-mode="dark"] { --dt-color-surface-info-opaque: oklch(from var(--dt-color-blue-300) l c h / 0.6) !important; }
+  */
 }

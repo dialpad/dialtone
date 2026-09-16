@@ -13,6 +13,7 @@
 //  ============================================================================
 //  $   BASE STYLE
 //  ----------------------------------------------------------------------------
+@layer dialtone.components {
 .d-link {
     --link-color-default: var(--dt-color-link-primary);
     --link-color-default-hover: var(--dt-color-link-primary-hover);
@@ -22,7 +23,7 @@
 
     position: relative;
     display: inline-flex;
-    gap: var(--dt-space-300);
+    gap: var(--dt-spacing-50);
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
@@ -31,8 +32,8 @@
     color: var(--link-color-default);
     font: inherit;
     text-decoration: var(--link-text-decoration);
-    text-underline-offset: calc(var(--dt-size-border-300) - var(--dt-size-border-100));
-    text-decoration-thickness: var(--dt-size-border-50);
+    text-underline-offset: var(--dt-spacing-25);
+    text-decoration-thickness: var(--dt-size-border-100);
     background-color: var(--link-background-color);
     border: 0;
     transition-timing-function: var(--ttf-out-quint);
@@ -40,9 +41,7 @@
     transition-property: background-color, border, box-shadow;
 
     //  Reset button appearance
-    -webkit-appearance: none;
-       -moz-appearance: none;
-            appearance: none;
+    appearance: none;
     fill: currentColor;
 
     &:hover {
@@ -53,7 +52,6 @@
     }
 
     &:active {
-        // --link-text-decoration: underline;
         color: var(--link-color-default);
     }
 
@@ -69,23 +67,42 @@
     //  ============================================================================
     //  $$  WARNING
     //  ----------------------------------------------------------------------------
+    &--no-underline {
+        --link-text-decoration: none;
+
+        &:hover {
+            --link-text-decoration: underline;
+        }
+    }
+
+    //  $$  WARNING
+    //  ----------------------------------------------------------------------------
     &--warning {
         --link-color-default: var(--dt-color-link-warning);
         --link-color-default-hover: var(--dt-color-link-warning-hover);
     }
 
-    //  $$  DANGER
+    //  $$  CRITICAL / DANGER
     //  ----------------------------------------------------------------------------
+    &--critical,
     &--danger {
         --link-color-default: var(--dt-color-link-critical);
         --link-color-default-hover: var(--dt-color-link-critical-hover);
     }
 
-    //  $$  SUCCESS
+    //  $$  POSITIVE / SUCCESS
     //  ----------------------------------------------------------------------------
+    &--positive,
     &--success {
-        --link-color-default: var(--dt-color-link-success);
-        --link-color-default-hover: var(--dt-color-link-success-hover);
+        --link-color-default: var(--dt-color-link-positive);
+        --link-color-default-hover: var(--dt-color-link-positive-hover);
+    }
+
+    //  $$  INFO
+    //  ----------------------------------------------------------------------------
+    &--info {
+        --link-color-default: var(--dt-color-link-info);
+        --link-color-default-hover: var(--dt-color-link-info-hover);
     }
 
     //  $$  MUTED
@@ -131,18 +148,20 @@
         }
     }
 
-    //  $$  INVERTED DANGER
+    //  $$  INVERTED CRITICAL / DANGER
     //  ----------------------------------------------------------------------------
+    &--inverted-critical,
     &--inverted-danger {
         --link-color-default: var(--dt-color-link-critical-inverted);
         --link-color-default-hover: var(--dt-color-link-critical-inverted-hover);
     }
 
-    //  $$  INVERTED SUCCESS
+    //  $$  INVERTED POSITIVE / SUCCESS
     //  ----------------------------------------------------------------------------
+    &--inverted-positive,
     &--inverted-success {
-        --link-color-default: var(--dt-color-link-success-inverted);
-        --link-color-default-hover: var(--dt-color-link-success-inverted-hover);
+        --link-color-default: var(--dt-color-link-positive-inverted);
+        --link-color-default-hover: var(--dt-color-link-positive-inverted-hover);
     }
 
     //  $$  INVERTED WARNING
@@ -150,6 +169,13 @@
     &--inverted-warning {
         --link-color-default: var(--dt-color-link-warning-inverted);
         --link-color-default-hover: var(--dt-color-link-warning-inverted-hover);
+    }
+
+    //  $$  INVERTED INFO
+    //  ----------------------------------------------------------------------------
+    &--inverted-info {
+        --link-color-default: var(--dt-color-link-info-inverted);
+        --link-color-default-hover: var(--dt-color-link-info-inverted-hover);
     }
 
     //  $$  INVERTED MUTED
@@ -164,36 +190,48 @@
     &--inverted-mention {
         --link-color-default: var(--dt-color-link-primary-inverted);
         --link-color-default-hover: var(--dt-color-link-primary-inverted-hover);
-        --link-text-decoration: none;
-        --link-padding: 0 var(--dt-space-200);
-        --link-background-color: hsl(var(--dt-color-surface-brand-strong-hsl) / 0.3);
+        --link-padding: 0 var(--dt-spacing-25);
+        --link-background-color: var(--dt-color-link-mention-inverted-background);
 
         line-height: var(--dt-font-line-height-200);
-        border-radius: var(--dt-size-radius-200);
+        border-radius: var(--dt-size-radius-300);
+
+        &:hover {
+            --link-background-color: var(--dt-color-link-mention-inverted-background-hover);
+        }
     }
 
     //  $$  MENTION
     //  ----------------------------------------------------------------------------
-    // Styling specific to mentions such as @brad.paugh. The underline highlighting
-    // is reversed compared to a regular link, and it has a light background.
+    // Styling for @mention links (e.g. @brad.paugh). Displays as a pill-shaped
+    // background using brand surface tokens. Background changes on hover.
     &--mention {
+        --link-color-default: var(--dt-color-link-mention);
+        --link-color-default-hover: var(--dt-color-link-mention-hover);
+        --link-padding: var(--dt-spacing-1) var(--dt-spacing-25);
+        --link-background-color: var(--dt-color-link-mention-background);
         --link-text-decoration: none;
-        --link-padding: 0 var(--dt-space-200);
-        --link-background-color: hsl(var(--dt-color-surface-brand-strong-hsl) / 0.1);
 
         line-height: var(--dt-font-line-height-200);
-        border-radius: var(--dt-size-radius-200);
+        border-radius: var(--dt-size-radius-300);
 
         &:hover {
+            --link-background-color: var(--dt-color-link-mention-background-hover);
             --link-text-decoration: underline;
-            --link-background-color: hsl(var(--dt-color-surface-brand-strong-hsl) / 0.25);
-
-            text-underline-offset: calc(var(--dt-size-border-300) - var(--dt-size-border-100));
-            text-decoration-thickness: var(--dt-size-border-50);
-        }
-
-        &:active {
-            --link-background-color: hsl(var(--dt-color-surface-brand-strong-hsl) / 0.1);
         }
     }
+}
+
+.d-link--unstyled {
+    /* stylelint-disable-next-line order/properties-order */
+    all: unset; // Must be first!
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+
+    &:focus-visible {
+        outline: none;
+        box-shadow: var(--dt-shadow-focus);
+    }
+}
 }

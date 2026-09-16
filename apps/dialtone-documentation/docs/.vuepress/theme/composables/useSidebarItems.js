@@ -1,24 +1,54 @@
 import { computed } from 'vue';
-import { useRoute } from 'vue-router';
-import { usePageData } from 'vuepress/client';
+
+function toSidebarItem (item, isTopLevel = false) {
+  const sidebarItem = {
+    ...item,
+    text: item.sidebarText ?? item.text,
+    ...(isTopLevel ? { icon: item.icon ?? 'box-select' } : {}),
+  };
+
+  delete sidebarItem.promoteChildrenInSidebar;
+  delete sidebarItem.sidebarText;
+
+  if (item.hideStatusInSidebar) {
+    delete sidebarItem.status;
+  }
+  delete sidebarItem.hideStatusInSidebar;
+
+  if (item.hideChildrenInSidebar) {
+    delete sidebarItem.children;
+  } else if (item.children) {
+    sidebarItem.children = item.children.map(child => toSidebarItem(child));
+  }
+
+  return sidebarItem;
+}
 
 /*
-* Get the sidebar items from the page data, that are listed in site-nav.
-* If the value for the current route is not an array, it will use the headers
-* to fill the sidebar items.
-*/
+ * Projects the route-independent `site-nav.json` tree into promoted and primary
+ * sidebar presentation groups. Top-level primary items without an icon get the
+ * `box-select` placeholder.
+ */
 export function useSidebarItems (items) {
-  const route = useRoute();
   return computed(() => {
-    const key = Object.keys(items).filter(item => route.path.includes(item.replace(/\/$/, '')));
-    if (!items[key]) return [];
-    if (Array.isArray(items[key])) return items[key] || [];
-    return [{
-      isSinglePage: true,
-      text: items[key].text,
-      children: usePageData().value.headers.map(item => {
-        return { text: item.title, link: item.link };
-      }),
-    }];
+    const navItems = items.nav || [];
+    const promotedParent = navItems.find(item => (
+      item.promoteChildrenInSidebar && item.children?.length
+    ));
+
+    return [
+      {
+        key: 'promoted',
+        presentation: 'promoted',
+        items: promotedParent?.children.map(item => toSidebarItem(item)) || [],
+      },
+      {
+        key: 'primary',
+        presentation: 'primary',
+        items: navItems
+          .filter(item => item !== promotedParent)
+          .map(item => toSidebarItem(item, true)),
+      },
+    ];
   });
 }

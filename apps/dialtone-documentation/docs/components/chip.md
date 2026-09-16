@@ -1,214 +1,72 @@
 ---
 title: Chip
-description: A Chip is a compact UI element that provides brief, descriptive information about an element. It is terse, ideally one word.
+description: Compact token for selected values, filters, or dismissible items.
 status: ready
 thumb: true
-image: assets/images/components/chip.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-chip--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=9937-64802
+keywords: ["tag", "pill", "token", "badge", "d-chip", "DtChip", "dt-chip", "filter chip", "choice chip"]
+combinator: DtChip
 ---
-
-<code-well-header>
-  <dt-stack direction="row" gap="400">
-    <dt-chip size="sm" :hide-close="true" :interactive="false">Chip</dt-chip>
-    <dt-chip size="sm" :interactive="false">Chip</dt-chip>
-    <dt-chip size="sm">
-      <template #avatar>
-        <dt-avatar
-          image-src="/assets/images/person.png"
-          image-alt="Jaqueline Nackos"
-          full-name="Jaqueline Nackos"
-        />
-      </template>
-      <template #default>
-        Chip
-      </template>
-    </dt-chip>
-    <dt-chip size="sm">
-      <template #icon>
-        <dt-icon
-          name="phone"
-          size="200"
-        />
-      </template>
-      <template #default>
-        Chip
-      </template>
-    </dt-chip>
-  </dt-stack>
-</code-well-header>
-
-<!-- <component-combinator component-name="DtChip" /> -->
 
 ## Variants and Examples
 
-### Non Interactive
-
-Add `:interactive="false"` to make it a read-only, non-interactive Chip. This changes it from a `<button>` to a non-interactive, read-only Chip with no events or hover/active state. Note that this does not effect the interactivity of its `×` remove button.
-
-<code-well-header>
-  <dt-chip :interactive="false">Chip</dt-chip>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<span class="d-chip">
-  <span class="d-chip__label">
-    <span class="d-chip__text">Chip</span>
-  </span>
-  <button class="d-chip__close" type="button" aria-label="close">
-    <span class="d-btn__icon">
-      <svg>...</svg>
-    </span>
-  </button>
-</span>
-'
-vueCode='
-<dt-chip :interactive="false">
-  Chip
-</dt-chip>
-'
-showHtmlWarning />
-
 ### Default
 
-<code-well-header>
-  <dt-chip>Chip</dt-chip>
-</code-well-header>
+```vue demo
+<dt-chip>Chip</dt-chip>
+```
 
-<code-example-tabs
-htmlCode='
-<span class="d-chip">
-  <button type="button" aria-labelledby="dt0-content" aria-label="" class="d-chip__label">
-    <span class="d-chip__text"> Chip </span>
-  </button>
-  <button type="button" aria-label="close" class="base-button__button d-btn d-btn--primary d-btn--icon-only d-chip__close">
-    <span data-qa="dt-button-icon" class="base-button__icon d-btn__icon d-btn__icon--left">
-      <svg>...</svg>
-    </span>
-  </button>
-</span>
-'
-vueCode='
-<dt-chip>
-  Chip
-</dt-chip>
-'
-showHtmlWarning />
+### Sizes
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <dt-chip :size="100">Chip</dt-chip>
+  <dt-chip :size="200">Chip</dt-chip>
+  <dt-chip :size="300">Chip</dt-chip>
+</dt-stack>
+```
+
+### Interactive
+
+Add `:interactive="true"` to make it an interactive Chip. This changes it from a non-interactive, read-only Chip to an interactive Chip with events and hover/active state. Note that this does not affect the interactivity of its `×` remove button.
+
+```vue demo
+<dt-chip :interactive="true">Chip</dt-chip>
+```
 
 ### Disabled
 
 Use the `disabled` prop to disable both the Chip and its close button. This sets `aria-disabled="true"` and `tabindex="-1"` on the interactive elements and applies disabled styles, preventing pointer and keyboard interaction.
 
-<code-well-header>
-  <dt-chip disabled ref="example-disabled">Chip</dt-chip>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode="() => $refs['example-disabled']"
-vueCode='
-<dt-chip disabled>
-  Chip
-</dt-chip>
-'
-showHtmlWarning />
+```vue demo
+<dt-chip disabled>Chip</dt-chip>
+```
 
 ### Without Close Button
 
-<code-well-header>
-  <dt-chip :hide-close="true">Chip</dt-chip>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<span class="d-chip">
-  <button class="d-chip__label" type="button">
-    <span class="d-chip__text">Chip</span>
-  </button>
-</span>
-'
-vueCode='
-<dt-chip :hide-close="true">
-  Chip
-</dt-chip>
-'
-showHtmlWarning />
+```vue demo
+<dt-chip :show-close="false">Chip</dt-chip>
+```
 
 ### With Icon
 
-<code-well-header>
-  <dt-chip with-icon :hide-close="true">
-    <template #icon>
-      <dt-icon
-        name="phone"
-        size="200"
-      />
-    </template>
-    <template #default>
-      Chip
-    </template>
-  </dt-chip>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<span class="d-chip">
-  <button class="d-chip__label" type="button">
-    <span class="d-chip__icon">
-      <svg>...</svg>
-    </span>
-    <span class="d-chip__text">Chip</span>
-  </button>
-</span>
-'
-vueCode='
-<dt-chip :hide-close="true">
+```vue demo
+<dt-chip :show-close="false">
   <template #icon>
     <dt-icon
       name="phone"
       size="200"
     />
   </template>
-  <template #default>
-    Chip
-  </template>
+  Chip
 </dt-chip>
-'
-showHtmlWarning />
+```
 
 ### With Icon and Close Button
 
-<code-well-header>
-  <dt-chip>
-    <template #icon>
-      <dt-icon
-        name="phone"
-        size="200"
-      />
-    </template>
-    <template #default>
-      Chip
-    </template>
-  </dt-chip>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<span class="d-chip">
-  <button class="d-chip__label" type="button">
-    <span class="d-chip__icon">
-      <svg>...</svg>
-    </span>
-    <span class="d-chip__text">Chip</span>
-  </button>
-  <button class="d-chip__close" type="button" aria-label="close">
-    <span class="d-btn__icon">
-      <svg>...</svg>
-    </span>
-  </button>
-</span>
-'
-vueCode='
+```vue demo
 <dt-chip>
   <template #icon>
     <dt-icon
@@ -216,152 +74,47 @@ vueCode='
       size="200"
     />
   </template>
-  <template #default>
-    Chip
-  </template>
+  Chip
 </dt-chip>
-'
-showHtmlWarning />
+```
 
-### With Avatar and Close Button
+### With Avatar
 
-<code-well-header>
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
   <dt-chip>
     <template #avatar>
       <dt-avatar
+        size="200"
         image-src="/assets/images/person.png"
         image-alt="Jaqueline Nackos"
         full-name="Jaqueline Nackos"
       />
     </template>
-    <template #default>
-      Chip
-    </template>
-  </dt-chip>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<span class="d-chip">
-  <button class="d-chip__label" type="button">
-    <span class="d-avatar">...</span>
-    <span class="d-chip__text">Chip</span>
-  </button>
-  <button class="d-chip__close" type="button" aria-label="close">
-    <span class="d-btn__icon">
-      <svg>...</svg>
-    </span>
-  </button>
-</span>
-'
-vueCode='
-<dt-chip>
-  <template #avatar>
-    <dt-avatar
-      image-src="/assets/images/person.png"
-      image-alt="Jaqueline Nackos"
-      full-name="Jaqueline Nackos"
-    />
-  </template>
-  <template #default>
     Chip
-  </template>
-</dt-chip>
-'
-showHtmlWarning />
+  </dt-chip>
+  <dt-chip>
+    <template #avatar>
+      <dt-avatar
+        size="200"
+        full-name="Jaqueline Nackos"
+      />
+    </template>
+    Chip
+  </dt-chip>
+</dt-stack>
+```
 
 ### Truncated
 
-To truncate text, add `.d-truncate` to the content element, and set the width of the `.d-chip` element.
+To truncate text, use DtText's `truncate` prop, and set the width of the Chip's content with a `content-class` prop.
 
-<code-well-header>
-  <dt-chip content-class="d-w102">
-    <span class="d-chip__text d-truncate">Chip loooooong name</span>
-  </dt-chip>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<span class="d-chip">
-  <button class="d-chip__label d-w102" type="button">
-    <span class="d-chip__text d-truncate">Chip loooooong name</span>
-  </button>
-  <button class="d-chip__close" type="button" aria-label="close">
-    <span class="d-btn__icon">
-      <svg>...</svg>
-    </span>
-  </button>
-</span>
-'
-vueCode='
-<dt-chip content-class="d-w102">
-  <span class="d-chip__text d-truncate">Chip loooooong name</span>
+```vue demo
+<dt-chip content-class="d-w-150">
+  <dt-text truncate>Chip loooooong name here</dt-text>
 </dt-chip>
-'
-showHtmlWarning />
-
-### Sizes
-
-<code-well-header>
-  <dt-stack direction="row" gap="400">
-    <dt-chip :interactive="false" size="xs">Chip</dt-chip>
-    <dt-chip :interactive="false" size="sm">Chip</dt-chip>
-    <dt-chip :interactive="false">Chip</dt-chip>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<span class="d-chip">
-  <button class="d-chip__label d-chip__label--xs" type="button">
-    <span class="d-chip__icon">
-      <svg>...</svg>
-    </span>
-    <span class="d-chip__text">Chip</span>
-  </button>
-  <button class="d-chip__close d-chip__close--xs" type="button" aria-label="close">
-    <span class="d-btn__icon">
-      <svg>...</svg>
-    </span>
-  </button>
-</span>
-<span class="d-chip">
-  <button class="d-chip__label d-chip__label--sm" type="button">
-    <span class="d-avatar">...</span>
-    <span class="d-chip__text">Chip</span>
-  </button>
-  <button class="d-chip__close d-chip__close--sm" type="button" aria-label="close">
-    <span class="d-btn__icon">
-      <svg>...</svg>
-    </span>
-  </button>
-</span>
-<span class="d-chip">
-  <button class="d-chip__label" type="button">
-    <span class="d-chip__icon">
-      <svg>...</svg>
-    </span>
-    <span class="d-chip__text">Chip</span>
-  </button>
-  <button class="d-chip__close" type="button" aria-label="close">
-    <span class="d-btn__icon">
-      <svg>...</svg>
-    </span>
-  </button>
-</span>
-'
-vueCode='
-<dt-chip :interactive="false" size="xs">
-  chip
-</dt-chip>
-<dt-chip :interactive="false" size="sm">
-  chip
-</dt-chip>
-<dt-chip :interactive="false">
-  chip
-</dt-chip>
-'
-showHtmlWarning />
+```
 
 ## Vue API
 

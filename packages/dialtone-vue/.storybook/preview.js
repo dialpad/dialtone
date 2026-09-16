@@ -1,32 +1,113 @@
 import '../css/dialtone-globals.less';
 import '@dialpad/dialtone-css/lib/dist/dialtone.css';
 import 'overlayscrollbars/overlayscrollbars.css';
+// Import layered token CSS files
+import '@dialpad/dialtone-tokens/layered/tokens-core.css';
+import '@dialpad/dialtone-tokens/layered/tokens-base-colors.css';
+import '@dialpad/dialtone-tokens/layered/tokens-dp-colors.css';
 import { addons } from 'storybook/preview-api';
-import { setTheme } from '@dialpad/dialtone-tokens/themes/config';
-import DpLight from '@dialpad/dialtone-tokens/themes/dp-light';
-import DpDark from '@dialpad/dialtone-tokens/themes/dp-dark';
+import { setMode, setBrand, setContrast, initDialtoneTheme } from '@dialpad/dialtone-tokens/themes/config';
+import { createThemeController } from './theme-controller.js';
+
+// Storybook shows a representative subset of the full Dialtone theme set, not
+// all of it. This list is the only place to edit when that subset changes — the
+// toolbar options and the loaded theme map are both derived from it. Paths stay
+// literal so Vite can resolve them, and every import starts here at module
+// scope, so they load concurrently rather than one after another.
+const BRAND_IMPORTS = [
+  ['dp', import('@dialpad/dialtone-tokens/themes/dp')],
+  ['tmo', import('@dialpad/dialtone-tokens/themes/tmo')],
+  ['aegean', import('@dialpad/dialtone-tokens/themes/aegean')],
+  ['botany', import('@dialpad/dialtone-tokens/themes/botany')],
+  ['buttercream', import('@dialpad/dialtone-tokens/themes/buttercream')],
+  ['eucalyptus', import('@dialpad/dialtone-tokens/themes/eucalyptus')],
+  ['high-desert', import('@dialpad/dialtone-tokens/themes/high-desert')],
+  ['melon', import('@dialpad/dialtone-tokens/themes/melon')],
+  ['mulberry', import('@dialpad/dialtone-tokens/themes/mulberry')],
+  ['paprika', import('@dialpad/dialtone-tokens/themes/paprika')],
+  ['plum', import('@dialpad/dialtone-tokens/themes/plum')],
+  ['raincloud', import('@dialpad/dialtone-tokens/themes/raincloud')],
+  ['sunflower', import('@dialpad/dialtone-tokens/themes/sunflower')],
+  ['verdant-haze', import('@dialpad/dialtone-tokens/themes/verdant-haze')],
+  ['prota-deuter', import('@dialpad/dialtone-tokens/themes/prota-deuter')],
+  ['trita', import('@dialpad/dialtone-tokens/themes/trita')],
+];
+
+// Titles that title-casing the id can't derive.
+const BRAND_TITLES = {
+  'dp': 'Dialpad',
+  'tmo': 'T-Mobile',
+  'prota-deuter': 'Protanopia/Deuteranopia',
+  'trita': 'Tritanopia',
+};
+
+const brandTitle = (id) => BRAND_TITLES[id] ??
+  id.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
+
+const highContrastImport = import('@dialpad/dialtone-tokens/themes/high-contrast');
 import { MINIMAL_VIEWPORTS } from 'storybook/viewport';
 import { setup } from '@storybook/vue3-vite';
+import React, { useState, useEffect } from 'react';
 import { DocsContainer } from '@storybook/addon-docs/blocks';
 import { DARK_MODE_EVENT_NAME } from '@vueless/storybook-dark-mode';
-import React, { useState, useEffect } from 'react';
-import fixDefaultSlot from '../components/plugins/fixDefaultSlot';
+import fixDefaultSlot from '../components/Plugins/FixDefaultSlot';
 import { setEmojiAssetUrlSmall, setEmojiAssetUrlLarge, setCustomEmojiUrl, setCustomEmojiJson } from '@/common/emoji';
 import customEmojiJson from '@/common/custom-emoji.json';
 import { dialtoneDarkTheme, dialtoneLightTheme } from './dialtone-themes.js';
 import { DialtoneDocsPage } from './DialtoneDocsPage.js';
 import { DtTooltipDirective } from '@/directives/tooltip_directive';
 import { DtScrollbarDirective } from '@/directives/scrollbar_directive';
-import { DtStack } from '@/components/stack';
+import { DtModeDirective } from '@/directives/mode_directive';
+import { DtFocusgroupDirective } from '@/directives/focusgroup_directive';
+import { DtFocustrapDirective } from '@/directives/focustrap_directive';
+import { DtStack } from '@/components/Stack';
 import { faker } from '@faker-js/faker';
 
-setTheme(DpLight);
+let currentContrast = 'default';
+// Initialize dark mode from localStorage (storybook-dark-mode stores it there)
+let currentDarkMode = (() => {
+  try {
+    const storedValue = localStorage.getItem('sb-addon-themes-3');
+    if (storedValue) {
+      const parsed = JSON.parse(storedValue);
+      return parsed.current === 'dark';
+    }
+  } catch {
+    // Ignore errors
+  }
+  return false; // Default to light mode
+})();
+let currentBrandTheme = 'dp';
+
+const themeController = createThemeController({
+  brandImports: BRAND_IMPORTS,
+  highContrastImport,
+  initialize: theme => initDialtoneTheme(theme, 'light', document.documentElement),
+  applyMode: mode => setMode(mode, document.documentElement),
+  applyBrand: theme => setBrand(theme, document.documentElement),
+  applyContrast: theme => setContrast(theme, document.documentElement),
+});
 
 const channel = addons.getChannel();
 
+const updateTheme = (isDark, isHighContrast, brandTheme = 'dp') => {
+  currentDarkMode = isDark;
+  currentContrast = isHighContrast ? 'high' : 'default';
+  currentBrandTheme = brandTheme;
+
+  void themeController.update({
+    mode: isDark ? 'dark' : 'light',
+    brand: brandTheme,
+    highContrast: isHighContrast,
+  });
+};
+
 channel.on(DARK_MODE_EVENT_NAME, (isDark) => {
-  setTheme(isDark ? DpDark : DpLight);
+  updateTheme(isDark, currentContrast === 'high', currentBrandTheme);
 });
+
+// Initialize theme on load with current dark mode state
+updateTheme(currentDarkMode, currentContrast === 'high', currentBrandTheme);
 
 setEmojiAssetUrlSmall('https://static.dialpadcdn.com/joypixels/png/unicode/32/', '.png');
 setEmojiAssetUrlLarge('https://static.dialpadcdn.com/joypixels/svg/unicode/', '.svg');
@@ -37,6 +118,9 @@ setup((app) => {
   app.use(fixDefaultSlot);
   app.use(DtTooltipDirective);
   app.use(DtScrollbarDirective);
+  app.use(DtModeDirective);
+  app.use(DtFocusgroupDirective);
+  app.use(DtFocustrapDirective);
   app.component('DtStack', DtStack);
   // global seed, to make sure results are reproducible on percy and don't change on every reload too.
   faker.seed(6687422389464139);
@@ -44,7 +128,30 @@ setup((app) => {
 
 export default {
   name: 'StorybookPreview',
-
+  globalTypes: {
+    theme: {
+      description: 'Brand theme',
+      defaultValue: 'dp',
+      toolbar: {
+        title: 'Theme',
+        icon: 'paintbrush',
+        items: BRAND_IMPORTS.map(([value]) => ({ value, title: brandTitle(value) })),
+        dynamicTitle: true,
+      },
+    },
+    contrast: {
+      description: 'Contrast level',
+      toolbar: {
+        title: 'Contrast',
+        icon: 'contrast',
+        items: [
+          { value: 'default', icon: 'circlehollow', title: 'Default contrast' },
+          { value: 'high', icon: 'circle', title: 'High contrast' },
+        ],
+        dynamicTitle: true,
+      },
+    },
+  },
   parameters: {
     a11y: {
       config: {
@@ -111,7 +218,7 @@ export default {
         const channel = addons.getChannel();
 
         channel.on(DARK_MODE_EVENT_NAME, (isDark) => {
-          setTheme(isDark ? DpDark : DpLight);
+          setMode(isDark ? 'dark' : 'light', document.documentElement);
         });
 
         useEffect(() => {
@@ -131,6 +238,14 @@ export default {
 
     percy: { globalShow: true },
   },
+  decorators: [
+    (story, context) => {
+      const isHighContrast = context.globals.contrast === 'high';
+      const brandTheme = context.globals.theme || 'dp';
+      updateTheme(currentDarkMode, isHighContrast, brandTheme);
+      return story();
+    },
+  ],
 
   tags: ['autodocs'],
 };

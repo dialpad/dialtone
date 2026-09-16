@@ -39,7 +39,8 @@ also to define the component status on [Components status page],
   - Status options available: `['wip', 'planned', 'new', 'ready', null]`
   if status is not defined, the component will have a "N/A" CSS status on [Components status page].
 - thumb `(optional)`: Boolean to define if the component in [Components overview page] will have a thumbnail
-  - ***Note:*** The thumbnail must exist on `/docs/.vuepress/public/assets/images/components` and the name should be the `component title` in kebab-case in `png` format. e.g. `Button Group` component -> button-group.png
+  - Thumbnails are **auto-generated** from each component's default rendering. Run `pnpm nx run dialtone-documentation:thumbs` to regenerate; output lands at `apps/dialtone-documentation/docs/.vuepress/public/assets/images/components/<slug>-{light,dark}.png` (e.g. `button-group-light.png`).
+  - If the default rendering doesn't read well as a thumbnail (overlay components, layout primitives, etc.), author an override `.vue` file at `apps/dialtone-documentation/thumbs/<slug>.vue` — see [`apps/dialtone-documentation/thumbs/README.md`](../thumbs/README.md) for the override-authoring guide and `?gallery` preview URL.
 - storybook `(optional)`: It can be a storybook URL or a status.
   - Status options available: `['wip', 'planned', null]`
   if storybook is not defined, the component will have a "N/A" Vue status on [Components status page].

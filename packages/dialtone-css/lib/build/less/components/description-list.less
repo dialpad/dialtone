@@ -1,3 +1,8 @@
+//  Register gap modifier var as non-inheriting so nested description lists
+//  don't pick up an ancestor's gap override.
+@property --description-list-gap { syntax: "*"; inherits: false; }
+
+@layer dialtone.components {
 .d-description-list {
   display: flex;
   flex-flow: row wrap;
@@ -5,10 +10,21 @@
   align-items: flex-start;
   font: var(--dt-typography-body-sm);
 
-  --description-list-gap: var(--dt-space-400);
-  each(range(0, 600, 100), {
+  --description-list-gap: var(--dt-spacing-100);
+
+  // Stops outside both range() sequences: 1 (not a multiple of 25), 525 (not a multiple of 50)
+  &--gap-1 { --description-list-gap: var(--dt-spacing-1); }
+  &--gap-525 { --description-list-gap: var(--dt-spacing-525); }
+
+  each(range(0, 200, 25), {
     &--gap-@{value} {
-     --description-list-gap: ~"var(--dt-space-@{value})";
+     --description-list-gap: ~"var(--dt-spacing-@{value})";
+    }
+  });
+
+  each(range(250, 800, 50), {
+    &--gap-@{value} {
+     --description-list-gap: ~"var(--dt-spacing-@{value})";
     }
   });
 
@@ -24,7 +40,8 @@
 
   &__description {
     flex: 1 1 50%;
-    margin-left: 0;
+    margin-inline-start: 0;
     color: var(--dt-color-foreground-primary);
   }
+}
 }

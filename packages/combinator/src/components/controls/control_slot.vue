@@ -1,24 +1,54 @@
 <template>
-  <dt-input
-    :value="value"
+  <dtc-control-clearable-shell
+    :label="label"
+    :empty="isEmpty"
+    :expanded="expanded"
     :disabled="disabled"
-    spellcheck="false"
-    size="sm"
-    @input="updateValue"
+    :required="required"
+    :clearable="clearable"
+    @add="addValue"
+    @clear="clearValue"
   >
-    <template #labelSlot>
-      <span class="d-input__label-text d-label--sm">
-        <slot />
-      </span>
+    <template #label>
+      <slot />
     </template>
-  </dt-input>
+    <dt-input
+      ref="inputRef"
+      class="d-fl1"
+      :model-value="inputValue"
+      :disabled="disabled"
+      type="textarea"
+      spellcheck="false"
+      :size="100"
+      input-class="comb-control-textarea d-hmx-200"
+      @update:model-value="updateValue"
+      @blur="collapseIfEmpty"
+    >
+      <template #label>
+        <dt-text
+          kind="label"
+          :size="100"
+          tone="secondary"
+          class="d-mbe-50 d-c-default d-d-block"
+        >
+          <slot />
+        </dt-text>
+      </template>
+    </dt-input>
+  </dtc-control-clearable-shell>
 </template>
 
 <script setup>
-import { DtInput } from '@dialpad/dialtone-vue';
+import { DtInput, DtText } from '@dialpad/dialtone-vue';
+import DtcControlClearableShell from './control_clearable_shell.vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
+import { useClearableInput } from '@/src/lib/utils_vue';
 
-defineProps({
+const props = defineProps({
+  label: {
+    type: String,
+    default: '',
+  },
   value: {
     type: undefined,
     default: () => null,
@@ -27,14 +57,24 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  required: {
+    type: Boolean,
+    default: false,
+  },
+  clearable: {
+    type: Boolean,
+    default: true,
+  },
+  defaultValue: {
+    type: undefined,
+    default: () => null,
+  },
 });
 
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
 
-function updateValue (e) {
-  const value = e || null;
-  emit(VALUE_UPDATE_EVENT, value);
-}
+const { expanded, inputRef, inputValue, isEmpty, updateValue, addValue, collapseIfEmpty, clearValue } =
+  useClearableInput({ props, emit, parse: (e) => e || null });
 </script>
 
 <script>
@@ -45,3 +85,9 @@ export default {
   name: 'DtcControlSlot',
 };
 </script>
+
+<style lang="less">
+.comb-control-textarea {
+  field-sizing: content;
+}
+</style>

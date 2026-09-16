@@ -1,0 +1,578 @@
+{
+  "material": {
+    "sandstone": {
+      "50": {
+        "value": "oklch(1 0 0)",
+        "type": "color"
+      },
+      "100": {
+        "value": "oklch(0.9748 0.0025 48.72)",
+        "type": "color"
+      },
+      "150": {
+        "value": "oklch(0.9512 0.0027 66.64)",
+        "type": "color"
+      },
+      "200": {
+        "value": "oklch(0.9245 0.0029 84.56)",
+        "type": "color"
+      },
+      "250": {
+        "value": "oklch(0.8894 0.0044 84.56)",
+        "type": "color"
+      },
+      "300": {
+        "value": "oklch(0.8448 0.0059 84.57)",
+        "type": "color"
+      },
+      "350": {
+        "value": "oklch(0.7914 0.006 84.57)",
+        "type": "color"
+      },
+      "400": {
+        "value": "oklch(0.7321 0.0061 84.57)",
+        "type": "color"
+      },
+      "450": {
+        "value": "oklch(0.6706 0.0047 84.56)",
+        "type": "color"
+      },
+      "500": {
+        "value": "oklch(0.6114 0.0032 84.56)",
+        "type": "color"
+      },
+      "550": {
+        "value": "oklch(0.5586 0.0047 89.87)",
+        "type": "color"
+      },
+      "600": {
+        "value": "oklch(0.5134 0.0063 95.18)",
+        "type": "color"
+      },
+      "650": {
+        "value": "oklch(0.4747 0.0059 86.72)",
+        "type": "color"
+      },
+      "700": {
+        "value": "oklch(0.4355 0.0055 78.27)",
+        "type": "color"
+      },
+      "750": {
+        "value": "oklch(0.3902 0.0055 67.24)",
+        "type": "color"
+      },
+      "800": {
+        "value": "oklch(0.3436 0.0055 56.21)",
+        "type": "color"
+      },
+      "850": {
+        "value": "oklch(0.3008 0.0059 67.21)",
+        "type": "color"
+      },
+      "900": {
+        "value": "oklch(0.2572 0.0063 78.21)",
+        "type": "color"
+      },
+      "950": {
+        "value": "oklch(0.2083 0.006 91.63)",
+        "type": "color"
+      },
+      "1000": {
+        "value": "oklch(0.1595 0.0045 84.59)",
+        "type": "color"
+      }
+    },
+    "steel": {
+      "50": {
+        "value": "oklch(1 0 0)",
+        "type": "color"
+      },
+      "100": {
+        "value": "oklch(0.9748 0.0019 268.93)",
+        "type": "color"
+      },
+      "150": {
+        "value": "oklch(0.9512 0.0033 273.27)",
+        "type": "color"
+      },
+      "200": {
+        "value": "oklch(0.9245 0.0052 273.02)",
+        "type": "color"
+      },
+      "250": {
+        "value": "oklch(0.8894 0.0074 270.68)",
+        "type": "color"
+      },
+      "300": {
+        "value": "oklch(0.8448 0.0102 269.8)",
+        "type": "color"
+      },
+      "350": {
+        "value": "oklch(0.7914 0.0136 270.35)",
+        "type": "color"
+      },
+      "400": {
+        "value": "oklch(0.7321 0.0175 270.96)",
+        "type": "color"
+      },
+      "450": {
+        "value": "oklch(0.6706 0.02 271.64)",
+        "type": "color"
+      },
+      "500": {
+        "value": "oklch(0.6114 0.0213 272.31)",
+        "type": "color"
+      },
+      "550": {
+        "value": "oklch(0.5586 0.0224 272.91)",
+        "type": "color"
+      },
+      "600": {
+        "value": "oklch(0.5134 0.0234 271.35)",
+        "type": "color"
+      },
+      "650": {
+        "value": "oklch(0.4747 0.0242 269.65)",
+        "type": "color"
+      },
+      "700": {
+        "value": "oklch(0.4355 0.025 268.65)",
+        "type": "color"
+      },
+      "750": {
+        "value": "oklch(0.3902 0.0255 269.75)",
+        "type": "color"
+      },
+      "800": {
+        "value": "oklch(0.3436 0.0261 270.24)",
+        "type": "color"
+      },
+      "850": {
+        "value": "oklch(0.3008 0.0268 270.36)",
+        "type": "color"
+      },
+      "900": {
+        "value": "oklch(0.2572 0.0257 271.29)",
+        "type": "color"
+      },
+      "950": {
+        "value": "oklch(0.2083 0.0227 273.11)",
+        "type": "color"
+      },
+      "1000": {
+        "value": "oklch(0.1595 0.0202 272.01)",
+        "type": "color"
+      }
+    },
+    "graphite": {
+      "50": {
+        "value": "oklch(1 0 0)",
+        "type": "color"
+      },
+      "100": {
+        "value": "oklch(0.9748 0.0013 286.38)",
+        "type": "color"
+      },
+      "150": {
+        "value": "oklch(0.9512 0.0026 286.36)",
+        "type": "color"
+      },
+      "200": {
+        "value": "oklch(0.9245 0.0048 286.33)",
+        "type": "color"
+      },
+      "250": {
+        "value": "oklch(0.8894 0.0068 286.30)",
+        "type": "color"
+      },
+      "300": {
+        "value": "oklch(0.8448 0.0096 286.25)",
+        "type": "color"
+      },
+      "350": {
+        "value": "oklch(0.7914 0.0134 286.18)",
+        "type": "color"
+      },
+      "400": {
+        "value": "oklch(0.7321 0.0176 286.10)",
+        "type": "color"
+      },
+      "450": {
+        "value": "oklch(0.6706 0.0198 286.04)",
+        "type": "color"
+      },
+      "500": {
+        "value": "oklch(0.6114 0.0203 285.99)",
+        "type": "color"
+      },
+      "550": {
+        "value": "oklch(0.5586 0.0207 285.94)",
+        "type": "color"
+      },
+      "600": {
+        "value": "oklch(0.5134 0.0213 285.88)",
+        "type": "color"
+      },
+      "650": {
+        "value": "oklch(0.4747 0.0217 285.83)",
+        "type": "color"
+      },
+      "700": {
+        "value": "oklch(0.4355 0.0216 285.79)",
+        "type": "color"
+      },
+      "750": {
+        "value": "oklch(0.3902 0.0184 285.80)",
+        "type": "color"
+      },
+      "800": {
+        "value": "oklch(0.3436 0.0144 285.87)",
+        "type": "color"
+      },
+      "850": {
+        "value": "oklch(0.3008 0.0103 285.97)",
+        "type": "color"
+      },
+      "900": {
+        "value": "oklch(0.2572 0.0078 285.99)",
+        "type": "color"
+      },
+      "950": {
+        "value": "oklch(0.2083 0.0078 285.88)",
+        "type": "color"
+      },
+      "1000": {
+        "value": "oklch(0.1595 0.0068 285.84)",
+        "type": "color"
+      }
+    },
+    "iron": {
+      "50": {
+        "value": "oklch(1 0 0)",
+        "type": "color"
+      },
+      "100": {
+        "value": "oklch(0.9748 0 0)",
+        "type": "color"
+      },
+      "150": {
+        "value": "oklch(0.9512 0 0)",
+        "type": "color"
+      },
+      "200": {
+        "value": "oklch(0.9245 0 0)",
+        "type": "color"
+      },
+      "250": {
+        "value": "oklch(0.8894 0 0)",
+        "type": "color"
+      },
+      "300": {
+        "value": "oklch(0.8448 0 0)",
+        "type": "color"
+      },
+      "350": {
+        "value": "oklch(0.7914 0 0)",
+        "type": "color"
+      },
+      "400": {
+        "value": "oklch(0.7321 0 0)",
+        "type": "color"
+      },
+      "450": {
+        "value": "oklch(0.6706 0 0)",
+        "type": "color"
+      },
+      "500": {
+        "value": "oklch(0.6114 0 0)",
+        "type": "color"
+      },
+      "550": {
+        "value": "oklch(0.5586 0 0)",
+        "type": "color"
+      },
+      "600": {
+        "value": "oklch(0.5134 0 0)",
+        "type": "color"
+      },
+      "650": {
+        "value": "oklch(0.4747 0 0)",
+        "type": "color"
+      },
+      "700": {
+        "value": "oklch(0.4355 0 0)",
+        "type": "color"
+      },
+      "750": {
+        "value": "oklch(0.3902 0 0)",
+        "type": "color"
+      },
+      "800": {
+        "value": "oklch(0.3436 0 0)",
+        "type": "color"
+      },
+      "850": {
+        "value": "oklch(0.3008 0 0)",
+        "type": "color"
+      },
+      "900": {
+        "value": "oklch(0.2572 0 0)",
+        "type": "color"
+      },
+      "950": {
+        "value": "oklch(0.2083 0 0)",
+        "type": "color"
+      },
+      "1000": {
+        "value": "oklch(0.1595 0 0)",
+        "type": "color"
+      }
+    },
+    "jade": {
+      "50": {
+        "value": "oklch(1 0 0)",
+        "type": "color"
+      },
+      "100": {
+        "value": "oklch(0.9748 0.0026 251.44)",
+        "type": "color"
+      },
+      "150": {
+        "value": "oklch(0.9512 0.0042 251.36)",
+        "type": "color"
+      },
+      "200": {
+        "value": "oklch(0.9245 0.0063 251.29)",
+        "type": "color"
+      },
+      "250": {
+        "value": "oklch(0.8894 0.0088 251.23)",
+        "type": "color"
+      },
+      "300": {
+        "value": "oklch(0.8448 0.0120 251.17)",
+        "type": "color"
+      },
+      "350": {
+        "value": "oklch(0.7914 0.0159 251.10)",
+        "type": "color"
+      },
+      "400": {
+        "value": "oklch(0.7321 0.0202 251.03)",
+        "type": "color"
+      },
+      "450": {
+        "value": "oklch(0.6706 0.0239 250.95)",
+        "type": "color"
+      },
+      "500": {
+        "value": "oklch(0.6114 0.0269 250.88)",
+        "type": "color"
+      },
+      "550": {
+        "value": "oklch(0.5586 0.0296 250.81)",
+        "type": "color"
+      },
+      "600": {
+        "value": "oklch(0.5134 0.0314 250.76)",
+        "type": "color"
+      },
+      "650": {
+        "value": "oklch(0.4747 0.0329 250.73)",
+        "type": "color"
+      },
+      "700": {
+        "value": "oklch(0.4355 0.0350 250.71)",
+        "type": "color"
+      },
+      "750": {
+        "value": "oklch(0.3902 0.0394 250.78)",
+        "type": "color"
+      },
+      "800": {
+        "value": "oklch(0.3436 0.0438 250.86)",
+        "type": "color"
+      },
+      "850": {
+        "value": "oklch(0.3008 0.0479 250.95)",
+        "type": "color"
+      },
+      "900": {
+        "value": "oklch(0.2572 0.0449 251.10)",
+        "type": "color"
+      },
+      "950": {
+        "value": "oklch(0.2083 0.0338 251.30)",
+        "type": "color"
+      },
+      "1000": {
+        "value": "oklch(0.1595 0.0283 251.43)",
+        "type": "color"
+      }
+    },
+    "copper": {
+      "50": {
+        "value": "oklch(1 0 0)",
+        "type": "color"
+      },
+      "100": {
+        "value": "oklch(0.9748 0.0009 55.37)",
+        "type": "color"
+      },
+      "150": {
+        "value": "oklch(0.9512 0.0014 53.69)",
+        "type": "color"
+      },
+      "200": {
+        "value": "oklch(0.9245 0.0019 52.38)",
+        "type": "color"
+      },
+      "250": {
+        "value": "oklch(0.8894 0.0026 51.12)",
+        "type": "color"
+      },
+      "300": {
+        "value": "oklch(0.8448 0.0036 50.09)",
+        "type": "color"
+      },
+      "350": {
+        "value": "oklch(0.7914 0.0048 49.28)",
+        "type": "color"
+      },
+      "400": {
+        "value": "oklch(0.7321 0.0061 48.38)",
+        "type": "color"
+      },
+      "450": {
+        "value": "oklch(0.6706 0.0073 47.53)",
+        "type": "color"
+      },
+      "500": {
+        "value": "oklch(0.6114 0.0084 46.77)",
+        "type": "color"
+      },
+      "550": {
+        "value": "oklch(0.5586 0.0095 46.10)",
+        "type": "color"
+      },
+      "600": {
+        "value": "oklch(0.5134 0.0105 45.46)",
+        "type": "color"
+      },
+      "650": {
+        "value": "oklch(0.4747 0.0113 44.91)",
+        "type": "color"
+      },
+      "700": {
+        "value": "oklch(0.4355 0.0124 44.36)",
+        "type": "color"
+      },
+      "750": {
+        "value": "oklch(0.3902 0.0143 43.74)",
+        "type": "color"
+      },
+      "800": {
+        "value": "oklch(0.3436 0.0152 43.03)",
+        "type": "color"
+      },
+      "850": {
+        "value": "oklch(0.3008 0.0155 42.35)",
+        "type": "color"
+      },
+      "900": {
+        "value": "oklch(0.2572 0.0145 41.37)",
+        "type": "color"
+      },
+      "950": {
+        "value": "oklch(0.2083 0.0119 39.96)",
+        "type": "color"
+      },
+      "1000": {
+        "value": "oklch(0.1595 0.0097 38.74)",
+        "type": "color"
+      }
+    },
+    "amethyst": {
+      "50": {
+        "value": "oklch(1 0 0)",
+        "type": "color"
+      },
+      "100": {
+        "value": "oklch(0.9748 0.0013 289.00)",
+        "type": "color"
+      },
+      "150": {
+        "value": "oklch(0.9512 0.0026 289.00)",
+        "type": "color"
+      },
+      "200": {
+        "value": "oklch(0.9245 0.0048 289.10)",
+        "type": "color"
+      },
+      "250": {
+        "value": "oklch(0.8894 0.0068 289.10)",
+        "type": "color"
+      },
+      "300": {
+        "value": "oklch(0.8448 0.0096 289.20)",
+        "type": "color"
+      },
+      "350": {
+        "value": "oklch(0.7914 0.0134 289.30)",
+        "type": "color"
+      },
+      "400": {
+        "value": "oklch(0.7321 0.0176 289.40)",
+        "type": "color"
+      },
+      "450": {
+        "value": "oklch(0.6706 0.0198 289.50)",
+        "type": "color"
+      },
+      "500": {
+        "value": "oklch(0.6114 0.0203 289.70)",
+        "type": "color"
+      },
+      "550": {
+        "value": "oklch(0.5586 0.0207 289.80)",
+        "type": "color"
+      },
+      "600": {
+        "value": "oklch(0.5134 0.0213 290.00)",
+        "type": "color"
+      },
+      "650": {
+        "value": "oklch(0.4747 0.0217 290.10)",
+        "type": "color"
+      },
+      "700": {
+        "value": "oklch(0.4355 0.0216 290.20)",
+        "type": "color"
+      },
+      "750": {
+        "value": "oklch(0.3902 0.0184 290.40)",
+        "type": "color"
+      },
+      "800": {
+        "value": "oklch(0.3436 0.0220 290.70)",
+        "type": "color"
+      },
+      "850": {
+        "value": "oklch(0.3008 0.0350 290.90)",
+        "type": "color"
+      },
+      "900": {
+        "value": "oklch(0.2085 0.0594 294.02)",
+        "type": "color"
+      },
+      "950": {
+        "value": "oklch(0.1599 0.0811 291.62)",
+        "type": "color"
+      },
+      "1000": {
+        "value": "oklch(0.1361 0.0811 291.62)",
+        "type": "color"
+      }
+    }
+  }
+}

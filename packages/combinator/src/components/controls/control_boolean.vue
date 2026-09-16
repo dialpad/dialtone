@@ -1,26 +1,38 @@
 <template>
   <div class="dtc-control-boolean">
-    <dt-toggle
-      :value="value"
-      :disabled="disabled"
-      label-class="d-label--sm d-fc-secondary"
-      size="sm"
-      wrapper-class="d-jc-space-between"
-      data-qa="dtc-control-boolean-input"
-      @change="e => emit(VALUE_UPDATE_EVENT, e)"
+    <dt-stack
+      direction="row"
+      gap="50"
+      align="center"
     >
-      <slot />
-    </dt-toggle>
+      <dt-toggle
+        :model-value="toggleValue"
+        :disabled="disabled"
+        :size="200"
+        class="d-jc-space-between d-fl1"
+        data-qa="dtc-control-boolean-input"
+        @update:model-value="e => emit(VALUE_UPDATE_EVENT, e)"
+      >
+        <dt-text
+          kind="label"
+          :size="100"
+          tone="secondary"
+        >
+          <slot />
+        </dt-text>
+      </dt-toggle>
+    </dt-stack>
   </div>
 </template>
 
 <script setup>
-import { DtToggle } from '@dialpad/dialtone-vue';
+import { DtStack, DtText, DtToggle } from '@dialpad/dialtone-vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
+import { computed } from 'vue';
 
-defineProps({
+const props = defineProps({
   value: {
-    type: Boolean,
+    type: [Boolean, null],
     default: () => false,
   },
   disabled: {
@@ -30,6 +42,8 @@ defineProps({
 });
 
 const emit = defineEmits([VALUE_UPDATE_EVENT]);
+
+const toggleValue = computed(() => props.value ?? false);
 </script>
 
 <script>

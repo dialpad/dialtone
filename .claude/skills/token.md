@@ -59,3 +59,4 @@ After creating or updating tokens:
 - If tokens are edited manually (not via Figma sync), `sync:tokens-to-figma` may be needed to push changes back to Figma
 - The `$metadata.json` file defines the build order for 137 token sets — do not modify this without understanding the dependency chain
 - Component tokens should reference semantic tokens, not base palette tokens directly, to ensure theme compatibility
+- Base color token values use OKLCH format (`oklch(L C H)`), not hex or HSL. HSL channel decomposition (`-h`, `-s`, `-l` suffix variables) was removed — tokens output only the base variable now.

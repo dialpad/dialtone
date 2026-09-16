@@ -1,26 +1,26 @@
 ---
 title: Banner
-description: A banner is a type of Notice, delivering system and engagement messaging. It is highly intrusive and should be used sparingly and appropriately.
+description: High-visibility message for system or engagement updates.
 status: ready
 thumb: true
-image: assets/images/components/banner.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-banner--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=4516-0
+keywords: ["alert","notification","message","d-banner","DtBanner","dt-banner"]
 ---
 
-<code-well-header class="d-p0">
-    <dt-stack gap="500" class="d-w100p" align="center">
-      <dt-banner title="Example banner" kind="info" class="d-ps-relative d-zi-base">
-          Message body with a <dt-link kind="muted">Link</dt-link>
-          <template #action>
-            <dt-button size="sm" kind="muted" importance="outlined">Action</dt-button>
-          </template>
-      </dt-banner>
-      <dt-stack direction="row">
-          <dt-button @click="toggleBanner('example-pinned')">Pin to top</dt-button>
-      </dt-stack>
-    </dt-stack>
-</code-well-header>
+```vue demo-only
+<dt-stack gap="200" class="d-w100p" align="center">
+  <dt-banner header-text="Example banner" kind="info" class="d-ps-relative d-zi-base">
+    Message body with a <dt-link tone="muted">Link</dt-link>
+    <template #action>
+      <dt-button :size="200" kind="muted" importance="outlined">Action</dt-button>
+    </template>
+  </dt-banner>
+  <dt-stack direction="row">
+    <dt-button @click="toggleBanner('example-pinned')">Pin to top</dt-button>
+  </dt-stack>
+</dt-stack>
+```
 
 ## Usage
 
@@ -35,104 +35,77 @@ Banners are a type of notice and so you can use the following [Notice](notice.md
 
 ### Kind
 
-<code-well-header>
-    <dt-stack direction="row" gap="400" align="end" class="d-w100p">
-        <div class="d-fl-grow1">
-            <dt-select-menu label="Style" :options="bannerOptions" v-model="selectedKind" />
-        </div>
-        <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
-        <dt-button @click="toggleBanner('example-kind')">Toggle Example</dt-button>
-    </dt-stack>
-</code-well-header>
+```vue demo-only
+<dt-stack direction="row" gap="200">
+  <dt-select-menu :show-label="false" label="Style" :options="bannerOptions" v-model="selectedKind" />
+  <dt-checkbox value="important" @update:model-value="toggleImportant">Important</dt-checkbox>
+  <dt-button @click="toggleBanner('example-kind')">Toggle Example</dt-button>
+</dt-stack>
+```
 
 <dt-banner
+  v-if="shownBanner === 'example-kind'"
   :pinned="pinned"
   :important="important"
   :kind="selectedKind"
-  title="Optional banner title"
-  v-show="shownBanner === 'example-kind'"
+  header-text="Optional banner title"
   @close="closeBanner"
 >
   Message body
 </dt-banner>
 
-<code-example-tabs
-htmlCode='
-<aside class="d-banner d-banner--base" role="alert" aria-hidden="false">
-  <div class="d-banner__dialog" role="alertdialog" aria-labelledy="info-alert-title" aria-describedby="info-alert-desc">
-    <div class="d-notice__icon">...</div>
-    <div class="d-notice__content">
-      <h2 class="d-notice__title" id="info-alert-title">...</h2>
-      <p class="d-notice__message" id="info-alert-desc">...</p>
-    </div>
-  <div class="d-notice__actions">...</div>
-</aside>
-
-<aside class="d-banner d-banner--error" role="alert" aria-hidden="false">...</aside>
-<aside class="d-banner d-banner--info" role="alert" aria-hidden="false">...</aside>
-<aside class="d-banner d-banner--success" role="alert" aria-hidden="false">...</aside>
-<aside class="d-banner d-banner--warning" role="alert" aria-hidden="false">...</aside>
-'
-vueCode='
-<dt-banner kind="base" title="Optional banner title"> Message body </dt-banner>
-<dt-banner kind="error" title="Optional banner title"> Message body </dt-banner>
-<dt-banner kind="info" title="Optional banner title"> Message body </dt-banner>
-<dt-banner kind="success" title="Optional banner title"> Message body </dt-banner>
-<dt-banner kind="warning" title="Optional banner title"> Message body </dt-banner>
+```vue code-only
+<dt-banner kind="base" header-text="Optional banner title"> Message body </dt-banner>
+<dt-banner kind="critical" header-text="Optional banner title"> Message body </dt-banner>
+<dt-banner kind="info" header-text="Optional banner title"> Message body </dt-banner>
+<dt-banner kind="positive" header-text="Optional banner title"> Message body </dt-banner>
+<dt-banner kind="warning" header-text="Optional banner title"> Message body </dt-banner>
 <dt-banner background-image="{$background-image}" background-size="contain"> Message body </dt-banner>
-<dt-banner pinned="true" kind="warning" title="Optional banner title"> Message body </dt-banner>
-<dt-banner important="true" kind="warning" title="Optional banner title"> Message body </dt-banner>
-'
-/>
+<dt-banner pinned="true" kind="warning" header-text="Optional banner title"> Message body </dt-banner>
+<dt-banner important="true" kind="warning" header-text="Optional banner title"> Message body </dt-banner>
+```
 
 ### Pinned
 
 Pins the banner to the top of the window.
 
-<code-well-header>
-    <dt-stack direction="row">
-        <dt-button @click="toggleBanner('example-pinned')">Toggle Example</dt-button>
-    </dt-stack>
-</code-well-header>
+```vue demo-only
+<dt-stack direction="row">
+  <dt-button @click="toggleBanner('example-pinned')">Toggle Example</dt-button>
+</dt-stack>
+```
 
 <dt-banner
   :pinned="true"
-  title="Optional banner title"
+  header-text="Optional banner title"
   v-show="shownBanner === 'example-pinned'"
   @close="closeBanner"
 >
   Detailed description goes here.
   <template #action>
-    <dt-button size="sm" kind="muted" importance="outlined">Action</dt-button>
+    <dt-button :size="200" kind="muted" importance="outlined">Action</dt-button>
   </template>
 </dt-banner>
 
-<code-example-tabs
-htmlCode='
-<aside class="d-banner d-banner--base d-banner--pinned" role="alert" aria-hidden="false">...</aside>
-'
-vueCode='
+```vue code-only
 <dt-banner
   :pinned="true"
-  title="Optional banner title"
+  header-text="Optional banner title"
 >
   Detailed description goes here.
   <template #action>
-    <dt-button size="sm" kind="muted" importance="outlined">Action</dt-button>
+    <dt-button :size="200" kind="muted" importance="outlined">Action</dt-button>
   </template>
 </dt-banner>
-'
-/>
-
-## Vue API
-
-<component-vue-api component-name="banner" />
-
-## Classes
-
-<component-class-table component-name="banner"></component-class-table>
+```
 
 ## Accessibility
+
+### Focus management
+
+When `important` is set, the banner is presented as a modal `alertdialog`: keyboard focus moves to the first focusable element when it appears, stays trapped within the banner while it is shown, and returns to the previously focused element when the banner is dismissed. Reserve `important` for messages that must block the rest of the page until they are addressed.
+
+Non-important banners use the `status` role and do **not** trap focus — keyboard users can Tab straight through them.
 
 <component-accessible-table component-name="banner"></component-accessible-table>
 
@@ -142,9 +115,9 @@ import { accessible } from '@data/banner.json';
 
 const bannerOptions = [
   { value: 'base', label: 'Base' },
-  { value: 'error', label: 'Error' },
+  { value: 'critical', label: 'Critical' },
   { value: 'info', label: 'Info' },
-  { value: 'success', label: 'Success' },
+  { value: 'positive', label: 'Positive' },
   { value: 'warning', label: 'Warning' },
 ];
 
@@ -161,11 +134,19 @@ function toggleBanner (id) {
   }
 }
 
-function toggleImportant () {
-  important.value = !important.value;
+function toggleImportant (checked) {
+  important.value = checked;
 }
 
 function closeBanner () {
   shownBanner.value = null;
 }
 </script>
+
+## Vue API
+
+<component-vue-api component-name="banner" />
+
+## Classes
+
+<component-class-table component-name="banner"></component-class-table>

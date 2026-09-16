@@ -5,10 +5,22 @@
 </template>
 
 <script setup>
-import { capitalize, computed, h, onMounted, onUpdated, ref, render, useSlots } from 'vue';
+import {
+  capitalize,
+  computed,
+  getCurrentInstance,
+  h,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  onUpdated,
+  ref,
+  render,
+  useSlots,
+} from 'vue';
 import { DtNotice } from '@dialpad/dialtone-vue';
 
-const ERROR_MESSAGE = 'Error rendering component';
+const ERROR_MESSAGE = 'Invalid combination';
 
 const props = defineProps({
   /**
@@ -34,6 +46,14 @@ const props = defineProps({
     type: undefined,
     required: true,
   },
+
+  /**
+   * Set of member names that are currently disabled.
+   */
+  disabledMembers: {
+    type: Set,
+    default: () => new Set(),
+  },
 });
 
 const emit = defineEmits([
@@ -41,6 +61,11 @@ const emit = defineEmits([
 ]);
 
 const slots = useSlots();
+
+// Standalone render() creates an app-less context; attaching appContext here
+// lets the target component and all its children (including DtcNode slots)
+// resolve globally registered components, directives, and provides.
+const { appContext } = getCurrentInstance();
 
 /**
  * Map object containing events and their respective handlers.
@@ -59,41 +84,77 @@ const events = computed(() => {
   );
 });
 
-onMounted(renderTarget);
+let currentContainer = null;
+
+onMounted(() => {
+  currentContainer = freshContainer();
+  renderTarget();
+  nextTick(renderTarget);
+});
 onUpdated(renderTarget);
+
+// Tear down the manually-rendered subtree on unmount so the target component's
+// own teardown (effects, observers, listeners) runs instead of leaking. The
+// render() tree lives in a detached container, so Vue removing our wrapper does
+// not unmount it; only render(null, ...) does. The spec sheet mounts one target
+// per cell and toggles via v-if, so without this each view switch orphans N
+// still-reactive component trees.
+onBeforeUnmount(() => {
+  if (currentContainer) {
+    render(null, currentContainer);
+    currentContainer = null;
+  }
+});
 
 const wrapper = ref();
 
 /**
- * Destroys any old containers in the wrapper and appends a new one.
- * Not completely sure why this has to be done, but it is buggy
- * if this method is not used.
+ * Properly unmounts any existing component, clears the wrapper,
+ * and creates a fresh container element for rendering.
  *
  * @returns {HTMLDivElement} Instantiated container for rendering.
  */
-function nextContainer () {
+function freshContainer () {
+  if (wrapper.value.firstChild) {
+    render(null, wrapper.value.firstChild);
+  }
   wrapper.value.replaceChildren();
-  return wrapper.value.appendChild(document.createElement('div'));
+  const container = document.createElement('div');
+  container.className = 'dialtone-playground__component-content';
+  return wrapper.value.appendChild(container);
 }
 
 /**
  * Need to render manually to catch DOM exception errors.
  *
- * Attempts to render the target component, if there is
- * an error a warning will be logged and a 'notice' component
- * will be rendered to inform the user.
+ * Renders the target component into the current container.
+ * Reuses the existing container so Vue patches the component
+ * instance (preserving DOM and Floating UI state) rather than
+ * unmounting and remounting on every prop change.
  */
 function renderTarget () {
-  const container = nextContainer();
+  if (!currentContainer) {
+    currentContainer = freshContainer();
+  }
+
+  const filteredBindings = Object.fromEntries(
+    Object.entries(props.bindings).filter(([name]) => !props.disabledMembers.has(name)),
+  );
+
+  const slotKey = Object.keys(slots).sort().join(',');
 
   try {
-    render(h(props.component, {
-      ...props.bindings,
+    const vnode = h(props.component, {
+      ...filteredBindings,
       ...events.value,
-    }, slots), container);
+      key: slotKey,
+    }, slots);
+    vnode.appContext = appContext;
+    render(vnode, currentContainer);
   } catch (e) {
     console.warn('Rendering warning: \n', e);
-    renderError(e, container);
+    currentContainer = freshContainer();
+    renderError(e, currentContainer);
   }
 }
 
@@ -105,9 +166,9 @@ function renderTarget () {
  */
 function renderError (exception, container) {
   render(h(DtNotice, {
-    kind: 'error',
-    hideClose: true,
-    title: ERROR_MESSAGE,
+    kind: 'critical',
+    showClose: false,
+    headerText: ERROR_MESSAGE,
   }, {
     default: () => exception.toString(),
   }), container);

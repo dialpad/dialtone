@@ -1,0 +1,41 @@
+<template>
+  <!-- DLT-3438: presence indicators gain internal shapes/icons so statuses
+       are distinguishable by more than color. `dnd` may not exist on the
+       before branch and falls back — part of the story. -->
+  <div
+    class="vg-scene"
+    style="width:560px;"
+  >
+    <p class="vg-heading">
+      Presence
+    </p>
+    <div style="display:flex;gap:36px;align-items:flex-end;">
+      <div
+        v-for="p in ['active', 'away', 'busy', 'dnd', 'offline']"
+        :key="p"
+        style="text-align:center;"
+      >
+        <div style="height:28px;display:flex;align-items:center;justify-content:center;">
+          <dt-presence
+            :presence="p"
+            class="vg-presence-size"
+          />
+        </div>
+        <p class="vg-caption">
+          {{ p }}
+        </p>
+      </div>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+/* Render presence dots large enough to see the new internal shapes.
+   Size via the component's own --presence-size variable: both branches
+   size the inner dot (and, on next, radius/borders/icon) from it. Forcing
+   width/height on the wrapper instead left staging's wrapper ring at 20px
+   around a native-size dot — the "ghost circle" review finding. */
+.vg-presence-size {
+  --presence-size: 20px;
+}
+</style>

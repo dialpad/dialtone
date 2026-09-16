@@ -142,23 +142,64 @@ const FLEX_TO_PROP = {
   'd-fd-row-reverse': { prop: 'direction', value: 'row-reverse' },
   'd-fd-column-reverse': { prop: 'direction', value: 'column-reverse' },
 
-  // Gap mappings (d-g* → gap prop)
+  // Gap mappings (d-g* → gap prop) — old pixel-based utilities
   'd-g0': { prop: 'gap', value: '0' },
-  'd-g8': { prop: 'gap', value: '400' },
-  'd-g16': { prop: 'gap', value: '500' },
-  'd-g24': { prop: 'gap', value: '550' },
-  'd-g32': { prop: 'gap', value: '600' },
-  'd-g48': { prop: 'gap', value: '650' },
-  'd-g64': { prop: 'gap', value: '700' },
+  'd-g1': { prop: 'gap', value: '1' },
+  'd-g2': { prop: 'gap', value: '25' },
+  'd-g4': { prop: 'gap', value: '50' },
+  'd-g6': { prop: 'gap', value: '75' },
+  'd-g8': { prop: 'gap', value: '100' },
+  'd-g10': { prop: 'gap', value: '125' },
+  'd-g12': { prop: 'gap', value: '150' },
+  'd-g14': { prop: 'gap', value: '175' },
+  'd-g16': { prop: 'gap', value: '200' },
+  'd-g20': { prop: 'gap', value: '250' },
+  'd-g24': { prop: 'gap', value: '300' },
+  'd-g32': { prop: 'gap', value: '400' },
+  'd-g48': { prop: 'gap', value: '600' },
+  'd-g64': { prop: 'gap', value: '800' },
 
-  // Grid-gap mappings (d-gg* → gap prop) - deprecated utilities, same as d-g*
+  // Gap mappings (d-g-* → gap prop) — new token-stop-based utilities
+  'd-g-0': { prop: 'gap', value: '0' },
+  'd-g-1': { prop: 'gap', value: '1' },
+  'd-g-25': { prop: 'gap', value: '25' },
+  'd-g-50': { prop: 'gap', value: '50' },
+  'd-g-75': { prop: 'gap', value: '75' },
+  'd-g-100': { prop: 'gap', value: '100' },
+  'd-g-125': { prop: 'gap', value: '125' },
+  'd-g-150': { prop: 'gap', value: '150' },
+  'd-g-175': { prop: 'gap', value: '175' },
+  'd-g-200': { prop: 'gap', value: '200' },
+  'd-g-250': { prop: 'gap', value: '250' },
+  'd-g-300': { prop: 'gap', value: '300' },
+  'd-g-350': { prop: 'gap', value: '350' },
+  'd-g-400': { prop: 'gap', value: '400' },
+  'd-g-450': { prop: 'gap', value: '450' },
+  'd-g-500': { prop: 'gap', value: '500' },
+  'd-g-525': { prop: 'gap', value: '525' },
+  'd-g-550': { prop: 'gap', value: '550' },
+  'd-g-600': { prop: 'gap', value: '600' },
+  'd-g-650': { prop: 'gap', value: '650' },
+  'd-g-700': { prop: 'gap', value: '700' },
+  'd-g-750': { prop: 'gap', value: '750' },
+  'd-g-800': { prop: 'gap', value: '800' },
+
+  // Grid-gap mappings (d-gg* → gap prop) — deprecated utilities
   'd-gg0': { prop: 'gap', value: '0' },
-  'd-gg8': { prop: 'gap', value: '400' },
-  'd-gg16': { prop: 'gap', value: '500' },
-  'd-gg24': { prop: 'gap', value: '550' },
-  'd-gg32': { prop: 'gap', value: '600' },
-  'd-gg48': { prop: 'gap', value: '650' },
-  'd-gg64': { prop: 'gap', value: '700' },
+  'd-gg1': { prop: 'gap', value: '1' },
+  'd-gg2': { prop: 'gap', value: '25' },
+  'd-gg4': { prop: 'gap', value: '50' },
+  'd-gg6': { prop: 'gap', value: '75' },
+  'd-gg8': { prop: 'gap', value: '100' },
+  'd-gg10': { prop: 'gap', value: '125' },
+  'd-gg12': { prop: 'gap', value: '150' },
+  'd-gg14': { prop: 'gap', value: '175' },
+  'd-gg16': { prop: 'gap', value: '200' },
+  'd-gg20': { prop: 'gap', value: '250' },
+  'd-gg24': { prop: 'gap', value: '300' },
+  'd-gg32': { prop: 'gap', value: '400' },
+  'd-gg48': { prop: 'gap', value: '600' },
+  'd-gg64': { prop: 'gap', value: '800' },
 };
 
 // Classes to remove (redundant on dt-stack)
@@ -987,15 +1028,28 @@ async function processFile(filePath, options) {
       newContent = newContent.slice(0, r.start) + r.replacement + newContent.slice(r.end);
     }
 
-    await fs.writeFile(filePath, newContent, 'utf-8');
-    console.log(log.green(`   ✓ Saved ${changes} change(s)`));
-
-    // Check if file needs DtStack import
-    const importCheck = detectMissingStackImport(newContent, changes > 0);
+    // Auto-inject DtStack import before writing; fall back to manual instructions if needed.
+    // Skipped entirely when --no-import is set (e.g. DtStack is globally registered).
+    const importCheck = options.noImport ? null : detectMissingStackImport(newContent, changes > 0, options.package);
+    let finalContent = newContent;
     if (importCheck?.needsImport) {
+      const injected = injectComponentImport(newContent, 'DtStack', importCheck.suggestedPath);
+      if (injected) finalContent = injected;
+    }
+
+    await fs.writeFile(filePath, finalContent, 'utf-8');
+
+    if (importCheck?.needsImport) {
+      if (finalContent !== newContent) {
+        console.log(log.green(`   ✓ Saved ${changes} change(s) + added DtStack import`));
+        return { changes, skipped, needsImport: false };
+      }
+      console.log(log.green(`   ✓ Saved ${changes} change(s)`));
       printImportInstructions(filePath, importCheck);
       return { changes, skipped, needsImport: true };
     }
+
+    console.log(log.green(`   ✓ Saved ${changes} change(s)`));
   }
 
   return { changes, skipped, needsImport: false };
@@ -1048,9 +1102,10 @@ async function cleanupMarkers(filePath, options) {
  * Check if a file needs DtStack import
  * @param {string} content - Full file content
  * @param {boolean} usesStack - Whether file has <dt-stack> in template
+ * @param {string} [packageName] - Explicit package to import from (overrides detection)
  * @returns {object|null} - Detection result with suggested import path, or null if import exists
  */
-function detectMissingStackImport(content, usesStack) {
+function detectMissingStackImport(content, usesStack, packageName) {
   if (!usesStack) return null;
 
   // Check if DtStack is already imported
@@ -1058,7 +1113,7 @@ function detectMissingStackImport(content, usesStack) {
   if (hasImport) return null;
 
   // Analyze existing imports to suggest appropriate path
-  const importPath = detectImportPattern(content);
+  const importPath = detectImportPattern(content, packageName);
 
   return {
     needsImport: true,
@@ -1070,9 +1125,17 @@ function detectMissingStackImport(content, usesStack) {
 /**
  * Detect import pattern from existing imports in file
  * @param {string} content - File content
+ * @param {string} [packageName] - Explicit package name (e.g. @dialpad/dialtone-next).
+ *   When provided, it is used verbatim, overriding the heuristics below. This lets
+ *   consumers running Dialtone under a custom package alias inject the correct import.
  * @returns {string} - Suggested import path
  */
-function detectImportPattern(content) {
+function detectImportPattern(content, packageName) {
+  // Explicit override: honor the caller-provided package name.
+  if (packageName) {
+    return packageName;
+  }
+
   // Check for @/ alias (absolute from package root)
   if (content.includes('from \'@/components/')) {
     return '@/components/stack';
@@ -1090,6 +1153,70 @@ function detectImportPattern(content) {
 
   // Default suggestion
   return '@/components/stack';
+}
+
+/**
+ * Attempt to auto-insert a component import (and Options API registration) into a Vue SFC.
+ * Returns updated content on success, or null when the insertion can't be made safely
+ * (caller should fall back to printing manual instructions).
+ *
+ * Handles:
+ *   - <script setup>: inserts import after the last existing import; no components
+ *     registration needed (auto-registered when imported in setup context).
+ *   - Options API with existing `components: {}`: inserts import + adds to the object.
+ *   - Options API without a components object: returns null (manual step required).
+ */
+function injectComponentImport(content, componentName, importPath) {
+  if (new RegExp(`import\\s+(?:\\{[^}]*\\b${componentName}\\b[^}]*\\}|${componentName})\\s+from`).test(content)) {
+    return null; // already imported
+  }
+
+  const isScriptSetup = /<script\b[^>]*\bsetup\b/.test(content);
+  const scriptBlockRe = isScriptSetup
+    ? /<script\b[^>]*\bsetup\b[^>]*>([\s\S]*?)<\/script>/
+    : /<script\b(?![^>]*\bsetup\b)[^>]*>([\s\S]*?)<\/script>/;
+  const scriptMatch = scriptBlockRe.exec(content);
+  if (!scriptMatch) return null;
+
+  const scriptInnerStart = scriptMatch.index + scriptMatch[0].indexOf('>') + 1;
+  const scriptInner = scriptMatch[1];
+
+  const importLineRe = /^import\s.+from\s+['"][^'"]+['"]\s*;?/gm;
+  let lastImportMatch = null;
+  let m;
+  while ((m = importLineRe.exec(scriptInner)) !== null) lastImportMatch = m;
+
+  const insertOffset = lastImportMatch
+    ? scriptInnerStart + lastImportMatch.index + lastImportMatch[0].length
+    : scriptInnerStart;
+
+  const importLine = `\nimport { ${componentName} } from '${importPath}';`;
+  let out = content.slice(0, insertOffset) + importLine + content.slice(insertOffset);
+
+  if (isScriptSetup) return out; // import alone is sufficient for <script setup>
+
+  // Options API: also register in components: {}
+  // Re-exec against the updated content to get current positions, then restrict
+  // the components: { search to within the script block and after export default
+  // to avoid matching template bindings or helper objects that appear earlier.
+  const scriptMatchUpdated = scriptBlockRe.exec(out);
+  if (!scriptMatchUpdated) return null;
+  const scriptBodyStart = scriptMatchUpdated.index + scriptMatchUpdated[0].indexOf('>') + 1;
+  const scriptBodyText = scriptMatchUpdated[1];
+  const exportDefaultMatch = /\bexport\s+default\b/.exec(scriptBodyText);
+  if (!exportDefaultMatch) return null;
+  const searchFrom = scriptBodyStart + exportDefaultMatch.index;
+  const compMatchInSlice = /components\s*:\s*\{/.exec(out.slice(searchFrom));
+  if (!compMatchInSlice) return null; // no components object — can't safely auto-register
+  const compAbsIndex = searchFrom + compMatchInSlice.index;
+
+  const lineStart = out.lastIndexOf('\n', compAbsIndex) + 1;
+  const compIndent = out.slice(lineStart, compAbsIndex).match(/^[ \t]*/)[0];
+  const memberIndent = compIndent + '  ';
+  const insertAt = compAbsIndex + compMatchInSlice[0].length;
+  out = out.slice(0, insertAt) + `\n${memberIndent}${componentName},` + out.slice(insertAt);
+
+  return out;
 }
 
 /**
@@ -1138,6 +1265,8 @@ function parseArgs() {
     files: [], // Explicit file list via --file flag
     showOutline: false, // Add migration marker for visual debugging
     removeOutline: false, // Remove migration markers (cleanup mode)
+    noImport: false, // Skip import injection (for apps that globally register DtStack)
+    package: null, // Override the package name used for injected DtStack imports
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -1165,11 +1294,15 @@ Options:
   --yes, -y        Apply all changes without prompting
   --show-outline   Add data-migrate-outline attribute for visual debugging
   --remove-outline Remove data-migrate-outline attributes after review
+  --no-import      Skip import injection (use when DtStack is globally registered)
+  --package <name> Package name for injected DtStack imports
+                   (default: @dialpad/dialtone-vue when a Dialtone import is detected).
+                   Use when Dialtone runs under a custom alias, e.g. @dialpad/dialtone-next.
   --help, -h       Show help
 
 Post-Migration Steps:
   1. Review template changes with data-migrate-outline markers
-  2. Add DtStack imports as instructed by the script
+  2. Add DtStack imports as instructed by the script (skipped with --no-import)
   3. Test your application
   4. Run with --remove-outline to clean up markers
 
@@ -1211,6 +1344,17 @@ Examples:
       options.showOutline = true;
     } else if (arg === '--remove-outline') {
       options.removeOutline = true;
+    } else if (arg === '--no-import') {
+      options.noImport = true;
+    } else if (arg === '--package') {
+      // Reject a missing value or one that is really the next option (e.g.
+      // `--package --yes`) so an invalid alias is never recorded.
+      const value = args[i + 1];
+      if (!value || value.startsWith('-')) {
+        console.error('\n  --package requires a package name (e.g. --package @dialpad/dialtone-next)\n');
+        process.exit(1);
+      }
+      options.package = args[++i];
     } else if (arg === '--file' && args[i + 1]) {
       const filePath = args[++i];
       options.files.push(filePath);
@@ -1307,6 +1451,8 @@ async function main() {
         yes: options.yes,
         showOutline: options.showOutline,
         validate: options.validate,
+        noImport: options.noImport,
+        package: options.package,
       });
     }
 

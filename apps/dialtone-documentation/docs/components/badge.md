@@ -1,21 +1,13 @@
 ---
 title: Badge
-description: A badge is a compact UI element providing brief, descriptive information about an element and its surrounding context. It is terse, ideally one word.
+description: Compact marker for status, metadata, or short labels.
 status: ready
 thumb: true
-image: assets/images/components/badge.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-badge--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=2128-0
+keywords: ["label","tag","indicator","count","d-badge","DtBadge","dt-badge"]
+combinator: DtBadge
 ---
-
-<code-well-header>
-  <dt-stack direction="row" gap="400" align="center">
-    <dt-badge text="Label"></dt-badge>
-    <dt-badge kind="count" text="1"></dt-badge>
-  </dt-stack>
-</code-well-header>
-
-<!-- <component-combinator component-name="DtBadge" /> -->
 
 ## Usage
 
@@ -46,35 +38,19 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 
 ### Label
 
-<code-well-header bgclass="d-bgc-primary">
-  <dt-badge text="Label"></dt-badge>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<span class="d-badge"><span class="d-badge__label">Label</span></span>'
-vueCode='
+```vue demo
 <dt-badge text="Label" />
-'
-showHtmlWarning />
+```
 
 ### Count
 
-<code-well-header bgclass="d-bgc-primary">
-  <dt-badge kind="count" text="1"></dt-badge>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<span class="d-badge d-badge--count"><span class="d-badge__label">1</span></span>'
-vueCode='
+```vue demo
 <dt-badge kind="count" text="1" />
-'
-showHtmlWarning />
+```
 
 ## Type
 
-<table class="d-table dialtone-doc-table d-mb16">
+<table class="d-table dialtone-doc-table d-mbe-200">
   <thead>
     <tr>
       <th>Type</th>
@@ -102,15 +78,15 @@ showHtmlWarning />
       <td>
         <dt-badge kind="count" type="info" text="2"></dt-badge>
       </td>
-      <td>Used to convey general information that isn’t critical or requires action on the user's part.</td>
+      <td>Used to convey general information that isn't critical or requires action on the user's part.</td>
     </tr>
     <tr>
-      <th class="d-ta-left">Success</th>
+      <th class="d-ta-left">Positive</th>
       <td>
-        <dt-badge type="success" text="Label"></dt-badge>
+        <dt-badge type="positive" text="Label"></dt-badge>
       </td>
       <td>
-        <dt-badge kind="count" type="success" text="3"></dt-badge>
+        <dt-badge kind="count" type="positive" text="3"></dt-badge>
       </td>
       <td>Accompanying a successful or otherwise positive action or message</td>
     </tr>
@@ -149,239 +125,143 @@ showHtmlWarning />
       <td>
         <dt-badge type="ai" text="Label" kind="label"></dt-badge>
       </td>
-      <td><abbr class="d-fc-black-400 d-td-none d-fs-100" title="Not applicable">N/A</abbr></td>
+      <td><abbr class="d-fc-muted d-td-none d-fs-100" title="Not applicable">N/A</abbr></td>
       <td>To call out Dialpad Ai features.</td>
     </tr>
   </tbody>
 </table>
 
-<code-example-tabs
-htmlCode='
-<span class="d-badge"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--info"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--success"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--warning"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--critical"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--bulletin"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--ai">
-  <span class="d-badge__icon-left">
-    <dt-icon name="lightning-bolt" size="200" />
-  </span>
-  <span class="d-badge__label">Label</span>
-</span>
-<span class="d-badge d-badge--count"><span class="d-badge__label">1</span></span>
-<span class="d-badge d-badge--count d-badge--info"><span class="d-badge__label">2</span></span>
-<span class="d-badge d-badge--count d-badge--success"><span class="d-badge__label">3</span></span>
-<span class="d-badge d-badge--count d-badge--warning"><span class="d-badge__label">4</span></span>
-<span class="d-badge d-badge--count d-badge--critical"><span class="d-badge__label">5</span></span>
-<span class="d-badge d-badge--count d-badge--bulletin"><span class="d-badge__label">6</span></span>
-'
-vueCode='
+```vue code-only
 <dt-badge kind="label" text="Label" />
 <dt-badge type="info" kind="label" text="Label" />
-<dt-badge type="success" kind="label" text="Label" />
+<dt-badge type="positive" kind="label" text="Label" />
 <dt-badge type="warning" kind="label" text="Label" />
 <dt-badge type="critical" kind="label" text="Label" />
 <dt-badge type="bulletin" kind="label" text="Label" />
 <dt-badge type="ai" text="Label" kind="label" />
 <dt-badge type="default" text="1" kind="count" />
 <dt-badge type="info" text="2" kind="count" />
-<dt-badge type="success" text="3" kind="count" />
+<dt-badge type="positive" text="3" kind="count" />
 <dt-badge type="warning" text="4" kind="count" />
 <dt-badge type="critical" text="5" kind="count" />
 <dt-badge type="bulletin" text="6" kind="count" />
-'
-showHtmlWarning />
+```
 
 ## Outlined
 
-<code-well-header bgclass="d-bgc-primary">
-  <dt-stack direction="row" gap="400">
-    <dt-badge text="Label" outlined></dt-badge>
-    <dt-badge text="Label" type="info" outlined></dt-badge>
-    <dt-badge text="Label" type="success" outlined></dt-badge>
-    <dt-badge text="Label" type="warning" outlined></dt-badge>
-    <dt-badge text="Label" type="critical" outlined></dt-badge>
-    <dt-badge text="1" kind="count" outlined></dt-badge>
-    <dt-badge text="1" type="info" kind="count" outlined></dt-badge>
-    <dt-badge text="1" type="success" kind="count" outlined></dt-badge>
-    <dt-badge text="1" type="warning" kind="count" outlined></dt-badge>
-    <dt-badge text="1" type="critical" kind="count" outlined></dt-badge>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<span class="d-badge d-badge--outlined"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--info d-badge--outlined"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--success d-badge--outlined"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--warning d-badge--outlined"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--critical d-badge--outlined"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
-<span class="d-badge d-badge--info d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
-<span class="d-badge d-badge--success d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
-<span class="d-badge d-badge--warning d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
-<span class="d-badge d-badge--critical d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
-'
-vueCode='
-<dt-badge text="Label" outlined />
-<dt-badge text="Label" type="info" outlined />
-<dt-badge text="Label" type="success" outlined />
-<dt-badge text="Label" type="warning" outlined />
-<dt-badge text="Label" type="critical" outlined />
-<dt-badge text="1" kind="count" outlined />
-<dt-badge text="1" type="info" kind="count" outlined />
-<dt-badge text="1" type="success" kind="count" outlined />
-<dt-badge text="1" type="warning" kind="count" outlined />
-<dt-badge text="1" type="critical" kind="count" outlined />
-'
-showHtmlWarning />
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <dt-badge text="Label" outlined />
+  <dt-badge text="Label" type="info" outlined />
+  <dt-badge text="Label" type="positive" outlined />
+  <dt-badge text="Label" type="warning" outlined />
+  <dt-badge text="Label" type="critical" outlined />
+  <dt-badge text="1" kind="count" outlined />
+  <dt-badge text="1" type="info" kind="count" outlined />
+  <dt-badge text="1" type="positive" kind="count" outlined />
+  <dt-badge text="1" type="warning" kind="count" outlined />
+  <dt-badge text="1" type="critical" kind="count" outlined />
+</dt-stack>
+```
 
 ## Subtle
 
 At the moment, only the `bulletin` type has a subtle variant.
 
-<code-well-header>
-  <dt-stack direction="row" gap="400">
-    <dt-badge text="Label" type="bulletin" subtle></dt-badge>
-    <dt-badge text="Label" type="bulletin" subtle outlined></dt-badge>
-    <dt-badge text="1" type="bulletin" subtle kind="count"></dt-badge>
-    <dt-badge text="1" type="bulletin" subtle kind="count" outlined></dt-badge>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<span class="d-badge d-badge--bulletin d-badge--subtle"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--bulletin d-badge--subtle d-badge--outlined"><span class="d-badge__label">Label</span></span>
-<span class="d-badge d-badge--bulletin d-badge--subtle d-badge--count"><span class="d-badge__label">1</span></span>
-<span class="d-badge d-badge--bulletin d-badge--subtle d-badge--count d-badge--outlined"><span class="d-badge__label">1</span></span>
-'
-vueCode='
-<dt-badge text="Label" type="bulletin" subtle />
-<dt-badge text="Label" type="bulletin" subtle outlined />
-<dt-badge text="1" type="bulletin" subtle kind="count" />
-<dt-badge text="1" type="bulletin" subtle kind="count" outlined />
-'
-showHtmlWarning />
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <dt-badge text="Label" type="bulletin" subtle />
+  <dt-badge text="Label" type="bulletin" subtle outlined />
+  <dt-badge text="1" type="bulletin" subtle kind="count" />
+  <dt-badge text="1" type="bulletin" subtle kind="count" outlined />
+</dt-stack>
+```
 
 ## Icon
 
-<code-well-header bgclass="d-bgc-primary">
-  <dt-stack direction="row" gap="400">
-    <dt-badge ref="iconExample" type="default" text="Label" kind="label">
-      <template #leftIcon="{ iconSize }">
-        <dt-icon-lightning-bolt :size="iconSize"></dt-icon-lightning-bolt>
-      </template>
-    </dt-badge>
-    <dt-badge type="default" text="Label" kind="label">
-      <template #rightIcon="{ iconSize }">
-        <dt-icon-lightning-bolt :size="iconSize"></dt-icon-lightning-bolt>
-      </template>
-    </dt-badge>
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.iconExample'
-vueCode='
-<dt-badge type="default" text="Label" kind="label">
-  <template #leftIcon="{ iconSize }">
-    <dt-icon-lightning-bolt :size="iconSize" />
-  </template>
-</dt-badge>
-<dt-badge type="default" text="Label" kind="label">
-  <template #rightIcon="{ iconSize }">
-    <dt-icon-lightning-bolt :size="iconSize" />
-  </template>
-</dt-badge>
-'
-showHtmlWarning />
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <dt-badge type="default" text="Label" kind="label">
+    <template #startIcon="{ iconSize }">
+      <dt-icon-lightning-bolt :size="iconSize" />
+    </template>
+  </dt-badge>
+  <dt-badge type="default" text="Label" kind="label">
+    <template #endIcon="{ iconSize }">
+      <dt-icon-lightning-bolt :size="iconSize" />
+    </template>
+  </dt-badge>
+  <dt-badge type="default" text="Label" kind="label">
+    <template #startIcon="{ iconSize }">
+      <dt-icon-lightning-bolt :size="iconSize" />
+    </template>
+    <template #endIcon="{ iconSize }">
+      <dt-icon-lightning-bolt :size="iconSize" />
+    </template>
+  </dt-badge>
+</dt-stack>
+```
 
 ## Decorative
 
 Decorative badges label and classify items for quick recognition.
 
-<code-well-header bgclass="d-bgc-primary">
-  <dt-stack direction="row" gap="500" align="baseline">
-    <dt-stack gap="500">
-      <span class="d-label--md-compact">Black</span>
-      <dt-badge text="Label" decoration="black-400"></dt-badge>
-      <dt-badge text="Label" decoration="black-500"></dt-badge>
-      <dt-badge text="Label" decoration="black-900"></dt-badge>
-    </dt-stack>
-    <dt-stack gap="500">
-      <span class="d-label--md-compact">Red</span>
-      <dt-badge text="Label" decoration="red-200"></dt-badge>
-      <dt-badge text="Label" decoration="red-300"></dt-badge>
-      <dt-badge text="Label" decoration="red-400"></dt-badge>
-    </dt-stack>
-    <dt-stack gap="500">
-      <span class="d-label--md-compact">Purple</span>
-      <dt-badge text="Label" decoration="purple-200"></dt-badge>
-      <dt-badge text="Label" decoration="purple-300"></dt-badge>
-      <dt-badge text="Label" decoration="purple-400"></dt-badge>
-      <dt-badge text="Label" decoration="purple-500"></dt-badge>
-    </dt-stack>
-    <dt-stack gap="500">
-      <span class="d-label--md-compact">Blue</span>
-      <dt-badge text="Label" decoration="blue-200"></dt-badge>
-      <dt-badge text="Label" decoration="blue-300"></dt-badge>
-      <dt-badge text="Label" decoration="blue-400"></dt-badge>
-    </dt-stack>
-    <dt-stack gap="500">
-      <span class="d-label--md-compact">Green</span>
-      <dt-badge text="Label" decoration="green-300"></dt-badge>
-      <dt-badge text="Label" decoration="green-400"></dt-badge>
-      <dt-badge text="Label" decoration="green-500"></dt-badge>
-    </dt-stack>
-    <dt-stack gap="500">
-      <span class="d-label--md-compact">Gold</span>
-      <dt-badge text="Label" decoration="gold-300"></dt-badge>
-      <dt-badge text="Label" decoration="gold-400"></dt-badge>
-      <dt-badge text="Label" decoration="gold-500"></dt-badge>
-    </dt-stack>
-    <dt-stack gap="500">
-      <span class="d-label--md-compact">Magenta</span>
-      <dt-badge text="Label" decoration="magenta-200"></dt-badge>
-      <dt-badge text="Label" decoration="magenta-300"></dt-badge>
-      <dt-badge text="Label" decoration="magenta-400"></dt-badge>
-    </dt-stack>
+```vue demo
+<dt-stack direction="row" gap="200" align="baseline">
+  <dt-stack gap="200">
+    <dt-text kind="label" :size="300" density="200">Black</dt-text>
+    <dt-badge text="Label" decoration="black-400" />
+    <dt-badge text="Label" decoration="black-500" />
+    <dt-badge text="Label" decoration="black-900" />
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<span class="d-badge d-badge--decorate-{$color}">
-  <span class="d-badge__decorative"></span>
-  <span class="d-badge__label">Label</span>
-</span>
-'
-vueCode='
+  <dt-stack gap="200">
+    <dt-text kind="label" :size="300" density="200">Red</dt-text>
+    <dt-badge text="Label" decoration="red-200" />
+    <dt-badge text="Label" decoration="red-300" />
+    <dt-badge text="Label" decoration="red-400" />
+  </dt-stack>
+  <dt-stack gap="200">
+    <dt-text kind="label" :size="300" density="200">Purple</dt-text>
+    <dt-badge text="Label" decoration="purple-200" />
+    <dt-badge text="Label" decoration="purple-300" />
+    <dt-badge text="Label" decoration="purple-400" />
+    <dt-badge text="Label" decoration="purple-500" />
+  </dt-stack>
+  <dt-stack gap="200">
+    <dt-text kind="label" :size="300" density="200">Blue</dt-text>
+    <dt-badge text="Label" decoration="blue-200" />
+    <dt-badge text="Label" decoration="blue-300" />
+    <dt-badge text="Label" decoration="blue-400" />
+  </dt-stack>
+  <dt-stack gap="200">
+    <dt-text kind="label" :size="300" density="200">Green</dt-text>
+    <dt-badge text="Label" decoration="green-300" />
+    <dt-badge text="Label" decoration="green-400" />
+    <dt-badge text="Label" decoration="green-500" />
+  </dt-stack>
+  <dt-stack gap="200">
+    <dt-text kind="label" :size="300" density="200">Gold</dt-text>
+    <dt-badge text="Label" decoration="gold-300" />
+    <dt-badge text="Label" decoration="gold-400" />
+    <dt-badge text="Label" decoration="gold-500" />
+  </dt-stack>
+  <dt-stack gap="200">
+    <dt-text kind="label" :size="300" density="200">Magenta</dt-text>
+    <dt-badge text="Label" decoration="magenta-200" />
+    <dt-badge text="Label" decoration="magenta-300" />
+    <dt-badge text="Label" decoration="magenta-400" />
+  </dt-stack>
+</dt-stack>
+<!-- @code -->
 <dt-badge text="Label" decoration="black-400" />
 <dt-badge text="Label" decoration="black-500" />
 <dt-badge text="Label" decoration="black-900" />
 <dt-badge text="Label" decoration="red-200" />
-<dt-badge text="Label" decoration="red-300" />
-<dt-badge text="Label" decoration="red-400" />
-<dt-badge text="Label" decoration="purple-200" />
-<dt-badge text="Label" decoration="purple-300" />
-<dt-badge text="Label" decoration="purple-400" />
-<dt-badge text="Label" decoration="purple-500" />
-<dt-badge text="Label" decoration="blue-200" />
-<dt-badge text="Label" decoration="blue-300" />
-<dt-badge text="Label" decoration="blue-400" />
-<dt-badge text="Label" decoration="green-300" />
-<dt-badge text="Label" decoration="green-400" />
-<dt-badge text="Label" decoration="green-500" />
-<dt-badge text="Label" decoration="gold-300" />
-<dt-badge text="Label" decoration="gold-400" />
-<dt-badge text="Label" decoration="gold-500" />
-<dt-badge text="Label" decoration="magenta-200" />
-<dt-badge text="Label" decoration="magenta-300" />
-<dt-badge text="Label" decoration="magenta-400" />
-'
-showHtmlWarning />
+...
+```
 
 <dialtone-usage>
 <template #do>
@@ -411,78 +291,78 @@ showHtmlWarning />
 
 ### Label
 
-<code-well-header bgclass="d-bgc-primary">
-  <dt-stack gap="500">
-    <dt-stack direction="row" gap="400">
-      <dt-badge text="Co-host"></dt-badge>
-      <dt-badge text="Customer"></dt-badge>
-      <dt-badge text="Locked">
-        <template #leftIcon="{ iconSize }">
-          <dt-icon-lock :size="iconSize"></dt-icon-lock>
-        </template>
-      </dt-badge>
-      <dt-badge text="Chat log">
-        <template #leftIcon="{ iconSize }">
-          <dt-icon-message :size="iconSize"></dt-icon-message>
-        </template>
-      </dt-badge>
-    </dt-stack>
-    <dt-stack direction="row" gap="400">
-      <dt-badge text="In progress" type="info"></dt-badge>
-      <dt-badge text="Beta" type="info"></dt-badge>
-      <dt-badge text="Draft" type="info"></dt-badge>
-    </dt-stack>
-    <dt-stack direction="row" gap="400">
-      <dt-badge text="Overdue" type="warning"></dt-badge>
-    </dt-stack>
-    <dt-stack direction="row" gap="400">
-      <dt-badge text="Resolved" type="success"></dt-badge>
-    </dt-stack>
-    <dt-stack direction="row" gap="400">
-      <dt-badge text="Recording" type="critical">
-        <template #leftIcon="{ iconSize }">
-          <dt-icon-record-filled :size="iconSize"></dt-icon-record-filled>
-        </template>
-      </dt-badge>
-    </dt-stack>
-    <dt-stack direction="row" gap="400">
-      <dt-badge text="Live" type="bulletin"></dt-badge>
-      <dt-badge text="Presenter" type="bulletin"></dt-badge>
-    </dt-stack>
-    <dt-stack direction="row" gap="400">
-      <dt-badge type="ai" text="Ai Notes"></dt-badge>
-      <dt-badge type="ai" text="Ai Suggestion"></dt-badge>
-      <dt-badge type="ai" text="Ai enabled"></dt-badge>
-      <dt-badge type="ai" text="Ai Transcript"></dt-badge>
-    </dt-stack>
+```vue demo-only
+<dt-stack gap="200">
+  <dt-stack direction="row" gap="100">
+    <dt-badge text="Co-host" />
+    <dt-badge text="Customer" />
+    <dt-badge text="Locked">
+      <template #startIcon="{ iconSize }">
+        <dt-icon-lock :size="iconSize" />
+      </template>
+    </dt-badge>
+    <dt-badge text="Chat log">
+      <template #startIcon="{ iconSize }">
+        <dt-icon-message :size="iconSize" />
+      </template>
+    </dt-badge>
   </dt-stack>
-</code-well-header>
+  <dt-stack direction="row" gap="00">
+    <dt-badge text="In progress" type="info" />
+    <dt-badge text="Beta" type="info" />
+    <dt-badge text="Draft" type="info" />
+  </dt-stack>
+  <dt-stack direction="row" gap="100">
+    <dt-badge text="Overdue" type="warning" />
+  </dt-stack>
+  <dt-stack direction="row" gap="100">
+    <dt-badge text="Resolved" type="positive" />
+  </dt-stack>
+  <dt-stack direction="row" gap="100">
+    <dt-badge text="Recording" type="critical">
+      <template #startIcon="{ iconSize }">
+        <dt-icon-record-filled :size="iconSize" />
+      </template>
+    </dt-badge>
+  </dt-stack>
+  <dt-stack direction="row" gap="100">
+    <dt-badge text="Live" type="bulletin" />
+    <dt-badge text="Presenter" type="bulletin" />
+  </dt-stack>
+  <dt-stack direction="row" gap="100">
+    <dt-badge type="ai" text="Ai Notes" />
+    <dt-badge type="ai" text="Ai Suggestion" />
+    <dt-badge type="ai" text="Ai enabled" />
+    <dt-badge type="ai" text="Ai Transcript" />
+  </dt-stack>
+</dt-stack>
+```
 
 ### Count
 
-<code-well-header bgclass="d-bgc-primary">
-  <dt-stack gap="500">
-    <dt-stack direction="row" gap="400">
-      <dt-badge kind="count" type="success" text="5%">
-        <template #leftIcon="{ iconSize }">
-          <dt-icon-arrow-up :size="iconSize"></dt-icon-arrow-up>
-        </template>
-      </dt-badge>
-    </dt-stack>
-    <dt-stack direction="row" gap="400">
-      <dt-badge kind="count" type="critical" text="-12%">
-        <template #leftIcon="{ iconSize }">
-          <dt-icon-arrow-down :size="iconSize"></dt-icon-arrow-down>
-        </template>
-      </dt-badge>
-    </dt-stack>
-    <dt-stack direction="row" gap="400">
-      <dt-badge kind="count" type="bulletin" text="1"></dt-badge>
-      <dt-badge kind="count" type="bulletin" text="18"></dt-badge>
-      <dt-badge kind="count" type="bulletin" text="99+"></dt-badge>
-    </dt-stack>
+```vue demo-only
+<dt-stack gap="200">
+  <dt-stack direction="row" gap="100">
+    <dt-badge kind="count" type="positive" text="5%">
+      <template #startIcon="{ iconSize }">
+        <dt-icon-arrow-up :size="iconSize" />
+      </template>
+    </dt-badge>
   </dt-stack>
-</code-well-header>
+  <dt-stack direction="row" gap="100">
+    <dt-badge kind="count" type="critical" text="-12%">
+      <template #startIcon="{ iconSize }">
+        <dt-icon-arrow-down :size="iconSize" />
+      </template>
+    </dt-badge>
+  </dt-stack>
+  <dt-stack direction="row" gap="100">
+    <dt-badge kind="count" type="bulletin" text="1" />
+    <dt-badge kind="count" type="bulletin" text="18" />
+    <dt-badge kind="count" type="bulletin" text="99+" />
+  </dt-stack>
+</dt-stack>
+```
 
 ## Vue API
 
@@ -500,5 +380,5 @@ showHtmlWarning />
     DtIconRecordFilled,
     DtIconArrowUp,
     DtIconArrowDown,
-  } from '@dialpad/dialtone-icons/vue3';
+  } from '@dialpad/dialtone-icons/vue';
 </script>

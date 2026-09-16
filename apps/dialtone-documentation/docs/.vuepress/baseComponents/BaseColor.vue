@@ -1,63 +1,64 @@
 <template>
-  <dt-stack as="aside">
-    <dt-stack v-if="stops.length" as="header" direction="row" justify="between">
-      <h4
-        class="d-docsite--header-3 d-tt-capitalize"
-        tabindex="-1"
-        v-text="colorName"
-      />
+  <dt-stack as="aside" gap="100">
+    <dt-stack v-if="stops.length" as="header" direction="row" justify="between" align="baseline">
+      <dt-box padding-inline="150">
+        <dt-text
+          as="h4"
+          kind="headline"
+          :size="300"
+          class="d-tt-capitalize"
+          text-box-trim="start"
+          tabindex="-1"
+        >
+          {{ colorName }}
+        </dt-text>
+      </dt-box>
+      <dt-text
+        v-dt-tooltip="`Lightness Contrast (APCA) against either pure white or black. 60 is considered AA accessible.`"
+        as="abbr"
+        tabindex="0"
+        text-box-trim="start"
+        class="d-px-150 d-td-dotted d-c-help"
+      >
+        LC
+      </dt-text>
     </dt-stack>
-    <div
-      v-for="(stop, index) in stops"
-      :key="`${colorName}-${index}`"
-      :class="[
-        'd-d-flex d-jc-space-between d-ai-center d-px12 d-py8 d-code--sm',
-        {
-          'd-btr4': index === 0,
-          'd-bbr4': index === (stops.length - 1),
-        },
-      ]"
-      :style="`background-color: ${stop.value}`"
-    >
-      <div :class="fontColorClass(stop.primaryContrast, stop.invertedContrast)">
-        <strong v-text="`var(--dt-color-${colorName}-${stop.stop})`" />
-        <br>
-        <span v-text="stop.value" />
-      </div>
-      <dt-stack class="d-fs-100 d-lh2 d-fw-bold d-bar-sm d-px4 py2">
-        <span
-          v-if="stop.primaryContrast >= minAAContrastRatio"
-          :class="fontColorMap[mode].primary"
-          v-text="formattedContrast(stop.primaryContrast)"
-        />
-        <span
-          v-if="stop.invertedContrast >= minAAContrastRatio"
-          :class="fontColorMap[mode].inverted"
-          v-text="formattedContrast(stop.invertedContrast)"
-        />
+    <dt-stack>
+      <dt-stack
+        v-for="(stop, index) in stops"
+        :key="`${colorName}-${index}`"
+        direction="row"
+        align="center"
+        justify="space-between"
+        :class="[
+          'color-stop d-px-150 d-py-100 d-text-code--xs',
+          {
+            'd-bbsr-300': index === 0,
+            'd-bber-300': index === (stops.length - 1),
+          },
+        ]"
+        :style="`background-color: ${stop.value}`"
+      >
+        <dt-stack gap="50" :class="['color-stop__meta', fontColorClass(stop.lightness)]">
+          <dt-text as="strong" class="d-us-all">
+            {{ tokenName(stop.stop) }}
+          </dt-text>
+          <dt-text class="d-o75 d-us-all">
+            {{ stop.value }}
+          </dt-text>
+        </dt-stack>
+        <dt-text
+          strength="bold"
+          :class="['color-stop__lc', fontColorClass(stop.lightness)]"
+        >
+          {{ formattedContrast(activeContrast(stop)) }}
+        </dt-text>
       </dt-stack>
-    </div>
+    </dt-stack>
   </dt-stack>
 </template>
 
 <script setup>
-const minAAContrastRatio = 4;
-const minAAAContrastRatio = 7;
-
-// Using neutral colors instead of primary, primary-inverted to make it easier to
-// implement this, as the primary color change based on theme, it was being pretty complex
-// to keep the text colors matching.
-const fontColorMap = {
-  light: {
-    primary: 'd-fc-neutral-black',
-    inverted: 'd-fc-neutral-white',
-  },
-  dark: {
-    primary: 'd-fc-neutral-white',
-    inverted: 'd-fc-neutral-black',
-  },
-};
-
 const props = defineProps({
   stops: {
     type: Array,
@@ -71,15 +72,38 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  // Token-name display format. 'color' (default) renders `var(--dt-color-{name}-{stop})`
+  // since named ramps are CSS variables. Any other value renders the source-path
+  // form `{namespace}.{name}.{stop}` — used by `material` since material ramps
+  // don't emit CSS variables.
+  namespace: {
+    type: String,
+    default: 'color',
+  },
 });
 
-function fontColorClass (primaryContrast, invertedContrast) {
-  return primaryContrast > invertedContrast
-    ? fontColorMap[props.mode].primary
-    : fontColorMap[props.mode].inverted;
+const LIGHTNESS_THRESHOLD = 0.65;
+
+function tokenName (stop) {
+  return props.namespace === 'color'
+    ? `var(--dt-color-${props.colorName}-${stop})`
+    : `${props.namespace}.${props.colorName}.${stop}`;
+}
+function fontColorClass (lightness) {
+  return lightness >= LIGHTNESS_THRESHOLD
+    ? 'd-fc-neutral-black'
+    : 'd-fc-neutral-white';
+}
+function activeContrast (stop) {
+  const useBlackText = stop.lightness >= LIGHTNESS_THRESHOLD;
+  // In light mode: primary = black contrast, inverted = white contrast
+  // In dark mode: primary = white contrast, inverted = black contrast
+  if (props.mode === 'light') {
+    return useBlackText ? stop.primaryContrast : stop.invertedContrast;
+  }
+  return useBlackText ? stop.invertedContrast : stop.primaryContrast;
 }
 function formattedContrast (contrast) {
-  const contrastGrade = contrast >= minAAAContrastRatio ? 'AAA' : (contrast >= minAAContrastRatio ? 'AA' : 'A');
-  return `${contrastGrade} ${contrast}`;
+  return `${Math.ceil(contrast)}`;
 }
 </script>

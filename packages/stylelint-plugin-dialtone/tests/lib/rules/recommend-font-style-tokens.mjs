@@ -27,7 +27,7 @@ testRule({
         font-size: var(--dt-font-size-200);
       }`,
       description: 'simple class definition containing a font size property',
-      message: messages.recommendFontStyleTokens("font-size"),
+      message: messages.recommendFontStyleTokens('font-size'),
     },
     {
       code: `.a {
@@ -40,10 +40,10 @@ testRule({
       }`,
       description: 'nested selector and several font properties',
       warnings: [
-        { message: messages.recommendFontStyleTokens("line-height") },
-        { message: messages.recommendFontStyleTokens("font-size") },
-        { message: messages.recommendFontStyleTokens("font-family") },
-        { message: messages.recommendFontStyleTokens("font-weight") },
+        { message: messages.recommendFontStyleTokens('line-height') },
+        { message: messages.recommendFontStyleTokens('font-size') },
+        { message: messages.recommendFontStyleTokens('font-family') },
+        { message: messages.recommendFontStyleTokens('font-weight') },
       ],
     },
   ],

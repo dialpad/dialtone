@@ -1,43 +1,115 @@
 <template>
-  <div>
-    <template
-      v-for="(member, key) in memberMap"
-      :key="key"
+  <template
+    v-for="(member, key) in memberMap"
+    :key="key"
+  >
+    <dt-box
+      v-if="!member.hideControl"
+      data-qa="dtc-option-bar-member-group-control"
+      min-block-size="24px"
+      class="d-plc-center"
     >
-      <div
-        v-if="!member.hideControl"
-        class="d-py6"
-        data-qa="dtc-option-bar-member-group-control"
-      >
-        <dtc-option-bar-control
-          :value="values[key]"
-          :label="member.label"
-          :control-data="getControlData(member)"
-          :valid-controls="member.validControls"
-          :description="member.description"
-          :v-model="isVModel(member)"
-          :required="member.required"
-          :locked="member.lockControl"
-          :args="{
-            defaultValue: member.defaultValue,
-            validValues: member.values,
-            validTypes: member.types,
-            tags: member.tags,
-          }"
-          @update:value="e => updateMember(e, key)"
-          @update:control="e => updateControl(e, key)"
-        />
-      </div>
-    </template>
-  </div>
+      <dtc-option-bar-control
+        :value="values[key]"
+        :label="member.label"
+        :control-data="getControlData(member)"
+        :valid-controls="member.validControls"
+        :description="member.description"
+        :v-model="isVModel(member)"
+        :required="member.required"
+        :deprecated="member.deprecated"
+        :locked="member.lockControl"
+        :disabled="member.disableControl"
+        :args="{
+          defaultValue: member.defaultValue ?? member.initialValue,
+          validValues: member.values,
+          validTypes: member.types,
+          tags: member.tags,
+          bindings: member.bindings,
+          tokenCategory: member.tokenCategory,
+          propValues,
+          disabledValues: getDisabledValues(key, props.exclusionRules, props.propValues, props.slotValues),
+          clearable: member.clearable,
+        }"
+        @update:value="e => updateMember(e, key)"
+        @update:control="e => updateControl(e, key)"
+      />
+    </dt-box>
+  </template>
 </template>
 
 <script setup>
 import DtcOptionBarControl from './option_bar_control.vue';
 import { MEMBER_UPDATE_EVENT } from '@/src/lib/constants';
-import { computed, reactive } from 'vue';
+import { computed, reactive, watch } from 'vue';
 import { convert } from '@/src/lib/convert';
 import { controlMap } from '@/src/lib/control';
+import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
+import { shouldDisable, shouldClear, getDisabledValues } from '@/src/lib/exclusion_rules';
+import { isIconSlot } from '@/src/lib/icons';
+import { isClassProp, shouldDisableSlotClassProp } from '@/src/lib/utils';
+
+const ICON_SLOT_ORDER = ['startIcon', 'endIcon', 'blockStartIcon', 'blockEndIcon', 'icon'];
+
+const PROP_PRIORITY = [
+  'title', 'as', 'variant', 'kind', 'importance', 'size', 'family', 'label', 'presence',
+  'placement', 'tone', 'density', 'strength', 'align',
+  'type', 'underline', 'selected', 'active', 'disabled',
+  'deferSelection', 'readOnly', 'showClear', 'useDropdown',
+  'showDivider', 'color', 'description',
+  'scrollbar', 'surface',
+  'borderRadius', 'borderColor',
+  'borderWidth', 'borderWidthInline', 'borderWidthInlineEnd', 'borderWidthInlineStart',
+  'borderWidthBlock', 'borderWidthBlockEnd', 'borderWidthBlockStart',
+  'padding', 'paddingInline', 'paddingInlineEnd', 'paddingInlineStart',
+  'paddingBlock', 'paddingBlockEnd', 'paddingBlockStart',
+  'inlineSize', 'minInlineSize', 'maxInlineSize', 'blockSize', 'maxBlockSize', 'minBlockSize',
+  'shadow', 'overflow',
+  'position',
+  'inset', 'insetBlock', 'insetBlockStart', 'insetBlockEnd', 'insetInline', 'insetInlineStart', 'insetInlineEnd',
+  'zIndex',
+];
+
+const CLASS_PROP_PRIORITY = [
+  'scrollbarContentClass',
+  'dropdownListClass', 'popoverContentClass', 'popoverDialogClass', 'popoverFooterClass', 'popoverHeaderClass',
+  'labelClass',
+  'startIconClass', 'endIconClass', 'iconClass', 'leadingClass', 'trailingClass',
+];
+
+const SLOT_PRIORITY = ['start', 'end', 'inlineStart', 'inlineEnd', 'blockStart', 'blockEnd', 'leading', 'trailing'];
+
+function getPropTier (member) {
+  if (isClassProp(member)) {
+    const priorityIdx = CLASS_PROP_PRIORITY.indexOf(member.name);
+    return [4, priorityIdx === -1 ? CLASS_PROP_PRIORITY.length : priorityIdx];
+  }
+
+  const priorityIdx = PROP_PRIORITY.indexOf(member.name);
+  if (priorityIdx !== -1) return [0, priorityIdx];
+  if (member.name?.startsWith('aria')) return [1, 0];
+  if (member.types?.includes('boolean')) return [2, 0];
+  return [3, 0];
+}
+
+function getSlotTier (member) {
+  if (member.name === 'default') return [0, 0];
+  if (isIconSlot(member)) return [1, ICON_SLOT_ORDER.indexOf(member.name)];
+  const priorityIdx = SLOT_PRIORITY.indexOf(member.name);
+  if (priorityIdx !== -1) return [2, priorityIdx];
+  return [3, 0];
+}
+
+// Class props always sort into the trailing class tier, even when a description
+// ("Only applies when…") would otherwise nest them under a parent prop. Detaching
+// them from the ordering dependency map keeps grouping from pulling them forward.
+// The full dependency map is still passed to shouldHideProp, so a class control is
+// still hidden when its parent is off — only its sort position is decoupled here.
+function getOrderingDependencyMap (depMap, membersByName) {
+  return new Map(
+    [...depMap].filter(([child]) => !isClassProp(membersByName.get(child))),
+  );
+}
 
 const props = defineProps({
   /**
@@ -69,9 +141,59 @@ const props = defineProps({
     type: Function,
     required: true,
   },
+  /**
+   * Exclusion rules from the variant file.
+   */
+  exclusionRules: {
+    type: Array,
+    default: () => [],
+  },
+  /**
+   * Current prop values, used to evaluate exclusion rule conditions.
+   */
+  propValues: {
+    type: Object,
+    default: () => ({}),
+  },
+  /**
+   * Current slot values, used only by exclusion rules that opt into
+   * `whenSlots` conditions.
+   */
+  slotValues: {
+    type: Object,
+    default: undefined,
+  },
+  /**
+   * The member group identifier ('props' or 'slots').
+   */
+  memberGroup: {
+    type: String,
+    default: 'props',
+  },
+  /**
+   * Settings data object.
+   */
+  settings: {
+    type: Object,
+    default: () => ({
+      controls: {
+        hideDeprecated: true,
+        hideInactive: false,
+      },
+    }),
+  },
+  /**
+   * True when option-bar search is actively filtering members.
+   */
+  searchActive: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits([MEMBER_UPDATE_EVENT]);
+
+const dependencyMap = computed(() => buildDependencyMap(props.members));
 
 /**
  * The member map is a reactive data object that wraps each member and
@@ -81,9 +203,41 @@ const emit = defineEmits([MEMBER_UPDATE_EVENT]);
  * @type {object}
  */
 const memberMap = computed(() => {
+  if (!props.members?.length) return reactive({});
+  const depMap = dependencyMap.value;
+  const membersByName = new Map(props.members.map(m => [m.name, m]));
+  const orderingDepMap = getOrderingDependencyMap(depMap, membersByName);
+  const childSet = new Set(orderingDepMap.keys());
+
+  const getTier = props.memberGroup === 'slots' ? getSlotTier : getPropTier;
+  const sortFn = (a, b) => {
+    const [aTier, aIdx] = getTier(a);
+    const [bTier, bIdx] = getTier(b);
+    if (aTier !== bTier) return aTier - bTier;
+    if (aIdx !== bIdx) return aIdx - bIdx;
+    return (a.name ?? '').localeCompare(b.name ?? '');
+  };
+
+  // Sort non-child members normally
+  const parents = [...props.members]
+    .filter(m => !childSet.has(m.name))
+    .sort(sortFn);
+
+  // Build parent → children map, sorted alphabetically
+  const childrenByParent = new Map();
+  for (const [child, parent] of orderingDepMap) {
+    if (!childrenByParent.has(parent)) childrenByParent.set(parent, []);
+    childrenByParent.get(parent).push(
+      membersByName.get(child),
+    );
+  }
+  childrenByParent.forEach(arr => arr.sort(sortFn));
+
+  // Flatten: each parent followed by its children
+  const sorted = parents.flatMap(m => [m, ...(childrenByParent.get(m.name) || [])]);
   return reactive({
     ...Object.fromEntries(
-      props.members.map(member => {
+      sorted.map(member => {
         return [getMemberKey(member), extendMember(member)];
       }),
     ),
@@ -100,15 +254,6 @@ function getMemberKey (member) {
   return member.name;
 }
 
-/**
- * Determines if the member has a default value.
- *
- * @param member
- * @returns {boolean} If the member has default value.
- */
-function hasDefaultValue (member) {
-  return 'defaultValue' in member;
-}
 
 /**
  * Attempts to get the control data for a given control.
@@ -141,10 +286,39 @@ function extendMember (member) {
 
   const [validControls, control] = props.controlSelector(member, value);
 
+  const dynamicHide = !member.required
+    && shouldHideProp(key, dependencyMap.value, props.values);
+
+  const isDocDeprecated = !!member.tags?.deprecated
+    || member.description?.startsWith('@deprecated');
+
+  const isDisabled = !member.required
+    && (
+      shouldDisable(key, props.memberGroup, props.exclusionRules, props.propValues, props.slotValues) ||
+      (props.memberGroup === 'props' && shouldDisableSlotClassProp(key, props.slotValues))
+    );
+  const deprecated = isDocDeprecated;
+  const inactive = dynamicHide || isDisabled;
+
+  const clearValue = !member.required
+    && shouldClear(key, props.memberGroup, props.exclusionRules, props.propValues, props.slotValues);
+  // clearable = true when the member has no concrete default (prop is optional, user explicitly set it)
+  const clearable = !member.required
+    && (member.clearable ?? (member.defaultValue == null || member.defaultValue === ''));
+  const hiddenBySettings = !props.searchActive && (
+    (props.settings.controls.hideDeprecated && deprecated) ||
+    (props.settings.controls.hideInactive && inactive)
+  );
+
   return {
     ...member,
     control,
     validControls,
+    hideControl: member.hideControl || hiddenBySettings,
+    clearValue,
+    clearable,
+    deprecated,
+    disableControl: inactive,
   };
 }
 
@@ -160,6 +334,14 @@ function updateMember (e, key) {
     value: e,
   });
 }
+
+watch(memberMap, (members) => {
+  Object.entries(members).forEach(([key, member]) => {
+    if (!member.clearValue) return;
+    if (props.values[key] === null || props.values[key] === undefined) return;
+    updateMember(null, key);
+  });
+});
 
 /**
  * Updates the member's control in the 'member map'.

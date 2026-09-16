@@ -1,11 +1,15 @@
 ---
 title: Z-Index
 description: Utility classes for setting an element's z-index level.
+keywords: ["stacking", "layer", "overlap"]
 ---
+
+> [!INFO] Prefer DtBox when it fits
+> Reach for [DtBox's](/components/box.html#positioning) `z-index` prop for token-backed container stacking. Use z-index utilities for non-DtBox elements or custom overlay behavior.
 
 ## Classes
 
-Set an element's z-index by using a class (`.d-zi-{level}`>). These classes match up with the variables names listed above. The table below lists the available z-index levels, class names, and the CSS output.
+Set an element's z-index by using a class (`.d-zi-{level}`). These classes match up with the variables names listed above. The table below lists the available z-index levels, class names, and the CSS output.
 
 <utility-class-table>
   <template #content>
@@ -30,11 +34,11 @@ When writing Less, you can set an element's z-index by using a variable (`var(--
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
-          <th scope="col" class="d-p0 d-bbw0 d-w25p"><div class="d-p16 d-bb d-bc-default d-bbw1">Variable</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Description</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w25p"><div class="d-p-200 d-bb d-bbw1">Variable</div></th>
+          <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
+          <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Description</div></th>
         </tr>
       </thead>
       <tbody>

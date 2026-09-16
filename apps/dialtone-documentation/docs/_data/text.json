@@ -1,0 +1,344 @@
+{
+  "classes": [
+    {
+      "class": "d-text",
+      "applies": "N/A",
+      "description": "Text component base class."
+    },
+    {
+      "class": "d-text-headline--3xl",
+      "applies": ".d-text",
+      "description": "Headline style, size 3xl."
+    },
+    {
+      "class": "d-text-headline--2xl",
+      "applies": ".d-text",
+      "description": "Headline style, size 2xl."
+    },
+    {
+      "class": "d-text-headline--xl",
+      "applies": ".d-text",
+      "description": "Headline style, size xl."
+    },
+    {
+      "class": "d-text-headline--lg",
+      "applies": ".d-text",
+      "description": "Headline style, size lg."
+    },
+    {
+      "class": "d-text-headline--md",
+      "applies": ".d-text",
+      "description": "Headline style, size md."
+    },
+    {
+      "class": "d-text-headline--sm",
+      "applies": ".d-text",
+      "description": "Headline style, size sm."
+    },
+    {
+      "class": "d-text-headline--xs",
+      "applies": ".d-text",
+      "description": "Headline style, size xs."
+    },
+    {
+      "class": "d-text-body--lg",
+      "applies": ".d-text",
+      "description": "Body style, size lg."
+    },
+    {
+      "class": "d-text-body--md",
+      "applies": ".d-text",
+      "description": "Body style, size md."
+    },
+    {
+      "class": "d-text-body--sm",
+      "applies": ".d-text",
+      "description": "Body style, size sm."
+    },
+    {
+      "class": "d-text-body--xs",
+      "applies": ".d-text",
+      "description": "Body style, size xs."
+    },
+    {
+      "class": "d-text-label--lg",
+      "applies": ".d-text",
+      "description": "Label style, size lg."
+    },
+    {
+      "class": "d-text-label--md",
+      "applies": ".d-text",
+      "description": "Label style, size md."
+    },
+    {
+      "class": "d-text-label--sm",
+      "applies": ".d-text",
+      "description": "Label style, size sm."
+    },
+    {
+      "class": "d-text-label--xs",
+      "applies": ".d-text",
+      "description": "Label style, size xs."
+    },
+    {
+      "class": "d-text-code--lg",
+      "applies": ".d-text",
+      "description": "Code style, size lg."
+    },
+    {
+      "class": "d-text-code--md",
+      "applies": ".d-text",
+      "description": "Code style, size md."
+    },
+    {
+      "class": "d-text-code--sm",
+      "applies": ".d-text",
+      "description": "Code style, size sm."
+    },
+    {
+      "class": "d-text-code--xs",
+      "applies": ".d-text",
+      "description": "Code style, size xs."
+    },
+    {
+      "class": "d-text--fs-50",
+      "applies": ".d-text",
+      "description": "Font size 50."
+    },
+    {
+      "class": "d-text--fs-75",
+      "applies": ".d-text",
+      "description": "Font size 75."
+    },
+    {
+      "class": "d-text--fs-100",
+      "applies": ".d-text",
+      "description": "Font size 100."
+    },
+    {
+      "class": "d-text--fs-125",
+      "applies": ".d-text",
+      "description": "Font size 125."
+    },
+    {
+      "class": "d-text--fs-150",
+      "applies": ".d-text",
+      "description": "Font size 150."
+    },
+    {
+      "class": "d-text--fs-200",
+      "applies": ".d-text",
+      "description": "Font size 200."
+    },
+    {
+      "class": "d-text--fs-250",
+      "applies": ".d-text",
+      "description": "Font size 250."
+    },
+    {
+      "class": "d-text--fs-300",
+      "applies": ".d-text",
+      "description": "Font size 300."
+    },
+    {
+      "class": "d-text--fs-350",
+      "applies": ".d-text",
+      "description": "Font size 350."
+    },
+    {
+      "class": "d-text--fs-400",
+      "applies": ".d-text",
+      "description": "Font size 400."
+    },
+    {
+      "class": "d-text--fs-450",
+      "applies": ".d-text",
+      "description": "Font size 450."
+    },
+    {
+      "class": "d-text--fs-500",
+      "applies": ".d-text",
+      "description": "Font size 500."
+    },
+    {
+      "class": "d-text--fs-550",
+      "applies": ".d-text",
+      "description": "Font size 550."
+    },
+    {
+      "class": "d-text--fs-600",
+      "applies": ".d-text",
+      "description": "Font size 600."
+    },
+    {
+      "class": "d-text--fs-650",
+      "applies": ".d-text",
+      "description": "Font size 650."
+    },
+    {
+      "class": "d-text--fs-700",
+      "applies": ".d-text",
+      "description": "Font size 700."
+    },
+    {
+      "class": "d-text--fs-750",
+      "applies": ".d-text",
+      "description": "Font size 750."
+    },
+    {
+      "class": "d-text--fs-800",
+      "applies": ".d-text",
+      "description": "Font size 800."
+    },
+    {
+      "class": "d-text--ff-inherit",
+      "applies": ".d-text",
+      "description": "Inherits font family."
+    },
+    {
+      "class": "d-text--ff-custom",
+      "applies": ".d-text",
+      "description": "Applies body font family."
+    },
+    {
+      "class": "d-text--ff-sans",
+      "applies": ".d-text",
+      "description": "Applies sans font family."
+    },
+    {
+      "class": "d-text--ff-mono",
+      "applies": ".d-text",
+      "description": "Applies mono font family."
+    },
+    {
+      "class": "d-text--ff-expressive",
+      "applies": ".d-text",
+      "description": "Applies expressive font family."
+    },
+    {
+      "class": "d-text--italic",
+      "applies": ".d-text",
+      "description": "Applies italic font style."
+    },
+    {
+      "class": "d-text--truncate",
+      "applies": ".d-text",
+      "description": "Truncates text with ellipsis."
+    },
+    {
+      "class": "d-text--line-clamp",
+      "applies": ".d-text",
+      "description": "Enables multi-line truncation. Use with --dt-text-line-clamp CSS variable."
+    },
+    {
+      "class": "d-text--numeric",
+      "applies": ".d-text",
+      "description": "Applies tabular-nums for numeric alignment."
+    },
+    {
+      "class": "d-text--align-start",
+      "applies": ".d-text",
+      "description": "Aligns text to start."
+    },
+    {
+      "class": "d-text--align-center",
+      "applies": ".d-text",
+      "description": "Aligns text to center."
+    },
+    {
+      "class": "d-text--align-end",
+      "applies": ".d-text",
+      "description": "Aligns text to end."
+    },
+    {
+      "class": "d-text--align-justify",
+      "applies": ".d-text",
+      "description": "Justifies text."
+    },
+    {
+      "class": "d-text--wrap-wrap",
+      "applies": ".d-text",
+      "description": "Normal text wrapping."
+    },
+    {
+      "class": "d-text--wrap-nowrap",
+      "applies": ".d-text",
+      "description": "Prevents text wrapping."
+    },
+    {
+      "class": "d-text--wrap-balance",
+      "applies": ".d-text",
+      "description": "Balances line lengths."
+    },
+    {
+      "class": "d-text--wrap-pretty",
+      "applies": ".d-text",
+      "description": "Optimizes line breaks."
+    },
+    {
+      "class": "d-text--trim-start",
+      "applies": ".d-text",
+      "description": "Trims leading whitespace."
+    },
+    {
+      "class": "d-text--trim-end",
+      "applies": ".d-text",
+      "description": "Trims trailing whitespace."
+    },
+    {
+      "class": "d-text--trim-both",
+      "applies": ".d-text",
+      "description": "Trims both leading and trailing whitespace."
+    },
+    {
+      "class": "d-text--fw-bold",
+      "applies": ".d-text",
+      "description": "Bold font weight."
+    },
+    {
+      "class": "d-text--fw-semibold",
+      "applies": ".d-text",
+      "description": "Semibold font weight."
+    },
+    {
+      "class": "d-text--fw-medium",
+      "applies": ".d-text",
+      "description": "Medium font weight."
+    },
+    {
+      "class": "d-text--fw-normal",
+      "applies": ".d-text",
+      "description": "Normal font weight."
+    },
+    {
+      "class": "d-text--lh-100",
+      "applies": ".d-text",
+      "description": "Line height 100."
+    },
+    {
+      "class": "d-text--lh-200",
+      "applies": ".d-text",
+      "description": "Line height 200."
+    },
+    {
+      "class": "d-text--lh-300",
+      "applies": ".d-text",
+      "description": "Line height 300."
+    },
+    {
+      "class": "d-text--lh-400",
+      "applies": ".d-text",
+      "description": "Line height 400."
+    },
+    {
+      "class": "d-text--lh-500",
+      "applies": ".d-text",
+      "description": "Line height 500."
+    },
+    {
+      "class": "d-text--lh-600",
+      "applies": ".d-text",
+      "description": "Line height 600."
+    }
+  ]
+}

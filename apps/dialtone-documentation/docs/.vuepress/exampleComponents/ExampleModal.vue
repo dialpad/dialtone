@@ -1,13 +1,14 @@
 <template>
   <dt-modal
-    title="Example title"
-    :show="isOpen"
-    :kind="kind"
-    :banner-title="bannerTitle"
+    header-text="Example title"
+    :open="isOpen"
+    :banner-header-text="bannerTitle"
     :banner-kind="bannerKind"
-    :size="size"
+    :fixed-header-footer="fixedHeaderFooter"
+    :fullscreen="fullscreen"
     :copy="copy"
-    @update:show="isOpen = $event"
+    :transparent-backdrop="transparentBackdrop"
+    @update:open="isOpen = $event"
   >
     <template
       #footer
@@ -16,7 +17,6 @@
         id="confirm-button"
         importance="primary"
         :kind="kind"
-        class="d-ml6"
         @click="isOpen = false"
       >
         Confirm
@@ -32,7 +32,6 @@
     </template>
   </dt-modal>
   <dt-button
-    class="d-mt0"
     @click="isOpen = !isOpen"
   >
     Click to open
@@ -44,11 +43,6 @@ export default {
   name: 'ExampleModal',
 
   props: {
-    initiallyOpen: {
-      type: Boolean,
-      default: false,
-    },
-
     kind: {
       type: String,
       default: 'default',
@@ -64,9 +58,19 @@ export default {
       default: '',
     },
 
-    size: {
-      type: String,
-      default: 'default',
+    fixedHeaderFooter: {
+      type: Boolean,
+      default: false,
+    },
+
+    fullscreen: {
+      type: Boolean,
+      default: false,
+    },
+
+    transparentBackdrop: {
+      type: Boolean,
+      default: false,
     },
 
     copy: {
@@ -81,16 +85,8 @@ export default {
 
   data () {
     return {
-      isOpen: this.initiallyOpen,
+      isOpen: false,
     };
-  },
-
-  // Docs-only behavior: render the modal open once when `initiallyOpen` is true
-  // so we can capture the open state markup for examples, then immediately close it.
-  mounted () {
-    if (this.initiallyOpen) {
-      this.isOpen = false;
-    }
   },
 };
 </script>

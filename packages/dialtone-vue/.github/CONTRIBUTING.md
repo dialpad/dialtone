@@ -187,7 +187,6 @@ change via a blog post on [dialtone.dialpad.com](https://dialtone.dialpad.com/ab
 - **`dist`:** The Dialtone Vue library is output here upon `npm run build`.
 - **`docs`:** Any storybook documentation not directly related to a component.
 - **`functions`:** Contains documentation for any functions we export as part of the library.
-- **`recipes`:** Everything related to recipe components is stored here in a folder with the component name. This includes the component itself, tests, documentation and storybook files.
 - **`scripts`:** - Contains shell scripts.
 - **`tests`:** For utility/helper files to be used in multiple tests and test configuration. Actual tests are stored in the component folder.
 
@@ -203,6 +202,13 @@ We use [Storybook](https://storybook.js.org/) for our Dialtone Vue component doc
 Storybook allows you to render each component in isolation and change any available properties.
 Our storybook is hosted at <https://dialtone.dialpad.com/vue>, and can also be run locally via `npm start`.
 For more detailed info on how to use storybook in Dialtone Vue, refer to our [storybook documentation](https://dialtone.dialpad.com/vue/?path=/story/docs-storybook-getting-started--docs).
+
+### Component Wall Thumbnail
+
+Every component that appears on the [Components overview wall](https://dialtone.dialpad.com/components/) has an auto-generated thumbnail PNG.
+Thumbnails render the component's Combinator default variant; if that doesn't read well (overlay components, layout primitives, etc.), you can author an override `.vue` file.
+Run `pnpm nx run dialtone-documentation:thumbs` to regenerate after touching a component (a pre-commit hook also fires automatically on staged component changes).
+For override-authoring details and the live `?gallery` preview workflow, see [`apps/dialtone-documentation/thumbs/README.md`](../../../apps/dialtone-documentation/thumbs/README.md).
 
 #### Function Documentation via TypeDoc
 

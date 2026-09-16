@@ -1,19 +1,16 @@
 <template>
-  <aside class="dialtone-toc d-of-auto d-py32 d-ps-fixed d-d-none xl:d-d-block">
-    <h2 class="d-headline--eyebrow d-fw-semibold d-fc-secondary d-px8 d-pb4">
-      On this page
-    </h2>
+  <aside>
     <nav>
       <ul
         v-for="header in headers"
         :key="header.slug"
-        class="d-mt2"
       >
-        <li v-if="!header.children.length">
+        <li v-if="!header.children?.length">
           <toc-item
             :active="isItemActive(header)"
             :to="header.link"
             :text="header.title"
+            @navigate="handleNavigate($event, header)"
           />
         </li>
         <dt-collapsible
@@ -27,22 +24,24 @@
               :active="isItemActive(header)"
               :to="header.link"
               :text="header.title"
+              @navigate="handleNavigate($event, header)"
             />
           </template>
           <template
-            v-if="header.children.length"
+            v-if="header.children?.length"
             #content
           >
-            <ul class="d-pl8 d-mt2">
+            <ul class="d-pis-100 ">
               <li
                 v-for="child in header.children"
                 :key="child.slug"
-                class="lg:d-d-flex d-fw-wrap d-mt2"
+                class="d-fw-wrap "
               >
                 <toc-item
                   :active="isItemActive(child)"
                   :to="child.link"
                   :text="child.title"
+                  @navigate="handleNavigate($event, child)"
                 />
               </li>
             </ul>
@@ -54,32 +53,31 @@
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router';
 import TocItem from './TocItem.vue';
 
-defineProps({
+const props = defineProps({
   headers: {
     type: Array,
-    default: null,
+    default: () => [],
+  },
+  activeHash: {
+    type: String,
+    default: '',
   },
 });
 
-const route = useRoute();
+const emit = defineEmits(['navigate']);
 
 function isHeaderActive (header) {
-  const links = [header.link, ...header.children.map(child => child.link)];
-  return links.some(link => link === route.hash);
+  return header.link === props.activeHash ||
+    (header.children ?? []).some(child => child.link === props.activeHash);
 }
 
 function isItemActive (item) {
-  return item.link === route.hash;
+  return item.link === props.activeHash;
+}
+
+function handleNavigate (event, item) {
+  emit('navigate', event, item);
 }
 </script>
-
-<style lang="less" scoped>
-.dialtone-toc {
-  width: var(--dt-size-850);
-  height: calc(100vh - var(--dt-size-700));
-  top: var(--dt-space-700);
-}
-</style>

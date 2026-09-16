@@ -1,5 +1,6 @@
 // swift-tools-version: 5.7
 // The swift-tools-version declares the minimum version of Swift required to build this package.
+// Prerelease sync: forces publish-ios.yml to pick up accumulated next-branch token changes.
 
 import PackageDescription
 

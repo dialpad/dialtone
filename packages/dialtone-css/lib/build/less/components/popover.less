@@ -17,6 +17,7 @@
 
 //  $  POPOVER
 //  ----------------------------------------------------------------------------
+@layer dialtone.components {
 .d-popover {
   //  $  POPOVER DIALOG
   //  ----------------------------------------------------------------------------
@@ -24,9 +25,9 @@
   &__dialog {
     //  $$  CSS CUSTOM PROPERTIES
     //  ----------------------------------------------------------------------------
-    --popover-color-background: var(--dt-color-surface-secondary);
-    --popover-border-width: var(--dt-size-100);
-    --popover-border-radius: var(--dt-size-400);
+    --popover-color-background: var(--dt-color-surface-overlay);
+    --popover-border-width: var(--dt-size-border-100);
+    --popover-border-radius: var(--dt-size-radius-400);
     --popover-color-border: var(--dt-color-border-subtle);
     --popover-shadow: var(--dt-shadow-card);
 
@@ -70,33 +71,32 @@
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    width: 100%;
-    min-height: var(--dt-size-650);
-    padding-top: var(--dt-space-350);
-    padding-bottom: var(--dt-space-350);
+    inline-size: 100%;
+    padding-block: var(--dt-spacing-75) var(--dt-spacing-75);
     overflow: auto;
     font-weight: var(--dt-font-weight-semi-bold);
     font-size: var(--dt-font-size-200);
 
     &__content {
-      width: 100%;
+      inline-size: 100%;
       text-overflow: ellipsis;
     }
 
     &__close-button {
-      margin-right: var(--dt-space-350);
-      padding: var(--dt-space-350);
+      margin-inline-end: var(--dt-spacing-75);
+      padding: var(--dt-spacing-75);
       border-color: transparent;
     }
   }
 
   &__header {
     grid-row: 1;
-    border-bottom: var(--popover-border-width) solid var(--popover-color-border);
+    border-block-end: var(--popover-border-width) solid var(--popover-color-border);
   }
 
   &__footer {
     grid-row: 3;
-    border-top: var(--popover-border-width) solid var(--popover-color-border);
+    border-block-start: var(--popover-border-width) solid var(--popover-color-border);
   }
+}
 }

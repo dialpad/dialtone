@@ -4,22 +4,34 @@ import { llmsPlugin } from '@vuepress/plugin-llms';
 import viteSvgLoader from 'vite-svg-loader';
 import anchor from 'markdown-it-anchor';
 import { getDirname, path } from 'vuepress/utils'
+import { execSync } from 'node:child_process';
+import { BROWSER_THEME_COLOR_FALLBACK } from './theme/utils/browserThemeColor.js';
 
 const sidebar = require('../_data/site-nav.json');
 const { dialtoneVuepressTheme } = require('./theme');
 const baseURL = (process.env.VUEPRESS_BASE_URL ?? '/');
 
+function resolveBranchName () {
+  // GITHUB_HEAD_REF is set on pull_request events; GITHUB_REF_NAME on push events.
+  const fromCi = process.env.GITHUB_HEAD_REF || process.env.GITHUB_REF_NAME;
+  if (fromCi) return fromCi;
+  try {
+    return execSync('git symbolic-ref --short HEAD', { stdio: ['ignore', 'pipe', 'ignore'] })
+      .toString()
+      .trim();
+  } catch {
+    return '';
+  }
+}
+
+const branchName = resolveBranchName();
+
 const themeConfig = {
   logo: baseURL + 'assets/images/dialpad-logo.svg',
-  navbar: [
-    { text: 'Home', link: '/' },
-    { text: 'Design', link: '/design/' },
-    { text: 'Components', link: '/components/' },
-    { text: 'Utilities', link: '/utilities/' },
-    { text: 'Tokens', link: '/tokens/' },
-    { text: 'Guides', link: '/guides/' },
-    { text: 'About', link: '/about/dialtone' },
-  ],
+  // Navbar config disabled - now using Navbar component with hardcoded top-level navigation
+  // Top-level navigation: Foundations | Design System | Careers | Articles
+  // Design System sections (Design, Components, etc.) appear in left sidebar
+  navbar: [],
   sidebar,
   sidebarDepth: 0,
   editLink: false,
@@ -38,11 +50,23 @@ export default defineUserConfig({
 
   port: 4000,
 
+  pagePatterns: [
+    '**/*.md',
+    '!.vuepress',
+    '!.vuepress/**',
+    '!node_modules',
+    '!node_modules/**',
+  ],
+
   // theme and its config
   theme: dialtoneVuepressTheme(themeConfig),
 
   bundler: viteBundler({
     viteOptions: {
+      define: {
+        __DIALTONE_DEPLOY_PREVIEW__: JSON.stringify(baseURL.includes('deploy-previews')),
+        __DIALTONE_BRANCH_NAME__: JSON.stringify(branchName),
+      },
       build: {
         sourcemap: true,
       },
@@ -51,6 +75,22 @@ export default defineUserConfig({
       ],
       css: {
         devSourcemap: true,
+      },
+      resolve: {
+        alias: [
+          // The combinator's DtcNode uses runtime template compilation (h({ template: '...' })),
+          // which requires the full Vue build including the compiler.
+          // Exact match only — must not rewrite vue/server-renderer etc. during SSR build.
+          { find: /^vue$/, replacement: 'vue/dist/vue.esm-bundler.js' },
+        ],
+      },
+      server: {
+        // hmr: {
+        //   overlay: false,
+        // },
+        watch: {
+          ignored: ['**/node_modules/**'],
+        },
       },
     },
     vuePluginOptions: {
@@ -74,7 +114,7 @@ export default defineUserConfig({
     ['link', { rel: 'manifest', href: baseURL + 'assets/images/favicons/site.webmanifest' }],
     ['link', { rel: 'mask-icon', href: baseURL + 'assets/images/favicons/safari-pinned-tab.svg', color: '#7C52FF' }],
     ['meta', { name: 'msapplication-TileColor', content: '#7C52FF' }],
-    ['meta', { name: 'theme-color', content: '#ffffff' }],
+    ['meta', { name: 'theme-color', content: BROWSER_THEME_COLOR_FALLBACK }],
     // Site-level SEO defaults
     ['meta', { name: 'description', content: 'Dialtone is Dialpad\'s design system — tokens, CSS utilities, and Vue components for building consistent UIs.' }],
     ['meta', { property: 'og:site_name', content: 'Dialtone Design System' }],
@@ -115,6 +155,7 @@ export default defineUserConfig({
     '@views': path.resolve(__dirname, './views'),
     '@mixins': path.resolve(__dirname, './common/mixins/'),
     '@utilities': path.resolve(__dirname, './common/utilities.js'),
+    '@composables': path.resolve(__dirname, './theme/composables'),
     '@projectRoot': path.resolve(__dirname, '../../'),
     '@': path.resolve(__dirname, '../'),
     '@workspaceRoot': path.resolve(__dirname, '../../../../'),

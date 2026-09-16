@@ -7,92 +7,116 @@
   <clamped-table-wrapper>
     <div>
       <table
-        class="d-table dialtone-doc-table d-wmn512"
+        class="d-table dialtone-doc-table d-wmn-800"
       >
-        <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+        <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
           <tr>
             <th
               scope="col"
-              class="d-p0 d-bbw0"
+              class="d-p-0 d-bbw0"
             >
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 Name
-              </div>
-            </th>
-            <th
-              scope="col"
-              class="vue-api-table d-p0 d-bbw0"
-            >
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
-                Description
               </div>
             </th>
             <th
               v-if="withDefault"
               scope="col"
-              class="d-p0 d-bbw0"
+              class="d-p-0 d-bbw0"
             >
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
+              <div class="d-p-200 d-bb d-bbw1">
                 Default
+              </div>
+            </th>
+            <th
+              scope="col"
+              class="vue-api-table d-p-0 d-bbw0"
+            >
+              <div class="d-p-200 d-bb d-bbw1">
+                Type
               </div>
             </th>
           </tr>
         </thead>
         <tbody>
           <tr
-            v-for="({ name, description, type, defaultValue, values, required }) in sortedTableDataByName"
-            :key="name"
+            v-for="item in sortedTableDataByName"
+            :key="item.name"
+            class="d-va-baseline"
           >
-            <th
-              scope="row"
-              class="d-code--sm d-docsite-code"
-            >
-              <dt-stack gap="300">
-                <div>{{ name }}</div>
-                <div
-                  v-if="required"
-                  class="d-fc-critical d-fw-normal"
+            <th scope="row">
+              <dt-stack gap="50">
+                <dt-text as="code" kind="code" :size="100" class="d-docsite-code">
+                  {{ item.name }}
+                </dt-text>
+                <dt-text
+                  v-if="item.required"
+                  tone="critical"
+                  strength="normal"
                 >
                   required
-                </div>
+                </dt-text>
+                <span v-if="item.deprecated">
+                  <dt-badge
+                    type="critical"
+                    kind="label"
+                    text="Deprecated"
+                  />
+                </span>
               </dt-stack>
             </th>
 
-            <td
-              class="d-lh-300 vue-api-table"
-            >
-              <dt-stack
-                v-if="description"
-                gap="400"
-              >
-                <markdown-render :markdown="description" />
-                <span v-if="type">
-                  <span class="d-code--sm">Type:</span> <dt-badge>{{ type }}</dt-badge>
-                </span>
-                <dt-stack
-                  v-if="values"
-                  direction="row"
-                  class="d-ai-center d-fw-wrap"
-                  gap="300"
-                >
-                  <span class="d-code--sm">Values:</span>
-                  <dt-badge
-                    v-for="value in values"
-
-                    :key="`${name} ${value}`"
-                  >
-                    {{ value }}
-                  </dt-badge>
-                </dt-stack>
-              </dt-stack>
+            <td v-if="withDefault">
+              <dt-text v-if="item.defaultValue" as="code" kind="code" :size="100" class="d-docsite-code">
+                {{ item.defaultValue }}
+              </dt-text>
             </td>
-            <td
-              v-if="withDefault"
-              class="d-fs-100"
-            >
-              <dt-badge v-if="defaultValue">
-                {{ defaultValue }}
-              </dt-badge>
+
+            <td class="vue-api-table">
+              <dt-stack gap="75">
+                <dt-stack
+                  v-if="item.values"
+                  direction="row"
+                  align="baseline"
+                  class="d-fw-wrap"
+                  gap="75"
+                >
+                  <template
+                    v-for="(value, index) in item.values"
+                    :key="`${item.name} ${value}`"
+                  >
+                    <dt-text v-if="index > 0" tone="muted" as="span" kind="body" :size="100">
+                      |
+                    </dt-text>
+                    <dt-text as="code" kind="code" :size="100" class="d-docsite-code">
+                      "{{ value }}"
+                    </dt-text>
+                  </template>
+                </dt-stack>
+                <dt-text v-else-if="item.type" as="code" kind="code" :size="100" class="d-docsite-code">
+                  {{ item.type }}
+                </dt-text>
+                <dt-text
+                  v-if="item.description"
+                  as="p"
+                  kind="body"
+                  :size="200"
+                  wrap="balance"
+                >
+                  <markdown-render
+                    :markdown="item.description"
+                  />
+                </dt-text>
+                <dt-text
+                  v-if="item.deprecated && item.deprecatedMessage"
+                  as="p"
+                  kind="body"
+                  :size="200"
+                  tone="critical"
+                >
+                  {{ item.deprecatedMessage }}
+                </dt-text>
+              </dt-stack>
             </td>
           </tr>
         </tbody>
@@ -132,16 +156,14 @@ const sortDataByKey = (data, nameKey, requiredKey) => {
   return data.sort((a, b) => {
     const aIsRequired = !!a[requiredKey];
     const bIsRequired = !!b[requiredKey];
+    const aIsDeprecated = !!a.deprecated;
+    const bIsDeprecated = !!b.deprecated;
 
-    // always have required at top
-    if (aIsRequired && !bIsRequired) {
-      return -1;
-    } else if (!aIsRequired && bIsRequired) {
-      return 1;
-    } else {
-      if (a[nameKey] < b[nameKey]) return -1;
-      if (a[nameKey] > b[nameKey]) return 1;
-    }
+    // Required first, deprecated last, then alphabetical
+    if (aIsRequired !== bIsRequired) return aIsRequired ? -1 : 1;
+    if (aIsDeprecated !== bIsDeprecated) return aIsDeprecated ? 1 : -1;
+    if (a[nameKey] < b[nameKey]) return -1;
+    if (a[nameKey] > b[nameKey]) return 1;
     return 0;
   });
 };

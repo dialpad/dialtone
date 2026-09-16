@@ -6,6 +6,6 @@ const classes = [
 
 export default {
   plugins: [
-    postcssResponsiveVariations({ classes }),
+    postcssResponsiveVariations({ classes, layer: 'dialtone.utilities' }),
   ],
 };

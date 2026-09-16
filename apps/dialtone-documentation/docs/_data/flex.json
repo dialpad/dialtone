@@ -123,6 +123,31 @@
       "class": "jc-unset",
       "output": "justify-content: unset",
       "description": "Resets the justify-content to its initial value."
+    },
+    {
+      "class": "jc-start",
+      "output": "justify-content: flex-start",
+      "deprecated": true
+    },
+    {
+      "class": "jc-end",
+      "output": "justify-content: flex-end",
+      "deprecated": true
+    },
+    {
+      "class": "jc-around",
+      "output": "justify-content: space-around",
+      "deprecated": true
+    },
+    {
+      "class": "jc-between",
+      "output": "justify-content: space-between",
+      "deprecated": true
+    },
+    {
+      "class": "jc-evenly",
+      "output": "justify-content: space-evenly",
+      "deprecated": true
     }
   ],
   "alignContent": [
@@ -175,6 +200,16 @@
       "class": "ac-unset",
       "output": "align-content: unset",
       "description": "Resets the align-content to its initial value."
+    },
+    {
+      "class": "ac-start",
+      "output": "align-content: flex-start",
+      "deprecated": true
+    },
+    {
+      "class": "ac-end",
+      "output": "align-content: flex-end",
+      "deprecated": true
     }
   ],
   "alignItems": [
@@ -212,6 +247,16 @@
       "class": "ai-unset",
       "output": "align-items: unset",
       "description": "Resets the align-items to its initial value."
+    },
+    {
+      "class": "ai-start",
+      "output": "align-items: flex-start",
+      "deprecated": true
+    },
+    {
+      "class": "ai-end",
+      "output": "align-items: flex-end",
+      "deprecated": true
     }
   ],
   "alignSelf": [
@@ -254,6 +299,16 @@
       "class": "as-unset",
       "output": "align-self: unset",
       "description": "Resets the align-self to its initial value."
+    },
+    {
+      "class": "as-start",
+      "output": "align-self: flex-start",
+      "deprecated": true
+    },
+    {
+      "class": "as-end",
+      "output": "align-self: flex-end",
+      "deprecated": true
     }
   ],
   "direction": [

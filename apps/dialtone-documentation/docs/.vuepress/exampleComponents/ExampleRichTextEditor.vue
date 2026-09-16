@@ -7,7 +7,7 @@
     :output-format="$attrs.outputFormat"
     :auto-focus="false"
     placeholder="Type here..."
-    :prevent-typing="$attrs.preventTyping"
+    :allow-typing="$attrs.allowTyping"
     :link="true"
     :mention-suggestion="$attrs.mentionSuggestion"
     :channel-suggestion="$attrs.channelSuggestion"
@@ -23,7 +23,7 @@
     :allow-underline="$attrs.allowUnderline"
     :additional-extensions="$attrs.additionalExtensions"
     @blur="$attrs.onBlur"
-    @input="$attrs.onInput"
+    @update:model-value="$attrs.onInput"
     @focus="$attrs.onFocus"
     @enter="$attrs.onEnter"
   />

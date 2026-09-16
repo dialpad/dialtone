@@ -32,18 +32,21 @@
           </dt-button>
         </template>
         <template #headerContent>
-          <span
-            class="d-tt-capitalize d-fc-primary"
-            v-text="name"
-          />
+          <dt-text class="d-tt-capitalize">
+            {{ name }}
+          </dt-text>
         </template>
         <template #content>
-          <dt-stack gap="500">
-            <dt-stack direction="row" gap="300">
+          <dt-stack gap="200">
+            <dt-stack direction="row" gap="50">
               <dt-stack class="d-fl-grow5">
-                <span class="d-label d-label--sm">Name</span>
+                <dt-text kind="label" :size="200">
+                  Name
+                </dt-text>
                 <dt-stack direction="row" justify="between">
-                  <span class="d-body--md-compact">{{ name }}</span>
+                  <dt-text kind="body" :size="300" density="200">
+                    {{ name }}
+                  </dt-text>
                 </dt-stack>
               </dt-stack>
               <dt-button
@@ -61,10 +64,12 @@
             </dt-stack>
             <dt-stack direction="row" align="center">
               <dt-stack class="d-fl-grow5">
-                <span class="d-label d-label--sm">Description</span>
-                <div class="d-body--md-compact">
+                <dt-text kind="label" :size="200">
+                  Description
+                </dt-text>
+                <dt-text kind="body" :size="300" density="200">
                   {{ desc }}
-                </div>
+                </dt-text>
               </dt-stack>
             </dt-stack>
             <dt-stack direction="row" align="end">
@@ -74,12 +79,12 @@
                   label="SVG"
                   readonly
                   tabindex="-1"
-                  size="sm"
+                  :size="200"
                   :value="rawSvg"
                 />
               </div>
               <copy-button
-                class="d-ml8"
+                class="d-mis-100"
                 :text="rawSvg"
                 aria-label="Copy SVG markup"
               />
@@ -91,12 +96,12 @@
                   label="Vue"
                   tabindex="-1"
                   readonly
-                  size="sm"
+                  :size="200"
                   :value="`<${vue} />`"
                 />
               </div>
               <copy-button
-                class="d-ml8"
+                class="d-mis-100"
                 :text="`<${vue} />`"
                 aria-label="Copy Vue markup"
               />
@@ -113,7 +118,7 @@ import { computed, ref } from 'vue';
 import { ICON_KINDS } from './constants.js';
 import CopyButton from './CopyButton.vue';
 import SvgLoader from './SvgLoader.vue';
-import { DtIconFigma } from '@dialpad/dialtone-icons/vue3';
+import { DtIconFigma } from '@dialpad/dialtone-icons/vue';
 
 const props = defineProps({
   name: {

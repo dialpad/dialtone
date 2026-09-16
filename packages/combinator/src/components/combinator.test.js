@@ -1,20 +1,47 @@
 import DtcCombinator from './combinator.vue';
 
-import { assert } from 'chai';
+import { expect } from 'vitest';
 import { shallowMount } from '@vue/test-utils';
+import { nextTick } from 'vue';
 import { getSupportedComponents } from '@/src/lib/test/utils_test';
-import documentation from '@/node_modules/@dialpad/dialtone-vue/dist/component-documentation.json';
+import { DtButton, DtCard, DtInput, DtToggle } from '@dialpad/dialtone-vue';
+import allDocs from '@/node_modules/@dialpad/dialtone-vue/dist/component-documentation.json';
+import variants from '@/src/variants/variants';
+
+const documentation = allDocs;
+const buttonDoc = allDocs.find(d => d.displayName === 'DtButton');
+const cardDoc = allDocs.find(d => d.displayName === 'DtCard');
+const toggleDoc = allDocs.find(d => d.displayName === 'DtToggle');
+const inputDoc = allDocs.find(d => d.displayName === 'DtInput');
+const variantBank = variants();
+
+function shallowMountCombinator (options) {
+  return shallowMount(DtcCombinator, {
+    ...options,
+    global: {
+      ...options.global,
+      stubs: {
+        ...options.global?.stubs,
+        teleport: false,
+      },
+    },
+  });
+}
 
 describe('combinator.vue test', function () {
   const testComponents = getSupportedComponents();
 
   let wrapper;
 
+  afterEach(function () {
+    window.localStorage.clear();
+  });
+
   describe(`Supported component tests`, function () {
     testComponents.forEach(component => {
       describe(`When mounted with component '${component.name}'`, function () {
         beforeEach(function () {
-          wrapper = shallowMount(DtcCombinator, {
+          wrapper = shallowMountCombinator({
             props: {
               component,
               documentation,
@@ -28,9 +55,207 @@ describe('combinator.vue test', function () {
         });
 
         it('Should render successfully', function () {
-          assert.isTrue(wrapper.exists());
+          expect(wrapper.exists()).toBe(true);
         });
       });
+    });
+  });
+
+  describe('v-model writeback', function () {
+    describe('boolean modelValue (DtToggle)', function () {
+      beforeEach(function () {
+        wrapper = shallowMountCombinator({
+          props: {
+            component: DtToggle,
+            documentation: toggleDoc,
+            variants: {},
+          },
+        });
+      });
+
+      afterEach(function () {
+        wrapper.unmount();
+      });
+
+      it('updates options.props when the renderer emits an update:modelValue event', async function () {
+        const renderer = wrapper.findComponent({ name: 'DtcRenderer' });
+        const initialValue = renderer.props('options').props.modelValue;
+
+        await renderer.vm.$emit('event', 'update:modelValue', !initialValue);
+        await nextTick();
+
+        expect(renderer.props('options').props.modelValue).toBe(!initialValue);
+      });
+
+      it('does not mutate options.props for non-update events (e.g. "change")', async function () {
+        const renderer = wrapper.findComponent({ name: 'DtcRenderer' });
+        const before = JSON.stringify(renderer.props('options').props);
+
+        await renderer.vm.$emit('event', 'change', 'something');
+        await nextTick();
+
+        expect(JSON.stringify(renderer.props('options').props)).toBe(before);
+      });
+    });
+
+    describe('string modelValue (DtInput)', function () {
+      beforeEach(function () {
+        wrapper = shallowMountCombinator({
+          props: {
+            component: DtInput,
+            documentation: inputDoc,
+            variants: {},
+          },
+        });
+      });
+
+      afterEach(function () {
+        wrapper.unmount();
+      });
+
+      it('updates options.props when the renderer emits an update:modelValue event', async function () {
+        const renderer = wrapper.findComponent({ name: 'DtcRenderer' });
+
+        await renderer.vm.$emit('event', 'update:modelValue', 'hello');
+        await nextTick();
+
+        expect(renderer.props('options').props.modelValue).toBe('hello');
+      });
+
+      it('reflects subsequent updates (simulates typing character by character)', async function () {
+        const renderer = wrapper.findComponent({ name: 'DtcRenderer' });
+
+        for (const value of ['h', 'he', 'hel', 'hell', 'hello']) {
+          await renderer.vm.$emit('event', 'update:modelValue', value);
+          await nextTick();
+        }
+
+        expect(renderer.props('options').props.modelValue).toBe('hello');
+      });
+    });
+  });
+
+  describe('component changes', function () {
+    beforeEach(function () {
+      wrapper = shallowMountCombinator({
+        props: {
+          component: DtButton,
+          documentation: buttonDoc,
+          variants: variantBank.DtButton,
+        },
+      });
+    });
+
+    afterEach(function () {
+      wrapper.unmount();
+    });
+
+    it('resets the active preset and options when the target component changes', async function () {
+      wrapper.vm.updateVariant('icon only');
+      await nextTick();
+
+      await wrapper.setProps({
+        component: DtCard,
+        documentation: cardDoc,
+        variants: variantBank.DtCard,
+      });
+      await nextTick();
+
+      const renderer = wrapper.findComponent({ name: 'DtcRenderer' });
+
+      expect(wrapper.vm.selectedVariant).toBe('default');
+      expect(renderer.props('options').slots.content).toBe(
+        variantBank.DtCard.default.slots.content.initialValue,
+      );
+    });
+  });
+
+  describe('fullscreen layout', function () {
+    let host;
+
+    beforeEach(function () {
+      document.documentElement.setAttribute('data-overlayscrollbars', '');
+      host = document.createElement('div');
+      document.body.appendChild(host);
+      wrapper = shallowMountCombinator({
+        attachTo: host,
+        props: {
+          component: DtButton,
+          documentation: buttonDoc,
+          fullScreen: true,
+          variants: {},
+        },
+      });
+    });
+
+    afterEach(function () {
+      wrapper.unmount();
+      host.remove();
+      document.documentElement.removeAttribute('data-overlayscrollbars');
+      document.documentElement.classList.remove('d-scrollbar-disabled', 'd-of-hidden');
+    });
+
+    it('teleports the fullscreen playground to the document body', function () {
+      const fullscreenPlayground = Array.from(document.body.children).find(child => {
+        return child.classList.contains('dialtone-playground--fullscreen');
+      });
+
+      expect(fullscreenPlayground).toBeTruthy();
+      expect(host.querySelector('.dialtone-playground--fullscreen')).toBeNull();
+    });
+
+    it('keeps the fullscreen shell below modal popover layers', function () {
+      const fullscreenPlayground = document.body.querySelector('.dialtone-playground--fullscreen');
+
+      expect(fullscreenPlayground.classList.contains('d-zi-popover')).toBe(true);
+    });
+
+    it('locks the OverlayScrollbars root while fullscreen', async function () {
+      expect(document.documentElement.classList.contains('d-scrollbar-disabled')).toBe(true);
+
+      await wrapper.setProps({ fullScreen: false });
+
+      expect(document.documentElement.classList.contains('d-scrollbar-disabled')).toBe(false);
+    });
+  });
+
+  describe('control display settings', function () {
+    beforeEach(function () {
+      wrapper = shallowMountCombinator({
+        props: {
+          component: DtToggle,
+          documentation: toggleDoc,
+          variants: {},
+        },
+      });
+    });
+
+    afterEach(function () {
+      wrapper.unmount();
+    });
+
+    it('persists control display settings and passes them to new component views', async function () {
+      const optionBar = wrapper.findComponent({ name: 'DtcOptionBar' });
+
+      expect(optionBar.props('settings').controls.hideDeprecated).toBe(true);
+
+      await optionBar.vm.$emit('update:settings', (model) => {
+        model.controls.hideDeprecated = false;
+      });
+      await nextTick();
+
+      expect(window.localStorage.getItem('dialtoneCombinatorControlsHideDeprecated')).toBe('false');
+
+      const nextWrapper = shallowMountCombinator({
+        props: {
+          component: DtInput,
+          documentation: inputDoc,
+          variants: {},
+        },
+      });
+
+      expect(nextWrapper.findComponent({ name: 'DtcOptionBar' }).props('settings').controls.hideDeprecated).toBe(false);
+      nextWrapper.unmount();
     });
   });
 });

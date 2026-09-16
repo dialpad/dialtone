@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/postcss-responsive-variations",
-  "version": "1.2.3",
+  "version": "1.2.4-next.1",
   "type": "commonjs",
   "description": "PostCSS plugin for creating responsive variations from a list of classes",
   "scripts": {

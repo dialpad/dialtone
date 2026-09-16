@@ -1,12 +1,22 @@
 <template>
   <template v-if="illustration">
     <template v-for="i in illustrationSVGs" :key="i">
-      <component :is="i" v-if="i" v-bind="$attrs" />
+      <component
+        :is="i"
+        v-if="i"
+        v-bind="$attrs"
+        :ref="el => setIllustrationRef(el)"
+      />
     </template>
   </template>
   <template v-else>
-    <template v-for="svg in svgs" :key="svg">
-      <component :is="svg" v-if="svg" v-bind="$attrs" />
+    <template v-for="(svg, index) in svgs" :key="svg">
+      <component
+        :is="svg"
+        v-if="svg"
+        v-bind="$attrs"
+        :ref="el => setSvgRef(el, index)"
+      />
     </template>
   </template>
 </template>
@@ -46,6 +56,12 @@ const illustrationSVGs = [
   ),
 ];
 
+const svgPaths = [
+  `assets/images/${props.name}.svg`,
+  `assets/images/components/${props.name}.svg`,
+  `assets/images/favicons/${props.name}.svg`,
+];
+
 const svgs = [
   defineAsyncComponent(() =>
     import(`../public/assets/images/${props.name}.svg?component`).catch(() => empty),
@@ -57,4 +73,24 @@ const svgs = [
     import(`../public/assets/images/favicons/${props.name}.svg?component`).catch(() => empty),
   ),
 ];
+
+
+// Ref callbacks to add data-svg-source attribute to rendered SVG elements
+const setSourceAttribute = (el, source) => {
+  const svgEl = el?.$el || el;
+  if (svgEl?.setAttribute) {
+    svgEl.setAttribute('data-svg-source', source);
+  }
+};
+
+const setIllustrationRef = (el) => {
+  setSourceAttribute(
+    el,
+    `@dialpad/dialtone-icons/dist/svg/illustrations/${props.name}.svg`,
+  );
+};
+
+const setSvgRef = (el, index) => {
+  setSourceAttribute(el, svgPaths[index]);
+};
 </script>

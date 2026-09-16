@@ -12,7 +12,7 @@ module.exports = {
   meta: {
     type: 'suggestion',
     docs: {
-      description: 'Prefer DtStack component over flex utility classes',
+      description: 'Detects flex utility layouts that should use `DtStack`.',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/prefer-stack-over-flex.md',
     },

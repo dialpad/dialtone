@@ -1,6 +1,6 @@
 <!-- eslint-disable vuejs-accessibility/no-autofocus -->
 <template>
-  <div class="d-d-grid d-gg16 d-g-cols6 d-mt32 d-mb16 d-p16 d-bgc-secondary d-bar8">
+  <div class="d-d-grid d-g-200 d-g-cols6 d-mbe-200 d-p-200 d-bgc-secondary d-bar-400">
     <div class="d-gc4">
       <dt-input
         id="search-input"
@@ -9,26 +9,25 @@
         autofocus
         aria-label="Search icon"
         label="Find an icon"
-        class="d-input d-input-icon--left d-input-icon--right"
         type="text"
         autocomplete="off"
         @keyup="searchIcon"
       >
-        <template #leftIcon>
+        <template #startIcon>
           <dt-icon name="search" size="300" />
         </template>
-        <template #rightIcon>
+        <template #endIcon>
           <dt-button
             v-if="!isSearchEmpty"
             id="search-input-button-close"
+            v-dt-tooltip="'Clear search'"
             kind="muted"
             importance="clear"
-            size="xs"
-            circle
+            :size="100"
             aria-label="Clear filters"
             @click="resetSearch"
           >
-            <template #icon>
+            <template #startIcon>
               <dt-icon name="close" size="200" />
             </template>
           </dt-button>
@@ -63,33 +62,38 @@
       </div>
     </div>
   </div>
-  <div
-    v-for="(icons, category) in filteredIconsList"
-    :key="category"
-    class="d-mb16"
-  >
-    <div
-      class="d-headline--lg d-tt-capitalize d-mb4"
-      v-text="category"
-    />
-    <div class="d-gl-docsite-icons">
-      <icon-popover
-        v-for="(keywords, name) in icons"
-        :id="`in-${name}`"
-        :key="name"
-        v-model="isPopoverOpen[name]"
-        :icon-name="name"
-        :category="category"
-        :keywords="keywords"
-        @click="selectIcon({ name, keywords, category })"
-      />
-    </div>
-  </div>
+  <dt-stack gap="300">
+    <dt-box
+      v-for="(icons, category) in filteredIconsList"
+      :key="category"
+      :padding-inline="200"
+    >
+      <dt-text
+        as="h2"
+        kind="headline"
+        :size="500"
+        class="d-tt-capitalize d-mbe-50"
+      >
+        {{ category }}
+      </dt-text>
+      <div class="d-gl-docsite-icons">
+        <icon-popover
+          v-for="(keywords, name) in icons"
+          :id="`in-${name}`"
+          :key="name"
+          v-model="isPopoverOpen[name]"
+          :icon-name="name"
+          :category="category"
+          :keywords="keywords"
+          @click="selectIcon({ name, keywords, category })"
+        />
+      </div>
+    </dt-box>
+  </dt-stack>
   <dt-empty-state
     v-if="!hasSearchResults"
-    size="sm"
+    :size="200"
     :header-text="`No results found for &OpenCurlyDoubleQuote;${search}&CloseCurlyDoubleQuote;`"
-    class="d-w100p d-ba d-bc-subtle d-bar8 d-mt16 d-pt32"
   >
     <template #icon="{ iconSize }">
       <dt-icon name="box" :size="iconSize" />
@@ -97,10 +101,10 @@
   </dt-empty-state>
   <dt-modal
     v-if="selectedIcon"
-    :show="isModalOpen"
-    size="full"
-    content-class="d-wmx100p d-pr32"
-    @update:show="isModalOpen = false"
+    :open="isModalOpen"
+    fullscreen
+    content-class="d-wmx100p d-pie-400"
+    @update:open="isModalOpen = $event"
   >
     <template #header>
       <span
@@ -122,16 +126,18 @@ import { computed, onMounted, ref, watch, nextTick } from 'vue';
 import IconPopover from '../baseComponents/IconPopover.vue';
 import IconPopoverContent from '../baseComponents/IconPopoverContent.vue';
 import { debounce } from '../common/utilities';
+import { useViewportBreakpoints } from '../theme/composables/useViewportBreakpoints.js';
 
+const viewport = useViewportBreakpoints();
 const selectedCategory = ref('');
 const search = ref(null);
 const searching = ref(false);
 const searchRef = ref(null);
-const isMobile = ref(false);
 const isModalOpen = ref(false);
 const isPopoverOpen = ref({});
 const filteredIconsList = ref({});
 const selectedIcon = ref(undefined);
+const usesIconModal = computed(() => !viewport.atLeast('lg'));
 const excludedIcons = [
   'brand-dialpad-meetings',
   'brand-dialpad',
@@ -217,12 +223,12 @@ const filterIconList = () => {
 
 const selectIcon = (icon) => {
   selectedIcon.value = icon;
-  if (isMobile.value) isModalOpen.value = true;
+  if (usesIconModal.value) isModalOpen.value = true;
   else isPopoverOpen.value[icon.name] = !isPopoverOpen.value[icon.name];
 };
 
 const scrollToIcon = async (iconName) => {
-  if (isMobile.value) {
+  if (usesIconModal.value) {
     const iconsList = filteredIconsList.value;
     for (const category of Object.keys(iconsList)) {
       if (iconsList[category][iconName]) {
@@ -254,7 +260,6 @@ watch(selectedCategory, (newCategory) => {
 });
 
 onMounted(() => {
-  isMobile.value = window.outerWidth <= 980;
   // Check for existing search parameter in URL
   const queryParams = new URLSearchParams(window.location.search);
   const searchParam = queryParams.get('search');
@@ -273,6 +278,6 @@ onMounted(() => {
 <style scoped>
   /* more or less a hack, 🤷‍♂️ */
   #search-input-button-close {
-    margin-right: var(--dt-size-350-negative);
+    margin-inline-end: var(--dt-spacing-75-negative);
   }
 </style>

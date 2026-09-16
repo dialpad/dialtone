@@ -1,9 +1,26 @@
 ---
 type: reference
 category: reference
-keywords: [component-api, props, events, slots, constants, vue-components, dialtone-vue, v-model, provide-inject, aria, data-qa, icon-sizes]
+keywords:
+  [
+    component-api,
+    props,
+    events,
+    slots,
+    constants,
+    vue-components,
+    dialtone-vue,
+    v-model,
+    provide-inject,
+    aria,
+    data-qa,
+    icon-sizes,
+    dt-text,
+    dt-box,
+    logical-props,
+  ]
 ai_summary: Cross-component API contract for Dialtone Vue components — standard props, events, slots, and patterns shared by all components.
-last_updated: 2026-03-09
+last_updated: 2026-07-09
 related_packages: [dialtone-vue]
 ---
 
@@ -20,7 +37,7 @@ Every component has a `{component_name}_constants.js` file that exports modifier
 export const BUTTON_SIZE_MODIFIERS = {
   xs: 'd-btn--xs',
   sm: 'd-btn--sm',
-  md: '',           // default size — no modifier class needed
+  md: '', // default size — no modifier class needed
   lg: 'd-btn--lg',
   xl: 'd-btn--xl',
 };
@@ -36,16 +53,42 @@ Constants are also re-exported from each component's `index.js` so consumers can
 
 Most sizable components accept a `size` prop with values: `xs`, `sm`, `md`, `lg`, `xl`. Default is usually `md`.
 
-Exceptions exist — DtModal uses `default` and `full` instead.
+Exceptions exist:
+
+- DtModal has no `size` prop. Use the `fullscreen` boolean instead (`fullscreen: true` for a fullscreen modal, `false` for the default size).
+- DtText uses numeric font-size token stops for raw font-size control when paired with `variant`: `50`, `75`, `100`, `125`, `150`, `200`, `250`, `300`, `350`, `400`, `450`, `500`, `550`, `600`, `650`, `700`, `750`, `800`.
+
+DtText `size` must be paired with `variant`, or with legacy `kind` while older code migrates. DtText also keeps legacy `kind + size` composition behavior for backward compatibility when `variant` is not set.
+
+### Logical Geometry Props
+
+Primitive container APIs use logical CSS naming for directional props. DtBox uses this pattern for padding, border widths, sizing, and positioning:
+
+- `paddingBlockStart`, `paddingBlockEnd`, `paddingInlineStart`, `paddingInlineEnd`
+- `borderWidthBlockStart`, `borderWidthBlockEnd`, `borderWidthInlineStart`, `borderWidthInlineEnd`
+- `blockSize`, `inlineSize`, `minBlockSize`, `maxInlineSize`
+- `insetBlockStart`, `insetBlockEnd`, `insetInlineStart`, `insetInlineEnd`
+
+Use logical names in public component APIs. Documentation may mention physical equivalents such as top, right, bottom, and left for discoverability, but do not add physical prop aliases when logical props exist.
+
+DtBox positioning props cover container positioning: `position`, logical inset props, and `zIndex`. Logical inset props accept documented coordinate values, including negative spacing coordinates and side-specific `50p` / `100p` percentage coordinates. Keep CSS utility classes available for responsive modifiers, calc coordinates, CSS-wide reset values, arbitrary coordinates, and non-DtBox elements.
 
 ### Kind
 
 Color or semantic variant. Values vary per component:
 
-- DtButton: `default`, `muted`, `danger`, `positive`, `inverted`, `unstyled`
-- DtModal: `default`, `danger`
-- DtNotice: `base`, `error`, `info`, `success`, `warning`
-- DtBadge: uses `type` instead (`default`, `info`, `success`, `warning`, `critical`, `bulletin`, `ai`)
+- DtButton: `default`, `muted`, `critical`, `positive`, `inverted`, `unstyled`
+- DtModal: `default`, `critical`
+- DtNotice: `base`, `critical`, `info`, `positive`, `warning`
+- DtBadge: uses `type` instead (`default`, `info`, `positive`, `warning`, `critical`, `bulletin`, `ai`)
+
+For DtText, `kind` is legacy composition syntax. Prefer `variant` for new text compositions.
+
+### Variant
+
+Visual variant or complete composition. Values vary per component.
+
+DtText uses `variant` for complete typography compositions such as `headline-md`, `body-md`, `label-md`, and `code-sm`. `variant` can be combined with numeric `size` when the composition is correct but the font-size token needs an explicit override.
 
 ### Importance
 
@@ -67,20 +110,23 @@ These are bound with Vue's `:class` binding on the inner element, separate from 
 
 All form components implement Vue 3 v-model via `modelValue` prop + `update:modelValue` emit:
 
-| Component | modelValue type | Notes |
-|-----------|----------------|-------|
-| DtInput | `String \| Number` | Also emits `update:length`, `update:invalid` |
-| DtCheckbox | `Boolean` | Via CheckableMixin |
-| DtRadio | `String \| Number` | Via CheckableMixin |
-| DtSelectMenu | `String \| Number` | |
-| DtToggle | `Boolean \| String` | Supports `'mixed'` for indeterminate state |
+| Component    | modelValue type     | Notes                                        |
+| ------------ | ------------------- | -------------------------------------------- |
+| DtInput      | `String \| Number`  | Also emits `update:length`, `update:invalid` |
+| DtCheckbox   | `Boolean`           | Via CheckableMixin                           |
+| DtRadio      | `String \| Number`  | Via CheckableMixin                           |
+| DtSelectMenu | `String \| Number`  |                                              |
+| DtToggle     | `Boolean \| String` | Supports `'mixed'` for indeterminate state   |
 
-Visibility-toggle components use `update:show` instead:
+Visibility-toggle components use `update:open`:
 
-| Component | Emit |
-|-----------|------|
-| DtModal | `update:show` |
-| DtTooltip | `update:show` |
+| Component  | Emit          |
+| ---------- | ------------- |
+| DtModal    | `update:open` |
+| DtTooltip  | `update:open` |
+| DtToast    | `update:open` |
+| DtPopover  | `update:open` |
+| DtDropdown | `update:open` |
 
 ## Event Naming
 
@@ -88,24 +134,24 @@ Native DOM events are forwarded as-is: `focus`, `blur`, `focusin`, `focusout`, `
 
 Custom events use the `update:{prop}` convention to stay compatible with `v-model`:
 
-```
+```text
 update:modelValue   — value changed
-update:show         — visibility changed
+update:open         — visibility changed
 update:length       — input length changed (DtInput)
 update:invalid      — validation state changed (DtInput)
 ```
 
 ## Slot Conventions
 
-| Slot name | Used by | Purpose |
-|-----------|---------|---------|
-| `default` | All components | Primary content |
-| `icon` | Button, Badge, Avatar | Single icon placement |
-| `leftIcon` / `rightIcon` | Input | Directional icon slots |
-| `header` / `footer` | Modal | Section slots |
-| `banner` | Modal | Top banner area |
-| `anchor` | Tooltip, Popover | Trigger element |
-| `description` | Input, Checkbox | Helper/description text |
+| Slot name                | Used by               | Purpose                 |
+| ------------------------ | --------------------- | ----------------------- |
+| `default`                | All components        | Primary content         |
+| `icon`                   | Button, Badge, Avatar | Single icon placement   |
+| `leftIcon` / `rightIcon` | Input                 | Directional icon slots  |
+| `header` / `footer`      | Modal                 | Section slots           |
+| `banner`                 | Modal                 | Top banner area         |
+| `anchor`                 | Tooltip, Popover      | Trigger element         |
+| `description`            | Input, Checkbox       | Helper/description text |
 
 Icon slots pass sizing data via slot props:
 
@@ -118,37 +164,39 @@ Icon slots pass sizing data via slot props:
 Each component with icons maps its `size` prop to an icon scale via a `*_ICON_SIZES` constant. The mapping is component-specific, not global:
 
 | Component size | Button icon | Input icon | Avatar icon |
-|---------------|-------------|------------|-------------|
-| xs | 200 | 100 | 100 |
-| sm | 200 | 200 | 200 |
-| md | 300 | 200 | 300 |
-| lg | 400 | 400 | 500 |
-| xl | 500 | 500 | 600 |
+| -------------- | ----------- | ---------- | ----------- |
+| xs             | 200         | 100        | 100         |
+| sm             | 200         | 200        | 200         |
+| md             | 300         | 200        | 300         |
+| lg             | 400         | 400        | 500         |
+| xl             | 500         | 500        | 600         |
 
 Icon scale values correspond to pixel sizes defined in `packages/dialtone-icons/src/constants.js`:
 
 | Scale | Pixels |
-|-------|--------|
-| 100 | 12px |
-| 200 | 14px |
-| 300 | 18px |
-| 400 | 20px |
-| 500 | 24px |
-| 600 | 32px |
-| 700 | 38px |
-| 800 | 48px |
+| ----- | ------ |
+| 100   | 12px   |
+| 200   | 14px   |
+| 300   | 18px   |
+| 400   | 20px   |
+| 500   | 24px   |
+| 600   | 32px   |
+| 700   | 38px   |
+| 800   | 48px   |
 
 ## Provide/Inject for Group Components
 
 Group-child relationships use Vue's provide/inject. The parent provides a reactive context object plus action methods:
 
 **Tab group** (`tab_group.vue`):
-```
+
+```javascript
 provides: { groupContext: { selected, disabled }, setFocus }
 ```
 
 **Input groups** (CheckboxGroup, RadioGroup via `input_group.js` mixin):
-```
+
+```javascript
 provides: { groupContext: { name, disabled, validationState, value, selectedValues }, setGroupValue }
 ```
 
@@ -171,12 +219,9 @@ DtTooltip, DtPopover, and DtHovercard use Tippy.js with a similar `appendTo` pro
 
 All components use `data-qa` attributes for test selectors. Pattern: `dt-{component}` for the root, `dt-{component}-{element}` for children:
 
-```
-data-qa="dt-button"
-data-qa="dt-button-icon"
-data-qa="dt-button-label"
-data-qa="dt-modal-title"
-data-qa="dt-input-label"
+```html
+data-qa="dt-button" data-qa="dt-button-icon" data-qa="dt-button-label"
+data-qa="dt-modal-title" data-qa="dt-input-label"
 ```
 
 Tests query these with `wrapper.find('[data-qa="dt-button"]')`.

@@ -2,73 +2,27 @@
 title: Toast
 status: ready
 thumb: true
-image: assets/images/components/toast.png
-description: A toast notice, sometimes called a snackbar, is a time-based message that appears based on users' actions. It contains at-a-glance information about outcomes and can be paired with actions.
+description: Temporary notification shown above page content after an action.
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-toast--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=233-3758
+keywords: ["notification", "snackbar", "alert", "message", "d-toast", "DtToast", "dt-toast", "flash message"]
+combinator: DtToast
 ---
-
-<code-well-header>
-  <dt-stack direction="row" justify="center">
-    <example-toast show title="Title" class="d-ps-relative d-zi-base d-t0" :fixed="false" />
-  </dt-stack>
-</code-well-header>
-
-<!-- <component-combinator component-name="DtToast" /> -->
 
 ## Variants and Examples
 
-<code-well-header>
-    <dt-stack direction="row" gap="400" align="end" class="d-w100p">
-        <div class="d-fl-grow1">
-            <dt-select-menu label="Style" :options="toastOptions" v-model="selectedKind" />
-        </div>
-        <dt-checkbox value="important" @input="toggleImportant">Important</dt-checkbox>
-        <dt-button @click="toggleToast">Toggle Example</dt-button>
-    </dt-stack>
-</code-well-header>
-
-<example-toast
-  class="d-zi-notification"
-  :show="showToast"
-  title="Title"
-  :important="important"
-  :kind="selectedKind"
-  @close="toggleToast"
-/>
-
-<code-example-tabs
-htmlCode='
-<aside class="d-toast-wrapper">
-  <div class="d-toast d-toast--base" role="status" aria-hidden="true">
-    <div class="d-toast__dialog">
-      <div class="d-notice__icon">...</div>
-      <div class="d-notice__content">
-        <h2 class="d-notice__title">...</h2>
-        <p class="d-notice__message">...</p>
-      </div>
-      <div class="d-notice__actions">...</div>
-    </div>
+```vue demo
+<dt-stack direction="row" gap="200" class="d-w100p">
+  <div class="d-fl-grow1">
+    <dt-select-menu :show-label="false" label="Style" :options="toastOptions" v-model="selectedKind" />
   </div>
-</aside>
-
-<aside class="d-toast-wrapper">
-  <div class="d-toast d-toast--error" role="status" aria-hidden="true">...</div>
-</aside>
-<aside class="d-toast-wrapper">
-  <div class="d-toast d-toast--info" role="status" aria-hidden="true">...</div>
-</aside>
-<aside class="d-toast-wrapper">
-  <div class="d-toast d-toast--success" role="status" aria-hidden="true">...</div>
-</aside>
-<aside class="d-toast-wrapper">
-  <div class="d-toast d-toast--warning" role="status" aria-hidden="true">...</div>
-</aside>
-'
-vueCode='
+  <dt-checkbox value="important" @update:model-value="toggleImportant">Important</dt-checkbox>
+  <dt-button @click="toggleToast">Toggle Example</dt-button>
+</dt-stack>
+<!-- @code -->
 <dt-toast
-  title="Title"
-  :show="showToast"
+  header-text="Title"
+  :open="showToast"
   :important="important"
   :kind="selectedKind"
   @close="closeEvent"
@@ -79,7 +33,7 @@ vueCode='
   </dt-link>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="muted"
     >
@@ -87,31 +41,36 @@ vueCode='
     </dt-button>
   </template>
 </dt-toast>
-'
-showHtmlWarning />
+```
+
+<example-toast
+  class="d-zi-notification"
+  :open="showToast"
+  title="Title"
+  :important="important"
+  :kind="selectedKind"
+  @close="toggleToast"
+/>
 
 ### With Duration
 
 It's recommended to use a time of at least 6000 ms (minimum duration validated in the component) to give users enough time to read the toast. Take into account that the time necessary to read and comprehend the message could vary in users. For instance, users using assistive technology, or users with language barriers could potentially need more time to read and understand the message.
 If the duration is not provided the toast won't disappear automatically.
 
-<code-well-header>
-  <dt-button @click="toggleDurationToast(true)">Show Example</dt-button>
-  <example-toast
-    class="d-zi-notification"
-    :show="showDurationToast"
-    title="Title"
-    @close="toggleDurationToast(false)"
-    @update:show="updateShow"
-    :duration="6000"
-  />
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-toast
+```vue demo
+<dt-button @click="toggleDurationToast(true)">Show Example</dt-button>
+<example-toast
+  class="d-zi-notification"
+  :open="showDurationToast"
   title="Title"
-  :show="showDurationToast"
+  @close="toggleDurationToast(false)"
+  @update:open="updateOpen"
+  :duration="6000"
+/>
+<!-- @code -->
+<dt-toast
+  header-text="Title"
+  :open="showDurationToast"
   @close="closeEvent"
   :duration="7500"
 >
@@ -121,7 +80,7 @@ vueCode='
   </dt-link>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="muted"
     >
@@ -129,30 +88,21 @@ vueCode='
     </dt-button>
   </template>
 </dt-toast>
-'
-/>
+```
 
 ### With Self-Positioning
 
 If you need to self-position the toast at the top center, use the `d-toast-wrapper` Dialtone class:
 
-```html
+```vue code-only
 <aside class="d-toast-wrapper">
   <dt-toast
-    :title="title"
+    :header-text="title"
     :message="message"
-    :show="isShown"
+    :open="isShown"
   ></dt-toast>
 </aside>
 ```
-
-## Vue API
-
-<component-vue-api component-name="toast" />
-
-## Classes
-
-<component-class-table component-name="toast" />
 
 ## Accessibility
 
@@ -181,9 +131,9 @@ import { ref } from 'vue';
 
 const toastOptions = [
   { value: 'base', label: 'Base' },
-  { value: 'error', label: 'Error' },
+  { value: 'critical', label: 'Critical' },
   { value: 'info', label: 'Info' },
-  { value: 'success', label: 'Success' },
+  { value: 'positive', label: 'Positive' },
   { value: 'warning', label: 'Warning' },
 ];
 const showToast = ref(false);
@@ -198,14 +148,22 @@ function toggleToast () {
 function toggleDurationToast (value) {
   showDurationToast.value = value;
 }
-const updateShow = (value) => {
+const updateOpen = (value) => {
   if (!value) showDurationToast.value = false;
 };
 
-function toggleImportant () {
-  important.value = !important.value;
+function toggleImportant (checked) {
+  important.value = checked;
 }
 function togglePinned () {
   pinned.value = !pinned.value;
 }
 </script>
+
+## Vue API
+
+<component-vue-api component-name="toast" />
+
+## Classes
+
+<component-class-table component-name="toast" />

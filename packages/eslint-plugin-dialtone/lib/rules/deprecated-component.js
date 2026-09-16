@@ -15,7 +15,7 @@ module.exports = {
   meta: {
     type: 'suggestion', // `problem`, `suggestion`, or `layout`
     docs: {
-      description: "Detects usages of deprecated components that should be replaced by Dialtone Vue components",
+      description: "Detects usage of deprecated components that should be replaced with Dialtone Vue components.",
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-component.md', // URL to the documentation page for this rule
     },
@@ -32,7 +32,7 @@ module.exports = {
         fileName: 'select_menu',
         componentName: 'SelectMenu',
         replacement: 'DtComboboxWithPopover',
-        link: 'https://dialtone.dialpad.com/vue/?path=/story/recipes-comboboxes-combobox-with-popover--default'
+        link: 'https://dialtone.dialpad.com/vue/?path=/story/components-combobox-with-popover--default'
       },
       {
         fileName: 'dropdown_menu',

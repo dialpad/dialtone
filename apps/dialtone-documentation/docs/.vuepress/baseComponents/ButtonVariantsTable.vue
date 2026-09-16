@@ -14,9 +14,9 @@ const importanceDescriptions = {
   primary: 'Highest level of importance, presenting a solid background color.',
 };
 const kindDescriptions = {
-  default: 'Our default button colors.',
-  danger: 'Potentially destructive or otherwise critical actions.',
-  positive: 'Used to communicate positive actions.',
+  default: 'Default button colors.',
+  critical: 'Potentially destructive or otherwise critical actions.',
+  positive: 'Used to communicate positive, confirmatory, or success-related actions.',
   inverted: 'Use for placement on non-white, dark backgrounds.',
   muted: 'For non-primary actions and contexts where base style may not work.',
   unstyled: 'Raw button devoid of any style.',
@@ -24,7 +24,7 @@ const kindDescriptions = {
 </script>
 
 <template>
-  <table class="d-table dialtone-doc-table d-mb16">
+  <table class="d-table dialtone-doc-table d-mbe-200">
     <colgroup>
       <col>
       <col class="d-w25p">
@@ -33,26 +33,26 @@ const kindDescriptions = {
     </colgroup>
     <thead>
       <tr>
-        <th class="d-ta-left d-va-top" />
+        <th class="d-ta-left d-va-top" aria-hidden="true" />
         <th v-for="importance in importanceModifiers" :key="importance" class="d-ta-left d-va-top">
-          <div class="d-mb4">
+          <div class="d-mbe-75 d-tt-uppercase">
             {{ importance }}
           </div>
-          <div class="d-tt-none d-body--md-compact">
+          <dt-text kind="body" :size="200" density="200" tone="tertiary" class="d-tt-none">
             {{ importanceDescriptions[importance] }}
-          </div>
+          </dt-text>
         </th>
       </tr>
     </thead>
     <tbody>
       <tr v-for="kind in kindModifiers" :key="kind">
-        <th class="d-ta-left d-pl0" scope="row">
-          <a class="d-link d-fs-100 d-fw-medium d-d-block d-mb4 d-tt-uppercase" :href="`#${kind}`">
+        <th class="d-ta-left d-pis-0" scope="row">
+          <a class="d-link d-fs-100 d-fw-medium d-d-block d-mbe-50 d-tt-uppercase" :href="`#${kind}`">
             <strong>{{ kind }}</strong>
           </a>
-          <div class="d-body--md-compact">
+          <dt-text kind="body" :size="200" density="200">
             {{ kindDescriptions[kind] }}
-          </div>
+          </dt-text>
         </th>
         <td
           v-for="importance in importanceModifiers"

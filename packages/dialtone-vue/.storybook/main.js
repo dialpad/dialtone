@@ -2,14 +2,15 @@
 import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 import { mergeConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 const require = createRequire(import.meta.url);
 
 /** @type { import('@storybook/vue3-vite').StorybookConfig } */
 const config = {
   stories: [
-    '../@(components|directives|recipes|prototypes|localization)/**/*.stories.@(js|jsx|ts|tsx)',
-    '../@(components|directives|docs|recipes|localization)/**/*.mdx',
+    '../@(components|directives|prototypes|localization)/**/*.stories.@(js|jsx|ts|tsx)',
+    '../@(components|directives|docs|localization)/**/*.mdx',
     '../functions/*.mdx',
   ],
 
@@ -28,6 +29,11 @@ const config = {
   async viteFinal (config) {
     // Merge custom configuration into the default config
     return mergeConfig(config, {
+      // @vitejs/plugin-react ensures .jsx files are transformed before
+      // Storybook's external-globals-plugin (which uses es-module-lexer
+      // and cannot parse JSX). Scoped to .jsx only to avoid conflicts
+      // with Vue's SFC compiler.
+      plugins: [react({ include: /\.jsx$/, jsxRuntime: 'classic' })],
       build: {
         sourcemap: true,
       },

@@ -4,6 +4,7 @@ import { provide, shallowRef } from 'vue';
 // Common views
 import Icons from './views/Icons.vue';
 import Overview from './views/Overview.vue';
+import DownloadsCatalog from './views/DownloadsCatalog.vue';
 
 // Base components
 import CodeWellHeader from './baseComponents/CodeWellHeader.vue';
@@ -15,15 +16,18 @@ import ComponentVueApi from './baseComponents/ComponentVueApi.vue';
 import ComponentAccessibleTable from './baseComponents/ComponentAccessibleTable.vue';
 import ComponentCombinator from './baseComponents/ComponentCombinator.vue';
 import CodeExampleTabs from './baseComponents/CodeExampleTabs.vue';
+import CodeExample from './baseComponents/CodeExample.vue';
 import SvgLoader from './baseComponents/SvgLoader.vue';
 import DialtoneUsage from './baseComponents/DialtoneUsage.vue';
-import FlexStackNotice from './baseComponents/FlexStackNotice.vue';
+import BeforeAfter from './baseComponents/BeforeAfter.vue';
+import MigrationBanner from './baseComponents/MigrationBanner.vue';
 
 export default defineClientConfig({
   enhance ({ app }) {
     // Common views
     app.component('Icons', Icons);
     app.component('Overview', Overview);
+    app.component('DownloadsCatalog', DownloadsCatalog);
 
     // Base components
     app.component('CodeWellHeader', CodeWellHeader);
@@ -35,9 +39,11 @@ export default defineClientConfig({
     app.component('ComponentAccessibleTable', ComponentAccessibleTable);
     app.component('ComponentCombinator', ComponentCombinator);
     app.component('CodeExampleTabs', CodeExampleTabs);
+    app.component('CodeExample', CodeExample);
     app.component('SvgLoader', SvgLoader);
     app.component('DialtoneUsage', DialtoneUsage);
-    app.component('FlexStackNotice', FlexStackNotice);
+    app.component('BeforeAfter', BeforeAfter);
+    app.component('MigrationBanner', MigrationBanner);
   },
   setup () {
     const headers = shallowRef([]);

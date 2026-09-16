@@ -8,7 +8,7 @@
     >
       <template #opening>
         <span>&nbsp;</span>
-        <span class="dtc-scheme__class">#{{ name }}</span>
+        <span class="dtc-scheme__class">#{{ name }}<template v-if="scopeString">="{{ scopeString }}"</template></span>
       </template>
       <template #default>
         <dtc-code-editor-indent
@@ -36,6 +36,8 @@ import DtcCodeEditorElement from './code_editor_element.vue';
 import DtcCodeEditorInput from './code_editor_input.vue';
 import { DEFAULT_SLOT_NAME } from '@/src/lib/constants';
 import DtcCodeEditorIndent from '@/src/components/code_editor/code_editor_indent.vue';
+import { computed } from 'vue';
+import { camelCase } from 'change-case';
 
 const props = defineProps({
   /**
@@ -52,6 +54,29 @@ const props = defineProps({
     type: Number,
     default: 1,
   },
+  /**
+   * Slot bindings from component documentation.
+   */
+  bindings: {
+    type: Array,
+    default: undefined,
+  },
+  /**
+   * The slot's template content string.
+   */
+  content: {
+    type: String,
+    default: '',
+  },
+});
+
+const scopeString = computed(() => {
+  if (!props.bindings?.length || !props.content) return '';
+  const used = props.bindings
+    .map(b => camelCase(b.name))
+    .filter(name => props.content.includes(name));
+  if (!used.length) return '';
+  return `{ ${used.join(', ')} }`;
 });
 
 const emit = defineEmits(['update:options']);

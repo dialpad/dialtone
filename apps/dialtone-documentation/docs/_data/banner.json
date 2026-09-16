@@ -11,9 +11,9 @@
       "description": "Contains the banner content."
     },
     {
-      "class": "d-banner--error",
+      "class": "d-banner--critical",
       "applies": ".d-banner",
-      "description": "Applies error visual style."
+      "description": "Applies critical visual style."
     },
     {
       "class": "d-banner--info",
@@ -21,9 +21,9 @@
       "description": "Applies info visual style."
     },
     {
-      "class": "d-banner--success",
+      "class": "d-banner--positive",
       "applies": ".d-banner",
-      "description": "Applies success visual style."
+      "description": "Applies positive visual style."
     },
     {
       "class": "d-banner--warning",

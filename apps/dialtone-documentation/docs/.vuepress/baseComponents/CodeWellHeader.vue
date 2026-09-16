@@ -1,8 +1,15 @@
 <template>
   <aside>
-    <header class="d-bar8" :class="classes">
+    <dt-stack
+      as="header"
+      gap="100"
+      align="center"
+      justify="center"
+      class="d-bar-400"
+      :class="classes"
+    >
       <slot />
-    </header>
+    </dt-stack>
   </aside>
 </template>
 
@@ -32,9 +39,9 @@ export default {
     classes () {
       if (this.custom) return this.$attrs.class;
       return [
-        'd-fl-center d-fd-column d-p24 d-w100p d-of-auto d-stack8',
+        'd-p-400 d-w100p d-of-auto',
         this.bgclass,
-        { 'd-ba d-bc-subtle d-btr8 d-baw1': this.isSurfacePrimary },
+        { 'd-ba d-bc-subtle d-bbsr-400 d-baw1': this.isSurfacePrimary },
         this.$attrs.class,
       ];
     },

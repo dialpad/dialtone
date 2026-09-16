@@ -31,6 +31,7 @@ export * from './<name>_constants';
 ```
 
 **Optional files for complex components:**
+
 - **`utils.js`** — Utility/helper functions specific to this component
 - **`validators.js`** — Custom prop or value validators
 - **`modules/`** — Directory for sub-components (e.g. emoji_picker has `emoji_search.vue`, `emoji_selector.vue`)
@@ -52,6 +53,7 @@ If the component needs custom styles:
 
 - Create a VuePress documentation page under `apps/dialtone-documentation/docs/components/<name>.md`
 - Update sidebar navigation in `apps/dialtone-documentation/docs/_data/site-nav.json`
+- Create `packages/combinator/src/variants/variants_<name>.js` and register it in `packages/combinator/src/variants/variants.js` when the component is supported in the playground. Follow `.claude/rules/combinator-variants.md`.
 
 ### 6. Verification
 
@@ -70,6 +72,7 @@ Follow steps 2-6 from create flow above, with these additions:
 - Update JSDoc comments and constants file for any changed/added props, events, or sizes
 - Add test cases for new/changed behavior; run existing tests for regressions
 - Update Storybook stories/MDX and VuePress docs if API surface changed
+- Update `packages/combinator/src/variants/variants_<component>.js` when props, slots, valid values, or visual defaults changed
 
 ---
 
@@ -80,3 +83,4 @@ Path-scoped rules auto-load when editing component files. Key verification point
 - Props use `validator` not `validate`
 - Constants exported and imported (no hardcoded strings)
 - ARIA attributes, keyboard navigation, focus management
+- Combinator variants stay in sync with public component API changes

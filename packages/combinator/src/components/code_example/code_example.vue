@@ -28,12 +28,12 @@
             HTML
           </dt-tab>
         </div>
-        <!-- aria label blank so no tooltip displays since it would be redundant to the "Copy code" text -->
+        <!-- aria label blank so no tooltip displays since it would be redundant to the "Copy" text -->
         <copy-button
           :text="selectedPanelId === htmlPanelId ? trimmedHtmlCode : trimmedVueCode"
           aria-label=""
         >
-          Copy Code
+          Copy
         </copy-button>
       </dt-stack>
     </template>
@@ -43,7 +43,7 @@
     >
       <div
         v-dt-scrollbar
-        class="language-html d-hmx332"
+        class="language-html d-hmx-500"
         data-ext="html"
       >
         <pre
@@ -61,13 +61,13 @@
         v-if="showHtmlWarning"
         class="d-ps-static"
         kind="warning"
-        hide-close
+        :show-close="false"
       >
         Raw HTML renders visuals only. You may need to add JS to replicate its functionality.
       </dt-banner>
       <div
         v-dt-scrollbar
-        class="language-html d-hmx332"
+        class="language-html d-hmx-500"
         data-ext="html"
       >
         <pre
@@ -185,9 +185,10 @@ const formatHTML = async (elementHTML) => {
 
 <style scoped lang="less">
 .code-example-tab-group {
-  margin-top: var(--dt-space-500);
+  margin-block-start: var(--dt-spacing-100);
+  margin-block-end: var(--dt-spacing-300);
   .language-html {
-    margin-top: 0;
+    margin-block-start: 0;
     position: relative;
   }
 }

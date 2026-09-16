@@ -1,0 +1,32 @@
+{
+  "shell": {
+    "base": {
+      "material": {
+        "value": "sandstone",
+        "type": "other"
+      },
+      "color": {
+        "surface": {
+          "value": "oklch(0.9228 0.0268 80.25)",
+          "type": "color"
+        },
+        "foreground": {
+          "value": "oklch(0.2794 0.0107 73.48)",
+          "type": "color"
+        },
+        "border": {
+          "value": "oklch(0.3597 0.0158 75.12)",
+          "type": "color"
+        },
+        "accent": {
+          "value": "oklch(0.3597 0.0158 75.12)",
+          "type": "color"
+        },
+        "action": {
+          "value": "oklch(0.5163 0.0211 69.99)",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

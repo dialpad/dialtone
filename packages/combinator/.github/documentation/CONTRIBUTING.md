@@ -1,97 +1,74 @@
-# Contributing
+# Contribution guide
 
-Before contributing to Dialtone Combinator, please check the [Jira backlog](https://switchcomm.atlassian.net/jira/software/projects/DT/boards/187/backlog) to see if there is already an issue for it and if not, add it.
+Dialtone Combinator lives in the Dialtone monorepo at
+`packages/combinator`. Follow the root repository workflow for branch naming,
+pull requests, and commit format.
 
-## Overview
+## Before opening a pull request
 
-### What Is a Contribution?
+Check whether the work already has a ticket or GitHub issue. If it does not,
+create one through the normal Dialtone planning process before starting broad
+changes.
 
-A contribution is any proposal, design, code, or documentation completed by someone not on the core Dialtone team, and released through Dialtone Combinator for other people to use. It can be created by anyone who'd like to help make Dialtone Combinator better.
+For component API work, remember that Combinator variant files are part of the
+component surface. Updating a Dialtone Vue component prop, slot, or supported
+value usually requires an update to
+`packages/combinator/src/variants/variants_<component>.js` and registration in
+`packages/combinator/src/variants/variants.js`.
 
-Types of contributions:
+## Local commands
 
-- **Fix:** Fixes a technical or documentation defect.
-- **Enhancement:** Extends an existing component without changing the underlying architecture or behavior.
-- **New feature:** Adds something new, like a component.
+Run commands from the monorepo root unless the command uses `--dir`.
 
-### Roles
+```bash
+pnpm nx run dialtone-combinator:start
+pnpm --dir packages/combinator test
+pnpm --dir packages/combinator lint
+pnpm nx run dialtone-combinator:build
+```
 
-- **Contributor:** Has the ability to create PRs and merge their change into staging after at least one approving review.
-- **Maintainer:** A trusted contributor with the ability to release Dialtone.
-- **Admin:** Has the ability to change any configuration on the Dialtone repository and release Dialtone. Usually for members of the Dialtone team.
+The package `lint` script runs `eslint --fix src`. If you need a report-only
+lint check, run ESLint directly:
 
-## Making a Pull Request
+```bash
+pnpm --dir packages/combinator exec eslint src
+```
 
-### Before Submitting
+## Pull request checklist
 
-Before submitting a pull request, make sure to communicate what you wish to change to the Dialtone team. The easiest way to do this is via the [#dialtone](https://dialpad.slack.com/messages/dialtone/) Slack channel. It's possible your change is already being worked on, has already been fixed, or maybe we just need to discuss the best solution to the problem. This prevents you from having to re-write your entire change, or even having to scrap it entirely.
+- Unit tests cover the changed behavior.
+- Combinator tests pass locally.
+- Run ESLint for touched Combinator files.
+- The package builds when the change affects build output or imports.
+- Update documentation when behavior, commands, settings, variants, or
+  unsupported-component status changes.
 
-Any new components or updates to existing components require the following:
+## Coding guidelines
 
-- Unit tests covering the entire change.
-- Unit tests are passing locally.
-  - `npm run test`
-- Linters are passing locally.
-  - `npm run lint`
-- Library builds locally.
-  - `npm run build`
-- Preview builds locally.
-  - `npm run build:preview`
+Keep accessibility in mind for every feature and fix. Test keyboard behavior for
+new interactive controls and use Dialtone Vue components and Dialtone utility
+classes where they fit the UI.
 
-### How to Submit
+The package uses flat ESLint config at
+`packages/combinator/eslint.config.js`.
 
-After you have discussed your change with the Dialtone team, follow these steps to submit it:
+## Tests
 
-1. See [README.md](/README.md) for instructions on how to initially clone and run the project.
-2. First make sure you are on the `staging` branch with `git checkout staging`,
-   and that it is up to date with `git pull`.
-3. Create a personal branch to make your change off of `staging` with `git checkout -b my-change-branch`.
-   We use kebab-case for branch names.
-4. Make and commit your changes. Note our [commit message conventions](COMMIT_CONVENTION.md).
-5. Push your branch to remote. `git push -u origin my-change-branch`.
-8. Create a pull request into the `staging` branch, reviewers will be automatically added and notified of your PR.
+Combinator has package-local Vitest tests under
+`packages/combinator/src/**/*.test.js`. See
+[internal/TESTING.md](internal/TESTING.md) for the current test map and command
+notes.
 
-Once your change is in `staging` it will deploy and go live immediately.
+## Breaking changes
 
-## Coding Guidelines
+The Dialtone documentation site and thumbnail tooling use Combinator.
+Before changing public exports, props, variant behavior, or generated code
+format, check the consumers and update their tests or docs in the same branch.
 
-### Accessibility in Mind
+## Folder structure
 
-Keep accessibility in mind for every new feature, improvement or bug fix you make.
-Always test your change with a screen reader and keyboard navigation if applicable.
-
-### Unit Testing
-*Unit testing is not implemented yet
-
-### Dialtone Usage
-We should attempt to use Dialtone utility classes and Dialtone vue components where applicable.
-
-### Breaking Changes
-
-Dialtone Combinator is a dependency of other projects so you must always be aware of making a breaking change.
-It is possible to make breaking changes, however if you do so you will need to update / verify all
-instances of usage of the component in reliant projects before updating.
-
-### Folder Structure
 See [OVERVIEW](OVERVIEW.md#folder-structure).
 
-## Commit Message Convention
+## Commit message convention
+
 See [COMMIT_CONVENTION](COMMIT_CONVENTION.md).
-
-## Tooling
-
-### ESLint
-
-We use ESLint to promote best practices throughout our codebase.
-ESLint will check any of our javascript or vue code for styling or syntax errors.
-The configuration can be found in [.eslintrc.js](/.eslintrc.js).
-Any changes code changes you make will be automatically linted upon commit.
-You can manually run ESLint via `npm run lint`.
-
-### GitHub Actions
-
-[GitHub Actions](https://docs.github.com/en/actions) is what we use for our CI/CD solution.
-All GHA workflows are in the `.github/workflows` directory. Currently, we use GitHub Actions for the following:
-
-- Deploying a preview `.github/workflows/deploy.yml`, `.github/workflows/deploy-preview.yml`
-- Linting our files on pull request `.github/workflows/lint-pr.yml`.

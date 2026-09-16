@@ -1,0 +1,65 @@
+[
+  {
+    "id": "dirty-worktree-stops",
+    "state": {
+      "dirty": true
+    },
+    "expectedAction": "stop-dirty"
+  },
+  {
+    "id": "unresolved-conflicts-stop",
+    "state": {
+      "unresolvedConflicts": true
+    },
+    "expectedAction": "stop-conflicts"
+  },
+  {
+    "id": "unapproved-merge-pauses",
+    "state": {
+      "migrationComplete": true,
+      "thumbnailsFresh": true
+    },
+    "expectedAction": "wait-user-review"
+  },
+  {
+    "id": "thumbnails-run-before-commit",
+    "state": {
+      "migrationComplete": true,
+      "userApproved": true
+    },
+    "expectedAction": "regenerate-thumbnails"
+  },
+  {
+    "id": "validation-runs-before-push",
+    "state": {
+      "migrationComplete": true,
+      "thumbnailsFresh": true,
+      "userApproved": true,
+      "committed": true
+    },
+    "expectedAction": "run-validation"
+  },
+  {
+    "id": "push-requires-approval",
+    "state": {
+      "migrationComplete": true,
+      "thumbnailsFresh": true,
+      "userApproved": true,
+      "committed": true,
+      "validationComplete": true
+    },
+    "expectedAction": "wait-push-approval"
+  },
+  {
+    "id": "approved-push-proceeds",
+    "state": {
+      "migrationComplete": true,
+      "thumbnailsFresh": true,
+      "userApproved": true,
+      "committed": true,
+      "validationComplete": true,
+      "pushApproved": true
+    },
+    "expectedAction": "push"
+  }
+]

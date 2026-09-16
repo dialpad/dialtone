@@ -18,6 +18,7 @@
 //  @   SKELETON CONTAINER
 //  ----------------------------------------------------------------------------
 
+@layer dialtone.components {
 // The --placeholder-from-color and --placeholder-to-color
 // custom properties can be set on the parent class of the
 // placeholder to control the animation colors.
@@ -26,7 +27,7 @@
   --placeholder-to-color: var(--dt-color-surface-moderate-opaque);
 
   display: flex;
-  width: 100%;
+  inline-size: 100%;
   background: var(--placeholder-from-color);
   animation-duration: 1000ms;
   fill: var(--placeholder-from-color);
@@ -67,13 +68,13 @@
   }
 
   &__shape {
-    margin-right: var(--dt-space-400);
+    margin-inline-end: var(--dt-spacing-100);
   }
 
   &__paragraph-container {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    inline-size: 100%;
   }
 }
 
@@ -81,13 +82,13 @@
 //  @   SKELETON PARAGRAPH
 //  ----------------------------------------------------------------------------
 .d-skeleton-paragraph {
-  width: 100%;
+  inline-size: 100%;
 
   .d-skeleton-text {
-    margin-bottom: var(--dt-space-450);
+    margin-block-end: var(--dt-spacing-150);
 
     &:last-child {
-      margin-bottom: var(--dt-space-0);
+      margin-block-end: var(--dt-spacing-0);
     }
   }
 }
@@ -96,10 +97,11 @@
 //  @   SKELETON TEXT
 //  ----------------------------------------------------------------------------
 .d-skeleton-text {
-  height: var(--dt-size-400);
+  block-size: var(--dt-spacing-100);
   border-radius: var(--dt-size-radius-200);
 }
 
 .d-skeleton-text--heading {
   border-radius: var(--dt-size-radius-200);
+}
 }

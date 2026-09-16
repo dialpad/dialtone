@@ -13,7 +13,7 @@ module.exports = {
   meta: {
     type: 'suggestion', // `problem`, `suggestion`, or `layout`
     docs: {
-      description: "Detects usages of deprecated Dialtone components that should be replaced by newer alternatives",
+      description: "Detects usage of deprecated Dialtone components that have newer alternatives.",
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-dialtone-component.md',
     },

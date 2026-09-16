@@ -12,6 +12,7 @@
 //  ============================================================================
 //  $   SIZE
 //  ----------------------------------------------------------------------------
+@layer dialtone.components {
 .d-icon {
   --icon-size-100: var(--dt-icon-size-100);
   --icon-size-200: var(--dt-icon-size-200);
@@ -24,8 +25,8 @@
   --icon-size: var(--icon-size-500);
 
   flex: none;
-  width: var(--icon-size);
-  height: var(--icon-size);
+  inline-size: var(--icon-size);
+  block-size: var(--icon-size);
   fill: currentColor;
 
   &--size-800 {
@@ -65,4 +66,5 @@
     align-items: center;
     justify-content: center;
   }
+}
 }

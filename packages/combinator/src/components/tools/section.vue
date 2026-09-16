@@ -29,7 +29,7 @@
 
 <script setup>
 import { DtListItem } from '@dialpad/dialtone-vue';
-import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue3';
+import { DtIconChevronDown, DtIconChevronRight } from '@dialpad/dialtone-icons/vue';
 
 import { ref } from 'vue';
 

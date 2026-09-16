@@ -1,4 +1,4 @@
-const stylelint = require("stylelint");
+const stylelint = require('stylelint');
 
 const {
   createPlugin,
@@ -16,7 +16,8 @@ const messages = ruleMessages(ruleName, {
 });
 
 const meta = {
-  url: "https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/recommend-font-style-tokens.md",
+  description: 'Detects separate font declarations that should use a composed font token.',
+  url: 'https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/recommend-font-style-tokens.md',
 };
 
 /** @type {import('stylelint').Rule} */

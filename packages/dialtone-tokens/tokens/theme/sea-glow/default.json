@@ -1,0 +1,32 @@
+{
+  "shell": {
+    "base": {
+      "material": {
+        "value": "graphite",
+        "type": "other"
+      },
+      "color": {
+        "surface": {
+          "value": "oklch(0.981 0.027 193.91)",
+          "type": "color"
+        },
+        "foreground": {
+          "value": "oklch(0.3195 0.1279 259.64)",
+          "type": "color"
+        },
+        "border": {
+          "value": "oklch(0.5022 0.1473 313.44)",
+          "type": "color"
+        },
+        "accent": {
+          "value": "oklch(0.427 0.1446 295.09)",
+          "type": "color"
+        },
+        "action": {
+          "value": "oklch(0.5022 0.1473 313.44)",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

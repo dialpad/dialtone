@@ -1,6 +1,7 @@
 ---
 title: Breakpoints
 description: All classes can have responsive variations. Using our plugin @dialpad/postcss-responsive-variations and configuring the breakpoint constants, you can create media queries represented in conditional prefixes. These prefixed classes allow you to apply a style or property within a specific breakpoint.
+keywords: ["media query", "mobile", "responsive"]
 ---
 
 ## How Responsive Variations Work
@@ -139,7 +140,7 @@ export default {
 };
 ```
 
-For more context on this approach and its benefits, see our [What's New post about mobile-first design principles](https://dialtone.dialpad.com/about/whats-new/posts/2025-5-6.html).
+For more context on this approach and its benefits, see our [What's New post about mobile-first design principles](https://dialtone.dialpad.com/dialtone/whats-new/posts/2025-5-6.html).
 
 ### Examples of Class Patterns
 
@@ -161,28 +162,20 @@ const classes = [
 
 ## Usage
 
-<code-well-header>
-  <div class="d-ai-center d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center">Visible on <strong>all</strong> screens</div>
-  <div class="d-d-none xl:d-d-block d-w100p">
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center">Visible only on screens wider than <strong>extra-large</strong> breakpoint</dt-stack>
-  </div>
-  <div class="d-d-none lg:d-d-block d-w100p">
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center">Visible only on screens wider than <strong>large</strong> breakpoint</dt-stack>
-  </div>
-  <div class="d-d-none md:d-d-block d-w100p">
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center">Visible only on screens wider than <strong>medium</strong> breakpoint</dt-stack>
-  </div>
-  <div class="d-d-none sm:d-d-block d-w100p">
-    <dt-stack direction="row" align="center" justify="center" class="d-w100p d-m8 d-p16 d-bgc-moderate d-bar4 d-ta-center">Visible only on screens wider than <strong>small</strong> breakpoint</dt-stack>
-  </div>
-</code-well-header>
-
-```html
-<div>...</div>
-<div class="d-d-none xl:d-d-block">...</div>
-<div class="d-d-none lg:d-d-block">...</div>
-<div class="d-d-none md:d-d-block">...</div>
-<div class="d-d-none sm:d-d-block">...</div>
+```vue demo
+<div class="d-ai-center d-w100p d-m-100 d-p-200 d-bgc-moderate d-bar-300 d-ta-center">Visible on <strong>all</strong> screens</div>
+<div class="d-d-none xl:d-d-block d-w100p">
+  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-m-100 d-p-200 d-bgc-moderate d-bar-300 d-ta-center">Visible only on screens wider than <strong>extra-large</strong> breakpoint</dt-stack>
+</div>
+<div class="d-d-none lg:d-d-block d-w100p">
+  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-m-100 d-p-200 d-bgc-moderate d-bar-300 d-ta-center">Visible only on screens wider than <strong>large</strong> breakpoint</dt-stack>
+</div>
+<div class="d-d-none md:d-d-block d-w100p">
+  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-m-100 d-p-200 d-bgc-moderate d-bar-300 d-ta-center">Visible only on screens wider than <strong>medium</strong> breakpoint</dt-stack>
+</div>
+<div class="d-d-none sm:d-d-block d-w100p">
+  <dt-stack direction="row" align="center" justify="center" class="d-w100p d-m-100 d-p-200 d-bgc-moderate d-bar-300 d-ta-center">Visible only on screens wider than <strong>small</strong> breakpoint</dt-stack>
+</div>
 ```
 
 ## Classes
@@ -192,11 +185,11 @@ To help keep prefixes concise, we use abbreviations. This syntax is used consist
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
-          <th scope="col" class="d-p0 d-bbw0 d-w25p"><div class="d-p16 d-bb d-bc-default d-bbw1">Class Prefix</div></th>
-          <th scope="col" class="d-p0 d-bbw0 d-w25p"><div class="d-p16 d-bb d-bc-default d-bbw1">Media Query</div></th>
-          <th scope="col" class="d-p0 d-bbw0 "><div class="d-p16 d-bb d-bc-default d-bbw1">Description</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w25p"><div class="d-p-200 d-bb d-bbw1">Class Prefix</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w25p"><div class="d-p-200 d-bb d-bbw1">Media Query</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 "><div class="d-p-200 d-bb d-bbw1">Description</div></th>
         </tr>
       </thead>
       <tbody>

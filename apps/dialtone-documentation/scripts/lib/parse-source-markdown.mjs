@@ -1,0 +1,759 @@
+/* eslint-disable max-lines */
+/* eslint-disable complexity */
+/**
+ * State-machine parser that transforms a component .md source file
+ * into clean GFM markdown.
+ *
+ * States:
+ *   NORMAL          — default, pass-through for standard markdown
+ *   FENCED_CODE     — inside ``` fenced code block (highest priority)
+ *   FENCED_DEMO     — inside ```vue demo block (transforms directives to clean code)
+ *   CODE_WELL_HEADER — inside <code-well-header>...</code-well-header> (remove)
+ *   CODE_EXAMPLE    — inside <code-example>...</code-example> (extract slot as code)
+ *   CODE_EXAMPLE_TABS — accumulating <code-example-tabs ... /> lines
+ *   DIALTONE_USAGE  — inside <dialtone-usage>...</dialtone-usage>
+ *   UTILITY_CLASS_TABLE — inside <utility-class-table> or <new-utility-class-table>
+ *   HTML_TABLE      — inside <table>...</table>
+ *   SCRIPT_SETUP    — inside <script setup>...</script>
+ *   STYLE_BLOCK     — inside <style>...</style>
+ *   HTML_COMMENT    — inside multi-line <!-- ... -->
+ *   ICONS_BLOCK     — inside <icons ...>...</icons> (non-self-closing)
+ */
+
+import { transformCodeExampleTabs } from './transform-code-example-tabs.mjs';
+import { transformUsage } from './transform-usage.mjs';
+import { transformHtmlTable } from './transform-html-table.mjs';
+import { transformNewUtilityClassTable, transformOldUtilityClassTable } from './transform-utility-class-table.mjs';
+import { isStandaloneVueComponentLine, cleanupOutput, PASSTHROUGH_COMPONENTS } from './utils.mjs';
+import { INLINE_HANDLERS, consumeUntilClose } from './component-handlers.mjs';
+import { parseMarkdownFrontmatter } from './frontmatter.mjs';
+import { parseDirectives, trimBlankLines } from '../../docs/.vuepress/plugins/fenced-demo-shared.js';
+
+const S = {
+  NORMAL: 'NORMAL',
+  FENCED_CODE: 'FENCED_CODE',
+  FENCED_DEMO: 'FENCED_DEMO',
+  CODE_WELL_HEADER: 'CODE_WELL_HEADER',
+  CODE_EXAMPLE_TABS: 'CODE_EXAMPLE_TABS',
+  DIALTONE_USAGE: 'DIALTONE_USAGE',
+  UTILITY_CLASS_TABLE: 'UTILITY_CLASS_TABLE',
+  HTML_TABLE: 'HTML_TABLE',
+  SCRIPT_SETUP: 'SCRIPT_SETUP',
+  STYLE_BLOCK: 'STYLE_BLOCK',
+  HTML_COMMENT: 'HTML_COMMENT',
+  ICONS_BLOCK: 'ICONS_BLOCK',
+  DT_NOTICE: 'DT_NOTICE',
+  CODE_EXAMPLE: 'CODE_EXAMPLE',
+};
+
+/**
+ * Extract <script setup> content from source lines.
+ */
+function extractScriptSetup (lines) {
+  let inScript = false;
+  const scriptLines = [];
+  for (const line of lines) {
+    const t = line.trim();
+    if (!inScript && t.match(/^<script\b/)) {
+      inScript = true;
+      scriptLines.push(line);
+      continue;
+    }
+    if (inScript) {
+      scriptLines.push(line);
+      if (t === '</script>' || t.startsWith('</script>')) {
+        inScript = false;
+      }
+    }
+  }
+  return scriptLines.join('\n');
+}
+
+function formatFrontmatterValue (value) {
+  if (value instanceof Date) return value.toISOString().slice(0, 10);
+  return String(value);
+}
+
+function formatKeywords (keywords) {
+  const values = Array.isArray(keywords) ? keywords : [keywords];
+  return values.map(formatFrontmatterValue).filter(Boolean).join(', ');
+}
+
+/**
+ * Emit the title, description, and metadata as plain markdown (no YAML frontmatter).
+ */
+function emitFrontmatter (fm, output) {
+  const displayTitle = fm.title || fm.heading;
+  if (displayTitle) {
+    output.push(`# ${formatFrontmatterValue(displayTitle)}`);
+    output.push('');
+  }
+  if (fm.description) {
+    output.push(formatFrontmatterValue(fm.description));
+    output.push('');
+  }
+  const meta = [];
+  if (fm.status) meta.push(`- **Status**: ${formatFrontmatterValue(fm.status)}`);
+  if (fm.storybook) meta.push(`- **Storybook**: ${formatFrontmatterValue(fm.storybook)}`);
+  if (fm.keywords) meta.push(`- **Keywords**: ${formatKeywords(fm.keywords)}`);
+  if (fm.author) meta.push(`- **Author**: ${formatFrontmatterValue(fm.author)}`);
+  if (fm.posted) meta.push(`- **Posted**: ${formatFrontmatterValue(fm.posted)}`);
+  if (meta.length > 0) {
+    output.push(...meta);
+    output.push('');
+  }
+}
+
+/**
+ * Emit the appropriate utility class table result.
+ */
+function emitUtilityTable (isNew, ctx, output) {
+  const result = isNew
+    ? transformNewUtilityClassTable(ctx.scriptSetupContent)
+    : transformOldUtilityClassTable(ctx.filePath, ctx.utilitiesDir);
+  output.push(...result);
+}
+
+/**
+ * Check if a closing tag is a Vue component (not standard HTML).
+ */
+const KNOWN_CLOSING_HTML = new Set(['table', 'thead', 'tbody', 'tfoot', 'tr', 'th', 'td',
+  'div', 'span', 'p', 'a', 'ul', 'ol', 'li', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6',
+  'pre', 'code', 'blockquote', 'section', 'header', 'footer', 'nav', 'main']);
+
+function isVueClosingTag (trimmed) {
+  if (!trimmed.match(/^<\/[A-Z]/) && !(trimmed.match(/^<\/[a-z]+-/) && !trimmed.startsWith('</table') && !trimmed.startsWith('</code-well') && !trimmed.startsWith('</script'))) {
+    return false;
+  }
+  const m = trimmed.match(/^<\/([a-zA-Z][a-zA-Z0-9-]*)/);
+  return m ? !KNOWN_CLOSING_HTML.has(m[1].toLowerCase()) : false;
+}
+
+// ── State handler: FENCED_CODE ───────────────────────────────────
+function handleFencedCode (ctx) {
+  ctx.output.push(ctx.line);
+  if (ctx.trimmed.startsWith(ctx.fencedCodeMarker) && ctx.trimmed.slice(ctx.fencedCodeMarker.length).trim() === '') {
+    ctx.state = S.NORMAL;
+    ctx.fencedCodeMarker = '';
+  }
+}
+
+// ── State handler: FENCED_DEMO ──────────────────────────────────
+function handleFencedDemoState (ctx) {
+  // Detect the closing fence
+  if (ctx.trimmed.startsWith(ctx.fencedCodeMarker) && ctx.trimmed.slice(ctx.fencedCodeMarker.length).trim() === '') {
+    const result = transformFencedDemoBlock(ctx.accumulator, ctx.fencedDemoInfoMode);
+    if (result !== null) {
+      ctx.output.push('');
+      ctx.output.push('```vue');
+      ctx.output.push(...result);
+      ctx.output.push('```');
+      ctx.output.push('');
+    }
+    ctx.accumulator = [];
+    ctx.fencedCodeMarker = '';
+    ctx.state = S.NORMAL;
+    return;
+  }
+  ctx.accumulator.push(ctx.line);
+}
+
+/**
+ * Transform accumulated lines from a ```vue demo block into clean code lines.
+ *
+ * Handles directives:
+ *   <!-- @demo-only -->  → return null (skip entire block)
+ *   <!-- @code-only -->  → stripped (content emitted normally)
+ *   <!-- @code -->       → emit only content below the separator
+ *   <!-- @wrapper -->    → strip the wrapper element, keep children
+ *   <!-- @bg ... -->     → stripped
+ *   <!-- @class ... -->  → stripped
+ *
+ * @param {string[]} lines - Accumulated content lines (without fences)
+ * @param {string} [infoMode='demo'] - 'demo', 'demo-only', or 'code-only' from the info string
+ * @returns {string[]|null} - Cleaned lines, or null to skip the block
+ */
+export function transformFencedDemoBlock (lines, infoMode = 'demo') {
+  const { onlyShow, hasWrapper, codeSeparatorIndex, directiveLines: directiveIndices } =
+    parseDirectives(lines, infoMode);
+
+  // @demo-only: skip the entire block
+  if (onlyShow === 'demo') return null;
+
+  let contentLines;
+
+  if (codeSeparatorIndex !== -1) {
+    // @code separator: emit only lines below the separator (excluding directives)
+    contentLines = [];
+    for (let i = codeSeparatorIndex + 1; i < lines.length; i++) {
+      if (!directiveIndices.has(i)) contentLines.push(lines[i]);
+    }
+  } else {
+    // No separator: emit all non-directive lines
+    contentLines = lines.filter((_, i) => !directiveIndices.has(i));
+  }
+
+  // Trim leading/trailing blank lines
+  while (contentLines.length > 0 && contentLines[0].trim() === '') contentLines.shift();
+  while (contentLines.length > 0 && contentLines[contentLines.length - 1].trim() === '') contentLines.pop();
+
+  if (contentLines.length === 0) return null;
+
+  // @wrapper: strip the wrapper element, keeping only its children.
+  // Only applies when there's no @code separator (with @code, the code content
+  // is already explicitly specified below the separator).
+  if (hasWrapper && codeSeparatorIndex === -1) {
+    contentLines = stripWrapperElement(contentLines);
+  }
+
+  // Dedent
+  const nonEmpty = contentLines.filter(l => l.trim().length > 0);
+  if (nonEmpty.length > 0) {
+    const minIndent = Math.min(...nonEmpty.map(l => l.match(/^(\s*)/)[1].length));
+    if (minIndent > 0) {
+      contentLines = contentLines.map(l => l.slice(minIndent));
+    }
+  }
+
+  return contentLines;
+}
+
+/**
+ * Strip the outermost wrapper element from content lines, keeping only
+ * its children. Used when @wrapper directive is present.
+ *
+ * @param {string[]} lines - Content lines (wrapper element is the outer element)
+ * @returns {string[]} - Children lines with wrapper removed
+ */
+function stripWrapperElement (lines) {
+  const joined = lines.join('\n');
+  const trimmed = joined.trim();
+
+  // Find the end of the opening tag (first > not inside quotes)
+  let inSQ = false;
+  let inDQ = false;
+  let openEnd = -1;
+  for (let i = 0; i < trimmed.length; i++) {
+    const ch = trimmed[i];
+    if (ch === '\'' && !inDQ) inSQ = !inSQ;
+    else if (ch === '"' && !inSQ) inDQ = !inDQ;
+    else if (ch === '>' && !inSQ && !inDQ) { openEnd = i; break; }
+  }
+  if (openEnd === -1) return lines;
+
+  // Find the last closing tag
+  const lastCloseStart = trimmed.lastIndexOf('</');
+  if (lastCloseStart === -1 || lastCloseStart <= openEnd) return lines;
+
+  // Extract children between the opening and closing tags
+  const children = trimmed.slice(openEnd + 1, lastCloseStart);
+  const childLines = children.split('\n');
+
+  // Trim leading/trailing blank or whitespace-only lines
+  while (childLines.length > 0 && childLines[0].trim() === '') childLines.shift();
+  while (childLines.length > 0 && childLines[childLines.length - 1].trim() === '') childLines.pop();
+
+  return childLines;
+}
+
+// ── State handler: skip-until-close states ────────────────────────
+function handleSkipUntilClose (ctx, closeTag, nextState) {
+  if (ctx.trimmed === closeTag || ctx.trimmed.startsWith(closeTag)) {
+    ctx.state = nextState;
+  }
+}
+
+// ── State handler: UTILITY_CLASS_TABLE ────────────────────────────
+function handleUtilityClassTableState (ctx) {
+  if (
+    (ctx.utilityTableIsNew && ctx.trimmed === '</new-utility-class-table>') ||
+    (!ctx.utilityTableIsNew && ctx.trimmed === '</utility-class-table>')
+  ) {
+    emitUtilityTable(ctx.utilityTableIsNew, ctx, ctx.output);
+    ctx.state = S.NORMAL;
+  }
+}
+
+// ── State handler: CODE_EXAMPLE ────────────────────────────────────
+function handleCodeExampleState (ctx) {
+  ctx.accumulator.push(ctx.line);
+  if (ctx.trimmed === '</code-example>') {
+    if (!ctx.codeExampleDemoOnly) {
+      ctx.output.push(...transformCodeExample(ctx.accumulator));
+    }
+    ctx.accumulator = [];
+    ctx.state = S.NORMAL;
+  }
+}
+
+/**
+ * Extract slot content from accumulated <code-example> lines.
+ * Ignores vueCode attribute — always uses the slot.
+ * Returns a fenced ```vue block.
+ */
+function transformCodeExample (lines) {
+  const joined = lines.join('\n');
+
+  // Find the end of the opening tag (track quotes to handle multi-line attrs)
+  let inSQ = false;
+  let inDQ = false;
+  let openTagEnd = -1;
+  const tagStart = joined.indexOf('<code-example');
+  for (let i = tagStart + '<code-example'.length; i < joined.length; i++) {
+    const ch = joined[i];
+    if (ch === '\'' && !inDQ) inSQ = !inSQ;
+    else if (ch === '"' && !inSQ) inDQ = !inDQ;
+    else if (ch === '>' && !inSQ && !inDQ) { openTagEnd = i + 1; break; }
+  }
+  if (openTagEnd === -1) return [];
+
+  const closeTagStart = joined.lastIndexOf('</code-example>');
+  if (closeTagStart === -1) return [];
+
+  const slotContent = trimBlankLines(joined.slice(openTagEnd, closeTagStart));
+  if (!slotContent.trim()) return [];
+
+  // Dedent
+  const slotLines = slotContent.split('\n');
+  const nonEmpty = slotLines.filter(l => l.trim().length > 0);
+  if (nonEmpty.length === 0) return [];
+  const minIndent = Math.min(...nonEmpty.map(l => l.match(/^(\s*)/)[1].length));
+  const dedented = slotLines.map(l => l.slice(minIndent)).join('\n').trim();
+
+  if (!dedented) return [];
+  return ['', '```vue', dedented, '```', ''];
+}
+
+// ── State handler: CODE_EXAMPLE_TABS ──────────────────────────────
+function handleCodeExampleTabsState (ctx) {
+  ctx.accumulator.push(ctx.line);
+  const sqCount = (ctx.trimmed.match(/'/g) || []).length;
+  if (sqCount % 2 !== 0) ctx.inSingleQuoteAttr = !ctx.inSingleQuoteAttr;
+  if (!ctx.inSingleQuoteAttr && (ctx.trimmed === '/>' || ctx.trimmed.endsWith('/>'))) {
+    ctx.output.push(...transformCodeExampleTabs(ctx.accumulator));
+    ctx.accumulator = [];
+    ctx.state = S.NORMAL;
+  }
+}
+
+// ── State handler: DIALTONE_USAGE ─────────────────────────────────
+function handleDialtoneUsageState (ctx) {
+  ctx.accumulator.push(ctx.line);
+  if (ctx.trimmed === '</dialtone-usage>') {
+    ctx.output.push(...transformUsage(ctx.accumulator));
+    ctx.accumulator = [];
+    ctx.state = S.NORMAL;
+  }
+}
+
+// ── State handler: HTML_TABLE ─────────────────────────────────────
+function handleHtmlTableState (ctx) {
+  ctx.accumulator.push(ctx.line);
+  if (ctx.trimmed.match(/^<table[\s>]/i)) ctx.tableNestDepth++;
+  if (ctx.trimmed.match(/<\/table>/i)) {
+    ctx.tableNestDepth--;
+    if (ctx.tableNestDepth <= 0) {
+      ctx.output.push(...transformHtmlTable(ctx.accumulator));
+      ctx.accumulator = [];
+      ctx.tableNestDepth = 0;
+      ctx.state = S.NORMAL;
+    }
+  }
+}
+
+// ── Detect state transitions from NORMAL ──────────────────────────
+function tryDetectFencedCode (ctx) {
+  const fenceMatch = ctx.trimmed.match(/^(`{3,}|~{3,})/);
+  if (!fenceMatch) return false;
+  ctx.fencedCodeMarker = fenceMatch[1];
+
+  // Check if the info string is "vue demo", "vue demo-only", or "vue code-only"
+  const infoString = ctx.trimmed.slice(fenceMatch[1].length).trim();
+  if (/^vue\s+(demo-only|code-only|demo)$/.test(infoString)) {
+    ctx.state = S.FENCED_DEMO;
+    ctx.accumulator = [];
+    ctx.fencedDemoInfoMode = infoString.split(/\s+/)[1]; // 'demo', 'demo-only', or 'code-only'
+    return true;
+  }
+
+  ctx.state = S.FENCED_CODE;
+  ctx.output.push(ctx.line);
+  return true;
+}
+
+function tryDetectComment (ctx) {
+  if (!ctx.trimmed.startsWith('<!--')) return false;
+  if (!ctx.trimmed.includes('-->')) ctx.state = S.HTML_COMMENT;
+  return true;
+}
+
+function tryDetectScriptOrStyle (ctx) {
+  if (ctx.trimmed.match(/^<script\b/)) { ctx.state = S.SCRIPT_SETUP; return true; }
+  if (ctx.trimmed.match(/^<style\b/)) { ctx.state = S.STYLE_BLOCK; return true; }
+  return false;
+}
+
+function tryDetectCodeWellHeader (ctx) {
+  if (!ctx.trimmed.startsWith('<code-well-header')) return false;
+  if (!ctx.trimmed.includes('</code-well-header>') && !ctx.trimmed.endsWith('/>')) {
+    ctx.state = S.CODE_WELL_HEADER;
+  }
+  return true;
+}
+
+function tryDetectUtilityClassTable (ctx) {
+  if (!ctx.trimmed.startsWith('<new-utility-class-table') && !ctx.trimmed.startsWith('<utility-class-table')) return false;
+  ctx.utilityTableIsNew = ctx.trimmed.startsWith('<new-utility-class-table');
+  if (ctx.trimmed.endsWith('/>') || ctx.trimmed.includes('</utility-class-table>') || ctx.trimmed.includes('</new-utility-class-table>')) {
+    emitUtilityTable(ctx.utilityTableIsNew, ctx, ctx.output);
+    return true;
+  }
+  ctx.state = S.UTILITY_CLASS_TABLE;
+  return true;
+}
+
+function tryDetectCodeExample (ctx) {
+  if (!ctx.trimmed.startsWith('<code-example') || ctx.trimmed.startsWith('<code-example-tabs')) return false;
+  ctx.accumulator = [ctx.line];
+  ctx.codeExampleDemoOnly = ctx.trimmed.includes('only-show="demo"') || ctx.trimmed.includes('only-show=\'demo\'');
+  ctx.state = S.CODE_EXAMPLE;
+  return true;
+}
+
+function tryDetectCodeExampleTabs (ctx) {
+  if (!ctx.trimmed.startsWith('<code-example-tabs')) return false;
+  ctx.inSingleQuoteAttr = false;
+  ctx.accumulator = [ctx.line];
+  const sqCount = (ctx.trimmed.match(/'/g) || []).length;
+  if (sqCount % 2 !== 0) ctx.inSingleQuoteAttr = true;
+  if (!ctx.inSingleQuoteAttr && ctx.trimmed.endsWith('/>')) {
+    ctx.output.push(...transformCodeExampleTabs(ctx.accumulator));
+    ctx.accumulator = [];
+  } else {
+    ctx.state = S.CODE_EXAMPLE_TABS;
+  }
+  return true;
+}
+
+function tryDetectDialtoneUsage (ctx) {
+  if (!ctx.trimmed.startsWith('<dialtone-usage')) return false;
+  ctx.accumulator = [ctx.line];
+  if (ctx.trimmed === '</dialtone-usage>') {
+    ctx.accumulator = [];
+  } else {
+    ctx.state = S.DIALTONE_USAGE;
+  }
+  return true;
+}
+
+function tryDetectHtmlTable (ctx) {
+  if (!ctx.trimmed.match(/^<table[\s>]/i)) return false;
+  ctx.accumulator = [ctx.line];
+  ctx.tableNestDepth = 1;
+  ctx.state = S.HTML_TABLE;
+  return true;
+}
+
+function tryInlineHandlers (ctx) {
+  for (const handler of INLINE_HANDLERS) {
+    const m = handler.match(ctx.trimmed);
+    if (m) {
+      ctx.output.push(...handler.handle(m, { ...ctx.handlerCtx, trimmed: ctx.trimmed }));
+      ctx.i = consumeUntilClose(ctx.lines, ctx.i, ctx.trimmed, ...handler.closingTags);
+      return true;
+    }
+  }
+  return false;
+}
+
+// ── Kind → GFM alert mapping for dt-notice ───────────────────────
+// Uses DtNotice kind values directly (uppercase) to match the
+// > [!KIND] convention used in the VuePress source files.
+const NOTICE_KIND_MAP = {
+  warning: 'WARNING',
+  info: 'INFO',
+  error: 'ERROR',
+  success: 'SUCCESS',
+  base: 'BASE',
+};
+
+/**
+ * Extract an attribute value from a (possibly partial) tag string.
+ */
+function extractTagAttribute (tagText, attr) {
+  const m = tagText.match(new RegExp(`\\b${attr}="([^"]*)"`));
+  return m ? m[1] : null;
+}
+
+/**
+ * Strip remaining inline HTML tags (but keep text content).
+ */
+function stripInlineHtml (text) {
+  return text.replace(/<[^>]*>/g, '').trim();
+}
+
+function tryDetectDtNotice (ctx) {
+  if (!ctx.trimmed.startsWith('<dt-notice')) return false;
+
+  // Collect the full opening tag (may span multiple lines)
+  let openTagText = ctx.trimmed;
+  let openTagClosed = openTagText.includes('>');
+
+  if (!openTagClosed) {
+    // Multi-line opening tag — accumulate until we find the closing >
+    const tagLines = [ctx.trimmed];
+    while (!openTagClosed && ctx.i + 1 < ctx.lines.length) {
+      ctx.i++;
+      const nextTrimmed = ctx.lines[ctx.i].trim();
+      tagLines.push(nextTrimmed);
+      if (nextTrimmed.includes('>')) {
+        openTagClosed = true;
+      }
+    }
+    openTagText = tagLines.join(' ');
+  }
+
+  const kind = extractTagAttribute(openTagText, 'kind') || 'base';
+  ctx.noticeKind = kind;
+  ctx.noticeOpenTag = openTagText;
+  ctx.accumulator = [];
+  ctx.state = S.DT_NOTICE;
+  return true;
+}
+
+/**
+ * Convert dt-notice template content into GFM alert lines.
+ * @param {string} openingTag - The <dt-notice ...> opening tag (for kind extraction)
+ * @param {string[]} bodyLines - Lines between <dt-notice> and </dt-notice>
+ * @returns {string[]} - GFM alert markdown lines
+ */
+export function transformDtNotice (openingTag, bodyLines) {
+  const kind = extractTagAttribute(openingTag, 'kind') || 'base';
+  const alertType = NOTICE_KIND_MAP[kind] || 'INFO';
+  const title = extractTagAttribute(openingTag, 'title');
+
+  const filtered = bodyLines.filter(l => !/^\s*<\/?template[\s>]/.test(l));
+
+  const joined = filtered.join('\n');
+  const withLinks = convertRouterLinks(joined);
+  const cleaned = stripInlineHtml(withLinks);
+  const paragraphs = cleaned.split(/\n\s*\n/)
+    .map(p => p.replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+  let content = paragraphs.join('\n\n');
+
+  // Use title as body fallback when body is empty
+  if (!content && title) content = title;
+
+  if (!content) return [];
+  const header = title ? `> [!${alertType}] ${title}` : `> [!${alertType}]`;
+  const lines = [header];
+  for (const line of content.split('\n')) {
+    const trimmedLine = line.trim();
+    lines.push(trimmedLine ? `> ${trimmedLine}` : '>');
+  }
+  lines.push('');
+  return lines;
+}
+
+// ── State handler: DT_NOTICE ──────────────────────────────────────
+function handleDtNoticeState (ctx) {
+  if (ctx.trimmed === '</dt-notice>' || ctx.trimmed.startsWith('</dt-notice>')) {
+    const result = transformDtNotice(ctx.noticeOpenTag, ctx.accumulator);
+    ctx.output.push(...result);
+
+    ctx.accumulator = [];
+    ctx.state = S.NORMAL;
+    return;
+  }
+
+  ctx.accumulator.push(ctx.line);
+}
+
+/**
+ * Detect passthrough wrapper components (e.g. <BlogPost>, <BlogPostPreview>).
+ * Strips the opening/closing tags but keeps inner content for normal processing.
+ */
+function tryDetectPassthroughComponent (ctx) {
+  const match = ctx.trimmed.match(/^<\/?([a-zA-Z][a-zA-Z0-9-]*)/);
+  if (!match) return false;
+  const tagName = match[1].toLowerCase();
+  if (!PASSTHROUGH_COMPONENTS.has(tagName)) return false;
+
+  // Closing tag — just skip it
+  if (ctx.trimmed.startsWith('</')) return true;
+
+  // Opening tag — skip attribute lines until we find the closing >
+  if (!ctx.trimmed.includes('>')) {
+    while (ctx.i + 1 < ctx.lines.length) {
+      ctx.i++;
+      if (ctx.lines[ctx.i].trim().includes('>')) break;
+    }
+  }
+  return true;
+}
+
+/**
+ * Remove Vue component tags that may span multiple lines and contain inner content.
+ * Handles: orphaned closing tags, single-line self-closing tags, and multi-line
+ * opening tags (with or without inner content up to the matching closing tag).
+ */
+function tryRemoveVueComponent (ctx) {
+  // Orphaned closing tag — safety net
+  if (isVueClosingTag(ctx.trimmed)) return true;
+
+  // Must be a standalone Vue component opening tag
+  if (!isStandaloneVueComponentLine(ctx.trimmed)) return false;
+
+  // If the line is already a closing tag (handled above), skip
+  if (ctx.trimmed.startsWith('</')) return true;
+
+  // Single-line self-closing: <DtFoo ... />
+  if (ctx.trimmed.endsWith('/>')) return true;
+
+  // Single-line with closing tag on same line: <dt-foo>...</dt-foo>
+  const tagMatch = ctx.trimmed.match(/^<([a-zA-Z][a-zA-Z0-9-]*)/);
+  if (!tagMatch) return true;
+  const tagName = tagMatch[1];
+  const closingTag = `</${tagName}>`;
+
+  if (ctx.trimmed.includes('>') && ctx.trimmed.includes(closingTag)) return true;
+
+  // Multi-line: advance past attribute lines until we find the end of the opening tag
+  const openTagClosed = ctx.trimmed.includes('>');
+  if (!openTagClosed) {
+    while (ctx.i + 1 < ctx.lines.length) {
+      ctx.i++;
+      const nextTrimmed = ctx.lines[ctx.i].trim();
+      if (nextTrimmed.includes('>')) break;
+    }
+  }
+
+  // Check if the opening tag was self-closing (`/>`)
+  const currentTrimmed = ctx.lines[ctx.i].trim();
+  if (currentTrimmed.endsWith('/>') || currentTrimmed === '/>') return true;
+
+  // Not self-closing — advance past inner content until the matching closing tag
+  const closingTagLower = closingTag.toLowerCase();
+  while (ctx.i + 1 < ctx.lines.length) {
+    ctx.i++;
+    const nextTrimmed = ctx.lines[ctx.i].trim();
+    if (nextTrimmed.toLowerCase().startsWith(closingTagLower)) break;
+  }
+
+  return true;
+}
+
+/**
+ * Detectors run in order for NORMAL state lines.
+ * Each returns true if the line was consumed.
+ */
+const NORMAL_DETECTORS = [
+  tryDetectFencedCode,
+  tryDetectComment,
+  tryDetectScriptOrStyle,
+  tryDetectCodeWellHeader,
+  tryDetectUtilityClassTable,
+  tryDetectCodeExample,
+  tryDetectCodeExampleTabs,
+  tryDetectDialtoneUsage,
+  tryDetectHtmlTable,
+  tryInlineHandlers,
+  tryDetectDtNotice,
+  tryDetectPassthroughComponent,
+  tryRemoveVueComponent,
+];
+
+/**
+ * Process a single line in NORMAL state, checking all detectors.
+ * Returns true if the line was consumed.
+ */
+function processNormalLine (ctx) {
+  for (const detector of NORMAL_DETECTORS) {
+    if (detector(ctx)) return true;
+  }
+  return false;
+}
+
+/**
+ * State dispatch table — maps non-NORMAL states to handler functions.
+ */
+const STATE_HANDLERS = {
+  [S.FENCED_CODE]: handleFencedCode,
+  [S.FENCED_DEMO]: handleFencedDemoState,
+  [S.HTML_COMMENT]: (ctx) => handleSkipUntilClose(ctx, '-->', S.NORMAL),
+  [S.SCRIPT_SETUP]: (ctx) => handleSkipUntilClose(ctx, '</script>', S.NORMAL),
+  [S.STYLE_BLOCK]: (ctx) => handleSkipUntilClose(ctx, '</style>', S.NORMAL),
+  [S.CODE_WELL_HEADER]: (ctx) => handleSkipUntilClose(ctx, '</code-well-header>', S.NORMAL),
+  [S.UTILITY_CLASS_TABLE]: handleUtilityClassTableState,
+  [S.CODE_EXAMPLE]: handleCodeExampleState,
+  [S.CODE_EXAMPLE_TABS]: handleCodeExampleTabsState,
+  [S.DIALTONE_USAGE]: handleDialtoneUsageState,
+  [S.HTML_TABLE]: handleHtmlTableState,
+  [S.DT_NOTICE]: handleDtNoticeState,
+};
+
+/**
+ * Convert inline <router-link to="...">text</router-link> to markdown links.
+ * Uses dotAll flag to handle router-link tags that span multiple lines.
+ */
+function convertRouterLinks (line) {
+  if (!line.includes('<router-link')) return line;
+  return line.replace(
+    /<router-link\b[^>]*\bto="([^"]*)"[^>]*>(.*?)<\/router-link>/gs,
+    (_, url, text) => `[${text.replace(/\s+/g, ' ').trim()}](${url})`,
+  );
+}
+
+/**
+ * Parse a component source markdown file and return clean GFM.
+ *
+ * @param {string} source - The raw source markdown content
+ * @param {object} options
+ * @param {string} options.dataDir - Absolute path to docs/_data/ directory
+ * @param {string} [options.filePath] - Absolute path to the source .md file
+ * @param {string} [options.utilitiesDir] - Absolute path to docs/utilities/ directory
+ * @returns {string} - Clean GFM markdown
+ */
+export function parseSourceMarkdown (source, { dataDir, filePath, utilitiesDir }) {
+  const { data: frontmatter, content } = parseMarkdownFrontmatter(source, { filePath });
+  const lines = content.split('\n');
+  const scriptSetupContent = extractScriptSetup(lines);
+  const output = [];
+  emitFrontmatter(frontmatter, output);
+  const ctx = {
+    lines,
+    output,
+    state: S.NORMAL,
+    accumulator: [],
+    fencedCodeMarker: '',
+    inSingleQuoteAttr: false,
+    tableNestDepth: 0,
+    utilityTableIsNew: false,
+    scriptSetupContent,
+    filePath,
+    utilitiesDir,
+    handlerCtx: { dataDir, scriptSetupContent },
+    i: 0,
+    line: '',
+    trimmed: '',
+  };
+
+  for (ctx.i = 0; ctx.i < lines.length; ctx.i++) {
+    ctx.line = lines[ctx.i];
+    ctx.trimmed = ctx.line.trim();
+
+    const stateHandler = STATE_HANDLERS[ctx.state];
+    if (stateHandler) {
+      stateHandler(ctx);
+      continue;
+    }
+
+    // NORMAL state — try all detectors
+    if (processNormalLine(ctx)) continue;
+
+    ctx.output.push(convertRouterLinks(ctx.line));
+  }
+
+  return cleanupOutput(ctx.output.join('\n'));
+}

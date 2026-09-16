@@ -1,0 +1,32 @@
+{
+  "shell": {
+    "base": {
+      "material": {
+        "value": "jade",
+        "type": "other"
+      },
+      "color": {
+        "surface": {
+          "value": "oklch(0.9667 0.0136 92.98)",
+          "type": "color"
+        },
+        "foreground": {
+          "value": "oklch(0.1253 0.0587 302.08)",
+          "type": "color"
+        },
+        "border": {
+          "value": "oklch(0.1253 0.0587 302.08)",
+          "type": "color"
+        },
+        "accent": {
+          "value": "oklch(0.5172 0.0845 194.86)",
+          "type": "color"
+        },
+        "action": {
+          "value": "oklch(0.7249 0.1606 32.59)",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

@@ -3,7 +3,19 @@
     "base": {
       "color": {
         "accent": {
-          "value": "#F49AC8",
+          "value": "oklch(0.7904 0.1208 348.23)",
+          "type": "color"
+        }
+      }
+    },
+    "logo": {
+      "color": {
+        "star": {
+          "value": "{color.purple.1000}",
+          "type": "color"
+        },
+        "wordmark": {
+          "value": "{color.purple.1000}",
           "type": "color"
         }
       }

@@ -15,12 +15,11 @@ Detailed rules are applied automatically via path-scoped rules when editing comp
 | Prop validation | `validator` (NEVER `validate` — Vue silently ignores it) |
 | Constants | Export from `*_constants.js`, import in component + tests |
 | v-model event | `update:modelValue` |
-| Open/close (new) | `update:open` (Popover, Collapsible, ImageViewer, FilterPill) |
-| Open/close (legacy) | `update:show` (Modal, Tooltip, Toast — don't change) |
+| Open/close | `update:open` (Modal, Tooltip, Toast, Popover, Collapsible, ImageViewer, FilterPill) |
 | Overlay slots | `headerContent` / `footerContent` |
 | Structural slots | `header` / `footer` |
 | Sizes (interactive) | `xs`, `sm`, `md`, `lg`, `xl` |
 | Sizes (icons) | `100`–`800` numeric |
-| Visibility toggles | `hideX` negative polarity |
+| Visibility toggles | `showX` positive polarity |
 | Styles | `<style scoped>` or `d-*` utility classes, `var(--dt-*)` tokens only |
 | Shared behavior | Composables for new, mixins for legacy in `packages/dialtone-vue/common/mixins/` (`InputMixin`, `CheckableMixin`, `GroupableMixin`, `MessagesMixin`) |

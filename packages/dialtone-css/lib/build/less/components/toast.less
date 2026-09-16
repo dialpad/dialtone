@@ -9,14 +9,15 @@
 //  ============================================================================
 //  @   TOAST CONTAINER
 //  ----------------------------------------------------------------------------
+@layer dialtone.components {
 .d-toast-wrapper {
   position: absolute;
-  top: var(--dt-space-600); // 32
-  left: 50%;
+  inset-block-start: var(--dt-spacing-400); // 32
+  inset-inline-start: 50%;
   z-index: var(--zi-notification);
   display: flex;
   flex-direction: column;
-  gap: var(--dt-space-500);
+  gap: var(--dt-spacing-200);
   transform: translateX(-50%);
 }
 
@@ -27,17 +28,17 @@
     //  Component CSS Vars
     //  ------------------------------------------------------------------------
     --toast-color-shadow: var(--dt-color-border-subtle);
-    --toast-box-shadow: 0 0 0 var(--dt-size-100) var(--toast-color-shadow) inset, var(--dt-shadow-medium);
+    --toast-box-shadow: 0 0 0 var(--dt-size-border-100) var(--toast-color-shadow) inset, var(--dt-shadow-medium);
 
     z-index: var(--zi-notification);
     display: block;
-    max-width: var(--dt-size-975);
+    max-inline-size: var(--dt-layout-700);
     word-break: normal;
     box-shadow: var(--toast-box-shadow);
     pointer-events: all;
 
     //  If there's a link in a toast, break the url so it wraps
-    > a {
+    > :where(a) {
         word-break: break-all;
     }
 
@@ -57,14 +58,11 @@
 //  $   CONTENT CONTAINER
 //  ----------------------------------------------------------------------------
 .d-toast__dialog {
+    --notice-actions-button-offset: var(--dt-spacing-400);
+
     position: relative;
     display: flex;
-    align-items: center;
-
-
-    .d-notice__actions button:first-child {
-        margin-left: var(--dt-space-600); // 32
-    }
+    align-items: start;
 }
 
 //  ============================================================================
@@ -107,10 +105,10 @@
 .d-toast--viewing {
   --toast-border-radius: var(--dt-size-radius-200);
 
-  border-top: var(--dt-size-300) solid var(--dt-color-magenta-300);
+  border-block-start: var(--dt-size-border-300) solid var(--dt-color-magenta-400);
 
   .d-notice__icon {
-    color: var(--dt-color-magenta-300);
+    color: var(--dt-color-magenta-400);
   }
 }
 
@@ -126,18 +124,18 @@
 .d-toast-alternate {
   //  Component CSS Vars
   //  ------------------------------------------------------------------------
-  --toast-alternate-color-shadow: hsl(var(--dt-color-black-900-hsl) / 0.15);
-  --toast-alternate-box-shadow: 0 0 0 var(--dt-size-0) var(--toast-alternate-color-shadow) inset, var(--dt-shadow-medium);
+  --toast-alternate-color-shadow: oklch(from var(--dt-color-black-900) l c h / 0.15);
+  --toast-alternate-box-shadow: 0 0 0 var(--dt-spacing-0) var(--toast-alternate-color-shadow) inset, var(--dt-shadow-medium);
   --toast-alternate-color-background: var(--dt-color-surface-primary);
   --toast-alternate-color-text: var(--dt-color-foreground-primary);
   --toast-alternate-color-icon: var(--dt-color-foreground-muted);
   --toast-alternate-font-color: var(--dt-color-foreground-tertiary);
   --toast-alternate-font-size: var(--dt-font-size-200);
   --toast-alternate-line-height: var(--dt-font-line-height-300);
-  --toast-alternate-border-radius: var(--dt-size-500);
+  --toast-alternate-border-radius: var(--dt-size-radius-500);
   --toast-alternate-border-color: var(--dt-color-border-subtle);
   --toast-alternate-border-style: solid;
-  --toast-alternate-border-width: var(--dt-size-100);
+  --toast-alternate-border-width: var(--dt-size-border-100);
 
   z-index: var(--zi-notification);
 
@@ -146,8 +144,8 @@
   display: flex;
   align-items: center;
   box-sizing: border-box;
-  width: var(--dt-size-925);
-  padding: var(--dt-space-350) var(--dt-space-350) var(--dt-space-450) var(--dt-space-450);
+  inline-size: var(--dt-layout-500);
+  padding: var(--dt-spacing-75) var(--dt-spacing-75) var(--dt-spacing-150) var(--dt-spacing-150);
   color: var(--toast-alternate-color-text);
   font-size: var(--toast-alternate-font-size);
   line-height: var(--toast-alternate-line-height);
@@ -159,7 +157,7 @@
   pointer-events: all;
 
   //  If there's a link in a toast, break the url so it wraps
-  > a {
+  > :where(a) {
     word-break: break-all;
   }
 
@@ -177,7 +175,7 @@
   .d-toast-layout-alternate__icon {
     display: flex;
     flex: 0 auto;
-    margin-right: var(--dt-space-300);
+    margin-inline-end: var(--dt-spacing-50);
     color: var(--toast-alternate-color-icon);
   }
 
@@ -199,32 +197,30 @@
   display: flex;
   flex: 1 auto;
   flex-direction: column;
-  margin-right: var(--dt-space-500);
+  margin-inline-end: var(--dt-spacing-200);
   color: var(--dt-color-foreground-primary);
   font-weight: var(--dt-font-weight-normal);
   font-size: var(--dt-font-size-200);
 }
 
 .d-toast-alternate__dialog {
+  --notice-actions-button-offset: var(--dt-spacing-400);
+
   position: relative;
   align-items: center;
-  width: var(--dt-size-100-percent);
-
-
-  .d-notice__actions button:first-child {
-    margin-left: var(--dt-space-600); // 32
-  }
+  inline-size: var(--dt-layout-100-percent);
 }
 
 .d-toast-alternate__header {
   display: flex;
-  gap: var(--dt-space-200);
+  gap: var(--dt-spacing-25);
   align-items: center;
   color: var(--toast-alternate-font-color);
 }
 
-//  $$  ERROR
+//  $$  CRITICAL / ERROR
 //  ----------------------------------------------------------------------------
+.d-toast-alternate--critical,
 .d-toast-alternate--error {
   --toast-alternate-border-color: var(--dt-color-border-critical-subtle);
 }
@@ -236,10 +232,11 @@
   --toast-alternate-border-color: var(--dt-color-border-subtle);
 }
 
-//  $$  SUCCESS
+//  $$  POSITIVE / SUCCESS
 //  ----------------------------------------------------------------------------
+.d-toast-alternate--positive,
 .d-toast-alternate--success {
-  --toast-alternate-border-color: var(--dt-color-border-success-subtle);
+  --toast-alternate-border-color: var(--dt-color-border-positive-subtle);
 }
 
 //  $$  GRADIENT
@@ -253,4 +250,5 @@
 //  ----------------------------------------------------------------------------
 .d-toast-alternate--warning {
   --toast-alternate-border-color: var(--dt-color-border-warning-subtle);
+}
 }

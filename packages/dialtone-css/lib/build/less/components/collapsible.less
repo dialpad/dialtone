@@ -12,21 +12,21 @@
 //  ============================================================================
 //  $   BASE STYLE
 //  ----------------------------------------------------------------------------
+@layer dialtone.components {
 .d-collapsible__icon {
-  --icon-base-scale: var(--dt-size-400);
+  --icon-base-scale: var(--dt-spacing-100);
   --icon-size-300: calc(var(--icon-base-scale) * 2.25);
   --icon-size: var(--icon-size-300);
 
   flex: none;
   flex-shrink: 0;
-  width: var(--icon-size);
-  height: var(--icon-size);
-  margin-right: var(--dt-space-400);
+  inline-size: var(--icon-size);
+  block-size: var(--icon-size);
   fill: currentColor;
 }
 
 .d-collapsible__anchor-text {
-  margin-right: auto;
+  margin-inline-end: auto;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -35,5 +35,6 @@
 .d-collapsible__enter-active,
 .d-collapsible__leave-active {
   overflow: hidden;
-  transition: height var(--td300) var(--ttf-out-quint);
+  transition: block-size var(--td300) var(--ttf-out-quint);
+}
 }

@@ -7,7 +7,7 @@ import StyleDictionary from 'style-dictionary';
 import { promises, readFileSync } from 'fs';
 import { kebabCaseToPascalCase } from '../../common/utils/client.mjs';
 
-import { registerDialtoneTransforms } from './dialtone-transforms.js';
+import { registerDialtoneTransforms, registerDialtonePreprocessors, registerRelativeColorWrap, isMaterialNamespaceRef, isFontSizeToken, isLineHeightToken, isPercentToken, isNegativeToken } from './dialtone-transforms.js';
 import { buildDocs } from './build-docs.js';
 const Root = JSON.parse(readFileSync('./tokens/root.json', 'utf8'));
 const BASE_FONT_SIZE = Root.font.size.root.value;
@@ -15,6 +15,8 @@ const BASE_FONT_SIZE = Root.font.size.root.value;
 register(StyleDictionary);
 
 registerDialtoneTransforms(StyleDictionary);
+registerDialtonePreprocessors(StyleDictionary);
+registerRelativeColorWrap(StyleDictionary);
 
 StyleDictionary.registerAction({
   name: 'buildDocJson',
@@ -28,7 +30,7 @@ StyleDictionary.registerAction({
 
 StyleDictionary.registerTransformGroup({
   name: 'custom/css/tokens-studio',
-  transforms: [...getTransforms({ platform: 'css' }), 'name/kebab', 'dt/size/pxToRem', 'dt/space/pxToRem'].filter(transform => !['name/camel', 'ts/size/px', 'ts/typography/css/fontFamily'].includes(transform)),
+  transforms: [...getTransforms({ platform: 'css' }), 'name/kebab', 'dt/size/pxToRem', 'dt/space/pxToRem', 'dt/lineHeight/percentToDecimal', 'dt/avatar/anchorHue'].filter(transform => !['name/camel', 'ts/size/px', 'ts/typography/css/fontFamily'].includes(transform)),
 });
 
 export async function run () {
@@ -67,7 +69,7 @@ export async function run () {
 
     return {
       source,
-      preprocessors: ['tokens-studio'],
+      preprocessors: ['tokens-studio', 'dt/relative-color/extract'],
       expand: {
         typesMap: expandTypesMap,
       },
@@ -87,6 +89,7 @@ export async function run () {
               if (token.$extensions?.['studio.tokens']?.modify || (token.$extensions?.['studio.tokens']?.originalType === 'boxShadow' && token.type === 'color')) {
                 return false;
               }
+              if (isMaterialNamespaceRef(token)) return false;
               return true;
             },
           },
@@ -151,21 +154,54 @@ export async function run () {
               format: 'android/resources',
               resourceType: 'color',
               filter: function (token) {
-                if (token.value.startsWith('linear-gradient')) return false;
+                if (typeof token.value === 'string' && token.value.startsWith('linear-gradient')) return false;
                 if (token.path.includes('shadow')) return false;
                 return ['color'].includes(token.type) && token.isSource;
               },
             },
-            {
-              destination: 'dimens.xml',
+          ],
+        },
+        // Separate processor for android xml dimensions so we only get one dimens-base.xml file and
+        // one dimens-theme.xml file.
+        android_xml_dimens: {
+          transforms: [
+            'attribute/cti',
+            'name/snake',
+            'dt/android/xml/size/resolveMath',
+            'dt/android/xml/size/pxToDp',
+          ],
+          prefix: 'dt',
+          theme: themeName,
+          buildPath: 'dist/android/res/values/',
+          files: [
+            ...(themeName === 'base-light' ? [{
+              destination: 'dimens-base.xml',
               format: 'android/resources',
               resourceType: 'dimen',
               filter: function (token) {
-                if (token.value.startsWith('linear-gradient')) return false;
+                if (typeof token.value === 'string' && token.value.startsWith('linear-gradient')) return false;
                 if (token.path.includes('shadow')) return false;
+                if (isFontSizeToken(token)) return false;
+                if (isLineHeightToken(token)) return false;
+                if (isPercentToken(token)) return false;
+                if (isNegativeToken(token)) return false;
                 return ['dimension'].includes(token.type) && token.isSource;
               },
-            },
+            }] : []),
+            ...(themeName === 'dp-light' ? [{
+              destination: 'dimens-theme.xml',
+              format: 'android/resources',
+              resourceType: 'dimen',
+              filter: function (token) {
+                if (typeof token.value === 'string' && token.value.startsWith('linear-gradient')) return false;
+                if (token.path.includes('shadow')) return false;
+                if (isFontSizeToken(token)) return false;
+                if (isLineHeightToken(token)) return false;
+                if (isPercentToken(token)) return false;
+                if (isNegativeToken(token)) return false;
+                return ['dimension'].includes(token.type) && token.isSource;
+              },
+            }] : []),
           ],
         },
         android_compose: {
@@ -174,7 +210,7 @@ export async function run () {
             'dt/android/compose/fonts/transformToStack',
             'dt/android/compose/fonts/weight',
             'dt/android/compose/lineHeight/percentToDecimal',
-            'dt/android/compose/opacity/percentToFloat',
+            'dt/android/compose/number/toFloat',
             'dt/android/compose/size/pxToDp',
             'dt/android/compose/size/pxToSp',
             'dt/android/compose/color',
@@ -198,8 +234,10 @@ export async function run () {
               },
 
               filter: function (token) {
-                if (token.value.startsWith('linear-gradient')) return false;
+                if (typeof token.value === 'string' && token.value.startsWith('linear-gradient')) return false;
                 if (token.path.includes('shadow')) return false;
+                if (isPercentToken(token)) return false;
+                if (isNegativeToken(token)) return false;
                 return token.isSource;
               },
             },
@@ -229,7 +267,7 @@ export async function run () {
                 className: `DialtoneTokens${kebabCaseToPascalCase(themeName)}`,
               },
               filter: function (token) {
-                if (token.value.startsWith('linear-gradient')) return false;
+                if (typeof token.value === 'string' && token.value.startsWith('linear-gradient')) return false;
                 return token.isSource;
               },
             },

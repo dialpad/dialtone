@@ -16,101 +16,163 @@ The below usage instructions are for the combined package.
 npm install @dialpad/dialtone @dialpad/i18n
 ```
 
-### Import packages:
+---
 
-#### Without theming
-
-If you don't care about theming and just want to use Dialtone with the default light theme:
-
-- CSS
-
-```css
-@import "@dialpad/dialtone/css-default-theme";
-```
-
-- JavaScript
+### Import CSS
 
 ```js
-import "@dialpad/dialtone/css-default-theme";
+import '@dialpad/dialtone/css';
 ```
 
-#### With theming
+#### No-Layers Build
 
-If you want to use theming, import from the below path. This file does not include design tokens so it is required to also set a theme to apply design tokens to the root element.
-
-- CSS
-
-```css
-@import "@dialpad/dialtone/css";
-```
-
-- JavaScript
+If your project cannot use CSS Cascade Layers, import the no-layers variant. You will likely need to use the no-layers build if you are upgrading from Dialtone <=9, unless you migrate your application CSS to support layers. See the [CSS Cascade Layers migration guide](https://dialtone.dialpad.com/guides/migration/css-cascade-layers/) for more details.
 
 ```js
-import "@dialpad/dialtone/css";
+import '@dialpad/dialtone/css/no-layers';
 ```
 
-##### Set theme via setTheme() JavaScript function (preferred)
+---
 
-Import the theme you want to use and set it via the `setTheme` function:
+### Theming
+
+Dialtone has four theming dimensions: **mode** (light/dark), **brand** (the color palette), **material** (the neutral ramp), and **contrast** (default/high). Each switches at runtime via `@dialpad/dialtone/themes/config`. See the [Theme and Mode guide](https://dialtone.dialpad.com/guides/theme-and-mode/) for the full API.
+
+#### Quick Start
+
+**Install:**
+
+```shell
+npm install @dialpad/dialtone
+```
+
+**Initialize (main.js or App.vue):**
+
+```js
+import { initDialtoneTheme } from '@dialpad/dialtone/themes/config';
+import Dp from '@dialpad/dialtone/themes/dp';
+
+initDialtoneTheme(Dp, 'light');
+```
+
+Done. Your app now has theming.
+
+---
+
+##### Basic Usage
+
+```js
+import {
+  setMode,
+  setBrand,
+  setMaterial,
+  setContrast,
+} from '@dialpad/dialtone/themes/config';
+import Tmo from '@dialpad/dialtone/themes/tmo';
+import HighContrast from '@dialpad/dialtone/themes/high-contrast';
+
+setMode('dark');           // toggles data-dt-mode
+setBrand(Tmo);             // injects brand CSS, sets data-dt-brand
+setMaterial('steel');      // toggles data-dt-material
+setContrast(HighContrast); // injects contrast CSS, sets data-dt-contrast
+setContrast(null);         // remove contrast override
+```
+
+`setMode` and `setMaterial` toggle attributes against pre-bundled CSS — no injection. `setBrand` and `setContrast` inject per-theme override CSS.
+
+---
+
+##### Brand-locked materials
+
+Most brands declare a paired material via the `shell.base.material` token in their token JSON. `setBrand` auto-applies the locked material in the same paint frame. Free-choice brands (`dp`, `tmo`, `prota-deuter`, `trita`) keep material independent.
+
+```js
+import { getBrandMaterial, hasBrandMaterialLock } from '@dialpad/dialtone/themes/config';
+import Botany from '@dialpad/dialtone/themes/botany';
+
+getBrandMaterial(Botany);     // 'sandstone'
+hasBrandMaterialLock(Botany); // true
+```
+
+Use these getters to drive picker UI (disable material options on locked brands).
+
+---
+
+##### Available Themes
+
+50 themes total. Pass theme modules to `initDialtoneTheme()` or `setBrand()`.
+
+**Base:** dp (Dialpad — every other theme layers on top of it) · **Partner:** tmo
+
+**Standard:** aegean, alpine, arctic, aurora, autumn, blue-hour, botany, brick, buttercream, cactus-bloom, cayenne, cedar-grove, cobalt, copper, coral-reef, dragonfruit, eucalyptus, fjord, high-desert, inkberry, kiln, lavender, marigold, melon, mulberry, mushroom, nightshade, paprika, peach-blossom, plum, poppy-field, raincloud, rhubarb, rust-harbor, sea-glow, seashell, solstice, storm, sunflower, tropical-night, verdant-haze, wildflower, wineberry, winter-gold, woodland
+
+**Accessibility:** prota-deuter, trita
+
+**Contrast:** high-contrast
+
+**Materials** (string names, no module imports): sandstone, steel, graphite, iron, amethyst, jade
+
+```js
+import ThemeName from '@dialpad/dialtone/themes/theme-name';
+```
+
+---
+
+##### Advanced
+
+**Shadow DOM (Web Components):**
+
+Pass host element as third parameter.
+
+```js
+initDialtoneTheme(Dp, 'light', this);
+```
+
+**CSS only (no JS):**
+
+```css
+@import "@dialpad/dialtone-tokens/layered/tokens-core.css";
+@import "@dialpad/dialtone-tokens/layered/tokens-base-colors.css";
+@import "@dialpad/dialtone-tokens/layered/tokens-dp-colors.css";
+```
+
+Then set attributes:
+
+```html
+<html data-dt-mode="light" data-dt-brand="dp" data-dt-material="sandstone" data-dt-contrast="default">
+```
+
+**Mode sections:**
+
+See [Mode Island component](https://dialtone.dialpad.com/components/mode-island.html) docs.
+
+---
+
+##### Legacy Theming System (Backward Compatible)
+
+The original `setTheme()` API remains supported for existing projects. New projects should use the layered system above for smaller bundle sizes and finer-grained switching across all four dimensions.
 
 ```js
 import { setTheme } from '@dialpad/dialtone/themes/config';
 import DpLight from '@dialpad/dialtone/themes/dp-light';
-setTheme(DpLight);
+import DpDark from '@dialpad/dialtone/themes/dp-dark';
+
+setTheme(DpLight);   // auto-detected as legacy
+setTheme(DpLight, document.querySelector('#my-shadow-root-host')); // Shadow DOM support
 ```
 
-Possible themes are as follows:
-
-- DpLight - Dialpad Light
-- DpDark - Dialpad Dark
-- TmoLight - T-Mobile Light
-- TmoDark - T-Mobile Dark
-- ExpressiveLight - Marketing Light
-- ExpressiveDark - Marketing Dark
-- ExpressiveSmLight - Marketing Small Light
-- ExpressiveSmDark - Marketing Small Dark
-
-There is an optional second parameter to `setTheme` that allows you to set the theme on a specific element. This is useful in the case of a shadow DOM
-when you want to apply the theme to the root element of the shadow DOM rather than the document root. If you do not set this parameter the theme will be applied to the document root.
-
-```js
-import { setTheme } from '@dialpad/dialtone/themes/config';
-import DpLight from '@dialpad/dialtone/themes/dp-light';
-setTheme(DpLight, document.querySelector('#my-shadow-root-host'));
-```
-
-##### Set theme manually by importing files
-
-You may want to use this method if you are unable to use JavaScript.
-
-You need to import two tokens files in order to apply a theme. A base tokens files, which is either light or dark, and
-a semantic brand tokens file which is named after a brand and theme 'tokens-dp-light', 'tokens-dp-dark', 'tokens-tmo-light', ...
-
-- CSS
-
-```css
-@import "@dialpad/dialtone/tokens/tokens-base-light.css" // Base light theme
-@import "@dialpad/dialtone/tokens/tokens-dp-light.css" // Dialpad light brand
-```
-
-- JavaScript
-
-```js
-import "@dialpad/dialtone/tokens/tokens-base-light.css" // Base light theme
-import "@dialpad/dialtone/tokens/tokens-dp-light.css" // Dialpad light brand
-```
+**Legacy themes:** `DpLight`, `DpDark`, `TmoLight`, `TmoDark` — each ships the complete token set (~1256KB per theme), versus the layered system's small per-dimension overrides.
 
 #### Dialtone icons
 
 ```js
 // Named import
-import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue3';
-import { DtIllustrationBlankSpace } from '@dialpad/dialtone-icons/vue3';
+import { DtIconArrowUp } from '@dialpad/dialtone-icons/vue';
+import { DtIllustrationBlankSpace } from '@dialpad/dialtone-icons/vue';
 
 // Default import (Preferred if using webpack as it is tree-shakeable by default)
-import DtIconArrowUp from '@dialpad/dialtone-icons/vue3/arrow-up';
-import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue3/blank-space';
+import DtIconArrowUp from '@dialpad/dialtone-icons/vue/arrow-up';
+import DtIllustrationBlankSpace from '@dialpad/dialtone-icons/vue/blank-space';
 ```
 
 #### Dialtone Vue components
@@ -512,3 +574,5 @@ These will generate a JSON and HTML report in the `coverage` directory.
 
 The coverage thresholds are defined in the `vitest.config.ts` file.
 When submitting a PR the CI will run the tests with coverage and fail if the coverage is below the thresholds.
+
+<!-- test -->

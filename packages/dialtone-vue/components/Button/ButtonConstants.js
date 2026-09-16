@@ -1,0 +1,105 @@
+export const BUTTON_UNSTYLED_CLASS = 'd-btn--unstyled';
+
+export const BUTTON_SIZE_MODIFIERS = {
+  // Numeric (preferred)
+  100: 'd-btn--xs',
+  200: 'd-btn--sm',
+  300: '',
+  400: 'd-btn--lg',
+  500: 'd-btn--xl',
+  // T-shirt aliases (deprecated)
+  xs: 'd-btn--xs',
+  sm: 'd-btn--sm',
+  md: '',
+  lg: 'd-btn--lg',
+  xl: 'd-btn--xl',
+};
+
+export const BUTTON_KIND_MODIFIERS = {
+  default: '',
+  muted: 'd-btn--muted',
+  critical: 'd-btn--critical',
+  positive: 'd-btn--positive',
+  inverted: 'd-btn--inverted',
+  unstyled: 'd-btn--unstyled',
+};
+
+export const BUTTON_IMPORTANCE_MODIFIERS = {
+  clear: '',
+  outlined: 'd-btn--outlined',
+  primary: 'd-btn--primary',
+};
+
+export const BUTTON_TYPES = ['submit', 'reset', 'button'];
+
+export const ICON_POSITION_MODIFIERS = {
+  start: 'd-btn__icon--left',
+  end: 'd-btn__icon--right',
+  blockStart: 'd-btn__icon--top',
+  blockEnd: 'd-btn__icon--bottom',
+  left: 'd-btn__icon--left',
+  right: 'd-btn__icon--right',
+  top: 'd-btn__icon--top',
+  bottom: 'd-btn__icon--bottom',
+};
+
+export const INVALID_COMBINATION = [
+  {
+    circle: true,
+    kind: 'default',
+    importance: 'primary',
+    message: _invalidCombinationMessage(true, 'default', 'primary'),
+  },
+  {
+    circle: true,
+    kind: 'critical',
+    importance: 'outlined',
+    message: _invalidCombinationMessage(true, 'critical', 'outlined'),
+  },
+  {
+    circle: true,
+    kind: 'muted',
+    importance: 'primary',
+    message: _invalidCombinationMessage(true, 'muted', 'primary'),
+  },
+  {
+    circle: false,
+    kind: 'muted',
+    importance: 'primary',
+    message: _invalidCombinationMessage(false, 'muted', 'primary'),
+  },
+];
+
+export const BUTTON_ICON_SIZES = {
+  // Numeric (preferred)
+  100: '200',
+  200: '200',
+  300: '300',
+  400: '400',
+  500: '500',
+  // T-shirt aliases (deprecated)
+  xs: '200',
+  sm: '200',
+  md: '300',
+  lg: '400',
+  xl: '500',
+};
+
+function _invalidCombinationMessage (circle, kind, importance) {
+  return `You cannot have a ${circle ? 'circle ' : ''}button \
+with kind: ${kind} and importance: ${importance} as it \
+does not exist in our design system. \
+See https://dialtone.dialpad.com/components/button.html for a \
+list of available button styles`;
+}
+
+export default {
+  BUTTON_SIZE_MODIFIERS,
+  BUTTON_KIND_MODIFIERS,
+  BUTTON_IMPORTANCE_MODIFIERS,
+  BUTTON_TYPES,
+  BUTTON_UNSTYLED_CLASS,
+  ICON_POSITION_MODIFIERS,
+  INVALID_COMBINATION,
+  BUTTON_ICON_SIZES,
+};

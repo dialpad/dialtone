@@ -1,27 +1,21 @@
 ---
 title: Order
 description: Utilities for controlling an element's order within a parent container.
+keywords: ["flexbox","flex order","reorder","sort"]
 ---
 
-<FlexStackNotice />
+> [!WARNING] Use DtStack in favor of Flex CSS Utilities
+> Use the [DtStack](/components/stack) component for most Flex-based layout implementations. View [Migrating from Flex CSS Utilities to DtStack](/guides/migration/flex-to-stack/) for more details.
 
 ## Example
 
 By default, items are ordered by their position in the DOM. To re-order an element, use `d-order{#}`.
 
-<code-well-header>
-  <dt-stack direction="row" align="center" justify="between" class="d-w100p d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-p16 d-w64 d-h64 d-bgc-bold-opaque d-bar4 d-order-first">3</dt-stack>
-  </dt-stack>
-</code-well-header>
-
-```html
-<dt-stack align="center" justify="between">
-  <div>1</div>
-  <div>2</div>
-  <div class="d-order-first">3</div>
+```vue demo
+<dt-stack direction="row" gap="200" align="center" justify="between" class="d-w100p d-bar-400 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-moderate-opaque d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-p-200 d-size-100 d-bgc-bold-opaque d-bar-300 d-order-first">3</dt-stack>
 </dt-stack>
 ```
 

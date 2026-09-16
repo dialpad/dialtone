@@ -1,16 +1,18 @@
 {
   "name": "@dialpad/dialtone-tokens",
-  "version": "1.47.4",
+  "version": "2.0.0-next.8",
   "description": "Design tokens for Dialtone.",
   "type": "module",
   "scripts": {
     "sync:tokens-to-figma": "tsx sync-scripts/sync_tokens_to_figma.ts",
-    "sync:figma-to-tokens": "tsx sync-scripts/sync_figma_to_tokens.ts"
+    "sync:figma-to-tokens": "tsx sync-scripts/sync_figma_to_tokens.ts",
+    "test": "pnpm exec vitest run"
   },
   "files": [
     "dist"
   ],
   "exports": {
+    "./no-layers/*.css": "./dist/css/no-layers/*.css",
     "./*.css": "./dist/css/*.css",
     "./*.less": "./dist/less/*.less",
     "./postcss/*": {
@@ -41,6 +43,7 @@
     "@typescript-eslint/eslint-plugin": "^8.44.1",
     "@typescript-eslint/parser": "^8.44.1",
     "axios": "^1.12.2",
+    "culori": "4.0.2",
     "dotenv": "^16.3.1",
     "maven": "^5.0.0",
     "postcss": "8.4.39",

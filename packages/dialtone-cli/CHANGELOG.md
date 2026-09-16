@@ -1,3 +1,10 @@
+# [1.1.0-next.1](https://github.com/dialpad/dialtone/compare/dialtone-cli/v1.0.0...dialtone-cli/v1.1.0-next.1) (2026-07-03)
+
+
+### Features
+
+* **Dialtone Vue:** DLT-3225 migrate component size props to numeric ordinal scale ([#1157](https://github.com/dialpad/dialtone/issues/1157)) ([725bd41](https://github.com/dialpad/dialtone/commit/725bd411b842489634c9ba79098144bee166c2da))
+
 # 1.0.0 (2026-06-16)
 
 

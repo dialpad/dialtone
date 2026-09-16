@@ -1,34 +1,22 @@
 ---
 title: Motion Text
-description: A versatile, accessible text animation component with multiple animation modes, full accessibility support, and comprehensive customization options.
-status: ready
+description: Animated text for reveal, shimmer, and loading moments.
+keywords: ["animated text", "typing", "loading text", "animation", "DtMotionText", "dt-motion-text"]
+status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-motion-text--default
 ---
 
-<code-well-header class="d-d-block">
-  <dt-stack direction="row" align="center" class="d-hmn128 d-p24">
-    <dt-motion-text
-      ref="example-motion-text"
-      text="Welcome to Dialtone Motion Text"
-      animation-mode="gradient-in"
-      speed="md"
-      :auto-start="true"
-      class="d-headline--lg"
-    />
-  </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-motion-text
-  text="Welcome to Dialtone Motion Text"
-  animation-mode="gradient-in"
-  speed="md"
-  class="d-headline--lg"
-/>
-'
-/>
+```vue demo
+<dt-text kind="headline" :size="600">
+  <dt-motion-text
+    text="Welcome to Dialtone Motion Text"
+    animation-mode="shimmer"
+    :auto-start="true"
+    loop
+  />
+</dt-text>
+```
 
 ## Usage
 
@@ -38,129 +26,131 @@ The Motion Text component provides beautiful text animations with zero configura
 
 The component supports six different animation modes:
 
-- **gradient-in**: Characters appear with a colorful gradient highlight reveal
-- **fade-in**: Smooth opacity-based character reveal
-- **slide-in**: Words slide up from below
-- **gradient-sweep**: Static text with an animated gradient sweep (loops automatically)
-- **shimmer**: Static text with an animated shimmer effect (loops automatically)
-- **none**: Instant text display without animation
-
-<code-well-header class="d-d-block">
-  <dt-stack gap="400" class="d-p24">
-    <dt-motion-text
-      text="Gradient In Animation"
-      animation-mode="gradient-in"
-      speed="md"
-      :auto-start="true"
-      class="d-headline--md"
-    />
+```vue demo
+<dt-stack gap="200" align="center" class="d-hmn84">
+  <dt-stack direction="row" gap="100">
+    <dt-button
+      v-for="mode in animationModes"
+      :key="mode"
+      :size="100"
+      kind="muted"
+      importance="outlined"
+      @click="playMode(mode)"
+    >
+      {{ mode }}
+    </dt-button>
   </dt-stack>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
-<dt-motion-text
-  text="Gradient In Animation"
-  animation-mode="gradient-in"
-  speed="md"
-/>
-'
-/>
+  <dt-text kind="headline" :size="600">
+    <dt-motion-text
+      ref="animDemoRef"
+      text="Welcome to Dialtone Motion Text"
+      :animation-mode="activeMode"
+      :speed="300"
+    />
+  </dt-text>
+</dt-stack>
+<!-- @code -->
+<dt-text kind="headline" :size="600">
+  <dt-motion-text
+    text="Welcome to Dialtone Motion Text"
+    :animation-mode="{mode}"
+  />
+</dt-text>
+```
 
 ### Speed Control
 
-Use t-shirt sizing (sm, md, lg) to control animation speed:
-
-- **sm**: Fast animation
-- **md**: Medium animation (default)
-- **lg**: Slow animation
-
-<code-example-tabs
-vueCode='
-<dt-motion-text
-  text="Fast animation"
-  animation-mode="fade-in"
-  speed="sm"
-/>
-
-<dt-motion-text
-  text="Medium animation"
-  animation-mode="fade-in"
-  speed="md"
-/>
-
-<dt-motion-text
-  text="Slow animation"
-  animation-mode="fade-in"
-  speed="lg"
-/>
-'
-/>
+```vue demo
+<dt-stack gap="200">
+  <dt-segmented-control :size="100" v-model="selected" aria-label="Speed Control">
+    <dt-segmented-control-item  v-dt-tooltip="'Near-instant'" value="100" :selected="selected === '100'">100</dt-segmented-control-item>
+    <dt-segmented-control-item  v-dt-tooltip="'Fast'" value="200" :selected="selected === '200'">200</dt-segmented-control-item>
+    <dt-segmented-control-item  v-dt-tooltip="'Medium (default)'" value="300" :selected="selected === '300'">300</dt-segmented-control-item>
+    <dt-segmented-control-item  v-dt-tooltip="'Slow'" value="400" :selected="selected === '400'">400</dt-segmented-control-item>
+    <dt-segmented-control-item  v-dt-tooltip="'Very slow'" value="500" :selected="selected === '500'">500</dt-segmented-control-item>
+  </dt-segmented-control>
+  <dt-text kind="headline" :size="600">
+    <dt-motion-text
+      text="Welcome to Dialtone Motion Text"
+      animation-mode="shimmer"
+      :speed="Number(selected)"
+      :auto-start="true"
+      loop
+    />
+  </dt-text>
+</dt-stack>
+<!-- @code -->
+<dt-text kind="headline" :size="600">
+  <dt-motion-text
+    text="Welcome to Dialtone Motion Text"
+    animation-mode="shimmer"
+    :speed="{speed}"
+    :auto-start="true"
+    loop
+  />
+</dt-text>
+```
 
 ### Manual Control
 
 Take full control of the animation lifecycle:
 
-```vue
-<template>
-  <div>
+```vue demo
+<dt-stack gap="200" align="center">
+  <dt-stack direction="row" gap="100">
+    <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.start()">Start</dt-button>
+    <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.pause()">Pause</dt-button>
+    <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.resume()">Resume</dt-button>
+    <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.reset()">Reset</dt-button>
+    <dt-button :size="100" kind="muted" importance="outlined" @click="manualDemoRef.skipToEnd()">Skip to End</dt-button>
+  </dt-stack>
+  <dt-text kind="headline" :size="600">
     <dt-motion-text
-      ref="textRef"
-      text="Click to animate"
-      :auto-start="false"
-      @complete="onComplete"
+      ref="manualDemoRef"
+      text="Welcome to Dialtone Motion Text"
+      animation-mode="shimmer"
+      :auto-start="true"
+      loop
     />
-
-    <dt-button @click="$refs.textRef.start()">Start</dt-button>
-    <dt-button @click="$refs.textRef.pause()">Pause</dt-button>
-    <dt-button @click="$refs.textRef.resume()">Resume</dt-button>
-    <dt-button @click="$refs.textRef.reset()">Reset</dt-button>
-    <dt-button @click="$refs.textRef.skipToEnd()">Skip to End</dt-button>
-  </div>
-</template>
-
-<script>
-export default {
-  methods: {
-    onComplete() {
-      console.log('Animation completed!');
-    }
-  }
-}
-</script>
+  </dt-text>
+</dt-stack>
+<!-- @code -->
+<dt-button @click="$refs.textRef.start()">Start</dt-button>
+<dt-button @click="$refs.textRef.pause()">Pause</dt-button>
+<dt-button @click="$refs.textRef.resume()">Resume</dt-button>
+<dt-button @click="$refs.textRef.reset()">Reset</dt-button>
+<dt-button @click="$refs.textRef.skipToEnd()">Skip to End</dt-button>
+<dt-motion-text
+  ref="textRef"
+  text="Welcome to Dialtone Motion Text"
+  animation-mode="shimmer"
+  :auto-start="false"
+/>
 ```
 
 ### Looping Animation
 
 Perfect for attention-grabbing headers or hero sections:
 
-<code-example-tabs
-vueCode='
+```vue code-only
 <dt-motion-text
   text="Continuous animation"
   animation-mode="slide-in"
   :loop="true"
-  speed="sm"
+  :speed="200"
 />
-'
-/>
+```
 
 ### Using Slots
 
 You can also use the default slot instead of the text prop:
 
-<code-example-tabs
-vueCode='
+```vue code-only
 <dt-motion-text animation-mode="fade-in">
   <span>Animated </span>
   <strong>text</strong>
 </dt-motion-text>
-'
-/>
-
-## Vue API
-
-<component-vue-api component-name="motiontext" />
+```
 
 ## Accessibility
 
@@ -198,8 +188,34 @@ The component automatically includes proper ARIA attributes:
 
 ## Best Practices
 
-1. **Choose the right speed**: Use `sm` for short text, `lg` for longer passages
+1. **Choose the right speed**: Use `200` for short text, `400` for longer passages
 2. **Don't overuse**: Too many animated elements can be distracting
 3. **Consider context**: Hero sections work well with `gradient-in`, while body text might be better with `fade-in`
 4. **Test with reduced motion**: Always ensure your UI works with animations disabled
 5. **Provide screen reader text**: If using emojis or special characters, always include alternative text
+
+<script setup>
+import { ref, nextTick } from 'vue';
+
+const animDemoRef = ref(null);
+const manualDemoRef = ref(null);
+const activeMode = ref('none');
+const selected = ref('300');
+
+const animationModes = ['gradient-in', 'fade-in', 'slide-in', 'gradient-sweep', 'shimmer'];
+
+async function playMode (mode) {
+  // Force re-render even when clicking the same mode twice
+  activeMode.value = '';
+  await nextTick();
+  activeMode.value = mode;
+  await nextTick();
+  if (!animDemoRef.value) return;
+  animDemoRef.value.reset();
+  animDemoRef.value.start();
+}
+</script>
+
+## Vue API
+
+<component-vue-api component-name="motiontext" />

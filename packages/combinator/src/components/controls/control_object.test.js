@@ -1,6 +1,6 @@
 import DtcControlObject from './control_object.vue';
 
-import { assert } from 'chai';
+import { expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 
 const itemKeySelector = '[data-qa=dtc-control-object-item-key]';
@@ -35,13 +35,13 @@ describe('control_object.vue test', function () {
     itemValueInputWrappers = itemValueWrappers.map(itemWrapper => itemWrapper.find(itemValueInputSelector));
   };
 
-  before(function () {
+  beforeAll(function () {
     _mountWrapper();
   });
 
   describe('When mounted', function () {
     it('Should render successfully', function () {
-      assert.isTrue(wrapper.exists());
+      expect(wrapper.exists()).toBe(true);
     });
   });
 
@@ -54,8 +54,8 @@ describe('control_object.vue test', function () {
     });
 
     it('Should generate a key control and a value control for each object entry', function () {
-      assert.equal(Object.keys(inputValues).length, itemKeyWrappers.length);
-      assert.equal(Object.values(inputValues).length, itemValueWrappers.length);
+      expect(Object.keys(inputValues).length).toBe(itemKeyWrappers.length);
+      expect(Object.values(inputValues).length).toBe(itemValueWrappers.length);
     });
 
     // Checking if each key-value pair passed to the component has native inputs with a matching values
@@ -66,14 +66,14 @@ describe('control_object.vue test', function () {
             return inputWrapper.element.value;
           });
 
-          assert.isTrue(itemKeys.includes(inputKey));
+          expect(itemKeys.includes(inputKey)).toBe(true);
         });
 
         it(`Should have a matching native input for value '${inputValue}'`, function () {
           const itemValues = itemValueInputWrappers.map(inputWrapper => {
             return inputWrapper.element.value;
           });
-          assert.isTrue(itemValues.includes(inputValue.toString()));
+          expect(itemValues.includes(inputValue.toString())).toBe(true);
         });
       });
     });

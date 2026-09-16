@@ -1,0 +1,125 @@
+@layer dialtone.components {
+.d-text-list {
+  --text-list-gap: var(--dt-spacing-0);
+  --text-list-indent: var(--dt-spacing-250);
+  --text-list-marker-unordered: disc;
+  --text-list-marker-ordered: decimal;
+  --text-list-marker-color: var(--dt-color-foreground-tertiary);
+
+  margin: 0;
+  padding-inline-start: var(--text-list-indent);
+  list-style-type: var(--text-list-marker-unordered);
+
+  & & {
+    --text-list-marker-unordered: circle;
+    --text-list-marker-ordered: lower-alpha;
+  }
+
+  & & & {
+    --text-list-marker-unordered: square;
+    --text-list-marker-ordered: lower-roman;
+  }
+
+  &--ordered {
+    list-style-type: var(--text-list-marker-ordered);
+  }
+
+  &--marker-none {
+    padding-inline-start: 0;
+    list-style-type: none;
+  }
+
+  &--marker-disc        { list-style-type: disc; }
+  &--marker-circle      { list-style-type: circle; }
+  &--marker-square      { list-style-type: square; }
+  &--marker-decimal     { list-style-type: decimal; }
+  &--marker-lower-alpha { list-style-type: lower-alpha; }
+  &--marker-upper-alpha { list-style-type: upper-alpha; }
+  &--marker-lower-roman { list-style-type: lower-roman; }
+  &--marker-upper-roman { list-style-type: upper-roman; }
+
+  // Tones mapping 1:1 onto --dt-color-foreground-* tokens. The two neutral
+  // tones map onto --dt-color-neutral-* and are declared separately below.
+  each(primary secondary tertiary muted disabled placeholder critical critical-strong positive positive-strong warning info info-strong, {
+    &--marker-tone-@{value},
+    &__item--marker-tone-@{value} {
+      --text-list-marker-color: ~"var(--dt-color-foreground-@{value})";
+    }
+  });
+
+  &--marker-tone-neutral-black,
+  &__item--marker-tone-neutral-black { --text-list-marker-color: var(--dt-color-neutral-black); }
+
+  &--marker-tone-neutral-white,
+  &__item--marker-tone-neutral-white { --text-list-marker-color: var(--dt-color-neutral-white); }
+
+  // Stop outside both range() sequences: 1 (not a multiple of 25)
+  &--gap-1 { --text-list-gap: var(--dt-spacing-1); }
+
+  each(range(0, 200, 25), {
+    &--gap-@{value} {
+      --text-list-gap: ~"var(--dt-spacing-@{value})";
+    }
+  });
+
+  each(range(250, 400, 50), {
+    &--gap-@{value} {
+      --text-list-gap: ~"var(--dt-spacing-@{value})";
+    }
+  });
+
+  > :where(li)::marker {
+    color: var(--text-list-marker-color);
+  }
+
+  > :where(li) {
+    list-style: inherit;
+  }
+
+  // Space only BETWEEN items — no leading/trailing margins, no first/last
+  // exceptions, no reliance on margin collapsing.
+  > :where(li + li) {
+    margin-block-start: var(--text-list-gap);
+  }
+
+  :where(&__item-content) > & {
+    margin-block-start: var(--text-list-gap);
+  }
+
+  :where(&__item--custom-marker) {
+    display: flex;
+    gap: var(--dt-spacing-100);
+    // Baseline-align the marker with the content's FIRST line at layout time —
+    // any nested typography (DtText size/density on a child) aligns without the
+    // marker knowing its metrics. This is how native ::marker boxes behave.
+    align-items: baseline;
+    list-style-type: none;
+  }
+
+  :where(&:not(&--marker-none) > &__item--custom-marker) {
+    margin-inline-start: calc(var(--text-list-indent) * -1);
+  }
+
+  &__item-marker {
+    display: inline-flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-list-marker-color);
+    min-inline-size: var(--text-list-indent);
+    // Center marker content within one line box anchored on the shared baseline.
+    block-size: 1lh;
+
+    // Zero-width strut: gives the span a real text baseline so flex baseline
+    // alignment works even when the marker content has none (SVG icon, emoji).
+    &::before {
+      content: "\200B";
+    }
+  }
+
+  &__item-content {
+    flex: 1 1 auto;
+    min-inline-size: 0;
+  }
+}
+}

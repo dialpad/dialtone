@@ -8,6 +8,7 @@ paths:
 > **Canonical reference**: See [TEST_GUIDELINE.md](../../packages/dialtone-vue/.github/TEST_CONTRIBUTING/TEST_GUIDELINE.md) for the full test contributing guide, including the standardized template and the 5 required test sections.
 
 ## Framework
+
 - Vitest + @vue/test-utils
 - Run all: `pnpm nx run dialtone-vue:test`
 - Run single: `pnpm nx run dialtone-vue:test -- --testPathPattern=component_name`
@@ -53,47 +54,12 @@ Call `wrapper.unmount()` in `afterEach` when the component uses teleport/portal 
 
 ## Element Selection
 
-Always use `data-qa` attributes:
-```javascript
-wrapper.find('[data-qa="dt-button-icon"]')
-```
-Never select by CSS class or bare tag name — brittle and tied to implementation.
-
-## `it.each` for Similar Tests
-
-Use `it.each` when multiple inputs produce predictable variations of the same outcome:
-
-```javascript
-it.each([
-  ['sm', 'd-avatar--size-sm'],
-  ['md', 'd-avatar--size-md'],
-  ['lg', 'd-avatar--size-lg'],
-])('when size is %s, class %s is applied', (size, expectedClass) => {
-  mockProps = { size };
-  updateWrapper();
-  expect(wrapper.classes()).toContain(expectedClass);
-});
-```
-
-## `beforeEach` for Nested Setup
-
-Use nested `beforeEach` for shared setup within a `describe` block:
-
-```javascript
-describe('When image is provided', () => {
-  beforeEach(() => {
-    mockProps = { imageSrc: 'image.png' };
-    updateWrapper();
-  });
-
-  it('renders the image', () => { ... });
-  it('does not render initials', () => { ... });
-});
-```
+Always use `data-qa` attributes: `wrapper.find('[data-qa="dt-button-icon"]')`.
+Never select by CSS class or bare tag name — these are brittle.
 
 ## Constants
 
-Import valid values from `*_constants.js`. Never hardcode strings like `'md'` directly in tests.
+Import valid values from `*_constants.js`. Never hardcode strings like `'md'` — use `COMPONENT_SIZE_DEFAULT`.
 
 ## Required Test Categories
 
@@ -103,9 +69,10 @@ Import valid values from `*_constants.js`. Never hardcode strings like `'md'` di
 
 ## Test Focus
 
-Each `it` block tests one behavior. Multiple assertions are fine when they validate the same concept. If you need a new `describe('When ...')` to explain the setup, it's a separate test.
+Each `it` block should test one behavior. Multiple assertions are fine when they validate the same concept (e.g., checking both existence and content of an element). If you need a new `describe('When ...')` to explain the setup, it's a separate test.
 
 ## Anti-Patterns
+
 - Don't test internal state (`wrapper.vm.internalCounter`) — test observable behavior.
 - Don't rely on snapshot tests alone — they don't test behavior.
 - Don't call `wrapper?.unmount()` in `afterEach` — reset mock variables instead.

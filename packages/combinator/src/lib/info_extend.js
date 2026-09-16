@@ -18,6 +18,7 @@ export function extendMember (member) {
       member.types = extractMemberTypes(typeString);
     }
   }
+  normalizeDocValues(member);
   if (member.name) {
     member.label = paramCase(member.name);
   }
@@ -52,6 +53,32 @@ export function extendBinding (member, defaults) {
  */
 function extractMemberTypes (typeString) {
   return typeString.split('|').map(type => type.trim().toLowerCase());
+}
+
+function normalizeDocValues (member) {
+  if (!member.values) return;
+  member.values = member.values.map(value => normalizeDocValue(value, member.types));
+}
+
+// Only boolean-typed enums are normalized — 'true'/'false' become booleans and the
+// quoted 'mixed' sentinel is unwrapped so DtToggle routes to a segmented control.
+// Skipping everything else leaves string enums and numeric token strings ('200') intact.
+// (parseDocValue/JSON5 isn't reused here precisely because it would coerce '200' to a number.)
+function normalizeDocValue (value, types = []) {
+  if (typeof value !== 'string' || !types.includes('boolean')) return value;
+
+  if (value === 'true') return true;
+  if (value === 'false') return false;
+  if (isQuotedString(value)) return value.slice(1, -1);
+
+  return value;
+}
+
+function isQuotedString (value) {
+  return (
+    (value.startsWith('\'') && value.endsWith('\'')) ||
+    (value.startsWith('"') && value.endsWith('"'))
+  );
 }
 
 /**

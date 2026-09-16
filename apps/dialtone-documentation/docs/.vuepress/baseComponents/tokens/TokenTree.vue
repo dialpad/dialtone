@@ -1,16 +1,16 @@
 <template>
-  <div v-for="subNodeKey in Object.keys(node)" :key="subNodeKey">
+  <template v-for="subNodeKey in Object.keys(node)" :key="subNodeKey">
     <token-table
       v-if="isChild(subNodeKey) && hasContent(subNodeKey)"
       :category="category"
       :tokens="node[subNodeKey]"
       :mode="props.mode"
     />
-    <div v-else-if="!isChild(subNodeKey)">
+    <template v-else-if="!isChild(subNodeKey)">
       <component
         :is="`h${level}`"
         :id="getHeaderId(subNodeKey)"
-        :class="`d-docsite--header-${level} d-tt-capitalize`"
+        :class="`d-docsite--header-${level} d-tt-capitalize d-mbs-300`"
         tabindex="-1"
       >
         <a
@@ -25,8 +25,8 @@
         :level="level + 1"
         :mode="props.mode"
       />
-    </div>
-  </div>
+    </template>
+  </template>
 </template>
 
 <script setup>

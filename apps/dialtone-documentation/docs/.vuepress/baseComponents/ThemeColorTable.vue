@@ -2,30 +2,30 @@
   <clamped-table-wrapper>
     <div>
       <table class="d-table dialtone-doc-table">
-        <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+        <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
           <tr>
-            <th class="d-p0 d-bbw0" scope="col">
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
+            <th class="d-p-0 d-bbw0" scope="col">
+              <div class="d-p-200 d-bb d-bbw1">
                 Color
               </div>
             </th>
-            <th class="d-p0 d-bbw0" scope="col">
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
+            <th class="d-p-0 d-bbw0" scope="col">
+              <div class="d-p-200 d-bb d-bbw1">
                 Section
               </div>
             </th>
-            <th class="d-p0 d-bbw0" scope="col">
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
+            <th class="d-p-0 d-bbw0" scope="col">
+              <div class="d-p-200 d-bb d-bbw1">
                 State
               </div>
             </th>
-            <th class="d-p0 d-bbw0" scope="col">
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
+            <th class="d-p-0 d-bbw0" scope="col">
+              <div class="d-p-200 d-bb d-bbw1">
                 Property
               </div>
             </th>
-            <th class="d-p0 d-bbw0" scope="col">
-              <div class="d-p16 d-bb d-bc-default d-bbw1">
+            <th class="d-p-0 d-bbw0" scope="col">
+              <div class="d-p-200 d-bb d-bbw1">
                 Variable
               </div>
             </th>
@@ -59,7 +59,7 @@
                     'background-color': `var(--dt-shell-mention-color-background)`,
                   }"
                 >
-                  Aa
+                  Ag
                 </dt-stack>
               </dt-stack>
               <dt-stack
@@ -73,16 +73,22 @@
                   class="d-w42 d-h42 d-bar-circle d-ba d-bc-subtle"
                 />
               </dt-stack>
-              <div
+              <dt-text
                 v-else-if="color.property === 'color'"
+                as="p"
                 :style="{ color: `var(${color.variable})` }"
-                class="d-fs-300 d-p6 d-ta-center d-fw-medium"
+                kind="body"
+                :size="400"
+                class="d-p-75 d-ta-center d-fw-medium"
               >
-                Aa
-              </div>
+                Ag
+              </dt-text>
               <div
                 v-else-if="color.property === 'border-color'"
-                :class="['d-d-inline-flex d-p4 d-bar-pill', { 'd-bgc-contrast': color.variable.includes('inverted') }]"
+                :class="[
+                  'd-d-inline-flex d-p-50 d-bar-pill',
+                  { 'd-bgc-contrast': color.variable.includes('inverted') },
+                ]"
               >
                 <div
                   :style="{ borderColor: `var(--${color.variable})` }"
@@ -90,10 +96,26 @@
                 />
               </div>
             </td>
-            <th scope="row" class="d-ws-nowrap d-tt-capitalize" v-text="color.section" />
-            <td class="d-tt-capitalize" v-text="color.states" />
-            <td class="d-code--sm d-docsite-code" v-text="color.property" />
-            <td class="d-code--sm d-docsite-code" v-text="color.variable" />
+            <th scope="row">
+              <dt-text as="span" kind="body" :size="100" class="d-tt-capitalize">
+                {{ color.section }}
+              </dt-text>
+            </th>
+            <td>
+              <dt-text as="span" kind="body" :size="100" class="d-tt-capitalize">
+                {{ color.states }}
+              </dt-text>
+            </td>
+            <td>
+              <dt-text as="span" kind="code" :size="100" class="d-docsite-code">
+                {{ color.property }}
+              </dt-text>
+            </td>
+            <td>
+              <dt-text as="span" kind="code" :size="100" class="d-docsite-code">
+                {{ color.variable }}
+              </dt-text>
+            </td>
           </tr>
         </tbody>
       </table>

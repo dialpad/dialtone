@@ -16,7 +16,7 @@
     "@dialpad/dialtone-css": "workspace:*",
     "@dialpad/dialtone-docs": "workspace:*",
     "@dialpad/dialtone-icons": "workspace:*",
-    "@dialpad/dialtone-vue": "workspace:^3",
+    "@dialpad/dialtone-vue": "workspace:*",
     "@types/node": "24.3.1",
     "@vitest/coverage-v8": "^4.1.0",
     "typescript": "^5.2",

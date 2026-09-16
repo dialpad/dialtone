@@ -7,6 +7,7 @@ Apply to `packages/dialtone-css/**`, especially `lib/build/less/utilities/**`.
 - Utilities live in the established utility Less files: backgrounds, borders, colors, effects, flex, grid, interactivity, layout, sizing, spacing, typography.
 - Use `d-<property-shorthand><value>` naming such as `d-p8`, `d-d-flex`, or `d-w100p`.
 - Search existing utilities before adding a new one.
+- Prefer primitive component props before utilities when a primitive already covers the concern. For example, use DtBox for token-backed container surface, spacing, sizing, positioning, logical insets, and z-index; keep utilities for non-DtBox elements, responsive variants, calc coordinates, resets, arbitrary coordinates, and local escape hatches.
 
 ## Token Usage
 

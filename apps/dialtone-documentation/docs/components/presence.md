@@ -1,90 +1,92 @@
 ---
 title: Presence
-description: A visual control element indicating the current status of a user.
+description: Status indicator for user availability.
 status: ready
 thumb: true
-image: assets/images/components/presence.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-presence--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=9628-58458
+keywords: ["status", "online", "availability", "d-presence", "DtPresence", "dt-presence", "status indicator", "status dot"]
+combinator: DtPresence
 ---
-<code-well-header>
-  <dt-stack direction="row" gap="500">
-    <example-presence presence="active"/>
-    <example-presence presence="away"/>
-    <example-presence presence="busy"/>
-    <example-presence presence="offline"/>
-  </dt-stack>
-</code-well-header>
 
 ## Usage
 
-Located at the bottom right of an avatar, the `presence` indicator displays a user's current availablity. At a glance, check if a user is available, in a meeting, on a call, away, offline, or set to 'Do Not Disturb'. It's important to note that this indicator is automatically set and cannot be changed manually by the user.
+Located at the bottom right of an avatar, the `presence` indicator displays a user's current availability. At a glance, check if a user is available, on a call, in a meeting, away, set to Do Not Disturb, or offline. Most states are inferred automatically from user activity; Do Not Disturb is a state the user explicitly opts into.
+
+By default, the dot contains a state-specific glyph so state isn't conveyed by color alone: a checkmark for active, a minus dash for busy and dnd. Consumers who want a dot-only treatment can opt out with `:show-icon="false"`. The `away` and `offline` states do not render a glyph.
 
 ## Variants and Examples
 
 ### Active
 
 When a user is available.
-<code-well-header>
-  <example-presence presence="active" ref="activeExample"/>
-</code-well-header>
 
-<code-example-tabs
-:htmlCode='() => $refs.activeExample'
-vueCode='
-<dt-presence presence="active"  />
-'
-showHtmlWarning />
+```vue demo
+<dt-presence presence="active" />
+<!-- @code -->
+<dt-presence presence="active" />
+```
 
 ### Busy
 
-When a user is unavailable, either due to being **'On a call'**, **'In a meeting'**, or set to **'DND (Do Not Disturb)'**. Additionally, a text label indicating their specific status will appear under the user's name.
-<code-well-header>
-  <example-presence presence="busy" ref="busyExample"/>
-</code-well-header>
+When a user is unavailable due to being **'On a call'** or **'In a meeting'**. Additionally, a text label indicating their specific status will appear under the user's name.
 
-<code-example-tabs
-:htmlCode='() => $refs.busyExample'
-vueCode='
+```vue demo
 <dt-presence presence="busy" />
-'
-showHtmlWarning />
+<!-- @code -->
+<dt-presence presence="busy" />
+```
+
+### Do not Disturb
+
+When a user has explicitly silenced themselves. The dot uses a border-only treatment in the unavailable color with a minus dash glyph.
+
+```vue demo
+<dt-presence presence="dnd" />
+<!-- @code -->
+<dt-presence presence="dnd" />
+```
 
 ### Away
 
 When a user has a scheduled meeting on their synced calendar (Google G Suite or Microsoft Office 365) and is not actively participating in it through the app. Additionally, **'In a meeting'** will appear under the user's name.
-<code-well-header>
-  <example-presence presence="away" ref="awayExample"/>
-</code-well-header>
 
-<code-example-tabs
-:htmlCode='() => $refs.awayExample'
-vueCode='
+```vue demo
 <dt-presence presence="away" />
-'
-showHtmlWarning />
+<!-- @code -->
+<dt-presence presence="away" />
+```
 
 ### Offline
 
 When a user has not logged in for their first time.
-<code-well-header>
-  <example-presence presence="offline" ref="offlineExample"/>
-</code-well-header>
 
-<code-example-tabs
-:htmlCode='() => $refs.offlineExample'
-vueCode='
+```vue demo
 <dt-presence presence="offline" />
-'
-showHtmlWarning />
+<!-- @code -->
+<dt-presence presence="offline" />
+```
 
-## Vue API
+### Without icon
 
-<component-vue-api component-name="presence" />
+Pass `:show-icon="false"` for a dot-only treatment across all states. The `offline` state never renders a glyph regardless of `showIcon`.
 
-## Classes
-
-<component-class-table component-name="presence" />
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" gap="100">
+  <dt-presence presence="active" :show-icon="false" />
+  <dt-presence presence="away" :show-icon="false" />
+  <dt-presence presence="busy" :show-icon="false" />
+  <dt-presence presence="dnd" :show-icon="false" />
+  <dt-presence presence="offline" :show-icon="false" />
+</dt-stack>
+<!-- @code -->
+<dt-presence presence="active" :show-icon="false" />
+<dt-presence presence="away" :show-icon="false" />
+<dt-presence presence="busy" :show-icon="false" />
+<dt-presence presence="dnd" :show-icon="false" />
+<dt-presence presence="offline" :show-icon="false" />
+```
 
 ## Accessibility
 
@@ -99,7 +101,7 @@ Even though the component has a role of "status" to assist SR apps in reading ou
 
 Example:
 
-```html
+```vue code-only
 <dt-presence
   presence="active"
   sr-text="User {{ user }} is active"
@@ -108,6 +110,10 @@ Example:
 
 Abbreviations / symbols should be read out in full for voiceover / screen readers.
 
-<script setup>
-  import ExamplePresence from '@exampleComponents/ExamplePresence.vue';
-</script>
+## Vue API
+
+<component-vue-api component-name="presence" />
+
+## Classes
+
+<component-class-table component-name="presence" />

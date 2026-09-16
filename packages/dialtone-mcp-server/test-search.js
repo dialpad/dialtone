@@ -127,17 +127,17 @@ console.log();
 
 const utilityTests = [
   // Spacing (padding/margin with values)
-  { query: 'padding 8px', expect: 'd-p8' },
-  { query: 'padding 16px', expect: 'd-p16' },
-  { query: 'right padding 8px', expect: 'd-pr8' },
-  { query: 'left margin 16px', expect: 'd-ml16' },
-  { query: 'bottom margin 4px', expect: 'd-mb4' },
-  { query: 'top padding 24px', expect: 'd-pt24' },
+  { query: 'padding 8px', expect: 'd-p-100' },
+  { query: 'padding 16px', expect: 'd-p-200' },
+  { query: 'right padding 8px', expect: 'd-pr-100' },
+  { query: 'left margin 16px', expect: 'd-ml-200' },
+  { query: 'bottom margin 4px', expect: 'd-mb-50' },
+  { query: 'top padding 24px', expect: 'd-pt-300' },
 
   // Spacing (auto/0)
   { query: 'margin auto', expect: 'd-m-auto' },
   { query: 'margin top auto', expect: 'd-mt-auto' },
-  { query: 'padding 0', expect: 'd-p0' },
+  { query: 'padding 0', expect: 'd-p-0' },
 
   // Display
   { query: 'display flex', expect: 'd-d-flex' },
@@ -190,10 +190,10 @@ const tokenTests = [
   { query: 'color success', expect: '--dt-color' },
   { query: 'foreground primary', expect: '--dt-color-foreground-primary' },
 
-  // Space tokens
-  { query: 'space 400', expect: '--dt-space-400' },
-  { query: 'space 500', expect: '--dt-space-500' },
-  { query: 'space 100', expect: '--dt-space-100' },
+  // Spacing tokens
+  { query: 'spacing 100', expect: '--dt-spacing-100' },
+  { query: 'spacing 200', expect: '--dt-spacing-200' },
+  { query: 'spacing 50', expect: '--dt-spacing-50' },
 
   // Font tokens
   { query: 'font family', expect: '--dt-font-family' },

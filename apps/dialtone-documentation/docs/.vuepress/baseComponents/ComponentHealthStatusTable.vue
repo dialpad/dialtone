@@ -1,36 +1,44 @@
 <template>
-  <dt-stack gap="500" direction="row" class="d-bgc-secondary d-p16 d-bar4 d-ba d-bc-subtle d-my16">
-    <dt-stack direction="row" gap="400">
+  <dt-stack gap="200" direction="row" class="d-bgc-secondary d-p-200 d-py-100 d-bar-400 d-ba d-bc-subtle d-my-200">
+    <dt-stack direction="row" gap="100">
       <dt-icon
-        class="d-fc-success"
+        class="d-fc-positive"
         name="check-circle"
         size="300"
       />
-      <span class="d-label--md-plain-base">Ready</span>
+      <dt-text kind="label" strength="medium">
+        Ready
+      </dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="400">
+    <dt-stack direction="row" gap="100">
       <dt-icon
         class="d-fc-warning"
         name="tools"
         size="300"
       />
-      <span class="d-label--md-plain-base">In progress</span>
+      <dt-text kind="label" strength="medium">
+        In progress
+      </dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="400">
+    <dt-stack direction="row" gap="100">
       <dt-icon
         class="d-fc-critical"
         name="box-select"
         size="300"
       />
-      <span class="d-label--md-plain-base">Planned</span>
+      <dt-text kind="label" strength="medium">
+        Planned
+      </dt-text>
     </dt-stack>
-    <dt-stack direction="row" gap="400">
+    <dt-stack direction="row" gap="100">
       <dt-icon
         class="d-fc-muted"
         name="box"
         size="300"
       />
-      <span class="d-label--md-plain-base">N/A</span>
+      <dt-text kind="label" strength="medium">
+        N/A
+      </dt-text>
     </dt-stack>
   </dt-stack>
   <table class="d-table">
@@ -56,12 +64,9 @@
         :key="component.name"
       >
         <th scope="row">
-          <router-link
-            class="d-link"
-            :to="component.url"
-          >
+          <dt-link :to="component.url">
             {{ component.name }}
-          </router-link>
+          </dt-link>
         </th>
         <td
           tabindex="0"
@@ -109,7 +114,7 @@ const statusIcon = {
   'N/A': 'box',
 };
 const statusColor = {
-  Ready: 'd-fc-success',
+  Ready: 'd-fc-positive',
   'In progress': 'd-fc-warning',
   Planned: 'd-fc-critical',
   'N/A': 'd-fc-muted',

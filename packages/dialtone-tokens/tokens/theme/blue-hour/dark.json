@@ -1,0 +1,40 @@
+{
+  "shell": {
+    "base": {
+      "color": {
+        "surface": {
+          "value": "oklch(0.2185 0.0789 262.38)",
+          "type": "color"
+        },
+        "foreground": {
+          "value": "oklch(0.9099 0.0337 246.81)",
+          "type": "color"
+        },
+        "border": {
+          "value": "oklch(0.9099 0.0337 246.81)",
+          "type": "color"
+        },
+        "accent": {
+          "value": "oklch(0.8133 0.1058 83.25)",
+          "type": "color"
+        },
+        "action": {
+          "value": "oklch(0.8687 0.019 57.18)",
+          "type": "color"
+        }
+      }
+    },
+    "logo": {
+      "color": {
+        "star": {
+          "value": "{color.purple.1000}",
+          "type": "color"
+        },
+        "wordmark": {
+          "value": "{color.purple.1000}",
+          "type": "color"
+        }
+      }
+    }
+  }
+}

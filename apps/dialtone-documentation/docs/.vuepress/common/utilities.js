@@ -71,9 +71,10 @@ export function extractUtilityClasses (utilityClassDocs, prefix) {
 }
 
 export function extractCSSVariableName (propValue) {
-  const variable = Object.values(propValue.values)[0].value;
-  if (!variable.startsWith('var(')) return;
-  return variable.replace('var(', '').replace(/(-[hsla])?\).*/, '');
+  const value = Object.values(propValue.values)[0].value;
+  const match = value.match(/var\((--[\w-]+)\)/);
+  if (!match) return;
+  return match[1].replace(/(-(h|s|c|l|a|hsl|hsla|oklch|oklcha))$/, '');
 }
 
 /**

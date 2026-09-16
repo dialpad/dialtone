@@ -13,14 +13,15 @@
 //  ============================================================================
 //  $   EMPTY LIST
 //  ----------------------------------------------------------------------------
+@layer dialtone.components {
 .d-combobox__empty-list {
-  padding: var(--dt-space-0);
+  padding: var(--dt-spacing-0);
 
   &-item {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: var(--dt-space-300) var(--dt-space-450);
+    padding: var(--dt-spacing-50) var(--dt-spacing-150);
     font-size: var(--dt-font-size-200);
     line-height: var(--lh4);
   }
@@ -30,8 +31,9 @@
 //  $   LOADING LIST
 //  ----------------------------------------------------------------------------
 .d-combobox__loading-list {
-  max-height: var(--dt-size-925);
-  margin-top: var(--dt-space-400);
-  padding: var(--dt-space-0);
-  overflow-y: auto;
+  max-block-size: var(--dt-layout-500);
+  margin-block-start: var(--dt-spacing-100);
+  padding: var(--dt-spacing-0);
+  overflow-block: auto;
+}
 }

@@ -13,6 +13,8 @@
         "{projectRoot}/build-docs.js",
         "{projectRoot}/build-ios.js",
         "{projectRoot}/build-sd-transforms.js",
+        "{projectRoot}/build-sd-transforms-layered.js",
+        "{projectRoot}/build-layered.js",
         "{projectRoot}/dialtone-transforms.js",
         "{projectRoot}/generate-themes.js",
         "{projectRoot}/vite.config.js"
@@ -29,7 +31,6 @@
           "rm -rf dist",
           "git clean -fx themes/",
           "node ./build.js",
-          "pnpm exec vite build"
         ],
         "parallel": false
       }
@@ -58,6 +59,13 @@
       "executor": "nx:run-commands",
       "options": {
         "command": "pnpm publish --filter ./packages/dialtone-tokens"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "pnpm test"
       }
     },
     "release": {

@@ -11,5 +11,9 @@
   "renderer": {
     "default-positioning": "center",
     "default-background": "white"
+  },
+  "controls": {
+    "default-hide-deprecated": true,
+    "default-hide-inactive": false
   }
 }

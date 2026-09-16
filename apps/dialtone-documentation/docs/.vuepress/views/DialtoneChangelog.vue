@@ -1,6 +1,6 @@
 <template>
   <div
-    v-for="(n, i) in 5"
+    v-for="(n, i) in 10"
     :key="i"
     class="dialtone-release-notes"
   >

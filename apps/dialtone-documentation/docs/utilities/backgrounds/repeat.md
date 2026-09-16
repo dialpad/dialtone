@@ -1,28 +1,40 @@
 ---
 title: Background Repeat
 description: Utilities for controlling if or how an element's background image repeats.
+keywords: ["bg repeat", "no repeat", "tile"]
 ---
 
 ## Usage
 
 Use `d-bgr-{n}` to how an element's background image repeats.
 
-<code-well-header class="d-fl-col3 d-fw-wrap d-g16 d-p16 d-bgc-secondary" custom>
-  <dt-stack align="center" class="d-g4" v-for="i in repeat">
-      <dt-stack direction="row" align="center" justify="center" class="d-w128 d-h128 d-bgc-moderate d-bar8 d-of-hidden d-bgp-tl d-bgs-var" style="--bgg-size: 65% 65%; background-image: url('/assets/images/puffin.jpg');"
-        :class="`d-bgr-${i}`">
-      </dt-stack>
-      <code class="d-code--sm d-bgc-transparent">.d-bgr-{{ i }}</code>
-  </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-bgr-repeat d-bgs-var d-bgp-tl" style="--bgg-size: 65% 65%; background-image: url(...);">...</div>
-<div class="d-bgr-repeat-x d-bgs-var d-bgp-tl" style="--bgg-size: 65% 65%; background-image: url(...);">...</div>
-<div class="d-bgr-repeat-y d-bgs-var d-bgp-tl" style="--bgg-size: 65% 65%; background-image: url(...);">...</div>
-<div class="d-bgr-space d-bgs-var d-bgp-tl" style="--bgg-size: 65% 65%; background-image: url(...);">...</div>
-<div class="d-bgr-none d-bgs-var d-bgp-tl" style="--bgg-size: 65% 65%; background-image: url(...);">...</div>
-<div class="d-bgr-unset d-bgs-var d-bgp-tl" style="--bgg-size: 65% 65%; background-image: url(...);">...</div>
+```vue demo
+<!-- @custom -->
+<!-- @class d-d-grid d-g-200 d-g-cols4 d-p-200 d-bgc-secondary -->
+<dt-stack align="center" class="d-g-50">
+  <div class="d-size-200 d-bgc-moderate d-bar-400 d-of-hidden d-bgp-tl d-bgs-var d-bgr-repeat" style="--bgg-size: 65% 65%; background-image: url('/assets/images/puffin.jpg');"></div>
+  <dt-text as="code" kind="code" size="100">d-bgr-repeat</dt-text>
+</dt-stack>
+<dt-stack align="center" class="d-g-50">
+  <div class="d-size-200 d-bgc-moderate d-bar-400 d-of-hidden d-bgp-tl d-bgs-var d-bgr-repeat-x" style="--bgg-size: 65% 65%; background-image: url('/assets/images/puffin.jpg');"></div>
+  <dt-text as="code" kind="code" size="100">d-bgr-repeat-x</dt-text>
+</dt-stack>
+<dt-stack align="center" class="d-g-50">
+  <div class="d-size-200 d-bgc-moderate d-bar-400 d-of-hidden d-bgp-tl d-bgs-var d-bgr-repeat-y" style="--bgg-size: 65% 65%; background-image: url('/assets/images/puffin.jpg');"></div>
+  <dt-text as="code" kind="code" size="100">d-bgr-repeat-y</dt-text>
+</dt-stack>
+<dt-stack align="center" class="d-g-50">
+  <div class="d-size-200 d-bgc-moderate d-bar-400 d-of-hidden d-bgp-tl d-bgs-var d-bgr-space" style="--bgg-size: 65% 65%; background-image: url('/assets/images/puffin.jpg');"></div>
+  <dt-text as="code" kind="code" size="100">d-bgr-space</dt-text>
+</dt-stack>
+<dt-stack align="center" class="d-g-50">
+  <div class="d-size-200 d-bgc-moderate d-bar-400 d-of-hidden d-bgp-tl d-bgs-var d-bgr-none" style="--bgg-size: 65% 65%; background-image: url('/assets/images/puffin.jpg');"></div>
+  <dt-text as="code" kind="code" size="100">d-bgr-none</dt-text>
+</dt-stack>
+<dt-stack align="center" class="d-g-50">
+  <div class="d-size-200 d-bgc-moderate d-bar-400 d-of-hidden d-bgp-tl d-bgs-var d-bgr-unset" style="--bgg-size: 65% 65%; background-image: url('/assets/images/puffin.jpg');"></div>
+  <dt-text as="code" kind="code" size="100">d-bgr-unset</dt-text>
+</dt-stack>
 ```
 
 <script setup>

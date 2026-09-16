@@ -15,9 +15,10 @@ export const HTML_ELEMENT_TYPE = typeof HTMLElement !== 'undefined' ? HTMLElemen
 
 // Types of messages, also dictates what is the current state of the input.
 export const VALIDATION_MESSAGE_TYPES = {
-  ERROR: 'error',
+  CRITICAL: 'critical',
   WARNING: 'warning',
-  SUCCESS: 'success',
+  POSITIVE: 'positive',
+  INFO: 'info',
 };
 
 // Description size variants
@@ -28,8 +29,15 @@ export const DESCRIPTION_SIZE_TYPES = {
 
 // Description size variants
 export const DESCRIPTION_SIZE_MODIFIERS = {
-  xs: '',
-  sm: '',
+  // Numeric (preferred)
+  100: 'd-description--xs',
+  200: 'd-description--sm',
+  300: '',
+  400: 'd-description--lg',
+  500: 'd-description--xl',
+  // T-shirt aliases (deprecated)
+  xs: 'd-description--xs',
+  sm: 'd-description--sm',
   md: '',
   lg: 'd-description--lg',
   xl: 'd-description--xl',
@@ -37,6 +45,13 @@ export const DESCRIPTION_SIZE_MODIFIERS = {
 
 // Label size variants
 export const LABEL_SIZE_MODIFIERS = {
+  // Numeric (preferred)
+  100: 'd-label--xs',
+  200: 'd-label--sm',
+  300: '',
+  400: 'd-label--lg',
+  500: 'd-label--xl',
+  // T-shirt aliases (deprecated)
   xs: 'd-label--xs',
   sm: 'd-label--sm',
   md: '',
@@ -67,10 +82,14 @@ export const EVENT_KEYNAMES = {
  * Any string message or message object in the messages prop that do not specify
  * a 'type' attributes will default to 'DEFAULT_MESSAGE_TYPE'.
  */
-export const DEFAULT_VALIDATION_MESSAGE_TYPE = VALIDATION_MESSAGE_TYPES.ERROR;
+export const DEFAULT_VALIDATION_MESSAGE_TYPE = VALIDATION_MESSAGE_TYPES.CRITICAL;
 
 // Default prefix used for ids
 export const DEFAULT_PREFIX = 'dt';
+
+// Component size scale
+export { COMPONENT_SIZES, TEXT_HEADLINE_SIZES } from './sizes.js';
+export { LAYOUT_SIZE_VALUES, LAYOUT_PERCENT_VALUES, LAYOUT_VALUES } from './layout.js';
 
 export default {
   VALIDATION_MESSAGE_TYPES,

@@ -1,0 +1,112 @@
+<template>
+  <dt-stack gap="100">
+    <div
+      v-for="(variant, i) in variantsTabs"
+      :key="i"
+    >
+      <p class="d-fw-bold d-mbe-100">
+        {{ variant.description }}
+      </p>
+      <dt-tab-group
+        v-bind="variant.propsToBind"
+        class="d-mbe-100"
+      >
+        <template #tabs>
+          <dt-tab
+            :id="`${i}1`"
+            :panel-id="`${i}2`"
+            selected
+          >
+            First
+          </dt-tab>
+          <dt-tab
+            :id="`${i}3`"
+            :panel-id="`${i}4`"
+          >
+            Second
+          </dt-tab>
+          <dt-tab
+            :id="`${i}5`"
+            :panel-id="`${i}6`"
+            label="Third Label"
+          >
+            Third
+          </dt-tab>
+        </template>
+
+        <div>
+          <dt-tab-panel
+            :id="`${i}2`"
+            :tab-id="`${i}1`"
+          >
+            <p>First Panel</p>
+          </dt-tab-panel>
+          <dt-tab-panel
+            :id="`${i}4`"
+            :tab-id="`${i}3`"
+          >
+            <p>Second Panel</p>
+          </dt-tab-panel>
+          <dt-tab-panel
+            :id="`${i}6`"
+            :tab-id="`${i}5`"
+          >
+            <p>Third Panel</p>
+          </dt-tab-panel>
+        </div>
+      </dt-tab-group>
+    </div>
+  </dt-stack>
+</template>
+
+<script>
+import DtTabGroup from './TabGroup.vue';
+import DtTab from './Tab.vue';
+import DtTabPanel from './TabPanel.vue';
+import { DtStack } from '@/components/Stack';
+
+export default {
+  name: 'DtTabsVariants',
+  components: { DtTabGroup, DtTab, DtTabPanel, DtStack },
+  data () {
+    return {
+      variantsTabs: [
+        {
+          description: 'Default tabs',
+          propsToBind: {},
+        },
+        {
+          description: 'Small size tabs',
+          propsToBind: {
+            size: 'sm',
+          },
+        },
+        {
+          description: 'Borderless tabs',
+          propsToBind: {
+            borderless: true,
+          },
+        },
+        {
+          description: 'Disabled tabs',
+          propsToBind: {
+            disabled: true,
+          },
+        },
+        {
+          description: 'Spread grow tabs',
+          propsToBind: {
+            spread: 'grow',
+          },
+        },
+        {
+          description: 'Spread equal tabs',
+          propsToBind: {
+            spread: 'equal',
+          },
+        },
+      ],
+    };
+  },
+};
+</script>

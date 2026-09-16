@@ -1,13 +1,13 @@
 <template>
   <dt-button-group
-    class="d-d-flex d-bgc-black-025 d-bar4"
+    class="d-d-flex d-bgc-black-025 d-bar-300"
   >
     <template
       v-for="(_, slot) in slots"
       :key="slot"
     >
       <dt-button
-        class="d-px24"
+        class="d-px-300"
         importance="clear"
         :active="slot === value"
         @click="() => emit('click', slot)"

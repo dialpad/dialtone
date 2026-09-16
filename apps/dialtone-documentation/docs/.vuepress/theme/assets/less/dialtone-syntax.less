@@ -3,18 +3,25 @@
  * Based on dabblet (http://dabblet.com)
  */
 
+
+:root {
+  --code-c-text: var(--dt-color-foreground-secondary);
+  --code-c-bg: blue;
+  --code-c-highlight-bg: var(--dt-color-foreground-info-strong);
+  --code-c-line-number: gray;
+}
+
 div[class*="language-"] {
-	margin: var(--dt-space-500) 0;
-	padding: var(--dt-space-400);
+	margin: var(--dt-spacing-300) 0;
+	padding: var(--dt-spacing-200);
 	background-color: var(--dt-color-surface-secondary);
-	border-radius: var(--dt-size-500);
+	border-radius: var(--dt-spacing-200);
 
-	& pre {
+	& :where(pre) {
 		margin: 0;
-		padding: var(--dt-space-450);
-    padding-top: var(--dt-space-550);
+		padding: 0;
 
-		& code {
+		& :where(code) {
 			padding: 0;
 			color: var(--dt-color-foreground-secondary);
 			background-color: unset;
@@ -22,32 +29,27 @@ div[class*="language-"] {
 	}
 
 	&[class*="html"] {
-		margin-top: var(--dt-space-400-negative);
-		border-radius: 0 0 var(--dt-size-400) var(--dt-size-400) !important;
+		margin-block-start: var(--dt-spacing-100-negative);
+		border-radius: 0 0 var(--dt-spacing-100) var(--dt-spacing-100) !important;
 	}
 
   &::before {
     color: var(--dt-color-foreground-primary);
-    font: var(--dt-typography-body-sm)
+    font: var(--dt-typography-body-sm);
+		opacity: 0;
   }
 }
 
-code:not(.d-code--md, .d-code--sm) {
-	padding: var(--dt-space-200) var(--dt-space-300);
-	color: var(--dt-color-blue-500);
-	background-color: var(--dt-color-surface-info);
-	border-radius: var(--dt-size-100);
-	user-select: all;
-}
 
 code[class*="language-"],
 pre[class*="language-"] {
 	margin: 0;
-	color: var(--dt-color-black-1000);
-	font: var(--dt-typography-code-sm);
+	color: var(--dt-color-foreground-secondary);
+	font: var(--dt-text-code-xs);
 	line-height: var(--dt-font-line-height-400);
 	white-space: pre;
-	text-align: left;
+	text-align: start;
+	word-wrap: normal;
 	word-break: normal;
 	word-spacing: normal;
 	overflow-wrap: normal;
@@ -55,6 +57,11 @@ pre[class*="language-"] {
 	hyphens: none;
 	border-radius: var(--dt-size-radius-400);
 	user-select: initial;
+}
+
+div[class*=language-] pre {
+	font: var(--dt-text-code-xs);
+	line-height: var(--dt-font-line-height-400);
 }
 
 @media print {
@@ -66,13 +73,13 @@ pre[class*="language-"] {
 
 /* Code blocks */
 pre[class*="language-"] {
-	padding: var(--dt-space-100);
+	padding: var(--dt-spacing-1);
 	overflow: auto;
 }
 
 /* Inline code */
 :not(pre) > code[class*="language-"] {
-	padding: var(--dt-space-100);
+	padding: var(--dt-spacing-1);
 	white-space: normal;
 }
 
@@ -80,11 +87,12 @@ pre[class*="language-"] {
 .token.prolog,
 .token.doctype,
 .token.cdata {
-	color: var(--dt-color-foreground-tertiary);
+	color: var(--dt-color-foreground-muted);
+	font-style: italic;
 }
 
 .token.punctuation {
-	color: var(--dt-color-blue-500);
+	color: var(--dt-color-foreground-info-strong);
 }
 
 .token.namespace {
@@ -98,7 +106,7 @@ pre[class*="language-"] {
 .token.constant,
 .token.symbol,
 .token.deleted {
-	color: var(--dt-color-blue-500);
+	color: var(--dt-color-foreground-info-strong);
 }
 
 .token.selector,
@@ -107,7 +115,7 @@ pre[class*="language-"] {
 .token.char,
 .token.builtin,
 .token.inserted {
-	color: var(--dt-color-purple-550);
+	color: var(--dt-color-purple-900);
 }
 
 .token.operator,
@@ -115,24 +123,24 @@ pre[class*="language-"] {
 .token.url,
 .language-css .token.string,
 .style .token.string {
-	color: var(--dt-color-gold-500);
+	color: var(--dt-color-gold-700);
 }
 
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-	color: var(--dt-color-green-600);
+	color: var(--dt-color-green-900);
 }
 
 .token.function,
 .token.class-name {
-	color: var(--dt-color-red-600);
+	color: var(--dt-color-red-800);
 }
 
 .token.regex,
 .token.important,
 .token.variable {
-	color: var(--dt-color-gold-600);
+	color: var(--dt-color-gold-800);
 }
 
 .token.important,
@@ -150,75 +158,70 @@ pre[class*="language-"] {
 
 pre[class*="language-"].line-numbers {
 	position: relative;
-	padding-left: var(--dt-space-600);
+	padding-inline-start: var(--dt-size-radius-600);
 	counter-reset: linenumber;
 }
 
-pre[class*="language-"].line-numbers > code {
+pre[class*="language-"].line-numbers > :where(code) {
 	position: relative;
 	white-space: inherit;
 }
 
 .line-numbers .line-numbers-rows {
 	position: absolute;
-	top: 0;
-	left: var(--dt-space-negative-600);
-	width: var(--dt-size-600);
+	inset-block-start: 0;
+	inset-inline-start: var(--dt-spacing-400-negative);
+	inline-size: var(--dt-layout-50);
 	font-size: 100%;
-	letter-spacing: var(--dt-space-negative-100);
-	border-right: var(--dt-size-100) solid var(--dt-color-black-600);
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
+	letter-spacing: var(--dt-spacing-1-negative);
+	border-inline-end: var(--dt-size-border-100) solid var(--dt-color-black-600);
 	user-select: none;
 	pointer-events: none;
 }
 
-.line-numbers-rows > span {
+.line-numbers-rows > :where(span) {
   display: block;
   counter-increment: linenumber;
 
   &::before {
     display: block;
-    padding-right: var(--dt-space-400);
+    padding-inline-end: var(--dt-spacing-100);
     color: var(--dt-color-black-600);
-    text-align: right;
+    text-align: end;
     content: counter(linenumber);
   }
 }
 
 .command-line-prompt {
 	display: block;
-	float: left;
-	margin-right: var(--dt-space-negative-450);
+	float: inline-start;
+	margin-inline-end: var(--dt-spacing-150-negative);
 	font-size: 100%;
-	letter-spacing: var(--dt-space-negative-100);
-	border-right: var(--dt-size-100) solid var(--dt-color-black-600);
+	letter-spacing: var(--dt-spacing-1-negative);
+	border-inline-end: var(--dt-size-border-100) solid var(--dt-color-black-600);
 	user-select: none;
 	pointer-events: none;
 }
 
-.command-line-prompt > span::before {
+.command-line-prompt > :where(span)::before {
 	display: block;
-	padding-right: var(--dt-space-400);
+	padding-inline-end: var(--dt-spacing-100);
 	color: var(--dt-color-black-600);
 	content: ' ';
 }
 
-.command-line-prompt > span[data-user]::before {
+.command-line-prompt > :where(span[data-user])::before {
 	content: "[" attr(data-user) "@" attr(data-host) "] $";
 }
 
-.command-line-prompt > span[data-user="root"]::before {
+.command-line-prompt > :where(span[data-user="root"])::before {
 	content: "[" attr(data-user) "@" attr(data-host) "] #";
 }
 
-.command-line-prompt > span[data-prompt]::before {
+.command-line-prompt > :where(span[data-prompt])::before {
 	content: attr(data-prompt);
 }
 
-code,
-kbd,
-samp {
+:is(pre, code, kbd, samp) {
   font-family: var(--dt-font-family-mono);
 }

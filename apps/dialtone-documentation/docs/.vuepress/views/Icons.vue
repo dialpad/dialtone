@@ -1,10 +1,11 @@
 <template>
-  <div
-    class="d-stack16 d-p16 d-bar8"
+  <dt-stack
+    gap="200"
+    class="d-p-200 d-bar-400"
   >
     <h3
       :id="kind"
-      class="d-docsite--header-3 d-mt0"
+      class="d-docsite--header-3 d-mbs-0"
     >
       <a
         :href="`#${kind}`"
@@ -29,7 +30,7 @@
         :display-name="kind === 'brand-logos'"
       />
     </div>
-  </div>
+  </dt-stack>
 </template>
 
 <script>

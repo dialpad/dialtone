@@ -17,6 +17,7 @@ const WrapperComponent = {
       <button :key="id" data-qa="dt-tooltip-placement" v-dt-tooltip:[placement]="MOCK_TOOLTIP_TEXT">{{MOCK_ANCHOR_TEXT}}</button>
       <button :key="id" data-qa="dt-tooltip-object" v-dt-tooltip="MOCK_TOOLTIP_PROPS">{{MOCK_ANCHOR_TEXT}}</button>
       <button :key="id" data-qa="dt-tooltip-changing" v-dt-tooltip:[placement]="tooltipText">{{MOCK_ANCHOR_TEXT}}</button>
+      <button :key="id" data-qa="dt-tooltip-mode" v-dt-tooltip.invert="MOCK_TOOLTIP_TEXT">{{MOCK_ANCHOR_TEXT}}</button>
     </div>
   `,
 
@@ -129,6 +130,25 @@ describe('DtTooltipDirective Tests', () => {
 
       it('should render the message', () => {
         expect(document.body.querySelector('[data-qa="dt-tooltip"]').textContent.trim()).toBe(MOCK_TOOLTIP_TEXT);
+      });
+    });
+
+    describe('when tooltip with mode modifier is open', () => {
+      beforeEach(async () => {
+        document.documentElement.setAttribute('data-dt-mode', 'light');
+        await updateWrapper();
+        await flushPromises();
+        await wrapper.find('[data-qa="dt-tooltip-mode"]').trigger('mouseenter');
+      });
+
+      afterEach(() => {
+        document.documentElement.removeAttribute('data-dt-mode');
+      });
+
+      it('should set data-dt-mode on the tooltip content', () => {
+        const tooltips = document.body.querySelectorAll('[data-qa="dt-tooltip"]');
+        const modeTooltip = Array.from(tooltips).find(t => t.getAttribute('data-dt-mode'));
+        expect(modeTooltip.getAttribute('data-dt-mode')).toBe('dark');
       });
     });
 

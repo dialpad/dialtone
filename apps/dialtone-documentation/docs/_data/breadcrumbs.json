@@ -6,9 +6,19 @@
       "description": "Parent wrapper class for all breadcrumb items."
     },
     {
+      "class": "d-breadcrumbs__list",
+      "applies": "N/A",
+      "description": "Wrapper for all breadcrumb items."
+    },
+    {
       "class": "d-breadcrumbs__item",
       "applies": "N/A",
       "description": "Wrapper for each breadcrumb li element. Adds a decorative separator using the :before pseudo element in CSS."
+    },
+    {
+      "class": "d-breadcrumbs__link",
+      "applies": "N/A",
+      "description": "Each breadcrumb link element."
     },
     {
       "class": "d-breadcrumbs__item--selected",

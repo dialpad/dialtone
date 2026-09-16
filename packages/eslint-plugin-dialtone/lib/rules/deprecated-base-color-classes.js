@@ -14,7 +14,7 @@ module.exports = {
   meta: {
     type: 'suggestion', // `problem`, `suggestion`, or `layout`
     docs: {
-      description,
+      description: 'Detects usage of deprecated base-color utility classes.',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/deprecated-base-color-classes.md', // URL to the documentation page for this rule
     },
@@ -33,7 +33,7 @@ module.exports = {
     return sourceCode.parserServices.defineTemplateBodyVisitor({
       // Visitor functions for Vue templates
       VAttribute (node) {
-        if (node.key.name === 'class') {
+        if (node.key.name === 'class' && node.value && typeof node.value.value === 'string') {
           const classes = node.value.value;
           if (classes.match(/d-bgc-\w+-\d{2,4}/)) {
             context.report({ node, messageId: 'recommendBackgroundSemanticColor' });

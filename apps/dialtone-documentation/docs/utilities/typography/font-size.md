@@ -1,44 +1,37 @@
 ---
 title: Font Size
 description: Utilities to change an element's font-size.
+keywords: ['text size', 'type size', 'type scale']
 ---
 
-<dt-notice
-  kind="warning"
-  :hideClose="true"
-  class="d-wmx100p"
->
-  <template #default>
-    <p class="d-body--md-compact">Before applying a typography utility, first consider using <dt-link to="/design/typography/" kind="muted" class="d-fw-bold">Dialtone's text styles</dt-link> that bundles Font family, Font weight, Font size, and Line height together.</p>
-  </template>
-</dt-notice>
+> [!WARNING] Use DtText over CSS Utilities
+> Reach for the [DtText](/components/text) component before considering any typography utility.
 
 ## Usage
 
-Use `d-{fs|headline}-{stop}` to change an element's font-size in the product or `d-{fs|headline}-{stop}-{platform}` to
-change in other platforms (mobile, tc8, tv).
-
-<code-well-header>
-  <div class="d-d-grid d-g16 d-ai-center" style="grid-template-columns: 10rem 1fr">
-    <div class="d-code--sm d-docsite-code">.d-fs-100</div>
-    <div><p class="d-fs-100">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-docsite-code">.d-fs-200</div>
-    <div><p class="d-fs-200">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-docsite-code">.d-fs-300</div>
-    <div><p class="d-fs-300">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-docsite-code">.d-fs-400</div>
-    <div><p class="d-fs-400">The quick brown fox jumps over the lazy dog.</p></div>
-    <div class="d-code--sm d-docsite-code">.d-fs-500</div>
-    <div><p class="d-fs-500">The quick brown fox jumps over the lazy dog.</p></div>
-  </div>
-</code-well-header>
-
-```html
-<p class="d-fs-100">...</p>
-<p class="d-fs-200">...</p>
-<p class="d-fs-300">...</p>
-<p class="d-fs-400">...</p>
-<p class="d-fs-500">...</p>
+```vue demo
+<div class="d-d-grid d-g-200 d-ai-baseline" style="grid-template-columns: 10rem 1fr">
+  <div class="d-code--sm d-docsite-code">d-fs-50</div><div><p class="d-lc-1 d-fs-50">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-75</div><div><p class="d-lc-1 d-fs-75">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-100</div><div><p class="d-lc-1 d-fs-100">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-125</div><div><p class="d-lc-1 d-fs-125">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-150</div><div><p class="d-lc-1 d-fs-150">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-200</div><div><p class="d-lc-1 d-fs-200">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-250</div><div><p class="d-lc-1 d-fs-250">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-300</div><div><p class="d-lc-1 d-fs-300">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-350</div><div><p class="d-lc-1 d-fs-350">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-400</div><div><p class="d-lc-1 d-fs-400">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-450</div><div><p class="d-lc-1 d-fs-450">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-500</div><div><p class="d-lc-1 d-fs-500">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-550</div><div><p class="d-lc-1 d-fs-550">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-600</div><div><p class="d-lc-1 d-fs-600">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-650</div><div><p class="d-lc-1 d-fs-650">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-700</div><div><p class="d-lc-1 d-fs-700">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-750</div><div><p class="d-lc-1 d-fs-750">The quick brown fox jumps over the lazy dog.</p></div>
+  <div class="d-code--sm d-docsite-code">d-fs-800</div><div><p class="d-lc-1 d-fs-800">The quick brown fox jumps over the lazy dog.</p></div>
+</div>
+<!-- @code -->
+<p class="d-fs-{stop}">...</p>
 ```
 
 <script setup>
@@ -53,11 +46,11 @@ change in other platforms (mobile, tc8, tv).
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
-          <th scope="col" class="d-p0 d-bbw0 d-w10p"><div class="d-p16 d-bb d-bc-default d-bbw1">Size</div></th>
-          <th scope="col" class="d-p0 d-bbw0 d-w20p"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w10p"><div class="d-p-200 d-bb d-bbw1">Size</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w20p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
+          <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
         </tr>
       </thead>
       <tbody>
@@ -85,11 +78,11 @@ change in other platforms (mobile, tc8, tv).
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
-          <th scope="col" class="d-p0 d-bbw0 d-w10p"><div class="d-p16 d-bb d-bc-default d-bbw1">Size</div></th>
-          <th scope="col" class="d-p0 d-bbw0 d-w20p"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w10p"><div class="d-p-200 d-bb d-bbw1">Size</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w20p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
+          <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
         </tr>
       </thead>
       <tbody>
@@ -117,11 +110,11 @@ change in other platforms (mobile, tc8, tv).
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
-          <th scope="col" class="d-p0 d-bbw0 d-w10p"><div class="d-p16 d-bb d-bc-default d-bbw1">Size</div></th>
-          <th scope="col" class="d-p0 d-bbw0 d-w20p"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w10p"><div class="d-p-200 d-bb d-bbw1">Size</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w20p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
+          <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
         </tr>
       </thead>
       <tbody>
@@ -149,11 +142,11 @@ change in other platforms (mobile, tc8, tv).
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
-          <th scope="col" class="d-p0 d-bbw0 d-w10p"><div class="d-p16 d-bb d-bc-default d-bbw1">Size</div></th>
-          <th scope="col" class="d-p0 d-bbw0 d-w20p"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w10p"><div class="d-p-200 d-bb d-bbw1">Size</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w20p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
+          <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
         </tr>
       </thead>
       <tbody>

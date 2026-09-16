@@ -1,63 +1,116 @@
 ---
 title: Line Height
 description: Utilities to change an element's line-height.
+keywords: ["leading", "line spacing"]
 ---
 
-<dt-notice
-  kind="warning"
-  :hideClose="true"
-  class="d-wmx100p"
->
-  <template #default>
-    <p class="d-body--md-compact">Before applying a typography utility, first consider using <dt-link to="/design/typography/" kind="muted" class="d-fw-bold">Dialtone's text styles</dt-link> that bundles Font family, Font weight, Font size, and Line height together.</p>
-  </template>
-</dt-notice>
+> [!WARNING] Use DtText over CSS Utilities
+> Reach for the [DtText](/components/text) component before considering any typography utility.
 
 ## Relative Line-Heights
 
 Use `d-lh-{n}` to change an element's line-height relatively. This means no unit is set with the line-height. Instead the line-height value is a multiple of the font-size.
 
-<code-well-header>
-  <div v-for="{ class: stop } in relative" class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
-    <div class="d-code--sm d-docsite-code">.d-lh-{{stop}}</div>
-    <p :class="`d-lh-${stop} d-bgc-moderate`">The quick brown fox jumps over the lazy dog.</p>
-  </div>
-</code-well-header>
-
-```html
-<p class="d-lh-unset">...</p>
-<p class="d-lh-100">...</p>
-<p class="d-lh-200">...</p>
-<p class="d-lh-300">...</p>
-<p class="d-lh-400">...</p>
-<p class="d-lh-500">...</p>
-<p class="d-lh-600">...</p>
+```vue demo
+<div class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
+  <div class="d-code--sm d-docsite-code">.d-lh-unset</div>
+  <p class="d-lh-unset d-bgc-moderate">The quick brown fox jumps over the lazy dog.</p>
+</div>
+<div class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
+  <div class="d-code--sm d-docsite-code">.d-lh-100</div>
+  <p class="d-lh-100 d-bgc-moderate">The quick brown fox jumps over the lazy dog.</p>
+</div>
+<div class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
+  <div class="d-code--sm d-docsite-code">.d-lh-200</div>
+  <p class="d-lh-200 d-bgc-moderate">The quick brown fox jumps over the lazy dog.</p>
+</div>
+<div class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
+  <div class="d-code--sm d-docsite-code">.d-lh-300</div>
+  <p class="d-lh-300 d-bgc-moderate">The quick brown fox jumps over the lazy dog.</p>
+</div>
+<div class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
+  <div class="d-code--sm d-docsite-code">.d-lh-400</div>
+  <p class="d-lh-400 d-bgc-moderate">The quick brown fox jumps over the lazy dog.</p>
+</div>
+<div class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
+  <div class="d-code--sm d-docsite-code">.d-lh-500</div>
+  <p class="d-lh-500 d-bgc-moderate">The quick brown fox jumps over the lazy dog.</p>
+</div>
+<div class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
+  <div class="d-code--sm d-docsite-code">.d-lh-600</div>
+  <p class="d-lh-600 d-bgc-moderate">The quick brown fox jumps over the lazy dog.</p>
+</div>
+<!-- @code -->
+<p class="d-lh-{stop}">...</p>
 ```
 
 ## Fixed Line-Heights
 
 Use `d-lh{n}` to fix an element's line-height. This allows you to target a specific line-height based on the font-size. For example if a target 20px line-height is desired and the current font-size is 14px, apply `.d-lh6` to achieve this target (14px font-size + 6px = 20px target line-height).
 
-<code-well-header>
-  <div v-for="{ class: stop } in fixed" class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
-    <div class="d-code--sm d-docsite-code">.d-lh{{stop}}</div>
-    <div>
-        <p :class="`d-lh${stop} d-fs-300 d-bgc-moderate`">The quick brown fox jumps over the lazy dog.</p>
-    </div>
+```vue demo
+<div class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
+  <div class="d-code--sm d-docsite-code">.d-lh0</div>
+  <div>
+      <p class="d-lh0 d-fs-300 d-bgc-moderate">The quick brown fox jumps over the lazy dog.</p>
   </div>
-</code-well-header>
-
-```html
-<p class="d-lh0">...</p>
-<p class="d-lh1">...</p>
-<p class="d-lh2">...</p>
-<p class="d-lh4">...</p>
-<p class="d-lh6">...</p>
-<p class="d-lh8">...</p>
-<p class="d-lh12">...</p>
-<p class="d-lh16">...</p>
-<p class="d-lh20">...</p>
-<p class="d-lh24">...</p>
+</div>
+<div class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
+  <div class="d-code--sm d-docsite-code">.d-lh1</div>
+  <div>
+      <p class="d-lh1 d-fs-300 d-bgc-moderate">The quick brown fox jumps over the lazy dog.</p>
+  </div>
+</div>
+<div class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
+  <div class="d-code--sm d-docsite-code">.d-lh2</div>
+  <div>
+      <p class="d-lh2 d-fs-300 d-bgc-moderate">The quick brown fox jumps over the lazy dog.</p>
+  </div>
+</div>
+<div class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
+  <div class="d-code--sm d-docsite-code">.d-lh4</div>
+  <div>
+      <p class="d-lh4 d-fs-300 d-bgc-moderate">The quick brown fox jumps over the lazy dog.</p>
+  </div>
+</div>
+<div class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
+  <div class="d-code--sm d-docsite-code">.d-lh6</div>
+  <div>
+      <p class="d-lh6 d-fs-300 d-bgc-moderate">The quick brown fox jumps over the lazy dog.</p>
+  </div>
+</div>
+<div class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
+  <div class="d-code--sm d-docsite-code">.d-lh8</div>
+  <div>
+      <p class="d-lh8 d-fs-300 d-bgc-moderate">The quick brown fox jumps over the lazy dog.</p>
+  </div>
+</div>
+<div class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
+  <div class="d-code--sm d-docsite-code">.d-lh12</div>
+  <div>
+      <p class="d-lh12 d-fs-300 d-bgc-moderate">The quick brown fox jumps over the lazy dog.</p>
+  </div>
+</div>
+<div class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
+  <div class="d-code--sm d-docsite-code">.d-lh16</div>
+  <div>
+      <p class="d-lh16 d-fs-300 d-bgc-moderate">The quick brown fox jumps over the lazy dog.</p>
+  </div>
+</div>
+<div class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
+  <div class="d-code--sm d-docsite-code">.d-lh20</div>
+  <div>
+      <p class="d-lh20 d-fs-300 d-bgc-moderate">The quick brown fox jumps over the lazy dog.</p>
+  </div>
+</div>
+<div class="d-d-grid d-ai-center" style="grid-template-columns: 10rem 1fr">
+  <div class="d-code--sm d-docsite-code">.d-lh24</div>
+  <div>
+      <p class="d-lh24 d-fs-300 d-bgc-moderate">The quick brown fox jumps over the lazy dog.</p>
+  </div>
+</div>
+<!-- @code -->
+<p class="d-lh{stop}">...</p>
 ```
 
 ## CSS Variables
@@ -65,10 +118,10 @@ Use `d-lh{n}` to fix an element's line-height. This allows you to target a speci
 <clamped-table-wrapper>
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Variable</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
+          <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Variable</div></th>
+          <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
         </tr>
       </thead>
       <tbody>

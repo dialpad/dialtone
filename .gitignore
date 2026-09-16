@@ -88,6 +88,9 @@ SKILLS_TODO*.md
 .claude/scheduled_tasks.lock
 .agents/**/evals/artifacts/
 .omx/
+
+# Thumb generator content-hash cache
+apps/dialtone-documentation/scripts/thumbs/.cache.json
 .worktrees/
 .claude/plans/
 docs/prd/

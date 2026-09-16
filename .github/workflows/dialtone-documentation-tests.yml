@@ -39,6 +39,9 @@ jobs:
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
 
+      - name: Test documentation scripts
+        run: pnpm nx run dialtone-documentation:test
+
       - name: Build dialtone-documentation
         run: pnpm nx run dialtone-documentation:build
 

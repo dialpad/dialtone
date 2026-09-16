@@ -1,114 +1,143 @@
 ---
 title: Padding
 description: Utilities for setting an element's interior spacing between child elements and the element's box edge.
+keywords: ["inner spacing", "inset", "padding top", "padding right", "padding bottom", "padding left", "padding inline start", "padding inline end", "padding block start", "padding block end"]
 ---
 
-<dt-notice kind="info" class="d-wmx100p d-mt24" hideClose>
-  Padding CSS Utilities are most appropriate for padding on the <strong>sides</strong> of an element. Avoiding using it to create spacing <strong>between</strong> elements. Instead, favor the <dt-link to="/components/stack/" kind="muted">Stack</dt-link> component and its <code>gap</code> property for spacing between. It can still be combined with flex utilities to create more complex layouts.
-</dt-notice>
+> [!INFO] Consider DtBox and DtStack first
+>
+> - Favor using the [DtBox](/components/box.md) component and its padding properties.
+> - Avoid using padding or margin utilities for spacing **between** elements. Instead, favor the [DtStack](/components/stack.md) component and its `gap` property for spacing between.
+
+Use `d-p-{stop}` to set padding using spacing token stops. The number references the spacing token (`d-p-100` = `--dt-spacing-100` = 8px).
 
 ## Add Padding to All Sides
 
-<code-well-header>
-  <div class="d-h128 d-w128 d-p16 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-fl1 d-h100p d-bgc-moderate d-bar4 d-code--md">d-p16</dt-stack></div>
-</code-well-header>
-
-```html
-<div class="d-p8 ...">d-p8</div>
+```vue demo
+<div class="d-size-200 d-p-200 d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-fl1 d-h100p d-bgc-moderate d-bar-300 d-code--md">d-p-200</dt-stack></div>
 ```
 
 ## Add Padding to a Single Side
 
-<code-well-header>
-  <dt-stack direction="row" justify="center" gap="550" class="d-fw-wrap d-w100p">
-    <div class="d-as-center d-pt12 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-bbr4 d-code--md">d-pt12</dt-stack></div>
-    <div class="d-as-center d-pr16 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-brl4 d-code--md">d-pr16</dt-stack></div>
-    <div class="d-as-center d-pb24 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-btr4 d-code--md">d-pb24</dt-stack></div>
-    <div class="d-as-center d-pl32 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-brr4 d-code--md">d-pl32</dt-stack></div>
-  </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-pt12 ...">d-pt12</div>
-<div class="d-pr16 ...">d-pr16</div>
-<div class="d-pb24 ...">d-pb24</div>
-<div class="d-pl32 ...">d-pl32</div>
+```vue demo
+<!-- @wrapper -->
+<dt-stack direction="row" justify="center" gap="300" class="d-fw-wrap d-w100p">
+  <div class="d-as-center d-pbs-150 d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bber-300 d-code--md">d-pbs-150</dt-stack></div>
+  <div class="d-as-center d-pie-200 d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-brl4 d-code--md">d-pie-200</dt-stack></div>
+  <div class="d-as-center d-pbe-300 d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bbsr-300 d-code--md">d-pbe-300</dt-stack></div>
+  <div class="d-as-center d-pis-400 d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-bier-300 d-code--md">d-pis-400</dt-stack></div>
+</dt-stack>
 ```
 
 ## Add Horizontal Padding
 
-<code-well-header>
-  <div class="d-as-center d-px16 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-code--md">d-px16</dt-stack></div>
-</code-well-header>
-
-```html
-<div class="d-px16 ...">d-px16</div>
+```vue demo
+<div class="d-as-center d-px-200 d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-code--md">d-px-200</dt-stack></div>
 ```
 
 ## Add Vertical Padding
 
-<code-well-header>
-  <div class="d-as-center d-py16 d-bar8 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p16 d-bgc-moderate d-code--md">d-py16</dt-stack></div>
-</code-well-header>
-
-```html
-<div class="d-py24 ...">d-py24</div>
+```vue demo
+<div class="d-as-center d-py-300 d-bar-400 d-bgc-bold d-of-hidden"><dt-stack direction="row" align="center" justify="center" class="d-p-200 d-bgc-moderate d-code--md">d-py-300</dt-stack></div>
 ```
 
 <script setup>
-  import { directions, values } from '@data/spacing.json';
+  import { directions, legacyDirections, legacyPaddingValues, values } from '@data/spacing.json';
 </script>
 
 ## Classes
 
-Padding can be added to an element by using a utility class (i.e. `.d-p[#]`) or by using a directional class (i.e. `.d-p{t|r|b|l|y|x}[#]`).
+Padding can be added to an element by using `d-p-{stop}` or a directional class like `d-p{t|r|b|l|y|x}-{stop}`. Logical property aliases are also available: `d-pbs-{stop}` (padding-block-start, aka top), `d-pbe-{stop}` (padding-block-end, aka bottom), `d-pis-{stop}` (padding-inline-start, aka left), `d-pie-{stop}` (padding-inline-end, aka right).
 
-<utility-class-table>
+It is highly recommended to use the [DtBox component](/components/box.md) before applying padding individually.
+
+<utility-class-table show-rendered>
   <template #content>
     <!-- Positive paddings -->
-    <tbody v-for="i in directions">
+    <tbody v-for="{ name: dir, suffix, deprecated } in directions">
         <tr v-for="{ value: val, output } in values">
-            <th scope="row" class="d-code--sm d-docsite-code">
-              <span v-if="i !== 'All'">.d-p{{ i[0] }}{{ val }}</span>
-              <span v-else>.d-p{{ val }}</span>
+            <th scope="row">
+              <dt-stack gap="50">
+                <span class="d-code--sm d-docsite-code">
+                  <span v-if="dir !== 'All'">d-p{{ suffix }}-{{ val }}</span>
+                  <span v-else>d-p-{{ val }}</span>
+                </span>
+                <span>
+                  <dt-badge v-if="deprecated" type="critical" kind="label" text="Deprecated" />
+                </span>
+              </dt-stack>
             </th>
             <td class="d-code--sm">
-                <span v-if="i == 'y'">
-                  padding-top: {{ output }} !important;<br/>
-                  padding-bottom: {{ output }} !important;
+                <span v-if="dir == 'y'">
+                  padding-block: var(--dt-spacing-{{ val }}) !important;
                 </span>
-                <span v-else-if="i == 'x'">
-                  padding-right: {{ output }} !important;<br/>
-                  padding-left: {{ output }} !important;
+                <span v-else-if="dir == 'x'">
+                  padding-inline: var(--dt-spacing-{{ val }}) !important;
                 </span>
                 <span v-else>
-                  <span v-if="i !== 'All'">padding-{{ i }}: {{ output }} !important; </span>
-                  <span v-else>padding: {{ output }} !important</span>
+                  <span v-if="dir !== 'All'">padding-{{ dir === 'top' ? 'block-start' : dir === 'bottom' ? 'block-end' : dir === 'left' ? 'inline-start' : dir === 'right' ? 'inline-end' : dir }}: var(--dt-spacing-{{ val }}) !important; </span>
+                  <span v-else>padding: var(--dt-spacing-{{ val }}) !important</span>
                 </span>
             </td>
+            <td class="d-code--sm d-fc-tertiary d-ta-right">{{ output }}</td>
+            <td class="d-code--sm d-fc-tertiary d-ta-right">{{ parseFloat(output) * 10 }}px</td>
         </tr>
     </tbody>
     <!-- Unset paddings -->
     <tbody>
-      <tr v-for="i in directions">
-        <th scope="row" class="d-code--sm d-docsite-code">
-          <span v-if="i !== 'All'">.d-p{{ i[0] }}-unset</span>
-          <span v-else>.d-p-unset</span>
+      <tr v-for="{ name: dir, suffix, deprecated } in directions">
+        <th scope="row">
+          <dt-stack gap="50">
+            <span class="d-code--sm d-docsite-code">
+              <span v-if="dir !== 'All'">d-p{{ suffix }}-unset</span>
+              <span v-else>d-p-unset</span>
+            </span>
+            <span>
+              <dt-badge v-if="deprecated" type="critical" kind="label" text="Deprecated" />
+            </span>
+          </dt-stack>
         </th>
         <td class="d-code--sm">
-          <span v-if="i == 'y'">
-            padding-top: unset !important;<br/>
-            padding-bottom: unset !important;
+          <span v-if="dir == 'y'">
+            padding-block: unset !important;
           </span>
-          <span v-else-if="i == 'x'">
-            padding-right: unset !important;<br/>
-            padding-left: unset !important;
+          <span v-else-if="dir == 'x'">
+            padding-inline: unset !important;
           </span>
           <span v-else>
-            <span v-if="i !== 'All'">padding-{{ i }}: unset !important; </span>
+            <span v-if="dir !== 'All'">padding-{{ dir === 'top' ? 'block-start' : dir === 'bottom' ? 'block-end' : dir === 'left' ? 'inline-start' : dir === 'right' ? 'inline-end' : dir }}: unset !important; </span>
             <span v-else>padding: unset !important</span>
           </span>
         </td>
+        <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
+        <td class="d-fc-muted d-fs-100 d-ta-center">N/A</td>
+      </tr>
+    </tbody>
+    <!-- Deprecated pixel-named paddings -->
+    <tbody v-for="{ name: dir, suffix } in legacyDirections">
+      <tr v-for="{ value: val, variable, output } in legacyPaddingValues">
+        <th scope="row">
+          <dt-stack gap="50">
+            <span class="d-code--sm d-docsite-code">d-p{{ suffix }}{{ val }}</span>
+            <span>
+              <dt-badge type="critical" kind="label" text="Deprecated" />
+            </span>
+          </dt-stack>
+        </th>
+        <td class="d-code--sm">
+          <span v-if="dir == 'y'">
+            padding-block: var({{ variable }}) !important;
+          </span>
+          <span v-else-if="dir == 'x'">
+            padding-inline: var({{ variable }}) !important;
+          </span>
+          <span v-else>
+            <span v-if="dir !== 'All'">padding-{{ dir === 'top' ? 'block-start' : dir === 'bottom' ? 'block-end' : dir === 'left' ? 'inline-start' : 'inline-end' }}: var({{ variable }}) !important; </span>
+            <span v-else>padding: var({{ variable }}) !important</span>
+          </span>
+        </td>
+        <td class="d-code--sm d-fc-tertiary d-ta-right">{{ output }}</td>
+        <td class="d-code--sm d-fc-tertiary d-ta-right">{{ parseFloat(output) * 10 }}px</td>
       </tr>
     </tbody>
   </template>

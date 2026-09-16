@@ -2,15 +2,15 @@
 title: Tooltip
 status: ready
 thumb: true
-image: assets/images/components/tooltip.png
-description: A tooltip is a floating label that briefly explains an action, function, or an element. Its content is exclusively text and shouldn't be vital information for users. If richer media is desired, consider using a popover instead.
+description: Brief helper text shown when an element receives hover or focus.
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-tooltip--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=261-0
+keywords: ["hint", "help text", "d-tooltip", "DtTooltip", "dt-tooltip"]
 ---
 
-<code-well-header>
-  <dt-button v-dt-tooltip="`Simple tooltip`">Hover me</dt-button>
-</code-well-header>
+```vue demo-only
+<dt-button v-dt-tooltip="`Simple tooltip`">Hover me</dt-button>
+```
 
 ## Tooltip as a Directive
 
@@ -20,36 +20,15 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 
 Default tooltip directive uses top as default placement
 
-<code-well-header class="d-hmn164">
-  <dt-button v-dt-tooltip="`Tooltip text`">Hover me</dt-button>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<span data-dt-tooltip-id="dt0" aria-describedby="tippy-1">Span with tooltip</span>
-<div data-tippy-root="" id="tippy-1" style="pointer-events: none; z-index: 400; visibility: visible; position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(64.5px, -378px, 0px);">
-  <div class="tippy-box" data-state="visible" tabindex="-1" data-animation="fade" role="tooltip" data-placement="top" style="max-width: 350px; transition-duration: 180ms;">
-    <div class="tippy-content" data-state="visible" style="transition-duration: 180ms;"><div id="dt4" class="d-tooltip">Default placement</div></div>
-    <div class="tippy-svg-arrow" style="position: absolute; left: 0px; transform: translate3d(59px, 0px, 0px);">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="7"><path d="M 14.5,7 8,0 1.5,7 Z"></path></svg>
-    </div>
-  </div>
-</div>
-'
-vueCode='
+```vue demo
 <dt-button v-dt-tooltip="`Tooltip text`">Hover me</dt-button>
-'
-showHtmlWarning />
+```
 
 #### With Placement
 
 It's possible to change the tooltip default placement with directive arguments, possible values: bottom, bottom-start, bottom-end, right, right-start, right-end, left, left-start, left-end, top, top-start, top-end.
 
-<code-well-header class='d-hmn164'>
-<dt-button v-dt-tooltip:bottom-start="`Tooltip text`">Placeholder Button</dt-button>
-</code-well-header>
-
-```javascript
+```vue demo
 <dt-button v-dt-tooltip:bottom-start="`Tooltip text`">Placeholder Button</dt-button>
 ```
 
@@ -57,12 +36,21 @@ It's possible to change the tooltip default placement with directive arguments, 
 
 It's possible to change any property of the tooltip with object syntax.
 
-<code-well-header class='d-hmn164'>
+```vue demo
 <dt-button v-dt-tooltip="{ message: 'Tooltip text', placement: 'bottom-start', delay: false }">Placeholder Button</dt-button>
-</code-well-header>
+```
 
-```javascript
-<dt-button v-dt-tooltip="{ message: 'Tooltip text', placement: 'bottom-start', delay: false }">Placeholder Button</dt-button>
+#### Content Mode
+
+Tooltip content renders outside the DOM tree via Tippy.js. Use the `contentMode` modifier or object property to apply a color mode to the tooltip content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
+
+```vue demo
+<!-- @wrapper -->
+<!-- @bg d-bgc-contrast d-py-800 -->
+<dt-stack direction="row" gap="100">
+  <dt-button v-dt-tooltip.invert="`Tooltip`">Invert via Modifier</dt-button>
+  <dt-button v-dt-tooltip="{ message: 'Tooltip', contentMode: 'invert' }">Invert via Object</dt-button>
+</dt-stack>
 ```
 
 ### Import
@@ -95,35 +83,7 @@ A tooltip has two slots:
 
 ### Base Styles
 
-<code-well-header class="d-hmn164">
-  <dt-tooltip message="tooltip">
-    <template #anchor>
-      <dt-button>
-        Hover me
-      </dt-button>
-    </template>
-  </dt-tooltip>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div>
-  <span>
-    <button type="button" class="base-button__button d-btn d-btn--primary" aria-describedby="tippy-1">
-      <span class="d-btn__label base-button__label"> Hover to show tooltip </span>
-    </button>
-  </span>
-</div>
-<div data-tippy-root="" id="tippy-1" style="pointer-events: none; z-index: 400; visibility: visible; position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(129px, -322px, 0px);">
-  <div class="tippy-box" data-state="visible" tabindex="-1" data-animation="fade" role="tooltip" data-placement="top" data-theme="inverted" style="max-width: 350px; transition-duration: 180ms;">
-    <div class="tippy-content" data-state="visible" style="transition-duration: 180ms;"><div id="dt0" class="d-tooltip">tooltip</div></div>
-    <div class="tippy-svg-arrow" style="position: absolute; left: 0px; transform: translate3d(23.5px, 0px, 0px);">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="7"><path d="M 14.5,7 8,0 1.5,7 Z"></path></svg>
-    </div>
-  </div>
-</div>
-'
-vueCode='
+```vue demo
 <dt-tooltip message="tooltip">
   <template #anchor>
     <dt-button>
@@ -131,58 +91,13 @@ vueCode='
     </dt-button>
   </template>
 </dt-tooltip>
-'
-showHtmlWarning />
-
-### Inverted
-
-<code-well-header bgclass="d-bgc-contrast" class="d-hmn164">
-  <dt-tooltip inverted message="tooltip">
-    <template #anchor>
-      <dt-button>
-        Hover me
-      </dt-button>
-    </template>
-  </dt-tooltip>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div>
-  <span>
-    <button type="button" class="base-button__button d-btn d-btn--primary" aria-describedby="tippy-1">
-      <span class="d-btn__label base-button__label"> Hover to show tooltip </span>
-    </button>
-  </span>
-</div>
-<div data-tippy-root="" id="tippy-1" style="pointer-events: none; z-index: 400; visibility: visible; position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(129px, -322px, 0px);">
-  <div class="tippy-box" data-state="visible" tabindex="-1" data-animation="fade" role="tooltip" data-placement="top" data-theme="inverted" style="max-width: 350px; transition-duration: 180ms;">
-    <div class="tippy-content" data-state="visible" style="transition-duration: 180ms;"><div id="dt0" class="d-tooltip d-tooltip--inverted">tooltip</div></div>
-    <div class="tippy-svg-arrow" style="position: absolute; left: 0px; transform: translate3d(23.5px, 0px, 0px);">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="7"><path d="M 14.5,7 8,0 1.5,7 Z"></path></svg>
-    </div>
-  </div>
-</div>
-'
-vueCode='
-<dt-tooltip inverted message="tooltip">
-  <template #anchor>
-    <dt-button>
-      Hover me
-    </dt-button>
-  </template>
-</dt-tooltip>
-'
-showHtmlWarning />
+```
 
 ### Placement
 
-<code-well-header>
-  <example-tooltip-directions :directions="directions" />
-</code-well-header>
-
-<code-example-tabs
-vueCode='
+```vue demo
+<example-tooltip-directions :directions="directions" />
+<!-- @code -->
 <dt-tooltip
   message="This is a simple tooltip. The tooltip can be positioned in different directions."
   :placement="placement"
@@ -193,27 +108,11 @@ vueCode='
     </dt-button>
   </template>
 </dt-tooltip>
-'
-/>
+```
 
 ### External anchor
 
-<code-well-header>
-  <dt-button
-    id="external-tooltip-anchor"
-    importance="outlined"
-  >
-    External anchor
-  </dt-button>
-  <dt-tooltip
-    external-anchor="#external-tooltip-anchor"
-  >
-    This is a tooltip with external anchor
-  </dt-tooltip>
-</code-well-header>
-
-<code-example-tabs
-vueCode='
+```vue demo
 <dt-button
   id="external-tooltip-anchor"
   importance="outlined"
@@ -225,8 +124,7 @@ vueCode='
 >
   This is a tooltip with external anchor
 </dt-tooltip>
-'
-/>
+```
 
 ### Fallback Placements
 
@@ -235,13 +133,28 @@ The tooltip uses [headless-tippy](https://atomiks.github.io/tippyjs/v6/headless-
 be clipped, it will move to a new position. It will do this automatically by default, but if you want to
 manually specify which position it will move to in what order you can do so via the fallbackPlacements prop.
 
-## Vue API
+### Content Mode
 
-<component-vue-api component-name="tooltip" />
+Tooltip content renders outside the DOM tree via Tippy.js. Use the `contentMode` prop to apply a color mode to the tooltip content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
 
-## Classes
-
-<component-class-table component-name="tooltip" />
+```vue demo
+<!-- @bg d-bgc-contrast -->
+<dt-tooltip content-mode="invert" message="Inverted tooltip">
+  <template #anchor>
+    <dt-button>
+      Inverted
+    </dt-button>
+  </template>
+</dt-tooltip>
+<!-- @code -->
+<dt-tooltip content-mode="invert|dark|light" message="Tooltip">
+  <template #anchor>
+    <dt-button>
+      Anchor
+    </dt-button>
+  </template>
+</dt-tooltip>
+```
 
 ## Accessibility
 
@@ -273,3 +186,11 @@ import ExampleTooltipDirections from '@exampleComponents/ExampleTooltipDirection
 const dialtoneConstants = inject('dialtoneConstants', {});
 const directions = dialtoneConstants.TOOLTIP_DIRECTIONS;
 </script>
+
+## Vue API
+
+<component-vue-api component-name="tooltip" />
+
+## Classes
+
+<component-class-table component-name="tooltip" />

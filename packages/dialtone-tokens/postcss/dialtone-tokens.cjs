@@ -1,15 +1,18 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-const Color = require('colorjs.io').default;
 const {
   PLATFORM_FONT_SIZES,
   Z_INDEX,
-  IS_COLOR_REGEX,
-  IS_THEME_COLOR_REGEX,
   IS_SHADOW_REGEX,
   IS_TYPOGRAPHY_REGEX,
+  IS_TEXT_REGEX,
+  SHADOW_ALIASES,
   REGEX_OPTIONS,
-  HSLA_EXCLUDED_COLORS,
 } = require('./constants.cjs');
+
+// Hoisted to module scope — these regexes are read-only and the plugin's
+// hot path runs them per CSS file in a large per-theme loop.
+const TYPOGRAPHY_SEGMENTS_REGEX = new RegExp(`--dt-typography-(${REGEX_OPTIONS.TYPOGRAPHY_TYPE})-?(${REGEX_OPTIONS.TYPOGRAPHY_SIZES})?-?(${REGEX_OPTIONS.TYPOGRAPHY_VARIABLES})?-?(${REGEX_OPTIONS.TYPOGRAPHY_VARIABLES})?-?(.+)`);
+const TEXT_SEGMENTS_REGEX = new RegExp(`--dt-text-(${REGEX_OPTIONS.TEXT_TYPE})-(${REGEX_OPTIONS.TEXT_SIZES})-(.+)`);
+const SHADOW_SEGMENTS_REGEX = new RegExp(`--dt-shadow-(${REGEX_OPTIONS.SHADOW_VARIABLES})-?([0-9])?-(\\w+)`);
 
 let newDocEntries = {};
 
@@ -18,11 +21,10 @@ let newDocEntries = {};
  * @param { Declaration } declaration
  */
 function typography (typographyDeclarations, Declaration) {
-  const typographySegmentsRegex = new RegExp(`--dt-typography-(${REGEX_OPTIONS.TYPOGRAPHY_TYPE})-?(${REGEX_OPTIONS.TYPOGRAPHY_SIZES})?-?(${REGEX_OPTIONS.TYPOGRAPHY_VARIABLES})?-?(${REGEX_OPTIONS.TYPOGRAPHY_VARIABLES})?-?(.+)`);
   const typographyMap = typographyDeclarations.map(m => m.prop).filter(prop => !prop.endsWith('-font-family'))
     .reduce((typographies, typography) => {
       const matches = typography
-        .split(typographySegmentsRegex)
+        .split(TYPOGRAPHY_SEGMENTS_REGEX)
         .filter(chunk => !!chunk);
 
       matches.pop();
@@ -42,16 +44,42 @@ function typography (typographyDeclarations, Declaration) {
 }
 
 /**
+ * Compose text tokens
+ * @param { Declaration } declaration
+ */
+function text (textDeclarations, Declaration) {
+  const textMap = textDeclarations.map(m => m.prop).filter(prop => !prop.endsWith('-font-family'))
+    .reduce((texts, text) => {
+      const matches = text
+        .split(TEXT_SEGMENTS_REGEX)
+        .filter(chunk => !!chunk);
+
+      matches.pop();
+
+      texts.add(matches.join('-'));
+
+      return texts;
+    }, new Set());
+
+  textMap
+    .forEach(textName => {
+      const composedVar = `--dt-text-${textName}`;
+      const value = `var(${composedVar}-font-weight) var(${composedVar}-font-size)/var(${composedVar}-line-height) var(${composedVar}-font-family)`;
+      textDeclarations.at(-1).after(new Declaration({ prop: composedVar, value }));
+      newDocEntries[composedVar] = formatCompositionTokenForDocs(composedVar, value);
+    });
+}
+
+/**
  * Compose box shadow tokens
  * @param { shadowDeclarations } array declarations related to shadow
  * @param { Declaration } declaration
  */
 function boxShadows (shadowDeclarations, Declaration) {
-  const shadowSegmentsRegex = new RegExp(`--dt-shadow-(${REGEX_OPTIONS.SHADOW_VARIABLES})-?([0-9])?-(\\w+)`);
   const shadowMap = shadowDeclarations.map(m => m.prop)
     .reduce((shadows, shadow) => {
       const [name, index] = shadow
-        .split(shadowSegmentsRegex).slice(1, -1);
+        .split(SHADOW_SEGMENTS_REGEX).slice(1, -1);
       // Track the maximum layer index for multi-layer shadows
       const layerIndex = Number.isNaN(Number.parseInt(index)) ? 1 : Number.parseInt(index);
       shadows[name] = Math.max(shadows[name] || 0, layerIndex);
@@ -65,16 +93,19 @@ function boxShadows (shadowDeclarations, Declaration) {
       // in css inset shadows are defined by adding the inset keyword
       const isInset = shadowName.includes('inset');
       const times = shadowMap[shadowName];
-      const value = Array(times)
-        .fill(undefined)
-        .map((val, i) => {
-          let shadowNumber = `-${i + 1}`;
-          // tokens no longer get numbered if there is only a single one, so if this is the case, do not number it.
-          if (times === 1) {
-            shadowNumber = '';
-          }
-          return `var(${shadowVar}${shadowNumber}-offset-x) var(${shadowVar}${shadowNumber}-offset-y) var(${shadowVar}${shadowNumber}-blur) var(${shadowVar}${shadowNumber}-spread) var(${shadowVar}${shadowNumber}-color)${isInset ? ' inset' : ''}`;
-        }).join(', ');
+      const alias = SHADOW_ALIASES[shadowName];
+      const value = alias
+        ? `var(--dt-shadow-${alias})`
+        : Array(times)
+          .fill(undefined)
+          .map((val, i) => {
+            let shadowNumber = `-${i + 1}`;
+            // tokens no longer get numbered if there is only a single one, so if this is the case, do not number it.
+            if (times === 1) {
+              shadowNumber = '';
+            }
+            return `var(${shadowVar}${shadowNumber}-offset-x) var(${shadowVar}${shadowNumber}-offset-y) var(${shadowVar}${shadowNumber}-blur) var(${shadowVar}${shadowNumber}-spread) var(${shadowVar}${shadowNumber}-color)${isInset ? ' inset' : ''}`;
+          }).join(', ');
 
       shadowDeclarations.at(0).after(new Declaration({ prop: shadowVar, value }));
       newDocEntries[shadowVar] = formatCompositionTokenForDocs(shadowVar, value);
@@ -88,62 +119,13 @@ function boxShadows (shadowDeclarations, Declaration) {
  */
 function wrapInCalc (declaration) {
   if ([' * ', ' + '].some(str => declaration.value.includes(str)) && !declaration.value.startsWith('calc')) {
-    if (declaration.value.includes('var(--dt-font-size-root)')) {
-      // replace referenced root font size with 1 rem so they output as rem instead of px.
-      declaration.value = declaration.value.replace('var(--dt-font-size-root)', '1rem');
+    // Simplify "var(--dt-font-size-root) * 1" to just the variable reference
+    if (declaration.value === 'var(--dt-font-size-root) * 1') {
+      declaration.value = 'var(--dt-font-size-root)';
+      return;
     }
     declaration.value = `calc(${declaration.value})`;
   }
-}
-
-/**
- * Generate HSL CSS Variables.
- * @param { Declaration } declaration
- */
-// eslint-disable-next-line complexity
-function generateColorHsla (declaration) {
-  // Prevent regenerating hsla variables that have already been generated, since postcss will run this
-  // even for newly generated variables.
-  const isHSLA = ['-h', '-s', '-l', '-a', '-hsl', '-hsla'].some(suffix => {
-    if (declaration.prop.endsWith(suffix)) {
-      return true;
-    }
-    return false;
-  });
-
-  const isReferenceToken = (value) => value.includes('var(--');
-  const shouldHaveHSLAGenerated = (prop) =>
-    (IS_COLOR_REGEX.test(prop) ||
-    IS_THEME_COLOR_REGEX.test(prop)) &&
-    !isHSLA &&
-    !HSLA_EXCLUDED_COLORS.includes(prop);
-
-  if (!shouldHaveHSLAGenerated(declaration.prop)) return;
-
-  if (isReferenceToken(declaration.value)) {
-    const varName = declaration.value.substring(4, declaration.value.length - 1);
-    declaration.before({ prop: `${declaration.prop}-h`, value: `var(${varName}-h)` });
-    declaration.before({ prop: `${declaration.prop}-s`, value: `var(${varName}-s)` });
-    declaration.before({ prop: `${declaration.prop}-l`, value: `var(${varName}-l)` });
-    declaration.before({ prop: `${declaration.prop}-a`, value: `var(${varName}-a)` });
-    declaration.before({ prop: `${declaration.prop}-hsl`, value: `var(${varName}-hsl)` });
-    declaration.before({ prop: `${declaration.prop}-hsla`, value: `var(${varName}-hsla)` });
-    return;
-  }
-
-  const color = new Color(declaration.value).to('hsl');
-  let [hue, saturation, lightness] = color.coords;
-  const alpha = ((color.alpha?.raw || color.alpha) * 100).toFixed(0);
-  hue = hue?.raw || (isNaN(hue) ? 0 : hue);
-  saturation = saturation?.raw || saturation;
-  lightness = lightness?.raw || lightness;
-
-  declaration.before({ prop: `${declaration.prop}-h`, value: `${hue}` });
-  declaration.before({ prop: `${declaration.prop}-s`, value: `${saturation}%` });
-  declaration.before({ prop: `${declaration.prop}-l`, value: `${lightness}%` });
-  declaration.before({ prop: `${declaration.prop}-a`, value: `${alpha}%` });
-  declaration.before({ prop: `${declaration.prop}-hsl`, value: `var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l)` });
-  declaration.before({ prop: `${declaration.prop}-hsla`, value: `hsl(var(${declaration.prop}-h) var(${declaration.prop}-s) var(${declaration.prop}-l) / var(--alpha, ${alpha}%))` });
 }
 
 /**
@@ -222,7 +204,7 @@ function getThemeFromFilename (filename) {
 module.exports = () => {
   return {
     postcssPlugin: 'dialtone-tokens',
-    async Once (root, { Declaration }) {
+    async Once (root, { Declaration, AtRule }) {
       // dynamic import because we're importing ES6 into CJS
       const { buildDocs } = await import('../build-docs.js');
 
@@ -244,14 +226,21 @@ module.exports = () => {
       boxShadows(shadows, Declaration);
       const typographies = rootSelector.nodes.filter(node => node.type === 'decl' && IS_TYPOGRAPHY_REGEX.test(node.prop));
       typography(typographies, Declaration);
+      const texts = rootSelector.nodes.filter(node => node.type === 'decl' && IS_TEXT_REGEX.test(node.prop));
+      text(texts, Declaration);
 
       // add the new entries to the documentation object
       buildDocs(platformName, theme, newDocEntries);
+
+      // Wrap all token CSS output in @layer dialtone.base
+      const layerRule = new AtRule({ name: 'layer', params: 'dialtone.base' });
+      const nodes = [];
+      root.each(node => nodes.push(node));
+      nodes.forEach(node => layerRule.append(node));
+      root.append(layerRule);
     },
 
     Declaration (declaration) {
-      generateColorHsla(declaration);
-
       // A little hacky, but doesn't seem like there's a better way to do this currently.
       // wraps calculated values in calc() for css if it contains a multiplication operator.
       // This could cause issues if a value ever contains a * character that isn't for multiplication.

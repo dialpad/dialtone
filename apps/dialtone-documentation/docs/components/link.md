@@ -1,18 +1,13 @@
 ---
 title: Link
-description: A link is a navigational element that can be found on its own, within other text, or directly following content.
+description: Navigation element for inline text or adjacent content.
 status: ready
 thumb: true
-image: assets/images/components/link.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-link--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=5531-26862
+keywords: ["anchor", "hyperlink", "url", "d-link", "DtLink", "dt-link", "text link", "href"]
+combinator: DtLink
 ---
-
-<code-well-header>
-  <a href="#link" class="d-link">Base link</a>
-</code-well-header>
-
-<!-- <component-combinator component-name="DtLink" /> -->
 
 ## Usage
 
@@ -33,13 +28,13 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 
 ### Best Practices
 
-- Use useful, actionable, and descriptive text clearly conveying the hyperlink’s destination. For example, a generic label like "click here" doesn’t convey its target content.
+- Use useful, actionable, and descriptive text clearly conveying the hyperlink's destination. For example, a generic label like "click here" doesn't convey its target content.
 - Too many links can be overwhelming. Be selective about the number of links in a context.
 - Clearly identify links that target an external source.
 
 ## Accessibility
 
-- Allow keyboard navigation. Users must be able to navigate between links, i.e. keypress of tab, and activate it by pressing ‘Enter’.
+- Allow keyboard navigation. Users must be able to navigate between links, i.e. keypress of tab, and activate it by pressing 'Enter'.
 - Users must be able to identify links without relying on color alone.
 - Users must be able to activate hover and focus states with both a mouse and a keyboard.
 
@@ -47,63 +42,51 @@ figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Lib
 
 ### Default
 
-<code-well-header>
-  <a href="#link" class="d-link">Base link</a>
-  <a href="#link" class="d-link d-link--danger">Danger link</a>
-  <a href="#link" class="d-link d-link--muted">Muted link</a>
-  <a href="#link" class="d-link d-link--success">Success link</a>
-  <a href="#link" class="d-link d-link--warning">Warning link</a>
-  <a href="#link" class="d-link d-link--mention">Mention link</a>
-</code-well-header>
+```vue demo
+<!-- @wrapper -->
+<DtStack gap="100">
+  <dt-link href="#link">Base link</dt-link>
+  <dt-link href="#link" tone="critical">Critical link</dt-link>
+  <dt-link href="#link" tone="muted">Muted link</dt-link>
+  <dt-link href="#link" tone="positive">Positive link</dt-link>
+  <dt-link href="#link" tone="warning">Warning link</dt-link>
+  <dt-link href="#link" tone="info">Info link</dt-link>
+  <dt-link href="#link" tone="mention">@Mention link</dt-link>
+  <dt-link href="#link" tone="unstyled">Unstyled link</dt-link>
+</DtStack>
+```
 
-<code-example-tabs
-htmlCode='
-<a href="#link" class="d-link">Link</a>
-<a href="#link" class="d-link d-link--danger">Danger link</a>
-<a href="#link" class="d-link d-link--muted">Muted link</a>
-<a href="#link" class="d-link d-link--success">Success link</a>
-<a href="#link" class="d-link d-link--warning">Warning link</a>
-<a href="#link" class="d-link d-link--mention">Mention link</a>
-'
-vueCode='
-<dt-link :href="#link">Link</dt-link>
-<dt-link :href="#link" kind="danger">Danger link</dt-link>
-<dt-link :href="#link" kind="muted">Muted link</dt-link>
-<dt-link :href="#link" kind="success">Success link</dt-link>
-<dt-link :href="#link" kind="warning">Warning link</dt-link>
-<dt-link :href="#link" kind="mention">Mention link</dt-link>
-'
-showHtmlWarning />
+> [!WARNING]
+> `tone="unstyled"` removes default link color and underline. Use it only when the surrounding UI provides a non-color visual distinction, and keep a visible focus treatment.
+
+### No underline
+
+This inverts the underline behavior. With `underline="false"`, the link will not have an underline by default, but will show one on hover.
+
+```vue demo
+<dt-link href="#link" :underline="false">No underline link</dt-link>
+```
 
 ### Inverted
 
-<code-well-header bgclass="d-bgc-contrast">
-  <a href="#link" class="d-link d-link--inverted">Inverted base link</a>
-  <a href="#link" class="d-link d-link--inverted-danger">Inverted danger link</a>
-  <a href="#link" class="d-link d-link--inverted-success">Inverted success link</a>
-  <a href="#link" class="d-link d-link--inverted-warning">Inverted warning link</a>
-  <a href="#link" class="d-link d-link--inverted-muted">Inverted muted link</a>
-  <a href="#link" class="d-link d-link--inverted-mention">Inverted mention link</a>
-</code-well-header>
+> [!CRITICAL] Deprecated
+> The `inverted` prop has been deprecated. Use the [v-dt-mode directive](mode-island.html#inverting) instead.
 
-<code-example-tabs
-htmlCode='
-<a href="#link" class="d-link d-link--inverted">Inverted link</a>
-<a href="#link" class="d-link d-link--inverted-danger">Inverted danger link</a>
-<a href="#link" class="d-link d-link--inverted-success">Inverted success link</a>
-<a href="#link" class="d-link d-link--inverted-warning">Inverted warning link</a>
-<a href="#link" class="d-link d-link--inverted-muted">Inverted muted link</a>
-<a href="#link" class="d-link d-link--inverted-mention">Inverted muted link</a>
-'
-vueCode='
-<dt-link :href="#link" inverted>Inverted link</dt-link>
-<dt-link :href="#link" kind="danger" inverted>Inverted danger link</dt-link>
-<dt-link :href="#link" kind="success" inverted>Inverted success link</dt-link>
-<dt-link :href="#link" kind="warning" inverted>Inverted warning link</dt-link>
-<dt-link :href="#link" kind="muted" inverted>Inverted muted link</dt-link>
-<dt-link :href="#link" kind="mention" inverted>Inverted mention link</dt-link>
-'
-showHtmlWarning />
+In place of the `inverted` prop, use the [v-dt-mode directive](mode-island.html#inverting) on the component element.
+
+```vue demo
+<DtStack gap="100" class="d-bgc-contrast d-p-100">
+  <dt-link v-dt-mode:invert href="#link">Base link</dt-link>
+  <dt-link v-dt-mode:invert href="#link" tone="critical">Critical link</dt-link>
+  <dt-link v-dt-mode:invert href="#link" tone="positive">Positive link</dt-link>
+  <dt-link v-dt-mode:invert href="#link" tone="warning">Warning link</dt-link>
+  <dt-link v-dt-mode:invert href="#link" tone="info">Info link</dt-link>
+  <dt-link v-dt-mode:invert href="#link" tone="muted">Muted link</dt-link>
+  <dt-link v-dt-mode:invert href="#link" tone="mention">@Mention link</dt-link>
+</DtStack>
+<!-- @code -->
+<dt-link v-dt-mode:invert {props}>Link</dt-link>
+```
 
 ## Navigation
 
@@ -113,36 +96,30 @@ DtLink supports both external links and internal SPA navigation via Vue Router.
 
 Use `href` for standard anchor links — external URLs, hash links, etc.
 
-<code-example-tabs
-vueCode='
+```vue code-only
 <dt-link href="https://github.com/dialpad/dialtone" target="_blank" rel="noopener noreferrer">
   GitHub
 </dt-link>
 <dt-link href="#section">Jump to section</dt-link>
-'
-showHtmlWarning />
+```
 
 ### to
 
 Use `to` for Vue Router navigation. DtLink renders as a `<router-link>` when `to` is provided.
 
-<code-example-tabs
-vueCode='
+```vue code-only
 <dt-link to="/components/">Browse Components</dt-link>
 <dt-link to="/components/button">Button docs</dt-link>
-<dt-link :to="{ name: &apos;component&apos;, params: { id: &apos;button&apos; } }">Button docs</dt-link>
-'
-showHtmlWarning />
+<dt-link :to="{ name: 'component', params: { id: 'button' } }">Button docs</dt-link>
+```
 
 ### Replace history
 
 Use the `replace` prop to replace the current history entry instead of pushing a new one. Only applies when `to` is provided.
 
-<code-example-tabs
-vueCode='
+```vue code-only
 <dt-link to="/components/" replace>Browse Components</dt-link>
-'
-showHtmlWarning />
+```
 
 ## Vue API
 

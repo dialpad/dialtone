@@ -1,6 +1,7 @@
 ---
 title: Contributing
 description: Help Dialtone be even better.
+keywords: ["contribute","pull request","development"]
 ---
 
 ## Component Contribution
@@ -14,6 +15,16 @@ TBD
 To make code changes in our Design System please first read the
 [CONTRIBUTING.md](https://github.com/dialpad/dialtone/blob/staging/.github/CONTRIBUTING.md#contributing)
 in our Dialtone repository.
+
+### CSS Architecture
+
+#### Cascade Layers
+
+Dialtone uses [CSS Cascade Layers](../css-layers/) to organize styles into a predictable hierarchy. When contributing CSS, all styles must be wrapped in the appropriate `@layer` block. Read the [CSS Layers Guide](../css-layers/) to understand where to place your styles.
+
+#### Selector Specificity
+
+All component selectors should target a specificity of `(0,1,0)` — a single class. BEM naming naturally achieves this. Use CSS custom properties for modifier overrides instead of increasing selector depth, and wrap bare element descendants (e.g., `th`, `td`, `a`) in `:where()` to keep specificity flat. See the [dialtone-css CONTRIBUTING guide](https://github.com/dialpad/dialtone/blob/staging/packages/dialtone-css/.github/CONTRIBUTING.md) for full details and examples.
 
 ## Adding Icons and Illustrations
 

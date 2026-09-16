@@ -1,0 +1,625 @@
+---
+title: Text
+description: Semantic typography for individual text elements authored in Vue.
+status: new
+thumb: true
+storybook: https://dialtone.dialpad.com/vue/?path=/story/components-text--default
+keywords:
+  [
+    'dt-text',
+    'DtText',
+    'typography',
+    'size',
+    'tone',
+    'font',
+    'font size',
+    'font weight',
+    'line height',
+    'density',
+    'strength',
+    'primitive',
+  ]
+combinator: DtText
+---
+
+## Usage
+
+```vue code-only
+<dt-text> ... </dt-text>
+```
+
+Use `DtText` for individual text elements that you author in a Vue template, such as a heading, paragraph, label, caption, or code value. Its props control the element's semantic tag and typography.
+
+### Choose a text component
+
+| Content ownership | Use |
+| --- | --- |
+| You author an individual text element in a Vue template. | [DtText](/components/text.md) |
+| You author a list and its items in a Vue template. | [DtTextList](/components/text-list.md) |
+| A renderer supplies a block of native HTML. | [DtProse](/components/prose.md) |
+
+Use `DtText` in place of manually applying Text Styles. Avoid:
+
+- Applying Text Styles classes, e.g. `class="d-text-body--md"`
+- Combinations of CSS Utilities, e.g. `class="d-fs-300 d-fw-semibold d-lh-300"`
+- Custom CSS, e.g. `.foo { font: var(--dt-typography-body-md); }`.
+
+### Guidance
+
+- Prefer `DtText` over individual typography utility classes to keep implementations aligned with token updates.
+- Use the default slot for inline formatting or inline components within one text element. The `text` prop provides a simple fallback string when no slot content is present.
+- Choose the `as` prop to match the semantic HTML element (e.g., `h1`, `label`, `p`).
+- Use `variant` for complete text compositions and pair `size` with `variant` only when a raw font-size override is needed.
+- Most properties are optional, as they layer in on top of each other.
+
+<dialtone-usage>
+<template #do>
+
+- Replace multiple `d-` typography classes with a single `dt-text` instance.
+- Pick the smallest `variant` that conveys the desired hierarchy.
+- Pair `size` with `variant` when the composition is right but the font size needs a token-backed override.
+- Use `tone` for semantic color tokens instead of standalone `d-fc-*` classes.
+- Use the default slot for inline links, emphasis, icons, or other content within the text element.
+
+</template>
+<template #dont>
+
+- Mix `DtText` with conflicting typography utilities (e.g., `d-fs-*`).
+- Render headings with non-heading tags (e.g., avoid `as="div"` for top-level titles).
+- Depend on the `text` prop when the content requires inline formatting; slot it instead.
+- Wrap a block of rendered HTML or Markdown output in `DtText`. Use `DtProse` instead.
+- Render an authored list through `DtText`. Use `DtTextList` and place `DtText` inside individual items when needed.
+
+</template>
+</dialtone-usage>
+
+## Variants
+
+### Variant
+
+Use `variant` to apply a complete text composition, including font family, font size, font weight, and line height. Default will inherit styles from the parent.
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack
+  gap="400"
+  :direction="{ default: 'column', md: 'row' }"
+  align="baseline"
+>
+  <dt-text variant="headline-md" as="h3">Headline</dt-text>
+  <dt-text variant="body-md">Body</dt-text>
+  <dt-text variant="label-md">Label</dt-text>
+  <dt-text variant="code-md">Code</dt-text>
+  <dt-text>Default (inherits)</dt-text>
+</dt-stack>
+```
+
+### Size
+
+Using `size` with `variant` acts as an override of the `font-size` over its composed default. It applies a raw font-size token while keeping the rest of the composition. `size` will not work by itself, as it requires pairing with `variant`, or with legacy `kind` when migrating older usages.
+
+<dt-stack class="d-w100p d-by d-bar-300 d-of-auto">
+  <table class="d-w100p d-table">
+    <tr class="d-va-baseline">
+      <th>Size</th>
+      <th>Output</th>
+      <th>Example</th>
+    </tr>
+    <tr v-for="item in textSizeScale" :key="item.size" class="d-va-baseline">
+      <th scope="row">
+        <dt-text as="code" variant="code-xs" class="d-docsite-code">{{ item.size }}</dt-text>
+      </th>
+      <td>
+        <dt-text variant="body-sm">{{ item.output }}</dt-text>
+      </td>
+      <td>
+        <dt-text variant="body-md" :size="item.size">Text</dt-text>
+      </td>
+    </tr>
+  </table>
+</dt-stack>
+
+```vue code-only
+<dt-text
+  variant="body-xs"
+  size="125"
+>
+  Body composition with font-size override to fall between "body-xs" and "body-sm"
+</dt-text>
+```
+
+### Legacy kind
+
+> [!WARNING] Favor using `variant` over `kind/size` combinations. The `kind` prop remains supported for backward compatibility.
+>
+> When `kind` is present and `variant` is absent, `size` keeps its legacy composition behavior.
+>
+> `kind` is ignored if `variant` is present.
+
+```vue code-only
+<!-- Legacy, still supported -->
+<dt-text kind="body" size="300">Body medium composition</dt-text>
+
+<!-- Preferred -->
+<dt-text variant="body-md">Body medium composition</dt-text>
+```
+
+T-shirt sizes such as `xs`, `sm`, `md`, and `lg` belong in `variant` names for new usage. Numeric `size` values are raw font-size tokens when paired with `variant`; with legacy `kind`, they keep the historical composition mapping.
+
+### Numeric
+
+The `numeric` prop applies styles that ensure that each number is set with consistent width, making them align properly when displayed together. Ideal for displaying aligned data such as phone numbers or numbers in a table.
+
+```vue demo
+<dt-stack direction="row" gap="200">
+  <dt-stack>
+    <dt-text variant="label-sm" tone="critical">Without numeric</dt-text>
+    <dt-text>(913) 555-3170</dt-text>
+    <dt-text>(908) 555-1111</dt-text>
+    <dt-text>(805) 555-8413</dt-text>
+    <dt-text>(816) 555-1203</dt-text>
+    <dt-text>(886) 555-8888</dt-text>
+  </dt-stack>
+  <dt-stack>
+    <dt-text variant="label-sm" tone="positive">With numeric</dt-text>
+    <dt-text numeric>(913) 555-3170</dt-text>
+    <dt-text numeric>(908) 555-1111</dt-text>
+    <dt-text numeric>(805) 555-8413</dt-text>
+    <dt-text numeric>(816) 555-1203</dt-text>
+    <dt-text numeric>(886) 555-8888</dt-text>
+  </dt-stack>
+</dt-stack>
+<!-- @code -->
+<dt-text numeric>(913) 555-3170</dt-text>
+```
+
+### Strength
+
+Override the font-weight of the text. Applies to any kind/size combination. If omitted, the default weight from the typography token is used.
+
+```vue demo
+<dt-stack
+  :direction="{ default: 'column', md: 'row' }"
+  gap="200"
+  class="d-fw-wrap"
+>
+  <dt-text strength="bold">Bold</dt-text>
+  <dt-text strength="semibold">Semibold</dt-text>
+  <dt-text strength="medium">Medium</dt-text>
+  <dt-text strength="normal">Normal</dt-text>
+</dt-stack>
+<!-- @code -->
+<dt-text strength="{{strength}}">...</dt-text>
+```
+
+### Density
+
+Override the line-height of the text. Applies to any kind/size combination. If omitted, the default line-height from the typography token is used.
+
+```vue demo
+<dt-stack gap="100">
+  <dt-text variant="body-md" as="p" density="100" class="d-bgc-moderate-opaque h:d-bgc-bold-opaque">
+    <dt-text variant="code-sm" tone="tertiary" as="code" class="d-bgc-transparent">100</dt-text>
+    The quick brown fox jumped over the lazy dog.
+  </dt-text>
+  <dt-text variant="body-md" as="p" density="200" class="d-bgc-moderate-opaque h:d-bgc-bold-opaque">
+    <dt-text variant="code-sm" tone="tertiary" as="code" class="d-bgc-transparent">200</dt-text>
+    The quick brown fox jumped over the lazy dog.
+  </dt-text>
+  <dt-text variant="body-md" as="p" density="300" class="d-bgc-moderate-opaque h:d-bgc-bold-opaque">
+    <dt-text variant="code-sm" tone="tertiary" as="code" class="d-bgc-transparent">300</dt-text>
+    The quick brown fox jumped over the lazy dog.
+  </dt-text>
+  <dt-text variant="body-md" as="p" density="400" class="d-bgc-moderate-opaque h:d-bgc-bold-opaque">
+    <dt-text variant="code-sm" tone="tertiary" as="code" class="d-bgc-transparent">400</dt-text>
+    The quick brown fox jumped over the lazy dog.
+  </dt-text>
+  <dt-text variant="body-md" as="p" density="500" class="d-bgc-moderate-opaque h:d-bgc-bold-opaque">
+    <dt-text variant="code-sm" tone="tertiary" as="code" class="d-bgc-transparent">500</dt-text>
+    The quick brown fox jumped over the lazy dog.
+  </dt-text>
+  <dt-text variant="body-md" as="p" density="600" class="d-bgc-moderate-opaque h:d-bgc-bold-opaque">
+    <dt-text variant="code-sm" tone="tertiary" as="code" class="d-bgc-transparent">600</dt-text>
+    The quick brown fox jumped over the lazy dog.
+  </dt-text>
+</dt-stack>
+<!-- @code -->
+<dt-text density="{{density}}">...</dt-text>
+```
+
+### Family
+
+Override the font family. By default, `DtText` does not emit a font-family class and inherits naturally from the parent.
+
+```vue demo
+<dt-stack
+  :direction="{ default: 'column', md: 'row' }"
+  gap="200"
+  class="d-fw-wrap"
+>
+  <dt-text>Inherited</dt-text>
+  <dt-text family="sans">Sans</dt-text>
+  <dt-text family="mono">Mono</dt-text>
+  <dt-text family="expressive">Expressive</dt-text>
+</dt-stack>
+<!-- @code -->
+<dt-text family="mono">...</dt-text>
+```
+
+### Italic
+
+Use the `italic` prop to apply italic font style. When omitted or false, `DtText` does not emit a font-style override.
+
+```vue demo
+<dt-text italic>Italic text</dt-text>
+<!-- @code -->
+<dt-text italic>...</dt-text>
+```
+
+## Tone
+
+Use `tone` to declare the text's tone, which will map to a foreground color. By default, the tone is inherited from its parent.
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack class="d-py-100 d-px-200 d-bar-300">
+  <dt-text>primary</dt-text>
+  <dt-text tone="secondary">secondary</dt-text>
+  <dt-text tone="tertiary">tertiary</dt-text>
+  <dt-text tone="muted">muted</dt-text>
+  <dt-text tone="disabled">disabled</dt-text>
+  <dt-text tone="placeholder">placeholder</dt-text>
+  <dt-text tone="positive">positive</dt-text>
+  <dt-text tone="positive-strong">positive-strong</dt-text>
+  <dt-text tone="warning">warning</dt-text>
+  <dt-text tone="critical">critical</dt-text>
+  <dt-text tone="critical-strong">critical-strong</dt-text>
+  <dt-text tone="info">info</dt-text>
+  <dt-text tone="info-strong">info-strong</dt-text>
+</dt-stack>
+```
+
+### Inverted
+
+Rather than use the `-inverted` tone variants, use the [v-dt-mode](/components/mode-island.html) directive.
+
+```vue demo
+<dt-stack gap="100" class="d-py-100 d-px-200 d-bar-300">
+  <div class="d-p-100 d-px-150 d-bgc-transparent d-baw2 d-bas-dashed d-bc-subtle">
+    <dt-text as="p" align="center" tone="critical">critical tone on default surface</dt-text>
+  </div>
+  <div class="d-p-100 d-px-150 d-bgc-contrast">
+    <dt-text as="p" align="center" v-dt-mode:invert tone="critical">critical tone on contrasting surface</dt-text>
+  </div>
+</dt-stack>
+<!-- @code -->
+<dt-text
+  v-dt-mode:invert
+  tone="critical"
+>critical tone on contrasting surface</dt-text>
+```
+
+## Render as
+
+Use `as` to declare the underlying HTML tag that the component should render, independent of the visual styling. Defaults to `span`.
+
+```vue demo
+<dt-stack class="d-w100p" gap="200">
+  <dt-stack gap="100">
+    <dt-text variant="headline-xl" as="h1">The Complete Agentic AI Platform</dt-text>
+    <dt-text variant="body-md" as="p">Our AI Agents come equipped with the core skills businesses need to deliver seamless customer experiences.</dt-text>
+  </dt-stack>
+  <dt-stack direction="row" gap="500" align="start">
+    <dt-stack gap="100">
+      <dt-text variant="headline-md" as="h2" density="200">Try before you AI</dt-text>
+      <dt-text variant="body-sm" as="p">Build, run and optimize your agents - no code, just your expertise and our built-in intelligence.</dt-text>
+    </dt-stack>
+    <dt-stack gap="100">
+      <dt-text variant="headline-md" as="h2" density="200">Great minds sync alike</dt-text>
+      <dt-text variant="body-sm" as="p">Our AI learns and balances speed with quality using one data plane that keeps customers coming back.</dt-text>
+    </dt-stack>
+    <dt-stack gap="100">
+      <dt-text variant="headline-md" as="h2" density="200">History repeats itself. Customers shouldn't.</dt-text>
+      <dt-text variant="body-sm" as="p">Whatever your customer types or says, our AI and your human agents stay in sync.</dt-text>
+    </dt-stack>
+  </dt-stack>
+</dt-stack>
+```
+
+## Align
+
+Since `DtText`'s default element is a `<span>`, which is inline by default, the `align` prop will only work if its element is styled in a block context.
+
+```vue demo
+<dt-stack class="d-w100p" gap="300">
+  <div class="d-bgc-moderate-opaque">
+    <dt-text as="p" align="start">Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. </dt-text>
+  </div>
+  <div class="d-bgc-moderate-opaque">
+    <dt-text as="p" align="center">Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. </dt-text>
+  </div>
+  <div class="d-bgc-moderate-opaque">
+    <dt-text as="p" align="end">Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. </dt-text>
+  </div>
+  <div class="d-bgc-moderate-opaque">
+    <dt-text as="p" align="justify">Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. </dt-text>
+  </div>
+</dt-stack>
+<!-- @code -->
+<dt-text align="start">....</dt-text>
+<dt-text align="center">....</dt-text>
+<dt-text align="end">....</dt-text>
+<dt-text align="justify">....</dt-text>
+```
+
+## Truncate
+
+Since `DtText`'s default element is a `<span>`, the `truncate` will only work if its element is in block or inline-block context, e.g. `<div>...</div>`.
+
+```vue demo
+<div class="d-w-700">
+  <dt-text as="p" truncate>Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app.</dt-text>
+</div>
+```
+
+## Max Lines
+
+```vue demo-only
+<dt-stack gap="100">
+  <dt-stack direction="row" gap="200" justify="space-between" align="center">
+    <dt-text variant="headline-xl" as="h3" tone="secondary">Demo</dt-text>
+    <dt-stack direction="row" gap="200" align="center">
+      <dt-text v-if="state.isApplied" as="code" variant="code-sm" tone="tertiary">
+        max-lines="<dt-text tone="info">{{ state.value }}</dt-text>"
+      </dt-text>
+      <dt-stack direction="row" gap="25" align="center">
+        <dt-stack direction="row">
+          <dt-button
+            class="d-as-stretch d-bier-0 d-brw0"
+            :size="200"
+            importance="outlined"
+            kind="muted"
+            @click="toggleMaxLines"
+          >
+            Toggle
+          </dt-button>
+          <dt-button
+            v-dt-tooltip="`Decrement`"
+            class="d-as-stretch d-g-0 d-bisr-0 d-bier-0 d-brw0"
+            :size="200"
+            importance="outlined"
+            kind="muted"
+            :disabled="!canDecreaseMaxLines"
+            @click="decrementMaxLines"
+          >
+            <template #startIcon="{ iconSize }">
+              <dt-icon name="minus" :size="iconSize" />
+            </template>
+          </dt-button>
+          <dt-button
+            v-dt-tooltip="`Increment`"
+            class="d-as-stretch d-g-0 d-bisr-0"
+            :size="200"
+            importance="outlined"
+            kind="muted"
+            :disabled="!canIncreaseMaxLines"
+            @click="incrementMaxLines"
+          >
+            <template #startIcon="{ iconSize }">
+              <dt-icon name="plus" :size="iconSize" />
+            </template>
+          </dt-button>
+        </dt-stack>
+      </dt-stack>
+    </dt-stack>
+  </dt-stack>
+  <dt-stack justify="start" gap="500">
+    <dt-text :max-lines="maxLinesBinding" as="p">Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It's all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant. Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It's all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant. Welcome to Dialpad, the most modern, AI-powered business communications platform. We've taken every form of communication that you rely on and unified it into one app. Calling a client? Meeting with your team? Texting a colleague? It's all here, on all your devices. AI is by your side to transform your conversations into something you can see and use, giving you and your team a deeper look into action items and insights. Dialpad AI does the legwork to capture the details that matter most while you make and receive calls, send messages, and join meetings in an instant.</dt-text>
+  </dt-stack>
+</dt-stack>
+```
+
+```vue code-only
+<dt-text as="p" :max-lines="4">....</dt-text>
+```
+
+## Wrap
+
+Control text wrapping behavior. Particularly useful for headlines where balanced line lengths improve readability.
+
+Since `DtText`'s default element is a `<span>`, which is inline by default, the `wrap` prop will only work if its element is styled in a block context.
+
+```vue demo
+<dt-stack gap="400" align="start" class="d-w-700">
+  <dt-text as="p"><strong>Default</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
+  <dt-text as="p" wrap="balance"><strong>Balance</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
+  <dt-text as="p" wrap="pretty"><strong>Pretty</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
+  <dt-text as="p" wrap="nowrap"><strong>No Wrap</strong>. Lorem ipsum dolor sit amet consectetur adipisicing consequatur deleniti non doloremque autem adipisci in omnis voluptatibus </dt-text>
+</dt-stack>
+<!-- @code -->
+<dt-text>....</dt-text>
+<dt-text wrap="balance">....</dt-text>
+<dt-text wrap="pretty">....</dt-text>
+<dt-text wrap="nowrap">....</dt-text>
+```
+
+## Text Box Trim
+
+Remove extra leading space above and/or below text. Useful for tight component layouts where text needs to align precisely with adjacent elements.
+
+Text box trim will only affect elements with block or inline-block styled context. It may have no effect on elements with inline or flex context.
+
+```vue demo
+<dt-stack gap="200" :direction="{ default: 'column', md: 'row' }">
+  <dt-text as="p" class="d-bgc-moderate-opaque"><strong>No trim:</strong> lorem ipsum dolor sit amet</dt-text>
+  <dt-text as="p" text-box-trim="start" class="d-bgc-moderate-opaque"><strong>Trim start:</strong> lorem ipsum dolor sit amet</dt-text>
+  <dt-text as="p" text-box-trim="end" class="d-bgc-moderate-opaque"><strong>Trim end:</strong> lorem ipsum dolor sit amet</dt-text>
+  <dt-text as="p" text-box-trim="both" class="d-bgc-moderate-opaque"><strong>Trim both:</strong> lorem ipsum dolor sit amet</dt-text>
+</dt-stack>
+<!-- @code -->
+<dt-text as="p" text-box-trim="start">....</dt-text>
+<dt-text as="p" text-box-trim="end">....</dt-text>
+<dt-text as="p" text-box-trim="both">....</dt-text>
+```
+
+<dialtone-usage>
+<template #do>
+
+- Use `text-box-trim="both"` when text needs to align flush with container's top and/or bottom edges.
+
+</template>
+<template #dont>
+
+- Apply text-box-trim to body copy that benefits from natural line spacing.
+- Use text-box-trim as a substitute for proper layout spacing.
+
+</template>
+</dialtone-usage>
+
+> [!INFO] Browser Support
+> Text box trim requires modern browser support for `text-box-trim`. Chrome 133+, Edge 132+, Safari 18.2+ as of November 2025. Otherwise, it will gracefully fallback to default rendering with half-leading above and below.
+
+## Examples
+
+### Profile Card
+
+```vue demo
+<ExampleProfileCard />
+<!-- @code -->
+<dt-stack gap="200">
+  <dt-stack gap="100" justify="space-between">
+    <dt-stack>
+      <dt-text as="h2" variant="headline-xl" size="400" strength="medium" density="200">
+        Katie Rodriguez
+      </dt-text>
+      <dt-stack direction="row" gap="75">
+        <dt-text tone="positive">
+          Available
+        </dt-text>
+        <dt-text>&bull;</dt-text>
+        <dt-text tone="tertiary">
+          Working from coffee shop
+        </dt-text>
+      </dt-stack>
+    </dt-stack>
+    <dt-stack gap="25">
+      <dt-text variant="body-md" density="200" strength="semibold" tone="tertiary">
+        Chief Customer Success Officer
+      </dt-text>
+      <dt-text variant="body-sm" density="200">
+        <dt-text strength="semibold">
+          6:19 am
+        </dt-text> local time
+      </dt-text>
+    </dt-stack>
+  </dt-stack>
+  <dt-stack gap="100" direction="row" class="d-jc-space-between">
+    <dt-button class="d-fl1" kind="muted" importance="outlined">
+      <template #startIcon="{ iconSize }">
+        <dt-icon-phone :size="iconSize" />
+      </template>
+      Call
+    </dt-button>
+    <dt-button class="d-fl1" kind="muted" importance="outlined">
+      <template #startIcon="{ iconSize }">
+        <dt-icon-quick-reply :size="iconSize" />
+      </template>
+      Message
+    </dt-button>
+    <dt-button class="d-fl1" kind="muted" importance="outlined">
+      <template #startIcon="{ iconSize }">
+        <dt-icon-video :size="iconSize" />
+      </template>
+      Meet
+    </dt-button>
+  </dt-stack>
+</dt-stack>
+```
+
+### Call Log
+
+```vue demo
+<dt-stack gap="100" class="d-w-700">
+  <dt-text as="h2" variant="headline-lg">Saturday, May 24, 2025</dt-text>
+  <dt-stack direction="row" gap="150">
+    <dt-avatar full-name="Ashanti Trevor" />
+    <dt-stack class="d-fl1">
+      <dt-text variant="body-sm" strength="bold">Ashanti Trevor</dt-text>
+      <dt-stack direction="row" gap="50">
+        <dt-stack direction="row" gap="100">
+          <dt-icon name="phone-outgoing" size="200" class="d-fc-tertiary" />
+          <dt-text variant="body-xs" tone="tertiary">Outgoing call</dt-text>
+        </dt-stack>
+        <dt-text variant="body-xs" tone="tertiary">&bull;</dt-text>
+        <dt-text variant="body-xs" tone="tertiary">2 minutes 10 seconds</dt-text>
+      </dt-stack>
+    </dt-stack>
+    <dt-text variant="body-sm" tone="tertiary">3:23 pm</dt-text>
+    <dt-badge kind="count" type="bulletin" text="6" />
+  </dt-stack>
+</dt-stack>
+```
+
+## Accessibility
+
+- Maintain semantic structure via `as` (e.g., screen readers expect heading levels to be sequential).
+- When using `truncate`, provide another way to access the full content (tooltip, detail view, or explicit `aria-label`). `DtText` does not apply alternative access to the full string, so consuming applications should opt in.
+- Allow numeric content to remain readable by enabling the `numeric` prop when aligning tables or numbers that dynamically update.
+
+## Vue API
+
+<component-vue-api component-name="text" />
+
+## Classes
+
+<component-class-table component-name="text"></component-class-table>
+
+<script setup>
+import { computed, reactive } from 'vue';
+import ExampleProfileCard from '@exampleComponents/ExampleProfileCard.vue';
+import { fontSize } from '@data/type.json';
+
+const textSizeScale = fontSize.product.map(({ stop, size }) => ({
+  size: stop,
+  output: `${size}px`,
+}));
+
+const BOUNDS = Object.freeze({ min: 2, max: 10, default: 4 });
+const clampToBounds = (value) => Math.min(Math.max(value ?? BOUNDS.default, BOUNDS.min), BOUNDS.max);
+
+const state = reactive({
+  value: clampToBounds(BOUNDS.default),
+  lastApplied: clampToBounds(BOUNDS.default),
+  isApplied: true,
+});
+
+const maxLinesBinding = computed(() => (state.isApplied ? state.value : undefined));
+
+const canDecreaseMaxLines = computed(() => state.isApplied && state.value > BOUNDS.min);
+const canIncreaseMaxLines = computed(() => state.isApplied && state.value < BOUNDS.max);
+
+const adjustMaxLines = (delta) => {
+  if (!state.isApplied) return;
+  const nextValue = clampToBounds(state.value + delta);
+  if (nextValue === state.value) return;
+
+  state.value = nextValue;
+  state.lastApplied = nextValue;
+};
+
+const decrementMaxLines = () => adjustMaxLines(-1);
+const incrementMaxLines = () => adjustMaxLines(1);
+
+const toggleMaxLines = () => {
+  if (state.isApplied) {
+    state.lastApplied = state.value;
+    state.isApplied = false;
+    return;
+  }
+
+  const restoredValue = clampToBounds(state.lastApplied);
+  state.value = restoredValue;
+  state.lastApplied = restoredValue;
+  state.isApplied = true;
+};
+</script>

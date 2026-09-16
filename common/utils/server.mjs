@@ -7,14 +7,14 @@ import { readdirSync } from 'node:fs';
 
 /**
  * Scans recursively through the provided path
- * and gets the valid contained Vue components and recipes.
+ * and gets the valid contained Vue components.
  * @param {PathLike} folder
  * @returns {PathLike[]}
  */
 export function getValidFileList (folder) {
   const parentFolderName = folder.split('/').pop();
   const excludedFolderNamesRegex = /(extensions|modules|decorators)$/;
-  const validFileNamesRegex = new RegExp(`^${parentFolderName}\\w*\\.vue$`);
+  const validFileNamesRegex = new RegExp(`^${parentFolderName}\\w*\\.vue$`, 'i');
 
   return readdirSync(folder, { withFileTypes: true })
     .filter((item) => {

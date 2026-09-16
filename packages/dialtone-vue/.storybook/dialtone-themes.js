@@ -24,7 +24,7 @@ export const dialtoneDarkTheme = create({
 
   barBg: '#1B1B1B', // --dt-color-surface-secondary
 
-  colorSecondary: '#AB7EFF', // --dt-color-purple-400
+  colorSecondary: '#AB7EFF', // --dt-color-purple-600
 });
 export const dialtoneLightTheme = create({
   base: 'light',
@@ -38,5 +38,5 @@ export const dialtoneLightTheme = create({
 
   barBg: '#F9F9F9', // --dt-color-surface-secondary
 
-  colorSecondary: '#7C52FF', // --dt-color-purple-400
+  colorSecondary: '#7C52FF', // --dt-color-purple-600
 });

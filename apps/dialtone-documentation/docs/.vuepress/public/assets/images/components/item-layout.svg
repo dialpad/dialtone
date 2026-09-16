@@ -1,6 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 264 107" fill="none">
-<rect x="66" y="22" width="88" height="64" rx="8" fill="var(--dt-color-surface-primary)" id="button-bg"/>
-<rect x="66.5" y="22.5" width="87" height="63" rx="7.5" stroke="var(--dt-color-border-bold)" stroke-opacity="0.5" id="button-bg"/>
-<rect x="166" y="22" width="32" height="64" rx="8" fill="var(--dt-color-surface-primary)" id="button-bg"/>
-<rect x="166.5" y="22.5" width="31" height="63" rx="7.5" stroke="var(--dt-color-border-bold)" stroke-opacity="0.5" id="button-bg"/>
-</svg>

@@ -1,23 +1,19 @@
 ---
 title: Resize
 description: Utilities for controlling the resize of an element.
+keywords: ["resizable", "drag to resize"]
 ---
 
 ## Usage
 
-<code-well-header>
-  <dt-stack gap="400" class="d-w50p">
-    <div v-for="{ class: className } in resize.slice(0, 4)" :class="className" class="d-of-auto d-p16 d-ba d-bc-default">
-      .{{ className }}
-    </div>
-  </dt-stack>
-</code-well-header>
-
-```html
-<div class="d-r-both">...</div>
-<div class="d-r-horizontal">...</div>
-<div class="d-r-vertical">...</div>
-<div class="d-r-none">...</div>
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="400" class="d-w50p">
+  <div class="d-of-auto d-p-200 d-ba d-r-both">.d-r-both</div>
+  <div class="d-of-auto d-p-200 d-ba d-r-inline">.d-r-inline</div>
+  <div class="d-of-auto d-p-200 d-ba d-r-block">.d-r-block</div>
+  <div class="d-of-auto d-p-200 d-ba d-r-none">.d-r-none</div>
+</dt-stack>
 ```
 
 <script setup>
@@ -29,8 +25,8 @@ description: Utilities for controlling the resize of an element.
 <utility-class-table>
   <template #content>
     <tbody>
-      <tr v-for="{ class: className, output } in resize">
-        <th scope="row" class="d-code--sm d-docsite-code">.{{ className }}</th>
+      <tr v-for="{ class: className, output, deprecated } in resize">
+        <th scope="row" class="d-code--sm d-docsite-code">.{{ className }} <dt-badge v-if="deprecated" type="critical" class="d-ff-sans">Deprecated</dt-badge></th>
         <td class="d-code--sm">{{ output }}</td>
       </tr>
     </tbody>

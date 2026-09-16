@@ -13,7 +13,7 @@ function _getEntries (pathPrefix, globRegex) {
       'common/storybook_utils.js',
       'common/v_html.js',
       'common/mixins/keyboard_list_navigation_tester.vue',
-      'components/plugins/*',
+      'components/Plugins/*',
     ],
     maxDepth: 4,
   }).reduce((entries, path) => {
@@ -23,7 +23,9 @@ function _getEntries (pathPrefix, globRegex) {
       .join('/')
       .replace(`${pathPrefix}/`, '')
       .replace(/\.(vue|js)/, '')
-      .replaceAll('_', '-');
+      .replaceAll('_', '-')
+      .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+      .toLowerCase();
 
     entries[`${pathPrefix}/${entryName}`] = path;
 
@@ -34,7 +36,6 @@ function _getEntries (pathPrefix, globRegex) {
 const commonEntries = _getEntries('common', 'common/*/*.{js,vue}');
 const componentEntries = _getEntries('lib', 'components/*/*.{js,vue}');
 const directiveEntries = _getEntries('lib', 'directives/*/*.{js,vue}');
-const recipeEntries = _getEntries('lib', 'recipes/**/*.{js,vue}');
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -69,7 +70,6 @@ export default defineConfig({
         ...commonEntries,
         ...componentEntries,
         ...directiveEntries,
-        ...recipeEntries,
 
         // Shared components
         'shared/sr_only_close_button': './common/sr_only_close_button.vue',
@@ -107,7 +107,10 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './tests/setupTests.js',
     exclude: ['common/custom-emoji.test.js'],
-    include: ['./{common,components,directives,recipes,localization}/**/*.test.js'],
+    include: [
+      './{common,components,directives,localization}/**/*.test.js',
+      './.storybook/**/*.test.js',
+    ],
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html', 'json'],
@@ -116,7 +119,6 @@ export default defineConfig({
         'components/**/*.{js,vue}',
         'common/**/*.{js,vue}',
         'directives/**/*.{js,vue}',
-        'recipes/**/*.{js,vue}',
         'localization/**/*.{js,vue}',
       ],
       exclude: [
@@ -132,7 +134,7 @@ export default defineConfig({
         'common/storybook_utils.js',
         'common/v_html.js',
         'common/mixins/keyboard_list_navigation_tester.vue',
-        'components/plugins/*',
+        'components/Plugins/*',
         '.storybook/**',
         'storybook-static/**',
       ],

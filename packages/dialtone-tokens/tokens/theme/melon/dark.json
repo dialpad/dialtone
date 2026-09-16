@@ -7,11 +7,23 @@
           "type": "color"
         },
         "accent": {
-          "value": "{color.magenta.600}",
+          "value": "{color.magenta.900}",
           "type": "color"
         },
         "action": {
           "value": "{color.berry.950}",
+          "type": "color"
+        }
+      }
+    },
+    "logo": {
+      "color": {
+        "star": {
+          "value": "{color.purple.1000}",
+          "type": "color"
+        },
+        "wordmark": {
+          "value": "{color.purple.1000}",
           "type": "color"
         }
       }

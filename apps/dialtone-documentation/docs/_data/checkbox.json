@@ -31,21 +31,6 @@
       "description": "Styles checkbox group in a disabled state."
     },
     {
-      "class": "d-checkbox--error",
-      "applies": ".d-checkbox",
-      "description": "Styles checkbox's input in an error state."
-    },
-    {
-      "class": "d-checkbox--success",
-      "applies": ".d-checkbox",
-      "description": "Styles checkbox's input in a success state."
-    },
-    {
-      "class": "d-checkbox--warning",
-      "applies": ".d-checkbox",
-      "description": "Styles checkbox's input in a warning state."
-    },
-    {
       "class": "d-checkbox--indeterminate",
       "applies": ".d-checkbox",
       "description": "Styles checkbox's input in an indeterminate state."
@@ -56,14 +41,14 @@
       "description": "Applies base styles to checkbox's validation message."
     },
     {
-      "class": "d-validation-message--error",
+      "class": "d-validation-message--critical",
       "applies": ".d-validation-message",
-      "description": "Styles radio's validation message in an error state."
+      "description": "Styles checkbox's validation message in a critical state."
     },
     {
-      "class": "d-validation-message--success",
+      "class": "d-validation-message--positive",
       "applies": ".d-validation-message",
-      "description": "Styles radio's validation message in a success state."
+      "description": "Styles checkbox's validation message in a positive state."
     },
     {
       "class": "d-validation-message--warning",

@@ -1,50 +1,39 @@
 ---
 title: Direction, Wrap, & Flow
 description: Utilities for setting an object's flex direction, wrap, and flow directions.
+keywords: ["flexbox","flex direction","flex wrap","flex flow","row","column"]
 ---
 
-<FlexStackNotice />
+> [!WARNING] Use DtStack in favor of Flex CSS Utilities
+> Use the [DtStack](/components/stack) component for most Flex-based layout implementations. View [Migrating from Flex CSS Utilities to DtStack](/guides/migration/flex-to-stack/) for more details.
 
 ## Flex Direction
 
 The `flex-direction` property declares a flex container’s main axis direction. The default value is row.
 
-<code-well-header>
-  <dt-stack class="d-fd-row-reverse d-w100p d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-  </dt-stack>
-  <dt-stack class="d-fd-row d-w100p d-mt16 d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w64 d-h64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-  </dt-stack>
-</code-well-header>
-
-```html
-<dt-stack class="d-fd-row-reverse">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
+```vue demo
+<dt-stack class="d-fd-row-reverse d-w100p d-bar-400 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar-300">3</dt-stack>
 </dt-stack>
-<dt-stack class="d-fd-row">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
+<dt-stack class="d-fd-row d-w100p d-mbs-200 d-bar-400 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-size-100 d-bgc-moderate-opaque d-bar-300">3</dt-stack>
 </dt-stack>
 ```
 
 ### Classes
 
-<clamped-table-wrapper class="d-mb16">
+<clamped-table-wrapper class="d-mbe-200">
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
-          <th scope="col" class="d-p0 d-bbw0 d-w20p"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
-          <th scope="col" class="d-p0 d-bbw0 d-w30p"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Description</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w20p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w30p"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
+          <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Description</div></th>
         </tr>
       </thead>
       <tbody>
@@ -62,32 +51,24 @@ The `flex-direction` property declares a flex container’s main axis direction.
 
 The `flex-wrap` property declares a flex container’s wrapping status. The default value is nowrap.
 
-<code-well-header>
-  <dt-stack direction="row" class="d-fw-wrap d-w100p d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w25p d-h64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w50p d-h64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w75p d-h64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-  </dt-stack>
-</code-well-header>
-
-```html
-<dt-stack direction="row" class="d-fw-wrap">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
+```vue demo
+<dt-stack direction="row" class="d-fw-wrap d-w100p d-bar-400 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w25p d-h-100 d-bgc-moderate-opaque d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w50p d-h-100 d-bgc-moderate-opaque d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w75p d-h-100 d-bgc-moderate-opaque d-bar-300">3</dt-stack>
 </dt-stack>
 ```
 
 ### Classes
 
-<clamped-table-wrapper class="d-mb16">
+<clamped-table-wrapper class="d-mbe-200">
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
-          <th scope="col" class="d-p0 d-bbw0 d-w20p"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
-          <th scope="col" class="d-p0 d-bbw0 d-w30p"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Description</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w20p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w30p"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
+          <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Description</div></th>
         </tr>
       </thead>
       <tbody>
@@ -105,32 +86,24 @@ The `flex-wrap` property declares a flex container’s wrapping status. The defa
 
 The `flex-flow` property is a shorthand property that sets allows you to quickly set the above `flex-direction` and `flex-wrap` properties. By default all flex containers are set to `row` and `nowrap`.
 
-<code-well-header>
-  <dt-stack class="d-ff-row-reverse-wrap d-w100p d-bar8 d-bgc-moderate">
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w25p d-h64 d-bgc-moderate-opaque d-bar4">1</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w50p d-h64 d-bgc-moderate-opaque d-bar4">2</dt-stack>
-    <dt-stack direction="row" align="center" justify="center" class="d-m8 d-p16 d-w75p d-h64 d-bgc-moderate-opaque d-bar4">3</dt-stack>
-  </dt-stack>
-</code-well-header>
-
-```html
-<dt-stack class="d-ff-row-reverse-wrap">
-  <div>1</div>
-  <div>2</div>
-  <div>3</div>
+```vue demo
+<dt-stack class="d-ff-row-reverse-wrap d-w100p d-bar-400 d-bgc-moderate">
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w25p d-h-100 d-bgc-moderate-opaque d-bar-300">1</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w50p d-h-100 d-bgc-moderate-opaque d-bar-300">2</dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-m-100 d-p-200 d-w75p d-h-100 d-bgc-moderate-opaque d-bar-300">3</dt-stack>
 </dt-stack>
 ```
 
 ### Classes
 
-<clamped-table-wrapper class="d-mb16">
+<clamped-table-wrapper class="d-mbe-200">
   <div>
     <table class="d-table dialtone-doc-table">
-      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-t0">
+      <thead class="d-bgc-primary d-ps-sticky d-zi-base1 d-ibs-0">
         <tr>
-          <th scope="col" class="d-p0 d-bbw0 d-w20p"><div class="d-p16 d-bb d-bc-default d-bbw1">Class</div></th>
-          <th scope="col" class="d-p0 d-bbw0 d-w30p"><div class="d-p16 d-bb d-bc-default d-bbw1">Output</div></th>
-          <th scope="col" class="d-p0 d-bbw0"><div class="d-p16 d-bb d-bc-default d-bbw1">Description</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w20p"><div class="d-p-200 d-bb d-bbw1">Class</div></th>
+          <th scope="col" class="d-p-0 d-bbw0 d-w30p"><div class="d-p-200 d-bb d-bbw1">Output</div></th>
+          <th scope="col" class="d-p-0 d-bbw0"><div class="d-p-200 d-bb d-bbw1">Description</div></th>
         </tr>
       </thead>
       <tbody>

@@ -1,18 +1,13 @@
 ---
 title: Notice
-description: A notice is an informational and assistive message that appears inline with content.
+description: Inline message for guidance, feedback, or status.
 status: ready
 thumb: true
-image: assets/images/components/notice.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-notice--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=4492-7076
+keywords: ["alert", "message", "notification", "d-notice", "DtNotice", "dt-notice", "callout", "inline alert"]
+combinator: DtNotice
 ---
-
-<code-well-header bgclass="d-bgc-primary">
-  <example-notice kind="base" title="Base title (optional)" />
-</code-well-header>
-
-<!-- <component-combinator component-name="DtNotice" /> -->
 
 ## Usage
 
@@ -24,205 +19,18 @@ A notice delivers informational and assistive messages that inform the user abou
 
 Used in most scenarios when the message should be noticeable but not dominate.
 
-<code-well-header bgclass="d-bgc-primary">
+```vue demo
+<!-- @bg d-bgc-primary -->
+<dt-stack gap="100">
   <example-notice kind="base" title="Base title (optional)" />
-  <example-notice kind="error" title="Error title (optional)" />
+  <example-notice kind="critical" title="Critical title (optional)" />
   <example-notice kind="info" title="Info title (optional)" />
-  <example-notice kind="success" title="Success title (optional)" />
+  <example-notice kind="positive" title="Positive title (optional)" />
   <example-notice kind="warning" title="Warning title (optional)" />
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<aside class="d-notice d-notice--base">
-  <div aria-hidden="true" class="d-notice__icon">
-    <span class="d-icon__wrapper">
-      <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-400" style="display: none;">
-        <div
-          class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-          style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-        ></div>
-      </div>
-      <svg>...</svg>
-    </span>
-  </div>
-  <div class="d-notice__content" role="status">
-    <p class="d-notice__title">Base title (optional)</p>
-    <p class="d-notice__message">
-      <span> Message body with <a href="#" class="d-link d-link--muted">a link</a>. </span>
-    </p>
-  </div>
-  <div class="d-notice__actions">
-    <button type="button" class="base-button__button d-btn d-btn--outlined d-btn--muted d-btn--sm">
-      <span class="d-btn__label base-button__label"> Action </span>
-    </button>
-    <button type="button" aria-label="Close" class="base-button__button d-btn d-btn--sm d-btn--circle d-btn--icon-only">
-      <span class="base-button__icon d-btn__icon d-btn__icon--left">
-        <span class="d-icon__wrapper">
-          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-200" style="display: none;">
-            <div
-              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-            ></div>
-          </div>
-          <svg>...</svg>
-        </span>
-      </span>
-    </button>
-  </div>
-</aside>
-<aside class="d-notice d-notice--info">
-  <div aria-hidden="true" class="d-notice__icon">
-    <span class="d-icon__wrapper">
-      <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-400" style="display: none;">
-        <div
-          class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-          style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-        ></div>
-      </div>
-      <svg>...</svg>
-    </span>
-  </div>
-  <div class="d-notice__content" role="status">
-    <p class="d-notice__title">Info title (optional)</p>
-    <p class="d-notice__message">
-      <span> Message body with <a href="#" class="d-link d-link--muted">a link</a>. </span>
-    </p>
-  </div>
-  <div class="d-notice__actions">
-    <button type="button" class="base-button__button d-btn d-btn--outlined d-btn--muted d-btn--sm">
-      <span class="d-btn__label base-button__label"> Action </span>
-    </button>
-    <button type="button" aria-label="Close" class="base-button__button d-btn d-btn--sm d-btn--circle d-btn--icon-only">
-      <span class="base-button__icon d-btn__icon d-btn__icon--left">
-        <span class="d-icon__wrapper">
-          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-200" style="display: none;">
-            <div
-              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-            ></div>
-          </div>
-          <svg>...</svg>
-        </span>
-      </span>
-    </button>
-  </div>
-</aside>
-<aside class="d-notice d-notice--error">
-  <div aria-hidden="true" class="d-notice__icon">
-    <span class="d-icon__wrapper">
-      <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-400" style="display: none;">
-        <div
-          class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-          style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-        ></div>
-      </div>
-      <svg>...</svg>
-    </span>
-  </div>
-  <div class="d-notice__content" role="status">
-    <p class="d-notice__title">Error title (optional)</p>
-    <p class="d-notice__message">
-      <span> Message body with <a href="#" class="d-link d-link--muted">a link</a>. </span>
-    </p>
-  </div>
-  <div class="d-notice__actions">
-    <button type="button" class="base-button__button d-btn d-btn--outlined d-btn--muted d-btn--sm">
-      <span class="d-btn__label base-button__label"> Action </span>
-    </button>
-    <button type="button" aria-label="Close" class="base-button__button d-btn d-btn--sm d-btn--circle d-btn--icon-only">
-      <span class="base-button__icon d-btn__icon d-btn__icon--left">
-        <span class="d-icon__wrapper">
-          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-200" style="display: none;">
-            <div
-              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-            ></div>
-          </div>
-          <svg>...</svg>
-        </span>
-      </span>
-    </button>
-  </div>
-</aside>
-<aside class="d-notice d-notice--success">
-  <div aria-hidden="true" class="d-notice__icon">
-    <span class="d-icon__wrapper">
-      <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-400" style="display: none;">
-        <div
-          class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-          style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-        ></div>
-      </div>
-      <svg>...</svg>
-    </span>
-  </div>
-  <div class="d-notice__content" role="status">
-    <p class="d-notice__title">Success title (optional)</p>
-    <p class="d-notice__message">
-      <span> Message body with <a href="#" class="d-link d-link--muted">a link</a>. </span>
-    </p>
-  </div>
-  <div class="d-notice__actions">
-    <button type="button" class="base-button__button d-btn d-btn--outlined d-btn--muted d-btn--sm">
-      <span class="d-btn__label base-button__label"> Action </span>
-    </button>
-    <button type="button" aria-label="Close" class="base-button__button d-btn d-btn--sm d-btn--circle d-btn--icon-only">
-      <span class="base-button__icon d-btn__icon d-btn__icon--left">
-        <span class="d-icon__wrapper">
-          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-200" style="display: none;">
-            <div
-              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-            ></div>
-          </div>
-          <svg>...</svg>
-        </span>
-      </span>
-    </button>
-  </div>
-</aside>
-<aside class="d-notice d-notice--warning">
-  <div aria-hidden="true" class="d-notice__icon">
-    <span class="d-icon__wrapper">
-      <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-400" style="display: none;">
-        <div
-          class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-          style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-        ></div>
-      </div>
-      <svg>...</svg>
-    </span>
-  </div>
-  <div class="d-notice__content" role="status">
-    <p class="d-notice__title">Warning title (optional)</p>
-    <p class="d-notice__message">
-      <span> Message body with <a href="#" class="d-link d-link--muted">a link</a>. </span>
-    </p>
-  </div>
-  <div class="d-notice__actions">
-    <button type="button" class="base-button__button d-btn d-btn--outlined d-btn--muted d-btn--sm">
-      <span class="d-btn__label base-button__label"> Action </span>
-    </button>
-    <button type="button" aria-label="Close" class="base-button__button d-btn d-btn--sm d-btn--circle d-btn--icon-only">
-      <span class="base-button__icon d-btn__icon d-btn__icon--left">
-        <span class="d-icon__wrapper">
-          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-200" style="display: none;">
-            <div
-              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-            ></div>
-          </div>
-          <svg>...</svg>
-        </span>
-      </span>
-    </button>
-  </div>
-</aside>
-'
-vueCode='
+</dt-stack>
+<!-- @code -->
 <dt-notice
-  title="Base title (optional)"
+  header-text="Base title (optional)"
 >
   <span>
     Message body with
@@ -234,7 +42,7 @@ vueCode='
   </span>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="muted"
       @click="onClick"
@@ -244,7 +52,7 @@ vueCode='
   </template>
 </dt-notice>
 <dt-notice
-  title="Info title (optional)"
+  header-text="Info title (optional)"
   kind="info"
 >
   <span>
@@ -257,7 +65,7 @@ vueCode='
   </span>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="muted"
       @click="onClick"
@@ -267,8 +75,8 @@ vueCode='
   </template>
 </dt-notice>
 <dt-notice
-  title="Error title (optional)"
-  kind="error"
+  header-text="Critical title (optional)"
+  kind="critical"
 >
   <span>
     Message body with
@@ -280,7 +88,7 @@ vueCode='
   </span>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="muted"
       @click="onClick"
@@ -290,8 +98,8 @@ vueCode='
   </template>
 </dt-notice>
 <dt-notice
-  title="Success title (optional)"
-  kind="success"
+  header-text="Positive title (optional)"
+  kind="positive"
 >
   <span>
     Message body with
@@ -303,7 +111,7 @@ vueCode='
   </span>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="muted"
       @click="onClick"
@@ -313,7 +121,7 @@ vueCode='
   </template>
 </dt-notice>
 <dt-notice
-  title="Warning title (optional)"
+  header-text="Warning title (optional)"
   kind="warning"
 >
   <span>
@@ -326,7 +134,7 @@ vueCode='
   </span>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="muted"
       @click="onClick"
@@ -335,212 +143,23 @@ vueCode='
     </dt-button>
   </template>
 </dt-notice>
-'
-showHtmlWarning />
+```
 
 ### Important
 
 Used occasionally in scenarios when the message needs to dominate.
 
-<code-well-header>
+```vue demo
+<dt-stack gap="100">
   <example-notice important kind="base" title="Base title (optional)" />
-  <example-notice important kind="error" title="Error title (optional)" />
+  <example-notice important kind="critical" title="Critical title (optional)" />
   <example-notice important kind="info" title="Info title (optional)" />
-  <example-notice important kind="success" title="Success title (optional)" />
+  <example-notice important kind="positive" title="Positive title (optional)" />
   <example-notice important kind="warning" title="Warning title (optional)" />
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<aside class="d-notice d-notice--base d-notice--important">
-  <div aria-hidden="true" class="d-notice__icon">
-    <span class="d-icon__wrapper">
-      <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-400" style="display: none;">
-        <div
-          class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-          style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-        ></div>
-      </div>
-      <svg>...</svg>
-    </span>
-  </div>
-  <div class="d-notice__content" role="status">
-    <p class="d-notice__title">Base title (optional)</p>
-    <p class="d-notice__message">
-      <span> Message body with <a href="#" class="d-link d-link--muted">a link</a>. </span>
-    </p>
-  </div>
-  <div class="d-notice__actions">
-    <button type="button" class="base-button__button d-btn d-btn--outlined d-btn--muted d-btn--sm">
-        <span class="d-btn__label base-button__label"> Action </span>
-    </button>
-    <button type="button" aria-label="Close" class="base-button__button d-btn d-btn--sm d-btn--circle d-btn--icon-only">
-      <span class="base-button__icon d-btn__icon d-btn__icon--left">
-        <span class="d-icon__wrapper">
-          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-200" style="display: none;">
-            <div
-              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-            ></div>
-          </div>
-          <svg>...</svg>
-        </span>
-      </span>
-    </button>
-  </div>
-</aside>
-<aside class="d-notice d-notice--info d-notice--important">
-  <div aria-hidden="true" class="d-notice__icon">
-    <span class="d-icon__wrapper">
-      <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-400" style="display: none;">
-        <div
-          class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-          style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-        ></div>
-      </div>
-      <svg>...</svg>
-    </span>
-  </div>
-  <div class="d-notice__content" role="status">
-    <p class="d-notice__title">Info title (optional)</p>
-    <p class="d-notice__message">
-      <span> Message body with <a href="#" class="d-link d-link--muted">a link</a>. </span>
-    </p>
-  </div>
-  <div class="d-notice__actions">
-    <button type="button" class="base-button__button d-btn d-btn--outlined d-btn--muted d-btn--sm">
-        <span class="d-btn__label base-button__label"> Action </span>
-    </button>
-    <button type="button" aria-label="Close" class="base-button__button d-btn d-btn--sm d-btn--circle d-btn--icon-only">
-      <span class="base-button__icon d-btn__icon d-btn__icon--left">
-        <span class="d-icon__wrapper">
-          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-200" style="display: none;">
-            <div
-              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-            ></div>
-          </div>
-          <svg>...</svg>
-        </span>
-      </span>
-    </button>
-  </div>
-</aside>
-<aside class="d-notice d-notice--error d-notice--important">
-  <div aria-hidden="true" class="d-notice__icon">
-    <span class="d-icon__wrapper">
-      <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-400" style="display: none;">
-        <div
-          class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-          style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-        ></div>
-      </div>
-      <svg>...</svg>
-    </span>
-  </div>
-  <div class="d-notice__content" role="status">
-    <p class="d-notice__title">Error title (optional)</p>
-    <p class="d-notice__message">
-      <span> Message body with <a href="#" class="d-link d-link--muted">a link</a>. </span>
-    </p>
-  </div>
-  <div class="d-notice__actions">
-    <button type="button" class="base-button__button d-btn d-btn--outlined d-btn--muted d-btn--sm">
-        <span class="d-btn__label base-button__label"> Action </span>
-    </button>
-    <button type="button" aria-label="Close" class="base-button__button d-btn d-btn--sm d-btn--circle d-btn--icon-only">
-      <span class="base-button__icon d-btn__icon d-btn__icon--left">
-        <span class="d-icon__wrapper">
-          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-200" style="display: none;">
-            <div
-              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-            ></div>
-          </div>
-          <svg>...</svg>
-        </span>
-      </span>
-    </button>
-  </div>
-</aside>
-<aside class="d-notice d-notice--success d-notice--important">
-  <div aria-hidden="true" class="d-notice__icon">
-    <span class="d-icon__wrapper">
-      <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-400" style="display: none;">
-        <div
-          class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-          style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-        ></div>
-      </div>
-      <svg>...</svg>
-    </span>
-  </div>
-  <div class="d-notice__content" role="status">
-    <p class="d-notice__title">Success title (optional)</p>
-    <p class="d-notice__message">
-      <span> Message body with <a href="#" class="d-link d-link--muted">a link</a>. </span>
-    </p>
-  </div>
-  <div class="d-notice__actions">
-    <button type="button" class="base-button__button d-btn d-btn--outlined d-btn--muted d-btn--sm">
-        <span class="d-btn__label base-button__label"> Action </span>
-    </button>
-    <button type="button" aria-label="Close" class="base-button__button d-btn d-btn--sm d-btn--circle d-btn--icon-only">
-      <span class="base-button__icon d-btn__icon d-btn__icon--left">
-        <span class="d-icon__wrapper">
-          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-200" style="display: none;">
-            <div
-              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-            ></div>
-          </div>
-          <svg>...</svg>
-        </span>
-      </span>
-    </button>
-  </div>
-</aside>
-<aside class="d-notice d-notice--warning d-notice--important">
-  <div aria-hidden="true" class="d-notice__icon">
-    <span class="d-icon__wrapper">
-      <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-400" style="display: none;">
-        <div
-          class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-          style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-        ></div>
-      </div>
-      <svg>...</svg>
-    </span>
-  </div>
-  <div class="d-notice__content" role="status">
-    <p class="d-notice__title">Warning title (optional)</p>
-    <p class="d-notice__message">
-      <span> Message body with <a href="#" class="d-link d-link--muted">a link</a>. </span>
-    </p>
-  </div>
-  <div class="d-notice__actions">
-    <button type="button" class="base-button__button d-btn d-btn--outlined d-btn--muted d-btn--sm">
-        <span class="d-btn__label base-button__label"> Action </span>
-    </button>
-    <button type="button" aria-label="Close" class="base-button__button d-btn d-btn--sm d-btn--circle d-btn--icon-only">
-      <span class="base-button__icon d-btn__icon d-btn__icon--left">
-        <span class="d-icon__wrapper">
-          <div aria-busy="true" role="status" aria-label="" class="d-icon d-icon--size-200" style="display: none;">
-            <div
-              class="d-skeleton-placeholder d-bar-circle d-skeleton-placeholder--animate"
-              style="animation-delay: 0ms; animation-duration: 1000ms; min-width: 100%; max-width: 100%; min-height: 100%; max-height: 100%;"
-            ></div>
-          </div>
-          <svg>...</svg>
-        </span>
-      </span>
-    </button>
-  </div>
-</aside>
-'
-vueCode='
+</dt-stack>
+<!-- @code -->
 <dt-notice
-  title="Base title (optional)"
+  header-text="Base title (optional)"
   important
 >
   <span>
@@ -553,7 +172,7 @@ vueCode='
   </span>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="inverted"
       @click="onClick"
@@ -563,7 +182,7 @@ vueCode='
   </template>
 </dt-notice>
 <dt-notice
-  title="Info title (optional)"
+  header-text="Info title (optional)"
   kind="info"
   important
 >
@@ -577,7 +196,7 @@ vueCode='
   </span>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="inverted"
       @click="onClick"
@@ -587,8 +206,8 @@ vueCode='
   </template>
 </dt-notice>
 <dt-notice
-  title="Error title (optional)"
-  kind="error"
+  header-text="Critical title (optional)"
+  kind="critical"
   important
 >
   <span>
@@ -601,7 +220,7 @@ vueCode='
   </span>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="inverted"
       @click="onClick"
@@ -611,8 +230,8 @@ vueCode='
   </template>
 </dt-notice>
 <dt-notice
-  title="Success title (optional)"
-  kind="success"
+  header-text="Positive title (optional)"
+  kind="positive"
   important
 >
   <span>
@@ -625,7 +244,7 @@ vueCode='
   </span>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="inverted"
       @click="onClick"
@@ -635,7 +254,7 @@ vueCode='
   </template>
 </dt-notice>
 <dt-notice
-  title="Warning title (optional)"
+  header-text="Warning title (optional)"
   kind="warning"
   important
 >
@@ -649,7 +268,7 @@ vueCode='
   </span>
   <template #action>
     <dt-button
-      size="sm"
+      :size="200"
       importance="outlined"
       kind="inverted"
       @click="onClick"
@@ -658,33 +277,17 @@ vueCode='
     </dt-button>
   </template>
 </dt-notice>
-'
-showHtmlWarning />
+```
 
 ### Truncate Text
 
 Truncates the text instead of wrapping it. Useful when the Notice needs to have a fixed height.
 
-<code-well-header bgclass="d-bgc-primary">
-  <dt-notice
-    ref="htmlTruncateText"
-    :truncate-text="true"
-    title="Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-      sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
-  >
-    <span>
-      Duis aute irure dolor in reprehenderit in voluptate velit
-      esse cillum dolore eu fugiat nulla pariatur.
-    </span>
-  </dt-notice>
-</code-well-header>
-
-<code-example-tabs
-:htmlCode='() => $refs.htmlTruncateText'
-vueCode='
+```vue demo
+<!-- @bg d-bgc-primary -->
 <dt-notice
   :truncate-text="true"
-  title="Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+  header-text="Lorem ipsum dolor sit amet, consectetur adipiscing elit,
     sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
 >
   <span>
@@ -692,16 +295,7 @@ vueCode='
     esse cillum dolore eu fugiat nulla pariatur.
   </span>
 </dt-notice>
-'
-/>
-
-## Vue API
-
-<component-vue-api component-name="notice" />
-
-## Classes
-
-<component-class-table component-name="notice" />
+```
 
 ## Accessibility
 
@@ -710,3 +304,11 @@ vueCode='
 <script setup>
   import ExampleNotice from '@exampleComponents/ExampleNotice.vue';
 </script>
+
+## Vue API
+
+<component-vue-api component-name="notice" />
+
+## Classes
+
+<component-class-table component-name="notice" />

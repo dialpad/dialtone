@@ -1,5 +1,7 @@
+import clone from 'just-clone';
 import { controlMap } from '@/src/lib/control';
 import { extendBinding, extendEvent, extendMember } from '@/src/lib/info_extend';
+import { supportsRootClass } from '@/src/lib/utils';
 
 /**
  * Gets component data from the documentation and processing on it
@@ -13,8 +15,16 @@ import { extendBinding, extendEvent, extendMember } from '@/src/lib/info_extend'
  * @returns {object} A newly instantiated info object.
  */
 export function getComponentInfo (component, documentation) {
-  extendInfo(documentation, component);
-  return documentation;
+  // Extend a deep clone rather than the argument itself. `documentation` is a
+  // reactive prop, and `extendInfo` reassigns member groups (and mutates member
+  // objects) in place. Mutating it here makes the `info`/`defaultInfo` computeds
+  // that read it invalidate themselves on every evaluation — an unbounded
+  // recompute loop that surfaces as "Maximum recursive updates" once a v-model
+  // write-back perturbs the reactive graph. `clone` preserves function refs
+  // (e.g. prop validators/defaults).
+  const info = documentation ? clone(documentation) : documentation;
+  extendInfo(info, component);
+  return info;
 }
 
 /**
@@ -41,7 +51,8 @@ function extendInfo (info, component) {
 
   renameModelProp(info);
 
-  const attributes = getAttributes(info);
+  const attributes = getAttributes(info) ?? [];
+  addRootClassAttribute(info, attributes);
 
   if (info.slots) {
     info.slots = processMembers(info.slots);
@@ -52,7 +63,7 @@ function extendInfo (info, component) {
     info.props = processMembers(info.props, binding => extendBinding(binding, defaultCache));
   }
 
-  if (attributes) {
+  if (attributes.length) {
     info.attributes = processMembers(attributes);
   }
 
@@ -86,7 +97,7 @@ function renameModelProp (info) {
  * @returns {Array} - Array of attribute members.
  */
 function getAttributes (info) {
-  const properties = info.tags.property;
+  const properties = info.tags?.property;
 
   if (!properties) {
     return null;
@@ -105,6 +116,28 @@ function getAttributes (info) {
       initialValue: defaultValue,
       defaultValue,
     };
+  });
+}
+
+/**
+ * Adds the native `class` attribute unless the component is known not to apply
+ * class fallthrough directly to its rendered root element.
+ *
+ * @param {object} info - The unprocessed info object.
+ * @param {Array} attributes - Attribute members to mutate.
+ */
+function addRootClassAttribute (info, attributes) {
+  if (!supportsRootClass(info.displayName)) return;
+  if (attributes.some(attribute => attribute.name === 'class')) return;
+
+  attributes.unshift({
+    name: 'class',
+    description: 'Adds a class to the root element of this component',
+    type: {
+      name: 'string',
+    },
+    initialValue: '',
+    defaultValue: '',
   });
 }
 
@@ -165,7 +198,7 @@ function getComponentDefaults (component) {
         return [
           entryKey,
           entryValue.type !== Function && typeof entryDefault === 'function'
-            ? entryDefault()
+            ? entryDefault({})
             : entryDefault,
         ];
       });

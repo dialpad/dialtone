@@ -1,6 +1,6 @@
 <!-- eslint-disable vuejs-accessibility/no-autofocus -->
 <template>
-  <dt-stack gap="500" class="d-p16 d-bgc-secondary d-bar8">
+  <dt-stack gap="200" class="d-p-200 d-bgc-secondary d-bar-400">
     <dt-input
       id="search-input"
       v-model="searchCriteria"
@@ -11,61 +11,63 @@
       autocomplete="off"
       @keyup="searchToken"
     >
-      <template #leftIcon>
+      <template #startIcon>
         <dt-icon name="search" size="300" />
       </template>
-      <template #rightIcon>
+      <template #endIcon>
         <dt-button
           v-if="hasSearchTerm"
           id="search-input-button-close"
+          v-dt-tooltip="'Clear search'"
           kind="muted"
           importance="clear"
-          size="xs"
-          circle
+          :size="100"
           aria-label="Clear search"
           @click="resetSearch"
         >
-          <template #icon>
+          <template #startIcon>
             <dt-icon name="close" size="200" />
           </template>
         </dt-button>
       </template>
     </dt-input>
-    <dt-stack direction="row" gap="500" class="d-ai-flex-end">
+    <dt-stack direction="row" gap="200" class="d-ai-flex-end">
       <dt-select-menu
         name="format-select"
         label="Format"
-        select-class="d-w128"
+        select-class="d-w-200"
         :model-value="format"
         :options="formatSelectMenuOptions"
-        @change="updateFormat"
+        @update:model-value="updateFormat"
       />
       <dt-select-menu
         name="mode-select"
         label="Mode"
-        select-class="d-w128"
+        select-class="d-w-200"
         :model-value="mode"
         :options="MODES"
-        @change="updateMode"
+        @update:model-value="updateMode"
       />
-      <dt-select-menu
-        name="theme-select"
-        label="Theme"
-        select-class="d-w128"
-        :model-value="theme"
-        :options="THEMES"
-        @change="updateTheme"
-      />
+      <!-- hidden intetionally. keep. will revisit its role here. -->
+      <div hidden>
+        <dt-select-menu
+          name="theme-select"
+          label="Theme"
+          select-class="d-w-200"
+          :model-value="theme"
+          :options="THEMES"
+          @update:model-value="updateTheme"
+        />
+      </div>
       <dt-button
         v-dt-tooltip:top-end="shareLinkTooltip"
         importance="clear"
         kind="muted"
-        icon-position="left"
-        class="d-ml-auto"
+        class="d-mis-auto"
         @click="copyURLToClipboard"
       >
         Share Search Filter
-        <template #icon="{ iconSize }">
+        <template #startIcon="{ iconSize }">
           <dt-icon
             name="link-2"
             :size="iconSize"

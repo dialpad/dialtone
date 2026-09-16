@@ -1,12 +1,12 @@
 import DtcControlIterable from './control_iterable.vue';
 
-import { assert } from 'chai';
+import { expect } from 'vitest';
 import { mount } from '@vue/test-utils';
 
 describe('control_iterable.vue test', function () {
   let wrapper;
 
-  before(function () {
+  beforeAll(function () {
     wrapper = mount(DtcControlIterable, {
       props: {
         value: [],
@@ -17,7 +17,7 @@ describe('control_iterable.vue test', function () {
 
   describe('When mounted', function () {
     it('Should render successfully', function () {
-      assert.isTrue(wrapper.exists());
+      expect(wrapper.exists()).toBe(true);
     });
   });
 });

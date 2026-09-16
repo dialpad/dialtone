@@ -29,6 +29,11 @@
       "class": "d-presence__inner--offline",
       "applies": "d-presence__inner",
       "description": "Updates the background color of the inner Presence circle to be offline color."
+    },
+    {
+      "class": "d-presence__inner--dnd",
+      "applies": "d-presence__inner",
+      "description": "Renders the inner Presence circle as a border-only dot in the unavailable color, indicating Do Not Disturb."
     }
   ]
 }

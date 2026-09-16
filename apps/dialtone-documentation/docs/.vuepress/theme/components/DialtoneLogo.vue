@@ -1,7 +1,6 @@
 <template>
   <!-- eslint-disable max-len -->
   <router-link
-    class="d-pl16 d-w216"
     title="Dialtone homepage"
     to="/"
   >

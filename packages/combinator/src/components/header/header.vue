@@ -2,28 +2,28 @@
   <dt-stack
     direction="row"
     align="stretch"
-    class="dtc-theme__canvas d-pl12"
+    class="dtc-theme__canvas d-pis-150"
   >
     <h1 class="d-headline32 d-as-center">
       {{ component.name }}
     </h1>
-    <div class="d-fl-grow1 d-ml12 d-bl">
+    <div class="d-fl-grow1 d-mis-150 d-bl">
       <dt-stack
         direction="row"
         align="center"
         class="dtc-header__variant d-h100p"
       >
-        <div class="d-pl6 d-pt2 d-fl-grow1">
+        <div class="d-pis-75 d-pbs-25 d-fl-grow1">
           <dt-select-menu
             class="d-ba-none"
             select-class="dtc-header__select"
             label="Select target component variant"
             label-class="d-vi-visible-sr"
             name="select-menu"
-            :value="selectedVariant"
+            :model-value="selectedVariant"
             :options="variantOptions"
-            size="xl"
-            @input="e => emit('update:variant', e)"
+            :size="500"
+            @update:model-value="e => emit('update:variant', e)"
           />
         </div>
       </dt-stack>

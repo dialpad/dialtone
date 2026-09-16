@@ -19,7 +19,7 @@ module.exports = {
   meta: {
     type: 'suggestion', // `problem`, `suggestion`, or `layout`
     docs: {
-      description: 'Combining multiple typography utility categories is discouraged in favor of composed typography utilities',
+      description: 'Detects separate typography utilities that should use a composed typography utility.',
       recommended: false,
       url: 'https://github.com/dialpad/dialtone/blob/staging/packages/eslint-plugin-dialtone/docs/rules/recommend-typography-style.md', // URL to the documentation page for this rule
     },
@@ -40,7 +40,7 @@ module.exports = {
     return sourceCode.parserServices.defineTemplateBodyVisitor({
       // Visitor functions for Vue templates
       VAttribute (node) {
-        if (node.key.name === 'class') {
+        if (node.key.name === 'class' && node.value) {
           const classes = node.value.value.split(' ');
 
           // For each class, determine which category it belongs to and track all matches

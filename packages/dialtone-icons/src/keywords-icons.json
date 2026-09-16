@@ -792,6 +792,10 @@
         "subtract",
         "decrease"
       ],
+      "minus": [
+        "subtract",
+        "decrease"
+      ],
       "multi-line-dept": [
         "selection",
         "line",
@@ -1106,7 +1110,7 @@
       ],
       "dash": [
         "horizontal",
-        "minus"
+        "line"
       ],
       "equal": [
         "calculate",
@@ -1445,7 +1449,6 @@
         "brackets",
         "code",
         "json",
-        "code",
         "token",
         "curly",
         "data",
@@ -1580,6 +1583,11 @@
         "spacing",
         "default"
       ],
+      "paint-bucket": [
+        "color",
+        "fill",
+        "paint"
+      ],
       "paperclip": [
         "attachment",
         "file"
@@ -1610,7 +1618,6 @@
       ],
       "unlink-2": [
         "url",
-        "unchain",
         "unchain"
       ],
       "variable": [
@@ -1784,6 +1791,14 @@
         "bearing",
         "orient"
       ],
+      "component": [
+        "design",
+        "element",
+        "group",
+        "module",
+        "part",
+        "symbol"
+      ],
       "copy": [
         "clone",
         "duplicate"
@@ -1844,8 +1859,7 @@
       "hash-bold": [
         "number",
         "pound",
-        "hashtag",
-        "number"
+        "hashtag"
       ],
       "hash": [
         "hashtag",
@@ -2013,7 +2027,6 @@
       "shield-off": [
         "security",
         "secure",
-        "security",
         "insecure"
       ],
       "shield": [
@@ -2240,6 +2253,11 @@
       ],
       "file-pdf": [
         "document"
+      ],
+      "file-text": [
+        "document",
+        "txt",
+        "data"
       ],
       "file": [
         "document"

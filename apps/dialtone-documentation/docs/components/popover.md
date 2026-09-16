@@ -1,15 +1,13 @@
 ---
 title: Popover
-description: A Popover displays a content overlay when its anchor element is activated.
+description: Floating surface for supplemental content or controls.
 status: ready
 thumb: true
-image: assets/images/components/popover.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-popover--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=7298-20354
+keywords: ["popup", "overlay", "floating", "d-popover", "DtPopover", "dt-popover", "flyout", "tooltip panel"]
+combinator: DtPopover
 ---
-<code-well-header>
-  <example-popover modal />
-</code-well-header>
 
 ## Usage
 
@@ -64,36 +62,14 @@ The content slot will be rendered lazily when the popover is open. By default, t
 
 ### Popover - Modal
 
-<code-well-header>
-  <example-popover modal />
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div class="d-popover">
-  <div id="DtPopover__anchor1">
-    <button type="button" class="base-button__button d-btn d-btn--primary" aria-expanded="false">
-      <span class="d-btn__label base-button__label"> View Popover </span>
-    </button>
-  </div>
-</div>
-<div class="tippy-box d-ps-absolute" id="tippy-1" style="z-index: 650; position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-593px, 197px, 0px);" data-popper-placement="bottom-end">
-  <div id="dt0" role="dialog" aria-hidden="false" aria-labelledby="DtPopover__anchor1" aria-modal="false" tabindex="-1" class="d-popover__dialog d-popover__dialog--modal" style="">
-    <div class="d-popover__content d-p16">
-      <div>
-        <p class="d-mb4">This is content rendered within the popover.</p>
-        <button type="button" class="base-button__button d-btn d-btn--primary">
-          <span class="d-btn__label base-button__label"> Button </span>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-'
-vueCode='
-<dt-popover>
-  <template #anchor="{ attrs }">
-    <dt-button v-bind="attrs">
+```vue demo
+<example-popover modal />
+<!-- @code -->
+<dt-popover
+  :open="onOpen"
+>
+  <template #anchor>
+    <dt-button>
        View Popover
     </dt-button>
   </template>
@@ -101,7 +77,7 @@ vueCode='
     #content="{ close }"
   >
     <div>
-      <p class="d-mb4">
+      <p class="d-mbe-50">
         This is content rendered within the popover.
       </p>
       <dt-button
@@ -112,43 +88,19 @@ vueCode='
     </div>
   </template>
 </dt-popover>
-'
-showHtmlWarning />
+```
 
 ### Popover - Non Modal
 
-<code-well-header>
-  <example-popover />
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div class="d-popover">
-  <div id="DtPopover__anchor1">
-    <button type="button" class="base-button__button d-btn d-btn--primary" aria-expanded="false">
-      <span class="d-btn__label base-button__label"> View Popover </span>
-    </button>
-  </div>
-</div>
-<div class="tippy-box d-ps-absolute" data-tippy-root="" id="tippy-1" data-popper-placement="bottom-end" style="z-index: 300; position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(-593px, 197px, 0px);">
-  <div id="dt0" role="dialog" aria-hidden="false" aria-labelledby="DtPopover__anchor1" aria-modal="true" tabindex="-1" class="d-popover__dialog" style="">
-    <div class="d-popover__content d-p16">
-      <div>
-        <p class="d-mb4">This is content rendered within the popover.</p>
-        <button type="button" class="base-button__button d-btn d-btn--primary">
-          <span class="d-btn__label base-button__label"> Button </span>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-'
-vueCode='
+```vue demo
+<example-popover />
+<!-- @code -->
 <dt-popover
+  :open="onOpen"
   :modal="false"
 >
-  <template #anchor="{ attrs }">
-    <dt-button v-bind="attrs">
+  <template #anchor>
+    <dt-button>
       View Popover
     </dt-button>
   </template>
@@ -156,7 +108,7 @@ vueCode='
     #content="{ close }"
   >
     <div>
-      <p class="d-mb4">
+      <p class="d-mbe-50">
         This is content rendered within the popover.
       </p>
       <dt-button
@@ -167,61 +119,22 @@ vueCode='
     </div>
   </template>
 </dt-popover>
-'
-showHtmlWarning />
+```
 
 ### With Header - Modal
 
-<code-well-header>
-  <example-popover modal header>
-    <template #content>
-      <div class="d-mb8">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
-    </template>
-  </example-popover>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div class="d-popover">
-  <div id="DtPopover__anchor1">
-    <button type="button" class="base-button__button d-btn d-btn--primary" aria-expanded="false">
-      <span class="d-btn__label base-button__label"> View Popover </span>
-    </button>
-  </div>
-</div>
-<div class="tippy-box d-ps-absolute" data-tippy-root="" id="tippy-1" data-popper-placement="bottom-end" style="z-index: 650; position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(5px, 197px, 0px);">
-  <div
-    id="dt0"
-    role="dialog"
-    aria-hidden="false"
-    aria-labelledby="DtPopover__anchor1"
-    aria-modal="false"
-    tabindex="-1"
-    class="d-popover__dialog d-popover__dialog--modal"
-    style="max-height: calc(100vh - var(--dt-space-300));"
-  >
-    <div class="d-popover__header d-pl16">
-      <div class="d-popover__header__content"><div class="d-w100p">This is the header</div></div>
-    </div>
-    <div class="d-popover__content d-p16">
-      <div>
-        <div class="d-mb8">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam
-          repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis
-          obcaecati quibusdam repudiandae.<br />
-        </div>
-        <button type="button" class="base-button__button d-btn d-btn--primary">
-          <span class="d-btn__label base-button__label"> Button </span>
-        </button>
-      </div>
-    </div>
-  </div>
-</div>
-'
-vueCode='
-<dt-popover>
-  <template #anchor="{ attrs }">
-    <dt-button v-bind="attrs">
+```vue demo
+<example-popover modal header>
+  <template #content>
+    <div class="d-mbe-100">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
+  </template>
+</example-popover>
+<!-- @code -->
+<dt-popover
+  :open="onOpen"
+>
+  <template #anchor>
+    <dt-button>
       View Popover
     </dt-button>
   </template>
@@ -234,7 +147,7 @@ vueCode='
     #content="{ close }"
   >
     <div>
-      <div class="d-mb8">
+      <div class="d-mbe-100">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br>
       </div>
       <dt-button
@@ -245,61 +158,22 @@ vueCode='
     </div>
   </template>
 </dt-popover>
-'
-showHtmlWarning />
+```
 
 ### With Footer - Modal
 
-<code-well-header>
-  <example-popover modal footer>
-    <template #content>
-      <div class="d-mb8">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
-    </template>
-  </example-popover>
-</code-well-header>
-
-<code-example-tabs
-htmlCode='
-<div class="d-popover">
-  <div id="DtPopover__anchor1">
-    <button type="button" class="base-button__button d-btn d-btn--primary" aria-expanded="false">
-      <span class="d-btn__label base-button__label"> View Popover </span>
-    </button>
-  </div>
-</div>
-<div class="tippy-box d-ps-absolute" data-tippy-root="" id="tippy-5" style="z-index: 650; position: absolute; inset: 0px 0px auto auto; margin: 0px; transform: translate3d(5px, 197px, 0px);" data-popper-placement="bottom-end">
-  <div
-    id="dt0"
-    role="dialog"
-    aria-hidden="false"
-    aria-labelledby="DtPopover__anchor1"
-    aria-modal="false"
-    tabindex="-1"
-    class="d-popover__dialog d-popover__dialog--modal"
-    style="max-height: calc(100vh - var(--dt-space-300));"
-  >
-    <div class="d-popover__content d-p16">
-      <div>
-        <div class="d-mb8">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam
-          repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis
-          obcaecati quibusdam repudiandae.<br />
-        </div>
-        <button type="button" class="base-button__button d-btn d-btn--primary">
-          <span class="d-btn__label base-button__label"> Button </span>
-        </button>
-      </div>
-    </div>
-    <div class="d-popover__footer d-pl16">
-      <div class="d-popover__footer__content"><div class="d-w100p">This is the footer</div></div>
-    </div>
-  </div>
-</div>
-'
-vueCode='
-<dt-popover>
-  <template #anchor="{ attrs }">
-    <dt-button v-bind="attrs">
+```vue demo
+<example-popover modal footer>
+  <template #content>
+    <div class="d-mbe-100">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br></div>
+  </template>
+</example-popover>
+<!-- @code -->
+<dt-popover
+  :open="onOpen"
+>
+  <template #anchor>
+    <dt-button>
       View Popover
     </dt-button>
   </template>
@@ -307,7 +181,7 @@ vueCode='
     #content="{ close }"
   >
     <div>
-      <div class="d-mb8">
+      <div class="d-mbe-100">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur delectus distinctio id iure labore, maiores mollitia reprehenderit sunt tempore veritatis. Aliquam delectus earum ex, expedita ipsam nobis obcaecati quibusdam repudiandae.<br>
       </div>
       <dt-button
@@ -323,8 +197,7 @@ vueCode='
     </div>
   </template>
 </dt-popover>
-'
-showHtmlWarning />
+```
 
 ### Fallback Placements
 
@@ -333,17 +206,15 @@ The popover uses [headless-tippy](https://atomiks.github.io/tippyjs/v6/headless-
 be clipped, it will move to a new position. It will do this automatically by default, but if you want to
 manually specify which position it will move to in what order you can do so via the `fallbackPlacements` prop.
 
-<code-well-header>
-  <example-popover :fallback-placements="['top']" button-text="Fallback placement: top" />
-</code-well-header>
-
-<code-example-tabs
-vueCode='
+```vue demo
+<example-popover :fallback-placements="['top']" button-text="Fallback placement: top" />
+<!-- @code -->
 <dt-popover
+  :open="onOpen"
   :fallback-placements="[`top`]"
 >
-  <template #anchor="{ attrs }">
-    <dt-button v-bind="attrs">
+  <template #anchor>
+    <dt-button>
        fallback placement: top
     </dt-button>
   </template>
@@ -351,7 +222,7 @@ vueCode='
     #content="{ close }"
   >
     <div>
-      <p class="d-mb4">
+      <p class="d-mbe-50">
         This is content rendered within the popover.
       </p>
       <dt-button
@@ -362,24 +233,21 @@ vueCode='
     </div>
   </template>
 </dt-popover>
-'
-/>
+```
 
 ### Padding
 
 Padding options for the popover content are provided via size classes "small", "medium" or "large" in order to standardize the look of the popover content between usages. To remove the padding from the content, you can pass "none". Setting none will also allow you to set custom padding via utility classes (Ex: you only want padding on the left.).
 
-<code-well-header>
-  <example-popover padding="small" />
-</code-well-header>
-
-<code-example-tabs
-vueCode='
+```vue demo
+<example-popover padding="small" />
+<!-- @code -->
 <dt-popover
+  :open="onOpen"
   padding="small"
 >
-  <template #anchor="{ attrs }">
-    <dt-button v-bind="attrs">
+  <template #anchor>
+    <dt-button>
        View Popover
     </dt-button>
   </template>
@@ -387,7 +255,7 @@ vueCode='
     #content="{ close }"
   >
     <div>
-      <p class="d-mb4">
+      <p class="d-mbe-50">
         This is content rendered within the popover.
       </p>
       <dt-button
@@ -398,8 +266,7 @@ vueCode='
     </div>
   </template>
 </dt-popover>
-'
-/>
+```
 
 ### Force Close All Opened Instances
 
@@ -410,15 +277,24 @@ const e = new Event('dt-popover-close');
 window.dispatchEvent(e);
 ```
 
-## Vue API
+## Content Mode
 
-<component-vue-api component-name="popover" />
+Popover content renders outside the DOM tree. Use the `contentMode` prop to apply color mode (invert, light, dark) to the positioned content. See [Positioned Components](/components/mode-island.html#positioned-components) for details.
 
-## Classes
-
-Popover must contain an anchor and content element. d-modal--transparent can be used as a sibling before the popover container if you wish to make the popover modal.
-
-<component-class-table component-name="popover" />
+```vue demo
+<dt-popover content-mode="invert" placement="bottom-start" dialogClass="d-w-350">
+  <template #anchor>
+    <dt-button :size="200" kind="muted" importance="outlined">Inverted Popover</dt-button>
+  </template>
+  <template #content="{ close }">
+    <dt-text as="p">This Popover's content is in the <dt-text strength="strong">inverted</dt-text> mode.</dt-text>
+  </template>
+</dt-popover>
+<!-- @code -->
+<dt-popover content-mode="invert">...</dt-popover>
+<dt-popover content-mode="dark">...</dt-popover>
+<dt-popover content-mode="light">...</dt-popover>
+```
 
 ## Accessibility
 
@@ -471,3 +347,13 @@ Additionally you must use the "initialFocusElement" prop to set which element is
 <script setup>
   import ExamplePopover from '@exampleComponents/ExamplePopover.vue';
 </script>
+
+## Vue API
+
+<component-vue-api component-name="popover" />
+
+## Classes
+
+Popover must contain an anchor and content element. d-modal--transparent can be used as a sibling before the popover container if you wish to make the popover modal.
+
+<component-class-table component-name="popover" />

@@ -1,0 +1,26 @@
+import KitchenSinkView from './KitchenSinkView.vue';
+import { createTemplateFromVueFile } from '@/common/storybook_utils';
+
+const componentLoaders = import.meta.glob(['../**/*.stories.js', '!../kitchen_sink/**']);
+
+export default {
+  title: 'Kitchen Sink',
+  tags: ['!autodocs'],
+  parameters: {
+    options: { showPanel: false },
+    controls: { disable: true },
+    percy: { skip: true },
+  },
+};
+
+const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, KitchenSinkView);
+
+export const Components = {
+  render: Template,
+  args: {
+    title: 'Kitchen Sink: Components',
+    itemLabel: 'components',
+    iframeUrl: '/iframe.html?id=kitchen-sink--components&viewMode=story',
+    loaders: componentLoaders,
+  },
+};
