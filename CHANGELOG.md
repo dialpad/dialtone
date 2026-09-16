@@ -1,3 +1,22 @@
+# [10.0.0-next.24](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.23...dialtone/v10.0.0-next.24) (2026-09-16)
+
+
+### Documentation
+
+* DLT-3344 announcing dialtone 10 ([#1423](https://github.com/dialpad/dialtone/issues/1423)) ([12e75e3](https://github.com/dialpad/dialtone/commit/12e75e37e516fe6ffb714b1fe1060e99e541535f))
+* DLT-3612 add missing css utilities in doc table ([#1424](https://github.com/dialpad/dialtone/issues/1424)) ([7c936b9](https://github.com/dialpad/dialtone/commit/7c936b92e4e03b630ca01dad8626a0220c515a03))
+* NO-JIRA add 'at a glance' to Dialtone 10 announcement ([40dc1a0](https://github.com/dialpad/dialtone/commit/40dc1a0aec92e76af3c3ebbbcf28402411f0053c))
+
+
+### Features
+
+* **Icons:** NO-JIRA add variables icon ([#1421](https://github.com/dialpad/dialtone/issues/1421)) ([07784d4](https://github.com/dialpad/dialtone/commit/07784d4c60c94aaa6119758dc52d4c53384bfe6e))
+
+
+### Performance Improvements
+
+* **Button, Popover, Tooltip:** DLT-3600 replace deep $props watchers with targeted prop watchers ([#1422](https://github.com/dialpad/dialtone/issues/1422)) ([efe7a84](https://github.com/dialpad/dialtone/commit/efe7a84eb792621e555fe9a970a79eb53953c92f))
+
 # [9.191.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.190.0...dialtone/v9.191.0) (2026-09-15)
 
 
