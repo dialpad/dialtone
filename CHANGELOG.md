@@ -1,3 +1,10 @@
+# [9.193.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.192.0...dialtone/v9.193.0) (2026-09-16)
+
+
+### Features
+
+* DLT-2979 promote dialtone, dialtone-vue, dialtone-tokens, dialtone-css, dialtone-icons to v10 ([#1427](https://github.com/dialpad/dialtone/issues/1427)) ([41fccb9](https://github.com/dialpad/dialtone/commit/41fccb92f46281fc68bae67d5ff5effb2eabfb6b))
+
 # [9.192.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.191.0...dialtone/v9.192.0) (2026-09-16)
 
 
