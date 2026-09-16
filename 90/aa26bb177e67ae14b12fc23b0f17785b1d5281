@@ -1,0 +1,26 @@
+apps/dialtone-documentation/docs/.vuepress/theme/utils/navBreadcrumbs.js
+  s_fb74aa28f644ee::t_ce551e0fb7fc93 1
+  s_fb74aa28f644ee::t_3cfb2fe6bddbbf 35,38
+  s_fb74aa28f644ee::t_c4402129fbb004 3-9,12,18
+  s_fb74aa28f644ee::t_ba66702e49946b 26-27
+  s_fb74aa28f644ee::t_cd250cedb246f7 2,10-11,13-17,19-25,28-34,36-37,39-41
+apps/dialtone-documentation/docs/.vuepress/theme/components/Page.vue
+  s_fb74aa28f644ee::t_cd250cedb246f7 21-23,187,191-192,223-231
+  s_fb74aa28f644ee::t_e9c2fa02fda063 20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "90aa26bb177e67ae14b12fc23b0f17785b1d5281",
+  "prompts": {},
+  "sessions": {
+    "s_fb74aa28f644ee": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a016c1-4534-7332-9095-8e18310eed6e",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

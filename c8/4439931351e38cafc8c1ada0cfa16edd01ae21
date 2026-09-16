@@ -1,0 +1,46 @@
+apps/dialtone-documentation/docs/.vuepress/baseComponents/gradientHeroCursor.js
+  s_183be30c77d6b5::t_6bc3707594d35b 17-21,27,29,67-69,75,166-167
+apps/dialtone-documentation/docs/.vuepress/baseComponents/gradientHeroColors.test.mjs
+  s_183be30c77d6b5::t_762cd2fbb3f639 1-4,7-115
+  s_183be30c77d6b5::t_ec402a96b24b0c 5-6
+apps/dialtone-documentation/docs/.vuepress/baseComponents/gradientHeroColors.js
+  s_183be30c77d6b5::t_3bc4f4d2f37ecc 177,181-198,200-225,227-255
+  s_183be30c77d6b5::t_ea4c51ef95f884 1,5-6,8-18,24-25,28-36,38,43-55,59-92,95-96,99,101,103,106,108-110,113-176,178,180
+  s_183be30c77d6b5::t_93bcbc22c76b0e 179
+apps/dialtone-documentation/docs/.vuepress/baseComponents/GradientHero.vue
+  s_183be30c77d6b5::t_cfebb487755f57 32,34-37,78,105,111-112,114-116,118-120,122-123,130,134,164-165,190
+  s_183be30c77d6b5::t_d000586fe98bed 98-99
+  s_183be30c77d6b5::t_2f728ea37468ac 45-59
+  s_183be30c77d6b5::t_a2dab374867df2 153-155,253-255,257,284-285,289-297
+  s_183be30c77d6b5::t_d687caa98f4db8 33,74-77,106,110,113,117,131-133,135,188-189,236,261-265
+  s_183be30c77d6b5::t_d90943e357c490 266-269
+  s_183be30c77d6b5::t_f2661e0d28c878 270-271,273
+  s_183be30c77d6b5::t_8cc10705f61d43 22,29,39-40
+  s_183be30c77d6b5::t_382055e9722d3f 136,237,256,272,298
+apps/dialtone-documentation/docs/.vuepress/baseComponents/GradientHeroContent.vue
+  s_183be30c77d6b5::t_e2bd5538227485 1-54,56-82,87-102
+  s_183be30c77d6b5::t_9609b94ad96d85 55
+  s_183be30c77d6b5::t_7060c759dff49a 83-86
+apps/dialtone-documentation/docs/.vuepress/baseComponents/gradientHeroShader.js
+  s_183be30c77d6b5::t_d000586fe98bed 37-43,85-86,123,231-233,235-236
+  s_183be30c77d6b5::t_6147921c1a2095 44
+apps/dialtone-documentation/docs/index.md
+  s_183be30c77d6b5::t_b42db53149ea6c 266,291-298
+  s_183be30c77d6b5::t_6c53d2bb86b545 299
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "c84439931351e38cafc8c1ada0cfa16edd01ae21",
+  "prompts": {},
+  "sessions": {
+    "s_183be30c77d6b5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "89e35caf-c3fd-4daa-9b7f-4c1ed53c3ffc",
+        "model": "claude-opus-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

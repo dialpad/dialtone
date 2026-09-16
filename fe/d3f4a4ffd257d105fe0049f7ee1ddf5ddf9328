@@ -1,0 +1,24 @@
+apps/dialtone-documentation/docs/guides/migration/layout-and-spacing-tokens/index.md
+  s_dc177bf0a9429d::t_98f39245c38f90 35,89
+apps/dialtone-documentation/docs/dialtone/whats-new/posts/2026-9-16.md
+  s_dc177bf0a9429d::t_98f39245c38f90 65
+apps/dialtone-documentation/docs/foundations/size-and-space/index.md
+  s_dc177bf0a9429d::t_98f39245c38f90 21-22,27-28,31
+  s_dc177bf0a9429d::t_75e68ce3fab33a 35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "fed3f4a4ffd257d105fe0049f7ee1ddf5ddf9328",
+  "prompts": {},
+  "sessions": {
+    "s_dc177bf0a9429d": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a09cd9-0610-7db3-ae84-4054925281bf",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
