@@ -1,3 +1,10 @@
+# [8.81.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.80.1...dialtone-css/v8.81.0) (2026-09-16)
+
+
+### Features
+
+* DLT-2979 dialtone version 10 upgrade ([#1426](https://github.com/dialpad/dialtone/issues/1426)) ([21b5032](https://github.com/dialpad/dialtone/commit/21b50328e54a528fc961fc62b27b0460e4f3bf80))
+
 # [8.81.0-next.17](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.81.0-next.16...dialtone-css/v8.81.0-next.17) (2026-09-09)
 
 
