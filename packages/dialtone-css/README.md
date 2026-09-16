@@ -3,7 +3,7 @@
 This is the library for Dialtone's CSS. Any classes or styles used within Dialtone should
 be stored here and documented on our site under `apps/dialtone-documentation`.
 
-> **Dialtone v10:** see [DLT-2979](https://dialpad.atlassian.net/browse/DLT-2979) / [#1426](https://github.com/dialpad/dialtone/pull/1426) for the v10 upgrade and its breaking changes.
+> **Dialtone v10:** see [DLT-2979](https://dialpad.atlassian.net/browse/DLT-2979) / [#1426](https://github.com/dialpad/dialtone/pull/1426) for the v10 upgrade and its breaking changes. This is a MAJOR version release.
 
 ## Installation
 

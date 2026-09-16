@@ -6,7 +6,7 @@ Design tokens are all the defined values that are part of the design system, suc
 more. The goal is to store design tokens as JSON and output and publish them to many different formats (CSS, LESS,
 Android, iOS, etc.) upon build.
 
-> **Dialtone v10:** see [DLT-2979](https://dialpad.atlassian.net/browse/DLT-2979) / [#1426](https://github.com/dialpad/dialtone/pull/1426) for the v10 upgrade and its breaking changes.
+> **Dialtone v10:** see [DLT-2979](https://dialpad.atlassian.net/browse/DLT-2979) / [#1426](https://github.com/dialpad/dialtone/pull/1426) for the v10 upgrade and its breaking changes. This is a MAJOR version release.
 
 ## Usage
 

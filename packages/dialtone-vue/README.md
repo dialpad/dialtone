@@ -7,7 +7,7 @@ Dialtone Vue is a library of Vue components for [Dialtone][dt]. The goal is to s
 [dt]: https://dialtone.dialpad.com
 [dialtone-vue]: https://dialtone.dialpad.com/vue
 
-> **Dialtone v10:** see [DLT-2979](https://dialpad.atlassian.net/browse/DLT-2979) / [#1426](https://github.com/dialpad/dialtone/pull/1426) for the v10 upgrade and its breaking changes.
+> **Dialtone v10:** see [DLT-2979](https://dialpad.atlassian.net/browse/DLT-2979) / [#1426](https://github.com/dialpad/dialtone/pull/1426) for the v10 upgrade and its breaking changes. This is a MAJOR version release.
 
 ## Installation
 
