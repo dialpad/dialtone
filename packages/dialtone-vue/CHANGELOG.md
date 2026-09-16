@@ -1,3 +1,10 @@
+# [3.225.0-next.11](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0-next.10...dialtone-vue/v3.225.0-next.11) (2026-09-16)
+
+
+### Performance Improvements
+
+* **Button, Popover, Tooltip:** DLT-3600 replace deep $props watchers with targeted prop watchers ([#1422](https://github.com/dialpad/dialtone/issues/1422)) ([efe7a84](https://github.com/dialpad/dialtone/commit/efe7a84eb792621e555fe9a970a79eb53953c92f))
+
 # [3.225.0-next.10](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0-next.9...dialtone-vue/v3.225.0-next.10) (2026-09-11)
 
 
