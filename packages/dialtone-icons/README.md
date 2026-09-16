@@ -2,6 +2,8 @@
 
 This is the home for Dialtone icons and illustrations. It includes the resources needed to implement icons and illustrations on your application that conform to Dialpad’s design principles and best practices.
 
+> **Dialtone v10:** see [DLT-2979](https://dialpad.atlassian.net/browse/DLT-2979) / [#1426](https://github.com/dialpad/dialtone/pull/1426) for the v10 upgrade and its breaking changes.
+
 ## Install Dialtone icons via NPM
 
 To add Dialtone icons into your project, you can install it via NPM:
