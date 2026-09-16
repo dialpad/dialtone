@@ -107,7 +107,7 @@ jobs:
       - name: Get heading from blog post
         id: get-heading
         run: |
-          HEADING=$(sed -n 's/^heading: *//p' $FILE_PATH | sed -e 's/[[:space:]]*$//' -e 's/^"//' -e 's/"$//')
+          HEADING=$(sed -n 's/^heading: *//p' $FILE_PATH | sed -e 's/[[:space:]]*$//' -e "s/^['\"]//" -e "s/['\"]\$//")
           echo "BLOG_POST_HEADING=$HEADING" >> $GITHUB_ENV
 
       # This will do the following:
@@ -190,7 +190,7 @@ jobs:
       - name: Get heading from blog post
         id: get-heading
         run: |
-          HEADING=$(sed -n 's/^heading: *//p' $FILE_PATH | sed -e 's/[[:space:]]*$//' -e 's/^"//' -e 's/"$//')
+          HEADING=$(sed -n 's/^heading: *//p' $FILE_PATH | sed -e 's/[[:space:]]*$//' -e "s/^['\"]//" -e "s/['\"]\$//")
           echo "BLOG_POST_HEADING=$HEADING" >> $GITHUB_ENV
 
       - id: auth
