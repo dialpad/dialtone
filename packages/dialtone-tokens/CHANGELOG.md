@@ -1,3 +1,10 @@
+# [1.48.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.47.4...dialtone-tokens/v1.48.0) (2026-09-16)
+
+
+### Features
+
+* DLT-2979 dialtone version 10 upgrade ([#1426](https://github.com/dialpad/dialtone/issues/1426)) ([21b5032](https://github.com/dialpad/dialtone/commit/21b50328e54a528fc961fc62b27b0460e4f3bf80))
+
 # [2.0.0-next.8](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.0-next.7...dialtone-tokens/v2.0.0-next.8) (2026-08-27)
 
 
