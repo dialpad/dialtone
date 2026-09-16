@@ -1,3 +1,10 @@
+# [9.192.0](https://github.com/dialpad/dialtone/compare/dialtone/v9.191.0...dialtone/v9.192.0) (2026-09-16)
+
+
+### Features
+
+* DLT-2979 dialtone version 10 upgrade ([#1426](https://github.com/dialpad/dialtone/issues/1426)) ([21b5032](https://github.com/dialpad/dialtone/commit/21b50328e54a528fc961fc62b27b0460e4f3bf80))
+
 # [10.0.0-next.24](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0-next.23...dialtone/v10.0.0-next.24) (2026-09-16)
 
 
