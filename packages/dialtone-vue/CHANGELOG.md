@@ -1,3 +1,17 @@
+# [4.0.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.226.0...dialtone-vue/v4.0.0) (2026-09-16)
+
+
+### Features
+
+* DLT-2979 promote dialtone, dialtone-vue, dialtone-tokens, dialtone-css, dialtone-icons to v10 (retry) ([f307333](https://github.com/dialpad/dialtone/commit/f30733356b7f6168060fe02d923e94414cb90021)), closes [#1427](https://github.com/dialpad/dialtone/issues/1427)
+
+
+### BREAKING CHANGES
+
+* Dialtone v10 upgrade (#1426, DLT-2979). Applies a major
+version bump to dialtone, dialtone-vue, dialtone-tokens, dialtone-css, and
+dialtone-icons. See DLT-2979 for the full list of breaking changes.
+
 # [3.226.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.225.0...dialtone-vue/v3.226.0) (2026-09-16)
 
 
