@@ -45,7 +45,7 @@ The sync resolves the token sets itself, so it does not need `dialtone-tokens:bu
 
 ### Getting it into Figma, once CI is set up
 
-The push trigger takes over. Open the pull request, and if you want to see the change in Figma before it merges, comment `/sync-tokens` on it: that syncs to a separate preview file. Merging to `next` syncs the main file.
+The push trigger takes over. Open the pull request, and if you want to see the change in Figma before it merges, comment `/sync-tokens` on it: that syncs to a separate preview file. Merging to `staging` syncs the main file.
 
 At that point the local commands become debugging tools rather than the normal path. The checks stay useful for the same reason as before.
 
@@ -108,7 +108,7 @@ In CI they come from a GitHub environment rather than a plain repo secret, so a 
 
 | Trigger | Writes to | Environment |
 |---------|-----------|-------------|
-| Push to `next` touching `tokens/**` | the main file | `figma-sync-main` |
+| Push to `staging` touching `tokens/**` | the main file | `figma-sync-main` |
 | A `/sync-tokens` comment on a pull request | the preview file | `figma-sync-preview` |
 
 The comment trigger requires write access to the repo, so an outside pull request cannot start a run that holds a Figma token, and the workflow definition is read from the base branch rather than the pull request.
