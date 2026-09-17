@@ -20,7 +20,7 @@ import '@dialpad/dialtone-tokens/layered/tokens-core.css';
 import '@dialpad/dialtone-tokens/layered/tokens-base-colors.css';
 import '@dialpad/dialtone-tokens/layered/tokens-dp-colors.css';
 
-import { VALID_MATERIALS } from '@dialpad/dialtone-tokens/themes/config';
+import { VALID_MATERIALS, setMaterial as setMaterialConfig } from '@dialpad/dialtone-tokens/themes/config';
 import { DEFAULT_MATERIAL, DEFAULT_MODE, MODES } from './constants/themes.js';
 
 // Normalize stale localStorage values from removed/renamed entries (e.g.
@@ -39,13 +39,16 @@ if (typeof localStorage !== 'undefined') {
   }
 }
 
-// Pre-mount bootstrap: apply the persisted material via the data-dt-material
-// attribute before Vue hydrates so the page paints with the user's saved choice.
-// All material CSS is loaded above; the attribute selects which set wins.
+// Pre-mount bootstrap: apply the persisted material before Vue hydrates so the
+// page paints with the user's saved choice instead of flashing sandstone.
+// Goes through setMaterialConfig (not a bare attribute set) since material CSS
+// is injected on demand now — reusing it here avoids duplicating that logic,
+// and the later onMounted call in useThemeManager.js re-applying the same
+// material is a no-op upsert, not a second injection.
 if (typeof document !== 'undefined' && typeof localStorage !== 'undefined') {
   const saved = localStorage.getItem('preferredMaterial');
   if (saved) {
-    document.documentElement.setAttribute('data-dt-material', saved);
+    setMaterialConfig(saved, document.documentElement);
   }
 }
 
