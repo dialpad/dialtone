@@ -100,12 +100,16 @@ describe('themes/config.js', () => {
     });
 
     describe('When the brand declares a material lock', () => {
-      it.each([
-        ['iron', melonStub],
-        ['sandstone', botanyStub],
-      ])('Should apply data-dt-material="%s"', (expected, brand) => {
-        initDialtoneTheme(brand, 'light', root);
-        expect(root.getAttribute('data-dt-material')).toBe(expected);
+      it('Should apply the locked material and inject its override CSS', () => {
+        initDialtoneTheme(melonStub, 'light', root);
+        expect(root.getAttribute('data-dt-material')).toBe('iron');
+        expect(root.querySelector('#dialtone-css-material').innerHTML).toContain('--dt-iron-marker');
+      });
+
+      it('Should apply sandstone without injecting a style tag when the lock is sandstone', () => {
+        initDialtoneTheme(botanyStub, 'light', root);
+        expect(root.getAttribute('data-dt-material')).toBe('sandstone');
+        expect(root.querySelector('#dialtone-css-material')).toBeNull();
       });
     });
 
@@ -155,8 +159,9 @@ describe('themes/config.js', () => {
         expect(message).toContain(`unknown material '${unknownMaterialBrandStub.material.name}'`);
       });
 
-      it('Should fall back to data-dt-material="sandstone"', () => {
+      it('Should fall back to data-dt-material="sandstone" without injecting a style tag', () => {
         expect(root.getAttribute('data-dt-material')).toBe('sandstone');
+        expect(root.querySelector('#dialtone-css-material')).toBeNull();
       });
     });
 
@@ -176,15 +181,29 @@ describe('themes/config.js', () => {
   });
 
   describe('setMaterial', () => {
-    describe('When called with a known material name', () => {
-      it.each(VALID_MATERIALS)(
-        'Should set data-dt-material="%s" without injecting a style tag',
+    describe('When called with a known non-default material name', () => {
+      it.each(VALID_MATERIALS.filter((name) => name !== 'sandstone'))(
+        'Should set data-dt-material="%s" and inject its override CSS',
         (name) => {
           setMaterial(name, root);
           expect(root.getAttribute('data-dt-material')).toBe(name);
-          expect(root.querySelector('#dialtone-css-material')).toBeNull();
+          expect(root.querySelector('#dialtone-css-material').innerHTML).toContain(`--dt-${name}-marker`);
         },
       );
+    });
+
+    describe('When called with "sandstone"', () => {
+      it('Should set data-dt-material="sandstone" without injecting a style tag', () => {
+        setMaterial('sandstone', root);
+        expect(root.getAttribute('data-dt-material')).toBe('sandstone');
+        expect(root.querySelector('#dialtone-css-material')).toBeNull();
+      });
+
+      it('Should remove a previously injected style tag when switching back', () => {
+        setMaterial('steel', root);
+        setMaterial('sandstone', root);
+        expect(root.querySelector('#dialtone-css-material')).toBeNull();
+      });
     });
 
     describe('When called with null or undefined', () => {
@@ -193,7 +212,7 @@ describe('themes/config.js', () => {
       });
 
       it.each([null, undefined])(
-        'Should reset to sandstone without injecting a style tag (%p)',
+        'Should reset to sandstone and remove the injected style tag (%p)',
         (sentinel) => {
           setMaterial(sentinel, root);
           expect(root.getAttribute('data-dt-material')).toBe('sandstone');
@@ -212,14 +231,27 @@ describe('themes/config.js', () => {
         expect(message).toContain('unknown material \'unobtainium\'');
       });
 
-      it('Should fall back to data-dt-material="sandstone"', () => {
+      it('Should fall back to data-dt-material="sandstone" without injecting a style tag', () => {
         expect(root.getAttribute('data-dt-material')).toBe('sandstone');
+        expect(root.querySelector('#dialtone-css-material')).toBeNull();
       });
     });
 
     describe('When called with a non-string non-null name', () => {
       it('Should throw TypeError', () => {
         expect(() => setMaterial(42, root)).toThrow(TypeError);
+      });
+    });
+
+    describe('When switching between two non-default materials', () => {
+      it('Should replace the style tag content rather than accumulate tags', () => {
+        setMaterial('steel', root);
+        setMaterial('jade', root);
+
+        const tags = root.querySelectorAll('#dialtone-css-material');
+        expect(tags).toHaveLength(1);
+        expect(tags[0].innerHTML).toContain('--dt-jade-marker');
+        expect(tags[0].innerHTML).not.toContain('--dt-steel-marker');
       });
     });
   });
@@ -330,6 +362,17 @@ describe('themes/config.js', () => {
       });
     });
 
+    describe('When an overlay brand locks a material', () => {
+      beforeEach(() => {
+        setBrand(melonStub, root); // melon locks to iron
+      });
+
+      it('Should inject the locked material\'s override CSS', () => {
+        expect(root.getAttribute('data-dt-material')).toBe('iron');
+        expect(root.querySelector('#dialtone-css-material').innerHTML).toContain('--dt-iron-marker');
+      });
+    });
+
     describe('When a locked-material overlay is cleared with null', () => {
       beforeEach(() => {
         setBrand(melonStub, root); // melon locks to iron
@@ -338,6 +381,10 @@ describe('themes/config.js', () => {
 
       it('Should restore data-dt-material to the base brand material (sandstone for dp)', () => {
         expect(root.getAttribute('data-dt-material')).toBe('sandstone');
+      });
+
+      it('Should remove the injected material style tag', () => {
+        expect(root.querySelector('#dialtone-css-material')).toBeNull();
       });
     });
 
@@ -349,6 +396,10 @@ describe('themes/config.js', () => {
 
       it('Should restore data-dt-material to the base brand material (sandstone for dp)', () => {
         expect(root.getAttribute('data-dt-material')).toBe('sandstone');
+      });
+
+      it('Should remove the injected material style tag', () => {
+        expect(root.querySelector('#dialtone-css-material')).toBeNull();
       });
     });
   });
@@ -387,6 +438,10 @@ describe('themes/config.js', () => {
         'data-dt-contrast',
       ])('Should remove %s', (attr) => {
         expect(root.getAttribute(attr)).toBeNull();
+      });
+
+      it('Should remove the injected material style tag', () => {
+        expect(root.querySelector('#dialtone-css-material')).toBeNull();
       });
     });
   });

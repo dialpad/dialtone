@@ -128,7 +128,7 @@ setMaterial('steel'); // Apply the steel material
 setMaterial(null);    // Reset to sandstone (the default)
 ```
 
-`setMaterial` toggles the `data-dt-material` attribute on the root, which selects the matching material override CSS already loaded in the bundle. It doesn't touch brand or mode. Pass any of the five non-default material names (`steel`, `graphite`, `iron`, `amethyst`, `jade`); pass `null` or `'sandstone'` to clear the override.
+`setMaterial` injects the matching material's override CSS into the document — the same way `setBrand`/`setContrast` inject their theme CSS — then sets the `data-dt-material` attribute on the root. It doesn't touch brand or mode. Pass any of the five non-default material names (`steel`, `graphite`, `iron`, `amethyst`, `jade`); pass `null` or `'sandstone'` to clear the override (sandstone has no override CSS, so clearing just removes the injected style tag).
 
 > [!INFO] Material is root-level by design
 > Material applies at the document root only — there's no per-subtree override. Material is paired to brand for visual coherence (see [Brand-locked materials](#brand-locked-materials)), and mixing materials within a page would break that pairing. Mode (light/dark) is the only theming dimension with per-subtree override (via DtModeIsland and `v-dt-mode`).
@@ -158,9 +158,9 @@ Dialtone provides 50 themes. Import any theme from `@dialpad/dialtone/themes/{th
 **Materials:**
 
 - `sandstone` - Default warm-yellow neutral ramp (baked into base CSS — clearing the material returns here)
-- `steel`, `graphite`, `iron`, `amethyst`, `jade` - Override ramps. All ship pre-bundled in the layered CSS; `setMaterial(name)` toggles the active one via `data-dt-material`.
+- `steel`, `graphite`, `iron`, `amethyst`, `jade` - Override ramps. `setMaterial(name)` injects the matching ramp's CSS and sets `data-dt-material`.
 
-Materials are passed to `setMaterial` by string name — there are no per-material modules to import.
+Materials are passed to `setMaterial` by string name — there are no per-material modules to import. Internally, all five override ramps are bundled together (they're small) and `setMaterial` looks one up by name, the same way `setBrand`/`setContrast` inject their own theme CSS.
 
 Most brands declare a locked material in their token JSON. Switching to a locked brand auto-applies its material; the [material picker](#brand-locked-materials) disables on those brands. Free-choice brands (`dp`, `tmo`, `prota-deuter`, `trita`) keep the picker enabled.
 
