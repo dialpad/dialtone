@@ -108,8 +108,8 @@ In CI they come from a GitHub environment rather than a plain repo secret, so a 
 
 | Trigger | Writes to | Environment |
 |---------|-----------|-------------|
-| Push to `staging` touching `tokens/**` | the main file | `figma-sync-main` |
-| A `/sync-tokens` comment on a pull request | the preview file | `figma-sync-preview` |
+| Push to `staging` touching `tokens/**` | the main file | `figma-tokens-sync-main` |
+| A `/sync-tokens` comment on a pull request | the preview file | `figma-tokens-sync-preview` |
 
 The comment trigger requires write access to the repo, so an outside pull request cannot start a run that holds a Figma token, and the workflow definition is read from the base branch rather than the pull request.
 
