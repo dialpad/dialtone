@@ -196,7 +196,7 @@ hasBrandMaterialLock(Dp);     // false
 
 Disable material options in your picker when `hasBrandMaterialLock(activeBrandTheme)` returns true.
 
-**Side effect on `setBrand`:** for a locked brand, `setBrand` auto-applies the matching material (toggling `data-dt-material` alongside `data-dt-brand` in the same paint frame). This applies to both the overlay setter (`setBrand`) and the base setter (`setBaseBrand`):
+**Side effect on `setBrand`:** for a locked brand, `setBrand` auto-applies the matching material — injecting its override CSS and setting `data-dt-material` alongside `data-dt-brand` in the same paint frame. This applies to both the overlay setter (`setBrand`) and the base setter (`setBaseBrand`):
 
 ```js
 import { setBrand } from '@dialpad/dialtone/themes/config';
