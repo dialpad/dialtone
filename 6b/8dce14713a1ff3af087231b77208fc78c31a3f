@@ -1,0 +1,19 @@
+packages/dialtone-vue/components/rich_text_editor/rich_text_editor.vue
+  s_3b7290be0fb161::t_5d1b27975e346c 1010-1015
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "6b8dce14713a1ff3af087231b77208fc78c31a3f",
+  "prompts": {},
+  "sessions": {
+    "s_3b7290be0fb161": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "32b5b7a7-89dd-495e-b20e-efb4b29a5309",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Brian Alonso <brian.alonso@dialpad.com>"
+    }
+  }
+}

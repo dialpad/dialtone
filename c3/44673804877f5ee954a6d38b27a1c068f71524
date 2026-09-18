@@ -1,0 +1,36 @@
+apps/dialtone-documentation/docs/dialtone/whats-new/posts/2026-7-15.md
+  s_2c9bf7a91b8fa5::t_5f095b3ba8b19f 131
+  s_2c9bf7a91b8fa5::t_d7d461d0739b02 63-84
+  s_2c9bf7a91b8fa5::t_bec295597715ad 42
+  s_2c9bf7a91b8fa5::t_c16904ff251206 116
+  s_2c9bf7a91b8fa5::t_576e2c68a55887 88
+  s_2c9bf7a91b8fa5::t_f109532e855214 13
+  s_2c9bf7a91b8fa5::t_1e6c452db4da89 46
+  s_2c9bf7a91b8fa5::t_6bc6dbf855c55a 59
+  h_c15b5755534093 122,124-126
+  s_2c9bf7a91b8fa5::t_ecb914d67153d9 15
+  s_2c9bf7a91b8fa5::t_c6df012063d95d 1-12,14,16-21,23-41,43-45,47-58,60-62,85-87,89-105,107-115,117-121,123,127-130,132-144
+  s_2c9bf7a91b8fa5::t_37def8970d1ea8 22
+  s_2c9bf7a91b8fa5::t_0ebe03e7be6a0a 106
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "c344673804877f5ee954a6d38b27a1c068f71524",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_2c9bf7a91b8fa5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "996319e4-ffde-4045-b12a-986ae83372d8",
+        "model": "claude-fable-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
