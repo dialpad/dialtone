@@ -318,13 +318,9 @@ async function main (): Promise<void> {
     }
   }
 
-  const emit = { length: emitTotal };
-  const excluded = { length: excludedTotal };
-  const unscoped = { length: unscopedTotal };
-
-  console.log(`variables to emit : ${emit.length}`);
-  console.log(`excluded          : ${excluded.length}`);
-  console.log(`unscoped          : ${unscoped.length}`);
+  console.log(`variables to emit : ${emitTotal}`);
+  console.log(`excluded          : ${excludedTotal}`);
+  console.log(`unscoped          : ${unscopedTotal}`);
   console.log(`values compared   : ${compared}`);
   console.log(`identity refs     : ${collapsed}  (CSS collapsed an "x times 1" expression to a bare ref)`);
   console.log(`uncheckable       : ${referenced}  (expression the check will not guess at)`);

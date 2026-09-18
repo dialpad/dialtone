@@ -117,6 +117,22 @@ interface ApiPostVariablesResponse {
   meta: { tempIdToRealId: { [tempId: string]: string } }
 }
 
+const TIMEOUT_MS = 30_000
+const MAX_ATTEMPTS = 3
+
+function isTransient(error: unknown): boolean {
+  if (!axios.isAxiosError(error)) return false
+  // No response at all (timeout, DNS, connection reset) is exactly the kind
+  // of thing a retry can paper over. A 429 or 5xx is Figma's side failing
+  // transiently; a 4xx otherwise is a real client error retrying won't fix.
+  const status = error.response?.status
+  return status === undefined || status === 429 || status >= 500
+}
+
+async function sleep(ms: number): Promise<void> {
+  return new Promise(resolve => setTimeout(resolve, ms))
+}
+
 export default class FigmaApi {
   private baseUrl = 'https://api.figma.com'
   private token: string
@@ -125,20 +141,40 @@ export default class FigmaApi {
     this.token = token
   }
 
+  /**
+   * A run with no timeout can hang a CI job indefinitely on a stalled
+   * socket, and a 429/5xx used to stop a multi-material sync partway through
+   * with no chance to recover in the same run. Bounded retry on transient
+   * failures only — a real 4xx (bad payload, auth) fails immediately, since
+   * retrying it just repeats the same error three times slower.
+   */
+  private async request<T>(config: Parameters<typeof axios.request>[0]): Promise<T> {
+    let lastError: unknown
+    for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+      try {
+        const resp = await axios.request<T>({ timeout: TIMEOUT_MS, ...config })
+        return resp.data
+      } catch (error) {
+        lastError = error
+        if (attempt === MAX_ATTEMPTS || !isTransient(error)) throw error
+        await sleep(2 ** attempt * 500) // 1s, 2s
+      }
+    }
+    throw lastError
+  }
+
   async getLocalVariables(fileKey: string) {
-    const resp = await axios.request<ApiGetLocalVariablesResponse>({
+    return this.request<ApiGetLocalVariablesResponse>({
       url: `${this.baseUrl}/v1/files/${fileKey}/variables/local`,
       headers: {
         Accept: '*/*',
         'X-Figma-Token': this.token,
       },
     })
-
-    return resp.data
   }
 
   async postVariables(fileKey: string, payload: ApiPostVariablesPayload) {
-    const resp = await axios.request<ApiPostVariablesResponse>({
+    return this.request<ApiPostVariablesResponse>({
       url: `${this.baseUrl}/v1/files/${fileKey}/variables`,
       method: 'POST',
       headers: {
@@ -147,7 +183,5 @@ export default class FigmaApi {
       },
       data: payload,
     })
-
-    return resp.data
   }
 }
