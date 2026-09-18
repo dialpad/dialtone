@@ -127,14 +127,16 @@ import '@dialpad/dialtone-tokens/no-layers/tokens-base-light.css';
 import '@dialpad/dialtone-tokens/no-layers/tokens-dp-light.css';
 ```
 
-If you theme at runtime with `initDialtoneTheme` from `@dialpad/dialtone-tokens/themes/config`, pass `{ layers: false }` to load the no-layers core tokens instead:
+If you theme at runtime, use `initDialtoneThemeNoLayers` from `@dialpad/dialtone-tokens/themes/config-no-layers` to load the no-layers core tokens:
 
 ```js
-import { initDialtoneTheme } from '@dialpad/dialtone/themes/config';
+import { initDialtoneThemeNoLayers } from '@dialpad/dialtone/themes/config-no-layers';
 import Dp from '@dialpad/dialtone/themes/dp';
 
-initDialtoneTheme(Dp, 'light', document.documentElement, { layers: false });
+initDialtoneThemeNoLayers(Dp, 'light', document.documentElement);
 ```
+
+`initDialtoneTheme(..., { layers: false })` from `@dialpad/dialtone-tokens/themes/config` still works too, but resolves the no-layers core via a runtime dynamic import, so it applies a moment after the call returns rather than synchronously — prefer `initDialtoneThemeNoLayers` for new code.
 
 `setBrand`, `setContrast`, and `setMaterial` need no equivalent option — brand, contrast, and material overrides were never wrapped in `@layer` to begin with.
 
