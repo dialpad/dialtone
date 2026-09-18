@@ -89,7 +89,7 @@ let initializationState = null;
  * // Apply a brand overlay after initDialtoneTheme has set the base
  * import { initDialtoneTheme, setBrand } from '@dialpad/dialtone/themes/config';
  * import Dp from '@dialpad/dialtone/themes/dp';
- * import Tmo from '@dialpad/dialtone/themes/tmo.json';
+ * import Tmo from '@dialpad/dialtone/themes/tmo';
  *
  * initDialtoneTheme(Dp, 'light');   // base brand = dp
  * setBrand(Tmo);                    // overlay: tmo overrides on top of dp
@@ -342,7 +342,7 @@ export function setMode(mode, rootNode = document.documentElement) {
  * @example
  * // Standard brand switching
  * import { setBaseBrand } from '@dialpad/dialtone/themes/config';
- * import Tmo from '@dialpad/dialtone/themes/tmo.json';
+ * import Tmo from '@dialpad/dialtone/themes/tmo';
  * setBaseBrand(Tmo);
  *
  * @example
