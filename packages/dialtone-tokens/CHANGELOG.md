@@ -1,3 +1,10 @@
+## [2.0.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.0...dialtone-tokens/v2.0.1) (2026-09-18)
+
+
+### Bug Fixes
+
+* **Tokens:** NO-JIRA add synchronous no-layers theme init ([#1433](https://github.com/dialpad/dialtone/issues/1433)) ([8ba1631](https://github.com/dialpad/dialtone/commit/8ba1631db89f7d797ad2d95453ffa664412c5f7d))
+
 # [2.0.0](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v1.49.0...dialtone-tokens/v2.0.0) (2026-09-16)
 
 
