@@ -1,9 +1,10 @@
 /**
  * Generate per-theme `.js` entrypoints that re-export the layered CSS as inline
  * strings. Each entrypoint is consumed by the runtime setMode/setBrand/
- * setContrast APIs in `themes/config.js`. Material switching is attribute-only
- * (driven by `data-dt-material` against pre-bundled per-material CSS) and does
- * not generate JS entrypoints.
+ * setContrast/setMaterial APIs in `themes/config.js`. Materials are bundled
+ * into a single `themes/materials.js` lookup (keyed by name) rather than one
+ * file per material — there are only 5, so the small fixed set is loaded
+ * together and setMaterial() injects the matching entry's CSS by name.
  */
 
 import fs from 'fs';
@@ -41,6 +42,9 @@ export async function generateThemeFiles () {
 
   // Generate high contrast theme
   await generateHighContrastTheme();
+
+  // Generate the bundled materials lookup
+  await generateMaterialsThemeFile();
 
   console.log('Layered theme files generated');
 }
@@ -166,5 +170,47 @@ export default {
 
   fs.writeFileSync(filePath, content);
   console.log('Generated high-contrast theme');
+}
+
+/**
+ * Generate the bundled materials lookup file. Unlike brands (45+, each with a
+ * distinct locked-choice), the 5 non-default materials are a small fixed set,
+ * so they're loaded together as one module — setMaterial() picks the matching
+ * entry by name and injects its CSS, the same way setBrand/setContrast inject
+ * a single theme's CSS.
+ */
+async function generateMaterialsThemeFile() {
+  const filePath = path.join(THEMES_OUTPUT_DIR, 'materials.js');
+  const materialDir = path.join(LAYERED_CSS_DIR, 'material');
+
+  if (!fs.existsSync(materialDir)) {
+    console.log('No material files found, skipping materials theme file...');
+    return;
+  }
+
+  const materialNames = fs.readdirSync(materialDir)
+    .filter(f => f.endsWith('.css'))
+    .map(f => f.replace('tokens-', '').replace('.css', ''))
+    .sort();
+
+  const importVarName = (name) => `Material${name.replace(/(^|-)([a-z])/g, (_, __, c) => c.toUpperCase())}`;
+
+  const imports = materialNames
+    .map(name => `import ${importVarName(name)} from '@dialpad/dialtone-tokens/layered/material/tokens-${name}.css?inline';`)
+    .join('\n');
+
+  const entries = materialNames
+    .map(name => `  ${name}: {\n    name: '${name}',\n    css: ${importVarName(name)},\n  },`)
+    .join('\n');
+
+  const content = `${imports}
+
+export default {
+${entries}
+};
+`;
+
+  fs.writeFileSync(filePath, content);
+  console.log('Generated materials theme file');
 }
 

@@ -232,15 +232,15 @@ initDialtoneTheme(Dp, 'light');  // load core, base, dp brand, light mode
 setMode('dark');                 // toggle data-dt-mode attribute
 setBrand(Tmo);                   // inject Tmo brand CSS, set data-dt-brand
 setContrast(HighContrast);       // inject contrast CSS, set data-dt-contrast
-setMaterial('steel');            // toggle data-dt-material attribute
+setMaterial('steel');            // inject steel override CSS, set data-dt-material
 ```
 
 The four dimensions split along two switching mechanisms:
 
-- **Mode and material** are attribute-driven. The runtime sets `data-dt-mode` / `data-dt-material` on the root; pre-bundled CSS (loaded once at app startup) applies via `[data-dt-mode="..."]` / `[data-dt-material="..."][data-dt-mode="..."]` attribute selectors.
-- **Brand and contrast** are injection-driven. The runtime injects per-theme override `<style>` tags keyed by id (`dialtone-css-brand-colors`, `dialtone-css-contrast`); brand and contrast each ship one small CSS payload per option.
+- **Mode** is attribute-driven. The runtime sets `data-dt-mode` on the root; pre-bundled core CSS (loaded once at app startup) applies via `[data-dt-mode="..."]` attribute selectors.
+- **Brand, material, and contrast** are injection-driven. The runtime injects per-theme override `<style>` tags keyed by id (`dialtone-css-brand-colors`, `dialtone-css-material`, `dialtone-css-contrast`). Brand and contrast each ship one small CSS payload per option; material's five override ramps are bundled together (they're tiny) and looked up by name, but still injected the same way rather than left in a pre-loaded bundle.
 
-Brands can pair to a locked material via the `shell.base.material` token in their source JSON. When `setBrand` is called for a locked brand, `data-dt-material` toggles automatically alongside `data-dt-brand` in the same paint frame.
+Brands can pair to a locked material via the `shell.base.material` token in their source JSON. When `setBrand` is called for a locked brand, it injects that material's override CSS and sets `data-dt-material` automatically, alongside `data-dt-brand`, in the same paint frame.
 
 For the full API surface (including `getBrandMaterial` / `hasBrandMaterialLock` getters, the brand-locked-material order-of-operations, and Web Components / Shadow DOM support), see the [Theme and Mode guide](https://dialtone.dialpad.com/guides/theme-and-mode/).
 
