@@ -1,6 +1,13 @@
-import { describe, it, expect } from 'vitest'
+// @vitest-environment node
+//
+// The project config sets `environment: 'jsdom'` globally. Under jsdom,
+// resolveModes below runs with no error and no missing-token report, but
+// silently resolves to zero tokens — Style Dictionary's Node-only pipeline
+// doesn't tolerate jsdom's altered globals. compareTokenNames above is pure
+// and unaffected either way; only the resolver tests actually need this.
+import { describe, it, expect, beforeAll } from 'vitest'
 
-import { compareTokenNames } from './resolve_tokens.js'
+import { compareTokenNames, resolveModes, ResolvedToken } from './resolve_tokens.js'
 
 /**
  * Ordering is load-bearing rather than cosmetic: Figma has no ordering field,
@@ -208,5 +215,46 @@ describe('compareTokenNames', () => {
       'color.black.50', 'color.black.100', 'color.black.150',
       'color.black.200', 'color.black.250', 'color.black.400',
     ])
+  })
+})
+
+/**
+ * Against the real token set, not fixtures. resolveTheme/resolveModes run
+ * Style Dictionary over tokens/, and resolveRelativeColors isn't exported —
+ * mimicking that pipeline with hand-built fixtures would test the mimic, not
+ * the resolver. Resolved once and shared: a full resolution costs a few
+ * seconds, and every assertion here reads the same result.
+ */
+describe('resolveModes — alias retention and flattening', () => {
+  let dp: ResolvedToken[]
+
+  beforeAll(async () => {
+    ({ tokens: dp } = await resolveModes('dp', ['light', 'dark']))
+  }, 30_000)
+
+  it('keeps a plain reference as a real alias, not a flattened literal', () => {
+    // Style Dictionary resolves every token's value regardless of whether it
+    // stayed a reference — `resolved` is populated either way. `alias` is
+    // what distinguishes "this survives as a real Figma alias" from "this had
+    // to be baked into a literal", which is the one thing worth asserting.
+    const token = dp.find(t => t.name === 'color.surface.primary')
+    expect(token).toBeDefined()
+    expect(token!.modes.light.alias).toBe('color.black.50')
+    expect(token!.modes.light.resolved).toBeTruthy()
+  })
+
+  it('drops the alias and records the modifier when a relative-colour alpha changes the value', () => {
+    // resolveRelativeColors runs a `studio.tokens.modify` alpha expression
+    // through oklch, which changes the resolved value away from the target's
+    // — survivesAsAlias() then correctly refuses to claim it as an alias.
+    const token = dp.find(t => t.name === 'color.surface.primary-opaque')
+    expect(token).toBeDefined()
+    expect(token!.modes.light.alias).toBeNull()
+    expect(token!.modes.light.from).toBeDefined()
+    expect(token!.modes.light.from!.modifier.type).toBe('alpha')
+    expect(token!.modes.light.from!.target).toBe('color.surface.secondary')
+    // The flattened value is real oklch, not the placeholder the modifier
+    // expression started as.
+    expect(String(token!.modes.light.resolved)).toMatch(/^oklch\(/)
   })
 })

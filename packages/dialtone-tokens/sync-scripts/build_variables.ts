@@ -269,7 +269,12 @@ export function convert (classified: Classified[]): Conversion {
       files[fileName][name] = {
         $type: tokenType(figmaType),
         $value: value,
-        ...(description ? { $description: description } : {}),
+        // Always sent, never omitted. token_import.ts only updates a
+        // description when $description !== undefined, so omitting it here
+        // when a token no longer has a modifier (description === null) left
+        // whatever provenance text Figma already had — from before that
+        // modifier was removed — untouched instead of cleared.
+        $description: description ?? '',
         $extensions: {
           'com.figma': {
             ...(scopes.length ? { scopes } : {}),
