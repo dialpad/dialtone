@@ -218,9 +218,9 @@ Secrets required: `SMARTLING_API_USER`, `SMARTLING_API_SECRET`, `SMARTLING_PROJE
 
 ---
 
-### `sync-figma-to-tokens.yml` / `sync-tokens-to-figma.yml`
+### `sync-figma-to-tokens.yml` / `sync-variables-to-figma.yml`
 
-Manual-only workflows (`workflow_dispatch`). See `workflow-figma-sync.md` for full documentation.
+`sync-figma-to-tokens.yml` is manual-only (`workflow_dispatch`), pulling Figma variables back into the repo. `sync-variables-to-figma.yml` is the other direction — code to Figma — triggered by a push to `staging` touching `tokens/**` or a `/sync-tokens` comment on a pull request. See `workflow-figma-sync.md` for full documentation.
 
 ---
 

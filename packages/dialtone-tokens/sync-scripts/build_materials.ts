@@ -112,8 +112,15 @@ function overridesFor (
   parent: Map<string, ResolvedToken>,
   material: ResolvedToken[],
   types: Map<string, FigmaType>,
-): Override[] {
+): { overrides: Override[]; unconvertible: string[] } {
   const out: Override[] = [];
+  // Named and reported at the call site, not dropped — the stale-reset pass
+  // 120 lines below hits the identical figmaValue() failure and reports it
+  // via `unresettable`; this path silently `continue`d on the exact same
+  // failure, which is the one thing this file's own comment on that other
+  // path warns against: "a silent skip here reads as a clean run while
+  // Figma holds a value nothing in the tokens asks for."
+  const unconvertible: string[] = [];
 
   for (const token of material) {
     const figmaType = types.get(token.name);
@@ -130,12 +137,12 @@ function overridesFor (
       if (String(was.resolved) === String(now.resolved)) continue;
 
       const value = figmaValue(figmaType, now.resolved);
-      if (value === null) continue;
+      if (value === null) { unconvertible.push(`${token.name} [${mode}]`); continue; }
       out.push({ name: token.name, mode, value });
     }
   }
 
-  return out;
+  return { overrides: out, unconvertible };
 }
 
 async function main (): Promise<void> {
@@ -166,7 +173,7 @@ async function main (): Promise<void> {
   for (const material of MATERIALS) {
     const name = collectionNameFor(material);
     const tokens = await resolveAll([`base/material/${material}`]);
-    const overrides = overridesFor(parent, tokens, types);
+    const { overrides, unconvertible: unconvertibleOverrides } = overridesFor(parent, tokens, types);
 
     let collection = Object.values(local.meta.variableCollections).find(c => c.name === name);
 
@@ -269,6 +276,7 @@ async function main (): Promise<void> {
       if (items.length > 10) console.log(`    … and ${items.length - 10} more`);
     };
     report('overrides could not be addressed, no such variable or mode', unaddressable);
+    report('wanted overrides could not be converted to a Figma value', unconvertibleOverrides);
     report('stale overrides could not be reset', unresettable);
 
     if (dryRun) {
