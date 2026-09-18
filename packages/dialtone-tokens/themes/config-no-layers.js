@@ -26,7 +26,7 @@ import { initDialtoneTheme } from '@/themes/config.js';
  *
  * @example
  * import { initDialtoneThemeNoLayers } from '@dialpad/dialtone-tokens/themes/config-no-layers';
- * import Dp from '@dialpad/dialtone-tokens/themes/dp.json';
+ * import Dp from '@dialpad/dialtone-tokens/themes/dp';
  *
  * initDialtoneThemeNoLayers(Dp, 'light');
  */
