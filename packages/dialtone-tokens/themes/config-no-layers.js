@@ -2,6 +2,12 @@ import CoreNoLayers from '@/themes/core-no-layers.js';
 import { initDialtoneTheme } from '@/themes/config.js';
 
 /**
+ * @typedef {import('./config.js').BrandTheme} BrandTheme
+ * @typedef {import('./config.js').Mode} Mode
+ * @typedef {import('./config.js').ThemeRootNode} ThemeRootNode
+ */
+
+/**
  * Initialize the Dialtone theme system for apps that can't use CSS Cascade
  * Layers — call once on app startup, in place of initDialtoneTheme(..., { layers: false }).
  *
