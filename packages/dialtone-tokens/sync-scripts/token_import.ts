@@ -9,6 +9,7 @@ import {
   ApiGetLocalVariablesResponse,
   VariableChange,
   VariableCodeSyntax,
+  VariableAlias,
 } from './figma_api.js'
 import { colorApproximatelyEqual, parseColor } from './color.js'
 import { areSetsEqual } from './utils.js'
@@ -117,6 +118,78 @@ function isAlias(value: string) {
   return value.toString().trim().charAt(0) === '{'
 }
 
+/**
+ * Resolve an alias name (`{a.b.c}` or the already-slashed `a/b/c`) to the
+ * Figma variable it should point at. Shared by a plain alias `$value` and by
+ * a composed colour's `colorAlias`, which needs the identical target/payload/
+ * fallback search — this used to live only in `variableValueFromToken`.
+ */
+function resolveAliasId(
+  rawValue: string,
+  localVariablesByCollectionAndName: {
+    [variableCollectionId: string]: { [variableName: string]: Variable }
+  },
+  targetCollectionId?: string,
+  targetPayloadNames?: Set<string>,
+): VariableAlias {
+  // Assume aliases are in the format {group.subgroup.token} with any number of optional groups/subgroups
+  // The Figma syntax for variable names is: group/subgroup/token
+  const value = rawValue
+    .trim()
+    .replace(/\./g, '/')
+    .replace(/[\{\}]/g, '')
+
+  // The collection being written wins, so a file that already holds another
+  // collection using the same token names cannot capture our aliases. Without
+  // this, semantics alias into the old collection's primitives and every
+  // later update to ours stops propagating — the material overrides included,
+  // since those only touch our own variables.
+  const target = targetCollectionId
+    ? localVariablesByCollectionAndName[targetCollectionId]
+    : undefined
+  if (target?.[value]) {
+    return {
+      type: 'VARIABLE_ALIAS',
+      id: target[value].id,
+    }
+  }
+
+  // A variable this payload is about to create in the target collection. Its
+  // temporary id is its token name, which the API resolves within the payload.
+  // Checked before the fallback, and not only when the collection is new: a
+  // collection that exists can still be gaining the alias target in this same
+  // run, and a namesake elsewhere must not win that race either.
+  if (targetPayloadNames?.has(value)) {
+    return {
+      type: 'VARIABLE_ALIAS',
+      id: value,
+    }
+  }
+
+  // Only then fall back to the rest of the file. Kept because a token set may
+  // legitimately reference a variable that lives in another collection, and
+  // the name is all we have to find it by.
+  for (const [collectionId, localVariablesByName] of Object.entries(
+    localVariablesByCollectionAndName,
+  )) {
+    if (collectionId === targetCollectionId) continue
+    if (localVariablesByName[value]) {
+      return {
+        type: 'VARIABLE_ALIAS',
+        id: localVariablesByName[value].id,
+      }
+    }
+  }
+
+  // If we don't find a local variable matching the alias, we assume it's a variable
+  // that we're going to create elsewhere in the payload.
+  // If the file has an invalid alias, we rely on the Figma API to return a 400 error
+  return {
+    type: 'VARIABLE_ALIAS',
+    id: value,
+  }
+}
+
 function variableValueFromToken(
   token: Token,
   localVariablesByCollectionAndName: {
@@ -125,63 +198,28 @@ function variableValueFromToken(
   targetCollectionId?: string,
   targetPayloadNames?: Set<string>,
 ): VariableValue {
-  if (typeof token.$value === 'string' && isAlias(token.$value)) {
-    // Assume aliases are in the format {group.subgroup.token} with any number of optional groups/subgroups
-    // The Figma syntax for variable names is: group/subgroup/token
-    const value = token.$value
-      .trim()
-      .replace(/\./g, '/')
-      .replace(/[\{\}]/g, '')
-
-    // The collection being written wins, so a file that already holds another
-    // collection using the same token names cannot capture our aliases. Without
-    // this, semantics alias into the old collection's primitives and every
-    // later update to ours stops propagating — the material overrides included,
-    // since those only touch our own variables.
-    const target = targetCollectionId
-      ? localVariablesByCollectionAndName[targetCollectionId]
-      : undefined
-    if (target?.[value]) {
-      return {
-        type: 'VARIABLE_ALIAS',
-        id: target[value].id,
-      }
-    }
-
-    // A variable this payload is about to create in the target collection. Its
-    // temporary id is its token name, which the API resolves within the payload.
-    // Checked before the fallback, and not only when the collection is new: a
-    // collection that exists can still be gaining the alias target in this same
-    // run, and a namesake elsewhere must not win that race either.
-    if (targetPayloadNames?.has(value)) {
-      return {
-        type: 'VARIABLE_ALIAS',
-        id: value,
-      }
-    }
-
-    // Only then fall back to the rest of the file. Kept because a token set may
-    // legitimately reference a variable that lives in another collection, and
-    // the name is all we have to find it by.
-    for (const [collectionId, localVariablesByName] of Object.entries(
-      localVariablesByCollectionAndName,
-    )) {
-      if (collectionId === targetCollectionId) continue
-      if (localVariablesByName[value]) {
-        return {
-          type: 'VARIABLE_ALIAS',
-          id: localVariablesByName[value].id,
-        }
-      }
-    }
-
-    // If we don't find a local variable matching the alias, we assume it's a variable
-    // that we're going to create elsewhere in the payload.
-    // If the file has an invalid alias, we rely on the Figma API to return a 400 error
+  const composedColor = token.$extensions?.['com.figma']?.composedColor
+  if (composedColor && token.$type === 'color') {
+    // A colour whose colour and opacity channels are authored independently.
+    // The colour channel is a real alias — resolved the same way a plain
+    // `$value` alias is — and the opacity channel is the literal percentage
+    // build_variables.ts computed from the source token's alpha modifier.
     return {
-      type: 'VARIABLE_ALIAS',
-      id: value,
+      color: resolveAliasId(
+        composedColor.colorAlias,
+        localVariablesByCollectionAndName,
+        targetCollectionId,
+        targetPayloadNames,
+      ),
+      opacity: composedColor.opacity,
     }
+  } else if (typeof token.$value === 'string' && isAlias(token.$value)) {
+    return resolveAliasId(
+      token.$value,
+      localVariablesByCollectionAndName,
+      targetCollectionId,
+      targetPayloadNames,
+    )
   } else if (typeof token.$value === 'string' && token.$type === 'color') {
     return parseColor(token.$value)
   } else {
@@ -201,10 +239,33 @@ function numbersApproximatelyEqual(a: number, b: number) {
   return Math.fround(a) === Math.fround(b)
 }
 
+/** Either channel of a VariableComposedColor can be a literal or an alias. */
+function composedChannelsEqual(
+  a: VariableValue,
+  b: VariableValue,
+): boolean {
+  if (typeof a === 'object' && typeof b === 'object' && a !== null && b !== null) {
+    if ('type' in a && 'type' in b && a.type === 'VARIABLE_ALIAS' && b.type === 'VARIABLE_ALIAS') {
+      return a.id === b.id
+    }
+    if ('r' in a && 'r' in b) return colorApproximatelyEqual(a, b)
+    return false
+  }
+  if (typeof a === 'number' && typeof b === 'number') return numbersApproximatelyEqual(a, b)
+  return a === b
+}
+
 function compareVariableValues(a: VariableValue, b: VariableValue) {
   if (typeof a === 'object' && typeof b === 'object') {
     if ('type' in a && 'type' in b && a.type === 'VARIABLE_ALIAS' && b.type === 'VARIABLE_ALIAS') {
       return a.id === b.id
+    } else if ('color' in a && 'color' in b) {
+      // VariableComposedColor — compare BOTH channels independently, since
+      // the point of the type is that they vary independently. Falling
+      // through to `'r' in a` below would never match (a composed value has
+      // no top-level r/g/b of its own) and every run would re-POST a value
+      // that never actually changed.
+      return composedChannelsEqual(a.color, b.color) && composedChannelsEqual(a.opacity, b.opacity)
     } else if ('r' in a && 'r' in b) {
       return colorApproximatelyEqual(a, b)
     }

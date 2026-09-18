@@ -44,6 +44,8 @@ interface Conversion {
   unconvertible: { name: string; mode: string; value: string }[];
   /** Font stacks with no family Figma could resolve. */
   unresolvedFonts: { name: string; value: string }[];
+  /** Alpha-modified colours that became a real composed-colour alias. */
+  composed: { name: string; mode: string; target: string }[];
 }
 
 /** `color.surface.primary` becomes `color/surface/primary`, Figma's grouping. */
@@ -130,6 +132,7 @@ export function convert (classified: Classified[]): Conversion {
   const flattened: Conversion['flattened'] = [];
   const unconvertible: Conversion['unconvertible'] = [];
   const unresolvedFonts: Conversion['unresolvedFonts'] = [];
+  const composed: Conversion['composed'] = [];
 
   // Would THIS (token, mode) pair's literal conversion fail? Used for both
   // passes below — a non-alias entry, and an alias entry whose target didn't
@@ -201,6 +204,7 @@ export function convert (classified: Classified[]): Conversion {
       const name = figmaName(token.name);
 
       let value: Token['$value'];
+      let composedColor: { colorAlias: string; opacity: number } | undefined;
 
       if (modeValue.alias && emitted.has(modeValue.alias)) {
         // token_import expects the dotted form and converts it to slashes.
@@ -218,6 +222,27 @@ export function convert (classified: Classified[]): Conversion {
           value = figmaFontFamily(String(modeValue.resolved))!;
         } else if (figmaType === 'COLOR' || figmaType === 'STRING') {
           value = String(modeValue.resolved);
+          // A Tokens Studio `alpha` modifier is the one case resolve_tokens.ts
+          // drops the alias for that Figma CAN still represent — as a
+          // VariableComposedColor, alias for colour + literal opacity — once
+          // the target survives as a real variable of its own. `lighten`,
+          // `darken` and `mix` change the actual colour, which composed
+          // colour cannot express (it only decouples colour from opacity), so
+          // those stay flattened literals; this checks specifically for
+          // `alpha` and does nothing for the others.
+          if (
+            figmaType === 'COLOR' && modeValue.from?.modifier.type === 'alpha'
+            && emitted.has(modeValue.from.target)
+          ) {
+            // Rounded to 4 decimal places — ".07" * 100 is 7.000000000000001
+            // in floating point, which is real noise in the payload and in
+            // every log line, not a value anyone authored.
+            const opacity = Math.round(Number.parseFloat(modeValue.from.modifier.value) * 100 * 1e4) / 1e4;
+            if (Number.isFinite(opacity)) {
+              composedColor = { colorAlias: modeValue.from.target, opacity };
+              composed.push({ name: token.name, mode, target: modeValue.from.target });
+            }
+          }
         } else if (figmaType === 'BOOLEAN') {
           value = modeValue.resolved === true || modeValue.resolved === 'true';
         } else {
@@ -236,13 +261,14 @@ export function convert (classified: Classified[]): Conversion {
           'com.figma': {
             ...(scopes.length ? { scopes } : {}),
             ...(codeSyntax ? { codeSyntax } : {}),
+            ...(composedColor ? { composedColor } : {}),
           },
         },
       };
     }
   }
 
-  return { files, flattened, unconvertible, unresolvedFonts };
+  return { files, flattened, unconvertible, unresolvedFonts, composed };
 }
 
 function countPayload (payload: Record<string, unknown[]>): string {
@@ -300,13 +326,14 @@ async function main (): Promise<void> {
     process.exit(1);
   }
 
-  const { files, flattened, unconvertible, unresolvedFonts } = convert(emit);
+  const { files, flattened, unconvertible, unresolvedFonts, composed } = convert(emit);
 
   console.log(`resolved        : ${all.length}`);
   console.log(`excluded        : ${excluded.length}`);
   console.log(`variables       : ${emit.length}`);
   console.log(`unscoped        : ${unscoped.length}`);
   console.log(`flattened alias : ${flattened.length / Object.keys(MODES).length} (target is resolution-only)`);
+  console.log(`composed colour : ${composed.length} (alpha-modified, now a real alias + opacity)`);
   console.log(`unconvertible   : ${unconvertible.length}`);
   console.log(`unresolved font : ${unresolvedFonts.length}`);
   for (const f of unresolvedFonts.slice(0, 5)) console.log(`  ${f.name} = ${f.value.slice(0, 60)}`);

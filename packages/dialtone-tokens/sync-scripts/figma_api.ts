@@ -34,12 +34,23 @@ export interface Color {
   a?: number
 }
 
-interface VariableAlias {
+export interface VariableAlias {
   type: 'VARIABLE_ALIAS'
   id: string
 }
 
-export type VariableValue = boolean | number | string | Color | VariableAlias
+/**
+ * A colour whose colour and opacity channels are authored independently — at
+ * least one of the two must be an alias, or it isn't composed. `opacity` is a
+ * PERCENTAGE (0-100 per the REST API's own field definition), not a 0-1
+ * fraction like `Color.a`.
+ */
+export interface VariableComposedColor {
+  color: Color | VariableAlias
+  opacity: number | VariableAlias
+}
+
+export type VariableValue = boolean | number | string | Color | VariableAlias | VariableComposedColor
 
 export type VariableScope = 'ALL_SCOPES' | VariableFloatScopes | VariableColorScopes
 type VariableFloatScopes = 'TEXT_CONTENT' | 'WIDTH_HEIGHT' | 'GAP'
