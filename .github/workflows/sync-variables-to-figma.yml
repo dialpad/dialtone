@@ -1,0 +1,148 @@
+name: Sync tokens to Figma variables
+
+# Two independent triggers, two independent Figma files, two GitHub
+# environments — so a preview run can never hold the credential that writes
+# to the main file, and vice versa. See
+# packages/dialtone-docs/src/content/workflows/workflow-figma-sync.md.
+on:
+  push:
+    branches: [staging]
+    paths:
+      - "packages/dialtone-tokens/tokens/**"
+  issue_comment:
+    types: [created]
+
+jobs:
+  # ── main file: push to staging ──────────────────────────────────────────
+  sync-main:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment: figma-tokens-sync-main
+    permissions:
+      contents: read
+    concurrency:
+      # The file, not the branch or the ref: two overlapping pushes must not
+      # write to the same collection at once.
+      group: figma-tokens-sync-main
+      cancel-in-progress: false
+    env:
+      HUSKY: 0
+      PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      FILE_KEY: ${{ vars.FILE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+      - name: Sync variables
+        run: pnpm nx run dialtone-tokens:sync:variables
+      - name: Sync materials
+        # Always, not gated on which files changed: a material override can go
+        # stale from a PARENT token changing, without any file under
+        # tokens/base/material/** being touched itself. The sync is
+        # idempotent, so running it on every push costs an extra diff, never
+        # a wrong write.
+        run: pnpm nx run dialtone-tokens:sync:materials
+
+  # ── preview file: a `/sync-tokens` comment on a pull request ────────────
+  #
+  # issue_comment always runs the WORKFLOW DEFINITION from the base branch,
+  # never the PR's — but the PR's own code (including these sync scripts) is
+  # what actually gets checked out and executed below, with a real Figma
+  # credential in scope. The one control standing between that and a
+  # malicious PR touching these scripts to exfiltrate the token is the
+  # permission check in `authorize`: only a commenter with WRITE access can
+  # start the run at all, and only after that check passes does the workflow
+  # so much as look at the PR's ref.
+  authorize:
+    if: >
+      github.event_name == 'issue_comment' &&
+      github.event.issue.pull_request &&
+      contains(github.event.comment.body, '/sync-tokens')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      allowed: ${{ steps.check.outputs.allowed }}
+      sha: ${{ steps.pr.outputs.sha }}
+    steps:
+      - name: Check commenter's permission
+        id: check
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data } = await github.rest.repos.getCollaboratorPermissionLevel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              username: context.payload.comment.user.login,
+            });
+            const allowed = data.permission === 'admin' || data.permission === 'write';
+            core.setOutput('allowed', String(allowed));
+            if (!allowed) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: `@${context.payload.comment.user.login} \`/sync-tokens\` needs write access to this repo.`,
+              });
+            }
+      - name: Resolve the PR's head SHA
+        id: pr
+        if: steps.check.outputs.allowed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+            core.setOutput('sha', pr.data.head.sha);
+
+  sync-preview:
+    needs: authorize
+    if: needs.authorize.outputs.allowed == 'true'
+    runs-on: ubuntu-latest
+    environment: figma-tokens-sync-preview
+    permissions:
+      contents: read
+      pull-requests: write
+    concurrency:
+      # The preview file is shared across every PR (REST has no endpoint to
+      # create one per-PR) — a second /sync-tokens on a different PR must
+      # queue behind this one, not race it or cancel it mid-write.
+      group: figma-tokens-sync-preview
+      cancel-in-progress: false
+    env:
+      HUSKY: 0
+      PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+      FILE_KEY: ${{ vars.FILE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Pinned to the SHA the permission check resolved, not the ref name —
+          # a ref can move between that check and this checkout.
+          ref: ${{ needs.authorize.outputs.sha }}
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+      - name: Sync variables
+        run: pnpm nx run dialtone-tokens:sync:variables
+      - name: Sync materials
+        run: pnpm nx run dialtone-tokens:sync:materials
+      - name: Comment with the preview link
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const ok = '${{ job.status }}' === 'success';
+            const url = `https://www.figma.com/design/${process.env.FILE_KEY}`;
+            const body = ok
+              ? `✅ Synced to the [preview file](${url}).`
+              : `❌ \`/sync-tokens\` failed — see the [run log](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}).`;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });
+        env:
+          FILE_KEY: ${{ vars.FILE_KEY }}
