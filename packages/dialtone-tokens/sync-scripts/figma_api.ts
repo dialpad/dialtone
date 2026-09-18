@@ -143,12 +143,19 @@ export default class FigmaApi {
 
   /**
    * A run with no timeout can hang a CI job indefinitely on a stalled
-   * socket, and a 429/5xx used to stop a multi-material sync partway through
-   * with no chance to recover in the same run. Bounded retry on transient
-   * failures only — a real 4xx (bad payload, auth) fails immediately, since
-   * retrying it just repeats the same error three times slower.
+   * socket — that applies to every call, so the timeout is unconditional.
+   * Retrying is a different question: Figma's Variables POST accepts CREATE
+   * actions with no documented idempotency guarantee. If the first write
+   * actually committed server-side and only the RESPONSE was lost (a true
+   * no-response timeout, not a clean error), replaying the same payload can
+   * create duplicate variables or collections — a GET has no such risk, it
+   * changes nothing either way. So `retry` defaults true for reads and is
+   * turned off explicitly for the one write call.
    */
-  private async request<T>(config: Parameters<typeof axios.request>[0]): Promise<T> {
+  private async request<T>(
+    config: Parameters<typeof axios.request>[0],
+    retry = true,
+  ): Promise<T> {
     let lastError: unknown
     for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
       try {
@@ -156,7 +163,7 @@ export default class FigmaApi {
         return resp.data
       } catch (error) {
         lastError = error
-        if (attempt === MAX_ATTEMPTS || !isTransient(error)) throw error
+        if (!retry || attempt === MAX_ATTEMPTS || !isTransient(error)) throw error
         await sleep(2 ** attempt * 500) // 1s, 2s
       }
     }
@@ -174,14 +181,17 @@ export default class FigmaApi {
   }
 
   async postVariables(fileKey: string, payload: ApiPostVariablesPayload) {
-    return this.request<ApiPostVariablesResponse>({
-      url: `${this.baseUrl}/v1/files/${fileKey}/variables`,
-      method: 'POST',
-      headers: {
-        Accept: '*/*',
-        'X-Figma-Token': this.token,
+    return this.request<ApiPostVariablesResponse>(
+      {
+        url: `${this.baseUrl}/v1/files/${fileKey}/variables`,
+        method: 'POST',
+        headers: {
+          Accept: '*/*',
+          'X-Figma-Token': this.token,
+        },
+        data: payload,
       },
-      data: payload,
-    })
+      false, // never retry — see the comment on request() above
+    )
   }
 }
