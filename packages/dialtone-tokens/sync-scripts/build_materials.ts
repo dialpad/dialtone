@@ -28,6 +28,7 @@ import FigmaApi from './figma_api.js';
 import { parseColor, colorApproximatelyEqual } from './color.js';
 import { resolveModes, ResolvedToken } from './resolve_tokens.js';
 import { classify, FigmaType } from './variable_policy.js';
+import { toNumber as toNumberWithUnits } from './utils.js';
 
 const PARENT = 'Dialtone 2026';
 
@@ -59,13 +60,7 @@ async function resolveAll (extraSets?: string[]): Promise<ResolvedToken[]> {
   return out;
 }
 
-function toNumber (value: unknown): number | null {
-  if (typeof value === 'number') return Number.isFinite(value) ? value : null;
-  const match = String(value).trim().match(/^(-?[\d.]+)(px|rem|em)?$/);
-  if (!match) return null;
-  const n = Number.parseFloat(match[1]);
-  return Number.isFinite(n) ? n : null;
-}
+const toNumber = (value: unknown): number | null => toNumberWithUnits(value, 'px|rem|em');
 
 /** The same conversion the main sync applies, for the value being overridden. */
 function figmaValue (figmaType: FigmaType, resolved: unknown): unknown | null {
@@ -88,7 +83,11 @@ function figmaValue (figmaType: FigmaType, resolved: unknown): unknown | null {
 function sameValue (stored: unknown, wanted: unknown): boolean {
   if (stored === undefined) return false;
   if (typeof stored === 'number' && typeof wanted === 'number') {
-    return Math.abs(stored - wanted) <= Math.max(Math.abs(stored), Math.abs(wanted), 1) * 1e-6;
+    // Same fix as token_import.ts's numbersApproximatelyEqual, and for the
+    // same reason: Figma stores floats as float32, and a relative 1e-6
+    // tolerance is looser than the float32 rounding floor — wide enough to
+    // treat a genuine value change as noise and silently skip the override.
+    return Math.fround(stored) === Math.fround(wanted);
   }
   const isColor = (v: unknown): v is { r: number; g: number; b: number; a?: number } =>
     typeof v === 'object' && v !== null && 'r' in v;
