@@ -142,9 +142,12 @@ function evaluate (expression: string): number | null {
   const stripped = expression.replace(/calc/g, '');
   if (!/^[\d\s.+\-*/()a-z]*$/.test(stripped)) return null;
 
+  // The same NUM grammar normalise() uses above — [\d.]+ here accepted
+  // "calc(1.2.3rem + 1px)" and silently truncated it via parseFloat, letting
+  // the checker compare a value the CSS doesn't actually represent.
   const toPx = stripped
-    .replace(/(-?[\d.]+)rem/g, (_, n) => String(Number.parseFloat(n) * ROOT_FONT_SIZE))
-    .replace(/(-?[\d.]+)px/g, '$1');
+    .replace(new RegExp(`(${NUM})rem`, 'g'), (_, n) => String(Number.parseFloat(n) * ROOT_FONT_SIZE))
+    .replace(new RegExp(`(${NUM})px`, 'g'), '$1');
 
   if (!/^[\d\s.+\-*/()]+$/.test(toPx)) return null;
 
