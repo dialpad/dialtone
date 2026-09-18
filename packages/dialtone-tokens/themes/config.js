@@ -88,7 +88,7 @@ let initializationState = null;
  * @example
  * // Apply a brand overlay after initDialtoneTheme has set the base
  * import { initDialtoneTheme, setBrand } from '@dialpad/dialtone/themes/config';
- * import Dp from '@dialpad/dialtone/themes/dp.json';
+ * import Dp from '@dialpad/dialtone/themes/dp';
  * import Tmo from '@dialpad/dialtone/themes/tmo.json';
  *
  * initDialtoneTheme(Dp, 'light');   // base brand = dp
@@ -540,7 +540,7 @@ export function setMaterial (name, rootNode = document.documentElement) {
  * @example
  * // Standard usage (non-Shadow DOM)
  * import { initDialtoneTheme } from '@dialpad/dialtone/themes/config';
- * import Dp from '@dialpad/dialtone/themes/dp.json';
+ * import Dp from '@dialpad/dialtone/themes/dp';
  *
  * initDialtoneTheme(Dp, 'light');
  *
