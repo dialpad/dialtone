@@ -10,7 +10,7 @@ export default defineConfig({
     name: 'dialtone-tokens',
     globals: true,
     environment: 'jsdom',
-    include: ['tests/**/*.test.js'],
+    include: ['tests/**/*.test.js', 'sync-scripts/**/*.test.ts'],
   },
   resolve: {
     alias: [
