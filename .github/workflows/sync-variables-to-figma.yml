@@ -20,6 +20,7 @@ jobs:
     environment: figma-tokens-sync-main
     permissions:
       contents: read
+      packages: read
     concurrency:
       # The file, not the branch or the ref: two overlapping pushes must not
       # write to the same collection at once.
@@ -33,11 +34,15 @@ jobs:
       - uses: actions/checkout@v4
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
-      - name: Sync variables
-        run: pnpm nx run dialtone-tokens:sync:variables
-      - name: Sync materials
-        # Always, not gated on which files changed: a material override can go
-        # stale from a PARENT token changing, without any file under
+      - name: Sync variables and materials
+        # ONE step, not two. sync:materials declares dependsOn: ["sync:variables"]
+        # in project.json, so this single `nx run` sequences both within one
+        # process. Calling them as two separate `nx run` invocations — as an
+        # earlier version of this workflow did — ran sync:variables TWICE per
+        # job: once as its own step, and again as sync:materials's dependency,
+        # doubling every write to Figma on every push. Always run, not gated
+        # on which files changed: a material override can go stale from a
+        # PARENT token changing, without any file under
         # tokens/base/material/** being touched itself. The sync is
         # idempotent, so running it on every push costs an extra diff, never
         # a wrong write.
@@ -105,6 +110,7 @@ jobs:
     environment: figma-tokens-sync-preview
     permissions:
       contents: read
+      packages: read
       pull-requests: write
     concurrency:
       # The preview file is shared across every PR (REST has no endpoint to
@@ -124,9 +130,10 @@ jobs:
           ref: ${{ needs.authorize.outputs.sha }}
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
-      - name: Sync variables
-        run: pnpm nx run dialtone-tokens:sync:variables
-      - name: Sync materials
+      - name: Sync variables and materials
+        # See the identical comment in sync-main: sync:materials's
+        # dependsOn: ["sync:variables"] sequences both within one nx run, so
+        # this is deliberately one step, not two.
         run: pnpm nx run dialtone-tokens:sync:materials
       - name: Comment with the preview link
         if: always()

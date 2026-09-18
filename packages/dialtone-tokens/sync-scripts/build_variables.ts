@@ -176,16 +176,29 @@ export function convert (classified: Classified[]): Conversion {
   // into the payload (a `null` $value) instead of dropping it, because the
   // first pass skips every alias entry on the assumption it never needs its
   // own literal. That assumption breaks the moment the target is gone.
-  for (const entry of classified) {
-    const { token, figmaType, scopes } = entry;
-    if (dropped.has(token.name)) continue;
-    for (const mode of modesList) {
-      const modeValue = token.modes[mode];
-      if (!modeValue.alias || !dropped.has(modeValue.alias)) continue;
-      if (fails(figmaType, scopes, modeValue.resolved)) {
-        record(figmaType, scopes, token.name, mode, modeValue.resolved);
-        dropped.add(token.name);
-        break;
+  //
+  // Run to a FIXED POINT, not once. `classified` is sorted by token name, not
+  // by dependency order, so a single forward sweep over a 3+ hop chain
+  // X -> Y -> Z can miss X: if X sorts before Y, X is checked before Y has
+  // been added to `dropped` in THIS same pass, even though Y only fails
+  // because Z (dropped in the pass above) already did. Repeating until a
+  // whole sweep adds nothing new means the order tokens happen to sort in can
+  // no longer decide whether a genuine cascade gets caught.
+  let changed = true;
+  while (changed) {
+    changed = false;
+    for (const entry of classified) {
+      const { token, figmaType, scopes } = entry;
+      if (dropped.has(token.name)) continue;
+      for (const mode of modesList) {
+        const modeValue = token.modes[mode];
+        if (!modeValue.alias || !dropped.has(modeValue.alias)) continue;
+        if (fails(figmaType, scopes, modeValue.resolved)) {
+          record(figmaType, scopes, token.name, mode, modeValue.resolved);
+          dropped.add(token.name);
+          changed = true;
+          break;
+        }
       }
     }
   }
