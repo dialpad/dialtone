@@ -627,6 +627,139 @@ describe('generatePostVariablesPayload', () => {
     })
   })
 
+  it('writes a composed colour as a real alias plus a literal opacity', () => {
+    const localVariablesResponse: ApiGetLocalVariablesResponse = {
+      status: 200,
+      error: false,
+      meta: {
+        variableCollections: {
+          'VariableCollectionId:1:1': {
+            id: 'VariableCollectionId:1:1',
+            name: 'collection',
+            modes: [{ modeId: '1:0', name: 'mode1' }],
+            defaultModeId: '1:0',
+            remote: false,
+            hiddenFromPublishing: false,
+          },
+        },
+        variables: {
+          'VariableID:2:1': {
+            id: 'VariableID:2:1',
+            name: 'color/surface/secondary',
+            key: 'variable_key',
+            variableCollectionId: 'VariableCollectionId:1:1',
+            resolvedType: 'COLOR',
+            valuesByMode: { '1:0': { r: 0.97, g: 0.97, b: 0.97, a: 1 } },
+            remote: false,
+            description: '',
+            hiddenFromPublishing: false,
+            scopes: ['ALL_FILLS'],
+            codeSyntax: {},
+          },
+        },
+      },
+    }
+
+    const tokensByFile: FlattenedTokensByFile = {
+      'collection.mode1.json': {
+        'color/surface/primary-opaque': {
+          $type: 'color',
+          $value: 'oklch(0.9748 0.0025 48.72 / .07)',
+          $extensions: {
+            'com.figma': {
+              scopes: ['FRAME_FILL', 'SHAPE_FILL'],
+              composedColor: { colorAlias: 'color.surface.secondary', opacity: 7 },
+            },
+          },
+        },
+      },
+    }
+
+    const result = generatePostVariablesPayload(tokensByFile, localVariablesResponse)
+
+    expect(result.variableModeValues).toEqual([
+      {
+        variableId: 'color/surface/primary-opaque',
+        modeId: '1:0',
+        value: {
+          color: { type: 'VARIABLE_ALIAS', id: 'VariableID:2:1' },
+          opacity: 7,
+        },
+      },
+    ])
+  })
+
+  it('noops on a composed colour already stored with the same alias and opacity', () => {
+    const localVariablesResponse: ApiGetLocalVariablesResponse = {
+      status: 200,
+      error: false,
+      meta: {
+        variableCollections: {
+          'VariableCollectionId:1:1': {
+            id: 'VariableCollectionId:1:1',
+            name: 'collection',
+            modes: [{ modeId: '1:0', name: 'mode1' }],
+            defaultModeId: '1:0',
+            remote: false,
+            hiddenFromPublishing: false,
+          },
+        },
+        variables: {
+          'VariableID:2:1': {
+            id: 'VariableID:2:1',
+            name: 'color/surface/secondary',
+            key: 'variable_key',
+            variableCollectionId: 'VariableCollectionId:1:1',
+            resolvedType: 'COLOR',
+            valuesByMode: { '1:0': { r: 0.97, g: 0.97, b: 0.97, a: 1 } },
+            remote: false,
+            description: '',
+            hiddenFromPublishing: false,
+            scopes: ['ALL_FILLS'],
+            codeSyntax: {},
+          },
+          'VariableID:2:2': {
+            id: 'VariableID:2:2',
+            name: 'color/surface/primary-opaque',
+            key: 'variable_key2',
+            variableCollectionId: 'VariableCollectionId:1:1',
+            resolvedType: 'COLOR',
+            valuesByMode: {
+              '1:0': {
+                color: { type: 'VARIABLE_ALIAS', id: 'VariableID:2:1' },
+                opacity: 7,
+              },
+            },
+            remote: false,
+            description: '',
+            hiddenFromPublishing: false,
+            scopes: ['FRAME_FILL', 'SHAPE_FILL'],
+            codeSyntax: {},
+          },
+        },
+      },
+    }
+
+    const tokensByFile: FlattenedTokensByFile = {
+      'collection.mode1.json': {
+        'color/surface/primary-opaque': {
+          $type: 'color',
+          $value: 'oklch(0.9748 0.0025 48.72 / .07)',
+          $extensions: {
+            'com.figma': {
+              scopes: ['FRAME_FILL', 'SHAPE_FILL'],
+              composedColor: { colorAlias: 'color.surface.secondary', opacity: 7 },
+            },
+          },
+        },
+      },
+    }
+
+    const result = generatePostVariablesPayload(tokensByFile, localVariablesResponse)
+
+    expect(result.variableModeValues).toEqual([])
+  })
+
   it('aliases within the collection being written, not a namesake in another', () => {
     // A file can already hold an unrelated collection using the same token
     // names — the hand-built Dialtone layer in a team file, for instance. The
