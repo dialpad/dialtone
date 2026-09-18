@@ -88,8 +88,8 @@ let initializationState = null;
  * @example
  * // Apply a brand overlay after initDialtoneTheme has set the base
  * import { initDialtoneTheme, setBrand } from '@dialpad/dialtone/themes/config';
- * import Dp from '@dialpad/dialtone/themes/dp.json';
- * import Tmo from '@dialpad/dialtone/themes/tmo.json';
+ * import Dp from '@dialpad/dialtone/themes/dp';
+ * import Tmo from '@dialpad/dialtone/themes/tmo';
  *
  * initDialtoneTheme(Dp, 'light');   // base brand = dp
  * setBrand(Tmo);                    // overlay: tmo overrides on top of dp
@@ -208,33 +208,48 @@ function _setBrandLayered(theme, rootNode = document.documentElement) {
  * when a repeated initDialtoneTheme() call changes the layers option.
  *
  * Sets `coreTokensLoaded` only once the core CSS has actually been applied —
- * synchronously for the layered core, or after the dynamic import resolves
- * for the no-layers core — so a failed import doesn't falsely report core
- * tokens as loaded.
+ * synchronously for the layered core and for a caller-supplied `presetCore`,
+ * or after the dynamic import resolves for the no-layers fallback path — so
+ * a failed import doesn't falsely report core tokens as loaded.
  *
  * Also guards against a stale in-flight no-layers import: if this function
  * (or resetBrand) runs again before that import resolves, the earlier
  * generation is discarded instead of clobbering newer core CSS.
+ *
+ * @param {boolean} layers
+ * @param {ThemeRootNode} styleRoot
+ * @param {CoreTheme|null} [presetCore] - Pre-resolved core CSS (e.g. from
+ *   initDialtoneThemeNoLayers' static import). When provided, the no-layers
+ *   core is applied synchronously and the dynamic import is skipped entirely.
  */
-function _loadCoreTokens (layers, styleRoot) {
+function _loadCoreTokens (layers, styleRoot, presetCore = null) {
   const generation = ++coreLoadGeneration;
   if (layers) {
     _setStyleTag('dialtone-css-core', Core.core, styleRoot);
     coreTokensLoaded = true;
-  } else {
-    // Reserve the tag's DOM position synchronously so the base-colors/brand
-    // tags appended below still land after it, then fill in its content once
-    // the dynamic import resolves.
-    _setStyleTag('dialtone-css-core', '', styleRoot);
-    import('@/themes/core-no-layers.js').then(({ default: CoreNoLayers }) => {
-      if (generation !== coreLoadGeneration) return; // superseded — discard
-      _setStyleTag('dialtone-css-core', CoreNoLayers.core, styleRoot);
-      coreTokensLoaded = true;
-    }).catch((error) => {
-      if (generation !== coreLoadGeneration) return; // superseded — discard
-      console.error('[Dialtone] initDialtoneTheme: failed to load no-layers core tokens.', error);
-    });
+    return;
   }
+
+  if (presetCore) {
+    // Caller already resolved the no-layers core via a static import
+    // (initDialtoneThemeNoLayers) — apply it directly, no import() needed.
+    _setStyleTag('dialtone-css-core', presetCore.core, styleRoot);
+    coreTokensLoaded = true;
+    return;
+  }
+
+  // Reserve the tag's DOM position synchronously so the base-colors/brand
+  // tags appended below still land after it, then fill in its content once
+  // the dynamic import resolves.
+  _setStyleTag('dialtone-css-core', '', styleRoot);
+  import('@/themes/core-no-layers.js').then(({ default: CoreNoLayers }) => {
+    if (generation !== coreLoadGeneration) return; // superseded — discard
+    _setStyleTag('dialtone-css-core', CoreNoLayers.core, styleRoot);
+    coreTokensLoaded = true;
+  }).catch((error) => {
+    if (generation !== coreLoadGeneration) return; // superseded — discard
+    console.error('[Dialtone] initDialtoneTheme: failed to load no-layers core tokens.', error);
+  });
 }
 
 /**
@@ -327,7 +342,7 @@ export function setMode(mode, rootNode = document.documentElement) {
  * @example
  * // Standard brand switching
  * import { setBaseBrand } from '@dialpad/dialtone/themes/config';
- * import Tmo from '@dialpad/dialtone/themes/tmo.json';
+ * import Tmo from '@dialpad/dialtone/themes/tmo';
  * setBaseBrand(Tmo);
  *
  * @example
@@ -515,11 +530,17 @@ export function setMaterial (name, rootNode = document.documentElement) {
  *   already unlayered either way — this only affects the shared core tokens initDialtoneTheme loads.
  *   The no-layers core is loaded via a dynamic import (not bundled into the default path), so with
  *   `layers: false` the core token styles apply asynchronously, a moment after this call returns.
+ *   **Prefer `initDialtoneThemeNoLayers()` from `@dialpad/dialtone-tokens/themes/config-no-layers`
+ *   instead of `{ layers: false }`** — it statically imports the no-layers core so it applies
+ *   synchronously, with the same bundle-splitting benefit (layered-only apps never pay for the
+ *   no-layers CSS string). `{ layers: false }` remains supported for backwards compatibility.
+ * @param {CoreTheme} [options.core] - Pre-resolved core theme to use instead of the default layered
+ *   core (internal — set by initDialtoneThemeNoLayers). Most callers should not pass this directly.
  *
  * @example
  * // Standard usage (non-Shadow DOM)
  * import { initDialtoneTheme } from '@dialpad/dialtone/themes/config';
- * import Dp from '@dialpad/dialtone/themes/dp.json';
+ * import Dp from '@dialpad/dialtone/themes/dp';
  *
  * initDialtoneTheme(Dp, 'light');
  *
@@ -528,8 +549,13 @@ export function setMaterial (name, rootNode = document.documentElement) {
  * initDialtoneTheme(Dp, 'light', document.documentElement);
  *
  * @example
- * // No CSS Cascade Layers support
+ * // No CSS Cascade Layers support (loads the no-layers core asynchronously)
  * initDialtoneTheme(Dp, 'light', document.documentElement, { layers: false });
+ *
+ * @example
+ * // No CSS Cascade Layers support, loaded synchronously (preferred)
+ * import { initDialtoneThemeNoLayers } from '@dialpad/dialtone/themes/config-no-layers';
+ * initDialtoneThemeNoLayers(Dp, 'light', document.documentElement);
  *
  * @example
  * // ❌ WRONG - In Web Components, forgetting rootNode causes styles to inject into document!
@@ -552,7 +578,7 @@ export function setMaterial (name, rootNode = document.documentElement) {
  * }
  */
 export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = document.documentElement, options = {}) {
-  const { layers = true } = options;
+  const { layers = true, core = null } = options;
   // Validation: brandTheme must be an object
   if (!brandTheme || typeof brandTheme !== 'object') {
     throw new TypeError(
@@ -635,7 +661,7 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
         `[Dialtone] Theme already initialized with brand '${brandTheme.brand.name}' and mode '${mode}' ` +
         `using layers=${existing.layers}. Reloading core tokens with layers=${layers}.`,
       );
-      _loadCoreTokens(layers, styleRoot);
+      _loadCoreTokens(layers, styleRoot, core);
       initializationState.layers = layers;
       return;
     } else {
@@ -650,7 +676,7 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
   }
 
   // Load core tokens (once per JavaScript instance)
-  _loadCoreTokens(layers, styleRoot);
+  _loadCoreTokens(layers, styleRoot, core);
 
   // Load base colors (once) — identical CSS whether layers is true or false
   // (tokens-base-colors.css was never wrapped in @layer), so no branching needed.
