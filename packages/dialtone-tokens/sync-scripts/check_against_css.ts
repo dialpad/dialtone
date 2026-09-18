@@ -45,13 +45,17 @@ function parseCss (file: string): Map<string, string> {
 }
 
 /** rem to px, so a resolver px value and a CSS rem value can be compared. */
+// One optional decimal point, not `[\d.]+` — that class accepts "1.2.3px"
+// and silently truncates it via parseFloat, same bug fixed in toNumber()
+// in build_variables.ts and build_materials.ts.
+const NUM = String.raw`-?(?:\d+(?:\.\d+)?|\.\d+)`;
 function normalise (value: string): string {
   const trimmed = String(value).trim();
-  const rem = trimmed.match(/^(-?[\d.]+)rem$/);
+  const rem = trimmed.match(new RegExp(`^(${NUM})rem$`));
   if (rem) return `${round(Number.parseFloat(rem[1]) * ROOT_FONT_SIZE)}px`;
-  const px = trimmed.match(/^(-?[\d.]+)px$/);
+  const px = trimmed.match(new RegExp(`^(${NUM})px$`));
   if (px) return `${round(Number.parseFloat(px[1]))}px`;
-  const num = trimmed.match(/^-?[\d.]+$/);
+  const num = trimmed.match(new RegExp(`^${NUM}$`));
   if (num) return String(round(Number.parseFloat(trimmed)));
   return trimmed;
 }
@@ -204,7 +208,12 @@ async function main (): Promise<void> {
         const inCss = css.get(cssName);
 
         if (inCss === undefined) {
-          if (mode === modes[0]) absent.push(token.name);
+          // Every mode, not just modes[0]. A token missing ONLY from the dark
+          // stylesheet — present in light — used to be invisible end to end:
+          // never pushed to `absent`, never compared, never part of the exit
+          // code. The mode suffix keeps the `name.split('.')` namespace
+          // grouping below intact while making which mode failed visible.
+          absent.push(`${token.name} [${mode}]`);
           continue;
         }
 
@@ -359,7 +368,10 @@ async function main (): Promise<void> {
     }
   }
 
-  process.exit(findings.length ? 1 : 0);
+  // `absent` used to be informational only — the exit code was gated on
+  // `findings.length` alone, so a token entirely missing from the CSS (rather
+  // than merely mismatched) never failed the run on its own.
+  process.exit(findings.length || absent.length ? 1 : 0);
 }
 
 main();

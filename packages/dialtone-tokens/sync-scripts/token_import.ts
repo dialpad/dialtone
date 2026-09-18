@@ -190,13 +190,15 @@ function variableValueFromToken(
 }
 
 /**
- * True when two numbers differ only by single-precision rounding. Figma stores
- * floats as float32, so the tolerance is scaled to the magnitude of the value
- * rather than fixed: 1.2 and 1200 carry very different absolute errors.
+ * True when two numbers round-trip to the same float32 value. Figma stores
+ * floats as float32 (a 1.2 sent from here comes back as 1.2000000476837158),
+ * so the comparison has to land on that exact representation rather than an
+ * arbitrary relative tolerance: 1e-6 relative is about 8x looser than the
+ * ~1.19e-7 float32 rounding floor, wide enough to treat a genuine value
+ * change (e.g. 1.2 -> 1.200001) as noise and silently drop its update.
  */
 function numbersApproximatelyEqual(a: number, b: number) {
-  if (a === b) return true
-  return Math.abs(a - b) <= Math.max(Math.abs(a), Math.abs(b), 1) * 1e-6
+  return Math.fround(a) === Math.fround(b)
 }
 
 function compareVariableValues(a: VariableValue, b: VariableValue) {

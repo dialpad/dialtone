@@ -289,10 +289,21 @@ export function classify (tokens: ResolvedToken[]): Classification {
       continue;
     }
 
+    const figmaType = figmaTypeFor(token.type)!;
+
+    // Figma defines no UI picker scopes for BOOLEAN — VALID_SCOPES.BOOLEAN is
+    // deliberately empty. The ALL_SCOPES fallback below exists for every OTHER
+    // type's coverage gaps; applying it here would fail validation on the
+    // first boolean token with no matching rule, since no scope at all is
+    // valid for BOOLEAN. Skip scope assignment, not just the fallback.
+    if (figmaType === 'BOOLEAN') {
+      emit.push({ token, figmaType, scopes: [], scopeRule: null });
+      continue;
+    }
+
     const rule = SCOPES.find(r => r.match.test(token.name));
     if (!rule) unscoped.push(token.name);
 
-    const figmaType = figmaTypeFor(token.type)!;
     const scopes = rule ? rule.scopes : ['ALL_SCOPES' as VariableScope];
 
     const allowed = VALID_SCOPES[figmaType];

@@ -24,7 +24,8 @@ import 'dotenv/config';
 import { readFileSync, existsSync } from 'fs';
 
 import FigmaApi from './figma_api.js';
-import { parseColor } from './color.js';
+import { parseColor, colorApproximatelyEqual } from './color.js';
+import { Color } from './figma_api.js';
 import { resolveModes, ResolvedToken } from './resolve_tokens.js';
 import { classify, FigmaType } from './variable_policy.js';
 
@@ -42,19 +43,25 @@ const GROUPS = ['base', 'dp'];
  * report a difference that only exists because the check did the conversion
  * differently.
  */
-function colorKey (value: unknown): string | null {
-  const q = (n: number) => Math.round(Math.min(1, Math.max(0, n)) * 255);
-  const key = (c: { r: number; g: number; b: number; a?: number }) =>
-    `${q(c.r)},${q(c.g)},${q(c.b)},${Math.round((c.a ?? 1) * 100) / 100}`;
-
+/** The raw colour, for equality — quantising here reintroduces the exact
+ * boundary problem `colorApproximatelyEqual`'s tolerance exists to avoid. */
+function colorValue (value: unknown): Color | null {
   if (value && typeof value === 'object' && 'r' in (value as Record<string, unknown>)) {
-    return key(value as { r: number; g: number; b: number; a?: number });
+    return value as Color;
   }
   try {
-    return key(parseColor(String(value)));
+    return parseColor(String(value));
   } catch {
     return null;
   }
+}
+
+/** Display only. Never compare on this — see colorValue. */
+function colorKey (value: unknown): string | null {
+  const c = colorValue(value);
+  if (!c) return null;
+  const q = (n: number) => Math.round(Math.min(1, Math.max(0, n)) * 255);
+  return `${q(c.r)},${q(c.g)},${q(c.b)},${Math.round((c.a ?? 1) * 100) / 100}`;
 }
 
 function cssNameFor (path: string): string {
@@ -137,35 +144,45 @@ async function main (): Promise<void> {
         if (types.get(token.name) !== 'COLOR') continue;
         const inCss = css.get(cssNameFor(token.name));
         if (inCss === undefined || inCss.includes('var(')) continue;
-        const expected = colorKey(inCss);
-        const got = colorKey(token.modes[mode].resolved);
-        if (expected === null || got === null) continue;
+        const expectedColor = colorValue(inCss);
+        const gotColor = colorValue(token.modes[mode].resolved);
+        if (expectedColor === null || gotColor === null) continue;
         resolutionChecks++;
-        if (expected !== got) {
-          findings.push({ material, pass: 'resolution', name: token.name, mode, expected, got });
+        if (!colorApproximatelyEqual(expectedColor, gotColor)) {
+          findings.push({ material, pass: 'resolution', name: token.name, mode, expected: colorKey(inCss)!, got: colorKey(token.modes[mode].resolved)! });
         }
       }
 
       // PASS 2: what a frame pinned to this material would actually see.
+      // Mode ids come from the LIVE Figma collection, not a hardcoded map, so a
+      // renamed mode makes these lookups genuinely absent. A silent `continue`
+      // there would fold this whole pass into zero checks with no signal — so
+      // an absent mode id is reported as a finding, not skipped.
+      const modeId = modeIdFor.get(MODES[mode]);
+      const parentModeId = parentModeIdFor.get(MODES[mode]);
+      if (modeId === undefined || parentModeId === undefined) {
+        findings.push({ material, pass: 'setup', name: '-', mode, expected: `mode "${MODES[mode]}"`, got: 'missing from the collection' });
+        continue;
+      }
+
       for (const token of tokens) {
         if (types.get(token.name) !== 'COLOR') continue;
         const variableId = byName.get(token.name.split('.').join('/'));
         if (!variableId) continue;
 
-        const overridden = overrides[variableId]?.[modeIdFor.get(MODES[mode])!];
-        const parentValue = local.meta.variables[variableId]
-          ?.valuesByMode?.[parentModeIdFor.get(MODES[mode])!];
+        const overridden = overrides[variableId]?.[modeId];
+        const parentValue = local.meta.variables[variableId]?.valuesByMode?.[parentModeId];
         const effective = overridden ?? parentValue;
 
         // An alias resolves through the graph, which this check does not walk.
         if (effective && typeof effective === 'object' && 'type' in effective) continue;
 
-        const expected = colorKey(token.modes[mode].resolved);
-        const got = colorKey(effective);
-        if (expected === null || got === null) continue;
+        const expectedColor = colorValue(token.modes[mode].resolved);
+        const gotColor = colorValue(effective);
+        if (expectedColor === null || gotColor === null) continue;
         writeChecks++;
-        if (expected !== got) {
-          findings.push({ material, pass: 'write', name: token.name, mode, expected, got });
+        if (!colorApproximatelyEqual(expectedColor, gotColor)) {
+          findings.push({ material, pass: 'write', name: token.name, mode, expected: colorKey(token.modes[mode].resolved)!, got: colorKey(effective)! });
         }
       }
     }
@@ -192,6 +209,15 @@ async function main (): Promise<void> {
       console.log(`      expected ${f.expected}`);
       console.log(`      got      ${f.got}`);
     }
+  }
+
+  // A validation step that passes without comparing anything is the exact
+  // failure this file exists to prevent (see the header). A classification
+  // change, a mode rename, or an empty MATERIALS list can all zero out both
+  // counters while findings.length stays 0 — that must fail, not pass.
+  if (resolutionChecks === 0 || writeChecks === 0) {
+    console.error('\nNo comparisons were made; the check cannot pass.');
+    process.exit(2);
   }
 
   process.exit(findings.length ? 1 : 0);

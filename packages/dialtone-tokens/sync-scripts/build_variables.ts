@@ -26,6 +26,9 @@ import { gamutMapped, resetGamutLog } from './color.js';
 import { resolveModes, compareTokenNames } from './resolve_tokens.js';
 import { classify, Classified, ScopeViolation, figmaFontFamily } from './variable_policy.js';
 import type { Token } from './token_types.js';
+import { toNumber as toNumberWithUnits } from './utils.js';
+
+const toNumber = (value: unknown): number | null => toNumberWithUnits(value, 'px|rem|em|%');
 
 const COLLECTION = 'Dialtone 2026';
 const MODES = { light: 'Light', dark: 'Dark' } as const;
@@ -122,27 +125,77 @@ export function codeSyntaxFor (cssName: string): { WEB: string; ANDROID: string;
   };
 }
 
-/** `"4px"` becomes `4`. Returns null when there is no number to be had. */
-export function toNumber (value: unknown): number | null {
-  if (typeof value === 'number') return Number.isFinite(value) ? value : null;
-  const match = String(value).trim().match(/^(-?[\d.]+)(px|rem|em|%)?$/);
-  if (!match) return null;
-  const n = Number.parseFloat(match[1]);
-  return Number.isFinite(n) ? n : null;
-}
-
 export function convert (classified: Classified[]): Conversion {
-  const emitted = new Set(classified.map(c => c.token.name));
-  const files: FlattenedTokensByFile = {};
+  const modesList = Object.keys(MODES) as (keyof typeof MODES)[];
   const flattened: Conversion['flattened'] = [];
   const unconvertible: Conversion['unconvertible'] = [];
   const unresolvedFonts: Conversion['unresolvedFonts'] = [];
 
-  for (const mode of Object.keys(MODES) as (keyof typeof MODES)[]) {
+  // Would THIS (token, mode) pair's literal conversion fail? Used for both
+  // passes below — a non-alias entry, and an alias entry whose target didn't
+  // survive, are checked by the exact same rule, because both end up needing
+  // a literal value in the emission loop below.
+  const fails = (figmaType: FigmaType, scopes: VariableScope[], resolved: TokenValue): boolean => {
+    if (figmaType === 'STRING' && scopes.includes('FONT_FAMILY')) return figmaFontFamily(String(resolved)) === null;
+    if (figmaType === 'COLOR' || figmaType === 'STRING' || figmaType === 'BOOLEAN') return false;
+    return toNumber(resolved) === null;
+  };
+  const record = (figmaType: FigmaType, scopes: VariableScope[], name: string, mode: keyof typeof MODES, resolved: TokenValue) => {
+    if (figmaType === 'STRING' && scopes.includes('FONT_FAMILY')) unresolvedFonts.push({ name, value: String(resolved) });
+    else unconvertible.push({ name, mode, value: String(resolved) });
+  };
+
+  // Decide the drop ONCE, across every mode, before building anything. A
+  // token that failed conversion in only one mode used to still get emitted
+  // for its other modes, from an `emitted` set computed once up front — so
+  // Figma either got a variable missing that mode's value, or, if some other
+  // token aliased it, a dangling alias with no CREATE behind it, which fails
+  // the WHOLE payload with a 400. Dropping a token everywhere the moment it
+  // fails anywhere keeps `emitted` an honest description of what is actually
+  // about to be created.
+  const dropped = new Set<string>();
+  for (const entry of classified) {
+    const { token, figmaType, scopes } = entry;
+    for (const mode of modesList) {
+      const modeValue = token.modes[mode];
+      if (modeValue.alias) continue;   // handled by the second pass, below
+      if (fails(figmaType, scopes, modeValue.resolved)) {
+        record(figmaType, scopes, token.name, mode, modeValue.resolved);
+        dropped.add(token.name);
+      }
+    }
+  }
+
+  // An alias whose TARGET didn't survive falls back to its own resolved
+  // value in the emission loop below — and that fallback can fail the exact
+  // same way the target did, since resolution follows the same chain. Left
+  // unchecked, the emission loop would force-unwrap that failure straight
+  // into the payload (a `null` $value) instead of dropping it, because the
+  // first pass skips every alias entry on the assumption it never needs its
+  // own literal. That assumption breaks the moment the target is gone.
+  for (const entry of classified) {
+    const { token, figmaType, scopes } = entry;
+    if (dropped.has(token.name)) continue;
+    for (const mode of modesList) {
+      const modeValue = token.modes[mode];
+      if (!modeValue.alias || !dropped.has(modeValue.alias)) continue;
+      if (fails(figmaType, scopes, modeValue.resolved)) {
+        record(figmaType, scopes, token.name, mode, modeValue.resolved);
+        dropped.add(token.name);
+        break;
+      }
+    }
+  }
+
+  const usable = classified.filter(c => !dropped.has(c.token.name));
+  const emitted = new Set(usable.map(c => c.token.name));
+  const files: FlattenedTokensByFile = {};
+
+  for (const mode of modesList) {
     const fileName = `${COLLECTION}.${MODES[mode]}.json`;
     files[fileName] = {};
 
-    for (const entry of classified) {
+    for (const entry of usable) {
       const { token, figmaType, scopes } = entry;
       const modeValue = token.modes[mode];
       const name = figmaName(token.name);
@@ -161,25 +214,14 @@ export function convert (classified: Classified[]): Conversion {
         }
 
         if (figmaType === 'STRING' && scopes.includes('FONT_FAMILY')) {
-          // A CSS stack cannot be bound to a text layer. Resolve it to the one
-          // family Figma can actually apply.
-          const family = figmaFontFamily(String(modeValue.resolved));
-          if (family === null) {
-            unresolvedFonts.push({ name: token.name, value: String(modeValue.resolved) });
-            continue;
-          }
-          value = family;
+          // Pre-verified above: this entry would not be in `usable` otherwise.
+          value = figmaFontFamily(String(modeValue.resolved))!;
         } else if (figmaType === 'COLOR' || figmaType === 'STRING') {
           value = String(modeValue.resolved);
         } else if (figmaType === 'BOOLEAN') {
           value = modeValue.resolved === true || modeValue.resolved === 'true';
         } else {
-          const n = toNumber(modeValue.resolved);
-          if (n === null) {
-            unconvertible.push({ name: token.name, mode, value: String(modeValue.resolved) });
-            continue;
-          }
-          value = n;
+          value = toNumber(modeValue.resolved)!;   // pre-verified above
         }
       }
 
@@ -269,16 +311,31 @@ async function main (): Promise<void> {
   console.log(`unresolved font : ${unresolvedFonts.length}`);
   for (const f of unresolvedFonts.slice(0, 5)) console.log(`  ${f.name} = ${f.value.slice(0, 60)}`);
 
-  // Fatal rather than reported. `convert()` omits the mode value it could not
-  // parse, so carrying on posts a payload that leaves an existing variable at
-  // its stale value, or creates one missing a mode — and exits 0 either way.
-  if (unconvertible.length) {
-    console.error('\nunconvertible values, nothing posted:');
-    for (const u of unconvertible.slice(0, 10)) {
-      console.error(`  ${u.name} [${u.mode}] = ${u.value}`);
+  // Fatal rather than reported. `convert()` drops the WHOLE token (every
+  // mode, not just the one that failed) the moment either list is non-empty
+  // for it, so carrying on posts a payload silently missing that token
+  // entirely — and exits 0 either way. `unresolvedFonts` uses the identical
+  // drop-everywhere mechanism as `unconvertible` now, so it gets the same
+  // fatal treatment: a partial run is no safer for a font that failed than
+  // for a number that failed.
+  if (unconvertible.length || unresolvedFonts.length) {
+    if (unconvertible.length) {
+      console.error('\nunconvertible values, nothing posted:');
+      for (const u of unconvertible.slice(0, 10)) {
+        console.error(`  ${u.name} [${u.mode}] = ${u.value}`);
+      }
+      if (unconvertible.length > 10) {
+        console.error(`  … and ${unconvertible.length - 10} more`);
+      }
     }
-    if (unconvertible.length > 10) {
-      console.error(`  … and ${unconvertible.length - 10} more`);
+    if (unresolvedFonts.length) {
+      console.error('\nunresolved font families, nothing posted:');
+      for (const f of unresolvedFonts.slice(0, 10)) {
+        console.error(`  ${f.name} = ${f.value.slice(0, 60)}`);
+      }
+      if (unresolvedFonts.length > 10) {
+        console.error(`  … and ${unresolvedFonts.length - 10} more`);
+      }
     }
     process.exit(1);
   }
