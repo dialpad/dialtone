@@ -837,9 +837,18 @@ export default {
                   return commands.toggleNode(this.name, 'paragraph', attributes);
                 }
 
-                // Multiple paragraphs selected: merge into a single code block. The
-                // built-in would give one code block per paragraph instead, so retype
-                // them all and then stitch the results together.
+                // Every selected block is already a code block, so the button reads as
+                // active and pressing it has to turn them all off rather than merge
+                // them. Passing no attributes on purpose: they take part in the
+                // is-active check, so a language on the command would stop blocks with
+                // a different language from toggling off.
+                if (blocks.every(({ node }) => node.type === codeBlockType)) {
+                  return commands.toggleNode(this.name, 'paragraph');
+                }
+
+                // A mix of blocks, or several paragraphs: merge into a single code
+                // block. The built-in would give one code block per paragraph instead,
+                // so retype them all and then stitch the results together.
                 return chain()
                   .setNode(this.name, attributes)
                   .command(({ tr }) => {

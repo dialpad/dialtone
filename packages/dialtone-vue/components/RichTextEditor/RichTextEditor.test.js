@@ -2433,6 +2433,43 @@ describe('DtRichTextEditor tests', () => {
       });
     });
 
+    describe('When toggling a selection that spans several existing codeblocks', function () {
+      beforeEach(async () => {
+        await _setContentAndSelection(
+          '<pre><code>a</code></pre><pre><code>b</code></pre>', { from: 2, to: 6 },
+        );
+      });
+
+      it('should report the codeblock as active', function () {
+        expect(editorInstance.isActive('codeBlock')).toBe(true);
+      });
+
+      it('should turn them all off rather than merging them', async () => {
+        editorInstance.commands.toggleCodeBlock();
+        await wrapper.vm.$nextTick();
+
+        expect(editorInstance.getHTML()).toBe('<p>a</p><p>b</p>');
+      });
+    });
+
+    describe('When toggling a selection that mixes a codeblock and a paragraph', function () {
+      beforeEach(async () => {
+        await _setContentAndSelection('<pre><code>a</code></pre><p>b</p>', { from: 2, to: 6 });
+      });
+
+      it('should not report the codeblock as active', function () {
+        expect(editorInstance.isActive('codeBlock')).toBe(false);
+      });
+
+      it('should merge them into a single codeblock', async () => {
+        editorInstance.commands.toggleCodeBlock();
+        await wrapper.vm.$nextTick();
+
+        expect(editorInstance.getHTML())
+          .toBe('<pre class="d-rich-text-editor__code-block"><code>a\nb</code></pre>');
+      });
+    });
+
     describe('When adding a codeblock over paragraphs with a blank one between', function () {
       beforeEach(async () => {
         await _setContentAndSelection('<p>a</p><p></p><p>b</p>', { from: 1, to: 8 });
