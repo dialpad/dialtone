@@ -1,0 +1,40 @@
+apps/dialtone-documentation/docs/_data/site-nav.json
+  s_fb74aa28f644ee::t_b1ee4f94293f05 7,11
+apps/dialtone-documentation/docs/.vuepress/theme/components/Sidebar.vue
+  s_fb74aa28f644ee::t_49d2a3cb52d1bc 15,17-22,28-37,47,70,99-107,111,113,172,185,192,195,201
+  s_fb74aa28f644ee::t_2d81d7ee836813 46,60,63,66,110,112,114,116,125-126,129-134
+apps/dialtone-documentation/docs/.vuepress/theme/components/SidebarGroup.vue
+  s_fb74aa28f644ee::t_400f8ded9286c0 1-64
+apps/dialtone-documentation/docs/.vuepress/theme/components/SidebarItem.vue
+  s_fb74aa28f644ee::t_a043cd8889c0e3 3,10,12-22,29,31,33-45,51-59,66,72,78-81,106-109,115-132,134-138,142
+apps/dialtone-documentation/docs/.vuepress/theme/components/SidebarItemRow.vue
+  s_fb74aa28f644ee::t_7ef75b28e0ec36 68,74
+  s_fb74aa28f644ee::t_f69e570517605f 1-67,69-73,75-150
+apps/dialtone-documentation/docs/.vuepress/theme/utils/sidebarSearch.test.mjs
+  s_fb74aa28f644ee::t_49d2a3cb52d1bc 116-121
+apps/dialtone-documentation/docs/.vuepress/theme/composables/useSidebarItems.js
+  s_fb74aa28f644ee::t_b1ee4f94293f05 6,10-12,29-47
+  s_fb74aa28f644ee::t_bd71d8305ed02f 23-25
+apps/dialtone-documentation/docs/.vuepress/theme/utils/sidebarSearch.js
+  s_fb74aa28f644ee::t_49d2a3cb52d1bc 69,89
+  s_fb74aa28f644ee::t_2d81d7ee836813 65-66,70,72,80,94-96
+  s_fb74aa28f644ee::t_3a2f5ad8377c6a 97
+apps/dialtone-documentation/docs/.vuepress/theme/components/SidebarHeader.vue
+  s_fb74aa28f644ee::t_96ac9c854c6fab 7,15,68-107
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "cc811f98f7c469f41d6ce8717b7c2d2e1ae99bfb",
+  "prompts": {},
+  "sessions": {
+    "s_fb74aa28f644ee": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a016c1-4534-7332-9095-8e18310eed6e",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

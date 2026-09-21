@@ -1,0 +1,24 @@
+packages/dialtone-vue/components/Modal/Modal.test.js
+  s_b007f3976ebd62::t_45365d044f6908 188-191
+  s_b007f3976ebd62::t_5efb73a6322296 143-149
+apps/dialtone-documentation/docs/guides/migration/modal-native-dialog/index.md
+  s_b007f3976ebd62::t_326c2acf4eafa6 92
+packages/dialtone-vue/components/Modal/Modal.vue
+  s_b007f3976ebd62::t_fb16d57686a10a 18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "3d30da49a652b38afd9f44e73b670984e3d5f23a",
+  "prompts": {},
+  "sessions": {
+    "s_b007f3976ebd62": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "2b3ae57f-2175-41e8-9a71-42894bdfcac2",
+        "model": "claude-opus-5"
+      },
+      "human_author": "belumontoya <163597542+belumontoya@users.noreply.github.com>"
+    }
+  }
+}
