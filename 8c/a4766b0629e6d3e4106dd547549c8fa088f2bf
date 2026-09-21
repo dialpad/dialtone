@@ -1,0 +1,19 @@
+packages/dialtone-vue/components/rich_text_editor/extensions/link_phone_numbers/link_phone_numbers.js
+  s_d5e86a56d4f166::t_b17c176bf8884f 18
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "8ca4766b0629e6d3e4106dd547549c8fa088f2bf",
+  "prompts": {},
+  "sessions": {
+    "s_d5e86a56d4f166": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "16963438-69cc-46fa-8f17-4832f0e334a0",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

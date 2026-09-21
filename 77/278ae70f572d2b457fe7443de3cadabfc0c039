@@ -1,0 +1,20 @@
+apps/dialtone-documentation/docs/.vuepress/baseComponents/MigrationBanner.vue
+  s_fb74aa28f644ee::t_a2dbcbc9e546e8 33
+  s_fb74aa28f644ee::t_2c174dc1d0b169 34-35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "77278ae70f572d2b457fe7443de3cadabfc0c039",
+  "prompts": {},
+  "sessions": {
+    "s_fb74aa28f644ee": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a016c1-4534-7332-9095-8e18310eed6e",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

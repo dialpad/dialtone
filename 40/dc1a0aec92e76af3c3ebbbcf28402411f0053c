@@ -1,0 +1,20 @@
+apps/dialtone-documentation/docs/dialtone/whats-new/posts/2026-9-16.md
+  s_dc177bf0a9429d::t_a9d0cd33dc7e3a 10,12-13
+  s_dc177bf0a9429d::t_da112057944c50 14-16
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "40dc1a0aec92e76af3c3ebbbcf28402411f0053c",
+  "prompts": {},
+  "sessions": {
+    "s_dc177bf0a9429d": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a09cd9-0610-7db3-ae84-4054925281bf",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
