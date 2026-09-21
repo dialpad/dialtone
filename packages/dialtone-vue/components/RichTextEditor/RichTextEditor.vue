@@ -852,16 +852,26 @@ export default {
                   textStarts.push(consumed);
                   consumed += node.textContent.length + 1; // +1 for the joining newline
                 });
-                const combinedOffset = ($pos, fallback) => {
+                const combinedOffset = ($pos) => {
+                  // A document-level endpoint (select all, or a node selection) has no
+                  // position before it and belongs to no block, so it has no offset.
+                  if (!$pos.depth) return null;
                   const index = blocks.findIndex(({ pos }) => pos === $pos.before($pos.depth));
-                  return index === -1 ? fallback : textStarts[index] + $pos.parentOffset;
+                  return index === -1 ? null : textStarts[index] + $pos.parentOffset;
                 };
+                // Map anchor and head rather than the ordered from/to, so a backward
+                // selection stays backward: setTextSelection hands both straight to
+                // TextSelection.create without sorting them.
+                const anchorOffset = combinedOffset(state.selection.$anchor);
+                const headOffset = combinedOffset(state.selection.$head);
+                // With either end outside the merged paragraphs, select the whole block.
+                const outsideBlocks = anchorOffset === null || headOffset === null;
                 // Unlike setBlockType, replaceWith swaps out content, and ProseMirror maps
                 // positions inside a replaced range to its end — so without an explicit
                 // selection the caret would jump to the end of the new code block.
                 // +1 steps inside the code block node.
-                const selectionFrom = firstPos + 1 + combinedOffset($from, 0);
-                const selectionTo = firstPos + 1 + combinedOffset($to, combinedText.length);
+                const selectionFrom = firstPos + 1 + (outsideBlocks ? 0 : anchorOffset);
+                const selectionTo = firstPos + 1 + (outsideBlocks ? combinedText.length : headOffset);
 
                 return chain()
                   .command(({ tr }) => {
