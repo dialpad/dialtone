@@ -1,0 +1,29 @@
+packages/combinator/src/components/controls/control_nullish.test.js
+  s_5496a5e114cfcf::t_e73cf58b841f91 33-34,43-44
+packages/combinator/package.json
+  s_5496a5e114cfcf::t_da237c36339cfa 14
+packages/combinator/tests/setupTests.js
+  s_5496a5e114cfcf::t_c7060d246d015c 7-8
+packages/combinator/src/components/controls/control_selection.test.js
+  s_5496a5e114cfcf::t_3f7bd48c5c1c99 39-40,46-47
+packages/combinator/src/components/controls/control_boolean.test.js
+  s_5496a5e114cfcf::t_a58d39d1d909d4 4-6,15,33-34,43-44
+packages/combinator/src/components/controls/control_dynamic.test.js
+  s_5496a5e114cfcf::t_e2c71d6fcfc262 49-50,54-55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "947082916cc1d0f4272ec519ab169f18a5ef2c3c",
+  "prompts": {},
+  "sessions": {
+    "s_5496a5e114cfcf": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5db296a0-c4fe-47eb-97fc-bed0d42a3ead",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

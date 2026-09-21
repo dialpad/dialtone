@@ -1,0 +1,28 @@
+packages/dialtone-vue/components/Modal/Modal.vue
+  s_1b0723d23d701b::t_4aa5b8226b2ed2 10
+  s_1b0723d23d701b::t_388799199c94de 6
+packages/dialtone-vue/components/Modal/Modal.test.js
+  s_1b0723d23d701b::t_be32e727643914 204-231
+  s_1b0723d23d701b::t_48201243bc101d 3-4
+  s_1b0723d23d701b::t_f2aded544005dd 55-57
+  s_1b0723d23d701b::t_e183d6cef7685e 365-367
+  s_1b0723d23d701b::t_4149e3f9f2dd8c 338-340
+apps/dialtone-documentation/docs/guides/migration/modal-native-dialog/index.md
+  s_1b0723d23d701b::t_cab3e7dd5c7ef2 67
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "fc032d429e435bbde0af252b115df8491c6933d8",
+  "prompts": {},
+  "sessions": {
+    "s_1b0723d23d701b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9a319ef4-2b39-4342-8916-af92ca8f529a",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

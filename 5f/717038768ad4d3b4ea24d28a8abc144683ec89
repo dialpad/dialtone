@@ -1,0 +1,31 @@
+packages/combinator/src/components/combinator.test.js
+  s_3e2c0f28cfe374::t_d99da88abb0569 5,8-11,42,53-54,58,62,65,78-79,94,97
+  s_3e2c0f28cfe374::t_d5e7f078e11d4e 7,12,43-52,55-57,59-61,63-64,67-75,77,80-93,96,98-100,102-111,113
+  s_c8bb1bc8e0154a::t_d5795b6c12a404 66
+  s_c8bb1bc8e0154a::t_79604724f53843 76
+  s_3e2c0f28cfe374::t_61dc9a450d4e67 95
+  s_c8bb1bc8e0154a::t_35cbb8fe995030 101,112
+.github/workflows/unit_tests.yml
+  s_c8bb1bc8e0154a::t_945779cf6c946b 88-89
+packages/combinator/tests/setupTests.js
+  s_c8bb1bc8e0154a::t_783ac5b45b02ad 1,3,12-13
+  s_c8bb1bc8e0154a::t_806f9424b230c8 2,14-20
+packages/combinator/src/lib/info.js
+  s_c8bb1bc8e0154a::t_3dce5d347f6c3d 1-2,17-35
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.1",
+  "base_commit_sha": "5f717038768ad4d3b4ea24d28a8abc144683ec89",
+  "prompts": {},
+  "sessions": {
+    "s_c8bb1bc8e0154a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "26cc1112-ee2c-4d75-ad24-dac4c82f4710",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
