@@ -838,48 +838,24 @@ export default {
                 }
 
                 // Multiple paragraphs selected: merge into a single code block. The
-                // built-in would give one code block per paragraph instead.
-                const combinedText = blocks.map(({ node }) => node.textContent).join('\n');
-                const firstPos = blocks[0].pos;
-                const lastBlock = blocks[blocks.length - 1];
-                const lastPos = lastBlock.pos + lastBlock.node.nodeSize;
-
-                // Where each block's text lands within combinedText, so the selection
-                // can be re-anchored below.
-                const textStarts = [];
-                let consumed = 0;
-                blocks.forEach(({ node }) => {
-                  textStarts.push(consumed);
-                  consumed += node.textContent.length + 1; // +1 for the joining newline
-                });
-                const combinedOffset = ($pos) => {
-                  // A document-level endpoint (select all, or a node selection) has no
-                  // position before it and belongs to no block, so it has no offset.
-                  if (!$pos.depth) return null;
-                  const index = blocks.findIndex(({ pos }) => pos === $pos.before($pos.depth));
-                  return index === -1 ? null : textStarts[index] + $pos.parentOffset;
-                };
-                // Map anchor and head rather than the ordered from/to, so a backward
-                // selection stays backward: setTextSelection hands both straight to
-                // TextSelection.create without sorting them.
-                const anchorOffset = combinedOffset(state.selection.$anchor);
-                const headOffset = combinedOffset(state.selection.$head);
-                // With either end outside the merged paragraphs, select the whole block.
-                const outsideBlocks = anchorOffset === null || headOffset === null;
-                // Unlike setBlockType, replaceWith swaps out content, and ProseMirror maps
-                // positions inside a replaced range to its end — so without an explicit
-                // selection the caret would jump to the end of the new code block.
-                // +1 steps inside the code block node.
-                const selectionFrom = firstPos + 1 + (outsideBlocks ? 0 : anchorOffset);
-                const selectionTo = firstPos + 1 + (outsideBlocks ? combinedText.length : headOffset);
-
+                // built-in would give one code block per paragraph instead, so retype
+                // them all and then stitch the results together.
                 return chain()
+                  .setNode(this.name, attributes)
                   .command(({ tr }) => {
-                    const content = combinedText.length ? [state.schema.text(combinedText)] : [];
-                    tr.replaceWith(firstPos, lastPos, codeBlockType.create(attributes, content));
+                    // Replace only the boundary between two adjacent code blocks with a
+                    // newline. That is a small enough step that every text position on
+                    // either side maps through it, so the caret, the selected range and
+                    // its direction all survive without being recomputed. Walk the
+                    // boundaries back to front to keep the earlier positions valid.
+                    for (let index = blocks.length - 1; index > 0; index--) {
+                      const blockStart = tr.mapping.map(blocks[index].pos);
+                      const previousBlockEnd = blockStart - 1;
+                      if (tr.doc.resolve(previousBlockEnd).parent.type !== codeBlockType) continue;
+                      tr.replaceWith(previousBlockEnd, blockStart + 1, state.schema.text('\n'));
+                    }
                     return true;
                   })
-                  .setTextSelection({ from: selectionFrom, to: selectionTo })
                   .run();
               },
             };

@@ -2433,6 +2433,19 @@ describe('DtRichTextEditor tests', () => {
       });
     });
 
+    describe('When adding a codeblock over paragraphs with a blank one between', function () {
+      beforeEach(async () => {
+        await _setContentAndSelection('<p>a</p><p></p><p>b</p>', { from: 1, to: 8 });
+        editorInstance.commands.toggleCodeBlock();
+        await wrapper.vm.$nextTick();
+      });
+
+      it('should keep the blank line as an empty line in the codeblock', function () {
+        expect(editorInstance.getHTML())
+          .toBe('<pre class="d-rich-text-editor__code-block"><code>a\n\nb</code></pre>');
+      });
+    });
+
     describe('When adding a codeblock over a backward selection', function () {
       beforeEach(async () => {
         await _setContentAndSelection('<p>line1</p><p>line2</p>', { from: 2, to: 10 });
