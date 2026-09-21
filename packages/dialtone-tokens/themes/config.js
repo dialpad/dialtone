@@ -1,5 +1,6 @@
 /* eslint-disable complexity */
 import Core from '@/themes/core.js';
+import Materials from '@/themes/materials.js';
 // Not statically imported — the no-layers core is only needed when initDialtoneTheme
 // is called with { layers: false }. Dynamically importing it here lets bundlers
 // code-split it out of the default (layers: true) path, so apps that never opt into
@@ -7,9 +8,12 @@ import Core from '@/themes/core.js';
 
 /**
  * Names of all materials, including the default (sandstone). Material switching
- * is attribute-driven: setMaterial sets `data-dt-material` on the rootNode,
- * and the bundled per-material CSS (loaded once at app startup) applies via
- * the matching `[data-dt-material="<name>"]` selector.
+ * injects CSS the same way setBrand/setContrast do: setMaterial looks up the
+ * named entry in the bundled `Materials` map, writes its CSS into a
+ * `#dialtone-css-material` style tag, then sets `data-dt-material` on the
+ * rootNode. Sandstone is the exception — it's the default ramp baked into the
+ * base CSS, has no override entry in `Materials`, and clearing simply removes
+ * the style tag.
  */
 export const VALID_MATERIALS = Object.freeze(['sandstone', 'steel', 'graphite', 'iron', 'amethyst', 'jade']);
 const VALID_MATERIALS_SET = new Set(VALID_MATERIALS);
@@ -121,7 +125,7 @@ export function setBrand (theme, rootNode = document.documentElement, contrastTh
     _removeStyleTag('dialtone-css-brand', rootNode?.shadowRoot ?? rootNode);
     if (initializationState) {
       rootNode?.setAttribute('data-dt-brand', initializationState.brand);
-      rootNode?.setAttribute('data-dt-material', initializationState.material ?? 'sandstone');
+      _applyMaterial(initializationState.material ?? 'sandstone', rootNode);
     }
     return;
   }
@@ -185,7 +189,7 @@ function _setBrandLayered(theme, rootNode = document.documentElement) {
     if (baseBrand && theme.brand.name === baseBrand) {
       _removeStyleTag('dialtone-css-brand', styleRoot);
       rootNode?.setAttribute('data-dt-brand', baseBrand);
-      rootNode?.setAttribute('data-dt-material', initializationState?.material ?? 'sandstone');
+      _applyMaterial(initializationState?.material ?? 'sandstone', rootNode);
     } else {
       _setStyleTag('dialtone-css-brand', theme.brand.css, styleRoot);
       rootNode?.setAttribute('data-dt-brand', theme.brand.name);
@@ -404,12 +408,11 @@ function _applyBrandLockedMaterial(brandTheme, rootNode) {
   const lockName = brandTheme.material?.name;
   if (!lockName) return;
 
-  // Skip the round-trip through setMaterial — caller (setBaseBrand) already
-  // resolved shadowRoot, and we'd just hit the same VALID_MATERIALS_SET
-  // lookup. Set the attribute directly; preserve the brand-context warn
-  // for unknown names so token-JSON typos surface clearly.
+  // Routes through _applyMaterial so a brand-locked material injects CSS the
+  // same way an explicit setMaterial() call does — preserve the brand-context
+  // warn for unknown names so token-JSON typos surface clearly.
   if (VALID_MATERIALS_SET.has(lockName)) {
-    rootNode?.setAttribute('data-dt-material', lockName);
+    _applyMaterial(lockName, rootNode);
     return;
   }
 
@@ -417,7 +420,26 @@ function _applyBrandLockedMaterial(brandTheme, rootNode) {
     `[Dialtone] setBaseBrand: brand '${brandTheme.brand.name}' ` +
     `declares unknown material '${lockName}'; falling back to sandstone.`,
   );
-  rootNode?.setAttribute('data-dt-material', 'sandstone');
+  _applyMaterial('sandstone', rootNode);
+}
+
+/**
+ * Apply a material by name: inject its override CSS (if it has one) into
+ * `#dialtone-css-material`, then set `data-dt-material`. Shared by
+ * setMaterial() and _applyBrandLockedMaterial() so a brand-locked material
+ * goes through the same CSS-injection path as an explicit setMaterial() call.
+ * `name` must already be a validated member of VALID_MATERIALS.
+ */
+function _applyMaterial(name, rootNode) {
+  const styleRoot = rootNode?.shadowRoot ?? rootNode;
+  const materialTheme = Materials[name];
+  if (materialTheme) {
+    _setStyleTag('dialtone-css-material', materialTheme.css, styleRoot);
+  } else {
+    // sandstone has no override entry — it's the bare base ramp.
+    _removeStyleTag('dialtone-css-material', styleRoot);
+  }
+  rootNode?.setAttribute('data-dt-material', name);
 }
 
 /**
@@ -468,19 +490,23 @@ export function setContrast(contrastTheme, rootNode = document.documentElement) 
 }
 
 /**
- * Set the active material — toggles `data-dt-material` on the rootNode. The
- * matching `[data-dt-material="<name>"][data-dt-mode="..."]` CSS (loaded once
- * in the layered bundle) re-binds `--dt-color-black-*` for that subtree.
+ * Set the active material by name — injects that material's override CSS
+ * into a `#dialtone-css-material` style tag and sets `data-dt-material` on
+ * the rootNode, the same way setBrand/setContrast inject their theme's CSS.
+ * Unlike those, setMaterial takes a string rather than an imported theme
+ * object: there are only 5 non-default materials, so their CSS is bundled
+ * together in `themes/materials.js` and looked up by name — no per-material
+ * module to import.
  *
  * Pass `null`, `undefined`, or `'sandstone'` to clear the override (sandstone
  * is the default neutral ramp baked into the base CSS, so it has no override
- * selector — the attribute simply matches nothing and the bare base values
+ * entry — clearing just removes the style tag and the bare base values
  * apply). Pass a known string name to apply that material.
  *
  * Unknown material names emit a `console.warn` and fall back to sandstone.
  *
  * @param {MaterialName|null} name - Material name, or null/undefined to reset to sandstone
- * @param {ThemeRootNode} [rootNode=document.documentElement] - Root element to apply the attribute to
+ * @param {ThemeRootNode} [rootNode=document.documentElement] - Root element for style injection
  *
  * @example
  * setMaterial('steel');
@@ -506,11 +532,11 @@ export function setMaterial (name, rootNode = document.documentElement) {
     console.warn(
       `[Dialtone] setMaterial: unknown material '${name}'; falling back to sandstone.`,
     );
-    rootNode?.setAttribute('data-dt-material', 'sandstone');
+    _applyMaterial('sandstone', rootNode);
     return;
   }
 
-  rootNode?.setAttribute('data-dt-material', resolved);
+  _applyMaterial(resolved, rootNode);
 }
 
 /**
@@ -765,9 +791,8 @@ export function resetBrand(rootNode = document.documentElement) {
   // can't recreate the #dialtone-css-core tag we're about to remove.
   coreLoadGeneration++;
 
-  // Remove all theme style tags. Material no longer injects a style tag
-  // (attribute-driven), but resetBrand should still scrub any pre-existing
-  // injection from older code paths.
+  // Remove all theme style tags, including the material override tag
+  // setMaterial()/_applyBrandLockedMaterial() may have injected.
   _removeStyleTag('dialtone-css-core', styleRoot);
   _removeStyleTag('dialtone-css-base-colors', styleRoot);
   _removeStyleTag('dialtone-css-material', styleRoot);

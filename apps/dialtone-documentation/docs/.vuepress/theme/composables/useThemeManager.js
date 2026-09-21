@@ -218,8 +218,8 @@ export function useThemeManager(options = {}) {
 
   /**
    * Applies the selected material via the shared setMaterial config function.
-   * Material switching is attribute-only — `setMaterialConfig` toggles
-   * `data-dt-material` and the pre-bundled per-material CSS handles the rest.
+   * `setMaterialConfig` injects the matching material's override CSS and sets
+   * `data-dt-material`.
    * @param {string} material - The material name
    */
   const applyMaterialTheme = (material) => {
