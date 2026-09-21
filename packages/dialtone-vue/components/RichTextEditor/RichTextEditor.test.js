@@ -2464,19 +2464,16 @@ describe('DtRichTextEditor tests', () => {
       beforeEach(async () => {
         editorInstance.commands.setContent('<p>line1</p><p>line2</p>');
         editorInstance.commands.selectAll();
+        editorInstance.commands.toggleCodeBlock();
         await wrapper.vm.$nextTick();
       });
 
-      it('should merge the paragraphs rather than throwing', function () {
-        expect(() => editorInstance.commands.toggleCodeBlock()).not.toThrow();
+      it('should merge the paragraphs into one codeblock', function () {
         expect(editorInstance.getHTML())
           .toBe('<pre class="d-rich-text-editor__code-block"><code>line1\nline2</code></pre>');
       });
 
-      it('should leave the whole codeblock selected', async () => {
-        editorInstance.commands.toggleCodeBlock();
-        await wrapper.vm.$nextTick();
-
+      it('should leave the whole codeblock selected', function () {
         const { from, to } = editorInstance.state.selection;
         expect(editorInstance.state.doc.textBetween(from, to)).toBe('line1\nline2');
       });
