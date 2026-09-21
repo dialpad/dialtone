@@ -816,42 +816,52 @@ export default {
               ...this.parent?.(),
               toggleCodeBlock: (attributes = {}) => ({ state, chain, commands }) => {
                 const codeBlockType = state.schema.nodes[this.name];
-                const { $from } = state.selection;
+                const { $from, $to } = state.selection;
 
-                if ($from.parent.type === codeBlockType) {
-                  const paragraphType = state.schema.nodes.paragraph;
-                  const lines = $from.parent.textContent.split('\n');
-                  const codeBlockPos = $from.before();
-                  const codeBlockNode = $from.parent;
-                  return chain()
-                    .command(({ tr }) => {
-                      const paragraphs = lines.map(line =>
-                        paragraphType.create({}, line ? [state.schema.text(line)] : []),
-                      );
-                      tr.replaceWith(codeBlockPos, codeBlockPos + codeBlockNode.nodeSize, paragraphs);
-                      return true;
-                    })
-                    .run();
-                }
-
-                const { from, to } = state.selection;
                 const blocks = [];
-                state.doc.nodesBetween(from, to, (node, pos) => {
+                state.doc.nodesBetween($from.pos, $to.pos, (node, pos) => {
                   if (node.isTextblock) {
                     blocks.push({ node, pos });
                     return false;
                   }
                 });
 
+                // Single block, in either direction: defer to the built-in. It uses
+                // setBlockType, which changes the node's type in place rather than
+                // replacing its content, so the cursor and any selection map through
+                // untouched. Untoggling this way also leaves the block's newlines as
+                // hard breaks in one paragraph, which round-trips the original text
+                // exactly (splitting into separate paragraphs would turn each single
+                // newline into a paragraph break).
                 if (blocks.length <= 1) {
-                  return commands.setNode(this.name, attributes);
+                  return commands.toggleNode(this.name, 'paragraph', attributes);
                 }
 
-                // Multiple paragraphs selected: merge into a single code block
+                // Multiple paragraphs selected: merge into a single code block. The
+                // built-in would give one code block per paragraph instead.
                 const combinedText = blocks.map(({ node }) => node.textContent).join('\n');
                 const firstPos = blocks[0].pos;
                 const lastBlock = blocks[blocks.length - 1];
                 const lastPos = lastBlock.pos + lastBlock.node.nodeSize;
+
+                // Where each block's text lands within combinedText, so the selection
+                // can be re-anchored below.
+                const textStarts = [];
+                let consumed = 0;
+                blocks.forEach(({ node }) => {
+                  textStarts.push(consumed);
+                  consumed += node.textContent.length + 1; // +1 for the joining newline
+                });
+                const combinedOffset = ($pos, fallback) => {
+                  const index = blocks.findIndex(({ pos }) => pos === $pos.before($pos.depth));
+                  return index === -1 ? fallback : textStarts[index] + $pos.parentOffset;
+                };
+                // Unlike setBlockType, replaceWith swaps out content, and ProseMirror maps
+                // positions inside a replaced range to its end — so without an explicit
+                // selection the caret would jump to the end of the new code block.
+                // +1 steps inside the code block node.
+                const selectionFrom = firstPos + 1 + combinedOffset($from, 0);
+                const selectionTo = firstPos + 1 + combinedOffset($to, combinedText.length);
 
                 return chain()
                   .command(({ tr }) => {
@@ -859,6 +869,7 @@ export default {
                     tr.replaceWith(firstPos, lastPos, codeBlockType.create(attributes, content));
                     return true;
                   })
+                  .setTextSelection({ from: selectionFrom, to: selectionTo })
                   .run();
               },
             };
