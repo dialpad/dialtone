@@ -2433,22 +2433,58 @@ describe('DtRichTextEditor tests', () => {
       });
     });
 
+    // Text positions in <pre>aaa</pre><pre>bbb</pre>: 1-4 in the first block,
+    // 6-9 in the second. setBlockType does not change node sizes, so the same
+    // positions still address the same characters once they are paragraphs.
+    const TWO_CODEBLOCKS = '<pre><code>aaa</code></pre><pre><code>bbb</code></pre>';
+
     describe('When toggling a selection that spans several existing codeblocks', function () {
       beforeEach(async () => {
-        await _setContentAndSelection(
-          '<pre><code>a</code></pre><pre><code>b</code></pre>', { from: 2, to: 6 },
-        );
+        await _setContentAndSelection(TWO_CODEBLOCKS, { from: 2, to: 8 });
       });
 
       it('should report the codeblock as active', function () {
         expect(editorInstance.isActive('codeBlock')).toBe(true);
       });
 
-      it('should turn them all off rather than merging them', async () => {
+      describe('When the button is pressed', function () {
+        beforeEach(async () => {
+          editorInstance.commands.toggleCodeBlock();
+          await wrapper.vm.$nextTick();
+        });
+
+        it('should turn them all off rather than merging them', function () {
+          expect(editorInstance.getHTML()).toBe('<p>aaa</p><p>bbb</p>');
+        });
+
+        it('should keep the forward selection over the same text', function () {
+          const { anchor, head } = editorInstance.state.selection;
+          expect({ anchor, head }).toEqual({ anchor: 2, head: 8 });
+        });
+      });
+    });
+
+    describe('When toggling off a backward selection spanning several codeblocks', function () {
+      beforeEach(async () => {
+        await _setContentAndSelection(TWO_CODEBLOCKS, { from: 2, to: 8 });
+        // Drag from the second block up into the first.
+        editorInstance.view.dispatch(
+          editorInstance.state.tr.setSelection(
+            TextSelection.create(editorInstance.state.doc, 8, 2),
+          ),
+        );
+        await wrapper.vm.$nextTick();
         editorInstance.commands.toggleCodeBlock();
         await wrapper.vm.$nextTick();
+      });
 
-        expect(editorInstance.getHTML()).toBe('<p>a</p><p>b</p>');
+      it('should turn them all off', function () {
+        expect(editorInstance.getHTML()).toBe('<p>aaa</p><p>bbb</p>');
+      });
+
+      it('should keep the selection pointing backward over the same text', function () {
+        const { anchor, head } = editorInstance.state.selection;
+        expect({ anchor, head }).toEqual({ anchor: 8, head: 2 });
       });
     });
 
