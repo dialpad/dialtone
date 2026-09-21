@@ -329,6 +329,30 @@ describe('DtPopover Tests', () => {
     });
   });
 
+  describe('getReferenceClientRect fallback (DLT-3607)', () => {
+    it('returns a zero rect instead of undefined when anchorEl is null', () => {
+      wrapper.vm.anchorEl = null;
+
+      const rect = wrapper.vm.getReferenceClientRect(false);
+
+      expect(rect).toEqual({ width: 0, height: 0, top: 0, left: 0, right: 0, bottom: 0, x: 0, y: 0 });
+    });
+  });
+
+  describe('When isOpen becomes true before an anchor element has been resolved (DLT-3607)', () => {
+    it('does not initialize a tippy instance with a null anchor', async () => {
+      wrapper.vm.isOpen = false;
+      await wrapper.vm.$nextTick();
+      wrapper.vm.anchorEl = null;
+      const initSpy = vi.spyOn(wrapper.vm, 'initTippyInstance');
+
+      wrapper.vm.isOpen = true;
+      await wrapper.vm.$nextTick();
+
+      expect(initSpy).not.toHaveBeenCalled();
+    });
+  });
+
   describe('Accessibility Tests', () => {
     describe('When popover is open', () => {
       beforeEach(async () => {
