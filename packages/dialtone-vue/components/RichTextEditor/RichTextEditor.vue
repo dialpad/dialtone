@@ -816,47 +816,53 @@ export default {
               ...this.parent?.(),
               toggleCodeBlock: (attributes = {}) => ({ state, chain, commands }) => {
                 const codeBlockType = state.schema.nodes[this.name];
-                const { $from } = state.selection;
+                const { $from, $to } = state.selection;
 
-                if ($from.parent.type === codeBlockType) {
-                  const paragraphType = state.schema.nodes.paragraph;
-                  const lines = $from.parent.textContent.split('\n');
-                  const codeBlockPos = $from.before();
-                  const codeBlockNode = $from.parent;
-                  return chain()
-                    .command(({ tr }) => {
-                      const paragraphs = lines.map(line =>
-                        paragraphType.create({}, line ? [state.schema.text(line)] : []),
-                      );
-                      tr.replaceWith(codeBlockPos, codeBlockPos + codeBlockNode.nodeSize, paragraphs);
-                      return true;
-                    })
-                    .run();
-                }
-
-                const { from, to } = state.selection;
                 const blocks = [];
-                state.doc.nodesBetween(from, to, (node, pos) => {
+                state.doc.nodesBetween($from.pos, $to.pos, (node, pos) => {
                   if (node.isTextblock) {
                     blocks.push({ node, pos });
                     return false;
                   }
                 });
 
+                // Single block, in either direction: defer to the built-in. It uses
+                // setBlockType, which changes the node's type in place rather than
+                // replacing its content, so the cursor and any selection map through
+                // untouched. Untoggling this way also leaves the block's newlines as
+                // hard breaks in one paragraph, which round-trips the original text
+                // exactly (splitting into separate paragraphs would turn each single
+                // newline into a paragraph break).
                 if (blocks.length <= 1) {
-                  return commands.setNode(this.name, attributes);
+                  return commands.toggleNode(this.name, 'paragraph', attributes);
                 }
 
-                // Multiple paragraphs selected: merge into a single code block
-                const combinedText = blocks.map(({ node }) => node.textContent).join('\n');
-                const firstPos = blocks[0].pos;
-                const lastBlock = blocks[blocks.length - 1];
-                const lastPos = lastBlock.pos + lastBlock.node.nodeSize;
+                // Every selected block is already a code block, so the button reads as
+                // active and pressing it has to turn them all off rather than merge
+                // them. Passing no attributes on purpose: they take part in the
+                // is-active check, so a language on the command would stop blocks with
+                // a different language from toggling off.
+                if (blocks.every(({ node }) => node.type === codeBlockType)) {
+                  return commands.toggleNode(this.name, 'paragraph');
+                }
 
+                // A mix of blocks, or several paragraphs: merge into a single code
+                // block. The built-in would give one code block per paragraph instead,
+                // so retype them all and then stitch the results together.
                 return chain()
+                  .setNode(this.name, attributes)
                   .command(({ tr }) => {
-                    const content = combinedText.length ? [state.schema.text(combinedText)] : [];
-                    tr.replaceWith(firstPos, lastPos, codeBlockType.create(attributes, content));
+                    // Replace only the boundary between two adjacent code blocks with a
+                    // newline. That is a small enough step that every text position on
+                    // either side maps through it, so the caret, the selected range and
+                    // its direction all survive without being recomputed. Walk the
+                    // boundaries back to front to keep the earlier positions valid.
+                    for (let index = blocks.length - 1; index > 0; index--) {
+                      const blockStart = tr.mapping.map(blocks[index].pos);
+                      const previousBlockEnd = blockStart - 1;
+                      if (tr.doc.resolve(previousBlockEnd).parent.type !== codeBlockType) continue;
+                      tr.replaceWith(previousBlockEnd, blockStart + 1, state.schema.text('\n'));
+                    }
                     return true;
                   })
                   .run();

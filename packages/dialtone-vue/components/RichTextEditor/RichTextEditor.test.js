@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils';
 import DtRichTextEditor from './RichTextEditor.vue';
 import { EditorContent } from '@tiptap/vue-3';
+import { TextSelection } from '@tiptap/pm/state';
 import { simulatePaste } from '../../tests/setupTests';
 import {
   findVariable,
@@ -2326,6 +2327,258 @@ describe('DtRichTextEditor tests', () => {
 
         const hasVariables = countVariables(jsonOutput.content) > 0;
         expect(hasVariables).toBe(true);
+      });
+    });
+  });
+
+  describe('Codeblock toggle tests', function () {
+    let editorInstance;
+
+    // Resolves the collapsed/anchor end of the selection into a readable shape.
+    const _cursor = () => {
+      const { $from } = editorInstance.state.selection;
+      return {
+        block: $from.index(0),
+        text: $from.parent.textContent,
+        offset: $from.parentOffset,
+      };
+    };
+
+    const _setContentAndSelection = async (html, selection) => {
+      editorInstance.commands.setContent(html);
+      editorInstance.commands.setTextSelection(selection);
+      await wrapper.vm.$nextTick();
+    };
+
+    beforeEach(async () => {
+      editorInstance = wrapper.vm.editor;
+    });
+
+    describe('When removing a codeblock with the cursor on the first line', function () {
+      // A two-line message is a single paragraph with a hard break, since Enter
+      // sends the message and Shift + Enter inserts the break.
+      beforeEach(async () => {
+        await _setContentAndSelection('<p>line1<br>line2</p>', 4);
+        editorInstance.commands.toggleCodeBlock();
+        await wrapper.vm.$nextTick();
+      });
+
+      it('should place the cursor in the codeblock at the same offset', function () {
+        expect(_cursor()).toEqual({ block: 0, text: 'line1\nline2', offset: 3 });
+      });
+
+      describe('When the codeblock is removed', function () {
+        beforeEach(async () => {
+          editorInstance.commands.toggleCodeBlock();
+          await wrapper.vm.$nextTick();
+        });
+
+        it('should leave the cursor on the same line', function () {
+          expect(_cursor()).toEqual({ block: 0, text: 'line1line2', offset: 3 });
+        });
+
+        it('should restore the original hard break rather than splitting into paragraphs', function () {
+          expect(editorInstance.getHTML()).toBe('<p>line1<br>line2</p>');
+        });
+      });
+    });
+
+    describe('When removing a single-line codeblock', function () {
+      beforeEach(async () => {
+        await _setContentAndSelection('<pre><code>hello world</code></pre>', 4);
+        editorInstance.commands.toggleCodeBlock();
+        await wrapper.vm.$nextTick();
+      });
+
+      it('should leave the cursor where it was', function () {
+        expect(_cursor()).toEqual({ block: 0, text: 'hello world', offset: 3 });
+      });
+
+      it('should convert the codeblock to a paragraph', function () {
+        expect(editorInstance.getHTML()).toBe('<p>hello world</p>');
+      });
+    });
+
+    describe('When toggling a codeblock on and back off', function () {
+      // The codeblock stores each line separated by a single newline, so removing
+      // it must not inflate those newlines into paragraph breaks.
+      it('should round-trip the text output unchanged', async () => {
+        await wrapper.setProps({ outputFormat: 'text' });
+        await _setContentAndSelection('<p>line1<br>line2</p>', 4);
+        const before = wrapper.vm.getOutput();
+
+        editorInstance.commands.toggleCodeBlock();
+        editorInstance.commands.toggleCodeBlock();
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.vm.getOutput()).toBe(before);
+      });
+    });
+
+    describe('When adding a codeblock over a selection spanning multiple paragraphs', function () {
+      beforeEach(async () => {
+        // from/to land inside 'line1' and 'line2' respectively.
+        await _setContentAndSelection('<p>line1</p><p>line2</p>', { from: 2, to: 10 });
+        editorInstance.commands.toggleCodeBlock();
+        await wrapper.vm.$nextTick();
+      });
+
+      it('should merge the paragraphs into a single codeblock', function () {
+        expect(editorInstance.getHTML()).toBe('<pre class="d-rich-text-editor__code-block"><code>line1\nline2</code></pre>');
+      });
+
+      it('should keep the same text selected rather than collapsing to the end', function () {
+        const { from, to } = editorInstance.state.selection;
+        expect(editorInstance.state.doc.textBetween(from, to)).toBe('ine1\nli');
+      });
+    });
+
+    // Text positions in <pre>aaa</pre><pre>bbb</pre>: 1-4 in the first block,
+    // 6-9 in the second. setBlockType does not change node sizes, so the same
+    // positions still address the same characters once they are paragraphs.
+    const TWO_CODEBLOCKS = '<pre><code>aaa</code></pre><pre><code>bbb</code></pre>';
+
+    describe('When toggling a selection that spans several existing codeblocks', function () {
+      beforeEach(async () => {
+        await _setContentAndSelection(TWO_CODEBLOCKS, { from: 2, to: 8 });
+      });
+
+      it('should report the codeblock as active', function () {
+        expect(editorInstance.isActive('codeBlock')).toBe(true);
+      });
+
+      describe('When the button is pressed', function () {
+        beforeEach(async () => {
+          editorInstance.commands.toggleCodeBlock();
+          await wrapper.vm.$nextTick();
+        });
+
+        it('should turn them all off rather than merging them', function () {
+          expect(editorInstance.getHTML()).toBe('<p>aaa</p><p>bbb</p>');
+        });
+
+        it('should keep the forward selection over the same text', function () {
+          const { anchor, head } = editorInstance.state.selection;
+          expect({ anchor, head }).toEqual({ anchor: 2, head: 8 });
+        });
+      });
+    });
+
+    describe('When toggling off a backward selection spanning several codeblocks', function () {
+      beforeEach(async () => {
+        await _setContentAndSelection(TWO_CODEBLOCKS, { from: 2, to: 8 });
+        // Drag from the second block up into the first.
+        editorInstance.view.dispatch(
+          editorInstance.state.tr.setSelection(
+            TextSelection.create(editorInstance.state.doc, 8, 2),
+          ),
+        );
+        await wrapper.vm.$nextTick();
+        editorInstance.commands.toggleCodeBlock();
+        await wrapper.vm.$nextTick();
+      });
+
+      it('should turn them all off', function () {
+        expect(editorInstance.getHTML()).toBe('<p>aaa</p><p>bbb</p>');
+      });
+
+      it('should keep the selection pointing backward over the same text', function () {
+        const { anchor, head } = editorInstance.state.selection;
+        expect({ anchor, head }).toEqual({ anchor: 8, head: 2 });
+      });
+    });
+
+    describe('When toggling a selection that mixes a codeblock and a paragraph', function () {
+      beforeEach(async () => {
+        await _setContentAndSelection('<pre><code>a</code></pre><p>b</p>', { from: 2, to: 6 });
+      });
+
+      it('should not report the codeblock as active', function () {
+        expect(editorInstance.isActive('codeBlock')).toBe(false);
+      });
+
+      it('should merge them into a single codeblock', async () => {
+        editorInstance.commands.toggleCodeBlock();
+        await wrapper.vm.$nextTick();
+
+        expect(editorInstance.getHTML())
+          .toBe('<pre class="d-rich-text-editor__code-block"><code>a\nb</code></pre>');
+      });
+    });
+
+    describe('When adding a codeblock over paragraphs with a blank one between', function () {
+      beforeEach(async () => {
+        await _setContentAndSelection('<p>a</p><p></p><p>b</p>', { from: 1, to: 8 });
+        editorInstance.commands.toggleCodeBlock();
+        await wrapper.vm.$nextTick();
+      });
+
+      it('should keep the blank line as an empty line in the codeblock', function () {
+        expect(editorInstance.getHTML())
+          .toBe('<pre class="d-rich-text-editor__code-block"><code>a\n\nb</code></pre>');
+      });
+    });
+
+    describe('When adding a codeblock over a backward selection', function () {
+      beforeEach(async () => {
+        await _setContentAndSelection('<p>line1</p><p>line2</p>', { from: 2, to: 10 });
+        // Drag from 'line2' up into 'line1', so the anchor trails the head.
+        editorInstance.view.dispatch(
+          editorInstance.state.tr.setSelection(
+            TextSelection.create(editorInstance.state.doc, 10, 2),
+          ),
+        );
+        await wrapper.vm.$nextTick();
+        editorInstance.commands.toggleCodeBlock();
+        await wrapper.vm.$nextTick();
+      });
+
+      it('should keep the selection pointing backward', function () {
+        const { anchor, head } = editorInstance.state.selection;
+        expect(anchor).toBeGreaterThan(head);
+      });
+
+      it('should keep the same text selected', function () {
+        const { from, to } = editorInstance.state.selection;
+        expect(editorInstance.state.doc.textBetween(from, to)).toBe('ine1\nli');
+      });
+    });
+
+    describe('When adding a codeblock over a select-all of multiple paragraphs', function () {
+      // Select all produces an AllSelection whose ends sit at the document level,
+      // outside any of the merged paragraphs.
+      beforeEach(async () => {
+        editorInstance.commands.setContent('<p>line1</p><p>line2</p>');
+        editorInstance.commands.selectAll();
+        editorInstance.commands.toggleCodeBlock();
+        await wrapper.vm.$nextTick();
+      });
+
+      it('should merge the paragraphs into one codeblock', function () {
+        expect(editorInstance.getHTML())
+          .toBe('<pre class="d-rich-text-editor__code-block"><code>line1\nline2</code></pre>');
+      });
+
+      it('should leave the whole codeblock selected', function () {
+        const { from, to } = editorInstance.state.selection;
+        expect(editorInstance.state.doc.textBetween(from, to)).toBe('line1\nline2');
+      });
+    });
+
+    describe('When adding a codeblock over a selection spanning three paragraphs', function () {
+      beforeEach(async () => {
+        await _setContentAndSelection('<p>line1</p><p>line2</p><p>line3</p>', { from: 2, to: 17 });
+        editorInstance.commands.toggleCodeBlock();
+        await wrapper.vm.$nextTick();
+      });
+
+      it('should merge all three paragraphs into a single codeblock', function () {
+        expect(editorInstance.getHTML()).toBe('<pre class="d-rich-text-editor__code-block"><code>line1\nline2\nline3</code></pre>');
+      });
+
+      it('should keep the same text selected', function () {
+        const { from, to } = editorInstance.state.selection;
+        expect(editorInstance.state.doc.textBetween(from, to)).toBe('ine1\nline2\nli');
       });
     });
   });
