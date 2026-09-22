@@ -1,3 +1,10 @@
+## [1.14.1](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.14.0...eslint-plugin-dialtone/v1.14.1) (2026-09-22)
+
+
+### Bug Fixes
+
+* NO-JIRA widen dialtone-vue peer range to include v4 ([#1438](https://github.com/dialpad/dialtone/issues/1438)) ([f7d4267](https://github.com/dialpad/dialtone/commit/f7d42670ab62a199f5795e536fa9bab60d8f2239))
+
 # [1.14.0](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.13.0...eslint-plugin-dialtone/v1.14.0) (2026-09-16)
 
 
