@@ -1,0 +1,318 @@
+packages/combinator/src/components/combinator.vue
+  s_30aae87b3e19ec::t_85bbdc1181791c 36,38,160-161,530,535-537,543,629,650
+  s_42d457a6803b9f::t_5a5078b800bbb2 349,353
+  s_cbd29f6a5140e8::t_f62e9c06cb7d0b 136,169-170,348,350-352,354-357
+packages/combinator/src/variants/variants_text.js
+  s_42d457a6803b9f::t_33f82e9d99d5f7 2-13
+  s_42d457a6803b9f::t_54f2ccac3027d4 55
+  s_30aae87b3e19ec::t_7a6842221144f4 44-54,56-58,74-75
+  s_42d457a6803b9f::t_2d5778c5421609 59
+  s_cbd29f6a5140e8::t_c4c64d9c8b3f63 18-19,21-23,25-27,29-31
+  s_cbd29f6a5140e8::t_978b3f93c2e841 20,24,28,32-38
+  h_c15b5755534093 86-87,94,97,101-102,109,116-117,119,124,127,131-132,137-138,149-150,161-162,194-195,198,208,220-255
+  s_42d457a6803b9f::t_f74f66abd378c0 62
+packages/combinator/src/variants/variants_description_list.js
+  s_cbd29f6a5140e8::t_978b3f93c2e841 4,7
+  s_cbd29f6a5140e8::t_859023223817b9 5-6,8
+packages/combinator/src/components/controls/control_suggestion.vue
+  s_cbd29f6a5140e8::t_c6a371cf4495cc 103
+  s_53ce6bf944760d::t_784aba86da9518 19-20,75-84
+  s_30aae87b3e19ec::t_85bbdc1181791c 15,65,70-73
+packages/combinator/src/variants/variants_filter_pill.js
+  s_30aae87b3e19ec::t_85bbdc1181791c 5-15
+packages/combinator/src/components/controls/control_slot.test.js
+  s_30aae87b3e19ec::t_85bbdc1181791c 4-8,19-21,29,33-34,55-59,61-103
+packages/combinator/src/components/controls/control_segmented.vue
+  s_30aae87b3e19ec::t_85bbdc1181791c 2-5,7-10,12-32,34-43,49,52-53,56-59,72-79,96-99,119-122,124,127-151
+packages/combinator/src/lib/control.js
+  s_30aae87b3e19ec::t_85bbdc1181791c 21,97-98
+packages/combinator/src/components/renderer/renderer_target.test.js
+  s_30aae87b3e19ec::t_85bbdc1181791c 1-33
+packages/combinator/src/components/option_bar/option_bar_member_group.test.js
+  s_30aae87b3e19ec::t_85bbdc1181791c 11-26,28-29,31-44,46-47,49-63,65-66,86-89,92-106,110-116,118,197-218,221-226,322-342,344-348
+  s_30aae87b3e19ec::t_20add9d1e71f83 6-7,9
+  s_cbd29f6a5140e8::t_3e26c63098ec61 227-261
+  s_53ce6bf944760d::t_9f203c26085ce5 350-411
+  s_cbd29f6a5140e8::t_eae3cb7b10cd4a 126,148
+  s_cbd29f6a5140e8::t_852ca0a8f30940 321
+  s_cbd29f6a5140e8::t_0f721dc1e38659 171-194,262-320
+  s_cbd29f6a5140e8::t_f7363cc6c2c212 67-85
+  s_cbd29f6a5140e8::t_9c434680b50699 120-125,127-147,149-170,195-196
+packages/combinator/src/variants/variants_button.js
+  s_42d457a6803b9f::t_a579f9174f9401 1-2
+  s_cbd29f6a5140e8::t_8eaec7cf33958c 3-5,34-65
+  s_42d457a6803b9f::t_bc43d69a31f8cb 12
+  s_cbd29f6a5140e8::t_724a7abf4d5c73 11,13-23
+packages/combinator/src/lib/info.test.js
+  s_cbd29f6a5140e8::t_9568b0ca04c94b 40-45,47,50-55,57
+  s_9f61fa9161643f::t_292a9d70dfae88 1,8-19,21-37
+  s_30aae87b3e19ec::t_85bbdc1181791c 2-7,48-49,56,58-60
+  s_9f61fa9161643f::t_66bf035366100d 20,38-39,46
+packages/combinator/src/lib/prop_dependencies.test.js
+  s_30aae87b3e19ec::t_85bbdc1181791c 1-22
+packages/combinator/src/lib/utils_vue.test.js
+  s_cbd29f6a5140e8::t_f7363cc6c2c212 1-22
+packages/combinator/src/components/controls/control_boolean.vue
+  s_30aae87b3e19ec::t_85bbdc1181791c 3-6,8-15,17-26,31,33,35,37,47-48
+packages/combinator/src/lib/exclusion_rules.test.js
+  s_53ce6bf944760d::t_e9672edc8a26c8 166
+  s_30aae87b3e19ec::t_83fa409cb1418e 145
+  s_cbd29f6a5140e8::t_82ba9e8617ae27 289
+  s_cbd29f6a5140e8::t_f0ee29b2d7f0bf 170,176,185,197-198,209,211-213,217-218,220-222,226-228,232-234,239,261
+  s_53ce6bf944760d::t_9f203c26085ce5 2,17-18,146-165
+  s_30aae87b3e19ec::t_85bbdc1181791c 4,16,78,98-144
+  s_cbd29f6a5140e8::t_62a496639dc5ed 3,5-11,20-29,167-169,171-175,177-184,186-196,199-208,210,214-216,219,223-225,229-231,235-238,240-260,262-288
+packages/combinator/src/lib/exclusion_rules.js
+  s_42d457a6803b9f::t_f8ab7873e89630 1-35
+  s_30aae87b3e19ec::t_85bbdc1181791c 36-37,39-40,44-57,60,66,69-85,88-91,95-109,112,117,120,124
+apps/dialtone-documentation/docs/.vuepress/exampleComponents/ExampleProfileCard.vue
+  h_c15b5755534093 3,5,19,22-23,29
+packages/combinator/src/components/option_bar/option_bar_control.vue
+  s_30aae87b3e19ec::t_85bbdc1181791c 17,22-23,37-38,50,55-63,91,148-154,200-201,203,210,212
+packages/combinator/src/lib/control.test.js
+  s_30aae87b3e19ec::t_85bbdc1181791c 23-28
+apps/dialtone-documentation/docs/components/hovercard.md
+  h_c15b5755534093 65,73,76,78,81,84-85,91-116,129
+packages/combinator/src/components/controls/control_segmented.test.js
+  s_30aae87b3e19ec::t_85bbdc1181791c 1-58
+packages/combinator/src/components/controls/control_string.vue
+  s_30aae87b3e19ec::t_85bbdc1181791c 2-5,7-11,14,16-38,40-46,50-51,54,57,59-63,69-76,83,89-90
+packages/combinator/src/unsupported_components.json
+  s_cbd29f6a5140e8::t_a94d8d08495efc 1-13
+packages/combinator/src/components/controls/control_number.vue
+  s_30aae87b3e19ec::t_85bbdc1181791c 2-5,7-11,14,16-37,42,44,46-50,52-53,59-66,70-72
+packages/combinator/src/lib/info.js
+  s_30aae87b3e19ec::t_5bd7016f0bce9d 141-143
+  s_9f61fa9161643f::t_a8e04ccec6103e 201
+  s_30aae87b3e19ec::t_85bbdc1181791c 4,54-55,66,122-140
+packages/combinator/src/App.vue
+  s_cbd29f6a5140e8::t_a94d8d08495efc 49,56
+apps/dialtone-documentation/docs/.vuepress/exampleComponents/ExampleHovercard.vue
+  h_c15b5755534093 4,22
+packages/combinator/src/variants/variants_split_button.js
+  s_42d457a6803b9f::t_9b6a130064df35 4
+  s_42d457a6803b9f::t_b41fd093a66edf 3
+  s_cbd29f6a5140e8::t_d856dbd805ab5f 5-6,20-103
+packages/combinator/src/variants/variants_link.js
+  s_cbd29f6a5140e8::t_31728e5e1aee25 7-8,10
+  s_cbd29f6a5140e8::t_978b3f93c2e841 6,9,11
+  s_cbd29f6a5140e8::t_5617fa9c103049 21
+  s_cbd29f6a5140e8::t_d6372947586217 2,15-17,19-20
+  s_42d457a6803b9f::t_36fa6709638b23 1
+  s_42d457a6803b9f::t_e5a5665f515310 18
+packages/combinator/src/components/option_bar/option_bar_settings.test.js
+  s_cbd29f6a5140e8::t_8b654bb008fd01 1-38,40-54,56-70
+  s_cbd29f6a5140e8::t_650a7babe196d8 39
+  h_c15b5755534093 55
+packages/combinator/src/lib/component_support.js
+  s_42d457a6803b9f::t_d49c13826b1d65 7
+  s_cbd29f6a5140e8::t_a94d8d08495efc 1-6,8-16
+packages/combinator/src/lib/utils_vue.js
+  s_30aae87b3e19ec::t_85bbdc1181791c 1,3,99-175
+  s_42d457a6803b9f::t_e767d73875f42f 18
+  s_cbd29f6a5140e8::t_f7363cc6c2c212 19-29
+packages/combinator/src/lib/utils.test.js
+  s_30aae87b3e19ec::t_85bbdc1181791c 2-19,28-47
+  s_53ce6bf944760d::t_1a0b05ec63d9de 26-27
+  s_53ce6bf944760d::t_9f203c26085ce5 1,20-25
+packages/combinator/src/variants/variants_tab_group.js
+  s_42d457a6803b9f::t_54f4822b2bb816 2
+  s_cbd29f6a5140e8::t_71b990bf773e15 5-7,9-11
+  s_42d457a6803b9f::t_ef93eb4ba612ec 8
+packages/combinator/src/settings.json
+  s_cbd29f6a5140e8::t_d1fd2c19eaf6e2 14-16,19
+  s_cbd29f6a5140e8::t_f237a263543cbd 17
+packages/dialtone-icons/src/svg/icons/controls/minus.svg
+  s_30aae87b3e19ec::t_85bbdc1181791c 1-3
+packages/dialtone-vue/components/Text/Text.vue
+  s_5c2995026e6cb7::t_d3b3d24231d469 79,84,94,409-413
+  s_5c2995026e6cb7::t_dcd2ee0e5ff134 16,20-22,80-83,85,90-93,95,102-109,114-123,251-263,325,338-344,346-348,350,356-357,418-426,430-431
+  h_c15b5755534093 65
+  s_5c2995026e6cb7::t_7fb541e957ec85 71-74,86-89,110-113,133-136,148-151,190-193,205-208,220-223,235-238,244,310,321,330,337,345,349,351-355,362-364,379,384-386,390-392,404,427-429,433,447,451,455,459-472,475-480,483-488
+  s_5c2995026e6cb7::t_c2dc1270e756d6 414-416
+  s_5c2995026e6cb7::t_9a9bdb30e5bc4a 329
+packages/combinator/src/variants/variants_box.js
+  s_cbd29f6a5140e8::t_d5179dfc3ac4ab 8-9,11,14-15,17-19,21-23,25-27,29-31,33-35,37,39-40,42-44,46-48,50-52,54-56,58-60,62-64,66-68,70-72,74-76,78-80,82-84,86-88,90-91
+  s_30aae87b3e19ec::t_cd146dfa398d11 114
+  s_cbd29f6a5140e8::t_e0cebfaa127848 7,10,12,16,20,24,28,41,45,49,53,65,69,73,77,81,85,89
+  s_cbd29f6a5140e8::t_978b3f93c2e841 32,36,57,61
+  s_30aae87b3e19ec::t_85bbdc1181791c 2-3,95-113
+packages/combinator/src/lib/constants.js
+  s_cbd29f6a5140e8::t_75ff8e1952ecf0 19-20
+packages/combinator/src/components/controls/control_clearable_shell.vue
+  s_30aae87b3e19ec::t_85bbdc1181791c 1-129
+packages/combinator/src/variants/variants_stack.js
+  s_cbd29f6a5140e8::t_978b3f93c2e841 7,10
+  s_cbd29f6a5140e8::t_dd467fc7291c2d 8-9,11
+packages/combinator/src/variants/variants_popover.js
+  s_cbd29f6a5140e8::t_c0a3ec9de78c8e 4-6,8-10
+  s_42d457a6803b9f::t_214d8fe81b5b3e 1
+  s_42d457a6803b9f::t_a0bc3f5ca60101 7
+packages/combinator/src/lib/component_support.test.js
+  s_cbd29f6a5140e8::t_c11fc7986e254b 6,47-52,54
+  s_cbd29f6a5140e8::t_30a5df1f8588d1 1-2,4-5,7-9,11-46,53,55-64
+  s_cbd29f6a5140e8::t_4a97abd090f7a2 3,10
+packages/combinator/src/lib/utils.js
+  s_30aae87b3e19ec::t_85bbdc1181791c 109,111-115,117-160
+  s_53ce6bf944760d::t_784aba86da9518 110,116
+packages/dialtone-icons/src/keywords-icons.json
+  s_30aae87b3e19ec::t_85bbdc1181791c 787-790,1105
+packages/combinator/src/components/controls/control_clearable_shell.test.js
+  s_30aae87b3e19ec::t_85bbdc1181791c 1-67
+packages/combinator/src/components/controls/control_boolean.test.js
+  s_30aae87b3e19ec::t_85bbdc1181791c 31-33,35
+packages/combinator/src/components/controls/control_iterable.vue
+  s_30aae87b3e19ec::t_85bbdc1181791c 12,44-47,49-61,65
+packages/combinator/src/components/code_editor/code_editor.test.js
+  s_30aae87b3e19ec::t_85bbdc1181791c 1-84
+packages/combinator/src/components/controls/control_slot.vue
+  s_30aae87b3e19ec::t_85bbdc1181791c 2-5,7-10,13,15-38,42-43,45,48-51,60-67,76-77,88-93
+packages/combinator/src/components/combinator.test.js
+  s_cbd29f6a5140e8::t_9cc2243340f78f 19-22,120-159
+packages/combinator/src/components/renderer/renderer_target.vue
+  s_30aae87b3e19ec::t_85bbdc1181791c 8-19
+packages/combinator/src/variants/variants_badge.js
+  s_cbd29f6a5140e8::t_8b48540d0767b4 30,34,38
+  s_cbd29f6a5140e8::t_ac2137f4c0f3b8 1,41-51
+  s_30aae87b3e19ec::t_85bbdc1181791c 2,29,31-33,35-37,39-40
+packages/combinator/src/components/option_bar/option_bar_control.test.js
+  s_53ce6bf944760d::t_9f203c26085ce5 38-68
+apps/dialtone-documentation/docs/components/text.md
+  s_5c2995026e6cb7::t_d3b3d24231d469 43,51,68,81,104,135
+  s_5c2995026e6cb7::t_41057397f1d854 3,66,78-80,92-94,96,98,100-103,119-120,126-134
+  s_5c2995026e6cb7::t_50eb64cebd858f 218-222,228-246
+  s_5c2995026e6cb7::t_ca50c2c88e94e7 4,77,112-113,121-125,568
+  s_cbd29f6a5140e8::t_f7363cc6c2c212 480
+  s_5c2995026e6cb7::t_08a78f68ac049c 87,114-116,570-573
+  s_5c2995026e6cb7::t_7fb541e957ec85 7-8,11-21,34-36,40-42,49-50,52,57-59,72-76,111,169-173,223-227,284-287,441,456,461-462,553-555
+  h_c15b5755534093 89,144,152,189-190,192-194,196-198,200-202,204-206,208-210,297-298,302-303,306-307,310-311,358,360-361,384,477-478,483,493-494,497,504,531,535,539,541-542,545
+packages/combinator/src/components/controls/control_base.vue
+  s_53ce6bf944760d::t_784aba86da9518 3,20-23
+  s_30aae87b3e19ec::t_85bbdc1181791c 6-8,26,32-43
+packages/combinator/src/components/controls/control_number.test.js
+  s_30aae87b3e19ec::t_c25fbaab122989 69-70
+  s_30aae87b3e19ec::t_85bbdc1181791c 4-7,12,18-20,28,32-33,58-68
+packages/combinator/src/variants/variants_item_layout.js
+  s_cbd29f6a5140e8::t_978b3f93c2e841 12-14
+  s_cbd29f6a5140e8::t_20920c32fec959 5-11,15-17
+  s_42d457a6803b9f::t_e4c9514f0e0087 2
+  s_cbd29f6a5140e8::t_6d17c72e75d135 18-44
+packages/combinator/src/components/controls/control_dynamic.test.js
+  s_30aae87b3e19ec::t_85bbdc1181791c 30-32,37-38,40-41
+packages/combinator/src/components/controls/control_suggestion.test.js
+  s_cbd29f6a5140e8::t_c25a6ab2a5d121 89-100
+  s_cbd29f6a5140e8::t_d4bad153fb9f2e 35-38,79-88
+  s_53ce6bf944760d::t_10560638dfbe24 70,77
+  s_53ce6bf944760d::t_9f203c26085ce5 1-34,39-69,71-76,78,101
+packages/combinator/src/components/option_bar/option_bar_member_group.vue
+  s_cbd29f6a5140e8::t_f7363cc6c2c212 301-302
+  s_cbd29f6a5140e8::t_82362c14565a92 296,316
+  s_30aae87b3e19ec::t_85bbdc1181791c 18,29-30,42,46,48,53-57,59-64,68-74,78-82,98-108,153-160,203-205,223,226,287,290-294,297-300,313-314,333-338
+  s_53ce6bf944760d::t_784aba86da9518 339
+  s_cbd29f6a5140e8::t_5288558bdcd967 168-179,315
+  s_30aae87b3e19ec::t_9f608e419d6e90 340
+  s_cbd29f6a5140e8::t_eae3cb7b10cd4a 295
+  s_cbd29f6a5140e8::t_0f721dc1e38659 180-186,303-306,312
+packages/combinator/src/components/controls/control_selection.test.js
+  s_30aae87b3e19ec::t_85bbdc1181791c 5-10,13,44-48,52-57,61-68,72-73,75-80,82,84-85,88-89,91-94,97-98,100-103,105-106,109-110,112-113,115,118-119,121-123,125,127-128
+packages/combinator/src/lib/test/utils_test.js
+  s_30aae87b3e19ec::t_85bbdc1181791c 3,5-7,20-34
+  s_30aae87b3e19ec::t_f81109dde24e10 35-36
+  s_cbd29f6a5140e8::t_a94d8d08495efc 2,4,10-11,17
+packages/combinator/src/components/controls/control_string.test.js
+  s_30aae87b3e19ec::t_85bbdc1181791c 4-8,18-20,28,32-33,54-85
+packages/combinator/src/components/option_bar/option_bar.test.js
+  s_30aae87b3e19ec::t_85bbdc1181791c 1-7,9-12,20-36,38-61,64-78,85-125,136-161,166-322,437
+  s_cbd29f6a5140e8::t_ccea847517cbfb 430
+  s_cbd29f6a5140e8::t_0f721dc1e38659 63,340-357
+  s_cbd29f6a5140e8::t_978b3f93c2e841 328-329,363-364,382,395,398
+  s_cbd29f6a5140e8::t_c3390990d3d92c 436
+  s_cbd29f6a5140e8::t_d3fa87deaeaafc 358-359
+  s_53ce6bf944760d::t_9f203c26085ce5 126-135,162-165,323,401-415
+  s_cbd29f6a5140e8::t_084f58d1df1be9 324-327,330-339,360-362,365-381,383-394,396-397,399-400
+  s_cbd29f6a5140e8::t_bd575462792a50 8,13-19,37,62,79-84,417-429,431-435
+  s_53ce6bf944760d::t_eaa0ea4d85c799 416
+packages/combinator/src/variants/variants_avatar.js
+  s_42d457a6803b9f::t_8114d0148f5735 1
+  s_cbd29f6a5140e8::t_a9e2c9eb9f5657 2,17,23-42
+packages/combinator/src/variants/variants_card.js
+  h_c15b5755534093 32,34-35
+packages/combinator/src/components/controls/control_selection.vue
+  s_30aae87b3e19ec::t_85bbdc1181791c 2-10,12-17,19-20,22-23,25-45,47-49,52-54,57-77,79-111,113-176,178-186,193,196-197,203-206,223-230,255-259,269-271,275,282-290,298-301,311,322-326,333-348,361-375
+  s_30aae87b3e19ec::t_0f2114e14b3b44 376
+packages/combinator/src/components/option_bar/option_bar.vue
+  s_53ce6bf944760d::t_dcbb8ba38742bd 329
+  h_c15b5755534093 48-50,53,63-65,68-69
+  s_cbd29f6a5140e8::t_0f721dc1e38659 127,150,174,188,250,310
+  s_42d457a6803b9f::t_8702b0e9d8b282 306-307,309,314
+  s_53ce6bf944760d::t_784aba86da9518 10,328
+  s_cbd29f6a5140e8::t_60dc147d170c5c 54-55,126,149,173,187,204,206,236-242,245
+  s_cbd29f6a5140e8::t_e37cdc44023432 263,284-285,287,293,297,301,304
+  s_30aae87b3e19ec::t_85bbdc1181791c 12-21,25,28,33,36,40-47,109,112,116,121,125,135,139,148,157-172,175-186,189-194,209,291-292,294-296,298-300,302-303,315-317,319-326,391,404-406
+packages/combinator/src/components/option_bar/option_bar_settings.vue
+  s_cbd29f6a5140e8::t_93a02df29eed14 3
+  s_cbd29f6a5140e8::t_8df61dc58e49a5 11,19,86,96
+  h_c15b5755534093 7,9,29-34,36-44,46-48,51-59,62,64-71,73-74,76-77
+  s_cbd29f6a5140e8::t_3fa08ecb18f7b1 1-2,4-6,8,10,12-18,20-28,35,49-50,61,75,78-85,87-95,97-109
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.5",
+  "base_commit_sha": "0385c2f4a3945b176b55322932aaa68c03fc0848",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_30aae87b3e19ec": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "019ef122-867f-71f2-bacd-0ea0fd649d67",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_42d457a6803b9f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a2d8975c-326c-4d31-bdf7-e28916e5f145",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_53ce6bf944760d": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f0592-371a-7cc2-9cb7-97b530325041",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_5c2995026e6cb7": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019eef70-8249-79a3-8adc-6396d473def8",
+        "model": "gpt-5.5"
+      },
+      "human_author": "Joshua Hynes <jhynes@dialpad.com>"
+    },
+    "s_9f61fa9161643f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ef122-867f-71f2-bacd-0ea0fd649d67",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_cbd29f6a5140e8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f1571-d2ad-7572-827a-d391f2dc0ba6",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

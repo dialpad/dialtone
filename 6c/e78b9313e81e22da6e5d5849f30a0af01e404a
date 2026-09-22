@@ -1,0 +1,16 @@
+apps/dialtone-documentation/docs/.vuepress/theme/components/PageHeader.vue
+  h_c15b5755534093 2,4-5,158,162,164
+apps/dialtone-documentation/docs/.vuepress/theme/components/Page.vue
+  h_c15b5755534093 18-22
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.7",
+  "base_commit_sha": "6ce78b9313e81e22da6e5d5849f30a0af01e404a",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
