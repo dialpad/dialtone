@@ -1,3 +1,10 @@
+## [9.0.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v9.0.0...dialtone-css/v9.0.1) (2026-09-22)
+
+
+### Bug Fixes
+
+* NO-JIRA make script peer deps optional ([#1436](https://github.com/dialpad/dialtone/issues/1436)) ([fcdd3d1](https://github.com/dialpad/dialtone/commit/fcdd3d1aa4bccb45fef4a5f83b8dbe3885af0d1f))
+
 # [9.0.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v8.82.0...dialtone-css/v9.0.0) (2026-09-16)
 
 
