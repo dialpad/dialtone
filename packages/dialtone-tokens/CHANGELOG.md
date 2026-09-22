@@ -1,3 +1,10 @@
+## [2.0.2](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.1...dialtone-tokens/v2.0.2) (2026-09-22)
+
+
+### Bug Fixes
+
+* **Dialtone Tokens:** DLT-3614 inject material override CSS in setMaterial ([#1432](https://github.com/dialpad/dialtone/issues/1432)) ([8a963ea](https://github.com/dialpad/dialtone/commit/8a963ea56c32a71b5254216bac52db0fce84006e))
+
 ## [2.0.1](https://github.com/dialpad/dialtone/compare/dialtone-tokens/v2.0.0...dialtone-tokens/v2.0.1) (2026-09-18)
 
 
