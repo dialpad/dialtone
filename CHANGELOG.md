@@ -1,3 +1,10 @@
+## [10.0.3](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.2...dialtone/v10.0.3) (2026-09-22)
+
+
+### Bug Fixes
+
+* NO-JIRA make script peer deps optional ([#1436](https://github.com/dialpad/dialtone/issues/1436)) ([fcdd3d1](https://github.com/dialpad/dialtone/commit/fcdd3d1aa4bccb45fef4a5f83b8dbe3885af0d1f))
+
 ## [10.0.2](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.1...dialtone/v10.0.2) (2026-09-22)
 
 
