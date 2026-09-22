@@ -70,7 +70,7 @@
     "node": "^14.17.0 || ^16.0.0 || >= 18.0.0"
   },
   "peerDependencies": {
-    "@dialpad/dialtone-vue": "^3",
+    "@dialpad/dialtone-vue": "^3 || ^4",
     "eslint": ">=7",
     "vue-eslint-parser": ">=9"
   },
