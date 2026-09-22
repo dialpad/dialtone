@@ -1,9 +1,12 @@
-import chalk from 'chalk';
-import { globby } from 'globby';
-import inquirer from 'inquirer';
 import path from 'path';
 import fs from 'fs';
+import { assertOptionalPeerDeps } from './optional-peer-deps.mjs';
 const { readdir, readFile, writeFile } = fs.promises;
+
+await assertOptionalPeerDeps(['chalk', 'globby', 'inquirer']);
+const { default: chalk } = await import('chalk');
+const { globby } = await import('globby');
+const { default: inquirer } = await import('inquirer');
 
 // confirm prompt for starting operations, display warning and y/n dialog
 export const confirmStart = () => {
