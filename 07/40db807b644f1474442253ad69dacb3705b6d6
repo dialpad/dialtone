@@ -1,0 +1,41 @@
+packages/combinator/src/components/controls/control_string.vue
+  s_9f61fa9161643f::t_b3a7fe8c00ab3d 86,106-107,132-135
+packages/combinator/src/components/controls/control_number.vue
+  s_9f61fa9161643f::t_ddf849d734ea2a 69,79-80,105-108
+packages/combinator/src/components/controls/control_string.test.js
+  s_9f61fa9161643f::t_b6c752407a8a54 74-91
+packages/combinator/src/components/controls/control_boolean.test.js
+  s_53fa132747c3c1::t_e74081e06a5b86 31-33
+packages/combinator/src/components/controls/control_clearable_shell.test.js
+  s_53fa132747c3c1::t_17470f50f13dcb 31-35
+packages/combinator/src/components/controls/control_slot.vue
+  s_9f61fa9161643f::t_a67808f778e166 74,84-85,110-113
+packages/combinator/src/components/controls/control_selection.test.js
+  s_53fa132747c3c1::t_ed882b4285c18a 41-42
+packages/combinator/src/components/option_bar/option_bar_member_group.test.js
+  s_53fa132747c3c1::t_e74b134b7998dc 38-39,43,52-53
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.10",
+  "base_commit_sha": "0740db807b644f1474442253ad69dacb3705b6d6",
+  "prompts": {},
+  "sessions": {
+    "s_53fa132747c3c1": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b9dd6578-4289-464c-8bc2-d50bd98834aa",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_9f61fa9161643f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ef122-867f-71f2-bacd-0ea0fd649d67",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

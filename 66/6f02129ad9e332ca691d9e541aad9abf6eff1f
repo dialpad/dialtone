@@ -1,0 +1,21 @@
+package.json
+  s_84d670ab6252e6::t_d0604c90a94a8d 174
+packages/dialtone-vue/package.json
+  s_84d670ab6252e6::t_b3196933b1b8ee 66
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "666f02129ad9e332ca691d9e541aad9abf6eff1f",
+  "prompts": {},
+  "sessions": {
+    "s_84d670ab6252e6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "20253a5e-95fe-4af2-9c52-518963a05832",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

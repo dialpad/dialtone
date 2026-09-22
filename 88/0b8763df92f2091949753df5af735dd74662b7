@@ -1,0 +1,23 @@
+apps/dialtone-documentation/docs/utilities/layout/coordinates.md
+  s_0deedfec899a67::t_ed98cadc102d97 14,78
+packages/dialtone-css/lib/build/less/components/box.less
+  s_0deedfec899a67::t_ed98cadc102d97 182-183,186-187
+packages/dialtone-vue/components/Box/Box.test.js
+  s_0deedfec899a67::t_ed98cadc102d97 419-420,422-424,426-427,429-430,432-433,435-436,438-449,458-462,467,470
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "880b8763df92f2091949753df5af735dd74662b7",
+  "prompts": {},
+  "sessions": {
+    "s_0deedfec899a67": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f24dc-c4e6-7560-9f4a-625c9c8673a7",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
