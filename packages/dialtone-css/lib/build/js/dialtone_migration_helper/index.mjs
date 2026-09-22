@@ -1,7 +1,15 @@
 #!/usr/bin/env node
 
-import chalk from 'chalk';
-import {
+import ora from 'ora';
+import { dirname, normalize } from 'path';
+import { fileURLToPath } from 'url';
+import { assertOptionalPeerDeps } from './optional-peer-deps.mjs';
+
+await assertOptionalPeerDeps(['chalk', 'yargs']);
+const { default: chalk } = await import('chalk');
+const { hideBin } = await import('yargs/helpers');
+const { default: yargs } = await import('yargs');
+const {
   confirmStart,
   doPatternSearch,
   error,
@@ -10,13 +18,7 @@ import {
   getAllFileContents,
   inquireForFile,
   modifyFileContents,
-  readConfigFile,
-} from './helpers.mjs';
-import ora from 'ora';
-import { dirname, normalize } from 'path';
-import { fileURLToPath } from 'url';
-import { hideBin } from 'yargs/helpers';
-import yargs from 'yargs';
+} = await import('./helpers.mjs');
 
 // eslint-disable-next-line complexity
 (async () => {

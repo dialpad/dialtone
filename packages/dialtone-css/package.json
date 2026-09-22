@@ -107,6 +107,20 @@
     "inquirer": "^9.1.5",
     "yargs": "^17.7.2"
   },
+  "peerDependenciesMeta": {
+    "chalk": {
+      "optional": true
+    },
+    "globby": {
+      "optional": true
+    },
+    "inquirer": {
+      "optional": true
+    },
+    "yargs": {
+      "optional": true
+    }
+  },
   "nx": {
     "includedScripts": [
       "lint"
