@@ -1,0 +1,49 @@
+packages/dialtone-migration-helper/token-renames.js
+  s_6bb5ab4bcdcce9::t_e6bbde1a9a8afa 114
+packages/dialtone-migration-helper/README.md
+  s_6bb5ab4bcdcce9::t_8cdba6dcbfd86c 26,30
+  s_6bb5ab4bcdcce9::t_5ef379ce9127c9 68-69
+  s_6bb5ab4bcdcce9::t_abbe47569e706c 20
+packages/dialtone-migration-helper/content.js
+  s_6bb5ab4bcdcce9::t_fdb24fc45f7f7e 529-534
+packages/dialtone-migration-helper/background.js
+  s_6bb5ab4bcdcce9::t_06273379895c8c 115
+  s_6bb5ab4bcdcce9::t_97ae901040b0c4 15-28
+  s_6bb5ab4bcdcce9::t_8d1a3307b1ec87 90
+packages/dialtone-migration-helper/e2e.mjs
+  s_6bb5ab4bcdcce9::t_9ee66214f91363 1003-1021
+  s_6bb5ab4bcdcce9::t_081d9755edd748 958-1002
+packages/dialtone-migration-helper/structure.js
+  s_6bb5ab4bcdcce9::t_2aeed14740a210 67-70
+  s_6bb5ab4bcdcce9::t_83a16d9db3f46a 266-267,269-271,275-276,279,282,284-285,288-290,292
+  s_6bb5ab4bcdcce9::t_06cdf429d3c794 37-48
+  s_6bb5ab4bcdcce9::t_0a669468284611 332-333
+  s_6bb5ab4bcdcce9::t_caa41e7432318b 237-239
+packages/dialtone-migration-helper/popup.js
+  s_6bb5ab4bcdcce9::t_54849559f318fc 109-113,116,118
+  s_6bb5ab4bcdcce9::t_eb858a478462a3 254-255
+  s_6bb5ab4bcdcce9::t_7d9bf1843a95b3 198
+  s_6bb5ab4bcdcce9::t_466ae55ba60d10 235
+  s_6bb5ab4bcdcce9::t_1beff4e88152fa 236-237
+  s_6bb5ab4bcdcce9::t_a385b4f2e902cc 217-218
+  s_6bb5ab4bcdcce9::t_a29dcc9d5367ba 216
+  s_6bb5ab4bcdcce9::t_39e6404728778f 253
+pnpm-lock.yaml
+  s_6bb5ab4bcdcce9::t_f6da19cd924095 705-710
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "ba558b6fb850837bec9b3bd2bb0fdfd96fdd76bc",
+  "prompts": {},
+  "sessions": {
+    "s_6bb5ab4bcdcce9": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "adce73fc-348b-4e3a-a5c6-9e4fbaa675c4",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "belumontoya <163597542+belumontoya@users.noreply.github.com>"
+    }
+  }
+}

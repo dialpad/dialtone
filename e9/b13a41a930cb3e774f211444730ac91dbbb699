@@ -1,0 +1,24 @@
+packages/dialtone-tokens/dist_ios/Package.swift
+  s_2c554a81bcb109::t_d9880af765a581 3
+.github/workflows/publish-ios.yml
+  s_2c554a81bcb109::t_18b80dd0e11dd4 50
+  s_2c554a81bcb109::t_81bf2cb5177653 51
+  s_2c554a81bcb109::t_9ff6df1b1aece4 8
+  s_2c554a81bcb109::t_e4fdd032e96e40 41
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "e9b13a41a930cb3e774f211444730ac91dbbb699",
+  "prompts": {},
+  "sessions": {
+    "s_2c554a81bcb109": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e7f0ebd1-52fc-43e3-b015-63a8197f6ea9",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

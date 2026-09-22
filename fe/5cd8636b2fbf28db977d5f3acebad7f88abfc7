@@ -1,0 +1,31 @@
+packages/dialtone-tokens/themes/config.js
+  s_e9445e5afc8ec0::t_a391164cea8880 533-538,552,556-558
+  s_e9445e5afc8ec0::t_da4648477ed375 581
+  s_e9445e5afc8ec0::t_a2961706c3dae1 211-213,218-223,225,230,232-252,559
+  s_e9445e5afc8ec0::t_3da8b11cb4f88c 664
+  s_e9445e5afc8ec0::t_9eb512770b30a4 679
+  s_e9445e5afc8ec0::t_ffb5c3de009ce9 560
+packages/dialtone-tokens/tests/config-no-layers.test.js
+  s_e9445e5afc8ec0::t_1f2a7c81404457 1-39
+packages/dialtone-tokens/themes/.gitignore
+  s_e9445e5afc8ec0::t_bcfac580e4785a 3
+  s_e9445e5afc8ec0::t_b13825af822fa5 1
+packages/dialtone-tokens/themes/config-no-layers.js
+  s_e9445e5afc8ec0::t_046a8364734014 1-29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "fe5cd8636b2fbf28db977d5f3acebad7f88abfc7",
+  "prompts": {},
+  "sessions": {
+    "s_e9445e5afc8ec0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "eee9c514-d220-4821-88ca-43e89257f152",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

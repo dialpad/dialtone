@@ -1,0 +1,14 @@
+packages/dialtone-tokens/tokens/theme/dp/default.json
+  h_c15b5755534093 3749
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "bf70eb441b022f0584f957939658bbd4f6728adc",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
