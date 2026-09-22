@@ -42,7 +42,7 @@ pnpm sync:variables -- --dry-run
 pnpm sync:variables
 ```
 
-Run it yourself for now, or once `.github/workflows/sync-variables-to-figma.yml` has reached `staging`: a push to `staging` touching `tokens/**` syncs the main file and a `/sync-tokens` comment on a pull request syncs a separate preview file. The workflow is built, but `issue_comment` triggers only evaluate the definition on the default branch, so it has no effect until it merges there. See [workflow-figma-sync](../workflows/workflow-figma-sync.md) for the detail, including the limitations.
+Run it yourself for now, or once `.github/workflows/sync-variables-to-figma.yml` has reached `staging`: a push to `staging` touching `packages/dialtone-tokens/tokens/**` syncs the main file and a `/sync-tokens` comment on a pull request syncs a separate preview file. The workflow is built, but `issue_comment` triggers only evaluate the definition on the default branch, so it has no effect until it merges there. See [workflow-figma-sync](../workflows/workflow-figma-sync.md) for the detail, including the limitations.
 
 `sync_figma_to_tokens.ts` still exists and pulls the other way, but it is **not** authoritative. Running both directions risks whichever ran last winning.
 
