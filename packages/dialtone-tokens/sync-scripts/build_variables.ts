@@ -169,14 +169,22 @@ export function convert (classified: Classified[]): Conversion {
     }
   }
 
-  // An alias whose TARGET didn't survive falls back to its own resolved
-  // value in the emission loop below — and that fallback can fail the exact
-  // same way the target did, since resolution follows the same chain. Left
-  // unchecked, the emission loop would force-unwrap that failure straight
-  // into the payload (a `null` $value) instead of dropping it, because the
-  // first pass skips every alias entry on the assumption it never needs its
-  // own literal. That assumption breaks the moment the target is gone.
-  //
+  // An alias whose target does not survive as a Figma variable falls back to
+  // its own resolved value in the emission loop below — and that fallback
+  // can fail the exact same way the target's did, since resolution follows
+  // the same chain. Left unchecked, the emission loop would force-unwrap
+  // that failure straight into the payload (a `null` $value) instead of
+  // dropping it, because the first pass skips every alias entry on the
+  // assumption it never needs its own literal. That assumption breaks two
+  // ways, not one: the target FAILED conversion (tracked in `dropped`), or
+  // the target was EXCLUDED before classification ever ran on it (deprecated,
+  // a gradient, the legacy space/size scale — never in `classified` at all,
+  // so it can never appear in `dropped` either). `classifiedNames` makes
+  // "never classified" and "classified then dropped" the same non-survival
+  // condition, matching exactly what `emitted.has(...)` checks below.
+  const classifiedNames = new Set(classified.map(c => c.token.name));
+  const targetSurvives = (name: string) => classifiedNames.has(name) && !dropped.has(name);
+
   // Run to a FIXED POINT, not once. `classified` is sorted by token name, not
   // by dependency order, so a single forward sweep over a 3+ hop chain
   // X -> Y -> Z can miss X: if X sorts before Y, X is checked before Y has
@@ -192,7 +200,7 @@ export function convert (classified: Classified[]): Conversion {
       if (dropped.has(token.name)) continue;
       for (const mode of modesList) {
         const modeValue = token.modes[mode];
-        if (!modeValue.alias || !dropped.has(modeValue.alias)) continue;
+        if (!modeValue.alias || targetSurvives(modeValue.alias)) continue;
         if (fails(figmaType, scopes, modeValue.resolved)) {
           record(figmaType, scopes, token.name, mode, modeValue.resolved);
           dropped.add(token.name);

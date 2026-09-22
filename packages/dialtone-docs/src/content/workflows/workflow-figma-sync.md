@@ -43,7 +43,7 @@ The sync resolves the token sets itself, so it does not need `dialtone-tokens:bu
 
 `sync:materials` writes the five material collections, which extend the main one. It reads the main collection to find the variables it overrides, so run it after `sync:variables`, never before.
 
-### Getting it into Figma, once CI is set up
+### Getting it into Figma, once this reaches `staging`
 
 The push trigger takes over. Open the pull request, and if you want to see the change in Figma before it merges, comment `/sync-tokens` on it: that syncs to a separate preview file. Merging to `staging` syncs the main file.
 
@@ -104,7 +104,7 @@ In CI they come from a GitHub environment rather than a plain repo secret, so a 
 
 ## CI, in detail
 
-`.github/workflows/sync-variables-to-figma.yml`, once it is set up:
+`.github/workflows/sync-variables-to-figma.yml` is built, but inactive until it merges to `staging` — `issue_comment` triggers (the `/sync-tokens` comment below) only evaluate the workflow definition on the default branch, so the file existing on a feature branch has no effect:
 
 | Trigger | Writes to | Environment |
 |---------|-----------|-------------|
