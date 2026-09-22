@@ -1,3 +1,11 @@
+## [4.0.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.0.0...dialtone-vue/v4.0.1) (2026-09-22)
+
+
+### Bug Fixes
+
+* **Popover:** DLT-3607 return a rect fallback and guard tippy init against a null anchor ([#1434](https://github.com/dialpad/dialtone/issues/1434)) ([12d936d](https://github.com/dialpad/dialtone/commit/12d936dba262089ac35877bee538634c62e822b3))
+* **Rich Text Editor:** DP-188940 keep cursor in place when removing a code block ([#1435](https://github.com/dialpad/dialtone/issues/1435)) ([3d2449b](https://github.com/dialpad/dialtone/commit/3d2449b0750886e8e308983486cf7e94349ba06b))
+
 # [4.0.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.226.0...dialtone-vue/v4.0.0) (2026-09-16)
 
 
