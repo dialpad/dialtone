@@ -1,3 +1,11 @@
+## [10.0.4](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.3...dialtone/v10.0.4) (2026-09-22)
+
+
+### Bug Fixes
+
+* NO-JIRA widen dialtone-vue peer range to include v4 ([#1438](https://github.com/dialpad/dialtone/issues/1438)) ([f7d4267](https://github.com/dialpad/dialtone/commit/f7d42670ab62a199f5795e536fa9bab60d8f2239))
+* **Scroller:** DLT-3616 guard CoreScroller against post-unmount null ref ([#1437](https://github.com/dialpad/dialtone/issues/1437)) ([141966c](https://github.com/dialpad/dialtone/commit/141966cb5737a009a4ba30ef6a97db9f3ab84160))
+
 ## [10.0.3](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.2...dialtone/v10.0.3) (2026-09-22)
 
 
