@@ -1,3 +1,12 @@
+## [10.0.2](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.1...dialtone/v10.0.2) (2026-09-22)
+
+
+### Bug Fixes
+
+* **Dialtone Tokens:** DLT-3614 inject material override CSS in setMaterial ([#1432](https://github.com/dialpad/dialtone/issues/1432)) ([8a963ea](https://github.com/dialpad/dialtone/commit/8a963ea56c32a71b5254216bac52db0fce84006e))
+* **Popover:** DLT-3607 return a rect fallback and guard tippy init against a null anchor ([#1434](https://github.com/dialpad/dialtone/issues/1434)) ([12d936d](https://github.com/dialpad/dialtone/commit/12d936dba262089ac35877bee538634c62e822b3))
+* **Rich Text Editor:** DP-188940 keep cursor in place when removing a code block ([#1435](https://github.com/dialpad/dialtone/issues/1435)) ([3d2449b](https://github.com/dialpad/dialtone/commit/3d2449b0750886e8e308983486cf7e94349ba06b))
+
 ## [10.0.1](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.0...dialtone/v10.0.1) (2026-09-18)
 
 
