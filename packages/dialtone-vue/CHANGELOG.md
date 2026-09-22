@@ -1,3 +1,10 @@
+## [4.0.2](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.0.1...dialtone-vue/v4.0.2) (2026-09-22)
+
+
+### Bug Fixes
+
+* **Scroller:** DLT-3616 guard CoreScroller against post-unmount null ref ([#1437](https://github.com/dialpad/dialtone/issues/1437)) ([141966c](https://github.com/dialpad/dialtone/commit/141966cb5737a009a4ba30ef6a97db9f3ab84160))
+
 ## [4.0.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.0.0...dialtone-vue/v4.0.1) (2026-09-22)
 
 
