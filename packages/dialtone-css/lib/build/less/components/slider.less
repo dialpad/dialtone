@@ -28,9 +28,16 @@
     --slider-track-height: var(--dt-size-border-300);         // 4px
     --slider-track-color: var(--dt-color-black-250);
     --slider-indicator-color: var(--dt-color-purple-500);
+    // Same token an outlined button's text uses — readable against both
+    // light and dark canvases, unlike --slider-indicator-color above, whose
+    // dark-theme value is tuned for a filled bar's larger area, not text.
+    --slider-readout-color: var(--dt-color-link-primary);
     --slider-thumb-size: var(--dt-spacing-350);               // 28px — controls control area + hit target
     --slider-thumb-visual-size: calc(var(--slider-thumb-size) * 0.65); // 35% smaller than the hit target
-    --slider-thumb-color: var(--dt-color-surface-primary);
+    // Literal white, not a themed surface token — the thumb reads as a
+    // physical knob that should stay light on both light and dark canvases,
+    // rather than tracking the page background the way surface-primary does.
+    --slider-thumb-color: var(--dt-color-neutral-white);
     --slider-thumb-border-color: var(--dt-color-black-350);
     --slider-thumb-border-width: var(--dt-size-border-100);
     --slider-thumb-shadow: var(--dt-shadow-small);
@@ -43,6 +50,19 @@
     --slider-boundary-color: var(--dt-color-foreground-tertiary);
     --slider-track-length: var(--dt-layout-300);               // 192px — used as block-size in vertical mode
     --slider-mark-offset: var(--dt-spacing-200);               // gap from track/thumb to marks & readout
+
+    // link-primary's dark-theme value is still too close to the canvas for
+    // readout-sized text (it's tuned for links inside body copy, not a bold
+    // number sitting alone). foreground-primary is the token built for that
+    // job — properly high-contrast body text in both themes. Also used for
+    // the thumb here so both read as the same off-white in dark mode; it's
+    // dark gray in light mode, which is why it's scoped to dark only rather
+    // than replacing neutral-white as the base value above.
+    [data-dt-mode="dark"] &,
+    [data-dt-theme="dark"] & {
+        --slider-readout-color: var(--dt-color-foreground-primary);
+        --slider-thumb-color: var(--dt-color-foreground-primary);
+    }
 
     display: flex;
     flex-direction: column;
@@ -141,7 +161,7 @@
 //  every pointermove — the transition above is for discrete value jumps
 //  (click-to-position, keyboard) and only makes a continuous drag look
 //  like it's lagging behind the thumb.
-.d-slider[data-dragging] .d-slider__indicator {
+.d-slider--dragging .d-slider__indicator {
     transition: none;
 }
 
@@ -265,7 +285,7 @@
 //  ----------------------------------------------------------------------------
 .d-slider__readout {
     position: absolute;
-    color: var(--slider-indicator-color);
+    color: var(--slider-readout-color);
     font: var(--dt-typography-body-sm);
     font-weight: var(--dt-font-weight-bold);
     white-space: nowrap;
@@ -280,7 +300,7 @@
 
 //  Same rationale as the indicator: don't let a transition meant for discrete
 //  jumps make a continuous drag look like the readout is lagging the thumb.
-.d-slider[data-dragging] .d-slider__readout {
+.d-slider--dragging .d-slider__readout {
     transition: none;
 }
 
@@ -296,7 +316,7 @@
 
 //  $$  DRAGGING STATE
 //  ----------------------------------------------------------------------------
-.d-slider[data-dragging] {
+.d-slider--dragging {
     .d-slider__control,
     .d-slider__thumb-hit {
         cursor: grabbing;

@@ -1,14 +1,18 @@
 <template>
   <div
+    v-bind="removeClassStyleAttrs($attrs)"
     :class="[
       'd-slider',
       sizeClass,
+      $attrs.class,
       {
         'd-slider--disabled': disabled,
         'd-slider--vertical': isVertical,
         'd-slider--inverted': inverted,
+        'd-slider--dragging': isDragging,
       },
     ]"
+    :style="$attrs.style"
     :data-disabled="disabled || undefined"
     :data-orientation="orientation"
     :data-dragging="isDragging || undefined"
@@ -42,7 +46,7 @@
         :class="['d-slider__start', startClass]"
         data-qa="dt-slider-start"
       >
-        <!-- @slot Optional content at the inline-start end of the track (aka left in LTR).
+        <!-- @slot Optional content at the inline-start end of the track (aka left).
              When using icon-only content, add aria-label or hidden text to the icon. -->
         <slot name="start" />
       </div>
@@ -111,6 +115,7 @@
           :aria-labelledby="(label || $slots.label) ? labelId : undefined"
           :aria-label="(!label && !$slots.label) ? $attrs['aria-label'] : undefined"
           :aria-valuetext="formatValue(val, i)"
+          :aria-orientation="isVertical ? 'vertical' : undefined"
           :style="thumbPositionStyle(val)"
           data-qa="dt-slider-thumb"
           @input="onThumbInput(i, $event)"
@@ -144,6 +149,7 @@
             ]"
             :style="markStyle(thumbPercent(val))"
             :data-readout-index="i"
+            aria-hidden="true"
             data-qa="dt-slider-thumb-readout"
           >
             {{ formatValue(val, i) }}
@@ -156,6 +162,7 @@
             ref="mergedReadoutElRef"
             class="d-slider__readout d-slider__readout--show"
             :style="markStyle(mergedReadoutPct)"
+            aria-hidden="true"
             data-qa="dt-slider-thumb-readout-merged"
           >
             {{ mergedReadoutText }}
@@ -166,7 +173,7 @@
         :class="['d-slider__end', endClass]"
         data-qa="dt-slider-end"
       >
-        <!-- @slot Optional content at the inline-end end of the track (aka right in LTR).
+        <!-- @slot Optional content at the inline-end end of the track (aka right).
              When using icon-only content, add aria-label or hidden text to the icon. -->
         <slot name="end" />
       </div>
@@ -177,7 +184,7 @@
 <script setup>
 import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick } from 'vue';
 import { DtText } from '@/components/Text';
-import { getUniqueString } from '@/common/utils';
+import { getUniqueString, removeClassStyleAttrs } from '@/common/utils';
 import {
   SLIDER_ORIENTATIONS,
   SLIDER_SIZE_MODIFIERS,
@@ -395,7 +402,7 @@ const props = defineProps({
   },
 
   /**
-   * Additional class(es) applied to the inline-start slot wrapper (aka left in LTR).
+   * Additional class(es) applied to the inline-start slot wrapper (aka left).
    */
   startClass: {
     type: [String, Array, Object],
@@ -403,7 +410,7 @@ const props = defineProps({
   },
 
   /**
-   * Additional class(es) applied to the inline-end slot wrapper (aka right in LTR).
+   * Additional class(es) applied to the inline-end slot wrapper (aka right).
    */
   endClass: {
     type: [String, Array, Object],
@@ -474,6 +481,11 @@ const controlRef = ref(null);
 const thumbRefs = ref([]);
 const isDragging = ref(false);
 const activeThumbIndex = ref(null);
+// Unlike activeThumbIndex (cleared on pointerup so the --active visual class
+// turns off), this persists across drags — it's what lets a pointerdown on
+// two coincident thumbs route to whichever one wasn't grabbed last time,
+// instead of always defaulting back to the same thumb once they touch.
+const lastActiveThumbIndex = ref(null);
 const focusedThumbIndex = ref(null);
 const hoveredThumbIndex = ref(null);
 // Not reactive on purpose: set synchronously right before a pointer-driven
@@ -516,10 +528,19 @@ watch(
   () => props.modelValue,
   (newVal) => {
     if (newVal === undefined || newVal === null) return;
+    const isInvertedPair = Array.isArray(newVal) && newVal.length === 2 && newVal[0] > newVal[1];
     const next = Array.isArray(newVal) ? normalizeRangeValues([...newVal]) : [newVal];
     const current = internalValues.value;
     if (next.length !== current.length || next.some((v, i) => v !== current[i])) {
       internalValues.value = next;
+    }
+    // Correct the parent's own v-model source, not just our local render —
+    // otherwise a consumer reading modelValue directly (not just watching
+    // our rendered output) sees a stale, still-inverted pair indefinitely.
+    // Safe against feedback loops: the corrected pair is never itself
+    // inverted, so this re-triggers the watcher at most once.
+    if (isInvertedPair) {
+      emit('update:modelValue', [...next]);
     }
   },
   { deep: true },
@@ -558,7 +579,11 @@ const computedSnapPoints = computed(() => {
     }
     return values;
   }
-  return props.snapPoints;
+  // A point outside [min, max] can never be a value the thumb is allowed to
+  // hold, so it must never be offered as a snap target — otherwise a drag
+  // that lands within snapThreshold of it would pull the thumb (and the
+  // emitted modelValue) out of the slider's own documented range.
+  return props.snapPoints.filter((point) => point >= props.min && point <= props.max);
 });
 
 // How much wider the release radius is than the entry radius, in units of
@@ -732,7 +757,23 @@ function updateThumbValue(thumbIndex, newVal, { allowSnap = false } = {}) {
     } else {
       clamped = Math.max(clamped, (next[0] ?? props.min) + gap);
     }
+    // gap is a product of two decimals (e.g. 3 * 0.1) and can carry IEEE-754
+    // noise (0.30000000000000004) that snapToStep's rounding, applied
+    // earlier in this function, never sees — round it out the same way
+    // before it reaches internalValues/the emitted modelValue.
+    const dp = Math.max(decimalPlaces(props.min), decimalPlaces(props.step));
+    clamped = parseFloat(clamped.toFixed(dp));
     clamped = Math.min(props.max, Math.max(props.min, clamped));
+
+    // The crossing clamp above can pull the thumb away from the magnetic
+    // point findMagneticSnapPoint just latched hysteresis onto — the thumb
+    // never actually reached it. Left uncleared, hysteresis keeps comparing
+    // future drag positions against that unreachable point and can freeze
+    // the thumb at the other thumb's boundary across a wide swath of the
+    // release radius. Clearing it lets the next move re-evaluate fresh.
+    if (magneticValue != null && clamped !== magneticValue) {
+      delete activeSnapValue.value[thumbIndex];
+    }
   }
 
   if (next[thumbIndex] === clamped) return;
@@ -772,7 +813,7 @@ function getNearestThumbIndex(val) {
   const [lo, hi] = internalValues.value;
   if (lo === hi) {
     // When thumbs overlap, route to the one opposite last-active
-    return activeThumbIndex.value === 0 ? 1 : 0;
+    return lastActiveThumbIndex.value === 0 ? 1 : 0;
   }
   return Math.abs(val - lo) <= Math.abs(val - hi) ? 0 : 1;
 }
@@ -791,6 +832,7 @@ function onPointerDown(event) {
   const idx = getNearestThumbIndex(rawVal);
 
   activeThumbIndex.value = idx;
+  lastActiveThumbIndex.value = idx;
   isDragging.value = true;
   controlRef.value.setPointerCapture(event.pointerId);
 
@@ -806,6 +848,14 @@ function onPointerDown(event) {
 
 function onPointerMove(event) {
   if (!isDragging.value || activeThumbIndex.value === null) return;
+
+  // A consumer can flip :disabled reactively mid-drag (e.g. async
+  // validation) — stop accepting input immediately rather than waiting for
+  // the pointer to be released, matching a native disabled control.
+  if (props.disabled) {
+    onPointerUp();
+    return;
+  }
 
   // The primary button can be released outside this document (e.g. over a
   // parent frame, or outside the OS window) without a pointerup ever
@@ -1042,6 +1092,13 @@ onMounted(() => {
     markCollisionResizeObserver = new ResizeObserver(() => updateCollisions());
     markCollisionResizeObserver.observe(controlRef.value);
   }
+  // The initial modelValue never runs through the watch() above — correct
+  // an inverted starting pair back to the parent the same way a later prop
+  // update would, so v-model doesn't stay silently out of sync with what's
+  // rendered.
+  if (Array.isArray(props.modelValue) && props.modelValue.length === 2 && props.modelValue[0] > props.modelValue[1]) {
+    emit('update:modelValue', [...internalValues.value]);
+  }
 });
 
 onBeforeUnmount(() => {
@@ -1051,7 +1108,6 @@ onBeforeUnmount(() => {
 // ─── Dev warnings ─────────────────────────────────────────────────────────────
 
 onMounted(() => {
-  if (!props.label && !props.labelHidden) return; // will have visible label
   if (isRange.value && !props.getValueText) {
     console.info(
       '[Dialtone] DtSlider in range mode: provide getValueText to give each thumb a distinct screen-reader description.',

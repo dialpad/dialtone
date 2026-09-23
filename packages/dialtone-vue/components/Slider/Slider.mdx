@@ -58,6 +58,20 @@ import { DtSlider } from '@dialpad/dialtone-vue';
 />
 ```
 
+### Magnetic snapping
+
+```html
+<dt-slider
+  v-model="zoomLevel"
+  label="Zoom level"
+  :min="10"
+  :max="400"
+  :snap-points="[25, 50, 75, 100, 150, 200, 300]"
+  :get-value-text="(value) => `${value}%`"
+  suffix="%"
+/>
+```
+
 ### Vertical orientation
 
 ```html
@@ -103,8 +117,8 @@ import { DtSlider } from '@dialpad/dialtone-vue';
 | Arrow Left / Arrow Down | Decrease by `step` |
 | Home | Jump to `min` |
 | End | Jump to `max` |
-| Page Up | Increase by `largeStep` (default 10) |
-| Page Down | Decrease by `largeStep` (default 10) |
+| Page Up / Shift + Arrow Right / Shift + Arrow Up | Increase by `largeStep` (default 10) |
+| Page Down / Shift + Arrow Left / Shift + Arrow Down | Decrease by `largeStep` (default 10) |
 
 ### Screen reader notes
 

@@ -151,6 +151,11 @@ describe('DtSlider Tests', () => {
       it('sets data-orientation to vertical', () => {
         expect(root.attributes('data-orientation')).toBe('vertical');
       });
+
+      it('sets aria-orientation to vertical on the thumb input, since the native default is horizontal', () => {
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        expect(thumbInputs[0].attributes('aria-orientation')).toBe('vertical');
+      });
     });
 
     describe('When inverted', () => {
@@ -221,11 +226,41 @@ describe('DtSlider Tests', () => {
         expect(readouts()[0].classes()).toContain('d-slider__readout--hide');
       });
 
+      it('shows the readout on thumb-hit hover, independent of focus, when readout is "interaction"', async () => {
+        mockProps = { readout: 'interaction' };
+        updateWrapper();
+        await nextTick();
+        const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
+        await hitTarget.trigger('pointerenter');
+        expect(readouts()[0].classes()).toContain('d-slider__readout--show');
+        await hitTarget.trigger('pointerleave');
+        expect(readouts()[0].classes()).toContain('d-slider__readout--hide');
+      });
+
+      it('keeps the readout open on hover-leave if that thumb is still keyboard-focused', async () => {
+        mockProps = { readout: 'interaction' };
+        updateWrapper();
+        await nextTick();
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
+        await thumbInputs[0].trigger('focus');
+        await hitTarget.trigger('pointerenter');
+        await hitTarget.trigger('pointerleave');
+        expect(readouts()[0].classes()).toContain('d-slider__readout--show');
+      });
+
       it('renders the formatted value as the readout content', async () => {
         mockProps = { readout: 'always' };
         updateWrapper();
         await nextTick();
         expect(readouts()[0].text()).toBe('50');
+      });
+
+      it('hides the readout from the accessibility tree, since it duplicates the thumb input\'s own aria-valuetext', async () => {
+        mockProps = { readout: 'always' };
+        updateWrapper();
+        await nextTick();
+        expect(readouts()[0].attributes('aria-hidden')).toBe('true');
       });
 
       it('renders one readout per thumb in range mode', async () => {
@@ -355,6 +390,27 @@ describe('DtSlider Tests', () => {
         expect(wrapper.find('[data-qa="dt-slider-end"]').classes()).toContain('custom-end-class');
       });
     });
+
+    describe('Attrs passthrough (inheritAttrs: false)', () => {
+      it('forwards a consumer class onto the root element, merged with the component\'s own classes', () => {
+        mockAttrs = { class: 'consumer-class' };
+        updateWrapper();
+        expect(root.classes()).toContain('consumer-class');
+        expect(root.classes()).toContain('d-slider');
+      });
+
+      it('forwards consumer style onto the root element', () => {
+        mockAttrs = { style: 'margin-top: 8px;' };
+        updateWrapper();
+        expect(root.attributes('style')).toContain('margin-top');
+      });
+
+      it('forwards non-class/style attrs like data-testid onto the root element', () => {
+        mockAttrs = { 'data-testid': 'volume-slider' };
+        updateWrapper();
+        expect(root.attributes('data-testid')).toBe('volume-slider');
+      });
+    });
   });
 
   describe('Accessibility Tests', () => {
@@ -398,6 +454,42 @@ describe('DtSlider Tests', () => {
       updateWrapper();
       thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
       expect(thumbInputs[0].attributes('aria-valuetext')).toBe('50%');
+    });
+  });
+
+  describe('Dev-only accessibility warnings (console.info)', () => {
+    let infoSpy;
+
+    beforeEach(() => {
+      infoSpy = vi.spyOn(console, 'info').mockImplementation(() => {});
+    });
+
+    afterEach(() => {
+      infoSpy.mockRestore();
+    });
+
+    it('warns when neither label nor labelHidden is set — the one case actually missing an accessible name', () => {
+      mockProps = { label: undefined };
+      updateWrapper();
+      expect(infoSpy).toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
+    });
+
+    it('does not warn about a missing label when label is set', () => {
+      mockProps = { label: 'Volume' };
+      updateWrapper();
+      expect(infoSpy).not.toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
+    });
+
+    it('warns about missing getValueText in range mode, independent of whether a label is set', () => {
+      mockProps = { label: 'Price range', modelValue: [20, 70] };
+      updateWrapper();
+      expect(infoSpy).toHaveBeenCalledWith(expect.stringContaining('provide getValueText'));
+    });
+
+    it('does not warn about getValueText when it is provided', () => {
+      mockProps = { label: 'Price range', modelValue: [20, 70], getValueText: (v) => `${v}` };
+      updateWrapper();
+      expect(infoSpy).not.toHaveBeenCalledWith(expect.stringContaining('provide getValueText'));
     });
   });
 
@@ -506,6 +598,60 @@ describe('DtSlider Tests', () => {
         await control.trigger('pointermove', { pointerId: 1, clientX: 10, buttons: 0 });
         thumbVisuals = wrapper.findAll('[data-qa="dt-slider-thumb-visual"]');
         expect(thumbVisuals[0].classes()).not.toContain('d-slider__thumb-visual--active');
+      });
+
+      it('ignores a non-primary mouse button, so the native context menu still works', async () => {
+        await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 2, clientX: 0, buttons: 2 });
+        thumbVisuals = wrapper.findAll('[data-qa="dt-slider-thumb-visual"]');
+        expect(thumbVisuals[0].classes()).not.toContain('d-slider__thumb-visual--active');
+      });
+
+      it('adds d-slider--dragging while a pointer drag is active, and removes it on release', async () => {
+        await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 0, buttons: 1 });
+        expect(wrapper.find('[data-qa="dt-slider"]').classes()).toContain('d-slider--dragging');
+        await control.trigger('pointerup', { pointerId: 1 });
+        expect(wrapper.find('[data-qa="dt-slider"]').classes()).not.toContain('d-slider--dragging');
+      });
+
+      it('does not start or continue a drag on a disabled slider', async () => {
+        mockProps = { disabled: true };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+
+        await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 10, buttons: 1 });
+        await control.trigger('pointermove', { pointerId: 1, clientX: 50, buttons: 1 });
+        expect(wrapper.emitted('update:modelValue')).toBeFalsy();
+      });
+
+      it('stops accepting drag input the moment disabled flips true mid-drag', async () => {
+        await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 0, buttons: 1 });
+        await wrapper.setProps({ disabled: true });
+        const emittedBefore = (wrapper.emitted('update:modelValue') || []).length;
+        await control.trigger('pointermove', { pointerId: 1, clientX: 90, buttons: 1 });
+        const emittedAfter = (wrapper.emitted('update:modelValue') || []).length;
+        expect(emittedAfter).toBe(emittedBefore);
+      });
+
+      it('routes a pointerdown to the thumb opposite the one last dragged, when both thumbs coincide', async () => {
+        mockProps = { modelValue: [50, 50] };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+
+        // First drag: neither thumb has been active yet, so it grabs thumb 0.
+        await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 0, buttons: 1 });
+        thumbVisuals = wrapper.findAll('[data-qa="dt-slider-thumb-visual"]');
+        expect(thumbVisuals[0].classes()).toContain('d-slider__thumb-visual--active');
+        await control.trigger('pointerup', { pointerId: 1 });
+
+        // Thumbs are still coincident — a fresh pointerdown must route to the
+        // OTHER thumb, not fall back to thumb 0 again (the regression this
+        // guards: activeThumbIndex resets to null on every pointerup, which
+        // would make this always route to thumb 0).
+        await control.trigger('pointerdown', { pointerId: 2, pointerType: 'mouse', button: 0, clientX: 0, buttons: 1 });
+        thumbVisuals = wrapper.findAll('[data-qa="dt-slider-thumb-visual"]');
+        expect(thumbVisuals[1].classes()).toContain('d-slider__thumb-visual--active');
       });
     });
 
@@ -628,6 +774,69 @@ describe('DtSlider Tests', () => {
         const emitted = wrapper.emitted('update:modelValue');
         expect(emitted[emitted.length - 1][0]).toEqual([25, 60]);
       });
+
+      it('snaps exactly at the threshold boundary (inclusive)', async () => {
+        mockProps = { snapPoints: 25, snapThreshold: 5 };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => controlRect;
+
+        await dragTo(20); // distance exactly 5 from the 25 snap point, equal to the threshold
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toBe(25);
+      });
+
+      it('never offers a snap point outside [min, max] as a target, so the emitted value can never leave the documented range', async () => {
+        mockProps = { min: 0, max: 100, snapPoints: [105], snapThreshold: 10 };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => controlRect;
+
+        await dragTo(98); // distance 7 from the out-of-range 105 "snap point" — must not pull toward it
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toBe(98);
+      });
+
+      it('snaps correctly for a vertical slider, using the control height rather than width', async () => {
+        const verticalRect = { top: 0, left: 0, right: 20, bottom: 100, width: 20, height: 100 };
+        mockProps = { orientation: 'vertical', snapPoints: 25, snapThreshold: 5 };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => verticalRect;
+
+        // Vertical value = min + (1 - (clientY - top) / height) * (max - min); clientY 77 -> value 23,
+        // distance 2 from the 25 snap point, within the threshold.
+        await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientY: 77, buttons: 1 });
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toBe(25);
+      });
+
+      it('releases hysteresis when the range-crossing clamp blocks the snap point, instead of freezing the thumb at the other thumb\'s boundary', async () => {
+        // A snap point beyond the high thumb can pull the low thumb toward
+        // it, but the crossing clamp then stops it short — hysteresis must
+        // not keep comparing later drag positions against that unreachable
+        // point, or the thumb stays stuck at 60 across a wide swath of the
+        // drag that has nothing to do with the 90 snap point.
+        mockProps = { modelValue: [40, 60], snapPoints: [90], snapThreshold: 25 };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => controlRect;
+
+        await dragTo(41); // grabs the low thumb (nearer to 40 than 60)
+        await moveTo(85); // distance 5 from 90, within entry radius 25 — snaps to 90, crossing-clamped to 60
+        let emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toEqual([60, 60]);
+
+        await moveTo(45); // distance 45 from 90 — past entry radius; would still be inside the OLD, un-reconciled
+        // release radius (25 * SNAP_RELEASE_MULTIPLIER), but the thumb is no longer near the point it's
+        // ostensibly "holding," and 45 is not blocked by the high thumb at 60, so it must move freely.
+        emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toEqual([45, 60]);
+      });
     });
 
     describe('Keyboard: PageUp / PageDown / Shift+Arrow', () => {
@@ -735,6 +944,14 @@ describe('DtSlider Tests', () => {
         expect(Number(thumbInputs[1].element.value)).toBe(70);
       });
 
+      it('emits the corrected pair on mount so a v-model source stays in sync, not just the render', () => {
+        mockProps = { modelValue: [70, 30] };
+        updateWrapper();
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted).toBeTruthy();
+        expect(emitted[emitted.length - 1][0]).toEqual([30, 70]);
+      });
+
       it('swaps an inverted modelValue pushed in later via prop update', async () => {
         mockProps = { modelValue: [20, 80] };
         updateWrapper();
@@ -742,6 +959,22 @@ describe('DtSlider Tests', () => {
         thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
         expect(Number(thumbInputs[0].element.value)).toBe(10);
         expect(Number(thumbInputs[1].element.value)).toBe(90);
+      });
+
+      it('emits the corrected pair when a later prop update arrives inverted', async () => {
+        mockProps = { modelValue: [20, 80] };
+        updateWrapper();
+        await wrapper.setProps({ modelValue: [90, 10] });
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted).toBeTruthy();
+        expect(emitted[emitted.length - 1][0]).toEqual([10, 90]);
+      });
+
+      it('does not re-emit when a later prop update is already in order', async () => {
+        mockProps = { modelValue: [20, 80] };
+        updateWrapper();
+        await wrapper.setProps({ modelValue: [25, 75] });
+        expect(wrapper.emitted('update:modelValue')).toBeFalsy();
       });
     });
   });
@@ -1118,6 +1351,19 @@ describe('DtSlider Tests', () => {
         await thumbInputs[0].trigger('input');
         const emitted = wrapper.emitted('update:modelValue');
         expect(emitted[emitted.length - 1][0][0]).toBe(2);
+      });
+
+      it('rounds out IEEE-754 drift in the minStepsBetweenValues gap (3 * 0.1 !== 0.3 in raw JS)', async () => {
+        mockProps = { modelValue: [0.3, 0.9], min: 0, max: 1, step: 0.1, minStepsBetweenValues: 3 };
+        updateWrapper();
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        // High thumb (index 1) nudged toward the low thumb: gap = 3 * 0.1, which is
+        // 0.30000000000000004 in raw JS float math — the emitted value must be the
+        // clean 0.6, not that literal.
+        thumbInputs[1].element.value = '0.31';
+        await thumbInputs[1].trigger('input');
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0][1]).toBe(0.6);
       });
     });
 

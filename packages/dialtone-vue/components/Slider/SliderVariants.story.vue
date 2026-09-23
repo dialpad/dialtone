@@ -77,6 +77,24 @@
       />
     </section>
 
+    <!-- Magnetic snapping — pulls toward snapPoints while dragging, but a
+         value just outside snapThreshold stays freely reachable (unlike
+         step's hard grid) -->
+    <section>
+      <p class="d-body--sm-compact d-mbe-300 d-fc-tertiary">
+        Magnetic snapping (arbitrary, non-uniform snap points)
+      </p>
+      <dt-slider
+        v-model="canvasZoomValue"
+        label="Canvas zoom"
+        :min="10"
+        :max="400"
+        :snap-points="[25, 50, 75, 100, 150, 200, 300]"
+        :get-value-text="(value) => `${value}%`"
+        suffix="%"
+      />
+    </section>
+
     <!-- Start/end slots + marks below (both independent) -->
     <section>
       <p class="d-body--sm-compact d-mbe-300 d-fc-tertiary">
@@ -452,6 +470,7 @@ export default {
       iconValue: ref(65),
       emojiValue: ref(50),
       tickValue: ref(7),
+      canvasZoomValue: ref(60),
       labelsWithBoundariesValue: ref(10),
       midpointValue: ref(0),
       readoutAlwaysValue: ref(48),
