@@ -1,3 +1,10 @@
+# [4.1.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.0.2...dialtone-vue/v4.1.0) (2026-09-23)
+
+
+### Features
+
+* **Split Button:** DLT-3630 DLT-3631 add startButtonClass and endButtonClass props ([#1440](https://github.com/dialpad/dialtone/issues/1440)) ([7d30032](https://github.com/dialpad/dialtone/commit/7d30032165c7719bf609751b199409848078da0d))
+
 ## [4.0.2](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.0.1...dialtone-vue/v4.0.2) (2026-09-22)
 
 
