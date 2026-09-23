@@ -69,7 +69,8 @@ import Paragraph from '@tiptap/extension-paragraph';
 import Bold from '@tiptap/extension-bold';
 import { BulletList, OrderedList, ListItem } from '@tiptap/extension-list';
 import Italic from '@tiptap/extension-italic';
-import TipTapLink from '@tiptap/extension-link';
+import TipTapLink, { isAllowedUri as isAllowedLinkUri } from '@tiptap/extension-link';
+import { find } from 'linkifyjs';
 import Strike from '@tiptap/extension-strike';
 import Underline from '@tiptap/extension-underline';
 import Text from '@tiptap/extension-text';
@@ -716,6 +717,7 @@ export default {
               if (self.allowLineBreaks) {
                 return false;
               }
+              self.forceLinkifyPendingText();
               self.$emit('enter');
               return true;
             },
@@ -1097,6 +1099,66 @@ export default {
       this.editor?.chain()?.focus();
       const link = this.editor.getAttributes('link').href;
       window.open(link, '_blank');
+    },
+
+    /**
+     * TipTap's built-in link autolink plugin only commits a link mark once a
+     * trailing boundary character (space, newline, etc.) is typed after the URL
+     * (ueberdosis/tiptap#3225), so a URL sitting at the very end of the input never
+     * gets linkified before send (ueberdosis/tiptap#783). There's no built-in
+     * "flush" command for this, so reuse linkifyjs -- the same link-detection
+     * engine autolink and the paste rule already use internally -- to mark any
+     * URL/email matches autolink hasn't caught yet, honoring whatever
+     * protocols/defaultProtocol/isAllowedUri/shouldAutoLink the link extension was
+     * configured with.
+     */
+    forceLinkifyPendingText () {
+      if (!this.editor || !this.link || this.customLink) {
+        return;
+      }
+
+      const markType = this.editor.state.schema.marks.link;
+      const linkExtension = this.editor.extensionManager.extensions.find(
+        extension => extension.name === 'link',
+      );
+      if (!markType || !linkExtension) {
+        return;
+      }
+
+      const { protocols, defaultProtocol, isAllowedUri, shouldAutoLink } = linkExtension.options;
+      const { doc } = this.editor.state;
+      const tr = this.editor.state.tr;
+      let modified = false;
+
+      doc.descendants((node, pos) => {
+        if (!node.isTextblock) {
+          return;
+        }
+
+        find(node.textContent, { defaultProtocol })
+          .filter(link => link.isLink)
+          .filter(link => isAllowedUri(link.value, {
+            defaultValidate: href => !!isAllowedLinkUri(href, protocols),
+            protocols,
+            defaultProtocol,
+          }))
+          .filter(link => shouldAutoLink(link.value))
+          .forEach(link => {
+            const from = pos + link.start + 1;
+            const to = pos + link.end + 1;
+
+            if (doc.rangeHasMark(from, to, markType)) {
+              return;
+            }
+
+            tr.addMark(from, to, markType.create({ href: link.href }));
+            modified = true;
+          });
+      });
+
+      if (modified) {
+        this.editor.view.dispatch(tr);
+      }
     },
 
 

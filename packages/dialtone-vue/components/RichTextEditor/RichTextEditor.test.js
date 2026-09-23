@@ -1804,6 +1804,53 @@ describe('DtRichTextEditor tests', () => {
       });
     });
 
+    describe('forceLinkifyPendingText method', () => {
+      beforeEach(async () => {
+        await wrapper.setProps({ link: true, outputFormat: 'html' });
+      });
+
+      it('should linkify a bare URL at the end of the content with no trailing space', async () => {
+        wrapper.vm.editor.commands.setContent('www.google.com');
+        wrapper.vm.forceLinkifyPendingText();
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.vm.getOutput()).toContain('href="http://www.google.com"');
+      });
+
+      it('should not modify content that is already linkified', async () => {
+        wrapper.vm.editor.commands.setContent('<p><a href="https://www.google.com">www.google.com</a></p>');
+        const before = wrapper.vm.getOutput();
+
+        wrapper.vm.forceLinkifyPendingText();
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.vm.getOutput()).toBe(before);
+      });
+
+      it('should do nothing when customLink is enabled', async () => {
+        await wrapper.setProps({ customLink: true });
+        wrapper.vm.editor.commands.setContent('www.google.com');
+        wrapper.vm.forceLinkifyPendingText();
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.vm.getOutput()).not.toContain('href=');
+      });
+    });
+
+    describe('Enter key triggers forceLinkifyPendingText', () => {
+      it('should linkify a bare URL before emitting enter when allowLineBreaks is false', async () => {
+        await wrapper.setProps({ link: true, outputFormat: 'html', allowLineBreaks: false });
+        wrapper.vm.editor.commands.setContent('www.google.com');
+        wrapper.vm.editor.commands.focus();
+
+        wrapper.vm.editor.commands.keyboardShortcut('Enter');
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.emitted('enter')).toBeTruthy();
+        expect(wrapper.vm.getOutput()).toContain('href="http://www.google.com"');
+      });
+    });
+
     describe('Blockquote keyboard shortcut functionality', () => {
       describe('When Mod+Shift+B is pressed and blockquote is enabled', () => {
         it('should toggle blockquote formatting', async () => {
