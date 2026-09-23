@@ -669,6 +669,22 @@ describe('DtSplitButton Tests', function () {
       });
     });
 
+    it('applies each button class only to its button', () => {
+      mockProps = {
+        startButtonClass: 'custom-start',
+        endButtonClass: 'custom-end',
+      };
+
+      updateWrapper();
+
+      expect(startButton.classes()).toContain('custom-start');
+      expect(startButton.classes()).not.toContain('custom-end');
+      expect(endButton.classes()).toContain('custom-end');
+      expect(endButton.classes()).not.toContain('custom-start');
+      expect(wrapper.classes()).not.toContain('custom-start');
+      expect(wrapper.classes()).not.toContain('custom-end');
+    });
+
     describe('When startLeadingClass is provided', () => {
       it('should apply custom class to the leading wrapper', () => {
         mockProps = { startLeadingClass: 'custom-leading' };
