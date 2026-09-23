@@ -509,6 +509,127 @@ describe('DtSlider Tests', () => {
       });
     });
 
+    describe('Magnetic snapping (snapPoints / snapThreshold)', () => {
+      let control;
+
+      // A 100px-wide control with the default min/max of [0, 100] makes the
+      // pixel threshold and the value threshold numerically identical, which
+      // keeps the expected values in each test easy to verify by hand.
+      const controlRect = { top: 0, left: 0, right: 100, bottom: 20, width: 100, height: 20 };
+
+      const dragTo = async (clientX) => {
+        await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX, buttons: 1 });
+      };
+
+      const moveTo = async (clientX) => {
+        await control.trigger('pointermove', { pointerId: 1, clientX, buttons: 1 });
+      };
+
+      beforeEach(() => {
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => controlRect;
+      });
+
+      it('pulls a dragged value within snapThreshold to the nearest interval snap point', async () => {
+        mockProps = { snapPoints: 25, snapThreshold: 5 };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => controlRect;
+
+        await dragTo(23); // distance 2 from the 25 snap point, within threshold 5
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toBe(25);
+      });
+
+      it('leaves a value outside snapThreshold freely selectable', async () => {
+        mockProps = { snapPoints: 25, snapThreshold: 2 };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => controlRect;
+
+        await dragTo(20); // distance 5 from the 25 snap point, outside threshold 2
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toBe(20);
+      });
+
+      it('pulls a dragged value within snapThreshold to the nearest arbitrary snap point', async () => {
+        mockProps = { snapPoints: [10, 42, 90], snapThreshold: 5 };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => controlRect;
+
+        await dragTo(41); // distance 1 from the 42 snap point
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toBe(42);
+      });
+
+      it('uses normal step quantization, unaffected, for values far from any snap point', async () => {
+        mockProps = { snapPoints: [10, 42, 90], snapThreshold: 5, step: 1 };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => controlRect;
+
+        await dragTo(65);
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toBe(65);
+      });
+
+      it('does not snap keyboard-driven input, even near a snap point with a large threshold', async () => {
+        mockProps = { snapPoints: 25, snapThreshold: 50 };
+        updateWrapper();
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+
+        thumbInputs[0].element.value = '23';
+        await thumbInputs[0].trigger('input');
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toBe(23);
+      });
+
+      it('leaves default behavior unchanged when snapPoints is not set', async () => {
+        await dragTo(37);
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toBe(37);
+      });
+
+      it('holds a snapped thumb through hysteresis, past the entry radius, until it clears the wider release radius', async () => {
+        // snapThreshold 3 → entry radius 3, release radius 3 * SNAP_RELEASE_MULTIPLIER (2) = 6.
+        mockProps = { snapPoints: 25, snapThreshold: 3 };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => controlRect;
+
+        await dragTo(23); // distance 2, within entry radius 3 — snaps to 25
+        let emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toBe(25);
+
+        await moveTo(21); // distance 4 from 25 — past entry radius, but within release radius 6
+        emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toBe(25); // stays pinned via hysteresis
+
+        await moveTo(15); // distance 10 — past the release radius, breaks free
+        emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toBe(15);
+      });
+
+      it('snaps each thumb independently in range mode while still respecting the no-crossing clamp', async () => {
+        mockProps = { modelValue: [40, 60], snapPoints: 25, snapThreshold: 5 };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => controlRect;
+
+        await dragTo(23); // routes to the low thumb, snaps to 25 — well clear of the high thumb at 60
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toEqual([25, 60]);
+      });
+    });
+
     describe('Keyboard: PageUp / PageDown / Shift+Arrow', () => {
       it('increases value by largeStep on PageUp', async () => {
         await thumbInputs[0].trigger('keydown', { key: 'PageUp' });

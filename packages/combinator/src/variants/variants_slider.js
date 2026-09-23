@@ -79,4 +79,19 @@ export default {
       label: { initialValue: 'Audio pan · {{ value }}' },
     },
   },
+
+  'budget cap': {
+    props: {
+      modelValue: { initialValue: 620 },
+      min: { initialValue: 0 },
+      max: { initialValue: 1000 },
+      step: { initialValue: 1 },
+      snapPoints: { initialValue: 100 },
+      showTicks: { initialValue: true },
+      tickInterval: { initialValue: 100 },
+    },
+    slots: {
+      label: { initialValue: 'Budget cap · ${{ value }}' },
+    },
+  },
 };

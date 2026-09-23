@@ -221,6 +221,30 @@ const props = defineProps({
   },
 
   /**
+   * Magnetic snap points the thumb pulls toward while dragging — unlike
+   * step, this doesn't restrict which values are selectable; a value just
+   * outside snapThreshold of a snap point stays freely reachable. Pass a
+   * number for an evenly spaced interval (e.g. 25), or an array for
+   * arbitrary values (e.g. [10, 42, 90]). Pointer drag only — keyboard
+   * stepping (step/largeStep) is unaffected.
+   */
+  snapPoints: {
+    type: [Number, Array],
+    default: undefined,
+  },
+
+  /**
+   * Pixel radius around a snap point where the magnetic pull engages. Once
+   * engaged, releasing takes a larger drag than entering did (see
+   * SNAP_RELEASE_MULTIPLIER) — a "sticky" feel like Figma/Photoshop
+   * guide-snapping, rather than a hard cutoff at the same radius.
+   */
+  snapThreshold: {
+    type: Number,
+    default: 10,
+  },
+
+  /**
    * Disables the slider, preventing interaction.
    * @values true, false
    */
@@ -518,6 +542,82 @@ function snapToStep(val) {
   return Math.min(props.max, Math.max(props.min, parseFloat((props.min + steps * props.step).toFixed(dp))));
 }
 
+// Mirrors computedTickValues' interval generation — a number means "evenly
+// spaced", an array is used as-is. [] (snapPoints unset) short-circuits
+// findMagneticSnapPoint below, so this is also what keeps the feature a
+// pure no-op — same code path, same result — for every consumer that
+// doesn't set snapPoints.
+const computedSnapPoints = computed(() => {
+  if (props.snapPoints == null) return [];
+  if (typeof props.snapPoints === 'number') {
+    const interval = props.snapPoints;
+    if (interval <= 0) return [];
+    const values = [];
+    for (let v = props.min; v <= props.max; v = parseFloat((v + interval).toFixed(10))) {
+      values.push(v);
+    }
+    return values;
+  }
+  return props.snapPoints;
+});
+
+// How much wider the release radius is than the entry radius, in units of
+// snapThreshold — lets a snapped thumb resist small jitter near the point
+// instead of flickering in and out right at the entry boundary.
+const SNAP_RELEASE_MULTIPLIER = 2;
+
+// Tracks, per thumb index, the snap point currently held via hysteresis —
+// cleared once a drag moves far enough past SNAP_RELEASE_MULTIPLIER's radius
+// to release it, or once the drag ends.
+const activeSnapValue = ref({});
+
+// Magnetic, not restrictive: only overrides the value when rawVal falls
+// within snapThreshold *pixels* of a snap point (converted to value-space
+// via the control's current rendered size, so the pull feels consistent
+// regardless of the slider's min/max range) — otherwise returns null and
+// normal step-quantization proceeds untouched. A pixel radius, not a value
+// radius, is what makes this feel like Figma/Photoshop guide-snapping
+// rather than a second, finer step grid. Once a thumb is pulled onto a
+// point, releasing it requires crossing a wider radius than entering did
+// (SNAP_RELEASE_MULTIPLIER) rather than the same boundary in both
+// directions — the "sticky" half of that feel.
+function findMagneticSnapPoint(rawVal, thumbIndex) {
+  const points = computedSnapPoints.value;
+  if (!points.length || !controlRef.value) {
+    delete activeSnapValue.value[thumbIndex];
+    return null;
+  }
+  const rect = controlRef.value.getBoundingClientRect();
+  const trackSizePx = isVertical.value ? rect.height : rect.width;
+  if (!trackSizePx) return null;
+  const entryThreshold = (props.snapThreshold / trackSizePx) * (props.max - props.min);
+
+  const heldValue = activeSnapValue.value[thumbIndex];
+  if (heldValue != null) {
+    const releaseThreshold = entryThreshold * SNAP_RELEASE_MULTIPLIER;
+    if (Math.abs(heldValue - rawVal) <= releaseThreshold) {
+      return heldValue;
+    }
+  }
+
+  let closest = null;
+  let closestDist = Infinity;
+  for (const point of points) {
+    const dist = Math.abs(point - rawVal);
+    if (dist <= entryThreshold && dist < closestDist) {
+      closest = point;
+      closestDist = dist;
+    }
+  }
+
+  if (closest == null) {
+    delete activeSnapValue.value[thumbIndex];
+  } else {
+    activeSnapValue.value[thumbIndex] = closest;
+  }
+  return closest;
+}
+
 function thumbPositionStyle(val) {
   const pct = thumbPercent(val);
   if (isVertical.value) {
@@ -615,9 +715,10 @@ const indicatorStyle = computed(() => {
 
 // ─── Value update ─────────────────────────────────────────────────────────────
 
-function updateThumbValue(thumbIndex, newVal) {
+function updateThumbValue(thumbIndex, newVal, { allowSnap = false } = {}) {
   let clamped = Math.min(props.max, Math.max(props.min, newVal));
-  clamped = snapToStep(clamped);
+  const magneticValue = allowSnap ? findMagneticSnapPoint(clamped, thumbIndex) : null;
+  clamped = magneticValue ?? snapToStep(clamped);
 
   const next = [...internalValues.value];
 
@@ -693,7 +794,7 @@ function onPointerDown(event) {
   isDragging.value = true;
   controlRef.value.setPointerCapture(event.pointerId);
 
-  updateThumbValue(idx, rawVal);
+  updateThumbValue(idx, rawVal, { allowSnap: true });
   // Marks the focus() call below as pointer-driven so onThumbFocus can skip
   // the keyboard-focus ring for it — :focus-visible isn't usable here since
   // browsers treat range inputs as always focus-visible on click, unlike
@@ -715,7 +816,7 @@ function onPointerMove(event) {
     return;
   }
 
-  updateThumbValue(activeThumbIndex.value, getValueFromPointerEvent(event));
+  updateThumbValue(activeThumbIndex.value, getValueFromPointerEvent(event), { allowSnap: true });
 }
 
 function onPointerUp() {
@@ -723,6 +824,7 @@ function onPointerUp() {
   isDragging.value = false;
   commitIfChanged();
   activeThumbIndex.value = null;
+  activeSnapValue.value = {};
 }
 
 // ─── Keyboard events on native inputs ─────────────────────────────────────────

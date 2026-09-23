@@ -40,6 +40,7 @@ A slider is appropriate when the exact value is less important than the relative
 - Use `prefix` or `suffix` for simple unit decoration (e.g. `suffix="%"`), or `getValueText` for full control — it takes precedence and also drives the readout, marks, and each thumb's `aria-valuetext`, so all three always agree.
 - Use `showTicks` together with `tickInterval` to indicate discrete stops on the track; avoid rendering more than ~20 ticks to prevent visual noise.
 - `marks` defaults to labeling the start and end of the range. Pass an array of `{ value, text }` objects for custom text, a plain number array to label positions without custom text, `true` to auto-generate marks at every tick position, or `false` for none.
+- When using `snapPoints`, make sure `getValueText` (and any custom mark text) can render *any* value in range, not just the snap points — the pull is a soft suggestion, not a restriction, so users can still land on values off the grid.
 
 ## Variants and Examples
 
@@ -98,6 +99,39 @@ When they differ, ticks become checkpoints along a finer scale rather than a mar
   :step="1"
   :tick-interval="25"
   show-ticks
+/>
+```
+
+### Magnetic snapping
+
+`step` is a hard restriction — the thumb can only ever land on a value in its grid. `snapPoints` is different: it pulls a dragged thumb toward nearby values, like the snapping in Figma or Photoshop, but a value just outside `snapThreshold` (in pixels along the track, default `10`) stays freely reachable. The pull is also sticky — once a thumb snaps onto a point, dragging away from it takes noticeably more distance than dragging onto it did, so it resists small jitter right at the boundary. It only affects pointer dragging — keyboard stepping via `step`/`largeStep` is unaffected.
+
+Pass a number for an evenly spaced interval:
+
+```vue demo
+<dt-slider
+  :model-value="62"
+  label="Budget cap"
+  :min="0"
+  :max="100"
+  :snap-points="25"
+  show-ticks
+  :tick-interval="25"
+  suffix="%"
+/>
+```
+
+Pass an array for arbitrary snap values — unlike an interval, they don't need to be evenly spaced:
+
+```vue demo
+<dt-slider
+  :model-value="60"
+  label="Zoom level"
+  :min="10"
+  :max="400"
+  :snap-points="[25, 50, 75, 100, 150, 200, 300]"
+  :get-value-text="(value) => `${value}%`"
+  suffix="%"
 />
 ```
 
