@@ -12,7 +12,7 @@
 //    - Base Style
 //    - Track & Indicator
 //    - Thumb
-//    - Ticks & Marks
+//    - Ticks, Marks & Readout
 //    - States (disabled, inverted)
 //    - Sizes
 //    - Vertical orientation
@@ -37,12 +37,12 @@
     --slider-focus-shadow: var(--dt-shadow-focus);
     --slider-disabled-track-color: var(--dt-inputs-color-background-disabled);
     --slider-disabled-indicator-color: var(--dt-inputs-color-foreground-disabled);
-    --slider-disabled-thumb-color: var(--dt-inputs-color-foreground-disabled);
     --slider-disabled-border-color: var(--dt-inputs-color-border-disabled);
     --slider-tick-color: var(--dt-color-border-bold);
     --slider-tick-width: calc(var(--dt-size-border-100) * 1.5); // 1.5px
     --slider-boundary-color: var(--dt-color-foreground-tertiary);
     --slider-track-length: var(--dt-layout-300);               // 192px — used as block-size in vertical mode
+    --slider-mark-offset: var(--dt-spacing-200);               // gap from track/thumb to marks & readout
 
     display: flex;
     flex-direction: column;
@@ -60,7 +60,7 @@
 //  ----------------------------------------------------------------------------
 .d-slider__body {
     display: flex;
-    gap: var(--dt-spacing-100);
+    gap: var(--dt-spacing-200);
     align-items: center;
     inline-size: 100%;
 }
@@ -81,11 +81,31 @@
     flex: 1;
     align-items: center;
     box-sizing: content-box;
+
+    // A mark/readout near 0%/100% is centered on its value (translateX(-50%)),
+    // so it naturally renders partly outside this box — there's nothing left
+    // of 0% or right of 100% to center into. That's fine and expected (it's
+    // what keeps "0"/"100" looking centered rather than nudged inward), but
+    // left uncontained it registers as real layout overflow: an ancestor
+    // container's scrollWidth grows as the thumb approaches an edge, adding a
+    // horizontal scrollbar with no visual indication of why. overflow-clip-margin
+    // gives it room to render past this box's own edge without being clipped,
+    // while still giving the browser a bounded, finite region to clip beyond —
+    // capping the maximum any ancestor's scrollWidth can grow by, regardless of
+    // how long the value/mark text is. Needs overflow-x AND -y both set to clip
+    // (not just one) for the margin to actually apply in current browsers.
+    // overflow-clip-margin also only accepts a literal length — var(--dt-*)
+    // silently resolves to 0 (confirmed in current Chrome), so this one
+    // property can't follow the token-reference convention used everywhere
+    // else in this file; 32px matches --dt-spacing-400.
+    overflow: clip;
     cursor: default;
     block-size: var(--slider-thumb-size);
 
     // Minimum WCAG 2.5.5 touch target via padding
     padding-block: max(0, calc((var(--dt-spacing-550) - var(--slider-thumb-size)) / 2));
+    /* stylelint-disable-next-line meowtec/no-px */
+    overflow-clip-margin: 32px;
 }
 
 //  $$  TRACK
@@ -173,63 +193,6 @@
     inset-block-start: 50%;
 }
 
-//  $$  VALUE TOOLTIP (plain, CSS-positioned bubble — no Popper/tippy)
-//  Positioned entirely off the thumb-hit box (a percentage inset the Vue
-//  component already computes the same way it positions the thumb itself),
-//  so it can never desync from its thumb the way a Popper-driven floating
-//  tooltip can when scrolled inside a non-window scroll container. Reuses
-//  .d-tooltip for appearance/fade only — its positioning classes are not used.
-//  ----------------------------------------------------------------------------
-.d-slider__thumb-tooltip {
-    position: absolute;
-    z-index: var(--zi-tooltip);
-    pointer-events: none;
-}
-
-.d-slider__thumb-tooltip--block-start {
-    inset-block-end: calc(100% + var(--dt-spacing-150)); // 100% + 12
-    inset-inline-start: 50%;
-    transform: translateX(-50%);
-
-    &::after {
-        // Half a pixel *into* the box (not past it) so there's no seam between
-        // the box's bottom edge and the arrow's top edge.
-        inset-block-end: calc(var(--dt-spacing-75-negative) + calc(var(--dt-spacing-1) / 2)); // -5.5
-        inset-inline-start: 50%;
-        margin-inline-start: var(--dt-spacing-75-negative); // -6
-        border-block-start-color: var(--tooltip-color-background);
-        border-block-end-width: 0;
-    }
-}
-
-.d-slider__thumb-tooltip--inline-start {
-    inset-inline-end: calc(100% + var(--dt-spacing-150)); // 100% + 12
-    inset-block-start: 50%;
-    transform: translateY(-50%);
-
-    &::after {
-        inset-inline-end: calc(var(--dt-spacing-75-negative) + calc(var(--dt-spacing-1) / 2)); // -5.5
-        inset-block-start: 50%;
-        margin-block-start: var(--dt-spacing-75-negative); // -6
-        border-inline-end-width: 0;
-        border-inline-start-color: var(--tooltip-color-background);
-    }
-}
-
-.d-slider__thumb-tooltip--inline-end {
-    inset-inline-start: calc(100% + var(--dt-spacing-150)); // 100% + 12
-    inset-block-start: 50%;
-    transform: translateY(-50%);
-
-    &::after {
-        inset-inline-start: calc(var(--dt-spacing-75-negative) + calc(var(--dt-spacing-1) / 2)); // -5.5
-        inset-block-start: 50%;
-        margin-block-start: var(--dt-spacing-75-negative); // -6
-        border-inline-start-width: 0;
-        border-inline-end-color: var(--tooltip-color-background);
-    }
-}
-
 //  $$  NATIVE INPUT (transparent, a11y + keyboard carrier)
 //  ----------------------------------------------------------------------------
 .d-slider__thumb {
@@ -279,7 +242,56 @@
     white-space: nowrap;
     transform: translateX(-50%);
     pointer-events: none;
-    inset-block-start: calc(50% + var(--slider-track-height) / 2 + var(--dt-spacing-50));
+    inset-block-start: calc(50% + var(--slider-track-height) / 2 + var(--slider-mark-offset));
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: opacity 0.15s ease;
+    }
+}
+
+//  Hidden in favor of the live readout when the two would visually overlap
+//  (JS-measured — see the "Mark / readout collision avoidance" comment in
+//  Slider.vue). visibility, not display: none, so it keeps its layout slot
+//  and can be measured again once it's no longer colliding.
+.d-slider__mark--collision-hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+
+//  $$  READOUT (live value, tracks the thumb — same size and position as
+//  marks, sharing the same row below the track; distinguished from them
+//  only by color, since it reflects the current value rather than a
+//  fixed reference point)
+//  ----------------------------------------------------------------------------
+.d-slider__readout {
+    position: absolute;
+    color: var(--slider-indicator-color);
+    font: var(--dt-typography-body-sm);
+    font-weight: var(--dt-font-weight-bold);
+    white-space: nowrap;
+    transform: translateX(-50%);
+    pointer-events: none;
+    inset-block-start: calc(50% + var(--slider-track-height) / 2 + var(--slider-mark-offset));
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: left 0.1s ease, bottom 0.1s ease, opacity 0.15s ease;
+    }
+}
+
+//  Same rationale as the indicator: don't let a transition meant for discrete
+//  jumps make a continuous drag look like the readout is lagging the thumb.
+.d-slider[data-dragging] .d-slider__readout {
+    transition: none;
+}
+
+.d-slider__readout--hide {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.d-slider__readout--show {
+    visibility: visible;
+    opacity: 1;
 }
 
 //  $$  DRAGGING STATE
@@ -307,8 +319,19 @@
         background-color: var(--slider-disabled-indicator-color);
     }
 
+    .d-slider__readout {
+        color: var(--slider-disabled-indicator-color);
+    }
+
+    // Grey, but opaque — the thumb straddles both the indicator and the bare
+    // track, and --dt-inputs-color-background-disabled is translucent (meant
+    // for a uniform backdrop like a badge), so each showed through
+    // differently on either side and made the thumb look off-center rather
+    // than disabled. Same relative-color-syntax pattern the opacity utility
+    // classes use: keep the actual disabled-background token as the source
+    // of truth, just force its alpha to 1 at the point of use.
     .d-slider__thumb-visual {
-        --slider-thumb-color: var(--dt-inputs-color-background-disabled);
+        --slider-thumb-color: oklch(from var(--dt-inputs-color-background-disabled) l c h / 1);
 
         border-color: var(--slider-disabled-border-color);
     }
@@ -320,26 +343,14 @@
 // .d-slider--inverted {}
 
 //  $$  SIZES
-//  Thumb size steps linearly in 10px increments across xs–xl (8, 18, 28,
-//  38, 48px — md/28px is the unmodified root default). sm and lg fall
-//  between named spacing tokens, so they're expressed directly off
-//  --dt-spacing-base rather than snapping to an off-ramp token.
-//  Tick width steps linearly too, in 0.25px increments (1, 1.25, 1.5,
-//  1.75, 2px) — md/1.5px is slightly narrower than the old flat 2px.
-//  Thumb border width scales in 3 tiers rather than 5 linear steps:
-//  browsers snap `border-width` used values to the nearest device pixel
-//  (e.g. 0.5px increments at 2x DPR), so a 0.25px cadence like tick-width's
-//  collapses adjacent sizes into identical rendered borders. xs/sm share a
-//  thinner border, lg/xl share a thicker one, md/1px is the unmodified
-//  root default — every tier still renders as a distinct, non-zero width.
+//  Thumb size steps linearly in 10px increments (18, 28, 38px — md/28px is
+//  the unmodified root default). sm and lg fall between named spacing
+//  tokens, so they're expressed directly off --dt-spacing-base rather than
+//  snapping to an off-ramp token.
+//  Tick width steps linearly too, in 0.25px increments (1.25, 1.5, 1.75px)
+//  — md/1.5px is slightly narrower than the old flat 2px.
+//  Thumb border width: sm/0.5px, md/1px (unmodified root default), lg/1.5px.
 //  ----------------------------------------------------------------------------
-.d-slider--xs {
-    --slider-track-height: var(--dt-size-border-200);
-    --slider-thumb-size: var(--dt-spacing-100); // 8px
-    --slider-tick-width: var(--dt-size-border-100); // 1px
-    --slider-thumb-border-width: calc(var(--dt-size-border-100) * 0.5); // 0.5px
-}
-
 .d-slider--sm {
     --slider-track-height: var(--dt-size-border-200);
     --slider-thumb-size: calc(var(--dt-spacing-base) * 2.25); // 18px
@@ -351,13 +362,6 @@
     --slider-track-height: var(--dt-size-border-400);
     --slider-thumb-size: calc(var(--dt-spacing-base) * 4.75); // 38px
     --slider-tick-width: calc(var(--dt-size-border-100) * 1.75); // 1.75px
-    --slider-thumb-border-width: calc(var(--dt-size-border-100) * 1.5); // 1.5px
-}
-
-.d-slider--xl {
-    --slider-track-height: var(--dt-size-border-400);
-    --slider-thumb-size: var(--dt-spacing-600); // 48px
-    --slider-tick-width: var(--dt-size-border-200); // 2px
     --slider-thumb-border-width: calc(var(--dt-size-border-100) * 1.5); // 1.5px
 }
 
@@ -380,6 +384,11 @@
         flex-direction: column;
         padding-block: 0;
         padding-inline: max(0, calc((var(--dt-spacing-550) - var(--slider-thumb-size)) / 2));
+        // Marks/readout sit beside the (narrow) vertical control by a fixed,
+        // value-independent offset — not the value-dependent inline overflow
+        // the horizontal clip above guards against — so there's no equivalent
+        // growing-scrollWidth risk here. Restore full visibility.
+        overflow: visible;
     }
 
     .d-slider__track {
@@ -425,7 +434,14 @@
 
     .d-slider__mark {
         inset-block-start: unset;
-        inset-inline-start: calc(50% + var(--slider-thumb-size) / 2 + var(--dt-spacing-50));
+        inset-inline-start: calc(50% + var(--slider-thumb-size) / 2 + var(--slider-mark-offset));
+        transform: translateY(50%);
+        // bottom set inline via style
+    }
+
+    .d-slider__readout {
+        inset-block-start: unset;
+        inset-inline-start: calc(50% + var(--slider-thumb-size) / 2 + var(--slider-mark-offset));
         transform: translateY(50%);
         // bottom set inline via style
     }

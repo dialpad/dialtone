@@ -115,27 +115,27 @@
       />
     </section>
 
-    <!-- Value tooltip: always -->
+    <!-- Value readout: always -->
     <section>
       <p class="d-body--sm-compact d-mbe-300 d-fc-tertiary">
-        Value tooltip — always
+        Value readout — always
       </p>
       <dt-slider
-        v-model="tooltipAlwaysValue"
+        v-model="readoutAlwaysValue"
         label="Volume"
-        tooltip="always"
+        readout="always"
       />
     </section>
 
-    <!-- Value tooltip: on interaction -->
+    <!-- Value readout: on interaction -->
     <section>
       <p class="d-body--sm-compact d-mbe-300 d-fc-tertiary">
-        Value tooltip — on interaction (hover, drag, or focus)
+        Value readout — on interaction (hover, drag, or focus)
       </p>
       <dt-slider
-        v-model="tooltipInteractionValue"
+        v-model="readoutInteractionValue"
         label="Volume"
-        tooltip="interaction"
+        readout="interaction"
       />
     </section>
 
@@ -454,8 +454,8 @@ export default {
       tickValue: ref(7),
       labelsWithBoundariesValue: ref(10),
       midpointValue: ref(0),
-      tooltipAlwaysValue: ref(48),
-      tooltipInteractionValue: ref(48),
+      readoutAlwaysValue: ref(48),
+      readoutInteractionValue: ref(48),
       invertedValue: ref(40),
       panValue: ref(50),
       percentageValue: ref(0),

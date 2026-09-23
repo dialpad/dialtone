@@ -95,25 +95,7 @@
           data-qa="dt-slider-thumb-hit"
           @pointerenter="onThumbHitPointerEnter(i)"
           @pointerleave="onThumbHitPointerLeave(i)"
-        >
-          <!-- Plain, CSS-positioned value bubble — deliberately NOT DtTooltip/Popper.
-               It's anchored to this hit-target box the same way the thumb itself is
-               positioned by thumbPositionStyle(), so there's no JS measurement, no
-               document.body portal, and no async reposition loop that can desync
-               from the thumb while scrolling (see DLT-1974 investigation notes). -->
-          <div
-            v-if="tooltip !== 'never'"
-            :class="[
-              'd-tooltip',
-              'd-slider__thumb-tooltip',
-              thumbTooltipDirectionClass(i),
-              isTooltipOpen(i) ? 'd-tooltip--show' : 'd-tooltip--hide',
-            ]"
-            data-qa="dt-slider-thumb-tooltip"
-          >
-            {{ getAriaValueText ? getAriaValueText(val, i) : String(val) }}
-          </div>
-        </div>
+        />
         <input
           v-for="(val, i) in internalValues"
           :key="`thumb-input-${i}`"
@@ -128,7 +110,7 @@
           :name="name || undefined"
           :aria-labelledby="(label || $slots.label) ? labelId : undefined"
           :aria-label="(!label && !$slots.label) ? $attrs['aria-label'] : undefined"
-          :aria-valuetext="getAriaValueText ? getAriaValueText(val, i) : undefined"
+          :aria-valuetext="formatValue(val, i)"
           :style="thumbPositionStyle(val)"
           data-qa="dt-slider-thumb"
           @input="onThumbInput(i, $event)"
@@ -139,12 +121,46 @@
         <div
           v-for="(mark, i) in computedMarks"
           :key="`mark-${i}`"
-          class="d-slider__mark"
+          ref="markElRefs"
+          :class="['d-slider__mark', { 'd-slider__mark--collision-hidden': markCollisionHidden[i] }]"
           :style="markStyle(mark.pct)"
+          :data-mark-index="i"
           data-qa="dt-slider-mark"
         >
           {{ mark.text }}
         </div>
+        <!-- Plain, CSS-positioned text — deliberately not a floating tooltip/portal.
+             It sits in the same row as marks, positioned by the same value-to-percent
+             math, so it never needs JS measurement or a reposition loop that could
+             desync from the thumb (see DLT-1974 investigation notes). -->
+        <template v-if="readout !== 'never'">
+          <div
+            v-for="(val, i) in internalValues"
+            :key="`readout-${i}`"
+            ref="readoutElRefs"
+            :class="[
+              'd-slider__readout',
+              (isReadoutOpen(i) && !readoutMerged) ? 'd-slider__readout--show' : 'd-slider__readout--hide',
+            ]"
+            :style="markStyle(thumbPercent(val))"
+            :data-readout-index="i"
+            data-qa="dt-slider-thumb-readout"
+          >
+            {{ formatValue(val, i) }}
+          </div>
+          <!-- Range mode only: when the two individual readouts above would overlap,
+               they're hidden (still measurable — visibility:hidden) and this single
+               merged pill takes over, centered between the thumbs. -->
+          <div
+            v-if="readoutMerged"
+            ref="mergedReadoutElRef"
+            class="d-slider__readout d-slider__readout--show"
+            :style="markStyle(mergedReadoutPct)"
+            data-qa="dt-slider-thumb-readout-merged"
+          >
+            {{ mergedReadoutText }}
+          </div>
+        </template>
       </div>
       <div
         :class="['d-slider__end', endClass]"
@@ -159,13 +175,13 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue';
+import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick } from 'vue';
 import { DtText } from '@/components/Text';
 import { getUniqueString } from '@/common/utils';
 import {
   SLIDER_ORIENTATIONS,
   SLIDER_SIZE_MODIFIERS,
-  SLIDER_TOOLTIP_MODES,
+  SLIDER_READOUT_MODES,
   SLIDER_DEFAULT_LARGE_STEP,
 } from './SliderConstants';
 
@@ -272,7 +288,7 @@ const props = defineProps({
 
   /**
    * Size of the slider (thumb and track scale).
-   * @values 100, 200, 300, 400, 500
+   * @values 200, 300, 400
    */
   size: {
     type: [String, Number],
@@ -298,14 +314,35 @@ const props = defineProps({
   },
 
   /**
-   * A function returning the accessible text for a thumb's current value.
-   * Signature: (value: number, index: number) => string.
-   * For range sliders, use this to differentiate thumbs (e.g., "Minimum: 20").
-   * The default (null) uses the raw number, which must be i18n-safe for your context.
+   * A function returning the user-facing text for a value — shared by the readout, marks,
+   * and each thumb's aria-valuetext, so all three always agree on how a number is displayed.
+   * Signature: (value: number, index?: number) => string. index is the thumb index for a
+   * thumb's own value (use it to differentiate thumbs in range mode, e.g. "Minimum: 20"),
+   * and is omitted when formatting a mark, since marks aren't tied to a specific thumb.
+   * Takes precedence over prefix/suffix when set. The default (null) uses the raw number
+   * (optionally wrapped in prefix/suffix), which must be i18n-safe for your context.
    */
-  getAriaValueText: {
+  getValueText: {
     type: Function,
     default: null,
+  },
+
+  /**
+   * Text prepended to the raw number wherever it's displayed (readout, marks, aria-valuetext)
+   * — e.g. prefix="$" for currency. Ignored when getValueText is set.
+   */
+  prefix: {
+    type: String,
+    default: '',
+  },
+
+  /**
+   * Text appended to the raw number wherever it's displayed (readout, marks, aria-valuetext)
+   * — e.g. suffix="%" for a percentage. Ignored when getValueText is set.
+   */
+  suffix: {
+    type: String,
+    default: '',
   },
 
   /**
@@ -318,7 +355,7 @@ const props = defineProps({
   },
 
   /**
-   * Number of steps to move on Page Up or Page Down.
+   * Number of steps to move on Page Up/Page Down or Shift + Arrow.
    */
   largeStep: {
     type: Number,
@@ -350,27 +387,28 @@ const props = defineProps({
   },
 
   /**
-   * Controls the value tooltip shown above (aka on top of) each thumb: always visible,
-   * never shown, or shown only while hovering, dragging, or focusing that thumb.
-   * Uses getAriaValueText for the label when provided, otherwise falls back to the raw number.
+   * Controls the live value readout shown alongside the track for each thumb: always
+   * visible, never shown, or shown only while hovering, dragging, or focusing that thumb.
+   * Text is formatted the same way as marks — via getValueText, or prefix/suffix.
    * @values always, never, interaction
    */
-  tooltip: {
+  readout: {
     type: String,
-    default: 'never',
-    validator: (v) => SLIDER_TOOLTIP_MODES.includes(v),
+    default: 'always',
+    validator: (v) => SLIDER_READOUT_MODES.includes(v),
   },
 
   /**
    * Text annotations rendered below the track at specific positions, independent of ticks.
-   * Pass true to mark every tick position automatically (uses tickInterval
-   * or step to determine positions). Pass an array for explicit control: each entry is either
-   * a plain number (text defaults to the number itself) or an object with a required value
-   * and optional text override. Example: [{ value: 0, text: 'Neutral' }, -100, 100]
+   * Defaults to min and max (start and end). Pass true to mark every tick position
+   * automatically (uses tickInterval or step to determine positions) instead. Pass an
+   * array for explicit control: each entry is either a plain number (text defaults to the
+   * number itself) or an object with a required value and optional text override.
+   * Pass false to render no marks at all. Example: [{ value: 0, text: 'Neutral' }, -100, 100]
    */
   marks: {
     type: [Array, Boolean],
-    default: false,
+    default: undefined,
   },
 });
 
@@ -414,6 +452,10 @@ const isDragging = ref(false);
 const activeThumbIndex = ref(null);
 const focusedThumbIndex = ref(null);
 const hoveredThumbIndex = ref(null);
+// Not reactive on purpose: set synchronously right before a pointer-driven
+// focus() call and read/cleared synchronously in the 'focus' handler it
+// triggers, within the same task. See onPointerDown.
+let isPointerFocus = false;
 
 const isRange = computed(() => Array.isArray(props.modelValue));
 
@@ -492,11 +534,30 @@ function tickPositionStyle(val) {
   return { left: `${pct}%`, transform: 'translateX(-50%)' };
 }
 
+// Shared by the readout, marks (rendered from a bare number, not an explicit
+// text override), and each thumb's aria-valuetext, so all three always agree
+// on how a value is displayed. index is omitted for marks — they aren't tied
+// to a specific thumb — and getValueText simply ignores an argument it wasn't
+// written to use.
+function formatValue(value, index) {
+  if (props.getValueText) return props.getValueText(value, index);
+  return `${props.prefix}${value}${props.suffix}`;
+}
+
 const computedMarks = computed(() => {
-  const source = props.marks === true ? computedTickValues.value : (props.marks || []);
+  let source;
+  if (props.marks === undefined) {
+    // Default: start and end, unless the consumer opts in to every tick (true),
+    // provides their own array, or opts out entirely (false).
+    source = [props.min, props.max];
+  } else if (props.marks === true) {
+    source = computedTickValues.value;
+  } else {
+    source = props.marks || [];
+  }
   return source.map((item) => {
     const value = typeof item === 'number' ? item : item.value;
-    const text = typeof item === 'number' ? String(item) : (item.text ?? String(value));
+    const text = typeof item === 'number' ? formatValue(item) : (item.text ?? formatValue(value));
     const pct = (value - props.min) / (props.max - props.min) * 100;
     return { text, pct };
   });
@@ -620,6 +681,11 @@ function onPointerDown(event) {
   // Only handle primary pointer button
   if (event.pointerType === 'mouse' && event.button !== 0) return;
 
+  // Suppresses the browser's native mousedown default action, which would
+  // otherwise shift focus to the nearest scrollable ancestor after our own
+  // thumbRefs.focus() call below runs.
+  event.preventDefault();
+
   const rawVal = getValueFromPointerEvent(event);
   const idx = getNearestThumbIndex(rawVal);
 
@@ -628,6 +694,12 @@ function onPointerDown(event) {
   controlRef.value.setPointerCapture(event.pointerId);
 
   updateThumbValue(idx, rawVal);
+  // Marks the focus() call below as pointer-driven so onThumbFocus can skip
+  // the keyboard-focus ring for it — :focus-visible isn't usable here since
+  // browsers treat range inputs as always focus-visible on click, unlike
+  // buttons/links. focus() dispatches its 'focus' event synchronously, so
+  // this flag is read and cleared before any other code runs.
+  isPointerFocus = true;
   thumbRefs.value[idx]?.focus();
 }
 
@@ -661,19 +733,27 @@ function onThumbInput(i, event) {
 }
 
 function onThumbKeydown(i, event) {
-  const { key } = event;
-  if (key === 'PageUp') {
+  const { key, shiftKey } = event;
+  if (key === 'PageUp' || (shiftKey && (key === 'ArrowRight' || key === 'ArrowUp'))) {
     event.preventDefault();
     updateThumbValue(i, internalValues.value[i] + props.largeStep);
-  } else if (key === 'PageDown') {
+  } else if (key === 'PageDown' || (shiftKey && (key === 'ArrowLeft' || key === 'ArrowDown'))) {
     event.preventDefault();
     updateThumbValue(i, internalValues.value[i] - props.largeStep);
   }
-  // Arrow keys, Home, End handled natively by <input type="range">
+  // Plain arrow keys, Home, End handled natively by <input type="range">
 }
 
 function onThumbFocus(i, event) {
-  focusedThumbIndex.value = i;
+  // Skip the keyboard-focus ring (and the interaction-mode readout it's tied
+  // to via focusedThumbIndex) for a pointer-driven focus — a mouse drag
+  // already gets its own affordance via activeThumbIndex while the pointer
+  // is down. Tab/keyboard focus falls through and sets it normally.
+  if (isPointerFocus) {
+    isPointerFocus = false;
+  } else {
+    focusedThumbIndex.value = i;
+  }
   emit('focus', event);
 }
 
@@ -691,26 +771,188 @@ function onThumbHitPointerLeave(i) {
   if (hoveredThumbIndex.value === i) hoveredThumbIndex.value = null;
 }
 
-function isTooltipOpen(i) {
-  if (props.tooltip === 'always') return true;
+function isReadoutOpen(i) {
+  if (props.readout === 'always') return true;
   return activeThumbIndex.value === i || focusedThumbIndex.value === i || hoveredThumbIndex.value === i;
 }
 
-// Which side the value bubble sits on, relative to its thumb-hit box. Single-thumb
-// mode always sits above (block-start); range mode splits thumbs to either inline
-// side so the two bubbles don't collide near the middle of the track.
-function thumbTooltipDirectionClass(i) {
-  if (!isRange.value) return 'd-slider__thumb-tooltip--block-start';
-  return i === 0 ? 'd-slider__thumb-tooltip--inline-start' : 'd-slider__thumb-tooltip--inline-end';
+// ─── Mark / readout collision avoidance ────────────────────────────────────────
+// Two kinds of collision, resolved in order: in range mode, the low/high readouts
+// can overlap each other as the thumbs converge — merged into a single centered
+// "lo–hi" pill. Separately, the live readout can overlap a static mark — marks
+// default to start/end and readout defaults to always, so the readout sits right
+// on top of an end mark near the extremes. When they collide, hide the mark: the
+// readout is the thing actively communicating current state during interaction,
+// matching the convention this was
+// modeled on (firespotter's own percentage slider hides its static markers, never
+// the live value). Pure rect measurement, no continuous polling — recomputed when
+// the value or readout visibility changes (both already reactive) and on control
+// resize, so there's no open-ended loop that could silently stop working the way
+// the old Popper-based tooltip did (see the DLT-1974 investigation notes above).
+
+const markElRefs = ref([]);
+const readoutElRefs = ref([]);
+const mergedReadoutElRef = ref(null);
+const markCollisionHidden = ref([]);
+const readoutMerged = ref(false);
+const COLLISION_PADDING = 4; // px of breathing room before a mark hides or readouts merge
+
+function rectsOverlap(a, b, padding = 0) {
+  return !(
+    a.right + padding < b.left ||
+    a.left - padding > b.right ||
+    a.bottom + padding < b.top ||
+    a.top - padding > b.bottom
+  );
 }
+
+const mergedReadoutPct = computed(() => {
+  if (!isRange.value || internalValues.value.length !== 2) return 0;
+  const [lo, hi] = internalValues.value;
+  return (thumbPercent(lo) + thumbPercent(hi)) / 2;
+});
+
+const mergedReadoutText = computed(() => {
+  if (!isRange.value || internalValues.value.length !== 2) return '';
+  const [lo, hi] = internalValues.value;
+  return `${formatValue(lo, 0)}–${formatValue(hi, 1)}`;
+});
+
+// Two passes: first decide whether the individual readouts should merge (their
+// elements stay in the DOM at all times, only visibility toggles, so their rects
+// are always measurable). Then, after Vue renders the merged pill (or removes it),
+// measure whichever readout representation is actually shown against the marks.
+// The watcher and the ResizeObserver below can both call this, and since it
+// awaits across multiple ticks, two calls can overlap: a slower call started
+// from stale (pre-update) DOM state can finish — and write its now-outdated
+// result — after a newer call already wrote the correct one, clobbering it
+// with stale data. collisionUpdateId is a generation counter: each call
+// captures the id it started with and bails at its next checkpoint if a newer
+// call has since started, so only the freshest measurement ever gets applied.
+let collisionUpdateId = 0;
+
+// .d-slider__readout has `transition: left/bottom` (see slider.less) so its
+// value-driven position animates — during that ~100ms animation,
+// getBoundingClientRect() reports wherever it currently is mid-flight, not
+// its final target. data-dragging turns the transition off during a mouse
+// drag, but a keyboard nudge or a programmatic value change never sets
+// data-dragging, so this genuinely can read a stale, mid-animation position.
+// Sidesteps this by computing position analytically from the same reactive
+// pct the template itself uses (always instantly correct, no animation to
+// wait out) and only pulling size (width/height) from the DOM — unlike
+// position, size isn't transitioned, so it's accurate immediately after
+// Vue's own render, no extra frame-waiting needed.
+function analyticalReadoutRect(pct, el) {
+  if (!el || !controlRef.value) return null;
+  const elRect = el.getBoundingClientRect();
+  const controlRect = controlRef.value.getBoundingClientRect();
+  if (isVertical.value) {
+    const height = elRect.bottom - elRect.top;
+    const centerPx = controlRect.bottom - (pct / 100) * (controlRect.bottom - controlRect.top);
+    return { left: elRect.left, right: elRect.right, top: centerPx - height / 2, bottom: centerPx + height / 2 };
+  }
+  const width = elRect.right - elRect.left;
+  const centerPx = controlRect.left + (pct / 100) * (controlRect.right - controlRect.left);
+  return { left: centerPx - width / 2, right: centerPx + width / 2, top: elRect.top, bottom: elRect.bottom };
+}
+
+// Same rationale as data-mark-index on marks: don't trust readoutElRefs[i]'s
+// array position to correspond to internalValues[i] — look the element up by
+// its own tagged index instead.
+function readoutElByIndex(i) {
+  return readoutElRefs.value.find((el) => el && Number(el.dataset.readoutIndex) === i);
+}
+
+async function updateCollisions() {
+  const thisUpdateId = ++collisionUpdateId;
+  await nextTick(); // let Vue's own DOM patch (text/value/style) land before measuring
+  if (thisUpdateId !== collisionUpdateId) return;
+
+  const wasMerged = readoutMerged.value;
+  if (isRange.value && internalValues.value.length === 2 && isReadoutOpen(0) && isReadoutOpen(1)) {
+    const [lo, hi] = internalValues.value;
+    const rectA = analyticalReadoutRect(thumbPercent(lo), readoutElByIndex(0));
+    const rectB = analyticalReadoutRect(thumbPercent(hi), readoutElByIndex(1));
+    readoutMerged.value = !!(rectA && rectB && rectsOverlap(rectA, rectB, COLLISION_PADDING));
+  } else {
+    readoutMerged.value = false;
+  }
+
+  // Only worth another wait when the merge state actually flipped this cycle
+  // — that's the only time the merged pill is about to mount/unmount, so
+  // it's the only time it'd otherwise be measured (for the marks check
+  // below) before existing in the DOM at all.
+  if (readoutMerged.value !== wasMerged) {
+    await nextTick();
+    if (thisUpdateId !== collisionUpdateId) return;
+  }
+
+  updateMarkCollisions();
+}
+
+function collectReadoutRects() {
+  if (readoutMerged.value) {
+    const rect = analyticalReadoutRect(mergedReadoutPct.value, mergedReadoutElRef.value);
+    return rect ? [rect] : [];
+  }
+  return internalValues.value
+    .map((val, i) => (isReadoutOpen(i) ? analyticalReadoutRect(thumbPercent(val), readoutElByIndex(i)) : null))
+    .filter(Boolean);
+}
+
+// Key the result by each mark's own data-mark-index rather than by its
+// position in markElRefs.value — that array (populated via ref="markElRefs"
+// on the marks v-for) isn't reliably index-aligned across renders with
+// computedMarks/markCollisionHidden[i], which the template assumes when it
+// reads markCollisionHidden[i] for the same i as its v-for. Confirmed live:
+// markElRefs.value[0]/[1] can end up holding the "100"/"0" mark elements in
+// the opposite order from computedMarks, silently applying one mark's
+// collision result to the other mark's rendered element.
+function updateMarkCollisions() {
+  const marks = markElRefs.value;
+  if (!marks.length) return;
+  const readoutRects = collectReadoutRects();
+  const result = computedMarks.value.map(() => false);
+  if (readoutRects.length) {
+    marks.forEach((markEl) => {
+      if (!markEl) return;
+      const idx = Number(markEl.dataset.markIndex);
+      const markRect = markEl.getBoundingClientRect();
+      result[idx] = readoutRects.some((readoutRect) => rectsOverlap(markRect, readoutRect, COLLISION_PADDING));
+    });
+  }
+  markCollisionHidden.value = result;
+}
+
+const readoutVisibility = computed(() => internalValues.value.map((_, i) => isReadoutOpen(i)));
+
+let markCollisionResizeObserver = null;
+
+watch(
+  [internalValues, readoutVisibility, computedMarks],
+  () => updateCollisions(),
+  { deep: true },
+);
+
+onMounted(() => {
+  nextTick(updateCollisions);
+  if (typeof ResizeObserver !== 'undefined' && controlRef.value) {
+    markCollisionResizeObserver = new ResizeObserver(() => updateCollisions());
+    markCollisionResizeObserver.observe(controlRef.value);
+  }
+});
+
+onBeforeUnmount(() => {
+  markCollisionResizeObserver?.disconnect();
+});
 
 // ─── Dev warnings ─────────────────────────────────────────────────────────────
 
 onMounted(() => {
   if (!props.label && !props.labelHidden) return; // will have visible label
-  if (isRange.value && !props.getAriaValueText) {
+  if (isRange.value && !props.getValueText) {
     console.info(
-      '[Dialtone] DtSlider in range mode: provide getAriaValueText to give each thumb a distinct screen-reader description.',
+      '[Dialtone] DtSlider in range mode: provide getValueText to give each thumb a distinct screen-reader description.',
     );
   }
   if (!props.label && !props.labelHidden) {

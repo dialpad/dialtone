@@ -2,6 +2,20 @@ import { h, nextTick } from 'vue';
 import { mount } from '@vue/test-utils';
 import DtSlider from './Slider.vue';
 
+// Matches Slider.vue's updateCollisions: nextTick() alone doesn't guarantee
+// jsdom/the browser has painted the latest patch — it waits a real frame
+// (twice) after each Vue flush, so tests exercising collision detection need
+// to wait the same way rather than relying on microtask ticks alone.
+const nextFrame = () => new Promise((resolve) => {
+  requestAnimationFrame(() => requestAnimationFrame(resolve));
+});
+const settleCollisions = async () => {
+  await nextTick();
+  await nextFrame();
+  await nextTick();
+  await nextFrame();
+};
+
 const baseProps = {
   label: 'Volume',
   modelValue: 50,
@@ -150,68 +164,99 @@ describe('DtSlider Tests', () => {
       });
     });
 
-    describe('Tooltip', () => {
-      // The value bubble is a plain CSS-positioned element (not DtTooltip/Popper) so
-      // it can't desync from its thumb while scrolling — see DLT-1974 investigation
-      // notes. It's found via data-qa and shown/hidden via the d-tooltip--show /
-      // d-tooltip--hide modifier classes instead of a `open` component prop.
-      const tooltipBubbles = () => wrapper.findAll('[data-qa="dt-slider-thumb-tooltip"]');
+    describe('Readout', () => {
+      // The readout is a plain CSS-positioned element in the same row as marks (not
+      // a floating tooltip/portal), so it can't desync from its thumb while scrolling
+      // — see DLT-1974 investigation notes. It's found via data-qa and shown/hidden
+      // via the d-slider__readout--show / --hide modifier classes instead of an
+      // `open` component prop.
+      const readouts = () => wrapper.findAll('[data-qa="dt-slider-thumb-readout"]');
 
-      it('renders no tooltip by default (never)', async () => {
+      it('renders an always-shown readout by default', async () => {
         await nextTick();
-        expect(tooltipBubbles()).toHaveLength(0);
+        const els = readouts();
+        expect(els).toHaveLength(1);
+        expect(els[0].classes()).toContain('d-slider__readout--show');
       });
 
-      it('renders an always-shown tooltip when tooltip is "always"', async () => {
-        mockProps = { tooltip: 'always' };
+      it('renders no readout when readout is "never"', async () => {
+        mockProps = { readout: 'never' };
         updateWrapper();
         await nextTick();
-        const bubbles = tooltipBubbles();
-        expect(bubbles).toHaveLength(1);
-        expect(bubbles[0].classes()).toContain('d-tooltip--show');
+        expect(readouts()).toHaveLength(0);
       });
 
-      it('keeps the tooltip hidden at rest when tooltip is "interaction"', async () => {
-        mockProps = { tooltip: 'interaction' };
+      it('renders an always-shown readout when readout is "always"', async () => {
+        mockProps = { readout: 'always' };
         updateWrapper();
         await nextTick();
-        expect(tooltipBubbles()[0].classes()).toContain('d-tooltip--hide');
+        const els = readouts();
+        expect(els).toHaveLength(1);
+        expect(els[0].classes()).toContain('d-slider__readout--show');
       });
 
-      it('shows the tooltip while the thumb is focused when tooltip is "interaction"', async () => {
-        mockProps = { tooltip: 'interaction' };
+      it('keeps the readout hidden at rest when readout is "interaction"', async () => {
+        mockProps = { readout: 'interaction' };
+        updateWrapper();
+        await nextTick();
+        expect(readouts()[0].classes()).toContain('d-slider__readout--hide');
+      });
+
+      it('shows the readout when the thumb receives keyboard focus, readout "interaction"', async () => {
+        mockProps = { readout: 'interaction' };
         updateWrapper();
         await nextTick();
         thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
         await thumbInputs[0].trigger('focus');
-        expect(tooltipBubbles()[0].classes()).toContain('d-tooltip--show');
+        expect(readouts()[0].classes()).toContain('d-slider__readout--show');
       });
 
-      it('hides the tooltip again once the thumb blurs when tooltip is "interaction"', async () => {
-        mockProps = { tooltip: 'interaction' };
+      it('hides the readout again once the thumb blurs when readout is "interaction"', async () => {
+        mockProps = { readout: 'interaction' };
         updateWrapper();
         await nextTick();
         thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
         await thumbInputs[0].trigger('focus');
         await thumbInputs[0].trigger('blur');
-        expect(tooltipBubbles()[0].classes()).toContain('d-tooltip--hide');
+        expect(readouts()[0].classes()).toContain('d-slider__readout--hide');
       });
 
-      it('renders the formatted value as the tooltip content', async () => {
-        mockProps = { tooltip: 'always' };
+      it('renders the formatted value as the readout content', async () => {
+        mockProps = { readout: 'always' };
         updateWrapper();
         await nextTick();
-        expect(tooltipBubbles()[0].text()).toBe('50');
+        expect(readouts()[0].text()).toBe('50');
       });
 
-      it('splits range-mode tooltips to either inline side of the track', async () => {
-        mockProps = { tooltip: 'always', modelValue: [20, 70] };
+      it('renders one readout per thumb in range mode', async () => {
+        mockProps = { readout: 'always', modelValue: [20, 70] };
         updateWrapper();
         await nextTick();
-        const bubbles = tooltipBubbles();
-        expect(bubbles).toHaveLength(2);
-        expect(bubbles[0].classes()).toContain('d-slider__thumb-tooltip--inline-start');
-        expect(bubbles[1].classes()).toContain('d-slider__thumb-tooltip--inline-end');
+        const els = readouts();
+        expect(els).toHaveLength(2);
+        expect(els[0].text()).toBe('20');
+        expect(els[1].text()).toBe('70');
+      });
+
+      it('applies suffix to the readout content', async () => {
+        mockProps = { readout: 'always', suffix: '%' };
+        updateWrapper();
+        await nextTick();
+        expect(readouts()[0].text()).toBe('50%');
+      });
+
+      it('applies prefix to the readout content', async () => {
+        mockProps = { readout: 'always', prefix: '$' };
+        updateWrapper();
+        await nextTick();
+        expect(readouts()[0].text()).toBe('$50');
+      });
+
+      it('prefers getValueText over suffix for the readout content', async () => {
+        mockProps = { readout: 'always', suffix: '%', getValueText: (v) => `${v} units` };
+        updateWrapper();
+        await nextTick();
+        expect(readouts()[0].text()).toBe('50 units');
       });
     });
 
@@ -334,11 +379,25 @@ describe('DtSlider Tests', () => {
       expect(thumbInputs[0].element.value).toBe('50');
     });
 
-    it('applies getAriaValueText result to aria-valuetext', () => {
-      mockProps = { getAriaValueText: (v) => `Volume: ${v}%` };
+    it('applies getValueText result to aria-valuetext', () => {
+      mockProps = { getValueText: (v) => `Volume: ${v}%` };
       updateWrapper();
       thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
       expect(thumbInputs[0].attributes('aria-valuetext')).toBe('Volume: 50%');
+    });
+
+    it('applies prefix/suffix to aria-valuetext when getValueText is not set', () => {
+      mockProps = { prefix: '$', suffix: ' USD' };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      expect(thumbInputs[0].attributes('aria-valuetext')).toBe('$50 USD');
+    });
+
+    it('prefers getValueText over prefix/suffix when both are set', () => {
+      mockProps = { getValueText: (v) => `${v}%`, prefix: '$', suffix: ' USD' };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      expect(thumbInputs[0].attributes('aria-valuetext')).toBe('50%');
     });
   });
 
@@ -397,6 +456,34 @@ describe('DtSlider Tests', () => {
         expect(thumbVisuals[0].classes()).toContain('d-slider__thumb-visual--active');
       });
 
+      it('focuses the nearest thumb input on pointerdown, so a keyboard nudge works immediately after', async () => {
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        const focusSpy = vi.spyOn(thumbInputs[0].element, 'focus');
+        await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 0, buttons: 1 });
+        expect(focusSpy).toHaveBeenCalled();
+      });
+
+      it('does not add the keyboard-focus ring class for a pointer-driven focus', async () => {
+        await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 0, buttons: 1 });
+        thumbVisuals = wrapper.findAll('[data-qa="dt-slider-thumb-visual"]');
+        expect(thumbVisuals[0].classes()).not.toContain('d-slider__thumb-visual--focused');
+      });
+
+      it('adds the keyboard-focus ring class for a real keyboard (Tab) focus', async () => {
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        await thumbInputs[0].trigger('focus');
+        thumbVisuals = wrapper.findAll('[data-qa="dt-slider-thumb-visual"]');
+        expect(thumbVisuals[0].classes()).toContain('d-slider__thumb-visual--focused');
+      });
+
+      it('prevents the default browser action on pointerdown, which would otherwise steal focus back after our own .focus() call', async () => {
+        const event = new Event('pointerdown', { bubbles: true, cancelable: true });
+        Object.assign(event, { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 0, buttons: 1 });
+        control.element.dispatchEvent(event);
+        await nextTick();
+        expect(event.defaultPrevented).toBe(true);
+      });
+
       it('removes the active class on pointerup', async () => {
         await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 0, buttons: 1 });
         await control.trigger('pointerup', { pointerId: 1 });
@@ -422,7 +509,7 @@ describe('DtSlider Tests', () => {
       });
     });
 
-    describe('Keyboard: PageUp / PageDown', () => {
+    describe('Keyboard: PageUp / PageDown / Shift+Arrow', () => {
       it('increases value by largeStep on PageUp', async () => {
         await thumbInputs[0].trigger('keydown', { key: 'PageUp' });
         const emitted = wrapper.emitted('update:modelValue');
@@ -435,6 +522,27 @@ describe('DtSlider Tests', () => {
         const emitted = wrapper.emitted('update:modelValue');
         expect(emitted).toBeTruthy();
         expect(emitted[emitted.length - 1][0]).toBe(40); // 50 - 10
+      });
+
+      it.each(['ArrowRight', 'ArrowUp'])('increases value by largeStep on Shift+%s', async (key) => {
+        await thumbInputs[0].trigger('keydown', { key, shiftKey: true });
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted).toBeTruthy();
+        expect(emitted[emitted.length - 1][0]).toBe(60); // 50 + 10
+      });
+
+      it.each(['ArrowLeft', 'ArrowDown'])('decreases value by largeStep on Shift+%s', async (key) => {
+        await thumbInputs[0].trigger('keydown', { key, shiftKey: true });
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted).toBeTruthy();
+        expect(emitted[emitted.length - 1][0]).toBe(40); // 50 - 10
+      });
+
+      it('does not apply largeStep on a plain, non-shifted ArrowRight', async () => {
+        await thumbInputs[0].trigger('keydown', { key: 'ArrowRight' });
+        // Plain arrows are handled natively by <input type="range">, not by this
+        // handler — no update should be emitted from the keydown handler itself.
+        expect(wrapper.emitted('update:modelValue')).toBeFalsy();
       });
     });
 
@@ -643,6 +751,191 @@ describe('DtSlider Tests', () => {
         mockProps = { showTicks: true, step: 0.1, min: 0, max: 1 };
         updateWrapper();
         expect(wrapper.findAll('[data-qa="dt-slider-tick"]')).toHaveLength(11);
+      });
+    });
+
+    describe('Marks default', () => {
+      it('renders start and end marks by default', async () => {
+        await nextTick();
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        expect(marks).toHaveLength(2);
+        expect(marks[0].text()).toBe(String(baseProps.min ?? 0));
+        expect(marks[1].text()).toBe(String(baseProps.max ?? 100));
+      });
+
+      it('renders no marks when marks is explicitly false', async () => {
+        mockProps = { marks: false };
+        updateWrapper();
+        await nextTick();
+        expect(wrapper.findAll('[data-qa="dt-slider-mark"]')).toHaveLength(0);
+      });
+
+      it('applies suffix to default and bare-number marks, but not explicit text', async () => {
+        mockProps = { suffix: '%', marks: [25, { value: 75, text: 'Cap' }] };
+        updateWrapper();
+        await nextTick();
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        expect(marks[0].text()).toBe('25%');
+        expect(marks[1].text()).toBe('Cap');
+      });
+
+      it('prefers getValueText over suffix for marks', async () => {
+        mockProps = { suffix: '%', getValueText: (v) => `${v} units`, marks: [25] };
+        updateWrapper();
+        await nextTick();
+        expect(wrapper.find('[data-qa="dt-slider-mark"]').text()).toBe('25 units');
+      });
+    });
+
+    describe('Mark / readout collision avoidance', () => {
+      // jsdom has no real layout engine — getBoundingClientRect() returns an
+      // all-zero rect for every element by default. Marks are still measured
+      // directly (their position doesn't animate, so no analytical treatment
+      // needed), but the readout's position is now computed analytically from
+      // pct + the control's own rect (see analyticalReadoutRect in Slider.vue),
+      // so the control needs a stub too — the readout's stubbed rect only
+      // contributes its width to that calculation.
+      const controlRect = { top: 0, left: 0, right: 300, bottom: 20 };
+      const readoutSize = { top: 0, left: 0, right: 20, bottom: 20 }; // 20px wide
+      const nearReadoutRect = { top: 0, left: 150, right: 170, bottom: 20 }; // overlaps a readout at pct 51
+      const farRect = { top: 0, left: 500, right: 520, bottom: 20 };
+
+      it('hides a mark once it overlaps the visible readout', async () => {
+        mockProps = { readout: 'always', marks: [0, 100], modelValue: 50 };
+        updateWrapper();
+        await nextTick();
+
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        const readouts = wrapper.findAll('[data-qa="dt-slider-thumb-readout"]');
+        marks[0].element.getBoundingClientRect = () => nearReadoutRect;
+        marks[1].element.getBoundingClientRect = () => farRect;
+        readouts[0].element.getBoundingClientRect = () => readoutSize;
+
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        thumbInputs[0].element.value = '51';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+
+        const marksAfter = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        expect(marksAfter[0].classes()).toContain('d-slider__mark--collision-hidden');
+        expect(marksAfter[1].classes()).not.toContain('d-slider__mark--collision-hidden');
+      });
+
+      it('keeps a mark visible when it does not overlap the readout', async () => {
+        mockProps = { readout: 'always', marks: [0, 100], modelValue: 50 };
+        updateWrapper();
+        await nextTick();
+
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        const readouts = wrapper.findAll('[data-qa="dt-slider-thumb-readout"]');
+        marks[0].element.getBoundingClientRect = () => farRect;
+        marks[1].element.getBoundingClientRect = () => farRect;
+        readouts[0].element.getBoundingClientRect = () => readoutSize;
+
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        thumbInputs[0].element.value = '51';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+
+        const marksAfter = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        expect(marksAfter[0].classes()).not.toContain('d-slider__mark--collision-hidden');
+        expect(marksAfter[1].classes()).not.toContain('d-slider__mark--collision-hidden');
+      });
+
+      it('never hides a mark for a readout that is not currently shown', async () => {
+        mockProps = { readout: 'interaction', marks: [0, 100], modelValue: 50 };
+        updateWrapper();
+        await nextTick();
+
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        const readouts = wrapper.findAll('[data-qa="dt-slider-thumb-readout"]');
+        marks[0].element.getBoundingClientRect = () => nearReadoutRect;
+        readouts[0].element.getBoundingClientRect = () => readoutSize;
+
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        thumbInputs[0].element.value = '51';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+
+        const marksAfter = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        expect(marksAfter[0].classes()).not.toContain('d-slider__mark--collision-hidden');
+      });
+    });
+
+    describe('Range readout collision merge', () => {
+      // Position is now computed analytically from pct + the control's rect
+      // (not read off the readout element directly — see analyticalReadoutRect
+      // in Slider.vue), so the control needs a stub too; the readout's own
+      // stubbed rect only contributes its width to the calculation.
+      const controlRect = { top: 0, left: 0, right: 300, bottom: 20 };
+      const readoutSize = { top: 0, left: 0, right: 20, bottom: 20 }; // 20px wide
+
+      it('merges both readouts into a single centered pill once they overlap', async () => {
+        mockProps = { readout: 'always', modelValue: [40, 60], min: 0, max: 100 };
+        updateWrapper();
+        await nextTick();
+
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        let readouts = wrapper.findAll('[data-qa="dt-slider-thumb-readout"]');
+        readouts[0].element.getBoundingClientRect = () => readoutSize;
+        readouts[1].element.getBoundingClientRect = () => readoutSize;
+
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        // 55 vs 60: 5% apart on a 300px control (15px), well inside the
+        // combined 20px of half-widths (10px each) — genuinely overlaps.
+        thumbInputs[0].element.value = '55';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+
+        readouts = wrapper.findAll('[data-qa="dt-slider-thumb-readout"]');
+        expect(readouts[0].classes()).toContain('d-slider__readout--hide');
+        expect(readouts[1].classes()).toContain('d-slider__readout--hide');
+
+        const merged = wrapper.find('[data-qa="dt-slider-thumb-readout-merged"]');
+        expect(merged.exists()).toBe(true);
+        expect(merged.text()).toBe('55–60');
+      });
+
+      it('keeps both readouts separate when they do not overlap', async () => {
+        mockProps = { readout: 'always', modelValue: [20, 80], min: 0, max: 100 };
+        updateWrapper();
+        await nextTick();
+
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        const readouts = wrapper.findAll('[data-qa="dt-slider-thumb-readout"]');
+        readouts[0].element.getBoundingClientRect = () => readoutSize;
+        readouts[1].element.getBoundingClientRect = () => readoutSize;
+
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        // 21 vs 80: nowhere close on a 300px control.
+        thumbInputs[0].element.value = '21';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+
+        const readoutsAfter = wrapper.findAll('[data-qa="dt-slider-thumb-readout"]');
+        expect(readoutsAfter[0].classes()).toContain('d-slider__readout--show');
+        expect(readoutsAfter[1].classes()).toContain('d-slider__readout--show');
+        expect(wrapper.find('[data-qa="dt-slider-thumb-readout-merged"]').exists()).toBe(false);
+      });
+
+      it('does not merge outside range mode', async () => {
+        mockProps = { readout: 'always', modelValue: 50, min: 0, max: 100 };
+        updateWrapper();
+        await nextTick();
+
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        const readout = wrapper.find('[data-qa="dt-slider-thumb-readout"]');
+        readout.element.getBoundingClientRect = () => readoutSize;
+
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        thumbInputs[0].element.value = '51';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+
+        expect(wrapper.find('[data-qa="dt-slider-thumb-readout-merged"]').exists()).toBe(false);
       });
     });
 

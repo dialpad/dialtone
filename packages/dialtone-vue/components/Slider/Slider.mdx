@@ -110,6 +110,6 @@ import { DtSlider } from '@dialpad/dialtone-vue';
 
 - Each thumb is a native `<input type="range">` with `role="slider"` (native), `aria-valuemin`, `aria-valuemax`, and `aria-valuenow` automatically set from the `min`, `max`, and current value props.
 - Provide a `label` prop (use `labelHidden` to hide it visually). The label is associated via `aria-labelledby` on each thumb.
-- For range sliders, provide a `getAriaValueText` callback to give each thumb a distinct description, for example `(v, i) => i === 0 ? 'Minimum: ' + v : 'Maximum: ' + v`.
+- For range sliders, provide a `getValueText` callback to give each thumb a distinct description, for example `(v, i) => i === 0 ? 'Minimum: ' + v : 'Maximum: ' + v`.
 - If using icon-only content in the `start` or `end` slots, ensure each icon has an `aria-label` or hidden text — the slot wrapper itself carries no semantic label.
 - The `name` attribute enables form submission. In range mode, both `<input>` elements share the same name; retrieve both values with `FormData.getAll(name)`.

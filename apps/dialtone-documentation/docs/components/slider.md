@@ -35,10 +35,11 @@ A slider is appropriate when the exact value is less important than the relative
 ### Best Practices
 
 - Always provide a visible `label` or pass `label-hidden` to keep an accessible label in the DOM for screen readers.
-- For range sliders with two thumbs, pass a `getAriaValueText` callback that returns localized text distinguishing each thumb (e.g. `"Minimum: 20"` / `"Maximum: 70"`).
+- For range sliders with two thumbs, pass a `getValueText` callback that returns localized text distinguishing each thumb (e.g. `"Minimum: 20"` / `"Maximum: 70"`).
 - Keep `min` and `max` values meaningful to the context. Label the scale so users understand what the numbers represent.
+- Use `prefix` or `suffix` for simple unit decoration (e.g. `suffix="%"`), or `getValueText` for full control — it takes precedence and also drives the readout, marks, and each thumb's `aria-valuetext`, so all three always agree.
 - Use `showTicks` together with `tickInterval` to indicate discrete stops on the track; avoid rendering more than ~20 ticks to prevent visual noise.
-- Use `marks` to annotate key positions below the track. Pass an array of `{ value, text }` objects for custom text, a plain number array to label positions without custom text, or `true` to auto-generate marks at every tick position.
+- `marks` defaults to labeling the start and end of the range. Pass an array of `{ value, text }` objects for custom text, a plain number array to label positions without custom text, `true` to auto-generate marks at every tick position, or `false` for none.
 
 ## Variants and Examples
 
@@ -58,7 +59,7 @@ A slider is appropriate when the exact value is less important than the relative
 
 ```vue demo
 <!-- @wrapper -->
-<dt-slider :model-value="60" label="Brightness">
+<dt-slider :model-value="60" label="Brightness" :marks="false">
   <template #start>
     <span aria-hidden="true">0%</span>
   </template>
@@ -123,7 +124,7 @@ Pass an array of numbers to label positions automatically:
 </dt-slider>
 ```
 
-Pass `{ value, text }` objects when the label at a position isn't just the number itself — `value` still positions the mark on the track, but `text` can be any string:
+Pass `{ value, text }` objects when the label at a position isn't just the number itself — `value` still positions the mark on the track, but `text` can be any string. The readout doesn't read from `marks`, so pair it with `getValueText` or `suffix` to keep it consistent with what the marks say:
 
 ```vue demo
 <!-- @wrapper -->
@@ -135,6 +136,7 @@ Pass `{ value, text }` objects when the label at a position isn't just the numbe
     :max="4"
     :step="1"
     :marks="[{ value: 0, text: 'Off' }, { value: 1, text: 'Low' }, { value: 2, text: 'Medium' }, { value: 3, text: 'High' }, { value: 4, text: 'Max' }]"
+    :get-value-text="(value) => ['Off', 'Low', 'Medium', 'High', 'Max'][value]"
   />
   <dt-slider
     :model-value="45"
@@ -143,6 +145,7 @@ Pass `{ value, text }` objects when the label at a position isn't just the numbe
     :max="90"
     :step="1"
     :marks="[{ value: 0, text: 'No trial' }, { value: 30, text: '30 days' }, { value: 60, text: '60 days' }, { value: 90, text: '90 days' }]"
+    :get-value-text="(value) => value === 1 ? '1 day' : `${value} days`"
   />
 </dt-stack>
 ```
@@ -174,20 +177,37 @@ Combine marks with ticks for fully annotated steps — the two are independent, 
 </dt-stack>
 ```
 
-### Value tooltip
+### Value readout
 
-Set `tooltip` to display a floating label above each thumb showing its current value. Useful when the track context alone isn't enough to communicate the exact value.
+Set `readout` to show each thumb's current value alongside the track. Useful when the track context alone isn't enough to communicate the exact value.
 
-- `always` — the tooltip is always visible.
-- `never` (default) — no tooltip.
-- `interaction` — the tooltip appears only while that thumb is hovered, dragged, or focused.
+- `always` (default) — the readout is always visible.
+- `never` — no readout.
+- `interaction` — the readout appears only while that thumb is hovered, dragged, or focused.
 
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="300" class="d-w100p">
-  <dt-slider :model-value="48" label="Volume" tooltip="always" />
-  <dt-slider :model-value="48" label="Volume" tooltip="interaction" />
+  <dt-slider :model-value="48" label="Volume" readout="always" />
+  <dt-slider :model-value="48" label="Volume" readout="interaction" />
 </dt-stack>
+```
+
+Use `prefix`/`suffix` to decorate the raw number wherever it's displayed — the readout, marks, and each thumb's `aria-valuetext` all pick it up:
+
+```vue demo
+<dt-slider :model-value="58" label="Traffic split" suffix="%" />
+```
+
+For anything beyond a fixed prefix/suffix, pass `getValueText` — it takes precedence and receives the thumb index too, so range sliders can give each thumb distinct text:
+
+```vue demo
+<dt-slider
+  :model-value="[20, 70]"
+  label="Price range"
+  :marks="[{ value: 0, text: 'Min $0' }, { value: 100, text: 'Max $100' }]"
+  :get-value-text="(value, index) => index === 0 ? `Min $${value}` : `Max $${value}`"
+/>
 ```
 
 ### Inverted fill direction
@@ -229,7 +249,8 @@ Set `fill-origin` to a value within `[min, max]` and the indicator grows outward
 
 ```vue demo
 <!-- @wrapper -->
-<div class="d-d-flex d-g-600 d-h200">
+<!-- @class d-hmn384 -->
+<div class="d-d-flex d-g-600 d-hmn200">
   <dt-slider
     :model-value="60"
     label="Height"
@@ -256,11 +277,9 @@ Use `label-hidden` when you have a visually obvious context but still need acces
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="300" class="d-w100p">
-  <dt-slider :model-value="50" label="Extra small (100)" :size="100" />
   <dt-slider :model-value="50" label="Small (200)" :size="200" />
   <dt-slider :model-value="50" label="Medium / default (300)" :size="300" />
   <dt-slider :model-value="50" label="Large (400)" :size="400" />
-  <dt-slider :model-value="50" label="Extra large (500)" :size="500" />
 </dt-stack>
 ```
 
@@ -274,20 +293,20 @@ Use `label-hidden` when you have a visually obvious context but still need acces
 | Arrow Left / Arrow Down | Decrease value by `step` |
 | Home | Jump to `min` |
 | End | Jump to `max` |
-| Page Up | Increase value by `largeStep` (default 10) |
-| Page Down | Decrease value by `largeStep` (default 10) |
+| Page Up / Shift + Arrow Right / Shift + Arrow Up | Increase value by `largeStep` (default 10) |
+| Page Down / Shift + Arrow Left / Shift + Arrow Down | Decrease value by `largeStep` (default 10) |
 
 ### Screen reader behavior
 
 - Each thumb is a native `<input type="range">` which carries `role="slider"` implicitly, along with `aria-valuemin`, `aria-valuemax`, and `aria-valuenow`.
 - The component label is associated with each thumb via `aria-labelledby`. When `label-hidden` is true, the label element remains in the DOM (only visually hidden via `.d-vi-visible-sr`).
-- For **range sliders**, provide the `getAriaValueText` prop to give each thumb a distinct, localized description:
+- For **range sliders**, provide the `getValueText` prop to give each thumb a distinct, localized description:
 
 ```vue code-only
 <dt-slider
   :model-value="[20, 70]"
   label="Price range"
-  :get-aria-value-text="(value, index) => index === 0 ? `Minimum: $${value}` : `Maximum: $${value}`"
+  :get-value-text="(value, index) => index === 0 ? `Minimum: $${value}` : `Maximum: $${value}`"
 />
 ```
 

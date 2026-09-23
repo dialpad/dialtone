@@ -1,7 +1,7 @@
 import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import DtSlider from './Slider.vue';
-import { SLIDER_SIZE_MODIFIERS, SLIDER_ORIENTATIONS, SLIDER_TOOLTIP_MODES } from './SliderConstants';
+import { SLIDER_SIZE_MODIFIERS, SLIDER_ORIENTATIONS, SLIDER_READOUT_MODES } from './SliderConstants';
 
 import SliderDefaultTemplate from './SliderDefault.story.vue';
 import SliderVariantsTemplate from './SliderVariants.story.vue';
@@ -23,9 +23,8 @@ export const argsData = {
   labelHidden: false,
   name: '',
   largeStep: 10,
-  marks: false,
   fillOrigin: null,
-  tooltip: 'never',
+  readout: 'always',
   'onUpdate:modelValue': action('update:modelValue'),
   onChange: action('change'),
   onFocus: action('focus'),
@@ -131,14 +130,14 @@ export const argTypesData = {
       defaultValue: { summary: 'null' },
     },
   },
-  tooltip: {
-    description: 'Controls the value tooltip: always visible, never shown, or shown only while hovering, dragging, or focusing that thumb.',
+  readout: {
+    description: 'Controls the live value readout: always visible, never shown, or shown only while hovering, dragging, or focusing that thumb.',
     control: { type: 'select' },
-    options: SLIDER_TOOLTIP_MODES,
+    options: SLIDER_READOUT_MODES,
     table: {
       category: 'props',
       type: { summary: 'String' },
-      defaultValue: { summary: 'never' },
+      defaultValue: { summary: 'always' },
     },
   },
   showTicks: {
@@ -210,12 +209,12 @@ export const argTypesData = {
     },
   },
   marks: {
-    description: 'Text annotations below the track. true = one mark per tick; a Number[] generates marks with auto-text; a { value, text }[] uses custom text.',
+    description: 'Text annotations below the track. true = one mark per tick; a Number[] generates marks with auto-text; a { value, text }[] uses custom text; false = none.',
     control: { type: 'object' },
     table: {
       category: 'props',
       type: { summary: 'Boolean | Number[] | { value: Number, text: String }[]' },
-      defaultValue: { summary: 'false' },
+      defaultValue: { summary: '[min, max] (start and end)' },
     },
   },
   labelClass: {
@@ -230,13 +229,23 @@ export const argTypesData = {
     control: 'text',
     table: { category: 'props' },
   },
-  getAriaValueText: {
-    description: 'Function returning aria-valuetext for a thumb. Signature: (value, index) => string.',
+  getValueText: {
+    description: 'Function formatting a value for the readout, marks, and aria-valuetext. Signature: (value, index?) => string. Takes precedence over prefix/suffix.',
     control: null,
     table: {
       category: 'props',
       type: { summary: 'Function' },
     },
+  },
+  prefix: {
+    description: 'Text prepended to the raw number wherever it\'s displayed. Ignored when getValueText is set.',
+    control: 'text',
+    table: { category: 'props' },
+  },
+  suffix: {
+    description: 'Text appended to the raw number wherever it\'s displayed. Ignored when getValueText is set.',
+    control: 'text',
+    table: { category: 'props' },
   },
 
   // Directives
