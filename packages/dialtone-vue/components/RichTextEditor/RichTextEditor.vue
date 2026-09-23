@@ -717,7 +717,6 @@ export default {
               if (self.allowLineBreaks) {
                 return false;
               }
-              self.forceLinkifyPendingText();
               self.$emit('enter');
               return true;
             },
@@ -1105,13 +1104,15 @@ export default {
      * TipTap's built-in link autolink plugin only commits a link mark once a
      * trailing boundary character (space, newline, etc.) is typed after the URL
      * (ueberdosis/tiptap#3225), so a URL sitting at the very end of the input never
-     * gets linkified before send (ueberdosis/tiptap#783). There's no built-in
+     * gets linkified on its own (ueberdosis/tiptap#783). There's no built-in
      * "flush" command for this, so reuse linkifyjs -- the same link-detection
      * engine autolink and the paste rule already use internally -- to mark any
      * URL/email matches autolink hasn't caught yet, honoring whatever
      * protocols/defaultProtocol/isAllowedUri/shouldAutoLink the link extension was
-     * configured with. Called on Enter-to-send and on blur, since a consumer's
-     * own send button triggers a blur before it reads the editor's content.
+     * configured with. Dialtone has no generic "send" event to hook, so this is
+     * not called automatically -- consumers should call it themselves (e.g. right
+     * before reading the editor's content to send it) to catch a trailing URL
+     * with nothing typed after it.
      */
     forceLinkifyPendingText () {
       if (!this.editor || !this.link || this.customLink) {
@@ -1405,7 +1406,6 @@ export default {
 
       // The editor isn't focused anymore.
       this.editor.on('blur', ({ event }) => {
-        this.forceLinkifyPendingText();
         this.$emit('blur', event);
       });
 

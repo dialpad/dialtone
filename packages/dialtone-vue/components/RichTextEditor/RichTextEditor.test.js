@@ -1835,31 +1835,19 @@ describe('DtRichTextEditor tests', () => {
 
         expect(wrapper.vm.getOutput()).not.toContain('href=');
       });
-    });
 
-    describe('Enter key triggers forceLinkifyPendingText', () => {
-      it('should linkify a bare URL before emitting enter when allowLineBreaks is false', async () => {
-        await wrapper.setProps({ link: true, outputFormat: 'html', allowLineBreaks: false });
+      it('should not run automatically on Enter or blur, it must be called explicitly', async () => {
+        await wrapper.setProps({ allowLineBreaks: false });
         wrapper.vm.editor.commands.setContent('www.google.com');
         wrapper.vm.editor.commands.focus();
 
         wrapper.vm.editor.commands.keyboardShortcut('Enter');
-        await wrapper.vm.$nextTick();
-
-        expect(wrapper.emitted('enter')).toBeTruthy();
-        expect(wrapper.vm.getOutput()).toContain('href="http://www.google.com"');
-      });
-    });
-
-    describe('Blur triggers forceLinkifyPendingText', () => {
-      it('should linkify a bare URL before emitting blur, for consumers that send via a button', async () => {
-        await wrapper.setProps({ link: true, outputFormat: 'html', allowLineBreaks: true });
-        wrapper.vm.editor.commands.setContent('www.google.com');
         wrapper.vm.editor.view.dom.dispatchEvent(new FocusEvent('blur'));
         await wrapper.vm.$nextTick();
 
+        expect(wrapper.emitted('enter')).toBeTruthy();
         expect(wrapper.emitted('blur')).toBeTruthy();
-        expect(wrapper.vm.getOutput()).toContain('href="http://www.google.com"');
+        expect(wrapper.vm.getOutput()).not.toContain('href=');
       });
     });
 
