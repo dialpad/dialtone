@@ -222,7 +222,7 @@ export default {
     },
 
     /**
-     * Used to customize the start button
+     * Used to customize the start button (aka left)
      */
     startButtonClass: {
       type: [String, Array, Object],
@@ -423,7 +423,7 @@ export default {
     },
 
     /**
-     * Used to customize the end button
+     * Used to customize the end button (aka right)
      */
     endButtonClass: {
       type: [String, Array, Object],
