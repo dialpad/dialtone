@@ -1,0 +1,24 @@
+apps/dialtone-documentation/docs/dialtone/whats-new/posts/2026-9-16.md
+  s_dc177bf0a9429d::t_24664dc5a9b109 83,573-616
+  s_dc177bf0a9429d::t_33427257e496b9 268-275,281-307,309,315-329,333-349,355-374,376,404-405,407,421,423-454,462,486,488,490,497,499,501,508,515-517,572
+  s_dc177bf0a9429d::t_33f7ccabac8b85 80-82
+  s_dc177bf0a9429d::t_ce086c9a0a4331 84
+  s_dc177bf0a9429d::t_6e22ab11361c8e 266-267
+  s_dc177bf0a9429d::t_a575c8405fb124 617-618
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "951e131f312d4ad83f512b208935a3869488e051",
+  "prompts": {},
+  "sessions": {
+    "s_dc177bf0a9429d": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a09cd9-0610-7db3-ae84-4054925281bf",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

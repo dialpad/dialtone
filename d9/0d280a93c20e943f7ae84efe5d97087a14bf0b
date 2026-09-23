@@ -1,0 +1,36 @@
+apps/dialtone-documentation/docs/.vuepress/theme/composables/useSidebarItems.js
+  s_3ba2e4878f4a8f::t_61ee2c263b1d48 4-7,10-13
+apps/dialtone-documentation/docs/.vuepress/views/UiKitsOverview.vue
+  s_3ba2e4878f4a8f::t_66f8660bc55bfb 59-64
+apps/dialtone-documentation/docs/.vuepress/theme/index.js
+  s_3ba2e4878f4a8f::t_70d4d5f8b2e6fb 229-231,235-240,243-244,246-251
+apps/dialtone-documentation/docs/.vuepress/theme/assets/less/dialtone-docs.less
+  s_3ba2e4878f4a8f::t_40bc861cc8819c 288
+apps/dialtone-documentation/scripts/generate-raw-markdown.mjs
+  s_3ba2e4878f4a8f::t_21eccc8a08aebb 322-332,334,631,641
+apps/dialtone-documentation/docs/_data/site-nav.json
+  s_3ba2e4878f4a8f::t_f717c1d9d259ee 2-129,131-248,250-263,265-267,269-911,913-1015,1017-1020,1022
+apps/dialtone-documentation/docs/.vuepress/theme/layouts/Layout.vue
+  s_3ba2e4878f4a8f::t_2b8049d52230a5 103-104,113,128,145,147-148
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "d90d280a93c20e943f7ae84efe5d97087a14bf0b",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_3ba2e4878f4a8f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019eb88b-fafb-7873-8ce2-4e147954337e",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
