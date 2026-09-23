@@ -1110,7 +1110,8 @@ export default {
      * engine autolink and the paste rule already use internally -- to mark any
      * URL/email matches autolink hasn't caught yet, honoring whatever
      * protocols/defaultProtocol/isAllowedUri/shouldAutoLink the link extension was
-     * configured with.
+     * configured with. Called on Enter-to-send and on blur, since a consumer's
+     * own send button triggers a blur before it reads the editor's content.
      */
     forceLinkifyPendingText () {
       if (!this.editor || !this.link || this.customLink) {
@@ -1404,6 +1405,7 @@ export default {
 
       // The editor isn't focused anymore.
       this.editor.on('blur', ({ event }) => {
+        this.forceLinkifyPendingText();
         this.$emit('blur', event);
       });
 

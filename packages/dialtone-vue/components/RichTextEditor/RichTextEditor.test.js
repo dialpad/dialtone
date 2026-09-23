@@ -1851,6 +1851,18 @@ describe('DtRichTextEditor tests', () => {
       });
     });
 
+    describe('Blur triggers forceLinkifyPendingText', () => {
+      it('should linkify a bare URL before emitting blur, for consumers that send via a button', async () => {
+        await wrapper.setProps({ link: true, outputFormat: 'html', allowLineBreaks: true });
+        wrapper.vm.editor.commands.setContent('www.google.com');
+        wrapper.vm.editor.view.dom.dispatchEvent(new FocusEvent('blur'));
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.emitted('blur')).toBeTruthy();
+        expect(wrapper.vm.getOutput()).toContain('href="http://www.google.com"');
+      });
+    });
+
     describe('Blockquote keyboard shortcut functionality', () => {
       describe('When Mod+Shift+B is pressed and blockquote is enabled', () => {
         it('should toggle blockquote formatting', async () => {
