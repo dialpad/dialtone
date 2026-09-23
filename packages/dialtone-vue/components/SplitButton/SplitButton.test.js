@@ -658,13 +658,31 @@ describe('DtSplitButton Tests', function () {
 
   describe('Extendability Tests', () => {
     describe('When a class is provided', () => {
-      it('should include the class', () => {
-        mockAttrs = { class: MOCK_ROOT_CLASS }
+      it('applies the class only to the root', () => {
+        mockAttrs = { class: MOCK_ROOT_CLASS };
 
         updateWrapper();
 
-        expect(wrapper.classes().includes(MOCK_ROOT_CLASS)).toBe(true);
+        expect(wrapper.classes()).toContain(MOCK_ROOT_CLASS);
+        expect(startButton.classes()).not.toContain(MOCK_ROOT_CLASS);
+        expect(endButton.classes()).not.toContain(MOCK_ROOT_CLASS);
       });
+    });
+
+    it('applies each button class only to its button', () => {
+      mockProps = {
+        startButtonClass: 'custom-start',
+        endButtonClass: 'custom-end',
+      };
+
+      updateWrapper();
+
+      expect(startButton.classes()).toContain('custom-start');
+      expect(startButton.classes()).not.toContain('custom-end');
+      expect(endButton.classes()).toContain('custom-end');
+      expect(endButton.classes()).not.toContain('custom-start');
+      expect(wrapper.classes()).not.toContain('custom-start');
+      expect(wrapper.classes()).not.toContain('custom-end');
     });
 
     describe('When startLeadingClass is provided', () => {

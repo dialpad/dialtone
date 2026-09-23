@@ -113,6 +113,10 @@ export const argTypesData = {
     control: 'boolean',
   },
 
+  startButtonClass: {
+    control: 'text',
+  },
+
   startDisabled: {
     control: 'boolean',
   },
@@ -132,6 +136,10 @@ export const argTypesData = {
 
   endActive: {
     control: 'boolean',
+  },
+
+  endButtonClass: {
+    control: 'text',
   },
 
   endDisabled: {
