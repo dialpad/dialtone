@@ -1804,6 +1804,85 @@ describe('DtRichTextEditor tests', () => {
       });
     });
 
+    describe('forceLinkifyPendingText method', () => {
+      beforeEach(async () => {
+        await wrapper.setProps({ link: true, outputFormat: 'html' });
+      });
+
+      it('should linkify a bare URL at the end of the content with no trailing space', async () => {
+        wrapper.vm.editor.commands.setContent('www.google.com');
+        wrapper.vm.forceLinkifyPendingText();
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.vm.getOutput()).toContain('href="http://www.google.com"');
+      });
+
+      it('should not modify content that is already linkified', async () => {
+        wrapper.vm.editor.commands.setContent('<p><a href="https://www.google.com">www.google.com</a></p>');
+        const before = wrapper.vm.getOutput();
+
+        wrapper.vm.forceLinkifyPendingText();
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.vm.getOutput()).toBe(before);
+      });
+
+      it('should do nothing when customLink is enabled', async () => {
+        await wrapper.setProps({ customLink: true });
+        wrapper.vm.editor.commands.setContent('www.google.com');
+        wrapper.vm.forceLinkifyPendingText();
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.vm.getOutput()).not.toContain('href=');
+      });
+
+      it('should not run automatically on Enter or blur, it must be called explicitly', async () => {
+        await wrapper.setProps({ allowLineBreaks: false });
+        wrapper.vm.editor.commands.setContent('www.google.com');
+        wrapper.vm.editor.commands.focus();
+
+        wrapper.vm.editor.commands.keyboardShortcut('Enter');
+        wrapper.vm.editor.view.dom.dispatchEvent(new FocusEvent('blur'));
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.emitted('enter')).toBeTruthy();
+        expect(wrapper.emitted('blur')).toBeTruthy();
+        expect(wrapper.vm.getOutput()).not.toContain('href=');
+      });
+
+      it('should not linkify a malformed domain that only looks valid as a prefix', async () => {
+        wrapper.vm.editor.commands.setContent('www.google.comx');
+        wrapper.vm.forceLinkifyPendingText();
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.vm.getOutput()).not.toContain('href=');
+      });
+
+      it('should linkify a URL wrapped in matching parentheses without including them', async () => {
+        wrapper.vm.editor.commands.setContent('(www.google.com)');
+        wrapper.vm.forceLinkifyPendingText();
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.vm.getOutput()).toContain('href="http://www.google.com">www.google.com</a>)');
+      });
+
+      it('should re-link the full range when an existing link is extended without a boundary character', async () => {
+        wrapper.vm.editor.commands.setContent('<p><a href="http://example.co">example.co</a>m</p>');
+        wrapper.vm.forceLinkifyPendingText();
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.vm.getOutput()).toContain('href="http://example.com">example.com</a>');
+      });
+
+      it('should linkify a URL correctly positioned after a hard break', async () => {
+        wrapper.vm.editor.commands.setContent('<p>hi<br>www.google.com</p>');
+        wrapper.vm.forceLinkifyPendingText();
+        await wrapper.vm.$nextTick();
+
+        expect(wrapper.vm.getOutput()).toContain('hi<br><a target="_blank" rel="noopener noreferrer nofollow" class="d-link d-wb-break-all" href="http://www.google.com">www.google.com</a>');
+      });
+    });
+
     describe('Blockquote keyboard shortcut functionality', () => {
       describe('When Mod+Shift+B is pressed and blockquote is enabled', () => {
         it('should toggle blockquote formatting', async () => {

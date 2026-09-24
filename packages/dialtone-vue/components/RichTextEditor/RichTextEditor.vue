@@ -79,6 +79,7 @@ import { CustomTextStyle } from './Extensions/TextStyle/TextStyle';
 import { TextStyleKit } from '@tiptap/extension-text-style';
 import Emoji from './Extensions/Emoji';
 import CustomLink from './Extensions/CustomLink';
+import { forceLinkifyPendingText as flushPendingLinks } from './ForceLinkify';
 import { LinkPhoneNumbers } from './Extensions/LinkPhoneNumbers/LinkPhoneNumbers';
 import ConfigurableImage from './Extensions/Image';
 import DivParagraph from './Extensions/Div';
@@ -1097,6 +1098,21 @@ export default {
       this.editor?.chain()?.focus();
       const link = this.editor.getAttributes('link').href;
       window.open(link, '_blank');
+    },
+
+    /**
+     * See ForceLinkify.js for why this exists: TipTap's built-in link autolink
+     * only commits a link mark once a boundary character follows a URL, so a
+     * trailing URL never gets linkified on its own. Dialtone has no generic
+     * "send" event to hook, so this is a plain public method -- call it
+     * yourself (e.g. right before reading the editor's content to send it).
+     */
+    forceLinkifyPendingText () {
+      if (!this.editor || !this.link || this.customLink) {
+        return;
+      }
+
+      flushPendingLinks(this.editor);
     },
 
 
