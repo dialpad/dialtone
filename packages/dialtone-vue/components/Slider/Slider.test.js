@@ -746,6 +746,17 @@ describe('DtSlider Tests', () => {
       expect(infoSpy).toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
     });
 
+    it('does not crash mounting with a scoped #label slot that indexes into value, in range mode', () => {
+      // The #label slot is documented as scoped with :value — a range-mode
+      // consumer destructuring it (e.g. the shipped 'call duration filter'
+      // Combinator preset: {{ value[0] }}–{{ value[1] }}) used to throw
+      // during hasVisibleLabel's hasSlotContent probe, which called the slot
+      // with no props at all, leaving `value` undefined.
+      mockProps = { label: undefined, modelValue: [20, 70] };
+      mockSlots = { label: '<template #label="{ value }">{{ value[0] }}-{{ value[1] }}</template>' };
+      expect(() => updateWrapper()).not.toThrow();
+    });
+
     it('warns about missing getValueText in range mode, independent of whether a label is set', () => {
       mockProps = { label: 'Price range', modelValue: [20, 70] };
       updateWrapper();

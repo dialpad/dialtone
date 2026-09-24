@@ -612,12 +612,24 @@ const lastCommittedValues = ref([...internalValues.value]);
 
 const isVertical = computed(() => props.orientation === 'vertical');
 
+// Mirrors the update:modelValue payload shape (Number, or Number[] in range
+// mode) so a custom #label slot can render the live value while dragging.
+// Declared here (not further down where currentValue used to live) because
+// hasVisibleLabel below needs it too — the #label slot is documented as
+// scoped with :value, and probing it via hasSlotContent({}) without that
+// scope left `value` undefined inside the slot body, throwing whenever a
+// consumer actually used it (e.g. `{{ value[0] }}`, the exact pattern the
+// 'call duration filter' Combinator preset already ships).
+const currentValue = computed(() => (isRange.value ? [...internalValues.value] : internalValues.value[0]));
+
 // Whether each thumb gets its accessible name from a visible label (prop or
 // slot) rather than a bare aria-label — determines which of the two the
 // native input actually binds. hasSlotContent (not a bare slots.label
 // existence check) so a #label slot that renders nothing — an empty or
 // v-if-false template — doesn't count as providing a name.
-const hasVisibleLabel = computed(() => !!(props.label?.trim() || hasSlotContent(slots.label)));
+const hasVisibleLabel = computed(() => !!(
+  props.label?.trim() || hasSlotContent(slots.label, { value: currentValue.value })
+));
 const sizeClass = computed(() => SLIDER_SIZE_MODIFIERS[String(props.size)] ?? '');
 
 // These form-control ARIA relationship attributes are explicitly forwarded
@@ -632,10 +644,6 @@ const wrapperAttrs = computed(() => {
   const base = removeClassStyleAttrs(attrs);
   return Object.fromEntries(Object.entries(base).filter(([key]) => !THUMB_ARIA_KEYS.includes(key)));
 });
-
-// Mirrors the update:modelValue payload shape (Number, or Number[] in range
-// mode) so a custom #label slot can render the live value while dragging.
-const currentValue = computed(() => (isRange.value ? [...internalValues.value] : internalValues.value[0]));
 
 // ─── Sync controlled modelValue → internalValues ──────────────────────────────
 
@@ -1515,7 +1523,10 @@ watchEffect(() => {
   // own aria-labelledby/aria-label fallback logic above) — a consumer using
   // that standard pattern shouldn't be warned either.
   const hasAccessibleName = !!(
-    props.label?.trim() || hasSlotContent(slots.label) || attrs['aria-label'] || attrs['aria-labelledby']
+    props.label?.trim() ||
+    hasSlotContent(slots.label, { value: currentValue.value }) ||
+    attrs['aria-label'] ||
+    attrs['aria-labelledby']
   );
   if (!hasAccessibleName) {
     console.info(
