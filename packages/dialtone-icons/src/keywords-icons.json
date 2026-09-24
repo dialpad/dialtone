@@ -432,6 +432,12 @@
         "ignore",
         "dismiss"
       ],
+      "chat-rejected": [
+        "Chat",
+        "decline",
+        "ignore",
+        "dismiss"
+      ],
       "contacts": [
         "address",
         "people",
@@ -442,6 +448,12 @@
       ],
       "digital-whisper": [
         "private"
+      ],
+      "email-rejected": [
+        "Email",
+        "decline",
+        "ignore",
+        "dismiss"
       ],
       "forward": [
         "send",
