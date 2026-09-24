@@ -220,7 +220,7 @@ export const argTypesData = {
     },
   },
   largeStep: {
-    description: 'Number of steps to move on Page Up / Page Down.',
+    description: 'Approximate distance (same units as step) to move on Page Up/Page Down or Shift+Arrow, rounded to a whole number of steps (at least one).',
     control: { type: 'number' },
     table: {
       category: 'props',
