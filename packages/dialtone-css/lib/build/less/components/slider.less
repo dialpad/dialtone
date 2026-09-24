@@ -132,7 +132,13 @@
     block-size: var(--slider-thumb-size);
 
     // Minimum WCAG 2.5.5 touch target via padding
-    padding-block: max(0, calc((var(--dt-spacing-550) - var(--slider-thumb-size)) / 2));
+    // A bare `0` is a <number>, not a <length> — max() can't mix that with the
+    // calc()'s length result, so the whole declaration becomes invalid at
+    // computed-value time and silently falls back to 0, defeating the WCAG
+    // 2.5.5 touch target this is meant to guarantee. calc(--dt-spacing-base * 0)
+    // is a zero typed as a length (same pattern the sm/lg size modifiers below
+    // use for their own --dt-spacing-base arithmetic).
+    padding-block: max(calc(var(--dt-spacing-base) * 0), calc((var(--dt-spacing-550) - var(--slider-thumb-size)) / 2));
     /* stylelint-disable-next-line meowtec/no-px */
     overflow-clip-margin: 32px;
 }
@@ -423,7 +429,9 @@
         flex: 1;
         flex-direction: column;
         padding-block: 0;
-        padding-inline: max(0, calc((var(--dt-spacing-550) - var(--slider-thumb-size)) / 2));
+        // Same bare-number-vs-length max() pitfall as the horizontal
+        // padding-block rule above — see its comment.
+        padding-inline: max(calc(var(--dt-spacing-base) * 0), calc((var(--dt-spacing-550) - var(--slider-thumb-size)) / 2));
         // Marks/readout sit beside the (narrow) vertical control by a fixed,
         // value-independent offset — not the value-dependent inline overflow
         // the horizontal clip above guards against — so there's no equivalent
