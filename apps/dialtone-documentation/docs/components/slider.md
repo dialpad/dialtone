@@ -79,10 +79,10 @@ Emoji or icon-only content works the same way — give it an `aria-label` so the
 <!-- @wrapper -->
 <dt-slider :model-value="50" label="Mood" :marks="false">
   <template #start>
-    <span aria-label="sad">😞</span>
+    <span role="img" aria-label="sad">😞</span>
   </template>
   <template #end>
-    <span aria-label="happy">😄</span>
+    <span role="img" aria-label="happy">😄</span>
   </template>
 </dt-slider>
 ```
@@ -167,10 +167,10 @@ Pass an array of numbers to label positions automatically:
   :marks="[-20, 0, 40]"
 >
   <template #start>
-    <span aria-label="cold">❄️</span>
+    <span role="img" aria-label="cold">❄️</span>
   </template>
   <template #end>
-    <span aria-label="hot">🔥</span>
+    <span role="img" aria-label="hot">🔥</span>
   </template>
 </dt-slider>
 ```
