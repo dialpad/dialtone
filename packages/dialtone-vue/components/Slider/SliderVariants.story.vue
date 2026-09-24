@@ -22,6 +22,8 @@
       <dt-slider
         v-model="rangeValue"
         label="Price range"
+        :marks="[{ value: 0, text: 'Min $0' }, { value: 100, text: 'Max $100' }]"
+        :get-value-text="(value, index) => index === 0 ? `Minimum: $${value}` : `Maximum: $${value}`"
       />
     </section>
 
@@ -208,6 +210,7 @@
       <dt-slider
         :model-value="[20, 80]"
         label="Price range (disabled)"
+        :get-value-text="(value, index) => index === 0 ? `Minimum: $${value}` : `Maximum: $${value}`"
         disabled
       />
     </section>
@@ -227,6 +230,7 @@
           :model-value="[30, 70]"
           label="Range vertical"
           orientation="vertical"
+          :get-value-text="(value, index) => index === 0 ? `Min: ${value}` : `Max: ${value}`"
         />
       </div>
     </section>
@@ -243,6 +247,7 @@
           :min="0"
           :max="120"
           :step="1"
+          :get-value-text="(value, index) => index === 0 ? `Start: ${value} min` : `End: ${value} min`"
         >
           <template #label>
             Call duration filter &middot; {{ durationFilter[0] }}–{{ durationFilter[1] }} min
@@ -393,6 +398,7 @@
           :max="90"
           :step="1"
           :marks="[1, 30, 60, 90]"
+          :get-value-text="(value, index) => index === 0 ? `From day ${value}` : `To day ${value}`"
         >
           <template #label>
             Auto-delete recordings after &middot; {{ retentionRange[0] }}–{{ retentionRange[1] }} days
@@ -476,7 +482,6 @@ export default {
       readoutAlwaysValue: ref(48),
       readoutInteractionValue: ref(48),
       invertedValue: ref(40),
-      panValue: ref(50),
       percentageValue: ref(0),
       verticalValue: ref(60),
       hiddenLabelValue: ref(50),

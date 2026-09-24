@@ -3,7 +3,7 @@ type: reference
 category: reference
 keywords: [accessibility, a11y, wcag, aria, focus-management, keyboard-navigation, screen-reader, data-qa, focus-visible, reduced-motion]
 ai_summary: Accessibility checklist for Dialtone components — ARIA patterns, focus management, keyboard navigation, and CSS utilities.
-last_updated: 2026-03-09
+last_updated: 2026-09-24
 related_packages: [dialtone-vue, dialtone-css]
 ---
 
@@ -37,6 +37,15 @@ For the full accessibility guide with P.O.U.R. principles and role-specific resp
 - `aria-checked` as string on DtToggle (supports `'mixed'` for indeterminate)
 - `aria-disabled` as string attribute (not just the `disabled` HTML prop)
 - Validation messages connected via `aria-describedby`
+
+### Sliders (DtSlider)
+
+- Each thumb is a native `<input type="range">` (implicit `role="slider"`, native `aria-valuemin`/`aria-valuemax`/`aria-valuenow`) — range mode renders two native inputs, not a single custom control
+- `aria-labelledby` (visible `label` prop or non-empty `#label` slot) or `aria-label` (bare `$attrs['aria-label']`) — never both; a dev-only `console.info` warns when neither resolves to an accessible name
+- `aria-valuetext` is set dynamically per thumb via `getValueText(value, index)` when provided (falls back to `prefix`/`suffix`) — required in range mode to give each thumb a distinct description; warned via `console.info` when absent
+- `aria-orientation="vertical"` mirrors the `orientation` prop; horizontal is the implicit native default
+- Positioning uses CSS logical properties (`inset-inline-start`, not `left`) so the track/thumb/indicator mirror automatically under `dir="rtl"`; pointer-to-value mapping and the Shift+Arrow/Page Up/Page Down handlers are also direction-aware to match the native `<input>`'s own RTL-flipped Arrow key behavior — plain Arrow/Home/End are handled natively (already RTL-aware) and never intercepted in JS
+- Keyboard-focus-ring visibility is tracked via a synchronous pointer-vs-keyboard modality flag rather than `:focus-visible` alone, since browsers treat range inputs as always focus-visible on click
 
 ### Combobox (DtCombobox)
 

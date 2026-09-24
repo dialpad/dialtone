@@ -112,8 +112,8 @@
           :step="step"
           :disabled="disabled"
           :name="name || undefined"
-          :aria-labelledby="(label || $slots.label) ? labelId : undefined"
-          :aria-label="(!label && !$slots.label) ? $attrs['aria-label'] : undefined"
+          :aria-labelledby="hasVisibleLabel ? labelId : undefined"
+          :aria-label="hasVisibleLabel ? undefined : attrs['aria-label']"
           :aria-valuetext="formatValue(val, i)"
           :aria-orientation="isVertical ? 'vertical' : undefined"
           :style="thumbPositionStyle(val)"
@@ -137,7 +137,7 @@
         <!-- Plain, CSS-positioned text — deliberately not a floating tooltip/portal.
              It sits in the same row as marks, positioned by the same value-to-percent
              math, so it never needs JS measurement or a reposition loop that could
-             desync from the thumb (see DLT-1974 investigation notes). -->
+             desync from the thumb. -->
         <template v-if="readout !== 'never'">
           <div
             v-for="(val, i) in internalValues"
@@ -182,9 +182,9 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick } from 'vue';
+import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick, useSlots, useAttrs } from 'vue';
 import { DtText } from '@/components/Text';
-import { getUniqueString, removeClassStyleAttrs } from '@/common/utils';
+import { getUniqueString, hasSlotContent, removeClassStyleAttrs } from '@/common/utils';
 import {
   SLIDER_ORIENTATIONS,
   SLIDER_SIZE_MODIFIERS,
@@ -197,10 +197,12 @@ defineOptions({ name: 'DtSlider', inheritAttrs: false });
 const props = defineProps({
   /**
    * The current value. A number enables single-thumb mode; an array enables range mode.
+   * @values Number, [Number, Number]
    */
   modelValue: {
     type: [Number, Array],
     default: undefined,
+    validator: (value) => !Array.isArray(value) || value.length === 2,
   },
 
   /**
@@ -345,13 +347,16 @@ const props = defineProps({
   },
 
   /**
-   * A function returning the user-facing text for a value — shared by the readout, marks,
-   * and each thumb's aria-valuetext, so all three always agree on how a number is displayed.
-   * Signature: (value: number, index?: number) => string. index is the thumb index for a
-   * thumb's own value (use it to differentiate thumbs in range mode, e.g. "Minimum: 20"),
-   * and is omitted when formatting a mark, since marks aren't tied to a specific thumb.
-   * Takes precedence over prefix/suffix when set. The default (null) uses the raw number
-   * (optionally wrapped in prefix/suffix), which must be i18n-safe for your context.
+   * A function returning the user-facing text for a value — shared by the readout and
+   * each thumb's aria-valuetext, so the two always agree on how a number is displayed.
+   * Signature: (value: number, index?: number) => string. index is the thumb index (use
+   * it to differentiate thumbs in range mode, e.g. "Minimum: 20" / "Maximum: 70").
+   * Deliberately NOT used for a mark's own auto-generated text — a mark isn't tied to
+   * either thumb, so there's no index this function could meaningfully receive; marks use
+   * prefix/suffix instead (see the marks prop), or their own explicit text override.
+   * Takes precedence over prefix/suffix for the readout and aria-valuetext when set. The
+   * default (null) uses the raw number (optionally wrapped in prefix/suffix), which must
+   * be i18n-safe for your context.
    */
   getValueText: {
     type: Function,
@@ -359,8 +364,9 @@ const props = defineProps({
   },
 
   /**
-   * Text prepended to the raw number wherever it's displayed (readout, marks, aria-valuetext)
-   * — e.g. prefix="$" for currency. Ignored when getValueText is set.
+   * Text prepended to the raw number wherever it's displayed — e.g. prefix="$" for
+   * currency. Always applied to marks. Ignored by the readout and aria-valuetext when
+   * getValueText is set (see getValueText).
    */
   prefix: {
     type: String,
@@ -368,8 +374,9 @@ const props = defineProps({
   },
 
   /**
-   * Text appended to the raw number wherever it's displayed (readout, marks, aria-valuetext)
-   * — e.g. suffix="%" for a percentage. Ignored when getValueText is set.
+   * Text appended to the raw number wherever it's displayed — e.g. suffix="%" for a
+   * percentage. Always applied to marks. Ignored by the readout and aria-valuetext when
+   * getValueText is set (see getValueText).
    */
   suffix: {
     type: String,
@@ -420,7 +427,8 @@ const props = defineProps({
   /**
    * Controls the live value readout shown alongside the track for each thumb: always
    * visible, never shown, or shown only while hovering, dragging, or focusing that thumb.
-   * Text is formatted the same way as marks — via getValueText, or prefix/suffix.
+   * Text is formatted via getValueText when set, otherwise prefix/suffix — same as each
+   * thumb's aria-valuetext, but unlike a mark's own auto-generated text (see marks).
    * @values always, never, interaction
    */
   readout: {
@@ -434,8 +442,11 @@ const props = defineProps({
    * Defaults to min and max (start and end). Pass true to mark every tick position
    * automatically (uses tickInterval or step to determine positions) instead. Pass an
    * array for explicit control: each entry is either a plain number (text defaults to the
-   * number itself) or an object with a required value and optional text override.
-   * Pass false to render no marks at all. Example: [{ value: 0, text: 'Neutral' }, -100, 100]
+   * number itself, formatted with prefix/suffix — NOT getValueText, which has no
+   * meaningful index for a position that isn't tied to either thumb) or an object with a
+   * required value and optional text override, which is used as-is regardless of
+   * prefix/suffix/getValueText. Pass false to render no marks at all.
+   * Example: [{ value: 0, text: 'Neutral' }, -100, 100]
    */
   marks: {
     type: [Array, Boolean],
@@ -476,6 +487,8 @@ const emit = defineEmits([
 
 // ─── Internal state ───────────────────────────────────────────────────────────
 
+const slots = useSlots();
+const attrs = useAttrs();
 const labelId = `slider-label-${getUniqueString()}`;
 const controlRef = ref(null);
 const thumbRefs = ref([]);
@@ -505,17 +518,44 @@ function normalizeRangeValues(values) {
   return values;
 }
 
-const internalValues = ref(
-  Array.isArray(props.modelValue)
-    ? normalizeRangeValues([...props.modelValue])
-    : props.modelValue !== undefined
-      ? [props.modelValue]
-      : [props.min],
-);
+function clampToRange(val) {
+  return Math.min(props.max, Math.max(props.min, val));
+}
+
+// The public contract (see modelValue's validator) is a number or a
+// length-2 array. Nothing enforces that at runtime, though — a controlled
+// value out of [min, max], or an array of some other length, would
+// otherwise flow straight into internalValues and split the native input
+// (browser-clamped), aria-valuetext (unclamped), and visual thumb (also
+// unclamped) into three disagreeing states, or render an unmanaged extra
+// thumb. This is the single place both mount and the modelValue watcher
+// funnel through, so both get the same guarantees: every value clamped to
+// [min, max], and an array normalized to at most two entries (a longer
+// array is truncated rather than spawning extra thumbs; a single-entry
+// array degrades to that one clamped value rather than crashing).
+function normalizeModelValue(value) {
+  let raw;
+  if (Array.isArray(value)) {
+    raw = value.length >= 2 ? [value[0], value[1]] : value.length === 1 ? [value[0]] : [props.min];
+  } else {
+    raw = value !== undefined && value !== null ? [value] : [props.min];
+  }
+  const clamped = raw.map(clampToRange);
+  return clamped.length === 2 ? normalizeRangeValues(clamped) : clamped;
+}
+
+const internalValues = ref(normalizeModelValue(props.modelValue));
 
 const lastCommittedValues = ref([...internalValues.value]);
 
 const isVertical = computed(() => props.orientation === 'vertical');
+
+// Whether each thumb gets its accessible name from a visible label (prop or
+// slot) rather than a bare aria-label — determines which of the two the
+// native input actually binds. hasSlotContent (not a bare slots.label
+// existence check) so a #label slot that renders nothing — an empty or
+// v-if-false template — doesn't count as providing a name.
+const hasVisibleLabel = computed(() => !!(props.label || hasSlotContent(slots.label)));
 const sizeClass = computed(() => SLIDER_SIZE_MODIFIERS[String(props.size)] ?? '');
 
 // Mirrors the update:modelValue payload shape (Number, or Number[] in range
@@ -528,27 +568,59 @@ watch(
   () => props.modelValue,
   (newVal) => {
     if (newVal === undefined || newVal === null) return;
-    const isInvertedPair = Array.isArray(newVal) && newVal.length === 2 && newVal[0] > newVal[1];
-    const next = Array.isArray(newVal) ? normalizeRangeValues([...newVal]) : [newVal];
+    const next = normalizeModelValue(newVal);
     const current = internalValues.value;
     if (next.length !== current.length || next.some((v, i) => v !== current[i])) {
       internalValues.value = next;
+      // An externally-driven value is already "committed" as far as this
+      // component is concerned — without this, lastCommittedValues stays
+      // stale, and the next blur (even with zero further user interaction)
+      // sees a spurious diff against it and fires a false change event.
+      lastCommittedValues.value = [...next];
     }
-    // Correct the parent's own v-model source, not just our local render —
-    // otherwise a consumer reading modelValue directly (not just watching
-    // our rendered output) sees a stale, still-inverted pair indefinitely.
-    // Safe against feedback loops: the corrected pair is never itself
-    // inverted, so this re-triggers the watcher at most once.
-    if (isInvertedPair) {
-      emit('update:modelValue', [...next]);
+    // normalizeModelValue can rewrite what was actually passed in — swapping
+    // an inverted pair, clamping an out-of-[min,max] value, or truncating an
+    // invalid array length — and that correction must reach the parent's own
+    // v-model source, not just our local render, or a consumer reading
+    // modelValue directly stays silently out of sync with what's rendered.
+    // Safe against feedback loops: normalizeModelValue is idempotent, so a
+    // corrected emission re-triggers this watcher at most once, and that
+    // second pass is always a no-op.
+    const incoming = Array.isArray(newVal) ? newVal : [newVal];
+    const needsCorrection = next.length !== incoming.length || next.some((v, i) => v !== incoming[i]);
+    if (needsCorrection) {
+      emit('update:modelValue', Array.isArray(newVal) ? [...next] : next[0]);
     }
   },
   { deep: true },
 );
 
+// A consumer can narrow [min, max] (or widen/shift it) without touching
+// modelValue at all — the watcher above never fires for that, so the
+// current value(s) would otherwise silently drift out of bounds the same
+// three-way way (native input clamps, aria-valuetext and the visual thumb
+// don't). Re-clamping here closes that gap; it deliberately doesn't re-run
+// full normalizeModelValue (array-length truncation, inversion) since min/
+// max changing isn't a signal that the array shape itself is now invalid.
+watch(
+  () => [props.min, props.max],
+  () => {
+    const next = internalValues.value.map(clampToRange);
+    if (next.some((v, i) => v !== internalValues.value[i])) {
+      internalValues.value = next;
+      lastCommittedValues.value = [...next];
+      emit('update:modelValue', isRange.value ? [...next] : next[0]);
+    }
+  },
+);
+
 // ─── Computed visual helpers ──────────────────────────────────────────────────
 
 function thumbPercent(val) {
+  // A degenerate min === max range has no meaningful position — avoid a
+  // division by zero that would otherwise produce NaN and corrupt every
+  // positioning/collision calculation downstream.
+  if (props.max === props.min) return 0;
   return ((val - props.min) / (props.max - props.min)) * 100;
 }
 
@@ -643,29 +715,44 @@ function findMagneticSnapPoint(rawVal, thumbIndex) {
   return closest;
 }
 
+// Shared by every element positioned along the track (thumb, tick, mark,
+// readout) — they only differ in which transform re-centers them, so the
+// axis branch (insetInlineStart/top vs. bottom for vertical) lives in one
+// place instead of being repeated per element type. insetInlineStart (not
+// left) so the browser itself mirrors horizontal positions under
+// dir="rtl" — see getValueFromPointerEvent and onThumbKeydown for the two
+// other places RTL must be handled explicitly (pointer math and the
+// hard-coded Shift+Arrow keys), since neither goes through CSS.
+function positionStyle(pct, transform) {
+  const style = isVertical.value ? { bottom: `${pct}%` } : { insetInlineStart: `${pct}%` };
+  if (transform) style.transform = transform;
+  return style;
+}
+
 function thumbPositionStyle(val) {
-  const pct = thumbPercent(val);
-  if (isVertical.value) {
-    return { bottom: `${pct}%`, transform: 'translate(-50%, 50%)' };
-  }
-  return { left: `${pct}%`, transform: 'translate(-50%, -50%)' };
+  return positionStyle(thumbPercent(val), isVertical.value ? 'translate(-50%, 50%)' : 'translate(-50%, -50%)');
 }
 
 function tickPositionStyle(val) {
-  const pct = thumbPercent(val);
-  if (isVertical.value) {
-    return { bottom: `${pct}%`, transform: 'translateY(50%)' };
-  }
-  return { left: `${pct}%`, transform: 'translateX(-50%)' };
+  return positionStyle(thumbPercent(val), isVertical.value ? 'translateY(50%)' : 'translateX(-50%)');
 }
 
-// Shared by the readout, marks (rendered from a bare number, not an explicit
-// text override), and each thumb's aria-valuetext, so all three always agree
-// on how a value is displayed. index is omitted for marks — they aren't tied
-// to a specific thumb — and getValueText simply ignores an argument it wasn't
-// written to use.
+// Shared by the readout and each thumb's aria-valuetext, so the two always
+// agree on how a value is displayed. Deliberately NOT used for a mark's own
+// auto-generated text — see formatMarkValue below.
 function formatValue(value, index) {
   if (props.getValueText) return props.getValueText(value, index);
+  return `${props.prefix}${value}${props.suffix}`;
+}
+
+// A mark isn't tied to either thumb, so unlike formatValue there's no
+// meaningful index to pass getValueText — that function's whole purpose is
+// letting a dual-thumb slider give each thumb a *different* meaning (e.g.
+// "Minimum"/"Maximum"), which has no correct answer for a fixed reference
+// point on the track. Only prefix/suffix apply here, same as a bare number
+// would get; anything more specific belongs in that mark's own explicit
+// `text`, which bypasses this function entirely (see computedMarks below).
+function formatMarkValue(value) {
   return `${props.prefix}${value}${props.suffix}`;
 }
 
@@ -682,17 +769,13 @@ const computedMarks = computed(() => {
   }
   return source.map((item) => {
     const value = typeof item === 'number' ? item : item.value;
-    const text = typeof item === 'number' ? formatValue(item) : (item.text ?? formatValue(value));
-    const pct = (value - props.min) / (props.max - props.min) * 100;
-    return { text, pct };
+    const text = typeof item === 'number' ? formatMarkValue(item) : (item.text ?? formatMarkValue(value));
+    return { text, pct: thumbPercent(value) };
   });
 });
 
-function markStyle (pct) {
-  if (isVertical.value) {
-    return { bottom: `${pct}%` };
-  }
-  return { left: `${pct}%` };
+function markStyle(pct) {
+  return positionStyle(pct);
 }
 
 const computedTickValues = computed(() => {
@@ -713,7 +796,7 @@ const indicatorStyle = computed(() => {
     if (isVertical.value) {
       return { bottom: `${loP}%`, height: `${hiP - loP}%` };
     }
-    return { left: `${loP}%`, width: `${hiP - loP}%` };
+    return { insetInlineStart: `${loP}%`, width: `${hiP - loP}%` };
   }
 
   const pct = thumbPercent(internalValues.value[0] ?? props.min);
@@ -725,7 +808,7 @@ const indicatorStyle = computed(() => {
     if (isVertical.value) {
       return { bottom: `${startPct}%`, height: `${sizePct}%` };
     }
-    return { left: `${startPct}%`, width: `${sizePct}%` };
+    return { insetInlineStart: `${startPct}%`, width: `${sizePct}%` };
   }
 
   if (isVertical.value) {
@@ -734,8 +817,8 @@ const indicatorStyle = computed(() => {
       : { bottom: '0', height: `${pct}%` };
   }
   return props.inverted
-    ? { right: '0', width: `${100 - pct}%` }
-    : { left: '0', width: `${pct}%` };
+    ? { insetInlineEnd: '0', width: `${100 - pct}%` }
+    : { insetInlineStart: '0', width: `${pct}%` };
 });
 
 // ─── Value update ─────────────────────────────────────────────────────────────
@@ -796,6 +879,14 @@ function commitIfChanged() {
 
 // ─── Pointer drag ─────────────────────────────────────────────────────────────
 
+// True when the control's resolved text direction is RTL — read live off
+// the DOM (not a prop) since dir is ambient, inherited from any ancestor.
+// Only meaningful for horizontal orientation: vertical positioning runs on
+// the block axis, which bidi direction doesn't affect.
+function isRtl() {
+  return !!controlRef.value && getComputedStyle(controlRef.value).direction === 'rtl';
+}
+
 function getValueFromPointerEvent(event) {
   const rect = controlRef.value.getBoundingClientRect();
   let pct;
@@ -803,6 +894,11 @@ function getValueFromPointerEvent(event) {
     pct = 1 - (event.clientY - rect.top) / rect.height;
   } else {
     pct = (event.clientX - rect.left) / rect.width;
+    // The visual track is positioned with insetInlineStart, so the browser
+    // already mirrors it under dir="rtl" — min renders on the physical right
+    // instead of the left. clientX is always a physical coordinate, so the
+    // pointer-to-value mapping has to mirror the same way by hand.
+    if (isRtl()) pct = 1 - pct;
   }
   pct = Math.min(1, Math.max(0, pct));
   return props.min + pct * (props.max - props.min);
@@ -842,8 +938,17 @@ function onPointerDown(event) {
   // browsers treat range inputs as always focus-visible on click, unlike
   // buttons/links. focus() dispatches its 'focus' event synchronously, so
   // this flag is read and cleared before any other code runs.
-  isPointerFocus = true;
-  thumbRefs.value[idx]?.focus();
+  //
+  // Only set it — and only call focus() — when the thumb isn't already the
+  // active element: focus() on an already-focused element fires no focus
+  // event at all, so the flag would never get cleared and would corrupt
+  // the next *real* keyboard focus, which is exactly the modality it's
+  // meant to distinguish.
+  const thumbEl = thumbRefs.value[idx];
+  if (thumbEl && document.activeElement !== thumbEl) {
+    isPointerFocus = true;
+    thumbEl.focus();
+  }
 }
 
 function onPointerMove(event) {
@@ -884,16 +989,46 @@ function onThumbInput(i, event) {
   updateThumbValue(i, Number(event.target.value));
 }
 
+// +1/-1/0 for a largeStep nudge, or 0 for any other key. increaseKey/
+// decreaseKey are resolved by the caller (onThumbKeydown) rather than here,
+// so this stays a flat, low-complexity lookup — see the comment there for
+// why they're sometimes 'ArrowLeft'/'ArrowRight' and sometimes swapped.
+function largeStepDelta(key, shiftKey, increaseKey, decreaseKey) {
+  if (key === 'PageUp') return 1;
+  if (key === 'PageDown') return -1;
+  if (!shiftKey) return 0;
+  if (key === 'ArrowUp' || key === increaseKey) return 1;
+  if (key === 'ArrowDown' || key === decreaseKey) return -1;
+  return 0;
+}
+
 function onThumbKeydown(i, event) {
-  const { key, shiftKey } = event;
-  if (key === 'PageUp' || (shiftKey && (key === 'ArrowRight' || key === 'ArrowUp'))) {
+  // A pointer click that focused this thumb never fires another 'focus'
+  // event just because the user starts pressing keys afterward — focus()
+  // only fires once per focus session. Without this, arrow-key navigation
+  // right after a click-to-focus would silently never show the ring, even
+  // though the user has unambiguously switched to keyboard input.
+  if (focusedThumbIndex.value !== i) {
+    focusedThumbIndex.value = i;
+  }
+
+  // Left/Right are direction-relative — the native <input type="range">
+  // swaps which one increments under dir="rtl" (per the HTML stepping
+  // algorithm), and plain arrow keys fall through to that native handling
+  // below. largeStepDelta's Shift+Arrow handling must swap the same way, or
+  // Shift+ArrowRight would contradict what plain ArrowRight just did on the
+  // same key. Up/Down and PageUp/PageDown are never direction-relative;
+  // vertical orientation only ever uses Up/Down, so it's unaffected by this.
+  const rtl = !isVertical.value && isRtl();
+  const increaseKey = rtl ? 'ArrowLeft' : 'ArrowRight';
+  const decreaseKey = rtl ? 'ArrowRight' : 'ArrowLeft';
+  const delta = largeStepDelta(event.key, event.shiftKey, increaseKey, decreaseKey);
+  if (delta !== 0) {
     event.preventDefault();
-    updateThumbValue(i, internalValues.value[i] + props.largeStep);
-  } else if (key === 'PageDown' || (shiftKey && (key === 'ArrowLeft' || key === 'ArrowDown'))) {
-    event.preventDefault();
-    updateThumbValue(i, internalValues.value[i] - props.largeStep);
+    updateThumbValue(i, internalValues.value[i] + delta * props.largeStep);
   }
   // Plain arrow keys, Home, End handled natively by <input type="range">
+  // (also RTL-aware natively, so no extra handling needed here).
 }
 
 function onThumbFocus(i, event) {
@@ -935,12 +1070,10 @@ function isReadoutOpen(i) {
 // default to start/end and readout defaults to always, so the readout sits right
 // on top of an end mark near the extremes. When they collide, hide the mark: the
 // readout is the thing actively communicating current state during interaction,
-// matching the convention this was
-// modeled on (firespotter's own percentage slider hides its static markers, never
-// the live value). Pure rect measurement, no continuous polling — recomputed when
-// the value or readout visibility changes (both already reactive) and on control
-// resize, so there's no open-ended loop that could silently stop working the way
-// the old Popper-based tooltip did (see the DLT-1974 investigation notes above).
+// so it takes priority over a fixed reference point. Pure rect measurement, no
+// continuous polling — recomputed when the value or readout visibility changes
+// (both already reactive) and on control resize, so there's no open-ended loop
+// that could silently stop tracking the layout.
 
 const markElRefs = ref([]);
 const readoutElRefs = ref([]);
@@ -1080,8 +1213,16 @@ const readoutVisibility = computed(() => internalValues.value.map((_, i) => isRe
 
 let markCollisionResizeObserver = null;
 
+// Collision detection measures rendered readout/mark widths, which change
+// whenever their formatted TEXT changes — not just when the underlying
+// values do. getValueText/prefix/suffix drive that text (see formatValue),
+// so a consumer swapping getValueText (e.g. a locale change) at unchanged
+// values must still trigger a recheck, or two readouts can end up visibly
+// overlapping (or a stale merged pill can persist) with nothing left to
+// re-trigger the measurement — the ResizeObserver below only watches the
+// control container's own size, not text-driven changes to its children.
 watch(
-  [internalValues, readoutVisibility, computedMarks],
+  [internalValues, readoutVisibility, computedMarks, () => props.getValueText, () => props.prefix, () => props.suffix],
   () => updateCollisions(),
   { deep: true },
 );
@@ -1092,12 +1233,18 @@ onMounted(() => {
     markCollisionResizeObserver = new ResizeObserver(() => updateCollisions());
     markCollisionResizeObserver.observe(controlRef.value);
   }
-  // The initial modelValue never runs through the watch() above — correct
-  // an inverted starting pair back to the parent the same way a later prop
-  // update would, so v-model doesn't stay silently out of sync with what's
-  // rendered.
-  if (Array.isArray(props.modelValue) && props.modelValue.length === 2 && props.modelValue[0] > props.modelValue[1]) {
-    emit('update:modelValue', [...internalValues.value]);
+  // The initial modelValue never runs through the watch() above — correct a
+  // starting value normalizeModelValue had to rewrite (inverted pair,
+  // out-of-bounds clamp, invalid array length) back to the parent the same
+  // way a later prop update would, so v-model doesn't stay silently out of
+  // sync with what's rendered from the very first paint.
+  if (props.modelValue !== undefined && props.modelValue !== null) {
+    const incoming = Array.isArray(props.modelValue) ? props.modelValue : [props.modelValue];
+    const next = internalValues.value;
+    const needsCorrection = next.length !== incoming.length || next.some((v, i) => v !== incoming[i]);
+    if (needsCorrection) {
+      emit('update:modelValue', Array.isArray(props.modelValue) ? [...next] : next[0]);
+    }
   }
 });
 
@@ -1113,7 +1260,13 @@ onMounted(() => {
       '[Dialtone] DtSlider in range mode: provide getValueText to give each thumb a distinct screen-reader description.',
     );
   }
-  if (!props.label && !props.labelHidden) {
+  // labelHidden is a purely visual modifier (see the #label template branch
+  // and the sr-only class above) — it hides label content, it doesn't
+  // create it. Checking it here as if it were its own accessible-name
+  // source let labelHidden-without-label ship with no name and no warning,
+  // while a valid aria-label-only consumer got warned unnecessarily.
+  const hasAccessibleName = !!(props.label || hasSlotContent(slots.label) || attrs['aria-label']);
+  if (!hasAccessibleName) {
     console.info(
       '[Dialtone] DtSlider: provide a label prop (use labelHidden to hide it visually) or aria-label for accessibility.',
     );

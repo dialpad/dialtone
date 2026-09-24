@@ -27,7 +27,7 @@
     //  Component CSS vars — override these for size/state modifiers
     --slider-track-height: var(--dt-size-border-300);         // 4px
     --slider-track-color: var(--dt-color-black-250);
-    --slider-indicator-color: var(--dt-color-purple-500);
+    --slider-indicator-color: var(--dt-slider-color-indicator);
     // Same token an outlined button's text uses — readable against both
     // light and dark canvases, unlike --slider-indicator-color above, whose
     // dark-theme value is tuned for a filled bar's larger area, not text.
@@ -151,18 +151,16 @@
     inset-block-start: 50%;
     transform: translateY(-50%);
     pointer-events: none;
+    // Orientation (below) and dragging state (further below) both override
+    // this variable rather than the transition property directly, so the two
+    // stay a plain same-specificity, same-selector-shape contest resolved by
+    // source order — see the .d-slider--dragging override near the bottom of
+    // this file for why dragging is declared last.
+    --slider-indicator-transition: width 0.1s ease, inset-inline-start 0.1s ease, inset-inline-end 0.1s ease, background-color 0.1s ease;
 
     @media (prefers-reduced-motion: no-preference) {
-        transition: width 0.1s ease, left 0.1s ease, right 0.1s ease, background-color 0.1s ease;
+        transition: var(--slider-indicator-transition);
     }
-}
-
-//  While dragging, the indicator's position is driven by the pointer on
-//  every pointermove — the transition above is for discrete value jumps
-//  (click-to-position, keyboard) and only makes a continuous drag look
-//  like it's lagging behind the thumb.
-.d-slider--dragging .d-slider__indicator {
-    transition: none;
 }
 
 //  $$  VISUAL THUMB (the styled handle)
@@ -172,7 +170,7 @@
     z-index: 1;
     background-color: var(--slider-thumb-color);
     border: var(--slider-thumb-border-width) solid var(--slider-thumb-border-color);
-    border-radius: 50%;
+    border-radius: var(--dt-size-radius-circle);
     box-shadow: var(--slider-thumb-shadow);
     pointer-events: none;
     inline-size: var(--slider-thumb-visual-size);
@@ -208,7 +206,7 @@
     z-index: 2;
     min-inline-size: var(--dt-spacing-550);
     min-block-size: var(--dt-spacing-550);
-    border-radius: 50%;
+    border-radius: var(--dt-size-radius-circle);
     cursor: grab;
     inset-block-start: 50%;
 }
@@ -294,7 +292,7 @@
     inset-block-start: calc(50% + var(--slider-track-height) / 2 + var(--slider-mark-offset));
 
     @media (prefers-reduced-motion: no-preference) {
-        transition: left 0.1s ease, bottom 0.1s ease, opacity 0.15s ease;
+        transition: inset-inline-start 0.1s ease, bottom 0.1s ease, opacity 0.15s ease;
     }
 }
 
@@ -427,7 +425,11 @@
         inset-inline-start: 50%;
         inset-block-start: unset;
         transform: translateX(-50%);
-        transition: height 0.1s ease, bottom 0.1s ease, top 0.1s ease, background-color 0.1s ease;
+        // Overrides the variable, not the transition property itself — see
+        // the comment on the base .d-slider__indicator rule for why, and
+        // .d-slider--dragging .d-slider__indicator near the end of this file
+        // for the same-specificity override that must win over this one.
+        --slider-indicator-transition: height 0.1s ease, bottom 0.1s ease, top 0.1s ease, background-color 0.1s ease;
     }
 
     .d-slider__thumb-visual {
@@ -465,6 +467,20 @@
         transform: translateY(50%);
         // bottom set inline via style
     }
+}
+
+//  $$  DRAGGING OVERRIDES THAT OUTRANK ORIENTATION
+//  Same (0,2,0) specificity, same descendant shape, as the orientation
+//  override above — placed after it in source order on purpose, so dragging
+//  always wins regardless of which orientation is active. Keep this after
+//  .d-slider--vertical.
+//  ----------------------------------------------------------------------------
+//  While dragging, the indicator's position is driven by the pointer on
+//  every pointermove — the transition above is for discrete value jumps
+//  (click-to-position, keyboard) and only makes a continuous drag look
+//  like it's lagging behind the thumb.
+.d-slider--dragging .d-slider__indicator {
+    --slider-indicator-transition: none;
 }
 
 } // @layer

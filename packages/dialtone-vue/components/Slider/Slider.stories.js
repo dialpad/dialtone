@@ -47,7 +47,7 @@ export const argTypesData = {
   },
   startSlot: {
     name: 'start',
-    description: 'Optional content at the inline-start end of the track (aka left in LTR).',
+    description: 'Optional content at the inline-start end of the track (aka left).',
     control: 'text',
     table: {
       category: 'slots',
@@ -56,7 +56,7 @@ export const argTypesData = {
   },
   endSlot: {
     name: 'end',
-    description: 'Optional content at the inline-end end of the track (aka right in LTR).',
+    description: 'Optional content at the inline-end end of the track (aka right).',
     control: 'text',
     table: {
       category: 'slots',
@@ -250,7 +250,7 @@ export const argTypesData = {
     table: { category: 'props' },
   },
   getValueText: {
-    description: 'Function formatting a value for the readout, marks, and aria-valuetext. Signature: (value, index?) => string. Takes precedence over prefix/suffix.',
+    description: 'Function formatting a value for the readout and aria-valuetext (not marks — see marks). Signature: (value, index?) => string. Takes precedence over prefix/suffix.',
     control: null,
     table: {
       category: 'props',
@@ -258,12 +258,12 @@ export const argTypesData = {
     },
   },
   prefix: {
-    description: 'Text prepended to the raw number wherever it\'s displayed. Ignored when getValueText is set.',
+    description: 'Text prepended to the raw number wherever it\'s displayed. Always applied to marks; ignored by the readout/aria-valuetext when getValueText is set.',
     control: 'text',
     table: { category: 'props' },
   },
   suffix: {
-    description: 'Text appended to the raw number wherever it\'s displayed. Ignored when getValueText is set.',
+    description: 'Text appended to the raw number wherever it\'s displayed. Always applied to marks; ignored by the readout/aria-valuetext when getValueText is set.',
     control: 'text',
     table: { category: 'props' },
   },

@@ -1,15 +1,13 @@
 ---
 title: Slider
 description: A slider lets users select a numeric value — or a range of values — by dragging a thumb along a track. It is appropriate when approximate selection is more important than precision.
-status: ready
+status: new
 thumb: true
-image: assets/images/components/slider.png
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-slider--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-
 keywords: ["range", "track", "thumb", "input range", "d-slider", "DtSlider", "dt-slider"]
+combinator: DtSlider
 ---
-
-<component-combinator component-name="DtSlider" />
 
 ## Usage
 
@@ -34,10 +32,10 @@ A slider is appropriate when the exact value is less important than the relative
 
 ### Best Practices
 
-- Always provide a visible `label` or pass `label-hidden` to keep an accessible label in the DOM for screen readers.
+- Always provide a `label` — it's the only thing that gives the slider an accessible name. Add `label-hidden` on top of it when you only need to hide the label visually (a visually obvious context elsewhere on the page); `label-hidden` alone, without `label`, does not create an accessible name.
 - For range sliders with two thumbs, pass a `getValueText` callback that returns localized text distinguishing each thumb (e.g. `"Minimum: 20"` / `"Maximum: 70"`).
 - Keep `min` and `max` values meaningful to the context. Label the scale so users understand what the numbers represent.
-- Use `prefix` or `suffix` for simple unit decoration (e.g. `suffix="%"`), or `getValueText` for full control — it takes precedence and also drives the readout, marks, and each thumb's `aria-valuetext`, so all three always agree.
+- Use `prefix` or `suffix` for simple unit decoration (e.g. `suffix="%"`) — marks always use it. For the readout and each thumb's `aria-valuetext`, `getValueText` takes precedence over prefix/suffix when set, so the two stay in agreement; marks never call `getValueText`, since a mark isn't tied to either thumb and has no index for it to differentiate on.
 - Use `showTicks` together with `tickInterval` to indicate discrete stops on the track; avoid rendering more than ~20 ticks to prevent visual noise.
 - `marks` defaults to labeling the start and end of the range. Pass an array of `{ value, text }` objects for custom text, a plain number array to label positions without custom text, `true` to auto-generate marks at every tick position, or `false` for none.
 - When using `snapPoints`, make sure `getValueText` (and any custom mark text) can render *any* value in range, not just the snap points — the pull is a soft suggestion, not a restriction, so users can still land on values off the grid.
@@ -53,10 +51,15 @@ A slider is appropriate when the exact value is less important than the relative
 ### Range slider
 
 ```vue demo
-<dt-slider :model-value="[20, 70]" label="Price range" />
+<dt-slider
+  :model-value="[20, 70]"
+  label="Price range"
+  :marks="[{ value: 0, text: 'Min $0' }, { value: 100, text: 'Max $100' }]"
+  :get-value-text="(value, index) => index === 0 ? `Minimum: $${value}` : `Maximum: $${value}`"
+/>
 ```
 
-### With start and end slots (aka left/right in LTR)
+### With start and end slots (aka left/right)
 
 ```vue demo
 <!-- @wrapper -->
@@ -275,7 +278,12 @@ Set `fill-origin` to a value within `[min, max]` and the indicator grows outward
 <!-- @wrapper -->
 <dt-stack gap="300" class="d-w100p">
   <dt-slider :model-value="30" label="Volume (disabled)" disabled />
-  <dt-slider :model-value="[20, 80]" label="Price range (disabled)" disabled />
+  <dt-slider
+    :model-value="[20, 80]"
+    label="Price range (disabled)"
+    :get-value-text="(value, index) => index === 0 ? `Minimum: $${value}` : `Maximum: $${value}`"
+    disabled
+  />
 </dt-stack>
 ```
 
@@ -294,6 +302,7 @@ Set `fill-origin` to a value within `[min, max]` and the indicator grows outward
     :model-value="[30, 70]"
     label="Range vertical"
     orientation="vertical"
+    :get-value-text="(value, index) => index === 0 ? `Min: ${value}` : `Max: ${value}`"
   />
 </div>
 ```
@@ -330,10 +339,13 @@ Use `label-hidden` when you have a visually obvious context but still need acces
 | Page Up / Shift + Arrow Right / Shift + Arrow Up | Increase value by `largeStep` (default 10) |
 | Page Down / Shift + Arrow Left / Shift + Arrow Down | Decrease value by `largeStep` (default 10) |
 
+> [!INFO] RTL support
+> The track, thumb, and indicator position with logical (inset-inline-start) values, so they mirror automatically under `dir="rtl"`. Pointer dragging and the Shift+Arrow/Page Up/Page Down keys are direction-aware too, matching the native `<input type="range">`'s own RTL-flipped Arrow key behavior.
+
 ### Screen reader behavior
 
 - Each thumb is a native `<input type="range">` which carries `role="slider"` implicitly, along with `aria-valuemin`, `aria-valuemax`, and `aria-valuenow`.
-- The component label is associated with each thumb via `aria-labelledby`. When `label-hidden` is true, the label element remains in the DOM (only visually hidden via `.d-vi-visible-sr`).
+- The component label is associated with each thumb via `aria-labelledby`. When `label-hidden` is true, the label element remains in the DOM (only visually hidden via `.sr-only`).
 - For **range sliders**, provide the `getValueText` prop to give each thumb a distinct, localized description:
 
 ```vue code-only
@@ -348,3 +360,7 @@ Use `label-hidden` when you have a visually obvious context but still need acces
 
 > [!INFO] Form submission in range mode
 > In range mode, both `<input>` elements share the same `name` attribute. Retrieve both values server-side using `FormData.getAll(name)`, which returns `[low, high]` in DOM order.
+
+## Vue API
+
+<component-vue-api component-name="slider" />
