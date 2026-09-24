@@ -73,6 +73,20 @@ A slider is appropriate when the exact value is less important than the relative
 </dt-slider>
 ```
 
+Emoji or icon-only content works the same way — give it an `aria-label` so the meaning still reaches screen readers:
+
+```vue demo
+<!-- @wrapper -->
+<dt-slider :model-value="50" label="Mood" :marks="false">
+  <template #start>
+    <span aria-label="sad">😞</span>
+  </template>
+  <template #end>
+    <span aria-label="happy">😄</span>
+  </template>
+</dt-slider>
+```
+
 ### With ticks
 
 `tickInterval` is independent of `step` — ticks are purely a visual overlay along the track and don't constrain where the thumb can actually stop. The two often match, but they don't have to.
@@ -315,6 +329,39 @@ Use `label-hidden` when you have a visually obvious context but still need acces
 <dt-slider :model-value="50" label="Volume" label-hidden />
 ```
 
+### Custom label content
+
+The `label` slot replaces the plain text label entirely — scoped with `value` (the live value, or `[low, high]` in range mode) so the label itself can echo the current value or any derived text:
+
+```vue demo
+<dt-slider :model-value="0" :min="-100" :max="100" :fill-origin="0">
+  <template #label="{ value }">
+    Balance &middot; {{ value }}
+  </template>
+</dt-slider>
+```
+
+```vue demo
+<dt-slider
+  :model-value="100"
+  :min="25"
+  :max="200"
+  :step="25"
+  show-ticks
+  :tick-interval="25"
+>
+  <template #label="{ value }">
+    Playback speed &middot; {{ (value / 100).toFixed(2) }}×
+  </template>
+  <template #start>
+    🐢
+  </template>
+  <template #end>
+    🐇
+  </template>
+</dt-slider>
+```
+
 ### Sizes
 
 ```vue demo
@@ -341,6 +388,16 @@ Use `label-hidden` when you have a visually obvious context but still need acces
 
 > [!INFO] RTL support
 > The track, thumb, and indicator position with logical (inset-inline-start) values, so they mirror automatically under `dir="rtl"`. Pointer dragging and the Shift+Arrow/Page Up/Page Down keys are direction-aware too, matching the native `<input type="range">`'s own RTL-flipped Arrow key behavior.
+
+```vue demo
+<dt-slider
+  dir="rtl"
+  :model-value="[20, 70]"
+  label="Price range"
+  :marks="[{ value: 0, text: 'Min $0' }, { value: 100, text: 'Max $100' }]"
+  :get-value-text="(value, index) => index === 0 ? `Minimum: $${value}` : `Maximum: $${value}`"
+/>
+```
 
 ### Screen reader behavior
 

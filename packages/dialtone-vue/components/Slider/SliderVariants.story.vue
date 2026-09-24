@@ -35,6 +35,7 @@
       <dt-slider
         v-model="iconValue"
         label="Brightness"
+        :marks="false"
       >
         <template #start>
           <span>0%</span>
@@ -53,6 +54,7 @@
       <dt-slider
         v-model="emojiValue"
         label="Mood"
+        :marks="false"
       >
         <template #start>
           <span aria-label="sad">😞</span>
@@ -107,13 +109,13 @@
         label="Temperature"
         :min="-20"
         :max="40"
-        :marks="[-20, 40]"
+        :marks="[-20, 0, 40]"
       >
         <template #start>
-          <span>❄️</span>
+          <span aria-label="cold">❄️</span>
         </template>
         <template #end>
-          <span>🔥</span>
+          <span aria-label="hot">🔥</span>
         </template>
       </dt-slider>
     </section>
@@ -302,6 +304,7 @@
           show-ticks
           :tick-interval="1"
           :marks="[{ value: 0, text: 'Off' }, { value: 4, text: 'Max' }]"
+          :get-value-text="(value) => ['Off', 'Low', 'Medium', 'High', 'Max'][value]"
         >
           <template #label>
             Noise cancellation &middot; {{ ['Off', 'Low', 'Medium', 'High', 'Max'][noiseCancellation] }}

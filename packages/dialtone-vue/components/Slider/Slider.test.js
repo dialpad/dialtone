@@ -16,6 +16,26 @@ const settleCollisions = async () => {
   await nextFrame();
 };
 
+// Mocks getComputedStyle for the control element rather than setting real
+// inline style/dir and relying on jsdom to resolve it — jsdom's
+// getComputedStyle doesn't compute inherited properties (a dir set on an
+// ancestor never reaches a descendant's computed style) and caches its
+// result per element on first call without invalidating it on a later
+// direct inline-style mutation. isRtl() is the only thing that calls
+// getComputedStyle(controlRef.value) in this component, so mocking it here
+// is a precise, browser-CSS-engine-independent way to exercise "when
+// direction resolves to rtl" without depending on jsdom's incomplete CSS
+// support. Restore the spy (mockControlDirectionSpy?.mockRestore()) in an
+// afterEach wherever this is used.
+let mockControlDirectionSpy;
+function mockControlDirection(direction) {
+  const original = window.getComputedStyle.bind(window);
+  mockControlDirectionSpy = vi.spyOn(window, 'getComputedStyle').mockImplementation((el, ...rest) => {
+    if (el?.dataset?.qa === 'dt-slider-control') return { direction };
+    return original(el, ...rest);
+  });
+}
+
 const baseProps = {
   label: 'Volume',
   modelValue: 50,
@@ -1100,12 +1120,17 @@ describe('DtSlider Tests', () => {
     });
 
     describe('RTL (dir="rtl")', () => {
+      // See mockControlDirection's own comment near the top of the file.
+      afterEach(() => {
+        mockControlDirectionSpy?.mockRestore();
+      });
+
       it('mirrors pointer-to-value mapping — a physically-left position maps toward max, not min', async () => {
+        mockControlDirection('rtl');
         const controlRect = { top: 0, left: 0, right: 100, bottom: 20, width: 100, height: 20 };
         const control = wrapper.find('[data-qa="dt-slider-control"]');
         control.element.setPointerCapture = () => {};
         control.element.getBoundingClientRect = () => controlRect;
-        control.element.style.direction = 'rtl';
 
         // 10% across from the physical left edge is 90% under RTL (min renders
         // on the physical right), not 10% as it would under LTR.
@@ -1115,11 +1140,11 @@ describe('DtSlider Tests', () => {
       });
 
       it('does not mirror pointer mapping when direction is (explicitly or by default) ltr', async () => {
+        mockControlDirection('ltr');
         const controlRect = { top: 0, left: 0, right: 100, bottom: 20, width: 100, height: 20 };
         const control = wrapper.find('[data-qa="dt-slider-control"]');
         control.element.setPointerCapture = () => {};
         control.element.getBoundingClientRect = () => controlRect;
-        control.element.style.direction = 'ltr';
 
         await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 10, buttons: 1 });
         const emitted = wrapper.emitted('update:modelValue');
@@ -1127,21 +1152,21 @@ describe('DtSlider Tests', () => {
       });
 
       it('swaps Shift+ArrowRight to decrease (matching the native RTL-flipped arrow keys)', async () => {
-        wrapper.find('[data-qa="dt-slider-control"]').element.style.direction = 'rtl';
+        mockControlDirection('rtl');
         await thumbInputs[0].trigger('keydown', { key: 'ArrowRight', shiftKey: true });
         const emitted = wrapper.emitted('update:modelValue');
         expect(emitted[emitted.length - 1][0]).toBe(40); // 50 - largeStep(10), flipped under rtl
       });
 
       it('swaps Shift+ArrowLeft to increase (matching the native RTL-flipped arrow keys)', async () => {
-        wrapper.find('[data-qa="dt-slider-control"]').element.style.direction = 'rtl';
+        mockControlDirection('rtl');
         await thumbInputs[0].trigger('keydown', { key: 'ArrowLeft', shiftKey: true });
         const emitted = wrapper.emitted('update:modelValue');
         expect(emitted[emitted.length - 1][0]).toBe(60); // 50 + largeStep(10), flipped under rtl
       });
 
       it('does not swap Shift+ArrowUp/ArrowDown or PageUp/PageDown under rtl — only Left/Right are direction-relative', async () => {
-        wrapper.find('[data-qa="dt-slider-control"]').element.style.direction = 'rtl';
+        mockControlDirection('rtl');
         await thumbInputs[0].trigger('keydown', { key: 'ArrowUp', shiftKey: true });
         let emitted = wrapper.emitted('update:modelValue');
         expect(emitted[emitted.length - 1][0]).toBe(60); // still increases
@@ -1155,11 +1180,43 @@ describe('DtSlider Tests', () => {
         mockProps = { orientation: 'vertical' };
         updateWrapper();
         thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
-        wrapper.find('[data-qa="dt-slider-control"]').element.style.direction = 'rtl';
+        mockControlDirection('rtl');
 
         await thumbInputs[0].trigger('keydown', { key: 'ArrowRight', shiftKey: true });
         const emitted = wrapper.emitted('update:modelValue');
         expect(emitted[emitted.length - 1][0]).toBe(60); // unaffected by rtl — vertical never uses Left/Right
+      });
+
+      it('centers the thumb on its actual anchor point under rtl, not one thumb-width off', async () => {
+        // translateX(-50%) is a PHYSICAL shift that never mirrors under
+        // dir="rtl" the way insetInlineStart does — the compensating shift
+        // has to flip sign too (+50%) or the thumb renders centered a full
+        // width away from where insetInlineStart actually anchored it. This
+        // is exactly the bug that produced a visible gap between the thumb
+        // and the indicator's edge. controlRef isn't bound yet during the
+        // very first render (arming the mock before mount would never be
+        // consulted), so mount normally first, then arm the mock and force
+        // a re-render via a prop update.
+        mockControlDirection('rtl');
+        await wrapper.setProps({ modelValue: 51 });
+        const thumbVisual = wrapper.find('[data-qa="dt-slider-thumb-visual"]');
+        expect(thumbVisual.attributes('style')).toContain('translate(50%, -50%)');
+      });
+
+      it('keeps the ltr centering transform when direction is ltr', async () => {
+        mockControlDirection('ltr');
+        await wrapper.setProps({ modelValue: 51 });
+        const thumbVisual = wrapper.find('[data-qa="dt-slider-thumb-visual"]');
+        expect(thumbVisual.attributes('style')).toContain('translate(-50%, -50%)');
+      });
+
+      it('centers ticks on their anchor point under rtl too', async () => {
+        mockProps = { showTicks: true, tickInterval: 25 };
+        updateWrapper();
+        mockControlDirection('rtl');
+        await wrapper.setProps({ modelValue: 51 });
+        const tick = wrapper.find('[data-qa="dt-slider-tick"]');
+        expect(tick.attributes('style')).toContain('translateX(50%)');
       });
     });
 
@@ -1424,6 +1481,10 @@ describe('DtSlider Tests', () => {
       const nearReadoutRect = { top: 0, left: 150, right: 170, bottom: 20 }; // overlaps a readout at pct 51
       const farRect = { top: 0, left: 500, right: 520, bottom: 20 };
 
+      afterEach(() => {
+        mockControlDirectionSpy?.mockRestore();
+      });
+
       it('hides a mark once it overlaps the visible readout', async () => {
         mockProps = { readout: 'always', marks: [0, 100], modelValue: 50 };
         updateWrapper();
@@ -1517,6 +1578,44 @@ describe('DtSlider Tests', () => {
         marksNow = wrapper.findAll('[data-qa="dt-slider-mark"]');
         expect(marksNow[0].classes()).toContain('d-slider__mark--collision-hidden');
         expect(marksNow[1].classes()).not.toContain('d-slider__mark--collision-hidden');
+      });
+
+      it('detects a readout/mark collision correctly under rtl, where pct mirrors to the physical right', async () => {
+        // analyticalReadoutRect computes the readout's collision rect from
+        // pct + the control's own rect — under RTL that pct is measured
+        // from the physical right (insetInlineStart mirrors), so the
+        // calculation has to mirror too, or it places the readout on the
+        // wrong side entirely and the system ends up hiding the wrong mark
+        // (or missing/inventing a collision) rather than the one that's
+        // actually overlapping on screen.
+        mockProps = { readout: 'always', marks: [0, 100], modelValue: 50 };
+        updateWrapper();
+        await nextTick();
+
+        mockControlDirection('rtl');
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        const readouts = wrapper.findAll('[data-qa="dt-slider-thumb-readout"]');
+        readouts[0].element.getBoundingClientRect = () => readoutSize;
+
+        // At modelValue 90 under RTL, the readout's correctly-mirrored
+        // analytical center sits near the physical LEFT (effective pct
+        // 100-90=10 -> ~30px on this 300px-wide control), not near the
+        // physical right (~270px) an un-mirrored calculation would place
+        // it. Stub a mark's rect exactly where the mirrored readout should
+        // land, and the far mark well outside either candidate position.
+        const nearMirroredReadoutRect = { top: 0, left: 20, right: 40, bottom: 20 };
+        marks[0].element.getBoundingClientRect = () => nearMirroredReadoutRect;
+        marks[1].element.getBoundingClientRect = () => farRect;
+
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        thumbInputs[0].element.value = '90';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+
+        const marksAfter = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        expect(marksAfter[0].classes()).toContain('d-slider__mark--collision-hidden');
+        expect(marksAfter[1].classes()).not.toContain('d-slider__mark--collision-hidden');
       });
     });
 

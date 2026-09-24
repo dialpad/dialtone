@@ -729,12 +729,33 @@ function positionStyle(pct, transform) {
   return style;
 }
 
+// translateX(-50%) is the standard trick for centering an element ON its
+// insetInlineStart anchor point — shift left by half the element's own
+// width so the anchor lands at its center instead of its edge. That shift
+// is a PHYSICAL transform: transform: translateX() never mirrors under
+// dir="rtl" the way insetInlineStart does. So when the anchor itself has
+// mirrored to the physical right, the compensating shift has to flip sign
+// too (+50%, not -50%), or the element renders centered a full width away
+// from its actual anchor — which is exactly what caused the thumb/indicator
+// gap and mark misalignment under RTL before this existed. This applies
+// regardless of orientation — insetInlineStart is still the horizontal/
+// inline axis even for a vertical slider (it's used there to center the
+// narrow track/thumb within the wider control area), since orientation is
+// a layout convention, not a CSS writing-mode change.
+function centerInlineTransform() {
+  return isRtl() ? '50%' : '-50%';
+}
+
 function thumbPositionStyle(val) {
-  return positionStyle(thumbPercent(val), isVertical.value ? 'translate(-50%, 50%)' : 'translate(-50%, -50%)');
+  const transform = isVertical.value
+    ? `translate(${centerInlineTransform()}, 50%)`
+    : `translate(${centerInlineTransform()}, -50%)`;
+  return positionStyle(thumbPercent(val), transform);
 }
 
 function tickPositionStyle(val) {
-  return positionStyle(thumbPercent(val), isVertical.value ? 'translateY(50%)' : 'translateX(-50%)');
+  const transform = isVertical.value ? 'translateY(50%)' : `translateX(${centerInlineTransform()})`;
+  return positionStyle(thumbPercent(val), transform);
 }
 
 // Shared by the readout and each thumb's aria-valuetext, so the two always
@@ -1137,7 +1158,12 @@ function analyticalReadoutRect(pct, el) {
     return { left: elRect.left, right: elRect.right, top: centerPx - height / 2, bottom: centerPx + height / 2 };
   }
   const width = elRect.right - elRect.left;
-  const centerPx = controlRect.left + (pct / 100) * (controlRect.right - controlRect.left);
+  // pct is measured from insetInlineStart, which the browser mirrors to the
+  // physical right under dir="rtl" — this analytical calculation has to
+  // mirror the same way, or collision rects land on the wrong side and the
+  // system ends up comparing (and hiding) the wrong element entirely.
+  const effectivePct = isRtl() ? 100 - pct : pct;
+  const centerPx = controlRect.left + (effectivePct / 100) * (controlRect.right - controlRect.left);
   return { left: centerPx - width / 2, right: centerPx + width / 2, top: elRect.top, bottom: elRect.bottom };
 }
 

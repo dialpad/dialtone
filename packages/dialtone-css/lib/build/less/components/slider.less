@@ -262,6 +262,14 @@
     pointer-events: none;
     inset-block-start: calc(50% + var(--slider-track-height) / 2 + var(--slider-mark-offset));
 
+    // translateX(-50%) centers the mark on its insetInlineStart anchor — a
+    // physical shift that doesn't mirror under dir="rtl" the way
+    // insetInlineStart does, so the anchor and the compensating shift
+    // disagree unless this flips too.
+    &:dir(rtl) {
+        transform: translateX(50%);
+    }
+
     @media (prefers-reduced-motion: no-preference) {
         transition: opacity 0.15s ease;
     }
@@ -290,6 +298,11 @@
     transform: translateX(-50%);
     pointer-events: none;
     inset-block-start: calc(50% + var(--slider-track-height) / 2 + var(--slider-mark-offset));
+
+    // Same rationale as .d-slider__mark's :dir(rtl) override above.
+    &:dir(rtl) {
+        transform: translateX(50%);
+    }
 
     @media (prefers-reduced-motion: no-preference) {
         transition: inset-inline-start 0.1s ease, bottom 0.1s ease, opacity 0.15s ease;
@@ -417,6 +430,14 @@
         inset-inline-start: 50%;
         inset-block-start: 0;
         transform: translateX(-50%);
+
+        // insetInlineStart:50% still mirrors under dir="rtl" even in
+        // vertical orientation — it's the CSS inline axis (unaffected by
+        // this component's own orientation prop), so the centering
+        // transform has to flip the same way it does horizontally.
+        &:dir(rtl) {
+            transform: translateX(50%);
+        }
     }
 
     .d-slider__indicator {
@@ -430,6 +451,11 @@
         // .d-slider--dragging .d-slider__indicator near the end of this file
         // for the same-specificity override that must win over this one.
         --slider-indicator-transition: height 0.1s ease, bottom 0.1s ease, top 0.1s ease, background-color 0.1s ease;
+
+        // Same rationale as .d-slider__track's :dir(rtl) override above.
+        &:dir(rtl) {
+            transform: translateX(50%);
+        }
     }
 
     .d-slider__thumb-visual {
