@@ -194,7 +194,8 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+// @ts-nocheck
 import { ref, computed, watch, watchEffect, onMounted, onBeforeUnmount, nextTick, useSlots, useAttrs } from 'vue';
 import { DtText } from '@/components/Text';
 import { getUniqueString, hasSlotContent, removeClassStyleAttrs } from '@/common/utils';
