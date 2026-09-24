@@ -470,6 +470,7 @@
       ],
       "mail-rejected": [
         "Mail",
+        "email",
         "decline",
         "ignore",
         "dismiss"
@@ -491,6 +492,7 @@
       ],
       "message-rejected": [
         "Message",
+        "chat",
         "decline",
         "ignore",
         "dismiss"
