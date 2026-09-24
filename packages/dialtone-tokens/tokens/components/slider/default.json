@@ -4,6 +4,14 @@
       "indicator": {
         "value": "{color.surface.brand-strong}",
         "type": "color"
+      },
+      "track": {
+        "value": "{color.black.250}",
+        "type": "color"
+      },
+      "thumb-border": {
+        "value": "{color.black.350}",
+        "type": "color"
       }
     }
   }

@@ -456,7 +456,7 @@
       <dt-slider
         v-model="hiddenLabelValue"
         label="This label is for screen readers only"
-        label-hidden
+        :show-label="false"
       />
     </section>
   </div>

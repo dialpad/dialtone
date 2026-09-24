@@ -20,13 +20,13 @@
   >
     <div
       :id="labelId"
-      :class="['d-slider__label', { 'sr-only': labelHidden }, labelClass]"
+      :class="['d-slider__label', { 'sr-only': !showLabel }, labelClass]"
       data-qa="dt-slider-label"
     >
       <!-- @slot Slot for the label, defaults to the label prop. Scoped with
            :value (Number, or Number[] in range mode) — the live value(s),
            updating as the thumb is dragged — for labels that echo the
-           current value. Required for accessibility; use labelHidden to
+           current value. Required for accessibility; set showLabel to false to
            hide it visually. -->
       <slot
         name="label"
@@ -112,8 +112,8 @@
           :step="step"
           :disabled="disabled"
           :name="name || undefined"
-          :aria-labelledby="hasVisibleLabel ? labelId : undefined"
-          :aria-label="hasVisibleLabel ? undefined : attrs['aria-label']"
+          :aria-labelledby="hasVisibleLabel ? labelId : attrs['aria-labelledby']"
+          :aria-label="hasVisibleLabel || attrs['aria-labelledby'] ? undefined : attrs['aria-label']"
           :aria-valuetext="formatValue(val, i)"
           :aria-orientation="isVertical ? 'vertical' : undefined"
           :style="thumbPositionStyle(val)"
@@ -182,7 +182,7 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, onBeforeUnmount, nextTick, useSlots, useAttrs } from 'vue';
+import { ref, computed, watch, watchEffect, onMounted, onBeforeUnmount, nextTick, useSlots, useAttrs } from 'vue';
 import { DtText } from '@/components/Text';
 import { getUniqueString, hasSlotContent, removeClassStyleAttrs } from '@/common/utils';
 import {
@@ -338,12 +338,12 @@ const props = defineProps({
   },
 
   /**
-   * When true, the label is hidden visually but remains in the DOM for screen readers.
+   * When false, the label is hidden visually but remains in the DOM for screen readers.
    * @values true, false
    */
-  labelHidden: {
+  showLabel: {
     type: Boolean,
-    default: false,
+    default: true,
   },
 
   /**
@@ -555,7 +555,7 @@ const isVertical = computed(() => props.orientation === 'vertical');
 // native input actually binds. hasSlotContent (not a bare slots.label
 // existence check) so a #label slot that renders nothing — an empty or
 // v-if-false template — doesn't count as providing a name.
-const hasVisibleLabel = computed(() => !!(props.label || hasSlotContent(slots.label)));
+const hasVisibleLabel = computed(() => !!(props.label?.trim() || hasSlotContent(slots.label)));
 const sizeClass = computed(() => SLIDER_SIZE_MODIFIERS[String(props.size)] ?? '');
 
 // Mirrors the update:modelValue payload shape (Number, or Number[] in range
@@ -595,6 +595,18 @@ watch(
   { deep: true },
 );
 
+// A consumer can flip :disabled reactively while a thumb is focused — the
+// native input's own focus ring clears automatically, but focusedThumbIndex
+// is separate internal state (also drives the 'interaction' readout), so
+// without this it would keep pointing at a thumb that's no longer
+// interactive, leaving its focus ring/readout stuck open.
+watch(
+  () => props.disabled,
+  (isDisabled) => {
+    if (isDisabled) focusedThumbIndex.value = null;
+  },
+);
+
 // A consumer can narrow [min, max] (or widen/shift it) without touching
 // modelValue at all — the watcher above never fires for that, so the
 // current value(s) would otherwise silently drift out of bounds the same
@@ -629,7 +641,31 @@ function decimalPlaces(n) {
   return dot === -1 ? 0 : String(n).length - dot - 1;
 }
 
+// A too-small interval relative to [min, max] (e.g. tickInterval=0.001 over a
+// 0–100 range) would otherwise generate tens of thousands of DOM nodes and an
+// equally large per-pointermove scan — cap it and warn instead of silently
+// hanging the tab.
+const MAX_GENERATED_POINTS = 1000;
+
+function generateInterval(min, max, interval, label) {
+  const values = [];
+  for (let v = min; v <= max && values.length <= MAX_GENERATED_POINTS; v = parseFloat((v + interval).toFixed(10))) {
+    values.push(v);
+  }
+  if (values.length > MAX_GENERATED_POINTS) {
+    console.info(
+      `[Dialtone] DtSlider: ${label} would generate more than ${MAX_GENERATED_POINTS} points — truncating. Use a larger interval.`,
+    );
+    return values.slice(0, MAX_GENERATED_POINTS);
+  }
+  return values;
+}
+
 function snapToStep(val) {
+  // A zero or negative step has no valid grid to snap to — dividing by it
+  // would produce NaN/Infinity and corrupt every downstream value. Fall back
+  // to the clamped raw value, same as an unset step would with no quantization.
+  if (props.step <= 0) return Math.min(props.max, Math.max(props.min, val));
   const steps = Math.round((val - props.min) / props.step);
   const dp = Math.max(decimalPlaces(props.min), decimalPlaces(props.step));
   return Math.min(props.max, Math.max(props.min, parseFloat((props.min + steps * props.step).toFixed(dp))));
@@ -645,11 +681,7 @@ const computedSnapPoints = computed(() => {
   if (typeof props.snapPoints === 'number') {
     const interval = props.snapPoints;
     if (interval <= 0) return [];
-    const values = [];
-    for (let v = props.min; v <= props.max; v = parseFloat((v + interval).toFixed(10))) {
-      values.push(v);
-    }
-    return values;
+    return generateInterval(props.min, props.max, interval, 'snapPoints');
   }
   // A point outside [min, max] can never be a value the thumb is allowed to
   // hold, so it must never be offered as a snap target — otherwise a drag
@@ -802,11 +834,7 @@ function markStyle(pct) {
 const computedTickValues = computed(() => {
   const interval = props.tickInterval ?? props.step;
   if (!interval || interval <= 0) return [];
-  const values = [];
-  for (let v = props.min; v <= props.max; v = parseFloat((v + interval).toFixed(10))) {
-    values.push(v);
-  }
-  return values;
+  return generateInterval(props.min, props.max, interval, 'tickInterval');
 });
 
 const indicatorStyle = computed(() => {
@@ -880,7 +908,23 @@ function updateThumbValue(thumbIndex, newVal, { allowSnap = false } = {}) {
     }
   }
 
-  if (next[thumbIndex] === clamped) return;
+  if (next[thumbIndex] === clamped) {
+    // Nothing logically changed, but a native keyboard step (plain Arrow/
+    // Home/End, handled by the browser itself — see onThumbKeydown) can
+    // still have already written a DIFFERENT value into the native
+    // <input>'s own DOM .value before this handler ran, since the native
+    // element isn't constrained to the sibling thumb's position the way
+    // this range-mode clamp is. Vue's one-way :value binding only re-patches
+    // the DOM when the bound reactive value itself changes, so without this
+    // correction the native input's real value would silently drift from
+    // internalValues/aria-valuetext, and the next keypress would read from
+    // that wrong baseline instead of the true current value.
+    const el = thumbRefs.value[thumbIndex];
+    if (el && el.value !== String(clamped)) {
+      el.value = String(clamped);
+    }
+    return;
+  }
   next[thumbIndex] = clamped;
   internalValues.value = next;
 
@@ -952,6 +996,13 @@ function onPointerDown(event) {
   lastActiveThumbIndex.value = idx;
   isDragging.value = true;
   controlRef.value.setPointerCapture(event.pointerId);
+  // Pointer capture routes every subsequent pointer event to controlRef, so
+  // the non-dragged thumb's own pointerenter/pointerleave never fire again
+  // once the drag starts — without this, a thumb hovered right before the
+  // drag began would keep its 'interaction' readout stuck open for the rest
+  // of the drag. The dragged thumb's own readout is unaffected — it's driven
+  // by activeThumbIndex, not hoveredThumbIndex.
+  hoveredThumbIndex.value = null;
 
   updateThumbValue(idx, rawVal, { allowSnap: true });
   // Marks the focus() call below as pointer-driven so onThumbFocus can skip
@@ -1280,21 +1331,32 @@ onBeforeUnmount(() => {
 
 // ─── Dev warnings ─────────────────────────────────────────────────────────────
 
-onMounted(() => {
+// watchEffect (not onMounted) — the accessible-name and range/getValueText
+// checks below read reactive sources (props, slots, attrs), and a consumer
+// can legitimately change any of them after mount (e.g. reactively clearing
+// label once a heading it depends on loads). A one-shot mount check would
+// silently stop warning about a real regression the moment it happens after
+// the initial paint.
+watchEffect(() => {
   if (isRange.value && !props.getValueText) {
     console.info(
       '[Dialtone] DtSlider in range mode: provide getValueText to give each thumb a distinct screen-reader description.',
     );
   }
-  // labelHidden is a purely visual modifier (see the #label template branch
+  // showLabel is a purely visual modifier (see the #label template branch
   // and the sr-only class above) — it hides label content, it doesn't
   // create it. Checking it here as if it were its own accessible-name
-  // source let labelHidden-without-label ship with no name and no warning,
-  // while a valid aria-label-only consumer got warned unnecessarily.
-  const hasAccessibleName = !!(props.label || hasSlotContent(slots.label) || attrs['aria-label']);
+  // source let showLabel={false} without a label ship with no name and no
+  // warning, while a valid aria-label-only consumer got warned unnecessarily.
+  // aria-labelledby is also a valid accessible-name source (see the thumb's
+  // own aria-labelledby/aria-label fallback logic above) — a consumer using
+  // that standard pattern shouldn't be warned either.
+  const hasAccessibleName = !!(
+    props.label?.trim() || hasSlotContent(slots.label) || attrs['aria-label'] || attrs['aria-labelledby']
+  );
   if (!hasAccessibleName) {
     console.info(
-      '[Dialtone] DtSlider: provide a label prop (use labelHidden to hide it visually) or aria-label for accessibility.',
+      '[Dialtone] DtSlider: provide a label prop (set showLabel to false to hide it visually) or aria-label for accessibility.',
     );
   }
 });

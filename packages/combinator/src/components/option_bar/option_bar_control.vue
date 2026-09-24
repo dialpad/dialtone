@@ -246,8 +246,12 @@ function updateValue (e) {
 const showRawToggle = computed(() => {
   const name = props.controlData.component?.name;
   if (name === 'DtcControlArray' || name === 'DtcControlObject') return true;
-  // Also show for props that accept array/object in addition to other types (e.g. Number | Number[])
-  return props.validControls.some(c => c === 'array' || c === 'object');
+  // Also show for props that accept array/object in addition to other types (e.g. Number | Number[]).
+  // Excludes anything that also accepts 'string' — every *Class prop is typed
+  // string|array|object, so without this exclusion the toggle would show up
+  // on virtually every class-override control in the library, not just the
+  // genuinely array/object-shaped props (like Slider's modelValue) it's meant for.
+  return !props.validControls.includes('string') && props.validControls.some(c => c === 'array' || c === 'object');
 });
 
 const rawMode = ref(false);

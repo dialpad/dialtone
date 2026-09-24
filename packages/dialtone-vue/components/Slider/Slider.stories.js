@@ -22,7 +22,7 @@ export const argsData = {
   minStepsBetweenValues: 0,
   size: 300,
   label: 'Slider label',
-  labelHidden: false,
+  showLabel: true,
   name: '',
   largeStep: 10,
   fillOrigin: null,
@@ -203,8 +203,8 @@ export const argTypesData = {
       type: { summary: 'String' },
     },
   },
-  labelHidden: {
-    description: 'Hides the label visually while keeping it in the DOM for screen readers.',
+  showLabel: {
+    description: 'When false, hides the label visually while keeping it in the DOM for screen readers.',
     control: 'boolean',
     table: {
       category: 'props',

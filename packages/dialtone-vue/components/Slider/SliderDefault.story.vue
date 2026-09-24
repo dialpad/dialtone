@@ -12,7 +12,7 @@
     :min-steps-between-values="$attrs.minStepsBetweenValues"
     :size="$attrs.size"
     :label="$attrs.label"
-    :label-hidden="$attrs.labelHidden"
+    :show-label="$attrs.showLabel"
     :name="$attrs.name"
     :large-step="$attrs.largeStep"
     :snap-points="$attrs.snapPoints"

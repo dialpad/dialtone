@@ -26,7 +26,7 @@
 .d-slider {
     //  Component CSS vars — override these for size/state modifiers
     --slider-track-height: var(--dt-size-border-300);         // 4px
-    --slider-track-color: var(--dt-color-black-250);
+    --slider-track-color: var(--dt-slider-color-track);
     --slider-indicator-color: var(--dt-slider-color-indicator);
     // Same token an outlined button's text uses — readable against both
     // light and dark canvases, unlike --slider-indicator-color above, whose
@@ -38,7 +38,7 @@
     // physical knob that should stay light on both light and dark canvases,
     // rather than tracking the page background the way surface-primary does.
     --slider-thumb-color: var(--dt-color-neutral-white);
-    --slider-thumb-border-color: var(--dt-color-black-350);
+    --slider-thumb-border-color: var(--dt-slider-color-thumb-border);
     --slider-thumb-border-width: var(--dt-size-border-100);
     --slider-thumb-shadow: var(--dt-shadow-small);
     --slider-focus-shadow: var(--dt-shadow-focus);
@@ -156,7 +156,7 @@
     // stay a plain same-specificity, same-selector-shape contest resolved by
     // source order — see the .d-slider--dragging override near the bottom of
     // this file for why dragging is declared last.
-    --slider-indicator-transition: width 0.1s ease, inset-inline-start 0.1s ease, inset-inline-end 0.1s ease, background-color 0.1s ease;
+    --slider-indicator-transition: width var(--td100) var(--ttf-ease), inset-inline-start var(--td100) var(--ttf-ease), inset-inline-end var(--td100) var(--ttf-ease), background-color var(--td100) var(--ttf-ease);
 
     @media (prefers-reduced-motion: no-preference) {
         transition: var(--slider-indicator-transition);
@@ -178,7 +178,7 @@
     inset-block-start: 50%;
 
     @media (prefers-reduced-motion: no-preference) {
-        transition: box-shadow 0.15s ease, inline-size 0.15s ease, block-size 0.15s ease;
+        transition: box-shadow var(--td150) var(--ttf-ease), inline-size var(--td150) var(--ttf-ease), block-size var(--td150) var(--ttf-ease);
     }
 }
 
@@ -271,7 +271,7 @@
     }
 
     @media (prefers-reduced-motion: no-preference) {
-        transition: opacity 0.15s ease;
+        transition: opacity var(--td150) var(--ttf-ease);
     }
 }
 
@@ -305,7 +305,7 @@
     }
 
     @media (prefers-reduced-motion: no-preference) {
-        transition: inset-inline-start 0.1s ease, bottom 0.1s ease, opacity 0.15s ease;
+        transition: inset-inline-start var(--td100) var(--ttf-ease), bottom var(--td100) var(--ttf-ease), opacity var(--td150) var(--ttf-ease);
     }
 }
 
@@ -450,7 +450,7 @@
         // the comment on the base .d-slider__indicator rule for why, and
         // .d-slider--dragging .d-slider__indicator near the end of this file
         // for the same-specificity override that must win over this one.
-        --slider-indicator-transition: height 0.1s ease, bottom 0.1s ease, top 0.1s ease, background-color 0.1s ease;
+        --slider-indicator-transition: height var(--td100) var(--ttf-ease), bottom var(--td100) var(--ttf-ease), top var(--td100) var(--ttf-ease), background-color var(--td100) var(--ttf-ease);
 
         // Same rationale as .d-slider__track's :dir(rtl) override above.
         &:dir(rtl) {

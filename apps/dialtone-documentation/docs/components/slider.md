@@ -32,7 +32,7 @@ A slider is appropriate when the exact value is less important than the relative
 
 ### Best Practices
 
-- Always provide a `label` — it's the only thing that gives the slider an accessible name. Add `label-hidden` on top of it when you only need to hide the label visually (a visually obvious context elsewhere on the page); `label-hidden` alone, without `label`, does not create an accessible name.
+- Always provide a `label` — it's the only thing that gives the slider an accessible name. Set `show-label` to `false` when you only need to hide the label visually (a visually obvious context elsewhere on the page); `show-label="false"` alone, without `label`, does not create an accessible name.
 - For range sliders with two thumbs, pass a `getValueText` callback that returns localized text distinguishing each thumb (e.g. `"Minimum: 20"` / `"Maximum: 70"`).
 - Keep `min` and `max` values meaningful to the context. Label the scale so users understand what the numbers represent.
 - Use `prefix` or `suffix` for simple unit decoration (e.g. `suffix="%"`) — marks always use it. For the readout and each thumb's `aria-valuetext`, `getValueText` takes precedence over prefix/suffix when set, so the two stay in agreement; marks never call `getValueText`, since a mark isn't tied to either thumb and has no index for it to differentiate on.
@@ -323,10 +323,10 @@ Set `fill-origin` to a value within `[min, max]` and the indicator grows outward
 
 ### Visually hidden label
 
-Use `label-hidden` when you have a visually obvious context but still need accessible text for screen readers.
+Use `show-label="false"` when you have a visually obvious context but still need accessible text for screen readers.
 
 ```vue demo
-<dt-slider :model-value="50" label="Volume" label-hidden />
+<dt-slider :model-value="50" label="Volume" :show-label="false" />
 ```
 
 ### Custom label content
@@ -402,7 +402,7 @@ The `label` slot replaces the plain text label entirely — scoped with `value` 
 ### Screen reader behavior
 
 - Each thumb is a native `<input type="range">` which carries `role="slider"` implicitly, along with `aria-valuemin`, `aria-valuemax`, and `aria-valuenow`.
-- The component label is associated with each thumb via `aria-labelledby`. When `label-hidden` is true, the label element remains in the DOM (only visually hidden via `.sr-only`).
+- The component label is associated with each thumb via `aria-labelledby`. When `show-label` is `false`, the label element remains in the DOM (only visually hidden via `.sr-only`).
 - For **range sliders**, provide the `getValueText` prop to give each thumb a distinct, localized description:
 
 ```vue code-only

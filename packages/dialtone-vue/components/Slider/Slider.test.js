@@ -154,14 +154,18 @@ describe('DtSlider Tests', () => {
       });
 
       it('does not produce NaN positioning for the thumb', () => {
+        // insetInlineStart (not left) is the actual CSS property the
+        // component sets — see positionStyle in Slider.vue. Asserting on
+        // .style.left here would pass unconditionally regardless of the
+        // NaN guard, since the component never touches that property at all.
         thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
-        expect(thumbInputs[0].element.style.left).not.toContain('NaN');
+        expect(thumbInputs[0].element.style.insetInlineStart).not.toContain('NaN');
       });
 
       it('does not produce NaN positioning for default marks', () => {
         const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
         marks.forEach((mark) => {
-          expect(mark.element.style.left).not.toContain('NaN');
+          expect(mark.element.style.insetInlineStart).not.toContain('NaN');
         });
       });
     });
@@ -341,9 +345,9 @@ describe('DtSlider Tests', () => {
       });
     });
 
-    describe('When labelHidden is true', () => {
+    describe('When showLabel is false', () => {
       beforeEach(() => {
-        mockProps = { labelHidden: true };
+        mockProps = { showLabel: false };
         updateWrapper();
       });
 
@@ -370,6 +374,38 @@ describe('DtSlider Tests', () => {
       it('renders 11 ticks for tickInterval=10 over 0–100', () => {
         const ticks = wrapper.findAll('[data-qa="dt-slider-tick"]');
         expect(ticks).toHaveLength(11);
+      });
+    });
+
+    describe('Dense generated points are capped', () => {
+      let warnSpy;
+
+      beforeEach(() => {
+        warnSpy = vi.spyOn(console, 'info').mockImplementation(() => {});
+      });
+
+      afterEach(() => {
+        warnSpy.mockRestore();
+      });
+
+      it('caps tick generation instead of hanging on a too-small tickInterval', () => {
+        mockProps = { showTicks: true, tickInterval: 0.001, min: 0, max: 100 };
+        updateWrapper();
+        const ticks = wrapper.findAll('[data-qa="dt-slider-tick"]');
+        expect(ticks.length).toBeLessThanOrEqual(1000);
+        expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('tickInterval'));
+      });
+
+      it('caps snapPoints generation instead of hanging on a too-small interval', async () => {
+        // computedSnapPoints is lazily evaluated — only findMagneticSnapPoint
+        // (a pointer drag with allowSnap) actually reads it, so mounting
+        // alone never triggers the warning; a drag start is required.
+        mockProps = { snapPoints: 0.001, min: 0, max: 100 };
+        updateWrapper();
+        const control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 10, buttons: 1 });
+        expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('snapPoints'));
       });
     });
 
@@ -437,6 +473,40 @@ describe('DtSlider Tests', () => {
       });
     });
 
+    describe('size prop', () => {
+      it('applies no size modifier class for the default size (300)', () => {
+        mockProps = { size: 300 };
+        updateWrapper();
+        expect(root.classes()).not.toContain('d-slider--sm');
+        expect(root.classes()).not.toContain('d-slider--lg');
+      });
+
+      it('applies d-slider--sm for size 200', () => {
+        mockProps = { size: 200 };
+        updateWrapper();
+        expect(root.classes()).toContain('d-slider--sm');
+      });
+
+      it('applies d-slider--lg for size 400', () => {
+        mockProps = { size: 400 };
+        updateWrapper();
+        expect(root.classes()).toContain('d-slider--lg');
+      });
+    });
+
+    describe('name prop', () => {
+      it('forwards name to each thumb input, so range mode values can be retrieved together via FormData.getAll', () => {
+        mockProps = { name: 'volume', modelValue: [20, 70] };
+        updateWrapper();
+        expect(thumbInputs[0].attributes('name')).toBe('volume');
+        expect(thumbInputs[1].attributes('name')).toBe('volume');
+      });
+
+      it('omits the name attribute entirely when unset, rather than rendering name=""', () => {
+        expect(thumbInputs[0].attributes('name')).toBeUndefined();
+      });
+    });
+
     describe('Attrs passthrough (inheritAttrs: false)', () => {
       it('forwards a consumer class onto the root element, merged with the component\'s own classes', () => {
         mockAttrs = { class: 'consumer-class' };
@@ -477,6 +547,28 @@ describe('DtSlider Tests', () => {
       thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
       expect(thumbInputs[0].attributes('aria-labelledby')).toBeUndefined();
       expect(thumbInputs[0].attributes('aria-label')).toBe('Volume');
+    });
+
+    it('forwards a consumer-supplied aria-labelledby to each thumb when there is no visible label', () => {
+      // Standard "label via an external heading" pattern — before this fix,
+      // removeClassStyleAttrs only stripped class/style, so aria-labelledby
+      // landed on the inert wrapper div and never reached the actual
+      // role="slider" inputs, leaving them with no accessible name at all.
+      mockProps = { label: undefined };
+      mockAttrs = { 'aria-labelledby': 'external-heading' };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      expect(thumbInputs[0].attributes('aria-labelledby')).toBe('external-heading');
+      expect(thumbInputs[0].attributes('aria-label')).toBeUndefined();
+    });
+
+    it('prefers the internal label over a consumer-supplied aria-labelledby when both are present', () => {
+      mockProps = { label: 'Volume' };
+      mockAttrs = { 'aria-labelledby': 'external-heading' };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      const labelId = wrapper.find('[data-qa="dt-slider-label"]').attributes('id');
+      expect(thumbInputs[0].attributes('aria-labelledby')).toBe(labelId);
     });
 
     it('sets aria-valuemin from min prop', () => {
@@ -524,7 +616,7 @@ describe('DtSlider Tests', () => {
       infoSpy.mockRestore();
     });
 
-    it('warns when neither label nor labelHidden is set — the one case actually missing an accessible name', () => {
+    it('warns when neither label nor showLabel is set — the one case actually missing an accessible name', () => {
       mockProps = { label: undefined };
       updateWrapper();
       expect(infoSpy).toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
@@ -536,13 +628,13 @@ describe('DtSlider Tests', () => {
       expect(infoSpy).not.toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
     });
 
-    it('warns when only labelHidden is set without a label — labelHidden alone does not create an accessible name', () => {
-      mockProps = { label: undefined, labelHidden: true };
+    it('warns when only showLabel is set without a label — showLabel alone does not create an accessible name', () => {
+      mockProps = { label: undefined, showLabel: false };
       updateWrapper();
       expect(infoSpy).toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
     });
 
-    it('does not warn when aria-label is provided, even without label or labelHidden', () => {
+    it('does not warn when aria-label is provided, even without label or showLabel', () => {
       mockProps = { label: undefined };
       mockAttrs = { 'aria-label': 'Volume' };
       updateWrapper();
@@ -573,6 +665,28 @@ describe('DtSlider Tests', () => {
       mockProps = { label: 'Price range', modelValue: [20, 70], getValueText: (v) => `${v}` };
       updateWrapper();
       expect(infoSpy).not.toHaveBeenCalledWith(expect.stringContaining('provide getValueText'));
+    });
+
+    it('does not warn when aria-labelledby is provided, even without label or aria-label', () => {
+      mockProps = { label: undefined };
+      mockAttrs = { 'aria-labelledby': 'external-heading' };
+      updateWrapper();
+      expect(infoSpy).not.toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
+    });
+
+    it('warns for a whitespace-only label — it has no non-whitespace content, same as an empty one', () => {
+      mockProps = { label: '   ' };
+      updateWrapper();
+      expect(infoSpy).toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
+    });
+
+    it('warns as soon as a reactively-cleared label removes the accessible name after mount, not just at mount time', async () => {
+      mockProps = { label: 'Volume' };
+      updateWrapper();
+      expect(infoSpy).not.toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
+
+      await wrapper.setProps({ label: '' });
+      expect(infoSpy).toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
     });
   });
 
@@ -630,6 +744,33 @@ describe('DtSlider Tests', () => {
     it('emits blur on thumb blur', async () => {
       await thumbInputs[0].trigger('blur');
       expect(wrapper.emitted('blur')).toBeTruthy();
+    });
+
+    describe('Exposed public API', () => {
+      // document.activeElement only tracks elements actually attached to the
+      // document — the shared `wrapper` from the outer beforeEach isn't, so
+      // these mount their own instance with attachTo instead.
+      let attachedWrapper;
+
+      afterEach(() => {
+        attachedWrapper?.unmount();
+      });
+
+      it('focus() focuses the first thumb input', () => {
+        attachedWrapper = mount(DtSlider, { props: baseProps, attachTo: document.body });
+        const input = attachedWrapper.find('[data-qa="dt-slider-thumb"]').element;
+        attachedWrapper.vm.focus();
+        expect(document.activeElement).toBe(input);
+      });
+
+      it('blur() blurs the first thumb input', () => {
+        attachedWrapper = mount(DtSlider, { props: baseProps, attachTo: document.body });
+        const input = attachedWrapper.find('[data-qa="dt-slider-thumb"]').element;
+        input.focus();
+        expect(document.activeElement).toBe(input);
+        attachedWrapper.vm.blur();
+        expect(document.activeElement).not.toBe(input);
+      });
     });
 
     describe('Pointer drag', () => {
@@ -772,6 +913,17 @@ describe('DtSlider Tests', () => {
         await control.trigger('pointermove', { pointerId: 1, clientX: 90, buttons: 1 });
         const emittedAfter = (wrapper.emitted('update:modelValue') || []).length;
         expect(emittedAfter).toBe(emittedBefore);
+      });
+
+      it('clears the keyboard-focus ring when disabled flips true while a thumb is focused', async () => {
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        await thumbInputs[0].trigger('focus');
+        thumbVisuals = wrapper.findAll('[data-qa="dt-slider-thumb-visual"]');
+        expect(thumbVisuals[0].classes()).toContain('d-slider__thumb-visual--focused');
+
+        await wrapper.setProps({ disabled: true });
+        thumbVisuals = wrapper.findAll('[data-qa="dt-slider-thumb-visual"]');
+        expect(thumbVisuals[0].classes()).not.toContain('d-slider__thumb-visual--focused');
       });
 
       it('routes a pointerdown to the thumb opposite the one last dragged, when both thumbs coincide', async () => {
@@ -1073,6 +1225,36 @@ describe('DtSlider Tests', () => {
       });
     });
 
+    it('corrects the native input DOM value when the crossing clamp leaves internalValues unchanged', async () => {
+      // Native plain-arrow keyboard stepping is handled entirely by the
+      // browser itself (see onThumbKeydown) — it writes straight into the
+      // input's own DOM .value before Vue's 'input' handler ever runs, and
+      // it isn't constrained to the sibling thumb's position the way this
+      // range-mode crossing clamp is. Simulate exactly that: the low thumb
+      // is already at 60 (touching the high thumb), and the native element
+      // has already stepped itself one further, to 61.
+      mockProps = { modelValue: [60, 60] };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      // Let mount fully settle first — pending post-mount reactive effects
+      // (e.g. the collision-detection watcher's own nextTick) can otherwise
+      // land on the same tick as the manual DOM write below and coincidentally
+      // force-resync every input's value as an unrelated side effect of
+      // Vue's own value-binding patch, masking whether THIS fix is what
+      // actually corrected it.
+      await settleCollisions();
+
+      thumbInputs[0].element.value = '61';
+      await thumbInputs[0].trigger('input');
+
+      // The crossing clamp reduces 61 back to 60 — already the thumb's
+      // current logical value — so internalValues never changes and no
+      // update:modelValue fires. Without the fix, the native input's own
+      // DOM value would be left at the wrong '61' anyway.
+      expect(wrapper.emitted('update:modelValue')).toBeFalsy();
+      expect(thumbInputs[0].element.value).toBe('60');
+    });
+
     describe('Range: an inverted modelValue is normalized, not left crossed', () => {
       it('swaps an inverted initial modelValue on mount', () => {
         mockProps = { modelValue: [70, 30] };
@@ -1287,6 +1469,26 @@ describe('DtSlider Tests', () => {
         expect(thumbInputs).toHaveLength(1);
         expect(Number(thumbInputs[0].element.value)).toBe(100);
       });
+    });
+  });
+
+  describe('step edge cases', () => {
+    it('does not produce NaN when step is 0 — falls back to the clamped raw value', async () => {
+      mockProps = { modelValue: 50, min: 0, max: 100, step: 0 };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      thumbInputs[0].element.value = '73';
+      await thumbInputs[0].trigger('input');
+      expect(wrapper.emitted('update:modelValue')?.at(-1)[0]).toBe(73);
+    });
+
+    it('does not produce NaN when step is negative — falls back to the clamped raw value', async () => {
+      mockProps = { modelValue: 50, min: 0, max: 100, step: -5 };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      thumbInputs[0].element.value = '40';
+      await thumbInputs[0].trigger('input');
+      expect(wrapper.emitted('update:modelValue')?.at(-1)[0]).toBe(40);
     });
   });
 

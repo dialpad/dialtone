@@ -100,6 +100,18 @@ describe('option_bar_control.vue test', function () {
       expect(findRawButton(wrapper)).toBeUndefined();
     });
 
+    it('hides the RAW toggle for a string|array|object union (e.g. any *Class prop)', function () {
+      // Every *Class prop across the library (labelClass, iconClass, etc.) is
+      // typed [String, Array, Object] — validControls always includes
+      // 'string' for these. Without excluding 'string', the toggle would
+      // show up on virtually every class-override control, not just
+      // genuinely array/object-shaped props like Slider's modelValue.
+      wrapper = mount(DtcOptionBarControl, {
+        props: { ...numberOrArrayMember, validControls: ['string', 'array', 'object'], value: '' },
+      });
+      expect(findRawButton(wrapper)).toBeUndefined();
+    });
+
     it('shows the RAW toggle for an array control component regardless of validControls', function () {
       wrapper = mount(DtcOptionBarControl, {
         props: {
