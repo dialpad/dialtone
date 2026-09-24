@@ -432,12 +432,6 @@
         "ignore",
         "dismiss"
       ],
-      "chat-rejected": [
-        "Chat",
-        "decline",
-        "ignore",
-        "dismiss"
-      ],
       "contacts": [
         "address",
         "people",
@@ -448,12 +442,6 @@
       ],
       "digital-whisper": [
         "private"
-      ],
-      "email-rejected": [
-        "Email",
-        "decline",
-        "ignore",
-        "dismiss"
       ],
       "forward": [
         "send",
@@ -480,6 +468,12 @@
         "letter",
         "read"
       ],
+      "mail-rejected": [
+        "Mail",
+        "decline",
+        "ignore",
+        "dismiss"
+      ],
       "mail": [
         "email",
         "message",
@@ -494,6 +488,12 @@
         "mailing list",
         "newsletter",
         "copy"
+      ],
+      "message-rejected": [
+        "Message",
+        "decline",
+        "ignore",
+        "dismiss"
       ],
       "message": [
         "chat",
