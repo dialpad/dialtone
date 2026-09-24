@@ -235,6 +235,6 @@ Some components validate prop combinations at runtime and log warnings. There is
 - DtBadge: errors on `type: 'ai'` with `kind: 'count'`, decoration with non-default type/kind
 - DtAvatar: errors when `imageSrc` is provided without `imageAlt`
 - DtTooltip: warns when both `enabled` and `show` props are set
-- DtSlider: warns (dev-only `console.info`) when range mode (array `modelValue`) has no `getValueText`, and when there's no accessible name from `label`, a non-empty `label` slot, or `aria-label`
+- DtSlider: warns (dev-only `console.info`) when range mode (array `modelValue`) has no `getValueText`, and when there's no accessible name from `label`, a non-empty `label` slot, `aria-label`, or `aria-labelledby`
 
 Check each component's source or `_constants.js` for the full list of invalid combinations.

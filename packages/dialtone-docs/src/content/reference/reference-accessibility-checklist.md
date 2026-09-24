@@ -41,7 +41,7 @@ For the full accessibility guide with P.O.U.R. principles and role-specific resp
 ### Sliders (DtSlider)
 
 - Each thumb is a native `<input type="range">` (implicit `role="slider"`, native `aria-valuemin`/`aria-valuemax`/`aria-valuenow`) — range mode renders two native inputs, not a single custom control
-- `aria-labelledby` (visible `label` prop or non-empty `#label` slot) or `aria-label` (bare `$attrs['aria-label']`) — never both; a dev-only `console.info` warns when neither resolves to an accessible name
+- `aria-labelledby` points at the internal label element when a visible `label` prop or non-empty `#label` slot is present; otherwise a consumer-supplied `aria-labelledby` (`$attrs['aria-labelledby']`) is forwarded instead, falling back to a consumer `aria-label` (`$attrs['aria-label']`) only when neither of those is set — never more than one of the three at once; a dev-only `console.info` warns when none of them resolves to an accessible name
 - `aria-valuetext` is set dynamically per thumb via `getValueText(value, index)` when provided (falls back to `prefix`/`suffix`) — required in range mode to give each thumb a distinct description; warned via `console.info` when absent
 - `aria-orientation="vertical"` mirrors the `orientation` prop; horizontal is the implicit native default
 - Positioning uses CSS logical properties (`inset-inline-start`, not `left`) so the track/thumb/indicator mirror automatically under `dir="rtl"`; pointer-to-value mapping and the Shift+Arrow/Page Up/Page Down handlers are also direction-aware to match the native `<input>`'s own RTL-flipped Arrow key behavior — plain Arrow/Home/End are handled natively (already RTL-aware) and never intercepted in JS
