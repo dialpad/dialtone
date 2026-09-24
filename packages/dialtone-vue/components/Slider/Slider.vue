@@ -100,10 +100,19 @@
           @pointerenter="onThumbHitPointerEnter(i)"
           @pointerleave="onThumbHitPointerLeave(i)"
         />
+        <!-- A plain string `ref="thumbRefs"` on a v-for only pushes each
+             element in patch order — the same class of ordering risk this
+             file's own updateMarkCollisions comment documents ("confirmed
+             live") for markElRefs, and onPointerDown/updateThumbValue below
+             both index into thumbRefs directly, so a misalignment here would
+             focus/write to the wrong native input. A function ref assigns by
+             the v-for's own index explicitly instead, and Vue calls it with
+             null on unmount, so a shrinking array (range to single mode)
+             self-cleans rather than leaving a stale entry. -->
         <input
           v-for="(val, i) in internalValues"
           :key="`thumb-input-${i}`"
-          ref="thumbRefs"
+          :ref="(el) => { thumbRefs[i] = el; }"
           type="range"
           class="d-slider__thumb"
           :value="val"
