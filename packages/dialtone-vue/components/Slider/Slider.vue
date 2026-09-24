@@ -1,6 +1,6 @@
 <template>
   <div
-    v-bind="removeClassStyleAttrs($attrs)"
+    v-bind="wrapperAttrs"
     :class="[
       'd-slider',
       sizeClass,
@@ -107,13 +107,17 @@
           type="range"
           class="d-slider__thumb"
           :value="val"
-          :min="min"
-          :max="max"
-          :step="step"
+          :min="thumbNativeMin(i)"
+          :max="thumbNativeMax(i)"
+          :step="thumbNativeStep(i)"
           :disabled="disabled"
           :name="name || undefined"
           :aria-labelledby="hasVisibleLabel ? labelId : attrs['aria-labelledby']"
           :aria-label="hasVisibleLabel || attrs['aria-labelledby'] ? undefined : attrs['aria-label']"
+          :aria-describedby="attrs['aria-describedby']"
+          :aria-errormessage="attrs['aria-errormessage']"
+          :aria-details="attrs['aria-details']"
+          :aria-invalid="attrs['aria-invalid']"
           :aria-valuetext="formatValue(val, i)"
           :aria-orientation="isVertical ? 'vertical' : undefined"
           :style="thumbPositionStyle(val)"
@@ -393,7 +397,10 @@ const props = defineProps({
   },
 
   /**
-   * Number of steps to move on Page Up/Page Down or Shift + Arrow.
+   * Roughly how far to move on Page Up/Page Down or Shift + Arrow, in the
+   * same units as step — rounded to the nearest whole number of steps (at
+   * least one), so the result always lands on the step grid and always
+   * moves, even when step is coarser than largeStep itself.
    */
   largeStep: {
     type: Number,
@@ -522,17 +529,64 @@ function clampToRange(val) {
   return Math.min(props.max, Math.max(props.min, val));
 }
 
-// The public contract (see modelValue's validator) is a number or a
-// length-2 array. Nothing enforces that at runtime, though — a controlled
-// value out of [min, max], or an array of some other length, would
-// otherwise flow straight into internalValues and split the native input
-// (browser-clamped), aria-valuetext (unclamped), and visual thumb (also
-// unclamped) into three disagreeing states, or render an unmanaged extra
-// thumb. This is the single place both mount and the modelValue watcher
-// funnel through, so both get the same guarantees: every value clamped to
-// [min, max], and an array normalized to at most two entries (a longer
-// array is truncated rather than spawning extra thumbs; a single-entry
-// array degrades to that one clamped value rather than crashing).
+// step must be a positive value for a well-defined grid — <input step> is
+// only valid when positive, and the HTML range-state algorithm silently
+// rounds any assigned .value to the nearest step-grid point relative to the
+// element's own min. Without this guard, a controlled value or a magnetic
+// snap point that doesn't land on that grid renders correctly in Vue's
+// internal state (visual thumb, readout, aria-valuetext, emitted
+// modelValue) but gets silently coerced by the BROWSER itself the moment
+// it's written to the native input's .value — splitting Vue's state from
+// what the native control, its implicit aria-valuenow, and form submission
+// actually hold.
+function snapToStep(val) {
+  if (props.step <= 0) return Math.min(props.max, Math.max(props.min, val));
+  const steps = Math.round((val - props.min) / props.step);
+  const dp = Math.max(decimalPlaces(props.min), decimalPlaces(props.step));
+  return Math.min(props.max, Math.max(props.min, parseFloat((props.min + steps * props.step).toFixed(dp))));
+}
+
+// Range mode's low/high thumbs may only meet, or — when minStepsBetweenValues
+// is set — must keep at least that many steps apart. updateThumbValue already
+// enforces this during interactive drags/keyboard input, but a controlled
+// modelValue, or a reactive change to step/minStepsBetweenValues, bypassed it
+// entirely: two values could sit closer together than the documented minimum
+// gap from the very first render, and the native inputs' min/max never
+// reflected that dependency either (see thumbNativeMin/thumbNativeMax).
+function enforceRangeGap(values) {
+  if (values.length !== 2) return values;
+  const gap = props.minStepsBetweenValues * props.step;
+  if (gap <= 0) return values;
+  let [lo, hi] = values;
+  if (hi - lo >= gap) return values;
+  // Widen from the high end first — mirrors updateThumbValue's own
+  // asymmetry (thumb 1 is the one pushed when a drag closes the gap) — then
+  // pull the low end down only if that overflowed max.
+  hi = Math.min(props.max, lo + gap);
+  lo = Math.min(lo, hi - gap);
+  lo = Math.max(props.min, lo);
+  const dp = Math.max(decimalPlaces(props.min), decimalPlaces(props.step));
+  return [parseFloat(lo.toFixed(dp)), parseFloat(hi.toFixed(dp))];
+}
+
+// The single place every value entering internalValues funnels through —
+// mount, a controlled modelValue change, and reactive min/max/step/
+// minStepsBetweenValues changes all call this (directly or via
+// renormalizeCurrentValues below) — so all of them get the same guarantees:
+// clamped to [min, max], snapped to the step grid, range order normalized,
+// and the minStepsBetweenValues gap enforced. Nothing enforces the public
+// contract (see modelValue's validator) at runtime otherwise: a controlled
+// value out of [min, max] or off the step grid, or an array of some other
+// length, would otherwise flow straight into internalValues and split the
+// native input (browser-clamped/step-coerced), aria-valuetext (unclamped),
+// and visual thumb (also unclamped) into three disagreeing states, or
+// render an unmanaged extra thumb.
+function applyValueConstraints(values) {
+  let out = values.map(clampToRange).map(snapToStep);
+  out = out.length === 2 ? normalizeRangeValues(out) : out;
+  return enforceRangeGap(out);
+}
+
 function normalizeModelValue(value) {
   let raw;
   if (Array.isArray(value)) {
@@ -540,8 +594,7 @@ function normalizeModelValue(value) {
   } else {
     raw = value !== undefined && value !== null ? [value] : [props.min];
   }
-  const clamped = raw.map(clampToRange);
-  return clamped.length === 2 ? normalizeRangeValues(clamped) : clamped;
+  return applyValueConstraints(raw);
 }
 
 const internalValues = ref(normalizeModelValue(props.modelValue));
@@ -557,6 +610,19 @@ const isVertical = computed(() => props.orientation === 'vertical');
 // v-if-false template — doesn't count as providing a name.
 const hasVisibleLabel = computed(() => !!(props.label?.trim() || hasSlotContent(slots.label)));
 const sizeClass = computed(() => SLIDER_SIZE_MODIFIERS[String(props.size)] ?? '');
+
+// These form-control ARIA relationship attributes are explicitly forwarded
+// to each native thumb input instead (see the template's thumb <input>
+// bindings) — a generic wrapper <div> isn't a form control, so leaving them
+// here as well would duplicate aria-label/aria-labelledby on an element
+// that shouldn't be named, and would strand aria-describedby/
+// aria-errormessage/aria-details/aria-invalid somewhere neither the native
+// input nor assistive tech querying it would ever see them.
+const THUMB_ARIA_KEYS = ['aria-label', 'aria-labelledby', 'aria-describedby', 'aria-errormessage', 'aria-details', 'aria-invalid'];
+const wrapperAttrs = computed(() => {
+  const base = removeClassStyleAttrs(attrs);
+  return Object.fromEntries(Object.entries(base).filter(([key]) => !THUMB_ARIA_KEYS.includes(key)));
+});
 
 // Mirrors the update:modelValue payload shape (Number, or Number[] in range
 // mode) so a custom #label slot can render the live value while dragging.
@@ -607,18 +673,19 @@ watch(
   },
 );
 
-// A consumer can narrow [min, max] (or widen/shift it) without touching
-// modelValue at all — the watcher above never fires for that, so the
-// current value(s) would otherwise silently drift out of bounds the same
-// three-way way (native input clamps, aria-valuetext and the visual thumb
-// don't). Re-clamping here closes that gap; it deliberately doesn't re-run
-// full normalizeModelValue (array-length truncation, inversion) since min/
-// max changing isn't a signal that the array shape itself is now invalid.
+// A consumer can narrow [min, max], change step, or change
+// minStepsBetweenValues without touching modelValue at all — the watcher
+// above never fires for that, so the current value(s) would otherwise
+// silently drift out of bounds, off the step grid, or inside a now-invalid
+// gap (native input clamps/step-coerces, aria-valuetext and the visual
+// thumb don't — see applyValueConstraints). This re-applies the same full
+// constraint pipeline every time any of those four props change, so the
+// guarantees hold continuously, not just at mount and on modelValue writes.
 watch(
-  () => [props.min, props.max],
+  () => [props.min, props.max, props.step, props.minStepsBetweenValues],
   () => {
-    const next = internalValues.value.map(clampToRange);
-    if (next.some((v, i) => v !== internalValues.value[i])) {
+    const next = applyValueConstraints(internalValues.value);
+    if (next.length !== internalValues.value.length || next.some((v, i) => v !== internalValues.value[i])) {
       internalValues.value = next;
       lastCommittedValues.value = [...next];
       emit('update:modelValue', isRange.value ? [...next] : next[0]);
@@ -641,6 +708,50 @@ function decimalPlaces(n) {
   return dot === -1 ? 0 : String(n).length - dot - 1;
 }
 
+// The two thumbs in range mode have a DEPENDENT range, not the full
+// [min, max] each: the low thumb can never reach past (high - gap) and the
+// high thumb never below (low + gap). Binding both native inputs to the
+// same static min/max (as before) told the browser and assistive tech that
+// either thumb could traverse the complete range, contradicting the
+// WAI-ARIA multi-thumb slider pattern, which requires each thumb's
+// aria-valuemin/aria-valuemax to reflect the other thumb's current position.
+function thumbNativeMin(i) {
+  if (!isRange.value || i !== 1) return props.min;
+  const gap = props.minStepsBetweenValues * props.step;
+  return Math.min(props.max, (internalValues.value[0] ?? props.min) + gap);
+}
+
+function thumbNativeMax(i) {
+  if (!isRange.value || i !== 0) return props.max;
+  const gap = props.minStepsBetweenValues * props.step;
+  return Math.max(props.min, (internalValues.value[1] ?? props.max) - gap);
+}
+
+// The native range-state algorithm rounds any value assigned to a step
+// mismatch relative to the input's OWN min — silently overriding Vue's
+// :value binding the moment the browser applies it, splitting native state
+// (and form submission) from the visual thumb/readout/aria-valuetext/
+// emitted modelValue. applyValueConstraints (mount, controlled updates,
+// reactive min/max/step/minStepsBetweenValues changes) already keeps
+// internalValues on the step grid, so this never matters in practice — with
+// one deliberate exception: an active magnetic snap point (see
+// findMagneticSnapPoint) intentionally holds an off-grid value while
+// dragging, exactly as documented ("unlike step, this doesn't restrict
+// which values are selectable"). Falling back to step="any" only for that
+// specific thumb, only while its value is genuinely off-grid, keeps the
+// browser from fighting that intentional value without touching native
+// Home/End/Arrow stepping (which relies on the real `step` attribute) the
+// rest of the time. A non-positive step has no valid grid at all, matching
+// snapToStep's own unsnapped fallback in that case.
+function thumbNativeStep(i) {
+  if (props.step <= 0) return 'any';
+  const val = internalValues.value[i];
+  if (val === undefined) return props.step;
+  const stepsFromMin = (val - props.min) / props.step;
+  const isOffGrid = Math.abs(stepsFromMin - Math.round(stepsFromMin)) > 1e-9;
+  return isOffGrid ? 'any' : props.step;
+}
+
 // A too-small interval relative to [min, max] (e.g. tickInterval=0.001 over a
 // 0–100 range) would otherwise generate tens of thousands of DOM nodes and an
 // equally large per-pointermove scan — cap it and warn instead of silently
@@ -648,27 +759,37 @@ function decimalPlaces(n) {
 const MAX_GENERATED_POINTS = 1000;
 
 function generateInterval(min, max, interval, label) {
+  const span = max - min;
+  const naturalCount = span > 0 ? Math.floor(span / interval) + 1 : 1;
+  let effectiveInterval = interval;
+  if (naturalCount > MAX_GENERATED_POINTS) {
+    // Too many points for the requested interval to be practical over this
+    // range — widen it just enough to fit the cap while still spanning the
+    // FULL domain, rather than truncating to a fixed count from `min`. That
+    // used to silently cover only the first ~1% of the range (e.g.
+    // tickInterval=0.001 over 0–100 rendered ticks from 0 to 0.999 only) —
+    // a plausible-looking but materially false representation of the range.
+    effectiveInterval = span / (MAX_GENERATED_POINTS - 1);
+    if (process.env.NODE_ENV !== 'production') {
+      console.info(
+        `[Dialtone] DtSlider: ${label}=${interval} would generate more than ${MAX_GENERATED_POINTS} points over this range — using ${effectiveInterval} instead so coverage still spans the full range.`,
+      );
+    }
+  }
   const values = [];
-  for (let v = min; v <= max && values.length <= MAX_GENERATED_POINTS; v = parseFloat((v + interval).toFixed(10))) {
+  for (
+    let v = min;
+    v <= max && values.length < MAX_GENERATED_POINTS;
+    v = parseFloat((v + effectiveInterval).toFixed(10))
+  ) {
     values.push(v);
   }
-  if (values.length > MAX_GENERATED_POINTS) {
-    console.info(
-      `[Dialtone] DtSlider: ${label} would generate more than ${MAX_GENERATED_POINTS} points — truncating. Use a larger interval.`,
-    );
-    return values.slice(0, MAX_GENERATED_POINTS);
+  // Float accumulation can fall just short of `max` after many increments —
+  // make sure the end of the domain is always represented.
+  if (values.length && values[values.length - 1] < max - 1e-9) {
+    values.push(max);
   }
   return values;
-}
-
-function snapToStep(val) {
-  // A zero or negative step has no valid grid to snap to — dividing by it
-  // would produce NaN/Infinity and corrupt every downstream value. Fall back
-  // to the clamped raw value, same as an unset step would with no quantization.
-  if (props.step <= 0) return Math.min(props.max, Math.max(props.min, val));
-  const steps = Math.round((val - props.min) / props.step);
-  const dp = Math.max(decimalPlaces(props.min), decimalPlaces(props.step));
-  return Math.min(props.max, Math.max(props.min, parseFloat((props.min + steps * props.step).toFixed(dp))));
 }
 
 // Mirrors computedTickValues' interval generation — a number means "evenly
@@ -1020,6 +1141,14 @@ function onPointerDown(event) {
   if (thumbEl && document.activeElement !== thumbEl) {
     isPointerFocus = true;
     thumbEl.focus();
+  } else if (focusedThumbIndex.value === idx) {
+    // This exact thumb was already keyboard-focused, so focus() above is
+    // skipped entirely (an already-focused element fires no 'focus' event to
+    // clear the keyboard-focus ring through the normal path). Without this,
+    // the keyboard-only focus ring would stay visually combined with the
+    // --active drag style for the whole drag, even though input modality
+    // just switched to pointer.
+    focusedThumbIndex.value = null;
   }
 }
 
@@ -1074,6 +1203,22 @@ function largeStepDelta(key, shiftKey, increaseKey, decreaseKey) {
   return 0;
 }
 
+// largeStep is documented as roughly how far a Page Up/Down or Shift+Arrow
+// nudge should move — but the actual movement always has to land on the
+// step grid (see snapToStep), and rounding the raw sum to the NEAREST grid
+// point can round backward to the value it started from whenever step is
+// more than about twice largeStep (e.g. step=25, largeStep=10: 100+10=110
+// rounds back to 100 — a silent no-op on a documented keyboard operation).
+// Converting largeStep into a whole number of real steps first — at least
+// one — guarantees a large-step key always moves, while still landing on
+// exactly the plain-step increment for the common case (step=1, the
+// default) where it already matched exactly.
+function largeStepValue() {
+  if (props.step <= 0) return props.largeStep;
+  const stepsCount = Math.max(1, Math.round(props.largeStep / props.step));
+  return stepsCount * props.step;
+}
+
 function onThumbKeydown(i, event) {
   // A pointer click that focused this thumb never fires another 'focus'
   // event just because the user starts pressing keys afterward — focus()
@@ -1097,7 +1242,7 @@ function onThumbKeydown(i, event) {
   const delta = largeStepDelta(event.key, event.shiftKey, increaseKey, decreaseKey);
   if (delta !== 0) {
     event.preventDefault();
-    updateThumbValue(i, internalValues.value[i] + delta * props.largeStep);
+    updateThumbValue(i, internalValues.value[i] + delta * largeStepValue());
   }
   // Plain arrow keys, Home, End handled natively by <input type="range">
   // (also RTL-aware natively, so no extra handling needed here).
@@ -1332,12 +1477,21 @@ onBeforeUnmount(() => {
 // ─── Dev warnings ─────────────────────────────────────────────────────────────
 
 // watchEffect (not onMounted) — the accessible-name and range/getValueText
-// checks below read reactive sources (props, slots, attrs), and a consumer
-// can legitimately change any of them after mount (e.g. reactively clearing
-// label once a heading it depends on loads). A one-shot mount check would
-// silently stop warning about a real regression the moment it happens after
-// the initial paint.
+// checks below read reactive sources (props and slots; the accessible-name
+// check also reads useAttrs(), which is reactive for properties read while
+// an effect runs), and a consumer can legitimately change label/getValueText
+// after mount (e.g. reactively clearing label once a heading it depends on
+// loads). A one-shot mount check would silently stop warning about a real
+// regression the moment it happens after the initial paint.
+//
+// Guarded by NODE_ENV, matching this repo's convention for dev-only console
+// warnings (see e.g. DtButton, DtTextList, DtProse) — a library can't assume
+// every downstream consumer strips console calls from their own production
+// build, so an unguarded call here would log in every consumer's production
+// app, not just during local development.
 watchEffect(() => {
+  if (process.env.NODE_ENV === 'production') return;
+
   if (isRange.value && !props.getValueText) {
     console.info(
       '[Dialtone] DtSlider in range mode: provide getValueText to give each thumb a distinct screen-reader description.',

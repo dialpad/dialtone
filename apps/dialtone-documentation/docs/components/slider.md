@@ -383,8 +383,8 @@ The `label` slot replaces the plain text label entirely — scoped with `value` 
 | Arrow Left / Arrow Down | Decrease value by `step` |
 | Home | Jump to `min` |
 | End | Jump to `max` |
-| Page Up / Shift + Arrow Right / Shift + Arrow Up | Increase value by `largeStep` (default 10) |
-| Page Down / Shift + Arrow Left / Shift + Arrow Down | Decrease value by `largeStep` (default 10) |
+| Page Up / Shift + Arrow Right / Shift + Arrow Up | Increase value by roughly `largeStep` (default 10), rounded to the nearest whole number of `step`s — always at least one |
+| Page Down / Shift + Arrow Left / Shift + Arrow Down | Decrease value by roughly `largeStep` (default 10), rounded to the nearest whole number of `step`s — always at least one |
 
 > [!INFO] RTL support
 > The track, thumb, and indicator position with logical (inset-inline-start) values, so they mirror automatically under `dir="rtl"`. Pointer dragging and the Shift+Arrow/Page Up/Page Down keys are direction-aware too, matching the native `<input type="range">`'s own RTL-flipped Arrow key behavior.

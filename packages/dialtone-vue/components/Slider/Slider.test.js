@@ -392,8 +392,21 @@ describe('DtSlider Tests', () => {
         mockProps = { showTicks: true, tickInterval: 0.001, min: 0, max: 100 };
         updateWrapper();
         const ticks = wrapper.findAll('[data-qa="dt-slider-tick"]');
-        expect(ticks.length).toBeLessThanOrEqual(1000);
+        expect(ticks.length).toBeLessThanOrEqual(1001); // +1 for the guaranteed end-of-domain point
         expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('tickInterval'));
+      });
+
+      it('still covers the FULL domain when capped, not just the beginning of it', () => {
+        // The cap used to generate points sequentially from `min` and
+        // truncate at 1000 — for tickInterval=0.001 over 0–100 that covered
+        // only 0 through 0.999 (the first ~1% of the range): a plausible-
+        // looking but materially false representation of the range, with
+        // no ticks or snap targets anywhere past it.
+        mockProps = { showTicks: true, tickInterval: 0.001, min: 0, max: 100 };
+        updateWrapper();
+        const tickPositions = wrapper.findAll('[data-qa="dt-slider-tick"]').map((t) => t.attributes('style'));
+        const lastTickStyle = tickPositions.at(-1);
+        expect(lastTickStyle).toMatch(/inset-inline-start:\s*(99\.\d+|100)%/);
       });
 
       it('caps snapPoints generation instead of hanging on a too-small interval', async () => {
@@ -406,6 +419,28 @@ describe('DtSlider Tests', () => {
         control.element.setPointerCapture = () => {};
         await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 10, buttons: 1 });
         expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('snapPoints'));
+      });
+    });
+
+    describe('Dense generated points, production mode', () => {
+      let warnSpy;
+      let originalNodeEnv;
+
+      beforeEach(() => {
+        warnSpy = vi.spyOn(console, 'info').mockImplementation(() => {});
+        originalNodeEnv = process.env.NODE_ENV;
+        process.env.NODE_ENV = 'production';
+      });
+
+      afterEach(() => {
+        warnSpy.mockRestore();
+        process.env.NODE_ENV = originalNodeEnv;
+      });
+
+      it('does not log the interval-cap notice in production', () => {
+        mockProps = { showTicks: true, tickInterval: 0.001, min: 0, max: 100 };
+        updateWrapper();
+        expect(warnSpy).not.toHaveBeenCalled();
       });
     });
 
@@ -571,6 +606,50 @@ describe('DtSlider Tests', () => {
       expect(thumbInputs[0].attributes('aria-labelledby')).toBe(labelId);
     });
 
+    it('does not duplicate aria-label/aria-labelledby onto the root wrapper — only the thumb inputs get them', () => {
+      mockProps = { label: undefined };
+      mockAttrs = { 'aria-label': 'Volume', 'aria-labelledby': 'external-heading' };
+      updateWrapper();
+      expect(root.attributes('aria-label')).toBeUndefined();
+      expect(root.attributes('aria-labelledby')).toBeUndefined();
+    });
+
+    it('forwards aria-describedby, aria-errormessage, aria-details, and aria-invalid to each thumb input', () => {
+      mockAttrs = {
+        'aria-describedby': 'hint-id',
+        'aria-errormessage': 'error-id',
+        'aria-details': 'details-id',
+        'aria-invalid': 'true',
+      };
+      mockProps = { modelValue: [20, 70] };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      for (const input of thumbInputs) {
+        expect(input.attributes('aria-describedby')).toBe('hint-id');
+        expect(input.attributes('aria-errormessage')).toBe('error-id');
+        expect(input.attributes('aria-details')).toBe('details-id');
+        expect(input.attributes('aria-invalid')).toBe('true');
+      }
+    });
+
+    it('does not leave aria-describedby/aria-errormessage/aria-details/aria-invalid on the root wrapper', () => {
+      // Before this fix, only class/style were stripped from $attrs before
+      // binding the rest to the root <div> — these form-control relationship
+      // attributes stayed on that inert wrapper and never reached the actual
+      // role="slider" inputs at all.
+      mockAttrs = {
+        'aria-describedby': 'hint-id',
+        'aria-errormessage': 'error-id',
+        'aria-details': 'details-id',
+        'aria-invalid': 'true',
+      };
+      updateWrapper();
+      expect(root.attributes('aria-describedby')).toBeUndefined();
+      expect(root.attributes('aria-errormessage')).toBeUndefined();
+      expect(root.attributes('aria-details')).toBeUndefined();
+      expect(root.attributes('aria-invalid')).toBeUndefined();
+    });
+
     it('sets aria-valuemin from min prop', () => {
       expect(thumbInputs[0].attributes('min')).toBe('0');
     });
@@ -620,6 +699,18 @@ describe('DtSlider Tests', () => {
       mockProps = { label: undefined };
       updateWrapper();
       expect(infoSpy).toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
+    });
+
+    it('does not warn at all in production — a library cannot assume every consumer strips console calls', () => {
+      const originalNodeEnv = process.env.NODE_ENV;
+      process.env.NODE_ENV = 'production';
+      try {
+        mockProps = { label: undefined, modelValue: [20, 70] }; // range mode + no label: would normally warn twice
+        updateWrapper();
+        expect(infoSpy).not.toHaveBeenCalled();
+      } finally {
+        process.env.NODE_ENV = originalNodeEnv;
+      }
     });
 
     it('does not warn about a missing label when label is set', () => {
@@ -845,6 +936,35 @@ describe('DtSlider Tests', () => {
           await nextTick();
 
           expect(attached.find('[data-qa="dt-slider-thumb-visual"]').classes()).toContain('d-slider__thumb-visual--focused');
+        } finally {
+          attached.unmount();
+        }
+      });
+
+      it('clears the keyboard-focus ring when a pointer drag starts on an already keyboard-focused thumb', async () => {
+        // onPointerDown skips focus() entirely for an already-focused thumb
+        // (see the test above), so onThumbFocus never runs and never clears
+        // focusedThumbIndex through the normal path — without an explicit
+        // clear, the keyboard-only ring stayed visually combined with the
+        // --active drag style for the whole drag, even though the input
+        // modality had switched to pointer. Attached to document.body (like
+        // the sibling test above) so document.activeElement genuinely
+        // reflects the focused thumb — onPointerDown's own already-focused
+        // check depends on it.
+        const attached = mount(DtSlider, { props: baseProps, attachTo: document.body });
+        try {
+          const attachedControl = attached.find('[data-qa="dt-slider-control"]');
+          attachedControl.element.setPointerCapture = () => {};
+          const attachedInput = attached.find('[data-qa="dt-slider-thumb"]');
+
+          attachedInput.element.focus();
+          await nextTick();
+          expect(attached.find('[data-qa="dt-slider-thumb-visual"]').classes()).toContain('d-slider__thumb-visual--focused');
+
+          await attachedControl.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 0, buttons: 1 });
+          const thumbVisual = attached.find('[data-qa="dt-slider-thumb-visual"]');
+          expect(thumbVisual.classes()).not.toContain('d-slider__thumb-visual--focused');
+          expect(thumbVisual.classes()).toContain('d-slider__thumb-visual--active');
         } finally {
           attached.unmount();
         }
@@ -1489,6 +1609,126 @@ describe('DtSlider Tests', () => {
       thumbInputs[0].element.value = '40';
       await thumbInputs[0].trigger('input');
       expect(wrapper.emitted('update:modelValue')?.at(-1)[0]).toBe(40);
+    });
+  });
+
+  describe('Controlled values stay on the native step grid', () => {
+    it('snaps a controlled modelValue that does not land on the step grid, correcting the parent', () => {
+      // The HTML range-state algorithm silently rounds any value assigned to
+      // a step mismatch relative to the native input's own min — without
+      // snapping this on mount, Vue's internal state (visual thumb, readout,
+      // aria-valuetext, emitted modelValue) would say 42 while the browser's
+      // own .value, implicit aria-valuenow, and form data would say 50.
+      mockProps = { modelValue: 42, min: 0, max: 100, step: 25 };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      expect(thumbInputs[0].element.value).toBe('50');
+      expect(wrapper.emitted('update:modelValue')?.at(-1)[0]).toBe(50);
+    });
+
+    it('sets step="any" on a thumb whose value is off-grid from an active magnetic snap point', async () => {
+      // snapPoints is documented to intentionally allow off-grid values
+      // ("unlike step, this doesn't restrict which values are selectable")
+      // — the real `step` attribute would otherwise let the browser silently
+      // round that intentional value away the moment it's applied.
+      mockProps = { modelValue: 50, min: 0, max: 100, step: 25, snapPoints: [42], snapThreshold: 1000 };
+      updateWrapper();
+      const control = wrapper.find('[data-qa="dt-slider-control"]');
+      control.element.setPointerCapture = () => {};
+      control.element.getBoundingClientRect = () => (
+        { left: 0, top: 0, right: 100, bottom: 20, width: 100, height: 20 }
+      );
+      await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 42, buttons: 1 });
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      expect(thumbInputs[0].element.value).toBe('42');
+      expect(thumbInputs[0].attributes('step')).toBe('any');
+    });
+
+    it('uses the real step attribute for an on-grid value (the common case)', () => {
+      mockProps = { modelValue: 50, min: 0, max: 100, step: 25 };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      expect(thumbInputs[0].attributes('step')).toBe('25');
+    });
+
+    it('uses step="any" for any thumb when step itself is non-positive', () => {
+      mockProps = { modelValue: 50, min: 0, max: 100, step: 0 };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      expect(thumbInputs[0].attributes('step')).toBe('any');
+    });
+  });
+
+  describe('Range: dependent per-thumb native bounds', () => {
+    it('enforces minStepsBetweenValues on a controlled modelValue at mount, not just during interaction', () => {
+      mockProps = { modelValue: [40, 60], min: 0, max: 100, step: 1, minStepsBetweenValues: 30 };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      const [lo, hi] = [Number(thumbInputs[0].element.value), Number(thumbInputs[1].element.value)];
+      expect(hi - lo).toBeGreaterThanOrEqual(30);
+      expect(wrapper.emitted('update:modelValue')?.at(-1)[0]).toEqual([lo, hi]);
+    });
+
+    it('re-enforces the gap reactively when minStepsBetweenValues changes after mount', async () => {
+      mockProps = { modelValue: [40, 60], min: 0, max: 100, step: 1 };
+      updateWrapper();
+      await wrapper.setProps({ minStepsBetweenValues: 30 });
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      const [lo, hi] = [Number(thumbInputs[0].element.value), Number(thumbInputs[1].element.value)];
+      expect(hi - lo).toBeGreaterThanOrEqual(30);
+    });
+
+    it('binds each thumb\'s native min/max to the sibling-dependent range, not the full [min, max]', () => {
+      // WAI-ARIA's multi-thumb slider pattern requires each thumb's
+      // aria-valuemin/aria-valuemax (native min/max on a range input) to
+      // reflect the OTHER thumb's current position, not the full domain.
+      mockProps = { modelValue: [40, 60], min: 0, max: 100, step: 1, minStepsBetweenValues: 5 };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      expect(thumbInputs[0].attributes('min')).toBe('0');
+      expect(thumbInputs[0].attributes('max')).toBe('55'); // 60 - gap(5)
+      expect(thumbInputs[1].attributes('min')).toBe('45'); // 40 + gap(5)
+      expect(thumbInputs[1].attributes('max')).toBe('100');
+    });
+
+    it('single-thumb mode is unaffected — each thumb still uses the full [min, max]', () => {
+      mockProps = { modelValue: 50, min: 0, max: 100 };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      expect(thumbInputs[0].attributes('min')).toBe('0');
+      expect(thumbInputs[0].attributes('max')).toBe('100');
+    });
+  });
+
+  describe('largeStep always moves when step is coarser than largeStep', () => {
+    it('moves by a full step instead of no-op-ing when step > 2 * largeStep', async () => {
+      // Rounding largeStep's raw sum to the NEAREST step-grid point could
+      // round backward to the starting value (e.g. step=25, largeStep=10:
+      // 100 + 10 = 110 rounds back to 100) — a silent no-op on a documented
+      // keyboard operation. This is exactly the shipped playback/zoom demo
+      // configuration (step=25, largeStep left at its default of 10).
+      mockProps = { modelValue: 100, min: 0, max: 200, step: 25 };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      await thumbInputs[0].trigger('keydown', { key: 'PageUp' });
+      expect(wrapper.emitted('update:modelValue')).toBeTruthy();
+      expect(wrapper.emitted('update:modelValue').at(-1)[0]).toBe(125);
+    });
+
+    it('still moves by exactly one step when even one step would overshoot largeStep by a lot', async () => {
+      mockProps = { modelValue: 100, min: 0, max: 105, step: 25, largeStep: 1 };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      await thumbInputs[0].trigger('keydown', { key: 'PageDown' });
+      expect(wrapper.emitted('update:modelValue').at(-1)[0]).toBe(75);
+    });
+
+    it('keeps exact backward-compatible behavior for the common case (step=1, default largeStep=10)', async () => {
+      mockProps = { modelValue: 50 };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      await thumbInputs[0].trigger('keydown', { key: 'PageUp' });
+      expect(wrapper.emitted('update:modelValue').at(-1)[0]).toBe(60);
     });
   });
 

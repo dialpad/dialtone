@@ -26,7 +26,13 @@
 .d-slider {
     //  Component CSS vars — override these for size/state modifiers
     --slider-track-height: var(--dt-size-border-300);         // 4px
-    --slider-track-color: var(--dt-slider-color-track);
+    // Same color-mix-off-a-semantic-token pattern DtProgressCircle's track
+    // uses (see progress_circle.less) rather than a raw base-palette
+    // reference — border-bold plus a light mix keeps this correct across
+    // light/dark/high-contrast themes automatically, instead of hard-coding
+    // one pre-mixed gray that stayed identical (and low-contrast) in dark
+    // mode regardless of theme.
+    --slider-track-color: color-mix(in oklch, var(--dt-color-border-bold) 25%, var(--dt-color-surface-primary));
     --slider-indicator-color: var(--dt-slider-color-indicator);
     // Same token an outlined button's text uses — readable against both
     // light and dark canvases, unlike --slider-indicator-color above, whose
@@ -38,7 +44,10 @@
     // physical knob that should stay light on both light and dark canvases,
     // rather than tracking the page background the way surface-primary does.
     --slider-thumb-color: var(--dt-color-neutral-white);
-    --slider-thumb-border-color: var(--dt-slider-color-thumb-border);
+    // A heavier mix than --slider-track-color above — the thumb border
+    // needs to read against the white/light thumb face, not just against
+    // the canvas, so it stays a bolder gray than the passive track.
+    --slider-thumb-border-color: color-mix(in oklch, var(--dt-color-border-bold) 45%, var(--dt-color-surface-primary));
     --slider-thumb-border-width: var(--dt-size-border-100);
     --slider-thumb-shadow: var(--dt-shadow-small);
     --slider-focus-shadow: var(--dt-shadow-focus);
