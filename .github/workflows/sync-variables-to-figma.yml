@@ -1,0 +1,179 @@
+name: Sync tokens to Figma variables
+
+# Two independent triggers, two independent Figma files, two GitHub
+# environments — so a preview run can never hold the credential that writes
+# to the main file, and vice versa. See
+# packages/dialtone-docs/src/content/workflows/workflow-figma-sync.md.
+on:
+  push:
+    branches: [staging]
+    paths:
+      - "packages/dialtone-tokens/tokens/**"
+  issue_comment:
+    types: [created]
+
+jobs:
+  # ── main file: push to staging ──────────────────────────────────────────
+  sync-main:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    environment: figma-tokens-sync-main
+    permissions:
+      contents: read
+      packages: read
+    concurrency:
+      # The file, not the branch or the ref: two overlapping pushes must not
+      # write to the same collection at once.
+      group: figma-tokens-sync-main
+      cancel-in-progress: false
+    env:
+      HUSKY: 0
+      FILE_KEY: ${{ vars.FILE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+      - name: Sync variables and materials
+        # The credential is scoped to THIS step alone, not the job-level env —
+        # checkout and setup don't need it, and GitHub exposes a job-level env
+        # var to every step, including ones a compromised action dependency
+        # could read from.
+        env:
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        # ONE step, not two. sync:materials declares dependsOn: ["sync:variables"]
+        # in project.json, so this single `nx run` sequences both within one
+        # process. Calling them as two separate `nx run` invocations — as an
+        # earlier version of this workflow did — ran sync:variables TWICE per
+        # job: once as its own step, and again as sync:materials's dependency,
+        # doubling every write to Figma on every push. Always run, not gated
+        # on which files changed: a material override can go stale from a
+        # PARENT token changing, without any file under
+        # tokens/base/material/** being touched itself. The sync is
+        # idempotent, so running it on every push costs an extra diff, never
+        # a wrong write.
+        run: pnpm nx run dialtone-tokens:sync:materials
+
+  # ── preview file: a `/sync-tokens` comment on a pull request ────────────
+  #
+  # issue_comment always runs the WORKFLOW DEFINITION from the base branch,
+  # never the PR's — but the PR's own code (including these sync scripts) is
+  # what actually gets checked out and executed below, with a real Figma
+  # credential in scope. TWO controls stand between that and a malicious PR
+  # exfiltrating the token, not one: the commenter must hold write-or-higher
+  # access, AND the PR's head must be a branch of THIS repo, not a fork. The
+  # first alone is not enough — a write-access maintainer commenting in good
+  # faith on someone else's fork PR would otherwise still run that fork's
+  # (possibly attacker-modified) sync scripts with a real Figma credential in
+  # scope, with nothing to stop the credential leaving in the payload of a
+  # request the fork's own code controls.
+  authorize:
+    if: >
+      github.event_name == 'issue_comment' &&
+      github.event.issue.pull_request &&
+      contains(github.event.comment.body, '/sync-tokens')
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    outputs:
+      allowed: ${{ steps.pr.outputs.allowed }}
+      sha: ${{ steps.pr.outputs.sha }}
+    steps:
+      - name: Check commenter's permission
+        id: check
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data } = await github.rest.repos.getCollaboratorPermissionLevel({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              username: context.payload.comment.user.login,
+            });
+            // GitHub's write-or-higher roles are write < maintain < admin —
+            // an exact 'admin' || 'write' check silently rejected maintainers.
+            const allowed = ['write', 'maintain', 'admin'].includes(data.permission);
+            core.setOutput('allowed', String(allowed));
+            if (!allowed) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: `@${context.payload.comment.user.login} \`/sync-tokens\` needs write access to this repo.`,
+              });
+            }
+      - name: Resolve the PR's head SHA and reject forks
+        id: pr
+        if: steps.check.outputs.allowed == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = await github.rest.pulls.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.issue.number,
+            });
+            // A deleted fork reports head.repo as null — treat that the same
+            // as "not this repo": never trusted.
+            const sameRepo = pr.data.head.repo?.full_name === pr.data.base.repo.full_name;
+            core.setOutput('allowed', String(sameRepo));
+            core.setOutput('sha', pr.data.head.sha);
+            if (!sameRepo) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: '`/sync-tokens` only runs for a branch of this repository, never a fork — a fork\'s own code would run with a real Figma credential in scope.',
+              });
+            }
+
+  sync-preview:
+    needs: authorize
+    if: needs.authorize.outputs.allowed == 'true'
+    runs-on: ubuntu-latest
+    environment: figma-tokens-sync-preview
+    permissions:
+      contents: read
+      packages: read
+      pull-requests: write
+    concurrency:
+      # The preview file is shared across every PR (REST has no endpoint to
+      # create one per-PR) — a second /sync-tokens on a different PR must
+      # queue behind this one, not race it or cancel it mid-write.
+      group: figma-tokens-sync-preview
+      cancel-in-progress: false
+    env:
+      HUSKY: 0
+      FILE_KEY: ${{ vars.FILE_KEY }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # Pinned to the SHA the permission check resolved, not the ref name —
+          # a ref can move between that check and this checkout.
+          ref: ${{ needs.authorize.outputs.sha }}
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+      - name: Sync variables and materials
+        env:
+          PERSONAL_ACCESS_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        # See the identical comment in sync-main: sync:materials's
+        # dependsOn: ["sync:variables"] sequences both within one nx run, so
+        # this is deliberately one step, not two.
+        run: pnpm nx run dialtone-tokens:sync:materials
+      - name: Comment with the preview link
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const ok = '${{ job.status }}' === 'success';
+            const url = `https://www.figma.com/design/${process.env.FILE_KEY}`;
+            const body = ok
+              ? `✅ Synced to the [preview file](${url}).`
+              : `❌ \`/sync-tokens\` failed — see the [run log](${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}).`;
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body,
+            });
+        env:
+          FILE_KEY: ${{ vars.FILE_KEY }}
