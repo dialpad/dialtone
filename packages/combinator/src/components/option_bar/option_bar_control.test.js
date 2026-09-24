@@ -171,5 +171,36 @@ describe('option_bar_control.vue test', function () {
       await findRawButton(wrapper).trigger('click'); // re-enter raw mode
       expect(wrapper.find(textareaSelector).element.value).toBe('75');
     });
+
+    it('does not emit an update just from opening raw mode, before any edit', async function () {
+      wrapper = mount(DtcOptionBarControl, { props: numberOrArrayMember });
+      await findRawButton(wrapper).trigger('click');
+      expect(wrapper.emitted('update:value')).toBeFalsy();
+    });
+
+    it('does not emit an update when the textarea is reseeded by an external value change', async function () {
+      wrapper = mount(DtcOptionBarControl, { props: numberOrArrayMember });
+      await findRawButton(wrapper).trigger('click');
+      await wrapper.setProps({ value: 75 });
+      expect(wrapper.emitted('update:value')).toBeFalsy();
+    });
+
+    it('does not emit a raw-edited value whose shape is not in validControls', async function () {
+      // numberOrArrayMember's validControls is ['number', 'array'] — a
+      // string is neither, so typing one should never reach the component.
+      wrapper = mount(DtcOptionBarControl, { props: numberOrArrayMember });
+      await findRawButton(wrapper).trigger('click');
+      await wrapper.find(textareaSelector).setValue('"hello"');
+      expect(wrapper.emitted('update:value')).toBeFalsy();
+    });
+
+    it('emits null from raw mode even though null is not itself listed in validControls', async function () {
+      wrapper = mount(DtcOptionBarControl, { props: numberOrArrayMember });
+      await findRawButton(wrapper).trigger('click');
+      await wrapper.find(textareaSelector).setValue('null');
+      const emitted = wrapper.emitted('update:value');
+      expect(emitted).toBeTruthy();
+      expect(emitted[emitted.length - 1][0]).toBeNull();
+    });
   });
 });

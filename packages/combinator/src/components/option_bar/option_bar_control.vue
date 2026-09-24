@@ -91,7 +91,7 @@ import DtIconLock from '@dialpad/dialtone-icons/vue/lock';
 import { DtButton, DtInput, DtText } from '@dialpad/dialtone-vue';
 import { VALUE_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed, ref, watch } from 'vue';
-import { deserializeControlValue, serializeControlValue } from '@/src/lib/control';
+import { deserializeControlValue, getControlByValue, serializeControlValue } from '@/src/lib/control';
 import { parseDocValue } from '@/src/lib/parse';
 import JSON5 from 'json5-with-undefined';
 
@@ -257,6 +257,11 @@ const showRawToggle = computed(() => {
 const rawMode = ref(false);
 const rawText = ref('');
 let rawEditInProgress = false;
+// Set right before rawText is assigned programmatically (entering raw mode,
+// or the props.value watcher below reformatting it) — the rawText watcher
+// checks and clears it to skip emitting for that one seeded change, so
+// opening/reformatting raw mode never re-emits the value it just displayed.
+let suppressNextEmit = false;
 
 function formatRawValue (val) {
   return JSON5.stringify(val, null, 2);
@@ -264,6 +269,7 @@ function formatRawValue (val) {
 
 watch(() => props.value, (val) => {
   if (rawMode.value && !rawEditInProgress) {
+    suppressNextEmit = true;
     rawText.value = formatRawValue(val);
   }
 }, { deep: true });
@@ -271,14 +277,27 @@ watch(() => props.value, (val) => {
 function toggleRawMode () {
   rawMode.value = !rawMode.value;
   if (rawMode.value) {
+    suppressNextEmit = true;
     rawText.value = formatRawValue(props.value);
   }
 }
 
 watch(rawText, (val) => {
+  if (suppressNextEmit) {
+    suppressNextEmit = false;
+    return;
+  }
   try {
     rawEditInProgress = true;
     const parsed = parseDocValue(val);
+    // A control only accepts certain value shapes (validControls) — RAW mode
+    // lets a consumer type arbitrary JSON5, so without this check a string
+    // typed for a number|array control (e.g. Slider's modelValue) would
+    // reach the component unchanged and break it. 'null' is always allowed:
+    // it's how a control's value gets cleared, and it isn't itself a member
+    // of validControls the way a shape like 'number' or 'array' is.
+    const parsedControl = getControlByValue(parsed);
+    if (parsedControl !== 'null' && !props.validControls.includes(parsedControl)) return;
     emit(VALUE_UPDATE_EVENT, parsed);
   } catch {
     // Invalid JSON5 — don't emit until syntax is valid
