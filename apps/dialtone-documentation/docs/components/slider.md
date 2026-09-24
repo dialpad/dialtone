@@ -32,7 +32,7 @@ A slider is appropriate when the exact value is less important than the relative
 
 ### Best Practices
 
-- Always provide a `label` — it's the only thing that gives the slider an accessible name. Set `show-label` to `false` when you only need to hide the label visually (a visually obvious context elsewhere on the page); `show-label="false"` alone, without `label`, does not create an accessible name.
+- Always provide a `label`, or an `aria-label`/`aria-labelledby` attribute, to give the slider an accessible name. Set `:show-label="false"` when you only need to hide the `label` visually (a visually obvious context elsewhere on the page); `:show-label="false"` alone, without `label`, does not create an accessible name.
 - For range sliders with two thumbs, pass a `getValueText` callback that returns localized text distinguishing each thumb (e.g. `"Minimum: 20"` / `"Maximum: 70"`).
 - Keep `min` and `max` values meaningful to the context. Label the scale so users understand what the numbers represent.
 - Use `prefix` or `suffix` for simple unit decoration (e.g. `suffix="%"`) — marks always use it. For the readout and each thumb's `aria-valuetext`, `getValueText` takes precedence over prefix/suffix when set, so the two stay in agreement; marks never call `getValueText`, since a mark isn't tied to either thumb and has no index for it to differentiate on.
@@ -323,7 +323,7 @@ Set `fill-origin` to a value within `[min, max]` and the indicator grows outward
 
 ### Visually hidden label
 
-Use `show-label="false"` when you have a visually obvious context but still need accessible text for screen readers.
+Use `:show-label="false"` when you have a visually obvious context but still need accessible text for screen readers.
 
 ```vue demo
 <dt-slider :model-value="50" label="Volume" :show-label="false" />
