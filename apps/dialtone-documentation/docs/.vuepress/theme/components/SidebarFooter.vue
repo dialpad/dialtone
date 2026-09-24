@@ -19,7 +19,7 @@
             <dt-button
               v-dt-tooltip="`#dialtone channel`"
               class="d-w100p"
-              href="https://dialpad.com/app/messages/agxzfnViZXItdm9pY2VyGAsSC1RleHRNZXNzYWdlGIDA3KvmyP0IDA"
+              href="https://dialpad.slack.com/archives/CEDUKPKC1"
               target="_blank"
               rel="noreferrer noopener"
               aria-label="#dialtone channel"
@@ -28,7 +28,7 @@
               size="200"
             >
               <template #startIcon="{ iconSize }">
-                <dt-icon name="hash" :size="iconSize" />
+                <dt-icon name="slack-mono" :size="iconSize" />
               </template>
             </dt-button>
             <dt-button
