@@ -508,6 +508,12 @@ const attrs = useAttrs();
 const labelId = `slider-label-${getUniqueString()}`;
 const controlRef = ref(null);
 const thumbRefs = ref([]);
+// Cached, reactive mirror of isRtl()'s live DOM read (see syncDirection and
+// the dirObserver near it) — getComputedStyle itself isn't reactive, so a
+// runtime dir change on any ancestor (dir is ambient/inherited) would
+// otherwise never re-trigger the template's transform bindings between
+// mount and the next unrelated render.
+const rtl = ref(false);
 const isDragging = ref(false);
 const activeThumbIndex = ref(null);
 // Unlike activeThumbIndex (cleared on pointerup so the --active visual class
@@ -1082,13 +1088,31 @@ function commitIfChanged() {
 
 // ─── Pointer drag ─────────────────────────────────────────────────────────────
 
-// True when the control's resolved text direction is RTL — read live off
-// the DOM (not a prop) since dir is ambient, inherited from any ancestor.
-// Only meaningful for horizontal orientation: vertical positioning runs on
-// the block axis, which bidi direction doesn't affect.
-function isRtl() {
-  return !!controlRef.value && getComputedStyle(controlRef.value).direction === 'rtl';
+// Re-reads the control's resolved text direction off the DOM and caches it
+// in the `rtl` ref above. getComputedStyle() itself isn't reactive — Vue has
+// no way to know a runtime dir change on some ancestor should re-run
+// anything — so this has to be called explicitly: once on mount (see
+// onMounted), and again whenever dirObserver (below) sees a relevant dir
+// attribute change. Only meaningful for horizontal orientation: vertical
+// positioning runs on the block axis, which bidi direction doesn't affect.
+function syncDirection() {
+  rtl.value = !!controlRef.value && getComputedStyle(controlRef.value).direction === 'rtl';
 }
+
+// True when the control's resolved text direction is RTL. Reads the cached
+// `rtl` ref (kept current by syncDirection) rather than the DOM directly, so
+// every call site — pointer math, keyboard direction-relative keys, and the
+// analytical collision rect — reactively agrees on the same value instead of
+// each doing its own point-in-time getComputedStyle() read.
+function isRtl() {
+  return rtl.value;
+}
+
+// dir is ambient — inherited from ANY ancestor, not just controlRef's direct
+// parent — so this has to watch the whole document, not just this
+// component's own subtree, to catch every change that could actually affect
+// the resolved direction here.
+let dirObserver = null;
 
 function getValueFromPointerEvent(event) {
   const rect = controlRef.value.getBoundingClientRect();
@@ -1472,6 +1496,11 @@ onMounted(() => {
     markCollisionResizeObserver = new ResizeObserver(() => updateCollisions());
     markCollisionResizeObserver.observe(controlRef.value);
   }
+  syncDirection();
+  if (typeof MutationObserver !== 'undefined') {
+    dirObserver = new MutationObserver(syncDirection);
+    dirObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['dir'], subtree: true });
+  }
   // The initial modelValue never runs through the watch() above — correct a
   // starting value normalizeModelValue had to rewrite (inverted pair,
   // out-of-bounds clamp, invalid array length) back to the parent the same
@@ -1489,6 +1518,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   markCollisionResizeObserver?.disconnect();
+  dirObserver?.disconnect();
 });
 
 // ─── Dev warnings ─────────────────────────────────────────────────────────────

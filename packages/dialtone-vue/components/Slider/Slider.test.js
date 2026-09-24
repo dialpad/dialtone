@@ -21,19 +21,34 @@ const settleCollisions = async () => {
 // getComputedStyle doesn't compute inherited properties (a dir set on an
 // ancestor never reaches a descendant's computed style) and caches its
 // result per element on first call without invalidating it on a later
-// direct inline-style mutation. isRtl() is the only thing that calls
-// getComputedStyle(controlRef.value) in this component, so mocking it here
-// is a precise, browser-CSS-engine-independent way to exercise "when
+// direct inline-style mutation. syncDirection() is the only thing that
+// calls getComputedStyle(controlRef.value) in this component, so mocking it
+// here is a precise, browser-CSS-engine-independent way to exercise "when
 // direction resolves to rtl" without depending on jsdom's incomplete CSS
-// support. Restore the spy (mockControlDirectionSpy?.mockRestore()) in an
-// afterEach wherever this is used.
+// support. Restore the spy (mockControlDirectionSpy?.mockRestore()) and
+// remove the dir attribute in an afterEach wherever this is used.
+//
+// syncDirection only re-reads getComputedStyle in response to a real dir
+// attribute mutation observed anywhere in the document (see dirObserver in
+// Slider.vue) — toggling documentElement's own dir attribute here is a
+// convenient, always-in-scope way to trigger that resync, mirroring how a
+// real runtime direction change fires it. It doesn't matter that jsdom
+// can't actually resolve the control's inherited style from it (that's what
+// the mock above is for) — the observer only cares that A dir attribute
+// changed somewhere, not which element or value.
 let mockControlDirectionSpy;
-function mockControlDirection(direction) {
+async function mockControlDirection(direction) {
   const original = window.getComputedStyle.bind(window);
   mockControlDirectionSpy = vi.spyOn(window, 'getComputedStyle').mockImplementation((el, ...rest) => {
     if (el?.dataset?.qa === 'dt-slider-control') return { direction };
     return original(el, ...rest);
   });
+  document.documentElement.setAttribute('dir', direction);
+  // The MutationObserver callback that triggers syncDirection() is queued
+  // as its own microtask separate from the attribute assignment above —
+  // await a tick so it's guaranteed to have run by the time callers
+  // interact with the component, instead of racing it.
+  await nextTick();
 }
 
 const baseProps = {
@@ -1436,10 +1451,11 @@ describe('DtSlider Tests', () => {
       // See mockControlDirection's own comment near the top of the file.
       afterEach(() => {
         mockControlDirectionSpy?.mockRestore();
+        document.documentElement.removeAttribute('dir');
       });
 
       it('mirrors pointer-to-value mapping — a physically-left position maps toward max, not min', async () => {
-        mockControlDirection('rtl');
+        await mockControlDirection('rtl');
         const controlRect = { top: 0, left: 0, right: 100, bottom: 20, width: 100, height: 20 };
         const control = wrapper.find('[data-qa="dt-slider-control"]');
         control.element.setPointerCapture = () => {};
@@ -1453,7 +1469,7 @@ describe('DtSlider Tests', () => {
       });
 
       it('does not mirror pointer mapping when direction is (explicitly or by default) ltr', async () => {
-        mockControlDirection('ltr');
+        await mockControlDirection('ltr');
         const controlRect = { top: 0, left: 0, right: 100, bottom: 20, width: 100, height: 20 };
         const control = wrapper.find('[data-qa="dt-slider-control"]');
         control.element.setPointerCapture = () => {};
@@ -1465,21 +1481,21 @@ describe('DtSlider Tests', () => {
       });
 
       it('swaps Shift+ArrowRight to decrease (matching the native RTL-flipped arrow keys)', async () => {
-        mockControlDirection('rtl');
+        await mockControlDirection('rtl');
         await thumbInputs[0].trigger('keydown', { key: 'ArrowRight', shiftKey: true });
         const emitted = wrapper.emitted('update:modelValue');
         expect(emitted[emitted.length - 1][0]).toBe(40); // 50 - largeStep(10), flipped under rtl
       });
 
       it('swaps Shift+ArrowLeft to increase (matching the native RTL-flipped arrow keys)', async () => {
-        mockControlDirection('rtl');
+        await mockControlDirection('rtl');
         await thumbInputs[0].trigger('keydown', { key: 'ArrowLeft', shiftKey: true });
         const emitted = wrapper.emitted('update:modelValue');
         expect(emitted[emitted.length - 1][0]).toBe(60); // 50 + largeStep(10), flipped under rtl
       });
 
       it('does not swap Shift+ArrowUp/ArrowDown or PageUp/PageDown under rtl — only Left/Right are direction-relative', async () => {
-        mockControlDirection('rtl');
+        await mockControlDirection('rtl');
         await thumbInputs[0].trigger('keydown', { key: 'ArrowUp', shiftKey: true });
         let emitted = wrapper.emitted('update:modelValue');
         expect(emitted[emitted.length - 1][0]).toBe(60); // still increases
@@ -1493,7 +1509,7 @@ describe('DtSlider Tests', () => {
         mockProps = { orientation: 'vertical' };
         updateWrapper();
         thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
-        mockControlDirection('rtl');
+        await mockControlDirection('rtl');
 
         await thumbInputs[0].trigger('keydown', { key: 'ArrowRight', shiftKey: true });
         const emitted = wrapper.emitted('update:modelValue');
@@ -1510,14 +1526,14 @@ describe('DtSlider Tests', () => {
         // very first render (arming the mock before mount would never be
         // consulted), so mount normally first, then arm the mock and force
         // a re-render via a prop update.
-        mockControlDirection('rtl');
+        await mockControlDirection('rtl');
         await wrapper.setProps({ modelValue: 51 });
         const thumbVisual = wrapper.find('[data-qa="dt-slider-thumb-visual"]');
         expect(thumbVisual.attributes('style')).toContain('translate(50%, -50%)');
       });
 
       it('keeps the ltr centering transform when direction is ltr', async () => {
-        mockControlDirection('ltr');
+        await mockControlDirection('ltr');
         await wrapper.setProps({ modelValue: 51 });
         const thumbVisual = wrapper.find('[data-qa="dt-slider-thumb-visual"]');
         expect(thumbVisual.attributes('style')).toContain('translate(-50%, -50%)');
@@ -1526,7 +1542,7 @@ describe('DtSlider Tests', () => {
       it('centers ticks on their anchor point under rtl too', async () => {
         mockProps = { showTicks: true, tickInterval: 25 };
         updateWrapper();
-        mockControlDirection('rtl');
+        await mockControlDirection('rtl');
         await wrapper.setProps({ modelValue: 51 });
         const tick = wrapper.find('[data-qa="dt-slider-tick"]');
         expect(tick.attributes('style')).toContain('translateX(50%)');
@@ -1936,6 +1952,7 @@ describe('DtSlider Tests', () => {
 
       afterEach(() => {
         mockControlDirectionSpy?.mockRestore();
+        document.documentElement.removeAttribute('dir');
       });
 
       it('hides a mark once it overlaps the visible readout', async () => {
@@ -2045,7 +2062,7 @@ describe('DtSlider Tests', () => {
         updateWrapper();
         await nextTick();
 
-        mockControlDirection('rtl');
+        await mockControlDirection('rtl');
         wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
         const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
         const readouts = wrapper.findAll('[data-qa="dt-slider-thumb-readout"]');
