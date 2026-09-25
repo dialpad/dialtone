@@ -209,6 +209,51 @@ describe('option_bar_control.vue test', function () {
       expect(wrapper.emitted('update:value')).toBeFalsy();
     });
 
+    it('does not emit a raw-edited array whose length fails the live prop validator', async function () {
+      // Mimics Slider's modelValue: Number | Number[], but only a 2-element
+      // array is actually valid — validControls alone can't express that,
+      // so RAW mode needs the component's own validator to catch it.
+      wrapper = mount(DtcOptionBarControl, {
+        props: {
+          ...numberOrArrayMember,
+          args: { validator: (value) => !Array.isArray(value) || value.length === 2 },
+        },
+      });
+      await findRawButton(wrapper).trigger('click');
+      await wrapper.find(textareaSelector).setValue('[10, 20, 30]');
+      expect(wrapper.emitted('update:value')).toBeFalsy();
+    });
+
+    it('still emits a raw-edited array that passes the live prop validator', async function () {
+      wrapper = mount(DtcOptionBarControl, {
+        props: {
+          ...numberOrArrayMember,
+          args: { validator: (value) => !Array.isArray(value) || value.length === 2 },
+        },
+      });
+      await findRawButton(wrapper).trigger('click');
+      await wrapper.find(textareaSelector).setValue('[10, 20]');
+      const emitted = wrapper.emitted('update:value');
+      expect(emitted).toBeTruthy();
+      expect(emitted[emitted.length - 1][0]).toEqual([10, 20]);
+    });
+
+    it('emits a raw-edited array of any length for a generic array control (no validator)', async function () {
+      wrapper = mount(DtcOptionBarControl, {
+        props: {
+          controlData: controlMap.array,
+          validControls: ['array'],
+          label: 'list',
+          value: [1, 2, 3],
+        },
+      });
+      await findRawButton(wrapper).trigger('click');
+      await wrapper.find(textareaSelector).setValue('[1, 2, 3, 4, 5]');
+      const emitted = wrapper.emitted('update:value');
+      expect(emitted).toBeTruthy();
+      expect(emitted[emitted.length - 1][0]).toEqual([1, 2, 3, 4, 5]);
+    });
+
     it('emits null from raw mode even though null is not itself listed in validControls', async function () {
       wrapper = mount(DtcOptionBarControl, { props: numberOrArrayMember });
       await findRawButton(wrapper).trigger('click');

@@ -171,7 +171,7 @@ const props = defineProps({
    */
   args: {
     type: Object,
-    default: () => {},
+    default: () => ({}),
   },
 });
 
@@ -308,6 +308,12 @@ watch(rawText, (val) => {
     // of validControls the way a shape like 'number' or 'array' is.
     const parsedControl = getControlByValue(parsed);
     if (parsedControl !== 'null' && !props.validControls.includes(parsedControl)) return;
+    // validControls only checks the value's coarse shape (e.g. 'array') — a shape
+    // can still be internally invalid (e.g. Slider's modelValue accepts an array
+    // only when it has exactly 2 elements). Reuse the live component's own prop
+    // validator when one was threaded through via args, so RAW mode can't emit
+    // a value the component itself would reject.
+    if (parsedControl !== 'null' && props.args.validator && !props.args.validator(parsed)) return;
     emit(VALUE_UPDATE_EVENT, parsed);
   } catch {
     // Invalid JSON5 — don't emit until syntax is valid

@@ -169,10 +169,10 @@ function processMembers (members, ...processors) {
 }
 
 /**
- * Gets all the default values for each possible member of a component.
+ * Gets the default value and validator for each possible member of a component.
  *
  * @param {object} component - The target component.
- * @returns {object} Default value map.
+ * @returns {object} Map of member name to `{ default, validator }`.
  */
 function getComponentDefaults (component) {
   /**
@@ -197,9 +197,12 @@ function getComponentDefaults (component) {
         const entryDefault = entryValue.default;
         return [
           entryKey,
-          entryValue.type !== Function && typeof entryDefault === 'function'
-            ? entryDefault({})
-            : entryDefault,
+          {
+            default: entryValue.type !== Function && typeof entryDefault === 'function'
+              ? entryDefault({})
+              : entryDefault,
+            validator: entryValue.validator,
+          },
         ];
       });
     }).flat()),
