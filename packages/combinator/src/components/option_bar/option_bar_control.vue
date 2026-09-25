@@ -79,6 +79,7 @@
         v-model="rawText"
         type="textarea"
         :size="100"
+        :disabled="locked || disabled"
         spellcheck="false"
         class="d-mbs-75"
       />
@@ -297,6 +298,11 @@ watch(rawText, (val) => {
     suppressNextEmit = false;
     return;
   }
+  // The textarea is disabled via :disabled above, but that alone doesn't stop
+  // rawText from being reassigned by other means (e.g. a test driving
+  // setValue() directly, bypassing the disabled attribute) — belt-and-braces
+  // so a locked/disabled member can never emit a RAW-mode edit either way.
+  if (props.locked || props.disabled) return;
   try {
     rawEditInProgress = true;
     const parsed = parseDocValue(val);

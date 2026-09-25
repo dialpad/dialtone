@@ -262,5 +262,21 @@ describe('option_bar_control.vue test', function () {
       expect(emitted).toBeTruthy();
       expect(emitted[emitted.length - 1][0]).toBeNull();
     });
+
+    it.each([
+      ['locked', { locked: true }],
+      ['disabled', { disabled: true }],
+    ])('disables the RAW textarea and blocks edits from emitting when %s', async function (_label, extraProps) {
+      wrapper = mount(DtcOptionBarControl, { props: { ...numberOrArrayMember, ...extraProps } });
+      await findRawButton(wrapper).trigger('click');
+      const textarea = wrapper.find(textareaSelector);
+      expect(textarea.attributes('disabled')).toBeDefined();
+
+      // setValue() drives the DOM node directly, bypassing the disabled
+      // attribute the same way a stray programmatic write could — this is
+      // exactly what the watcher's own locked/disabled guard defends against.
+      await textarea.setValue('51');
+      expect(wrapper.emitted('update:value')).toBeFalsy();
+    });
   });
 });
