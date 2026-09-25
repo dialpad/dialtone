@@ -826,6 +826,23 @@ describe('DtSlider Tests', () => {
       await wrapper.setProps({ label: '' });
       expect(infoSpy).toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
     });
+
+    it('warns as soon as a parent removes aria-label after mount, not just at mount time', async () => {
+      // Older Vue docs caution that useAttrs() isn't reactive, which would
+      // make the watch() below (sourcing attrs['aria-label']) miss this
+      // change entirely unless some OTHER tracked dependency (e.g.
+      // hasVisibleLabel) happened to change on the same render. Verified
+      // against the installed Vue version (attrs reads ARE tracked here) —
+      // this pins that behavior so a future Vue bump that regresses it
+      // gets caught.
+      mockProps = { label: undefined };
+      mockAttrs = { 'aria-label': 'Volume' };
+      updateWrapper();
+      expect(infoSpy).not.toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
+
+      await wrapper.setProps({ 'aria-label': undefined });
+      expect(infoSpy).toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
+    });
   });
 
   describe('Interactivity Tests', () => {
