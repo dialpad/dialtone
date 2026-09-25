@@ -178,6 +178,21 @@ describe('option_bar_control.vue test', function () {
       expect(wrapper.emitted('update:value')).toBeFalsy();
     });
 
+    it('still emits a real edit made right after reopening raw mode with an unchanged value', async function () {
+      // Reopening with the SAME value means rawText is reassigned the exact
+      // string it already held — Vue's watch() never fires for a no-op
+      // assignment, so a naive "always suppress the next change" flag would
+      // never get consumed and would incorrectly swallow the edit below.
+      wrapper = mount(DtcOptionBarControl, { props: numberOrArrayMember });
+      await findRawButton(wrapper).trigger('click');
+      await findRawButton(wrapper).trigger('click'); // close, value never changed
+      await findRawButton(wrapper).trigger('click'); // reopen — re-seeds the same "50"
+      await wrapper.find(textareaSelector).setValue('51');
+      const emitted = wrapper.emitted('update:value');
+      expect(emitted).toBeTruthy();
+      expect(emitted[emitted.length - 1][0]).toBe(51);
+    });
+
     it('does not emit an update when the textarea is reseeded by an external value change', async function () {
       wrapper = mount(DtcOptionBarControl, { props: numberOrArrayMember });
       await findRawButton(wrapper).trigger('click');

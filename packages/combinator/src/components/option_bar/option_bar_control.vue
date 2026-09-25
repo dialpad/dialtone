@@ -267,18 +267,28 @@ function formatRawValue (val) {
   return JSON5.stringify(val, null, 2);
 }
 
+// Only set suppressNextEmit when the seeded text actually differs from what
+// rawText already holds — Vue's watch() only invokes its callback on a real
+// change, so seeding with an UNCHANGED value (e.g. reopening raw mode
+// without having edited anything) would otherwise set the flag with no
+// watcher run left to consume and clear it. That stale `true` then silently
+// discarded the user's next genuine edit — the callback saw a leftover flag
+// from a seed that never actually reached it.
+function seedRawText (formatted) {
+  if (formatted !== rawText.value) suppressNextEmit = true;
+  rawText.value = formatted;
+}
+
 watch(() => props.value, (val) => {
   if (rawMode.value && !rawEditInProgress) {
-    suppressNextEmit = true;
-    rawText.value = formatRawValue(val);
+    seedRawText(formatRawValue(val));
   }
 }, { deep: true });
 
 function toggleRawMode () {
   rawMode.value = !rawMode.value;
   if (rawMode.value) {
-    suppressNextEmit = true;
-    rawText.value = formatRawValue(props.value);
+    seedRawText(formatRawValue(props.value));
   }
 }
 
