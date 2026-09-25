@@ -778,6 +778,27 @@ describe('DtSlider Tests', () => {
       expect(infoSpy).toHaveBeenCalledWith(expect.stringContaining('provide getValueText'));
     });
 
+    it('does not re-log an unchanged warning on every value tick while dragging', async () => {
+      // The accessible-name check reads currentValue.value (to safely probe
+      // a scoped #label slot — see hasVisibleLabel above), which changes on
+      // every drag tick. Watching that raw value directly (a bare
+      // watchEffect) would re-run — and re-log — on every tick even though
+      // the warning CONDITION never changes; a boolean-sourced watch() only
+      // re-invokes when the condition itself flips.
+      mockProps = { label: undefined, modelValue: 50 };
+      updateWrapper();
+      const callsAtMount = infoSpy.mock.calls.length;
+      expect(callsAtMount).toBeGreaterThan(0); // sanity: the warning did fire once
+
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      for (const val of [51, 52, 53, 54, 55]) {
+        thumbInputs[0].element.value = String(val);
+        await thumbInputs[0].trigger('input');
+      }
+
+      expect(infoSpy.mock.calls.length).toBe(callsAtMount);
+    });
+
     it('does not warn about getValueText when it is provided', () => {
       mockProps = { label: 'Price range', modelValue: [20, 70], getValueText: (v) => `${v}` };
       updateWrapper();
