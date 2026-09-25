@@ -263,6 +263,16 @@ describe('option_bar_control.vue test', function () {
       expect(emitted[emitted.length - 1][0]).toBeNull();
     });
 
+    it('does not emit a raw-edited null for a required member — required members are not clearable', async function () {
+      // option_bar_member_group.vue's extendMember already computes
+      // clearable: false for required members — RAW mode typing 'null'
+      // directly must not be able to sidestep that same restriction.
+      wrapper = mount(DtcOptionBarControl, { props: { ...numberOrArrayMember, required: true } });
+      await findRawButton(wrapper).trigger('click');
+      await wrapper.find(textareaSelector).setValue('null');
+      expect(wrapper.emitted('update:value')).toBeFalsy();
+    });
+
     it.each([
       ['locked', { locked: true }],
       ['disabled', { disabled: true }],
