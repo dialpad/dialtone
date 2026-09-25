@@ -123,10 +123,6 @@
     // capping the maximum any ancestor's scrollWidth can grow by, regardless of
     // how long the value/mark text is. Needs overflow-x AND -y both set to clip
     // (not just one) for the margin to actually apply in current browsers.
-    // overflow-clip-margin also only accepts a literal length — var(--dt-*)
-    // silently resolves to 0 (confirmed in current Chrome), so this one
-    // property can't follow the token-reference convention used everywhere
-    // else in this file; 32px matches --dt-spacing-400.
     overflow: clip;
     cursor: default;
     block-size: var(--slider-thumb-size);
@@ -139,8 +135,7 @@
     // is a zero typed as a length (same pattern the sm/lg size modifiers below
     // use for their own --dt-spacing-base arithmetic).
     padding-block: max(calc(var(--dt-spacing-base) * 0), calc((var(--dt-spacing-550) - var(--slider-thumb-size)) / 2));
-    /* stylelint-disable-next-line meowtec/no-px */
-    overflow-clip-margin: 32px;
+    overflow-clip-margin: var(--dt-spacing-400);
 }
 
 //  $$  TRACK
@@ -480,6 +475,11 @@
         inset-block-start: unset;
         // bottom is set inline via style
         transform: translate(-50%, 50%);
+
+        // Same rationale as .d-slider__track's :dir(rtl) override above.
+        &:dir(rtl) {
+            transform: translate(50%, 50%);
+        }
     }
 
     .d-slider__thumb-hit {
