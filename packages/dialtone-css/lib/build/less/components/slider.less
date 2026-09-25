@@ -1,0 +1,529 @@
+//
+//  DIALTONE
+//  COMPONENTS: SLIDER
+//
+//  These are slider classes for Dialpad's design system Dialtone.
+//  For further documentation of these and other classes,
+//  visit https://dialtone.dialpad.com/components/slider
+//
+//  TABLE OF CONTENTS
+//  • VARIABLES
+//  • SLIDER
+//    - Base Style
+//    - Track & Indicator
+//    - Thumb
+//    - Ticks, Marks & Readout
+//    - States (disabled, inverted)
+//    - Sizes
+//    - Vertical orientation
+//  • REDUCED MOTION
+//
+
+@layer dialtone.components {
+
+//  $  SLIDER
+//  ============================================================================
+.d-slider {
+    //  Component CSS vars — override these for size/state modifiers
+    --slider-track-height: var(--dt-size-border-300);         // 4px
+    // Same color-mix-off-a-semantic-token pattern DtProgressCircle's track
+    // uses (see progress_circle.less) rather than a raw base-palette
+    // reference — border-bold plus a light mix keeps this correct across
+    // light/dark/high-contrast themes automatically, instead of hard-coding
+    // one pre-mixed gray that stayed identical (and low-contrast) in dark
+    // mode regardless of theme.
+    --slider-track-color: color-mix(in oklch, var(--dt-color-border-bold) 25%, var(--dt-color-surface-primary));
+    --slider-indicator-color: var(--dt-slider-color-indicator);
+    // Same token an outlined button's text uses — readable against both
+    // light and dark canvases, unlike --slider-indicator-color above, whose
+    // dark-theme value is tuned for a filled bar's larger area, not text.
+    --slider-readout-color: var(--dt-color-link-primary);
+    --slider-thumb-size: var(--dt-spacing-350);               // 28px — controls control area + hit target
+    --slider-thumb-visual-size: calc(var(--slider-thumb-size) * 0.65); // 35% smaller than the hit target
+    // Literal white, not a themed surface token — the thumb reads as a
+    // physical knob that should stay light on both light and dark canvases,
+    // rather than tracking the page background the way surface-primary does.
+    --slider-thumb-color: var(--dt-color-neutral-white);
+    // A heavier mix than --slider-track-color above — the thumb border
+    // needs to read against the white/light thumb face, not just against
+    // the canvas, so it stays a bolder gray than the passive track.
+    --slider-thumb-border-color: color-mix(in oklch, var(--dt-color-border-bold) 45%, var(--dt-color-surface-primary));
+    --slider-thumb-border-width: var(--dt-size-border-100);
+    --slider-thumb-shadow: var(--dt-shadow-small);
+    --slider-focus-shadow: var(--dt-shadow-focus);
+    --slider-disabled-track-color: var(--dt-inputs-color-background-disabled);
+    --slider-disabled-indicator-color: var(--dt-inputs-color-foreground-disabled);
+    --slider-disabled-border-color: var(--dt-inputs-color-border-disabled);
+    --slider-tick-color: var(--dt-color-border-bold);
+    --slider-tick-width: calc(var(--dt-size-border-100) * 1.5); // 1.5px
+    --slider-boundary-color: var(--dt-color-foreground-tertiary);
+    --slider-track-length: var(--dt-layout-300);               // 192px — used as block-size in vertical mode
+    --slider-mark-offset: var(--dt-spacing-200);               // gap from track/thumb to marks & readout
+
+    // link-primary's dark-theme value is still too close to the canvas for
+    // readout-sized text (it's tuned for links inside body copy, not a bold
+    // number sitting alone). foreground-primary is the token built for that
+    // job — properly high-contrast body text in both themes. Also used for
+    // the thumb here so both read as the same off-white in dark mode; it's
+    // dark gray in light mode, which is why it's scoped to dark only rather
+    // than replacing neutral-white as the base value above.
+    [data-dt-mode="dark"] &,
+    [data-dt-theme="dark"] & {
+        --slider-readout-color: var(--dt-color-foreground-primary);
+        --slider-thumb-color: var(--dt-color-foreground-primary);
+    }
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--dt-spacing-50);
+    inline-size: 100%;
+}
+
+//  $$  LABEL
+//  ----------------------------------------------------------------------------
+.d-slider__label {
+    display: block;
+}
+
+//  $$  BODY
+//  ----------------------------------------------------------------------------
+.d-slider__body {
+    display: flex;
+    gap: var(--dt-spacing-200);
+    align-items: center;
+    inline-size: 100%;
+}
+
+.d-slider__start,
+.d-slider__end {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    color: var(--slider-boundary-color);
+}
+
+//  $$  CONTROL AREA (track + thumbs container)
+//  ----------------------------------------------------------------------------
+.d-slider__control {
+    position: relative;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    box-sizing: content-box;
+
+    // A mark/readout near 0%/100% is centered on its value (translateX(-50%)),
+    // so it naturally renders partly outside this box — there's nothing left
+    // of 0% or right of 100% to center into. That's fine and expected (it's
+    // what keeps "0"/"100" looking centered rather than nudged inward), but
+    // left uncontained it registers as real layout overflow: an ancestor
+    // container's scrollWidth grows as the thumb approaches an edge, adding a
+    // horizontal scrollbar with no visual indication of why. overflow-clip-margin
+    // gives it room to render past this box's own edge without being clipped,
+    // while still giving the browser a bounded, finite region to clip beyond —
+    // capping the maximum any ancestor's scrollWidth can grow by, regardless of
+    // how long the value/mark text is. Needs overflow-x AND -y both set to clip
+    // (not just one) for the margin to actually apply in current browsers.
+    overflow: clip;
+    cursor: default;
+    block-size: var(--slider-thumb-size);
+
+    // Minimum WCAG 2.5.5 touch target via padding
+    // A bare `0` is a <number>, not a <length> — max() can't mix that with the
+    // calc()'s length result, so the whole declaration becomes invalid at
+    // computed-value time and silently falls back to 0, defeating the WCAG
+    // 2.5.5 touch target this is meant to guarantee. calc(--dt-spacing-base * 0)
+    // is a zero typed as a length (same pattern the sm/lg size modifiers below
+    // use for their own --dt-spacing-base arithmetic).
+    padding-block: max(calc(var(--dt-spacing-base) * 0), calc((var(--dt-spacing-550) - var(--slider-thumb-size)) / 2));
+    overflow-clip-margin: var(--dt-spacing-400);
+}
+
+//  $$  TRACK
+//  ----------------------------------------------------------------------------
+.d-slider__track {
+    position: absolute;
+    inset-inline: 0;
+    block-size: var(--slider-track-height);
+    background-color: var(--slider-track-color);
+    border-radius: var(--dt-size-radius-pill);
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+//  $$  INDICATOR (filled portion)
+//  ----------------------------------------------------------------------------
+.d-slider__indicator {
+    position: absolute;
+    block-size: var(--slider-track-height);
+    background-color: var(--slider-indicator-color);
+    border-radius: var(--dt-size-radius-pill);
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    // Orientation (below) and dragging state (further below) both override
+    // this variable rather than the transition property directly, so the two
+    // stay a plain same-specificity, same-selector-shape contest resolved by
+    // source order — see the .d-slider--dragging override near the bottom of
+    // this file for why dragging is declared last.
+    --slider-indicator-transition: width var(--td100) var(--ttf-ease), inset-inline-start var(--td100) var(--ttf-ease), inset-inline-end var(--td100) var(--ttf-ease), background-color var(--td100) var(--ttf-ease);
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: var(--slider-indicator-transition);
+    }
+}
+
+//  $$  VISUAL THUMB (the styled handle)
+//  ----------------------------------------------------------------------------
+.d-slider__thumb-visual {
+    position: absolute;
+    z-index: 1;
+    background-color: var(--slider-thumb-color);
+    border: var(--slider-thumb-border-width) solid var(--slider-thumb-border-color);
+    border-radius: var(--dt-size-radius-circle);
+    box-shadow: var(--slider-thumb-shadow);
+    pointer-events: none;
+    inline-size: var(--slider-thumb-visual-size);
+    block-size: var(--slider-thumb-visual-size);
+    inset-block-start: 50%;
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: box-shadow var(--td150) var(--ttf-ease), inline-size var(--td150) var(--ttf-ease), block-size var(--td150) var(--ttf-ease);
+    }
+}
+
+.d-slider__thumb-visual--focused {
+    box-shadow: var(--slider-thumb-shadow), var(--slider-focus-shadow);
+}
+
+//  $$  ACTIVE (grabbed/dragging) STATE
+//  Lifts the thumb slightly, as if picked up off the track.
+//  ----------------------------------------------------------------------------
+.d-slider__thumb-visual--active {
+    inline-size: calc(var(--slider-thumb-visual-size) * 1.2);
+    block-size: calc(var(--slider-thumb-visual-size) * 1.2);
+    box-shadow: var(--dt-shadow-medium);
+}
+
+.d-slider__thumb-visual--active.d-slider__thumb-visual--focused {
+    box-shadow: var(--dt-shadow-medium), var(--slider-focus-shadow);
+}
+
+//  $$  THUMB HIT AREA (min 44×44px transparent touch target per thumb)
+//  ----------------------------------------------------------------------------
+.d-slider__thumb-hit {
+    position: absolute;
+    z-index: 2;
+    min-inline-size: var(--dt-spacing-550);
+    min-block-size: var(--dt-spacing-550);
+    border-radius: var(--dt-size-radius-circle);
+    cursor: grab;
+    inset-block-start: 50%;
+}
+
+//  $$  NATIVE INPUT (transparent, a11y + keyboard carrier)
+//  ----------------------------------------------------------------------------
+.d-slider__thumb {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    pointer-events: none;
+    inline-size: 100%;
+    block-size: 100%;
+    inset: 0;
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+    }
+
+    &::-moz-range-thumb {
+        background: transparent;
+        border: none;
+        appearance: none;
+    }
+}
+
+//  $$  TICKS
+//  ----------------------------------------------------------------------------
+.d-slider__tick {
+    position: absolute;
+    inline-size: var(--slider-tick-width);
+    block-size: var(--dt-spacing-50);
+    background-color: var(--slider-tick-color);
+    inset-block-start: 50%;
+    margin-block-start: calc(var(--slider-track-height) / 2 + var(--dt-size-border-100));
+    pointer-events: none;
+}
+
+//  $$  MARKS (text annotations centered under a track position)
+//  Independent of ticks; set via the marks prop.
+//  ----------------------------------------------------------------------------
+.d-slider__mark {
+    position: absolute;
+    color: var(--slider-boundary-color);
+    font: var(--dt-typography-body-sm);
+    white-space: nowrap;
+    transform: translateX(-50%);
+    pointer-events: none;
+    inset-block-start: calc(50% + var(--slider-track-height) / 2 + var(--slider-mark-offset));
+
+    // translateX(-50%) centers the mark on its insetInlineStart anchor — a
+    // physical shift that doesn't mirror under dir="rtl" the way
+    // insetInlineStart does, so the anchor and the compensating shift
+    // disagree unless this flips too.
+    &:dir(rtl) {
+        transform: translateX(50%);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: opacity var(--td150) var(--ttf-ease);
+    }
+}
+
+//  Hidden in favor of the live readout when the two would visually overlap
+//  (JS-measured — see the "Mark / readout collision avoidance" comment in
+//  Slider.vue). visibility, not display: none, so it keeps its layout slot
+//  and can be measured again once it's no longer colliding.
+.d-slider__mark--collision-hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+
+//  $$  READOUT (live value, tracks the thumb — same size and position as
+//  marks, sharing the same row below the track; distinguished from them
+//  only by color, since it reflects the current value rather than a
+//  fixed reference point)
+//  ----------------------------------------------------------------------------
+.d-slider__readout {
+    position: absolute;
+    color: var(--slider-readout-color);
+    font: var(--dt-typography-body-sm);
+    font-weight: var(--dt-font-weight-bold);
+    white-space: nowrap;
+    transform: translateX(-50%);
+    pointer-events: none;
+    inset-block-start: calc(50% + var(--slider-track-height) / 2 + var(--slider-mark-offset));
+
+    // Same rationale as .d-slider__mark's :dir(rtl) override above.
+    &:dir(rtl) {
+        transform: translateX(50%);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: inset-inline-start var(--td100) var(--ttf-ease), bottom var(--td100) var(--ttf-ease), opacity var(--td150) var(--ttf-ease);
+    }
+}
+
+//  Same rationale as the indicator: don't let a transition meant for discrete
+//  jumps make a continuous drag look like the readout is lagging the thumb.
+.d-slider--dragging .d-slider__readout {
+    transition: none;
+}
+
+.d-slider__readout--hide {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.d-slider__readout--show {
+    visibility: visible;
+    opacity: 1;
+}
+
+//  $$  DRAGGING STATE
+//  ----------------------------------------------------------------------------
+.d-slider--dragging {
+    .d-slider__control,
+    .d-slider__thumb-hit {
+        cursor: grabbing;
+    }
+}
+
+//  $$  DISABLED STATE
+//  ----------------------------------------------------------------------------
+.d-slider--disabled {
+    .d-slider__control,
+    .d-slider__thumb-hit {
+        cursor: not-allowed;
+    }
+
+    .d-slider__track {
+        background-color: var(--slider-disabled-track-color);
+    }
+
+    .d-slider__indicator {
+        background-color: var(--slider-disabled-indicator-color);
+    }
+
+    .d-slider__readout {
+        color: var(--slider-disabled-indicator-color);
+    }
+
+    // Grey, but opaque — the thumb straddles both the indicator and the bare
+    // track, and --dt-inputs-color-background-disabled is translucent (meant
+    // for a uniform backdrop like a badge), so each showed through
+    // differently on either side and made the thumb look off-center rather
+    // than disabled. Same relative-color-syntax pattern the opacity utility
+    // classes use: keep the actual disabled-background token as the source
+    // of truth, just force its alpha to 1 at the point of use.
+    .d-slider__thumb-visual {
+        --slider-thumb-color: oklch(from var(--dt-inputs-color-background-disabled) l c h / 1);
+
+        border-color: var(--slider-disabled-border-color);
+    }
+}
+
+//  $$  INVERTED STATE
+//  (indicator is already positioned by the Vue component via :style)
+//  Class provided for consumer overrides.
+// .d-slider--inverted {}
+
+//  $$  SIZES
+//  Thumb size steps linearly in 10px increments (18, 28, 38px — md/28px is
+//  the unmodified root default). sm and lg fall between named spacing
+//  tokens, so they're expressed directly off --dt-spacing-base rather than
+//  snapping to an off-ramp token.
+//  Tick width steps linearly too, in 0.25px increments (1.25, 1.5, 1.75px)
+//  — md/1.5px is slightly narrower than the old flat 2px.
+//  Thumb border width: sm/0.5px, md/1px (unmodified root default), lg/1.5px.
+//  ----------------------------------------------------------------------------
+.d-slider--sm {
+    --slider-track-height: var(--dt-size-border-200);
+    --slider-thumb-size: calc(var(--dt-spacing-base) * 2.25); // 18px
+    --slider-tick-width: calc(var(--dt-size-border-100) * 1.25); // 1.25px
+    --slider-thumb-border-width: calc(var(--dt-size-border-100) * 0.5); // 0.5px
+}
+
+.d-slider--lg {
+    --slider-track-height: var(--dt-size-border-400);
+    --slider-thumb-size: calc(var(--dt-spacing-base) * 4.75); // 38px
+    --slider-tick-width: calc(var(--dt-size-border-100) * 1.75); // 1.75px
+    --slider-thumb-border-width: calc(var(--dt-size-border-100) * 1.5); // 1.5px
+}
+
+//  $$  VERTICAL ORIENTATION
+//  ----------------------------------------------------------------------------
+.d-slider--vertical {
+    inline-size: auto;
+    block-size: var(--slider-track-length);
+
+    .d-slider__body {
+        flex-direction: column;
+        align-items: center;
+        block-size: 100%;
+    }
+
+    .d-slider__control {
+        inline-size: var(--slider-thumb-size);
+        block-size: auto;
+        flex: 1;
+        flex-direction: column;
+        padding-block: 0;
+        // Same bare-number-vs-length max() pitfall as the horizontal
+        // padding-block rule above — see its comment.
+        padding-inline: max(calc(var(--dt-spacing-base) * 0), calc((var(--dt-spacing-550) - var(--slider-thumb-size)) / 2));
+        // Marks/readout sit beside the (narrow) vertical control by a fixed,
+        // value-independent offset — not the value-dependent inline overflow
+        // the horizontal clip above guards against — so there's no equivalent
+        // growing-scrollWidth risk here. Restore full visibility.
+        overflow: visible;
+    }
+
+    .d-slider__track {
+        inset-inline: unset;
+        inset-block: 0;
+        inline-size: var(--slider-track-height);
+        block-size: 100%;
+        inset-inline-start: 50%;
+        inset-block-start: 0;
+        transform: translateX(-50%);
+
+        // insetInlineStart:50% still mirrors under dir="rtl" even in
+        // vertical orientation — it's the CSS inline axis (unaffected by
+        // this component's own orientation prop), so the centering
+        // transform has to flip the same way it does horizontally.
+        &:dir(rtl) {
+            transform: translateX(50%);
+        }
+    }
+
+    .d-slider__indicator {
+        inline-size: var(--slider-track-height);
+        block-size: auto;
+        inset-inline-start: 50%;
+        inset-block-start: unset;
+        transform: translateX(-50%);
+        // Overrides the variable, not the transition property itself — see
+        // the comment on the base .d-slider__indicator rule for why, and
+        // .d-slider--dragging .d-slider__indicator near the end of this file
+        // for the same-specificity override that must win over this one.
+        --slider-indicator-transition: height var(--td100) var(--ttf-ease), bottom var(--td100) var(--ttf-ease), top var(--td100) var(--ttf-ease), background-color var(--td100) var(--ttf-ease);
+
+        // Same rationale as .d-slider__track's :dir(rtl) override above.
+        &:dir(rtl) {
+            transform: translateX(50%);
+        }
+    }
+
+    .d-slider__thumb-visual {
+        inset-inline-start: 50%;
+        inset-block-start: unset;
+        // bottom is set inline via style
+        transform: translate(-50%, 50%);
+
+        // Same rationale as .d-slider__track's :dir(rtl) override above.
+        &:dir(rtl) {
+            transform: translate(50%, 50%);
+        }
+    }
+
+    .d-slider__thumb-hit {
+        inset-inline-start: 50%;
+        inset-block-start: unset;
+    }
+
+    .d-slider__tick {
+        inline-size: var(--dt-spacing-50);
+        block-size: var(--dt-size-border-200);
+        inset-block-start: unset;
+        inset-inline-start: calc(50% + var(--slider-track-height) / 2 + var(--dt-size-border-100));
+        margin-block-start: 0;
+        // bottom set via style
+        transform: translateY(50%);
+    }
+
+    .d-slider__mark {
+        inset-block-start: unset;
+        inset-inline-start: calc(50% + var(--slider-thumb-size) / 2 + var(--slider-mark-offset));
+        transform: translateY(50%);
+        // bottom set inline via style
+    }
+
+    .d-slider__readout {
+        inset-block-start: unset;
+        inset-inline-start: calc(50% + var(--slider-thumb-size) / 2 + var(--slider-mark-offset));
+        transform: translateY(50%);
+        // bottom set inline via style
+    }
+}
+
+//  $$  DRAGGING OVERRIDES THAT OUTRANK ORIENTATION
+//  Same (0,2,0) specificity, same descendant shape, as the orientation
+//  override above — placed after it in source order on purpose, so dragging
+//  always wins regardless of which orientation is active. Keep this after
+//  .d-slider--vertical.
+//  ----------------------------------------------------------------------------
+//  While dragging, the indicator's position is driven by the pointer on
+//  every pointermove — the transition above is for discrete value jumps
+//  (click-to-position, keyboard) and only makes a continuous drag look
+//  like it's lagging behind the thumb.
+.d-slider--dragging .d-slider__indicator {
+    --slider-indicator-transition: none;
+}
+
+} // @layer
