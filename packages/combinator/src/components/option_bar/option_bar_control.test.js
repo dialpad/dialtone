@@ -273,6 +273,20 @@ describe('option_bar_control.vue test', function () {
       expect(wrapper.emitted('update:value')).toBeFalsy();
     });
 
+    it('does not emit a raw-edited null for an optional member marked non-clearable via args', async function () {
+      // required is the common reason a member isn't clearable, but not the
+      // only one — extendMember also computes clearable: false for an
+      // optional member with a meaningful non-nullish default, or an
+      // explicit override, and threads it through as args.clearable. RAW
+      // mode must honor that too, not just the required flag.
+      wrapper = mount(DtcOptionBarControl, {
+        props: { ...numberOrArrayMember, args: { clearable: false } },
+      });
+      await findRawButton(wrapper).trigger('click');
+      await wrapper.find(textareaSelector).setValue('null');
+      expect(wrapper.emitted('update:value')).toBeFalsy();
+    });
+
     it.each([
       ['locked', { locked: true }],
       ['disabled', { disabled: true }],

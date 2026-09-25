@@ -311,12 +311,15 @@ watch(rawText, (val) => {
     // typed for a number|array control (e.g. Slider's modelValue) would
     // reach the component unchanged and break it. 'null' is normally allowed
     // regardless of validControls — it's how a control's value gets cleared —
-    // except on a required member: option_bar_member_group.vue already
-    // computes clearable: false for those, and RAW mode typing 'null'
-    // directly would otherwise bypass that same restriction.
+    // except when the member isn't clearable: option_bar_member_group.vue
+    // already computes clearable: false both for required members AND for
+    // optional members with a meaningful non-nullish default or an explicit
+    // clearable: false override (see its own clearable computation), and
+    // threads that through as args.clearable. RAW mode typing 'null' directly
+    // would otherwise bypass either restriction.
     const parsedControl = getControlByValue(parsed);
     if (parsedControl === 'null') {
-      if (props.required) return;
+      if (props.required || props.args.clearable === false) return;
     } else {
       if (!props.validControls.includes(parsedControl)) return;
       // validControls only checks the value's coarse shape (e.g. 'array') — a shape
