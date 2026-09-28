@@ -123,13 +123,14 @@
     // capping the maximum any ancestor's scrollWidth can grow by, regardless of
     // how long the value/mark text is. Needs overflow-x AND -y both set to clip
     // (not just one) for the margin to actually apply in current browsers.
-    // overflow-clip-margin also can't take a Dialtone spacing token directly —
-    // every --dt-spacing-* token is itself defined as calc(--dt-spacing-base * n),
-    // and a var() that resolves to a calc()/nested-var() chain computes to 0
-    // here (confirmed live: a custom property holding a plain literal length
-    // works, one holding calc(var(--base) * 4) does not) — so this one
-    // property is a raw px value instead of the token reference used
-    // everywhere else in this file; 32px matches --dt-spacing-400.
+    // overflow-clip-margin also can't take a Dialtone spacing token — every
+    // --dt-spacing-* token is defined as calc(--dt-spacing-base * n), and this
+    // property doesn't resolve ANY math function to a used value, not just
+    // var()-wrapped ones: calc(32px) alone (zero arithmetic, no var at all)
+    // still computes to 0px here, same as min()/max(). Only a bare <length>
+    // token works. So this one property is a raw px value instead of the
+    // token reference used everywhere else in this file; 32px matches
+    // --dt-spacing-400.
     overflow: clip;
     cursor: default;
     block-size: var(--slider-thumb-size);
