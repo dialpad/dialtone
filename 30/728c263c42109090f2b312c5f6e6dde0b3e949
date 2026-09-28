@@ -1,0 +1,27 @@
+apps/dialtone-documentation/scripts/data/emit-width-height.mjs
+  s_35758a979f0a53::t_aef708bf9d51eb 1-29
+apps/dialtone-documentation/docs/_data/width-height.json
+  s_35758a979f0a53::t_c23e2f0557d49b 2-103,105-211
+apps/dialtone-documentation/scripts/generate-data.mjs
+  s_35758a979f0a53::t_a635c1b965a61e 20,23
+apps/dialtone-documentation/scripts/data/token-values.mjs
+  s_35758a979f0a53::t_5ab9c2ae8a114f 86-95
+apps/dialtone-documentation/scripts/data/metadata.mjs
+  s_35758a979f0a53::t_62cf145d82178a 26-43
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "30728c263c42109090f2b312c5f6e6dde0b3e949",
+  "prompts": {},
+  "sessions": {
+    "s_35758a979f0a53": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e95815f4-bd6d-4938-b966-268ab186f0b7",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

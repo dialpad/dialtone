@@ -1,0 +1,19 @@
+apps/dialtone-documentation/docs/guides/theme-and-mode/index.md
+  s_876ae9a32ded18::t_83bd84eefec6d5 199
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "d10a059ee8f7197ef0a75291a1891eefa0e3eb8d",
+  "prompts": {},
+  "sessions": {
+    "s_876ae9a32ded18": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "35453216-46e7-4b31-87c8-ff5408087efb",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}
