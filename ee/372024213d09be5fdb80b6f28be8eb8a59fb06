@@ -1,0 +1,19 @@
+pnpm-lock.yaml
+  s_0deedfec899a67::t_38cfaaeb2c060e 14279-14280,18362,30750
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "ee372024213d09be5fdb80b6f28be8eb8a59fb06",
+  "prompts": {},
+  "sessions": {
+    "s_0deedfec899a67": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f24dc-c4e6-7560-9f4a-625c9c8673a7",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
