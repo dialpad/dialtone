@@ -1,0 +1,16 @@
+packages/combinator/src/components/controls/control_iterable.vue
+  h_c15b5755534093 44-47,56-57,60-61
+packages/combinator/src/components/controls/control_clearable_shell.vue
+  h_c15b5755534093 17-20,22-24,30-31,34-35,47-50,52-54,60-61,64-65
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.10",
+  "base_commit_sha": "a142096c33f2c915dd922425c7f0f50d51dd6f2f",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

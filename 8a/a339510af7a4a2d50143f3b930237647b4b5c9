@@ -1,0 +1,23 @@
+packages/dialtone-vue/components/Tab/TabGroup.vue
+  s_cf576d8e7533b3::t_d005126afd862e 231-232
+  s_cf576d8e7533b3::t_c92be0e06fa8a9 477-478
+packages/dialtone-vue/components/Tab/TabGroup.test.js
+  s_cf576d8e7533b3::t_1183e1f644008f 242-244,246
+  s_cf576d8e7533b3::t_014db4f82e1214 245
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.21",
+  "base_commit_sha": "8aa339510af7a4a2d50143f3b930237647b4b5c9",
+  "prompts": {},
+  "sessions": {
+    "s_cf576d8e7533b3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "3a53830b-11f9-49c9-9536-7256fa694a2d",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

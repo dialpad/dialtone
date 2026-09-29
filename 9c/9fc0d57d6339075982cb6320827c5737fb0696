@@ -1,0 +1,196 @@
+packages/dialtone-vue/index.js
+  s_70bd67c1949733::t_332edb71bf861c 66
+packages/dialtone-vue/components/TextList/TextList.vue
+  s_70bd67c1949733::t_0e3d3c79ab129b 18
+  s_2c9bf7a91b8fa5::t_49dff6187b4d0e 164-168
+  s_2c9bf7a91b8fa5::t_9139e149123949 124-125
+  s_70bd67c1949733::t_eddee25f3cb4ea 1
+  s_70bd67c1949733::t_ed470b8f112555 104
+  s_70bd67c1949733::t_17cfb38df4c978 2-4,6-17,19,20-22,24,25-27,28-75,77-79,81-100,102-103,105-108,111-115,117-123,126-150,151,157,159-163,169-170
+  s_70bd67c1949733::t_e0d1fa7fd181a1 76
+  s_2c9bf7a91b8fa5::t_08d7486ce7d49c 109-110
+  s_2c9bf7a91b8fa5::t_ef626fd307abbf 116
+  s_2c9bf7a91b8fa5::t_bb3406551007c4 80
+  s_70bd67c1949733::t_9812cbf78a355a 5,23,101,152-156,158
+apps/dialtone-documentation/thumbs/text-list.vue
+  s_70bd67c1949733::t_f76dd229da370f 1,19
+  h_c15b5755534093 2,4-5,9-16
+common/components_list.js
+  s_70bd67c1949733::t_332edb71bf861c 63
+packages/dialtone-vue/components/TextList/Validators.js
+  s_70bd67c1949733::t_e0d1fa7fd181a1 5
+  s_70bd67c1949733::t_17cfb38df4c978 1-4,6-14
+  s_2c9bf7a91b8fa5::t_9d44b55b34a58d 15
+packages/eslint-plugin-dialtone/docs/rules/deprecated-list-styling-classes.md
+  s_70bd67c1949733::t_35dfe7e04cd665 1-6,8-41,47-51,53-73
+  s_2c9bf7a91b8fa5::t_e38943969d7fdb 7
+  s_2c9bf7a91b8fa5::t_869420304d94d1 42-46
+  s_2c9bf7a91b8fa5::t_a7dde5aa01abaf 52
+packages/dialtone-vue/components/TextList/TextList.stories.js
+  s_70bd67c1949733::t_29f4b3f01814d4 2,4-13,15-19,21-44,46-93
+  s_70bd67c1949733::t_e0d1fa7fd181a1 3
+  s_70bd67c1949733::t_75df1cc7e5aeaf 1
+  s_2c9bf7a91b8fa5::t_c3e282dd55fffc 20
+  s_2c9bf7a91b8fa5::t_ae44b4e8a63114 45
+  s_2c9bf7a91b8fa5::t_a695772310d68c 14
+apps/dialtone-documentation/docs/utilities/typography/lists.md
+  s_70bd67c1949733::t_7c3366da7eab3d 7,9
+  s_2c9bf7a91b8fa5::t_51b73639426801 4
+  h_c15b5755534093 8
+packages/dialtone-vue/components/TextList/index.js
+  s_70bd67c1949733::t_e0d1fa7fd181a1 4
+  s_70bd67c1949733::t_17cfb38df4c978 1-3,5-11
+packages/combinator/src/lib/variant_state.test.js
+  s_70bd67c1949733::t_e2bc37e91fe066 28-39,71-75,77-79,81-88
+  s_70bd67c1949733::t_2cdaee1b9fce73 70,76,80
+  s_70bd67c1949733::t_f9301a356a5775 89
+packages/dialtone-vue/components/TextList/TextList.mdx
+  s_70bd67c1949733::t_29f4b3f01814d4 1-9
+apps/dialtone-documentation/docs/_data/site-nav.json
+  s_70bd67c1949733::t_7c3366da7eab3d 593-595
+  s_70bd67c1949733::t_2304fad876e98b 592
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-list-styling-classes.js
+  s_70bd67c1949733::t_35dfe7e04cd665 1-23,26-47,55-65,73-100
+  s_2c9bf7a91b8fa5::t_280cd753cfe88c 24-25
+  s_70bd67c1949733::t_9812cbf78a355a 48-54,66-72
+packages/combinator/src/lib/utils.test.js
+  s_70bd67c1949733::t_2cdaee1b9fce73 33,43,51
+  s_70bd67c1949733::t_e2bc37e91fe066 34-36,44-45,47
+  s_70bd67c1949733::t_cf87c6c312acb6 46
+  s_70bd67c1949733::t_ac8d5f5a93bf98 48
+packages/dialtone-vue/components/TextList/TextListConstants.js
+  s_70bd67c1949733::t_17cfb38df4c978 1,3-4,6-22,24-30
+  s_70bd67c1949733::t_e0d1fa7fd181a1 2,5,23
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-success-color-classes.js
+  s_70bd67c1949733::t_62be535cb35909 19,20-22
+packages/combinator/src/lib/utils.js
+  s_70bd67c1949733::t_e2bc37e91fe066 136
+packages/dialtone-vue/components/TextList/TextListItem.vue
+  s_70bd67c1949733::t_0e3d3c79ab129b 29
+  s_2c9bf7a91b8fa5::t_a36fa410b9fd38 92-93,96-99,101-103
+  s_70bd67c1949733::t_2cdaee1b9fce73 8-21,24
+  s_70bd67c1949733::t_714949808df672 39,55-64,89
+  s_70bd67c1949733::t_eddee25f3cb4ea 1
+  s_70bd67c1949733::t_bba693d817dfc8 65,67,84,88
+  s_70bd67c1949733::t_17cfb38df4c978 2-7,22-23,25-28,30-36,38,40-54,66,68-81,83,85-87,90-91,94-95,100,104-106
+  s_70bd67c1949733::t_ed470b8f112555 82
+  s_2c9bf7a91b8fa5::t_fbd6d237e80f31 37
+packages/combinator/src/variants/variants_text_list.js
+  s_70bd67c1949733::t_0b6315d6af39ed 1-58,59-62,64-68,70,73,89-90,94-95,124-127,145,149-154,158,281-285
+  s_70bd67c1949733::t_24174e63ae7fea 97,99,102,104,106,109,118,120,123
+  h_c15b5755534093 70-74,78,83,92,103,128,132,135,138,149-151,172-176,204,222,248,274
+  s_70bd67c1949733::t_cc136e7a850a42 75-76,82,88-91,93,94-102,104-127,133-134,136-137,139-148,152-171,177-179,181,183,185,187,189,193,195,201,205-221,223-228,230-247,249-273,275-280
+  s_70bd67c1949733::t_f8bd6ed2e1fa9b 69
+  s_70bd67c1949733::t_53df5618502d21 77,79-81
+  s_70bd67c1949733::t_77adffe170095c 84-87
+packages/dialtone-vue/components/TextList/TextListDefault.story.vue
+  s_2c9bf7a91b8fa5::t_9a7688579426b5 30-31
+  s_70bd67c1949733::t_29f4b3f01814d4 1-11,13-29,32-40
+  s_70bd67c1949733::t_9812cbf78a355a 12
+apps/dialtone-documentation/scripts/thumbs/harness/vite.config.js
+  s_70bd67c1949733::t_14b28bbbf66c6b 41-42
+packages/dialtone-css/lib/build/less/components/text-list.less
+  s_70bd67c1949733::t_e0d1fa7fd181a1 56,65
+  s_70bd67c1949733::t_5d23c8c7e7a7cd 89,99,103
+  s_70bd67c1949733::t_5d28a082ffeed2 49-54
+  s_70bd67c1949733::t_17cfb38df4c978 1-2,5-6,8-10,12-23,25-28,30-31,40,55,57-64,66-70,77-78,83-84,87-88,90,96-98,100-102,104-106,107-108,112,119-125
+  s_70bd67c1949733::t_751bf2464811a3 24,29,36-39
+  h_c15b5755534093 3,4,7,11,71-75,76,86,91,109
+  s_2c9bf7a91b8fa5::t_63a8b30dbe4d06 41-48
+  s_2c9bf7a91b8fa5::t_a2f5ddcb75e393 111
+  s_2c9bf7a91b8fa5::t_bba64b659013f1 79-82
+  s_2c9bf7a91b8fa5::t_126198ff33794a 92-95,110,112-117
+  s_2c9bf7a91b8fa5::t_49dbda099c1740 85
+apps/dialtone-documentation/docs/components/text-list.md
+  s_70bd67c1949733::t_5a9356bdd34488 131
+  s_70bd67c1949733::t_7c3366da7eab3d 1-2,4-13,19-24,25-39,41,46-50,52,54-59,61-70,78,80-83,117-123,126-130,132-143,145,147-152,155,163,170-197,204-212
+  s_70bd67c1949733::t_b4499395841f6c 3,42,45,60,144,153,156-157,159,161,165
+  h_c15b5755534093 14-18,40,43-44,71-77,79,84-86,91-96,99-100,101,118,124-125,146,154,160,162,166,167,169,198-203
+  s_70bd67c1949733::t_e0d1fa7fd181a1 51
+  s_70bd67c1949733::t_c45770a466a287 53
+  s_2c9bf7a91b8fa5::t_335be277d99a80 102-117
+packages/dialtone-css/lib/build/less/dialtone.less
+  s_70bd67c1949733::t_332edb71bf861c 21
+packages/dialtone-vue/components/TextList/TextListVariants.story.vue
+  s_70bd67c1949733::t_2087337a256174 33-35,61-62
+  s_70bd67c1949733::t_29f4b3f01814d4 1-11,13-28,29-32,36-45,47-49,50,63,65-79,81-105,107-115,118-120
+  s_70bd67c1949733::t_25953bcbd0df19 46,51-56,58-60,64,106,116-117
+  s_70bd67c1949733::t_44985031a7bd29 57
+  h_c15b5755534093 12,80
+packages/eslint-plugin-dialtone/lib/rules/deprecated-list-styling-classes.js
+  s_70bd67c1949733::t_35dfe7e04cd665 1-5,15-37,41,51-57,64-69
+  s_2c9bf7a91b8fa5::t_1d529e4096c4b1 6-9,38-40,48-50
+  s_70bd67c1949733::t_9812cbf78a355a 10-14,42-47,58-63
+packages/combinator/src/variants/variants.js
+  s_70bd67c1949733::t_0b6315d6af39ed 56,119
+packages/dialtone-vue/components/TextList/TextList.test.js
+  s_70bd67c1949733::t_edf2d908a03e61 186-187,342-353
+  s_70bd67c1949733::t_943ac5eee00fe8 188-189,274
+  s_70bd67c1949733::t_eddee25f3cb4ea 1-5,6-7,9,11-20,34-35,43,45,50-57,65-66,70-76,78-80,99,101,104-107,116,124,144,146,148,150,153-155,178,180-184,192,194-198,202,205-208,212,214,216,218-219,225,227,229,231,241-244,246,248-252,257,259,261,265-266,268,270,272,275-276,286-287,291,293-306,309,314,316,320-321,324-325,332-333,335,340-341,364,367-369,371-373,375-378,385,389-391
+  s_70bd67c1949733::t_32d12844d7e4e1 46-49,60,156-168,172-174,307,310-313,319,322,326-331,338-339,355-360,365
+  s_70bd67c1949733::t_28ff5939e9f867 44
+  s_70bd67c1949733::t_6d274c9847906b 128-130,132-133,135-140
+  s_70bd67c1949733::t_b42a0e5ec6852f 8,10,21-33,36-42,58-59,61-64,67-69,102-103,117,121-123,145,147,151-152,169-171,175-177,179,185,190,193,199-201,203-204,209,211,213,215,217,220-224,226,228,230,232-236,238-240,245,247,253,256,258,260,262-264,269,271,288-290,292,308,315,317-318,323,334,336-337,354,361-363,366,370,379-384,386-388
+  s_70bd67c1949733::t_9b4a1740abd06a 81-98
+  s_2c9bf7a91b8fa5::t_0d2522439d36fa 118-120,125-127
+  s_2c9bf7a91b8fa5::t_f6be5ece699e67 131,134,141-143
+  s_2c9bf7a91b8fa5::t_ba387fb2b75d51 149
+  s_2c9bf7a91b8fa5::t_66ca5d157e6bf1 374
+  s_2c9bf7a91b8fa5::t_41c0a0f8681bf7 100,210
+  s_2c9bf7a91b8fa5::t_b6b3ffd53ba0c7 254-255
+  s_2c9bf7a91b8fa5::t_82be8e0b38e976 191
+  s_2c9bf7a91b8fa5::t_607052b11c28bb 237
+  s_70bd67c1949733::t_65537203f054ce 77,108-113
+  s_70bd67c1949733::t_30ef6cb345a7e6 114-115
+  s_70bd67c1949733::t_9812cbf78a355a 267,273,277-283
+  s_70bd67c1949733::t_7c89d70ccaa8e7 284-285
+packages/combinator/.github/documentation/internal/EXCLUSIONS.md
+  s_70bd67c1949733::t_e2bc37e91fe066 147
+packages/dialtone-css/lib/build/less/components/prose.less
+  h_c15b5755534093 227-230
+apps/dialtone-documentation/docs/dialtone/whats-new/posts/2026-7-15.md
+  s_2c9bf7a91b8fa5::t_5f095b3ba8b19f 131
+  s_2c9bf7a91b8fa5::t_d7d461d0739b02 63-84
+  s_2c9bf7a91b8fa5::t_bec295597715ad 42
+  s_2c9bf7a91b8fa5::t_c16904ff251206 116
+  s_2c9bf7a91b8fa5::t_576e2c68a55887 88
+  s_2c9bf7a91b8fa5::t_f109532e855214 13
+  s_2c9bf7a91b8fa5::t_1e6c452db4da89 46
+  s_2c9bf7a91b8fa5::t_6bc6dbf855c55a 59
+  h_c15b5755534093 124-126
+  s_2c9bf7a91b8fa5::t_ecb914d67153d9 15
+  s_2c9bf7a91b8fa5::t_c6df012063d95d 1-12,14,16-21,23-41,43-45,47-58,60-62,85-87,89-90,92-105,107-115,117-121,123,127-130,132-144
+  s_2c9bf7a91b8fa5::t_37def8970d1ea8 22
+  s_2c9bf7a91b8fa5::t_0ebe03e7be6a0a 106
+  s_2c9bf7a91b8fa5::t_eb74d06a9a97fe 91
+  s_2c9bf7a91b8fa5::t_6b030a4ee0249a 122
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "9c9fc0d57d6339075982cb6320827c5737fb0696",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_2c9bf7a91b8fa5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "996319e4-ffde-4045-b12a-986ae83372d8",
+        "model": "claude-fable-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_70bd67c1949733": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f3c9e-fb6d-7a13-bf9d-512be21eb336",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
