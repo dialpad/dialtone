@@ -1,3 +1,15 @@
+# [10.3.0](https://github.com/dialpad/dialtone/compare/dialtone/v10.2.0...dialtone/v10.3.0) (2026-09-29)
+
+
+### Bug Fixes
+
+* **Language Server:** NO-JIRA declare typescript-eslint deps used by eslint config ([#1444](https://github.com/dialpad/dialtone/issues/1444)) ([3a99e50](https://github.com/dialpad/dialtone/commit/3a99e50c8c90ef5fa7456f389bdc66831fd6c41c))
+
+
+### Features
+
+* **Rich Text Editor:** DP-209950 linkify pending URL before send when no trailing space ([#1439](https://github.com/dialpad/dialtone/issues/1439)) ([234cf7f](https://github.com/dialpad/dialtone/commit/234cf7f7ad24e7a93608744e7ef0e443ceaaf652))
+
 # [10.2.0](https://github.com/dialpad/dialtone/compare/dialtone/v10.1.0...dialtone/v10.2.0) (2026-09-29)
 
 
