@@ -1,0 +1,30 @@
+apps/dialtone-documentation/docs/index.md
+  s_fb74aa28f644ee::t_7ee104c820a084 177,183,212,214,225
+  s_fb74aa28f644ee::t_d151436fe37144 208,210,250,253-255,265-267,275-282,289,299-301,307-311
+  s_fb74aa28f644ee::t_7c3a68b3da4f2e 178-180
+  s_fb74aa28f644ee::t_64ec4e0bde267e 209
+  s_fb74aa28f644ee::t_40f68a8b6300a3 215
+apps/dialtone-documentation/docs/.vuepress/baseComponents/gradientHeroColors.js
+  s_fb74aa28f644ee::t_03fc5490845e26 24,27,29-30,95,115
+  s_fb74aa28f644ee::t_eacc09e7bc5d71 6,17-19,92
+apps/dialtone-documentation/docs/.vuepress/baseComponents/GradientHero.vue
+  s_fb74aa28f644ee::t_57037d7c336569 2,14,19,26,29-31
+apps/dialtone-documentation/docs/.vuepress/baseComponents/HalftoneSurface.vue
+  s_fb74aa28f644ee::t_44622a2d22d9a9 1-271
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "734ddb1e243b1bb80348a6693baa6a6b6bba7cd3",
+  "prompts": {},
+  "sessions": {
+    "s_fb74aa28f644ee": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a016c1-4534-7332-9095-8e18310eed6e",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
