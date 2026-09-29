@@ -263,6 +263,7 @@ describe('DtModal Tests', () => {
       expect(wrapper.emitted(SYNC_EVENT_NAME)).toBeFalsy();
 
       await overlay.trigger('mousedown');
+      await overlay.trigger('mouseup');
       await overlay.trigger('click');
 
       expect(wrapper.emitted()[SYNC_EVENT_NAME].length).toBe(1);
@@ -270,9 +271,15 @@ describe('DtModal Tests', () => {
     });
 
     it('Should not close when drag starts inside dialog and ends on backdrop', async () => {
-      expect(wrapper.emitted(SYNC_EVENT_NAME)).toBeFalsy();
-
       await copy.trigger('mousedown');
+      await overlay.trigger('click');
+
+      expect(wrapper.emitted(SYNC_EVENT_NAME)).toBeFalsy();
+    });
+
+    it('Should not close when drag starts on backdrop and ends inside dialog', async () => {
+      await overlay.trigger('mousedown');
+      await copy.trigger('mouseup');
       await overlay.trigger('click');
 
       expect(wrapper.emitted(SYNC_EVENT_NAME)).toBeFalsy();
