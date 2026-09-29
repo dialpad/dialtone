@@ -23,7 +23,7 @@ import { writeFileSync } from 'fs';
 import FigmaApi from './figma_api.js';
 import { generatePostVariablesPayload, FlattenedTokensByFile } from './token_import.js';
 import { gamutMapped, resetGamutLog } from './color.js';
-import { resolveModes, compareTokenNames } from './resolve_tokens.js';
+import { resolveModes, compareTokenNames, ResolvedToken, ValueOf } from './resolve_tokens.js';
 import { classify, Classified, ScopeViolation, figmaFontFamily } from './variable_policy.js';
 import type { Token } from './token_types.js';
 import { toNumber as toNumberWithUnits } from './utils.js';
@@ -51,6 +51,23 @@ interface Conversion {
 /** `color.surface.primary` becomes `color/surface/primary`, Figma's grouping. */
 function figmaName (path: string): string {
   return path.split('.').join('/');
+}
+
+/**
+ * A token's resolved value as a plain number, for `compareTokenNames`'
+ * `valueOf` — light mode's, since every value-sortable dimension is
+ * mode-invariant (only colour and alpha ever differ between modes). A colour
+ * or a font family resolves to `null`, same as `toNumber` returns everywhere
+ * else in this file, so those keep sorting by curated order exactly as before.
+ */
+function valueOfToken (tokens: ResolvedToken[]): ValueOf {
+  const byName = new Map(tokens.map(t => [t.name, t]));
+  return (name: string) => {
+    const modes = byName.get(name)?.modes;
+    if (!modes) return null;
+    const mode = modes.light ?? Object.values(modes)[0];
+    return toNumber(mode?.resolved);
+  };
 }
 
 function tokenType (figmaType: Classified['figmaType']): Token['$type'] {
@@ -337,7 +354,8 @@ async function main (): Promise<void> {
   // Each group is sorted on its own, so the union has to be sorted again.
   // Ordering is not cosmetic here: Figma has no ordering field, so a variable's
   // position in the panel is the order its CREATE arrived in.
-  all.sort((a, b) => compareTokenNames(a.name, b.name));
+  const valueOf = valueOfToken(all);
+  all.sort((a, b) => compareTokenNames(a.name, b.name, valueOf));
 
   const { emit, excluded, unscoped, violations } = classify(all);
 
