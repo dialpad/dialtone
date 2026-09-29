@@ -77,6 +77,14 @@ All commands support `--format`:
 | `--format markdown` | Markdown |
 | `--format json` | Structured JSON |
 
+## Debug Output
+
+Set `DIALTONE_DEBUG=1` to print the search engine's debug output to stderr:
+
+```bash
+DIALTONE_DEBUG=1 dialtone search button
+```
+
 ## Updating
 
 The CLI checks for updates automatically. To update:

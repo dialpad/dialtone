@@ -268,6 +268,14 @@ dialtone search "input|select|menu"
 
 Use the focused `component`, `token`, `utility`, or `docs` command once you know which type of result you need.
 
+### See how a search chose its results
+
+Set `DIALTONE_DEBUG=1` to print the search engine's debug output to stderr, including the parsed query and how many results each step matched:
+
+```bash
+DIALTONE_DEBUG=1 dialtone component stack --prop gap
+```
+
 ## Resources
 
 - [Dialtone MCP Server](/guides/mcp-server/)
