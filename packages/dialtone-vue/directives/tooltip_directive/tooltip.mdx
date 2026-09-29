@@ -7,7 +7,7 @@ import * as TooltipDirectiveStories from './tooltip.stories.js';
 
 A tooltip is a floating label that briefly explains an action, function, or an element.
 Its content is exclusively text and shouldn't be vital information for users.
-If customization other than placement is needed consider using `dt-tooltip` component instead.
+Use object syntax to pass `DtTooltip` props to the directive.
 
 ## Usage
 
@@ -39,4 +39,12 @@ top, top-start, top-end**.
 
 ```html
 <dt-button v-dt-tooltip:bottom-start="Tooltip text">Placeholder button</dt-button>
+```
+
+### Without Arrow
+
+Set `showArrow` to `false` with object syntax to hide the tooltip arrow.
+
+```html
+<dt-button v-dt-tooltip="{ message: 'Tooltip text', showArrow: false }">Placeholder button</dt-button>
 ```

@@ -8,6 +8,7 @@ const MOCK_TOOLTIP_PROPS = {
   placement: 'bottom-start',
   delay: false,
   message: MOCK_TOOLTIP_TEXT,
+  showArrow: false,
 };
 
 const WrapperComponent = {
@@ -130,6 +131,10 @@ describe('DtTooltipDirective Tests', () => {
 
       it('should render the message', () => {
         expect(document.body.querySelector('[data-qa="dt-tooltip"]').textContent.trim()).toBe(MOCK_TOOLTIP_TEXT);
+      });
+
+      it('should pass component props through object syntax', () => {
+        expect(anchorButtonObject.element._tippy.popper.querySelector('.tippy-svg-arrow')).toBeNull();
       });
     });
 

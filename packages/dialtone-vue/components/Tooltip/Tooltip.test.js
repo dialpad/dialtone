@@ -98,6 +98,28 @@ describe('DtTooltip tests', () => {
         expect(tooltip.textContent).toBe('Test message');
       });
 
+      it('should render an arrow by default', () => {
+        expect(wrapper.vm.tip.popper.querySelector('.tippy-svg-arrow')).not.toBeNull();
+      });
+
+      it('should not render an arrow initially when showArrow is false', () => {
+        wrapper.unmount();
+        mockProps = { open: true, showArrow: false };
+        updateWrapper();
+
+        expect(wrapper.vm.tip.popper.querySelector('.tippy-arrow, .tippy-svg-arrow')).toBeNull();
+      });
+
+      it('should update the arrow when showArrow changes', async () => {
+        await wrapper.setProps({ showArrow: false });
+
+        expect(wrapper.vm.tip.popper.querySelector('.tippy-svg-arrow')).toBeNull();
+
+        await wrapper.setProps({ showArrow: true });
+
+        expect(wrapper.vm.tip.popper.querySelector('.tippy-svg-arrow')).not.toBeNull();
+      });
+
       describe('When tooltip content is a space character', () => {
         it('should not render the content', async () => {
           wrapper.unmount();

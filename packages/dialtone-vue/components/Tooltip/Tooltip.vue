@@ -61,6 +61,8 @@ import {
 } from '@/components/Popover/TippyUtils';
 import ModeMixin from '@/common/mixins/mode';
 
+const TOOLTIP_ARROW_SVG = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="7"><path d="M 14.5,7 8,0 1.5,7 Z"/></svg>';
+
 /**
  * A tooltip is a floating label that briefly explains an action, function, or an element.
  * Its content is exclusively text and shouldn't be vital information for users.
@@ -122,6 +124,15 @@ export default {
     offset: {
       type: Array,
       default: () => [0, 12],
+    },
+
+    /**
+     * Whether to show the arrow between the tooltip and its anchor.
+     * @values true, false
+     */
+    showArrow: {
+      type: Boolean,
+      default: true,
     },
 
     /**
@@ -317,8 +328,13 @@ export default {
 
   computed: {
 
+    tippyArrow () {
+      return this.showArrow ? TOOLTIP_ARROW_SVG : false;
+    },
+
     tippyProps () {
       return {
+        arrow: this.tippyArrow,
         offset: this.offset,
         delay: this.delay ? TOOLTIP_DELAY_MS : false,
         placement: this.placement,
@@ -538,13 +554,14 @@ export default {
       return true;
     },
 
-    // set initial options here. If any of the options need to dynamically change, they should be put in
-    // tippyProps instead.
+    // Set initial options here. Reactive options belong in tippyProps, but arrow is duplicated because Tippy
+    // renders its default arrow during synchronous showOnCreate mounting. setProps only runs later from
+    // onMount, so omitting the initial value would leave the default arrow in the DOM until then.
     initOptions () {
       const template = this.$refs.content;
       return {
         content: template,
-        arrow: '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="7"><path d="M 14.5,7 8,0 1.5,7 Z"/></svg>',
+        arrow: this.tippyArrow,
         // transition duration - same as our custom fade delay in dialtone-globals.less
         duration: 180,
         interactive: false,
