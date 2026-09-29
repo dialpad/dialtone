@@ -20,6 +20,7 @@
       :aria-labelledby="labelledById"
       v-bind="modeAttrs"
       @cancel.prevent="close"
+      @mousedown="onBackdropMousedown"
       @click="onBackdropClick"
       @keydown="onKeydown"
     >
@@ -427,6 +428,7 @@ export default {
       hasSlotContent,
       i18n: new DialtoneLocalization(),
       autoTeleportTarget: null,
+      mousedownOnBackdrop: false,
     };
   },
 
@@ -504,8 +506,12 @@ export default {
       this.$emit('update:open', false);
     },
 
+    onBackdropMousedown (event) {
+      this.mousedownOnBackdrop = event.target === event.currentTarget;
+    },
+
     onBackdropClick (event) {
-      if (this.closeOnClick && event.target === event.currentTarget) {
+      if (this.closeOnClick && event.target === event.currentTarget && this.mousedownOnBackdrop) {
         this.close();
       }
       this.$emit('click', event);

@@ -262,10 +262,20 @@ describe('DtModal Tests', () => {
     it('Should emit a sync-able update event when overlay is clicked', async () => {
       expect(wrapper.emitted(SYNC_EVENT_NAME)).toBeFalsy();
 
+      await overlay.trigger('mousedown');
       await overlay.trigger('click');
 
       expect(wrapper.emitted()[SYNC_EVENT_NAME].length).toBe(1);
       expect(wrapper.emitted()[SYNC_EVENT_NAME][0][0]).toBe(false);
+    });
+
+    it('Should not close when drag starts inside dialog and ends on backdrop', async () => {
+      expect(wrapper.emitted(SYNC_EVENT_NAME)).toBeFalsy();
+
+      await copy.trigger('mousedown');
+      await overlay.trigger('click');
+
+      expect(wrapper.emitted(SYNC_EVENT_NAME)).toBeFalsy();
     });
 
     it('Should emit a sync-able update event when close-icon is clicked', async () => {
