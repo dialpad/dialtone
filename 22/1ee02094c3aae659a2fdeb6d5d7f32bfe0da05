@@ -1,0 +1,45 @@
+packages/dialtone-docs/src/content/reference/reference-component-api-patterns.md
+  s_e29a672f6e8027::t_6c7ed9a0b290f6 58
+  s_e29a672f6e8027::t_3fa97c9c59b4ef 23
+packages/dialtone-vue/components/Icon/Icon.vue
+  s_e29a672f6e8027::t_ff22862696b09c 32
+packages/dialtone-vue/components/Emoji/Emoji.vue
+  s_e29a672f6e8027::t_ed05d96868b01a 65
+packages/dialtone-css/lib/build/js/dialtone_migrate_tshirt_to_numeric/index.mjs
+  s_e29a672f6e8027::t_08f2bc19d33b85 62-64
+packages/dialtone-css/lib/build/js/dialtone_migrate_tshirt_to_numeric/test.mjs
+  s_e29a672f6e8027::t_32615d16bb6857 349-355
+apps/dialtone-documentation/docs/guides/migration/component-sizes/index.md
+  s_e29a672f6e8027::t_26cd657e9eac46 87-89
+  s_e29a672f6e8027::t_2ff29c92f0af5c 12
+packages/dialtone-icons/src/IconTemplate.vue
+  s_e29a672f6e8027::t_96025f7564d35c 19
+packages/dialtone-vue/components/Toast/Layouts/ToastLayoutAlternateIcon.vue
+  s_e29a672f6e8027::t_90bd6bff36c3a4 61
+packages/dialtone-vue/components/Badge/Badge.vue
+  s_e29a672f6e8027::t_3efdbe41e999fd 81
+packages/dialtone-vue/components/EmojiTextWrapper/EmojiTextWrapper.vue
+  s_e29a672f6e8027::t_a0c713286a48b8 36
+packages/dialtone-vue/components/ProgressCircle/ProgressCircle.vue
+  s_e29a672f6e8027::t_e5cbf99f16c2b8 27
+packages/dialtone-vue/components/Loader/Loader.vue
+  s_e29a672f6e8027::t_475638eb09241e 76
+packages/dialtone-css/lib/build/js/dialtone_migrate/index.mjs
+  s_e29a672f6e8027::t_46513da68e7bd2 193-204
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "221ee02094c3aae659a2fdeb6d5d7f32bfe0da05",
+  "prompts": {},
+  "sessions": {
+    "s_e29a672f6e8027": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "70c05a53-9304-4e92-bae7-9a74889bacd3",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}
