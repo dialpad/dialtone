@@ -317,6 +317,74 @@ export function compareTokenNames (a: string, b: string, valueOf?: ValueOf): num
   return ka.length - kb.length;
 }
 
+type SuffixAxis = 'state' | 'intensity' | 'opacity' | 'rangePosition' | 'inversion';
+
+/**
+ * Every recognised modifier word, and where it ranks on its own axis.
+ *
+ * Confirmed against the whole resolved corpus rather than assumed: state
+ * (`hover`/`active`/`selected`, `default` standing in for the resting state)
+ * and intensity (`subtle`/`strong`) never both apply to the same base name,
+ * so a single combined table is enough — nothing needs picking between two
+ * axes that might conflict. `opaque` and `inverted` each layer onto either
+ * one. `start`/`end` is its own axis, found on `color.chart.sequential.range`
+ * (a gradient stop's two anchor colours), unrelated to the other four.
+ *
+ * `inverted` is ranked last on the assumption that it trails a whole cluster
+ * as a block, the same shape it already has in every family that still
+ * groups by suffix type rather than by base name — no family exists yet in
+ * the base-name-clustered shape this ranks for, so there is nothing to check
+ * that assumption against directly.
+ */
+const SUFFIX_WORDS: Record<string, { axis: SuffixAxis; rank: number }> = {
+  default: { axis: 'state', rank: 0 },
+  hover: { axis: 'state', rank: 1 },
+  active: { axis: 'state', rank: 2 },
+  selected: { axis: 'state', rank: 3 },
+  subtle: { axis: 'intensity', rank: 1 },
+  strong: { axis: 'intensity', rank: 2 },
+  opaque: { axis: 'opacity', rank: 1 },
+  start: { axis: 'rangePosition', rank: 0 },
+  end: { axis: 'rangePosition', rank: 1 },
+  inverted: { axis: 'inversion', rank: 1 },
+}
+
+// `inversion` first, not last: it is the axis that has to dominate for
+// "trails as a block" to mean anything. Comparing it last would let two
+// items that differ only in inversion still interleave around a THIRD item
+// that differs in some earlier axis — e.g. `primary-opaque` sorting between
+// `primary` and `primary-inverted` because opacity is compared before
+// inversion reaches a tiebreak, when the actual intent is every inverted
+// variant after every non-inverted one, full stop.
+const SUFFIX_AXES: SuffixAxis[] = ['inversion', 'state', 'intensity', 'opacity', 'rangePosition']
+
+/**
+ * Strips recognised modifier words from the right of a leaf, so
+ * `critical-subtle-opaque-inverted` clusters with `critical`,
+ * `critical-strong` and every other variant of the same base name, instead
+ * of sorting after every OTHER base name's own `-subtle`/`-strong`/`-opaque`
+ * the way a flat curated or alphabetic order would.
+ *
+ * Always keeps at least one part as the base name, even when it is itself a
+ * recognised word — `color.border.subtle` is a bare weight level, not
+ * `subtle` modifying nothing, and `color.border.subtle-inverted` strips only
+ * the `inverted` it actually carries, leaving `subtle` as the base rather
+ * than stripping both and losing which weight it was.
+ */
+function stripSuffixWords (leaf: string): { base: string; ranks: Record<SuffixAxis, number> } {
+  const parts = leaf.split('-')
+  const ranks: Record<SuffixAxis, number> = { state: 0, intensity: 0, opacity: 0, rangePosition: 0, inversion: 0 }
+
+  while (parts.length > 1) {
+    const word = SUFFIX_WORDS[parts[parts.length - 1]]
+    if (!word) break
+    ranks[word.axis] = word.rank
+    parts.pop()
+  }
+
+  return { base: parts.join('-'), ranks }
+}
+
 /**
  * A fixed key per name, rather than a decision made per pair.
  *
@@ -349,6 +417,16 @@ export function compareTokenNames (a: string, b: string, valueOf?: ValueOf): num
  * number (`color.blue.500`) has no such value — a colour cannot be a
  * sort-worthy number — so it keeps sorting by its own leaf integer exactly as
  * before.
+ *
+ * A fourth case is a named leaf that is itself a *variant* of another named
+ * leaf — `critical-subtle`, `info-strong-opaque`. Curation alone groups these
+ * by suffix rather than by base name, because that is how the file it came
+ * from is itself organised: every `-subtle` together, separately from every
+ * `-strong`, separately again from the bare tones. `stripSuffixWords` finds
+ * the base a variant belongs to, so `curatedRank` places the whole family —
+ * `critical`, `critical-subtle`, `critical-strong-opaque`, all of it —
+ * together at the base's own position, and the stripped-off modifiers order
+ * what was clustered.
  */
 function sortKey (name: string, valueOf?: ValueOf): (number | string)[] {
   const segments = name.split('.');
@@ -365,14 +443,23 @@ function sortKey (name: string, valueOf?: ValueOf): (number | string)[] {
   // group the old file did not have sorts after the ones it did.
   const groupKey = curatedRank(group === '' ? name : group);
 
-  const numeric = /^\d+$/.test(leaf);
-  const resolved = valueOf?.(name);
+  const { base, ranks } = stripSuffixWords(leaf);
+  const baseName = group === '' ? base : `${group}.${base}`;
+
+  // Keyed off the STRIPPED base, not the raw leaf: `01` and `01-hover` have
+  // to land in the same bucket on the same value, or a purely numeric bare
+  // leaf (`01`) and its non-numeric suffixed sibling (`01-hover`) split
+  // across the numeric/named branches below and stop clustering at all —
+  // every bare stop would sort before every suffixed one, family-wide,
+  // rather than each stop's own variants sitting next to it.
+  const numeric = /^\d+$/.test(base);
+  const resolved = valueOf?.(baseName);
   const hasResolvedValue = typeof resolved === 'number' && Number.isFinite(resolved);
 
   // Prefer the real resolved value when there is one — it is what "worth" a
-  // one-off's own name cannot say. Otherwise fall back to the leaf's own
+  // one-off's own name cannot say. Otherwise fall back to the base's own
   // integer for a purely numeric leaf (a colour ramp's stop), same as always.
-  const sortValue = hasResolvedValue ? resolved : (numeric ? Number(leaf) : undefined);
+  const sortValue = hasResolvedValue ? resolved : (numeric ? Number(base) : undefined);
   const hasSortValue = sortValue !== undefined;
 
   return [
@@ -381,7 +468,11 @@ function sortKey (name: string, valueOf?: ValueOf): (number | string)[] {
     group,
     // Anything with a real position on its scale first, then anything named.
     hasSortValue ? 0 : 1,
-    hasSortValue ? sortValue : curatedRank(name),
+    // A variant's base name carries the curated position, not the variant's
+    // own — that is the whole fix. When base === leaf (nothing stripped)
+    // this is exactly `curatedRank(name)`, unchanged from before.
+    hasSortValue ? sortValue : curatedRank(baseName),
+    ...SUFFIX_AXES.map(axis => ranks[axis]),
     leaf,
   ];
 }
