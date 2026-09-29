@@ -272,6 +272,7 @@ describe('DtModal Tests', () => {
 
     it('Should not close when drag starts inside dialog and ends on backdrop', async () => {
       await copy.trigger('mousedown');
+      await overlay.trigger('mouseup');
       await overlay.trigger('click');
 
       expect(wrapper.emitted(SYNC_EVENT_NAME)).toBeFalsy();
