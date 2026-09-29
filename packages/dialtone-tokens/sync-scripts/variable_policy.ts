@@ -260,10 +260,20 @@ export const HIDDEN: HiddenRule[] = [
     match: t => INVERTED_WORD.test(t.name),
   },
   {
-    // Point 7 (base colour ramps) is deliberately not here — Francis called it
-    // a separate, "controversial" call, not a mechanical follow-on to this one.
+    // Kept apart from the colour ramps below, added separately and later —
+    // Francis called that one a "controversial", deliberate call, not a
+    // mechanical follow-on to this one.
     label: 'base primitive, reference only',
     match: t => t.filePath.startsWith('tokens/base/') && !RAW_COLOUR_RAMP.test(t.name),
+  },
+  {
+    // The deliberate one: discourage picking a raw hue/stop directly in
+    // favour of a semantic colour token, in product and in prototypes alike.
+    // These were left visible on purpose (see the SCOPES comment above) while
+    // it was still being decided whether the picker would get noisy; hiding
+    // them now reverses that, not extends it.
+    label: 'base colour ramp, discourage direct use',
+    match: t => RAW_COLOUR_RAMP.test(t.name),
   },
 ];
 
