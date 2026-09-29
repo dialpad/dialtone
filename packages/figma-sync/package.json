@@ -1,0 +1,46 @@
+{
+  "name": "@dialpad/dialtone-figma-sync",
+  "version": "0.1.0",
+  "description": "Writes Dialtone styles and components into Figma via the Plugin API",
+  "scripts": {
+    "lint": "eslint --fix src plugin",
+    "test": "vitest run",
+    "sync:styles:serve": "tsx src/serve.ts",
+    "sync:styles:build-plugin": "esbuild plugin/code.ts --bundle --outfile=plugin/code.js --target=es2017"
+  },
+  "bugs": {
+    "email": "dialtone@dialpad.com"
+  },
+  "engineStrict": true,
+  "engines": {
+    "node": ">= 20.0.0"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dialpad/dialtone.git",
+    "directory": "packages/figma-sync"
+  },
+  "dependencies": {
+    "@dialpad/dialtone-tokens": "workspace:*",
+    "@dialpad/dialtone-vue": "workspace:vue3-next",
+    "@figma/plugin-typings": "^1.100.0",
+    "dotenv": "^16.3.1",
+    "tsx": "^4.19.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.8.4",
+    "@typescript-eslint/eslint-plugin": "^8.44.1",
+    "@typescript-eslint/parser": "^8.44.1",
+    "esbuild": "^0.24.0",
+    "typescript": "^5.9.0",
+    "vitest": "^4.1.0"
+  },
+  "keywords": [
+    "Dialpad",
+    "Dialtone",
+    "Figma"
+  ],
+  "license": "MIT",
+  "sideEffects": false
+}

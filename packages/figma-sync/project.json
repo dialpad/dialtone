@@ -1,0 +1,22 @@
+{
+  "name": "figma-sync",
+  "targets": {
+    "lint": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "pnpm lint"
+      }
+    },
+    "test": {
+      "executor": "nx:run-commands",
+      "dependsOn": [
+        "dialtone-tokens:build"
+      ],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "pnpm test"
+      }
+    }
+  }
+}
