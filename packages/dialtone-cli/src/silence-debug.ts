@@ -4,10 +4,11 @@
 
 const originalError = console.error;
 
-// Matches the specific debug prefixes used by dialtone-query-core:
+// Matches the complete debug tags used by dialtone-query-core:
 // [CLASS SEARCH DEBUG], [TOKEN SEARCH DEBUG], [COMPONENT SEARCH DEBUG],
-// [ICON SEARCH DEBUG], [FILTER], [INIT]
-const CORE_DEBUG_PREFIX = /^\n?\[(CLASS SEARCH|TOKEN SEARCH|COMPONENT SEARCH|ICON SEARCH|FILTER|INIT)/;
+// [ICON SEARCH DEBUG], [FILTER]
+// Full tags only, so a future [... ERROR] or [... WARNING] line still prints.
+const CORE_DEBUG_PREFIX = /^\n?\[(CLASS SEARCH DEBUG|TOKEN SEARCH DEBUG|COMPONENT SEARCH DEBUG|ICON SEARCH DEBUG|FILTER)\]/;
 
 export function silenceDebug() {
   console.error = (...args: unknown[]) => {
