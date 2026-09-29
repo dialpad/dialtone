@@ -268,7 +268,7 @@ dialtone search "input|select|menu"
 
 Use the focused `component`, `token`, `utility`, or `docs` command once you know which type of result you need.
 
-### See how a search chose its results
+### Show the search engine's debug output
 
 Set `DIALTONE_DEBUG=1` to print the search engine's debug output to stderr, including the parsed query and how many results each step matched:
 

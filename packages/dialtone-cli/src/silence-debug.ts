@@ -11,7 +11,7 @@ const originalError = console.error;
 const CORE_DEBUG_PREFIX = /^\n?\[(CLASS SEARCH DEBUG|TOKEN SEARCH DEBUG|COMPONENT SEARCH DEBUG|ICON SEARCH DEBUG|FILTER)\]/;
 
 export function silenceDebug() {
-  // DIALTONE_DEBUG=1 keeps the debug output, e.g. to see how a search ranked its results.
+  // DIALTONE_DEBUG=1 keeps the debug output, e.g. to see the parsed query and per-step match counts.
   if (process.env.DIALTONE_DEBUG === '1') return;
 
   console.error = (...args: unknown[]) => {
