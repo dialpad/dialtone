@@ -20,6 +20,10 @@
  * Usage:
  *   npx tsx sync-scripts/build_materials.ts --dry-run
  *   npx tsx sync-scripts/build_materials.ts
+ *
+ * Options:
+ *   --dry-run        report what would change, post nothing
+ *   --file-key KEY   override FILE_KEY from .env
  */
 
 import 'dotenv/config';
@@ -147,11 +151,15 @@ function overridesFor (
 
 async function main (): Promise<void> {
   const args = process.argv.slice(2);
+  const flag = (name: string): string | undefined => {
+    const i = args.indexOf(`--${name}`);
+    return i >= 0 ? args[i + 1] : undefined;
+  };
   const dryRun = args.includes('--dry-run');
   const pat = process.env.PERSONAL_ACCESS_TOKEN;
-  const fileKey = process.env.FILE_KEY;
+  const fileKey = flag('file-key') ?? process.env.FILE_KEY;
   if (!pat || !fileKey) {
-    console.error('PERSONAL_ACCESS_TOKEN and FILE_KEY are required');
+    console.error('PERSONAL_ACCESS_TOKEN and FILE_KEY are required, in .env or via --file-key');
     process.exit(2);
   }
 
