@@ -103,6 +103,26 @@
       justify="center"
       class="d-w100p"
     >
+      <!-- Without arrow -->
+      <dt-tooltip
+        class="d-my-100"
+        :show-arrow="false"
+        :transition="$attrs.transition"
+        message="This tooltip does not have an arrow."
+        :open="$attrs.showTooltip"
+      >
+        <template #anchor>
+          <dt-button importance="outlined">
+            Without Arrow
+          </dt-button>
+        </template>
+      </dt-tooltip>
+    </dt-stack>
+    <dt-stack
+      direction="row"
+      justify="center"
+      class="d-w100p"
+    >
       <!-- Open state -->
       <dt-tooltip
         class="d-my-100"
