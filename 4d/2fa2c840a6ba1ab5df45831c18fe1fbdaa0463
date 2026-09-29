@@ -1,0 +1,53 @@
+packages/dialtone-vue/components/ComboboxWithPopover/ComboboxWithPopover.vue
+  s_81c8e55d6fab48::t_dbbafcbe382a25 353
+packages/dialtone-vue/components/Stack/Stack.vue
+  s_81c8e55d6fab48::t_79f0f0f089b8e6 87
+  s_81c8e55d6fab48::t_169a65c36ef9e2 58
+packages/dialtone-vue/components/Box/Box.vue
+  s_81c8e55d6fab48::t_e3aea20a74aa9c 75
+packages/dialtone-vue/components/Hovercard/Hovercard.vue
+  s_81c8e55d6fab48::t_3cccb1e8505d53 201
+  s_81c8e55d6fab48::t_dd88e67d5e51e1 118
+packages/dialtone-vue/components/Button/Button.vue
+  s_81c8e55d6fab48::t_90af23148a3fff 373
+  s_81c8e55d6fab48::t_cbf861705c11f8 218
+packages/dialtone-vue/components/Tooltip/Tooltip.vue
+  s_81c8e55d6fab48::t_86abafbf3be100 139
+  s_81c8e55d6fab48::t_42138e4248301a 178
+packages/dialtone-vue/components/Scroller/Scroller.vue
+  h_9e2c5818b2d2f6 142
+  s_81c8e55d6fab48::t_ca0be58d9d6c22 144
+packages/dialtone-vue/components/Popover/Popover.vue
+  s_81c8e55d6fab48::t_be78a2d7076ef7 414
+packages/dialtone-vue/components/Dropdown/Dropdown.vue
+  s_81c8e55d6fab48::t_a1f5de30af87f3 252
+packages/dialtone-vue/components/Skeleton/SkeletonText.vue
+  s_81c8e55d6fab48::t_85f2ca8004b254 61
+packages/dialtone-vue/components/ComboboxMultiSelect/ComboboxMultiSelect.vue
+  s_81c8e55d6fab48::t_1c5cd11cb6406d 302
+packages/dialtone-vue/components/SplitButton/SplitButton.vue
+  s_81c8e55d6fab48::t_7ac3db397b269b 373
+packages/dialtone-vue/components/Toast/Layouts/ToastLayoutAlternateIcon.vue
+  s_81c8e55d6fab48::t_3ff37cd5983307 49
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "4d2fa2c840a6ba1ab5df45831c18fe1fbdaa0463",
+  "prompts": {},
+  "humans": {
+    "h_9e2c5818b2d2f6": {
+      "author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_81c8e55d6fab48": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "041a6510-1f13-48eb-999c-27945c76fd16",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

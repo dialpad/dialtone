@@ -1,0 +1,73 @@
+packages/dialtone-tokens/tokens/base/default.json
+  s_2957100dcd47f1::t_38ae88155fd933 712-716
+packages/dialtone-vue/components/Highlight/Highlight.stories.js
+  s_2957100dcd47f1::t_d61b190a2a34dd 1-62
+apps/dialtone-documentation/docs/_data/site-nav.json
+  s_2957100dcd47f1::t_0f9a6988efb350 452-455
+packages/dialtone-vue/components/Highlight/Highlight.vue
+  s_28e7542310568d::t_51d115ab77c8e9 188-191
+  s_28e7542310568d::t_770730d705a780 193-195
+  s_28e7542310568d::t_2b3add2025190f 174-176
+  s_28e7542310568d::t_89ee7dae5e1d1c 185-186
+  s_28e7542310568d::t_ca5d2debd4ee2e 153
+  s_28e7542310568d::t_f7b6c7edbb840a 204-206
+  s_28e7542310568d::t_db95066597b583 212-214
+  s_28e7542310568d::t_ea024821673d28 201-202
+  s_28e7542310568d::t_4d398b5fd5f5a4 141-142
+  s_28e7542310568d::t_de2a9a33476af6 208-210
+  s_2957100dcd47f1::t_0b9c84c35d14fd 1-80,215-222
+  s_28e7542310568d::t_4e1c94042c1057 84-140,143-152,154-171,173,177-184,187,192,196-200,203,207,211
+  s_28e7542310568d::t_106f12e0d8001d 172
+  s_28e7542310568d::t_4b67b452010b3f 81-83
+packages/dialtone-vue/components/Highlight/HighlightExamples.story.vue
+  s_2957100dcd47f1::t_9ad4f9f6c61299 1-53
+packages/dialtone-vue/index.js
+  s_2957100dcd47f1::t_5b97112eb776b6 32
+packages/dialtone-vue/components/Highlight/index.js
+  s_2957100dcd47f1::t_e5d0ed74c9d8d5 1-2
+packages/dialtone-css/postcss/constants.cjs
+  s_2957100dcd47f1::t_674e5f64e399e5 11
+apps/dialtone-documentation/docs/components/highlight.md
+  s_2957100dcd47f1::t_ef6161e1ee84f2 1-35
+packages/dialtone-css/lib/build/less/components/highlight.less
+  s_28e7542310568d::t_4e1c94042c1057 2-25,29-30,32-33,35-36,38-39
+  s_2957100dcd47f1::t_b3b3e7142038f2 1,26-28,31,34,37,40-116
+packages/combinator/src/variants/variants_highlight.js
+  s_2957100dcd47f1::t_6d660ede0aa971 1-63
+common/components_list.js
+  s_2957100dcd47f1::t_7204280f8ac96e 25
+packages/dialtone-vue/components/Highlight/Highlight.test.js
+  s_2957100dcd47f1::t_3b6b95c76e8b15 1-106
+packages/combinator/src/variants/variants.js
+  s_2957100dcd47f1::t_ae73a9f14551ef 23,87
+packages/dialtone-vue/components/Highlight/HighlightConstants.js
+  s_2957100dcd47f1::t_0c0c34b8d2e212 1-12
+packages/dialtone-css/lib/build/less/dialtone.less
+  s_2957100dcd47f1::t_adebfff6a0df6f 72
+packages/dialtone-vue/components/Highlight/HighlightDefault.story.vue
+  s_2957100dcd47f1::t_a8885f642f0ce7 1-17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "f55ac8f04737bd139930e2da1e23b2ff2b53160b",
+  "prompts": {},
+  "sessions": {
+    "s_28e7542310568d": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f6096-9a14-7f83-af39-dcbe45e4d2ea",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    },
+    "s_2957100dcd47f1": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f6018-ebcc-71a1-9ace-c8b063961654",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,24 @@
+packages/dialtone-tokens/tokens/theme/dp/high-contrast-dark.json
+  s_e4d76a0cf67ae8::t_c941697fc6c33e 38
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "78cd1aa7fe423149c9fa1fb0bdc085e416e2d255",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_e4d76a0cf67ae8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f8b7f-11d1-77b0-b141-39ce9696c843",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

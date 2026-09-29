@@ -1,0 +1,29 @@
+packages/dialtone-vue/components/combobox/combobox.vue
+  h_af198fa66bb652 399
+  s_751be0d35ef3b5::t_2c1aca8117bbc4 352,397-398,400-402
+packages/dialtone-vue/components/combobox/combobox.test.js
+  s_751be0d35ef3b5::t_2c1aca8117bbc4 518-551
+.gitignore
+  s_751be0d35ef3b5::t_974c7dd9e8104b 30-34
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.5",
+  "base_commit_sha": "aeda99d48379551bb3975abcea00b6ddd374fe81",
+  "prompts": {},
+  "humans": {
+    "h_af198fa66bb652": {
+      "author": "ninarepetto <nina.repetto@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_751be0d35ef3b5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "c228162a-7ace-4803-afe4-1340de5c6df6",
+        "model": "claude-fable-5"
+      },
+      "human_author": "ninarepetto <nina.repetto@dialpad.com>"
+    }
+  }
+}
