@@ -37,6 +37,17 @@ The editor itself is without any styling and the intention is to wrap it with an
 />
 ```
 
+### Linkifying a trailing URL
+
+The editor only turns a URL into a link once a boundary character (such as a space) follows it. If the user
+sends a message that ends with a URL, call the public `forceLinkifyPendingText()` method before reading the
+editor's content. It is a no-op when `link` is disabled or `customLink` is used.
+
+```js
+editorRef.value.forceLinkifyPendingText();
+const html = editorRef.value.editor.getHTML();
+```
+
 ## Output Format
 
 There are 3 defined output formats currently for the input text.

@@ -1101,11 +1101,15 @@ export default {
     },
 
     /**
+     * Converts a trailing URL that has not been linkified yet into a link.
+     * Call this before reading the editor's content (e.g. right before sending).
+     *
      * See ForceLinkify.js for why this exists: TipTap's built-in link autolink
      * only commits a link mark once a boundary character follows a URL, so a
      * trailing URL never gets linkified on its own. Dialtone has no generic
      * "send" event to hook, so this is a plain public method -- call it
-     * yourself (e.g. right before reading the editor's content to send it).
+     * yourself.
+     * @public
      */
     forceLinkifyPendingText () {
       if (!this.editor || !this.link || this.customLink) {
