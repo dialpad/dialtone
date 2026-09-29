@@ -1,3 +1,15 @@
+# [10.2.0](https://github.com/dialpad/dialtone/compare/dialtone/v10.1.0...dialtone/v10.2.0) (2026-09-29)
+
+
+### Documentation
+
+* NO-JIRA change dialtone channel link to slack ([#1441](https://github.com/dialpad/dialtone/issues/1441)) ([cb330ca](https://github.com/dialpad/dialtone/commit/cb330ca7d547b0000564f2ba9cfe80022437d4db))
+
+
+### Features
+
+* **Dialtone Icons:** NO-JIRA add microsoft-sharepoint brand-full-color icon ([#1443](https://github.com/dialpad/dialtone/issues/1443)) ([89b38f0](https://github.com/dialpad/dialtone/commit/89b38f0037d935ae7bb6fba2697d41a5a7f3b88a))
+
 # [10.1.0](https://github.com/dialpad/dialtone/compare/dialtone/v10.0.4...dialtone/v10.1.0) (2026-09-23)
 
 
