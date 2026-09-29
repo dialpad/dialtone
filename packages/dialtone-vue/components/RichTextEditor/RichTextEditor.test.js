@@ -1858,28 +1858,16 @@ describe('DtRichTextEditor tests', () => {
         expect(wrapper.vm.getOutput()).not.toContain('href=');
       });
 
-      it('should linkify a URL wrapped in matching parentheses without including them', async () => {
-        wrapper.vm.editor.commands.setContent('(www.google.com)');
+      it.each([
+        ['a URL wrapped in matching parentheses', '(www.google.com)', 'href="http://www.google.com">www.google.com</a>)'],
+        ['the full range of an extended link', '<p><a href="http://example.co">example.co</a>m</p>', 'href="http://example.com">example.com</a>'],
+        ['a URL after a hard break', '<p>hi<br>www.google.com</p>', 'hi<br><a target="_blank" rel="noopener noreferrer nofollow" class="d-link d-wb-break-all" href="http://www.google.com">www.google.com</a>'],
+      ])('should linkify %s', async (_, content, expected) => {
+        wrapper.vm.editor.commands.setContent(content);
         wrapper.vm.forceLinkifyPendingText();
         await wrapper.vm.$nextTick();
 
-        expect(wrapper.vm.getOutput()).toContain('href="http://www.google.com">www.google.com</a>)');
-      });
-
-      it('should re-link the full range when an existing link is extended without a boundary character', async () => {
-        wrapper.vm.editor.commands.setContent('<p><a href="http://example.co">example.co</a>m</p>');
-        wrapper.vm.forceLinkifyPendingText();
-        await wrapper.vm.$nextTick();
-
-        expect(wrapper.vm.getOutput()).toContain('href="http://example.com">example.com</a>');
-      });
-
-      it('should linkify a URL correctly positioned after a hard break', async () => {
-        wrapper.vm.editor.commands.setContent('<p>hi<br>www.google.com</p>');
-        wrapper.vm.forceLinkifyPendingText();
-        await wrapper.vm.$nextTick();
-
-        expect(wrapper.vm.getOutput()).toContain('hi<br><a target="_blank" rel="noopener noreferrer nofollow" class="d-link d-wb-break-all" href="http://www.google.com">www.google.com</a>');
+        expect(wrapper.vm.getOutput()).toContain(expected);
       });
     });
 
