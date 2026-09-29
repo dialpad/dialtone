@@ -1,3 +1,10 @@
+# [10.4.0](https://github.com/dialpad/dialtone/compare/dialtone/v10.3.0...dialtone/v10.4.0) (2026-09-29)
+
+
+### Features
+
+* **Icons:** DLT-3613 add email-rejected and chat-rejected icons ([#1442](https://github.com/dialpad/dialtone/issues/1442)) ([153a6cc](https://github.com/dialpad/dialtone/commit/153a6cc2091da0696d32ec92411e39f65926a4d2))
+
 # [10.3.0](https://github.com/dialpad/dialtone/compare/dialtone/v10.2.0...dialtone/v10.3.0) (2026-09-29)
 
 
