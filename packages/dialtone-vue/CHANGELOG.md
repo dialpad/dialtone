@@ -1,3 +1,10 @@
+# [4.2.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.1.0...dialtone-vue/v4.2.0) (2026-09-29)
+
+
+### Features
+
+* **Rich Text Editor:** DP-209950 linkify pending URL before send when no trailing space ([#1439](https://github.com/dialpad/dialtone/issues/1439)) ([234cf7f](https://github.com/dialpad/dialtone/commit/234cf7f7ad24e7a93608744e7ef0e443ceaaf652))
+
 # [4.1.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.0.2...dialtone-vue/v4.1.0) (2026-09-23)
 
 
