@@ -2378,4 +2378,40 @@ describe('DtSlider Tests', () => {
       });
     });
   });
+
+  describe('Reserved space for marks/readout', () => {
+    // Marks/readout are position:absolute (see slider.less), so they don't
+    // naturally reserve layout space — without the reserve-space class,
+    // content right after <dt-slider> renders on top of them.
+    const bodySelector = '.d-slider__body';
+
+    it('reserves space by default — marks default to start/end and readout defaults to always', () => {
+      updateWrapper();
+      expect(wrapper.find(bodySelector).classes()).toContain('d-slider__body--reserve-annotation-space');
+    });
+
+    it('does not reserve space when both marks and readout are turned off', () => {
+      mockProps = { marks: false, readout: 'never' };
+      updateWrapper();
+      expect(wrapper.find(bodySelector).classes()).not.toContain('d-slider__body--reserve-annotation-space');
+    });
+
+    it('still reserves space for readout alone, with marks turned off', () => {
+      mockProps = { marks: false, readout: 'always' };
+      updateWrapper();
+      expect(wrapper.find(bodySelector).classes()).toContain('d-slider__body--reserve-annotation-space');
+    });
+
+    it('still reserves space for marks alone, with readout turned off', () => {
+      mockProps = { marks: [0, 100], readout: 'never' };
+      updateWrapper();
+      expect(wrapper.find(bodySelector).classes()).toContain('d-slider__body--reserve-annotation-space');
+    });
+
+    it('does not reserve space in vertical orientation — marks/readout sit beside the track there, not below it', () => {
+      mockProps = { orientation: 'vertical' };
+      updateWrapper();
+      expect(wrapper.find(bodySelector).classes()).not.toContain('d-slider__body--reserve-annotation-space');
+    });
+  });
 });

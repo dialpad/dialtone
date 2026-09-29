@@ -94,6 +94,16 @@
     inline-size: 100%;
 }
 
+// Marks/readout (see below) are position:absolute against .d-slider__control,
+// so they don't naturally reserve layout space the way in-flow content would
+// — without this, a sibling right after <dt-slider> renders on top of them.
+// A fixed allowance sized for one line of their text, not an exact
+// measurement (same bounded approach .d-slider__control's own
+// overflow-clip-margin below takes for the same row).
+.d-slider__body--reserve-annotation-space {
+    padding-block-end: var(--dt-spacing-400);
+}
+
 .d-slider__start,
 .d-slider__end {
     display: flex;
