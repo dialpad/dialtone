@@ -220,7 +220,7 @@ export function convert (classified: Classified[]): Conversion {
     files[fileName] = {};
 
     for (const entry of usable) {
-      const { token, figmaType, scopes } = entry;
+      const { token, figmaType, scopes, hidden } = entry;
       const modeValue = token.modes[mode];
       const name = figmaName(token.name);
 
@@ -288,6 +288,10 @@ export function convert (classified: Classified[]): Conversion {
             ...(scopes.length ? { scopes } : {}),
             ...(codeSyntax ? { codeSyntax } : {}),
             ...(composedColor ? { composedColor } : {}),
+            // Always sent, never omitted — same reasoning as $description
+            // above. A token moving out of a hidden group later needs this
+            // to actually flip back, not just stay silently true forever.
+            hiddenFromPublishing: hidden,
           },
         },
       };
@@ -357,6 +361,7 @@ async function main (): Promise<void> {
   console.log(`resolved        : ${all.length}`);
   console.log(`excluded        : ${excluded.length}`);
   console.log(`variables       : ${emit.length}`);
+  console.log(`hidden          : ${emit.filter(e => e.hidden).length} (reference-only, hiddenFromPublishing)`);
   console.log(`unscoped        : ${unscoped.length}`);
   console.log(`flattened alias : ${flattened.length / Object.keys(MODES).length} (target is resolution-only)`);
   console.log(`composed colour : ${composed.length} (alpha-modified, now a real alias + opacity)`);

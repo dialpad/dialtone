@@ -156,6 +156,14 @@ export function figmaTypeFor (type: string): FigmaType | null {
   }
 }
 
+/**
+ * `color.blue.500`, `color.neutral.black`, and the other bare hue/stop
+ * primitives — what Francis means by "base colours" when he asks for them to
+ * be hidden from publishing. Shared between `SCOPES` and `HIDDEN` so the two
+ * policies cannot drift apart on what counts as a raw ramp.
+ */
+const RAW_COLOUR_RAMP = /^color\.[a-z-]+\.(\d+|black|white|transparent|gold|magenta|purple|red|green|blue)$/;
+
 interface ScopeRule {
   /** Why this rule exists, for the report. */
   label: string;
@@ -172,7 +180,7 @@ interface ScopeRule {
 export const SCOPES: ScopeRule[] = [
   // Raw palettes. Paulo, 2026-08-26: show them everywhere for now, and
   // revisit once designers report the picker is noisy.
-  { label: 'raw colour ramp', match: /^color\.[a-z-]+\.(\d+|black|white|transparent|gold|magenta|purple|red|green|blue)$/, scopes: ['ALL_SCOPES'] },
+  { label: 'raw colour ramp', match: RAW_COLOUR_RAMP, scopes: ['ALL_SCOPES'] },
   { label: 'material palette', match: /^material\./, scopes: ['ALL_SCOPES'] },
   { label: 'chart colour', match: /^color\.chart\./, scopes: ['ALL_SCOPES'] },
 
@@ -221,12 +229,53 @@ export const SCOPES: ScopeRule[] = [
   { label: 'unclassified colour', match: /(^|\.)color($|\.)/, scopes: ['ALL_SCOPES'] },
 ];
 
+interface HiddenRule {
+  /** Why this rule exists, for the report. */
+  label: string;
+  match: (token: ResolvedToken) => boolean;
+}
+
+/**
+ * `inverted` as a whole word, bounded by `.` or `-` (or either end of the
+ * name): `color.surface.primary-inverted` (hyphenated leaf suffix),
+ * `action.color.background.inverted.default` (its own dot segment), and
+ * `mention-inverted-background` (embedded mid-leaf) all match; a word merely
+ * containing "inverted" as a substring would not.
+ */
+const INVERTED_WORD = /(^|[.-])inverted([.-]|$)/;
+
+/**
+ * Ordered, first match wins, same convention as `SCOPES`. Every entry here
+ * still becomes a variable — this only sets `hiddenFromPublishing`, so the
+ * value stays available to anything already bound to it while disappearing
+ * from the pickers designers pick a fresh colour or size from.
+ */
+export const HIDDEN: HiddenRule[] = [
+  {
+    label: 'theme, superseded by shell',
+    match: t => t.name === 'theme' || t.name.startsWith('theme.'),
+  },
+  {
+    label: 'inverted, superseded by Mode Directive',
+    match: t => INVERTED_WORD.test(t.name),
+  },
+  {
+    // Point 7 (base colour ramps) is deliberately not here — Francis called it
+    // a separate, "controversial" call, not a mechanical follow-on to this one.
+    label: 'base primitive, reference only',
+    match: t => t.filePath.startsWith('tokens/base/') && !RAW_COLOUR_RAMP.test(t.name),
+  },
+];
+
 export interface Classified {
   token: ResolvedToken;
   figmaType: FigmaType;
   scopes: VariableScope[];
   /** The rule that assigned the scopes, or null when nothing matched. */
   scopeRule: string | null;
+  hidden: boolean;
+  /** The rule that hid it, or null when it stays published. */
+  hiddenRule: string | null;
 }
 
 /**
@@ -291,13 +340,18 @@ export function classify (tokens: ResolvedToken[]): Classification {
 
     const figmaType = figmaTypeFor(token.type)!;
 
+    const hiddenRule = HIDDEN.find(r => r.match(token)) ?? null;
+
     // Figma defines no UI picker scopes for BOOLEAN — VALID_SCOPES.BOOLEAN is
     // deliberately empty. The ALL_SCOPES fallback below exists for every OTHER
     // type's coverage gaps; applying it here would fail validation on the
     // first boolean token with no matching rule, since no scope at all is
     // valid for BOOLEAN. Skip scope assignment, not just the fallback.
     if (figmaType === 'BOOLEAN') {
-      emit.push({ token, figmaType, scopes: [], scopeRule: null });
+      emit.push({
+        token, figmaType, scopes: [], scopeRule: null,
+        hidden: !!hiddenRule, hiddenRule: hiddenRule?.label ?? null,
+      });
       continue;
     }
 
@@ -312,7 +366,10 @@ export function classify (tokens: ResolvedToken[]): Classification {
       violations.push({ name: token.name, figmaType, scopes: bad, rule: rule?.label ?? null });
     }
 
-    emit.push({ token, figmaType, scopes, scopeRule: rule ? rule.label : null });
+    emit.push({
+      token, figmaType, scopes, scopeRule: rule ? rule.label : null,
+      hidden: !!hiddenRule, hiddenRule: hiddenRule?.label ?? null,
+    });
   }
 
   return { emit, excluded, unscoped, violations };
