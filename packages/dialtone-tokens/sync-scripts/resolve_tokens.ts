@@ -290,6 +290,9 @@ for (const [name, index] of curatedIndex) {
   if (current === undefined || index < current) namespaceRank.set(ns, index);
 }
 
+/** A token's resolved value as a plain number, or `null`/`undefined` when it has none — a colour, a font family, anything not a scalar. */
+export type ValueOf = (name: string) => number | null | undefined;
+
 /**
  * Orders token paths the way a person reads them, so `100` sorts before `1000`
  * and `50` before both.
@@ -298,10 +301,16 @@ for (const [name, index] of curatedIndex) {
  * from the order it was created in, which is the order of this list. Sorting as
  * plain strings puts `1000` second in every ramp, right after `100`, and leaves
  * `50` stranded in the middle.
+ *
+ * `valueOf` is optional so every existing caller — including the property
+ * tests, which check this function's algebraic properties on bare names —
+ * keeps working unchanged. Passing it is what lets a one-off like
+ * `layout.1px` or a same-valued alias like `spacing.base` sort by what it's
+ * actually worth rather than fall to the back of the group; see `sortKey`.
  */
-export function compareTokenNames (a: string, b: string): number {
-  const ka = sortKey(a);
-  const kb = sortKey(b);
+export function compareTokenNames (a: string, b: string, valueOf?: ValueOf): number {
+  const ka = sortKey(a, valueOf);
+  const kb = sortKey(b, valueOf);
   for (let i = 0; i < Math.min(ka.length, kb.length); i++) {
     if (ka[i] !== kb[i]) return ka[i] < kb[i] ? -1 : 1;
   }
@@ -328,8 +337,20 @@ export function compareTokenNames (a: string, b: string): number {
  * because the February migration removed its irregular stops, so deferring to
  * it scrambles a ramp. A named leaf is the opposite: `primary, secondary,
  * tertiary, muted` is meaning no sort can derive, and only curation has it.
+ *
+ * A third case sits between those two: a dimension scale's one-off —
+ * `layout.1px`, `size.border.focus` — or a semantic alias that happens to
+ * land on an existing step — `spacing.base`, `font.size.root`. None of these
+ * are purely numeric leaves, so before `valueOf` existed they fell all the
+ * way to curated order and sorted after the whole numeric ramp regardless of
+ * how small the value actually was. `valueOf` gives them a real resolved
+ * value to sort by instead — the same axis a numeric leaf already sorts on —
+ * so `1px` lands next to `0`/`25`, not after `1600`. A colour ramp's stop
+ * number (`color.blue.500`) has no such value — a colour cannot be a
+ * sort-worthy number — so it keeps sorting by its own leaf integer exactly as
+ * before.
  */
-function sortKey (name: string): (number | string)[] {
+function sortKey (name: string, valueOf?: ValueOf): (number | string)[] {
   const segments = name.split('.');
   const namespace = segments[0];
   const group = segments.slice(0, -1).join('.');
@@ -345,14 +366,22 @@ function sortKey (name: string): (number | string)[] {
   const groupKey = curatedRank(group === '' ? name : group);
 
   const numeric = /^\d+$/.test(leaf);
+  const resolved = valueOf?.(name);
+  const hasResolvedValue = typeof resolved === 'number' && Number.isFinite(resolved);
+
+  // Prefer the real resolved value when there is one — it is what "worth" a
+  // one-off's own name cannot say. Otherwise fall back to the leaf's own
+  // integer for a purely numeric leaf (a colour ramp's stop), same as always.
+  const sortValue = hasResolvedValue ? resolved : (numeric ? Number(leaf) : undefined);
+  const hasSortValue = sortValue !== undefined;
 
   return [
     namespaceKey,
     groupKey,
     group,
-    // Plain steps first, then anything named: `pill`, `focus`, `base`, `1px`.
-    numeric ? 0 : 1,
-    numeric ? Number(leaf) : curatedRank(name),
+    // Anything with a real position on its scale first, then anything named.
+    hasSortValue ? 0 : 1,
+    hasSortValue ? sortValue : curatedRank(name),
     leaf,
   ];
 }
