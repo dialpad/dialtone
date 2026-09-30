@@ -1597,6 +1597,13 @@ describe('DtSlider Tests', () => {
     });
 
     describe('modelValue bounds and shape validation', () => {
+      it('resolves an omitted modelValue to min', () => {
+        mockProps = { modelValue: undefined, min: 10, max: 100 };
+        updateWrapper();
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        expect(Number(thumbInputs[0].element.value)).toBe(10);
+      });
+
       it('clamps an initial modelValue above max down to max', () => {
         mockProps = { modelValue: 150, min: 0, max: 100 };
         updateWrapper();
