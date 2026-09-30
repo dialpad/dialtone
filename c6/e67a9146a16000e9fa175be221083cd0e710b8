@@ -1,0 +1,39 @@
+apps/dialtone-documentation/docs/.vuepress/theme/components/LayoutBody.vue
+  s_fb74aa28f644ee::t_76ad574814addc 9,98
+apps/dialtone-documentation/docs/.vuepress/theme/layouts/Home.vue
+  s_fb74aa28f644ee::t_76ad574814addc 3
+apps/dialtone-documentation/docs/.vuepress/theme/components/SidebarHeader.vue
+  s_fb74aa28f644ee::t_76ad574814addc 11,100
+apps/dialtone-documentation/docs/.vuepress/theme/layouts/Layout.vue
+  s_fb74aa28f644ee::t_76ad574814addc 13
+apps/dialtone-documentation/docs/.vuepress/theme/composables/useViewportBreakpoints.js
+  s_fb74aa28f644ee::t_76ad574814addc 4,89-90,92-93,95-96,98-99,101-102,104-105,107-108,158-159,174
+apps/dialtone-documentation/docs/.vuepress/baseComponents/MigrationBanner.vue
+  s_fb74aa28f644ee::t_76ad574814addc 3
+apps/dialtone-documentation/docs/.vuepress/theme/components/SidebarFooter.vue
+  s_fb74aa28f644ee::t_76ad574814addc 3
+apps/dialtone-documentation/docs/index.md
+  s_fb74aa28f644ee::t_76ad574814addc 8
+apps/dialtone-documentation/docs/.vuepress/views/IconCatalog.vue
+  s_fb74aa28f644ee::t_76ad574814addc 140
+apps/dialtone-documentation/docs/.vuepress/theme/components/PageHeader.vue
+  s_fb74aa28f644ee::t_76ad574814addc 45
+apps/dialtone-documentation/docs/.vuepress/theme/components/Header.vue
+  s_fb74aa28f644ee::t_76ad574814addc 19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "c6e67a9146a16000e9fa175be221083cd0e710b8",
+  "prompts": {},
+  "sessions": {
+    "s_fb74aa28f644ee": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a016c1-4534-7332-9095-8e18310eed6e",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

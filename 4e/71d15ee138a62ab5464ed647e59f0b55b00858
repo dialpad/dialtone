@@ -1,0 +1,24 @@
+packages/dialtone-vue/components/Popover/Popover.vue
+  s_b93b519d657e1f::t_438960871efc06 10
+packages/dialtone-vue/components/Popover/Popover.test.js
+  s_b93b519d657e1f::t_54d6d25a1c980f 706
+  s_b93b519d657e1f::t_035b8ef9af5f44 641,654,669,681,720
+  s_b93b519d657e1f::t_e5a221868ed769 699-704,707-710
+  s_b93b519d657e1f::t_1181f353e46b91 705
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "4e71d15ee138a62ab5464ed647e59f0b55b00858",
+  "prompts": {},
+  "sessions": {
+    "s_b93b519d657e1f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5a784a33-91fd-4aa2-b8fd-2a4b9f8d093d",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}
