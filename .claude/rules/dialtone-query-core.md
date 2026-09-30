@@ -90,6 +90,7 @@ export function format<Domain>Results(
 ```
 
 - `search*` does the matching, ranking, and filtering — returns structured results.
+- `searchComponents` also returns `exactMatch: boolean`; when true, `results[0]` is the exact component.
 - `format*Results` returns a Markdown-formatted string for transport consumers to print directly.
 
 ## SearchResult Shape
