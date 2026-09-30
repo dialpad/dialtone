@@ -9,12 +9,14 @@ import { createServer } from 'http';
 
 import { resolveTextStyles } from './resolve_text_styles.ts';
 import { resolveEffectStyles } from './resolve_effect_styles.ts';
+import { resolvePaintStyles } from './resolve_paint_styles.ts';
 
 const PORT = 4577;
 
 const ROUTES: Record<string, () => Promise<unknown>> = {
   '/text-styles.json': resolveTextStyles,
   '/effect-styles.json': resolveEffectStyles,
+  '/paint-styles.json': resolvePaintStyles,
 };
 
 createServer(async (req, res) => {

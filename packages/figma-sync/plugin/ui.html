@@ -13,10 +13,11 @@
 <body>
   <button id="run-text" data-type="run-text-styles" data-url="text-styles.json">Sync text styles</button>
   <button id="run-effect" data-type="run-effect-styles" data-url="effect-styles.json">Sync effect styles</button>
+  <button id="run-paint" data-type="run-paint-styles" data-url="paint-styles.json">Sync paint styles</button>
   <div id="log">Fetches each spec from the local dev server (run <code>pnpm sync:styles:serve</code> first), then builds every style of that kind in this file.</div>
   <script>
     const log = document.getElementById('log');
-    const buttons = [document.getElementById('run-text'), document.getElementById('run-effect')];
+    const buttons = [document.getElementById('run-text'), document.getElementById('run-effect'), document.getElementById('run-paint')];
     const BASE_URL = 'http://localhost:4577/';
 
     for (const button of buttons) {

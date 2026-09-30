@@ -64,3 +64,29 @@ Confirmed against the built CSS, not the token data — every layer's own
 `inset` as a trailing keyword on the shared `box-shadow` property rather than
 a distinct type. The real signal is the compiled `--dt-shadow-focus-inset`
 value carrying a trailing ` inset`, tied to the token name, not the layer.
+
+## Paint styles
+
+`src/resolve_paint_styles.ts` resolves Dialtone's 2 gradient tokens
+(`color.gradient.magenta-purple`, `color.gradient.gold-red-magenta-purple`)
+into one `GRADIENT_LINEAR` paint style each.
+
+A gradient stop binds a variable when its token's RAW value references
+another token (`magenta-purple`'s 2 stops both do), and falls back to a
+literal `oklch()` colour when it doesn't (all 11 stops of
+`gold-red-magenta-purple` are baked literals with no token behind them). The
+resolver reads `raw`, not `resolved` — resolution substitutes a reference
+with the referenced token's own literal, discarding exactly what needs
+binding. There's no `setBoundVariableForColorStop` helper; the plugin sets
+`boundVariables.color` directly on the `ColorStop` object literal, alongside
+a literal `color` that Figma uses as the stop's fallback swatch until the
+binding resolves.
+
+**`gradientTransform` angle sign is `(90 - angleDeg)`, not `(angleDeg - 90)`.**
+Figma's `gradientTransform` is a 2x3 affine matrix, not a CSS-style angle —
+naively porting the more obvious `(angleDeg - 90)` formula from other
+tooling renders every gradient with its direction mirrored (verified by
+screenshotting a red-to-blue calibration gradient at 0°, 90°, and 135° and
+comparing against what those angles render as in CSS: the output was
+consistently `180 - input`). The corrected sign was confirmed the same way
+before being used on the real gradients.
