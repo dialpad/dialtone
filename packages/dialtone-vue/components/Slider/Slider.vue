@@ -210,6 +210,8 @@ import {
 } from './SliderConstants';
 import { useSliderDevWarnings } from './Composables/UseSliderDevWarnings';
 import { useSliderValue } from './Composables/UseSliderValue';
+import { useSliderMagneticSnap } from './Composables/UseSliderMagneticSnap';
+import { generateInterval } from './utils';
 
 defineOptions({ name: 'DtSlider', inheritAttrs: false });
 
@@ -593,121 +595,7 @@ watch(
 
 // ─── Computed visual helpers ──────────────────────────────────────────────────
 
-// A too-small interval relative to [min, max] (e.g. tickInterval=0.001 over a
-// 0–100 range) would otherwise generate tens of thousands of DOM nodes and an
-// equally large per-pointermove scan — cap it and warn instead of silently
-// hanging the tab.
-const MAX_GENERATED_POINTS = 1000;
-
-function generateInterval(min, max, interval, label) {
-  const span = max - min;
-  const naturalCount = span > 0 ? Math.floor(span / interval) + 1 : 1;
-  let effectiveInterval = interval;
-  if (naturalCount > MAX_GENERATED_POINTS) {
-    // Too many points for the requested interval to be practical over this
-    // range — widen it just enough to fit the cap while still spanning the
-    // FULL domain, rather than truncating to a fixed count from `min`. That
-    // used to silently cover only the first ~1% of the range (e.g.
-    // tickInterval=0.001 over 0–100 rendered ticks from 0 to 0.999 only) —
-    // a plausible-looking but materially false representation of the range.
-    effectiveInterval = span / (MAX_GENERATED_POINTS - 1);
-    if (process.env.NODE_ENV !== 'production') {
-      console.info(
-        `[Dialtone] DtSlider: ${label}=${interval} would generate more than ${MAX_GENERATED_POINTS} points over this range — using ${effectiveInterval} instead so coverage still spans the full range.`,
-      );
-    }
-  }
-  const values = [];
-  for (
-    let v = min;
-    v <= max && values.length < MAX_GENERATED_POINTS;
-    v = parseFloat((v + effectiveInterval).toFixed(10))
-  ) {
-    values.push(v);
-  }
-  // Float accumulation can fall just short of `max` after many increments —
-  // make sure the end of the domain is always represented.
-  if (values.length && values[values.length - 1] < max - 1e-9) {
-    values.push(max);
-  }
-  return values;
-}
-
-// Mirrors computedTickValues' interval generation — a number means "evenly
-// spaced", an array is used as-is. [] (snapPoints unset) short-circuits
-// findMagneticSnapPoint below, so this is also what keeps the feature a
-// pure no-op — same code path, same result — for every consumer that
-// doesn't set snapPoints.
-const computedSnapPoints = computed(() => {
-  if (props.snapPoints == null) return [];
-  if (typeof props.snapPoints === 'number') {
-    const interval = props.snapPoints;
-    if (interval <= 0) return [];
-    return generateInterval(props.min, props.max, interval, 'snapPoints');
-  }
-  // A point outside [min, max] can never be a value the thumb is allowed to
-  // hold, so it must never be offered as a snap target — otherwise a drag
-  // that lands within snapThreshold of it would pull the thumb (and the
-  // emitted modelValue) out of the slider's own documented range.
-  return props.snapPoints.filter((point) => point >= props.min && point <= props.max);
-});
-
-// How much wider the release radius is than the entry radius, in units of
-// snapThreshold — lets a snapped thumb resist small jitter near the point
-// instead of flickering in and out right at the entry boundary.
-const SNAP_RELEASE_MULTIPLIER = 2;
-
-// Tracks, per thumb index, the snap point currently held via hysteresis —
-// cleared once a drag moves far enough past SNAP_RELEASE_MULTIPLIER's radius
-// to release it, or once the drag ends.
-const activeSnapValue = ref({});
-
-// Magnetic, not restrictive: only overrides the value when rawVal falls
-// within snapThreshold *pixels* of a snap point (converted to value-space
-// via the control's current rendered size, so the pull feels consistent
-// regardless of the slider's min/max range) — otherwise returns null and
-// normal step-quantization proceeds untouched. A pixel radius, not a value
-// radius, is what makes this feel like Figma/Photoshop guide-snapping
-// rather than a second, finer step grid. Once a thumb is pulled onto a
-// point, releasing it requires crossing a wider radius than entering did
-// (SNAP_RELEASE_MULTIPLIER) rather than the same boundary in both
-// directions — the "sticky" half of that feel.
-function findMagneticSnapPoint(rawVal, thumbIndex) {
-  const points = computedSnapPoints.value;
-  if (!points.length || !controlRef.value) {
-    delete activeSnapValue.value[thumbIndex];
-    return null;
-  }
-  const rect = controlRef.value.getBoundingClientRect();
-  const trackSizePx = isVertical.value ? rect.height : rect.width;
-  if (!trackSizePx) return null;
-  const entryThreshold = (props.snapThreshold / trackSizePx) * (props.max - props.min);
-
-  const heldValue = activeSnapValue.value[thumbIndex];
-  if (heldValue != null) {
-    const releaseThreshold = entryThreshold * SNAP_RELEASE_MULTIPLIER;
-    if (Math.abs(heldValue - rawVal) <= releaseThreshold) {
-      return heldValue;
-    }
-  }
-
-  let closest = null;
-  let closestDist = Infinity;
-  for (const point of points) {
-    const dist = Math.abs(point - rawVal);
-    if (dist <= entryThreshold && dist < closestDist) {
-      closest = point;
-      closestDist = dist;
-    }
-  }
-
-  if (closest == null) {
-    delete activeSnapValue.value[thumbIndex];
-  } else {
-    activeSnapValue.value[thumbIndex] = closest;
-  }
-  return closest;
-}
+const { activeSnapValue, findMagneticSnapPoint } = useSliderMagneticSnap(props, { controlRef, isVertical });
 
 // Shared by every element positioned along the track (thumb, tick, mark,
 // readout) — they only differ in which transform re-centers them, so the
