@@ -24,7 +24,7 @@ import FigmaApi from './figma_api.js';
 import { generatePostVariablesPayload, FlattenedTokensByFile } from './token_import.js';
 import { gamutMapped, resetGamutLog } from './color.js';
 import { resolveModes, compareTokenNames, ResolvedToken, ValueOf } from './resolve_tokens.js';
-import { classify, Classified, ScopeViolation, figmaFontFamily } from './variable_policy.js';
+import { classify, Classified, ScopeViolation, figmaFontFamily, LINE_HEIGHT_FAMILY } from './variable_policy.js';
 import type { Token } from './token_types.js';
 import { toNumber as toNumberWithUnits } from './utils.js';
 
@@ -97,8 +97,23 @@ export function asPercent (value: string): string {
  *
  * Reads the modes separately, because a token can be modified differently in
  * light and dark, and saying so is more use than picking one.
+ *
+ * A line-height variable gets a different kind of note entirely: not
+ * provenance, a warning. Hiding it from publishing stops a designer
+ * *browsing* to it, but the property picker on a text node's own line-height
+ * field still offers every FLOAT variable in scope for it, hidden or not —
+ * so the warning has to live on the variable itself, for whoever gets there
+ * that way instead.
  */
 export function descriptionFor (token: Classified['token']): string | null {
+  if (LINE_HEIGHT_FAMILY.test(token.name)) {
+    return 'DO NOT USE to bind a line-height property. Figma always reads a bound '
+      + 'variable\'s number as pixels, never as this unitless multiplier — binding '
+      + '"1.4" renders as 1.4px, not 140%. Kept, and its value stays accurate, for '
+      + 'Dev Mode and for the styles pipeline, which sets the correct value as a '
+      + 'literal percent on each text style instead of binding this variable.';
+  }
+
   const parts: string[] = [];
   const seen = new Map<string, string[]>();
 

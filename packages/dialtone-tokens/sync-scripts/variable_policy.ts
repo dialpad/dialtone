@@ -164,6 +164,15 @@ export function figmaTypeFor (type: string): FigmaType | null {
  */
 const RAW_COLOUR_RAMP = /^color\.[a-z-]+\.(\d+|black|white|transparent|gold|magenta|purple|red|green|blue)$/;
 
+/**
+ * Every `lineHeight` field: the six shared primitives (`font.lineHeight.400`)
+ * and every composite's own alias (`text.body.md.lineHeight`). Shared between
+ * `SCOPES` and `HIDDEN` — decided to hide exactly what gets `LINE_HEIGHT`
+ * scope, nothing more or less, since scope is what invites someone to bind
+ * one of these in the first place.
+ */
+export const LINE_HEIGHT_FAMILY = /(^|\.)lineHeight($|\.)|(^|\.)font\.lineHeight\./;
+
 interface ScopeRule {
   /** Why this rule exists, for the report. */
   label: string;
@@ -192,7 +201,7 @@ export const SCOPES: ScopeRule[] = [
   // FONT_STYLE, so sending the obvious one makes every run see a difference
   // and rewrite the same 86 variables forever. Send what it stores.
   { label: 'font weight', match: /(^|\.)fontWeight$|(^|\.)font\.weight\./, scopes: ['FONT_STYLE'] },
-  { label: 'line height', match: /(^|\.)lineHeight($|\.)|(^|\.)font\.lineHeight\./, scopes: ['LINE_HEIGHT'] },
+  { label: 'line height', match: LINE_HEIGHT_FAMILY, scopes: ['LINE_HEIGHT'] },
   { label: 'letter spacing', match: /(^|\.)letterSpacing$/, scopes: ['LETTER_SPACING'] },
 
   // Colour by the surface it paints.
@@ -274,6 +283,18 @@ export const HIDDEN: HiddenRule[] = [
     // them now reverses that, not extends it.
     label: 'base colour ramp, discourage direct use',
     match: t => RAW_COLOUR_RAMP.test(t.name),
+  },
+  {
+    // Not a reference-only or deprecated case like the others above — this one
+    // is actively broken if used as its own scope invites: Figma always reads
+    // a bound line-height variable's number as PIXELS, never as the unitless
+    // multiplier Dialtone's tokens actually are. Binding `1.4` renders as
+    // "1.4 pixels", collapsed and unreadable, confirmed directly against a
+    // live file (see `descriptionFor`'s DO NOT USE text on the variable
+    // itself). Kept, not excluded — Dev Mode and the styles pipeline both
+    // still read the real value — just never meant to be bound.
+    label: 'line height, do not bind — always renders in pixels',
+    match: t => LINE_HEIGHT_FAMILY.test(t.name),
   },
 ];
 
