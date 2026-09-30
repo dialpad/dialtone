@@ -101,6 +101,55 @@
     <dt-stack
       direction="row"
       justify="center"
+      gap="200"
+      class="d-w100p d-pbs-800"
+    >
+      <!-- Without arrow -->
+      <dt-tooltip
+        class="d-my-100"
+        :show-arrow="false"
+        :transition="$attrs.transition"
+        :message="i18n.$t('DIALTONE_TOOLTIP_WITHOUT_ARROW_MESSAGE')"
+      >
+        <template #anchor>
+          <dt-button importance="outlined">
+            {{ i18n.$t('DIALTONE_TOOLTIP_WITHOUT_ARROW_LABEL') }}
+          </dt-button>
+        </template>
+      </dt-tooltip>
+      <!-- Without arrow, bottom -->
+      <dt-tooltip
+        class="d-my-100"
+        placement="bottom"
+        :show-arrow="false"
+        :transition="$attrs.transition"
+        :message="i18n.$t('DIALTONE_TOOLTIP_WITHOUT_ARROW_MESSAGE')"
+      >
+        <template #anchor>
+          <dt-button importance="outlined">
+            {{ i18n.$t('DIALTONE_TOOLTIP_WITHOUT_ARROW_BOTTOM_LABEL') }}
+          </dt-button>
+        </template>
+      </dt-tooltip>
+      <!-- Without arrow, open -->
+      <dt-tooltip
+        class="d-my-100"
+        placement="top"
+        :show-arrow="false"
+        :transition="$attrs.transition"
+        :message="i18n.$t('DIALTONE_TOOLTIP_WITHOUT_ARROW_MESSAGE')"
+        :open="true"
+      >
+        <template #anchor>
+          <dt-button importance="outlined">
+            {{ i18n.$t('DIALTONE_TOOLTIP_WITHOUT_ARROW_OPEN_LABEL') }}
+          </dt-button>
+        </template>
+      </dt-tooltip>
+    </dt-stack>
+    <dt-stack
+      direction="row"
+      justify="center"
       class="d-w100p"
     >
       <!-- Open state -->
@@ -183,6 +232,7 @@ import { DtStack } from '@/components/Stack';
 import { DtButton } from './../Button';
 import { DtIcon } from './../Icon';
 import { TOOLTIP_DIRECTIONS } from './TooltipConstants';
+import { DialtoneLocalization } from '@/localization';
 
 function sliceIntoChunks (arr, chunkSize) {
   const res = [];
@@ -200,6 +250,7 @@ export default {
     return {
       TOOLTIP_DIRECTIONS: sliceIntoChunks(this.$attrs.customDirections || TOOLTIP_DIRECTIONS, 3),
 
+      i18n: new DialtoneLocalization(),
       localMessage: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
       show1: this.$attrs.showTooltip ?? false,
     };
