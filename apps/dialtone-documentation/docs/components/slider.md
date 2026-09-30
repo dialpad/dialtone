@@ -59,6 +59,16 @@ A slider is appropriate when the exact value is less important than the relative
 />
 ```
 
+Set `min-gap-steps` to keep the two thumbs from getting too close together. It's a number of steps, not a raw value gap — the actual minimum gap enforced between the thumbs' values is `minGapSteps * step`, so `min-gap-steps="5"` enforces a gap of 5 with `step="1"`, but 50 with `step="10"`:
+
+```vue demo
+<dt-slider
+  :model-value="[20, 70]"
+  label="Price range with a minimum gap"
+  :min-gap-steps="10"
+/>
+```
+
 ### With start and end slots (aka left/right)
 
 ```vue demo
