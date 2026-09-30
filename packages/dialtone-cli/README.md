@@ -93,7 +93,7 @@ The CLI checks for updates automatically. To update:
 npm install -g @dialpad/dialtone-cli@latest
 ```
 
-The data (components, tokens, utilities, icons) is bundled at build time. Update the CLI to get the latest design system data.
+Run from a project, the CLI uses the Dialtone data installed there (components, tokens, utilities, icons). Anything it can't find comes from data bundled with the CLI at build time, and documentation search always uses bundled content. Updating the CLI refreshes that bundled data. See [Data sources](https://dialtone.dialpad.com/guides/cli/#data-sources) for how the CLI finds a project's data.
 
 ## Claude Code Integration
 

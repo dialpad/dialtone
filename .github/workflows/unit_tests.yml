@@ -6,6 +6,11 @@ on:
       - 'packages/dialtone-vue/**'
       - 'packages/dialtone-tokens/**'
       - 'packages/combinator/**'
+      - 'packages/dialtone-query-core/**'
+      - 'packages/dialtone-cli/**'
+      - 'scripts/build-dialtone-vue-docs.mjs'
+      - 'packages/dialtone-css/postcss/dialtone-docs.cjs'
+      - 'packages/dialtone-docs/src/generators/**'
   push:
     branches:
       - staging
@@ -13,6 +18,11 @@ on:
       - 'packages/dialtone-vue/**'
       - 'packages/dialtone-tokens/**'
       - 'packages/combinator/**'
+      - 'packages/dialtone-query-core/**'
+      - 'packages/dialtone-cli/**'
+      - 'scripts/build-dialtone-vue-docs.mjs'
+      - 'packages/dialtone-css/postcss/dialtone-docs.cjs'
+      - 'packages/dialtone-docs/src/generators/**'
 
 env:
   HUSKY: 0
@@ -31,6 +41,7 @@ jobs:
       vue: ${{ steps.filter.outputs.vue }}
       tokens: ${{ steps.filter.outputs.tokens }}
       combinator: ${{ steps.filter.outputs.combinator }}
+      cli: ${{ steps.filter.outputs.cli }}
     steps:
       - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3
@@ -43,6 +54,13 @@ jobs:
               - 'packages/dialtone-tokens/**'
             combinator:
               - 'packages/combinator/**'
+            # The CLI and query-core, plus the scripts that generate the data files they read.
+            cli:
+              - 'packages/dialtone-query-core/**'
+              - 'packages/dialtone-cli/**'
+              - 'scripts/build-dialtone-vue-docs.mjs'
+              - 'packages/dialtone-css/postcss/dialtone-docs.cjs'
+              - 'packages/dialtone-docs/src/generators/**'
 
   test:
     needs: changes
@@ -93,3 +111,21 @@ jobs:
 
       - name: Run dialtone-combinator tests
         run: pnpm nx run dialtone-combinator:test
+
+  test-cli:
+    needs: changes
+    if: needs.changes.outputs.cli == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      packages: read
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Run dialtone-query-core and dialtone-cli tests
+        run: pnpm nx run-many -t test -p dialtone-query-core dialtone-cli
