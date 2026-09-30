@@ -98,10 +98,13 @@ A tooltip has two slots:
 Set `showArrow` to `false` to hide the tooltip arrow.
 
 ```vue demo
-<dt-tooltip :show-arrow="false" message="Tooltip without an arrow">
+<dt-tooltip
+  :show-arrow="false"
+  :message="i18n.$t('DIALTONE_TOOLTIP_WITHOUT_ARROW_MESSAGE')"
+>
   <template #anchor>
     <dt-button>
-      Hover me
+      {{ i18n.$t('DIALTONE_TOOLTIP_WITHOUT_ARROW_LABEL') }}
     </dt-button>
   </template>
 </dt-tooltip>
@@ -195,10 +198,12 @@ You are encouraged to consult the ARIA documentation for the particular role.
 
 <script setup>
 import { inject } from 'vue';
+import { DialtoneLocalization } from '@dialpad/dialtone-vue';
 import ExampleTooltipDirections from '@exampleComponents/ExampleTooltipDirections.vue';
 
 const dialtoneConstants = inject('dialtoneConstants', {});
 const directions = dialtoneConstants.TOOLTIP_DIRECTIONS;
+const i18n = new DialtoneLocalization();
 </script>
 
 ## Vue API

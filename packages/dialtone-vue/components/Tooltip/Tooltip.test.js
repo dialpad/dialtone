@@ -110,10 +110,16 @@ describe('DtTooltip tests', () => {
         expect(wrapper.vm.tip.popper.querySelector('.tippy-arrow, .tippy-svg-arrow')).toBeNull();
       });
 
-      it('should update the arrow when showArrow changes', async () => {
+      it('should remove the arrow when showArrow changes to false', async () => {
         await wrapper.setProps({ showArrow: false });
 
         expect(wrapper.vm.tip.popper.querySelector('.tippy-svg-arrow')).toBeNull();
+      });
+
+      it('should restore the arrow when showArrow changes to true', async () => {
+        wrapper.unmount();
+        mockProps = { open: true, showArrow: false };
+        updateWrapper();
 
         await wrapper.setProps({ showArrow: true });
 

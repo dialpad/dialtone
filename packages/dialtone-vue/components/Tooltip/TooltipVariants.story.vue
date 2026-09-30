@@ -108,12 +108,12 @@
         class="d-my-100"
         :show-arrow="false"
         :transition="$attrs.transition"
-        message="This tooltip does not have an arrow."
-        :open="$attrs.showTooltip"
+        :message="i18n.$t('DIALTONE_TOOLTIP_WITHOUT_ARROW_MESSAGE')"
+        :open="true"
       >
         <template #anchor>
           <dt-button importance="outlined">
-            Without Arrow
+            {{ i18n.$t('DIALTONE_TOOLTIP_WITHOUT_ARROW_LABEL') }}
           </dt-button>
         </template>
       </dt-tooltip>
@@ -203,6 +203,7 @@ import { DtStack } from '@/components/Stack';
 import { DtButton } from './../Button';
 import { DtIcon } from './../Icon';
 import { TOOLTIP_DIRECTIONS } from './TooltipConstants';
+import { DialtoneLocalization } from '@/localization';
 
 function sliceIntoChunks (arr, chunkSize) {
   const res = [];
@@ -220,6 +221,7 @@ export default {
     return {
       TOOLTIP_DIRECTIONS: sliceIntoChunks(this.$attrs.customDirections || TOOLTIP_DIRECTIONS, 3),
 
+      i18n: new DialtoneLocalization(),
       localMessage: `This is a simple tooltip. The tooltip can be positioned in multiple areas too!`,
       show1: this.$attrs.showTooltip ?? false,
     };
