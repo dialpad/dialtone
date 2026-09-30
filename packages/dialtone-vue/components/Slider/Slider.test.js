@@ -542,6 +542,15 @@ describe('DtSlider Tests', () => {
         updateWrapper();
         expect(root.classes()).toContain('d-slider--lg');
       });
+
+      it('does not accept a t-shirt-size alias — Slider is new, with no legacy sm/md/lg API to stay backward compatible with', () => {
+        const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+        mockProps = { size: 'sm' };
+        updateWrapper();
+        expect(root.classes()).not.toContain('d-slider--sm');
+        expect(warnSpy.mock.calls[0][0]).toContain('Invalid prop: custom validator check failed for prop "size"');
+        warnSpy.mockRestore();
+      });
     });
 
     describe('name prop', () => {
