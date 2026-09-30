@@ -16,6 +16,11 @@
         "command": "pnpm exec rollup -c"
       }
     },
+    "test": {
+      "executor": "nx:run-script",
+      "dependsOn": ["build"],
+      "options": { "script": "test" }
+    },
     "publish": {
       "executor": "nx:run-commands",
       "options": {

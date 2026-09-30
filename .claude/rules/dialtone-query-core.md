@@ -90,7 +90,7 @@ export function format<Domain>Results(
 ```
 
 - `search*` does the matching, ranking, and filtering — returns structured results.
-- `searchComponents` also returns `exactMatch: boolean`; when true, `results[0]` is the exact component.
+- `searchComponents` also returns `exactMatch: boolean`; when true, `results[0]` is the exact component. Its `warning: string | null` is the deprecation or discouragement note for the component the query names (also included in `notes`).
 - `format*Results` returns a Markdown-formatted string for transport consumers to print directly.
 
 ## SearchResult Shape

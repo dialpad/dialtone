@@ -1,6 +1,6 @@
 import { defineCommand } from 'citty';
-import { searchComponents } from '@dialpad/dialtone-query-core';
 import type { Component } from '@dialpad/dialtone-query-core';
+import { requireComponent } from '../select-component.js';
 import { getContext } from '../context.js';
 import { formatPrompt } from '../formatters.js';
 
@@ -12,14 +12,7 @@ export const promptCommand = defineCommand({
   },
   run({ args }) {
     const { components } = getContext();
-    const { results } = searchComponents(args.name, components);
-
-    if (results.length === 0) {
-      console.error(`No component found matching "${args.name}".`);
-      process.exit(1);
-    }
-
-    const result = results[0];
+    const result = requireComponent(args.name, components);
     const format = args.format || 'minimal';
 
     if (format === 'json') {

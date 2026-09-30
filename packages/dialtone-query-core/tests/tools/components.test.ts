@@ -76,22 +76,25 @@ describe('searchComponents exact name matching', () => {
 
 describe('searchComponents deprecated and discouraged components', () => {
   test.each(['DtIcon', 'dt-icon', '<dt-icon>'])('"%s" returns deprecated DtIcon first with a note instead of filtering it out', (query) => {
-    const { results, notes, exactMatch } = searchComponents(query, fixture);
+    const { results, notes, exactMatch, warning } = searchComponents(query, fixture);
     expect(exactMatch).toBe(true);
     expect(results[0].name).toBe('DtIcon');
     expect(notes).toEqual([iconNote]);
+    expect(warning).toBe(iconNote);
   });
 
   test('a bare word keeps a deprecated component filtered but still points to its replacement', () => {
-    const { results, notes, exactMatch } = searchComponents('icon', fixture);
+    const { results, notes, exactMatch, warning } = searchComponents('icon', fixture);
     expect(exactMatch).toBe(false);
     expect(results.map(r => r.name)).toEqual(['DtNoticeIcon']);
     expect(notes[0]).toBe(iconNote);
+    expect(warning).toBe(iconNote);
   });
 
-  test('deprecated components are still filtered for unrelated queries', () => {
-    const { results } = searchComponents('glyph', fixture);
+  test('deprecated components are still filtered for unrelated queries, with no warning', () => {
+    const { results, warning } = searchComponents('glyph', fixture);
     expect(results.map(r => r.name)).not.toContain('DtIcon');
+    expect(warning).toBeNull();
   });
 
   test('a deprecated component with no replacement or reason gets a plain note', () => {
@@ -110,10 +113,11 @@ describe('searchComponents deprecated and discouraged components', () => {
     });
 
     test('an exact match is returned with a note naming its alternatives', () => {
-      const { results, notes, exactMatch } = searchComponents('DtButtonLegacy', withDiscouraged);
+      const { results, notes, exactMatch, warning } = searchComponents('DtButtonLegacy', withDiscouraged);
       expect(exactMatch).toBe(true);
       expect(results.map(r => r.name)).toEqual(['DtButtonLegacy']);
       expect(notes).toEqual(['DtButtonLegacy is discouraged. Use DtButton instead.']);
+      expect(warning).toBe('DtButtonLegacy is discouraged. Use DtButton instead.');
     });
   });
 });

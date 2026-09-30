@@ -32,7 +32,7 @@ const iconResults = searchIcons('notification', icons);
 
 ### Search Functions
 
-All search functions return `{ results: SearchResult[]; notes: string[] }`. `searchComponents` also returns `exactMatch: boolean`.
+All search functions return `{ results: SearchResult[]; notes: string[] }`. `searchComponents` also returns `exactMatch: boolean` and `warning: string | null`, the deprecation or discouragement note for the component the query names (also included in `notes`).
 
 | Function | Data Parameter | Description |
 |----------|---------------|-------------|

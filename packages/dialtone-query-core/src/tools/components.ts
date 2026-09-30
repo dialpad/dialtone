@@ -181,7 +181,7 @@ function legacyNote(component: Component): string | null {
 /**
  * Search Vue components by name, description, props, events, and slots
  */
-export function searchComponents(query: string, components: Component[]): { results: SearchResult[]; notes: string[]; exactMatch: boolean } {
+export function searchComponents(query: string, components: Component[]): { results: SearchResult[]; notes: string[]; exactMatch: boolean; warning: string | null } {
   console.error(`\n[COMPONENT SEARCH DEBUG] Query: "${query}"`);
 
   // Normalize query: split camelCase, lowercase, replace hyphens/slashes with spaces
@@ -254,7 +254,7 @@ export function searchComponents(query: string, components: Component[]): { resu
   const allNotes = [...(note ? [note] : []), ...searchNotes, ...filterNotes];
   // removeDuplicates also drops the exact match if the filter swapped it back in.
   const results = exact ? removeDuplicates([toSearchResult(exact), ...filtered]) : filtered;
-  return { results, notes: allNotes, exactMatch: exact !== null };
+  return { results, notes: allNotes, exactMatch: exact !== null, warning: note };
 }
 
 function deprecatedWarning(reason?: string): string {
