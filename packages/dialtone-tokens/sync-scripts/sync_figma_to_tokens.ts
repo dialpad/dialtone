@@ -44,8 +44,12 @@ async function main () {
   });
 
   console.log(green(`✅ Tokens files have been written to the ${outputDir} directory`));
+
+  // Handed to `transformFigmaToSD` so it reads the directory just written,
+  // rather than a hard-coded one that `--output` may have moved away from.
+  return outputDir;
 }
 
-main().then(() => {
-  transformFigmaToSD();
+main().then((outputDir) => {
+  transformFigmaToSD(outputDir);
 });
