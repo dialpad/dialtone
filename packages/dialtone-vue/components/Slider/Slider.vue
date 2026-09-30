@@ -143,7 +143,7 @@
           :key="`mark-${i}`"
           ref="markElRefs"
           :class="['d-slider__mark', { 'd-slider__mark--collision-hidden': markCollisionHidden[i] }]"
-          :style="markStyle(mark.pct)"
+          :style="markStyle(mark.pct, i)"
           :data-mark-index="i"
           data-qa="dt-slider-mark"
         >
@@ -382,7 +382,9 @@ const props = defineProps({
   /**
    * Text prepended to the raw number wherever it's displayed — e.g. prefix="$" for
    * currency. Always applied to marks. Ignored by the readout and aria-valuetext when
-   * getValueText is set (see getValueText).
+   * getValueText is set (see getValueText). A long prefix makes every mark's text
+   * longer too — keep it short enough that the first/last mark stays legible near
+   * the track's own edges (see marks).
    */
   prefix: {
     type: String,
@@ -392,7 +394,8 @@ const props = defineProps({
   /**
    * Text appended to the raw number wherever it's displayed — e.g. suffix="%" for a
    * percentage. Always applied to marks. Ignored by the readout and aria-valuetext when
-   * getValueText is set (see getValueText).
+   * getValueText is set (see getValueText). Same edge-legibility caveat as prefix
+   * applies (see marks).
    */
   suffix: {
     type: String,
@@ -466,6 +469,11 @@ const props = defineProps({
    * required value and optional text override, which is used as-is regardless of
    * prefix/suffix/getValueText. Pass false to render no marks at all.
    * Example: [{ value: 0, text: 'Neutral' }, -100, 100]
+   *
+   * Keep mark text (via a short prefix/suffix, or an explicit text override) reasonably
+   * short — the first/last mark is nudged inward once it would otherwise render past the
+   * track's own edges, but very long text can still end up close to the live readout or
+   * an adjacent mark.
    */
   marks: {
     type: [Array, Boolean],
@@ -984,8 +992,19 @@ const reservesAnnotationSpace = computed(() => (
   !isVertical.value && (computedMarks.value.length > 0 || props.readout !== 'never')
 ));
 
-function markStyle(pct) {
-  return positionStyle(pct);
+// A mark beyond EDGE_CLAMP_TOLERANCE_PX of the control's edge (see
+// updateMarkCollisions below, which measures and populates this) gets nudged
+// inward by that excess so its text stays legible instead of being clipped —
+// index-keyed like markCollisionHidden, for the same reason (see the
+// data-mark-index rationale above updateMarkCollisions). Guarded by
+// !isVertical here (not just where it's computed) so a stale offset from a
+// prior horizontal render can never leak into vertical mode's own transform
+// (translateY, not translateX) if orientation changes reactively.
+const markEdgeOffsetPx = ref([]);
+function markStyle(pct, index) {
+  const offset = !isVertical.value ? markEdgeOffsetPx.value[index] : 0;
+  if (!offset) return positionStyle(pct);
+  return positionStyle(pct, `translateX(calc(${centerInlineTransform()} + ${offset}px))`);
 }
 
 const computedTickValues = computed(() => {
@@ -1352,6 +1371,12 @@ const mergedReadoutElRef = ref(null);
 const markCollisionHidden = ref([]);
 const readoutMerged = ref(false);
 const COLLISION_PADDING = 4; // px of breathing room before a mark hides or readouts merge
+// Must match .d-slider__control's own overflow-clip-margin (slider.less) — a
+// mark within that margin already renders fully today (it's what the margin
+// is for), so leave it centered exactly as before. Only once a mark's natural
+// centered position would exceed this margin does it need nudging inward;
+// see markEdgeOffsetPx below.
+const EDGE_CLAMP_TOLERANCE_PX = 32;
 
 function rectsOverlap(a, b, padding = 0) {
   return !(
@@ -1469,20 +1494,66 @@ function collectReadoutRects() {
 // markElRefs.value[0]/[1] can end up holding the "100"/"0" mark elements in
 // the opposite order from computedMarks, silently applying one mark's
 // collision result to the other mark's rendered element.
+// Measures collision-hiding and edge-clamping together in one pass (rather
+// than two separate functions each reading the DOM independently) because
+// they'd otherwise disagree about a mark's position for one cycle: the
+// collision check needs to compare against where a mark is ABOUT to render
+// this cycle, not where it currently sits from last cycle's correction. If
+// a mark's overflow newly crosses the edge-clamp tolerance this cycle, its
+// collision-hidden verdict has to be judged against its corrected (not
+// stale, pre-nudge) position, or a mark right at that boundary could be
+// left with a wrong hidden/visible state until some later, unrelated
+// re-measurement happens to correct it.
 function updateMarkCollisions() {
   const marks = markElRefs.value;
   if (!marks.length) return;
   const readoutRects = collectReadoutRects();
-  const result = computedMarks.value.map(() => false);
-  if (readoutRects.length) {
-    marks.forEach((markEl) => {
-      if (!markEl) return;
-      const idx = Number(markEl.dataset.markIndex);
-      const markRect = markEl.getBoundingClientRect();
-      result[idx] = readoutRects.some((readoutRect) => rectsOverlap(markRect, readoutRect, COLLISION_PADDING));
-    });
-  }
-  markCollisionHidden.value = result;
+  const collisionResult = computedMarks.value.map(() => false);
+  const offsets = computedMarks.value.map(() => 0);
+  // Edge-clamping is only meaningful horizontally — in vertical mode marks
+  // sit beside the track, and .d-slider__control's inline-size there is
+  // just the thumb's own width (see slider.less's vertical override), so
+  // there's no equivalent inline edge to clamp against.
+  const canClampEdges = !!controlRef.value && !isVertical.value;
+  const controlRect = canClampEdges ? controlRef.value.getBoundingClientRect() : null;
+
+  marks.forEach((markEl) => {
+    if (!markEl) return;
+    const idx = Number(markEl.dataset.markIndex);
+    // Measure with any PREVIOUS offset backed out, so this reflects the
+    // mark's natural (centered) position, not last render's correction —
+    // otherwise a shrinking overflow (e.g. a shorter value swapped in)
+    // would compound on top of the old offset instead of being measured
+    // fresh each time.
+    const prevOffset = markEdgeOffsetPx.value[idx] || 0;
+    const r = markEl.getBoundingClientRect();
+    const naturalLeft = r.left - prevOffset;
+    const naturalRight = r.right - prevOffset;
+
+    let offset = 0;
+    if (canClampEdges) {
+      const startOverflow = controlRect.left - naturalLeft; // >0 means it hangs past the left edge
+      const endOverflow = naturalRight - controlRect.right; // >0 means it hangs past the right edge
+      if (startOverflow > EDGE_CLAMP_TOLERANCE_PX) offset = startOverflow - EDGE_CLAMP_TOLERANCE_PX;
+      else if (endOverflow > EDGE_CLAMP_TOLERANCE_PX) offset = -(endOverflow - EDGE_CLAMP_TOLERANCE_PX);
+    }
+    offsets[idx] = offset;
+
+    if (readoutRects.length) {
+      // The rect this mark is ABOUT to render at this cycle (natural
+      // position + the offset just computed above), not markEl's current
+      // (pre-update) DOM rect — see this function's own comment for why.
+      const correctedRect = {
+        top: r.top, bottom: r.bottom, left: naturalLeft + offset, right: naturalRight + offset,
+      };
+      collisionResult[idx] = readoutRects.some(
+        (readoutRect) => rectsOverlap(correctedRect, readoutRect, COLLISION_PADDING),
+      );
+    }
+  });
+
+  markCollisionHidden.value = collisionResult;
+  markEdgeOffsetPx.value = offsets;
 }
 
 const readoutVisibility = computed(() => internalValues.value.map((_, i) => isReadoutOpen(i)));

@@ -1995,7 +1995,11 @@ describe('DtSlider Tests', () => {
       const controlRect = { top: 0, left: 0, right: 300, bottom: 20 };
       const readoutSize = { top: 0, left: 0, right: 20, bottom: 20 }; // 20px wide
       const nearReadoutRect = { top: 0, left: 150, right: 170, bottom: 20 }; // overlaps a readout at pct 51
-      const farRect = { top: 0, left: 500, right: 520, bottom: 20 };
+      // Inside controlRect's own bounds (0–300), not past them — a rect
+      // that overflows the control's edges now also feeds the edge-clamp
+      // offset (see "Edge-aware mark label clamping" below), which these
+      // collision-only tests aren't about and shouldn't have to account for.
+      const farRect = { top: 0, left: 250, right: 270, bottom: 20 };
 
       afterEach(() => {
         mockControlDirectionSpy?.mockRestore();
@@ -2133,6 +2137,261 @@ describe('DtSlider Tests', () => {
         const marksAfter = wrapper.findAll('[data-qa="dt-slider-mark"]');
         expect(marksAfter[0].classes()).toContain('d-slider__mark--collision-hidden');
         expect(marksAfter[1].classes()).not.toContain('d-slider__mark--collision-hidden');
+      });
+    });
+
+    describe('Edge-aware mark label clamping', () => {
+      // 300px-wide control, matching the collision-avoidance describe above.
+      const controlRect = { top: 0, left: 100, right: 400, bottom: 20 };
+
+      // updateCollisions can run more than once per settle (see its own
+      // "two calls can overlap" comment) — in a real browser,
+      // getBoundingClientRect() on a later call reflects whatever offset
+      // the PREVIOUS call already applied, which is exactly what
+      // updateMarkEdgeOffsets's own "back out any previous offset" step
+      // expects. jsdom has no real layout engine, so a plain static stub
+      // doesn't behave that way; this reads the mark's own currently
+      // applied inline offset back out of its style, so a static
+      // "natural" left/right stays a fixed point no matter how many times
+      // it's re-measured — the same thing a real DOM element would do.
+      function rectWithCurrentOffset (el, naturalLeft, naturalRight) {
+        const match = (el.style.transform || '').match(/calc\([^+]+\+\s*(-?[\d.]+)px\)/);
+        const offset = match ? parseFloat(match[1]) : 0;
+        return { top: 0, left: naturalLeft + offset, right: naturalRight + offset, bottom: 20 };
+      }
+
+      afterEach(() => {
+        mockControlDirectionSpy?.mockRestore();
+        document.documentElement.removeAttribute('dir');
+      });
+
+      it('does not shift a mark whose overflow already fits within the existing overflow-clip-margin tolerance (32px)', async () => {
+        mockProps = { marks: [0, 100], modelValue: 50 };
+        updateWrapper();
+        await nextTick();
+
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        // Hangs 20px past the left edge — within the 32px tolerance.
+        marks[0].element.getBoundingClientRect = () => ({ top: 0, left: 80, right: 150, bottom: 20 });
+        marks[1].element.getBoundingClientRect = () => ({ top: 0, left: 350, right: 420, bottom: 20 });
+
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        thumbInputs[0].element.value = '51';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+
+        const style = wrapper.findAll('[data-qa="dt-slider-mark"]')[0].attributes('style');
+        expect(style).not.toContain('translateX(calc(');
+      });
+
+      it('does not shift a mark whose overflow lands exactly at the 32px tolerance boundary (the condition is a strict >)', async () => {
+        mockProps = { marks: [0, 100], modelValue: 50 };
+        updateWrapper();
+        await nextTick();
+
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        // Hangs exactly 32px past the left edge — not "beyond" it.
+        marks[0].element.getBoundingClientRect = () => rectWithCurrentOffset(marks[0].element, 68, 150);
+        marks[1].element.getBoundingClientRect = () => rectWithCurrentOffset(marks[1].element, 350, 420);
+
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        thumbInputs[0].element.value = '51';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+
+        const style = wrapper.findAll('[data-qa="dt-slider-mark"]')[0].attributes('style');
+        expect(style).not.toContain('translateX(calc(');
+      });
+
+      it('shifts a mark by exactly 1px once its overflow is just 1px past the 32px tolerance boundary', async () => {
+        mockProps = { marks: [0, 100], modelValue: 50 };
+        updateWrapper();
+        await nextTick();
+
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        // Hangs 33px past the left edge — 1px beyond the 32px tolerance.
+        marks[0].element.getBoundingClientRect = () => rectWithCurrentOffset(marks[0].element, 67, 150);
+        marks[1].element.getBoundingClientRect = () => rectWithCurrentOffset(marks[1].element, 350, 420);
+
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        thumbInputs[0].element.value = '51';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+
+        const style = wrapper.findAll('[data-qa="dt-slider-mark"]')[0].attributes('style');
+        expect(style).toContain('translateX(calc(-50% + 1px))');
+      });
+
+      it('shifts a start-edge mark inward by only the excess past the 32px tolerance, not the full overflow', async () => {
+        mockProps = { marks: [0, 100], modelValue: 50 };
+        updateWrapper();
+        await nextTick();
+
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        // Hangs 50px past the left edge — 18px beyond the 32px tolerance.
+        marks[0].element.getBoundingClientRect = () => rectWithCurrentOffset(marks[0].element, 50, 150);
+        marks[1].element.getBoundingClientRect = () => rectWithCurrentOffset(marks[1].element, 350, 420);
+
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        thumbInputs[0].element.value = '51';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+
+        const style = wrapper.findAll('[data-qa="dt-slider-mark"]')[0].attributes('style');
+        expect(style).toContain('translateX(calc(-50% + 18px))');
+      });
+
+      it('shifts an end-edge mark inward (the opposite direction) by only the excess past the tolerance', async () => {
+        mockProps = { marks: [0, 100], modelValue: 50 };
+        updateWrapper();
+        await nextTick();
+
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        marks[0].element.getBoundingClientRect = () => rectWithCurrentOffset(marks[0].element, 500, 520);
+        // Hangs 50px past the right edge — 18px beyond the 32px tolerance.
+        marks[1].element.getBoundingClientRect = () => rectWithCurrentOffset(marks[1].element, 350, 450);
+
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        thumbInputs[0].element.value = '51';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+
+        const style = wrapper.findAll('[data-qa="dt-slider-mark"]')[1].attributes('style');
+        expect(style).toContain('translateX(calc(-50% + -18px))');
+      });
+
+      it('re-measures from the natural (unshifted) position, so a later smaller overflow reduces the offset instead of compounding on top of it', async () => {
+        mockProps = { marks: [0, 100], modelValue: 50 };
+        updateWrapper();
+        await nextTick();
+
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        // First: 50px overflow -> +18px offset.
+        marks[0].element.getBoundingClientRect = () => rectWithCurrentOffset(marks[0].element, 50, 150);
+        marks[1].element.getBoundingClientRect = () => rectWithCurrentOffset(marks[1].element, 350, 420);
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        thumbInputs[0].element.value = '51';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+        expect(wrapper.findAll('[data-qa="dt-slider-mark"]')[0].attributes('style')).toContain('+ 18px');
+
+        // Then: a shorter value now only overflows by 40px -> +8px offset,
+        // not 18 + 8. The mark's own element is the same one already
+        // carrying the +18px transform from the check above — swapping its
+        // stub to a smaller natural overflow (40px, not 50px) and
+        // re-measuring proves the offset shrinks with it, rather than
+        // stacking on top of the stale +18px.
+        marks[0].element.getBoundingClientRect = () => rectWithCurrentOffset(marks[0].element, 60, 150);
+        thumbInputs[0].element.value = '52';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+
+        const style = wrapper.findAll('[data-qa="dt-slider-mark"]')[0].attributes('style');
+        expect(style).toContain('translateX(calc(-50% + 8px))');
+      });
+
+      it('does not apply any offset in vertical orientation, where marks sit beside the track rather than below it', async () => {
+        mockProps = { marks: [0, 100], modelValue: 50, orientation: 'vertical' };
+        updateWrapper();
+        await nextTick();
+
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        marks[0].element.getBoundingClientRect = () => ({ top: 0, left: 50, right: 150, bottom: 20 });
+        marks[1].element.getBoundingClientRect = () => ({ top: 0, left: 350, right: 420, bottom: 20 });
+
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        thumbInputs[0].element.value = '51';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+
+        const style = wrapper.findAll('[data-qa="dt-slider-mark"]')[0].attributes('style');
+        expect(style).not.toContain('translateX(calc(');
+      });
+
+      it('drops an already-applied offset immediately when orientation switches from horizontal to vertical', async () => {
+        mockProps = { marks: [0, 100], modelValue: 50 };
+        updateWrapper();
+        await nextTick();
+
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        // Hangs 50px past the left edge — 18px beyond the 32px tolerance.
+        marks[0].element.getBoundingClientRect = () => rectWithCurrentOffset(marks[0].element, 50, 150);
+        marks[1].element.getBoundingClientRect = () => rectWithCurrentOffset(marks[1].element, 350, 420);
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        thumbInputs[0].element.value = '51';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+        // Sanity: the offset really did apply while still horizontal.
+        expect(wrapper.findAll('[data-qa="dt-slider-mark"]')[0].attributes('style')).toContain('translateX(calc(');
+
+        // markEdgeOffsetPx itself is never cleared on this switch (see
+        // updateMarkEdgeOffsets's own early bail) — it's markStyle's own
+        // !isVertical.value check that has to stop that now-stale +18px
+        // from leaking into vertical mode's translateY-based transform.
+        await wrapper.setProps({ orientation: 'vertical' });
+
+        const styleAfter = wrapper.findAll('[data-qa="dt-slider-mark"]')[0].attributes('style');
+        expect(styleAfter).not.toContain('translateX(calc(');
+      });
+
+      it('mirrors the shift direction under RTL, same as the existing centering transform', async () => {
+        mockProps = { marks: [0, 100], modelValue: 50 };
+        updateWrapper();
+        await nextTick();
+
+        await mockControlDirection('rtl');
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        // Hangs 50px past the left edge — 18px beyond the 32px tolerance.
+        marks[0].element.getBoundingClientRect = () => rectWithCurrentOffset(marks[0].element, 50, 150);
+        marks[1].element.getBoundingClientRect = () => rectWithCurrentOffset(marks[1].element, 350, 420);
+
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        thumbInputs[0].element.value = '51';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+
+        const style = wrapper.findAll('[data-qa="dt-slider-mark"]')[0].attributes('style');
+        expect(style).toContain('translateX(calc(50% + 18px))');
+      });
+
+      it('composes correctly with mark/readout collision-hiding — an edge-clamped mark can still be hidden by an overlapping readout', async () => {
+        // The readout's rect is analytical — analyticalReadoutRect derives
+        // its CENTER from pct + controlRect, only borrowing WIDTH from the
+        // stubbed element (see that function). With controlRect 100–400
+        // (300px wide) and modelValue 21 (post-trigger), pct 21 puts its
+        // center at 100 + 0.21*300 = 163; a 10px-wide stub centers that at
+        // 158–168 — inside this mark's corrected (post-edge-clamp) position
+        // (68–168), so the two features' outcomes (a shifted transform AND
+        // a hidden mark) are expected to hold simultaneously.
+        mockProps = { readout: 'always', marks: [0, 100], modelValue: 20 };
+        updateWrapper();
+        await nextTick();
+
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        const readouts = wrapper.findAll('[data-qa="dt-slider-thumb-readout"]');
+        // Hangs 50px past the left edge — 18px beyond the 32px tolerance.
+        marks[0].element.getBoundingClientRect = () => rectWithCurrentOffset(marks[0].element, 50, 150);
+        marks[1].element.getBoundingClientRect = () => rectWithCurrentOffset(marks[1].element, 350, 420);
+        readouts[0].element.getBoundingClientRect = () => ({ top: 0, left: 0, right: 10, bottom: 20 });
+
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        thumbInputs[0].element.value = '21';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+
+        const marksAfter = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        expect(marksAfter[0].attributes('style')).toContain('translateX(calc(-50% + 18px))');
+        expect(marksAfter[0].classes()).toContain('d-slider__mark--collision-hidden');
       });
     });
 
