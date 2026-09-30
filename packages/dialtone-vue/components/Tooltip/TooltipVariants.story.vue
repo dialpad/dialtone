@@ -102,7 +102,7 @@
       direction="row"
       justify="center"
       gap="200"
-      class="d-w100p"
+      class="d-w100p d-pbs-800"
     >
       <!-- Without arrow -->
       <dt-tooltip
@@ -117,10 +117,24 @@
           </dt-button>
         </template>
       </dt-tooltip>
+      <!-- Without arrow, bottom -->
+      <dt-tooltip
+        class="d-my-100"
+        placement="bottom"
+        :show-arrow="false"
+        :transition="$attrs.transition"
+        :message="i18n.$t('DIALTONE_TOOLTIP_WITHOUT_ARROW_MESSAGE')"
+      >
+        <template #anchor>
+          <dt-button importance="outlined">
+            {{ i18n.$t('DIALTONE_TOOLTIP_WITHOUT_ARROW_BOTTOM_LABEL') }}
+          </dt-button>
+        </template>
+      </dt-tooltip>
       <!-- Without arrow, open -->
       <dt-tooltip
         class="d-my-100"
-        placement="right"
+        placement="top"
         :show-arrow="false"
         :transition="$attrs.transition"
         :message="i18n.$t('DIALTONE_TOOLTIP_WITHOUT_ARROW_MESSAGE')"
