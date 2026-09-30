@@ -328,9 +328,13 @@ const props = defineProps({
   },
 
   /**
-   * Minimum number of steps that must remain between thumbs in range mode.
+   * Minimum gap, in steps (not raw values), that must remain between the two
+   * thumbs in range mode: the actual minimum gap enforced between their
+   * values is minGapSteps * step, so the same prop value means a different
+   * real gap depending on step (e.g. minGapSteps={5} enforces a gap of 5 with
+   * step={1}, but 50 with step={10}).
    */
-  minStepsBetweenValues: {
+  minGapSteps: {
     type: Number,
     default: 0,
   },
@@ -572,16 +576,16 @@ function snapToStep(val) {
   return Math.min(props.max, Math.max(props.min, parseFloat((props.min + steps * props.step).toFixed(dp))));
 }
 
-// Range mode's low/high thumbs may only meet, or — when minStepsBetweenValues
+// Range mode's low/high thumbs may only meet, or — when minGapSteps
 // is set — must keep at least that many steps apart. updateThumbValue already
 // enforces this during interactive drags/keyboard input, but a controlled
-// modelValue, or a reactive change to step/minStepsBetweenValues, bypassed it
+// modelValue, or a reactive change to step/minGapSteps, bypassed it
 // entirely: two values could sit closer together than the documented minimum
 // gap from the very first render, and the native inputs' min/max never
 // reflected that dependency either (see thumbNativeMin/thumbNativeMax).
 function enforceRangeGap(values) {
   if (values.length !== 2) return values;
-  const gap = props.minStepsBetweenValues * props.step;
+  const gap = props.minGapSteps * props.step;
   if (gap <= 0) return values;
   let [lo, hi] = values;
   if (hi - lo >= gap) return values;
@@ -597,10 +601,10 @@ function enforceRangeGap(values) {
 
 // The single place every value entering internalValues funnels through —
 // mount, a controlled modelValue change, and reactive min/max/step/
-// minStepsBetweenValues changes all call this (directly or via
+// minGapSteps changes all call this (directly or via
 // renormalizeCurrentValues below) — so all of them get the same guarantees:
 // clamped to [min, max], snapped to the step grid, range order normalized,
-// and the minStepsBetweenValues gap enforced. Nothing enforces the public
+// and the minGapSteps gap enforced. Nothing enforces the public
 // contract (see modelValue's validator) at runtime otherwise: a controlled
 // value out of [min, max] or off the step grid, or an array of some other
 // length, would otherwise flow straight into internalValues and split the
@@ -708,7 +712,7 @@ watch(
 );
 
 // A consumer can narrow [min, max], change step, or change
-// minStepsBetweenValues without touching modelValue at all — the watcher
+// minGapSteps without touching modelValue at all — the watcher
 // above never fires for that, so the current value(s) would otherwise
 // silently drift out of bounds, off the step grid, or inside a now-invalid
 // gap (native input clamps/step-coerces, aria-valuetext and the visual
@@ -716,7 +720,7 @@ watch(
 // constraint pipeline every time any of those four props change, so the
 // guarantees hold continuously, not just at mount and on modelValue writes.
 watch(
-  () => [props.min, props.max, props.step, props.minStepsBetweenValues],
+  () => [props.min, props.max, props.step, props.minGapSteps],
   () => {
     const next = applyValueConstraints(internalValues.value);
     if (next.length !== internalValues.value.length || next.some((v, i) => v !== internalValues.value[i])) {
@@ -751,13 +755,13 @@ function decimalPlaces(n) {
 // aria-valuemin/aria-valuemax to reflect the other thumb's current position.
 function thumbNativeMin(i) {
   if (!isRange.value || i !== 1) return props.min;
-  const gap = props.minStepsBetweenValues * props.step;
+  const gap = props.minGapSteps * props.step;
   return Math.min(props.max, (internalValues.value[0] ?? props.min) + gap);
 }
 
 function thumbNativeMax(i) {
   if (!isRange.value || i !== 0) return props.max;
-  const gap = props.minStepsBetweenValues * props.step;
+  const gap = props.minGapSteps * props.step;
   return Math.max(props.min, (internalValues.value[1] ?? props.max) - gap);
 }
 
@@ -766,7 +770,7 @@ function thumbNativeMax(i) {
 // :value binding the moment the browser applies it, splitting native state
 // (and form submission) from the visual thumb/readout/aria-valuetext/
 // emitted modelValue. applyValueConstraints (mount, controlled updates,
-// reactive min/max/step/minStepsBetweenValues changes) already keeps
+// reactive min/max/step/minGapSteps changes) already keeps
 // internalValues on the step grid, so this never matters in practice — with
 // one deliberate exception: an active magnetic snap point (see
 // findMagneticSnapPoint) intentionally holds an off-grid value while
@@ -1057,9 +1061,9 @@ function updateThumbValue(thumbIndex, newVal, { allowSnap = false } = {}) {
 
   if (isRange.value) {
     // The low thumb can never pass the high thumb (and vice versa) — they
-    // may only meet. minStepsBetweenValues, when set, widens this into a
+    // may only meet. minGapSteps, when set, widens this into a
     // larger required gap instead of a bare touch.
-    const gap = props.minStepsBetweenValues * props.step;
+    const gap = props.minGapSteps * props.step;
     if (thumbIndex === 0) {
       clamped = Math.min(clamped, (next[1] ?? props.max) - gap);
     } else {

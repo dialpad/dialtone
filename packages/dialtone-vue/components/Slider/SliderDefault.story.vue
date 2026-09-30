@@ -9,7 +9,7 @@
     :inverted="$attrs.inverted"
     :show-ticks="$attrs.showTicks"
     :tick-interval="$attrs.tickInterval"
-    :min-steps-between-values="$attrs.minStepsBetweenValues"
+    :min-gap-steps="$attrs.minGapSteps"
     :size="$attrs.size"
     :label="$attrs.label"
     :show-label="$attrs.showLabel"

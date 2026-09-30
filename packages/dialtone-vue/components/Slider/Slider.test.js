@@ -1362,9 +1362,9 @@ describe('DtSlider Tests', () => {
       });
     });
 
-    describe('Range: minStepsBetweenValues', () => {
+    describe('Range: minGapSteps', () => {
       beforeEach(() => {
-        mockProps = { modelValue: [40, 60], minStepsBetweenValues: 10 };
+        mockProps = { modelValue: [40, 60], minGapSteps: 10 };
         updateWrapper();
         thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
       });
@@ -1379,7 +1379,7 @@ describe('DtSlider Tests', () => {
       });
     });
 
-    describe('Range: thumbs cannot cross (no minStepsBetweenValues set)', () => {
+    describe('Range: thumbs cannot cross (no minGapSteps set)', () => {
       beforeEach(() => {
         mockProps = { modelValue: [40, 60] };
         updateWrapper();
@@ -1734,8 +1734,8 @@ describe('DtSlider Tests', () => {
   });
 
   describe('Range: dependent per-thumb native bounds', () => {
-    it('enforces minStepsBetweenValues on a controlled modelValue at mount, not just during interaction', () => {
-      mockProps = { modelValue: [40, 60], min: 0, max: 100, step: 1, minStepsBetweenValues: 30 };
+    it('enforces minGapSteps on a controlled modelValue at mount, not just during interaction', () => {
+      mockProps = { modelValue: [40, 60], min: 0, max: 100, step: 1, minGapSteps: 30 };
       updateWrapper();
       thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
       const [lo, hi] = [Number(thumbInputs[0].element.value), Number(thumbInputs[1].element.value)];
@@ -1743,10 +1743,10 @@ describe('DtSlider Tests', () => {
       expect(wrapper.emitted('update:modelValue')?.at(-1)[0]).toEqual([lo, hi]);
     });
 
-    it('re-enforces the gap reactively when minStepsBetweenValues changes after mount', async () => {
+    it('re-enforces the gap reactively when minGapSteps changes after mount', async () => {
       mockProps = { modelValue: [40, 60], min: 0, max: 100, step: 1 };
       updateWrapper();
-      await wrapper.setProps({ minStepsBetweenValues: 30 });
+      await wrapper.setProps({ minGapSteps: 30 });
       thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
       const [lo, hi] = [Number(thumbInputs[0].element.value), Number(thumbInputs[1].element.value)];
       expect(hi - lo).toBeGreaterThanOrEqual(30);
@@ -1756,7 +1756,7 @@ describe('DtSlider Tests', () => {
       // WAI-ARIA's multi-thumb slider pattern requires each thumb's
       // aria-valuemin/aria-valuemax (native min/max on a range input) to
       // reflect the OTHER thumb's current position, not the full domain.
-      mockProps = { modelValue: [40, 60], min: 0, max: 100, step: 1, minStepsBetweenValues: 5 };
+      mockProps = { modelValue: [40, 60], min: 0, max: 100, step: 1, minGapSteps: 5 };
       updateWrapper();
       thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
       expect(thumbInputs[0].attributes('min')).toBe('0');
@@ -2518,8 +2518,8 @@ describe('DtSlider Tests', () => {
         expect(emitted[emitted.length - 1][0][0]).toBe(0.3);
       });
 
-      it('enforces minStepsBetweenValues gap with fractional step', async () => {
-        mockProps = { modelValue: [1.0, 3.0], min: 0, max: 10, step: 0.5, minStepsBetweenValues: 2 };
+      it('enforces minGapSteps gap with fractional step', async () => {
+        mockProps = { modelValue: [1.0, 3.0], min: 0, max: 10, step: 0.5, minGapSteps: 2 };
         updateWrapper();
         thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
         // gap = 2 × 0.5 = 1.0; lower thumb max = 3.0 − 1.0 = 2.0
@@ -2529,8 +2529,8 @@ describe('DtSlider Tests', () => {
         expect(emitted[emitted.length - 1][0][0]).toBe(2);
       });
 
-      it('rounds out IEEE-754 drift in the minStepsBetweenValues gap (3 * 0.1 !== 0.3 in raw JS)', async () => {
-        mockProps = { modelValue: [0.3, 0.9], min: 0, max: 1, step: 0.1, minStepsBetweenValues: 3 };
+      it('rounds out IEEE-754 drift in the minGapSteps gap (3 * 0.1 !== 0.3 in raw JS)', async () => {
+        mockProps = { modelValue: [0.3, 0.9], min: 0, max: 1, step: 0.1, minGapSteps: 3 };
         updateWrapper();
         thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
         // High thumb (index 1) nudged toward the low thumb: gap = 3 * 0.1, which is

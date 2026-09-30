@@ -19,7 +19,7 @@ export const argsData = {
   inverted: false,
   showTicks: true,
   tickInterval: 10,
-  minStepsBetweenValues: 0,
+  minGapSteps: 0,
   size: 300,
   label: 'Slider label',
   showLabel: true,
@@ -177,7 +177,7 @@ export const argTypesData = {
       defaultValue: { summary: 'null (uses step)' },
     },
   },
-  minStepsBetweenValues: {
+  minGapSteps: {
     description: 'Minimum gap (in steps) between thumbs in range mode.',
     control: { type: 'number' },
     table: {
