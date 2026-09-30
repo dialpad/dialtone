@@ -4,12 +4,16 @@
 
 const originalError = console.error;
 
-// Matches the specific debug prefixes used by dialtone-query-core:
+// Matches the complete debug tags used by dialtone-query-core:
 // [CLASS SEARCH DEBUG], [TOKEN SEARCH DEBUG], [COMPONENT SEARCH DEBUG],
-// [ICON SEARCH DEBUG], [FILTER], [INIT]
-const CORE_DEBUG_PREFIX = /^\n?\[(CLASS SEARCH|TOKEN SEARCH|COMPONENT SEARCH|ICON SEARCH|FILTER|INIT)\]/;
+// [ICON SEARCH DEBUG], [FILTER]
+// Full tags only, so a future [... ERROR] or [... WARNING] line still prints.
+const CORE_DEBUG_PREFIX = /^\n?\[(CLASS SEARCH DEBUG|TOKEN SEARCH DEBUG|COMPONENT SEARCH DEBUG|ICON SEARCH DEBUG|FILTER)\]/;
 
 export function silenceDebug() {
+  // DIALTONE_DEBUG=1 keeps the debug output, e.g. to see the parsed query and per-step match counts.
+  if (process.env.DIALTONE_DEBUG === '1') return;
+
   console.error = (...args: unknown[]) => {
     const first = String(args[0] ?? '');
     if (CORE_DEBUG_PREFIX.test(first)) return;
