@@ -214,6 +214,7 @@ defineOptions({ name: 'DtSlider', inheritAttrs: false });
 const props = defineProps({
   /**
    * The current value. A number enables single-thumb mode; an array enables range mode.
+   * When omitted (or explicitly undefined/null), resolves to min — see normalizeModelValue.
    * @values Number, [Number, Number]
    */
   modelValue: {
