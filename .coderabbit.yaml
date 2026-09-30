@@ -101,6 +101,9 @@ reviews:
         - Accessibility: ARIA correctness, keyboard navigation, focus management
           in modals/overlays, screen reader announcements via aria-live.
 
+        - New user-facing strings must use FTL localization keys
+          (packages/dialtone-vue/localization). Flag hardcoded English.
+
         Follow the conventions in .claude/rules/vue-components.md.
 
     # Vue tests
@@ -279,6 +282,9 @@ reviews:
 
         - Sidebar navigation is in _data/site-nav.json — new pages must be added there.
 
+        - This documentation site is not localized. Plain English is expected in Markdown
+          and documentation-site Vue components. Do not request FTL keys or i18n wrappers here.
+
         Follow the conventions in .claude/rules/documentation-site.md.
 
     # General (all files)
@@ -293,4 +299,5 @@ reviews:
         - Flag non-tree-shakeable imports at entry points and heavy dependencies
           added without justification.
 
-        - New user-facing strings must use FTL localization keys. Flag hardcoded English.
+        - Only dialtone-vue component strings are localized (FTL). Do not flag hardcoded
+          English in documentation, READMEs, CLI or MCP output, or tooling.
