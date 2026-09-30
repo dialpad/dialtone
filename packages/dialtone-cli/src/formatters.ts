@@ -12,16 +12,8 @@ import type {
   ThemeData,
   Component,
 } from '@dialpad/dialtone-query-core';
-import type { DomainSource } from './data-resolver.js';
 
 export type Format = 'minimal' | 'markdown' | 'json';
-
-// v10 consumers install @dialpad/dialtone and import Vue components from its
-// ./vue export. Only data read from a separately installed
-// @dialpad/dialtone-vue means importing from that package instead.
-export function componentImportPath(source: DomainSource): string {
-  return source.kind === 'local' && source.package === '@dialpad/dialtone-vue' ? '@dialpad/dialtone-vue' : '@dialpad/dialtone/vue';
-}
 
 export function importStatement(name: string, importFrom: string): string {
   return `import { ${name} } from '${importFrom}'`;

@@ -206,7 +206,7 @@ For programmatic use, prefer `--format json` instead of parsing the default term
 
 ## Data sources
 
-The CLI looks for installed packages in the `node_modules` folders of the project you run it from:
+The CLI looks for installed packages the way Node does, in the `node_modules` folders in and above the directory you run it from:
 
 1. If a `package.json` at or above your directory, up to the repository root, depends on `@dialpad/dialtone`, the CLI uses that package's component, token, and utility data, and the icons package it depends on.
 2. Otherwise, it uses installed `@dialpad/dialtone-vue`, `@dialpad/dialtone-css`, and `@dialpad/dialtone-icons` packages, and fills any gaps from an installed `@dialpad/dialtone`.
@@ -214,7 +214,7 @@ The CLI looks for installed packages in the `node_modules` folders of the projec
 
 The source line lists any data that came from somewhere other than the main package. If `package.json` declares a caret, tilde, or exact version of `@dialpad/dialtone` (such as `^10.0.0`) and the installed copy has a different major version, the CLI prints a warning. If `package.json` declares `@dialpad/dialtone` but the CLI can't find an installed copy, it warns and uses bundled data. Yarn Plug'n'Play installs have no `node_modules`, so the CLI uses bundled data there.
 
-Import hints in `component` and `prompt` output use `@dialpad/dialtone/vue`, unless the component data came from an installed `@dialpad/dialtone-vue`.
+Import hints in `component` and `prompt` output use `@dialpad/dialtone/vue`. Versions of `@dialpad/dialtone` before 9.173 don't export `./vue`, so their hints use `@dialpad/dialtone/vue3`. Component data from an installed `@dialpad/dialtone-vue` gives hints for `@dialpad/dialtone-vue`.
 
 Use `--bundled` when you want to ignore installed packages and query the CLI's bundled data:
 

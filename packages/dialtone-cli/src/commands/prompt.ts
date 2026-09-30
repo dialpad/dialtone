@@ -2,7 +2,7 @@ import { defineCommand } from 'citty';
 import type { Component } from '@dialpad/dialtone-query-core';
 import { requireComponent } from '../select-component.js';
 import { getContext } from '../context.js';
-import { componentImportPath, formatPrompt, importStatement } from '../formatters.js';
+import { formatPrompt, importStatement } from '../formatters.js';
 
 export const promptCommand = defineCommand({
   meta: { name: 'prompt', description: 'Emit a compact LLM-optimized context block for a component' },
@@ -11,9 +11,8 @@ export const promptCommand = defineCommand({
     format: { type: 'string', description: 'Output format: minimal, markdown, json', default: 'minimal' },
   },
   run({ args }) {
-    const { components, sources } = getContext();
+    const { components, componentImportPath: importFrom } = getContext();
     const result = requireComponent(args.name, components);
-    const importFrom = componentImportPath(sources.components);
     const format = args.format || 'minimal';
 
     if (format === 'json') {

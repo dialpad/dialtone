@@ -42,6 +42,8 @@ export interface ResolvedData {
   icons: IconsData;
   documentation: DocumentationRecord[];
   sources: Record<Domain, DomainSource>;
+  // Where import hints say to import components from.
+  componentImportPath: string;
   warnings: string[];
 }
 
@@ -49,6 +51,7 @@ interface Found {
   data: unknown;
   file: string;
   source: LocalSource;
+  exports: Record<string, unknown>; // the package's exports map
 }
 
 type Parts = Partial<Record<Exclude<Domain, 'docs'>, Found | null>>;
@@ -94,8 +97,8 @@ function tryRead(fromDir: string, specifier: string): Found | null {
     if (!file.startsWith(realpathSync(dirname(manifest)) + sep)) return null;
     const data = JSON.parse(readFileSync(file, 'utf-8'));
     if (data === null) return null;
-    const { version } = JSON.parse(readFileSync(manifest, 'utf-8'));
-    return { data, file, source: { kind: 'local', package: packageName, version } };
+    const { version, exports } = JSON.parse(readFileSync(manifest, 'utf-8'));
+    return { data, file, source: { kind: 'local', package: packageName, version }, exports: exports ?? {} };
   } catch {
     return null;
   }
@@ -127,6 +130,14 @@ function declaredDialtoneSpec(pkgPath: string): string | null {
   }
 }
 
+// v10 apps import components from the umbrella's ./vue export, which
+// umbrellas before 9.173 don't have. Bundled data documents v10.
+function componentImportPath(components: Found | null | undefined): string {
+  if (components?.source.package === '@dialpad/dialtone-vue') return '@dialpad/dialtone-vue';
+  if (components && !('./vue' in components.exports)) return '@dialpad/dialtone/vue3';
+  return '@dialpad/dialtone/vue';
+}
+
 // Each domain comes from the first candidate that found it, else from bundled data.
 function assemble(...candidates: Parts[]): ResolvedData {
   const pick = (domain: keyof Parts) => candidates.map(c => c[domain]).find(Boolean);
@@ -144,6 +155,7 @@ function assemble(...candidates: Parts[]): ResolvedData {
       icons: icons?.source ?? BUNDLED,
       docs: BUNDLED,
     },
+    componentImportPath: componentImportPath(components),
     warnings: [],
   };
 }

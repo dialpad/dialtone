@@ -34,6 +34,7 @@ interface Layout {
     version?: string; // defaults to 10.0.4
     omit?: Array<'components' | 'utilities' | 'tokens'>;
     icons?: string; // a @dialpad/dialtone-icons version nested under the umbrella
+    noVueExport?: boolean; // exports ./vue3 but not ./vue, like umbrellas before 9.173
   };
   icons?: string; // top-level @dialpad/dialtone-icons version
   css?: string;   // top-level @dialpad/dialtone-css version
@@ -64,7 +65,8 @@ function project(layout: Layout): string {
   if (layout.umbrella) {
     const u = join(nm, 'dialtone');
     const omit = layout.umbrella.omit ?? [];
-    write(join(u, 'package.json'), { name: '@dialpad/dialtone', version: layout.umbrella.version ?? '10.0.4', exports: { './*': './dist/*' } });
+    const vueExports = layout.umbrella.noVueExport ? { './vue3': './dist/vue3/dialtone-vue.js' } : { './vue': './dist/vue3/dialtone-vue.js', './vue3': './dist/vue3/dialtone-vue.js' };
+    write(join(u, 'package.json'), { name: '@dialpad/dialtone', version: layout.umbrella.version ?? '10.0.4', exports: { ...vueExports, './*': './dist/*' } });
     if (!omit.includes('components')) write(join(u, 'dist/vue3/component-documentation.json'), [{ displayName: 'DtFromUmbrella' }]);
     if (!omit.includes('utilities')) write(join(u, 'dist/css/dialtone-docs.json'), { marker: 'umbrella-utilities' });
     if (!omit.includes('tokens')) write(join(u, 'dist/css/tokens-docs.json'), { marker: 'umbrella-tokens' });
@@ -148,7 +150,7 @@ describe('resolveData: where data comes from', () => {
   });
 
   test('the declaration search stops at a repository root', () => {
-    // A separate repo nested inside a project that declares Dialtone uses its own packages.
+    // A separate repo nested inside a project that declares Dialtone doesn't inherit the declaration, so its own dialtone-css answers for utilities.
     const child = join(project({ declares: '^10.0.0', umbrella: {} }), 'vendor', 'other-repo');
     write(join(child, 'package.json'), { name: 'other-repo' });
     mkdirSync(join(child, '.git'));
@@ -173,6 +175,17 @@ describe('resolveData: where data comes from', () => {
     const root = project({ declares: '^10.0.0', umbrella: {} });
     write(join(root, 'node_modules/@dialpad/dialtone/dist/vue3/component-documentation.json'), null);
     expect(resolveData(false, root).sources.components).toEqual(bundled);
+  });
+});
+
+describe('resolveData: component import path', () => {
+  test.each<{ data: string; layout: Layout; expected: string }>([
+    { data: 'a v10 umbrella', layout: { declares: '^10.0.0', umbrella: {} }, expected: '@dialpad/dialtone/vue' },
+    { data: 'an umbrella without a ./vue export', layout: { declares: '^9.0.0', umbrella: { version: '9.171.1', noVueExport: true } }, expected: '@dialpad/dialtone/vue3' },
+    { data: 'a separately installed dialtone-vue', layout: { vue: '4.0.2' }, expected: '@dialpad/dialtone-vue' },
+    { data: 'bundled data', layout: {}, expected: '@dialpad/dialtone/vue' },
+  ])('$data imports from $expected', ({ layout, expected }) => {
+    expect(resolveData(false, project(layout)).componentImportPath).toBe(expected);
   });
 });
 

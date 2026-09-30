@@ -2,7 +2,7 @@ import { defineCommand } from 'citty';
 import type { ComponentProp } from '@dialpad/dialtone-query-core';
 import { requireComponent } from '../select-component.js';
 import { getContext } from '../context.js';
-import { componentImportPath, formatComponentOutput, propsTable, eventsTable, slotsTable, type Format } from '../formatters.js';
+import { formatComponentOutput, propsTable, eventsTable, slotsTable, type Format } from '../formatters.js';
 
 function formatSingleProp(prop: ComponentProp): string {
   const lines: string[] = [];
@@ -33,9 +33,8 @@ export const componentCommand = defineCommand({
   },
   run({ args }) {
     const format = (args.format || 'minimal') as Format;
-    const { components, sources } = getContext();
+    const { components, componentImportPath: importFrom } = getContext();
     const result = requireComponent(args.name, components);
-    const importFrom = componentImportPath(sources.components);
 
     // --prop <name>: single prop lookup
     if (args.prop) {
