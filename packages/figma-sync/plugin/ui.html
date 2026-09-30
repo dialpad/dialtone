@@ -11,39 +11,42 @@
 </style>
 </head>
 <body>
-  <button id="run">Sync text styles</button>
-  <div id="log">Fetches the spec from the local dev server (run <code>pnpm sync:styles:serve</code> first), then builds every text style in this file.</div>
+  <button id="run-text" data-type="run-text-styles" data-url="text-styles.json">Sync text styles</button>
+  <button id="run-effect" data-type="run-effect-styles" data-url="effect-styles.json">Sync effect styles</button>
+  <div id="log">Fetches each spec from the local dev server (run <code>pnpm sync:styles:serve</code> first), then builds every style of that kind in this file.</div>
   <script>
     const log = document.getElementById('log');
-    const button = document.getElementById('run');
-    const SPEC_URL = 'http://localhost:4577/text-styles.json';
+    const buttons = [document.getElementById('run-text'), document.getElementById('run-effect')];
+    const BASE_URL = 'http://localhost:4577/';
 
-    button.onclick = async () => {
-      button.disabled = true;
-      log.textContent = 'Fetching spec…';
-      try {
-        const res = await fetch(SPEC_URL);
-        if (!res.ok) throw new Error(`dev server responded ${res.status}`);
-        const specs = await res.json();
-        log.textContent = `Fetched ${specs.length} specs. Creating styles…`;
-        parent.postMessage({ pluginMessage: { type: 'run-text-styles', specs } }, '*');
-      } catch (e) {
-        log.textContent = `Could not reach the dev server: ${e.message}`;
-        log.className = 'err';
-        button.disabled = false;
-      }
-    };
+    for (const button of buttons) {
+      button.onclick = async () => {
+        for (const b of buttons) b.disabled = true;
+        log.textContent = 'Fetching spec…';
+        try {
+          const res = await fetch(BASE_URL + button.dataset.url);
+          if (!res.ok) throw new Error(`dev server responded ${res.status}`);
+          const specs = await res.json();
+          log.textContent = `Fetched ${specs.length} specs. Creating styles…`;
+          parent.postMessage({ pluginMessage: { type: button.dataset.type, specs } }, '*');
+        } catch (e) {
+          log.textContent = `Could not reach the dev server: ${e.message}`;
+          log.className = 'err';
+          for (const b of buttons) b.disabled = false;
+        }
+      };
+    }
 
     onmessage = (event) => {
       const msg = event.data.pluginMessage;
       if (!msg) return;
-      button.disabled = false;
+      for (const b of buttons) b.disabled = false;
       if (msg.type === 'result') {
         const { created, updated, errors, totalStyles } = msg.result;
         log.className = errors.length ? 'err' : 'ok';
         log.textContent =
           `created ${created.length}, updated ${updated.length}, errors ${errors.length}\n` +
-          `total text styles in file: ${totalStyles}\n\n` +
+          `total styles of this kind in file: ${totalStyles}\n\n` +
           (errors.length ? errors.map(e => `${e.name}: ${e.error}`).join('\n') : 'All clean.');
       } else if (msg.type === 'error') {
         log.className = 'err';

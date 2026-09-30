@@ -96,13 +96,102 @@ async function createTextStyles (specs: TextStyleSpec[]): Promise<CreateTextStyl
   return { created, updated, errors, totalStyles: (await figma.getLocalTextStylesAsync()).length };
 }
 
+const EFFECT_BINDABLE_FIELDS = ['blur', 'color', 'offsetX', 'offsetY', 'spread'] as const;
+type EffectBindableField = (typeof EFFECT_BINDABLE_FIELDS)[number];
+
+interface EffectLayerSpec {
+  variables: Record<EffectBindableField, string>;
+}
+
+interface EffectStyleSpec {
+  name: string;
+  isInset: boolean;
+  layers: EffectLayerSpec[];
+}
+
+interface CreateEffectStylesResult {
+  created: string[];
+  updated: string[];
+  errors: { name: string; error: string }[];
+  totalStyles: number;
+}
+
+/** `radius` is the field name `setBoundVariableForEffect` expects for blur. */
+const EFFECT_FIELD_TO_API: Record<EffectBindableField, VariableBindableEffectField> = {
+  blur: 'radius',
+  color: 'color',
+  offsetX: 'offsetX',
+  offsetY: 'offsetY',
+  spread: 'spread',
+};
+
+/**
+ * Every field here has a real variable — none of these are set as literals,
+ * unlike a text style's lineHeight. Both light and dark share the same layer
+ * count per shadow (the padding fix that made this possible), so one style,
+ * with every field bound, renders correctly in both modes without needing a
+ * per-mode style object, which Figma has no concept of.
+ */
+async function createEffectStyles (specs: EffectStyleSpec[]): Promise<CreateEffectStylesResult> {
+  const vars = await figma.variables.getLocalVariablesAsync();
+  const varByName = new Map(vars.map(v => [v.name, v]));
+  const existingStyles = await figma.getLocalEffectStylesAsync();
+  const styleByName = new Map(existingStyles.map(s => [s.name, s]));
+
+  const created: string[] = [];
+  const updated: string[] = [];
+  const errors: CreateEffectStylesResult['errors'] = [];
+
+  for (const spec of specs) {
+    try {
+      let style = styleByName.get(spec.name);
+      const isNew = !style;
+      if (!style) style = figma.createEffectStyle();
+      style.name = spec.name;
+
+      const effects: Effect[] = spec.layers.map(layer => {
+        let effect: Effect = {
+          type: spec.isInset ? 'INNER_SHADOW' : 'DROP_SHADOW',
+          color: { r: 0, g: 0, b: 0, a: 1 },
+          offset: { x: 0, y: 0 },
+          radius: 0,
+          spread: 0,
+          visible: true,
+          blendMode: 'NORMAL',
+        };
+
+        for (const field of EFFECT_BINDABLE_FIELDS) {
+          const variable = varByName.get(layer.variables[field]);
+          if (!variable) throw new Error(`missing variable: ${layer.variables[field]}`);
+          effect = figma.variables.setBoundVariableForEffect(effect, EFFECT_FIELD_TO_API[field], variable);
+        }
+        return effect;
+      });
+
+      style.effects = effects;
+      (isNew ? created : updated).push(style.name);
+    } catch (e) {
+      errors.push({ name: spec.name, error: String(e) });
+    }
+  }
+
+  return { created, updated, errors, totalStyles: (await figma.getLocalEffectStylesAsync()).length };
+}
+
 figma.showUI(__html__, { width: 360, height: 420 });
 
-figma.ui.onmessage = async (msg: { type: string; specs?: TextStyleSpec[] }) => {
-  if (msg.type !== 'run-text-styles') return;
+figma.ui.onmessage = async (msg: {
+  type: string;
+  specs?: TextStyleSpec[] | EffectStyleSpec[];
+}) => {
   try {
-    const result = await createTextStyles(msg.specs ?? []);
-    figma.ui.postMessage({ type: 'result', result });
+    if (msg.type === 'run-text-styles') {
+      const result = await createTextStyles((msg.specs ?? []) as TextStyleSpec[]);
+      figma.ui.postMessage({ type: 'result', result });
+    } else if (msg.type === 'run-effect-styles') {
+      const result = await createEffectStyles((msg.specs ?? []) as EffectStyleSpec[]);
+      figma.ui.postMessage({ type: 'result', result });
+    }
   } catch (e) {
     figma.ui.postMessage({ type: 'error', error: String(e) });
   }
