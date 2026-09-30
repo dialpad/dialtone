@@ -101,6 +101,7 @@
     <dt-stack
       direction="row"
       justify="center"
+      gap="200"
       class="d-w100p"
     >
       <!-- Without arrow -->
@@ -109,11 +110,25 @@
         :show-arrow="false"
         :transition="$attrs.transition"
         :message="i18n.$t('DIALTONE_TOOLTIP_WITHOUT_ARROW_MESSAGE')"
-        :open="true"
       >
         <template #anchor>
           <dt-button importance="outlined">
             {{ i18n.$t('DIALTONE_TOOLTIP_WITHOUT_ARROW_LABEL') }}
+          </dt-button>
+        </template>
+      </dt-tooltip>
+      <!-- Without arrow, open -->
+      <dt-tooltip
+        class="d-my-100"
+        placement="right"
+        :show-arrow="false"
+        :transition="$attrs.transition"
+        :message="i18n.$t('DIALTONE_TOOLTIP_WITHOUT_ARROW_MESSAGE')"
+        :open="true"
+      >
+        <template #anchor>
+          <dt-button importance="outlined">
+            {{ i18n.$t('DIALTONE_TOOLTIP_WITHOUT_ARROW_OPEN_LABEL') }}
           </dt-button>
         </template>
       </dt-tooltip>
