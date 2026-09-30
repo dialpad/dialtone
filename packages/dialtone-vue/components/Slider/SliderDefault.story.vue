@@ -6,7 +6,6 @@
     :step="$attrs.step"
     :disabled="$attrs.disabled"
     :orientation="$attrs.orientation"
-    :inverted="$attrs.inverted"
     :show-ticks="$attrs.showTicks"
     :tick-interval="$attrs.tickInterval"
     :min-gap-steps="$attrs.minGapSteps"

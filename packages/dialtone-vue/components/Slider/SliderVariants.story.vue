@@ -173,15 +173,15 @@
       />
     </section>
 
-    <!-- Inverted -->
+    <!-- Fill from end -->
     <section>
       <p class="d-body--sm-compact d-mbe-300 d-fc-tertiary">
-        Inverted (fill from max end)
+        Fill from end (fill-origin="end")
       </p>
       <dt-slider
         v-model="invertedValue"
         label="Download limit"
-        inverted
+        fill-origin="end"
       />
     </section>
 

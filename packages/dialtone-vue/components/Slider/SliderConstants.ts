@@ -2,6 +2,8 @@ export const SLIDER_ORIENTATIONS = ['horizontal', 'vertical'] as const;
 
 export const SLIDER_READOUT_MODES = ['always', 'never', 'interaction'] as const;
 
+export const SLIDER_FILL_ORIGINS = ['start', 'end'] as const;
+
 // Slider is a new component with no prior t-shirt-size API to stay backward
 // compatible with, unlike existing components that still accept a deprecated
 // sm/md/lg alias alongside the numeric scale — so only the numeric keys are

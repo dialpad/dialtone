@@ -224,9 +224,9 @@ describe('DtSlider Tests', () => {
       });
     });
 
-    describe('When inverted', () => {
+    describe('When fillOrigin is \'end\'', () => {
       beforeEach(() => {
-        mockProps = { inverted: true };
+        mockProps = { fillOrigin: 'end' };
         updateWrapper();
       });
 
@@ -2565,6 +2565,42 @@ describe('DtSlider Tests', () => {
   });
 
   describe('fillOrigin', () => {
+    describe('When fillOrigin is the default (\'start\')', () => {
+      beforeEach(() => {
+        mockProps = { modelValue: 25, min: 0, max: 100 };
+        updateWrapper();
+      });
+
+      it('fills from the min end toward the thumb', () => {
+        const style = indicator.attributes('style');
+        expect(style).toContain('inset-inline-start: 0');
+        expect(style).toContain('width: 25%');
+      });
+    });
+
+    describe('When fillOrigin is \'end\'', () => {
+      beforeEach(() => {
+        mockProps = { modelValue: 25, min: 0, max: 100, fillOrigin: 'end' };
+        updateWrapper();
+      });
+
+      it('fills from the max end toward the thumb', () => {
+        const style = indicator.attributes('style');
+        expect(style).toContain('inset-inline-end: 0');
+        expect(style).toContain('width: 75%');
+      });
+    });
+
+    describe('When fillOrigin is an invalid string', () => {
+      it('does not accept a value outside start/end', () => {
+        const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+        mockProps = { fillOrigin: 'middle' };
+        updateWrapper();
+        expect(warnSpy.mock.calls[0][0]).toContain('Invalid prop: custom validator check failed for prop "fillOrigin"');
+        warnSpy.mockRestore();
+      });
+    });
+
     describe('When fillOrigin is set and value equals fillOrigin', () => {
       beforeEach(() => {
         mockProps = { modelValue: 50, fillOrigin: 50 };

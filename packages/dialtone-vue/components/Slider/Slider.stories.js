@@ -16,7 +16,6 @@ export const argsData = {
   snapThreshold: 10,
   disabled: false,
   orientation: 'horizontal',
-  inverted: false,
   showTicks: true,
   tickInterval: 10,
   minGapSteps: 0,
@@ -25,7 +24,7 @@ export const argsData = {
   showLabel: true,
   name: '',
   largeStep: 10,
-  fillOrigin: null,
+  fillOrigin: 'start',
   readout: 'always',
   'onUpdate:modelValue': action('update:modelValue'),
   onChange: action('change'),
@@ -133,21 +132,13 @@ export const argTypesData = {
       defaultValue: { summary: 'horizontal' },
     },
   },
-  inverted: {
-    description: 'Reverses fill direction — fills from the max end toward the thumb. Ignored when fillOrigin is set.',
-    control: 'boolean',
-    table: {
-      category: 'props',
-      type: { summary: 'Boolean' },
-    },
-  },
   fillOrigin: {
-    description: 'Fill grows outward from this value toward the thumb. Useful for balance/pan controls (:fill-origin="50" on a 0–100 range) or deviation displays. Ignored in range mode. Clamped to [min, max].',
-    control: { type: 'number' },
+    description: 'Which end the indicator fills from toward the thumb — start (the default, aka left) or end (aka right). Pass a Number instead to fill outward from that value toward the thumb, useful for balance/pan controls (:fill-origin="50" on a 0–100 range) or deviation displays. Ignored in range mode; a numeric origin is clamped to [min, max].',
+    control: { type: 'text' },
     table: {
       category: 'props',
-      type: { summary: 'Number' },
-      defaultValue: { summary: 'null' },
+      type: { summary: 'Number | String' },
+      defaultValue: { summary: 'start' },
     },
   },
   readout: {

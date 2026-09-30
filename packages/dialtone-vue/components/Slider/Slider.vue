@@ -8,7 +8,7 @@
       {
         'd-slider--disabled': disabled,
         'd-slider--vertical': isVertical,
-        'd-slider--inverted': inverted,
+        'd-slider--inverted': fillOrigin === 'end',
         'd-slider--dragging': isDragging,
       },
     ]"
@@ -206,6 +206,7 @@ import {
   SLIDER_SIZE_MODIFIERS,
   SLIDER_READOUT_MODES,
   SLIDER_DEFAULT_LARGE_STEP,
+  SLIDER_FILL_ORIGINS,
 } from './SliderConstants';
 
 defineOptions({ name: 'DtSlider', inheritAttrs: false });
@@ -289,24 +290,17 @@ const props = defineProps({
   },
 
   /**
-   * When true, the indicator fills from the max end toward the thumb instead of from min.
-   * Ignored when fillOrigin is set.
-   * @values true, false
-   */
-  inverted: {
-    type: Boolean,
-    default: false,
-  },
-
-  /**
-   * When set, the indicator fills outward from this value toward the thumb
-   * rather than from the min (or max when inverted). Useful for balance
-   * controls (aka center-fill) or deviation-from-setpoint displays.
-   * Ignored in range mode. Clamped to [min, max].
+   * Which end the indicator fills from, toward the thumb: start (the default,
+   * aka left) fills from the min end, end (aka right) fills from the max end.
+   * Pass a Number instead to fill outward from that value toward the thumb —
+   * useful for balance controls (aka center-fill) or deviation-from-setpoint
+   * displays. A numeric origin is clamped to [min, max]. Ignored in range mode.
+   * @values start, end
    */
   fillOrigin: {
-    type: Number,
-    default: null,
+    type: [Number, String],
+    default: 'start',
+    validator: (v) => typeof v === 'number' || SLIDER_FILL_ORIGINS.includes(v),
   },
 
   /**
@@ -1030,7 +1024,7 @@ const indicatorStyle = computed(() => {
 
   const pct = thumbPercent(internalValues.value[0] ?? props.min);
 
-  if (props.fillOrigin != null) {
+  if (typeof props.fillOrigin === 'number') {
     const originPct = thumbPercent(Math.min(props.max, Math.max(props.min, props.fillOrigin)));
     const startPct = Math.min(pct, originPct);
     const sizePct = Math.abs(pct - originPct);
@@ -1040,12 +1034,13 @@ const indicatorStyle = computed(() => {
     return { insetInlineStart: `${startPct}%`, width: `${sizePct}%` };
   }
 
+  const fillsFromEnd = props.fillOrigin === 'end';
   if (isVertical.value) {
-    return props.inverted
+    return fillsFromEnd
       ? { top: '0', height: `${100 - pct}%` }
       : { bottom: '0', height: `${pct}%` };
   }
-  return props.inverted
+  return fillsFromEnd
     ? { insetInlineEnd: '0', width: `${100 - pct}%` }
     : { insetInlineStart: '0', width: `${pct}%` };
 });

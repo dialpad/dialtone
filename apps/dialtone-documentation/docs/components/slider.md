@@ -261,10 +261,12 @@ For anything beyond a fixed prefix/suffix, pass `getValueText` — it takes prec
 />
 ```
 
-### Inverted fill direction
+### Fill direction
+
+Set `fill-origin` to `end` (aka right) to fill from the max end toward the thumb instead of the default `start` (aka left).
 
 ```vue demo
-<dt-slider :model-value="40" label="Download limit" inverted />
+<dt-slider :model-value="40" label="Download limit" fill-origin="end" />
 ```
 
 ### Fill from origin
