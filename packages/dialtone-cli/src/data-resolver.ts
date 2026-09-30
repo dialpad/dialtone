@@ -1,20 +1,26 @@
 // ============================================================================
 // DATA RESOLVER
-// Resolves Dialtone data from the local project's installed packages or
-// falls back to the bundled data (CLI version).
+// Resolves Dialtone data from the project's installed packages, falling back
+// to the CLI's bundled data one domain at a time.
 //
-// Resolution order:
-// 1. Individual packages (@dialpad/dialtone-css, dialtone-vue, dialtone-icons)
-// 2. Umbrella package (@dialpad/dialtone/dist/css/*, dist/vue3/*)
-// 3. Bundled data (compiled into the CLI at build time)
-//
-// Uses Node's module resolution (via createRequire) to find packages,
-// which works with pnpm virtual stores, workspace links, and npm hoisting.
+// Resolution order (DLT-3639):
+// 1. --bundled: bundled data only.
+// 2. The project declares @dialpad/dialtone: use that package's data, with
+//    icons from the @dialpad/dialtone-icons it depends on. Separately
+//    installed dialtone-css/-vue (e.g. lint-plugin peers) are ignored,
+//    because they can be older than the Dialtone the app uses. Warn when the
+//    installed major version differs from the declared one, or when none is
+//    found (bundled data is used then).
+// 3. Otherwise, per domain: an individual @dialpad/dialtone-vue, -css or
+//    -icons package, then an undeclared umbrella.
+// 4. Anything still missing: bundled data.
+// Documentation is always bundled. Packages are found through node_modules
+// folders only, never NODE_PATH.
 // ============================================================================
 
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync, realpathSync } from 'node:fs';
 import { createRequire } from 'node:module';
-import { join } from 'node:path';
+import { dirname, join, parse, sep } from 'node:path';
 import {
   utilityClasses as bundledUtilityClasses,
   tokens as bundledTokens,
@@ -24,111 +30,176 @@ import {
 } from '@dialpad/dialtone-query-core';
 import type { UtilityClassesData, TokensData, Component, IconsData, DocumentationRecord } from '@dialpad/dialtone-query-core';
 
-interface ResolvedData {
+export const DOMAINS = ['components', 'utilities', 'tokens', 'icons', 'docs'] as const;
+export type Domain = typeof DOMAINS[number];
+type LocalSource = { kind: 'local'; package: string; version?: string };
+export type DomainSource = LocalSource | { kind: 'bundled' };
+
+export interface ResolvedData {
   utilityClasses: UtilityClassesData;
   tokens: TokensData;
   components: Component[];
   icons: IconsData;
   documentation: DocumentationRecord[];
-  source: 'local' | 'bundled';
-  version?: string;
+  sources: Record<Domain, DomainSource>;
+  warnings: string[];
 }
 
-const BUNDLED: ResolvedData = {
-  utilityClasses: bundledUtilityClasses,
-  tokens: bundledTokens,
-  components: bundledComponents,
-  icons: bundledIcons,
-  // documentation is bundled-only in v1 — no local-package resolution path
-  documentation: bundledDocumentation,
-  source: 'bundled',
-};
+interface Found {
+  data: unknown;
+  file: string;
+  source: LocalSource;
+}
 
-function tryResolveAndRead(localRequire: NodeRequire, specifier: string): unknown | null {
+type Parts = Partial<Record<Exclude<Domain, 'docs'>, Found | null>>;
+
+const BUNDLED: DomainSource = { kind: 'bundled' };
+
+// The umbrella file that proves it's installed, and whose location and version stand for it.
+const anchorOf = (parts: Parts) => parts.components ?? parts.utilities ?? parts.tokens;
+
+const installWarning = (spec: string, problem: string) =>
+  `package.json declares @dialpad/dialtone "${spec}" but ${problem}. Reinstall dependencies to match.`;
+
+// dir, then each parent up to and including the filesystem root.
+function* ancestors(dir: string) {
+  for (; ; dir = dirname(dir)) {
+    yield dir;
+    if (dir === parse(dir).root) return;
+  }
+}
+
+function findUp(fromDir: string, relativePath: string): string | null {
+  for (const dir of ancestors(fromDir)) {
+    const candidate = join(dir, relativePath);
+    if (existsSync(candidate)) return candidate;
+  }
+  return null;
+}
+
+// Finds the package through node_modules folders only, then reads one of its
+// files. Plain require.resolve would also search NODE_PATH, which pnpm's bin
+// shims point at a whole store, so a missing install could quietly resolve
+// some other project's copy.
+function tryRead(fromDir: string, specifier: string): Found | null {
+  // "@dialpad/dialtone-vue/component-documentation.json" → "@dialpad/dialtone-vue"
+  const packageName = specifier.split('/').slice(0, 2).join('/');
+  const manifest = findUp(fromDir, join('node_modules', packageName, 'package.json'));
+  if (!manifest) return null;
   try {
-    const resolved = localRequire.resolve(specifier);
-    return JSON.parse(readFileSync(resolved, 'utf-8'));
+    // Resolving the package's own name from inside it applies its exports map.
+    const file = createRequire(manifest).resolve(specifier);
+    // Without an exports map, resolve() falls back to Node's full lookup,
+    // NODE_PATH included, so only accept the package's own files.
+    if (!file.startsWith(realpathSync(dirname(manifest)) + sep)) return null;
+    const data = JSON.parse(readFileSync(file, 'utf-8'));
+    if (data === null) return null;
+    const { version } = JSON.parse(readFileSync(manifest, 'utf-8'));
+    return { data, file, source: { kind: 'local', package: packageName, version } };
   } catch {
     return null;
   }
 }
 
-function tryResolveVersion(localRequire: NodeRequire, specifier: string): string | undefined {
+// Walks up from cwd to the first package.json that declares @dialpad/dialtone,
+// so a subfolder stub like {"type": "module"} doesn't hide the app's. It stops
+// at the repository root (.git), so an enclosing project's declaration never
+// applies.
+function findProject(cwd: string): { projectDir: string; spec: string | null } {
+  for (const dir of ancestors(cwd)) {
+    const spec = declaredDialtoneSpec(join(dir, 'package.json'));
+    if (spec !== null) return { projectDir: dir, spec };
+    if (existsSync(join(dir, '.git'))) break;
+  }
+  return { projectDir: cwd, spec: null };
+}
+
+function declaredDialtoneSpec(pkgPath: string): string | null {
   try {
-    const pkgPath = localRequire.resolve(specifier);
     const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
-    return pkg.version;
+    for (const key of ['dependencies', 'devDependencies', 'peerDependencies']) {
+      const spec = pkg[key]?.['@dialpad/dialtone'];
+      if (typeof spec === 'string') return spec;
+    }
+    return null;
   } catch {
-    return undefined;
+    return null;
   }
 }
 
-// Individual packages: @dialpad/dialtone-css, dialtone-vue, dialtone-icons
-function tryIndividualPackages(localRequire: NodeRequire): ResolvedData | null {
-  const utilityClasses = tryResolveAndRead(localRequire, '@dialpad/dialtone-css/lib/dist/dialtone-docs.json');
-  const tokens = tryResolveAndRead(localRequire, '@dialpad/dialtone-css/lib/dist/tokens-docs.json');
-  const components = tryResolveAndRead(localRequire, '@dialpad/dialtone-vue/component-documentation.json');
-  const icons = tryResolveAndRead(localRequire, '@dialpad/dialtone-icons/keywords-icons.json');
-
-  if (utilityClasses && tokens && components && icons) {
-    return {
-      utilityClasses: utilityClasses as UtilityClassesData,
-      tokens: tokens as TokensData,
-      components: components as Component[],
-      icons: icons as IconsData,
-      documentation: bundledDocumentation,
-      source: 'local',
-      version: tryResolveVersion(localRequire, '@dialpad/dialtone-css/package.json'),
-    };
-  }
-  return null;
+// Each domain comes from the first candidate that found it, else from bundled data.
+function assemble(...candidates: Parts[]): ResolvedData {
+  const pick = (domain: keyof Parts) => candidates.map(c => c[domain]).find(Boolean);
+  const [components, utilities, tokens, icons] = [pick('components'), pick('utilities'), pick('tokens'), pick('icons')];
+  return {
+    components: (components?.data as Component[]) ?? bundledComponents,
+    utilityClasses: (utilities?.data as UtilityClassesData) ?? bundledUtilityClasses,
+    tokens: (tokens?.data as TokensData) ?? bundledTokens,
+    icons: (icons?.data as IconsData) ?? bundledIcons,
+    documentation: bundledDocumentation,
+    sources: {
+      components: components?.source ?? BUNDLED,
+      utilities: utilities?.source ?? BUNDLED,
+      tokens: tokens?.source ?? BUNDLED,
+      icons: icons?.source ?? BUNDLED,
+      docs: BUNDLED,
+    },
+    warnings: [],
+  };
 }
 
-// Umbrella package: @dialpad/dialtone
-// The exports map "./*" → "./dist/*" means specifiers omit the "dist/" prefix.
-function tryUmbrellaPackage(localRequire: NodeRequire): ResolvedData | null {
-  const utilityClasses = tryResolveAndRead(localRequire, '@dialpad/dialtone/css/dialtone-docs.json');
-  const tokens = tryResolveAndRead(localRequire, '@dialpad/dialtone/css/tokens-docs.json');
-  const components = tryResolveAndRead(localRequire, '@dialpad/dialtone/vue3/component-documentation.json');
-  // Icons aren't copied to the umbrella dist — fall back to bundled
-  const icons = tryResolveAndRead(localRequire, '@dialpad/dialtone/icons/keywords-icons.json');
-
-  if (utilityClasses && tokens && components) {
-    // Version: read package.json via direct file path since it's not in exports
-    let version: string | undefined;
-    try {
-      const dialtoneDir = localRequire.resolve('@dialpad/dialtone/css/dialtone-docs.json');
-      // Walk up from .../dist/css/dialtone-docs.json to package root
-      const pkgDir = dialtoneDir.replace(/\/dist\/css\/dialtone-docs\.json$/, '');
-      const pkg = JSON.parse(readFileSync(join(pkgDir, 'package.json'), 'utf-8'));
-      version = pkg.version;
-    } catch { /* ignore */ }
-
-    return {
-      utilityClasses: utilityClasses as UtilityClassesData,
-      tokens: tokens as TokensData,
-      components: components as Component[],
-      icons: (icons as IconsData) || bundledIcons,
-      documentation: bundledDocumentation,
-      source: 'local',
-      version,
-    };
-  }
-  return null;
+// The umbrella's exports map "./*" → "./dist/*", so specifiers omit "dist/".
+function umbrellaParts(fromDir: string): Parts {
+  const components = tryRead(fromDir, '@dialpad/dialtone/vue3/component-documentation.json');
+  const utilities = tryRead(fromDir, '@dialpad/dialtone/css/dialtone-docs.json');
+  const tokens = tryRead(fromDir, '@dialpad/dialtone/css/tokens-docs.json');
+  const anchor = anchorOf({ components, utilities, tokens });
+  if (!anchor) return {};
+  // Icons aren't in the umbrella's dist: look for the icons package from the
+  // umbrella's real path, so it's the version the umbrella depends on. Under
+  // pnpm, the umbrella's dependencies sit beside it there, not at the top.
+  const icons = tryRead(dirname(anchor.file), '@dialpad/dialtone-icons/keywords-icons.json');
+  return { components, utilities, tokens, icons };
 }
 
-export function resolveData(forceBundled = false): ResolvedData {
-  if (forceBundled) return BUNDLED;
+function individualParts(fromDir: string): Parts {
+  return {
+    components: tryRead(fromDir, '@dialpad/dialtone-vue/component-documentation.json'),
+    utilities: tryRead(fromDir, '@dialpad/dialtone-css/lib/dist/dialtone-docs.json'),
+    tokens: tryRead(fromDir, '@dialpad/dialtone-css/lib/dist/tokens-docs.json'),
+    icons: tryRead(fromDir, '@dialpad/dialtone-icons/keywords-icons.json'),
+  };
+}
 
-  const localRequire = createRequire(join(process.cwd(), 'package.json'));
+// A single caret, tilde or exact version, e.g. "^10.0.0", "~9.1",
+// "10.0.0-next.10", "10.0.0+build.1". The first group is the major.
+const SIMPLE_VERSION = /^[\^~=v]?(\d+)(\.(\d+|[xX*])){0,2}(-[\w.-]+)?(\+[\w.-]+)?$/;
 
-  // Try individual packages first (most precise version match)
-  const individual = tryIndividualPackages(localRequire);
-  if (individual) return individual;
+// Compares majors only, so no semver dependency is needed. Warns when the
+// installed major matches none of the range's alternatives ("^9 || ^10").
+// Anything that isn't simple versions ("*", "workspace:*", ">=10", "8 - 9")
+// never warns.
+function mismatchWarnings(spec: string, installed: string | undefined): string[] {
+  const majors = spec.split('||').map(a => SIMPLE_VERSION.exec(a.trim())?.[1]);
+  if (majors.includes(undefined)) return [];
+  const have = installed?.match(/\d+/)?.[0];
+  if (!have || majors.includes(have)) return [];
+  return [installWarning(spec, `${installed} is installed`)];
+}
 
-  // Try umbrella package
-  const umbrella = tryUmbrellaPackage(localRequire);
-  if (umbrella) return umbrella;
-
-  return BUNDLED;
+export function resolveData(forceBundled = false, cwd = process.cwd()): ResolvedData {
+  if (forceBundled) return assemble();
+  const { projectDir, spec } = findProject(cwd);
+  if (spec === null) {
+    const individual = individualParts(projectDir);
+    // The umbrella's files are large (~13MB), so skip them when individual
+    // packages cover every domain. Any gap reads all of them.
+    return Object.values(individual).every(Boolean) ? assemble(individual) : assemble(individual, umbrellaParts(projectDir));
+  }
+  const umbrella = umbrellaParts(projectDir);
+  const anchor = anchorOf(umbrella);
+  if (anchor) {
+    return { ...assemble(umbrella), warnings: mismatchWarnings(spec, anchor.source.version) };
+  }
+  return { ...assemble(), warnings: [installWarning(spec, 'no installed copy with lookup data was found')] };
 }
