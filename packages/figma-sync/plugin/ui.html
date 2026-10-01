@@ -30,8 +30,10 @@
   .logo { display: flex; align-items: center; gap: 0.5rem; margin-block-end: 1rem; }
   .logo svg { inline-size: 5.5rem; block-size: auto; }
   .logo span {
-    position: relative;
-    inset-block-start: 0.18rem;
+    /* translateY, not top: Figma's embedded renderer silently ignores
+       inset-block-start, and this repo's pre-commit hook auto-rewrites a
+       physical top back into it — transform isn't in that rewrite map. */
+    transform: translateY(0.18rem);
     font-weight: 600;
     font-size: 0.8125rem;
     color: var(--dt-fg-secondary);
