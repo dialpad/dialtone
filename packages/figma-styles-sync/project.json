@@ -1,5 +1,5 @@
 {
-  "name": "figma-sync",
+  "name": "figma-styles-sync",
   "targets": {
     "lint": {
       "executor": "nx:run-commands",

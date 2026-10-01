@@ -1,15 +1,21 @@
-# @dialpad/dialtone-figma-sync
+# @dialpad/dialtone-figma-styles-sync
 
-Writes Dialtone styles and components into Figma. Unlike `dialtone-tokens`'
-variables sync, which posts to Figma's REST API, styles and components have
-no write endpoint — Figma only exposes `createTextStyle()`, `createEffectStyle()`
-and `createPaintStyle()` through the Plugin API, so this package builds a
-Figma plugin rather than a script.
+Writes Dialtone text, effect, and paint styles into Figma. Unlike
+`dialtone-tokens`' variables sync, which posts to Figma's REST API, styles
+have no write endpoint — Figma only exposes `createTextStyle()`,
+`createEffectStyle()` and `createPaintStyle()` through the Plugin API, so
+this package builds a Figma plugin rather than a script.
 
 Lives separately from `packages/dialtone-tokens/` because it depends on
 `dialtone-vue` (to measure real rendered components), and the dependency
 graph runs `dialtone-tokens → dialtone-css → dialtone-vue` — keeping it in
 `dialtone-tokens` would create a cycle.
+
+Component variant sets are a separate package,
+[`@dialpad/dialtone-figma-components-sync`](../figma-components-sync/README.md)
+— the measurement and construction pipeline there is heavier (a full
+provenance-verified variant build per component) and deserves its own
+build/test/release surface rather than sharing this one.
 
 ## Structure
 

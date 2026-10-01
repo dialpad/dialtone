@@ -976,7 +976,7 @@ importers:
         specifier: '>=9'
         version: 10.4.0(eslint@9.39.4(jiti@1.21.7))
 
-  packages/figma-sync:
+  packages/figma-styles-sync:
     dependencies:
       '@dialpad/dialtone-tokens':
         specifier: workspace:*
