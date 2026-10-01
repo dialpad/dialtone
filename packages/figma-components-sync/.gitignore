@@ -1,0 +1,4 @@
+build-data/
+.env
+sync-scripts/figma-plugin/code.js
+node_modules

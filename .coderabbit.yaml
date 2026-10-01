@@ -269,6 +269,32 @@ reviews:
         - Credentials (Figma PAT, file key) belong in a gitignored .env, never inline
           or in a commit. Flag any literal token/key.
 
+    # Figma components sync (full component variant sets — browser-measured via CDP,
+    # not a token lookup; ported from an uncommitted spike, see its README's
+    # Provenance section)
+    - path: 'packages/figma-components-sync/**'
+      instructions: >
+        - Not in CI — needs a real browser, a Figma PAT, and a scratch file; changes
+          can't be verified by a type check alone. Look for evidence a change was
+          re-run through check-all.mjs/negative-control.mjs, not just that it parses.
+
+        - sync-scripts/generic-builder.js, icon-builder.js, and slot-properties.js are
+          fragments inlined into a generated plugin code.js by build-plugin.mjs — never
+          hand-edit code.js, and a bare top-level `return` in these three is intentional,
+          not a bug.
+
+        - sync-scripts/superseded/** is retired-on-purpose (see its own README for what
+          replaced each file and why) — don't suggest reviving or importing from it.
+
+        - Don't suggest duplicating color.ts, token_*.ts, transform.ts, utils.ts, or
+          figma_api.ts here — the real versions live in
+          packages/dialtone-tokens/sync-scripts/ and nothing in this package imports
+          them today, so there's no reason to add a second copy.
+
+        - Credentials (Figma PAT, file key) belong in a gitignored .env, never inline
+          or in a commit. Flag any literal token/key — this package's own predecessor
+          leaked two PATs into a chat transcript, which is why this rule exists.
+
     # CI workflows
     - path: '.github/workflows/**'
       instructions: >

@@ -1,0 +1,204 @@
+/**
+ * Component coordinate spaces, shared by the verifier, the spec builder and the
+ * provenance audit. Axes come from the PROP API (component-documentation.json plus
+ * the .vue props block), never from <Name>Constants.js, whose keys are CSS modifier
+ * names and not prop values.
+ */
+const BUILT_IN = {
+  badge: {
+    component: 'DtBadge', label: 'Badge', page: 'Badge', figmaSetId: '286:6666', figmaMergedSetId: '252:113178',
+    axes: {
+      type: ['default','info','positive','warning','critical','bulletin','ai'],
+      kind: ['label','count'], subtle: [false,true], outlined: [false,true],
+      decoration: ['','black-400','black-500','black-900','red-200','red-300','red-400',
+        'purple-200','purple-300','purple-400','purple-500','blue-200','blue-300','blue-400',
+        'green-300','green-400','green-500','gold-300','gold-400','gold-500',
+        'magenta-200','magenta-300','magenta-400'],
+    },
+    invalid: c => (c.type === 'ai' && c.kind === 'count')
+      || (c.subtle === true && c.type !== 'bulletin')
+      || (c.decoration !== '' && (c.kind !== 'label' || c.type !== 'default')),
+    variantName: c => `type=${c.type}, kind=${c.kind}, subtle=${c.subtle}, outlined=${c.outlined}, decoration=${c.decoration || 'none'}`,
+    props: c => ({ type: c.type, kind: c.kind, subtle: c.subtle, outlined: c.outlined, ...(c.decoration ? { decoration: c.decoration } : {}) }),
+    // Which slots a MERGED build fills for its second render. The nodes behind a BOOLEAN
+    // component property default to false, so nothing else ever renders them (B-11).
+    // `--merged` is what checks them, in both states.
+    slotPass: ['startIcon', 'endIcon'],
+    // DtBadge rejects `decoration` together with either icon slot, so the slot pass
+    // has to exclude decorated variants on top of the ordinary invalid rules.
+    slotInvalid: c => c.decoration !== '',
+  },
+  link: {
+    component: 'DtLink', label: 'Link', page: 'Link', figmaSetId: '286:7009',
+    axes: {
+      tone: ['default','critical','warning','positive','info','muted','mention','unstyled'],
+      inverted: [false, true],
+      underline: [true, false],
+      state: ['default','hover','active','focus'],
+    },
+    // `unstyled` returns early from getLinkClasses() with exactly
+    // ['d-link--unstyled'], so inverted and underline have no effect and the base
+    // .d-link:hover / :active rules cannot match it.
+    invalid: c => (c.tone === 'unstyled' && (c.inverted === true || c.underline === false))
+      || (c.tone === 'unstyled' && ['hover','active'].includes(c.state)),
+    variantName: c => `tone=${c.tone}, inverted=${c.inverted}, underline=${c.underline}, state=${c.state}`,
+    props: c => ({ tone: c.tone === 'default' ? '' : c.tone, inverted: c.inverted, underline: c.underline, href: '#' }),
+    pseudo: c => (c.state === 'default' ? [] : c.state === 'focus' ? ['focus-visible'] : [c.state]),
+  },
+  toggle: {
+    component: 'DtToggle', label: 'Toggle', page: 'Toggle', figmaSetId: '286:7394',
+    axes: {
+      // modelValue looks boolean but is TRI-state; 'mixed' drives
+      // d-toggle--indeterminate and switches role to checkbox.
+      modelValue: [false, true, 'mixed'],
+      size: [200, 300],
+      disabled: [false, true],
+      // Booleans that gate real child elements. Kept as variant axes rather than
+      // Figma component properties so the verifier actually covers both states —
+      // a component property's non-default value is never swept (see B-11).
+      showIcon: [true, false],
+      showLabel: [true, false],
+      state: ['default', 'focus'],
+    },
+    // a native <button disabled> cannot receive focus
+    invalid: c => (c.disabled === true && c.state === 'focus'),
+    variantName: c => `modelValue=${c.modelValue}, size=${c.size}, disabled=${c.disabled}, showIcon=${c.showIcon}, showLabel=${c.showLabel}, state=${c.state}`,
+    props: c => ({ modelValue: c.modelValue, size: Number(c.size), disabled: c.disabled, showIcon: c.showIcon, showLabel: c.showLabel }),
+    pseudo: c => (c.state === 'focus' ? ['focus-visible'] : []),
+    // The focusable element is the inner <button class="d-toggle">, NOT the root
+    // wrapper div. Forcing :focus-visible on the root made `.d-toggle:focus-visible`
+    // never match, so the focus ring — which the CSS puts on `.d-toggle::after` —
+    // was silently absent.
+    stateTarget: '.d-toggle',
+    // .d-toggle-wrapper is display:flex with NO gap of its own — measured, the label's
+    // right edge and the track's left edge are the same coordinate. Every Dialtone doc
+    // example passes a spacing class, so the library depicts that rather than a render
+    // nobody ships. See D-15.
+    rootClass: 'd-g-200',
+  },
+  chip: {
+    component: 'DtChip', label: 'Chip', page: 'Chip', figmaSetId: '286:14642',
+    axes: {
+      size: [100, 200, 300],
+      disabled: [false, true],
+      showClose: [true, false],
+      // No prop behind this: the `icon` and `avatar` slots are mutually exclusive
+      // (v-else-if) and each changes real geometry, so it is a real visual axis.
+      leading: ['none', 'icon', 'avatar'],
+      // Label states and CLOSE-BUTTON states are separate: the close button's
+      // hover/active/focus rules are NOT gated on `interactive`, so they are
+      // reachable on a static chip that merely has a close button.
+      state: ['default', 'hover', 'active', 'focus', 'closeHover', 'closeActive', 'closeFocus'],
+    },
+    // `interactive` is deliberately NOT an axis. Measured across all 36 remaining
+    // combinations, interactive=false and interactive=true are byte-identical at
+    // rest — same computed styles, same boxes, same children. Its only effects are
+    // the element tag, the cursor, and enabling the label's interaction states.
+    // Including it would put 36 pairs of pixel-identical variants in the picker.
+    invalid: c => {
+      const labelState = ['hover', 'active', 'focus'].includes(c.state);
+      const closeState = c.state.startsWith('close');
+      if (labelState && c.disabled === true) return true;          // pointer-events: none
+      if (closeState && (c.disabled === true || c.showClose === false)) return true;
+      return false;
+    },
+    variantName: c => `size=${c.size}, disabled=${c.disabled}, showClose=${c.showClose}, leading=${c.leading}, state=${c.state}`,
+    // interactive is forced true whenever a label state is under test, since that is
+    // the only way the state is reachable at all.
+    props: c => ({
+      size: Number(c.size),
+      disabled: c.disabled,
+      showClose: c.showClose,
+      interactive: ['hover', 'active', 'focus'].includes(c.state),
+    }),
+    slots: c => (c.leading === 'none' ? [] : [c.leading]),
+    // A pointer press cannot happen without hover, so `active` means hover+active.
+    // It is not cosmetic: on the close button, :active alone paints a purple glyph
+    // while hover+active paints near-black, because .d-chip__close:hover and :active
+    // have identical specificity and hover is later in source. :active alone is only
+    // reachable by keyboard (Space/Enter on a focused button) — a real but far rarer
+    // state, deliberately not given its own variant.
+    pseudo: (c) => {
+      const map = { hover: ['hover'], active: ['hover', 'active'], focus: ['focus-visible'],
+                    closeHover: ['hover'], closeActive: ['hover', 'active'], closeFocus: ['focus-visible'] };
+      return map[c.state] || [];
+    },
+    // The state lands on different elements depending on which one is under test —
+    // forcing it on the wrong element makes the rule never match at all (B-22).
+    stateTarget: c => (c.state.startsWith('close') ? '.d-chip__close' : '.d-chip__label'),
+  },
+  button: {
+    component: 'DtButton', label: 'Button', page: 'Button', figmaSetId: '286:48418',
+    /**
+     * SLOT PRESENCE IS A VARIANT AXIS HERE, not a BOOLEAN component property.
+     *
+     * `button.less` reduces horizontal padding when an icon is present, so the optical
+     * spacing stays even — every one of the 560 combinations differs, by 2px a side, and
+     * some change `itemSpacing` too. No Figma component property can change a frame's
+     * padding, so a single variant carrying its icons behind a toggle is wrong in one of the
+     * two states whichever padding it is given. Measured as a merged set it produced 2,660
+     * findings; the guard in build-spec now refuses that build outright.
+     *
+     * As an axis, each state is measured in its own right and is exact. Figma renders a
+     * two-value variant property as a control that reads much like a toggle, so almost
+     * nothing is lost in use — and the two SINGLE-icon combinations, which `slotPass` could
+     * never produce because it fills every slot at once, exist for the first time.
+     *
+     * DtBadge keeps the BOOLEAN model: its padding does not respond to its icons, which the
+     * merged pass confirms with 0 findings in both states.
+     */
+    axes: {
+      kind: ['default','muted','critical','positive','inverted'],
+      importance: ['clear','outlined','primary'],
+      size: [100,200,300,400,500],
+      // Figma variant value is 'focus'; the CSS pseudo-class is ':focus-visible'
+      state: ['default','hover','active','focus','disabled'],
+      loading: [false,true],
+      startIcon: [false, true],
+      endIcon: [false, true],
+    },
+    // muted/primary is rejected by the component; hover and active are not
+    // reachable while loading because the button is pointer-events:none.
+    // Icons are NOT excluded while loading: measured, both render — the spinner sits
+    // alongside them rather than replacing them.
+    invalid: c => (c.kind === 'muted' && c.importance === 'primary')
+      || (c.loading === true && ['hover','active'].includes(c.state)),
+    variantName: c => `kind=${c.kind}, importance=${c.importance}, size=${c.size}, state=${c.state}, `
+      + `loading=${c.loading}, startIcon=${c.startIcon}, endIcon=${c.endIcon}`,
+    props: c => ({
+      kind: c.kind, importance: c.importance, size: Number(c.size),
+      ...(c.state === 'active' ? { active: true } : {}),
+      ...(c.state === 'disabled' ? { disabled: true } : {}),
+      ...(c.loading ? { loading: true } : {}),
+    }),
+    // Which named slots this variant fills. The ordinary sweep reads this, so no second
+    // build and no merge is involved at all.
+    slots: c => [...(c.startIcon ? ['startIcon'] : []), ...(c.endIcon ? ['endIcon'] : [])],
+    // only these two need the CDP override; active/disabled are class-driven
+    pseudo: c => (c.state === 'hover' ? ['hover'] : c.state === 'focus' ? ['focus-visible'] : []),
+    // No `slotPass`: slot presence is swept above, so the two-set path and the merged path
+    // are both redundant here. The old sets (223:10810, 241:41867) are superseded.
+  },
+};
+
+// Per-component configs live in ./configs/<name>.mjs so that several agents can add
+// components in parallel without ever editing the same file. Each module default-
+// exports a single config object and is discovered at runtime.
+import { readdirSync } from 'fs';
+import { fileURLToPath, pathToFileURL } from 'url';
+import { dirname, join } from 'path';
+
+const CONFIG_DIR = join(dirname(fileURLToPath(import.meta.url)), 'configs');
+const discovered = {};
+let files = [];
+try { files = readdirSync(CONFIG_DIR).filter(f => f.endsWith('.mjs')); } catch { /* none yet */ }
+for (const f of files.sort()) {
+  const mod = await import(pathToFileURL(join(CONFIG_DIR, f)).href);
+  const cfg = mod.default;
+  if (!cfg || !cfg.component) throw new Error(`configs/${f} must default-export a config with a \`component\` field`);
+  const key = cfg.key || f.replace(/\.mjs$/, '');
+  if (BUILT_IN[key]) throw new Error(`configs/${f} collides with the built-in "${key}"`);
+  discovered[key] = cfg;
+}
+
+export const COMPONENTS = { ...BUILT_IN, ...discovered };
