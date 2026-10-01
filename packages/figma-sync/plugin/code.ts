@@ -25,6 +25,7 @@ interface TextStyleSpec {
 interface CreateTextStylesResult {
   created: string[];
   updated: string[];
+  unchanged: string[];
   errors: { name: string; error: string }[];
   totalStyles: number;
 }
@@ -35,6 +36,25 @@ const TEXT_CASE: Record<string, TextCase> = {
   lowercase: 'LOWER',
   capitalize: 'TITLE',
 };
+
+interface TextStyleFingerprintInput {
+  fontFamily: string;
+  fontStyleName: string;
+  fontSizeVar: string | null;
+  fontWeightVar: string | null;
+  fontFamilyVar: string | null;
+  lineHeight: LineHeight;
+  textCase: TextCase;
+}
+
+/** Shared by every style kind's fingerprint: a bound field's variable id, or null. */
+function boundVarId (bv: Record<string, VariableAlias | undefined> | undefined, field: string): string | null {
+  return bv?.[field]?.id ?? null;
+}
+
+function textStyleFingerprint (input: TextStyleFingerprintInput): string {
+  return JSON.stringify(input);
+}
 
 /**
  * lineHeight cannot bind: confirmed directly against a live file that Figma
@@ -56,6 +76,7 @@ async function createTextStyles (specs: TextStyleSpec[]): Promise<CreateTextStyl
 
   const created: string[] = [];
   const updated: string[] = [];
+  const unchanged: string[] = [];
   const errors: CreateTextStylesResult['errors'] = [];
 
   for (const spec of specs) {
@@ -63,6 +84,17 @@ async function createTextStyles (specs: TextStyleSpec[]): Promise<CreateTextStyl
       let style = styleByName.get(spec.name);
       const isNew = !style;
       if (!style) style = figma.createTextStyle();
+
+      const before = isNew ? null : textStyleFingerprint({
+        fontFamily: style.fontName.family,
+        fontStyleName: style.fontName.style,
+        fontSizeVar: boundVarId(style.boundVariables, 'fontSize'),
+        fontWeightVar: boundVarId(style.boundVariables, 'fontWeight'),
+        fontFamilyVar: boundVarId(style.boundVariables, 'fontFamily'),
+        lineHeight: style.lineHeight,
+        textCase: style.textCase,
+      });
+
       style.name = spec.name;
 
       // Baseline before binding, so setBoundVariable('fontWeight', …) has a
@@ -87,13 +119,26 @@ async function createTextStyles (specs: TextStyleSpec[]): Promise<CreateTextStyl
 
       style.textCase = TEXT_CASE[spec.textCase] ?? 'ORIGINAL';
 
-      (isNew ? created : updated).push(style.name);
+      if (isNew) {
+        created.push(style.name);
+      } else {
+        const after = textStyleFingerprint({
+          fontFamily: spec.figmaFamily,
+          fontStyleName: spec.fontStyleName,
+          fontSizeVar: sizeVar.id,
+          fontWeightVar: weightVar.id,
+          fontFamilyVar: famVar.id,
+          lineHeight: style.lineHeight,
+          textCase: style.textCase,
+        });
+        (before === after ? unchanged : updated).push(style.name);
+      }
     } catch (e) {
       errors.push({ name: spec.name, error: String(e) });
     }
   }
 
-  return { created, updated, errors, totalStyles: (await figma.getLocalTextStylesAsync()).length };
+  return { created, updated, unchanged, errors, totalStyles: (await figma.getLocalTextStylesAsync()).length };
 }
 
 const EFFECT_BINDABLE_FIELDS = ['blur', 'color', 'offsetX', 'offsetY', 'spread'] as const;
@@ -112,6 +157,7 @@ interface EffectStyleSpec {
 interface CreateEffectStylesResult {
   created: string[];
   updated: string[];
+  unchanged: string[];
   errors: { name: string; error: string }[];
   totalStyles: number;
 }
@@ -124,6 +170,55 @@ const EFFECT_FIELD_TO_API: Record<EffectBindableField, VariableBindableEffectFie
   offsetY: 'offsetY',
   spread: 'spread',
 };
+
+/**
+ * Comparing `JSON.stringify` of a style's own `.effects`/`.paints` directly
+ * against a freshly-built literal is unreliable two ways: Figma hands back
+ * its own key order on read, which can differ from the literal's insertion
+ * order with identical values, and a value that round-tripped through Figma's
+ * storage can lose float precision our freshly-computed number still has —
+ * confirmed directly: a literal gradient stop's red channel came back from
+ * storage as 0.8274314999…, 3e-8 under our computed 0.8274315283…, close
+ * enough to flip which side of a 6-decimal rounding boundary each landed on
+ * and register as "changed" every run. Rebuilding both sides through the same
+ * normalizer — fixed key order, floats rounded to 4 decimals rather than 6 —
+ * clears that noise with a wide margin while still catching any real change,
+ * which differs by orders of magnitude more than storage round-trip noise.
+ */
+function round4 (n: number): number {
+  return Math.round(n * 1e4) / 1e4;
+}
+
+function roundColor (c: RGBA): RGBA {
+  return { r: round4(c.r), g: round4(c.g), b: round4(c.b), a: round4(c.a) };
+}
+
+// We only ever build DROP_SHADOW/INNER_SHADOW effects, so color/offset/
+// radius/spread are always present — no need to guard per field.
+function normalizeEffect (e: Effect) {
+  const shadow = e as Effect & { color: RGBA; offset: Vector; radius: number; spread?: number };
+  const bv = shadow.boundVariables;
+  return {
+    type: shadow.type,
+    visible: shadow.visible,
+    blendMode: shadow.blendMode,
+    color: roundColor(shadow.color),
+    offset: { x: round4(shadow.offset.x), y: round4(shadow.offset.y) },
+    radius: round4(shadow.radius),
+    spread: round4(shadow.spread ?? 0),
+    boundVariables: {
+      color: boundVarId(bv, 'color'),
+      radius: boundVarId(bv, 'radius'),
+      offsetX: boundVarId(bv, 'offsetX'),
+      offsetY: boundVarId(bv, 'offsetY'),
+      spread: boundVarId(bv, 'spread'),
+    },
+  };
+}
+
+function effectsFingerprint (effects: readonly Effect[]): string {
+  return JSON.stringify(effects.map(normalizeEffect));
+}
 
 /**
  * Every field here has a real variable — none of these are set as literals,
@@ -140,6 +235,7 @@ async function createEffectStyles (specs: EffectStyleSpec[]): Promise<CreateEffe
 
   const created: string[] = [];
   const updated: string[] = [];
+  const unchanged: string[] = [];
   const errors: CreateEffectStylesResult['errors'] = [];
 
   for (const spec of specs) {
@@ -147,6 +243,7 @@ async function createEffectStyles (specs: EffectStyleSpec[]): Promise<CreateEffe
       let style = styleByName.get(spec.name);
       const isNew = !style;
       if (!style) style = figma.createEffectStyle();
+      const before = isNew ? null : effectsFingerprint(style.effects);
       style.name = spec.name;
 
       const effects: Effect[] = spec.layers.map(layer => {
@@ -169,13 +266,14 @@ async function createEffectStyles (specs: EffectStyleSpec[]): Promise<CreateEffe
       });
 
       style.effects = effects;
-      (isNew ? created : updated).push(style.name);
+      if (isNew) created.push(style.name);
+      else (before === effectsFingerprint(effects) ? unchanged : updated).push(style.name);
     } catch (e) {
       errors.push({ name: spec.name, error: String(e) });
     }
   }
 
-  return { created, updated, errors, totalStyles: (await figma.getLocalEffectStylesAsync()).length };
+  return { created, updated, unchanged, errors, totalStyles: (await figma.getLocalEffectStylesAsync()).length };
 }
 
 interface GradientStopSpec {
@@ -193,6 +291,7 @@ interface PaintStyleSpec {
 interface CreatePaintStylesResult {
   created: string[];
   updated: string[];
+  unchanged: string[];
   errors: { name: string; error: string }[];
   totalStyles: number;
 }
@@ -214,6 +313,30 @@ function gradientTransform (angleDeg: number): Transform {
   ];
 }
 
+function normalizeColorStop (s: ColorStop) {
+  return {
+    position: round4(s.position),
+    color: roundColor(s.color),
+    boundColor: boundVarId(s.boundVariables, 'color'),
+  };
+}
+
+function normalizePaint (p: Paint) {
+  if (p.type !== 'GRADIENT_LINEAR') return p;
+  return {
+    type: p.type,
+    visible: p.visible,
+    opacity: round4(p.opacity ?? 1),
+    blendMode: p.blendMode,
+    gradientTransform: p.gradientTransform.map(row => row.map(round4)),
+    gradientStops: p.gradientStops.map(normalizeColorStop),
+  };
+}
+
+function paintsFingerprint (paints: readonly Paint[]): string {
+  return JSON.stringify(paints.map(normalizePaint));
+}
+
 /**
  * A bound stop still needs a literal `color` alongside `boundVariables` —
  * Figma has no dedicated `setBoundVariableForColorStop` helper, so the alias
@@ -228,6 +351,7 @@ async function createPaintStyles (specs: PaintStyleSpec[]): Promise<CreatePaintS
 
   const created: string[] = [];
   const updated: string[] = [];
+  const unchanged: string[] = [];
   const errors: CreatePaintStylesResult['errors'] = [];
 
   for (const spec of specs) {
@@ -235,6 +359,7 @@ async function createPaintStyles (specs: PaintStyleSpec[]): Promise<CreatePaintS
       let style = styleByName.get(spec.name);
       const isNew = !style;
       if (!style) style = figma.createPaintStyle();
+      const before = isNew ? null : paintsFingerprint(style.paints);
       style.name = spec.name;
 
       const stops: ColorStop[] = spec.stops.map(stop => {
@@ -253,7 +378,7 @@ async function createPaintStyles (specs: PaintStyleSpec[]): Promise<CreatePaintS
         return { position: stop.position, color: { r: c.r, g: c.g, b: c.b, a: c.a ?? 1 } };
       });
 
-      style.paints = [{
+      const paints: Paint[] = [{
         type: 'GRADIENT_LINEAR',
         gradientTransform: gradientTransform(spec.angleDeg),
         gradientStops: stops,
@@ -261,22 +386,28 @@ async function createPaintStyles (specs: PaintStyleSpec[]): Promise<CreatePaintS
         opacity: 1,
         blendMode: 'NORMAL',
       }];
+      style.paints = paints;
 
-      (isNew ? created : updated).push(style.name);
+      if (isNew) created.push(style.name);
+      else (before === paintsFingerprint(paints) ? unchanged : updated).push(style.name);
     } catch (e) {
       errors.push({ name: spec.name, error: String(e) });
     }
   }
 
-  return { created, updated, errors, totalStyles: (await figma.getLocalPaintStylesAsync()).length };
+  return { created, updated, unchanged, errors, totalStyles: (await figma.getLocalPaintStylesAsync()).length };
 }
 
-figma.showUI(__html__, { width: 360, height: 420 });
+figma.showUI(__html__, { width: 360, height: 400 });
 
 figma.ui.onmessage = async (msg: {
   type: string;
   specs?: TextStyleSpec[] | EffectStyleSpec[] | PaintStyleSpec[];
 }) => {
+  if (msg.type === 'close') {
+    figma.closePlugin();
+    return;
+  }
   try {
     if (msg.type === 'run-text-styles') {
       const result = await createTextStyles((msg.specs ?? []) as TextStyleSpec[]);
