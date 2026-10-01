@@ -91,7 +91,8 @@ function tryRead(fromDir: string, specifier: string): Found | null {
   if (!manifest) return null;
   try {
     // Resolving the package's own name from inside it applies its exports map.
-    const file = createRequire(manifest).resolve(specifier);
+    // The real path keeps the check below valid when Node preserves symlinks.
+    const file = realpathSync(createRequire(manifest).resolve(specifier));
     // Without an exports map, resolve() falls back to Node's full lookup,
     // NODE_PATH included, so only accept the package's own files.
     if (!file.startsWith(realpathSync(dirname(manifest)) + sep)) return null;
