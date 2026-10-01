@@ -3,57 +3,308 @@
 <head>
 <meta charset="utf-8">
 <style>
-  body { font: 12px -apple-system, sans-serif; margin: 0; padding: 12px; color: #1c1c1c; }
-  button { inline-size: 100%; padding: 8px; margin-block-end: 8px; cursor: pointer; }
-  #log { white-space: pre-wrap; font-family: ui-monospace, monospace; font-size: 11px; line-height: 1.5; }
-  .ok { color: #0a7c2f; }
-  .err { color: #c0392b; }
+  :root {
+    --dt-brand: #7C52FF;
+    --dt-fg-primary: #1C1C1C;
+    --dt-fg-secondary: #3A3A3A;
+    --dt-surface: #FFFFFF;
+    --dt-surface-secondary: #F9F9F9;
+    --dt-border: rgba(28, 28, 28, 0.17);
+    --dt-radius-md: 0.8rem;
+    --dt-font: -apple-system, BlinkMacSystemFont, "SF Pro", "Segoe UI Adjusted", "Segoe UI", SFMono,
+      "Helvetica Neue", Cantarell, Ubuntu, Roboto, Arial, "Noto Sans", sans-serif, "Apple Color Emoji",
+      "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --dt-font-mono: SFMono-Regular, "SF Mono", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+    font-size: 16px;
+  }
+  * { box-sizing: border-box; }
+  html, body { block-size: 100%; }
+  body {
+    font: 0.75rem/1.4 var(--dt-font);
+    margin: 0;
+    padding: 1rem;
+    overflow-y: auto;
+    color: var(--dt-fg-primary);
+    background: var(--dt-surface);
+  }
+  .logo { display: flex; align-items: center; gap: 0.5rem; margin-block-end: 1rem; }
+  .logo svg { inline-size: 5.5rem; block-size: auto; }
+  .logo span {
+    position: relative;
+    inset-block-start: 0.18rem;
+    font-weight: 600;
+    font-size: 0.8125rem;
+    color: var(--dt-fg-secondary);
+  }
+  .intro {
+    margin: 0 0 1rem;
+    color: var(--dt-fg-secondary);
+  }
+  button {
+    inline-size: 100%;
+    padding: 0.5rem 0.75rem;
+    margin-block-end: 0.5rem;
+    cursor: pointer;
+    font: inherit;
+    font-weight: 600;
+    border-radius: var(--dt-radius-md);
+    border: 1px solid var(--dt-border);
+    background: var(--dt-surface);
+    color: var(--dt-fg-primary);
+    transition: background-color 0.1s ease, border-color 0.1s ease;
+  }
+  button:hover:not(:disabled) { background: var(--dt-surface-secondary); }
+  button:disabled { opacity: 0.5; cursor: not-allowed; }
+  button#run-all {
+    margin-block-start: 0.5rem;
+    background: var(--dt-brand);
+    border-color: var(--dt-brand);
+    color: #FFFFFF;
+  }
+  button#run-all:hover:not(:disabled) { background: #6a42e0; }
+  #log {
+    white-space: pre-wrap;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    margin-block-start: 0.5rem;
+    color: var(--dt-fg-secondary);
+  }
+  #log code {
+    white-space: nowrap;
+    font-family: var(--dt-font-mono);
+    font-size: 0.6875rem;
+    color: #5c5c5c;
+    background: var(--dt-surface-secondary);
+    border: 1px solid var(--dt-border);
+    border-radius: 0.3rem;
+    padding: 0.05rem 0.3rem;
+  }
+  .results-intro { margin: 0 0 1rem; color: var(--dt-fg-secondary); }
+  .result-item { margin-block-end: 1rem; }
+  .result-item__header { display: flex; align-items: center; gap: 0.5rem; margin-block-end: 0.25rem; }
+  .result-item__label { font-weight: 600; }
+  .result-item__detail { margin: 0; color: var(--dt-fg-secondary); }
+  .result-item__detail.err { color: #c0392b; }
+  .result-item__errors {
+    margin: 0.4rem 0 0;
+    padding-inline-start: 1.1rem;
+    color: #c0392b;
+  }
+  .result-item__errors li { margin-block-end: 0.25rem; }
+  .result-item__errors code {
+    font-family: var(--dt-font-mono);
+    font-size: 0.6875rem;
+    color: #5c5c5c;
+    background: var(--dt-surface-secondary);
+    border: 1px solid var(--dt-border);
+    border-radius: 0.3rem;
+    padding: 0.05rem 0.3rem;
+  }
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.1rem 0.5rem;
+    border-radius: 1rem;
+    font-size: 0.625rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+  .badge.ok { background: rgba(10, 124, 47, 0.12); color: #0a7c2f; }
+  .badge.err { background: rgba(192, 57, 43, 0.12); color: #c0392b; }
+  .actions { display: flex; gap: 0.5rem; margin-block-start: 1rem; }
+  .actions button { margin-block-end: 0; }
 </style>
 </head>
 <body>
-  <button id="run-text" data-type="run-text-styles" data-url="text-styles.json">Sync text styles</button>
-  <button id="run-effect" data-type="run-effect-styles" data-url="effect-styles.json">Sync effect styles</button>
-  <button id="run-paint" data-type="run-paint-styles" data-url="paint-styles.json">Sync paint styles</button>
-  <div id="log">Fetches each spec from the local dev server (run <code>pnpm sync:styles:serve</code> first), then builds every style of that kind in this file.</div>
+  <div class="logo">
+    <svg width="110" height="38" viewBox="0 0 110 38" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20.9624 31.993C16.445 31.993 13.2 28.3477 13.2 23.3593C13.2 18.371 16.445 14.7576 20.9624 14.7576C23.0621 14.7576 25.0664 15.8129 25.9571 17.1878V8.29835H29.6475V31.6733H25.9571V29.5308C25.0664 30.9058 23.0621 31.993 20.9624 31.993ZM21.5669 28.7634C23.9529 28.7634 25.7344 26.9087 25.9571 24.3826V22.2721C25.7344 19.746 23.9529 17.9873 21.5669 17.9873C18.8946 17.9873 16.9858 20.1297 16.9858 23.3274C16.9858 26.525 18.8946 28.7634 21.5669 28.7634Z" fill="#1C1C1C"/>
+      <path d="M35.5531 31.6733H31.831V15.0774H35.5531V31.6733ZM33.6443 12.807C32.34 12.807 31.3538 11.7838 31.3538 10.4728C31.3538 9.19369 32.34 8.17044 33.6443 8.17044C35.0123 8.17044 36.0303 9.19369 36.0303 10.4728C36.0303 11.7838 35.0123 12.807 33.6443 12.807Z" fill="#1C1C1C"/>
+      <path d="M57.4412 31.6733H53.7191V8.29835H57.4412V31.6733Z" fill="#1C1C1C"/>
+      <path d="M59.7069 37.6529V15.0774H63.4291V17.2198C64.288 15.8448 66.2923 14.7576 68.4874 14.7576C72.9412 14.7576 76.1862 18.403 76.1862 23.3913C76.1862 28.3797 72.9412 31.993 68.4237 31.993C66.2923 31.993 64.288 30.9058 63.4291 29.5308V37.6529H59.7069ZM67.8193 28.7634C70.4598 28.7634 72.4004 26.6209 72.4004 23.4233C72.4004 20.2256 70.4598 17.9873 67.8829 17.9873C65.4015 17.9873 63.6518 19.8419 63.4291 22.3681V24.4785C63.6199 27.0047 65.4015 28.7634 67.8193 28.7634Z" fill="#1C1C1C"/>
+      <path d="M101.315 31.993C96.7975 31.993 93.5526 28.3477 93.5526 23.3593C93.5526 18.371 96.7975 14.7576 101.315 14.7576C103.415 14.7576 105.419 15.8129 106.31 17.1878V8.29835H110V31.6733H106.31V29.5308C105.419 30.9058 103.415 31.993 101.315 31.993ZM101.919 28.7634C104.305 28.7634 106.087 26.9087 106.31 24.3826V22.2721C106.087 19.746 104.305 17.9873 101.919 17.9873C99.2471 17.9873 97.3383 20.1297 97.3383 23.3274C97.3383 26.525 99.2471 28.7634 101.919 28.7634Z" fill="#1C1C1C"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M77.4333 27.1646C77.4333 29.9465 79.8511 31.993 83.1915 31.993C84.9731 31.993 86.8182 31.3215 88.0271 29.4988V31.6733H91.7175V20.9291C91.7175 17.0599 88.9179 14.7576 84.814 14.7576C80.7958 14.7576 78.4855 16.9955 77.7039 19.4901L81.2343 19.9549C81.747 18.5754 82.9114 17.6355 84.814 17.6355C86.6592 17.6355 88.0271 18.7227 88.0271 20.7053V21.2809L83.2233 21.9843C79.5966 22.496 77.4333 24.2547 77.4333 27.1646ZM83.8278 29.2111C82.2371 29.2111 81.2191 28.2518 81.2191 27.0047C81.2191 25.6616 82.1417 24.9262 83.8278 24.6384L88.0271 23.9029V25.9175C87.4545 27.6442 86.0547 29.2111 83.8278 29.2111Z" fill="#1C1C1C"/>
+      <path fill-rule="evenodd" clip-rule="evenodd" d="M37.2483 27.1645C37.2483 29.9464 39.6661 31.9929 43.0065 31.9929C44.7881 31.9929 46.6332 31.3214 47.8421 29.4988V31.6732H51.5325V20.929C51.5325 17.0599 48.7329 14.7576 44.629 14.7576C40.6108 14.7576 38.3005 16.9954 37.5189 19.4901L41.0493 19.9548C41.562 18.5754 42.7264 17.6354 44.629 17.6354C46.4742 17.6354 47.8421 18.7227 47.8421 20.7052V21.2808L43.0383 21.9843C39.4116 22.4959 37.2483 24.2546 37.2483 27.1645ZM43.6428 29.211C42.0521 29.211 41.0341 28.2517 41.0341 27.0046C41.0341 25.6616 41.9567 24.9261 43.6428 24.6383L47.8421 23.9029V25.9174C47.2695 27.6441 45.8697 29.211 43.6428 29.211Z" fill="#1C1C1C"/>
+      <path d="M16.7963 8.12782C17.0327 8.18068 17.0795 8.56646 16.8585 8.66699C12.5926 10.1191 9.23484 13.8317 7.48158 18.774C7.38563 19.0136 6.96469 18.9558 6.92513 18.7001C6.32538 14.8238 3.64729 11.7289 0.197235 10.8938C-0.0313905 10.8385 -0.074564 10.4793 0.138252 10.3776C4.51838 8.57543 7.8103 4.87854 9.33139 0.155355C9.42639 -0.0910761 9.88536 -0.0288374 9.92442 0.23297C10.5141 4.1865 13.2641 7.33793 16.7963 8.12782Z" fill="#7C52FF"/>
+    </svg>
+    <span>Dialtone Styles Sync</span>
+  </div>
+
+  <div id="view-form">
+    <p class="intro">Synchronizes the styles (text, effect, paint) in the current Figma file with
+      Dialtone. Publish this file as a library to make the styles available in other files.</p>
+    <button id="run-text" data-type="run-text-styles" data-url="text-styles.json">Sync text styles</button>
+    <button id="run-effect" data-type="run-effect-styles" data-url="effect-styles.json">Sync effect styles</button>
+    <button id="run-paint" data-type="run-paint-styles" data-url="paint-styles.json">Sync paint styles</button>
+    <button id="run-all">Sync all</button>
+    <div id="log">Requires the local <code>figma-sync</code> server to be running. Run <code>pnpm sync:styles:serve</code> from <code>packages/figma-sync</code>, then click a button above.</div>
+  </div>
+
+  <div id="view-results" hidden>
+    <div id="results-content"></div>
+    <div class="actions">
+      <button id="back-btn">Back</button>
+      <button id="close-btn">Close</button>
+    </div>
+  </div>
   <script>
-    const log = document.getElementById('log');
-    const buttons = [document.getElementById('run-text'), document.getElementById('run-effect'), document.getElementById('run-paint')];
+    const KINDS = [
+      { type: 'run-text-styles', url: 'text-styles.json', label: 'Text styles' },
+      { type: 'run-effect-styles', url: 'effect-styles.json', label: 'Effect styles' },
+      { type: 'run-paint-styles', url: 'paint-styles.json', label: 'Paint styles' },
+    ];
+    const kindButtons = [document.getElementById('run-text'), document.getElementById('run-effect'), document.getElementById('run-paint')];
+    const allButton = document.getElementById('run-all');
+    const buttons = [...kindButtons, allButton];
+    const viewForm = document.getElementById('view-form');
+    const viewResults = document.getElementById('view-results');
+    const resultsContent = document.getElementById('results-content');
+    const backButton = document.getElementById('back-btn');
+    const closeButton = document.getElementById('close-btn');
     const BASE_URL = 'http://localhost:4577/';
 
-    for (const button of buttons) {
+    // Only one request is ever in flight — both a single-kind click and the
+    // "Sync all" loop await each reply before sending the next message — so a
+    // single pending resolver is enough to correlate request and response.
+    let pendingResolve = null;
+    onmessage = (event) => {
+      const msg = event.data.pluginMessage;
+      if (!msg || !pendingResolve) return;
+      const resolve = pendingResolve;
+      pendingResolve = null;
+      resolve(msg);
+    };
+
+    function setBusy (busy) {
+      for (const b of buttons) b.disabled = busy;
+    }
+
+    async function runOne (kind) {
+      const res = await fetch(BASE_URL + kind.url);
+      if (!res.ok) throw new Error(`dev server responded ${res.status}`);
+      const specs = await res.json();
+      const reply = await new Promise((resolve) => {
+        pendingResolve = resolve;
+        parent.postMessage({ pluginMessage: { type: kind.type, specs } }, '*');
+      });
+      if (reply.type === 'error') throw new Error(reply.error);
+      return reply.result;
+    }
+
+    function createResultItem ({ label, result, errorMessage }) {
+      const item = document.createElement('div');
+      item.className = 'result-item';
+
+      const header = document.createElement('div');
+      header.className = 'result-item__header';
+      const badge = document.createElement('span');
+      const labelEl = document.createElement('span');
+      labelEl.className = 'result-item__label';
+      labelEl.textContent = label;
+      header.append(badge, labelEl);
+
+      const detail = document.createElement('p');
+      detail.className = 'result-item__detail';
+
+      item.append(header, detail);
+
+      if (errorMessage) {
+        badge.className = 'badge err';
+        badge.textContent = 'Failed';
+        detail.classList.add('err');
+        detail.textContent = errorMessage;
+        return item;
+      }
+
+      const { created, updated, unchanged, errors, totalStyles } = result;
+      if (errors.length) {
+        badge.className = 'badge err';
+        badge.textContent = 'Needs a look';
+        detail.classList.add('err');
+        detail.textContent = `${errors.length} of ${totalStyles} ran into a problem.`;
+        const list = document.createElement('ul');
+        list.className = 'result-item__errors';
+        for (const e of errors) {
+          const li = document.createElement('li');
+          const code = document.createElement('code');
+          code.textContent = e.name;
+          li.append(code, document.createTextNode(`: ${e.error}`));
+          list.append(li);
+        }
+        item.append(list);
+        return item;
+      }
+
+      badge.className = 'badge ok';
+      badge.textContent = 'Synced';
+      const parts = [];
+      if (created.length) parts.push(`${created.length} created`);
+      if (updated.length) parts.push(`${updated.length} updated`);
+      if (!parts.length) {
+        detail.textContent = `All ${totalStyles} unchanged.`;
+        return item;
+      }
+      if (unchanged.length) parts.push(`${unchanged.length} unchanged`);
+      detail.textContent = `${parts.join(', ')} (${totalStyles} total).`;
+      return item;
+    }
+
+    function showResults (items) {
+      const anyProblem = items.some(i => i.errorMessage || i.result.errors.length);
+      const intro = document.createElement('p');
+      intro.className = 'results-intro';
+      intro.textContent = anyProblem
+        ? "Synced, but a couple of things need a look."
+        : "All done! Here's what changed.";
+      resultsContent.replaceChildren(intro, ...items.map(createResultItem));
+      viewForm.hidden = true;
+      viewResults.hidden = false;
+    }
+
+    function showForm () {
+      viewResults.hidden = true;
+      viewForm.hidden = false;
+    }
+
+    for (const button of kindButtons) {
+      const kind = KINDS.find(k => k.type === button.dataset.type);
       button.onclick = async () => {
-        for (const b of buttons) b.disabled = true;
-        log.textContent = 'Fetching spec…';
+        const originalText = button.textContent;
+        setBusy(true);
+        button.textContent = 'Syncing…';
         try {
-          const res = await fetch(BASE_URL + button.dataset.url);
-          if (!res.ok) throw new Error(`dev server responded ${res.status}`);
-          const specs = await res.json();
-          log.textContent = `Fetched ${specs.length} specs. Creating styles…`;
-          parent.postMessage({ pluginMessage: { type: button.dataset.type, specs } }, '*');
+          const result = await runOne(kind);
+          showResults([{ label: kind.label, result }]);
         } catch (e) {
-          log.textContent = `Could not reach the dev server: ${e.message}`;
-          log.className = 'err';
-          for (const b of buttons) b.disabled = false;
+          showResults([{ label: kind.label, errorMessage: `Could not sync — ${e.message}` }]);
+        } finally {
+          button.textContent = originalText;
+          setBusy(false);
         }
       };
     }
 
-    onmessage = (event) => {
-      const msg = event.data.pluginMessage;
-      if (!msg) return;
-      for (const b of buttons) b.disabled = false;
-      if (msg.type === 'result') {
-        const { created, updated, errors, totalStyles } = msg.result;
-        log.className = errors.length ? 'err' : 'ok';
-        log.textContent =
-          `created ${created.length}, updated ${updated.length}, errors ${errors.length}\n` +
-          `total styles of this kind in file: ${totalStyles}\n\n` +
-          (errors.length ? errors.map(e => `${e.name}: ${e.error}`).join('\n') : 'All clean.');
-      } else if (msg.type === 'error') {
-        log.className = 'err';
-        log.textContent = msg.error;
+    allButton.onclick = async () => {
+      const originalText = allButton.textContent;
+      setBusy(true);
+      const items = [];
+      for (const kind of KINDS) {
+        allButton.textContent = `Syncing ${kind.label.toLowerCase()}…`;
+        try {
+          const result = await runOne(kind);
+          items.push({ label: kind.label, result });
+        } catch (e) {
+          items.push({ label: kind.label, errorMessage: `Could not sync — ${e.message}` });
+        }
       }
+      allButton.textContent = originalText;
+      showResults(items);
+      setBusy(false);
     };
+
+    backButton.onclick = () => showForm();
+    closeButton.onclick = () => parent.postMessage({ pluginMessage: { type: 'close' } }, '*');
   </script>
 </body>
 </html>
