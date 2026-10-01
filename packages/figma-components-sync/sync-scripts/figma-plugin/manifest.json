@@ -1,0 +1,18 @@
+{
+  "name": "Dialtone Spec Builder",
+  "id": "dialtone-spec-builder",
+  "api": "1.0.0",
+  "main": "code.js",
+  "editorType": [
+    "figma"
+  ],
+  "networkAccess": {
+    "allowedDomains": [
+      "none"
+    ],
+    "devAllowedDomains": [
+      "http://localhost:8931"
+    ],
+    "reasoning": "Reads locally generated component build payloads from a dev server on this machine."
+  }
+}

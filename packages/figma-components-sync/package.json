@@ -1,0 +1,44 @@
+{
+  "name": "@dialpad/dialtone-figma-components-sync",
+  "version": "0.1.0",
+  "description": "Measures real rendered Dialtone Vue components and builds matching Figma component variant sets via the Plugin API",
+  "scripts": {
+    "lint": "eslint --fix sync-scripts",
+    "build-spec": "node sync-scripts/build-spec.mjs",
+    "run-batch": "node sync-scripts/run-batch.mjs",
+    "check-all": "node sync-scripts/check-all.mjs",
+    "negative-control": "node sync-scripts/negative-control.mjs",
+    "visual-compare": "node sync-scripts/visual-compare.mjs"
+  },
+  "bugs": {
+    "email": "dialtone@dialpad.com"
+  },
+  "engineStrict": true,
+  "engines": {
+    "node": ">= 20.0.0"
+  },
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dialpad/dialtone.git",
+    "directory": "packages/figma-components-sync"
+  },
+  "dependencies": {
+    "@dialpad/dialtone-icons": "workspace:*",
+    "@dialpad/dialtone-vue": "workspace:vue3-next",
+    "@vitejs/plugin-vue": "^5.0.0",
+    "culori": "4.0.2",
+    "dotenv": "^16.3.1",
+    "playwright": "1.60.0",
+    "postcss": "8.4.39",
+    "vite": "^8.0.0",
+    "vue": "^3.3.4"
+  },
+  "keywords": [
+    "Dialpad",
+    "Dialtone",
+    "Figma"
+  ],
+  "license": "MIT",
+  "sideEffects": false
+}
