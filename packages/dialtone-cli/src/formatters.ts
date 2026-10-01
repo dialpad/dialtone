@@ -15,6 +15,10 @@ import type {
 
 export type Format = 'minimal' | 'markdown' | 'json';
 
+export function importStatement(name: string, importFrom: string): string {
+  return `import { ${name} } from '${importFrom}'`;
+}
+
 // ── Table helper ────────────────────────────────────────────────────────────
 
 function makeTable(head: string[], rows: string[][], colWidths?: number[]): string {
@@ -81,7 +85,7 @@ function minimalSearchResults(results: SearchResult[]): string {
   }).join('\n');
 }
 
-function minimalComponent(result: SearchResult, describe = false): string {
+function minimalComponent(result: SearchResult, importFrom: string, describe = false): string {
   const lines: string[] = [];
   lines.push(result.name);
 
@@ -104,7 +108,7 @@ function minimalComponent(result: SearchResult, describe = false): string {
     lines.push(slotsTable(result.details.slots));
   }
 
-  lines.push('', `Import: import { ${result.name} } from '@dialpad/dialtone-vue'`);
+  lines.push('', `Import: ${importStatement(result.name, importFrom)}`);
 
   return lines.join('\n');
 }
@@ -153,7 +157,7 @@ function markdownPropsTable(props: ComponentProp[]): string {
   return lines.join('\n');
 }
 
-function markdownComponent(result: SearchResult): string {
+function markdownComponent(result: SearchResult, importFrom: string): string {
   const lines: string[] = [];
   lines.push(`# ${result.name}`);
   if (result.details.description) {
@@ -179,7 +183,7 @@ function markdownComponent(result: SearchResult): string {
     });
   }
 
-  lines.push('', '## Usage', '', '```vue', `import { ${result.name} } from '@dialpad/dialtone-vue'`, '```');
+  lines.push('', '## Usage', '', '```vue', importStatement(result.name, importFrom), '```');
   return lines.join('\n');
 }
 
@@ -199,7 +203,7 @@ function markdownToken(result: SearchResult): string {
 
 // ── Prompt formatter (LLM-optimized) ────────────────────────────────────────
 
-export function formatPrompt(component: Component): string {
+export function formatPrompt(component: Component, importFrom: string): string {
   const lines: string[] = [];
   lines.push(`<${component.displayName}>`);
 
@@ -230,7 +234,7 @@ export function formatPrompt(component: Component): string {
     lines.push(`Events: ${component.events.map((e: ComponentEvent) => e.name).join(', ')}`);
   }
 
-  lines.push(`Import: import { ${component.displayName} } from '@dialpad/dialtone-vue'`);
+  lines.push(`Import: ${importStatement(component.displayName, importFrom)}`);
   return lines.join('\n');
 }
 
@@ -242,7 +246,7 @@ export function formatSearchOutput(results: SearchResult[], format: Format): str
   return minimalSearchResults(results);
 }
 
-export function formatComponentOutput(result: SearchResult, format: Format, filter?: 'props' | 'events' | 'examples', options?: { describe?: boolean }): string {
+export function formatComponentOutput(result: SearchResult, format: Format, filter: 'props' | 'events' | 'examples' | undefined, options: { describe?: boolean; importFrom: string }): string {
   if (format === 'json') {
     if (filter === 'props') return JSON.stringify(result.details.props || [], null, 2);
     if (filter === 'events') return JSON.stringify(result.details.events || [], null, 2);
@@ -251,7 +255,7 @@ export function formatComponentOutput(result: SearchResult, format: Format, filt
 
   if (filter === 'props') {
     if (format === 'markdown') return markdownPropsTable(result.details.props || []);
-    return propsTable(result.details.props || [], options?.describe);
+    return propsTable(result.details.props || [], options.describe);
   }
 
   if (filter === 'events') {
@@ -262,11 +266,11 @@ export function formatComponentOutput(result: SearchResult, format: Format, filt
   }
 
   if (filter === 'examples') {
-    return `import { ${result.name} } from '@dialpad/dialtone-vue'\n\n<${result.name} />`;
+    return `${importStatement(result.name, options.importFrom)}\n\n<${result.name} />`;
   }
 
-  if (format === 'markdown') return markdownComponent(result);
-  return minimalComponent(result, options?.describe);
+  if (format === 'markdown') return markdownComponent(result, options.importFrom);
+  return minimalComponent(result, options.importFrom, options.describe);
 }
 
 export function formatTokenOutput(result: SearchResult, format: Format): string {

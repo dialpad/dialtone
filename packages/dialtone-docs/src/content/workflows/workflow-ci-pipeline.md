@@ -3,8 +3,8 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-03-04
-related_packages: [dialtone-vue, dialtone-documentation]
+last_updated: 2026-09-30
+related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli]
 ---
 
 # CI Pipeline
@@ -30,7 +30,7 @@ These checks are required on every PR:
 | Check | Workflow | Command |
 |-------|---------|---------|
 | Lint PR Title | `lint-pr.yml` | `pnpm commitlint` against PR title |
-| Unit Tests | `unit_tests.yml` | `pnpm nx run dialtone-vue:test:coverage` |
+| Unit Tests | `unit_tests.yml` | Path-filtered test jobs; see `unit_tests.yml` below |
 | Accessibility Tests | `a11y_tests.yml` | `pnpm nx run dialtone-vue:test:a11y` |
 | Bundle Size Check | `bundle-size-check.yml` | `pnpm pack` + size comparison |
 | Visual Tests | `visual_tests.yml` | `pnpm nx run dialtone-vue:test:visual` (required only with `visual-test-ready` label) |
@@ -41,13 +41,20 @@ These checks are required on every PR:
 
 ### `unit_tests.yml`
 
-**Trigger:** Push to `staging` (paths: `packages/dialtone-vue/**`), PR to any branch (same paths)
+**Trigger:** Push to `staging`, PR to any branch (paths: `packages/dialtone-vue/**`, `packages/dialtone-tokens/**`, `packages/combinator/**`, `packages/dialtone-query-core/**`, `packages/dialtone-cli/**`, and the data generators listed for `test-cli` below)
 
-**What it does:**
-1. Setup environment
-2. Run `pnpm nx run dialtone-vue:test:coverage`
+**What it does:** A `changes` job (`dorny/paths-filter`) decides which test jobs run. Each job sets up the environment, then runs its command:
 
-Outputs a coverage report in JSON and HTML. Coverage thresholds enforced: 80% branches, 70% functions, 85% lines and statements. Build fails if thresholds are not met.
+| Job | Runs when these change | Command |
+|-----|------------------------|---------|
+| `test` | `packages/dialtone-vue/**` | `pnpm nx run dialtone-vue:test:coverage` |
+| `test-tokens` | `packages/dialtone-tokens/**` | `pnpm nx run dialtone-tokens:test` |
+| `test-combinator` | `packages/combinator/**` | `pnpm nx run dialtone-combinator:test` |
+| `test-cli` | `packages/dialtone-query-core/**`, `packages/dialtone-cli/**`, and the data generators `scripts/build-dialtone-vue-docs.mjs`, `packages/dialtone-css/postcss/dialtone-docs.cjs`, `packages/dialtone-docs/src/generators/**` | `pnpm nx run-many -t test -p dialtone-query-core dialtone-cli` |
+
+The `test` job outputs a coverage report in JSON and HTML. Coverage thresholds enforced: 80% branches, 70% functions, 85% lines and statements. Build fails if thresholds are not met.
+
+In `test-cli`, both test targets depend on their project's build. The builds generate the component, token, utility, icon, and documentation data the tests read, and the CLI's smoke tests run its built `build/index.js`. A change to a generator can change the shape of that data, so it runs `test-cli`. A change to the content alone, such as a component, icon, or docs page, doesn't; a test it breaks fails on the next PR that runs `test-cli`.
 
 ---
 

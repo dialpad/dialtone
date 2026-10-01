@@ -32,11 +32,11 @@ const iconResults = searchIcons('notification', icons);
 
 ### Search Functions
 
-All search functions return `{ results: SearchResult[]; notes: string[] }`.
+All search functions return `{ results: SearchResult[]; notes: string[] }`. `searchComponents` also returns `exactMatch: boolean` and `warning: string | null`, the deprecation or discouragement note for the component the query names (also included in `notes`).
 
 | Function | Data Parameter | Description |
 |----------|---------------|-------------|
-| `searchComponents(query, components)` | `Component[]` | 5-bucket priority search (name, description, props, events, slots) |
+| `searchComponents(query, components)` | `Component[]` | 5-bucket priority search (name, description, props, events, slots). An exact name match comes first. |
 | `searchTokens(query, tokens, options?)` | `TokensData` | Token search with optional `{ includeHsl: boolean }` |
 | `searchUtilityClasses(query, utilityClasses)` | `UtilityClassesData` | CSS class search with automatic px/rem conversion |
 | `searchIcons(query, icons)` | `IconsData` | Icon search by name, category, and keywords |
