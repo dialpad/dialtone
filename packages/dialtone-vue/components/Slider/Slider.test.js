@@ -1102,6 +1102,20 @@ describe('DtSlider Tests', () => {
         expect(thumbVisuals[0].classes()).not.toContain('d-slider__thumb-visual--focused');
       });
 
+      it('closes the interaction readout when disabled flips true while a thumb is hovered', async () => {
+        mockProps = { readout: 'interaction' };
+        updateWrapper();
+        await nextTick();
+        const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
+        await hitTarget.trigger('pointerenter');
+        let readout = wrapper.findAll('[data-qa="dt-slider-thumb-readout"]')[0];
+        expect(readout.classes()).toContain('d-slider__readout--show');
+
+        await wrapper.setProps({ disabled: true });
+        readout = wrapper.findAll('[data-qa="dt-slider-thumb-readout"]')[0];
+        expect(readout.classes()).toContain('d-slider__readout--hide');
+      });
+
       it('routes a pointerdown to the thumb opposite the one last dragged, when both thumbs coincide', async () => {
         mockProps = { modelValue: [50, 50] };
         updateWrapper();

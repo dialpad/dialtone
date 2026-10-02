@@ -30,15 +30,19 @@ export function useSliderInteraction(props, emit, {
   // triggers, within the same task. See onPointerDown.
   let isPointerFocus = false;
 
-  // A consumer can flip :disabled reactively while a thumb is focused — the
-  // native input's own focus ring clears automatically, but focusedThumbIndex
-  // is separate internal state (also drives the 'interaction' readout), so
-  // without this it would keep pointing at a thumb that's no longer
-  // interactive, leaving its focus ring/readout stuck open.
+  // A consumer can flip :disabled reactively while a thumb is focused or
+  // hovered — the native input's own focus ring clears automatically, but
+  // focusedThumbIndex/hoveredThumbIndex are separate internal state (also
+  // drive the 'interaction' readout), so without this they'd keep pointing at
+  // a thumb that's no longer interactive, leaving its focus ring/readout
+  // stuck open.
   watch(
     () => props.disabled,
     (isDisabled) => {
-      if (isDisabled) focusedThumbIndex.value = null;
+      if (isDisabled) {
+        focusedThumbIndex.value = null;
+        hoveredThumbIndex.value = null;
+      }
     },
   );
 
