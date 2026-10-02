@@ -1,15 +1,10 @@
 import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from 'vue';
 
-// Two kinds of collision, resolved in order: in range mode, the low/high readouts
-// can overlap each other as the thumbs converge — merged into a single centered
-// "lo–hi" pill. Separately, the live readout can overlap a static mark — marks
-// default to start/end and readout defaults to always, so the readout sits right
-// on top of an end mark near the extremes. When they collide, hide the mark: the
-// readout is the thing actively communicating current state during interaction,
-// so it takes priority over a fixed reference point. Pure rect measurement, no
-// continuous polling — recomputed when the value or readout visibility changes
-// (both already reactive) and on control resize, so there's no open-ended loop
-// that could silently stop tracking the layout.
+// Two kinds of collision: low/high readouts overlapping each other as thumbs
+// converge (merged into one centered "lo–hi" pill), and a readout overlapping
+// a static mark (readout wins, mark hides — it's the thing actively
+// communicating current state). Pure rect measurement, recomputed on value/
+// visibility change and control resize, no polling.
 export function useSliderCollisionAvoidance(props, {
   controlRef,
   isVertical,
@@ -44,30 +39,18 @@ export function useSliderCollisionAvoidance(props, {
     );
   }
 
-  // Two passes: first decide whether the individual readouts should merge (their
-  // elements stay in the DOM at all times, only visibility toggles, so their rects
-  // are always measurable). Then, after Vue renders the merged pill (or removes it),
-  // measure whichever readout representation is actually shown against the marks.
-  // The watcher and the ResizeObserver below can both call this, and since it
-  // awaits across multiple ticks, two calls can overlap: a slower call started
-  // from stale (pre-update) DOM state can finish — and write its now-outdated
-  // result — after a newer call already wrote the correct one, clobbering it
-  // with stale data. collisionUpdateId is a generation counter: each call
-  // captures the id it started with and bails at its next checkpoint if a newer
-  // call has since started, so only the freshest measurement ever gets applied.
+  // Two passes: decide whether the readouts should merge, then — after Vue
+  // renders the merged pill or removes it — measure whichever representation
+  // is actually shown against the marks. The watcher and ResizeObserver below
+  // can both call this and overlap across ticks; collisionUpdateId is a
+  // generation counter so only the freshest call's result ever applies.
   let collisionUpdateId = 0;
 
-  // .d-slider__readout has `transition: left/bottom` (see slider.less) so its
-  // value-driven position animates — during that ~100ms animation,
-  // getBoundingClientRect() reports wherever it currently is mid-flight, not
-  // its final target. data-dragging turns the transition off during a mouse
-  // drag, but a keyboard nudge or a programmatic value change never sets
-  // data-dragging, so this genuinely can read a stale, mid-animation position.
-  // Sidesteps this by computing position analytically from the same reactive
-  // pct the template itself uses (always instantly correct, no animation to
-  // wait out) and only pulling size (width/height) from the DOM — unlike
-  // position, size isn't transitioned, so it's accurate immediately after
-  // Vue's own render, no extra frame-waiting needed.
+  // .d-slider__readout animates position (slider.less), so a mid-transition
+  // getBoundingClientRect() can read a stale position — a keyboard nudge or
+  // programmatic change doesn't set data-dragging to disable it. Sidesteps
+  // this by computing position analytically from the same reactive pct the
+  // template uses, only pulling size (never transitioned) from the DOM.
   function analyticalReadoutRect(pct, el) {
     if (!el || !controlRef.value) return null;
     const elRect = el.getBoundingClientRect();
@@ -131,24 +114,14 @@ export function useSliderCollisionAvoidance(props, {
       .filter(Boolean);
   }
 
-  // Key the result by each mark's own data-mark-index rather than by its
-  // position in markElRefs.value — that array (populated via ref="markElRefs"
-  // on the marks v-for) isn't reliably index-aligned across renders with
-  // computedMarks/markCollisionHidden[i], which the template assumes when it
-  // reads markCollisionHidden[i] for the same i as its v-for. Confirmed live:
-  // markElRefs.value[0]/[1] can end up holding the "100"/"0" mark elements in
-  // the opposite order from computedMarks, silently applying one mark's
-  // collision result to the other mark's rendered element.
-  // Measures collision-hiding and edge-clamping together in one pass (rather
-  // than two separate functions each reading the DOM independently) because
-  // they'd otherwise disagree about a mark's position for one cycle: the
-  // collision check needs to compare against where a mark is ABOUT to render
-  // this cycle, not where it currently sits from last cycle's correction. If
-  // a mark's overflow newly crosses the edge-clamp tolerance this cycle, its
-  // collision-hidden verdict has to be judged against its corrected (not
-  // stale, pre-nudge) position, or a mark right at that boundary could be
-  // left with a wrong hidden/visible state until some later, unrelated
-  // re-measurement happens to correct it.
+  // Key by each mark's own data-mark-index, not its position in
+  // markElRefs.value — that array isn't reliably aligned with computedMarks
+  // across renders (confirmed live: can hold the "100"/"0" marks in opposite
+  // order, silently swapping collision results).
+  // Measures collision-hiding and edge-clamping in one pass, not two: the
+  // collision check must compare against where a mark is ABOUT to render this
+  // cycle (post-clamp), not its stale pre-nudge position, or a mark at the
+  // boundary gets a wrong hidden/visible state until some later remeasure.
   function updateMarkCollisions() {
     const marks = markElRefs.value;
     if (!marks.length) return;
@@ -205,15 +178,10 @@ export function useSliderCollisionAvoidance(props, {
 
   let markCollisionResizeObserver = null;
 
-  // Collision detection measures rendered readout/mark widths, which change
-  // whenever their formatted TEXT changes — not just when the underlying
-  // values do. getValueText/prefix/suffix drive that text (see formatValue,
-  // UseSliderValue), so a consumer swapping getValueText (e.g. a locale
-  // change) at unchanged values must still trigger a recheck, or two readouts
-  // can end up visibly overlapping (or a stale merged pill can persist) with
-  // nothing left to re-trigger the measurement — the ResizeObserver below
-  // only watches the control container's own size, not text-driven changes
-  // to its children.
+  // Rendered widths change with formatted TEXT (getValueText/prefix/suffix),
+  // not just the underlying values — a locale change at unchanged values must
+  // still recheck, since the ResizeObserver below only watches the control's
+  // own size, not text-driven changes to its children.
   watch(
     [
       internalValues,

@@ -1,13 +1,9 @@
 import { ref, computed, watch, onMounted } from 'vue';
 
-// Single source of truth for turning a possibly-uncontrolled, possibly
-// out-of-contract modelValue into the normalized internalValues every other
-// part of the component reads — clamped to [min, max], snapped to the step
-// grid, range order normalized, and the minGapSteps gap enforced. See
-// normalizeModelValue below for the full rationale. isRange is prop-derived
-// state, not value normalization — it lives in Slider.vue and is passed in
-// here (and to every other composable that needs it) rather than owned by
-// any one of them.
+// Normalizes a possibly-uncontrolled, out-of-contract modelValue into
+// internalValues — clamped, step-snapped, range-ordered, gap-enforced. isRange
+// is prop-derived state, not value normalization, so it's passed in rather
+// than owned here.
 export function useSliderValue(props, emit, { isRange }) {
   function decimalPlaces(n) {
     const dot = String(n).indexOf('.');
@@ -18,16 +14,11 @@ export function useSliderValue(props, emit, { isRange }) {
     return Math.min(props.max, Math.max(props.min, val));
   }
 
-  // step must be a positive value for a well-defined grid — <input step> is
-  // only valid when positive, and the HTML range-state algorithm silently
-  // rounds any assigned .value to the nearest step-grid point relative to the
-  // element's own min. Without this guard, a controlled value or a magnetic
-  // snap point that doesn't land on that grid renders correctly in Vue's
-  // internal state (visual thumb, readout, aria-valuetext, emitted
-  // modelValue) but gets silently coerced by the BROWSER itself the moment
-  // it's written to the native input's .value — splitting Vue's state from
-  // what the native control, its implicit aria-valuenow, and form submission
-  // actually hold.
+  // Without this, an off-grid value (from a controlled modelValue or a
+  // magnetic snap point) renders correctly in Vue's state but gets silently
+  // rounded by the browser the moment it hits the native input's .value —
+  // splitting Vue's state from the native control. A non-positive step has no
+  // valid grid, so just clamp.
   function snapToStep(val) {
     if (props.step <= 0) return Math.min(props.max, Math.max(props.min, val));
     const steps = Math.round((val - props.min) / props.step);
@@ -45,14 +36,9 @@ export function useSliderValue(props, emit, { isRange }) {
     return values;
   }
 
-  // Range mode's low/high thumbs may only meet, or — when minGapSteps
-  // is set — must keep at least that many steps apart. updateThumbValue (see
-  // UseSliderInteraction) already enforces this during interactive
-  // drags/keyboard input, but a controlled modelValue, or a reactive change
-  // to step/minGapSteps, bypassed it entirely: two values could sit closer
-  // together than the documented minimum gap from the very first render, and
-  // the native inputs' min/max never reflected that dependency either (see
-  // thumbNativeMin/thumbNativeMax).
+  // updateThumbValue (UseSliderInteraction) enforces this gap during drags,
+  // but a controlled modelValue or a reactive min/max/step/minGapSteps change
+  // bypasses that — this is what keeps those paths honoring the same gap.
   function enforceRangeGap(values) {
     if (values.length !== 2) return values;
     const gap = props.minGapSteps * props.step;
@@ -69,18 +55,11 @@ export function useSliderValue(props, emit, { isRange }) {
     return [parseFloat(lo.toFixed(dp)), parseFloat(hi.toFixed(dp))];
   }
 
-  // The single place every value entering internalValues funnels through —
-  // mount, a controlled modelValue change, and reactive min/max/step/
-  // minGapSteps changes all call this (directly or via normalizeModelValue
-  // below) — so all of them get the same guarantees: clamped to [min, max],
-  // snapped to the step grid, range order normalized, and the minGapSteps gap
-  // enforced. Nothing enforces the public contract (see modelValue's
-  // validator) at runtime otherwise: a controlled value out of [min, max] or
-  // off the step grid, or an array of some other length, would otherwise flow
-  // straight into internalValues and split the native input (browser-clamped/
-  // step-coerced), aria-valuetext (unclamped), and visual thumb (also
-  // unclamped) into three disagreeing states, or render an unmanaged extra
-  // thumb.
+  // Every value entering internalValues funnels through here (mount,
+  // controlled modelValue changes, reactive min/max/step/minGapSteps changes)
+  // so they all get the same guarantees — otherwise an out-of-contract value
+  // would split the native input, aria-valuetext, and visual thumb into three
+  // disagreeing states.
   function applyValueConstraints(values) {
     let out = values.map(clampToRange).map(snapToStep);
     out = out.length === 2 ? normalizeRangeValues(out) : out;
@@ -113,13 +92,9 @@ export function useSliderValue(props, emit, { isRange }) {
     return ((val - props.min) / (props.max - props.min)) * 100;
   }
 
-  // The two thumbs in range mode have a DEPENDENT range, not the full
-  // [min, max] each: the low thumb can never reach past (high - gap) and the
-  // high thumb never below (low + gap). Binding both native inputs to the
-  // same static min/max (as before) told the browser and assistive tech that
-  // either thumb could traverse the complete range, contradicting the
-  // WAI-ARIA multi-thumb slider pattern, which requires each thumb's
-  // aria-valuemin/aria-valuemax to reflect the other thumb's current position.
+  // The WAI-ARIA multi-thumb pattern requires each thumb's aria-valuemin/max
+  // to reflect the OTHER thumb's current position, not a static [min, max] —
+  // the low thumb can never reach past (high - gap), and vice versa.
   function thumbNativeMin(i) {
     if (!isRange.value || i !== 1) return props.min;
     const gap = props.minGapSteps * props.step;
@@ -132,23 +107,11 @@ export function useSliderValue(props, emit, { isRange }) {
     return Math.max(props.min, (internalValues.value[1] ?? props.max) - gap);
   }
 
-  // The native range-state algorithm rounds any value assigned to a step
-  // mismatch relative to the input's OWN min — silently overriding Vue's
-  // :value binding the moment the browser applies it, splitting native state
-  // (and form submission) from the visual thumb/readout/aria-valuetext/
-  // emitted modelValue. applyValueConstraints (mount, controlled updates,
-  // reactive min/max/step/minGapSteps changes) already keeps
-  // internalValues on the step grid, so this never matters in practice — with
-  // one deliberate exception: an active magnetic snap point (see
-  // findMagneticSnapPoint, UseSliderMagneticSnap) intentionally holds an
-  // off-grid value while dragging, exactly as documented ("unlike step, this
-  // doesn't restrict which values are selectable"). Falling back to
-  // step="any" only for that specific thumb, only while its value is
-  // genuinely off-grid, keeps the browser from fighting that intentional
-  // value without touching native Home/End/Arrow stepping (which relies on
-  // the real `step` attribute) the rest of the time. A non-positive step has
-  // no valid grid at all, matching snapToStep's own unsnapped fallback in
-  // that case.
+  // internalValues is always on-grid except for one deliberate case: an
+  // active magnetic snap point (UseSliderMagneticSnap) intentionally holds an
+  // off-grid value while dragging. step="any" for just that thumb, only while
+  // off-grid, keeps the browser from fighting it without losing native
+  // Home/End/Arrow stepping the rest of the time.
   function thumbNativeStep(i) {
     if (props.step <= 0) return 'any';
     const val = internalValues.value[i];
@@ -176,20 +139,15 @@ export function useSliderValue(props, emit, { isRange }) {
       const current = internalValues.value;
       if (next.length !== current.length || next.some((v, i) => v !== current[i])) {
         internalValues.value = next;
-        // An externally-driven value is already "committed" as far as this
-        // component is concerned — without this, lastCommittedValues stays
-        // stale, and the next blur (even with zero further user interaction)
-        // sees a spurious diff against it and fires a false change event.
+        // An externally-driven value is already "committed" — without this,
+        // the next blur sees a spurious diff against a stale lastCommittedValues
+        // and fires a false change event.
         lastCommittedValues.value = [...next];
       }
-      // normalizeModelValue can rewrite what was actually passed in — swapping
-      // an inverted pair, clamping an out-of-[min,max] value, or truncating an
-      // invalid array length — and that correction must reach the parent's own
-      // v-model source, not just our local render, or a consumer reading
-      // modelValue directly stays silently out of sync with what's rendered.
-      // Safe against feedback loops: normalizeModelValue is idempotent, so a
-      // corrected emission re-triggers this watcher at most once, and that
-      // second pass is always a no-op.
+      // normalizeModelValue can rewrite what was passed in (inverted pair,
+      // out-of-bounds clamp, invalid length) — that correction must reach the
+      // parent's own v-model, or it stays silently out of sync. Safe against
+      // feedback loops since normalizeModelValue is idempotent.
       const incoming = Array.isArray(newVal) ? newVal : [newVal];
       const needsCorrection = next.length !== incoming.length || next.some((v, i) => v !== incoming[i]);
       if (needsCorrection) {
@@ -199,14 +157,10 @@ export function useSliderValue(props, emit, { isRange }) {
     { deep: true },
   );
 
-  // A consumer can narrow [min, max], change step, or change
-  // minGapSteps without touching modelValue at all — the watcher
-  // above never fires for that, so the current value(s) would otherwise
-  // silently drift out of bounds, off the step grid, or inside a now-invalid
-  // gap (native input clamps/step-coerces, aria-valuetext and the visual
-  // thumb don't — see applyValueConstraints). This re-applies the same full
-  // constraint pipeline every time any of those four props change, so the
-  // guarantees hold continuously, not just at mount and on modelValue writes.
+  // Narrowing [min, max], step, or minGapSteps without touching modelValue
+  // never fires the watcher above — re-apply the full constraint pipeline so
+  // the value can't silently drift out of bounds, off-grid, or inside a
+  // now-invalid gap.
   watch(
     () => [props.min, props.max, props.step, props.minGapSteps],
     () => {
@@ -220,10 +174,8 @@ export function useSliderValue(props, emit, { isRange }) {
   );
 
   // The initial modelValue never runs through the watch() above — correct a
-  // starting value normalizeModelValue had to rewrite (inverted pair,
-  // out-of-bounds clamp, invalid array length) back to the parent the same
-  // way a later prop update would, so v-model doesn't stay silently out of
-  // sync with what's rendered from the very first paint.
+  // rewritten starting value back to the parent the same way a later update
+  // would, so v-model isn't out of sync from the first paint.
   onMounted(() => {
     if (props.modelValue === undefined || props.modelValue === null) return;
     const incoming = Array.isArray(props.modelValue) ? props.modelValue : [props.modelValue];

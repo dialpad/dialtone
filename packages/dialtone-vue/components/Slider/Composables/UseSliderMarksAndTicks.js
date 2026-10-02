@@ -11,14 +11,10 @@ export function useSliderMarksAndTicks(props, { isVertical, thumbPercent }) {
     return generateInterval(props.min, props.max, interval, 'ticks');
   });
 
-  // A mark isn't tied to either thumb, so unlike formatValue (UseSliderValue)
-  // there's no meaningful index to pass getValueText — that function's whole
-  // purpose is letting a dual-thumb slider give each thumb a *different*
-  // meaning (e.g. "Minimum"/"Maximum"), which has no correct answer for a
-  // fixed reference point on the track. Only prefix/suffix apply here, same
-  // as a bare number would get; anything more specific belongs in that
-  // mark's own explicit `text`, which bypasses this function entirely (see
-  // computedMarks below).
+  // A mark isn't tied to either thumb, so there's no meaningful index for
+  // getValueText (its whole purpose is per-thumb meaning, e.g. "Minimum"/
+  // "Maximum"). Only prefix/suffix apply; anything more specific belongs in
+  // that mark's own explicit `text`, which bypasses this entirely.
   function formatMarkValue(value) {
     return `${props.prefix}${value}${props.suffix}`;
   }

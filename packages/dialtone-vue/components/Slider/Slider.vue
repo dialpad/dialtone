@@ -102,15 +102,11 @@
           @pointerenter="onThumbHitPointerEnter(i)"
           @pointerleave="onThumbHitPointerLeave(i)"
         />
-        <!-- A plain string `ref="thumbRefs"` on a v-for only pushes each
-             element in patch order — the same class of ordering risk this
-             file's own updateMarkCollisions comment documents ("confirmed
-             live") for markElRefs, and onPointerDown/updateThumbValue below
-             both index into thumbRefs directly, so a misalignment here would
-             focus/write to the wrong native input. A function ref assigns by
-             the v-for's own index explicitly instead, and Vue calls it with
-             null on unmount, so a shrinking array (range to single mode)
-             self-cleans rather than leaving a stale entry. -->
+        <!-- A plain `ref="thumbRefs"` only pushes in patch order (the same
+             index-misalignment risk UseSliderCollisionAvoidance documents for
+             markElRefs), but onPointerDown/updateThumbValue index into this
+             directly — a function ref assigns by the v-for's own index, and
+             self-cleans on unmount when range shrinks to single mode. -->
         <input
           v-for="(val, i) in internalValues"
           :key="`thumb-input-${i}`"
@@ -533,23 +529,17 @@ const {
   formatValue,
 } = useSliderValue(props, emit, { isRange });
 
-// Whether each thumb gets its accessible name from a visible label (prop or
-// slot) rather than a bare aria-label — determines which of the two the
-// native input actually binds. hasSlotContent (not a bare slots.label
-// existence check) so a #label slot that renders nothing — an empty or
-// v-if-false template — doesn't count as providing a name.
+// Determines which accessible-name source each thumb's native input binds.
+// hasSlotContent (not a bare slots.label check) so an empty/v-if-false #label
+// slot doesn't count as providing a name.
 const hasVisibleLabel = computed(() => !!(
   props.label?.trim() || hasSlotContent(slots.label, { value: currentValue.value })
 ));
 const sizeClass = computed(() => SLIDER_SIZE_MODIFIERS[String(props.size)] ?? '');
 
-// These form-control ARIA relationship attributes are explicitly forwarded
-// to each native thumb input instead (see the template's thumb <input>
-// bindings) — a generic wrapper <div> isn't a form control, so leaving them
-// here as well would duplicate aria-label/aria-labelledby on an element
-// that shouldn't be named, and would strand aria-describedby/
-// aria-errormessage/aria-details/aria-invalid somewhere neither the native
-// input nor assistive tech querying it would ever see them.
+// These forward to each native thumb <input> instead — the wrapper <div>
+// isn't a form control, so leaving them here would duplicate the name and
+// strand the rest where assistive tech querying the input would never see them.
 const THUMB_ARIA_KEYS = ['aria-label', 'aria-labelledby', 'aria-describedby', 'aria-errormessage', 'aria-details', 'aria-invalid'];
 const wrapperAttrs = computed(() => {
   const base = removeClassStyleAttrs(attrs);

@@ -1,10 +1,8 @@
 import { ref, watch } from 'vue';
 
-// Everything about a user actively interacting with the thumbs: pointer
-// drag, native keyboard events, focus/hover tracking, and the interactive
-// value-update path they all funnel through (updateThumbValue/
-// commitIfChanged) — as opposed to UseSliderValue's normalization of
-// externally-driven (controlled prop, reactive min/max/step) changes.
+// Pointer drag, native keyboard events, focus/hover tracking, and the
+// interactive value-update path (updateThumbValue/commitIfChanged) — as
+// opposed to UseSliderValue's normalization of externally-driven changes.
 export function useSliderInteraction(props, emit, {
   controlRef,
   thumbRefs,
@@ -84,15 +82,10 @@ export function useSliderInteraction(props, emit, {
 
     if (next[thumbIndex] === clamped) {
       // Nothing logically changed, but a native keyboard step (plain Arrow/
-      // Home/End, handled by the browser itself — see onThumbKeydown) can
-      // still have already written a DIFFERENT value into the native
-      // <input>'s own DOM .value before this handler ran, since the native
-      // element isn't constrained to the sibling thumb's position the way
-      // this range-mode clamp is. Vue's one-way :value binding only re-patches
-      // the DOM when the bound reactive value itself changes, so without this
-      // correction the native input's real value would silently drift from
-      // internalValues/aria-valuetext, and the next keypress would read from
-      // that wrong baseline instead of the true current value.
+      // Home/End) may have already written a different value into the native
+      // input's own DOM .value — it isn't range-clamped the way this is.
+      // Vue's :value binding won't re-patch an unchanged reactive value, so
+      // correct the DOM directly or it silently drifts from internalValues.
       const el = thumbRefs.value[thumbIndex];
       if (el && el.value !== String(clamped)) {
         el.value = String(clamped);
@@ -171,28 +164,20 @@ export function useSliderInteraction(props, emit, {
     hoveredThumbIndex.value = null;
 
     updateThumbValue(idx, rawVal, { allowSnap: true });
-    // Marks the focus() call below as pointer-driven so onThumbFocus can skip
-    // the keyboard-focus ring for it — :focus-visible isn't usable here since
-    // browsers treat range inputs as always focus-visible on click, unlike
-    // buttons/links. focus() dispatches its 'focus' event synchronously, so
-    // this flag is read and cleared before any other code runs.
-    //
-    // Only set it — and only call focus() — when the thumb isn't already the
-    // active element: focus() on an already-focused element fires no focus
-    // event at all, so the flag would never get cleared and would corrupt
-    // the next *real* keyboard focus, which is exactly the modality it's
-    // meant to distinguish.
+    // Marks the focus() below as pointer-driven so onThumbFocus skips the
+    // keyboard-focus ring — :focus-visible can't tell, since browsers treat
+    // range inputs as always focus-visible on click. Only call focus() when
+    // the thumb isn't already active: an already-focused element fires no
+    // 'focus' event, so the flag would never clear and would corrupt the
+    // next real keyboard focus.
     const thumbEl = thumbRefs.value[idx];
     if (thumbEl && document.activeElement !== thumbEl) {
       isPointerFocus = true;
       thumbEl.focus();
     } else if (focusedThumbIndex.value === idx) {
-      // This exact thumb was already keyboard-focused, so focus() above is
-      // skipped entirely (an already-focused element fires no 'focus' event to
-      // clear the keyboard-focus ring through the normal path). Without this,
-      // the keyboard-only focus ring would stay visually combined with the
-      // --active drag style for the whole drag, even though input modality
-      // just switched to pointer.
+      // Already keyboard-focused, so focus() above is skipped (no 'focus'
+      // event fires) — clear the ring by hand, or it'd stay combined with
+      // the --active drag style even though input switched to pointer.
       focusedThumbIndex.value = null;
     }
   }
@@ -248,16 +233,10 @@ export function useSliderInteraction(props, emit, {
     return 0;
   }
 
-  // largeStep is documented as roughly how far a Page Up/Down or Shift+Arrow
-  // nudge should move — but the actual movement always has to land on the
-  // step grid (see snapToStep), and rounding the raw sum to the NEAREST grid
-  // point can round backward to the value it started from whenever step is
-  // more than about twice largeStep (e.g. step=25, largeStep=10: 100+10=110
-  // rounds back to 100 — a silent no-op on a documented keyboard operation).
-  // Converting largeStep into a whole number of real steps first — at least
-  // one — guarantees a large-step key always moves, while still landing on
-  // exactly the plain-step increment for the common case (step=1, the
-  // default) where it already matched exactly.
+  // Rounding largeStep to the NEAREST step-grid point can round backward to
+  // the start value when step is more than ~2x largeStep (step=25,
+  // largeStep=10: 100+10=110 rounds back to 100 — a silent no-op). Converting
+  // to a whole number of steps first, at least one, guarantees it always moves.
   function largeStepValue() {
     if (props.step <= 0) return props.largeStep;
     const stepsCount = Math.max(1, Math.round(props.largeStep / props.step));
@@ -265,22 +244,15 @@ export function useSliderInteraction(props, emit, {
   }
 
   function onThumbKeydown(i, event) {
-    // A pointer click that focused this thumb never fires another 'focus'
-    // event just because the user starts pressing keys afterward — focus()
-    // only fires once per focus session. Without this, arrow-key navigation
-    // right after a click-to-focus would silently never show the ring, even
-    // though the user has unambiguously switched to keyboard input.
+    // focus() only fires once per session, so a click-to-focus then keyboard
+    // nav would never show the ring without setting this explicitly.
     if (focusedThumbIndex.value !== i) {
       focusedThumbIndex.value = i;
     }
 
-    // Left/Right are direction-relative — the native <input type="range">
-    // swaps which one increments under dir="rtl" (per the HTML stepping
-    // algorithm), and plain arrow keys fall through to that native handling
-    // below. largeStepDelta's Shift+Arrow handling must swap the same way, or
-    // Shift+ArrowRight would contradict what plain ArrowRight just did on the
-    // same key. Up/Down and PageUp/PageDown are never direction-relative;
-    // vertical orientation only ever uses Up/Down, so it's unaffected by this.
+    // The native input swaps which of Left/Right increments under dir="rtl" —
+    // largeStepDelta's Shift+Arrow must swap the same way, or Shift+ArrowRight
+    // would contradict plain ArrowRight on the same key. Up/Down never swap.
     const rtlKeys = !isVertical.value && isRtl();
     const increaseKey = rtlKeys ? 'ArrowLeft' : 'ArrowRight';
     const decreaseKey = rtlKeys ? 'ArrowRight' : 'ArrowLeft';

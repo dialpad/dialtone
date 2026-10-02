@@ -13,34 +13,22 @@ export function useSliderGeometry(props, {
   markEdgeOffsetPx,
   formatValue,
 }) {
-  // Shared by every element positioned along the track (thumb, tick, mark,
-  // readout) — they only differ in which transform re-centers them, so the
-  // axis branch (insetInlineStart/top vs. bottom for vertical) lives in one
-  // place instead of being repeated per element type. insetInlineStart (not
-  // left) so the browser itself mirrors horizontal positions under
-  // dir="rtl" — see getValueFromPointerEvent and onThumbKeydown
-  // (UseSliderInteraction) for the two other places RTL must be handled
-  // explicitly (pointer math and the hard-coded Shift+Arrow keys), since
-  // neither goes through CSS.
+  // Shared by every track element — they only differ in which transform
+  // re-centers them. insetInlineStart (not left) so the browser itself
+  // mirrors under dir="rtl"; see UseSliderInteraction for the other two
+  // places RTL needs explicit handling instead (pointer math, Shift+Arrow).
   function positionStyle(pct, transform) {
     const style = isVertical.value ? { bottom: `${pct}%` } : { insetInlineStart: `${pct}%` };
     if (transform) style.transform = transform;
     return style;
   }
 
-  // translateX(-50%) is the standard trick for centering an element ON its
-  // insetInlineStart anchor point — shift left by half the element's own
-  // width so the anchor lands at its center instead of its edge. That shift
-  // is a PHYSICAL transform: transform: translateX() never mirrors under
-  // dir="rtl" the way insetInlineStart does. So when the anchor itself has
-  // mirrored to the physical right, the compensating shift has to flip sign
-  // too (+50%, not -50%), or the element renders centered a full width away
-  // from its actual anchor — which is exactly what caused the thumb/indicator
-  // gap and mark misalignment under RTL before this existed. This applies
-  // regardless of orientation — insetInlineStart is still the horizontal/
-  // inline axis even for a vertical slider (it's used there to center the
-  // narrow track/thumb within the wider control area), since orientation is
-  // a layout convention, not a CSS writing-mode change.
+  // translateX(-50%) centers an element on its insetInlineStart anchor — but
+  // unlike insetInlineStart, transform never mirrors under dir="rtl", so the
+  // shift has to flip sign by hand (+50%) once the anchor itself mirrors, or
+  // the element renders a full width away from its anchor. Applies regardless
+  // of orientation — insetInlineStart centers the track/thumb on the inline
+  // axis even in vertical mode.
   function centerInlineTransform() {
     return isRtl() ? '50%' : '-50%';
   }

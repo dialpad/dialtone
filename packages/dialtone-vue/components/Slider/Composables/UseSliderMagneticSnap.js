@@ -36,16 +36,12 @@ export function useSliderMagneticSnap(props, { controlRef, isVertical }) {
   // to release it, or once the drag ends.
   const activeSnapValue = ref({});
 
-  // Magnetic, not restrictive: only overrides the value when rawVal falls
-  // within SNAP_THRESHOLD_PX of a snap point (converted to value-space
-  // via the control's current rendered size, so the pull feels consistent
-  // regardless of the slider's min/max range) — otherwise returns null and
-  // normal step-quantization proceeds untouched. A pixel radius, not a value
-  // radius, is what makes this feel like Figma/Photoshop guide-snapping
-  // rather than a second, finer step grid. Once a thumb is pulled onto a
-  // point, releasing it requires crossing a wider radius than entering did
-  // (SNAP_RELEASE_MULTIPLIER) rather than the same boundary in both
-  // directions — the "sticky" half of that feel.
+  // Magnetic, not restrictive: only overrides the value within SNAP_THRESHOLD_PX
+  // of a point (converted to value-space via the control's rendered size, so
+  // the pull feels consistent across any min/max range), else returns null
+  // and normal step-quantization proceeds. A pixel radius is what makes this
+  // feel like Figma/Photoshop guide-snapping. Releasing needs a wider radius
+  // than entering (SNAP_RELEASE_MULTIPLIER) — the "sticky" half of that feel.
   function findMagneticSnapPoint(rawVal, thumbIndex) {
     const points = computedSnapPoints.value;
     if (!points.length || !controlRef.value) {

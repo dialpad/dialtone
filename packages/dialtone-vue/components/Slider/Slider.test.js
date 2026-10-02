@@ -16,26 +16,14 @@ const settleCollisions = async () => {
   await nextFrame();
 };
 
-// Mocks getComputedStyle for the control element rather than setting real
-// inline style/dir and relying on jsdom to resolve it — jsdom's
-// getComputedStyle doesn't compute inherited properties (a dir set on an
-// ancestor never reaches a descendant's computed style) and caches its
-// result per element on first call without invalidating it on a later
-// direct inline-style mutation. syncDirection() is the only thing that
-// calls getComputedStyle(controlRef.value) in this component, so mocking it
-// here is a precise, browser-CSS-engine-independent way to exercise "when
-// direction resolves to rtl" without depending on jsdom's incomplete CSS
-// support. Restore the spy (mockControlDirectionSpy?.mockRestore()) and
-// remove the dir attribute in an afterEach wherever this is used.
-//
-// syncDirection only re-reads getComputedStyle in response to a real dir
-// attribute mutation observed anywhere in the document (see dirObserver in
-// Slider.vue) — toggling documentElement's own dir attribute here is a
-// convenient, always-in-scope way to trigger that resync, mirroring how a
-// real runtime direction change fires it. It doesn't matter that jsdom
-// can't actually resolve the control's inherited style from it (that's what
-// the mock above is for) — the observer only cares that A dir attribute
-// changed somewhere, not which element or value.
+// jsdom's getComputedStyle doesn't resolve inherited properties (a dir set on
+// an ancestor never reaches a descendant), so mock it directly for the
+// control element rather than relying on jsdom to resolve a real dir
+// attribute. Toggling documentElement's own dir still triggers the
+// dirObserver's resync (UseSliderDirection) — it only cares that *a* dir
+// attribute changed somewhere, not which element. Restore the spy
+// (mockControlDirectionSpy?.mockRestore()) and remove the dir attribute in
+// an afterEach wherever this is used.
 let mockControlDirectionSpy;
 async function mockControlDirection(direction) {
   const original = window.getComputedStyle.bind(window);
@@ -1015,15 +1003,10 @@ describe('DtSlider Tests', () => {
       });
 
       it('clears the keyboard-focus ring when a pointer drag starts on an already keyboard-focused thumb', async () => {
-        // onPointerDown skips focus() entirely for an already-focused thumb
-        // (see the test above), so onThumbFocus never runs and never clears
-        // focusedThumbIndex through the normal path — without an explicit
-        // clear, the keyboard-only ring stayed visually combined with the
-        // --active drag style for the whole drag, even though the input
-        // modality had switched to pointer. Attached to document.body (like
-        // the sibling test above) so document.activeElement genuinely
-        // reflects the focused thumb — onPointerDown's own already-focused
-        // check depends on it.
+        // onPointerDown skips focus() for an already-focused thumb, so
+        // onThumbFocus never runs to clear the ring — needs an explicit clear.
+        // Attached to document.body so document.activeElement genuinely
+        // reflects the focused thumb, which onPointerDown's check depends on.
         const attached = mount(DtSlider, { props: baseProps, attachTo: document.body });
         try {
           const attachedControl = attached.find('[data-qa="dt-slider-control"]');
@@ -1567,15 +1550,10 @@ describe('DtSlider Tests', () => {
       });
 
       it('centers the thumb on its actual anchor point under rtl, not one thumb-width off', async () => {
-        // translateX(-50%) is a PHYSICAL shift that never mirrors under
-        // dir="rtl" the way insetInlineStart does — the compensating shift
-        // has to flip sign too (+50%) or the thumb renders centered a full
-        // width away from where insetInlineStart actually anchored it. This
-        // is exactly the bug that produced a visible gap between the thumb
-        // and the indicator's edge. controlRef isn't bound yet during the
-        // very first render (arming the mock before mount would never be
-        // consulted), so mount normally first, then arm the mock and force
-        // a re-render via a prop update.
+        // translateX(-50%) never mirrors under dir="rtl" — the compensating
+        // shift must flip sign (+50%) or the thumb renders a full width away
+        // from its anchor. controlRef isn't bound during the first render, so
+        // mount normally first, then arm the mock and force a re-render.
         await mockControlDirection('rtl');
         await wrapper.setProps({ modelValue: 51 });
         const thumbVisual = wrapper.find('[data-qa="dt-slider-thumb-visual"]');
@@ -2154,16 +2132,11 @@ describe('DtSlider Tests', () => {
       // 300px-wide control, matching the collision-avoidance describe above.
       const controlRect = { top: 0, left: 100, right: 400, bottom: 20 };
 
-      // updateCollisions can run more than once per settle (see its own
-      // "two calls can overlap" comment) — in a real browser,
-      // getBoundingClientRect() on a later call reflects whatever offset
-      // the PREVIOUS call already applied, which is exactly what
-      // updateMarkEdgeOffsets's own "back out any previous offset" step
-      // expects. jsdom has no real layout engine, so a plain static stub
-      // doesn't behave that way; this reads the mark's own currently
-      // applied inline offset back out of its style, so a static
-      // "natural" left/right stays a fixed point no matter how many times
-      // it's re-measured — the same thing a real DOM element would do.
+      // A real browser's getBoundingClientRect() reflects whatever offset a
+      // previous updateCollisions call already applied (which the "back out
+      // any previous offset" step expects) — jsdom has no layout engine, so
+      // read the mark's own applied inline offset back out of its style to
+      // simulate that.
       function rectWithCurrentOffset (el, naturalLeft, naturalRight) {
         const match = (el.style.transform || '').match(/calc\([^+]+\+\s*(-?[\d.]+)px\)/);
         const offset = match ? parseFloat(match[1]) : 0;
