@@ -209,6 +209,7 @@ import {
   SLIDER_FILL_ORIGINS,
 } from './SliderConstants';
 import { useSliderDevWarnings } from './Composables/UseSliderDevWarnings';
+import { useSliderDirection } from './Composables/UseSliderDirection';
 import { useSliderValue } from './Composables/UseSliderValue';
 import { useSliderMagneticSnap } from './Composables/UseSliderMagneticSnap';
 import { useSliderInteraction } from './Composables/UseSliderInteraction';
@@ -507,9 +508,19 @@ const labelId = `slider-label-${getUniqueString()}`;
 const controlRef = ref(null);
 const thumbRefs = ref([]);
 
+// Prop-derived, not owned by any one composable — every composable that
+// needs either receives it as a plain argument below.
+const isRange = computed(() => Array.isArray(props.modelValue));
+const isVertical = computed(() => props.orientation === 'vertical');
+
+// Shared between UseSliderGeometry (reads it to build markStyle) and
+// UseSliderCollisionAvoidance (measures and writes it) — a plain ref passed
+// to both rather than owned by either, since each needs it the other way.
+const markEdgeOffsetPx = ref([]);
+
+const { isRtl } = useSliderDirection(controlRef);
+
 const {
-  isRange,
-  isVertical,
   internalValues,
   lastCommittedValues,
   currentValue,
@@ -520,7 +531,7 @@ const {
   thumbNativeMax,
   thumbNativeStep,
   formatValue,
-} = useSliderValue(props, emit);
+} = useSliderValue(props, emit, { isRange });
 
 // Whether each thumb gets its accessible name from a visible label (prop or
 // slot) rather than a bare aria-label — determines which of the two the
@@ -551,7 +562,6 @@ const {
   isDragging,
   activeThumbIndex,
   focusedThumbIndex,
-  isRtl,
   onPointerDown,
   onPointerMove,
   onPointerUp,
@@ -573,48 +583,50 @@ const {
   lastCommittedValues,
   findMagneticSnapPoint,
   activeSnapValue,
+  isRtl,
 });
 
 // ─── Computed visual helpers ──────────────────────────────────────────────────
 
 const {
-  positionStyle,
-  centerInlineTransform,
   thumbPositionStyle,
   tickPositionStyle,
+  markStyle,
+  mergedReadoutPct,
+  mergedReadoutText,
   indicatorStyle,
-} = useSliderGeometry(props, { isVertical, isRange, internalValues, thumbPercent, isRtl });
+} = useSliderGeometry(props, {
+  isVertical,
+  isRange,
+  internalValues,
+  thumbPercent,
+  isRtl,
+  markEdgeOffsetPx,
+  formatValue,
+});
 
 const { computedTickValues, computedMarks, reservesAnnotationSpace } = useSliderMarksAndTicks(
   props,
   { isVertical, thumbPercent },
 );
 
-const markElRefs = ref([]);
-const readoutElRefs = ref([]);
-const mergedReadoutElRef = ref(null);
-
 const {
-  markStyle,
-  markCollisionHidden,
-  readoutMerged,
-  mergedReadoutPct,
-  mergedReadoutText,
-} = useSliderCollisionAvoidance(props, {
-  controlRef,
   markElRefs,
   readoutElRefs,
   mergedReadoutElRef,
+  markCollisionHidden,
+  readoutMerged,
+} = useSliderCollisionAvoidance(props, {
+  controlRef,
   isVertical,
   isRange,
   internalValues,
   thumbPercent,
-  formatValue,
   isRtl,
   isReadoutOpen,
   computedMarks,
-  positionStyle,
-  centerInlineTransform,
+  markEdgeOffsetPx,
+  mergedReadoutPct,
 });
 
 // ─── Dev warnings ─────────────────────────────────────────────────────────────

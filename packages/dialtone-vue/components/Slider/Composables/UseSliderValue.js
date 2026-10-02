@@ -4,11 +4,11 @@ import { ref, computed, watch, onMounted } from 'vue';
 // out-of-contract modelValue into the normalized internalValues every other
 // part of the component reads — clamped to [min, max], snapped to the step
 // grid, range order normalized, and the minGapSteps gap enforced. See
-// normalizeModelValue below for the full rationale.
-export function useSliderValue(props, emit) {
-  const isRange = computed(() => Array.isArray(props.modelValue));
-  const isVertical = computed(() => props.orientation === 'vertical');
-
+// normalizeModelValue below for the full rationale. isRange is prop-derived
+// state, not value normalization — it lives in Slider.vue and is passed in
+// here (and to every other composable that needs it) rather than owned by
+// any one of them.
+export function useSliderValue(props, emit, { isRange }) {
   function decimalPlaces(n) {
     const dot = String(n).indexOf('.');
     return dot === -1 ? 0 : String(n).length - dot - 1;
@@ -235,8 +235,6 @@ export function useSliderValue(props, emit) {
   });
 
   return {
-    isRange,
-    isVertical,
     internalValues,
     lastCommittedValues,
     currentValue,

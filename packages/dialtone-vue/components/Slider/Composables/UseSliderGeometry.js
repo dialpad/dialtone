@@ -2,8 +2,17 @@ import { computed } from 'vue';
 
 // Pure positioning math shared by every element placed along the track
 // (thumb, tick, mark, readout, indicator) — no DOM reads, just props +
-// reactive state from UseSliderValue/UseSliderInteraction.
-export function useSliderGeometry(props, { isVertical, isRange, internalValues, thumbPercent, isRtl }) {
+// reactive state from UseSliderValue/UseSliderDirection/
+// UseSliderCollisionAvoidance (markEdgeOffsetPx).
+export function useSliderGeometry(props, {
+  isVertical,
+  isRange,
+  internalValues,
+  thumbPercent,
+  isRtl,
+  markEdgeOffsetPx,
+  formatValue,
+}) {
   // Shared by every element positioned along the track (thumb, tick, mark,
   // readout) — they only differ in which transform re-centers them, so the
   // axis branch (insetInlineStart/top vs. bottom for vertical) lives in one
@@ -48,6 +57,31 @@ export function useSliderGeometry(props, { isVertical, isRange, internalValues, 
     return positionStyle(thumbPercent(val), transform);
   }
 
+  // A mark beyond the edge-clamp tolerance of the control's edge (see
+  // UseSliderCollisionAvoidance, which measures and populates
+  // markEdgeOffsetPx) gets nudged inward by that excess so its text stays
+  // legible instead of being clipped. Guarded by !isVertical here (not just
+  // where the offset is computed) so a stale offset from a prior horizontal
+  // render can never leak into vertical mode's own transform (translateY,
+  // not translateX) if orientation changes reactively.
+  function markStyle(pct, index) {
+    const offset = !isVertical.value ? markEdgeOffsetPx.value[index] : 0;
+    if (!offset) return positionStyle(pct);
+    return positionStyle(pct, `translateX(calc(${centerInlineTransform()} + ${offset}px))`);
+  }
+
+  const mergedReadoutPct = computed(() => {
+    if (!isRange.value || internalValues.value.length !== 2) return 0;
+    const [lo, hi] = internalValues.value;
+    return (thumbPercent(lo) + thumbPercent(hi)) / 2;
+  });
+
+  const mergedReadoutText = computed(() => {
+    if (!isRange.value || internalValues.value.length !== 2) return '';
+    const [lo, hi] = internalValues.value;
+    return `${formatValue(lo, 0)}–${formatValue(hi, 1)}`;
+  });
+
   const indicatorStyle = computed(() => {
     if (isRange.value && internalValues.value.length === 2) {
       const [lo, hi] = internalValues.value;
@@ -87,6 +121,9 @@ export function useSliderGeometry(props, { isVertical, isRange, internalValues, 
     centerInlineTransform,
     thumbPositionStyle,
     tickPositionStyle,
+    markStyle,
+    mergedReadoutPct,
+    mergedReadoutText,
     indicatorStyle,
   };
 }

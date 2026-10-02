@@ -12,20 +12,19 @@ import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from 'vue'
 // that could silently stop tracking the layout.
 export function useSliderCollisionAvoidance(props, {
   controlRef,
-  markElRefs,
-  readoutElRefs,
-  mergedReadoutElRef,
   isVertical,
   isRange,
   internalValues,
   thumbPercent,
-  formatValue,
   isRtl,
   isReadoutOpen,
   computedMarks,
-  positionStyle,
-  centerInlineTransform,
+  markEdgeOffsetPx,
+  mergedReadoutPct,
 }) {
+  const markElRefs = ref([]);
+  const readoutElRefs = ref([]);
+  const mergedReadoutElRef = ref(null);
   const markCollisionHidden = ref([]);
   const readoutMerged = ref(false);
   const COLLISION_PADDING = 4; // px of breathing room before a mark hides or readouts merge
@@ -33,23 +32,8 @@ export function useSliderCollisionAvoidance(props, {
   // mark within that margin already renders fully today (it's what the margin
   // is for), so leave it centered exactly as before. Only once a mark's natural
   // centered position would exceed this margin does it need nudging inward;
-  // see markEdgeOffsetPx below.
+  // see markEdgeOffsetPx (UseSliderGeometry's markStyle reads it) below.
   const EDGE_CLAMP_TOLERANCE_PX = 32;
-
-  // A mark beyond EDGE_CLAMP_TOLERANCE_PX of the control's edge (see
-  // updateMarkCollisions below, which measures and populates this) gets nudged
-  // inward by that excess so its text stays legible instead of being clipped —
-  // index-keyed like markCollisionHidden, for the same reason (see the
-  // data-mark-index rationale above updateMarkCollisions). Guarded by
-  // !isVertical here (not just where it's computed) so a stale offset from a
-  // prior horizontal render can never leak into vertical mode's own transform
-  // (translateY, not translateX) if orientation changes reactively.
-  const markEdgeOffsetPx = ref([]);
-  function markStyle(pct, index) {
-    const offset = !isVertical.value ? markEdgeOffsetPx.value[index] : 0;
-    if (!offset) return positionStyle(pct);
-    return positionStyle(pct, `translateX(calc(${centerInlineTransform()} + ${offset}px))`);
-  }
 
   function rectsOverlap(a, b, padding = 0) {
     return !(
@@ -59,18 +43,6 @@ export function useSliderCollisionAvoidance(props, {
       a.top - padding > b.bottom
     );
   }
-
-  const mergedReadoutPct = computed(() => {
-    if (!isRange.value || internalValues.value.length !== 2) return 0;
-    const [lo, hi] = internalValues.value;
-    return (thumbPercent(lo) + thumbPercent(hi)) / 2;
-  });
-
-  const mergedReadoutText = computed(() => {
-    if (!isRange.value || internalValues.value.length !== 2) return '';
-    const [lo, hi] = internalValues.value;
-    return `${formatValue(lo, 0)}–${formatValue(hi, 1)}`;
-  });
 
   // Two passes: first decide whether the individual readouts should merge (their
   // elements stay in the DOM at all times, only visibility toggles, so their rects
@@ -268,11 +240,10 @@ export function useSliderCollisionAvoidance(props, {
   });
 
   return {
-    markEdgeOffsetPx,
-    markStyle,
+    markElRefs,
+    readoutElRefs,
+    mergedReadoutElRef,
     markCollisionHidden,
     readoutMerged,
-    mergedReadoutPct,
-    mergedReadoutText,
   };
 }
