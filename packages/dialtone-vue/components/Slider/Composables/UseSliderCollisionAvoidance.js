@@ -1,4 +1,4 @@
-import { ref, computed, watch, nextTick } from 'vue';
+import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from 'vue';
 
 // Two kinds of collision, resolved in order: in range mode, the low/high readouts
 // can overlap each other as the thumbs converge — merged into a single centered
@@ -255,17 +255,17 @@ export function useSliderCollisionAvoidance(props, {
     { deep: true },
   );
 
-  function mountCollisionAvoidance() {
+  onMounted(() => {
     nextTick(updateCollisions);
     if (typeof ResizeObserver !== 'undefined' && controlRef.value) {
       markCollisionResizeObserver = new ResizeObserver(() => updateCollisions());
       markCollisionResizeObserver.observe(controlRef.value);
     }
-  }
+  });
 
-  function unmountCollisionAvoidance() {
+  onBeforeUnmount(() => {
     markCollisionResizeObserver?.disconnect();
-  }
+  });
 
   return {
     markEdgeOffsetPx,
@@ -274,7 +274,5 @@ export function useSliderCollisionAvoidance(props, {
     readoutMerged,
     mergedReadoutPct,
     mergedReadoutText,
-    mountCollisionAvoidance,
-    unmountCollisionAvoidance,
   };
 }

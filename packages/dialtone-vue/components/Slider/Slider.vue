@@ -198,7 +198,7 @@
 
 <script setup lang="ts">
 // @ts-nocheck
-import { ref, computed, onMounted, onBeforeUnmount, useSlots, useAttrs } from 'vue';
+import { ref, computed, useSlots, useAttrs } from 'vue';
 import { DtText } from '@/components/Text';
 import { getUniqueString, hasSlotContent, removeClassStyleAttrs } from '@/common/utils';
 import {
@@ -520,7 +520,6 @@ const {
   thumbNativeMax,
   thumbNativeStep,
   formatValue,
-  correctInitialModelValue,
 } = useSliderValue(props, emit);
 
 // Whether each thumb gets its accessible name from a visible label (prop or
@@ -563,8 +562,6 @@ const {
   onThumbHitPointerEnter,
   onThumbHitPointerLeave,
   isReadoutOpen,
-  mountInteraction,
-  unmountInteraction,
 } = useSliderInteraction(props, emit, {
   controlRef,
   thumbRefs,
@@ -603,8 +600,6 @@ const {
   readoutMerged,
   mergedReadoutPct,
   mergedReadoutText,
-  mountCollisionAvoidance,
-  unmountCollisionAvoidance,
 } = useSliderCollisionAvoidance(props, {
   controlRef,
   markElRefs,
@@ -620,17 +615,6 @@ const {
   computedMarks,
   positionStyle,
   centerInlineTransform,
-});
-
-onMounted(() => {
-  mountCollisionAvoidance();
-  mountInteraction();
-  correctInitialModelValue();
-});
-
-onBeforeUnmount(() => {
-  unmountCollisionAvoidance();
-  unmountInteraction();
 });
 
 // ─── Dev warnings ─────────────────────────────────────────────────────────────

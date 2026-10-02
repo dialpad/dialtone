@@ -1,4 +1,4 @@
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 
 // Single source of truth for turning a possibly-uncontrolled, possibly
 // out-of-contract modelValue into the normalized internalValues every other
@@ -223,9 +223,8 @@ export function useSliderValue(props, emit) {
   // starting value normalizeModelValue had to rewrite (inverted pair,
   // out-of-bounds clamp, invalid array length) back to the parent the same
   // way a later prop update would, so v-model doesn't stay silently out of
-  // sync with what's rendered from the very first paint. Called from
-  // Slider.vue's onMounted.
-  function correctInitialModelValue() {
+  // sync with what's rendered from the very first paint.
+  onMounted(() => {
     if (props.modelValue === undefined || props.modelValue === null) return;
     const incoming = Array.isArray(props.modelValue) ? props.modelValue : [props.modelValue];
     const next = internalValues.value;
@@ -233,7 +232,7 @@ export function useSliderValue(props, emit) {
     if (needsCorrection) {
       emit('update:modelValue', Array.isArray(props.modelValue) ? [...next] : next[0]);
     }
-  }
+  });
 
   return {
     isRange,
@@ -251,6 +250,5 @@ export function useSliderValue(props, emit) {
     thumbNativeMax,
     thumbNativeStep,
     formatValue,
-    correctInitialModelValue,
   };
 }

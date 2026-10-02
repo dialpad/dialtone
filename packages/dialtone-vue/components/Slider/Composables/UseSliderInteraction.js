@@ -1,4 +1,4 @@
-import { ref, watch } from 'vue';
+import { ref, watch, onMounted, onBeforeUnmount } from 'vue';
 
 // Everything about a user actively interacting with the thumbs: pointer
 // drag, native keyboard events, focus/hover tracking, and the interactive
@@ -356,17 +356,17 @@ export function useSliderInteraction(props, emit, {
     return activeThumbIndex.value === i || focusedThumbIndex.value === i || hoveredThumbIndex.value === i;
   }
 
-  function mountInteraction() {
+  onMounted(() => {
     syncDirection();
     if (typeof MutationObserver !== 'undefined') {
       dirObserver = new MutationObserver(syncDirection);
       dirObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['dir'], subtree: true });
     }
-  }
+  });
 
-  function unmountInteraction() {
+  onBeforeUnmount(() => {
     dirObserver?.disconnect();
-  }
+  });
 
   return {
     isDragging,
@@ -386,7 +386,5 @@ export function useSliderInteraction(props, emit, {
     onThumbHitPointerEnter,
     onThumbHitPointerLeave,
     isReadoutOpen,
-    mountInteraction,
-    unmountInteraction,
   };
 }
