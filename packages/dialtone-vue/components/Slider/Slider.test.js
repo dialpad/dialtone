@@ -2126,6 +2126,40 @@ describe('DtSlider Tests', () => {
         expect(marksAfter[0].classes()).toContain('d-slider__mark--collision-hidden');
         expect(marksAfter[1].classes()).not.toContain('d-slider__mark--collision-hidden');
       });
+
+      it('re-measures collisions on a pure runtime dir flip, with no value/marks/prefix/suffix change', async () => {
+        mockProps = { readout: 'always', marks: [0, 100], modelValue: 90 };
+        updateWrapper();
+        await nextTick();
+
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        const readouts = wrapper.findAll('[data-qa="dt-slider-thumb-readout"]');
+        readouts[0].element.getBoundingClientRect = () => readoutSize;
+        // Neither the LTR readout position at modelValue 90 (~260-280, see
+        // the RTL mirroring test above) nor its RTL-mirrored position
+        // (~20-40) — genuinely clear of both, for a real baseline.
+        const neutralRect = { top: 0, left: 120, right: 140, bottom: 20 };
+        marks[0].element.getBoundingClientRect = () => neutralRect;
+        marks[1].element.getBoundingClientRect = () => neutralRect;
+        await settleCollisions();
+
+        // Baseline under LTR: nothing overlaps, nothing hidden.
+        let marksNow = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        expect(marksNow[0].classes()).not.toContain('d-slider__mark--collision-hidden');
+
+        // Re-stub mark[0] where the RTL-mirrored readout would land (see the
+        // RTL mirroring test above) — only the dir attribute changes next,
+        // not modelValue/marks/prefix/suffix, so this only gets measured if
+        // isRtl is itself a reactive source the collision watcher reacts to.
+        const nearMirroredReadoutRect = { top: 0, left: 20, right: 40, bottom: 20 };
+        marks[0].element.getBoundingClientRect = () => nearMirroredReadoutRect;
+        await mockControlDirection('rtl');
+        await settleCollisions();
+
+        marksNow = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        expect(marksNow[0].classes()).toContain('d-slider__mark--collision-hidden');
+      });
     });
 
     describe('Edge-aware mark label clamping', () => {

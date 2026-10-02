@@ -181,7 +181,10 @@ export function useSliderCollisionAvoidance(props, {
   // Rendered widths change with formatted TEXT (getValueText/prefix/suffix),
   // not just the underlying values — a locale change at unchanged values must
   // still recheck, since the ResizeObserver below only watches the control's
-  // own size, not text-driven changes to its children.
+  // own size, not text-driven changes to its children. isVertical/isRtl are
+  // watched too — a runtime orientation or dir flip changes every rect this
+  // measures without touching any of the other sources, or without the
+  // control's own size changing, and neither recomputes on its own otherwise.
   watch(
     [
       internalValues,
@@ -190,6 +193,8 @@ export function useSliderCollisionAvoidance(props, {
       () => props.getValueText,
       () => props.prefix,
       () => props.suffix,
+      isVertical,
+      () => isRtl(),
     ],
     () => updateCollisions(),
     { deep: true },
