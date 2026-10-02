@@ -6,21 +6,18 @@ import { ref, onMounted, onBeforeUnmount } from 'vue';
 // all three need to agree on the same reactively-cached value instead of each
 // doing its own point-in-time getComputedStyle() read.
 export function useSliderDirection(controlRef) {
-  // Cached, reactive mirror of isRtl()'s live DOM read — getComputedStyle
-  // itself isn't reactive, so a runtime dir change on any ancestor (dir is
+  // Cached, reactive mirror of a live DOM read — getComputedStyle itself
+  // isn't reactive, so a runtime dir change on any ancestor (dir is
   // ambient/inherited) would otherwise never re-trigger the template's
-  // transform bindings between mount and the next unrelated render.
-  const rtl = ref(false);
+  // transform bindings between mount and the next unrelated render. Exposed
+  // as isRtl, matching the sibling isRange/isVertical computed-ref shape.
+  const isRtl = ref(false);
 
   // Re-reads the control's resolved text direction off the DOM and caches it
-  // in `rtl` above. Called once on mount, and again whenever dirObserver
+  // in isRtl above. Called once on mount, and again whenever dirObserver
   // below sees a relevant dir attribute change.
   function syncDirection() {
-    rtl.value = !!controlRef.value && getComputedStyle(controlRef.value).direction === 'rtl';
-  }
-
-  function isRtl() {
-    return rtl.value;
+    isRtl.value = !!controlRef.value && getComputedStyle(controlRef.value).direction === 'rtl';
   }
 
   // dir is ambient — inherited from ANY ancestor, not just controlRef's direct

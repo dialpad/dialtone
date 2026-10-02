@@ -65,7 +65,7 @@ export function useSliderCollisionAvoidance(props, {
     // physical right under dir="rtl" — this analytical calculation has to
     // mirror the same way, or collision rects land on the wrong side and the
     // system ends up comparing (and hiding) the wrong element entirely.
-    const effectivePct = isRtl() ? 100 - pct : pct;
+    const effectivePct = isRtl.value ? 100 - pct : pct;
     const centerPx = controlRect.left + (effectivePct / 100) * (controlRect.right - controlRect.left);
     return { left: centerPx - width / 2, right: centerPx + width / 2, top: elRect.top, bottom: elRect.bottom };
   }
@@ -194,7 +194,7 @@ export function useSliderCollisionAvoidance(props, {
       () => props.prefix,
       () => props.suffix,
       isVertical,
-      () => isRtl(),
+      isRtl,
     ],
     () => updateCollisions(),
     { deep: true },

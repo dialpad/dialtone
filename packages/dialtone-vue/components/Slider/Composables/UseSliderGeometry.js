@@ -30,7 +30,7 @@ export function useSliderGeometry(props, {
   // of orientation — insetInlineStart centers the track/thumb on the inline
   // axis even in vertical mode.
   function centerInlineTransform() {
-    return isRtl() ? '50%' : '-50%';
+    return isRtl.value ? '50%' : '-50%';
   }
 
   function thumbPositionStyle(val) {
@@ -105,8 +105,6 @@ export function useSliderGeometry(props, {
   });
 
   return {
-    positionStyle,
-    centerInlineTransform,
     thumbPositionStyle,
     tickPositionStyle,
     markStyle,

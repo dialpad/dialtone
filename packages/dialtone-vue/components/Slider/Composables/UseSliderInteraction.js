@@ -126,7 +126,7 @@ export function useSliderInteraction(props, emit, {
       // already mirrors it under dir="rtl" — min renders on the physical right
       // instead of the left. clientX is always a physical coordinate, so the
       // pointer-to-value mapping has to mirror the same way by hand.
-      if (isRtl()) pct = 1 - pct;
+      if (isRtl.value) pct = 1 - pct;
     }
     pct = Math.min(1, Math.max(0, pct));
     return props.min + pct * (props.max - props.min);
@@ -260,7 +260,7 @@ export function useSliderInteraction(props, emit, {
     // Applies in vertical mode too — aria-orientation is purely an ARIA hint,
     // the native input is never actually reoriented, so dir still swaps Left/
     // Right there exactly as it does horizontally.
-    const rtlKeys = isRtl();
+    const rtlKeys = isRtl.value;
     const increaseKey = rtlKeys ? 'ArrowLeft' : 'ArrowRight';
     const decreaseKey = rtlKeys ? 'ArrowRight' : 'ArrowLeft';
     const delta = largeStepDelta(event.key, event.shiftKey, increaseKey, decreaseKey);

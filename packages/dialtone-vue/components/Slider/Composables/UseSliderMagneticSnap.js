@@ -80,7 +80,6 @@ export function useSliderMagneticSnap(props, { controlRef, isVertical }) {
   }
 
   return {
-    computedSnapPoints,
     activeSnapValue,
     findMagneticSnapPoint,
   };
