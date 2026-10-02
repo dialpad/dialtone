@@ -380,6 +380,13 @@ describe('DtSlider Tests', () => {
       });
     });
 
+    describe('When ticks is left at its default', () => {
+      it('renders zero ticks', () => {
+        const ticks = wrapper.findAll('[data-qa="dt-slider-tick"]');
+        expect(ticks).toHaveLength(0);
+      });
+    });
+
     describe('Dense generated points are capped', () => {
       let warnSpy;
 
@@ -1686,6 +1693,14 @@ describe('DtSlider Tests', () => {
       await thumbInputs[0].trigger('input');
       expect(wrapper.emitted('update:modelValue')?.at(-1)[0]).toBe(40);
     });
+
+    it('falls back to the raw largeStep value for Shift+Arrow when step is 0', async () => {
+      mockProps = { modelValue: 50, min: 0, max: 100, step: 0 };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      await thumbInputs[0].trigger('keydown', { key: 'ArrowRight', shiftKey: true });
+      expect(wrapper.emitted('update:modelValue')?.at(-1)[0]).toBe(60); // 50 + default largeStep(10)
+    });
   });
 
   describe('Controlled values stay on the native step grid', () => {
@@ -2018,6 +2033,17 @@ describe('DtSlider Tests', () => {
       afterEach(() => {
         mockControlDirectionSpy?.mockRestore();
         document.documentElement.removeAttribute('dir');
+      });
+
+      it('observes the control on mount and disconnects on unmount', () => {
+        const observeSpy = vi.spyOn(global.ResizeObserver.prototype, 'observe');
+        const disconnectSpy = vi.spyOn(global.ResizeObserver.prototype, 'disconnect');
+        updateWrapper();
+        expect(observeSpy).toHaveBeenCalledWith(wrapper.find('[data-qa="dt-slider-control"]').element);
+        wrapper.unmount();
+        expect(disconnectSpy).toHaveBeenCalled();
+        observeSpy.mockRestore();
+        disconnectSpy.mockRestore();
       });
 
       it('hides a mark once it overlaps the visible readout', async () => {
