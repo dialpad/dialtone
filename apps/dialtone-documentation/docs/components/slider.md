@@ -129,7 +129,7 @@ When they differ, ticks become checkpoints along a finer scale rather than a mar
 
 ### Magnetic snapping
 
-`step` is a hard restriction — the thumb can only ever land on a value in its grid. `snapPoints` is different: it pulls a dragged thumb toward nearby values, like the snapping in Figma or Photoshop, but a value just outside `snapThreshold` (in pixels along the track, default `10`) stays freely reachable. The pull is also sticky — once a thumb snaps onto a point, dragging away from it takes noticeably more distance than dragging onto it did, so it resists small jitter right at the boundary. It only affects pointer dragging — keyboard stepping via `step`/`largeStep` is unaffected.
+`step` is a hard restriction — the thumb can only ever land on a value in its grid. `snapPoints` is different: it pulls a dragged thumb toward nearby values, like the snapping in Figma or Photoshop, but a value just outside a fixed 10px radius along the track stays freely reachable. The pull is also sticky — once a thumb snaps onto a point, dragging away from it takes noticeably more distance than dragging onto it did, so it resists small jitter right at the boundary. It only affects pointer dragging — keyboard stepping via `step`/`largeStep` is unaffected.
 
 Pass a number for an evenly spaced interval:
 

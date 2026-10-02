@@ -87,7 +87,7 @@
     </section>
 
     <!-- Magnetic snapping — pulls toward snapPoints while dragging, but a
-         value just outside snapThreshold stays freely reachable (unlike
+         value just outside the snap radius stays freely reachable (unlike
          step's hard grid) -->
     <section>
       <p class="d-body--sm-compact d-mbe-300 d-fc-tertiary">

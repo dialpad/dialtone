@@ -14,7 +14,6 @@
     :name="$attrs.name"
     :large-step="$attrs.largeStep"
     :snap-points="$attrs.snapPoints"
-    :snap-threshold="$attrs.snapThreshold"
     :fill-origin="$attrs.fillOrigin"
     :readout="$attrs.readout"
     :prefix="$attrs.prefix"

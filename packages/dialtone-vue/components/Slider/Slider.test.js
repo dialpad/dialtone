@@ -1141,12 +1141,13 @@ describe('DtSlider Tests', () => {
       });
     });
 
-    describe('Magnetic snapping (snapPoints / snapThreshold)', () => {
+    describe('Magnetic snapping (snapPoints)', () => {
       let control;
 
       // A 100px-wide control with the default min/max of [0, 100] makes the
-      // pixel threshold and the value threshold numerically identical, which
-      // keeps the expected values in each test easy to verify by hand.
+      // fixed 10px snap threshold and the value threshold numerically
+      // identical, which keeps the expected values in each test easy to
+      // verify by hand.
       const controlRect = { top: 0, left: 0, right: 100, bottom: 20, width: 100, height: 20 };
 
       const dragTo = async (clientX) => {
@@ -1163,32 +1164,32 @@ describe('DtSlider Tests', () => {
         control.element.getBoundingClientRect = () => controlRect;
       });
 
-      it('pulls a dragged value within snapThreshold to the nearest interval snap point', async () => {
-        mockProps = { snapPoints: 25, snapThreshold: 5 };
+      it('pulls a dragged value within the snap threshold to the nearest interval snap point', async () => {
+        mockProps = { snapPoints: 25 };
         updateWrapper();
         control = wrapper.find('[data-qa="dt-slider-control"]');
         control.element.setPointerCapture = () => {};
         control.element.getBoundingClientRect = () => controlRect;
 
-        await dragTo(23); // distance 2 from the 25 snap point, within threshold 5
+        await dragTo(23); // distance 2 from the 25 snap point, within the fixed 10px threshold
         const emitted = wrapper.emitted('update:modelValue');
         expect(emitted[emitted.length - 1][0]).toBe(25);
       });
 
-      it('leaves a value outside snapThreshold freely selectable', async () => {
-        mockProps = { snapPoints: 25, snapThreshold: 2 };
+      it('leaves a value outside the snap threshold freely selectable', async () => {
+        mockProps = { snapPoints: 25 };
         updateWrapper();
         control = wrapper.find('[data-qa="dt-slider-control"]');
         control.element.setPointerCapture = () => {};
         control.element.getBoundingClientRect = () => controlRect;
 
-        await dragTo(20); // distance 5 from the 25 snap point, outside threshold 2
+        await dragTo(12); // distance 12 from the nearest interval point (0), outside the fixed 10px threshold
         const emitted = wrapper.emitted('update:modelValue');
-        expect(emitted[emitted.length - 1][0]).toBe(20);
+        expect(emitted[emitted.length - 1][0]).toBe(12);
       });
 
-      it('pulls a dragged value within snapThreshold to the nearest arbitrary snap point', async () => {
-        mockProps = { snapPoints: [10, 42, 90], snapThreshold: 5 };
+      it('pulls a dragged value within the snap threshold to the nearest arbitrary snap point', async () => {
+        mockProps = { snapPoints: [10, 42, 90] };
         updateWrapper();
         control = wrapper.find('[data-qa="dt-slider-control"]');
         control.element.setPointerCapture = () => {};
@@ -1200,7 +1201,7 @@ describe('DtSlider Tests', () => {
       });
 
       it('uses normal step quantization, unaffected, for values far from any snap point', async () => {
-        mockProps = { snapPoints: [10, 42, 90], snapThreshold: 5, step: 1 };
+        mockProps = { snapPoints: [10, 42, 90], step: 1 };
         updateWrapper();
         control = wrapper.find('[data-qa="dt-slider-control"]');
         control.element.setPointerCapture = () => {};
@@ -1211,8 +1212,8 @@ describe('DtSlider Tests', () => {
         expect(emitted[emitted.length - 1][0]).toBe(65);
       });
 
-      it('does not snap keyboard-driven input, even near a snap point with a large threshold', async () => {
-        mockProps = { snapPoints: 25, snapThreshold: 50 };
+      it('does not snap keyboard-driven input, even near a snap point', async () => {
+        mockProps = { snapPoints: 25 };
         updateWrapper();
         thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
 
@@ -1229,28 +1230,28 @@ describe('DtSlider Tests', () => {
       });
 
       it('holds a snapped thumb through hysteresis, past the entry radius, until it clears the wider release radius', async () => {
-        // snapThreshold 3 → entry radius 3, release radius 3 * SNAP_RELEASE_MULTIPLIER (2) = 6.
-        mockProps = { snapPoints: 25, snapThreshold: 3 };
+        // Fixed 10px entry radius, release radius 10 * SNAP_RELEASE_MULTIPLIER (2) = 20.
+        mockProps = { snapPoints: 25 };
         updateWrapper();
         control = wrapper.find('[data-qa="dt-slider-control"]');
         control.element.setPointerCapture = () => {};
         control.element.getBoundingClientRect = () => controlRect;
 
-        await dragTo(23); // distance 2, within entry radius 3 — snaps to 25
+        await dragTo(23); // distance 2, within entry radius 10 — snaps to 25
         let emitted = wrapper.emitted('update:modelValue');
         expect(emitted[emitted.length - 1][0]).toBe(25);
 
-        await moveTo(21); // distance 4 from 25 — past entry radius, but within release radius 6
+        await moveTo(10); // distance 15 from 25 — past entry radius, but within release radius 20
         emitted = wrapper.emitted('update:modelValue');
         expect(emitted[emitted.length - 1][0]).toBe(25); // stays pinned via hysteresis
 
-        await moveTo(15); // distance 10 — past the release radius, breaks free
+        await moveTo(0); // distance 25 — past the release radius, breaks free
         emitted = wrapper.emitted('update:modelValue');
-        expect(emitted[emitted.length - 1][0]).toBe(15);
+        expect(emitted[emitted.length - 1][0]).toBe(0);
       });
 
       it('snaps each thumb independently in range mode while still respecting the no-crossing clamp', async () => {
-        mockProps = { modelValue: [40, 60], snapPoints: 25, snapThreshold: 5 };
+        mockProps = { modelValue: [40, 60], snapPoints: 25 };
         updateWrapper();
         control = wrapper.find('[data-qa="dt-slider-control"]');
         control.element.setPointerCapture = () => {};
@@ -1262,19 +1263,19 @@ describe('DtSlider Tests', () => {
       });
 
       it('snaps exactly at the threshold boundary (inclusive)', async () => {
-        mockProps = { snapPoints: 25, snapThreshold: 5 };
+        mockProps = { snapPoints: 25 };
         updateWrapper();
         control = wrapper.find('[data-qa="dt-slider-control"]');
         control.element.setPointerCapture = () => {};
         control.element.getBoundingClientRect = () => controlRect;
 
-        await dragTo(20); // distance exactly 5 from the 25 snap point, equal to the threshold
+        await dragTo(15); // distance exactly 10 from the 25 snap point, equal to the fixed threshold
         const emitted = wrapper.emitted('update:modelValue');
         expect(emitted[emitted.length - 1][0]).toBe(25);
       });
 
       it('never offers a snap point outside [min, max] as a target, so the emitted value can never leave the documented range', async () => {
-        mockProps = { min: 0, max: 100, snapPoints: [105], snapThreshold: 10 };
+        mockProps = { min: 0, max: 100, snapPoints: [105] };
         updateWrapper();
         control = wrapper.find('[data-qa="dt-slider-control"]');
         control.element.setPointerCapture = () => {};
@@ -1287,7 +1288,7 @@ describe('DtSlider Tests', () => {
 
       it('snaps correctly for a vertical slider, using the control height rather than width', async () => {
         const verticalRect = { top: 0, left: 0, right: 20, bottom: 100, width: 20, height: 100 };
-        mockProps = { orientation: 'vertical', snapPoints: 25, snapThreshold: 5 };
+        mockProps = { orientation: 'vertical', snapPoints: 25 };
         updateWrapper();
         control = wrapper.find('[data-qa="dt-slider-control"]');
         control.element.setPointerCapture = () => {};
@@ -1304,24 +1305,26 @@ describe('DtSlider Tests', () => {
         // A snap point beyond the high thumb can pull the low thumb toward
         // it, but the crossing clamp then stops it short — hysteresis must
         // not keep comparing later drag positions against that unreachable
-        // point, or the thumb stays stuck at 60 across a wide swath of the
-        // drag that has nothing to do with the 90 snap point.
-        mockProps = { modelValue: [40, 60], snapPoints: [90], snapThreshold: 25 };
+        // point, or the thumb stays stuck at 75 across a wide swath of the
+        // drag that has nothing to do with the 90 snap point. High thumb is
+        // placed at 75 (not 60) so the fixed 20px release radius around 90
+        // still reaches a position (72) below the high thumb's clamp.
+        mockProps = { modelValue: [40, 75], snapPoints: [90] };
         updateWrapper();
         control = wrapper.find('[data-qa="dt-slider-control"]');
         control.element.setPointerCapture = () => {};
         control.element.getBoundingClientRect = () => controlRect;
 
-        await dragTo(41); // grabs the low thumb (nearer to 40 than 60)
-        await moveTo(85); // distance 5 from 90, within entry radius 25 — snaps to 90, crossing-clamped to 60
+        await dragTo(41); // grabs the low thumb (nearer to 40 than 75)
+        await moveTo(85); // distance 5 from 90, within entry radius 10 — snaps to 90, crossing-clamped to 75
         let emitted = wrapper.emitted('update:modelValue');
-        expect(emitted[emitted.length - 1][0]).toEqual([60, 60]);
+        expect(emitted[emitted.length - 1][0]).toEqual([75, 75]);
 
-        await moveTo(45); // distance 45 from 90 — past entry radius; would still be inside the OLD, un-reconciled
-        // release radius (25 * SNAP_RELEASE_MULTIPLIER), but the thumb is no longer near the point it's
-        // ostensibly "holding," and 45 is not blocked by the high thumb at 60, so it must move freely.
+        await moveTo(72); // distance 18 from 90 — past entry radius; would still be inside the OLD, un-reconciled
+        // release radius (20), but the thumb is no longer near the point it's ostensibly "holding," and 72 is
+        // not blocked by the high thumb at 75, so it must move freely.
         emitted = wrapper.emitted('update:modelValue');
-        expect(emitted[emitted.length - 1][0]).toEqual([45, 60]);
+        expect(emitted[emitted.length - 1][0]).toEqual([72, 75]);
       });
     });
 
@@ -1712,7 +1715,7 @@ describe('DtSlider Tests', () => {
       // ("unlike step, this doesn't restrict which values are selectable")
       // — the real `step` attribute would otherwise let the browser silently
       // round that intentional value away the moment it's applied.
-      mockProps = { modelValue: 50, min: 0, max: 100, step: 25, snapPoints: [42], snapThreshold: 1000 };
+      mockProps = { modelValue: 50, min: 0, max: 100, step: 25, snapPoints: [42] };
       updateWrapper();
       const control = wrapper.find('[data-qa="dt-slider-control"]');
       control.element.setPointerCapture = () => {};

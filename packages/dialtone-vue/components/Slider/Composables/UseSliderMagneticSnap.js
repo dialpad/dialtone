@@ -1,8 +1,13 @@
 import { ref, computed } from 'vue';
 import { generateInterval } from '../utils';
 
+// Pixel radius around a snap point where the magnetic pull engages — not
+// exposed as a prop; Brad (PR review) questioned whether consumers would
+// ever need to tune this, and a fixed value keeps the API smaller.
+const SNAP_THRESHOLD_PX = 10;
+
 // How much wider the release radius is than the entry radius, in units of
-// snapThreshold — lets a snapped thumb resist small jitter near the point
+// SNAP_THRESHOLD_PX — lets a snapped thumb resist small jitter near the point
 // instead of flickering in and out right at the entry boundary.
 const SNAP_RELEASE_MULTIPLIER = 2;
 
@@ -21,7 +26,7 @@ export function useSliderMagneticSnap(props, { controlRef, isVertical }) {
     }
     // A point outside [min, max] can never be a value the thumb is allowed to
     // hold, so it must never be offered as a snap target — otherwise a drag
-    // that lands within snapThreshold of it would pull the thumb (and the
+    // that lands within the snap radius of it would pull the thumb (and the
     // emitted modelValue) out of the slider's own documented range.
     return props.snapPoints.filter((point) => point >= props.min && point <= props.max);
   });
@@ -32,7 +37,7 @@ export function useSliderMagneticSnap(props, { controlRef, isVertical }) {
   const activeSnapValue = ref({});
 
   // Magnetic, not restrictive: only overrides the value when rawVal falls
-  // within snapThreshold *pixels* of a snap point (converted to value-space
+  // within SNAP_THRESHOLD_PX of a snap point (converted to value-space
   // via the control's current rendered size, so the pull feels consistent
   // regardless of the slider's min/max range) — otherwise returns null and
   // normal step-quantization proceeds untouched. A pixel radius, not a value
@@ -50,7 +55,7 @@ export function useSliderMagneticSnap(props, { controlRef, isVertical }) {
     const rect = controlRef.value.getBoundingClientRect();
     const trackSizePx = isVertical.value ? rect.height : rect.width;
     if (!trackSizePx) return null;
-    const entryThreshold = (props.snapThreshold / trackSizePx) * (props.max - props.min);
+    const entryThreshold = (SNAP_THRESHOLD_PX / trackSizePx) * (props.max - props.min);
 
     const heldValue = activeSnapValue.value[thumbIndex];
     if (heldValue != null) {

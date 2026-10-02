@@ -13,7 +13,6 @@ export const argsData = {
   max: 100,
   step: 1,
   snapPoints: undefined,
-  snapThreshold: 10,
   disabled: false,
   orientation: 'horizontal',
   ticks: 10,
@@ -96,21 +95,12 @@ export const argTypesData = {
     },
   },
   snapPoints: {
-    description: 'Magnetic snap points the thumb pulls toward while dragging (pointer only — keyboard stepping is unaffected). A Number sets an evenly spaced interval (e.g. 25); a Number[] sets arbitrary, not-necessarily-even values (e.g. [10, 42, 90]). Unlike step, this doesn\'t restrict which values are selectable — a value just outside snapThreshold stays freely reachable.',
+    description: 'Magnetic snap points the thumb pulls toward while dragging (pointer only — keyboard stepping is unaffected). A Number sets an evenly spaced interval (e.g. 25); a Number[] sets arbitrary, not-necessarily-even values (e.g. [10, 42, 90]). Unlike step, this doesn\'t restrict which values are selectable — a value just outside the snap radius stays freely reachable.',
     control: { type: 'object' },
     table: {
       category: 'props',
       type: { summary: 'Number | Number[]' },
       defaultValue: { summary: 'undefined' },
-    },
-  },
-  snapThreshold: {
-    description: 'Pixel radius around a snap point where the magnetic pull engages. Releasing a snapped thumb takes a wider radius than entering did, for a sticky feel similar to Figma/Photoshop guide-snapping.',
-    control: { type: 'number' },
-    table: {
-      category: 'props',
-      type: { summary: 'Number' },
-      defaultValue: { summary: '10' },
     },
   },
   disabled: {

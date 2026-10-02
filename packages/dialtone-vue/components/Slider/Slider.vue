@@ -257,7 +257,7 @@ const props = defineProps({
   /**
    * Magnetic snap points the thumb pulls toward while dragging — unlike
    * step, this doesn't restrict which values are selectable; a value just
-   * outside snapThreshold of a snap point stays freely reachable. Pass a
+   * outside the snap radius of a snap point stays freely reachable. Pass a
    * number for an evenly spaced interval (e.g. 25), or an array for
    * arbitrary values (e.g. [10, 42, 90]). Pointer drag only — keyboard
    * stepping (step/largeStep) is unaffected.
@@ -265,17 +265,6 @@ const props = defineProps({
   snapPoints: {
     type: [Number, Array],
     default: undefined,
-  },
-
-  /**
-   * Pixel radius around a snap point where the magnetic pull engages. Once
-   * engaged, releasing takes a larger drag than entering did (see
-   * SNAP_RELEASE_MULTIPLIER) — a "sticky" feel like Figma/Photoshop
-   * guide-snapping, rather than a hard cutoff at the same radius.
-   */
-  snapThreshold: {
-    type: Number,
-    default: 10,
   },
 
   /**
