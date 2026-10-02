@@ -1760,6 +1760,18 @@ describe('DtSlider Tests', () => {
       expect(thumbInputs[0].attributes('min')).toBe('0');
       expect(thumbInputs[0].attributes('max')).toBe('100');
     });
+
+    it('does not apply the sibling gap when a malformed single-element array reaches range mode', () => {
+      // isRange is a bare Array.isArray check — a prop validator only warns in
+      // dev, it never coerces — so modelValue={[50]} still reaches
+      // internalValues as a length-1 array while isRange stays true. There's
+      // no second thumb to leave a gap against.
+      mockProps = { modelValue: [50], min: 0, max: 100, step: 1, minGapSteps: 5 };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      expect(thumbInputs[0].attributes('min')).toBe('0');
+      expect(thumbInputs[0].attributes('max')).toBe('100');
+    });
   });
 
   describe('largeStep always moves when step is coarser than largeStep', () => {

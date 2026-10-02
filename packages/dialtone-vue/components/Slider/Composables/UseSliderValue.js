@@ -94,17 +94,20 @@ export function useSliderValue(props, emit, { isRange }) {
 
   // The WAI-ARIA multi-thumb pattern requires each thumb's aria-valuemin/max
   // to reflect the OTHER thumb's current position, not a static [min, max] —
-  // the low thumb can never reach past (high - gap), and vice versa.
+  // the low thumb can never reach past (high - gap), and vice versa. Guarded
+  // on internalValues having a second thumb at all, not just isRange — an
+  // out-of-contract single-element modelValue in range mode must not apply a
+  // gap against a thumb that doesn't exist.
   function thumbNativeMin(i) {
-    if (!isRange.value || i !== 1) return props.min;
+    if (!isRange.value || i !== 1 || internalValues.value.length < 2) return props.min;
     const gap = props.minGapSteps * props.step;
-    return Math.min(props.max, (internalValues.value[0] ?? props.min) + gap);
+    return Math.min(props.max, internalValues.value[0] + gap);
   }
 
   function thumbNativeMax(i) {
-    if (!isRange.value || i !== 0) return props.max;
+    if (!isRange.value || i !== 0 || internalValues.value.length < 2) return props.max;
     const gap = props.minGapSteps * props.step;
-    return Math.max(props.min, (internalValues.value[1] ?? props.max) - gap);
+    return Math.max(props.min, internalValues.value[1] - gap);
   }
 
   // internalValues is always on-grid except for one deliberate case: an
