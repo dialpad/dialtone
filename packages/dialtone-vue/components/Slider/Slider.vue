@@ -71,7 +71,7 @@
           :style="indicatorStyle"
           data-qa="dt-slider-indicator"
         />
-        <template v-if="showTicks">
+        <template v-if="ticks">
           <div
             v-for="(tickValue, i) in computedTickValues"
             :key="i"
@@ -312,21 +312,13 @@ const props = defineProps({
   },
 
   /**
-   * When true, renders a tick mark at every tickInterval along the track.
+   * Renders tick marks along the track. Pass true to put a tick at every step;
+   * pass a Number instead to space ticks at that interval (same units as step).
    * @values true, false
    */
-  showTicks: {
-    type: Boolean,
+  ticks: {
+    type: [Boolean, Number],
     default: false,
-  },
-
-  /**
-   * Distance between tick marks, in the same units as step.
-   * When null, defaults to the step value.
-   */
-  tickInterval: {
-    type: Number,
-    default: null,
   },
 
   /**
@@ -468,7 +460,7 @@ const props = defineProps({
   /**
    * Text annotations rendered below the track at specific positions, independent of ticks.
    * Defaults to min and max (start and end). Pass true to mark every tick position
-   * automatically (uses tickInterval or step to determine positions) instead. Pass an
+   * automatically (uses the ticks interval or step to determine positions) instead. Pass an
    * array for explicit control: each entry is either a plain number (text defaults to the
    * number itself, formatted with prefix/suffix — NOT getValueText, which has no
    * meaningful index for a position that isn't tied to either thumb) or an object with a

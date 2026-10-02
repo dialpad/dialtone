@@ -1,4 +1,4 @@
-// A too-small interval relative to [min, max] (e.g. tickInterval=0.001 over a
+// A too-small interval relative to [min, max] (e.g. ticks=0.001 over a
 // 0–100 range) would otherwise generate tens of thousands of DOM nodes and an
 // equally large per-pointermove scan — cap it and warn instead of silently
 // hanging the tab.
@@ -16,7 +16,7 @@ export function generateInterval(min, max, interval, label) {
     // range — widen it just enough to fit the cap while still spanning the
     // FULL domain, rather than truncating to a fixed count from `min`. That
     // used to silently cover only the first ~1% of the range (e.g.
-    // tickInterval=0.001 over 0–100 rendered ticks from 0 to 0.999 only) —
+    // ticks=0.001 over 0–100 rendered ticks from 0 to 0.999 only) —
     // a plausible-looking but materially false representation of the range.
     effectiveInterval = span / (MAX_GENERATED_POINTS - 1);
     if (process.env.NODE_ENV !== 'production') {

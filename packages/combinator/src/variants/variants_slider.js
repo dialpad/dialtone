@@ -13,8 +13,7 @@ export default {
       min: { initialValue: 0 },
       max: { initialValue: 100 },
       step: { initialValue: 1 },
-      showTicks: { initialValue: true },
-      tickInterval: { initialValue: 10 },
+      ticks: { initialValue: 10 },
     },
     slots: {
       label: { initialValue: 'Slider label · {{ value }}' },
@@ -41,8 +40,7 @@ export default {
       min: { initialValue: 0 },
       max: { initialValue: 4 },
       step: { initialValue: 1 },
-      showTicks: { initialValue: true },
-      tickInterval: { initialValue: 1 },
+      ticks: { initialValue: 1 },
       marks: { initialValue: [{ value: 0, text: 'Off' }, { value: 4, text: 'Max' }] },
     },
     slots: {
@@ -87,8 +85,7 @@ export default {
       max: { initialValue: 1000 },
       step: { initialValue: 1 },
       snapPoints: { initialValue: 100 },
-      showTicks: { initialValue: true },
-      tickInterval: { initialValue: 100 },
+      ticks: { initialValue: 100 },
     },
     slots: {
       label: { initialValue: 'Budget cap · ${{ value }}' },

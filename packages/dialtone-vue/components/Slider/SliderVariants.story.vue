@@ -82,8 +82,7 @@
         :min="0"
         :max="10"
         :step="1"
-        :tick-interval="1"
-        show-ticks
+        :ticks="1"
       />
     </section>
 
@@ -144,8 +143,7 @@
         :max="100"
         :fill-origin="0"
         :marks="[{ value: -100, text: '−100' }, { value: 0, text: '0' }, { value: 100, text: '100' }]"
-        show-ticks
-        :tick-interval="25"
+        :ticks="25"
       />
     </section>
 
@@ -286,8 +284,7 @@
           :min="12"
           :max="32"
           :step="2"
-          show-ticks
-          :tick-interval="2"
+          :ticks="2"
           :marks="true"
         >
           <template #label>
@@ -313,8 +310,7 @@
           :min="0"
           :max="4"
           :step="1"
-          show-ticks
-          :tick-interval="1"
+          :ticks="1"
           :marks="[{ value: 0, text: 'Off' }, { value: 4, text: 'Max' }]"
           :get-value-text="(value) => ['Off', 'Low', 'Medium', 'High', 'Max'][value]"
         >
@@ -341,8 +337,7 @@
           :min="25"
           :max="200"
           :step="25"
-          show-ticks
-          :tick-interval="25"
+          :ticks="25"
         >
           <template #label>
             Playback speed &middot; {{ (playbackSpeed / 100).toFixed(2) }}×
@@ -361,8 +356,7 @@
           :min="50"
           :max="200"
           :step="25"
-          show-ticks
-          :tick-interval="25"
+          :ticks="25"
           :marks="[50, 100, 150, 200]"
         >
           <template #label>
@@ -438,8 +432,7 @@
           :min="5"
           :max="50"
           :step="5"
-          show-ticks
-          :tick-interval="5"
+          :ticks="5"
         >
           <template #label>
             Battery saver threshold &middot; {{ batteryThreshold }}%

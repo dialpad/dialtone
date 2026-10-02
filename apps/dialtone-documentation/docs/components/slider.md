@@ -36,7 +36,7 @@ A slider is appropriate when the exact value is less important than the relative
 - For range sliders with two thumbs, pass a `getValueText` callback that returns localized text distinguishing each thumb (e.g. `"Minimum: 20"` / `"Maximum: 70"`).
 - Keep `min` and `max` values meaningful to the context. Label the scale so users understand what the numbers represent.
 - Use `prefix` or `suffix` for simple unit decoration (e.g. `suffix="%"`) — marks always use it. For the readout and each thumb's `aria-valuetext`, `getValueText` takes precedence over prefix/suffix when set, so the two stay in agreement; marks never call `getValueText`, since a mark isn't tied to either thumb and has no index for it to differentiate on.
-- Use `showTicks` together with `tickInterval` to indicate discrete stops on the track; avoid rendering more than ~20 ticks to prevent visual noise.
+- Use `ticks` to indicate discrete stops on the track; avoid rendering more than ~20 ticks to prevent visual noise.
 - `marks` defaults to labeling the start and end of the range. Pass an array of `{ value, text }` objects for custom text, a plain number array to label positions without custom text, `true` to auto-generate marks at every tick position, or `false` for none.
 - When using `snapPoints`, make sure `getValueText` (and any custom mark text) can render *any* value in range, not just the snap points — the pull is a soft suggestion, not a restriction, so users can still land on values off the grid.
 
@@ -99,9 +99,9 @@ Emoji or icon-only content works the same way — give it an `aria-label` so the
 
 ### With ticks
 
-`tickInterval` is independent of `step` — ticks are purely a visual overlay along the track and don't constrain where the thumb can actually stop. The two often match, but they don't have to.
+A numeric `ticks` interval is independent of `step` — ticks are purely a visual overlay along the track and don't constrain where the thumb can actually stop. The two often match, but they don't have to.
 
-When `tickInterval` equals `step`, every value the thumb can land on gets its own tick:
+When the `ticks` interval equals `step`, every value the thumb can land on gets its own tick — same as passing `ticks="true"`:
 
 ```vue demo
 <dt-slider
@@ -110,8 +110,7 @@ When `tickInterval` equals `step`, every value the thumb can land on gets its ow
   :min="0"
   :max="10"
   :step="1"
-  :tick-interval="1"
-  show-ticks
+  :ticks="1"
 />
 ```
 
@@ -124,8 +123,7 @@ When they differ, ticks become checkpoints along a finer scale rather than a mar
   :min="0"
   :max="100"
   :step="1"
-  :tick-interval="25"
-  show-ticks
+  :ticks="25"
 />
 ```
 
@@ -142,8 +140,7 @@ Pass a number for an evenly spaced interval:
   :min="0"
   :max="100"
   :snap-points="25"
-  show-ticks
-  :tick-interval="25"
+  :ticks="25"
   suffix="%"
 />
 ```
@@ -222,8 +219,7 @@ Combine marks with ticks for fully annotated steps — the two are independent, 
     :min="-100"
     :max="100"
     :marks="[{ value: -100, text: '−100' }, { value: 0, text: '0' }, { value: 100, text: '100' }]"
-    show-ticks
-    :tick-interval="25"
+    :ticks="25"
   />
   <dt-slider
     :model-value="7"
@@ -231,8 +227,7 @@ Combine marks with ticks for fully annotated steps — the two are independent, 
     :min="0"
     :max="10"
     :step="1"
-    show-ticks
-    :tick-interval="1"
+    :ticks="1"
     :marks="true"
   />
 </dt-stack>
@@ -359,8 +354,7 @@ The `label` slot replaces the plain text label entirely — scoped with `value` 
   :min="25"
   :max="200"
   :step="25"
-  show-ticks
-  :tick-interval="25"
+  :ticks="25"
 >
   <template #label="{ value }">
     Playback speed &middot; {{ (value / 100).toFixed(2) }}×

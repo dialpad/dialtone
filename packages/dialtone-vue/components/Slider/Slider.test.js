@@ -375,9 +375,9 @@ describe('DtSlider Tests', () => {
       });
     });
 
-    describe('When showTicks is true', () => {
+    describe('When ticks is set to an interval', () => {
       beforeEach(() => {
-        mockProps = { showTicks: true, tickInterval: 10, min: 0, max: 100, step: 10 };
+        mockProps = { ticks: 10, min: 0, max: 100, step: 10 };
         updateWrapper();
       });
 
@@ -386,7 +386,7 @@ describe('DtSlider Tests', () => {
         expect(ticks.length).toBeGreaterThan(0);
       });
 
-      it('renders 11 ticks for tickInterval=10 over 0–100', () => {
+      it('renders 11 ticks for ticks=10 over 0–100', () => {
         const ticks = wrapper.findAll('[data-qa="dt-slider-tick"]');
         expect(ticks).toHaveLength(11);
       });
@@ -403,21 +403,21 @@ describe('DtSlider Tests', () => {
         warnSpy.mockRestore();
       });
 
-      it('caps tick generation instead of hanging on a too-small tickInterval', () => {
-        mockProps = { showTicks: true, tickInterval: 0.001, min: 0, max: 100 };
+      it('caps tick generation instead of hanging on a too-small ticks interval', () => {
+        mockProps = { ticks: 0.001, min: 0, max: 100 };
         updateWrapper();
         const ticks = wrapper.findAll('[data-qa="dt-slider-tick"]');
         expect(ticks.length).toBeLessThanOrEqual(1001); // +1 for the guaranteed end-of-domain point
-        expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('tickInterval'));
+        expect(warnSpy).toHaveBeenCalledWith(expect.stringContaining('ticks'));
       });
 
       it('still covers the FULL domain when capped, not just the beginning of it', () => {
         // The cap used to generate points sequentially from `min` and
-        // truncate at 1000 — for tickInterval=0.001 over 0–100 that covered
+        // truncate at 1000 — for ticks=0.001 over 0–100 that covered
         // only 0 through 0.999 (the first ~1% of the range): a plausible-
         // looking but materially false representation of the range, with
         // no ticks or snap targets anywhere past it.
-        mockProps = { showTicks: true, tickInterval: 0.001, min: 0, max: 100 };
+        mockProps = { ticks: 0.001, min: 0, max: 100 };
         updateWrapper();
         const tickPositions = wrapper.findAll('[data-qa="dt-slider-tick"]').map((t) => t.attributes('style'));
         const lastTickStyle = tickPositions.at(-1);
@@ -453,7 +453,7 @@ describe('DtSlider Tests', () => {
       });
 
       it('does not log the interval-cap notice in production', () => {
-        mockProps = { showTicks: true, tickInterval: 0.001, min: 0, max: 100 };
+        mockProps = { ticks: 0.001, min: 0, max: 100 };
         updateWrapper();
         expect(warnSpy).not.toHaveBeenCalled();
       });
@@ -1587,7 +1587,7 @@ describe('DtSlider Tests', () => {
       });
 
       it('centers ticks on their anchor point under rtl too', async () => {
-        mockProps = { showTicks: true, tickInterval: 25 };
+        mockProps = { ticks: 25 };
         updateWrapper();
         await mockControlDirection('rtl');
         await wrapper.setProps({ modelValue: 51 });
@@ -1917,26 +1917,26 @@ describe('DtSlider Tests', () => {
     });
 
     describe('Tick generation with fractional interval', () => {
-      it('generates 5 ticks for tickInterval=0.25 over 0–1', () => {
-        mockProps = { showTicks: true, tickInterval: 0.25, min: 0, max: 1, step: 0.25 };
+      it('generates 5 ticks for ticks=0.25 over 0–1', () => {
+        mockProps = { ticks: 0.25, min: 0, max: 1, step: 0.25 };
         updateWrapper();
         expect(wrapper.findAll('[data-qa="dt-slider-tick"]')).toHaveLength(5);
       });
 
-      it('generates 11 ticks for tickInterval=0.1 over 0–1', () => {
-        mockProps = { showTicks: true, tickInterval: 0.1, min: 0, max: 1, step: 0.1 };
+      it('generates 11 ticks for ticks=0.1 over 0–1', () => {
+        mockProps = { ticks: 0.1, min: 0, max: 1, step: 0.1 };
         updateWrapper();
         expect(wrapper.findAll('[data-qa="dt-slider-tick"]')).toHaveLength(11);
       });
 
-      it('generates 5 ticks for tickInterval=2.5 over 0–10', () => {
-        mockProps = { showTicks: true, tickInterval: 2.5, min: 0, max: 10, step: 2.5 };
+      it('generates 5 ticks for ticks=2.5 over 0–10', () => {
+        mockProps = { ticks: 2.5, min: 0, max: 10, step: 2.5 };
         updateWrapper();
         expect(wrapper.findAll('[data-qa="dt-slider-tick"]')).toHaveLength(5);
       });
 
       it('generates exactly 11 ticks for step=0.1 over 0–1 — no extra tick from loop drift', () => {
-        mockProps = { showTicks: true, step: 0.1, min: 0, max: 1 };
+        mockProps = { ticks: true, step: 0.1, min: 0, max: 1 };
         updateWrapper();
         expect(wrapper.findAll('[data-qa="dt-slider-tick"]')).toHaveLength(11);
       });

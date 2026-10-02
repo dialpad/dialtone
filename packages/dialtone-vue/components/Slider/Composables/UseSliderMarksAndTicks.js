@@ -2,10 +2,13 @@ import { computed } from 'vue';
 import { generateInterval } from '../utils';
 
 export function useSliderMarksAndTicks(props, { isVertical, thumbPercent }) {
+  // Independent of whether ticks render visually (gated separately by the
+  // template's v-if="ticks") — computedMarks also reads this for marks="true"
+  // (mark every tick position), regardless of whether ticks itself is set.
   const computedTickValues = computed(() => {
-    const interval = props.tickInterval ?? props.step;
+    const interval = typeof props.ticks === 'number' ? props.ticks : props.step;
     if (!interval || interval <= 0) return [];
-    return generateInterval(props.min, props.max, interval, 'tickInterval');
+    return generateInterval(props.min, props.max, interval, 'ticks');
   });
 
   // A mark isn't tied to either thumb, so unlike formatValue (UseSliderValue)

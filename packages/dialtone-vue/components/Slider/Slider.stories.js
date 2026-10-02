@@ -16,8 +16,7 @@ export const argsData = {
   snapThreshold: 10,
   disabled: false,
   orientation: 'horizontal',
-  showTicks: true,
-  tickInterval: 10,
+  ticks: 10,
   minGapSteps: 0,
   size: 300,
   label: 'Slider label',
@@ -151,21 +150,13 @@ export const argTypesData = {
       defaultValue: { summary: 'always' },
     },
   },
-  showTicks: {
-    description: 'Renders a tick mark at every tickInterval.',
-    control: 'boolean',
+  ticks: {
+    description: 'Renders tick marks along the track — true for one per step, or a Number for a custom interval.',
+    control: { type: 'text' },
     table: {
       category: 'props',
-      type: { summary: 'Boolean' },
-    },
-  },
-  tickInterval: {
-    description: 'Distance between tick marks (same units as step). Defaults to step when null.',
-    control: { type: 'number' },
-    table: {
-      category: 'props',
-      type: { summary: 'Number' },
-      defaultValue: { summary: 'null (uses step)' },
+      type: { summary: 'Boolean | Number' },
+      defaultValue: { summary: 'false' },
     },
   },
   minGapSteps: {
