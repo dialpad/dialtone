@@ -3,7 +3,7 @@ type: development
 category: development
 keywords: [vitest, testing, vue-test-utils, jsdom, coverage, mount, shallowMount, fixtures, assertions, dialtone-vue, co-located, thresholds]
 ai_summary: How testing works in dialtone-vue with Vitest and Vue Test Utils — file structure, coverage thresholds, test patterns, and utilities.
-last_updated: 2026-03-04
+last_updated: 2026-09-24
 related_packages: [dialtone-vue]
 ---
 
@@ -71,7 +71,7 @@ components/button/
 └── index.js
 ```
 
-Test file naming: `{component-name}.test.js` (snake_case, matching the component file).
+Test file naming: `{component-name}.test.js`, matching the component file's own casing — snake_case for legacy Options API components (`button.test.js`), PascalCase for newer Composition API components (`Slider.test.js`, `Resizable.test.js`, `TextList.test.js`).
 
 ## Standard Test Pattern
 

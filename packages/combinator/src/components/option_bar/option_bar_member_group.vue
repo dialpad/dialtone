@@ -30,6 +30,7 @@
           propValues,
           disabledValues: getDisabledValues(key, props.exclusionRules, props.propValues, props.slotValues),
           clearable: member.clearable,
+          validator: member.validator,
         }"
         @update:value="e => updateMember(e, key)"
         @update:control="e => updateControl(e, key)"

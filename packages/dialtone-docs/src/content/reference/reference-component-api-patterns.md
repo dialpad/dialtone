@@ -20,7 +20,7 @@ keywords:
     logical-props,
   ]
 ai_summary: Cross-component API contract for Dialtone Vue components — standard props, events, slots, and patterns shared by all components.
-last_updated: 2026-07-09
+last_updated: 2026-09-24
 related_packages: [dialtone-vue]
 ---
 
@@ -117,6 +117,7 @@ All form components implement Vue 3 v-model via `modelValue` prop + `update:mode
 | DtRadio      | `String \| Number`  | Via CheckableMixin                           |
 | DtSelectMenu | `String \| Number`  |                                              |
 | DtToggle     | `Boolean \| String` | Supports `'mixed'` for indeterminate state   |
+| DtSlider     | `Number \| [Number, Number]` | A number is single-thumb mode, a 2-length array is range mode. Also emits `change` on commit only (pointer up / blur), separate from the continuous `update:modelValue` |
 
 Visibility-toggle components use `update:open`:
 
@@ -234,5 +235,6 @@ Some components validate prop combinations at runtime and log warnings. There is
 - DtBadge: errors on `type: 'ai'` with `kind: 'count'`, decoration with non-default type/kind
 - DtAvatar: errors when `imageSrc` is provided without `imageAlt`
 - DtTooltip: warns when both `enabled` and `show` props are set
+- DtSlider: warns (dev-only `console.info`) when range mode (array `modelValue`) has no `getValueText`, and when there's no accessible name from `label`, a non-empty `label` slot, `aria-label`, or `aria-labelledby`
 
 Check each component's source or `_constants.js` for the full list of invalid combinations.

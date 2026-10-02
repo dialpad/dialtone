@@ -46,6 +46,20 @@ describe('utils.js test', function () {
       })).toBe(false);
     });
 
+    it('Should disable start/end class props (Slider, ItemLayout) when their slot is empty', function () {
+      expect(shouldDisableSlotClassProp('startClass', { start: '' })).toBe(true);
+      expect(shouldDisableSlotClassProp('endClass', { end: '' })).toBe(true);
+    });
+
+    it('Should not disable start/end class props when their slot has content', function () {
+      expect(shouldDisableSlotClassProp('startClass', {
+        start: '<dt-icon name="clock-1" size="200" />',
+      })).toBe(false);
+      expect(shouldDisableSlotClassProp('endClass', {
+        end: '<dt-icon name="clock-12" size="200" />',
+      })).toBe(false);
+    });
+
     it('Should ignore class props without a direct slot dependency', function () {
       expect(shouldDisableSlotClassProp('labelClass', { label: '' })).toBe(false);
       expect(shouldDisableSlotClassProp('contentClass', { marker: '' })).toBe(false);
