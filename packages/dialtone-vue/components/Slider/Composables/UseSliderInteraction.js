@@ -253,7 +253,10 @@ export function useSliderInteraction(props, emit, {
     // The native input swaps which of Left/Right increments under dir="rtl" —
     // largeStepDelta's Shift+Arrow must swap the same way, or Shift+ArrowRight
     // would contradict plain ArrowRight on the same key. Up/Down never swap.
-    const rtlKeys = !isVertical.value && isRtl();
+    // Applies in vertical mode too — aria-orientation is purely an ARIA hint,
+    // the native input is never actually reoriented, so dir still swaps Left/
+    // Right there exactly as it does horizontally.
+    const rtlKeys = isRtl();
     const increaseKey = rtlKeys ? 'ArrowLeft' : 'ArrowRight';
     const decreaseKey = rtlKeys ? 'ArrowRight' : 'ArrowLeft';
     const delta = largeStepDelta(event.key, event.shiftKey, increaseKey, decreaseKey);

@@ -1538,7 +1538,7 @@ describe('DtSlider Tests', () => {
         expect(emitted[emitted.length - 1][0]).toBe(50); // still decreases, from 60
       });
 
-      it('does not swap Shift+ArrowRight/ArrowLeft for a vertical slider even under rtl', async () => {
+      it('swaps Shift+ArrowRight/ArrowLeft for a vertical slider under rtl too — the native input is never actually reoriented', async () => {
         mockProps = { orientation: 'vertical' };
         updateWrapper();
         thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
@@ -1546,7 +1546,7 @@ describe('DtSlider Tests', () => {
 
         await thumbInputs[0].trigger('keydown', { key: 'ArrowRight', shiftKey: true });
         const emitted = wrapper.emitted('update:modelValue');
-        expect(emitted[emitted.length - 1][0]).toBe(60); // unaffected by rtl — vertical never uses Left/Right
+        expect(emitted[emitted.length - 1][0]).toBe(40); // 50 - largeStep(10), flipped under rtl, same as horizontal
       });
 
       it('centers the thumb on its actual anchor point under rtl, not one thumb-width off', async () => {
