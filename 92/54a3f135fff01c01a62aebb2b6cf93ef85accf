@@ -1,0 +1,46 @@
+packages/dialtone-vue/components/Modal/ModalWithOverlays.story.vue
+  s_b93b519d657e1f::t_1c31c9acfd8e43 41-46,52
+  s_b93b519d657e1f::t_b8b84b43a79dc3 73
+  s_b93b519d657e1f::t_e42690d8e5ccf6 181,183-188
+  s_b93b519d657e1f::t_2726b8afbf3e24 182
+  s_b93b519d657e1f::t_9256978ed290ee 166,176
+  s_b93b519d657e1f::t_37ba627650f5ba 127
+  s_b93b519d657e1f::t_91b17198f374d6 1-40,47-51,53,55-64,66-72,74-118,132-149,152-165,167-175,177-180
+  s_b93b519d657e1f::t_b0ff5302b71699 54
+  s_b93b519d657e1f::t_8f1b265a1eae7c 150-151
+  s_b93b519d657e1f::t_800094ea4411c8 119-126,128-129,131
+  s_b93b519d657e1f::t_6ffeb94d19f261 65
+  s_b93b519d657e1f::t_a0558c097a7b0e 130
+packages/dialtone-vue/components/ImageViewer/ImageViewer.vue
+  s_b93b519d657e1f::t_dcfed83e16d587 201-211
+  s_b93b519d657e1f::t_65c2f5ab87a246 98-102
+  s_b93b519d657e1f::t_9e7f166a96eafe 4,19
+packages/dialtone-vue/components/Modal/Modal.stories.js
+  s_b93b519d657e1f::t_592a7325c9dfcf 242-243
+  s_b93b519d657e1f::t_82114a3d88bc9f 244-256
+  s_b93b519d657e1f::t_385fb3b877de71 161-162
+  s_b93b519d657e1f::t_1f4536b1e23763 4
+packages/dialtone-vue/components/Popover/Popover.vue
+  s_b93b519d657e1f::t_88db93c57b97e2 682-691,700-701
+  s_b93b519d657e1f::t_cad016231b8feb 1111-1114,1121-1124
+  s_b93b519d657e1f::t_dfad6d4837e815 695,699
+  s_b93b519d657e1f::t_82bdb5fda9d7e0 1115-1120,1125-1126
+  s_b93b519d657e1f::t_c08ff2a7f71b78 6
+  s_b93b519d657e1f::t_0a088b48338003 692-694,696-698
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "9254a3f135fff01c01a62aebb2b6cf93ef85accf",
+  "prompts": {},
+  "sessions": {
+    "s_b93b519d657e1f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "5a784a33-91fd-4aa2-b8fd-2a4b9f8d093d",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

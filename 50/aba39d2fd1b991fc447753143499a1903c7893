@@ -1,0 +1,23 @@
+.github/workflows/docs-data-freshness.yml
+  s_35758a979f0a53::t_e3030dcbc4b386 29,36,38-39
+  s_35758a979f0a53::t_aa3e49e3369107 1-2,4-6,8,14-26,30-31,33-35,37,40,54,56-58,60-62,64-68
+  s_35758a979f0a53::t_4a93ef25c9da6c 3,7,9-13,27-28,32,41-53,55,59,63
+.husky/pre-commit
+  s_35758a979f0a53::t_7ee00e16321583 31-44
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.2",
+  "base_commit_sha": "50aba39d2fd1b991fc447753143499a1903c7893",
+  "prompts": {},
+  "sessions": {
+    "s_35758a979f0a53": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e95815f4-bd6d-4938-b966-268ab186f0b7",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    }
+  }
+}
