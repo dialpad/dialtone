@@ -1,3 +1,4 @@
+import { nextTick } from 'vue';
 import { mount, flushPromises } from '@vue/test-utils';
 import DtHovercard from './Hovercard.vue';
 import { DtPopover } from '@/components/Popover/index.js';
@@ -157,6 +158,21 @@ describe('DtHovercard Tests', () => {
         anchor.element.parentNode.removeChild(anchor.element);
         // Advance timers to allow hovercard to react
         await vi.runAllTimers();
+
+        expect(wrapper.vm.hovercardOpen).toBe(false);
+      });
+
+      it('does not reopen when the enter timer is still pending', async () => {
+        vi.useFakeTimers();
+        await anchor.trigger('mouseenter');
+
+        // Remove anchor from DOM before the enter delay elapses, so inTimer is still pending
+        anchor.element.parentNode.removeChild(anchor.element);
+        // Let the MutationObserver react to the removal
+        await nextTick();
+
+        expect(() => vi.runAllTimers()).not.toThrow();
+        await nextTick();
 
         expect(wrapper.vm.hovercardOpen).toBe(false);
       });
