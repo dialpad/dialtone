@@ -1,0 +1,21 @@
+packages/eslint-plugin-dialtone/lib/rules/deprecated-component.js
+  s_f1e475b2b85669::t_e682ad31382c84 35
+scripts/build-dialtone-vue-docs.mjs
+  s_f1e475b2b85669::t_84b6f2be70a9b9 17
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "41f8cd5685cd1754d0e4b2feb66e44c90c12220a",
+  "prompts": {},
+  "sessions": {
+    "s_f1e475b2b85669": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "98b44e92-f9e2-44b0-a503-6f36763110f8",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+apps/dialtone-documentation/docs/.vuepress/baseComponents/GradientHeroContent.vue
+  s_7d5235cebc230d::t_e9fcc6ddddb59b 88
+  s_7d5235cebc230d::t_cc1476c461ecfd 89-91
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "c0fbc76ffc2b3c6212b2857cbd170899129ffd97",
+  "prompts": {},
+  "sessions": {
+    "s_7d5235cebc230d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "715021af-5bad-4eb4-8db2-71628c97799d",
+        "model": "claude-opus-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
