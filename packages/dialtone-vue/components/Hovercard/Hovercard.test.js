@@ -171,10 +171,10 @@ describe('DtHovercard Tests', () => {
         // Let the MutationObserver react to the removal
         await nextTick();
 
-        expect(() => vi.runAllTimers()).not.toThrow();
+        vi.runAllTimers();
         await nextTick();
 
-        expect(wrapper.vm.hovercardOpen).toBe(false);
+        expect(getHovercardContent()).toBeNull();
       });
     });
   });
