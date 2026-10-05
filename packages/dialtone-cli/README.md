@@ -22,7 +22,7 @@ dialtone search "input|select|menu"   # OR search
 
 ### `dialtone component <name>`
 
-Show full component documentation.
+Show full component documentation. The name must match exactly, ignoring case, separators, and the `Dt` prefix, so `button`, `dt-button`, and `DtButton` all work. For any other name, the CLI lists close matches on stderr and exits with an error.
 
 ```bash
 dialtone component button
@@ -93,7 +93,7 @@ The CLI checks for updates automatically. To update:
 npm install -g @dialpad/dialtone-cli@latest
 ```
 
-The data (components, tokens, utilities, icons) is bundled at build time. Update the CLI to get the latest design system data.
+Run from a project, the CLI uses the Dialtone data installed there (components, tokens, utilities, icons). Anything it can't find comes from data bundled with the CLI at build time, and documentation search always uses bundled content. Updating the CLI refreshes that bundled data. See [Data sources](https://dialtone.dialpad.com/guides/cli/#data-sources) for how the CLI finds a project's data.
 
 ## Claude Code Integration
 
@@ -119,7 +119,8 @@ When working with Dialtone components, tokens, or utility classes, use the `dial
 - Structured data: add `--format json` to any command
 
 Prefer the CLI over reading source files for design system information. It searches
-the full published API and filters deprecated items automatically.
+the full published API and leaves deprecated items out of search results. An exact
+deprecated component name still works, with a warning naming its replacement.
 ```
 
 ### Skills

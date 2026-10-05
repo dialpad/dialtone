@@ -1,6 +1,6 @@
 import { defineCommand } from 'citty';
-import { searchComponents } from '@dialpad/dialtone-query-core';
 import type { ComponentProp } from '@dialpad/dialtone-query-core';
+import { requireComponent } from '../select-component.js';
 import { getContext } from '../context.js';
 import { formatComponentOutput, propsTable, eventsTable, slotsTable, type Format } from '../formatters.js';
 
@@ -33,15 +33,8 @@ export const componentCommand = defineCommand({
   },
   run({ args }) {
     const format = (args.format || 'minimal') as Format;
-    const { components } = getContext();
-    const { results } = searchComponents(args.name, components);
-
-    if (results.length === 0) {
-      console.error(`No component found matching "${args.name}".`);
-      process.exit(1);
-    }
-
-    const result = results[0];
+    const { components, componentImportPath: importFrom } = getContext();
+    const result = requireComponent(args.name, components);
 
     // --prop <name>: single prop lookup
     if (args.prop) {
@@ -94,11 +87,11 @@ export const componentCommand = defineCommand({
 
     // --examples
     if (args.examples) {
-      console.log(formatComponentOutput(result, format, 'examples'));
+      console.log(formatComponentOutput(result, format, 'examples', { importFrom }));
       return;
     }
 
     // Default: full component view
-    console.log(formatComponentOutput(result, format, undefined, { describe: args.describe }));
+    console.log(formatComponentOutput(result, format, undefined, { describe: args.describe, importFrom }));
   },
 });

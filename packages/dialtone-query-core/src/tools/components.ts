@@ -34,6 +34,20 @@ function removeDuplicates(results: SearchResult[]): SearchResult[] {
   });
 }
 
+function toSearchResult(component: Component): SearchResult {
+  return {
+    type: 'component',
+    name: component.displayName,
+    details: {
+      description: component.description,
+      props: component.props || [],
+      events: component.events || [],
+      slots: component.slots || []
+    },
+    metadata: component.metadata || null
+  };
+}
+
 /**
  * Search components by name (with camelCase splitting)
  */
@@ -46,17 +60,7 @@ function searchByName(regexArray: RegExp[], components: Component[]): SearchResu
 
     const allMatch = regexArray.every(regex => regex.test(nameText));
     if (allMatch) {
-      matches.push({
-        type: 'component',
-        name: component.displayName,
-        details: {
-          description: component.description,
-          props: component.props || [],
-          events: component.events || [],
-          slots: component.slots || []
-        },
-        metadata: component.metadata || null
-      });
+      matches.push(toSearchResult(component));
     }
   }
 
@@ -74,17 +78,7 @@ function searchByDescription(regexArray: RegExp[], components: Component[]): Sea
 
     const allMatch = regexArray.every(regex => regex.test(description));
     if (allMatch) {
-      matches.push({
-        type: 'component',
-        name: component.displayName,
-        details: {
-          description: component.description,
-          props: component.props || [],
-          events: component.events || [],
-          slots: component.slots || []
-        },
-        metadata: component.metadata || null
-      });
+      matches.push(toSearchResult(component));
     }
   }
 
@@ -107,17 +101,7 @@ function searchByProps(regexArray: RegExp[], components: Component[]): SearchRes
 
     const allMatch = regexArray.every(regex => regex.test(combined));
     if (allMatch) {
-      matches.push({
-        type: 'component',
-        name: component.displayName,
-        details: {
-          description: component.description,
-          props: component.props || [],
-          events: component.events || [],
-          slots: component.slots || []
-        },
-        metadata: component.metadata || null
-      });
+      matches.push(toSearchResult(component));
     }
   }
 
@@ -139,17 +123,7 @@ function searchByEvents(regexArray: RegExp[], components: Component[]): SearchRe
 
     const allMatch = regexArray.every(regex => regex.test(combined));
     if (allMatch) {
-      matches.push({
-        type: 'component',
-        name: component.displayName,
-        details: {
-          description: component.description,
-          props: component.props || [],
-          events: component.events || [],
-          slots: component.slots || []
-        },
-        metadata: component.metadata || null
-      });
+      matches.push(toSearchResult(component));
     }
   }
 
@@ -171,17 +145,7 @@ function searchBySlots(regexArray: RegExp[], components: Component[]): SearchRes
 
     const allMatch = regexArray.every(regex => regex.test(combined));
     if (allMatch) {
-      matches.push({
-        type: 'component',
-        name: component.displayName,
-        details: {
-          description: component.description,
-          props: component.props || [],
-          events: component.events || [],
-          slots: component.slots || []
-        },
-        metadata: component.metadata || null
-      });
+      matches.push(toSearchResult(component));
     }
   }
 
@@ -189,9 +153,35 @@ function searchBySlots(regexArray: RegExp[], components: Component[]): SearchRes
 }
 
 /**
+ * Normalize a component name for exact matching: case-insensitive, ignores
+ * separators and an optional "Dt" prefix. "DtButtonGroup", "button-group",
+ * and "Button Group" all become "buttongroup".
+ */
+function normalizeComponentName(name: string): string {
+  return compactName(name).replace(/^dt/, '');
+}
+
+/** Lowercase and drop separators, keeping any "Dt" prefix. */
+function compactName(name: string): string {
+  return name.toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+
+function legacyNote(component: Component): string | null {
+  const metadata = component.metadata;
+  if (metadata?.deprecated) {
+    return `${component.displayName} is deprecated. ${metadata.replacement ?? metadata.reason ?? ''}`.trim();
+  }
+  if (metadata?.discouraged) {
+    const advice = metadata.alternatives?.length ? `Use ${metadata.alternatives.join(', ')} instead.` : (metadata.reason ?? '');
+    return `${component.displayName} is discouraged. ${advice}`.trim();
+  }
+  return null;
+}
+
+/**
  * Search Vue components by name, description, props, events, and slots
  */
-export function searchComponents(query: string, components: Component[]): { results: SearchResult[]; notes: string[] } {
+export function searchComponents(query: string, components: Component[]): { results: SearchResult[]; notes: string[]; exactMatch: boolean; warning: string | null } {
   console.error(`\n[COMPONENT SEARCH DEBUG] Query: "${query}"`);
 
   // Normalize query: split camelCase, lowercase, replace hyphens/slashes with spaces
@@ -232,23 +222,43 @@ export function searchComponents(query: string, components: Component[]): { resu
 
   console.error(`[COMPONENT SEARCH DEBUG] After deduplication: ${deduplicated.length} results`);
 
+  // Exact name first (DLT-3639). An explicit request for a deprecated or
+  // discouraged component still returns it, with a note, instead of silently
+  // substituting a different component. Those need their full name ("DtIcon",
+  // "dt-icon"), so a generic word like "icon" doesn't lead with legacy UI.
+  const target = normalizeComponentName(query);
+  const candidates = target ? components.filter(c => normalizeComponentName(c.displayName) === target) : [];
+  const match = candidates.find(c => c.displayName === query.trim()) ?? (candidates.length === 1 ? candidates[0] : null);
+  // A note means the match is deprecated or discouraged.
+  const note = match ? legacyNote(match) : null;
+  const exact = match && (!note || compactName(query) === compactName(match.displayName)) ? match : null;
+  console.error(`[COMPONENT SEARCH DEBUG] Exact match: ${exact ? exact.displayName : 'none'}`);
+
   // Add note if no name matches but other buckets have results
   const searchNotes: string[] = [];
-  if (nameMatches.length === 0 && deduplicated.length > 0) {
+  if (!exact && nameMatches.length === 0 && deduplicated.length > 0) {
     searchNotes.push(`No component named '${query}', showing components with matching description/props/events/slots`);
   }
 
   // Apply smart filter (remove deprecated, swap discouraged with alternatives)
   const componentsData: { [key: string]: Component } = {};
   components.forEach((c: Component) => { componentsData[c.displayName] = c; });
-  const { results: filtered, notes: filterNotes } = applySmartFilter(deduplicated, componentsData);
+  // Keep the exact match out of the filter so it isn't dropped, swapped, or counted.
+  const rest = deduplicated.filter(r => r.name !== exact?.displayName);
+  const { results: filtered, notes: filterNotes } = applySmartFilter(rest, componentsData);
 
   console.error(`[COMPONENT SEARCH DEBUG] After filter: ${filtered.length} results\n`);
 
-  // Combine notes
-  const allNotes = [...searchNotes, ...filterNotes];
+  // The note also covers a bare "icon": DtIcon is filtered out, but the note
+  // still points to its replacement.
+  const allNotes = [...(note ? [note] : []), ...searchNotes, ...filterNotes];
+  // removeDuplicates also drops the exact match if the filter swapped it back in.
+  const results = exact ? removeDuplicates([toSearchResult(exact), ...filtered]) : filtered;
+  return { results, notes: allNotes, exactMatch: exact !== null, warning: note };
+}
 
-  return { results: filtered, notes: allNotes };
+function deprecatedWarning(reason?: string): string {
+  return reason ? `   ⚠️  **DEPRECATED:** ${reason}\n` : `   ⚠️  **DEPRECATED**\n`;
 }
 
 /**
@@ -267,7 +277,7 @@ export function formatComponentResults(results: SearchResult[], query: string): 
     // Show metadata warnings if present
     if (result.metadata) {
       if (result.metadata.deprecated) {
-        output += `   ⚠️  **DEPRECATED:** ${result.metadata.reason}\n`;
+        output += deprecatedWarning(result.metadata.reason);
       }
 
       if (result.metadata.replacement) {
@@ -391,7 +401,7 @@ export function formatSingleResult(result: SearchResult, index: number): string 
   // Show metadata warnings if present
   if (result.metadata) {
     if (result.metadata.deprecated) {
-      output += `   ⚠️  **DEPRECATED:** ${result.metadata.reason}\n`;
+      output += deprecatedWarning(result.metadata.reason);
     }
     if (result.metadata.discouraged) {
       output += `   ⚠️  **DISCOURAGED:** ${result.metadata.reason || 'Consider alternatives'}\n`;
