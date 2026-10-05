@@ -108,6 +108,17 @@ Set `showArrow` to `false` to hide the tooltip arrow.
     </dt-button>
   </template>
 </dt-tooltip>
+<!-- @code -->
+<dt-tooltip
+  :show-arrow="false"
+  message="Tooltip without an arrow"
+>
+  <template #anchor>
+    <dt-button>
+      Without Arrow
+    </dt-button>
+  </template>
+</dt-tooltip>
 ```
 
 ### Placement
