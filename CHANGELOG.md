@@ -1,3 +1,22 @@
+# [10.5.0](https://github.com/dialpad/dialtone/compare/dialtone/v10.4.0...dialtone/v10.5.0) (2026-10-06)
+
+
+### Bug Fixes
+
+* **Dialtone Cli:** DLT-3222 suppress query-core debug output ([#1448](https://github.com/dialpad/dialtone/issues/1448)) ([21c883c](https://github.com/dialpad/dialtone/commit/21c883c5cc154261466f98b9e5c8477cccb4afe4))
+* **Modal:** DLT-3476 do not close when drag starts inside dialog and ends on backdrop ([#1445](https://github.com/dialpad/dialtone/issues/1445)) ([c6fb6ef](https://github.com/dialpad/dialtone/commit/c6fb6ef70e24515a21706eeb848968e24a13c319))
+
+
+### Documentation
+
+* **Box Sizing:** NO-JIRA correct class table ([#1446](https://github.com/dialpad/dialtone/issues/1446)) ([3e28930](https://github.com/dialpad/dialtone/commit/3e289305926cf36e5c01c88557627a7149cba9d2))
+
+
+### Features
+
+* **Dialtone Cli, Dialtone Query Core:** DLT-3639 select exact component names and use the project's Dialtone data ([#1449](https://github.com/dialpad/dialtone/issues/1449)) ([1c236be](https://github.com/dialpad/dialtone/commit/1c236be653cae4fa0d252f0ff88546621907f9a3))
+* **Tooltip:** DP-211073 make arrow optional ([#1447](https://github.com/dialpad/dialtone/issues/1447)) ([67b7afb](https://github.com/dialpad/dialtone/commit/67b7afbb3be11761236a3b82c5871c364d21c198))
+
 # [10.4.0](https://github.com/dialpad/dialtone/compare/dialtone/v10.3.0...dialtone/v10.4.0) (2026-09-29)
 
 
