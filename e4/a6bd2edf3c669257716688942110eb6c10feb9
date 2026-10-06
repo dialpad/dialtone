@@ -1,0 +1,18 @@
+apps/dialtone-documentation/docs/.vuepress/baseComponents/GradientHero.vue
+  h_c15b5755534093 10,45,116
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ShowcaseCarousel.vue
+  h_c15b5755534093 170-176
+apps/dialtone-documentation/docs/index.md
+  h_c15b5755534093 26-32,47-53,95-101,143-149,198,202,204-207
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "e4a6bd2edf3c669257716688942110eb6c10feb9",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

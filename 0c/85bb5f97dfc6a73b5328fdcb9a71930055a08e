@@ -1,0 +1,18 @@
+packages/dialtone-icons/src/svg/icons/brand-full-color/dialpad-analytics-ai.svg
+  h_c15b5755534093 2
+  h_c15b5755534093 3-18
+packages/dialtone-icons/src/svg/icons/brand-full-color/dialbot.svg
+  h_c15b5755534093 1-4,6-18
+  h_c15b5755534093 5,19
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.22",
+  "base_commit_sha": "0c85bb5f97dfc6a73b5328fdcb9a71930055a08e",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
