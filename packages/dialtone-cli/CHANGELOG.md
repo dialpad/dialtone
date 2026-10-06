@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/dialpad/dialtone/compare/dialtone-cli/v1.1.0...dialtone-cli/v1.2.0) (2026-10-06)
+
+
+### Bug Fixes
+
+* **Dialtone Cli:** DLT-3222 suppress query-core debug output ([#1448](https://github.com/dialpad/dialtone/issues/1448)) ([21c883c](https://github.com/dialpad/dialtone/commit/21c883c5cc154261466f98b9e5c8477cccb4afe4))
+
+
+### Features
+
+* **Dialtone Cli, Dialtone Query Core:** DLT-3639 select exact component names and use the project's Dialtone data ([#1449](https://github.com/dialpad/dialtone/issues/1449)) ([1c236be](https://github.com/dialpad/dialtone/commit/1c236be653cae4fa0d252f0ff88546621907f9a3))
+
 # [1.1.0](https://github.com/dialpad/dialtone/compare/dialtone-cli/v1.0.0...dialtone-cli/v1.1.0) (2026-09-16)
 
 
