@@ -262,6 +262,8 @@ onMounted(() => {
 
     observer.value = new MutationObserver(() => {
       if (anchorEl.value && !anchorEl.value.isConnected) {
+        clearTimeout(inTimer.value);
+        clearTimeout(outTimer.value);
         hovercardOpen.value = false;
       }
     });
@@ -277,8 +279,8 @@ onBeforeUnmount(() => {
   if (observer.value) {
     observer.value.disconnect();
   }
-  clearTimeout(inTimer);
-  clearTimeout(outTimer);
+  clearTimeout(inTimer.value);
+  clearTimeout(outTimer.value);
 });
 
 watch(() => props.open, (open) => {
