@@ -1,3 +1,15 @@
+# [4.3.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.2.0...dialtone-vue/v4.3.0) (2026-10-06)
+
+
+### Bug Fixes
+
+* **Modal:** DLT-3476 do not close when drag starts inside dialog and ends on backdrop ([#1445](https://github.com/dialpad/dialtone/issues/1445)) ([c6fb6ef](https://github.com/dialpad/dialtone/commit/c6fb6ef70e24515a21706eeb848968e24a13c319))
+
+
+### Features
+
+* **Tooltip:** DP-211073 make arrow optional ([#1447](https://github.com/dialpad/dialtone/issues/1447)) ([67b7afb](https://github.com/dialpad/dialtone/commit/67b7afbb3be11761236a3b82c5871c364d21c198))
+
 # [4.2.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.1.0...dialtone-vue/v4.2.0) (2026-09-29)
 
 
