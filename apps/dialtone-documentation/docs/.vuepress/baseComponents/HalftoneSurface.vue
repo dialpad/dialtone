@@ -28,6 +28,12 @@ import {
 } from './gradientHeroColors.js';
 
 const props = defineProps({
+  animated: {
+    // The fragment shader searches the phyllotaxis lattice for every output pixel.
+    // Keep full-page surfaces static unless animation is explicitly worth that cost.
+    type: Boolean,
+    default: false,
+  },
   flipX: {
     type: Boolean,
     default: false,
@@ -72,6 +78,7 @@ const dotColorLoop = createDotColorLoop({
 const prefersReducedMotion = () => Boolean(reducedMotionQuery?.matches);
 const prefersFinePointer = () => Boolean(finePointerQuery?.matches);
 const currentSpeed = () => (
+  !props.animated ||
   prefersReducedMotion() ||
   !isVisible ||
   isTouchActive ||
@@ -188,7 +195,7 @@ const attachObservers = (surface) => {
   }
 };
 
-watch(isHalftonePaused, syncMotionState);
+watch([isHalftonePaused, () => props.animated], syncMotionState);
 
 const initShader = async () => {
   const host = shaderHostEl.value;
