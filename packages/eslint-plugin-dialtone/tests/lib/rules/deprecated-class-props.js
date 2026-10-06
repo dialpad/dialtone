@@ -4,12 +4,8 @@
 "use strict";
 
 const RuleTester = require("eslint").RuleTester;
-// noPreserveCache forces a fresh module load on each proxyquire call so the
-// MOCK_COMPONENTS fixture (used by detection/autofix/regression suites) and
-// the MALFORMED_MOCK fixture (used by the fail-closed suite below) are both
-// actually exercised. Without it, proxyquire's default cache reuse means the
-// second require returns the first-loaded fixture, silently passing the
-// fail-closed assertions for the wrong reason.
+// Stub only data loading in these detection/autofix suites. Consumer package
+// selection is covered separately with real filesystem/ESLint fixtures.
 const proxyquire = require("proxyquire").noCallThru().noPreserveCache();
 
 // Post-deprecation fixture: mirrors what component-documentation.json will look like
@@ -31,7 +27,7 @@ const MOCK_COMPONENTS = [
 ];
 
 const rule = proxyquire("../../../lib/rules/deprecated-class-props", {
-  "@dialpad/dialtone-vue/component-documentation.json": MOCK_COMPONENTS,
+  "../util/consumer-component-data": () => MOCK_COMPONENTS,
 });
 
 const ruleTester = new RuleTester({
@@ -234,7 +230,7 @@ const MALFORMED_MOCK = [
 ];
 
 const malformedRule = proxyquire("../../../lib/rules/deprecated-class-props", {
-  "@dialpad/dialtone-vue/component-documentation.json": MALFORMED_MOCK,
+  "../util/consumer-component-data": () => MALFORMED_MOCK,
 });
 
 ruleTester.run("deprecated-class-props (fail-closed)", malformedRule, {
