@@ -379,7 +379,7 @@ export function sortUnifiedResults(results: SearchResult[]): SearchResult[] {
  */
 export function formatUnifiedResults(results: SearchResult[], query: string): string {
   if (results.length === 0) {
-    return `No results found for "${query}".\n\nTry searching with:\n- CSS properties (e.g., "padding", "display", "flex")\n- Values (e.g., "8px", "0.8rem", "100%")\n- Token names (e.g., "color", "spacing", "border")\n- Component names (e.g., "button", "modal", "avatar")\n- Hex colors (e.g., "#1C1C1C")`;
+    return `No results found for "${query}".\n\nTry searching with:\n- CSS properties (e.g., "padding", "display", "flex")\n- Values (e.g., "8px", "0.8rem", "100%")\n- Token names (e.g., "color", "spacing", "border")\n- Component names (e.g., "button", "modal", "avatar")`;
   }
 
   let output = `Found ${results.length} result${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
