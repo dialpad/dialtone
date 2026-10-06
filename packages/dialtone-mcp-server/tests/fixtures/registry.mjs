@@ -1,0 +1,37 @@
+// Replace only the external registry request; the built server and SDK stay real.
+const scenario = process.env.DIALTONE_TEST_REGISTRY;
+
+function stall(signal) {
+  return new Promise((resolve, reject) => {
+    // Model a request that keeps the process alive until it is cancelled.
+    const pending = setInterval(() => {}, 1000);
+    const abort = () => {
+      clearInterval(pending);
+      console.error('[registry fixture] aborted');
+      reject(signal.reason);
+    };
+    if (signal?.aborted) abort();
+    else signal?.addEventListener('abort', abort, { once: true });
+  });
+}
+
+globalThis.fetch = async (url, options = {}) => {
+  if (url !== 'https://registry.npmjs.org/@dialpad/dialtone-mcp-server/latest') {
+    throw new Error(`Unexpected registry URL: ${url}`);
+  }
+  if (scenario === 'stalled-fetch') return stall(options.signal);
+  if (scenario === 'stalled-body') {
+    return { ok: true, json: () => stall(options.signal) };
+  }
+  if (scenario === 'offline') throw new TypeError('fetch failed');
+  if (scenario === 'http-error') return new Response('{"version":"99.0.0"}', { status: 503 });
+  if (scenario === 'invalid-json') return new Response('{invalid');
+  const versions = {
+    current: process.env.DIALTONE_TEST_VERSION,
+    update: '99.0.0',
+    missing: undefined,
+    numeric: 99,
+    invalid: 'not-a-version',
+  };
+  return new Response(JSON.stringify({ version: versions[scenario] }));
+};

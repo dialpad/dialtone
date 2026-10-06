@@ -63,7 +63,7 @@ claude mcp add dialtone --scope user -- npx -y @dialpad/dialtone-mcp-server
 
 This stores configuration in `~/.claude/mcp.json`.
 
-**Version checking:** When the server starts, you'll see the current version. If outdated, follow the instructions shown.
+**Version checking:** The server connects to stdio before checking npm for updates. The advisory check is cancelled after two seconds or on shutdown. Offline, failed, or malformed registry replies are ignored. Valid version notices appear on stderr, keeping stdout available for MCP messages.
 
 ## Updating
 

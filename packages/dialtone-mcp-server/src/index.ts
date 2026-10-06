@@ -15,19 +15,24 @@ import {
 
 import type { TokensData, IconsData } from '@dialpad/dialtone-query-core';
 
+const UPDATE_CHECK_TIMEOUT_MS = 2000;
+
 /**
  * Check if a newer version of the package is available on npm
  * Logs a warning with update instructions if outdated
  * Fails silently if offline or registry unavailable
  */
-async function checkVersion() {
+async function checkVersion(signal: AbortSignal) {
   try {
     const packageName = pkg.name;
     const currentVersion = pkg.version;
 
-    const response = await fetch(`https://registry.npmjs.org/${packageName}/latest`);
+    const response = await fetch(`https://registry.npmjs.org/${packageName}/latest`, { signal });
+    if (!response.ok) return;
     const data = await response.json();
-    const latestVersion = data.version;
+    const latestVersion = data?.version;
+    if (signal.aborted || typeof latestVersion !== 'string' ||
+        !/^\d+\.\d+\.\d+(?:-[\da-z.-]+)?(?:\+[\da-z.-]+)?$/i.test(latestVersion)) return;
 
     if (currentVersion !== latestVersion) {
       console.error('');
@@ -44,15 +49,13 @@ async function checkVersion() {
     } else {
       console.error(`✓ Dialtone MCP Server v${currentVersion} (up to date)`);
     }
-  } catch (error) {
+  } catch {
     // Fail silently if offline or registry unavailable
     // This ensures the server still starts even without network access
   }
 }
 
 async function main() {
-  // Check for updates on startup
-  await checkVersion();
   // Build compound properties set from utility classes data (done once at startup)
   const compoundProperties = buildCompoundPropertiesSet(utilityClasses);
   console.error(`[INIT] Built compound properties set: ${compoundProperties.size} properties`);
@@ -343,6 +346,30 @@ async function main() {
   await server.connect(transport);
 
   console.error("Dialtone MCP Server running on stdio");
+
+  // Registry availability must not delay protocol readiness. Bound both fetch and body reads.
+  const updateController = new AbortController();
+  const updateTimeout = setTimeout(() => updateController.abort(), UPDATE_CHECK_TIMEOUT_MS);
+  updateTimeout.unref();
+  void checkVersion(updateController.signal).finally(() => {
+    clearTimeout(updateTimeout);
+    updateController.abort();
+  });
+
+  const shutdown = () => {
+    updateController.abort();
+    void server.close().catch(console.error);
+  };
+  server.server.onclose = () => {
+    clearTimeout(updateTimeout);
+    updateController.abort();
+    process.stdin.off('end', shutdown);
+    process.off('SIGINT', shutdown);
+    process.off('SIGTERM', shutdown);
+  };
+  process.stdin.once('end', shutdown);
+  process.once('SIGINT', shutdown);
+  process.once('SIGTERM', shutdown);
 }
 
 main().catch(console.error);
