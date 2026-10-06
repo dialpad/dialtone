@@ -1,0 +1,28 @@
+packages/dialtone-icons/src/keywords-icons.json
+  s_6e87615822f9a7::t_eecd8adfa45a0a 452-457
+  s_6e87615822f9a7::t_06a70c23620424 435-440
+packages/dialtone-icons/src/svg/icons/communication/chat-rejected.svg
+  s_6e87615822f9a7::t_f1c27f9e79e69b 2-3
+  s_6e87615822f9a7::t_5b128699d8953a 1
+  s_6e87615822f9a7::t_29d1016856ecfd 4
+packages/dialtone-icons/src/svg/icons/communication/email-rejected.svg
+  s_6e87615822f9a7::t_93dc0c8981b33a 2-5
+  s_6e87615822f9a7::t_4bf030bdf2ce8b 1
+  s_6e87615822f9a7::t_05360bd814cbaa 6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "0a0835d420e6d1908c8cd64d58b21b731320f686",
+  "prompts": {},
+  "sessions": {
+    "s_6e87615822f9a7": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8683e3d5-3e3e-42b1-836b-bb4af6f08d59",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Ted Goas <ted.goas@dialpad.com>"
+    }
+  }
+}

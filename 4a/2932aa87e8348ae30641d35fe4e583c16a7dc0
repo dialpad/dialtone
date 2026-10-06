@@ -1,0 +1,19 @@
+.github/workflows/docs-data-freshness.yml
+  s_fb74aa28f644ee::t_c90a3c5f35798f 3-6,52-59,62,76-79
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "4a2932aa87e8348ae30641d35fe4e583c16a7dc0",
+  "prompts": {},
+  "sessions": {
+    "s_fb74aa28f644ee": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a016c1-4534-7332-9095-8e18310eed6e",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

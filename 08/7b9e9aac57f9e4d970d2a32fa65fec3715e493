@@ -1,0 +1,25 @@
+packages/dialtone-css/lib/build/less/components/chip.less
+  s_15cf27efeb3a97::t_140917d795166b 33-41,43
+  h_c15b5755534093 26,31,42,55,165-170,210
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "087b9e9aac57f9e4d970d2a32fa65fec3715e493",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_15cf27efeb3a97": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f9467-f3fb-7fe3-8f43-93e4dad7fd5a",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
