@@ -60,7 +60,7 @@ async function main() {
   // Create server instance
   const server = new McpServer({
     name: "dialtone-mcp-server",
-    version: "0.1.0",
+    version: pkg.version,
   }, {
     capabilities: {
       resources: {},
@@ -159,13 +159,13 @@ async function main() {
       tools: [
         {
           name: "search_utility_classes",
-          description: "Search for CSS utility classes to style HTML elements. Use when query mentions CSS properties (padding, margin, display, flex, width, border, color) or CSS values (8px, 100%, center, auto, bold). Returns classes like d-p8, d-d-flex, d-w100p, d-mt-auto.",
+          description: "Search for CSS utility classes to style HTML elements. Use when query mentions CSS properties (padding, margin, display, flex, width, border, color) or CSS values (8px, 100%, center, auto, bold). Returns classes like d-p-100, d-d-flex, d-w100p, d-mbs-auto.",
           inputSchema: {
             type: "object",
             properties: {
               query: {
                 type: "string",
-                description: "CSS property and/or value (e.g., 'padding 8px', 'display flex', 'width 100%', 'margin top auto')"
+                description: "CSS property and/or value (e.g., 'padding 8px', 'display flex', 'width 100%', 'margin block start auto')"
               },
               limit: {
                 type: "number",
@@ -186,7 +186,7 @@ async function main() {
             properties: {
               query: {
                 type: "string",
-                description: "Token category, name, or value (e.g., 'color primary', 'space 400', 'layout 200', 'font family', '#1C1C1C')"
+                description: "Token category, name, or value (e.g., 'color primary', 'spacing 400', 'layout 200', 'font family')"
               },
               limit: {
                 type: "number",
