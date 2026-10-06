@@ -1,3 +1,10 @@
+## [10.5.1](https://github.com/dialpad/dialtone/compare/dialtone/v10.5.0...dialtone/v10.5.1) (2026-10-06)
+
+
+### Bug Fixes
+
+* DLT-3646 crash when hover element removed ([#1450](https://github.com/dialpad/dialtone/issues/1450)) ([5b2f2fb](https://github.com/dialpad/dialtone/commit/5b2f2fbd3d69ffb4dabd02c062329e256c584750))
+
 # [10.5.0](https://github.com/dialpad/dialtone/compare/dialtone/v10.4.0...dialtone/v10.5.0) (2026-10-06)
 
 
