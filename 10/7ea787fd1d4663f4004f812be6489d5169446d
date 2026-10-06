@@ -1,0 +1,50 @@
+packages/dialtone-css/lib/build/js/dialtone_migrate_typography/index.mjs
+  s_03037567884f7d::t_e6d7e90905cd80 1549
+  s_03037567884f7d::t_8b4fc2d2c953e8 1592
+  s_03037567884f7d::t_d816a0fbad4c68 1238-1239,1242-1251,1260,1266
+  s_03037567884f7d::t_6e5ae1198b76d7 1646-1647
+  s_03037567884f7d::t_d0cc4c24100566 1613-1615
+packages/dialtone-css/lib/build/js/dialtone_migrate_typography/test.mjs
+  s_03037567884f7d::t_ceb7840906157a 732-743
+apps/dialtone-documentation/docs/guides/migration/typography/index.md
+  s_03037567884f7d::t_4a4350cf41165a 365-370
+  s_03037567884f7d::t_dc5281d52b856f 333
+packages/dialtone-css/lib/build/js/dialtone_migrate_flex_to_stack/index.mjs
+  s_03037567884f7d::t_ef4e64050479a7 1298-1300
+  s_03037567884f7d::t_f8f08dfa67d304 1033
+  s_03037567884f7d::t_c48362fdbb1866 1349-1350
+  s_03037567884f7d::t_184c168cd7daf6 1269
+  s_03037567884f7d::t_ee4da096b9ded7 1448
+  s_03037567884f7d::t_ee44677f266d52 1105,1108,1116,1128-1130,1133-1138
+apps/dialtone-documentation/docs/guides/migration/flex-to-stack/index.md
+  s_03037567884f7d::t_5a209398f6871c 340-341
+apps/dialtone-documentation/docs/guides/migration/index.md
+  s_03037567884f7d::t_9dccf43a67c017 73-75,78-79
+  s_03037567884f7d::t_07529a990277f9 80
+packages/dialtone-css/lib/build/js/dialtone_migrate/index.mjs
+  s_03037567884f7d::t_5251b68383c247 416-418
+  s_03037567884f7d::t_5b3eff37e313f6 810-812
+  s_03037567884f7d::t_07b777de8020a6 313-314
+  s_03037567884f7d::t_0cc2b37a031e4d 22-24
+  s_03037567884f7d::t_75cf5d45456336 257-258
+  s_03037567884f7d::t_2b19a4b96c9c4f 56
+  s_03037567884f7d::t_2ea7eb2ce86404 382,396-397
+  s_03037567884f7d::t_65223fc6992ec2 906-908
+  s_03037567884f7d::t_7cea777d3bcee8 398
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "107ea787fd1d4663f4004f812be6489d5169446d",
+  "prompts": {},
+  "sessions": {
+    "s_03037567884f7d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8162e311-7da0-49d2-a5c7-97695632b186",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

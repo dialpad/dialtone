@@ -1,0 +1,21 @@
+packages/dialtone-css/CHANGELOG.md
+  s_c11e0676746562::t_0b3d5bb3c3ba69 13-24
+packages/dialtone-css/package.json
+  s_c11e0676746562::t_0b3d5bb3c3ba69 69-76
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.5",
+  "base_commit_sha": "11f2f9d29e56d63263c5ce697d85fc8b9a93b52f",
+  "prompts": {},
+  "sessions": {
+    "s_c11e0676746562": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "019f1571-d2ad-7572-827a-d391f2dc0ba6",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
