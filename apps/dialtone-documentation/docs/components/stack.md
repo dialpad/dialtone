@@ -128,6 +128,32 @@ combinator: DtStack
 </dt-stack>
 ```
 
+## Wrap
+
+Set `wrap` to allow items to flow onto additional lines when they exceed the available space. It defaults to `false`. The `gap` applies between items and between wrapped lines.
+
+```vue demo
+<dt-box inline-size="500" max-inline-size="100p">
+  <dt-stack direction="row" gap="200" wrap>
+    <dt-box inline-size="200" surface="moderate-opaque" padding="100" border-radius="300">
+      Stack item 1
+    </dt-box>
+    <dt-box inline-size="200" surface="moderate-opaque" padding="100" border-radius="300">
+      Stack item 2
+    </dt-box>
+    <dt-box inline-size="200" surface="moderate-opaque" padding="100" border-radius="300">
+      Stack item 3
+    </dt-box>
+  </dt-stack>
+</dt-box>
+<!-- @code -->
+<dt-stack direction="row" gap="200" wrap>
+  <dt-box> Stack item 1 </dt-box>
+  <dt-box> Stack item 2 </dt-box>
+  <dt-box> Stack item 3 </dt-box>
+</dt-stack>
+```
+
 ## Render as
 
 The `as` prop controls which HTML element the Stack component renders as. Defaults to `<div>`, but can be declared as any valid HTML element to ensure semantic and accessible markup.
