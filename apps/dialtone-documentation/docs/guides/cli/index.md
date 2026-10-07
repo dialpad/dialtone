@@ -218,6 +218,8 @@ The source line lists any data that came from somewhere other than the main pack
 
 Import hints in `component` and `prompt` output appear only for verified public exports. Installed `@dialpad/dialtone` data uses its verified `@dialpad/dialtone/vue` route, or `@dialpad/dialtone/vue3` for versions before 9.173 that expose that route. Installed `@dialpad/dialtone-vue` data and bundled component data use verified routes from `@dialpad/dialtone-vue`.
 
+Bundled import hints are verified against the bundled Vue source version. They do not establish that `@dialpad/dialtone-vue` is installed at that version or that the import is compatible with your project's dependencies.
+
 Use `--bundled` when you want to ignore installed packages and query the CLI's bundled data:
 
 ```bash

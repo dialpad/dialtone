@@ -134,8 +134,9 @@ function declaredDialtoneSpec(pkgPath: string): string | null {
   }
 }
 
-// v10 apps import components from the umbrella's ./vue export, which
-// umbrellas before 9.173 don't have. Bundled data documents v10.
+// Prefer the installed umbrella's ./vue route (./vue3 before 9.173).
+// Identity imports determine the actual hint; bundled data retains its
+// source-verified standalone Vue route, without installed-project verification.
 function componentImportPath(components: Found | null | undefined): string {
   if (components?.source.package === '@dialpad/dialtone-vue') return '@dialpad/dialtone-vue';
   if (components && !('./vue' in components.exports)) return '@dialpad/dialtone/vue3';

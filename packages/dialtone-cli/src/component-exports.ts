@@ -7,8 +7,8 @@ const sideEffectImport = /^import\s+(['"])[^'"\r\n]+\1\s*;/;
 const forbiddenLocals = new Set(`await break case catch class const continue debugger default delete do else enum export extends false finally for function if implements import in instanceof interface let new null package private protected public return static super switch this throw true try typeof var void while with yield eval arguments`.split(' '));
 
 function bindings(list: string): Array<{ original: string; local: string }> | null {
+  if (!list.trim()) return [];
   const parts = list.trim().replace(/,$/, '').split(',').map(part => part.trim());
-  if (parts.length === 1 && !parts[0]) return [];
   const result = [];
   for (const part of parts) {
     const match = namedBinding.exec(part);

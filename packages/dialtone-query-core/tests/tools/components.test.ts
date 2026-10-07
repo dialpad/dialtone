@@ -204,4 +204,29 @@ describe('component identity and import safety', () => {
     expect(normalized.find(record => record.displayName === 'DtBreadcrumbItem')).toBeUndefined();
     expect(searchComponents('KitchenSinkView', normalized).results[0].details.identity.imports).toEqual([]);
   });
+
+  test('unique normalized installed exports canonicalize legacy filenames and preserve recorded APIs', () => {
+    const mappings = [
+      ['emoji_picker', 'DtEmojiPicker'], ['empty_state', 'DtEmptyState'], ['hovercard', 'DtHovercard'],
+      ['datepicker', 'DtDatepicker'], ['illustration', 'DtIllustration'], ['scroller', 'DtScroller'],
+      ['resizable', 'DtResizable'], ['resizable_panel', 'DtResizablePanel'], ['resizable_handle', 'DtResizableHandle'],
+    ];
+    const records = mappings.map(([name]) => component(name));
+    const installed = { package: '@dialpad/dialtone', version: '9.185.0', from: '@dialpad/dialtone/vue', names: mappings.map(([, name]) => name) };
+    const normalized = normalizeComponents(records, installed);
+    normalized.forEach((record, index) => {
+      const [legacy, canonical] = mappings[index];
+      expect(record.displayName).toBe(canonical);
+      expect(record.identity).toMatchObject({ canonicalName: canonical, aliases: [legacy], kind: 'public', imports: [{ name: canonical, from: installed.from, verification: 'installed-export', version: installed.version }] });
+      expect(record.props).toBe(records[index].props);
+    });
+  });
+
+  test('colliding normalized exports remain unknown while an exact export still wins', () => {
+    const installed = { package: '@dialpad/dialtone-vue', version: '3.157.0', from: '@dialpad/dialtone-vue', names: ['DtEmojiPicker', 'DtEmoji_Picker'] };
+    const [ambiguous, exact] = normalizeComponents([component('emoji_picker'), component('DtEmojiPicker')], installed);
+    expect(ambiguous.displayName).toBe('emoji_picker');
+    expect(ambiguous.identity).toMatchObject({ kind: 'unknown', imports: [] });
+    expect(exact.identity).toMatchObject({ canonicalName: 'DtEmojiPicker', kind: 'public', imports: [{ name: 'DtEmojiPicker' }] });
+  });
 });

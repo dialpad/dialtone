@@ -17,11 +17,17 @@ export function normalizeComponents(records: Component[], installed?: InstalledC
     let kind: ComponentIdentity['kind'] = identity?.kind ?? 'unknown';
     let imports = kind === 'public' ? identity?.imports ?? [] : [];
     if (installed) {
-      // A filename is an alias only after the selected installed export entry
-      // proves the Dt-prefixed export. Exact names take precedence.
+      // The selected installed entry must prove the export. Exact names take
+      // precedence; legacy case/separator differences require a unique match.
       canonicalName = names?.has(recordedName) ? recordedName
         : names?.has(`Dt${recordedName}`) ? `Dt${recordedName}` : recordedName;
-      kind = names ? (names.has(canonicalName) ? 'public' : 'internal') : 'unknown';
+      let ambiguous = false;
+      if (names && !names.has(canonicalName)) {
+        const matches = [...names].filter(name => normalizeComponentName(name) === normalizeComponentName(recordedName));
+        if (matches.length === 1) canonicalName = matches[0];
+        ambiguous = matches.length > 1;
+      }
+      kind = names && !ambiguous ? (names.has(canonicalName) ? 'public' : 'internal') : 'unknown';
       imports = kind === 'public' ? [{
         name: canonicalName, from: installed.from,
         kind: installed.from === installed.package ? 'root' : 'subpath',
