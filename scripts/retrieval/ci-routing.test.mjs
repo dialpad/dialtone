@@ -39,6 +39,7 @@ test('lookup source, data, adapter and harness changes route to the mandatory su
     'packages/eslint-plugin-dialtone/lib/rules/deprecated-class-props.js',
     'scripts/retrieval/cases.mjs',
     '.github/workflows/unit_tests.yml',
+    '.github/workflows/dialtone-documentation-tests.yml',
   ];
   for (const path of paths) {
     for (const patterns of [

@@ -19,6 +19,7 @@ on:
       - 'scripts/lib/**/*.mjs'
       - 'common/utils/server.mjs'
       - '.github/workflows/unit_tests.yml'
+      - '.github/workflows/dialtone-documentation-tests.yml'
       - 'scripts/build-dialtone-vue-docs.mjs'
   push:
     branches:
@@ -40,6 +41,7 @@ on:
       - 'scripts/lib/**/*.mjs'
       - 'common/utils/server.mjs'
       - '.github/workflows/unit_tests.yml'
+      - '.github/workflows/dialtone-documentation-tests.yml'
       - 'scripts/build-dialtone-vue-docs.mjs'
 
 env:
@@ -87,6 +89,7 @@ jobs:
               - 'scripts/lib/**/*.mjs'
               - 'common/utils/server.mjs'
               - '.github/workflows/unit_tests.yml'
+              - '.github/workflows/dialtone-documentation-tests.yml'
               - 'packages/dialtone-tokens/**'
               - 'packages/dialtone-vue/**'
               - 'scripts/build-dialtone-vue-docs.mjs'
