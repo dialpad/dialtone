@@ -9,7 +9,7 @@ const metadataExports = {
     './component-documentation.json': './dist/component-documentation.json',
   },
   '@dialpad/dialtone-icons': {
-    './keywords-icons.json': './src/keywords-icons.json',
+    './keywords-icons.json': './dist/keywords-icons.json',
   },
 };
 

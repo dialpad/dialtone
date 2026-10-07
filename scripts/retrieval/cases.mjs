@@ -15,6 +15,25 @@ const missing = (id, domain, query, diagnostic) =>
       mcp: [contains('meaningful-negative', diagnostic)],
     },
   });
+const breadcrumbResponse = (cli = false) => ({
+  id: 'breadcrumb-response',
+  kind: 'any',
+  value: [
+    [
+      order(['DtBreadcrumbItem']),
+      contains('canonical-subject', 'DtBreadcrumbItem'),
+    ],
+    [
+      { kind: 'empty' },
+      cli
+        ? { kind: 'exact', value: '[]' }
+        : contains(
+            'current-no-match',
+            'No components found for "DtBreadcrumbItem".',
+          ),
+    ],
+  ],
+});
 export const cases = [
   baseline('button-exact', 'components', 'DtButton', [
     order(['DtButton']),
@@ -41,19 +60,47 @@ export const cases = [
     'DLT3652MissingWidget',
     'No components found for "DLT3652MissingWidget".',
   ),
-  baseline('breadcrumb-public-name', 'components', 'DtBreadcrumbItem', [
-    order(['DtBreadcrumbItem']),
+  baseline(
+    'breadcrumb-public-name',
+    'components',
+    'DtBreadcrumbItem',
+    [order(['DtBreadcrumbItem'])],
+    {
+      checksByAdapter: {
+        core: [breadcrumbResponse()],
+        cli: [breadcrumbResponse(true)],
+        mcp: [breadcrumbResponse()],
+      },
+    },
+  ),
+  baseline('breadcrumb-family', 'components', 'DtBreadcrumbs', [
+    order(['DtBreadcrumbs']),
+    contains('context', 'currently-viewed page'),
   ]),
   baseline(
     'button-complete-prop',
     'components',
     'DtButton',
-    [contains('late-prop', 'assertiveOnFocus')],
+    [
+      order(['DtButton']),
+      contains('description', 'allows users to take an action'),
+      contains('late-prop', 'assertiveOnFocus'),
+    ],
     { adapters: ['mcp'], limit: 1 },
   ),
-  baseline('utility-pixel-ranking', 'utilities', 'padding 8px', [
-    order(['d-p-100']),
-  ]),
+  baseline(
+    'utility-pixel-ranking',
+    'utilities',
+    'padding 8px',
+    [order(['d-p-100']), contains('spacing-value', '--dt-spacing-100')],
+    {
+      checksByAdapter: {
+        core: [contains('padding-property', '"prop":"padding"')],
+        cli: [contains('padding-property', '"prop":"padding"')],
+        mcp: [contains('padding-property', 'padding:')],
+      },
+    },
+  ),
   baseline(
     'utility-display-facts',
     'utilities',
@@ -130,7 +177,11 @@ export const cases = [
     'checkbox-accessibility-literal',
     'documentation',
     'checkbox aria-describedby',
-    [contains('aria-literal', 'aria-describedby')],
+    [
+      order(['Checkbox > Accessibility']),
+      contains('checkbox-label', 'Associate checkbox labels'),
+      contains('aria-literal', 'aria-describedby'),
+    ],
     { limit: 1 },
   ),
   baseline(
@@ -138,6 +189,7 @@ export const cases = [
     'documentation',
     'migrate DtOldPopover',
     [
+      order(['Popover > Usage']),
       contains('deprecated-name', 'DtOldPopover is deprecated'),
       contains('replacement', 'DtPopover'),
     ],
@@ -147,7 +199,11 @@ export const cases = [
     'tooltip-wrapper-literal',
     'documentation',
     'tooltip disabled',
-    [contains('span-literal', '<span>')],
+    [
+      order(['Tooltip > Tooltip as a Component']),
+      contains('disabled-button', 'disabled DtButton'),
+      contains('span-literal', '<span>'),
+    ],
     { limit: 1 },
   ),
   baseline(
@@ -166,6 +222,7 @@ export const cases = [
     'components',
     'DtButton',
     [
+      order(['DtButton']),
       contains('legacy-value', 'xs'),
       {
         id: 'unverified-import',
@@ -179,8 +236,22 @@ export const cases = [
     'mcp-answer-provenance',
     'components',
     'DtButton',
-    [contains('answer-provenance', 'provenance')],
+    [
+      order(['DtButton']),
+      contains('description', 'allows users to take an action'),
+      contains('answer-provenance', 'provenance'),
+    ],
     { adapters: ['mcp'], limit: 1, wire: true },
+  ),
+  baseline(
+    'legacy-cli-local-selection',
+    'components',
+    'DtButton',
+    [
+      order(['DtButton']),
+      contains('old-size-values', '"values":["xs","sm","md","lg","xl"]'),
+    ],
+    { adapters: ['cli'], fixture: 'legacy-cli', limit: 1 },
   ),
 ];
 const failure = (issue, owner, assertion, removeWhen) => ({

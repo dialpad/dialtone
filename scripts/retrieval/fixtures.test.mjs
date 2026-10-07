@@ -11,9 +11,11 @@ test('nested fixture declares exact pins at the dependency root and limits evide
   const directory = await mkdtemp(join(tmpdir(), 'dialtone-fixtures-'));
   try {
     const data = [{ displayName: 'DtButton' }];
+    const icons = { fixture: ['keyword'] };
     const fixture = await createConsumerFixture(directory, 'nested-umbrella', {
       packages: {
         '@dialpad/dialtone': { 'dist/vue3/component-documentation.json': data },
+        '@dialpad/dialtone-icons': { 'dist/keywords-icons.json': icons },
       },
     });
     assert.equal(fixture.verification, 'lookup-data-only');
@@ -26,6 +28,16 @@ test('nested fixture declares exact pins at the dependency root and limits evide
         ),
       ),
       data,
+    );
+    assert.deepEqual(
+      JSON.parse(
+        await readFile(
+          createRequire(join(fixture.invocationRoot, 'package.json')).resolve(
+            '@dialpad/dialtone-icons/keywords-icons.json',
+          ),
+        ),
+      ),
+      icons,
     );
     assert.equal(
       fixture.invocationRoot,

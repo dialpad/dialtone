@@ -60,6 +60,16 @@ test('every owned failure is an exercised precise assertion, and every case stay
       1,
       id,
     );
+    if (id !== 'documentation-negative/mcp')
+      for (const actual of [
+        { names: [], text: '', bytes: 0 },
+        { names: ['DtModal'], text: 'Unrelated modal result', bytes: 22 },
+      ])
+        assert.throws(
+          () => evaluateAssertions(id, actual, exercised.get(id), failure),
+          undefined,
+          `${id} must reject blank or wrong-subject content`,
+        );
   }
   for (const value of cases)
     assert.ok(value.limit > 0 && value.limit <= 3, value.id);

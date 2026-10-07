@@ -31,6 +31,7 @@ test('lookup source, data, adapter and harness changes route to the mandatory su
     'apps/dialtone-documentation/docs/components/tooltip.md',
     'scripts/build-dialtone-vue-docs.mjs',
     'scripts/lib/vue-component-identity.mjs',
+    'scripts/tests/vue-component-identity.test.mjs',
     'common/utils/server.mjs',
     'packages/dialtone-query-core/src/data.ts',
     'packages/dialtone-cli/src/context.ts',
@@ -50,6 +51,31 @@ test('lookup source, data, adapter and harness changes route to the mandatory su
         `lookup CI does not run for ${path}`,
       );
   }
+  const docsWorkflow = parse(
+    readFileSync(
+      new URL(
+        '../../.github/workflows/dialtone-documentation-tests.yml',
+        import.meta.url,
+      ),
+      'utf8',
+    ),
+  );
+  for (const path of [
+    'apps/dialtone-documentation/scripts/lib/transform-vue-api.test.mjs',
+    'scripts/build-dialtone-vue-docs.mjs',
+    'scripts/lib/vue-component-identity.mjs',
+    'scripts/tests/vue-component-identity.test.mjs',
+    'common/utils/server.mjs',
+    '.github/workflows/dialtone-documentation-tests.yml',
+  ])
+    for (const patterns of [
+      docsWorkflow.on.pull_request.paths,
+      docsWorkflow.on.push.paths,
+    ])
+      assert.ok(
+        patterns.some((pattern) => minimatch(path, pattern)),
+        `documentation CI does not run for ${path}`,
+      );
   const commands = workflow.jobs['test-cli'].steps
     .map((step) => step.run ?? '')
     .join('\n');

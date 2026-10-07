@@ -1,13 +1,15 @@
 import assert from 'node:assert/strict';
 import { execFile, execFileSync } from 'node:child_process';
 import { createRequire } from 'node:module';
-import { readFile, writeFile } from 'node:fs/promises';
+import { glob, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { resolve } from 'node:path';
+import { join, resolve } from 'node:path';
+import { tmpdir } from 'node:os';
 import { promisify } from 'node:util';
 import { cases, expectedFailures } from './cases.mjs';
 import { evaluateAssertions } from './assertions.mjs';
-import { sha256 } from './fixtures.mjs';
+import { createConsumerFixture, sha256 } from './fixtures.mjs';
+import legacyButton from './legacy-button.json' with { type: 'json' };
 
 const root = fileURLToPath(new URL('../..', import.meta.url));
 const reportArgument = process.argv.indexOf('--report');
@@ -88,23 +90,9 @@ function textNames(text, domain) {
 async function query(testCase, adapter) {
   const [search, data, format, tool, type] = domains[testCase.domain];
   if (adapter === 'core') {
-    // Size values are sampled from standalone-vue3-legacy 3.157.0 metadata.
-    // This small old-schema fixture establishes lookup facts, with no installation/build claim.
+    // The stamped dt9-legacy projection establishes lookup facts, with no install/build claim.
     const dataset =
-      testCase.fixture === 'legacy'
-        ? [
-            {
-              displayName: 'DtButton',
-              props: [
-                {
-                  name: 'size',
-                  values: ['xs', 'sm', 'md', 'lg', 'xl'],
-                  type: { name: 'string' },
-                },
-              ],
-            },
-          ]
-        : core[data];
+      testCase.fixture === 'legacy' ? legacyButton.records : core[data];
     // Query-core debug logging is unrelated to deterministic retrieval evidence.
     const stderr = console.error;
     let result;
@@ -121,6 +109,7 @@ async function query(testCase, adapter) {
     };
   }
   if (adapter === 'cli') {
+    const local = testCase.fixture === 'legacy-cli';
     const command =
       testCase.domain === 'documentation'
         ? 'docs'
@@ -136,7 +125,7 @@ async function query(testCase, adapter) {
           offline,
           resolve(root, 'packages/dialtone-cli/build/index.js'),
           command,
-          '--bundled',
+          ...(local ? [] : ['--bundled']),
           '--format',
           'json',
           '--limit',
@@ -144,7 +133,11 @@ async function query(testCase, adapter) {
           '--',
           testCase.query,
         ],
-        { cwd: root, timeout: 10000, maxBuffer: 512 * 1024 },
+        {
+          cwd: local ? legacyFixture.invocationRoot : root,
+          timeout: 10000,
+          maxBuffer: 512 * 1024,
+        },
       ));
     } catch (error) {
       // Only the adapter's documented negative result (exit 1 + precise diagnostic) is accepted.
@@ -162,7 +155,11 @@ async function query(testCase, adapter) {
       return { names: [], text: error.stderr };
     }
     assert.ok(
-      stderr.includes('Using bundled Dialtone data'),
+      stderr.includes(
+        local
+          ? `Using local Dialtone data: ${legacyButton.package}@${legacyButton.version}`
+          : 'Using bundled Dialtone data',
+      ),
       'CLI source selection must be explicit',
     );
     const parsed = JSON.parse(stdout);
@@ -218,7 +215,29 @@ const report = {
   artifacts: [],
   results: [],
 };
+let fixtureRoot;
+let legacyFixture;
 try {
+  fixtureRoot = await mkdtemp(join(tmpdir(), 'dialtone-retrieval-'));
+  legacyFixture = await createConsumerFixture(
+    fixtureRoot,
+    legacyButton.profile,
+    {
+      packages: {
+        [legacyButton.package]: {
+          [legacyButton.source.path]: legacyButton.records,
+        },
+      },
+    },
+  );
+  report.fixtures = [
+    {
+      profile: legacyFixture.profile,
+      verification: legacyFixture.verification,
+      data: legacyFixture.data,
+      source: legacyButton.source,
+    },
+  ];
   await client.connect(transport, { timeout: 10000 });
   const rules = await client.readResource(
     { uri: 'dialtone://client-rules' },
@@ -234,11 +253,30 @@ try {
     ),
     'MCP bundled client rules are fresh',
   );
+  assert.deepEqual(
+    JSON.parse(
+      await readFile(
+        resolve(root, 'packages/dialtone-icons/dist/keywords-icons.json'),
+      ),
+    ),
+    JSON.parse(
+      await readFile(
+        resolve(root, 'packages/dialtone-icons/src/keywords-icons.json'),
+      ),
+    ),
+    'Consumed icon metadata matches its source',
+  );
+  const helpers = await Array.fromAsync(
+    glob('scripts/lib/**/*.mjs', { cwd: root }),
+  );
   for (const path of [
     'scripts/build-dialtone-vue-docs.mjs',
+    'common/utils/server.mjs',
+    ...helpers.sort(),
     'scripts/retrieval/cases.mjs',
     'scripts/retrieval/run.mjs',
     'scripts/retrieval/profiles.mjs',
+    'scripts/retrieval/legacy-button.json',
     '.github/workflows/unit_tests.yml',
     'packages/dialtone-query-core/package.json',
     'packages/dialtone-cli/package.json',
@@ -247,6 +285,7 @@ try {
     'packages/dialtone-css/lib/dist/dialtone-docs.json',
     'packages/dialtone-css/lib/dist/tokens-docs.json',
     'packages/dialtone-icons/src/keywords-icons.json',
+    'packages/dialtone-icons/dist/keywords-icons.json',
     'packages/dialtone-docs/dist/public-docs.json',
     'packages/dialtone-cli/build/index.js',
     'packages/dialtone-mcp-server/build/index.js',
@@ -310,10 +349,14 @@ try {
   try {
     await client.close();
   } finally {
-    if (reportPath)
-      await writeFile(
-        resolve(reportPath),
-        JSON.stringify(report, null, 2) + '\n',
-      );
+    try {
+      if (fixtureRoot) await rm(fixtureRoot, { recursive: true, force: true });
+    } finally {
+      if (reportPath)
+        await writeFile(
+          resolve(reportPath),
+          JSON.stringify(report, null, 2) + '\n',
+        );
+    }
   }
 }
