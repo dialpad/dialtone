@@ -2,6 +2,22 @@
  * Utility helpers for raw markdown generation.
  */
 
+/** Match authored camel/kebab/snake names against canonical names and aliases. */
+export function findComponentRecord (records, name) {
+  const key = value => value.toLowerCase().replace(/[^a-z0-9]/g, '').replace(/^dt/, '');
+  const candidates = records.filter(record => [record.displayName, ...(record.identity?.aliases ?? [])]
+    .some(candidate => candidate && key(candidate) === key(name)));
+  return candidates.find(record => record.displayName === name) ?? (candidates.length === 1 ? candidates[0] : null);
+}
+
+/** Only the generated root route certifies a public docs import. */
+export function componentRootImportName (record) {
+  if (record?.schemaVersion !== 2 || record.identity?.kind !== 'public') return null;
+  const routes = (record.identity.imports ?? []).filter(route => route.from === '@dialpad/dialtone-vue'
+    && route.kind === 'root' && route.verification === 'source-export');
+  return (routes.find(route => route.name === record.identity.canonicalName) ?? routes[0])?.name ?? null;
+}
+
 /**
  * Collapse whitespace and trim text for use inside a backtick-wrapped table cell.
  * Pipes inside backtick code spans are literal in GFM, so no escaping needed.

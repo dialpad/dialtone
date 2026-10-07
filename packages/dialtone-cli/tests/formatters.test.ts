@@ -5,7 +5,11 @@ import { formatComponentOutput, formatPrompt } from '../src/formatters.js';
 describe('import hints name the given package', () => {
   // Not a real Dialtone path, so a hint hard-coded to any of them fails.
   const importFrom = '@example/ui';
-  const button: SearchResult = { type: 'component', name: 'DtButton', details: {}, metadata: null };
+  const identity = {
+    canonicalName: 'DtButton', aliases: [], kind: 'public' as const,
+    imports: [{ name: 'DtButton', from: importFrom, kind: 'root' as const, verification: 'installed-export' as const, package: importFrom, version: '1.0.0' }],
+  };
+  const button: SearchResult = { type: 'component', name: 'DtButton', details: { identity }, metadata: null };
 
   test('minimal component view', () => {
     expect(formatComponentOutput(button, 'minimal', undefined, { importFrom })).toBe([
@@ -27,13 +31,33 @@ describe('import hints name the given package', () => {
     ].join('\n'));
   });
 
-  test('examples', () => {
-    expect(formatComponentOutput(button, 'minimal', 'examples', { importFrom }))
+  test('examples import the canonical binding even when a public alias appears first', () => {
+    const aliased = { ...button, details: { identity: {
+      ...identity, aliases: ['ButtonAlias'],
+      imports: [{ ...identity.imports[0], name: 'ButtonAlias' }, ...identity.imports],
+    } } };
+    expect(formatComponentOutput(aliased, 'minimal', 'examples', { importFrom }))
       .toBe("import { DtButton } from '@example/ui'\n\n<DtButton />");
   });
 
   test('prompt text', () => {
-    expect(formatPrompt({ displayName: 'DtButton' }, importFrom))
+    expect(formatPrompt({ displayName: 'DtButton', identity }, importFrom))
       .toBe("<DtButton>\nImport: import { DtButton } from '@example/ui'");
+  });
+});
+
+describe('unverified import guidance', () => {
+  const unknown: SearchResult = { type: 'component', name: 'KitchenSinkView', details: {}, metadata: null };
+  test.each(['minimal', 'markdown'] as const)('%s component and examples withhold unverified imports', format => {
+    for (const filter of [undefined, 'examples'] as const) {
+      const text = formatComponentOutput(unknown, format, filter, { importFrom: '@dialpad/dialtone/vue' });
+      expect(text).not.toContain('import {');
+      expect(text).toContain('unverified');
+    }
+  });
+  test('prompt text withholds unverified imports', () => {
+    const text = formatPrompt({ displayName: 'KitchenSinkView' }, '@dialpad/dialtone/vue');
+    expect(text).not.toContain('import {');
+    expect(text).toContain('unverified');
   });
 });

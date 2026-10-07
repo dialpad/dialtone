@@ -55,6 +55,24 @@ export interface ComponentSlot {
   name: string;
 }
 
+export interface ComponentImport {
+  name: string;
+  from: string;
+  kind: 'root' | 'subpath';
+  verification: 'source-export' | 'installed-export';
+  package: string;
+  version: string;
+}
+
+/** C1 v2: aliases are lookup names; only imports certify an export route. */
+export interface ComponentIdentity {
+  canonicalName: string;
+  aliases: string[];
+  kind: 'public' | 'internal' | 'unknown';
+  source?: { package: string; version: string; path?: string };
+  imports: ComponentImport[];
+}
+
 export interface Component {
   displayName: string;
   description?: string;
@@ -62,6 +80,8 @@ export interface Component {
   events?: ComponentEvent[];
   slots?: ComponentSlot[];
   metadata?: Metadata;
+  schemaVersion?: number;
+  identity?: ComponentIdentity;
 }
 
 export interface Icon {

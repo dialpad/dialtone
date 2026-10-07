@@ -27,8 +27,10 @@ import {
   components as bundledComponents,
   icons as bundledIcons,
   documentation as bundledDocumentation,
+  normalizeComponents,
 } from '@dialpad/dialtone-query-core';
 import type { UtilityClassesData, TokensData, Component, IconsData, DocumentationRecord } from '@dialpad/dialtone-query-core';
+import { parseComponentExports } from './component-exports.js';
 
 export const DOMAINS = ['components', 'utilities', 'tokens', 'icons', 'docs'] as const;
 export type Domain = typeof DOMAINS[number];
@@ -52,6 +54,7 @@ interface Found {
   file: string;
   source: LocalSource;
   exports: Record<string, unknown>; // the package's exports map
+  manifest: string;
 }
 
 type Parts = Partial<Record<Exclude<Domain, 'docs'>, Found | null>>;
@@ -99,7 +102,7 @@ function tryRead(fromDir: string, specifier: string): Found | null {
     const data = JSON.parse(readFileSync(file, 'utf-8'));
     if (data === null) return null;
     const { version, exports } = JSON.parse(readFileSync(manifest, 'utf-8'));
-    return { data, file, source: { kind: 'local', package: packageName, version }, exports: exports ?? {} };
+    return { data, file, source: { kind: 'local', package: packageName, version }, exports: exports ?? {}, manifest };
   } catch {
     return null;
   }
@@ -139,12 +142,48 @@ function componentImportPath(components: Found | null | undefined): string {
   return '@dialpad/dialtone/vue';
 }
 
+// Read the ESM condition explicitly: createRequire.resolve would select the
+// CJS condition, and executing a consumer's package is unnecessary for lookup.
+function installedComponentNames(found: Found, importFrom: string): string[] | null {
+  function importTarget(value: unknown): string | null {
+    if (typeof value === 'string') return value;
+    if (!value || typeof value !== 'object' || Array.isArray(value)) return null;
+    // Conditional exports are ordered. Only flat published ESM maps are
+    // supported; an earlier unknown condition or nested target is unverified.
+    for (const [condition, target] of Object.entries(value)) {
+      if (condition === 'types' || condition === 'require') continue;
+      if (condition === 'import' || condition === 'default') return typeof target === 'string' ? target : null;
+      return null;
+    }
+    return null;
+  }
+  try {
+    const manifest = JSON.parse(readFileSync(found.manifest, 'utf8'));
+    const subpath = importFrom === found.source.package ? '.' : `.${importFrom.slice(found.source.package.length)}`;
+    const target = importTarget(found.exports[subpath])
+      ?? (subpath === '.' && !manifest.exports ? manifest.module : null);
+    if (typeof target !== 'string' || !target.startsWith('./')) return null;
+    const root = realpathSync(dirname(found.manifest));
+    const file = realpathSync(join(root, target));
+    if (!file.startsWith(root + sep)) return null;
+    return parseComponentExports(readFileSync(file, 'utf8'));
+  } catch {
+    return null;
+  }
+}
+
 // Each domain comes from the first candidate that found it, else from bundled data.
 function assemble(...candidates: Parts[]): ResolvedData {
   const pick = (domain: keyof Parts) => candidates.map(c => c[domain]).find(Boolean);
   const [components, utilities, tokens, icons] = [pick('components'), pick('utilities'), pick('tokens'), pick('icons')];
+  const importFrom = componentImportPath(components);
   return {
-    components: (components?.data as Component[]) ?? bundledComponents,
+    components: components ? normalizeComponents(components.data as Component[], {
+      package: components.source.package,
+      version: components.source.version ?? 'unknown',
+      from: importFrom,
+      names: installedComponentNames(components, importFrom),
+    }) : bundledComponents,
     utilityClasses: (utilities?.data as UtilityClassesData) ?? bundledUtilityClasses,
     tokens: (tokens?.data as TokensData) ?? bundledTokens,
     icons: (icons?.data as IconsData) ?? bundledIcons,
@@ -156,7 +195,7 @@ function assemble(...candidates: Parts[]): ResolvedData {
       icons: icons?.source ?? BUNDLED,
       docs: BUNDLED,
     },
-    componentImportPath: componentImportPath(components),
+    componentImportPath: importFrom,
     warnings: [],
   };
 }

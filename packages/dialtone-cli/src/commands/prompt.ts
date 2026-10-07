@@ -26,7 +26,8 @@ export const promptCommand = defineCommand({
         })),
         slots: result.details.slots?.map((s: { name: string }) => s.name),
         events: result.details.events?.map((e: { name: string }) => e.name),
-        import: importStatement(result.name, importFrom),
+        identity: result.details.identity,
+        import: importStatement(result.details.identity, importFrom),
       };
       console.log(JSON.stringify(component, null, 2));
       return;
@@ -39,6 +40,8 @@ export const promptCommand = defineCommand({
       props: result.details.props,
       events: result.details.events,
       slots: result.details.slots,
+      schemaVersion: result.details.schemaVersion,
+      identity: result.details.identity,
     };
 
     console.log(formatPrompt(comp, importFrom));

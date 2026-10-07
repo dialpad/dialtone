@@ -3,6 +3,7 @@
 // ============================================================================
 
 import { applySmartFilter } from '../utils/filters.js';
+import { normalizeComponents, normalizeComponentName, componentNames, componentImportStatement, componentImportNote } from '../component-identity.js';
 import type {
   Component,
   ComponentProp,
@@ -42,7 +43,9 @@ function toSearchResult(component: Component): SearchResult {
       description: component.description,
       props: component.props || [],
       events: component.events || [],
-      slots: component.slots || []
+      slots: component.slots || [],
+      identity: component.identity,
+      schemaVersion: component.schemaVersion,
     },
     metadata: component.metadata || null
   };
@@ -55,10 +58,10 @@ function searchByName(regexArray: RegExp[], components: Component[]): SearchResu
   const matches: SearchResult[] = [];
 
   for (const component of components) {
-    const nameParts = splitCamelCase(component.displayName);
-    const nameText = nameParts.join(' ');
-
-    const allMatch = regexArray.every(regex => regex.test(nameText));
+    const allMatch = componentNames(component).some(name => {
+      const nameText = splitCamelCase(name).join(' ');
+      return regexArray.every(regex => regex.test(nameText));
+    });
     if (allMatch) {
       matches.push(toSearchResult(component));
     }
@@ -157,10 +160,6 @@ function searchBySlots(regexArray: RegExp[], components: Component[]): SearchRes
  * separators and an optional "Dt" prefix. "DtButtonGroup", "button-group",
  * and "Button Group" all become "buttongroup".
  */
-function normalizeComponentName(name: string): string {
-  return compactName(name).replace(/^dt/, '');
-}
-
 /** Lowercase and drop separators, keeping any "Dt" prefix. */
 function compactName(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]/g, '');
@@ -182,6 +181,7 @@ function legacyNote(component: Component): string | null {
  * Search Vue components by name, description, props, events, and slots
  */
 export function searchComponents(query: string, components: Component[]): { results: SearchResult[]; notes: string[]; exactMatch: boolean; warning: string | null } {
+  components = normalizeComponents(components);
   console.error(`\n[COMPONENT SEARCH DEBUG] Query: "${query}"`);
 
   // Normalize query: split camelCase, lowercase, replace hyphens/slashes with spaces
@@ -227,7 +227,7 @@ export function searchComponents(query: string, components: Component[]): { resu
   // substituting a different component. Those need their full name ("DtIcon",
   // "dt-icon"), so a generic word like "icon" doesn't lead with legacy UI.
   const target = normalizeComponentName(query);
-  const candidates = target ? components.filter(c => normalizeComponentName(c.displayName) === target) : [];
+  const candidates = target ? components.filter(c => componentNames(c).some(name => normalizeComponentName(name) === target)) : [];
   const match = candidates.find(c => c.displayName === query.trim()) ?? (candidates.length === 1 ? candidates[0] : null);
   // A note means the match is deprecated or discouraged.
   const note = match ? legacyNote(match) : null;
@@ -333,11 +333,10 @@ export function formatComponentResults(results: SearchResult[], query: string): 
       output += `\n\n`;
     }
 
-    // Usage example
-    output += `   **Usage:**\n`;
-    output += `   \`\`\`vue\n`;
-    output += `   import { ${result.name} } from '@dialpad/dialtone-vue'\n`;
-    output += `   \`\`\`\n\n`;
+    const statement = componentImportStatement(result.details.identity);
+    output += statement
+      ? `   **Usage:**\n   \`\`\`vue\n   ${statement}\n   \`\`\`\n\n`
+      : `   ${componentImportNote(result.details.identity)}\n\n`;
   });
 
   return output;

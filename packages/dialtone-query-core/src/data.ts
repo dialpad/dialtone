@@ -3,6 +3,7 @@
 // ============================================================================
 
 import type { UtilityClassesData, TokensData, Component, IconsData, DocumentationRecord } from './types.js';
+import { normalizeComponents } from './component-identity.js';
 
 import utilityClassesData from '@dialpad/dialtone-css/lib/dist/dialtone-docs.json' with { type: 'json' };
 import tokensData from '@dialpad/dialtone-css/lib/dist/tokens-docs.json' with { type: 'json' };
@@ -12,6 +13,6 @@ import documentationData from '@dialpad/dialtone-docs/dist/public-docs.json' wit
 
 export const utilityClasses: UtilityClassesData = utilityClassesData as unknown as UtilityClassesData;
 export const tokens: TokensData = tokensData as unknown as TokensData;
-export const components: Component[] = componentsData as unknown as Component[];
+export const components: Component[] = normalizeComponents(componentsData as unknown as Component[]);
 export const icons: IconsData = iconsData as unknown as IconsData;
 export const documentation: DocumentationRecord[] = documentationData as unknown as DocumentationRecord[];

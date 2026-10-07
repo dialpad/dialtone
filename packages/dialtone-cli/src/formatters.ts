@@ -3,6 +3,7 @@
 // ============================================================================
 
 import Table from 'cli-table3';
+import { componentImportStatement, componentImportNote } from '@dialpad/dialtone-query-core';
 import type {
   SearchResult,
   ComponentProp,
@@ -11,12 +12,13 @@ import type {
   ValueObject,
   ThemeData,
   Component,
+  ComponentIdentity,
 } from '@dialpad/dialtone-query-core';
 
 export type Format = 'minimal' | 'markdown' | 'json';
 
-export function importStatement(name: string, importFrom: string): string {
-  return `import { ${name} } from '${importFrom}'`;
+export function importStatement(identity?: ComponentIdentity, importFrom?: string): string | null {
+  return componentImportStatement(identity, importFrom);
 }
 
 // ── Table helper ────────────────────────────────────────────────────────────
@@ -108,7 +110,8 @@ function minimalComponent(result: SearchResult, importFrom: string, describe = f
     lines.push(slotsTable(result.details.slots));
   }
 
-  lines.push('', `Import: ${importStatement(result.name, importFrom)}`);
+  const statement = importStatement(result.details.identity, importFrom);
+  lines.push('', statement ? `Import: ${statement}` : componentImportNote(result.details.identity));
 
   return lines.join('\n');
 }
@@ -183,7 +186,8 @@ function markdownComponent(result: SearchResult, importFrom: string): string {
     });
   }
 
-  lines.push('', '## Usage', '', '```vue', importStatement(result.name, importFrom), '```');
+  const statement = importStatement(result.details.identity, importFrom);
+  lines.push('', '## Usage', '', ...(statement ? ['```vue', statement, '```'] : [componentImportNote(result.details.identity)]));
   return lines.join('\n');
 }
 
@@ -234,7 +238,8 @@ export function formatPrompt(component: Component, importFrom: string): string {
     lines.push(`Events: ${component.events.map((e: ComponentEvent) => e.name).join(', ')}`);
   }
 
-  lines.push(`Import: ${importStatement(component.displayName, importFrom)}`);
+  const statement = importStatement(component.identity, importFrom);
+  lines.push(statement ? `Import: ${statement}` : componentImportNote(component.identity));
   return lines.join('\n');
 }
 
@@ -266,7 +271,8 @@ export function formatComponentOutput(result: SearchResult, format: Format, filt
   }
 
   if (filter === 'examples') {
-    return `${importStatement(result.name, options.importFrom)}\n\n<${result.name} />`;
+    const statement = importStatement(result.details.identity, options.importFrom);
+    return statement ? `${statement}\n\n<${result.name} />` : componentImportNote(result.details.identity);
   }
 
   if (format === 'markdown') return markdownComponent(result, options.importFrom);
