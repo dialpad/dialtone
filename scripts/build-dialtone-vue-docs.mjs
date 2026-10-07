@@ -3,7 +3,7 @@ import path, { join } from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import { getValidFileList } from '../common/utils/server.mjs';
-import { readPublicComponentExports, withComponentIdentity } from './lib/vue-component-identity.mjs';
+import { readPublicComponentExports, uniqueComponentFiles, withComponentIdentity } from './lib/vue-component-identity.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -46,7 +46,9 @@ const manifest = JSON.parse(fs.readFileSync(join(dialtoneVueRootFolder, 'package
 const publicExports = readPublicComponentExports(dialtoneVueRootFolder);
 // Preserve records used by editor/docs consumers, adding any public SFCs the
 // historical filename scan missed. Export identity, not filenames, is authority.
-const fileList = [...new Set([...getValidFileList(dialtoneVueRootFolder + '/components'), ...publicExports.keys()])];
+const fileList = uniqueComponentFiles([
+  ...getValidFileList(dialtoneVueRootFolder + '/components'), ...publicExports.keys(),
+]);
 
 function writeDocumentationFile (data) {
   const jsonData = JSON.stringify(data);

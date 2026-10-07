@@ -1,10 +1,10 @@
 import assert from 'node:assert/strict';
 import { readFileSync, mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
-import { dirname, resolve, join } from 'node:path';
+import { dirname, resolve, join, win32 } from 'node:path';
 import { tmpdir } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
-import { readPublicComponentExports, withComponentIdentity } from '../lib/vue-component-identity.mjs';
+import { readPublicComponentExports, uniqueComponentFiles, withComponentIdentity } from '../lib/vue-component-identity.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 // Consume metadata generated separately by the standard dialtone-vue:build.
@@ -54,6 +54,24 @@ test('array records carry additive versioned identity with portable source paths
     assert.ok(!record.identity.source.path.includes(root));
     assert.ok(!record.identity.aliases.includes(record.displayName));
   }
+});
+
+test('Windows scan and export paths produce one public record with a verified import', () => {
+  const packageRoot = String.raw`C:\dialtone\packages\dialtone-vue`;
+  const scanned = `${packageRoot}/components/button/button.vue`;
+  const exported = win32.resolve(scanned);
+  const exports = new Map([[exported, ['DtButton']]]);
+  const files = uniqueComponentFiles([scanned, ...exports.keys()], win32.resolve);
+  const records = files.map(file => withComponentIdentity(
+    { displayName: 'button' }, file, exports, packageRoot, { name: '@example/ui', version: '1.0.0' },
+  ));
+  assert.deepEqual(records.map(record => ({ kind: record.identity.kind, imports: record.identity.imports })), [{
+    kind: 'public',
+    imports: [{
+      name: 'DtButton', from: '@example/ui', kind: 'root', verification: 'source-export',
+      package: '@example/ui', version: '1.0.0',
+    }],
+  }]);
 });
 
 test('barrel aliases share source identity and prefer the public Dt name', () => {

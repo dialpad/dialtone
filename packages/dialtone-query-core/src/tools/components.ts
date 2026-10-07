@@ -59,7 +59,7 @@ function searchByName(regexArray: RegExp[], components: Component[]): SearchResu
 
   for (const component of components) {
     const allMatch = componentNames(component).some(name => {
-      const nameText = splitCamelCase(name).join(' ');
+      const nameText = splitCamelCase(name.replace(/[_-]/g, ' ')).join(' ');
       return regexArray.every(regex => regex.test(nameText));
     });
     if (allMatch) {

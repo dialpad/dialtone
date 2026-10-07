@@ -272,7 +272,9 @@ export function formatComponentOutput(result: SearchResult, format: Format, filt
 
   if (filter === 'examples') {
     const statement = componentImportStatement(result.details.identity, options.importFrom);
-    return statement ? `${statement}\n\n<${result.name} />` : componentImportNote(result.details.identity);
+    if (statement) return `${statement}\n\n<${result.name} />`;
+    const note = componentImportNote(result.details.identity);
+    return result.details.identity?.kind === 'public' ? `${note}\n\n<${result.name} />` : note;
   }
 
   if (format === 'markdown') return markdownComponent(result, options.importFrom);

@@ -2,6 +2,11 @@ import { existsSync, readFileSync, statSync } from 'node:fs';
 import { basename, dirname, join, relative, resolve } from 'node:path';
 import ts from 'typescript';
 
+/** Normalize scan/export paths before deduplication and identity lookup. */
+export function uniqueComponentFiles (files, resolveFile = resolve) {
+  return [...new Set(files.map(file => resolveFile(file)))];
+}
+
 function resolveModule (file, specifier) {
   if (!specifier.startsWith('.')) return null;
   const target = resolve(dirname(file), specifier);

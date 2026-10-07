@@ -149,6 +149,10 @@ describe('component identity and import safety', () => {
     expect(formatComponentResults(result.results, 'ResizePane')).toContain("import { DtResizable } from '@dialpad/dialtone-vue'");
   });
 
+  test('all query words must match the same canonical name or alias', () => {
+    expect(searchComponents('resizable pane', [publicResizable]).results).toEqual([]);
+  });
+
   test('an alias lookup imports the canonical component name within the preferred package', () => {
     const panel = component('DtPanel', {
       schemaVersion: 2,
@@ -184,6 +188,15 @@ describe('component identity and import safety', () => {
     const output = formatComponentResults(results, 'DtText');
     expect(output).not.toContain('import {');
     expect(output).toContain('unverified');
+  });
+
+  test('partial legacy name words remain discoverable without verified imports', () => {
+    const legacy = component('emoji_picker', { description: '', props: [{ name: 'searchQuery' }] });
+    const { results, exactMatch } = searchComponents('picker', [legacy]);
+    expect(exactMatch).toBe(false);
+    expect(results.map(result => result.name)).toEqual(['emoji_picker']);
+    expect(results[0].details.props).toEqual([{ name: 'searchQuery' }]);
+    expect(results[0].details.identity).toMatchObject({ canonicalName: 'emoji_picker', kind: 'unknown', imports: [] });
   });
 
   test('reused mutable arrays reflect appended records and replacement import evidence', () => {

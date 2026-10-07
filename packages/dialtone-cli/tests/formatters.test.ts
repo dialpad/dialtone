@@ -40,6 +40,14 @@ describe('import hints name the given package', () => {
       .toBe("import { DtButton } from '@example/ui'\n\n<DtButton />");
   });
 
+  test('examples retain a known public tag when its import route is unverified', () => {
+    const unverified = { ...button, details: { identity: { ...identity, imports: [] } } };
+    const text = formatComponentOutput(unverified, 'minimal', 'examples', { importFrom });
+    expect(text).toContain('unverified');
+    expect(text).toContain('<DtButton />');
+    expect(text).not.toContain('import {');
+  });
+
   test('prompt text', () => {
     expect(formatPrompt({ displayName: 'DtButton', identity }, importFrom))
       .toBe("<DtButton>\nImport: import { DtButton } from '@example/ui'");
@@ -53,7 +61,17 @@ describe('unverified import guidance', () => {
       const text = formatComponentOutput(unknown, format, filter, { importFrom: '@dialpad/dialtone/vue' });
       expect(text).not.toContain('import {');
       expect(text).toContain('unverified');
+      if (filter === 'examples') expect(text).not.toContain('<KitchenSinkView />');
     }
+  });
+  test('examples do not recommend an internal component', () => {
+    const internal = { ...unknown, details: { identity: {
+      canonicalName: 'KitchenSinkView', aliases: [], kind: 'internal' as const, imports: [],
+    } } };
+    const text = formatComponentOutput(internal, 'minimal', 'examples', { importFrom: '@dialpad/dialtone/vue' });
+    expect(text).toContain('not exported');
+    expect(text).not.toContain('<KitchenSinkView />');
+    expect(text).not.toContain('import {');
   });
   test('prompt text withholds unverified imports', () => {
     const text = formatPrompt({ displayName: 'KitchenSinkView' }, '@dialpad/dialtone/vue');
