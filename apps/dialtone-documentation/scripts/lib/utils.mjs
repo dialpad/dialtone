@@ -4,6 +4,7 @@
 
 /** Match authored camel/kebab/snake names against canonical names and aliases. */
 export function findComponentRecord (records, name) {
+  // Keep this rule aligned with packages/dialtone-query-core/src/component-identity.ts.
   const key = value => value.toLowerCase().replace(/[^a-z0-9]/g, '').replace(/^dt/, '');
   const candidates = records.filter(record => [record.displayName, ...(record.identity?.aliases ?? [])]
     .some(candidate => candidate && key(candidate) === key(name)));
