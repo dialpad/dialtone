@@ -35,6 +35,14 @@ If the selected package or its metadata is missing, unreadable, or not a JSON ar
 
 Metadata is cached separately for each consumer root for the lifetime of the ESLint process. Restart ESLint after changing dependency declarations or installed metadata.
 
+### Upgrading consumers
+
+Umbrella consumers no longer need `@dialpad/dialtone-vue` installed solely to provide metadata for this rule. Keep it if another application or tool dependency still needs the standalone package.
+
+Consumers that previously relied on a transitive or hoisted, undeclared Dialtone package must declare the intended `@dialpad/dialtone` or `@dialpad/dialtone-vue` dependency. Otherwise, the rule warns and skips its checks. A declared dependency can still use a hoisted installation within the repository.
+
+The plugin keeps its existing optional standalone peer. Consumer-root resolution reads the declared umbrella directly, so no additional umbrella peer is required.
+
 ### Examples of incorrect code
 
 ```vue
