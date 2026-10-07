@@ -59,6 +59,7 @@ function tableText (value) {
 
 function apiCode (value) {
   if (value === undefined) return 'Not documented';
+  if (value === null) return '`null`';
   const text = tableText(value);
   const runs = text.match(/`+/g) ?? [];
   const fence = '`'.repeat(Math.max(0, ...runs.map(run => run.length)) + 1);

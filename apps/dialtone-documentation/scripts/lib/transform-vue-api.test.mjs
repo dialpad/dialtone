@@ -62,6 +62,8 @@ test('raw API tables retain allowed values, required, defaults and deprecation f
     { name: 'empty', defaultValue: { value: '\'\'' }, required: false },
     { name: 'enabled', defaultValue: { value: false } },
     { name: 'count', defaultValue: { value: 0 } },
+    { name: 'nullable', defaultValue: { value: null } },
+    { name: 'missing' },
     { name: 'items', defaultValue: { func: true, value: '() => []' } },
     { name: 'documented', tags: { default: [{ description: '[]' }] } },
   ];
@@ -73,6 +75,8 @@ test('raw API tables retain allowed values, required, defaults and deprecation f
   assert.match(output, /`empty`.*`''`.*No/);
   assert.match(output, /`enabled`.*`false`/);
   assert.match(output, /`count`.*`0`/);
+  assert.match(output, /`nullable`.*`null`/);
+  assert.equal(output.split('\n').find(line => line.startsWith('| `missing`')).split('|')[5].trim(), 'Not documented');
   assert.match(output, /`items`.*`\(\) => \[\]`/);
   assert.match(output, /`documented`.*`\[\]`/);
   assert.match(output, /Deprecated.*DtReplacement/);
