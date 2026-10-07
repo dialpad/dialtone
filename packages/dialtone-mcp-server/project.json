@@ -6,9 +6,11 @@
       "dependsOn": ["dialtone-query-core:build"],
       "inputs": [
         "{projectRoot}/src/**/*",
+        "{projectRoot}/client-rules.json",
         "{projectRoot}/package.json",
         "{projectRoot}/tsconfig.json",
-        "{projectRoot}/rollup.config.js"
+        "{projectRoot}/rollup.config.js",
+        { "dependentTasksOutputFiles": "**/*.{js,json}", "transitive": true }
       ],
       "outputs": ["{projectRoot}/build"],
       "options": {

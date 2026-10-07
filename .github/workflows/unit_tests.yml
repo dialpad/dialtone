@@ -8,9 +8,17 @@ on:
       - 'packages/combinator/**'
       - 'packages/dialtone-query-core/**'
       - 'packages/dialtone-cli/**'
+      - 'packages/dialtone-mcp-server/**'
+      - 'packages/dialtone-css/**'
+      - 'packages/dialtone-icons/**'
+      - 'packages/dialtone-docs/**'
+      - 'packages/eslint-plugin-dialtone/**'
+      - 'apps/dialtone-documentation/docs/**/*.md'
+      - 'scripts/retrieval/**'
+      - 'scripts/lib/**/*.mjs'
+      - 'common/utils/server.mjs'
+      - '.github/workflows/unit_tests.yml'
       - 'scripts/build-dialtone-vue-docs.mjs'
-      - 'packages/dialtone-css/postcss/dialtone-docs.cjs'
-      - 'packages/dialtone-docs/src/generators/**'
   push:
     branches:
       - staging
@@ -20,9 +28,17 @@ on:
       - 'packages/combinator/**'
       - 'packages/dialtone-query-core/**'
       - 'packages/dialtone-cli/**'
+      - 'packages/dialtone-mcp-server/**'
+      - 'packages/dialtone-css/**'
+      - 'packages/dialtone-icons/**'
+      - 'packages/dialtone-docs/**'
+      - 'packages/eslint-plugin-dialtone/**'
+      - 'apps/dialtone-documentation/docs/**/*.md'
+      - 'scripts/retrieval/**'
+      - 'scripts/lib/**/*.mjs'
+      - 'common/utils/server.mjs'
+      - '.github/workflows/unit_tests.yml'
       - 'scripts/build-dialtone-vue-docs.mjs'
-      - 'packages/dialtone-css/postcss/dialtone-docs.cjs'
-      - 'packages/dialtone-docs/src/generators/**'
 
 env:
   HUSKY: 0
@@ -54,13 +70,23 @@ jobs:
               - 'packages/dialtone-tokens/**'
             combinator:
               - 'packages/combinator/**'
-            # The CLI and query-core, plus the scripts that generate the data files they read.
+            # Lookup adapters, their source datasets/generators, and the shared retrieval fixtures.
             cli:
               - 'packages/dialtone-query-core/**'
               - 'packages/dialtone-cli/**'
+              - 'packages/dialtone-mcp-server/**'
+              - 'packages/dialtone-css/**'
+              - 'packages/dialtone-icons/**'
+              - 'packages/dialtone-docs/**'
+              - 'packages/eslint-plugin-dialtone/**'
+              - 'apps/dialtone-documentation/docs/**/*.md'
+              - 'scripts/retrieval/**'
+              - 'scripts/lib/**/*.mjs'
+              - 'common/utils/server.mjs'
+              - '.github/workflows/unit_tests.yml'
+              - 'packages/dialtone-tokens/**'
+              - 'packages/dialtone-vue/**'
               - 'scripts/build-dialtone-vue-docs.mjs'
-              - 'packages/dialtone-css/postcss/dialtone-docs.cjs'
-              - 'packages/dialtone-docs/src/generators/**'
 
   test:
     needs: changes
@@ -127,5 +153,21 @@ jobs:
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
 
-      - name: Run dialtone-query-core and dialtone-cli tests
-        run: pnpm nx run-many -t test -p dialtone-query-core dialtone-cli
+      - name: Build lookup adapters and source datasets
+        run: pnpm nx run-many -t build -p dialtone-cli dialtone-mcp-server
+
+      - name: Run query-core, CLI, documentation and ESLint suites
+        run: |
+          pnpm --dir packages/dialtone-query-core test
+          pnpm --dir packages/dialtone-cli test
+          pnpm --dir packages/dialtone-docs test
+          pnpm --dir packages/eslint-plugin-dialtone test
+
+      - name: Run shared fixture and cache contracts
+        run: node --test scripts/retrieval/*.test.mjs
+
+      - name: Run bounded cross-adapter retrieval regressions
+        run: node scripts/retrieval/run.mjs
+
+      - name: Run existing documentation search scenarios
+        run: node packages/dialtone-mcp-server/scripts/run-acceptance-scenarios.mjs
