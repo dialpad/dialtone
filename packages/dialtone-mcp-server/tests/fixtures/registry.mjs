@@ -10,8 +10,8 @@ function stall(signal, retainHandle = false) {
       console.error('[registry fixture] aborted');
       reject(signal.reason);
     };
-    if (signal?.aborted) abort();
-    else signal?.addEventListener('abort', abort, { once: true });
+    if (signal.aborted) abort();
+    else signal.addEventListener('abort', abort, { once: true });
   });
 }
 

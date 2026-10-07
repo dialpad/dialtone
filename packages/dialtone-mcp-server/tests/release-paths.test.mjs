@@ -13,7 +13,7 @@ const getCommits = releaseRequire('./lib/get-commits.js');
 const { analyzeCommits } = releaseRequire('@semantic-release/commit-analyzer');
 const logger = { log() {} };
 
-function repository(t) {
+function repository(t, options) {
   const cwd = mkdtempSync(join(tmpdir(), 'dialtone-release-paths-'));
   t.after(() => rmSync(cwd, { recursive: true, force: true, maxRetries: 3, retryDelay: 100 }));
   const git = (...args) => execFileSync('git', args, { cwd, encoding: 'utf8' }).trim();
@@ -31,7 +31,10 @@ function repository(t) {
     git('commit', '--quiet', '-m', message);
     return git('rev-parse', 'HEAD');
   };
-  return { cwd, baseline, commit };
+  const selectCommits = () => getCommits({
+    cwd, env: process.env, lastRelease: { gitHead: baseline }, logger, options,
+  });
+  return { cwd, commit, selectCommits };
 }
 
 for (const adapter of ['dialtone-cli', 'dialtone-mcp-server']) {
@@ -39,14 +42,12 @@ for (const adapter of ['dialtone-cli', 'dialtone-mcp-server']) {
   const analyzerOptions = config.plugins.find(([name]) => name === '@semantic-release/commit-analyzer')[1];
 
   test(`${adapter} selects nested shared-core fixes and its own fixes for patch release`, async t => {
-    const { cwd, baseline, commit } = repository(t);
+    const { cwd, commit, selectCommits } = repository(t, config);
     const coreFix = commit('packages/dialtone-query-core/src/tools/components.ts', 'fix(query-core): exact component');
     const ownFix = commit(`packages/${adapter}/src/nested/startup.ts`, `fix(${adapter}): startup`);
     commit('packages/dialtone-query-core-extra/src/tools/components.ts', 'fix(other): unrelated sibling');
     commit('packages/dialtone-vue/components/text/text.vue', 'fix(vue): unrelated component');
-    const commits = await getCommits({
-      cwd, env: process.env, lastRelease: { gitHead: baseline }, logger, options: config,
-    });
+    const commits = await selectCommits();
     assert.deepEqual(new Set(commits.map(({ hash }) => hash)), new Set([ownFix, coreFix]));
     for (const hash of [coreFix, ownFix]) {
       const selected = commits.filter(commit => commit.hash === hash);
@@ -55,11 +56,9 @@ for (const adapter of ['dialtone-cli', 'dialtone-mcp-server']) {
   });
 
   test(`${adapter} does not release for shared-core test-only commits`, async t => {
-    const { cwd, baseline, commit } = repository(t);
+    const { cwd, commit, selectCommits } = repository(t, config);
     commit('packages/dialtone-query-core/tests/components.test.ts', 'test(query-core): exact component coverage');
-    const commits = await getCommits({
-      cwd, env: process.env, lastRelease: { gitHead: baseline }, logger, options: config,
-    });
+    const commits = await selectCommits();
     assert.equal(commits.length, 1);
     assert.equal(await analyzeCommits(analyzerOptions, { cwd, commits, logger }), null);
   });

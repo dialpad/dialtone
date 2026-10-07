@@ -375,8 +375,6 @@ async function main() {
     process.exit(exitCode);
   };
   server.server.onclose = () => {
-    clearTimeout(updateTimeout);
-    updateController.abort();
     process.stdin.off('end', shutdown);
     process.off('SIGINT', shutdown);
     process.off('SIGTERM', shutdown);
