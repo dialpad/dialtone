@@ -38,6 +38,8 @@ function findConsumer (fromDir) {
         DEPENDENCIES.some(key => typeof pkg?.[key]?.[name] === "string")
       );
       if (packageName) return { dir, packageName };
+      // Named packages own their declarations; unnamed source stubs may inherit.
+      if (typeof pkg?.name === "string" && pkg.name) return { dir };
     } catch {
       // A source-directory stub or unreadable manifest does not hide its parent.
     }

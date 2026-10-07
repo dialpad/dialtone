@@ -215,6 +215,18 @@ describe("deprecated-class-props consumer metadata resolution", () => {
     assertRemoved(root);
   });
 
+  it("warns and skips an undeclared named package instead of inheriting its parent", () => {
+    const root = project({ [UMBRELLA]: "^10" });
+    install(root, UMBRELLA, REMOVED);
+    const child = join(root, "packages", "undeclared");
+    write(join(child, "package.json"), { name: "fixture-undeclared" });
+    const result = lint(root, { filename: join(child, "src", "consumer.vue"), fix: true });
+    assert.deepEqual(result.messages, []);
+    assert.equal(result.output, code);
+    assert.equal(warnings.length, 1);
+    assert.ok(warnings[0].includes(child));
+  });
+
   it("uses ESLint's working directory for virtual input without a physical filename", () => {
     const root = project({ [UMBRELLA]: "^10" });
     install(root, UMBRELLA, REMOVED);

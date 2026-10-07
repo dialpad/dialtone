@@ -22,7 +22,7 @@ Components that legitimately declare `wrapperClass` (e.g., `DtListItem`) are **n
 
 ### Component metadata resolution
 
-Starting from the linted file's directory, the rule looks upward for a `package.json` that declares a supported Dialtone package. It stops at the repository's `.git` boundary. Source-directory stub manifests do not hide a parent declaration. For virtual input without an absolute physical filename, the search starts at ESLint's working directory.
+Starting from the linted file's directory, the rule looks upward for a `package.json` that declares a supported Dialtone package. A named package without a Dialtone declaration stops the search and skips checks with a warning. The search also stops at the repository's `.git` boundary. Unnamed source-directory stub manifests do not hide a parent declaration. For virtual input without an absolute physical filename, the search starts at ESLint's working directory.
 
 Declarations in `dependencies`, `devDependencies`, and `peerDependencies` count. Within the consumer's manifest:
 
