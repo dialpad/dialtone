@@ -146,12 +146,6 @@ Set `wrap` to allow items to flow onto additional lines when they exceed the ava
     </dt-box>
   </dt-stack>
 </dt-box>
-<!-- @code -->
-<dt-stack direction="row" gap="200" wrap>
-  <dt-box> Stack item 1 </dt-box>
-  <dt-box> Stack item 2 </dt-box>
-  <dt-box> Stack item 3 </dt-box>
-</dt-stack>
 ```
 
 ## Render as
