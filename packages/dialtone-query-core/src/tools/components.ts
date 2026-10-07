@@ -167,23 +167,11 @@ function legacyNote(component: Component): string | null {
   return null;
 }
 
-// Adapters search the same loaded dataset on every request; normalize it once.
-const normalizedDatasets = new WeakMap<Component[], Component[]>();
-
-function normalizedFor(components: Component[]): Component[] {
-  let normalized = normalizedDatasets.get(components);
-  if (!normalized) {
-    normalized = normalizeComponents(components);
-    normalizedDatasets.set(components, normalized);
-  }
-  return normalized;
-}
-
 /**
  * Search Vue components by name, description, props, events, and slots
  */
 export function searchComponents(query: string, components: Component[]): { results: SearchResult[]; notes: string[]; exactMatch: boolean; warning: string | null } {
-  components = normalizedFor(components);
+  components = normalizeComponents(components);
   console.error(`\n[COMPONENT SEARCH DEBUG] Query: "${query}"`);
 
   // Normalize query: split camelCase, lowercase, replace hyphens/slashes with spaces

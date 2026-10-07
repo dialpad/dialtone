@@ -186,6 +186,23 @@ describe('component identity and import safety', () => {
     expect(output).toContain('unverified');
   });
 
+  test('reused mutable arrays reflect appended records and replacement import evidence', () => {
+    const records = normalizeComponents([component('DtButton')], {
+      package: '@dialpad/dialtone', version: '10.5.1', from: '@dialpad/dialtone/vue', names: ['DtButton'],
+    });
+    const initial = searchComponents('DtButton', records).results[0];
+    expect(initial.details.identity.kind).toBe('public');
+    expect(initial.details.identity.imports).toHaveLength(1);
+
+    records.push(component('DtText'));
+    records[0] = { displayName: 'DtButton', props: [] };
+    const appended = searchComponents('DtText', records).results[0];
+    const replaced = searchComponents('DtButton', records).results[0];
+    expect({ appended: appended?.name, replacement: replaced.details.identity }).toMatchObject({
+      appended: 'DtText', replacement: { kind: 'unknown', imports: [] },
+    });
+  });
+
   test('an ambiguous alias is not an exact identity', () => {
     const other = component('DtOtherResizable', {
       ...publicResizable,
