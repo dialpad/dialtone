@@ -1,0 +1,152 @@
+apps/dialtone-documentation/docs/components/chip.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/tooltip.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 5
+apps/dialtone-documentation/docs/components/pagination.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/combobox-multi-select.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/empty-state.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/list-item.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/mode-island.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/collapsible.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/split-button.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/table.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 5
+apps/dialtone-documentation/docs/.vuepress/theme/components/PageHeader.vue
+  h_c15b5755534093 154-161
+apps/dialtone-documentation/docs/components/item-layout.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/validation-messages.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 5
+apps/dialtone-documentation/docs/components/rich-text-editor.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/stack.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/hovercard.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/emoji.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/select-menu.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/box.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/emoji-text-wrapper.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/avatar.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/dropdown.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/modal.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/checkbox-group.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/notice.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/datepicker.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 4
+apps/dialtone-documentation/docs/components/toggle.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 5
+apps/dialtone-documentation/docs/components/input-group.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/radio-group.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/scroller.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/input.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/button-group.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/lazy-show.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/combobox-with-popover.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/motion-text.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/breadcrumbs.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/badge.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/banner.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/illustration.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/image-viewer.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/loader.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/presence.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/tabs.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 5
+apps/dialtone-documentation/docs/components/combobox.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/text.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/keyboard-shortcut.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/button.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/card.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/link.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/filter-pill.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/checkbox.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/icon.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/popover.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/description-list.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/resizable.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/emoji-picker.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 4
+apps/dialtone-documentation/docs/components/list-item-group.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/prose.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/segmented-control.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/skeleton.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 5
+apps/dialtone-documentation/docs/components/root-layout.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/scrollbar.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/toast.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 5
+apps/dialtone-documentation/docs/components/radio.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+apps/dialtone-documentation/docs/components/progress-circle.md
+  s_56ff63ab3ac16c::t_a99d7da204d73c 3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "8d537c02666710967ef1f9670144889879a9dec9",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_56ff63ab3ac16c": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "019eb75a-1703-7701-b0b6-29b6cf4d3b9e",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

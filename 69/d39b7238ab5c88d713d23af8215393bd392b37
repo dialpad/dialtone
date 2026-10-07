@@ -1,0 +1,14 @@
+apps/dialtone-documentation/docs/.vuepress/views/IconCatalog.vue
+  h_c15b5755534093 65-66,69,74,76,91-92
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.9",
+  "base_commit_sha": "69d39b7238ab5c88d713d23af8215393bd392b37",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

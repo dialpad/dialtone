@@ -1,0 +1,28 @@
+apps/dialtone-documentation/docs/.vuepress/baseComponents/showcaseCarouselMotion.js
+  s_7d5235cebc230d::t_598c90cdd3bc45 7
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ShowcaseCarousel.vue
+  s_7d5235cebc230d::t_199b2d3d35ecd0 211,224-225,227,237,242
+  s_7d5235cebc230d::t_18dc61af421997 93,103-108
+  s_7d5235cebc230d::t_25a7948b6f029f 109-110
+  s_7d5235cebc230d::t_5f34660ec7e162 50-57,71,74,77
+  s_7d5235cebc230d::t_143f8986972bb4 286,296
+  s_7d5235cebc230d::t_10ccfff5f5c084 163,170
+  s_7d5235cebc230d::t_26d14a6b0dfc09 37
+  s_7d5235cebc230d::t_c3dc8fd5c04d53 273
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.2",
+  "base_commit_sha": "29b46b7dd66dde3b9be48181bd14b4243d67687c",
+  "prompts": {},
+  "sessions": {
+    "s_7d5235cebc230d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "715021af-5bad-4eb4-8db2-71628c97799d",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
