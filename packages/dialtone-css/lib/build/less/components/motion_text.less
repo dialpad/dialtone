@@ -1,59 +1,50 @@
 //
 //  DIALTONE
-//  RECIPES: MOTION TEXT
+//  COMPONENTS: MOTION TEXT
 //
 //  TABLE OF CONTENTS
-//  • CSS CUSTOM PROPERTIES
 //  • BASE STYLE
+//  • STATES
 //  • CHILD ELEMENTS
 //  • ANIMATION KEYFRAMES
-//  • TRANSITION CLASSES - GRADIENT IN
-//  • TRANSITION CLASSES - FADE IN
-//  • TRANSITION CLASSES - SLIDE IN
-//  • GRADIENT IN
-//  • GRADIENT SWEEP & SHIMMER
-//  • MODIFIERS
+//  • ANIMATION MODES
 //  • ACCESSIBILITY
 //
-//  ============================================================================
-//  $   CSS CUSTOM PROPERTIES
-//  ----------------------------------------------------------------------------
+//  Motion matches the "Motion-Text-Effects" spec in the 27Q4 Agentic Product Language Figma file.
+//  Track timings (--d-motion-text-{enter,reveal,sweep}-*) are set inline by DtMotionText from
+//  MOTION_TEXT_TRACKS, and each word gets --d-motion-text-word-index for its stagger.
+//
 @layer dialtone.components {
-  @property --d-motion-text-mask-pos {
-    inherits: true;
-    initial-value: 0%;
-    syntax: '<percentage>';
-  }
-
   //  ============================================================================
   //  $   BASE STYLE
   //  ----------------------------------------------------------------------------
   .d-motion-text {
-    /* Theme variables - can be overridden by design system */
-    --d-motion-text-duration: 1000ms;
-    --d-motion-text-char-duration: var(--d-motion-text-duration);
-    --d-motion-text-word-duration: calc(var(--d-motion-text-duration) * 2);
-    --d-motion-text-highlight-color: linear-gradient(135deg, var(--dt-color-brand-magenta) 10%, var(--dt-color-brand-purple) 80%, var(--dt-color-brand-gold) 100%);
-    --d-motion-text-gradient: linear-gradient(
-      90deg,
-      transparent 0%,
-      transparent 20%,
-      black 40%,
-      black 60%,
-      transparent 80%,
-      transparent 100%
-    ) 0% 0% / 500% 100%;
-    --d-motion-text-shimmer-gradient: linear-gradient(
-      90deg,
-      black 0%,
-      black 20%,
-      #0005 40%,
-      #0005 60%,
-      black 80%,
-      black 100%
-    ) 0% 0% / 500% 100%;
+    // One continuous gradient shown behind the text in gradient modes. Each word is given
+    // its own slice (--d-motion-text-gradient-size / -position) so it reads across the line.
+    // Falls back to the solid text color so words never vanish if the token isn't loaded
+    --d-motion-text-gradient: var(--dt-color-gradient-orange-red-magenta-purple, linear-gradient(currentcolor, currentcolor));
+    // Spec is 18px at a 27px font size; scales with the text
+    --d-motion-text-slide-distance: calc(18em / 27);
 
     position: relative;
+  }
+
+  //  ============================================================================
+  //  $   STATES
+  //  ----------------------------------------------------------------------------
+  //  Word animations hold on their first frame until the root is animating.
+  //  --d-motion-text-resting: none renders words at rest, with no animation or gradient.
+  .d-motion-text--animating {
+    --d-motion-text-play-state: running;
+  }
+
+  .d-motion-text--paused {
+    --d-motion-text-play-state: paused;
+  }
+
+  .d-motion-text--complete,
+  .d-motion-text--restarting {
+    --d-motion-text-resting: none;
   }
 
   //  ============================================================================
@@ -68,33 +59,77 @@
     clip-path: inset(50%);
   }
 
-  .d-motion-text__content {
-    display: contents;
-  }
-
   .d-motion-text__fallback {
     display: contents;
   }
 
-  .d-motion-text__char {
-    display: inline;
-    white-space: pre;
-  }
-
   .d-motion-text__word {
-    position: relative;
+    --d-motion-text-enter-start: calc(var(--d-motion-text-enter-delay) + var(--d-motion-text-enter-stagger) * var(--d-motion-text-word-index));
+    --d-motion-text-reveal-start: calc(var(--d-motion-text-reveal-delay) + var(--d-motion-text-reveal-stagger) * var(--d-motion-text-word-index));
+    --d-motion-text-sweep-start: calc(var(--d-motion-text-sweep-delay) + var(--d-motion-text-sweep-stagger) * var(--d-motion-text-word-index));
+    --d-motion-text-sweep-return: calc(var(--d-motion-text-sweep-start) + var(--d-motion-text-sweep-duration) - var(--d-motion-text-sweep-fade));
+
     display: inline-block;
-    white-space: nowrap;
+    max-inline-size: 100%;
+    overflow-wrap: anywhere;
+    animation: var(--d-motion-text-resting, var(--d-motion-text-word-animation, none));
+    animation-play-state: var(--d-motion-text-play-state, paused);
   }
 
   //  ============================================================================
   //  $   ANIMATION KEYFRAMES
   //  ----------------------------------------------------------------------------
-
-  // Gradient-in mode animations
-  @keyframes d-motion-text-gradient-in-char-appear {
+  @keyframes d-motion-text-fade-in {
     from {
       opacity: 0;
+    }
+  }
+
+  @keyframes d-motion-text-slide-in {
+    from {
+      transform: translateY(var(--d-motion-text-slide-distance));
+      opacity: 0;
+    }
+  }
+
+  //  The sweep stacks an "out" and a "back" animation on one property, so both ends are explicit:
+  //  an implicit keyframe would resolve to the value still held by the animation beneath it.
+
+  // Text fill fades in over the gradient, settling on the text color
+  @keyframes d-motion-text-fill-in {
+    from {
+      -webkit-text-fill-color: transparent;
+    }
+
+    to {
+      -webkit-text-fill-color: currentcolor;
+    }
+  }
+
+  // Text fill fades away to expose the gradient
+  @keyframes d-motion-text-fill-out {
+    from {
+      -webkit-text-fill-color: currentcolor;
+    }
+
+    to {
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  @keyframes d-motion-text-dim {
+    from {
+      opacity: 1;
+    }
+
+    to {
+      opacity: 0.5;
+    }
+  }
+
+  @keyframes d-motion-text-undim {
+    from {
+      opacity: 0.5;
     }
 
     to {
@@ -102,197 +137,68 @@
     }
   }
 
-  @keyframes d-motion-text-gradient-in-char-reveal {
-    from {
-      color: var(--dt-color-neutral-transparent);
-    }
-
-    to {
-      color: inherit;
-    }
-  }
-
-  @keyframes d-motion-text-gradient-in-word-reveal {
-    from {
-      --d-motion-text-mask-pos: 100%;
-    }
-
-    to {
-      --d-motion-text-mask-pos: 0%;
-    }
-  }
-
-  // Fade-in mode animations
-  @keyframes d-motion-text-fade-in-char-appear {
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
-    }
-  }
-
-  @keyframes d-motion-text-fade-in-word-appear {
-    from {
-      opacity: 0;
-    }
-
-    to {
-      opacity: 1;
-    }
-  }
-
-  // Slide-in mode animations
-  @keyframes d-motion-text-slide-in-char-appear {
-    from {
-      transform: translateY(0.3em);
-      opacity: 0;
-    }
-
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-
-  @keyframes d-motion-text-slide-in-word-appear {
-    from {
-      transform: translateY(0.5em);
-      opacity: 0;
-    }
-
-    to {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  }
-
   //  ============================================================================
-  //  $   TRANSITION CLASSES - GRADIENT IN
+  //  $   ANIMATION MODES
   //  ----------------------------------------------------------------------------
-  .d-motion-text-char-gradient-in-enter-active {
-    animation: d-motion-text-gradient-in-char-appear var(--d-motion-text-char-duration) var(--ttf-in-out);
+  //  Enter easing --ttf-out is the spec's cubic-bezier(0.35, 0, 0.1, 1).
+  //  Sweep and shimmer use the spec's standard ease-in-out, cubic-bezier(0.42, 0, 0.58, 1).
+  .d-motion-text--fade-in .d-motion-text__word {
+    --d-motion-text-word-animation: d-motion-text-fade-in var(--d-motion-text-enter-duration) var(--ttf-out) var(--d-motion-text-enter-start) both;
   }
 
-  .d-motion-text-char-gradient-in-leave-active {
-    animation: d-motion-text-gradient-in-char-appear calc(var(--d-motion-text-char-duration) * 0.5) var(--ttf-out-quint) reverse;
+  .d-motion-text--slide-in .d-motion-text__word {
+    --d-motion-text-word-animation: d-motion-text-slide-in var(--d-motion-text-enter-duration) var(--ttf-out) var(--d-motion-text-enter-start) both;
   }
 
-  .d-motion-text-word-gradient-in-enter-active {
-    animation: d-motion-text-gradient-in-word-reveal calc(var(--d-motion-text-word-duration) * 1.5) var(--ttf-out-quint);
+  .d-motion-text--gradient-in .d-motion-text__word {
+    --d-motion-text-word-animation:
+      d-motion-text-fade-in var(--d-motion-text-enter-duration) var(--ttf-out) var(--d-motion-text-enter-start) both,
+      d-motion-text-fill-in var(--d-motion-text-reveal-duration) linear var(--d-motion-text-reveal-start) both;
   }
 
-  .d-motion-text-word-gradient-in-leave-active {
-    animation: d-motion-text-gradient-in-word-reveal calc(var(--d-motion-text-word-duration) * 0.5) var(--ttf-out-quint) reverse;
+  .d-motion-text--slide-in-gradient .d-motion-text__word {
+    --d-motion-text-word-animation:
+      d-motion-text-slide-in var(--d-motion-text-enter-duration) var(--ttf-out) var(--d-motion-text-enter-start) both,
+      d-motion-text-fill-in var(--d-motion-text-reveal-duration) linear var(--d-motion-text-reveal-start) both;
   }
 
-  //  ============================================================================
-  //  $   TRANSITION CLASSES - FADE IN
-  //  ----------------------------------------------------------------------------
-  .d-motion-text-char-fade-in-enter-active {
-    animation: d-motion-text-fade-in-char-appear var(--d-motion-text-char-duration) var(--ttf-out-quint);
+  .d-motion-text--gradient-sweep .d-motion-text__word {
+    --d-motion-text-word-animation:
+      d-motion-text-fill-out var(--d-motion-text-sweep-fade) ease-in-out var(--d-motion-text-sweep-start) both,
+      d-motion-text-fill-in var(--d-motion-text-sweep-fade) ease-in-out var(--d-motion-text-sweep-return) forwards;
   }
 
-  .d-motion-text-char-fade-in-leave-active {
-    animation: d-motion-text-fade-in-char-appear calc(var(--d-motion-text-char-duration) * 0.5) var(--ttf-out-quint) reverse;
+  .d-motion-text--shimmer .d-motion-text__word {
+    --d-motion-text-word-animation:
+      d-motion-text-dim var(--d-motion-text-sweep-fade) ease-in-out var(--d-motion-text-sweep-start) both,
+      d-motion-text-undim var(--d-motion-text-sweep-fade) ease-in-out var(--d-motion-text-sweep-return) forwards;
   }
 
-  .d-motion-text-word-fade-in-enter-active {
-    animation: d-motion-text-fade-in-word-appear var(--d-motion-text-word-duration) var(--ttf-out-quint);
-  }
-
-  .d-motion-text-word-fade-in-leave-active {
-    animation: d-motion-text-fade-in-word-appear calc(var(--d-motion-text-word-duration) * 0.5) var(--ttf-out-quint) reverse;
-  }
-
-  //  ============================================================================
-  //  $   TRANSITION CLASSES - SLIDE IN
-  //  ----------------------------------------------------------------------------
-  .d-motion-text-char-slide-in-enter-active {
-    animation: d-motion-text-slide-in-char-appear var(--d-motion-text-char-duration) var(--ttf-out-quint);
-  }
-
-  .d-motion-text-char-slide-in-leave-active {
-    animation: d-motion-text-slide-in-char-appear calc(var(--d-motion-text-char-duration) * 0.5) var(--ttf-out-quint) reverse;
-  }
-
-  .d-motion-text-word-slide-in-enter-active {
-    animation: d-motion-text-slide-in-word-appear var(--d-motion-text-word-duration) var(--ttf-out-quint);
-  }
-
-  .d-motion-text-word-slide-in-leave-active {
-    animation: d-motion-text-slide-in-word-appear calc(var(--d-motion-text-word-duration) * 0.5) var(--ttf-out-quint) reverse;
-  }
-
-  //  ============================================================================
-  //  $   GRADIENT IN
-  //  ----------------------------------------------------------------------------
-  //  Delay reveal of character text color to prevent a flash on the first letter
-  .d-motion-text--gradient-in .d-motion-text__char {
-    animation: d-motion-text-gradient-in-char-reveal var(--d-motion-text-char-duration) var(--ttf-in-out);
-  }
-
-  //  ============================================================================
-  //  $   GRADIENT SWEEP & SHIMMER
-  //  ----------------------------------------------------------------------------
-  .d-motion-text--gradient-sweep,
-  .d-motion-text--shimmer {
-    position: relative;
-    display: inline-block;
-    animation: d-motion-text-gradient-in-word-reveal calc(var(--d-motion-text-word-duration) * 1.5) var(--ttf-in-out) 1;
-  }
-
-  .d-motion-text--gradient-in .d-motion-text__word::before,
-  .d-motion-text--gradient-sweep::before {
-    position: absolute;
-    font-size: inherit;
-    line-height: inherit;
-    letter-spacing: inherit;
-    background: var(--d-motion-text-highlight-color);
-    -webkit-background-clip: text;
-    background-clip: text;
-    content: attr(data-text-content);
-    pointer-events: none;
-    -webkit-text-fill-color: transparent;
-    mask: var(--d-motion-text-gradient);
-    mask-position: var(--d-motion-text-mask-pos) 0%;
-  }
-
-  .d-motion-text--shimmer {
-    content: attr(data-text-content);
-    mask: var(--d-motion-text-shimmer-gradient);
-    mask-position: var(--d-motion-text-mask-pos) 0%;
-  }
-
-  //  ============================================================================
-  //  $   MODIFIERS
-  //  ----------------------------------------------------------------------------
-  .d-motion-text--none .d-motion-text__word,
-  .d-motion-text--none .d-motion-text__char {
-    transform: none;
-    opacity: 1;
-  }
-
-  .d-motion-text--paused {
-    animation-play-state: paused !important;
-  }
-
-  .d-motion-text--looped {
-    animation-iteration-count: infinite !important;
+  .d-motion-text--gradient-in,
+  .d-motion-text--slide-in-gradient,
+  .d-motion-text--gradient-sweep {
+    .d-motion-text__word {
+      background-image: var(--d-motion-text-resting, var(--d-motion-text-gradient));
+      background-position: var(--d-motion-text-gradient-position, 0% 0%);
+      background-size: var(--d-motion-text-gradient-size, 100% 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
   }
 
   //  ============================================================================
   //  $   ACCESSIBILITY
   //  ----------------------------------------------------------------------------
   @media (prefers-reduced-motion: reduce) {
-    .d-motion-text {
-      --d-motion-text-duration: 0ms;
-      --d-motion-text-char-duration: 0ms;
-      --d-motion-text-word-duration: 0ms;
+    .d-motion-text--respects-reduced-motion {
+      --d-motion-text-resting: none;
+    }
+  }
 
-      transition-duration: 0ms !important;
-      animation-duration: 0ms !important;
+  // Transparent fills over a clipped gradient don't survive forced colors; show plain text
+  @media (forced-colors: active) {
+    .d-motion-text {
+      --d-motion-text-resting: none;
     }
   }
 }

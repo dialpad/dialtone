@@ -176,6 +176,8 @@ Style Dictionary builds 7 output formats simultaneously:
 
 All CSS and LESS outputs are prefixed with `--dt` to avoid collisions with other CSS variables in the consuming application.
 
+Gradient tokens (color tokens whose value starts with `linear-gradient(`, such as `color.gradient.gold-red-magenta-purple` and `color.gradient.orange-red-magenta-purple`) are web-only: they are emitted to CSS, LESS, JSON, and `doc.json`, and filtered out of the Android and iOS outputs by the `startsWith('linear-gradient')` file filters in `build-sd-transforms.js`.
+
 ~120 CSS files and the equivalent LESS files are generated — one per brand × mode combination plus the layered per-dimension overrides (e.g., `tokens-dp-light.css`, `tokens-dp-dark.css`, `tokens-aegean-light.css`).
 
 ## Stage 4 — dialtone-css Consumption

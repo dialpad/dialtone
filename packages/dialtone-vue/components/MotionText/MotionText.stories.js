@@ -12,9 +12,10 @@ import DtMotionTextVariantsTemplate from './MotionTextVariants.story.vue';
 
 // Default Prop Values
 export const argsData = {
-  text: 'Experience the magic of animated text',
+  // Reference sentence used by the "Motion-Text-Effects" Figma spec
+  text: 'The AI platform for customer experience',
   animationMode: 'gradient-in',
-  speed: 300,
+  speed: '300',
   autoStart: true,
   loop: false,
   respectsReducedMotion: true,
@@ -30,8 +31,9 @@ export const argTypesData = {
   // Props
   text: {
     control: 'text',
-    description: 'The text content to animate',
+    description: 'The text content to animate. Text is split into words and animated word by word.',
     table: {
+      category: 'props',
       type: {
         summary: 'string',
       },
@@ -42,8 +44,10 @@ export const argTypesData = {
       type: 'select',
     },
     options: MOTION_TEXT_ANIMATION_MODES,
-    description: 'The animation mode to use for the text reveal',
+    description: 'The word-by-word animation to play. gradient-in, fade-in, slide-in and slide-in-gradient reveal ' +
+      'the text; gradient-sweep and shimmer play over text that is already visible; none shows the text immediately.',
     table: {
+      category: 'props',
       type: {
         summary: MOTION_TEXT_ANIMATION_MODES.join(' | '),
       },
@@ -57,13 +61,14 @@ export const argTypesData = {
       type: 'select',
     },
     options: MOTION_TEXT_SPEEDS,
-    description: 'Animation speed (100: near-instant, 200: fast, 300: medium, 400: slow, 500: very slow)',
+    description: 'Animation speed. 300 plays the motion as designed; lower values are faster and higher values are slower.',
     table: {
+      category: 'props',
       type: {
         summary: MOTION_TEXT_SPEEDS.join(' | '),
       },
       defaultValue: {
-        summary: 'md',
+        summary: '300',
       },
     },
   },
@@ -71,6 +76,7 @@ export const argTypesData = {
     control: 'boolean',
     description: 'Whether to start animation automatically when component is mounted',
     table: {
+      category: 'props',
       type: {
         summary: 'boolean',
       },
@@ -81,8 +87,10 @@ export const argTypesData = {
   },
   loop: {
     control: 'boolean',
-    description: 'Whether to loop the animation continuously',
+    description: 'Whether to loop the animation. Each cycle holds briefly after the last word settles, ' +
+      'then every word restarts together.',
     table: {
+      category: 'props',
       type: {
         summary: 'boolean',
       },
@@ -95,6 +103,7 @@ export const argTypesData = {
     control: 'boolean',
     description: 'Whether to respect the user\'s prefers-reduced-motion system setting',
     table: {
+      category: 'props',
       type: {
         summary: 'boolean',
       },
@@ -107,6 +116,7 @@ export const argTypesData = {
     control: 'text',
     description: 'Alternative text for screen readers',
     table: {
+      category: 'props',
       type: {
         summary: 'string',
       },
@@ -116,20 +126,21 @@ export const argTypesData = {
   // Slots
   default: {
     name: 'default',
-    description: 'Slot for text content when not using the text prop',
+    description: 'Text content to animate when not using the text prop. Only the text is animated; markup is not preserved.',
     control: 'text',
     table: {
       category: 'slots',
       type: {
-        summary: 'text/html',
+        summary: 'text',
       },
     },
   },
 
   // Action Event Handlers
   start: {
-    description: 'Emitted when the animation starts',
+    description: 'Emitted when the animation starts, and again at the start of each looped cycle',
     table: {
+      category: 'events',
       disable: false,
       type: {
         summary: 'event',
@@ -137,8 +148,9 @@ export const argTypesData = {
     },
   },
   complete: {
-    description: 'Emitted when the animation completes',
+    description: 'Emitted when the animation completes, and at the end of each looped cycle',
     table: {
+      category: 'events',
       disable: false,
       type: {
         summary: 'event',
@@ -146,8 +158,9 @@ export const argTypesData = {
     },
   },
   progress: {
-    description: 'Emitted during animation progress with wordsComplete, totalWords, and progress percentage',
+    description: 'Emitted as each word finishes animating, with wordsComplete, totalWords, and progress (0 to 1)',
     table: {
+      category: 'events',
       disable: false,
       type: {
         summary: 'event',
@@ -158,6 +171,7 @@ export const argTypesData = {
   pause: {
     description: 'Emitted when the animation is paused',
     table: {
+      category: 'events',
       disable: false,
       type: {
         summary: 'event',
@@ -167,6 +181,7 @@ export const argTypesData = {
   resume: {
     description: 'Emitted when the animation resumes',
     table: {
+      category: 'events',
       disable: false,
       type: {
         summary: 'event',
@@ -230,10 +245,7 @@ const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(
 
 export const Default = {
   render: DefaultTemplate,
-
-  args: {
-    text: 'Welcome to Dialtone Motion Text',
-  },
+  args: {},
 };
 
 export const Modes = {
