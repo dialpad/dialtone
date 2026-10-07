@@ -7,8 +7,14 @@ const { existsSync, readFileSync, realpathSync } = require("fs");
 const { createRequire } = require("module");
 const { dirname, isAbsolute, join, sep } = require("path");
 
-const PACKAGES = ["@dialpad/dialtone", "@dialpad/dialtone-vue"];
+// Insertion order is precedence: the umbrella wins when both are declared.
+const METADATA = {
+  "@dialpad/dialtone": "vue3/component-documentation.json",
+  "@dialpad/dialtone-vue": "component-documentation.json",
+};
+const PACKAGES = Object.keys(METADATA);
 const DEPENDENCIES = ["dependencies", "devDependencies", "peerDependencies"];
+const consumers = new Map();
 const cache = new Map();
 
 function* ancestors (dir) {
@@ -25,8 +31,9 @@ function findConsumer (fromDir) {
     try {
       const pkg = JSON.parse(readFileSync(join(dir, "package.json"), "utf8"));
       if (!nearestManifest) nearestManifest = dir;
-      // Match DLT-3639's declared umbrella precedence. Standalone consumers
-      // must also declare their package; a plugin peer/transitive is not proof.
+      // Match the CLI's declared umbrella precedence (DLT-3639,
+      // packages/dialtone-cli/src/data-resolver.ts). Standalone consumers must
+      // also declare their package; a plugin peer/transitive is not proof.
       const packageName = PACKAGES.find(name =>
         DEPENDENCIES.some(key => typeof pkg?.[key]?.[name] === "string")
       );
@@ -47,10 +54,7 @@ function readComponents (consumer) {
     const manifest = join(dir, "node_modules", packageName, "package.json");
     if (!existsSync(manifest)) continue;
     try {
-      const subpath = packageName === PACKAGES[0]
-        ? "vue3/component-documentation.json"
-        : "component-documentation.json";
-      const file = realpathSync(createRequire(manifest).resolve(`${packageName}/${subpath}`));
+      const file = realpathSync(createRequire(manifest).resolve(`${packageName}/${METADATA[packageName]}`));
       // Packages without exports can fall through to Node's global lookup.
       // Accept only a file belonging to the selected installed package.
       if (!file.startsWith(realpathSync(dirname(manifest)) + sep)) return null;
@@ -65,10 +69,11 @@ function readComponents (consumer) {
 }
 
 module.exports = function consumerComponents (context) {
-  const cwd = context.cwd ?? context.getCwd?.() ?? process.cwd();
-  const filename = context.physicalFilename ?? context.getPhysicalFilename?.()
-    ?? context.filename ?? context.getFilename?.();
-  const consumer = findConsumer(filename && isAbsolute(filename) ? dirname(filename) : cwd);
+  // getPhysicalFilename arrived in ESLint 7.28; older 7.x only has getFilename.
+  const filename = context.physicalFilename ?? context.getPhysicalFilename?.() ?? context.getFilename();
+  const fromDir = isAbsolute(filename) ? dirname(filename) : (context.cwd ?? context.getCwd());
+  if (!consumers.has(fromDir)) consumers.set(fromDir, findConsumer(fromDir));
+  const consumer = consumers.get(fromDir);
   if (!cache.has(consumer.dir)) {
     const components = readComponents(consumer);
     if (components === null) {

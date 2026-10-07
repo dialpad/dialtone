@@ -48,12 +48,13 @@ function install (root, name, components) {
   return file;
 }
 
-function lint (root, filename = join(root, "src", "consumer.vue"), consumerRule = rule, fix = false) {
+// `filename: null` lints virtual input with no physical filename.
+function lint (root, { filename = join(root, "src", "consumer.vue"), ruleModule = rule, fix = false } = {}) {
   const linter = new Linter({ cwd: root });
   const config = [{
     ...(filename === null ? {} : { files: ["**/*.vue"] }),
     languageOptions: { parser },
-    plugins: { dialtone: { rules: { "deprecated-class-props": consumerRule } } },
+    plugins: { dialtone: { rules: { "deprecated-class-props": ruleModule } } },
     rules: { "dialtone/deprecated-class-props": "warn" },
   }];
   return {
@@ -77,16 +78,16 @@ describe("deprecated-class-props consumer metadata resolution", () => {
     for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true });
   });
 
-  function assertRemoved (root, filename, fix = false) {
-    const result = lint(root, filename, rule, fix);
+  function assertRemoved (root, options = {}) {
+    const result = lint(root, options);
     assert.equal(result.messages.length, 1);
     assert.equal(result.messages[0].messageId, "propRemoved");
-    if (fix) assert.equal(result.output, '<template><dt-consumer class="x" /></template>');
+    if (options.fix) assert.equal(result.output, '<template><dt-consumer class="x" /></template>');
     assert.deepEqual(warnings, []);
   }
 
-  function assertUnavailable (root, packageName, consumerRule = rule) {
-    assert.deepEqual(lint(root, undefined, consumerRule).messages, []);
+  function assertUnavailable (root, packageName, ruleModule) {
+    assert.deepEqual(lint(root, { ruleModule }).messages, []);
     assert.equal(warnings.length, 1);
     assert.ok(/deprecated-class-props/.test(warnings[0]));
     if (packageName) assert.ok(warnings[0].includes(packageName));
@@ -95,13 +96,13 @@ describe("deprecated-class-props consumer metadata resolution", () => {
   it("activates checks and autofix for a declared umbrella-only consumer", () => {
     const root = project({ [UMBRELLA]: "^10" });
     install(root, UMBRELLA, REMOVED);
-    assertRemoved(root, undefined, true);
+    assertRemoved(root, { fix: true });
   });
 
   it("activates checks and autofix for a declared standalone-only consumer", () => {
     const root = project({ [STANDALONE]: "^3" });
     install(root, STANDALONE, REMOVED);
-    assertRemoved(root, undefined, true);
+    assertRemoved(root, { fix: true });
   });
 
   for (const declaredIn of ["dependencies", "devDependencies", "peerDependencies"]) {
@@ -139,8 +140,8 @@ describe("deprecated-class-props consumer metadata resolution", () => {
     const root = project({ [UMBRELLA]: "^10", [STANDALONE]: "^3" });
     install(root, STANDALONE, REMOVED);
     assertUnavailable(root, UMBRELLA);
-    assert.deepEqual(lint(root, join(root, "src", "second.vue")).messages, []);
-    lint(root, undefined, rule, true);
+    assert.deepEqual(lint(root, { filename: join(root, "src", "second.vue") }).messages, []);
+    lint(root, { fix: true });
     assert.equal(warnings.length, 1, "one diagnostic across files and autofix passes");
   });
 
@@ -217,7 +218,7 @@ describe("deprecated-class-props consumer metadata resolution", () => {
   it("uses ESLint's working directory for virtual input without a physical filename", () => {
     const root = project({ [UMBRELLA]: "^10" });
     install(root, UMBRELLA, REMOVED);
-    assertRemoved(root, null);
+    assertRemoved(root, { filename: null });
   });
 
   it("uses the linted file's own package when ESLint runs from a parent workspace", () => {
@@ -226,7 +227,7 @@ describe("deprecated-class-props consumer metadata resolution", () => {
     const child = join(root, "packages", "legacy");
     write(join(child, "package.json"), { dependencies: { [STANDALONE]: "^3" } });
     install(child, STANDALONE, REMOVED);
-    assertRemoved(root, join(child, "src", "consumer.vue"));
+    assertRemoved(root, { filename: join(child, "src", "consumer.vue") });
   });
 
   it("does not inherit a declaration across a nested repository boundary", () => {
@@ -244,7 +245,7 @@ describe("deprecated-class-props consumer metadata resolution", () => {
     install(root, STANDALONE, REMOVED);
     const child = join(root, "packages", "legacy");
     write(join(child, "package.json"), { dependencies: { [STANDALONE]: "^3" } });
-    assertRemoved(root, join(child, "src", "consumer.vue"));
+    assertRemoved(root, { filename: join(child, "src", "consumer.vue") });
   });
 
   it("ignores NODE_PATH even when a selected package without exports is missing its own file", () => {
