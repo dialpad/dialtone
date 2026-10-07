@@ -206,16 +206,11 @@ export const cases = [
     ],
     { limit: 1 },
   ),
-  baseline(
+  missing(
     'documentation-negative',
     'documentation',
     'DLT3652MissingDocument',
-    [{ id: 'negative', kind: 'empty' }],
-    {
-      checksByAdapter: {
-        mcp: [contains('meaningful-negative', 'No documentation')],
-      },
-    },
+    'No documentation',
   ),
   baseline(
     'legacy-import-qualification',
@@ -254,12 +249,29 @@ export const cases = [
     { adapters: ['cli'], fixture: 'legacy-cli', limit: 1 },
   ),
 ];
+// The checks one adapter must satisfy, including its transmitted-size budget.
+export const checksFor = (testCase, adapter) => [
+  ...testCase.checks,
+  ...(testCase.checksByAdapter?.[adapter] ?? []),
+  {
+    id: 'output-budget',
+    kind: 'bytes',
+    value: adapter === 'mcp' ? 16000 : 100000,
+  },
+];
 const failure = (issue, owner, assertion, removeWhen) => ({
   issue,
   owner,
   assertion,
   removeWhen,
 });
+// One owned failure for every adapter that runs the case.
+const everyAdapter = (caseId, entry) =>
+  Object.fromEntries(
+    cases
+      .find((value) => value.id === caseId)
+      .adapters.map((adapter) => [`${caseId}/${adapter}`, entry]),
+  );
 export const expectedFailures = {
   'box-exact/mcp': failure(
     'DLT-3650',
@@ -273,23 +285,14 @@ export const expectedFailures = {
     'replacement',
     'selected migration detail retains the replacement beyond the summary excerpt',
   ),
-  'breadcrumb-public-name/core': failure(
-    'DLT-3649',
-    'public API identity',
-    'top-results',
-    'integrated canonical public names rank DtBreadcrumbItem first',
-  ),
-  'breadcrumb-public-name/cli': failure(
-    'DLT-3649',
-    'public API identity',
-    'top-results',
-    'integrated canonical public names rank DtBreadcrumbItem first',
-  ),
-  'breadcrumb-public-name/mcp': failure(
-    'DLT-3649',
-    'public API identity',
-    'top-results',
-    'integrated canonical public names rank DtBreadcrumbItem first',
+  ...everyAdapter(
+    'breadcrumb-public-name',
+    failure(
+      'DLT-3649',
+      'public API identity',
+      'top-results',
+      'integrated canonical public names rank DtBreadcrumbItem first',
+    ),
   ),
   'button-complete-prop/mcp': failure(
     'DLT-3650',
@@ -297,23 +300,14 @@ export const expectedFailures = {
     'late-prop',
     'focused component detail returns the requested later prop; replace with the integrated detail tool assertion',
   ),
-  'utility-pixel-ranking/core': failure(
-    'DLT-3651',
-    'ranking and migration guidance',
-    'top-results',
-    'padding 8px ranks the value-preserving d-p-100 utility before component internals',
-  ),
-  'utility-pixel-ranking/cli': failure(
-    'DLT-3651',
-    'ranking and migration guidance',
-    'top-results',
-    'padding 8px ranks the value-preserving d-p-100 utility before component internals',
-  ),
-  'utility-pixel-ranking/mcp': failure(
-    'DLT-3651',
-    'ranking and migration guidance',
-    'top-results',
-    'padding 8px ranks the value-preserving d-p-100 utility before component internals',
+  ...everyAdapter(
+    'utility-pixel-ranking',
+    failure(
+      'DLT-3651',
+      'ranking and migration guidance',
+      'top-results',
+      'padding 8px ranks the value-preserving d-p-100 utility before component internals',
+    ),
   ),
   'checkbox-accessibility-literal/mcp': failure(
     'DLT-3650',
@@ -321,23 +315,14 @@ export const expectedFailures = {
     'aria-literal',
     'selected documentation detail retains aria-describedby beyond the summary excerpt',
   ),
-  'tooltip-wrapper-literal/core': failure(
-    'DLT-3653',
-    'documentation fidelity',
-    'span-literal',
-    'raw inline HTML literal survives generation and retrieval',
-  ),
-  'tooltip-wrapper-literal/cli': failure(
-    'DLT-3653',
-    'documentation fidelity',
-    'span-literal',
-    'raw inline HTML literal survives generation and retrieval',
-  ),
-  'tooltip-wrapper-literal/mcp': failure(
-    'DLT-3653',
-    'documentation fidelity',
-    'span-literal',
-    'raw inline HTML literal survives generation and retrieval',
+  ...everyAdapter(
+    'tooltip-wrapper-literal',
+    failure(
+      'DLT-3653',
+      'documentation fidelity',
+      'span-literal',
+      'raw inline HTML literal survives generation and retrieval',
+    ),
   ),
   'documentation-negative/mcp': failure(
     'DLT-3650',

@@ -19,26 +19,17 @@ test('nested fixture declares exact pins at the dependency root and limits evide
       },
     });
     assert.equal(fixture.verification, 'lookup-data-only');
-    assert.deepEqual(
-      JSON.parse(
-        await readFile(
-          createRequire(join(fixture.invocationRoot, 'package.json')).resolve(
-            '@dialpad/dialtone/vue3/component-documentation.json',
-          ),
-        ),
-      ),
-      data,
-    );
-    assert.deepEqual(
-      JSON.parse(
-        await readFile(
-          createRequire(join(fixture.invocationRoot, 'package.json')).resolve(
-            '@dialpad/dialtone-icons/keywords-icons.json',
-          ),
-        ),
-      ),
-      icons,
-    );
+    const resolveFromApp = createRequire(
+      join(fixture.invocationRoot, 'package.json'),
+    ).resolve;
+    for (const [specifier, expected] of [
+      ['@dialpad/dialtone/vue3/component-documentation.json', data],
+      ['@dialpad/dialtone-icons/keywords-icons.json', icons],
+    ])
+      assert.deepEqual(
+        JSON.parse(await readFile(resolveFromApp(specifier))),
+        expected,
+      );
     assert.equal(
       fixture.invocationRoot,
       join(fixture.dependencyRoot, 'apps/client'),

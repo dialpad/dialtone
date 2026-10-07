@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { evaluateAssertions } from './assertions.mjs';
-import { cases, expectedFailures } from './cases.mjs';
+import { cases, checksFor, expectedFailures } from './cases.mjs';
 
 const checks = [
   { id: 'literal', kind: 'contains', value: 'required' },
@@ -61,10 +61,7 @@ test('mandatory required, forbidden, order, negative and budget assertions fail 
   );
   for (const adapter of breadcrumb.adapters) {
     const id = `${breadcrumb.id}/${adapter}`;
-    const actualChecks = [
-      ...breadcrumb.checks,
-      ...breadcrumb.checksByAdapter[adapter],
-    ];
+    const actualChecks = checksFor(breadcrumb, adapter);
     assert.equal(
       evaluateAssertions(
         id,

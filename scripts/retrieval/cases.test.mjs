@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { cases, expectedFailures } from './cases.mjs';
+import { cases, checksFor, expectedFailures } from './cases.mjs';
 import { evaluateAssertions } from './assertions.mjs';
 
 test('mandatory MCP missing cases reject blank and unrecognized negative responses', () => {
@@ -11,10 +11,7 @@ test('mandatory MCP missing cases reject blank and unrecognized negative respons
     'icon-missing': 'No icons found for "DLT3652MissingIcon".',
   })) {
     const testCase = cases.find((value) => value.id === id);
-    const checks = [
-      ...testCase.checks,
-      ...(testCase.checksByAdapter?.mcp ?? []),
-    ];
+    const checks = checksFor(testCase, 'mcp');
     assert.equal(
       evaluateAssertions(`${id}/mcp`, { names: [], text: diagnostic }, checks)
         .status,
@@ -46,7 +43,7 @@ test('every owned failure is an exercised precise assertion, and every case stay
     cases.flatMap((value) =>
       value.adapters.map((adapter) => [
         `${value.id}/${adapter}`,
-        [...value.checks, ...(value.checksByAdapter?.[adapter] ?? [])],
+        checksFor(value, adapter),
       ]),
     ),
   );

@@ -6,7 +6,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 import { join, resolve } from 'node:path';
 import { tmpdir } from 'node:os';
 import { promisify } from 'node:util';
-import { cases, expectedFailures } from './cases.mjs';
+import { cases, checksFor, expectedFailures } from './cases.mjs';
 import { evaluateAssertions } from './assertions.mjs';
 import { createConsumerFixture, sha256 } from './fixtures.mjs';
 import legacyButton from './legacy-button.json' with { type: 'json' };
@@ -291,15 +291,13 @@ try {
     'packages/dialtone-mcp-server/build/index.js',
   ]) {
     const bytes = await readFile(resolve(root, path));
+    const manifest = path.endsWith('/package.json') ? JSON.parse(bytes) : null;
     report.artifacts.push({
       path,
       sha256: sha256(bytes),
       bytes: bytes.length,
-      ...(path.endsWith('/package.json')
-        ? {
-            package: JSON.parse(bytes).name,
-            version: JSON.parse(bytes).version,
-          }
+      ...(manifest
+        ? { package: manifest.name, version: manifest.version }
         : {}),
     });
   }
@@ -309,17 +307,13 @@ try {
       const id = `${testCase.id}/${adapter}`;
       try {
         const actual = await query(testCase, adapter);
-        const checks = [
-          ...testCase.checks,
-          ...(testCase.checksByAdapter?.[adapter] ?? []),
-          {
-            id: 'output-budget',
-            kind: 'bytes',
-            value: adapter === 'mcp' ? 16000 : 100000,
-          },
-        ];
         report.results.push(
-          evaluateAssertions(id, actual, checks, expectedFailures[id]),
+          evaluateAssertions(
+            id,
+            actual,
+            checksFor(testCase, adapter),
+            expectedFailures[id],
+          ),
         );
       } catch (error) {
         failures.push(`${id}: ${error.message}`);

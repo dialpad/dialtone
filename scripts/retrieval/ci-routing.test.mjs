@@ -11,15 +11,25 @@ assert.equal(
 const nxRequire = createRequire(require.resolve('nx/package.json'));
 const { parse } = nxRequire('yaml');
 const { minimatch } = nxRequire('minimatch');
-const workflow = parse(
-  readFileSync(
-    new URL('../../.github/workflows/unit_tests.yml', import.meta.url),
-    'utf8',
-  ),
-);
+const readWorkflow = (file) =>
+  parse(
+    readFileSync(
+      new URL(`../../.github/workflows/${file}`, import.meta.url),
+      'utf8',
+    ),
+  );
+const workflow = readWorkflow('unit_tests.yml');
 const filters = parse(
   workflow.jobs.changes.steps.find((step) => step.id === 'filter').with.filters,
 );
+function assertRouted(label, paths, patternLists) {
+  for (const path of paths)
+    for (const patterns of patternLists)
+      assert.ok(
+        patterns.some((pattern) => minimatch(path, pattern)),
+        `${label} CI does not run for ${path}`,
+      );
+}
 test('lookup source, data, adapter and harness changes route to the mandatory suites on PRs and staging', () => {
   const paths = [
     'packages/dialtone-vue/components/button/button.vue',
@@ -41,42 +51,24 @@ test('lookup source, data, adapter and harness changes route to the mandatory su
     '.github/workflows/unit_tests.yml',
     '.github/workflows/dialtone-documentation-tests.yml',
   ];
-  for (const path of paths) {
-    for (const patterns of [
-      workflow.on.pull_request.paths,
-      workflow.on.push.paths,
-      filters.cli,
-    ])
-      assert.ok(
-        patterns.some((pattern) => minimatch(path, pattern)),
-        `lookup CI does not run for ${path}`,
-      );
-  }
-  const docsWorkflow = parse(
-    readFileSync(
-      new URL(
-        '../../.github/workflows/dialtone-documentation-tests.yml',
-        import.meta.url,
-      ),
-      'utf8',
-    ),
+  assertRouted('lookup', paths, [
+    workflow.on.pull_request.paths,
+    workflow.on.push.paths,
+    filters.cli,
+  ]);
+  const docsWorkflow = readWorkflow('dialtone-documentation-tests.yml');
+  assertRouted(
+    'documentation',
+    [
+      'apps/dialtone-documentation/scripts/lib/transform-vue-api.test.mjs',
+      'scripts/build-dialtone-vue-docs.mjs',
+      'scripts/lib/vue-component-identity.mjs',
+      'scripts/tests/vue-component-identity.test.mjs',
+      'common/utils/server.mjs',
+      '.github/workflows/dialtone-documentation-tests.yml',
+    ],
+    [docsWorkflow.on.pull_request.paths, docsWorkflow.on.push.paths],
   );
-  for (const path of [
-    'apps/dialtone-documentation/scripts/lib/transform-vue-api.test.mjs',
-    'scripts/build-dialtone-vue-docs.mjs',
-    'scripts/lib/vue-component-identity.mjs',
-    'scripts/tests/vue-component-identity.test.mjs',
-    'common/utils/server.mjs',
-    '.github/workflows/dialtone-documentation-tests.yml',
-  ])
-    for (const patterns of [
-      docsWorkflow.on.pull_request.paths,
-      docsWorkflow.on.push.paths,
-    ])
-      assert.ok(
-        patterns.some((pattern) => minimatch(path, pattern)),
-        `documentation CI does not run for ${path}`,
-      );
   const commands = workflow.jobs['test-cli'].steps
     .map((step) => step.run ?? '')
     .join('\n');

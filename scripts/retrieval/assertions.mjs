@@ -1,26 +1,29 @@
 import assert from 'node:assert/strict';
 
+const primitives = {
+  contains: (actual, value) =>
+    assert.ok(actual.text.includes(value), `missing ${JSON.stringify(value)}`),
+  absent: (actual, value) =>
+    assert.ok(
+      !actual.text.includes(value),
+      `forbidden ${JSON.stringify(value)}`,
+    ),
+  exact: (actual, value) => assert.equal(actual.text, value),
+  order: (actual, value) =>
+    assert.deepEqual(actual.names?.slice(0, value.length), value),
+  empty: (actual) => assert.deepEqual(actual.names, []),
+  bytes: (actual, value) =>
+    assert.ok(
+      (actual.bytes ?? Buffer.byteLength(actual.text)) <= value,
+      `exceeds ${value} bytes`,
+    ),
+};
+const isPrimitive = (check) => Object.hasOwn(primitives, check?.kind);
+
 function assertPrimitive(actual, check) {
-  if (check.kind === 'contains')
-    assert.ok(
-      actual.text.includes(check.value),
-      `missing ${JSON.stringify(check.value)}`,
-    );
-  else if (check.kind === 'absent')
-    assert.ok(
-      !actual.text.includes(check.value),
-      `forbidden ${JSON.stringify(check.value)}`,
-    );
-  else if (check.kind === 'exact') assert.equal(actual.text, check.value);
-  else if (check.kind === 'order')
-    assert.deepEqual(actual.names?.slice(0, check.value.length), check.value);
-  else if (check.kind === 'empty') assert.deepEqual(actual.names, []);
-  else if (check.kind === 'bytes')
-    assert.ok(
-      (actual.bytes ?? Buffer.byteLength(actual.text)) <= check.value,
-      `exceeds ${check.value} bytes`,
-    );
-  else throw new Error(`Unknown primitive assertion kind: ${check.kind}`);
+  if (!isPrimitive(check))
+    throw new Error(`Unknown primitive assertion kind: ${check.kind}`);
+  primitives[check.kind](actual, check.value);
 }
 
 function assertAlternative(actual, groups) {
@@ -29,19 +32,7 @@ function assertAlternative(actual, groups) {
     !groups.length ||
     groups.some(
       (group) =>
-        !Array.isArray(group) ||
-        !group.length ||
-        group.some(
-          (check) =>
-            ![
-              'contains',
-              'absent',
-              'exact',
-              'order',
-              'empty',
-              'bytes',
-            ].includes(check?.kind),
-        ),
+        !Array.isArray(group) || !group.length || !group.every(isPrimitive),
     )
   )
     throw new Error(

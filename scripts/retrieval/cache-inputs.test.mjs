@@ -49,18 +49,19 @@ function covered(paths, patterns) {
     patterns,
   ).map((value) => value.file);
 }
+// Workspace-relative file patterns from a project's own build inputs.
+function selfPatterns(name) {
+  return inputs(name)
+    .selfInputs.filter((input) => input.fileset)
+    .map((input) =>
+      input.fileset
+        .replace('{workspaceRoot}/', '')
+        .replace('{projectRoot}', `packages/${name}`),
+    );
+}
 test('Vue generator and its shared helpers participate in the build hash', () => {
   assert.deepEqual(
-    covered(
-      generatorInputs,
-      inputs('dialtone-vue')
-        .selfInputs.filter((input) => input.fileset)
-        .map((input) =>
-          input.fileset
-            .replace('{workspaceRoot}/', '')
-            .replace('{projectRoot}', 'packages/dialtone-vue'),
-        ),
-    ),
+    covered(generatorInputs, selfPatterns('dialtone-vue')),
     generatorInputs,
   );
 });
@@ -123,14 +124,7 @@ test('MCP client rules participate in the build hash', () => {
   assert.deepEqual(
     covered(
       ['packages/dialtone-mcp-server/client-rules.json'],
-      inputs('dialtone-mcp-server')
-        .selfInputs.filter((input) => input.fileset)
-        .map((input) =>
-          input.fileset.replace(
-            '{projectRoot}',
-            'packages/dialtone-mcp-server',
-          ),
-        ),
+      selfPatterns('dialtone-mcp-server'),
     ),
     ['packages/dialtone-mcp-server/client-rules.json'],
   );
