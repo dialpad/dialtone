@@ -733,7 +733,7 @@ export function parseSourceMarkdown (source, { dataDir, filePath, utilitiesDir }
     scriptSetupContent,
     filePath,
     utilitiesDir,
-    handlerCtx: { dataDir, scriptSetupContent },
+    handlerCtx: { dataDir, scriptSetupContent, filePath },
     i: 0,
     line: '',
     trimmed: '',

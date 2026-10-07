@@ -159,6 +159,16 @@ describe('buildRecords — status filter (blacklist)', () => {
 // ─── Edge case tests ─────────────────────────────────────────────────────────
 
 describe('buildRecords — edge cases', () => {
+  test('Tooltip prose keeps the literal wrapper independently of examples and source identity', () => {
+    const tooltip = resolve(__dirname, '../../../../apps/dialtone-documentation/docs/components/tooltip.md');
+    const record = buildRecords(tooltip).find(r => r.headingPath.includes('Tooltip as a Component'));
+    expect(record.content).toContain('wrap the button in a `<span>` element');
+    expect(record.content).toContain('disabled elements do not fire mouse events');
+    expect(record.content).not.toContain('<dt-tooltip');
+    expect(record.filePath).toBe('apps/dialtone-documentation/docs/components/tooltip.md');
+    expect(record.frontmatter.storybook).toContain('components-tooltip');
+  });
+
   test('file with no H2/H3 emits one record with empty headingPath', () => {
     const records = buildRecords(resolve(fixtureDir, 'no-headings.md'));
     expect(records).toHaveLength(1);
