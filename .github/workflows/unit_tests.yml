@@ -142,6 +142,7 @@ jobs:
     needs: changes
     if: needs.changes.outputs.cli == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     permissions:
       packages: read
     steps:

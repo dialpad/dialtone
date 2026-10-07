@@ -287,11 +287,6 @@ try {
         report.results.push({ id, status: 'fail', message: error.message });
       }
     }
-  if (reportPath)
-    await writeFile(
-      resolve(reportPath),
-      JSON.stringify(report, null, 2) + '\n',
-    );
   console.log(
     JSON.stringify(
       {
@@ -308,6 +303,17 @@ try {
     ),
   );
   if (failures.length) process.exitCode = 1;
+} catch (error) {
+  report.failure = { message: error.message };
+  throw error;
 } finally {
-  await client.close();
+  try {
+    await client.close();
+  } finally {
+    if (reportPath)
+      await writeFile(
+        resolve(reportPath),
+        JSON.stringify(report, null, 2) + '\n',
+      );
+  }
 }
