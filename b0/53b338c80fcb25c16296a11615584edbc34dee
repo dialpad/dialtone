@@ -1,0 +1,24 @@
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-class-props-consumer.js
+  s_c8ad6feb7a7a00::t_d117d11854aee9 51-52,57,81-82,85,89-90,99,105,143-144,221,230,248
+packages/eslint-plugin-dialtone/lib/rules/deprecated-class-props.js
+  s_c8ad6feb7a7a00::t_c231a6450ad8f1 50-66,128,151-152,161
+packages/eslint-plugin-dialtone/lib/util/consumer-component-data.js
+  s_c8ad6feb7a7a00::t_c231a6450ad8f1 74
+  s_c8ad6feb7a7a00::t_f4dbe7280d3101 10-15,17,34-36,57,72-73,75-76
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "b053b338c80fcb25c16296a11615584edbc34dee",
+  "prompts": {},
+  "sessions": {
+    "s_c8ad6feb7a7a00": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6f605576-f73f-414c-9125-c046a01ec7e1",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

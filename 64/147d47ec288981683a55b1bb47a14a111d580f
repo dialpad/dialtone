@@ -1,0 +1,48 @@
+packages/eslint-plugin-dialtone/lib/rules/deprecated-class-props.js
+  s_7f1d1d64baa803::t_1dd6e6dbc40556 7
+  s_c8ad6feb7a7a00::t_c231a6450ad8f1 50-66,128,151-152,161
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-class-props.js
+  s_7f1d1d64baa803::t_1dd6e6dbc40556 7-8,30,221
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-class-props-consumer.js
+  s_7f1d1d64baa803::t_0b81debe368a39 1-6,9-10,12-50,53-54,56,58-60,63-80,83-84,86-88,93-98,100-104,106-142,146-160,167-174,199-215,234-241,243-251,283-284
+  s_7f1d1d64baa803::t_7b7c8283677142 7,11,92,261-282
+  s_7f1d1d64baa803::t_ced515c6949251 55,61,175-181,216-217,230-232,252-259
+  s_7f1d1d64baa803::t_0daab5f655b5c5 8,62,91,145,161-166,182-198
+  s_c8ad6feb7a7a00::t_d117d11854aee9 51-52,57,81-82,85,89-90,99,105,143-144,233,242,260
+  s_7f1d1d64baa803::t_6ae6a87a81fefc 218-229
+packages/eslint-plugin-dialtone/docs/rules/deprecated-class-props.md
+  s_7f1d1d64baa803::t_bd1a2a05263da2 19,23-24,26-36
+  s_7f1d1d64baa803::t_f637677788e10a 37
+  s_7f1d1d64baa803::t_0daab5f655b5c5 38-45
+  s_7f1d1d64baa803::t_7bf52777a7d432 25
+packages/eslint-plugin-dialtone/lib/util/consumer-component-data.js
+  s_7f1d1d64baa803::t_7b7c8283677142 33
+  s_7f1d1d64baa803::t_1dd6e6dbc40556 1-9,16,18-32,37-40,43-58,60-73,79-96
+  s_c8ad6feb7a7a00::t_c231a6450ad8f1 76
+  s_c8ad6feb7a7a00::t_f4dbe7280d3101 10-15,17,34-36,59,74-75,77-78
+  s_7f1d1d64baa803::t_7bf52777a7d432 41-42
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "64147d47ec288981683a55b1bb47a14a111d580f",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_c8ad6feb7a7a00": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6f605576-f73f-414c-9125-c046a01ec7e1",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
