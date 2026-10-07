@@ -4,7 +4,6 @@
     "build": {
       "executor": "nx:run-commands",
       "inputs": [
-        "{projectRoot}/figma_tokens/*",
         "{projectRoot}/postcss/*",
         "{projectRoot}/themes/*",
         "{projectRoot}/tokens/**/*",
@@ -66,6 +65,35 @@
       "options": {
         "cwd": "{projectRoot}",
         "command": "pnpm test"
+      }
+    },
+    "sync:variables": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "pnpm sync:variables"
+      }
+    },
+    "sync:variables:check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "pnpm sync:variables:check"
+      }
+    },
+    "sync:materials": {
+      "dependsOn": ["sync:variables"],
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "pnpm sync:materials"
+      }
+    },
+    "sync:materials:check": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "pnpm sync:materials:check"
       }
     },
     "release": {
