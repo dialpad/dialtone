@@ -11,10 +11,17 @@
 //  • ACCESSIBILITY
 //
 //  Motion matches the Motion Text design spec.
-//  Track timings (--d-motion-text-{enter,reveal,sweep}-*) are set inline by DtMotionText from
+//  Track timings (--d-motion-text-{enter,reveal,sweep,shimmer}-*) are set inline by DtMotionText from
 //  MOTION_TEXT_TRACKS, and each word gets --d-motion-text-word-index for its stagger.
 //
 @layer dialtone.components {
+  // Animatable mask position for the shimmer band
+  @property --d-motion-text-mask-pos {
+    inherits: true;
+    initial-value: 0%;
+    syntax: '<percentage>';
+  }
+
   //  ============================================================================
   //  $   BASE STYLE
   //  ----------------------------------------------------------------------------
@@ -25,6 +32,16 @@
     --d-motion-text-gradient: var(--dt-color-gradient-orange-red-magenta-purple, linear-gradient(currentcolor, currentcolor));
     // Spec is 18px at a 27px font size; scales with the text
     --d-motion-text-slide-distance: calc(18em / 27);
+    // Shimmer: a dimmed band, five times the text's width, that slides across it
+    --d-motion-text-shimmer-mask: linear-gradient(
+      90deg,
+      black 0%,
+      black 20%,
+      #0005 40%,
+      #0005 60%,
+      black 80%,
+      black 100%
+    ) 0% 0% / 500% 100%;
 
     position: relative;
   }
@@ -117,23 +134,13 @@
     }
   }
 
-  @keyframes d-motion-text-dim {
+  @keyframes d-motion-text-shimmer {
     from {
-      opacity: 1;
+      --d-motion-text-mask-pos: 100%;
     }
 
     to {
-      opacity: 0.5;
-    }
-  }
-
-  @keyframes d-motion-text-undim {
-    from {
-      opacity: 0.5;
-    }
-
-    to {
-      opacity: 1;
+      --d-motion-text-mask-pos: 0%;
     }
   }
 
@@ -141,7 +148,7 @@
   //  $   ANIMATION MODES
   //  ----------------------------------------------------------------------------
   //  Enter easing --ttf-out is the spec's cubic-bezier(0.35, 0, 0.1, 1).
-  //  Sweep and shimmer use the spec's standard ease-in-out, cubic-bezier(0.42, 0, 0.58, 1).
+  //  The sweep uses the spec's standard ease-in-out, cubic-bezier(0.42, 0, 0.58, 1).
   .d-motion-text--fade-in .d-motion-text__word {
     --d-motion-text-word-animation: d-motion-text-fade-in var(--d-motion-text-enter-duration) var(--ttf-out) var(--d-motion-text-enter-start) both;
   }
@@ -168,10 +175,13 @@
       d-motion-text-fill-in var(--d-motion-text-sweep-fade) ease-in-out var(--d-motion-text-sweep-return) forwards;
   }
 
-  .d-motion-text--shimmer .d-motion-text__word {
-    --d-motion-text-word-animation:
-      d-motion-text-dim var(--d-motion-text-sweep-fade) ease-in-out var(--d-motion-text-sweep-start) both,
-      d-motion-text-undim var(--d-motion-text-sweep-fade) ease-in-out var(--d-motion-text-sweep-return) forwards;
+  // Shimmer animates the whole text at once: the dimmed band sweeps left to right, even across a single word
+  .d-motion-text--shimmer {
+    display: inline-block;
+    animation: var(--d-motion-text-resting, d-motion-text-shimmer var(--d-motion-text-shimmer-duration) var(--ttf-in-out) both);
+    animation-play-state: var(--d-motion-text-play-state, paused);
+    mask: var(--d-motion-text-resting, var(--d-motion-text-shimmer-mask));
+    mask-position: var(--d-motion-text-mask-pos) 0%;
   }
 
   .d-motion-text--gradient-in,

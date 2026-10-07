@@ -13,6 +13,7 @@ combinator: DtMotionText
   <dt-motion-text
     text="Welcome to Dialtone Motion Text"
     animation-mode="slide-in-gradient"
+    loop
   />
 </dt-text>
 ```
@@ -21,7 +22,7 @@ combinator: DtMotionText
 
 `DtMotionText` animates text word by word. Pass `text` and the effect plays as soon as the component mounts, using `gradient-in` unless you set `animation-mode`.
 
-Every effect works on whole words, never individual characters. Words animate in reading order, each starting a moment after the one before it. The gradient effects place one continuous purple-to-orange gradient behind all of the words, so each word shows its own slice of the same sweep rather than a gradient of its own. The gradient is the `--dt-color-gradient-orange-red-magenta-purple` token, a horizontal span of the Ai gradient used by Ai surfaces and borders.
+Every effect except `shimmer` works on whole words, never individual characters. Words animate in reading order, each starting a moment after the one before it. `shimmer` instead sweeps one dimmed band left to right across the whole text, so it reads well even on a single word. The gradient effects place one continuous purple-to-orange gradient behind all of the words, so each word shows its own slice of the same sweep rather than a gradient of its own. The gradient is the `--dt-color-gradient-orange-red-magenta-purple` token, a horizontal span of the Ai gradient used by Ai surfaces and borders.
 
 ### Animation Modes
 
@@ -32,9 +33,9 @@ Every effect works on whole words, never individual characters. Words animate in
 | `slide-in` | Each word fades in while rising into place. |
 | `slide-in-gradient` | The `slide-in` motion combined with the `gradient-in` color reveal. |
 | `gradient-sweep` | Text starts solid. Each word fades to the gradient, holds, then fades back to its text color. |
-| `shimmer` | Each word dims to half opacity, holds, then returns to full opacity. |
+| `shimmer` | A dimmed band sweeps left to right across the whole text. |
 
-Select a mode to replay it. Turn on **Loop** to watch it repeat.
+Select a mode to play it. **Loop** is on, so each effect keeps repeating; turn it off to watch a single play.
 
 ```vue demo
 <dt-stack gap="400" align="center" class="d-hmn84">
@@ -89,6 +90,7 @@ Select a mode to replay it. Turn on **Loop** to watch it repeat.
       text="Welcome to Dialtone Motion Text"
       animation-mode="shimmer"
       :speed="Number(selected)"
+      loop
     />
   </dt-text>
 </dt-stack>
@@ -98,6 +100,7 @@ Select a mode to replay it. Turn on **Loop** to watch it repeat.
     text="Welcome to Dialtone Motion Text"
     animation-mode="shimmer"
     :speed="{speed}"
+    loop
   />
 </dt-text>
 ```
@@ -123,6 +126,7 @@ Until `start()` is called, the reveal modes (`gradient-in`, `fade-in`, `slide-in
       text="Welcome to Dialtone Motion Text"
       animation-mode="slide-in-gradient"
       :auto-start="false"
+      loop
     />
   </dt-text>
 </dt-stack>
@@ -137,12 +141,13 @@ Until `start()` is called, the reveal modes (`gradient-in`, `fade-in`, `slide-in
   text="Welcome to Dialtone Motion Text"
   animation-mode="slide-in-gradient"
   :auto-start="false"
+  loop
 />
 ```
 
 ### Looping Animation
 
-Set `loop` to repeat the effect continuously. When a cycle finishes, the text holds at rest for a moment, then every word resets together and the cycle plays again. The hold is fixed, so the length of each cycle depends on how many words there are. For a six-word line at speed `300`, the reveal modes repeat every 2 seconds and `gradient-sweep` and `shimmer` repeat every 2.65 seconds.
+Set `loop` to repeat the effect continuously. When a cycle finishes, the text holds at rest for a moment, then every word resets together and the cycle plays again. The hold is fixed, so the length of each cycle depends on how many words there are. For a six-word line at speed `300`, the reveal modes repeat every 2 seconds and `gradient-sweep` every 2.65 seconds. `shimmer` repeats back to back every 3 seconds, whatever the length of the text.
 
 Each cycle emits `start` when it begins and `complete` when its last word settles.
 
@@ -217,7 +222,7 @@ import { MOTION_TEXT_ANIMATION_MODES } from '@dialpad/dialtone-vue';
 
 const animationModes = MOTION_TEXT_ANIMATION_MODES;
 const activeMode = ref('gradient-in');
-const loopModes = ref(false);
+const loopModes = ref(true);
 const modeDemoKey = ref(0);
 const manualDemoRef = ref(null);
 const selected = ref('300');

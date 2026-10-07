@@ -31,7 +31,17 @@ const MOCK_SWEEP_VARS = {
   '--d-motion-text-sweep-duration': '1400ms',
   '--d-motion-text-sweep-fade': '250ms',
 };
-const MOCK_TRACK_VAR_NAMES = Object.keys({ ...MOCK_ENTER_VARS, ...MOCK_REVEAL_VARS, ...MOCK_SWEEP_VARS });
+const MOCK_SHIMMER_VARS = {
+  '--d-motion-text-shimmer-delay': '0ms',
+  '--d-motion-text-shimmer-stagger': '0ms',
+  '--d-motion-text-shimmer-duration': '3000ms',
+};
+const MOCK_TRACK_VAR_NAMES = Object.keys({
+  ...MOCK_ENTER_VARS,
+  ...MOCK_REVEAL_VARS,
+  ...MOCK_SWEEP_VARS,
+  ...MOCK_SHIMMER_VARS,
+});
 
 const MOCK_MODE_TRACK_VARS = {
   'gradient-in': { ...MOCK_ENTER_VARS, ...MOCK_REVEAL_VARS },
@@ -39,7 +49,7 @@ const MOCK_MODE_TRACK_VARS = {
   'slide-in': MOCK_ENTER_VARS,
   'slide-in-gradient': { ...MOCK_ENTER_VARS, ...MOCK_REVEAL_VARS },
   'gradient-sweep': MOCK_SWEEP_VARS,
-  shimmer: MOCK_SWEEP_VARS,
+  shimmer: MOCK_SHIMMER_VARS,
 };
 
 const MOCK_GRADIENT_MODES = ['gradient-in', 'slide-in-gradient', 'gradient-sweep'];
@@ -50,14 +60,18 @@ const MOCK_SOLID_MODES = ['fade-in', 'slide-in', 'shimmer'];
 const MOCK_REVEAL_WORD_ENDS = [550, 600, 650, 700, 750, 800];
 const MOCK_ENTER_WORD_ENDS = [300, 360, 420, 480, 540, 600];
 const MOCK_SWEEP_WORD_ENDS = [1750, 1870, 1990, 2110, 2230, 2350];
+// Shimmer sweeps one band across the whole text, so every word finishes together
+const MOCK_SHIMMER_WORD_ENDS = [3000, 3000, 3000, 3000, 3000, 3000];
 const MOCK_MODE_TIMELINES = [
   ['gradient-in', { wordEnds: MOCK_REVEAL_WORD_ENDS, restart: 2000 }],
   ['fade-in', { wordEnds: MOCK_ENTER_WORD_ENDS, restart: 2000 }],
   ['slide-in', { wordEnds: MOCK_ENTER_WORD_ENDS, restart: 2000 }],
   ['slide-in-gradient', { wordEnds: MOCK_REVEAL_WORD_ENDS, restart: 2000 }],
   ['gradient-sweep', { wordEnds: MOCK_SWEEP_WORD_ENDS, restart: 2650 }],
-  ['shimmer', { wordEnds: MOCK_SWEEP_WORD_ENDS, restart: 2650 }],
+  ['shimmer', { wordEnds: MOCK_SHIMMER_WORD_ENDS, restart: 3000 }],
 ];
+// Modes whose words settle one after another and hold before looping
+const MOCK_STAGGERED_TIMELINES = MOCK_MODE_TIMELINES.filter(([mode]) => mode !== 'shimmer');
 
 /**
  * Environment Constants variables
@@ -509,7 +523,7 @@ describe('DtMotionText Tests', () => {
     });
 
     describe('When loop is true', () => {
-      it.each(MOCK_MODE_TIMELINES)('should restart %s after its Figma loop duration', async (mode, timeline) => {
+      it.each(MOCK_STAGGERED_TIMELINES)('should restart %s after its Figma loop duration', async (mode, timeline) => {
         const cycleEnd = timeline.wordEnds.at(-1);
         mockProps = { animationMode: mode, loop: true };
         updateWrapper();
@@ -523,6 +537,18 @@ describe('DtMotionText Tests', () => {
         await advance(timeline.restart - cycleEnd - 1);
         expect(getEmittedCount('start')).toBe(1);
         await advance(1);
+        expect(getEmittedCount('start')).toBe(2);
+      });
+
+      it('should restart shimmer back to back as soon as the band finishes', async () => {
+        mockProps = { animationMode: 'shimmer', loop: true };
+        updateWrapper();
+        await start();
+
+        await advance(2999);
+        expect(getEmittedCount('start')).toBe(1);
+        await advance(1);
+        expect(getEmittedCount('complete')).toBe(1);
         expect(getEmittedCount('start')).toBe(2);
       });
 
@@ -895,7 +921,7 @@ describe('DtMotionText Tests', () => {
       expect(getEmittedCount('start')).toBe(1);
     });
 
-    it.each(MOCK_MODE_TIMELINES)('should emit progress as each word settles in %s', async (mode, timeline) => {
+    it.each(MOCK_STAGGERED_TIMELINES)('should emit progress as each word settles in %s', async (mode, timeline) => {
       mockProps = { animationMode: mode };
       updateWrapper();
       await start();
@@ -912,6 +938,19 @@ describe('DtMotionText Tests', () => {
           progress: (index + 1) / MOCK_FIGMA_WORDS.length,
         });
       }
+    });
+
+    it('should emit progress for every word when the shimmer band finishes', async () => {
+      mockProps = { animationMode: 'shimmer' };
+      updateWrapper();
+      await start();
+
+      await advance(2999);
+      expect(getEmittedCount('progress')).toBe(0);
+      await advance(1);
+      expect(getEmittedCount('progress')).toBe(MOCK_FIGMA_WORDS.length);
+      expect(getProgressPayloads().at(-1).progress).toBe(1);
+      expect(getEmittedCount('complete')).toBe(1);
     });
 
     it.each(MOCK_MODE_TIMELINES)('should emit complete after the last word settles in %s', async (mode, timeline) => {

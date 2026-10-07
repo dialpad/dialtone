@@ -57,7 +57,7 @@ const MODE_DESCRIPTIONS = {
   'slide-in': 'Each word fades in while rising into place',
   'slide-in-gradient': 'Each word rises into place showing its slice of a purple-to-orange gradient, then settles into the text color',
   'gradient-sweep': 'Text stays visible while a purple-to-orange gradient sweeps across it word by word, holds, and fades back',
-  shimmer: 'Text stays visible while each word dims to half opacity and back, sweeping across the line',
+  shimmer: 'Text stays visible while a dimmed band sweeps left to right across it',
 };
 
 export default {

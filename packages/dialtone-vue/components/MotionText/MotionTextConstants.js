@@ -31,8 +31,10 @@ export const MOTION_TEXT_TRACKS = {
   enter: { delay: 0, stagger: 60, duration: 300 },
   // Text color fades in over the gradient
   reveal: { delay: 250, stagger: 50, duration: 300 },
-  // Word fades to the gradient (or to half opacity for shimmer), holds, then fades back over `fade`
+  // Word fades to the gradient, holds, then fades back over `fade`
   sweep: { delay: 350, stagger: 120, duration: 1400, fade: 250 },
+  // A dimmed band sweeps left to right across the whole text at once (the original shimmer)
+  shimmer: { delay: 0, stagger: 0, duration: 3000 },
 };
 
 // `loopHold` is the pause after the last word settles before a looped animation restarts.
@@ -43,7 +45,8 @@ export const MOTION_TEXT_MODE_SETTINGS = {
   'slide-in': { tracks: ['enter'], gradient: false, loopHold: 1400 },
   'slide-in-gradient': { tracks: ['enter', 'reveal'], gradient: true, loopHold: 1200 },
   'gradient-sweep': { tracks: ['sweep'], gradient: true, loopHold: 300 },
-  shimmer: { tracks: ['sweep'], gradient: false, loopHold: 300 },
+  // Loops back to back, as the band starts and ends off the text
+  shimmer: { tracks: ['shimmer'], gradient: false, loopHold: 0 },
 };
 
 export default {
