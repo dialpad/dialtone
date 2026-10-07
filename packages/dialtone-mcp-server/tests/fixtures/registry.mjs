@@ -1,12 +1,12 @@
 // Replace only the external registry request; the built server and SDK stay real.
 const scenario = process.env.DIALTONE_TEST_REGISTRY;
 
-function stall(signal) {
+function stall(signal, retainHandle = false) {
   return new Promise((resolve, reject) => {
-    // Model a request that keeps the process alive until it is cancelled.
+    // A connection handle can survive even after fetch rejects on abort.
     const pending = setInterval(() => {}, 1000);
     const abort = () => {
-      clearInterval(pending);
+      if (!retainHandle) clearInterval(pending);
       console.error('[registry fixture] aborted');
       reject(signal.reason);
     };
@@ -19,7 +19,9 @@ globalThis.fetch = async (url, options = {}) => {
   if (url !== 'https://registry.npmjs.org/@dialpad/dialtone-mcp-server/latest') {
     throw new Error(`Unexpected registry URL: ${url}`);
   }
-  if (scenario === 'stalled-fetch') return stall(options.signal);
+  if (['stalled-fetch', 'stalled-retained-handle'].includes(scenario)) {
+    return stall(options.signal, scenario === 'stalled-retained-handle');
+  }
   if (scenario === 'stalled-body') {
     return { ok: true, json: () => stall(options.signal) };
   }

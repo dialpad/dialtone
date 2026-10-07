@@ -63,7 +63,7 @@ claude mcp add dialtone --scope user -- npx -y @dialpad/dialtone-mcp-server
 
 This stores configuration in `~/.claude/mcp.json`.
 
-**Version checking:** The server connects to stdio before checking npm for updates. The advisory check is cancelled after two seconds or on shutdown. Offline, failed, or malformed registry replies are ignored. Valid version notices appear on stderr, keeping stdout available for MCP messages.
+**Version checking:** The server connects to stdio before checking npm for updates. The advisory check is cancelled after two seconds or on shutdown. Offline, failed, or malformed registry replies are ignored. Valid version notices appear on stderr, keeping stdout available for MCP messages. On stdin EOF, SIGINT, or SIGTERM, the server closes its transport, flushes queued output, and exits even if an aborted registry connection retains a handle.
 
 ## Updating
 

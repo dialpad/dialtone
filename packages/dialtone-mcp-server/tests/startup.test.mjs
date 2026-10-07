@@ -5,6 +5,7 @@ import { readFileSync } from 'node:fs';
 import { createInterface } from 'node:readline';
 import { test } from 'node:test';
 import { fileURLToPath } from 'node:url';
+import { JSONRPCMessageSchema } from '@modelcontextprotocol/sdk/types.js';
 
 const server = fileURLToPath(new URL('../build/index.js', import.meta.url));
 const registryFixture = fileURLToPath(new URL('./fixtures/registry.mjs', import.meta.url));
@@ -79,7 +80,8 @@ async function probe(t, scenario, { waitForTimeout = false, signal } = {}) {
   assert.equal(code, 0);
   assert.equal(exitSignal, null);
   assert.deepEqual(invalidLines, [], 'stdout must contain only JSON-RPC');
-  assert.deepEqual(stdout.map(message => message.id), [1]);
+  stdout.forEach(message => JSONRPCMessageSchema.parse(message));
+  assert.equal(stdout.filter(message => message.id === 1).length, 1);
   t.diagnostic(`${scenario}: initialize ${initializeMs}ms; shutdown ${Math.round(performance.now() - shutdownStarted)}ms`);
   return stderr;
 }
@@ -99,13 +101,17 @@ for (const scenario of ['offline', 'http-error', 'invalid-json', 'missing', 'num
 }
 
 test('valid update and current-version notices stay on stderr', { timeout: 8000 }, async t => {
-  assert.match(await probe(t, 'update'), /Update Available[\s\S]*Latest: {2}v99\.0\.0/);
+  const updateNotice = await probe(t, 'update');
+  assert.match(updateNotice, /Update Available[\s\S]*Latest: {2}v99\.0\.0/);
+  assert.match(updateNotice, /1\. npm install -D @dialpad\/dialtone-mcp-server@latest/);
+  assert.match(updateNotice, /2\. Restart this conversation/);
   assert.match(await probe(t, 'current'), /up to date/);
 });
 
 for (const signal of [undefined, 'SIGINT', 'SIGTERM']) {
-  test(`shutdown via ${signal ?? 'stdin EOF'} cancels a pending update`, { timeout: 5000 }, async t => {
-    const stderr = await probe(t, 'stalled-fetch', { signal });
-    assert.match(stderr, /\[registry fixture\] aborted/);
-  });
+  test(`shutdown via ${signal ?? 'stdin EOF'} exits when an aborted update retains a handle`,
+    { timeout: 5000 }, async t => {
+      const stderr = await probe(t, 'stalled-retained-handle', { signal });
+      assert.match(stderr, /\[registry fixture\] aborted/);
+    });
 }

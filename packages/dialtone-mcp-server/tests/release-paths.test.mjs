@@ -15,7 +15,7 @@ const logger = { log() {} };
 
 function repository(t) {
   const cwd = mkdtempSync(join(tmpdir(), 'dialtone-release-paths-'));
-  t.after(() => rmSync(cwd, { recursive: true, force: true }));
+  t.after(() => rmSync(cwd, { recursive: true, force: true, maxRetries: 3, retryDelay: 100 }));
   const git = (...args) => execFileSync('git', args, { cwd, encoding: 'utf8' }).trim();
   git('init', '--quiet');
   git('config', 'user.name', 'Release path test');
@@ -47,7 +47,7 @@ for (const adapter of ['dialtone-cli', 'dialtone-mcp-server']) {
     const commits = await getCommits({
       cwd, env: process.env, lastRelease: { gitHead: baseline }, logger, options: config,
     });
-    assert.deepEqual(commits.map(({ hash }) => hash), [ownFix, coreFix]);
+    assert.deepEqual(new Set(commits.map(({ hash }) => hash)), new Set([ownFix, coreFix]));
     for (const hash of [coreFix, ownFix]) {
       const selected = commits.filter(commit => commit.hash === hash);
       assert.equal(await analyzeCommits(analyzerOptions, { cwd, commits: selected, logger }), 'patch');

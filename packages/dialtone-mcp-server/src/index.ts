@@ -356,9 +356,23 @@ async function main() {
     updateController.abort();
   });
 
-  const shutdown = () => {
+  let shuttingDown = false;
+  const shutdown = async () => {
+    if (shuttingDown) return;
+    shuttingDown = true;
     updateController.abort();
-    void server.close().catch(console.error);
+    let exitCode = 0;
+    try {
+      await server.close();
+    } catch (error) {
+      console.error(error);
+      exitCode = 1;
+    }
+    // Flush queued protocol messages/notices before terminating lingering connection handles.
+    await Promise.all([process.stdout, process.stderr].map(stream =>
+      new Promise<void>(resolve => stream.write('', () => resolve())),
+    ));
+    process.exit(exitCode);
   };
   server.server.onclose = () => {
     clearTimeout(updateTimeout);
@@ -366,6 +380,7 @@ async function main() {
     process.stdin.off('end', shutdown);
     process.off('SIGINT', shutdown);
     process.off('SIGTERM', shutdown);
+    void shutdown();
   };
   process.stdin.once('end', shutdown);
   process.once('SIGINT', shutdown);
