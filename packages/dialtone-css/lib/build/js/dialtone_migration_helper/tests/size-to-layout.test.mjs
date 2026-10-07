@@ -85,3 +85,20 @@ describe('size-to-layout config', () => {
     });
   });
 });
+
+
+describe('value and context safety', () => {
+  for (const input of [
+    '.x { padding: var(--dt-size-50); }',
+    '.x { width: var(--dt-size-825); }',
+    '.x { --unknown: var(--dt-size-400); }',
+    '.x { line-height: var(--dt-size-500); }',
+    '.x { padding: var(--dt-size-720); }',
+    '.x { width: var(--dt-size-400-negative); }',
+  ]) {
+    it(`leaves ${input} for manual review`, () => assert.equal(apply(input), input));
+  }
+  it('preserves negative spacing value', () => {
+    assert.equal(apply('.x { margin: var(--dt-size-400-negative); }'), '.x { margin: var(--dt-spacing-100-negative); }');
+  });
+});

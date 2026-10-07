@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-09-30
+last_updated: 2026-10-07
 related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli]
 ---
 
@@ -41,7 +41,7 @@ These checks are required on every PR:
 
 ### `unit_tests.yml`
 
-**Trigger:** Push to `staging`, PR to any branch (paths: `packages/dialtone-vue/**`, `packages/dialtone-tokens/**`, `packages/combinator/**`, `packages/dialtone-query-core/**`, `packages/dialtone-cli/**`, and the data generators listed for `test-cli` below)
+**Trigger:** Push to `staging`, PR to any branch (paths: `packages/dialtone-vue/**`, `packages/dialtone-tokens/**`, `packages/combinator/**`, `packages/dialtone-query-core/**`, `packages/dialtone-cli/**`, CSS migration/metadata inputs, lint plugins, and the data generators and recommendation sources listed for `test-cli` below)
 
 **What it does:** A `changes` job (`dorny/paths-filter`) decides which test jobs run. Each job sets up the environment, then runs its command:
 
@@ -50,7 +50,15 @@ These checks are required on every PR:
 | `test` | `packages/dialtone-vue/**` | `pnpm nx run dialtone-vue:test:coverage` |
 | `test-tokens` | `packages/dialtone-tokens/**` | `pnpm nx run dialtone-tokens:test` |
 | `test-combinator` | `packages/combinator/**` | `pnpm nx run dialtone-combinator:test` |
-| `test-cli` | `packages/dialtone-query-core/**`, `packages/dialtone-cli/**`, and the data generators `scripts/build-dialtone-vue-docs.mjs`, `packages/dialtone-css/postcss/dialtone-docs.cjs`, `packages/dialtone-docs/src/generators/**` | `pnpm nx run-many -t test -p dialtone-query-core dialtone-cli` |
+| `test-cli` | Query-core/CLI, Vue/docs generators, CSS migration helpers/metadata, token-doc generation, MCP guide/client recommendations, CSS agent rules and this workflow | `pnpm nx run-many -t test -p dialtone-query-core dialtone-cli`; focused Node migration/metadata tests |
+| `test-lint-plugins` | Lint packages, canonical migration guidance, its generator and this workflow | Guidance generation check; ESLint/Stylelint package tests |
+
+The lookup job also runs helper migration tests and verifies generated
+utility metadata after building its data. CSS migration/helper and metadata
+changes trigger it. A separate `test-lint-plugins` job runs the ESLint and
+Stylelint suites, verifies source-value agreement and checks generated migration
+guidance against its source.
+Lint-only changes trigger that job without rebuilding the lookup adapters.
 
 The `test` job outputs a coverage report in JSON and HTML. Coverage thresholds enforced: 80% branches, 70% functions, 85% lines and statements. Build fails if thresholds are not met.
 

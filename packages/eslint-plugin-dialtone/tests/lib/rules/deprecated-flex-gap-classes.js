@@ -48,7 +48,7 @@ ruleTester.run("deprecated-flex-gap-classes", rule, {
   invalid: [
     {
       code: "<template><div class=\"d-fl-col2 d-flg8\" /></template>",
-      errors: [{ messageId: 'recommendFlexGapStyle' }],
+      errors: [{ message: /d-g-100.*manual layout review/i }],
     },
     {
       code: "<template><div class=\"d-fl-col12 d-flg8\" /></template>",

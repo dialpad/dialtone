@@ -3,6 +3,7 @@
  * @author Tico Ortega
  */
 "use strict";
+const { SPACING_MAP } = require('../generated/migration-guidance.json');
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -19,8 +20,7 @@ module.exports = {
     fixable: null, // Or `code` or `whitespace`
     schema: [], // Add a schema if the rule has options
     messages: {
-      recommendFlexGapStyle: `Usage of d-flg* utility classes are deprecated and will be removed in the future. 
-      Checkout the available replacements here: https://dialtone.dialpad.com/utilities/flex/gap.html`,
+      recommendFlexGapStyle: `Legacy flex-gap utilities are deprecated in Dialtone 10. Use current token-stop gap utilities (e.g. d-g-${SPACING_MAP[8]}); child-margin gutters require manual layout review before using native gap. See https://dialtone.dialpad.com/utilities/flex/gap.html`,
     }, // Add messageId and message
   },
 

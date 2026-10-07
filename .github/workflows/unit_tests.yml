@@ -8,8 +8,17 @@ on:
       - 'packages/combinator/**'
       - 'packages/dialtone-query-core/**'
       - 'packages/dialtone-cli/**'
+      - 'packages/dialtone-css/lib/build/js/dialtone_migration_helper/**'
+      - 'packages/dialtone-css/postcss/**'
+      - 'packages/eslint-plugin-dialtone/**'
+      - 'packages/stylelint-plugin-dialtone/**'
+      - 'scripts/generate-migration-guidance.mjs'
+      - '.github/workflows/unit_tests.yml'
+      - 'apps/dialtone-documentation/docs/guides/mcp-server/index.md'
+      - 'packages/dialtone-mcp-server/client-rules.json'
+      - '.agents/resources/rules/css-utilities.md'
+      - '.claude/rules/css-utilities.md'
       - 'scripts/build-dialtone-vue-docs.mjs'
-      - 'packages/dialtone-css/postcss/dialtone-docs.cjs'
       - 'packages/dialtone-docs/src/generators/**'
   push:
     branches:
@@ -20,8 +29,17 @@ on:
       - 'packages/combinator/**'
       - 'packages/dialtone-query-core/**'
       - 'packages/dialtone-cli/**'
+      - 'packages/dialtone-css/lib/build/js/dialtone_migration_helper/**'
+      - 'packages/dialtone-css/postcss/**'
+      - 'packages/eslint-plugin-dialtone/**'
+      - 'packages/stylelint-plugin-dialtone/**'
+      - 'scripts/generate-migration-guidance.mjs'
+      - '.github/workflows/unit_tests.yml'
+      - 'apps/dialtone-documentation/docs/guides/mcp-server/index.md'
+      - 'packages/dialtone-mcp-server/client-rules.json'
+      - '.agents/resources/rules/css-utilities.md'
+      - '.claude/rules/css-utilities.md'
       - 'scripts/build-dialtone-vue-docs.mjs'
-      - 'packages/dialtone-css/postcss/dialtone-docs.cjs'
       - 'packages/dialtone-docs/src/generators/**'
 
 env:
@@ -42,6 +60,7 @@ jobs:
       tokens: ${{ steps.filter.outputs.tokens }}
       combinator: ${{ steps.filter.outputs.combinator }}
       cli: ${{ steps.filter.outputs.cli }}
+      lint_plugins: ${{ steps.filter.outputs.lint_plugins }}
     steps:
       - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3
@@ -58,9 +77,22 @@ jobs:
             cli:
               - 'packages/dialtone-query-core/**'
               - 'packages/dialtone-cli/**'
+              - 'packages/dialtone-css/lib/build/js/dialtone_migration_helper/**'
+              - 'packages/dialtone-css/postcss/**'
+              - 'packages/dialtone-tokens/build-docs.js'
+              - '.github/workflows/unit_tests.yml'
+              - 'apps/dialtone-documentation/docs/guides/mcp-server/index.md'
+              - 'packages/dialtone-mcp-server/client-rules.json'
+              - '.agents/resources/rules/css-utilities.md'
+              - '.claude/rules/css-utilities.md'
               - 'scripts/build-dialtone-vue-docs.mjs'
-              - 'packages/dialtone-css/postcss/dialtone-docs.cjs'
               - 'packages/dialtone-docs/src/generators/**'
+            lint_plugins:
+              - 'packages/eslint-plugin-dialtone/**'
+              - 'packages/stylelint-plugin-dialtone/**'
+              - 'packages/dialtone-css/lib/build/js/dialtone_migration_helper/**'
+              - 'scripts/generate-migration-guidance.mjs'
+              - '.github/workflows/unit_tests.yml'
 
   test:
     needs: changes
@@ -129,3 +161,33 @@ jobs:
 
       - name: Run dialtone-query-core and dialtone-cli tests
         run: pnpm nx run-many -t test -p dialtone-query-core dialtone-cli
+
+      - name: Test generated utility metadata and migration helpers
+        run: >-
+          node --test
+          packages/dialtone-css/postcss/dialtone-docs.test.cjs
+          packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/space-to-spacing.test.mjs
+          packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/size-to-layout.test.mjs
+          packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/utility-class-to-token-stops.test.mjs
+
+  test-lint-plugins:
+    needs: changes
+    if: needs.changes.outputs.lint_plugins == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      packages: read
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Check generated migration guidance
+        run: node scripts/generate-migration-guidance.mjs --check
+
+      - name: Test Dialtone ESLint rules
+        run: pnpm --dir packages/eslint-plugin-dialtone test
+
+      - name: Test Dialtone Stylelint rules
+        run: pnpm --dir packages/stylelint-plugin-dialtone test

@@ -16,9 +16,11 @@ import type {
  */
 export function searchTokens(query: string, data: TokensData, options?: { includeHsl?: boolean }): { results: SearchResult[]; notes: string[] } {
   console.error(`\n[TOKEN SEARCH DEBUG] Query: "${query}"`);
+  if (!query.trim()) return { results: [], notes: [] };
+  const exactName = query.trim().replace(/^var\(([^)]+)\)$/, '$1').toLowerCase();
 
   // Normalize query: lowercase, replace hyphens/slashes with spaces
-  const normalized = query.toLowerCase().replace(/[/-]/g, ' ');
+  const normalized = exactName.replace(/[/-]/g, ' ');
   const words = normalized.split(/\s+/).filter(w => w.length > 0);
 
   // Create regex for each word (handle px/rem conversion)
@@ -100,7 +102,11 @@ export function searchTokens(query: string, data: TokensData, options?: { includ
   console.error(`[TOKEN SEARCH DEBUG] Found ${results.length} raw matches`);
 
   // Apply smart filter (remove deprecated, swap discouraged with alternatives)
-  const { results: filtered, notes } = applySmartFilter(results, data);
+  const explicit = results.filter(result => result.name.toLowerCase() === exactName);
+  const { results: filtered, notes } = applySmartFilter(results.filter(result => !explicit.includes(result)), data);
+  filtered.unshift(...explicit);
+  filtered.sort((a, b) => Number(b.name.toLowerCase() === exactName) - Number(a.name.toLowerCase() === exactName)
+    || a.name.localeCompare(b.name));
 
   console.error(`[TOKEN SEARCH DEBUG] After filter: ${filtered.length} results\n`);
 
@@ -142,7 +148,7 @@ export function formatTokenResults(results: SearchResult[], query: string): stri
 
     // Show theme variants
     output += `   Theme Variants:\n`;
-    const themes = Object.entries(result.details.allThemes) as [string, ThemeData][];
+    const themes = Object.entries(result.details.allThemes).filter(([name]) => name !== 'metadata') as [string, ThemeData][];
 
     // Show first few themes as examples
     const themesToShow = themes.slice(0, 3);
@@ -158,7 +164,14 @@ export function formatTokenResults(results: SearchResult[], query: string): stri
     }
 
     // Show usage example
-    output += `   Usage: style="color: var(${result.name})"\n`;
+    const property = /--dt-(spacing|space)-.*-negative$/.test(result.name) ? 'margin'
+      : /--dt-(spacing|space)-/.test(result.name) ? 'padding'
+      : /--dt-layout-/.test(result.name) ? 'inline-size'
+        : /--dt-size-radius-/.test(result.name) ? 'border-radius'
+          : /--dt-size-border-/.test(result.name) ? 'border-width'
+            : /color/.test(result.name) ? 'color' : null;
+    if (property) output += `   Usage: style="${property}: var(${result.name})"\n`;
+    else output += `   Usage: var(${result.name}) — choose a property appropriate to this token.\n`;
     output += `   Note: This will automatically use the correct value for the active theme.\n\n`;
   });
 

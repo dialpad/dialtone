@@ -1,0 +1,18 @@
+{
+  "SPACE_TOKEN_MAP": {
+    "0": "spacing-0",
+    "100": "spacing-1",
+    "200": "spacing-25",
+    "300": "spacing-50",
+    "350": "spacing-75",
+    "400": "spacing-100",
+    "450": "spacing-150",
+    "500": "spacing-200",
+    "525": "spacing-250",
+    "550": "spacing-300",
+    "600": "spacing-400",
+    "625": "spacing-525",
+    "650": "spacing-600",
+    "700": "spacing-800"
+  }
+}

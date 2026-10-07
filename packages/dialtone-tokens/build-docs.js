@@ -21,7 +21,7 @@ export function buildDocs (platformName, theme, currentObj) {
   const isCompositionToken = currentObj?.isCompositionToken ?? undefined;
   const tokenDeprecated = currentObj?.$deprecated ?? currentObj?.deprecated ?? undefined;
 
-  if (tokenValue && tokenPath) {
+  if (tokenValue !== undefined && tokenValue !== null && tokenPath) {
     const tokenKey = tokenPath.join('/');
 
     docTokens[theme][tokenKey] = {

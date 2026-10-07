@@ -38,7 +38,7 @@ export function extractKeywords(query: string, compoundProperties: Set<string>):
   const normalized = query.toLowerCase();
   const words = normalized.split(/\s+/).filter(w => w.length > 0);
 
-  // Convert px values to rem for Dialtone's 10-based scale
+  // Convert px values to rem for Dialtone's 10px rem base
   const convertedWords = words.flatMap((word: string) => {
     if (word.endsWith('px')) {
       const px = parseFloat(word);
@@ -111,6 +111,8 @@ export function valueMatchesKeyword(value: string, description: string | undefin
  */
 export function searchUtilityClasses(query: string, data: UtilityClassesData): { results: SearchResult[]; notes: string[] } {
   console.error(`\n[CLASS SEARCH DEBUG] Query: "${query}"`);
+  if (!query.trim()) return { results: [], notes: [] };
+  const exactName = query.trim().replace(/^\./, '').toLowerCase();
 
   // Normalize query: lowercase, replace hyphens/slashes with spaces
   const normalized = query.toLowerCase().replace(/[/-]/g, ' ');
@@ -151,7 +153,20 @@ export function searchUtilityClasses(query: string, data: UtilityClassesData): {
     const searchableTexts = [className.toLowerCase()];
 
     for (const valueObj of classData.values) {
-      searchableTexts.push(valueObj.prop?.toLowerCase() || '');
+      const prop = valueObj.prop?.toLowerCase() || '';
+      searchableTexts.push(prop);
+      // Physical and logical directions coincide only in horizontal-tb/LTR.
+      // Keep this vocabulary bounded to padding/margin/inset recovery.
+      const directionAliases: Record<string, string> = {
+        'block-start': 'top', 'block-end': 'bottom',
+        'inline-start': 'left', 'inline-end': 'right',
+      };
+      for (const [logical, physical] of Object.entries(directionAliases)) {
+        if (/^(padding|margin|inset)-/.test(prop)) {
+          searchableTexts.push(prop.replace(logical, physical).replace(`-${physical}`, `-${logical}`));
+          searchableTexts.push(prop.replace(logical, physical));
+        }
+      }
       searchableTexts.push(valueObj.value?.toLowerCase() || '');
       searchableTexts.push(valueObj.description?.toLowerCase() || '');
     }
@@ -176,7 +191,17 @@ export function searchUtilityClasses(query: string, data: UtilityClassesData): {
   console.error(`[CLASS SEARCH DEBUG] Found ${results.length} raw matches`);
 
   // Apply smart filter (remove deprecated, swap discouraged with alternatives)
-  const { results: filtered, notes } = applySmartFilter(results, data);
+  const explicit = results.filter(result => result.name.toLowerCase() === exactName);
+  const { results: filtered, notes } = applySmartFilter(results.filter(result => !explicit.includes(result)), data);
+  filtered.unshift(...explicit);
+  filtered.sort((a, b) => {
+    const rank = (name: string) => name.toLowerCase() === exactName ? 0
+      : regexArray.every(regex => regex.test(name)) ? 1 : 2;
+    return rank(a.name) - rank(b.name) || a.name.localeCompare(b.name);
+  });
+  if (/\b(padding|margin|inset)\s+(top|bottom|left|right|block|inline)\b/i.test(query)) {
+    notes.push('Physical/logical direction matches assume horizontal-tb and left-to-right writing; verify the writing mode.');
+  }
 
   console.error(`[CLASS SEARCH DEBUG] After filter: ${filtered.length} results\n`);
 

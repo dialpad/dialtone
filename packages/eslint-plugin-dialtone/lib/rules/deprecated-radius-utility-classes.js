@@ -7,21 +7,7 @@
 
 const { START, END, buildDetectRegex, createClassAttributeRule } = require('../util/class-attribute-rule');
 
-// MUST STAY IN SYNC with:
-// - RADIUS_STOPS in dialtone-css/postcss/constants.cjs
-// - RADIUS_MAP / RADIUS_PAIR_PREFIX_MAP in dialtone-css/.../migration_helper/configs/utility-class-to-token-stops.mjs
-
-const RADIUS_STOP_MAP = {
-  0: '0', 1: '100', 2: '200', 4: '300', 6: '350',
-  8: '400', 12: '450', 16: '500', 24: '550', 32: '600',
-};
-
-const PAIR_PREFIX_MAP = {
-  btr: 'bbsr', // top    → block-start pair
-  bbr: 'bber', // bottom → block-end pair
-  blr: 'bisr', // left   → inline-start pair
-  brr: 'bier', // right  → inline-end pair
-};
+const { RADIUS_MAP: RADIUS_STOP_MAP, RADIUS_PAIR_PREFIX_MAP: PAIR_PREFIX_MAP } = require('../generated/migration-guidance.json');
 
 // Ordered by descending string length so regex alternation matches longest first
 // (.d-bar32 resolves as `32`, not `3`).
