@@ -14,7 +14,7 @@
     "start": "node build/index.js",
     "dev": "tsx src/index.ts",
     "test": "node test-search.js",
-    "test:startup": "pnpm exec nx run dialtone-mcp-server:test-startup",
+    "test:startup": "node --test tests/startup.test.mjs",
     "test:release-paths": "node --test tests/release-paths.test.mjs",
     "test:acceptance": "node scripts/run-acceptance-scenarios.mjs",
     "interactive": "tsx interactive-search.ts",

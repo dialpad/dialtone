@@ -200,8 +200,10 @@ Startup and shutdown regressions build the server and its prerequisites first:
 pnpm nx run dialtone-mcp-server:test-startup
 ```
 
-From the package directory, `pnpm run test:startup` runs the same target.
+From the package directory, `pnpm run test:startup` invokes `node --test` directly
+and requires an existing server build. Use the Nx target above to build first.
 Release-path regressions run with `pnpm run test:release-paths`.
+Both regression suites run in the path-filtered Unit Tests workflow.
 
 From the package directory:
 ```bash
