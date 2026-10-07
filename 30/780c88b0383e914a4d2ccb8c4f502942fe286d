@@ -1,0 +1,26 @@
+apps/dialtone-documentation/docs/scratch.md
+  s_15cf27efeb3a97::t_7e8c5f81cb8dea 672-705
+  h_c15b5755534093 91-221,223-248,250-275,277-299,339-340
+  s_15cf27efeb3a97::t_476301afd5c5ba 706
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.16",
+  "base_commit_sha": "30780c88b0383e914a4d2ccb8c4f502942fe286d",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_15cf27efeb3a97": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f9467-f3fb-7fe3-8f43-93e4dad7fd5a",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

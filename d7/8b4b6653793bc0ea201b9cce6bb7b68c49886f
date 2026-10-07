@@ -1,0 +1,19 @@
+packages/dialtone-icons/package.json
+  s_c41cee8710b5c5::t_10030eba630870 7,11-13,15-20,22-23,26-27,30-31,34,36-37,40-41,44-45
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "d78b4b6653793bc0ea201b9cce6bb7b68c49886f",
+  "prompts": {},
+  "sessions": {
+    "s_c41cee8710b5c5": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "32e69512-16da-4919-9cad-38aaaa0b7ca9",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

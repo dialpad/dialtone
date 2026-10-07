@@ -1,0 +1,26 @@
+.agents/resources/package-map.md
+  s_f1e475b2b85669::t_72521eba618bc9 21
+apps/dialtone-documentation/docs/components/rich-text-editor.md
+  s_f1e475b2b85669::t_43c2679f868487 11
+packages/dialtone-docs/src/content/development/development-testing.md
+  s_f1e475b2b85669::t_dc0f8593c71054 25
+packages/dialtone-docs/src/content/development/development-component-workflow.md
+  s_f1e475b2b85669::t_23b0782e434fd2 4
+  s_f1e475b2b85669::t_5a0f5f97503bdc 52-53
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "18e7db8fa8a3ce3e217545aba5f58ce075856238",
+  "prompts": {},
+  "sessions": {
+    "s_f1e475b2b85669": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "98b44e92-f9e2-44b0-a503-6f36763110f8",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+packages/dialtone-vue/components/Tooltip/TooltipVariants.story.vue
+  s_50ca0bdecfb15a::t_b1faf2d4c7fee9 106-120
+  s_50ca0bdecfb15a::t_90a30e5996ee98 101-102
+  s_50ca0bdecfb15a::t_750b7bf7dca082 103-105
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "056540de9fdc9bb2fcdcb8483780d58b48a530a0",
+  "prompts": {},
+  "sessions": {
+    "s_50ca0bdecfb15a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0ed74-0cf1-7e93-95e3-9941d8424ccb",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "Josh Everhart <josh.everhart@dialpad.com>"
+    }
+  }
+}
