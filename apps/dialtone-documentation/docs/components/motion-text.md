@@ -122,6 +122,7 @@ Until `start()` is called, the reveal modes (`gradient-in`, `fade-in`, `slide-in
       ref="manualDemoRef"
       text="Welcome to Dialtone Motion Text"
       animation-mode="slide-in-gradient"
+      :auto-start="false"
     />
   </dt-text>
 </dt-stack>

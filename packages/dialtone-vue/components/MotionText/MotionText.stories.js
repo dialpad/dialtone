@@ -45,7 +45,7 @@ export const argTypesData = {
     },
     options: MOTION_TEXT_ANIMATION_MODES,
     description: 'The word-by-word animation to play. gradient-in, fade-in, slide-in and slide-in-gradient reveal ' +
-      'the text; gradient-sweep and shimmer play over text that is already visible; none shows the text immediately.',
+      'the text; gradient-sweep and shimmer play over text that is already visible.',
     table: {
       category: 'props',
       type: {

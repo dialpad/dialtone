@@ -54,6 +54,7 @@
 <script>
 import {
   MOTION_TEXT_ANIMATION_MODES,
+  MOTION_TEXT_DEPRECATED_ANIMATION_MODES,
   MOTION_TEXT_MODE_SETTINGS,
   MOTION_TEXT_SPEEDS,
   MOTION_TEXT_TIMING_PRESETS,
@@ -62,7 +63,7 @@ import {
 import { getGradientSlices, splitWords } from './utils';
 
 const DEFAULT_PRESET = MOTION_TEXT_TIMING_PRESETS['300'];
-// Unsupported modes (such as the removed 'none') render the text at rest
+// Unsupported and deprecated modes (such as 'none') render the text at rest
 const RESTING_SETTINGS = { tracks: [], gradient: false, loopHold: 0 };
 
 export default {
@@ -79,13 +80,14 @@ export default {
     },
 
     /**
-     * The animation mode to use for the text reveal.
+     * The animation mode to use for the text reveal. `none` is deprecated and renders the text at rest.
      * @values gradient-in, fade-in, slide-in, slide-in-gradient, gradient-sweep, shimmer
      */
     animationMode: {
       type: String,
       default: 'gradient-in',
-      validator: (value) => MOTION_TEXT_ANIMATION_MODES.includes(value),
+      validator: (value) => MOTION_TEXT_ANIMATION_MODES.includes(value) ||
+        MOTION_TEXT_DEPRECATED_ANIMATION_MODES.includes(value),
     },
 
     /**
@@ -265,7 +267,15 @@ export default {
   watch: {
     text () {
       this.reset();
-      this.initializeContent();
+
+      if (this.text) {
+        this.initializeContent();
+        return;
+      }
+
+      // Slot content only renders once the words are cleared, so read it on the next tick
+      this.words = [];
+      this.$nextTick(() => this.initializeContent());
     },
 
     animationMode () {
@@ -293,7 +303,7 @@ export default {
   },
 
   mounted () {
-    this.watchReducedMotion();
+    this.initWatchReducedMotion();
     this.initializeContent();
 
     // Word widths change once web fonts load, which would misalign the gradient slices
@@ -319,7 +329,7 @@ export default {
     /**
      * Track the reduced motion preference, finishing any running animation if it turns on
      */
-    watchReducedMotion () {
+    initWatchReducedMotion () {
       if (typeof window === 'undefined' || !window.matchMedia) return;
 
       const query = window.matchMedia('(prefers-reduced-motion: reduce)');

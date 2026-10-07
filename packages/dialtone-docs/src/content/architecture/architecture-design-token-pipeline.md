@@ -3,7 +3,7 @@ type: architecture
 category: architecture
 keywords: [design-tokens, style-dictionary, figma, dialtone-tokens, css-custom-properties, less, themes, token-pipeline, rem, runtime-theming]
 ai_summary: How Dialtone tokens flow from Figma through Style Dictionary into CSS, LESS, JS, and Vue across 50+ brands with a four-dimension layered runtime API.
-last_updated: 2026-05-09
+last_updated: 2026-10-07
 related_packages: [dialtone-tokens, dialtone-css, dialtone-vue]
 ---
 

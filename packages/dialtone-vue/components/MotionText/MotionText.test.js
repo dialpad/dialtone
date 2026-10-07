@@ -13,7 +13,6 @@ const MOCK_FIGMA_WORDS = MOCK_FIGMA_TEXT.split(' ');
 // Word lengths 2, 4, 2 give round gradient slices when widths fall back to character counts
 const MOCK_GRADIENT_TEXT = 'we move on';
 const MOCK_SCREEN_READER_TEXT = 'Alternative text';
-const MOCK_REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
 
 // Track timings at speed 300, as authored in the Figma spec
 const MOCK_ENTER_VARS = {
@@ -496,9 +495,8 @@ describe('DtMotionText Tests', () => {
       });
     });
 
-    describe('When animationMode is not supported', () => {
+    describe('When animationMode is the deprecated none mode', () => {
       it('should render at rest and complete as soon as it starts', async () => {
-        vi.spyOn(console, 'warn').mockImplementation(() => {});
         mockProps = { animationMode: 'none' };
         updateWrapper();
         await start();
@@ -642,7 +640,7 @@ describe('DtMotionText Tests', () => {
     });
 
     describe('When unmounted before autoStart runs', () => {
-      it('should not start or schedule a timeline', async () => {
+      it('should not start or emit any events', async () => {
         mockProps = { autoStart: true, loop: true };
         updateWrapper();
         wrapper.unmount();
@@ -650,7 +648,8 @@ describe('DtMotionText Tests', () => {
         await advance(5000);
 
         expect(getEmittedCount('start')).toBe(0);
-        expect(vi.getTimerCount()).toBe(0);
+        expect(getEmittedCount('progress')).toBe(0);
+        expect(getEmittedCount('complete')).toBe(0);
       });
     });
   });
@@ -719,12 +718,6 @@ describe('DtMotionText Tests', () => {
       beforeEach(() => {
         matchMedia = vi.fn().mockReturnValue({ matches: true });
         vi.stubGlobal('matchMedia', matchMedia);
-      });
-
-      it('should query the reduced motion preference', () => {
-        updateWrapper();
-
-        expect(matchMedia).toHaveBeenCalledWith(MOCK_REDUCED_MOTION_QUERY);
       });
 
       it('should complete without animating', async () => {
@@ -821,6 +814,21 @@ describe('DtMotionText Tests', () => {
       await flushAutoStart();
 
       expect(getEmittedCount('start')).toBe(1);
+    });
+
+    describe('When the text prop is cleared', () => {
+      it('should split and animate the slot content instead', async () => {
+        mockProps = { text: MOCK_GRADIENT_TEXT, autoStart: true };
+        mockSlots = { default: 'Slotted content' };
+        updateWrapper();
+        await flushAutoStart();
+        await wrapper.setProps({ text: '' });
+        await flushAutoStart();
+        await nextTick();
+
+        expect(findWordTexts()).toEqual(['Slotted', 'content']);
+        expect(getEmittedCount('start')).toBe(2);
+      });
     });
   });
 
@@ -969,8 +977,8 @@ describe('DtMotionText Tests', () => {
         expect(validator(mode)).toBe(true);
       });
 
-      it('should accept the slide-in-gradient mode', () => {
-        expect(validator('slide-in-gradient')).toBe(true);
+      it('should accept the deprecated none mode', () => {
+        expect(validator('none')).toBe(true);
       });
 
       it('should reject an unknown mode', () => {

@@ -8,41 +8,23 @@ export const MOTION_TEXT_ANIMATION_MODES = [
   'shimmer',
 ];
 
+// Still accepted so existing usages keep working; they render the text at rest
+export const MOTION_TEXT_DEPRECATED_ANIMATION_MODES = ['none'];
+
 // Speed options
 export const MOTION_TEXT_SPEEDS = ['100', '200', '300', '400', '500'];
 
 // Timing presets based on speed. `duration` relative to the 300 preset sets how much
-// every motion timing is scaled (300 plays the Figma spec as authored).
-// `characterDelay` and `wordDelay` are no longer used: animation is word-level.
+// every motion timing is scaled (300 plays the design spec as authored).
 export const MOTION_TEXT_TIMING_PRESETS = {
-  100: {
-    characterDelay: 10,
-    wordDelay: 15,
-    duration: 300,
-  },
-  200: {
-    characterDelay: 20,
-    wordDelay: 30,
-    duration: 600,
-  },
-  300: {
-    characterDelay: 30,
-    wordDelay: 50,
-    duration: 1000,
-  },
-  400: {
-    characterDelay: 50,
-    wordDelay: 100,
-    duration: 1500,
-  },
-  500: {
-    characterDelay: 80,
-    wordDelay: 180,
-    duration: 2100,
-  },
+  100: { duration: 300 },
+  200: { duration: 600 },
+  300: { duration: 1000 },
+  400: { duration: 1500 },
+  500: { duration: 2100 },
 };
 
-// Per-word animation tracks in ms at speed 300, from the "Motion-Text-Effects" Figma spec.
+// Per-word animation tracks in ms at speed 300, from the Motion Text design spec.
 // Word `i` starts at `delay + stagger * i` and runs for `duration`.
 export const MOTION_TEXT_TRACKS = {
   // Word fades in (and rises, for slide modes)
