@@ -54,7 +54,8 @@ interface Found {
   file: string;
   source: LocalSource;
   exports: Record<string, unknown>; // the package's exports map
-  manifest: string;
+  module?: unknown; // the legacy ESM entry, only when there is no exports map
+  root: string; // the package folder's real path
 }
 
 type Parts = Partial<Record<Exclude<Domain, 'docs'>, Found | null>>;
@@ -96,13 +97,14 @@ function tryRead(fromDir: string, specifier: string): Found | null {
     // Resolving the package's own name from inside it applies its exports map.
     // The real path keeps the check below valid when Node preserves symlinks.
     const file = realpathSync(createRequire(manifest).resolve(specifier));
+    const root = realpathSync(dirname(manifest));
     // Without an exports map, resolve() falls back to Node's full lookup,
     // NODE_PATH included, so only accept the package's own files.
-    if (!file.startsWith(realpathSync(dirname(manifest)) + sep)) return null;
+    if (!file.startsWith(root + sep)) return null;
     const data = JSON.parse(readFileSync(file, 'utf-8'));
     if (data === null) return null;
-    const { version, exports } = JSON.parse(readFileSync(manifest, 'utf-8'));
-    return { data, file, source: { kind: 'local', package: packageName, version }, exports: exports ?? {}, manifest };
+    const { version, exports, module } = JSON.parse(readFileSync(manifest, 'utf-8'));
+    return { data, file, source: { kind: 'local', package: packageName, version }, exports: exports ?? {}, module: exports ? undefined : module, root };
   } catch {
     return null;
   }
@@ -159,14 +161,11 @@ function installedComponentNames(found: Found, importFrom: string): string[] | n
     return null;
   }
   try {
-    const manifest = JSON.parse(readFileSync(found.manifest, 'utf8'));
     const subpath = importFrom === found.source.package ? '.' : `.${importFrom.slice(found.source.package.length)}`;
-    const target = importTarget(found.exports[subpath])
-      ?? (subpath === '.' && !manifest.exports ? manifest.module : null);
+    const target = importTarget(found.exports[subpath]) ?? (subpath === '.' ? found.module : null);
     if (typeof target !== 'string' || !target.startsWith('./')) return null;
-    const root = realpathSync(dirname(found.manifest));
-    const file = realpathSync(join(root, target));
-    if (!file.startsWith(root + sep)) return null;
+    const file = realpathSync(join(found.root, target));
+    if (!file.startsWith(found.root + sep)) return null;
     return parseComponentExports(readFileSync(file, 'utf8'));
   } catch {
     return null;

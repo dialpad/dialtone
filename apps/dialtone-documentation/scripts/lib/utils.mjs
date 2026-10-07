@@ -19,6 +19,15 @@ export function componentRootImportName (record) {
   return (routes.find(route => route.name === record.identity.canonicalName) ?? routes[0])?.name ?? null;
 }
 
+/** The docs import for a record and its companions, or null when no route is certified. */
+export function componentImportLine (records, record, alsoImport = []) {
+  const main = componentRootImportName(record);
+  if (!main) return null;
+  const companions = alsoImport.map(name => componentRootImportName(findComponentRecord(records, name)));
+  const names = [main, ...companions.filter(Boolean)];
+  return `import { ${[...new Set(names)].join(', ')} } from '@dialpad/dialtone-vue';`;
+}
+
 /**
  * Collapse whitespace and trim text for use inside a backtick-wrapped table cell.
  * Pipes inside backtick code spans are literal in GFM, so no escaping needed.

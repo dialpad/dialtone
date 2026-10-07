@@ -23,7 +23,7 @@
 import { computed, inject } from 'vue';
 import Prism from 'prismjs';
 import ComponentVueApiTable from './ComponentVueApiTable.vue';
-import { findComponentRecord, componentRootImportName } from '../../../scripts/lib/utils.mjs';
+import { findComponentRecord, componentImportLine } from '../../../scripts/lib/utils.mjs';
 
 const props = defineProps({
   componentName: {
@@ -52,16 +52,7 @@ const props = defineProps({
 const componentDocs = inject('dialtoneComponentsDocumentation');
 const componentDoc = findComponentRecord(componentDocs, props.componentName);
 
-const importStatement = computed(() => {
-  const mainName = componentRootImportName(componentDoc);
-  if (!mainName) return '';
-  const names = [mainName];
-  for (const name of props.alsoImport) {
-    const exportedName = componentRootImportName(findComponentRecord(componentDocs, name));
-    if (exportedName) names.push(exportedName);
-  }
-  return `import { ${[...new Set(names)].join(', ')} } from '@dialpad/dialtone-vue';`;
-});
+const importStatement = computed(() => componentImportLine(componentDocs, componentDoc, props.alsoImport) ?? '');
 
 const highlightedImport = computed(() => {
   return Prism.highlight(importStatement.value, Prism.languages.javascript, 'javascript');

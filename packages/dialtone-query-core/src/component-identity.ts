@@ -10,6 +10,11 @@ export interface InstalledComponentExports {
 /** Normalize identity without inventing API facts absent from older metadata. */
 export function normalizeComponents(records: Component[], installed?: InstalledComponentExports): Component[] {
   const names = installed?.names ? new Set(installed.names) : null;
+  const namesByKey = new Map<string, string[]>();
+  for (const name of names ?? []) {
+    const key = normalizeComponentName(name);
+    namesByKey.set(key, [...(namesByKey.get(key) ?? []), name]);
+  }
   return records.map(record => {
     const identity = record.schemaVersion === 2 ? record.identity : undefined;
     const recordedName = identity?.canonicalName || record.displayName;
@@ -23,7 +28,7 @@ export function normalizeComponents(records: Component[], installed?: InstalledC
         : names?.has(`Dt${recordedName}`) ? `Dt${recordedName}` : recordedName;
       let ambiguous = false;
       if (names && !names.has(canonicalName)) {
-        const matches = [...names].filter(name => normalizeComponentName(name) === normalizeComponentName(recordedName));
+        const matches = namesByKey.get(normalizeComponentName(recordedName)) ?? [];
         if (matches.length === 1) canonicalName = matches[0];
         ambiguous = matches.length > 1;
       }
@@ -66,9 +71,18 @@ export function componentImportNote(identity?: ComponentIdentity): string {
     : 'Import unverified: upgrade component metadata or verify the exports of the installed package before importing.';
 }
 
-/** Canonical/alias comparisons accept authored camel, kebab and snake names. */
+/** Lowercase and drop separators, keeping any "Dt" prefix. */
+export function compactName(name: string): string {
+  return name.toLowerCase().replace(/[^a-z0-9]/g, '');
+}
+
+/**
+ * Canonical/alias comparisons accept authored camel, kebab and snake names and
+ * an optional "Dt" prefix: "DtButtonGroup", "button-group" and "Button Group"
+ * all become "buttongroup".
+ */
 export function normalizeComponentName(name: string): string {
-  return name.toLowerCase().replace(/[^a-z0-9]/g, '').replace(/^dt/, '');
+  return compactName(name).replace(/^dt/, '');
 }
 
 export function componentNames(component: Component): string[] {

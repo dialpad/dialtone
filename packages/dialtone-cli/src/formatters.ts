@@ -17,8 +17,10 @@ import type {
 
 export type Format = 'minimal' | 'markdown' | 'json';
 
-export function importStatement(identity?: ComponentIdentity, importFrom?: string): string | null {
-  return componentImportStatement(identity, importFrom);
+// The verified import, or why no import is shown.
+function importLine(identity: ComponentIdentity | undefined, importFrom: string): string {
+  const statement = componentImportStatement(identity, importFrom);
+  return statement ? `Import: ${statement}` : componentImportNote(identity);
 }
 
 // ── Table helper ────────────────────────────────────────────────────────────
@@ -110,8 +112,7 @@ function minimalComponent(result: SearchResult, importFrom: string, describe = f
     lines.push(slotsTable(result.details.slots));
   }
 
-  const statement = importStatement(result.details.identity, importFrom);
-  lines.push('', statement ? `Import: ${statement}` : componentImportNote(result.details.identity));
+  lines.push('', importLine(result.details.identity, importFrom));
 
   return lines.join('\n');
 }
@@ -186,7 +187,7 @@ function markdownComponent(result: SearchResult, importFrom: string): string {
     });
   }
 
-  const statement = importStatement(result.details.identity, importFrom);
+  const statement = componentImportStatement(result.details.identity, importFrom);
   lines.push('', '## Usage', '', ...(statement ? ['```vue', statement, '```'] : [componentImportNote(result.details.identity)]));
   return lines.join('\n');
 }
@@ -238,8 +239,7 @@ export function formatPrompt(component: Component, importFrom: string): string {
     lines.push(`Events: ${component.events.map((e: ComponentEvent) => e.name).join(', ')}`);
   }
 
-  const statement = importStatement(component.identity, importFrom);
-  lines.push(statement ? `Import: ${statement}` : componentImportNote(component.identity));
+  lines.push(importLine(component.identity, importFrom));
   return lines.join('\n');
 }
 
@@ -271,7 +271,7 @@ export function formatComponentOutput(result: SearchResult, format: Format, filt
   }
 
   if (filter === 'examples') {
-    const statement = importStatement(result.details.identity, options.importFrom);
+    const statement = componentImportStatement(result.details.identity, options.importFrom);
     return statement ? `${statement}\n\n<${result.name} />` : componentImportNote(result.details.identity);
   }
 

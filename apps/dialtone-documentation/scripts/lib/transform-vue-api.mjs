@@ -6,7 +6,7 @@
  */
 
 import { readFileSync } from 'node:fs';
-import { escapeTableCell, codeCell, findComponentRecord, componentRootImportName } from './utils.mjs';
+import { escapeTableCell, codeCell, findComponentRecord, componentImportLine } from './utils.mjs';
 
 let _componentDocData = null;
 
@@ -73,10 +73,9 @@ function buildApiTable (heading, items, headers, formatRow) {
 }
 
 function importLines (component, alsoImport) {
-  const main = componentRootImportName(component);
-  if (!main) return ['<!-- Import unavailable: upgrade metadata or verify the public export route. -->', ''];
-  const names = [main, ...alsoImport.map(name => componentRootImportName(findComponent(name))).filter(Boolean)];
-  return ['```js', `import { ${[...new Set(names)].join(', ')} } from '@dialpad/dialtone-vue';`, '```', ''];
+  const line = componentImportLine(_componentDocData, component, alsoImport);
+  if (!line) return ['<!-- Import unavailable: upgrade metadata or verify the public export route. -->', ''];
+  return ['```js', line, '```', ''];
 }
 
 /**

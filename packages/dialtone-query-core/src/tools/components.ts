@@ -3,7 +3,7 @@
 // ============================================================================
 
 import { applySmartFilter } from '../utils/filters.js';
-import { normalizeComponents, normalizeComponentName, componentNames, componentImportStatement, componentImportNote } from '../component-identity.js';
+import { normalizeComponents, normalizeComponentName, compactName, componentNames, componentImportStatement, componentImportNote } from '../component-identity.js';
 import type {
   Component,
   ComponentProp,
@@ -155,16 +155,6 @@ function searchBySlots(regexArray: RegExp[], components: Component[]): SearchRes
   return matches;
 }
 
-/**
- * Normalize a component name for exact matching: case-insensitive, ignores
- * separators and an optional "Dt" prefix. "DtButtonGroup", "button-group",
- * and "Button Group" all become "buttongroup".
- */
-/** Lowercase and drop separators, keeping any "Dt" prefix. */
-function compactName(name: string): string {
-  return name.toLowerCase().replace(/[^a-z0-9]/g, '');
-}
-
 function legacyNote(component: Component): string | null {
   const metadata = component.metadata;
   if (metadata?.deprecated) {
@@ -177,11 +167,23 @@ function legacyNote(component: Component): string | null {
   return null;
 }
 
+// Adapters search the same loaded dataset on every request; normalize it once.
+const normalizedDatasets = new WeakMap<Component[], Component[]>();
+
+function normalizedFor(components: Component[]): Component[] {
+  let normalized = normalizedDatasets.get(components);
+  if (!normalized) {
+    normalized = normalizeComponents(components);
+    normalizedDatasets.set(components, normalized);
+  }
+  return normalized;
+}
+
 /**
  * Search Vue components by name, description, props, events, and slots
  */
 export function searchComponents(query: string, components: Component[]): { results: SearchResult[]; notes: string[]; exactMatch: boolean; warning: string | null } {
-  components = normalizeComponents(components);
+  components = normalizedFor(components);
   console.error(`\n[COMPONENT SEARCH DEBUG] Query: "${query}"`);
 
   // Normalize query: split camelCase, lowercase, replace hyphens/slashes with spaces
