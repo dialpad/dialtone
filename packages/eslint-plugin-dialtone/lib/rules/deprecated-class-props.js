@@ -4,38 +4,7 @@
  */
 "use strict";
 
-// ---------------------------------------------------------------------------
-// Component data — loaded from @dialpad/dialtone-vue/component-documentation.json.
-// In production this is the consumer's installed dialtone-vue version.
-// In tests this require is stubbed via proxyquire so tests are deterministic.
-// ---------------------------------------------------------------------------
-
-let components = [];
-
-try {
-  components = require("@dialpad/dialtone-vue/component-documentation.json");
-} catch {
-  console.warn(
-    "[eslint-plugin-dialtone] Could not load component-documentation.json from @dialpad/dialtone-vue. " +
-    "The deprecated-class-props rule will not flag anything. " +
-    "Ensure @dialpad/dialtone-vue is installed as a peer dependency."
-  );
-}
-
-// Defensive: handle malformed top-level data (not an array) gracefully.
-if (!Array.isArray(components)) components = [];
-
-// Pre-build a Map<displayName, Set<propName>> for O(1) lookup. Built once at module load.
-// Only entries with a valid displayName AND an array `props` are included — entries with
-// malformed/missing `props` are excluded entirely, so the rule fails closed (does not fire)
-// on components whose declared-prop set is unknown rather than flagging them as deprecated.
-const componentPropsMap = new Map();
-for (const c of components) {
-  if (!c || typeof c.displayName !== "string") continue;
-  if (!Array.isArray(c.props)) continue;
-  const propNames = c.props.map(p => p?.name).filter(s => typeof s === "string");
-  componentPropsMap.set(c.displayName, new Set(propNames));
-}
+const consumerComponents = require("../util/consumer-component-data");
 
 // ---------------------------------------------------------------------------
 // Constants
@@ -78,15 +47,23 @@ function isDialtoneTag (rawName) {
   return /^dt-[a-z]/.test(rawName) || /^Dt[A-Z]/.test(rawName);
 }
 
-function componentDeclaresProp (displayName, camelPropName) {
-  return componentPropsMap.get(displayName)?.has(camelPropName) ?? false;
-}
+// The resolver returns one cached array per consumer, so each lookup is built once.
+const propsMapCache = new WeakMap();
 
-// True when we have validated metadata for this component. Components missing from the
-// map (unknown to the installed dialtone-vue, or malformed entry) are NOT flagged — the
-// rule's job is to flag deprecation, not to flag unrecognised tags.
-function componentHasMetadata (displayName) {
-  return componentPropsMap.has(displayName);
+// displayName → Set of declared prop names. Missing/malformed prop sets remain
+// unknown, rather than proving removal.
+function componentPropsMap (components) {
+  let map = propsMapCache.get(components);
+  if (map) return map;
+  map = new Map();
+  for (const component of components) {
+    if (!component || typeof component.displayName !== "string") continue;
+    if (!Array.isArray(component.props)) continue;
+    const propNames = component.props.map(p => p?.name).filter(s => typeof s === "string");
+    map.set(component.displayName, new Set(propNames));
+  }
+  propsMapCache.set(components, map);
+  return map;
 }
 
 function isStaticClassAttr (attr) {
@@ -148,6 +125,7 @@ module.exports = {
 
   create (context) {
     const sourceCode = context.sourceCode ?? context.getSourceCode();
+    const propsByComponent = componentPropsMap(consumerComponents(context));
 
     // Read the raw source slice for an attribute's value, preserving HTML entities
     // and quote style. Strips surrounding quote characters; returns "" when missing.
@@ -170,7 +148,8 @@ module.exports = {
         // Skip components we don't have validated metadata for. This includes both
         // unknown tags (`<dt-foobar>`) and entries with malformed `props` arrays.
         // Fail closed: if we can't confirm the prop is deprecated, don't fire.
-        if (!componentHasMetadata(displayName)) return;
+        const declaredProps = propsByComponent.get(displayName);
+        if (!declaredProps) return;
 
         const attrs = node.startTag.attributes;
 
@@ -179,7 +158,7 @@ module.exports = {
         for (const attr of attrs) {
           const cls = classifyDeprecatedAttr(attr);
           if (!cls) continue;
-          if (componentDeclaresProp(displayName, cls.entry.camel)) continue;
+          if (declaredProps.has(cls.entry.camel)) continue;
           deprecated.push({ attr, ...cls });
         }
         if (deprecated.length === 0) return;

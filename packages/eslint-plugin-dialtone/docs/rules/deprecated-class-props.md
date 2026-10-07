@@ -16,9 +16,32 @@ For the full migration reference see the [component props migration guide](https
 
 ## Rule Details
 
-The rule fires on any `<dt-*>` or `<Dt*>` template tag where one of the removed props appears and the component does not currently declare that prop. It is data-driven: the component list is read from `@dialpad/dialtone-vue/component-documentation.json` at lint time, so future changes to the component API are automatically reflected without a plugin update.
+The rule fires on any `<dt-*>` or `<Dt*>` template tag where one of the removed props appears and the component does not currently declare that prop. It reads the consumer's installed component metadata at lint time, so changes in that metadata are reflected without a plugin update.
 
 Components that legitimately declare `wrapperClass` (e.g., `DtListItem`) are **not** flagged.
+
+### Component metadata resolution
+
+Starting from the linted file's directory, the rule looks upward for a `package.json` that declares a supported Dialtone package. A named package without a Dialtone declaration stops the search and skips checks with a warning. The search also stops at the repository's `.git` boundary. Unnamed source-directory stub manifests do not hide a parent declaration. For virtual input without an absolute physical filename, the search starts at ESLint's working directory.
+
+Declarations in `dependencies`, `devDependencies`, and `peerDependencies` count. Within the consumer's manifest:
+
+1. Declared `@dialpad/dialtone` supplies `@dialpad/dialtone/vue3/component-documentation.json`.
+2. Otherwise, declared `@dialpad/dialtone-vue` supplies `@dialpad/dialtone-vue/component-documentation.json` for standalone/legacy consumers.
+
+The umbrella takes precedence when both packages are declared. Undeclared or transitive packages, including the plugin's optional standalone peer, do not supply metadata. Packages are resolved through local `node_modules` directories and their exports maps; `NODE_PATH` is ignored.
+
+If the selected package or its metadata is missing, unreadable, or not a JSON array, the rule emits one console warning per consumer and skips its checks. It does not substitute another package/version. Unknown components and records without valid prop arrays are also skipped. A valid empty metadata array produces no findings.
+
+Metadata is cached separately for each consumer root for the lifetime of the ESLint process. Restart ESLint after changing dependency declarations or installed metadata.
+
+### Upgrading consumers
+
+Umbrella consumers no longer need `@dialpad/dialtone-vue` installed solely to provide metadata for this rule. Keep it if another application or tool dependency still needs the standalone package.
+
+Consumers that previously relied on a transitive or hoisted, undeclared Dialtone package must declare the intended `@dialpad/dialtone` or `@dialpad/dialtone-vue` dependency. Otherwise, the rule warns and skips its checks. A declared dependency can still use a hoisted installation within the repository.
+
+The plugin keeps its existing optional standalone peer. Consumer-root resolution reads the declared umbrella directly, so no additional umbrella peer is required.
 
 ### Examples of incorrect code
 
