@@ -117,7 +117,28 @@ keywords: ["theme island","mode island","mode override","v-dt-mode","directive",
 
 ## Usage
 
-Use the `v-dt-mode` directive to control the color mode of a region, component, or element. It creates a scoped region with the specified mode. Descendant elements retain their original styling but are rendered with the specified mode.
+Use `v-dt-mode` by default on the element that defines the region. It adds no wrapper and does not paint a background. Choose `DtModeIsland` when you deliberately want its container and automatic primary surface together, or cannot use the directive.
+
+Both APIs scope token-based styles to the specified color mode. Putting the directive on an existing element preserves layout relationships, such as direct children of a flex or grid container.
+
+### Directive or component?
+
+Use `v-dt-mode` by default for new mode-scoping code.
+
+| Situation | Recommendation |
+| --- | --- |
+| The region already has a container (section, card, toolbar, or button) | `v-dt-mode` |
+| You need a new container, including a painted surface | Usually a native container with `v-dt-mode`; add `d-bgc-primary` when needed |
+| You deliberately want the component's container and automatic primary surface together | `DtModeIsland` is a reasonable convenience |
+| You cannot install the currently exported directive plugin | `DtModeIsland` |
+| Explicit light/dark attributes must appear in server-rendered HTML | Consider `DtModeIsland`; verify rendering and hydration in your setup |
+| Positioned overlay content | The positioned component's `content-mode` prop |
+
+The current directive applies attributes after mounting; the component binds them in its template. This makes the component worth considering for explicit light/dark server markup. It does not guarantee correct inverted mode, root-derived contrast/material, or hydration in every SSR setup.
+
+The directive and `content-mode` prop use `invert`; the component uses `mode="inverted"`.
+
+### Basic usage
 
 ```vue demo
 <!-- @wrapper -->
@@ -211,7 +232,7 @@ Pass a boolean value to conditionally apply or remove the directive. When `false
 - Contrast is inherited from the root `<html>` element and kept in sync via MutationObserver
 - Material is inherited from the root `<html>` element the same way — `data-dt-material` propagates onto the island/directive element so `--dt-color-black-*` re-binds correctly inside inverted regions
 - For `invert` mode, the directive reads the nearest ancestor's `data-dt-mode`, computes the opposite, and reacts when it changes
-- `data-dt-brand` (theme) and `data-dt-material` cannot be overridden on mode islands — brand and material are root-level by design (material is paired to brand for visual coherence; see [brand-locked materials](/guides/theme-and-mode/#brand-locked-materials))
+- Keep `data-dt-brand` (theme) and `data-dt-material` at the root; do not set local overrides on mode boundaries. Material is paired to brand for visual coherence (see [brand-locked materials](/guides/theme-and-mode/#brand-locked-materials)).
 
 ## Variants
 
@@ -263,43 +284,51 @@ Mode boundaries can be nested. Each `v-dt-mode:invert` reads the nearest parent 
 
 ## Custom background
 
-The background surface of a Mode Island defaults to the root surface color. To override, use a CSS Utility class.
+The directive scopes color mode without supplying a background. Keep the region's existing background styling, or choose a surface explicitly with `d-bgc-primary` or the `surface` prop when using [DtBox](/components/box.html). For example, `<dt-box v-dt-mode:invert surface="primary">` scopes the mode and paints its primary surface. Check foreground and background contrast in both root modes.
+
+The component's `d-mode-island` class automatically paints `var(--dt-color-surface-primary)` from the island's active mode. A background utility can override that surface.
+
+```vue code-only
+<section v-dt-mode:invert>
+  <dt-text as="p">The region keeps its existing background styling.</dt-text>
+</section>
+```
+
+These live examples choose backgrounds explicitly with the directive, or use the component's automatic surface:
 
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="200">
-  <dt-mode-island class="d-p-200 d-bar-400 d-w100p d-bgc-transparent">
-      <dt-stack gap="200">
-        <dt-text as="p" kind="code" :size="100" tone="tertiary">Transparent background, inverted mode island</dt-text>
-        <div>
-          <dt-button>Button</dt-button>
-        </div>
-      </dt-stack>
-    </dt-mode-island>
-    <dt-mode-island class="d-p-200 d-bar-400 d-w100p">
-      <dt-stack gap="200">
-        <dt-text as="p" kind="code" :size="100" tone="tertiary">Default background, inverted mode island</dt-text>
-        <div>
-          <dt-button>Button</dt-button>
-        </div>
-      </dt-stack>
-    </dt-mode-island>
-    <dt-mode-island mode="dark" class="d-p-200 d-bar-400 d-w100p d-bgc-critical">
-      <dt-stack gap="200">
-        <dt-text as="p" kind="code" :size="100" tone="tertiary">critical background, dark mode island</dt-text>
-        <div>
-          <dt-button>Button</dt-button>
-        </div>
-      </dt-stack>
-    </dt-mode-island>
-    <dt-mode-island mode="light" class="d-p-200 d-bar-400 d-w100p d-bgc-critical">
-      <dt-stack gap="200">
-        <dt-text as="p" kind="code" :size="100" tone="tertiary">critical background, light mode island</dt-text>
-        <div>
-          <dt-button>Button</dt-button>
-        </div>
-      </dt-stack>
-    </dt-mode-island>
+  <section v-dt-mode:invert class="d-bgc-primary d-p-200 d-bar-400 d-w100p">
+    <dt-text as="p">The region explicitly uses the active mode's primary surface.</dt-text>
+  </section>
+  <dt-box v-dt-mode:invert surface="secondary" padding="200" border-radius="400" class="d-w100p">
+    <dt-text as="p">DtBox: explicit secondary surface, inverted mode</dt-text>
+  </dt-box>
+  <dt-mode-island class="d-p-200 d-bar-400 d-w100p">
+    <dt-stack gap="200">
+      <dt-text as="p" kind="code" :size="100" tone="tertiary">Component: automatic primary surface, inverted mode</dt-text>
+      <div>
+        <dt-button>Button</dt-button>
+      </div>
+    </dt-stack>
+  </dt-mode-island>
+  <section v-dt-mode:dark class="d-p-200 d-bar-400 d-w100p d-bgc-critical">
+    <dt-stack gap="200">
+      <dt-text as="p" kind="code" :size="100" tone="tertiary">Explicit critical background, dark mode directive</dt-text>
+      <div>
+        <dt-button>Button</dt-button>
+      </div>
+    </dt-stack>
+  </section>
+  <section v-dt-mode:light class="d-p-200 d-bar-400 d-w100p d-bgc-critical">
+    <dt-stack gap="200">
+      <dt-text as="p" kind="code" :size="100" tone="tertiary">Explicit critical background, light mode directive</dt-text>
+      <div>
+        <dt-button>Button</dt-button>
+      </div>
+    </dt-stack>
+  </section>
 </dt-stack>
 ```
 
@@ -359,7 +388,7 @@ A real-world pattern: the callbar container already exists as a semantic element
 
 ### Positioned Components
 
-[Popovers](/components/popover.html), [Dropdowns](/components/dropdown.html), [Modals](/components/modal.html), and [Hovercards](/components/hovercard.html) render their content *outside* the normal DOM tree, so `v-dt-mode` on the component itself won't reach the positioned element. These components provide a `contentMode` prop that applies the mode directly to the positioned content.
+[Popovers](/components/popover.html), [Dropdowns](/components/dropdown.html), [Modals](/components/modal.html), and [Hovercards](/components/hovercard.html) render their content *outside* the normal DOM tree, so `v-dt-mode` on the component itself won't reach the positioned element. Use their `content-mode` prop (`contentMode` in JavaScript) to apply the mode directly to the positioned content.
 
 ```vue demo
 <dt-stack gap="200">
@@ -570,12 +599,14 @@ A real-world pattern: the callbar container already exists as a semantic element
 </dt-dropdown>
 ```
 
-## Component
+## Mode Island component
 
-The `<dt-mode-island>` component is the underlying abstraction that the directive builds on. The key rendered difference is that it creates a wrapper element, while the directive attaches to mode to the existing element.
+> [!INFO] Prefer the directive
+> Use `v-dt-mode` by default, including on a new native container. Choose `DtModeIsland` when you deliberately want its container and automatic primary surface together, or cannot install the current directive plugin.
 
-> [!INFO] Note
-> The only real case where you might want to use the component is when you need to create a container element that doesn't already exist, but even then, you can create any kind of containing element with the directive e.g. `<span v-dt-mode:invert">...</span>`.
+Both APIs create scoped mode regions and share utility functions, but have separate implementations. The component renders a container, controlled by its `as` prop, and paints the active mode's primary surface. The directive attaches to an existing element, such as `<span v-dt-mode:invert>...</span>`, without adding a container or background.
+
+The component's default mode is `inverted`, equivalent in intent to the directive's `invert` argument. See [Directive or component?](#directive-or-component) for registration and server-rendering considerations.
 
 ```vue code-only
 <dt-mode-island as="section">
@@ -594,7 +625,7 @@ The `<dt-mode-island>` component is the underlying abstraction that the directiv
 
 ## Accessibility
 
-Purely visual. No semantic HTML impact. Supports high contrast mode via auto contrast inheritance.
+Changing color mode is visual. The directive preserves the element's semantics; the component's `as` prop determines its container semantics. Both inherit the root's high-contrast setting. Check readability against the chosen background in light, dark, and high-contrast modes.
 
 <script setup>
 import { DtIconPhone, DtIconQuickReply, DtIconVideo } from '@dialpad/dialtone-icons/vue';
