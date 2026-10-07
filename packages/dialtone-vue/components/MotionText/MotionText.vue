@@ -15,9 +15,18 @@
       {{ screenReaderText }}
     </span>
 
+    <!-- Whole-text modes animate the root, so the text and slot render as-is and stay live -->
+    <span
+      v-if="isWholeText"
+      ref="slotRef"
+      data-qa="dt-motion-text-content"
+      class="d-motion-text__content"
+      :aria-hidden="screenReaderText ? 'true' : undefined"
+    >{{ text }}<slot v-if="!text" /></span>
+
     <!-- Word-by-word animated content -->
     <span
-      v-if="words.length"
+      v-else-if="words.length"
       ref="contentRef"
       :key="animationKey"
       data-qa="dt-motion-text-content"
@@ -32,10 +41,7 @@
           data-qa="dt-motion-text-word"
           class="d-motion-text__word"
           :style="wordStyles[wordIdx]"
-        >{{ word }}</span>
-        <template v-if="wordIdx < words.length - 1">
-          {{ ' ' }}
-        </template>
+        >{{ word.text }}</span>{{ word.space }}
       </template>
     </span>
 
@@ -187,12 +193,17 @@ export default {
       timelineElapsed: 0,
       prefersReducedMotion: false,
       animationKey: 0,
+      cssIterations: 1,
     };
   },
 
   computed: {
     modeSettings () {
       return MOTION_TEXT_MODE_SETTINGS[this.animationMode] ?? RESTING_SETTINGS;
+    },
+
+    isWholeText () {
+      return Boolean(this.modeSettings.wholeText);
     },
 
     /**
@@ -248,6 +259,19 @@ export default {
       });
     },
 
+    /**
+     * Time (ms) at which one cycle of the animation ends
+     */
+    cycleDuration () {
+      if (!this.isWholeText) return Math.max(0, ...this.wordEndTimes);
+
+      const ends = this.modeSettings.tracks.map(track => {
+        const { delay, duration } = MOTION_TEXT_TRACKS[track];
+        return delay + duration;
+      });
+      return Math.max(0, ...ends) * this.speedScale * this.cssIterations;
+    },
+
     motionTextClasses () {
       return [
         'd-motion-text',
@@ -266,6 +290,12 @@ export default {
 
   watch: {
     text () {
+      // Whole-text modes render the text live and keep animating, as they always have
+      if (this.isWholeText) {
+        this.words = splitWords(this.text);
+        return;
+      }
+
       this.reset();
 
       if (this.text) {
@@ -278,8 +308,29 @@ export default {
       this.$nextTick(() => this.initializeContent());
     },
 
-    animationMode () {
+    animationMode (mode, oldMode) {
+      const wasWholeText = Boolean(MOTION_TEXT_MODE_SETTINGS[oldMode]?.wholeText);
+
+      // Whole-text modes render the slot live, so read it again when switching to or from word mode
+      if (!this.text && wasWholeText !== this.isWholeText) {
+        const wasAnimating = this.isAnimating;
+        this.reset();
+        this.words = [];
+        this.$nextTick(() => {
+          this.words = splitWords(this.getSlotText());
+          this.wordWidths = [];
+          if (wasAnimating) this.$nextTick(() => this.start());
+        });
+        return;
+      }
+
       this.restartIfAnimating();
+    },
+
+    autoStart (value) {
+      if (value && !this.isAnimating && (this.isWholeText || this.words.length)) {
+        this.$nextTick(() => this.start());
+      }
     },
 
     speed () {
@@ -356,7 +407,7 @@ export default {
       this.isRtl = window.getComputedStyle(this.$el).direction === 'rtl';
       this.wordWidths = widths.length === this.words.length && widths.every(width => width > 0)
         ? widths
-        : this.words.map(word => word.length);
+        : this.words.map(word => word.text.length);
     },
 
     /**
@@ -378,11 +429,13 @@ export default {
     runTimeline () {
       const elapsed = this.timelineElapsed;
       const totalWords = this.words.length;
-      const cycleEnd = Math.max(0, ...this.wordEndTimes);
+      const cycleEnd = this.cycleDuration;
 
       this.timelineStartedAt = Date.now() - elapsed;
 
-      this.wordEndTimes.forEach((end, index) => {
+      // Whole-text modes have no per-word progress
+      const wordEnds = this.isWholeText ? [] : this.wordEndTimes;
+      wordEnds.forEach((end, index) => {
         if (end <= elapsed) return;
         this.schedule(end - elapsed, () => {
           this.$emit('progress', {
@@ -425,14 +478,25 @@ export default {
         return;
       }
 
-      if (!this.modeSettings.tracks.length || !this.words.length) {
+      if (!this.modeSettings.tracks.length || (!this.isWholeText && !this.words.length)) {
         this.showAllContent();
         return;
       }
 
       this.measureWords();
+      this.cssIterations = this.readCssIterations();
       this.timelineElapsed = 0;
       this.runTimeline();
+    },
+
+    /**
+     * Whole-text animations honor a consumer's animation-iteration-count override (e.g. 2 sweeps)
+     */
+    readCssIterations () {
+      if (!this.isWholeText || this.loop) return 1;
+
+      const count = parseFloat(window.getComputedStyle(this.$el).animationIterationCount);
+      return Number.isFinite(count) && count > 1 ? count : 1;
     },
 
     /**
@@ -471,6 +535,8 @@ export default {
       this.isComplete = false;
       this.timelineElapsed = 0;
       this.animationKey++;
+      // Whole-text modes animate the root, which re-keying the words doesn't reset
+      this.replayAnimations();
     },
 
     /**
@@ -512,20 +578,28 @@ export default {
     },
 
     /**
-     * Restart a looped animation: every word returns to its starting state at once.
-     * The animations are dropped for one style pass and replayed on the same word nodes, so text
-     * selection survives and nothing is re-inserted into the aria-live region.
+     * Drop the CSS animations for one style pass so they replay from their first frame on the same
+     * elements, keeping text selection and not re-inserting anything into the aria-live region.
+     */
+    replayAnimations (callback) {
+      this.isRestarting = true;
+
+      this.$nextTick(() => {
+        // Flush styles while the animations are removed
+        this.$el?.getBoundingClientRect?.();
+        this.isRestarting = false;
+        callback?.();
+      });
+    },
+
+    /**
+     * Restart a looped animation: everything returns to its starting state at once
      */
     restartCycle () {
       if (this.isUnmounted) return;
 
       this.clearTimeouts();
-      this.isRestarting = true;
-
-      this.$nextTick(() => {
-        // Flush styles while the animations are removed so they restart from their first frame
-        this.$refs.contentRef?.getBoundingClientRect();
-        this.isRestarting = false;
+      this.replayAnimations(() => {
         this.measureWords();
         this.timelineElapsed = 0;
         this.$emit('start');
@@ -540,7 +614,8 @@ export default {
       this.words = splitWords(this.text || this.getSlotText());
       this.wordWidths = [];
 
-      if (this.autoStart && this.words.length > 0) {
+      // Whole-text modes start even while empty, e.g. a slot that streams its content in
+      if (this.autoStart && (this.isWholeText || this.words.length > 0)) {
         this.$nextTick(() => this.start());
       }
     },

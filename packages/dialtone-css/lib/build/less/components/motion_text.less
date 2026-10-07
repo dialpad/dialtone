@@ -88,7 +88,7 @@
 
     display: inline-block;
     max-inline-size: 100%;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
     animation: var(--d-motion-text-resting, var(--d-motion-text-word-animation, none));
     animation-play-state: var(--d-motion-text-play-state, paused);
   }
@@ -167,6 +167,10 @@
     --d-motion-text-word-animation:
       d-motion-text-slide-in var(--d-motion-text-enter-duration) var(--ttf-out) var(--d-motion-text-enter-start) both,
       d-motion-text-fill-in var(--d-motion-text-reveal-duration) linear var(--d-motion-text-reveal-start) both;
+  }
+
+  .d-motion-text--gradient-sweep {
+    display: inline-block;
   }
 
   .d-motion-text--gradient-sweep .d-motion-text__word {

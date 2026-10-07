@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils';
-import { nextTick } from 'vue';
+import { defineComponent, h, nextTick, ref } from 'vue';
 import DtMotionText from './MotionText.vue';
-import { MOTION_TEXT_ANIMATION_MODES, MOTION_TEXT_SPEEDS } from './MotionTextConstants';
+import { MOTION_TEXT_ANIMATION_MODES, MOTION_TEXT_SPEEDS, MOTION_TEXT_TIMING_PRESETS } from './MotionTextConstants';
 import { getGradientSlices } from './utils';
 
 /**
@@ -110,6 +110,12 @@ describe('DtMotionText Tests', () => {
   const getRootStyle = (property) => wrapper.element.style.getPropertyValue(property);
   const getEmittedCount = (event) => wrapper.emitted(event)?.length ?? 0;
   const getProgressPayloads = () => (wrapper.emitted('progress') ?? []).map(([payload]) => payload);
+
+  // Mounts DtMotionText in a parent so its props and slot can change reactively
+  const mountInParent = (props, slot) => mount(defineComponent({
+    name: 'MotionTextParent',
+    render: () => h(DtMotionText, props.value, { default: slot }),
+  }));
 
   const advance = async (ms) => {
     await vi.advanceTimersByTimeAsync(ms);
@@ -802,6 +808,123 @@ describe('DtMotionText Tests', () => {
     });
   });
 
+  describe('Shimmer Tests', () => {
+    // Shimmer animates the whole element, so its content renders as-is and stays live
+    const mountShimmerWithSlot = (props = {}) => {
+      const message = ref('Francis');
+      const parent = mountInParent(
+        ref({ animationMode: 'shimmer', ...props }),
+        () => [h('strong', message.value), ' is typing'],
+      );
+      return { parent, message };
+    };
+
+    it('should render the text prop without splitting it into words', () => {
+      mockProps = { animationMode: 'shimmer' };
+      updateWrapper();
+
+      expect(findWords()).toHaveLength(0);
+      expect(findContent().text()).toBe(MOCK_FIGMA_TEXT);
+    });
+
+    it('should keep slot markup', () => {
+      const { parent } = mountShimmerWithSlot({ autoStart: false });
+
+      expect(parent.find('strong').text()).toBe('Francis');
+    });
+
+    it('should show slot updates as they happen', async () => {
+      const { parent, message } = mountShimmerWithSlot({ autoStart: false });
+      message.value = 'Tamara';
+      await nextTick();
+
+      expect(parent.find('strong').text()).toBe('Tamara');
+    });
+
+    it('should keep animating when the text changes', async () => {
+      mockProps = { animationMode: 'shimmer', autoStart: true, loop: true };
+      updateWrapper();
+      await flushAutoStart();
+      await wrapper.setProps({ text: 'Searching' });
+
+      expect(findContent().text()).toBe('Searching');
+      expect(wrapper.classes()).toContain('d-motion-text--animating');
+      expect(getEmittedCount('start')).toBe(1);
+    });
+
+    it('should start on mount even while its slot is empty', async () => {
+      mockProps = { animationMode: 'shimmer', text: '', autoStart: true };
+      updateWrapper();
+      await flushAutoStart();
+
+      expect(wrapper.classes()).toContain('d-motion-text--animating');
+    });
+
+    it('should replay from the first frame when reset', async () => {
+      mockProps = { animationMode: 'shimmer' };
+      updateWrapper();
+      await start();
+      wrapper.vm.reset();
+      await nextTick();
+
+      expect(wrapper.classes()).toContain('d-motion-text--restarting');
+
+      await nextTick();
+      expect(wrapper.classes()).not.toContain('d-motion-text--restarting');
+    });
+  });
+
+  describe('When autoStart turns true after mount', () => {
+    it.each(['gradient-in', 'shimmer'])('should start the %s animation', async (mode) => {
+      mockProps = { animationMode: mode, autoStart: false };
+      updateWrapper();
+      await wrapper.setProps({ autoStart: true });
+      await flushAutoStart();
+
+      expect(getEmittedCount('start')).toBe(1);
+      expect(wrapper.classes()).toContain('d-motion-text--animating');
+    });
+
+    it('should wait for content in word modes', async () => {
+      mockProps = { text: '', autoStart: false };
+      updateWrapper();
+      await wrapper.setProps({ autoStart: true });
+      await nextTick();
+
+      expect(getEmittedCount('start')).toBe(0);
+    });
+  });
+
+  describe('When a consumer sets animation-iteration-count on shimmer', () => {
+    it('should complete after every iteration has played', async () => {
+      mockProps = { animationMode: 'shimmer' };
+      mockAttrs = { style: 'animation-iteration-count: 2' };
+      updateWrapper();
+      await start();
+
+      await advance(3000);
+      expect(getEmittedCount('complete')).toBe(0);
+      await advance(3000);
+      expect(getEmittedCount('complete')).toBe(1);
+    });
+  });
+
+  describe('When switching from shimmer to a word mode with slot content', () => {
+    it('should split the current slot content into words', async () => {
+      const message = ref('Thinking');
+      const props = ref({ animationMode: 'shimmer', autoStart: false });
+      const parent = mountInParent(props, () => message.value);
+      message.value = 'Searching the web';
+      await nextTick();
+      props.value = { ...props.value, animationMode: 'gradient-in' };
+      await nextTick();
+      await nextTick();
+      await nextTick();
+
+      expect(parent.findAll('[data-qa="dt-motion-text-word"]').map(word => word.text())).toEqual(['Searching', 'the', 'web']);
+    });
+  });
+
   describe('Slot Tests', () => {
     beforeEach(() => {
       mockProps = { text: '' };
@@ -875,11 +998,11 @@ describe('DtMotionText Tests', () => {
       });
     });
 
-    it('should collapse whitespace into single spaces between words', async () => {
-      await wrapper.setProps({ text: '  Hello   wide\n world  ' });
+    it('should keep the whitespace between words, including line breaks', async () => {
+      await wrapper.setProps({ text: '  Hello   wide\n world' });
 
       expect(findWordTexts()).toEqual(['Hello', 'wide', 'world']);
-      expect(findContent().element.textContent).toBe('Hello wide world');
+      expect(findContent().element.textContent).toBe('Hello   wide\n world');
     });
 
     it('should render nothing for whitespace-only text', async () => {
@@ -940,17 +1063,16 @@ describe('DtMotionText Tests', () => {
       }
     });
 
-    it('should emit progress for every word when the shimmer band finishes', async () => {
+    it('should emit complete without per-word progress when the shimmer band finishes', async () => {
       mockProps = { animationMode: 'shimmer' };
       updateWrapper();
       await start();
 
       await advance(2999);
-      expect(getEmittedCount('progress')).toBe(0);
+      expect(getEmittedCount('complete')).toBe(0);
       await advance(1);
-      expect(getEmittedCount('progress')).toBe(MOCK_FIGMA_WORDS.length);
-      expect(getProgressPayloads().at(-1).progress).toBe(1);
       expect(getEmittedCount('complete')).toBe(1);
+      expect(getEmittedCount('progress')).toBe(0);
     });
 
     it.each(MOCK_MODE_TIMELINES)('should emit complete after the last word settles in %s', async (mode, timeline) => {
@@ -1026,6 +1148,10 @@ describe('DtMotionText Tests', () => {
     });
 
     describe('speed', () => {
+      it('should keep the deprecated timing preset keys', () => {
+        expect(MOTION_TEXT_TIMING_PRESETS['300']).toEqual({ characterDelay: 30, wordDelay: 50, duration: 1000 });
+      });
+
       it('should fall back to the default timing for an unsupported value', () => {
         vi.spyOn(console, 'warn').mockImplementation(() => {});
         mockProps = { speed: 'md' };

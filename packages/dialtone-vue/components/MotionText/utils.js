@@ -1,10 +1,14 @@
 /**
- * Split text into words, collapsing all whitespace.
+ * Split text into words, keeping the whitespace that follows each one (spaces, line breaks) so
+ * the consumer's `white-space` setting still applies between words.
  * @param {string} text
- * @returns {string[]}
+ * @returns {Array<{ text: string, space: string }>}
  */
 export function splitWords (text) {
-  return text?.match(/\S+/g) || [];
+  return (text?.match(/\S+\s*/g) || []).map(segment => {
+    const word = segment.trimEnd();
+    return { text: word, space: segment.slice(word.length) };
+  });
 }
 
 /**

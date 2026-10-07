@@ -107,7 +107,7 @@ Select a mode to play it. **Loop** is on, so each effect keeps repeating; turn i
 
 ### Manual Control
 
-Set `:auto-start="false"` to start the effect on your own trigger, then drive it with the `start()`, `pause()`, `resume()`, `reset()`, and `skipToEnd()` methods.
+Set `:auto-start="false"` to start the effect on your own trigger, then drive it with the `start()`, `pause()`, `resume()`, `reset()`, and `skipToEnd()` methods. Switching `auto-start` to `true` later also starts the effect.
 
 Until `start()` is called, the reveal modes (`gradient-in`, `fade-in`, `slide-in`, and `slide-in-gradient`) keep the text hidden, while `gradient-sweep` and `shimmer` show the text at rest. `reset()` returns every word to that starting frame, and `skipToEnd()` shows the text at rest immediately.
 
@@ -164,11 +164,16 @@ Each cycle emits `start` when it begins and `complete` when its last word settle
 
 ### Using Slots
 
-You can pass the text through the default slot instead of the `text` prop. `DtMotionText` reads the slot as plain text and splits it into words, so markup inside the slot, such as `<strong>`, is not preserved.
+You can pass the text through the default slot instead of the `text` prop.
+
+- `shimmer` renders the slot as-is, so markup such as `<strong>` and live updates, like streamed text or a changing name, are kept.
+- The word-by-word modes read the slot once as plain text and split it into words, so markup inside the slot isn't preserved.
+
+Whitespace between words, including line breaks, is kept, so `white-space: pre-wrap` on the component still applies.
 
 ```vue code-only
-<dt-motion-text animation-mode="fade-in">
-  Animated text from the default slot
+<dt-motion-text animation-mode="shimmer" loop>
+  <strong>{{ userName }}</strong> is typing...
 </dt-motion-text>
 ```
 
