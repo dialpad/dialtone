@@ -5,7 +5,7 @@
 "use strict";
 
 const assert = require("assert").strict;
-const { mkdtempSync, mkdirSync, writeFileSync, rmSync } = require("node:fs");
+const { copyFileSync, mkdtempSync, mkdirSync, writeFileSync, rmSync } = require("node:fs");
 const { tmpdir } = require("node:os");
 const { dirname, join } = require("node:path");
 const Module = require("module");
@@ -48,17 +48,17 @@ function install (root, name, components) {
   return file;
 }
 
-function lint (root, filename = join(root, "src", "consumer.vue")) {
+function lint (root, filename = join(root, "src", "consumer.vue"), consumerRule = rule, fix = false) {
   const linter = new Linter({ cwd: root });
   const config = [{
     ...(filename === null ? {} : { files: ["**/*.vue"] }),
     languageOptions: { parser },
-    plugins: { dialtone: { rules: { "deprecated-class-props": rule } } },
+    plugins: { dialtone: { rules: { "deprecated-class-props": consumerRule } } },
     rules: { "dialtone/deprecated-class-props": "warn" },
   }];
   return {
     messages: linter.verify(code, config, filename ?? undefined),
-    output: linter.verifyAndFix(code, config, filename ?? undefined).output,
+    ...(fix ? { output: linter.verifyAndFix(code, config, filename ?? undefined).output } : {}),
   };
 }
 
@@ -77,18 +77,17 @@ describe("deprecated-class-props consumer metadata resolution", () => {
     for (const root of roots.splice(0)) rmSync(root, { recursive: true, force: true });
   });
 
-  function assertRemoved (root, filename) {
-    const result = lint(root, filename);
+  function assertRemoved (root, filename, fix = false) {
+    const result = lint(root, filename, rule, fix);
     assert.equal(result.messages.length, 1);
     assert.equal(result.messages[0].messageId, "propRemoved");
-    assert.equal(result.output, '<template><dt-consumer class="x" /></template>');
+    if (fix) assert.equal(result.output, '<template><dt-consumer class="x" /></template>');
     assert.deepEqual(warnings, []);
   }
 
-  function assertUnavailable (root, packageName) {
-    assert.deepEqual(lint(root).messages, []);
-    lint(root, join(root, "src", "second.vue"));
-    assert.equal(warnings.length, 1, "one diagnostic per consumer, not per file/pass");
+  function assertUnavailable (root, packageName, consumerRule = rule) {
+    assert.deepEqual(lint(root, undefined, consumerRule).messages, []);
+    assert.equal(warnings.length, 1);
     assert.ok(/deprecated-class-props/.test(warnings[0]));
     if (packageName) assert.ok(warnings[0].includes(packageName));
   }
@@ -96,13 +95,13 @@ describe("deprecated-class-props consumer metadata resolution", () => {
   it("activates checks and autofix for a declared umbrella-only consumer", () => {
     const root = project({ [UMBRELLA]: "^10" });
     install(root, UMBRELLA, REMOVED);
-    assertRemoved(root);
+    assertRemoved(root, undefined, true);
   });
 
   it("activates checks and autofix for a declared standalone-only consumer", () => {
     const root = project({ [STANDALONE]: "^3" });
     install(root, STANDALONE, REMOVED);
-    assertRemoved(root);
+    assertRemoved(root, undefined, true);
   });
 
   for (const declaredIn of ["dependencies", "devDependencies", "peerDependencies"]) {
@@ -140,6 +139,9 @@ describe("deprecated-class-props consumer metadata resolution", () => {
     const root = project({ [UMBRELLA]: "^10", [STANDALONE]: "^3" });
     install(root, STANDALONE, REMOVED);
     assertUnavailable(root, UMBRELLA);
+    assert.deepEqual(lint(root, join(root, "src", "second.vue")).messages, []);
+    lint(root, undefined, rule, true);
+    assert.equal(warnings.length, 1, "one diagnostic across files and autofix passes");
   });
 
   it("warns without substituting stray data when the declared umbrella lacks its data export", () => {
@@ -155,14 +157,12 @@ describe("deprecated-class-props consumer metadata resolution", () => {
     assertUnavailable(root, STANDALONE);
   });
 
-  for (const malformed of [null, {}]) {
-    it(`disables checks gracefully for malformed top-level metadata ${JSON.stringify(malformed)}`, () => {
-      const root = project({ [UMBRELLA]: "^10" });
-      install(root, UMBRELLA, malformed);
-      install(root, STANDALONE, REMOVED);
-      assertUnavailable(root, UMBRELLA);
-    });
-  }
+  it("disables checks gracefully for non-array top-level metadata", () => {
+    const root = project({ [UMBRELLA]: "^10" });
+    install(root, UMBRELLA, {});
+    install(root, STANDALONE, REMOVED);
+    assertUnavailable(root, UMBRELLA);
+  });
 
   it("disables checks gracefully for invalid JSON", () => {
     const root = project({ [STANDALONE]: "^3" });
@@ -178,8 +178,23 @@ describe("deprecated-class-props consumer metadata resolution", () => {
     assert.deepEqual(warnings, []);
   });
 
-  it("warns gracefully when no supported dependency is declared or installed", () => {
-    assertUnavailable(project());
+  it("does not use metadata from the plugin's own location for an undeclared consumer", () => {
+    const consumer = project();
+    const plugin = project();
+    install(plugin, STANDALONE, REMOVED);
+    // Copy just the rule and resolver into an isolated plugin installation.
+    // Its data would falsely flag the same DtConsumer identity if the loader
+    // fell back to a plugin-relative require instead of the consumer root.
+    const pluginLib = join(plugin, "lib");
+    for (const file of ["rules/deprecated-class-props.js", "util/consumer-component-data.js"]) {
+      const destination = join(pluginLib, file);
+      mkdirSync(dirname(destination), { recursive: true });
+      copyFileSync(join(__dirname, "../../../lib", file), destination);
+    }
+    const ruleFile = join(pluginLib, "rules/deprecated-class-props.js");
+    const pluginRequire = Module.createRequire(ruleFile);
+    assert.equal(pluginRequire(`${STANDALONE}/component-documentation.json`)[0].displayName, "DtConsumer");
+    assertUnavailable(consumer, undefined, require(ruleFile));
   });
 
   it("keeps two consumer roots separate in one process", () => {

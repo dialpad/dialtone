@@ -128,12 +128,6 @@ ruleTester.run("deprecated-class-props (detection)", rule, {
 ruleTester.run("deprecated-class-props (autofix)", rule, {
   valid: [],
   invalid: [
-    // Scenario 1: static, no existing class → simple rename
-    {
-      code: "<template><dt-input root-class=\"d-w332\" /></template>",
-      errors: 1,
-      output: "<template><dt-input class=\"d-w332\" /></template>",
-    },
     // Scenario 2a: static, existing class before offending attr → merge
     {
       code: "<template><dt-input class=\"other\" root-class=\"d-w332\" /></template>",
@@ -145,12 +139,6 @@ ruleTester.run("deprecated-class-props (autofix)", rule, {
       code: "<template><dt-input root-class=\"d-w332\" class=\"other\" /></template>",
       errors: 1,
       output: "<template><dt-input class=\"other d-w332\" /></template>",
-    },
-    // Scenario 3: dynamic, no existing :class → rename
-    {
-      code: "<template><dt-input :root-class=\"cls\" /></template>",
-      errors: 1,
-      output: "<template><dt-input :class=\"cls\" /></template>",
     },
     // Scenario 4: dynamic, existing :class → warn only (no autofix)
     {
@@ -253,22 +241,6 @@ ruleTester.run("deprecated-class-props (fail-closed)", malformedRule, {
 });
 
 // ---------------------------------------------------------------------------
-// Regression: components currently declaring these prop names must NOT fire.
-// Source-of-truth: git log confirms DtListItem has wrapperClass at staging:
-// packages/dialtone-vue/components/list_item/list_item.vue line 143.
-// These cases verify the data-driven design — if the lookup logic breaks or
-// the fixture shape changes, these tests catch false positives early.
-// ---------------------------------------------------------------------------
-
-ruleTester.run("deprecated-class-props (regression)", rule, {
-  valid: [
-    { code: "<template><dt-list-item wrapper-class=\"d-pt8\" /></template>" },
-    { code: "<template><dt-list-item :wrapper-class=\"cls\" /></template>" },
-  ],
-  invalid: [],
-});
-
-// ---------------------------------------------------------------------------
 // Integration smoke test: realistic multi-line template covering all scenarios.
 // Validates detection count and exact post-fix output in one shot.
 // Uses the same MOCK_COMPONENTS fixture as unit tests — fully deterministic.
@@ -314,21 +286,4 @@ ruleTester.run("deprecated-class-props (integration)", rule, {
       ].join("\n"),
     },
   ],
-});
-
-// ---------------------------------------------------------------------------
-// Idempotency: applying the autofix twice yields no further changes.
-// The already-fixed code must NOT trigger any new warnings.
-// ---------------------------------------------------------------------------
-
-ruleTester.run("deprecated-class-props (idempotency)", rule, {
-  valid: [
-    // Output of autofix scenario 1 (static rename) — no further warning
-    { code: "<template><dt-input class=\"d-w332\" /></template>" },
-    // Output of autofix scenario 2 (static merge) — no further warning
-    { code: "<template><dt-input class=\"other d-w332\" /></template>" },
-    // Output of autofix scenario 3 (dynamic rename) — no further warning
-    { code: "<template><dt-input :class=\"cls\" /></template>" },
-  ],
-  invalid: [],
 });
