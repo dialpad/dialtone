@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { test } from 'vitest';
 import { setComponentDocs, findComponent, transformVueApi } from './transform-vue-api.mjs';
 
 const record = (name, kind = 'public') => ({
