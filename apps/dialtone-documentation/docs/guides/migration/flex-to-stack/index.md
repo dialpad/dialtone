@@ -11,7 +11,7 @@ keywords: ["d-d-flex", "flexbox utilities", "stack component", "layout", "spacin
 
 ## Overview
 
-[DtStack](/components/stack.html) is a primitive layout component using flexbox for simple vertical or horizontal layouts. It should be the first tool you reach for. It handles direction, alignment, justification, and gap through props instead of utility classes. This reduces class clutter, improves intent, and improves readability.
+[DtStack](/components/stack.html) is a primitive layout component using flexbox for simple vertical or horizontal layouts. It should be the first tool you reach for. It handles direction, alignment, justification, gap, and wrapping through props instead of utility classes. This reduces class clutter, improves intent, and improves readability.
 
 A [Migration Tool](#migration-tool-flex-to-stack) is available to migrate `class="d-d-flex"` to `<dt-stack>`, or you may do so [manually](#manual-migration).
 
@@ -221,7 +221,7 @@ The migration tool intelligently handles various edge cases:
 
 **Retained as Classes:**
 
-Some utilities remain as classes because they don't have DtStack prop equivalents:
+The tool retains the following utilities as classes. Replace `d-fw-wrap` with the `wrap` prop after migration.
 
 **Flex Properties:**
 
@@ -406,16 +406,16 @@ Flex CSS Utilities are still supported on DtStack, e.g. some flex utilities have
 
 **Examples**
 
-- `d-fw-wrap`, `d-fw-nowrap` (flex-wrap)
+- `d-fw-nowrap` (flex-wrap override)
 - `d-fl-grow1`, `d-fl-shrink0` (flex grow/shrink)
 - `d-as-*` (align-self)
 - `d-ac-*` (align-content)
 - `d-g*` values larger than `d-g64` (`700`)
 
-For example, `d-fw-wrap` isn't a DtStack prop, but can still be applied.
+Use `wrap` instead of `d-fw-wrap` to enable wrapping:
 
 ```html
-<dt-stack direction="row" align="center" gap="100" class="d-fw-wrap">
+<dt-stack direction="row" align="center" gap="100" wrap>
   ...
 </dt-stack>
 ```
@@ -521,6 +521,7 @@ If you own the component, refactor its root element to use DtStack.
 | `d-fd-column` | — | `direction` | `"column"` |
 | `d-fd-row-reverse` | — | `direction` | `"row-reverse"` |
 | `d-fd-column-reverse` | — | `direction` | `"column-reverse"` |
+| `d-fw-wrap` | — | `wrap` | `true` |
 | `d-g0` | `d-g-0` | `gap` | `"0"` |
 | `d-g8` | `d-g-100` | `gap` | `"100"` |
 | `d-g16` | `d-g-200` | `gap` | `"200"` |
