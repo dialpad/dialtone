@@ -194,6 +194,15 @@ npx tsx packages/dialtone-mcp-server/interactive-search.ts
 
 ### Run Tests
 
+Startup and shutdown regressions build the server and its prerequisites first:
+
+```bash
+pnpm nx run dialtone-mcp-server:test-startup
+```
+
+From the package directory, `pnpm run test:startup` runs the same target.
+Release-path regressions run with `pnpm run test:release-paths`.
+
 From the package directory:
 ```bash
 cd packages/dialtone-mcp-server

@@ -25,9 +25,16 @@ globalThis.fetch = async (url, options = {}) => {
   if (scenario === 'stalled-body') {
     return { ok: true, json: () => stall(options.signal) };
   }
-  if (scenario === 'offline') throw new TypeError('fetch failed');
-  if (scenario === 'http-error') return new Response('{"version":"99.0.0"}', { status: 503 });
-  if (scenario === 'invalid-json') return new Response('{invalid');
+  // Registry responses need not finish before the initialize round trip.
+  await new Promise(resolve => setTimeout(resolve, 100));
+  const completed = () => setImmediate(() => console.error('[registry fixture] completed'));
+  if (scenario === 'offline') {
+    completed();
+    throw new TypeError('fetch failed');
+  }
+  if (scenario === 'http-error') {
+    return { get ok() { completed(); return false; } };
+  }
   const versions = {
     current: process.env.DIALTONE_TEST_VERSION,
     update: '99.0.0',
@@ -35,5 +42,12 @@ globalThis.fetch = async (url, options = {}) => {
     numeric: 99,
     invalid: 'not-a-version',
   };
-  return new Response(JSON.stringify({ version: versions[scenario] }));
+  const response = new Response(scenario === 'invalid-json' ? '{invalid' : JSON.stringify({ version: versions[scenario] }));
+  return {
+    ok: true,
+    async json() {
+      try { return await response.json(); }
+      finally { completed(); }
+    },
+  };
 };

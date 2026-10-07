@@ -24,6 +24,12 @@ function bounded(promise, milliseconds, message) {
   ]).finally(() => clearTimeout(timeout));
 }
 
+function registryDiagnostic(scenario, waitForTimeout) {
+  if (waitForTimeout) return '[registry fixture] aborted';
+  if (scenario.startsWith('stalled')) return;
+  return { update: 'Update Available', current: 'up to date' }[scenario] ?? '[registry fixture] completed';
+}
+
 async function probe(t, scenario, { waitForTimeout = false, signal } = {}) {
   const started = performance.now();
   const child = spawn(process.execPath, ['--import', registryFixture, server], {
@@ -66,12 +72,13 @@ async function probe(t, scenario, { waitForTimeout = false, signal } = {}) {
     assert.doesNotMatch(stderr, /\[registry fixture\] aborted/, 'initialize must precede the registry deadline');
   }
   child.stdin.write('{"jsonrpc":"2.0","method":"notifications/initialized"}\n');
-  if (waitForTimeout) {
+  const expected = registryDiagnostic(scenario, waitForTimeout);
+  if (expected) {
     await bounded(new Promise(resolve => {
-      const check = () => { if (stderr.includes('[registry fixture] aborted')) resolve(); };
+      const check = () => { if (stderr.includes(expected)) resolve(); };
       child.stderr.on('data', check);
       check();
-    }), 2500, 'registry request exceeded its two-second abort deadline');
+    }), 2500, `registry check did not reach ${expected}`);
   }
   const shutdownStarted = performance.now();
   if (signal) child.kill(signal);
@@ -96,6 +103,7 @@ for (const scenario of ['stalled-fetch', 'stalled-body']) {
 for (const scenario of ['offline', 'http-error', 'invalid-json', 'missing', 'numeric', 'invalid']) {
   test(`${scenario} leaves initialize available without an update notice`, { timeout: 5000 }, async t => {
     const stderr = await probe(t, scenario);
+    assert.match(stderr, /\[registry fixture\] completed/);
     assert.doesNotMatch(stderr, /Update Available|Latest:|up to date/);
   });
 }
