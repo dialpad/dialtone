@@ -1,0 +1,45 @@
+apps/dialtone-documentation/docs/scratch.md
+  s_0deedfec899a67::t_d0e65f3738bc7d 270-271,334,337
+apps/dialtone-documentation/docs/utilities/layout/position.md
+  s_0deedfec899a67::t_74b829b7f86049 7-9
+apps/dialtone-documentation/docs/foundations/size-and-space/index.md
+  s_0deedfec899a67::t_2e6b242baf5b42 48
+  s_0deedfec899a67::t_5fb8d3c766d462 36,189-191
+apps/dialtone-documentation/docs/utilities/layout/z-index.md
+  s_0deedfec899a67::t_3f68c1af4b99c1 7-9,12
+apps/dialtone-documentation/docs/utilities/layout/coordinates.md
+  s_0deedfec899a67::t_2e6b242baf5b42 16
+  s_0deedfec899a67::t_1dd03c744344e6 7-9
+  s_0deedfec899a67::t_45ef6ff1d1d3d1 17
+apps/dialtone-documentation/docs/dialtone/whats-new/posts/2026-4-22.md
+  s_0deedfec899a67::t_2e6b242baf5b42 62,128
+  s_0deedfec899a67::t_d255e643ccc860 5,12,22,71
+  s_0deedfec899a67::t_d0e65f3738bc7d 13,130
+apps/dialtone-documentation/docs/components/box.md
+  s_0deedfec899a67::t_2e6b242baf5b42 234
+  h_c15b5755534093 195-197,199,203-204,206-207,214-216,218,224-228,237,240-244,246,248-277,285-308
+  s_0deedfec899a67::t_0a5def940eaff1 38
+  s_0deedfec899a67::t_0be7733ae1f7f6 3,7,20,26,28,35,46,193-194,198,200-202,205,208-213,217,219-223,229-233,235-236,238-239,245,247,278-283,309
+  s_0deedfec899a67::t_d7bf3d90b6f818 310
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "a7919e1dffacfc03e5495b9500248246c4f508ba",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_0deedfec899a67": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f24dc-c4e6-7560-9f4a-625c9c8673a7",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

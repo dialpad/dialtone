@@ -1,0 +1,21 @@
+packages/combinator/src/components/combinator.vue
+  s_c3b12373d86df3::t_ae10e4da8ada76 487-497,500-504,506,509-510,513-514
+  s_c3b12373d86df3::t_38ed66be8c7e10 85
+  s_c3b12373d86df3::t_7987d39ce74ce8 498-499,505,511-512
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "7e0128a0052a5614b23c9d90bb74ed995044f556",
+  "prompts": {},
+  "sessions": {
+    "s_c3b12373d86df3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f1ddcc08-3576-4872-b773-84c8083715f1",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

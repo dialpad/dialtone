@@ -1,0 +1,16 @@
+packages/dialtone-icons/src/keywords-icons.json
+  h_c15b5755534093 1105
+packages/dialtone-icons/src/svg/icons/controls/minus.svg
+  h_c15b5755534093 1-3
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.10",
+  "base_commit_sha": "acd5eff3aca90dcb4e1c72870dc4f97f4f9cb561",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

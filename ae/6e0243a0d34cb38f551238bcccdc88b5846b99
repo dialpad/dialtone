@@ -1,0 +1,14 @@
+packages/dialtone-vue/components/Collapsible/Collapsible.vue
+  h_c15b5755534093 32-33,42-43
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.15",
+  "base_commit_sha": "ae6e0243a0d34cb38f551238bcccdc88b5846b99",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

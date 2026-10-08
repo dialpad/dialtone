@@ -1,0 +1,14 @@
+apps/dialtone-documentation/docs/.vuepress/baseComponents/tokens/TokenExample.vue
+  h_c15b5755534093 71
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.14",
+  "base_commit_sha": "53598fb4deaad7c2e5fdfcbf686b2065977ba229",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
