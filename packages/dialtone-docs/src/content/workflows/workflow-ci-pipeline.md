@@ -50,7 +50,7 @@ These checks are required on every PR:
 | `test`            | `packages/dialtone-vue/**`                                                                                          | `pnpm nx run dialtone-vue:test:coverage`                                                                                                                                                              |
 | `test-tokens`     | `packages/dialtone-tokens/**`                                                                                       | `pnpm nx run dialtone-tokens:test`                                                                                                                                                                    |
 | `test-combinator` | `packages/combinator/**`                                                                                            | `pnpm nx run dialtone-combinator:test`                                                                                                                                                                |
-| `test-cli`        | Lookup adapters, their source datasets/generators/tests, documentation pages, ESLint, and shared retrieval fixtures | Build CLI/MCP and their datasets; run query-core, CLI, AI docs and ESLint tests; run shared fixture/cache contracts, cross-adapter retrieval regressions, and existing documentation search scenarios |
+| `test-cli`        | Lookup adapters, their source datasets/generators/tests, documentation pages, ESLint, and shared retrieval fixtures | Build CLI/MCP and their datasets; run query-core, CLI, AI docs and ESLint tests; run the public-identity generator suite, shared fixture/cache contracts, cross-adapter retrieval regressions, and existing documentation search scenarios |
 
 The `test` job outputs a coverage report in JSON and HTML. Coverage thresholds enforced: 80% branches, 70% functions, 85% lines and statements. Build fails if thresholds are not met.
 
@@ -64,7 +64,7 @@ Shared contracts run with `node --test scripts/retrieval/*.test.mjs`; `node scri
 
 **Trigger:** Push to `staging` and pull requests touching `apps/dialtone-documentation/**`, the Vue docs generator, `scripts/lib/**/*.mjs`, `scripts/tests/**`, the imported common helper, this workflow, or `pnpm-lock.yaml`.
 
-**What it does:** Runs `pnpm nx run dialtone-documentation:test`, builds the documentation site with `pnpm nx run dialtone-documentation:build`, and verifies that `llms.txt` and `llms-full.txt` exist and are nonempty. Generator/helper/test routing runs the existing documentation checks; it does not imply that absent generator or startup suite commands have been integrated.
+**What it does:** Runs `pnpm nx run dialtone-documentation:test`, builds the documentation site with `pnpm nx run dialtone-documentation:build`, and verifies that `llms.txt` and `llms-full.txt` exist and are nonempty. Generator/helper/test routing runs the existing documentation checks. The public-identity generator suite runs after the lookup build; startup suite integration still waits for its source to merge.
 
 ---
 

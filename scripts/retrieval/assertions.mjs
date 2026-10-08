@@ -8,7 +8,6 @@ const primitives = {
       !actual.text.includes(value),
       `forbidden ${JSON.stringify(value)}`,
     ),
-  exact: (actual, value) => assert.equal(actual.text, value),
   order: (actual, value) =>
     assert.deepEqual(actual.names?.slice(0, value.length), value),
   empty: (actual) => assert.deepEqual(actual.names, []),
@@ -26,31 +25,6 @@ function assertPrimitive(actual, check) {
   primitives[check.kind](actual, check.value);
 }
 
-function assertAlternative(actual, groups) {
-  if (
-    !Array.isArray(groups) ||
-    !groups.length ||
-    groups.some(
-      (group) =>
-        !Array.isArray(group) || !group.length || !group.every(isPrimitive),
-    )
-  )
-    throw new Error(
-      'Assertion alternatives must be nonempty flat primitive groups',
-    );
-  const failures = [];
-  for (const group of groups) {
-    try {
-      for (const check of group) assertPrimitive(actual, check);
-      return;
-    } catch (error) {
-      if (!(error instanceof assert.AssertionError)) throw error;
-      failures.push(error.message);
-    }
-  }
-  assert.fail(`No valid response alternative: ${failures.join('; ')}`);
-}
-
 export function evaluateAssertions(id, actual, checks, expected) {
   if (!actual || typeof actual.text !== 'string')
     throw new Error(`Invalid adapter response for ${id}`);
@@ -65,8 +39,7 @@ export function evaluateAssertions(id, actual, checks, expected) {
   const failures = [];
   for (const check of checks) {
     try {
-      if (check.kind === 'any') assertAlternative(actual, check.value);
-      else assertPrimitive(actual, check);
+      assertPrimitive(actual, check);
     } catch (error) {
       // Programming errors never qualify as expected retrieval failures.
       if (!(error instanceof assert.AssertionError)) throw error;

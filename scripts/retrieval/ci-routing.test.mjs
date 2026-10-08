@@ -79,6 +79,7 @@ test('lookup source, data, adapter and harness changes route to the mandatory su
     'dialtone-docs',
     'eslint-plugin-dialtone',
     'scripts/retrieval/run.mjs',
+    'scripts/tests/vue-component-identity.test.mjs',
     'scripts/retrieval/*.test.mjs',
     'run-acceptance-scenarios.mjs',
   ])

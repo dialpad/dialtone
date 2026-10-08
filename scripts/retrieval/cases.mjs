@@ -15,25 +15,6 @@ const missing = (id, domain, query, diagnostic) =>
       mcp: [contains('meaningful-negative', diagnostic)],
     },
   });
-const breadcrumbResponse = (cli = false) => ({
-  id: 'breadcrumb-response',
-  kind: 'any',
-  value: [
-    [
-      order(['DtBreadcrumbItem']),
-      contains('canonical-subject', 'DtBreadcrumbItem'),
-    ],
-    [
-      { kind: 'empty' },
-      cli
-        ? { kind: 'exact', value: '[]' }
-        : contains(
-            'current-no-match',
-            'No components found for "DtBreadcrumbItem".',
-          ),
-    ],
-  ],
-});
 export const cases = [
   baseline('button-exact', 'components', 'DtButton', [
     order(['DtButton']),
@@ -60,19 +41,10 @@ export const cases = [
     'DLT3652MissingWidget',
     'No components found for "DLT3652MissingWidget".',
   ),
-  baseline(
-    'breadcrumb-public-name',
-    'components',
-    'DtBreadcrumbItem',
-    [order(['DtBreadcrumbItem'])],
-    {
-      checksByAdapter: {
-        core: [breadcrumbResponse()],
-        cli: [breadcrumbResponse(true)],
-        mcp: [breadcrumbResponse()],
-      },
-    },
-  ),
+  baseline('breadcrumb-public-name', 'components', 'DtBreadcrumbItem', [
+    order(['DtBreadcrumbItem']),
+    contains('canonical-subject', 'DtBreadcrumbItem'),
+  ]),
   baseline('breadcrumb-family', 'components', 'DtBreadcrumbs', [
     order(['DtBreadcrumbs']),
     contains('context', 'currently-viewed page'),
@@ -285,15 +257,6 @@ export const expectedFailures = {
     'replacement',
     'selected migration detail retains the replacement beyond the summary excerpt',
   ),
-  ...everyAdapter(
-    'breadcrumb-public-name',
-    failure(
-      'DLT-3649',
-      'public API identity',
-      'top-results',
-      'integrated canonical public names rank DtBreadcrumbItem first',
-    ),
-  ),
   'button-complete-prop/mcp': failure(
     'DLT-3650',
     'focused MCP retrieval',
@@ -329,12 +292,6 @@ export const expectedFailures = {
     'focused MCP retrieval',
     'meaningful-negative',
     'zero matches produce an explicit negative response instead of empty text',
-  ),
-  'legacy-import-qualification/core': failure(
-    'DLT-3649',
-    'public API identity',
-    'unverified-import',
-    'legacy metadata without identity/export verification emits no guessed import',
   ),
   'mcp-answer-provenance/mcp': failure(
     'DLT-3650',
