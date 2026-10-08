@@ -103,7 +103,7 @@ function askForTool(): void {
     } else if (choice === '2') {
       currentTool = 'tokens';
       console.log('\n✓ Selected: Design Tokens');
-      console.log('Example: "color foreground", "space 400", "font family"\n');
+      console.log('Example: "color foreground", "spacing 100", "font family"\n');
       rl.prompt();
     } else if (choice === '3') {
       currentTool = 'components';
