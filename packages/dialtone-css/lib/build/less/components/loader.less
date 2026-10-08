@@ -47,6 +47,9 @@
 //      Translate values are SVG user units within the 24 × 24 viewBox, so the
 //      motion scales with every icon size. They are not CSS pixels, so no
 //      spacing tokens apply.
+//      Figma's code export reports each dot's offsets in its rotated (-45°)
+//      local frame. They are rotated back to screen space here, which matches
+//      Figma's rendered playback. Re-apply that rotation when re-exporting.
 //  ----------------------------------------------------------------------------
 /* stylelint-disable meowtec/no-px */
 @keyframes d-loader-dot-1-orbit {
@@ -55,95 +58,95 @@
   }
 
   4.1667% {
-    translate: 0.793px 1.005px;
+    translate: -0.126px 1.07px;
   }
 
   8.3333% {
-    translate: 1.339px 2.189px;
+    translate: -0.506px 2.1px;
   }
 
   12.5% {
-    translate: 1.603px 3.457px;
+    translate: -1.103px 3.012px;
   }
 
   16.6667% {
-    translate: 1.565px 4.698px;
+    translate: -1.865px 3.728px;
   }
 
   20.8333% {
-    translate: 1.228px 5.805px;
+    translate: -2.724px 4.186px;
   }
 
   25% {
-    translate: 0.616px 6.686px;
+    translate: -3.613px 4.347px;
   }
 
   29.1667% {
-    translate: -0.23px 7.275px;
+    translate: -4.467px 4.193px;
   }
 
   33.3333% {
-    translate: -1.252px 7.537px;
+    translate: -5.232px 3.741px;
   }
 
   37.5% {
-    translate: -2.382px 7.472px;
+    translate: -5.866px 3.03px;
   }
 
   41.6667% {
-    translate: -3.54px 7.107px;
+    translate: -6.339px 2.123px;
   }
 
   45.8333% {
-    translate: -4.65px 6.49px;
+    translate: -6.631px 1.095px;
   }
 
   50% {
-    translate: -5.635px 5.679px;
+    translate: -6.734px 0.026px;
   }
 
   54.1667% {
-    translate: -6.427px 4.735px;
+    translate: -6.645px -1.007px;
   }
 
   58.3333% {
-    translate: -6.974px 3.718px;
+    translate: -6.364px -1.939px;
   }
 
   62.5% {
-    translate: -7.238px 2.679px;
+    translate: -5.903px -2.714px;
   }
 
   66.6667% {
-    translate: -7.2px 1.666px;
+    translate: -5.277px -3.294px;
   }
 
   70.8333% {
-    translate: -6.863px 0.726px;
+    translate: -4.518px -3.653px;
   }
 
   75% {
-    translate: -6.251px -0.094px;
+    translate: -3.665px -3.777px;
   }
 
   79.1667% {
-    translate: -5.405px -0.744px;
+    translate: -2.775px -3.66px;
   }
 
   83.3333% {
-    translate: -4.382px -1.173px;
+    translate: -1.91px -3.307px;
   }
 
   87.5% {
-    translate: -3.253px -1.337px;
+    translate: -1.141px -2.732px;
   }
 
   91.6667% {
-    translate: -2.094px -1.2px;
+    translate: -0.532px -1.961px;
   }
 
   95.8333% {
-    translate: -0.985px -0.75px;
+    translate: -0.14px -1.033px;
   }
 }
 
@@ -153,95 +156,95 @@
   }
 
   4.1667% {
-    translate: -0.793px -0.943px;
+    translate: 0.089px -1.033px;
   }
 
   8.3333% {
-    translate: -1.339px -1.961px;
+    translate: 0.37px -1.965px;
   }
 
   12.5% {
-    translate: -1.603px -3px;
+    translate: 0.832px -2.74px;
   }
 
   16.6667% {
-    translate: -1.565px -4.013px;
+    translate: 1.457px -3.32px;
   }
 
   20.8333% {
-    translate: -1.228px -4.953px;
+    translate: 2.217px -3.679px;
   }
 
   25% {
-    translate: -0.616px -5.772px;
+    translate: 3.069px -3.803px;
   }
 
   29.1667% {
-    translate: 0.23px -6.422px;
+    translate: 3.96px -3.686px;
   }
 
   33.3333% {
-    translate: 1.252px -6.852px;
+    translate: 4.825px -3.333px;
   }
 
   37.5% {
-    translate: 2.382px -7.016px;
+    translate: 5.594px -2.758px;
   }
 
   41.6667% {
-    translate: 3.54px -6.879px;
+    translate: 6.202px -1.987px;
   }
 
   45.8333% {
-    translate: 4.65px -6.429px;
+    translate: 6.595px -1.059px;
   }
 
   50% {
-    translate: 5.635px -5.679px;
+    translate: 6.734px -0.026px;
   }
 
   54.1667% {
-    translate: 6.427px -4.674px;
+    translate: 6.609px 1.044px;
   }
 
   58.3333% {
-    translate: 6.974px -3.489px;
+    translate: 6.229px 2.074px;
   }
 
   62.5% {
-    translate: 7.238px -2.222px;
+    translate: 5.631px 2.986px;
   }
 
   66.6667% {
-    translate: 7.2px -0.981px;
+    translate: 4.87px 3.702px;
   }
 
   70.8333% {
-    translate: 6.863px 0.126px;
+    translate: 4.01px 4.16px;
   }
 
   75% {
-    translate: 6.251px 1.007px;
+    translate: 3.122px 4.32px;
   }
 
   79.1667% {
-    translate: 5.405px 1.596px;
+    translate: 2.267px 4.167px;
   }
 
   83.3333% {
-    translate: 4.382px 1.858px;
+    translate: 1.502px 3.715px;
   }
 
   87.5% {
-    translate: 3.253px 1.794px;
+    translate: 0.869px 3.004px;
   }
 
   91.6667% {
-    translate: 2.094px 1.429px;
+    translate: 0.396px 2.097px;
   }
 
   95.8333% {
-    translate: 0.985px 0.811px;
+    translate: 0.103px 1.069px;
   }
 }
 
@@ -251,95 +254,95 @@
   }
 
   4.1667% {
-    translate: -0.846px 0.589px;
+    translate: -0.854px -0.153px;
   }
 
   8.3333% {
-    translate: -1.869px 0.851px;
+    translate: -1.619px -0.606px;
   }
 
   12.5% {
-    translate: -2.998px 0.787px;
+    translate: -2.252px -1.316px;
   }
 
   16.6667% {
-    translate: -4.157px 0.422px;
+    translate: -2.726px -2.223px;
   }
 
   20.8333% {
-    translate: -5.266px -0.196px;
+    translate: -3.018px -3.252px;
   }
 
   25% {
-    translate: -6.251px -1.007px;
+    translate: -3.122px -4.32px;
   }
 
   29.1667% {
-    translate: -7.044px -1.95px;
+    translate: -3.032px -5.354px;
   }
 
   33.3333% {
-    translate: -7.59px -2.968px;
+    translate: -2.752px -6.285px;
   }
 
   37.5% {
-    translate: -7.854px -4.007px;
+    translate: -2.29px -7.06px;
   }
 
   41.6667% {
-    translate: -7.816px -5.02px;
+    translate: -1.665px -7.641px;
   }
 
   45.8333% {
-    translate: -7.48px -5.96px;
+    translate: -0.905px -8px;
   }
 
   50% {
-    translate: -6.867px -6.779px;
+    translate: -0.052px -8.123px;
   }
 
   54.1667% {
-    translate: -6.021px -7.429px;
+    translate: 0.838px -8.007px;
   }
 
   58.3333% {
-    translate: -4.999px -7.859px;
+    translate: 1.703px -7.654px;
   }
 
   62.5% {
-    translate: -3.869px -8.023px;
+    translate: 2.472px -7.079px;
   }
 
   66.6667% {
-    translate: -2.711px -7.886px;
+    translate: 3.081px -6.308px;
   }
 
   70.8333% {
-    translate: -1.601px -7.436px;
+    translate: 3.473px -5.379px;
   }
 
   75% {
-    translate: -0.616px -6.686px;
+    translate: 3.613px -4.347px;
   }
 
   79.1667% {
-    translate: 0.176px -5.681px;
+    translate: 3.487px -3.277px;
   }
 
   83.3333% {
-    translate: 0.723px -4.496px;
+    translate: 3.107px -2.246px;
   }
 
   87.5% {
-    translate: 0.986px -3.229px;
+    translate: 2.509px -1.335px;
   }
 
   91.6667% {
-    translate: 0.949px -1.988px;
+    translate: 1.748px -0.619px;
   }
 
   95.8333% {
-    translate: 0.612px -0.881px;
+    translate: 0.889px -0.16px;
   }
 }
 
@@ -349,95 +352,95 @@
   }
 
   4.1667% {
-    translate: 0.846px -0.65px;
+    translate: 0.891px 0.117px;
   }
 
   8.3333% {
-    translate: 1.869px -1.08px;
+    translate: 1.755px 0.47px;
   }
 
   12.5% {
-    translate: 2.998px -1.243px;
+    translate: 2.524px 1.044px;
   }
 
   16.6667% {
-    translate: 4.157px -1.107px;
+    translate: 3.133px 1.816px;
   }
 
   20.8333% {
-    translate: 5.266px -0.656px;
+    translate: 3.526px 2.744px;
   }
 
   25% {
-    translate: 6.251px 0.094px;
+    translate: 3.666px 3.777px;
   }
 
   29.1667% {
-    translate: 7.044px 1.098px;
+    translate: 3.539px 4.847px;
   }
 
   33.3333% {
-    translate: 7.59px 2.283px;
+    translate: 3.159px 5.877px;
   }
 
   37.5% {
-    translate: 7.854px 3.55px;
+    translate: 2.561px 6.789px;
   }
 
   41.6667% {
-    translate: 7.816px 4.791px;
+    translate: 1.801px 7.505px;
   }
 
   45.8333% {
-    translate: 7.48px 5.898px;
+    translate: 0.941px 7.963px;
   }
 
   50% {
-    translate: 6.867px 6.779px;
+    translate: 0.052px 8.123px;
   }
 
   54.1667% {
-    translate: 6.021px 7.368px;
+    translate: -0.802px 7.97px;
   }
 
   58.3333% {
-    translate: 4.999px 7.631px;
+    translate: -1.567px 7.518px;
   }
 
   62.5% {
-    translate: 3.869px 7.566px;
+    translate: -2.2px 6.807px;
   }
 
   66.6667% {
-    translate: 2.711px 7.201px;
+    translate: -2.673px 5.9px;
   }
 
   70.8333% {
-    translate: 1.601px 6.584px;
+    translate: -2.966px 4.872px;
   }
 
   75% {
-    translate: 0.616px 5.772px;
+    translate: -3.069px 3.803px;
   }
 
   79.1667% {
-    translate: -0.176px 4.829px;
+    translate: -2.979px 2.769px;
   }
 
   83.3333% {
-    translate: -0.723px 3.811px;
+    translate: -2.699px 1.838px;
   }
 
   87.5% {
-    translate: -0.986px 2.772px;
+    translate: -2.237px 1.063px;
   }
 
   91.6667% {
-    translate: -0.949px 1.76px;
+    translate: -1.612px 0.483px;
   }
 
   95.8333% {
-    translate: -0.612px 0.82px;
+    translate: -0.852px 0.123px;
   }
 }
 
