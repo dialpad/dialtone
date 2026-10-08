@@ -59,7 +59,7 @@ Use `null` to turn off a rule inherited from a shared configuration.
 
 <!-- GENERATED:stylelint-rules:end -->
 
-Do not enable `no-deprecated-space-tokens` and `no-deprecated-size-tokens` together. Both report `--dt-space-*`, but the older space rule points to the intermediate `--dt-size-*` tokens. Use `no-deprecated-size-tokens` for the current migration to `--dt-spacing-*` and `--dt-layout-*`.
+`no-deprecated-space-tokens` recommends exact `--dt-spacing-*` replacements for legacy space tokens used in spacing properties, with manual review for unsupported values or contexts. Use the migration helper's `space-to-spacing` route for those replacements. `no-deprecated-size-tokens` reports both generic size and space tokens; use it for broader migration detection, including size-to-layout work. Avoid enabling both rules together unless you want duplicate reports for `--dt-space-*`.
 
 ## Logical properties
 

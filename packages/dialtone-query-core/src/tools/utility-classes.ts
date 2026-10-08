@@ -112,10 +112,10 @@ export function valueMatchesKeyword(value: string, description: string | undefin
 export function searchUtilityClasses(query: string, data: UtilityClassesData): { results: SearchResult[]; notes: string[] } {
   console.error(`\n[CLASS SEARCH DEBUG] Query: "${query}"`);
   if (!query.trim()) return { results: [], notes: [] };
-  const exactName = query.trim().replace(/^\./, '').toLowerCase();
+  const exactName = query.trim().replace(/^\.(?=d-)/i, '').toLowerCase();
 
   // Normalize query: lowercase, replace hyphens/slashes with spaces
-  const normalized = query.toLowerCase().replace(/[/-]/g, ' ');
+  const normalized = exactName.replace(/[/-]/g, ' ');
   const words = normalized.split(/\s+/).filter(w => w.length > 0);
 
   // Create regex for each word (handle px/rem conversion)

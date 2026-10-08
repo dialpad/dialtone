@@ -96,5 +96,8 @@
     "bbr": "bber",
     "blr": "bisr",
     "brr": "bier"
+  },
+  "UTILITY_REVIEW_REQUIRED": {
+    "d-flg2": "Legacy d-flg2 resolves to 1px; its suffix does not identify its value. Manual layout review required."
   }
 }

@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import guidance from '../packages/dialtone-css/lib/build/js/dialtone_migration_helper/migration-guidance.cjs';
 
 const projections = {
-  'eslint-plugin-dialtone': ['SIZING_MAP', 'SPACING_MAP', 'NEGATIVE_SPACING_MAP', 'SPACING_LAYOUT_MAP', 'RADIUS_MAP', 'RADIUS_PAIR_PREFIX_MAP'],
+  'eslint-plugin-dialtone': ['SIZING_MAP', 'SPACING_MAP', 'NEGATIVE_SPACING_MAP', 'SPACING_LAYOUT_MAP', 'RADIUS_MAP', 'RADIUS_PAIR_PREFIX_MAP', 'UTILITY_REVIEW_REQUIRED'],
   'stylelint-plugin-dialtone': ['SPACE_TOKEN_MAP'],
 };
 for (const [pkg, keys] of Object.entries(projections)) {

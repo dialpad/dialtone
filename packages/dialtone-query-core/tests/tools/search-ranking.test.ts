@@ -41,9 +41,12 @@ describe('exact names and bounded utility intent', () => {
   test.each(['padding diagonal 8px', 'not-a-real-utility', ''])('does not invent a utility for %j', query => {
     expect(searchUtilityClasses(query, utilities).results).toEqual([]);
   });
-  test('explicit legacy query retains its contract and migration warning', () => {
-    const { results } = searchUtilityClasses('d-p8', utilities);
+  test.each(['d-p8', '.d-p8'])('explicit legacy query %s retains its contract and migration warning', query => {
+    const { results } = searchUtilityClasses(query, utilities);
     expect(results[0]).toMatchObject({ name: 'd-p8', metadata: { deprecated: true, alternatives: ['d-p-100'] } });
+  });
+  test('a leading decimal point remains a value query', () => {
+    expect(searchUtilityClasses('.8rem', utilities).results.map(result => result.name)).toContain('d-p-100');
   });
   test('general spacing discovery excludes deprecated utilities', () => {
     expect(searchUtilityClasses('padding 8px', utilities).results.some(r => r.name === 'd-p8')).toBe(false);

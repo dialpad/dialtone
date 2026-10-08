@@ -50,11 +50,11 @@ These checks are required on every PR:
 | `test` | `packages/dialtone-vue/**` | `pnpm nx run dialtone-vue:test:coverage` |
 | `test-tokens` | `packages/dialtone-tokens/**` | `pnpm nx run dialtone-tokens:test` |
 | `test-combinator` | `packages/combinator/**` | `pnpm nx run dialtone-combinator:test` |
-| `test-cli` | Query-core/CLI, Vue/docs generators, CSS migration helpers/metadata, token-doc generation, MCP guide/client recommendations, CSS agent rules and this workflow | `pnpm nx run-many -t test -p dialtone-query-core dialtone-cli`; focused Node migration/metadata tests |
+| `test-cli` | Query-core/CLI, Vue/docs generators, CSS migration helpers/metadata, token-doc generation, MCP guide/client recommendations, CSS agent rules and this workflow | `pnpm nx run-many -t test -p dialtone-query-core dialtone-cli`; focused Node migration/metadata and recommendation integration tests |
 | `test-lint-plugins` | Lint packages, canonical migration guidance, its generator and this workflow | Guidance generation check; ESLint/Stylelint package tests |
 
 The lookup job also runs helper migration tests and verifies generated
-utility metadata after building its data. CSS migration/helper and metadata
+utility metadata and recommendation strings after building their data. CSS migration/helper and metadata
 changes trigger it. A separate `test-lint-plugins` job runs the ESLint and
 Stylelint suites, verifies source-value agreement and checks generated migration
 guidance against its source.
