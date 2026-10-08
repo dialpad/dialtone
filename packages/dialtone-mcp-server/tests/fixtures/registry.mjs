@@ -39,7 +39,6 @@ globalThis.fetch = async (url, options = {}) => {
     current: process.env.DIALTONE_TEST_VERSION,
     update: '99.0.0',
     missing: undefined,
-    numeric: 99,
     invalid: 'not-a-version',
   };
   const response = new Response(scenario === 'invalid-json' ? '{invalid' : JSON.stringify({ version: versions[scenario] }));

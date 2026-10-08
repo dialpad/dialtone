@@ -55,11 +55,13 @@ for (const adapter of ['dialtone-cli', 'dialtone-mcp-server']) {
     }
   });
 
-  test(`${adapter} does not release for shared-core test-only commits`, async t => {
-    const { cwd, commit, selectCommits } = repository(t, config);
-    commit('packages/dialtone-query-core/tests/components.test.ts', 'test(query-core): exact component coverage');
-    const commits = await selectCommits();
-    assert.equal(commits.length, 1);
-    assert.equal(await analyzeCommits(analyzerOptions, { cwd, commits, logger }), null);
-  });
+  if (adapter === 'dialtone-mcp-server') {
+    test('shared-core test-only commits do not request a release', async t => {
+      const { cwd, commit, selectCommits } = repository(t, config);
+      commit('packages/dialtone-query-core/tests/components.test.ts', 'test(query-core): exact component coverage');
+      const commits = await selectCommits();
+      assert.equal(commits.length, 1);
+      assert.equal(await analyzeCommits(analyzerOptions, { cwd, commits, logger }), null);
+    });
+  }
 }

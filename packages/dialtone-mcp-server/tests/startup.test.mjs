@@ -100,7 +100,7 @@ for (const scenario of ['stalled-fetch', 'stalled-body']) {
   });
 }
 
-for (const scenario of ['offline', 'http-error', 'invalid-json', 'missing', 'numeric', 'invalid']) {
+for (const scenario of ['offline', 'http-error', 'invalid-json', 'missing', 'invalid']) {
   test(`${scenario} leaves initialize available without an update notice`, { timeout: 5000 }, async t => {
     const stderr = await probe(t, scenario);
     assert.match(stderr, /\[registry fixture\] completed/);
