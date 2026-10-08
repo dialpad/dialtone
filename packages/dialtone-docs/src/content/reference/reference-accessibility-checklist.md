@@ -3,7 +3,7 @@ type: reference
 category: reference
 keywords: [accessibility, a11y, wcag, aria, focus-management, keyboard-navigation, screen-reader, data-qa, focus-visible, reduced-motion]
 ai_summary: Accessibility checklist for Dialtone components — ARIA patterns, focus management, keyboard navigation, and CSS utilities.
-last_updated: 2026-03-09
+last_updated: 2026-10-08
 related_packages: [dialtone-vue, dialtone-css]
 ---
 
@@ -104,6 +104,8 @@ Applied on: buttons (`.d-btn:focus-visible`), links (`.d-link:focus-visible`), c
 ### Reduced Motion
 
 `@media (prefers-reduced-motion)` is applied to disable animations for users with motion sensitivity. This affects transitions on tooltips, modals, and other animated components.
+
+Indeterminate indicators keep a cue that work is in progress. `DtLoader` stops the dot orbit and scale under `prefers-reduced-motion: reduce` and pulses opacity instead (`d-loader-pulse` in `packages/dialtone-css/lib/build/less/components/loader.less`).
 
 ## Component Accessibility Checklist
 

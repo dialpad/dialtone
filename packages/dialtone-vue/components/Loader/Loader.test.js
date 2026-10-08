@@ -41,6 +41,10 @@ describe('DtLoader Tests', function () {
       expect(loadingIcon.exists()).toBe(true);
     });
 
+    it('Should render four dots', () => {
+      expect(loadingIcon.findAll('[data-qa="dt-loader-dot"]').length).toBe(4);
+    });
+
     describe('When rendered with default props', () => {
       it('Size should be 500', () => {
         expect(loadingIcon.element.classList.contains('d-icon--size-500')).toBe(true);
