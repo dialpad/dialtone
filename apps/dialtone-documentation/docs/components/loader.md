@@ -58,7 +58,7 @@ The base loader size is 24px and should be used in most cases.
 
 ## Color
 
-Loader dots use `--dt-color-surface-bold` by default. Inside a [Button](/components/button.html), they follow the button's text color. To recolor the dots elsewhere, set the `--loader-color-dot` custom property on the loader or on a parent element.
+Loader dots use `--dt-color-surface-bold` by default. Inside a [Button](/components/button.html), they follow the button's text color. To recolor the dots elsewhere, add a color utility class such as `d-fc-critical` to the loader, or set the `--loader-color-dot` custom property on the loader or on a parent element.
 
 ## Accessibility
 

@@ -19,6 +19,10 @@
   --loader-duration: 2500ms;
 
   display: inline-grid;
+  // Dots fill with currentColor, so a color utility or `color` set on the
+  // loader itself still recolors it. --loader-color-dot is left unset here so
+  // contexts like buttons can override it regardless of stylesheet order.
+  color: var(--loader-color-dot, var(--dt-color-surface-bold));
 
   &__dot {
     // With transform-box: fill-box, each dot scales from its own center
@@ -29,10 +33,7 @@
     animation-duration: var(--loader-duration);
     animation-timing-function: linear;
     animation-iteration-count: infinite;
-    // Set --loader-color-dot on the loader or an ancestor to recolor the dots.
-    // It's left unset here so contexts like buttons can override it
-    // regardless of stylesheet order.
-    fill: var(--loader-color-dot, var(--dt-color-surface-bold));
+    fill: currentColor;
     transform-box: fill-box;
 
     &--1 { animation-name: d-loader-dot-1-orbit, d-loader-dot-grow; }
