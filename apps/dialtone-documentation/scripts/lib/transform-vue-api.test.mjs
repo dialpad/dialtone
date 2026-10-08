@@ -59,7 +59,7 @@ test('raw API tables retain allowed values, required, defaults and deprecation f
   component.props = [
     { name: 'mode', description: 'A mode.', type: { name: 'string|number' }, values: ['light', 'dark'], required: true,
       defaultValue: { value: 'undefined' }, tags: { deprecated: [{ description: 'Use contentMode.' }] } },
-    { name: 'empty', defaultValue: { value: '\'\'' }, required: false },
+    { name: 'empty', defaultValue: { value: '' }, required: false },
     { name: 'enabled', defaultValue: { value: false } },
     { name: 'count', defaultValue: { value: 0 } },
     { name: 'nullable', defaultValue: { value: null } },

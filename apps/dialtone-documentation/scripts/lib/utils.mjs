@@ -62,6 +62,7 @@ export function tableText (value) {
 export function apiCode (value) {
   if (value === undefined) return 'Not documented';
   if (value === null) return '`null`';
+  if (value === '') return '`\'\'`';
   const text = tableText(value);
   const runs = text.match(/`+/g) ?? [];
   const fence = '`'.repeat(Math.max(0, ...runs.map(run => run.length)) + 1);
