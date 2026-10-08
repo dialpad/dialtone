@@ -120,8 +120,10 @@ When working with Dialtone components, tokens, or utility classes, use the `dial
 - Structured data: add `--format json` to any command
 
 Prefer the CLI over reading source files for design system information. It searches
-the generated API and leaves deprecated items out of general discovery. An exact
-legacy component, utility or token name retains its contract and migration guidance.
+the generated API and leaves deprecated items out of general discovery. Exact
+legacy component, utility or token names retain their contract. Use `--format json`
+to inspect utility migration metadata. Token lookups print migration notes to stderr
+in all formats; add `--values --format json` for structured metadata.
 ```
 
 ### Skills
