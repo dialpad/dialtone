@@ -102,7 +102,10 @@ include any of these paths ("thumb inputs"):
 - `packages/dialtone-vue/components/`
 - `apps/dialtone-documentation/thumbs/`
 - `packages/combinator/src/variants/`
-- `packages/dialtone-tokens/`
+- `packages/dialtone-tokens/tokens/`
+
+Files that don't affect rendering are excluded: `package.json`, `*.md`,
+`*.mdx`, `*.test.*` and `*.stories.*`.
 
 When it fires, it runs `pnpm nx run dialtone-documentation:thumbs` and
 auto-stages any updated PNGs from
