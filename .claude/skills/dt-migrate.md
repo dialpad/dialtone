@@ -6,16 +6,18 @@ description: "Run Dialtone migration tools for token and utility renames. Use '/
 
 ## Available Migrations
 
+Run these commands from a consumer project root with `@dialpad/dialtone` installed. Check `npx dialtone-migrate --help` to confirm the migration IDs and options available in that version.
+
 | Migration | Description | Command |
 | --- | --- | --- |
-| `color-stops` | Renames irregular color stops (250, 350, 425, etc.) to standard 12-stop scale | `npx dialtone-migration-helper` → "color stops" |
-| `base-to-semantic` | Replaces base color utilities and CSS tokens with semantic equivalents | `npx dialtone-migration-helper` → "base to semantic" |
-| `space-to-spacing` | Maps supported `var(--dt-space-*)` values to `--dt-spacing-*` by value (e.g., `--dt-space-400` → `--dt-spacing-100`), including negative variants. Percentage and unmapped stops stay unchanged for manual review | `npx dialtone-migration-helper` → "space to spacing" |
-| `size-to-layout` | Routes supported numeric `var(--dt-size-*)` values to spacing, layout, border, or radius tokens by recognized CSS property context. Includes exact off-scale layout exceptions (1/2/8/20/24 px → `--dt-layout-Npx`). Unmapped or approximate values, negative layout values, and numeric tokens in unknown contexts stay unchanged for manual review | `npx dialtone-migration-helper` → "size to layout" |
-| `utility-class-to-token-stops` | Rewrites legacy pixel-indexed utility class names (`d-h16`, `d-p8`) to token-stop-based names (`d-h-25`, `d-p-100`). Covers off-scale pixel-indexed exceptions (`d-w1` → `d-w-1px`, `d-h24` → `d-h-24px`, etc.) | `npx dialtone-migration-helper` → "utility class to token stops" |
-| `hsl-to-oklch` | Migrates consumer HSL channel variable patterns to OKLCH relative color syntax or plain `var()` | `npx dialtone-migration-helper` → "hsl to oklch" |
-| `link-rendering` | Migrates `<a class="d-btn">`, `<router-link class="d-link">`, etc. to `<dt-button>` / `<dt-link>` with `to`/`href` props. Also extracts `d-btn--*` / `d-link--*` modifiers into corresponding props (size, kind, importance, tone) and converts `d-td-*` classes on DtLink to the `underline` prop. Standalone CLI, not a config of `dialtone-migration-helper`. | `npx dialtone-migrate-link-rendering` |
-| `typography` | Migrates legacy typography utility classes (`d-headline--*`, `d-body--*`, `d-label--*`, `d-code--md`, `d-fw-*`, `d-fc-*`, `d-lh-*`, `d-truncate`, `d-ta-*`) on `<p>`/`<span>`/`<div>`/`<h1>`-`<h6>`/`<label>` elements to `<dt-text>` with semantic props. Flags `d-headline--eyebrow`, `d-code--sm`, `d-helper--*`, dynamic `:class` bindings, and `d-fs-*` for manual review. | `npx dialtone-migrate-typography` |
+| `color-stops` | Renames irregular color stops (250, 350, 425, etc.) to standard 12-stop scale | `npx dialtone-migrate --only color-stops` |
+| `base-to-semantic` | Replaces base color utilities and CSS tokens with semantic equivalents | `npx dialtone-migrate --only base-to-semantic` |
+| `space-to-spacing` | Maps supported `var(--dt-space-*)` values to `--dt-spacing-*` by value (e.g., `--dt-space-400` → `--dt-spacing-100`), including negative variants. Percentage and unmapped stops stay unchanged for manual review | `npx dialtone-migrate --only space-to-spacing` |
+| `size-to-layout` | Routes supported numeric `var(--dt-size-*)` values to spacing, layout, border, or radius tokens by recognized CSS property context. Includes exact off-scale layout exceptions (1/2/8/20/24 px → `--dt-layout-Npx`). Unmapped or approximate values, negative layout values, and numeric tokens in unknown contexts stay unchanged for manual review | `npx dialtone-migrate --only size-to-layout` |
+| `utility-class-to-token-stops` | Rewrites legacy pixel-indexed utility class names (`d-h16`, `d-p8`) to token-stop-based names (`d-h-25`, `d-p-100`). Covers off-scale pixel-indexed exceptions (`d-w1` → `d-w-1px`, `d-h24` → `d-h-24px`, etc.) | `npx dialtone-migrate --only utility-class-to-token-stops` |
+| `hsl-to-oklch` | Migrates consumer HSL channel variable patterns to OKLCH relative color syntax or plain `var()` | `npx dialtone-migrate --only hsl-to-oklch` |
+| `link-rendering` | Migrates `<a class="d-btn">`, `<router-link class="d-link">`, etc. to `<dt-button>` / `<dt-link>` with `to`/`href` props. Also extracts `d-btn--*` / `d-link--*` modifiers into corresponding props (size, kind, importance, tone) and converts `d-td-*` classes on DtLink to the `underline` prop. | `npx dialtone-migrate --only link-rendering` |
+| `typography` | Migrates legacy typography utility classes (`d-headline--*`, `d-body--*`, `d-label--*`, `d-code--md`, `d-fw-*`, `d-fc-*`, `d-lh-*`, `d-truncate`, `d-ta-*`) on `<p>`/`<span>`/`<div>`/`<h1>`-`<h6>`/`<label>` elements to `<dt-text>` with semantic props. Flags `d-headline--eyebrow`, `d-code--sm`, `d-helper--*`, dynamic `:class` bindings, and `d-fs-*` for manual review. | `npx dialtone-migrate --only typography` |
 
 ## Usage
 
@@ -28,13 +30,19 @@ List all available migrations with descriptions.
 Run the specified migration:
 
 1. Confirm the target directory with the user (default: `./src`)
-2. Look up `<name>` in the table above. If the Command column shows `npx dialtone-migration-helper`, run that command and select the named config interactively. If the Command column shows a different `npx <name>` invocation (a standalone CLI — e.g., `link-rendering` runs `npx dialtone-migrate-link-rendering`), run the command shown directly with `--cwd <dir>` instead.
+2. Look up `<name>` in the table above and run its command with `--cwd <dir>`.
 3. Report the number of files changed and matches replaced
 4. Suggest running linters after migration to catch remaining manual fixes
 
+Contributors can run a listed migration by ID from the Dialtone monorepo root:
+
+```sh
+node packages/dialtone-css/lib/build/js/dialtone_migrate/index.mjs --only <id> --cwd <dir>
+```
+
 ### `/dt-migrate <name> --dry-run`
 
-Preview changes without applying them.
+Add `--dry-run` to the selected migration command to preview changes without applying them.
 
 ### `/dt-migrate color-stops --merge-from staging`
 
