@@ -24,13 +24,16 @@ function bounded(promise, milliseconds, message) {
   ]).finally(() => clearTimeout(timeout));
 }
 
-function registryDiagnostic(scenario, waitForTimeout) {
-  if (waitForTimeout) return '[registry fixture] aborted';
-  if (scenario.startsWith('stalled')) return;
-  return { update: 'Update Available', current: 'up to date' }[scenario] ?? '[registry fixture] completed';
-}
+// Stderr each scenario must reach before shutdown. Retained-handle probes shut down mid-check.
+const registryDiagnostics = {
+  'stalled-fetch': '[registry fixture] aborted',
+  'stalled-body': '[registry fixture] aborted',
+  'stalled-retained-handle': null,
+  update: 'Update Available',
+  current: 'up to date',
+};
 
-async function probe(t, scenario, { waitForTimeout = false, signal } = {}) {
+async function probe(t, scenario, { signal } = {}) {
   const started = performance.now();
   const child = spawn(process.execPath, ['--import', registryFixture, server], {
     env: { ...process.env, DIALTONE_TEST_REGISTRY: scenario, DIALTONE_TEST_VERSION: version },
@@ -72,7 +75,7 @@ async function probe(t, scenario, { waitForTimeout = false, signal } = {}) {
     assert.doesNotMatch(stderr, /\[registry fixture\] aborted/, 'initialize must precede the registry deadline');
   }
   child.stdin.write('{"jsonrpc":"2.0","method":"notifications/initialized"}\n');
-  const expected = registryDiagnostic(scenario, waitForTimeout);
+  const expected = scenario in registryDiagnostics ? registryDiagnostics[scenario] : '[registry fixture] completed';
   if (expected) {
     await bounded(new Promise(resolve => {
       const check = () => { if (stderr.includes(expected)) resolve(); };
@@ -95,7 +98,7 @@ async function probe(t, scenario, { waitForTimeout = false, signal } = {}) {
 
 for (const scenario of ['stalled-fetch', 'stalled-body']) {
   test(`${scenario} cannot delay initialize and is aborted after two seconds`, { timeout: 7000 }, async t => {
-    const stderr = await probe(t, scenario, { waitForTimeout: true });
+    const stderr = await probe(t, scenario);
     assert.doesNotMatch(stderr, /Update Available|up to date/);
   });
 }

@@ -56,9 +56,7 @@ The `test` job outputs a coverage report in JSON and HTML. Coverage thresholds e
 
 In `test-cli`, the query-core and CLI test targets depend on their project's build. The builds generate the component, token, utility, icon, and documentation data the tests read, and the CLI's smoke tests run its built `build/index.js`. A change to a generator can change the shape of that data, so it runs `test-cli`. A change to the content alone, such as a component, icon, or docs page, doesn't; a test it breaks fails on the next PR that runs `test-cli`.
 
-The MCP startup target also depends on its build, so startup and shutdown checks
-run against a built server. The release-path suite checks commit selection using
-the installed release implementation without publishing packages.
+The MCP startup target also depends on its build, so startup and shutdown checks run against a built server. The release-path suite checks commit selection using the installed release implementation without publishing packages.
 
 ---
 

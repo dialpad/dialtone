@@ -374,12 +374,8 @@ async function main() {
     ));
     process.exit(exitCode);
   };
-  server.server.onclose = () => {
-    process.stdin.off('end', shutdown);
-    process.off('SIGINT', shutdown);
-    process.off('SIGTERM', shutdown);
-    void shutdown();
-  };
+  // Also exit if the transport closes before any shutdown trigger.
+  server.server.onclose = () => void shutdown();
   process.stdin.once('end', shutdown);
   process.once('SIGINT', shutdown);
   process.once('SIGTERM', shutdown);
