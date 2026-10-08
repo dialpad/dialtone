@@ -2,7 +2,7 @@
 // UTILITY CLASSES SEARCH TOOL
 // ============================================================================
 
-import { applySmartFilter } from '../utils/filters.js';
+import { applySmartFilterKeepingExact, sortExactFirst } from '../utils/filters.js';
 import type {
   UtilityClassesData,
   ClassData,
@@ -106,6 +106,13 @@ export function valueMatchesKeyword(value: string, description: string | undefin
   return wordBoundaryRegex.test(value) || wordBoundaryRegex.test(description || '');
 }
 
+// Physical and logical directions coincide only in horizontal-tb/LTR.
+// Keep this vocabulary bounded to padding/margin/inset recovery.
+const DIRECTION_ALIASES = Object.entries({
+  'block-start': 'top', 'block-end': 'bottom',
+  'inline-start': 'left', 'inline-end': 'right',
+});
+
 /**
  * Search utility classes using simple AND-logic (like Dialtone docs site)
  */
@@ -155,14 +162,8 @@ export function searchUtilityClasses(query: string, data: UtilityClassesData): {
     for (const valueObj of classData.values) {
       const prop = valueObj.prop?.toLowerCase() || '';
       searchableTexts.push(prop);
-      // Physical and logical directions coincide only in horizontal-tb/LTR.
-      // Keep this vocabulary bounded to padding/margin/inset recovery.
-      const directionAliases: Record<string, string> = {
-        'block-start': 'top', 'block-end': 'bottom',
-        'inline-start': 'left', 'inline-end': 'right',
-      };
-      for (const [logical, physical] of Object.entries(directionAliases)) {
-        if (/^(padding|margin|inset)-/.test(prop)) {
+      if (/^(padding|margin|inset)-/.test(prop)) {
+        for (const [logical, physical] of DIRECTION_ALIASES) {
           searchableTexts.push(prop.replace(logical, physical).replace(`-${physical}`, `-${logical}`));
           searchableTexts.push(prop.replace(logical, physical));
         }
@@ -191,14 +192,9 @@ export function searchUtilityClasses(query: string, data: UtilityClassesData): {
   console.error(`[CLASS SEARCH DEBUG] Found ${results.length} raw matches`);
 
   // Apply smart filter (remove deprecated, swap discouraged with alternatives)
-  const explicit = results.filter(result => result.name.toLowerCase() === exactName);
-  const { results: filtered, notes } = applySmartFilter(results.filter(result => !explicit.includes(result)), data);
-  filtered.unshift(...explicit);
-  filtered.sort((a, b) => {
-    const rank = (name: string) => name.toLowerCase() === exactName ? 0
-      : regexArray.every(regex => regex.test(name)) ? 1 : 2;
-    return rank(a.name) - rank(b.name) || a.name.localeCompare(b.name);
-  });
+  const { results: filtered, notes } = applySmartFilterKeepingExact(results, data, exactName);
+  // Names that contain every query word rank ahead of property/value-only matches.
+  sortExactFirst(filtered, exactName, name => regexArray.every(regex => regex.test(name)) ? 0 : 1);
   if (/\b(padding|margin|inset)\s+(top|bottom|left|right|block|inline)\b/i.test(query)) {
     notes.push('Physical/logical direction matches assume horizontal-tb and left-to-right writing; verify the writing mode.');
   }

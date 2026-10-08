@@ -6,13 +6,12 @@
  */
 'use strict';
 
-const { START, END, buildDetectRegex, createClassAttributeRule } = require('../util/class-attribute-rule');
+const { START, END, buildAlternation, buildDetectRegex, createClassAttributeRule } = require('../util/class-attribute-rule');
 
 const { SIZING_MAP, SPACING_MAP, NEGATIVE_SPACING_MAP, SPACING_LAYOUT_MAP } = require('../generated/migration-guidance.json');
-const keys = map => Object.keys(map).sort((a, b) => b.length - a.length || Number(b) - Number(a)).join('|');
-const SIZING_PIXELS = keys(SIZING_MAP);
-const SPACING_PIXELS = keys({ ...SPACING_MAP, ...SPACING_LAYOUT_MAP });
-const NEGATIVE_PIXELS = keys(NEGATIVE_SPACING_MAP);
+const SIZING_PIXELS = buildAlternation(SIZING_MAP);
+const SPACING_PIXELS = buildAlternation({ ...SPACING_MAP, ...SPACING_LAYOUT_MAP });
+const NEGATIVE_PIXELS = buildAlternation(NEGATIVE_SPACING_MAP);
 
 // Per-category regexes with capture groups. Negative variants precede positive so `d-mtn8`
 // matches the negative pattern (rule order is load-order in `rewriteClassString`).

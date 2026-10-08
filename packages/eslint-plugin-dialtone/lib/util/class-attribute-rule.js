@@ -9,6 +9,11 @@
 const START = '(?<=^|\\s)';
 const END = '(?=$|\\s)';
 
+// Longest keys first so regex alternation resolves `1024` before `1` (d-w1024).
+function buildAlternation (map) {
+  return Object.keys(map).sort((a, b) => b.length - a.length || Number(b) - Number(a)).join('|');
+}
+
 function buildDetectRegex (regexes) {
   return new RegExp(regexes.map(r => r.source).join('|'));
 }
@@ -46,4 +51,4 @@ function createClassAttributeRule ({ detect, rewrite, messageId }) {
   };
 }
 
-module.exports = { START, END, buildDetectRegex, createClassAttributeRule };
+module.exports = { START, END, buildAlternation, buildDetectRegex, createClassAttributeRule };

@@ -2,7 +2,7 @@
 // TOKENS SEARCH TOOL
 // ============================================================================
 
-import { applySmartFilter } from '../utils/filters.js';
+import { applySmartFilterKeepingExact, sortExactFirst } from '../utils/filters.js';
 import type {
   TokensData,
   TokenData,
@@ -10,6 +10,16 @@ import type {
   Metadata,
   SearchResult
 } from '../types.js';
+
+// First matching token-name pattern picks the CSS property for the usage example.
+const USAGE_PROPERTIES: [RegExp, string][] = [
+  [/--dt-(spacing|space)-.*-negative$/, 'margin'],
+  [/--dt-(spacing|space)-/, 'padding'],
+  [/--dt-layout-/, 'inline-size'],
+  [/--dt-size-radius-/, 'border-radius'],
+  [/--dt-size-border-/, 'border-width'],
+  [/color/, 'color'],
+];
 
 /**
  * Search design tokens using simple AND-logic (like Dialtone docs site)
@@ -102,11 +112,8 @@ export function searchTokens(query: string, data: TokensData, options?: { includ
   console.error(`[TOKEN SEARCH DEBUG] Found ${results.length} raw matches`);
 
   // Apply smart filter (remove deprecated, swap discouraged with alternatives)
-  const explicit = results.filter(result => result.name.toLowerCase() === exactName);
-  const { results: filtered, notes } = applySmartFilter(results.filter(result => !explicit.includes(result)), data);
-  filtered.unshift(...explicit);
-  filtered.sort((a, b) => Number(b.name.toLowerCase() === exactName) - Number(a.name.toLowerCase() === exactName)
-    || a.name.localeCompare(b.name));
+  const { results: filtered, notes } = applySmartFilterKeepingExact(results, data, exactName);
+  sortExactFirst(filtered, exactName);
 
   console.error(`[TOKEN SEARCH DEBUG] After filter: ${filtered.length} results\n`);
 
@@ -164,12 +171,7 @@ export function formatTokenResults(results: SearchResult[], query: string): stri
     }
 
     // Show usage example
-    const property = /--dt-(spacing|space)-.*-negative$/.test(result.name) ? 'margin'
-      : /--dt-(spacing|space)-/.test(result.name) ? 'padding'
-      : /--dt-layout-/.test(result.name) ? 'inline-size'
-        : /--dt-size-radius-/.test(result.name) ? 'border-radius'
-          : /--dt-size-border-/.test(result.name) ? 'border-width'
-            : /color/.test(result.name) ? 'color' : null;
+    const property = USAGE_PROPERTIES.find(([pattern]) => pattern.test(result.name))?.[1];
     if (property) output += `   Usage: style="${property}: var(${result.name})"\n`;
     else output += `   Usage: var(${result.name}) — choose a property appropriate to this token.\n`;
     output += `   Note: This will automatically use the correct value for the active theme.\n\n`;

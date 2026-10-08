@@ -1,5 +1,6 @@
 // Consume the preferred migration-helper authority; do not maintain a second stop map.
 const { SIZING_MAP, SPACING_MAP, NEGATIVE_SPACING_MAP, RADIUS_MAP, RADIUS_PAIR_PREFIX_MAP, SPACE_TOKEN_MAP, SIZE_LAYOUT_MAP, RAW_FALLBACK, UTILITY_REVIEW_REQUIRED } = require('./migration-guidance.json');
+const LEGACY_GAP_PREFIXES = { flg: 'g', gg: 'g', grg: 'rg', gcg: 'cg' };
 const scope = 'Legacy Dialtone 9 naming. For Dialtone 10, verify the installed target supports the replacement.';
 
 function utilityMetadata (name) {
@@ -18,7 +19,7 @@ function utilityMetadata (name) {
     const stop = match[2].startsWith('-') ? match[2].slice(1) : RADIUS_MAP[match[2]];
     if (stop != null) replacement = `d-${prefix}-${stop}`;
   } else if ((match = /^d-(flg|gg|grg|gcg)(\d+)$/.exec(name))) {
-    const prefix = match[1] === 'grg' ? 'rg' : match[1] === 'gcg' ? 'cg' : 'g';
+    const prefix = LEGACY_GAP_PREFIXES[match[1]];
     if (SPACING_MAP[match[2]]) replacement = `d-${prefix}-${SPACING_MAP[match[2]]}`;
     layoutReview = match[1] === 'flg';
   } else {

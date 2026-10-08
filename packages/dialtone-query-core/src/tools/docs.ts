@@ -67,6 +67,8 @@ function stemTerm(word: string): string {
   return word;
 }
 
+const NEWS_DOC = /^(?:dialtone|about)\/whats-new(?:\/|$)/;
+
 /**
  * Search documentation sections using OR-logic word-boundary regex matching.
  * Each query term independently scores sections; results ranked by match count descending.
@@ -160,8 +162,8 @@ export function searchDocumentation(
   //   3. Match count descending (more query terms matched = more relevant)
   //   4. Sections with headings before intro stubs (non-empty headingPath wins ties)
   scored.sort((a, b) => {
-    const aIsNews = (a.result.details as DocumentationRecord).docId.match(/^(?:dialtone|about)\/whats-new(?:\/|$)/) !== null;
-    const bIsNews = (b.result.details as DocumentationRecord).docId.match(/^(?:dialtone|about)\/whats-new(?:\/|$)/) !== null;
+    const aIsNews = NEWS_DOC.test((a.result.details as DocumentationRecord).docId);
+    const bIsNews = NEWS_DOC.test((b.result.details as DocumentationRecord).docId);
     if (aIsNews !== bIsNews) return aIsNews ? 1 : -1;
     if (a.titleMatch !== b.titleMatch) return a.titleMatch ? -1 : 1;
     if (b.matchCount !== a.matchCount) return b.matchCount - a.matchCount;

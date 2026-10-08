@@ -7,6 +7,8 @@ const {
 } = stylelint;
 
 const ruleName = '@dialpad/stylelint-plugin-dialtone/no-deprecated-space-tokens';
+// Properties where a spacing token preserves the legacy space token's meaning.
+const SPACING_PROPERTY = /^(?:padding|margin|inset)(?:-|$)|^(?:gap|row-gap|column-gap|top|right|bottom|left)$/;
 
 const messages = ruleMessages(ruleName, {
   deprecated: (spaceToken, spacingToken) =>
@@ -33,12 +35,12 @@ const ruleFunction = (primary) => {
       // Match var(--dt-space-*) pattern
       const spaceTokenMatch = declaration.value.match(/var\(--dt-space-[^)]+\)/g);
       if (!spaceTokenMatch) return;
+      const spacingContext = SPACING_PROPERTY.test(declaration.prop);
 
       spaceTokenMatch.forEach((match) => {
         const spaceToken = match.replace('var(', '').replace(')', '');
         const parts = /^--dt-space-([0-9]+)(-negative)?$/.exec(spaceToken);
         const replacement = parts && SPACE_TOKEN_MAP[parts[1]];
-        const spacingContext = /^(?:padding|margin|inset)(?:-|$)|^(?:gap|row-gap|column-gap|top|right|bottom|left)$/.test(declaration.prop);
         const spacingToken = replacement ? `--dt-${replacement}${parts[2] || ''}` : null;
 
         report({

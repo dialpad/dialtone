@@ -5,13 +5,12 @@
  */
 'use strict';
 
-const { START, END, buildDetectRegex, createClassAttributeRule } = require('../util/class-attribute-rule');
+const { START, END, buildAlternation, buildDetectRegex, createClassAttributeRule } = require('../util/class-attribute-rule');
 
 const { RADIUS_MAP: RADIUS_STOP_MAP, RADIUS_PAIR_PREFIX_MAP: PAIR_PREFIX_MAP } = require('../generated/migration-guidance.json');
 
-// Ordered by descending string length so regex alternation matches longest first
-// (.d-bar32 resolves as `32`, not `3`).
-const NUMERIC_SUFFIXES = Object.keys(RADIUS_STOP_MAP).sort((a, b) => b.length - a.length || Number(b) - Number(a)).join('|');
+// Longest first: .d-bar32 resolves as `32`, not `3`.
+const NUMERIC_SUFFIXES = buildAlternation(RADIUS_STOP_MAP);
 const PAIR_PREFIXES = Object.keys(PAIR_PREFIX_MAP).join('|');
 
 const ALL_CORNERS_NUMERIC = new RegExp(`${START}d-bar(${NUMERIC_SUFFIXES})${END}`, 'g');

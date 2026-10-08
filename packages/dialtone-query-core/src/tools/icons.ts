@@ -2,6 +2,7 @@
 // ICONS SEARCH TOOL
 // ============================================================================
 
+import { sortExactFirst } from '../utils/filters.js';
 import type { IconsData, SearchResult } from '../types.js';
 
 /**
@@ -58,8 +59,7 @@ export function searchIcons(query: string, data: IconsData): { results: SearchRe
 
   console.error(`[ICON SEARCH DEBUG] Found ${results.length} matches\n`);
 
-  results.sort((a, b) => Number(b.name.toLowerCase() === exactName) - Number(a.name.toLowerCase() === exactName)
-    || a.name.localeCompare(b.name));
+  sortExactFirst(results, exactName);
   return { results, notes: [] };
 }
 
