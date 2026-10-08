@@ -9,8 +9,16 @@ on:
       - 'packages/dialtone-query-core/**'
       - 'packages/dialtone-cli/**'
       - 'scripts/build-dialtone-vue-docs.mjs'
-      - 'packages/dialtone-css/postcss/dialtone-docs.cjs'
-      - 'packages/dialtone-docs/src/generators/**'
+      - 'packages/dialtone-docs/**'
+      - 'packages/dialtone-mcp-server/**'
+      - 'packages/dialtone-css/**'
+      - 'packages/dialtone-icons/**'
+      - 'apps/dialtone-documentation/docs/components/**'
+      - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
+      - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
+      - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
+      - 'scripts/lib/vue-component-identity.mjs'
+      - '.github/workflows/unit_tests.yml'
   push:
     branches:
       - staging
@@ -21,8 +29,16 @@ on:
       - 'packages/dialtone-query-core/**'
       - 'packages/dialtone-cli/**'
       - 'scripts/build-dialtone-vue-docs.mjs'
-      - 'packages/dialtone-css/postcss/dialtone-docs.cjs'
-      - 'packages/dialtone-docs/src/generators/**'
+      - 'packages/dialtone-docs/**'
+      - 'packages/dialtone-mcp-server/**'
+      - 'packages/dialtone-css/**'
+      - 'packages/dialtone-icons/**'
+      - 'apps/dialtone-documentation/docs/components/**'
+      - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
+      - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
+      - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
+      - 'scripts/lib/vue-component-identity.mjs'
+      - '.github/workflows/unit_tests.yml'
 
 env:
   HUSKY: 0
@@ -54,13 +70,23 @@ jobs:
               - 'packages/dialtone-tokens/**'
             combinator:
               - 'packages/combinator/**'
-            # The CLI and query-core, plus the scripts that generate the data files they read.
+            # Lookup adapters and sources for their bundled datasets.
             cli:
               - 'packages/dialtone-query-core/**'
               - 'packages/dialtone-cli/**'
+              - 'packages/dialtone-mcp-server/**'
+              - 'packages/dialtone-docs/**'
+              - 'packages/dialtone-css/**'
+              - 'packages/dialtone-icons/**'
+              - 'packages/dialtone-vue/**'
+              - 'packages/dialtone-tokens/**'
               - 'scripts/build-dialtone-vue-docs.mjs'
-              - 'packages/dialtone-css/postcss/dialtone-docs.cjs'
-              - 'packages/dialtone-docs/src/generators/**'
+              - 'scripts/lib/vue-component-identity.mjs'
+              - 'apps/dialtone-documentation/docs/components/**'
+              - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
+              - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
+              - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
+              - '.github/workflows/unit_tests.yml'
 
   test:
     needs: changes
@@ -116,6 +142,7 @@ jobs:
     needs: changes
     if: needs.changes.outputs.cli == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     permissions:
       packages: read
     steps:
@@ -127,5 +154,14 @@ jobs:
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
 
+      - name: Build lookup adapters and their datasets
+        run: pnpm nx run-many -t build -p dialtone-cli dialtone-mcp-server
+
       - name: Run dialtone-query-core and dialtone-cli tests
         run: pnpm nx run-many -t test -p dialtone-query-core dialtone-cli
+
+      - name: Test source-derived component documentation links
+        run: pnpm --dir packages/dialtone-docs test
+
+      - name: Test MCP query protocol contracts
+        run: pnpm --dir packages/dialtone-mcp-server test:protocol

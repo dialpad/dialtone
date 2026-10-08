@@ -455,3 +455,6 @@ export function formatSingleResult(result: SearchResult, index: number): string 
 
   return output;
 }
+
+// Selected API detail is intentionally separate from ranked discovery.
+export { getComponentDetail } from '../component-detail.js';

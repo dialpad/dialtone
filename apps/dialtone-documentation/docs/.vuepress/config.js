@@ -5,6 +5,7 @@ import viteSvgLoader from 'vite-svg-loader';
 import anchor from 'markdown-it-anchor';
 import { getDirname, path } from 'vuepress/utils'
 import { execSync } from 'node:child_process';
+import { SITE_URL } from './site-reference.js';
 import { BROWSER_THEME_COLOR_FALLBACK } from './theme/utils/browserThemeColor.js';
 
 const sidebar = require('../_data/site-nav.json');
@@ -203,7 +204,6 @@ export default defineUserConfig({
   ],
 
   extendsPage: (page) => {
-    const SITE_URL = 'https://dialtone.dialpad.com';
     const DEFAULT_IMAGE = `${SITE_URL}/assets/images/default-og-image.png`;
 
     const title = page.frontmatter.title || page.frontmatter.heading || page.title || 'Dialtone Design System';

@@ -45,14 +45,32 @@ export interface ComponentProp {
   type?: { name: string };
   values?: string[];
   description?: string;
+  required?: boolean;
+  defaultValue?: { value?: unknown; [key: string]: unknown };
+  tags?: Record<string, unknown>;
+  [key: string]: unknown;
 }
 
 export interface ComponentEvent {
   name: string;
+  description?: string;
+  type?: unknown;
+  properties?: unknown[];
+  tags?: Record<string, unknown>;
+  [key: string]: unknown;
 }
 
 export interface ComponentSlot {
   name: string;
+  description?: string;
+  bindings?: unknown[];
+  tags?: Record<string, unknown>;
+  [key: string]: unknown;
+}
+
+export interface ComponentMember {
+  name: string;
+  [key: string]: unknown;
 }
 
 export interface ComponentImport {
@@ -79,6 +97,9 @@ export interface Component {
   props?: ComponentProp[];
   events?: ComponentEvent[];
   slots?: ComponentSlot[];
+  methods?: ComponentMember[];
+  expose?: ComponentMember[];
+  tags?: Record<string, unknown>;
   metadata?: Metadata;
   schemaVersion?: number;
   identity?: ComponentIdentity;

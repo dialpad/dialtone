@@ -218,3 +218,19 @@ export function formatDocumentationResults(
     return `${heading}\n\n${excerpt}${linkLine}`;
   }).join('\n\n---\n\n');
 }
+
+/** Exact source-section retrieval; offsets count Unicode code points. */
+export function getDocumentationDetail(args: { id: string; textOffset?: number; textLimit?: number }, data: DocumentationRecord[]) {
+  const record = data.find(record => record.id === args.id.trim());
+  if (!record) return { match: 'no-match' as const, record: null, contentCounts: { total: 0, returned: 0, offset: 0 }, continuation: null };
+  const textOffset = args.textOffset ?? 0;
+  const textLimit = args.textLimit ?? 6000;
+  const points = Array.from(record.content);
+  const selected = points.slice(textOffset, textOffset + textLimit);
+  const hasMore = textOffset + selected.length < points.length;
+  return {
+    match: 'exact' as const, record: { ...record, content: selected.join('') },
+    contentCounts: { total: points.length, returned: selected.length, offset: textOffset },
+    continuation: hasMore ? { tool: 'get_documentation', arguments: { id: record.id, textOffset: textOffset + selected.length, textLimit } } : null,
+  };
+}

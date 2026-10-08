@@ -13,4 +13,4 @@ Check out our [illustration catalog](/foundations/illustrations/index.md), and o
 
 ## Vue API
 
-<component-vue-api component-name="icon" />
+<component-vue-api component-name="illustration" />

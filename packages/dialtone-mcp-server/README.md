@@ -4,6 +4,8 @@ A [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server that pr
 
 Automatically filters deprecated items, swaps discouraged patterns with recommended alternatives, and provides AI-optimized search results.
 
+See [the retrieval contract](./RETRIEVAL.md) for exact component/API retrieval, complete prose, input limits, result envelopes, provenance and continuation.
+
 ## Installation
 
 There are three ways to install the Dialtone MCP Server. **Project-scoped installation takes priority** over user-scoped when both exist.
