@@ -81,6 +81,7 @@ const fixture: DocumentationRecord[] = [
 describe('explicit directive documentation routing', () => {
   test.each([
     ['v-dt-mode', 'mode', ['@dialpad/dialtone-vue', 'app.use(DtModeDirective)']],
+    ['v-dt-mode mode', 'mode', ['app.use(DtModeDirective)']],
     ['DtScrollbarDirective registration', 'scrollbar', ['app.use(DtScrollbarDirective)', 'single child']],
     ['v-dt-mode:dark', 'mode', ['@dialpad/dialtone-vue', 'app.use(DtModeDirective)', 'light', 'invert']],
     ['v-dt-focusgroup.horizontal', 'focusgroup', ['horizontal', 'Left/Right', 'bound value', 'ignores arguments and modifiers']],

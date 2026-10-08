@@ -150,7 +150,9 @@ export function searchDocumentation(
     const namedComponent = directives.length > 0 && record.category === 'components'
       && [record.docTitle, record.docId.slice('components/'.length)]
         .some(name => namedComponentKeys.has(normalizeComponentName(name)));
-    const titleMatch = selectedDirective || checkTitleMatch(record) || namedComponent;
+    const titleMatch = directives.length > 0
+      ? selectedDirective || namedComponent
+      : checkTitleMatch(record);
     // Explicit directives scope results to those directives and named counterparts.
     if (directives.length > 0 && !titleMatch) continue;
     const fullBlob = [record.docTitle, ...record.headingPath, record.frontmatter.description ?? '', record.content].join(' ');
