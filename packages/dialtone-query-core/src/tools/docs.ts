@@ -4,8 +4,10 @@
 
 import type { DocumentationRecord, SearchResult } from '../types.js';
 import { directiveIdentifiers } from '../directive-identifiers.js';
+import { normalizeComponentName } from '../component-identity.js';
 
 const CONTENT_EXCERPT_MAX = 500;
+const DIRECTIVE_PREFIX = 'directives/';
 const MAX_QUERY_CHARS = 256;
 const MAX_QUERY_TERMS = 12;
 
@@ -113,12 +115,11 @@ export function searchDocumentation(
   });
   // Once an explicit directive selects the document, its identifier should not
   // favor the registration section over requested options or behavior.
-  const contractRegexes = regexes.filter((_, index) => {
-    const word = words[index];
-    const identifier = word.startsWith('v-dt-') ? word.slice(5)
-      : word.startsWith('dt') && word.endsWith('directive') ? word.slice(2, -9) : null;
-    return identifier === null || !directives.includes(identifier);
-  });
+  const identifierWords = new Set(directives.flatMap(name => [`v-dt-${name}`, `dt${name}directive`]));
+  const contractRegexes = regexes.filter((_, index) => !identifierWords.has(words[index]));
+  // Directive comparisons keep explicitly named component pages, matched by
+  // title or page slug: the Mode Island page is titled "Mode".
+  const namedComponentKeys = new Set(words.filter(word => word.startsWith('dt')).map(normalizeComponentName));
 
   // Determine whether a record's docTitle matches a query term.
   // Extracted before the scoring loop so title-matching sections are included even when
@@ -142,21 +143,19 @@ export function searchDocumentation(
   const scored: Array<{ result: SearchResult; matchCount: number; titleMatch: boolean }> = [];
 
   for (const record of data) {
-    const isDirective = record.docId.startsWith('directives/');
-    const selectedDirective = isDirective && directives.includes(record.docId.slice('directives/'.length).toLowerCase());
-    const namedTitle = checkTitleMatch(record);
-    // Preserve explicitly named component counterparts in a directive comparison
-    // using the existing component page slug as well as its title. The Mode
-    // Island page is titled "Mode". Ordinary queries keep existing ranking.
+    const isDirective = record.docId.startsWith(DIRECTIVE_PREFIX);
+    const selectedDirective = isDirective && directives.includes(record.docId.slice(DIRECTIVE_PREFIX.length).toLowerCase());
+    if (directives.length > 0 && isDirective && !selectedDirective) continue;
+    // Ordinary queries keep existing ranking; only directive comparisons match component slugs.
     const namedComponent = directives.length > 0 && record.category === 'components'
-      && words.some(word => word.startsWith('dt')
-        && [record.docTitle, record.docId.slice('components/'.length)]
-          .some(name => word.slice(2).replace(/-/g, '') === name.toLowerCase().replace(/[\s/-]/g, '')));
-    if (directives.length > 0 && !selectedDirective && (isDirective || !(namedTitle || namedComponent))) continue;
+      && [record.docTitle, record.docId.slice('components/'.length)]
+        .some(name => namedComponentKeys.has(normalizeComponentName(name)));
+    const titleMatch = selectedDirective || checkTitleMatch(record) || namedComponent;
+    // Explicit directives scope results to those directives and named counterparts.
+    if (directives.length > 0 && !titleMatch) continue;
     const fullBlob = [record.docTitle, ...record.headingPath, record.frontmatter.description ?? '', record.content].join(' ');
     const sectionRegexes = selectedDirective && contractRegexes.length > 0 ? contractRegexes : regexes;
     const matchCount = sectionRegexes.filter(r => r.test(fullBlob)).length;
-    const titleMatch = selectedDirective || namedTitle || namedComponent;
     // Include if content matched OR the document is specifically named in the query.
     if (matchCount === 0 && !titleMatch) continue;
 
@@ -206,7 +205,7 @@ export function searchDocumentation(
     });
 
   const notes: string[] = [];
-  if (directives.length > 0 && !results.some(result => result.details.docId.startsWith('directives/'))) {
+  if (directives.length > 0 && !results.some(result => result.details.docId.startsWith(DIRECTIVE_PREFIX))) {
     notes.push('No directive documentation found for the explicit identifier.');
   }
   if (truncated) notes.push(`Query truncated to ${MAX_QUERY_CHARS} characters.`);

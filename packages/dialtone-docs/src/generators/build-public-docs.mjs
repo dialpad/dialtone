@@ -146,19 +146,22 @@ export function buildRecords(absolutePath) {
 
   const name = basename(absolutePath).replace(/\.mdx?$/, '');
 
-  // Category = first path component under docs/ root.
-  // Falls back to parent directory name for files outside docsRoot (test fixtures).
-  const relToDocsRoot = relative(docsRoot, absolutePath);
-  const relParts = relToDocsRoot.replace(/\\/g, '/').split('/');
-  const category = isDirective ? 'directives' : relParts[0] === '..'
-    ? basename(dirname(absolutePath))
-    : (relParts.length > 1 ? relParts[0] : 'root');
-
-  // Use relative path from docsRoot as docId to avoid collisions (e.g. multiple index.md files).
-  // Falls back to basename for files outside docsRoot (test fixtures).
-  const docId = isDirective ? `directives/${name}` : relParts[0] === '..'
-    ? name
-    : relToDocsRoot.replace(/\\/g, '/').replace(/\.md$/, '');
+  // Category = first path component under docs/ root; docId = relative path from
+  // docsRoot to avoid collisions (e.g. multiple index.md files). Files outside
+  // docsRoot (test fixtures) fall back to their parent directory name and basename.
+  const relToDocsRoot = relative(docsRoot, absolutePath).replace(/\\/g, '/');
+  const relParts = relToDocsRoot.split('/');
+  let category, docId;
+  if (isDirective) {
+    category = 'directives';
+    docId = `directives/${name}`;
+  } else if (relParts[0] === '..') {
+    category = basename(dirname(absolutePath));
+    docId = name;
+  } else {
+    category = relParts.length > 1 ? relParts[0] : 'root';
+    docId = relToDocsRoot.replace(/\.md$/, '');
+  }
   const docTitle = extractTitle(frontmatter, body) ?? docId;
 
   // Frontmatter stored on each record. Source uses snake_case (VuePress convention),
@@ -173,7 +176,7 @@ export function buildRecords(absolutePath) {
   if (isDirective) {
     const storiesImport = rawFile.match(/^import \* as \w+ from ['"](.+\.stories\.js)['"]/m);
     const stories = storiesImport && readFileSync(resolve(dirname(absolutePath), storiesImport[1]), 'utf8');
-    const storyTitle = stories && stories.match(/title:\s*['"]([^'"]+)['"]/)?.[1];
+    const storyTitle = stories?.match(/title:\s*['"]([^'"]+)['"]/)?.[1];
     if (!storyTitle) throw new Error(`Missing Storybook title for ${filePath}`);
     fm.storybook = `https://dialtone.dialpad.com/vue/?path=/docs/${slugify(storyTitle)}--docs`;
     fm.sourcePackage = vuePackage.name;

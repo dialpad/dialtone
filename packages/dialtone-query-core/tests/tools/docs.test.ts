@@ -90,8 +90,8 @@ describe('explicit directive documentation routing', () => {
   ])('%s selects its requested public contract facts', (query, name, facts) => {
     const { results } = searchDocumentation(query, documentation);
     expect(results.map(result => result.details.docId)).toEqual([`directives/${name}`]);
-    const text = formatDocumentationResults(results, query);
-    for (const fact of facts) expect(text.replace(/\s+/g, ' ')).toContain(fact);
+    const text = formatDocumentationResults(results, query).replace(/\s+/g, ' ');
+    for (const fact of facts) expect(text).toContain(fact);
   });
 
   test('a directive excerpt qualifies its source and links the authoritative Storybook contract', () => {
