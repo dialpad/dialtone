@@ -2,7 +2,7 @@
 
 A [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server that provides AI assistants with search access to Dialtone's design system: utility classes, design tokens, Vue components, and icons.
 
-Automatically filters deprecated items, swaps discouraged patterns with recommended alternatives, and provides AI-optimized search results.
+Filters deprecated items from general discovery, retains exact legacy-name matches with migration guidance, swaps discouraged patterns with recommended alternatives, and provides AI-optimized search results.
 
 ## Installation
 
