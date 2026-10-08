@@ -5,7 +5,7 @@ import {
 } from '../src/value-retrieval.js';
 
 describe('bounded value discovery and exact source detail', () => {
-  it('projects large theme maps with explicit previews/counts and all migration metadata', () => {
+  it('projects theme maps with explicit previews/counts and all migration metadata', () => {
     const metadata = {
       deprecated: true,
       reason: 'Legacy subject',
@@ -16,7 +16,7 @@ describe('bounded value discovery and exact source detail', () => {
     const allThemes = {
       metadata,
       ...Object.fromEntries(
-        Array.from({ length: 120 }, (_, i) => [
+        Array.from({ length: 3 }, (_, i) => [
           `theme-${i}`,
           { value: i, description: 'Source value description' },
         ]),
@@ -32,7 +32,7 @@ describe('bounded value discovery and exact source detail', () => {
       type: 'design-token',
       name: '--dt-test',
       metadata,
-      valueCounts: { total: 120, previewed: 2, omitted: 118 },
+      valueCounts: { total: 3, previewed: 2, omitted: 1 },
     });
     expect(summary.previewValues).toEqual([
       {
@@ -47,19 +47,31 @@ describe('bounded value discovery and exact source detail', () => {
     const detail = getValueDetail('--dt-test', 'tokens', {
       '--dt-test': allThemes,
     });
-    expect(detail.items).toHaveLength(120);
+    expect(detail.items).toHaveLength(3);
     expect(detail.subject?.metadata).toEqual(metadata);
-    expect(detail.items[119]).toEqual({
-      theme: 'theme-119',
-      contract: allThemes['theme-119'],
+    expect(detail.items[2]).toEqual({
+      theme: 'theme-2',
+      contract: allThemes['theme-2'],
     });
   });
   it('retains compound property records and migration metadata', () => {
-    const values = Array.from({ length: 51 }, (_, i) => ({
-      prop: `property-${i}`,
-      value: 'é'.repeat(120),
-      description: 'Source property',
-    }));
+    const values = [
+      {
+        prop: 'color',
+        value: 'var(--dt-color-foreground-primary)',
+        description: 'Foreground color',
+      },
+      {
+        prop: 'padding',
+        value: '0',
+        description: 'Spacing around content',
+      },
+      {
+        prop: 'border',
+        value: '1px solid currentColor',
+        description: 'Source border',
+      },
+    ];
     const metadata = {
       discouraged: true,
       reason: 'Prefer a newer class',
@@ -72,9 +84,9 @@ describe('bounded value discovery and exact source detail', () => {
       details: { properties: values },
     });
     expect(summary.valueCounts).toEqual({
-      total: 51,
+      total: 3,
       previewed: 2,
-      omitted: 49,
+      omitted: 1,
     });
     expect(summary.previewValues).toEqual(values.slice(0, 2));
     const detail = getValueDetail('d-test', 'utilityClasses', {

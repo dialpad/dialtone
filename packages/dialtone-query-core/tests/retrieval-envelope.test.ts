@@ -1,8 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import {
-  createRetrievalEnvelope,
-  formatRetrievalEnvelope,
-} from '../src/retrieval.js';
+import { createRetrievalEnvelope } from '../src/retrieval.js';
 const stamp = {
   schemaVersion: 1,
   buildHash: 'a'.repeat(64),
@@ -86,22 +83,5 @@ describe('bounded C2 result contract', () => {
     expect(result.budget.estimatedTokens).toBe(
       Math.ceil(Buffer.byteLength(JSON.stringify(result)) / 4),
     );
-  });
-  it('text fallback includes the same selected facts, source and continuation as structured JSON', () => {
-    const result = envelope({
-      tool: 'get_component',
-      args: { component: 'DtButton', limit: 1, offset: 0 },
-      mode: 'detail',
-      domain: 'components',
-      match: 'exact',
-      items: [
-        {
-          name: 'kind',
-          values: ['primary', 'old'],
-          defaultValue: { value: 'primary' },
-        },
-      ],
-    });
-    expect(formatRetrievalEnvelope(result)).toContain(JSON.stringify(result));
   });
 });

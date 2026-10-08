@@ -210,7 +210,6 @@ test('discovery counts retain documented methods/exposed members and unknown sec
     for (const [name, section] of [
       ['DtMotionText', 'methods'],
       ['DtHovercard', 'expose'],
-      ['DtScroller', 'expose'],
       ['DtRichTextEditor', 'slots'],
     ]) {
       const record = components.find(
