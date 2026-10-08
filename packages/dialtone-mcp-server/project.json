@@ -10,7 +10,7 @@
         "{projectRoot}/package.json",
         "{projectRoot}/tsconfig.json",
         "{projectRoot}/rollup.config.js",
-        { "dependentTasksOutputFiles": "**/*.{js,json}", "transitive": true }
+        { "dependentTasksOutputFiles": "**/*.{js,json,d.ts}", "transitive": true }
       ],
       "outputs": ["{projectRoot}/build"],
       "options": {

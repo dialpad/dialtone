@@ -148,10 +148,16 @@ test('core and adapters hash the generated data they consume through dependency 
     if (name !== 'dialtone-query-core')
       assert.deepEqual(
         covered(
-          ['packages/dialtone-query-core/build/tools/components.js'],
+          [
+            'packages/dialtone-query-core/build/tools/components.js',
+            'packages/dialtone-query-core/build/types.d.ts',
+          ],
           outputs,
         ),
-        ['packages/dialtone-query-core/build/tools/components.js'],
+        [
+            'packages/dialtone-query-core/build/tools/components.js',
+            'packages/dialtone-query-core/build/types.d.ts',
+          ],
         name,
       );
   }

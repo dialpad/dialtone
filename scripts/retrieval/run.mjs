@@ -9,6 +9,7 @@ import { promisify } from 'node:util';
 import { cases, checksFor, expectedFailures } from './cases.mjs';
 import { evaluateAssertions } from './assertions.mjs';
 import { createConsumerFixture, sha256 } from './fixtures.mjs';
+import { fingerprintSourceState } from './source-state.mjs';
 import legacyButton from './legacy-button.json' with { type: 'json' };
 
 const root = fileURLToPath(new URL('../..', import.meta.url));
@@ -210,7 +211,7 @@ const report = {
     encoding: 'utf8',
   }).trim(),
   node: process.version,
-  sourceDiffSha256: sha256(execFileSync('git', ['diff'], { cwd: root })),
+  ...fingerprintSourceState(root),
   registryCheck: 'disabled for deterministic retrieval',
   artifacts: [],
   results: [],
@@ -275,6 +276,7 @@ try {
     ...helpers.sort(),
     'scripts/retrieval/cases.mjs',
     'scripts/retrieval/run.mjs',
+    'scripts/retrieval/source-state.mjs',
     'scripts/retrieval/profiles.mjs',
     'scripts/retrieval/legacy-button.json',
     '.github/workflows/unit_tests.yml',
