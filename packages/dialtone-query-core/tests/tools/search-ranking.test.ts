@@ -66,6 +66,8 @@ describe('token and icon ranking', () => {
     expect(output).toContain('padding: var(--dt-space-400)');
     expect(output).not.toContain('metadata:');
     expect(output).not.toContain('color: var(--dt-space-400)');
+    const zero = searchTokens('--dt-spacing-0', { '--dt-spacing-0': { 'dp-light': { value: 0 } } }).results;
+    expect(formatTokenResults(zero, '--dt-spacing-0')).toContain('dp-light: 0');
   });
   test.each(['--dt-spacing-100-negative', '--dt-space-400-negative'])('negative spacing %s uses a valid margin property', name => {
     const output = formatTokenResults(searchTokens(name, tokens).results, name);

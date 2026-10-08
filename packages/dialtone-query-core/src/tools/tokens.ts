@@ -153,7 +153,7 @@ export function formatTokenResults(results: SearchResult[], query: string): stri
     // Show first few themes as examples
     const themesToShow = themes.slice(0, 3);
     themesToShow.forEach(([themeName, themeData]: [string, ThemeData]) => {
-      const valueStr = themeData && themeData.value ? String(themeData.value) : 'N/A';
+      const valueStr = String(themeData?.value ?? 'N/A');
       const descStr = themeData && themeData.description ? String(themeData.description) : '';
       const desc = descStr ? ` - ${descStr}` : '';
       output += `   - ${themeName}: ${valueStr}${desc}\n`;
