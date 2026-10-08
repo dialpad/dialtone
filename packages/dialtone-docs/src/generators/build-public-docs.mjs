@@ -46,9 +46,9 @@ function extractTitle(frontmatter, body) {
  * Headings inside fenced code blocks are treated as plain content and do NOT split.
  * Returns: Array<{ headingPath: string[], raw: string }>
  *
- * NOTE: The stripping pipeline in stripMarkdown removes fenced code BEFORE htmlTag.
- * This ordering is load-bearing — fenced blocks are omitted before
- * htmlTag strips VuePress directives. Do not change the call order in strip-markdown.mjs.
+ * NOTE: stripMarkdown consumes fenced code, comments and script/style blocks in
+ * extractProse before htmlTag strips VuePress directives. Keep extractProse first
+ * in strip-markdown.mjs.
  */
 export function chunkSections(body) {
   const lines = body.split('\n');

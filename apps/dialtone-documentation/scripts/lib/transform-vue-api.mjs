@@ -6,7 +6,7 @@
  */
 
 import { readFileSync } from 'node:fs';
-import { findComponentRecord, componentRootImportName, componentImportLine } from './utils.mjs';
+import { findComponentRecord, componentRootImportRoute, componentImportLine, tableText, apiCode } from './utils.mjs';
 
 let _componentDocData = null;
 let _documentationProfile = null;
@@ -46,24 +46,9 @@ export function findComponent (componentName) {
  */
 function formatDefault (prop) {
   const value = prop.defaultValue;
-  if (value !== undefined) {
-    return apiCode(value && typeof value === 'object' ? value.value : value);
-  }
-  const documented = prop.tags?.default?.[0]?.description;
-  return documented === undefined ? 'Not documented' : apiCode(documented);
-}
-
-function tableText (value) {
-  return String(value ?? '').replace(/\|/g, '\\|').replace(/\s+/g, ' ').trim();
-}
-
-function apiCode (value) {
-  if (value === undefined) return 'Not documented';
-  if (value === null) return '`null`';
-  const text = tableText(value);
-  const runs = text.match(/`+/g) ?? [];
-  const fence = '`'.repeat(Math.max(0, ...runs.map(run => run.length)) + 1);
-  return `${fence} ${text} ${fence}`.replace(/^` (.*?) `$/, '`$1`');
+  return apiCode(value !== undefined
+    ? (value && typeof value === 'object' ? value.value : value)
+    : prop.tags?.default?.[0]?.description);
 }
 
 function documentedBoolean (value) {
@@ -75,8 +60,8 @@ function deprecation (item) {
     ? item.tags.find(tag => tag.title === 'deprecated')
     : item.tags?.deprecated?.[0];
   const description = item.description?.match(/@deprecated\b\s*(.*)/i)?.[1];
-  if (item.deprecated || tag || description !== undefined) {
-    return tableText(tag?.description || description || item.deprecatedMessage || 'Yes');
+  if (tag || description !== undefined) {
+    return tableText(tag?.description || description || 'Yes');
   }
   return 'Not documented';
 }
@@ -130,10 +115,8 @@ function importLines (component, alsoImport, filePath) {
   const profile = _documentationProfile;
   const matchesProfile = profile?.package && profile?.version && profile?.dependency
     && [component, ...companions].every(record => {
-      const name = componentRootImportName(record);
-      const route = (record.identity?.imports ?? []).find(route => route.name === name
-        && route.from === profile.package && route.kind === 'root' && route.verification === 'source-export');
-      return route?.version === profile.version;
+      const route = componentRootImportRoute(record);
+      return route?.from === profile.package && route.version === profile.version;
     });
   if (!line || !matchesProfile) {
     return [`Import unverified: ${profile ? `${profile.package}@${profile.version} (${profile.dependency})` : 'documentation package/version profile unavailable'}. Verify the public export route against that profile.`, ''];

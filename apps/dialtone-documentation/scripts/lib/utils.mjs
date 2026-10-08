@@ -12,11 +12,15 @@ export function findComponentRecord (records, name) {
 }
 
 /** Only the generated root route certifies a public docs import. */
-export function componentRootImportName (record) {
+export function componentRootImportRoute (record) {
   if (record?.schemaVersion !== 2 || record.identity?.kind !== 'public') return null;
   const routes = (record.identity.imports ?? []).filter(route => route.from === '@dialpad/dialtone-vue'
     && route.kind === 'root' && route.verification === 'source-export');
-  return (routes.find(route => route.name === record.identity.canonicalName) ?? routes[0])?.name ?? null;
+  return routes.find(route => route.name === record.identity.canonicalName) ?? routes[0] ?? null;
+}
+
+export function componentRootImportName (record) {
+  return componentRootImportRoute(record)?.name ?? null;
 }
 
 /** The docs import for a record and its companions, or null when no route is certified. */
@@ -30,15 +34,15 @@ export function componentImportLine (records, record, alsoImport = []) {
 
 /**
  * Collapse whitespace and trim text for use inside a backtick-wrapped table cell.
- * Pipes inside backtick code spans are literal in GFM, so no escaping needed.
+ * GFM splits table cells on pipes even inside code spans; apiCode escapes them.
  */
 export function codeCell (text) {
   return (text || '').replace(/\s+/g, ' ').trim();
 }
 
 /**
- * Escape pipe characters inside a markdown table cell.
- * Also collapses whitespace and trims.
+ * Escape pipe characters inside a markdown table cell, except inside code spans.
+ * Also collapses whitespace and trims. tableText escapes every pipe.
  */
 export function escapeTableCell (text) {
   if (!text) return '';
@@ -47,6 +51,21 @@ export function escapeTableCell (text) {
     .replace(/`[^`]*`|(\|)/g, (m, pipe) => pipe ? '\\|' : m)
     .replace(/\s+/g, ' ')
     .trim();
+}
+
+/** Table-cell text: escape every pipe (GFM splits cells on them, even in code spans). */
+export function tableText (value) {
+  return String(value ?? '').replace(/\|/g, '\\|').replace(/\s+/g, ' ').trim();
+}
+
+/** Table-cell code span whose fence outlasts any backtick run in the value. */
+export function apiCode (value) {
+  if (value === undefined) return 'Not documented';
+  if (value === null) return '`null`';
+  const text = tableText(value);
+  const runs = text.match(/`+/g) ?? [];
+  const fence = '`'.repeat(Math.max(0, ...runs.map(run => run.length)) + 1);
+  return fence.length === 1 ? `\`${text}\`` : `${fence} ${text} ${fence}`;
 }
 
 /**

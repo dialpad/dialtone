@@ -17,22 +17,21 @@ function extractProse (markdown, inlineCode) {
   const tokens = /^ {0,3}(`{3,})[^`\n]*$|^ {0,3}(~{3,})[^\n]*$|<!--|<(script|style)\b[^>]*>|(?<!`)(`+)(?!`)/gmi;
   let cursor = 0;
   let match;
+  // Unclosed blocks run to the end of the input.
+  const skipPast = (closing) => {
+    closing.lastIndex = cursor;
+    return closing.exec(markdown) ? closing.lastIndex : markdown.length;
+  };
   while ((match = tokens.exec(markdown))) {
     output.push(markdown.slice(cursor, match.index));
     cursor = tokens.lastIndex;
-    if (match[1] || match[2]) {
-      const fence = match[1] || match[2];
-      const closing = new RegExp(`^ {0,3}${fence[0]}{${fence.length},}[ \\t]*$`, 'gm');
-      closing.lastIndex = cursor;
-      const end = closing.exec(markdown);
-      cursor = end ? closing.lastIndex : markdown.length;
+    const fence = match[1] || match[2];
+    if (fence) {
+      cursor = skipPast(new RegExp(`^ {0,3}${fence[0]}{${fence.length},}[ \\t]*$`, 'gm'));
     } else if (match[0] === '<!--') {
-      const end = markdown.indexOf('-->', cursor);
-      cursor = end < 0 ? markdown.length : end + 3;
+      cursor = skipPast(/-->/g);
     } else if (match[3]) {
-      const closing = new RegExp(`</${match[3]}\\s*>`, 'gi');
-      closing.lastIndex = cursor;
-      cursor = closing.exec(markdown) ? closing.lastIndex : markdown.length;
+      cursor = skipPast(new RegExp(`</${match[3]}\\s*>`, 'gi'));
     } else {
       const closing = new RegExp('(?<!`)' + match[4] + '(?!`)', 'g');
       closing.lastIndex = cursor;
