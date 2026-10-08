@@ -6,10 +6,8 @@ export const MOTION_TEXT_ANIMATION_MODES = [
   'slide-in-gradient',
   'gradient-sweep',
   'shimmer',
+  'none',
 ];
-
-// Still accepted so existing usages keep working; they render the text at rest
-export const MOTION_TEXT_DEPRECATED_ANIMATION_MODES = ['none'];
 
 // Speed options
 export const MOTION_TEXT_SPEEDS = ['100', '200', '300', '400', '500'];
@@ -51,6 +49,8 @@ export const MOTION_TEXT_MODE_SETTINGS = {
   'gradient-sweep': { tracks: ['sweep'], gradient: true, loopHold: 300 },
   // Loops back to back, as the band starts and ends off the text
   shimmer: { tracks: ['shimmer'], gradient: false, loopHold: 0, wholeText: true },
+  // Renders the text at rest, without animation
+  none: { tracks: [], gradient: false, loopHold: 0 },
 };
 
 export default {

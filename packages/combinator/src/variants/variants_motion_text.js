@@ -16,6 +16,10 @@ export default {
   },
 
   exclusions: [
+    {
+      when: { animationMode: 'none' },
+      disable: { props: ['speed', 'loop', 'respectsReducedMotion'] },
+    },
     // `text` takes precedence over the default slot, so only one can be set at a time.
     {
       when: { text: hasValue },

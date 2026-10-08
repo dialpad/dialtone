@@ -60,7 +60,6 @@
 <script>
 import {
   MOTION_TEXT_ANIMATION_MODES,
-  MOTION_TEXT_DEPRECATED_ANIMATION_MODES,
   MOTION_TEXT_MODE_SETTINGS,
   MOTION_TEXT_SPEEDS,
   MOTION_TEXT_TIMING_PRESETS,
@@ -69,7 +68,7 @@ import {
 import { getGradientSlices, splitWords } from './utils';
 
 const DEFAULT_PRESET = MOTION_TEXT_TIMING_PRESETS['300'];
-// Unsupported and deprecated modes (such as 'none') render the text at rest
+// Unsupported modes render the text at rest, like 'none'
 const RESTING_SETTINGS = { tracks: [], gradient: false, loopHold: 0 };
 
 export default {
@@ -86,14 +85,13 @@ export default {
     },
 
     /**
-     * The animation mode to use for the text reveal. `none` is deprecated and renders the text at rest.
-     * @values gradient-in, fade-in, slide-in, slide-in-gradient, gradient-sweep, shimmer
+     * The animation mode to use for the text reveal. `none` renders the text without animation.
+     * @values gradient-in, fade-in, slide-in, slide-in-gradient, gradient-sweep, shimmer, none
      */
     animationMode: {
       type: String,
       default: 'gradient-in',
-      validator: (value) => MOTION_TEXT_ANIMATION_MODES.includes(value) ||
-        MOTION_TEXT_DEPRECATED_ANIMATION_MODES.includes(value),
+      validator: (value) => MOTION_TEXT_ANIMATION_MODES.includes(value),
     },
 
     /**
@@ -293,6 +291,12 @@ export default {
       // Whole-text modes render the text live and keep animating, as they always have
       if (this.isWholeText) {
         this.words = splitWords(this.text);
+
+        // A finished single play runs again for the new text; a loop stopped with skipToEnd() stays at rest
+        if (this.isComplete && this.autoStart && !this.loop) {
+          this.reset();
+          this.$nextTick(() => this.start());
+        }
         return;
       }
 

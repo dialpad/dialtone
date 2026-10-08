@@ -88,7 +88,8 @@
 
     display: inline-block;
     max-inline-size: 100%;
-    overflow-wrap: break-word;
+    // `anywhere` (unlike break-word) lowers the min-content size, so long words wrap in flex and grid items
+    overflow-wrap: anywhere;
     animation: var(--d-motion-text-resting, var(--d-motion-text-word-animation, none));
     animation-play-state: var(--d-motion-text-play-state, paused);
   }

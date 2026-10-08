@@ -50,6 +50,7 @@ const MOCK_MODE_TRACK_VARS = {
   'slide-in-gradient': { ...MOCK_ENTER_VARS, ...MOCK_REVEAL_VARS },
   'gradient-sweep': MOCK_SWEEP_VARS,
   shimmer: MOCK_SHIMMER_VARS,
+  none: {},
 };
 
 const MOCK_GRADIENT_MODES = ['gradient-in', 'slide-in-gradient', 'gradient-sweep'];
@@ -515,7 +516,7 @@ describe('DtMotionText Tests', () => {
       });
     });
 
-    describe('When animationMode is the deprecated none mode', () => {
+    describe('When animationMode is none', () => {
       it('should render at rest and complete as soon as it starts', async () => {
         mockProps = { animationMode: 'none' };
         updateWrapper();
@@ -852,6 +853,45 @@ describe('DtMotionText Tests', () => {
       expect(getEmittedCount('start')).toBe(1);
     });
 
+    it('should play again for new text once a single play has finished', async () => {
+      mockProps = { animationMode: 'shimmer', autoStart: true };
+      updateWrapper();
+      await flushAutoStart();
+      await advance(3000);
+      expect(wrapper.classes()).toContain('d-motion-text--complete');
+
+      await wrapper.setProps({ text: 'Searching' });
+      await flushAutoStart();
+
+      expect(getEmittedCount('start')).toBe(2);
+      expect(wrapper.classes()).toContain('d-motion-text--animating');
+    });
+
+    it('should keep a loop stopped with skipToEnd() at rest for new text', async () => {
+      mockProps = { animationMode: 'shimmer', autoStart: true, loop: true };
+      updateWrapper();
+      await flushAutoStart();
+      wrapper.vm.skipToEnd();
+      await advance(0);
+      await wrapper.setProps({ text: 'Here is the answer' });
+      await flushAutoStart();
+
+      expect(getEmittedCount('start')).toBe(1);
+      expect(wrapper.classes()).toContain('d-motion-text--complete');
+    });
+
+    it('should stay at rest for new text when autoStart is false', async () => {
+      mockProps = { animationMode: 'shimmer' };
+      updateWrapper();
+      await start();
+      await advance(3000);
+      await wrapper.setProps({ text: 'Searching' });
+      await flushAutoStart();
+
+      expect(getEmittedCount('start')).toBe(1);
+      expect(wrapper.classes()).toContain('d-motion-text--complete');
+    });
+
     it('should start on mount even while its slot is empty', async () => {
       mockProps = { animationMode: 'shimmer', text: '', autoStart: true };
       updateWrapper();
@@ -1136,10 +1176,6 @@ describe('DtMotionText Tests', () => {
 
       it.each(MOTION_TEXT_ANIMATION_MODES)('should accept %s', (mode) => {
         expect(validator(mode)).toBe(true);
-      });
-
-      it('should accept the deprecated none mode', () => {
-        expect(validator('none')).toBe(true);
       });
 
       it('should reject an unknown mode', () => {

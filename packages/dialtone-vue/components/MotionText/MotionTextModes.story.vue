@@ -73,7 +73,8 @@ export default {
       modeRefs: {},
       // Reference sentence used by the "Motion-Text-Effects" Figma spec
       exampleText: 'The AI platform for customer experience',
-      animationModes: MOTION_TEXT_ANIMATION_MODES.map(mode => ({
+      // `none` has no motion to show
+      animationModes: MOTION_TEXT_ANIMATION_MODES.filter(mode => mode !== 'none').map(mode => ({
         value: mode,
         label: this.formatLabel(mode),
         description: MODE_DESCRIPTIONS[mode] || '',

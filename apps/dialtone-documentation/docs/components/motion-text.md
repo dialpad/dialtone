@@ -34,6 +34,7 @@ Every effect except `shimmer` works on whole words, never individual characters.
 | `slide-in-gradient` | The `slide-in` motion combined with the `gradient-in` color reveal. |
 | `gradient-sweep` | Text starts solid. Each word fades to the gradient, holds, then fades back to its text color. |
 | `shimmer` | A dimmed band sweeps left to right across the whole text. |
+| `none` | No animation. The text renders at rest. |
 
 Select a mode to play it. **Loop** is on, so each effect keeps repeating; turn it off to watch a single play.
 
@@ -225,7 +226,8 @@ Each word is real text separated by real spaces, so screen readers read the sent
 import { ref } from 'vue';
 import { MOTION_TEXT_ANIMATION_MODES } from '@dialpad/dialtone-vue';
 
-const animationModes = MOTION_TEXT_ANIMATION_MODES;
+// `none` has no motion to show
+const animationModes = MOTION_TEXT_ANIMATION_MODES.filter(mode => mode !== 'none');
 const activeMode = ref('gradient-in');
 const loopModes = ref(true);
 const modeDemoKey = ref(0);
