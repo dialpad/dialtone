@@ -55,10 +55,9 @@ test('initialization delivers bounded routing instructions and complete selected
       'installed compatibility is not checked',
     ])
       assert.ok(module.ROUTING_INSTRUCTIONS.slice(0, 512).includes(route));
-    const tool = (await client.listTools()).tools.find(
-      (tool) => tool.name === 'get_component',
-    );
-    assert.ok(tool.outputSchema);
+    const tools = (await client.listTools()).tools;
+    for (const name of ['get_component', 'get_documentation'])
+      assert.ok(tools.find((tool) => tool.name === name).outputSchema);
     const result = structured(
       await client.callTool({
         name: 'get_component',
@@ -101,50 +100,85 @@ test('scoped bindings and event payloads match the generated Combobox data', asy
       );
     }
   }));
-test('all tools reject invalid queries/limits and execute their advertised defaults', async () =>
+function readable(result) {
+  assert.notEqual(result.isError, true);
+  assert.equal(result.structuredContent, undefined);
+  assert.ok(result.content.every((item) => item.type === 'text'));
+  return result.content.map((item) => item.text).join('\n');
+}
+function pageSubjects(text, name, recordPattern) {
+  return name === 'search_documentation'
+    ? [...text.matchAll(/get_documentation\((\{[^`\n]+\})\)/g)].map(
+        (match) => JSON.parse(match[1]).id,
+      )
+    : [...text.matchAll(recordPattern)].map((match) => match[1]);
+}
+function nextCall(text) {
+  const match = text.match(/\*\*Continue:\*\* `([^(`]+)\(([^\n]+)\)`/);
+  return match ? { name: match[1], arguments: JSON.parse(match[2]) } : null;
+}
+test('readable searches execute default 15, explicit limits and compatible inputs with progressing pages', async () =>
   fixture(async (client) => {
-    for (const tool of (await client.listTools()).tools.filter((tool) =>
-      tool.name.startsWith('search_'),
-    )) {
-      for (const limit of [
-        '2',
-        -1,
-        0,
-        1.5,
-        tool.inputSchema.properties.limit.maximum + 1,
+    for (const [name, query, recordPattern] of [
+      ['search_utility_classes', 'padding', /^\d+\. \*\*([^*]+)\*\*/gm],
+      ['search_tokens', 'color', /^\d+\. \*\*([^*]+)\*\*/gm],
+      ['search_components', 'button', /^\d+\. \*\*([^*]+)\*\*/gm],
+      ['search_icons', 'arrow', /^ {2}• \*\*([^*]+)\*\*/gm],
+      ['search_documentation', 'accessibility', /^### /gm],
+    ]) {
+      const tool = (await client.listTools()).tools.find(
+        (tool) => tool.name === name,
+      );
+      assert.equal(tool.inputSchema.properties.limit.type, 'number');
+      assert.equal(tool.inputSchema.properties.limit.default, 15);
+      assert.equal(tool.inputSchema.properties.query.maxLength, undefined);
+      assert.notEqual(tool.inputSchema.additionalProperties, false);
+      for (const [arguments_, count] of [
+        [{ query }, 15],
+        [{ query, limit: 2.5, unused: 'accepted' }, 2],
+        [{ query, limit: '2' }, 2],
       ]) {
-        const result = await client.callTool({
-          name: tool.name,
-          arguments: { query: 'button', limit },
-        });
-        assert.equal(result.isError, true, `${tool.name}:${limit}`);
+        const text = readable(
+          await client.callTool({ name, arguments: arguments_ }),
+        );
+        assert.equal([...text.matchAll(recordPattern)].length, count, name);
+        const next = nextCall(text);
+        assert.ok(next, name);
+        assert.equal(next.arguments.offset, count);
+        const following = readable(await client.callTool(next));
+        assert.ok(following.includes(`offset ${count}.`));
+        const firstSubjects = pageSubjects(text, name, recordPattern);
+        const nextSubjects = pageSubjects(following, name, recordPattern);
+        assert.ok(nextSubjects.length > 0);
+        assert.ok(
+          nextSubjects.every((subject) => !firstSubjects.includes(subject)),
+        );
       }
+      const negative = readable(
+        await client.callTool({ name, arguments: { query, limit: -1 } }),
+      );
+      assert.ok([...negative.matchAll(recordPattern)].length > 0);
+      assert.equal(nextCall(negative), null);
+      const larger = readable(
+        await client.callTool({ name, arguments: { query, limit: 40 } }),
+      );
+      assert.ok([...larger.matchAll(recordPattern)].length > 15, name);
+      const blank = readable(
+        await client.callTool({ name, arguments: { query: '   ' } }),
+      );
+      assert.match(blank, /no (?:match|.*found)/i);
+      const long = readable(
+        await client.callTool({ name, arguments: { query: 'x'.repeat(257) } }),
+      );
+      assert.match(long, /no (?:match|.*found)/i);
       assert.equal(
-        (
-          await client.callTool({
-            name: tool.name,
-            arguments: { query: '   ' },
-          })
-        ).isError,
+        (await client.callTool({ name, arguments: { query, offset: -1 } }))
+          .isError,
         true,
       );
-      const result = structured(
-        await client.callTool({
-          name: tool.name,
-          arguments: { query: 'button' },
-        }),
-      );
-      assert.ok(
-        result.counts.returned <= tool.inputSchema.properties.limit.default,
-      );
-      if (result.continuation)
-        assert.equal(
-          result.continuation.arguments.limit,
-          tool.inputSchema.properties.limit.default,
-        );
     }
   }));
-test('discovery/detail pagination makes progress and missing selectors are actionable', async () =>
+test('selected component detail pagination makes progress and missing selectors are actionable', async () =>
   fixture(async (client) => {
     const first = structured(
       await client.callTool({
@@ -205,118 +239,178 @@ test('exact documentation retrieval preserves guidance beyond the discovery exce
     assert.equal(content, record.content);
     assert.ok(content.includes('aria-describedby'));
   }));
-test('discovery counts retain documented methods/exposed members and unknown sections', async () =>
+test('all five searches retain readable domain facts, notes and provenance without structured output', async () =>
   fixture(async (client) => {
-    for (const [name, section] of [
-      ['DtMotionText', 'methods'],
-      ['DtHovercard', 'expose'],
-      ['DtRichTextEditor', 'slots'],
+    const core = await import('@dialpad/dialtone-query-core');
+    for (const [name, query, domain] of [
+      ['search_utility_classes', 'd-chip__close', 'utilityClasses'],
+      ['search_tokens', '--dt-color-foreground-primary', 'tokens'],
+      ['search_components', 'DtButton', 'components'],
+      ['search_icons', 'voicemail', 'icons'],
+      ['search_documentation', 'checkbox accessibility', 'documentation'],
     ]) {
-      const record = components.find(
-        (component) => component.displayName === name,
+      const tool = (await client.listTools()).tools.find(
+        (tool) => tool.name === name,
       );
-      const result = structured(
+      assert.equal(tool.outputSchema, undefined, name);
+      const text = readable(
+        await client.callTool({ name, arguments: { query } }),
+      );
+      const stamp = core.bundledProvenance.domains[domain];
+      for (const fact of [
+        stamp.package,
+        stamp.version,
+        stamp.hash,
+        'bundled',
+        'installed compatibility not checked',
+      ])
+        assert.ok(text.includes(fact), `${name}: ${fact}`);
+      if (domain === 'utilityClasses') {
+        assert.equal(core.utilityClasses[query].values.length, 51);
+        for (const record of core.utilityClasses[query].values) {
+          assert.ok(text.includes(`${record.prop}: ${record.value}`));
+          if (record.description) assert.ok(text.includes(record.description));
+        }
+        assert.ok(text.includes('class="d-chip__close"'));
+      } else if (domain === 'tokens') {
+        const themes = Object.entries(core.tokens[query]).filter(
+          ([theme]) => theme !== 'metadata',
+        );
+        for (const [theme, contract] of themes.slice(0, 3))
+          assert.ok(text.includes(`${theme}: ${contract.value}`));
+        assert.ok(text.includes('Usage:'));
+        assert.ok(text.includes('projection'));
+        assert.ok(text.includes('themes'));
+        assert.match(text, /sample|preview/i);
+      } else if (domain === 'components') {
+        const record = core.components.find(
+          (component) => component.displayName === 'DtButton',
+        );
+        for (const prop of record.props.slice(0, 5)) {
+          assert.ok(
+            text.includes(`\`${prop.name}\` (${prop.type?.name || 'unknown'})`),
+          );
+          if (prop.description) assert.ok(text.includes(prop.description));
+          for (const value of prop.values?.slice(0, 3) ?? [])
+            assert.ok(text.includes(value));
+        }
+        for (const section of ['events', 'slots'])
+          for (const record_ of record[section]?.slice(0, 3) ?? [])
+            assert.ok(text.includes(record_.name));
+        assert.ok(
+          text.includes(`import { DtButton } from '@dialpad/dialtone-vue'`),
+        );
+        assert.ok(text.includes('get_component'));
+        assert.match(text, /sample|preview/i);
+      } else if (domain === 'icons') {
+        assert.ok(text.includes('**voicemail**'));
+        assert.ok(text.includes('DtIconVoicemail'));
+        assert.ok(text.includes(`from '@dialpad/dialtone-icons/vue'`));
+      } else {
+        assert.ok(text.includes('Checkbox'));
+        assert.ok(text.includes('get_documentation'));
+        assert.ok(text.includes('components/checkbox#'));
+      }
+    }
+    const notes = readable(
+      await client.callTool({
+        name: 'search_components',
+        arguments: { query: 'ariaLabel' },
+      }),
+    );
+    assert.match(notes, /No component named/);
+  }));
+test('readable exact token themes retrieve all source records and migration metadata', async () =>
+  fixture(async (client) => {
+    const { tokens } = await import('@dialpad/dialtone-query-core');
+    const query = '--dt-color-foreground-primary';
+    const expected = Object.entries(tokens[query]).filter(
+      ([name]) => name !== 'metadata',
+    );
+    assert.equal(expected.length, 104);
+    const seen = [];
+    let call = {
+      name: 'search_tokens',
+      arguments: { query, projection: 'themes', limit: 17 },
+    };
+    for (let page = 0; page < 10; page++) {
+      const text = readable(await client.callTool(call));
+      const records = [...text.matchAll(/^\d+\. \*\*([^*]+)\*\*/gm)];
+      const themes = records.map((match) => match[1]);
+      assert.ok(themes.length > 0);
+      for (const [index, record] of records.entries()) {
+        const block = text.slice(record.index, records[index + 1]?.index);
+        const contract = tokens[query][record[1]];
+        for (const [field, value] of Object.entries(contract))
+          assert.ok(
+            block.includes(
+              `${field}: ${typeof value === 'string' ? value : JSON.stringify(value)}`,
+            ),
+          );
+      }
+      seen.push(...themes);
+      const next = nextCall(text);
+      if (!next) break;
+      assert.ok(next.arguments.offset > (call.arguments.offset ?? 0));
+      call = next;
+    }
+    assert.deepEqual(
+      seen,
+      expected.map(([theme]) => theme),
+    );
+    const deprecated = '--dt-font-size-root';
+    const text = readable(
+      await client.callTool({
+        name: 'search_tokens',
+        arguments: { query: deprecated, projection: 'themes' },
+      }),
+    );
+    for (const [field, value] of Object.entries(tokens[deprecated].metadata))
+      assert.ok(
+        text.includes(
+          `${field}: ${typeof value === 'string' ? value : JSON.stringify(value)}`,
+        ),
+      );
+    for (const query_ of [
+      'color foreground primary',
+      'definitely-missing',
+      'constructor',
+    ]) {
+      const missing = readable(
         await client.callTool({
-          name: 'search_components',
-          arguments: { query: name },
+          name: 'search_tokens',
+          arguments: { query: query_, projection: 'themes' },
         }),
       );
-      const candidate = result.items.find((item) => item.name === name);
-      assert.equal(
-        candidate.apiCounts[section],
-        record[section]?.length ?? null,
-        `${name}.${section}`,
-      );
+      assert.match(missing, /No exact/);
+      assert.ok(missing.includes('search_tokens'));
     }
   }));
-for (const [tool, query, projection, domain] of [
-  ['search_tokens', '--dt-color-foreground-primary', 'themes', 'tokens'],
-  ['search_utility_classes', 'd-chip__close', 'properties', 'utilityClasses'],
-]) {
-  test(`${tool} keeps large subjects discoverable and complete values retrievable`, async () =>
-    fixture(async (client) => {
-      const core = await import('@dialpad/dialtone-query-core');
-      const raw = core[domain][query];
-      const expected =
-        projection === 'themes'
-          ? Object.entries(raw)
-              .filter(([name]) => name !== 'metadata')
-              .map(([theme, contract]) => ({ theme, contract }))
-          : raw.values;
-      assert.ok(expected.length > 50);
-      const discovery = structured(
-        await client.callTool({ name: tool, arguments: { query } }),
-      );
-      assert.ok(
-        discovery.counts.returned > 0,
-        'ordinary source subject must remain accessible',
-      );
-      const subject = discovery.items.find((item) => item.name === query);
-      assert.ok(subject, 'search subject must fit as a compact candidate');
-      assert.deepEqual(subject.metadata, raw.metadata ?? null);
-      assert.equal(subject.valueCounts.total, expected.length);
-      assert.equal(
-        subject.valueCounts.omitted,
-        expected.length - subject.previewValues.length,
-      );
-      assert.deepEqual(
-        subject.previewValues,
-        expected.slice(0, subject.previewValues.length),
-      );
-      assert.ok(subject.valueCounts.omitted > 0);
-      assert.ok(
-        discovery.truncation.omissions.includes('values_not_previewed'),
-      );
-      assert.equal(subject.detail.arguments.projection, projection);
-      let args = { ...subject.detail.arguments, limit: 17 };
-      const values = [];
-      for (let page = 0; page < 20; page++) {
-        const result = structured(
-          await client.callTool({ name: tool, arguments: args }),
-        );
-        assert.equal(result.mode, 'detail');
-        assert.equal(result.match, 'exact');
-        assert.equal(result.detail.subject.name, query);
-        assert.deepEqual(result.detail.subject.metadata, raw.metadata ?? null);
-        assert.equal(result.counts.total, expected.length);
-        assert.ok(result.items.length > 0);
-        values.push(...result.items);
-        assert.equal(
-          result.source.domains[domain].hash,
-          core.bundledProvenance.domains[domain].hash,
-        );
-        assert.ok(
-          result.budget.estimatedTokens <= result.budget.maximumEstimatedTokens,
-        );
-        if (!result.continuation) break;
-        assert.ok(result.continuation.arguments.offset > args.offset);
-        args = result.continuation.arguments;
-      }
-      assert.deepEqual(values, expected);
-    }));
-}
-test('value projections require exact subjects and reject unsupported selectors', async () =>
+test('selected detail tools retain strict schemas and budgets', async () =>
   fixture(async (client) => {
-    for (const [name, projection, broad] of [
-      ['search_tokens', 'themes', 'color foreground primary'],
-      ['search_utility_classes', 'properties', 'padding'],
+    for (const [name, arguments_] of [
+      ['get_component', { component: 'DtButton', limit: 1.5 }],
+      ['get_component', { component: 'DtButton', ignored: true }],
+      [
+        'get_documentation',
+        { id: 'components/checkbox#accessibility', textLimit: 0 },
+      ],
+      ['get_documentation', { id: ' ', ignored: true }],
     ]) {
-      for (const query of [broad, 'definitely-missing']) {
-        const result = structured(
-          await client.callTool({ name, arguments: { query, projection } }),
-        );
-        assert.equal(result.match, 'no-match');
-        assert.equal(result.counts.returned, 0);
-        assert.equal(result.continuation.arguments.projection, 'summary');
-      }
-      assert.equal(
-        (
-          await client.callTool({
-            name,
-            arguments: { query: broad, projection: 'everything' },
-          })
-        ).isError,
-        true,
-      );
+      const result = await client.callTool({ name, arguments: arguments_ });
+      assert.equal(result.isError, true);
     }
+    const detail = structured(
+      await client.callTool({
+        name: 'get_component',
+        arguments: {
+          component: 'DtButton',
+          projection: 'props',
+          field: 'kind',
+        },
+      }),
+    );
+    assert.ok(
+      detail.budget.estimatedTokens <= detail.budget.maximumEstimatedTokens,
+    );
   }));

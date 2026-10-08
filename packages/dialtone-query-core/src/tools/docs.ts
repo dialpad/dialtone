@@ -196,9 +196,9 @@ export function searchDocumentation(
  */
 export function formatDocumentationResults(
   results: SearchResult[],
-  _query: string,
+  query: string,
 ): string {
-  if (results.length === 0) return '';
+  if (results.length === 0) return `No documentation found for "${query}".`;
 
   return results.map(result => {
     const record = result.details as DocumentationRecord;

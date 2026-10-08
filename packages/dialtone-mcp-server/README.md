@@ -4,7 +4,7 @@ A [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server that pr
 
 Automatically filters deprecated items, swaps discouraged patterns with recommended alternatives, and provides AI-optimized search results.
 
-See [the retrieval contract](./RETRIEVAL.md) for exact component/API retrieval, complete prose, input limits, result envelopes, provenance and continuation.
+See [the retrieval contract](./RETRIEVAL.md) for readable searches, structured component/API and prose detail, compatible search inputs, provenance and continuation. Searches return Markdown text; only the two selected detail tools advertise structured output.
 
 ## Installation
 

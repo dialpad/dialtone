@@ -17,9 +17,13 @@ import {
   searchComponents,
   searchIcons,
   searchDocumentation,
+  formatResults,
+  formatTokenResults,
+  formatComponentResults,
+  formatIconResults,
+  formatDocumentationResults,
   getComponentDetail,
   getValueDetail,
-  projectDiscoveryValues,
   getComponentDocumentation,
   getDocumentationDetail,
   COMPONENT_SECTIONS,
@@ -33,44 +37,39 @@ import type {
 
 /** Routing only; policy remains in the existing client-rules resource. */
 export const ROUTING_INSTRUCTIONS =
-  'Discover with search_components, search_icons, search_tokens, search_utility_classes, or search_documentation. Select a canonical component; call get_component for complete API or named fields. Use get_documentation with an exact section ID for complete prose. Follow returned continuation calls. Results use bundled data; installed compatibility is not checked. Inspect match state, package versions, hashes, unknown metadata and omissions. Import hints verify only the stated exports. Documentation links are latest references. Verify API availability and behavior against installed packages. Discovery omits detail; client-rules remains a separate resource.';
+  'Search with search_components, search_icons, search_tokens, search_utility_classes or search_documentation for readable summaries. Component API and token themes are samples. Use get_component for complete selected APIs or named fields, get_documentation for exact section prose, and search_tokens projection themes for all named theme records. Follow continuation calls. Results use bundled data; installed compatibility is not checked. Inspect source packages, versions, hashes and missing metadata. Import hints verify stated exports only. Documentation links are latest references. Verify availability and behavior against installed packages. Client-rules remains a separate resource.';
 const query = z.string().max(256).trim().min(1);
 const offset = z.number().int().min(0).max(100000).default(0);
+const searchLimit = z.preprocess(
+  (value) =>
+    typeof value === 'string' && value.trim() ? Number(value) : value,
+  z.number().optional(),
+);
 const specs = {
   search_utility_classes: {
     domain: 'utilityClasses',
-    defaultLimit: 15,
-    max: 50,
     description:
-      'Discover CSS utility classes with property previews/counts. For complete atomic properties, use projection properties with an exact returned class name as query.',
+      'Search CSS utility classes with their available properties and usage.',
   },
   search_tokens: {
     domain: 'tokens',
-    defaultLimit: 15,
-    max: 50,
     description:
-      'Discover design tokens with named theme previews/counts. For complete atomic theme values, use projection themes with an exact returned token name as query.',
+      'Search design tokens with three named theme samples and usage. For all available theme records, use projection themes with an exact returned token name.',
   },
   search_components: {
     domain: 'components',
-    defaultLimit: 10,
-    max: 30,
     description:
-      'Discover component candidates by UI feature or name. API contracts are omitted: select a canonical identity and use get_component for detail.',
+      'Search components by name or feature with descriptions, sampled props/events/slots and import hints. Use get_component for the complete selected API.',
   },
   search_icons: {
     domain: 'icons',
-    defaultLimit: 20,
-    max: 50,
     description:
-      'Discover icons by name, category or visual keyword. Icon imports use @dialpad/dialtone-icons/vue.',
+      'Search icons by name, category or keyword with component import examples from @dialpad/dialtone-icons/vue.',
   },
   search_documentation: {
     domain: 'documentation',
-    defaultLimit: 10,
-    max: 30,
     description:
-      'Discover documentation sections about usage, accessibility, migrations or design guidance. For complete prose use get_documentation with the returned exact section ID.',
+      'Search documentation prose about usage, accessibility, migrations or design guidance. Use get_documentation with an exact returned section ID for complete prose.',
   },
 } as const;
 type SearchTool = keyof typeof specs;
@@ -174,31 +173,22 @@ export function queryToolDefinitions() {
       inputSchema: {
         type: 'object' as const,
         properties: {
-          query: stringSchema,
-          limit: {
-            type: 'integer',
-            minimum: 1,
-            maximum: spec.max,
-            default: spec.defaultLimit,
-          },
+          query: { type: 'string' },
+          limit: { type: 'number', default: 15 },
           offset: offsetSchema,
-          ...(name === 'search_tokens' || name === 'search_utility_classes'
+          ...(name === 'search_tokens'
             ? {
                 projection: {
                   type: 'string',
-                  enum: [
-                    'summary',
-                    name === 'search_tokens' ? 'themes' : 'properties',
-                  ],
+                  enum: ['summary', 'themes'],
                   default: 'summary',
                 },
               }
             : {}),
         },
         required: ['query'],
-        additionalProperties: false,
+        additionalProperties: true,
       },
-      outputSchema,
     })),
     {
       name: 'get_component',
@@ -262,6 +252,45 @@ function reply(envelope: RetrievalEnvelope, isError = false) {
     ...(isError ? { isError: true } : {}),
   };
 }
+function readableReply(text: string, isError = false) {
+  return {
+    content: [{ type: 'text' as const, text }],
+    ...(isError ? { isError: true } : {}),
+  };
+}
+function callText(tool: string, args: Record<string, unknown>) {
+  return `\`${tool}(${JSON.stringify(args)})\``;
+}
+function sourceText(name: SearchTool) {
+  const source = bundledProvenance.domains[specs[name].domain];
+  return `**Source:** bundled; installed compatibility not checked. ${source.package}@${source.version}; SHA256 ${source.hash}.`;
+}
+function searchFooter(
+  name: SearchTool,
+  args: { query: string; limit: number; offset: number; projection?: string },
+  total: number,
+  returned: number,
+) {
+  let footer = `\n\n**Results:** ${returned} of ${total}; offset ${args.offset}.\n${sourceText(name)}`;
+  const next = args.offset + returned;
+  if (args.limit > 0 && returned && next < total && next <= 100000)
+    footer += `\n**Continue:** ${callText(name, { ...args, offset: next })}`;
+  else if (next < total)
+    footer +=
+      '\nNo continuation can make progress with this limit within the supported offset range.';
+  return footer;
+}
+function fieldsText(fields: object) {
+  return Object.entries(fields)
+    .map(
+      ([field, value]) =>
+        `   - ${field}: ${typeof value === 'string' ? value : JSON.stringify(value)}`,
+    )
+    .join('\n');
+}
+function metadataText(metadata: object | null) {
+  return metadata ? `**Metadata:**\n${fieldsText(metadata)}\n\n` : '';
+}
 export function executeQueryTool(name: string, input: unknown) {
   try {
     if (name === 'get_documentation') {
@@ -307,7 +336,7 @@ export function executeQueryTool(name: string, input: unknown) {
               }
             : {
                 tool: 'search_components',
-                arguments: { query: args.component, limit: 10, offset: 0 },
+                arguments: { query: args.component, limit: 15, offset: 0 },
               }
           : null;
       const notes = [
@@ -367,62 +396,55 @@ export function executeQueryTool(name: string, input: unknown) {
       throw new Error(
         `Unknown tool '${name}'. Call tools/list for available routes.`,
       );
-    const spec = specs[name as SearchTool];
+    const searchName = name as SearchTool;
     const args = z
       .object({
-        query,
-        limit: z.number().int().min(1).max(spec.max).default(spec.defaultLimit),
+        query: z.string(),
+        limit: searchLimit,
         offset,
         ...(name === 'search_tokens'
           ? { projection: z.enum(['summary', 'themes']).default('summary') }
-          : name === 'search_utility_classes'
-            ? {
-                projection: z
-                  .enum(['summary', 'properties'])
-                  .default('summary'),
-              }
-            : {}),
+          : {}),
       })
-      .strict()
       .parse(input ?? {});
-    if (args.projection && args.projection !== 'summary') {
-      const selected =
-        name === 'search_tokens'
-          ? getValueDetail(args.query, 'tokens', tokens)
-          : getValueDetail(args.query, 'utilityClasses', utilityClasses);
-      return reply(
-        createRetrievalEnvelope(
-          {
-            tool: name,
-            args,
-            mode: 'detail',
-            domain: spec.domain,
-            match: selected.match,
-            items: selected.items,
-            detail: { projection: args.projection, subject: selected.subject },
-            notes: selected.subject
-              ? []
-              : [
-                  'No exact source name matched. Use summary discovery and select a returned name.',
-                ],
-            continuation: selected.subject
-              ? null
-              : {
-                  tool: name,
-                  arguments: {
-                    query: args.query,
-                    projection: 'summary',
-                    limit: spec.defaultLimit,
-                    offset: 0,
-                  },
-                },
-          },
-          bundledProvenance,
-        ),
+    const pageArgs = {
+      query: args.query,
+      limit: args.limit || 15,
+      offset: args.offset,
+      ...(typeof args.projection === 'string'
+        ? { projection: args.projection }
+        : {}),
+    };
+    if (name === 'search_tokens' && args.projection === 'themes') {
+      const selected = getValueDetail(args.query, tokens);
+      const records = selected.items as { theme: string; contract: object }[];
+      const page = records.slice(
+        pageArgs.offset,
+        pageArgs.offset + pageArgs.limit,
+      );
+      const text = selected.subject
+        ? `Theme records for **${selected.subject.name}**:\n\n${metadataText(selected.subject.metadata)}${page
+            .map(
+              (item, index) =>
+                `${index + 1}. **${item.theme}**\n${fieldsText(item.contract)}`,
+            )
+            .join(
+              '\n',
+            )}\nTheme values do not identify the active installed theme.`
+        : `No exact token source name matched "${args.query}". Use ${callText(name, { query: args.query, projection: 'summary' })} and select a returned name.`;
+      return readableReply(
+        text +
+          searchFooter(
+            searchName,
+            pageArgs,
+            selected.items.length,
+            page.length,
+          ),
       );
     }
-    const found =
-      name === 'search_utility_classes'
+    const found = !args.query.trim()
+      ? { results: [], notes: ['No match: query contains only whitespace.'] }
+      : name === 'search_utility_classes'
         ? searchUtilityClasses(args.query, utilityClasses)
         : name === 'search_tokens'
           ? searchTokens(args.query, tokens)
@@ -431,112 +453,52 @@ export function executeQueryTool(name: string, input: unknown) {
             : name === 'search_icons'
               ? searchIcons(args.query, icons)
               : searchDocumentation(args.query, documentation);
-    const items =
-      name === 'search_components'
-        ? found.results.map((result) => {
-            const component = getComponentDetail(
-              { component: result.name },
-              components,
-            ).component;
-            return {
-              name: result.name,
-              canonicalIdentity: result.details.identity,
-              description: result.details.description?.slice(0, 280) ?? null,
-              metadata: result.metadata,
-              apiCounts: Object.fromEntries(
-                COMPONENT_SECTIONS.map((section) => [
-                  section,
-                  component?.[section]?.length ?? null,
-                ]),
-              ),
-              detail: {
-                tool: 'get_component',
-                arguments: {
-                  component: result.name,
-                  projection: 'all',
-                  limit: 20,
-                  offset: 0,
-                },
-              },
-            };
-          })
-        : name === 'search_documentation'
-          ? found.results.map((result) => ({
-              id: result.details.id,
-              docId: result.details.docId,
-              title: result.details.docTitle,
-              headingPath: result.details.headingPath,
-              excerpt: result.details.content.slice(0, 500),
-              contentLength: Array.from(result.details.content).length,
-              detail: {
-                tool: 'get_documentation',
-                arguments: {
-                  id: result.details.id,
-                  textOffset: 0,
-                  textLimit: 6000,
-                },
-              },
-            }))
-          : name === 'search_tokens' || name === 'search_utility_classes'
-            ? found.results.map((result) => ({
-                ...projectDiscoveryValues(result),
-                detail: {
-                  tool: name,
-                  arguments: {
-                    query: result.name,
-                    projection:
-                      name === 'search_tokens' ? 'themes' : 'properties',
-                    limit: spec.defaultLimit,
-                    offset: 0,
-                  },
-                },
-              }))
-            : found.results;
-    const exact = 'exactMatch' in found && found.exactMatch === true;
-    return reply(
-      createRetrievalEnvelope(
-        {
-          tool: name,
-          args,
-          mode: 'discovery',
-          domain: spec.domain,
-          match: items.length ? (exact ? 'exact' : 'candidate') : 'no-match',
-          items,
-          notes: found.notes,
-          omissions:
-            name === 'search_components'
-              ? [
-                  'component_api_details',
-                  'description_after_280_characters_if_present',
-                ]
-              : name === 'search_documentation'
-                ? [
-                    'prose_after_500_characters_if_present',
-                    'other_sections_in_matching_pages',
-                  ]
-                : name === 'search_tokens' || name === 'search_utility_classes'
-                  ? items.some(
-                      (item) =>
-                        'valueCounts' in item && item.valueCounts.omitted > 0,
-                    )
-                    ? ['values_not_previewed']
-                    : []
-                  : [],
-          continuation:
-            name === 'search_components' && exact
-              ? {
-                  tool: 'get_component',
-                  arguments: {
-                    component: found.results[0].name,
-                    projection: 'all',
-                    limit: 20,
-                    offset: 0,
-                  },
-                }
-              : null,
-        },
-        bundledProvenance,
-      ),
+    const page = found.results.slice(
+      pageArgs.offset,
+      pageArgs.offset + pageArgs.limit,
+    );
+    let text =
+      name === 'search_utility_classes'
+        ? formatResults(page, args.query)
+        : name === 'search_tokens'
+          ? formatTokenResults(page, args.query)
+          : name === 'search_components'
+            ? formatComponentResults(page, args.query)
+            : name === 'search_icons'
+              ? formatIconResults(page, args.query)
+              : formatDocumentationResults(page, args.query);
+    if (found.notes.length) text += `\n\n${found.notes.join('\n')}`;
+    if (page.length && name === 'search_components') {
+      text +=
+        '\n**Complete selected API:** The displayed API is an incomplete sample.\n';
+      text += page
+        .map(
+          (result) =>
+            `- ${result.name}: ${callText('get_component', { component: result.name })}`,
+        )
+        .join('\n');
+    } else if (page.length && name === 'search_tokens') {
+      text +=
+        '\n**Complete theme records:** Three themes are a sample; they do not identify the active installed theme.\n';
+      text += page
+        .map(
+          (result) =>
+            `- ${result.name}: ${callText(name, { query: result.name, projection: 'themes', limit: 15, offset: 0 })}`,
+        )
+        .join('\n');
+    } else if (page.length && name === 'search_documentation') {
+      text +=
+        '\n**Complete section prose:** Discovery excerpts can omit available guidance.\n';
+      text += page
+        .map(
+          (result) =>
+            `- ${result.details.id}: ${callText('get_documentation', { id: result.details.id })}`,
+        )
+        .join('\n');
+    }
+    return readableReply(
+      text +
+        searchFooter(searchName, pageArgs, found.results.length, page.length),
     );
   } catch (error) {
     const notes =
@@ -546,11 +508,13 @@ export function executeQueryTool(name: string, input: unknown) {
               `${issue.path.join('.') || 'arguments'}: ${issue.message}`,
           )
         : [error instanceof Error ? error.message : String(error)];
-    const domain = Object.hasOwn(specs, name)
-      ? specs[name as SearchTool].domain
-      : name === 'get_documentation'
-        ? 'documentation'
-        : 'components';
+    if (Object.hasOwn(specs, name))
+      return readableReply(
+        `Error: ${notes.join('\n')}\n${sourceText(name as SearchTool)}`,
+        true,
+      );
+    const domain =
+      name === 'get_documentation' ? 'documentation' : 'components';
     return reply(
       createRetrievalEnvelope(
         {

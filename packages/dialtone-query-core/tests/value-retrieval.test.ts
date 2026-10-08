@@ -1,116 +1,38 @@
 import { describe, it, expect } from 'vitest';
-import {
-  projectDiscoveryValues,
-  getValueDetail,
-} from '../src/value-retrieval.js';
+import { getValueDetail } from '../src/value-retrieval.js';
 
-describe('bounded value discovery and exact source detail', () => {
-  it('projects theme maps with explicit previews/counts and all migration metadata', () => {
+describe('exact token theme retrieval', () => {
+  it('retains all named theme contracts, zero values and migration metadata', () => {
     const metadata = {
-      deprecated: true,
-      reason: 'Legacy subject',
-      alternatives: ['--dt-new'],
-      docs: '/migration/',
-      replacement: '--dt-new',
+      deprecated: true, reason: 'Legacy subject', alternatives: ['--dt-new'],
+      docs: '/migration/', replacement: '--dt-new',
     };
-    const allThemes = {
-      metadata,
-      ...Object.fromEntries(
-        Array.from({ length: 3 }, (_, i) => [
-          `theme-${i}`,
-          { value: i, description: 'Source value description' },
-        ]),
-      ),
-    };
-    const summary = projectDiscoveryValues({
-      type: 'design-token',
-      name: '--dt-test',
-      metadata,
-      details: { allThemes },
-    });
-    expect(summary).toMatchObject({
-      type: 'design-token',
-      name: '--dt-test',
-      metadata,
-      valueCounts: { total: 3, previewed: 2, omitted: 1 },
-    });
-    expect(summary.previewValues).toEqual([
-      {
-        theme: 'theme-0',
-        contract: { value: 0, description: 'Source value description' },
+    const detail = getValueDetail('--dt-test', {
+      '--dt-test': {
+        metadata,
+        light: { value: 0, description: 'Zero value' },
+        dark: { value: 1, description: 'Dark value' },
+        material: { value: 2, description: 'Material value' },
       },
-      {
-        theme: 'theme-1',
-        contract: { value: 1, description: 'Source value description' },
-      },
-    ]);
-    const detail = getValueDetail('--dt-test', 'tokens', {
-      '--dt-test': allThemes,
     });
-    expect(detail.items).toHaveLength(3);
     expect(detail.subject?.metadata).toEqual(metadata);
-    expect(detail.items[2]).toEqual({
-      theme: 'theme-2',
-      contract: allThemes['theme-2'],
-    });
+    expect(detail.items).toEqual([
+      { theme: 'light', contract: { value: 0, description: 'Zero value' } },
+      { theme: 'dark', contract: { value: 1, description: 'Dark value' } },
+      { theme: 'material', contract: { value: 2, description: 'Material value' } },
+    ]);
   });
-  it('retains compound property records and migration metadata', () => {
-    const values = [
-      {
-        prop: 'color',
-        value: 'var(--dt-color-foreground-primary)',
-        description: 'Foreground color',
-      },
-      {
-        prop: 'padding',
-        value: '0',
-        description: 'Spacing around content',
-      },
-      {
-        prop: 'border',
-        value: '1px solid currentColor',
-        description: 'Source border',
-      },
-    ];
-    const metadata = {
-      discouraged: true,
-      reason: 'Prefer a newer class',
-      alternatives: ['d-new'],
-    };
-    const summary = projectDiscoveryValues({
-      type: 'utility-class',
-      name: 'd-test',
-      metadata,
-      details: { properties: values },
-    });
-    expect(summary.valueCounts).toEqual({
-      total: 3,
-      previewed: 2,
-      omitted: 1,
-    });
-    expect(summary.previewValues).toEqual(values.slice(0, 2));
-    const detail = getValueDetail('d-test', 'utilityClasses', {
-      'd-test': { values, metadata },
-    });
-    expect(detail.items).toEqual(values);
-    expect(detail.subject).toEqual({
-      type: 'utility-class',
-      name: 'd-test',
-      metadata,
-    });
-  });
+
   it('does not interpret broad phrases, prefixes or inherited keys as selected names', () => {
     const data = {
       '--dt-color-primary': { base: { value: 'red' } },
       '--dt-color-primary-hover': { base: { value: 'blue' } },
     };
     for (const query of ['color primary', '--dt-color', 'constructor'])
-      expect(getValueDetail(query, 'tokens', data)).toMatchObject({
-        match: 'no-match',
-        subject: null,
-        items: [],
+      expect(getValueDetail(query, data)).toMatchObject({
+        match: 'no-match', subject: null, items: [],
       });
-    expect(getValueDetail('--dt-color-primary', 'tokens', data).items).toEqual([
+    expect(getValueDetail('--dt-color-primary', data).items).toEqual([
       { theme: 'base', contract: { value: 'red' } },
     ]);
   });

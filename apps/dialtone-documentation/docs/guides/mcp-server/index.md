@@ -121,12 +121,11 @@ Find CSS utility classes to style HTML elements. Use when your query mentions CS
 
 **Parameters:**
 
-- `query` (required): CSS property and/or value; an exact returned class name for property detail
-- `projection` (optional): `summary` (default) or `properties`
-- `limit` (optional): Maximum class summaries or detail property records (1-50, default 15)
-- `offset` (optional): Record offset (default 0)
+- `query` (required): CSS property and/or value
+- `limit` (optional): Maximum returned classes (default 15)
+- `offset` (optional): Integer record offset (0–100000, default 0)
 
-Summary items include source name/type, migration metadata, up to two property previews, total/previewed/omitted counts, and an exact detail call. Follow `projection: "properties"` continuations for complete available property records.
+Readable Markdown results retain every available property and usage example for each returned class, together with search notes and source provenance. Follow the text continuation call for more classes.
 
 ### Design Tokens
 
@@ -147,10 +146,10 @@ Find design tokens (CSS variables) from Dialtone's design system. Use when your 
 
 - `query` (required): Token category, name, or value; an exact returned token name for theme detail
 - `projection` (optional): `summary` (default) or `themes`
-- `limit` (optional): Maximum token summaries or detail theme records (1-50, default 15)
+- `limit` (optional): Maximum returned tokens or theme records (default 15)
 - `offset` (optional): Record offset (default 0)
 
-Summary items include source name/type, migration metadata, up to two named theme previews, total/previewed/omitted counts, and an exact detail call. Follow `projection: "themes"` continuations for complete available theme records. Previewed values do not identify your active installed theme.
+Readable Markdown results preserve three named theme samples and token usage, label the sample as incomplete, and supply an exact `projection: "themes"` call. The theme projection returns complete available named source records and migration metadata as text, with limit/offset continuations. Samples and detail values do not identify your active installed theme.
 
 ### Components
 
@@ -168,15 +167,15 @@ Discover Vue component candidates by UI element or name. Select a canonical comp
 
 **Returns:**
 
-- Component identity, description excerpt and API counts
+- Component names, descriptions, the first five props and sampled event/slot names
 - Deprecation metadata and verified export hints where available
 - Exact detail and pagination continuation calls
 - Bundled data package versions and hashes; installed compatibility is not checked
 
 **Parameters:**
 
-- `query` (required): Trimmed nonempty component name or UI element, at most 256 characters
-- `limit` (optional): Integer maximum results (1–30, default 10)
+- `query` (required): Component name or UI element
+- `limit` (optional): Maximum returned components (default 15)
 - `offset` (optional): Integer record offset (0–100000, default 0)
 
 ### Selected component API
@@ -191,7 +190,7 @@ Retrieve the selected component's complete available generated records. For Butt
 
 `projection` accepts `all` (default), `props`, `events`, `slots`, `methods` and `expose`. `field` is optional and stays within that component. Records preserve available types, values, defaults, required inputs, tags, event payloads and scoped-slot bindings. Missing metadata is unknown. Import hints state export verification only; documentation links are latest production references with readiness and API-content qualification.
 
-`limit` accepts integers 1–50 (default 20); `offset` defaults to zero. Follow the returned continuation for remaining records. Discovery has a rough budget of 1500 estimated tokens and detail has 12000, counted as compact envelope JSON UTF-8 bytes divided by four and rounded up. Oversized atomic contracts report their omission instead of silently truncating values or payloads.
+`limit` accepts integers 1–50 (default 20); `offset` defaults to zero. Follow the returned continuation for remaining records. Selected detail has a rough budget of 12000 estimated tokens, counted as compact envelope JSON UTF-8 bytes divided by four and rounded up. Readable searches are not cut by this budget. Oversized atomic contracts report their omission instead of silently truncating values or payloads.
 
 ### Complete documentation prose
 
@@ -205,7 +204,7 @@ Search returns exact section IDs, 500-character excerpts and detail calls. Pass 
 
 `textLimit` defaults to 6000 Unicode code points (1–10000); `textOffset` defaults to zero (0–1000000). Follow the returned continuation to read remaining content. Prose retrieval does not verify example code or consumer compatibility.
 
-All tools return a shared structured envelope and a readable text fallback with the same facts, including match state, counts, omissions, sources and targeted continuation. Whitespace-only queries, invalid types, fractional/out-of-range limits and unknown arguments return errors.
+The five search tools return readable Markdown only, with bundled package/version/hash provenance and text continuation calls. All execute and advertise a default limit of 15. They accept plain string queries, fractional numeric limits, harmless numeric-string limits and extra arguments. Whitespace-only queries return a clear no-match message; long inputs follow the existing domain search rules. Only `get_component` and `get_documentation` return structured envelopes and matching JSON text fallbacks; their selected detail schemas remain strict. Installed compatibility is not checked.
 
 ### Icons
 
@@ -233,7 +232,8 @@ Find icons from Dialtone's icon library and learn how to use icon components. Ic
 **Parameters:**
 
 - `query` (required): Icon name, category, or keyword
-- `limit` (optional): Maximum results (1-50, default 20)
+- `limit` (optional): Maximum returned icons (default 15)
+- `offset` (optional): Integer record offset (0–100000, default 0)
 
 ## Usage Examples
 
@@ -254,7 +254,7 @@ When building UI and unsure what components exist:
 ```text
 User: "What button components are available in Dialtone?"
 Claude: [Uses search_components tool]
-Result: Candidate identities, descriptions, API counts, and detail routes.
+Result: Component descriptions, sampled props/events/slots, imports and detail routes.
 Claude: [Uses get_component for the selected DtButton API]
 ```
 

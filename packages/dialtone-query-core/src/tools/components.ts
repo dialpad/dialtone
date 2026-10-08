@@ -288,7 +288,7 @@ export function formatComponentResults(results: SearchResult[], query: string): 
 
     // Show key props (up to 5)
     if (result.details.props && result.details.props.length > 0) {
-      output += `   **Key Props:**\n`;
+      output += `   **Props (first ${Math.min(5, result.details.props.length)} of ${result.details.props.length}):**\n`;
       const propsToShow = result.details.props.slice(0, 5);
       propsToShow.forEach((prop: ComponentProp) => {
         const typeName = prop.type?.name || 'unknown';

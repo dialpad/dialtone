@@ -220,8 +220,10 @@ describe('formatDocumentationResults', () => {
     expect(formatted).toContain('dialtone.dialpad.com');
   });
 
-  test('returns empty string for empty results array', () => {
-    expect(formatDocumentationResults([], 'nothing')).toBe('');
+  test('reports the unmatched documentation query explicitly', () => {
+    const output = formatDocumentationResults([], 'nothing');
+    expect(output).toMatch(/no documentation/i);
+    expect(output).toContain('nothing');
   });
 });
 
