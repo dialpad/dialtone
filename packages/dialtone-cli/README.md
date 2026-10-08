@@ -35,7 +35,7 @@ dialtone component button --slots              # slots only
 dialtone component button --examples           # usage example
 ```
 
-### `dialtone token <query>`
+### `dialtone token [query]`
 
 Look up design tokens. Use `--name=--dt-*` for canonical CSS names so the leading dashes are parsed as a value. Exact legacy names retain their values and qualified migration guidance; add `--values --format json` to inspect that metadata.
 
