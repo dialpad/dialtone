@@ -58,6 +58,7 @@ jobs:
             cli:
               - 'packages/dialtone-query-core/**'
               - 'packages/dialtone-cli/**'
+              - 'packages/dialtone-vue/directives/**/*.mdx'
               - 'scripts/build-dialtone-vue-docs.mjs'
               - 'packages/dialtone-css/postcss/dialtone-docs.cjs'
               - 'packages/dialtone-docs/src/generators/**'

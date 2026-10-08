@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-09-30
+last_updated: 2026-10-08
 related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli]
 ---
 
@@ -50,11 +50,11 @@ These checks are required on every PR:
 | `test` | `packages/dialtone-vue/**` | `pnpm nx run dialtone-vue:test:coverage` |
 | `test-tokens` | `packages/dialtone-tokens/**` | `pnpm nx run dialtone-tokens:test` |
 | `test-combinator` | `packages/combinator/**` | `pnpm nx run dialtone-combinator:test` |
-| `test-cli` | `packages/dialtone-query-core/**`, `packages/dialtone-cli/**`, and the data generators `scripts/build-dialtone-vue-docs.mjs`, `packages/dialtone-css/postcss/dialtone-docs.cjs`, `packages/dialtone-docs/src/generators/**` | `pnpm nx run-many -t test -p dialtone-query-core dialtone-cli` |
+| `test-cli` | `packages/dialtone-query-core/**`, `packages/dialtone-cli/**`, directive sources `packages/dialtone-vue/directives/**/*.mdx`, and the data generators `scripts/build-dialtone-vue-docs.mjs`, `packages/dialtone-css/postcss/dialtone-docs.cjs`, `packages/dialtone-docs/src/generators/**` | `pnpm nx run-many -t test -p dialtone-query-core dialtone-cli` |
 
 The `test` job outputs a coverage report in JSON and HTML. Coverage thresholds enforced: 80% branches, 70% functions, 85% lines and statements. Build fails if thresholds are not met.
 
-In `test-cli`, both test targets depend on their project's build. The builds generate the component, token, utility, icon, and documentation data the tests read, and the CLI's smoke tests run its built `build/index.js`. A change to a generator can change the shape of that data, so it runs `test-cli`. A change to the content alone, such as a component, icon, or docs page, doesn't; a test it breaks fails on the next PR that runs `test-cli`.
+In `test-cli`, both test targets depend on their project's build. The builds generate the component, token, utility, icon, and documentation data the tests read, and the CLI's smoke tests run its built `build/index.js`. Generator and directive MDX changes run `test-cli`. Directive MDX changes also run `docs_tests.yml`, which builds the documentation corpus before testing its extraction. Other content-only changes, such as a component, icon, or VuePress page, do not run `test-cli`; a test they break fails on the next PR that runs it.
 
 ---
 

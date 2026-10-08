@@ -14,7 +14,14 @@ The directive handles **focus movement only**. Activation and selection (togglin
 
 ## Usage
 
-Import and install the directive:
+Import `DtFocusgroupDirective` from `@dialpad/dialtone-vue` and register it with
+`app.use(DtFocusgroupDirective)` on your Vue 3 application before mounting. Use
+`v-dt-focusgroup` on the widget container with its role and accessible name.
+Bind a space-separated token string or an object configuration; arguments and
+modifiers are not read. With no configuration, the axis is `both`, looping and
+focus memory are enabled, and the role determines item selection and disabled
+item handling. A `false` value also uses these defaults; it does not disable the
+directive.
 
 ```js
 import { DtFocusgroupDirective } from "@dialpad/dialtone-vue";
@@ -120,7 +127,10 @@ on the container, finding items at any nesting depth in DOM order:
 
 ## Tokens
 
-Space-separated string tokens configure the directive behavior:
+Set space-separated tokens in the **bound value**, such as
+`v-dt-focusgroup="'horizontal'"`, or use an object with `axis: 'horizontal'`.
+The directive ignores arguments and modifiers; `.horizontal` does not set the
+axis. The `horizontal` token handles Left/Right arrow keys only.
 
 <table>
   <thead>
@@ -220,6 +230,11 @@ The `event.detail` payload:
 
 Arrow direction is RTL-aware: in right-to-left contexts, Left arrow moves
 forward and Right arrow moves backward on the horizontal axis.
+
+Tab leaves the group normally. Activation, selection, and dismissal remain the
+widget's responsibility; the directive does not handle Enter, Space, or Escape.
+Configuration changes reattach its listeners, and unmounting removes them.
+It does not restore the items' previous tabindex values on unmount.
 
 ## Limitations
 

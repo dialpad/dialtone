@@ -11,16 +11,19 @@ Use object syntax to pass `DtTooltip` props to the directive.
 
 ## Usage
 
-Import the directive from dialtone-vue
+Import `DtTooltipDirective` from `@dialpad/dialtone-vue` and register it with
+`app.use(DtTooltipDirective)` on your Vue 3 application before mounting. Use
+`v-dt-tooltip` on the anchor element. Registration creates a shared tooltip
+container in `document.body`, so it requires a browser DOM.
 
 ```js
 import { DtTooltipDirective } from "@dialpad/dialtone-vue";
 ```
 
-Install the directive into vue instance
+Register the directive on your application:
 
 ```js
-Vue.use(DtTooltipDirective);
+app.use(DtTooltipDirective);
 ```
 
 ### Default
@@ -28,7 +31,7 @@ Vue.use(DtTooltipDirective);
 Default tooltip directive uses `top` as default placement
 
 ```html
-<dt-button v-dt-tooltip="Tooltip text">Placeholder button</dt-button>
+<dt-button v-dt-tooltip="'Tooltip text'">Placeholder button</dt-button>
 ```
 
 ### With Placement
@@ -38,7 +41,7 @@ possible values: **bottom, bottom-start, bottom-end, right, right-start, right-e
 top, top-start, top-end**.
 
 ```html
-<dt-button v-dt-tooltip:bottom-start="Tooltip text">Placeholder button</dt-button>
+<dt-button v-dt-tooltip:bottom-start="'Tooltip text'">Placeholder button</dt-button>
 ```
 
 ### Without Arrow
@@ -48,3 +51,28 @@ Set `showArrow` to `false` with object syntax to hide the tooltip arrow.
 ```html
 <dt-button v-dt-tooltip="{ message: 'Tooltip text', showArrow: false }">Placeholder button</dt-button>
 ```
+
+## Binding options and modifiers
+
+Bind a string for the message or an object with `DtTooltip` props such as
+`message`, `placement`, and `showArrow`. The default placement is `top`.
+An object's `placement` overrides the argument; a placement modifier overrides
+both. Placement modifiers accept the same twelve values as the argument.
+Use `.no-delay` to disable delay, `.no-transition` to disable the transition,
+or `.light`, `.dark`, and `.invert` for `contentMode`. The legacy `.inverted`
+modifier sets the deprecated `inverted` prop; use `.invert`
+(`contentMode: 'invert'`) for inversion.
+
+```html
+<button v-dt-tooltip:bottom.no-delay="'Save changes'">Save</button>
+```
+
+## Behavior and accessibility
+
+Changes to the bound value update the tooltip. Bind `null` or `undefined` to
+remove it; unmounting the anchor removes its tooltip entry. Argument or modifier
+changes alone do not trigger an update when the value is unchanged.
+
+Keep essential information and an accessible name on the anchor itself. Native
+disabled buttons cannot receive focus or pointer events; use a focusable `span`
+wrapper as the tooltip anchor when a disabled control needs an explanation.

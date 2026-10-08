@@ -5,6 +5,28 @@ import { buildRecords, chunkSections } from '@src/generators/build-public-docs.m
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const fixtureDir = resolve(__dirname, '../fixtures/public-docs');
+const directiveRoot = resolve(__dirname, '../../../dialtone-vue/directives');
+
+describe('public directive MDX records', () => {
+  test.each(['tooltip', 'scrollbar', 'mode', 'focusgroup', 'focustrap'])('%s retains its public contract and source reference', (name) => {
+    const records = buildRecords(resolve(directiveRoot, `${name}_directive/${name}.mdx`));
+    expect(records[0].docId).toBe(`directives/${name}`);
+    expect(records[0].category).toBe('directives');
+    const content = records.map(record => record.content).join(' ');
+    expect(content).toContain(`v-dt-${name}`);
+    expect(content).toContain(`Dt${name[0].toUpperCase()}${name.slice(1)}Directive`);
+    expect(content).toContain('app.use');
+    expect(content).not.toMatch(/import \*|<Meta|<Canvas|Stories|addon-docs/);
+    for (const record of records) expect(record.content.trim()).not.toBe('');
+  });
+
+  test('source qualification and Storybook identity are derived for a public directive', () => {
+    const { frontmatter } = buildRecords(resolve(directiveRoot, 'tooltip_directive/tooltip.mdx'))[0];
+    expect(frontmatter.sourcePackage).toBe('@dialpad/dialtone-vue');
+    expect(frontmatter.sourceVersion).toMatch(/^\d+\.\d+\.\d+/);
+    expect(frontmatter.storybook).toBe('https://dialtone.dialpad.com/vue/?path=/docs/directives-tooltip--docs');
+  });
+});
 
 // ─── chunkSections unit tests ────────────────────────────────────────────────
 

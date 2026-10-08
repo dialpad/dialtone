@@ -16,7 +16,12 @@ dismissal, and `aria-modal` management remain the consumer's responsibility.
 
 ## Usage
 
-Import and install the directive:
+Import `DtFocustrapDirective` from `@dialpad/dialtone-vue` and register it with
+`app.use(DtFocustrapDirective)` on your Vue 3 application before mounting. Use
+`v-dt-focustrap` on the container. Bind a boolean for activation or an object
+configuration; arguments and modifiers are not read. With no binding it is
+active, `initialFocus` is `auto`, and `restoreFocus` is `true`. Supply the
+appropriate role, accessible name, activation state, and dismissal handlers.
 
 ```js
 import { DtFocustrapDirective } from "@dialpad/dialtone-vue";
@@ -147,11 +152,17 @@ When the trap activates, focus is placed according to the `initialFocus` option:
 Initial focus is set asynchronously (microtask) to avoid breaking CSS transitions
 and unwanted scrolling.
 
+Initial focus and restoration settings are captured when the trap activates.
+Changing those settings while it remains active does not reinitialize the trap.
+
 ### Focus restoration
 
 When the trap deactivates with `restoreFocus: true`, the element that held focus
 before activation is refocused. If that element has been removed from the DOM,
 the restore is silently skipped.
+
+Deactivation and unmounting remove the keydown listener and any fallback
+tabindex added to the container, and restore focus when configured.
 
 ## Focustrap vs. Focusgroup
 

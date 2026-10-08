@@ -11,6 +11,8 @@ const __dirname = dirname(__filename);
 const packageRoot = resolve(__dirname, '../..');
 const repoRoot = resolve(packageRoot, '../..');
 const docsRoot = resolve(repoRoot, 'apps/dialtone-documentation/docs');
+const vueRoot = resolve(repoRoot, 'packages/dialtone-vue');
+const vuePackage = JSON.parse(readFileSync(resolve(vueRoot, 'package.json'), 'utf8'));
 const distDir = resolve(packageRoot, 'dist');
 const outputPath = resolve(distDir, 'public-docs.json');
 
@@ -127,7 +129,14 @@ export function chunkSections(body) {
  */
 export function buildRecords(absolutePath) {
   const rawFile = readFileSync(absolutePath, 'utf8');
-  const { data: frontmatter, content: body } = matter(rawFile);
+  const { data: frontmatter, content } = matter(rawFile);
+  const filePath = relative(repoRoot, absolutePath).replace(/\\/g, '/');
+  const isDirective = filePath.startsWith('packages/dialtone-vue/directives/') && filePath.endsWith('.mdx');
+  // Directive MDX starts with Storybook imports and Meta. Reuse the prose from
+  // its first H1; authoring setup and fenced examples are not search guidance.
+  const headingStart = isDirective ? content.search(/^#\s+/m) : 0;
+  if (headingStart < 0) throw new Error(`Missing H1 for ${filePath}`);
+  const body = content.slice(headingStart);
 
   // Blacklist filter: skip explicitly non-ready docs (case-insensitive against canonical lowercase set)
   const status = typeof frontmatter.status === 'string'
@@ -135,20 +144,19 @@ export function buildRecords(absolutePath) {
     : '';
   if (status && NON_READY_STATUSES.has(status)) return [];
 
-  const filePath = relative(repoRoot, absolutePath).replace(/\\/g, '/');
-  const name = basename(absolutePath, '.md');
+  const name = basename(absolutePath).replace(/\.mdx?$/, '');
 
   // Category = first path component under docs/ root.
   // Falls back to parent directory name for files outside docsRoot (test fixtures).
   const relToDocsRoot = relative(docsRoot, absolutePath);
   const relParts = relToDocsRoot.replace(/\\/g, '/').split('/');
-  const category = relParts[0] === '..'
+  const category = isDirective ? 'directives' : relParts[0] === '..'
     ? basename(dirname(absolutePath))
     : (relParts.length > 1 ? relParts[0] : 'root');
 
   // Use relative path from docsRoot as docId to avoid collisions (e.g. multiple index.md files).
   // Falls back to basename for files outside docsRoot (test fixtures).
-  const docId = relParts[0] === '..'
+  const docId = isDirective ? `directives/${name}` : relParts[0] === '..'
     ? name
     : relToDocsRoot.replace(/\\/g, '/').replace(/\.md$/, '');
   const docTitle = extractTitle(frontmatter, body) ?? docId;
@@ -162,6 +170,15 @@ export function buildRecords(absolutePath) {
     figmaUrl: frontmatter.figma_url ?? null,
     storybook: frontmatter.storybook ?? null,
   };
+  if (isDirective) {
+    const storiesImport = rawFile.match(/^import \* as \w+ from ['"](.+\.stories\.js)['"]/m);
+    const stories = storiesImport && readFileSync(resolve(dirname(absolutePath), storiesImport[1]), 'utf8');
+    const storyTitle = stories && stories.match(/title:\s*['"]([^'"]+)['"]/)?.[1];
+    if (!storyTitle) throw new Error(`Missing Storybook title for ${filePath}`);
+    fm.storybook = `https://dialtone.dialpad.com/vue/?path=/docs/${slugify(storyTitle)}--docs`;
+    fm.sourcePackage = vuePackage.name;
+    fm.sourceVersion = vuePackage.version;
+  }
 
   const sections = chunkSections(body);
 
@@ -198,7 +215,7 @@ export function buildRecords(absolutePath) {
       frontmatter: fm,
       filePath,
     };
-  });
+  }).filter(record => !isDirective || record.content.trim().length > 0);
 }
 
 async function build() {
@@ -214,6 +231,12 @@ async function build() {
   if (files.length === 0) {
     throw new Error('No markdown files found in apps/dialtone-documentation/docs/');
   }
+
+  // Only include directive folders exported by the public package barrel.
+  const barrel = readFileSync(resolve(vueRoot, 'index.js'), 'utf8');
+  const directiveGlobs = [...barrel.matchAll(/export \* from ['"]\.\/(directives\/[^'"]+)['"]/g)]
+    .map(match => `packages/dialtone-vue/${match[1]}/*.mdx`);
+  files.push(...await glob(directiveGlobs, { cwd: repoRoot, absolute: true }));
 
   const allRecords = [];
   for (const file of files) {

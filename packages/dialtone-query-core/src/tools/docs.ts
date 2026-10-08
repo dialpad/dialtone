@@ -3,6 +3,7 @@
 // ============================================================================
 
 import type { DocumentationRecord, SearchResult } from '../types.js';
+import { directiveIdentifiers } from '../directive-identifiers.js';
 
 const CONTENT_EXCERPT_MAX = 500;
 const MAX_QUERY_CHARS = 256;
@@ -81,6 +82,7 @@ export function searchDocumentation(
   // Bound input to prevent expensive worst-case scans on very long queries.
   const truncated = query.length > MAX_QUERY_CHARS;
   const bounded = truncated ? query.slice(0, MAX_QUERY_CHARS) : query;
+  const directives = directiveIdentifiers(bounded);
 
   // Normalize: lowercase, strip punctuation (keep alphanumerics + hyphens for v-model etc.)
   const normalized = bounded.toLowerCase()
@@ -109,6 +111,14 @@ export function searchDocumentation(
     const pattern = stem.length >= 4 ? `\\b${stem}\\w*` : `\\b${escaped}\\b`;
     return new RegExp(pattern, 'i');
   });
+  // Once an explicit directive selects the document, its identifier should not
+  // favor the registration section over requested options or behavior.
+  const contractRegexes = regexes.filter((_, index) => {
+    const word = words[index];
+    const identifier = word.startsWith('v-dt-') ? word.slice(5)
+      : word.startsWith('dt') && word.endsWith('directive') ? word.slice(2, -9) : null;
+    return identifier === null || !directives.includes(identifier);
+  });
 
   // Determine whether a record's docTitle matches a query term.
   // Extracted before the scoring loop so title-matching sections are included even when
@@ -132,9 +142,21 @@ export function searchDocumentation(
   const scored: Array<{ result: SearchResult; matchCount: number; titleMatch: boolean }> = [];
 
   for (const record of data) {
+    const isDirective = record.docId.startsWith('directives/');
+    const selectedDirective = isDirective && directives.includes(record.docId.slice('directives/'.length).toLowerCase());
+    const namedTitle = checkTitleMatch(record);
+    // Preserve explicitly named component counterparts in a directive comparison
+    // using the existing component page slug as well as its title. The Mode
+    // Island page is titled "Mode". Ordinary queries keep existing ranking.
+    const namedComponent = directives.length > 0 && record.category === 'components'
+      && words.some(word => word.startsWith('dt')
+        && [record.docTitle, record.docId.slice('components/'.length)]
+          .some(name => word.slice(2).replace(/-/g, '') === name.toLowerCase().replace(/[\s/-]/g, '')));
+    if (directives.length > 0 && !selectedDirective && (isDirective || !(namedTitle || namedComponent))) continue;
     const fullBlob = [record.docTitle, ...record.headingPath, record.frontmatter.description ?? '', record.content].join(' ');
-    const matchCount = regexes.filter(r => r.test(fullBlob)).length;
-    const titleMatch = checkTitleMatch(record);
+    const sectionRegexes = selectedDirective && contractRegexes.length > 0 ? contractRegexes : regexes;
+    const matchCount = sectionRegexes.filter(r => r.test(fullBlob)).length;
+    const titleMatch = selectedDirective || namedTitle || namedComponent;
     // Include if content matched OR the document is specifically named in the query.
     if (matchCount === 0 && !titleMatch) continue;
 
@@ -184,6 +206,9 @@ export function searchDocumentation(
     });
 
   const notes: string[] = [];
+  if (directives.length > 0 && !results.some(result => result.details.docId.startsWith('directives/'))) {
+    notes.push('No directive documentation found for the explicit identifier.');
+  }
   if (truncated) notes.push(`Query truncated to ${MAX_QUERY_CHARS} characters.`);
   if (wordsTruncated) notes.push(`Query truncated to ${MAX_QUERY_TERMS} terms.`);
 
@@ -215,6 +240,9 @@ export function formatDocumentationResults(
     if (record.frontmatter.figmaUrl) links.push(`[Figma](${record.frontmatter.figmaUrl})`);
 
     const linkLine = links.length > 0 ? `\n${links.join(' · ')}` : '';
-    return `${heading}\n\n${excerpt}${linkLine}`;
+    const sourceLine = record.frontmatter.sourcePackage && record.frontmatter.sourceVersion
+      ? `\nSource reference: ${record.frontmatter.sourcePackage}@${record.frontmatter.sourceVersion} (documentation source version; installed compatibility not checked).`
+      : '';
+    return `${heading}\n\n${excerpt}${linkLine}${sourceLine}`;
   }).join('\n\n---\n\n');
 }
