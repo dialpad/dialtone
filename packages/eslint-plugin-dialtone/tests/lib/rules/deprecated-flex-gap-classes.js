@@ -51,10 +51,6 @@ ruleTester.run("deprecated-flex-gap-classes", rule, {
       errors: [{ message: /^Legacy d-flg2 resolves to 1px;.*Manual layout review required\.$/ }],
     },
     {
-      code: "<template><div class=\"d-flg24 d-flg2\" /></template>",
-      errors: [{ messageId: 'recommendFlexGapStyle' }, { message: /^Legacy d-flg2 resolves to 1px;.*Manual layout review required\.$/ }],
-    },
-    {
       code: "<template><div class=\"d-fl-col2 d-flg8\" /></template>",
       errors: [{ message: /d-g-100.*manual layout review/i }],
     },

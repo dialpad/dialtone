@@ -1,7 +1,60 @@
-import guidance from '../migration-guidance.cjs';
-const {
-  SIZING_MAP, SPACING_MAP, NEGATIVE_SPACING_MAP, SPACING_LAYOUT_MAP, RADIUS_MAP, RADIUS_PAIR_PREFIX_MAP,
-} = guidance;
+// Migration: old pixel-based utility class names → new token-stop-based class names
+// e.g. d-h16 → d-h-25, d-p8 → d-p-100, d-m8 → d-m-100
+
+// Sizing: pixel value → layout token stop
+// MUST STAY IN SYNC with LAYOUT_STOPS in dialtone-css/postcss/constants.cjs
+// Off-scale pixel-indexed exceptions (1, 2, 8, 20, 24) map to the Npx stops
+// introduced in DLT-3330; scale-indexed values (16+) map to the 64px-base stops.
+const SIZING_MAP = {
+  // Off-scale pixel-indexed exceptions
+  1: '1px', 2: '2px', 8: '8px', 20: '20px', 24: '24px',
+  // Scale-indexed stops (64px base)
+  16: '25', 32: '50', 48: '75', 64: '100', 80: '125', 96: '150',
+  112: '175', 128: '200', 160: '250', 192: '300', 224: '350', 256: '400',
+  288: '450', 320: '500', 352: '550', 384: '600', 416: '650', 448: '700',
+  480: '750', 512: '800', 544: '850', 576: '900', 608: '950', 640: '1000',
+  672: '1050', 704: '1100', 736: '1150', 768: '1200', 800: '1250',
+  832: '1300', 864: '1350', 896: '1400', 928: '1450', 960: '1500',
+  992: '1550', 1024: '1600',
+};
+
+// Remaining off-scale sizing values without a layout-token equivalent (4, 6, 10, 12, 14)
+// are left on the Tier 1 calc-based legacy path and pass through unchanged.
+
+// Spacing: pixel value → spacing token stop
+// MUST STAY IN SYNC with GAP_SPACES_SPACING / MARGIN_SIZES_SPACING / PADDING_SIZES_SPACING in dialtone-css/postcss/constants.cjs
+const SPACING_MAP = {
+  0: '0', 1: '1', 2: '25', 4: '50', 6: '75', 8: '100',
+  10: '125', 12: '150', 14: '175', 16: '200', 20: '250', 24: '300',
+  32: '400', 48: '600', 64: '800',
+};
+
+// Negative spacing: old notation (n8) → new notation (n100)
+const NEGATIVE_SPACING_MAP = {
+  1: '1', 2: '25', 4: '50', 6: '75', 8: '100',
+  10: '125', 12: '150', 14: '175', 16: '200', 20: '250', 24: '300',
+  32: '400', 48: '600', 64: '800',
+};
+
+// Layout sizes for sizing (96px, 128px use layout tokens)
+const SPACING_LAYOUT_MAP = {
+  96: '150', 128: '200',
+};
+
+// Border-radius: legacy pixel value → new radius token stop
+// MUST STAY IN SYNC with RADIUS_STOPS in dialtone-css/postcss/constants.cjs.
+const RADIUS_MAP = {
+  0: '0', 1: '100', 2: '200', 4: '300', 6: '350',
+  8: '400', 12: '450', 16: '500', 24: '550', 32: '600',
+};
+
+// Border-radius: legacy physical-side prefix → new logical prefix.
+const RADIUS_PAIR_PREFIX_MAP = {
+  btr: 'bbsr', // top    → block-start pair
+  bbr: 'bber', // bottom → block-end pair
+  blr: 'bisr', // left   → inline-start pair
+  brr: 'bier', // right  → inline-end pair
+};
 
 // Class-name boundary: preceded by space, quote, or start; followed by space, quote, or end.
 const CLASS_BOUNDARY_LEFT = `((?:^|["'\\s]))`;

@@ -53,6 +53,11 @@ test('generated metadata carries safe legacy migrations and source token depreca
   assert.deepEqual(tokens['--dt-space-400-negative']?.metadata?.alternatives, ['--dt-spacing-100-negative']);
   assert.deepEqual(tokens['--dt-space-50-percent']?.metadata?.alternatives, []);
   assert.match(tokens['--dt-space-50-percent'].metadata.reason, /manual review/);
+  for (const [name, target] of [['--dt-size-825', '--dt-layout-250'], ['--dt-size-1115', '71.25rem']]) {
+    assert.equal(tokens[name].metadata.deprecated, true);
+    assert.deepEqual(tokens[name].metadata.alternatives, []);
+    assert.ok(tokens[name].metadata.reason.includes(target));
+  }
   assert.equal(tokens['--dt-color-foreground-success']?.metadata?.deprecated, true);
   assert.match(tokens['--dt-color-foreground-success'].metadata.reason, /positive/);
 });

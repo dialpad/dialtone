@@ -32,8 +32,9 @@ module.exports = {
       VAttribute(node) {
         if (node.key.name === 'class' && node.value && typeof node.value.value === 'string') {
           const classes = node.value.value;
-          for (const className of classes.match(/d-flg\d{1,2}/g) || []) {
-            const reason = UTILITY_REVIEW_REQUIRED[className];
+          const matches = classes.match(/d-flg\d{1,2}/g) || [];
+          if (matches.length > 0) {
+            const reason = matches.map(className => UTILITY_REVIEW_REQUIRED[className]).find(Boolean);
             context.report({
               node: node,
               messageId: reason ? 'reviewFlexGapStyle' : 'recommendFlexGapStyle',

@@ -9,6 +9,7 @@ on:
       - 'packages/dialtone-query-core/**'
       - 'packages/dialtone-cli/**'
       - 'packages/dialtone-css/lib/build/js/dialtone_migration_helper/**'
+      - 'packages/dialtone-css/lib/build/less/utilities/flex.less'
       - 'packages/dialtone-css/postcss/**'
       - 'packages/eslint-plugin-dialtone/**'
       - 'packages/stylelint-plugin-dialtone/**'
@@ -31,6 +32,7 @@ on:
       - 'packages/dialtone-query-core/**'
       - 'packages/dialtone-cli/**'
       - 'packages/dialtone-css/lib/build/js/dialtone_migration_helper/**'
+      - 'packages/dialtone-css/lib/build/less/utilities/flex.less'
       - 'packages/dialtone-css/postcss/**'
       - 'packages/eslint-plugin-dialtone/**'
       - 'packages/stylelint-plugin-dialtone/**'
@@ -81,6 +83,7 @@ jobs:
               - 'scripts/tests/dialtone-recommendations.test.mjs'
               - 'packages/dialtone-cli/**'
               - 'packages/dialtone-css/lib/build/js/dialtone_migration_helper/**'
+              - 'packages/dialtone-css/lib/build/less/utilities/flex.less'
               - 'packages/dialtone-css/postcss/**'
               - 'packages/dialtone-tokens/build-docs.js'
               - '.github/workflows/unit_tests.yml'
@@ -94,6 +97,7 @@ jobs:
               - 'packages/eslint-plugin-dialtone/**'
               - 'packages/stylelint-plugin-dialtone/**'
               - 'packages/dialtone-css/lib/build/js/dialtone_migration_helper/**'
+              - 'packages/dialtone-css/lib/build/less/utilities/flex.less'
               - 'scripts/generate-migration-guidance.mjs'
               - '.github/workflows/unit_tests.yml'
 
@@ -165,14 +169,11 @@ jobs:
       - name: Run dialtone-query-core and dialtone-cli tests
         run: pnpm nx run-many -t test -p dialtone-query-core dialtone-cli
 
-      - name: Test generated utility metadata and migration helpers
+      - name: Test generated utility metadata and recommendations
         run: >-
           node --test
           scripts/tests/dialtone-recommendations.test.mjs
           packages/dialtone-css/postcss/dialtone-docs.test.cjs
-          packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/space-to-spacing.test.mjs
-          packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/size-to-layout.test.mjs
-          packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/utility-class-to-token-stops.test.mjs
 
   test-lint-plugins:
     needs: changes

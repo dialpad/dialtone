@@ -149,7 +149,7 @@ npx dialtone-migrate-typography --cwd ./src
 npx eslint --fix "src/**/*.vue"
 ```
 
-After running all tools, review the diff and handle manual cases. The size-to-layout migration leaves unsupported, approximate, subpixel, and unknown-context mappings unchanged; it does not add inline TODO comments for them.
+After running all tools, review terminal output for warnings about skipped cases that need manual attention. The size-to-layout migration also leaves inline `/* TODO: no --dt-layout-* … */` comments for tokens that exceed the layout scale.
 
 ## Need Help?
 

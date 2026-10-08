@@ -51,11 +51,34 @@ Use layout tokens for `width`, `height`, `min-width`, `max-width`, `min-height`,
 | `--dt-size-1050` | 768px | `--dt-layout-1200` | 768px |
 | `--dt-size-1100` | 1024px | `--dt-layout-1600` | 1024px |
 
-### Mappings requiring manual review
+### Nearest-neighbor mappings
 
-For layout properties, `size-to-layout` leaves approximate, unsupported, subpixel, out-of-scale, and negative mappings unchanged. Numeric size tokens in unknown property contexts also remain unchanged. Review these cases manually; the helper does not emit raw fallback values or inline TODO comments.
+These old tokens have no exact equivalent in the new scale. The migration tool maps them to the closest available stop.
 
-For example, `width: var(--dt-size-825)` and `width: var(--dt-size-1115)` remain unchanged. Choose a replacement after reviewing the resolved value and layout.
+| Old Token | Old Value | New Token | New Value | Δ |
+| --- | --- | --- | --- | --- |
+| `--dt-size-825` | 164px | `--dt-layout-250` | 160px | 4px |
+| `--dt-size-875` | 216px | `--dt-layout-350` | 224px | 8px |
+| `--dt-size-905` | 264px | `--dt-layout-400` | 256px | 8px |
+| `--dt-size-925` | 332px | `--dt-layout-500` | 320px | 12px |
+| `--dt-size-975` | 464px | `--dt-layout-700` | 448px | 16px |
+| `--dt-size-1020` | 628px | `--dt-layout-1000` | 640px | 12px |
+| `--dt-size-1040` | 764px | `--dt-layout-1200` | 768px | 4px |
+| `--dt-size-1060` | 828px | `--dt-layout-1300` | 832px | 4px |
+| `--dt-size-1080` | 912px | `--dt-layout-1400` | 896px | 16px |
+
+### Tokens converted to raw values
+
+The following tokens exceed the layout scale (max `--dt-layout-1600` = 1024px) and have no token equivalent. The migration tool converts them to raw `rem` values and adds a `TODO` comment so they can be updated when a token is added.
+
+| Old Token | Old Value | Migration output |
+| --- | --- | --- |
+| `--dt-size-1115` | 1140px | `71.25rem` |
+| `--dt-size-1120` | 1268px | `79.25rem` |
+| `--dt-size-1125` | 1280px | `80rem` |
+| `--dt-size-1130` | 1340px | `83.75rem` |
+| `--dt-size-1150` | 1536px | `96rem` |
+| `--dt-size-1200` | 2048px | `128rem` |
 
 If you need a token at one of these sizes, [open a request](https://github.com/dialpad/dialtone/issues).
 

@@ -1,5 +1,5 @@
 // Consume the preferred migration-helper authority; do not maintain a second stop map.
-const { SIZING_MAP, SPACING_MAP, NEGATIVE_SPACING_MAP, RADIUS_MAP, RADIUS_PAIR_PREFIX_MAP, SPACE_TOKEN_MAP, UTILITY_REVIEW_REQUIRED } = require('../lib/build/js/dialtone_migration_helper/migration-guidance.cjs');
+const { SIZING_MAP, SPACING_MAP, NEGATIVE_SPACING_MAP, RADIUS_MAP, RADIUS_PAIR_PREFIX_MAP, SPACE_TOKEN_MAP, SIZE_LAYOUT_MAP, RAW_FALLBACK, UTILITY_REVIEW_REQUIRED } = require('./migration-guidance.json');
 const scope = 'Legacy Dialtone 9 naming. For Dialtone 10, verify the installed target supports the replacement.';
 
 function utilityMetadata (name) {
@@ -47,9 +47,12 @@ function tokenMetadata (name, deprecated) {
     };
   }
   if (/^--dt-size-\d/.test(name)) {
+    const stop = /^--dt-size-(\d+)$/.exec(name)?.[1];
+    const route = SIZE_LAYOUT_MAP[stop] ? ` Layout routing maps this stop to --dt-layout-${SIZE_LAYOUT_MAP[stop]}.`
+      : RAW_FALLBACK[stop] ? ` Layout routing emits ${RAW_FALLBACK[stop]} with a TODO comment for this stop.` : '';
     return {
       deprecated: true, category: 'migration',
-      reason: `${scope} Generic size tokens require CSS property context. Select size-to-layout in the migration helper; unsupported or approximate mappings require manual review.`,
+      reason: `${scope} Select size-to-layout in the migration helper for CSS property routing and the default layout fallback.${route} Approved nearest-stop mappings intentionally change values; mapped out-of-scale tokens become raw rem with TODO comments. Unmapped tokens remain unchanged.`,
       alternatives: [],
     };
   }

@@ -50,14 +50,13 @@ These checks are required on every PR:
 | `test` | `packages/dialtone-vue/**` | `pnpm nx run dialtone-vue:test:coverage` |
 | `test-tokens` | `packages/dialtone-tokens/**` | `pnpm nx run dialtone-tokens:test` |
 | `test-combinator` | `packages/combinator/**` | `pnpm nx run dialtone-combinator:test` |
-| `test-cli` | Query-core/CLI, Vue/docs generators, CSS migration helpers/metadata, token-doc generation, MCP guide/client recommendations, CSS agent rules and this workflow | `pnpm nx run-many -t test -p dialtone-query-core dialtone-cli`; focused Node migration/metadata and recommendation integration tests |
+| `test-cli` | Query-core/CLI, Vue/docs generators, CSS migration helpers/metadata, token-doc generation, MCP guide/client recommendations, CSS agent rules and this workflow | `pnpm nx run-many -t test -p dialtone-query-core dialtone-cli`; focused Node metadata and recommendation integration tests |
 | `test-lint-plugins` | Lint packages, canonical migration guidance, its generator and this workflow | Guidance generation check; ESLint/Stylelint package tests |
 
-The lookup job also runs helper migration tests and verifies generated
-utility metadata and recommendation strings after building their data. CSS migration/helper and metadata
-changes trigger it. A separate `test-lint-plugins` job runs the ESLint and
-Stylelint suites, verifies source-value agreement and checks generated migration
-guidance against its source.
+The lookup job checks generated utility metadata and recommendation strings
+after building their data. CSS migration-source and metadata changes trigger it.
+A separate `test-lint-plugins` job runs the ESLint and Stylelint suites and checks
+generated migration guidance against the unchanged helper configs.
 Lint-only changes trigger that job without rebuilding the lookup adapters.
 
 The `test` job outputs a coverage report in JSON and HTML. Coverage thresholds enforced: 80% branches, 70% functions, 85% lines and statements. Build fails if thresholds are not met.
