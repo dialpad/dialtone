@@ -28,10 +28,6 @@ import {
 } from './gradientHeroColors.js';
 
 const props = defineProps({
-  animated: {
-    type: Boolean,
-    default: true,
-  },
   flipX: {
     type: Boolean,
     default: false,
@@ -74,7 +70,6 @@ const dotColorLoop = createDotColorLoop({
 const prefersReducedMotion = () => Boolean(reducedMotionQuery?.matches);
 const prefersFinePointer = () => Boolean(finePointerQuery?.matches);
 const currentSpeed = () => (
-  !props.animated ||
   prefersReducedMotion() ||
   !isVisible ||
   isTouchActive ||
@@ -187,7 +182,7 @@ const attachObservers = (surface) => {
   }
 };
 
-watch([isHalftonePaused, () => props.animated], syncMotionState);
+watch(isHalftonePaused, syncMotionState);
 
 const initRenderer = () => {
   const host = shaderHostEl.value;
