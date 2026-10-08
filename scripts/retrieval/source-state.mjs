@@ -1,9 +1,7 @@
 import { execFileSync } from 'node:child_process';
-import { createHash } from 'node:crypto';
 import { lstatSync, readFileSync, readlinkSync } from 'node:fs';
 import { join } from 'node:path';
-
-const hash = (bytes) => createHash('sha256').update(bytes).digest('hex');
+import { sha256 as hash } from './fixtures.mjs';
 
 export function fingerprintSourceState(root) {
   const sourceDiffSha256 = hash(

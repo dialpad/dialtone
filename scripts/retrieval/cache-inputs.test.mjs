@@ -136,6 +136,10 @@ test('core and adapters hash the generated data they consume through dependency 
     'packages/dialtone-vue/dist/component-documentation.json',
     'packages/dialtone-docs/dist/public-docs.json',
   ];
+  const coreOutputs = [
+    'packages/dialtone-query-core/build/tools/components.js',
+    'packages/dialtone-query-core/build/types.d.ts',
+  ];
   for (const name of [
     'dialtone-query-core',
     'dialtone-cli',
@@ -146,19 +150,6 @@ test('core and adapters hash the generated data they consume through dependency 
       .map((input) => input.dependentTasksOutputFiles);
     assert.deepEqual(covered(consumed, outputs), consumed, name);
     if (name !== 'dialtone-query-core')
-      assert.deepEqual(
-        covered(
-          [
-            'packages/dialtone-query-core/build/tools/components.js',
-            'packages/dialtone-query-core/build/types.d.ts',
-          ],
-          outputs,
-        ),
-        [
-            'packages/dialtone-query-core/build/tools/components.js',
-            'packages/dialtone-query-core/build/types.d.ts',
-          ],
-        name,
-      );
+      assert.deepEqual(covered(coreOutputs, outputs), coreOutputs, name);
   }
 });

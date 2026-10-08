@@ -17,10 +17,8 @@ const primitives = {
       `exceeds ${value} bytes`,
     ),
 };
-const isPrimitive = (check) => Object.hasOwn(primitives, check?.kind);
-
 function assertPrimitive(actual, check) {
-  if (!isPrimitive(check))
+  if (!Object.hasOwn(primitives, check?.kind))
     throw new Error(`Unknown primitive assertion kind: ${check.kind}`);
   primitives[check.kind](actual, check.value);
 }
