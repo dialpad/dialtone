@@ -70,3 +70,5 @@ export type { BundledProvenance, DomainStamp, MatchState, Continuation, Retrieva
 export { getComponentDocumentation } from "./component-documentation.js";
 export type { ComponentDocCatalog, ComponentDocPage } from "./component-documentation.js";
 export { getDocumentationDetail } from './tools/docs.js';
+
+export { projectDiscoveryValues, getValueDetail } from './value-retrieval.js';

@@ -18,6 +18,8 @@ import {
   searchIcons,
   searchDocumentation,
   getComponentDetail,
+  getValueDetail,
+  projectDiscoveryValues,
   getComponentDocumentation,
   getDocumentationDetail,
   COMPONENT_SECTIONS,
@@ -40,14 +42,14 @@ const specs = {
     defaultLimit: 15,
     max: 50,
     description:
-      'Discover CSS utility classes by CSS property or value, with bounded records and continuation.',
+      'Discover CSS utility classes with property previews/counts. For complete atomic properties, use projection properties with an exact returned class name as query.',
   },
   search_tokens: {
     domain: 'tokens',
     defaultLimit: 15,
     max: 50,
     description:
-      'Discover design tokens by semantic name, category or value, with bounded records and continuation.',
+      'Discover design tokens with named theme previews/counts. For complete atomic theme values, use projection themes with an exact returned token name as query.',
   },
   search_components: {
     domain: 'components',
@@ -180,6 +182,18 @@ export function queryToolDefinitions() {
             default: spec.defaultLimit,
           },
           offset: offsetSchema,
+          ...(name === 'search_tokens' || name === 'search_utility_classes'
+            ? {
+                projection: {
+                  type: 'string',
+                  enum: [
+                    'summary',
+                    name === 'search_tokens' ? 'themes' : 'properties',
+                  ],
+                  default: 'summary',
+                },
+              }
+            : {}),
         },
         required: ['query'],
         additionalProperties: false,
@@ -359,9 +373,54 @@ export function executeQueryTool(name: string, input: unknown) {
         query,
         limit: z.number().int().min(1).max(spec.max).default(spec.defaultLimit),
         offset,
+        ...(name === 'search_tokens'
+          ? { projection: z.enum(['summary', 'themes']).default('summary') }
+          : name === 'search_utility_classes'
+            ? {
+                projection: z
+                  .enum(['summary', 'properties'])
+                  .default('summary'),
+              }
+            : {}),
       })
       .strict()
       .parse(input ?? {});
+    if (args.projection && args.projection !== 'summary') {
+      const selected =
+        name === 'search_tokens'
+          ? getValueDetail(args.query, 'tokens', tokens)
+          : getValueDetail(args.query, 'utilityClasses', utilityClasses);
+      return reply(
+        createRetrievalEnvelope(
+          {
+            tool: name,
+            args,
+            mode: 'detail',
+            domain: spec.domain,
+            match: selected.match,
+            items: selected.items,
+            detail: { projection: args.projection, subject: selected.subject },
+            notes: selected.subject
+              ? []
+              : [
+                  'No exact source name matched. Use summary discovery and select a returned name.',
+                ],
+            continuation: selected.subject
+              ? null
+              : {
+                  tool: name,
+                  arguments: {
+                    query: args.query,
+                    projection: 'summary',
+                    limit: spec.defaultLimit,
+                    offset: 0,
+                  },
+                },
+          },
+          bundledProvenance,
+        ),
+      );
+    }
     const found =
       name === 'search_utility_classes'
         ? searchUtilityClasses(args.query, utilityClasses)
@@ -418,7 +477,21 @@ export function executeQueryTool(name: string, input: unknown) {
                 },
               },
             }))
-          : found.results;
+          : name === 'search_tokens' || name === 'search_utility_classes'
+            ? found.results.map((result) => ({
+                ...projectDiscoveryValues(result),
+                detail: {
+                  tool: name,
+                  arguments: {
+                    query: result.name,
+                    projection:
+                      name === 'search_tokens' ? 'themes' : 'properties',
+                    limit: spec.defaultLimit,
+                    offset: 0,
+                  },
+                },
+              }))
+            : found.results;
     const exact = 'exactMatch' in found && found.exactMatch === true;
     return reply(
       createRetrievalEnvelope(
@@ -441,7 +514,14 @@ export function executeQueryTool(name: string, input: unknown) {
                     'prose_after_500_characters_if_present',
                     'other_sections_in_matching_pages',
                   ]
-                : [],
+                : name === 'search_tokens' || name === 'search_utility_classes'
+                  ? items.some(
+                      (item) =>
+                        'valueCounts' in item && item.valueCounts.omitted > 0,
+                    )
+                    ? ['values_not_previewed']
+                    : []
+                  : [],
           continuation:
             name === 'search_components' && exact
               ? {

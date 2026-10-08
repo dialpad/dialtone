@@ -230,3 +230,94 @@ test('discovery counts retain documented methods/exposed members and unknown sec
       );
     }
   }));
+for (const [tool, query, projection, domain] of [
+  ['search_tokens', '--dt-color-foreground-primary', 'themes', 'tokens'],
+  ['search_utility_classes', 'd-chip__close', 'properties', 'utilityClasses'],
+]) {
+  test(`${tool} keeps large subjects discoverable and complete values retrievable`, async () =>
+    fixture(async (client) => {
+      const core = await import('@dialpad/dialtone-query-core');
+      const raw = core[domain][query];
+      const expected =
+        projection === 'themes'
+          ? Object.entries(raw)
+              .filter(([name]) => name !== 'metadata')
+              .map(([theme, contract]) => ({ theme, contract }))
+          : raw.values;
+      assert.ok(expected.length > 50);
+      const discovery = structured(
+        await client.callTool({ name: tool, arguments: { query } }),
+      );
+      assert.ok(
+        discovery.counts.returned > 0,
+        'ordinary source subject must remain accessible',
+      );
+      const subject = discovery.items.find((item) => item.name === query);
+      assert.ok(subject, 'search subject must fit as a compact candidate');
+      assert.deepEqual(subject.metadata, raw.metadata ?? null);
+      assert.equal(subject.valueCounts.total, expected.length);
+      assert.equal(
+        subject.valueCounts.omitted,
+        expected.length - subject.previewValues.length,
+      );
+      assert.deepEqual(
+        subject.previewValues,
+        expected.slice(0, subject.previewValues.length),
+      );
+      assert.ok(subject.valueCounts.omitted > 0);
+      assert.ok(
+        discovery.truncation.omissions.includes('values_not_previewed'),
+      );
+      assert.equal(subject.detail.arguments.projection, projection);
+      let args = { ...subject.detail.arguments, limit: 17 };
+      const values = [];
+      for (let page = 0; page < 20; page++) {
+        const result = structured(
+          await client.callTool({ name: tool, arguments: args }),
+        );
+        assert.equal(result.mode, 'detail');
+        assert.equal(result.match, 'exact');
+        assert.equal(result.detail.subject.name, query);
+        assert.deepEqual(result.detail.subject.metadata, raw.metadata ?? null);
+        assert.equal(result.counts.total, expected.length);
+        assert.ok(result.items.length > 0);
+        values.push(...result.items);
+        assert.equal(
+          result.source.domains[domain].hash,
+          core.bundledProvenance.domains[domain].hash,
+        );
+        assert.ok(
+          result.budget.estimatedTokens <= result.budget.maximumEstimatedTokens,
+        );
+        if (!result.continuation) break;
+        assert.ok(result.continuation.arguments.offset > args.offset);
+        args = result.continuation.arguments;
+      }
+      assert.deepEqual(values, expected);
+    }));
+}
+test('value projections require exact subjects and reject unsupported selectors', async () =>
+  fixture(async (client) => {
+    for (const [name, projection, broad] of [
+      ['search_tokens', 'themes', 'color foreground primary'],
+      ['search_utility_classes', 'properties', 'padding'],
+    ]) {
+      for (const query of [broad, 'definitely-missing']) {
+        const result = structured(
+          await client.callTool({ name, arguments: { query, projection } }),
+        );
+        assert.equal(result.match, 'no-match');
+        assert.equal(result.counts.returned, 0);
+        assert.equal(result.continuation.arguments.projection, 'summary');
+      }
+      assert.equal(
+        (
+          await client.callTool({
+            name,
+            arguments: { query: broad, projection: 'everything' },
+          })
+        ).isError,
+        true,
+      );
+    }
+  }));

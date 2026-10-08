@@ -121,8 +121,12 @@ Find CSS utility classes to style HTML elements. Use when your query mentions CS
 
 **Parameters:**
 
-- `query` (required): CSS property and/or value
-- `limit` (optional): Maximum results (1-50, default 15)
+- `query` (required): CSS property and/or value; an exact returned class name for property detail
+- `projection` (optional): `summary` (default) or `properties`
+- `limit` (optional): Maximum class summaries or detail property records (1-50, default 15)
+- `offset` (optional): Record offset (default 0)
+
+Summary items include source name/type, migration metadata, up to two property previews, total/previewed/omitted counts, and an exact detail call. Follow `projection: "properties"` continuations for complete available property records.
 
 ### Design Tokens
 
@@ -141,8 +145,12 @@ Find design tokens (CSS variables) from Dialtone's design system. Use when your 
 
 **Parameters:**
 
-- `query` (required): Token category, name, or value
-- `limit` (optional): Maximum results (1-50, default 15)
+- `query` (required): Token category, name, or value; an exact returned token name for theme detail
+- `projection` (optional): `summary` (default) or `themes`
+- `limit` (optional): Maximum token summaries or detail theme records (1-50, default 15)
+- `offset` (optional): Record offset (default 0)
+
+Summary items include source name/type, migration metadata, up to two named theme previews, total/previewed/omitted counts, and an exact detail call. Follow `projection: "themes"` continuations for complete available theme records. Previewed values do not identify your active installed theme.
 
 ### Components
 
