@@ -93,13 +93,9 @@ Disabled controls let the background show through on both versions. The pair bel
   alt="Enabled and disabled buttons and inputs over a gradient backdrop"
 />
 
-### A few fixed sizes move by 4–16px
+### Some fixed sizes require manual review
 
-Nine legacy size tokens have no exact match in the new layout scale, so **when a surface is migrated** its fixed dimensions shift to the nearest stop: sidebars, panels, and modals move by 4–16px (old size in gray, new in purple, to scale below). These small moves are sanctioned; see the [full table](/guides/migration/layout-and-spacing-tokens/) for every mapping. Un-migrated code keeps rendering the old sizes (the deprecated tokens still resolve for now), so this shift marks *migrated* surfaces, not broken ones.
-
-<dt-box surface="secondary" border-width="100" border-color="subtle" border-radius="400" padding="300">
-  <img :src="$withBase('/assets/images/migration-visual/token-size-shifts-after-light.png')" alt="To-scale bars comparing each legacy size token to its nearest layout token, with the pixel delta" class="d-d-block d-w100p">
-</dt-box>
+When `size-to-layout` runs, legacy size tokens without an exact layout equivalent remain unchanged. Review these fixed dimensions manually and choose a replacement after checking the resolved value and layout. See the [manual-review guidance](/guides/migration/layout-and-spacing-tokens/#mappings-requiring-manual-review).
 
 ## Redesigned components
 
