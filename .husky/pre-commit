@@ -27,8 +27,8 @@ THUMB_INPUTS=(
   ':(exclude)*package.json'
   ':(exclude)*.md'
   ':(exclude)*.mdx'
-  ':(exclude)*.test.js'
-  ':(exclude)*.stories.js'
+  ':(exclude)*.test.*'
+  ':(exclude)*.stories.*'
 )
 if ! git diff --staged --quiet -- "${THUMB_INPUTS[@]}"; then
   echo "Detected changes to thumb inputs, regenerating component thumbnails..."
