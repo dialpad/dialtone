@@ -40,6 +40,9 @@ All search functions return `{ results: SearchResult[]; notes: string[] }`. `sea
 | `searchTokens(query, tokens, options?)` | `TokensData` | Token search with optional `{ includeHsl: boolean }` |
 | `searchUtilityClasses(query, utilityClasses)` | `UtilityClassesData` | CSS class search with automatic px/rem conversion |
 | `searchIcons(query, icons)` | `IconsData` | Icon search by name, category, and keywords |
+| `searchDocumentation(query, documentation)` | `DocumentationRecord[]` | Search reference sections; explicit directive identifiers scope results to named directives and component comparisons |
+
+Directive identifiers such as `v-dt-tooltip` or `DtTooltipDirective` return no component results, with a note directing callers to documentation search. Use `searchDocumentation` for their contracts.
 
 ### Format Functions
 
@@ -49,6 +52,7 @@ All search functions return `{ results: SearchResult[]; notes: string[] }`. `sea
 | `formatTokenResults(results, query)` | Format token results as markdown |
 | `formatComponentResults(results, query)` | Format component results as markdown |
 | `formatIconResults(results, query)` | Format icon results as markdown |
+| `formatDocumentationResults(results, query)` | Format reference excerpts and links as markdown; directive records include source package/version and an installed-compatibility qualifier |
 
 ### Data Exports
 
@@ -60,6 +64,7 @@ Pre-loaded design system data, bundled at build time:
 | `tokens` | `TokensData` | `@dialpad/dialtone-css` |
 | `components` | `Component[]` | `@dialpad/dialtone-vue` |
 | `icons` | `IconsData` | `@dialpad/dialtone-icons` |
+| `documentation` | `DocumentationRecord[]` | `@dialpad/dialtone-docs` |
 
 ### Utilities
 

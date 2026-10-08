@@ -107,7 +107,9 @@ dialtone search "calendar" --format json
 
 ### Inspect a component
 
-Use `component` to inspect a component's public API. The name must match exactly, ignoring case, separators, and the `Dt` prefix, so `button`, `dt-button`, and `DtButton` all work. For any other name, the CLI lists close matches on stderr and exits with an error. A deprecated component still works by its full name, with a note naming its replacement.
+Use `component` to inspect a component's public API. The name must match exactly, ignoring case, separators, and the `Dt` prefix, so `button`, `dt-button`, and `DtButton` all work. Other names exit with an error, listing close matches when available. A deprecated component still works by its full name, with a note naming its replacement.
+
+Directive identifiers such as `v-dt-tooltip` or `DtTooltipDirective` are not component names and return no component match. Use `docs` for their imports, registration and behavior.
 
 ```bash
 dialtone component button
@@ -168,6 +170,7 @@ Use `docs` for questions about how or why to use Dialtone. It searches public gu
 dialtone docs "how to choose button importance"
 dialtone docs "accessible tooltip labels"
 dialtone docs "migrate physical properties to logical properties"
+dialtone docs "v-dt-tooltip"
 ```
 
 Documentation is bundled with the CLI rather than resolved from your project's installed Dialtone packages. Update the CLI to refresh this content.
