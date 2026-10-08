@@ -14,30 +14,30 @@
       <circle
         class="d-loader__dot d-loader__dot--1"
         data-qa="dt-loader-dot"
-        cx="14.805"
-        cy="9.510"
-        r="2.496"
+        cx="14.843"
+        cy="9.471"
+        r="2.410"
       />
       <circle
         class="d-loader__dot d-loader__dot--2"
         data-qa="dt-loader-dot"
-        cx="9.195"
-        cy="15.160"
-        r="2.496"
+        cx="9.156"
+        cy="15.199"
+        r="2.410"
       />
       <circle
         class="d-loader__dot d-loader__dot--3"
         data-qa="dt-loader-dot"
-        cx="15.421"
-        cy="15.697"
-        r="3.777"
+        cx="15.469"
+        cy="15.743"
+        r="3.647"
       />
       <circle
         class="d-loader__dot d-loader__dot--4"
         data-qa="dt-loader-dot"
-        cx="8.587"
-        cy="8.962"
-        r="3.777"
+        cx="8.539"
+        cy="8.915"
+        r="3.647"
       />
     </svg>
   </div>
