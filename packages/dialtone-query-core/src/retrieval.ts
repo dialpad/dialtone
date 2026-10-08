@@ -1,11 +1,13 @@
 import type { ComponentIdentity } from './types.js';
 
-export type MatchState =
-  | 'exact'
-  | 'candidate'
-  | 'no-match'
-  | 'unavailable'
-  | 'unverified';
+export const MATCH_STATES = [
+  'exact',
+  'candidate',
+  'no-match',
+  'unavailable',
+  'unverified',
+] as const;
+export type MatchState = (typeof MATCH_STATES)[number];
 export interface DomainStamp {
   package: string;
   version: string;
@@ -98,6 +100,16 @@ export function createRetrievalEnvelope(
     notes: options.notes ?? [],
     ...(options.detail ? { detail: options.detail } : {}),
   };
+  // Settle the small self-counting field to include its own decimal digits.
+  function measure() {
+    for (let i = 0; i < 3; i++) {
+      const estimate = Math.ceil(
+        Buffer.byteLength(JSON.stringify(envelope), 'utf8') / 4,
+      );
+      if (estimate === envelope.budget.estimatedTokens) break;
+      envelope.budget.estimatedTokens = estimate;
+    }
+  }
   function update() {
     envelope.counts.returned = envelope.items.length;
     const hasMore = offset + envelope.items.length < total;
@@ -114,11 +126,7 @@ export function createRetrievalEnvelope(
       : options.continuation ?? null;
     if (hasMore && !envelope.truncation.omissions.includes('remaining_records'))
       envelope.truncation.omissions.push('remaining_records');
-    // Settle the small self-counting field to include its own decimal digits.
-    for (let i = 0; i < 3; i++)
-      envelope.budget.estimatedTokens = Math.ceil(
-        Buffer.byteLength(JSON.stringify(envelope), 'utf8') / 4,
-      );
+    measure();
   }
   update();
   while (
@@ -149,10 +157,7 @@ export function createRetrievalEnvelope(
     update();
     envelope.continuation = null;
   }
-  for (let i = 0; i < 3; i++)
-    envelope.budget.estimatedTokens = Math.ceil(
-      Buffer.byteLength(JSON.stringify(envelope), 'utf8') / 4,
-    );
+  measure();
   return envelope;
 }
 

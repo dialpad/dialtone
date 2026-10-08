@@ -26,12 +26,12 @@ it('retrieves prose beyond discovery excerpts with a precise Unicode continuatio
     returned: 500,
     offset: 0,
   });
-  expect(first.continuation.arguments).toEqual({
+  expect(first.next).toEqual({
     id: records[0].id,
     textOffset: 500,
     textLimit: 500,
   });
-  const second = lookup(first.continuation.arguments, records);
+  const second = lookup(first.next!, records);
   expect(first.record.content + second.record.content).toBe(content);
   expect(second.record.content).toContain('aria-describedby');
   expect(lookup({ id: 'missing' }, records).match).toBe('no-match');

@@ -37,6 +37,7 @@ export function stampDatasets(inputs, { sourceRoot = root } = {}) {
           version: input.version,
           schemaVersion: input.schemaVersion,
           hash: createHash('sha256').update(input.bytes).digest('hex'),
+          // Parsing fails closed instead of stamping malformed artifacts.
           contentHash: createHash('sha256')
             .update(
               JSON.stringify(
@@ -86,7 +87,6 @@ export function buildBundledProvenance() {
         readFileSync(resolve(root, 'packages', folder, 'package.json'), 'utf8'),
       );
       const bytes = readFileSync(resolve(root, 'packages', folder, artifact));
-      JSON.parse(bytes); // Fail closed instead of stamping malformed artifacts.
       return {
         domain,
         package: manifest.name,

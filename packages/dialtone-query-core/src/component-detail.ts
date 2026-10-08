@@ -4,6 +4,7 @@ import {
   componentNames,
 } from './component-identity.js';
 import type { Component, ComponentMember } from './types.js';
+import type { MatchState } from './retrieval.js';
 
 export const COMPONENT_SECTIONS = [
   'props',
@@ -13,6 +14,14 @@ export const COMPONENT_SECTIONS = [
   'expose',
 ] as const;
 export type ComponentSection = (typeof COMPONENT_SECTIONS)[number];
+/** Contract fields that generated metadata can document for each section. */
+const CONTRACT_FIELDS: Record<ComponentSection, readonly string[]> = {
+  props: ['type', 'values', 'defaultValue', 'required', 'description', 'tags'],
+  events: ['type', 'properties', 'description', 'tags'],
+  slots: ['bindings', 'description', 'tags'],
+  methods: ['params', 'returns', 'description'],
+  expose: ['type', 'description'],
+};
 export interface ComponentDetailArgs {
   component: string;
   projection?: 'all' | ComponentSection;
@@ -52,6 +61,7 @@ export function getComponentDetail(
       items: [],
       available: candidates.map((record) => record.displayName),
       unknown: [],
+      unknownContractFields: [],
     };
   }
   const unknown = sections.filter(
@@ -69,11 +79,27 @@ export function getComponentDetail(
       )
       .map((contract) => ({ section, contract: contract as ComponentMember })),
   );
-  const match =
+  const unknownContractFields = items
+    .map(({ section, contract }) => ({
+      section,
+      name: contract.name,
+      fields: CONTRACT_FIELDS[section].filter(
+        (field) => !Object.hasOwn(contract, field),
+      ),
+    }))
+    .filter((record) => record.fields.length);
+  const match: MatchState =
     args.field && items.length === 0
       ? 'no-match'
       : component.identity?.kind === 'unknown'
         ? 'unverified'
         : 'exact';
-  return { match, component, items, available, unknown };
+  return {
+    match,
+    component,
+    items,
+    available,
+    unknown,
+    unknownContractFields,
+  };
 }
