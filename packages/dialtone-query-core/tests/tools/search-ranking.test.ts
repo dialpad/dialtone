@@ -31,8 +31,12 @@ describe('exact names and bounded utility intent', () => {
   test('ranks an exact class before incidental matches', () => {
     expect(searchUtilityClasses('d-p-100', utilities).results[0].name).toBe('d-p-100');
   });
-  test('logical padding query recovers physical top in the default writing mode', () => {
-    expect(searchUtilityClasses('padding top 8px', utilities).results.map(r => r.name)).toContain('d-pbs-100');
+  test('physical padding queries recover logical matches with a writing-mode warning', () => {
+    for (const query of ['padding top 8px', 'padding-top 8px', 'padding/top 8px']) {
+      const { results, notes } = searchUtilityClasses(query, utilities);
+      expect(results.map(r => r.name)).toContain('d-pbs-100');
+      expect(notes.some(note => note.includes('horizontal-tb'))).toBe(true);
+    }
   });
   test('returns no utilities for an empty query', () => {
     expect(searchUtilityClasses('', utilities).results).toEqual([]);

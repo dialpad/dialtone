@@ -195,7 +195,7 @@ export function searchUtilityClasses(query: string, data: UtilityClassesData): {
   const { results: filtered, notes } = applySmartFilterKeepingExact(results, data, exactName);
   // Names that contain every query word rank ahead of property/value-only matches.
   sortExactFirst(filtered, exactName, name => regexArray.every(regex => regex.test(name)) ? 0 : 1);
-  if (/\b(padding|margin|inset)\s+(top|bottom|left|right|block|inline)\b/i.test(query)) {
+  if (/\b(padding|margin|inset)\s+(top|bottom|left|right|block|inline)\b/i.test(normalized)) {
     notes.push('Physical/logical direction matches assume horizontal-tb and left-to-right writing; verify the writing mode.');
   }
 
