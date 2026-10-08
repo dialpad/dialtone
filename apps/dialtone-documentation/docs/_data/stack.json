@@ -21,6 +21,11 @@
       "description": "Styles stack group with row-reverse direction."
     },
     {
+      "class": "d-stack--wrap",
+      "applies": ".d-stack",
+      "description": "Allows stack items to wrap onto additional lines."
+    },
+    {
       "class": "d-stack--align-normal",
       "applies": ".d-stack",
       "description": "Aligns stack items with browser default behavior along the cross-axis (default)."

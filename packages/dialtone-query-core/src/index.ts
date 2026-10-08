@@ -14,6 +14,8 @@ export type {
   ComponentProp,
   ComponentEvent,
   ComponentSlot,
+  ComponentImport,
+  ComponentIdentity,
   Component,
   Icon,
   IconsData,
@@ -21,6 +23,9 @@ export type {
   DocumentationRecord,
   SearchResult
 } from './types.js';
+
+export { normalizeComponents, normalizeComponentName, componentNames, componentImportStatement, componentImportNote } from './component-identity.js';
+export type { InstalledComponentExports } from './component-identity.js';
 
 // Data
 export { utilityClasses, tokens, components, icons, documentation } from './data.js';

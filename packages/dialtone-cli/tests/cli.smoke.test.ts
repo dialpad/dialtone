@@ -32,15 +32,16 @@ function write(path: string, content: unknown) {
 
 // A temp app that doesn't declare @dialpad/dialtone, with only @dialpad/dialtone-vue installed,
 // the way pnpm installs it: the package lives under node_modules/.pnpm and is symlinked into place.
-function appWithDialtoneVue(): string {
+function appWithDialtoneVue(verifiedEntry = true): string {
   const root = mkdtempSync(join(tmpdir(), 'dialtone-cli-smoke-'));
   onTestFinished(() => rmSync(root, { recursive: true, force: true }));
   mkdirSync(join(root, '.git')); // so a package.json above tmpdir can't declare Dialtone for it
   write(join(root, 'package.json'), { name: 'fixture-app' });
   const vue = join(root, 'node_modules/.pnpm/@dialpad+dialtone-vue@4.0.2/node_modules/@dialpad/dialtone-vue');
   // Like the real package: the data file sits in dist/, reached through the exports map.
-  write(join(vue, 'package.json'), { name: '@dialpad/dialtone-vue', version: '4.0.2', exports: { './component-documentation.json': './dist/component-documentation.json' } });
+  write(join(vue, 'package.json'), { name: '@dialpad/dialtone-vue', version: '4.0.2', exports: { '.': { import: './dist/dialtone-vue.js' }, './component-documentation.json': './dist/component-documentation.json' } });
   write(join(vue, 'dist/component-documentation.json'), [{ displayName: 'DtButton' }]);
+  if (verifiedEntry) writeFileSync(join(vue, 'dist/dialtone-vue.js'), "import button from './button.js'; export { button as DtButton };");
   mkdirSync(join(root, 'node_modules/@dialpad'));
   symlinkSync(vue, join(root, 'node_modules/@dialpad/dialtone-vue'), 'dir');
   return root;
@@ -63,16 +64,24 @@ describe('dialtone CLI (built)', { timeout: 30_000 }, () => {
   });
 
   // prompt builds its JSON import field itself, not through a formatter, so formatters.test.ts can't cover it.
-  test('prompt --format json imports from @dialpad/dialtone/vue on bundled data', () => {
+  test('prompt --format json uses the source-verified standalone route on bundled data', () => {
     const r = run(['prompt', 'DtButton', '--format', 'json']);
     expect(r.status).toBe(0);
-    expect(JSON.parse(r.stdout).import).toBe("import { DtButton } from '@dialpad/dialtone/vue'");
+    expect(JSON.parse(r.stdout).import).toBe("import { DtButton } from '@dialpad/dialtone-vue'");
   });
 
   test('prompt --format json imports from the project\'s own @dialpad/dialtone-vue', () => {
     const r = run(['prompt', 'DtButton', '--format', 'json'], { cwd: appWithDialtoneVue(), bundled: false });
     expect(r.status).toBe(0);
     expect(JSON.parse(r.stdout).import).toBe("import { DtButton } from '@dialpad/dialtone-vue'");
+    expect(JSON.parse(r.stdout).identity.imports[0]).toMatchObject({ verification: 'installed-export', version: '4.0.2' });
+  });
+
+  test('prompt JSON withholds imports when the installed export entry cannot be verified', () => {
+    const r = run(['prompt', 'DtButton', '--format', 'json'], { cwd: appWithDialtoneVue(false), bundled: false });
+    expect(r.status).toBe(0);
+    expect(JSON.parse(r.stdout).import).toBeNull();
+    expect(JSON.parse(r.stdout).identity).toMatchObject({ kind: 'unknown', imports: [] });
   });
 
   test('reads the project\'s own @dialpad/dialtone-vue when Node preserves symlinks', () => {

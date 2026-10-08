@@ -174,11 +174,13 @@ Documentation is bundled with the CLI rather than resolved from your project's i
 
 ### Generate context for a coding agent
 
-Use `prompt` to produce a compact component summary with its props, slots, events, and import path:
+Use `prompt` to produce a compact component summary with its props, slots, and events. It includes an import hint only when the CLI can verify a public export route for the component:
 
 ```bash
 dialtone prompt button
 ```
+
+Internal components show `Import unavailable` instead of an import. If the CLI cannot verify the installed package's exports, it shows `Import unverified` and advises upgrading component metadata or checking those exports. JSON output uses `import: null` when no verified route is available.
 
 Copy the result to your clipboard on macOS:
 
@@ -214,7 +216,9 @@ The CLI looks for installed packages the way Node does, in the `node_modules` fo
 
 The source line lists any data that came from somewhere other than the main package. If `package.json` declares a caret, tilde, or exact version of `@dialpad/dialtone` (such as `^10.0.0`) and the installed copy has a different major version, the CLI prints a warning. If `package.json` declares `@dialpad/dialtone` but the CLI can't find an installed copy, it warns and uses bundled data. Yarn Plug'n'Play installs have no `node_modules`, so the CLI uses bundled data there.
 
-Import hints in `component` and `prompt` output use `@dialpad/dialtone/vue`. Versions of `@dialpad/dialtone` before 9.173 don't export `./vue`, so their hints use `@dialpad/dialtone/vue3`. Component data from an installed `@dialpad/dialtone-vue` gives hints for `@dialpad/dialtone-vue`.
+Import hints in `component` and `prompt` output appear only for verified public exports. Installed `@dialpad/dialtone` data uses its verified `@dialpad/dialtone/vue` route, or `@dialpad/dialtone/vue3` for versions before 9.173 that expose that route. Installed `@dialpad/dialtone-vue` data and bundled component data use verified routes from `@dialpad/dialtone-vue`.
+
+Bundled import hints are verified against the bundled Vue source version. They do not establish that `@dialpad/dialtone-vue` is installed at that version or that the import is compatible with your project's dependencies.
 
 Use `--bundled` when you want to ignore installed packages and query the CLI's bundled data:
 

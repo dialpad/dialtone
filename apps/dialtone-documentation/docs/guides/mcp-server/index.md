@@ -165,7 +165,7 @@ Find Vue components from Dialtone's component library with props, events, and sl
 - Props (name, type, default, description)
 - Events (name, description)
 - Slots (name, description)
-- Import path
+- Import path when verified; otherwise, an unavailable or unverified import note
 
 **Parameters:**
 
