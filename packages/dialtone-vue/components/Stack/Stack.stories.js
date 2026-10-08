@@ -2,6 +2,7 @@ import DtStack from './Stack.vue';
 
 import StackDefault from './StackDefault.story.vue';
 import StackVariants from './StackVariants.story.vue';
+import StackWrapping from './StackWrapping.story.vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import {
   DT_STACK_DIRECTION,
@@ -14,6 +15,7 @@ import {
 export const argsData = {
   direction: { default: 'column' },
   as: 'div',
+  wrap: false,
   gap: { default: '400' },
   // align is optional, no default value
   justify: { default: 'start' },
@@ -53,6 +55,9 @@ Object: { "default": "row", "sm": "column", "lg": "column-reverse" }`,
   },
   as: {
     control: 'text',
+  },
+  wrap: {
+    control: 'boolean',
   },
   gap: {
     control: 'object',
@@ -106,6 +111,15 @@ const Template = (args, { argTypes }) => createTemplateFromVueFile(args, argType
 export const Default = {
   render: Template,
   args: {},
+};
+
+export const Wrapping = {
+  render: (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, StackWrapping),
+  args: {
+    direction: 'row',
+    gap: '200',
+    wrap: true,
+  },
 };
 
 const VariantsTemplate = (args, { argTypes }) => createTemplateFromVueFile(args, argTypes, StackVariants);

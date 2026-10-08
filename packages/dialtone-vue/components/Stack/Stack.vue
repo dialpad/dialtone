@@ -4,6 +4,7 @@
     data-qa="dt-stack"
     :class="[
       'd-stack',
+      { 'd-stack--wrap': wrap },
       defaultDirection,
       defaultGap,
       defaultAlign,
@@ -47,6 +48,14 @@ export default {
     as: {
       type: String,
       default: 'div',
+    },
+
+    /**
+     * Allow items to wrap onto additional lines when they exceed the available space.
+     */
+    wrap: {
+      type: Boolean,
+      default: false,
     },
 
     /**

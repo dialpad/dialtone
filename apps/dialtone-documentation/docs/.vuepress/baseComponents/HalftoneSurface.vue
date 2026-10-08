@@ -6,7 +6,7 @@
   >
     <!--
       Always render the empty host so server markup and the first client render match.
-      Paper appends its canvas after mount.
+      The point renderer appends its canvas after mount.
     -->
     <div
       ref="shaderHostEl"
@@ -19,7 +19,7 @@
 
 <script setup>
 import { computed, inject, onBeforeUnmount, onMounted, ref, watch } from 'vue';
-import { gradientHeroFragmentShader, HERO_GEOMETRY } from './gradientHeroShader.js';
+import { HalftonePointRenderer, HERO_GEOMETRY } from './halftonePointRenderer.js';
 import {
   createDotColorLoop,
   observeThemeChanges,
@@ -43,8 +43,7 @@ const shaderHostEl = ref(null);
 const geometry = computed(() => ({ ...HERO_GEOMETRY, ...props.geometry }));
 const isHalftonePaused = inject('halftonePaused', ref(false));
 
-// Both match Paper's defaults. A tighter pixel cap renders the canvas below CSS
-// resolution and stretches it up, softening the dots.
+// Render at least 2x for crisp dots, but cap unusually large displays to bound memory.
 const MIN_PIXEL_RATIO = 2;
 const MAX_PIXEL_COUNT = 1920 * 1080 * 4;
 const DOT_COLOR_PERIOD_MS = 14_000;
@@ -53,12 +52,11 @@ const TOUCH_SCROLL_IDLE_MS = 100;
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)';
 const FINE_POINTER_QUERY = '(hover: hover) and (pointer: fine)';
 
-let shaderMount = null;
+let pointRenderer = null;
 let disposeThemeObserver = null;
 let intersectionObserver = null;
 let reducedMotionQuery = null;
 let finePointerQuery = null;
-let isDisposed = false;
 let isVisible = true;
 let isTouchActive = false;
 let isTouchScrolling = false;
@@ -66,7 +64,7 @@ let touchScrollIdleTimer = null;
 
 const dotColorLoop = createDotColorLoop({
   periodMs: DOT_COLOR_PERIOD_MS,
-  onColor: (channels) => shaderMount?.setUniforms({ u_dotColor: channels }),
+  onColor: (channels) => pointRenderer?.setUniforms({ u_dotColor: channels }),
 });
 
 const prefersReducedMotion = () => Boolean(reducedMotionQuery?.matches);
@@ -104,9 +102,6 @@ const buildUniforms = (surface) => {
     u_meshLight2: [...settings.meshLightPoles[1]],
     u_meshPointSize: settings.meshPointSize,
     u_meshSmoothness: settings.meshSmoothness,
-    // Paper's shared vertex shader divides by u_scale. This fragment shader reads only
-    // gl_FragCoord, but supplying a valid value avoids leaving NaN in the vertex stage.
-    u_scale: 1,
     u_bgColor: resolveHalftoneBackground(surface),
     u_dotColor: dotColorLoop.current(),
   };
@@ -115,19 +110,19 @@ const buildUniforms = (surface) => {
 const refreshColors = (surface) => {
   dotColorLoop.setPalette(resolveHalftoneDotPalette(surface));
 
-  shaderMount?.setUniforms({
+  pointRenderer?.setUniforms({
     u_bgColor: resolveHalftoneBackground(surface),
     u_dotColor: dotColorLoop.current(),
   });
 };
 
 const syncMotionState = () => {
-  if (!shaderMount) return;
+  if (!pointRenderer) return;
 
   const speed = currentSpeed();
   // Both animation clocks retain their accumulated phase while stopped, so resuming continues
   // from the parked frame instead of jumping forward by the elapsed wall-clock time.
-  shaderMount.setSpeed(speed);
+  pointRenderer.setSpeed(speed);
 
   if (speed !== 0) {
     dotColorLoop.start();
@@ -169,8 +164,7 @@ const handleTouchEnd = (event) => {
 const canMountShader = (host) => {
   if (!host || host.clientWidth === 0 || host.clientHeight === 0) return false;
 
-  // Paper stamps the host on construction. A second mount would leak the first context.
-  return !('paperShaderMount' in host);
+  return host.childElementCount === 0;
 };
 
 const attachObservers = (surface) => {
@@ -190,29 +184,24 @@ const attachObservers = (surface) => {
 
 watch(isHalftonePaused, syncMotionState);
 
-const initShader = async () => {
+const initRenderer = () => {
   const host = shaderHostEl.value;
   const surface = surfaceEl.value;
 
   if (!surface || !canMountShader(host)) return;
 
-  const { ShaderMount } = await import('@paper-design/shaders');
-
-  if (isDisposed || shaderHostEl.value !== host) return;
-
   dotColorLoop.setPalette(resolveHalftoneDotPalette(surface));
 
-  shaderMount = new ShaderMount(
+  pointRenderer = new HalftonePointRenderer(
     host,
-    gradientHeroFragmentShader,
     buildUniforms(surface),
-    undefined,
-    currentSpeed(),
-    0,
-    MIN_PIXEL_RATIO,
-    MAX_PIXEL_COUNT,
+    {
+      speed: currentSpeed(),
+      minPixelRatio: MIN_PIXEL_RATIO,
+      maxPixelCount: MAX_PIXEL_COUNT,
+    },
   );
-  shaderMount.canvasElement.classList.add('halftone-surface__canvas');
+  pointRenderer.canvasElement.classList.add('halftone-surface__canvas');
 
   attachObservers(surface);
   syncMotionState();
@@ -229,14 +218,14 @@ onMounted(() => {
     window.addEventListener('touchcancel', handleTouchEnd, { passive: true });
   }
 
-  initShader().catch((error) => {
+  try {
+    initRenderer();
+  } catch (error) {
     console.warn('[HalftoneSurface] Canvas unavailable; using the flat background.', error);
-  });
+  }
 });
 
 onBeforeUnmount(() => {
-  isDisposed = true;
-
   intersectionObserver?.disconnect();
   intersectionObserver = null;
 
@@ -257,8 +246,8 @@ onBeforeUnmount(() => {
 
   dotColorLoop.dispose();
 
-  shaderMount?.dispose();
-  shaderMount = null;
+  pointRenderer?.dispose();
+  pointRenderer = null;
 });
 </script>
 

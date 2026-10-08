@@ -1,8 +1,9 @@
 import { defineCommand } from 'citty';
+import { componentImportStatement } from '@dialpad/dialtone-query-core';
 import type { Component } from '@dialpad/dialtone-query-core';
 import { requireComponent } from '../select-component.js';
 import { getContext } from '../context.js';
-import { formatPrompt, importStatement } from '../formatters.js';
+import { formatPrompt } from '../formatters.js';
 
 export const promptCommand = defineCommand({
   meta: { name: 'prompt', description: 'Emit a compact LLM-optimized context block for a component' },
@@ -26,7 +27,8 @@ export const promptCommand = defineCommand({
         })),
         slots: result.details.slots?.map((s: { name: string }) => s.name),
         events: result.details.events?.map((e: { name: string }) => e.name),
-        import: importStatement(result.name, importFrom),
+        identity: result.details.identity,
+        import: componentImportStatement(result.details.identity, importFrom),
       };
       console.log(JSON.stringify(component, null, 2));
       return;
@@ -39,6 +41,7 @@ export const promptCommand = defineCommand({
       props: result.details.props,
       events: result.details.events,
       slots: result.details.slots,
+      identity: result.details.identity,
     };
 
     console.log(formatPrompt(comp, importFrom));

@@ -68,7 +68,18 @@ Pre-loaded design system data, bundled at build time:
 | `applySmartFilter(results, data)` | Remove deprecated items, swap discouraged with alternatives |
 | `buildCompoundPropertiesSet(data)` | Build compound CSS property index for query parsing |
 | `extractKeywords(query, compoundProperties)` | Parse query into keywords with compound property detection |
+| `normalizeComponents(records, installed?)` | Add canonical identity to component records without inventing missing API fields. Optional installed export evidence qualifies public import routes. |
+| `normalizeComponentName(name)` | Normalize case and separators for canonical/alias comparisons, accepting an optional `Dt` prefix |
+| `componentNames(component)` | Return the component's display name and recorded aliases |
+| `componentImportStatement(identity?, preferredFrom?)` | Return a verified public import statement, or `null`. A preferred route never creates an unsupported import. |
+| `componentImportNote(identity?)` | Explain an unavailable or unverified import |
+
+`InstalledComponentExports` describes the optional installed evidence passed to `normalizeComponents`: the exact `package`, `version`, import route `from`, and exported `names` (`readonly string[]` or `null` when unverified).
 
 ## Types
 
-All interfaces are exported: `SearchResult`, `Component`, `ComponentProp`, `ComponentEvent`, `ComponentSlot`, `UtilityClassesData`, `ClassData`, `ValueObject`, `TokensData`, `TokenData`, `ThemeData`, `Metadata`, `Icon`, `IconsData`.
+Exported interfaces include `SearchResult`, `Component`, `ComponentProp`, `ComponentEvent`, `ComponentSlot`, `ComponentImport`, `ComponentIdentity`, `InstalledComponentExports`, `UtilityClassesData`, `ClassData`, `ValueObject`, `TokensData`, `TokenData`, `ThemeData`, `Metadata`, `Icon`, `IconsData`.
+
+`Component` has optional `schemaVersion?: number` and `identity?: ComponentIdentity` fields, preserving compatibility with older metadata arrays. Normalized version 2 records include a canonical name, lookup aliases, a `public`, `internal`, or `unknown` classification, optional source information, and verified import routes. Older records without version 2 identity remain `unknown` unless installed export evidence is provided.
+
+`ComponentImport` records the export name, import route, root or subpath kind, exact package/version, and `source-export` or `installed-export` verification. Only these verified routes authorize import guidance; aliases and the schema version alone do not. Export verification does not certify runtime or peer dependency compatibility.

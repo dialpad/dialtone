@@ -1,8 +1,10 @@
 import { describe, test, expect, afterEach, onTestFinished } from 'vitest';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, rmSync, realpathSync } from 'node:fs';
 import { createRequire } from 'node:module';
+import { execFileSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
+import { pathToFileURL } from 'node:url';
 import { resolveData } from '../src/data-resolver.js';
 
 const roots: string[] = [];
@@ -88,10 +90,52 @@ const ALL_BUNDLED = { components: bundled, utilities: bundled, tokens: bundled, 
 const stale = (spec: string) => `package.json declares @dialpad/dialtone "${spec}" but 9.187.0 is installed. Reinstall dependencies to match.`;
 const missing = (spec: string) => `package.json declares @dialpad/dialtone "${spec}" but no installed copy with lookup data was found. Reinstall dependencies to match.`;
 
+describe('installed component ESM condition verification', () => {
+  function installedEntry(conditions: Record<string, unknown>) {
+    const root = project({ vue: '4.3.1' });
+    const vue = join(root, 'node_modules/@dialpad/dialtone-vue');
+    write(join(vue, 'package.json'), {
+      name: '@dialpad/dialtone-vue', version: '4.3.1', type: 'module',
+      exports: { '.': conditions, './component-documentation.json': './dist/component-documentation.json' },
+    });
+    write(join(vue, 'dist/component-documentation.json'), [{ displayName: 'DtButton' }]);
+    writeFileSync(join(vue, 'dist/good.js'), "import local from './part.js'; export { local as DtButton };");
+    writeFileSync(join(vue, 'dist/other.js'), "import local from './part.js'; export { local as DtOther };");
+    return { root, vue };
+  }
+
+  test.each([
+    { default: './dist/other.js', import: './dist/good.js' },
+    { node: './dist/other.js', import: './dist/good.js' },
+  ])('does not verify a later import branch when an earlier condition wins: %j', conditions => {
+    const { root, vue } = installedEntry(conditions);
+    const selected = execFileSync(process.execPath, ['--input-type=module', '--eval', "console.log(import.meta.resolve('@dialpad/dialtone-vue'))"], { cwd: root, encoding: 'utf8' }).trim();
+    expect(selected).toBe(pathToFileURL(realpathSync(join(vue, 'dist/other.js'))).href);
+    expect(resolveData(false, root).components[0].identity).toMatchObject({
+      kind: 'default' in conditions ? 'internal' : 'unknown', imports: [],
+    });
+  });
+
+  test.each([
+    { import: { node: './dist/good.js' } },
+    { import: ['./dist/good.js'] },
+  ])('unsupported nested or array targets stay unverified: %j', conditions => {
+    const { root } = installedEntry(conditions);
+    expect(resolveData(false, root).components[0].identity).toMatchObject({ kind: 'unknown', imports: [] });
+  });
+
+  test('preserves the ordinary flat published ESM condition map', () => {
+    const { root } = installedEntry({ types: './dist/index.d.ts', import: './dist/good.js', require: './dist/good.cjs' });
+    expect(resolveData(false, root).components[0].identity?.imports).toEqual([{
+      name: 'DtButton', from: '@dialpad/dialtone-vue', kind: 'root', verification: 'installed-export', package: '@dialpad/dialtone-vue', version: '4.3.1',
+    }]);
+  });
+});
+
 describe('resolveData: where data comes from', () => {
   test('a declared umbrella wins over stray individual packages', () => {
     const data = resolveData(false, project({ declares: '^10.0.0', umbrella: {}, icons: '5.0.0', css: '9.0.1', vue: '4.0.2' }));
-    expect(data.components).toEqual([{ displayName: 'DtFromUmbrella' }]);
+    expect(data.components).toMatchObject([{ displayName: 'DtFromUmbrella', identity: { kind: 'unknown', imports: [] } }]);
     expect(data.utilityClasses).toEqual({ marker: 'umbrella-utilities' });
     expect(data.tokens).toEqual({ marker: 'umbrella-tokens' });
     expect(data.sources).toEqual({ components: umbrella, utilities: umbrella, tokens: umbrella, icons: local('@dialpad/dialtone-icons', '5.0.0'), docs: bundled });

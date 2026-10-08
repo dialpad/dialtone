@@ -42,6 +42,24 @@ export default {
     },
   },
 
+  'row, wrap': {
+    props: {
+      direction: { initialValue: 'row' },
+      gap: { initialValue: '200' },
+      wrap: { initialValue: true },
+    },
+    attributes: {
+      class: { initialValue: 'd-w-500 d-wmx100p' },
+    },
+    slots: {
+      default: {
+        initialValue: `<dt-box inline-size="200" surface="moderate-opaque" padding="100" border-radius="300">Stack item 1</dt-box>
+<dt-box inline-size="200" surface="moderate-opaque" padding="100" border-radius="300">Stack item 2</dt-box>
+<dt-box inline-size="200" surface="moderate-opaque" padding="100" border-radius="300">Stack item 3</dt-box>`,
+      },
+    },
+  },
+
   'row, align start': {
     props: {
       direction: {

@@ -3,6 +3,7 @@
 // ============================================================================
 
 import Table from 'cli-table3';
+import { componentImportStatement, componentImportNote } from '@dialpad/dialtone-query-core';
 import type {
   SearchResult,
   ComponentProp,
@@ -11,12 +12,15 @@ import type {
   ValueObject,
   ThemeData,
   Component,
+  ComponentIdentity,
 } from '@dialpad/dialtone-query-core';
 
 export type Format = 'minimal' | 'markdown' | 'json';
 
-export function importStatement(name: string, importFrom: string): string {
-  return `import { ${name} } from '${importFrom}'`;
+// The verified import, or why no import is shown.
+function importLine(identity: ComponentIdentity | undefined, importFrom: string): string {
+  const statement = componentImportStatement(identity, importFrom);
+  return statement ? `Import: ${statement}` : componentImportNote(identity);
 }
 
 // ── Table helper ────────────────────────────────────────────────────────────
@@ -108,7 +112,7 @@ function minimalComponent(result: SearchResult, importFrom: string, describe = f
     lines.push(slotsTable(result.details.slots));
   }
 
-  lines.push('', `Import: ${importStatement(result.name, importFrom)}`);
+  lines.push('', importLine(result.details.identity, importFrom));
 
   return lines.join('\n');
 }
@@ -183,7 +187,8 @@ function markdownComponent(result: SearchResult, importFrom: string): string {
     });
   }
 
-  lines.push('', '## Usage', '', '```vue', importStatement(result.name, importFrom), '```');
+  const statement = componentImportStatement(result.details.identity, importFrom);
+  lines.push('', '## Usage', '', ...(statement ? ['```vue', statement, '```'] : [componentImportNote(result.details.identity)]));
   return lines.join('\n');
 }
 
@@ -234,7 +239,7 @@ export function formatPrompt(component: Component, importFrom: string): string {
     lines.push(`Events: ${component.events.map((e: ComponentEvent) => e.name).join(', ')}`);
   }
 
-  lines.push(`Import: ${importStatement(component.displayName, importFrom)}`);
+  lines.push(importLine(component.identity, importFrom));
   return lines.join('\n');
 }
 
@@ -266,7 +271,10 @@ export function formatComponentOutput(result: SearchResult, format: Format, filt
   }
 
   if (filter === 'examples') {
-    return `${importStatement(result.name, options.importFrom)}\n\n<${result.name} />`;
+    const statement = componentImportStatement(result.details.identity, options.importFrom);
+    if (statement) return `${statement}\n\n<${result.name} />`;
+    const note = componentImportNote(result.details.identity);
+    return result.details.identity?.kind === 'public' ? `${note}\n\n<${result.name} />` : note;
   }
 
   if (format === 'markdown') return markdownComponent(result, options.importFrom);

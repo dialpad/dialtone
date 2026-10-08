@@ -34,13 +34,9 @@ reviews:
     - reviewers:
         - handle: "braddialpad"
           type: "user"
-        - handle: "ninarepetto"
-          type: "user"
       instructions: "Assign when the PR modifies the documentation site under apps/dialtone-documentation/ or icons under packages/dialtone-icons/."
     - reviewers:
         - handle: "francisrupert"
-          type: "user"
-        - handle: "ninarepetto"
           type: "user"
         - handle: "belumontoya"
           type: "user"
