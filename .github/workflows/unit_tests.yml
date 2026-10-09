@@ -8,6 +8,8 @@ on:
       - 'packages/combinator/**'
       - 'packages/dialtone-query-core/**'
       - 'packages/dialtone-cli/**'
+      - 'packages/dialtone-mcp-server/**'
+      - '.github/workflows/unit_tests.yml'
       - 'scripts/build-dialtone-vue-docs.mjs'
       - 'packages/dialtone-css/postcss/dialtone-docs.cjs'
       - 'packages/dialtone-docs/src/generators/**'
@@ -20,6 +22,8 @@ on:
       - 'packages/combinator/**'
       - 'packages/dialtone-query-core/**'
       - 'packages/dialtone-cli/**'
+      - 'packages/dialtone-mcp-server/**'
+      - '.github/workflows/unit_tests.yml'
       - 'scripts/build-dialtone-vue-docs.mjs'
       - 'packages/dialtone-css/postcss/dialtone-docs.cjs'
       - 'packages/dialtone-docs/src/generators/**'
@@ -54,11 +58,13 @@ jobs:
               - 'packages/dialtone-tokens/**'
             combinator:
               - 'packages/combinator/**'
-            # The CLI and query-core, plus the scripts that generate the data files they read.
+            # Lookup adapters and the scripts that generate their data.
             cli:
               - 'packages/dialtone-query-core/**'
               - 'packages/dialtone-cli/**'
               - 'packages/dialtone-vue/directives/**/*.mdx'
+              - 'packages/dialtone-mcp-server/**'
+              - '.github/workflows/unit_tests.yml'
               - 'scripts/build-dialtone-vue-docs.mjs'
               - 'packages/dialtone-css/postcss/dialtone-docs.cjs'
               - 'packages/dialtone-docs/src/generators/**'
@@ -130,3 +136,9 @@ jobs:
 
       - name: Run dialtone-query-core and dialtone-cli tests
         run: pnpm nx run-many -t test -p dialtone-query-core dialtone-cli
+
+      - name: Build and test MCP startup and shutdown
+        run: pnpm nx run dialtone-mcp-server:test-startup
+
+      - name: Test shared-core release selection
+        run: pnpm --dir packages/dialtone-mcp-server test:release-paths

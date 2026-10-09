@@ -4,7 +4,7 @@ category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
 last_updated: 2026-10-08
-related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli]
+related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server]
 ---
 
 # CI Pipeline
@@ -41,7 +41,7 @@ These checks are required on every PR:
 
 ### `unit_tests.yml`
 
-**Trigger:** Push to `staging`, PR to any branch (paths: `packages/dialtone-vue/**`, `packages/dialtone-tokens/**`, `packages/combinator/**`, `packages/dialtone-query-core/**`, `packages/dialtone-cli/**`, and the data generators listed for `test-cli` below)
+**Trigger:** Push to `staging`, PR to any branch (paths: `packages/dialtone-vue/**`, `packages/dialtone-tokens/**`, `packages/combinator/**`, `packages/dialtone-query-core/**`, `packages/dialtone-cli/**`, `packages/dialtone-mcp-server/**`, `.github/workflows/unit_tests.yml`, and the data generators listed for `test-cli` below)
 
 **What it does:** A `changes` job (`dorny/paths-filter`) decides which test jobs run. Each job sets up the environment, then runs its command:
 
@@ -50,11 +50,13 @@ These checks are required on every PR:
 | `test` | `packages/dialtone-vue/**` | `pnpm nx run dialtone-vue:test:coverage` |
 | `test-tokens` | `packages/dialtone-tokens/**` | `pnpm nx run dialtone-tokens:test` |
 | `test-combinator` | `packages/combinator/**` | `pnpm nx run dialtone-combinator:test` |
-| `test-cli` | `packages/dialtone-query-core/**`, `packages/dialtone-cli/**`, directive sources `packages/dialtone-vue/directives/**/*.mdx`, and the data generators `scripts/build-dialtone-vue-docs.mjs`, `packages/dialtone-css/postcss/dialtone-docs.cjs`, `packages/dialtone-docs/src/generators/**` | `pnpm nx run-many -t test -p dialtone-query-core dialtone-cli` |
+| `test-cli` | `packages/dialtone-query-core/**`, `packages/dialtone-cli/**`, `packages/dialtone-mcp-server/**`, `.github/workflows/unit_tests.yml`, directive sources `packages/dialtone-vue/directives/**/*.mdx`, and the data generators `scripts/build-dialtone-vue-docs.mjs`, `packages/dialtone-css/postcss/dialtone-docs.cjs`, `packages/dialtone-docs/src/generators/**` | `pnpm nx run-many -t test -p dialtone-query-core dialtone-cli`, `pnpm nx run dialtone-mcp-server:test-startup`, and `pnpm --dir packages/dialtone-mcp-server test:release-paths` |
 
 The `test` job outputs a coverage report in JSON and HTML. Coverage thresholds enforced: 80% branches, 70% functions, 85% lines and statements. Build fails if thresholds are not met.
 
-In `test-cli`, both test targets depend on their project's build. The builds generate the component, token, utility, icon, and documentation data the tests read, and the CLI's smoke tests run its built `build/index.js`. Generator and directive MDX changes run `test-cli`. Directive MDX changes also run `docs_tests.yml`, which builds the documentation corpus before testing its extraction. Other content-only changes, such as a component, icon, or VuePress page, do not run `test-cli`; a test they break fails on the next PR that runs it.
+In `test-cli`, the query-core and CLI test targets depend on their project's build. The builds generate the component, token, utility, icon, and documentation data the tests read, and the CLI's smoke tests run its built `build/index.js`. Generator and directive MDX changes run `test-cli`. Directive MDX changes also run `docs_tests.yml`, which builds the documentation corpus before testing its extraction. Other content-only changes, such as a component, icon, or VuePress page, do not run `test-cli`; a test they break fails on the next PR that runs it.
+
+The MCP startup target also depends on its build, so startup and shutdown checks run against a built server. The release-path suite checks commit selection using the installed release implementation without publishing packages.
 
 ---
 
