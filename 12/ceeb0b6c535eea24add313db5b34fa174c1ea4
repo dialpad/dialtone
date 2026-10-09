@@ -1,0 +1,22 @@
+packages/dialtone-vue/directives/scrollbar_directive/scrollbar.test.js
+  s_bc9c535f81cc93::t_e0dcdd5c0c3d45 97,105-115
+  s_bc9c535f81cc93::t_b074d8c31805ad 116
+packages/dialtone-vue/directives/scrollbar_directive/scrollbar.js
+  s_bc9c535f81cc93::t_64b8abb18b6425 20-28
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "12ceeb0b6c535eea24add313db5b34fa174c1ea4",
+  "prompts": {},
+  "sessions": {
+    "s_bc9c535f81cc93": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9ccc5db8-c7da-4040-bc3e-4abd4f58ec1c",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

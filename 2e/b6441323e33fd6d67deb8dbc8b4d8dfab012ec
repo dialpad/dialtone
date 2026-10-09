@@ -1,0 +1,20 @@
+packages/dialtone-vue/components/SplitButton/SplitButton.test.js
+  s_4871532d82935f::t_e22692482b790d 672-676,678,680-685
+  s_4871532d82935f::t_993e0432bf35ac 677,679,686-687
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "2eb6441323e33fd6d67deb8dbc8b4d8dfab012ec",
+  "prompts": {},
+  "sessions": {
+    "s_4871532d82935f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0cfee-52e8-7d91-8707-5dd5664333ba",
+        "model": "gpt-6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

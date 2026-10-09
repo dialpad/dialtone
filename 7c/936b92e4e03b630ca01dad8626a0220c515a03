@@ -1,0 +1,48 @@
+apps/dialtone-documentation/scripts/data/token-values.mjs
+  s_b207ad802f6ca8::t_3c8b8865b7026e 92
+  s_b207ad802f6ca8::t_bfdde4d120733e 87-91,93-111
+  s_b207ad802f6ca8::t_65a74e93be7d1b 86
+apps/dialtone-documentation/scripts/data/metadata.mjs
+  s_22be81245ef5bb::t_145fe0d4e7dc0f 59-69
+  s_b207ad802f6ca8::t_bfdde4d120733e 49-50
+apps/dialtone-documentation/docs/utilities/spacing/padding.md
+  s_b207ad802f6ca8::t_6f12e946970103 57,62,88,92
+  s_b207ad802f6ca8::t_e5966cc0149002 45,116-140
+  s_b207ad802f6ca8::t_ff124bcb202e94 141-142
+apps/dialtone-documentation/docs/_data/spacing.json
+  s_22be81245ef5bb::t_313dce443226cb 4,10,16,22,28,33-34,37-49,52-54
+  s_b207ad802f6ca8::t_0968e447bcad4f 5-6,11-12,17-18,23-24,29-30,50-51,55-97,194-434
+apps/dialtone-documentation/scripts/data/emit-spacing.mjs
+  s_22be81245ef5bb::t_6f05ab3288ae17 12-16,74-76
+  s_b207ad802f6ca8::t_bfdde4d120733e 5-6,23,25-31,34,59,62-63,66-67,70,78-80
+  s_b207ad802f6ca8::t_3c8b8865b7026e 22
+  s_22be81245ef5bb::t_145fe0d4e7dc0f 17,24,60-61,64-65,68-69
+  s_b207ad802f6ca8::t_6f2aacedddd5f3 71
+apps/dialtone-documentation/docs/utilities/spacing/margin.md
+  s_b207ad802f6ca8::t_6f12e946970103 77,82,107,112,138,140,162,164
+  s_b207ad802f6ca8::t_e5966cc0149002 184-237,242
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "7c936b92e4e03b630ca01dad8626a0220c515a03",
+  "prompts": {},
+  "sessions": {
+    "s_22be81245ef5bb": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "01a0a55f-3425-79e0-b86e-b3c8e8dbc5f7",
+        "model": "unknown"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_b207ad802f6ca8": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0a55f-3425-79e0-b86e-b3c8e8dbc5f7",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

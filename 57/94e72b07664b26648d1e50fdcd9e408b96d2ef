@@ -1,0 +1,19 @@
+packages/dialtone-icons/src/keywords-icons.json
+  s_5249ab6b421cdd::t_dd26ed478ff4d1 1616
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "5794e72b07664b26648d1e50fdcd9e408b96d2ef",
+  "prompts": {},
+  "sessions": {
+    "s_5249ab6b421cdd": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ddc74969-c7d9-42cf-94eb-7db6c63001c8",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Axel Lew <axel.lew@dialpad.com>"
+    }
+  }
+}

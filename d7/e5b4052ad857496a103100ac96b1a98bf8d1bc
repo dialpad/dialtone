@@ -1,0 +1,55 @@
+.agents/evals/run-skill-contract-evals.mjs
+  s_6071117341a43e::t_b46c8a59ec473f 35-36
+  s_51be0be46a03b0::t_35efbd005a755e 27-34,37-40
+  s_51be0be46a03b0::t_86f1e29981d7ae 184-191
+.claude/skills/merge-next/SKILL.md
+  s_51be0be46a03b0::t_35efbd005a755e 7,17-18,20,22,90-97,99-100,103-107,110,112-114,120,136,146,160,189
+  s_6071117341a43e::t_cc99665307553c 12,98,101-102,108-109,132,142,201-202
+  s_6071117341a43e::t_98d59c93f6c813 11
+  s_51be0be46a03b0::t_87eee176aa1e21 111
+  s_6071117341a43e::t_860271f4142a76 133
+.agents/skills/merge-next/evals/run-merge-next-evals.mjs
+  s_6071117341a43e::t_b46c8a59ec473f 49,64-67
+  s_6071117341a43e::t_5b0a7cdd82baff 1-48,50-63,68-77
+.agents/skills/merge-next/evals/merge-next-cases.json
+  s_6071117341a43e::t_5b0a7cdd82baff 1-65
+.agents/README.md
+  s_51be0be46a03b0::t_35efbd005a755e 10,38
+.agents/skills/merge-next/SKILL.md
+  s_6071117341a43e::t_9f341696ce2df0 79-81
+  s_6071117341a43e::t_98d59c93f6c813 12
+  s_6071117341a43e::t_102526161dfae7 66,76-77,83-84,94
+  s_6071117341a43e::t_92846d15834bd2 1-11,14-65,68-69,72,74-75,78,82,85-93,95-103,105-110,112-121
+  s_6071117341a43e::t_cc99665307553c 13,67,70-71,73,104,111
+.agents/resources/agent-tooling-parity.md
+  s_6071117341a43e::t_cc99665307553c 15
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.13",
+  "base_commit_sha": "d7e5b4052ad857496a103100ac96b1a98bf8d1bc",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_51be0be46a03b0": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a6783a03-6736-42cc-814b-25aee88bd9e7",
+        "model": "claude-fable-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_6071117341a43e": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f4d8b-397b-7102-a4c6-dc4cb5f84ffd",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
