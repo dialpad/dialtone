@@ -22,7 +22,7 @@ dialtone search "input|select|menu"   # OR search
 
 ### `dialtone component <name>`
 
-Show full component documentation. The name must match exactly, ignoring case, separators, and the `Dt` prefix, so `button`, `dt-button`, and `DtButton` all work. For any other name, the CLI lists close matches on stderr and exits with an error.
+Show full component documentation. The name must match exactly, ignoring case, separators, and the `Dt` prefix, so `button`, `dt-button`, and `DtButton` all work. Other names exit with an error, listing close matches when available. Directive identifiers such as `v-dt-tooltip` or `DtTooltipDirective` are not component names; use documentation search for their contracts.
 
 ```bash
 dialtone component button
@@ -33,6 +33,15 @@ dialtone component button --prop kind          # single prop detail
 dialtone component button --events             # events only
 dialtone component button --slots              # slots only
 dialtone component button --examples           # usage example
+```
+
+### `dialtone docs <query>`
+
+Search bundled reference documentation, including directive imports, registration and behavior.
+
+```bash
+dialtone docs "v-dt-tooltip"
+dialtone docs "DtModeDirective registration"
 ```
 
 ### `dialtone token <query>`

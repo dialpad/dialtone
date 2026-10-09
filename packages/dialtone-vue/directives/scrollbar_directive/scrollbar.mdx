@@ -10,21 +10,26 @@ to provide styled, cross-browser-consistent scrollbars.
 
 ## Usage
 
-Import the directive from dialtone-vue
+Import `DtScrollbarDirective` from `@dialpad/dialtone-vue` and register it with
+`app.use(DtScrollbarDirective)` on your Vue 3 application before mounting. Use
+`v-dt-scrollbar` on the container. Load Dialtone CSS and the
+`overlayscrollbars/overlayscrollbars.css` stylesheet. The container needs a single
+child element for the viewport and a size constraint so its content can overflow.
 
 ```js
 import { DtScrollbarDirective } from "@dialpad/dialtone-vue";
 ```
 
-Install the directive into vue instance
+Register the directive on your application:
 
 ```js
-Vue.use(DtScrollbarDirective);
+app.use(DtScrollbarDirective);
 ```
 
 ### Default
 
-Default scrollbar uses `leave` auto-hide behavior — the scrollbar hides when the pointer leaves the element.
+The default public mode is `enter`: show on pointer entry and hide on pointer
+leave. The directive maps this to OverlayScrollbars' internal `leave` mode.
 
 ```html
 <div v-dt-scrollbar>
@@ -36,10 +41,16 @@ Default scrollbar uses `leave` auto-hide behavior — the scrollbar hides when t
 
 Control when the scrollbar hides using directive arguments:
 
+Allowed public arguments are `always`, `enter` (default), `scroll`, and `move`.
+`always` keeps the scrollbar visible; `scroll` and `move` auto-hide after
+scrolling or pointer movement with a 1300ms delay. Unknown values fall back to
+`enter`. OverlayScrollbars' internal `never` and `leave` names are not public
+directive arguments. The directive does not read modifiers.
+
 **Never auto-hide** — scrollbar is always visible
 
 ```html
-<div v-dt-scrollbar:never>
+<div v-dt-scrollbar:always>
   <div>Scrollable content</div>
 </div>
 ```
@@ -56,3 +67,16 @@ Control when the scrollbar hides using directive arguments:
 
 The directive expects the scrollable content to be wrapped in a single child element,
 which becomes the OverlayScrollbars viewport.
+
+## Object configuration and cleanup
+
+Bind an object with `showScrollbar`, `offset`, `blockClasses`, or `inlineClasses`.
+`showScrollbar` takes precedence over the argument. `offset` supports logical
+`blockStart`, `blockEnd`, `inlineStart`, and `inlineEnd`, plus `block` and `inline`
+fallbacks; numbers become pixel lengths and strings are used as CSS lengths.
+`blockClasses` and `inlineClasses` are space-separated class strings for the
+vertical and horizontal scrollbars. Configuration updates apply to the existing
+instance; unmounting destroys its OverlayScrollbars instance.
+
+See the [Scrollbar page](https://dialtone.dialpad.com/components/scrollbar.html)
+for complete styling and configuration examples.

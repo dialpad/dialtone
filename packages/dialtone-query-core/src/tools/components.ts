@@ -3,6 +3,7 @@
 // ============================================================================
 
 import { applySmartFilter } from '../utils/filters.js';
+import { directiveIdentifiers } from '../directive-identifiers.js';
 import { normalizeComponents, normalizeComponentName, compactName, componentNames, componentImportStatement, componentImportNote } from '../component-identity.js';
 import type {
   Component,
@@ -171,6 +172,14 @@ function legacyNote(component: Component): string | null {
  * Search Vue components by name, description, props, events, and slots
  */
 export function searchComponents(query: string, components: Component[]): { results: SearchResult[]; notes: string[]; exactMatch: boolean; warning: string | null } {
+  if (directiveIdentifiers(query).length > 0) {
+    return {
+      results: [],
+      notes: ['Directive identifiers are not component names. Search documentation for the directive contract and registration.'],
+      exactMatch: false,
+      warning: null,
+    };
+  }
   components = normalizeComponents(components);
   console.error(`\n[COMPONENT SEARCH DEBUG] Query: "${query}"`);
 

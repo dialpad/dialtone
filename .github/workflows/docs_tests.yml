@@ -4,11 +4,13 @@ on:
   pull_request:
     paths:
       - 'packages/dialtone-docs/**'
+      - 'packages/dialtone-vue/directives/**/*.mdx'
   push:
     branches:
       - staging
     paths:
       - 'packages/dialtone-docs/**'
+      - 'packages/dialtone-vue/directives/**/*.mdx'
 
 env:
   HUSKY: 0

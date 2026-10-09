@@ -6,7 +6,11 @@
       "options": { "script": "build" },
       "inputs": [
         "{projectRoot}/src/**",
-        "{workspaceRoot}/apps/dialtone-documentation/docs/**/*.md"
+        "{workspaceRoot}/apps/dialtone-documentation/docs/**/*.md",
+        "{workspaceRoot}/packages/dialtone-vue/directives/**/*.mdx",
+        "{workspaceRoot}/packages/dialtone-vue/directives/**/*.stories.js",
+        "{workspaceRoot}/packages/dialtone-vue/index.js",
+        "{workspaceRoot}/packages/dialtone-vue/package.json"
       ],
       "outputs": ["{projectRoot}/dist/**"]
     },

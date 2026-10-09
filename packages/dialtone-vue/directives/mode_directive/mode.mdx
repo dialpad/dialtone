@@ -14,6 +14,9 @@ For full documentation, see the [Mode Island page](https://dialtone.dialpad.com/
 
 ## Usage
 
+Import `DtModeDirective` from `@dialpad/dialtone-vue` and register it with
+`app.use(DtModeDirective)` on your Vue 3 application before mounting.
+
 Use `v-dt-mode` by default on the element that already defines the region. It adds
 no wrapper and does not paint a background. If you need a new container, use a
 native element with the directive and add a surface explicitly when needed.
@@ -25,13 +28,11 @@ for the full decision table and server-rendering considerations. The component
 uses `mode="inverted"`; the directive and positioned components' `content-mode`
 prop use `invert`.
 
-Import the directive from dialtone-vue
-
 ```js
 import { DtModeDirective } from "@dialpad/dialtone-vue";
 ```
 
-Install the directive into vue instance
+Register the directive on your application:
 
 ```js
 app.use(DtModeDirective);
@@ -62,6 +63,14 @@ Bind a reactive variable to switch modes at runtime.
 ```
 
 ## Args
+
+Register `DtModeDirective` from `@dialpad/dialtone-vue` with
+`app.use(DtModeDirective)` before using `v-dt-mode`.
+
+Use the arguments `light`, `dark`, or `invert`; omitting the argument defaults
+to `invert`. The legacy argument `inverted` warns and maps to `invert`; other
+invalid arguments warn and fall back to `invert`. The directive does not read
+modifiers. Bind `false` to disable it and remove its mode attributes.
 
 <table>
   <thead>
@@ -104,3 +113,5 @@ Bind a reactive variable to switch modes at runtime.
 - Does **not** add the `d-mode-island` CSS class or set `background-color`
 - Both the directive and `<dt-mode-island>` use `data-dt-mode` boundaries
 - Keep `data-dt-brand` and `data-dt-material` at the root; do not set local overrides on mode boundaries. Material is paired to brand for visual coherence. Mode is the only theming dimension the directive overrides locally.
+- Argument or activation changes reapply the mode. Disabling or unmounting disconnects observers and removes the mode, contrast, and material attributes.
+- The directive runs on client mount and does not provide server-rendered mode attributes. See the Mode Island page for server-rendering choices.

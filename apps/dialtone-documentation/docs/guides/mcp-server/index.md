@@ -150,6 +150,8 @@ Find design tokens (CSS variables) from Dialtone's design system. Use when your 
 
 Find Vue components from Dialtone's component library with props, events, and slots. Use when your query mentions UI elements (button, modal, input, dropdown) or component names.
 
+Directive identifiers such as `v-dt-tooltip` or `DtTooltipDirective` are not component names. Component search returns no components for them; use `search_documentation` for directive contracts.
+
 **Example queries:**
 
 ```text
@@ -199,6 +201,19 @@ Find icons from Dialtone's icon library and learn how to use icon components. Ic
 
 - `query` (required): Icon name, category, or keyword
 - `limit` (optional): Maximum results (1-50, default 20)
+
+### Documentation
+
+**Tool:** `search_documentation`
+
+Search usage guidance, accessibility responsibilities and directive contracts, including imports, registration, arguments and modifiers.
+
+```text
+"v-dt-tooltip"
+"DtModeDirective registration"
+```
+
+Directive replies identify the source package and version and link to the Storybook reference. Documentation uses bundled data; compatibility with the project's installed packages is not checked.
 
 ## Usage Examples
 
