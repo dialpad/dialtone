@@ -36,4 +36,19 @@ export function useSliderDevWarnings(props, { isRange, hasVisibleLabel, attrs })
     },
     { immediate: true },
   );
+
+  // clampToRange (UseSliderValue) silently collapses every value to max when
+  // min > max, with no indication anything's wrong — this is almost always a
+  // prop-wiring bug upstream, not an intentional inverted range.
+  watch(
+    () => props.min > props.max,
+    (isInverted) => {
+      if (isInverted) {
+        console.info(
+          `[Dialtone] DtSlider: min (${props.min}) is greater than max (${props.max}) — every value will collapse to max.`,
+        );
+      }
+    },
+    { immediate: true },
+  );
 }

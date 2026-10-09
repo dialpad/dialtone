@@ -1,4 +1,4 @@
-import { ref, watch } from 'vue';
+import { ref, watch, nextTick } from 'vue';
 
 // Pointer drag, native keyboard events, focus/hover tracking, and the
 // interactive value-update path (updateThumbValue/commitIfChanged) — as
@@ -46,6 +46,20 @@ export function useSliderInteraction(props, emit, {
     },
   );
 
+  // A controlled modelValue switching from range to single mode shrinks
+  // internalValues (and thumbRefs, via its self-cleaning function ref) to
+  // length 1 — unmounting thumb index 1's native input. If it held focus,
+  // the browser drops focus to <body> with nothing to restore it, silently
+  // breaking keyboard navigation. Restore it to the one remaining thumb.
+  watch(
+    () => internalValues.value.length,
+    (newLength, oldLength) => {
+      if (newLength === 1 && oldLength === 2 && focusedThumbIndex.value === 1) {
+        nextTick(() => thumbRefs.value[0]?.focus());
+      }
+    },
+  );
+
   // ─── Value update ─────────────────────────────────────────────────────────
 
   function updateThumbValue(thumbIndex, newVal, { allowSnap = false } = {}) {
@@ -58,8 +72,10 @@ export function useSliderInteraction(props, emit, {
     if (isRange.value) {
       // The low thumb can never pass the high thumb (and vice versa) — they
       // may only meet. minGapSteps, when set, widens this into a
-      // larger required gap instead of a bare touch.
-      const gap = props.minGapSteps * props.step;
+      // larger required gap instead of a bare touch. Clamped to 0 — an
+      // unvalidated negative minGapSteps would otherwise flip the sign below
+      // and invert the crossing clamp instead of disabling it.
+      const gap = Math.max(0, props.minGapSteps * props.step);
       if (thumbIndex === 0) {
         clamped = Math.min(clamped, (next[1] ?? props.max) - gap);
       } else {
@@ -209,9 +225,27 @@ export function useSliderInteraction(props, emit, {
     updateThumbValue(activeThumbIndex.value, getValueFromPointerEvent(event), { allowSnap: true });
   }
 
+  // Same off-grid detection as UseSliderValue's thumbNativeStep (duplicated
+  // rather than threaded through as a dependency for one caller) — also
+  // naturally false for a non-finite value, so it can't misfire there.
+  function isOffGrid(val) {
+    if (props.step <= 0) return false;
+    const stepsFromMin = (val - props.min) / props.step;
+    return Math.abs(stepsFromMin - Math.round(stepsFromMin)) > 1e-9;
+  }
+
   function onPointerUp() {
     if (!isDragging.value) return;
     isDragging.value = false;
+    // A magnetic snap point can leave the thumb off the step grid (fine
+    // while dragging — thumbNativeStep sets step="any" for it) — but left in
+    // place, the NEXT plain Arrow-key press is handled natively using
+    // step="any"'s own default increment instead of props.step. Re-quantize
+    // onto the grid now that the drag has ended.
+    const idx = activeThumbIndex.value;
+    if (idx !== null && isOffGrid(internalValues.value[idx])) {
+      updateThumbValue(idx, internalValues.value[idx]);
+    }
     commitIfChanged();
     activeThumbIndex.value = null;
     activeSnapValue.value = {};

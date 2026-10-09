@@ -2,11 +2,8 @@ import { computed } from 'vue';
 import { generateInterval } from '../utils';
 
 export function useSliderMarksAndTicks(props, { isVertical, thumbPercent }) {
-  // Independent of whether ticks render visually (gated separately by the
-  // template's v-if="ticks") — computedMarks also reads this for marks="true"
-  // (mark every tick position), regardless of whether ticks itself is set.
   const computedTickValues = computed(() => {
-    const interval = typeof props.ticks === 'number' ? props.ticks : props.step;
+    const interval = typeof props.showTicks === 'number' ? props.showTicks : props.step;
     if (!interval || interval <= 0) return [];
     return generateInterval(props.min, props.max, interval, 'ticks');
   });
@@ -20,20 +17,14 @@ export function useSliderMarksAndTicks(props, { isVertical, thumbPercent }) {
   }
 
   const computedMarks = computed(() => {
-    let source;
-    if (props.marks === undefined) {
-      // Default: start and end, unless the consumer opts in to every tick (true),
-      // provides their own array, or opts out entirely (false).
-      source = [props.min, props.max];
-    } else if (props.marks === true) {
-      source = computedTickValues.value;
-    } else {
-      source = props.marks || [];
-    }
+    const source = props.showMarks === true ? [props.min, props.max] : (props.showMarks || []);
     return source.map((item) => {
       const value = typeof item === 'number' ? item : item.value;
       const text = typeof item === 'number' ? formatMarkValue(item) : (item.text ?? formatMarkValue(value));
-      return { text, pct: thumbPercent(value) };
+      // A mark landing exactly on min/max is edge-aligned (flush to the track's
+      // own edge) rather than centered — see markStyle (UseSliderGeometry).
+      const edge = value === props.min ? 'start' : value === props.max ? 'end' : null;
+      return { text, pct: thumbPercent(value), edge };
     });
   });
 
@@ -42,9 +33,14 @@ export function useSliderMarksAndTicks(props, { isVertical, thumbPercent }) {
   // track — a sibling right after <dt-slider> would overlap them. Only relevant
   // horizontally: in vertical mode marks/readout sit to the side of the track,
   // not below it. Ticks don't need this — they sit close enough to the track to
-  // stay within the control's own box (see slider.less).
+  // stay within the control's own box (see slider.less). A tooltip-styled readout
+  // renders above the thumb instead of in this row, so it doesn't need the space
+  // either — when nothing else does (no marks, readout isn't in-row), there's
+  // nothing below the track to reserve space for; a parent controls spacing/gaps.
   const reservesAnnotationSpace = computed(() => (
-    !isVertical.value && (computedMarks.value.length > 0 || props.readout !== 'never')
+    !isVertical.value && (
+      computedMarks.value.length > 0 || (props.readout !== 'never' && props.readout !== 'tooltip')
+    )
   ));
 
   return {

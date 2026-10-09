@@ -3,7 +3,6 @@
     v-bind="wrapperAttrs"
     :class="[
       'd-slider',
-      sizeClass,
       $attrs.class,
       {
         'd-slider--disabled': disabled,
@@ -35,7 +34,9 @@
         <dt-text
           v-if="label"
           kind="label"
-          size="300"
+          :size="resolvedLabelSize"
+          :strength="labelStrength"
+          :tone="disabled ? 'disabled' : 'primary'"
         >
           {{ label }}
         </dt-text>
@@ -71,7 +72,7 @@
           :style="indicatorStyle"
           data-qa="dt-slider-indicator"
         />
-        <template v-if="ticks">
+        <template v-if="showTicks">
           <div
             v-for="(tickValue, i) in computedTickValues"
             :key="i"
@@ -139,7 +140,7 @@
           :key="`mark-${i}`"
           ref="markElRefs"
           :class="['d-slider__mark', { 'd-slider__mark--collision-hidden': markCollisionHidden[i] }]"
-          :style="markStyle(mark.pct, i)"
+          :style="markStyle(mark.pct, i, mark.edge)"
           :data-mark-index="i"
           data-qa="dt-slider-mark"
         >
@@ -149,7 +150,7 @@
              It sits in the same row as marks, positioned by the same value-to-percent
              math, so it never needs JS measurement or a reposition loop that could
              desync from the thumb. -->
-        <template v-if="readout !== 'never'">
+        <template v-if="readout === 'always' || readout === 'interaction'">
           <div
             v-for="(val, i) in internalValues"
             :key="`readout-${i}`"
@@ -179,6 +180,26 @@
             {{ mergedReadoutText }}
           </div>
         </template>
+        <!-- Tooltip-styled readout (default): borrows DtTooltip's CSS without
+             the component; positioned like marks, no measurement loop. -->
+        <template v-if="readout === 'tooltip'">
+          <div
+            v-for="(val, i) in internalValues"
+            :key="`readout-tooltip-${i}`"
+            :ref="(el) => { tooltipElRefs[i] = el; }"
+            :class="[
+              'd-tooltip',
+              'd-slider__readout-tooltip',
+              tooltipReadoutArrowClass,
+              isReadoutOpen(i) ? 'd-tooltip--show' : 'd-tooltip--hide',
+            ]"
+            :style="tooltipReadoutStyle(val, i)"
+            aria-hidden="true"
+            data-qa="dt-slider-thumb-readout-tooltip"
+          >
+            {{ formatValue(val, i) }}
+          </div>
+        </template>
       </div>
       <div
         :class="['d-slider__end', endClass]"
@@ -194,12 +215,11 @@
 
 <script setup lang="ts">
 // @ts-nocheck
-import { ref, computed, useSlots, useAttrs } from 'vue';
-import { DtText } from '@/components/Text';
-import { getUniqueString, hasSlotContent, removeClassStyleAttrs } from '@/common/utils';
+import { ref, computed, Comment, useSlots, useAttrs } from 'vue';
+import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/Text';
+import { getUniqueString, removeClassStyleAttrs } from '@/common/utils';
 import {
   SLIDER_ORIENTATIONS,
-  SLIDER_SIZE_MODIFIERS,
   SLIDER_READOUT_MODES,
   SLIDER_DEFAULT_LARGE_STEP,
   SLIDER_FILL_ORIGINS,
@@ -218,7 +238,8 @@ defineOptions({ name: 'DtSlider', inheritAttrs: false });
 const props = defineProps({
   /**
    * The current value. A number enables single-thumb mode; an array enables range mode.
-   * When omitted (or explicitly undefined/null), resolves to min — see normalizeModelValue.
+   * When omitted (or explicitly undefined/null), resolves to the midpoint of
+   * [min, max] — matching native <input type="range"> — see normalizeModelValue.
    * @values Number, [Number, Number]
    */
   modelValue: {
@@ -300,9 +321,8 @@ const props = defineProps({
   /**
    * Renders tick marks along the track. Pass true to put a tick at every step;
    * pass a Number instead to space ticks at that interval (same units as step).
-   * @values true, false
    */
-  ticks: {
+  showTicks: {
     type: [Boolean, Number],
     default: false,
   },
@@ -317,16 +337,6 @@ const props = defineProps({
   minGapSteps: {
     type: Number,
     default: 0,
-  },
-
-  /**
-   * Size of the slider (thumb and track scale).
-   * @values 200, 300, 400
-   */
-  size: {
-    type: [String, Number],
-    default: 300,
-    validator: (v) => Object.keys(SLIDER_SIZE_MODIFIERS).includes(String(v)),
   },
 
   /**
@@ -347,13 +357,33 @@ const props = defineProps({
   },
 
   /**
+   * Overrides the label text size.
+   * @values 100, 200, 300, 400
+   */
+  labelSize: {
+    type: [String, Number],
+    default: null,
+    validator: (s) => TEXT_SIZE_MODIFIERS.label.includes(String(s)),
+  },
+
+  /**
+   * Overrides the label font weight.
+   * @values bold, semibold, medium, normal
+   */
+  labelStrength: {
+    type: String,
+    default: null,
+    validator: (s) => Object.keys(TEXT_STRENGTH_MODIFIERS).includes(s),
+  },
+
+  /**
    * A function returning the user-facing text for a value — shared by the readout and
    * each thumb's aria-valuetext, so the two always agree on how a number is displayed.
    * Signature: (value: number, index?: number) => string. index is the thumb index (use
    * it to differentiate thumbs in range mode, e.g. "Minimum: 20" / "Maximum: 70").
    * Deliberately NOT used for a mark's own auto-generated text — a mark isn't tied to
    * either thumb, so there's no index this function could meaningfully receive; marks use
-   * prefix/suffix instead (see the marks prop), or their own explicit text override.
+   * prefix/suffix instead (see the showMarks prop), or their own explicit text override.
    * Takes precedence over prefix/suffix for the readout and aria-valuetext when set. The
    * default (null) uses the raw number (optionally wrapped in prefix/suffix), which must
    * be i18n-safe for your context.
@@ -368,7 +398,7 @@ const props = defineProps({
    * currency. Always applied to marks. Ignored by the readout and aria-valuetext when
    * getValueText is set (see getValueText). A long prefix makes every mark's text
    * longer too — keep it short enough that the first/last mark stays legible near
-   * the track's own edges (see marks).
+   * the track's own edges (see showMarks).
    */
   prefix: {
     type: String,
@@ -379,7 +409,7 @@ const props = defineProps({
    * Text appended to the raw number wherever it's displayed — e.g. suffix="%" for a
    * percentage. Always applied to marks. Ignored by the readout and aria-valuetext when
    * getValueText is set (see getValueText). Same edge-legibility caveat as prefix
-   * applies (see marks).
+   * applies (see showMarks).
    */
   suffix: {
     type: String,
@@ -431,37 +461,42 @@ const props = defineProps({
   },
 
   /**
-   * Controls the live value readout shown alongside the track for each thumb: always
-   * visible, never shown, or shown only while hovering, dragging, or focusing that thumb.
-   * Text is formatted via getValueText when set, otherwise prefix/suffix — same as each
-   * thumb's aria-valuetext, but unlike a mark's own auto-generated text (see marks).
-   * @values always, never, interaction
+   * Controls the live value readout for each thumb: a tooltip-styled bubble above the
+   * thumb shown only while hovering, dragging, or focusing it (the default); always
+   * visible below the track; never shown; or shown below the track only while
+   * hovering, dragging, or focusing that thumb. Text is formatted via getValueText
+   * when set, otherwise prefix/suffix — same as each thumb's aria-valuetext, but
+   * unlike a mark's own auto-generated text (see showMarks). Only the tooltip
+   * readout is edge-clamped near min/max (see UseSliderGeometry's
+   * tooltipReadoutStyle) — the always/interaction readout and the merged
+   * two-thumb pill are not, so a long getValueText/suffix string can render
+   * close to or past the track's own edge at those values.
+   * @values tooltip, always, never, interaction
    */
   readout: {
     type: String,
-    default: 'always',
+    default: 'tooltip',
     validator: (v) => SLIDER_READOUT_MODES.includes(v),
   },
 
   /**
    * Text annotations rendered below the track at specific positions, independent of ticks.
-   * Defaults to min and max (start and end). Pass true to mark every tick position
-   * automatically (uses the ticks interval or step to determine positions) instead. Pass an
-   * array for explicit control: each entry is either a plain number (text defaults to the
-   * number itself, formatted with prefix/suffix — NOT getValueText, which has no
-   * meaningful index for a position that isn't tied to either thumb) or an object with a
-   * required value and optional text override, which is used as-is regardless of
-   * prefix/suffix/getValueText. Pass false to render no marks at all.
+   * Off by default — rendering min/max isn't always wanted. Pass true to label min and max
+   * (start and end) only. Pass an array for explicit control: each entry is either a plain
+   * number (text defaults to the number itself, formatted with prefix/suffix — NOT
+   * getValueText, which has no meaningful index for a position that isn't tied to either
+   * thumb) or an object with a required value and optional text override, which is used
+   * as-is regardless of prefix/suffix/getValueText.
    * Example: [{ value: 0, text: 'Neutral' }, -100, 100]
    *
    * Keep mark text (via a short prefix/suffix, or an explicit text override) reasonably
-   * short — the first/last mark is nudged inward once it would otherwise render past the
-   * track's own edges, but very long text can still end up close to the live readout or
-   * an adjacent mark.
+   * short — a mark landing exactly on min or max is edge-aligned rather than centered, and
+   * any other mark is nudged inward once it would otherwise render past the track's own
+   * edges, but very long text can still end up close to the live readout or an adjacent mark.
    */
-  marks: {
+  showMarks: {
     type: [Array, Boolean],
-    default: undefined,
+    default: false,
   },
 });
 
@@ -509,11 +544,6 @@ const thumbRefs = ref([]);
 const isRange = computed(() => Array.isArray(props.modelValue));
 const isVertical = computed(() => props.orientation === 'vertical');
 
-// Shared between UseSliderGeometry (reads it to build markStyle) and
-// UseSliderCollisionAvoidance (measures and writes it) — a plain ref passed
-// to both rather than owned by either, since each needs it the other way.
-const markEdgeOffsetPx = ref([]);
-
 const { isRtl } = useSliderDirection(controlRef);
 
 const {
@@ -529,13 +559,25 @@ const {
   formatValue,
 } = useSliderValue(props, emit, { isRange });
 
+// Recurses into slot vnodes for actual TEXT, not just "something renders" —
+// an icon-only #label (e.g. a bare <dt-icon> with no text of its own) would
+// otherwise count as providing an accessible name, silently leaving the
+// thumb unnamed with no indication anything's wrong.
+function slotHasText(vnodes) {
+  return vnodes.some((vnode) => {
+    if (vnode.type === Comment) return false;
+    if (typeof vnode.children === 'string') return vnode.children.trim() !== '';
+    if (Array.isArray(vnode.children)) return slotHasText(vnode.children);
+    return false;
+  });
+}
+
 // Determines which accessible-name source each thumb's native input binds.
-// hasSlotContent (not a bare slots.label check) so an empty/v-if-false #label
-// slot doesn't count as providing a name.
 const hasVisibleLabel = computed(() => !!(
-  props.label?.trim() || hasSlotContent(slots.label, { value: currentValue.value })
+  props.label?.trim() || (slots.label && slotHasText(slots.label({ value: currentValue.value })))
 ));
-const sizeClass = computed(() => SLIDER_SIZE_MODIFIERS[String(props.size)] ?? '');
+
+const resolvedLabelSize = computed(() => props.labelSize ?? 300);
 
 // These forward to each native thumb <input> instead — the wrapper <div>
 // isn't a form control, so leaving them here would duplicate the name and
@@ -578,10 +620,38 @@ const {
 
 // ─── Computed visual helpers ──────────────────────────────────────────────────
 
+const { computedTickValues, computedMarks, reservesAnnotationSpace } = useSliderMarksAndTicks(
+  props,
+  { isVertical, thumbPercent },
+);
+
+const {
+  markElRefs,
+  readoutElRefs,
+  mergedReadoutElRef,
+  tooltipElRefs,
+  markCollisionHidden,
+  readoutMerged,
+  markEdgeOffsetPx,
+  controlRect,
+  tooltipWidthPx,
+} = useSliderCollisionAvoidance(props, {
+  controlRef,
+  isVertical,
+  isRange,
+  internalValues,
+  thumbPercent,
+  isRtl,
+  isReadoutOpen,
+  computedMarks,
+});
+
 const {
   thumbPositionStyle,
   tickPositionStyle,
   markStyle,
+  tooltipReadoutArrowClass,
+  tooltipReadoutStyle,
   mergedReadoutPct,
   mergedReadoutText,
   indicatorStyle,
@@ -592,31 +662,9 @@ const {
   thumbPercent,
   isRtl,
   markEdgeOffsetPx,
+  controlRect,
+  tooltipWidthPx,
   formatValue,
-});
-
-const { computedTickValues, computedMarks, reservesAnnotationSpace } = useSliderMarksAndTicks(
-  props,
-  { isVertical, thumbPercent },
-);
-
-const {
-  markElRefs,
-  readoutElRefs,
-  mergedReadoutElRef,
-  markCollisionHidden,
-  readoutMerged,
-} = useSliderCollisionAvoidance(props, {
-  controlRef,
-  isVertical,
-  isRange,
-  internalValues,
-  thumbPercent,
-  isRtl,
-  isReadoutOpen,
-  computedMarks,
-  markEdgeOffsetPx,
-  mergedReadoutPct,
 });
 
 // ─── Dev warnings ─────────────────────────────────────────────────────────────

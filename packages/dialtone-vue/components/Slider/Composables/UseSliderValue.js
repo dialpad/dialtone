@@ -61,17 +61,30 @@ export function useSliderValue(props, emit, { isRange }) {
   // would split the native input, aria-valuetext, and visual thumb into three
   // disagreeing states.
   function applyValueConstraints(values) {
-    let out = values.map(clampToRange).map(snapToStep);
+    // A non-finite element (NaN, or a non-numeric value coerced to NaN)
+    // would otherwise propagate through Math.min/Math.max in enforceRangeGap
+    // and contaminate the OTHER thumb's value too — replace it before
+    // anything downstream can see it.
+    let out = values
+      .map((v) => (Number.isFinite(v) ? v : defaultValue()))
+      .map(clampToRange)
+      .map(snapToStep);
     out = out.length === 2 ? normalizeRangeValues(out) : out;
     return enforceRangeGap(out);
+  }
+
+  // Matches native <input type="range">, which defaults an unset value to the
+  // midpoint of its range rather than min.
+  function defaultValue() {
+    return (props.min + props.max) / 2;
   }
 
   function normalizeModelValue(value) {
     let raw;
     if (Array.isArray(value)) {
-      raw = value.length >= 2 ? [value[0], value[1]] : value.length === 1 ? [value[0]] : [props.min];
+      raw = value.length >= 2 ? [value[0], value[1]] : value.length === 1 ? [value[0]] : [defaultValue()];
     } else {
-      raw = value !== undefined && value !== null ? [value] : [props.min];
+      raw = value !== undefined && value !== null ? [value] : [defaultValue()];
     }
     return applyValueConstraints(raw);
   }
@@ -128,7 +141,18 @@ export function useSliderValue(props, emit, { isRange }) {
   // agree on how a value is displayed. Deliberately NOT used for a mark's own
   // auto-generated text — see formatMarkValue (UseSliderMarksAndTicks).
   function formatValue(value, index) {
-    if (props.getValueText) return props.getValueText(value, index);
+    if (props.getValueText) {
+      try {
+        return props.getValueText(value, index);
+      } catch (e) {
+        // Called on every render path (aria-valuetext, every readout style) —
+        // an uncaught throw here would crash the whole component, not just
+        // degrade one value's text.
+        if (process.env.NODE_ENV !== 'production') {
+          console.info(`[Dialtone] DtSlider: getValueText threw — falling back to the raw value. ${e}`);
+        }
+      }
+    }
     return `${props.prefix}${value}${props.suffix}`;
   }
 
@@ -171,7 +195,15 @@ export function useSliderValue(props, emit, { isRange }) {
       if (next.length !== internalValues.value.length || next.some((v, i) => v !== internalValues.value[i])) {
         internalValues.value = next;
         lastCommittedValues.value = [...next];
-        emit('update:modelValue', isRange.value ? [...next] : next[0]);
+        const payload = isRange.value ? [...next] : next[0];
+        emit('update:modelValue', payload);
+        // Unlike the controlled-modelValue watch above, this correction is
+        // never something the parent explicitly requested — it's a real,
+        // committed change the parent needs to know about (e.g. to persist),
+        // not an intermediate drag state. Without this, lastCommittedValues
+        // above having already moved on meant the actual transition from the
+        // previous value was never reported via 'change' at all.
+        emit('change', payload);
       }
     },
   );
