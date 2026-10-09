@@ -8,6 +8,7 @@ on:
       - 'packages/combinator/**'
       - 'packages/dialtone-query-core/**'
       - 'packages/dialtone-cli/**'
+      - 'packages/dialtone-mcp-server/**'
       - 'packages/dialtone-css/lib/build/js/dialtone_migration_helper/**'
       - 'packages/dialtone-css/lib/build/less/utilities/flex.less'
       - 'packages/dialtone-css/postcss/**'
@@ -31,6 +32,7 @@ on:
       - 'packages/combinator/**'
       - 'packages/dialtone-query-core/**'
       - 'packages/dialtone-cli/**'
+      - 'packages/dialtone-mcp-server/**'
       - 'packages/dialtone-css/lib/build/js/dialtone_migration_helper/**'
       - 'packages/dialtone-css/lib/build/less/utilities/flex.less'
       - 'packages/dialtone-css/postcss/**'
@@ -77,11 +79,12 @@ jobs:
               - 'packages/dialtone-tokens/**'
             combinator:
               - 'packages/combinator/**'
-            # The CLI and query-core, plus the scripts that generate the data files they read.
+            # Lookup adapters and the scripts that generate their data.
             cli:
               - 'packages/dialtone-query-core/**'
               - 'scripts/tests/dialtone-recommendations.test.mjs'
               - 'packages/dialtone-cli/**'
+              - 'packages/dialtone-mcp-server/**'
               - 'packages/dialtone-css/lib/build/js/dialtone_migration_helper/**'
               - 'packages/dialtone-css/lib/build/less/utilities/flex.less'
               - 'packages/dialtone-css/postcss/**'
@@ -174,6 +177,12 @@ jobs:
           node --test
           scripts/tests/dialtone-recommendations.test.mjs
           packages/dialtone-css/postcss/dialtone-docs.test.cjs
+
+      - name: Build and test MCP startup and shutdown
+        run: pnpm nx run dialtone-mcp-server:test-startup
+
+      - name: Test shared-core release selection
+        run: pnpm --dir packages/dialtone-mcp-server test:release-paths
 
   test-lint-plugins:
     needs: changes
