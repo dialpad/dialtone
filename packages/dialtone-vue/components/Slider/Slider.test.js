@@ -1,5 +1,6 @@
 import { h, nextTick } from 'vue';
 import { mount } from '@vue/test-utils';
+import { DtText } from '@/components/Text';
 import DtSlider from './Slider.vue';
 
 // Matches Slider.vue's updateCollisions: nextTick() alone doesn't guarantee
@@ -24,6 +25,43 @@ const settleCollisions = async () => {
 // attribute changed somewhere, not which element. Restore the spy
 // (mockControlDirectionSpy?.mockRestore()) and remove the dir attribute in
 // an afterEach wherever this is used.
+// jsdom's getBoundingClientRect always returns all-zero rects (no real
+// layout engine) — for the tooltip-readout's edge clamp, that naturally
+// resolves to "no overflow, no clamp" (0 width means the clamp is a no-op),
+// which is enough to exercise the default (unclamped) case without any
+// mocking. This mocks just the two inputs the clamp actually reads —
+// .d-slider__control's own rect and the bubble's rendered WIDTH (see
+// UseSliderGeometry's tooltipEdgeOffset) — not the bubble's position, which
+// is derived analytically from thumbPercent(modelValue) instead of measured,
+// precisely to avoid a render-behind-the-value-change lag (see that
+// function's own comment for the bug this fixes). Construct an overflow
+// scenario via modelValue (which pct the bubble's un-clamped center lands
+// at) + controlLeft/controlRight + tooltipWidth, not by positioning a mock
+// tooltip rect directly.
+let geometryMockSpy;
+function mockEdgeClampGeometry({
+  controlLeft = 0, controlRight = 1000, tooltipWidth = 100,
+} = {}) {
+  geometryMockSpy = vi.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(function mockRect() {
+    const qa = this.dataset?.qa;
+    if (qa === 'dt-slider-control') {
+      return {
+        top: 0, bottom: 0, left: controlLeft, right: controlRight,
+        width: controlRight - controlLeft, height: 0, x: controlLeft, y: 0,
+      };
+    }
+    if (qa === 'dt-slider-thumb-readout-tooltip') {
+      return {
+        top: 0, bottom: 0, left: 0, right: tooltipWidth,
+        width: tooltipWidth, height: 0, x: 0, y: 0,
+      };
+    }
+    return {
+      top: 0, bottom: 0, left: 0, right: 0, width: 0, height: 0, x: 0, y: 0,
+    };
+  });
+}
+
 let mockControlDirectionSpy;
 async function mockControlDirection(direction) {
   const original = window.getComputedStyle.bind(window);
@@ -60,6 +98,15 @@ describe('DtSlider Tests', () => {
   let thumbInputs;
 
   const updateWrapper = () => {
+    // readout defaults to "tooltip", which teleports to the real
+    // document.body (see UseSliderTooltipReadoutTeleport) — many tests call
+    // updateWrapper() a second time mid-test to apply different mockProps,
+    // which previously just discarded the first instance harmlessly (it
+    // lived in a detached mount tree). Now that teleported content escapes
+    // into the real document, that discarded instance would leak its
+    // teleported node into document.body forever (afterEach only unmounts
+    // whichever instance `wrapper` points to LAST) — unmount it first.
+    wrapper?.unmount();
     wrapper = mount(DtSlider, {
       props: { ...baseProps, ...mockProps },
       attrs: { ...baseAttrs, ...mockAttrs },
@@ -83,6 +130,10 @@ describe('DtSlider Tests', () => {
     mockAttrs = {};
     mockSlots = {};
     wrapper?.unmount();
+    geometryMockSpy?.mockRestore();
+    geometryMockSpy = undefined;
+    mockControlDirectionSpy?.mockRestore();
+    document.documentElement.removeAttribute('dir');
   });
 
   describe('Presentation Tests', () => {
@@ -230,13 +281,6 @@ describe('DtSlider Tests', () => {
       // --hide modifier classes instead of an `open` component prop.
       const readouts = () => wrapper.findAll('[data-qa="dt-slider-thumb-readout"]');
 
-      it('renders an always-shown readout by default', async () => {
-        await nextTick();
-        const els = readouts();
-        expect(els).toHaveLength(1);
-        expect(els[0].classes()).toContain('d-slider__readout--show');
-      });
-
       it('renders no readout when readout is "never"', async () => {
         mockProps = { readout: 'never' };
         updateWrapper();
@@ -346,6 +390,188 @@ describe('DtSlider Tests', () => {
         await nextTick();
         expect(readouts()[0].text()).toBe('50 units');
       });
+
+      it('does not edge-clamp near min/max, unlike the tooltip readout — pins documented current behavior', async () => {
+        // markStyle is called here without an index (see Slider.vue's
+        // template), so markEdgeOffsetPx never applies — a known limitation
+        // noted on the readout prop's own JSDoc, same as showMarks's.
+        // Centering itself comes from .d-slider__readout's own CSS
+        // transform, not an inline style, so the absence of an inline
+        // transform here IS the "no nudge applied" signal.
+        mockProps = { readout: 'always', modelValue: 100 };
+        updateWrapper();
+        await nextTick();
+        const style = readouts()[0].attributes('style');
+        expect(style).toContain('inset-inline-start: 100%');
+        expect(style).not.toContain('transform');
+      });
+    });
+
+    describe('readout: "tooltip" (the default)', () => {
+      // Positioned the same way marks and the in-row readout already are
+      // (see UseSliderGeometry's tooltipReadoutStyle) — a plain child of
+      // .d-slider__control, found via wrapper.findAll like any other
+      // element, not teleported anywhere.
+      const tooltipReadouts = () => wrapper.findAll('[data-qa="dt-slider-thumb-readout-tooltip"]');
+
+      it('is the default readout mode', async () => {
+        await nextTick();
+        const els = tooltipReadouts();
+        expect(els).toHaveLength(1);
+        expect(wrapper.findAll('[data-qa="dt-slider-thumb-readout"]')).toHaveLength(0);
+      });
+
+      it('renders inline inside .d-slider__control, not teleported elsewhere', async () => {
+        await nextTick();
+        const control = wrapper.find('[data-qa="dt-slider-control"]');
+        expect(control.find('[data-qa="dt-slider-thumb-readout-tooltip"]').exists()).toBe(true);
+      });
+
+      it('renders hidden at rest', async () => {
+        await nextTick();
+        expect(tooltipReadouts()[0].classes()).toContain('d-tooltip--hide');
+      });
+
+      it('shows on thumb-hit hover', async () => {
+        await nextTick();
+        const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
+        await hitTarget.trigger('pointerenter');
+        expect(tooltipReadouts()[0].classes()).toContain('d-tooltip--show');
+        await hitTarget.trigger('pointerleave');
+        expect(tooltipReadouts()[0].classes()).toContain('d-tooltip--hide');
+      });
+
+      it('shows on keyboard focus', async () => {
+        await nextTick();
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        await thumbInputs[0].trigger('focus');
+        expect(tooltipReadouts()[0].classes()).toContain('d-tooltip--show');
+      });
+
+      it('renders the formatted value as its content', async () => {
+        await nextTick();
+        expect(tooltipReadouts()[0].text()).toBe('50');
+      });
+
+      it('hides from the accessibility tree, since it duplicates the thumb input\'s own aria-valuetext', async () => {
+        await nextTick();
+        expect(tooltipReadouts()[0].attributes('aria-hidden')).toBe('true');
+      });
+
+      it('renders one independent tooltip per thumb in range mode, with no merge-into-one-pill behavior', async () => {
+        mockProps = { modelValue: [20, 70] };
+        updateWrapper();
+        await nextTick();
+        const els = tooltipReadouts();
+        expect(els).toHaveLength(2);
+        expect(els[0].text()).toBe('20');
+        expect(els[1].text()).toBe('70');
+        expect(wrapper.find('[data-qa="dt-slider-thumb-readout-merged"]').exists()).toBe(false);
+      });
+
+      // Regression coverage for a real bug: referencing a CSS custom property
+      // that doesn't exist (--dt-layout-25-negative, confirmed absent from the
+      // token set) made the WHOLE transform declaration invalid, not just
+      // that one axis — it silently computed to `none`, breaking both
+      // horizontal centering and the vertical gap simultaneously. Pinning the
+      // exact transform/inset formula (not just "a transform exists") catches
+      // a future regression the same way.
+      it('centers the bubble above the thumb by percent, same mechanism as the thumb itself', async () => {
+        await nextTick();
+        const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
+        await hitTarget.trigger('pointerenter');
+        await nextTick();
+        const el = tooltipReadouts()[0];
+        const style = el.attributes('style');
+        expect(style).toContain('inset-inline-start: 50%'); // modelValue 50 of [0, 100]
+        expect(style).toContain('inset-block-end: calc(50% + var(--slider-thumb-visual-size) / 2 + var(--dt-spacing-150))');
+        expect(style).toContain('transform: translateX(-50%)');
+        expect(el.classes()).toContain('d-tooltip__arrow--bottom-center');
+      });
+
+      it('mirrors the horizontal centering transform under rtl, same as every other track element', async () => {
+        await mockControlDirection('rtl');
+        await nextTick();
+        const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
+        await hitTarget.trigger('pointerenter');
+        await nextTick();
+        const style = tooltipReadouts()[0].attributes('style');
+        expect(style).toContain('transform: translateX(50%)');
+      });
+
+      it('lifts the bubble beside the thumb instead of above it in vertical mode, centered on the block axis', async () => {
+        mockProps = { orientation: 'vertical' };
+        updateWrapper();
+        await nextTick();
+        const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
+        await hitTarget.trigger('pointerenter');
+        await nextTick();
+        const el = tooltipReadouts()[0];
+        expect(el.attributes('style')).toContain('transform: translateY(50%)');
+        expect(el.classes()).toContain('d-tooltip__arrow--left-center');
+      });
+
+      // Regression coverage for the reported bug this clamp exists to fix:
+      // the bubble visibly sliding past .d-slider__control's own edge near
+      // min/max. Tolerates some overflow before nudging — the SAME
+      // tolerance marks already use, matching the control's own
+      // overflow-clip-margin (slider.less), minus a small safety margin
+      // marks don't need (see TOOLTIP_CLAMP_SAFETY_MARGIN_PX's own comment:
+      // a STATIC mark landing exactly at the true clip boundary is a rare,
+      // fixed occurrence, but the tooltip sweeps continuously through every
+      // point during a drag, so landing it exactly ON that boundary with
+      // 0px to spare meant ordinary sub-pixel measurement noise visibly
+      // clipped and un-clipped it right at that exact point) — effectively
+      // 28px (32 - 4), not 32px.
+      describe('edge clamping — tolerates the control\'s own reserved overflow space, same as marks', () => {
+        it('does not nudge the bubble when it already fits within the control', async () => {
+          // modelValue 50 of [0, 100] (base default) centers the bubble at
+          // the control's own midpoint — nowhere near either edge.
+          mockEdgeClampGeometry({ controlLeft: 0, controlRight: 1000, tooltipWidth: 100 });
+          const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
+          await hitTarget.trigger('pointerenter');
+          await settleCollisions();
+          const style = tooltipReadouts()[0].attributes('style');
+          expect(style).toContain('transform: translateX(-50%)'); // no offset — clean formula, no calc()
+          expect(style).toContain('--tooltip-arrow-offset: 0px');
+        });
+
+        it('does not nudge the bubble when its overflow is within the control\'s own reserved tolerance', async () => {
+          mockProps = { modelValue: 0 }; // pct 0 — bubble's un-clamped center lands exactly on the control's own left edge
+          updateWrapper();
+          mockEdgeClampGeometry({ controlLeft: 0, controlRight: 1000, tooltipWidth: 40 }); // half-width 20px overflow, under the effective 28px tolerance
+          const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
+          await hitTarget.trigger('pointerenter');
+          await settleCollisions();
+          const style = tooltipReadouts()[0].attributes('style');
+          expect(style).toContain('transform: translateX(-50%)');
+          expect(style).toContain('--tooltip-arrow-offset: 0px');
+        });
+
+        it('nudges the bubble right (and the arrow back left by the same amount) by the excess once it overflows past the control\'s own reserved tolerance, at its start edge', async () => {
+          mockProps = { modelValue: 0 }; // pct 0 — bubble's un-clamped center lands exactly on the control's own left edge
+          updateWrapper();
+          mockEdgeClampGeometry({ controlLeft: 0, controlRight: 1000, tooltipWidth: 96 }); // half-width 48px overflow, 20px past the effective 28px tolerance
+          const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
+          await hitTarget.trigger('pointerenter');
+          await settleCollisions();
+          const style = tooltipReadouts()[0].attributes('style');
+          expect(style).toContain('transform: translateX(calc(-50% + 20px))');
+          expect(style).toContain('--tooltip-arrow-offset: -20px');
+        });
+
+        it('nudges the bubble left (and the arrow back right by the same amount) by the excess once it overflows past the control\'s own reserved tolerance, at its end edge', async () => {
+          mockProps = { modelValue: 100 }; // pct 100 — bubble's un-clamped center lands exactly on the control's own right edge
+          updateWrapper();
+          mockEdgeClampGeometry({ controlLeft: 0, controlRight: 1000, tooltipWidth: 96 }); // half-width 48px overflow, 20px past the effective 28px tolerance
+          const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
+          await hitTarget.trigger('pointerenter');
+          await settleCollisions();
+          const style = tooltipReadouts()[0].attributes('style');
+          expect(style).toContain('transform: translateX(calc(-50% + -20px))');
+          expect(style).toContain('--tooltip-arrow-offset: 20px');
+        });
+      });
     });
 
     describe('When showLabel is false', () => {
@@ -363,9 +589,47 @@ describe('DtSlider Tests', () => {
       });
     });
 
+    describe('Label size and strength', () => {
+      it('defaults label size to 300', () => {
+        const dtText = wrapper.findComponent(DtText);
+        expect(dtText.props('size')).toBe(300);
+      });
+
+      it('leaves label strength unset by default, so the label kind\'s own semibold weight applies (matching DtInput)', () => {
+        const dtText = wrapper.findComponent(DtText);
+        expect(dtText.props('strength')).toBe(null);
+      });
+
+      it('overrides the default label size via labelSize', () => {
+        mockProps = { labelSize: 400 };
+        updateWrapper();
+        const dtText = wrapper.findComponent(DtText);
+        expect(dtText.props('size')).toBe(400);
+      });
+
+      it('overrides the default label strength via labelStrength', () => {
+        mockProps = { labelStrength: 'bold' };
+        updateWrapper();
+        const dtText = wrapper.findComponent(DtText);
+        expect(dtText.props('strength')).toBe('bold');
+      });
+
+      it('sets label tone to disabled when the slider is disabled', () => {
+        mockProps = { disabled: true };
+        updateWrapper();
+        const dtText = wrapper.findComponent(DtText);
+        expect(dtText.props('tone')).toBe('disabled');
+      });
+
+      it('sets label tone to primary when not disabled', () => {
+        const dtText = wrapper.findComponent(DtText);
+        expect(dtText.props('tone')).toBe('primary');
+      });
+    });
+
     describe('When ticks is set to an interval', () => {
       beforeEach(() => {
-        mockProps = { ticks: 10, min: 0, max: 100, step: 10 };
+        mockProps = { showTicks: 10, min: 0, max: 100, step: 10 };
         updateWrapper();
       });
 
@@ -374,7 +638,7 @@ describe('DtSlider Tests', () => {
         expect(ticks.length).toBeGreaterThan(0);
       });
 
-      it('renders 11 ticks for ticks=10 over 0–100', () => {
+      it('renders 11 ticks for showTicks=10 over 0–100', () => {
         const ticks = wrapper.findAll('[data-qa="dt-slider-tick"]');
         expect(ticks).toHaveLength(11);
       });
@@ -399,7 +663,7 @@ describe('DtSlider Tests', () => {
       });
 
       it('caps tick generation instead of hanging on a too-small ticks interval', () => {
-        mockProps = { ticks: 0.001, min: 0, max: 100 };
+        mockProps = { showTicks: 0.001, min: 0, max: 100 };
         updateWrapper();
         const ticks = wrapper.findAll('[data-qa="dt-slider-tick"]');
         expect(ticks.length).toBeLessThanOrEqual(1001); // +1 for the guaranteed end-of-domain point
@@ -408,11 +672,11 @@ describe('DtSlider Tests', () => {
 
       it('still covers the FULL domain when capped, not just the beginning of it', () => {
         // The cap used to generate points sequentially from `min` and
-        // truncate at 1000 — for ticks=0.001 over 0–100 that covered
+        // truncate at 1000 — for showTicks=0.001 over 0–100 that covered
         // only 0 through 0.999 (the first ~1% of the range): a plausible-
         // looking but materially false representation of the range, with
         // no ticks or snap targets anywhere past it.
-        mockProps = { ticks: 0.001, min: 0, max: 100 };
+        mockProps = { showTicks: 0.001, min: 0, max: 100 };
         updateWrapper();
         const tickPositions = wrapper.findAll('[data-qa="dt-slider-tick"]').map((t) => t.attributes('style'));
         const lastTickStyle = tickPositions.at(-1);
@@ -448,7 +712,7 @@ describe('DtSlider Tests', () => {
       });
 
       it('does not log the interval-cap notice in production', () => {
-        mockProps = { ticks: 0.001, min: 0, max: 100 };
+        mockProps = { showTicks: 0.001, min: 0, max: 100 };
         updateWrapper();
         expect(warnSpy).not.toHaveBeenCalled();
       });
@@ -515,36 +779,6 @@ describe('DtSlider Tests', () => {
         mockProps = { endClass: 'custom-end-class' };
         updateWrapper();
         expect(wrapper.find('[data-qa="dt-slider-end"]').classes()).toContain('custom-end-class');
-      });
-    });
-
-    describe('size prop', () => {
-      it('applies no size modifier class for the default size (300)', () => {
-        mockProps = { size: 300 };
-        updateWrapper();
-        expect(root.classes()).not.toContain('d-slider--sm');
-        expect(root.classes()).not.toContain('d-slider--lg');
-      });
-
-      it('applies d-slider--sm for size 200', () => {
-        mockProps = { size: 200 };
-        updateWrapper();
-        expect(root.classes()).toContain('d-slider--sm');
-      });
-
-      it('applies d-slider--lg for size 400', () => {
-        mockProps = { size: 400 };
-        updateWrapper();
-        expect(root.classes()).toContain('d-slider--lg');
-      });
-
-      it('does not accept a t-shirt-size alias — Slider is new, with no legacy sm/md/lg API to stay backward compatible with', () => {
-        const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
-        mockProps = { size: 'sm' };
-        updateWrapper();
-        expect(root.classes()).not.toContain('d-slider--sm');
-        expect(warnSpy.mock.calls[0][0]).toContain('Invalid prop: custom validator check failed for prop "size"');
-        warnSpy.mockRestore();
       });
     });
 
@@ -809,6 +1043,27 @@ describe('DtSlider Tests', () => {
       expect(infoSpy).not.toHaveBeenCalledWith(expect.stringContaining('provide getValueText'));
     });
 
+    it('falls back to the raw formatted value, without crashing, when getValueText throws', () => {
+      // formatValue is called on every render path (aria-valuetext, every
+      // readout style) — an uncaught throw there would crash the whole
+      // component, not just degrade one value's text.
+      mockProps = {
+        modelValue: 42,
+        getValueText: () => { throw new Error('boom'); },
+      };
+      expect(() => updateWrapper()).not.toThrow();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      expect(thumbInputs[0].attributes('aria-valuetext')).toBe('42');
+      expect(infoSpy).toHaveBeenCalledWith(expect.stringContaining('getValueText threw'));
+    });
+
+    it('does not crash when getValueText returns a non-string value', () => {
+      mockProps = { modelValue: 42, getValueText: () => 42 };
+      expect(() => updateWrapper()).not.toThrow();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      expect(thumbInputs[0].attributes('aria-valuetext')).toBe('42');
+    });
+
     it('does not warn when aria-labelledby is provided, even without label or aria-label', () => {
       mockProps = { label: undefined };
       mockAttrs = { 'aria-labelledby': 'external-heading' };
@@ -846,6 +1101,29 @@ describe('DtSlider Tests', () => {
 
       await wrapper.setProps({ 'aria-label': undefined });
       expect(infoSpy).toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
+    });
+
+    it('still warns when the label slot renders only a non-text element (e.g. an icon) with no text content', () => {
+      // A childless icon has no accessible text of its own unless the
+      // consumer labels it directly — counting its mere presence as a
+      // "visible label" would silently leave the thumb unnamed with no
+      // indication anything's wrong.
+      mockProps = { label: undefined };
+      mockSlots = { label: '<svg aria-hidden="true"><use href="#icon-volume" /></svg>' };
+      updateWrapper();
+      expect(infoSpy).toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
+    });
+
+    it('does not warn about min/max when min is less than max', () => {
+      mockProps = { min: 0, max: 100 };
+      updateWrapper();
+      expect(infoSpy).not.toHaveBeenCalledWith(expect.stringContaining('is greater than max'));
+    });
+
+    it('warns when min is greater than max', () => {
+      mockProps = { min: 100, max: 0 };
+      updateWrapper();
+      expect(infoSpy).toHaveBeenCalledWith(expect.stringContaining('is greater than max (0)'));
     });
   });
 
@@ -893,6 +1171,25 @@ describe('DtSlider Tests', () => {
       updateWrapper();
       thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
       expect(thumbInputs[0].attributes('disabled')).toBeDefined();
+    });
+
+    it('emits change (not just update:modelValue) when reactively narrowing max forces a value correction', async () => {
+      // Without this, a consumer relying on 'change' for persistence (per its
+      // own documented contract) never learns the value was corrected — the
+      // displayed value visibly changes but nothing gets persisted.
+      mockProps = { modelValue: 50, min: 0, max: 100 };
+      updateWrapper();
+      await wrapper.setProps({ max: 40 });
+      const emitted = wrapper.emitted('change');
+      expect(emitted).toBeTruthy();
+      expect(emitted[emitted.length - 1][0]).toBe(40);
+    });
+
+    it('does not emit change when a reactive min/max/step/minGapSteps change does not actually move the value', async () => {
+      mockProps = { modelValue: 50, min: 0, max: 100 };
+      updateWrapper();
+      await wrapper.setProps({ max: 90 });
+      expect(wrapper.emitted('change')).toBeFalsy();
     });
 
     it('emits focus on thumb focus', async () => {
@@ -1028,6 +1325,31 @@ describe('DtSlider Tests', () => {
           const thumbVisual = attached.find('[data-qa="dt-slider-thumb-visual"]');
           expect(thumbVisual.classes()).not.toContain('d-slider__thumb-visual--focused');
           expect(thumbVisual.classes()).toContain('d-slider__thumb-visual--active');
+        } finally {
+          attached.unmount();
+        }
+      });
+
+      it('restores focus to the remaining thumb when a controlled modelValue switches from range to single mode while the high thumb is focused', async () => {
+        // Switching range->single unmounts thumb index 1's native input (its
+        // function ref self-cleans) — if it held focus, the browser drops
+        // focus to <body> with nothing to restore it otherwise.
+        const attached = mount(DtSlider, {
+          props: { ...baseProps, modelValue: [20, 70] },
+          attachTo: document.body,
+        });
+        try {
+          const inputs = attached.findAll('[data-qa="dt-slider-thumb"]');
+          inputs[1].element.focus();
+          await nextTick();
+          expect(document.activeElement).toBe(inputs[1].element);
+
+          await attached.setProps({ modelValue: 50 });
+          await nextTick();
+          await nextTick();
+
+          const remaining = attached.find('[data-qa="dt-slider-thumb"]');
+          expect(document.activeElement).toBe(remaining.element);
         } finally {
           attached.unmount();
         }
@@ -1231,6 +1553,29 @@ describe('DtSlider Tests', () => {
         await dragTo(37);
         const emitted = wrapper.emitted('update:modelValue');
         expect(emitted[emitted.length - 1][0]).toBe(37);
+      });
+
+      it('re-quantizes an off-grid magnetic-snap value onto the step grid once the drag ends, restoring the real step for the next keyboard nudge', async () => {
+        // Left in place, the next plain Arrow-key press would be handled
+        // entirely natively using step="any"'s own default increment
+        // instead of props.step.
+        mockProps = {
+          modelValue: 50, min: 0, max: 100, step: 25, snapPoints: [42],
+        };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => controlRect;
+
+        await dragTo(42);
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        expect(thumbInputs[0].element.value).toBe('42');
+        expect(thumbInputs[0].attributes('step')).toBe('any');
+
+        await control.trigger('pointerup', { pointerId: 1 });
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        expect(thumbInputs[0].element.value).toBe('50'); // nearest real step-grid point
+        expect(thumbInputs[0].attributes('step')).toBe('25');
       });
 
       it('holds a snapped thumb through hysteresis, past the entry radius, until it clears the wider release radius', async () => {
@@ -1589,7 +1934,7 @@ describe('DtSlider Tests', () => {
       });
 
       it('centers ticks on their anchor point under rtl too', async () => {
-        mockProps = { ticks: 25 };
+        mockProps = { showTicks: 25 };
         updateWrapper();
         await mockControlDirection('rtl');
         await wrapper.setProps({ modelValue: 51 });
@@ -1599,11 +1944,11 @@ describe('DtSlider Tests', () => {
     });
 
     describe('modelValue bounds and shape validation', () => {
-      it('resolves an omitted modelValue to min', () => {
+      it('resolves an omitted modelValue to the midpoint of [min, max], matching native <input type="range">', () => {
         mockProps = { modelValue: undefined, min: 10, max: 100 };
         updateWrapper();
         thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
-        expect(Number(thumbInputs[0].element.value)).toBe(10);
+        expect(Number(thumbInputs[0].element.value)).toBe(55);
       });
 
       it('clamps an initial modelValue above max down to max', () => {
@@ -1801,6 +2146,100 @@ describe('DtSlider Tests', () => {
       expect(thumbInputs[0].attributes('min')).toBe('0');
       expect(thumbInputs[0].attributes('max')).toBe('100');
     });
+
+    it('keeps the result within [min, max] and lo <= hi when minGapSteps*step exceeds the domain span', () => {
+      // enforceRangeGap's fallback math (widen from hi, then pull lo down,
+      // then re-clamp to min) can only approximate an impossible gap — this
+      // pins that it degrades safely rather than producing an inverted or
+      // out-of-bounds pair.
+      mockProps = {
+        modelValue: [8, 12], min: 0, max: 20, step: 1, minGapSteps: 50,
+      };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      const [lo, hi] = [Number(thumbInputs[0].element.value), Number(thumbInputs[1].element.value)];
+      expect(lo).toBeGreaterThanOrEqual(0);
+      expect(hi).toBeLessThanOrEqual(20);
+      expect(lo).toBeLessThanOrEqual(hi);
+    });
+
+    it('keeps the result within [min, max] when min/max reactively shrink below a previously-valid gap', async () => {
+      mockProps = {
+        modelValue: [8, 12], min: 0, max: 20, step: 1, minGapSteps: 5,
+      };
+      updateWrapper();
+      await wrapper.setProps({ max: 10, minGapSteps: 50 });
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      const [lo, hi] = [Number(thumbInputs[0].element.value), Number(thumbInputs[1].element.value)];
+      expect(lo).toBeGreaterThanOrEqual(0);
+      expect(hi).toBeLessThanOrEqual(10);
+      expect(lo).toBeLessThanOrEqual(hi);
+    });
+
+    it('does not let a negative minGapSteps invert the drag-time crossing clamp', async () => {
+      // Unvalidated, a negative gap flips the sign in the crossing-clamp
+      // math and lets the low thumb be dragged PAST the high thumb instead
+      // of only up to it — the opposite of what minGapSteps is for.
+      mockProps = {
+        modelValue: [30, 60], min: 0, max: 100, step: 1, minGapSteps: -5,
+      };
+      updateWrapper();
+      const control = wrapper.find('[data-qa="dt-slider-control"]');
+      control.element.setPointerCapture = () => {};
+      control.element.getBoundingClientRect = () => (
+        { left: 0, top: 0, right: 100, bottom: 20, width: 100, height: 20 }
+      );
+      await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 30, buttons: 1 });
+      await control.trigger('pointermove', { pointerId: 1, clientX: 70, buttons: 1 });
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      const [lo, hi] = [Number(thumbInputs[0].element.value), Number(thumbInputs[1].element.value)];
+      expect(lo).toBeLessThanOrEqual(hi);
+    });
+
+    it('does not let a single NaN element in a controlled range modelValue contaminate the other thumb via enforceRangeGap', () => {
+      mockProps = { modelValue: [NaN, 5], min: 0, max: 100, step: 1, minGapSteps: 2 };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      expect(thumbInputs[0].element.value).not.toBe('NaN');
+      expect(thumbInputs[1].element.value).not.toBe('NaN');
+      expect(Number.isNaN(Number(thumbInputs[0].element.value))).toBe(false);
+      expect(Number.isNaN(Number(thumbInputs[1].element.value))).toBe(false);
+    });
+  });
+
+  describe('Vertical orientation + range mode combined', () => {
+    // Neither combination has its own dedicated coverage elsewhere — vertical
+    // tests use single-thumb mode, range tests use horizontal — leaving
+    // UseSliderGeometry's vertical-range indicatorStyle branch and
+    // getNearestThumbIndex's clientY-based routing unexercised together.
+    const verticalRect = { top: 0, left: 0, right: 20, bottom: 100, width: 20, height: 100 };
+
+    it('drags each thumb independently via clientY and updates the vertical range indicator', async () => {
+      mockProps = { orientation: 'vertical', modelValue: [20, 70] };
+      updateWrapper();
+      const control = wrapper.find('[data-qa="dt-slider-control"]');
+      control.element.setPointerCapture = () => {};
+      control.element.getBoundingClientRect = () => verticalRect;
+
+      // value = min + (1 - (clientY - top) / height) * (max - min)
+      // Low thumb: 20 (clientY 80) -> 30 (clientY 70)
+      await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientY: 80, buttons: 1 });
+      await control.trigger('pointermove', { pointerId: 1, clientY: 70, buttons: 1 });
+      await control.trigger('pointerup', { pointerId: 1 });
+
+      // High thumb: 70 (clientY 30) -> 60 (clientY 40)
+      await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientY: 30, buttons: 1 });
+      await control.trigger('pointermove', { pointerId: 1, clientY: 40, buttons: 1 });
+      await control.trigger('pointerup', { pointerId: 1 });
+
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      expect(thumbInputs[0].element.value).toBe('30');
+      expect(thumbInputs[1].element.value).toBe('60');
+
+      const style = wrapper.find('[data-qa="dt-slider-indicator"]').attributes('style');
+      expect(style).toContain('bottom: 30%');
+      expect(style).toContain('height: 30%');
+    });
   });
 
   describe('largeStep always moves when step is coarser than largeStep', () => {
@@ -1939,33 +2378,40 @@ describe('DtSlider Tests', () => {
     });
 
     describe('Tick generation with fractional interval', () => {
-      it('generates 5 ticks for ticks=0.25 over 0–1', () => {
-        mockProps = { ticks: 0.25, min: 0, max: 1, step: 0.25 };
+      it('generates 5 ticks for showTicks=0.25 over 0–1', () => {
+        mockProps = { showTicks: 0.25, min: 0, max: 1, step: 0.25 };
         updateWrapper();
         expect(wrapper.findAll('[data-qa="dt-slider-tick"]')).toHaveLength(5);
       });
 
-      it('generates 11 ticks for ticks=0.1 over 0–1', () => {
-        mockProps = { ticks: 0.1, min: 0, max: 1, step: 0.1 };
+      it('generates 11 ticks for showTicks=0.1 over 0–1', () => {
+        mockProps = { showTicks: 0.1, min: 0, max: 1, step: 0.1 };
         updateWrapper();
         expect(wrapper.findAll('[data-qa="dt-slider-tick"]')).toHaveLength(11);
       });
 
-      it('generates 5 ticks for ticks=2.5 over 0–10', () => {
-        mockProps = { ticks: 2.5, min: 0, max: 10, step: 2.5 };
+      it('generates 5 ticks for showTicks=2.5 over 0–10', () => {
+        mockProps = { showTicks: 2.5, min: 0, max: 10, step: 2.5 };
         updateWrapper();
         expect(wrapper.findAll('[data-qa="dt-slider-tick"]')).toHaveLength(5);
       });
 
       it('generates exactly 11 ticks for step=0.1 over 0–1 — no extra tick from loop drift', () => {
-        mockProps = { ticks: true, step: 0.1, min: 0, max: 1 };
+        mockProps = { showTicks: true, step: 0.1, min: 0, max: 1 };
         updateWrapper();
         expect(wrapper.findAll('[data-qa="dt-slider-tick"]')).toHaveLength(11);
       });
     });
 
     describe('Marks default', () => {
-      it('renders start and end marks by default', async () => {
+      it('renders no marks by default', async () => {
+        await nextTick();
+        expect(wrapper.findAll('[data-qa="dt-slider-mark"]')).toHaveLength(0);
+      });
+
+      it('renders start and end marks when showMarks is true', async () => {
+        mockProps = { showMarks: true };
+        updateWrapper();
         await nextTick();
         const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
         expect(marks).toHaveLength(2);
@@ -1973,15 +2419,15 @@ describe('DtSlider Tests', () => {
         expect(marks[1].text()).toBe(String(baseProps.max ?? 100));
       });
 
-      it('renders no marks when marks is explicitly false', async () => {
-        mockProps = { marks: false };
+      it('renders no marks when showMarks is explicitly false', async () => {
+        mockProps = { showMarks: false };
         updateWrapper();
         await nextTick();
         expect(wrapper.findAll('[data-qa="dt-slider-mark"]')).toHaveLength(0);
       });
 
       it('applies suffix to default and bare-number marks, but not explicit text', async () => {
-        mockProps = { suffix: '%', marks: [25, { value: 75, text: 'Cap' }] };
+        mockProps = { suffix: '%', showMarks: [25, { value: 75, text: 'Cap' }] };
         updateWrapper();
         await nextTick();
         const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
@@ -1990,14 +2436,14 @@ describe('DtSlider Tests', () => {
       });
 
       it('ignores getValueText for a bare-number mark and falls back to suffix — a mark has no thumb index for getValueText to differentiate on', async () => {
-        mockProps = { suffix: '%', getValueText: (v, i) => i === 0 ? `${v} low` : `${v} high`, marks: [25] };
+        mockProps = { suffix: '%', getValueText: (v, i) => i === 0 ? `${v} low` : `${v} high`, showMarks: [25] };
         updateWrapper();
         await nextTick();
         expect(wrapper.find('[data-qa="dt-slider-mark"]').text()).toBe('25%');
       });
 
-      it('ignores getValueText for the default min/max marks too', async () => {
-        mockProps = { suffix: '%', getValueText: (v, i) => i === 0 ? `Minimum: ${v}` : `Maximum: ${v}` };
+      it('ignores getValueText for the min/max marks too', async () => {
+        mockProps = { suffix: '%', showMarks: true, getValueText: (v, i) => i === 0 ? `Minimum: ${v}` : `Maximum: ${v}` };
         updateWrapper();
         await nextTick();
         const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
@@ -2006,10 +2452,59 @@ describe('DtSlider Tests', () => {
       });
 
       it('still uses an explicit mark text override even when getValueText is set', async () => {
-        mockProps = { getValueText: (v) => `${v} units`, marks: [{ value: 25, text: 'Cap' }] };
+        mockProps = { getValueText: (v) => `${v} units`, showMarks: [{ value: 25, text: 'Cap' }] };
         updateWrapper();
         await nextTick();
         expect(wrapper.find('[data-qa="dt-slider-mark"]').text()).toBe('Cap');
+      });
+    });
+
+    describe('Edge-aligned min/max marks', () => {
+      afterEach(() => {
+        mockControlDirectionSpy?.mockRestore();
+        document.documentElement.removeAttribute('dir');
+      });
+
+      it('flush-aligns the min mark to the track start instead of centering it', async () => {
+        mockProps = { showMarks: true };
+        updateWrapper();
+        await nextTick();
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        expect(marks[0].attributes('style')).toContain('translateX(0)');
+      });
+
+      it('flush-aligns the max mark to the track end, shifted by its own full width', async () => {
+        mockProps = { showMarks: true };
+        updateWrapper();
+        await nextTick();
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        expect(marks[1].attributes('style')).toContain('translateX(-100%)');
+      });
+
+      it('still centers a custom mark that does not land on min or max — no inline transform override, relying on the CSS default', async () => {
+        mockProps = { showMarks: [50] };
+        updateWrapper();
+        await nextTick();
+        const mark = wrapper.find('[data-qa="dt-slider-mark"]');
+        expect(mark.attributes('style')).not.toContain('transform');
+      });
+
+      it('mirrors the end-edge shift under rtl, same sign flip as the centering transform', async () => {
+        mockProps = { showMarks: true };
+        updateWrapper();
+        await mockControlDirection('rtl');
+        await nextTick();
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        expect(marks[1].attributes('style')).toContain('translateX(100%)');
+      });
+
+      it('does not edge-align marks in vertical orientation, where this distinction does not apply', async () => {
+        mockProps = { showMarks: true, orientation: 'vertical' };
+        updateWrapper();
+        await nextTick();
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        expect(marks[0].attributes('style')).not.toContain('transform');
+        expect(marks[1].attributes('style')).not.toContain('transform');
       });
     });
 
@@ -2047,7 +2542,7 @@ describe('DtSlider Tests', () => {
       });
 
       it('hides a mark once it overlaps the visible readout', async () => {
-        mockProps = { readout: 'always', marks: [0, 100], modelValue: 50 };
+        mockProps = { readout: 'always', showMarks: [0, 100], modelValue: 50 };
         updateWrapper();
         await nextTick();
 
@@ -2068,8 +2563,37 @@ describe('DtSlider Tests', () => {
         expect(marksAfter[1].classes()).not.toContain('d-slider__mark--collision-hidden');
       });
 
+      it('hides a mark once it overlaps the tooltip readout (the default mode) — tooltip elements are looked up by their own ref array, not data-readout-index', async () => {
+        // readoutElByIndex used to only search readoutElRefs (data-readout-index,
+        // the always/interaction readout's own lookup) — the tooltip readout
+        // has no such attribute, so with readout left at its default
+        // ('tooltip'), this collision check was silently a no-op: marks and
+        // the tooltip bubble could overlap with zero hiding ever applied.
+        mockProps = { showMarks: [0, 100], modelValue: 50 }; // readout defaults to 'tooltip'
+        updateWrapper();
+        await nextTick();
+
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
+        await hitTarget.trigger('pointerenter'); // opens the tooltip so it's considered for collisions
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        const tooltip = wrapper.find('[data-qa="dt-slider-thumb-readout-tooltip"]');
+        tooltip.element.getBoundingClientRect = () => readoutSize;
+        marks[0].element.getBoundingClientRect = () => nearReadoutRect;
+        marks[1].element.getBoundingClientRect = () => farRect;
+
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        thumbInputs[0].element.value = '51';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+
+        const marksAfter = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        expect(marksAfter[0].classes()).toContain('d-slider__mark--collision-hidden');
+        expect(marksAfter[1].classes()).not.toContain('d-slider__mark--collision-hidden');
+      });
+
       it('keeps a mark visible when it does not overlap the readout', async () => {
-        mockProps = { readout: 'always', marks: [0, 100], modelValue: 50 };
+        mockProps = { readout: 'always', showMarks: [0, 100], modelValue: 50 };
         updateWrapper();
         await nextTick();
 
@@ -2091,7 +2615,7 @@ describe('DtSlider Tests', () => {
       });
 
       it('never hides a mark for a readout that is not currently shown', async () => {
-        mockProps = { readout: 'interaction', marks: [0, 100], modelValue: 50 };
+        mockProps = { readout: 'interaction', showMarks: [0, 100], modelValue: 50 };
         updateWrapper();
         await nextTick();
 
@@ -2111,7 +2635,7 @@ describe('DtSlider Tests', () => {
       });
 
       it('re-checks collisions when getValueText changes the readout text, even though the value itself did not change', async () => {
-        mockProps = { readout: 'always', marks: [0, 100], modelValue: 50, getValueText: (v) => `${v}` };
+        mockProps = { readout: 'always', showMarks: [0, 100], modelValue: 50, getValueText: (v) => `${v}` };
         updateWrapper();
 
         wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
@@ -2149,7 +2673,7 @@ describe('DtSlider Tests', () => {
         // wrong side entirely and the system ends up hiding the wrong mark
         // (or missing/inventing a collision) rather than the one that's
         // actually overlapping on screen.
-        mockProps = { readout: 'always', marks: [0, 100], modelValue: 50 };
+        mockProps = { readout: 'always', showMarks: [0, 100], modelValue: 50 };
         updateWrapper();
         await nextTick();
 
@@ -2180,7 +2704,7 @@ describe('DtSlider Tests', () => {
       });
 
       it('re-measures collisions on a pure runtime dir flip, with no value/marks/prefix/suffix change', async () => {
-        mockProps = { readout: 'always', marks: [0, 100], modelValue: 90 };
+        mockProps = { readout: 'always', showMarks: [0, 100], modelValue: 90 };
         updateWrapper();
         await nextTick();
 
@@ -2235,7 +2759,7 @@ describe('DtSlider Tests', () => {
       });
 
       it('does not shift a mark whose overflow already fits within the existing overflow-clip-margin tolerance (32px)', async () => {
-        mockProps = { marks: [0, 100], modelValue: 50 };
+        mockProps = { showMarks: [5, 95], modelValue: 50 };
         updateWrapper();
         await nextTick();
 
@@ -2255,7 +2779,7 @@ describe('DtSlider Tests', () => {
       });
 
       it('does not shift a mark whose overflow lands exactly at the 32px tolerance boundary (the condition is a strict >)', async () => {
-        mockProps = { marks: [0, 100], modelValue: 50 };
+        mockProps = { showMarks: [5, 95], modelValue: 50 };
         updateWrapper();
         await nextTick();
 
@@ -2275,7 +2799,7 @@ describe('DtSlider Tests', () => {
       });
 
       it('shifts a mark by exactly 1px once its overflow is just 1px past the 32px tolerance boundary', async () => {
-        mockProps = { marks: [0, 100], modelValue: 50 };
+        mockProps = { showMarks: [5, 95], modelValue: 50 };
         updateWrapper();
         await nextTick();
 
@@ -2295,7 +2819,7 @@ describe('DtSlider Tests', () => {
       });
 
       it('shifts a start-edge mark inward by only the excess past the 32px tolerance, not the full overflow', async () => {
-        mockProps = { marks: [0, 100], modelValue: 50 };
+        mockProps = { showMarks: [5, 95], modelValue: 50 };
         updateWrapper();
         await nextTick();
 
@@ -2315,7 +2839,7 @@ describe('DtSlider Tests', () => {
       });
 
       it('shifts an end-edge mark inward (the opposite direction) by only the excess past the tolerance', async () => {
-        mockProps = { marks: [0, 100], modelValue: 50 };
+        mockProps = { showMarks: [5, 95], modelValue: 50 };
         updateWrapper();
         await nextTick();
 
@@ -2335,7 +2859,7 @@ describe('DtSlider Tests', () => {
       });
 
       it('re-measures from the natural (unshifted) position, so a later smaller overflow reduces the offset instead of compounding on top of it', async () => {
-        mockProps = { marks: [0, 100], modelValue: 50 };
+        mockProps = { showMarks: [5, 95], modelValue: 50 };
         updateWrapper();
         await nextTick();
 
@@ -2366,7 +2890,7 @@ describe('DtSlider Tests', () => {
       });
 
       it('does not apply any offset in vertical orientation, where marks sit beside the track rather than below it', async () => {
-        mockProps = { marks: [0, 100], modelValue: 50, orientation: 'vertical' };
+        mockProps = { showMarks: [5, 95], modelValue: 50, orientation: 'vertical' };
         updateWrapper();
         await nextTick();
 
@@ -2385,7 +2909,7 @@ describe('DtSlider Tests', () => {
       });
 
       it('drops an already-applied offset immediately when orientation switches from horizontal to vertical', async () => {
-        mockProps = { marks: [0, 100], modelValue: 50 };
+        mockProps = { showMarks: [5, 95], modelValue: 50 };
         updateWrapper();
         await nextTick();
 
@@ -2412,7 +2936,7 @@ describe('DtSlider Tests', () => {
       });
 
       it('mirrors the shift direction under RTL, same as the existing centering transform', async () => {
-        mockProps = { marks: [0, 100], modelValue: 50 };
+        mockProps = { showMarks: [5, 95], modelValue: 50 };
         updateWrapper();
         await nextTick();
 
@@ -2441,7 +2965,7 @@ describe('DtSlider Tests', () => {
         // 158–168 — inside this mark's corrected (post-edge-clamp) position
         // (68–168), so the two features' outcomes (a shifted transform AND
         // a hidden mark) are expected to hold simultaneously.
-        mockProps = { readout: 'always', marks: [0, 100], modelValue: 20 };
+        mockProps = { readout: 'always', showMarks: [5, 95], modelValue: 20 };
         updateWrapper();
         await nextTick();
 
@@ -2540,28 +3064,31 @@ describe('DtSlider Tests', () => {
 
     describe('Marks with fractional positions', () => {
       it('renders the correct number of marks for a fractional marks array', () => {
-        mockProps = { marks: [0.25, 0.5, 0.75], min: 0, max: 1, step: 0.25 };
+        mockProps = { showMarks: [0.25, 0.5, 0.75], min: 0, max: 1, step: 0.25 };
         updateWrapper();
         expect(wrapper.findAll('[data-qa="dt-slider-mark"]')).toHaveLength(3);
       });
 
       it('renders mark text for a fractional number entry', () => {
-        mockProps = { marks: [0.5], min: 0, max: 1, step: 0.1 };
+        mockProps = { showMarks: [0.5], min: 0, max: 1, step: 0.1 };
         updateWrapper();
         const mark = wrapper.find('[data-qa="dt-slider-mark"]');
         expect(mark.text()).toBe('0.5');
       });
 
       it('renders mark text from an object entry at a fractional position', () => {
-        mockProps = { marks: [{ value: 0.5, text: 'Halfway' }], min: 0, max: 1, step: 0.1 };
+        mockProps = { showMarks: [{ value: 0.5, text: 'Halfway' }], min: 0, max: 1, step: 0.1 };
         updateWrapper();
         expect(wrapper.find('[data-qa="dt-slider-mark"]').text()).toBe('Halfway');
       });
 
-      it('renders marks:true following fractional tick positions', () => {
-        mockProps = { marks: true, step: 0.25, min: 0, max: 1 };
+      it('renders exactly the two min/max marks when showMarks is true, even with a fractional step', () => {
+        mockProps = { showMarks: true, step: 0.25, min: 0, max: 1 };
         updateWrapper();
-        expect(wrapper.findAll('[data-qa="dt-slider-mark"]')).toHaveLength(5);
+        const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+        expect(marks).toHaveLength(2);
+        expect(marks[0].text()).toBe('0');
+        expect(marks[1].text()).toBe('1');
       });
     });
 
@@ -2640,10 +3167,23 @@ describe('DtSlider Tests', () => {
         updateWrapper();
       });
 
-      it('fills from the min end toward the thumb', () => {
+      it('fills from the min end toward the thumb, with its static cap extended past the control edge', () => {
         const style = indicator.attributes('style');
-        expect(style).toContain('inset-inline-start: 0');
-        expect(style).toContain('width: 25%');
+        expect(style).toContain('inset-inline-start: calc(calc(var(--slider-track-height) / 2) * -1)');
+        expect(style).toContain('width: calc(25% + calc(var(--slider-track-height) / 2))');
+      });
+    });
+
+    describe('When fillOrigin is \'start\' and the thumb is at min', () => {
+      beforeEach(() => {
+        mockProps = { modelValue: 0, min: 0, max: 100 };
+        updateWrapper();
+      });
+
+      it('still extends the static cap, but the thumb-tracking edge stays exactly at the thumb (no overshoot)', () => {
+        const style = indicator.attributes('style');
+        expect(style).toContain('inset-inline-start: calc(calc(var(--slider-track-height) / 2) * -1)');
+        expect(style).toContain('width: calc(0% + calc(var(--slider-track-height) / 2))');
       });
     });
 
@@ -2653,10 +3193,10 @@ describe('DtSlider Tests', () => {
         updateWrapper();
       });
 
-      it('fills from the max end toward the thumb', () => {
+      it('fills from the max end toward the thumb, with its static cap extended past the control edge (var(--dt-size-border-100) more than the start cap)', () => {
         const style = indicator.attributes('style');
-        expect(style).toContain('inset-inline-end: 0');
-        expect(style).toContain('width: 75%');
+        expect(style).toContain('inset-inline-end: calc(calc(calc(var(--slider-track-height) / 2) + var(--dt-size-border-100)) * -1)');
+        expect(style).toContain('width: calc(75% + calc(calc(var(--slider-track-height) / 2) + var(--dt-size-border-100)))');
       });
     });
 
@@ -2758,25 +3298,37 @@ describe('DtSlider Tests', () => {
     // content right after <dt-slider> renders on top of them.
     const bodySelector = '.d-slider__body';
 
-    it('reserves space by default — marks default to start/end and readout defaults to always', () => {
+    it('does not reserve space by default — showMarks defaults false and readout defaults to tooltip (rendered above, not below)', () => {
       updateWrapper();
-      expect(wrapper.find(bodySelector).classes()).toContain('d-slider__body--reserve-annotation-space');
+      expect(wrapper.find(bodySelector).classes()).not.toContain('d-slider__body--reserve-annotation-space');
     });
 
     it('does not reserve space when both marks and readout are turned off', () => {
-      mockProps = { marks: false, readout: 'never' };
+      mockProps = { showMarks: false, readout: 'never' };
+      updateWrapper();
+      expect(wrapper.find(bodySelector).classes()).not.toContain('d-slider__body--reserve-annotation-space');
+    });
+
+    it('does not reserve space for a tooltip readout, even with marks off — nothing renders in the below-track row', () => {
+      mockProps = { showMarks: false, readout: 'tooltip' };
       updateWrapper();
       expect(wrapper.find(bodySelector).classes()).not.toContain('d-slider__body--reserve-annotation-space');
     });
 
     it('still reserves space for readout alone, with marks turned off', () => {
-      mockProps = { marks: false, readout: 'always' };
+      mockProps = { showMarks: false, readout: 'always' };
       updateWrapper();
       expect(wrapper.find(bodySelector).classes()).toContain('d-slider__body--reserve-annotation-space');
     });
 
     it('still reserves space for marks alone, with readout turned off', () => {
-      mockProps = { marks: [0, 100], readout: 'never' };
+      mockProps = { showMarks: [0, 100], readout: 'never' };
+      updateWrapper();
+      expect(wrapper.find(bodySelector).classes()).toContain('d-slider__body--reserve-annotation-space');
+    });
+
+    it('still reserves space for marks alone, even with a tooltip readout', () => {
+      mockProps = { showMarks: [0, 100], readout: 'tooltip' };
       updateWrapper();
       expect(wrapper.find(bodySelector).classes()).toContain('d-slider__body--reserve-annotation-space');
     });
