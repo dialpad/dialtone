@@ -8,9 +8,10 @@ on:
       - 'packages/combinator/**'
       - 'packages/dialtone-query-core/**'
       - 'packages/dialtone-cli/**'
+      - 'packages/dialtone-mcp-server/**'
+      - '.github/workflows/unit_tests.yml'
       - 'scripts/build-dialtone-vue-docs.mjs'
       - 'packages/dialtone-docs/**'
-      - 'packages/dialtone-mcp-server/**'
       - 'packages/dialtone-css/**'
       - 'packages/dialtone-icons/**'
       - 'apps/dialtone-documentation/docs/components/**'
@@ -18,7 +19,6 @@ on:
       - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
       - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
       - 'scripts/lib/vue-component-identity.mjs'
-      - '.github/workflows/unit_tests.yml'
   push:
     branches:
       - staging
@@ -28,9 +28,10 @@ on:
       - 'packages/combinator/**'
       - 'packages/dialtone-query-core/**'
       - 'packages/dialtone-cli/**'
+      - 'packages/dialtone-mcp-server/**'
+      - '.github/workflows/unit_tests.yml'
       - 'scripts/build-dialtone-vue-docs.mjs'
       - 'packages/dialtone-docs/**'
-      - 'packages/dialtone-mcp-server/**'
       - 'packages/dialtone-css/**'
       - 'packages/dialtone-icons/**'
       - 'apps/dialtone-documentation/docs/components/**'
@@ -38,7 +39,6 @@ on:
       - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
       - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
       - 'scripts/lib/vue-component-identity.mjs'
-      - '.github/workflows/unit_tests.yml'
 
 env:
   HUSKY: 0
@@ -80,13 +80,13 @@ jobs:
               - 'packages/dialtone-icons/**'
               - 'packages/dialtone-vue/**'
               - 'packages/dialtone-tokens/**'
+              - '.github/workflows/unit_tests.yml'
               - 'scripts/build-dialtone-vue-docs.mjs'
               - 'scripts/lib/vue-component-identity.mjs'
               - 'apps/dialtone-documentation/docs/components/**'
               - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
               - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
               - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
-              - '.github/workflows/unit_tests.yml'
 
   test:
     needs: changes
@@ -165,3 +165,9 @@ jobs:
 
       - name: Test MCP query protocol contracts
         run: pnpm --dir packages/dialtone-mcp-server test:protocol
+
+      - name: Build and test MCP startup and shutdown
+        run: pnpm nx run dialtone-mcp-server:test-startup
+
+      - name: Test shared-core release selection
+        run: pnpm --dir packages/dialtone-mcp-server test:release-paths

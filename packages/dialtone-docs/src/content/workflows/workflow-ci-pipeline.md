@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-10-07
+last_updated: 2026-10-08
 related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server, dialtone-docs]
 ---
 
@@ -50,7 +50,7 @@ These checks are required on every PR:
 | `test` | `packages/dialtone-vue/**` | `pnpm nx run dialtone-vue:test:coverage` |
 | `test-tokens` | `packages/dialtone-tokens/**` | `pnpm nx run dialtone-tokens:test` |
 | `test-combinator` | `packages/combinator/**` | `pnpm nx run dialtone-combinator:test` |
-| `test-cli` | Lookup packages, their bundled dataset sources and documentation-link sources | Builds CLI/MCP and prerequisites, then runs core/CLI, docs and MCP protocol tests; commands below |
+| `test-cli` | Lookup packages, their bundled dataset sources and documentation-link sources | Builds CLI/MCP and prerequisites, then runs core/CLI, docs, MCP protocol, startup/shutdown and release-selection tests; commands below |
 
 The `test` job outputs a coverage report in JSON and HTML. Coverage thresholds enforced: 80% branches, 70% functions, 85% lines and statements. Build fails if thresholds are not met.
 
@@ -63,9 +63,13 @@ pnpm nx run-many -t build -p dialtone-cli dialtone-mcp-server
 pnpm nx run-many -t test -p dialtone-query-core dialtone-cli
 pnpm --dir packages/dialtone-docs test
 pnpm --dir packages/dialtone-mcp-server test:protocol
+pnpm nx run dialtone-mcp-server:test-startup
+pnpm --dir packages/dialtone-mcp-server test:release-paths
 ```
 
 The build generates the component, token, utility, icon and documentation data consumed by the adapters. CLI smoke tests use the built entrypoint; MCP protocol tests exercise tool registration, inputs, complete selected API retrieval, bounded replies and documentation continuations through the SDK. These checks establish retrieval behavior, not automatic tool use by coding assistants.
+
+The MCP startup target also depends on its build, so startup and shutdown checks run against a built server. The release-path suite checks commit selection using the installed release implementation without publishing packages.
 
 ---
 

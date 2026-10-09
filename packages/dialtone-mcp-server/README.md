@@ -65,7 +65,7 @@ claude mcp add dialtone --scope user -- npx -y @dialpad/dialtone-mcp-server
 
 This stores configuration in `~/.claude/mcp.json`.
 
-**Version checking:** When the server starts, you'll see the current version. If outdated, follow the instructions shown.
+**Version checking:** The server connects to stdio before checking npm for updates. The advisory check is cancelled after two seconds or on shutdown. Offline, failed, or malformed registry replies are ignored. Valid version notices appear on stderr, keeping stdout available for MCP messages. On stdin EOF, SIGINT, or SIGTERM, the server closes its transport, flushes queued output, and exits even if an aborted registry connection retains a handle.
 
 ## Updating
 
@@ -195,6 +195,17 @@ npx tsx packages/dialtone-mcp-server/interactive-search.ts
 - ✗ Bad: `how do I add padding?`, `what button component exists?`
 
 ### Run Tests
+
+Startup and shutdown regressions build the server and its prerequisites first:
+
+```bash
+pnpm nx run dialtone-mcp-server:test-startup
+```
+
+From the package directory, `pnpm run test:startup` invokes `node --test` directly
+and requires an existing server build. Use the Nx target above to build first.
+Release-path regressions run with `pnpm run test:release-paths`.
+Both regression suites run in the path-filtered Unit Tests workflow.
 
 From the package directory:
 ```bash
