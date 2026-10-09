@@ -18,6 +18,14 @@
         "command": "pnpm exec rollup -c"
       }
     },
+    "test-startup": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build"],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "node --test tests/startup.test.mjs"
+      }
+    },
     "start": {
       "executor": "nx:run-commands",
       "dependsOn": ["build"],

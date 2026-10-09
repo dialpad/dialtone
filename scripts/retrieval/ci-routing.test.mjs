@@ -81,6 +81,8 @@ test('lookup source, data, adapter and harness changes route to the mandatory su
     'scripts/retrieval/run.mjs',
     'scripts/tests/vue-component-identity.test.mjs',
     'scripts/retrieval/*.test.mjs',
+    'dialtone-mcp-server:test-startup',
+    'test:release-paths',
     'run-acceptance-scenarios.mjs',
   ])
     assert.ok(

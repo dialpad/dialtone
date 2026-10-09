@@ -23,6 +23,14 @@ import {
   findParentMode,
 } from './Utils';
 
+/**
+ * Prefer the v-dt-mode directive for local color-mode scoping.
+ * DtModeIsland renders a container with the active mode's primary surface background.
+ * Use it when that container and automatic surface are wanted together, or when
+ * the current directive plugin cannot be installed. Its mode prop uses "inverted";
+ * the directive uses "invert". See the usage guide for server-rendering considerations.
+ * @see https://dialtone.dialpad.com/components/mode-island.html
+ */
 export default {
   name: 'DtModeIsland',
 

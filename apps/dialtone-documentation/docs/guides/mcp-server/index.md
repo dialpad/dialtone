@@ -99,7 +99,7 @@ claude mcp add dialtone-http --transport http --scope user https://mcp.dialtone.
 ```
 
 > [!INFO] Version Checking
-> When the server starts, you'll see the current version. If outdated, follow the instructions shown to update.
+> Startup does not wait for the update check. A successful check writes a version or update notice to stderr; failed or malformed responses are ignored. The check is cancelled after two seconds or during shutdown.
 
 ## Search Tools
 
@@ -259,7 +259,7 @@ You can install both. The MCP server handles tool calls from an AI client, while
 
 ### Updating the Server
 
-The server checks for updates automatically on startup. If a new version is available, you'll see:
+The server checks for updates after connecting. If the registry check succeeds and a different version is available, it writes this notice to stderr:
 
 ```text
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━

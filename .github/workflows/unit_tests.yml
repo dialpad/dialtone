@@ -179,5 +179,11 @@ jobs:
       - name: Run bounded cross-adapter retrieval regressions
         run: node scripts/retrieval/run.mjs
 
+      - name: Build and test MCP startup and shutdown
+        run: pnpm nx run dialtone-mcp-server:test-startup
+
+      - name: Test shared-core release selection
+        run: pnpm --dir packages/dialtone-mcp-server test:release-paths
+
       - name: Run existing documentation search scenarios
         run: node packages/dialtone-mcp-server/scripts/run-acceptance-scenarios.mjs
