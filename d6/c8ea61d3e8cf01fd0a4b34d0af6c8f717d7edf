@@ -1,0 +1,27 @@
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_7f1d1d64baa803::t_cd4da31de6ff7f 6-7,44,53,58-61
+  s_7f1d1d64baa803::t_d25ff7c9f905ac 57
+packages/dialtone-mcp-server/package.json
+  s_7f1d1d64baa803::t_cd4da31de6ff7f 17
+.github/workflows/unit_tests.yml
+  s_7f1d1d64baa803::t_cd4da31de6ff7f 11-12,25-26,61,65-66,138-143
+packages/dialtone-mcp-server/README.md
+  s_7f1d1d64baa803::t_d25ff7c9f905ac 206
+  s_7f1d1d64baa803::t_cd4da31de6ff7f 203-204
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "d6c8ea61d3e8cf01fd0a4b34d0af6c8f717d7edf",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

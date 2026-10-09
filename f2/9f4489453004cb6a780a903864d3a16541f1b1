@@ -1,0 +1,21 @@
+packages/dialtone-mcp-server/tests/fixtures/registry.mjs
+  s_c8ad6feb7a7a00::t_4cb7f33fdd9a9e 13-14
+packages/dialtone-mcp-server/tests/release-paths.test.mjs
+  s_c8ad6feb7a7a00::t_4cb7f33fdd9a9e 16,34-37,45,50,59,61
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "f29f4489453004cb6a780a903864d3a16541f1b1",
+  "prompts": {},
+  "sessions": {
+    "s_c8ad6feb7a7a00": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6f605576-f73f-414c-9125-c046a01ec7e1",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
