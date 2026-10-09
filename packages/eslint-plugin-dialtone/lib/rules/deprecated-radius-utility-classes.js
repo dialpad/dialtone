@@ -5,27 +5,12 @@
  */
 'use strict';
 
-const { START, END, buildDetectRegex, createClassAttributeRule } = require('../util/class-attribute-rule');
+const { START, END, buildAlternation, buildDetectRegex, createClassAttributeRule } = require('../util/class-attribute-rule');
 
-// MUST STAY IN SYNC with:
-// - RADIUS_STOPS in dialtone-css/postcss/constants.cjs
-// - RADIUS_MAP / RADIUS_PAIR_PREFIX_MAP in dialtone-css/.../migration_helper/configs/utility-class-to-token-stops.mjs
+const { RADIUS_MAP: RADIUS_STOP_MAP, RADIUS_PAIR_PREFIX_MAP: PAIR_PREFIX_MAP } = require('../generated/migration-guidance.json');
 
-const RADIUS_STOP_MAP = {
-  0: '0', 1: '100', 2: '200', 4: '300', 6: '350',
-  8: '400', 12: '450', 16: '500', 24: '550', 32: '600',
-};
-
-const PAIR_PREFIX_MAP = {
-  btr: 'bbsr', // top    → block-start pair
-  bbr: 'bber', // bottom → block-end pair
-  blr: 'bisr', // left   → inline-start pair
-  brr: 'bier', // right  → inline-end pair
-};
-
-// Ordered by descending string length so regex alternation matches longest first
-// (.d-bar32 resolves as `32`, not `3`).
-const NUMERIC_SUFFIXES = Object.keys(RADIUS_STOP_MAP).sort((a, b) => b.length - a.length || Number(b) - Number(a)).join('|');
+// Longest first: .d-bar32 resolves as `32`, not `3`.
+const NUMERIC_SUFFIXES = buildAlternation(RADIUS_STOP_MAP);
 const PAIR_PREFIXES = Object.keys(PAIR_PREFIX_MAP).join('|');
 
 const ALL_CORNERS_NUMERIC = new RegExp(`${START}d-bar(${NUMERIC_SUFFIXES})${END}`, 'g');

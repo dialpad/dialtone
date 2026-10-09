@@ -2,6 +2,7 @@
 // ICONS SEARCH TOOL
 // ============================================================================
 
+import { sortExactFirst } from '../utils/filters.js';
 import type { IconsData, SearchResult } from '../types.js';
 
 /**
@@ -10,6 +11,8 @@ import type { IconsData, SearchResult } from '../types.js';
  */
 export function searchIcons(query: string, data: IconsData): { results: SearchResult[]; notes: string[] } {
   console.error(`\n[ICON SEARCH DEBUG] Query: "${query}"`);
+  if (!query.trim()) return { results: [], notes: [] };
+  const exactName = query.trim().toLowerCase();
 
   // Normalize query: lowercase, replace hyphens/slashes with spaces
   const normalized = query.toLowerCase().replace(/[/-]/g, ' ');
@@ -56,6 +59,7 @@ export function searchIcons(query: string, data: IconsData): { results: SearchRe
 
   console.error(`[ICON SEARCH DEBUG] Found ${results.length} matches\n`);
 
+  sortExactFirst(results, exactName);
   return { results, notes: [] };
 }
 

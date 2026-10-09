@@ -15,7 +15,7 @@ keywords:
     breakpoints,
   ]
 ai_summary: How CSS utility classes are structured and added in dialtone-css — static LESS files, PostCSS generators, naming conventions, and Gulp build.
-last_updated: 2026-07-03
+last_updated: 2026-10-07
 related_packages: [dialtone-css, dialtone-tokens, postcss-responsive-variations]
 ---
 
@@ -24,6 +24,14 @@ related_packages: [dialtone-css, dialtone-tokens, postcss-responsive-variations]
 CSS utility classes in Dialtone live in `packages/dialtone-css/`. They can be defined in two ways depending on whether the class follows a repeating pattern or is a one-off.
 
 Prefer component primitives before adding or recommending utility classes when a primitive already exposes the same concern. For example, DtBox covers token-backed container surface, spacing, sizing, positioning, logical insets, and z-index. Keep utilities for non-component HTML, responsive variants, calc coordinates, reset values, arbitrary coordinates, and highly local adjustments.
+
+## Migration Guidance
+
+The unchanged preferred migration-helper configs supply generated search metadata and lint recommendations. `node scripts/generate-migration-guidance.mjs` extracts their flat literal maps into `packages/dialtone-css/postcss/migration-guidance.json` and the standalone lint projections; `--check` verifies all outputs agree with those sources. Do not edit the generated maps. The bounded extractor rejects unsupported syntax, so a future source-map shape change requires a deliberate extractor update.
+
+Legacy Dialtone 9 names and Dialtone 10 conventions use different stops. For spacing properties, `--dt-space-400` resolves to `0.8rem` with the token build's 10px base and maps to `--dt-spacing-100` (`8px`); the negative pair preserves `-8px`. Verify the installed target supports each replacement. Standalone package major versions do not identify the umbrella migration version.
+
+Run `npx --package @dialpad/dialtone-css dialtone-migration-helper` and select the relevant migration. `size-to-layout` retains its property-specific routes and default layout fallback, including exact mappings, approved nearest-stop value changes, and 0.5px → 1px spacing rounding. Mapped out-of-scale tokens become raw `rem` with follow-up review comments; unmapped tokens pass through unchanged. Legacy flex gutters and gap compatibility rules affect child margins and `--fl-gap`, so replacing them with native gap also requires layout review. In particular, `d-flg2` resolves to 1px despite its suffix and has no automatic replacement recommendation.
 
 ## Package Structure
 

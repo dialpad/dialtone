@@ -104,3 +104,23 @@ export function applySmartFilter(results: SearchResult[], data: UtilityClassesDa
 
   return { results: filtered, notes };
 }
+
+/**
+ * Smart filter that keeps an explicitly named result visible, even when it is
+ * deprecated, so a requested legacy name still returns its migration guidance.
+ */
+export function applySmartFilterKeepingExact(results: SearchResult[], data: UtilityClassesData | TokensData, exactName: string): { results: SearchResult[]; notes: string[] } {
+  const explicit = results.filter(result => result.name.toLowerCase() === exactName);
+  const filtered = applySmartFilter(results.filter(result => !explicit.includes(result)), data);
+  filtered.results.unshift(...explicit);
+  return filtered;
+}
+
+/**
+ * Sort in place: the exact name first, then by optional tier, then alphabetically.
+ * Ranks are computed once per result rather than per comparison.
+ */
+export function sortExactFirst(results: SearchResult[], exactName: string, tier: (name: string) => number = () => 0): SearchResult[] {
+  const ranks = new Map(results.map(result => [result, result.name.toLowerCase() === exactName ? 0 : 1 + tier(result.name)]));
+  return results.sort((a, b) => ranks.get(a)! - ranks.get(b)! || a.name.localeCompare(b.name));
+}

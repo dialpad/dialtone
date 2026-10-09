@@ -51,7 +51,7 @@ Use `null` to turn off a rule inherited from a shared configuration.
 | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- | ------- |
 | [no-base-color-tokens](https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/no-base-color-tokens.md)                 | Detects raw base-color tokens that should use a semantic color token.              | No      |
 | [no-deprecated-size-tokens](https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/lib/rules/no-deprecated-size-tokens.js)        | Detects deprecated size and space tokens that should use layout or spacing tokens. | No      |
-| [no-deprecated-space-tokens](https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/no-deprecated-space-tokens.md)     | Detects legacy space tokens that use the older space-to-size migration path.       | No      |
+| [no-deprecated-space-tokens](https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/no-deprecated-space-tokens.md)     | Detects legacy space tokens and recommends value-preserving spacing migrations.    | No      |
 | [no-deprecated-success-tokens](https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/no-deprecated-success-tokens.md) | Detects success color tokens that have been renamed to positive.                   | No      |
 | [no-mixins](https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/no-mixins.md)                                       | Detects Less mixins.                                                               | No      |
 | [recommend-font-style-tokens](https://github.com/dialpad/dialtone/blob/staging/packages/stylelint-plugin-dialtone/docs/rules/recommend-font-style-tokens.md)   | Detects separate font declarations that should use a composed font token.          | No      |
@@ -59,7 +59,7 @@ Use `null` to turn off a rule inherited from a shared configuration.
 
 <!-- GENERATED:stylelint-rules:end -->
 
-Do not enable `no-deprecated-space-tokens` and `no-deprecated-size-tokens` together. Both report `--dt-space-*`, but the older space rule points to the intermediate `--dt-size-*` tokens. Use `no-deprecated-size-tokens` for the current migration to `--dt-spacing-*` and `--dt-layout-*`.
+`no-deprecated-space-tokens` recommends exact `--dt-spacing-*` replacements for legacy space tokens used in spacing properties, with manual review for unsupported values or contexts. Use the migration helper's `space-to-spacing` route for those replacements. `no-deprecated-size-tokens` reports both generic size and space tokens; use it for broader migration detection, including size-to-layout work. Avoid enabling both rules together unless you want duplicate reports for `--dt-space-*`.
 
 ## Logical properties
 

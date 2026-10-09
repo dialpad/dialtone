@@ -13,6 +13,8 @@
         "{projectRoot}/lib/build/js/**/*",
         "{projectRoot}/postcss/*.cjs",
         "!{projectRoot}/postcss/*.test.cjs",
+        "{projectRoot}/postcss/migration-guidance.json",
+        "{workspaceRoot}/scripts/generate-migration-guidance.mjs",
         "{projectRoot}/gulpfile.cjs",
         "{projectRoot}/dialtone.less"
       ],

@@ -97,6 +97,19 @@ describe('dialtone CLI (built)', { timeout: 30_000 }, () => {
     expect(r.stderr).toContain('Using local Dialtone data: @dialpad/dialtone-vue@4.0.2 (utilities: bundled, tokens: bundled, icons: bundled, docs: bundled)');
   });
 
+  test('token --name accepts a canonical CSS token identifier', () => {
+    const r = run(['token', '--name=--dt-spacing-100', '--values', '--format', 'json']);
+    expect(r.status).toBe(0);
+    expect(JSON.parse(r.stdout).name).toBe('--dt-spacing-100');
+  });
+
+  test('explicit legacy token warns and preserves qualified migration metadata in JSON', () => {
+    const r = run(['token', '--name=--dt-space-400', '--values', '--format', 'json']);
+    expect(r.status).toBe(0);
+    expect(JSON.parse(r.stdout)).toMatchObject({ name: '--dt-space-400', metadata: { deprecated: true, alternatives: ['--dt-spacing-100'] } });
+    expect(r.stderr).toContain('--dt-spacing-100');
+  });
+
   test('prints no debug lines by default', () => {
     const r = run(['search', 'button']);
     expect(r.status).toBe(0);

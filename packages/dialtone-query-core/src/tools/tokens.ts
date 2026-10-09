@@ -2,7 +2,7 @@
 // TOKENS SEARCH TOOL
 // ============================================================================
 
-import { applySmartFilter } from '../utils/filters.js';
+import { applySmartFilterKeepingExact, sortExactFirst } from '../utils/filters.js';
 import type {
   TokensData,
   TokenData,
@@ -11,14 +11,26 @@ import type {
   SearchResult
 } from '../types.js';
 
+// First matching token-name pattern picks the CSS property for the usage example.
+const USAGE_PROPERTIES: [RegExp, string][] = [
+  [/--dt-(spacing|space)-.*-negative$/, 'margin'],
+  [/--dt-(spacing|space)-/, 'padding'],
+  [/--dt-layout-/, 'inline-size'],
+  [/--dt-size-radius-/, 'border-radius'],
+  [/--dt-size-border-/, 'border-width'],
+  [/color/, 'color'],
+];
+
 /**
  * Search design tokens using simple AND-logic (like Dialtone docs site)
  */
 export function searchTokens(query: string, data: TokensData, options?: { includeHsl?: boolean }): { results: SearchResult[]; notes: string[] } {
   console.error(`\n[TOKEN SEARCH DEBUG] Query: "${query}"`);
+  if (!query.trim()) return { results: [], notes: [] };
+  const exactName = query.trim().replace(/^var\(([^)]+)\)$/, '$1').toLowerCase();
 
   // Normalize query: lowercase, replace hyphens/slashes with spaces
-  const normalized = query.toLowerCase().replace(/[/-]/g, ' ');
+  const normalized = exactName.replace(/[/-]/g, ' ');
   const words = normalized.split(/\s+/).filter(w => w.length > 0);
 
   // Create regex for each word (handle px/rem conversion)
@@ -100,7 +112,8 @@ export function searchTokens(query: string, data: TokensData, options?: { includ
   console.error(`[TOKEN SEARCH DEBUG] Found ${results.length} raw matches`);
 
   // Apply smart filter (remove deprecated, swap discouraged with alternatives)
-  const { results: filtered, notes } = applySmartFilter(results, data);
+  const { results: filtered, notes } = applySmartFilterKeepingExact(results, data, exactName);
+  sortExactFirst(filtered, exactName);
 
   console.error(`[TOKEN SEARCH DEBUG] After filter: ${filtered.length} results\n`);
 
@@ -142,12 +155,12 @@ export function formatTokenResults(results: SearchResult[], query: string): stri
 
     // Show theme variants
     output += `   Theme Variants:\n`;
-    const themes = Object.entries(result.details.allThemes) as [string, ThemeData][];
+    const themes = Object.entries(result.details.allThemes).filter(([name]) => name !== 'metadata') as [string, ThemeData][];
 
     // Show first few themes as examples
     const themesToShow = themes.slice(0, 3);
     themesToShow.forEach(([themeName, themeData]: [string, ThemeData]) => {
-      const valueStr = themeData && themeData.value ? String(themeData.value) : 'N/A';
+      const valueStr = String(themeData?.value ?? 'N/A');
       const descStr = themeData && themeData.description ? String(themeData.description) : '';
       const desc = descStr ? ` - ${descStr}` : '';
       output += `   - ${themeName}: ${valueStr}${desc}\n`;
@@ -158,7 +171,9 @@ export function formatTokenResults(results: SearchResult[], query: string): stri
     }
 
     // Show usage example
-    output += `   Usage: style="color: var(${result.name})"\n`;
+    const property = USAGE_PROPERTIES.find(([pattern]) => pattern.test(result.name))?.[1];
+    if (property) output += `   Usage: style="${property}: var(${result.name})"\n`;
+    else output += `   Usage: var(${result.name}) — choose a property appropriate to this token.\n`;
     output += `   Note: This will automatically use the correct value for the active theme.\n\n`;
   });
 
