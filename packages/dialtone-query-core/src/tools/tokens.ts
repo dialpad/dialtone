@@ -158,7 +158,14 @@ export function formatTokenResults(results: SearchResult[], query: string): stri
     }
 
     // Show usage example
-    output += `   Usage: style="color: var(${result.name})"\n`;
+    const property = /--dt-(spacing|space)-.*-negative$/.test(result.name) ? 'margin'
+      : /--dt-(spacing|space)-/.test(result.name) ? 'padding'
+      : /--dt-layout-/.test(result.name) ? 'inline-size'
+        : /--dt-size-radius-/.test(result.name) ? 'border-radius'
+          : /--dt-size-border-/.test(result.name) ? 'border-width'
+            : /color/.test(result.name) ? 'color' : null;
+    if (property) output += `   Usage: style="${property}: var(${result.name})"\n`;
+    else output += `   Usage: var(${result.name}) — choose a property appropriate to this token.\n`;
     output += `   Note: This will automatically use the correct value for the active theme.\n\n`;
   });
 

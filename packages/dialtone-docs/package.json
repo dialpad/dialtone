@@ -4,7 +4,7 @@
   "description": "Documentation generation and validation for Dialtone",
   "type": "module",
   "scripts": {
-    "build": "node src/generators/build-ai-docs.mjs && node src/generators/build-public-docs.mjs",
+    "build": "node src/generators/build-ai-docs.mjs && node src/generators/build-public-docs.mjs && node src/generators/build-component-doc-links.mjs",
     "check-freshness": "node src/generators/check-freshness.mjs",
     "test": "vitest run",
     "test:watch": "vitest"
@@ -15,8 +15,13 @@
     "vitest": "^4.1.0"
   },
   "exports": {
-    "./dist/public-docs.json": "./dist/public-docs.json"
+    "./dist/public-docs.json": "./dist/public-docs.json",
+    "./dist/component-doc-links.json": "./dist/component-doc-links.json"
   },
-  "keywords": ["documentation", "ai", "dialtone"],
+  "keywords": [
+    "documentation",
+    "ai",
+    "dialtone"
+  ],
   "license": "MIT"
 }

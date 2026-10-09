@@ -11,8 +11,14 @@ on:
       - 'packages/dialtone-mcp-server/**'
       - '.github/workflows/unit_tests.yml'
       - 'scripts/build-dialtone-vue-docs.mjs'
-      - 'packages/dialtone-css/postcss/dialtone-docs.cjs'
-      - 'packages/dialtone-docs/src/generators/**'
+      - 'packages/dialtone-docs/**'
+      - 'packages/dialtone-css/**'
+      - 'packages/dialtone-icons/**'
+      - 'apps/dialtone-documentation/docs/components/**'
+      - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
+      - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
+      - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
+      - 'scripts/lib/vue-component-identity.mjs'
   push:
     branches:
       - staging
@@ -25,8 +31,14 @@ on:
       - 'packages/dialtone-mcp-server/**'
       - '.github/workflows/unit_tests.yml'
       - 'scripts/build-dialtone-vue-docs.mjs'
-      - 'packages/dialtone-css/postcss/dialtone-docs.cjs'
-      - 'packages/dialtone-docs/src/generators/**'
+      - 'packages/dialtone-docs/**'
+      - 'packages/dialtone-css/**'
+      - 'packages/dialtone-icons/**'
+      - 'apps/dialtone-documentation/docs/components/**'
+      - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
+      - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
+      - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
+      - 'scripts/lib/vue-component-identity.mjs'
 
 env:
   HUSKY: 0
@@ -58,15 +70,23 @@ jobs:
               - 'packages/dialtone-tokens/**'
             combinator:
               - 'packages/combinator/**'
-            # Lookup adapters and the scripts that generate their data.
+            # Lookup adapters and sources for their bundled datasets.
             cli:
               - 'packages/dialtone-query-core/**'
               - 'packages/dialtone-cli/**'
               - 'packages/dialtone-mcp-server/**'
+              - 'packages/dialtone-docs/**'
+              - 'packages/dialtone-css/**'
+              - 'packages/dialtone-icons/**'
+              - 'packages/dialtone-vue/**'
+              - 'packages/dialtone-tokens/**'
               - '.github/workflows/unit_tests.yml'
               - 'scripts/build-dialtone-vue-docs.mjs'
-              - 'packages/dialtone-css/postcss/dialtone-docs.cjs'
-              - 'packages/dialtone-docs/src/generators/**'
+              - 'scripts/lib/vue-component-identity.mjs'
+              - 'apps/dialtone-documentation/docs/components/**'
+              - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
+              - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
+              - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
 
   test:
     needs: changes
@@ -122,6 +142,7 @@ jobs:
     needs: changes
     if: needs.changes.outputs.cli == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     permissions:
       packages: read
     steps:
@@ -133,8 +154,17 @@ jobs:
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
 
+      - name: Build lookup adapters and their datasets
+        run: pnpm nx run-many -t build -p dialtone-cli dialtone-mcp-server
+
       - name: Run dialtone-query-core and dialtone-cli tests
         run: pnpm nx run-many -t test -p dialtone-query-core dialtone-cli
+
+      - name: Test source-derived component documentation links
+        run: pnpm --dir packages/dialtone-docs test
+
+      - name: Test MCP query protocol contracts
+        run: pnpm --dir packages/dialtone-mcp-server test:protocol
 
       - name: Build and test MCP startup and shutdown
         run: pnpm nx run dialtone-mcp-server:test-startup

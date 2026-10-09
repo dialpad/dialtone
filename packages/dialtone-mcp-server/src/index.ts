@@ -1,19 +1,13 @@
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
-import { CallToolRequestSchema, ListToolsRequestSchema } from "@modelcontextprotocol/sdk/types.js";
+import { registerQueryTools, ROUTING_INSTRUCTIONS } from "./query-tools.js";
 import pkg from '../package.json' with { type: 'json' };
 import clientRules from '../client-rules.json' with { type: 'json' };
 
 import {
   utilityClasses, tokens, components, icons, documentation,
-  searchUtilityClasses, formatResults, buildCompoundPropertiesSet,
-  searchTokens, formatTokenResults,
-  searchComponents, formatComponentResults,
-  searchIcons, formatIconResults,
-  searchDocumentation, formatDocumentationResults,
+  buildCompoundPropertiesSet,
 } from '@dialpad/dialtone-query-core';
-
-import type { TokensData, IconsData } from '@dialpad/dialtone-query-core';
 
 const UPDATE_CHECK_TIMEOUT_MS = 2000;
 
@@ -65,6 +59,7 @@ async function main() {
     name: "dialtone-mcp-server",
     version: pkg.version,
   }, {
+    instructions: ROUTING_INSTRUCTIONS,
     capabilities: {
       resources: {},
       tools: {},
@@ -156,190 +151,7 @@ async function main() {
     };
   });
 
-  // Handle tool discovery - tell clients what tools are available
-  server.server.setRequestHandler(ListToolsRequestSchema, async () => {
-    return {
-      tools: [
-        {
-          name: "search_utility_classes",
-          description: "Search for CSS utility classes to style HTML elements. Use when query mentions CSS properties (padding, margin, display, flex, width, border, color) or CSS values (8px, 100%, center, auto, bold). Returns classes like d-p-100, d-d-flex, d-w100p, d-mbs-auto.",
-          inputSchema: {
-            type: "object",
-            properties: {
-              query: {
-                type: "string",
-                description: "CSS property and/or value (e.g., 'padding 8px', 'display flex', 'width 100%', 'margin block start auto')"
-              },
-              limit: {
-                type: "number",
-                description: "Maximum number of results to return (1-50, default 15)",
-                default: 15,
-                minimum: 1,
-                maximum: 50
-              }
-            },
-            required: ["query"]
-          }
-        },
-        {
-          name: "search_tokens",
-          description: "Search for design tokens (CSS variables) from Dialtone's design system. Use when query mentions token categories (color, spacing, layout, font, size, shadow) or semantic names (primary, positive, critical, warning, info, foreground, background). Returns tokens like --dt-color-foreground-primary, --dt-spacing-100.",
-          inputSchema: {
-            type: "object",
-            properties: {
-              query: {
-                type: "string",
-                description: "Token category, name, or value (e.g., 'color primary', 'spacing 400', 'layout 200', 'font family')"
-              },
-              limit: {
-                type: "number",
-                description: "Maximum number of results to return (1-50, default 15)",
-                default: 15,
-                minimum: 1,
-                maximum: 50
-              }
-            },
-            required: ["query"]
-          }
-        },
-        {
-          name: "search_components",
-          description: "Search for Vue components from Dialtone's component library. Use when query mentions UI elements or component names (button, modal, input, dropdown, checkbox, avatar, badge, card, tooltip). Returns components like DtButton, DtModal with props and usage info.",
-          inputSchema: {
-            type: "object",
-            properties: {
-              query: {
-                type: "string",
-                description: "Component name or UI element (e.g., 'button', 'modal', 'checkbox', 'DtDropdown')"
-              },
-              limit: {
-                type: "number",
-                description: "Maximum number of results to return (1-30, default 10)",
-                default: 10,
-                minimum: 1,
-                maximum: 30
-              }
-            },
-            required: ["query"]
-          }
-        },
-        {
-          name: "search_icons",
-          description: "Search for icons from Dialtone's icon library and learn how to use icon components. Use when query mentions icon names (bell, arrow, calendar), categories (alerts, communication, time), visual concepts (notification, warning, email), or when user asks how to use/implement icons. Icons are imported from @dialpad/dialtone-icons/vue, not @dialpad/dialtone-vue. Returns icon names like 'alert-circle', 'bell-ring', 'calendar-plus' with tree-shakable usage examples.",
-          inputSchema: {
-            type: "object",
-            properties: {
-              query: {
-                type: "string",
-                description: "Icon name, category, or keyword (e.g., 'notification', 'arrow up', 'calendar', 'warning')"
-              },
-              limit: {
-                type: "number",
-                description: "Maximum number of results to return (1-50, default 20)",
-                default: 20,
-                minimum: 1,
-                maximum: 50
-              }
-            },
-            required: ["query"]
-          }
-        },
-        {
-          name: "search_documentation",
-          description: "Search Dialtone documentation for usage patterns, accessibility rules, migration guides, design principles, and how-to guidance. Use when query mentions behavior (loading, disabled, deprecated, migration, validation, dark mode), patterns (do/don't, composition, recipe), or asks why/how/difference ('modal close behavior', 'tooltip on disabled', 'DtOldPopover replacement'). NOT for finding components / icons / tokens / utility classes by name — use search_components / search_icons / search_tokens / search_utility_classes for those. Returns documentation sections with content excerpts.",
-          inputSchema: {
-            type: "object",
-            properties: {
-              query: {
-                type: "string",
-                description: "2–5 keyword phrase — topic, behavior, or concept (e.g., 'button loading state', 'modal outside click', 'tooltip disabled', 'migrate DtOldPopover')"
-              },
-              limit: {
-                type: "number",
-                description: "Maximum number of results to return (1-30, default 10)",
-                default: 10,
-                minimum: 1,
-                maximum: 30
-              }
-            },
-            required: ["query"]
-          }
-        }
-      ]
-    };
-  });
-
-  // Handle tool execution - route to correct search function
-  server.server.setRequestHandler(CallToolRequestSchema, async (request) => {
-    console.error('[MCP] Tool call received:', request.params.name);
-
-    const toolName = request.params.name;
-    const args = request.params.arguments || {};
-    const query = args.query;
-    const limit = args.limit || 15;
-
-    // Validate query
-    if (!query || typeof query !== 'string') {
-      return {
-        content: [{ type: "text", text: "Error: 'query' parameter is required and must be a string" }],
-        isError: true
-      };
-    }
-
-    try {
-      let searchResult;
-      let formatterFunction;
-
-      // Route to correct search function
-      if (toolName === "search_utility_classes") {
-        searchResult = searchUtilityClasses(query, utilityClasses);
-        formatterFunction = formatResults;
-      } else if (toolName === "search_tokens") {
-        searchResult = searchTokens(query, tokens as TokensData);
-        formatterFunction = formatTokenResults;
-      } else if (toolName === "search_components") {
-        searchResult = searchComponents(query, components);
-        formatterFunction = formatComponentResults;
-      } else if (toolName === "search_icons") {
-        searchResult = searchIcons(query, icons as IconsData);
-        formatterFunction = formatIconResults;
-      } else if (toolName === "search_documentation") {
-        searchResult = searchDocumentation(query, documentation);
-        formatterFunction = formatDocumentationResults;
-      } else {
-        throw new Error(`Unknown tool: ${toolName}`);
-      }
-
-      // Apply limit
-      const limitedResults = searchResult.results.slice(0, Number(limit));
-
-      console.error(`[${toolName}] Found ${searchResult.results.length} results, limited to ${limitedResults.length}`);
-
-      // Format results
-      let formatted = formatterFunction(limitedResults, query);
-
-      // Add notes if any
-      if (searchResult.notes.length > 0) {
-        formatted += `\n\n**Notes:**\n${searchResult.notes.map(n => `- ${n}`).join('\n')}`;
-      }
-
-      return {
-        content: [{
-          type: "text",
-          text: formatted
-        }]
-      };
-    } catch (error) {
-      console.error(`[${toolName}] Error:`, error);
-      return {
-        content: [{
-          type: "text",
-          text: `Error: ${error instanceof Error ? error.message : String(error)}`
-        }],
-        isError: true
-      };
-    }
-  });
+  registerQueryTools(server);
 
   // Start the server
   const transport = new StdioServerTransport();

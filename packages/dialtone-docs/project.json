@@ -3,20 +3,36 @@
   "targets": {
     "build": {
       "executor": "nx:run-script",
-      "options": { "script": "build" },
+      "options": {
+        "script": "build"
+      },
       "inputs": [
         "{projectRoot}/src/**",
-        "{workspaceRoot}/apps/dialtone-documentation/docs/**/*.md"
+        "{workspaceRoot}/apps/dialtone-documentation/docs/**/*.md",
+        "{workspaceRoot}/scripts/lib/vue-component-identity.mjs",
+        "{workspaceRoot}/packages/dialtone-query-core/src/component-name.js",
+        "{workspaceRoot}/packages/dialtone-vue/index.js",
+        "{workspaceRoot}/packages/dialtone-vue/components/**/index.js",
+        "{workspaceRoot}/packages/dialtone-vue/package.json",
+        "{workspaceRoot}/apps/dialtone-documentation/scripts/lib/frontmatter.mjs",
+        "{workspaceRoot}/apps/dialtone-documentation/scripts/lib/source-page.mjs",
+        "{workspaceRoot}/apps/dialtone-documentation/docs/.vuepress/site-reference.js"
       ],
-      "outputs": ["{projectRoot}/dist/**"]
+      "outputs": [
+        "{projectRoot}/dist/**"
+      ]
     },
     "test": {
       "executor": "nx:run-script",
-      "options": { "script": "test" }
+      "options": {
+        "script": "test"
+      }
     },
     "check-freshness": {
       "executor": "nx:run-script",
-      "options": { "script": "check-freshness" }
+      "options": {
+        "script": "check-freshness"
+      }
     }
   }
 }

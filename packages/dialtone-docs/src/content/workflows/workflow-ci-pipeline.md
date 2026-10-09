@@ -3,8 +3,8 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-10-07
-related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server]
+last_updated: 2026-10-08
+related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server, dialtone-docs]
 ---
 
 # CI Pipeline
@@ -41,7 +41,7 @@ These checks are required on every PR:
 
 ### `unit_tests.yml`
 
-**Trigger:** Push to `staging`, PR to any branch (paths: `packages/dialtone-vue/**`, `packages/dialtone-tokens/**`, `packages/combinator/**`, `packages/dialtone-query-core/**`, `packages/dialtone-cli/**`, `packages/dialtone-mcp-server/**`, `.github/workflows/unit_tests.yml`, and the data generators listed for `test-cli` below)
+**Trigger:** Push to `staging`, PR to any branch. Package, dataset and documentation-link sources listed below, plus `unit_tests.yml` itself, trigger the workflow.
 
 **What it does:** A `changes` job (`dorny/paths-filter`) decides which test jobs run. Each job sets up the environment, then runs its command:
 
@@ -50,11 +50,24 @@ These checks are required on every PR:
 | `test` | `packages/dialtone-vue/**` | `pnpm nx run dialtone-vue:test:coverage` |
 | `test-tokens` | `packages/dialtone-tokens/**` | `pnpm nx run dialtone-tokens:test` |
 | `test-combinator` | `packages/combinator/**` | `pnpm nx run dialtone-combinator:test` |
-| `test-cli` | `packages/dialtone-query-core/**`, `packages/dialtone-cli/**`, `packages/dialtone-mcp-server/**`, `.github/workflows/unit_tests.yml`, and the data generators `scripts/build-dialtone-vue-docs.mjs`, `packages/dialtone-css/postcss/dialtone-docs.cjs`, `packages/dialtone-docs/src/generators/**` | `pnpm nx run-many -t test -p dialtone-query-core dialtone-cli`, `pnpm nx run dialtone-mcp-server:test-startup`, and `pnpm --dir packages/dialtone-mcp-server test:release-paths` |
+| `test-cli` | Lookup packages, their bundled dataset sources and documentation-link sources | Builds CLI/MCP and prerequisites, then runs core/CLI, docs, MCP protocol, startup/shutdown and release-selection tests; commands below |
 
 The `test` job outputs a coverage report in JSON and HTML. Coverage thresholds enforced: 80% branches, 70% functions, 85% lines and statements. Build fails if thresholds are not met.
 
-In `test-cli`, the query-core and CLI test targets depend on their project's build. The builds generate the component, token, utility, icon, and documentation data the tests read, and the CLI's smoke tests run its built `build/index.js`. A change to a generator can change the shape of that data, so it runs `test-cli`. A change to the content alone, such as a component, icon, or docs page, doesn't; a test it breaks fails on the next PR that runs `test-cli`.
+`test-cli` runs when query-core, CLI, MCP, docs, CSS, icons, Vue or tokens change. It also covers component Markdown pages, the Vue API generator and identity helper, and the site-reference, frontmatter and source-page helpers used to generate documentation links. The exact path filters are in `unit_tests.yml`.
+
+The job has a 30-minute timeout and runs:
+
+```bash
+pnpm nx run-many -t build -p dialtone-cli dialtone-mcp-server
+pnpm nx run-many -t test -p dialtone-query-core dialtone-cli
+pnpm --dir packages/dialtone-docs test
+pnpm --dir packages/dialtone-mcp-server test:protocol
+pnpm nx run dialtone-mcp-server:test-startup
+pnpm --dir packages/dialtone-mcp-server test:release-paths
+```
+
+The build generates the component, token, utility, icon and documentation data consumed by the adapters. CLI smoke tests use the built entrypoint; MCP protocol tests exercise tool registration, inputs, complete selected API retrieval, bounded replies and documentation continuations through the SDK. These checks establish retrieval behavior, not automatic tool use by coding assistants.
 
 The MCP startup target also depends on its build, so startup and shutdown checks run against a built server. The release-path suite checks commit selection using the installed release implementation without publishing packages.
 

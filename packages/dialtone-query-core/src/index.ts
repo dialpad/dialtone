@@ -60,3 +60,16 @@ export { searchDocumentation, formatDocumentationResults } from './tools/docs.js
 
 // Filters
 export { applySmartFilter } from './utils/filters.js';
+
+export { getComponentDetail, COMPONENT_SECTIONS } from './component-detail.js';
+export type { ComponentDetailArgs, ComponentSection } from './component-detail.js';
+
+export { bundledProvenance, componentDocumentation } from "./data.js";
+export { createRetrievalEnvelope, formatRetrievalEnvelope, MATCH_STATES, RETRIEVAL_BUDGETS } from "./retrieval.js";
+export type { BundledProvenance, DomainStamp, MatchState, Continuation, RetrievalEnvelope } from "./retrieval.js";
+export { getComponentDocumentation } from "./component-documentation.js";
+export type { ComponentDocCatalog, ComponentDocPage } from "./component-documentation.js";
+export { getDocumentationDetail } from './tools/docs.js';
+
+export { getValueDetail, formatTokenThemes } from './value-retrieval.js';
+export type { TokenThemeRecord } from './value-retrieval.js';
