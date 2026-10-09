@@ -17,7 +17,6 @@
           {{ mode.label }} Mode
         </h3>
         <dt-button
-          v-if="!isStaticMode(mode.value)"
           :size="200"
           importance="outlined"
           kind="muted"
@@ -34,14 +33,13 @@
         align="center"
         class="d-p-300 d-bar-400 d-ba d-bc-subtle d-bgc-secondary d-hmn-200"
       >
+        <!-- Every mode loops, like the Figma prototypes, so they can be compared side by side -->
         <dt-motion-text
           :ref="el => { if (el) modeRefs[mode.value] = el }"
           :text="exampleText"
           :animation-mode="mode.value"
-          :speed="300"
-          :auto-start="false"
-          :loop="isStaticMode(mode.value)"
-          class="d-headline--lg"
+          loop
+          class="d-headline--xl"
         />
       </dt-stack>
     </dt-stack>
@@ -52,6 +50,15 @@
 import { DtMotionText, MOTION_TEXT_ANIMATION_MODES } from '@/components/MotionText';
 import { DtButton } from '@/components/Button';
 import { DtStack } from '@/components/Stack';
+
+const MODE_DESCRIPTIONS = {
+  'gradient-in': 'Each word fades in showing its slice of a purple-to-orange gradient, then settles into the text color',
+  'fade-in': 'Each word fades in, one after another',
+  'slide-in': 'Each word fades in while rising into place',
+  'slide-in-gradient': 'Each word rises into place showing its slice of a purple-to-orange gradient, then settles into the text color',
+  'gradient-sweep': 'Text stays visible while a purple-to-orange gradient sweeps across it word by word, holds, and fades back',
+  shimmer: 'Text stays visible while a dimmed band sweeps left to right across it',
+};
 
 export default {
   name: 'DtMotionTextModesStory',
@@ -64,22 +71,15 @@ export default {
   data () {
     return {
       modeRefs: {},
-      exampleText: 'Experience the magic of animated text',
-      animationModes: MOTION_TEXT_ANIMATION_MODES.map(mode => ({
+      // Reference sentence used by the "Motion-Text-Effects" Figma spec
+      exampleText: 'The AI platform for customer experience',
+      // `none` has no motion to show
+      animationModes: MOTION_TEXT_ANIMATION_MODES.filter(mode => mode !== 'none').map(mode => ({
         value: mode,
         label: this.formatLabel(mode),
-        description: this.getDescription(mode),
+        description: MODE_DESCRIPTIONS[mode] || '',
       })),
     };
-  },
-
-  mounted () {
-    // Start all animations on mount
-    Object.values(this.modeRefs).forEach(ref => {
-      if (ref) {
-        setTimeout(() => ref.start(), 100);
-      }
-    });
   },
 
   methods: {
@@ -89,27 +89,11 @@ export default {
       ).join(' ');
     },
 
-    getDescription (mode) {
-      const descriptions = {
-        'gradient-in': 'Characters appear one by one with a gradient highlight reveal effect',
-        'fade-in': 'Characters fade in smoothly with opacity transitions',
-        'slide-in': 'Words slide up from below with smooth vertical movement',
-        'gradient-sweep': 'Text is static while a gradient sweeps across continuously',
-        'shimmer': 'Text is static while a black and white gradient pulses continuously',
-        'none': 'All text appears instantly without animation',
-      };
-      return descriptions[mode] || 'Unknown animation mode';
-    },
-
-    isStaticMode (mode) {
-      return mode === 'gradient-sweep' || mode === 'shimmer';
-    },
-
     restartAnimation (mode) {
       const ref = this.modeRefs[mode];
       if (ref) {
         ref.reset();
-        setTimeout(() => ref.start(), 100);
+        this.$nextTick(() => ref.start());
       }
     },
   },

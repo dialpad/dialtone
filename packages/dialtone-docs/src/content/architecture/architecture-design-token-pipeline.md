@@ -3,7 +3,7 @@ type: architecture
 category: architecture
 keywords: [design-tokens, style-dictionary, figma, dialtone-tokens, css-custom-properties, less, themes, token-pipeline, rem, runtime-theming]
 ai_summary: How Dialtone tokens flow from Figma through Style Dictionary into CSS, LESS, JS, and Vue across 50+ brands with a four-dimension layered runtime API.
-last_updated: 2026-05-09
+last_updated: 2026-10-07
 related_packages: [dialtone-tokens, dialtone-css, dialtone-vue]
 ---
 
@@ -175,6 +175,8 @@ Style Dictionary builds 7 output formats simultaneously:
 | iOS Swift | `enum DialtoneTokens { static let colorForegroundPrimary }` | — | `dist/ios/` |
 
 All CSS and LESS outputs are prefixed with `--dt` to avoid collisions with other CSS variables in the consuming application.
+
+Gradient tokens (color tokens whose value starts with `linear-gradient(`, such as `color.gradient.gold-red-magenta-purple` and `color.gradient.orange-red-magenta-purple`) are web-only: they are emitted to CSS, LESS, JSON, and `doc.json`, and filtered out of the Android and iOS outputs by the `startsWith('linear-gradient')` file filters in `build-sd-transforms.js`.
 
 ~120 CSS files and the equivalent LESS files are generated — one per brand × mode combination plus the layered per-dimension overrides (e.g., `tokens-dp-light.css`, `tokens-dp-dark.css`, `tokens-aegean-light.css`).
 

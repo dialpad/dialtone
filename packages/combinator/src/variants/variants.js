@@ -35,6 +35,7 @@ import DtListItemGroup from './variants_list_item_group.js';
 import DtLoader from './variants_loader.js';
 import DtModal from './variants_modal.js';
 import DtModeIsland from './variants_mode_island.js';
+import DtMotionText from './variants_motion_text.js';
 import DtNotice from './variants_notice.js';
 import DtPagination from './variants_pagination.js';
 import DtPopover from './variants_popover.js';
@@ -98,6 +99,7 @@ export default function variants () {
     DtLoader,
     DtModal,
     DtModeIsland,
+    DtMotionText,
     DtNotice,
     DtPagination,
     DtPopover,
