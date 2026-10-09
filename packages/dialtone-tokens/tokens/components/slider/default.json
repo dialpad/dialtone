@@ -1,0 +1,10 @@
+{
+  "slider": {
+    "color": {
+      "indicator": {
+        "value": "{color.surface.brand-strong}",
+        "type": "color"
+      }
+    }
+  }
+}

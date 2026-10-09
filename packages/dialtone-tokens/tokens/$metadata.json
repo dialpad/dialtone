@@ -50,6 +50,7 @@
     "components/presence/default",
     "components/presence/dark",
     "components/radio/default",
+    "components/slider/default",
     "theme/raincloud/default",
     "theme/raincloud/dark",
     "theme/eucalyptus/default",
