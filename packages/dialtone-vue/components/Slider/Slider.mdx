@@ -43,7 +43,7 @@ import { DtSlider } from '@dialpad/dialtone-vue';
 <dt-slider
   v-model="priceRange"
   label="Price range"
-  :marks="[{ value: 0, text: 'Min $0' }, { value: 100, text: 'Max $100' }]"
+  :show-marks="[{ value: 0, text: 'Min $0' }, { value: 100, text: 'Max $100' }]"
   :get-value-text="(value, index) => index === 0 ? `Minimum: $${value}` : `Maximum: $${value}`"
 />
 <!-- where priceRange = ref([20, 70]) -->
@@ -58,7 +58,7 @@ import { DtSlider } from '@dialpad/dialtone-vue';
   :min="0"
   :max="10"
   :step="1"
-  :ticks="1"
+  :show-ticks="1"
 />
 ```
 

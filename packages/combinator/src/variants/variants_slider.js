@@ -3,20 +3,21 @@ export default {
   // capabilities (single vs. range, ticks vs. marks vs. neither, icons vs.
   // none, fillOrigin) rather than variations on the same shape.
   //
-  // Labels use the scoped #label slot (`value` binding — mirrors the
-  // update:modelValue payload shape) instead of the static `label` prop, so
-  // the value shown updates live while dragging rather than freezing at the
-  // preset's initial value.
+  // Every other preset's label uses the scoped #label slot (`value` binding —
+  // mirrors the update:modelValue payload shape) instead of the static
+  // `label` prop, so the value shown updates live while dragging rather than
+  // freezing at the preset's initial value. default is the exception: it's
+  // also what renders the component-wall thumbnail and the docs page's own
+  // top preview widget, where the plain `label` prop is the far more common
+  // real-world usage worth demonstrating there.
   default: {
     props: {
       modelValue: { initialValue: 50 },
       min: { initialValue: 0 },
       max: { initialValue: 100 },
       step: { initialValue: 1 },
-      ticks: { initialValue: 10 },
-    },
-    slots: {
-      label: { initialValue: 'Slider label · {{ value }}' },
+      showTicks: { initialValue: 10 },
+      label: { initialValue: 'Slider label' },
     },
   },
 
@@ -40,8 +41,8 @@ export default {
       min: { initialValue: 0 },
       max: { initialValue: 4 },
       step: { initialValue: 1 },
-      ticks: { initialValue: 1 },
-      marks: { initialValue: [{ value: 0, text: 'Off' }, { value: 4, text: 'Max' }] },
+      showTicks: { initialValue: 1 },
+      showMarks: { initialValue: [{ value: 0, text: 'Off' }, { value: 4, text: 'Max' }] },
     },
     slots: {
       label: { initialValue: 'Noise cancellation · {{ ["Off", "Low", "Medium", "High", "Max"][value] }}' },
@@ -56,7 +57,7 @@ export default {
       min: { initialValue: 1 },
       max: { initialValue: 90 },
       step: { initialValue: 1 },
-      marks: { initialValue: [1, 30, 60, 90] },
+      showMarks: { initialValue: [1, 30, 60, 90] },
     },
     slots: {
       label: { initialValue: 'Auto-delete recordings after · {{ value[0] }}–{{ value[1] }} days' },
@@ -85,7 +86,7 @@ export default {
       max: { initialValue: 1000 },
       step: { initialValue: 1 },
       snapPoints: { initialValue: 100 },
-      ticks: { initialValue: 100 },
+      showTicks: { initialValue: 100 },
     },
     slots: {
       label: { initialValue: 'Budget cap · ${{ value }}' },

@@ -22,7 +22,7 @@
       <dt-slider
         v-model="rangeValue"
         label="Price range"
-        :marks="[{ value: 0, text: 'Min $0' }, { value: 100, text: 'Max $100' }]"
+        :show-marks="[{ value: 0, text: 'Min $0' }, { value: 100, text: 'Max $100' }]"
         :get-value-text="(value, index) => index === 0 ? `Minimum: $${value}` : `Maximum: $${value}`"
       />
     </section>
@@ -35,7 +35,7 @@
       <dt-slider
         v-model="iconValue"
         label="Brightness"
-        :marks="false"
+        :show-marks="false"
       >
         <template #start>
           <span>0%</span>
@@ -54,7 +54,7 @@
       <dt-slider
         v-model="emojiValue"
         label="Mood"
-        :marks="false"
+        :show-marks="false"
       >
         <template #start>
           <span
@@ -82,7 +82,7 @@
         :min="0"
         :max="10"
         :step="1"
-        :ticks="1"
+        :show-ticks="1"
       />
     </section>
 
@@ -114,7 +114,7 @@
         label="Temperature"
         :min="-20"
         :max="40"
-        :marks="[-20, 0, 40]"
+        :show-marks="[-20, 0, 40]"
       >
         <template #start>
           <span
@@ -142,8 +142,19 @@
         :min="-100"
         :max="100"
         :fill-origin="0"
-        :marks="[{ value: -100, text: '−100' }, { value: 0, text: '0' }, { value: 100, text: '100' }]"
-        :ticks="25"
+        :show-marks="[{ value: -100, text: '−100' }, { value: 0, text: '0' }, { value: 100, text: '100' }]"
+        :show-ticks="25"
+      />
+    </section>
+
+    <!-- Value readout: tooltip (the default) -->
+    <section>
+      <p class="d-body--sm-compact d-mbe-300 d-fc-tertiary">
+        Value readout — tooltip (the default; hover, drag, or focus to show)
+      </p>
+      <dt-slider
+        v-model="readoutTooltipValue"
+        label="Volume"
       />
     </section>
 
@@ -194,7 +205,7 @@
         :max="100"
         :step="1"
         :fill-origin="0"
-        :marks="[{ value: -100, text: '-100%' }, { value: 0, text: '0%' }, { value: 100, text: '100%' }]"
+        :show-marks="[{ value: -100, text: '-100%' }, { value: 0, text: '0%' }, { value: 100, text: '100%' }]"
       >
         <template #label>
           Percentage &middot; {{ percentageValue }}%
@@ -284,8 +295,8 @@
           :min="12"
           :max="32"
           :step="2"
-          :ticks="2"
-          :marks="true"
+          :show-ticks="2"
+          :show-marks="true"
         >
           <template #label>
             Chat text size &middot; {{ fontSize }}px
@@ -310,8 +321,8 @@
           :min="0"
           :max="4"
           :step="1"
-          :ticks="1"
-          :marks="[{ value: 0, text: 'Off' }, { value: 4, text: 'Max' }]"
+          :show-ticks="1"
+          :show-marks="[{ value: 0, text: 'Off' }, { value: 4, text: 'Max' }]"
           :get-value-text="(value) => ['Off', 'Low', 'Medium', 'High', 'Max'][value]"
         >
           <template #label>
@@ -337,7 +348,7 @@
           :min="25"
           :max="200"
           :step="25"
-          :ticks="25"
+          :show-ticks="25"
         >
           <template #label>
             Playback speed &middot; {{ (playbackSpeed / 100).toFixed(2) }}×
@@ -356,8 +367,8 @@
           :min="50"
           :max="200"
           :step="25"
-          :ticks="25"
-          :marks="[50, 100, 150, 200]"
+          :show-ticks="25"
+          :show-marks="[50, 100, 150, 200]"
         >
           <template #label>
             Zoom level &middot; {{ zoomLevel }}%
@@ -406,7 +417,7 @@
           :min="1"
           :max="90"
           :step="1"
-          :marks="[1, 30, 60, 90]"
+          :show-marks="[1, 30, 60, 90]"
           :get-value-text="(value, index) => index === 0 ? `From day ${value}` : `To day ${value}`"
         >
           <template #label>
@@ -432,7 +443,7 @@
           :min="5"
           :max="50"
           :step="5"
-          :ticks="5"
+          :show-ticks="5"
         >
           <template #label>
             Battery saver threshold &middot; {{ batteryThreshold }}%
@@ -487,6 +498,7 @@ export default {
       canvasZoomValue: ref(60),
       labelsWithBoundariesValue: ref(10),
       midpointValue: ref(0),
+      readoutTooltipValue: ref(48),
       readoutAlwaysValue: ref(48),
       readoutInteractionValue: ref(48),
       invertedValue: ref(40),

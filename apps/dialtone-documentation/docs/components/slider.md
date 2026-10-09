@@ -36,9 +36,10 @@ A slider is appropriate when the exact value is less important than the relative
 - For range sliders with two thumbs, pass a `getValueText` callback that returns localized text distinguishing each thumb (e.g. `"Minimum: 20"` / `"Maximum: 70"`).
 - Keep `min` and `max` values meaningful to the context. Label the scale so users understand what the numbers represent.
 - Use `prefix` or `suffix` for simple unit decoration (e.g. `suffix="%"`) — marks always use it. For the readout and each thumb's `aria-valuetext`, `getValueText` takes precedence over prefix/suffix when set, so the two stay in agreement; marks never call `getValueText`, since a mark isn't tied to either thumb and has no index for it to differentiate on.
-- Use `ticks` to indicate discrete stops on the track; avoid rendering more than ~20 ticks to prevent visual noise.
-- `marks` defaults to labeling the start and end of the range. Pass an array of `{ value, text }` objects for custom text, a plain number array to label positions without custom text, `true` to auto-generate marks at every tick position, or `false` for none.
+- Use `showTicks` to indicate discrete stops on the track; avoid rendering more than ~20 ticks to prevent visual noise.
+- `showMarks` is off by default. Pass `true` to label the start and end of the range, or an array of `{ value, text }` objects (or a plain number array, for default-formatted text) to label specific positions instead.
 - When using `snapPoints`, make sure `getValueText` (and any custom mark text) can render *any* value in range, not just the snap points — the pull is a soft suggestion, not a restriction, so users can still land on values off the grid.
+- With no marks and the default `tooltip` readout, the slider reserves no space below the track — add your own gap (e.g. `dt-stack`) when stacking it with other content, rather than relying on built-in spacing.
 
 ## Variants and Examples
 
@@ -54,7 +55,7 @@ A slider is appropriate when the exact value is less important than the relative
 <dt-slider
   :model-value="[20, 70]"
   label="Price range"
-  :marks="[{ value: 0, text: 'Min $0' }, { value: 100, text: 'Max $100' }]"
+  :show-marks="[{ value: 0, text: 'Min $0' }, { value: 100, text: 'Max $100' }]"
   :get-value-text="(value, index) => index === 0 ? `Minimum: $${value}` : `Maximum: $${value}`"
 />
 ```
@@ -73,7 +74,7 @@ Set `min-gap-steps` to keep the two thumbs from getting too close together. It's
 
 ```vue demo
 <!-- @wrapper -->
-<dt-slider :model-value="60" label="Brightness" :marks="false">
+<dt-slider :model-value="60" label="Brightness">
   <template #start>
     <span aria-hidden="true">0%</span>
   </template>
@@ -87,7 +88,7 @@ Emoji or icon-only content works the same way — give it an `aria-label` so the
 
 ```vue demo
 <!-- @wrapper -->
-<dt-slider :model-value="50" label="Mood" :marks="false">
+<dt-slider :model-value="50" label="Mood">
   <template #start>
     <span role="img" aria-label="sad">😞</span>
   </template>
@@ -99,9 +100,9 @@ Emoji or icon-only content works the same way — give it an `aria-label` so the
 
 ### With ticks
 
-A numeric `ticks` interval is independent of `step` — ticks are purely a visual overlay along the track and don't constrain where the thumb can actually stop. The two often match, but they don't have to.
+A numeric `showTicks` interval is independent of `step` — ticks are purely a visual overlay along the track and don't constrain where the thumb can actually stop. The two often match, but they don't have to.
 
-When the `ticks` interval equals `step`, every value the thumb can land on gets its own tick — same as passing `ticks="true"`:
+When the `showTicks` interval equals `step`, every value the thumb can land on gets its own tick — same as passing `show-ticks="true"`:
 
 ```vue demo
 <dt-slider
@@ -110,7 +111,7 @@ When the `ticks` interval equals `step`, every value the thumb can land on gets 
   :min="0"
   :max="10"
   :step="1"
-  :ticks="1"
+  :show-ticks="1"
 />
 ```
 
@@ -123,7 +124,7 @@ When they differ, ticks become checkpoints along a finer scale rather than a mar
   :min="0"
   :max="100"
   :step="1"
-  :ticks="25"
+  :show-ticks="25"
 />
 ```
 
@@ -140,7 +141,7 @@ Pass a number for an evenly spaced interval:
   :min="0"
   :max="100"
   :snap-points="25"
-  :ticks="25"
+  :show-ticks="25"
   suffix="%"
 />
 ```
@@ -171,7 +172,7 @@ Pass an array of numbers to label positions automatically:
   label="Temperature"
   :min="-20"
   :max="40"
-  :marks="[-20, 0, 40]"
+  :show-marks="[-20, 0, 40]"
 >
   <template #start>
     <span role="img" aria-label="cold">❄️</span>
@@ -193,7 +194,7 @@ Pass `{ value, text }` objects when the label at a position isn't just the numbe
     :min="0"
     :max="4"
     :step="1"
-    :marks="[{ value: 0, text: 'Off' }, { value: 1, text: 'Low' }, { value: 2, text: 'Medium' }, { value: 3, text: 'High' }, { value: 4, text: 'Max' }]"
+    :show-marks="[{ value: 0, text: 'Off' }, { value: 1, text: 'Low' }, { value: 2, text: 'Medium' }, { value: 3, text: 'High' }, { value: 4, text: 'Max' }]"
     :get-value-text="(value) => ['Off', 'Low', 'Medium', 'High', 'Max'][value]"
   />
   <dt-slider
@@ -202,13 +203,13 @@ Pass `{ value, text }` objects when the label at a position isn't just the numbe
     :min="0"
     :max="90"
     :step="1"
-    :marks="[{ value: 0, text: 'No trial' }, { value: 30, text: '30 days' }, { value: 60, text: '60 days' }, { value: 90, text: '90 days' }]"
+    :show-marks="[{ value: 0, text: 'No trial' }, { value: 30, text: '30 days' }, { value: 60, text: '60 days' }, { value: 90, text: '90 days' }]"
     :get-value-text="(value) => value === 1 ? '1 day' : `${value} days`"
   />
 </dt-stack>
 ```
 
-Combine marks with ticks for fully annotated steps — the two are independent, so a mark doesn't need a tick at the same position and vice versa:
+Marks and ticks are independent — a mark doesn't need a tick at the same position and vice versa, so dense ticks pair well with sparser marks:
 
 ```vue demo
 <!-- @wrapper -->
@@ -218,8 +219,8 @@ Combine marks with ticks for fully annotated steps — the two are independent, 
     label="Balance"
     :min="-100"
     :max="100"
-    :marks="[{ value: -100, text: '−100' }, { value: 0, text: '0' }, { value: 100, text: '100' }]"
-    :ticks="25"
+    :show-marks="[{ value: -100, text: '−100' }, { value: 0, text: '0' }, { value: 100, text: '100' }]"
+    :show-ticks="25"
   />
   <dt-slider
     :model-value="7"
@@ -227,23 +228,27 @@ Combine marks with ticks for fully annotated steps — the two are independent, 
     :min="0"
     :max="10"
     :step="1"
-    :ticks="1"
-    :marks="true"
+    :show-ticks="1"
+    :show-marks="true"
   />
 </dt-stack>
 ```
 
 ### Value readout
 
-Set `readout` to show each thumb's current value alongside the track. Useful when the track context alone isn't enough to communicate the exact value.
+Set `readout` to show each thumb's current value. Useful when the track context alone isn't enough to communicate the exact value.
 
-- `always` (default) — the readout is always visible.
+- `tooltip` (default) — a tooltip-styled bubble above the thumb, shown only while that thumb is hovered, dragged, or focused. Nudges itself inward as a thumb approaches `min`/`max` so the bubble doesn't get clipped at the track's edge.
+- `always` — a readout below the track, always visible.
+- `interaction` — a readout below the track, shown only while that thumb is hovered, dragged, or focused.
 - `never` — no readout.
-- `interaction` — the readout appears only while that thumb is hovered, dragged, or focused.
+
+In range mode with `always` or `interaction`, the two thumbs' readouts merge into a single centered `low–high` pill once they'd otherwise overlap as the thumbs converge.
 
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="300" class="d-w100p">
+  <dt-slider :model-value="48" label="Volume" />
   <dt-slider :model-value="48" label="Volume" readout="always" />
   <dt-slider :model-value="48" label="Volume" readout="interaction" />
 </dt-stack>
@@ -261,7 +266,7 @@ For anything beyond a fixed prefix/suffix, pass `getValueText` — it takes prec
 <dt-slider
   :model-value="[20, 70]"
   label="Price range"
-  :marks="[{ value: 0, text: 'Min $0' }, { value: 100, text: 'Max $100' }]"
+  :show-marks="[{ value: 0, text: 'Min $0' }, { value: 100, text: 'Max $100' }]"
   :get-value-text="(value, index) => index === 0 ? `Min $${value}` : `Max $${value}`"
 />
 ```
@@ -288,7 +293,7 @@ Set `fill-origin` to a value within `[min, max]` and the indicator grows outward
     :min="-100"
     :max="100"
     :fill-origin="0"
-    :marks="[{ value: -100, text: '−100' }, { value: 0, text: '0' }, { value: 100, text: '100' }]"
+    :show-marks="[{ value: -100, text: '−100' }, { value: 0, text: '0' }, { value: 100, text: '100' }]"
   />
 </dt-stack>
 ```
@@ -354,7 +359,7 @@ The `label` slot replaces the plain text label entirely — scoped with `value` 
   :min="25"
   :max="200"
   :step="25"
-  :ticks="25"
+  :show-ticks="25"
 >
   <template #label="{ value }">
     Playback speed &middot; {{ (value / 100).toFixed(2) }}×
@@ -366,17 +371,6 @@ The `label` slot replaces the plain text label entirely — scoped with `value` 
     🐇
   </template>
 </dt-slider>
-```
-
-### Sizes
-
-```vue demo
-<!-- @wrapper -->
-<dt-stack gap="300" class="d-w100p">
-  <dt-slider :model-value="50" label="Small (200)" :size="200" />
-  <dt-slider :model-value="50" label="Medium / default (300)" :size="300" />
-  <dt-slider :model-value="50" label="Large (400)" :size="400" />
-</dt-stack>
 ```
 
 ## Accessibility
@@ -400,7 +394,7 @@ The `label` slot replaces the plain text label entirely — scoped with `value` 
   dir="rtl"
   :model-value="[20, 70]"
   label="Price range"
-  :marks="[{ value: 0, text: 'Min $0' }, { value: 100, text: 'Max $100' }]"
+  :show-marks="[{ value: 0, text: 'Min $0' }, { value: 100, text: 'Max $100' }]"
   :get-value-text="(value, index) => index === 0 ? `Minimum: $${value}` : `Maximum: $${value}`"
 />
 ```

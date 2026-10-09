@@ -1,7 +1,8 @@
 import { action } from 'storybook/actions';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
+import { TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/Text';
 import DtSlider from './Slider.vue';
-import { SLIDER_SIZE_MODIFIERS, SLIDER_ORIENTATIONS, SLIDER_READOUT_MODES } from './SliderConstants';
+import { SLIDER_ORIENTATIONS, SLIDER_READOUT_MODES } from './SliderConstants';
 
 import SliderDefaultTemplate from './SliderDefault.story.vue';
 import SliderVariantsTemplate from './SliderVariants.story.vue';
@@ -15,15 +16,16 @@ export const argsData = {
   snapPoints: undefined,
   disabled: false,
   orientation: 'horizontal',
-  ticks: 10,
+  showTicks: 10,
   minGapSteps: 0,
-  size: 300,
   label: 'Slider label',
   showLabel: true,
+  labelSize: undefined,
+  labelStrength: undefined,
   name: '',
   largeStep: 10,
   fillOrigin: 'start',
-  readout: 'always',
+  readout: 'tooltip',
   'onUpdate:modelValue': action('update:modelValue'),
   onChange: action('change'),
   onFocus: action('focus'),
@@ -131,16 +133,16 @@ export const argTypesData = {
     },
   },
   readout: {
-    description: 'Controls the live value readout: always visible, never shown, or shown only while hovering, dragging, or focusing that thumb.',
+    description: 'Controls the live value readout: a tooltip-styled bubble above the thumb (the default), always visible below the track, never shown, or shown below the track only while hovering, dragging, or focusing that thumb.',
     control: { type: 'select' },
     options: SLIDER_READOUT_MODES,
     table: {
       category: 'props',
       type: { summary: 'String' },
-      defaultValue: { summary: 'always' },
+      defaultValue: { summary: 'tooltip' },
     },
   },
-  ticks: {
+  showTicks: {
     description: 'Renders tick marks along the track — true for one per step, or a Number for a custom interval.',
     control: { type: 'text' },
     table: {
@@ -157,16 +159,6 @@ export const argTypesData = {
       type: { summary: 'Number' },
     },
   },
-  size: {
-    description: 'Size of the slider thumb and track.',
-    control: { type: 'select' },
-    options: Object.keys(SLIDER_SIZE_MODIFIERS).filter((k) => !isNaN(Number(k))).map(Number),
-    table: {
-      category: 'props',
-      type: { summary: 'Number | String' },
-      defaultValue: { summary: '300' },
-    },
-  },
   label: {
     description: 'Visible label text. Required for accessibility.',
     control: 'text',
@@ -181,6 +173,26 @@ export const argTypesData = {
     table: {
       category: 'props',
       type: { summary: 'Boolean' },
+    },
+  },
+  labelSize: {
+    description: 'Overrides the label text size.',
+    control: { type: 'select' },
+    options: TEXT_SIZE_MODIFIERS.label,
+    table: {
+      category: 'props',
+      type: { summary: 'Number | String' },
+      defaultValue: { summary: '300' },
+    },
+  },
+  labelStrength: {
+    description: 'Overrides the label font weight.',
+    control: { type: 'select' },
+    options: Object.keys(TEXT_STRENGTH_MODIFIERS),
+    table: {
+      category: 'props',
+      type: { summary: 'String' },
+      defaultValue: { summary: 'semibold (DtText\'s own default for kind="label")' },
     },
   },
   name: {
@@ -200,13 +212,13 @@ export const argTypesData = {
       defaultValue: { summary: '10' },
     },
   },
-  marks: {
-    description: 'Text annotations below the track. true = one mark per tick; a Number[] generates marks with auto-text; a { value, text }[] uses custom text; false = none.',
+  showMarks: {
+    description: 'Text annotations below the track. Off by default; true = min/max only; a Number[] generates marks with auto-text; a { value, text }[] uses custom text.',
     control: { type: 'object' },
     table: {
       category: 'props',
       type: { summary: 'Boolean | Number[] | { value: Number, text: String }[]' },
-      defaultValue: { summary: '[min, max] (start and end)' },
+      defaultValue: { summary: 'false' },
     },
   },
   labelClass: {
@@ -222,7 +234,7 @@ export const argTypesData = {
     table: { category: 'props' },
   },
   getValueText: {
-    description: 'Function formatting a value for the readout and aria-valuetext (not marks — see marks). Signature: (value, index?) => string. Takes precedence over prefix/suffix.',
+    description: 'Function formatting a value for the readout and aria-valuetext (not marks — see showMarks). Signature: (value, index?) => string. Takes precedence over prefix/suffix.',
     control: null,
     table: {
       category: 'props',
