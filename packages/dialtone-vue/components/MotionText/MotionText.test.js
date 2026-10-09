@@ -842,54 +842,83 @@ describe('DtMotionText Tests', () => {
       expect(parent.find('strong').text()).toBe('Tamara');
     });
 
-    it('should keep animating when the text changes', async () => {
-      mockProps = { animationMode: 'shimmer', autoStart: true, loop: true };
-      updateWrapper();
-      await flushAutoStart();
-      await wrapper.setProps({ text: 'Searching' });
+    describe('When the text changes while looping', () => {
+      beforeEach(async () => {
+        mockProps = { animationMode: 'shimmer', autoStart: true, loop: true };
+        updateWrapper();
+        await flushAutoStart();
+        await wrapper.setProps({ text: 'Searching' });
+      });
 
-      expect(findContent().text()).toBe('Searching');
-      expect(wrapper.classes()).toContain('d-motion-text--animating');
-      expect(getEmittedCount('start')).toBe(1);
+      it('should render the new text', () => {
+        expect(findContent().text()).toBe('Searching');
+      });
+
+      it('should keep animating', () => {
+        expect(wrapper.classes()).toContain('d-motion-text--animating');
+      });
+
+      it('should not restart the animation', () => {
+        expect(getEmittedCount('start')).toBe(1);
+      });
     });
 
-    it('should play again for new text once a single play has finished', async () => {
-      mockProps = { animationMode: 'shimmer', autoStart: true };
-      updateWrapper();
-      await flushAutoStart();
-      await advance(3000);
-      expect(wrapper.classes()).toContain('d-motion-text--complete');
+    describe('When the text changes after a single play has finished', () => {
+      beforeEach(async () => {
+        mockProps = { animationMode: 'shimmer', autoStart: true };
+        updateWrapper();
+        await flushAutoStart();
+        await advance(3000);
+        await wrapper.setProps({ text: 'Searching' });
+        await flushAutoStart();
+      });
 
-      await wrapper.setProps({ text: 'Searching' });
-      await flushAutoStart();
+      it('should play again', () => {
+        expect(getEmittedCount('start')).toBe(2);
+      });
 
-      expect(getEmittedCount('start')).toBe(2);
-      expect(wrapper.classes()).toContain('d-motion-text--animating');
+      it('should be animating', () => {
+        expect(wrapper.classes()).toContain('d-motion-text--animating');
+      });
     });
 
-    it('should keep a loop stopped with skipToEnd() at rest for new text', async () => {
-      mockProps = { animationMode: 'shimmer', autoStart: true, loop: true };
-      updateWrapper();
-      await flushAutoStart();
-      wrapper.vm.skipToEnd();
-      await advance(0);
-      await wrapper.setProps({ text: 'Here is the answer' });
-      await flushAutoStart();
+    describe('When the text changes after a loop was stopped with skipToEnd()', () => {
+      beforeEach(async () => {
+        mockProps = { animationMode: 'shimmer', autoStart: true, loop: true };
+        updateWrapper();
+        await flushAutoStart();
+        wrapper.vm.skipToEnd();
+        await advance(0);
+        await wrapper.setProps({ text: 'Here is the answer' });
+        await flushAutoStart();
+      });
 
-      expect(getEmittedCount('start')).toBe(1);
-      expect(wrapper.classes()).toContain('d-motion-text--complete');
+      it('should not play again', () => {
+        expect(getEmittedCount('start')).toBe(1);
+      });
+
+      it('should stay at rest', () => {
+        expect(wrapper.classes()).toContain('d-motion-text--complete');
+      });
     });
 
-    it('should stay at rest for new text when autoStart is false', async () => {
-      mockProps = { animationMode: 'shimmer' };
-      updateWrapper();
-      await start();
-      await advance(3000);
-      await wrapper.setProps({ text: 'Searching' });
-      await flushAutoStart();
+    describe('When the text changes after a finished play and autoStart is false', () => {
+      beforeEach(async () => {
+        mockProps = { animationMode: 'shimmer' };
+        updateWrapper();
+        await start();
+        await advance(3000);
+        await wrapper.setProps({ text: 'Searching' });
+        await flushAutoStart();
+      });
 
-      expect(getEmittedCount('start')).toBe(1);
-      expect(wrapper.classes()).toContain('d-motion-text--complete');
+      it('should not play again', () => {
+        expect(getEmittedCount('start')).toBe(1);
+      });
+
+      it('should stay at rest', () => {
+        expect(wrapper.classes()).toContain('d-motion-text--complete');
+      });
     });
 
     it('should start on mount even while its slot is empty', async () => {
