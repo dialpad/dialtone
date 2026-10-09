@@ -3,6 +3,9 @@ name: Unit Tests
 on:
   pull_request:
     paths:
+      - 'nx.json'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
       - 'packages/dialtone-vue/**'
       - 'packages/dialtone-tokens/**'
       - 'packages/combinator/**'
@@ -25,6 +28,9 @@ on:
     branches:
       - staging
     paths:
+      - 'nx.json'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
       - 'packages/dialtone-vue/**'
       - 'packages/dialtone-tokens/**'
       - 'packages/combinator/**'
@@ -76,6 +82,9 @@ jobs:
               - 'packages/combinator/**'
             # Lookup adapters, their source datasets/generators, and the shared retrieval fixtures.
             cli:
+              - 'nx.json'
+              - 'package.json'
+              - 'pnpm-lock.yaml'
               - 'packages/dialtone-query-core/**'
               - 'packages/dialtone-cli/**'
               - 'packages/dialtone-mcp-server/**'

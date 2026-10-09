@@ -32,6 +32,9 @@ function assertRouted(label, paths, patternLists) {
 }
 test('lookup source, data, adapter and harness changes route to the mandatory suites on PRs and staging', () => {
   const paths = [
+    'nx.json',
+    'package.json',
+    'pnpm-lock.yaml',
     'packages/dialtone-vue/components/button/button.vue',
     'packages/dialtone-css/lib/build/less/utilities/padding.less',
     'packages/dialtone-tokens/tokens/global.json',

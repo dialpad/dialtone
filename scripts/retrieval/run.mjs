@@ -218,6 +218,8 @@ const report = {
 };
 let fixtureRoot;
 let legacyFixture;
+let setupError;
+let cleanupError;
 try {
   fixtureRoot = await mkdtemp(join(tmpdir(), 'dialtone-retrieval-'));
   legacyFixture = await createConsumerFixture(
@@ -340,19 +342,30 @@ try {
   if (failures.length) process.exitCode = 1;
 } catch (error) {
   report.failure = { message: error.message };
-  throw error;
+  setupError = error;
 } finally {
   try {
     await client.close();
-  } finally {
-    try {
-      if (fixtureRoot) await rm(fixtureRoot, { recursive: true, force: true });
-    } finally {
-      if (reportPath)
-        await writeFile(
-          resolve(reportPath),
-          JSON.stringify(report, null, 2) + '\n',
-        );
-    }
+  } catch (error) {
+    cleanupError = error;
+    console.error(`client.close failed: ${error.message}`);
+  }
+  try {
+    if (fixtureRoot) await rm(fixtureRoot, { recursive: true, force: true });
+  } catch (error) {
+    cleanupError ??= error;
+    console.error(`fixture cleanup failed: ${error.message}`);
+  }
+  try {
+    if (reportPath)
+      await writeFile(
+        resolve(reportPath),
+        JSON.stringify(report, null, 2) + '\n',
+      );
+  } catch (error) {
+    cleanupError ??= error;
+    console.error(`report write failed: ${error.message}`);
   }
 }
+if (setupError) throw setupError;
+if (cleanupError) throw cleanupError;

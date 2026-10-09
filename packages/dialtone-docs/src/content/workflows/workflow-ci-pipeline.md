@@ -41,7 +41,7 @@ These checks are required on every PR:
 
 ### `unit_tests.yml`
 
-**Trigger:** Push to `staging` and pull requests touching Vue, CSS, tokens, icons, Combinator, query-core, CLI, MCP, documentation content/generators, generator tests, ESLint, shared retrieval fixtures, or the lookup workflow itself. Exact paths are listed in `unit_tests.yml`.
+**Trigger:** Push to `staging` and pull requests touching Vue, CSS, tokens, icons, Combinator, query-core, CLI, MCP, documentation content/generators, generator tests, ESLint, shared retrieval fixtures, root `nx.json`/`package.json`/`pnpm-lock.yaml`, or the lookup workflow itself. Exact paths are listed in `unit_tests.yml`.
 
 **What it does:** A `changes` job (`dorny/paths-filter`) decides which test jobs run. Each job sets up the environment, then runs its commands:
 
