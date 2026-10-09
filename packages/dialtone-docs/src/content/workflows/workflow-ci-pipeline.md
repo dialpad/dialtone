@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-10-07
+last_updated: 2026-10-08
 related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server]
 ---
 
@@ -41,22 +41,32 @@ These checks are required on every PR:
 
 ### `unit_tests.yml`
 
-**Trigger:** Push to `staging`, PR to any branch (paths: `packages/dialtone-vue/**`, `packages/dialtone-tokens/**`, `packages/combinator/**`, `packages/dialtone-query-core/**`, `packages/dialtone-cli/**`, `packages/dialtone-mcp-server/**`, `.github/workflows/unit_tests.yml`, and the data generators listed for `test-cli` below)
+**Trigger:** Push to `staging` and pull requests touching Vue, CSS, tokens, icons, Combinator, query-core, CLI, MCP, documentation content/generators, generator tests, ESLint, shared retrieval fixtures, root `nx.json`/`package.json`/`pnpm-lock.yaml`, or the lookup workflow itself. Exact paths are listed in `unit_tests.yml`.
 
-**What it does:** A `changes` job (`dorny/paths-filter`) decides which test jobs run. Each job sets up the environment, then runs its command:
+**What it does:** A `changes` job (`dorny/paths-filter`) decides which test jobs run. Each job sets up the environment, then runs its commands:
 
-| Job | Runs when these change | Command |
-|-----|------------------------|---------|
-| `test` | `packages/dialtone-vue/**` | `pnpm nx run dialtone-vue:test:coverage` |
-| `test-tokens` | `packages/dialtone-tokens/**` | `pnpm nx run dialtone-tokens:test` |
-| `test-combinator` | `packages/combinator/**` | `pnpm nx run dialtone-combinator:test` |
-| `test-cli` | `packages/dialtone-query-core/**`, `packages/dialtone-cli/**`, `packages/dialtone-mcp-server/**`, `.github/workflows/unit_tests.yml`, and the data generators `scripts/build-dialtone-vue-docs.mjs`, `packages/dialtone-css/postcss/dialtone-docs.cjs`, `packages/dialtone-docs/src/generators/**` | `pnpm nx run-many -t test -p dialtone-query-core dialtone-cli`, `pnpm nx run dialtone-mcp-server:test-startup`, and `pnpm --dir packages/dialtone-mcp-server test:release-paths` |
+| Job               | Runs when these change                                                                                              | Command                                                                                                                                                                                               |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `test`            | `packages/dialtone-vue/**`                                                                                          | `pnpm nx run dialtone-vue:test:coverage`                                                                                                                                                              |
+| `test-tokens`     | `packages/dialtone-tokens/**`                                                                                       | `pnpm nx run dialtone-tokens:test`                                                                                                                                                                    |
+| `test-combinator` | `packages/combinator/**`                                                                                            | `pnpm nx run dialtone-combinator:test`                                                                                                                                                                |
+| `test-cli`        | Lookup adapters, their source datasets/generators/tests, documentation pages, ESLint, and shared retrieval fixtures | Build CLI/MCP and their datasets; run query-core, CLI, AI docs and ESLint tests; run the public-identity generator suite, shared fixture/cache contracts, cross-adapter retrieval regressions, MCP startup/shutdown and shared-core release selection, and existing documentation search scenarios |
 
 The `test` job outputs a coverage report in JSON and HTML. Coverage thresholds enforced: 80% branches, 70% functions, 85% lines and statements. Build fails if thresholds are not met.
 
-In `test-cli`, the query-core and CLI test targets depend on their project's build. The builds generate the component, token, utility, icon, and documentation data the tests read, and the CLI's smoke tests run its built `build/index.js`. A change to a generator can change the shape of that data, so it runs `test-cli`. A change to the content alone, such as a component, icon, or docs page, doesn't; a test it breaks fails on the next PR that runs `test-cli`.
+The lookup build runs `pnpm nx run-many -t build -p dialtone-cli dialtone-mcp-server`. It generates the component, token, utility, icon, and documentation data the tests consume. Changes to source content also run these suites, so a component, icon, CSS rule, or docs-page change can expose retrieval regressions on the same PR.
 
-The MCP startup target also depends on its build, so startup and shutdown checks run against a built server. The release-path suite checks commit selection using the installed release implementation without publishing packages.
+Shared contracts run with `node --test scripts/retrieval/*.test.mjs`; `node scripts/retrieval/run.mjs` exercises query-core, CLI JSON and live MCP tool responses. The retrieval harness disables optional registry update-check I/O for deterministic lookup checks. Known retrieval failures carry a precise assertion, owning issue and removal condition; an unrelated failure or unexpected pass fails the job. These checks do not establish startup/network behavior or consumer build compatibility.
+
+The MCP startup target (`pnpm nx run dialtone-mcp-server:test-startup`) also depends on its build, so startup and shutdown checks run against a built server. The release-path suite (`pnpm --dir packages/dialtone-mcp-server test:release-paths`) checks commit selection using the installed release implementation without publishing packages.
+
+---
+
+### `dialtone-documentation-tests.yml`
+
+**Trigger:** Push to `staging` and pull requests touching `apps/dialtone-documentation/**`, the Vue docs generator, `scripts/lib/**/*.mjs`, `scripts/tests/**`, the imported common helper, this workflow, or `pnpm-lock.yaml`.
+
+**What it does:** Runs `pnpm nx run dialtone-documentation:test`, builds the documentation site with `pnpm nx run dialtone-documentation:build`, and verifies that `llms.txt` and `llms-full.txt` exist and are nonempty. Generator/helper/test routing runs the existing documentation checks. The public-identity generator suite runs after the lookup build.
 
 ---
 
