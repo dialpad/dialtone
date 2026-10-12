@@ -571,6 +571,22 @@ describe('DtSlider Tests', () => {
           expect(style).toContain('transform: translateX(calc(-50% + -20px))');
           expect(style).toContain('--tooltip-arrow-offset: 20px');
         });
+
+        it('mirrors the arrow-offset sign under rtl, so the arrow still points at the thumb instead of the browser\'s own inset-inline-start mirroring doubling up with it', async () => {
+          // pct 0 mirrors to the control's physical right edge under rtl —
+          // the same physical edge LTR's modelValue=100 case above tests,
+          // just reached the other way around.
+          mockProps = { modelValue: 0 };
+          updateWrapper();
+          await mockControlDirection('rtl');
+          mockEdgeClampGeometry({ controlLeft: 0, controlRight: 1000, tooltipWidth: 96 });
+          const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
+          await hitTarget.trigger('pointerenter');
+          await settleCollisions();
+          const style = tooltipReadouts()[0].attributes('style');
+          expect(style).toContain('transform: translateX(calc(50% + -20px))');
+          expect(style).toContain('--tooltip-arrow-offset: -20px');
+        });
       });
     });
 

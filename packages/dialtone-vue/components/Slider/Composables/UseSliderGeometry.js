@@ -116,8 +116,13 @@ export function useSliderGeometry(props, {
       transform,
       // Bridges into the ::after arrow rule (slider.less) since inline style
       // can't target a pseudo-element; negated so the arrow stays visually
-      // anchored to the thumb when the bubble shifts.
-      '--tooltip-arrow-offset': `${-offset}px`,
+      // anchored to the thumb when the bubble shifts. offset itself is a
+      // physical pixel value, but the arrow rule positions via
+      // inset-inline-start — a logical property the browser mirrors under
+      // dir="rtl" — so the sign has to flip under RTL too, same as
+      // centerInlineTransform, or the browser's own mirroring doubles up
+      // with this one and sends the arrow the wrong physical direction.
+      '--tooltip-arrow-offset': `${isRtl.value ? offset : -offset}px`,
     };
   }
 
