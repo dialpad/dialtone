@@ -2035,11 +2035,14 @@ describe('DtSlider Tests', () => {
       });
 
       it('centers ticks on their anchor point under rtl too', async () => {
+        // Index 1, not 0 — the first tick lands on min, which is edge-aligned
+        // (edgeInsetTransform) rather than centered; this exercises a genuine
+        // mid-track tick (25 of [0, 25, 50, 75, 100]) instead.
         mockProps = { showTicks: 25 };
         updateWrapper();
         await mockControlDirection('rtl');
         await wrapper.setProps({ modelValue: 51 });
-        const tick = wrapper.find('[data-qa="dt-slider-tick"]');
+        const tick = wrapper.findAll('[data-qa="dt-slider-tick"]')[1];
         expect(tick.attributes('style')).toContain('translateX(50%)');
       });
     });
@@ -2566,20 +2569,20 @@ describe('DtSlider Tests', () => {
         document.documentElement.removeAttribute('dir');
       });
 
-      it('flush-aligns the min mark to the track start instead of centering it', async () => {
+      it('nudges the min mark 1px inward from the flush edge instead of centering it', async () => {
         mockProps = { showMarks: true };
         updateWrapper();
         await nextTick();
         const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
-        expect(marks[0].attributes('style')).toContain('translateX(0)');
+        expect(marks[0].attributes('style')).toContain('translateX(1px)');
       });
 
-      it('flush-aligns the max mark to the track end, shifted by its own full width', async () => {
+      it('nudges the max mark 1px inward from the flush edge, shifted by its own full width', async () => {
         mockProps = { showMarks: true };
         updateWrapper();
         await nextTick();
         const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
-        expect(marks[1].attributes('style')).toContain('translateX(-100%)');
+        expect(marks[1].attributes('style')).toContain('translateX(calc(-100% + -1px))');
       });
 
       it('still centers a custom mark that does not land on min or max — no inline transform override, relying on the CSS default', async () => {
@@ -2596,7 +2599,7 @@ describe('DtSlider Tests', () => {
         await mockControlDirection('rtl');
         await nextTick();
         const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
-        expect(marks[1].attributes('style')).toContain('translateX(100%)');
+        expect(marks[1].attributes('style')).toContain('translateX(calc(100% + 1px))');
       });
 
       it('does not edge-align marks in vertical orientation, where this distinction does not apply', async () => {
@@ -3320,10 +3323,10 @@ describe('DtSlider Tests', () => {
         updateWrapper();
       });
 
-      it('fills from the min end toward the thumb, with its static cap extended past the control edge', () => {
+      it('fills from the min end toward the thumb, with its static cap flush at the control edge', () => {
         const style = indicator.attributes('style');
-        expect(style).toContain('inset-inline-start: calc(calc(var(--slider-track-height) / 2) * -1)');
-        expect(style).toContain('width: calc(25% + calc(var(--slider-track-height) / 2))');
+        expect(style).toContain('inset-inline-start: 0;');
+        expect(style).toContain('width: 25%');
       });
     });
 
@@ -3333,10 +3336,10 @@ describe('DtSlider Tests', () => {
         updateWrapper();
       });
 
-      it('still extends the static cap, but the thumb-tracking edge stays exactly at the thumb (no overshoot)', () => {
+      it('stays flush at the control edge, with the thumb-tracking edge exactly at the thumb (no overshoot)', () => {
         const style = indicator.attributes('style');
-        expect(style).toContain('inset-inline-start: calc(calc(var(--slider-track-height) / 2) * -1)');
-        expect(style).toContain('width: calc(0% + calc(var(--slider-track-height) / 2))');
+        expect(style).toContain('inset-inline-start: 0;');
+        expect(style).toContain('width: 0%');
       });
     });
 
@@ -3346,10 +3349,10 @@ describe('DtSlider Tests', () => {
         updateWrapper();
       });
 
-      it('fills from the max end toward the thumb, with its static cap extended past the control edge (var(--dt-size-border-100) more than the start cap)', () => {
+      it('fills from the max end toward the thumb, with its static cap flush at the control edge', () => {
         const style = indicator.attributes('style');
-        expect(style).toContain('inset-inline-end: calc(calc(calc(var(--slider-track-height) / 2) + var(--dt-size-border-100)) * -1)');
-        expect(style).toContain('width: calc(75% + calc(calc(var(--slider-track-height) / 2) + var(--dt-size-border-100)))');
+        expect(style).toContain('inset-inline-end: 0;');
+        expect(style).toContain('width: 75%');
       });
     });
 

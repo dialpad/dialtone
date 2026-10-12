@@ -44,16 +44,28 @@ export function useSliderGeometry(props, {
     return positionStyle(thumbPercent(val), transform);
   }
 
-  function tickPositionStyle(val) {
-    const transform = isVertical.value ? 'translateY(50%)' : `translateX(${centerInlineTransform()})`;
-    return positionStyle(thumbPercent(val), transform);
+  // A tick or mark at min/max nudges 1px inward from the true 0%/100% edge
+  // instead of sitting flush on it (or, for a mark, centering like every
+  // other one — which pokes ~1px past the edge since centering ignores the
+  // mark's own width) — pure flush/centered reads as touching the label
+  // above it, not a deliberately placed tick or mark. Shared by
+  // tickPositionStyle and markStyle below. RTL-mirrored like
+  // centerInlineTransform: "inward" is a physical direction that flips with
+  // which edge actually sits on which side.
+  function edgeInsetTransform(edge) {
+    if (edge === 'start') return `translateX(${isRtl.value ? '-1px' : '1px'})`;
+    const flushPct = isRtl.value ? '100%' : '-100%';
+    const inwardPx = isRtl.value ? '1px' : '-1px';
+    return `translateX(calc(${flushPct} + ${inwardPx}))`;
   }
 
-  // A mark at min/max flush-aligns to the track edge instead of centering;
-  // end uses the mark's own width, not half (RTL-mirrored like centerInlineTransform).
-  function edgeAlignedTransform (edge) {
-    if (edge === 'start') return 'translateX(0)';
-    return `translateX(${isRtl.value ? '100%' : '-100%'})`;
+  function tickPositionStyle(val) {
+    if (!isVertical.value) {
+      const edge = val === props.min ? 'start' : val === props.max ? 'end' : null;
+      if (edge) return positionStyle(thumbPercent(val), edgeInsetTransform(edge));
+    }
+    const transform = isVertical.value ? 'translateY(50%)' : `translateX(${centerInlineTransform()})`;
+    return positionStyle(thumbPercent(val), transform);
   }
 
   // A mark beyond the edge-clamp tolerance of the control's edge (see
@@ -64,7 +76,7 @@ export function useSliderGeometry(props, {
   // render can never leak into vertical mode's own transform (translateY,
   // not translateX) if orientation changes reactively.
   function markStyle(pct, index, edge) {
-    if (edge && !isVertical.value) return positionStyle(pct, edgeAlignedTransform(edge));
+    if (edge && !isVertical.value) return positionStyle(pct, edgeInsetTransform(edge));
     const offset = !isVertical.value ? markEdgeOffsetPx.value[index] : 0;
     if (!offset) return positionStyle(pct);
     return positionStyle(pct, `translateX(calc(${centerInlineTransform()} + ${offset}px))`);
@@ -163,30 +175,19 @@ export function useSliderGeometry(props, {
       return { insetInlineStart: `${startPct}%`, width: `${sizePct}%` };
     }
 
-    // Half the track's own height — how far the indicator's STATIC cap (the
-    // fixed end at fillOrigin, always resting at the control's true min/max,
-    // never tracked by a thumb) pokes outward past the control's edge, so
-    // its rounded end renders fully exposed instead of clipped flush against
-    // it. Grows the box by this amount while shifting its start by the same
-    // amount, so only this fixed edge moves — the OTHER edge tracks the
-    // thumb's own value and must land exactly there, no overshoot.
-    const capExtension = 'calc(var(--slider-track-height) / 2)';
-
-    // The inline-end cap gets an extra --dt-size-border-100 over the
-    // inline-start cap — a visual balance call (see .d-slider__track's own
-    // matching asymmetry in slider.less). Horizontal only — vertical mode's
-    // top/bottom caps stay symmetric.
-    const capExtensionInlineEnd = `calc(${capExtension} + var(--dt-size-border-100))`;
-
+    // The indicator's STATIC cap (the fixed end at fillOrigin, always resting
+    // at the control's true min/max, never tracked by a thumb) sits flush at
+    // that edge — the OTHER edge tracks the thumb's own value and must land
+    // exactly there too, matching .d-slider__track's own flush edges.
     const fillsFromEnd = props.fillOrigin === 'end';
     if (isVertical.value) {
       return fillsFromEnd
-        ? { top: `calc(${capExtension} * -1)`, height: `calc(${100 - pct}% + ${capExtension})` }
-        : { bottom: `calc(${capExtension} * -1)`, height: `calc(${pct}% + ${capExtension})` };
+        ? { top: 0, height: `${100 - pct}%` }
+        : { bottom: 0, height: `${pct}%` };
     }
     return fillsFromEnd
-      ? { insetInlineEnd: `calc(${capExtensionInlineEnd} * -1)`, width: `calc(${100 - pct}% + ${capExtensionInlineEnd})` }
-      : { insetInlineStart: `calc(${capExtension} * -1)`, width: `calc(${pct}% + ${capExtension})` };
+      ? { insetInlineEnd: 0, width: `${100 - pct}%` }
+      : { insetInlineStart: 0, width: `${pct}%` };
   });
 
   return {

@@ -163,13 +163,7 @@
 //  ----------------------------------------------------------------------------
 .d-slider__track {
     position: absolute;
-    // Extends past the control's own edges by half the track's own height —
-    // both ends are static caps (the track always spans the full control,
-    // never tracking a thumb), so letting the rounded pill end render fully
-    // exposed instead of clipped flush at the edge is always correct here.
-    inset-inline: calc(var(--slider-track-height) / -2) calc(calc(var(--slider-track-height) / -2) - var(--dt-size-border-100));
-    // The inline-end cap gets an extra --dt-size-border-100 over the
-    // inline-start cap — a visual balance call.
+    inset-inline: 0;
     block-size: var(--slider-track-height);
     background-color: var(--slider-track-color);
     border-radius: var(--dt-size-radius-pill);
