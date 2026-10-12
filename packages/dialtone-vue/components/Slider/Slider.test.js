@@ -2641,6 +2641,58 @@ describe('DtSlider Tests', () => {
         disconnectSpy.mockRestore();
       });
 
+      it('actually recomputes collisions when the observed control resizes, not just a no-op subscription', async () => {
+        // The global ResizeObserver mock (tests/setupTests.js) is a true
+        // no-op — observe() never invokes its callback — so a passing
+        // observe()/disconnect() spy alone wouldn't prove the callback body
+        // itself does anything. Install a local stub that captures the real
+        // callback the component registers, and invoke it directly to
+        // simulate an actual resize.
+        let observerCallback;
+        const OriginalResizeObserver = global.ResizeObserver;
+        global.ResizeObserver = class {
+          constructor (callback) {
+            observerCallback = callback;
+          }
+
+          observe () {}
+          disconnect () {}
+          unobserve () {}
+        };
+
+        try {
+          mockProps = { readout: 'always', showMarks: [0, 100], modelValue: 50 };
+          updateWrapper();
+          await nextTick();
+
+          wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+          const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+          const readouts = wrapper.findAll('[data-qa="dt-slider-thumb-readout"]');
+          marks[0].element.getBoundingClientRect = () => farRect;
+          marks[1].element.getBoundingClientRect = () => farRect;
+          readouts[0].element.getBoundingClientRect = () => readoutSize;
+          thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+          thumbInputs[0].element.value = '51';
+          await thumbInputs[0].trigger('input');
+          await settleCollisions();
+          expect(wrapper.findAll('[data-qa="dt-slider-mark"]')[0].classes())
+            .not.toContain('d-slider__mark--collision-hidden');
+
+          // Simulate the control actually resizing: the mark's rect now
+          // overlaps the readout, with nothing else (value, getValueText,
+          // prefix/suffix, orientation, dir) changing — only the captured
+          // observer callback itself can be what re-triggers the recheck.
+          marks[0].element.getBoundingClientRect = () => nearReadoutRect;
+          observerCallback();
+          await settleCollisions();
+
+          expect(wrapper.findAll('[data-qa="dt-slider-mark"]')[0].classes())
+            .toContain('d-slider__mark--collision-hidden');
+        } finally {
+          global.ResizeObserver = OriginalResizeObserver;
+        }
+      });
+
       it('hides a mark once it overlaps the visible readout', async () => {
         mockProps = { readout: 'always', showMarks: [0, 100], modelValue: 50 };
         updateWrapper();
