@@ -509,6 +509,11 @@
         flex-direction: column;
         align-items: center;
         block-size: 100%;
+        // The base rule's negative margin-block-start is tuned to disappear
+        // into .d-slider__control's own horizontal touch-target padding-block
+        // (below) — vertical mode zeroes that padding out, so the same
+        // negative margin would instead bite directly into the label gap.
+        margin-block-start: 0;
     }
 
     .d-slider__control {
