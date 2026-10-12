@@ -37,6 +37,22 @@ export function useSliderDevWarnings(props, { isRange, hasVisibleLabel, attrs })
     { immediate: true },
   );
 
+  // Every gap computation (UseSliderValue, UseSliderInteraction) rounds
+  // minGapSteps to the nearest integer before multiplying by step — a
+  // fractional value is silently coerced rather than rejected, so warn
+  // instead of leaving the mismatch undiscoverable.
+  watch(
+    () => props.minGapSteps !== Math.round(props.minGapSteps),
+    (isFractional) => {
+      if (isFractional) {
+        console.info(
+          `[Dialtone] DtSlider: minGapSteps (${props.minGapSteps}) is not a whole number — it will be rounded to ${Math.round(props.minGapSteps)}.`,
+        );
+      }
+    },
+    { immediate: true },
+  );
+
   // clampToRange (UseSliderValue) silently collapses every value to max when
   // min > max, with no indication anything's wrong — this is almost always a
   // prop-wiring bug upstream, not an intentional inverted range.

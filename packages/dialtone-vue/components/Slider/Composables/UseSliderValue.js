@@ -41,7 +41,10 @@ export function useSliderValue(props, emit, { isRange }) {
   // bypasses that — this is what keeps those paths honoring the same gap.
   function enforceRangeGap(values) {
     if (values.length !== 2) return values;
-    const gap = props.minGapSteps * props.step;
+    // Rounded — minGapSteps is a COUNT of steps; a fractional value would
+    // make the gap not an exact multiple of props.step, breaking the
+    // on-grid guarantee every other value in this file relies on.
+    const gap = Math.round(props.minGapSteps) * props.step;
     if (gap <= 0) return values;
     let [lo, hi] = values;
     if (hi - lo >= gap) return values;
@@ -50,7 +53,11 @@ export function useSliderValue(props, emit, { isRange }) {
     // pull the low end down only if that overflowed max.
     hi = Math.min(props.max, lo + gap);
     lo = Math.min(lo, hi - gap);
-    lo = Math.max(props.min, lo);
+    // min > max is already a degenerate, dev-warned config (UseSliderDevWarnings)
+    // — clamping lo against min alone, without also ceiling it at max, could
+    // push lo above hi (and above the control's own upper bound) whenever
+    // min > max and gap > 0.
+    lo = Math.min(Math.max(props.min, lo), props.max);
     const dp = Math.max(decimalPlaces(props.min), decimalPlaces(props.step));
     return [parseFloat(lo.toFixed(dp)), parseFloat(hi.toFixed(dp))];
   }
@@ -113,13 +120,13 @@ export function useSliderValue(props, emit, { isRange }) {
   // gap against a thumb that doesn't exist.
   function thumbNativeMin(i) {
     if (!isRange.value || i !== 1 || internalValues.value.length < 2) return props.min;
-    const gap = props.minGapSteps * props.step;
+    const gap = Math.round(props.minGapSteps) * props.step;
     return Math.min(props.max, internalValues.value[0] + gap);
   }
 
   function thumbNativeMax(i) {
     if (!isRange.value || i !== 0 || internalValues.value.length < 2) return props.max;
-    const gap = props.minGapSteps * props.step;
+    const gap = Math.round(props.minGapSteps) * props.step;
     return Math.max(props.min, internalValues.value[1] - gap);
   }
 

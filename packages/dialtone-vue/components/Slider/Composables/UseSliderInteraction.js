@@ -75,7 +75,11 @@ export function useSliderInteraction(props, emit, {
       // larger required gap instead of a bare touch. Clamped to 0 — an
       // unvalidated negative minGapSteps would otherwise flip the sign below
       // and invert the crossing clamp instead of disabling it.
-      const gap = Math.max(0, props.minGapSteps * props.step);
+      // Rounded — minGapSteps is a COUNT of steps, and a fractional value
+      // would make this gap not a multiple of props.step, so the
+      // re-quantize in onPointerUp could never land back on-grid once this
+      // clamp pulls the value to the boundary.
+      const gap = Math.max(0, Math.round(props.minGapSteps) * props.step);
       if (thumbIndex === 0) {
         clamped = Math.min(clamped, (next[1] ?? props.max) - gap);
       } else {

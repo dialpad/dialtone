@@ -567,9 +567,23 @@ const {
 // thumb unnamed with no indication anything's wrong.
 function slotHasText(vnodes) {
   return vnodes.some((vnode) => {
+    // A text vnode's own `children` is a plain string (handled below), but a
+    // slot function (including the recursive default() call below) is only
+    // contractually required to return SOME renderable value, not always an
+    // array of vnodes — a bare string is valid too.
+    if (typeof vnode === 'string') return vnode.trim() !== '';
     if (vnode.type === Comment) return false;
     if (typeof vnode.children === 'string') return vnode.children.trim() !== '';
     if (Array.isArray(vnode.children)) return slotHasText(vnode.children);
+    // A child COMPONENT vnode (e.g. <dt-text>{{ label }}</dt-text> in
+    // #label — the same pattern this component's own default fallback
+    // markup below uses) has `children` as a slots object, not a string or
+    // array — recurse into its own default slot to see what it will
+    // actually render instead of treating it as textless.
+    if (vnode.children && typeof vnode.children.default === 'function') {
+      const result = vnode.children.default();
+      return slotHasText(Array.isArray(result) ? result : [result]);
+    }
     return false;
   });
 }

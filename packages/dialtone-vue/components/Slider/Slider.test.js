@@ -1030,6 +1030,18 @@ describe('DtSlider Tests', () => {
       expect(infoSpy).not.toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
     });
 
+    it('does not warn when the label slot wraps its text in a child component, not a bare text node', () => {
+      // slotHasText recurses into a plain string/array vnode.children, but a
+      // child COMPONENT vnode (e.g. <dt-text>{{ label }}</dt-text>, exactly
+      // the pattern this component's own default fallback markup uses) has
+      // children as a slots object instead — this pins that it's recognized
+      // as real text, not silently misclassified as empty.
+      mockProps = { label: undefined };
+      mockSlots = { label: () => h(DtText, null, { default: () => 'Volume' }) };
+      updateWrapper();
+      expect(infoSpy).not.toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
+    });
+
     it('still warns when the label slot exists but renders nothing — an empty slot provides no accessible name', () => {
       mockProps = { label: undefined };
       mockSlots = { label: '' };
@@ -1162,6 +1174,27 @@ describe('DtSlider Tests', () => {
       mockProps = { min: 100, max: 0 };
       updateWrapper();
       expect(infoSpy).toHaveBeenCalledWith(expect.stringContaining('is greater than max (0)'));
+    });
+
+    it('warns as soon as a reactive prop change inverts min/max after mount, not just at mount time', async () => {
+      mockProps = { min: 0, max: 100 };
+      updateWrapper();
+      expect(infoSpy).not.toHaveBeenCalledWith(expect.stringContaining('is greater than max'));
+
+      await wrapper.setProps({ min: 150 });
+      expect(infoSpy).toHaveBeenCalledWith(expect.stringContaining('is greater than max (100)'));
+    });
+
+    it('warns when minGapSteps is not a whole number', () => {
+      mockProps = { minGapSteps: 2.5 };
+      updateWrapper();
+      expect(infoSpy).toHaveBeenCalledWith(expect.stringContaining('minGapSteps (2.5) is not a whole number'));
+    });
+
+    it('does not warn when minGapSteps is a whole number', () => {
+      mockProps = { minGapSteps: 2 };
+      updateWrapper();
+      expect(infoSpy).not.toHaveBeenCalledWith(expect.stringContaining('is not a whole number'));
     });
   });
 
