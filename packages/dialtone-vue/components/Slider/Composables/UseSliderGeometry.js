@@ -1,5 +1,5 @@
 import { computed } from 'vue';
-import { SLIDER_EDGE_CLAMP_TOLERANCE_PX } from '../SliderConstants';
+import { SLIDER_TOOLTIP_EDGE_CLAMP_TOLERANCE_PX } from '../SliderConstants';
 import { edgeClampOffset, mirrorPct } from '../utils';
 
 // Pure positioning math shared by every element placed along the track
@@ -80,13 +80,7 @@ export function useSliderGeometry(props, {
   // Hugs the thumb without overlapping the tooltip arrow's ~6px protrusion.
   const tooltipReadoutGapPx = 'var(--dt-spacing-150)'; // 12px
 
-  // Horizontal-only clamp, same tolerance marks use minus a small safety
-  // margin — sub-pixel noise can tip an unmargined clamp back and forth at
-  // the boundary during a drag. Computed synchronously from pct so the
-  // offset reacts instantly.
-  const TOOLTIP_CLAMP_SAFETY_MARGIN_PX = 4;
-  const TOOLTIP_EDGE_CLAMP_TOLERANCE_PX = SLIDER_EDGE_CLAMP_TOLERANCE_PX - TOOLTIP_CLAMP_SAFETY_MARGIN_PX;
-
+  // Computed synchronously from pct so the offset reacts instantly.
   function tooltipEdgeOffset(pct, index) {
     const rect = controlRect.value;
     const width = tooltipWidthPx.value[index];
@@ -94,7 +88,7 @@ export function useSliderGeometry(props, {
     const controlWidth = rect.right - rect.left;
     if (!controlWidth) return 0;
     const centerPx = rect.left + (mirrorPct(pct, isRtl.value) / 100) * controlWidth;
-    return edgeClampOffset(centerPx - width / 2, centerPx + width / 2, rect, TOOLTIP_EDGE_CLAMP_TOLERANCE_PX);
+    return edgeClampOffset(centerPx - width / 2, centerPx + width / 2, rect, SLIDER_TOOLTIP_EDGE_CLAMP_TOLERANCE_PX);
   }
 
   function tooltipReadoutStyle(val, index) {

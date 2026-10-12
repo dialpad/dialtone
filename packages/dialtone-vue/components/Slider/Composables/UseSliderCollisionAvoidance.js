@@ -1,5 +1,5 @@
 import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from 'vue';
-import { SLIDER_EDGE_CLAMP_TOLERANCE_PX } from '../SliderConstants';
+import { SLIDER_EDGE_CLAMP_TOLERANCE_PX, SLIDER_TOOLTIP_EDGE_CLAMP_TOLERANCE_PX } from '../SliderConstants';
 import { edgeClampOffset, mirrorPct } from '../utils';
 
 // Two kinds of collision: low/high readouts overlapping each other as thumbs
@@ -58,7 +58,7 @@ export function useSliderCollisionAvoidance(props, {
   // programmatic change doesn't set data-dragging to disable it. Sidesteps
   // this by computing position analytically from the same reactive pct the
   // template uses, only pulling size (never transitioned) from the DOM.
-  function analyticalReadoutRect(pct, el) {
+  function analyticalReadoutRect(pct, el, index) {
     if (!el || !controlRef.value) return null;
     const elRect = el.getBoundingClientRect();
     const controlRect = controlRef.value.getBoundingClientRect();
@@ -68,8 +68,19 @@ export function useSliderCollisionAvoidance(props, {
       return { left: elRect.left, right: elRect.right, top: centerPx - height / 2, bottom: centerPx + height / 2 };
     }
     const width = elRect.right - elRect.left;
-    const centerPx = controlRect.left
+    let centerPx = controlRect.left
       + (mirrorPct(pct, isRtl.value) / 100) * (controlRect.right - controlRect.left);
+    // Tooltip mode edge-clamps the real bubble (UseSliderGeometry's
+    // tooltipReadoutStyle) — without the same offset here, collision checks
+    // compare against the bubble's un-clamped position instead of where it
+    // actually renders, exactly where overlap is likeliest (near an edge).
+    // Never reached for the merged-pill call site below: tooltip mode has no
+    // merged pill, so index stays undefined there.
+    if (props.readout === 'tooltip' && index !== undefined) {
+      centerPx += edgeClampOffset(
+        centerPx - width / 2, centerPx + width / 2, controlRect, SLIDER_TOOLTIP_EDGE_CLAMP_TOLERANCE_PX,
+      );
+    }
     return { left: centerPx - width / 2, right: centerPx + width / 2, top: elRect.top, bottom: elRect.bottom };
   }
 
@@ -143,7 +154,7 @@ export function useSliderCollisionAvoidance(props, {
       return rect ? [rect] : [];
     }
     return internalValues.value
-      .map((val, i) => (isReadoutOpen(i) ? analyticalReadoutRect(thumbPercent(val), readoutElByIndex(i)) : null))
+      .map((val, i) => (isReadoutOpen(i) ? analyticalReadoutRect(thumbPercent(val), readoutElByIndex(i), i) : null))
       .filter(Boolean);
   }
 

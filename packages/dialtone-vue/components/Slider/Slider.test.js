@@ -469,6 +469,35 @@ describe('DtSlider Tests', () => {
         expect(wrapper.find('[data-qa="dt-slider-thumb-readout-merged"]').exists()).toBe(false);
       });
 
+      it('does not merge two tooltip bubbles into one even when they genuinely overlap — tooltip mode has no merged-pill UI to fall back to', async () => {
+        mockProps = { modelValue: [55, 60], min: 0, max: 100 };
+        updateWrapper();
+        await nextTick();
+
+        const controlRect = { top: 0, left: 0, right: 300, bottom: 20 };
+        // 20px wide each — 55 vs 60 is 15px apart on this 300px control,
+        // well inside the combined 20px of half-widths: a genuine overlap.
+        const tooltipRect = { top: 0, left: 0, right: 20, bottom: 20 };
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        const tooltips = tooltipReadouts();
+        tooltips[0].element.getBoundingClientRect = () => tooltipRect;
+        tooltips[1].element.getBoundingClientRect = () => tooltipRect;
+
+        // Tooltip mode has no 'always'-equivalent — isReadoutOpen needs a
+        // distinct interaction signal per thumb to have both open at once, so
+        // focus one and hover the other, same as a drag-near-the-other-thumb
+        // gesture would.
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        await thumbInputs[0].trigger('focus');
+        const hitTargets = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]');
+        await hitTargets[1].trigger('pointerenter');
+        await settleCollisions();
+
+        expect(tooltipReadouts()[0].classes()).toContain('d-tooltip--show');
+        expect(tooltipReadouts()[1].classes()).toContain('d-tooltip--show');
+        expect(wrapper.find('[data-qa="dt-slider-thumb-readout-merged"]').exists()).toBe(false);
+      });
+
       // Regression coverage for a real bug: referencing a CSS custom property
       // that doesn't exist (--dt-layout-25-negative, confirmed absent from the
       // token set) made the WHOLE transform declaration invalid, not just
