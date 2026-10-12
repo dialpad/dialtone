@@ -54,7 +54,13 @@ export function useSliderInteraction(props, emit, {
   watch(
     () => internalValues.value.length,
     (newLength, oldLength) => {
-      if (newLength === 1 && oldLength === 2 && focusedThumbIndex.value === 1) {
+      // focusedThumbIndex alone misses a pointer-driven drag — onPointerDown
+      // deliberately never sets it (see isPointerFocus/onThumbFocus above), so
+      // the far more common mouse-drag-then-shrink case needs the real DOM
+      // focus as a second signal, checked before the unmount this tick is about
+      // to cause moves it to <body>.
+      const wasFocused = focusedThumbIndex.value === 1 || document.activeElement === thumbRefs.value[1];
+      if (newLength === 1 && oldLength === 2 && wasFocused) {
         nextTick(() => thumbRefs.value[0]?.focus());
       }
     },
