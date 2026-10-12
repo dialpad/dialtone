@@ -252,6 +252,15 @@
     inline-size: calc(var(--slider-thumb-visual-size) * 1.1);
     block-size: calc(var(--slider-thumb-visual-size) * 1.1);
     box-shadow: var(--dt-shadow-small);
+
+    // A pure pointer/touch drag never sets --focused, so without its own
+    // outline here, forced-colors mode would have no legible affordance at
+    // all once box-shadow is suppressed — just the (also-suppressed) subtle
+    // scale bump.
+    @media (forced-colors: active) {
+        outline: var(--dt-size-border-200) solid Highlight;
+        outline-offset: var(--dt-size-border-100);
+    }
 }
 
 .d-slider__thumb-visual--active.d-slider__thumb-visual--focused {
