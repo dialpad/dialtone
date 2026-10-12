@@ -7,6 +7,7 @@ import type { DocumentationRecord, UtilityClassesData, TokensData } from '../../
 
 const utilities: UtilityClassesData = {
   'd-card': { values: [{ prop: 'padding', value: 'var(--dt-spacing-100)' }] },
+  'd-p-100-z': { values: [{ prop: 'padding', value: '0.8rem' }] },
   'd-p-100-extra': { values: [{ prop: 'padding', value: '0.8rem' }] },
   'd-p-100': { values: [{ prop: 'padding', value: '0.8rem' }] },
   'd-pbs-100': { values: [{ prop: 'padding-block-start', value: '0.8rem' }] },
@@ -15,6 +16,7 @@ const utilities: UtilityClassesData = {
   } },
 };
 const tokens: TokensData = {
+  '--dt-spacing-100-z': { 'dp-light': { value: '0.8rem' } },
   '--dt-spacing-100-negative': { 'dp-light': { value: '-0.8rem' } },
   '--dt-spacing-100': { 'dp-light': { value: '0.8rem' } },
   '--dt-space-400-negative': { 'dp-light': { value: '-0.8rem' }, metadata: { deprecated: true, alternatives: ['--dt-spacing-100-negative'] } },
@@ -28,8 +30,10 @@ function doc(docId: string, title: string, content: string): DocumentationRecord
 }
 
 describe('exact names and bounded utility intent', () => {
-  test('ranks an exact class before incidental matches', () => {
-    expect(searchUtilityClasses('d-p-100', utilities).results[0].name).toBe('d-p-100');
+  test('ranks an exact class first and preserves match order within each tier', () => {
+    expect(searchUtilityClasses('d-p-100', utilities).results.map(result => result.name)).toEqual([
+      'd-p-100', 'd-p-100-z', 'd-p-100-extra', 'd-pbs-100', 'd-card',
+    ]);
   });
   test('physical padding queries recover logical matches with a writing-mode warning', () => {
     for (const query of ['padding top 8px', 'padding-top 8px', 'padding/top 8px']) {
@@ -54,8 +58,10 @@ describe('exact names and bounded utility intent', () => {
 });
 
 describe('token and icon ranking', () => {
-  test('exact canonical token leads over its negative variant', () => {
-    expect(searchTokens('--dt-spacing-100', tokens).results[0].name).toBe('--dt-spacing-100');
+  test('exact canonical token leads without reordering other matches', () => {
+    expect(searchTokens('--dt-spacing-100', tokens).results.map(result => result.name)).toEqual([
+      '--dt-spacing-100', '--dt-spacing-100-z', '--dt-spacing-100-negative',
+    ]);
   });
   test('explicit legacy token keeps value and qualified replacement', () => {
     expect(searchTokens('--dt-space-400', tokens).results[0]).toMatchObject({ name: '--dt-space-400', metadata: { deprecated: true, alternatives: ['--dt-spacing-100'] } });
@@ -74,8 +80,11 @@ describe('token and icon ranking', () => {
     expect(output).toContain(`margin: var(${name})`);
     expect(output).not.toContain(`padding: var(${name})`);
   });
-  test('voicemail leads over voicemail-drop regardless of corpus order', () => {
-    expect(searchIcons('voicemail', { categories: { communication: { 'voicemail-drop': ['voicemail'], voicemail: ['message'] } } }).results[0].name).toBe('voicemail');
+  test('voicemail leads without reordering other icon matches', () => {
+    const icons = { categories: { communication: { 'voicemail-z': ['voicemail'], 'voicemail-drop': ['voicemail'], voicemail: ['message'] } } };
+    expect(searchIcons('voicemail', icons).results.map(result => result.name)).toEqual([
+      'voicemail', 'voicemail-z', 'voicemail-drop',
+    ]);
   });
 });
 

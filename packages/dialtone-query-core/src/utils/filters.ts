@@ -117,10 +117,10 @@ export function applySmartFilterKeepingExact(results: SearchResult[], data: Util
 }
 
 /**
- * Sort in place: the exact name first, then by optional tier, then alphabetically.
+ * Sort in place: the exact name first, then by optional tier, preserving match order for ties.
  * Ranks are computed once per result rather than per comparison.
  */
 export function sortExactFirst(results: SearchResult[], exactName: string, tier: (name: string) => number = () => 0): SearchResult[] {
   const ranks = new Map(results.map(result => [result, result.name.toLowerCase() === exactName ? 0 : 1 + tier(result.name)]));
-  return results.sort((a, b) => ranks.get(a)! - ranks.get(b)! || a.name.localeCompare(b.name));
+  return results.sort((a, b) => ranks.get(a)! - ranks.get(b)!);
 }
