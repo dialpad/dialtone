@@ -46,6 +46,7 @@
       :class="['d-slider__body', { 'd-slider__body--reserve-annotation-space': reservesAnnotationSpace }]"
     >
       <div
+        v-if="hasSlotContent($slots.start)"
         :class="['d-slider__start', startClass]"
         data-qa="dt-slider-start"
       >
@@ -202,6 +203,7 @@
         </template>
       </div>
       <div
+        v-if="hasSlotContent($slots.end)"
         :class="['d-slider__end', endClass]"
         data-qa="dt-slider-end"
       >
@@ -217,7 +219,7 @@
 // @ts-nocheck
 import { ref, computed, Comment, useSlots, useAttrs } from 'vue';
 import { DtText, TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/Text';
-import { getUniqueString, removeClassStyleAttrs } from '@/common/utils';
+import { getUniqueString, hasSlotContent, removeClassStyleAttrs } from '@/common/utils';
 import {
   SLIDER_ORIENTATIONS,
   SLIDER_READOUT_MODES,

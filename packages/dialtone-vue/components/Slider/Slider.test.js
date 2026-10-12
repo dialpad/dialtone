@@ -771,14 +771,36 @@ describe('DtSlider Tests', () => {
 
       it('applies startClass to the start slot wrapper', () => {
         mockProps = { startClass: 'custom-start-class' };
+        mockSlots = { start: '<span>Low</span>' };
         updateWrapper();
         expect(wrapper.find('[data-qa="dt-slider-start"]').classes()).toContain('custom-start-class');
       });
 
       it('applies endClass to the end slot wrapper', () => {
         mockProps = { endClass: 'custom-end-class' };
+        mockSlots = { end: '<span>High</span>' };
         updateWrapper();
         expect(wrapper.find('[data-qa="dt-slider-end"]').classes()).toContain('custom-end-class');
+      });
+    });
+
+    describe('Empty start/end slots', () => {
+      // Suppresses the wrapper markup entirely rather than leaving an empty
+      // <div class="d-slider__start"></div> — otherwise the track doesn't
+      // align flush to the overall container's own inline edges when neither
+      // slot is used (the common case).
+      it('does not render the start wrapper when the start slot is empty', () => {
+        expect(wrapper.find('[data-qa="dt-slider-start"]').exists()).toBe(false);
+      });
+
+      it('does not render the end wrapper when the end slot is empty', () => {
+        expect(wrapper.find('[data-qa="dt-slider-end"]').exists()).toBe(false);
+      });
+
+      it('renders the start wrapper once the slot has content', () => {
+        mockSlots = { start: '<span>Low</span>' };
+        updateWrapper();
+        expect(wrapper.find('[data-qa="dt-slider-start"]').exists()).toBe(true);
       });
     });
 
