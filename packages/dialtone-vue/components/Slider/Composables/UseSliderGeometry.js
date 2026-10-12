@@ -37,11 +37,31 @@ export function useSliderGeometry(props, {
     return isRtl.value ? '50%' : '-50%';
   }
 
+  // Matches the edge tick's own inset from the true 0%/100% edge (its 1px
+  // nudge plus half its own width) — the thumb's travel stops exactly where
+  // the first/last tick sits instead of reaching the control's true edge.
+  // The track and indicator still span the full control; only the thumb (and
+  // the tooltip readout that tracks it, below) treats that leftover span as a
+  // decorative, non-interactive cap.
+  const THUMB_EDGE_INSET = 'calc(1px + var(--slider-tick-width) / 2)';
+
+  // (100% - inset*2) * pct/100 + inset: a percentage and a px length combine
+  // into one calc() value when multiplied by a unitless number, so this
+  // rescales [0, 100]% onto [inset, 100% - inset] without ever needing the
+  // control's actual measured width.
+  function thumbAnchorPct(pct) {
+    return `calc(${THUMB_EDGE_INSET} + (100% - ${THUMB_EDGE_INSET} * 2) * ${pct / 100})`;
+  }
+
   function thumbPositionStyle(val) {
-    const transform = isVertical.value
-      ? `translate(${centerInlineTransform()}, 50%)`
-      : `translate(${centerInlineTransform()}, -50%)`;
-    return positionStyle(thumbPercent(val), transform);
+    const pct = thumbPercent(val);
+    if (isVertical.value) {
+      return positionStyle(pct, `translate(${centerInlineTransform()}, 50%)`);
+    }
+    return {
+      insetInlineStart: thumbAnchorPct(pct),
+      transform: `translate(${centerInlineTransform()}, -50%)`,
+    };
   }
 
   // A tick or mark at min/max nudges 1px inward from the true 0%/100% edge
@@ -125,7 +145,10 @@ export function useSliderGeometry(props, {
       ? `translateX(calc(${centerInlineTransform()} + ${offset}px))`
       : `translateX(${centerInlineTransform()})`;
     return {
-      insetInlineStart: `${pct}%`,
+      // Matches thumbPositionStyle's own inset anchor so the bubble (and its
+      // arrow) stay attached to the thumb's actual rendered position, not
+      // the control's true edge.
+      insetInlineStart: thumbAnchorPct(pct),
       insetBlockEnd: `calc(50% + var(--slider-thumb-visual-size) / 2 + ${tooltipReadoutGapPx})`,
       transform,
       // Bridges into the ::after arrow rule (slider.less) since inline style

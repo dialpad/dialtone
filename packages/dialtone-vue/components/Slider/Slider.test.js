@@ -512,7 +512,10 @@ describe('DtSlider Tests', () => {
         await nextTick();
         const el = tooltipReadouts()[0];
         const style = el.attributes('style');
-        expect(style).toContain('inset-inline-start: 50%'); // modelValue 50 of [0, 100]
+        // modelValue 50 of [0, 100] — thumbAnchorPct's own inset-rescaled
+        // formula (thumbPositionStyle, UseSliderGeometry), not a bare 50%,
+        // so the bubble tracks the thumb's actual (edge-inset) position.
+        expect(style).toContain('inset-inline-start: calc(calc(1px + var(--slider-tick-width) / 2) + (100% - calc(1px + var(--slider-tick-width) / 2) * 2) * 0.5)');
         expect(style).toContain('inset-block-end: calc(50% + var(--slider-thumb-visual-size) / 2 + var(--dt-spacing-100))');
         expect(style).toContain('transform: translateX(-50%)');
         expect(el.classes()).toContain('d-tooltip__arrow--bottom-center');
@@ -2560,6 +2563,68 @@ describe('DtSlider Tests', () => {
         updateWrapper();
         await nextTick();
         expect(wrapper.find('[data-qa="dt-slider-mark"]').text()).toBe('Cap');
+      });
+    });
+
+    describe('Thumb and tick edge inset — the thumb never visually crosses the first/last tick', () => {
+      afterEach(() => {
+        mockControlDirectionSpy?.mockRestore();
+        document.documentElement.removeAttribute('dir');
+      });
+
+      // Pinning the exact calc() formula (not just "some inset exists"), same
+      // rationale as the tooltip's own equivalent test above: it's the only
+      // way to catch a future regression that silently drops the inset.
+      const EDGE_INSET = 'calc(1px + var(--slider-tick-width) / 2)';
+
+      it('insets the thumb at min instead of reaching the control\'s true 0% edge', () => {
+        mockProps = { modelValue: 0 };
+        updateWrapper();
+        const style = thumbVisuals[0].attributes('style');
+        expect(style).toContain(`inset-inline-start: calc(${EDGE_INSET} + (100% - ${EDGE_INSET} * 2) * 0)`);
+      });
+
+      it('insets the thumb at max instead of reaching the control\'s true 100% edge', () => {
+        mockProps = { modelValue: 100 };
+        updateWrapper();
+        const style = thumbVisuals[0].attributes('style');
+        expect(style).toContain(`inset-inline-start: calc(${EDGE_INSET} + (100% - ${EDGE_INSET} * 2) * 1)`);
+      });
+
+      it('applies the same inset to the thumb-hit area and native input, so the draggable/hit targets stay under the visible thumb', () => {
+        mockProps = { modelValue: 0 };
+        updateWrapper();
+        const hit = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
+        const input = thumbInputs[0];
+        const expected = `inset-inline-start: calc(${EDGE_INSET} + (100% - ${EDGE_INSET} * 2) * 0)`;
+        expect(hit.attributes('style')).toContain(expected);
+        expect(input.attributes('style')).toContain(expected);
+      });
+
+      it('nudges the min tick 1px inward from the flush edge instead of centering it on 0%', () => {
+        // showTicks: 100 (not true) — a 100-wide interval on the default
+        // [0, 100] range generates exactly the two edge ticks, no middle ones.
+        mockProps = { showTicks: 100 };
+        updateWrapper();
+        const ticks = wrapper.findAll('[data-qa="dt-slider-tick"]');
+        expect(ticks[0].attributes('style')).toContain('translateX(1px)');
+      });
+
+      it('nudges the max tick 1px inward from the flush edge instead of centering it on 100%', () => {
+        mockProps = { showTicks: 100 };
+        updateWrapper();
+        const ticks = wrapper.findAll('[data-qa="dt-slider-tick"]');
+        expect(ticks[1].attributes('style')).toContain('translateX(calc(-100% + -1px))');
+      });
+
+      it('mirrors the tick inset sign under rtl, same as every other track element', async () => {
+        mockProps = { showTicks: 100 };
+        updateWrapper();
+        await mockControlDirection('rtl');
+        await nextTick();
+        const ticks = wrapper.findAll('[data-qa="dt-slider-tick"]');
+        expect(ticks[0].attributes('style')).toContain('translateX(-1px)');
+        expect(ticks[1].attributes('style')).toContain('translateX(calc(100% + 1px))');
       });
     });
 
