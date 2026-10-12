@@ -144,20 +144,32 @@ export function useSliderValue(props, emit, { isRange }) {
     return isOffGrid ? 'any' : props.step;
   }
 
+  // Logged at most once per mount — formatValue runs on every render path
+  // (aria-valuetext, every readout style), so an unconditional console.info
+  // would flood the console for the whole lifetime of a drag if getValueText
+  // keeps misbehaving on every call.
+  let hasWarnedGetValueText = false;
+  function warnGetValueTextOnce(message) {
+    if (process.env.NODE_ENV === 'production' || hasWarnedGetValueText) return;
+    hasWarnedGetValueText = true;
+    console.info(`[Dialtone] DtSlider: ${message}`);
+  }
+
   // Shared by the readout and each thumb's aria-valuetext, so the two always
   // agree on how a value is displayed. Deliberately NOT used for a mark's own
   // auto-generated text — see formatMarkValue (UseSliderMarksAndTicks).
   function formatValue(value, index) {
     if (props.getValueText) {
       try {
-        return props.getValueText(value, index);
+        const text = props.getValueText(value, index);
+        // A non-string return (e.g. an async getValueText's Promise) would
+        // otherwise render literally — String(aPromise) is "[object Promise]".
+        if (typeof text === 'string') return text;
+        warnGetValueTextOnce(`getValueText must return a string synchronously (got ${typeof text}) — falling back to the raw value.`);
       } catch (e) {
-        // Called on every render path (aria-valuetext, every readout style) —
-        // an uncaught throw here would crash the whole component, not just
+        // An uncaught throw here would crash the whole component, not just
         // degrade one value's text.
-        if (process.env.NODE_ENV !== 'production') {
-          console.info(`[Dialtone] DtSlider: getValueText threw — falling back to the raw value. ${e}`);
-        }
+        warnGetValueTextOnce(`getValueText threw — falling back to the raw value. ${e}`);
       }
     }
     return `${props.prefix}${value}${props.suffix}`;
