@@ -198,18 +198,28 @@ export function useSliderValue(props, emit, { isRange }) {
   watch(
     () => [props.min, props.max, props.step, props.minGapSteps],
     () => {
-      const next = applyValueConstraints(internalValues.value);
-      if (next.length !== internalValues.value.length || next.some((v, i) => v !== internalValues.value[i])) {
+      const cur = internalValues.value;
+      // If internalValues already differed from lastCommittedValues before
+      // this correction, a drag/keyboard interaction is already mid-flight
+      // with its own uncommitted delta — this correction is just an
+      // intermediate waypoint in that gesture, not a standalone change, so it
+      // must not emit 'change' ahead of the interaction's own eventual
+      // commit (pointer up / blur).
+      const alreadyUncommitted = cur.length !== lastCommittedValues.value.length
+        || cur.some((v, i) => v !== lastCommittedValues.value[i]);
+      const next = applyValueConstraints(cur);
+      if (next.length !== cur.length || next.some((v, i) => v !== cur[i])) {
         internalValues.value = next;
-        lastCommittedValues.value = [...next];
         const payload = isRange.value ? [...next] : next[0];
         emit('update:modelValue', payload);
+        if (alreadyUncommitted) return;
         // Unlike the controlled-modelValue watch above, this correction is
         // never something the parent explicitly requested — it's a real,
         // committed change the parent needs to know about (e.g. to persist),
         // not an intermediate drag state. Without this, lastCommittedValues
-        // above having already moved on meant the actual transition from the
+        // below having already moved on meant the actual transition from the
         // previous value was never reported via 'change' at all.
+        lastCommittedValues.value = [...next];
         emit('change', payload);
       }
     },

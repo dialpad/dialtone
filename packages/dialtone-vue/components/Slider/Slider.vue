@@ -511,8 +511,9 @@ const emit = defineEmits([
   'update:modelValue',
 
   /**
-   * Emitted on commit only when the value has changed (pointer up, blur).
-   * Use this for API calls or persistence.
+   * Emitted when a value change commits: pointer up, blur, or a reactive
+   * min/max/step/minGapSteps correction that lands outside any in-progress
+   * drag. Use this for API calls or persistence.
    * @event change
    * @type {number | number[]}
    */
