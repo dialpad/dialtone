@@ -271,6 +271,16 @@ For anything beyond a fixed prefix/suffix, pass `getValueText` — it takes prec
 />
 ```
 
+To render the value somewhere custom outside the component instead, set `readout="never"` and drive your own display off the same `v-model`:
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="200" class="d-w100p">
+  <dt-slider v-model="externalReadoutValue" label="Zoom" readout="never" />
+  <dt-text size="200" tone="subtle">{{ externalReadoutValue }}%</dt-text>
+</dt-stack>
+```
+
 ### Fill direction
 
 Set `fill-origin` to `end` (aka right) to fill from the max end toward the thumb instead of the default `start` (aka left).
@@ -331,6 +341,17 @@ Set `fill-origin` to a value within `[min, max]` and the indicator grows outward
     :get-value-text="(value, index) => index === 0 ? `Min: ${value}` : `Max: ${value}`"
   />
 </div>
+```
+
+Customize the track length with a CSS utility class directly on the component:
+
+```vue demo
+<dt-slider
+  :model-value="60"
+  label="Height"
+  orientation="vertical"
+  class="d-h-600"
+/>
 ```
 
 ### Visually hidden label
@@ -421,3 +442,9 @@ The `label` slot replaces the plain text label entirely — scoped with `value` 
 ## Vue API
 
 <component-vue-api component-name="slider" />
+
+<script setup>
+import { ref } from 'vue';
+
+const externalReadoutValue = ref(50);
+</script>
