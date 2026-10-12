@@ -424,7 +424,7 @@ The `label` slot replaces the plain text label entirely — scoped with `value` 
 ### Screen reader behavior
 
 - Each thumb is a native `<input type="range">` which carries `role="slider"` implicitly, along with `aria-valuemin`, `aria-valuemax`, and `aria-valuenow`.
-- The component label is associated with each thumb via `aria-labelledby`. When `show-label` is `false`, the label element remains in the DOM (only visually hidden via `.sr-only`).
+- The component label is associated with each thumb via `aria-labelledby`. When `show-label` is `false`, the label is removed and the `label` prop's text is promoted to `aria-label` instead — the same pattern `DtInput`, `DtCheckbox`, `DtRadio`, and `DtSelectMenu` use. A slotted (non-string) `#label` can't be promoted this way, so pair a hidden `#label` slot with an explicit `aria-label` on the component.
 - For **range sliders**, provide the `getValueText` prop to give each thumb a distinct, localized description:
 
 ```vue code-only

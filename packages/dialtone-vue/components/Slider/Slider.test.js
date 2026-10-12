@@ -513,7 +513,7 @@ describe('DtSlider Tests', () => {
         const el = tooltipReadouts()[0];
         const style = el.attributes('style');
         expect(style).toContain('inset-inline-start: 50%'); // modelValue 50 of [0, 100]
-        expect(style).toContain('inset-block-end: calc(50% + var(--slider-thumb-visual-size) / 2 + var(--dt-spacing-150))');
+        expect(style).toContain('inset-block-end: calc(50% + var(--slider-thumb-visual-size) / 2 + var(--dt-spacing-100))');
         expect(style).toContain('transform: translateX(-50%)');
         expect(el.classes()).toContain('d-tooltip__arrow--bottom-center');
       });
@@ -625,12 +625,13 @@ describe('DtSlider Tests', () => {
         updateWrapper();
       });
 
-      it('keeps the label in the DOM', () => {
-        expect(label.exists()).toBe(true);
+      it('removes the label from the DOM, matching DtInput/DtCheckbox/DtRadio/DtSelectMenu', () => {
+        expect(label.exists()).toBe(false);
       });
 
-      it('applies sr-only class to hide it visually', () => {
-        expect(label.classes()).toContain('sr-only');
+      it('promotes the label prop to aria-label on each thumb input', () => {
+        expect(thumbInputs[0].attributes('aria-label')).toBe(baseProps.label);
+        expect(thumbInputs[0].attributes('aria-labelledby')).toBeUndefined();
       });
     });
 
@@ -1082,7 +1083,7 @@ describe('DtSlider Tests', () => {
       // The #label slot is documented as scoped with :value — a range-mode
       // consumer destructuring it (e.g. the shipped 'call duration filter'
       // Combinator preset: {{ value[0] }}–{{ value[1] }}) used to throw
-      // during hasVisibleLabel's hasSlotContent probe, which called the slot
+      // during hasLabelContent's hasSlotContent probe, which called the slot
       // with no props at all, leaving `value` undefined.
       mockProps = { label: undefined, modelValue: [20, 70] };
       mockSlots = { label: '<template #label="{ value }">{{ value[0] }}-{{ value[1] }}</template>' };
@@ -1097,7 +1098,7 @@ describe('DtSlider Tests', () => {
 
     it('does not re-log an unchanged warning on every value tick while dragging', async () => {
       // The accessible-name check reads currentValue.value (to safely probe
-      // a scoped #label slot — see hasVisibleLabel above), which changes on
+      // a scoped #label slot — see hasLabelContent above), which changes on
       // every drag tick. Watching that raw value directly (a bare
       // watchEffect) would re-run — and re-log — on every tick even though
       // the warning CONDITION never changes; a boolean-sourced watch() only
@@ -1169,7 +1170,7 @@ describe('DtSlider Tests', () => {
       // Older Vue docs caution that useAttrs() isn't reactive, which would
       // make the watch() below (sourcing attrs['aria-label']) miss this
       // change entirely unless some OTHER tracked dependency (e.g.
-      // hasVisibleLabel) happened to change on the same render. Verified
+      // hasLabelContent) happened to change on the same render. Verified
       // against the installed Vue version (attrs reads ARE tracked here) —
       // this pins that behavior so a future Vue bump that regresses it
       // gets caught.

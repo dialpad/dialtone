@@ -78,7 +78,15 @@ export function useSliderGeometry(props, {
   ));
 
   // Hugs the thumb without overlapping the tooltip arrow's ~6px protrusion.
-  const tooltipReadoutGapPx = 'var(--dt-spacing-150)'; // 12px
+  // Deliberately smaller than it could visually afford to be: the bubble's
+  // vertical poke above .d-slider__control's own block-start edge (which
+  // overflow-clip-margin, slider.less, gives ~32px of clipped room to render
+  // into) measures flush against that budget with under 1px of slack at
+  // --dt-spacing-150 (12px) — any larger and the bubble starts getting
+  // clipped. This leaves real slack instead of growing the clip margin,
+  // which is shared across all four sides and would leak out as a visible
+  // horizontal scrollbar everywhere else the margin is too generous.
+  const tooltipReadoutGapPx = 'var(--dt-spacing-100)'; // 8px
 
   // Computed synchronously from pct so the offset reacts instantly.
   function tooltipEdgeOffset(pct, index) {

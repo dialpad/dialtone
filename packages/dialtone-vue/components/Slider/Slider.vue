@@ -18,15 +18,18 @@
     data-qa="dt-slider"
   >
     <div
+      v-if="showLabel"
       :id="labelId"
-      :class="['d-slider__label', { 'sr-only': !showLabel }, labelClass]"
+      :class="['d-slider__label', labelClass]"
       data-qa="dt-slider-label"
     >
       <!-- @slot Slot for the label, defaults to the label prop. Scoped with
            :value (Number, or Number[] in range mode) — the live value(s),
            updating as the thumb is dragged — for labels that echo the
-           current value. Required for accessibility; set showLabel to false to
-           hide it visually. -->
+           current value. Required for accessibility; set showLabel to false
+           to hide it, and provide the label prop (not just this slot) so its
+           text can be promoted to aria-label — a slot's rich markup can't
+           collapse to the flat string aria-label requires. -->
       <slot
         name="label"
         :value="currentValue"
@@ -121,8 +124,10 @@
           :step="thumbNativeStep(i)"
           :disabled="disabled"
           :name="name || undefined"
-          :aria-labelledby="hasVisibleLabel ? labelId : attrs['aria-labelledby']"
-          :aria-label="hasVisibleLabel || attrs['aria-labelledby'] ? undefined : attrs['aria-label']"
+          :aria-labelledby="showLabel && hasLabelContent ? labelId : attrs['aria-labelledby']"
+          :aria-label="showLabel && hasLabelContent
+            ? undefined
+            : (!showLabel && label ? label : attrs['aria-label'])"
           :aria-describedby="attrs['aria-describedby']"
           :aria-errormessage="attrs['aria-errormessage']"
           :aria-details="attrs['aria-details']"
@@ -350,7 +355,9 @@ const props = defineProps({
   },
 
   /**
-   * When false, the label is hidden visually but remains in the DOM for screen readers.
+   * When false, the label is removed and its text (the label prop, not the
+   * #label slot) is promoted to aria-label instead — matching DtInput,
+   * DtCheckbox, DtRadio, and DtSelectMenu's own showLabel behavior.
    * @values true, false
    */
   showLabel: {
@@ -589,8 +596,10 @@ function slotHasText(vnodes) {
   });
 }
 
-// Determines which accessible-name source each thumb's native input binds.
-const hasVisibleLabel = computed(() => !!(
+// Whether the label prop or #label slot provides real text — independent of
+// showLabel, which only controls visibility, not whether a name exists.
+// Named to match DtCheckbox/DtRadio's own hasLabelContent.
+const hasLabelContent = computed(() => !!(
   props.label?.trim() || (slots.label && slotHasText(slots.label({ value: currentValue.value })))
 ));
 
@@ -686,7 +695,7 @@ const {
 
 // ─── Dev warnings ─────────────────────────────────────────────────────────────
 
-useSliderDevWarnings(props, { isRange, hasVisibleLabel, attrs });
+useSliderDevWarnings(props, { isRange, hasLabelContent, attrs });
 
 // ─── Exposed API ──────────────────────────────────────────────────────────────
 
