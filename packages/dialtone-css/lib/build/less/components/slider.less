@@ -131,8 +131,18 @@
     // var()-wrapped ones: calc(32px) alone (zero arithmetic, no var at all)
     // still computes to 0px here, same as min()/max(). Only a bare <length>
     // token works. So this one property is a raw px value instead of the
-    // token reference used everywhere else in this file; 32px matches
-    // --dt-spacing-400.
+    // token reference used everywhere else in this file; 48px matches
+    // --dt-spacing-600. There's no per-side longhand to spare (CSS.supports
+    // confirms overflow-clip-margin-block-start isn't implemented) — one
+    // shared value for all four sides, sized for the tightest real need: the
+    // tooltip readout poking upward past this box's own block-start edge
+    // (measured ~32px for a single-line value, i.e. flush against the
+    // margin's PREVIOUS 32px value with no slack — the same boundary
+    // fragility the horizontal edge-clamp's own safety margin exists for;
+    // see TOOLTIP_CLAMP_SAFETY_MARGIN_PX in UseSliderGeometry). The
+    // inline sides (marks, the tooltip's own horizontal clamp) only ever
+    // needed 32px, so this is pure extra slack for them, not a tightened
+    // constraint.
     overflow: clip;
     cursor: default;
     block-size: var(--slider-thumb-size);
@@ -146,7 +156,7 @@
     // use for their own --dt-spacing-base arithmetic).
     padding-block: max(calc(var(--dt-spacing-base) * 0), calc((var(--dt-spacing-550) - var(--slider-thumb-size)) / 2));
     /* stylelint-disable-next-line meowtec/no-px */
-    overflow-clip-margin: 32px;
+    overflow-clip-margin: 48px;
 }
 
 //  $$  TRACK
