@@ -327,7 +327,7 @@ Set `fill-origin` to a value within `[min, max]` and the indicator grows outward
 
 ```vue demo
 <!-- @wrapper -->
-<!-- @class d-hmn384 -->
+<!-- @class d-hmn-600 -->
 <div class="d-d-flex d-g-600 d-hmn200">
   <dt-slider
     :model-value="60"
@@ -346,6 +346,7 @@ Set `fill-origin` to a value within `[min, max]` and the indicator grows outward
 Customize the track length with a CSS utility class directly on the component:
 
 ```vue demo
+<!-- @class d-hmn-600 -->
 <dt-slider
   :model-value="60"
   label="Height"
