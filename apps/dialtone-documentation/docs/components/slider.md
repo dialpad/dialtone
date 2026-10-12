@@ -254,6 +254,13 @@ In range mode with `always` or `interaction`, the two thumbs' readouts merge int
 </dt-stack>
 ```
 
+#### Choosing a mode
+
+- Prefer `tooltip` in space-constrained or dense layouts — it floats above the track without affecting layout, so it never reserves space below the slider the way `always`/`interaction` do. It's the right default for toolbars, side panels, and anywhere several sliders stack tightly.
+- Reach for `always` when the value needs to stay legible without any interaction — dashboards, read-mostly summaries, or sliders a user might glance at rather than operate.
+- Use `interaction` as a middle ground: a persistent on-track readout like `always`, but only rendered (and only consuming layout space) while that thumb is actually in use.
+- Use `never` when you're rendering the value yourself elsewhere on the page (see below).
+
 Use `prefix`/`suffix` to decorate the raw number wherever it's displayed — the readout, marks, and each thumb's `aria-valuetext` all pick it up:
 
 ```vue demo
