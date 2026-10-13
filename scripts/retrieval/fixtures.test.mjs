@@ -39,7 +39,7 @@ test('nested fixture declares exact pins at the dependency root and limits evide
     );
     assert.deepEqual(
       manifest.dependencies,
-      getProfile('dt10-current').dependencies,
+      getProfile('dt10-pinned').dependencies,
     );
     const fingerprint = await fingerprintArtifact(
       'nested-umbrella',

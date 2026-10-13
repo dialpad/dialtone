@@ -11,8 +11,7 @@ module.exports = {
   commitPaths: [
     `${srcRoot}/*`,
     'scripts/build-dialtone-vue-docs.mjs',
-    // Git glob magic includes helpers directly under lib as well as nested helpers.
-    ':(glob)scripts/lib/**/*.mjs',
+    'scripts/lib/vue-component-identity.mjs',
     'common/utils/server.mjs',
   ],
   plugins: [

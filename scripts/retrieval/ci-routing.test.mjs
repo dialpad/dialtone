@@ -1,16 +1,8 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { createRequire } from 'node:module';
 import { test } from 'node:test';
-const require = createRequire(import.meta.url);
-assert.equal(
-  require('nx/package.json').version,
-  '19.8.0',
-  'Nx private routing-test dependencies require 19.8.0; inspect their new versions before updating this guard',
-);
-const nxRequire = createRequire(require.resolve('nx/package.json'));
-const { parse } = nxRequire('yaml');
-const { minimatch } = nxRequire('minimatch');
+import { parse } from 'yaml';
+import { minimatch } from 'minimatch';
 const readWorkflow = (file) =>
   parse(
     readFileSync(

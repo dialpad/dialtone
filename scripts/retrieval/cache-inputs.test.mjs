@@ -94,11 +94,14 @@ test('standalone Vue release selection includes generator and shared-helper fixe
     const from = git('rev-parse', 'HEAD');
     const paths = [
       ...generatorInputs,
-      'scripts/lib/nested/helper.mjs',
       'packages/dialtone-vue/components/button/button.vue',
     ];
-    const unrelated = 'scripts/unrelated.mjs';
-    for (const path of [...paths, unrelated]) {
+    const unrelated = [
+      'scripts/unrelated.mjs',
+      'scripts/lib/nested/helper.mjs',
+      'scripts/lib/component-name.mjs',
+    ];
+    for (const path of [...paths, ...unrelated]) {
       await mkdir(dirname(join(directory, path)), { recursive: true });
       await writeFile(join(directory, path), 'fixture');
       git('add', path);

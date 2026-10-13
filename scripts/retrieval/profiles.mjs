@@ -19,14 +19,14 @@ const umbrella = (id, version, icons, integrity) => ({
     ? ['umbrella v9; do not assume DtBox/DtText availability']
     : ['umbrella v10; qualify exports and data from the pinned artifact'],
 });
-const current = umbrella(
-  'dt10-current',
+const pinned = umbrella(
+  'dt10-pinned',
   '10.5.1',
   '5.2.0',
   'sha512-SZ+5Muqmf+z94P6H1Yrxco8BlJ88qKpQnLd1rUFd47iHP6AUSdWC/cJ4R5qMDzn0s16rWdplxk0z9g+612NiKg==',
 );
 export const profiles = [
-  current,
+  pinned,
   umbrella(
     'dt10-min',
     '10.0.4',
@@ -78,15 +78,15 @@ export const profiles = [
   },
   {
     id: 'partial-install',
-    framework: current.framework,
+    framework: pinned.framework,
     dependencies: { '@dialpad/dialtone-icons': '5.2.0', vue: '3.5.18' },
     artifacts: {},
-    layout: current.layout,
+    layout: pinned.layout,
     data: {},
     boundaries: ['icons only; no component availability claim'],
   },
   {
-    ...current,
+    ...pinned,
     id: 'nested-umbrella',
     layout: { dependencyRoot: 'web', invocationRoot: 'web/apps/client' },
     boundaries: [

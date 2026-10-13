@@ -21,35 +21,41 @@ if (reportArgument >= 0 && !reportPath?.trim())
 const offline = fileURLToPath(new URL('offline-registry.mjs', import.meta.url));
 const execute = promisify(execFile);
 const domains = {
-  components: [
-    'searchComponents',
-    'components',
-    'formatComponentResults',
-    'search_components',
-    'component',
-  ],
-  utilities: [
-    'searchUtilityClasses',
-    'utilityClasses',
-    'formatResults',
-    'search_utility_classes',
-    'utility-class',
-  ],
-  tokens: [
-    'searchTokens',
-    'tokens',
-    'formatTokenResults',
-    'search_tokens',
-    'design-token',
-  ],
-  icons: ['searchIcons', 'icons', 'formatIconResults', 'search_icons', 'icon'],
-  documentation: [
-    'searchDocumentation',
-    'documentation',
-    'formatDocumentationResults',
-    'search_documentation',
-    'documentation',
-  ],
+  components: {
+    search: 'searchComponents',
+    data: 'components',
+    format: 'formatComponentResults',
+    tool: 'search_components',
+    type: 'component',
+  },
+  utilities: {
+    search: 'searchUtilityClasses',
+    data: 'utilityClasses',
+    format: 'formatResults',
+    tool: 'search_utility_classes',
+    type: 'utility-class',
+  },
+  tokens: {
+    search: 'searchTokens',
+    data: 'tokens',
+    format: 'formatTokenResults',
+    tool: 'search_tokens',
+    type: 'design-token',
+  },
+  icons: {
+    search: 'searchIcons',
+    data: 'icons',
+    format: 'formatIconResults',
+    tool: 'search_icons',
+    type: 'icon',
+  },
+  documentation: {
+    search: 'searchDocumentation',
+    data: 'documentation',
+    format: 'formatDocumentationResults',
+    tool: 'search_documentation',
+    type: 'documentation',
+  },
 };
 const core = await import(
   new URL('../../packages/dialtone-query-core/build/index.js', import.meta.url)
@@ -77,7 +83,10 @@ const transport = new StdioClientTransport({
   cwd: root,
   stderr: 'pipe',
 });
-transport.stderr?.on('data', () => {});
+let mcpStderr = '';
+transport.stderr?.on('data', chunk => {
+  mcpStderr = (mcpStderr + chunk.toString()).slice(-8192);
+});
 
 function textNames(text, domain) {
   if (domain === 'documentation')
@@ -89,7 +98,7 @@ function textNames(text, domain) {
   return [...text.matchAll(expression)].map((match) => match[1]);
 }
 async function query(testCase, adapter) {
-  const [search, data, format, tool, type] = domains[testCase.domain];
+  const { search, data, format, tool, type } = domains[testCase.domain];
   if (adapter === 'core') {
     // The stamped dt9-legacy projection establishes lookup facts, with no install/build claim.
     const dataset =
@@ -355,6 +364,13 @@ try {
   } catch (error) {
     cleanupError ??= error;
     console.error(`fixture cleanup failed: ${error.message}`);
+  }
+  if (
+    mcpStderr &&
+    (setupError || cleanupError || report.results.some(result => result.status === 'fail'))
+  ) {
+    report.mcpStderr = mcpStderr;
+    console.error(`MCP stderr:\n${mcpStderr}`);
   }
   try {
     if (reportPath)
