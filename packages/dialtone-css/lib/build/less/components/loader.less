@@ -8,34 +8,524 @@
 //
 //  TABLE OF CONTENTS
 //  • DEFAULT LOADER
+//  • KEYFRAMES
+//  • REDUCED MOTION
 //
 //  ============================================================================
 //  $   DEFAULT LOADER
 //  ----------------------------------------------------------------------------
 @layer dialtone.components {
 .d-loader {
+  --loader-duration: 2500ms;
+
   display: inline-grid;
+  // Dots fill with currentColor, so a color utility or `color` set on the
+  // loader itself still recolors it. --loader-color-dot is left unset here so
+  // contexts like buttons can override it regardless of stylesheet order.
+  color: var(--loader-color-dot, var(--dt-color-surface-bold));
 
-  &__icon {
-    grid-area: 1 / 1;
-    opacity: var(--dt-opacity-1000);
-    animation: d-loading-circle 900ms infinite linear;
+  &__dot {
+    // With transform-box: fill-box, each dot scales from its own center
+    // rather than the SVG origin.
+    transform-origin: center;
+    // Keyframes are sampled at 24 evenly spaced steps from the Figma motion
+    // spec, so each step interpolates linearly to reproduce the source curve.
+    animation-duration: var(--loader-duration);
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    fill: currentColor;
+    transform-box: fill-box;
 
-    // Comet fade. Black is an intentional choice and only used for masking.
-    mask-image: conic-gradient(
-      from 270deg,
-      black 0deg,
-      black 105deg,
-      transparent 170deg,
-      transparent 180deg,
-      black 234deg,
-      black 360deg
-    );
+    &--1 { animation-name: d-loader-dot-1-orbit, d-loader-dot-grow; }
+    &--2 { animation-name: d-loader-dot-2-orbit, d-loader-dot-grow; }
+    &--3 { animation-name: d-loader-dot-3-orbit, d-loader-dot-shrink; }
+    &--4 { animation-name: d-loader-dot-4-orbit, d-loader-dot-shrink; }
+  }
+}
+
+//  ============================================================================
+//  $   KEYFRAMES
+//      Translate values are percentages of each dot's own size (resolved
+//      against transform-box: fill-box), so the motion scales with every icon
+//      size without pixel values.
+//      Figma's code export reports each dot's offsets in its rotated (-45°)
+//      local frame. They are rotated back to screen space here, which matches
+//      Figma's rendered playback. Re-apply that rotation when re-exporting.
+//      Design tweak on top of the spec: dot positions sit 5% further from the
+//      loader center, then the whole loader is scaled to 0.9655 so the motion
+//      keeps the spec's footprint. The rest geometry in Loader.vue matches.
+//  ----------------------------------------------------------------------------
+@keyframes d-loader-dot-1-orbit {
+  0%, 100% {
+    translate: 0 0;
   }
 
-  &__icon-track {
-    grid-area: 1 / 1;
-    opacity: var(--dt-opacity-200);
+  4.1667% {
+    translate: -2.645% 22.505%;
+  }
+
+  8.3333% {
+    translate: -10.631% 44.175%;
+  }
+
+  12.5% {
+    translate: -23.199% 63.346%;
+  }
+
+  16.6667% {
+    translate: -39.21% 78.405%;
+  }
+
+  20.8333% {
+    translate: -57.288% 88.051%;
+  }
+
+  25% {
+    translate: -75.984% 91.427%;
+  }
+
+  29.1667% {
+    translate: -93.95% 88.199%;
+  }
+
+  33.3333% {
+    translate: -110.043% 78.68%;
+  }
+
+  37.5% {
+    translate: -123.369% 63.733%;
+  }
+
+  41.6667% {
+    translate: -133.312% 44.658%;
+  }
+
+  45.8333% {
+    translate: -139.469% 23.033%;
+  }
+
+  50% {
+    translate: -141.641% 0.545%;
+  }
+
+  54.1667% {
+    translate: -139.759% -21.192%;
+  }
+
+  58.3333% {
+    translate: -133.855% -40.78%;
+  }
+
+  62.5% {
+    translate: -124.15% -57.088%;
+  }
+
+  66.6667% {
+    translate: -110.995% -69.291%;
+  }
+
+  70.8333% {
+    translate: -95.014% -76.84%;
+  }
+
+  75% {
+    translate: -77.084% -79.45%;
+  }
+
+  79.1667% {
+    translate: -58.352% -76.988%;
+  }
+
+  83.3333% {
+    translate: -40.169% -69.559%;
+  }
+
+  87.5% {
+    translate: -23.98% -57.475%;
+  }
+
+  91.6667% {
+    translate: -11.182% -41.256%;
+  }
+
+  95.8333% {
+    translate: -2.927% -21.727%;
+  }
+}
+
+@keyframes d-loader-dot-2-orbit {
+  0%, 100% {
+    translate: 0 0;
+  }
+
+  4.1667% {
+    translate: 1.88% -21.74%;
+  }
+
+  8.3333% {
+    translate: 7.785% -41.328%;
+  }
+
+  12.5% {
+    translate: 17.49% -57.636%;
+  }
+
+  16.6667% {
+    translate: 30.645% -69.84%;
+  }
+
+  20.8333% {
+    translate: 46.626% -77.388%;
+  }
+
+  25% {
+    translate: 64.555% -79.998%;
+  }
+
+  29.1667% {
+    translate: 83.288% -77.537%;
+  }
+
+  33.3333% {
+    translate: 101.478% -70.115%;
+  }
+
+  37.5% {
+    translate: 117.66% -58.023%;
+  }
+
+  41.6667% {
+    translate: 130.458% -41.804%;
+  }
+
+  45.8333% {
+    translate: 138.712% -22.276%;
+  }
+
+  50% {
+    translate: 141.65% -0.554%;
+  }
+
+  54.1667% {
+    translate: 139.002% 21.949%;
+  }
+
+  58.3333% {
+    translate: 131.008% 43.627%;
+  }
+
+  62.5% {
+    translate: 118.44% 62.798%;
+  }
+
+  66.6667% {
+    translate: 102.43% 77.857%;
+  }
+
+  70.8333% {
+    translate: 84.351% 87.502%;
+  }
+
+  75% {
+    translate: 65.663% 90.871%;
+  }
+
+  79.1667% {
+    translate: 47.689% 87.651%;
+  }
+
+  83.3333% {
+    translate: 31.597% 78.132%;
+  }
+
+  87.5% {
+    translate: 18.27% 63.185%;
+  }
+
+  91.6667% {
+    translate: 8.335% 44.103%;
+  }
+
+  95.8333% {
+    translate: 2.17% 22.485%;
+  }
+}
+
+@keyframes d-loader-dot-3-orbit {
+  0%, 100% {
+    translate: 0 0;
+  }
+
+  4.1667% {
+    translate: -11.876% -2.133%;
+  }
+
+  8.3333% {
+    translate: -22.505% -8.418%;
+  }
+
+  12.5% {
+    translate: -31.311% -18.295%;
+  }
+
+  16.6667% {
+    translate: -37.887% -30.905%;
+  }
+
+  20.8333% {
+    translate: -41.956% -45.196%;
+  }
+
+  25% {
+    translate: -43.395% -60.051%;
+  }
+
+  29.1667% {
+    translate: -42.142% -74.415%;
+  }
+
+  33.3333% {
+    translate: -38.25% -87.359%;
+  }
+
+  37.5% {
+    translate: -31.827% -98.136%;
+  }
+
+  41.6667% {
+    translate: -23.144% -106.2%;
+  }
+
+  45.8333% {
+    translate: -12.579% -111.193%;
+  }
+
+  50% {
+    translate: -0.73% -112.908%;
+  }
+
+  54.1667% {
+    translate: 11.648% -111.291%;
+  }
+
+  58.3333% {
+    translate: 23.664% -106.382%;
+  }
+
+  62.5% {
+    translate: 34.357% -98.392%;
+  }
+
+  66.6667% {
+    translate: 42.814% -87.674%;
+  }
+
+  70.8333% {
+    translate: 48.269% -74.769%;
+  }
+
+  75% {
+    translate: 50.215% -60.42%;
+  }
+
+  79.1667% {
+    translate: 48.461% -45.545%;
+  }
+
+  83.3333% {
+    translate: 43.178% -31.22%;
+  }
+
+  87.5% {
+    translate: 34.873% -18.551%;
+  }
+
+  91.6667% {
+    translate: 24.293% -8.6%;
+  }
+
+  95.8333% {
+    translate: 12.351% -2.221%;
+  }
+}
+
+@keyframes d-loader-dot-4-orbit {
+  0%, 100% {
+    translate: 0 0;
+  }
+
+  4.1667% {
+    translate: 12.383% 1.625%;
+  }
+
+  8.3333% {
+    translate: 24.398% 6.525%;
+  }
+
+  12.5% {
+    translate: 35.091% 14.515%;
+  }
+
+  16.6667% {
+    translate: 43.553% 25.238%;
+  }
+
+  20.8333% {
+    translate: 49.008% 38.143%;
+  }
+
+  25% {
+    translate: 50.954% 52.492%;
+  }
+
+  29.1667% {
+    translate: 49.195% 67.362%;
+  }
+
+  33.3333% {
+    translate: 43.917% 81.692%;
+  }
+
+  37.5% {
+    translate: 35.607% 94.356%;
+  }
+
+  41.6667% {
+    translate: 25.032% 104.312%;
+  }
+
+  45.8333% {
+    translate: 13.086% 110.686%;
+  }
+
+  50% {
+    translate: 0.731% 112.907%;
+  }
+
+  54.1667% {
+    translate: -11.136% 110.779%;
+  }
+
+  58.3333% {
+    translate: -21.776% 104.494%;
+  }
+
+  62.5% {
+    translate: -30.577% 94.612%;
+  }
+
+  66.6667% {
+    translate: -37.147% 82.007%;
+  }
+
+  70.8333% {
+    translate: -41.216% 67.716%;
+  }
+
+  75% {
+    translate: -42.656% 52.861%;
+  }
+
+  79.1667% {
+    translate: -41.408% 38.492%;
+  }
+
+  83.3333% {
+    translate: -37.511% 25.553%;
+  }
+
+  87.5% {
+    translate: -31.093% 14.771%;
+  }
+
+  91.6667% {
+    translate: -22.405% 6.712%;
+  }
+
+  95.8333% {
+    translate: -11.844% 1.714%;
+  }
+}
+
+@keyframes d-loader-dot-grow {
+  0%, 50%, 100% {
+    scale: 1;
+  }
+
+  4.1667%, 45.8333%, 54.1667%, 95.8333% {
+    scale: 1.026;
+  }
+
+  8.3333%, 41.6667%, 58.3333%, 91.6667% {
+    scale: 1.095;
+  }
+
+  12.5%, 37.5%, 62.5%, 87.5% {
+    scale: 1.191;
+  }
+
+  16.6667%, 33.3333%, 66.6667%, 83.3333% {
+    scale: 1.286;
+  }
+
+  20.8333%, 29.1667%, 70.8333%, 79.1667% {
+    scale: 1.356;
+  }
+
+  25%, 75% {
+    scale: 1.382;
+  }
+}
+
+@keyframes d-loader-dot-shrink {
+  0%, 50%, 100% {
+    scale: 1;
+  }
+
+  4.1667%, 45.8333%, 54.1667%, 95.8333% {
+    scale: 0.983;
+  }
+
+  8.3333%, 41.6667%, 58.3333%, 91.6667% {
+    scale: 0.937;
+  }
+
+  12.5%, 37.5%, 62.5%, 87.5% {
+    scale: 0.874;
+  }
+
+  16.6667%, 33.3333%, 66.6667%, 83.3333% {
+    scale: 0.81;
+  }
+
+  20.8333%, 29.1667%, 70.8333%, 79.1667% {
+    scale: 0.764;
+  }
+
+  25%, 75% {
+    scale: 0.747;
+  }
+}
+
+@keyframes d-loader-pulse {
+  0%, 100% {
+    opacity: var(--dt-opacity-1300);
+  }
+
+  50% {
+    opacity: var(--dt-opacity-600);
+  }
+}
+
+//  ============================================================================
+//  $   REDUCED MOTION
+//      Drop the orbit and scale, keep a gentle opacity pulse so the loader
+//      still reads as active.
+//  ----------------------------------------------------------------------------
+@media (prefers-reduced-motion: reduce) {
+  .d-loader__dot {
+    animation-name: d-loader-pulse;
+    animation-timing-function: var(--ttf-in-out);
   }
 }
 }

@@ -4,7 +4,7 @@ description: Animated indicator for indeterminate loading or progress.
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-loader--default
-keywords: ["spinner", "loading", "progress", "d-loader", "DtLoader", "dt-loader", "activity indicator", "spin"]
+keywords: ["spinner", "loading", "progress", "d-loader", "DtLoader", "dt-loader", "activity indicator", "spin", "dots", "dot loader"]
 combinator: DtLoader
 ---
 
@@ -56,10 +56,15 @@ The base loader size is 24px and should be used in most cases.
 <dt-loader size="100|200|300|400|500|600|700|800"></dt-loader>
 ```
 
+## Color
+
+Loader dots use `--dt-color-surface-bold` by default. Inside a [Button](/components/button.html), they follow the button's text color. To recolor the dots elsewhere, add a color utility class such as `d-fc-critical` to the loader, or set the `--loader-color-dot` custom property on the loader or on a parent element.
+
 ## Accessibility
 
 - You can add an `aria-label` attribute to the loader to indicate a custom label.
 - If no `aria-label` is provided, the default value is "loading".
+- When the user prefers reduced motion, the dots stop moving and gently pulse in opacity instead.
 
 ## Vue API
 
