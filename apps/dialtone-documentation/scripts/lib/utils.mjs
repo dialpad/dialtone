@@ -42,20 +42,16 @@ export function codeCell (text) {
 
 /**
  * Escape pipe characters inside a markdown table cell, except inside code spans.
- * Also collapses whitespace and trims. tableText escapes every pipe.
+ * Pass escapeEveryPipe to also escape pipes inside code spans for GFM API tables.
+ * Also collapses whitespace and trims.
  */
-export function escapeTableCell (text) {
-  if (!text) return '';
-  // Escape pipes but skip those inside backtick code spans
-  return text
-    .replace(/`[^`]*`|(\|)/g, (m, pipe) => pipe ? '\\|' : m)
+export function escapeTableCell (text, escapeEveryPipe = false) {
+  if (!text && !escapeEveryPipe) return '';
+  const pattern = escapeEveryPipe ? /\|/g : /`[^`]*`|(\|)/g;
+  return String(text ?? '')
+    .replace(pattern, (match, pipe) => escapeEveryPipe || pipe ? '\\|' : match)
     .replace(/\s+/g, ' ')
     .trim();
-}
-
-/** Table-cell text: escape every pipe (GFM splits cells on them, even in code spans). */
-export function tableText (value) {
-  return String(value ?? '').replace(/\|/g, '\\|').replace(/\s+/g, ' ').trim();
 }
 
 /** Table-cell code span whose fence outlasts any backtick run in the value. */
@@ -63,7 +59,7 @@ export function apiCode (value) {
   if (value === undefined) return 'Not documented';
   if (value === null) return '`null`';
   if (value === '') return '`\'\'`';
-  const text = tableText(value);
+  const text = escapeTableCell(value, true);
   const runs = text.match(/`+/g) ?? [];
   const fence = '`'.repeat(Math.max(0, ...runs.map(run => run.length)) + 1);
   return fence.length === 1 ? `\`${text}\`` : `${fence} ${text} ${fence}`;

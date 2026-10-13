@@ -6,7 +6,7 @@
  */
 
 import { readFileSync } from 'node:fs';
-import { findComponentRecord, componentRootImportRoute, componentImportLine, tableText, apiCode } from './utils.mjs';
+import { findComponentRecord, componentRootImportRoute, componentImportLine, escapeTableCell, apiCode } from './utils.mjs';
 
 let _componentDocData = null;
 let _documentationProfile = null;
@@ -61,9 +61,9 @@ function deprecation (item) {
     : item.tags?.deprecated?.[0];
   const description = item.description?.match(/@deprecated\b\s*(.*)/i)?.[1];
   if (tag || description !== undefined) {
-    return tableText(tag?.description || description || 'Yes');
+    return escapeTableCell(tag?.description || description || 'Yes', true);
   }
-  return 'Not documented';
+  return 'No';
 }
 
 function typeName (type) {
@@ -75,7 +75,7 @@ function parameters (items) {
   return items.map(item => {
     const type = typeName(item.type);
     const name = item.name || '(unnamed)';
-    return `${apiCode(type ? `${name}: ${type}` : name)}${type ? '' : ' (type not documented)'}${item.description ? ` — ${tableText(item.description)}` : ''}`;
+    return `${apiCode(type ? `${name}: ${type}` : name)}${type ? '' : ' (type not documented)'}${item.description ? ` — ${escapeTableCell(item.description, true)}` : ''}`;
   }).join('; ');
 }
 
@@ -144,24 +144,24 @@ export function transformVueApi (componentName, { showImport = true, alsoImport 
 
   if (component.metadata?.deprecated) {
     const metadata = component.metadata;
-    output.push(`Deprecated: Yes.${metadata.reason ? ` ${tableText(metadata.reason)}` : ''}${metadata.replacement ? ` Replacement: ${apiCode(metadata.replacement)}.` : ''}`, '');
+    output.push(`Deprecated: Yes.${metadata.reason ? ` ${escapeTableCell(metadata.reason, true)}` : ''}${metadata.replacement ? ` Replacement: ${apiCode(metadata.replacement)}.` : ''}`, '');
   }
 
   const props = component.props ? Object.values(component.props) : [];
   output.push(...buildApiTable('Props', props, ['Name', 'Description', 'Type', 'Values', 'Default', 'Required', 'Deprecated'], (prop) => {
     const values = prop.values?.length ? prop.values.map(apiCode).join(', ') : 'Not documented';
-    return `| ${apiCode(prop.name)} | ${tableText(prop.description)} | ${apiCode(typeName(prop.type))} | ${values} | ${formatDefault(prop)} | ${documentedBoolean(prop.required)} | ${deprecation(prop)} |`;
+    return `| ${apiCode(prop.name)} | ${escapeTableCell(prop.description, true)} | ${apiCode(typeName(prop.type))} | ${values} | ${formatDefault(prop)} | ${documentedBoolean(prop.required ?? false)} | ${deprecation(prop)} |`;
   }));
 
   const slots = component.slots ? Object.values(component.slots) : [];
   output.push(...buildApiTable('Slots', slots, ['Name', 'Description', 'Scoped', 'Bindings', 'Deprecated'], (slot) => {
-    return `| ${apiCode(slot.name)} | ${tableText(slot.description)} | ${documentedBoolean(slot.scoped)} | ${parameters(slot.bindings)} | ${deprecation(slot)} |`;
+    return `| ${apiCode(slot.name)} | ${escapeTableCell(slot.description, true)} | ${documentedBoolean(slot.scoped)} | ${parameters(slot.bindings)} | ${deprecation(slot)} |`;
   }));
 
   const events = component.events ? Object.values(component.events) : [];
   output.push(...buildApiTable('Events', events, ['Name', 'Description', 'Payload', 'Parameters', 'Deprecated'], (event) => {
     const payload = typeName(event.type);
-    return `| ${apiCode(event.name)} | ${tableText(event.description)} | ${apiCode(payload)} | ${parameters(event.properties)} | ${deprecation(event)} |`;
+    return `| ${apiCode(event.name)} | ${escapeTableCell(event.description, true)} | ${apiCode(payload)} | ${parameters(event.properties)} | ${deprecation(event)} |`;
   }));
 
   return output;

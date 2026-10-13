@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'vitest';
 import { setComponentDocs, findComponent, transformVueApi } from './transform-vue-api.mjs';
+import { escapeTableCell } from './utils.mjs';
 
 const record = (name, kind = 'public') => ({
   displayName: name,
@@ -76,10 +77,19 @@ test('raw API tables retain allowed values, required, defaults and deprecation f
   assert.match(output, /`enabled`.*`false`/);
   assert.match(output, /`count`.*`0`/);
   assert.match(output, /`nullable`.*`null`/);
-  assert.equal(output.split('\n').find(line => line.startsWith('| `missing`')).split('|')[5].trim(), 'Not documented');
+  const missing = output.split('\n').find(line => line.startsWith('| `missing`')).split('|');
+  assert.equal(missing[5].trim(), 'Not documented');
+  assert.equal(missing[6].trim(), 'No');
+  assert.equal(missing[7].trim(), 'No');
   assert.match(output, /`items`.*`\(\) => \[\]`/);
   assert.match(output, /`documented`.*`\[\]`/);
   assert.match(output, /Deprecated.*DtReplacement/);
+});
+
+test('table escaping retains the legacy mode and can escape pipes inside code spans', () => {
+  const text = '  plain | `string | number`\n';
+  assert.equal(escapeTableCell(text), 'plain \\| `string | number`');
+  assert.equal(escapeTableCell(text, true), 'plain \\| `string \\| number`');
 });
 
 test('raw events and scoped slots preserve named payloads, binding facts and unknowns', () => {
