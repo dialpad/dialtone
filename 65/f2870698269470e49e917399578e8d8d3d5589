@@ -1,0 +1,25 @@
+packages/dialtone-css/lib/build/js/dialtone_migrate/index.mjs
+  s_65ca0d10331f6f::t_0e30e13c75d5c9 560
+  s_65ca0d10331f6f::t_0eebec6fa1f3b5 60-62
+  s_65ca0d10331f6f::t_49f49a49e3bbdf 252-259
+  s_65ca0d10331f6f::t_ca515a69bbabc6 168
+packages/dialtone-css/lib/build/js/dialtone_migrate/test.mjs
+  s_65ca0d10331f6f::t_70d2cadfb22dd6 89-107,109-114,116-121,123-128,130-131
+  s_65ca0d10331f6f::t_26c57cf6f24646 108,115,122,129
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.24",
+  "base_commit_sha": "65f2870698269470e49e917399578e8d8d3d5589",
+  "prompts": {},
+  "sessions": {
+    "s_65ca0d10331f6f": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e56d3a55-062e-4460-b99c-ee3cc0688ca3",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

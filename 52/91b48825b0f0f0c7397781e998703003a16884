@@ -1,0 +1,37 @@
+packages/dialtone-cli/src/component-exports.ts
+  s_c8ad6feb7a7a00::t_64231252151540 3-5,38,40,43
+apps/dialtone-documentation/scripts/lib/transform-vue-api.mjs
+  s_c8ad6feb7a7a00::t_19df732323bd1d 9,76-78
+apps/dialtone-documentation/scripts/lib/utils.mjs
+  s_c8ad6feb7a7a00::t_19df732323bd1d 22-25,28-30
+  s_c8ad6feb7a7a00::t_42d3b09b8539c9 26-27
+packages/dialtone-cli/src/formatters.ts
+  s_c8ad6feb7a7a00::t_bef8c549ab9594 20-23,115,190,242,274
+packages/dialtone-query-core/src/tools/components.ts
+  s_c8ad6feb7a7a00::t_136368576bc5fc 6,170-181,186
+packages/dialtone-query-core/src/component-identity.ts
+  s_c8ad6feb7a7a00::t_136368576bc5fc 13-17,31,74-83,85
+packages/dialtone-cli/src/commands/prompt.ts
+  s_c8ad6feb7a7a00::t_bef8c549ab9594 6,31
+  s_c8ad6feb7a7a00::t_33b4176451a91d 2
+packages/dialtone-cli/src/data-resolver.ts
+  s_c8ad6feb7a7a00::t_bef8c549ab9594 57-58,100,103,106-107,165,167-168
+apps/dialtone-documentation/docs/.vuepress/baseComponents/ComponentVueApi.vue
+  s_c8ad6feb7a7a00::t_19df732323bd1d 26,55
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "5291b48825b0f0f0c7397781e998703003a16884",
+  "prompts": {},
+  "sessions": {
+    "s_c8ad6feb7a7a00": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6f605576-f73f-414c-9125-c046a01ec7e1",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

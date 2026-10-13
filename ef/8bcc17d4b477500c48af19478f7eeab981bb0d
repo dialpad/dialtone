@@ -1,0 +1,27 @@
+packages/combinator/src/components/combinator.vue
+  s_f672c31256c957::t_327f973b669bc4 97-98
+packages/combinator/src/lib/variant_state.js
+  s_f672c31256c957::t_828cd39d47d2d0 75,85
+packages/combinator/src/components/renderer/renderer_spec_sheet.vue
+  s_f672c31256c957::t_05a84b1443e260 214
+  s_f672c31256c957::t_0686864e94c337 2
+packages/combinator/src/components/renderer/renderer_target.vue
+  s_f672c31256c957::t_29727c63c8937f 87-99
+  s_f672c31256c957::t_abc516d3548f4c 8-11
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.3",
+  "base_commit_sha": "ef8bcc17d4b477500c48af19478f7eeab981bb0d",
+  "prompts": {},
+  "sessions": {
+    "s_f672c31256c957": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9cc40e93-82f2-4b7d-b85d-ff4d3f97ff36",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

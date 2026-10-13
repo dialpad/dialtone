@@ -1,0 +1,24 @@
+packages/dialtone-vue/components/ImageViewer/ImageViewer.test.js
+  h_c15b5755534093 4,165-309
+packages/dialtone-vue/components/ImageViewer/ImageViewer.vue
+  h_c15b5755534093 4,19,79,98-102,106,176-184,216,236-243,247-256
+packages/dialtone-vue/components/Modal/Modal.stories.js
+  h_c15b5755534093 4,161-162,242-256
+packages/dialtone-vue/components/Modal/ModalWithOverlays.story.vue
+  h_c15b5755534093 1-188
+packages/dialtone-vue/components/Popover/Popover.test.js
+  h_c15b5755534093 622-774
+packages/dialtone-vue/components/Popover/Popover.vue
+  h_c15b5755534093 6,10,651-657,690,1100-1138,1168-1169
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.23",
+  "base_commit_sha": "2d218f61e59706689c2f3a485db2652f7e0ca5de",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
