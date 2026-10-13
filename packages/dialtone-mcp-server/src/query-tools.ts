@@ -31,6 +31,7 @@ import {
   COMPONENT_DETAIL_LIMIT,
   MATCH_STATES,
   createRetrievalEnvelope,
+  paginate,
   formatRetrievalEnvelope,
 } from '@dialpad/dialtone-query-core';
 import type {
@@ -316,14 +317,14 @@ function sourceText(name: string) {
 function searchFooter(
   name: string,
   args: { query: string; limit: number; offset: number; projection?: string },
-  total: number,
-  returned: number,
+  pagination: ReturnType<typeof paginate>,
 ) {
+  const { page, total, nextOffset } = pagination;
+  const returned = page.length;
   let footer = `\n\n**Results:** ${returned} of ${total}; offset ${args.offset}.\n${sourceText(name)}`;
-  const next = args.offset + returned;
-  if (args.limit > 0 && returned && next < total && next <= 100000)
-    footer += `\n**Continue:** ${callText(name, { ...args, offset: next })}`;
-  else if (next < total)
+  if (args.limit > 0 && returned && nextOffset !== null && nextOffset <= 100000)
+    footer += `\n**Continue:** ${callText(name, { ...args, offset: nextOffset })}`;
+  else if (nextOffset !== null)
     footer +=
       '\nNo continuation can make progress with this limit within the supported offset range.';
   return footer;
@@ -442,11 +443,10 @@ export function executeQueryTool(name: string, input: unknown) {
       limit: limit || DEFAULT_LIMIT,
       ...rest,
     };
-    const pageOf = <T>(items: T[]) =>
-      items.slice(pageArgs.offset, pageArgs.offset + pageArgs.limit);
     if (pageArgs.projection === 'themes') {
       const selected = getValueDetail(pageArgs.query, tokens);
-      const page = pageOf(selected.items);
+      const pagination = paginate(selected.items, pageArgs);
+      const page = pagination.page;
       const output = selected.subject
         ? formatTokenThemes(
             selected.subject.name,
@@ -456,13 +456,14 @@ export function executeQueryTool(name: string, input: unknown) {
         : `No exact token source name matched "${pageArgs.query}". Use ${callText(name, { query: pageArgs.query, projection: 'summary' })} and select a returned name.`;
       return readableReply(
         output +
-          searchFooter(name, pageArgs, selected.items.length, page.length),
+          searchFooter(name, pageArgs, pagination),
       );
     }
     const found = pageArgs.query.trim()
       ? spec.search(pageArgs.query)
       : { results: [], notes: ['No match: query contains only whitespace.'] };
-    const page = pageOf(found.results);
+    const pagination = paginate(found.results, pageArgs);
+    const page = pagination.page;
     let output = spec.format(
       page,
       text,
@@ -475,7 +476,7 @@ export function executeQueryTool(name: string, input: unknown) {
       output +=
         spec.followUp.heading + page.map(spec.followUp.line).join('\n');
     return readableReply(
-      output + searchFooter(name, pageArgs, found.results.length, page.length),
+      output + searchFooter(name, pageArgs, pagination),
     );
   } catch (error) {
     const notes =

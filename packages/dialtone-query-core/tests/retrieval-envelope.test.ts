@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { createRetrievalEnvelope } from '../src/retrieval.js';
+import { createRetrievalEnvelope, paginate } from '../src/retrieval.js';
 const stamp = {
   schemaVersion: 1,
   buildHash: 'a'.repeat(64),
@@ -15,6 +15,24 @@ const stamp = {
 const envelope = (options: Parameters<typeof createRetrievalEnvelope>[0]) => {
   return createRetrievalEnvelope(options, stamp);
 };
+describe('shared paging', () => {
+  it('preserves page counts and native slicing without changing caller validation', () => {
+    const items = ['A', 'B', 'C'];
+    for (const [offset, limit, page, nextOffset] of [
+      [0, 2, ['A', 'B'], 2],
+      [2, 2, ['C'], null],
+      [3, 2, [], null],
+      [0, 10, items, null],
+      [0, 2.5, ['A', 'B'], 2],
+      [0, -1, ['A', 'B'], 2],
+    ] as const) {
+      expect(paginate(items, { offset, limit })).toEqual({
+        page, total: 3, nextOffset,
+      });
+    }
+    expect(items).toEqual(['A', 'B', 'C']);
+  });
+});
 describe('bounded C2 result contract', () => {
   it('returns counts, explicit omissions, bundled versions and a stable continuation', () => {
     const result = envelope({

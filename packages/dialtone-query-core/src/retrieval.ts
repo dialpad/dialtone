@@ -63,6 +63,12 @@ interface EnvelopeOptions {
   detail?: Record<string, unknown>;
   continuation?: Continuation | null;
 }
+/** Callers own validation; retain native slicing for legacy search inputs. */
+export function paginate<T>(items: T[], { offset, limit }: { offset: number; limit: number }) {
+  const page = items.slice(offset, offset + limit);
+  const next = offset + page.length;
+  return { page, total: items.length, nextOffset: next < items.length ? next : null };
+}
 /** Shared pagination: count output bytes and retain whole requested records. */
 export function createRetrievalEnvelope(
   options: EnvelopeOptions,
@@ -70,7 +76,8 @@ export function createRetrievalEnvelope(
 ): RetrievalEnvelope {
   const offset = options.args.offset ?? 0;
   const limit = options.args.limit ?? COMPONENT_DETAIL_LIMIT;
-  const total = options.items.length;
+  const selectedPage = paginate(options.items, { offset, limit });
+  const total = selectedPage.total;
   const selectedDomains = Array.isArray(options.domain)
     ? options.domain
     : [options.domain];
@@ -97,7 +104,7 @@ export function createRetrievalEnvelope(
       countingMethod: 'ceil(UTF-8 bytes of compact JSON / 4)',
     },
     continuation: null,
-    items: options.items.slice(offset, offset + limit),
+    items: selectedPage.page,
     notes: options.notes ?? [],
     ...(options.detail ? { detail: options.detail } : {}),
   };
@@ -113,7 +120,8 @@ export function createRetrievalEnvelope(
   }
   function update() {
     envelope.counts.returned = envelope.items.length;
-    const hasMore = offset + envelope.items.length < total;
+    const { nextOffset } = paginate(options.items, { offset, limit: envelope.items.length });
+    const hasMore = nextOffset !== null;
     envelope.truncation.truncated =
       hasMore || envelope.truncation.omissions.length > 0;
     envelope.continuation = hasMore
@@ -121,7 +129,7 @@ export function createRetrievalEnvelope(
           tool: options.tool,
           arguments: {
             ...options.args,
-            offset: offset + envelope.items.length,
+            offset: nextOffset,
           },
         }
       : options.continuation ?? null;

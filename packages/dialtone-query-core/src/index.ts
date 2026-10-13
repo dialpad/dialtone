@@ -66,7 +66,7 @@ export { getComponentDetail, COMPONENT_SECTIONS } from './component-detail.js';
 export type { ComponentDetailArgs, ComponentSection } from './component-detail.js';
 
 export { bundledProvenance, componentDocumentation } from './data.js';
-export { createRetrievalEnvelope, formatRetrievalEnvelope, MATCH_STATES, RETRIEVAL_BUDGETS, COMPONENT_DETAIL_LIMIT } from './retrieval.js';
+export { paginate, createRetrievalEnvelope, formatRetrievalEnvelope, MATCH_STATES, RETRIEVAL_BUDGETS, COMPONENT_DETAIL_LIMIT } from './retrieval.js';
 export type { BundledProvenance, DomainStamp, MatchState, Continuation, RetrievalEnvelope } from './retrieval.js';
 export { getComponentDocumentation } from './component-documentation.js';
 export type { ComponentDocCatalog, ComponentDocPage } from './component-documentation.js';
