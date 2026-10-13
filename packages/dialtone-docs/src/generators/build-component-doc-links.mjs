@@ -10,7 +10,7 @@ import {
   readPublicComponentExports,
   withComponentIdentity,
 } from '../../../../scripts/lib/vue-component-identity.mjs';
-import { normalizeComponentName } from '../../../dialtone-query-core/src/component-name.js';
+import { normalizeComponentName } from '../../../../scripts/lib/component-name.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../../..');
 const appRequire = createRequire(

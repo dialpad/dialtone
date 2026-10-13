@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, copyFileSync } from 'node:fs';
 import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
@@ -101,6 +101,10 @@ export function buildBundledProvenance() {
     'packages/dialtone-query-core/src/generated/bundled-provenance.json',
   );
   mkdirSync(dirname(output), { recursive: true });
+  copyFileSync(
+    resolve(root, 'scripts/lib/component-name.mjs'),
+    resolve(dirname(output), 'component-name.mjs'),
+  );
   writeFileSync(output, JSON.stringify(stamp, null, 2));
   return stamp;
 }

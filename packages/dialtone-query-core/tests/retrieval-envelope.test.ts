@@ -36,6 +36,14 @@ describe('bounded C2 result contract', () => {
       domains: stamp.domains,
     });
     expect(result.truncation.truncated).toBe(true);
+    const last = envelope({
+      tool: 'get_component', args: { component: 'DtButton', limit: 2, offset: 2 },
+      mode: 'detail', domain: 'components', match: 'exact',
+      items: [{ name: 'A' }, { name: 'B' }, { name: 'C' }],
+    });
+    expect(last.items).toEqual([{ name: 'C' }]);
+    expect(last.continuation).toBeNull();
+    expect(last.truncation).toEqual({ truncated: false, omissions: [] });
   });
   it('pages only between atomic contracts using UTF8 rather than character count', () => {
     const items = Array.from({ length: 15 }, (_, i) => ({

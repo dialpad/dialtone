@@ -138,6 +138,11 @@ export interface DocumentationRecord {
   filePath: string;
 }
 
+export interface SearchPage {
+  total: number;
+  offset: number;
+}
+
 export interface SearchResult {
   type: string;
   name: string;

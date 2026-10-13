@@ -49,6 +49,7 @@ export interface RetrievalEnvelope {
   detail?: Record<string, unknown>;
 }
 export const RETRIEVAL_BUDGETS = { discovery: 1500, detail: 12000 } as const;
+export const COMPONENT_DETAIL_LIMIT = 20;
 interface EnvelopeOptions {
   tool: string;
   args: Record<string, unknown> & { limit?: number; offset?: number };
@@ -68,7 +69,7 @@ export function createRetrievalEnvelope(
   provenance: BundledProvenance,
 ): RetrievalEnvelope {
   const offset = options.args.offset ?? 0;
-  const limit = options.args.limit ?? 20;
+  const limit = options.args.limit ?? COMPONENT_DETAIL_LIMIT;
   const total = options.items.length;
   const selectedDomains = Array.isArray(options.domain)
     ? options.domain
@@ -114,7 +115,7 @@ export function createRetrievalEnvelope(
     envelope.counts.returned = envelope.items.length;
     const hasMore = offset + envelope.items.length < total;
     envelope.truncation.truncated =
-      offset > 0 || hasMore || envelope.truncation.omissions.length > 0;
+      hasMore || envelope.truncation.omissions.length > 0;
     envelope.continuation = hasMore
       ? {
           tool: options.tool,

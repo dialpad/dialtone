@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-10-08
+last_updated: 2026-10-13
 related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server, dialtone-docs]
 ---
 
@@ -54,7 +54,7 @@ These checks are required on every PR:
 
 The `test` job outputs a coverage report in JSON and HTML. Coverage thresholds enforced: 80% branches, 70% functions, 85% lines and statements. Build fails if thresholds are not met.
 
-`test-cli` runs when query-core, CLI, MCP, docs, CSS, icons, Vue or tokens change. It also covers component Markdown pages, the Vue API generator and identity helper, and the site-reference, frontmatter and source-page helpers used to generate documentation links. The exact path filters are in `unit_tests.yml`.
+`test-cli` runs when query-core, CLI, MCP, docs, CSS, icons, Vue or tokens change. It also covers component Markdown pages, the Vue API generator, identity helper and shared component-name normalizer, and the site-reference, frontmatter and source-page helpers used to generate documentation links. The exact path filters are in `unit_tests.yml`.
 
 The job has a 30-minute timeout and runs:
 

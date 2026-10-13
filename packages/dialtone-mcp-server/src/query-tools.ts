@@ -28,6 +28,7 @@ import {
   getComponentDocumentation,
   getDocumentationDetail,
   COMPONENT_SECTIONS,
+  COMPONENT_DETAIL_LIMIT,
   MATCH_STATES,
   createRetrievalEnvelope,
   formatRetrievalEnvelope,
@@ -35,6 +36,7 @@ import {
 import type {
   RetrievalEnvelope,
   SearchResult,
+  SearchPage,
 } from '@dialpad/dialtone-query-core';
 
 /** Routing only; policy remains in the existing client-rules resource. */
@@ -67,7 +69,7 @@ interface SearchSpec {
   domain: string;
   description: string;
   search: (query: string) => { results: SearchResult[]; notes: string[] };
-  format: (results: SearchResult[], query: string) => string;
+  format: (results: SearchResult[], query: string, page?: SearchPage) => string;
   /** Points each displayed result at its complete-detail call. */
   followUp?: { heading: string; line: (result: SearchResult) => string };
 }
@@ -136,7 +138,7 @@ const detailSchema = z
     component: query,
     projection: z.enum(['all', ...COMPONENT_SECTIONS]).default('all'),
     field: query.optional(),
-    limit: z.number().int().min(1).max(50).default(20),
+    limit: z.number().int().min(1).max(50).default(COMPONENT_DETAIL_LIMIT),
     offset,
   })
   .strict();
@@ -256,7 +258,7 @@ export function queryToolDefinitions() {
           component: stringSchema,
           projection: { enum: ['all', ...COMPONENT_SECTIONS], default: 'all' },
           field: stringSchema,
-          limit: { type: 'integer', minimum: 1, maximum: 50, default: 20 },
+          limit: { type: 'integer', minimum: 1, maximum: 50, default: COMPONENT_DETAIL_LIMIT },
           offset: offsetSchema,
         },
         required: ['component'],
@@ -461,7 +463,13 @@ export function executeQueryTool(name: string, input: unknown) {
       ? spec.search(pageArgs.query)
       : { results: [], notes: ['No match: query contains only whitespace.'] };
     const page = pageOf(found.results);
-    let output = spec.format(page, text);
+    let output = spec.format(
+      page,
+      text,
+      pageArgs.offset > 0
+        ? { total: found.results.length, offset: pageArgs.offset }
+        : undefined,
+    );
     if (found.notes.length) output += `\n\n${found.notes.join('\n')}`;
     if (page.length && spec.followUp)
       output +=

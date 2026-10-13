@@ -147,6 +147,11 @@ test('readable searches execute default 15, explicit limits and compatible input
         assert.equal(next.arguments.offset, count);
         const following = readable(await client.callTool(next));
         assert.ok(following.includes(`offset ${count}.`));
+        if (name !== 'search_documentation') {
+          assert.match(following, /Showing \d+ of \d+/);
+          if (name !== 'search_icons')
+            assert.ok(following.includes(`\n${count + 1}. **`));
+        }
         const firstSubjects = pageSubjects(text, name, recordPattern);
         const nextSubjects = pageSubjects(following, name, recordPattern);
         assert.ok(nextSubjects.length > 0);

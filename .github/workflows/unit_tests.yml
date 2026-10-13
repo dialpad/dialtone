@@ -19,6 +19,7 @@ on:
       - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
       - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
       - 'scripts/lib/vue-component-identity.mjs'
+      - 'scripts/lib/component-name.mjs'
   push:
     branches:
       - staging
@@ -39,6 +40,7 @@ on:
       - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
       - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
       - 'scripts/lib/vue-component-identity.mjs'
+      - 'scripts/lib/component-name.mjs'
 
 env:
   HUSKY: 0
@@ -83,6 +85,7 @@ jobs:
               - '.github/workflows/unit_tests.yml'
               - 'scripts/build-dialtone-vue-docs.mjs'
               - 'scripts/lib/vue-component-identity.mjs'
+              - 'scripts/lib/component-name.mjs'
               - 'apps/dialtone-documentation/docs/components/**'
               - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
               - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'

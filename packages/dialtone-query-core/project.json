@@ -13,6 +13,7 @@
         "{projectRoot}/package.json",
         "{projectRoot}/tsconfig.json",
         "{projectRoot}/scripts/**/*",
+        "{workspaceRoot}/scripts/lib/component-name.mjs",
         "!{projectRoot}/src/generated/**",
         {
           "dependentTasksOutputFiles": "**/*.json",
