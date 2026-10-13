@@ -13,6 +13,12 @@ knowledge_base:
       instructions: "Primary Dialpad web app and the main consumer of @dialpad/dialtone-vue components and Dialtone CSS utilities."
 
 reviews:
+  # Only PRs labeled by the CODEOWNERS author workflow receive automatic reviews.
+  auto_review:
+    enabled: true
+    labels:
+      - coderabbit-review
+
   # CODEOWNERS (.github/CODEOWNERS) already assigns the full team on every PR.
   # These rules supplement CODEOWNERS with area-specific expertise suggestions.
   # auto_assign_reviewers: false → suggest only, not assign (CODEOWNERS handles assignment).

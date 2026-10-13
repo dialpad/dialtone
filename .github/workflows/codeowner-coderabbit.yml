@@ -1,0 +1,65 @@
+name: CodeRabbit for Codeowner Authors
+
+on:
+  pull_request_target:
+    types: [opened, reopened, synchronize, ready_for_review, edited]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+concurrency:
+  group: codeowner-coderabbit-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+jobs:
+  label:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      # pull_request_target gives fork PRs permission to manage labels. Never check
+      # out or execute PR code here; CODEOWNERS is read only from the base branch.
+      - name: Synchronize CodeRabbit review label
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const label = 'coderabbit-review';
+            const repo = context.repo;
+            const { data: pr } = await github.rest.pulls.get({
+              ...repo,
+              pull_number: context.payload.pull_request.number,
+            });
+            if (pr.state !== 'open') return;
+
+            const { data: file } = await github.rest.repos.getContent({
+              ...repo,
+              path: '.github/CODEOWNERS',
+              ref: pr.base.sha,
+            });
+            if (Array.isArray(file) || file.encoding !== 'base64') {
+              throw new Error('Expected a base64-encoded CODEOWNERS file');
+            }
+            const content = Buffer.from(file.content, 'base64').toString('utf8');
+            const owners = new Set();
+            for (const line of content.split(/\r?\n/)) {
+              const fields = line.split('#')[0].trim().split(/\s+/);
+              if (!fields[0]) continue;
+              for (const owner of fields.slice(1)) {
+                // Dialtone currently lists individual GitHub usernames. Team or
+                // email ownership requires explicit resolution, never a guess.
+                if (!/^@[a-z\d](?:[a-z\d-]*[a-z\d])?$/i.test(owner)) {
+                  throw new Error(`Unsupported CODEOWNERS identity: ${owner}`);
+                }
+                owners.add(owner.slice(1).toLowerCase());
+              }
+            }
+
+            const eligible = owners.has(pr.user.login.toLowerCase());
+            const hasLabel = pr.labels.some(item => item.name === label);
+            const issue = { ...repo, issue_number: pr.number };
+            if (eligible && !hasLabel) {
+              await github.rest.issues.addLabels({ ...issue, labels: [label] });
+            } else if (!eligible && hasLabel) {
+              await github.rest.issues.removeLabel({ ...issue, name: label });
+            }
+            core.info(`CodeRabbit eligibility for ${pr.user.login}: ${eligible}`);
