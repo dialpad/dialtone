@@ -161,8 +161,15 @@ export function figmaTypeFor (type: string): FigmaType | null {
  * primitives — what Francis means by "base colours" when he asks for them to
  * be hidden from publishing. Shared between `SCOPES` and `HIDDEN` so the two
  * policies cannot drift apart on what counts as a raw ramp.
+ *
+ * `material.<name>.<stop>` (e.g. `material.jade.500`) is the same shape under
+ * a different namespace — every one of the 140 `material.*` tokens is a bare
+ * numbered ramp, confirmed against `tokens/base/refs/default.json`, no
+ * exceptions. Same discourage-direct-use reasoning applies: a material is a
+ * swapped-in alternative to the `color.black.*` ramp, not something to bind a
+ * stop of directly.
  */
-const RAW_COLOUR_RAMP = /^color\.[a-z-]+\.(\d+|black|white|transparent|gold|magenta|purple|red|green|blue)$/;
+const RAW_COLOUR_RAMP = /^(color|material)\.[a-z-]+\.(\d+|black|white|transparent|gold|magenta|purple|red|green|blue)$/;
 
 /**
  * Every `lineHeight` field: the six shared primitives (`font.lineHeight.400`)
@@ -267,13 +274,6 @@ export const HIDDEN: HiddenRule[] = [
   {
     label: 'inverted, superseded by Mode Directive',
     match: t => INVERTED_WORD.test(t.name),
-  },
-  {
-    // Kept apart from the colour ramps below, added separately and later —
-    // Francis called that one a "controversial", deliberate call, not a
-    // mechanical follow-on to this one.
-    label: 'base primitive, reference only',
-    match: t => t.filePath.startsWith('tokens/base/') && !RAW_COLOUR_RAMP.test(t.name),
   },
   {
     // The deliberate one: discourage picking a raw hue/stop directly in
