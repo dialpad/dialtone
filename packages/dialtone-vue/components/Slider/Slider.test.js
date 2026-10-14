@@ -2646,6 +2646,20 @@ describe('DtSlider Tests', () => {
         expect(emitted[emitted.length - 1][0]).toBe(0.15);
       });
 
+      it('preserves a tiny modelValue expressed in scientific notation on mount, instead of truncating it to 0', () => {
+        // String(1e-7) is the literal "1e-7" (JS switches to exponential
+        // notation below 1e-6) — no "." for decimalPlaces' plain branch to
+        // find, so it previously reported 0 decimal places for a genuinely
+        // valid, in-contract value, and toFixed(0) truncated 5e-7 down to 0
+        // right on mount.
+        mockProps = {
+          modelValue: 5e-7, min: 0, max: 1e-6, step: 1e-7,
+        };
+        updateWrapper();
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        expect(Number(thumbInputs[0].element.value)).toBe(5e-7);
+      });
+
       it('emits exact value for step=0.25 with non-zero min', async () => {
         mockProps = { modelValue: 0.25, min: 0.25, max: 2.0, step: 0.25 };
         updateWrapper();

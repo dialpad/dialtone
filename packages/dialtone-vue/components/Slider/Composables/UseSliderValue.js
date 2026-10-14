@@ -5,9 +5,24 @@ import { ref, computed, watch, onMounted } from 'vue';
 // is prop-derived state, not value normalization, so it's passed in rather
 // than owned here.
 export function useSliderValue(props, emit, { isRange }) {
+  // JS switches a Number to exponential string notation below 1e-6 (and
+  // above 1e21) — "5e-7", not "0.0000005" — which has no literal "." for the
+  // plain branch below to find, silently reporting 0 decimal places for a
+  // genuinely tiny (but finite, in-contract) value. toFixed(0) on that value
+  // afterward truncated it to 0 outright — real data loss on mount, not just
+  // a display quirk.
   function decimalPlaces(n) {
-    const dot = String(n).indexOf('.');
-    return dot === -1 ? 0 : String(n).length - dot - 1;
+    const str = String(n);
+    const eIndex = str.search(/e/i);
+    if (eIndex !== -1) {
+      const mantissa = str.slice(0, eIndex);
+      const exponent = parseInt(str.slice(eIndex + 1), 10);
+      const mantissaDot = mantissa.indexOf('.');
+      const mantissaDecimals = mantissaDot === -1 ? 0 : mantissa.length - mantissaDot - 1;
+      return Math.max(0, mantissaDecimals - exponent);
+    }
+    const dot = str.indexOf('.');
+    return dot === -1 ? 0 : str.length - dot - 1;
   }
 
   function clampToRange(val) {
