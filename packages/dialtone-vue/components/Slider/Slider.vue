@@ -594,12 +594,18 @@ function slotHasText(vnodes) {
   });
 }
 
-// Whether the label prop or #label slot provides real text — independent of
-// showLabel, which only controls visibility, not whether a name exists.
-// Named to match DtCheckbox/DtRadio's own hasLabelContent.
-const hasLabelContent = computed(() => !!(
-  props.label?.trim() || (slots.label && slotHasText(slots.label({ value: currentValue.value })))
-));
+// Whether what ACTUALLY renders for the label — the #label slot when a
+// consumer provides one (it fully replaces the prop's own <dt-text>
+// fallback, per the template's plain <slot> fallback semantics; a slot that
+// renders no text, e.g. a bare icon, means there's no accessible name here
+// regardless of what the unused label prop says), otherwise the label prop
+// itself — provides real text. Independent of showLabel, which only
+// controls visibility, not whether a name exists. Named to match
+// DtCheckbox/DtRadio's own hasLabelContent.
+const hasLabelContent = computed(() => {
+  if (slots.label) return slotHasText(slots.label({ value: currentValue.value }));
+  return !!props.label?.trim();
+});
 
 // Each native thumb <input> names itself from the visible label when there
 // is one; otherwise it falls back to whatever aria-label/aria-labelledby a

@@ -911,6 +911,23 @@ describe('DtSlider Tests', () => {
       expect(thumbInputs[0].attributes('aria-label')).toBe('Volume');
     });
 
+    it('falls back to aria-label, not aria-labelledby to an empty node, when the label PROP is non-empty but a provided #label slot overrides it with no text', () => {
+      // The #label slot fully replaces the prop's own <dt-text> fallback
+      // markup when provided (plain <slot> fallback semantics) — the prop's
+      // own text is never actually rendered here, so it must not count as
+      // "has a visible label" just because it happens to be non-empty.
+      // Before this fix, hasLabelContent checked the (unused) prop first and
+      // short-circuited there, wrongly pointing aria-labelledby at this
+      // empty slot's wrapper and dropping the explicit aria-label fallback.
+      mockProps = { label: 'Volume' };
+      mockAttrs = { 'aria-label': 'Explicit volume' };
+      mockSlots = { label: '<svg aria-hidden="true"><use href="#icon-volume" /></svg>' };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      expect(thumbInputs[0].attributes('aria-labelledby')).toBeUndefined();
+      expect(thumbInputs[0].attributes('aria-label')).toBe('Explicit volume');
+    });
+
     it('forwards a consumer-supplied aria-labelledby to each thumb when there is no visible label', () => {
       // Standard "label via an external heading" pattern — before this fix,
       // removeClassStyleAttrs only stripped class/style, so aria-labelledby
