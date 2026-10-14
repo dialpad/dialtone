@@ -512,7 +512,7 @@ describe('DtSlider Tests', () => {
         await nextTick();
         const el = tooltipReadouts()[0];
         const style = el.attributes('style');
-        // modelValue 50 of [0, 100] — thumbAnchorPct's own inset-rescaled
+        // modelValue 50 of [0, 100] — anchorPct's own inset-rescaled
         // formula (thumbPositionStyle, UseSliderGeometry), not a bare 50%,
         // so the bubble tracks the thumb's actual (edge-inset) position.
         expect(style).toContain('inset-inline-start: calc(calc(1px + var(--slider-tick-width) / 2) + (100% - calc(1px + var(--slider-tick-width) / 2) * 2) * 0.5)');
@@ -729,7 +729,10 @@ describe('DtSlider Tests', () => {
         updateWrapper();
         const tickPositions = wrapper.findAll('[data-qa="dt-slider-tick"]').map((t) => t.attributes('style'));
         const lastTickStyle = tickPositions.at(-1);
-        expect(lastTickStyle).toMatch(/inset-inline-start:\s*(99\.\d+|100)%/);
+        // anchorPct's calc() ends in `* <pct/100>)` — close to 1 (not some
+        // early fraction) confirms the last tick lands near the end of the
+        // domain, not truncated into just its first ~1%.
+        expect(lastTickStyle).toMatch(/\) \* (0\.9\d+|1)\);/);
       });
 
       it('caps snapPoints generation instead of hanging on a too-small interval', async () => {
@@ -2038,9 +2041,9 @@ describe('DtSlider Tests', () => {
       });
 
       it('centers ticks on their anchor point under rtl too', async () => {
-        // Index 1, not 0 — the first tick lands on min, which is edge-aligned
-        // (edgeInsetTransform) rather than centered; this exercises a genuine
-        // mid-track tick (25 of [0, 25, 50, 75, 100]) instead.
+        // Every tick (edge or not) shares the same anchorPct + centering
+        // transform now — index 1 just exercises a genuine mid-track tick
+        // (25 of [0, 25, 50, 75, 100]) rather than min/max specifically.
         mockProps = { showTicks: 25 };
         updateWrapper();
         await mockControlDirection('rtl');
@@ -2601,30 +2604,32 @@ describe('DtSlider Tests', () => {
         expect(input.attributes('style')).toContain(expected);
       });
 
-      it('nudges the min tick 1px inward from the flush edge instead of centering it on 0%', () => {
+      it('insets the min tick onto the same anchorPct band as the thumb, instead of centering it on the true 0% edge', () => {
         // showTicks: 100 (not true) — a 100-wide interval on the default
         // [0, 100] range generates exactly the two edge ticks, no middle ones.
         mockProps = { showTicks: 100 };
         updateWrapper();
         const ticks = wrapper.findAll('[data-qa="dt-slider-tick"]');
-        expect(ticks[0].attributes('style')).toContain('translateX(1px)');
+        expect(ticks[0].attributes('style')).toContain(`inset-inline-start: calc(${EDGE_INSET} + (100% - ${EDGE_INSET} * 2) * 0)`);
+        expect(ticks[0].attributes('style')).toContain('translateX(-50%)');
       });
 
-      it('nudges the max tick 1px inward from the flush edge instead of centering it on 100%', () => {
+      it('insets the max tick onto the same anchorPct band as the thumb, instead of centering it on the true 100% edge', () => {
         mockProps = { showTicks: 100 };
         updateWrapper();
         const ticks = wrapper.findAll('[data-qa="dt-slider-tick"]');
-        expect(ticks[1].attributes('style')).toContain('translateX(calc(-100% + -1px))');
+        expect(ticks[1].attributes('style')).toContain(`inset-inline-start: calc(${EDGE_INSET} + (100% - ${EDGE_INSET} * 2) * 1)`);
+        expect(ticks[1].attributes('style')).toContain('translateX(-50%)');
       });
 
-      it('mirrors the tick inset sign under rtl, same as every other track element', async () => {
+      it('mirrors the edge tick\'s centering transform under rtl, same as every other track element', async () => {
         mockProps = { showTicks: 100 };
         updateWrapper();
         await mockControlDirection('rtl');
         await nextTick();
         const ticks = wrapper.findAll('[data-qa="dt-slider-tick"]');
-        expect(ticks[0].attributes('style')).toContain('translateX(-1px)');
-        expect(ticks[1].attributes('style')).toContain('translateX(calc(100% + 1px))');
+        expect(ticks[0].attributes('style')).toContain('translateX(50%)');
+        expect(ticks[1].attributes('style')).toContain('translateX(50%)');
       });
     });
 

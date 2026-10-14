@@ -37,20 +37,25 @@ export function useSliderGeometry(props, {
     return isRtl.value ? '50%' : '-50%';
   }
 
-  // Matches the edge tick's own inset from the true 0%/100% edge (its 1px
-  // nudge plus half its own width) — the thumb's travel stops exactly where
-  // the first/last tick sits instead of reaching the control's true edge.
-  // The track and indicator still span the full control; only the thumb (and
-  // the tooltip readout that tracks it, below) treats that leftover span as a
-  // decorative, non-interactive cap.
-  const THUMB_EDGE_INSET = 'calc(1px + var(--slider-tick-width) / 2)';
+  // The usable area every centered track element (thumb, tick) anchors
+  // within: inset from the true 0%/100% edge by 1px plus half a tick's own
+  // width, matching where an edge tick's center would otherwise overshoot
+  // to if it were simply centered at 0%/100% like every other tick. The
+  // track and indicator still span the full control; the leftover span
+  // beyond this inset is a decorative, non-interactive cap — the same
+  // rounded-pill overhang a tick or thumb would otherwise visually poke
+  // past the edge of.
+  const EDGE_INSET = 'calc(1px + var(--slider-tick-width) / 2)';
 
   // (100% - inset*2) * pct/100 + inset: a percentage and a px length combine
   // into one calc() value when multiplied by a unitless number, so this
   // rescales [0, 100]% onto [inset, 100% - inset] without ever needing the
-  // control's actual measured width.
-  function thumbAnchorPct(pct) {
-    return `calc(${THUMB_EDGE_INSET} + (100% - ${THUMB_EDGE_INSET} * 2) * ${pct / 100})`;
+  // control's actual measured width. Shared by thumbPositionStyle and
+  // tickPositionStyle below — every tick (not just the edge ones) is
+  // rescaled onto this same band, so spacing between ticks stays even
+  // rather than only the edges standing out as special cases.
+  function anchorPct(pct) {
+    return `calc(${EDGE_INSET} + (100% - ${EDGE_INSET} * 2) * ${pct / 100})`;
   }
 
   function thumbPositionStyle(val) {
@@ -59,33 +64,36 @@ export function useSliderGeometry(props, {
       return positionStyle(pct, `translate(${centerInlineTransform()}, 50%)`);
     }
     return {
-      insetInlineStart: thumbAnchorPct(pct),
+      insetInlineStart: anchorPct(pct),
       transform: `translate(${centerInlineTransform()}, -50%)`,
     };
   }
 
-  // A tick or mark at min/max nudges 1px inward from the true 0%/100% edge
-  // instead of sitting flush on it (or, for a mark, centering like every
-  // other one — which pokes ~1px past the edge since centering ignores the
-  // mark's own width) — pure flush/centered reads as touching the label
-  // above it, not a deliberately placed tick or mark. Shared by
-  // tickPositionStyle and markStyle below. RTL-mirrored like
-  // centerInlineTransform: "inward" is a physical direction that flips with
-  // which edge actually sits on which side.
-  function edgeInsetTransform(edge) {
+  function tickPositionStyle(val) {
+    const pct = thumbPercent(val);
+    if (isVertical.value) {
+      return positionStyle(pct, 'translateY(50%)');
+    }
+    return {
+      insetInlineStart: anchorPct(pct),
+      transform: `translateX(${centerInlineTransform()})`,
+    };
+  }
+
+  // A mark at min/max nudges 1px inward from the true 0%/100% edge instead
+  // of centering like every other one — centering ignores the mark's own
+  // width, which pokes it ~1px past the edge. Pure flush (an unadorned 0%/
+  // 100%) reads as touching the label above it instead of a deliberately
+  // placed mark. Distinct from ticks (above), which center on the shared
+  // anchorPct band — a mark flush-aligns its own edge, not its center, so it
+  // doesn't fit that same rescale. RTL-mirrored like centerInlineTransform:
+  // "inward" is a physical direction that flips with which edge actually
+  // sits on which side.
+  function markEdgeInsetTransform(edge) {
     if (edge === 'start') return `translateX(${isRtl.value ? '-1px' : '1px'})`;
     const flushPct = isRtl.value ? '100%' : '-100%';
     const inwardPx = isRtl.value ? '1px' : '-1px';
     return `translateX(calc(${flushPct} + ${inwardPx}))`;
-  }
-
-  function tickPositionStyle(val) {
-    if (!isVertical.value) {
-      const edge = val === props.min ? 'start' : val === props.max ? 'end' : null;
-      if (edge) return positionStyle(thumbPercent(val), edgeInsetTransform(edge));
-    }
-    const transform = isVertical.value ? 'translateY(50%)' : `translateX(${centerInlineTransform()})`;
-    return positionStyle(thumbPercent(val), transform);
   }
 
   // A mark beyond the edge-clamp tolerance of the control's edge (see
@@ -96,7 +104,7 @@ export function useSliderGeometry(props, {
   // render can never leak into vertical mode's own transform (translateY,
   // not translateX) if orientation changes reactively.
   function markStyle(pct, index, edge) {
-    if (edge && !isVertical.value) return positionStyle(pct, edgeInsetTransform(edge));
+    if (edge && !isVertical.value) return positionStyle(pct, markEdgeInsetTransform(edge));
     const offset = !isVertical.value ? markEdgeOffsetPx.value[index] : 0;
     if (!offset) return positionStyle(pct);
     return positionStyle(pct, `translateX(calc(${centerInlineTransform()} + ${offset}px))`);
@@ -148,7 +156,7 @@ export function useSliderGeometry(props, {
       // Matches thumbPositionStyle's own inset anchor so the bubble (and its
       // arrow) stay attached to the thumb's actual rendered position, not
       // the control's true edge.
-      insetInlineStart: thumbAnchorPct(pct),
+      insetInlineStart: anchorPct(pct),
       insetBlockEnd: `calc(50% + var(--slider-thumb-visual-size) / 2 + ${tooltipReadoutGapPx})`,
       transform,
       // Bridges into the ::after arrow rule (slider.less) since inline style

@@ -548,14 +548,13 @@
     .d-slider__track {
         inset-inline: unset;
         inline-size: var(--slider-track-height);
-        // Same cap extension as the horizontal track above, along the block
-        // axis instead. block-size is an explicit size here (unlike the
-        // horizontal rule's auto inline-size), so an inset-block shorthand
-        // would have its end ignored — the extension has to grow the size
-        // directly and shift the start by half of that growth instead.
-        block-size: calc(100% + var(--slider-track-height));
+        // Flush with .d-slider__control, same as the horizontal track above
+        // (no cap extension past the control's own bounds) — ticks and the
+        // thumb's own travel (UseSliderGeometry's EDGE_INSET) are what stay
+        // inset from the true edge, not the track itself.
+        block-size: 100%;
         inset-inline-start: 50%;
-        inset-block-start: calc(var(--slider-track-height) / -2);
+        inset-block-start: 0;
         transform: translateX(-50%);
 
         // insetInlineStart:50% still mirrors under dir="rtl" even in
