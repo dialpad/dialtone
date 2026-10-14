@@ -170,6 +170,16 @@ describe('DtSlider Tests', () => {
       expect(root.attributes('data-orientation')).toBe('horizontal');
     });
 
+    it('does not apply the dot-centering position style to the full-size native input', () => {
+      // thumbPositionStyle's bottom/transform pair is sized for the small
+      // thumb-visual/thumb-hit dots — applied to this inset:0, 100%x100%
+      // native input instead, it shoves the whole (invisible,
+      // pointer-events:none) element out past its container, which then
+      // overflows any ancestor with overflow:auto into a scrollbar to
+      // nothing visible.
+      expect(thumbInputs[0].attributes('style')).toBeUndefined();
+    });
+
     describe('Range mode', () => {
       beforeEach(() => {
         mockProps = { modelValue: [20, 70] };
@@ -2834,14 +2844,12 @@ describe('DtSlider Tests', () => {
         expect(style).toContain(`inset-inline-start: calc(${EDGE_INSET} + (100% - ${EDGE_INSET} * 2) * 1)`);
       });
 
-      it('applies the same inset to the thumb-hit area and native input, so the draggable/hit targets stay under the visible thumb', () => {
+      it('applies the same inset to the thumb-hit area as the visible thumb, so the draggable/hit target stays under it', () => {
         mockProps = { modelValue: 0 };
         updateWrapper();
         const hit = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
-        const input = thumbInputs[0];
         const expected = `inset-inline-start: calc(${EDGE_INSET} + (100% - ${EDGE_INSET} * 2) * 0)`;
         expect(hit.attributes('style')).toContain(expected);
-        expect(input.attributes('style')).toContain(expected);
       });
 
       it('insets the min tick onto the same anchorPct band as the thumb, instead of centering it on the true 0% edge', () => {

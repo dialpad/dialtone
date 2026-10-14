@@ -132,7 +132,6 @@
           :aria-invalid="attrs['aria-invalid']"
           :aria-valuetext="formatValue(val, i)"
           :aria-orientation="isVertical ? 'vertical' : undefined"
-          :style="thumbPositionStyle(val)"
           data-qa="dt-slider-thumb"
           @input="onThumbInput(i, $event)"
           @keydown="onThumbKeydown(i, $event)"
