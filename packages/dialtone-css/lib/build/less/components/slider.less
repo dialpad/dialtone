@@ -43,7 +43,13 @@
     // edge rather than contrasting against it.
     --slider-thumb-border-color: var(--slider-thumb-color);
     --slider-thumb-border-width: var(--dt-size-border-150);
-    --slider-focus-shadow: var(--dt-shadow-focus);
+    // NOT --dt-shadow-focus directly — that token is an INSET ring (see
+    // --dt-shadow-focus-inset), sized for controls much larger than this
+    // thumb's small circle. Inset, that same ring eats a visible chunk out
+    // of the thumb's own face instead of reading as a focus affordance
+    // around it. Same color/thickness/blur as the system token, just drawn
+    // outward instead of inward.
+    --slider-focus-shadow: var(--dt-shadow-focus-inset-offset-x) var(--dt-shadow-focus-inset-offset-y) var(--dt-shadow-focus-inset-blur) var(--dt-shadow-focus-inset-spread) var(--dt-shadow-focus-inset-color);
     --slider-disabled-track-color: var(--dt-inputs-color-background-disabled);
     --slider-disabled-indicator-color: var(--dt-inputs-color-foreground-disabled);
     --slider-disabled-border-color: var(--dt-inputs-color-border-disabled);
