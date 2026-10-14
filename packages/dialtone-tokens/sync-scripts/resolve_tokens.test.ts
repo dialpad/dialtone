@@ -204,6 +204,29 @@ describe('compareTokenNames', () => {
     }
   })
 
+  it('clusters two uncurated base names in the same group instead of interleaving their variants', () => {
+    // `color.border.info` and `color.border.positive` used to be the example
+    // here: neither was in the curated list, so both tied at `Infinity` and
+    // fell through to an alphabetical `leaf` compare that interleaved their
+    // variants instead of keeping each base name's own cluster together. Both
+    // are curated now (deliberately, in severity order), so they no longer
+    // exercise this path — `avatar.color.foreground.dark`/`light` still do:
+    // neither is curated. `dark` already sorts before `light` alphabetically,
+    // so the bare pair alone wouldn't show the bug; adding each one's
+    // `-inverted` variant does, the same way `-subtle`/`-strong` did for the
+    // original example. A `leaf`-only compare interleaves them as dark,
+    // dark-inverted, light, light-inverted only by coincidence of spelling —
+    // swap in a base name that sorts the other way and it breaks. The
+    // `baseName` tiebreak clusters them on purpose instead of by luck.
+    expect(sorted([
+      'avatar.color.foreground.dark', 'avatar.color.foreground.light',
+      'avatar.color.foreground.dark-inverted', 'avatar.color.foreground.light-inverted',
+    ])).toEqual([
+      'avatar.color.foreground.dark', 'avatar.color.foreground.dark-inverted',
+      'avatar.color.foreground.light', 'avatar.color.foreground.light-inverted',
+    ])
+  })
+
   it('orders a ramp correctly even when the curated list covers it only partly', () => {
     // The old file lists 50, 100, 200 and 400 but not 150 or 250, because the
     // February migration removed its irregular stops. Deferring to it here put

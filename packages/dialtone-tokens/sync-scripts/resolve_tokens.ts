@@ -472,6 +472,21 @@ function sortKey (name: string, valueOf?: ValueOf): (number | string)[] {
     // own — that is the whole fix. When base === leaf (nothing stripped)
     // this is exactly `curatedRank(name)`, unchanged from before.
     hasSortValue ? sortValue : curatedRank(baseName),
+    // Two base names in the same group can tie at the slot above — not only
+    // when both are uncurated (`curatedRank` both `Infinity`): equal
+    // `sortValue`s tie too, and so does `curatedRank`'s parent-fallback
+    // resolving two different composite sub-leaves (e.g. a `.fontSize` and a
+    // `.lineHeight` off the same family) to the same finite index. Whenever
+    // that happens the comparison used to fall straight through to the suffix
+    // axes, which are themselves tied for every bare variant — bottoming out
+    // at `leaf`, an alphabetical string compare that interleaves the two
+    // families' variants instead of keeping each one's whole cluster
+    // together. `baseName` breaks the tie before the suffix axes get a turn,
+    // so a family still groups with itself regardless of why the prior slot
+    // tied; it changes nothing when that slot already differed, since a
+    // prior key component having already decided the order short-circuits
+    // every key after it.
+    baseName,
     ...SUFFIX_AXES.map(axis => ranks[axis]),
     leaf,
   ];
