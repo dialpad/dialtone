@@ -548,7 +548,7 @@ describe('DtSlider Tests', () => {
       // min/max. Tolerates some overflow before nudging — the SAME
       // tolerance marks already use, matching the control's own
       // overflow-clip-margin (slider.less), minus a small safety margin
-      // marks don't need (see TOOLTIP_CLAMP_SAFETY_MARGIN_PX's own comment:
+      // marks don't need (see SLIDER_EDGE_CLAMP_TOLERANCE_PX's own comment:
       // a STATIC mark landing exactly at the true clip boundary is a rare,
       // fixed occurrence, but the tooltip sweeps continuously through every
       // point during a drag, so landing it exactly ON that boundary with

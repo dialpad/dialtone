@@ -124,10 +124,8 @@
           :step="thumbNativeStep(i)"
           :disabled="disabled"
           :name="name || undefined"
-          :aria-labelledby="showLabel && hasLabelContent ? labelId : attrs['aria-labelledby']"
-          :aria-label="showLabel && hasLabelContent
-            ? undefined
-            : (!showLabel && label ? label : attrs['aria-label'])"
+          :aria-labelledby="resolvedAriaLabelledby"
+          :aria-label="resolvedAriaLabel"
           :aria-describedby="attrs['aria-describedby']"
           :aria-errormessage="attrs['aria-errormessage']"
           :aria-details="attrs['aria-details']"
@@ -602,6 +600,19 @@ function slotHasText(vnodes) {
 const hasLabelContent = computed(() => !!(
   props.label?.trim() || (slots.label && slotHasText(slots.label({ value: currentValue.value })))
 ));
+
+// Each native thumb <input> names itself from the visible label when there
+// is one; otherwise it falls back to whatever aria-label/aria-labelledby a
+// consumer passed in (or, lacking even that, the label prop's own text when
+// it's being used as a hidden accessible name — showLabel false).
+const usesVisibleLabelAsName = computed(() => props.showLabel && hasLabelContent.value);
+const resolvedAriaLabelledby = computed(() => (
+  usesVisibleLabelAsName.value ? labelId : attrs['aria-labelledby']
+));
+const resolvedAriaLabel = computed(() => {
+  if (usesVisibleLabelAsName.value) return undefined;
+  return !props.showLabel && props.label ? props.label : attrs['aria-label'];
+});
 
 const resolvedLabelSize = computed(() => props.labelSize ?? 300);
 

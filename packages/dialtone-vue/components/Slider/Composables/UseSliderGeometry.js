@@ -53,31 +53,41 @@ export function useSliderGeometry(props, {
   // control's actual measured width. Shared by thumbPositionStyle and
   // tickPositionStyle below — every tick (not just the edge ones) is
   // rescaled onto this same band, so spacing between ticks stays even
-  // rather than only the edges standing out as special cases.
+  // rather than only the edges standing out as special cases. Prefix/suffix
+  // hoisted once since EDGE_INSET's own text never changes between calls.
+  const ANCHOR_PCT_PREFIX = `calc(${EDGE_INSET} + (100% - ${EDGE_INSET} * 2) * `;
+  const ANCHOR_PCT_SUFFIX = ')';
+
   function anchorPct(pct) {
-    return `calc(${EDGE_INSET} + (100% - ${EDGE_INSET} * 2) * ${pct / 100})`;
+    return `${ANCHOR_PCT_PREFIX}${pct / 100}${ANCHOR_PCT_SUFFIX}`;
+  }
+
+  // Shared by thumbPositionStyle and tickPositionStyle — both anchor onto
+  // the same inset band horizontally, differing only in which transform
+  // re-centers them (and, vertically, positionStyle's own simpler path).
+  function anchoredPositionStyle(val, { verticalTransform, horizontalTransform }) {
+    const pct = thumbPercent(val);
+    if (isVertical.value) {
+      return positionStyle(pct, verticalTransform);
+    }
+    return {
+      insetInlineStart: anchorPct(pct),
+      transform: horizontalTransform,
+    };
   }
 
   function thumbPositionStyle(val) {
-    const pct = thumbPercent(val);
-    if (isVertical.value) {
-      return positionStyle(pct, `translate(${centerInlineTransform()}, 50%)`);
-    }
-    return {
-      insetInlineStart: anchorPct(pct),
-      transform: `translate(${centerInlineTransform()}, -50%)`,
-    };
+    return anchoredPositionStyle(val, {
+      verticalTransform: `translate(${centerInlineTransform()}, 50%)`,
+      horizontalTransform: `translate(${centerInlineTransform()}, -50%)`,
+    });
   }
 
   function tickPositionStyle(val) {
-    const pct = thumbPercent(val);
-    if (isVertical.value) {
-      return positionStyle(pct, 'translateY(50%)');
-    }
-    return {
-      insetInlineStart: anchorPct(pct),
-      transform: `translateX(${centerInlineTransform()})`,
-    };
+    return anchoredPositionStyle(val, {
+      verticalTransform: 'translateY(50%)',
+      horizontalTransform: `translateX(${centerInlineTransform()})`,
+    });
   }
 
   // A mark at min/max nudges 1px inward from the true 0%/100% edge instead
@@ -90,10 +100,10 @@ export function useSliderGeometry(props, {
   // "inward" is a physical direction that flips with which edge actually
   // sits on which side.
   function markEdgeInsetTransform(edge) {
-    if (edge === 'start') return `translateX(${isRtl.value ? '-1px' : '1px'})`;
+    const inward = isRtl.value ? -1 : 1; // mirrors centerInlineTransform's own RTL flip
+    if (edge === 'start') return `translateX(${inward}px)`;
     const flushPct = isRtl.value ? '100%' : '-100%';
-    const inwardPx = isRtl.value ? '1px' : '-1px';
-    return `translateX(calc(${flushPct} + ${inwardPx}))`;
+    return `translateX(calc(${flushPct} + ${-inward}px))`;
   }
 
   // A mark beyond the edge-clamp tolerance of the control's edge (see
