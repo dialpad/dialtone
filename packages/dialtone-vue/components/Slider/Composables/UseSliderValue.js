@@ -58,7 +58,14 @@ export function useSliderValue(props, emit, { isRange, activeSnapValue }) {
   // updateThumbValue (UseSliderInteraction) enforces this gap during drags,
   // but a controlled modelValue or a reactive min/max/step/minGapSteps change
   // bypasses that — this is what keeps those paths honoring the same gap.
-  function enforceRangeGap(values) {
+  // heldIndex (0 or 1, or null) marks a thumb whose value must be treated as
+  // a FIXED anchor — an actively-held magnetic snap, deliberately off-grid —
+  // rather than something this function may round or move. Computing the
+  // adjustment against the held thumb's raw value (not a snapped stand-in)
+  // and skipping the final rounding on it is what keeps the enforced gap
+  // accurate; patching the held value back in afterward, once this function
+  // already picked a sibling position based on a different number, cannot.
+  function enforceRangeGap(values, heldIndex = null) {
     if (values.length !== 2) return values;
     // Rounded — minGapSteps is a COUNT of steps; a fractional value would
     // make the gap not an exact multiple of props.step, breaking the
@@ -67,27 +74,40 @@ export function useSliderValue(props, emit, { isRange, activeSnapValue }) {
     if (gap <= 0) return values;
     let [lo, hi] = values;
     if (hi - lo >= gap) return values;
-    // Try widening hi alone first (lo stays put) — the common case. Failing
-    // that (it'd overshoot max), shrink lo alone instead of always pinning hi
-    // at max: that could freeze a thumb's native min === max even when a
-    // less disruptive pair existed, e.g. max=95, step=10, gap=20: [80,90]
-    // became [75,95] (frozen) instead of [70,90]. Only pin hi at max when
-    // neither single-ended fix fits the domain at all (dev-warned elsewhere).
-    if (lo + gap <= props.max) {
+    if (heldIndex === 0) {
+      hi = Math.min(props.max, lo + gap);
+    } else if (heldIndex === 1) {
+      lo = Math.max(props.min, hi - gap);
+    } else if (lo + gap <= props.max) {
+      // Try widening hi alone first (lo stays put) — the common case.
       hi = lo + gap;
     } else if (hi - gap >= props.min) {
+      // Failing that (it'd overshoot max), shrink lo alone instead of always
+      // pinning hi at max: that could freeze a thumb's native min === max
+      // even when a less disruptive pair existed, e.g. max=95, step=10,
+      // gap=20: [80,90] became [75,95] (frozen) instead of [70,90].
       lo = hi - gap;
     } else {
+      // Neither single-ended fix fits the domain at all (dev-warned
+      // elsewhere) — only then fall back to pinning hi at max.
       hi = props.max;
       lo = Math.max(props.min, hi - gap);
     }
     // Precision must include max's own decimal places — a hi pinned exactly
     // at a fractional max (e.g. 0.96) rounding at a coarser precision could
     // push it back out of bounds. The clamp after rounding is a second guard
-    // against that and ordinary float drift.
-    const dp = Math.max(decimalPlaces(props.min), decimalPlaces(props.max), decimalPlaces(props.step));
-    lo = Math.min(props.max, Math.max(props.min, parseFloat(lo.toFixed(dp))));
-    hi = Math.min(props.max, Math.max(props.min, parseFloat(hi.toFixed(dp))));
+    // against that and ordinary float drift. Skipped for the held index —
+    // its whole point is to stay exactly as held, off-grid precision and all.
+    // The sibling's computed value inherits whatever precision the held one
+    // has (lo + gap, or hi - gap) — a snap point's precision isn't bound by
+    // min/max/step at all, so dp must account for it too, or the sibling
+    // rounds away digits the held value actually has.
+    const dp = Math.max(
+      decimalPlaces(props.min), decimalPlaces(props.max), decimalPlaces(props.step),
+      heldIndex !== null ? decimalPlaces(values[heldIndex]) : 0,
+    );
+    if (heldIndex !== 0) lo = Math.min(props.max, Math.max(props.min, parseFloat(lo.toFixed(dp))));
+    if (heldIndex !== 1) hi = Math.min(props.max, Math.max(props.min, parseFloat(hi.toFixed(dp))));
     return [lo, hi];
   }
 
@@ -95,18 +115,24 @@ export function useSliderValue(props, emit, { isRange, activeSnapValue }) {
   // controlled modelValue changes, reactive min/max/step/minGapSteps changes)
   // so they all get the same guarantees — otherwise an out-of-contract value
   // would split the native input, aria-valuetext, and visual thumb into three
-  // disagreeing states.
-  function applyValueConstraints(values) {
+  // disagreeing states. heldIndex (see enforceRangeGap) skips clamping/
+  // snapping for that one index too, so its raw value reaches enforceRangeGap
+  // unchanged — not just restored afterward, which left the SIBLING'S
+  // adjustment computed against a snapped stand-in instead of the real hold.
+  function applyValueConstraints(values, heldIndex = null) {
     // A non-finite element (NaN, or a non-numeric value coerced to NaN)
     // would otherwise propagate through Math.min/Math.max in enforceRangeGap
     // and contaminate the OTHER thumb's value too — replace it before
-    // anything downstream can see it.
-    let out = values
-      .map((v) => (Number.isFinite(v) ? v : defaultValue()))
-      .map(clampToRange)
-      .map(snapToStep);
-    out = out.length === 2 ? normalizeRangeValues(out) : out;
-    return enforceRangeGap(out);
+    // anything downstream can see it. Skipped for the held index — a held
+    // value is never NaN (it came from a real pointer position).
+    let out = values.map((v, i) => (i === heldIndex ? v : (Number.isFinite(v) ? v : defaultValue())));
+    out = out.map((v, i) => (i === heldIndex ? v : clampToRange(v)));
+    out = out.map((v, i) => (i === heldIndex ? v : snapToStep(v)));
+    // A held index can't meaningfully swap sides with its sibling — the
+    // crossing clamp that produced the hold in the first place already
+    // guarantees it's on the correct side.
+    out = out.length === 2 && heldIndex === null ? normalizeRangeValues(out) : out;
+    return enforceRangeGap(out, heldIndex);
   }
 
   // Matches native <input type="range">, which defaults an unset value to the
@@ -115,14 +141,14 @@ export function useSliderValue(props, emit, { isRange, activeSnapValue }) {
     return (props.min + props.max) / 2;
   }
 
-  function normalizeModelValue(value) {
+  function normalizeModelValue(value, heldIndex = null) {
     let raw;
     if (Array.isArray(value)) {
       raw = value.length >= 2 ? [value[0], value[1]] : value.length === 1 ? [value[0]] : [defaultValue()];
     } else {
       raw = value !== undefined && value !== null ? [value] : [defaultValue()];
     }
-    return applyValueConstraints(raw);
+    return applyValueConstraints(raw, heldIndex);
   }
 
   const internalValues = ref(normalizeModelValue(props.modelValue));
@@ -232,11 +258,13 @@ export function useSliderValue(props, emit, { isRange, activeSnapValue }) {
       // A held magnetic snap is intentionally off-grid — normalizeModelValue
       // doesn't know that and re-snaps it onto the step grid regardless. If
       // the parent simply echoed back exactly what we just emitted (the
-      // common v-model round trip), there's nothing to correct; restore the
-      // held value so the echo doesn't silently destroy the hold.
-      const next = normalizeModelValue(newVal).map((v, i) => (
-        incoming[i] === current[i] && isActivelyHeld(i, current[i]) ? current[i] : v
-      ));
+      // common v-model round trip), there's nothing to correct. Threaded
+      // through as heldIndex (not patched on after) so, in range mode, the
+      // OTHER thumb's own gap adjustment is computed against the real held
+      // value instead of a snapped stand-in. At most one thumb is ever held
+      // at a time — a single activePointerId owns any drag.
+      const heldIndex = current.findIndex((v, i) => incoming[i] === v && isActivelyHeld(i, v));
+      const next = normalizeModelValue(newVal, heldIndex === -1 ? null : heldIndex);
       if (next.length !== current.length || next.some((v, i) => v !== current[i])) {
         // internalValues already diverged from lastCommittedValues means a
         // drag/keyboard interaction is mid-flight and this echo is just our
@@ -284,10 +312,10 @@ export function useSliderValue(props, emit, { isRange, activeSnapValue }) {
       // Same hold-preserving exception as the modelValue watcher above — a
       // held value still within the (possibly just-changed) [min, max]
       // bounds shouldn't be re-snapped onto the grid just because an
-      // unrelated reactive prop changed mid-drag.
-      const next = applyValueConstraints(cur).map((v, i) => (
-        isActivelyHeld(i, cur[i]) && cur[i] >= props.min && cur[i] <= props.max ? cur[i] : v
-      ));
+      // unrelated reactive prop changed mid-drag. Threaded through as
+      // heldIndex so the sibling's gap adjustment is computed correctly too.
+      const heldIndex = cur.findIndex((v, i) => isActivelyHeld(i, v) && v >= props.min && v <= props.max);
+      const next = applyValueConstraints(cur, heldIndex === -1 ? null : heldIndex);
       if (next.length !== cur.length || next.some((v, i) => v !== cur[i])) {
         internalValues.value = next;
         const payload = isRange.value ? [...next] : next[0];

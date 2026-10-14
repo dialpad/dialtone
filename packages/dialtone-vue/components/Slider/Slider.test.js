@@ -1736,6 +1736,33 @@ describe('DtSlider Tests', () => {
         expect(Number(thumbInputs[0].element.value)).toBe(0);
         expect(Number(thumbInputs[1].element.value)).toBe(60);
       });
+
+      it('does not hand off a drag that started on a clearly distinct thumb, even after it converges with its sibling', async () => {
+        mockProps = { modelValue: [40, 60], min: 0, max: 100 };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => (
+          { top: 0, left: 0, right: 100, bottom: 20, width: 100, height: 20 }
+        );
+
+        // Unambiguously grabs the low thumb — the pair isn't coincident yet.
+        await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 40, buttons: 1 });
+        // First move lands exactly on the high thumb's value (40 -> 60),
+        // becoming coincident as a RESULT of this gesture, not at its start.
+        await control.trigger('pointermove', { pointerId: 1, clientX: 60, buttons: 1 });
+        // A further move past that point is what the old (pre-narrowing) fix
+        // incorrectly handed off to the high thumb — this gesture started on
+        // a clearly distinct thumb, so it must stay pinned here instead.
+        await control.trigger('pointermove', { pointerId: 1, clientX: 90, buttons: 1 });
+
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        expect(Number(thumbInputs[0].element.value)).toBe(60);
+        expect(Number(thumbInputs[1].element.value)).toBe(60);
+        thumbVisuals = wrapper.findAll('[data-qa="dt-slider-thumb-visual"]');
+        expect(thumbVisuals[0].classes()).toContain('d-slider__thumb-visual--active');
+        expect(thumbVisuals[1].classes()).not.toContain('d-slider__thumb-visual--active');
+      });
     });
 
     describe('Magnetic snapping (snapPoints)', () => {
@@ -1998,6 +2025,47 @@ describe('DtSlider Tests', () => {
         await wrapper.setProps({ minGapSteps: 5 });
         const emitted = wrapper.emitted('update:modelValue');
         expect(emitted[emitted.length - 1][0][0]).toBe(42.5);
+      });
+
+      it('enforces the exact required gap around a held value, not a gap computed against its snapped stand-in', async () => {
+        // enforceRangeGap used to run on the already-snapped pair (42.5 -> 42
+        // at step=1), position the sibling relative to THAT, then restore the
+        // raw 42.5 afterward — leaving an actual gap of 4.6, short of the 5
+        // minGapSteps promises. Threading the held value through the gap
+        // computation itself keeps it exact.
+        mockProps = { modelValue: [20, 44], step: 1, snapPoints: [42.4] };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => controlRect;
+
+        await dragTo(20);
+        await moveTo(42); // distance 0.4 from 42.4, within the fixed 10px threshold
+        await wrapper.setProps({ minGapSteps: 5 });
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toEqual([42.4, 47.4]);
+      });
+
+      it('clears a stale hold left behind by a coincident-drag handoff, so a later gap change still corrects that thumb', async () => {
+        // resolveCoincidentHandoff reassigns which thumb is active but never
+        // used to clear the ABANDONED thumb's own activeSnapValue entry —
+        // updateThumbValue never runs for that index again this gesture, so
+        // it stayed "held" indefinitely, letting a later gap requirement skip
+        // correcting it entirely instead of just leaving it off-grid.
+        mockProps = {
+          modelValue: [50, 50], min: 0, max: 100, step: 1, snapPoints: [50],
+        };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => controlRect;
+
+        await dragTo(50); // grabs thumb 0 (no prior drag), latches onto 50
+        await moveTo(70); // hands off to thumb 1 — thumb 0's hold must clear
+
+        await wrapper.setProps({ minGapSteps: 60 });
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toEqual([10, 70]);
       });
     });
 

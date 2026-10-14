@@ -298,6 +298,12 @@ export function useSliderInteraction(props, emit, {
       ? resolveCoincidentHandoff(activeThumbIndex.value, rawVal)
       : activeThumbIndex.value;
     if (idx !== activeThumbIndex.value) {
+      // The abandoned thumb is no longer being dragged — updateThumbValue
+      // (and the findMagneticSnapPoint call inside it) will never run for
+      // its index again this gesture, so its old hold would otherwise sit
+      // there stale, read as "actively held" by UseSliderValue's watchers
+      // long after the handoff moved on.
+      delete activeSnapValue.value[activeThumbIndex.value];
       activeThumbIndex.value = idx;
       lastActiveThumbIndex.value = idx;
     }
