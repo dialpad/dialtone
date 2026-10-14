@@ -139,6 +139,14 @@ test('core and adapters hash the generated data they consume through dependency 
     'packages/dialtone-vue/dist/component-documentation.json',
     'packages/dialtone-docs/dist/public-docs.json',
   ];
+  const manifests = [
+    'dialtone-css', 'dialtone-vue', 'dialtone-icons', 'dialtone-docs',
+  ].map(name => `packages/${name}/package.json`);
+  assert.deepEqual(
+    covered(manifests, selfPatterns('dialtone-query-core')),
+    manifests,
+    'dataset versions read by bundled provenance participate in the core hash',
+  );
   const coreOutputs = [
     'packages/dialtone-query-core/build/tools/components.js',
     'packages/dialtone-query-core/build/types.d.ts',

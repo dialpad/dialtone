@@ -9,7 +9,7 @@ module.exports = {
   pkgRoot: srcRoot,
   tagFormat: name + '/v${version}',
   // semantic-release-plus passes these Git pathspecs to git log.
-  commitPaths: [`${srcRoot}/*`, 'packages/dialtone-query-core'],
+  commitPaths: [`${srcRoot}/*`, 'packages/dialtone-query-core', 'scripts/lib/component-name.mjs'],
   plugins: [
     ['@semantic-release/commit-analyzer', {
       preset: 'angular',

@@ -122,7 +122,10 @@ Find CSS utility classes to style HTML elements. Use when your query mentions CS
 **Parameters:**
 
 - `query` (required): CSS property and/or value
-- `limit` (optional): Maximum results (1-50, default 15)
+- `limit` (optional): Maximum returned classes (default 15)
+- `offset` (optional): Integer record offset (0–100000, default 0)
+
+Readable Markdown results retain every available property and usage example for each returned class, together with search notes and source provenance. Follow the text continuation call for more classes.
 
 ### Design Tokens
 
@@ -141,14 +144,18 @@ Find design tokens (CSS variables) from Dialtone's design system. Use when your 
 
 **Parameters:**
 
-- `query` (required): Token category, name, or value
-- `limit` (optional): Maximum results (1-50, default 15)
+- `query` (required): Token category, name, or value; an exact returned token name for theme detail
+- `projection` (optional): `summary` (default) or `themes`
+- `limit` (optional): Maximum returned tokens or theme records (default 15)
+- `offset` (optional): Record offset (default 0)
+
+Readable Markdown results preserve three named theme samples and token usage, label the sample as incomplete, and supply an exact `projection: "themes"` call. The theme projection returns complete available named source records and migration metadata as text, with limit/offset continuations. Samples and detail values do not identify your active installed theme.
 
 ### Components
 
 **Tool:** `search_components`
 
-Find Vue components from Dialtone's component library with props, events, and slots. Use when your query mentions UI elements (button, modal, input, dropdown) or component names.
+Discover Vue component candidates by UI element or name. Select a canonical component and use `get_component` to retrieve its available API contract.
 
 **Example queries:**
 
@@ -160,17 +167,44 @@ Find Vue components from Dialtone's component library with props, events, and sl
 
 **Returns:**
 
-- Component name
-- Description
-- Props (name, type, default, description)
-- Events (name, description)
-- Slots (name, description)
-- Import path when verified; otherwise, an unavailable or unverified import note
+- Component names, descriptions, the first five props and sampled event/slot names
+- Deprecation metadata and verified export hints where available
+- Exact detail and pagination continuation calls
+- Bundled data package versions and hashes; installed compatibility is not checked
 
 **Parameters:**
 
 - `query` (required): Component name or UI element
-- `limit` (optional): Maximum results (1-30, default 10)
+- `limit` (optional): Maximum returned components (default 15)
+- `offset` (optional): Integer record offset (0–100000, default 0)
+
+### Selected component API
+
+**Tool:** `get_component`
+
+Retrieve the selected component's complete available generated records. For Button's full `kind` values, default and deprecation contract, call:
+
+```json
+{ "component": "DtButton", "projection": "props", "field": "kind" }
+```
+
+`projection` accepts `all` (default), `props`, `events`, `slots`, `methods` and `expose`. `field` is optional and stays within that component. Records preserve available types, values, defaults, required inputs, tags, event payloads and scoped-slot bindings. Missing metadata is unknown. Import hints state export verification only; documentation links are latest production references with readiness and API-content qualification.
+
+`limit` accepts integers 1–50 (default 20); `offset` defaults to zero. Follow the returned continuation for remaining records. Selected detail has a rough budget of 12000 estimated tokens, counted as compact envelope JSON UTF-8 bytes divided by four and rounded up. Readable searches are not cut by this budget. Oversized atomic contracts report their omission instead of silently truncating values or payloads.
+
+### Complete documentation prose
+
+**Tools:** `search_documentation`, then `get_documentation`
+
+Search returns exact section IDs, 500-character excerpts and detail calls. Pass an exact ID to retrieve the available prose, for example:
+
+```json
+{ "id": "components/checkbox#accessibility" }
+```
+
+`textLimit` defaults to 6000 Unicode code points (1–10000); `textOffset` defaults to zero (0–1000000). Follow the returned continuation to read remaining content. Prose retrieval does not verify example code or consumer compatibility.
+
+The five search tools return readable Markdown only, with bundled package/version/hash provenance and text continuation calls. All execute and advertise a default limit of 15. They accept plain string queries, fractional numeric limits, harmless numeric-string limits and extra arguments. Whitespace-only queries return a clear no-match message; long inputs follow the existing domain search rules. Only `get_component` and `get_documentation` return structured envelopes and matching JSON text fallbacks; their selected detail schemas remain strict. Installed compatibility is not checked.
 
 ### Icons
 
@@ -198,7 +232,8 @@ Find icons from Dialtone's icon library and learn how to use icon components. Ic
 **Parameters:**
 
 - `query` (required): Icon name, category, or keyword
-- `limit` (optional): Maximum results (1-50, default 20)
+- `limit` (optional): Maximum returned icons (default 15)
+- `offset` (optional): Integer record offset (0–100000, default 0)
 
 ## Usage Examples
 
@@ -219,8 +254,8 @@ When building UI and unsure what components exist:
 ```text
 User: "What button components are available in Dialtone?"
 Claude: [Uses search_components tool]
-Result: DtButton, DtButtonGroup, DtIconButton with complete
-        prop documentation, events, and usage examples
+Result: Component descriptions, sampled props/events/slots, imports and detail routes.
+Claude: [Uses get_component for the selected DtButton API]
 ```
 
 ### Looking Up Tokens

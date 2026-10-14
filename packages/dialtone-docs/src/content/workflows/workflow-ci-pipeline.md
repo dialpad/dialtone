@@ -3,8 +3,8 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-10-08
-related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server]
+last_updated: 2026-10-13
+related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server, dialtone-docs]
 ---
 
 # CI Pipeline
@@ -50,11 +50,13 @@ These checks are required on every PR:
 | `test`            | `packages/dialtone-vue/**`                                                                                          | `pnpm nx run dialtone-vue:test:coverage`                                                                                                                                                              |
 | `test-tokens`     | `packages/dialtone-tokens/**`                                                                                       | `pnpm nx run dialtone-tokens:test`                                                                                                                                                                    |
 | `test-combinator` | `packages/combinator/**`                                                                                            | `pnpm nx run dialtone-combinator:test`                                                                                                                                                                |
-| `test-cli`        | Lookup adapters, their source datasets/generators/tests, documentation pages, ESLint, and shared retrieval fixtures | Build CLI/MCP and their datasets; run query-core, CLI, AI docs and ESLint tests; run the public-identity generator suite, shared fixture/cache contracts, cross-adapter retrieval regressions, MCP startup/shutdown and shared-core release selection, and existing documentation search scenarios |
+| `test-cli`        | Lookup adapters, their source datasets/generators/tests, documentation pages, ESLint, and shared retrieval fixtures | Build CLI/MCP and their datasets; run query-core, CLI, AI docs and ESLint tests; run the public-identity generator suite, shared fixture/cache contracts, cross-adapter retrieval regressions, MCP query protocol contracts, MCP startup/shutdown and shared-core release selection, and existing documentation search scenarios |
 
 The `test` job outputs a coverage report in JSON and HTML. Coverage thresholds enforced: 80% branches, 70% functions, 85% lines and statements. Build fails if thresholds are not met.
 
 The lookup build runs `pnpm nx run-many -t build -p dialtone-cli dialtone-mcp-server`. It generates the component, token, utility, icon, and documentation data the tests consume. Changes to source content also run these suites, so a component, icon, CSS rule, or docs-page change can expose retrieval regressions on the same PR.
+
+Documentation-link inputs also include the shared component-name normalizer, site-reference, frontmatter and source-page helpers. MCP protocol contracts run with `pnpm --dir packages/dialtone-mcp-server test:protocol`; the documentation suite runs once and includes source-derived link checks.
 
 Shared contracts run with `node --test scripts/retrieval/*.test.mjs`; `node scripts/retrieval/run.mjs` exercises query-core, CLI JSON and live MCP tool responses. The retrieval harness disables optional registry update-check I/O for deterministic lookup checks. Known retrieval failures carry a precise assertion, owning issue and removal condition; an unrelated failure or unexpected pass fails the job. These checks do not establish startup/network behavior or consumer build compatibility.
 

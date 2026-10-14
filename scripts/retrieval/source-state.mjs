@@ -5,7 +5,10 @@ import { sha256 as hash } from './fixtures.mjs';
 
 export function fingerprintSourceState(root) {
   const sourceDiffSha256 = hash(
-    execFileSync('git', ['diff', 'HEAD', '--binary'], { cwd: root }),
+    execFileSync('git', ['diff', 'HEAD', '--binary'], {
+      cwd: root,
+      maxBuffer: 16 * 1024 * 1024,
+    }),
   );
   const paths = execFileSync(
     'git',

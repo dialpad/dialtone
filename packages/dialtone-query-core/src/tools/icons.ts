@@ -2,7 +2,7 @@
 // ICONS SEARCH TOOL
 // ============================================================================
 
-import type { IconsData, SearchResult } from '../types.js';
+import type { IconsData, SearchResult, SearchPage } from '../types.js';
 
 /**
  * Search icons by name, category, and keywords using AND-logic
@@ -62,12 +62,14 @@ export function searchIcons(query: string, data: IconsData): { results: SearchRe
 /**
  * Format icon search results
  */
-export function formatIconResults(results: SearchResult[], query: string): string {
+export function formatIconResults(results: SearchResult[], query: string, page?: SearchPage): string {
   if (results.length === 0) {
     return `No icons found for "${query}".\n\nTry searching with:\n- Icon name (e.g., "bell", "arrow", "calendar")\n- Category (e.g., "alerts", "communication", "time")\n- Keyword (e.g., "notification", "email", "warning")`;
   }
 
-  let output = `Found ${results.length} icon${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
+  let output = page
+    ? `Showing ${results.length} of ${page.total} icon${page.total === 1 ? '' : 's'} for "${query}" (results ${page.offset + 1}–${page.offset + results.length}):\n\n`
+    : `Found ${results.length} icon${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
 
   // Group by category for better organization
   const byCategory: { [category: string]: SearchResult[] } = {};

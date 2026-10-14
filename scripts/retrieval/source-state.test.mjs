@@ -29,7 +29,8 @@ test('source provenance includes staged and untracked changes while ignoring exc
       'initial',
     );
     const clean = fingerprintSourceState(root);
-    await writeFile(join(root, 'source.js'), 'changed\n');
+    // Release changelogs can make a dirty integration diff exceed Node's default 1 MiB buffer.
+    await writeFile(join(root, 'source.js'), 'changed\n'.repeat(150000));
     const unstaged = fingerprintSourceState(root);
     assert.notEqual(unstaged.sourceDiffSha256, clean.sourceDiffSha256);
     git('add', 'source.js');
