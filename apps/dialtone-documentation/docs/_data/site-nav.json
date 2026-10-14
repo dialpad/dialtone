@@ -277,10 +277,6 @@
           "link": "/foundations/illustrations/"
         },
         {
-          "text": "Halftone",
-          "link": "/foundations/halftone/"
-        },
-        {
           "text": "Gradient",
           "link": "/foundations/gradient/",
           "navigateToFirstChildWhenPersistent": true,
@@ -294,6 +290,10 @@
               "link": "/foundations/gradient/product.html"
             }
           ]
+        },
+        {
+          "text": "Halftone",
+          "link": "/foundations/halftone/"
         },
         {
           "text": "Motion",

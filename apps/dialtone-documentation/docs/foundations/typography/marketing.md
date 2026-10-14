@@ -9,7 +9,7 @@ keywords: ["season vf", "season sans", "season mix", "brand font", "marketing ty
 
 ## Sans for everything except quotes
 
-Use **Season VF Sans** for headlines, display statements, stat numerals, eyebrows, body copy, buttons, labels, and UI. **Season VF Mix** is for one thing only: pull quotes and customer quotes.
+In brand and marketing communications, use **Season VF Sans** for headlines, display statements, stat numerals, eyebrows, body copy, buttons, labels, and UI shown in marketing assets. **Season VF Mix** is for one thing only: pull quotes and customer quotes. Product UI uses system fonts; see [Type in Product](/foundations/typography/).
 
 - Never set a headline, hero title, or display statement in Mix.
 - Never set stat numerals in Mix.
@@ -40,7 +40,7 @@ Every font size comes from this ramp: **8, 10, 12, 16, 20, 24, 32, 48, 64, 96 px
 | 500 Medium | Body copy, navigation, card body |
 | 600 SemiBold | Headlines at every size, stat numerals, button labels |
 | 700 Bold | Eyebrows and subheads: always uppercase with 0.05em letter spacing |
-| 450 (Mix) | Pull quotes only |
+| 450 (Mix) | Pull quotes only. Dialtone's bundled static `Season Mix` faces are 400, 600, and 700, so use 400 when you use those fonts. |
 
 ## Hierarchy in practice
 
@@ -65,16 +65,16 @@ Set stats in Season VF Sans at weight 600, in solid **Purple `#7C52FF`**, at 32 
 
 ## Pull quotes
 
-Pull quotes and customer quotes are the only place Season VF Mix appears. Set them at weight 450, at 24 → 32 → 48px. Use curly quotes and a hanging open-quote (`text-indent: -0.45em`). On a light page, a customer quote can sit in a contained Deep Blue card, set in Light Tan.
+Pull quotes and customer quotes are the only place Season VF Mix appears. Set them at weight 450 in the Season VF variable font, or 400 with Dialtone's bundled `Season Mix` faces, at 24 → 32 → 48px. Use curly quotes and a hanging open-quote (`text-indent: -0.45em`). On a light page, a customer quote can sit in a contained Deep Blue card, set in Light Tan.
 
 ## Text color
 
 - Headlines and body copy are **Deep Blue `#10022C`**.
-- **Purple `#7C52FF`** is for eyebrows, subheads, and stat numerals only. Never set headlines, body copy, or long-form text in purple.
-- Secondary text is **Ultra Dark Tan `#81807F`**.
+- **Purple `#7C52FF`** is for eyebrows, subheads, and stat numerals only. Never set headlines, body copy, or long-form text in purple. Purple meets 4.5:1 only on White, so set small eyebrows on Light Tan or Tan in Deep Blue.
+- Large secondary text can use **Ultra Dark Tan `#81807F`**. It's below 4.5:1 for small text, so keep small secondary text in Deep Blue.
 - **Light Tan `#F8F7F6`** text appears only inside a contained Deep Blue element, such as a quote card.
 
-See [Color in Marketing](/foundations/colors/marketing/) for surfaces and containers.
+See [Color in Marketing](/foundations/colors/marketing/#text-contrast) for contrast ratios, surfaces, and containers.
 
 ## Presentations and Google Workspace
 

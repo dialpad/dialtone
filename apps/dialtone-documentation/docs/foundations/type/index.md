@@ -2,6 +2,7 @@
 title: Type
 description: The Dialpad brand typeface is Season VF. Season VF Sans sets almost everything; Season VF Mix is reserved for pull quotes.
 figma_url: https://www.figma.com/design/VjrRh4vvfONSmBQxnZrL3u/DT9-Design-Tokens--Rebrand-2025-?node-id=3746-13426&t=D8g6K4TrMGXNsvLT-11
+status: ready
 thumb: true
 keywords: ["font", "typography", "typeface", "text", "season", "season vf", "season sans", "season mix", "dm sans"]
 next:

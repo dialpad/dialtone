@@ -181,19 +181,17 @@ onMounted(() => {
       ? new IntersectionObserver(handleVideoVisibilityChange)
       : null;
 
+    // Without an observer there's no reliable visibility check, so videos stay
+    // paused on their posters.
     const syncVideoPlayback = () => {
-      if (reducedMotionQuery.matches) {
+      if (!videoObserver || reducedMotionQuery.matches) {
         carouselVideos.forEach(video => video.pause());
         return;
       }
 
-      if (videoObserver) {
-        // Re-observing fires a fresh callback for each video's current visibility.
-        videoObserver.disconnect();
-        carouselVideos.forEach(video => videoObserver.observe(video));
-      } else {
-        carouselVideos.forEach(playVideo);
-      }
+      // Re-observing fires a fresh callback for each video's current visibility.
+      videoObserver.disconnect();
+      carouselVideos.forEach(video => videoObserver.observe(video));
     };
     const usesCompositorAutoplay = !fineHoverQuery.matches;
     const supportsScrollEnd = 'onscrollend' in carouselContainer;
