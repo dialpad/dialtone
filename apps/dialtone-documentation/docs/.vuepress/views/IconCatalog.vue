@@ -201,14 +201,17 @@ const hasSearchResults = computed(() => Object.keys(filteredIconsList.value).len
  * @returns void
  */
 const filterIconList = () => {
-  const regex = new RegExp(search.value, 'i');
+  const normalizeSearchTerm = value => value.toLowerCase().replace(/[\s_-]+/g, '');
+  const searchTerm = normalizeSearchTerm(search.value ?? '');
   const filteredIcons = Object.keys(categories)
     .filter(category => category.includes(selectedCategory.value))
     .reduce((acc, category) => {
       const filteredCategory = Object.entries(categories[category])
         .filter(([name, keywords]) => {
-          if (!search.value) return !excludedIcons.includes(name);
-          return !excludedIcons.includes(name) && (regex.test(name) || regex.test(keywords.join(' ')));
+          if (!searchTerm) return !excludedIcons.includes(name);
+          return !excludedIcons.includes(name) &&
+            (normalizeSearchTerm(name).includes(searchTerm) ||
+              normalizeSearchTerm(keywords.join(' ')).includes(searchTerm));
         })
         .reduce((acc, [name]) => Object.assign(acc, { [name]: Object.freeze(categories[category][name]) }), {});
 
