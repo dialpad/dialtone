@@ -687,6 +687,7 @@ const {
   isRtl,
   isReadoutOpen,
   computedMarks,
+  formatValue,
 });
 
 const {

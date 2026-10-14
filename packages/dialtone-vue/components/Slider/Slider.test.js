@@ -1,4 +1,4 @@
-import { defineComponent, h, nextTick } from 'vue';
+import { defineComponent, h, nextTick, ref } from 'vue';
 import { mount } from '@vue/test-utils';
 import { DtText } from '@/components/Text';
 import DtSlider from './Slider.vue';
@@ -590,6 +590,30 @@ describe('DtSlider Tests', () => {
           const style = tooltipReadouts()[0].attributes('style');
           expect(style).toContain('transform: translateX(calc(-50% + 20px))');
           expect(style).toContain('--tooltip-arrow-offset: -20px');
+        });
+
+        it('remeasures when a STABLE getValueText callback\'s own OUTPUT changes (e.g. a closed-over locale/units ref), not just when its reference changes', async () => {
+          // getValueText itself is never recreated — only the external ref it
+          // reads changes. Watching getValueText's bare identity would miss
+          // this entirely; watching the actual FORMATTED text (what this
+          // fix does) catches it.
+          const unit = ref('');
+          mockProps = { modelValue: 0, getValueText: (value) => `${value}${unit.value}` };
+          updateWrapper();
+
+          mockEdgeClampGeometry({ controlLeft: 0, controlRight: 1000, tooltipWidth: 32 });
+          const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
+          await hitTarget.trigger('pointerenter');
+          await settleCollisions();
+          // 32px is well within tolerance — no clamp yet.
+          expect(tooltipReadouts()[0].attributes('style')).toContain('--tooltip-arrow-offset: 0px');
+
+          // Same value, same callback reference — only the text it renders
+          // (and the measured width a real browser would report) changes.
+          unit.value = ' a very long localized unit string';
+          mockEdgeClampGeometry({ controlLeft: 0, controlRight: 1000, tooltipWidth: 174 });
+          await settleCollisions();
+          expect(tooltipReadouts()[0].attributes('style')).not.toContain('--tooltip-arrow-offset: 0px');
         });
 
         it('nudges the bubble left (and the arrow back right by the same amount) by the excess once it overflows past the control\'s own reserved tolerance, at its end edge', async () => {
