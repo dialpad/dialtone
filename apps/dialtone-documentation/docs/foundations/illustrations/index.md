@@ -1,5 +1,7 @@
 ---
 title: Illustrations
+description: Spot illustrations for product empty states, onboarding, and announcements.
+status: ready
 storybook: https://dialtone.dialpad.com/vue/index.html?path=/story/components-illustration--default
 figma_url: https://www.figma.com/design/dzGQjTcbUfviiqGvwsD9VV/DT9-Spot-Illustrations?node-id=1181-1068
 download_url: https://drive.google.com/drive/folders/16nm2aD9cB7gjtmQ7QLDNjvtQto9yqAkY?usp=drive_link
@@ -10,7 +12,7 @@ keywords: ["artwork", "graphics", "images"]
 <dt-stack gap="600" class="d-mbs-600">
   <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols3 d-ai-center">
     <div>
-      <p class="d-docsite--paragraph">Illustrations pair with inline text in <dt-link to="/components/empty-state">empty states</dt-link>, onboarding, and announcements. Spot illustrations also support marketing value propositions and features.</p>
+      <p class="d-docsite--paragraph">In product UI, illustrations pair with inline text in <dt-link to="/components/empty-state">empty states</dt-link>, onboarding, and announcements. Spot illustrations are retired from brand and marketing work. Use <dt-link to="/foundations/graphic-system/">Resolve graphics</dt-link> there instead.</p>
     </div>
     <div class="d-gc2">
       <figure>

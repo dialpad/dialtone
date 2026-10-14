@@ -273,6 +273,14 @@
           ]
         },
         {
+          "text": "Illustrations",
+          "link": "/foundations/illustrations/"
+        },
+        {
+          "text": "Halftone",
+          "link": "/foundations/halftone/"
+        },
+        {
           "text": "Gradient",
           "link": "/foundations/gradient/",
           "navigateToFirstChildWhenPersistent": true,
@@ -280,10 +288,6 @@
             {
               "text": "Overview",
               "link": "/foundations/gradient/"
-            },
-            {
-              "text": "Gradient in Marketing",
-              "link": "/foundations/gradient/marketing.html"
             },
             {
               "text": "Gradient in Product",
@@ -305,12 +309,16 @@
               "link": "/foundations/graphic-system/"
             },
             {
-              "text": "Abstract Graphics",
-              "link": "/foundations/graphic-system/abstract-graphics.html"
+              "text": "Schematic Line Art",
+              "link": "/foundations/graphic-system/schematic-line-art.html"
             },
             {
-              "text": "Illustrations",
-              "link": "/foundations/illustrations/"
+              "text": "Glyphs",
+              "link": "/foundations/graphic-system/glyphs.html"
+            },
+            {
+              "text": "Transformation Grid",
+              "link": "/foundations/graphic-system/transformation-grid.html"
             },
             {
               "text": "Data Visualizations",

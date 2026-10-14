@@ -21,6 +21,8 @@ next:
 The Dialpad icon draws on the core of the Dialpad product, the phone Dialpad and the artificial intelligence that powers our platform.
 
 The visual symbols of the dialpad and Ai are combined to represent the relationship between businesses and customers with Dialpad as the connective tissue.
+
+The Spark appears only inside its approved assets: the logo lockups and the app icon. Never lift it out on its own as a decorative element, bullet, divider, watermark, background motif, or "AI sparkle." Never redraw, recolor, or distort it.
   </div>
 
   <figure class="d-bar-500 d-of-hidden">
@@ -31,7 +33,4 @@ The visual symbols of the dialpad and Ai are combined to represent the relations
     <img class="d-d-block d-w100p" src="/assets/images/logo--sample-02.jpg" alt="">
   </figure>
 
-  <figure class="d-bar-500 d-of-hidden">
-    <img class="d-d-block d-w100p" src="/assets/images/logo--sample-03.png" alt="">
-  </figure>
 </dt-stack>
