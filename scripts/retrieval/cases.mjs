@@ -91,7 +91,7 @@ export const cases = [
     'utility-display-facts',
     'utilities',
     'display flex',
-    [contains('flex-value', 'flex')],
+    [order(['d-d-flex']), contains('flex-value', 'flex')],
     { limit: 1 },
   ),
   missing(
@@ -274,15 +274,6 @@ const everyAdapter = (caseId, entry) =>
       .adapters.map((adapter) => [`${caseId}/${adapter}`, entry]),
   );
 export const expectedFailures = {
-  ...everyAdapter(
-    'utility-pixel-ranking',
-    failure(
-      'DLT-3651',
-      'ranking and migration guidance',
-      'top-results',
-      'padding 8px ranks the value-preserving d-p-100 utility before component internals',
-    ),
-  ),
   ...everyAdapter(
     'tooltip-wrapper-literal',
     failure(

@@ -154,23 +154,28 @@ export function searchUtilityClasses(query: string, data: UtilityClassesData): {
   console.error(`[CLASS SEARCH DEBUG] Words:`, words);
 
   const results: SearchResult[] = [];
+  const utilityMatches = new Set<string>();
 
   // Check each class: ALL words must match somewhere
   for (const [className, classData] of Object.entries(data) as [string, ClassData][]) {
     // Gather all searchable text for this class
     const searchableTexts = [className.toLowerCase()];
+    let declarationMatch = false;
 
     for (const valueObj of classData.values) {
       const prop = valueObj.prop?.toLowerCase() || '';
-      searchableTexts.push(prop);
+      const declarationTexts = [prop];
       if (/^(padding|margin|inset)-/.test(prop)) {
         for (const [logical, physical] of DIRECTION_ALIASES) {
-          searchableTexts.push(prop.replace(logical, physical).replace(`-${physical}`, `-${logical}`));
-          searchableTexts.push(prop.replace(logical, physical));
+          declarationTexts.push(prop.replace(logical, physical).replace(`-${physical}`, `-${logical}`));
+          declarationTexts.push(prop.replace(logical, physical));
         }
       }
-      searchableTexts.push(valueObj.value?.toLowerCase() || '');
-      searchableTexts.push(valueObj.description?.toLowerCase() || '');
+      declarationTexts.push(valueObj.value?.toLowerCase() || '');
+      declarationTexts.push(valueObj.description?.toLowerCase() || '');
+      searchableTexts.push(...declarationTexts);
+      const declarationText = declarationTexts.join(' ');
+      if (regexArray.every(regex => regex.test(declarationText))) declarationMatch = true;
     }
 
     const combinedText = searchableTexts.join(' ');
@@ -179,6 +184,11 @@ export function searchUtilityClasses(query: string, data: UtilityClassesData): {
     const allWordsMatch = regexArray.every((regex: RegExp) => regex.test(combinedText));
 
     if (allWordsMatch) {
+      // Utilities emit !important declarations; prefer a matching declaration
+      // over incidental words spread across a component's CSS.
+      if (declarationMatch && classData.values.every(value => /!important\s*$/i.test(value.value || ''))) {
+        utilityMatches.add(className);
+      }
       results.push({
         type: 'utility-class',
         name: className,
@@ -194,8 +204,8 @@ export function searchUtilityClasses(query: string, data: UtilityClassesData): {
 
   // Apply smart filter (remove deprecated, swap discouraged with alternatives)
   const { results: filtered, notes } = applySmartFilterKeepingExact(results, data, exactName);
-  // Names that contain every query word rank ahead of property/value-only matches.
-  sortExactFirst(filtered, exactName, name => regexArray.every(regex => regex.test(name)) ? 0 : 1);
+  // Keep exact/name matches first and preserve source order within each tier.
+  sortExactFirst(filtered, exactName, name => regexArray.every(regex => regex.test(name)) ? 0 : utilityMatches.has(name) ? 1 : 2);
   if (/\b(padding|margin|inset)\s+(top|bottom|left|right|block|inline)\b/i.test(normalized)) {
     notes.push('Physical/logical direction matches assume horizontal-tb and left-to-right writing; verify the writing mode.');
   }

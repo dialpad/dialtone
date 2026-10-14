@@ -6,11 +6,13 @@ import { searchDocumentation } from '../../src/tools/docs.js';
 import type { DocumentationRecord, UtilityClassesData, TokensData } from '../../src/types.js';
 
 const utilities: UtilityClassesData = {
+  'd-datepicker__cell': { values: [{ prop: 'padding-block-start', value: '0.8rem' }, { prop: 'display', value: 'flex' }] },
   'd-card': { values: [{ prop: 'padding', value: 'var(--dt-spacing-100)' }] },
   'd-p-100-z': { values: [{ prop: 'padding', value: '0.8rem' }] },
   'd-p-100-extra': { values: [{ prop: 'padding', value: '0.8rem' }] },
   'd-p-100': { values: [{ prop: 'padding', value: '0.8rem' }] },
-  'd-pbs-100': { values: [{ prop: 'padding-block-start', value: '0.8rem' }] },
+  'd-pbs-100': { values: [{ prop: 'padding-block-start', value: '0.8rem !important' }] },
+  'd-d-flex': { values: [{ prop: 'display', value: 'flex !important' }] },
   'd-p8': { values: [{ prop: 'padding', value: '0.8rem' }], metadata: {
     deprecated: true, reason: 'Dialtone 9 pixel utility; Dialtone 10 replacement preserves 8px.', alternatives: ['d-p-100'],
   } },
@@ -38,9 +40,15 @@ describe('exact names and bounded utility intent', () => {
   test('physical padding queries recover logical matches with a writing-mode warning', () => {
     for (const query of ['padding top 8px', 'padding-top 8px', 'padding/top 8px']) {
       const { results, notes } = searchUtilityClasses(query, utilities);
-      expect(results.map(r => r.name)).toContain('d-pbs-100');
+      expect(results.map(r => r.name)).toEqual(['d-pbs-100', 'd-datepicker__cell']);
       expect(notes.some(note => note.includes('horizontal-tb'))).toBe(true);
     }
+  });
+  test('ranks a matching display utility before component CSS without hiding either', () => {
+    expect(searchUtilityClasses('display flex', utilities).results.map(r => r.name)).toEqual([
+      'd-d-flex', 'd-datepicker__cell',
+    ]);
+    expect(searchUtilityClasses('d-datepicker__cell', utilities).results[0].name).toBe('d-datepicker__cell');
   });
   test('returns no utilities for an empty query', () => {
     expect(searchUtilityClasses('', utilities).results).toEqual([]);
