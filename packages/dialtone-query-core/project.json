@@ -3,11 +3,7 @@
   "targets": {
     "build": {
       "executor": "nx:run-commands",
-      "dependsOn": [
-        "dialtone-css:build",
-        "dialtone-vue:build",
-        "dialtone-docs:build"
-      ],
+      "dependsOn": ["dialtone-css:build", "dialtone-vue:build", "dialtone-docs:build"],
       "inputs": [
         "{projectRoot}/src/**/*",
         "{projectRoot}/package.json",
@@ -15,10 +11,7 @@
         "{projectRoot}/scripts/**/*",
         "{workspaceRoot}/scripts/lib/component-name.mjs",
         "!{projectRoot}/src/generated/**",
-        {
-          "dependentTasksOutputFiles": "**/*.json",
-          "transitive": true
-        }
+        { "dependentTasksOutputFiles": "**/*.json", "transitive": true }
       ],
       "outputs": ["{projectRoot}/build", "{projectRoot}/src/generated"],
       "options": {
@@ -29,9 +22,7 @@
     "test": {
       "executor": "nx:run-script",
       "dependsOn": ["build"],
-      "options": {
-        "script": "test"
-      }
+      "options": { "script": "test" }
     }
   }
 }
