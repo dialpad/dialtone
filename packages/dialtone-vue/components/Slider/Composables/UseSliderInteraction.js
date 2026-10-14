@@ -30,6 +30,17 @@ export function useSliderInteraction(props, emit, {
   // triggers, within the same task. See onPointerDown.
   let isPointerFocus = false;
 
+  // Not reactive — plain bookkeeping for which pointer actually owns the
+  // current drag. setPointerCapture retargets POINTER events for this one
+  // pointerId to controlRef, but it does NOT stop some OTHER, uncaptured
+  // pointer's native move/up/cancel from also reaching the same listeners if
+  // it lands on (or bubbles through) controlRef — e.g. a second touch during
+  // a drag. Without this check, that unrelated pointer's own pointerup could
+  // end and commit the real drag, leaving the owning pointer's further
+  // movement silently inert (onPointerMove's isDragging guard would already
+  // be false by then).
+  let activePointerId = null;
+
   // A consumer can flip :disabled reactively while a thumb is focused or
   // hovered — the native input's own focus ring clears automatically, but
   // focusedThumbIndex/hoveredThumbIndex are separate internal state (also
@@ -196,6 +207,7 @@ export function useSliderInteraction(props, emit, {
     activeThumbIndex.value = idx;
     lastActiveThumbIndex.value = idx;
     isDragging.value = true;
+    activePointerId = event.pointerId;
     controlRef.value.setPointerCapture(event.pointerId);
     // Pointer capture routes every subsequent pointer event to controlRef, so
     // the non-dragged thumb's own pointerenter/pointerleave never fire again
@@ -226,6 +238,11 @@ export function useSliderInteraction(props, emit, {
 
   function onPointerMove(event) {
     if (!isDragging.value || activeThumbIndex.value === null) return;
+    // An unrelated pointer (e.g. a second touch) landing on controlRef fires
+    // its own move/up/cancel here too — pointer capture only retargets the
+    // OWNING pointer's events, it doesn't block others from reaching the same
+    // listeners. Ignore anything that isn't the pointer that started this drag.
+    if (event.pointerId !== activePointerId) return;
 
     // A consumer can flip :disabled reactively mid-drag (e.g. async
     // validation) — stop accepting input immediately rather than waiting for
@@ -256,9 +273,16 @@ export function useSliderInteraction(props, emit, {
     return Math.abs(stepsFromMin - Math.round(stepsFromMin)) > 1e-9;
   }
 
-  function onPointerUp() {
+  // event is omitted for the internal end-of-drag calls above (disabled
+  // flip, buttons===0 self-heal) — those are the component's own decision to
+  // end the drag, not a pointer event to validate ownership of. A REAL
+  // pointerup/pointercancel (from the template) always passes one, and must
+  // match the pointer that started the drag — see activePointerId above.
+  function onPointerUp(event) {
     if (!isDragging.value) return;
+    if (event && event.pointerId !== activePointerId) return;
     isDragging.value = false;
+    activePointerId = null;
     // A magnetic snap point can leave the thumb off the step grid (fine
     // while dragging — thumbNativeStep sets step="any" for it) — but left in
     // place, the NEXT plain Arrow-key press is handled natively using

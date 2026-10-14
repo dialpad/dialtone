@@ -1519,6 +1519,36 @@ describe('DtSlider Tests', () => {
         }
       });
 
+      it('ignores pointerup/pointermove from an unrelated second pointer, so it cannot prematurely commit or freeze the real drag', async () => {
+        // setPointerCapture retargets POINTER events for pointerId 1 to
+        // controlRef, but does not stop an unrelated second pointer (e.g.
+        // another finger) from independently firing its own move/up on the
+        // same element — without pointer-ownership tracking, that second
+        // pointer's pointerup would end and commit the first pointer's drag,
+        // and the first pointer's continued movement would then be silently
+        // dropped (isDragging already false).
+        control.element.getBoundingClientRect = () => (
+          { top: 0, left: 0, right: 100, bottom: 20, width: 100, height: 20 }
+        );
+        await control.trigger('pointerdown', {
+          pointerId: 1, pointerType: 'mouse', button: 0, clientX: 20, buttons: 1,
+        });
+
+        // An unrelated second pointer releases over the same control.
+        await control.trigger('pointerup', { pointerId: 2 });
+
+        // The real pointer keeps moving — if its drag had been prematurely
+        // ended by the other pointer's release, this would be a no-op.
+        await control.trigger('pointermove', { pointerId: 1, clientX: 60, buttons: 1 });
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        expect(Number(thumbInputs[0].element.value)).toBe(60);
+
+        // The real pointer's own release still properly ends the drag.
+        await control.trigger('pointerup', { pointerId: 1 });
+        const emitted = wrapper.emitted('change');
+        expect(emitted).toBeTruthy();
+      });
+
       it('prevents the default browser action on pointerdown, which would otherwise steal focus back after our own .focus() call', async () => {
         const event = new Event('pointerdown', { bubbles: true, cancelable: true });
         Object.assign(event, { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 0, buttons: 1 });
