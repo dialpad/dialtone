@@ -1375,6 +1375,18 @@ describe('DtSlider Tests', () => {
         attachedWrapper.vm.blur();
         expect(document.activeElement).not.toBe(input);
       });
+
+      it('blur() blurs whichever thumb is actually focused in range mode, not always the first one', () => {
+        attachedWrapper = mount(DtSlider, {
+          props: { ...baseProps, modelValue: [20, 80] },
+          attachTo: document.body,
+        });
+        const inputs = attachedWrapper.findAll('[data-qa="dt-slider-thumb"]');
+        inputs[1].element.focus();
+        expect(document.activeElement).toBe(inputs[1].element);
+        attachedWrapper.vm.blur();
+        expect(document.activeElement).not.toBe(inputs[1].element);
+      });
     });
 
     describe('Pointer drag', () => {

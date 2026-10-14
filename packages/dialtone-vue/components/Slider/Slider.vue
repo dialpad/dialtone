@@ -722,7 +722,11 @@ function focus() {
 }
 
 function blur() {
-  thumbRefs.value[0]?.blur();
+  // Blurs whichever thumb actually has focus, not always thumb 0 — in range
+  // mode, blurring the wrong (unfocused) thumb left the real one focused
+  // with its deferred keyboard commit (onThumbBlur's commitIfChanged)
+  // never firing. A no-op, same as native .blur(), when nothing is focused.
+  thumbRefs.value.find((el) => el === document.activeElement)?.blur();
 }
 
 defineExpose({ focus, blur });
