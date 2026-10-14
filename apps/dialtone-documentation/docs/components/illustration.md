@@ -9,8 +9,24 @@ keywords: ["image", "graphic", "artwork", "d-illustration", "DtIllustration", "d
 combinator: DtIllustration
 ---
 
-Check out our [illustration catalog](/foundations/illustrations/index.md), and our [brand section](/foundations/brand/index.md) for information on how to use this component.
+Use illustrations in product UI, paired with inline text in [empty states](/components/empty-state.html), onboarding, and announcements. Spot illustrations are retired from brand and marketing work; use [Resolve graphics](/foundations/graphic-system/) there instead.
+
+## Catalog
+
+<icons illustration kind="spot" size="large" :excluded-icons="excludedIllustrations"></icons>
 
 ## Vue API
 
 <component-vue-api component-name="illustration" />
+
+<script setup>
+// Temporarily exclude illustrations from being shown on the docsite
+const excludedIllustrations = [
+  'mind',
+  'blank-space',
+  'vector-vortex',
+  'atomic-pathway',
+  'black-hole',
+  'orbital-harmony',
+];
+</script>
