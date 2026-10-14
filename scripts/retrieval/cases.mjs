@@ -168,7 +168,13 @@ export const cases = [
       contains('checkbox-label', 'Associate checkbox labels'),
       contains('aria-literal', 'aria-describedby'),
     ],
-    { limit: 1 },
+    {
+      limit: 1,
+      mcp: {
+        tool: 'get_documentation',
+        arguments: { id: 'components/checkbox#accessibility' },
+      },
+    },
   ),
   baseline(
     'popover-migration',
