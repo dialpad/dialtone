@@ -3761,6 +3761,16 @@ describe('DtSlider Tests', () => {
       expect(wrapper.find(bodySelector).classes()).toContain('d-slider__body--reserve-annotation-space');
     });
 
+    it('reserves space for an "interaction" readout even at rest, before any thumb is actually interacted with', () => {
+      // Only the readout's own visibility is interaction-gated (see the
+      // Interactivity Tests above) — the layout space it occupies is
+      // reserved the whole time, same as "always", so nothing after the
+      // slider jumps when the readout first becomes visible.
+      mockProps = { showMarks: false, readout: 'interaction' };
+      updateWrapper();
+      expect(wrapper.find(bodySelector).classes()).toContain('d-slider__body--reserve-annotation-space');
+    });
+
     it('still reserves space for marks alone, with readout turned off', () => {
       mockProps = { showMarks: [0, 100], readout: 'never' };
       updateWrapper();
