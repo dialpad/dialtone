@@ -23,14 +23,22 @@ export function useSliderDirection(controlRef) {
   // dir is ambient — inherited from ANY ancestor, not just controlRef's direct
   // parent — so this has to watch the whole document, not just this
   // component's own subtree, to catch every change that could actually affect
-  // the resolved direction here.
+  // the resolved direction here. Also watches style/class, not just the dir
+  // attribute itself — the resolved direction getComputedStyle reads here can
+  // just as easily come from CSS (an inline `direction: rtl` or a class that
+  // sets it) as from the dir attribute, and the DOM has already re-rendered
+  // mirrored by the time either of those land — an attribute-only filter
+  // would leave isRtl (and everything keyed off it: pointer math, keyboard
+  // direction-relative keys, centering transforms) stuck on its stale value.
   let dirObserver = null;
 
   onMounted(() => {
     syncDirection();
     if (typeof MutationObserver !== 'undefined') {
       dirObserver = new MutationObserver(syncDirection);
-      dirObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['dir'], subtree: true });
+      dirObserver.observe(document.documentElement, {
+        attributes: true, attributeFilter: ['dir', 'style', 'class'], subtree: true,
+      });
     }
   });
 

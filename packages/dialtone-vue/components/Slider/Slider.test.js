@@ -2116,6 +2116,42 @@ describe('DtSlider Tests', () => {
         expect(emitted[emitted.length - 1][0]).toBe(10);
       });
 
+      it('resyncs isRtl when direction changes via CSS/style rather than the dir attribute itself', async () => {
+        // The dir ATTRIBUTE never changes here — only what getComputedStyle
+        // resolves to, as a stylesheet rule or inline `direction: rtl` would
+        // produce. The MutationObserver that drives this must not be scoped
+        // to dir alone, or isRtl (and everything keyed off it: pointer math,
+        // centering transforms) stays stuck on its stale LTR value even
+        // though the browser has already mirrored the actual layout.
+        const original = window.getComputedStyle.bind(window);
+        let direction = 'ltr';
+        mockControlDirectionSpy = vi.spyOn(window, 'getComputedStyle').mockImplementation((el, ...rest) => {
+          if (el?.dataset?.qa === 'dt-slider-control') return { direction };
+          return original(el, ...rest);
+        });
+
+        const control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => (
+          { top: 0, left: 0, right: 100, bottom: 20, width: 100, height: 20 }
+        );
+
+        direction = 'rtl';
+        // Mutates `class`, not `dir` — simulates a CSS-only direction change
+        // (e.g. a stylesheet rule keyed off this class) rather than the
+        // attribute this component used to exclusively watch for.
+        document.documentElement.classList.add('rtl-test-marker');
+        await nextTick();
+
+        await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 10, buttons: 1 });
+        const emitted = wrapper.emitted('update:modelValue');
+        // Physical 10% from the left mirrors to value 90 under a correctly
+        // resynced RTL, not the LTR-mapped 10.
+        expect(emitted[emitted.length - 1][0]).toBe(90);
+
+        document.documentElement.classList.remove('rtl-test-marker');
+      });
+
       it('swaps Shift+ArrowRight to decrease (matching the native RTL-flipped arrow keys)', async () => {
         await mockControlDirection('rtl');
         await thumbInputs[0].trigger('keydown', { key: 'ArrowRight', shiftKey: true });
