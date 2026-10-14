@@ -2273,6 +2273,40 @@ describe('DtSlider Tests', () => {
       expect(lo).toBeLessThanOrEqual(hi);
     });
 
+    it('never emits a gap-widened value above max, even when rounding at a coarser precision than max\'s own would overshoot it', () => {
+      // gap = 3 * 0.1 = 0.3 (IEEE-754 noise aside). Widening hi alone from
+      // lo=0.8 would overshoot max (0.8+0.3=1.1 > 0.96), so this falls to the
+      // shrink-lo-alone branch: lo = hi - gap = 0.9 - 0.3 = 0.6, hi stays 0.9.
+      // Previously, rounding at min/step's precision (1 decimal place) could
+      // push a hi pinned at max (0.96) out to 1 — above max.
+      mockProps = {
+        modelValue: [0.8, 0.9], min: 0, max: 0.96, step: 0.1, minGapSteps: 3,
+      };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      const [lo, hi] = [Number(thumbInputs[0].element.value), Number(thumbInputs[1].element.value)];
+      expect(hi).toBeLessThanOrEqual(0.96);
+      expect(hi - lo).toBeCloseTo(0.3, 5);
+    });
+
+    it('prefers shrinking the low end over pinning the high end at max, so the high thumb is not left frozen', () => {
+      // gap = 2 * 10 = 20. Widening hi alone from lo=80 would overshoot max
+      // (80+20=100 > 95), so this takes the shrink-lo-alone branch instead of
+      // the old "always push hi to max" fallback — hi stays at 90 (its
+      // native max/min window isn't collapsed to a single point), lo moves
+      // down to 70.
+      mockProps = {
+        modelValue: [80, 90], min: 0, max: 95, step: 10, minGapSteps: 2,
+      };
+      updateWrapper();
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      const [lo, hi] = [Number(thumbInputs[0].element.value), Number(thumbInputs[1].element.value)];
+      expect([lo, hi]).toEqual([70, 90]);
+      // The high thumb's own native min/max window must not collapse to a
+      // single point (min === max), or it can never move via arrow keys.
+      expect(thumbInputs[1].attributes('min')).not.toBe(thumbInputs[1].attributes('max'));
+    });
+
     it('keeps the result within [min, max] when min/max reactively shrink below a previously-valid gap', async () => {
       mockProps = {
         modelValue: [8, 12], min: 0, max: 20, step: 1, minGapSteps: 5,

@@ -48,18 +48,37 @@ export function useSliderValue(props, emit, { isRange }) {
     if (gap <= 0) return values;
     let [lo, hi] = values;
     if (hi - lo >= gap) return values;
-    // Widen from the high end first — mirrors updateThumbValue's own
-    // asymmetry (thumb 1 is the one pushed when a drag closes the gap) — then
-    // pull the low end down only if that overflowed max.
-    hi = Math.min(props.max, lo + gap);
-    lo = Math.min(lo, hi - gap);
-    // min > max is already a degenerate, dev-warned config (UseSliderDevWarnings)
-    // — clamping lo against min alone, without also ceiling it at max, could
-    // push lo above hi (and above the control's own upper bound) whenever
-    // min > max and gap > 0.
-    lo = Math.min(Math.max(props.min, lo), props.max);
-    const dp = Math.max(decimalPlaces(props.min), decimalPlaces(props.step));
-    return [parseFloat(lo.toFixed(dp)), parseFloat(hi.toFixed(dp))];
+    // Three strategies, tried in order of least to most disruptive. Widen hi
+    // alone first (lo stays exactly where it was) — the common case. Failing
+    // that (it would overshoot max), shrink lo alone instead (hi stays
+    // exactly where it was) rather than unconditionally pinning hi at max:
+    // the old "always widen hi first, pull lo down after" version could pin
+    // a thumb with native min === max (frozen, unable to move via arrow keys)
+    // even though a valid, less-disruptive pair existed — e.g. max=95,
+    // step=10, gap=20, [80,90] became [75,95] (high thumb frozen against
+    // max) instead of [70,90] (high thumb untouched, free to move up to 95).
+    // Only when NEITHER single-ended adjustment fits within [min, max] at all
+    // (the gap itself can't fit the domain from this pair) fall back to
+    // pinning hi at max and pulling lo down from there, clamped to min — a
+    // degenerate config already dev-warned elsewhere (UseSliderDevWarnings).
+    if (lo + gap <= props.max) {
+      hi = lo + gap;
+    } else if (hi - gap >= props.min) {
+      lo = hi - gap;
+    } else {
+      hi = props.max;
+      lo = Math.max(props.min, hi - gap);
+    }
+    // Precision must include max's own decimal places, not just min/step's —
+    // a hi pinned exactly at max (e.g. 0.96) rounding at a coarser precision
+    // than max's own would push it back out of bounds (0.96 -> "1.0" at 1
+    // decimal place). The explicit clamp after rounding is a second,
+    // independent guarantee against that same class of overshoot, and
+    // against ordinary floating-point drift.
+    const dp = Math.max(decimalPlaces(props.min), decimalPlaces(props.max), decimalPlaces(props.step));
+    lo = Math.min(props.max, Math.max(props.min, parseFloat(lo.toFixed(dp))));
+    hi = Math.min(props.max, Math.max(props.min, parseFloat(hi.toFixed(dp))));
+    return [lo, hi];
   }
 
   // Every value entering internalValues funnels through here (mount,
