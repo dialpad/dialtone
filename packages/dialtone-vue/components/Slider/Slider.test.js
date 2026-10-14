@@ -1869,6 +1869,25 @@ describe('DtSlider Tests', () => {
         emitted = wrapper.emitted('update:modelValue');
         expect(emitted[emitted.length - 1][0]).toEqual([72, 75]);
       });
+
+      it('holds a fractional snap point exactly in range mode, same as single-thumb mode, instead of re-rounding it onto the step grid', async () => {
+        // The crossing clamp (low thumb vs. high thumb + gap) never touches
+        // this value at all — the low thumb is nowhere near the high one —
+        // so there is no reason for range mode's own IEEE-754 cleanup
+        // rounding to apply here either; it previously ran unconditionally
+        // and re-rounded the held 42.5 down to 43 (step=1), clearing the
+        // latch for no reason even though nothing actually clamped it away.
+        mockProps = { modelValue: [20, 80], step: 1, snapPoints: [42.5] };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => controlRect;
+
+        await dragTo(20); // grabs the low thumb
+        await moveTo(42); // distance 0.5 from 42.5, within the fixed 10px threshold
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toEqual([42.5, 80]);
+      });
     });
 
     describe('Keyboard: PageUp / PageDown / Shift+Arrow', () => {

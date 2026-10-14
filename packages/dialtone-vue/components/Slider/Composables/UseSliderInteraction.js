@@ -114,13 +114,25 @@ export function useSliderInteraction(props, emit, {
       } else {
         clamped = Math.max(clamped, (next[0] ?? props.min) + gap);
       }
-      // gap is a product of two decimals (e.g. 3 * 0.1) and can carry IEEE-754
-      // noise (0.30000000000000004) that snapToStep's rounding, applied
-      // earlier in this function, never sees — round it out the same way
-      // before it reaches internalValues/the emitted modelValue.
-      const dp = Math.max(decimalPlaces(props.min), decimalPlaces(props.step));
-      clamped = parseFloat(clamped.toFixed(dp));
-      clamped = Math.min(props.max, Math.max(props.min, clamped));
+
+      // Whether the crossing clamp above left an active magnetic snap point
+      // untouched — if so, this thumb must keep that exact (deliberately
+      // off-grid) value rather than get re-rounded onto the step grid below.
+      // Without this, range mode destroyed a magnetic hold the crossing
+      // clamp never actually touched at all — e.g. snapPoints=[42.5] with
+      // step=1 re-rounded 42.5 to 43 and cleared the latch below for no
+      // reason, even mid-drag; single-thumb mode has no crossing clamp and
+      // correctly holds the same point.
+      const heldMagneticValue = magneticValue != null && clamped === magneticValue;
+      if (!heldMagneticValue) {
+        // gap is a product of two decimals (e.g. 3 * 0.1) and can carry IEEE-754
+        // noise (0.30000000000000004) that snapToStep's rounding, applied
+        // earlier in this function, never sees — round it out the same way
+        // before it reaches internalValues/the emitted modelValue.
+        const dp = Math.max(decimalPlaces(props.min), decimalPlaces(props.step));
+        clamped = parseFloat(clamped.toFixed(dp));
+        clamped = Math.min(props.max, Math.max(props.min, clamped));
+      }
 
       // The crossing clamp above can pull the thumb away from the magnetic
       // point findMagneticSnapPoint just latched hysteresis onto — the thumb
