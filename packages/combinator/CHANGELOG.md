@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/dialpad/dialtone/compare/combinator/v1.2.0...combinator/v1.3.0) (2026-10-13)
+
+
+### Features
+
+* **Stack:** DLT-3657 add wrap prop ([#1458](https://github.com/dialpad/dialtone/issues/1458)) ([9699220](https://github.com/dialpad/dialtone/commit/9699220b7d24b66c8b7cf28601b6c474b30981d2))
+
 # [1.2.0](https://github.com/dialpad/dialtone/compare/combinator/v1.1.1...combinator/v1.2.0) (2026-09-16)
 
 

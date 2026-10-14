@@ -10,12 +10,22 @@ on:
   pull_request:
     paths:
       - 'apps/dialtone-documentation/**'
+      - 'scripts/build-dialtone-vue-docs.mjs'
+      - 'scripts/lib/**/*.mjs'
+      - 'scripts/tests/**'
+      - 'common/utils/server.mjs'
+      - '.github/workflows/dialtone-documentation-tests.yml'
       - 'pnpm-lock.yaml'
   push:
     branches:
       - staging
     paths:
       - 'apps/dialtone-documentation/**'
+      - 'scripts/build-dialtone-vue-docs.mjs'
+      - 'scripts/lib/**/*.mjs'
+      - 'scripts/tests/**'
+      - 'common/utils/server.mjs'
+      - '.github/workflows/dialtone-documentation-tests.yml'
       - 'pnpm-lock.yaml'
 
 env:

@@ -1,3 +1,16 @@
+# [1.3.0](https://github.com/dialpad/dialtone/compare/dialtone-cli/v1.2.0...dialtone-cli/v1.3.0) (2026-10-13)
+
+
+### Bug Fixes
+
+* **Dialtone Mcp Server, Dialtone Cli:** DLT-3655 unblock startup and shared releases ([#1454](https://github.com/dialpad/dialtone/issues/1454)) ([2f72801](https://github.com/dialpad/dialtone/commit/2f728014ed1964152f08d47361dd617383a4e026))
+* **Dialtone Mcp Server, Dialtone Query Core:** DLT-3640 correct guidance and version metadata ([#1452](https://github.com/dialpad/dialtone/issues/1452)) ([6dcebc5](https://github.com/dialpad/dialtone/commit/6dcebc5dd6adc2e9b1dbf1c27901dd1bbf27e578))
+
+
+### Features
+
+* **Dialtone Query Core:** DLT-3649 align public component identity ([#1455](https://github.com/dialpad/dialtone/issues/1455)) ([94d7d56](https://github.com/dialpad/dialtone/commit/94d7d560a53403c22069b5724e213e10087badb8))
+
 # [1.2.0](https://github.com/dialpad/dialtone/compare/dialtone-cli/v1.1.0...dialtone-cli/v1.2.0) (2026-10-06)
 
 
