@@ -1,4 +1,4 @@
-import { h, nextTick } from 'vue';
+import { defineComponent, h, nextTick } from 'vue';
 import { mount } from '@vue/test-utils';
 import { DtText } from '@/components/Text';
 import DtSlider from './Slider.vue';
@@ -3563,6 +3563,65 @@ describe('DtSlider Tests', () => {
       mockProps = { orientation: 'vertical' };
       updateWrapper();
       expect(wrapper.find(bodySelector).classes()).not.toContain('d-slider__body--reserve-annotation-space');
+    });
+  });
+
+  // A real parent component with a genuine v-model round trip — not
+  // wrapper.setProps(), which skips the child-emits-then-parent-echoes-back
+  // cycle entirely. That round trip is exactly what the bug below depends on.
+  describe('Parent v-model feedback during a drag', () => {
+    const controlRect = { top: 0, left: 0, right: 100, bottom: 20, width: 100, height: 20 };
+
+    it('reports the full committed transition via change, even when the parent echo normalizes the dragged value onto the step grid', async () => {
+      const ParentWithVModel = defineComponent({
+        name: 'ParentWithVModel',
+        components: { DtSlider },
+        data() {
+          return { value: 75, changeEvents: [] };
+        },
+        methods: {
+          onChange(payload) {
+            this.changeEvents.push(payload);
+          },
+        },
+        render() {
+          return h(DtSlider, {
+            label: 'Volume',
+            modelValue: this.value,
+            'onUpdate:modelValue': (v) => { this.value = v; },
+            onChange: this.onChange,
+            min: 0,
+            max: 100,
+            step: 25,
+            snapPoints: [42],
+          });
+        },
+      });
+
+      const parentWrapper = mount(ParentWithVModel);
+      const control = parentWrapper.find('[data-qa="dt-slider-control"]');
+      control.element.setPointerCapture = () => {};
+      control.element.getBoundingClientRect = () => controlRect;
+
+      // Start the drag at the thumb's current position (75), pull onto the
+      // 42 snap point, then release without any further move — the exact
+      // repro shape the bug depends on.
+      await control.trigger('pointerdown', {
+        pointerId: 1, pointerType: 'mouse', button: 0, clientX: 75, buttons: 1,
+      });
+      await control.trigger('pointermove', { pointerId: 1, clientX: 42, buttons: 1 });
+      await nextTick();
+      // The parent's echoed, grid-corrected value should already have landed
+      // by now — this is the state the old bug silently stomped on.
+      expect(parentWrapper.vm.value).toBe(50);
+
+      await control.trigger('pointerup', { pointerId: 1 });
+      await nextTick();
+
+      expect(parentWrapper.vm.value).toBe(50);
+      expect(parentWrapper.vm.changeEvents).toEqual([50]);
+
+      parentWrapper.unmount();
     });
   });
 });

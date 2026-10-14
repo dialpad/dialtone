@@ -184,11 +184,23 @@ export function useSliderValue(props, emit, { isRange }) {
       const next = normalizeModelValue(newVal);
       const current = internalValues.value;
       if (next.length !== current.length || next.some((v, i) => v !== current[i])) {
+        // A drag/keyboard interaction already mid-flight (internalValues has
+        // already diverged from lastCommittedValues, e.g. via updateThumbValue)
+        // means this is the component's OWN uncommitted change echoing back
+        // through v-model — not a genuine external commit. Overwriting
+        // lastCommittedValues here would make the interaction's own eventual
+        // pointerup/blur commit (UseSliderInteraction's commitIfChanged) see no
+        // diff and silently swallow its 'change' event — same guard the
+        // min/max/step/minGapSteps watcher below already uses.
+        const alreadyUncommitted = current.length !== lastCommittedValues.value.length
+          || current.some((v, i) => v !== lastCommittedValues.value[i]);
         internalValues.value = next;
         // An externally-driven value is already "committed" — without this,
         // the next blur sees a spurious diff against a stale lastCommittedValues
         // and fires a false change event.
-        lastCommittedValues.value = [...next];
+        if (!alreadyUncommitted) {
+          lastCommittedValues.value = [...next];
+        }
       }
       // normalizeModelValue can rewrite what was passed in (inverted pair,
       // out-of-bounds clamp, invalid length) — that correction must reach the
