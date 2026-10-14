@@ -242,10 +242,10 @@ defineOptions({ name: 'DtSlider', inheritAttrs: false });
 
 const props = defineProps({
   /**
-   * The current value. A number enables single-thumb mode; an array enables range mode.
-   * When omitted (or explicitly undefined/null), resolves to the midpoint of
-   * [min, max] — matching native <input type="range"> — see normalizeModelValue.
-   * @values Number, [Number, Number]
+   * The current value. A number enables single-thumb mode; an array of two
+   * numbers enables range mode. When omitted (or explicitly undefined/null),
+   * resolves to the midpoint of [min, max] — matching native
+   * <input type="range"> — see normalizeModelValue.
    */
   modelValue: {
     type: [Number, Array],
@@ -310,12 +310,12 @@ const props = defineProps({
   },
 
   /**
-   * Which end the indicator fills from, toward the thumb: start (the default,
-   * aka left) fills from the min end, end (aka right) fills from the max end.
-   * Pass a Number instead to fill outward from that value toward the thumb —
-   * useful for balance controls (aka center-fill) or deviation-from-setpoint
-   * displays. A numeric origin is clamped to [min, max]. Ignored in range mode.
-   * @values start, end
+   * Which end the indicator fills from, toward the thumb: "start" (the
+   * default, aka left) fills from the min end, "end" (aka right) fills from
+   * the max end. Pass a Number instead to fill outward from that value
+   * toward the thumb — useful for balance controls (aka center-fill) or
+   * deviation-from-setpoint displays. A numeric origin is clamped to
+   * [min, max]. Ignored in range mode.
    */
   fillOrigin: {
     type: [Number, String],
