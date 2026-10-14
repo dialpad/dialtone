@@ -211,7 +211,7 @@ const filterIconList = () => {
           if (!searchTerm) return !excludedIcons.includes(name);
           return !excludedIcons.includes(name) &&
             (normalizeSearchTerm(name).includes(searchTerm) ||
-              normalizeSearchTerm(keywords.join(' ')).includes(searchTerm));
+              keywords.some(keyword => normalizeSearchTerm(keyword).includes(searchTerm)));
         })
         .reduce((acc, [name]) => Object.assign(acc, { [name]: Object.freeze(categories[category][name]) }), {});
 
