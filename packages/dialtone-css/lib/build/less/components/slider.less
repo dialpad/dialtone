@@ -623,6 +623,21 @@
         // here would never actually apply.
     }
 
+    .d-slider__mark,
+    .d-slider__readout {
+        // The base rule's max-inline-size: 100% is relative to
+        // .d-slider__control, the nearest positioned ancestor — in
+        // horizontal mode that's a meaningful cap (the control's own visible
+        // width), but here the control's own inline-size is just the
+        // thumb's width (a narrow column, e.g. ~44px), which these sit
+        // BESIDE, not within. Left as 100%, even a short unit-bearing label
+        // (e.g. "100 centimeters") ellipsized despite the real free space to
+        // the side of the track. 20ch matches filter-pill's own established
+        // cap for similarly short label text — generous for ordinary
+        // labels, still a real ceiling against pathologically long text.
+        max-inline-size: 20ch;
+    }
+
     .d-slider__mark {
         inset-block-start: unset;
         inset-inline-start: calc(50% + var(--slider-thumb-size) / 2 + var(--slider-mark-offset));
