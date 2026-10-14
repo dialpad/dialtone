@@ -24,6 +24,9 @@ on:
       - '.github/workflows/unit_tests.yml'
       - '.github/workflows/dialtone-documentation-tests.yml'
       - 'scripts/build-dialtone-vue-docs.mjs'
+      - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
+      - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
+      - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
   push:
     branches:
       - staging
@@ -49,6 +52,9 @@ on:
       - '.github/workflows/unit_tests.yml'
       - '.github/workflows/dialtone-documentation-tests.yml'
       - 'scripts/build-dialtone-vue-docs.mjs'
+      - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
+      - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
+      - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
 
 env:
   HUSKY: 0
@@ -103,6 +109,9 @@ jobs:
               - 'packages/dialtone-tokens/**'
               - 'packages/dialtone-vue/**'
               - 'scripts/build-dialtone-vue-docs.mjs'
+              - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
+              - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
+              - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
 
   test:
     needs: changes
@@ -188,6 +197,9 @@ jobs:
 
       - name: Run bounded cross-adapter retrieval regressions
         run: node scripts/retrieval/run.mjs
+
+      - name: Test MCP query protocol contracts
+        run: pnpm --dir packages/dialtone-mcp-server test:protocol
 
       - name: Build and test MCP startup and shutdown
         run: pnpm nx run dialtone-mcp-server:test-startup

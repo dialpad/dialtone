@@ -8,7 +8,8 @@ import type {
   TokenData,
   ThemeData,
   Metadata,
-  SearchResult
+  SearchResult,
+  SearchPage
 } from '../types.js';
 
 /**
@@ -110,16 +111,18 @@ export function searchTokens(query: string, data: TokensData, options?: { includ
 /**
  * Format token search results with theme variant information
  */
-export function formatTokenResults(results: SearchResult[], query: string): string {
+export function formatTokenResults(results: SearchResult[], query: string, page?: SearchPage): string {
   if (results.length === 0) {
     return `No token results found for "${query}".\n\nTry searching with:\n- Token category (e.g., "color", "spacing", "border")\n- Specific value (e.g., "0.8rem")\n- Semantic name (e.g., "primary", "positive", "critical")`;
   }
 
-  let output = `Found ${results.length} design token${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
+  let output = page
+    ? `Showing ${results.length} of ${page.total} design token${page.total === 1 ? '' : 's'} for "${query}" (results ${page.offset + 1}–${page.offset + results.length}):\n\n`
+    : `Found ${results.length} design token${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
   output += `ℹ️  **Note:** Design token values change based on the active theme (light/dark mode, brand variant).\n\n`;
 
   results.forEach((result: SearchResult, index: number) => {
-    output += `${index + 1}. **${result.name}**\n`;
+    output += `${(page?.offset ?? 0) + index + 1}. **${result.name}**\n`;
 
     // Show metadata warnings if present
     if (result.metadata) {
@@ -158,7 +161,20 @@ export function formatTokenResults(results: SearchResult[], query: string): stri
     }
 
     // Show usage example
-    output += `   Usage: style="color: var(${result.name})"\n`;
+    const hasGradient = themes.some(
+      ([, theme]) => typeof theme?.value === 'string' && /(?:linear|radial|conic)-gradient\(/i.test(theme.value),
+    );
+    const property = /--dt-(spacing|space)-.*-negative$/.test(result.name) ? 'margin'
+      : /--dt-(spacing|space)-/.test(result.name) ? 'padding'
+      : /--dt-layout-/.test(result.name) ? 'inline-size'
+        : /--dt-size-radius-/.test(result.name) ? 'border-radius'
+          : /--dt-size-border-/.test(result.name) ? 'border-width'
+            : hasGradient ? null
+              : /--dt-color-foreground-/.test(result.name) ? 'color'
+                : /--dt-color-surface-/.test(result.name) ? 'background-color'
+                  : /--dt-color-border-/.test(result.name) ? 'border-color' : null;
+    if (property) output += `   Usage: style="${property}: var(${result.name})"\n`;
+    else output += `   Usage: var(${result.name}) — choose a property appropriate to this token.\n`;
     output += `   Note: This will automatically use the correct value for the active theme.\n\n`;
   });
 

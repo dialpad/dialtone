@@ -222,9 +222,9 @@ export function searchDocumentation(
  */
 export function formatDocumentationResults(
   results: SearchResult[],
-  _query: string,
+  query: string,
 ): string {
-  if (results.length === 0) return '';
+  if (results.length === 0) return `No documentation found for "${query}".`;
 
   return results.map(result => {
     const record = result.details as DocumentationRecord;
@@ -246,4 +246,20 @@ export function formatDocumentationResults(
       : '';
     return `${heading}\n\n${excerpt}${linkLine}${sourceLine}`;
   }).join('\n\n---\n\n');
+}
+
+/** Exact source-section retrieval; offsets count Unicode code points. */
+export function getDocumentationDetail(args: { id: string; textOffset?: number; textLimit?: number }, data: DocumentationRecord[]) {
+  const record = data.find(record => record.id === args.id.trim());
+  if (!record) return { match: 'no-match' as const, record: null, contentCounts: { total: 0, returned: 0, offset: 0 }, next: null };
+  const textOffset = args.textOffset ?? 0;
+  const textLimit = args.textLimit ?? 6000;
+  const points = Array.from(record.content);
+  const selected = points.slice(textOffset, textOffset + textLimit);
+  const hasMore = textOffset + selected.length < points.length;
+  return {
+    match: 'exact' as const, record: { ...record, content: selected.join('') },
+    contentCounts: { total: points.length, returned: selected.length, offset: textOffset },
+    next: hasMore ? { id: record.id, textOffset: textOffset + selected.length, textLimit } : null,
+  };
 }

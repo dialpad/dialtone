@@ -7,7 +7,8 @@ import type {
   UtilityClassesData,
   ClassData,
   ValueObject,
-  SearchResult
+  SearchResult,
+  SearchPage
 } from '../types.js';
 
 /**
@@ -186,15 +187,17 @@ export function searchUtilityClasses(query: string, data: UtilityClassesData): {
 /**
  * Format search results as readable text
  */
-export function formatResults(results: SearchResult[], query: string): string {
+export function formatResults(results: SearchResult[], query: string, page?: SearchPage): string {
   if (results.length === 0) {
     return `No results found for "${query}".\n\nTry searching with:\n- Property + value (e.g., "padding right 8px", "display flex")\n- Full property name (e.g., "overflow hidden", "position relative")`;
   }
 
-  let output = `Found ${results.length} result${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
+  let output = page
+    ? `Showing ${results.length} of ${page.total} result${page.total === 1 ? '' : 's'} for "${query}" (results ${page.offset + 1}–${page.offset + results.length}):\n\n`
+    : `Found ${results.length} result${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
 
   results.forEach((result: SearchResult, index: number) => {
-    output += `${index + 1}. **${result.name}**\n`;
+    output += `${(page?.offset ?? 0) + index + 1}. **${result.name}**\n`;
 
     // Show metadata warnings if present
     if (result.metadata) {

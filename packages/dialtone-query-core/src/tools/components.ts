@@ -11,6 +11,7 @@ import type {
   ComponentEvent,
   ComponentSlot,
   SearchResult,
+  SearchPage,
   ValueObject
 } from '../types.js';
 
@@ -263,15 +264,17 @@ function deprecatedWarning(reason?: string): string {
 /**
  * Format component search results
  */
-export function formatComponentResults(results: SearchResult[], query: string): string {
+export function formatComponentResults(results: SearchResult[], query: string, page?: SearchPage): string {
   if (results.length === 0) {
     return `No components found for "${query}".\n\nTry searching with:\n- Component name (e.g., "button", "modal", "avatar")\n- Partial name (e.g., "badge", "card")\n- Component feature (e.g., "dropdown", "tooltip")`;
   }
 
-  let output = `Found ${results.length} component${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
+  let output = page
+    ? `Showing ${results.length} of ${page.total} component${page.total === 1 ? '' : 's'} for "${query}" (results ${page.offset + 1}–${page.offset + results.length}):\n\n`
+    : `Found ${results.length} component${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
 
   results.forEach((result: SearchResult, index: number) => {
-    output += `${index + 1}. **${result.name}**\n`;
+    output += `${(page?.offset ?? 0) + index + 1}. **${result.name}**\n`;
 
     // Show metadata warnings if present
     if (result.metadata) {
@@ -297,7 +300,7 @@ export function formatComponentResults(results: SearchResult[], query: string): 
 
     // Show key props (up to 5)
     if (result.details.props && result.details.props.length > 0) {
-      output += `   **Key Props:**\n`;
+      output += `   **Props (first ${Math.min(5, result.details.props.length)} of ${result.details.props.length}):**\n`;
       const propsToShow = result.details.props.slice(0, 5);
       propsToShow.forEach((prop: ComponentProp) => {
         const typeName = prop.type?.name || 'unknown';
