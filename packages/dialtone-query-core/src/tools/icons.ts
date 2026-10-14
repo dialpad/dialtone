@@ -2,7 +2,8 @@
 // ICONS SEARCH TOOL
 // ============================================================================
 
-import type { IconsData, SearchResult } from '../types.js';
+import { sortExactFirst } from '../utils/filters.js';
+import type { IconsData, SearchResult, SearchPage } from '../types.js';
 
 /**
  * Search icons by name, category, and keywords using AND-logic
@@ -10,6 +11,8 @@ import type { IconsData, SearchResult } from '../types.js';
  */
 export function searchIcons(query: string, data: IconsData): { results: SearchResult[]; notes: string[] } {
   console.error(`\n[ICON SEARCH DEBUG] Query: "${query}"`);
+  if (!query.trim()) return { results: [], notes: [] };
+  const exactName = query.trim().toLowerCase();
 
   // Normalize query: lowercase, replace hyphens/slashes with spaces
   const normalized = query.toLowerCase().replace(/[/-]/g, ' ');
@@ -56,18 +59,21 @@ export function searchIcons(query: string, data: IconsData): { results: SearchRe
 
   console.error(`[ICON SEARCH DEBUG] Found ${results.length} matches\n`);
 
+  sortExactFirst(results, exactName);
   return { results, notes: [] };
 }
 
 /**
  * Format icon search results
  */
-export function formatIconResults(results: SearchResult[], query: string): string {
+export function formatIconResults(results: SearchResult[], query: string, page?: SearchPage): string {
   if (results.length === 0) {
     return `No icons found for "${query}".\n\nTry searching with:\n- Icon name (e.g., "bell", "arrow", "calendar")\n- Category (e.g., "alerts", "communication", "time")\n- Keyword (e.g., "notification", "email", "warning")`;
   }
 
-  let output = `Found ${results.length} icon${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
+  let output = page
+    ? `Showing ${results.length} of ${page.total} icon${page.total === 1 ? '' : 's'} for "${query}" (results ${page.offset + 1}–${page.offset + results.length}):\n\n`
+    : `Found ${results.length} icon${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
 
   // Group by category for better organization
   const byCategory: { [category: string]: SearchResult[] } = {};

@@ -1,6 +1,7 @@
 const fs = require('fs').promises;
 const path = require('path');
 const { readdirSync } = require('node:fs');
+const { utilityMetadata, tokenMetadata } = require('./migration-metadata.cjs');
 
 /**
  * Had to duplicate this function to avoid asynchronous issues with postcss plugins
@@ -83,54 +84,7 @@ const metadataRules = [
       docs: 'https://dialtone.dialpad.com/utilities/backgrounds/color.html',
     },
   },
-  // Flex gap (deprecated per deprecated-flex-gap-classes.js eslint rule)
-  {
-    pattern: /^d-flg\d{1,2}$/,
-    metadata: {
-      deprecated: true,
-      discouraged: true,
-      category: 'flex',
-      reason: 'Flex gap utilities are deprecated and will be removed in the future',
-      alternatives: ['d-g8', 'd-rg8', 'd-cg8'],
-      docs: 'https://dialtone.dialpad.com/utilities/flex/gap.html',
-    },
-  },
-  // Grid gap (deprecated per deprecated-grid-gap-classes.js eslint rule)
-  {
-    pattern: /^d-(gg|grg|gcg)\d{1,2}$/,
-    metadata: {
-      deprecated: true,
-      discouraged: true,
-      category: 'grid',
-      reason: 'Grid gap utilities are deprecated and will be removed in the future',
-      alternatives: ['d-g8', 'd-rg8', 'd-cg8'],
-      docs: 'https://dialtone.dialpad.com/utilities/grid/gap.html',
-    },
-  },
-  // Legacy border-radius all-corners numeric (deprecated per deprecated-radius-utility-classes.js eslint rule)
-  {
-    pattern: /^d-bar(0|1|2|4|6|8|12|16|24|32)$/,
-    metadata: {
-      deprecated: true,
-      discouraged: true,
-      category: 'borders',
-      reason: 'Legacy pixel-suffix border-radius utilities are deprecated. Use token-stop-indexed names instead',
-      alternatives: ['d-bar-{stop}'],
-      docs: 'https://dialtone.dialpad.com/utilities/borders/radius.html',
-    },
-  },
-  // Legacy border-radius physical side-pair numeric and keyword (deprecated)
-  {
-    pattern: /^d-(btr|bbr|brr|blr)(0|1|2|4|6|8|12|16|24|32|-pill|-circle)$/,
-    metadata: {
-      deprecated: true,
-      discouraged: true,
-      category: 'borders',
-      reason: 'Legacy physical-direction border-radius utilities are deprecated. Use logical-named token-stop-indexed equivalents',
-      alternatives: ['d-bbsr-{stop} (was d-btr*)', 'd-bber-{stop} (was d-bbr*)', 'd-bisr-{stop} (was d-blr*)', 'd-bier-{stop} (was d-brr*)'],
-      docs: 'https://dialtone.dialpad.com/utilities/borders/radius.html',
-    },
-  },
+
 ];
 
 /**
@@ -139,6 +93,8 @@ const metadataRules = [
  * @returns {object|null} Metadata object if a rule matches, null otherwise
  */
 function getMetadataForClass (className) {
+  const migration = utilityMetadata(className);
+  if (migration) return migration;
   for (const rule of metadataRules) {
     if (rule.pattern.test(className)) {
       return rule.metadata;
@@ -196,7 +152,9 @@ function generateUtilityClassDocumentation (docs, rule) {
  * @param {string} tokenName - The token name to check
  * @returns {object|null} Metadata object if token matches a rule, null otherwise
  */
-function getMetadataForToken (tokenName) {
+function getMetadataForToken (tokenName, deprecated) {
+  const migration = tokenMetadata(tokenName, deprecated);
+  if (migration) return migration;
   // Base primitive tokens (--base--*) - not meant for direct use
   if (tokenName.startsWith('--base--')) {
     return {
@@ -253,6 +211,7 @@ function generateTokensDocumentation (documentation) {
           [theme]: {
             value,
             description,
+            ...(CSSVarEntry.deprecated && { deprecated: CSSVarEntry.deprecated }),
           },
         };
       });
@@ -333,7 +292,8 @@ module.exports = () => {
     async OnceExit () {
       // Iterate over tokens documentation to replace reference variables with primitive values
       const docs = Object.keys(tokensDocs).reduce((tokens, token) => {
-        const metadata = getMetadataForToken(token);
+        const deprecated = Object.values(tokensDocs[token]).find(theme => theme.deprecated)?.deprecated;
+        const metadata = getMetadataForToken(token, deprecated);
 
         tokens[token] = {
           ...Object.keys(tokensDocs[token]).reduce((themes, theme) => {

@@ -32,7 +32,7 @@ const HARNESS_PORT = 5899;
 const MODES = ['light', 'dark'];
 const VIEWPORT = { width: 400, height: 225 };
 const DEVICE_SCALE = 2;
-const CACHE_VERSION = 'png-v1'; // bump when output format changes
+const CACHE_VERSION = 'png-v2'; // bump when output format changes
 
 const TIMEOUTS = {
   goto: 15_000,
@@ -40,6 +40,13 @@ const TIMEOUTS = {
   networkIdle: 5_000,
   transitionSettle: 250,
   cleanupRecheck: 150,
+};
+
+// Slugs whose thumbnail is the animation itself: pause every animation at this
+// currentTime (ms) instead of cancelling them. Must be a pure-CSS animation —
+// JS-timeout-driven reveals can't be pinned to a frame this way.
+const FREEZE_FRAMES = {
+  'motion-text': 1500,
 };
 
 // Wall pages without a components_list.js entry — either Dt* components from
@@ -178,7 +185,7 @@ mkdirSync(OUTPUT_DIR, { recursive: true });
  * 250ms transition settle. The trailing 250ms isn't redundant — it catches
  * CSS transitions that fire post-paint (e.g. button hover/focus settling).
  */
-async function captureOne (url, outPath) {
+async function captureOne (url, outPath, freezeAtMs) {
   const page = await browser.newPage({ viewport: VIEWPORT, deviceScaleFactor: DEVICE_SCALE });
   try {
     await page.goto(url, { waitUntil: 'load', timeout: TIMEOUTS.goto });
@@ -218,7 +225,24 @@ async function captureOne (url, outPath) {
     });
     if (!hasContent) return false;
 
-    writeFileSync(outPath, await page.screenshot({ type: 'png', omitBackground: true }));
+    // Default: `animations: 'disabled'` fast-forwards finite animations and
+    // cancels infinite ones, so animated components and popovers render the
+    // same frame every run instead of churning PNG bytes. That resets
+    // animations to their initial state, which loses the visual for components
+    // whose look *is* the animation — those pin an exact frame instead.
+    if (freezeAtMs != null) {
+      await page.evaluate(ms => {
+        document.getAnimations().forEach(a => {
+          a.pause();
+          a.currentTime = ms;
+        });
+      }, freezeAtMs);
+    }
+    writeFileSync(outPath, await page.screenshot({
+      type: 'png',
+      omitBackground: true,
+      animations: freezeAtMs != null ? 'allow' : 'disabled',
+    }));
     return true;
   } finally {
     await page.close();
@@ -235,7 +259,7 @@ for (const slug of staleSlugs) {
     const url = `http://localhost:${resolvedPort}/?thumb=${exportName}&mode=${mode}`;
     const outPath = resolve(OUTPUT_DIR, `${slug}-${mode}.png`);
     try {
-      return await captureOne(url, outPath);
+      return await captureOne(url, outPath, FREEZE_FRAMES[slug]);
     } catch (err) {
       return err;
     }

@@ -1,3 +1,15 @@
+# [4.4.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.3.1...dialtone-vue/v4.4.0) (2026-10-13)
+
+
+### Documentation
+
+* **Mode:** DLT-3658 document v-dt-mode as the default ([#1459](https://github.com/dialpad/dialtone/issues/1459)) ([183bea2](https://github.com/dialpad/dialtone/commit/183bea296bdb648c7922693d969b4943464c08c7))
+
+
+### Features
+
+* **Stack:** DLT-3657 add wrap prop ([#1458](https://github.com/dialpad/dialtone/issues/1458)) ([9699220](https://github.com/dialpad/dialtone/commit/9699220b7d24b66c8b7cf28601b6c474b30981d2))
+
 ## [4.3.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.3.0...dialtone-vue/v4.3.1) (2026-10-06)
 
 

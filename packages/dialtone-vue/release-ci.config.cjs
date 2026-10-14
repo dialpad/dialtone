@@ -8,7 +8,12 @@ const srcRoot = `packages/${name}`;
 module.exports = {
   pkgRoot: srcRoot,
   tagFormat: name + '/v${version}',
-  commitPaths: [`${srcRoot}/*`],
+  commitPaths: [
+    `${srcRoot}/*`,
+    'scripts/build-dialtone-vue-docs.mjs',
+    'scripts/lib/vue-component-identity.mjs',
+    'common/utils/server.mjs',
+  ],
   plugins: [
     ['@semantic-release/commit-analyzer', {
       preset: 'angular',
