@@ -3,6 +3,7 @@
  * @author Tico Ortega
  */
 "use strict";
+const { SPACING_MAP } = require('../generated/migration-guidance.json');
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -19,8 +20,7 @@ module.exports = {
     fixable: null, // Or `code` or `whitespace`
     schema: [], // Add a schema if the rule has options
     messages: {
-      recommendGridGapStyle: `Usage of d-gg*, d-grg*, d-gcg* utility classes are deprecated and will be removed in the future. 
-      Checkout the available replacements here: https://dialtone.dialpad.com/utilities/grid/gap.html`,
+      recommendGridGapStyle: `Legacy grid-gap utilities are deprecated in Dialtone 10. Use current token-stop gap utilities (e.g. d-g-${SPACING_MAP[8]}, d-rg-${SPACING_MAP[8]}, d-cg-${SPACING_MAP[8]}). See https://dialtone.dialpad.com/utilities/grid/gap.html`,
     }, // Add messageId and message
   },
 

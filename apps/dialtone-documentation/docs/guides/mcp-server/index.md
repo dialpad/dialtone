@@ -17,7 +17,7 @@ The Dialtone MCP Server lets compatible AI clients search Dialtone through Model
 
 The Dialtone MCP Server provides AI assistants with real-time search access to:
 
-- **3,315 CSS utility classes** - Find classes like `d-p8`, `d-d-flex`, `d-w100p`
+- **3,315 CSS utility classes** - Find classes like `d-p-100`, `d-d-flex`, `d-w100p`
 - **5,691 design tokens** - Find tokens like `--dt-color-foreground-primary`, `--dt-spacing-100`
 - **87 Vue components** - Discover `DtButton`, `DtModal` with full API documentation
 - **594 icons** - Find icons like `bell-ring`, `arrow-up`, `calendar-plus`
@@ -25,7 +25,7 @@ The Dialtone MCP Server provides AI assistants with real-time search access to:
 
 ### Smart Features
 
-- **Filters deprecated items** - Automatically removes outdated classes and components
+- **Filters deprecated discovery results** - Exact legacy utility and token names retain their contract and migration guidance
 - **Recommends alternatives** - Suggests better patterns when discouraged classes are found
 - **AI-optimized results** - Smart scoring provides the most relevant matches first
 - **Design system aware** - Understands Dialtone's conventions and patterns
