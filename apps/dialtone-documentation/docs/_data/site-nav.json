@@ -254,6 +254,25 @@
           "link": "/foundations/size-and-space/"
         },
         {
+          "text": "Gradient",
+          "link": "/foundations/gradient/",
+          "navigateToFirstChildWhenPersistent": true,
+          "children": [
+            {
+              "text": "Overview",
+              "link": "/foundations/gradient/"
+            },
+            {
+              "text": "Gradient in Product",
+              "link": "/foundations/gradient/product.html"
+            }
+          ]
+        },
+        {
+          "text": "Halftone",
+          "link": "/foundations/halftone/"
+        },
+        {
           "text": "Icons",
           "link": "/foundations/icons/",
           "navigateToFirstChildWhenPersistent": true,
@@ -275,25 +294,6 @@
         {
           "text": "Illustrations",
           "link": "/foundations/illustrations/"
-        },
-        {
-          "text": "Gradient",
-          "link": "/foundations/gradient/",
-          "navigateToFirstChildWhenPersistent": true,
-          "children": [
-            {
-              "text": "Overview",
-              "link": "/foundations/gradient/"
-            },
-            {
-              "text": "Gradient in Product",
-              "link": "/foundations/gradient/product.html"
-            }
-          ]
-        },
-        {
-          "text": "Halftone",
-          "link": "/foundations/halftone/"
         },
         {
           "text": "Motion",
