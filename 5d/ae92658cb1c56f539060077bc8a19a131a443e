@@ -1,0 +1,28 @@
+apps/dialtone-documentation/docs/dialtone/whats-new/posts/2026-4-15.md
+  h_c15b5755534093 17,143
+apps/dialtone-documentation/docs/dialtone/whats-new/posts/2026-4-21.md
+  h_c15b5755534093 17
+apps/dialtone-documentation/docs/guides/migration/index.md
+  h_c15b5755534093 9
+apps/dialtone-documentation/docs/guides/migration/theme-to-mode/index.md
+  h_c15b5755534093 223
+apps/dialtone-documentation/docs/guides/migration/visual-changes/index.md
+  h_c15b5755534093 278
+packages/dialtone-vue/directives/focusgroup_directive/focusgroup_directive_events.story.vue
+  h_c15b5755534093 10
+packages/dialtone-vue/directives/focusgroup_directive/focusgroup_directive_recipes.story.vue
+  h_c15b5755534093 11
+packages/dialtone-vue/directives/focustrap_directive/focustrap.js
+  h_c15b5755534093 20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.0",
+  "base_commit_sha": "5dae92658cb1c56f539060077bc8a19a131a443e",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
