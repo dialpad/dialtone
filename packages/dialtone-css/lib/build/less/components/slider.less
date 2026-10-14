@@ -39,11 +39,10 @@
     // Same color as the filled track/indicator, not a neutral knob color —
     // the thumb reads as part of the same "selected" affordance.
     --slider-thumb-color: var(--slider-indicator-color);
-    // A heavier mix than --slider-track-color above — the thumb border
-    // needs to read against the thumb face, not just against the canvas, so
-    // it stays a bolder gray than the passive track.
-    --slider-thumb-border-color: color-mix(in oklch, var(--dt-color-border-bold) 45%, var(--dt-color-surface-primary));
-    --slider-thumb-border-width: var(--dt-size-border-100);
+    // Matches the thumb face itself — the border reinforces the thumb's own
+    // edge rather than contrasting against it.
+    --slider-thumb-border-color: var(--slider-thumb-color);
+    --slider-thumb-border-width: var(--dt-size-border-150);
     --slider-focus-shadow: var(--dt-shadow-focus);
     --slider-disabled-track-color: var(--dt-inputs-color-background-disabled);
     --slider-disabled-indicator-color: var(--dt-inputs-color-foreground-disabled);
