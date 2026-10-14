@@ -2548,6 +2548,33 @@ describe('DtSlider Tests', () => {
       expect(Number.isNaN(Number(thumbInputs[0].element.value))).toBe(false);
       expect(Number.isNaN(Number(thumbInputs[1].element.value))).toBe(false);
     });
+
+    it('grid-aligns the sibling thumb\'s native bound when the other thumb holds an off-grid magnetic snap point, instead of permanently mismatching its native step', async () => {
+      // A native <input>'s own stepMismatch validity is computed relative to
+      // ITS OWN min attribute, not this component's step origin (props.min)
+      // — if the low thumb's off-grid snap value (42) became the high
+      // thumb's native min as-is, every value the high thumb could actually
+      // reach on the REAL grid (0, 25, 50, 75, 100) would permanently
+      // mismatch that min's own step cadence, for as long as the snap held.
+      mockProps = {
+        modelValue: [25, 75], min: 0, max: 100, step: 25, snapPoints: [42],
+      };
+      updateWrapper();
+      const control = wrapper.find('[data-qa="dt-slider-control"]');
+      control.element.setPointerCapture = () => {};
+      control.element.getBoundingClientRect = () => (
+        { top: 0, left: 0, right: 100, bottom: 20, width: 100, height: 20 }
+      );
+
+      // Grab the low thumb and pull it onto the 42 snap point.
+      await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 40, buttons: 1 });
+      thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+      expect(Number(thumbInputs[0].element.value)).toBe(42);
+
+      // The high thumb's native min must be a real grid point (a multiple of
+      // step from props.min) — 50, not the raw off-grid 42.
+      expect(thumbInputs[1].attributes('min')).toBe('50');
+    });
   });
 
   describe('Vertical orientation + range mode combined', () => {

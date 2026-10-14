@@ -146,6 +146,25 @@ export function useSliderValue(props, emit, { isRange }) {
     return ((val - props.min) / (props.max - props.min)) * 100;
   }
 
+  // Rounds a native min/max bound derived from a (possibly off-grid, e.g. an
+  // actively held magnetic snap — see thumbNativeStep below) sibling value
+  // onto the real application step grid, always toward being stricter (a min
+  // bound rounds up, a max bound rounds down) so the crossing-prevention
+  // guarantee this bound exists for only ever gets tighter, never looser.
+  // Without this, an off-grid sibling made the OTHER thumb's native min/max
+  // itself off-grid — and the browser's own stepMismatch validity, computed
+  // relative to an input's own min attribute rather than this component's
+  // step origin (props.min), became permanently unsatisfiable for that
+  // thumb, for any value on the real grid, until the sibling moved again. No
+  // genuinely reachable value is lost: anything between the raw bound and
+  // its rounded form was never on-grid to begin with.
+  function toGridBound(val, roundUp) {
+    if (props.step <= 0) return val;
+    const stepsFromMin = (val - props.min) / props.step;
+    const rounded = roundUp ? Math.ceil(stepsFromMin - 1e-9) : Math.floor(stepsFromMin + 1e-9);
+    return props.min + rounded * props.step;
+  }
+
   // The WAI-ARIA multi-thumb pattern requires each thumb's aria-valuemin/max
   // to reflect the OTHER thumb's current position, not a static [min, max] —
   // the low thumb can never reach past (high - gap), and vice versa. Guarded
@@ -155,13 +174,15 @@ export function useSliderValue(props, emit, { isRange }) {
   function thumbNativeMin(i) {
     if (!isRange.value || i !== 1 || internalValues.value.length < 2) return props.min;
     const gap = Math.round(props.minGapSteps) * props.step;
-    return Math.min(props.max, internalValues.value[0] + gap);
+    const raw = Math.min(props.max, internalValues.value[0] + gap);
+    return Math.min(props.max, toGridBound(raw, true));
   }
 
   function thumbNativeMax(i) {
     if (!isRange.value || i !== 0 || internalValues.value.length < 2) return props.max;
     const gap = Math.round(props.minGapSteps) * props.step;
-    return Math.max(props.min, internalValues.value[1] - gap);
+    const raw = Math.max(props.min, internalValues.value[1] - gap);
+    return Math.max(props.min, toGridBound(raw, false));
   }
 
   // internalValues is always on-grid except for one deliberate case: an
