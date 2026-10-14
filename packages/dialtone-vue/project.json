@@ -12,7 +12,10 @@
         "{projectRoot}/index.js",
         "{projectRoot}/package.json",
         "{projectRoot}/vite.config.js",
-        "{projectRoot}/tsconfig.json"
+        "{projectRoot}/tsconfig.json",
+        "{workspaceRoot}/scripts/build-dialtone-vue-docs.mjs",
+        "{workspaceRoot}/scripts/lib/**/*.mjs",
+        "{workspaceRoot}/common/utils/server.mjs"
       ],
       "outputs": [ "{projectRoot}/dist" ],
       "options": {

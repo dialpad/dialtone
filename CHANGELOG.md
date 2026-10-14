@@ -1,3 +1,24 @@
+# [10.6.0](https://github.com/dialpad/dialtone/compare/dialtone/v10.5.1...dialtone/v10.6.0) (2026-10-13)
+
+
+### Bug Fixes
+
+* **Dialtone Mcp Server, Dialtone Cli:** DLT-3655 unblock startup and shared releases ([#1454](https://github.com/dialpad/dialtone/issues/1454)) ([2f72801](https://github.com/dialpad/dialtone/commit/2f728014ed1964152f08d47361dd617383a4e026))
+* **Dialtone Mcp Server, Dialtone Query Core:** DLT-3640 correct guidance and version metadata ([#1452](https://github.com/dialpad/dialtone/issues/1452)) ([6dcebc5](https://github.com/dialpad/dialtone/commit/6dcebc5dd6adc2e9b1dbf1c27901dd1bbf27e578))
+* **Eslint Plugin Dialtone:** DLT-3645 enable umbrella checks and skip undeclared installs ([#1453](https://github.com/dialpad/dialtone/issues/1453)) ([64147d4](https://github.com/dialpad/dialtone/commit/64147d47ec288981683a55b1bb47a14a111d580f))
+
+
+### Documentation
+
+* **Mode:** DLT-3658 document v-dt-mode as the default ([#1459](https://github.com/dialpad/dialtone/issues/1459)) ([183bea2](https://github.com/dialpad/dialtone/commit/183bea296bdb648c7922693d969b4943464c08c7))
+* NO-JIRA fix performance issue doc page ([#1451](https://github.com/dialpad/dialtone/issues/1451)) ([17ec4dd](https://github.com/dialpad/dialtone/commit/17ec4dd37afd8ba28900e7a4a8ffb2bdb9025ca9))
+
+
+### Features
+
+* **Dialtone Query Core:** DLT-3649 align public component identity ([#1455](https://github.com/dialpad/dialtone/issues/1455)) ([94d7d56](https://github.com/dialpad/dialtone/commit/94d7d560a53403c22069b5724e213e10087badb8))
+* **Stack:** DLT-3657 add wrap prop ([#1458](https://github.com/dialpad/dialtone/issues/1458)) ([9699220](https://github.com/dialpad/dialtone/commit/9699220b7d24b66c8b7cf28601b6c474b30981d2))
+
 ## [10.5.1](https://github.com/dialpad/dialtone/compare/dialtone/v10.5.0...dialtone/v10.5.1) (2026-10-06)
 
 
