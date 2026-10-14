@@ -109,6 +109,17 @@ describe('explicit directive documentation routing', () => {
     expect(notes.join(' ')).toContain('No directive documentation');
   });
 
+  test('reports every missing directive while retaining the known contract', () => {
+    const { results, notes } = searchDocumentation(
+      'v-dt-tooltip and v-dt-unknown and DtMissingDirective', documentation,
+    );
+    expect(results.map(result => result.details.docId)).toEqual(['directives/tooltip']);
+    expect(notes).toEqual([
+      'No directive documentation found for "unknown".',
+      'No directive documentation found for "missing".',
+    ]);
+  });
+
   test.each([
     ['v-dt-focusgroup versus DtFocustrapDirective', ['directives/focusgroup', 'directives/focustrap']],
     ['DtModeIsland versus v-dt-mode', ['components/mode-island', 'directives/mode']],

@@ -209,8 +209,10 @@ export function searchDocumentation(
     });
 
   const notes: string[] = [];
-  if (directives.length > 0 && !results.some(result => result.details.docId.startsWith(DIRECTIVE_PREFIX))) {
-    notes.push('No directive documentation found for the explicit identifier.');
+  for (const name of directives) {
+    if (!seenDocIds.has(`${DIRECTIVE_PREFIX}${name}`)) {
+      notes.push(`No directive documentation found for "${name}".`);
+    }
   }
   if (truncated) notes.push(`Query truncated to ${MAX_QUERY_CHARS} characters.`);
   if (wordsTruncated) notes.push(`Query truncated to ${MAX_QUERY_TERMS} terms.`);
