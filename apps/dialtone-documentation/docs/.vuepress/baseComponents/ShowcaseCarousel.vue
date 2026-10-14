@@ -2,29 +2,49 @@
 <template>
   <div ref="carouselContainerRef" class="showcase-carousel">
     <dt-stack ref="carouselTrackRef" direction="row" gap="800" class="showcase-carousel__track">
-      <picture
-        v-for="image in showcaseImages"
-        :key="image.name"
-        :style="{
-          alignSelf: image.alignSelf,
-          inlineSize: image.sizes,
-        }"
-        class="showcase-carousel__item"
-      >
-        <source :srcset="image.avifSrcset" :sizes="image.sizes" type="image/avif">
-        <source :srcset="image.webpSrcset" :sizes="image.sizes" type="image/webp">
-        <img
-          :src="image.fallbackSrc"
-          :width="image.sourceWidth"
-          :height="image.sourceHeight"
-          class="d-bar-500 d-d-block showcase-carousel__image"
-          alt=""
-          loading="lazy"
-          decoding="async"
-          fetchpriority="low"
+      <template v-for="item in showcaseItems" :key="item.name">
+        <video
+          v-if="item.type === 'video'"
+          :src="item.videoSrc"
+          :poster="item.posterSrc"
+          :width="item.sourceWidth"
+          :height="item.sourceHeight"
+          :style="{
+            alignSelf: item.alignSelf,
+            inlineSize: item.sizes,
+          }"
+          class="d-bar-500 d-d-block showcase-carousel__item showcase-carousel__image"
+          aria-hidden="true"
+          muted
+          loop
+          playsinline
+          disablepictureinpicture
+          preload="none"
           draggable="false"
+        />
+        <picture
+          v-else
+          :style="{
+            alignSelf: item.alignSelf,
+            inlineSize: item.sizes,
+          }"
+          class="showcase-carousel__item"
         >
-      </picture>
+          <source :srcset="item.avifSrcset" :sizes="item.sizes" type="image/avif">
+          <source :srcset="item.webpSrcset" :sizes="item.sizes" type="image/webp">
+          <img
+            :src="item.fallbackSrc"
+            :width="item.sourceWidth"
+            :height="item.sourceHeight"
+            class="d-bar-500 d-d-block showcase-carousel__image"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            fetchpriority="low"
+            draggable="false"
+          >
+        </picture>
+      </template>
     </dt-stack>
   </div>
 </template>
@@ -66,15 +86,35 @@ const createShowcaseImage = ({
   };
 };
 
-const showcaseImages = [
+const SHOWCASE_VIDEO_ROOT = '/assets/videos';
+// Brand samples delivered as motion. The poster is the still shown before
+// playback and under reduced motion.
+const createShowcaseVideo = ({
+  name,
+  alignSelf,
+  renderedWidth,
+  sourceWidth,
+  sourceHeight,
+}) => ({
+  type: 'video',
+  name,
+  alignSelf,
+  sourceWidth,
+  sourceHeight,
+  sizes: `${renderedWidth}px`,
+  videoSrc: withBase(`${SHOWCASE_VIDEO_ROOT}/home-showcase--${name}.mp4`),
+  posterSrc: withBase(`${SHOWCASE_IMAGE_ROOT}/home-showcase--${name}.jpg`),
+});
+
+const showcaseItems = [
   createShowcaseImage({ name: '01', alignSelf: 'flex-start', renderedWidth: 468, sourceWidth: 1068, sourceHeight: 736, candidateWidths: [468, 936, 1068] }),
-  createShowcaseImage({ name: '02', alignSelf: 'flex-end', renderedWidth: 546, sourceWidth: 1258, sourceHeight: 926, candidateWidths: [546, 1092, 1258] }),
+  createShowcaseVideo({ name: '02', alignSelf: 'flex-end', renderedWidth: 546, sourceWidth: 1092, sourceHeight: 728 }),
   createShowcaseImage({ name: '03', alignSelf: 'flex-start', renderedWidth: 352, sourceWidth: 1180, sourceHeight: 1284, candidateWidths: [352, 704, 1180] }),
-  createShowcaseImage({ name: '04', alignSelf: 'center', renderedWidth: 400, sourceWidth: 1180, sourceHeight: 782, candidateWidths: [400, 800, 1180] }),
-  createShowcaseImage({ name: '05', alignSelf: 'flex-end', renderedWidth: 480, sourceWidth: 1270, sourceHeight: 964, candidateWidths: [480, 960, 1270] }),
-  createShowcaseImage({ name: '06', alignSelf: 'flex-start', renderedWidth: 628, sourceWidth: 1882, sourceHeight: 1220, candidateWidths: [628, 1256, 1882] }),
+  createShowcaseVideo({ name: '04', alignSelf: 'center', renderedWidth: 480, sourceWidth: 960, sourceHeight: 540 }),
+  createShowcaseVideo({ name: '05', alignSelf: 'flex-end', renderedWidth: 320, sourceWidth: 640, sourceHeight: 800 }),
+  createShowcaseVideo({ name: '06', alignSelf: 'flex-start', renderedWidth: 628, sourceWidth: 1256, sourceHeight: 812 }),
   createShowcaseImage({ name: '07', alignSelf: 'center', renderedWidth: 438, sourceWidth: 722, sourceHeight: 453, candidateWidths: [438, 722] }),
-  createShowcaseImage({ name: '08', alignSelf: 'flex-end', renderedWidth: 404, sourceWidth: 1212, sourceHeight: 1162, candidateWidths: [404, 808, 1212] }),
+  createShowcaseVideo({ name: '08', alignSelf: 'flex-end', renderedWidth: 404, sourceWidth: 808, sourceHeight: 808 }),
   createShowcaseImage({ name: '09', alignSelf: 'flex-start', renderedWidth: 438, sourceWidth: 1440, sourceHeight: 1344, candidateWidths: [438, 876, 1440] }),
 ];
 
@@ -111,6 +151,50 @@ onMounted(() => {
 
     const fineHoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
     const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    // Clones don't inherit Vue's `muted` prop binding, and browsers block
+    // unmuted autoplay, so mute every video (originals and clones) explicitly.
+    const carouselVideos = Array.from(carousel.querySelectorAll('video'));
+    carouselVideos.forEach((video) => {
+      video.muted = true;
+      video.defaultMuted = true;
+    });
+
+    const playVideo = (video) => {
+      if (reducedMotionQuery.matches) return;
+      video.play().catch(() => {});
+    };
+
+    // Only play videos while they're on screen, so the cloned sets
+    // don't all decode at once.
+    const handleVideoVisibilityChange = (entries) => {
+      entries.forEach(({ target, isIntersecting }) => {
+        if (isIntersecting) {
+          playVideo(target);
+        } else {
+          target.pause();
+        }
+      });
+    };
+
+    const videoObserver = 'IntersectionObserver' in window
+      ? new IntersectionObserver(handleVideoVisibilityChange)
+      : null;
+
+    const syncVideoPlayback = () => {
+      if (reducedMotionQuery.matches) {
+        carouselVideos.forEach(video => video.pause());
+        return;
+      }
+
+      if (videoObserver) {
+        // Re-observing fires a fresh callback for each video's current visibility.
+        videoObserver.disconnect();
+        carouselVideos.forEach(video => videoObserver.observe(video));
+      } else {
+        carouselVideos.forEach(playVideo);
+      }
+    };
     const usesCompositorAutoplay = !fineHoverQuery.matches;
     const supportsScrollEnd = 'onscrollend' in carouselContainer;
 
@@ -227,6 +311,7 @@ onMounted(() => {
       } else {
         startAnimation();
       }
+      syncVideoPlayback();
     };
 
     const handlePointerEnter = (event) => {
@@ -334,6 +419,7 @@ onMounted(() => {
     }
 
     measureCarouselPeriod();
+    syncVideoPlayback();
 
     carouselContainer.addEventListener('pointerenter', handlePointerEnter);
     carouselContainer.addEventListener('pointermove', handlePointerMove);
@@ -359,6 +445,8 @@ onMounted(() => {
       clearScrollIdleTimer();
       window.clearTimeout(resizeTimer);
       visibilityObserver?.disconnect();
+      videoObserver?.disconnect();
+      carouselVideos.forEach(video => video.pause());
       carouselContainer.removeEventListener('pointerenter', handlePointerEnter);
       carouselContainer.removeEventListener('pointermove', handlePointerMove);
       carouselContainer.removeEventListener('pointerleave', handlePointerLeave);
