@@ -438,6 +438,15 @@
     &.d-tooltip__arrow--left-center::after {
         inset-inline-start: var(--dt-spacing-75-negative); // -6, flush with the bubble edge
     }
+
+    // The borrowed .d-tooltip--show/--hide classes declare their own
+    // transform/opacity transition unconditionally (unlike every transition
+    // this component declares itself, which is wrapped in the
+    // no-preference guard below) — without this, a reduced-motion
+    // preference is silently bypassed for this one readout.
+    @media (prefers-reduced-motion: reduce) {
+        transition: none;
+    }
 }
 
 //  $$  DRAGGING STATE
