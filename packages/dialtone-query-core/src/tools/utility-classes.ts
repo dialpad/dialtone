@@ -2,7 +2,7 @@
 // UTILITY CLASSES SEARCH TOOL
 // ============================================================================
 
-import { applySmartFilter } from '../utils/filters.js';
+import { applySmartFilterKeepingExact, sortExactFirst } from '../utils/filters.js';
 import type {
   UtilityClassesData,
   ClassData,
@@ -39,7 +39,7 @@ export function extractKeywords(query: string, compoundProperties: Set<string>):
   const normalized = query.toLowerCase();
   const words = normalized.split(/\s+/).filter(w => w.length > 0);
 
-  // Convert px values to rem for Dialtone's 10-based scale
+  // Convert px values to rem for Dialtone's 10px rem base
   const convertedWords = words.flatMap((word: string) => {
     if (word.endsWith('px')) {
       const px = parseFloat(word);
@@ -107,14 +107,23 @@ export function valueMatchesKeyword(value: string, description: string | undefin
   return wordBoundaryRegex.test(value) || wordBoundaryRegex.test(description || '');
 }
 
+// Physical and logical directions coincide only in horizontal-tb/LTR.
+// Keep this vocabulary bounded to padding/margin/inset recovery.
+const DIRECTION_ALIASES = Object.entries({
+  'block-start': 'top', 'block-end': 'bottom',
+  'inline-start': 'left', 'inline-end': 'right',
+});
+
 /**
  * Search utility classes using simple AND-logic (like Dialtone docs site)
  */
 export function searchUtilityClasses(query: string, data: UtilityClassesData): { results: SearchResult[]; notes: string[] } {
   console.error(`\n[CLASS SEARCH DEBUG] Query: "${query}"`);
+  if (!query.trim()) return { results: [], notes: [] };
+  const exactName = query.trim().replace(/^\.(?=d-)/i, '').toLowerCase();
 
   // Normalize query: lowercase, replace hyphens/slashes with spaces
-  const normalized = query.toLowerCase().replace(/[/-]/g, ' ');
+  const normalized = exactName.replace(/[/-]/g, ' ');
   const words = normalized.split(/\s+/).filter(w => w.length > 0);
 
   // Create regex for each word (handle px/rem conversion)
@@ -145,16 +154,28 @@ export function searchUtilityClasses(query: string, data: UtilityClassesData): {
   console.error(`[CLASS SEARCH DEBUG] Words:`, words);
 
   const results: SearchResult[] = [];
+  const utilityMatches = new Set<string>();
 
   // Check each class: ALL words must match somewhere
   for (const [className, classData] of Object.entries(data) as [string, ClassData][]) {
     // Gather all searchable text for this class
     const searchableTexts = [className.toLowerCase()];
+    let declarationMatch = false;
 
     for (const valueObj of classData.values) {
-      searchableTexts.push(valueObj.prop?.toLowerCase() || '');
-      searchableTexts.push(valueObj.value?.toLowerCase() || '');
-      searchableTexts.push(valueObj.description?.toLowerCase() || '');
+      const prop = valueObj.prop?.toLowerCase() || '';
+      const declarationTexts = [prop];
+      if (/^(padding|margin|inset)-/.test(prop)) {
+        for (const [logical, physical] of DIRECTION_ALIASES) {
+          declarationTexts.push(prop.replace(logical, physical).replace(`-${physical}`, `-${logical}`));
+          declarationTexts.push(prop.replace(logical, physical));
+        }
+      }
+      declarationTexts.push(valueObj.value?.toLowerCase() || '');
+      declarationTexts.push(valueObj.description?.toLowerCase() || '');
+      searchableTexts.push(...declarationTexts);
+      const declarationText = declarationTexts.join(' ');
+      if (regexArray.every(regex => regex.test(declarationText))) declarationMatch = true;
     }
 
     const combinedText = searchableTexts.join(' ');
@@ -163,6 +184,11 @@ export function searchUtilityClasses(query: string, data: UtilityClassesData): {
     const allWordsMatch = regexArray.every((regex: RegExp) => regex.test(combinedText));
 
     if (allWordsMatch) {
+      // Utilities emit !important declarations; prefer a matching declaration
+      // over incidental words spread across a component's CSS.
+      if (declarationMatch && classData.values.every(value => /!important\s*$/i.test(value.value || ''))) {
+        utilityMatches.add(className);
+      }
       results.push({
         type: 'utility-class',
         name: className,
@@ -177,7 +203,12 @@ export function searchUtilityClasses(query: string, data: UtilityClassesData): {
   console.error(`[CLASS SEARCH DEBUG] Found ${results.length} raw matches`);
 
   // Apply smart filter (remove deprecated, swap discouraged with alternatives)
-  const { results: filtered, notes } = applySmartFilter(results, data);
+  const { results: filtered, notes } = applySmartFilterKeepingExact(results, data, exactName);
+  // Keep exact/name matches first and preserve source order within each tier.
+  sortExactFirst(filtered, exactName, name => regexArray.every(regex => regex.test(name)) ? 0 : utilityMatches.has(name) ? 1 : 2);
+  if (/\b(padding|margin|inset)\s+(top|bottom|left|right|block|inline)\b/i.test(normalized)) {
+    notes.push('Physical/logical direction matches assume horizontal-tb and left-to-right writing; verify the writing mode.');
+  }
 
   console.error(`[CLASS SEARCH DEBUG] After filter: ${filtered.length} results\n`);
 

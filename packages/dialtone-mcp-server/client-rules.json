@@ -54,7 +54,7 @@
   "search": {
     "description": "How to search Dialtone documentation effectively",
     "tips": [
-      "Search by CSS property names: Dialtone utilities apply logical properties internally, so prefer logical names ('padding-block-start', 'margin-inline-end') over physical ('padding-top', 'margin-right'); physical queries surface noisy results",
+      "Search by CSS property names: prefer logical names ('padding-block-start', 'margin-inline-end'). Physical direction queries also recover logical padding, margin and inset matches assuming horizontal-tb and left-to-right writing; verify the writing mode",
       "Search by class name patterns (e.g., 'pbs-200', 'mie-100', 'd-mbs-auto'). Logical abbrevs: pbs/pbe (block-start/end), pis/pie (inline-start/end). Legacy 'pt'/'pr' aliases still emit but apply logical properties under the hood",
       "Search by component names (e.g., 'DtButton', 'DtModal')",
       "Search by component API — the search indexes prop names, slot names, and event names (e.g., 'startIcon' for a prop, 'header' for a slot, 'update:open' for an event)",

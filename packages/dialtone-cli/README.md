@@ -35,16 +35,17 @@ dialtone component button --slots              # slots only
 dialtone component button --examples           # usage example
 ```
 
-### `dialtone token <query>`
+### `dialtone token [query]`
 
-Look up design tokens.
+Look up design tokens. Use `--name=--dt-*` for canonical CSS names so the leading dashes are parsed as a value. Exact legacy names retain their values and qualified migration guidance; add `--values --format json` to inspect that metadata.
 
 ```bash
 dialtone token "color foreground"
-dialtone token "space 400"
+dialtone token "spacing 100"
 dialtone token "color foreground" --values     # show theme values
 dialtone token "color foreground" --all        # include HSL tokens
 dialtone token "color foreground" --limit 0    # show all results
+dialtone token --name=--dt-spacing-100 --values # canonical CSS token identifier
 ```
 
 ### `dialtone utility <query>`
@@ -119,8 +120,10 @@ When working with Dialtone components, tokens, or utility classes, use the `dial
 - Structured data: add `--format json` to any command
 
 Prefer the CLI over reading source files for design system information. It searches
-the full published API and leaves deprecated items out of search results. An exact
-deprecated component name still works, with a warning naming its replacement.
+the generated API and leaves deprecated items out of general discovery. Exact
+legacy component, utility or token names retain their contract. Use `--format json`
+to inspect utility migration metadata. Token lookups print migration notes to stderr
+in all formats; add `--values --format json` for structured metadata.
 ```
 
 ### Skills

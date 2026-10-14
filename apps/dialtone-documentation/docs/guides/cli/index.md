@@ -69,7 +69,7 @@ dialtone component button --format json
 | --------------------------- | --------------------------------------------------------------------- |
 | `dialtone search <query>`   | Search components, documentation, tokens, utility classes, and icons. |
 | `dialtone component <name>` | Read a component's API, including props, events, slots, and examples. |
-| `dialtone token <query>`    | Find design tokens and inspect theme values.                          |
+| `dialtone token [query]`    | Find design tokens by query or `--name` and inspect theme values.     |
 | `dialtone utility <query>`  | Find CSS utility classes by property or value.                        |
 | `dialtone docs <query>`     | Search usage guidance, recipes, accessibility guidance, and patterns. |
 | `dialtone prompt <name>`    | Generate compact component context for a coding agent.                |
@@ -136,6 +136,18 @@ dialtone token "color foreground primary"
 dialtone token "spacing 400"
 ```
 
+Use `--name` for a canonical CSS token identifier that begins with `--`. It takes precedence when both a name and a positional query are supplied:
+
+```bash
+dialtone token --name=--dt-spacing-100 --values
+```
+
+An exact legacy name remains available for migration inspection. The CLI reports its deprecation reason and qualified alternatives on stderr; add `--values --format json` to include metadata and theme values in JSON:
+
+```bash
+dialtone token --name=--dt-space-400 --values --format json
+```
+
 Use `--values` to show theme values for the first match:
 
 ```bash
@@ -158,7 +170,7 @@ dialtone utility "display flex"
 dialtone utility "margin auto"
 ```
 
-Search results include the class name and its CSS declaration. Deprecated utilities are filtered from the results.
+Search results include the class name and its CSS declaration. General searches filter deprecated utilities; exact legacy names retain their contract and migration metadata in JSON output.
 
 ### Search documentation
 

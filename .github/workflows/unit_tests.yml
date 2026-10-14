@@ -22,6 +22,10 @@ on:
       - 'scripts/lib/**/*.mjs'
       - 'common/utils/server.mjs'
       - '.github/workflows/unit_tests.yml'
+      - 'packages/stylelint-plugin-dialtone/**'
+      - 'scripts/generate-migration-guidance.mjs'
+      - '.agents/resources/rules/css-utilities.md'
+      - '.claude/rules/css-utilities.md'
       - '.github/workflows/dialtone-documentation-tests.yml'
       - 'scripts/build-dialtone-vue-docs.mjs'
       - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
@@ -50,6 +54,10 @@ on:
       - 'scripts/lib/**/*.mjs'
       - 'common/utils/server.mjs'
       - '.github/workflows/unit_tests.yml'
+      - 'packages/stylelint-plugin-dialtone/**'
+      - 'scripts/generate-migration-guidance.mjs'
+      - '.agents/resources/rules/css-utilities.md'
+      - '.claude/rules/css-utilities.md'
       - '.github/workflows/dialtone-documentation-tests.yml'
       - 'scripts/build-dialtone-vue-docs.mjs'
       - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
@@ -74,6 +82,7 @@ jobs:
       tokens: ${{ steps.filter.outputs.tokens }}
       combinator: ${{ steps.filter.outputs.combinator }}
       cli: ${{ steps.filter.outputs.cli }}
+      lint_plugins: ${{ steps.filter.outputs.lint_plugins }}
     steps:
       - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3
@@ -104,6 +113,9 @@ jobs:
               - 'scripts/lib/**/*.mjs'
               - 'common/utils/server.mjs'
               - '.github/workflows/unit_tests.yml'
+              - 'scripts/generate-migration-guidance.mjs'
+              - '.agents/resources/rules/css-utilities.md'
+              - '.claude/rules/css-utilities.md'
               - '.github/workflows/dialtone-documentation-tests.yml'
               - 'packages/dialtone-tokens/**'
               - 'packages/dialtone-vue/**'
@@ -111,6 +123,13 @@ jobs:
               - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
               - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
               - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
+            lint_plugins:
+              - 'packages/eslint-plugin-dialtone/**'
+              - 'packages/stylelint-plugin-dialtone/**'
+              - 'packages/dialtone-css/lib/build/js/dialtone_migration_helper/**'
+              - 'packages/dialtone-css/lib/build/less/utilities/flex.less'
+              - 'scripts/generate-migration-guidance.mjs'
+              - '.github/workflows/unit_tests.yml'
 
   test:
     needs: changes
@@ -197,6 +216,12 @@ jobs:
       - name: Run bounded cross-adapter retrieval regressions
         run: node scripts/retrieval/run.mjs
 
+      - name: Test generated utility metadata and recommendations
+        run: >-
+          node --test
+          scripts/tests/dialtone-recommendations.test.mjs
+          packages/dialtone-css/postcss/dialtone-docs.test.cjs
+
       - name: Test MCP query protocol contracts
         run: pnpm --dir packages/dialtone-mcp-server test:protocol
 
@@ -208,3 +233,24 @@ jobs:
 
       - name: Run existing documentation search scenarios
         run: node packages/dialtone-mcp-server/scripts/run-acceptance-scenarios.mjs
+
+  test-lint-plugins:
+    needs: changes
+    if: needs.changes.outputs.lint_plugins == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      packages: read
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Check generated migration guidance
+        run: node scripts/generate-migration-guidance.mjs --check
+
+      - name: Test Dialtone Stylelint rules
+        run: pnpm --dir packages/stylelint-plugin-dialtone test
