@@ -1694,6 +1694,26 @@ describe('DtSlider Tests', () => {
         thumbVisuals = wrapper.findAll('[data-qa="dt-slider-thumb-visual"]');
         expect(thumbVisuals[1].classes()).toContain('d-slider__thumb-visual--active');
       });
+
+      it('hands a coincident drag off to the sibling thumb once the crossing clamp pins the active one', async () => {
+        mockProps = { modelValue: [0, 0], min: 0, max: 100 };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => (
+          { top: 0, left: 0, right: 100, bottom: 20, width: 100, height: 20 }
+        );
+
+        // No prior drag yet, so this grabs thumb 0 (same as the test above).
+        await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 0, buttons: 1 });
+        // Dragging toward max: thumb 0 can never pass thumb 1 (both still at
+        // 0), so without handing off, this would stay frozen at 0 forever.
+        await control.trigger('pointermove', { pointerId: 1, clientX: 60, buttons: 1 });
+
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        expect(Number(thumbInputs[0].element.value)).toBe(0);
+        expect(Number(thumbInputs[1].element.value)).toBe(60);
+      });
     });
 
     describe('Magnetic snapping (snapPoints)', () => {

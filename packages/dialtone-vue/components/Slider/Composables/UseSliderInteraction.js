@@ -193,6 +193,19 @@ export function useSliderInteraction(props, emit, {
     return Math.abs(val - lo) <= Math.abs(val - hi) ? 0 : 1;
   }
 
+  // While the thumbs are still coincident, the active one can be pinned at
+  // its sibling by the crossing clamp (low can never pass high) — dragging
+  // further the same way would otherwise freeze forever. Hands the drag off
+  // to the sibling, which this same move CAN actually satisfy.
+  function resolveCoincidentHandoff(idx, rawVal) {
+    if (!isRange.value) return idx;
+    const [lo, hi] = internalValues.value;
+    if (lo !== hi) return idx;
+    if (idx === 0 && rawVal > lo) return 1;
+    if (idx === 1 && rawVal < hi) return 0;
+    return idx;
+  }
+
   function onPointerDown(event) {
     if (props.disabled) return;
     // Only handle primary pointer button
@@ -261,7 +274,14 @@ export function useSliderInteraction(props, emit, {
       return;
     }
 
-    updateThumbValue(activeThumbIndex.value, getValueFromPointerEvent(event), { allowSnap: true });
+    const rawVal = getValueFromPointerEvent(event);
+    const idx = resolveCoincidentHandoff(activeThumbIndex.value, rawVal);
+    if (idx !== activeThumbIndex.value) {
+      activeThumbIndex.value = idx;
+      lastActiveThumbIndex.value = idx;
+    }
+
+    updateThumbValue(idx, rawVal, { allowSnap: true });
   }
 
   // Same off-grid detection as UseSliderValue's thumbNativeStep (duplicated
