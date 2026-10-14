@@ -1,0 +1,19 @@
+packages/eslint-plugin-dialtone/package.json
+  s_a82105f5865b72::t_9565f995e2fcff 63
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.3",
+  "base_commit_sha": "5a7c6f86af1cbfbc08e9dfd0677ace9e99292566",
+  "prompts": {},
+  "sessions": {
+    "s_a82105f5865b72": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "aaa0b4c0-ced5-4274-8c37-8ab345772e34",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

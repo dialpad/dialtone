@@ -1,0 +1,31 @@
+packages/dialtone-vue/components/TextList/TextList.vue
+  s_70bd67c1949733::t_ac17b5d9ed3082 119
+packages/dialtone-vue/components/TextList/TextListConstants.js
+  s_70bd67c1949733::t_426671d987e707 5
+packages/dialtone-vue/components/TextList/TextList.test.js
+  s_70bd67c1949733::t_65537203f054ce 77,108-113
+  s_70bd67c1949733::t_30ef6cb345a7e6 114-115
+packages/combinator/src/variants/variants_text_list.js
+  h_c15b5755534093 70-74,78,83,172-176
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "e37255e161d2a9b75c5ab1173321752fd352fe59",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_70bd67c1949733": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019f3c9e-fb6d-7a13-bf9d-512be21eb336",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
