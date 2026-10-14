@@ -34,6 +34,7 @@ keywords: ["brand colors","marketing colors","purple","light tan","tan","deep bl
             v-dt-mode:dark="!!color.inverted"
             as="p"
             tone="primary"
+            :class="color.labelClass"
           >
             {{ color.hex }}
           </dt-text>
@@ -164,7 +165,8 @@ const marketingColors = [
   { hex: '#F2F0EE', name: 'Tan', description: 'Secondary surface for panels, hero media frames, and graphic panels. Also the 1px border on white cards.' },
   { hex: '#FFFFFF', name: 'White', description: 'Containers only: cards, banners, and floating UI. Never a page, section, or slide background.', outlined: true },
   { hex: '#CEC8C4', name: 'Dark Tan', description: 'Neutral halftone dots and grounds, transformation grid tiles, and strong borders.' },
-  { hex: '#81807F', name: 'Ultra Dark Tan', description: 'Secondary and muted text.', inverted: true },
+  // Near-black label: the default light label falls below 4.5:1 on this mid-tone swatch.
+  { hex: '#81807F', name: 'Ultra Dark Tan', description: 'Secondary and muted text.', labelClass: 'd-fc-black-1000' },
   { hex: '#10022C', name: 'Deep Blue', description: 'Headlines, body text, and graphic line art. As a fill, only in contained elements like the quote card.', inverted: true },
   { hex: '#1D0155', name: 'Dark Purple', description: 'Primary button background. Cards on a dark surface, when one is requested.', inverted: true },
   { hex: '#7C52FF', name: 'Purple', description: 'Accent for eyebrows, stat numerals, one accent node per graphic, halftone dots, and small UI details. Never headlines or body.', inverted: true },

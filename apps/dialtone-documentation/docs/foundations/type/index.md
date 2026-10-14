@@ -33,7 +33,8 @@ next:
       <p class="d-docsite--paragraph">Where Season VF can't be installed (Google Docs, Google Slides, PowerPoint, and Keynote), use <strong>DM Sans</strong> throughout, including for quotes. DM Sans is the only approved fallback.</p>
     </div>
     <div class="d-gc2">
-      <p class="d-docsite--paragraph"><code>font-family: 'Season VF', 'DM Sans', system-ui, sans-serif;</code></p>
+      <p class="d-docsite--paragraph">Dialtone's bundled fonts in <code>dialtone-css</code> register Season VF Sans as <code>Season Sans</code> and Season VF Mix as <code>Season Mix</code>.</p>
+      <p class="d-docsite--paragraph"><code>font-family: 'Season Sans', 'DM Sans', system-ui, sans-serif;</code></p>
     </div>
   </div>
   <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols3 d-ai-center">
