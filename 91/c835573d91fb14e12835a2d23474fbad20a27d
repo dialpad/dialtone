@@ -1,0 +1,26 @@
+packages/combinator/src/lib/info.test.js
+  s_9f61fa9161643f::t_66bf035366100d 9-36
+packages/combinator/src/lib/info.js
+  s_9f61fa9161643f::t_a8e04ccec6103e 201
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.1",
+  "base_commit_sha": "91c835573d91fb14e12835a2d23474fbad20a27d",
+  "prompts": {},
+  "humans": {
+    "h_c15b5755534093": {
+      "author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  },
+  "sessions": {
+    "s_9f61fa9161643f": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "019ef122-867f-71f2-bacd-0ea0fd649d67",
+        "model": "gpt-5.5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

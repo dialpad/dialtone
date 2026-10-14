@@ -1,0 +1,22 @@
+apps/dialtone-documentation/scripts/visual-guide/scenes/token-overlay-surface.vue
+  s_93aeca3805a6ee::t_19f987453cb502 2-13,15,17-51,72-75,80-94
+apps/dialtone-documentation/docs/guides/migration/visual-changes/index.md
+  s_93aeca3805a6ee::t_65af9def6ed270 246
+  s_93aeca3805a6ee::t_4851489629e5ea 76,78,83
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.11",
+  "base_commit_sha": "773337f986401f15e2ee4d4c0150c37cef7ff3d1",
+  "prompts": {},
+  "sessions": {
+    "s_93aeca3805a6ee": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6eac0ba6-144f-46e1-9c25-fb0c29ab1e02",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
