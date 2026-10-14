@@ -22,13 +22,23 @@
  *   npx tsx sync-scripts/build_materials.ts
  *
  * Options:
- *   --dry-run        report what would change, post nothing
- *   --file-key KEY   override FILE_KEY from .env
+ *   --dry-run                report what would change, post nothing
+ *   --file-key KEY            override FILE_KEY from .env
+ *   --local-snapshot FILE     skip the REST read of existing variables and use
+ *                             this file instead — a JSON dump shaped like
+ *                             ApiGetLocalVariablesResponse (same recovery
+ *                             valve as build_variables.ts's flag of the same
+ *                             name, for when REST's view of /variables/local
+ *                             is stale or wrong). Must include the parent
+ *                             "Dialtone 2026" collection/variables AND each
+ *                             material's own collection entry (with its real
+ *                             id/modes and whatever `variableOverrides` it
+ *                             actually currently holds).
  */
 
 import 'dotenv/config';
 
-import FigmaApi from './figma_api.js';
+import FigmaApi, { ApiGetLocalVariablesResponse, loadLocalSnapshot } from './figma_api.js';
 import { parseColor, colorApproximatelyEqual } from './color.js';
 import { resolveModes, ResolvedToken } from './resolve_tokens.js';
 import { classify, FigmaType } from './variable_policy.js';
@@ -156,6 +166,7 @@ async function main (): Promise<void> {
     return i >= 0 ? args[i + 1] : undefined;
   };
   const dryRun = args.includes('--dry-run');
+  const localSnapshot = flag('local-snapshot');
   const pat = process.env.PERSONAL_ACCESS_TOKEN;
   const fileKey = flag('file-key') ?? process.env.FILE_KEY;
   if (!pat || !fileKey) {
@@ -164,13 +175,19 @@ async function main (): Promise<void> {
   }
 
   const api = new FigmaApi(pat);
+  const snapshot: ApiGetLocalVariablesResponse | null = localSnapshot
+    ? loadLocalSnapshot(localSnapshot)
+    : null;
+  const getLocal = async (): Promise<ApiGetLocalVariablesResponse> =>
+    snapshot ?? api.getLocalVariables(fileKey);
+  if (snapshot) console.log(`\n--local-snapshot: skipping REST read, using ${localSnapshot}`);
 
   const parentTokens = await resolveAll();
   const classified = classify(parentTokens);
   const types = new Map<string, FigmaType>(classified.emit.map(e => [e.token.name, e.figmaType]));
   const parent = new Map(parentTokens.map(t => [t.name, t]));
 
-  let local = await api.getLocalVariables(fileKey);
+  let local = await getLocal();
   const parentCollection = Object.values(local.meta.variableCollections).find(c => c.name === PARENT);
   if (!parentCollection) {
     console.error(`No "${PARENT}" collection in the file. Run build_variables.ts first.`);
@@ -302,7 +319,7 @@ async function main (): Promise<void> {
     console.log(
       `${name}: wrote ${payload.length} overrides` +
       (stale.length ? `, reset ${stale.length} stale` : ''));
-    local = await api.getLocalVariables(fileKey);
+    local = await getLocal();
   }
 }
 

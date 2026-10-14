@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { readFileSync } from 'fs'
 
 export interface VariableMode {
   modeId: string
@@ -102,6 +103,56 @@ export interface ApiGetLocalVariablesResponse {
     variableCollections: { [id: string]: VariableCollection }
     variables: { [id: string]: Variable }
   }
+}
+
+/**
+ * Loads a `--local-snapshot` file — a recovery valve for when the REST read
+ * this normally comes from (`FigmaApi.getLocalVariables`) is stuck serving
+ * stale or wrong data, letting an operator substitute ground truth captured
+ * through the Plugin API instead. Shared by build_variables.ts and
+ * build_materials.ts, which otherwise each inlined this parse-and-trust step
+ * with no validation at all — an incomplete snapshot (missing a variable or
+ * collection that genuinely exists) would make the generator believe it needs
+ * to CREATE something that already exists, and Figma does not reject a
+ * duplicate name, so that failure is silent rather than loud.
+ *
+ * This only catches gross malformation (not a parseable snapshot shape, or
+ * one with no collections/variables at all) — it cannot detect a snapshot
+ * that is merely incomplete or stale relative to the live file, since from
+ * the shape alone there is no way to tell "this variable doesn't exist" from
+ * "this variable was never captured." Completeness is the operator's
+ * responsibility when building the snapshot; this just stops a glaringly
+ * broken file from silently reaching a live POST.
+ */
+export function loadLocalSnapshot(path: string): ApiGetLocalVariablesResponse {
+  let parsed: unknown
+  try {
+    parsed = JSON.parse(readFileSync(path, 'utf8'))
+  } catch (error) {
+    throw new Error(`--local-snapshot ${path}: not valid JSON (${(error as Error).message})`)
+  }
+
+  const meta = (parsed as { meta?: unknown })?.meta
+  const collections = (meta as { variableCollections?: unknown })?.variableCollections
+  const variables = (meta as { variables?: unknown })?.variables
+  const isPlainObject = (v: unknown): v is Record<string, unknown> =>
+    typeof v === 'object' && v !== null && !Array.isArray(v)
+
+  if (!isPlainObject(meta) || !isPlainObject(collections) || !isPlainObject(variables)) {
+    throw new Error(
+      `--local-snapshot ${path}: missing or malformed meta.variableCollections/meta.variables — ` +
+      'expected the ApiGetLocalVariablesResponse shape',
+    )
+  }
+  if (Object.keys(collections).length === 0 || Object.keys(variables).length === 0) {
+    throw new Error(
+      `--local-snapshot ${path}: meta.variableCollections or meta.variables is empty — ` +
+      'a snapshot with nothing in it is never correct, even right after a full delete ' +
+      '(the collection itself still exists)',
+    )
+  }
+
+  return parsed as ApiGetLocalVariablesResponse
 }
 
 export interface ApiPostVariablesPayload {

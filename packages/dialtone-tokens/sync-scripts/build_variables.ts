@@ -12,15 +12,24 @@
  *   npx tsx sync-scripts/build_variables.ts
  *
  * Options:
- *   --dry-run        report what would change, post nothing
- *   --file-key KEY   override FILE_KEY from .env
- *   --out FILE       also write the payload to a file, for inspection
+ *   --dry-run                report what would change, post nothing
+ *   --file-key KEY            override FILE_KEY from .env
+ *   --out FILE                also write the payload to a file, for inspection
+ *   --local-snapshot FILE     skip the REST read of existing variables and use
+ *                             this file instead — a JSON dump shaped like
+ *                             ApiGetLocalVariablesResponse. Recovery valve for
+ *                             when the REST API's view of /variables/local is
+ *                             stuck stale or wrong (confirmed twice: once
+ *                             under-counting after a manual delete, once
+ *                             over-counting with phantom entries). Build the
+ *                             file from the Plugin API's live, ground-truth
+ *                             state — not from another REST call.
  */
 
 import 'dotenv/config';
 import { writeFileSync } from 'fs';
 
-import FigmaApi from './figma_api.js';
+import FigmaApi, { ApiGetLocalVariablesResponse, loadLocalSnapshot } from './figma_api.js';
 import { generatePostVariablesPayload, FlattenedTokensByFile } from './token_import.js';
 import { gamutMapped, resetGamutLog } from './color.js';
 import { resolveModes, compareTokenNames, ResolvedToken, ValueOf } from './resolve_tokens.js';
@@ -347,6 +356,7 @@ async function main (): Promise<void> {
     return i >= 0 ? args[i + 1] : undefined;
   };
   const dryRun = args.includes('--dry-run');
+  const localSnapshot = flag('local-snapshot');
   const fileKey = flag('file-key') ?? process.env.FILE_KEY;
   const pat = process.env.PERSONAL_ACCESS_TOKEN;
 
@@ -394,7 +404,7 @@ async function main (): Promise<void> {
   console.log(`resolved        : ${all.length}`);
   console.log(`excluded        : ${excluded.length}`);
   console.log(`variables       : ${emit.length}`);
-  console.log(`hidden          : ${emit.filter(e => e.hidden).length} (reference-only, hiddenFromPublishing)`);
+  console.log(`hidden          : ${emit.filter(e => e.hidden).length} (hiddenFromPublishing — theme, inverted, raw colour/material ramps, line-height)`);
   console.log(`unscoped        : ${unscoped.length}`);
   console.log(`flattened alias : ${flattened.length / Object.keys(MODES).length} (target is resolution-only)`);
   console.log(`composed colour : ${composed.length} (alpha-modified, now a real alias + opacity)`);
@@ -432,10 +442,13 @@ async function main (): Promise<void> {
   }
 
   const api = new FigmaApi(pat);
-  const local = await api.getLocalVariables(fileKey);
+  const local: ApiGetLocalVariablesResponse = localSnapshot
+    ? loadLocalSnapshot(localSnapshot)
+    : await api.getLocalVariables(fileKey);
+  if (localSnapshot) console.log(`\n--local-snapshot: skipping REST read, using ${localSnapshot}`);
   const existing = Object.values(local.meta.variableCollections).find(c => c.name === COLLECTION);
   console.log(`\ntarget file     : ${fileKey.slice(0, 6)}…${fileKey.slice(-4)}`);
-  console.log(`collection      : "${COLLECTION}" ${existing ? `exists, ${existing.variableIds.length} variables` : 'does not exist yet'}`);
+  console.log(`collection      : "${COLLECTION}" ${existing ? `exists, ${Object.values(local.meta.variables).filter(v => v.variableCollectionId === existing.id).length} variables` : 'does not exist yet'}`);
 
   const payload = generatePostVariablesPayload(files, local);
 
