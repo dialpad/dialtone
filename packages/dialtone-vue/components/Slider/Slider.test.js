@@ -1479,6 +1479,46 @@ describe('DtSlider Tests', () => {
         }
       });
 
+      it('does not recreate a second thumb input when a controlled modelValue switches range to single mid-drag', async () => {
+        // Range -> single mid-drag shrinks internalValues to length 1 while
+        // the high thumb (index 1) is still the active drag target —
+        // without clearing activeThumbIndex, the next pointermove still
+        // writes into (now out-of-bounds) index 1, reviving a second input
+        // even though the public model stayed scalar the whole time.
+        const attached = mount(DtSlider, {
+          props: { ...baseProps, modelValue: [20, 80] },
+          attachTo: document.body,
+        });
+        try {
+          const attachedControl = attached.find('[data-qa="dt-slider-control"]');
+          attachedControl.element.setPointerCapture = () => {};
+          attachedControl.element.getBoundingClientRect = () => (
+            { top: 0, left: 0, right: 100, bottom: 20, width: 100, height: 20 }
+          );
+
+          // Grab the high thumb (value 80) and nudge it slightly, establishing
+          // activeThumbIndex === 1.
+          await attachedControl.trigger('pointerdown', {
+            pointerId: 1, pointerType: 'mouse', button: 0, clientX: 80, buttons: 1,
+          });
+          await attachedControl.trigger('pointermove', { pointerId: 1, clientX: 80, buttons: 1 });
+          expect(attached.findAll('[data-qa="dt-slider-thumb"]')).toHaveLength(2);
+
+          // An external update collapses to single-thumb mode while the
+          // pointer is still down and moving.
+          await attached.setProps({ modelValue: 50 });
+          await nextTick();
+          expect(attached.findAll('[data-qa="dt-slider-thumb"]')).toHaveLength(1);
+
+          await attachedControl.trigger('pointermove', { pointerId: 1, clientX: 70, buttons: 1 });
+          await nextTick();
+
+          expect(attached.findAll('[data-qa="dt-slider-thumb"]')).toHaveLength(1);
+        } finally {
+          attached.unmount();
+        }
+      });
+
       it('prevents the default browser action on pointerdown, which would otherwise steal focus back after our own .focus() call', async () => {
         const event = new Event('pointerdown', { bubbles: true, cancelable: true });
         Object.assign(event, { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 0, buttons: 1 });

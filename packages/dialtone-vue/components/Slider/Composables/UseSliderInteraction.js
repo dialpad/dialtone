@@ -63,6 +63,18 @@ export function useSliderInteraction(props, emit, {
       if (newLength === 1 && oldLength === 2 && wasFocused) {
         nextTick(() => thumbRefs.value[0]?.focus());
       }
+      // An external modelValue update mid-drag (e.g. range -> single) can
+      // shrink internalValues below the thumb currently being dragged —
+      // without this, the next pointermove still targets that now-gone index
+      // (onPointerMove's own guard only checks for null, not out-of-bounds),
+      // writing it back into `next` and silently recreating a second input
+      // the public model no longer has. isDragging is deliberately left
+      // alone — the eventual pointerup/pointercancel still arrives and ends
+      // it normally; onPointerMove's null check (and onPointerUp's own) are
+      // what actually need activeThumbIndex cleared to become safe no-ops.
+      if (activeThumbIndex.value !== null && activeThumbIndex.value >= newLength) {
+        activeThumbIndex.value = null;
+      }
     },
   );
 
