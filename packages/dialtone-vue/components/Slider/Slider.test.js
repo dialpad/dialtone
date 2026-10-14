@@ -1906,6 +1906,27 @@ describe('DtSlider Tests', () => {
         expect(emitted[emitted.length - 1][0]).toEqual([72, 75]);
       });
 
+      it('releases a held snap point immediately if snapPoints reactively changes to no longer include it, instead of staying latched', async () => {
+        mockProps = { snapPoints: [20, 80] };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => controlRect;
+
+        await dragTo(22); // distance 2 from 20, within the fixed 10px entry threshold — snaps to 20
+        let emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toBe(20);
+
+        // 20 is removed from the snap points mid-drag — the thumb should no
+        // longer be held there, even though 25 is still within 20's old
+        // (fixed 20px) RELEASE radius, which previously latched onto a point
+        // that was no longer offered at all.
+        await wrapper.setProps({ snapPoints: [80] });
+        await moveTo(25);
+        emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toBe(25);
+      });
+
       it('holds a fractional snap point exactly in range mode, same as single-thumb mode, instead of re-rounding it onto the step grid', async () => {
         // The crossing clamp (low thumb vs. high thumb + gap) never touches
         // this value at all — the low thumb is nowhere near the high one —
