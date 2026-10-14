@@ -305,20 +305,20 @@
               "link": "/foundations/graphic-system/"
             },
             {
-              "text": "Schematic Line Art",
-              "link": "/foundations/graphic-system/schematic-line-art.html"
+              "text": "Data Visualizations",
+              "link": "/foundations/graphic-system/data-visualizations.html"
             },
             {
               "text": "Glyphs",
               "link": "/foundations/graphic-system/glyphs.html"
             },
             {
-              "text": "Transformation Grid",
-              "link": "/foundations/graphic-system/transformation-grid.html"
+              "text": "Schematic Line Art",
+              "link": "/foundations/graphic-system/schematic-line-art.html"
             },
             {
-              "text": "Data Visualizations",
-              "link": "/foundations/graphic-system/data-visualizations.html"
+              "text": "Transformation Grid",
+              "link": "/foundations/graphic-system/transformation-grid.html"
             }
           ]
         },
