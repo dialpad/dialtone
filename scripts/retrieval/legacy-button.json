@@ -1,0 +1,33 @@
+{
+  "profile": "dt9-legacy",
+  "package": "@dialpad/dialtone",
+  "version": "9.185.0",
+  "verification": "lookup-data-only",
+  "source": {
+    "path": "dist/vue3/component-documentation.json",
+    "sha256": "a7b06ba86bb99a53d70a049add6c09b358712b3f525b5f732b97ca8b44704fc1",
+    "integrity": "sha512-lo+wRRkNAGeYbTzIm6YSjrFcnRDE7FJP1AEG/eKa7fiiy90jb967d2J28DidZOZQ2EC//MkinHm7z/m5gRb59A=="
+  },
+  "projection": "Only DtButton description and size metadata; no API absence or export certification.",
+  "records": [
+    {
+      "displayName": "DtButton",
+      "description": "A button is a UI element which allows users to take an action throughout the app.\nIt is important a button is identifiable, consistent, and communicates its actions clearly,\nand is appropriately sized to its action.",
+      "props": [
+        {
+          "name": "size",
+          "description": "The size of the button.",
+          "tags": {},
+          "values": ["xs", "sm", "md", "lg", "xl"],
+          "type": {
+            "name": "string"
+          },
+          "defaultValue": {
+            "func": false,
+            "value": "'md'"
+          }
+        }
+      ]
+    }
+  ]
+}
