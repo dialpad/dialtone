@@ -1584,6 +1584,28 @@ describe('DtSlider Tests', () => {
         expect(emitted).toBeTruthy();
       });
 
+      it('ignores a second pointer\'s pointerdown mid-drag, so it cannot hijack ownership and strand the real drag', async () => {
+        // A second pointerdown reassigning activePointerId to itself would
+        // make the FIRST pointer's own eventual pointerup fail the ownership
+        // check this same fix added — stranding that drag with no commit and
+        // isDragging stuck true, a worse outcome than the pre-fix behavior.
+        control.element.getBoundingClientRect = () => (
+          { top: 0, left: 0, right: 100, bottom: 20, width: 100, height: 20 }
+        );
+        await control.trigger('pointerdown', {
+          pointerId: 1, pointerType: 'mouse', button: 0, clientX: 20, buttons: 1,
+        });
+
+        // An unrelated second pointer touches down mid-drag.
+        await control.trigger('pointerdown', {
+          pointerId: 2, pointerType: 'mouse', button: 0, clientX: 80, buttons: 1,
+        });
+
+        // The real (first) pointer's own release must still end its drag.
+        await control.trigger('pointerup', { pointerId: 1 });
+        expect(wrapper.emitted('change')).toBeTruthy();
+      });
+
       it('prevents the default browser action on pointerdown, which would otherwise steal focus back after our own .focus() call', async () => {
         const event = new Event('pointerdown', { bubbles: true, cancelable: true });
         Object.assign(event, { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 0, buttons: 1 });
@@ -1959,6 +1981,24 @@ describe('DtSlider Tests', () => {
         const emitted = wrapper.emitted('update:modelValue');
         expect(emitted[emitted.length - 1][0]).toEqual([42.5, 80]);
       });
+
+      it('keeps a held fractional snap point through a reactive minGapSteps change mid-drag', async () => {
+        // The min/max/step/minGapSteps watcher (UseSliderValue) re-applies the
+        // full constraint pipeline on any of those props changing — unlike a
+        // modelValue echo, it used to re-snap a held value with no exception
+        // for an active magnetic hold at all.
+        mockProps = { modelValue: [20, 80], step: 1, snapPoints: [42.5] };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => controlRect;
+
+        await dragTo(20);
+        await moveTo(42);
+        await wrapper.setProps({ minGapSteps: 5 });
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0][0]).toBe(42.5);
+      });
     });
 
     describe('Keyboard: PageUp / PageDown / Shift+Arrow', () => {
@@ -2191,6 +2231,21 @@ describe('DtSlider Tests', () => {
         expect(emitted[emitted.length - 1][0]).toBe(90);
 
         document.documentElement.classList.remove('rtl-test-marker');
+      });
+
+      it('does not resync on a class/style mutation to an unrelated element elsewhere in the document', async () => {
+        // The observer used to watch the whole document (subtree: true on
+        // documentElement), re-running getComputedStyle on any class/style
+        // mutation anywhere on the page — including document.body, which is
+        // neither controlRef's own ancestor chain nor documentElement itself.
+        const getComputedStyleSpy = vi.spyOn(window, 'getComputedStyle');
+        const callsBefore = getComputedStyleSpy.mock.calls.length;
+
+        document.body.classList.add('unrelated-marker');
+        await nextTick();
+
+        expect(getComputedStyleSpy.mock.calls.length).toBe(callsBefore);
+        document.body.classList.remove('unrelated-marker');
       });
 
       it('swaps Shift+ArrowRight to decrease (matching the native RTL-flipped arrow keys)', async () => {
@@ -3847,7 +3902,7 @@ describe('DtSlider Tests', () => {
   describe('Parent v-model feedback during a drag', () => {
     const controlRect = { top: 0, left: 0, right: 100, bottom: 20, width: 100, height: 20 };
 
-    it('reports the full committed transition via change, even when the parent echo normalizes the dragged value onto the step grid', async () => {
+    it('holds a magnetic snap point through a real parent v-model echo, then reports the quantized commit on release', async () => {
       const ParentWithVModel = defineComponent({
         name: 'ParentWithVModel',
         components: { DtSlider },
@@ -3886,12 +3941,16 @@ describe('DtSlider Tests', () => {
       });
       await control.trigger('pointermove', { pointerId: 1, clientX: 42, buttons: 1 });
       await nextTick();
-      // The parent's grid-corrected echo should already have landed.
-      expect(parentWrapper.vm.value).toBe(50);
+      // The parent's echo of 42 should have already round-tripped — it must
+      // come back as 42, not get silently re-snapped onto the step grid
+      // (50) just because it passed through a real v-model assignment.
+      expect(parentWrapper.vm.value).toBe(42);
 
       await control.trigger('pointerup', { pointerId: 1 });
       await nextTick();
 
+      // Release re-quantizes the held off-grid value onto the real grid —
+      // this part is intentional, not the bug the hold above guards against.
       expect(parentWrapper.vm.value).toBe(50);
       expect(parentWrapper.vm.changeEvents).toEqual([50]);
 

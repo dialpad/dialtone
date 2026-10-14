@@ -553,6 +553,11 @@ const isVertical = computed(() => props.orientation === 'vertical');
 
 const { isRtl } = useSliderDirection(controlRef);
 
+// Hoisted above useSliderValue (normally wired in right before
+// useSliderInteraction below) so useSliderValue's own reactive watchers can
+// tell a held magnetic snap apart from a genuinely new external value.
+const { activeSnapValue, findMagneticSnapPoint } = useSliderMagneticSnap(props, { controlRef, isVertical });
+
 const {
   internalValues,
   lastCommittedValues,
@@ -564,7 +569,7 @@ const {
   thumbNativeMax,
   thumbNativeStep,
   formatValue,
-} = useSliderValue(props, emit, { isRange });
+} = useSliderValue(props, emit, { isRange, activeSnapValue });
 
 // Recurses into slot vnodes for actual TEXT, not just "something renders" —
 // an icon-only #label (e.g. a bare <dt-icon> with no text of its own) would
@@ -627,8 +632,6 @@ const wrapperAttrs = computed(() => {
   const base = removeClassStyleAttrs(attrs);
   return Object.fromEntries(Object.entries(base).filter(([key]) => !THUMB_ARIA_KEYS.includes(key)));
 });
-
-const { activeSnapValue, findMagneticSnapPoint } = useSliderMagneticSnap(props, { controlRef, isVertical });
 
 const {
   isDragging,

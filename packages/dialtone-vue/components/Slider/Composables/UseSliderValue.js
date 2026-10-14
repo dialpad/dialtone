@@ -4,7 +4,14 @@ import { ref, computed, watch, onMounted } from 'vue';
 // internalValues — clamped, step-snapped, range-ordered, gap-enforced. isRange
 // is prop-derived state, not value normalization, so it's passed in rather
 // than owned here.
-export function useSliderValue(props, emit, { isRange }) {
+export function useSliderValue(props, emit, { isRange, activeSnapValue }) {
+  // Whether thumbIndex currently holds an active magnetic snap at exactly
+  // its present value — reapplying step/gap constraints to it would destroy
+  // the (intentionally off-grid) hold for no reason; held values are already
+  // clamped within [min, max] by findMagneticSnapPoint itself.
+  function isActivelyHeld(thumbIndex, val) {
+    return activeSnapValue?.value[thumbIndex] === val;
+  }
   // JS stringifies a tiny number in exponential notation ("5e-7", not
   // "0.0000005") — no "." for the plain branch below to find, so this used
   // to report 0 decimal places and silently truncate valid tiny values.
@@ -220,8 +227,16 @@ export function useSliderValue(props, emit, { isRange }) {
     () => props.modelValue,
     (newVal) => {
       if (newVal === undefined || newVal === null) return;
-      const next = normalizeModelValue(newVal);
       const current = internalValues.value;
+      const incoming = Array.isArray(newVal) ? newVal : [newVal];
+      // A held magnetic snap is intentionally off-grid — normalizeModelValue
+      // doesn't know that and re-snaps it onto the step grid regardless. If
+      // the parent simply echoed back exactly what we just emitted (the
+      // common v-model round trip), there's nothing to correct; restore the
+      // held value so the echo doesn't silently destroy the hold.
+      const next = normalizeModelValue(newVal).map((v, i) => (
+        incoming[i] === current[i] && isActivelyHeld(i, current[i]) ? current[i] : v
+      ));
       if (next.length !== current.length || next.some((v, i) => v !== current[i])) {
         // internalValues already diverged from lastCommittedValues means a
         // drag/keyboard interaction is mid-flight and this echo is just our
@@ -242,7 +257,6 @@ export function useSliderValue(props, emit, { isRange }) {
       // out-of-bounds clamp, invalid length) — that correction must reach the
       // parent's own v-model, or it stays silently out of sync. Safe against
       // feedback loops since normalizeModelValue is idempotent.
-      const incoming = Array.isArray(newVal) ? newVal : [newVal];
       const needsCorrection = next.length !== incoming.length || next.some((v, i) => v !== incoming[i]);
       if (needsCorrection) {
         emit('update:modelValue', Array.isArray(newVal) ? [...next] : next[0]);
@@ -267,7 +281,13 @@ export function useSliderValue(props, emit, { isRange }) {
       // commit (pointer up / blur).
       const alreadyUncommitted = cur.length !== lastCommittedValues.value.length
         || cur.some((v, i) => v !== lastCommittedValues.value[i]);
-      const next = applyValueConstraints(cur);
+      // Same hold-preserving exception as the modelValue watcher above — a
+      // held value still within the (possibly just-changed) [min, max]
+      // bounds shouldn't be re-snapped onto the grid just because an
+      // unrelated reactive prop changed mid-drag.
+      const next = applyValueConstraints(cur).map((v, i) => (
+        isActivelyHeld(i, cur[i]) && cur[i] >= props.min && cur[i] <= props.max ? cur[i] : v
+      ));
       if (next.length !== cur.length || next.some((v, i) => v !== cur[i])) {
         internalValues.value = next;
         const payload = isRange.value ? [...next] : next[0];

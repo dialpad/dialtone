@@ -37,6 +37,12 @@ export function useSliderInteraction(props, emit, {
   // owning pointer's further movement silently inert.
   let activePointerId = null;
 
+  // Not reactive — whether THIS drag's own pointerdown landed on an already-
+  // coincident pair, the only case resolveCoincidentHandoff should apply in.
+  // A drag that grabbed a clearly distinct thumb and happens to converge with
+  // its sibling mid-gesture should stop there, not hand off mid-flight.
+  let dragStartedCoincident = false;
+
   // A consumer can flip :disabled reactively while a thumb is focused or
   // hovered — the native input's own focus ring clears automatically, but
   // focusedThumbIndex/hoveredThumbIndex are separate internal state (also
@@ -193,10 +199,15 @@ export function useSliderInteraction(props, emit, {
     return Math.abs(val - lo) <= Math.abs(val - hi) ? 0 : 1;
   }
 
-  // While the thumbs are still coincident, the active one can be pinned at
-  // its sibling by the crossing clamp (low can never pass high) — dragging
-  // further the same way would otherwise freeze forever. Hands the drag off
-  // to the sibling, which this same move CAN actually satisfy.
+  // Only meaningful when a drag STARTS on a coincident pair (see
+  // dragStartedCoincident in onPointerDown) — which thumb that initial touch
+  // actually means to grab is genuinely ambiguous, unlike a drag that picked
+  // a clearly distinct thumb and simply happened to reach its sibling along
+  // the way (that one should stop there, same as a plain keyboard press).
+  // Without this, the active thumb can be pinned at its sibling by the
+  // crossing clamp (low can never pass high) with no way to free it for the
+  // rest of this same gesture. Hands off to the sibling, which this same
+  // move CAN actually satisfy.
   function resolveCoincidentHandoff(idx, rawVal) {
     if (!isRange.value) return idx;
     const [lo, hi] = internalValues.value;
@@ -210,6 +221,12 @@ export function useSliderInteraction(props, emit, {
     if (props.disabled) return;
     // Only handle primary pointer button
     if (event.pointerType === 'mouse' && event.button !== 0) return;
+    // A second pointer touching down mid-drag must not steal ownership —
+    // the real pointer's own eventual pointerup would then be evaluated
+    // against the hijacked activePointerId and silently dropped by the
+    // ownership guard in onPointerMove/onPointerUp, stranding the drag with
+    // no commit and isDragging stuck true.
+    if (isDragging.value && event.pointerId !== activePointerId) return;
 
     // Suppresses the browser's native mousedown default action, which would
     // otherwise shift focus to the nearest scrollable ancestor after our own
@@ -218,6 +235,8 @@ export function useSliderInteraction(props, emit, {
 
     const rawVal = getValueFromPointerEvent(event);
     const idx = getNearestThumbIndex(rawVal);
+    const [lo, hi] = internalValues.value;
+    dragStartedCoincident = isRange.value && internalValues.value.length === 2 && lo === hi;
 
     activeThumbIndex.value = idx;
     lastActiveThumbIndex.value = idx;
@@ -275,7 +294,9 @@ export function useSliderInteraction(props, emit, {
     }
 
     const rawVal = getValueFromPointerEvent(event);
-    const idx = resolveCoincidentHandoff(activeThumbIndex.value, rawVal);
+    const idx = dragStartedCoincident
+      ? resolveCoincidentHandoff(activeThumbIndex.value, rawVal)
+      : activeThumbIndex.value;
     if (idx !== activeThumbIndex.value) {
       activeThumbIndex.value = idx;
       lastActiveThumbIndex.value = idx;
