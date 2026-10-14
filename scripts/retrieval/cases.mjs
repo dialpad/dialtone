@@ -28,10 +28,18 @@ export const cases = [
     order(['DtText']),
     contains('variant-prop', 'variant'),
   ]),
-  baseline('box-exact', 'components', 'DtBox', [
-    order(['DtBox']),
-    contains('padding-prop', 'padding'),
-  ]),
+  baseline(
+    'box-exact',
+    'components',
+    'DtBox',
+    [order(['DtBox']), contains('padding-prop', 'padding')],
+    {
+      mcp: {
+        tool: 'get_component',
+        arguments: { component: 'DtBox', projection: 'props', field: 'padding' },
+      },
+    },
+  ),
   baseline('button-ambiguous', 'components', 'button', [
     order(['DtButton', 'DtButtonGroup', 'DtSplitButton']),
   ]),
@@ -58,7 +66,13 @@ export const cases = [
       contains('description', 'allows users to take an action'),
       contains('late-prop', 'assertiveOnFocus'),
     ],
-    { adapters: ['mcp'], limit: 1 },
+    {
+      adapters: ['mcp'], limit: 1,
+      mcp: {
+        tool: 'get_component',
+        arguments: { component: 'DtButton', projection: 'props', field: 'assertiveOnFocus' },
+      },
+    },
   ),
   baseline(
     'utility-pixel-ranking',
@@ -154,7 +168,13 @@ export const cases = [
       contains('checkbox-label', 'Associate checkbox labels'),
       contains('aria-literal', 'aria-describedby'),
     ],
-    { limit: 1 },
+    {
+      limit: 1,
+      mcp: {
+        tool: 'get_documentation',
+        arguments: { id: 'components/checkbox#accessibility' },
+      },
+    },
   ),
   baseline(
     'popover-migration',
@@ -165,7 +185,13 @@ export const cases = [
       contains('deprecated-name', 'DtOldPopover is deprecated'),
       contains('replacement', 'DtPopover'),
     ],
-    { limit: 1 },
+    {
+      limit: 1,
+      mcp: {
+        tool: 'get_documentation',
+        arguments: { id: 'components/popover#usage' },
+      },
+    },
   ),
   baseline(
     'tooltip-wrapper-literal',
@@ -206,7 +232,10 @@ export const cases = [
     [
       order(['DtButton']),
       contains('description', 'allows users to take an action'),
-      contains('answer-provenance', 'provenance'),
+      contains(
+        'answer-provenance',
+        '**Source:** bundled; installed compatibility not checked.',
+      ),
     ],
     { adapters: ['mcp'], limit: 1, wire: true },
   ),
@@ -245,24 +274,6 @@ const everyAdapter = (caseId, entry) =>
       .adapters.map((adapter) => [`${caseId}/${adapter}`, entry]),
   );
 export const expectedFailures = {
-  'box-exact/mcp': failure(
-    'DLT-3650',
-    'focused MCP retrieval',
-    'padding-prop',
-    'focused box detail retains padding beyond the first five summary props',
-  ),
-  'popover-migration/mcp': failure(
-    'DLT-3650',
-    'focused MCP retrieval',
-    'replacement',
-    'selected migration detail retains the replacement beyond the summary excerpt',
-  ),
-  'button-complete-prop/mcp': failure(
-    'DLT-3650',
-    'focused MCP retrieval',
-    'late-prop',
-    'focused component detail returns the requested later prop; replace with the integrated detail tool assertion',
-  ),
   ...everyAdapter(
     'utility-pixel-ranking',
     failure(
@@ -272,12 +283,6 @@ export const expectedFailures = {
       'padding 8px ranks the value-preserving d-p-100 utility before component internals',
     ),
   ),
-  'checkbox-accessibility-literal/mcp': failure(
-    'DLT-3650',
-    'focused MCP retrieval',
-    'aria-literal',
-    'selected documentation detail retains aria-describedby beyond the summary excerpt',
-  ),
   ...everyAdapter(
     'tooltip-wrapper-literal',
     failure(
@@ -286,17 +291,5 @@ export const expectedFailures = {
       'span-literal',
       'raw inline HTML literal survives generation and retrieval',
     ),
-  ),
-  'documentation-negative/mcp': failure(
-    'DLT-3650',
-    'focused MCP retrieval',
-    'meaningful-negative',
-    'zero matches produce an explicit negative response instead of empty text',
-  ),
-  'mcp-answer-provenance/mcp': failure(
-    'DLT-3650',
-    'bundled answer provenance',
-    'answer-provenance',
-    'integrated C2 provenance is present on the wire; replace this detection with exact C2 stamp/data assertions',
   ),
 };

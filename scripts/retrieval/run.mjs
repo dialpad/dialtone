@@ -191,7 +191,12 @@ async function query(testCase, adapter) {
     };
   }
   const response = await client.callTool(
-    { name: tool, arguments: { query: testCase.query, limit: testCase.limit } },
+    {
+      name: testCase.mcp?.tool ?? tool,
+      arguments: testCase.mcp?.arguments ?? {
+        query: testCase.query, limit: testCase.limit,
+      },
+    },
     undefined,
     { timeout: 10000 },
   );
@@ -206,6 +211,32 @@ async function query(testCase, adapter) {
     'Expected MCP text content',
   );
   const text = response.content.map((value) => value.text).join('\n');
+  if (testCase.mcp) {
+    const detail = response.structuredContent;
+    assert.ok(
+      detail && detail.match === 'exact',
+      'Expected exact structured detail',
+    );
+    return {
+      names: testCase.domain === 'components'
+        ? [detail.canonicalIdentity.canonicalName]
+        : detail.items.map(value =>
+          value.docTitle + (value.headingPath.length
+            ? ' > ' + value.headingPath.join(' > ')
+            : ''),
+        ),
+      text: JSON.stringify(detail),
+      bytes: Buffer.byteLength(JSON.stringify(response)),
+    };
+  }
+  assert.equal(response.structuredContent, undefined, 'Search responses remain text-only');
+  if (testCase.id === 'mcp-answer-provenance') {
+    const stamp = core.bundledProvenance.domains.components;
+    assert.ok(
+      text.includes(`${stamp.package}@${stamp.version}; SHA256 ${stamp.hash}.`),
+      'MCP component source matches the consumed dataset stamp',
+    );
+  }
   return {
     names: textNames(text, testCase.domain),
     text: testCase.wire ? JSON.stringify(response) : text,

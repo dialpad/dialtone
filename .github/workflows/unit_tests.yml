@@ -28,6 +28,9 @@ on:
       - '.claude/rules/css-utilities.md'
       - '.github/workflows/dialtone-documentation-tests.yml'
       - 'scripts/build-dialtone-vue-docs.mjs'
+      - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
+      - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
+      - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
   push:
     branches:
       - staging
@@ -57,6 +60,9 @@ on:
       - '.claude/rules/css-utilities.md'
       - '.github/workflows/dialtone-documentation-tests.yml'
       - 'scripts/build-dialtone-vue-docs.mjs'
+      - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
+      - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
+      - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
 
 env:
   HUSKY: 0
@@ -114,6 +120,9 @@ jobs:
               - 'packages/dialtone-tokens/**'
               - 'packages/dialtone-vue/**'
               - 'scripts/build-dialtone-vue-docs.mjs'
+              - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
+              - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
+              - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
             lint_plugins:
               - 'packages/eslint-plugin-dialtone/**'
               - 'packages/stylelint-plugin-dialtone/**'
@@ -212,6 +221,9 @@ jobs:
           node --test
           scripts/tests/dialtone-recommendations.test.mjs
           packages/dialtone-css/postcss/dialtone-docs.test.cjs
+
+      - name: Test MCP query protocol contracts
+        run: pnpm --dir packages/dialtone-mcp-server test:protocol
 
       - name: Build and test MCP startup and shutdown
         run: pnpm nx run dialtone-mcp-server:test-startup
