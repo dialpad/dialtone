@@ -10,6 +10,10 @@
         "{projectRoot}/tsconfig.json",
         "{projectRoot}/scripts/**/*",
         "{workspaceRoot}/scripts/lib/component-name.mjs",
+        "{workspaceRoot}/packages/dialtone-css/package.json",
+        "{workspaceRoot}/packages/dialtone-vue/package.json",
+        "{workspaceRoot}/packages/dialtone-icons/package.json",
+        "{workspaceRoot}/packages/dialtone-docs/package.json",
         "!{projectRoot}/src/generated/**",
         { "dependentTasksOutputFiles": "**/*.json", "transitive": true }
       ],

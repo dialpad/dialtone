@@ -45,10 +45,12 @@ All search functions return `{ results: SearchResult[]; notes: string[] }`. `sea
 
 | Function | Description |
 |----------|-------------|
-| `formatResults(results, query)` | Format utility class results as markdown |
-| `formatTokenResults(results, query)` | Format token results as markdown |
-| `formatComponentResults(results, query)` | Format component results as markdown |
-| `formatIconResults(results, query)` | Format icon results as markdown |
+| `formatResults(results, query, page?: SearchPage)` | Format utility class results as markdown |
+| `formatTokenResults(results, query, page?: SearchPage)` | Format token results as markdown |
+| `formatComponentResults(results, query, page?: SearchPage)` | Format component results as markdown |
+| `formatIconResults(results, query, page?: SearchPage)` | Format icon results as markdown |
+
+`SearchPage` is `{ offset: number; total: number }`. Pass it to show total counts and the page range; numbered result lists continue from the offset. Omit it to retain the existing summary format.
 
 ### Selected Detail and Provenance
 
@@ -61,10 +63,11 @@ These functions select source records; they do not resolve a consuming project's
 | `getValueDetail(name, tokens)` | Select an exact token name and retain every named theme record and available metadata. |
 | `formatTokenThemes(name, metadata, page)` | Render a selected page of token theme records as Markdown. |
 | `getComponentDocumentation(identity, componentDocumentation)` | Join verified public identity to authored page associations; qualify missing or ambiguous links and latest-documentation scope. |
+| `paginate(items, { offset, limit })` | Return `{ page, total, nextOffset }` using native array slicing. Callers validate inputs; `nextOffset` is `null` when no records remain. |
 | `createRetrievalEnvelope(options, bundledProvenance)` | Package selected records with match state, source, counts, omissions, a budget and continuation. Records remain intact; an oversized atomic record reports unavailable. |
 | `formatRetrievalEnvelope(envelope)` | Render qualification text and the envelope JSON with the same facts as structured detail output. |
 
-`COMPONENT_SECTIONS` lists component projections. `MATCH_STATES` lists `exact`, `candidate`, `no-match`, `unavailable` and `unverified`. `RETRIEVAL_BUDGETS` defines envelope budgets using an estimate of UTF-8 JSON bytes divided by four, rounded up. MCP applies the detail budget only to its new detail tools; its five existing searches remain text-only and preserve their result limits. See the [MCP retrieval contract](../dialtone-mcp-server/RETRIEVAL.md) for adapter validation, defaults and continuation.
+`COMPONENT_DETAIL_LIMIT` is the shared default of 20 selected records. `COMPONENT_SECTIONS` lists component projections. `MATCH_STATES` lists `exact`, `candidate`, `no-match`, `unavailable` and `unverified`. `RETRIEVAL_BUDGETS` defines envelope budgets using an estimate of UTF-8 JSON bytes divided by four, rounded up. MCP applies the detail budget only to its new detail tools; its five existing searches remain text-only and preserve their result limits. See the [MCP retrieval contract](../dialtone-mcp-server/RETRIEVAL.md) for adapter validation, defaults and continuation.
 
 ### Data Exports
 
@@ -99,7 +102,7 @@ Bundled provenance identifies the data supplied to the adapters. It does not est
 
 ## Types
 
-Exported interfaces include `SearchResult`, `Component`, `ComponentProp`, `ComponentEvent`, `ComponentSlot`, `ComponentImport`, `ComponentIdentity`, `InstalledComponentExports`, `UtilityClassesData`, `ClassData`, `ValueObject`, `TokensData`, `TokenData`, `ThemeData`, `Metadata`, `Icon`, `IconsData`.
+Exported interfaces include `SearchResult`, `SearchPage`, `Component`, `ComponentProp`, `ComponentEvent`, `ComponentSlot`, `ComponentImport`, `ComponentIdentity`, `InstalledComponentExports`, `UtilityClassesData`, `ClassData`, `ValueObject`, `TokensData`, `TokenData`, `ThemeData`, `Metadata`, `Icon`, `IconsData`.
 
 Detail exports also include `ComponentDetailArgs`, `ComponentSection`, `TokenThemeRecord`, `DocumentationFrontmatter`, `DocumentationRecord`, `ComponentDocCatalog` and `ComponentDocPage`. Retrieval types are `BundledProvenance`, `DomainStamp`, `MatchState`, `Continuation` and `RetrievalEnvelope`.
 
