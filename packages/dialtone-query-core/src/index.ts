@@ -14,13 +14,19 @@ export type {
   ComponentProp,
   ComponentEvent,
   ComponentSlot,
+  ComponentImport,
+  ComponentIdentity,
   Component,
   Icon,
   IconsData,
   DocumentationFrontmatter,
   DocumentationRecord,
-  SearchResult
+  SearchResult,
+  SearchPage
 } from './types.js';
+
+export { normalizeComponents, normalizeComponentName, componentNames, componentImportStatement, componentImportNote } from './component-identity.js';
+export type { InstalledComponentExports } from './component-identity.js';
 
 // Data
 export { utilityClasses, tokens, components, icons, documentation } from './data.js';
@@ -55,3 +61,16 @@ export { searchDocumentation, formatDocumentationResults } from './tools/docs.js
 
 // Filters
 export { applySmartFilter } from './utils/filters.js';
+
+export { getComponentDetail, COMPONENT_SECTIONS } from './component-detail.js';
+export type { ComponentDetailArgs, ComponentSection } from './component-detail.js';
+
+export { bundledProvenance, componentDocumentation } from './data.js';
+export { paginate, createRetrievalEnvelope, formatRetrievalEnvelope, MATCH_STATES, RETRIEVAL_BUDGETS, COMPONENT_DETAIL_LIMIT } from './retrieval.js';
+export type { BundledProvenance, DomainStamp, MatchState, Continuation, RetrievalEnvelope } from './retrieval.js';
+export { getComponentDocumentation } from './component-documentation.js';
+export type { ComponentDocCatalog, ComponentDocPage } from './component-documentation.js';
+export { getDocumentationDetail } from './tools/docs.js';
+
+export { getValueDetail, formatTokenThemes } from './value-retrieval.js';
+export type { TokenThemeRecord } from './value-retrieval.js';

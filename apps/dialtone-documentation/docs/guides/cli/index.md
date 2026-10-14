@@ -32,13 +32,13 @@ Confirm the installation:
 dialtone --help
 ```
 
-Run CLI commands from the root of your project. When the CLI finds installed Dialtone packages, it prints the version it is using:
+Run CLI commands from your project. The CLI prints one line on stderr naming the Dialtone data it uses:
 
 ```text
-Using local Dialtone data (v8.81.0)
+Using local Dialtone data: @dialpad/dialtone@10.4.0 (icons: @dialpad/dialtone-icons@5.2.0, docs: bundled)
 ```
 
-Without local Dialtone data, the CLI uses the data bundled with `@dialpad/dialtone-cli`.
+Without local Dialtone data, the line reads `Using bundled Dialtone data (@dialpad/dialtone-cli@<version>)`.
 
 ## Quick start
 
@@ -107,7 +107,7 @@ dialtone search "calendar" --format json
 
 ### Inspect a component
 
-Use `component` to inspect the public API for the closest component match:
+Use `component` to inspect a component's public API. The name must match exactly, ignoring case, separators, and the `Dt` prefix, so `button`, `dt-button`, and `DtButton` all work. For any other name, the CLI lists close matches on stderr and exits with an error. A deprecated component still works by its full name, with a note naming its replacement.
 
 ```bash
 dialtone component button
@@ -174,11 +174,13 @@ Documentation is bundled with the CLI rather than resolved from your project's i
 
 ### Generate context for a coding agent
 
-Use `prompt` to produce a compact component summary with its props, slots, events, and import path:
+Use `prompt` to produce a compact component summary with its props, slots, and events. It includes an import hint only when the CLI can verify a public export route for the component:
 
 ```bash
 dialtone prompt button
 ```
+
+Internal components show `Import unavailable` instead of an import. If the CLI cannot verify the installed package's exports, it shows `Import unverified` and advises upgrading component metadata or checking those exports. JSON output uses `import: null` when no verified route is available.
 
 Copy the result to your clipboard on macOS:
 
@@ -206,13 +208,17 @@ For programmatic use, prefer `--format json` instead of parsing the default term
 
 ## Data sources
 
-The CLI resolves data from the directory where you run it. It checks these sources in order:
+The CLI looks for installed packages the way Node does, in the `node_modules` folders in and above the directory you run it from:
 
-1. Installed `@dialpad/dialtone-css`, `@dialpad/dialtone-vue`, and `@dialpad/dialtone-icons` packages.
-2. The installed `@dialpad/dialtone` package.
-3. Data bundled with `@dialpad/dialtone-cli`.
+1. If a `package.json` at or above your directory, up to the repository root, depends on `@dialpad/dialtone`, the CLI uses that package's component, token, and utility data, and the icons package it depends on.
+2. Otherwise, it uses installed `@dialpad/dialtone-vue`, `@dialpad/dialtone-css`, and `@dialpad/dialtone-icons` packages, and fills any gaps from an installed `@dialpad/dialtone`.
+3. Anything it can't resolve comes from the data bundled with `@dialpad/dialtone-cli`. Documentation search always uses bundled content.
 
-The CLI uses local component APIs, tokens, utility classes, and icons when their generated data is available. It falls back to bundled data for anything it cannot resolve. Documentation search always uses the content bundled with the CLI.
+The source line lists any data that came from somewhere other than the main package. If `package.json` declares a caret, tilde, or exact version of `@dialpad/dialtone` (such as `^10.0.0`) and the installed copy has a different major version, the CLI prints a warning. If `package.json` declares `@dialpad/dialtone` but the CLI can't find an installed copy, it warns and uses bundled data. Yarn Plug'n'Play installs have no `node_modules`, so the CLI uses bundled data there.
+
+Import hints in `component` and `prompt` output appear only for verified public exports. Installed `@dialpad/dialtone` data uses its verified `@dialpad/dialtone/vue` route, or `@dialpad/dialtone/vue3` for versions before 9.173 that expose that route. Installed `@dialpad/dialtone-vue` data and bundled component data use verified routes from `@dialpad/dialtone-vue`.
+
+Bundled import hints are verified against the bundled Vue source version. They do not establish that `@dialpad/dialtone-vue` is installed at that version or that the import is compatible with your project's dependencies.
 
 Use `--bundled` when you want to ignore installed packages and query the CLI's bundled data:
 
@@ -236,7 +242,7 @@ You can install both. The CLI handles explicit terminal queries; the MCP server 
 
 ## Update the CLI
 
-The CLI checks npm for a newer version without blocking a command. Update it globally when an update is available:
+The CLI checks npm for a newer version in the background, and gives up after 3 seconds. Update it globally when an update is available:
 
 ```bash
 npm install -g @dialpad/dialtone-cli@latest
@@ -256,7 +262,7 @@ npm install -g @dialpad/dialtone-cli
 
 ### Results do not match the project
 
-Run the command from the project root. The `Using local Dialtone data` message confirms that the CLI found installed Dialtone package data. If the message is absent, the CLI is using its bundled data.
+Run the command from inside the project. The source line names the package and version each kind of data came from; `bundled` means the CLI couldn't find installed data for it. A version warning means the installed packages don't match `package.json`; reinstall dependencies.
 
 ### A search returns no useful results
 
@@ -267,6 +273,14 @@ dialtone search "input|select|menu"
 ```
 
 Use the focused `component`, `token`, `utility`, or `docs` command once you know which type of result you need.
+
+### Show the search engine's debug output
+
+Set `DIALTONE_DEBUG=1` to print the search engine's debug output to stderr, including the parsed query and how many results each step matched:
+
+```bash
+DIALTONE_DEBUG=1 dialtone component stack --prop gap
+```
 
 ## Resources
 

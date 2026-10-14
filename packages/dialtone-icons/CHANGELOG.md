@@ -1,3 +1,24 @@
+## [5.2.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v5.2.0...dialtone-icons/v5.2.1) (2026-10-13)
+
+# [5.2.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v5.1.0...dialtone-icons/v5.2.0) (2026-09-29)
+
+
+### Features
+
+* **Icons:** DLT-3613 add email-rejected and chat-rejected icons ([#1442](https://github.com/dialpad/dialtone/issues/1442)) ([153a6cc](https://github.com/dialpad/dialtone/commit/153a6cc2091da0696d32ec92411e39f65926a4d2))
+
+# [5.1.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v5.0.0...dialtone-icons/v5.1.0) (2026-09-29)
+
+
+### Documentation
+
+* NO-JIRA change dialtone channel link to slack ([#1441](https://github.com/dialpad/dialtone/issues/1441)) ([cb330ca](https://github.com/dialpad/dialtone/commit/cb330ca7d547b0000564f2ba9cfe80022437d4db))
+
+
+### Features
+
+* **Dialtone Icons:** NO-JIRA add microsoft-sharepoint brand-full-color icon ([#1443](https://github.com/dialpad/dialtone/issues/1443)) ([89b38f0](https://github.com/dialpad/dialtone/commit/89b38f0037d935ae7bb6fba2697d41a5a7f3b88a))
+
 # [5.0.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v4.59.0...dialtone-icons/v5.0.0) (2026-09-16)
 
 

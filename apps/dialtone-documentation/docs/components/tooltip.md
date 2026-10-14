@@ -34,7 +34,7 @@ It's possible to change the tooltip default placement with directive arguments, 
 
 #### With Object Syntax
 
-It's possible to change any property of the tooltip with object syntax.
+It's possible to change any property of the tooltip with object syntax. Object syntax also accepts `showArrow: false` to hide the tooltip arrow.
 
 ```vue demo
 <dt-button v-dt-tooltip="{ message: 'Tooltip text', placement: 'bottom-start', delay: false }">Placeholder Button</dt-button>
@@ -88,6 +88,34 @@ A tooltip has two slots:
   <template #anchor>
     <dt-button>
       Hover me
+    </dt-button>
+  </template>
+</dt-tooltip>
+```
+
+### Without Arrow
+
+Set `showArrow` to `false` to hide the tooltip arrow.
+
+```vue demo
+<dt-tooltip
+  :show-arrow="false"
+  :message="i18n.$t('DIALTONE_TOOLTIP_WITHOUT_ARROW_MESSAGE')"
+>
+  <template #anchor>
+    <dt-button>
+      {{ i18n.$t('DIALTONE_TOOLTIP_WITHOUT_ARROW_LABEL') }}
+    </dt-button>
+  </template>
+</dt-tooltip>
+<!-- @code -->
+<dt-tooltip
+  :show-arrow="false"
+  message="Tooltip without an arrow"
+>
+  <template #anchor>
+    <dt-button>
+      Without Arrow
     </dt-button>
   </template>
 </dt-tooltip>
@@ -181,10 +209,12 @@ You are encouraged to consult the ARIA documentation for the particular role.
 
 <script setup>
 import { inject } from 'vue';
+import { DialtoneLocalization } from '@dialpad/dialtone-vue';
 import ExampleTooltipDirections from '@exampleComponents/ExampleTooltipDirections.vue';
 
 const dialtoneConstants = inject('dialtoneConstants', {});
 const directions = dialtoneConstants.TOOLTIP_DIRECTIONS;
+const i18n = new DialtoneLocalization();
 </script>
 
 ## Vue API

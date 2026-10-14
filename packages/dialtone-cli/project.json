@@ -8,13 +8,19 @@
         "{projectRoot}/src/**/*",
         "{projectRoot}/package.json",
         "{projectRoot}/tsconfig.json",
-        "{projectRoot}/rollup.config.js"
+        "{projectRoot}/rollup.config.js",
+        { "dependentTasksOutputFiles": "**/*.{js,json,d.ts}", "transitive": true }
       ],
       "outputs": ["{projectRoot}/build"],
       "options": {
         "cwd": "{projectRoot}",
         "command": "pnpm exec rollup -c"
       }
+    },
+    "test": {
+      "executor": "nx:run-script",
+      "dependsOn": ["build"],
+      "options": { "script": "test" }
     },
     "publish": {
       "executor": "nx:run-commands",

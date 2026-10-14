@@ -1,8 +1,9 @@
 import { parse } from 'vue-docgen-api';
 import path, { join } from 'path';
 import { fileURLToPath } from 'url';
-import fs, { writeFile } from 'fs';
+import fs from 'fs';
 import { getValidFileList } from '../common/utils/server.mjs';
+import { readPublicComponentExports, uniqueComponentFiles, withComponentIdentity } from './lib/vue-component-identity.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -41,19 +42,20 @@ const deprecatedComponents = {
 const distPath = join(__dirname, `../packages/dialtone-vue/dist`);
 const dialtoneVueRootFolder = join(__dirname, `../packages/dialtone-vue`);
 const outputPath = `${distPath}/component-documentation.json`;
-const fileList = getValidFileList(dialtoneVueRootFolder + '/components');
+const manifest = JSON.parse(fs.readFileSync(join(dialtoneVueRootFolder, 'package.json'), 'utf8'));
+const publicExports = readPublicComponentExports(dialtoneVueRootFolder);
+// Preserve records used by editor/docs consumers, adding any public SFCs the
+// historical filename scan missed. Export identity, not filenames, is authority.
+const fileList = uniqueComponentFiles([
+  ...getValidFileList(dialtoneVueRootFolder + '/components'), ...publicExports.keys(),
+]);
 
 function writeDocumentationFile (data) {
   const jsonData = JSON.stringify(data);
 
-  if (!fs.existsSync(distPath)) {
-    fs.mkdirSync(distPath);
-  }
-
-  writeFile(outputPath, jsonData, 'utf8', (err) => {
-    if (err) throw new Error('An error occurred while writing JSON Object to File.');
-    console.info('Documentation created successfully');
-  });
+  fs.mkdirSync(distPath, { recursive: true });
+  fs.writeFileSync(outputPath, jsonData, 'utf8');
+  console.info('Documentation created successfully');
 }
 
 /**
@@ -88,6 +90,7 @@ async function parseDocumentation (fileList) {
       if (defineOptionsName) {
         doc.displayName = defineOptionsName;
       }
+      doc = withComponentIdentity(doc, filePath, publicExports, dialtoneVueRootFolder, manifest);
 
       // Add metadata to deprecated components
       const componentName = doc.displayName;
@@ -103,8 +106,8 @@ async function parseDocumentation (fileList) {
       }
       return doc;
     });
-  } catch {
-    throw new Error('Parsing documentation');
+  } catch (cause) {
+    throw new Error('Parsing documentation', { cause });
   }
 }
 
@@ -112,4 +115,5 @@ parseDocumentation(fileList).then(docs => {
   writeDocumentationFile(docs);
 }).catch(err => {
   console.error(err);
+  process.exitCode = 1;
 });

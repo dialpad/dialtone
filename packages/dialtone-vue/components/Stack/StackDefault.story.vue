@@ -3,6 +3,7 @@
     <dt-stack
       :direction="$attrs.direction"
       :as="stackElement"
+      :wrap="$attrs.wrap"
       :gap="$attrs.gap"
       :align="$attrs.align"
       :justify="$attrs.justify"

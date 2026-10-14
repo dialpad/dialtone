@@ -3,8 +3,8 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-03-04
-related_packages: [dialtone-vue, dialtone-documentation]
+last_updated: 2026-10-13
+related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server, dialtone-docs]
 ---
 
 # CI Pipeline
@@ -30,7 +30,7 @@ These checks are required on every PR:
 | Check | Workflow | Command |
 |-------|---------|---------|
 | Lint PR Title | `lint-pr.yml` | `pnpm commitlint` against PR title |
-| Unit Tests | `unit_tests.yml` | `pnpm nx run dialtone-vue:test:coverage` |
+| Unit Tests | `unit_tests.yml` | Path-filtered test jobs; see `unit_tests.yml` below |
 | Accessibility Tests | `a11y_tests.yml` | `pnpm nx run dialtone-vue:test:a11y` |
 | Bundle Size Check | `bundle-size-check.yml` | `pnpm pack` + size comparison |
 | Visual Tests | `visual_tests.yml` | `pnpm nx run dialtone-vue:test:visual` (required only with `visual-test-ready` label) |
@@ -41,13 +41,34 @@ These checks are required on every PR:
 
 ### `unit_tests.yml`
 
-**Trigger:** Push to `staging` (paths: `packages/dialtone-vue/**`), PR to any branch (same paths)
+**Trigger:** Push to `staging` and pull requests touching Vue, CSS, tokens, icons, Combinator, query-core, CLI, MCP, documentation content/generators, generator tests, ESLint, shared retrieval fixtures, root `nx.json`/`package.json`/`pnpm-lock.yaml`, or the lookup workflow itself. Exact paths are listed in `unit_tests.yml`.
 
-**What it does:**
-1. Setup environment
-2. Run `pnpm nx run dialtone-vue:test:coverage`
+**What it does:** A `changes` job (`dorny/paths-filter`) decides which test jobs run. Each job sets up the environment, then runs its commands:
 
-Outputs a coverage report in JSON and HTML. Coverage thresholds enforced: 80% branches, 70% functions, 85% lines and statements. Build fails if thresholds are not met.
+| Job               | Runs when these change                                                                                              | Command                                                                                                                                                                                               |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `test`            | `packages/dialtone-vue/**`                                                                                          | `pnpm nx run dialtone-vue:test:coverage`                                                                                                                                                              |
+| `test-tokens`     | `packages/dialtone-tokens/**`                                                                                       | `pnpm nx run dialtone-tokens:test`                                                                                                                                                                    |
+| `test-combinator` | `packages/combinator/**`                                                                                            | `pnpm nx run dialtone-combinator:test`                                                                                                                                                                |
+| `test-cli`        | Lookup adapters, their source datasets/generators/tests, documentation pages, ESLint, and shared retrieval fixtures | Build CLI/MCP and their datasets; run query-core, CLI, AI docs and ESLint tests; run the public-identity generator suite, shared fixture/cache contracts, cross-adapter retrieval regressions, MCP query protocol contracts, MCP startup/shutdown and shared-core release selection, and existing documentation search scenarios |
+
+The `test` job outputs a coverage report in JSON and HTML. Coverage thresholds enforced: 80% branches, 70% functions, 85% lines and statements. Build fails if thresholds are not met.
+
+The lookup build runs `pnpm nx run-many -t build -p dialtone-cli dialtone-mcp-server`. It generates the component, token, utility, icon, and documentation data the tests consume. Changes to source content also run these suites, so a component, icon, CSS rule, or docs-page change can expose retrieval regressions on the same PR.
+
+Documentation-link inputs also include the shared component-name normalizer, site-reference, frontmatter and source-page helpers. MCP protocol contracts run with `pnpm --dir packages/dialtone-mcp-server test:protocol`; the documentation suite runs once and includes source-derived link checks.
+
+Shared contracts run with `node --test scripts/retrieval/*.test.mjs`; `node scripts/retrieval/run.mjs` exercises query-core, CLI JSON and live MCP tool responses. The retrieval harness disables optional registry update-check I/O for deterministic lookup checks. Known retrieval failures carry a precise assertion, owning issue and removal condition; an unrelated failure or unexpected pass fails the job. These checks do not establish startup/network behavior or consumer build compatibility.
+
+The MCP startup target (`pnpm nx run dialtone-mcp-server:test-startup`) also depends on its build, so startup and shutdown checks run against a built server. The release-path suite (`pnpm --dir packages/dialtone-mcp-server test:release-paths`) checks commit selection using the installed release implementation without publishing packages.
+
+---
+
+### `dialtone-documentation-tests.yml`
+
+**Trigger:** Push to `staging` and pull requests touching `apps/dialtone-documentation/**`, the Vue docs generator, `scripts/lib/**/*.mjs`, `scripts/tests/**`, the imported common helper, this workflow, or `pnpm-lock.yaml`.
+
+**What it does:** Runs `pnpm nx run dialtone-documentation:test`, builds the documentation site with `pnpm nx run dialtone-documentation:build`, and verifies that `llms.txt` and `llms-full.txt` exist and are nonempty. Generator/helper/test routing runs the existing documentation checks. The public-identity generator suite runs after the lookup build.
 
 ---
 
