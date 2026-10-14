@@ -205,12 +205,14 @@ function appendSubdirectoryLinks (outputBase) {
  */
 function loadAllDataSources () {
   const componentDocs = loadJson(COMPONENT_DOCS_JSON, 'component-documentation.json');
-  const docsManifest = JSON.parse(readFileSync(resolve(ROOT, 'package.json'), 'utf8'));
-  const vueManifest = JSON.parse(readFileSync(resolve(ROOT, '../../packages/dialtone-vue/package.json'), 'utf8'));
-  const dependency = docsManifest.devDependencies?.[vueManifest.name] ?? docsManifest.dependencies?.[vueManifest.name];
+  const docsManifest = loadJson(resolve(ROOT, 'package.json'), 'docs package.json');
+  const vueManifest = loadJson(resolve(ROOT, '../../packages/dialtone-vue/package.json'), 'dialtone-vue package.json');
+  const dependency = docsManifest?.devDependencies?.[vueManifest?.name]
+    ?? docsManifest?.dependencies?.[vueManifest?.name];
   // Workspace docs use this source package. Other dependency ranges need their
   // own installed metadata before a generated import can be certified.
-  const profile = dependency?.startsWith('workspace:') || dependency === vueManifest.version
+  const profile = typeof dependency === 'string' && typeof vueManifest?.name === 'string' && typeof vueManifest?.version === 'string'
+    && (dependency.startsWith('workspace:') || dependency === vueManifest.version)
     ? { package: vueManifest.name, version: vueManifest.version, dependency }
     : null;
   setComponentDocs(componentDocs || [], profile);
