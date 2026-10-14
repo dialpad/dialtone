@@ -172,7 +172,7 @@ onMounted(() => {
     });
 
     const playVideo = (video) => {
-      if (reducedMotionQuery.matches) return;
+      if (reducedMotionQuery.matches || document.hidden) return;
       video.play().catch(() => {});
     };
 
@@ -193,9 +193,10 @@ onMounted(() => {
       : null;
 
     // Without an observer there's no reliable visibility check, so videos stay
-    // paused on their posters.
+    // paused on their posters. IntersectionObserver doesn't report a hidden tab,
+    // so page visibility is checked here too (and re-synced on visibilitychange).
     const syncVideoPlayback = () => {
-      if (!videoObserver || reducedMotionQuery.matches) {
+      if (!videoObserver || reducedMotionQuery.matches || document.hidden) {
         carouselVideos.forEach(video => video.pause());
         return;
       }
@@ -439,6 +440,7 @@ onMounted(() => {
     carouselContainer.addEventListener('scroll', handleScroll, { passive: true });
     carouselContainer.addEventListener('scrollend', handleScrollEnd);
     reducedMotionQuery.addEventListener('change', handleReducedMotionChange);
+    document.addEventListener('visibilitychange', syncVideoPlayback);
     window.addEventListener('resize', handleResize);
 
     if ('IntersectionObserver' in window) {
@@ -468,6 +470,7 @@ onMounted(() => {
       carouselContainer.removeEventListener('scroll', handleScroll);
       carouselContainer.removeEventListener('scrollend', handleScrollEnd);
       reducedMotionQuery.removeEventListener('change', handleReducedMotionChange);
+      document.removeEventListener('visibilitychange', syncVideoPlayback);
       window.removeEventListener('resize', handleResize);
     };
   }
