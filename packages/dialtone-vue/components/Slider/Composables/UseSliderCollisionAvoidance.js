@@ -218,13 +218,9 @@ export function useSliderCollisionAvoidance(props, {
   const readoutVisibility = computed(() => internalValues.value.map((_, i) => isReadoutOpen(i)));
 
   // Rendered widths change with formatted TEXT (getValueText/prefix/suffix),
-  // not just the underlying values — a locale change at unchanged values must
-  // still recheck. Watching getValueText/prefix/suffix's own identity isn't
-  // enough: a STABLE getValueText that closes over some other reactive value
-  // (e.g. a locale/units ref) produces different text on the same render
-  // without its own reference ever changing — this computes the actual
-  // formatted strings so a change in OUTPUT is what's watched, not just a
-  // change in which function happens to be passed in.
+  // not just the values — a STABLE getValueText closing over some other
+  // reactive value (e.g. a locale ref) can produce different text with its
+  // own reference never changing, so this watches the actual output instead.
   const formattedValues = computed(() => internalValues.value.map((v, i) => formatValue(v, i)));
 
   let markCollisionResizeObserver = null;

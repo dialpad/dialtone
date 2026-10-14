@@ -594,14 +594,12 @@ function slotHasText(vnodes) {
   });
 }
 
-// Whether what ACTUALLY renders for the label — the #label slot when a
-// consumer provides one (it fully replaces the prop's own <dt-text>
-// fallback, per the template's plain <slot> fallback semantics; a slot that
-// renders no text, e.g. a bare icon, means there's no accessible name here
-// regardless of what the unused label prop says), otherwise the label prop
-// itself — provides real text. Independent of showLabel, which only
-// controls visibility, not whether a name exists. Named to match
-// DtCheckbox/DtRadio's own hasLabelContent.
+// Whether what ACTUALLY renders for the label has real text — the #label
+// slot when a consumer provides one (it fully replaces the prop's own
+// fallback markup, so a textless slot, e.g. a bare icon, means no
+// accessible name regardless of the unused prop), otherwise the prop
+// itself. Independent of showLabel, which only controls visibility. Named
+// to match DtCheckbox/DtRadio's own hasLabelContent.
 const hasLabelContent = computed(() => {
   if (slots.label) return slotHasText(slots.label({ value: currentValue.value }));
   return !!props.label?.trim();
@@ -722,10 +720,9 @@ function focus() {
 }
 
 function blur() {
-  // Blurs whichever thumb actually has focus, not always thumb 0 — in range
-  // mode, blurring the wrong (unfocused) thumb left the real one focused
-  // with its deferred keyboard commit (onThumbBlur's commitIfChanged)
-  // never firing. A no-op, same as native .blur(), when nothing is focused.
+  // Whichever thumb actually has focus, not always thumb 0 — in range mode
+  // the wrong (unfocused) thumb left the real one's deferred keyboard commit
+  // (commitIfChanged) never firing. No-op when nothing is focused.
   thumbRefs.value.find((el) => el === document.activeElement)?.blur();
 }
 

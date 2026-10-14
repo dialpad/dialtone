@@ -593,10 +593,8 @@ describe('DtSlider Tests', () => {
         });
 
         it('remeasures when a STABLE getValueText callback\'s own OUTPUT changes (e.g. a closed-over locale/units ref), not just when its reference changes', async () => {
-          // getValueText itself is never recreated — only the external ref it
-          // reads changes. Watching getValueText's bare identity would miss
-          // this entirely; watching the actual FORMATTED text (what this
-          // fix does) catches it.
+          // getValueText itself never changes — only the external ref it
+          // reads does. Watching its bare identity would miss this.
           const unit = ref('');
           mockProps = { modelValue: 0, getValueText: (value) => `${value}${unit.value}` };
           updateWrapper();
@@ -936,13 +934,9 @@ describe('DtSlider Tests', () => {
     });
 
     it('falls back to aria-label, not aria-labelledby to an empty node, when the label PROP is non-empty but a provided #label slot overrides it with no text', () => {
-      // The #label slot fully replaces the prop's own <dt-text> fallback
-      // markup when provided (plain <slot> fallback semantics) — the prop's
-      // own text is never actually rendered here, so it must not count as
-      // "has a visible label" just because it happens to be non-empty.
-      // Before this fix, hasLabelContent checked the (unused) prop first and
-      // short-circuited there, wrongly pointing aria-labelledby at this
-      // empty slot's wrapper and dropping the explicit aria-label fallback.
+      // A provided #label slot fully replaces the prop's own fallback markup
+      // — its text is never actually rendered, so a non-empty prop alone
+      // must not count as "has a visible label".
       mockProps = { label: 'Volume' };
       mockAttrs = { 'aria-label': 'Explicit volume' };
       mockSlots = { label: '<svg aria-hidden="true"><use href="#icon-volume" /></svg>' };
@@ -1518,9 +1512,8 @@ describe('DtSlider Tests', () => {
       it('does not recreate a second thumb input when a controlled modelValue switches range to single mid-drag', async () => {
         // Range -> single mid-drag shrinks internalValues to length 1 while
         // the high thumb (index 1) is still the active drag target —
-        // without clearing activeThumbIndex, the next pointermove still
-        // writes into (now out-of-bounds) index 1, reviving a second input
-        // even though the public model stayed scalar the whole time.
+        // without clearing activeThumbIndex, the next pointermove revives a
+        // second input even though the public model stayed scalar.
         const attached = mount(DtSlider, {
           props: { ...baseProps, modelValue: [20, 80] },
           attachTo: document.body,
@@ -1556,13 +1549,9 @@ describe('DtSlider Tests', () => {
       });
 
       it('ignores pointerup/pointermove from an unrelated second pointer, so it cannot prematurely commit or freeze the real drag', async () => {
-        // setPointerCapture retargets POINTER events for pointerId 1 to
-        // controlRef, but does not stop an unrelated second pointer (e.g.
-        // another finger) from independently firing its own move/up on the
-        // same element — without pointer-ownership tracking, that second
-        // pointer's pointerup would end and commit the first pointer's drag,
-        // and the first pointer's continued movement would then be silently
-        // dropped (isDragging already false).
+        // setPointerCapture only retargets pointer 1's events — an
+        // unrelated second pointer's own pointerup would end and commit the
+        // first pointer's drag, silently dropping its continued movement.
         control.element.getBoundingClientRect = () => (
           { top: 0, left: 0, right: 100, bottom: 20, width: 100, height: 20 }
         );
@@ -1917,10 +1906,8 @@ describe('DtSlider Tests', () => {
         let emitted = wrapper.emitted('update:modelValue');
         expect(emitted[emitted.length - 1][0]).toBe(20);
 
-        // 20 is removed from the snap points mid-drag — the thumb should no
-        // longer be held there, even though 25 is still within 20's old
-        // (fixed 20px) RELEASE radius, which previously latched onto a point
-        // that was no longer offered at all.
+        // 20 is removed mid-drag — 25 is still within 20's old release
+        // radius, which previously stayed latched regardless.
         await wrapper.setProps({ snapPoints: [80] });
         await moveTo(25);
         emitted = wrapper.emitted('update:modelValue');
@@ -1928,12 +1915,9 @@ describe('DtSlider Tests', () => {
       });
 
       it('holds a fractional snap point exactly in range mode, same as single-thumb mode, instead of re-rounding it onto the step grid', async () => {
-        // The crossing clamp (low thumb vs. high thumb + gap) never touches
-        // this value at all — the low thumb is nowhere near the high one —
-        // so there is no reason for range mode's own IEEE-754 cleanup
-        // rounding to apply here either; it previously ran unconditionally
-        // and re-rounded the held 42.5 down to 43 (step=1), clearing the
-        // latch for no reason even though nothing actually clamped it away.
+        // The crossing clamp never touches this value — the low thumb is
+        // nowhere near the high one — yet range mode's rounding used to run
+        // unconditionally, re-rounding the held 42.5 down to 43 (step=1).
         mockProps = { modelValue: [20, 80], step: 1, snapPoints: [42.5] };
         updateWrapper();
         control = wrapper.find('[data-qa="dt-slider-control"]');
@@ -2150,12 +2134,9 @@ describe('DtSlider Tests', () => {
       });
 
       it('resyncs isRtl when direction changes via CSS/style rather than the dir attribute itself', async () => {
-        // The dir ATTRIBUTE never changes here — only what getComputedStyle
-        // resolves to, as a stylesheet rule or inline `direction: rtl` would
-        // produce. The MutationObserver that drives this must not be scoped
-        // to dir alone, or isRtl (and everything keyed off it: pointer math,
-        // centering transforms) stays stuck on its stale LTR value even
-        // though the browser has already mirrored the actual layout.
+        // The dir ATTRIBUTE never changes — only what getComputedStyle
+        // resolves to, as a CSS rule would produce. The observer must watch
+        // more than dir, or isRtl stays stuck on its stale LTR value.
         const original = window.getComputedStyle.bind(window);
         let direction = 'ltr';
         mockControlDirectionSpy = vi.spyOn(window, 'getComputedStyle').mockImplementation((el, ...rest) => {
@@ -2170,16 +2151,13 @@ describe('DtSlider Tests', () => {
         );
 
         direction = 'rtl';
-        // Mutates `class`, not `dir` — simulates a CSS-only direction change
-        // (e.g. a stylesheet rule keyed off this class) rather than the
-        // attribute this component used to exclusively watch for.
+        // Mutates `class`, not `dir` — simulates a CSS-only direction change.
         document.documentElement.classList.add('rtl-test-marker');
         await nextTick();
 
         await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 10, buttons: 1 });
         const emitted = wrapper.emitted('update:modelValue');
-        // Physical 10% from the left mirrors to value 90 under a correctly
-        // resynced RTL, not the LTR-mapped 10.
+        // Physical 10% from the left is 90 under correctly-resynced RTL.
         expect(emitted[emitted.length - 1][0]).toBe(90);
 
         document.documentElement.classList.remove('rtl-test-marker');
@@ -2473,11 +2451,9 @@ describe('DtSlider Tests', () => {
     });
 
     it('never emits a gap-widened value above max, even when rounding at a coarser precision than max\'s own would overshoot it', () => {
-      // gap = 3 * 0.1 = 0.3 (IEEE-754 noise aside). Widening hi alone from
-      // lo=0.8 would overshoot max (0.8+0.3=1.1 > 0.96), so this falls to the
-      // shrink-lo-alone branch: lo = hi - gap = 0.9 - 0.3 = 0.6, hi stays 0.9.
-      // Previously, rounding at min/step's precision (1 decimal place) could
-      // push a hi pinned at max (0.96) out to 1 — above max.
+      // Widening hi (0.9+0.3) would overshoot max (0.96), so this shrinks lo
+      // instead. Previously, rounding at min/step's precision (1 decimal
+      // place) could push a hi pinned at max (0.96) out to 1 — above max.
       mockProps = {
         modelValue: [0.8, 0.9], min: 0, max: 0.96, step: 0.1, minGapSteps: 3,
       };
@@ -2489,11 +2465,9 @@ describe('DtSlider Tests', () => {
     });
 
     it('prefers shrinking the low end over pinning the high end at max, so the high thumb is not left frozen', () => {
-      // gap = 2 * 10 = 20. Widening hi alone from lo=80 would overshoot max
-      // (80+20=100 > 95), so this takes the shrink-lo-alone branch instead of
-      // the old "always push hi to max" fallback — hi stays at 90 (its
-      // native max/min window isn't collapsed to a single point), lo moves
-      // down to 70.
+      // Widening hi (80+20) would overshoot max (95), so this shrinks lo
+      // instead of the old "always push hi to max" fallback — hi stays at
+      // 90, lo moves to 70.
       mockProps = {
         modelValue: [80, 90], min: 0, max: 95, step: 10, minGapSteps: 2,
       };
@@ -2501,8 +2475,7 @@ describe('DtSlider Tests', () => {
       thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
       const [lo, hi] = [Number(thumbInputs[0].element.value), Number(thumbInputs[1].element.value)];
       expect([lo, hi]).toEqual([70, 90]);
-      // The high thumb's own native min/max window must not collapse to a
-      // single point (min === max), or it can never move via arrow keys.
+      // Its native min/max window must not collapse to a single point.
       expect(thumbInputs[1].attributes('min')).not.toBe(thumbInputs[1].attributes('max'));
     });
 
@@ -2550,12 +2523,9 @@ describe('DtSlider Tests', () => {
     });
 
     it('grid-aligns the sibling thumb\'s native bound when the other thumb holds an off-grid magnetic snap point, instead of permanently mismatching its native step', async () => {
-      // A native <input>'s own stepMismatch validity is computed relative to
-      // ITS OWN min attribute, not this component's step origin (props.min)
-      // — if the low thumb's off-grid snap value (42) became the high
-      // thumb's native min as-is, every value the high thumb could actually
-      // reach on the REAL grid (0, 25, 50, 75, 100) would permanently
-      // mismatch that min's own step cadence, for as long as the snap held.
+      // A native <input>'s stepMismatch is relative to its OWN min — if the
+      // low thumb's off-grid snap (42) became the high thumb's native min
+      // as-is, every real grid value it could reach would mismatch it.
       mockProps = {
         modelValue: [25, 75], min: 0, max: 100, step: 25, snapPoints: [42],
       };
@@ -2571,8 +2541,7 @@ describe('DtSlider Tests', () => {
       thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
       expect(Number(thumbInputs[0].element.value)).toBe(42);
 
-      // The high thumb's native min must be a real grid point (a multiple of
-      // step from props.min) — 50, not the raw off-grid 42.
+      // Native min must be a real grid point (50), not the raw off-grid 42.
       expect(thumbInputs[1].attributes('min')).toBe('50');
     });
   });
@@ -2707,11 +2676,8 @@ describe('DtSlider Tests', () => {
       });
 
       it('preserves a tiny modelValue expressed in scientific notation on mount, instead of truncating it to 0', () => {
-        // String(1e-7) is the literal "1e-7" (JS switches to exponential
-        // notation below 1e-6) — no "." for decimalPlaces' plain branch to
-        // find, so it previously reported 0 decimal places for a genuinely
-        // valid, in-contract value, and toFixed(0) truncated 5e-7 down to 0
-        // right on mount.
+        // String(5e-7) has no "." for decimalPlaces' plain branch to find,
+        // so it previously reported 0 places and toFixed(0) truncated to 0.
         mockProps = {
           modelValue: 5e-7, min: 0, max: 1e-6, step: 1e-7,
         };
@@ -3822,10 +3788,8 @@ describe('DtSlider Tests', () => {
     });
 
     it('reserves space for an "interaction" readout even at rest, before any thumb is actually interacted with', () => {
-      // Only the readout's own visibility is interaction-gated (see the
-      // Interactivity Tests above) — the layout space it occupies is
-      // reserved the whole time, same as "always", so nothing after the
-      // slider jumps when the readout first becomes visible.
+      // Only visibility is interaction-gated — the space is reserved the
+      // whole time, same as "always", so nothing jumps when it appears.
       mockProps = { showMarks: false, readout: 'interaction' };
       updateWrapper();
       expect(wrapper.find(bodySelector).classes()).toContain('d-slider__body--reserve-annotation-space');
@@ -3850,9 +3814,8 @@ describe('DtSlider Tests', () => {
     });
   });
 
-  // A real parent component with a genuine v-model round trip — not
-  // wrapper.setProps(), which skips the child-emits-then-parent-echoes-back
-  // cycle entirely. That round trip is exactly what the bug below depends on.
+  // A real parent with a genuine v-model round trip — wrapper.setProps()
+  // would skip the child-emits-then-parent-echoes-back cycle the bug needs.
   describe('Parent v-model feedback during a drag', () => {
     const controlRect = { top: 0, left: 0, right: 100, bottom: 20, width: 100, height: 20 };
 
@@ -3863,11 +3826,13 @@ describe('DtSlider Tests', () => {
         data() {
           return { value: 75, changeEvents: [] };
         },
+
         methods: {
           onChange(payload) {
             this.changeEvents.push(payload);
           },
         },
+
         render() {
           return h(DtSlider, {
             label: 'Volume',
@@ -3887,16 +3852,13 @@ describe('DtSlider Tests', () => {
       control.element.setPointerCapture = () => {};
       control.element.getBoundingClientRect = () => controlRect;
 
-      // Start the drag at the thumb's current position (75), pull onto the
-      // 42 snap point, then release without any further move — the exact
-      // repro shape the bug depends on.
+      // Drag from 75 onto the 42 snap point, then release — the repro shape.
       await control.trigger('pointerdown', {
         pointerId: 1, pointerType: 'mouse', button: 0, clientX: 75, buttons: 1,
       });
       await control.trigger('pointermove', { pointerId: 1, clientX: 42, buttons: 1 });
       await nextTick();
-      // The parent's echoed, grid-corrected value should already have landed
-      // by now — this is the state the old bug silently stomped on.
+      // The parent's grid-corrected echo should already have landed.
       expect(parentWrapper.vm.value).toBe(50);
 
       await control.trigger('pointerup', { pointerId: 1 });

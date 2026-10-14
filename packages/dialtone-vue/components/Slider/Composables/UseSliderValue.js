@@ -5,12 +5,9 @@ import { ref, computed, watch, onMounted } from 'vue';
 // is prop-derived state, not value normalization, so it's passed in rather
 // than owned here.
 export function useSliderValue(props, emit, { isRange }) {
-  // JS switches a Number to exponential string notation below 1e-6 (and
-  // above 1e21) — "5e-7", not "0.0000005" — which has no literal "." for the
-  // plain branch below to find, silently reporting 0 decimal places for a
-  // genuinely tiny (but finite, in-contract) value. toFixed(0) on that value
-  // afterward truncated it to 0 outright — real data loss on mount, not just
-  // a display quirk.
+  // JS stringifies a tiny number in exponential notation ("5e-7", not
+  // "0.0000005") — no "." for the plain branch below to find, so this used
+  // to report 0 decimal places and silently truncate valid tiny values.
   function decimalPlaces(n) {
     const str = String(n);
     const eIndex = str.search(/e/i);
@@ -63,19 +60,12 @@ export function useSliderValue(props, emit, { isRange }) {
     if (gap <= 0) return values;
     let [lo, hi] = values;
     if (hi - lo >= gap) return values;
-    // Three strategies, tried in order of least to most disruptive. Widen hi
-    // alone first (lo stays exactly where it was) — the common case. Failing
-    // that (it would overshoot max), shrink lo alone instead (hi stays
-    // exactly where it was) rather than unconditionally pinning hi at max:
-    // the old "always widen hi first, pull lo down after" version could pin
-    // a thumb with native min === max (frozen, unable to move via arrow keys)
-    // even though a valid, less-disruptive pair existed — e.g. max=95,
-    // step=10, gap=20, [80,90] became [75,95] (high thumb frozen against
-    // max) instead of [70,90] (high thumb untouched, free to move up to 95).
-    // Only when NEITHER single-ended adjustment fits within [min, max] at all
-    // (the gap itself can't fit the domain from this pair) fall back to
-    // pinning hi at max and pulling lo down from there, clamped to min — a
-    // degenerate config already dev-warned elsewhere (UseSliderDevWarnings).
+    // Try widening hi alone first (lo stays put) — the common case. Failing
+    // that (it'd overshoot max), shrink lo alone instead of always pinning hi
+    // at max: that could freeze a thumb's native min === max even when a
+    // less disruptive pair existed, e.g. max=95, step=10, gap=20: [80,90]
+    // became [75,95] (frozen) instead of [70,90]. Only pin hi at max when
+    // neither single-ended fix fits the domain at all (dev-warned elsewhere).
     if (lo + gap <= props.max) {
       hi = lo + gap;
     } else if (hi - gap >= props.min) {
@@ -84,12 +74,10 @@ export function useSliderValue(props, emit, { isRange }) {
       hi = props.max;
       lo = Math.max(props.min, hi - gap);
     }
-    // Precision must include max's own decimal places, not just min/step's —
-    // a hi pinned exactly at max (e.g. 0.96) rounding at a coarser precision
-    // than max's own would push it back out of bounds (0.96 -> "1.0" at 1
-    // decimal place). The explicit clamp after rounding is a second,
-    // independent guarantee against that same class of overshoot, and
-    // against ordinary floating-point drift.
+    // Precision must include max's own decimal places — a hi pinned exactly
+    // at a fractional max (e.g. 0.96) rounding at a coarser precision could
+    // push it back out of bounds. The clamp after rounding is a second guard
+    // against that and ordinary float drift.
     const dp = Math.max(decimalPlaces(props.min), decimalPlaces(props.max), decimalPlaces(props.step));
     lo = Math.min(props.max, Math.max(props.min, parseFloat(lo.toFixed(dp))));
     hi = Math.min(props.max, Math.max(props.min, parseFloat(hi.toFixed(dp))));
@@ -146,18 +134,14 @@ export function useSliderValue(props, emit, { isRange }) {
     return ((val - props.min) / (props.max - props.min)) * 100;
   }
 
-  // Rounds a native min/max bound derived from a (possibly off-grid, e.g. an
-  // actively held magnetic snap — see thumbNativeStep below) sibling value
-  // onto the real application step grid, always toward being stricter (a min
-  // bound rounds up, a max bound rounds down) so the crossing-prevention
-  // guarantee this bound exists for only ever gets tighter, never looser.
-  // Without this, an off-grid sibling made the OTHER thumb's native min/max
-  // itself off-grid — and the browser's own stepMismatch validity, computed
-  // relative to an input's own min attribute rather than this component's
-  // step origin (props.min), became permanently unsatisfiable for that
-  // thumb, for any value on the real grid, until the sibling moved again. No
-  // genuinely reachable value is lost: anything between the raw bound and
-  // its rounded form was never on-grid to begin with.
+  // Rounds a bound derived from a (possibly off-grid, e.g. an actively held
+  // magnetic snap — see thumbNativeStep below) sibling value onto the real
+  // step grid, always stricter (min rounds up, max rounds down) so the
+  // crossing-prevention guarantee only tightens, never loosens. Without
+  // this, native stepMismatch (computed from the input's own min attribute,
+  // not props.min) became permanently unsatisfiable for the other thumb.
+  // Nothing reachable is lost — the gap between raw and rounded was never
+  // on-grid anyway.
   function toGridBound(val, roundUp) {
     if (props.step <= 0) return val;
     const stepsFromMin = (val - props.min) / props.step;
@@ -239,14 +223,11 @@ export function useSliderValue(props, emit, { isRange }) {
       const next = normalizeModelValue(newVal);
       const current = internalValues.value;
       if (next.length !== current.length || next.some((v, i) => v !== current[i])) {
-        // A drag/keyboard interaction already mid-flight (internalValues has
-        // already diverged from lastCommittedValues, e.g. via updateThumbValue)
-        // means this is the component's OWN uncommitted change echoing back
-        // through v-model — not a genuine external commit. Overwriting
-        // lastCommittedValues here would make the interaction's own eventual
-        // pointerup/blur commit (UseSliderInteraction's commitIfChanged) see no
-        // diff and silently swallow its 'change' event — same guard the
-        // min/max/step/minGapSteps watcher below already uses.
+        // internalValues already diverged from lastCommittedValues means a
+        // drag/keyboard interaction is mid-flight and this echo is just our
+        // own uncommitted change bouncing back through v-model — overwriting
+        // lastCommittedValues here would make that interaction's own commit
+        // (commitIfChanged) see no diff and swallow its change event.
         const alreadyUncommitted = current.length !== lastCommittedValues.value.length
           || current.some((v, i) => v !== lastCommittedValues.value[i]);
         internalValues.value = next;

@@ -30,15 +30,11 @@ export function useSliderInteraction(props, emit, {
   // triggers, within the same task. See onPointerDown.
   let isPointerFocus = false;
 
-  // Not reactive — plain bookkeeping for which pointer actually owns the
-  // current drag. setPointerCapture retargets POINTER events for this one
-  // pointerId to controlRef, but it does NOT stop some OTHER, uncaptured
-  // pointer's native move/up/cancel from also reaching the same listeners if
-  // it lands on (or bubbles through) controlRef — e.g. a second touch during
-  // a drag. Without this check, that unrelated pointer's own pointerup could
-  // end and commit the real drag, leaving the owning pointer's further
-  // movement silently inert (onPointerMove's isDragging guard would already
-  // be false by then).
+  // Not reactive — which pointer owns the current drag. setPointerCapture
+  // only retargets POINTER events for this pointerId; an unrelated second
+  // pointer (e.g. a second touch) still reaches the same listeners, and its
+  // pointerup could otherwise end and commit the real drag, leaving the
+  // owning pointer's further movement silently inert.
   let activePointerId = null;
 
   // A consumer can flip :disabled reactively while a thumb is focused or
@@ -75,14 +71,11 @@ export function useSliderInteraction(props, emit, {
         nextTick(() => thumbRefs.value[0]?.focus());
       }
       // An external modelValue update mid-drag (e.g. range -> single) can
-      // shrink internalValues below the thumb currently being dragged —
-      // without this, the next pointermove still targets that now-gone index
-      // (onPointerMove's own guard only checks for null, not out-of-bounds),
-      // writing it back into `next` and silently recreating a second input
-      // the public model no longer has. isDragging is deliberately left
-      // alone — the eventual pointerup/pointercancel still arrives and ends
-      // it normally; onPointerMove's null check (and onPointerUp's own) are
-      // what actually need activeThumbIndex cleared to become safe no-ops.
+      // shrink internalValues below the thumb being dragged — the next
+      // pointermove would still target that now-gone index (its own guard
+      // only checks for null), recreating a second input the public model no
+      // longer has. isDragging is left alone; the eventual pointerup/
+      // pointercancel still arrives and ends it normally.
       if (activeThumbIndex.value !== null && activeThumbIndex.value >= newLength) {
         activeThumbIndex.value = null;
       }
@@ -116,13 +109,10 @@ export function useSliderInteraction(props, emit, {
       }
 
       // Whether the crossing clamp above left an active magnetic snap point
-      // untouched — if so, this thumb must keep that exact (deliberately
-      // off-grid) value rather than get re-rounded onto the step grid below.
-      // Without this, range mode destroyed a magnetic hold the crossing
-      // clamp never actually touched at all — e.g. snapPoints=[42.5] with
-      // step=1 re-rounded 42.5 to 43 and cleared the latch below for no
-      // reason, even mid-drag; single-thumb mode has no crossing clamp and
-      // correctly holds the same point.
+      // untouched — if so, keep that exact (deliberately off-grid) value
+      // instead of re-rounding it below, which used to clear a magnetic hold
+      // the clamp never actually touched (single-thumb mode has no crossing
+      // clamp and always held it correctly).
       const heldMagneticValue = magneticValue != null && clamped === magneticValue;
       if (!heldMagneticValue) {
         // gap is a product of two decimals (e.g. 3 * 0.1) and can carry IEEE-754
@@ -250,10 +240,8 @@ export function useSliderInteraction(props, emit, {
 
   function onPointerMove(event) {
     if (!isDragging.value || activeThumbIndex.value === null) return;
-    // An unrelated pointer (e.g. a second touch) landing on controlRef fires
-    // its own move/up/cancel here too — pointer capture only retargets the
-    // OWNING pointer's events, it doesn't block others from reaching the same
-    // listeners. Ignore anything that isn't the pointer that started this drag.
+    // Pointer capture only retargets the owning pointer's events — an
+    // unrelated second pointer's own move/up/cancel still reaches this.
     if (event.pointerId !== activePointerId) return;
 
     // A consumer can flip :disabled reactively mid-drag (e.g. async
@@ -286,10 +274,8 @@ export function useSliderInteraction(props, emit, {
   }
 
   // event is omitted for the internal end-of-drag calls above (disabled
-  // flip, buttons===0 self-heal) — those are the component's own decision to
-  // end the drag, not a pointer event to validate ownership of. A REAL
-  // pointerup/pointercancel (from the template) always passes one, and must
-  // match the pointer that started the drag — see activePointerId above.
+  // flip, buttons===0 self-heal) — our own decision, not a pointer event to
+  // validate. A real pointerup/pointercancel always passes one.
   function onPointerUp(event) {
     if (!isDragging.value) return;
     if (event && event.pointerId !== activePointerId) return;

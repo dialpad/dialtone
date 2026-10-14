@@ -1,11 +1,9 @@
 export default {
-  // modelValue's own shape (a plain number vs. a two-element array) decides
-  // single-thumb vs. range mode — not a separate boolean prop the option
-  // bar's own dependency inference could pick up from a name/description
-  // match, so these need an explicit exclusion rather than relying on that
-  // inference. fillOrigin is explicitly "Ignored in range mode" per its own
-  // JSDoc; minGapSteps's gap enforcement (UseSliderValue's enforceRangeGap)
-  // returns early whenever there's no second thumb to enforce a gap against.
+  // modelValue's shape (number vs. array) decides single/range mode — not a
+  // separate boolean prop the option bar's dependency inference can pick up,
+  // hence the explicit exclusion. fillOrigin is "Ignored in range mode" per
+  // its own JSDoc; minGapSteps' gap enforcement returns early with no
+  // second thumb to enforce against.
   exclusions: [
     {
       when: { modelValue: (v) => Array.isArray(v) },

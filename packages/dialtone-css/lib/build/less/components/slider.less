@@ -440,10 +440,8 @@
     }
 
     // The borrowed .d-tooltip--show/--hide classes declare their own
-    // transform/opacity transition unconditionally (unlike every transition
-    // this component declares itself, which is wrapped in the
-    // no-preference guard below) — without this, a reduced-motion
-    // preference is silently bypassed for this one readout.
+    // transition unconditionally, unlike every transition this component
+    // declares itself (wrapped in the no-preference guard below).
     @media (prefers-reduced-motion: reduce) {
         transition: none;
     }
@@ -626,15 +624,11 @@
     .d-slider__mark,
     .d-slider__readout {
         // The base rule's max-inline-size: 100% is relative to
-        // .d-slider__control, the nearest positioned ancestor — in
-        // horizontal mode that's a meaningful cap (the control's own visible
-        // width), but here the control's own inline-size is just the
-        // thumb's width (a narrow column, e.g. ~44px), which these sit
-        // BESIDE, not within. Left as 100%, even a short unit-bearing label
-        // (e.g. "100 centimeters") ellipsized despite the real free space to
-        // the side of the track. 20ch matches filter-pill's own established
-        // cap for similarly short label text — generous for ordinary
-        // labels, still a real ceiling against pathologically long text.
+        // .d-slider__control — a meaningful cap in horizontal mode, but here
+        // the control's own inline-size is just the thumb's narrow width,
+        // which these sit BESIDE, not within. Left at 100%, even a short
+        // unit-bearing label ellipsized despite the real free space. 20ch
+        // matches filter-pill's own cap for similarly short label text.
         max-inline-size: 20ch;
     }
 

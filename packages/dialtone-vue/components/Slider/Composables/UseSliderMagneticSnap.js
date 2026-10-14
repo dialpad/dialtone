@@ -53,10 +53,9 @@ export function useSliderMagneticSnap(props, { controlRef, isVertical }) {
     if (!trackSizePx) return null;
     const entryThreshold = (SNAP_THRESHOLD_PX / trackSizePx) * (props.max - props.min);
 
-    // Membership check guards against a reactive snapPoints change mid-drag
-    // — without it, a point removed from the list could stay latched purely
-    // because the pointer hadn't yet drifted past its (now-irrelevant)
-    // release radius, holding the thumb at a value no longer offered at all.
+    // Membership check guards a reactive snapPoints change mid-drag —
+    // without it, a removed point could stay latched purely because the
+    // pointer hadn't yet drifted past its (now-irrelevant) release radius.
     const heldValue = activeSnapValue.value[thumbIndex];
     if (heldValue != null && points.includes(heldValue)) {
       const releaseThreshold = entryThreshold * SNAP_RELEASE_MULTIPLIER;
