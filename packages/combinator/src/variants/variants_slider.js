@@ -1,4 +1,22 @@
 export default {
+  // modelValue's own shape (a plain number vs. a two-element array) decides
+  // single-thumb vs. range mode — not a separate boolean prop the option
+  // bar's own dependency inference could pick up from a name/description
+  // match, so these need an explicit exclusion rather than relying on that
+  // inference. fillOrigin is explicitly "Ignored in range mode" per its own
+  // JSDoc; minGapSteps's gap enforcement (UseSliderValue's enforceRangeGap)
+  // returns early whenever there's no second thumb to enforce a gap against.
+  exclusions: [
+    {
+      when: { modelValue: (v) => Array.isArray(v) },
+      disable: { props: ['fillOrigin'] },
+    },
+    {
+      when: { modelValue: (v) => !Array.isArray(v) },
+      disable: { props: ['minGapSteps'] },
+    },
+  ],
+
   // Each preset below is chosen to cover a distinct combination of
   // capabilities (single vs. range, ticks vs. marks vs. neither, icons vs.
   // none, fillOrigin) rather than variations on the same shape.
