@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/dialpad/dialtone/compare/dialtone-cli/v1.3.0...dialtone-cli/v1.4.0) (2026-10-15)
+
+
+### Bug Fixes
+
+* **Dialtone Query Core:** DLT-3651 align search and migration guidance ([#1461](https://github.com/dialpad/dialtone/issues/1461)) ([84ac078](https://github.com/dialpad/dialtone/commit/84ac078aa8f09fde46fecb9c1bc71e1f275f35dc))
+
+
+### Features
+
+* **Dialtone Mcp Server:** DLT-3650 add complete API retrieval and provenance ([#1462](https://github.com/dialpad/dialtone/issues/1462)) ([c23dc8c](https://github.com/dialpad/dialtone/commit/c23dc8c3cc4aa99aabf3651a0d024ce7bb935609))
+
 # [1.3.0](https://github.com/dialpad/dialtone/compare/dialtone-cli/v1.2.0...dialtone-cli/v1.3.0) (2026-10-13)
 
 
