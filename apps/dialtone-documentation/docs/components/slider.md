@@ -18,28 +18,23 @@ A slider is appropriate when the exact value is less important than the relative
 
 - Selecting an approximate value from a continuous range (volume, brightness, percentage).
 - Filtering results by a numeric range where exact precision isn't critical (price, date offset).
-- Adjusting values where the relative position matters more than the specific number.
 </template>
 
 <template #dont>
 
 - When precise numeric input is required — use `DtInput` instead, or pair a slider with a companion input.
-- When there are fewer than ~5 discrete choices — use `DtRadio` or `DtSelectMenu` instead.
-- When mobile drag accuracy would be a concern for precision-sensitive contexts — pair range sliders with companion inputs showing the current values.
+- For a small set of discrete choices, use `DtRadio` or `DtSelectMenu` instead.
 </template>
 
 </dialtone-usage>
 
 ### Best Practices
 
-- Always provide a `label`, or an `aria-label`/`aria-labelledby` attribute, to give the slider an accessible name. Set `:show-label="false"` when you only need to hide the `label` visually (a visually obvious context elsewhere on the page); `:show-label="false"` alone, without `label`, does not create an accessible name.
-- For range sliders with two thumbs, pass a `getValueText` callback that returns localized text distinguishing each thumb (e.g. `"Minimum: 20"` / `"Maximum: 70"`).
+- Give the slider a clear label and distinguish the start and end values of a range.
 - Keep `min` and `max` values meaningful to the context. Label the scale so users understand what the numbers represent.
-- Use `prefix` or `suffix` for simple unit decoration (e.g. `suffix="%"`) — marks always use it. For the readout and each thumb's `aria-valuetext`, `getValueText` takes precedence over prefix/suffix when set, so the two stay in agreement; marks never call `getValueText`, since a mark isn't tied to either thumb and has no index for it to differentiate on.
-- Use `showTicks` to indicate discrete stops on the track; avoid rendering more than ~20 ticks to prevent visual noise.
-- `showMarks` is off by default. Pass `true` to label the start and end of the range, or an array of `{ value, text }` objects (or a plain number array, for default-formatted text) to label specific positions instead.
-- When using `snapPoints`, make sure `getValueText` (and any custom mark text) can render *any* value in range, not just the snap points — the pull is a soft suggestion, not a restriction, so users can still land on values off the grid.
-- With no marks and the default `tooltip` readout, the slider reserves no space below the track — add your own gap (e.g. `dt-stack`) when stacking it with other content, rather than relying on built-in spacing.
+- Pair the slider with a number input when users need precise entry, especially on touch devices.
+- Space ticks and marks far enough apart to remain readable at the available width.
+- Use a layout gap, such as `dt-stack`, when stacking sliders with other content.
 
 ## Variants and Examples
 
@@ -60,7 +55,7 @@ A slider is appropriate when the exact value is less important than the relative
 />
 ```
 
-Set `min-gap-steps` to keep the two thumbs from getting too close together. It's a number of steps, not a raw value gap — the actual minimum gap enforced between the thumbs' values is `minGapSteps * step`, so `min-gap-steps="5"` enforces a gap of 5 with `step="1"`, but 50 with `step="10"`:
+Set `min-gap-steps` to keep a minimum separation between range values. The value gap is `minGapSteps * step`; for example, 5 steps of size 10 require a gap of 50:
 
 ```vue demo
 <dt-slider
@@ -109,6 +104,9 @@ Pair a range slider with number inputs for precise entry. Bind the slider to an 
 </dt-stack>
 ```
 
+> [!INFO] Form submission
+> Set `name` to include the slider value in a form submission. In range mode, both values use the same name; retrieve them with `FormData.getAll(name)` in `[low, high]` order.
+
 ### With start and end slots (aka left/right)
 
 ```vue demo
@@ -139,9 +137,9 @@ Emoji or icon-only content works the same way — give it an `aria-label` so the
 
 ### With ticks
 
-A numeric `showTicks` interval is independent of `step` — ticks are purely a visual overlay along the track and don't constrain where the thumb can actually stop. The two often match, but they don't have to.
+A numeric `showTicks` value sets the tick interval. Ticks are visual guides; `step` determines the selectable increments.
 
-When the `showTicks` interval equals `step`, every value the thumb can land on gets its own tick — same as passing `show-ticks="true"`:
+Use `show-ticks` for a tick at every step, or pass a matching interval:
 
 ```vue demo
 <dt-slider
@@ -154,7 +152,7 @@ When the `showTicks` interval equals `step`, every value the thumb can land on g
 />
 ```
 
-When they differ, ticks become checkpoints along a finer scale rather than a mark for every stop — the thumb still moves by `step`, ticks just call out the notable positions:
+Use a larger tick interval to highlight checkpoints while allowing finer adjustments:
 
 ```vue demo
 <dt-slider
@@ -169,7 +167,7 @@ When they differ, ticks become checkpoints along a finer scale rather than a mar
 
 ### Magnetic snapping
 
-`step` is a hard restriction — the thumb can only ever land on a value in its grid. `snapPoints` is different: it pulls a dragged thumb toward nearby values, like the snapping in Figma or Photoshop, but a value just outside a fixed 10px radius along the track stays freely reachable. The pull is also sticky — once a thumb snaps onto a point, dragging away from it takes noticeably more distance than dragging onto it did, so it resists small jitter right at the boundary. It only affects pointer dragging — keyboard stepping via `step`/`largeStep` is unaffected.
+`snapPoints` attracts a dragged thumb to nearby values without restricting selection to those points. Snapping applies only to pointer dragging; keyboard changes follow `step` and `largeStep`. Formatters should handle values between snap points too.
 
 Pass a number for an evenly spaced interval:
 
@@ -185,7 +183,7 @@ Pass a number for an evenly spaced interval:
 />
 ```
 
-Pass an array for arbitrary snap values — unlike an interval, they don't need to be evenly spaced:
+Pass an array for specific snap values:
 
 ```vue demo
 <dt-slider
@@ -194,16 +192,13 @@ Pass an array for arbitrary snap values — unlike an interval, they don't need 
   :min="10"
   :max="400"
   :snap-points="[25, 50, 75, 100, 150, 200, 300]"
-  :get-value-text="(value) => `${value}%`"
   suffix="%"
 />
 ```
 
 ### Marks
 
-Marks are text annotations placed below the track at specific positions, independent of ticks — use them together or separately.
-
-Pass an array of numbers to label positions automatically:
+Marks label positions below the track. Pass `true` to label the endpoints or an array of numbers to label specific values. Ticks can be added independently:
 
 ```vue demo
 <dt-slider
@@ -212,79 +207,33 @@ Pass an array of numbers to label positions automatically:
   :min="-20"
   :max="40"
   :show-marks="[-20, 0, 40]"
->
-  <template #start>
-    <span role="img" aria-label="cold">❄️</span>
-  </template>
-  <template #end>
-    <span role="img" aria-label="hot">🔥</span>
-  </template>
-</dt-slider>
+  :show-ticks="10"
+/>
 ```
 
-Pass `{ value, text }` objects when the label at a position isn't just the number itself — `value` still positions the mark on the track, but `text` can be any string. The readout doesn't read from `marks`, so pair it with `getValueText` or `suffix` to keep it consistent with what the marks say:
+Pass `{ value, text }` objects for custom labels. Use `getValueText` separately to format the readout and screen reader values:
 
 ```vue demo
-<!-- @wrapper -->
-<dt-stack gap="300" class="d-w100p">
-  <dt-slider
-    :model-value="2"
-    label="Noise cancellation"
-    :min="0"
-    :max="4"
-    :step="1"
-    :show-marks="[{ value: 0, text: 'Off' }, { value: 1, text: 'Low' }, { value: 2, text: 'Medium' }, { value: 3, text: 'High' }, { value: 4, text: 'Max' }]"
-    :get-value-text="(value) => ['Off', 'Low', 'Medium', 'High', 'Max'][value]"
-  />
-  <dt-slider
-    :model-value="45"
-    label="Trial length"
-    :min="0"
-    :max="90"
-    :step="1"
-    :show-marks="[{ value: 0, text: 'No trial' }, { value: 30, text: '30 days' }, { value: 60, text: '60 days' }, { value: 90, text: '90 days' }]"
-    :get-value-text="(value) => value === 1 ? '1 day' : `${value} days`"
-  />
-</dt-stack>
-```
-
-Marks and ticks are independent — a mark doesn't need a tick at the same position and vice versa, so dense ticks pair well with sparser marks:
-
-```vue demo
-<!-- @wrapper -->
-<dt-stack gap="300" class="d-w100p">
-  <dt-slider
-    :model-value="0"
-    label="Balance"
-    :min="-100"
-    :max="100"
-    :show-marks="[{ value: -100, text: '−100' }, { value: 0, text: '0' }, { value: 100, text: '100' }]"
-    :show-ticks="25"
-  />
-  <dt-slider
-    :model-value="7"
-    label="Rating"
-    :min="0"
-    :max="10"
-    :step="1"
-    :show-ticks="1"
-    :show-marks="true"
-  />
-</dt-stack>
+<dt-slider
+  :model-value="2"
+  label="Noise cancellation"
+  :min="0"
+  :max="4"
+  :step="1"
+  :show-marks="[{ value: 0, text: 'Off' }, { value: 1, text: 'Low' }, { value: 2, text: 'Medium' }, { value: 3, text: 'High' }, { value: 4, text: 'Max' }]"
+  :get-value-text="(value) => ['Off', 'Low', 'Medium', 'High', 'Max'][value]"
+/>
 ```
 
 ### Value readout
 
-Set `readout` to show each thumb's current value. Useful when the track context alone isn't enough to communicate the exact value.
+Choose how to display each thumb's current value:
 
-- `tooltip` (default) — a tooltip-styled bubble above the thumb, shown only while that thumb is hovered, dragged, or focused. It renders in the browser's top layer so ancestor overflow, clipping paths, and masks cannot cut it off. It shifts or flips near viewport edges and follows the thumb during dragging, scrolling, and resizing.
-- `always` — a readout below the track, always visible.
-- `never` — no readout.
+- `tooltip` (default) — shown on hover, drag, or focus. Useful in compact layouts.
+- `always` — always visible below the track. Use when users need to see the value at a glance.
+- `never` — hidden. Use when displaying the value elsewhere.
 
-> [!INFO] Tooltip readout
-> Requires native Popover API (Chrome/Edge 114+, Firefox 125+, Safari 17+). Browsers without this API do not display the floating readout; use `always` when a visible value is needed there. Each native range input still exposes the formatted value through `aria-valuetext`.
-
-In range mode with `always`, the two thumbs' readouts merge into a single centered `low–high` pill once they'd otherwise overlap as the thumbs converge.
+Tooltip readouts remain visible inside clipping containers and adjust near viewport edges. Keep formatted values brief to avoid clipping or overlap. In range mode, `always` readouts merge when the two values are close together.
 
 ```vue demo
 <!-- @wrapper -->
@@ -295,28 +244,13 @@ In range mode with `always`, the two thumbs' readouts merge into a single center
 </dt-stack>
 ```
 
-#### Choosing a mode
-
-- Prefer `tooltip` in space-constrained or dense layouts — it floats above the track without affecting layout, so it never reserves space below the slider the way `always` does. It's the right default for toolbars, side panels, and anywhere several sliders stack tightly.
-- Reach for `always` when the value needs to stay legible without any interaction — dashboards, read-mostly summaries, or sliders a user might glance at rather than operate.
-- Use `never` when you're rendering the value yourself elsewhere on the page (see below).
-
-Use `prefix`/`suffix` to decorate the raw number wherever it's displayed — the readout, marks, and each thumb's `aria-valuetext` all pick it up:
+Use `prefix` and `suffix` to add units to numeric marks, readouts, and screen reader values:
 
 ```vue demo
 <dt-slider :model-value="58" label="Traffic split" suffix="%" />
 ```
 
-For anything beyond a fixed prefix/suffix, pass `getValueText` — it takes precedence and receives the thumb index too, so range sliders can give each thumb distinct text:
-
-```vue demo
-<dt-slider
-  :model-value="[20, 70]"
-  label="Price range"
-  :show-marks="[{ value: 0, text: 'Min $0' }, { value: 100, text: 'Max $100' }]"
-  :get-value-text="(value, index) => index === 0 ? `Min $${value}` : `Max $${value}`"
-/>
-```
+For custom readout text, use `getValueText`; it overrides `prefix` and `suffix` for readouts and screen reader values, but does not format marks. See the [range slider](#range-slider) and [custom marks](#marks) examples.
 
 To render the value somewhere custom outside the component instead, set `readout="never"` and drive your own display off the same `v-model`:
 
@@ -363,39 +297,12 @@ Set `fill-origin` to a value within `[min, max]` and the indicator grows outward
 ### Disabled
 
 ```vue demo
-<!-- @wrapper -->
-<dt-stack gap="300" class="d-w100p">
-  <dt-slider :model-value="30" label="Volume (disabled)" disabled />
-  <dt-slider
-    :model-value="[20, 80]"
-    label="Price range (disabled)"
-    :get-value-text="(value, index) => index === 0 ? `Minimum: $${value}` : `Maximum: $${value}`"
-    disabled
-  />
-</dt-stack>
+<dt-slider :model-value="30" label="Volume (disabled)" disabled />
 ```
 
 ### Vertical orientation
 
-```vue demo
-<!-- @wrapper -->
-<!-- @class d-hmn-600 -->
-<div class="d-d-flex d-g-600 d-hmn200">
-  <dt-slider
-    :model-value="60"
-    label="Height"
-    orientation="vertical"
-  />
-  <dt-slider
-    :model-value="[30, 70]"
-    label="Range vertical"
-    orientation="vertical"
-    :get-value-text="(value, index) => index === 0 ? `Min: ${value}` : `Max: ${value}`"
-  />
-</div>
-```
-
-Customize the track length with a CSS utility class directly on the component:
+Set `orientation="vertical"` and use a height utility to customize the track length:
 
 ```vue demo
 <!-- @class d-hmn-600 -->
@@ -417,32 +324,12 @@ Use `:show-label="false"` when you have a visually obvious context but still nee
 
 ### Custom label content
 
-The `label` slot replaces the plain text label entirely — scoped with `value` (the live value, or `[low, high]` in range mode) so the label itself can echo the current value or any derived text:
+The `label` slot receives the current `value`: a number for a single thumb or a `[low, high]` array for a range.
 
 ```vue demo
 <dt-slider :model-value="0" :min="-100" :max="100" :fill-origin="0">
   <template #label="{ value }">
     Balance &middot; {{ value }}
-  </template>
-</dt-slider>
-```
-
-```vue demo
-<dt-slider
-  :model-value="100"
-  :min="25"
-  :max="200"
-  :step="25"
-  :show-ticks="25"
->
-  <template #label="{ value }">
-    Playback speed &middot; {{ (value / 100).toFixed(2) }}×
-  </template>
-  <template #start>
-    🐢
-  </template>
-  <template #end>
-    🐇
   </template>
 </dt-slider>
 ```
@@ -457,11 +344,11 @@ The `label` slot replaces the plain text label entirely — scoped with `value` 
 | Arrow Left / Arrow Down | Decrease value by `step` |
 | Home | Jump to `min` |
 | End | Jump to `max` |
-| Page Up / Shift + Arrow Right / Shift + Arrow Up | Increase value by roughly `largeStep` (default 10), rounded to the nearest whole number of `step`s — always at least one |
-| Page Down / Shift + Arrow Left / Shift + Arrow Down | Decrease value by roughly `largeStep` (default 10), rounded to the nearest whole number of `step`s — always at least one |
+| Page Up / Shift + Arrow Right / Shift + Arrow Up | Increase by `largeStep` (default 10), adjusted to the step size |
+| Page Down / Shift + Arrow Left / Shift + Arrow Down | Decrease by `largeStep` (default 10), adjusted to the step size |
 
 > [!INFO] RTL support
-> The track, thumb, and indicator position with logical (inset-inline-start) values, so they mirror automatically under `dir="rtl"`. Pointer dragging and the Shift+Arrow/Page Up/Page Down keys are direction-aware too, matching the native `<input type="range">`'s own RTL-flipped Arrow key behavior.
+> Set `dir="rtl"` on the slider or a parent to mirror the layout and horizontal keyboard navigation.
 
 ```vue demo
 <dt-slider
@@ -475,22 +362,11 @@ The `label` slot replaces the plain text label entirely — scoped with `value` 
 
 ### Screen reader behavior
 
-- Each thumb is a native `<input type="range">` which carries `role="slider"` implicitly, along with `aria-valuemin`, `aria-valuemax`, and `aria-valuenow`.
-- The component label is associated with each thumb via `aria-labelledby`. When `show-label` is `false`, the label is removed and the `label` prop's text is promoted to `aria-label` instead — the same pattern `DtInput`, `DtCheckbox`, `DtRadio`, and `DtSelectMenu` use. A slotted (non-string) `#label` can't be promoted this way, so pair a hidden `#label` slot with an explicit `aria-label` on the component.
-- For **range sliders**, provide the `getValueText` prop to give each thumb a distinct, localized description:
-
-```vue code-only
-<dt-slider
-  :model-value="[20, 70]"
-  label="Price range"
-  :get-value-text="(value, index) => index === 0 ? `Minimum: $${value}` : `Maximum: $${value}`"
-/>
-```
-
+- Provide a `label`, `aria-label`, or `aria-labelledby` for an accessible name.
+- With `show-label="false"`, keep the `label` prop for screen readers. A hidden custom `#label` slot requires an explicit `aria-label` or `aria-labelledby` instead.
+- For range sliders, use `getValueText` to distinguish each thumb with localized text, such as “Minimum: $20” and “Maximum: $70”. See the [range slider example](#range-slider).
+- Formatted readout values remain available to screen readers when the visual readout is hidden.
 - When the `start` or `end` slots contain icon-only content, add `aria-label` to each icon so the surrounding context is communicated to screen readers.
-
-> [!INFO] Form submission in range mode
-> In range mode, both `<input>` elements share the same `name` attribute. Retrieve both values server-side using `FormData.getAll(name)`, which returns `[low, high]` in DOM order.
 
 ## Vue API
 

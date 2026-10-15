@@ -241,10 +241,8 @@ defineOptions({ name: 'DtSlider', inheritAttrs: false });
 
 const props = defineProps({
   /**
-   * The current value. A number enables single-thumb mode; an array of two
-   * numbers enables range mode. When omitted (or explicitly undefined/null),
-   * resolves to the midpoint of [min, max] — matching native
-   * <input type="range"> — see normalizeModelValue.
+   * The current value: a number for a single thumb or an array of two numbers
+   * for a range. Defaults to the midpoint of [min, max] when omitted or null.
    */
   modelValue: {
     type: [Number, Array],
@@ -277,12 +275,9 @@ const props = defineProps({
   },
 
   /**
-   * Magnetic snap points the thumb pulls toward while dragging — unlike
-   * step, this doesn't restrict which values are selectable; a value just
-   * outside the snap radius of a snap point stays freely reachable. Pass a
-   * number for an evenly spaced interval (e.g. 25), or an array for
-   * arbitrary values (e.g. [10, 42, 90]). Pointer drag only — keyboard
-   * stepping (step/largeStep) is unaffected.
+   * Attracts a dragged thumb to nearby values without restricting selection.
+   * Pass a number for an evenly spaced interval or an array of specific values.
+   * Applies only to pointer dragging; keyboard changes follow step and largeStep.
    */
   snapPoints: {
     type: [Number, Array],
@@ -309,12 +304,9 @@ const props = defineProps({
   },
 
   /**
-   * Which end the indicator fills from, toward the thumb: "start" (the
-   * default, aka left) fills from the min end, "end" (aka right) fills from
-   * the max end. Pass a Number instead to fill outward from that value
-   * toward the thumb — useful for balance controls (aka center-fill) or
-   * deviation-from-setpoint displays. A numeric origin is clamped to
-   * [min, max]. Ignored in range mode.
+   * Fills from the minimum ("start"), maximum ("end"), or a numeric origin
+   * toward the thumb. A numeric origin is clamped to [min, max].
+   * Ignored in range mode, where the fill spans the two thumbs.
    */
   fillOrigin: {
     type: [Number, String],
@@ -332,11 +324,8 @@ const props = defineProps({
   },
 
   /**
-   * Minimum gap, in steps (not raw values), that must remain between the two
-   * thumbs in range mode: the actual minimum gap enforced between their
-   * values is minGapSteps * step, so the same prop value means a different
-   * real gap depending on step (e.g. minGapSteps={5} enforces a gap of 5 with
-   * step={1}, but 50 with step={10}).
+   * Minimum separation between range values, measured in steps.
+   * The value gap is minGapSteps * step.
    */
   minGapSteps: {
     type: Number,
@@ -352,9 +341,8 @@ const props = defineProps({
   },
 
   /**
-   * When false, the label is removed and its text (the label prop, not the
-   * #label slot) is promoted to aria-label instead — matching DtInput,
-   * DtCheckbox, DtRadio, and DtSelectMenu's own showLabel behavior.
+   * Hides the visible label when false, retaining the label prop as the accessible name.
+   * A hidden custom label slot requires an explicit aria-label or aria-labelledby.
    * @values true, false
    */
   showLabel: {
@@ -383,16 +371,10 @@ const props = defineProps({
   },
 
   /**
-   * A function returning the user-facing text for a value — shared by the readout and
-   * each thumb's aria-valuetext, so the two always agree on how a number is displayed.
-   * Signature: (value: number, index?: number) => string. index is the thumb index (use
-   * it to differentiate thumbs in range mode, e.g. "Minimum: 20" / "Maximum: 70").
-   * Deliberately NOT used for a mark's own auto-generated text — a mark isn't tied to
-   * either thumb, so there's no index this function could meaningfully receive; marks use
-   * prefix/suffix instead (see the showMarks prop), or their own explicit text override.
-   * Takes precedence over prefix/suffix for the readout and aria-valuetext when set. The
-   * default (null) uses the raw number (optionally wrapped in prefix/suffix), which must
-   * be i18n-safe for your context.
+   * Formats readout and screen reader values. Signature: (value: number, index?: number) => string.
+   * In range mode, index 0 identifies the lower value and index 1 the upper value.
+   * Return a localized string synchronously. Overrides prefix/suffix for these values;
+   * does not format marks.
    */
   getValueText: {
     type: Function,
@@ -400,11 +382,8 @@ const props = defineProps({
   },
 
   /**
-   * Text prepended to the raw number wherever it's displayed — e.g. prefix="$" for
-   * currency. Always applied to marks. Ignored by the readout and aria-valuetext when
-   * getValueText is set (see getValueText). A long prefix makes every mark's text
-   * longer too — keep it short enough that the first/last mark stays legible near
-   * the track's own edges (see showMarks).
+   * Text prepended to numeric marks and default readout values, e.g. "$" for currency.
+   * getValueText overrides it for readout and screen reader values.
    */
   prefix: {
     type: String,
@@ -412,10 +391,8 @@ const props = defineProps({
   },
 
   /**
-   * Text appended to the raw number wherever it's displayed — e.g. suffix="%" for a
-   * percentage. Always applied to marks. Ignored by the readout and aria-valuetext when
-   * getValueText is set (see getValueText). Same edge-legibility caveat as prefix
-   * applies (see showMarks).
+   * Text appended to numeric marks and default readout values, e.g. "%" for percentages.
+   * getValueText overrides it for readout and screen reader values.
    */
   suffix: {
     type: String,
@@ -432,10 +409,8 @@ const props = defineProps({
   },
 
   /**
-   * Roughly how far to move on Page Up/Page Down or Shift + Arrow, in the
-   * same units as step — rounded to the nearest whole number of steps (at
-   * least one), so the result always lands on the step grid and always
-   * moves, even when step is coarser than largeStep itself.
+   * Value change for Page Up/Page Down or Shift + Arrow.
+   * Rounded to a whole number of steps, with a minimum of one step.
    */
   largeStep: {
     type: Number,
@@ -467,16 +442,10 @@ const props = defineProps({
   },
 
   /**
-   * Controls the live value readout for each thumb: a tooltip-styled bubble above the
-   * thumb shown only while hovering, dragging, or focusing it (the default); always
-   * visible below the track; or never shown. Text is formatted via getValueText
-   * when set, otherwise prefix/suffix — same as each thumb's aria-valuetext, but
-   * unlike a mark's own auto-generated text (see showMarks). The tooltip uses
-   * the native Popover API to escape ancestor clipping and stays within the
-   * viewport. Browsers without that API do not display the floating readout;
-   * use always when a visible value is needed there. The inline readout
-   * and the merged two-thumb pill are not edge-clamped, so a long formatted value can render
-   * close to or past the track's own edge at those values.
+   * Shows the current value on hover, drag, or focus (tooltip), below the track
+   * at all times (always), or hides it (never). Tooltip requires browser Popover support;
+   * use always when a visible readout is needed in unsupported browsers.
+   * Values are formatted by getValueText, or prefix/suffix when no formatter is provided.
    * @values tooltip, always, never
    */
   readout: {
@@ -486,19 +455,10 @@ const props = defineProps({
   },
 
   /**
-   * Text annotations rendered below the track at specific positions, independent of ticks.
-   * Off by default — rendering min/max isn't always wanted. Pass true to label min and max
-   * (start and end) only. Pass an array for explicit control: each entry is either a plain
-   * number (text defaults to the number itself, formatted with prefix/suffix — NOT
-   * getValueText, which has no meaningful index for a position that isn't tied to either
-   * thumb) or an object with a required value and optional text override, which is used
-   * as-is regardless of prefix/suffix/getValueText.
-   * Example: [{ value: 0, text: 'Neutral' }, -100, 100]
-   *
-   * Keep mark text (via a short prefix/suffix, or an explicit text override) reasonably
-   * short — a mark landing exactly on min or max is edge-aligned rather than centered, and
-   * any other mark is nudged inward once it would otherwise render past the track's own
-   * edges, but very long text can still end up close to the live readout or an adjacent mark.
+   * Labels positions below the track, independently of ticks. Pass true for min/max labels,
+   * or an array of numbers and/or { value, text } objects for specific positions.
+   * Numeric labels use prefix/suffix; explicit text overrides that formatting.
+   * getValueText does not format marks. Keep labels short to avoid overlap.
    */
   showMarks: {
     type: [Array, Boolean],
@@ -515,9 +475,8 @@ const emit = defineEmits([
   'update:modelValue',
 
   /**
-   * Emitted when a value change commits: pointer up, blur, or a reactive
-   * min/max/step/minGapSteps correction that lands outside any in-progress
-   * drag. Use this for API calls or persistence.
+   * Emitted when a value change commits, on pointer release, blur, or a value
+   * correction after constraints change. Use this for API calls or persistence.
    * @event change
    * @type {number | number[]}
    */
