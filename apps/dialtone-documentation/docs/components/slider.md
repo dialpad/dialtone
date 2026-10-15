@@ -255,8 +255,8 @@ In range mode with `always`, the two thumbs' readouts merge into a single center
 <!-- @wrapper -->
 <dt-stack gap="300" class="d-w100p">
   <dt-slider :model-value="48" label="Volume" />
-  <dt-slider :model-value="48" label="Volume" readout="never" />
   <dt-slider :model-value="48" label="Volume" readout="always" />
+  <dt-slider :model-value="48" label="Volume" readout="never" />
 </dt-stack>
 ```
 
@@ -287,9 +287,51 @@ To render the value somewhere custom outside the component instead, set `readout
 
 ```vue demo
 <!-- @wrapper -->
-<dt-stack gap="200" class="d-w100p">
-  <dt-slider v-model="externalReadoutValue" label="Zoom" readout="never" />
-  <dt-text size="200" tone="subtle">Zoom level is set to <dt-text strength="strong" numeric>{{ externalReadoutValue }}%</dt-text></dt-text>
+<dt-stack gap="200" class="d-w100p" align="center">
+  <dt-slider v-model="externalReadoutValue" label="Zoom" :show-label="false" readout="never" />
+  <dt-box border-width="100" padding="100" padding-inline="150" border-radius="400" border-color="subtle">
+    <dt-text variant="body-sm" density="100" tone="tertiary">
+      Zoom level is set to
+      <dt-text strength="bold" tone="primary" numeric>{{ externalReadoutValue }}%</dt-text>
+    </dt-text>
+  </dt-box>
+</dt-stack>
+```
+
+Conversely, external inputs can control a range slider by binding their values.
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="100" class="d-w100p" align="center">
+  <dt-slider
+    v-model="meetingHours"
+    label="Meeting hours"
+    :min="8"
+    :max="18"
+    :show-ticks="1"
+    :min-gap-steps="1"
+    :get-value-text="(value, index) => `${index === 0 ? 'Start' : 'End'}: ${value}:00`"
+  />
+  <dt-stack direction="row" gap="100" align="center">
+    <dt-input
+      v-model.number="meetingHours[0]"
+      label-strength="medium"
+      label-size="200"
+      label="Start"
+      type="number"
+      :min="8"
+      :max="meetingHours[1] - 1"
+    />
+    <dt-input
+      v-model.number="meetingHours[1]"
+      label-strength="medium"
+      label-size="200"
+      label="End"
+      type="number"
+      :min="meetingHours[0] + 1"
+      :max="18"
+    />
+  </dt-stack>
 </dt-stack>
 ```
 
@@ -460,4 +502,5 @@ The `label` slot replaces the plain text label entirely — scoped with `value` 
 import { ref } from 'vue';
 
 const externalReadoutValue = ref(50);
+const meetingHours = ref([9, 17]);
 </script>
