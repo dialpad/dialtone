@@ -37,9 +37,9 @@
     // Same token an outlined button's text uses — readable against both
     // light and dark canvases, unlike --slider-indicator-color above, whose
     // dark-theme value is tuned for a filled bar's larger area, not text.
-    --slider-readout-color: var(--dt-color-link-primary);
-    --slider-thumb-size: var(--dt-spacing-300);               // 24px — control row height; actual hit target is --dt-spacing-550 below
-    --slider-thumb-visual-size: calc(var(--slider-thumb-size) * 0.65); // 35% smaller than the hit target
+    --slider-readout-color: var(--dt-color-foreground-primary);
+    --slider-thumb-size: var(--dt-layout-20px);
+    --slider-thumb-visual-size: calc(var(--slider-thumb-size) * 0.8); // 35% smaller than the hit target
     // Same color as the filled track/indicator, not a neutral knob color —
     // the thumb reads as part of the same "selected" affordance.
     --slider-thumb-color: var(--slider-indicator-color);
@@ -57,20 +57,12 @@
     --slider-disabled-track-color: var(--dt-inputs-color-background-disabled);
     --slider-disabled-indicator-color: var(--dt-inputs-color-foreground-disabled);
     --slider-disabled-border-color: var(--dt-inputs-color-border-disabled);
-    --slider-tick-color: var(--dt-color-border-moderate); // darker than the passive track for legibility
-    --slider-tick-width: var(--dt-size-border-100); // 1px
+    --slider-tick-color: var(--dt-color-border-default); // darker than the passive track for legibility
+    --slider-tick-width: var(--dt-size-border-300); // 1px
     --slider-boundary-color: var(--dt-color-foreground-tertiary);
     --slider-track-length: var(--dt-layout-300);               // 192px — used as block-size in vertical mode
     --slider-mark-offset: var(--dt-spacing-150);               // gap from track/thumb to marks & readout
 
-    // link-primary's dark-theme value is still too close to the canvas for
-    // readout-sized text (it's tuned for links inside body copy, not a bold
-    // number sitting alone). foreground-primary is the token built for that
-    // job — properly high-contrast body text in both themes.
-    [data-dt-mode="dark"] &,
-    [data-dt-theme="dark"] & {
-        --slider-readout-color: var(--dt-color-foreground-primary);
-    }
 }
 
 //  $$  LABEL
@@ -89,7 +81,6 @@
     gap: var(--dt-spacing-200);
     align-items: center;
     inline-size: 100%;
-    // margin-block-start: var(--dt-spacing-100-negative);
 }
 
 // Marks/readout (see below) are position:absolute against .d-slider__control,
@@ -290,12 +281,11 @@
 //  ----------------------------------------------------------------------------
 .d-slider__tick {
     position: absolute;
-    inline-size: var(--slider-tick-width);
-    block-size: var(--dt-spacing-50);
     background-color: var(--slider-tick-color);
-    inset-block-start: 50%;
-    // margin-block-start: calc(var(--slider-track-height) / 2 + var(--dt-size-border-100));
+    border-radius: var(--dt-size-radius-circle);
     pointer-events: none;
+    inline-size: var(--slider-tick-width);
+    block-size: var(--slider-tick-width);
 }
 
 //  $$  MARKS (text annotations centered under a track position)
@@ -305,7 +295,9 @@
     position: absolute;
     overflow: hidden;
     color: var(--slider-boundary-color);
-    font: var(--dt-typography-body-sm);
+    font: var(--dt-text-body-xs);
+    font-size: var(--dt-font-size-125);
+    line-height: var(--dt-font-line-height-100);
     white-space: nowrap;
     text-overflow: ellipsis;
     transform: translateX(-50%);
@@ -350,8 +342,11 @@
     position: absolute;
     overflow: hidden;
     color: var(--slider-readout-color);
-    font: var(--dt-typography-body-sm);
+    font: var(--dt-text-body-xs);
     font-weight: var(--dt-font-weight-bold);
+    font-size: var(--dt-font-size-125);
+    line-height: var(--dt-font-line-height-100);
+    font-variant-numeric: tabular-nums;
     white-space: nowrap;
     text-overflow: ellipsis;
     transform: translateX(-50%);
@@ -565,11 +560,11 @@
     }
 
     .d-slider__indicator {
+        transform: translateX(-50%);
         inline-size: var(--slider-track-height);
         block-size: auto;
         inset-inline-start: 50%;
         inset-block-start: unset;
-        transform: translateX(-50%);
         // Overrides the variable, not the transition property itself — see
         // the comment on the base .d-slider__indicator rule for why, and
         // .d-slider--dragging .d-slider__indicator near the end of this file

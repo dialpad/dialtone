@@ -68,7 +68,6 @@ layout: Blank
       <dt-slider :model-value="48" label="Volume" />
       <dt-input label="Label" />
       <dt-slider :model-value="48" label="Volume" readout="always" />
-      <dt-slider :model-value="48" label="Volume" readout="interaction" />
       <dt-input label="Label" />
     </dt-stack>
   </dt-box>
