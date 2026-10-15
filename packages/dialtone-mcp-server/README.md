@@ -2,7 +2,9 @@
 
 A [Model Context Protocol (MCP)](https://modelcontextprotocol.io) server that provides AI assistants with search access to Dialtone's design system: utility classes, design tokens, Vue components, and icons.
 
-Automatically filters deprecated items, swaps discouraged patterns with recommended alternatives, and provides AI-optimized search results.
+Filters deprecated items from general discovery, retains exact legacy-name matches with migration guidance, swaps discouraged patterns with recommended alternatives, and provides AI-optimized search results.
+
+See [the retrieval contract](./RETRIEVAL.md) for readable searches, structured component/API and prose detail, compatible search inputs, provenance and continuation. Searches return Markdown text; only the two selected detail tools advertise structured output.
 
 ## Installation
 
@@ -63,7 +65,7 @@ claude mcp add dialtone --scope user -- npx -y @dialpad/dialtone-mcp-server
 
 This stores configuration in `~/.claude/mcp.json`.
 
-**Version checking:** When the server starts, you'll see the current version. If outdated, follow the instructions shown.
+**Version checking:** The server connects to stdio before checking npm for updates. The advisory check is cancelled after two seconds or on shutdown. Offline, failed, or malformed registry replies are ignored. Valid version notices appear on stderr, keeping stdout available for MCP messages. On stdin EOF, SIGINT, or SIGTERM, the server closes its transport, flushes queued output, and exits even if an aborted registry connection retains a handle.
 
 ## Updating
 
@@ -193,6 +195,17 @@ npx tsx packages/dialtone-mcp-server/interactive-search.ts
 - ✗ Bad: `how do I add padding?`, `what button component exists?`
 
 ### Run Tests
+
+Startup and shutdown regressions build the server and its prerequisites first:
+
+```bash
+pnpm nx run dialtone-mcp-server:test-startup
+```
+
+From the package directory, `pnpm run test:startup` invokes `node --test` directly
+and requires an existing server build. Use the Nx target above to build first.
+Release-path regressions run with `pnpm run test:release-paths`.
+Both regression suites run in the path-filtered Unit Tests workflow.
 
 From the package directory:
 ```bash

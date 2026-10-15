@@ -1029,6 +1029,11 @@
         "square",
         "pause"
       ],
+      "stop-stroke": [
+        "square",
+        "outline",
+        "media"
+      ],
       "table": [
         "sheet",
         "grid",

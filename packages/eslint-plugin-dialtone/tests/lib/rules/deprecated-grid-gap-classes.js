@@ -54,7 +54,7 @@ ruleTester.run("deprecated-grid-gap-classes", rule, {
   invalid: [
     {
       code: "<template><div class=\"d-gg8\" /></template>",
-      errors: [{ messageId: 'recommendGridGapStyle' }],
+      errors: [{ message: /d-g-100/ }],
     },
     {
       code: "<template><div class=\"d-gg16\" /></template>",

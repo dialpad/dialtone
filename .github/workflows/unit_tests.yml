@@ -3,26 +3,66 @@ name: Unit Tests
 on:
   pull_request:
     paths:
+      - 'nx.json'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
       - 'packages/dialtone-vue/**'
       - 'packages/dialtone-tokens/**'
       - 'packages/combinator/**'
       - 'packages/dialtone-query-core/**'
       - 'packages/dialtone-cli/**'
+      - 'packages/dialtone-mcp-server/**'
+      - 'packages/dialtone-css/**'
+      - 'packages/dialtone-icons/**'
+      - 'packages/dialtone-docs/**'
+      - 'packages/eslint-plugin-dialtone/**'
+      - 'apps/dialtone-documentation/docs/**/*.md'
+      - 'scripts/retrieval/**'
+      - 'scripts/tests/**'
+      - 'scripts/lib/**/*.mjs'
+      - 'common/utils/server.mjs'
+      - '.github/workflows/unit_tests.yml'
+      - 'packages/stylelint-plugin-dialtone/**'
+      - 'scripts/generate-migration-guidance.mjs'
+      - '.agents/resources/rules/css-utilities.md'
+      - '.claude/rules/css-utilities.md'
+      - '.github/workflows/dialtone-documentation-tests.yml'
       - 'scripts/build-dialtone-vue-docs.mjs'
-      - 'packages/dialtone-css/postcss/dialtone-docs.cjs'
-      - 'packages/dialtone-docs/src/generators/**'
+      - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
+      - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
+      - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
   push:
     branches:
       - staging
     paths:
+      - 'nx.json'
+      - 'package.json'
+      - 'pnpm-lock.yaml'
       - 'packages/dialtone-vue/**'
       - 'packages/dialtone-tokens/**'
       - 'packages/combinator/**'
       - 'packages/dialtone-query-core/**'
       - 'packages/dialtone-cli/**'
+      - 'packages/dialtone-mcp-server/**'
+      - 'packages/dialtone-css/**'
+      - 'packages/dialtone-icons/**'
+      - 'packages/dialtone-docs/**'
+      - 'packages/eslint-plugin-dialtone/**'
+      - 'apps/dialtone-documentation/docs/**/*.md'
+      - 'scripts/retrieval/**'
+      - 'scripts/tests/**'
+      - 'scripts/lib/**/*.mjs'
+      - 'common/utils/server.mjs'
+      - '.github/workflows/unit_tests.yml'
+      - 'packages/stylelint-plugin-dialtone/**'
+      - 'scripts/generate-migration-guidance.mjs'
+      - '.agents/resources/rules/css-utilities.md'
+      - '.claude/rules/css-utilities.md'
+      - '.github/workflows/dialtone-documentation-tests.yml'
       - 'scripts/build-dialtone-vue-docs.mjs'
-      - 'packages/dialtone-css/postcss/dialtone-docs.cjs'
-      - 'packages/dialtone-docs/src/generators/**'
+      - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
+      - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
+      - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
 
 env:
   HUSKY: 0
@@ -42,6 +82,7 @@ jobs:
       tokens: ${{ steps.filter.outputs.tokens }}
       combinator: ${{ steps.filter.outputs.combinator }}
       cli: ${{ steps.filter.outputs.cli }}
+      lint_plugins: ${{ steps.filter.outputs.lint_plugins }}
     steps:
       - uses: actions/checkout@v4
       - uses: dorny/paths-filter@v3
@@ -54,13 +95,41 @@ jobs:
               - 'packages/dialtone-tokens/**'
             combinator:
               - 'packages/combinator/**'
-            # The CLI and query-core, plus the scripts that generate the data files they read.
+            # Lookup adapters, their source datasets/generators, and the shared retrieval fixtures.
             cli:
+              - 'nx.json'
+              - 'package.json'
+              - 'pnpm-lock.yaml'
               - 'packages/dialtone-query-core/**'
               - 'packages/dialtone-cli/**'
+              - 'packages/dialtone-mcp-server/**'
+              - 'packages/dialtone-css/**'
+              - 'packages/dialtone-icons/**'
+              - 'packages/dialtone-docs/**'
+              - 'packages/eslint-plugin-dialtone/**'
+              - 'apps/dialtone-documentation/docs/**/*.md'
+              - 'scripts/retrieval/**'
+              - 'scripts/tests/**'
+              - 'scripts/lib/**/*.mjs'
+              - 'common/utils/server.mjs'
+              - '.github/workflows/unit_tests.yml'
+              - 'scripts/generate-migration-guidance.mjs'
+              - '.agents/resources/rules/css-utilities.md'
+              - '.claude/rules/css-utilities.md'
+              - '.github/workflows/dialtone-documentation-tests.yml'
+              - 'packages/dialtone-tokens/**'
+              - 'packages/dialtone-vue/**'
               - 'scripts/build-dialtone-vue-docs.mjs'
-              - 'packages/dialtone-css/postcss/dialtone-docs.cjs'
-              - 'packages/dialtone-docs/src/generators/**'
+              - 'apps/dialtone-documentation/docs/.vuepress/site-reference.js'
+              - 'apps/dialtone-documentation/scripts/lib/frontmatter.mjs'
+              - 'apps/dialtone-documentation/scripts/lib/source-page.mjs'
+            lint_plugins:
+              - 'packages/eslint-plugin-dialtone/**'
+              - 'packages/stylelint-plugin-dialtone/**'
+              - 'packages/dialtone-css/lib/build/js/dialtone_migration_helper/**'
+              - 'packages/dialtone-css/lib/build/less/utilities/flex.less'
+              - 'scripts/generate-migration-guidance.mjs'
+              - '.github/workflows/unit_tests.yml'
 
   test:
     needs: changes
@@ -116,6 +185,7 @@ jobs:
     needs: changes
     if: needs.changes.outputs.cli == 'true'
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     permissions:
       packages: read
     steps:
@@ -127,5 +197,60 @@ jobs:
       - name: Setup Environment
         uses: ./.github/actions/setup-environment
 
-      - name: Run dialtone-query-core and dialtone-cli tests
-        run: pnpm nx run-many -t test -p dialtone-query-core dialtone-cli
+      - name: Build lookup adapters and source datasets
+        run: pnpm nx run-many -t build -p dialtone-cli dialtone-mcp-server
+
+      - name: Run query-core, CLI, documentation and ESLint suites
+        run: |
+          pnpm --dir packages/dialtone-query-core test
+          pnpm --dir packages/dialtone-cli test
+          pnpm --dir packages/dialtone-docs test
+          pnpm --dir packages/eslint-plugin-dialtone test
+
+      - name: Test source-generated public component identity
+        run: node --test scripts/tests/vue-component-identity.test.mjs
+
+      - name: Run shared fixture and cache contracts
+        run: node --test scripts/retrieval/*.test.mjs
+
+      - name: Run bounded cross-adapter retrieval regressions
+        run: node scripts/retrieval/run.mjs
+
+      - name: Test generated utility metadata and recommendations
+        run: >-
+          node --test
+          scripts/tests/dialtone-recommendations.test.mjs
+          packages/dialtone-css/postcss/dialtone-docs.test.cjs
+
+      - name: Test MCP query protocol contracts
+        run: pnpm --dir packages/dialtone-mcp-server test:protocol
+
+      - name: Build and test MCP startup and shutdown
+        run: pnpm nx run dialtone-mcp-server:test-startup
+
+      - name: Test shared-core release selection
+        run: pnpm --dir packages/dialtone-mcp-server test:release-paths
+
+      - name: Run existing documentation search scenarios
+        run: node packages/dialtone-mcp-server/scripts/run-acceptance-scenarios.mjs
+
+  test-lint-plugins:
+    needs: changes
+    if: needs.changes.outputs.lint_plugins == 'true'
+    runs-on: ubuntu-latest
+    permissions:
+      packages: read
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Environment
+        uses: ./.github/actions/setup-environment
+
+      - name: Check generated migration guidance
+        run: node scripts/generate-migration-guidance.mjs --check
+
+      - name: Test Dialtone Stylelint rules
+        run: pnpm --dir packages/stylelint-plugin-dialtone test

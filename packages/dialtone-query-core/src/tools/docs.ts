@@ -67,6 +67,8 @@ function stemTerm(word: string): string {
   return word;
 }
 
+const NEWS_DOC = /^(?:dialtone|about)\/whats-new(?:\/|$)/;
+
 /**
  * Search documentation sections using OR-logic word-boundary regex matching.
  * Each query term independently scores sections; results ranked by match count descending.
@@ -160,8 +162,8 @@ export function searchDocumentation(
   //   3. Match count descending (more query terms matched = more relevant)
   //   4. Sections with headings before intro stubs (non-empty headingPath wins ties)
   scored.sort((a, b) => {
-    const aIsNews = (a.result.details as DocumentationRecord).docId.startsWith('about/whats-new');
-    const bIsNews = (b.result.details as DocumentationRecord).docId.startsWith('about/whats-new');
+    const aIsNews = NEWS_DOC.test((a.result.details as DocumentationRecord).docId);
+    const bIsNews = NEWS_DOC.test((b.result.details as DocumentationRecord).docId);
     if (aIsNews !== bIsNews) return aIsNews ? 1 : -1;
     if (a.titleMatch !== b.titleMatch) return a.titleMatch ? -1 : 1;
     if (b.matchCount !== a.matchCount) return b.matchCount - a.matchCount;
@@ -196,9 +198,9 @@ export function searchDocumentation(
  */
 export function formatDocumentationResults(
   results: SearchResult[],
-  _query: string,
+  query: string,
 ): string {
-  if (results.length === 0) return '';
+  if (results.length === 0) return `No documentation found for "${query}".`;
 
   return results.map(result => {
     const record = result.details as DocumentationRecord;
@@ -217,4 +219,20 @@ export function formatDocumentationResults(
     const linkLine = links.length > 0 ? `\n${links.join(' · ')}` : '';
     return `${heading}\n\n${excerpt}${linkLine}`;
   }).join('\n\n---\n\n');
+}
+
+/** Exact source-section retrieval; offsets count Unicode code points. */
+export function getDocumentationDetail(args: { id: string; textOffset?: number; textLimit?: number }, data: DocumentationRecord[]) {
+  const record = data.find(record => record.id === args.id.trim());
+  if (!record) return { match: 'no-match' as const, record: null, contentCounts: { total: 0, returned: 0, offset: 0 }, next: null };
+  const textOffset = args.textOffset ?? 0;
+  const textLimit = args.textLimit ?? 6000;
+  const points = Array.from(record.content);
+  const selected = points.slice(textOffset, textOffset + textLimit);
+  const hasMore = textOffset + selected.length < points.length;
+  return {
+    match: 'exact' as const, record: { ...record, content: selected.join('') },
+    contentCounts: { total: points.length, returned: selected.length, offset: textOffset },
+    next: hasMore ? { id: record.id, textOffset: textOffset + selected.length, textLimit } : null,
+  };
 }

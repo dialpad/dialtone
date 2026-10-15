@@ -66,11 +66,11 @@
       ]
     },
     "gradient": {
-      "title": "Gradient",
+      "title": "Gradient (legacy)",
       "relatedLink": "/foundations/gradient/",
       "relatedLabel": "Usage Guidelines",
       "downloadAllUrl": "https://drive.google.com/open?id=1uNUvKNS3fpwdoZCF6py3Yq-20znzhtlg&usp=drive_fs",
-      "downloadAllLabel": "Download all Gradients",
+      "downloadAllLabel": "Download legacy gradients",
       "items": [
         {
           "svg": "download-gradient",
@@ -95,12 +95,12 @@
       "title": "Graphic",
       "relatedLink": "/foundations/graphic-system/",
       "relatedLabel": "Usage Guidelines",
-      "downloadAllUrl": "https://drive.google.com/open?id=1dWhUFvyoJdKXLsHMHPe05cej62hHPNp1&usp=drive_fs",
-      "downloadAllLabel": "Download",
+      "downloadAllUrl": "https://www.figma.com/design/pNwlnL86ybgXvyXepg8qfM/27Q2-Resolve-Brand---Web-Updates?node-id=8572-41905",
+      "downloadAllLabel": "Open in Figma",
       "items": [
         {
           "svg": "download-graphic",
-          "label": "Graphic"
+          "label": "Resolve graphics"
         }
       ]
     }

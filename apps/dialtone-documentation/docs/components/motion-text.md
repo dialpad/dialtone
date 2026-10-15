@@ -190,7 +190,7 @@ The component automatically includes proper ARIA attributes:
 
 1. **Choose the right speed**: Use `200` for short text, `400` for longer passages
 2. **Don't overuse**: Too many animated elements can be distracting
-3. **Consider context**: Hero sections work well with `gradient-in`, while body text might be better with `fade-in`
+3. **Consider context**: Reserve `gradient-in` for AI-generated text inside product UI. Don't use gradient modes on brand headlines or hero sections (see [Gradient](/foundations/gradient/)). Body text might be better with `fade-in`
 4. **Test with reduced motion**: Always ensure your UI works with animations disabled
 5. **Provide screen reader text**: If using emojis or special characters, always include alternative text
 
