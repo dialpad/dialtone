@@ -2,8 +2,8 @@
 type: architecture
 category: architecture
 keywords: [design-tokens, style-dictionary, figma, dialtone-tokens, css-custom-properties, less, themes, token-pipeline, rem, runtime-theming]
-ai_summary: How dialtone-tokens flows from JSON through Style Dictionary into CSS, LESS, JS, Vue and Figma variables, across 50+ brands and 4 dimensions.
-last_updated: 2026-09-17
+ai_summary: How Dialtone tokens flow from Tokens Studio JSON through Style Dictionary into CSS, LESS, JS, Vue and Figma variables, across 50+ brands and a four-dimension layered runtime API.
+last_updated: 2026-10-15
 related_packages: [dialtone-tokens, dialtone-css, dialtone-vue]
 ---
 
@@ -119,6 +119,8 @@ Components and CSS classes reference **semantic tokens only**. This is what enab
 3. `writeDocs()` — documentation generation
 4. `generateThemeFiles()` — JavaScript theme bundle generation
 5. `vite build` — bundles JS theme exports
+
+`build-docs.js` preserves zero values and source token deprecation reasons in documentation data. The CSS documentation generator carries those reasons into search metadata and adds context-qualified legacy migrations from the preferred migration helper's shared maps; see [Migration Guidance](../development/development-css-utilities.md#migration-guidance).
 
 ### Custom Transforms
 
