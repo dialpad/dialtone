@@ -70,16 +70,55 @@ Set `min-gap-steps` to keep the two thumbs from getting too close together. It's
 />
 ```
 
+### With companion inputs
+
+Pair a range slider with number inputs for precise entry. Bind the slider to an array and each input to its corresponding start or end value.
+
+```vue demo
+<!-- @wrapper -->
+<dt-stack gap="100" class="d-w100p" align="center">
+  <dt-slider
+    v-model="meetingHours"
+    label="Meeting hours"
+    :min="8"
+    :max="18"
+    :show-ticks="1"
+    :min-gap-steps="1"
+    :get-value-text="(value, index) => `${index === 0 ? 'Start' : 'End'}: ${value}:00`"
+  />
+  <dt-stack direction="row" gap="100" align="center">
+    <dt-input
+      v-model.number="meetingHours[0]"
+      label-strength="medium"
+      label-size="200"
+      label="Start"
+      type="number"
+      :min="8"
+      :max="meetingHours[1] - 1"
+    />
+    <dt-input
+      v-model.number="meetingHours[1]"
+      label-strength="medium"
+      label-size="200"
+      label="End"
+      type="number"
+      :min="meetingHours[0] + 1"
+      :max="18"
+    />
+  </dt-stack>
+</dt-stack>
+```
+
 ### With start and end slots (aka left/right)
 
 ```vue demo
 <!-- @wrapper -->
 <dt-slider :model-value="60" label="Brightness">
   <template #start>
-    <span aria-hidden="true">0%</span>
+    <dt-text variant="body-sm" aria-hidden="true">0%</dt-text>
   </template>
   <template #end>
-    <span aria-hidden="true">100%</span>
+    <dt-text variant="body-sm" aria-hidden="true">100%</dt-text>
   </template>
 </dt-slider>
 ```
@@ -106,7 +145,7 @@ When the `showTicks` interval equals `step`, every value the thumb can land on g
 
 ```vue demo
 <dt-slider
-  :model-value="7"
+  :model-value="3"
   label="Rating"
   :min="0"
   :max="10"
@@ -242,12 +281,8 @@ Set `readout` to show each thumb's current value. Useful when the track context 
 - `always` — a readout below the track, always visible.
 - `never` — no readout.
 
-> [!INFO] Floating readout
-> The floating readout requires the native Popover API (Chrome/Edge 114+, Firefox 125+, Safari 17+). Browsers without this API do not display the floating readout; use `always` when a visible value is needed there. Each native range input still exposes the formatted value through `aria-valuetext`. The tooltip remains within its document's viewport and cannot escape an embedding iframe.
->
-> Long values wrap and are clipped to the space available beside the thumb. The full formatted value remains available through `aria-valuetext`. The decorative bubble is noninteractive and never receives keyboard focus. It opens and closes immediately.
->
-> Top-layer rendering is independent of ancestor opacity, filters, and stacking contexts. A readout can therefore appear above a sticky header or another overlay covering its thumb; ancestor opacity and filter effects do not apply to it.
+> [!INFO] Tooltip readout
+> Requires native Popover API (Chrome/Edge 114+, Firefox 125+, Safari 17+). Browsers without this API do not display the floating readout; use `always` when a visible value is needed there. Each native range input still exposes the formatted value through `aria-valuetext`.
 
 In range mode with `always`, the two thumbs' readouts merge into a single centered `low–high` pill once they'd otherwise overlap as the thumbs converge.
 
@@ -295,43 +330,6 @@ To render the value somewhere custom outside the component instead, set `readout
       <dt-text strength="bold" tone="primary" numeric>{{ externalReadoutValue }}%</dt-text>
     </dt-text>
   </dt-box>
-</dt-stack>
-```
-
-Conversely, external inputs can control a range slider by binding their values.
-
-```vue demo
-<!-- @wrapper -->
-<dt-stack gap="100" class="d-w100p" align="center">
-  <dt-slider
-    v-model="meetingHours"
-    label="Meeting hours"
-    :min="8"
-    :max="18"
-    :show-ticks="1"
-    :min-gap-steps="1"
-    :get-value-text="(value, index) => `${index === 0 ? 'Start' : 'End'}: ${value}:00`"
-  />
-  <dt-stack direction="row" gap="100" align="center">
-    <dt-input
-      v-model.number="meetingHours[0]"
-      label-strength="medium"
-      label-size="200"
-      label="Start"
-      type="number"
-      :min="8"
-      :max="meetingHours[1] - 1"
-    />
-    <dt-input
-      v-model.number="meetingHours[1]"
-      label-strength="medium"
-      label-size="200"
-      label="End"
-      type="number"
-      :min="meetingHours[0] + 1"
-      :max="18"
-    />
-  </dt-stack>
 </dt-stack>
 ```
 
