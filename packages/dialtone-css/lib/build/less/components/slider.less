@@ -23,6 +23,10 @@
 //  $  SLIDER
 //  ============================================================================
 .d-slider {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    inline-size: 100%;
     //  Component CSS vars — override these for size/state modifiers
     --slider-track-height: var(--dt-size-border-300);         // 4px
     --slider-track-color: var(--dt-color-border-default);
@@ -57,7 +61,7 @@
     --slider-tick-width: var(--dt-size-border-100); // 1px
     --slider-boundary-color: var(--dt-color-foreground-tertiary);
     --slider-track-length: var(--dt-layout-300);               // 192px — used as block-size in vertical mode
-    --slider-mark-offset: var(--dt-spacing-200);               // gap from track/thumb to marks & readout
+    --slider-mark-offset: var(--dt-spacing-150);               // gap from track/thumb to marks & readout
 
     // link-primary's dark-theme value is still too close to the canvas for
     // readout-sized text (it's tuned for links inside body copy, not a bold
@@ -67,11 +71,6 @@
     [data-dt-theme="dark"] & {
         --slider-readout-color: var(--dt-color-foreground-primary);
     }
-
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    inline-size: 100%;
 }
 
 //  $$  LABEL
@@ -90,7 +89,7 @@
     gap: var(--dt-spacing-200);
     align-items: center;
     inline-size: 100%;
-    margin-block-start: var(--dt-spacing-100-negative);
+    // margin-block-start: var(--dt-spacing-100-negative);
 }
 
 // Marks/readout (see below) are position:absolute against .d-slider__control,
@@ -142,15 +141,6 @@
     overflow: clip;
     cursor: default;
     block-size: var(--slider-thumb-size);
-
-    // Minimum WCAG 2.5.5 touch target via padding
-    // A bare `0` is a <number>, not a <length> — max() can't mix that with the
-    // calc()'s length result, so the whole declaration becomes invalid at
-    // computed-value time and silently falls back to 0, defeating the WCAG
-    // 2.5.5 touch target this is meant to guarantee. calc(--dt-spacing-base * 0)
-    // is a zero typed as a length (same pattern the sm/lg size modifiers below
-    // use for their own --dt-spacing-base arithmetic).
-    padding-block: max(calc(var(--dt-spacing-base) * 0), calc((var(--dt-spacing-550) - var(--slider-thumb-size)) / 2));
     /* stylelint-disable-next-line meowtec/no-px */
     overflow-clip-margin: 32px;
 }
@@ -304,7 +294,7 @@
     block-size: var(--dt-spacing-50);
     background-color: var(--slider-tick-color);
     inset-block-start: 50%;
-    margin-block-start: calc(var(--slider-track-height) / 2 + var(--dt-size-border-100));
+    // margin-block-start: calc(var(--slider-track-height) / 2 + var(--dt-size-border-100));
     pointer-events: none;
 }
 
@@ -405,6 +395,7 @@
     display: none;
     margin: 0;
     overflow: visible;
+    font-variant-numeric: tabular-nums;
     border: 0;
     pointer-events: none;
     inset: auto;

@@ -39,7 +39,7 @@
           kind="label"
           :size="resolvedLabelSize"
           :strength="labelStrength"
-          :tone="disabled ? 'disabled' : 'primary'"
+          :tone="disabled ? 'disabled' : 'secondary'"
         >
           {{ label }}
         </dt-text>

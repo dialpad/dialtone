@@ -256,6 +256,7 @@ In range mode with `always` or `interaction`, the two thumbs' readouts merge int
 <!-- @wrapper -->
 <dt-stack gap="300" class="d-w100p">
   <dt-slider :model-value="48" label="Volume" />
+  <dt-slider :model-value="48" label="Volume" readout="never" />
   <dt-slider :model-value="48" label="Volume" readout="always" />
   <dt-slider :model-value="48" label="Volume" readout="interaction" />
 </dt-stack>
@@ -291,7 +292,7 @@ To render the value somewhere custom outside the component instead, set `readout
 <!-- @wrapper -->
 <dt-stack gap="200" class="d-w100p">
   <dt-slider v-model="externalReadoutValue" label="Zoom" readout="never" />
-  <dt-text size="200" tone="subtle">{{ externalReadoutValue }}%</dt-text>
+  <dt-text size="200" tone="subtle">Zoom level is set to <dt-text strength="strong" numeric>{{ externalReadoutValue }}%</dt-text></dt-text>
 </dt-stack>
 ```
 

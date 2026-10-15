@@ -3,6 +3,75 @@ layout: Blank
 ---
 
 <dt-stack class="d-p-400 d-bgc-primary" gap="400">
+  <dt-box inline-size="600" class="d-of-hidden">
+    <dt-stack gap="200" class="d-w100p foof">
+      <dt-input label="Label" />
+      <dt-input label="Label" />
+      <dt-slider :model-value="50" label="Label" />
+      <dt-slider :model-value="[20, 70]" label="Label" />
+      <dt-select-menu
+        :options="[
+              { value: ``, label: `Please select one` },
+              { value: `1`, label: `Option 1` },
+              { value: `2`, label: `Option 2` },
+              { value: `3`, label: `Option 3` },
+            ]"
+        label="Default"
+        :model-value="modelValue"
+        @update:model-value="onInput"
+      />
+      <dt-select-menu
+        :options="[
+              { value: ``, label: `Please select one` },
+              { value: `1`, label: `Option 1` },
+              { value: `2`, label: `Option 2` },
+              { value: `3`, label: `Option 3` },
+            ]"
+        label="Disabled"
+        disabled
+        :model-value="modelValue"
+        @update:model-value="onInput"
+      />
+      <dt-slider
+        :model-value="[20, 70]"
+        label="Price range"
+        :show-marks="[{ value: 0, text: 'Min $0' }, { value: 100, text: 'Max $100' }]"
+        :get-value-text="(value, index) => index === 0 ? `Minimum: $${value}` : `Maximum: $${value}`"
+      />
+      <dt-input label="Label" />
+      <dt-slider
+        :model-value="7"
+        label="Rating"
+        :min="0"
+        :max="10"
+        :step="1"
+        :show-ticks="1"
+      />
+      <dt-slider
+        :model-value="0"
+        label="Balance"
+        :min="-100"
+        :max="100"
+        :show-marks="[{ value: -100, text: '−100' }, { value: 0, text: '0' }, { value: 100, text: '100' }]"
+        :show-ticks="25"
+      />
+      <dt-slider :model-value="30" label="Volume (disabled)" disabled />
+      <dt-slider
+        :model-value="7"
+        label="Rating"
+        :min="0"
+        :max="10"
+        :step="1"
+        :show-ticks="1"
+        :show-marks="true"
+      />
+      <dt-slider :model-value="48" label="Volume" />
+      <dt-input label="Label" />
+      <dt-slider :model-value="48" label="Volume" readout="always" />
+      <dt-slider :model-value="48" label="Volume" readout="interaction" />
+      <dt-input label="Label" />
+    </dt-stack>
+  </dt-box>
   <dt-stack gap="100">
     <dt-box>
       <dt-toggle label-class="d-pie-100" size="200">Label</dt-toggle>
@@ -767,6 +836,13 @@ layout: Blank
 </dt-stack>
 
 </dt-stack>
+
+<style lang="less">
+  .foof:hover > * {
+    background-color: var(--dt-color-surface-moderate-opaque)
+  }
+
+</style>
 
 <script setup>
 import { ref, computed } from 'vue';
