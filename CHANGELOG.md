@@ -1,3 +1,17 @@
+# [10.7.0](https://github.com/dialpad/dialtone/compare/dialtone/v10.6.0...dialtone/v10.7.0) (2026-10-15)
+
+
+### Bug Fixes
+
+* **Dialtone Query Core:** DLT-3651 align search and migration guidance ([#1461](https://github.com/dialpad/dialtone/issues/1461)) ([84ac078](https://github.com/dialpad/dialtone/commit/84ac078aa8f09fde46fecb9c1bc71e1f275f35dc))
+* **Docs:** DLT-3664 normalize icon catalog search ([#1469](https://github.com/dialpad/dialtone/issues/1469)) ([588b248](https://github.com/dialpad/dialtone/commit/588b248d330e0bb5525f921820557af8ec79d42a))
+
+
+### Features
+
+* **Dialtone Icons:** DLT-3663 add stop-stroke ([#1468](https://github.com/dialpad/dialtone/issues/1468)) ([eb72e37](https://github.com/dialpad/dialtone/commit/eb72e37b0da5de82d6776af063338829097d0d5a))
+* **Dialtone Mcp Server:** DLT-3650 add complete API retrieval and provenance ([#1462](https://github.com/dialpad/dialtone/issues/1462)) ([c23dc8c](https://github.com/dialpad/dialtone/commit/c23dc8c3cc4aa99aabf3651a0d024ce7bb935609))
+
 # [10.6.0](https://github.com/dialpad/dialtone/compare/dialtone/v10.5.1...dialtone/v10.6.0) (2026-10-13)
 
 
