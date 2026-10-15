@@ -78,7 +78,7 @@
 //  ----------------------------------------------------------------------------
 .d-slider__body {
     display: flex;
-    gap: var(--dt-spacing-200);
+    gap: var(--dt-spacing-150);
     align-items: center;
     inline-size: 100%;
 }
@@ -107,6 +107,7 @@
     flex: 1;
     align-items: center;
     box-sizing: content-box;
+    margin-block-start: var(--dt-spacing-25-negative);
 
     // A mark/readout near 0%/100% is centered on its value (translateX(-50%)),
     // so it naturally renders partly outside this box — there's nothing left
@@ -162,6 +163,8 @@
 //  ----------------------------------------------------------------------------
 .d-slider__indicator {
     position: absolute;
+    // Cover ticks on the filled track; later thumb visuals still paint above it.
+    z-index: var(--zi-base1);
     block-size: var(--slider-track-height);
     background-color: var(--slider-indicator-color);
     border-radius: var(--dt-size-radius-pill);
@@ -527,6 +530,7 @@
         block-size: auto;
         flex: 1;
         flex-direction: column;
+        margin-block-start: var(--dt-spacing-50);
         padding-block: 0;
         // Same bare-number-vs-length max() pitfall as the horizontal
         // padding-block rule above — see its comment.
@@ -589,17 +593,6 @@
     .d-slider__thumb-hit {
         inset-inline-start: 50%;
         inset-block-start: unset;
-    }
-
-    .d-slider__tick {
-        inline-size: var(--dt-spacing-50);
-        block-size: var(--dt-size-border-200);
-        inset-block-start: unset;
-        inset-inline-start: calc(50% + var(--slider-track-height) / 2 + var(--dt-size-border-100));
-        margin-block-start: 0;
-        // bottom and transform set inline via style — tickPositionStyle
-        // (UseSliderGeometry) always sets a transform, so a CSS fallback
-        // here would never actually apply.
     }
 
     .d-slider__mark,
