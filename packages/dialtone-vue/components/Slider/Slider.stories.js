@@ -135,7 +135,7 @@ export const argTypesData = {
     },
   },
   readout: {
-    description: 'Controls the live value readout: a tooltip-styled bubble above the thumb (the default), always visible below the track, never shown, or shown below the track only while hovering, dragging, or focusing that thumb.',
+    description: 'Controls the live value readout: a tooltip-styled bubble above the thumb (the default), always visible below the track, or never shown.',
     control: { type: 'select' },
     options: SLIDER_READOUT_MODES,
     table: {

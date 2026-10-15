@@ -170,18 +170,6 @@
       />
     </section>
 
-    <!-- Value readout: on interaction -->
-    <section>
-      <p class="d-body--sm-compact d-mbe-300 d-fc-tertiary">
-        Value readout — on interaction (hover, drag, or focus)
-      </p>
-      <dt-slider
-        v-model="readoutInteractionValue"
-        label="Volume"
-        readout="interaction"
-      />
-    </section>
-
     <!-- Fill from end -->
     <section>
       <p class="d-body--sm-compact d-mbe-300 d-fc-tertiary">
@@ -500,7 +488,6 @@ export default {
       midpointValue: ref(0),
       readoutTooltipValue: ref(48),
       readoutAlwaysValue: ref(48),
-      readoutInteractionValue: ref(48),
       invertedValue: ref(40),
       percentageValue: ref(0),
       verticalValue: ref(60),

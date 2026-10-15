@@ -156,14 +156,14 @@
              It sits in the same row as marks, positioned by the same value-to-percent
              math, so it never needs JS measurement or a reposition loop that could
              desync from the thumb. -->
-        <template v-if="readout === 'always' || readout === 'interaction'">
+        <template v-if="readout === 'always'">
           <div
             v-for="(val, i) in internalValues"
             :key="`readout-${i}`"
             ref="readoutElRefs"
             :class="[
               'd-slider__readout',
-              (isReadoutOpen(i) && !readoutMerged) ? 'd-slider__readout--show' : 'd-slider__readout--hide',
+              !readoutMerged ? 'd-slider__readout--show' : 'd-slider__readout--hide',
             ]"
             :style="markStyle(thumbPercent(val))"
             :data-readout-index="i"
@@ -469,16 +469,15 @@ const props = defineProps({
   /**
    * Controls the live value readout for each thumb: a tooltip-styled bubble above the
    * thumb shown only while hovering, dragging, or focusing it (the default); always
-   * visible below the track; never shown; or shown below the track only while
-   * hovering, dragging, or focusing that thumb. Text is formatted via getValueText
+   * visible below the track; or never shown. Text is formatted via getValueText
    * when set, otherwise prefix/suffix — same as each thumb's aria-valuetext, but
    * unlike a mark's own auto-generated text (see showMarks). The tooltip uses
    * the native Popover API to escape ancestor clipping and stays within the
    * viewport. Browsers without that API do not display the floating readout;
-   * use always/interaction when a visible value is needed there. Those readouts
+   * use always when a visible value is needed there. The inline readout
    * and the merged two-thumb pill are not edge-clamped, so a long formatted value can render
    * close to or past the track's own edge at those values.
-   * @values tooltip, always, never, interaction
+   * @values tooltip, always, never
    */
   readout: {
     type: String,

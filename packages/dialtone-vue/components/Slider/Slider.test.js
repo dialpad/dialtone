@@ -278,6 +278,18 @@ describe('DtSlider Tests', () => {
         updateWrapper();
         await nextTick();
         expect(readouts()).toHaveLength(0);
+        expect(wrapper.find('[data-qa="dt-slider-thumb-readout-tooltip"]').exists()).toBe(false);
+      });
+
+      it('rejects the removed "interaction" readout mode', () => {
+        const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+        try {
+          mockProps = { readout: 'interaction' };
+          updateWrapper();
+          expect(warnSpy.mock.calls.flat().join(' ')).toContain('Invalid prop: custom validator check failed for prop "readout"');
+        } finally {
+          warnSpy.mockRestore();
+        }
       });
 
       it('renders an always-shown readout when readout is "always"', async () => {
@@ -287,55 +299,6 @@ describe('DtSlider Tests', () => {
         const els = readouts();
         expect(els).toHaveLength(1);
         expect(els[0].classes()).toContain('d-slider__readout--show');
-      });
-
-      it('keeps the readout hidden at rest when readout is "interaction"', async () => {
-        mockProps = { readout: 'interaction' };
-        updateWrapper();
-        await nextTick();
-        expect(readouts()[0].classes()).toContain('d-slider__readout--hide');
-      });
-
-      it('shows the readout when the thumb receives keyboard focus, readout "interaction"', async () => {
-        mockProps = { readout: 'interaction' };
-        updateWrapper();
-        await nextTick();
-        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
-        await thumbInputs[0].trigger('focus');
-        expect(readouts()[0].classes()).toContain('d-slider__readout--show');
-      });
-
-      it('hides the readout again once the thumb blurs when readout is "interaction"', async () => {
-        mockProps = { readout: 'interaction' };
-        updateWrapper();
-        await nextTick();
-        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
-        await thumbInputs[0].trigger('focus');
-        await thumbInputs[0].trigger('blur');
-        expect(readouts()[0].classes()).toContain('d-slider__readout--hide');
-      });
-
-      it('shows the readout on thumb-hit hover, independent of focus, when readout is "interaction"', async () => {
-        mockProps = { readout: 'interaction' };
-        updateWrapper();
-        await nextTick();
-        const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
-        await hitTarget.trigger('pointerenter');
-        expect(readouts()[0].classes()).toContain('d-slider__readout--show');
-        await hitTarget.trigger('pointerleave');
-        expect(readouts()[0].classes()).toContain('d-slider__readout--hide');
-      });
-
-      it('keeps the readout open on hover-leave if that thumb is still keyboard-focused', async () => {
-        mockProps = { readout: 'interaction' };
-        updateWrapper();
-        await nextTick();
-        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
-        const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
-        await thumbInputs[0].trigger('focus');
-        await hitTarget.trigger('pointerenter');
-        await hitTarget.trigger('pointerleave');
-        expect(readouts()[0].classes()).toContain('d-slider__readout--show');
       });
 
       it('renders the formatted value as the readout content', async () => {
@@ -451,6 +414,14 @@ describe('DtSlider Tests', () => {
         expect(tooltip.matches(':popover-open')).toBe(true);
         await hitTarget.trigger('pointerleave');
         expect(tooltip.matches(':popover-open')).toBe(false);
+      });
+
+      it('keeps the readout open on hover-leave if that thumb is still keyboard-focused', async () => {
+        const hitTarget = wrapper.find('[data-qa="dt-slider-thumb-hit"]');
+        await thumbInputs[0].trigger('focus');
+        await hitTarget.trigger('pointerenter');
+        await hitTarget.trigger('pointerleave');
+        expect(tooltipReadouts()[0].element.matches(':popover-open')).toBe(true);
       });
 
       it('renders the formatted value as its content', async () => {
@@ -632,9 +603,9 @@ describe('DtSlider Tests', () => {
         expect(dtText.props('tone')).toBe('disabled');
       });
 
-      it('sets label tone to primary when not disabled', () => {
+      it('sets label tone to secondary when not disabled', () => {
         const dtText = wrapper.findComponent(DtText);
-        expect(dtText.props('tone')).toBe('primary');
+        expect(dtText.props('tone')).toBe('secondary');
       });
     });
 
@@ -1612,18 +1583,14 @@ describe('DtSlider Tests', () => {
         expect(thumbVisuals[0].classes()).not.toContain('d-slider__thumb-visual--focused');
       });
 
-      it('closes the interaction readout when disabled flips true while a thumb is hovered', async () => {
-        mockProps = { readout: 'interaction' };
-        updateWrapper();
-        await nextTick();
+      it('closes the tooltip readout when disabled flips true while a thumb is hovered', async () => {
         const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
         await hitTarget.trigger('pointerenter');
-        let readout = wrapper.findAll('[data-qa="dt-slider-thumb-readout"]')[0];
-        expect(readout.classes()).toContain('d-slider__readout--show');
+        const readout = wrapper.find('[data-qa="dt-slider-thumb-readout-tooltip"]').element;
+        expect(readout.matches(':popover-open')).toBe(true);
 
         await wrapper.setProps({ disabled: true });
-        readout = wrapper.findAll('[data-qa="dt-slider-thumb-readout"]')[0];
-        expect(readout.classes()).toContain('d-slider__readout--hide');
+        expect(readout.matches(':popover-open')).toBe(false);
       });
 
       it('routes a pointerdown to the thumb opposite the one last dragged, when both thumbs coincide', async () => {
@@ -3007,7 +2974,7 @@ describe('DtSlider Tests', () => {
       // jsdom has no real layout engine — getBoundingClientRect() returns an
       // all-zero rect for every element by default. Marks are still measured
       // directly (their position doesn't animate, so no analytical treatment
-      // needed), but the always/interaction readout's position is computed
+      // needed), but the always readout's position is computed
       // analytically from pct + the control's own rect (see
       // analyticalReadoutRect in UseSliderCollisionAvoidance), so the control
       // needs a stub too — that readout's stubbed rect only contributes its
@@ -3113,7 +3080,7 @@ describe('DtSlider Tests', () => {
 
       it('hides a mark once it overlaps the tooltip readout (the default mode) — tooltip elements are looked up by their own ref array, not data-readout-index', async () => {
         // readoutElByIndex used to only search readoutElRefs (data-readout-index,
-        // the always/interaction readout's own lookup) — the tooltip readout
+        // the always readout's own lookup) — the tooltip readout
         // has no such attribute, so with readout left at its default
         // ('tooltip'), this collision check was silently a no-op: marks and
         // the tooltip bubble could overlap with zero hiding ever applied.
@@ -3163,20 +3130,22 @@ describe('DtSlider Tests', () => {
         expect(marksAfter[1].classes()).not.toContain('d-slider__mark--collision-hidden');
       });
 
-      it('never hides a mark for a readout that is not currently shown', async () => {
-        mockProps = { readout: 'interaction', showMarks: [0, 100], modelValue: 50 };
+      it('restores a mark when the overlapping tooltip readout closes', async () => {
+        mockProps = { showMarks: [0, 100], modelValue: 50 };
         updateWrapper();
         await nextTick();
 
         wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
         const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
-        const readouts = wrapper.findAll('[data-qa="dt-slider-thumb-readout"]');
         marks[0].element.getBoundingClientRect = () => nearReadoutRect;
-        readouts[0].element.getBoundingClientRect = () => readoutSize;
+        wrapper.find('[data-qa="dt-slider-thumb-readout-tooltip"]').element.getBoundingClientRect = () => nearReadoutRect;
 
-        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
-        thumbInputs[0].element.value = '51';
-        await thumbInputs[0].trigger('input');
+        const hitTarget = wrapper.find('[data-qa="dt-slider-thumb-hit"]');
+        await hitTarget.trigger('pointerenter');
+        await settleCollisions();
+        expect(wrapper.findAll('[data-qa="dt-slider-mark"]')[0].classes()).toContain('d-slider__mark--collision-hidden');
+
+        await hitTarget.trigger('pointerleave');
         await settleCollisions();
 
         const marksAfter = wrapper.findAll('[data-qa="dt-slider-mark"]');
@@ -3866,14 +3835,6 @@ describe('DtSlider Tests', () => {
 
     it('still reserves space for readout alone, with marks turned off', () => {
       mockProps = { showMarks: false, readout: 'always' };
-      updateWrapper();
-      expect(wrapper.find(bodySelector).classes()).toContain('d-slider__body--reserve-annotation-space');
-    });
-
-    it('reserves space for an "interaction" readout even at rest, before any thumb is actually interacted with', () => {
-      // Only visibility is interaction-gated — the space is reserved the
-      // whole time, same as "always", so nothing jumps when it appears.
-      mockProps = { showMarks: false, readout: 'interaction' };
       updateWrapper();
       expect(wrapper.find(bodySelector).classes()).toContain('d-slider__body--reserve-annotation-space');
     });
