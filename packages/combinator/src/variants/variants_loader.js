@@ -25,4 +25,12 @@ export default {
       ariaLabel: { initialValue: 'Processing' },
     },
   },
+
+  spinner: {
+    props: {
+      kind: { initialValue: 'spinner' },
+      size: { initialValue: '500' },
+      ariaLabel: { initialValue: 'Processing' },
+    },
+  },
 };

@@ -34,6 +34,14 @@ The base loader should be the go-to loader for most of your needs. When in doubt
 <dt-loader></dt-loader>
 ```
 
+### Spinner
+
+The circular spinner from earlier versions of Dialtone. Use `kind="spinner"` only where a placement still needs it.
+
+```vue demo
+<dt-loader kind="spinner"></dt-loader>
+```
+
 ## Sizes
 
 The base loader size is 24px and should be used in most cases.
@@ -58,13 +66,13 @@ The base loader size is 24px and should be used in most cases.
 
 ## Color
 
-Loader dots use `--dt-color-surface-bold` by default. Inside a [Button](/components/button.html), they follow the button's text color. To recolor the dots elsewhere, add a color utility class such as `d-fc-critical` to the loader, or set the `--loader-color-dot` custom property on the loader or on a parent element.
+The loader inherits the text color of its parent through `currentColor`, so inside a [Button](/components/button.html) it matches the button's text. To recolor it, add a color utility class such as `d-fc-critical` to the loader or a parent element, or set the `--loader-color-dot` custom property.
 
 ## Accessibility
 
 - You can add an `aria-label` attribute to the loader to indicate a custom label.
 - If no `aria-label` is provided, the default value is "loading".
-- When the user prefers reduced motion, the dots stop moving and gently pulse in opacity instead.
+- When the user prefers reduced motion, the default loader's dots stop moving and gently pulse in opacity instead.
 
 ## Vue API
 

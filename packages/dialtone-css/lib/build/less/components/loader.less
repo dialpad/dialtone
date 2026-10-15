@@ -8,6 +8,7 @@
 //
 //  TABLE OF CONTENTS
 //  • DEFAULT LOADER
+//  • SPINNER
 //  • KEYFRAMES
 //  • REDUCED MOTION
 //
@@ -19,10 +20,9 @@
   --loader-duration: 2500ms;
 
   display: inline-grid;
-  // Dots fill with currentColor, so a color utility or `color` set on the
-  // loader itself still recolors it. --loader-color-dot is left unset here so
-  // contexts like buttons can override it regardless of stylesheet order.
-  color: var(--loader-color-dot, var(--dt-color-surface-bold));
+  // The loader inherits the text color by default. A color utility, `color`,
+  // or --loader-color-dot on the loader or a parent recolors it.
+  color: var(--loader-color-dot, currentColor);
 
   &__dot {
     // With transform-box: fill-box, each dot scales from its own center
@@ -40,6 +40,36 @@
     &--2 { animation-name: d-loader-dot-2-orbit, d-loader-dot-grow; }
     &--3 { animation-name: d-loader-dot-3-orbit, d-loader-dot-shrink; }
     &--4 { animation-name: d-loader-dot-4-orbit, d-loader-dot-shrink; }
+  }
+}
+
+//  ============================================================================
+//  $   SPINNER
+//      The circular spinner, kept for placements that still need it
+//      (kind="spinner"). Scoped to the modifier so its icon rules don't reach
+//      the dots' SVG, which shares the d-loader__icon class.
+//  ----------------------------------------------------------------------------
+.d-loader--spinner {
+  .d-loader__icon {
+    grid-area: 1 / 1;
+    opacity: var(--dt-opacity-1000);
+    animation: d-loading-circle 900ms infinite linear;
+
+    // Comet fade. Black is an intentional choice and only used for masking.
+    mask-image: conic-gradient(
+      from 270deg,
+      black 0deg,
+      black 105deg,
+      transparent 170deg,
+      transparent 180deg,
+      black 234deg,
+      black 360deg
+    );
+  }
+
+  .d-loader__icon-track {
+    grid-area: 1 / 1;
+    opacity: var(--dt-opacity-200);
   }
 }
 

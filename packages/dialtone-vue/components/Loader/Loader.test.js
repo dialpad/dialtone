@@ -60,6 +60,43 @@ describe('DtLoader Tests', function () {
         expect(loadingIcon.element.classList.contains('d-icon--size-200')).toBe(true);
       });
     });
+
+    describe('When rendered with the default kind', () => {
+      it('Should not have the spinner modifier', () => {
+        expect(wrapper.classes()).not.toContain('d-loader--spinner');
+      });
+
+      it('Should not render the spinner track', () => {
+        expect(wrapper.find('.d-loader__icon-track').exists()).toBe(false);
+      });
+    });
+
+    describe('When kind is spinner', () => {
+      beforeEach(() => {
+        mockProps = { kind: 'spinner' };
+        updateWrapper();
+      });
+
+      it('Should have the spinner modifier', () => {
+        expect(wrapper.classes()).toContain('d-loader--spinner');
+      });
+
+      it('Should render the track and the spinning icon', () => {
+        expect(wrapper.find('.d-loader__icon-track').exists()).toBe(true);
+        expect(loadingIcon.exists()).toBe(true);
+      });
+
+      it('Should not render dots', () => {
+        expect(wrapper.findAll('[data-qa="dt-loader-dot"]').length).toBe(0);
+      });
+
+      it('Should apply the size to both SVGs', () => {
+        mockProps = { kind: 'spinner', size: '200' };
+        updateWrapper();
+        expect(wrapper.find('.d-loader__icon-track').classes()).toContain('d-icon--size-200');
+        expect(loadingIcon.classes()).toContain('d-icon--size-200');
+      });
+    });
   });
 
   describe('Accessibility Tests', () => {

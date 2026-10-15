@@ -3,8 +3,16 @@ import DtLoader from './Loader.vue';
 import DtLoaderDefaultTemplate from './LoaderDefault.story.vue';
 import DtLoaderVariantsTemplate from './LoaderVariants.story.vue';
 import { ICON_SIZE_MODIFIERS } from '@/components/Icon';
+import { LOADER_KIND_MODIFIERS } from './LoaderConstants';
 
 const argTypesData = {
+  kind: {
+    options: Object.keys(LOADER_KIND_MODIFIERS),
+    control: {
+      type: 'select',
+    },
+  },
+
   size: {
     options: Object.keys(ICON_SIZE_MODIFIERS),
     control: {
