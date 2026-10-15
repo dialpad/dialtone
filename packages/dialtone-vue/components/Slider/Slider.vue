@@ -88,6 +88,7 @@
         <div
           v-for="(val, i) in internalValues"
           :key="`thumb-visual-${i}`"
+          :ref="(el) => { thumbVisualRefs[i] = el; }"
           :class="[
             'd-slider__thumb-visual',
             {
@@ -111,17 +112,19 @@
              index-misalignment risk UseSliderCollisionAvoidance documents for
              markElRefs), but onPointerDown/updateThumbValue index into this
              directly — a function ref assigns by the v-for's own index, and
-             self-cleans on unmount when range shrinks to single mode. -->
+             self-cleans on unmount when range shrinks to single mode.
+             Keep :value after :min/:max/:step: Vue patches them in template
+             order, and the browser clamps a value set against stale bounds. -->
         <input
           v-for="(val, i) in internalValues"
           :key="`thumb-input-${i}`"
           :ref="(el) => { thumbRefs[i] = el; }"
           type="range"
           class="d-slider__thumb"
-          :value="val"
           :min="thumbNativeMin(i)"
           :max="thumbNativeMax(i)"
           :step="thumbNativeStep(i)"
+          :value="val"
           :disabled="disabled"
           :name="name || undefined"
           :aria-labelledby="resolvedAriaLabelledby"
@@ -183,24 +186,20 @@
             {{ mergedReadoutText }}
           </div>
         </template>
-        <!-- Tooltip-styled readout (default): borrows DtTooltip's CSS without
-             the component; positioned like marks, no measurement loop. -->
+        <!-- Keep DOM parentage for inherited themes; native popovers paint
+             outside every ancestor's overflow, clip path, and mask. -->
         <template v-if="readout === 'tooltip'">
           <div
             v-for="(val, i) in internalValues"
             :key="`readout-tooltip-${i}`"
             :ref="(el) => { tooltipElRefs[i] = el; }"
-            :class="[
-              'd-tooltip',
-              'd-slider__readout-tooltip',
-              tooltipReadoutArrowClass,
-              isReadoutOpen(i) ? 'd-tooltip--show' : 'd-tooltip--hide',
-            ]"
-            :style="tooltipReadoutStyle(val, i)"
+            class="d-tooltip d-slider__readout-tooltip"
+            popover="manual"
+            inert
             aria-hidden="true"
             data-qa="dt-slider-thumb-readout-tooltip"
           >
-            {{ formatValue(val, i) }}
+            <span class="d-slider__tooltip-content">{{ formatValue(val, i) }}</span>
           </div>
         </template>
       </div>
@@ -236,6 +235,7 @@ import { useSliderInteraction } from './Composables/UseSliderInteraction';
 import { useSliderGeometry } from './Composables/UseSliderGeometry';
 import { useSliderMarksAndTicks } from './Composables/UseSliderMarksAndTicks';
 import { useSliderCollisionAvoidance } from './Composables/UseSliderCollisionAvoidance';
+import { useSliderTooltipReadout } from './Composables/UseSliderTooltipReadout';
 
 defineOptions({ name: 'DtSlider', inheritAttrs: false });
 
@@ -472,10 +472,11 @@ const props = defineProps({
    * visible below the track; never shown; or shown below the track only while
    * hovering, dragging, or focusing that thumb. Text is formatted via getValueText
    * when set, otherwise prefix/suffix — same as each thumb's aria-valuetext, but
-   * unlike a mark's own auto-generated text (see showMarks). Only the tooltip
-   * readout is edge-clamped near min/max (see UseSliderGeometry's
-   * tooltipReadoutStyle) — the always/interaction readout and the merged
-   * two-thumb pill are not, so a long getValueText/suffix string can render
+   * unlike a mark's own auto-generated text (see showMarks). The tooltip uses
+   * the native Popover API to escape ancestor clipping and stays within the
+   * viewport. Browsers without that API do not display the floating readout;
+   * use always/interaction when a visible value is needed there. Those readouts
+   * and the merged two-thumb pill are not edge-clamped, so a long formatted value can render
    * close to or past the track's own edge at those values.
    * @values tooltip, always, never, interaction
    */
@@ -545,6 +546,7 @@ const attrs = useAttrs();
 const labelId = `slider-label-${getUniqueString()}`;
 const controlRef = ref(null);
 const thumbRefs = ref([]);
+const thumbVisualRefs = ref([]);
 
 // Prop-derived, not owned by any one composable — every composable that
 // needs either receives it as a plain argument below.
@@ -676,8 +678,9 @@ const {
   markCollisionHidden,
   readoutMerged,
   markEdgeOffsetPx,
-  controlRect,
-  tooltipWidthPx,
+  readoutVisibility,
+  formattedValues,
+  updateCollisions,
 } = useSliderCollisionAvoidance(props, {
   controlRef,
   isVertical,
@@ -694,8 +697,6 @@ const {
   thumbPositionStyle,
   tickPositionStyle,
   markStyle,
-  tooltipReadoutArrowClass,
-  tooltipReadoutStyle,
   mergedReadoutPct,
   mergedReadoutText,
   indicatorStyle,
@@ -706,9 +707,17 @@ const {
   thumbPercent,
   isRtl,
   markEdgeOffsetPx,
-  controlRect,
-  tooltipWidthPx,
   formatValue,
+});
+
+useSliderTooltipReadout(props, {
+  thumbVisualRefs,
+  tooltipElRefs,
+  isVertical,
+  isRtl,
+  readoutVisibility,
+  formattedValues,
+  onPosition: updateCollisions,
 });
 
 // ─── Dev warnings ─────────────────────────────────────────────────────────────

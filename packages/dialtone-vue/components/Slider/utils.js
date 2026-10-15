@@ -41,11 +41,13 @@ export function generateInterval(min, max, interval, label) {
   return values;
 }
 
-// Shared by UseSliderCollisionAvoidance (marks) and UseSliderGeometry (the
-// tooltip readout) — both nudge an element inward by however far it hangs
-// past controlRect, once that overflow exceeds tolerance. Callers compute
-// leftEdge/rightEdge and tolerance their own way (measured DOM rect vs.
-// analytical percent math; different tolerance constants).
+// Same length and the same entries in order — cheap enough to run every frame.
+export function sameValues(a, b) {
+  return a.length === b.length && a.every((value, i) => value === b[i]);
+}
+
+// How far to nudge a mark (UseSliderCollisionAvoidance) inward: however far
+// it hangs past controlRect, once that overflow exceeds tolerance.
 export function edgeClampOffset(leftEdge, rightEdge, controlRect, tolerance) {
   const startOverflow = controlRect.left - leftEdge; // >0 means it hangs past the start edge
   const endOverflow = rightEdge - controlRect.right; // >0 means it hangs past the end edge

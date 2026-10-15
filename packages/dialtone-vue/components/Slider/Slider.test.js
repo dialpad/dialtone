@@ -1,7 +1,15 @@
 import { defineComponent, h, nextTick, ref } from 'vue';
-import { mount } from '@vue/test-utils';
+import { mount, flushPromises } from '@vue/test-utils';
+import { computePosition } from '@floating-ui/dom';
 import { DtText } from '@/components/Text';
 import DtSlider from './Slider.vue';
+
+// Pass-through spy, so tests can see what the tooltip readout asks
+// Floating UI for without changing how it positions.
+vi.mock('@floating-ui/dom', async (importOriginal) => {
+  const floatingUi = await importOriginal();
+  return { ...floatingUi, computePosition: vi.fn(floatingUi.computePosition) };
+});
 
 // Matches Slider.vue's updateCollisions: nextTick() alone doesn't guarantee
 // jsdom/the browser has painted the latest patch — it waits a real frame
@@ -25,43 +33,6 @@ const settleCollisions = async () => {
 // attribute changed somewhere, not which element. Restore the spy
 // (mockControlDirectionSpy?.mockRestore()) and remove the dir attribute in
 // an afterEach wherever this is used.
-// jsdom's getBoundingClientRect always returns all-zero rects (no real
-// layout engine) — for the tooltip-readout's edge clamp, that naturally
-// resolves to "no overflow, no clamp" (0 width means the clamp is a no-op),
-// which is enough to exercise the default (unclamped) case without any
-// mocking. This mocks just the two inputs the clamp actually reads —
-// .d-slider__control's own rect and the bubble's rendered WIDTH (see
-// UseSliderGeometry's tooltipEdgeOffset) — not the bubble's position, which
-// is derived analytically from thumbPercent(modelValue) instead of measured,
-// precisely to avoid a render-behind-the-value-change lag (see that
-// function's own comment for the bug this fixes). Construct an overflow
-// scenario via modelValue (which pct the bubble's un-clamped center lands
-// at) + controlLeft/controlRight + tooltipWidth, not by positioning a mock
-// tooltip rect directly.
-let geometryMockSpy;
-function mockEdgeClampGeometry({
-  controlLeft = 0, controlRight = 1000, tooltipWidth = 100,
-} = {}) {
-  geometryMockSpy = vi.spyOn(Element.prototype, 'getBoundingClientRect').mockImplementation(function mockRect() {
-    const qa = this.dataset?.qa;
-    if (qa === 'dt-slider-control') {
-      return {
-        top: 0, bottom: 0, left: controlLeft, right: controlRight,
-        width: controlRight - controlLeft, height: 0, x: controlLeft, y: 0,
-      };
-    }
-    if (qa === 'dt-slider-thumb-readout-tooltip') {
-      return {
-        top: 0, bottom: 0, left: 0, right: tooltipWidth,
-        width: tooltipWidth, height: 0, x: 0, y: 0,
-      };
-    }
-    return {
-      top: 0, bottom: 0, left: 0, right: 0, width: 0, height: 0, x: 0, y: 0,
-    };
-  });
-}
-
 let mockControlDirectionSpy;
 async function mockControlDirection(direction) {
   const original = window.getComputedStyle.bind(window);
@@ -89,6 +60,24 @@ let mockAttrs = {};
 let mockSlots = {};
 
 describe('DtSlider Tests', () => {
+  const openPopovers = new WeakSet();
+  let matchesSpy;
+
+  beforeAll(() => {
+    const matches = HTMLElement.prototype.matches;
+    matchesSpy = vi.spyOn(HTMLElement.prototype, 'matches').mockImplementation(function (selector) {
+      return selector === ':popover-open' ? openPopovers.has(this) : matches.call(this, selector);
+    });
+    HTMLElement.prototype.showPopover = function () { openPopovers.add(this); };
+    HTMLElement.prototype.hidePopover = function () { openPopovers.delete(this); };
+  });
+
+  afterAll(() => {
+    matchesSpy.mockRestore();
+    delete HTMLElement.prototype.showPopover;
+    delete HTMLElement.prototype.hidePopover;
+  });
+
   let wrapper;
   let root;
   let track;
@@ -98,14 +87,6 @@ describe('DtSlider Tests', () => {
   let thumbInputs;
 
   const updateWrapper = () => {
-    // readout defaults to "tooltip", which teleports to the real
-    // document.body (see UseSliderTooltipReadoutTeleport) — many tests call
-    // updateWrapper() a second time mid-test to apply different mockProps,
-    // which previously just discarded the first instance harmlessly (it
-    // lived in a detached mount tree). Now that teleported content escapes
-    // into the real document, that discarded instance would leak its
-    // teleported node into document.body forever (afterEach only unmounts
-    // whichever instance `wrapper` points to LAST) — unmount it first.
     wrapper?.unmount();
     wrapper = mount(DtSlider, {
       props: { ...baseProps, ...mockProps },
@@ -125,13 +106,14 @@ describe('DtSlider Tests', () => {
     updateWrapper();
   });
 
-  afterEach(() => {
+  afterEach(async () => {
     mockProps = {};
     mockAttrs = {};
     mockSlots = {};
     wrapper?.unmount();
-    geometryMockSpy?.mockRestore();
-    geometryMockSpy = undefined;
+    // An open tooltip readout's last positioning pass can still be in flight
+    // after unmount; let it settle so it can't leak into the next test.
+    await flushPromises();
     mockControlDirectionSpy?.mockRestore();
     document.documentElement.removeAttribute('dir');
   });
@@ -418,11 +400,30 @@ describe('DtSlider Tests', () => {
     });
 
     describe('readout: "tooltip" (the default)', () => {
-      // Positioned the same way marks and the in-row readout already are
-      // (see UseSliderGeometry's tooltipReadoutStyle) — a plain child of
-      // .d-slider__control, found via wrapper.findAll like any other
-      // element, not teleported anywhere.
+      // Top-layer rendering preserves DOM parentage and local theme inheritance.
       const tooltipReadouts = () => wrapper.findAll('[data-qa="dt-slider-thumb-readout-tooltip"]');
+
+      it('opens while its thumb is focused and closes on blur', async () => {
+        const tooltip = tooltipReadouts()[0].element;
+        await thumbInputs[0].trigger('focus');
+        expect(tooltip.matches(':popover-open')).toBe(true);
+        await thumbInputs[0].trigger('blur');
+        expect(tooltip.matches(':popover-open')).toBe(false);
+      });
+
+      it('does not open while disabled, even when its thumb is hovered', async () => {
+        mockProps = { disabled: true };
+        updateWrapper();
+        await wrapper.find('[data-qa="dt-slider-thumb-hit"]').trigger('pointerenter');
+        expect(tooltipReadouts()[0].element.matches(':popover-open')).toBe(false);
+      });
+
+      it('closes its open readout on unmount', async () => {
+        await thumbInputs[0].trigger('focus');
+        const tooltip = tooltipReadouts()[0].element;
+        wrapper.unmount();
+        expect(tooltip.matches(':popover-open')).toBe(false);
+      });
 
       it('is the default readout mode', async () => {
         await nextTick();
@@ -439,23 +440,17 @@ describe('DtSlider Tests', () => {
 
       it('renders hidden at rest', async () => {
         await nextTick();
-        expect(tooltipReadouts()[0].classes()).toContain('d-tooltip--hide');
+        expect(tooltipReadouts()[0].element.matches(':popover-open')).toBe(false);
       });
 
       it('shows on thumb-hit hover', async () => {
         await nextTick();
         const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
+        const tooltip = tooltipReadouts()[0].element;
         await hitTarget.trigger('pointerenter');
-        expect(tooltipReadouts()[0].classes()).toContain('d-tooltip--show');
+        expect(tooltip.matches(':popover-open')).toBe(true);
         await hitTarget.trigger('pointerleave');
-        expect(tooltipReadouts()[0].classes()).toContain('d-tooltip--hide');
-      });
-
-      it('shows on keyboard focus', async () => {
-        await nextTick();
-        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
-        await thumbInputs[0].trigger('focus');
-        expect(tooltipReadouts()[0].classes()).toContain('d-tooltip--show');
+        expect(tooltip.matches(':popover-open')).toBe(false);
       });
 
       it('renders the formatted value as its content', async () => {
@@ -463,9 +458,12 @@ describe('DtSlider Tests', () => {
         expect(tooltipReadouts()[0].text()).toBe('50');
       });
 
-      it('hides from the accessibility tree, since it duplicates the thumb input\'s own aria-valuetext', async () => {
+      it('is a decorative manual popover: inert and hidden from the accessibility tree, since it duplicates the thumb input\'s own aria-valuetext', async () => {
         await nextTick();
-        expect(tooltipReadouts()[0].attributes('aria-hidden')).toBe('true');
+        const tooltip = tooltipReadouts()[0];
+        expect(tooltip.attributes('popover')).toBe('manual');
+        expect(tooltip.attributes('inert')).toBe('');
+        expect(tooltip.attributes('aria-hidden')).toBe('true');
       });
 
       it('renders one independent tooltip per thumb in range mode, with no merge-into-one-pill behavior', async () => {
@@ -503,154 +501,86 @@ describe('DtSlider Tests', () => {
         await hitTargets[1].trigger('pointerenter');
         await settleCollisions();
 
-        expect(tooltipReadouts()[0].classes()).toContain('d-tooltip--show');
-        expect(tooltipReadouts()[1].classes()).toContain('d-tooltip--show');
+        expect(tooltipReadouts()[0].element.matches(':popover-open')).toBe(true);
+        expect(tooltipReadouts()[1].element.matches(':popover-open')).toBe(true);
         expect(wrapper.find('[data-qa="dt-slider-thumb-readout-merged"]').exists()).toBe(false);
       });
 
-      // Regression coverage for a real bug: referencing a CSS custom property
-      // that doesn't exist (--dt-layout-25-negative, confirmed absent from the
-      // token set) made the WHOLE transform declaration invalid, not just
-      // that one axis — it silently computed to `none`, breaking both
-      // horizontal centering and the vertical gap simultaneously. Pinning the
-      // exact transform/inset formula (not just "a transform exists") catches
-      // a future regression the same way.
-      it('centers the bubble above the thumb by percent, same mechanism as the thumb itself', async () => {
-        await nextTick();
-        const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
-        await hitTarget.trigger('pointerenter');
-        await nextTick();
-        const el = tooltipReadouts()[0];
-        const style = el.attributes('style');
-        // modelValue 50 of [0, 100] — anchorPct's own inset-rescaled
-        // formula (thumbPositionStyle, UseSliderGeometry), not a bare 50%,
-        // so the bubble tracks the thumb's actual (edge-inset) position.
-        expect(style).toContain('inset-inline-start: calc(calc(1px + var(--slider-tick-width) / 2) + (100% - calc(1px + var(--slider-tick-width) / 2) * 2) * 0.5)');
-        expect(style).toContain('inset-block-end: calc(50% + var(--slider-thumb-visual-size) / 2 + var(--dt-spacing-100))');
-        expect(style).toContain('transform: translateX(-50%)');
-        expect(el.classes()).toContain('d-tooltip__arrow--bottom-center');
+      it('closes the removed thumb\'s readout when range switches to single', async () => {
+        mockProps = { modelValue: [20, 70] };
+        updateWrapper();
+        await wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[1].trigger('pointerenter');
+        const high = tooltipReadouts()[1].element;
+        expect(high.matches(':popover-open')).toBe(true);
+        await wrapper.setProps({ modelValue: 20 });
+        expect(high.matches(':popover-open')).toBe(false);
       });
 
-      it('mirrors the horizontal centering transform under rtl, same as every other track element', async () => {
-        await mockControlDirection('rtl');
+      it('repositions its readout when a stable getValueText callback\'s text changes', async () => {
+        const unit = ref(' dollars');
+        mockProps = { getValueText: value => `${value}${unit.value}` };
+        updateWrapper();
+        await wrapper.find('[data-qa="dt-slider-thumb"]').trigger('focus');
+        computePosition.mockClear();
+        unit.value = ' euros';
         await nextTick();
-        const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
-        await hitTarget.trigger('pointerenter');
-        await nextTick();
-        const style = tooltipReadouts()[0].attributes('style');
-        expect(style).toContain('transform: translateX(50%)');
+        expect(computePosition).toHaveBeenCalledTimes(1);
       });
 
-      it('lifts the bubble beside the thumb instead of above it in vertical mode, centered on the block axis', async () => {
+      it('opens a vertical thumb\'s readout to its physical left under rtl', async () => {
         mockProps = { orientation: 'vertical' };
         updateWrapper();
-        await nextTick();
-        const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
-        await hitTarget.trigger('pointerenter');
-        await nextTick();
-        const el = tooltipReadouts()[0];
-        expect(el.attributes('style')).toContain('transform: translateY(50%)');
-        expect(el.classes()).toContain('d-tooltip__arrow--left-center');
+        await mockControlDirection('rtl');
+        await thumbInputs[0].trigger('focus');
+        expect(computePosition.mock.lastCall[2].placement).toBe('left');
       });
 
-      // Regression coverage for the reported bug this clamp exists to fix:
-      // the bubble visibly sliding past .d-slider__control's own edge near
-      // min/max. Tolerates some overflow before nudging — the SAME
-      // tolerance marks already use, matching the control's own
-      // overflow-clip-margin (slider.less), minus a small safety margin
-      // marks don't need (see SLIDER_EDGE_CLAMP_TOLERANCE_PX's own comment:
-      // a STATIC mark landing exactly at the true clip boundary is a rare,
-      // fixed occurrence, but the tooltip sweeps continuously through every
-      // point during a drag, so landing it exactly ON that boundary with
-      // 0px to spare meant ordinary sub-pixel measurement noise visibly
-      // clipped and un-clipped it right at that exact point) — effectively
-      // 28px (32 - 4), not 32px.
-      describe('edge clamping — tolerates the control\'s own reserved overflow space, same as marks', () => {
-        it('does not nudge the bubble when it already fits within the control', async () => {
-          // modelValue 50 of [0, 100] (base default) centers the bubble at
-          // the control's own midpoint — nowhere near either edge.
-          mockEdgeClampGeometry({ controlLeft: 0, controlRight: 1000, tooltipWidth: 100 });
-          const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
-          await hitTarget.trigger('pointerenter');
-          await settleCollisions();
-          const style = tooltipReadouts()[0].attributes('style');
-          expect(style).toContain('transform: translateX(-50%)'); // no offset — clean formula, no calc()
-          expect(style).toContain('--tooltip-arrow-offset: 0px');
-        });
+      it('recovers a hovered readout after the browser closes its popover externally', async () => {
+        const attached = mount(DtSlider, { props: baseProps, attachTo: document.body });
+        try {
+          // jsdom has no rendered boxes; model a visible, connected owner.
+          attached.find('[data-qa="dt-slider-thumb-visual"]').element.checkVisibility = () => true;
+          await attached.find('[data-qa="dt-slider-thumb-hit"]').trigger('pointerenter');
+          const tooltip = attached.find('[data-qa="dt-slider-thumb-readout-tooltip"]').element;
+          tooltip.hidePopover();
+          await attached.setProps({ modelValue: 60 });
+          expect(tooltip.matches(':popover-open')).toBe(true);
+        } finally {
+          attached.unmount();
+        }
+      });
 
-        it('does not nudge the bubble when its overflow is within the control\'s own reserved tolerance', async () => {
-          mockProps = { modelValue: 0 }; // pct 0 — bubble's un-clamped center lands exactly on the control's own left edge
-          updateWrapper();
-          mockEdgeClampGeometry({ controlLeft: 0, controlRight: 1000, tooltipWidth: 40 }); // half-width 20px overflow, under the effective 28px tolerance
-          const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
-          await hitTarget.trigger('pointerenter');
-          await settleCollisions();
-          const style = tooltipReadouts()[0].attributes('style');
-          expect(style).toContain('transform: translateX(-50%)');
-          expect(style).toContain('--tooltip-arrow-offset: 0px');
-        });
+      it('hides the readout when its stationary thumb stops being visible', async () => {
+        // Floating UI's hide() needs a non-zero viewport with the thumb inside
+        // it. The checkVisibility stub honors only the older option names, so
+        // this also covers Chrome/Edge 114–120.
+        const visual = thumbVisuals[0].element;
+        const widthSpy = vi.spyOn(document.documentElement, 'clientWidth', 'get').mockReturnValue(1024);
+        const heightSpy = vi.spyOn(document.documentElement, 'clientHeight', 'get').mockReturnValue(768);
+        visual.getBoundingClientRect = () => (
+          { x: 100, y: 100, left: 100, top: 100, right: 116, bottom: 116, width: 16, height: 16 }
+        );
+        let ownerVisible = true;
+        visual.checkVisibility = options => ownerVisible || !(options.checkOpacity && options.checkVisibilityCSS);
+        try {
+          await thumbInputs[0].trigger('focus');
+          await flushPromises();
+          const tooltip = tooltipReadouts()[0].element;
+          expect(tooltip.style.visibility).toBe('visible');
+          ownerVisible = false;
+          await nextFrame();
+          expect(tooltip.style.visibility).toBe('hidden');
+        } finally {
+          widthSpy.mockRestore();
+          heightSpy.mockRestore();
+        }
+      });
 
-        it('nudges the bubble right (and the arrow back left by the same amount) by the excess once it overflows past the control\'s own reserved tolerance, at its start edge', async () => {
-          mockProps = { modelValue: 0 }; // pct 0 — bubble's un-clamped center lands exactly on the control's own left edge
-          updateWrapper();
-          mockEdgeClampGeometry({ controlLeft: 0, controlRight: 1000, tooltipWidth: 96 }); // half-width 48px overflow, 20px past the effective 28px tolerance
-          const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
-          await hitTarget.trigger('pointerenter');
-          await settleCollisions();
-          const style = tooltipReadouts()[0].attributes('style');
-          expect(style).toContain('transform: translateX(calc(-50% + 20px))');
-          expect(style).toContain('--tooltip-arrow-offset: -20px');
-        });
-
-        it('remeasures when a STABLE getValueText callback\'s own OUTPUT changes (e.g. a closed-over locale/units ref), not just when its reference changes', async () => {
-          // getValueText itself never changes — only the external ref it
-          // reads does. Watching its bare identity would miss this.
-          const unit = ref('');
-          mockProps = { modelValue: 0, getValueText: (value) => `${value}${unit.value}` };
-          updateWrapper();
-
-          mockEdgeClampGeometry({ controlLeft: 0, controlRight: 1000, tooltipWidth: 32 });
-          const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
-          await hitTarget.trigger('pointerenter');
-          await settleCollisions();
-          // 32px is well within tolerance — no clamp yet.
-          expect(tooltipReadouts()[0].attributes('style')).toContain('--tooltip-arrow-offset: 0px');
-
-          // Same value, same callback reference — only the text it renders
-          // (and the measured width a real browser would report) changes.
-          unit.value = ' a very long localized unit string';
-          mockEdgeClampGeometry({ controlLeft: 0, controlRight: 1000, tooltipWidth: 174 });
-          await settleCollisions();
-          expect(tooltipReadouts()[0].attributes('style')).not.toContain('--tooltip-arrow-offset: 0px');
-        });
-
-        it('nudges the bubble left (and the arrow back right by the same amount) by the excess once it overflows past the control\'s own reserved tolerance, at its end edge', async () => {
-          mockProps = { modelValue: 100 }; // pct 100 — bubble's un-clamped center lands exactly on the control's own right edge
-          updateWrapper();
-          mockEdgeClampGeometry({ controlLeft: 0, controlRight: 1000, tooltipWidth: 96 }); // half-width 48px overflow, 20px past the effective 28px tolerance
-          const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
-          await hitTarget.trigger('pointerenter');
-          await settleCollisions();
-          const style = tooltipReadouts()[0].attributes('style');
-          expect(style).toContain('transform: translateX(calc(-50% + -20px))');
-          expect(style).toContain('--tooltip-arrow-offset: 20px');
-        });
-
-        it('mirrors the arrow-offset sign under rtl, so the arrow still points at the thumb instead of the browser\'s own inset-inline-start mirroring doubling up with it', async () => {
-          // pct 0 mirrors to the control's physical right edge under rtl —
-          // the same physical edge LTR's modelValue=100 case above tests,
-          // just reached the other way around.
-          mockProps = { modelValue: 0 };
-          updateWrapper();
-          await mockControlDirection('rtl');
-          mockEdgeClampGeometry({ controlLeft: 0, controlRight: 1000, tooltipWidth: 96 });
-          const hitTarget = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]')[0];
-          await hitTarget.trigger('pointerenter');
-          await settleCollisions();
-          const style = tooltipReadouts()[0].attributes('style');
-          expect(style).toContain('transform: translateX(calc(50% + -20px))');
-          expect(style).toContain('--tooltip-arrow-offset: -20px');
-        });
+      it('does not open the readout when the browser lacks the Popover API', async () => {
+        const tooltip = tooltipReadouts()[0].element;
+        tooltip.showPopover = undefined;
+        await thumbInputs[0].trigger('focus');
+        expect(tooltip.matches(':popover-open')).toBe(false);
       });
     });
 
@@ -3077,10 +3007,11 @@ describe('DtSlider Tests', () => {
       // jsdom has no real layout engine — getBoundingClientRect() returns an
       // all-zero rect for every element by default. Marks are still measured
       // directly (their position doesn't animate, so no analytical treatment
-      // needed), but the readout's position is now computed analytically from
-      // pct + the control's own rect (see analyticalReadoutRect in Slider.vue),
-      // so the control needs a stub too — the readout's stubbed rect only
-      // contributes its width to that calculation.
+      // needed), but the always/interaction readout's position is computed
+      // analytically from pct + the control's own rect (see
+      // analyticalReadoutRect in UseSliderCollisionAvoidance), so the control
+      // needs a stub too — that readout's stubbed rect only contributes its
+      // width. The tooltip readout's rect is measured as-is.
       const controlRect = { top: 0, left: 0, right: 300, bottom: 20 };
       const readoutSize = { top: 0, left: 0, right: 20, bottom: 20 }; // 20px wide
       const nearReadoutRect = { top: 0, left: 150, right: 170, bottom: 20 }; // overlaps a readout at pct 51
@@ -3195,12 +3126,13 @@ describe('DtSlider Tests', () => {
         await hitTarget.trigger('pointerenter'); // opens the tooltip so it's considered for collisions
         const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
         const tooltip = wrapper.find('[data-qa="dt-slider-thumb-readout-tooltip"]');
-        tooltip.element.getBoundingClientRect = () => readoutSize;
+        tooltip.element.getBoundingClientRect = () => nearReadoutRect;
         marks[0].element.getBoundingClientRect = () => nearReadoutRect;
         marks[1].element.getBoundingClientRect = () => farRect;
 
         thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
-        thumbInputs[0].element.value = '51';
+        // Far from mark 0 by percent math — only the measured bubble overlaps it.
+        thumbInputs[0].element.value = '10';
         await thumbInputs[0].trigger('input');
         await settleCollisions();
 

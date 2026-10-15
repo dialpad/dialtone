@@ -137,17 +137,8 @@
     // still computes to 0px here, same as min()/max(). Only a bare <length>
     // token works. So this one property is a raw px value instead of the
     // token reference used everywhere else in this file; 32px matches
-    // --dt-spacing-400, sized for the inline sides' real need (marks, the
-    // tooltip's own horizontal clamp — see SLIDER_EDGE_CLAMP_TOLERANCE_PX).
-    // There's no per-side longhand to spare (CSS.supports confirms
-    // overflow-clip-margin-block-start isn't implemented), so don't raise
-    // this to cover the tooltip's vertical poke above the block-start edge —
-    // a single shared value hits ALL four sides, and the horizontal docs-demo
-    // page wrapper has exactly this much of its own padding to absorb the
-    // inline sides' overflow invisibly; anything above 32px here leaks out as
-    // a visible horizontal scrollbar on every demo on the page. Fix the
-    // tooltip's vertical clipping by shrinking its own poke height instead
-    // (tooltipReadoutGapPx in UseSliderGeometry), not by growing this.
+    // --dt-spacing-400 and SLIDER_EDGE_CLAMP_TOLERANCE_PX for marks. Tooltip
+    // readouts paint in the top layer and are not bounded by this allowance.
     overflow: clip;
     cursor: default;
     block-size: var(--slider-thumb-size);
@@ -406,45 +397,57 @@
 }
 
 //  $$  TOOLTIP-STYLED READOUT (readout="tooltip")
-//  Position/pointer-events only — bubble/arrow/show-hide styling reused from
-//  .d-tooltip directly; the real DtTooltip's Popper positioning can't keep
-//  up with a continuous drag.
+//  Native popovers retain DOM inheritance while escaping ancestor clipping.
+//  Floating UI positions against the rendered thumb in viewport coordinates.
 //  ----------------------------------------------------------------------------
 .d-slider__readout-tooltip {
-    position: absolute;
+    position: fixed;
+    display: none;
+    margin: 0;
+    overflow: visible;
+    border: 0;
     pointer-events: none;
-
-    // .d-tooltip has no explicit width — default shrink-to-fit sizing clamps
-    // to the space remaining between the inset and the container's edge, not
-    // the text's natural width, which wraps/clips it near min/max. max-content
-    // sizes to content instead (max-inline-size still caps pathological text).
+    inset: auto;
     inline-size: max-content;
+    max-inline-size: min(var(--dt-layout-350), calc(100dvw - var(--dt-spacing-100) * 2));
 
-    // The borrowed arrow classes set both an inset-block-start AND
-    // inset-block-end (alongside our own inline style), which stretches an
-    // auto block-size to fill the gap instead of sizing to content.
-    // max-content pins it back to content size, same fix as inline-size above.
-    block-size: max-content;
-
-    // Borrowed arrow classes bake in an extra -0.5px tuned for Tippy's
-    // fractional positioning; zeroed here since we position with plain calc
-    // values. --tooltip-arrow-offset compensates when the bubble itself is
-    // nudged inward.
-    &.d-tooltip__arrow--bottom-center::after {
-        inset-block-end: var(--dt-spacing-75-negative); // -6, flush with the bubble edge
-        inset-inline-start: calc(50% + var(--tooltip-arrow-offset, 0px));
+    &:popover-open {
+        display: block;
     }
 
-    &.d-tooltip__arrow--left-center::after {
-        inset-inline-start: var(--dt-spacing-75-negative); // -6, flush with the bubble edge
+    &[data-side="top"]::after {
+        transform: translateX(-50%);
+        inset-block-start: 100%;
+        inset-inline-start: var(--slider-tooltip-arrow-x);
+        border-block-start-color: var(--tooltip-color-background);
     }
 
-    // The borrowed .d-tooltip--show/--hide classes declare their own
-    // transition unconditionally, unlike every transition this component
-    // declares itself (wrapped in the no-preference guard below).
-    @media (prefers-reduced-motion: reduce) {
-        transition: none;
+    &[data-side="bottom"]::after {
+        transform: translateX(-50%);
+        inset-block-end: 100%;
+        inset-inline-start: var(--slider-tooltip-arrow-x);
+        border-block-end-color: var(--tooltip-color-background);
     }
+
+    &[data-side="left"]::after {
+        transform: translateY(-50%);
+        inset-block-start: var(--slider-tooltip-arrow-y);
+        inset-inline-start: 100%;
+        border-inline-start-color: var(--tooltip-color-background);
+    }
+
+    &[data-side="right"]::after {
+        transform: translateY(-50%);
+        inset-block-start: var(--slider-tooltip-arrow-y);
+        inset-inline-end: 100%;
+        border-inline-end-color: var(--tooltip-color-background);
+    }
+}
+
+.d-slider__tooltip-content {
+    display: block;
+    overflow: hidden;
+    overflow-wrap: anywhere;
 }
 
 //  $$  DRAGGING STATE
@@ -453,14 +456,6 @@
     .d-slider__control,
     .d-slider__thumb-hit {
         cursor: grabbing;
-    }
-
-    // .d-tooltip--show/--hide's transform transition is right for an
-    // open/close pop but wrong for the edge-nudge correction — animating it
-    // reads as the bubble overshooting the control's edge then springing
-    // back on every frame of a fast drag.
-    .d-slider__readout-tooltip {
-        transition: none;
     }
 }
 
