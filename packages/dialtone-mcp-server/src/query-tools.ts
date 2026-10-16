@@ -1,17 +1,11 @@
 import { z } from 'zod';
-import type { ProjectData } from '@dialpad/dialtone-query-core/node';
+import type { ProjectData, ResolvedData } from '@dialpad/dialtone-query-core/node';
 import type { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import {
   CallToolRequestSchema,
   ListToolsRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
 import {
-  utilityClasses,
-  tokens,
-  components,
-  icons,
-  documentation,
-  bundledProvenance,
   componentDocumentation,
   searchUtilityClasses,
   searchTokens,
@@ -36,6 +30,8 @@ import {
   formatRetrievalEnvelope,
 } from '@dialpad/dialtone-query-core';
 import type {
+  BundledProvenance,
+  MissingComponentReason,
   RetrievalEnvelope,
   SearchResult,
   SearchPage,
@@ -46,8 +42,11 @@ export const ROUTING_INSTRUCTIONS =
   'Search with search_components, search_icons, search_tokens, search_utility_classes or search_documentation for readable summaries. Component API and token themes are samples. Use get_component for complete selected APIs or named fields, get_documentation for exact section prose, and search_tokens projection themes for all named theme records. Follow continuation calls. Data comes from configured installations or bundled data; installed compatibility is not checked. Inspect source packages, versions, hashes and missing metadata. Import hints verify stated exports only. Documentation links are latest references. Verify availability and behavior against installed packages. Client-rules remains a separate resource.';
 /** Runtime fallback for an omitted or zero search limit; matches the schema default. */
 const DEFAULT_LIMIT = 15;
-const bundledData = { utilityClasses, tokens, components, icons, documentation };
-type QueryData = typeof bundledData;
+const MISSING_COMPONENT_NOTES: Record<MissingComponentReason, string> = {
+  'not-exported': 'The selected installed entry does not export this component. No bundled API was substituted.',
+  'exported-without-metadata': 'The selected installed entry exports this name, but no component metadata describes it; it may not be a component.',
+  'export-unverified': 'The selected metadata does not describe this name; its installed export availability is unverified.',
+};
 const query = z.string().max(256).trim().min(1);
 const offset = z.number().int().min(0).max(100000).default(0);
 const searchLimit = z.preprocess(
@@ -72,7 +71,7 @@ function callText(tool: string, args: Record<string, unknown>) {
 interface SearchSpec {
   domain: string;
   description: string;
-  search: (query: string, data: QueryData) => { results: SearchResult[]; notes: string[] };
+  search: (query: string, data: ResolvedData) => { results: SearchResult[]; notes: string[] };
   format: (results: SearchResult[], query: string, page?: SearchPage) => string;
   /** Points each displayed result at its complete-detail call. */
   followUp?: { heading: string; line: (result: SearchResult) => string };
@@ -313,7 +312,7 @@ function readableReply(text: string, isError = false) {
     ...(isError ? { isError: true } : {}),
   };
 }
-function sourceText(name: string, provenance: typeof bundledProvenance) {
+function sourceText(name: string, provenance: BundledProvenance) {
   const source = provenance.domains[specs[name].domain];
   return `**Source:** ${source.selection ?? 'bundled'}; installed compatibility not checked. ${source.package}@${source.version}; SHA256 ${source.hash}.${source.fallbackReason ? ` Fallback: ${source.fallbackReason}.` : ''}`;
 }
@@ -321,7 +320,7 @@ function searchFooter(
   name: string,
   args: { query: string; limit: number; offset: number; projection?: string },
   pagination: ReturnType<typeof paginate>,
-  provenance: typeof bundledProvenance,
+  provenance: BundledProvenance,
 ) {
   const { page, total, nextOffset } = pagination;
   const returned = page.length;
@@ -333,9 +332,8 @@ function searchFooter(
       '\nNo continuation can make progress with this limit within the supported offset range.';
   return footer;
 }
-export function executeQueryTool(name: string, input: unknown, context?: ProjectData) {
-  const data = context?.data ?? bundledData;
-  const provenance = context?.provenance ?? bundledProvenance;
+export function executeQueryTool(name: string, input: unknown, context: ProjectData) {
+  const { data, provenance } = context;
   try {
     if (name === 'get_documentation') {
       const args = docsSchema.parse(input ?? {});
@@ -367,40 +365,37 @@ export function executeQueryTool(name: string, input: unknown, context?: Project
     }
     if (name === 'get_component') {
       const args = detailSchema.parse(input ?? {});
-      const selected = getComponentDetail(args, data.components, context?.configured ? context.componentExports : undefined);
+      const selected = getComponentDetail(args, data.components, context.configured ? context.componentExports : undefined);
       const component = selected.component;
-      const missingExport = !component && selected.match === 'unavailable';
-      const continuation =
-        selected.match === 'no-match' || selected.match === 'candidate' || (!component && selected.match === 'unverified')
-          ? component
-            ? {
-                tool: name,
-                arguments: {
-                  component: component.displayName,
-                  projection: args.projection,
-                  limit: args.limit,
-                  offset: 0,
-                },
-              }
-            : {
-                tool: 'search_components',
-                arguments: {
-                  query: args.component,
-                  limit: DEFAULT_LIMIT,
-                  offset: 0,
-                },
-              }
-          : null;
+      // A missing field retries the component; any miss except a verified absence can still be searched.
+      const continuation = component
+        ? selected.match === 'no-match'
+          ? {
+              tool: name,
+              arguments: {
+                component: component.displayName,
+                projection: args.projection,
+                limit: args.limit,
+                offset: 0,
+              },
+            }
+          : null
+        : selected.match === 'unavailable'
+          ? null
+          : {
+              tool: 'search_components',
+              arguments: {
+                query: args.component,
+                limit: DEFAULT_LIMIT,
+                offset: 0,
+              },
+            };
       const notes = [
         'Absent metadata fields are unknown; an empty generated array reports no documented records.',
         'Import verification describes exports only; installed runtime, peer dependencies and compatibility are not checked.',
       ];
-      if (!component && (missingExport || selected.match === 'unverified')) notes.push(missingExport
-        ? 'The selected installed entry does not export this component. No bundled API was substituted.'
-        : context?.componentExports
-          ? 'The selected installed entry exports this name, but no component metadata describes it; it may not be a component.'
-          : 'The selected metadata does not describe this name; its installed export availability is unverified.');
-      if (context) notes.push(...context.data.warnings);
+      if (selected.reason) notes.push(MISSING_COMPONENT_NOTES[selected.reason]);
+      notes.push(...data.warnings);
       if (!component)
         notes.push(
           `No unique component selected. Use a canonical name${selected.available.length ? `: ${selected.available.join(', ')}` : ' from search_components'}.`,
@@ -436,7 +431,7 @@ export function executeQueryTool(name: string, input: unknown, context?: Project
                   )
                 : null,
             },
-            continuation: missingExport ? null : continuation,
+            continuation,
           },
           provenance,
         ),
@@ -524,7 +519,7 @@ export function executeQueryTool(name: string, input: unknown, context?: Project
     );
   }
 }
-export function registerQueryTools(server: McpServer, context?: ProjectData) {
+export function registerQueryTools(server: McpServer, context: ProjectData) {
   server.server.setRequestHandler(ListToolsRequestSchema, async () => ({
     tools: queryToolDefinitions(),
   }));

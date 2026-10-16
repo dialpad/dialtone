@@ -53,6 +53,8 @@ async function checkVersion(signal: AbortSignal) {
 async function main() {
   const context = resolveProjectData(process.env.DIALTONE_PROJECT_ROOT, process.env.DIALTONE_LOOKUP_ROOT);
   const { utilityClasses, tokens, components, icons, documentation } = context.data;
+  const sourceMeta = (domain: string) =>
+    ({ dialtone: { source: context.provenance.domains[domain], installedCompatibility: "not_checked" } });
   // Build compound properties set from utility classes data (done once at startup)
   const compoundProperties = buildCompoundPropertiesSet(utilityClasses);
   console.error(`[INIT] Built compound properties set: ${compoundProperties.size} properties`);
@@ -76,7 +78,7 @@ async function main() {
     mimeType: "application/json",
   }, async () => {
     return {
-      _meta: { dialtone: { source: context.provenance.domains.utilityClasses, installedCompatibility: "not_checked" } },
+      _meta: sourceMeta("utilityClasses"),
       contents: [{
         uri: "dialtone://utility-classes",
         mimeType: "application/json",
@@ -91,7 +93,7 @@ async function main() {
     mimeType: "application/json",
   }, async () => {
     return {
-      _meta: { dialtone: { source: context.provenance.domains.tokens, installedCompatibility: "not_checked" } },
+      _meta: sourceMeta("tokens"),
       contents: [{
         uri: "dialtone://tokens",
         mimeType: "application/json",
@@ -106,7 +108,7 @@ async function main() {
     mimeType: "application/json",
   }, async () => {
     return {
-      _meta: { dialtone: { source: context.provenance.domains.components, installedCompatibility: "not_checked" } },
+      _meta: sourceMeta("components"),
       contents: [{
         uri: "dialtone://components",
         mimeType: "application/json",
@@ -121,7 +123,7 @@ async function main() {
     mimeType: "application/json",
   }, async () => {
     return {
-      _meta: { dialtone: { source: context.provenance.domains.icons, installedCompatibility: "not_checked" } },
+      _meta: sourceMeta("icons"),
       contents: [{
         uri: "dialtone://icons",
         mimeType: "application/json",
@@ -136,7 +138,7 @@ async function main() {
     mimeType: "application/json",
   }, async () => {
     return {
-      _meta: { dialtone: { source: context.provenance.domains.documentation, installedCompatibility: "not_checked" } },
+      _meta: sourceMeta("documentation"),
       contents: [{
         uri: "dialtone://documentation",
         mimeType: "application/json",

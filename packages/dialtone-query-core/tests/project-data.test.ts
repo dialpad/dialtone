@@ -1,9 +1,8 @@
 import { afterEach, expect, test } from 'vitest';
 import { mkdtemp, mkdir, readFile, rename, rm, symlink, writeFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { createConsumerFixture } from '../../../scripts/retrieval/fixtures.mjs';
+import { createConsumerFixture, sha256 } from '../../../scripts/retrieval/fixtures.mjs';
 import { resolveProjectData } from '../src/node-data-resolver.js';
 import { getComponentDetail } from '../src/component-detail.js';
 
@@ -42,7 +41,7 @@ test('installed selection hashes actual bytes, verifies exports, and keeps missi
   expect(context.componentExports).toEqual(['DtButton']);
   const bytes = await readFile(join(app.pkg, 'dist/vue3/component-documentation.json'));
   expect(context.provenance.domains.components).toMatchObject({
-    selection: 'installed', version: '9.185.0', hash: createHash('sha256').update(bytes).digest('hex'),
+    selection: 'installed', version: '9.185.0', hash: sha256(bytes),
   });
   expect(context.provenance.domains.tokens).toMatchObject({ selection: 'bundled', fallbackReason: 'missing-or-unreadable-dataset' });
   expect(context.provenance.domains.documentation.selection).toBe('bundled');
@@ -50,7 +49,7 @@ test('installed selection hashes actual bytes, verifies exports, and keeps missi
 
 test('nested dependency roots are explicit and hoisting needs its own authorized boundary', async () => {
   const app = await fixture('nested-umbrella');
-  expect(resolveProjectData(app.invocationRoot).provenance.fallbackReason).toBe('project-root-or-manifest-unavailable');
+  expect(resolveProjectData(app.invocationRoot).provenance.domains.components.fallbackReason).toBe('project-root-or-manifest-unavailable');
   expect(resolveProjectData(app.dependencyRoot).data.sources.components.kind).toBe('local');
   await rename(join(app.dependencyRoot, 'node_modules'), join(app.directory, 'node_modules'));
   expect(resolveProjectData(app.dependencyRoot).data.sources.components.kind).toBe('bundled');
@@ -98,9 +97,9 @@ test.each([null, { displayName: 'DtButton' }, [{ displayName: 'DtButton', props:
 test('missing configuration preserves bundled identity while invalid explicit configuration cannot claim exports', () => {
   const context = resolveProjectData();
   expect(context.configured).toBe(false);
-  expect(context.provenance.fallbackReason).toBe('project-root-not-configured');
+  expect(context.provenance.domains.components.fallbackReason).toBe('project-root-not-configured');
   expect(context.data.components.some(record => record.identity?.imports.length)).toBe(true);
-  expect(resolveProjectData(undefined, '/absolute/workspace').provenance.fallbackReason).toBe('project-root-required');
+  expect(resolveProjectData(undefined, '/absolute/workspace').provenance.domains.components.fallbackReason).toBe('project-root-required');
   const invalid = resolveProjectData('relative/app');
   expect(invalid.configured).toBe(true);
   expect(invalid.data.components.every(record => record.identity?.kind === 'unknown')).toBe(true);

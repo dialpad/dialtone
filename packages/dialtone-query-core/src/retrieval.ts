@@ -21,7 +21,6 @@ export interface BundledProvenance {
   schemaVersion: number;
   buildHash: string;
   domains: Record<string, DomainStamp>;
-  fallbackReason?: string | null;
 }
 export interface Continuation {
   tool: string;
@@ -88,6 +87,8 @@ export function createRetrievalEnvelope(
     selectedDomains.map((domain) => [domain, provenance.domains[domain]]),
   );
   const selections = selectedDomains.map(domain => provenance.domains[domain]?.selection ?? 'bundled');
+  // A context-wide fallback stamps every domain with the same reason; report it once.
+  const fallbackReasons = new Set(selectedDomains.map(domain => provenance.domains[domain]?.fallbackReason).filter(Boolean));
   const selection = selections.every(value => value === 'installed') ? 'installed'
     : selections.some(value => value === 'installed') ? 'mixed' : 'bundled';
   const envelope: RetrievalEnvelope = {
@@ -98,7 +99,7 @@ export function createRetrievalEnvelope(
     source: {
       selection,
       installedCompatibility: 'not_checked',
-      fallbackReason: provenance.fallbackReason ?? (selectedDomains.map(domain => provenance.domains[domain]?.fallbackReason).filter(Boolean).join('; ') || null),
+      fallbackReason: [...fallbackReasons].join('; ') || null,
       buildHash: provenance.buildHash,
       domains,
     },

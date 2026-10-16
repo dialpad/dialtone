@@ -109,7 +109,12 @@ function findUp(fromDir: string, relativePath: string, policy?: ReadPolicy): str
 // files. Plain require.resolve would also search NODE_PATH, which pnpm's bin
 // shims point at a whole store, so a missing install could quietly resolve
 // some other project's copy.
-function tryRead(fromDir: string, specifier: string, policy?: ReadPolicy, domain?: Domain): Found | null {
+function tryRead(fromDir: string, specifier: string, domain: Domain, policy?: ReadPolicy): Found | null {
+  // Bounded (MCP) lookups record why a domain fell back; CLI lookups just miss.
+  const fail = (reason: string) => {
+    if (policy) policy.failures[domain] = reason;
+    return null;
+  };
   // "@dialpad/dialtone-vue/component-documentation.json" → "@dialpad/dialtone-vue"
   const packageName = specifier.split('/').slice(0, 2).join('/');
   const manifest = findUp(fromDir, join('node_modules', packageName, 'package.json'), policy);
@@ -118,30 +123,21 @@ function tryRead(fromDir: string, specifier: string, policy?: ReadPolicy, domain
     // Resolving the package's own name from inside it applies its exports map.
     // The real path keeps the check below valid when Node preserves symlinks.
     const root = realpathSync(dirname(manifest));
-    if (policy && (!authorizedPath(policy.boundary, root) || !within(root, realpathSync(manifest)))) {
-      if (domain) policy.failures[domain] = 'outside-lookup-boundary';
-      return null;
-    }
+    if (policy && (!authorizedPath(policy.boundary, root) || !within(root, realpathSync(manifest)))) return fail('outside-lookup-boundary');
     const file = realpathSync(createRequire(manifest).resolve(specifier));
     // Without an exports map, resolve() falls back to Node's full lookup,
     // NODE_PATH included, so only accept the package's own files.
     if (!file.startsWith(root + sep)) return null;
-    if (policy && !authorizedPath(policy.boundary, file)) {
-      if (domain) policy.failures[domain] = 'outside-lookup-boundary';
-      return null;
-    }
+    if (policy && !authorizedPath(policy.boundary, file)) return fail('outside-lookup-boundary');
     const bytes = readFileSync(file);
     const data = JSON.parse(bytes.toString('utf-8'));
     if (data === null) return null;
     const { name, version, exports, module, dependencies } = JSON.parse(readFileSync(manifest, 'utf-8'));
-    if (policy && (name !== packageName || typeof version !== 'string' || !version || !validData(domain!, data))) {
-      if (domain) policy.failures[domain] = 'malformed-or-unsupported-dataset';
-      return null;
-    }
+    if (policy && (name !== packageName || typeof version !== 'string' || !version || !validData(domain, data)))
+      return fail('malformed-or-unsupported-dataset');
     return { data, file, source: { kind: 'local', package: packageName, version }, exports: exports ?? {}, module: exports ? undefined : module, dependencies: dependencies ?? {}, hash: policy ? createHash('sha256').update(bytes).digest('hex') : '', root };
   } catch {
-    if (policy && domain) policy.failures[domain] = 'missing-or-unreadable-dataset';
-    return null;
+    return fail('missing-or-unreadable-dataset');
   }
 }
 
@@ -151,24 +147,32 @@ function tryRead(fromDir: string, specifier: string, policy?: ReadPolicy, domain
 // applies.
 function findProject(cwd: string): { projectDir: string; spec: string | null } {
   for (const dir of ancestors(cwd)) {
-    const spec = declaredDialtoneSpec(join(dir, 'package.json'));
+    const spec = declaredSpec(readManifest(join(dir, 'package.json')), '@dialpad/dialtone');
     if (spec !== null) return { projectDir: dir, spec };
     if (existsSync(join(dir, '.git'))) break;
   }
   return { projectDir: cwd, spec: null };
 }
 
-function declaredDialtoneSpec(pkgPath: string): string | null {
+const object = (value: unknown): value is Record<string, unknown> =>
+  value !== null && typeof value === 'object' && !Array.isArray(value);
+
+function readManifest(pkgPath: string): unknown {
   try {
-    const pkg = JSON.parse(readFileSync(pkgPath, 'utf-8'));
-    for (const key of ['dependencies', 'devDependencies', 'peerDependencies']) {
-      const spec = pkg[key]?.['@dialpad/dialtone'];
-      if (typeof spec === 'string') return spec;
-    }
-    return null;
+    return JSON.parse(readFileSync(pkgPath, 'utf-8'));
   } catch {
     return null;
   }
+}
+
+// The package's version spec from the first dependency field declaring it.
+function declaredSpec(manifest: unknown, packageName: string): string | null {
+  for (const key of ['dependencies', 'devDependencies', 'peerDependencies']) {
+    const dependencies = object(manifest) ? manifest[key] : undefined;
+    const spec = object(dependencies) ? dependencies[packageName] : undefined;
+    if (typeof spec === 'string') return spec;
+  }
+  return null;
 }
 
 // Prefer the installed umbrella's ./vue route (./vue3 before 9.173).
@@ -237,16 +241,16 @@ function assemble(...candidates: Parts[]): ResolvedData {
 
 // The umbrella's exports map "./*" → "./dist/*", so specifiers omit "dist/".
 function umbrellaParts(fromDir: string, policy?: ReadPolicy): Parts {
-  const components = tryRead(fromDir, '@dialpad/dialtone/vue3/component-documentation.json', policy, 'components');
-  const utilities = tryRead(fromDir, '@dialpad/dialtone/css/dialtone-docs.json', policy, 'utilities');
-  const tokens = tryRead(fromDir, '@dialpad/dialtone/css/tokens-docs.json', policy, 'tokens');
+  const components = tryRead(fromDir, '@dialpad/dialtone/vue3/component-documentation.json', 'components', policy);
+  const utilities = tryRead(fromDir, '@dialpad/dialtone/css/dialtone-docs.json', 'utilities', policy);
+  const tokens = tryRead(fromDir, '@dialpad/dialtone/css/tokens-docs.json', 'tokens', policy);
   const anchor = anchorOf({ components, utilities, tokens });
   if (!anchor) return {};
   // Icons aren't in the umbrella's dist: look for the icons package from the
   // umbrella's real path, so it's the version the umbrella depends on. Under
   // pnpm, the umbrella's dependencies sit beside it there, not at the top.
   const icons = !policy || typeof anchor.dependencies['@dialpad/dialtone-icons'] === 'string'
-    ? tryRead(dirname(anchor.file), '@dialpad/dialtone-icons/keywords-icons.json', policy, 'icons') : null;
+    ? tryRead(dirname(anchor.file), '@dialpad/dialtone-icons/keywords-icons.json', 'icons', policy) : null;
   return { components, utilities, tokens, icons };
 }
 
@@ -256,7 +260,7 @@ function individualParts(fromDir: string, policy?: ReadPolicy, declared?: (name:
       if (policy) policy.failures[domain] = 'package-not-declared';
       return null;
     }
-    return tryRead(fromDir, `${packageName}/${path}`, policy, domain);
+    return tryRead(fromDir, `${packageName}/${path}`, domain, policy);
   };
   return {
     components: read('components', '@dialpad/dialtone-vue', 'component-documentation.json'),
@@ -307,8 +311,6 @@ export interface ProjectData {
   configured: boolean;
 }
 
-const object = (value: unknown): value is Record<string, unknown> =>
-  value !== null && typeof value === 'object' && !Array.isArray(value);
 const optionalText = (value: unknown) => value === undefined || value === null || typeof value === 'string';
 const validMetadata = (value: unknown) => value === undefined || value === null || (object(value) &&
   ['reason', 'replacement', 'docs', 'category'].every(key => optionalText(value[key])) &&
@@ -345,25 +347,28 @@ function validData(domain: Domain, data: unknown): boolean {
     object(category) && Object.values(category).every(words => Array.isArray(words) && words.every(word => typeof word === 'string')));
 }
 
+const bundledStamp = (stamp: DomainStamp, fallbackReason: string): DomainStamp =>
+  ({ ...stamp, selection: 'bundled', fallbackReason });
+const bundledDomains = (fallbackReason: string): Record<string, DomainStamp> => Object.fromEntries(
+  Object.entries(bundledProvenance.domains).map(([key, stamp]) => [key, bundledStamp(stamp, fallbackReason)]));
+
+// A configured project's bundled fallback components keep no verified import hint.
+function unverifyBundledComponents(data: ResolvedData) {
+  data.components = normalizeComponents(data.components, {
+    package: bundledProvenance.domains.components.package,
+    version: bundledProvenance.domains.components.version,
+    from: data.componentImportPath,
+    names: null,
+  });
+}
+
 /** Explicit, bounded MCP selection. CLI callers retain resolveData's policy. */
 export function resolveProjectData(projectRoot?: string, lookupRoot?: string): ProjectData {
   const configured = projectRoot !== undefined || lookupRoot !== undefined;
   const fallback = (reason: string): ProjectData => {
     const data = assemble();
-    if (configured) data.components = normalizeComponents(data.components, {
-      package: bundledProvenance.domains.components.package,
-      version: bundledProvenance.domains.components.version,
-      from: data.componentImportPath,
-      names: null,
-    });
-    return {
-      data, configured, componentExports: null,
-      provenance: {
-        ...bundledProvenance, fallbackReason: reason,
-        domains: Object.fromEntries(Object.entries(bundledProvenance.domains).map(([key, stamp]) =>
-          [key, { ...stamp, selection: 'bundled', fallbackReason: reason }])),
-      },
-    };
+    if (configured) unverifyBundledComponents(data);
+    return { data, configured, componentExports: null, provenance: { ...bundledProvenance, domains: bundledDomains(reason) } };
   };
   if (!configured) return fallback('project-root-not-configured');
   if (!projectRoot) return fallback('project-root-required');
@@ -383,22 +388,18 @@ export function resolveProjectData(projectRoot?: string, lookupRoot?: string): P
   } catch {
     return fallback('project-root-or-manifest-unavailable');
   }
-  const declared = (name: string) => ['dependencies', 'devDependencies', 'peerDependencies'].some(key =>
-    object(manifest[key]) && typeof manifest[key][name] === 'string');
+  const spec = declaredSpec(manifest, '@dialpad/dialtone');
   const requestedBoundary = boundary;
   for (const dir of ancestors(root)) {
     if (existsSync(join(dir, '.git'))) { boundary = dir; break; }
     if (dir === boundary) break;
   }
   const policy: ReadPolicy = { boundary, failures: {} };
-  let parts: Parts;
-  if (declared('@dialpad/dialtone')) parts = umbrellaParts(root, policy);
-  else parts = individualParts(root, policy, declared);
+  const parts = spec !== null ? umbrellaParts(root, policy)
+    : individualParts(root, policy, name => declaredSpec(manifest, name) !== null);
   const data = assemble(parts);
   const domainKeys = { components: 'components', utilities: 'utilityClasses', tokens: 'tokens', icons: 'icons' } as const;
-  const domains: Record<string, DomainStamp> = Object.fromEntries(
-    Object.entries(bundledProvenance.domains).map(([key, stamp]) => [key, { ...stamp, selection: 'bundled', fallbackReason: 'documentation-is-bundled' }]),
-  );
+  const domains = bundledDomains('documentation-is-bundled');
   for (const [domain, key] of Object.entries(domainKeys) as Array<[keyof Parts, string]>) {
     const found = parts[domain];
     domains[key] = found ? {
@@ -406,16 +407,11 @@ export function resolveProjectData(projectRoot?: string, lookupRoot?: string): P
       schemaVersion: datasetSchema(found.data),
       hash: found.hash,
       selection: 'installed', fallbackReason: null,
-    } : { ...bundledProvenance.domains[key], selection: 'bundled', fallbackReason: policy.failures[domain] ??
-      (boundary !== requestedBoundary ? 'git-repository-lookup-boundary' : 'declared-installed-data-unavailable') };
+    } : bundledStamp(bundledProvenance.domains[key], policy.failures[domain] ??
+      (boundary !== requestedBoundary ? 'git-repository-lookup-boundary' : 'declared-installed-data-unavailable'));
   }
-  if (!parts.components) data.components = normalizeComponents(data.components, {
-    package: bundledProvenance.domains.components.package,
-    version: bundledProvenance.domains.components.version,
-    from: data.componentImportPath, names: null,
-  });
+  if (!parts.components) unverifyBundledComponents(data);
   const anchor = anchorOf(parts);
-  const spec = declaredDialtoneSpec(join(root, 'package.json'));
   if (spec && anchor) data.warnings = mismatchWarnings(spec, anchor.source.version);
   return {
     data, configured, componentExports: parts.components ? installedComponentNames(parts.components, data.componentImportPath) : null,
