@@ -170,7 +170,7 @@ export const argTypesData = {
     },
   },
   showLabel: {
-    description: 'When false, hides the label visually while keeping it in the DOM for screen readers.',
+    description: 'When false, removes the label and uses the label prop as aria-label. A label slot alone does not name a hidden-label slider.',
     control: 'boolean',
     table: {
       category: 'props',

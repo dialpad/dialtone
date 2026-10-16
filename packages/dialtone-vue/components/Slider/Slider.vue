@@ -653,6 +653,10 @@ const resolvedAriaLabel = computed(() => {
   return !props.showLabel && props.label ? props.label : attrs['aria-label'];
 });
 
+const hasAccessibleName = computed(() => usesVisibleLabelAsName.value || !!(
+  String(resolvedAriaLabel.value ?? '').trim() || String(resolvedAriaLabelledby.value ?? '').trim()
+));
+
 const resolvedLabelSize = computed(() => props.labelSize ?? 300);
 
 // These forward to each native thumb <input> instead — the wrapper <div>
@@ -751,7 +755,7 @@ useSliderTooltipReadout(props, {
 
 // ─── Dev warnings ─────────────────────────────────────────────────────────────
 
-useSliderDevWarnings(props, { isRange, hasLabelContent, attrs });
+useSliderDevWarnings(props, { isRange, hasAccessibleName });
 
 // ─── Exposed API ──────────────────────────────────────────────────────────────
 

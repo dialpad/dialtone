@@ -1029,6 +1029,24 @@ describe('DtSlider Tests', () => {
       expect(infoSpy).not.toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
     });
 
+    it('warns when a hidden label slot no longer supplies an accessible name', async () => {
+      mockProps = { label: undefined };
+      mockSlots = { label: '<span>Volume</span>' };
+      updateWrapper();
+      expect(infoSpy).not.toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
+
+      await wrapper.setProps({ showLabel: false });
+      expect(infoSpy).toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
+      const input = wrapper.find('[data-qa="dt-slider-thumb"]');
+      expect(input.attributes('aria-label')).toBeUndefined();
+      expect(input.attributes('aria-labelledby')).toBeUndefined();
+
+      infoSpy.mockClear();
+      await wrapper.setProps({ label: 'Volume' });
+      expect(input.attributes('aria-label')).toBe('Volume');
+      expect(infoSpy).not.toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
+    });
+
     it('does not warn when the label slot wraps its text in a child component, not a bare text node', () => {
       // slotHasText recurses into a plain string/array vnode.children, but a
       // child COMPONENT vnode (e.g. <dt-text>{{ label }}</dt-text>, exactly
