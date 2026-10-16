@@ -3,10 +3,29 @@
 // ============================================================================
 
 import type { DocumentationRecord, SearchResult } from '../types.js';
+import { directiveIdentifiers } from '../directive-identifiers.js';
+import { normalizeComponentName } from '../component-identity.js';
 
 const CONTENT_EXCERPT_MAX = 500;
+const DIRECTIVE_PREFIX = 'directives/';
 const MAX_QUERY_CHARS = 256;
 const MAX_QUERY_TERMS = 12;
+
+function closeExcerptFence(excerpt: string): string {
+  let fence = '';
+  let closing: RegExp | undefined;
+  for (const line of excerpt.split('\n')) {
+    if (closing) {
+      if (closing.test(line)) closing = undefined;
+      continue;
+    }
+    const opening = line.match(/^ {0,3}(`{3,}|~{3,})(.*)$/);
+    if (!opening || (opening[1][0] === '`' && opening[2].includes('`'))) continue;
+    fence = opening[1];
+    closing = new RegExp(`^ {0,3}${fence[0]}{${fence.length},}[ \\t\\r]*$`);
+  }
+  return closing ? `${excerpt}\n${fence}` : excerpt;
+}
 
 // Common English words that add no signal when matching docs.
 // Filtering them prevents AND-logic from requiring "how", "I", "difference" etc.
@@ -83,6 +102,7 @@ export function searchDocumentation(
   // Bound input to prevent expensive worst-case scans on very long queries.
   const truncated = query.length > MAX_QUERY_CHARS;
   const bounded = truncated ? query.slice(0, MAX_QUERY_CHARS) : query;
+  const directives = directiveIdentifiers(bounded);
 
   // Normalize: lowercase, strip punctuation (keep alphanumerics + hyphens for v-model etc.)
   const normalized = bounded.toLowerCase()
@@ -111,6 +131,13 @@ export function searchDocumentation(
     const pattern = stem.length >= 4 ? `\\b${stem}\\w*` : `\\b${escaped}\\b`;
     return new RegExp(pattern, 'i');
   });
+  // Once an explicit directive selects the document, its identifier should not
+  // favor the registration section over requested options or behavior.
+  const identifierWords = new Set(directives.flatMap(name => [`v-dt-${name}`, `dt${name}directive`]));
+  const contractRegexes = regexes.filter((_, index) => !identifierWords.has(words[index]));
+  // Directive comparisons keep explicitly named component pages, matched by
+  // title or page slug: the Mode Island page is titled "Mode".
+  const namedComponentKeys = new Set(words.filter(word => word.startsWith('dt')).map(normalizeComponentName));
 
   // Determine whether a record's docTitle matches a query term.
   // Extracted before the scoring loop so title-matching sections are included even when
@@ -134,9 +161,21 @@ export function searchDocumentation(
   const scored: Array<{ result: SearchResult; matchCount: number; titleMatch: boolean }> = [];
 
   for (const record of data) {
+    const isDirective = record.docId.startsWith(DIRECTIVE_PREFIX);
+    const selectedDirective = isDirective && directives.includes(record.docId.slice(DIRECTIVE_PREFIX.length).toLowerCase());
+    if (directives.length > 0 && isDirective && !selectedDirective) continue;
+    // Ordinary queries keep existing ranking; only directive comparisons match component slugs.
+    const namedComponent = directives.length > 0 && record.category === 'components'
+      && [record.docTitle, record.docId.slice('components/'.length)]
+        .some(name => namedComponentKeys.has(normalizeComponentName(name)));
+    const titleMatch = directives.length > 0
+      ? selectedDirective || namedComponent
+      : checkTitleMatch(record);
+    // Explicit directives scope results to those directives and named counterparts.
+    if (directives.length > 0 && !titleMatch) continue;
     const fullBlob = [record.docTitle, ...record.headingPath, record.frontmatter.description ?? '', record.content].join(' ');
-    const matchCount = regexes.filter(r => r.test(fullBlob)).length;
-    const titleMatch = checkTitleMatch(record);
+    const sectionRegexes = selectedDirective && contractRegexes.length > 0 ? contractRegexes : regexes;
+    const matchCount = sectionRegexes.filter(r => r.test(fullBlob)).length;
     // Include if content matched OR the document is specifically named in the query.
     if (matchCount === 0 && !titleMatch) continue;
 
@@ -186,6 +225,11 @@ export function searchDocumentation(
     });
 
   const notes: string[] = [];
+  for (const name of directives) {
+    if (!seenDocIds.has(`${DIRECTIVE_PREFIX}${name}`)) {
+      notes.push(`No directive documentation found for "${name}".`);
+    }
+  }
   if (truncated) notes.push(`Query truncated to ${MAX_QUERY_CHARS} characters.`);
   if (wordsTruncated) notes.push(`Query truncated to ${MAX_QUERY_TERMS} terms.`);
 
@@ -208,16 +252,22 @@ export function formatDocumentationResults(
       ? `### ${record.docTitle} — ${record.headingPath.join(' > ')}`
       : `### ${record.docTitle}`;
 
-    const excerpt = record.content.length > CONTENT_EXCERPT_MAX
+    let excerpt = record.content.length > CONTENT_EXCERPT_MAX
       ? `${record.content.slice(0, CONTENT_EXCERPT_MAX).trimEnd()}...`
       : record.content;
+    if (record.content.length > CONTENT_EXCERPT_MAX && record.docId.startsWith(DIRECTIVE_PREFIX)) {
+      excerpt = closeExcerptFence(excerpt);
+    }
 
     const links: string[] = [];
     if (record.frontmatter.storybook) links.push(`[Storybook](${record.frontmatter.storybook})`);
     if (record.frontmatter.figmaUrl) links.push(`[Figma](${record.frontmatter.figmaUrl})`);
 
     const linkLine = links.length > 0 ? `\n${links.join(' · ')}` : '';
-    return `${heading}\n\n${excerpt}${linkLine}`;
+    const sourceLine = record.frontmatter.sourcePackage && record.frontmatter.sourceVersion
+      ? `\nSource reference: ${record.frontmatter.sourcePackage}@${record.frontmatter.sourceVersion} (documentation source version; installed compatibility not checked).`
+      : '';
+    return `${heading}\n\n${excerpt}${linkLine}${sourceLine}`;
   }).join('\n\n---\n\n');
 }
 

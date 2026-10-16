@@ -13,6 +13,27 @@ const PATTERNS = {
   emphasis: /[*_]{1,2}([^*_]+)[*_]{1,2}/g,
 };
 
+function maskFencedCode(text, mask) {
+  const lines = text.split('\n');
+  const output = [];
+  for (let start = 0; start < lines.length; start++) {
+    const opening = lines[start].match(/^ {0,3}(`{3,}|~{3,})(.*)$/);
+    if (!opening || (opening[1][0] === '`' && opening[2].includes('`'))) {
+      output.push(lines[start]);
+      continue;
+    }
+    const fence = opening[1];
+    const closing = new RegExp(`^ {0,3}${fence[0]}{${fence.length},}[ \\t\\r]*$`);
+    let end = start + 1;
+    for (; end < lines.length; end++) {
+      if (closing.test(lines[end])) break;
+    }
+    output.push(mask(lines.slice(start, end + 1).join('\n')));
+    start = end;
+  }
+  return output.join('\n');
+}
+
 /**
  * Strip YAML frontmatter from raw markdown, returning only the body.
  * If no frontmatter is present, the original string is returned unchanged.
@@ -39,11 +60,19 @@ export function stripFrontmatter(markdown) {
  * @param {string} markdown - Markdown string
  * @param {Object} [options]
  * @param {boolean} [options.stripFrontmatter=true] - Strip YAML frontmatter before parsing
+ * @param {boolean} [options.preserveFencedCode=false] - Retain literal fenced examples
  * @returns {string}
  */
 export function stripMarkdown(markdown, options = {}) {
-  const { stripFrontmatter: strip = true } = options;
+  const { stripFrontmatter: strip = true, preserveFencedCode = false } = options;
   let text = strip ? stripFrontmatter(markdown) : markdown;
+  const codeBlocks = [];
+  if (preserveFencedCode) {
+    text = maskFencedCode(text, block => {
+      codeBlocks.push(block);
+      return `\uE000FENCE${codeBlocks.length - 1}\uE001`;
+    });
+  }
 
   text = text
     .replace(PATTERNS.htmlComment, '')
@@ -60,5 +89,7 @@ export function stripMarkdown(markdown, options = {}) {
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 
-  return text;
+  return preserveFencedCode
+    ? text.replace(/\uE000FENCE(\d+)\uE001/g, (_, index) => codeBlocks[Number(index)])
+    : text;
 }

@@ -17,7 +17,8 @@ export const docsCommand = defineCommand({
       process.exit(1);
     }
     const { documentation } = getContext();
-    const { results } = searchDocumentation(args.query, documentation);
+    const { results, notes } = searchDocumentation(args.query, documentation);
+    for (const note of new Set(notes)) console.error(`Note: ${note}`);
 
     if (results.length === 0) {
       console.error(`No documentation found matching "${args.query}".`);

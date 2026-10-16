@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
 import { glob } from 'glob';
 import { stripMarkdown } from '../utils/strip-markdown.mjs';
+import { SITE_URL } from '../../../../apps/dialtone-documentation/docs/.vuepress/site-reference.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -11,6 +12,8 @@ const __dirname = dirname(__filename);
 const packageRoot = resolve(__dirname, '../..');
 const repoRoot = resolve(packageRoot, '../..');
 const docsRoot = resolve(repoRoot, 'apps/dialtone-documentation/docs');
+const vueRoot = resolve(repoRoot, 'packages/dialtone-vue');
+const vuePackage = JSON.parse(readFileSync(resolve(vueRoot, 'package.json'), 'utf8'));
 const distDir = resolve(packageRoot, 'dist');
 const outputPath = resolve(distDir, 'public-docs.json');
 
@@ -127,7 +130,13 @@ export function chunkSections(body) {
  */
 export function buildRecords(absolutePath) {
   const rawFile = readFileSync(absolutePath, 'utf8');
-  const { data: frontmatter, content: body } = matter(rawFile);
+  const { data: frontmatter, content } = matter(rawFile);
+  const filePath = relative(repoRoot, absolutePath).replace(/\\/g, '/');
+  const isDirective = filePath.startsWith('packages/dialtone-vue/directives/') && filePath.endsWith('.mdx');
+  // Skip Storybook authoring imports and Meta; directive usage examples remain searchable.
+  const headingStart = isDirective ? content.search(/^#\s+/m) : 0;
+  if (headingStart < 0) throw new Error(`Missing H1 for ${filePath}`);
+  const body = content.slice(headingStart);
 
   // Blacklist filter: skip explicitly non-ready docs (case-insensitive against canonical lowercase set)
   const status = typeof frontmatter.status === 'string'
@@ -135,22 +144,24 @@ export function buildRecords(absolutePath) {
     : '';
   if (status && NON_READY_STATUSES.has(status)) return [];
 
-  const filePath = relative(repoRoot, absolutePath).replace(/\\/g, '/');
-  const name = basename(absolutePath, '.md');
+  const name = basename(absolutePath).replace(/\.mdx?$/, '');
 
-  // Category = first path component under docs/ root.
-  // Falls back to parent directory name for files outside docsRoot (test fixtures).
-  const relToDocsRoot = relative(docsRoot, absolutePath);
-  const relParts = relToDocsRoot.replace(/\\/g, '/').split('/');
-  const category = relParts[0] === '..'
-    ? basename(dirname(absolutePath))
-    : (relParts.length > 1 ? relParts[0] : 'root');
-
-  // Use relative path from docsRoot as docId to avoid collisions (e.g. multiple index.md files).
-  // Falls back to basename for files outside docsRoot (test fixtures).
-  const docId = relParts[0] === '..'
-    ? name
-    : relToDocsRoot.replace(/\\/g, '/').replace(/\.md$/, '');
+  // Category = first path component under docs/ root; docId = relative path from
+  // docsRoot to avoid collisions (e.g. multiple index.md files). Files outside
+  // docsRoot (test fixtures) fall back to their parent directory name and basename.
+  const relToDocsRoot = relative(docsRoot, absolutePath).replace(/\\/g, '/');
+  const relParts = relToDocsRoot.split('/');
+  let category, docId;
+  if (isDirective) {
+    category = 'directives';
+    docId = `directives/${name}`;
+  } else if (relParts[0] === '..') {
+    category = basename(dirname(absolutePath));
+    docId = name;
+  } else {
+    category = relParts.length > 1 ? relParts[0] : 'root';
+    docId = relToDocsRoot.replace(/\.md$/, '');
+  }
   const docTitle = extractTitle(frontmatter, body) ?? docId;
 
   // Frontmatter stored on each record. Source uses snake_case (VuePress convention),
@@ -162,12 +173,21 @@ export function buildRecords(absolutePath) {
     figmaUrl: frontmatter.figma_url ?? null,
     storybook: frontmatter.storybook ?? null,
   };
+  if (isDirective) {
+    const storiesImport = rawFile.match(/^import \* as \w+ from ['"](.+\.stories\.js)['"]/m);
+    const stories = storiesImport && readFileSync(resolve(dirname(absolutePath), storiesImport[1]), 'utf8');
+    const storyTitle = stories?.match(/title:\s*['"]([^'"]+)['"]/)?.[1];
+    if (!storyTitle) throw new Error(`Missing Storybook title for ${filePath}`);
+    fm.storybook = `${SITE_URL}/vue/?path=/docs/${slugify(storyTitle)}--docs`;
+    fm.sourcePackage = vuePackage.name;
+    fm.sourceVersion = vuePackage.version;
+  }
 
   const sections = chunkSections(body);
 
   if (sections.length === 0) {
     // No H2/H3 headings — emit one record for the whole body
-    const content = stripMarkdown(body, { stripFrontmatter: false });
+    const content = stripMarkdown(body, { stripFrontmatter: false, preserveFencedCode: isDirective });
     return [{
       id: docId,
       docId,
@@ -182,7 +202,7 @@ export function buildRecords(absolutePath) {
 
   const usedSlugs = new Map();
   return sections.map(({ headingPath, raw }) => {
-    const content = stripMarkdown(raw, { stripFrontmatter: false });
+    const content = stripMarkdown(raw, { stripFrontmatter: false, preserveFencedCode: isDirective });
     const baseSlug = headingPath.length > 0 ? slugify(headingPath.join('-')) : 'intro';
     const count = usedSlugs.get(baseSlug) ?? 0;
     usedSlugs.set(baseSlug, count + 1);
@@ -198,7 +218,7 @@ export function buildRecords(absolutePath) {
       frontmatter: fm,
       filePath,
     };
-  });
+  }).filter(record => !isDirective || record.content.trim().length > 0);
 }
 
 async function build() {
@@ -214,6 +234,12 @@ async function build() {
   if (files.length === 0) {
     throw new Error('No markdown files found in apps/dialtone-documentation/docs/');
   }
+
+  // Only include directive folders exported by the public package barrel.
+  const barrel = readFileSync(resolve(vueRoot, 'index.js'), 'utf8');
+  const directiveGlobs = [...barrel.matchAll(/export \* from ['"]\.\/(directives\/[^'"]+)['"]/g)]
+    .map(match => `packages/dialtone-vue/${match[1]}/*.mdx`);
+  files.push(...await glob(directiveGlobs, { cwd: repoRoot, absolute: true }));
 
   const allRecords = [];
   for (const file of files) {
