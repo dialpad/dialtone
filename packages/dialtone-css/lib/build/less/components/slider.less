@@ -57,7 +57,7 @@
     --slider-tick-width: var(--dt-size-border-200); // 3.2px diameter dot
     --slider-boundary-color: var(--dt-color-foreground-tertiary);
     --slider-track-length: var(--dt-layout-300);               // 192px — used as block-size in vertical mode
-    --slider-mark-offset: var(--dt-spacing-200);               // gap from track/thumb to marks & readout
+    --slider-mark-offset: var(--dt-spacing-150);               // gap from track/thumb to marks & readout
     // The band the thumb (and ticks, which share its travel) anchor within —
     // sized to the thumb's own worst-case rendered radius, including the
     // --active state's 1.05x drag scale bump (see
@@ -444,6 +444,7 @@
     display: none;
     margin: 0;
     overflow: visible;
+    font-variant-numeric: tabular-nums;
     border: 0;
     pointer-events: none;
     inset: auto;

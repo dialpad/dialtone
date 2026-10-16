@@ -256,32 +256,29 @@ Set `readout` to show each thumb's current value. Useful when the track context 
 
 - `tooltip` (default) — a tooltip-styled bubble above the thumb, shown only while that thumb is hovered, dragged, or focused. It renders in the browser's top layer so ancestor overflow, clipping paths, and masks cannot cut it off. It shifts or flips near viewport edges and follows the thumb during dragging, scrolling, and resizing.
 - `always` — a readout below the track, always visible.
-- `interaction` — a readout below the track, shown only while that thumb is hovered, dragged, or focused.
 - `never` — no readout.
 
 > [!INFO] Floating readout
-> The floating readout requires the native Popover API (Chrome/Edge 114+, Firefox 125+, Safari 17+). Browsers without this API do not display the floating readout; use `always` or `interaction` when a visible value is needed there. Each native range input still exposes the formatted value through `aria-valuetext`. The tooltip remains within its document's viewport and cannot escape an embedding iframe.
+> The floating readout requires the native Popover API (Chrome/Edge 114+, Firefox 125+, Safari 17+). Browsers without this API do not display the floating readout; use `always` when a visible value is needed there. Each native range input still exposes the formatted value through `aria-valuetext`. The tooltip remains within its document's viewport and cannot escape an embedding iframe.
 >
 > Long values wrap and are clipped to the space available beside the thumb. The full formatted value remains available through `aria-valuetext`. The decorative bubble is noninteractive and never receives keyboard focus. It opens and closes immediately.
 >
 > Top-layer rendering is independent of ancestor opacity, filters, and stacking contexts. A readout can therefore appear above a sticky header or another overlay covering its thumb; ancestor opacity and filter effects do not apply to it.
 
-In range mode with `always` or `interaction`, the two thumbs' readouts merge into a single centered `low–high` pill once they'd otherwise overlap as the thumbs converge.
+In range mode with `always`, the two thumbs' readouts merge into a single centered `low–high` pill once they'd otherwise overlap as the thumbs converge.
 
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="300" class="d-w100p">
   <dt-slider :model-value="48" label="Volume" />
   <dt-slider :model-value="48" label="Volume" readout="always" />
-  <dt-slider :model-value="48" label="Volume" readout="interaction" />
 </dt-stack>
 ```
 
 #### Choosing a mode
 
-- Prefer `tooltip` in space-constrained or dense layouts — it floats above the track without affecting layout, so it never reserves space below the slider the way `always`/`interaction` do. It's the right default for toolbars, side panels, and anywhere several sliders stack tightly.
+- Prefer `tooltip` in space-constrained or dense layouts — it floats above the track without affecting layout, so it never reserves space below the slider the way `always` does. It's the right default for toolbars, side panels, and anywhere several sliders stack tightly.
 - Reach for `always` when the value needs to stay legible without any interaction — dashboards, read-mostly summaries, or sliders a user might glance at rather than operate.
-- Use `interaction` as a middle ground: it reserves the same layout space as `always` the whole time, but the readout itself only becomes visible while that thumb is actually in use.
 - Use `never` when you're rendering the value yourself elsewhere on the page (see below).
 
 Use `prefix`/`suffix` to decorate the raw number wherever it's displayed — the readout, marks, and each thumb's `aria-valuetext` all pick it up:

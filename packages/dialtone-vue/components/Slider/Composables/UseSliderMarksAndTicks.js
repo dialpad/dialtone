@@ -39,7 +39,7 @@ export function useSliderMarksAndTicks(props, { isVertical, thumbPercent }) {
   // nothing below the track to reserve space for; a parent controls spacing/gaps.
   const reservesAnnotationSpace = computed(() => (
     !isVertical.value && (
-      computedMarks.value.length > 0 || (props.readout !== 'never' && props.readout !== 'tooltip')
+      computedMarks.value.length > 0 || props.readout === 'always'
     )
   ));
 

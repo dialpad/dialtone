@@ -46,7 +46,7 @@ export function useSliderInteraction(props, emit, {
   // A consumer can flip :disabled reactively while a thumb is focused or
   // hovered — the native input's own focus ring clears automatically, but
   // focusedThumbIndex/hoveredThumbIndex are separate internal state (also
-  // drive the 'interaction' readout), so without this they'd keep pointing at
+  // drive the tooltip readout), so without this they'd keep pointing at
   // a thumb that's no longer interactive, leaving its focus ring/readout
   // stuck open.
   watch(
@@ -246,7 +246,7 @@ export function useSliderInteraction(props, emit, {
     // Pointer capture routes every subsequent pointer event to controlRef, so
     // the non-dragged thumb's own pointerenter/pointerleave never fire again
     // once the drag starts — without this, a thumb hovered right before the
-    // drag began would keep its 'interaction' readout stuck open for the rest
+    // drag began would keep its tooltip readout stuck open for the rest
     // of the drag. The dragged thumb's own readout is unaffected — it's driven
     // by activeThumbIndex, not hoveredThumbIndex.
     hoveredThumbIndex.value = null;
@@ -398,10 +398,10 @@ export function useSliderInteraction(props, emit, {
   }
 
   function onThumbFocus(i, event) {
-    // Skip the keyboard-focus ring (and the interaction-mode readout it's tied
-    // to via focusedThumbIndex) for a pointer-driven focus — a mouse drag
-    // already gets its own affordance via activeThumbIndex while the pointer
-    // is down. Tab/keyboard focus falls through and sets it normally.
+    // Skip the keyboard-focus ring and focus-driven tooltip readout for a
+    // pointer-driven focus — a mouse drag already gets its own affordance via
+    // activeThumbIndex while the pointer is down. Tab/keyboard focus falls
+    // through and sets focusedThumbIndex normally.
     if (isPointerFocus) {
       isPointerFocus = false;
     } else {

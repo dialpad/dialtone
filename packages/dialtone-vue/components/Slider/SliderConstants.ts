@@ -1,6 +1,6 @@
 export const SLIDER_ORIENTATIONS = ['horizontal', 'vertical'] as const;
 
-export const SLIDER_READOUT_MODES = ['always', 'never', 'interaction', 'tooltip'] as const;
+export const SLIDER_READOUT_MODES = ['always', 'never', 'tooltip'] as const;
 
 export const SLIDER_FILL_ORIGINS = ['start', 'end'] as const;
 
