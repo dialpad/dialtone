@@ -9,6 +9,7 @@ import {
   ApiGetLocalVariablesResponse,
   VariableChange,
   VariableCodeSyntax,
+  VariableAlias,
 } from './figma_api.js'
 import { colorApproximatelyEqual, parseColor } from './color.js'
 import { areSetsEqual } from './utils.js'
@@ -117,38 +118,108 @@ function isAlias(value: string) {
   return value.toString().trim().charAt(0) === '{'
 }
 
+/**
+ * Resolve an alias name (`{a.b.c}` or the already-slashed `a/b/c`) to the
+ * Figma variable it should point at. Shared by a plain alias `$value` and by
+ * a composed colour's `colorAlias`, which needs the identical target/payload/
+ * fallback search — this used to live only in `variableValueFromToken`.
+ */
+function resolveAliasId(
+  rawValue: string,
+  localVariablesByCollectionAndName: {
+    [variableCollectionId: string]: { [variableName: string]: Variable }
+  },
+  targetCollectionId?: string,
+  targetPayloadNames?: Set<string>,
+): VariableAlias {
+  // Assume aliases are in the format {group.subgroup.token} with any number of optional groups/subgroups
+  // The Figma syntax for variable names is: group/subgroup/token
+  const value = rawValue
+    .trim()
+    .replace(/\./g, '/')
+    .replace(/[\{\}]/g, '')
+
+  // The collection being written wins, so a file that already holds another
+  // collection using the same token names cannot capture our aliases. Without
+  // this, semantics alias into the old collection's primitives and every
+  // later update to ours stops propagating — the material overrides included,
+  // since those only touch our own variables.
+  const target = targetCollectionId
+    ? localVariablesByCollectionAndName[targetCollectionId]
+    : undefined
+  if (target?.[value]) {
+    return {
+      type: 'VARIABLE_ALIAS',
+      id: target[value].id,
+    }
+  }
+
+  // A variable this payload is about to create in the target collection. Its
+  // temporary id is its token name, which the API resolves within the payload.
+  // Checked before the fallback, and not only when the collection is new: a
+  // collection that exists can still be gaining the alias target in this same
+  // run, and a namesake elsewhere must not win that race either.
+  if (targetPayloadNames?.has(value)) {
+    return {
+      type: 'VARIABLE_ALIAS',
+      id: value,
+    }
+  }
+
+  // Only then fall back to the rest of the file. Kept because a token set may
+  // legitimately reference a variable that lives in another collection, and
+  // the name is all we have to find it by.
+  for (const [collectionId, localVariablesByName] of Object.entries(
+    localVariablesByCollectionAndName,
+  )) {
+    if (collectionId === targetCollectionId) continue
+    if (localVariablesByName[value]) {
+      return {
+        type: 'VARIABLE_ALIAS',
+        id: localVariablesByName[value].id,
+      }
+    }
+  }
+
+  // If we don't find a local variable matching the alias, we assume it's a variable
+  // that we're going to create elsewhere in the payload.
+  // If the file has an invalid alias, we rely on the Figma API to return a 400 error
+  return {
+    type: 'VARIABLE_ALIAS',
+    id: value,
+  }
+}
+
 function variableValueFromToken(
   token: Token,
   localVariablesByCollectionAndName: {
     [variableCollectionId: string]: { [variableName: string]: Variable }
   },
+  targetCollectionId?: string,
+  targetPayloadNames?: Set<string>,
 ): VariableValue {
-  if (typeof token.$value === 'string' && isAlias(token.$value)) {
-    // Assume aliases are in the format {group.subgroup.token} with any number of optional groups/subgroups
-    // The Figma syntax for variable names is: group/subgroup/token
-    const value = token.$value
-      .trim()
-      .replace(/\./g, '/')
-      .replace(/[\{\}]/g, '')
-
-    // When mapping aliases to existing local variables, we assume that variable names
-    // are unique *across all collections* in the Figma file
-    for (const localVariablesByName of Object.values(localVariablesByCollectionAndName)) {
-      if (localVariablesByName[value]) {
-        return {
-          type: 'VARIABLE_ALIAS',
-          id: localVariablesByName[value].id,
-        }
-      }
-    }
-
-    // If we don't find a local variable matching the alias, we assume it's a variable
-    // that we're going to create elsewhere in the payload.
-    // If the file has an invalid alias, we rely on the Figma API to return a 400 error
+  const composedColor = token.$extensions?.['com.figma']?.composedColor
+  if (composedColor && token.$type === 'color') {
+    // A colour whose colour and opacity channels are authored independently.
+    // The colour channel is a real alias — resolved the same way a plain
+    // `$value` alias is — and the opacity channel is the literal percentage
+    // build_variables.ts computed from the source token's alpha modifier.
     return {
-      type: 'VARIABLE_ALIAS',
-      id: value,
+      color: resolveAliasId(
+        composedColor.colorAlias,
+        localVariablesByCollectionAndName,
+        targetCollectionId,
+        targetPayloadNames,
+      ),
+      opacity: composedColor.opacity,
     }
+  } else if (typeof token.$value === 'string' && isAlias(token.$value)) {
+    return resolveAliasId(
+      token.$value,
+      localVariablesByCollectionAndName,
+      targetCollectionId,
+      targetPayloadNames,
+    )
   } else if (typeof token.$value === 'string' && token.$type === 'color') {
     return parseColor(token.$value)
   } else {
@@ -156,13 +227,53 @@ function variableValueFromToken(
   }
 }
 
+/**
+ * True when two numbers round-trip to the same float32 value. Figma stores
+ * floats as float32 (a 1.2 sent from here comes back as 1.2000000476837158),
+ * so the comparison has to land on that exact representation rather than an
+ * arbitrary relative tolerance: 1e-6 relative is about 8x looser than the
+ * ~1.19e-7 float32 rounding floor, wide enough to treat a genuine value
+ * change (e.g. 1.2 -> 1.200001) as noise and silently drop its update.
+ */
+function numbersApproximatelyEqual(a: number, b: number) {
+  return Math.fround(a) === Math.fround(b)
+}
+
+/** Either channel of a VariableComposedColor can be a literal or an alias. */
+function composedChannelsEqual(
+  a: VariableValue,
+  b: VariableValue,
+): boolean {
+  if (typeof a === 'object' && typeof b === 'object' && a !== null && b !== null) {
+    if ('type' in a && 'type' in b && a.type === 'VARIABLE_ALIAS' && b.type === 'VARIABLE_ALIAS') {
+      return a.id === b.id
+    }
+    if ('r' in a && 'r' in b) return colorApproximatelyEqual(a, b)
+    return false
+  }
+  if (typeof a === 'number' && typeof b === 'number') return numbersApproximatelyEqual(a, b)
+  return a === b
+}
+
 function compareVariableValues(a: VariableValue, b: VariableValue) {
   if (typeof a === 'object' && typeof b === 'object') {
     if ('type' in a && 'type' in b && a.type === 'VARIABLE_ALIAS' && b.type === 'VARIABLE_ALIAS') {
       return a.id === b.id
+    } else if ('color' in a && 'color' in b) {
+      // VariableComposedColor — compare BOTH channels independently, since
+      // the point of the type is that they vary independently. Falling
+      // through to `'r' in a` below would never match (a composed value has
+      // no top-level r/g/b of its own) and every run would re-POST a value
+      // that never actually changed.
+      return composedChannelsEqual(a.color, b.color) && composedChannelsEqual(a.opacity, b.opacity)
     } else if ('r' in a && 'r' in b) {
       return colorApproximatelyEqual(a, b)
     }
+  } else if (typeof a === 'number' && typeof b === 'number') {
+    // Figma stores floats at single precision, so a 1.2 sent from here comes
+    // back as 1.2000000476837158. Comparing exactly makes every run believe
+    // those values changed and rewrite them, so the sync never settles.
+    return numbersApproximatelyEqual(a, b)
   } else {
     return a === b
   }
@@ -275,6 +386,25 @@ export function generatePostVariablesPayload(
     variableModeValues: [],
   }
 
+  // Every token name each collection will hold once this payload is applied,
+  // whether the variable already exists or is being created here.
+  //
+  // Needed because a collection that does not exist yet has no entry in
+  // `localVariablesByCollectionAndName`, so on a first sync there is nothing to
+  // prefer and alias resolution would fall through to whatever namesake the
+  // file already holds in another collection. Which is the case that matters:
+  // the first write into a file that already has a hand-built collection using
+  // the same token names.
+  const payloadNamesByCollection: { [variableCollectionId: string]: Set<string> } = {}
+  Object.entries(tokensByFile).forEach(([fileName, tokens]) => {
+    const { collectionName } = collectionAndModeFromFileName(fileName)
+    const collectionId = localVariableCollectionsByName[collectionName]?.id ?? collectionName
+    payloadNamesByCollection[collectionId] ??= new Set()
+    for (const tokenName of Object.keys(tokens)) {
+      payloadNamesByCollection[collectionId].add(tokenName)
+    }
+  })
+
   Object.entries(tokensByFile).forEach(([fileName, tokens]) => {
     const { collectionName, modeName } = collectionAndModeFromFileName(fileName)
 
@@ -351,7 +481,14 @@ export function generatePostVariablesPayload(
       }
 
       const existingVariableValue = variable && variableMode ? variable.valuesByMode[modeId] : null
-      const newVariableValue = variableValueFromToken(token, localVariablesByCollectionAndName)
+      const newVariableValue = variableValueFromToken(
+        token,
+        localVariablesByCollectionAndName,
+        // The temporary id when the collection is new, so the payload-name
+        // lookup below is keyed the same way either way.
+        variableCollectionId,
+        payloadNamesByCollection[variableCollectionId],
+      )
 
       // Only include the variable mode value in the payload if it's different from the existing value
       if (
