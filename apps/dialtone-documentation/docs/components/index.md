@@ -89,6 +89,19 @@ next:
       </DtStack>
     </DtStack>
   </DtLink>
+  <DtLink to="/components/slider.html" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
+    <DtStack direction="row" gap="200">
+      <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
+        <DtStack>
+          <dt-icon class="d-fc-tertiary" name="component" :size="viewport.pick({ default: '300', md: '500' })" />
+        </DtStack>
+      </DtBox>
+      <DtStack>
+        <dt-text as="h3" kind="headline" size="200">DtSlider</dt-text>
+        <dt-text as="p" kind="body" size="200" wrap="pretty">Track-based control for selecting a numeric value or range.</dt-text>
+      </DtStack>
+    </DtStack>
+  </DtLink>
   <DtLink to="/components/text.html" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
     <DtStack direction="row" gap="200">
       <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
