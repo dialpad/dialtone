@@ -196,7 +196,12 @@
         :show-marks="[{ value: -100, text: '-100%' }, { value: 0, text: '0%' }, { value: 100, text: '100%' }]"
       >
         <template #label>
-          Percentage &middot; {{ percentageValue }}%
+          <dt-text
+            variant="label-md"
+            tone="secondary"
+          >
+            Percentage: {{ percentageValue }}%
+          </dt-text>
         </template>
       </dt-slider>
     </section>
@@ -261,19 +266,12 @@
           :get-value-text="(value, index) => index === 0 ? `Start: ${value} min` : `End: ${value} min`"
         >
           <template #label>
-            Call duration filter &middot; {{ durationFilter[0] }}–{{ durationFilter[1] }} min
-          </template>
-          <template #start>
-            <dt-icon
-              name="clock-1"
-              size="200"
-            />
-          </template>
-          <template #end>
-            <dt-icon
-              name="clock-12"
-              size="200"
-            />
+            <dt-text
+              variant="label-md"
+              tone="secondary"
+            >
+              Call duration filter: {{ durationFilter[0] }}–{{ durationFilter[1] }} min
+            </dt-text>
           </template>
         </dt-slider>
 
@@ -287,7 +285,12 @@
           :show-marks="true"
         >
           <template #label>
-            Chat text size &middot; {{ fontSize }}px
+            <dt-text
+              variant="label-md"
+              tone="secondary"
+            >
+              Chat text size: {{ fontSize }}px
+            </dt-text>
           </template>
           <template #start>
             <dt-icon
@@ -314,7 +317,12 @@
           :get-value-text="(value) => ['Off', 'Low', 'Medium', 'High', 'Max'][value]"
         >
           <template #label>
-            Noise cancellation &middot; {{ ['Off', 'Low', 'Medium', 'High', 'Max'][noiseCancellation] }}
+            <dt-text
+              variant="label-md"
+              tone="secondary"
+            >
+              Noise cancellation: {{ ['Off', 'Low', 'Medium', 'High', 'Max'][noiseCancellation] }}
+            </dt-text>
           </template>
           <template #start>
             <dt-icon
@@ -339,7 +347,12 @@
           :show-ticks="25"
         >
           <template #label>
-            Playback speed &middot; {{ (playbackSpeed / 100).toFixed(2) }}×
+            <dt-text
+              variant="label-md"
+              tone="secondary"
+            >
+              Playback speed: {{ (playbackSpeed / 100).toFixed(2) }}×
+            </dt-text>
           </template>
           <template #start>
             🐢
@@ -359,7 +372,12 @@
           :show-marks="[50, 100, 150, 200]"
         >
           <template #label>
-            Zoom level &middot; {{ zoomLevel }}%
+            <dt-text
+              variant="label-md"
+              tone="secondary"
+            >
+              Zoom level: {{ zoomLevel }}%
+            </dt-text>
           </template>
           <template #start>
             <dt-icon
@@ -383,7 +401,12 @@
           :step="5"
         >
           <template #label>
-            Mic sensitivity &middot; {{ micSensitivity }}%
+            <dt-text
+              variant="label-md"
+              tone="secondary"
+            >
+              Mic sensitivity: {{ micSensitivity }}%
+            </dt-text>
           </template>
           <template #start>
             <dt-icon
@@ -409,7 +432,12 @@
           :get-value-text="(value, index) => index === 0 ? `From day ${value}` : `To day ${value}`"
         >
           <template #label>
-            Auto-delete recordings after &middot; {{ retentionRange[0] }}–{{ retentionRange[1] }} days
+            <dt-text
+              variant="label-md"
+              tone="secondary"
+            >
+              Auto-delete recordings after: {{ retentionRange[0] }}–{{ retentionRange[1] }} days
+            </dt-text>
           </template>
           <template #start>
             <dt-icon
@@ -434,7 +462,12 @@
           :show-ticks="5"
         >
           <template #label>
-            Battery saver threshold &middot; {{ batteryThreshold }}%
+            <dt-text
+              variant="label-md"
+              tone="secondary"
+            >
+              Battery saver threshold: {{ batteryThreshold }}%
+            </dt-text>
           </template>
           <template #start>
             <dt-icon
@@ -470,11 +503,12 @@
 import { ref } from 'vue';
 import DtSlider from './Slider.vue';
 import { DtIcon } from '@/components/Icon';
+import { DtText } from '@/components/Text';
 
 export default {
   name: 'SliderVariants',
 
-  components: { DtSlider, DtIcon },
+  components: { DtSlider, DtIcon, DtText },
 
   setup () {
     return {

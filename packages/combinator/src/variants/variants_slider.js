@@ -15,97 +15,87 @@ export default {
     },
   ],
 
-  // Each preset below is chosen to cover a distinct combination of
-  // capabilities (single vs. range, ticks vs. marks vs. neither, icons vs.
-  // none, fillOrigin) rather than variations on the same shape.
-  //
-  // Every other preset's label uses the scoped #label slot (`value` binding —
-  // mirrors the update:modelValue payload shape) instead of the static
-  // `label` prop, so the value shown updates live while dragging rather than
-  // freezing at the preset's initial value. default is the exception: it's
-  // also what renders the component-wall thumbnail and the docs page's own
-  // top preview widget, where the plain `label` prop is the far more common
-  // real-world usage worth demonstrating there.
   default: {
     props: {
       modelValue: { initialValue: 50 },
-      min: { initialValue: 0 },
-      max: { initialValue: 100 },
-      step: { initialValue: 1 },
-      showTicks: { initialValue: 10 },
-      label: { initialValue: 'Slider label' },
+      label: { initialValue: 'Volume' },
+      showLabel: { initialValue: false },
+      suffix: { initialValue: '%' },
     },
   },
 
-  'call duration filter': {
+  'horizontal volume': {
+    props: {
+      modelValue: { initialValue: 50 },
+      label: { initialValue: 'Volume' },
+      suffix: { initialValue: '%' },
+    },
+    slots: {
+      start: { initialValue: '<dt-icon-volume-x size="200" aria-label="Low volume" />' },
+      end: { initialValue: '<dt-icon-volume-2 size="200" aria-label="High volume" />' },
+    },
+  },
+
+  'call duration range': {
     props: {
       modelValue: { initialValue: [5, 45] },
-      min: { initialValue: 0 },
       max: { initialValue: 120 },
-      step: { initialValue: 1 },
-    },
-    slots: {
-      label: { initialValue: 'Call duration filter · {{ value[0] }}–{{ value[1] }} min' },
-      start: { initialValue: '<dt-icon name="clock-1" size="200" />' },
-      end: { initialValue: '<dt-icon name="clock-12" size="200" />' },
-    },
-  },
-
-  'noise cancellation': {
-    props: {
-      modelValue: { initialValue: 2 },
-      min: { initialValue: 0 },
-      max: { initialValue: 4 },
-      step: { initialValue: 1 },
-      showTicks: { initialValue: 1 },
-      showMarks: { initialValue: [{ value: 0, text: 'Off' }, { value: 4, text: 'Max' }] },
-    },
-    slots: {
-      label: { initialValue: 'Noise cancellation · {{ ["Off", "Low", "Medium", "High", "Max"][value] }}' },
-      start: { initialValue: '<dt-icon name="volume-1" size="200" />' },
-      end: { initialValue: '<dt-icon name="volume-x" size="200" />' },
+      label: { initialValue: 'Call duration' },
+      suffix: { initialValue: ' min' },
+      minGapSteps: { initialValue: 5 },
+      showMarks: { initialValue: true },
+      readout: { initialValue: 'always' },
     },
   },
 
-  'auto-delete recordings after': {
+  'playback speed': {
     props: {
-      modelValue: { initialValue: [14, 60] },
-      min: { initialValue: 1 },
-      max: { initialValue: 90 },
-      step: { initialValue: 1 },
-      showMarks: { initialValue: [1, 30, 60, 90] },
-    },
-    slots: {
-      label: { initialValue: 'Auto-delete recordings after · {{ value[0] }}–{{ value[1] }} days' },
-      start: { initialValue: '<dt-icon name="calendar-range" size="200" />' },
-      end: { initialValue: '<dt-icon name="trash" size="200" />' },
+      modelValue: { initialValue: 1.25 },
+      min: { initialValue: 0.5 },
+      max: { initialValue: 2 },
+      step: { initialValue: 0.25 },
+      label: { initialValue: 'Playback speed' },
+      suffix: { initialValue: '×' },
+      showTicks: { initialValue: true },
+      readout: { initialValue: 'always' },
     },
   },
 
-  'audio pan': {
+  'audio balance': {
     props: {
-      modelValue: { initialValue: 65 },
-      min: { initialValue: 0 },
+      modelValue: { initialValue: 25 },
+      min: { initialValue: -100 },
       max: { initialValue: 100 },
-      step: { initialValue: 1 },
-      fillOrigin: { initialValue: 50 },
+      label: { initialValue: 'Audio balance' },
+      fillOrigin: { initialValue: 0 },
+      showTicks: { initialValue: 25 },
+      showMarks: { initialValue: [{ value: 0, text: 'Center' }] },
     },
     slots: {
-      label: { initialValue: 'Audio pan · {{ value }}' },
+      start: { initialValue: '<span>Left</span>' },
+      end: { initialValue: '<span>Right</span>' },
     },
   },
 
   'budget cap': {
     props: {
       modelValue: { initialValue: 620 },
-      min: { initialValue: 0 },
       max: { initialValue: 1000 },
-      step: { initialValue: 1 },
+      label: { initialValue: 'Budget cap' },
+      prefix: { initialValue: '$' },
       snapPoints: { initialValue: 100 },
       showTicks: { initialValue: 100 },
+      showMarks: { initialValue: [0, 500, 1000] },
     },
-    slots: {
-      label: { initialValue: 'Budget cap · ${{ value }}' },
+  },
+
+  'vertical volume': {
+    props: {
+      modelValue: { initialValue: 60 },
+      label: { initialValue: 'Volume' },
+      orientation: { initialValue: 'vertical' },
+      suffix: { initialValue: '%' },
+      readout: { initialValue: 'always' },
     },
   },
 };
