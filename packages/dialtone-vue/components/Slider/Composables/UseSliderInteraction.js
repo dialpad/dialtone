@@ -425,9 +425,18 @@ export function useSliderInteraction(props, emit, {
       updateThumbValue(i, internalValues.value[i] + delta * largeStepValue());
     }
     // Matches DtTooltip's own Escape handling: dismiss without moving focus,
-    // so arrow-key nav on this thumb still works afterward.
+    // so arrow-key nav on this thumb still works afterward. Any OTHER key on
+    // this thumb (arrow/Home/End nav included, even though those are handled
+    // natively above) is a fresh show-trigger — same convention as
+    // onPointerDown/the coincident handoff/onThumbFocus/onThumbHitPointerEnter
+    // below, all of which clear the dismissal on their own re-trigger.
+    // Without this, continuing to arrow-step the value after an Escape would
+    // leave the readout hidden until blur+refocus or mouse leave+re-enter,
+    // unlike drag (which does re-trigger it).
     if (event.key === 'Escape') {
       escapeDismissedIndex.value = i;
+    } else if (escapeDismissedIndex.value === i) {
+      escapeDismissedIndex.value = null;
     }
     // Plain arrow keys, Home, End handled natively by <input type="range">
     // (also RTL-aware natively, so no extra handling needed here).

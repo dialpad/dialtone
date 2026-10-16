@@ -382,6 +382,27 @@ describe('DtSlider Tests', () => {
         expect(tooltip.matches(':popover-open')).toBe(false);
       });
 
+      // document.activeElement only tracks elements actually attached to the
+      // document (see "Exposed public API" below) — a real DOM focus check,
+      // not just a synthetic 'focus' event, is the only way to prove Escape
+      // doesn't blur the thumb (a naive Escape-blurs-the-thumb implementation
+      // would close the tooltip identically but fail this one).
+      it('does not move real DOM focus off the thumb on Escape', async () => {
+        const attachedWrapper = mount(DtSlider, { props: baseProps, attachTo: document.body });
+        try {
+          const input = attachedWrapper.find('[data-qa="dt-slider-thumb"]');
+          input.element.focus();
+          await nextTick();
+          const tooltip = attachedWrapper.find('[data-qa="dt-slider-thumb-readout-tooltip"]').element;
+          expect(tooltip.matches(':popover-open')).toBe(true);
+          await input.trigger('keydown', { key: 'Escape' });
+          expect(tooltip.matches(':popover-open')).toBe(false);
+          expect(document.activeElement).toBe(input.element);
+        } finally {
+          attachedWrapper.unmount();
+        }
+      });
+
       it('reopens on the next hover after an Escape dismissal, without needing to refocus', async () => {
         const hitTarget = wrapper.find('[data-qa="dt-slider-thumb-hit"]');
         const tooltip = tooltipReadouts()[0].element;
@@ -390,6 +411,30 @@ describe('DtSlider Tests', () => {
         expect(tooltip.matches(':popover-open')).toBe(false);
         await hitTarget.trigger('pointerenter');
         expect(tooltip.matches(':popover-open')).toBe(true);
+      });
+
+      it('reopens on the next arrow-key press after an Escape dismissal, without needing to blur/refocus', async () => {
+        const tooltip = tooltipReadouts()[0].element;
+        await thumbInputs[0].trigger('focus');
+        await thumbInputs[0].trigger('keydown', { key: 'Escape' });
+        expect(tooltip.matches(':popover-open')).toBe(false);
+        await thumbInputs[0].trigger('keydown', { key: 'ArrowRight' });
+        expect(tooltip.matches(':popover-open')).toBe(true);
+      });
+
+      it('dismisses only the Escaped thumb\'s own tooltip in range mode, leaving the other thumb open', async () => {
+        mockProps = { modelValue: [20, 70] };
+        updateWrapper();
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        const tooltips = tooltipReadouts();
+        await thumbInputs[0].trigger('focus');
+        const hitTargets = wrapper.findAll('[data-qa="dt-slider-thumb-hit"]');
+        await hitTargets[1].trigger('pointerenter');
+        expect(tooltips[0].element.matches(':popover-open')).toBe(true);
+        expect(tooltips[1].element.matches(':popover-open')).toBe(true);
+        await thumbInputs[0].trigger('keydown', { key: 'Escape' });
+        expect(tooltips[0].element.matches(':popover-open')).toBe(false);
+        expect(tooltips[1].element.matches(':popover-open')).toBe(true);
       });
 
       it('does not open while disabled, even when its thumb is hovered', async () => {
@@ -570,6 +615,54 @@ describe('DtSlider Tests', () => {
         tooltip.showPopover = undefined;
         await thumbInputs[0].trigger('focus');
         expect(tooltip.matches(':popover-open')).toBe(false);
+      });
+
+      describe('Per-frame position check is throttled (performance)', () => {
+        // UseSliderTooltipReadout's checkFrame reschedules itself via rAF every
+        // frame regardless, but only runs its own expensive body (an anchor
+        // rect read + visibility check) once the throttle window has elapsed.
+        // Mocking requestAnimationFrame to capture callbacks instead of firing
+        // them lets this drive checkFrame with controlled timestamps — real
+        // browser frame timing can't deterministically land inside vs. past a
+        // 100ms window from a test.
+        let rafCallbacks;
+        let rafSpy;
+
+        beforeEach(() => {
+          rafCallbacks = [];
+          rafSpy = vi.spyOn(window, 'requestAnimationFrame').mockImplementation((cb) => {
+            rafCallbacks.push(cb);
+            return rafCallbacks.length;
+          });
+        });
+
+        afterEach(() => {
+          rafSpy.mockRestore();
+        });
+
+        function fireNextFrame(timestamp) {
+          const cb = rafCallbacks.shift();
+          cb?.(timestamp);
+        }
+
+        it('skips the expensive per-frame check inside the throttle window, then runs it once the window elapses', async () => {
+          await thumbInputs[0].trigger('focus');
+          // The first checkFrame() runs synchronously (inside open(), timestamp
+          // defaults to 0) before this spy can intercept it — clear those
+          // calls so only the throttled, rAF-driven frames below are counted.
+          const anchor = wrapper.find('[data-qa="dt-slider-thumb-visual"]').element;
+          const rectSpy = vi.spyOn(anchor, 'getBoundingClientRect');
+          rectSpy.mockClear();
+
+          // Still inside the 100ms window the synchronous first check (t=0)
+          // opened — the expensive body must not run.
+          fireNextFrame(50);
+          expect(rectSpy).not.toHaveBeenCalled();
+
+          // Past that window — the gate reopens and the body runs.
+          fireNextFrame(150);
+          expect(rectSpy).toHaveBeenCalled();
+        });
       });
     });
 
