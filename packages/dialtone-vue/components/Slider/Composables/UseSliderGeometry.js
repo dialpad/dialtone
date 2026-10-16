@@ -37,15 +37,19 @@ export function useSliderGeometry(props, {
     return isRtl.value ? '50%' : '-50%';
   }
 
-  // The usable area every centered track element (thumb, tick) anchors
-  // within: inset from the true 0%/100% edge by 1px plus half a tick's own
-  // width, matching where an edge tick's center would otherwise overshoot
-  // to if it were simply centered at 0%/100% like every other tick. The
-  // track and indicator still span the full control; the leftover span
-  // beyond this inset is a decorative, non-interactive cap — the same
-  // rounded-pill overhang a tick or thumb would otherwise visually poke
-  // past the edge of.
-  const EDGE_INSET = 'calc(1px + var(--slider-tick-width) / 2)';
+  // The usable area the thumb (and ticks, which share its travel band)
+  // anchor within — defined once in slider.less (--slider-edge-inset) as the
+  // thumb's own worst-case rendered radius (the --active state's 1.05x drag
+  // scale bump included; its border is already inside that size, box-sizing:
+  // border-box — see --slider-edge-inset's own comment), so the thumb can
+  // never render past a consumer's own `overflow: hidden` wrapper.
+  // .d-slider__track itself stays flush with the true 0%/100% edges
+  // regardless — only the indicator's own thumb-tracking edges reuse this
+  // same band (see indicatorStyle), so they land under the thumb instead of
+  // poking past it. See --slider-edge-inset's own comment for why this can't
+  // just be .d-slider__control's own (much more generous, but internal-only)
+  // overflow-clip-margin.
+  const EDGE_INSET = 'var(--slider-edge-inset)';
 
   // (100% - inset*2) * pct/100 + inset: a percentage and a px length combine
   // into one calc() value when multiplied by a unitless number, so this
@@ -62,13 +66,28 @@ export function useSliderGeometry(props, {
     return `${ANCHOR_PCT_PREFIX}${pct / 100}${ANCHOR_PCT_SUFFIX}`;
   }
 
+  // Width/height between two anchored positions collapses to a pure function
+  // of their percentage delta — anchorPct(a) - anchorPct(b), with a - b ==
+  // deltaPct, cancels both EDGE_INSET terms down to this. Used by
+  // indicatorStyle wherever its span sits between two values on the same
+  // anchored scale as the thumb (both thumbs in range mode, or a fillOrigin
+  // value and a thumb) — staying on that same scale is what lets the
+  // indicator's own edge land under the thumb that's covering it, instead of
+  // poking past the thumb's own rendered radius.
+  function anchorSpanPct(deltaPct) {
+    return `calc((100% - ${EDGE_INSET} * 2) * ${deltaPct / 100})`;
+  }
+
   // Shared by thumbPositionStyle and tickPositionStyle — both anchor onto
-  // the same inset band horizontally, differing only in which transform
-  // re-centers them (and, vertically, positionStyle's own simpler path).
+  // the same inset band regardless of orientation, differing only in which
+  // transform re-centers them. Vertical used to fall through to
+  // positionStyle's raw pct% (no inset at all) — the thumb's own radius
+  // poked past the control's block-start/end edge at 0/100 exactly the same
+  // way it did on the inline axis before this inset existed.
   function anchoredPositionStyle(val, { verticalTransform, horizontalTransform }) {
     const pct = thumbPercent(val);
     if (isVertical.value) {
-      return positionStyle(pct, verticalTransform);
+      return { bottom: anchorPct(pct), transform: verticalTransform };
     }
     return {
       insetInlineStart: anchorPct(pct),
@@ -153,7 +172,10 @@ export function useSliderGeometry(props, {
     const pct = thumbPercent(val);
     if (isVertical.value) {
       return {
-        bottom: `${pct}%`,
+        // Matches thumbPositionStyle's own inset anchor (see its comment) —
+        // raw pct here would drift apart from the thumb's actual position
+        // near 0/100 now that the thumb itself anchors onto the inset band.
+        bottom: anchorPct(pct),
         insetInlineStart: `calc(50% + var(--slider-thumb-visual-size) / 2 + ${tooltipReadoutGapPx})`,
         transform: 'translateY(50%)',
       };
@@ -193,15 +215,24 @@ export function useSliderGeometry(props, {
     return `${formatValue(lo, 0)}–${formatValue(hi, 1)}`;
   });
 
+  // Every edge that tracks an actual thumb value anchors onto the same
+  // inset band as the thumb itself (anchorPct/anchorSpanPct) — not the raw
+  // percentage .d-slider__track uses — so that edge always lands under the
+  // thumb's own rendered circle instead of poking a sliver of color past it
+  // (the thumb is wide enough to cover the gap this leaves against the
+  // track's own flush edge; see --slider-edge-inset's comment in slider.less).
+  // The one edge with no thumb anywhere near it — the default mode's fixed
+  // fillOrigin end — has nothing to hide a mismatch under, so it stays
+  // literally flush at 0/100%, same as the track.
   const indicatorStyle = computed(() => {
     if (isRange.value && internalValues.value.length === 2) {
       const [lo, hi] = internalValues.value;
       const loP = thumbPercent(lo);
       const hiP = thumbPercent(hi);
       if (isVertical.value) {
-        return { bottom: `${loP}%`, height: `${hiP - loP}%` };
+        return { bottom: anchorPct(loP), height: anchorSpanPct(hiP - loP) };
       }
-      return { insetInlineStart: `${loP}%`, width: `${hiP - loP}%` };
+      return { insetInlineStart: anchorPct(loP), width: anchorSpanPct(hiP - loP) };
     }
 
     const pct = thumbPercent(internalValues.value[0] ?? props.min);
@@ -211,24 +242,20 @@ export function useSliderGeometry(props, {
       const startPct = Math.min(pct, originPct);
       const sizePct = Math.abs(pct - originPct);
       if (isVertical.value) {
-        return { bottom: `${startPct}%`, height: `${sizePct}%` };
+        return { bottom: anchorPct(startPct), height: anchorSpanPct(sizePct) };
       }
-      return { insetInlineStart: `${startPct}%`, width: `${sizePct}%` };
+      return { insetInlineStart: anchorPct(startPct), width: anchorSpanPct(sizePct) };
     }
 
-    // The indicator's STATIC cap (the fixed end at fillOrigin, always resting
-    // at the control's true min/max, never tracked by a thumb) sits flush at
-    // that edge — the OTHER edge tracks the thumb's own value and must land
-    // exactly there too, matching .d-slider__track's own flush edges.
     const fillsFromEnd = props.fillOrigin === 'end';
     if (isVertical.value) {
       return fillsFromEnd
-        ? { top: 0, height: `${100 - pct}%` }
-        : { bottom: 0, height: `${pct}%` };
+        ? { top: 0, height: `calc(100% - ${anchorPct(pct)})` }
+        : { bottom: 0, height: anchorPct(pct) };
     }
     return fillsFromEnd
-      ? { insetInlineEnd: 0, width: `${100 - pct}%` }
-      : { insetInlineStart: 0, width: `${pct}%` };
+      ? { insetInlineEnd: 0, width: `calc(100% - ${anchorPct(pct)})` }
+      : { insetInlineStart: 0, width: anchorPct(pct) };
   });
 
   return {

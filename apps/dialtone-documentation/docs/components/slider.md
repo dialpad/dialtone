@@ -70,6 +70,22 @@ Set `min-gap-steps` to keep the two thumbs from getting too close together. It's
 />
 ```
 
+### Overflow hidden (temporary test harness)
+
+Scratch demo for checking the thumb/track/indicator/tick inset against a consumer's own tight `overflow: hidden` wrapper — remove before merging.
+
+```vue demo
+<dt-slider
+  :model-value="[20, 70]"
+  label="Price range"
+  :show-marks="[{ value: 0, text: 'Min $0' }, { value: 100, text: 'Max $100' }]"
+  :show-ticks="10"
+  :get-value-text="(value, index) => index === 0 ? `Minimum: $${value}` : `Maximum: $${value}`"
+  class="d-ba d-bas-dashed d-of-hidden"
+  style="border-color: var(--dt-color-border-critical); border-width: 2px;"
+/>
+```
+
 ### With start and end slots (aka left/right)
 
 ```vue demo

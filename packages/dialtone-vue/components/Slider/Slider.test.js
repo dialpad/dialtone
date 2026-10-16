@@ -525,7 +525,7 @@ describe('DtSlider Tests', () => {
         // modelValue 50 of [0, 100] — anchorPct's own inset-rescaled
         // formula (thumbPositionStyle, UseSliderGeometry), not a bare 50%,
         // so the bubble tracks the thumb's actual (edge-inset) position.
-        expect(style).toContain('inset-inline-start: calc(calc(1px + var(--slider-tick-width) / 2) + (100% - calc(1px + var(--slider-tick-width) / 2) * 2) * 0.5)');
+        expect(style).toContain('inset-inline-start: calc(var(--slider-edge-inset) + (100% - var(--slider-edge-inset) * 2) * 0.5)');
         expect(style).toContain('inset-block-end: calc(50% + var(--slider-thumb-visual-size) / 2 + var(--dt-spacing-100))');
         expect(style).toContain('transform: translateX(-50%)');
         expect(el.classes()).toContain('d-tooltip__arrow--bottom-center');
@@ -2729,8 +2729,11 @@ describe('DtSlider Tests', () => {
       expect(thumbInputs[1].element.value).toBe('60');
 
       const style = wrapper.find('[data-qa="dt-slider-indicator"]').attributes('style');
-      expect(style).toContain('bottom: 30%');
-      expect(style).toContain('height: 30%');
+      // Range mode's indicator anchors both edges onto the same inset band as
+      // the thumbs themselves (anchorPct/anchorSpanPct), not raw percentages
+      // — see UseSliderGeometry's indicatorStyle.
+      expect(style).toContain('bottom: calc(var(--slider-edge-inset) + (100% - var(--slider-edge-inset) * 2) * 0.3)');
+      expect(style).toContain('height: calc((100% - var(--slider-edge-inset) * 2) * 0.3)');
     });
   });
 
@@ -2971,7 +2974,7 @@ describe('DtSlider Tests', () => {
       // Pinning the exact calc() formula (not just "some inset exists"), same
       // rationale as the tooltip's own equivalent test above: it's the only
       // way to catch a future regression that silently drops the inset.
-      const EDGE_INSET = 'calc(1px + var(--slider-tick-width) / 2)';
+      const EDGE_INSET = 'var(--slider-edge-inset)';
 
       it('insets the thumb at min instead of reaching the control\'s true 0% edge', () => {
         mockProps = { modelValue: 0 };
@@ -3786,8 +3789,11 @@ describe('DtSlider Tests', () => {
 
       it('fills from the min end toward the thumb, with its static cap flush at the control edge', () => {
         const style = indicator.attributes('style');
+        // The fixed end (no thumb there) stays literally flush; the
+        // thumb-tracking width anchors onto the same inset band as the
+        // thumb itself (anchorPct) — see UseSliderGeometry's indicatorStyle.
         expect(style).toContain('inset-inline-start: 0;');
-        expect(style).toContain('width: 25%');
+        expect(style).toContain('width: calc(var(--slider-edge-inset) + (100% - var(--slider-edge-inset) * 2) * 0.25)');
       });
     });
 
@@ -3800,7 +3806,7 @@ describe('DtSlider Tests', () => {
       it('stays flush at the control edge, with the thumb-tracking edge exactly at the thumb (no overshoot)', () => {
         const style = indicator.attributes('style');
         expect(style).toContain('inset-inline-start: 0;');
-        expect(style).toContain('width: 0%');
+        expect(style).toContain('width: calc(var(--slider-edge-inset) + (100% - var(--slider-edge-inset) * 2) * 0)');
       });
     });
 
@@ -3813,7 +3819,7 @@ describe('DtSlider Tests', () => {
       it('fills from the max end toward the thumb, with its static cap flush at the control edge', () => {
         const style = indicator.attributes('style');
         expect(style).toContain('inset-inline-end: 0;');
-        expect(style).toContain('width: 75%');
+        expect(style).toContain('width: calc(100% - calc(var(--slider-edge-inset) + (100% - var(--slider-edge-inset) * 2) * 0.25))');
       });
     });
 
@@ -3834,7 +3840,7 @@ describe('DtSlider Tests', () => {
       });
 
       it('renders the indicator with zero width', () => {
-        expect(indicator.attributes('style')).toContain('width: 0%');
+        expect(indicator.attributes('style')).toContain('width: calc((100% - var(--slider-edge-inset) * 2) * 0)');
       });
     });
 
@@ -3846,8 +3852,10 @@ describe('DtSlider Tests', () => {
 
       it('fills from the origin toward the thumb', () => {
         const style = indicator.attributes('style');
-        expect(style).toContain('inset-inline-start: 50%');
-        expect(style).toContain('width: 25%');
+        // Both edges (the origin and the thumb) anchor onto the same inset
+        // band — see UseSliderGeometry's indicatorStyle.
+        expect(style).toContain('inset-inline-start: calc(var(--slider-edge-inset) + (100% - var(--slider-edge-inset) * 2) * 0.5)');
+        expect(style).toContain('width: calc((100% - var(--slider-edge-inset) * 2) * 0.25)');
       });
     });
 
@@ -3859,8 +3867,8 @@ describe('DtSlider Tests', () => {
 
       it('fills from the thumb back toward the origin', () => {
         const style = indicator.attributes('style');
-        expect(style).toContain('inset-inline-start: 25%');
-        expect(style).toContain('width: 25%');
+        expect(style).toContain('inset-inline-start: calc(var(--slider-edge-inset) + (100% - var(--slider-edge-inset) * 2) * 0.25)');
+        expect(style).toContain('width: calc((100% - var(--slider-edge-inset) * 2) * 0.25)');
       });
     });
 
@@ -3869,16 +3877,16 @@ describe('DtSlider Tests', () => {
         mockProps = { modelValue: 60, fillOrigin: 150, min: 0, max: 100 };
         updateWrapper();
         const style = indicator.attributes('style');
-        expect(style).toContain('inset-inline-start: 60%');
-        expect(style).toContain('width: 40%');
+        expect(style).toContain('inset-inline-start: calc(var(--slider-edge-inset) + (100% - var(--slider-edge-inset) * 2) * 0.6)');
+        expect(style).toContain('width: calc((100% - var(--slider-edge-inset) * 2) * 0.4)');
       });
 
       it('clamps fillOrigin below min to min', () => {
         mockProps = { modelValue: 40, fillOrigin: -50, min: 0, max: 100 };
         updateWrapper();
         const style = indicator.attributes('style');
-        expect(style).toContain('inset-inline-start: 0%');
-        expect(style).toContain('width: 40%');
+        expect(style).toContain('inset-inline-start: calc(var(--slider-edge-inset) + (100% - var(--slider-edge-inset) * 2) * 0)');
+        expect(style).toContain('width: calc((100% - var(--slider-edge-inset) * 2) * 0.4)');
       });
     });
 
@@ -3890,8 +3898,8 @@ describe('DtSlider Tests', () => {
 
       it('ignores fillOrigin and fills between the two thumbs', () => {
         const style = indicator.attributes('style');
-        expect(style).toContain('inset-inline-start: 20%');
-        expect(style).toContain('width: 60%');
+        expect(style).toContain('inset-inline-start: calc(var(--slider-edge-inset) + (100% - var(--slider-edge-inset) * 2) * 0.2)');
+        expect(style).toContain('width: calc((100% - var(--slider-edge-inset) * 2) * 0.6)');
       });
     });
 
@@ -3903,8 +3911,8 @@ describe('DtSlider Tests', () => {
 
       it('fills from origin toward thumb along the block axis', () => {
         const style = indicator.attributes('style');
-        expect(style).toContain('bottom: 50%');
-        expect(style).toContain('height: 25%');
+        expect(style).toContain('bottom: calc(var(--slider-edge-inset) + (100% - var(--slider-edge-inset) * 2) * 0.5)');
+        expect(style).toContain('height: calc((100% - var(--slider-edge-inset) * 2) * 0.25)');
       });
     });
   });

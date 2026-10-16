@@ -53,11 +53,32 @@
     --slider-disabled-track-color: var(--dt-inputs-color-background-disabled);
     --slider-disabled-indicator-color: var(--dt-inputs-color-foreground-disabled);
     --slider-disabled-border-color: var(--dt-inputs-color-border-disabled);
-    --slider-tick-color: var(--dt-color-border-moderate); // darker than the passive track for legibility
-    --slider-tick-width: var(--dt-size-border-100); // 1px
+    --slider-tick-color: var(--dt-color-border-bold); // darker than the passive track for legibility
+    --slider-tick-width: var(--dt-size-border-200); // 3.2px diameter dot
     --slider-boundary-color: var(--dt-color-foreground-tertiary);
     --slider-track-length: var(--dt-layout-300);               // 192px — used as block-size in vertical mode
     --slider-mark-offset: var(--dt-spacing-200);               // gap from track/thumb to marks & readout
+    // The band the thumb (and ticks, which share its travel) anchor within —
+    // sized to the thumb's own worst-case rendered radius, including the
+    // --active state's 1.05x drag scale bump (see
+    // .d-slider__thumb-visual--active below), so the thumb can never render
+    // past this inset, even mid-drag. No separate border-width term:
+    // .d-slider__thumb-visual is box-sizing: border-box, so its border
+    // already lives inside --slider-thumb-visual-size — adding it again here
+    // would widen the inset past the thumb's own rendered edge, leaving a
+    // sliver of .d-slider__track visibly uncovered beside the thumb. A
+    // consumer's own `overflow: hidden` wrapper has none of
+    // .d-slider__control's internal overflow-clip-margin generosity below —
+    // it clips flush at its own edge, so this has to be exact. The 1.05
+    // scale factor (rather than a bigger, more visually obvious bump) keeps
+    // this same inset small enough that it reads as flush at rest too — the
+    // gap between an at-rest thumb's own (unscaled) edge and this inset is
+    // the scale bump's own delta, imperceptible at 1.05x. .d-slider__track
+    // itself deliberately stays flush with the true 0%/100% edges regardless
+    // — only the indicator's own thumb-tracking edges reuse this band too,
+    // so they land under the thumb instead of poking a sliver of color past
+    // its rendered circle — see UseSliderGeometry's indicatorStyle.
+    --slider-edge-inset: calc(var(--slider-thumb-visual-size) * 1.05 / 2);
 
     // link-primary's dark-theme value is still too close to the canvas for
     // readout-sized text (it's tuned for links inside body copy, not a bold
@@ -168,6 +189,9 @@
 //  ----------------------------------------------------------------------------
 .d-slider__track {
     position: absolute;
+    // Always flush with the container's own true edges — only the thumb
+    // (and ticks, anchored to its same travel band) stop short of them; see
+    // --slider-edge-inset's own comment.
     inset-inline: 0;
     block-size: var(--slider-track-height);
     background-color: var(--slider-track-color);
@@ -248,8 +272,11 @@
 //  Lifts the thumb slightly, as if picked up off the track.
 //  ----------------------------------------------------------------------------
 .d-slider__thumb-visual--active {
-    inline-size: calc(var(--slider-thumb-visual-size) * 1.1);
-    block-size: calc(var(--slider-thumb-visual-size) * 1.1);
+    // Matches --slider-edge-inset's own scale factor (see its comment) — any
+    // bigger and the gap this leaves at rest, between an unscaled thumb's own
+    // edge and the inset sized for this larger one, stops being imperceptible.
+    inline-size: calc(var(--slider-thumb-visual-size) * 1.05);
+    block-size: calc(var(--slider-thumb-visual-size) * 1.05);
     box-shadow: var(--dt-shadow-small);
 
     // A pure pointer/touch drag never sets --focused, so without its own
@@ -306,15 +333,27 @@
 }
 
 //  $$  TICKS
+//  A small round dot sitting ON the track itself (same centerline as the
+//  track/indicator), not below it — same footprint regardless of
+//  orientation, so the vertical-mode override below only needs to
+//  reposition it, not resize it. Painted between the track and the
+//  indicator in the template (not after), so the opaque indicator covers
+//  whichever ticks fall within its own filled span — a tick only shows
+//  through on the track's unfilled portion.
 //  ----------------------------------------------------------------------------
 .d-slider__tick {
     position: absolute;
-    inline-size: var(--slider-tick-width);
-    block-size: var(--dt-spacing-50);
     background-color: var(--slider-tick-color);
-    inset-block-start: 50%;
-    margin-block-start: calc(var(--slider-track-height) / 2 + var(--dt-size-border-100));
+    border-radius: var(--dt-size-radius-circle);
     pointer-events: none;
+    inline-size: var(--slider-tick-width);
+    block-size: var(--slider-tick-width);
+    inset-block-start: 50%;
+    // Centers the dot's own box on the 50% line instead of just anchoring
+    // its top edge there — no transform (tickPositionStyle's own inline
+    // transform only ever handles the inline axis), so this has to be a
+    // plain negative margin.
+    margin-block-start: calc(var(--slider-tick-width) / 2 * -1);
 }
 
 //  $$  MARKS (text annotations centered under a track position)
@@ -611,10 +650,12 @@
     }
 
     .d-slider__tick {
-        inline-size: var(--dt-spacing-50);
-        block-size: var(--dt-size-border-200);
+        // A circle's footprint doesn't change with orientation — only swap
+        // which axis centers it onto the track's own centerline, same as
+        // every other swap in this block.
         inset-block-start: unset;
-        inset-inline-start: calc(50% + var(--slider-track-height) / 2 + var(--dt-size-border-100));
+        inset-inline-start: 50%;
+        margin-inline-start: calc(var(--slider-tick-width) / 2 * -1);
         margin-block-start: 0;
         // bottom and transform set inline via style — tickPositionStyle
         // (UseSliderGeometry) always sets a transform, so a CSS fallback
