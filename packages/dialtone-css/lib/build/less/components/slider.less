@@ -451,16 +451,35 @@
         display: block;
     }
 
-    // left (not inset-inline-start): --slider-tooltip-arrow-x is computed in
-    // UseSliderTooltipReadout from physical viewport coordinates (Floating
-    // UI's own result.x, the anchor's physical rect.left) — a logical
-    // property here would have the browser re-mirror an already-physical
-    // value under dir="rtl", landing the arrow on the wrong side of center.
+    // --slider-tooltip-arrow-x is computed in UseSliderTooltipReadout from
+    // physical viewport coordinates (Floating UI's own result.x, the
+    // anchor's physical rect.left) — data-side is likewise always a
+    // physical Floating UI placement ('top'/'bottom'/'left'/'right', never
+    // '-start'/'-end'). A bare physical property (left/right/
+    // border-left-color/border-right-color) would say this correctly, but
+    // the pre-commit autofixer (stylelint-plugin-dialtone's
+    // fix-logical-properties.js) silently rewrites any bare physical
+    // property name back to its logical form on every commit — there is no
+    // disable-comment escape hatch for it. So this stays logical-only: the
+    // LTR-correct logical property, overridden under :dir(rtl) by the
+    // logical property that maps to the SAME physical side under RTL
+    // (inline-end -> physical left, inline-start -> physical right there),
+    // with the base property reset to transparent/auto so only one edge is
+    // ever colored/anchored at a time.
+    //
+    // :dir(rtl) is placed on THIS element (before ::after), not nested
+    // inside the ::after block — `::after:dir(rtl)` (a pseudo-class after a
+    // pseudo-element) is not a thing browsers match; it silently never
+    // applies, leaving the base (buggy) declaration active under RTL.
     &[data-side="top"]::after {
         transform: translateX(-50%);
         inset-block-start: 100%;
         inset-inline-start: var(--slider-tooltip-arrow-x);
         border-block-start-color: var(--tooltip-color-background);
+    }
+
+    &:dir(rtl)[data-side="top"]::after {
+        inset-inline: auto var(--slider-tooltip-arrow-x);
     }
 
     &[data-side="bottom"]::after {
@@ -470,11 +489,10 @@
         border-block-end-color: var(--tooltip-color-background);
     }
 
-    // left/right (not inset-inline-start/end): data-side is always a physical
-    // Floating UI placement ('left'/'right', never '-start'/'-end'), so an
-    // inline-logical property here mirrors under dir="rtl" even though the
-    // side itself didn't — landing the arrow on the box's far edge, pointing
-    // away from the thumb instead of toward it.
+    &:dir(rtl)[data-side="bottom"]::after {
+        inset-inline: auto var(--slider-tooltip-arrow-x);
+    }
+
     &[data-side="left"]::after {
         transform: translateY(-50%);
         inset-block-start: var(--slider-tooltip-arrow-y);
@@ -482,11 +500,23 @@
         border-inline-start-color: var(--tooltip-color-background);
     }
 
+    &:dir(rtl)[data-side="left"]::after {
+        inset-inline: auto 100%;
+        border-inline-start-color: transparent;
+        border-inline-end-color: var(--tooltip-color-background);
+    }
+
     &[data-side="right"]::after {
         transform: translateY(-50%);
         inset-block-start: var(--slider-tooltip-arrow-y);
         inset-inline-end: 100%;
         border-inline-end-color: var(--tooltip-color-background);
+    }
+
+    &:dir(rtl)[data-side="right"]::after {
+        inset-inline: 100% auto;
+        border-inline-end-color: transparent;
+        border-inline-start-color: var(--tooltip-color-background);
     }
 }
 
