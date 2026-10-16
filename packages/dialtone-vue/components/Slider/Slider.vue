@@ -71,10 +71,14 @@
           class="d-slider__track"
           data-qa="dt-slider-track"
         />
-        <!-- Painted between the track and the indicator (not after) so the
-             opaque indicator covers any tick that falls within its filled
-             span — ticks only show through on the track's own unfilled
-             portion. -->
+        <div
+          class="d-slider__indicator"
+          :style="indicatorStyle"
+          data-qa="dt-slider-indicator"
+        />
+        <!-- .d-slider__indicator's own z-index (slider.less) covers any tick
+             that falls within its filled span regardless of template order —
+             ticks only show through on the track's own unfilled portion. -->
         <template v-if="showTicks">
           <div
             v-for="(tickValue, i) in computedTickValues"
@@ -84,11 +88,6 @@
             data-qa="dt-slider-tick"
           />
         </template>
-        <div
-          class="d-slider__indicator"
-          :style="indicatorStyle"
-          data-qa="dt-slider-indicator"
-        />
         <div
           v-for="(val, i) in internalValues"
           :key="`thumb-visual-${i}`"

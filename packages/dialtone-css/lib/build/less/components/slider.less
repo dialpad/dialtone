@@ -30,10 +30,11 @@
     // a dedicated slider token — keeps the filled track visually consistent
     // with other controls' selected state (see radio-checkbox.less, toggle.less).
     --slider-indicator-color: var(--dt-checkbox-color-background-checked);
-    // Same token an outlined button's text uses — readable against both
-    // light and dark canvases, unlike --slider-indicator-color above, whose
-    // dark-theme value is tuned for a filled bar's larger area, not text.
-    --slider-readout-color: var(--dt-color-link-primary);
+    // foreground-primary, not --dt-color-link-primary — properly
+    // high-contrast body text in both themes, unlike link-primary (tuned for
+    // links inside body copy, too low-contrast for a bold number sitting
+    // alone in dark mode) which used to need a separate dark-mode override.
+    --slider-readout-color: var(--dt-color-foreground-primary);
     --slider-thumb-size: var(--dt-spacing-300);               // 24px — control row height; actual hit target is --dt-spacing-550 below
     --slider-thumb-visual-size: calc(var(--slider-thumb-size) * 0.65); // 35% smaller than the hit target
     // Same color as the filled track/indicator, not a neutral knob color —
@@ -80,15 +81,6 @@
     // its rendered circle — see UseSliderGeometry's indicatorStyle.
     --slider-edge-inset: calc(var(--slider-thumb-visual-size) * 1.05 / 2);
 
-    // link-primary's dark-theme value is still too close to the canvas for
-    // readout-sized text (it's tuned for links inside body copy, not a bold
-    // number sitting alone). foreground-primary is the token built for that
-    // job — properly high-contrast body text in both themes.
-    [data-dt-mode="dark"] &,
-    [data-dt-theme="dark"] & {
-        --slider-readout-color: var(--dt-color-foreground-primary);
-    }
-
     display: flex;
     flex-direction: column;
     gap: 0;
@@ -108,7 +100,7 @@
 //  ----------------------------------------------------------------------------
 .d-slider__body {
     display: flex;
-    gap: var(--dt-spacing-200);
+    gap: var(--dt-spacing-150);
     align-items: center;
     inline-size: 100%;
     margin-block-start: var(--dt-spacing-100-negative);
@@ -138,6 +130,7 @@
     flex: 1;
     align-items: center;
     box-sizing: content-box;
+    margin-block-start: var(--dt-spacing-25-negative);
 
     // A mark/readout near 0%/100% is centered on its value (translateX(-50%)),
     // so it naturally renders partly outside this box — there's nothing left
@@ -205,6 +198,10 @@
 //  ----------------------------------------------------------------------------
 .d-slider__indicator {
     position: absolute;
+    // Explicit stacking (not DOM order) so it paints over .d-slider__tick on
+    // its own filled span regardless of where either sits in the template —
+    // .d-slider__thumb-visual's own z-index still paints above this.
+    z-index: var(--zi-base1);
     block-size: var(--slider-track-height);
     background-color: var(--slider-indicator-color);
     border-radius: var(--dt-size-radius-pill);
@@ -327,10 +324,10 @@
 //  A small round dot sitting ON the track itself (same centerline as the
 //  track/indicator), not below it — same footprint regardless of
 //  orientation, so the vertical-mode override below only needs to
-//  reposition it, not resize it. Painted between the track and the
-//  indicator in the template (not after), so the opaque indicator covers
-//  whichever ticks fall within its own filled span — a tick only shows
-//  through on the track's unfilled portion.
+//  reposition it, not resize it. .d-slider__indicator's own z-index (above)
+//  covers whichever ticks fall within its filled span, regardless of
+//  template order — a tick only shows through on the track's own unfilled
+//  portion.
 //  ----------------------------------------------------------------------------
 .d-slider__tick {
     position: absolute;
@@ -354,7 +351,9 @@
     position: absolute;
     overflow: hidden;
     color: var(--slider-boundary-color);
-    font: var(--dt-typography-body-sm);
+    font: var(--dt-text-body-xs);
+    font-size: var(--dt-font-size-125);
+    line-height: var(--dt-font-line-height-100);
     white-space: nowrap;
     text-overflow: ellipsis;
     transform: translateX(-50%);
@@ -399,8 +398,11 @@
     position: absolute;
     overflow: hidden;
     color: var(--slider-readout-color);
-    font: var(--dt-typography-body-sm);
+    font: var(--dt-text-body-xs);
     font-weight: var(--dt-font-weight-bold);
+    font-size: var(--dt-font-size-125);
+    line-height: var(--dt-font-line-height-100);
+    font-variant-numeric: tabular-nums;
     white-space: nowrap;
     text-overflow: ellipsis;
     transform: translateX(-50%);
@@ -581,6 +583,7 @@
         block-size: auto;
         flex: 1;
         flex-direction: column;
+        margin-block-start: var(--dt-spacing-50);
         padding-block: 0;
         // Same bare-number-vs-length max() pitfall as the horizontal
         // padding-block rule above — see its comment.
