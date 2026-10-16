@@ -11,6 +11,22 @@ const DIRECTIVE_PREFIX = 'directives/';
 const MAX_QUERY_CHARS = 256;
 const MAX_QUERY_TERMS = 12;
 
+function closeExcerptFence(excerpt: string): string {
+  let fence = '';
+  let closing: RegExp | undefined;
+  for (const line of excerpt.split('\n')) {
+    if (closing) {
+      if (closing.test(line)) closing = undefined;
+      continue;
+    }
+    const opening = line.match(/^ {0,3}(`{3,}|~{3,})(.*)$/);
+    if (!opening || (opening[1][0] === '`' && opening[2].includes('`'))) continue;
+    fence = opening[1];
+    closing = new RegExp(`^ {0,3}${fence[0]}{${fence.length},}[ \\t\\r]*$`);
+  }
+  return closing ? `${excerpt}\n${fence}` : excerpt;
+}
+
 // Common English words that add no signal when matching docs.
 // Filtering them prevents AND-logic from requiring "how", "I", "difference" etc.
 // to appear in every matching section.
@@ -236,9 +252,12 @@ export function formatDocumentationResults(
       ? `### ${record.docTitle} — ${record.headingPath.join(' > ')}`
       : `### ${record.docTitle}`;
 
-    const excerpt = record.content.length > CONTENT_EXCERPT_MAX
+    let excerpt = record.content.length > CONTENT_EXCERPT_MAX
       ? `${record.content.slice(0, CONTENT_EXCERPT_MAX).trimEnd()}...`
       : record.content;
+    if (record.content.length > CONTENT_EXCERPT_MAX && record.docId.startsWith(DIRECTIVE_PREFIX)) {
+      excerpt = closeExcerptFence(excerpt);
+    }
 
     const links: string[] = [];
     if (record.frontmatter.storybook) links.push(`[Storybook](${record.frontmatter.storybook})`);

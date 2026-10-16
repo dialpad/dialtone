@@ -272,6 +272,17 @@ describe('formatDocumentationResults', () => {
     expect(formatted).toContain('dialtone.dialpad.com');
   });
 
+  test.each(['`', '~'])('closes a truncated directive %s fence before its links', marker => {
+    const result = searchDocumentation('button', fixture).results[0];
+    const fence = marker.repeat(4);
+    const content = `${fence}html\n${marker.repeat(3)}\n${'example\n'.repeat(100)}${fence}`;
+    const details = { ...result.details, docId: 'directives/example', content };
+    const formatted = formatDocumentationResults([{ ...result, details }], 'example');
+    expect(formatted).toContain(`...\n${fence}\n[Storybook]`);
+    const ordinary = formatDocumentationResults([{ ...result, details: { ...details, docId: 'example' } }], 'example');
+    expect(ordinary).toContain('...\n[Storybook]');
+  });
+
   test('reports the unmatched documentation query explicitly', () => {
     const output = formatDocumentationResults([], 'nothing');
     expect(output).toMatch(/no documentation/i);
