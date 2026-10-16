@@ -14,7 +14,7 @@ function extractProse (markdown, inlineCode, preserveFencedCode) {
   const output = [];
   // Consume blocks before scanning their contents, so apparent fences in a
   // comment/script and apparent HTML inside inline code have no special meaning.
-  const tokens = /^ {0,3}(`{3,})[^`\n]*$|^ {0,3}(~{3,})[^\n]*$|<!--|<(script|style)\b[^>]*>|(?<!`)(`+)(?!`)/gmi;
+  const tokens = /^ {0,3}(`{3,})[^`\n]*$|^ {0,3}(~{3,})[^\n]*$|<!--|<(script|style)(?![\w-])[^>]*>|(?<!`)(`+)(?!`)/gmi;
   let cursor = 0;
   let match;
   // Unclosed blocks run to the end of the input.
@@ -42,7 +42,7 @@ function extractProse (markdown, inlineCode, preserveFencedCode) {
       const end = closing.exec(markdown);
       const value = end && markdown.slice(cursor, end.index);
       // Inline spans cannot cross a paragraph or a code/comment block.
-      if (end && !/\n[ \t]*\n|\n {0,3}(?:`{3,}|~{3,}|<!--|<(?:script|style)\b)/i.test(value)) {
+      if (end && !/\n[ \t]*\n|\n {0,3}(?:`{3,}|~{3,}|<!--|<(?:script|style)(?![\w-]))/i.test(value)) {
         const span = markdown.slice(match.index, closing.lastIndex);
         const index = inlineCode.push(/[<>]/.test(value) ? span : value) - 1;
         output.push(`\uE000inline-code-${index}\uE001`);

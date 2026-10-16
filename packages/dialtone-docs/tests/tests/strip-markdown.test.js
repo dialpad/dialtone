@@ -65,6 +65,15 @@ describe('stripMarkdown', () => {
       .toBe('Guidance.\n\nMore guidance.');
   });
 
+  test('script and style prefixes in custom elements do not hide prose or interrupt inline code', () => {
+    for (const tag of ['style-guide', 'script-editor']) {
+      expect(stripMarkdown(`<${tag}>Guidance.</${tag}> More guidance.`))
+        .toBe('Guidance. More guidance.');
+      const inline = `Use \`an example\n<${tag}>still literal</${tag}>\` after.`;
+      expect(stripMarkdown(inline)).toBe(inline);
+    }
+  });
+
   test('indented fenced examples do not leak literal markup into prose', () => {
     const result = stripMarkdown('Before\n   ````vue\n<span>Example</span>\n```\nstill code\n   ````\nAfter');
     expect(result).toBe('Before\n\nAfter');
