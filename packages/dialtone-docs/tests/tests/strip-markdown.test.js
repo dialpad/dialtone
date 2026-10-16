@@ -20,6 +20,13 @@ describe('stripMarkdown', () => {
     expect(stripMarkdown(input)).toBe(expected);
   });
 
+  test('preserves fenced examples verbatim only when requested', () => {
+    const code = ['```html', `<button v-dt-tooltip="'Save'">Save</button>`, '<!-- example comment -->', '```'].join('\n');
+    const markdown = `Before\n\n${code}\n\nAfter`;
+    expect(stripMarkdown(markdown, { preserveFencedCode: true })).toContain(code);
+    expect(stripMarkdown(markdown)).not.toContain('v-dt-tooltip');
+  });
+
   test('removes code blocks but preserves surrounding text', () => {
     const md = 'Before\n\n```js\nconst x = 1;\n```\n\nAfter';
     const result = stripMarkdown(md);

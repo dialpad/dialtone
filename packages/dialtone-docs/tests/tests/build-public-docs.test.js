@@ -16,6 +16,7 @@ describe('public directive MDX records', () => {
     expect(content).toContain(`v-dt-${name}`);
     expect(content).toContain(`Dt${name[0].toUpperCase()}${name.slice(1)}Directive`);
     expect(content).toContain('app.use');
+    expect(content).toContain('```js\nimport {');
     expect(content).not.toMatch(/import \*|<Meta|<Canvas|Stories|addon-docs/);
     for (const record of records) expect(record.content.trim()).not.toBe('');
   });

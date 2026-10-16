@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
 import { glob } from 'glob';
 import { stripMarkdown } from '../utils/strip-markdown.mjs';
+import { SITE_URL } from '../../../../apps/dialtone-documentation/docs/.vuepress/site-reference.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -132,8 +133,7 @@ export function buildRecords(absolutePath) {
   const { data: frontmatter, content } = matter(rawFile);
   const filePath = relative(repoRoot, absolutePath).replace(/\\/g, '/');
   const isDirective = filePath.startsWith('packages/dialtone-vue/directives/') && filePath.endsWith('.mdx');
-  // Directive MDX starts with Storybook imports and Meta. Reuse the prose from
-  // its first H1; authoring setup and fenced examples are not search guidance.
+  // Skip Storybook authoring imports and Meta; directive usage examples remain searchable.
   const headingStart = isDirective ? content.search(/^#\s+/m) : 0;
   if (headingStart < 0) throw new Error(`Missing H1 for ${filePath}`);
   const body = content.slice(headingStart);
@@ -178,7 +178,7 @@ export function buildRecords(absolutePath) {
     const stories = storiesImport && readFileSync(resolve(dirname(absolutePath), storiesImport[1]), 'utf8');
     const storyTitle = stories?.match(/title:\s*['"]([^'"]+)['"]/)?.[1];
     if (!storyTitle) throw new Error(`Missing Storybook title for ${filePath}`);
-    fm.storybook = `https://dialtone.dialpad.com/vue/?path=/docs/${slugify(storyTitle)}--docs`;
+    fm.storybook = `${SITE_URL}/vue/?path=/docs/${slugify(storyTitle)}--docs`;
     fm.sourcePackage = vuePackage.name;
     fm.sourceVersion = vuePackage.version;
   }
@@ -187,7 +187,7 @@ export function buildRecords(absolutePath) {
 
   if (sections.length === 0) {
     // No H2/H3 headings — emit one record for the whole body
-    const content = stripMarkdown(body, { stripFrontmatter: false });
+    const content = stripMarkdown(body, { stripFrontmatter: false, preserveFencedCode: isDirective });
     return [{
       id: docId,
       docId,
@@ -202,7 +202,7 @@ export function buildRecords(absolutePath) {
 
   const usedSlugs = new Map();
   return sections.map(({ headingPath, raw }) => {
-    const content = stripMarkdown(raw, { stripFrontmatter: false });
+    const content = stripMarkdown(raw, { stripFrontmatter: false, preserveFencedCode: isDirective });
     const baseSlug = headingPath.length > 0 ? slugify(headingPath.join('-')) : 'intro';
     const count = usedSlugs.get(baseSlug) ?? 0;
     usedSlugs.set(baseSlug, count + 1);

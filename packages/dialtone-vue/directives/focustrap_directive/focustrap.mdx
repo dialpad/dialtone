@@ -16,17 +16,17 @@ dismissal, and `aria-modal` management remain the consumer's responsibility.
 
 ## Usage
 
-Import `DtFocustrapDirective` from `@dialpad/dialtone-vue` and register it with
-`app.use(DtFocustrapDirective)` on your Vue 3 application before mounting. Use
-`v-dt-focustrap` on the container. Bind a boolean for activation or an object
-configuration; arguments and modifiers are not read. With no binding it is
-active, `initialFocus` is `auto`, and `restoreFocus` is `true`. Supply the
-appropriate role, accessible name, activation state, and dismissal handlers.
+Register the plugin before mounting your Vue 3 application:
 
 ```js
 import { DtFocustrapDirective } from "@dialpad/dialtone-vue";
 app.use(DtFocustrapDirective);
 ```
+
+Use `v-dt-focustrap` on the container with an appropriate role, accessible name,
+activation state, and dismissal handlers. Bind a boolean for activation or an
+object configuration; arguments and modifiers are not read. With no binding it
+is active, `initialFocus` is `auto`, and `restoreFocus` is `true`.
 
 ### Boolean binding -- activate when truthy
 

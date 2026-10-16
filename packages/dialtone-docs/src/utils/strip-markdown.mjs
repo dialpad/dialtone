@@ -39,11 +39,19 @@ export function stripFrontmatter(markdown) {
  * @param {string} markdown - Markdown string
  * @param {Object} [options]
  * @param {boolean} [options.stripFrontmatter=true] - Strip YAML frontmatter before parsing
+ * @param {boolean} [options.preserveFencedCode=false] - Retain literal fenced examples
  * @returns {string}
  */
 export function stripMarkdown(markdown, options = {}) {
-  const { stripFrontmatter: strip = true } = options;
+  const { stripFrontmatter: strip = true, preserveFencedCode = false } = options;
   let text = strip ? stripFrontmatter(markdown) : markdown;
+  const codeBlocks = [];
+  if (preserveFencedCode) {
+    text = text.replace(PATTERNS.codeBlockFenced, block => {
+      codeBlocks.push(block);
+      return `\uE000FENCE${codeBlocks.length - 1}\uE001`;
+    });
+  }
 
   text = text
     .replace(PATTERNS.htmlComment, '')
@@ -60,5 +68,7 @@ export function stripMarkdown(markdown, options = {}) {
     .replace(/\n{3,}/g, '\n\n')
     .trim();
 
-  return text;
+  return preserveFencedCode
+    ? text.replace(/\uE000FENCE(\d+)\uE001/g, (_, index) => codeBlocks[Number(index)])
+    : text;
 }

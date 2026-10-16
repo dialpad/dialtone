@@ -10,21 +10,16 @@ to provide styled, cross-browser-consistent scrollbars.
 
 ## Usage
 
-Import `DtScrollbarDirective` from `@dialpad/dialtone-vue` and register it with
-`app.use(DtScrollbarDirective)` on your Vue 3 application before mounting. Use
-`v-dt-scrollbar` on the container. Load Dialtone CSS and the
-`overlayscrollbars/overlayscrollbars.css` stylesheet. The container needs a single
-child element for the viewport and a size constraint so its content can overflow.
+Register the plugin before mounting your Vue 3 application:
 
 ```js
 import { DtScrollbarDirective } from "@dialpad/dialtone-vue";
-```
-
-Register the directive on your application:
-
-```js
 app.use(DtScrollbarDirective);
 ```
+
+Use `v-dt-scrollbar` on the container. Load Dialtone CSS and the
+`overlayscrollbars/overlayscrollbars.css` stylesheet. The container needs a single
+child element for the viewport and a size constraint so its content can overflow.
 
 ### Default
 
@@ -47,7 +42,7 @@ scrolling or pointer movement with a 1300ms delay. Unknown values fall back to
 `enter`. OverlayScrollbars' internal `never` and `leave` names are not public
 directive arguments. The directive does not read modifiers.
 
-**Never auto-hide** — scrollbar is always visible
+**Always visible**: scrollbar stays visible
 
 ```html
 <div v-dt-scrollbar:always>

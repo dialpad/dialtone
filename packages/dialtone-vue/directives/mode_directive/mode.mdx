@@ -14,8 +14,12 @@ For full documentation, see the [Mode Island page](https://dialtone.dialpad.com/
 
 ## Usage
 
-Import `DtModeDirective` from `@dialpad/dialtone-vue` and register it with
-`app.use(DtModeDirective)` on your Vue 3 application before mounting.
+Register the plugin before mounting your Vue 3 application:
+
+```js
+import { DtModeDirective } from "@dialpad/dialtone-vue";
+app.use(DtModeDirective);
+```
 
 Use `v-dt-mode` by default on the element that already defines the region. It adds
 no wrapper and does not paint a background. If you need a new container, use a
@@ -27,16 +31,6 @@ primary surface together, or cannot install the current directive plugin. See
 for the full decision table and server-rendering considerations. The component
 uses `mode="inverted"`; the directive and positioned components' `content-mode`
 prop use `invert`.
-
-```js
-import { DtModeDirective } from "@dialpad/dialtone-vue";
-```
-
-Register the directive on your application:
-
-```js
-app.use(DtModeDirective);
-```
 
 ### Explicit modes
 
@@ -63,9 +57,6 @@ Bind a reactive variable to switch modes at runtime.
 ```
 
 ## Args
-
-Register `DtModeDirective` from `@dialpad/dialtone-vue` with
-`app.use(DtModeDirective)` before using `v-dt-mode`.
 
 Use the arguments `light`, `dark`, or `invert`; omitting the argument defaults
 to `invert`. The legacy argument `inverted` warns and maps to `invert`; other

@@ -102,7 +102,6 @@ jobs:
               - 'pnpm-lock.yaml'
               - 'packages/dialtone-query-core/**'
               - 'packages/dialtone-cli/**'
-              - 'packages/dialtone-vue/directives/**/*.mdx'
               - 'packages/dialtone-mcp-server/**'
               - 'packages/dialtone-css/**'
               - 'packages/dialtone-icons/**'

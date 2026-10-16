@@ -110,6 +110,13 @@ describe('dialtone CLI (built)', { timeout: 30_000 }, () => {
     expect(r.stderr).toContain('--dt-spacing-100');
   });
 
+  test('docs JSON retains known directives and reports missing identifiers on stderr', () => {
+    const r = run(['docs', 'v-dt-tooltip and v-dt-nope', '--format', 'json']);
+    expect(r.status).toBe(0);
+    expect(JSON.parse(r.stdout).map(record => record.docId)).toEqual(['directives/tooltip']);
+    expect(r.stderr).toContain('No directive documentation found for "nope".');
+  });
+
   test('prints no debug lines by default', () => {
     const r = run(['search', 'button']);
     expect(r.status).toBe(0);

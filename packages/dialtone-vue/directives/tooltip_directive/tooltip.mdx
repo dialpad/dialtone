@@ -11,20 +11,15 @@ Use object syntax to pass `DtTooltip` props to the directive.
 
 ## Usage
 
-Import `DtTooltipDirective` from `@dialpad/dialtone-vue` and register it with
-`app.use(DtTooltipDirective)` on your Vue 3 application before mounting. Use
-`v-dt-tooltip` on the anchor element. Registration creates a shared tooltip
-container in `document.body`, so it requires a browser DOM.
+Register the plugin before mounting your Vue 3 application:
 
 ```js
 import { DtTooltipDirective } from "@dialpad/dialtone-vue";
-```
-
-Register the directive on your application:
-
-```js
 app.use(DtTooltipDirective);
 ```
+
+Use `v-dt-tooltip` on the anchor element. Registration creates a shared tooltip
+container in `document.body`, so it requires a browser DOM.
 
 ### Default
 

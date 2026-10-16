@@ -14,19 +14,19 @@ The directive handles **focus movement only**. Activation and selection (togglin
 
 ## Usage
 
-Import `DtFocusgroupDirective` from `@dialpad/dialtone-vue` and register it with
-`app.use(DtFocusgroupDirective)` on your Vue 3 application before mounting. Use
-`v-dt-focusgroup` on the widget container with its role and accessible name.
-Bind a space-separated token string or an object configuration; arguments and
-modifiers are not read. With no configuration, the axis is `both`, looping and
-focus memory are enabled, and the role determines item selection and disabled
-item handling. A `false` value also uses these defaults; it does not disable the
-directive.
+Register the plugin before mounting your Vue 3 application:
 
 ```js
 import { DtFocusgroupDirective } from "@dialpad/dialtone-vue";
 app.use(DtFocusgroupDirective);
 ```
+
+Use `v-dt-focusgroup` on the widget container with its role and accessible name.
+Bind a space-separated token string or an object configuration; arguments and
+modifiers are not read. With no configuration, the axis is `both`, looping and
+focus memory are enabled, and the role determines item selection and disabled
+item handling. A `false` value also uses these defaults; it does not disable the
+directive.
 
 ### Important: always pair with ARIA
 

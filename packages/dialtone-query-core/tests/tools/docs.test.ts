@@ -83,7 +83,7 @@ describe('explicit directive documentation routing', () => {
     ['v-dt-mode', 'mode', ['@dialpad/dialtone-vue', 'app.use(DtModeDirective)']],
     ['v-dt-mode mode', 'mode', ['app.use(DtModeDirective)']],
     ['DtScrollbarDirective registration', 'scrollbar', ['app.use(DtScrollbarDirective)', 'single child']],
-    ['v-dt-mode:dark', 'mode', ['@dialpad/dialtone-vue', 'app.use(DtModeDirective)', 'light', 'invert']],
+    ['v-dt-mode:dark', 'mode', ['<section v-dt-mode:dark>', '<section v-dt-mode:light>']],
     ['v-dt-focusgroup.horizontal', 'focusgroup', ['horizontal', 'Left/Right', 'bound value', 'ignores arguments and modifiers']],
     ['DtFocustrapDirective', 'focustrap', ['app.use(DtFocustrapDirective)', 'accessible name']],
     ['DtTooltipDirective modifiers', 'tooltip', ['no-delay', 'no-transition']],
