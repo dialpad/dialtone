@@ -1,6 +1,6 @@
 ---
 title: Slider
-description: A slider lets users select a numeric value — or a range of values — by dragging a thumb along a track. It is appropriate when approximate selection is more important than precision.
+description: Control for selecting a value or range along a scale
 status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-slider--default
