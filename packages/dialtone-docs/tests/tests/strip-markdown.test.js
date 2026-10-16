@@ -27,6 +27,21 @@ describe('stripMarkdown', () => {
     expect(stripMarkdown(markdown)).not.toContain('v-dt-tooltip');
   });
 
+  test.each(['`', '~'])('preserves %s fences through invalid closing markers', marker => {
+    const fence = marker.repeat(4);
+    const other = marker === '`' ? '~~~~' : '````';
+    const code = [
+      `${fence}html`,
+      marker.repeat(3),
+      other,
+      `${fence} still code`,
+      '<button v-dt-tooltip="\'Save\'">Save</button>',
+      `${fence}${marker}  `,
+    ].join('\n');
+    expect(stripMarkdown(`Before\n\n${code}\n\nAfter`, { preserveFencedCode: true }))
+      .toBe(`Before\n\n${code}\n\nAfter`);
+  });
+
   test('removes code blocks but preserves surrounding text', () => {
     const md = 'Before\n\n```js\nconst x = 1;\n```\n\nAfter';
     const result = stripMarkdown(md);
