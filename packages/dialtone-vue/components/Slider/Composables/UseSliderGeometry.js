@@ -109,16 +109,28 @@ export function useSliderGeometry(props, {
   // of centering like every other one — centering ignores the mark's own
   // width, which pokes it ~1px past the edge. Pure flush (an unadorned 0%/
   // 100%) reads as touching the label above it instead of a deliberately
-  // placed mark. Distinct from ticks (above), which center on the shared
-  // anchorPct band — a mark flush-aligns its own edge, not its center, so it
-  // doesn't fit that same rescale. RTL-mirrored like centerInlineTransform:
-  // "inward" is a physical direction that flips with which edge actually
-  // sits on which side.
+  // placed mark. RTL-mirrored like centerInlineTransform: "inward" is a
+  // physical direction that flips with which edge actually sits on which
+  // side.
   function markEdgeInsetTransform(edge) {
     const inward = isRtl.value ? -1 : 1; // mirrors centerInlineTransform's own RTL flip
     if (edge === 'start') return `translateX(${inward}px)`;
     const flushPct = isRtl.value ? '100%' : '-100%';
     return `translateX(calc(${flushPct} + ${-inward}px))`;
+  }
+
+  // Shared by markStyle's own non-edge case — a value mark (or the
+  // readout='always' pill, which calls markStyle with no index/edge) has to
+  // anchor onto the same inset band as the thumb it tracks (anchorPct), not
+  // the track's raw flush percentage — otherwise it drifts up to a full
+  // --slider-edge-inset away from the thumb it's meant to line up with as
+  // the value nears min/max. Mirrors anchoredPositionStyle's horizontal arm;
+  // no vertical arm needed since marks/readouts share positionStyle's own
+  // bottom-only vertical anchor.
+  function anchoredMarkStyle(pct, transform) {
+    const style = isVertical.value ? { bottom: anchorPct(pct) } : { insetInlineStart: anchorPct(pct) };
+    if (transform) style.transform = transform;
+    return style;
   }
 
   // A mark beyond the edge-clamp tolerance of the control's edge (see
@@ -131,8 +143,12 @@ export function useSliderGeometry(props, {
   function markStyle(pct, index, edge) {
     if (edge && !isVertical.value) return positionStyle(pct, markEdgeInsetTransform(edge));
     const offset = !isVertical.value ? markEdgeOffsetPx.value[index] : 0;
-    if (!offset) return positionStyle(pct);
-    return positionStyle(pct, `translateX(calc(${centerInlineTransform()} + ${offset}px))`);
+    // No transform here — the base case's centering is CSS's own job
+    // (.d-slider__mark / .d-slider__readout's own translateX(-50%), flipped
+    // under :dir(rtl)), same as it always was; only the anchor position
+    // itself needed to change.
+    if (!offset) return anchoredMarkStyle(pct);
+    return anchoredMarkStyle(pct, `translateX(calc(${centerInlineTransform()} + ${offset}px))`);
   }
 
   const mergedReadoutPct = computed(() => {
