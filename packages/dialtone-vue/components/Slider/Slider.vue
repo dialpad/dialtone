@@ -46,7 +46,8 @@
       </slot>
     </div>
     <div
-      :class="['d-slider__body', { 'd-slider__body--reserve-annotation-space': reservesAnnotationSpace }]"
+      :class="['d-slider__body', bodyClass, { 'd-slider__body--reserve-annotation-space': reservesAnnotationSpace }]"
+      data-qa="dt-slider-body"
     >
       <div
         v-if="hasSlotContent($slots.start)"
@@ -167,6 +168,7 @@
             :class="[
               'd-slider__readout',
               !readoutMerged ? 'd-slider__readout--show' : 'd-slider__readout--hide',
+              readoutClass,
             ]"
             :style="markStyle(thumbPercent(val))"
             :data-readout-index="i"
@@ -181,7 +183,7 @@
           <div
             v-if="readoutMerged"
             ref="mergedReadoutElRef"
-            class="d-slider__readout d-slider__readout--show"
+            :class="['d-slider__readout', 'd-slider__readout--show', readoutClass]"
             :style="markStyle(mergedReadoutPct)"
             aria-hidden="true"
             data-qa="dt-slider-thumb-readout-merged"
@@ -446,6 +448,14 @@ const props = defineProps({
   },
 
   /**
+   * Additional class(es) applied to the body wrapper containing the start slot, control, and end slot.
+   */
+  bodyClass: {
+    type: [String, Array, Object],
+    default: '',
+  },
+
+  /**
    * Additional class(es) applied to the label wrapper element.
    */
   labelClass: {
@@ -486,6 +496,15 @@ const props = defineProps({
     type: String,
     default: 'tooltip',
     validator: (v) => SLIDER_READOUT_MODES.includes(v),
+  },
+
+  /**
+   * Additional class(es) applied to the individual and merged inline readouts when readout is 'always'.
+   * Ignored when readout is 'tooltip' or 'never'.
+   */
+  readoutClass: {
+    type: [String, Array, Object],
+    default: '',
   },
 
   /**

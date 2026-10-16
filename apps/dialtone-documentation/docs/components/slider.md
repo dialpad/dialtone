@@ -288,6 +288,8 @@ Set `readout` to show each thumb's current value. Useful when the track context 
 
 In range mode with `always`, the two thumbs' readouts merge into a single centered `low–high` pill once they'd otherwise overlap as the thumbs converge.
 
+Use `readout-class` to style the individual and merged readouts in `always` mode. It has no effect in `tooltip` or `never` mode.
+
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="300" class="d-w100p">
@@ -489,6 +491,8 @@ Use `dt-text` with `variant="label-md"` and `tone="secondary"` to match the defa
 - Formatted values remain available via `aria-valuetext` even when `readout="never"` hides the visual readout.
 
 ## Vue API
+
+Use `body-class` to style the existing wrapper around the start slot, control, and end slot, such as adjusting the gap between slot content and the control.
 
 <component-vue-api component-name="slider" />
 

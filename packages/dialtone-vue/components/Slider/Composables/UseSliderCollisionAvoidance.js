@@ -217,7 +217,7 @@ export function useSliderCollisionAvoidance(props, {
   // The tooltip readout re-runs collisions itself once it has moved
   // (Slider.vue's onPosition); measuring here would read its old position.
   watch(
-    [internalValues, formattedValues],
+    [internalValues, formattedValues, () => props.readoutClass],
     () => { if (props.readout !== 'tooltip') updateCollisions(); },
     { deep: true },
   );

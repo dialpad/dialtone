@@ -6,6 +6,10 @@ export default {
   // second thumb to enforce against.
   exclusions: [
     {
+      when: { readout: (value) => value !== 'always' },
+      disable: { props: ['readoutClass'] },
+    },
+    {
       when: { modelValue: (v) => Array.isArray(v) },
       disable: { props: ['fillOrigin'] },
     },

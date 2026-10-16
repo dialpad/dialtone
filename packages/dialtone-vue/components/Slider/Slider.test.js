@@ -325,6 +325,23 @@ describe('DtSlider Tests', () => {
         expect(els[1].text()).toBe('70');
       });
 
+      it('applies readoutClass only to always-visible readouts when switching modes', async () => {
+        mockProps = { modelValue: [20, 70], bodyClass: 'custom-body', readoutClass: 'custom-readout' };
+        updateWrapper();
+        expect(wrapper.find('[data-qa="dt-slider-body"]').classes()).toContain('custom-body');
+        expect(wrapper.findAll('[data-qa="dt-slider-thumb-readout-tooltip"]')).toHaveLength(2);
+        expect(wrapper.findAll('.custom-readout')).toHaveLength(0);
+
+        await wrapper.setProps({ readout: 'always' });
+        const els = readouts();
+        expect(els).toHaveLength(2);
+        els.forEach(el => expect(el.classes()).toContain('custom-readout'));
+
+        await wrapper.setProps({ readout: 'never' });
+        expect(readouts()).toHaveLength(0);
+        expect(wrapper.findAll('.custom-readout')).toHaveLength(0);
+      });
+
       it('applies suffix to the readout content', async () => {
         mockProps = { readout: 'always', suffix: '%' };
         updateWrapper();
@@ -3518,7 +3535,9 @@ describe('DtSlider Tests', () => {
       const readoutSize = { top: 0, left: 0, right: 20, bottom: 20 }; // 20px wide
 
       it('merges both readouts into a single centered pill once they overlap', async () => {
-        mockProps = { readout: 'always', modelValue: [40, 60], min: 0, max: 100 };
+        mockProps = {
+          readout: 'always', modelValue: [40, 60], min: 0, max: 100, readoutClass: 'custom-readout',
+        };
         updateWrapper();
         await nextTick();
 
@@ -3541,6 +3560,15 @@ describe('DtSlider Tests', () => {
         const merged = wrapper.find('[data-qa="dt-slider-thumb-readout-merged"]');
         expect(merged.exists()).toBe(true);
         expect(merged.text()).toBe('55–60');
+        expect(merged.classes()).toContain('custom-readout');
+
+        readouts.forEach(readout => {
+          readout.element.getBoundingClientRect = () => ({ ...readoutSize, right: 4 });
+        });
+        await wrapper.setProps({ readoutClass: 'compact-readout' });
+        await settleCollisions();
+        expect(wrapper.find('[data-qa="dt-slider-thumb-readout-merged"]').exists()).toBe(false);
+        readouts.forEach(readout => expect(readout.classes()).toContain('d-slider__readout--show'));
       });
 
       it('keeps both readouts separate when they do not overlap', async () => {

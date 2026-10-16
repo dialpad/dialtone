@@ -223,6 +223,10 @@ export const argTypesData = {
       defaultValue: { summary: 'false' },
     },
   },
+  bodyClass: {
+    control: 'text',
+    table: { category: 'props' },
+  },
   labelClass: {
     control: 'text',
     table: { category: 'props' },
@@ -233,6 +237,12 @@ export const argTypesData = {
   },
   endClass: {
     control: 'text',
+    table: { category: 'props' },
+  },
+  readoutClass: {
+    description: 'Classes for individual and merged readouts in always mode. Ignored in tooltip and never modes.',
+    control: 'text',
+    if: { arg: 'readout', eq: 'always' },
     table: { category: 'props' },
   },
   getValueText: {
