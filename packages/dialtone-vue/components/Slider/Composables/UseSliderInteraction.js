@@ -1,6 +1,15 @@
 import { ref, watch, nextTick } from 'vue';
 import { measureEdgeInsetPx } from '../utils';
 
+// Keys that actually navigate the thumb's value (natively or via
+// largeStepDelta below) — used to scope the Escape-dismissal reopen to real
+// navigation, not every keydown the thumb receives (a bare modifier press
+// like Shift/Control, held with focus but no navigation, shouldn't reopen a
+// tooltip the user just dismissed).
+const THUMB_NAV_KEYS = new Set([
+  'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End', 'PageUp', 'PageDown',
+]);
+
 // Pointer drag, native keyboard events, focus/hover tracking, and the
 // interactive value-update path (updateThumbValue/commitIfChanged) — as
 // opposed to UseSliderValue's normalization of externally-driven changes.
@@ -425,17 +434,19 @@ export function useSliderInteraction(props, emit, {
       updateThumbValue(i, internalValues.value[i] + delta * largeStepValue());
     }
     // Matches DtTooltip's own Escape handling: dismiss without moving focus,
-    // so arrow-key nav on this thumb still works afterward. Any OTHER key on
-    // this thumb (arrow/Home/End nav included, even though those are handled
-    // natively above) is a fresh show-trigger — same convention as
-    // onPointerDown/the coincident handoff/onThumbFocus/onThumbHitPointerEnter
-    // below, all of which clear the dismissal on their own re-trigger.
-    // Without this, continuing to arrow-step the value after an Escape would
-    // leave the readout hidden until blur+refocus or mouse leave+re-enter,
-    // unlike drag (which does re-trigger it).
+    // so nav keys on this thumb still work afterward. A THUMB_NAV_KEYS press
+    // (even Home/End/plain arrows, which are handled natively above) is a
+    // fresh show-trigger — same convention as onPointerDown/the coincident
+    // handoff/onThumbFocus/onThumbHitPointerEnter below, all of which clear
+    // the dismissal on their own re-trigger. Scoped to nav keys specifically
+    // (not "any key") so a bare modifier press — Shift/Control held with
+    // focus but no actual navigation — doesn't reopen a tooltip the user just
+    // dismissed. Without this, continuing to arrow-step the value after an
+    // Escape would leave the readout hidden until blur+refocus or mouse
+    // leave+re-enter, unlike drag (which does re-trigger it).
     if (event.key === 'Escape') {
       escapeDismissedIndex.value = i;
-    } else if (escapeDismissedIndex.value === i) {
+    } else if (THUMB_NAV_KEYS.has(event.key) && escapeDismissedIndex.value === i) {
       escapeDismissedIndex.value = null;
     }
     // Plain arrow keys, Home, End handled natively by <input type="range">

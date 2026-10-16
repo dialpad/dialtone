@@ -422,6 +422,17 @@ describe('DtSlider Tests', () => {
         expect(tooltip.matches(':popover-open')).toBe(true);
       });
 
+      it('stays dismissed on a bare modifier keypress after Escape — only actual nav keys reopen it', async () => {
+        const tooltip = tooltipReadouts()[0].element;
+        await thumbInputs[0].trigger('focus');
+        await thumbInputs[0].trigger('keydown', { key: 'Escape' });
+        expect(tooltip.matches(':popover-open')).toBe(false);
+        // Held with focus retained but no navigation — shouldn't reopen a
+        // tooltip the user just dismissed.
+        await thumbInputs[0].trigger('keydown', { key: 'Shift' });
+        expect(tooltip.matches(':popover-open')).toBe(false);
+      });
+
       it('dismisses only the Escaped thumb\'s own tooltip in range mode, leaving the other thumb open', async () => {
         mockProps = { modelValue: [20, 70] };
         updateWrapper();
@@ -3281,6 +3292,55 @@ describe('DtSlider Tests', () => {
         const marksAfter = wrapper.findAll('[data-qa="dt-slider-mark"]');
         expect(marksAfter[0].classes()).toContain('d-slider__mark--collision-hidden');
         expect(marksAfter[1].classes()).not.toContain('d-slider__mark--collision-hidden');
+      });
+
+      it('positions the analytical readout rect on the thumb\'s own inset band, not the flush track percentage, when --slider-edge-inset resolves non-zero', async () => {
+        // jsdom's getBoundingClientRect returns a zero-width rect for the
+        // measurement probe by default, so every OTHER collision test in this
+        // file silently runs with insetPx=0 — degenerating
+        // analyticalReadoutRect's anchored formula back to the old flush one
+        // without ever exercising the inset-compressed math this fix depends
+        // on. Intercepting the probe specifically (same technique as the
+        // pointer-mapping tests) resolves --slider-edge-inset to a real,
+        // non-zero pixel value here instead.
+        const insetPx = 30;
+        const realGetBoundingClientRect = HTMLElement.prototype.getBoundingClientRect;
+        const rectSpy = vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(function () {
+          if (this.style.inlineSize === 'var(--slider-edge-inset)') {
+            return { width: insetPx, height: 0, top: 0, left: 0, right: insetPx, bottom: 0 };
+          }
+          return realGetBoundingClientRect.call(this);
+        });
+
+        try {
+          mockProps = { readout: 'always', showMarks: [0, 100], modelValue: 99 };
+          updateWrapper();
+          await nextTick();
+
+          wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+          const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+          const readouts = wrapper.findAll('[data-qa="dt-slider-thumb-readout"]');
+          // At pct=100 with insetPx=30 on this 300px-wide control, the
+          // readout's anchored center lands at x=270 (30 + (300 - 60) * 1),
+          // not the flush x=300 — placed exactly there, this mark only
+          // overlaps the readout if the anchored formula is actually in
+          // effect; under the old flush formula the readout centers at
+          // x=300, 30px away, well past the 4px collision padding.
+          const anchoredMarkRect = { top: 0, left: 260, right: 280, bottom: 20 };
+          marks[0].element.getBoundingClientRect = () => anchoredMarkRect;
+          marks[1].element.getBoundingClientRect = () => farRect;
+          readouts[0].element.getBoundingClientRect = () => readoutSize;
+
+          thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+          thumbInputs[0].element.value = '100';
+          await thumbInputs[0].trigger('input');
+          await settleCollisions();
+
+          expect(wrapper.findAll('[data-qa="dt-slider-mark"]')[0].classes())
+            .toContain('d-slider__mark--collision-hidden');
+        } finally {
+          rectSpy.mockRestore();
+        }
       });
 
       it('hides a mark once it overlaps the tooltip readout (the default mode) — tooltip elements are looked up by their own ref array, not data-readout-index', async () => {

@@ -53,6 +53,17 @@ export function useSliderCollisionAvoidance(props, {
   // generation counter so only the freshest call's result ever applies.
   let collisionUpdateId = 0;
 
+  // --slider-edge-inset is effectively static for the component's lifetime
+  // (same rationale as UseSliderInteraction's own cachedEdgeInsetPx) —
+  // measured once per updateCollisions() pass below, not per
+  // analyticalReadoutRect() call. Every call within a single pass (the merge
+  // check's rectA/rectB, and updateMarkCollisions's own readout rects) traces
+  // back to that one measurement; re-measuring per call would mean inserting
+  // and removing a DOM probe — forcing a synchronous layout — up to 4 times
+  // in a single collision pass for no benefit, since the value can't have
+  // changed between them.
+  let cachedInsetPx = 0;
+
   // .d-slider__readout animates position (slider.less), so a mid-transition
   // getBoundingClientRect() can read a stale position — a keyboard nudge or
   // programmatic change doesn't set data-dragging to disable it. Sidesteps
@@ -70,7 +81,7 @@ export function useSliderCollisionAvoidance(props, {
     if (!el || !controlRef.value) return null;
     const elRect = el.getBoundingClientRect();
     const controlRect = controlRef.value.getBoundingClientRect();
-    const insetPx = measureEdgeInsetPx(controlRef.value);
+    const insetPx = cachedInsetPx;
     if (isVertical.value) {
       const height = elRect.bottom - elRect.top;
       const totalPx = controlRect.bottom - controlRect.top;
@@ -104,6 +115,8 @@ export function useSliderCollisionAvoidance(props, {
     const thisUpdateId = ++collisionUpdateId;
     await nextTick(); // let Vue's own DOM patch (text/value/style) land before measuring
     if (thisUpdateId !== collisionUpdateId) return;
+
+    if (controlRef.value) cachedInsetPx = measureEdgeInsetPx(controlRef.value);
 
     const wasMerged = readoutMerged.value;
     // The tooltip readout has no merged-pill fallback UI (unlike the in-row
