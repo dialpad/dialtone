@@ -89,16 +89,28 @@ it('locates live inline HTML in Markdown table cells', async () => {
   ]);
 });
 
-it('keeps compound public API associations and keywords without inventing CSS components', async () => {
-  const page = await build('components/tabs.md',
-    `---\ntitle: Tabs\nkeywords: [tab navigation]\n---\n<component-vue-api component-name="tabgroup" :also-import="['tab', 'tabpanel']" />\n<component-vue-api component-name="tabpanel" />\n<component-vue-api component-name="tab" />`, identities);
+it('carries page keywords and associates each documented compound part', async () => {
+  const source =
+    '---\ntitle: Tabs\nkeywords: [tab navigation]\n---\n<component-vue-api component-name="tabgroup" :also-import="[\'tab\', \'tabpanel\']" />\n<component-vue-api component-name="tabpanel" />\n<component-vue-api component-name="tab" />';
+  const page = await build('components/tabs.md', source, identities);
   expect(page.keywords).toEqual(['tab navigation']);
-  expect(page.components.map(c => [c.canonicalName, c.relation])).toEqual([
-    ['DtTabGroup', 'api'], ['DtTab', 'companion'], ['DtTabPanel', 'companion'], ['DtTabPanel', 'api'], ['DtTab', 'api'],
+  expect(page.components.map((c) => [c.canonicalName, c.relation])).toEqual([
+    ['DtTabGroup', 'api'],
+    ['DtTab', 'companion'],
+    ['DtTabPanel', 'companion'],
+    ['DtTabPanel', 'api'],
+    ['DtTab', 'api'],
   ]);
-  const table = await build('components/table.md', '---\nkeywords: [data table]\n---\n<table />', identities);
-  expect(table.components).toEqual([]);
-  await expect(build('components/internal.md', '<component-vue-api component-name="DtInternal" />', [
-    ...identities, { identity: { canonicalName: 'DtInternal', aliases: [], kind: 'internal' } },
-  ])).rejects.toThrow(/Unresolved/);
+});
+
+it('does not invent a component for a keyworded CSS-only page', async () => {
+  const page = await build('components/table.md', '---\nkeywords: [data table]\n---\n<table />', identities);
+  expect(page.components).toEqual([]);
+});
+
+it('rejects an internal identity as an API association', async () => {
+  const internal = { identity: { canonicalName: 'DtInternal', aliases: [], kind: 'internal' } };
+  await expect(
+    build('components/internal.md', '<component-vue-api component-name="DtInternal" />', [...identities, internal]),
+  ).rejects.toThrow(/Unresolved/);
 });

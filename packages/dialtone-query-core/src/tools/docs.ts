@@ -3,7 +3,7 @@
 // ============================================================================
 
 import type { DocumentationRecord, SearchResult } from '../types.js';
-import { matchingKeywords } from '../keyword-matching.js';
+import { keywordMatcher } from '../keyword-matching.js';
 import { directiveIdentifiers } from '../directive-identifiers.js';
 import { normalizeComponentName } from '../component-identity.js';
 
@@ -159,6 +159,8 @@ export function searchDocumentation(
     return titleWords.length > 1 && titleWords.every(tw => words.includes(tw));
   };
 
+  const queryName = normalizeComponentName(bounded);
+  const matchKeywords = keywordMatcher(bounded);
   const scored: Array<{ result: SearchResult; matchCount: number; titleMatch: boolean; exactTitle: boolean; keywordMatch: boolean }> = [];
 
   for (const record of data) {
@@ -174,8 +176,8 @@ export function searchDocumentation(
       : checkTitleMatch(record);
     // Explicit directives scope results to those directives and named counterparts.
     if (directives.length > 0 && !titleMatch) continue;
-    const exactTitle = normalizeComponentName(bounded) === normalizeComponentName(record.docTitle);
-    const keywordMatch = matchingKeywords(bounded, record.frontmatter.keywords).length > 0;
+    const exactTitle = queryName === normalizeComponentName(record.docTitle);
+    const keywordMatch = matchKeywords(record.frontmatter.keywords).length > 0;
     const fullBlob = [record.docTitle, ...record.headingPath, record.frontmatter.description ?? '', record.content].join(' ');
     const sectionRegexes = selectedDirective && contractRegexes.length > 0 ? contractRegexes : regexes;
     const matchCount = sectionRegexes.filter(r => r.test(fullBlob)).length;
@@ -209,9 +211,9 @@ export function searchDocumentation(
     const aIsNews = NEWS_DOC.test((a.result.details as DocumentationRecord).docId);
     const bIsNews = NEWS_DOC.test((b.result.details as DocumentationRecord).docId);
     if (aIsNews !== bIsNews) return aIsNews ? 1 : -1;
-    if (a.exactTitle !== b.exactTitle) return a.exactTitle ? -1 : 1;
-    if (a.keywordMatch !== b.keywordMatch) return a.keywordMatch ? -1 : 1;
-    if (a.titleMatch !== b.titleMatch) return a.titleMatch ? -1 : 1;
+    for (const key of ['exactTitle', 'keywordMatch', 'titleMatch'] as const) {
+      if (a[key] !== b[key]) return a[key] ? -1 : 1;
+    }
     if (b.matchCount !== a.matchCount) return b.matchCount - a.matchCount;
     // Prefer sections with actual headings over intro stubs (headingPath: [])
     const aIsIntro = (a.result.details as DocumentationRecord).headingPath.length === 0;

@@ -62,7 +62,7 @@ If the component needs custom styles:
 - Build Vue package: `pnpm nx run dialtone-vue:build`
 - Rebuild docs JSON: run `scripts/build-dialtone-vue-docs.mjs`
 - Rebuild lookup data: `pnpm nx run-many -t build -p dialtone-cli dialtone-mcp-server`
-- For a meaningful new keyword, record an alternate-term component/docs lookup against the rebuilt candidate, including intended leading subjects and ambiguity. Docs-only keyword edits require explicit adapter publication through the existing release process and an installed-tool update; the site can update first.
+- For a meaningful new keyword, record an alternate-term lookup and arrange adapter publication as `.claude/rules/documentation-site.md` describes.
 
 ---
 

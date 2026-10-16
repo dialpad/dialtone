@@ -6,6 +6,7 @@ import { components, componentDocumentation, documentation } from '../../src/dat
 import { searchComponents } from '../../src/tools/components.js';
 import { normalizeComponents, componentNames } from '../../src/component-identity.js';
 import { getComponentDetail } from '../../src/component-detail.js';
+import type { ComponentDocPage } from '../../src/component-documentation.js';
 import { searchDocumentation } from '../../src/tools/docs.js';
 import type { DocumentationRecord, UtilityClassesData, TokensData } from '../../src/types.js';
 
@@ -108,8 +109,12 @@ describe('real news paths', () => {
 });
 
 describe('curated public-page discovery', () => {
+  const withPages = (pages: ComponentDocPage[]) => ({ ...componentDocumentation, pages });
+  const selected = normalizeComponents([{ displayName: 'input', description: 'Legacy text input' }], {
+    package: '@dialpad/dialtone', version: '9.185.0', from: '@dialpad/dialtone/vue3', names: ['DtInput'],
+  });
+
   test.each([
-    ['DtInput', ['DtInput', 'DtInputGroup', 'DtBanner'], 'components/input'],
     ['switch', ['DtToggle'], 'components/toggle'],
     ['spinner', ['DtLoader'], 'components/loader'],
     ['activity indicator', ['DtLoader'], 'components/loader'],
@@ -123,26 +128,42 @@ describe('curated public-page discovery', () => {
     ['typeahead', ['DtCombobox', 'DtComboboxWithPopover'], 'components/combobox'],
     ['notification', ['DtBanner', 'DtNotice', 'DtToast'], 'components/notice'],
     ['tab navigation', ['DtTab', 'DtTabGroup', 'DtTabPanel'], 'components/tabs'],
-    ['DLT3659MissingCapability', [], undefined],
   ])('%s leads with supported subjects before incidental text', (query, expected, docId) => {
-    // A competing keyword must not displace existing canonical name/family results.
-    const catalog = query === 'DtInput' ? { ...componentDocumentation, pages: componentDocumentation.pages.map(page =>
-      page.docId === 'components/banner' ? { ...page, keywords: [...(page.keywords ?? []), 'DtInput'] } : page) } : componentDocumentation;
-    const found = searchComponents(query, components, catalog).results;
-    expect(found.slice(0, expected.length || 1).map(r => r.name)).toEqual(expected);
-    expect(searchDocumentation(query, documentation).results[0]?.details.docId).toBe(docId);
+    const found = searchComponents(query, components, componentDocumentation).results;
+    expect(found.slice(0, expected.length).map(r => r.name)).toEqual(expected);
+    expect(searchDocumentation(query, documentation).results[0].details.docId).toBe(docId);
   });
 
-  test('uses only the selected public dataset, preserving legacy lookup and exact identity', () => {
-    const selected = normalizeComponents([{ displayName: 'input', description: 'Legacy text input' }], {
-      package: '@dialpad/dialtone', version: '9.185.0', from: '@dialpad/dialtone/vue3', names: ['DtInput'],
-    });
+  test('a competing keyword does not displace canonical name and family matches', () => {
+    const catalog = withPages(componentDocumentation.pages.map(page =>
+      page.docId === 'components/banner' ? { ...page, keywords: [...(page.keywords ?? []), 'DtInput'] } : page));
+    expect(searchComponents('DtInput', components, catalog).results.slice(0, 3).map(r => r.name))
+      .toEqual(['DtInput', 'DtInputGroup', 'DtBanner']);
+    expect(searchDocumentation('DtInput', documentation).results[0].details.docId).toBe('components/input');
+  });
+
+  test('an unknown capability finds nothing', () => {
+    expect(searchComponents('DLT3659MissingCapability', components, componentDocumentation).results).toEqual([]);
+    expect(searchDocumentation('DLT3659MissingCapability', documentation).results).toEqual([]);
+  });
+
+  test('joins keywords only to API components in the selected dataset', () => {
     expect(searchComponents('text field', selected, componentDocumentation).results.map(r => r.name)).toEqual(['DtInput']);
     expect(searchComponents('spinner', selected, componentDocumentation).results).toEqual([]);
-    const companionOnly = { ...componentDocumentation, pages: componentDocumentation.pages.filter(page => page.docId === 'components/input').map(page => ({ ...page, components: page.components.map(reference => ({ ...reference, relation: 'companion' })) })) };
+    const companionOnly = withPages(componentDocumentation.pages
+      .filter(page => page.docId === 'components/input')
+      .map(page => ({ ...page, components: page.components.map(reference => ({ ...reference, relation: 'companion' })) })));
     expect(searchComponents('text field', selected, companionOnly).results).toEqual([]);
-    expect(searchComponents('Legacy', [{ displayName: 'input', description: 'Legacy input' }], componentDocumentation).results[0].name).toBe('input');
-    expect(searchComponents('text field', selected, { ...componentDocumentation, pages: componentDocumentation.pages.map(({ keywords, ...page }) => page) }).results).toEqual([]);
+    const withoutKeywords = withPages(componentDocumentation.pages.map(({ keywords, ...page }) => page));
+    expect(searchComponents('text field', selected, withoutKeywords).results).toEqual([]);
+  });
+
+  test('preserves legacy lookup without a verified identity', () => {
+    const legacy = [{ displayName: 'input', description: 'Legacy input' }];
+    expect(searchComponents('Legacy', legacy, componentDocumentation).results[0].name).toBe('input');
+  });
+
+  test('keywords never become component names for exact API selection', () => {
     expect(componentNames(components.find(c => c.displayName === 'DtLoader')!)).not.toContain('spinner');
     for (const query of ['spinner', 'switch', 'DtTabs', 'dt-tabs', 'DtTable', 'dt-table', 'DtScrollbar', 'dt-scrollbar']) {
       expect(getComponentDetail({ component: query }, components).match).toBe('no-match');

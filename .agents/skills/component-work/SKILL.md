@@ -42,7 +42,7 @@ Modify Vue components while keeping tests, stories, docs, exports, and downstrea
 4. Update the smallest necessary set of artifacts: source, constants, tests, stories/MDX, VuePress docs, exports, docs JSON, MCP/query docs, and Combinator variants.
 5. For a public page, preserve its canonical export and live `<component-vue-api>` association. Add useful missing alternate names or interaction phrases in frontmatter `keywords`, following `.agents/resources/rules/documentation-site.md`; do not add export aliases, synonym-filled descriptions, or API inventories to skills.
 6. Run focused tests first, then broader builds when API or downstream data changed.
-7. For a meaningful new keyword, rebuild both adapters with `pnpm nx run-many -t build -p dialtone-cli dialtone-mcp-server` and record an alternate-term component/docs lookup with expected leading subjects and relevant ambiguity. Docs-only edits need explicit adapter publication through the existing release process and an installed-tool update; the site can update first.
+7. For a meaningful new keyword, rebuild both adapters, record an alternate-term lookup and arrange adapter publication as `.agents/resources/rules/documentation-site.md` describes.
 8. Include manual accessibility/keyboard QA notes for interactive components.
 
 ## Done When

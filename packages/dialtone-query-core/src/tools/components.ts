@@ -3,7 +3,7 @@
 // ============================================================================
 
 import type { ComponentDocCatalog } from '../component-documentation.js';
-import { matchingKeywords } from '../keyword-matching.js';
+import { keywordMatcher } from '../keyword-matching.js';
 import { applySmartFilter } from '../utils/filters.js';
 import { directiveIdentifiers } from '../directive-identifiers.js';
 import { normalizeComponents, normalizeComponentName, compactName, componentNames, componentImportStatement, componentImportNote } from '../component-identity.js';
@@ -162,7 +162,8 @@ function searchBySlots(regexArray: RegExp[], components: Component[]): SearchRes
 /** Join discovery evidence only to public records present in the selected dataset. */
 function searchByKeywords(query: string, components: Component[], catalog?: ComponentDocCatalog): SearchResult[] {
   if (!catalog) return [];
-  const pages = catalog.pages.map(page => ({ page, keywords: matchingKeywords(query, page.keywords) }))
+  const match = keywordMatcher(query);
+  const pages = catalog.pages.map(page => ({ page, keywords: match(page.keywords) }))
     .filter(match => match.keywords.length > 0);
   return components.flatMap(component => {
     const identity = component.identity;

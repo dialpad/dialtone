@@ -1,9 +1,8 @@
 import { describe, test, expect, beforeAll } from 'vitest';
-import { mkdtempSync, writeFileSync, rmSync } from 'node:fs';
-import { tmpdir } from 'node:os';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildRecords, chunkSections } from '@src/generators/build-public-docs.mjs';
+import { readKeywords } from '@src/utils/keywords.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const fixtureDir = resolve(__dirname, '../fixtures/public-docs');
@@ -121,6 +120,10 @@ describe('buildRecords — complete.md', () => {
   test('preserves frontmatter figmaUrl and storybook', () => {
     expect(records[0].frontmatter.figmaUrl).toBe('https://www.figma.com/design/example');
     expect(records[0].frontmatter.storybook).toContain('dialtone.dialpad.com');
+  });
+
+  test('preserves validated keywords on every section record', () => {
+    expect(records.map(r => r.frontmatter.keywords)).toEqual(records.map(() => ['spinner', 'activity indicator']));
   });
 
   test('inner text inside <dialtone-usage> is preserved in content', () => {
@@ -249,22 +252,13 @@ describe('buildRecords — edge cases', () => {
 });
 
 // Public source keywords must reach both lookup adapters without a Vue rebuild.
-test('preserves optional keywords and rejects malformed authored arrays', () => {
-  const directory = mkdtempSync(resolve(tmpdir(), 'dialtone-keywords-'));
-  const file = resolve(directory, 'component.md');
-  try {
-    for (const [frontmatter, expected] of [
-      ['keywords: ["spinner", "activity indicator"]', ['spinner', 'activity indicator']],
-      ['', undefined],
-    ]) {
-      writeFileSync(file, `---\ntitle: Loader\n${frontmatter}\n---\n## Usage\nLoading guidance.`);
-      expect(buildRecords(file)[0].frontmatter.keywords).toEqual(expected);
-    }
-    for (const keywords of ['spinner', '["spinner", 42]', '[" "]']) {
-      writeFileSync(file, `---\ntitle: Loader\nkeywords: ${keywords}\n---\nLoading guidance.`);
-      expect(() => buildRecords(file)).toThrow(/keywords.*nonempty strings/);
-    }
-  } finally {
-    rmSync(directory, { recursive: true, force: true });
-  }
+describe('readKeywords', () => {
+  test('trims authored keywords and keeps them optional', () => {
+    expect(readKeywords([' spinner ', 'activity indicator'], 'loader.md')).toEqual(['spinner', 'activity indicator']);
+    expect(readKeywords(undefined, 'loader.md')).toBeUndefined();
+  });
+
+  test.each([['spinner'], [['spinner', 42]], [[' ']]])('rejects malformed keywords %j', (keywords) => {
+    expect(() => readKeywords(keywords, 'loader.md')).toThrow(/Invalid keywords in loader\.md: expected an array of nonempty strings/);
+  });
 });
