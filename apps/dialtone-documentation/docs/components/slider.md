@@ -107,22 +107,6 @@ Pair a range slider with number inputs for precise entry. Bind the slider to an 
 > [!INFO] Form submission
 > Set `name` to include the slider value in a form submission. In range mode, both values use the same name; retrieve them with `FormData.getAll(name)` in `[low, high]` order.
 
-### Overflow hidden (temporary test harness)
-
-Scratch demo for checking the thumb/track/indicator/tick inset against a consumer's own tight `overflow: hidden` wrapper — remove before merging.
-
-```vue demo
-<dt-slider
-  :model-value="[20, 70]"
-  label="Price range"
-  :show-marks="[{ value: 0, text: 'Min $0' }, { value: 100, text: 'Max $100' }]"
-  :show-ticks="10"
-  :get-value-text="(value, index) => index === 0 ? `Minimum: $${value}` : `Maximum: $${value}`"
-  class="d-ba d-bas-dashed d-of-hidden"
-  style="border-color: var(--dt-color-border-critical); border-width: 2px;"
-/>
-```
-
 ### With start and end slots (aka left/right)
 
 ```vue demo
