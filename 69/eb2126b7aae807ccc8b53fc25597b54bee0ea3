@@ -1,0 +1,19 @@
+packages/combinator/src/components/renderer/renderer_spec_sheet_cell.vue
+  s_f672c31256c957::t_6c6fa92b4f9bfc 116
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.8",
+  "base_commit_sha": "69eb2126b7aae807ccc8b53fc25597b54bee0ea3",
+  "prompts": {},
+  "sessions": {
+    "s_f672c31256c957": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9cc40e93-82f2-4b7d-b85d-ff4d3f97ff36",
+        "model": "claude-sonnet-4-6"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}

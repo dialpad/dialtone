@@ -1,0 +1,38 @@
+scripts/retrieval/run.test.mjs
+  s_7f1d1d64baa803::t_dffb973230f845 6-8,43-70
+  s_7f1d1d64baa803::t_2469f98400dba6 71
+package.json
+  s_7f1d1d64baa803::t_8fcd54dc8e4485 159,182
+packages/dialtone-vue/release-ci.config.cjs
+  s_7f1d1d64baa803::t_c3e5e160584c56 14
+pnpm-lock.yaml
+  s_7f1d1d64baa803::t_ae668191e91356 303-305,372-374
+scripts/retrieval/README.md
+  s_7f1d1d64baa803::t_79e637bd6c8645 19,23,29,39-44,53
+scripts/retrieval/cache-inputs.test.mjs
+  s_7f1d1d64baa803::t_0b2cc95c01e39d 99-104
+scripts/retrieval/ci-routing.test.mjs
+  s_7f1d1d64baa803::t_ab581edef7bcfe 4-5
+scripts/retrieval/fixtures.test.mjs
+  s_7f1d1d64baa803::t_1ac700d62fd082 42
+scripts/retrieval/profiles.mjs
+  s_7f1d1d64baa803::t_4d8441bcb2a701 22-23,29,81,84,89
+scripts/retrieval/run.mjs
+  s_7f1d1d64baa803::t_0ff8aa6ab84e17 24-58,86-89,101,368-374
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "0dc0eb7639e44f0cf959c756db2e808ed8b01df9",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
