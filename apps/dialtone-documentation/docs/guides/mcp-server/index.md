@@ -15,12 +15,14 @@ The Dialtone MCP Server lets compatible AI clients search Dialtone through Model
 
 ## What It Does
 
-The Dialtone MCP Server provides AI assistants with real-time search access to:
+The Dialtone MCP Server searches data bundled with the installed server package. Replies identify source packages, versions, and hashes; the server does not check compatibility with your project's installed Dialtone packages.
 
-- **3,315 CSS utility classes** - Find classes like `d-p-100`, `d-d-flex`, `d-w100p`
-- **5,691 design tokens** - Find tokens like `--dt-color-foreground-primary`, `--dt-spacing-100`
-- **87 Vue components** - Discover `DtButton`, `DtModal` with full API documentation
-- **594 icons** - Find icons like `bell-ring`, `arrow-up`, `calendar-plus`
+Search across:
+
+- **CSS utility classes** - Find classes like `d-p-100`, `d-d-flex`, `d-w100p`
+- **Design tokens** - Find tokens like `--dt-color-foreground-primary`, `--dt-spacing-100`
+- **Vue components** - Discover `DtButton` and `DtModal` with sampled API summaries, then use `get_component` for complete available records
+- **Icons** - Find icons like `bell-ring`, `arrow-up`, `calendar-plus`
 - **Public documentation** - `search_documentation`: Search usage prose, recipes, accessibility rules, migration guides, and design principles. Use for "how-to" and "why" questions that go beyond component/token/icon lookups.
 
 ### Smart Features
@@ -90,13 +92,9 @@ claude mcp add dialtone --scope user -- npx -y @dialpad/dialtone-mcp-server
 
 This stores configuration in `~/.claude/mcp.json`.
 
-### HTTP Transport (Coming Soon)
+### Transport
 
-Remote server deployment for enterprise use.
-
-```bash
-claude mcp add dialtone-http --transport http --scope user https://mcp.dialtone.dialpad.com
-```
+The packaged server uses stdio. Configure your MCP client to launch the server process, as shown above.
 
 > [!INFO] Version Checking
 > Startup does not wait for the update check. A successful check writes a version or update notice to stderr; failed or malformed responses are ignored. The check is cancelled after two seconds or during shutdown.
@@ -205,6 +203,8 @@ Search returns exact section IDs, 500-character excerpts and detail calls. Pass 
 ```
 
 `textLimit` defaults to 6000 Unicode code points (1–10000); `textOffset` defaults to zero (0–1000000). Follow the returned continuation to read remaining content. Prose retrieval does not verify example code or consumer compatibility.
+
+Directive documentation includes source code snippets and registration guidance. Component documentation can omit code fences or page-level scripts, so retrieving a complete record does not necessarily return a complete working example. Check required imports, CSS/theme setup, state, and behavior against your application before using a snippet.
 
 The five search tools return readable Markdown only, with bundled package/version/hash provenance and text continuation calls. All execute and advertise a default limit of 15. They accept plain string queries, fractional numeric limits, harmless numeric-string limits and extra arguments. Whitespace-only queries return a clear no-match message; long inputs follow the existing domain search rules. Only `get_component` and `get_documentation` return structured envelopes and matching JSON text fallbacks; their selected detail schemas remain strict. Installed compatibility is not checked.
 
@@ -345,9 +345,12 @@ npm update -g @dialpad/dialtone-mcp-server
 ```
 
 **User-scoped (npx):**
-No action needed - npx always uses the latest version.
+
+To request the latest published package when the server starts, use `npx -y @dialpad/dialtone-mcp-server@latest` in your client configuration.
 
 After updating, restart your Claude Code conversation to load the new version.
+
+Updating the server refreshes its bundled data. It does not verify your application's installed APIs or example behavior. A change merged into Dialtone source reaches an installed server only after publication and an update to that package.
 
 ### Managing Connections
 
