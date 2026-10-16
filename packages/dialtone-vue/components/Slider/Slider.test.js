@@ -1662,6 +1662,97 @@ describe('DtSlider Tests', () => {
       });
     });
 
+    describe('Pointer-to-value mapping matches the thumb\'s own inset anchor', () => {
+      // UseSliderGeometry's anchorPct compresses the thumb's rendered
+      // position into an inset band (so it never renders past a consumer's
+      // own overflow:hidden edge) — without the same compression in reverse
+      // here, clicking exactly on the rendered thumb at min/max computed a
+      // value a few units off 0/100 instead of landing on it, since the raw
+      // pointer fraction spans the control's true (uncompressed) edges.
+      // jsdom never computes real CSS layout, so getValueFromPointerEvent's
+      // measurement probe (which asks the real browser to resolve
+      // --slider-edge-inset to a pixel value) reads back a zero-width rect
+      // here regardless of its own inline-size — these mocks simulate what
+      // a real browser would actually resolve it to, so the inset-compressed
+      // formula itself is under test, not just its zero-inset fallback path.
+      const controlRect = { top: 0, left: 0, right: 200, bottom: 20, width: 200, height: 20 };
+      const insetPx = 20;
+      let control;
+      let rectSpy;
+
+      beforeEach(() => {
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => controlRect;
+        // Only the probe gets a fake rect — everything else (including
+        // whatever the tooltip composable measures internally) falls
+        // through to jsdom's own real implementation, same as every other
+        // currently-passing test that never touches this mock at all.
+        // Restoring this specific spy (not vi.restoreAllMocks()) matters:
+        // the latter would also tear down the file-level beforeAll's own
+        // :popover-open polyfill spy, breaking every test after this one.
+        const realGetBoundingClientRect = HTMLElement.prototype.getBoundingClientRect;
+        rectSpy = vi.spyOn(HTMLElement.prototype, 'getBoundingClientRect').mockImplementation(function () {
+          if (this.style.inlineSize === 'var(--slider-edge-inset)') {
+            return { width: insetPx, height: 0, top: 0, left: 0, right: insetPx, bottom: 0 };
+          }
+          return realGetBoundingClientRect.call(this);
+        });
+      });
+
+      afterEach(() => {
+        rectSpy.mockRestore();
+      });
+
+      it('maps a click exactly on the min thumb\'s rendered position to min, not a few units off it', async () => {
+        mockProps = { modelValue: 50 };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => controlRect;
+
+        await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: insetPx, buttons: 1 });
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toBe(0);
+      });
+
+      it('maps a click exactly on the max thumb\'s rendered position to max', async () => {
+        mockProps = { modelValue: 50 };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => controlRect;
+
+        await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: controlRect.width - insetPx, buttons: 1 });
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toBe(100);
+      });
+
+      it('clamps a click at the control\'s true edge, past the inset band, to min', async () => {
+        mockProps = { modelValue: 50 };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => controlRect;
+
+        await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: 0, buttons: 1 });
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toBe(0);
+      });
+
+      it('maps a click at the control\'s own midpoint to the midpoint value — the inset term cancels out exactly at 50%', async () => {
+        mockProps = { modelValue: 0 };
+        updateWrapper();
+        control = wrapper.find('[data-qa="dt-slider-control"]');
+        control.element.setPointerCapture = () => {};
+        control.element.getBoundingClientRect = () => controlRect;
+
+        await control.trigger('pointerdown', { pointerId: 1, pointerType: 'mouse', button: 0, clientX: controlRect.width / 2, buttons: 1 });
+        const emitted = wrapper.emitted('update:modelValue');
+        expect(emitted[emitted.length - 1][0]).toBe(50);
+      });
+    });
+
     describe('Magnetic snapping (snapPoints)', () => {
       let control;
 

@@ -172,13 +172,52 @@ export function useSliderInteraction(props, emit, {
 
   // ─── Pointer drag ─────────────────────────────────────────────────────────
 
+  // Resolved once per gesture (onPointerDown), not on every pointermove —
+  // --slider-edge-inset is effectively static for the duration of a single
+  // drag, and remeasuring via a DOM probe on every move event would mean
+  // inserting/removing a node per frame.
+  let cachedEdgeInsetPx = 0;
+
+  // A CSS custom property isn't resolved to a used pixel value by
+  // getComputedStyle on its own — per spec it's an unparsed token stream
+  // until something concrete (a real layout property) consumes it. Giving a
+  // disposable child element inline-size: var(--slider-edge-inset) and
+  // reading its rendered width is the standard way to resolve one without
+  // hand-reimplementing the calc() it's built from (UseSliderGeometry,
+  // slider.less) — which would silently drift out of sync with it over time.
+  function measureEdgeInsetPx(controlEl) {
+    const probe = document.createElement('div');
+    probe.style.position = 'absolute';
+    probe.style.visibility = 'hidden';
+    probe.style.pointerEvents = 'none';
+    probe.style.inlineSize = 'var(--slider-edge-inset)';
+    probe.style.blockSize = '0px';
+    controlEl.appendChild(probe);
+    const px = probe.getBoundingClientRect().width;
+    probe.remove();
+    return px;
+  }
+
   function getValueFromPointerEvent(event) {
     const rect = controlRef.value.getBoundingClientRect();
+    const sizePx = isVertical.value ? rect.height : rect.width;
+    // Mirrors anchorPct's own inset band (UseSliderGeometry) — the thumb's
+    // rendered position is compressed into [inset, size - inset], not flush
+    // across the control's full true edges, so the inverse (pointer position
+    // -> value) has to apply the same compression. Without this, clicking
+    // exactly on the rendered thumb at min/max computes a few percent off
+    // from 0/100 instead of landing on it, since the raw pointer position
+    // spans the whole control while the thumb itself stops short of it.
+    const span = sizePx - 2 * cachedEdgeInsetPx;
     let pct;
     if (isVertical.value) {
-      pct = 1 - (event.clientY - rect.top) / rect.height;
+      // Distance from the bottom edge — matches thumbPositionStyle's own
+      // `bottom: anchorPct(pct)`.
+      const rawPx = rect.bottom - event.clientY;
+      pct = span > 0 ? (rawPx - cachedEdgeInsetPx) / span : rawPx / sizePx;
     } else {
-      pct = (event.clientX - rect.left) / rect.width;
+      const rawPx = event.clientX - rect.left;
+      pct = span > 0 ? (rawPx - cachedEdgeInsetPx) / span : rawPx / sizePx;
       // The visual track is positioned with insetInlineStart, so the browser
       // already mirrors it under dir="rtl" — min renders on the physical right
       // instead of the left. clientX is always a physical coordinate, so the
@@ -232,6 +271,8 @@ export function useSliderInteraction(props, emit, {
     // otherwise shift focus to the nearest scrollable ancestor after our own
     // thumbRefs.focus() call below runs.
     event.preventDefault();
+
+    cachedEdgeInsetPx = measureEdgeInsetPx(controlRef.value);
 
     const rawVal = getValueFromPointerEvent(event);
     const idx = getNearestThumbIndex(rawVal);
