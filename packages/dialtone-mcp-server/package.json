@@ -20,7 +20,7 @@
     "test:acceptance": "node scripts/run-acceptance-scenarios.mjs",
     "interactive": "tsx interactive-search.ts",
     "inspect": "npx @modelcontextprotocol/inspector npm run start",
-    "test:protocol": "node --import tsx --test scripts/query-tools.test.mjs"
+    "test:protocol": "pnpm --workspace-root exec nx run dialtone-mcp-server:test-protocol"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "1.18.0",

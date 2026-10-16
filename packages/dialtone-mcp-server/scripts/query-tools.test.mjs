@@ -4,13 +4,14 @@ import { McpServer } from '@modelcontextprotocol/sdk/server/mcp.js';
 import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
 import { components, bundledProvenance } from '@dialpad/dialtone-query-core';
+import { resolveProjectData } from '@dialpad/dialtone-query-core/node';
 import * as module from '../src/query-tools.ts';
 async function fixture(run) {
   const server = new McpServer(
     { name: 'test-dialtone', version: '1.5.0' },
     { instructions: module.ROUTING_INSTRUCTIONS, capabilities: { tools: {} } },
   );
-  module.registerQueryTools(server);
+  module.registerQueryTools(server, resolveProjectData());
   const client = new Client({
     name: 'dialtone-protocol-fixture',
     version: '1.0.0',

@@ -5,9 +5,10 @@ import pkg from '../package.json' with { type: 'json' };
 import clientRules from '../client-rules.json' with { type: 'json' };
 
 import {
-  utilityClasses, tokens, components, icons, documentation,
   buildCompoundPropertiesSet,
 } from '@dialpad/dialtone-query-core';
+
+import { resolveProjectData } from '@dialpad/dialtone-query-core/node';
 
 const UPDATE_CHECK_TIMEOUT_MS = 2000;
 
@@ -50,6 +51,10 @@ async function checkVersion(signal: AbortSignal) {
 }
 
 async function main() {
+  const context = resolveProjectData(process.env.DIALTONE_PROJECT_ROOT, process.env.DIALTONE_LOOKUP_ROOT);
+  const { utilityClasses, tokens, components, icons, documentation } = context.data;
+  const sourceMeta = (domain: string) =>
+    ({ dialtone: { source: context.provenance.domains[domain], installedCompatibility: "not_checked" } });
   // Build compound properties set from utility classes data (done once at startup)
   const compoundProperties = buildCompoundPropertiesSet(utilityClasses);
   console.error(`[INIT] Built compound properties set: ${compoundProperties.size} properties`);
@@ -73,6 +78,7 @@ async function main() {
     mimeType: "application/json",
   }, async () => {
     return {
+      _meta: sourceMeta("utilityClasses"),
       contents: [{
         uri: "dialtone://utility-classes",
         mimeType: "application/json",
@@ -87,6 +93,7 @@ async function main() {
     mimeType: "application/json",
   }, async () => {
     return {
+      _meta: sourceMeta("tokens"),
       contents: [{
         uri: "dialtone://tokens",
         mimeType: "application/json",
@@ -101,6 +108,7 @@ async function main() {
     mimeType: "application/json",
   }, async () => {
     return {
+      _meta: sourceMeta("components"),
       contents: [{
         uri: "dialtone://components",
         mimeType: "application/json",
@@ -115,6 +123,7 @@ async function main() {
     mimeType: "application/json",
   }, async () => {
     return {
+      _meta: sourceMeta("icons"),
       contents: [{
         uri: "dialtone://icons",
         mimeType: "application/json",
@@ -125,10 +134,11 @@ async function main() {
 
   server.resource("documentation", "dialtone://documentation", {
     name: "Dialtone Documentation",
-    description: "Public docs site corpus — sections of usage prose, recipes, accessibility, migrations, and design principles",
+    description: "Bundled public docs site corpus — sections of usage prose, recipes, accessibility, migrations, and design principles",
     mimeType: "application/json",
   }, async () => {
     return {
+      _meta: sourceMeta("documentation"),
       contents: [{
         uri: "dialtone://documentation",
         mimeType: "application/json",
@@ -139,7 +149,7 @@ async function main() {
 
   server.resource("client-rules", "dialtone://client-rules", {
     name: "Dialtone Client Rules",
-    description: "Guidelines and rules for AI clients when working with Dialtone",
+    description: "Bundled guidelines and rules for AI clients when working with Dialtone",
     mimeType: "application/json",
   }, async () => {
     return {
@@ -151,7 +161,7 @@ async function main() {
     };
   });
 
-  registerQueryTools(server);
+  registerQueryTools(server, context);
 
   // Start the server
   const transport = new StdioServerTransport();

@@ -61,6 +61,16 @@ const detail = (
   components = records,
 ) => getComponentDetail(args, components);
 
+it.each([
+  ['DtText', null, 'unverified'],
+  ['DtText', [], 'unavailable'],
+  ['DtTooltipDirective', ['DtTooltipDirective'], 'no-match'],
+  ['ARROW_KEYS', ['ARROW_KEYS'], 'unverified'],
+  ['DtButon', [], 'no-match'],
+] as const)('missing metadata for %s is qualified by actual export evidence', (component, names, match) => {
+  expect(getComponentDetail({ component }, [], names).match).toBe(match);
+});
+
 describe('selected component contract', () => {
   it('constrains kind to Button and retains complete values/default/deprecation tags', () => {
     const result = detail({

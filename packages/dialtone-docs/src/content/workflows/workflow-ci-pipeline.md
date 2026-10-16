@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-10-14
+last_updated: 2026-10-16
 related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server, dialtone-docs]
 ---
 
@@ -61,7 +61,7 @@ Directive MDX sources (`packages/dialtone-vue/directives/**/*.mdx`) also feed th
 
 The lookup job also checks generated utility metadata and recommendation strings with `node --test scripts/tests/dialtone-recommendations.test.mjs packages/dialtone-css/postcss/dialtone-docs.test.cjs`. A separate `test-lint-plugins` job checks generated migration guidance against the unchanged helper configs and runs Stylelint. ESLint runs once in `test-cli`.
 
-Documentation-link inputs also include the shared component-name normalizer, site-reference, frontmatter and source-page helpers. MCP protocol contracts run with `pnpm --dir packages/dialtone-mcp-server test:protocol`; the documentation suite runs once and includes source-derived link checks.
+Documentation-link inputs also include the shared component-name normalizer, site-reference, frontmatter and source-page helpers. MCP protocol contracts run with `pnpm --dir packages/dialtone-mcp-server test:protocol`, whose Nx target depends on the MCP build; the documentation suite runs once and includes source-derived link checks.
 
 Shared contracts run with `node --test scripts/retrieval/*.test.mjs`; `node scripts/retrieval/run.mjs` exercises query-core, CLI JSON and live MCP tool responses. The retrieval harness disables optional registry update-check I/O for deterministic lookup checks. Known retrieval failures carry a precise assertion, owning issue and removal condition; an unrelated failure or unexpected pass fails the job. These checks do not establish startup/network behavior or consumer build compatibility.
 

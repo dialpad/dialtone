@@ -3,6 +3,8 @@ import {
   normalizeComponentName,
   componentNames,
 } from './component-identity.js';
+import { components as bundledComponents } from './data.js';
+import { directiveIdentifiers } from './directive-identifiers.js';
 import type { Component, ComponentMember } from './types.js';
 import type { MatchState } from './retrieval.js';
 
@@ -27,11 +29,30 @@ export interface ComponentDetailArgs {
   projection?: 'all' | ComponentSection;
   field?: string;
 }
+/** Why installed export evidence leaves a name without a component record. */
+export type MissingComponentReason = 'not-exported' | 'exported-without-metadata' | 'export-unverified';
+
+let bundledPublicKeys: Set<string> | undefined;
+function missingReason(
+  name: string,
+  key: string,
+  installedExports?: readonly string[] | null,
+): MissingComponentReason | null {
+  if (installedExports === undefined || directiveIdentifiers(name).length) return null;
+  if (installedExports === null) return 'export-unverified';
+  if (installedExports.some((exported) => normalizeComponentName(exported) === key)) return 'exported-without-metadata';
+  // Recognize an absent component name without substituting bundled APIs.
+  bundledPublicKeys ??= new Set(bundledComponents
+    .filter((record) => record.identity?.kind === 'public')
+    .flatMap((record) => componentNames(record).map((alias) => normalizeComponentName(alias))));
+  return bundledPublicKeys.has(key) ? 'not-exported' : null;
+}
 
 /** Select identity before projecting API fields. Never use a ranked feature hit. */
 export function getComponentDetail(
   args: ComponentDetailArgs,
   records: Component[],
+  installedExports?: readonly string[] | null,
 ) {
   const name = args.component.trim();
   const key = normalizeComponentName(name);
@@ -55,8 +76,13 @@ export function getComponentDetail(
       ? [args.projection]
       : COMPONENT_SECTIONS;
   if (!component) {
+    const reason = candidates.length ? null : missingReason(name, key, installedExports);
+    const match: MatchState = candidates.length ? 'candidate'
+      : reason === 'not-exported' ? 'unavailable'
+        : reason ? 'unverified' : 'no-match';
     return {
-      match: candidates.length ? ('candidate' as const) : ('no-match' as const),
+      match,
+      reason,
       component: null,
       items: [],
       available: candidates.map((record) => record.displayName),
@@ -96,6 +122,7 @@ export function getComponentDetail(
         : 'exact';
   return {
     match,
+    reason: null,
     component,
     items,
     available,
