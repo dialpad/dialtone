@@ -45,6 +45,8 @@ test('installed selection hashes actual bytes, verifies exports, and keeps missi
   });
   expect(context.provenance.domains.tokens).toMatchObject({ selection: 'bundled', fallbackReason: 'missing-or-unreadable-dataset' });
   expect(context.provenance.domains.documentation.selection).toBe('bundled');
+  await mkdir(join(app.dependencyRoot, '.git'));
+  expect(resolveProjectData(app.dependencyRoot, parent).provenance.domains.icons.fallbackReason).toBe('package-not-declared-by-umbrella');
 });
 
 test('nested dependency roots are explicit and hoisting needs its own authorized boundary', async () => {
@@ -55,7 +57,9 @@ test('nested dependency roots are explicit and hoisting needs its own authorized
   expect(resolveProjectData(app.dependencyRoot).data.sources.components.kind).toBe('bundled');
   expect(resolveProjectData(app.dependencyRoot, app.directory).data.sources.components.kind).toBe('local');
   await mkdir(join(app.dependencyRoot, '.git'));
-  expect(resolveProjectData(app.dependencyRoot, app.directory).provenance.domains.components.fallbackReason).toBe('git-repository-lookup-boundary');
+  expect(resolveProjectData(app.dependencyRoot, app.directory).provenance.domains.components.fallbackReason).toBe('package-not-found-within-lookup-boundary');
+  await rename(join(app.directory, 'node_modules'), join(parent, 'uninstalled-node-modules'));
+  expect(resolveProjectData(app.dependencyRoot, app.directory).provenance.domains.components.fallbackReason).toBe('package-not-found-within-lookup-boundary');
 });
 
 test('a declared umbrella never borrows stray standalone or undeclared installations', async () => {

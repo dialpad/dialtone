@@ -118,7 +118,7 @@ function tryRead(fromDir: string, specifier: string, domain: Domain, policy?: Re
   // "@dialpad/dialtone-vue/component-documentation.json" → "@dialpad/dialtone-vue"
   const packageName = specifier.split('/').slice(0, 2).join('/');
   const manifest = findUp(fromDir, join('node_modules', packageName, 'package.json'), policy);
-  if (!manifest) return null;
+  if (!manifest) return fail('package-not-found-within-lookup-boundary');
   try {
     // Resolving the package's own name from inside it applies its exports map.
     // The real path keeps the check below valid when Node preserves symlinks.
@@ -249,8 +249,9 @@ function umbrellaParts(fromDir: string, policy?: ReadPolicy): Parts {
   // Icons aren't in the umbrella's dist: look for the icons package from the
   // umbrella's real path, so it's the version the umbrella depends on. Under
   // pnpm, the umbrella's dependencies sit beside it there, not at the top.
-  const icons = !policy || typeof anchor.dependencies['@dialpad/dialtone-icons'] === 'string'
-    ? tryRead(dirname(anchor.file), '@dialpad/dialtone-icons/keywords-icons.json', 'icons', policy) : null;
+  const readsIcons = !policy || typeof anchor.dependencies['@dialpad/dialtone-icons'] === 'string';
+  if (policy && !readsIcons) policy.failures.icons = 'package-not-declared-by-umbrella';
+  const icons = readsIcons ? tryRead(dirname(anchor.file), '@dialpad/dialtone-icons/keywords-icons.json', 'icons', policy) : null;
   return { components, utilities, tokens, icons };
 }
 
@@ -389,7 +390,6 @@ export function resolveProjectData(projectRoot?: string, lookupRoot?: string): P
     return fallback('project-root-or-manifest-unavailable');
   }
   const spec = declaredSpec(manifest, '@dialpad/dialtone');
-  const requestedBoundary = boundary;
   for (const dir of ancestors(root)) {
     if (existsSync(join(dir, '.git'))) { boundary = dir; break; }
     if (dir === boundary) break;
@@ -407,8 +407,7 @@ export function resolveProjectData(projectRoot?: string, lookupRoot?: string): P
       schemaVersion: datasetSchema(found.data),
       hash: found.hash,
       selection: 'installed', fallbackReason: null,
-    } : bundledStamp(bundledProvenance.domains[key], policy.failures[domain] ??
-      (boundary !== requestedBoundary ? 'git-repository-lookup-boundary' : 'declared-installed-data-unavailable'));
+    } : bundledStamp(bundledProvenance.domains[key], policy.failures[domain] ?? 'declared-installed-data-unavailable');
   }
   if (!parts.components) unverifyBundledComponents(data);
   const anchor = anchorOf(parts);
