@@ -189,7 +189,7 @@ dialtone docs "v-dt-tooltip"
 
 Documentation is bundled with the CLI rather than resolved from your project's installed Dialtone packages. Update the CLI to refresh this content.
 
-Readable documentation results contain excerpts. `--format json` returns the complete available documentation records, which can include directive code snippets. A complete record can still omit component examples or page-level scripts; neither format establishes that a snippet runs in your application.
+Readable results from `dialtone docs` contain excerpts. `dialtone docs --format json` returns the complete available documentation records, which can include directive code snippets. A complete record can still omit component examples or page-level scripts; neither format establishes that a snippet runs in your application.
 
 ### Generate context for a coding agent
 
