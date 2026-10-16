@@ -3,6 +3,7 @@
 // ============================================================================
 
 import type { DocumentationRecord, SearchResult } from '../types.js';
+import { matchingKeywords } from '../keyword-matching.js';
 import { directiveIdentifiers } from '../directive-identifiers.js';
 import { normalizeComponentName } from '../component-identity.js';
 
@@ -158,7 +159,7 @@ export function searchDocumentation(
     return titleWords.length > 1 && titleWords.every(tw => words.includes(tw));
   };
 
-  const scored: Array<{ result: SearchResult; matchCount: number; titleMatch: boolean }> = [];
+  const scored: Array<{ result: SearchResult; matchCount: number; titleMatch: boolean; exactTitle: boolean; keywordMatch: boolean }> = [];
 
   for (const record of data) {
     const isDirective = record.docId.startsWith(DIRECTIVE_PREFIX);
@@ -173,11 +174,13 @@ export function searchDocumentation(
       : checkTitleMatch(record);
     // Explicit directives scope results to those directives and named counterparts.
     if (directives.length > 0 && !titleMatch) continue;
+    const exactTitle = normalizeComponentName(bounded) === normalizeComponentName(record.docTitle);
+    const keywordMatch = matchingKeywords(bounded, record.frontmatter.keywords).length > 0;
     const fullBlob = [record.docTitle, ...record.headingPath, record.frontmatter.description ?? '', record.content].join(' ');
     const sectionRegexes = selectedDirective && contractRegexes.length > 0 ? contractRegexes : regexes;
     const matchCount = sectionRegexes.filter(r => r.test(fullBlob)).length;
     // Include if content matched OR the document is specifically named in the query.
-    if (matchCount === 0 && !titleMatch) continue;
+    if (matchCount === 0 && !titleMatch && !keywordMatch) continue;
 
     const headingLabel = record.headingPath.length > 0
       ? ` > ${record.headingPath.join(' > ')}`
@@ -192,18 +195,22 @@ export function searchDocumentation(
       },
       matchCount,
       titleMatch,
+      exactTitle,
+      keywordMatch,
     });
   }
 
   // Sort priority (highest to lowest):
   //   1. Non-whats-new before whats-new (burial)
-  //   2. Title match before non-title-match (named component beats incidental mention)
+  //   2. Exact titles, then curated phrases, then other title matches
   //   3. Match count descending (more query terms matched = more relevant)
   //   4. Sections with headings before intro stubs (non-empty headingPath wins ties)
   scored.sort((a, b) => {
     const aIsNews = NEWS_DOC.test((a.result.details as DocumentationRecord).docId);
     const bIsNews = NEWS_DOC.test((b.result.details as DocumentationRecord).docId);
     if (aIsNews !== bIsNews) return aIsNews ? 1 : -1;
+    if (a.exactTitle !== b.exactTitle) return a.exactTitle ? -1 : 1;
+    if (a.keywordMatch !== b.keywordMatch) return a.keywordMatch ? -1 : 1;
     if (a.titleMatch !== b.titleMatch) return a.titleMatch ? -1 : 1;
     if (b.matchCount !== a.matchCount) return b.matchCount - a.matchCount;
     // Prefer sections with actual headings over intro stubs (headingPath: [])

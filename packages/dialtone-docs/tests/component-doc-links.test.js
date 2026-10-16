@@ -3,6 +3,8 @@ import { buildComponentPage as build } from '../src/generators/build-component-d
 const identities = [
   'DtButton',
   'DtTabPanel',
+  'DtTabGroup',
+  'DtTab',
   'DtDropdownSeparator',
   'DtResizablePanel',
 ].map((canonicalName) => ({
@@ -85,4 +87,18 @@ it('locates live inline HTML in Markdown table cells', async () => {
   expect(page.components.map((reference) => reference.sourceLine)).toEqual([
     1, 5,
   ]);
+});
+
+it('keeps compound public API associations and keywords without inventing CSS components', async () => {
+  const page = await build('components/tabs.md',
+    `---\ntitle: Tabs\nkeywords: [tab navigation]\n---\n<component-vue-api component-name="tabgroup" :also-import="['tab', 'tabpanel']" />\n<component-vue-api component-name="tabpanel" />\n<component-vue-api component-name="tab" />`, identities);
+  expect(page.keywords).toEqual(['tab navigation']);
+  expect(page.components.map(c => [c.canonicalName, c.relation])).toEqual([
+    ['DtTabGroup', 'api'], ['DtTab', 'companion'], ['DtTabPanel', 'companion'], ['DtTabPanel', 'api'], ['DtTab', 'api'],
+  ]);
+  const table = await build('components/table.md', '---\nkeywords: [data table]\n---\n<table />', identities);
+  expect(table.components).toEqual([]);
+  await expect(build('components/internal.md', '<component-vue-api component-name="DtInternal" />', [
+    ...identities, { identity: { canonicalName: 'DtInternal', aliases: [], kind: 'internal' } },
+  ])).rejects.toThrow(/Unresolved/);
 });

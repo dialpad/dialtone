@@ -2,6 +2,10 @@ import { describe, test, expect } from 'vitest';
 import { searchUtilityClasses } from '../../src/tools/utility-classes.js';
 import { searchTokens, formatTokenResults } from '../../src/tools/tokens.js';
 import { searchIcons } from '../../src/tools/icons.js';
+import { components, componentDocumentation, documentation } from '../../src/data.js';
+import { searchComponents } from '../../src/tools/components.js';
+import { normalizeComponents, componentNames } from '../../src/component-identity.js';
+import { getComponentDetail } from '../../src/component-detail.js';
 import { searchDocumentation } from '../../src/tools/docs.js';
 import type { DocumentationRecord, UtilityClassesData, TokensData } from '../../src/types.js';
 
@@ -100,5 +104,48 @@ describe('real news paths', () => {
   test('directive guidance leads over an exact news title', () => {
     const corpus = [doc('dialtone/whats-new/posts/2026-9-16', 'Mode Directive', 'Mode directive mode directive'), doc('guides/mode-directive', 'Mode', 'Use the mode directive to select a mode.')];
     expect(searchDocumentation('mode directive', corpus).results[0].details.docId).toBe('guides/mode-directive');
+  });
+});
+
+describe('curated public-page discovery', () => {
+  test.each([
+    ['DtInput', ['DtInput', 'DtInputGroup', 'DtBanner'], 'components/input'],
+    ['switch', ['DtToggle'], 'components/toggle'],
+    ['spinner', ['DtLoader'], 'components/loader'],
+    ['activity indicator', ['DtLoader'], 'components/loader'],
+    ['blank slate', ['DtEmptyState'], 'components/empty-state'],
+    ['zero state', ['DtEmptyState'], 'components/empty-state'],
+    ['text field', ['DtInput'], 'components/input'],
+    ['text-field', ['DtInput'], 'components/input'],
+    ['TEXT / field', ['DtInput'], 'components/input'],
+    ['textbox', ['DtInput'], 'components/input'],
+    ['autocomplete', ['DtCombobox', 'DtComboboxWithPopover'], 'components/combobox'],
+    ['typeahead', ['DtCombobox', 'DtComboboxWithPopover'], 'components/combobox'],
+    ['notification', ['DtBanner', 'DtNotice', 'DtToast'], 'components/notice'],
+    ['tab navigation', ['DtTab', 'DtTabGroup', 'DtTabPanel'], 'components/tabs'],
+    ['DLT3659MissingCapability', [], undefined],
+  ])('%s leads with supported subjects before incidental text', (query, expected, docId) => {
+    // A competing keyword must not displace existing canonical name/family results.
+    const catalog = query === 'DtInput' ? { ...componentDocumentation, pages: componentDocumentation.pages.map(page =>
+      page.docId === 'components/banner' ? { ...page, keywords: [...(page.keywords ?? []), 'DtInput'] } : page) } : componentDocumentation;
+    const found = searchComponents(query, components, catalog).results;
+    expect(found.slice(0, expected.length || 1).map(r => r.name)).toEqual(expected);
+    expect(searchDocumentation(query, documentation).results[0]?.details.docId).toBe(docId);
+  });
+
+  test('uses only the selected public dataset, preserving legacy lookup and exact identity', () => {
+    const selected = normalizeComponents([{ displayName: 'input', description: 'Legacy text input' }], {
+      package: '@dialpad/dialtone', version: '9.185.0', from: '@dialpad/dialtone/vue3', names: ['DtInput'],
+    });
+    expect(searchComponents('text field', selected, componentDocumentation).results.map(r => r.name)).toEqual(['DtInput']);
+    expect(searchComponents('spinner', selected, componentDocumentation).results).toEqual([]);
+    const companionOnly = { ...componentDocumentation, pages: componentDocumentation.pages.filter(page => page.docId === 'components/input').map(page => ({ ...page, components: page.components.map(reference => ({ ...reference, relation: 'companion' })) })) };
+    expect(searchComponents('text field', selected, companionOnly).results).toEqual([]);
+    expect(searchComponents('Legacy', [{ displayName: 'input', description: 'Legacy input' }], componentDocumentation).results[0].name).toBe('input');
+    expect(searchComponents('text field', selected, { ...componentDocumentation, pages: componentDocumentation.pages.map(({ keywords, ...page }) => page) }).results).toEqual([]);
+    expect(componentNames(components.find(c => c.displayName === 'DtLoader')!)).not.toContain('spinner');
+    for (const query of ['spinner', 'switch', 'DtTabs', 'dt-tabs', 'DtTable', 'dt-table', 'DtScrollbar', 'dt-scrollbar']) {
+      expect(getComponentDetail({ component: query }, components).match).toBe('no-match');
+    }
   });
 });

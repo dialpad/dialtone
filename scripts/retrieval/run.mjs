@@ -108,7 +108,7 @@ async function query(testCase, adapter) {
     let result;
     try {
       console.error = () => {};
-      result = core[search](testCase.query, dataset);
+      result = core[search](testCase.query, dataset, testCase.domain === 'components' ? core.componentDocumentation : undefined);
     } finally {
       console.error = stderr;
     }
@@ -139,7 +139,7 @@ async function query(testCase, adapter) {
           '--format',
           'json',
           '--limit',
-          testCase.domain === 'icons' ? '20' : String(testCase.limit),
+          testCase.domain === 'icons' ? '0' : String(testCase.limit),
           '--',
           testCase.query,
         ],

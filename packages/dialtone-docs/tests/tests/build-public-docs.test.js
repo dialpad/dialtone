@@ -1,4 +1,6 @@
 import { describe, test, expect, beforeAll } from 'vitest';
+import { mkdtempSync, writeFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildRecords, chunkSections } from '@src/generators/build-public-docs.mjs';
@@ -244,4 +246,25 @@ describe('buildRecords — edge cases', () => {
     expect(usage).toBeDefined();
     expect(usage.content).toContain('More content after the fence');
   });
+});
+
+// Public source keywords must reach both lookup adapters without a Vue rebuild.
+test('preserves optional keywords and rejects malformed authored arrays', () => {
+  const directory = mkdtempSync(resolve(tmpdir(), 'dialtone-keywords-'));
+  const file = resolve(directory, 'component.md');
+  try {
+    for (const [frontmatter, expected] of [
+      ['keywords: ["spinner", "activity indicator"]', ['spinner', 'activity indicator']],
+      ['', undefined],
+    ]) {
+      writeFileSync(file, `---\ntitle: Loader\n${frontmatter}\n---\n## Usage\nLoading guidance.`);
+      expect(buildRecords(file)[0].frontmatter.keywords).toEqual(expected);
+    }
+    for (const keywords of ['spinner', '["spinner", 42]', '[" "]']) {
+      writeFileSync(file, `---\ntitle: Loader\nkeywords: ${keywords}\n---\nLoading guidance.`);
+      expect(() => buildRecords(file)).toThrow(/keywords.*nonempty strings/);
+    }
+  } finally {
+    rmSync(directory, { recursive: true, force: true });
+  }
 });

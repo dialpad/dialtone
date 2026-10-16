@@ -52,6 +52,7 @@ If the component needs custom styles:
 ### 5. Documentation
 
 - Create a VuePress documentation page under `apps/dialtone-documentation/docs/components/<name>.md`
+- Keep the normal canonical export and live `<component-vue-api>` association on the public page. Add useful missing alternate names or interaction phrases in its frontmatter `keywords`; follow `.claude/rules/documentation-site.md` for keyword quality, compound pages and source/version qualification. Keywords are discovery evidence, never export aliases.
 - Update sidebar navigation in `apps/dialtone-documentation/docs/_data/site-nav.json`
 - Create `packages/combinator/src/variants/variants_<name>.js` and register it in `packages/combinator/src/variants/variants.js` when the component is supported in the playground. Follow `.claude/rules/combinator-variants.md`.
 
@@ -60,7 +61,8 @@ If the component needs custom styles:
 - Run tests: `pnpm nx run dialtone-vue:test -- --filter <name>`
 - Build Vue package: `pnpm nx run dialtone-vue:build`
 - Rebuild docs JSON: run `scripts/build-dialtone-vue-docs.mjs`
-- Rebuild MCP data: `pnpm nx run dialtone-mcp-server:build`
+- Rebuild lookup data: `pnpm nx run-many -t build -p dialtone-cli dialtone-mcp-server`
+- For a meaningful new keyword, record an alternate-term component/docs lookup against the rebuilt candidate, including intended leading subjects and ambiguity. Docs-only keyword edits require explicit adapter publication through the existing release process and an installed-tool update; the site can update first.
 
 ---
 
