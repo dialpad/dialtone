@@ -1,12 +1,13 @@
 import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from 'vue';
-import { SLIDER_EDGE_CLAMP_TOLERANCE_PX, SLIDER_TOOLTIP_EDGE_CLAMP_TOLERANCE_PX } from '../SliderConstants';
-import { edgeClampOffset, mirrorPct } from '../utils';
+import { SLIDER_EDGE_CLAMP_TOLERANCE_PX } from '../SliderConstants';
+import { edgeClampOffset, mirrorPct, sameValues } from '../utils';
 
 // Two kinds of collision: low/high readouts overlapping each other as thumbs
 // converge (merged into one centered "lo–hi" pill), and a readout overlapping
 // a static mark (readout wins, mark hides — it's the thing actively
 // communicating current state). Pure rect measurement, recomputed on value/
-// visibility change and control resize, no polling.
+// visibility change and control resize — and, for the tooltip readout, each
+// time UseSliderTooltipReadout moves it (Slider.vue's onPosition).
 export function useSliderCollisionAvoidance(props, {
   controlRef,
   isVertical,
@@ -25,11 +26,9 @@ export function useSliderCollisionAvoidance(props, {
   const markCollisionHidden = ref([]);
   const readoutMerged = ref(false);
   // Owned here (measured and written), read by UseSliderGeometry to build
-  // markStyle/tooltipReadoutStyle — returned below rather than threaded in
-  // from Slider.vue as a bare shared ref.
+  // markStyle — returned below rather than threaded in from Slider.vue as a
+  // bare shared ref.
   const markEdgeOffsetPx = ref([]);
-  const controlRect = ref({ left: 0, right: 0 });
-  const tooltipWidthPx = ref([]);
   const COLLISION_PADDING = 4; // px of breathing room before a mark hides or readouts merge
   // Must match .d-slider__control's own overflow-clip-margin (slider.less) — a
   // mark within that margin already renders fully today (it's what the margin
@@ -59,7 +58,7 @@ export function useSliderCollisionAvoidance(props, {
   // programmatic change doesn't set data-dragging to disable it. Sidesteps
   // this by computing position analytically from the same reactive pct the
   // template uses, only pulling size (never transitioned) from the DOM.
-  function analyticalReadoutRect(pct, el, index) {
+  function analyticalReadoutRect(pct, el) {
     if (!el || !controlRef.value) return null;
     const elRect = el.getBoundingClientRect();
     const controlRect = controlRef.value.getBoundingClientRect();
@@ -69,31 +68,24 @@ export function useSliderCollisionAvoidance(props, {
       return { left: elRect.left, right: elRect.right, top: centerPx - height / 2, bottom: centerPx + height / 2 };
     }
     const width = elRect.right - elRect.left;
-    let centerPx = controlRect.left
+    const centerPx = controlRect.left
       + (mirrorPct(pct, isRtl.value) / 100) * (controlRect.right - controlRect.left);
-    // Tooltip mode edge-clamps the real bubble (UseSliderGeometry's
-    // tooltipReadoutStyle) — without the same offset here, collision checks
-    // compare against the bubble's un-clamped position instead of where it
-    // actually renders, exactly where overlap is likeliest (near an edge).
-    // Never reached for the merged-pill call site below: tooltip mode has no
-    // merged pill, so index stays undefined there.
-    if (props.readout === 'tooltip' && index !== undefined) {
-      centerPx += edgeClampOffset(
-        centerPx - width / 2, centerPx + width / 2, controlRect, SLIDER_TOOLTIP_EDGE_CLAMP_TOLERANCE_PX,
-      );
-    }
     return { left: centerPx - width / 2, right: centerPx + width / 2, top: elRect.top, bottom: elRect.bottom };
   }
 
   // Same rationale as data-mark-index on marks: don't trust readoutElRefs[i]'s
   // array position to correspond to internalValues[i] — look the element up by
-  // its own tagged index instead. The tooltip readout uses a separate,
-  // already index-aligned ref array (tooltipElRefs, same pattern as
-  // markElRefs) instead of data-readout-index, since it never needs the
-  // array-ref-plus-lookup indirection the in-row readout does.
+  // its own tagged index instead.
   function readoutElByIndex(i) {
-    if (props.readout === 'tooltip') return tooltipElRefs.value[i] || null;
     return readoutElRefs.value.find((el) => el && Number(el.dataset.readoutIndex) === i);
+  }
+
+  // The tooltip readout is positioned by UseSliderTooltipReadout, not by
+  // percent math, so its rect is measured directly. Its ref array
+  // (tooltipElRefs) is already index-aligned, same pattern as markElRefs.
+  function readoutRect(val, i) {
+    if (props.readout === 'tooltip') return tooltipElRefs.value[i]?.getBoundingClientRect() ?? null;
+    return analyticalReadoutRect(thumbPercent(val), readoutElByIndex(i));
   }
 
   async function updateCollisions() {
@@ -128,19 +120,6 @@ export function useSliderCollisionAvoidance(props, {
     updateMarkCollisions();
   }
 
-  // Measures synchronously (not via the async/cancelable updateCollisions
-  // pipeline) so values stay current through a fast drag — see
-  // tooltipReadoutStyle for how they're consumed. Horizontal only.
-  function updateTooltipMeasurements() {
-    if (!controlRef.value) return;
-    controlRect.value = controlRef.value.getBoundingClientRect();
-    if (isVertical.value) return;
-    tooltipWidthPx.value = internalValues.value.map((_, i) => {
-      const el = tooltipElRefs.value[i];
-      return el ? el.getBoundingClientRect().width : 0;
-    });
-  }
-
   // Same formula as UseSliderGeometry's own mergedReadoutPct — recomputed
   // here rather than threaded in, since both values a merge check ever needs
   // (internalValues, thumbPercent) are already inputs to this composable.
@@ -155,7 +134,7 @@ export function useSliderCollisionAvoidance(props, {
       return rect ? [rect] : [];
     }
     return internalValues.value
-      .map((val, i) => (isReadoutOpen(i) ? analyticalReadoutRect(thumbPercent(val), readoutElByIndex(i), i) : null))
+      .map((val, i) => (isReadoutOpen(i) ? readoutRect(val, i) : null))
       .filter(Boolean);
   }
 
@@ -211,8 +190,8 @@ export function useSliderCollisionAvoidance(props, {
       }
     });
 
-    markCollisionHidden.value = collisionResult;
-    markEdgeOffsetPx.value = offsets;
+    if (!sameValues(collisionResult, markCollisionHidden.value)) markCollisionHidden.value = collisionResult;
+    if (!sameValues(offsets, markEdgeOffsetPx.value)) markEdgeOffsetPx.value = offsets;
   }
 
   const readoutVisibility = computed(() => internalValues.value.map((_, i) => isReadoutOpen(i)));
@@ -230,25 +209,23 @@ export function useSliderCollisionAvoidance(props, {
   // sources, or without the control's own size changing (the ResizeObserver
   // below only watches that), and neither recomputes on its own otherwise.
   watch(
-    [internalValues, readoutVisibility, computedMarks, formattedValues, isVertical, isRtl],
+    [readoutVisibility, computedMarks, isVertical, isRtl],
     () => updateCollisions(),
     { deep: true },
   );
 
-  // Separate from updateCollisions' watcher: flush:'post' can't be starved
-  // by its own async cancellation, so this stays current during a fast drag.
+  // The tooltip readout re-runs collisions itself once it has moved
+  // (Slider.vue's onPosition); measuring here would read its old position.
   watch(
-    [internalValues, readoutVisibility, formattedValues, isVertical, isRtl],
-    () => updateTooltipMeasurements(),
-    { deep: true, flush: 'post' },
+    [internalValues, formattedValues],
+    () => { if (props.readout !== 'tooltip') updateCollisions(); },
+    { deep: true },
   );
 
   onMounted(() => {
-    updateTooltipMeasurements();
     nextTick(updateCollisions);
     if (typeof ResizeObserver !== 'undefined' && controlRef.value) {
       markCollisionResizeObserver = new ResizeObserver(() => {
-        updateTooltipMeasurements();
         updateCollisions();
       });
       markCollisionResizeObserver.observe(controlRef.value);
@@ -267,7 +244,8 @@ export function useSliderCollisionAvoidance(props, {
     markCollisionHidden,
     readoutMerged,
     markEdgeOffsetPx,
-    controlRect,
-    tooltipWidthPx,
+    readoutVisibility,
+    formattedValues,
+    updateCollisions,
   };
 }

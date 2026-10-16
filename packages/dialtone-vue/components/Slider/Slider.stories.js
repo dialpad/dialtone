@@ -1,4 +1,6 @@
 import { action } from 'storybook/actions';
+import { expect, userEvent, waitFor } from 'storybook/test';
+import { ref } from 'vue';
 import { createTemplateFromVueFile } from '@/common/storybook_utils';
 import { TEXT_SIZE_MODIFIERS, TEXT_STRENGTH_MODIFIERS } from '@/components/Text';
 import DtSlider from './Slider.vue';
@@ -311,5 +313,57 @@ export const Variants = {
         ],
       },
     },
+  },
+};
+
+export const TooltipClipping = {
+  render: () => ({
+    components: { DtSlider },
+    setup: () => ({
+      value: ref(50),
+      formatValue: value => `Formatted value ${value} with additional localized context. `.repeat(200),
+    }),
+    template: `
+      <div class="d-p32">
+        <div style="overflow: hidden; transform: translateZ(0); clip-path: inset(0); mask-image: linear-gradient(#000, #000)">
+          <div class="d-py16" style="overflow: clip">
+            <dt-slider v-model="value" label="Value inside clipping ancestors" :get-value-text="formatValue" />
+          </div>
+        </div>
+        <button class="d-btn d-btn--outlined d-mt16" data-qa="slider-tooltip-next-control">Next control</button>
+      </div>
+    `,
+  }),
+  parameters: { controls: { disable: true } },
+  play: async ({ canvasElement }) => {
+    const input = canvasElement.querySelector('[data-qa="dt-slider-thumb"]');
+    const anchor = canvasElement.querySelector('[data-qa="dt-slider-thumb-visual"]');
+    const tooltip = canvasElement.querySelector('[data-qa="dt-slider-thumb-readout-tooltip"]');
+    const next = canvasElement.querySelector('[data-qa="slider-tooltip-next-control"]');
+    const view = canvasElement.ownerDocument.defaultView;
+    input.focus();
+    try {
+      await waitFor(() => {
+        expect(tooltip.matches(':popover-open')).toBe(true);
+        expect(tooltip.inert).toBe(true);
+        expect(view.getComputedStyle(tooltip).visibility).toBe('visible');
+        expect(view.getComputedStyle(tooltip.firstElementChild).overflow).toBe('hidden');
+        const bubble = tooltip.getBoundingClientRect();
+        const thumb = anchor.getBoundingClientRect();
+        expect(bubble.bottom <= thumb.top || bubble.top >= thumb.bottom ||
+          bubble.right <= thumb.left || bubble.left >= thumb.right).toBe(true);
+        expect(bubble.left).toBeGreaterThanOrEqual(0);
+        expect(bubble.top).toBeGreaterThanOrEqual(0);
+        expect(bubble.right).toBeLessThanOrEqual(view.innerWidth);
+        expect(bubble.bottom).toBeLessThanOrEqual(view.innerHeight);
+        expect(input.getAttribute('aria-valuetext')).toBe(tooltip.textContent);
+      });
+      await userEvent.tab();
+      expect(canvasElement.ownerDocument.activeElement).toBe(next);
+      await waitFor(() => expect(tooltip.matches(':popover-open')).toBe(false));
+    } finally {
+      input.blur();
+      next.blur();
+    }
   },
 };

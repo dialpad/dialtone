@@ -254,10 +254,17 @@ Marks and ticks are independent — a mark doesn't need a tick at the same posit
 
 Set `readout` to show each thumb's current value. Useful when the track context alone isn't enough to communicate the exact value.
 
-- `tooltip` (default) — a tooltip-styled bubble above the thumb, shown only while that thumb is hovered, dragged, or focused. Nudges itself inward as a thumb approaches `min`/`max` so the bubble doesn't get clipped at the track's edge.
+- `tooltip` (default) — a tooltip-styled bubble above the thumb, shown only while that thumb is hovered, dragged, or focused. It renders in the browser's top layer so ancestor overflow, clipping paths, and masks cannot cut it off. It shifts or flips near viewport edges and follows the thumb during dragging, scrolling, and resizing.
 - `always` — a readout below the track, always visible.
 - `interaction` — a readout below the track, shown only while that thumb is hovered, dragged, or focused.
 - `never` — no readout.
+
+> [!INFO] Floating readout
+> The floating readout requires the native Popover API (Chrome/Edge 114+, Firefox 125+, Safari 17+). Browsers without this API do not display the floating readout; use `always` or `interaction` when a visible value is needed there. Each native range input still exposes the formatted value through `aria-valuetext`. The tooltip remains within its document's viewport and cannot escape an embedding iframe.
+>
+> Long values wrap and are clipped to the space available beside the thumb. The full formatted value remains available through `aria-valuetext`. The decorative bubble is noninteractive and never receives keyboard focus. It opens and closes immediately.
+>
+> Top-layer rendering is independent of ancestor opacity, filters, and stacking contexts. A readout can therefore appear above a sticky header or another overlay covering its thumb; ancestor opacity and filter effects do not apply to it.
 
 In range mode with `always` or `interaction`, the two thumbs' readouts merge into a single centered `low–high` pill once they'd otherwise overlap as the thumbs converge.
 

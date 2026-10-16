@@ -1,11 +1,9 @@
 import { computed } from 'vue';
-import { SLIDER_TOOLTIP_EDGE_CLAMP_TOLERANCE_PX } from '../SliderConstants';
-import { edgeClampOffset, mirrorPct } from '../utils';
 
 // Pure positioning math shared by every element placed along the track
 // (thumb, tick, mark, readout, indicator) — no DOM reads, just props +
 // reactive state from UseSliderValue/UseSliderDirection/
-// UseSliderCollisionAvoidance (markEdgeOffsetPx, controlRect, tooltipWidthPx).
+// UseSliderCollisionAvoidance (markEdgeOffsetPx).
 export function useSliderGeometry(props, {
   isVertical,
   isRange,
@@ -13,8 +11,6 @@ export function useSliderGeometry(props, {
   thumbPercent,
   isRtl,
   markEdgeOffsetPx,
-  controlRect,
-  tooltipWidthPx,
   formatValue,
 }) {
   // Shared by every track element — they only differ in which transform
@@ -139,70 +135,6 @@ export function useSliderGeometry(props, {
     return positionStyle(pct, `translateX(calc(${centerInlineTransform()} + ${offset}px))`);
   }
 
-  // Tooltip-styled readout: borrows .d-tooltip CSS, positioned by percent
-  // math like marks (no measurement/polling loop). Above thumb horizontally;
-  // beside it vertically.
-  const tooltipReadoutArrowClass = computed(() => (
-    isVertical.value ? 'd-tooltip__arrow--left-center' : 'd-tooltip__arrow--bottom-center'
-  ));
-
-  // Hugs the thumb without overlapping the tooltip arrow's ~6px protrusion.
-  // Deliberately smaller than it could visually afford to be: the bubble's
-  // vertical poke above .d-slider__control's own block-start edge (which
-  // overflow-clip-margin, slider.less, gives ~32px of clipped room to render
-  // into) measures flush against that budget with under 1px of slack at
-  // --dt-spacing-150 (12px) — any larger and the bubble starts getting
-  // clipped. This leaves real slack instead of growing the clip margin,
-  // which is shared across all four sides and would leak out as a visible
-  // horizontal scrollbar everywhere else the margin is too generous.
-  const tooltipReadoutGapPx = 'var(--dt-spacing-100)'; // 8px
-
-  // Computed synchronously from pct so the offset reacts instantly.
-  function tooltipEdgeOffset(pct, index) {
-    const rect = controlRect.value;
-    const width = tooltipWidthPx.value[index];
-    if (!rect || !width) return 0;
-    const controlWidth = rect.right - rect.left;
-    if (!controlWidth) return 0;
-    const centerPx = rect.left + (mirrorPct(pct, isRtl.value) / 100) * controlWidth;
-    return edgeClampOffset(centerPx - width / 2, centerPx + width / 2, rect, SLIDER_TOOLTIP_EDGE_CLAMP_TOLERANCE_PX);
-  }
-
-  function tooltipReadoutStyle(val, index) {
-    const pct = thumbPercent(val);
-    if (isVertical.value) {
-      return {
-        // Matches thumbPositionStyle's own inset anchor (see its comment) —
-        // raw pct here would drift apart from the thumb's actual position
-        // near 0/100 now that the thumb itself anchors onto the inset band.
-        bottom: anchorPct(pct),
-        insetInlineStart: `calc(50% + var(--slider-thumb-visual-size) / 2 + ${tooltipReadoutGapPx})`,
-        transform: 'translateY(50%)',
-      };
-    }
-    const offset = tooltipEdgeOffset(pct, index);
-    const transform = offset
-      ? `translateX(calc(${centerInlineTransform()} + ${offset}px))`
-      : `translateX(${centerInlineTransform()})`;
-    return {
-      // Matches thumbPositionStyle's own inset anchor so the bubble (and its
-      // arrow) stay attached to the thumb's actual rendered position, not
-      // the control's true edge.
-      insetInlineStart: anchorPct(pct),
-      insetBlockEnd: `calc(50% + var(--slider-thumb-visual-size) / 2 + ${tooltipReadoutGapPx})`,
-      transform,
-      // Bridges into the ::after arrow rule (slider.less) since inline style
-      // can't target a pseudo-element; negated so the arrow stays visually
-      // anchored to the thumb when the bubble shifts. offset itself is a
-      // physical pixel value, but the arrow rule positions via
-      // inset-inline-start — a logical property the browser mirrors under
-      // dir="rtl" — so the sign has to flip under RTL too, same as
-      // centerInlineTransform, or the browser's own mirroring doubles up
-      // with this one and sends the arrow the wrong physical direction.
-      '--tooltip-arrow-offset': `${isRtl.value ? offset : -offset}px`,
-    };
-  }
-
   const mergedReadoutPct = computed(() => {
     if (!isRange.value || internalValues.value.length !== 2) return 0;
     const [lo, hi] = internalValues.value;
@@ -262,8 +194,6 @@ export function useSliderGeometry(props, {
     thumbPositionStyle,
     tickPositionStyle,
     markStyle,
-    tooltipReadoutArrowClass,
-    tooltipReadoutStyle,
     mergedReadoutPct,
     mergedReadoutText,
     indicatorStyle,
