@@ -1,0 +1,19 @@
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-class-props-consumer.js
+  s_7f1d1d64baa803::t_0daab5f655b5c5 8,51,56,61,80-81,84,88-90,98,104,142-144,160-165,181-197
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "c4d41add4bd041492501370fb93c141d70b4cf49",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

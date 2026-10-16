@@ -1,0 +1,19 @@
+packages/dialtone-icons/src/keywords-icons.json
+  s_29cbb1f96bc45e::t_9038d0ccebb182 217-222
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.4.1",
+  "base_commit_sha": "d159d7842e5f5f8b21b6ed314cb9b7f1e4c206b7",
+  "prompts": {},
+  "sessions": {
+    "s_29cbb1f96bc45e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bbb3f434-260e-4e02-96a3-5e97e4b2fb03",
+        "model": "claude-opus-4-7"
+      },
+      "human_author": "Santiago Mariani <santiago.mariani@dialpad.com>"
+    }
+  }
+}
