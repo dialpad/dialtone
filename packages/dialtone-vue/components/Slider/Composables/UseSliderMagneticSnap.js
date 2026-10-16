@@ -21,14 +21,15 @@ export function useSliderMagneticSnap(props, { controlRef, isVertical }) {
     if (props.snapPoints == null) return [];
     if (typeof props.snapPoints === 'number') {
       const interval = props.snapPoints;
-      if (interval <= 0) return [];
+      if (!Number.isFinite(interval) || interval <= 0) return [];
       return generateInterval(props.min, props.max, interval, 'snapPoints');
     }
     // A point outside [min, max] can never be a value the thumb is allowed to
     // hold, so it must never be offered as a snap target — otherwise a drag
     // that lands within the snap radius of it would pull the thumb (and the
     // emitted modelValue) out of the slider's own documented range.
-    return props.snapPoints.filter((point) => point >= props.min && point <= props.max);
+    if (!Array.isArray(props.snapPoints)) return [];
+    return props.snapPoints.filter((point) => Number.isFinite(point) && point >= props.min && point <= props.max);
   });
 
   // Tracks, per thumb index, the snap point currently held via hysteresis —

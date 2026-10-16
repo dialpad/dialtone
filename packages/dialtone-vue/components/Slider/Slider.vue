@@ -241,6 +241,7 @@ import { useSliderGeometry } from './Composables/UseSliderGeometry';
 import { useSliderMarksAndTicks } from './Composables/UseSliderMarksAndTicks';
 import { useSliderCollisionAvoidance } from './Composables/UseSliderCollisionAvoidance';
 import { useSliderTooltipReadout } from './Composables/UseSliderTooltipReadout';
+import { isValidMark } from './utils';
 
 defineOptions({ name: 'DtSlider', inheritAttrs: false });
 
@@ -258,27 +259,30 @@ const props = defineProps({
   },
 
   /**
-   * The minimum allowed value.
+   * The minimum allowed value. Must be finite.
    */
   min: {
     type: Number,
     default: 0,
+    validator: Number.isFinite,
   },
 
   /**
-   * The maximum allowed value.
+   * The maximum allowed value. Must be finite.
    */
   max: {
     type: Number,
     default: 100,
+    validator: Number.isFinite,
   },
 
   /**
-   * The increment/decrement step.
+   * The increment/decrement step. Must be finite.
    */
   step: {
     type: Number,
     default: 1,
+    validator: Number.isFinite,
   },
 
   /**
@@ -288,10 +292,12 @@ const props = defineProps({
    * number for an evenly spaced interval (e.g. 25), or an array for
    * arbitrary values (e.g. [10, 42, 90]). Pointer drag only — keyboard
    * stepping (step/largeStep) is unaffected.
+   * Values must be finite numbers; malformed array entries are ignored.
    */
   snapPoints: {
     type: [Number, Array],
     default: undefined,
+    validator: (value) => Number.isFinite(value) || (Array.isArray(value) && value.every(Number.isFinite)),
   },
 
   /**
@@ -516,6 +522,7 @@ const props = defineProps({
    * thumb) or an object with a required value and optional text override, which is used
    * as-is regardless of prefix/suffix/getValueText.
    * Example: [{ value: 0, text: 'Neutral' }, -100, 100]
+   * Mark values must be finite numbers; malformed entries are ignored.
    *
    * Keep mark text (via a short prefix/suffix, or an explicit text override) reasonably
    * short — a mark landing exactly on min or max is edge-aligned rather than centered, and
@@ -525,6 +532,7 @@ const props = defineProps({
   showMarks: {
     type: [Array, Boolean],
     default: false,
+    validator: (value) => typeof value === 'boolean' || (Array.isArray(value) && value.every(isValidMark)),
   },
 });
 

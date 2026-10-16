@@ -4,6 +4,10 @@
 // hanging the tab.
 export const MAX_GENERATED_POINTS = 1000;
 
+export function isValidMark(mark) {
+  return Number.isFinite(typeof mark === 'number' ? mark : mark?.value);
+}
+
 // Shared by computedTickValues (UseSliderMarksAndTicks) and computedSnapPoints
 // (UseSliderMagneticSnap) — a number means "evenly spaced", used identically
 // by both features.

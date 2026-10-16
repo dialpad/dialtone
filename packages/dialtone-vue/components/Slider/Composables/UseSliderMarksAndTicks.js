@@ -1,5 +1,5 @@
 import { computed } from 'vue';
-import { generateInterval } from '../utils';
+import { generateInterval, isValidMark } from '../utils';
 
 export function useSliderMarksAndTicks(props, { isVertical, thumbPercent }) {
   const computedTickValues = computed(() => {
@@ -17,8 +17,9 @@ export function useSliderMarksAndTicks(props, { isVertical, thumbPercent }) {
   }
 
   const computedMarks = computed(() => {
-    const source = props.showMarks === true ? [props.min, props.max] : (props.showMarks || []);
-    return source.map((item) => {
+    const source = props.showMarks === true ? [props.min, props.max] : props.showMarks;
+    if (!Array.isArray(source)) return [];
+    return source.filter(isValidMark).map((item) => {
       const value = typeof item === 'number' ? item : item.value;
       const text = typeof item === 'number' ? formatMarkValue(item) : (item.text ?? formatMarkValue(value));
       // A mark landing exactly on min/max is edge-aligned (flush to the track's
