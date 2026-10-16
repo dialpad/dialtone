@@ -1,3 +1,10 @@
+## [9.1.1](https://github.com/dialpad/dialtone/compare/dialtone-css/v9.1.0...dialtone-css/v9.1.1) (2026-10-15)
+
+
+### Bug Fixes
+
+* **Dialtone Query Core:** DLT-3651 align search and migration guidance ([#1461](https://github.com/dialpad/dialtone/issues/1461)) ([84ac078](https://github.com/dialpad/dialtone/commit/84ac078aa8f09fde46fecb9c1bc71e1f275f35dc))
+
 # [9.1.0](https://github.com/dialpad/dialtone/compare/dialtone-css/v9.0.1...dialtone-css/v9.1.0) (2026-10-13)
 
 

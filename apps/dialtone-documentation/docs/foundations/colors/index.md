@@ -31,14 +31,14 @@ next:
   </div>
 
   <figure class="d-bar-500 d-of-hidden">
-    <img src="/assets/images/color--sample-01.jpg" alt="" class="d-d-block d-w100p" />
+    <img src="/assets/images/graphics-resolve--billboard.png" alt="Schematic line art on Light Tan with white status pills" class="d-d-block d-w100p" />
   </figure>
 
   <figure class="d-bar-500 d-of-hidden">
-    <img src="/assets/images/color--sample-02.jpg" alt="" class="d-d-block d-w100p" />
+    <img src="/assets/images/halftone--purple.jpg" alt="Resolve halftone with Ultra Light Purple dots on a Purple ground" class="d-d-block d-w100p" />
   </figure>
 
   <figure class="d-bar-500 d-of-hidden">
-    <img src="/assets/images/color--sample-03.jpg" alt="" class="d-d-block d-w100p" />
+    <img src="/assets/images/halftone--secondary-ulp-coral.jpg" alt="Resolve halftone with coral dots on an Ultra Light Purple ground" class="d-d-block d-w100p" />
   </figure>
 </dt-stack>

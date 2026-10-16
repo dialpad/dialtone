@@ -10,7 +10,7 @@ const PATTERNS = {
   emphasis: /[*_]{1,2}([^*_]+)[*_]{1,2}/g,
 };
 
-function extractProse (markdown, inlineCode) {
+function extractProse (markdown, inlineCode, preserveFencedCode) {
   const output = [];
   // Consume blocks before scanning their contents, so apparent fences in a
   // comment/script and apparent HTML inside inline code have no special meaning.
@@ -28,6 +28,10 @@ function extractProse (markdown, inlineCode) {
     const fence = match[1] || match[2];
     if (fence) {
       cursor = skipPast(new RegExp(`^ {0,3}${fence[0]}{${fence.length},}[ \\t]*$`, 'gm'));
+      if (preserveFencedCode) {
+        const index = inlineCode.push(markdown.slice(match.index, cursor)) - 1;
+        output.push(`\uE000inline-code-${index}\uE001`);
+      }
     } else if (match[0] === '<!--') {
       cursor = skipPast(/-->/g);
     } else if (match[3]) {
@@ -79,12 +83,13 @@ export function stripFrontmatter(markdown) {
  * @param {string} markdown - Markdown string
  * @param {Object} [options]
  * @param {boolean} [options.stripFrontmatter=true] - Strip YAML frontmatter before parsing
+ * @param {boolean} [options.preserveFencedCode=false] - Retain literal fenced examples
  * @returns {string}
  */
 export function stripMarkdown(markdown, options = {}) {
-  const { stripFrontmatter: strip = true } = options;
+  const { stripFrontmatter: strip = true, preserveFencedCode = false } = options;
   const inlineCode = [];
-  let text = extractProse(strip ? stripFrontmatter(markdown) : markdown, inlineCode);
+  let text = extractProse(strip ? stripFrontmatter(markdown) : markdown, inlineCode, preserveFencedCode);
 
   text = text
     .replace(PATTERNS.image, '$1')

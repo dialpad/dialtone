@@ -157,6 +157,8 @@ Readable Markdown results preserve three named theme samples and token usage, la
 
 Discover Vue component candidates by UI element or name. Select a canonical component and use `get_component` to retrieve its available API contract.
 
+Directive identifiers such as `v-dt-tooltip` or `DtTooltipDirective` are not component names. Component search returns no components for them; use `search_documentation` for directive contracts.
+
 **Example queries:**
 
 ```text
@@ -234,6 +236,19 @@ Find icons from Dialtone's icon library and learn how to use icon components. Ic
 - `query` (required): Icon name, category, or keyword
 - `limit` (optional): Maximum returned icons (default 15)
 - `offset` (optional): Integer record offset (0–100000, default 0)
+
+### Documentation
+
+**Tool:** `search_documentation`
+
+Search usage guidance, accessibility responsibilities and directive contracts, including imports, registration, arguments and modifiers.
+
+```text
+"v-dt-tooltip"
+"DtModeDirective registration"
+```
+
+Directive replies identify the source package and version and link to the Storybook reference. Documentation uses bundled data; compatibility with the project's installed packages is not checked.
 
 ## Usage Examples
 

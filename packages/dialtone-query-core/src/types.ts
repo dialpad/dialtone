@@ -125,6 +125,8 @@ export interface DocumentationFrontmatter {
   status?: 'ready' | 'planned' | 'beta' | 'wip';
   figmaUrl?: string;
   storybook?: string;
+  sourcePackage?: string;
+  sourceVersion?: string;
 }
 
 export interface DocumentationRecord {
