@@ -94,16 +94,12 @@
 }
 
 //  $$  BODY
-//  No flex gap from the label above — .d-slider__control's own WCAG 2.5.5
-//  touch-target padding (below) already reads as whitespace; this overlaps
-//  the label into that padding's transparent part instead of adding more.
 //  ----------------------------------------------------------------------------
 .d-slider__body {
     display: flex;
     gap: var(--dt-spacing-150);
     align-items: center;
     inline-size: 100%;
-    margin-block-start: var(--dt-spacing-100-negative);
 }
 
 // Marks/readout (see below) are position:absolute against .d-slider__control,
@@ -156,15 +152,13 @@
     overflow: clip;
     cursor: default;
     block-size: var(--slider-thumb-size);
-
-    // Minimum WCAG 2.5.5 touch target via padding
-    // A bare `0` is a <number>, not a <length> — max() can't mix that with the
-    // calc()'s length result, so the whole declaration becomes invalid at
-    // computed-value time and silently falls back to 0, defeating the WCAG
-    // 2.5.5 touch target this is meant to guarantee. calc(--dt-spacing-base * 0)
-    // is a zero typed as a length (same pattern the sm/lg size modifiers below
-    // use for their own --dt-spacing-base arithmetic).
-    padding-block: max(calc(var(--dt-spacing-base) * 0), calc((var(--dt-spacing-550) - var(--slider-thumb-size)) / 2));
+    // No WCAG 2.5.5 touch-target padding here — .d-slider__thumb-hit (below)
+    // already guarantees its own 44×44px (--dt-spacing-550) hit target,
+    // independent of this control's own block-size. Padding the whole
+    // control out to 44px too only padded the row's overall height, not
+    // the thumb's actual interactive target, so it's gone — this keeps the
+    // row tight enough to sit flush with sibling form controls (DtInput,
+    // DtSelectMenu) when stacked at the same gap.
     /* stylelint-disable-next-line meowtec/no-px */
     overflow-clip-margin: 32px;
 }
@@ -571,11 +565,6 @@
         flex-direction: column;
         align-items: center;
         block-size: 100%;
-        // The base rule's negative margin-block-start is tuned to disappear
-        // into .d-slider__control's own horizontal touch-target padding-block
-        // (below) — vertical mode zeroes that padding out, so the same
-        // negative margin would instead bite directly into the label gap.
-        margin-block-start: 0;
     }
 
     .d-slider__control {
@@ -584,10 +573,9 @@
         flex: 1;
         flex-direction: column;
         margin-block-start: var(--dt-spacing-50);
-        padding-block: 0;
-        // Same bare-number-vs-length max() pitfall as the horizontal
-        // padding-block rule above — see its comment.
-        padding-inline: max(calc(var(--dt-spacing-base) * 0), calc((var(--dt-spacing-550) - var(--slider-thumb-size)) / 2));
+        // No touch-target padding-inline here either — same reasoning as the
+        // horizontal control's own rule above; .d-slider__thumb-hit's 44px
+        // minimum doesn't depend on it.
         // Marks/readout sit beside the (narrow) vertical control by a fixed,
         // value-independent offset — not the value-dependent inline overflow
         // the horizontal clip above guards against — so there's no equivalent
