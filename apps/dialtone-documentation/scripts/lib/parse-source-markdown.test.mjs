@@ -3,6 +3,13 @@ import assert from 'node:assert/strict';
 import { test } from 'vitest';
 
 import { parseSourceMarkdown } from './parse-source-markdown.mjs';
+import { setComponentDocs } from './transform-vue-api.mjs';
+
+test('unresolved API references report their source page and repair command', () => {
+  setComponentDocs([]);
+  assert.throws(() => parseSourceMarkdown('<component-vue-api component-name="missing_component" />', { filePath: 'docs/components/missing.md' }),
+    /missing_component.*docs\/components\/missing.md.*build-dialtone-vue-docs/);
+});
 
 test('emits multiline reader metadata without navigation metadata', () => {
   const source = `---

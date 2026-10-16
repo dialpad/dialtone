@@ -251,8 +251,13 @@ function umbrellaParts(fromDir: string, policy?: ReadPolicy): Parts {
 }
 
 function individualParts(fromDir: string, policy?: ReadPolicy, declared?: (name: string) => boolean): Parts {
-  const read = (domain: keyof Parts, packageName: string, path: string) =>
-    !declared || declared(packageName) ? tryRead(fromDir, `${packageName}/${path}`, policy, domain) : null;
+  const read = (domain: keyof Parts, packageName: string, path: string) => {
+    if (declared && !declared(packageName)) {
+      if (policy) policy.failures[domain] = 'package-not-declared';
+      return null;
+    }
+    return tryRead(fromDir, `${packageName}/${path}`, policy, domain);
+  };
   return {
     components: read('components', '@dialpad/dialtone-vue', 'component-documentation.json'),
     utilities: read('utilities', '@dialpad/dialtone-css', 'lib/dist/dialtone-docs.json'),
@@ -361,7 +366,8 @@ export function resolveProjectData(projectRoot?: string, lookupRoot?: string): P
     };
   };
   if (!configured) return fallback('project-root-not-configured');
-  if (!projectRoot || !isAbsolute(projectRoot) || (lookupRoot !== undefined && !isAbsolute(lookupRoot)))
+  if (!projectRoot) return fallback('project-root-required');
+  if (!isAbsolute(projectRoot) || (lookupRoot !== undefined && !isAbsolute(lookupRoot)))
     return fallback('project-and-lookup-roots-must-be-absolute');
   let root: string;
   let boundary: string;
@@ -379,6 +385,7 @@ export function resolveProjectData(projectRoot?: string, lookupRoot?: string): P
   }
   const declared = (name: string) => ['dependencies', 'devDependencies', 'peerDependencies'].some(key =>
     object(manifest[key]) && typeof manifest[key][name] === 'string');
+  const requestedBoundary = boundary;
   for (const dir of ancestors(root)) {
     if (existsSync(join(dir, '.git'))) { boundary = dir; break; }
     if (dir === boundary) break;
@@ -399,7 +406,8 @@ export function resolveProjectData(projectRoot?: string, lookupRoot?: string): P
       schemaVersion: datasetSchema(found.data),
       hash: found.hash,
       selection: 'installed', fallbackReason: null,
-    } : { ...bundledProvenance.domains[key], selection: 'bundled', fallbackReason: policy.failures[domain] ?? 'declared-installed-data-unavailable' };
+    } : { ...bundledProvenance.domains[key], selection: 'bundled', fallbackReason: policy.failures[domain] ??
+      (boundary !== requestedBoundary ? 'git-repository-lookup-boundary' : 'declared-installed-data-unavailable') };
   }
   if (!parts.components) data.components = normalizeComponents(data.components, {
     package: bundledProvenance.domains.components.package,

@@ -371,7 +371,7 @@ export function executeQueryTool(name: string, input: unknown, context?: Project
       const component = selected.component;
       const missingExport = !component && selected.match === 'unavailable';
       const continuation =
-        selected.match === 'no-match' || selected.match === 'candidate'
+        selected.match === 'no-match' || selected.match === 'candidate' || (!component && selected.match === 'unverified')
           ? component
             ? {
                 tool: name,
@@ -398,7 +398,7 @@ export function executeQueryTool(name: string, input: unknown, context?: Project
       if (!component && (missingExport || selected.match === 'unverified')) notes.push(missingExport
         ? 'The selected installed entry does not export this component. No bundled API was substituted.'
         : context?.componentExports
-          ? 'The selected installed entry exports this name, but its API metadata is unavailable.'
+          ? 'The selected installed entry exports this name, but no component metadata describes it; it may not be a component.'
           : 'The selected metadata does not describe this name; its installed export availability is unverified.');
       if (context) notes.push(...context.data.warnings);
       if (!component)

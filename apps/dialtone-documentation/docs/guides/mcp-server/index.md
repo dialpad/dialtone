@@ -120,6 +120,8 @@ For a nested application, point at the application rather than the repository ro
 
 For dependencies hoisted into an ancestor workspace, also set `DIALTONE_LOOKUP_ROOT` to that absolute workspace directory. Package and data realpaths must stay inside the authorized boundary; lookup does not cross a separate Git repository. Symlinks into that boundary are supported. Dependencies linked outside it remain unverified. Use separate named server configurations for separate applications.
 
+In pnpm workspaces, and other layouts where package symlinks resolve outside the application folder, also set `DIALTONE_LOOKUP_ROOT` to the workspace root.
+
 A declared `@dialpad/dialtone` takes precedence over standalone packages. Otherwise, only directly declared standalone Vue, CSS and icon packages supply installed data. Missing or malformed domains fall back separately to bundled data with a reason. Documentation, component-page links and client rules remain bundled references. Without configuration, existing bundled lookups continue; invalid configuration never silently falls back to the launch directory.
 
 Search replies remain Markdown, with actual source package versions, hashes and fallback reasons. Structured detail reports per-domain installed or bundled sources. Resource JSON uses the same selected data, with source information in the result's `_meta.dialtone`. A statically verified entry can establish that a component is not exported; absent metadata alone cannot. Fallback component hints are unverified. These checks do not run application imports or verify peers, runtime behavior or the active theme.

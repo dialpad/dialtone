@@ -25,7 +25,7 @@ test('configured legacy data with verified exports does not acquire bundled Text
     const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
     manifest.exports['./vue'] = './dist/vue3/entry.js';
     await writeFile(manifestPath, JSON.stringify(manifest));
-    await writeFile(join(pkg, 'dist/vue3/entry.js'), 'import button from \'./button.js\'; export { button as DtButton, button as DtBreadcrumbItem };\n');
+    await writeFile(join(pkg, 'dist/vue3/entry.js'), 'import button from \'./button.js\'; export { button as DtButton, button as DtBreadcrumbItem, button as DtTooltipDirective, button as ARROW_KEYS };\n');
     const transport = new StdioClientTransport({
       command: process.execPath,
       args: [fileURLToPath(new URL('../build/index.js', import.meta.url))],
@@ -46,6 +46,16 @@ test('configured legacy data with verified exports does not acquire bundled Text
     const missingMetadata = await client.callTool({ name: 'get_component', arguments: { component: 'DtBreadcrumbItem' } });
     assert.equal(missingMetadata.structuredContent.match, 'unverified');
     assert.deepEqual(missingMetadata.structuredContent.items, []);
+    assert.equal(missingMetadata.structuredContent.continuation.tool, 'search_components');
+    for (const [component, match] of [
+      ['DtTooltipDirective', 'no-match'], ['v-dt-tooltip', 'no-match'],
+      ['ARROW_KEYS', 'unverified'], ['DtButon', 'no-match'],
+    ]) {
+      const routed = await client.callTool({ name: 'get_component', arguments: { component } });
+      assert.equal(routed.structuredContent.match, match);
+      assert.equal(routed.structuredContent.continuation.tool, 'search_components');
+      assert.deepEqual(routed.structuredContent.items, []);
+    }
     const button = await client.callTool({ name: 'get_component', arguments: { component: 'DtButton', projection: 'props' } });
     assert.equal(button.structuredContent.items[0].contract.name, 'legacy-prop');
     const resource = await client.readResource({ uri: 'dialtone://components' });

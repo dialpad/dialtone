@@ -3,6 +3,8 @@ import {
   normalizeComponentName,
   componentNames,
 } from './component-identity.js';
+import { components as bundledComponents } from './data.js';
+import { directiveIdentifiers } from './directive-identifiers.js';
 import type { Component, ComponentMember } from './types.js';
 import type { MatchState } from './retrieval.js';
 
@@ -58,9 +60,14 @@ export function getComponentDetail(
   if (!component) {
     let match: MatchState = 'no-match';
     if (candidates.length) match = 'candidate';
-    else if (installedExports === null) match = 'unverified';
-    else if (installedExports) match = installedExports.some(name => normalizeComponentName(name) === key)
-      ? 'unverified' : 'unavailable';
+    else if (!directiveIdentifiers(name).length) {
+      if (installedExports === null) match = 'unverified';
+      else if (installedExports?.some(name => normalizeComponentName(name) === key)) match = 'unverified';
+      // Recognize an absent component name without substituting bundled APIs.
+      else if (installedExports && bundledComponents.some(record =>
+        record.identity?.kind === 'public' && componentNames(record).some(alias => normalizeComponentName(alias) === key),
+      )) match = 'unavailable';
+    }
     return {
       match,
       component: null,

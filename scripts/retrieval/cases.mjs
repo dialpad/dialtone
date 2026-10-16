@@ -260,27 +260,4 @@ export const checksFor = (testCase, adapter) => [
     value: adapter === 'mcp' ? 16000 : 100000,
   },
 ];
-const failure = (issue, owner, assertion, removeWhen) => ({
-  issue,
-  owner,
-  assertion,
-  removeWhen,
-});
-// One owned failure for every adapter that runs the case.
-const everyAdapter = (caseId, entry) =>
-  Object.fromEntries(
-    cases
-      .find((value) => value.id === caseId)
-      .adapters.map((adapter) => [`${caseId}/${adapter}`, entry]),
-  );
-export const expectedFailures = {
-  ...everyAdapter(
-    'tooltip-wrapper-literal',
-    failure(
-      'DLT-3653',
-      'documentation fidelity',
-      'span-literal',
-      'raw inline HTML literal survives generation and retrieval',
-    ),
-  ),
-};
+export const expectedFailures = {};

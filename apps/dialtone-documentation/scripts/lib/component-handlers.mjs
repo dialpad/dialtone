@@ -62,7 +62,7 @@ export const INLINE_HANDLERS = [
       const alsoImport = alsoMatch
         ? alsoMatch[1].split(',').map(s => s.trim().replace(/^'|'$/g, ''))
         : [];
-      return transformVueApi(m[1], { showImport, alsoImport });
+      return transformVueApi(m[1], { showImport, alsoImport, filePath: ctx.filePath });
     },
     closingTags: ['</component-vue-api>'],
   },

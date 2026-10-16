@@ -11,12 +11,16 @@ let parent: string;
 afterEach(async () => { if (parent) await rm(parent, { recursive: true, force: true, maxRetries: 5 }); });
 const records = [{ displayName: 'DtButton', props: [{ name: 'legacy-prop' }] }];
 test.each([
-  [undefined, 'no-match'],
-  [null, 'unverified'],
-  [[], 'unavailable'],
-  [['DtText'], 'unverified'],
-] as const)('missing metadata is qualified by actual export evidence: %j', (names, match) => {
-  expect(getComponentDetail({ component: 'DtText' }, [], names).match).toBe(match);
+  ['DtText', undefined, 'no-match'],
+  ['DtText', null, 'unverified'],
+  ['DtText', [], 'unavailable'],
+  ['DtText', ['DtText'], 'unverified'],
+  ['DtTooltipDirective', ['DtTooltipDirective'], 'no-match'],
+  ['v-dt-tooltip', [], 'no-match'],
+  ['ARROW_KEYS', ['ARROW_KEYS'], 'unverified'],
+  ['DtButon', [], 'no-match'],
+] as const)('missing metadata for %s is qualified by actual export evidence', (component, names, match) => {
+  expect(getComponentDetail({ component }, [], names).match).toBe(match);
 });
 async function fixture(profile = 'dt9-legacy', data: unknown = records) {
   parent = await mkdtemp(join(tmpdir(), 'dialtone-project-data-'));
@@ -40,19 +44,19 @@ test('installed selection hashes actual bytes, verifies exports, and keeps missi
   expect(context.provenance.domains.components).toMatchObject({
     selection: 'installed', version: '9.185.0', hash: createHash('sha256').update(bytes).digest('hex'),
   });
-  expect(context.provenance.domains.tokens).toMatchObject({ selection: 'bundled', fallbackReason: expect.any(String) });
+  expect(context.provenance.domains.tokens).toMatchObject({ selection: 'bundled', fallbackReason: 'missing-or-unreadable-dataset' });
   expect(context.provenance.domains.documentation.selection).toBe('bundled');
 });
 
 test('nested dependency roots are explicit and hoisting needs its own authorized boundary', async () => {
   const app = await fixture('nested-umbrella');
-  expect(resolveProjectData(app.invocationRoot).provenance.fallbackReason).toBeTruthy();
+  expect(resolveProjectData(app.invocationRoot).provenance.fallbackReason).toBe('project-root-or-manifest-unavailable');
   expect(resolveProjectData(app.dependencyRoot).data.sources.components.kind).toBe('local');
   await rename(join(app.dependencyRoot, 'node_modules'), join(app.directory, 'node_modules'));
   expect(resolveProjectData(app.dependencyRoot).data.sources.components.kind).toBe('bundled');
   expect(resolveProjectData(app.dependencyRoot, app.directory).data.sources.components.kind).toBe('local');
   await mkdir(join(app.dependencyRoot, '.git'));
-  expect(resolveProjectData(app.dependencyRoot, app.directory).data.sources.components.kind).toBe('bundled');
+  expect(resolveProjectData(app.dependencyRoot, app.directory).provenance.domains.components.fallbackReason).toBe('git-repository-lookup-boundary');
 });
 
 test('a declared umbrella never borrows stray standalone or undeclared installations', async () => {
@@ -64,7 +68,7 @@ test('a declared umbrella never borrows stray standalone or undeclared installat
   expect(resolveProjectData(app.dependencyRoot).data.components.map(record => record.displayName)).toEqual(['DtButton']);
   await writeFile(join(app.dependencyRoot, 'package.json'), '{}');
   const context = resolveProjectData(app.dependencyRoot);
-  expect(context.data.sources.components.kind).toBe('bundled');
+  expect(context.provenance.domains.components.fallbackReason).toBe('package-not-declared');
   expect(context.data.components.every(record => record.identity?.imports.length === 0)).toBe(true);
 });
 
@@ -96,6 +100,7 @@ test('missing configuration preserves bundled identity while invalid explicit co
   expect(context.configured).toBe(false);
   expect(context.provenance.fallbackReason).toBe('project-root-not-configured');
   expect(context.data.components.some(record => record.identity?.imports.length)).toBe(true);
+  expect(resolveProjectData(undefined, '/absolute/workspace').provenance.fallbackReason).toBe('project-root-required');
   const invalid = resolveProjectData('relative/app');
   expect(invalid.configured).toBe(true);
   expect(invalid.data.components.every(record => record.identity?.kind === 'unknown')).toBe(true);
