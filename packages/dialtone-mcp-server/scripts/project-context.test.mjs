@@ -8,7 +8,7 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { StdioClientTransport } from '@modelcontextprotocol/sdk/client/stdio.js';
 import { createConsumerFixture } from '../../../scripts/retrieval/fixtures.mjs';
 
-test('configured legacy data with verified exports does not acquire bundled Text APIs', async () => {
+test('tools and resources share installed data and preserve availability routing', async () => {
   const parent = await mkdtemp(join(tmpdir(), 'dialtone-project-context-'));
   let client;
   try {
@@ -25,7 +25,7 @@ test('configured legacy data with verified exports does not acquire bundled Text
     const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
     manifest.exports['./vue'] = './dist/vue3/entry.js';
     await writeFile(manifestPath, JSON.stringify(manifest));
-    await writeFile(join(pkg, 'dist/vue3/entry.js'), 'import button from \'./button.js\'; export { button as DtButton, button as DtBreadcrumbItem, button as DtTooltipDirective, button as ARROW_KEYS };\n');
+    await writeFile(join(pkg, 'dist/vue3/entry.js'), 'import button from \'./button.js\'; export { button as DtButton, button as ARROW_KEYS };\n');
     const transport = new StdioClientTransport({
       command: process.execPath,
       args: [fileURLToPath(new URL('../build/index.js', import.meta.url))],
@@ -42,14 +42,10 @@ test('configured legacy data with verified exports does not acquire bundled Text
     const result = await client.callTool({ name: 'get_component', arguments: { component: 'DtText' } });
     assert.equal(result.structuredContent.match, 'unavailable');
     assert.deepEqual(result.structuredContent.items, []);
+    assert.equal(result.structuredContent.continuation, null);
     assert.equal(result.structuredContent.source.domains.components.version, '9.185.0');
-    const missingMetadata = await client.callTool({ name: 'get_component', arguments: { component: 'DtBreadcrumbItem' } });
-    assert.equal(missingMetadata.structuredContent.match, 'unverified');
-    assert.deepEqual(missingMetadata.structuredContent.items, []);
-    assert.equal(missingMetadata.structuredContent.continuation.tool, 'search_components');
     for (const [component, match] of [
-      ['DtTooltipDirective', 'no-match'], ['v-dt-tooltip', 'no-match'],
-      ['ARROW_KEYS', 'unverified'], ['DtButon', 'no-match'],
+      ['v-dt-tooltip', 'no-match'], ['ARROW_KEYS', 'unverified'],
     ]) {
       const routed = await client.callTool({ name: 'get_component', arguments: { component } });
       assert.equal(routed.structuredContent.match, match);

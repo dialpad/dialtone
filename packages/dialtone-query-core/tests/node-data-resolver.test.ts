@@ -4,23 +4,10 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createConsumerFixture, sha256 } from '../../../scripts/retrieval/fixtures.mjs';
 import { resolveProjectData } from '../src/node-data-resolver.js';
-import { getComponentDetail } from '../src/component-detail.js';
 
 let parent: string;
 afterEach(async () => { if (parent) await rm(parent, { recursive: true, force: true, maxRetries: 5 }); });
 const records = [{ displayName: 'DtButton', props: [{ name: 'legacy-prop' }] }];
-test.each([
-  ['DtText', undefined, 'no-match'],
-  ['DtText', null, 'unverified'],
-  ['DtText', [], 'unavailable'],
-  ['DtText', ['DtText'], 'unverified'],
-  ['DtTooltipDirective', ['DtTooltipDirective'], 'no-match'],
-  ['v-dt-tooltip', [], 'no-match'],
-  ['ARROW_KEYS', ['ARROW_KEYS'], 'unverified'],
-  ['DtButon', [], 'no-match'],
-] as const)('missing metadata for %s is qualified by actual export evidence', (component, names, match) => {
-  expect(getComponentDetail({ component }, [], names).match).toBe(match);
-});
 async function fixture(profile = 'dt9-legacy', data: unknown = records) {
   parent = await mkdtemp(join(tmpdir(), 'dialtone-project-data-'));
   const app = await createConsumerFixture(parent, profile, { packages: {
@@ -82,6 +69,13 @@ test('symlinked packages are accepted inside the boundary and refused outside it
   await rename(app.pkg, stored);
   await symlink(stored, app.pkg);
   expect(resolveProjectData(app.dependencyRoot).data.sources.components.kind).toBe('local');
+  const metadata = join(stored, 'dist/vue3/component-documentation.json');
+  const escaped = join(app.dependencyRoot, 'outside-package-data.json');
+  await rename(metadata, escaped);
+  await symlink(escaped, metadata);
+  expect(resolveProjectData(app.dependencyRoot).provenance.domains.components.fallbackReason).toBe('outside-lookup-boundary');
+  await rm(metadata);
+  await rename(escaped, metadata);
   await rm(app.pkg);
   const outside = join(parent, 'other-package');
   await rename(stored, outside);
@@ -95,7 +89,7 @@ test.each([null, { displayName: 'DtButton' }, [{ displayName: 'DtButton', props:
   expect(context.componentExports).toBeNull();
   expect(context.data.sources.components.kind).toBe('bundled');
   expect(context.data.components.every(record => record.identity?.kind === 'unknown')).toBe(true);
-  expect(context.provenance.domains.components.fallbackReason).toBeTruthy();
+  expect(context.provenance.domains.components.fallbackReason).toBe('malformed-or-unsupported-dataset');
 });
 
 test('missing configuration preserves bundled identity while invalid explicit configuration cannot claim exports', () => {

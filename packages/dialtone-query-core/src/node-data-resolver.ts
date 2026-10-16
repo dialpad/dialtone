@@ -127,11 +127,11 @@ function tryRead(fromDir: string, specifier: string, domain: Domain, policy?: Re
     const file = realpathSync(createRequire(manifest).resolve(specifier));
     // Without an exports map, resolve() falls back to Node's full lookup,
     // NODE_PATH included, so only accept the package's own files.
-    if (!file.startsWith(root + sep)) return null;
+    if (!file.startsWith(root + sep)) return fail('outside-lookup-boundary');
     if (policy && !authorizedPath(policy.boundary, file)) return fail('outside-lookup-boundary');
     const bytes = readFileSync(file);
     const data = JSON.parse(bytes.toString('utf-8'));
-    if (data === null) return null;
+    if (data === null) return fail('malformed-or-unsupported-dataset');
     const { name, version, exports, module, dependencies } = JSON.parse(readFileSync(manifest, 'utf-8'));
     if (policy && (name !== packageName || typeof version !== 'string' || !version || !validData(domain, data)))
       return fail('malformed-or-unsupported-dataset');
@@ -212,7 +212,7 @@ function installedComponentNames(found: Found, importFrom: string): string[] | n
 }
 
 // Each domain comes from the first candidate that found it, else from bundled data.
-function assemble(...candidates: Parts[]): ResolvedData {
+function assemble(candidates: Parts[] = [], names?: string[] | null): ResolvedData {
   const pick = (domain: keyof Parts) => candidates.map(c => c[domain]).find(Boolean);
   const [components, utilities, tokens, icons] = [pick('components'), pick('utilities'), pick('tokens'), pick('icons')];
   const importFrom = componentImportPath(components);
@@ -221,7 +221,7 @@ function assemble(...candidates: Parts[]): ResolvedData {
       package: components.source.package,
       version: components.source.version ?? 'unknown',
       from: importFrom,
-      names: installedComponentNames(components, importFrom),
+      names: names === undefined ? installedComponentNames(components, importFrom) : names,
     }) : bundledComponents,
     utilityClasses: (utilities?.data as UtilityClassesData) ?? bundledUtilityClasses,
     tokens: (tokens?.data as TokensData) ?? bundledTokens,
@@ -294,12 +294,12 @@ export function resolveData(forceBundled = false, cwd = process.cwd()): Resolved
     const individual = individualParts(projectDir);
     // The umbrella's files are large (~13MB), so skip them when individual
     // packages cover every domain. Any gap reads all of them.
-    return Object.values(individual).every(Boolean) ? assemble(individual) : assemble(individual, umbrellaParts(projectDir));
+    return Object.values(individual).every(Boolean) ? assemble([individual]) : assemble([individual, umbrellaParts(projectDir)]);
   }
   const umbrella = umbrellaParts(projectDir);
   const anchor = anchorOf(umbrella);
   if (anchor) {
-    return { ...assemble(umbrella), warnings: mismatchWarnings(spec, anchor.source.version) };
+    return { ...assemble([umbrella]), warnings: mismatchWarnings(spec, anchor.source.version) };
   }
   return { ...assemble(), warnings: [installWarning(spec, 'no installed copy with lookup data was found')] };
 }
@@ -397,7 +397,8 @@ export function resolveProjectData(projectRoot?: string, lookupRoot?: string): P
   const policy: ReadPolicy = { boundary, failures: {} };
   const parts = spec !== null ? umbrellaParts(root, policy)
     : individualParts(root, policy, name => declaredSpec(manifest, name) !== null);
-  const data = assemble(parts);
+  const componentExports = parts.components ? installedComponentNames(parts.components, componentImportPath(parts.components)) : null;
+  const data = assemble([parts], componentExports);
   const domainKeys = { components: 'components', utilities: 'utilityClasses', tokens: 'tokens', icons: 'icons' } as const;
   const domains = bundledDomains('documentation-is-bundled');
   for (const [domain, key] of Object.entries(domainKeys) as Array<[keyof Parts, string]>) {
@@ -413,7 +414,7 @@ export function resolveProjectData(projectRoot?: string, lookupRoot?: string): P
   const anchor = anchorOf(parts);
   if (spec && anchor) data.warnings = mismatchWarnings(spec, anchor.source.version);
   return {
-    data, configured, componentExports: parts.components ? installedComponentNames(parts.components, data.componentImportPath) : null,
+    data, configured, componentExports,
     provenance: { ...bundledProvenance, domains },
   };
 }
