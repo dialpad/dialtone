@@ -451,6 +451,11 @@
         display: block;
     }
 
+    // left (not inset-inline-start): --slider-tooltip-arrow-x is computed in
+    // UseSliderTooltipReadout from physical viewport coordinates (Floating
+    // UI's own result.x, the anchor's physical rect.left) — a logical
+    // property here would have the browser re-mirror an already-physical
+    // value under dir="rtl", landing the arrow on the wrong side of center.
     &[data-side="top"]::after {
         transform: translateX(-50%);
         inset-block-start: 100%;
@@ -465,6 +470,11 @@
         border-block-end-color: var(--tooltip-color-background);
     }
 
+    // left/right (not inset-inline-start/end): data-side is always a physical
+    // Floating UI placement ('left'/'right', never '-start'/'-end'), so an
+    // inline-logical property here mirrors under dir="rtl" even though the
+    // side itself didn't — landing the arrow on the box's far edge, pointing
+    // away from the thumb instead of toward it.
     &[data-side="left"]::after {
         transform: translateY(-50%);
         inset-block-start: var(--slider-tooltip-arrow-y);
