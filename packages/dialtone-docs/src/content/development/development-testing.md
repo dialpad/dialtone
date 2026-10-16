@@ -64,14 +64,14 @@ simulatePaste(content, type, dispatchElement)
 Test files live next to the component they test:
 
 ```
-components/button/
-├── button.vue
-├── button.test.js      ← same directory
-├── button_constants.js
+components/Button/
+├── Button.vue
+├── Button.test.js      ← same directory
+├── ButtonConstants.js
 └── index.js
 ```
 
-Test file naming: `{component-name}.test.js`, matching the component file's own casing — snake_case for legacy Options API components (`button.test.js`), PascalCase for newer Composition API components (`Slider.test.js`, `Resizable.test.js`, `TextList.test.js`).
+Test file naming: `{ComponentName}.test.js`, matching the component file's own PascalCase, for both legacy Options API components (`Button.test.js`) and newer Composition API components (`Slider.test.js`, `Resizable.test.js`, `TextList.test.js`).
 
 ## Standard Test Pattern
 
@@ -79,7 +79,7 @@ Every component test follows this structure:
 
 ```javascript
 import { mount } from '@vue/test-utils';
-import DtButton from './button.vue';
+import DtButton from './Button.vue';
 
 // Constants — uppercase MOCK_ prefix for fixed stubs
 const MOCK_CLICK_STUB = vi.fn();
@@ -303,7 +303,7 @@ pnpm test:watch
 
 # Run a single test file
 cd packages/dialtone-vue
-pnpm exec vitest run components/button/button.test.js
+pnpm exec vitest run components/Button/Button.test.js
 
 # Run with coverage report
 pnpm exec vitest run --coverage
