@@ -62,3 +62,26 @@ export function edgeClampOffset(leftEdge, rightEdge, controlRect, tolerance) {
 export function mirrorPct(pct, isRtl) {
   return isRtl ? 100 - pct : pct;
 }
+
+// A CSS custom property isn't resolved to a used pixel value by
+// getComputedStyle on its own — per spec it's an unparsed token stream
+// until something concrete (a real layout property) consumes it. Giving a
+// disposable child element inline-size: var(--slider-edge-inset) and
+// reading its rendered width is the standard way to resolve one without
+// hand-reimplementing the calc() it's built from (UseSliderGeometry,
+// slider.less) — which would silently drift out of sync with it over time.
+// Shared by UseSliderInteraction (pointer-to-value mapping) and
+// UseSliderCollisionAvoidance (analytical readout/mark rects) — both need
+// the same inset in px to match where the thumb/readout actually render.
+export function measureEdgeInsetPx(controlEl) {
+  const probe = document.createElement('div');
+  probe.style.position = 'absolute';
+  probe.style.visibility = 'hidden';
+  probe.style.pointerEvents = 'none';
+  probe.style.inlineSize = 'var(--slider-edge-inset)';
+  probe.style.blockSize = '0px';
+  controlEl.appendChild(probe);
+  const px = probe.getBoundingClientRect().width;
+  probe.remove();
+  return px;
+}

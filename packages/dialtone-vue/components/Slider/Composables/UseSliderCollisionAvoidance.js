@@ -1,6 +1,6 @@
 import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from 'vue';
 import { SLIDER_EDGE_CLAMP_TOLERANCE_PX } from '../SliderConstants';
-import { edgeClampOffset, mirrorPct, sameValues } from '../utils';
+import { edgeClampOffset, measureEdgeInsetPx, mirrorPct, sameValues } from '../utils';
 
 // Two kinds of collision: low/high readouts overlapping each other as thumbs
 // converge (merged into one centered "lo–hi" pill), and a readout overlapping
@@ -58,18 +58,30 @@ export function useSliderCollisionAvoidance(props, {
   // programmatic change doesn't set data-dragging to disable it. Sidesteps
   // this by computing position analytically from the same reactive pct the
   // template uses, only pulling size (never transitioned) from the DOM.
+  //
+  // Rescaled onto the same inset band the actual render uses (UseSliderGeometry's
+  // anchorPct, via markStyle) — not a flush linear pct-to-px mapping across the
+  // control's full true edges. The two used to agree (both flush) before
+  // markStyle switched marks/readout='always' to anchorPct; left flush here,
+  // this would now systematically disagree with where the readout actually
+  // renders, worst-case by a full --slider-edge-inset right at the ends —
+  // exactly where collision/merge detection matters most.
   function analyticalReadoutRect(pct, el) {
     if (!el || !controlRef.value) return null;
     const elRect = el.getBoundingClientRect();
     const controlRect = controlRef.value.getBoundingClientRect();
+    const insetPx = measureEdgeInsetPx(controlRef.value);
     if (isVertical.value) {
       const height = elRect.bottom - elRect.top;
-      const centerPx = controlRect.bottom - (pct / 100) * (controlRect.bottom - controlRect.top);
+      const totalPx = controlRect.bottom - controlRect.top;
+      const anchorPx = insetPx + (totalPx - 2 * insetPx) * (pct / 100);
+      const centerPx = controlRect.bottom - anchorPx;
       return { left: elRect.left, right: elRect.right, top: centerPx - height / 2, bottom: centerPx + height / 2 };
     }
     const width = elRect.right - elRect.left;
-    const centerPx = controlRect.left
-      + (mirrorPct(pct, isRtl.value) / 100) * (controlRect.right - controlRect.left);
+    const totalPx = controlRect.right - controlRect.left;
+    const anchorPx = insetPx + (totalPx - 2 * insetPx) * (mirrorPct(pct, isRtl.value) / 100);
+    const centerPx = controlRect.left + anchorPx;
     return { left: centerPx - width / 2, right: centerPx + width / 2, top: elRect.top, bottom: elRect.bottom };
   }
 

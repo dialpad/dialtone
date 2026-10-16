@@ -1,4 +1,5 @@
 import { ref, watch, nextTick } from 'vue';
+import { measureEdgeInsetPx } from '../utils';
 
 // Pointer drag, native keyboard events, focus/hover tracking, and the
 // interactive value-update path (updateThumbValue/commitIfChanged) — as
@@ -184,26 +185,6 @@ export function useSliderInteraction(props, emit, {
   // drag, and remeasuring via a DOM probe on every move event would mean
   // inserting/removing a node per frame.
   let cachedEdgeInsetPx = 0;
-
-  // A CSS custom property isn't resolved to a used pixel value by
-  // getComputedStyle on its own — per spec it's an unparsed token stream
-  // until something concrete (a real layout property) consumes it. Giving a
-  // disposable child element inline-size: var(--slider-edge-inset) and
-  // reading its rendered width is the standard way to resolve one without
-  // hand-reimplementing the calc() it's built from (UseSliderGeometry,
-  // slider.less) — which would silently drift out of sync with it over time.
-  function measureEdgeInsetPx(controlEl) {
-    const probe = document.createElement('div');
-    probe.style.position = 'absolute';
-    probe.style.visibility = 'hidden';
-    probe.style.pointerEvents = 'none';
-    probe.style.inlineSize = 'var(--slider-edge-inset)';
-    probe.style.blockSize = '0px';
-    controlEl.appendChild(probe);
-    const px = probe.getBoundingClientRect().width;
-    probe.remove();
-    return px;
-  }
 
   function getValueFromPointerEvent(event) {
     const rect = controlRef.value.getBoundingClientRect();
