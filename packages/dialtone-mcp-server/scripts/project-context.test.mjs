@@ -30,7 +30,11 @@ test('configured legacy data with verified exports does not acquire bundled Text
       command: process.execPath,
       args: [fileURLToPath(new URL('../build/index.js', import.meta.url))],
       cwd: fixture.dependencyRoot,
-      env: { ...process.env, DIALTONE_PROJECT_ROOT: fixture.dependencyRoot, DIALTONE_LOOKUP_ROOT: fixture.dependencyRoot },
+      env: {
+        ...process.env,
+        DIALTONE_PROJECT_ROOT: fixture.dependencyRoot,
+        DIALTONE_LOOKUP_ROOT: fixture.dependencyRoot,
+      },
       stderr: 'pipe',
     });
     client = new Client({ name: 'dialtone-installed-project-test', version: '1.0.0' });

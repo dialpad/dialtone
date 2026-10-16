@@ -132,7 +132,7 @@ async function main() {
 
   server.resource("documentation", "dialtone://documentation", {
     name: "Dialtone Documentation",
-    description: "Public docs site corpus — sections of usage prose, recipes, accessibility, migrations, and design principles",
+    description: "Bundled public docs site corpus — sections of usage prose, recipes, accessibility, migrations, and design principles",
     mimeType: "application/json",
   }, async () => {
     return {
@@ -147,7 +147,7 @@ async function main() {
 
   server.resource("client-rules", "dialtone://client-rules", {
     name: "Dialtone Client Rules",
-    description: "Guidelines and rules for AI clients when working with Dialtone",
+    description: "Bundled guidelines and rules for AI clients when working with Dialtone",
     mimeType: "application/json",
   }, async () => {
     return {

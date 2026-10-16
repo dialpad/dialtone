@@ -1,6 +1,6 @@
 ---
 title: Dialtone CLI
-description: Search the Dialtone version installed in your project from the command line.
+description: Search Dialtone APIs and documentation from the command line.
 status: ready
 keywords:
   [
@@ -14,7 +14,7 @@ keywords:
   ]
 ---
 
-The Dialtone CLI searches components, design tokens, CSS utility classes, icons, and documentation from your terminal. Run it from your project to get results that match the version of Dialtone you have installed.
+The Dialtone CLI searches components, design tokens, CSS utility classes, icons, and documentation from your terminal. Run it from your project to use available installed package data. Missing data falls back to the CLI's bundled data; documentation always uses bundled content. Check the source line to see which data each lookup uses.
 
 Use the CLI for direct lookups, shell scripts, and compact context for coding agents. Use the [Dialtone MCP Server](/guides/mcp-server/) when you want an AI assistant to search Dialtone through Model Context Protocol (MCP) tools.
 
@@ -70,7 +70,7 @@ dialtone component button --format json
 | Command                     | Use it to                                                             |
 | --------------------------- | --------------------------------------------------------------------- |
 | `dialtone search <query>`   | Search components, documentation, tokens, utility classes, and icons. |
-| `dialtone component <name>` | Read a component's API, including props, events, slots, and examples. |
+| `dialtone component <name>` | Read props, events, slots, and qualified import hints.                |
 | `dialtone token [query]`    | Find design tokens by query or `--name` and inspect theme values.     |
 | `dialtone utility <query>`  | Find CSS utility classes by property or value.                        |
 | `dialtone docs <query>`     | Search usage guidance, recipes, accessibility guidance, and patterns. |
@@ -131,6 +131,8 @@ dialtone component button --examples
 
 `--prop` returns the prop type, description, and accepted values. If the prop does not exist, the CLI lists the available prop names.
 
+`--examples` currently returns an import hint when a public export route is verified, followed by a minimal component tag. It does not supply a complete working example with required props, slots, state, or application setup. With `--format json`, it returns component metadata rather than example code.
+
 ### Find a design token
 
 Use `token` to search by a token name, category, semantic purpose, or value:
@@ -189,6 +191,8 @@ dialtone docs "v-dt-tooltip"
 
 Documentation is bundled with the CLI rather than resolved from your project's installed Dialtone packages. Update the CLI to refresh this content.
 
+Readable results from `dialtone docs` contain excerpts. `dialtone docs "v-dt-tooltip" --format json` returns the complete available documentation records, which can include directive code snippets. A complete record can still omit component examples or page-level scripts; neither format establishes that a snippet runs in your application.
+
 ### Generate context for a coding agent
 
 Use `prompt` to produce a compact component summary with its props, slots, and events. It includes an import hint only when the CLI can verify a public export route for the component:
@@ -236,6 +240,8 @@ The source line lists any data that came from somewhere other than the main pack
 Import hints in `component` and `prompt` output appear only for verified public exports. Installed `@dialpad/dialtone` data uses its verified `@dialpad/dialtone/vue` route, or `@dialpad/dialtone/vue3` for versions before 9.173 that expose that route. Installed `@dialpad/dialtone-vue` data and bundled component data use verified routes from `@dialpad/dialtone-vue`.
 
 Bundled import hints are verified against the bundled Vue source version. They do not establish that `@dialpad/dialtone-vue` is installed at that version or that the import is compatible with your project's dependencies.
+
+Export verification checks the stated package entry. It does not establish that peer dependencies, application setup, or runtime behavior are correct. Validate code against your installed packages before using it.
 
 Use `--bundled` when you want to ignore installed packages and query the CLI's bundled data:
 

@@ -6,6 +6,8 @@ Filters deprecated items from general discovery, retains exact legacy-name match
 
 See [the retrieval contract](./RETRIEVAL.md) for readable searches, structured component/API and prose detail, compatible search inputs, provenance and continuation. Searches return Markdown text; only the two selected detail tools advertise structured output.
 
+Set `DIALTONE_PROJECT_ROOT` to an absolute application dependency directory to select installed lookup data. Without configuration, lookups stay bundled. See [installed project selection](./RETRIEVAL.md#installed-project-selection) for lookup boundaries, hoisting and restart behavior.
+
 ## Installation
 
 There are three ways to install the Dialtone MCP Server. **Project-scoped installation takes priority** over user-scoped when both exist.
