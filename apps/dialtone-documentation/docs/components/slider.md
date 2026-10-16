@@ -121,16 +121,16 @@ Pair a range slider with number inputs for precise entry. Bind the slider to an 
 </dt-slider>
 ```
 
-Emoji or icon-only content works the same way — give it an `aria-label` so the meaning still reaches screen readers:
+Icon-only content works the same way — give it an `aria-label` so the meaning still reaches screen readers:
 
 ```vue demo
 <!-- @wrapper -->
 <dt-slider :model-value="50" label="Mood">
   <template #start>
-    <span role="img" aria-label="sad">😞</span>
+    <dt-icon-very-dissatisfied size="200" aria-label="Very dissatisfied" />
   </template>
   <template #end>
-    <span role="img" aria-label="happy">😄</span>
+    <dt-icon-very-satisfied size="200" aria-label="Very satisfied" />
   </template>
 </dt-slider>
 ```
@@ -288,6 +288,8 @@ Set `readout` to show each thumb's current value. Useful when the track context 
 
 In range mode with `always`, the two thumbs' readouts merge into a single centered `low–high` pill once they'd otherwise overlap as the thumbs converge.
 
+Use `readout-class` to style the individual and merged readouts in `always` mode. It has no effect in `tooltip` or `never` mode.
+
 ```vue demo
 <!-- @wrapper -->
 <dt-stack gap="300" class="d-w100p">
@@ -415,10 +417,12 @@ Use `:show-label="false"` when you have a visually obvious context but still nee
 
 The `label` slot replaces the plain text label entirely — scoped with `value` (the live value, or `[low, high]` in range mode) so the label itself can echo the current value or any derived text:
 
+Use `dt-text` with `variant="label-md"` and `tone="secondary"` to match the default label's typography and color.
+
 ```vue demo
 <dt-slider :model-value="0" :min="-100" :max="100" :fill-origin="0">
   <template #label="{ value }">
-    Balance &middot; {{ value }}
+    <dt-text variant="label-md" tone="secondary">Balance: {{ value }}</dt-text>
   </template>
 </dt-slider>
 ```
@@ -432,13 +436,13 @@ The `label` slot replaces the plain text label entirely — scoped with `value` 
   :show-ticks="25"
 >
   <template #label="{ value }">
-    Playback speed &middot; {{ (value / 100).toFixed(2) }}×
+    <dt-text variant="label-md" tone="secondary">Playback speed: {{ (value / 100).toFixed(2) }}×</dt-text>
   </template>
   <template #start>
-    🐢
+    <span role="img" aria-label="slowest">🐢</span>
   </template>
   <template #end>
-    🐇
+    <span role="img" aria-label="fastest">🐇</span>
   </template>
 </dt-slider>
 ```
@@ -488,10 +492,13 @@ The `label` slot replaces the plain text label entirely — scoped with `value` 
 
 ## Vue API
 
+Use `body-class` to style the existing wrapper around the start slot, control, and end slot, such as adjusting the gap between slot content and the control.
+
 <component-vue-api component-name="slider" />
 
 <script setup>
 import { ref } from 'vue';
+import { DtIconVeryDissatisfied, DtIconVerySatisfied } from '@dialpad/dialtone-icons/vue';
 
 const externalReadoutValue = ref(50);
 const meetingHours = ref([9, 17]);

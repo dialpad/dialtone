@@ -325,6 +325,23 @@ describe('DtSlider Tests', () => {
         expect(els[1].text()).toBe('70');
       });
 
+      it('applies readoutClass only to always-visible readouts when switching modes', async () => {
+        mockProps = { modelValue: [20, 70], bodyClass: 'custom-body', readoutClass: 'custom-readout' };
+        updateWrapper();
+        expect(wrapper.find('[data-qa="dt-slider-body"]').classes()).toContain('custom-body');
+        expect(wrapper.findAll('[data-qa="dt-slider-thumb-readout-tooltip"]')).toHaveLength(2);
+        expect(wrapper.findAll('.custom-readout')).toHaveLength(0);
+
+        await wrapper.setProps({ readout: 'always' });
+        const els = readouts();
+        expect(els).toHaveLength(2);
+        els.forEach(el => expect(el.classes()).toContain('custom-readout'));
+
+        await wrapper.setProps({ readout: 'never' });
+        expect(readouts()).toHaveLength(0);
+        expect(wrapper.findAll('.custom-readout')).toHaveLength(0);
+      });
+
       it('applies suffix to the readout content', async () => {
         mockProps = { readout: 'always', suffix: '%' };
         updateWrapper();
@@ -1134,6 +1151,24 @@ describe('DtSlider Tests', () => {
       expect(infoSpy).not.toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
     });
 
+    it('warns when a hidden label slot no longer supplies an accessible name', async () => {
+      mockProps = { label: undefined };
+      mockSlots = { label: '<span>Volume</span>' };
+      updateWrapper();
+      expect(infoSpy).not.toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
+
+      await wrapper.setProps({ showLabel: false });
+      expect(infoSpy).toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
+      const input = wrapper.find('[data-qa="dt-slider-thumb"]');
+      expect(input.attributes('aria-label')).toBeUndefined();
+      expect(input.attributes('aria-labelledby')).toBeUndefined();
+
+      infoSpy.mockClear();
+      await wrapper.setProps({ label: 'Volume' });
+      expect(input.attributes('aria-label')).toBe('Volume');
+      expect(infoSpy).not.toHaveBeenCalledWith(expect.stringContaining('provide a label prop'));
+    });
+
     it('does not warn when the label slot wraps its text in a child component, not a bare text node', () => {
       // slotHasText recurses into a plain string/array vnode.children, but a
       // child COMPONENT vnode (e.g. <dt-text>{{ label }}</dt-text>, exactly
@@ -1303,6 +1338,23 @@ describe('DtSlider Tests', () => {
   });
 
   describe('Interactivity Tests', () => {
+    it.each([
+      ['min', NaN],
+      ['max', Infinity],
+      ['step', NaN],
+    ])('warns for a non-finite %s', (prop, value) => {
+      const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+      try {
+        mockProps = { [prop]: value };
+        updateWrapper();
+        expect(warnSpy.mock.calls.flat().join(' ')).toContain(
+          `Invalid prop: custom validator check failed for prop "${prop}"`,
+        );
+      } finally {
+        warnSpy.mockRestore();
+      }
+    });
+
     it('emits update:modelValue when thumb input event fires', async () => {
       const input = thumbInputs[0].element;
       input.value = '75';
@@ -1932,6 +1984,30 @@ describe('DtSlider Tests', () => {
         await dragTo(41); // distance 1 from the 42 snap point
         const emitted = wrapper.emitted('update:modelValue');
         expect(emitted[emitted.length - 1][0]).toBe(42);
+      });
+
+      it('ignores malformed snap points while preserving valid numeric targets', async () => {
+        const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+        try {
+          mockProps = { snapPoints: ['25', NaN, Infinity, 75] };
+          updateWrapper();
+          control = wrapper.find('[data-qa="dt-slider-control"]');
+          control.element.setPointerCapture = () => {};
+          control.element.getBoundingClientRect = () => controlRect;
+
+          await dragTo(26);
+          let emitted = wrapper.emitted('update:modelValue');
+          expect(emitted[emitted.length - 1][0]).toBe(26);
+
+          await moveTo(74);
+          emitted = wrapper.emitted('update:modelValue');
+          expect(emitted[emitted.length - 1][0]).toBe(75);
+          expect(warnSpy.mock.calls.flat().join(' ')).toContain(
+            'Invalid prop: custom validator check failed for prop "snapPoints"',
+          );
+        } finally {
+          warnSpy.mockRestore();
+        }
       });
 
       it('uses normal step quantization, unaffected, for values far from any snap point', async () => {
@@ -3020,6 +3096,27 @@ describe('DtSlider Tests', () => {
     });
 
     describe('Marks default', () => {
+      it('ignores malformed marks without losing valid annotations', () => {
+        const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+        try {
+          mockProps = { showMarks: [null, {}, NaN, { value: '50' }, 25, { value: 75, text: 'High' }] };
+          expect(() => updateWrapper()).not.toThrow();
+          const marks = wrapper.findAll('[data-qa="dt-slider-mark"]');
+          expect(marks.map(mark => mark.text())).toEqual(['25', 'High']);
+          // Anchored to the thumb's own inset band (anchorPct), not a flush
+          // 25%/75% — see "anchors onto the thumb's own inset band" above.
+          expect(marks[0].element.style.insetInlineStart)
+            .toBe('calc(var(--slider-edge-inset) + (100% - var(--slider-edge-inset) * 2) * 0.25)');
+          expect(marks[1].element.style.insetInlineStart)
+            .toBe('calc(var(--slider-edge-inset) + (100% - var(--slider-edge-inset) * 2) * 0.75)');
+          expect(warnSpy.mock.calls.flat().join(' ')).toContain(
+            'Invalid prop: custom validator check failed for prop "showMarks"',
+          );
+        } finally {
+          warnSpy.mockRestore();
+        }
+      });
+
       it('renders no marks by default', async () => {
         await nextTick();
         expect(wrapper.findAll('[data-qa="dt-slider-mark"]')).toHaveLength(0);
@@ -3780,7 +3877,9 @@ describe('DtSlider Tests', () => {
       const readoutSize = { top: 0, left: 0, right: 20, bottom: 20 }; // 20px wide
 
       it('merges both readouts into a single centered pill once they overlap', async () => {
-        mockProps = { readout: 'always', modelValue: [40, 60], min: 0, max: 100 };
+        mockProps = {
+          readout: 'always', modelValue: [40, 60], min: 0, max: 100, readoutClass: 'custom-readout',
+        };
         updateWrapper();
         await nextTick();
 
@@ -3803,6 +3902,15 @@ describe('DtSlider Tests', () => {
         const merged = wrapper.find('[data-qa="dt-slider-thumb-readout-merged"]');
         expect(merged.exists()).toBe(true);
         expect(merged.text()).toBe('55–60');
+        expect(merged.classes()).toContain('custom-readout');
+
+        readouts.forEach(readout => {
+          readout.element.getBoundingClientRect = () => ({ ...readoutSize, right: 4 });
+        });
+        await wrapper.setProps({ readoutClass: 'compact-readout' });
+        await settleCollisions();
+        expect(wrapper.find('[data-qa="dt-slider-thumb-readout-merged"]').exists()).toBe(false);
+        readouts.forEach(readout => expect(readout.classes()).toContain('d-slider__readout--show'));
       });
 
       it('keeps both readouts separate when they do not overlap', async () => {

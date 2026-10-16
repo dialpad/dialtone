@@ -7,7 +7,7 @@ import { watch } from 'vue';
 // change after mount. Guarded by NODE_ENV per this repo's dev-warning
 // convention (DtButton, DtTextList, DtProse) — consumers' production builds
 // shouldn't log library console calls.
-export function useSliderDevWarnings(props, { isRange, hasLabelContent, attrs }) {
+export function useSliderDevWarnings(props, { isRange, hasAccessibleName }) {
   if (process.env.NODE_ENV === 'production') return;
 
   watch(
@@ -22,13 +22,10 @@ export function useSliderDevWarnings(props, { isRange, hasLabelContent, attrs })
     { immediate: true },
   );
 
-  // showLabel only hides label content, it doesn't create an accessible name —
-  // treating it as its own name source let showLabel={false} ship silently
-  // unnamed. aria-labelledby is also a valid name source and shouldn't warn.
   watch(
-    () => !!(hasLabelContent.value || attrs['aria-label'] || attrs['aria-labelledby']),
-    (hasAccessibleName) => {
-      if (!hasAccessibleName) {
+    () => hasAccessibleName.value,
+    (hasName) => {
+      if (!hasName) {
         console.info(
           '[Dialtone] DtSlider: provide a label prop (set showLabel to false to hide it visually) or aria-label for accessibility.',
         );
