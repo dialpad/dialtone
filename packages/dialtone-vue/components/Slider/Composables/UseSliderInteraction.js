@@ -25,6 +25,13 @@ export function useSliderInteraction(props, emit, {
   const lastActiveThumbIndex = ref(null);
   const focusedThumbIndex = ref(null);
   const hoveredThumbIndex = ref(null);
+  // Escape's job is "suppress until the next real show-trigger", not "turn
+  // off forever" — DtTooltip's own onLeaveAnchor does the same thing
+  // (internalShow = false, reopens on the next mouseenter/focusin). Reusing
+  // focused/hoveredThumbIndex for this would force Escape to blur the thumb
+  // to take effect, losing further keyboard nav — so it's tracked separately
+  // and cleared by whichever handler fires on the next genuine trigger.
+  const escapeDismissedIndex = ref(null);
   // Not reactive on purpose: set synchronously right before a pointer-driven
   // focus() call and read/cleared synchronously in the 'focus' handler it
   // triggers, within the same task. See onPointerDown.
@@ -279,6 +286,7 @@ export function useSliderInteraction(props, emit, {
     const [lo, hi] = internalValues.value;
     dragStartedCoincident = isRange.value && internalValues.value.length === 2 && lo === hi;
 
+    if (escapeDismissedIndex.value === idx) escapeDismissedIndex.value = null;
     activeThumbIndex.value = idx;
     lastActiveThumbIndex.value = idx;
     isDragging.value = true;
@@ -345,6 +353,7 @@ export function useSliderInteraction(props, emit, {
       // there stale, read as "actively held" by UseSliderValue's watchers
       // long after the handoff moved on.
       delete activeSnapValue.value[activeThumbIndex.value];
+      if (escapeDismissedIndex.value === idx) escapeDismissedIndex.value = null;
       activeThumbIndex.value = idx;
       lastActiveThumbIndex.value = idx;
     }
@@ -434,6 +443,11 @@ export function useSliderInteraction(props, emit, {
       event.preventDefault();
       updateThumbValue(i, internalValues.value[i] + delta * largeStepValue());
     }
+    // Matches DtTooltip's own Escape handling: dismiss without moving focus,
+    // so arrow-key nav on this thumb still works afterward.
+    if (event.key === 'Escape') {
+      escapeDismissedIndex.value = i;
+    }
     // Plain arrow keys, Home, End handled natively by <input type="range">
     // (also RTL-aware natively, so no extra handling needed here).
   }
@@ -446,6 +460,7 @@ export function useSliderInteraction(props, emit, {
     if (isPointerFocus) {
       isPointerFocus = false;
     } else {
+      if (escapeDismissedIndex.value === i) escapeDismissedIndex.value = null;
       focusedThumbIndex.value = i;
     }
     emit('focus', event);
@@ -458,6 +473,7 @@ export function useSliderInteraction(props, emit, {
   }
 
   function onThumbHitPointerEnter(i) {
+    if (escapeDismissedIndex.value === i) escapeDismissedIndex.value = null;
     hoveredThumbIndex.value = i;
   }
 
@@ -467,6 +483,7 @@ export function useSliderInteraction(props, emit, {
 
   function isReadoutOpen(i) {
     if (props.readout === 'always') return true;
+    if (escapeDismissedIndex.value === i) return false;
     return activeThumbIndex.value === i || focusedThumbIndex.value === i || hoveredThumbIndex.value === i;
   }
 

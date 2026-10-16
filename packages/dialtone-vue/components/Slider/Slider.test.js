@@ -346,18 +346,18 @@ describe('DtSlider Tests', () => {
         expect(readouts()[0].text()).toBe('50 units');
       });
 
-      it('does not edge-clamp near min/max, unlike the tooltip readout — pins documented current behavior', async () => {
-        // markStyle is called here without an index (see Slider.vue's
-        // template), so markEdgeOffsetPx never applies — a known limitation
-        // noted on the readout prop's own JSDoc, same as showMarks's.
-        // Centering itself comes from .d-slider__readout's own CSS
-        // transform, not an inline style, so the absence of an inline
-        // transform here IS the "no nudge applied" signal.
+      it('anchors onto the thumb\'s own inset band at the edges, not a flush track percentage', async () => {
+        // Anchored (UseSliderGeometry's anchorPct), same band the thumb
+        // itself renders on — otherwise this pill would sit up to a full
+        // --slider-edge-inset away from the thumb it's meant to track,
+        // worst-case right at min/max. Centering itself still comes from
+        // .d-slider__readout's own CSS transform, not an inline style, so
+        // the absence of an inline transform here is expected, not a gap.
         mockProps = { readout: 'always', modelValue: 100 };
         updateWrapper();
         await nextTick();
         const style = readouts()[0].attributes('style');
-        expect(style).toContain('inset-inline-start: 100%');
+        expect(style).toContain('inset-inline-start: calc(var(--slider-edge-inset) + (100% - var(--slider-edge-inset) * 2) * 1)');
         expect(style).not.toContain('transform');
       });
     });
@@ -372,6 +372,24 @@ describe('DtSlider Tests', () => {
         expect(tooltip.matches(':popover-open')).toBe(true);
         await thumbInputs[0].trigger('blur');
         expect(tooltip.matches(':popover-open')).toBe(false);
+      });
+
+      it('closes on Escape while keeping focus, matching DtTooltip\'s own Escape handling', async () => {
+        const tooltip = tooltipReadouts()[0].element;
+        await thumbInputs[0].trigger('focus');
+        expect(tooltip.matches(':popover-open')).toBe(true);
+        await thumbInputs[0].trigger('keydown', { key: 'Escape' });
+        expect(tooltip.matches(':popover-open')).toBe(false);
+      });
+
+      it('reopens on the next hover after an Escape dismissal, without needing to refocus', async () => {
+        const hitTarget = wrapper.find('[data-qa="dt-slider-thumb-hit"]');
+        const tooltip = tooltipReadouts()[0].element;
+        await thumbInputs[0].trigger('focus');
+        await thumbInputs[0].trigger('keydown', { key: 'Escape' });
+        expect(tooltip.matches(':popover-open')).toBe(false);
+        await hitTarget.trigger('pointerenter');
+        expect(tooltip.matches(':popover-open')).toBe(true);
       });
 
       it('does not open while disabled, even when its thumb is hovered', async () => {
