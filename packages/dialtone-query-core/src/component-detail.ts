@@ -32,6 +32,7 @@ export interface ComponentDetailArgs {
 export function getComponentDetail(
   args: ComponentDetailArgs,
   records: Component[],
+  installedExports?: readonly string[] | null,
 ) {
   const name = args.component.trim();
   const key = normalizeComponentName(name);
@@ -55,8 +56,13 @@ export function getComponentDetail(
       ? [args.projection]
       : COMPONENT_SECTIONS;
   if (!component) {
+    let match: MatchState = 'no-match';
+    if (candidates.length) match = 'candidate';
+    else if (installedExports === null) match = 'unverified';
+    else if (installedExports) match = installedExports.some(name => normalizeComponentName(name) === key)
+      ? 'unverified' : 'unavailable';
     return {
-      match: candidates.length ? ('candidate' as const) : ('no-match' as const),
+      match,
       component: null,
       items: [],
       available: candidates.map((record) => record.displayName),

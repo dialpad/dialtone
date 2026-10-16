@@ -5,9 +5,10 @@ import pkg from '../package.json' with { type: 'json' };
 import clientRules from '../client-rules.json' with { type: 'json' };
 
 import {
-  utilityClasses, tokens, components, icons, documentation,
   buildCompoundPropertiesSet,
 } from '@dialpad/dialtone-query-core';
+
+import { resolveProjectData } from '@dialpad/dialtone-query-core/node';
 
 const UPDATE_CHECK_TIMEOUT_MS = 2000;
 
@@ -50,6 +51,8 @@ async function checkVersion(signal: AbortSignal) {
 }
 
 async function main() {
+  const context = resolveProjectData(process.env.DIALTONE_PROJECT_ROOT, process.env.DIALTONE_LOOKUP_ROOT);
+  const { utilityClasses, tokens, components, icons, documentation } = context.data;
   // Build compound properties set from utility classes data (done once at startup)
   const compoundProperties = buildCompoundPropertiesSet(utilityClasses);
   console.error(`[INIT] Built compound properties set: ${compoundProperties.size} properties`);
@@ -73,6 +76,7 @@ async function main() {
     mimeType: "application/json",
   }, async () => {
     return {
+      _meta: { dialtone: { source: context.provenance.domains.utilityClasses, installedCompatibility: "not_checked" } },
       contents: [{
         uri: "dialtone://utility-classes",
         mimeType: "application/json",
@@ -87,6 +91,7 @@ async function main() {
     mimeType: "application/json",
   }, async () => {
     return {
+      _meta: { dialtone: { source: context.provenance.domains.tokens, installedCompatibility: "not_checked" } },
       contents: [{
         uri: "dialtone://tokens",
         mimeType: "application/json",
@@ -101,6 +106,7 @@ async function main() {
     mimeType: "application/json",
   }, async () => {
     return {
+      _meta: { dialtone: { source: context.provenance.domains.components, installedCompatibility: "not_checked" } },
       contents: [{
         uri: "dialtone://components",
         mimeType: "application/json",
@@ -115,6 +121,7 @@ async function main() {
     mimeType: "application/json",
   }, async () => {
     return {
+      _meta: { dialtone: { source: context.provenance.domains.icons, installedCompatibility: "not_checked" } },
       contents: [{
         uri: "dialtone://icons",
         mimeType: "application/json",
@@ -129,6 +136,7 @@ async function main() {
     mimeType: "application/json",
   }, async () => {
     return {
+      _meta: { dialtone: { source: context.provenance.domains.documentation, installedCompatibility: "not_checked" } },
       contents: [{
         uri: "dialtone://documentation",
         mimeType: "application/json",
@@ -151,7 +159,7 @@ async function main() {
     };
   });
 
-  registerQueryTools(server);
+  registerQueryTools(server, context);
 
   // Start the server
   const transport = new StdioServerTransport();

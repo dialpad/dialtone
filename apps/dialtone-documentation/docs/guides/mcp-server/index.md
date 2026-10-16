@@ -11,7 +11,7 @@ keywords:
   ]
 ---
 
-The Dialtone MCP Server lets compatible AI clients search Dialtone through Model Context Protocol (MCP) tools. Use the [Dialtone CLI](/guides/cli/) for direct terminal queries, shell scripts, or lookups that should match the Dialtone version installed in your project.
+The Dialtone MCP Server lets compatible AI clients search Dialtone through Model Context Protocol (MCP) tools. Use the [Dialtone CLI](/guides/cli/) for direct terminal queries or shell scripts. MCP can select installed lookup data when configured with an explicit dependency root; otherwise it uses bundled data.
 
 ## What It Does
 
@@ -101,6 +101,33 @@ claude mcp add dialtone-http --transport http --scope user https://mcp.dialtone.
 > [!INFO] Version Checking
 > Startup does not wait for the update check. A successful check writes a version or update notice to stderr; failed or malformed responses are ignored. The check is cancelled after two seconds or during shutdown.
 
+## Select installed project data
+
+Set `DIALTONE_PROJECT_ROOT` to the absolute directory containing your application's `package.json` and dependency installation. The server does not infer this directory from its launch location, scan for nested applications, or request client workspace roots.
+
+For a nested application, point at the application rather than the repository root:
+
+```json
+{
+  "mcpServers": {
+    "dialtone": {
+      "command": "dialtone-mcp-server",
+      "env": {
+        "DIALTONE_PROJECT_ROOT": "/absolute/path/repo/apps/web"
+      }
+    }
+  }
+}
+```
+
+For dependencies hoisted into an ancestor workspace, also set `DIALTONE_LOOKUP_ROOT` to that absolute workspace directory. Package and data realpaths must stay inside the authorized boundary; lookup does not cross a separate Git repository. Symlinks into that boundary are supported. Dependencies linked outside it remain unverified. Use separate named server configurations for separate applications.
+
+A declared `@dialpad/dialtone` takes precedence over standalone packages. Otherwise, only directly declared standalone Vue, CSS and icon packages supply installed data. Missing or malformed domains fall back separately to bundled data with a reason. Documentation, component-page links and client rules remain bundled references. Without configuration, existing bundled lookups continue; invalid configuration never silently falls back to the launch directory.
+
+Search replies remain Markdown, with actual source package versions, hashes and fallback reasons. Structured detail reports per-domain installed or bundled sources. Resource JSON uses the same selected data, with source information in the result's `_meta.dialtone`. A statically verified entry can establish that a component is not exported; absent metadata alone cannot. Fallback component hints are unverified. These checks do not run application imports or verify peers, runtime behavior or the active theme.
+
+Restart the server after changing configuration or dependencies. It captures one context at startup and does not watch installations for changes. This feature requires a server package version containing it; a source merge does not update an existing installed server.
+
 ## Search Tools
 
 ### Utility Classes
@@ -172,7 +199,7 @@ Directive identifiers such as `v-dt-tooltip` or `DtTooltipDirective` are not com
 - Component names, descriptions, the first five props and sampled event/slot names
 - Deprecation metadata and verified export hints where available
 - Exact detail and pagination continuation calls
-- Bundled data package versions and hashes; installed compatibility is not checked
+- Selected data package versions and hashes; installed runtime compatibility is not checked
 
 **Parameters:**
 

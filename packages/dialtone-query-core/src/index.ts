@@ -74,3 +74,6 @@ export { getDocumentationDetail } from './tools/docs.js';
 
 export { getValueDetail, formatTokenThemes } from './value-retrieval.js';
 export type { TokenThemeRecord } from './value-retrieval.js';
+
+export { parseComponentExports } from './component-exports.js';
+export type { Domain, DomainSource, ResolvedData, ProjectData } from './node-data-resolver.js';
