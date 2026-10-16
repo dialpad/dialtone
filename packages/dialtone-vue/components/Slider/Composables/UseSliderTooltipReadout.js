@@ -135,9 +135,19 @@ export function useSliderTooltipReadout(props, {
     // anchors and a stationary owner's visibility. Comparing against the rect
     // the last update used skips the frame after a watcher already ran. It
     // also replaces autoUpdate's layoutShift observer, which reacts after paint.
-    function checkFrame() {
-      if (!tooltip.matches(':popover-open') || !anchorRect || !sameRect(anchor.getBoundingClientRect(), anchorRect)) update();
-      else tooltip.style.visibility = currentVisibility();
+    let nextFrameCheckAt = 0;
+    // A transformed anchor or a visibility flip is still well within human
+    // perception at a few checks a second — polling the full 60/s for as
+    // long as any readout is open re-measures a perfectly stationary tooltip
+    // 60 times a second for nothing. rAF's own timestamp (not Date.now)
+    // keeps this independent of when the tab last had focus.
+    const FRAME_CHECK_INTERVAL_MS = 100;
+    function checkFrame(timestamp = 0) {
+      if (timestamp >= nextFrameCheckAt) {
+        nextFrameCheckAt = timestamp + FRAME_CHECK_INTERVAL_MS;
+        if (!tooltip.matches(':popover-open') || !anchorRect || !sameRect(anchor.getBoundingClientRect(), anchorRect)) update();
+        else tooltip.style.visibility = currentVisibility();
+      }
       if (isLive()) frame = requestAnimationFrame(checkFrame);
     }
 
