@@ -2,6 +2,7 @@ import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { resolve, dirname, basename, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
+import { buildExampleRecords } from './documentation-examples.mjs';
 import { glob } from 'glob';
 import { stripMarkdown } from '../utils/strip-markdown.mjs';
 import { SITE_URL } from '../../../../apps/dialtone-documentation/docs/.vuepress/site-reference.js';
@@ -201,7 +202,7 @@ export function buildRecords(absolutePath) {
   }
 
   const usedSlugs = new Map();
-  return sections.map(({ headingPath, raw }) => {
+  const records = sections.map(({ headingPath, raw }) => {
     const content = stripMarkdown(raw, { stripFrontmatter: false, preserveFencedCode: isDirective });
     const baseSlug = headingPath.length > 0 ? slugify(headingPath.join('-')) : 'intro';
     const count = usedSlugs.get(baseSlug) ?? 0;
@@ -219,6 +220,7 @@ export function buildRecords(absolutePath) {
       filePath,
     };
   }).filter(record => !isDirective || record.content.trim().length > 0);
+  return [...records, ...buildExampleRecords({ rawFile, sections, records, filePath, vuePackage })];
 }
 
 async function build() {
@@ -244,6 +246,12 @@ async function build() {
   const allRecords = [];
   for (const file of files) {
     allRecords.push(...buildRecords(file));
+  }
+
+  const ids = new Set();
+  for (const record of allRecords) {
+    if (ids.has(record.id)) throw new Error(`Duplicate documentation ID: ${record.id}`);
+    ids.add(record.id);
   }
 
   // Sort alphabetically by docId; Array.sort is stable in V8, so section order

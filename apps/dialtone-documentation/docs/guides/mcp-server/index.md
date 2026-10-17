@@ -208,6 +208,24 @@ Directive documentation includes source code snippets and registration guidance.
 
 The five search tools return readable Markdown only, with bundled package/version/hash provenance and text continuation calls. All execute and advertise a default limit of 15. They accept plain string queries, fractional numeric limits, harmless numeric-string limits and extra arguments. Whitespace-only queries return a clear no-match message; long inputs follow the existing domain search rules. Only `get_component` and `get_documentation` return structured envelopes and matching JSON text fallbacks; their selected detail schemas remain strict. Installed compatibility is not checked.
 
+### Retrieve a selected example
+
+Use the existing exact-ID tool for complete source-derived examples:
+
+```json
+{"id":"examples/button-default"}
+```
+
+Pass this object to `get_documentation`; `examples/button-disabled-tooltip` retrieves the existing disabled Button Tooltip wrapper. Component search appends concise example IDs/fetch hints where available. Ordinary documentation search keeps its excerpt ranking and does not inject the complete example records.
+
+Each record includes complete `App.vue`, `main.js`, `index.html`, `package.json` and `vite.config.js` fences, explicit component imports, CSS/default-theme setup and directive plugin registration. Follow every returned `textOffset` continuation and concatenate `content` in order before copying files: an individual fragment can end inside a code fence and is not a runnable example. Unknown IDs return `no-match`.
+
+The explicit tested consumer build profile is `dt10-pinned`: `@dialpad/dialtone@10.5.1`, `@dialpad/dialtone-icons@5.2.0` and Vue `3.5.18`. Source package/version, page/section and SHA-256 are retained independently; other installations remain unverified. Source or assembled-file changes invalidate the recorded build/API validation until rechecked. Copy all five files into an empty directory, then run `npm install`, `npm run build` and `npm run dev`; the delivered manifest and Vite config include SFC build setup. These display examples have no application call handler or hidden state.
+
+The disabled example retains the literal focusable span wrapping the `aria-disabled` button. Consumers must prevent disabled actions in their handlers. Read each record's manual-review status and tested environment for focus, tooltip announcements and name/description checks; build evidence alone does not establish those results.
+
+Example generation runs in `dialtone-docs:build`; query-core and adapter builds bundle that output into packed packages. Documentation deployment and source merges do not update an installed server: the existing release selection, publication and package-update path still applies. Packed candidates are separate from published packages and verified consumer delivery.
+
 ### Icons
 
 **Tool:** `search_icons`

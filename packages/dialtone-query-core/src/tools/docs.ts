@@ -161,6 +161,7 @@ export function searchDocumentation(
   const scored: Array<{ result: SearchResult; matchCount: number; titleMatch: boolean }> = [];
 
   for (const record of data) {
+    if (record.example) continue;
     const isDirective = record.docId.startsWith(DIRECTIVE_PREFIX);
     const selectedDirective = isDirective && directives.includes(record.docId.slice(DIRECTIVE_PREFIX.length).toLowerCase());
     if (directives.length > 0 && isDirective && !selectedDirective) continue;
@@ -285,4 +286,11 @@ export function getDocumentationDetail(args: { id: string; textOffset?: number; 
     contentCounts: { total: points.length, returned: selected.length, offset: textOffset },
     next: hasMore ? { id: record.id, textOffset: textOffset + selected.length, textLimit } : null,
   };
+}
+
+/** Exact example IDs for a component; each adapter renders its own fetch syntax. */
+export function getDocumentationExampleIds(componentName: string, data: DocumentationRecord[]): string[] {
+  return data.filter(record => record.example?.components.some(identity =>
+    normalizeComponentName(identity.canonicalName) === normalizeComponentName(componentName)))
+    .map(record => record.id);
 }

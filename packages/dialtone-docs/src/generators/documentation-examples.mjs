@@ -1,0 +1,142 @@
+import { createHash } from 'node:crypto';
+import MarkdownIt from 'markdown-it';
+import { readFileSync } from 'node:fs';
+import { resolve, dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { parseDirectives, trimBlankLines } from '../../../../apps/dialtone-documentation/docs/.vuepress/plugins/fenced-demo-shared.js';
+import { readPublicComponentExports, withComponentIdentity } from '../../../../scripts/lib/vue-component-identity.mjs';
+import { normalizeComponentName } from '../../../../scripts/lib/component-name.mjs';
+import { getProfile } from '../../../../scripts/retrieval/profiles.mjs';
+
+const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../../..');
+const markdown = new MarkdownIt({ html: true });
+// Opt-in assembly metadata; live example markup remains solely in the source page.
+const selected = {
+  'examples/button-default': {
+    components: ['DtButton', 'DtStack'], directives: [],
+    responsibilities: 'Add application click handlers for real actions; retain meaningful button text.',
+    interaction: 'Check Tab order, visible focus, Enter/Space activation and accessible names; the three importance variants share the same interaction pattern.',
+  },
+  'examples/button-disabled-tooltip': {
+    components: ['DtButton', 'DtStack'], directives: ['DtTooltipDirective'],
+    responsibilities: 'The source uses both native disabled and a focusable span wrapping an aria-disabled button. The class and aria-disabled do not themselves prevent application actions; consumers must prevent disabled actions in their handlers. The wrapper remains literal source markup.',
+    interaction: 'Check wrapper focus, tooltip on keyboard focus/hover, Escape dismissal, accessible name/description relationship and disabled-action prevention before recommending this pattern.',
+  },
+};
+const profile = getProfile('dt10-pinned');
+const evidence = JSON.parse(readFileSync(new URL('./example-validation.json', import.meta.url), 'utf8'));
+const hash = value => createHash('sha256').update(value).digest('hex');
+let publicExports;
+
+/** Reviewed evidence binds these exact files, pins and source bytes; the consumer check recomputes it. */
+export function payloadHash({ files, dependencies, sourceHash }) {
+  return hash(JSON.stringify({ files, dependencies, sourceHash }));
+}
+
+/** Live demo markup before any @code separator, without fence directive lines. */
+function liveTemplate(id, fence) {
+  if (fence?.type !== 'fence' || !/^vue\s+demo(?:-only)?$/.test(fence.info.trim())) throw new Error(`Example ${id} must precede a live Vue demo fence`);
+  const lines = fence.content.split('\n');
+  const fenceDirectives = parseDirectives(lines, fence.info.trim().split(/\s+/)[1]);
+  if (fenceDirectives.onlyShow === 'code') throw new Error(`Example ${id} has no live demo`);
+  const end = fenceDirectives.codeSeparatorIndex < 0 ? lines.length : fenceDirectives.codeSeparatorIndex;
+  const template = trimBlankLines(lines.slice(0, end).filter((_, line) => !fenceDirectives.directiveLines.has(line)).join('\n'));
+  if (/\{props\}/.test(template)) throw new Error(`Example ${id} contains a placeholder`);
+  return template;
+}
+
+/** Every Dialtone component and directive in the live markup must be declared for assembly. */
+function assertDeclaredUsage(id, template, definition) {
+  const markup = template.replace(/<!--[\s\S]*?-->/g, '');
+  const declared = (names, name) => names.some(other => normalizeComponentName(other) === normalizeComponentName(name));
+  const missing = [
+    ...[...markup.matchAll(/<(dt-[a-z0-9-]+|Dt[A-Z][A-Za-z0-9]*)(?=[\s/>])/g)].map(match => match[1])
+      .filter(name => !declared(definition.components, name)),
+    ...[...markup.matchAll(/\sv-(dt-[a-z0-9-]+)/g)].map(match => match[1])
+      .filter(name => !declared(definition.directives, `${name}-directive`)).map(name => `v-${name}`),
+  ];
+  if (missing.length) throw new Error(`Example ${id} uses unconfigured ${[...new Set(missing)].join(', ')}`);
+}
+
+function publicIdentities(vuePackage) {
+  const vueRoot = resolve(root, 'packages/dialtone-vue');
+  publicExports ??= readPublicComponentExports(vueRoot);
+  return [...publicExports].map(([file]) => withComponentIdentity({ displayName: '' }, file, publicExports, vueRoot, vuePackage).identity);
+}
+
+/** The five consumer files, in the order the payload hash binds. */
+function consumerFiles(names, template, directives) {
+  return {
+    'package.json': JSON.stringify({
+      name: 'dialtone-button-example', private: true, type: 'module',
+      scripts: { dev: 'vite', build: 'vite build' }, dependencies: profile.dependencies,
+      devDependencies: { vite: '8.0.3', '@vitejs/plugin-vue': '6.0.5' },
+    }, null, 2) + '\n',
+    'vite.config.js': 'import { defineConfig } from \'vite\';\nimport vue from \'@vitejs/plugin-vue\';\nexport default defineConfig({ plugins: [vue()] });\n',
+    'App.vue': `<script setup>\nimport { ${names.join(', ')} } from '@dialpad/dialtone/vue';\n</script>\n\n<template>\n${template}\n</template>\n`,
+    'main.js': `import { createApp } from 'vue';\n${directives.length ? `import { ${directives.join(', ')} } from '@dialpad/dialtone/vue';\n` : ''}import '@dialpad/dialtone/css';\nimport '@dialpad/dialtone/css-default-theme';\nimport App from './App.vue';\n\nconst app = createApp(App);\n${directives.map(name => `app.use(${name});\n`).join('')}app.mount('#app');\n`,
+    'index.html': '<!doctype html>\n<html lang="en"><head><meta charset="UTF-8"><title>Dialtone Button example</title></head><body><div id="app"></div><script type="module" src="/main.js"></script></body></html>\n',
+  };
+}
+
+/** Selected IDs are authored beside fences; neither section names nor fence order select them. */
+export function buildExampleRecords({ rawFile, sections, records, filePath, vuePackage }) {
+  const result = [];
+  let identities;
+  for (const [sectionIndex, section] of sections.entries()) {
+    if (!section.raw.includes('<!-- example-id:')) continue;
+    const tokens = markdown.parse(section.raw, {});
+    for (const [index, token] of tokens.entries()) {
+      const marker = token.type === 'html_block' && token.content.trim().match(/^<!-- example-id: (examples\/[a-z0-9-]+) -->$/);
+      if (!marker) continue;
+      const id = marker[1];
+      const definition = selected[id];
+      if (!definition) throw new Error(`Unconfigured example ID: ${id}`);
+      if (result.some(record => record.id === id)) throw new Error(`Duplicate example ID: ${id}`);
+      const template = liveTemplate(id, tokens[index + 1]);
+      assertDeclaredUsage(id, template, definition);
+      const names = definition.components;
+      identities ??= publicIdentities(vuePackage);
+      const components = names.map(name => {
+        const identity = identities.find(identity => identity.canonicalName === name && identity.kind === 'public');
+        if (!identity) throw new Error(`Missing public identity for ${name}`);
+        return identity;
+      });
+      const files = consumerFiles(names, template, definition.directives);
+      const sourceHash = hash(rawFile);
+      const payload = payloadHash({ files, dependencies: profile.dependencies, sourceHash });
+      const saved = evidence[id];
+      const artifact = profile.artifacts[saved?.artifact?.package];
+      const matchesProfile = saved?.profile === profile.id && artifact &&
+        saved.artifact.version === artifact.version && saved.artifact.integrity === artifact.integrity;
+      const validation = saved?.payloadHash === payload && matchesProfile ? saved : { payloadHash: payload, consumerBuild: 'unverified' };
+      const manual = validation.manualReview;
+      const manualPassed = manual?.status === 'passed';
+      const manualSummary = manualPassed
+        ? `reviewer-reported spot checks passed on ${manual.date} by ${manual.reviewer} (${manual.browser}; ${manual.os}; ${manual.assistiveTechnology}).`
+        : 'manual browser, keyboard and screen-reader review pending; reviewer and browser/AT versions not yet recorded.';
+      const source = records[sectionIndex];
+      const content = [
+        `# ${id}`,
+        `Source: ${filePath} — ${section.headingPath.join(' > ')} (${source.id}). SHA-256: ${sourceHash}.`,
+        `Consumer profile: ${profile.id}. Exact pins: ${Object.entries(profile.dependencies).map(([name, version]) => `${name}@${version}`).join(', ')}. Other installations are unverified.`,
+        `Language: Vue 3 JavaScript SFC. CSS and default theme are imported in main.js. ${definition.directives.length ? `Register ${definition.directives.join(', ')} with app.use; these are directive plugins, not components.` : 'Components are imported locally; no plugin is needed.'}`,
+        'Setup: copy all five files below into an empty directory. Run npm install, npm run build and npm run dev. package.json pins the consumer dependencies and Vite SFC build tooling; main.js includes component, directive and CSS/theme setup.',
+        `State/events: no external state or hidden handlers. These display examples do not place a call. ${definition.responsibilities}`,
+        `Validation: consumer build ${validation.consumerBuild}; API/export/deprecation checks ${validation.api ?? 'unverified'}. Validation is tied to payload SHA-256 ${payload}.`,
+        `Interaction/accessibility: ${manualSummary} ${definition.interaction}`,
+        ...Object.entries(files).map(([name, code]) => `## ${name}\n\n\`\`\`${name.split('.').pop()}\n${code}\`\`\``),
+      ].join('\n\n');
+      result.push({ ...source, id, category: 'examples', content, example: {
+        source: {
+          id: source.id, filePath, headingPath: section.headingPath, hash: sourceHash,
+          package: vuePackage.name, version: vuePackage.version,
+        },
+        components, directives: definition.directives,
+        profile: { id: profile.id, dependencies: profile.dependencies }, validation,
+        manualReview: manualPassed ? 'passed' : 'pending',
+      } });
+    }
+  }
+  return result;
+}

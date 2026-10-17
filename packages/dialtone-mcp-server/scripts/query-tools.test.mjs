@@ -306,6 +306,8 @@ test('all five searches retain readable domain facts, notes and provenance witho
           text.includes(`import { DtButton } from '@dialpad/dialtone-vue'`),
         );
         assert.ok(text.includes('get_component'));
+        assert.ok(text.includes('- examples/button-default: `get_documentation({"id":"examples/button-default"})`'));
+        assert.ok(!text.includes('dialtone docs --id'));
         assert.match(text, /sample|preview/i);
       } else if (domain === 'icons') {
         assert.ok(text.includes('**voicemail**'));
