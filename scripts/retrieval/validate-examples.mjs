@@ -51,6 +51,7 @@ for (const id of ['examples/button-default', 'examples/button-disabled-tooltip']
   const record = docs.find(record => record.id === id);
   assert.ok(record?.example, id);
   const files = extractFiles(record);
+  assert.deepEqual(JSON.parse(files['package.json']), pkg, `${id} package.json differs from installed consumer manifest`);
   const exampleDir = resolve(consumer, id.split('/')[1]);
   mkdirSync(exampleDir);
   for (const [name, content] of Object.entries(files)) writeFileSync(resolve(exampleDir, name), content);

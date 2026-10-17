@@ -45,5 +45,7 @@ describe('selected documentation examples', () => {
     expect(record.example.validation.consumerBuild).toBe('unverified');
     expect(() => assemble(raw + '\n' + raw)).toThrow('Duplicate example ID');
     expect(() => assemble(raw.replace('vue demo', 'vue code-only'))).toThrow('live Vue demo');
+    expect(() => assemble(raw.replace('<dt-button>Live</dt-button>', '<dt-input />'))).toThrow('unconfigured dt-input');
+    expect(() => assemble(raw.replace('<dt-button>Live</dt-button>', '<dt-button v-dt-mode:dark>Live</dt-button>'))).toThrow('unconfigured v-dt-mode');
   });
 });

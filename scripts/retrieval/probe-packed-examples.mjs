@@ -52,7 +52,9 @@ try {
   assert.equal(legacy.name, 'DtButton');
   assert.ok(!legacy.examples);
   const tools = (await client.listTools()).tools;
-  for (const tool of tools.filter(tool => tool.name.startsWith('search_'))) {
+  const searchTools = tools.filter(tool => tool.name.startsWith('search_'));
+  assert.equal(searchTools.length, 5, searchTools.map(tool => tool.name).join(', '));
+  for (const tool of searchTools) {
     assert.equal(tool.outputSchema, undefined);
     const response = await client.callTool({ name: tool.name, arguments: { query: 'button', limit: 1 } });
     assert.equal(response.structuredContent, undefined);

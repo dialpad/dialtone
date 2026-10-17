@@ -5,6 +5,7 @@ import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseDirectives, trimBlankLines } from '../../../../apps/dialtone-documentation/docs/.vuepress/plugins/fenced-demo-shared.js';
 import { readPublicComponentExports, withComponentIdentity } from '../../../../scripts/lib/vue-component-identity.mjs';
+import { normalizeComponentName } from '../../../../scripts/lib/component-name.mjs';
 import { getProfile } from '../../../../scripts/retrieval/profiles.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../../..');
@@ -49,6 +50,16 @@ export function buildExampleRecords({ rawFile, sections, records, filePath, vueP
       const template = trimBlankLines(lines.slice(0, end).filter((_, line) => !directives.directiveLines.has(line)).join('\n'));
       if (/\{props\}/.test(template)) throw new Error(`Example ${id} contains a placeholder`);
       const names = definition.components;
+      const markup = template.replace(/<!--[\s\S]*?-->/g, '');
+      const usedComponents = [...markup.matchAll(/<(dt-[a-z0-9-]+|Dt[A-Z][A-Za-z0-9]*)(?=[\s/>])/g)]
+        .map(match => match[1]);
+      const usedDirectives = [...markup.matchAll(/\sv-(dt-[a-z0-9-]+)/g)].map(match => match[1]);
+      const missing = [
+        ...usedComponents.filter(name => !names.some(declared =>
+          normalizeComponentName(declared) === normalizeComponentName(name))),
+        ...usedDirectives.filter(name => !definition.directives.some(declared => normalizeComponentName(declared) === normalizeComponentName(`${name}-directive`))).map(name => `v-${name}`),
+      ];
+      if (missing.length) throw new Error(`Example ${id} uses unconfigured ${[...new Set(missing)].join(', ')}`);
       const vueRoot = resolve(root, 'packages/dialtone-vue');
       const exports = readPublicComponentExports(vueRoot);
       const identities = [...exports].map(([file]) => withComponentIdentity({ displayName: '' }, file, exports, vueRoot, vuePackage).identity);
