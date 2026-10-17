@@ -20,6 +20,15 @@ export const cases = [
     order(['DtButton']),
     contains('description', 'allows users to take an action'),
   ]),
+  baseline('keyword-spinner', 'components', 'spinner', [
+    order(['DtLoader']),
+  ], { limit: 1 }),
+  baseline('keyword-notification-ambiguity', 'components', 'notification', [
+    order(['DtBanner', 'DtNotice', 'DtToast']),
+  ]),
+  baseline('keyword-text-field-docs', 'documentation', 'text-field', [
+    order(['Input > Usage']),
+  ], { limit: 1 }),
   baseline('input-exact', 'components', 'DtInput', [
     order(['DtInput', 'DtInputGroup']),
     contains('label-slot', 'label'),

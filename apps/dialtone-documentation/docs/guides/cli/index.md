@@ -86,6 +86,18 @@ dialtone search "padding 8px"
 dialtone search "notification"
 ```
 
+Component and documentation discovery reuse curated page keywords. Try familiar interaction terms, then inspect a returned canonical component:
+
+```bash
+dialtone search "spinner"
+dialtone docs "text-field"
+dialtone component DtLoader
+```
+
+`spinner` leads with `DtLoader`; `blank slate` finds `DtEmptyState`; `text field`, `text-field`, and `textbox` find `DtInput`; `autocomplete` and `typeahead` find the supported Combobox candidates. `notification` presents `DtBanner`, `DtNotice`, and `DtToast` as distinct choices. Canonical component name and family matches keep their existing priority, followed by curated keywords and incidental API matches. Documentation ranks exact titles before keywords and incidental prose.
+
+Keywords are discovery terms. `dialtone component spinner` still exits with no selected component; `component switch` rejects the name and suggests `DtToggle`. Use the canonical result for API lookup.
+
 Separate terms with `|` to search for any of them:
 
 ```bash
@@ -103,6 +115,12 @@ The CLI does not have a separate icon command. Search by an icon's name, categor
 
 ```bash
 dialtone search "calendar" --format json
+```
+
+Broad searches share the 20-result limit across all result types. Include later icon matches with `--limit 0`; icon records in JSON have `type: "icon"`:
+
+```bash
+dialtone search "notification" --limit 0 --format json
 ```
 
 ### Inspect a component
@@ -237,6 +255,8 @@ The source line lists any data that came from somewhere other than the main pack
 
 Import hints in `component` and `prompt` output appear only for verified public exports. Installed `@dialpad/dialtone` data uses its verified `@dialpad/dialtone/vue` route, or `@dialpad/dialtone/vue3` for versions before 9.173 that expose that route. Installed `@dialpad/dialtone-vue` data and bundled component data use verified routes from `@dialpad/dialtone-vue`.
 
+Curated component keywords also come from bundled documentation and join only to public components present in the selected component data. They are latest documentation references, not proof of installed API availability or behavior. An older or unverified component dataset can lack these associations.
+
 Bundled import hints are verified against the bundled Vue source version. They do not establish that `@dialpad/dialtone-vue` is installed at that version or that the import is compatible with your project's dependencies.
 
 Export verification checks the stated package entry. It does not establish that peer dependencies, application setup, or runtime behavior are correct. Validate code against your installed packages before using it.
@@ -269,7 +289,7 @@ The CLI checks npm for a newer version in the background, and gives up after 3 s
 npm install -g @dialpad/dialtone-cli@latest
 ```
 
-Updating refreshes bundled documentation and the fallback data used outside a Dialtone project.
+Updating refreshes bundled documentation, discovery keywords, and the fallback data used outside a Dialtone project. Docs-only keyword edits can reach the site before the CLI: release commit selection watches CLI and query-core changes, so maintainers must explicitly arrange a CLI publication through the existing release process. Source merge and local builds do not update installed tools.
 
 ## Troubleshooting
 

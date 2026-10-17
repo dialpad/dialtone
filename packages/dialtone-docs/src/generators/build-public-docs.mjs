@@ -3,6 +3,7 @@ import { resolve, dirname, basename, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import matter from 'gray-matter';
 import { glob } from 'glob';
+import { readKeywords } from '../utils/keywords.mjs';
 import { stripMarkdown } from '../utils/strip-markdown.mjs';
 import { SITE_URL } from '../../../../apps/dialtone-documentation/docs/.vuepress/site-reference.js';
 
@@ -172,6 +173,7 @@ export function buildRecords(absolutePath) {
     status: frontmatter.status ?? null,
     figmaUrl: frontmatter.figma_url ?? null,
     storybook: frontmatter.storybook ?? null,
+    keywords: readKeywords(frontmatter.keywords, filePath),
   };
   if (isDirective) {
     const storiesImport = rawFile.match(/^import \* as \w+ from ['"](.+\.stories\.js)['"]/m);
