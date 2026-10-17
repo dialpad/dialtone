@@ -35,14 +35,20 @@ dialtone component button --slots              # slots only
 dialtone component button --examples           # usage example
 ```
 
-### `dialtone docs <query>`
+### `dialtone docs [query]`
 
 Search bundled reference documentation, including directive imports, registration and behavior.
 
 ```bash
 dialtone docs "v-dt-tooltip"
 dialtone docs "DtModeDirective registration"
+dialtone docs --id examples/button-default
+dialtone docs --id examples/button-disabled-tooltip --format json
 ```
+
+Use `--id <id>` instead of a query to retrieve a complete documentation record. Minimal and Markdown formats print its content; JSON returns a one-record array with its metadata. Missing IDs, an empty ID, or combining a query with `--id` exit with an error. `--limit` controls search results, not exact-ID content.
+
+The two selected Button examples include complete application files and pinned dependencies. Their tested profile does not establish installed-project compatibility, and manual interaction/accessibility review remains pending. `component --examples` text output lists available example IDs; complete example records stay out of documentation search. See [Retrieve a selected example](https://dialtone.dialpad.com/guides/cli/#retrieve-a-selected-example) for setup and qualification.
 
 ### `dialtone token [query]`
 
