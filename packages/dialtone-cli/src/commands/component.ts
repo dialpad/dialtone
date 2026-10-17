@@ -1,4 +1,5 @@
 import { defineCommand } from 'citty';
+import { getDocumentationExampleHints } from '@dialpad/dialtone-query-core';
 import type { ComponentProp } from '@dialpad/dialtone-query-core';
 import { requireComponent } from '../select-component.js';
 import { getContext } from '../context.js';
@@ -88,6 +89,10 @@ export const componentCommand = defineCommand({
     // --examples
     if (args.examples) {
       console.log(formatComponentOutput(result, format, 'examples', { importFrom }));
+      if (format !== 'json') {
+        const hints = getDocumentationExampleHints(result.name, getContext().documentation);
+        if (hints.length) console.log(`\nSource examples (check profile and validation limits):\n${hints.join('\n')}`);
+      }
       return;
     }
 

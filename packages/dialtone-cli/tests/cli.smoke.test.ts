@@ -123,3 +123,14 @@ describe('dialtone CLI (built)', { timeout: 30_000 }, () => {
     expect(r.stderr).not.toMatch(DEBUG_TAG);
   });
 });
+
+test('docs exact-ID selection is additive and returns the full record in the existing JSON array shape', () => {
+  const exact = run(['docs', '--id', 'examples/button-disabled-tooltip', '--format', 'json']);
+  expect(exact.status).toBe(0);
+  const records = JSON.parse(exact.stdout);
+  expect(records).toHaveLength(1);
+  expect(records[0].content).toContain('<span v-dt-tooltip="`Tooltip example`" tabindex="0">');
+  expect(records[0].content).toContain('app.use(DtTooltipDirective)');
+  expect(run(['docs', '--id', 'examples/unknown']).status).toBe(1);
+  expect(run(['docs', 'button', '--id', 'examples/button-default']).status).toBe(1);
+});

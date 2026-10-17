@@ -26,6 +26,7 @@ import {
   getValueDetail,
   formatTokenThemes,
   getComponentDocumentation,
+  getDocumentationExampleHints,
   getDocumentationDetail,
   COMPONENT_SECTIONS,
   COMPONENT_DETAIL_LIMIT,
@@ -270,7 +271,7 @@ export function queryToolDefinitions() {
     {
       name: 'get_documentation',
       description:
-        'Retrieve complete available prose for an exact documentation section ID. Follow the returned textOffset continuation to read remaining content. Offsets count Unicode code points. This corpus contains prose; code examples require their own verification.',
+        'Retrieve complete available prose for an exact documentation section ID. Follow the returned textOffset continuation to read remaining content. Offsets count Unicode code points. Selected examples/* IDs include complete source-derived files and setup; check their pinned consumer profile and validation limits. A continued fragment is not a complete runnable example.',
       inputSchema: {
         type: 'object' as const,
         properties: {
@@ -471,6 +472,10 @@ export function executeQueryTool(name: string, input: unknown) {
         ? { total: found.results.length, offset: pageArgs.offset }
         : undefined,
     );
+    if (name === 'search_components') {
+      const hints = [...new Set(page.flatMap(result => getDocumentationExampleHints(result.name, documentation)))];
+      if (hints.length) output += `\n\nSource examples (check profile and validation limits):\n${hints.join('\n')}`;
+    }
     if (found.notes.length) output += `\n\n${found.notes.join('\n')}`;
     if (page.length && spec.followUp)
       output +=

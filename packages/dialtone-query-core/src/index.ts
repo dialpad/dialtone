@@ -70,7 +70,7 @@ export { paginate, createRetrievalEnvelope, formatRetrievalEnvelope, MATCH_STATE
 export type { BundledProvenance, DomainStamp, MatchState, Continuation, RetrievalEnvelope } from './retrieval.js';
 export { getComponentDocumentation } from './component-documentation.js';
 export type { ComponentDocCatalog, ComponentDocPage } from './component-documentation.js';
-export { getDocumentationDetail } from './tools/docs.js';
+export { getDocumentationDetail, getDocumentationExampleHints } from './tools/docs.js';
 
 export { getValueDetail, formatTokenThemes } from './value-retrieval.js';
 export type { TokenThemeRecord } from './value-retrieval.js';

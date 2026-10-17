@@ -1,0 +1,60 @@
+{
+  "examples/button-default": {
+    "payloadHash": "ab1895a162e82763a807ae52c838c0984f032334698b5ac24ea4293c61450dd3",
+    "consumerBuild": "built",
+    "api": "passed",
+    "profile": "dt10-pinned",
+    "node": "v24.5.0",
+    "tooling": {
+      "vite": "8.0.3",
+      "@vitejs/plugin-vue": "6.0.5"
+    },
+    "verifiedOn": "2026-10-17",
+    "lockHash": "e2bf66e909dcb4e4859e4377544f308bfa50a6c04f8c31e754f2dd0124ec11fb",
+    "artifact": {
+      "package": "@dialpad/dialtone",
+      "version": "10.5.1",
+      "data": [
+        {
+          "path": "dist/vue3/component-documentation.json",
+          "sha256": "e981bd0057ab2f7bb6d7ae1fa4cb63702dc98af18cd59135503aa81323057f3d",
+          "shape": "array",
+          "records": 94,
+          "schemaVersions": [
+            null
+          ]
+        }
+      ],
+      "integrity": "sha512-SZ+5Muqmf+z94P6H1Yrxco8BlJ88qKpQnLd1rUFd47iHP6AUSdWC/cJ4R5qMDzn0s16rWdplxk0z9g+612NiKg=="
+    }
+  },
+  "examples/button-disabled-tooltip": {
+    "payloadHash": "8bd5bbdc50955371ff2bfa5593a826d3dcbc556c2d7238048fdd3daaa0d64586",
+    "consumerBuild": "built",
+    "api": "passed",
+    "profile": "dt10-pinned",
+    "node": "v24.5.0",
+    "tooling": {
+      "vite": "8.0.3",
+      "@vitejs/plugin-vue": "6.0.5"
+    },
+    "verifiedOn": "2026-10-17",
+    "lockHash": "e2bf66e909dcb4e4859e4377544f308bfa50a6c04f8c31e754f2dd0124ec11fb",
+    "artifact": {
+      "package": "@dialpad/dialtone",
+      "version": "10.5.1",
+      "data": [
+        {
+          "path": "dist/vue3/component-documentation.json",
+          "sha256": "e981bd0057ab2f7bb6d7ae1fa4cb63702dc98af18cd59135503aa81323057f3d",
+          "shape": "array",
+          "records": 94,
+          "schemaVersions": [
+            null
+          ]
+        }
+      ],
+      "integrity": "sha512-SZ+5Muqmf+z94P6H1Yrxco8BlJ88qKpQnLd1rUFd47iHP6AUSdWC/cJ4R5qMDzn0s16rWdplxk0z9g+612NiKg=="
+    }
+  }
+}

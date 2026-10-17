@@ -53,3 +53,23 @@ Reports hash both the source and consumed `dist/keywords-icons.json` icon metada
 Standalone Vue release commit selection also includes those generator/shared-helper paths. A temporary Git history exercises the installed release selector, including the Vue identity helper while excluding unrelated scripts and helpers. This verifies commit selection; publication and subsequent public artifact qualification still require separate evidence. Private Nx contract tests fail explicitly if the installed Nx version changes from 19.8.0.
 
 `unit_tests.yml` runs the existing query-core, CLI, docs and ESLint suites plus these contracts and retrieval checks for relevant source/data/adapter and generator-test changes. Generator, helper and test changes also route to the existing documentation tests/build workflow. Merged public-identity generator and installed-declaration tests now run from staging source. Merged MCP startup/shutdown and shared-core release-selection suites run as mandatory commands in the same lookup job, against the built server and installed release implementation. Registry publication and named consumer/client qualification remain separate acceptance evidence.
+
+## Selected example consumer and packed delivery checks
+
+The two opt-in Button example IDs are authored with `<!-- example-id: examples/button-default -->` and `<!-- example-id: examples/button-disabled-tooltip -->` immediately before their live Vue demo fences. `documentation-examples.mjs` supplies explicit assembly dependencies, component/directive associations and behavior responsibilities; it does not copy the example markup. Additional examples require their own source selection and complete setup qualification. No other fences are automatically exposed.
+
+After building the adapters, run the optional real-install consumer check in an owned scratch directory:
+
+```sh
+node scripts/retrieval/validate-examples.mjs .temp/example-consumers
+```
+
+This reuses the C5 `dt10-pinned` materializer, installs public npm artifacts with an isolated cache, validates delivered props/values/default slots and applicable deprecation rules, checks the exact primary artifact integrity, and builds all files extracted from each delivered record. It retains consumer applications, lockfiles and `example-consumer-report.json`. Network access is required. `example-validation.json` records reviewed evidence bound to source/files/profile hashes; generation falls back to unverified when those inputs change. Refresh that evidence only after a successful real consumer check. Browser/keyboard/screen-reader review remains separate and pending.
+
+Pack the built CLI and MCP packages with lifecycle scripts disabled, install both tarballs in a separate consumer, then run:
+
+```sh
+node scripts/retrieval/probe-packed-examples.mjs /path/to/packed-consumer
+```
+
+The probe compares both adapters with the same generated records, reconstructs bounded MCP continuations, checks no-match behavior, preserves legacy `component --examples` JSON and checks all five searches remain text-only. It writes `packed-example-report.json`. These are local candidate checks; they do not publish packages or establish installed-project compatibility.
