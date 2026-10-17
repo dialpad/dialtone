@@ -117,6 +117,7 @@ describe('curated public-page discovery', () => {
   test.each([
     ['switch', ['DtToggle'], 'components/toggle'],
     ['spinner', ['DtLoader'], 'components/loader'],
+    ['spinner?', ['DtLoader'], 'components/loader'],
     ['activity indicator', ['DtLoader'], 'components/loader'],
     ['blank slate', ['DtEmptyState'], 'components/empty-state'],
     ['zero state', ['DtEmptyState'], 'components/empty-state'],
@@ -142,9 +143,9 @@ describe('curated public-page discovery', () => {
     expect(searchDocumentation('DtInput', documentation).results[0].details.docId).toBe('components/input');
   });
 
-  test('an unknown capability finds nothing', () => {
-    expect(searchComponents('DLT3659MissingCapability', components, componentDocumentation).results).toEqual([]);
-    expect(searchDocumentation('DLT3659MissingCapability', documentation).results).toEqual([]);
+  test.each(['DLT3659MissingCapability', '???'])('an unknown or punctuation-only query %s finds nothing', (query) => {
+    expect(searchComponents(query, components, componentDocumentation).results).toEqual([]);
+    expect(searchDocumentation(query, documentation).results).toEqual([]);
   });
 
   test('joins keywords only to API components in the selected dataset', () => {

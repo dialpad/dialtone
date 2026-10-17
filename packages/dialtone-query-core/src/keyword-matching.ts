@@ -3,7 +3,7 @@ const normalizedPhrases = new Map<string, string>();
 
 function normalizePhrase(value: string): string {
   return value.replace(/([a-z0-9])([A-Z])/g, '$1 $2').toLowerCase()
-    .replace(/[-_/]/g, ' ').replace(/\s+/g, ' ').trim();
+    .replace(/[^\p{L}\p{N}]+/gu, ' ').replace(/\s+/g, ' ').trim();
 }
 
 function normalizedKeyword(keyword: string): string {

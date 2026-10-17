@@ -258,7 +258,7 @@ describe('readKeywords', () => {
     expect(readKeywords(undefined, 'loader.md')).toBeUndefined();
   });
 
-  test.each([['spinner'], [['spinner', 42]], [[' ']]])('rejects malformed keywords %j', (keywords) => {
+  test.each([['spinner'], [['spinner', 42]], [[' ']], [[]]])('rejects malformed keywords %j', (keywords) => {
     expect(() => readKeywords(keywords, 'loader.md')).toThrow(/Invalid keywords in loader\.md: expected an array of nonempty strings/);
   });
 });
