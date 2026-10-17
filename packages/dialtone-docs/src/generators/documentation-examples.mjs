@@ -1,5 +1,5 @@
 import { createHash } from 'node:crypto';
-import { createRequire } from 'node:module';
+import MarkdownIt from 'markdown-it';
 import { readFileSync } from 'node:fs';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -9,8 +9,6 @@ import { normalizeComponentName } from '../../../../scripts/lib/component-name.m
 import { getProfile } from '../../../../scripts/retrieval/profiles.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../../../..');
-const require = createRequire(resolve(root, 'apps/dialtone-documentation/package.json'));
-const MarkdownIt = require('markdown-it');
 const markdown = new MarkdownIt({ html: true });
 // Opt-in assembly metadata; live example markup remains solely in the source page.
 const selected = {
@@ -107,7 +105,11 @@ export function buildExampleRecords({ rawFile, sections, records, filePath, vueP
       const files = consumerFiles(names, template, definition.directives);
       const sourceHash = hash(rawFile);
       const payload = payloadHash({ files, dependencies: profile.dependencies, sourceHash });
-      const validation = evidence[id]?.payloadHash === payload ? evidence[id] : { payloadHash: payload, consumerBuild: 'unverified' };
+      const saved = evidence[id];
+      const artifact = profile.artifacts[saved?.artifact?.package];
+      const matchesProfile = saved?.profile === profile.id && artifact &&
+        saved.artifact.version === artifact.version && saved.artifact.integrity === artifact.integrity;
+      const validation = saved?.payloadHash === payload && matchesProfile ? saved : { payloadHash: payload, consumerBuild: 'unverified' };
       const manual = validation.manualReview;
       const manualPassed = manual?.status === 'passed';
       const manualSummary = manualPassed

@@ -14,7 +14,7 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const run = (file, args, cwd) => execFileSync(file, args, { cwd, stdio: 'pipe', encoding: 'utf8', timeout: 240000 });
 const destination = resolve(process.argv[2] ?? '.temp/example-consumers');
 const docs = JSON.parse(readFileSync(resolve(root, 'packages/dialtone-docs/dist/public-docs.json')));
-const require = createRequire(resolve(root, 'apps/dialtone-documentation/package.json'));
+const require = createRequire(resolve(root, 'packages/dialtone-docs/package.json'));
 const MarkdownIt = require('markdown-it');
 const markdown = new MarkdownIt();
 const selected = docs.filter(record => record.example);
