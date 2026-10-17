@@ -34,7 +34,7 @@ try {
       assert.equal(envelope.match, 'exact');
       assert.equal(envelope.source.installedCompatibility, 'not_checked');
       assert.equal(envelope.source.domains.documentation.hash, sha256(documentationBytes));
-      assert.equal(envelope.items[0].example.validation.payloadHash, record.example.validation.payloadHash);
+      assert.deepEqual(envelope.items[0].example, record.example);
       content += envelope.items[0].content;
       pages++;
       assert.ok(pages < 30);

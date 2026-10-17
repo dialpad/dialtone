@@ -83,6 +83,11 @@ export function buildExampleRecords({ rawFile, sections, records, filePath, vueP
       const sourceHash = hash(rawFile);
       const payloadHash = hash(JSON.stringify({ files, dependencies: profile.dependencies, sourceHash }));
       const validation = evidence[id]?.payloadHash === payloadHash ? evidence[id] : { payloadHash, consumerBuild: 'unverified' };
+      const manual = validation.manualReview;
+      const manualPassed = manual?.status === 'passed';
+      const manualSummary = manualPassed
+        ? `reviewer-reported spot checks passed on ${manual.date} by ${manual.reviewer} (${manual.browser}; ${manual.os}; ${manual.assistiveTechnology}).`
+        : 'manual browser, keyboard and screen-reader review pending; reviewer and browser/AT versions not yet recorded.';
       const source = records[sectionIndex];
       const content = [
         `# ${id}`,
@@ -92,7 +97,7 @@ export function buildExampleRecords({ rawFile, sections, records, filePath, vueP
         'Setup: copy all five files below into an empty directory. Run npm install, npm run build and npm run dev. package.json pins the consumer dependencies and Vite SFC build tooling; main.js includes component, directive and CSS/theme setup.',
         `State/events: no external state or hidden handlers. These display examples do not place a call. ${definition.responsibilities}`,
         `Validation: consumer build ${validation.consumerBuild}; API/export/deprecation checks ${validation.api ?? 'unverified'}. Validation is tied to payload SHA-256 ${payloadHash}.`,
-        `Interaction/accessibility: manual browser, keyboard and screen-reader review pending; reviewer and browser/AT versions not yet recorded. ${definition.interaction}`,
+        `Interaction/accessibility: ${manualSummary} ${definition.interaction}`,
         ...Object.entries(files).map(([name, code]) => `## ${name}\n\n\`\`\`${name.endsWith('.vue') ? 'vue' : name.endsWith('.html') ? 'html' : name.endsWith('.json') ? 'json' : 'js'}\n${code}\`\`\``),
       ].join('\n\n');
       result.push({ ...source, id, category: 'examples', content, example: {
@@ -102,7 +107,7 @@ export function buildExampleRecords({ rawFile, sections, records, filePath, vueP
         },
         components, directives: definition.directives,
         profile: { id: profile.id, dependencies: profile.dependencies }, validation,
-        manualReview: 'pending',
+        manualReview: manualPassed ? 'passed' : 'pending',
       } });
     }
   }

@@ -26,6 +26,20 @@
         }
       ],
       "integrity": "sha512-SZ+5Muqmf+z94P6H1Yrxco8BlJ88qKpQnLd1rUFd47iHP6AUSdWC/cJ4R5qMDzn0s16rWdplxk0z9g+612NiKg=="
+    },
+    "manualReview": {
+      "status": "passed",
+      "reviewer": "francisrupert",
+      "date": "2026-10-17",
+      "browser": "Google Chrome 154.0.8037.99 (Official Build) (arm64)",
+      "os": "macOS 15.7.4 (24G517)",
+      "assistiveTechnology": "VoiceOver 10",
+      "basis": "Reviewer confirmation of the supplied manual spot checks, not a full accessibility audit.",
+      "checks": [
+        "Keyboard focus, visible focus, Enter/Space and accessible names",
+        "Representative VoiceOver button names"
+      ],
+      "qualification": "Presentational example; no application action handler. Class/aria-disabled does not itself prevent consuming application actions."
     }
   },
   "examples/button-disabled-tooltip": {
@@ -55,6 +69,19 @@
         }
       ],
       "integrity": "sha512-SZ+5Muqmf+z94P6H1Yrxco8BlJ88qKpQnLd1rUFd47iHP6AUSdWC/cJ4R5qMDzn0s16rWdplxk0z9g+612NiKg=="
+    },
+    "manualReview": {
+      "status": "passed",
+      "reviewer": "francisrupert",
+      "date": "2026-10-17",
+      "browser": "Google Chrome 154.0.8037.99 (Official Build) (arm64)",
+      "os": "macOS 15.7.4 (24G517)",
+      "assistiveTechnology": "VoiceOver 10",
+      "basis": "Reviewer confirmation of the supplied manual spot checks, not a full accessibility audit.",
+      "checks": [
+        "Native-disabled button skipped; wrapper focus; tooltip on focus and hover; Escape dismissal; representative VoiceOver names, disabled state and description"
+      ],
+      "qualification": "Presentational example; no application action handler. Class/aria-disabled does not itself prevent consuming application actions."
     }
   }
 }

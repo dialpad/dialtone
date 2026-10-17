@@ -222,7 +222,7 @@ Each record includes complete `App.vue`, `main.js`, `index.html`, `package.json`
 
 The explicit tested consumer build profile is `dt10-pinned`: `@dialpad/dialtone@10.5.1`, `@dialpad/dialtone-icons@5.2.0` and Vue `3.5.18`. Source package/version, page/section and SHA-256 are retained independently; other installations remain unverified. Source or assembled-file changes invalidate the recorded build/API validation until rechecked. Copy all five files into an empty directory, then run `npm install`, `npm run build` and `npm run dev`; the delivered manifest and Vite config include SFC build setup. These display examples have no application call handler or hidden state.
 
-The disabled example retains the literal focusable span wrapping the `aria-disabled` button. Consumers must prevent disabled actions in their handlers. Manual browser, keyboard and screen-reader checks remain pending, including focus, tooltip announcements and name/description relationships; build evidence does not establish those results.
+The disabled example retains the literal focusable span wrapping the `aria-disabled` button. Consumers must prevent disabled actions in their handlers. Read each record's manual-review status and tested environment for focus, tooltip announcements and name/description checks; build evidence alone does not establish those results.
 
 Example generation runs in `dialtone-docs:build`; query-core and adapter builds bundle that output into packed packages. Documentation deployment and source merges do not update an installed server: the existing release selection, publication and package-update path still applies. Packed candidates are separate from published packages and verified consumer delivery.
 

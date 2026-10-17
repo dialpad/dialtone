@@ -19,7 +19,7 @@ describe('selected documentation examples', () => {
       expect(record.content).toContain('@dialpad/dialtone/css-default-theme');
       expect(record.content).not.toContain('{props}');
       expect(record.example.components.map(identity => identity.canonicalName)).toEqual(['DtButton', 'DtStack']);
-      expect(record.example.manualReview).toBe('pending');
+      expect(record.example.manualReview).toBe('passed');
     }
     expect(records[1].example.directives).toEqual(['DtTooltipDirective']);
     const stale = buildExampleRecords({
@@ -29,6 +29,8 @@ describe('selected documentation examples', () => {
       vuePackage: JSON.parse(readFileSync(resolve('../dialtone-vue/package.json'))),
     });
     expect(stale[0].example.validation.consumerBuild).toBe('unverified');
+    expect(stale[0].example.manualReview).toBe('pending');
+    expect(stale[0].example.validation.manualReview).toBeUndefined();
     expect(stale[0].example.validation.payloadHash).not.toBe(records[0].example.validation.payloadHash);
   });
 
