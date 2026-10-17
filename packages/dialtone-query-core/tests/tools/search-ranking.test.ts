@@ -159,6 +159,16 @@ describe('curated public-page discovery', () => {
     expect(searchComponents('text field', selected, withoutKeywords).results).toEqual([]);
   });
 
+  test.each([
+    { query: 'DtInput', data: selected, keywordEvidence: false },
+    { query: 'text field', data: selected, keywordEvidence: true },
+    { query: 'text field', data: selected.map(c => ({ ...c, metadata: { deprecated: true } })), keywordEvidence: false },
+  ])('qualifies only retained keyword evidence for $query ($keywordEvidence)', ({ query, data, keywordEvidence }) => {
+    const { results, notes } = searchComponents(query, data, componentDocumentation);
+    expect(results.some(r => r.details.keywordSource)).toBe(keywordEvidence);
+    expect(notes.some(note => note.includes('Curated keyword matches'))).toBe(keywordEvidence);
+  });
+
   test('preserves legacy lookup without a verified identity', () => {
     const legacy = [{ displayName: 'input', description: 'Legacy input' }];
     expect(searchComponents('Legacy', legacy, componentDocumentation).results[0].name).toBe('input');

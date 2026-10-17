@@ -262,9 +262,7 @@ export function searchComponents(query: string, components: Component[], catalog
   console.error(`[COMPONENT SEARCH DEBUG] Exact match: ${exact ? exact.displayName : 'none'}`);
 
   // Add note if no name matches but other buckets have results
-  const searchNotes: string[] = keywordMatches.length && catalog
-    ? [`Curated keyword matches use bundled documentation (${catalog.source.versionScope}; SHA256 ${catalog.source.hash}); installed compatibility is not checked.`]
-    : [];
+  const searchNotes: string[] = [];
   if (!exact && nameMatches.length === 0 && deduplicated.length > 0) {
     searchNotes.push(`No component named '${query}', showing components with matching ${catalog ? 'keywords/' : ''}description/props/events/slots`);
   }
@@ -280,9 +278,12 @@ export function searchComponents(query: string, components: Component[], catalog
 
   // The note also covers a bare "icon": DtIcon is filtered out, but the note
   // still points to its replacement.
-  const allNotes = [...(note ? [note] : []), ...searchNotes, ...filterNotes];
   // removeDuplicates also drops the exact match if the filter swapped it back in.
   const results = exact ? removeDuplicates([toSearchResult(exact), ...filtered]) : filtered;
+  if (catalog && results.some(result => result.details.keywordSource)) {
+    searchNotes.unshift(`Curated keyword matches use bundled documentation (${catalog.source.versionScope}; SHA256 ${catalog.source.hash}); installed compatibility is not checked.`);
+  }
+  const allNotes = [...(note ? [note] : []), ...searchNotes, ...filterNotes];
   return { results, notes: allNotes, exactMatch: exact !== null, warning: note };
 }
 
