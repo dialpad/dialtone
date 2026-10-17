@@ -1,5 +1,5 @@
 import { it, expect } from 'vitest';
-import { documentation, getDocumentationDetail, getDocumentationExampleHints, searchDocumentation } from '../src/index.js';
+import { documentation, getDocumentationDetail, getDocumentationExampleIds, searchDocumentation } from '../src/index.js';
 
 it('keeps selected examples exact-addressable without changing broad discovery', () => {
   const examples = documentation.filter(record => record.example);
@@ -10,7 +10,7 @@ it('keeps selected examples exact-addressable without changing broad discovery',
     expect(detail.next).toBeNull();
   }
   expect(getDocumentationDetail({ id: 'examples/unknown' }, documentation).match).toBe('no-match');
-  expect(getDocumentationExampleHints('DtButton', documentation)).toHaveLength(2);
-  expect(getDocumentationExampleHints('DtTooltipDirective', documentation)).toHaveLength(0);
+  expect(getDocumentationExampleIds('DtButton', documentation)).toEqual(['examples/button-default', 'examples/button-disabled-tooltip']);
+  expect(getDocumentationExampleIds('DtTooltipDirective', documentation)).toEqual([]);
   expect(searchDocumentation('button', documentation)).toEqual(searchDocumentation('button', documentation.filter(record => !record.example)));
 });

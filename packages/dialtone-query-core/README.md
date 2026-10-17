@@ -64,7 +64,7 @@ These functions select source records; they do not resolve a consuming project's
 | --- | --- |
 | `getComponentDetail(args, components)` | Select a canonical component or unique alias, then project `all`, `props`, `events`, `slots`, `methods` or `expose`. `args.component` is required; `projection` and a selected `field` are optional. Returns complete available contracts, alternatives and missing-field information. |
 | `getDocumentationDetail(args, documentation)` | Select an exact record `id`, including selected examples; optional `textOffset` and `textLimit` page its content by Unicode code points. Returns content counts and the next text page. |
-| `getDocumentationExampleHints(componentName, documentation)` | Return CLI/MCP exact-ID fetch hints for examples associated with the normalized public component name. |
+| `getDocumentationExampleIds(componentName, documentation)` | Return exact example IDs associated with the normalized public component name. Adapters render their own fetch syntax. |
 | `getValueDetail(name, tokens)` | Select an exact token name and retain every named theme record and available metadata. |
 | `formatTokenThemes(name, metadata, page)` | Render a selected page of token theme records as Markdown. |
 | `getComponentDocumentation(identity, componentDocumentation)` | Join verified public identity to authored page associations; qualify missing or ambiguous links and latest-documentation scope. |

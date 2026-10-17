@@ -288,9 +288,9 @@ export function getDocumentationDetail(args: { id: string; textOffset?: number; 
   };
 }
 
-/** Compact discovery uses the same source association as exact detail. */
-export function getDocumentationExampleHints(componentName: string, data: DocumentationRecord[]): string[] {
+/** Exact example IDs for a component; each adapter renders its own fetch syntax. */
+export function getDocumentationExampleIds(componentName: string, data: DocumentationRecord[]): string[] {
   return data.filter(record => record.example?.components.some(identity =>
     normalizeComponentName(identity.canonicalName) === normalizeComponentName(componentName)))
-    .map(record => `${record.id}: dialtone docs --id ${record.id}; MCP get_documentation({"id":"${record.id}"})`);
+    .map(record => record.id);
 }

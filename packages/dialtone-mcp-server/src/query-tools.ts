@@ -26,7 +26,7 @@ import {
   getValueDetail,
   formatTokenThemes,
   getComponentDocumentation,
-  getDocumentationExampleHints,
+  getDocumentationExampleIds,
   getDocumentationDetail,
   COMPONENT_SECTIONS,
   COMPONENT_DETAIL_LIMIT,
@@ -473,8 +473,8 @@ export function executeQueryTool(name: string, input: unknown) {
         : undefined,
     );
     if (name === 'search_components') {
-      const hints = [...new Set(page.flatMap(result => getDocumentationExampleHints(result.name, documentation)))];
-      if (hints.length) output += `\n\nSource examples (check profile and validation limits):\n${hints.join('\n')}`;
+      const ids = [...new Set(page.flatMap(result => getDocumentationExampleIds(result.name, documentation)))];
+      if (ids.length) output += `\n\nSource examples (check profile and validation limits):\n${ids.map(id => `- ${id}: ${callText('get_documentation', { id })}`).join('\n')}`;
     }
     if (found.notes.length) output += `\n\n${found.notes.join('\n')}`;
     if (page.length && spec.followUp)

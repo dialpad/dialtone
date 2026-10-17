@@ -7,6 +7,8 @@ import { createRequire } from 'node:module';
 import { execFileSync } from 'node:child_process';
 import { createConsumerFixture, fingerprintArtifact, sha256 } from './fixtures.mjs';
 import { getProfile } from './profiles.mjs';
+import { normalizeComponentName } from '../lib/component-name.mjs';
+import { payloadHash } from '../../packages/dialtone-docs/src/generators/documentation-examples.mjs';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const run = (file, args, cwd) => execFileSync(file, args, { cwd, stdio: 'pipe', encoding: 'utf8', timeout: 240000 });
@@ -16,6 +18,8 @@ const require = createRequire(resolve(root, 'apps/dialtone-documentation/package
 const MarkdownIt = require('markdown-it');
 const markdown = new MarkdownIt();
 const selected = docs.filter(record => record.example);
+assert.ok(selected.length, 'No selected examples in public-docs.json');
+const PROFILE_ID = 'dt10-pinned';
 const filenames = ['App.vue', 'index.html', 'main.js', 'package.json', 'vite.config.js'];
 function extractFiles(record) {
   const tokens = markdown.parse(record.content, {});
@@ -27,15 +31,16 @@ function extractFiles(record) {
     files[name] = tokens[index].content;
   }
   assert.deepEqual(Object.keys(files).sort(), filenames);
-  const deliveredHash = sha256(JSON.stringify({
+  const deliveredHash = payloadHash({
     files, dependencies: record.example.profile.dependencies, sourceHash: record.example.source.hash,
-  }));
+  });
   assert.equal(deliveredHash, record.example.validation.payloadHash);
   return files;
 }
-const fixture = await createConsumerFixture(destination, 'dt10-pinned');
+const fixture = await createConsumerFixture(destination, PROFILE_ID);
 const consumer = fixture.dependencyRoot;
-const pkg = JSON.parse(extractFiles(selected[0])['package.json']);
+const deliveredFiles = new Map(selected.map(record => [record.id, extractFiles(record)]));
+const pkg = JSON.parse(deliveredFiles.get(selected[0].id)['package.json']);
 writeFileSync(resolve(consumer, 'package.json'), JSON.stringify(pkg, null, 2));
 run('npm', ['install', '--ignore-scripts', '--registry=https://registry.npmjs.org', '--@dialpad:registry=https://registry.npmjs.org', '--no-audit', '--no-fund', '--cache', resolve(destination, 'npm-cache')], consumer);
 const consumerRequire = createRequire(resolve(consumer, 'package.json'));
@@ -46,28 +51,23 @@ const lintRequire = createRequire(resolve(root, 'package.json'));
 const { ESLint } = lintRequire('eslint');
 const vueParser = createRequire(lintRequire.resolve('eslint-plugin-vue'))('vue-eslint-parser');
 const plugin = lintRequire('./packages/eslint-plugin-dialtone');
-const reports = [];
-for (const id of ['examples/button-default', 'examples/button-disabled-tooltip']) {
-  const record = docs.find(record => record.id === id);
-  assert.ok(record?.example, id);
-  const files = extractFiles(record);
-  assert.deepEqual(JSON.parse(files['package.json']), pkg, `${id} package.json differs from installed consumer manifest`);
-  const exampleDir = resolve(consumer, id.split('/')[1]);
-  mkdirSync(exampleDir);
-  for (const [name, content] of Object.entries(files)) writeFileSync(resolve(exampleDir, name), content);
-  const sfc = parse(files['App.vue']);
-  assert.deepEqual(sfc.errors, []);
-  const ast = baseParse(sfc.descriptor.template.content);
+const eslint = new ESLint({ overrideConfigFile: true, ignore: false, overrideConfig: [{ files: ['**/*.vue'], languageOptions: { parser: vueParser }, plugins: { dialtone: plugin }, rules: Object.fromEntries(Object.keys(plugin.rules).filter(name => name.startsWith('deprecated-')).map(name => [`dialtone/${name}`, 'error'])) }] });
+
+/** Check delivered tags, props, values and default slots against installed metadata. */
+function checkTemplateApi(ast, directives) {
+  // Registered directive plugins (DtTooltipDirective) appear in templates as v-dt-tooltip.
+  const allowedDirectives = new Set(['bind', ...directives.map(name => name.replace(/Directive$/, '').replace(/([a-z0-9])([A-Z])/g, '$1-$2').toLowerCase())]);
   const checked = [];
   function visit(node) {
     if (node.type === NodeTypes.ELEMENT && node.tag.startsWith('dt-')) {
-      const name = node.tag.split('-').map(part => part[0].toUpperCase() + part.slice(1)).join('');
-      const component = metadata.find(component => component.displayName === name);
-      assert.ok(component, name);
+      const tag = normalizeComponentName(node.tag);
+      const component = metadata.find(component => normalizeComponentName(component.displayName) === tag);
+      assert.ok(component, node.tag);
+      const name = component.displayName;
       assert.ok(!component.tags?.deprecated && !component.metadata?.deprecated, `${name} deprecated`);
       for (const attribute of node.props) {
         const propName = attribute.type === NodeTypes.ATTRIBUTE ? attribute.name : attribute.name === 'bind' ? attribute.arg?.content : null;
-        if (attribute.type === NodeTypes.DIRECTIVE && !['bind', 'dt-tooltip'].includes(attribute.name)) throw new Error(`Unhandled directive/event ${attribute.name}`);
+        if (attribute.type === NodeTypes.DIRECTIVE && !allowedDirectives.has(attribute.name)) throw new Error(`Unhandled directive/event ${attribute.name}`);
         if (!propName || ['class', 'tabindex'].includes(propName) || propName.startsWith('aria-')) continue;
         const prop = component.props?.find(prop => prop.name === propName);
         assert.ok(prop, `${name}.${propName}`);
@@ -84,7 +84,21 @@ for (const id of ['examples/button-default', 'examples/button-disabled-tooltip']
     for (const child of node.children ?? []) visit(child);
   }
   visit(ast);
-  const eslint = new ESLint({ overrideConfigFile: true, ignore: false, overrideConfig: [{ files: ['**/*.vue'], languageOptions: { parser: vueParser }, plugins: { dialtone: plugin }, rules: Object.fromEntries(Object.keys(plugin.rules).filter(name => name.startsWith('deprecated-')).map(name => [`dialtone/${name}`, 'error'])) }] });
+  return checked;
+}
+
+const reports = [];
+for (const record of selected) {
+  const { id } = record;
+  const files = deliveredFiles.get(id);
+  assert.deepEqual(JSON.parse(files['package.json']), pkg, `${id} package.json differs from installed consumer manifest`);
+  const exampleDir = resolve(consumer, id.split('/')[1]);
+  mkdirSync(exampleDir);
+  for (const [name, content] of Object.entries(files)) writeFileSync(resolve(exampleDir, name), content);
+  const sfc = parse(files['App.vue']);
+  assert.deepEqual(sfc.errors, []);
+  const ast = baseParse(sfc.descriptor.template.content);
+  const checked = checkTemplateApi(ast, record.example.directives);
   const lint = await eslint.lintFiles([resolve(exampleDir, 'App.vue')]);
   const lintErrors = lint.reduce((total, result) => total + result.errorCount + result.warningCount, 0);
   assert.equal(lintErrors, 0, JSON.stringify(lint));
@@ -92,10 +106,10 @@ for (const id of ['examples/button-default', 'examples/button-disabled-tooltip']
   reports.push({ id, payloadHash: record.example.validation.payloadHash, consumerBuild: 'built', api: 'passed', checked: [...new Set(checked)], build });
 }
 const primary = resolve(consumer, 'node_modules/@dialpad/dialtone');
-const artifact = await fingerprintArtifact('dt10-pinned', primary, ['dist/vue3/component-documentation.json']);
+const artifact = await fingerprintArtifact(PROFILE_ID, primary, ['dist/vue3/component-documentation.json']);
 const lock = readFileSync(resolve(consumer, 'package-lock.json'));
 const installed = JSON.parse(lock).packages;
-const profile = getProfile('dt10-pinned');
+const profile = getProfile(PROFILE_ID);
 for (const [name, version] of Object.entries(profile.dependencies)) assert.equal(installed[`node_modules/${name}`].version, version);
 assert.equal(installed['node_modules/@dialpad/dialtone'].integrity, profile.artifacts['@dialpad/dialtone'].integrity);
 const report = { fixture, artifact, verification: 'built', node: process.version, tooling: pkg.devDependencies, lockHash: sha256(lock), reports };

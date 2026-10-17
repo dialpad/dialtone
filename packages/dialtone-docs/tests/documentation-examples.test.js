@@ -5,7 +5,14 @@ import { buildRecords, chunkSections } from '../src/generators/build-public-docs
 import { buildExampleRecords } from '../src/generators/documentation-examples.mjs';
 
 const source = resolve('../../apps/dialtone-documentation/docs/components/button.md');
+const vuePackage = JSON.parse(readFileSync(resolve('../dialtone-vue/package.json')));
 const examples = () => buildRecords(source).filter(record => record.example);
+function assemble(raw) {
+  const sections = chunkSections(raw);
+  return buildExampleRecords({ rawFile: raw, sections, records: sections.map(({ headingPath }) => ({ id: 'source#renamed', headingPath })), filePath: 'source.md', vuePackage });
+}
+const live = '### Renamed\n<!-- example-id: examples/button-default -->\n\n```vue demo\n<!-- @wrapper -->\n<dt-button>Live</dt-button>\n<!-- @code -->\n<dt-button {props}>Shortened</dt-button>\n```';
+
 describe('selected documentation examples', () => {
   it('assembles both authored IDs, literal live markup, identities and setup', () => {
     const records = examples();
@@ -22,32 +29,31 @@ describe('selected documentation examples', () => {
       expect(record.example.manualReview).toBe('passed');
     }
     expect(records[1].example.directives).toEqual(['DtTooltipDirective']);
-    const stale = buildExampleRecords({
-      rawFile: 'changed source bytes',
-      sections: [{ headingPath: ['Variants', 'Default'], raw: '<!-- example-id: examples/button-default -->\n\n```vue demo\n<dt-button>Changed</dt-button>\n```' }],
-      records: [records[0]], filePath: records[0].filePath,
-      vuePackage: JSON.parse(readFileSync(resolve('../dialtone-vue/package.json'))),
-    });
-    expect(stale[0].example.validation.consumerBuild).toBe('unverified');
-    expect(stale[0].example.manualReview).toBe('pending');
-    expect(stale[0].example.validation.manualReview).toBeUndefined();
-    expect(stale[0].example.validation.payloadHash).not.toBe(records[0].example.validation.payloadHash);
   });
 
-  function assemble(raw) {
-    const sections = chunkSections(raw);
-    return buildExampleRecords({ rawFile: raw, sections, records: sections.map(({ headingPath }) => ({ id: 'source#renamed', headingPath })), filePath: 'source.md', vuePackage: JSON.parse(readFileSync(resolve('../dialtone-vue/package.json'))) });
-  }
+  it('reverts changed source to unverified and pending review', () => {
+    const [current] = examples();
+    const [stale] = assemble('<!-- example-id: examples/button-default -->\n\n```vue demo\n<dt-button>Changed</dt-button>\n```');
+    expect(stale.example.validation.consumerBuild).toBe('unverified');
+    expect(stale.example.manualReview).toBe('pending');
+    expect(stale.example.validation.manualReview).toBeUndefined();
+    expect(stale.example.validation.payloadHash).not.toBe(current.example.validation.payloadHash);
+  });
+
   it('uses the authored ID after a heading rename and takes live code before @code', () => {
-    const raw = '### Renamed\n<!-- example-id: examples/button-default -->\n\n```vue demo\n<!-- @wrapper -->\n<dt-button>Live</dt-button>\n<!-- @code -->\n<dt-button {props}>Shortened</dt-button>\n```';
-    const [record] = assemble(raw);
+    const [record] = assemble(live);
     expect(record.id).toBe('examples/button-default');
     expect(record.content).toContain('<dt-button>Live</dt-button>');
     expect(record.content).not.toContain('Shortened');
     expect(record.example.validation.consumerBuild).toBe('unverified');
-    expect(() => assemble(raw + '\n' + raw)).toThrow('Duplicate example ID');
-    expect(() => assemble(raw.replace('vue demo', 'vue code-only'))).toThrow('live Vue demo');
-    expect(() => assemble(raw.replace('<dt-button>Live</dt-button>', '<dt-input />'))).toThrow('unconfigured dt-input');
-    expect(() => assemble(raw.replace('<dt-button>Live</dt-button>', '<dt-button v-dt-mode:dark>Live</dt-button>'))).toThrow('unconfigured v-dt-mode');
+  });
+
+  it.each([
+    ['a repeated ID', live + '\n' + live, 'Duplicate example ID'],
+    ['a code-only fence', live.replace('vue demo', 'vue code-only'), 'live Vue demo'],
+    ['an undeclared component', live.replace('<dt-button>Live</dt-button>', '<dt-input />'), 'unconfigured dt-input'],
+    ['an undeclared directive', live.replace('<dt-button>Live</dt-button>', '<dt-button v-dt-mode:dark>Live</dt-button>'), 'unconfigured v-dt-mode'],
+  ])('rejects %s', (_, raw, message) => {
+    expect(() => assemble(raw)).toThrow(message);
   });
 });
