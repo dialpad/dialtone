@@ -109,10 +109,13 @@ export function buildExampleRecords({ rawFile, sections, records, filePath, vueP
       const artifact = profile.artifacts[saved?.artifact?.package];
       const matchesProfile = saved?.profile === profile.id && artifact &&
         saved.artifact.version === artifact.version && saved.artifact.integrity === artifact.integrity;
-      const validation = saved?.payloadHash === payload && matchesProfile ? saved : { payloadHash: payload, consumerBuild: 'unverified' };
-      const manual = validation.manualReview;
+      const savedValidation = saved?.payloadHash === payload && matchesProfile ? saved : { payloadHash: payload, consumerBuild: 'unverified' };
+      const manual = savedValidation.manualReview;
       const manualPassed = manual?.status === 'passed' &&
         ['date', 'reviewer', 'browser', 'os', 'assistiveTechnology'].every(key => manual[key]);
+      const validation = manual?.status === 'passed' && !manualPassed
+        ? { ...savedValidation, manualReview: { ...manual, status: 'pending' } }
+        : savedValidation;
       const manualSummary = manualPassed
         ? `reviewer-reported spot checks passed on ${manual.date} by ${manual.reviewer} (${manual.browser}; ${manual.os}; ${manual.assistiveTechnology}).`
         : 'manual browser, keyboard and screen-reader review pending; reviewer and browser/AT versions not yet recorded.';

@@ -57,7 +57,9 @@ describe('selected documentation examples', () => {
         const { buildExampleRecords: build } = await import('../src/generators/documentation-examples.mjs');
         const [record] = assemble(readFileSync(source, 'utf8'), build);
         expect(record.example.validation.consumerBuild).toBe('built');
+        expect(record.example.validation.api).toBe('passed');
         expect(record.example.manualReview).toBe('pending');
+        expect(record.example.validation.manualReview.status).toBe('pending');
         expect(record.content).not.toContain('reviewer-reported spot checks passed');
       }
     } finally {
