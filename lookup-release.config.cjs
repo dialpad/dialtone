@@ -46,6 +46,7 @@ const commitPaths = [
   'scripts/generate-migration-guidance.mjs',
   'scripts/lib',
   'common/utils/server.mjs',
+  'lookup-release.config.cjs',
   ...testPaths,
 ];
 

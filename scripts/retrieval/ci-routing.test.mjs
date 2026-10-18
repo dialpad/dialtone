@@ -37,7 +37,7 @@ test('lookup source, data, adapter and harness changes route to the mandatory su
     'apps/dialtone-documentation/package.json',
     'scripts/build-dialtone-vue-docs.mjs',
     'scripts/lib/vue-component-identity.mjs',
-    'scripts/lib/lookup-release.cjs',
+    'lookup-release.config.cjs',
     'scripts/tests/vue-component-identity.test.mjs',
     'common/utils/server.mjs',
     'packages/dialtone-query-core/src/data.ts',

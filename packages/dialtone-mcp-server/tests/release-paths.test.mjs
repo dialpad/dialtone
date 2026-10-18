@@ -63,7 +63,7 @@ for (const adapter of ['dialtone-cli', 'dialtone-mcp-server']) {
       ['packages/dialtone-vue/package.json', 'chore: correct dataset version metadata', 'patch'],
       ['apps/dialtone-documentation/package.json', 'build(docs): update the link parser dependency', 'patch'],
       ['scripts/lib/component-name.mjs', 'refactor(core): normalize component names', 'patch'],
-      ['scripts/lib/lookup-release.cjs', 'ci(release): correct source selection', 'patch'],
+      ['lookup-release.config.cjs', 'ci(release): correct source selection', 'patch'],
       ['packages/dialtone-vue/components/input/input.vue', 'refactor(input): change an API\n\nBREAKING CHANGE: upstream API changed', 'patch'],
       ['packages/dialtone-vue/common/constants.js', 'chore(vue): change a contract\n\nBREAKING CHANGE: upstream contract changed', 'patch'],
       ['packages/dialtone-docs/src/utils/source.mjs', 'chore: change a contract\n\nBREAKING CHANGE: upstream documentation changed', 'patch'],

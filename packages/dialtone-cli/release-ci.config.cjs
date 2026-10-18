@@ -1,7 +1,7 @@
 
 const name = 'dialtone-cli';
 const srcRoot = `packages/${name}`;
-const lookupRelease = require('../../scripts/lib/lookup-release.cjs');
+const lookupRelease = require('../../lookup-release.config.cjs');
 
 /**
  * @type {import('semantic-release').GlobalConfig}
@@ -12,7 +12,7 @@ module.exports = {
   // semantic-release-plus passes these Git pathspecs to git log.
   commitPaths: [`${srcRoot}/*`, ...lookupRelease.commitPaths],
   plugins: [
-    [require.resolve('../../scripts/lib/lookup-release.cjs'), { adapterRoot: srcRoot }],
+    [require.resolve('../../lookup-release.config.cjs'), { adapterRoot: srcRoot }],
     ['@semantic-release/changelog', { changelogFile: `${srcRoot}/CHANGELOG.md` }],
     ['@dialpad/semantic-release-changelog-json', {
       changelogFile: `${srcRoot}/CHANGELOG.md`,
