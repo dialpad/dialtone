@@ -1,3 +1,19 @@
+// CommonJS supports the synchronous release configs and semantic-release-plus plugin loader.
+const { execFileSync } = require('node:child_process');
+const { createRequire } = require('node:module');
+
+const releaseRequire = createRequire(require.resolve('semantic-release-plus/package.json'));
+const commitAnalyzer = releaseRequire('@semantic-release/commit-analyzer');
+const notesGenerator = releaseRequire('@semantic-release/release-notes-generator');
+
+const testPaths = [
+  ':(exclude,glob)**/tests/**',
+  ':(exclude,glob)**/__tests__/**',
+  ':(exclude,glob)**/__fixtures__/**',
+  ':(exclude,glob)**/*.test.*',
+  ':(exclude,glob)**/*.spec.*',
+];
+
 // Git pathspecs for the sources consumed by both lookup bundles.
 // Source-family matches are conservative; tests and unrelated packages stay out.
 // When a bundled dataset gains a producer, add it here and to the release-path suite.
@@ -21,6 +37,7 @@ const commitPaths = [
   'packages/dialtone-docs/src/utils',
   'packages/dialtone-docs/package.json',
   'packages/dialtone-docs/project.json',
+  'apps/dialtone-documentation/package.json',
   ':(glob)apps/dialtone-documentation/docs/**/*.md',
   'apps/dialtone-documentation/docs/.vuepress/site-reference.js',
   'apps/dialtone-documentation/scripts/lib/frontmatter.mjs',
@@ -29,22 +46,49 @@ const commitPaths = [
   'scripts/generate-migration-guidance.mjs',
   'scripts/lib',
   'common/utils/server.mjs',
-  ':(exclude,glob)**/tests/**',
-  ':(exclude,glob)**/*.test.*',
+  ...testPaths,
 ];
 
-// Release commits can quote breaking notes, so no bump rule may match them.
-// The analyzer takes the highest matching rule, so `release: false` cannot veto a later
-// match; each bump rule excludes chore(release) itself. Scope globs never match a
-// missing scope, hence the `scope: null` twins.
+// A producer's breaking change refreshes data; tool/shared-core changes retain major semantics.
 const releaseRules = [
-  { type: 'chore', scope: 'release', release: false },
-  { type: '!chore', breaking: true, release: 'major' },
-  { type: 'chore', scope: '!release', breaking: true, release: 'major' },
-  { type: 'chore', scope: null, breaking: true, release: 'major' },
-  { type: '@(build|ci|docs|refactor|style)', release: 'patch' },
-  { type: 'chore', scope: '!release', release: 'patch' },
-  { type: 'chore', scope: null, release: 'patch' },
+  { breaking: true, lookupContract: true, release: 'major' },
+  { breaking: true, lookupContract: false, release: 'patch' },
+  { type: '@(build|chore|ci|docs|refactor|style)', release: 'patch' },
 ];
 
-module.exports = { commitPaths, releaseRules };
+function lookupCommits({ adapterRoot }, { cwd, env, commits }) {
+  return commits
+    // Filter bookkeeping from both analysis and notes: release rules alone cannot do the latter.
+    .filter(({ message }) => !/^chore\(release\):/.test(message))
+    .map(commit => ({
+      ...commit,
+      lookupContract: execFileSync('git', [
+        'diff-tree', '--root', '--no-commit-id', '--name-only', '-r', '-m', '--first-parent',
+        '--no-renames', commit.hash, '--', adapterRoot, 'packages/dialtone-query-core',
+        'scripts/lib/component-name.mjs', ...testPaths,
+      ], { cwd, env, encoding: 'utf8' }).trim().length > 0,
+    }));
+}
+
+async function analyzeCommits(options, context) {
+  return commitAnalyzer.analyzeCommits({ preset: 'angular', releaseRules }, {
+    ...context, commits: lookupCommits(options, context),
+  });
+}
+
+async function generateNotes(options, context) {
+  const { writerOpts } = await releaseRequire('@dialpad/conventional-changelog-angular');
+  return notesGenerator.generateNotes({
+    config: '@dialpad/conventional-changelog-angular',
+    writerOpts: {
+      transform(commit, writerContext) {
+        const formatted = writerOpts.transform(commit, writerContext);
+        if (formatted && !commit.lookupContract)
+          for (const note of formatted.notes) note.title = 'Bundled Dialtone data changes';
+        return formatted;
+      },
+    },
+  }, { ...context, commits: lookupCommits(options, context) });
+}
+
+module.exports = { commitPaths, analyzeCommits, generateNotes };

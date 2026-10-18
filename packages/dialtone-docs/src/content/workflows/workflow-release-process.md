@@ -55,7 +55,11 @@ Tags are what NX and semantic-release use to determine what has changed since th
 
 The CLI and MCP server bundle query-core and its generated datasets. Both release configurations use `scripts/lib/lookup-release.cjs` to select the consumed component, utility/token, icon/keyword, public documentation and generator sources. `semantic-release-plus` passes these paths to `git log` as Git pathspecs. Source-family selection is conservative: a matching source change can qualify even when it leaves a dataset unchanged. Unrelated packages and test-only paths are excluded.
 
-For these selected commits, `build`, `chore`, `ci`, `docs` and `style` request a patch release. Existing `feat`, `fix`, `perf`, `refactor` and breaking-footer semantics remain. Automated `chore(release)` commits and `test` commits do not request another release. When adding a new consumed producer, update the shared source policy and the existing release-path suite; do not add artificial adapter commits to trigger publication.
+For these selected commits, `build`, `chore`, `ci`, `docs` and `style` request a patch release. Nonbreaking `feat` commits request minors; `fix`, `perf` and `refactor` request patches. A breaking change confined to an upstream producer refreshes the bundled data with a tool patch. A commit touching the adapter itself, shared query-core or the shared runtime component-name helper retains normal breaking-footer semantics. Mixed source/tool changes retain those semantics too. Test paths do not count as contract changes.
+
+The shared module delegates commit analysis and notes to the installed release libraries. It omits automated `chore(release)` commits from both steps, including copied breaking notes. Upstream breaking notices appear under **Bundled Dialtone data changes**, separate from tool contract notices. Normal `test` commits do not request a release.
+
+The documentation app's manifest supplies parser dependencies, so it participates in release selection, lookup CI routing and the docs build hash. When adding a new consumed producer, update the shared source policy and the existing release-path suite; do not add artificial adapter commits to trigger publication.
 
 ## Packages Released
 

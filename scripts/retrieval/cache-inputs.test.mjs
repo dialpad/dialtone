@@ -132,6 +132,13 @@ test('MCP client rules participate in the build hash', () => {
     ['packages/dialtone-mcp-server/client-rules.json'],
   );
 });
+test('documentation parser dependencies participate in the docs build hash', () => {
+  const manifests = [
+    'packages/dialtone-docs/package.json',
+    'apps/dialtone-documentation/package.json',
+  ];
+  assert.deepEqual(covered(manifests, selfPatterns('dialtone-docs')), manifests);
+});
 test('core and adapters hash the generated data they consume through dependency outputs', () => {
   const consumed = [
     'packages/dialtone-css/lib/dist/dialtone-docs.json',

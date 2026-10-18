@@ -12,13 +12,7 @@ module.exports = {
   // semantic-release-plus passes these Git pathspecs to git log.
   commitPaths: [`${srcRoot}/*`, ...lookupRelease.commitPaths],
   plugins: [
-    ['@semantic-release/commit-analyzer', {
-      preset: 'angular',
-      releaseRules: lookupRelease.releaseRules,
-    }],
-    ['@semantic-release/release-notes-generator', {
-      config: '@dialpad/conventional-changelog-angular',
-    }],
+    [require.resolve('../../scripts/lib/lookup-release.cjs'), { adapterRoot: srcRoot }],
     ['@semantic-release/changelog', { changelogFile: `${srcRoot}/CHANGELOG.md` }],
     ['@dialpad/semantic-release-changelog-json', {
       changelogFile: `${srcRoot}/CHANGELOG.md`,

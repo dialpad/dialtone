@@ -8,6 +8,8 @@
       },
       "inputs": [
         "{projectRoot}/src/**",
+        "{projectRoot}/package.json",
+        "{workspaceRoot}/apps/dialtone-documentation/package.json",
         "{workspaceRoot}/apps/dialtone-documentation/docs/**/*.md",
         "{workspaceRoot}/scripts/lib/vue-component-identity.mjs",
         "{workspaceRoot}/scripts/lib/component-name.mjs",

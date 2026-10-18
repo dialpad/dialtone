@@ -34,6 +34,7 @@ test('lookup source, data, adapter and harness changes route to the mandatory su
     'packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md',
     'packages/dialtone-docs/src/generators/build-public-docs.mjs',
     'apps/dialtone-documentation/docs/components/tooltip.md',
+    'apps/dialtone-documentation/package.json',
     'scripts/build-dialtone-vue-docs.mjs',
     'scripts/lib/vue-component-identity.mjs',
     'scripts/lib/lookup-release.cjs',

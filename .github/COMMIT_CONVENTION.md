@@ -45,9 +45,11 @@ Must be one of the following:
 >
 > CLI and MCP also trigger patch releases for `build`, `chore`, `ci`, `docs` and `style` commits selected by their
 > lookup-source paths. Test-only paths and automated `chore(release)` commits do not trigger these releases.
+> Breaking changes confined to their upstream data producers request tool patches; changes to the tool or shared
+> query-core contracts retain normal breaking-change handling. See the release-process guide for this boundary.
 >
 > Commits with `BREAKING CHANGE:` in the footer of the commit message, regardless of type, will generate a `MAJOR`
-> release.
+> release, except for the CLI/MCP producer-only refreshes described above.
 
 ### Scope:
 
