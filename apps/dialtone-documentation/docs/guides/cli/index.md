@@ -40,6 +40,12 @@ Using local Dialtone data: @dialpad/dialtone@10.4.0 (icons: @dialpad/dialtone-ic
 
 Without local Dialtone data, the line reads `Using bundled Dialtone data (@dialpad/dialtone-cli@<version>)`.
 
+### Keeping lookup data current
+
+Changes to the component, utility, token, icon and documentation sources bundled by the CLI are eligible for a CLI release through the normal release process. A source change or documentation-site deployment does not immediately update an installed CLI.
+
+Update `@dialpad/dialtone-cli` in the same location where you installed it to receive newer bundled data. Documentation always comes from that bundle. When a lookup uses your project's installed Dialtone packages, their versions still determine the available API; updating the CLI does not update those packages. Check the reported source and version before using an answer.
+
 ## Quick start
 
 Search across Dialtone when you do not know which command to use:

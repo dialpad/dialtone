@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [release, semantic-release, versioning, changelog, tags, tuesday, cron, staging, production, npm-publish]
 ai_summary: How Dialtone releases work — Tuesday cron, semantic-release per package, tag format, changelogs, and staging-to-production merge.
-last_updated: 2026-10-06
+last_updated: 2026-10-18
 related_packages: [dialtone-vue, dialtone-css, dialtone-tokens, dialtone-icons]
 ---
 
@@ -53,7 +53,9 @@ Examples:
 
 Tags are what NX and semantic-release use to determine what has changed since the last release. The tag prefix is what lets semantic-release distinguish which package a tag belongs to in the monorepo — missing or wrong `tagFormat` breaks the release for that package.
 
-The CLI and MCP server bundle query-core. Their release configurations include `packages/dialtone-query-core` in `commitPaths`, so release-triggering shared-core commits also select both adapters for release. `semantic-release-plus` passes these paths to `git log` as Git pathspecs. Test-only or documentation-only commits retain the usual no-release behavior.
+The CLI and MCP server bundle query-core and its generated datasets. Both release configurations use `scripts/lib/lookup-release.cjs` to select the consumed component, utility/token, icon/keyword, public documentation and generator sources. `semantic-release-plus` passes these paths to `git log` as Git pathspecs. Source-family selection is conservative: a matching source change can qualify even when it leaves a dataset unchanged. Unrelated packages and test-only paths are excluded.
+
+For these selected commits, `build`, `chore`, `ci`, `docs` and `style` request a patch release. Existing `feat`, `fix`, `perf`, `refactor` and breaking-footer semantics remain. Automated `chore(release)` commits and `test` commits do not request another release. When adding a new consumed producer, update the shared source policy and the existing release-path suite; do not add artificial adapter commits to trigger publication.
 
 ## Packages Released
 
@@ -102,7 +104,7 @@ Actual npm publishing is done by a separate `publish-web.yml` workflow, which tr
 
 `dialtone-icons` and `dialtone-emojis` have additional `releaseRules` that trigger patch releases for `build`, `chore`, `ci`, `docs`, `style`, and `test` commit types. This is intentional — icon and emoji additions often arrive via those commit types and should increment the version.
 
-All other packages only release on `feat`, `fix`, `perf`, `refactor`, and `BREAKING CHANGE`.
+The CLI and MCP server have the source-qualified patch rules described above, excluding test-only and automated release commits. Other packages retain their existing `feat`, `fix`, `perf`, `refactor` and `BREAKING CHANGE` rules.
 
 ## Release Commit Format
 

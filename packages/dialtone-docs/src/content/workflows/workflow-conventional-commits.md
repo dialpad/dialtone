@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [conventional-commits, commitlint, semantic-release, commit-format, jira, breaking-change, version-bump, scope, angular-preset]
 ai_summary: Dialtone commit format rules — type, optional scope, required JIRA ID, and how each type maps to a semantic version bump in the release pipeline.
-last_updated: 2026-03-04
+last_updated: 2026-10-18
 related_packages: []
 ---
 
@@ -62,6 +62,8 @@ chore: NO-JIRA upgrade vitest to v2
 | `revert` | Reverts a previous commit | No* |
 
 *Exception: `dialtone-icons` and `dialtone-emojis` also trigger a **patch** release for `build`, `chore`, `ci`, `docs`, `style`, and `test` types. This covers icon additions that arrive via non-`feat` commits.
+
+CLI and MCP also request patch releases for `build`, `chore`, `ci`, `docs` and `style` commits selected by their consumed lookup-source paths. Test-only paths, unrelated packages and automated `chore(release)` commits do not trigger these releases. Maintain the shared selection in `scripts/lib/lookup-release.cjs`; the existing release-path suite checks both path selection and commit analysis.
 
 Any commit type triggers a **major** release if the footer contains `BREAKING CHANGE:`.
 

@@ -43,6 +43,9 @@ Must be one of the following:
 > Dialtone icons and Dialtone emojis packages trigger a patch release on `build`, `chore`, `ci`, `docs`, `style` and
 > `test` also.
 >
+> CLI and MCP also trigger patch releases for `build`, `chore`, `ci`, `docs` and `style` commits selected by their
+> lookup-source paths. Test-only paths and automated `chore(release)` commits do not trigger these releases.
+>
 > Commits with `BREAKING CHANGE:` in the footer of the commit message, regardless of type, will generate a `MAJOR`
 > release.
 
