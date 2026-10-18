@@ -104,7 +104,7 @@ Actual npm publishing is done by a separate `publish-web.yml` workflow, which tr
 
 `dialtone-icons` and `dialtone-emojis` have additional `releaseRules` that trigger patch releases for `build`, `chore`, `ci`, `docs`, `style`, and `test` commit types. This is intentional — icon and emoji additions often arrive via those commit types and should increment the version.
 
-The CLI and MCP server have the source-qualified patch rules described above, excluding test-only and automated release commits. Other packages retain their existing `feat`, `fix`, `perf`, `refactor` and `BREAKING CHANGE` rules.
+The CLI and MCP server have the source-qualified patch rules described above. Other packages retain their existing `feat`, `fix`, `perf`, `refactor` and `BREAKING CHANGE` rules.
 
 ## Release Commit Format
 

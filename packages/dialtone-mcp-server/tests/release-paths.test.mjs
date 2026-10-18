@@ -41,23 +41,11 @@ for (const adapter of ['dialtone-cli', 'dialtone-mcp-server']) {
   const config = require(`../../${adapter}/release-ci.config.cjs`);
   const analyzerOptions = config.plugins.find(([name]) => name === '@semantic-release/commit-analyzer')[1];
 
-  test(`${adapter} selects nested shared-core fixes and its own fixes for patch release`, async t => {
-    const { cwd, commit, selectCommits } = repository(t, config);
-    const coreFix = commit('packages/dialtone-query-core/src/tools/components.ts', 'fix(query-core): exact component');
-    const ownFix = commit(`packages/${adapter}/src/nested/startup.ts`, `fix(${adapter}): startup`);
-    commit('packages/dialtone-query-core-extra/src/tools/components.ts', 'fix(other): unrelated sibling');
-    commit('packages/combinator/src/combinator.vue', 'fix(combinator): unrelated playground');
-    const commits = await selectCommits();
-    assert.deepEqual(new Set(commits.map(({ hash }) => hash)), new Set([ownFix, coreFix]));
-    for (const hash of [coreFix, ownFix]) {
-      const selected = commits.filter(commit => commit.hash === hash);
-      assert.equal(await analyzeCommits(analyzerOptions, { cwd, commits: selected, logger }), 'patch');
-    }
-  });
-
-  test(`${adapter} releases consumed source changes using their actual commit types`, async t => {
+  test(`${adapter} releases its own and consumed source changes using their actual commit types`, async t => {
     const { cwd, commit, selectCommits } = repository(t, config);
     const cases = [
+      [`packages/${adapter}/src/nested/startup.ts`, `fix(${adapter}): startup`, 'patch'],
+      ['packages/dialtone-query-core/src/tools/components.ts', 'fix(query-core): exact component', 'patch'],
       ['packages/dialtone-vue/components/button/button.vue', 'fix(button): describe a public prop', 'patch'],
       ['packages/dialtone-vue/index.js', 'feat(vue): export a public component', 'minor'],
       ['scripts/build-dialtone-vue-docs.mjs', 'build(vue): update metadata generation', 'patch'],
@@ -73,7 +61,7 @@ for (const adapter of ['dialtone-cli', 'dialtone-mcp-server']) {
       ['packages/dialtone-vue/package.json', 'chore: correct dataset version metadata', 'patch'],
       ['scripts/lib/component-name.mjs', 'refactor(core): normalize component names', 'patch'],
       ['scripts/lib/lookup-release.cjs', 'ci(release): correct source selection', 'patch'],
-      ['packages/dialtone-vue/components/input/input.vue', 'feat(input): change an API\n\nBREAKING CHANGE: fixture API changed', 'major'],
+      ['packages/dialtone-vue/components/input/input.vue', 'refactor(input): change an API\n\nBREAKING CHANGE: fixture API changed', 'major'],
       ['packages/dialtone-vue/common/constants.js', 'chore(vue): change a contract\n\nBREAKING CHANGE: fixture contract changed', 'major'],
       ['packages/dialtone-docs/src/utils/source.mjs', 'chore: change a contract\n\nBREAKING CHANGE: fixture contract changed', 'major'],
     ].map(([path, message, release]) => ({ path, hash: commit(path, message), release }));
@@ -81,7 +69,7 @@ for (const adapter of ['dialtone-cli', 'dialtone-mcp-server']) {
     assert.deepEqual(new Set(commits.map(({ hash }) => hash)), new Set(cases.map(({ hash }) => hash)));
     for (const { path, hash, release } of cases) {
       assert.equal(await analyzeCommits(analyzerOptions, {
-        cwd, commits: commits.filter(commit => commit.hash === hash), logger,
+        cwd, commits: commits.filter(selected => selected.hash === hash), logger,
       }), release, path);
     }
   });

@@ -63,7 +63,7 @@ chore: NO-JIRA upgrade vitest to v2
 
 *Exception: `dialtone-icons` and `dialtone-emojis` also trigger a **patch** release for `build`, `chore`, `ci`, `docs`, `style`, and `test` types. This covers icon additions that arrive via non-`feat` commits.
 
-CLI and MCP also request patch releases for `build`, `chore`, `ci`, `docs` and `style` commits selected by their consumed lookup-source paths. Test-only paths, unrelated packages and automated `chore(release)` commits do not trigger these releases. Maintain the shared selection in `scripts/lib/lookup-release.cjs`; the existing release-path suite checks both path selection and commit analysis.
+CLI and MCP also trigger patch releases for `build`, `chore`, `ci`, `docs` and `style` commits selected by their consumed lookup-source paths. Test-only paths, unrelated packages and automated `chore(release)` commits do not trigger these releases. See [the release process](./workflow-release-process.md) for the shared selection.
 
 Any commit type triggers a **major** release if the footer contains `BREAKING CHANGE:`.
 

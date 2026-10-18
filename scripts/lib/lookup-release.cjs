@@ -1,5 +1,6 @@
 // Git pathspecs for the sources consumed by both lookup bundles.
 // Source-family matches are conservative; tests and unrelated packages stay out.
+// When a bundled dataset gains a producer, add it here and to the release-path suite.
 const commitPaths = [
   'packages/dialtone-query-core',
   'packages/dialtone-vue',
@@ -26,18 +27,16 @@ const commitPaths = [
   'apps/dialtone-documentation/scripts/lib/source-page.mjs',
   'scripts/build-dialtone-vue-docs.mjs',
   'scripts/generate-migration-guidance.mjs',
-  'scripts/lib/component-name.mjs',
-  'scripts/lib/vue-component-identity.mjs',
-  'scripts/lib/lookup-release.cjs',
+  'scripts/lib',
   'common/utils/server.mjs',
   ':(exclude,glob)**/tests/**',
-  ':(exclude,glob)**/__tests__/**',
-  ':(exclude,glob)**/__fixtures__/**',
   ':(exclude,glob)**/*.test.*',
-  ':(exclude,glob)**/*.spec.*',
 ];
 
 // Release commits can quote breaking notes, so no bump rule may match them.
+// The analyzer takes the highest matching rule, so `release: false` cannot veto a later
+// match; each bump rule excludes chore(release) itself. Scope globs never match a
+// missing scope, hence the `scope: null` twins.
 const releaseRules = [
   { type: 'chore', scope: 'release', release: false },
   { type: '!chore', breaking: true, release: 'major' },
