@@ -41,6 +41,31 @@ describe('selected documentation examples', () => {
     expect(stale.example.validation.payloadHash).not.toBe(current.example.validation.payloadHash);
   });
 
+  it('withholds passed manual claims when any required evidence field is missing', async () => {
+    const saved = JSON.parse(readFileSync(resolve('src/generators/example-validation.json'), 'utf8'));
+    let evidence;
+    vi.doMock('node:fs', async importOriginal => ({
+      ...await importOriginal(),
+      readFileSync: (file, ...args) => String(file).endsWith('/example-validation.json')
+        ? JSON.stringify(evidence) : readFileSync(file, ...args),
+    }));
+    try {
+      for (const field of ['date', 'reviewer', 'browser', 'os', 'assistiveTechnology']) {
+        evidence = structuredClone(saved);
+        delete evidence['examples/button-default'].manualReview[field];
+        vi.resetModules();
+        const { buildExampleRecords: build } = await import('../src/generators/documentation-examples.mjs');
+        const [record] = assemble(readFileSync(source, 'utf8'), build);
+        expect(record.example.validation.consumerBuild).toBe('built');
+        expect(record.example.manualReview).toBe('pending');
+        expect(record.content).not.toContain('reviewer-reported spot checks passed');
+      }
+    } finally {
+      vi.doUnmock('node:fs');
+      vi.resetModules();
+    }
+  });
+
   it.each(['id', 'artifact integrity'])('invalidates saved evidence after changing the profile %s', async field => {
     const profile = getProfile('dt10-pinned');
     if (field === 'id') profile.id = 'renamed-profile';

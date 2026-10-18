@@ -111,7 +111,8 @@ export function buildExampleRecords({ rawFile, sections, records, filePath, vueP
         saved.artifact.version === artifact.version && saved.artifact.integrity === artifact.integrity;
       const validation = saved?.payloadHash === payload && matchesProfile ? saved : { payloadHash: payload, consumerBuild: 'unverified' };
       const manual = validation.manualReview;
-      const manualPassed = manual?.status === 'passed';
+      const manualPassed = manual?.status === 'passed' &&
+        ['date', 'reviewer', 'browser', 'os', 'assistiveTechnology'].every(key => manual[key]);
       const manualSummary = manualPassed
         ? `reviewer-reported spot checks passed on ${manual.date} by ${manual.reviewer} (${manual.browser}; ${manual.os}; ${manual.assistiveTechnology}).`
         : 'manual browser, keyboard and screen-reader review pending; reviewer and browser/AT versions not yet recorded.';
