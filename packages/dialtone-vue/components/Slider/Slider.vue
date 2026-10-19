@@ -170,7 +170,7 @@
               !readoutMerged ? 'd-slider__readout--show' : 'd-slider__readout--hide',
               readoutClass,
             ]"
-            :style="markStyle(thumbPercent(val))"
+            :style="readoutStyle(thumbPercent(val), readoutEdgeOffsetPx[i], readoutEdge(val))"
             :data-readout-index="i"
             aria-hidden="true"
             data-qa="dt-slider-thumb-readout"
@@ -184,7 +184,7 @@
             v-if="readoutMerged"
             ref="mergedReadoutElRef"
             :class="['d-slider__readout', 'd-slider__readout--show', readoutClass]"
-            :style="markStyle(mergedReadoutPct)"
+            :style="readoutStyle(mergedReadoutPct, mergedReadoutEdgeOffsetPx)"
             aria-hidden="true"
             data-qa="dt-slider-thumb-readout-merged"
           >
@@ -711,6 +711,8 @@ const {
   markCollisionHidden,
   readoutMerged,
   markEdgeOffsetPx,
+  readoutEdgeOffsetPx,
+  mergedReadoutEdgeOffsetPx,
   readoutVisibility,
   formattedValues,
   updateCollisions,
@@ -730,6 +732,7 @@ const {
   thumbPositionStyle,
   tickPositionStyle,
   markStyle,
+  readoutStyle,
   mergedReadoutPct,
   mergedReadoutText,
   indicatorStyle,
@@ -742,6 +745,13 @@ const {
   markEdgeOffsetPx,
   formatValue,
 });
+
+// Same "edge" detection computedMarks (UseSliderMarksAndTicks) uses for its
+// own min/max marks — a readout tracking a thumb sitting exactly at min/max
+// gets the same flush-edge treatment there.
+function readoutEdge(val) {
+  return val === props.min ? 'start' : val === props.max ? 'end' : null;
+}
 
 useSliderTooltipReadout(props, {
   thumbVisualRefs,

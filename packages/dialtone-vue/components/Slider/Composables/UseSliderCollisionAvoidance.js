@@ -29,6 +29,18 @@ export function useSliderCollisionAvoidance(props, {
   // markStyle — returned below rather than threaded in from Slider.vue as a
   // bare shared ref.
   const markEdgeOffsetPx = ref([]);
+  // Same edge-clamp protection as markEdgeOffsetPx, but for readout='always'
+  // pills — those anchor onto the same inset band as the thumb (so they
+  // never poke past the thumb's own radius), but unlike the thumb, a
+  // readout's rendered width depends on its TEXT (locale, suffix, a long
+  // getValueText override), which the anchored band alone doesn't account
+  // for. A consumer wrapping the slider in a narrower overflow:hidden box
+  // than the control's own overflow-clip-margin tolerance could clip it.
+  // One offset per thumb index (individual pills) plus a separate scalar
+  // for the merged pill — never both populated at once (readoutMerged
+  // decides which representation is actually rendered).
+  const readoutEdgeOffsetPx = ref([]);
+  const mergedReadoutEdgeOffsetPx = ref(0);
   const COLLISION_PADDING = 4; // px of breathing room before a mark hides or readouts merge
   // Must match .d-slider__control's own overflow-clip-margin (slider.less) — a
   // mark within that margin already renders fully today (it's what the margin
@@ -143,6 +155,44 @@ export function useSliderCollisionAvoidance(props, {
     }
 
     updateMarkCollisions();
+    updateReadoutEdgeOffsets();
+  }
+
+  // Mirrors updateMarkCollisions's own edge-clamp loop (same edgeClampOffset
+  // helper, same "back out the previous offset before measuring" rationale),
+  // but for the readout='always' pill(s) instead of static marks — marks and
+  // readouts are two different DOM subtrees (only one of which ever renders
+  // a merged pill), so this is a parallel pass rather than a shared loop.
+  // Deliberately independent of updateMarkCollisions's own mark-vs-readout
+  // overlap check above: that check already ran against the readout's
+  // un-nudged rect this cycle, and the nudge here is a small, edge-only
+  // correction — not worth a second collision pass to chase.
+  function updateReadoutEdgeOffsets() {
+    const canClampEdges = props.readout === 'always' && !!controlRef.value && !isVertical.value;
+    const controlRect = canClampEdges ? controlRef.value.getBoundingClientRect() : null;
+
+    function clampOffset(el, prevOffset) {
+      if (!el || !canClampEdges) return 0;
+      const r = el.getBoundingClientRect();
+      return edgeClampOffset(r.left - prevOffset, r.right - prevOffset, controlRect, EDGE_CLAMP_TOLERANCE_PX);
+    }
+
+    function updateMergedOffset() {
+      const offset = clampOffset(mergedReadoutElRef.value, mergedReadoutEdgeOffsetPx.value);
+      if (offset !== mergedReadoutEdgeOffsetPx.value) mergedReadoutEdgeOffsetPx.value = offset;
+      if (readoutEdgeOffsetPx.value.some(Boolean)) readoutEdgeOffsetPx.value = internalValues.value.map(() => 0);
+    }
+
+    function updateIndividualOffsets() {
+      if (mergedReadoutEdgeOffsetPx.value) mergedReadoutEdgeOffsetPx.value = 0;
+      const offsets = internalValues.value.map((_, i) => (
+        isReadoutOpen(i) ? clampOffset(readoutElByIndex(i), readoutEdgeOffsetPx.value[i] || 0) : 0
+      ));
+      if (!sameValues(offsets, readoutEdgeOffsetPx.value)) readoutEdgeOffsetPx.value = offsets;
+    }
+
+    if (readoutMerged.value) updateMergedOffset();
+    else updateIndividualOffsets();
   }
 
   // Same formula as UseSliderGeometry's own mergedReadoutPct — recomputed
@@ -269,6 +319,8 @@ export function useSliderCollisionAvoidance(props, {
     markCollisionHidden,
     readoutMerged,
     markEdgeOffsetPx,
+    readoutEdgeOffsetPx,
+    mergedReadoutEdgeOffsetPx,
     readoutVisibility,
     formattedValues,
     updateCollisions,

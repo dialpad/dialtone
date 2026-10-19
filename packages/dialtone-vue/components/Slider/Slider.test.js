@@ -363,19 +363,45 @@ describe('DtSlider Tests', () => {
         expect(readouts()[0].text()).toBe('50 units');
       });
 
-      it('anchors onto the thumb\'s own inset band at the edges, not a flush track percentage', async () => {
+      it('anchors onto the thumb\'s own inset band near the edges, not a flush track percentage', async () => {
         // Anchored (UseSliderGeometry's anchorPct), same band the thumb
         // itself renders on — otherwise this pill would sit up to a full
-        // --slider-edge-inset away from the thumb it's meant to track,
-        // worst-case right at min/max. Centering itself still comes from
-        // .d-slider__readout's own CSS transform, not an inline style, so
-        // the absence of an inline transform here is expected, not a gap.
+        // --slider-edge-inset away from the thumb it's meant to track. 99,
+        // not 100 — an exact min/max match takes the flush-edge path
+        // instead (see the two tests below), which this one isn't about.
+        // Centering itself still comes from .d-slider__readout's own CSS
+        // transform, not an inline style, so the absence of an inline
+        // transform here is expected, not a gap.
+        mockProps = { readout: 'always', modelValue: 99 };
+        updateWrapper();
+        await nextTick();
+        const style = readouts()[0].attributes('style');
+        expect(style).toContain('inset-inline-start: calc(var(--slider-edge-inset) + (100% - var(--slider-edge-inset) * 2) * 0.99)');
+        expect(style).not.toContain('transform');
+      });
+
+      it('flush-aligns its own edge instead of centering when tracking a thumb exactly at max, so its text only ever extends inward', async () => {
+        // Same treatment UseSliderMarksAndTicks already gives a mark exactly
+        // at min/max — without it, a readout's own (unbounded, locale/
+        // suffix/getValueText-dependent) text width can poke past a
+        // consumer's overflow:hidden wrapper even though the thumb itself
+        // never does (reported: DLT-1974, a "120 min" label clipped to
+        // "120 m" in a narrow wrapper).
         mockProps = { readout: 'always', modelValue: 100 };
         updateWrapper();
         await nextTick();
         const style = readouts()[0].attributes('style');
-        expect(style).toContain('inset-inline-start: calc(var(--slider-edge-inset) + (100% - var(--slider-edge-inset) * 2) * 1)');
-        expect(style).not.toContain('transform');
+        expect(style).toContain('transform: translateX(calc(-100% + -1px))');
+        expect(style).not.toContain('inset-inline-start: calc(var(--slider-edge-inset)');
+      });
+
+      it('flush-aligns at min too, not just max', async () => {
+        mockProps = { readout: 'always', modelValue: 0 };
+        updateWrapper();
+        await nextTick();
+        const style = readouts()[0].attributes('style');
+        expect(style).toContain('transform: translateX(1px)');
+        expect(style).not.toContain('inset-inline-start: calc(var(--slider-edge-inset)');
       });
     });
 
@@ -3865,6 +3891,100 @@ describe('DtSlider Tests', () => {
         const marksAfter = wrapper.findAll('[data-qa="dt-slider-mark"]');
         expect(marksAfter[0].attributes('style')).toContain('translateX(calc(-50% + 18px))');
         expect(marksAfter[0].classes()).toContain('d-slider__mark--collision-hidden');
+      });
+    });
+
+    describe('Edge-aware readout label clamping (readout="always")', () => {
+      // Mirrors "Edge-aware mark label clamping" above — same edgeClampOffset
+      // helper, same 32px tolerance, same offset-backing-out rationale — but
+      // for the readout='always' pill(s), which (unlike marks until this
+      // fix) never got any edge-clamp protection at all. Only covers a
+      // value NEAR but not exactly at min/max: an exact match takes the
+      // structural flush-edge path instead (see "flush-aligns..." above,
+      // same describe block as the anchoring tests), which has no measured
+      // offset to clamp in the first place.
+      const controlRect = { top: 0, left: 100, right: 400, bottom: 20 };
+
+      function rectWithCurrentOffset(el, naturalLeft, naturalRight) {
+        const match = (el.style.transform || '').match(/calc\([^+]+\+\s*(-?[\d.]+)px\)/);
+        const offset = match ? parseFloat(match[1]) : 0;
+        return { top: 0, left: naturalLeft + offset, right: naturalRight + offset, bottom: 20 };
+      }
+
+      it('shifts an individual readout inward once its overflow exceeds the 32px tolerance', async () => {
+        mockProps = { readout: 'always', modelValue: 50 };
+        updateWrapper();
+        await nextTick();
+
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        const readout = wrapper.find('[data-qa="dt-slider-thumb-readout"]');
+        // Hangs 50px past the left edge — 18px beyond the 32px tolerance.
+        readout.element.getBoundingClientRect = () => rectWithCurrentOffset(readout.element, 50, 150);
+
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        thumbInputs[0].element.value = '51';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+
+        const style = wrapper.find('[data-qa="dt-slider-thumb-readout"]').attributes('style');
+        expect(style).toContain('translateX(calc(-50% + 18px))');
+      });
+
+      it('does not shift a readout whose overflow already fits within the 32px tolerance', async () => {
+        mockProps = { readout: 'always', modelValue: 50 };
+        updateWrapper();
+        await nextTick();
+
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        const readout = wrapper.find('[data-qa="dt-slider-thumb-readout"]');
+        // Hangs 20px past the left edge — within the 32px tolerance.
+        readout.element.getBoundingClientRect = () => ({ top: 0, left: 80, right: 150, bottom: 20 });
+
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        thumbInputs[0].element.value = '51';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+
+        const style = wrapper.find('[data-qa="dt-slider-thumb-readout"]').attributes('style');
+        expect(style).not.toContain('translateX(calc(');
+      });
+
+      it('shifts the merged readout pill too, independently of the individual (hidden) readouts', async () => {
+        mockProps = { readout: 'always', modelValue: [55, 60], min: 0, max: 100 };
+        updateWrapper();
+        await nextTick();
+
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        // 20px wide each, close enough (per modelValue) to force a merge.
+        const readoutSize = { top: 0, left: 0, right: 20, bottom: 20 };
+        wrapper.findAll('[data-qa="dt-slider-thumb-readout"]').forEach((r) => {
+          r.element.getBoundingClientRect = () => readoutSize;
+        });
+        await settleCollisions();
+        expect(wrapper.find('[data-qa="dt-slider-thumb-readout-merged"]').exists()).toBe(true);
+
+        const merged = wrapper.find('[data-qa="dt-slider-thumb-readout-merged"]');
+        // Hangs 50px past the left edge — 18px beyond the 32px tolerance.
+        // rectWithCurrentOffset (not a flat stub): the merge-forming settle
+        // above already measured this same element once against jsdom's
+        // zero-rect default, applying SOME offset — the "back out any
+        // previous offset" step inside updateReadoutEdgeOffsets expects
+        // the next getBoundingClientRect to reflect that already-applied
+        // offset, same as the mark-clamping tests' own multi-trigger cases.
+        merged.element.getBoundingClientRect = () => rectWithCurrentOffset(merged.element, 50, 150);
+        // settleCollisions alone only waits for an ALREADY-triggered pass —
+        // mutating a getBoundingClientRect stub isn't itself reactive, so a
+        // genuine value change (same technique the collision-avoidance
+        // tests above use) is what actually forces updateCollisions to
+        // re-measure against this new stub. 56, not 55 — close enough to
+        // stay merged.
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        thumbInputs[0].element.value = '56';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+
+        const style = wrapper.find('[data-qa="dt-slider-thumb-readout-merged"]').attributes('style');
+        expect(style).toContain('translateX(calc(-50% + 18px))');
       });
     });
 

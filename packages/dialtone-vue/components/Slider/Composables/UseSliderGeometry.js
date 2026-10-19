@@ -151,6 +151,31 @@ export function useSliderGeometry(props, {
     return anchoredMarkStyle(pct, `translateX(calc(${centerInlineTransform()} + ${offset}px))`);
   }
 
+  // Same anchored positioning + edge-nudge transform as markStyle, for the
+  // readout='always' pill(s) — kept separate rather than overloading
+  // markStyle's own index-based lookup: marks look their offset up by index
+  // into a shared computedMarks-sized array, but a readout's offset is
+  // either per-thumb or the merged pill's own scalar (UseSliderCollisionAvoidance's
+  // readoutEdgeOffsetPx / mergedReadoutEdgeOffsetPx) — no shared index space
+  // between the two, so the caller passes the resolved px value directly.
+  //
+  // edge mirrors markStyle's own edge case: a readout tracking a thumb
+  // sitting exactly at min/max flush-aligns its own edge instead of
+  // centering, same as a mark there — the label then only ever extends
+  // INWARD from the true edge, never past it, regardless of the label's
+  // own (unbounded, locale/suffix/getValueText-dependent) text width. This
+  // is what actually fixes clipping against an arbitrary consumer
+  // overflow:hidden wrapper structurally, with no measurement needed —
+  // readoutEdgeOffsetPx's measured nudge only covers values NEAR but not
+  // exactly at an edge, and (being clamped against the control's own edge,
+  // not any specific ancestor's) can't fully cover an external wrapper
+  // tighter than the control's own overflow-clip-margin tolerance.
+  function readoutStyle(pct, offsetPx, edge) {
+    if (edge && !isVertical.value) return positionStyle(pct, markEdgeInsetTransform(edge));
+    if (!offsetPx) return anchoredMarkStyle(pct);
+    return anchoredMarkStyle(pct, `translateX(calc(${centerInlineTransform()} + ${offsetPx}px))`);
+  }
+
   const mergedReadoutPct = computed(() => {
     if (!isRange.value || internalValues.value.length !== 2) return 0;
     const [lo, hi] = internalValues.value;
@@ -210,6 +235,7 @@ export function useSliderGeometry(props, {
     thumbPositionStyle,
     tickPositionStyle,
     markStyle,
+    readoutStyle,
     mergedReadoutPct,
     mergedReadoutText,
     indicatorStyle,
