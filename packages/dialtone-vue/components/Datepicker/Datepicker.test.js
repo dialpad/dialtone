@@ -47,10 +47,10 @@ describe('DtDatepicker Tests', () => {
     datepickerHeader = wrapper.find('[data-qa="dt-datepicker-header"]');
     datepickerBody = wrapper.find('[data-qa="dt-datepicker-body"]');
     datepickerValue = wrapper.find('[data-qa="dt-datepicker-heading"]');
-    prevYearButton = wrapper.find('[data-qa="dt-datepicker-previous-year"]');
-    prevMonthButton = wrapper.find('[data-qa="dt-datepicker-previous-month"]');
-    nextMonthButton = wrapper.find('[data-qa="dt-datepicker-next-month"]');
-    nextYearButton = wrapper.find('[data-qa="dt-datepicker-next-year"]');
+    prevYearButton = datepickerHeader.findAll('[data-qa="dt-button"]').at(0);
+    prevMonthButton = datepickerHeader.findAll('[data-qa="dt-button"]').at(1);
+    nextMonthButton = datepickerHeader.findAll('[data-qa="dt-button"]').at(2);
+    nextYearButton = datepickerHeader.findAll('[data-qa="dt-button"]').at(3);
   };
 
   beforeEach(async () => {
@@ -63,7 +63,7 @@ describe('DtDatepicker Tests', () => {
 
   describe('Presentation Tests', () => {
     it('should render the component', () => {
-      expect(wrapper.find('[data-qa="dt-datepicker"]').exists()).toBe(true);
+      expect(wrapper.find('[data-qa="dt-stack"]').exists()).toBe(true);
     });
 
     describe('On the header', () => {
@@ -110,19 +110,19 @@ describe('DtDatepicker Tests', () => {
       });
 
       it('should render 42 days', () => {
-        const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+        const days = datepickerBody.findAll('[data-qa="dt-button"]');
 
         expect(days.length).toBe(42);
       });
 
       it('days which are not of the current month should be disabled', () => {
-        const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+        const days = datepickerBody.findAll('[data-qa="dt-button"]');
 
         expect(days.at(40).classes('d-datepicker__day--disabled')).toBe(true);
       });
 
       it('selected date should be highlighted', () => {
-        const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+        const days = datepickerBody.findAll('[data-qa="dt-button"]');
 
         expect(days.at(26).classes('d-datepicker__day--selected')).toBe(true);
       });
@@ -155,7 +155,7 @@ describe('DtDatepicker Tests', () => {
 
     describe('On calendar', () => {
       it('day should has correct aria label', () => {
-        const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+        const days = datepickerBody.findAll('[data-qa="dt-button"]');
         const formattedDate = formatDate(`${MOCK_TODAY_YEAR}, ${MOCK_FORMATTED_TODAY_MONTH}, ${MOCK_DAY}`, INTL_MONTH_FORMAT, MOCK_CURRENT_LOCALE);
 
         expect(days.at(26).attributes('aria-label'))
@@ -171,7 +171,7 @@ describe('DtDatepicker Tests', () => {
 
     describe('On keyboard navigation', () => {
       it('should focus first available day of the week when tab', async () => {
-        const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+        const days = datepickerBody.findAll('[data-qa="dt-button"]');
 
         await prevYearButton.trigger('keydown.Tab');
 
@@ -179,7 +179,7 @@ describe('DtDatepicker Tests', () => {
       });
 
       it('should focus prev year button on tab from calendar', async () => {
-        const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+        const days = datepickerBody.findAll('[data-qa="dt-button"]');
 
         await prevYearButton.trigger('keydown.Tab');
 
@@ -191,7 +191,7 @@ describe('DtDatepicker Tests', () => {
       });
 
       it('should focus next day on arrow right', async () => {
-        const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+        const days = datepickerBody.findAll('[data-qa="dt-button"]');
 
         await days.at(6).trigger('keydown.ArrowRight');
 
@@ -199,7 +199,7 @@ describe('DtDatepicker Tests', () => {
       });
 
       it('should focus previous day on arrow left', async () => {
-        const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+        const days = datepickerBody.findAll('[data-qa="dt-button"]');
 
         await days.at(6).trigger('keydown.ArrowRight');
 
@@ -211,7 +211,7 @@ describe('DtDatepicker Tests', () => {
       });
 
       it('should focus the day below on down arrow', async () => {
-        const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+        const days = datepickerBody.findAll('[data-qa="dt-button"]');
 
         await days.at(6).trigger('keydown.ArrowRight');
 
@@ -223,7 +223,7 @@ describe('DtDatepicker Tests', () => {
       });
 
       it('should focus the day above on up arrow', async () => {
-        const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+        const days = datepickerBody.findAll('[data-qa="dt-button"]');
 
         await days.at(6).trigger('keydown.ArrowRight');
 
@@ -274,7 +274,7 @@ describe('DtDatepicker Tests', () => {
     });
 
     it('should go to previous month on left arrow press on first day', async () => {
-      const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+      const days = datepickerBody.findAll('[data-qa="dt-button"]');
 
       await days.at(6).trigger('keydown.ArrowLeft');
 
@@ -284,7 +284,7 @@ describe('DtDatepicker Tests', () => {
     });
 
     it('should go to next month on right arrow press on last day', async () => {
-      const daysJuly = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+      const daysJuly = datepickerBody.findAll('[data-qa="dt-button"]');
 
       await daysJuly.at(6).trigger('keydown.ArrowLeft');
 
@@ -293,7 +293,7 @@ describe('DtDatepicker Tests', () => {
         .text())
         .toBe(`${formatMonth(MOCK_TODAY_MONTH - 1, INTL_MONTH_FORMAT, MOCK_CURRENT_LOCALE)} ${MOCK_TODAY_YEAR}`);
 
-      const daysJune = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+      const daysJune = datepickerBody.findAll('[data-qa="dt-button"]');
 
       await daysJune.at(33).trigger('keydown.ArrowRight');
 
@@ -304,7 +304,7 @@ describe('DtDatepicker Tests', () => {
     });
 
     it('should go to prev month on up arrow press on some day of first week month', async () => {
-      const daysJuly = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+      const daysJuly = datepickerBody.findAll('[data-qa="dt-button"]');
 
       await daysJuly.at(6).trigger('keydown.ArrowUp');
 
@@ -315,7 +315,7 @@ describe('DtDatepicker Tests', () => {
     });
 
     it('should go to next month on down arrow press on some day of last week month', async () => {
-      const daysJuly = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+      const daysJuly = datepickerBody.findAll('[data-qa="dt-button"]');
 
       await daysJuly.at(6).trigger('keydown.ArrowUp');
 
@@ -324,7 +324,7 @@ describe('DtDatepicker Tests', () => {
         .text())
         .toBe(`${formatMonth(MOCK_TODAY_MONTH - 1, INTL_MONTH_FORMAT, MOCK_CURRENT_LOCALE)} ${MOCK_TODAY_YEAR}`);
 
-      const daysJune = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+      const daysJune = datepickerBody.findAll('[data-qa="dt-button"]');
 
       await daysJune.at(33).trigger('keydown.ArrowDown');
 
@@ -335,7 +335,7 @@ describe('DtDatepicker Tests', () => {
     });
 
     it('should emit selected-date event when a day is clicked', async () => {
-      const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+      const days = datepickerBody.findAll('[data-qa="dt-button"]');
 
       await days.at(6).trigger('click');
 
@@ -368,7 +368,7 @@ describe('DtDatepicker Tests', () => {
       };
       await updateWrapper();
 
-      const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+      const days = datepickerBody.findAll('[data-qa="dt-button"]');
 
       // With Monday start, the first row starts on Mon Dec 26.
       // Jan 1 (Sunday) should be in the 7th cell (index 6) of the first week row.
@@ -395,7 +395,7 @@ describe('DtDatepicker Tests', () => {
     });
 
     it('days before minDate should be disabled', () => {
-      const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+      const days = datepickerBody.findAll('[data-qa="dt-button"]');
       // Day 9 (July 9) is index 14 (6 offset days from June + 9 - 1)
       const day9 = days.at(14);
 
@@ -404,7 +404,7 @@ describe('DtDatepicker Tests', () => {
     });
 
     it('days after maxDate should be disabled', () => {
-      const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+      const days = datepickerBody.findAll('[data-qa="dt-button"]');
       // Day 21 (July 21) is index 26 (6 + 21 - 1)
       const day21 = days.at(26);
 
@@ -413,7 +413,7 @@ describe('DtDatepicker Tests', () => {
     });
 
     it('days within range should be enabled', () => {
-      const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+      const days = datepickerBody.findAll('[data-qa="dt-button"]');
       // Day 15 (July 15) is index 20 (6 + 15 - 1)
       const day15 = days.at(20);
 
@@ -422,7 +422,7 @@ describe('DtDatepicker Tests', () => {
     });
 
     it('clicking a disabled day should not emit selected-date', async () => {
-      const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+      const days = datepickerBody.findAll('[data-qa="dt-button"]');
       // Day 9 is before minDate
       const day9 = days.at(14);
 
@@ -432,7 +432,7 @@ describe('DtDatepicker Tests', () => {
     });
 
     it('clicking an enabled day should emit selected-date', async () => {
-      const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+      const days = datepickerBody.findAll('[data-qa="dt-button"]');
       // Day 15 is within range
       const day15 = days.at(20);
 
@@ -464,7 +464,7 @@ describe('DtDatepicker Tests', () => {
     });
 
     it('boundary minDate day should be enabled', () => {
-      const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+      const days = datepickerBody.findAll('[data-qa="dt-button"]');
       // Day 10 (July 10) is index 15 (6 + 10 - 1), the minDate itself
       const day10 = days.at(15);
 
@@ -473,7 +473,7 @@ describe('DtDatepicker Tests', () => {
     });
 
     it('boundary maxDate day should be enabled', () => {
-      const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+      const days = datepickerBody.findAll('[data-qa="dt-button"]');
       // Day 20 (July 20) is index 25 (6 + 20 - 1), the maxDate itself
       const day20 = days.at(25);
 
@@ -482,7 +482,7 @@ describe('DtDatepicker Tests', () => {
     });
 
     it('clicking boundary minDate day should emit selected-date', async () => {
-      const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+      const days = datepickerBody.findAll('[data-qa="dt-button"]');
       const day10 = days.at(15);
 
       await day10.trigger('click');
@@ -491,7 +491,7 @@ describe('DtDatepicker Tests', () => {
     });
 
     it('clicking boundary maxDate day should emit selected-date', async () => {
-      const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+      const days = datepickerBody.findAll('[data-qa="dt-button"]');
       const day20 = days.at(25);
 
       await day20.trigger('click');
@@ -501,7 +501,7 @@ describe('DtDatepicker Tests', () => {
 
     describe('reactive prop changes', () => {
       it('should update disabled days when minDate changes', async () => {
-        const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+        const days = datepickerBody.findAll('[data-qa="dt-button"]');
         // Day 5 (July 5) is index 10 (6 + 5 - 1), currently disabled
         const day5 = days.at(10);
 
@@ -510,14 +510,14 @@ describe('DtDatepicker Tests', () => {
         // Change minDate to July 3
         await wrapper.setProps({ minDate: new Date(MOCK_YEAR, MOCK_MONTH, 3) });
 
-        const updatedDays = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+        const updatedDays = datepickerBody.findAll('[data-qa="dt-button"]');
         const updatedDay5 = updatedDays.at(10);
 
         expect(updatedDay5.attributes('disabled')).toBeUndefined();
       });
 
       it('should update disabled days when maxDate changes', async () => {
-        const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+        const days = datepickerBody.findAll('[data-qa="dt-button"]');
         // Day 25 (July 25) is index 30 (6 + 25 - 1), currently disabled
         const day25 = days.at(30);
 
@@ -526,7 +526,7 @@ describe('DtDatepicker Tests', () => {
         // Change maxDate to July 28
         await wrapper.setProps({ maxDate: new Date(MOCK_YEAR, MOCK_MONTH, 28) });
 
-        const updatedDays = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+        const updatedDays = datepickerBody.findAll('[data-qa="dt-button"]');
         const updatedDay25 = updatedDays.at(30);
 
         expect(updatedDay25.attributes('disabled')).toBeUndefined();
@@ -540,14 +540,14 @@ describe('DtDatepicker Tests', () => {
       });
 
       it('days before minDate should be disabled', () => {
-        const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+        const days = datepickerBody.findAll('[data-qa="dt-button"]');
         const day9 = days.at(14);
 
         expect(day9.attributes('disabled')).toBeDefined();
       });
 
       it('days after minDate should be enabled', () => {
-        const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+        const days = datepickerBody.findAll('[data-qa="dt-button"]');
         const day15 = days.at(20);
 
         expect(day15.attributes('disabled')).toBeUndefined();
@@ -565,14 +565,14 @@ describe('DtDatepicker Tests', () => {
       });
 
       it('days after maxDate should be disabled', () => {
-        const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+        const days = datepickerBody.findAll('[data-qa="dt-button"]');
         const day21 = days.at(26);
 
         expect(day21.attributes('disabled')).toBeDefined();
       });
 
       it('days before maxDate should be enabled', () => {
-        const days = wrapper.findAll('[data-qa="dt-datepicker-day"]');
+        const days = datepickerBody.findAll('[data-qa="dt-button"]');
         const day15 = days.at(20);
 
         expect(day15.attributes('disabled')).toBeUndefined();

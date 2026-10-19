@@ -43,8 +43,8 @@ describe('DtIllustration Tests', () => {
 
     illustration = wrapper.find('[data-qa="dt-illustration"]');
     icon = wrapper.find('[data-qa="dt-icon"]');
-    headerText = wrapper.find('[data-qa="dt-empty-state-header"]');
-    bodyText = wrapper.find('[data-qa="dt-empty-state-body-text"]');
+    headerText = wrapper.findAll('[data-qa="dt-text"]').at(0);
+    bodyText = wrapper.findAll('[data-qa="dt-text"]').at(1);
     bodySlot = wrapper.find('[data-qa="empty-state-body"]');
   };
 
@@ -71,7 +71,7 @@ describe('DtIllustration Tests', () => {
     });
 
     it('Should render size classes in wrapper', () => {
-      expect(wrapper.attributes('data-qa')).toBe('dt-empty-state');
+      expect(wrapper.attributes('data-qa')).toBe('dt-stack');
       expect(wrapper.classes().includes('d-empty-state', 'd-empty-state--size-lg')).toBe(true);
     });
 
@@ -107,7 +107,7 @@ describe('DtIllustration Tests', () => {
 
         updateWrapper();
 
-        headerText = wrapper.find('[data-qa="dt-empty-state-header"]');
+        headerText = wrapper.findAll('[data-qa="dt-text"]').at(0);
 
         expect(headerText.classes().includes('d-text-headline--xl')).toBe(true);
       });
@@ -117,7 +117,7 @@ describe('DtIllustration Tests', () => {
 
         updateWrapper();
 
-        bodyText = wrapper.find('[data-qa="dt-empty-state-body-text"]');
+        bodyText = wrapper.findAll('[data-qa="dt-text"]').at(1);
 
         expect(bodyText.classes().includes('d-text-body--md')).toBe(true);
       });

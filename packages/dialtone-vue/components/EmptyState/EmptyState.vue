@@ -1,7 +1,6 @@
 <template>
   <dt-stack
     :class="emptyStateClasses"
-    data-qa="dt-empty-state"
   >
     <span
       v-if="showIllustration"
@@ -35,7 +34,6 @@
         wrap="balance"
         as="div"
         class="d-empty-state__header-text"
-        data-qa="dt-empty-state-header"
       >
         {{ headerText }}
       </dt-text>
@@ -49,7 +47,6 @@
         wrap="balance"
         as="p"
         class="d-empty-state__body-text"
-        data-qa="dt-empty-state-body-text"
       >
         {{ bodyText }}
       </dt-text>

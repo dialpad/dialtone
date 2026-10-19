@@ -2,7 +2,6 @@
 <template>
   <dt-stack
     class="d-datepicker"
-    data-qa="dt-datepicker"
     gap="100"
   >
     <div

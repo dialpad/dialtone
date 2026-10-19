@@ -44,7 +44,7 @@ describe('DtKeyboardShortcut Tests', () => {
 
       updateWrapper();
 
-      const dtText = wrapper.findComponent('[data-qa="dt-keyboard-shortcut-item"]');
+      const dtText = wrapper.findComponent('[data-qa="dt-text"]');
 
       expect(dtText.exists()).toBe(true);
       expect(dtText.props('tone')).toBe('tertiary');
@@ -55,7 +55,7 @@ describe('DtKeyboardShortcut Tests', () => {
 
       updateWrapper();
 
-      const dtText = wrapper.findComponent('[data-qa="dt-keyboard-shortcut-item"]');
+      const dtText = wrapper.findComponent('[data-qa="dt-text"]');
 
       expect(dtText.exists()).toBe(true);
       expect(dtText.props('tone')).toBe('tertiary');

@@ -19,7 +19,6 @@
           <dt-button
             id="prevYearButton"
             :ref="el => { if (el) setDayRef(el) }"
-            data-qa="dt-datepicker-previous-year"
             :aria-label="previousYearAriaLabel()"
             :disabled="isPrevYearDisabled"
             kind="muted"
@@ -45,7 +44,6 @@
           <dt-button
             id="prevMonthButton"
             :ref="el => { if (el) setDayRef(el) }"
-            data-qa="dt-datepicker-previous-month"
             :aria-label="previousMonthAriaLabel()"
             :disabled="isPrevMonthDisabled"
             class="d-datepicker__nav-btn"
@@ -87,7 +85,6 @@
           <dt-button
             id="nextMonthButton"
             :ref="el => { if (el) setDayRef(el) }"
-            data-qa="dt-datepicker-next-month"
             :aria-label="nextMonthAriaLabel()"
             :disabled="isNextMonthDisabled"
             class="d-datepicker__nav-btn"
@@ -113,7 +110,6 @@
           <dt-button
             id="nextYearButton"
             :ref="el => { if (el) setDayRef(el) }"
-            data-qa="dt-datepicker-next-year"
             :aria-label="nextYearAriaLabel()"
             :disabled="isNextYearDisabled"
             class="d-datepicker__nav-btn"

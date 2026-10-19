@@ -184,7 +184,7 @@ describe('DtEmojiPicker Tests', () => {
 
       updateWrapper();
 
-      const addEmojiButton = wrapper.find('[data-qa="dt-emoji-picker-add-emoji"]');
+      const addEmojiButton = wrapper.find('[data-qa="dt-emoji-picker-footer"] [data-qa="dt-button"]');
 
       expect(addEmojiButton.exists()).toBe(true);
       expect(addEmojiButton.attributes('aria-label')).toBe('Add emoji');
@@ -286,7 +286,7 @@ describe('DtEmojiPicker Tests', () => {
 
       updateWrapper();
 
-      const addEmojiButton = wrapper.find('[data-qa="dt-emoji-picker-add-emoji"]');
+      const addEmojiButton = wrapper.find('[data-qa="dt-emoji-picker-footer"] [data-qa="dt-button"]');
 
       expect(addEmojiButton.exists()).toBe(true);
 

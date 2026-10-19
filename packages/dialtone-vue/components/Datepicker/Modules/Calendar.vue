@@ -36,7 +36,6 @@
           <dt-button
             :ref="el => { if (el) setDayRef(el, day) }"
             class="d-datepicker__day"
-            data-qa="dt-datepicker-day"
             :size="200"
             kind="muted"
             importance="clear"

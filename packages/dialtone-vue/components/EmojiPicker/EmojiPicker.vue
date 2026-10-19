@@ -64,7 +64,6 @@
         importance="outlined"
         :aria-label="addEmojiLabel"
         class="d-emoji-picker__add-emoji"
-        data-qa="dt-emoji-picker-add-emoji"
         @click="emits('add-emoji')"
       >
         {{ addEmojiLabel }}

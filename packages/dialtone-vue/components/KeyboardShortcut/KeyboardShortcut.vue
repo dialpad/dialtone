@@ -35,7 +35,6 @@
         :density="400"
         tone="tertiary"
         aria-hidden="true"
-        data-qa="dt-keyboard-shortcut-item"
         :class="[
           'd-keyboard-shortcut__item',
           { 'd-keyboard-shortcut__item--inverted': inverted },
