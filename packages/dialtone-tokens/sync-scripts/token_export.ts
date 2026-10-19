@@ -63,6 +63,14 @@ export function tokenFilesFromLocalVariables (localVariablesResponse: ApiGetLoca
       return;
     }
 
+    // A deleted-but-referenced ghost shares the live variable's name; Figma
+    // keeps returning it while something still points at it. Exporting it
+    // would silently overwrite the live variable's token with a stale value
+    // if the ghost is iterated after it.
+    if (variable.deletedButReferenced) {
+      return;
+    }
+
     const collection = localVariableCollections[variable.variableCollectionId];
 
     collection.modes.forEach((mode) => {

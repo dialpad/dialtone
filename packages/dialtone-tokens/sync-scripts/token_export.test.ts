@@ -41,6 +41,65 @@ describe('tokenFilesFromLocalVariables', () => {
     expect(tokenFiles).toEqual({})
   })
 
+  it('ignores a deleted-but-referenced variable, even one sharing a live variable\'s name', () => {
+    const localVariablesResponse: ApiGetLocalVariablesResponse = {
+      status: 200,
+      error: false,
+      meta: {
+        variableCollections: {
+          'VariableCollectionId:1:1': {
+            id: 'VariableCollectionId:1:1',
+            name: 'primitives',
+            modes: [{ modeId: '1:0', name: 'mode1' }],
+            defaultModeId: '1:0',
+            remote: false,
+            hiddenFromPublishing: false,
+          },
+        },
+        variables: {
+          'VariableID:2:1': {
+            id: 'VariableID:2:1',
+            name: 'spacing/1',
+            key: 'variable_key',
+            variableCollectionId: 'VariableCollectionId:1:1',
+            resolvedType: 'FLOAT',
+            valuesByMode: {
+              '1:0': 8,
+            },
+            remote: false,
+            description: '',
+            hiddenFromPublishing: false,
+            scopes: ['ALL_SCOPES'],
+            codeSyntax: {},
+          },
+          // A ghost of a deleted variable, still returned because something
+          // references it, sharing the live variable's name and appearing
+          // after it in iteration order — the exact shape that would let a
+          // reverse export overwrite the live token with its stale value.
+          'VariableID:2:2': {
+            id: 'VariableID:2:2',
+            name: 'spacing/1',
+            key: 'variable_key_deleted',
+            variableCollectionId: 'VariableCollectionId:1:1',
+            resolvedType: 'FLOAT',
+            valuesByMode: {
+              '1:0': 999,
+            },
+            remote: false,
+            deletedButReferenced: true,
+            description: '',
+            hiddenFromPublishing: false,
+            scopes: ['ALL_SCOPES'],
+            codeSyntax: {},
+          },
+        },
+      },
+    }
+
+    const tokenFiles = tokenFilesFromLocalVariables(localVariablesResponse)
+    expect(tokenFiles['primitives.mode1.json'].spacing['1'].$value).toBe(8)
+  })
+
   it('returns token files', () => {
     const localVariablesResponse: ApiGetLocalVariablesResponse = {
       status: 200,

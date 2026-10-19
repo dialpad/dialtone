@@ -231,6 +231,11 @@ async function main (): Promise<void> {
 
     const byName = new Map<string, string>();
     for (const [id, variable] of Object.entries(local.meta.variables)) {
+      // A deleted-but-referenced ghost shares its name with the live variable
+      // it replaced; Figma keeps returning it while something still points at
+      // it. Letting it win this map would address an override at the ghost's
+      // id instead of the live variable's.
+      if (variable.deletedButReferenced) continue;
       if (variable.variableCollectionId === parentCollection.id) byName.set(variable.name, id);
     }
 
