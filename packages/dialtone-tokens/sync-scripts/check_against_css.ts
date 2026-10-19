@@ -56,7 +56,14 @@ function normalise (value: string): string {
   const px = trimmed.match(new RegExp(`^(${NUM})px$`));
   if (px) return `${round(Number.parseFloat(px[1]))}px`;
   const num = trimmed.match(new RegExp(`^${NUM}$`));
-  if (num) return String(round(Number.parseFloat(trimmed)));
+  if (num) {
+    const n = round(Number.parseFloat(trimmed));
+    // A bare 0 and "0px" are the same length — CSS doesn't disagree about
+    // that, this comparator shouldn't either. Only 0 is ambiguous this way;
+    // every other bare number keeps its unitless form, since a unitless
+    // value and a px value only ever agree numerically by coincidence.
+    return n === 0 ? '0px' : String(n);
+  }
   return trimmed;
 }
 
