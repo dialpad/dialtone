@@ -1,0 +1,24 @@
+scripts/retrieval/assertions.mjs
+  s_c8ad6feb7a7a00::t_f875530cf784dd 21
+scripts/retrieval/source-state.mjs
+  s_c8ad6feb7a7a00::t_f875530cf784dd 4
+scripts/retrieval/cache-inputs.test.mjs
+  s_c8ad6feb7a7a00::t_5b207c7d06d411 139-142
+  s_c8ad6feb7a7a00::t_f875530cf784dd 153
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "2035da192e081123a1ec41ccc178d6e3d1f68003",
+  "prompts": {},
+  "sessions": {
+    "s_c8ad6feb7a7a00": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6f605576-f73f-414c-9125-c046a01ec7e1",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}

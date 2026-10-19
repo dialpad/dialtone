@@ -1,0 +1,36 @@
+packages/dialtone-vue/components/Popover/Popover.vue
+  s_aa2f4287e4d553::t_322120d123f795 700,702,703-705
+  s_aa2f4287e4d553::t_c83c4bdded2e17 699
+  s_aa2f4287e4d553::t_b232d9cc522746 709-715,724-730
+  s_aa2f4287e4d553::t_0ee6658a1549a0 691-694,698
+packages/dialtone-vue/components/Button/Button.vue
+  s_aa2f4287e4d553::t_37b4e57363b696 575-584
+  s_aa2f4287e4d553::t_46d670f703091b 564-567,571
+packages/dialtone-vue/components/Tooltip/Tooltip.vue
+  s_aa2f4287e4d553::t_75cb107c74c3ee 350
+  s_aa2f4287e4d553::t_342ba39c72fda0 352-353,370
+  s_aa2f4287e4d553::t_d2df29f3ece59b 363
+  s_aa2f4287e4d553::t_2d6a946b6b1e5d 354-362,364-369
+packages/dialtone-vue/components/Tooltip/Tooltip.test.js
+  s_aa2f4287e4d553::t_6e304bfd8cdc24 148,163
+  s_aa2f4287e4d553::t_a83f1db1056598 145-146,149-156,160-161,164-171,176-177
+  s_aa2f4287e4d553::t_cafd24a58c4459 147,157-159,162,172-175
+packages/dialtone-vue/components/Popover/Popover.test.js
+  s_aa2f4287e4d553::t_49af11f0e43f87 299-329
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "efe7a84eb792621e555fe9a970a79eb53953c92f",
+  "prompts": {},
+  "sessions": {
+    "s_aa2f4287e4d553": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8ba710d9-eb02-42a4-aa29-1fd53f908f8b",
+        "model": "claude-sonnet-5"
+      },
+      "human_author": "Brad Paugh <brad.paugh@dialpad.com>"
+    }
+  }
+}

@@ -1,0 +1,62 @@
+packages/dialtone-vue/components/Tooltip/Tooltip.vue
+  s_50ca0bdecfb15a::t_15625298f4c364 558-559
+  s_50ca0bdecfb15a::t_9b5958324b8d5e 137
+  s_50ca0bdecfb15a::t_4315c943f595c6 557
+  s_50ca0bdecfb15a::t_ebada7c3f8e873 64,331
+  s_50ca0bdecfb15a::t_f32f481309cbf3 65,129-136,332-334,337,564
+packages/dialtone-vue/directives/tooltip_directive/tooltip.test.js
+  s_50ca0bdecfb15a::t_ebada7c3f8e873 135-137
+  s_50ca0bdecfb15a::t_3da643b44e07d6 138
+  s_50ca0bdecfb15a::t_f32f481309cbf3 11
+packages/dialtone-vue/components/Tooltip/Tooltip.stories.js
+  s_50ca0bdecfb15a::t_f32f481309cbf3 18,74
+  s_50ca0bdecfb15a::t_100cd241d12c2c 75-76
+packages/dialtone-vue/directives/tooltip_directive/tooltip.mdx
+  s_50ca0bdecfb15a::t_ebada7c3f8e873 49
+  s_50ca0bdecfb15a::t_5bbe0ca0918067 50
+  s_50ca0bdecfb15a::t_f32f481309cbf3 10,43-48
+packages/dialtone-vue/components/Tooltip/Tooltip.test.js
+  s_50ca0bdecfb15a::t_f32f481309cbf3 101,103-104,106-109,111-112,114-115,123-125,127-128
+  s_50ca0bdecfb15a::t_4315c943f595c6 105
+  s_50ca0bdecfb15a::t_ebada7c3f8e873 102,116,126
+  s_50ca0bdecfb15a::t_15625298f4c364 110
+  s_50ca0bdecfb15a::t_a949a448564a61 113,117-122
+apps/dialtone-documentation/docs/components/tooltip.md
+  s_50ca0bdecfb15a::t_cfb69174cab603 123
+  s_50ca0bdecfb15a::t_ea3e399d2db68a 37
+  s_50ca0bdecfb15a::t_cd9335c941deea 105-106,119-121
+  s_50ca0bdecfb15a::t_f32f481309cbf3 96-100,122
+  s_50ca0bdecfb15a::t_a949a448564a61 101-104,107,212,217
+  s_50ca0bdecfb15a::t_791e6225f62557 111-121
+packages/dialtone-vue/components/Tooltip/TooltipVariants.story.vue
+  s_50ca0bdecfb15a::t_b1faf2d4c7fee9 107-111,142-144,146-149
+  s_50ca0bdecfb15a::t_90a30e5996ee98 101-102
+  s_50ca0bdecfb15a::t_750b7bf7dca082 103,106
+  s_50ca0bdecfb15a::t_a949a448564a61 112,116,235,253
+  s_50ca0bdecfb15a::t_7e35e2b81c757e 104
+  s_50ca0bdecfb15a::t_a01e45429e7576 134-136,145
+  s_50ca0bdecfb15a::t_df33e98c0214de 138-140,142-144
+  s_50ca0bdecfb15a::t_7627213d1ee907 146-148
+  s_50ca0bdecfb15a::t_c76b44d42da826 141
+  s_50ca0bdecfb15a::t_d86db58f922319 105,120-133,137
+packages/dialtone-vue/localization/en-US.ftl
+  s_50ca0bdecfb15a::t_a949a448564a61 180-181,183
+  s_50ca0bdecfb15a::t_a01e45429e7576 182
+  s_50ca0bdecfb15a::t_d86db58f922319 179
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "67b7afbb3be11761236a3b82c5871c364d21c198",
+  "prompts": {},
+  "sessions": {
+    "s_50ca0bdecfb15a": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a0ed74-0cf1-7e93-95e3-9941d8424ccb",
+        "model": "gpt-5.6-sol"
+      },
+      "human_author": null
+    }
+  }
+}
