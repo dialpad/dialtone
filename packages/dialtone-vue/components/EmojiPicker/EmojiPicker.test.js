@@ -101,7 +101,7 @@ describe('DtEmojiPicker Tests', () => {
     });
 
     skinToneSelectorButton = wrapper.find('[data-qa="dt-emoji-picker-skin-toggle"]');
-    skinToneSelectorImg = wrapper.find('[data-qa="dt-emoji-picker-skin-toggle"] [data-qa="dt-emoji-picker-skin-image"]');
+    skinToneSelectorImg = skinToneSelectorButton.find('[data-qa="dt-emoji-picker-skin-image"]');
     skinToneMediumLightButton = wrapper.find('[data-qa="dt-emoji-picker-skin-list"]').findAll('[data-qa="dt-emoji-picker-skin-option"]').at(1);
   };
 
@@ -392,26 +392,18 @@ describe('DtEmojiPicker Tests', () => {
     });
 
     it('Should jump through all the first emojis of each tab', async () => {
-      // Thumbs up emoji - Recently used
-      const firstRecentlyUsed = wrapper.findAll('[data-qa="dt-emoji-picker-group"]').at(0).find('[data-qa="dt-emoji-picker-emoji"]');
-      // Skull and crossbones - People
-      const firstPeople = wrapper.findAll('[data-qa="dt-emoji-picker-group"]').at(1).find('[data-qa="dt-emoji-picker-emoji"]');
-      // Sun - Nature
-      const firstNature = wrapper.findAll('[data-qa="dt-emoji-picker-group"]').at(2).find('[data-qa="dt-emoji-picker-emoji"]');
-      // Coffe - Food
-      const firstFood = wrapper.findAll('[data-qa="dt-emoji-picker-group"]').at(3).find('[data-qa="dt-emoji-picker-emoji"]');
-      // Soccer ball - Activity
-      const firstActivity = wrapper.findAll('[data-qa="dt-emoji-picker-group"]').at(4).find('[data-qa="dt-emoji-picker-emoji"]');
-      // Anchor - Travel
-      const firstTravel = wrapper.findAll('[data-qa="dt-emoji-picker-group"]').at(5).find('[data-qa="dt-emoji-picker-emoji"]');
-      // Keyboard - Objects
-      const firstObjects = wrapper.findAll('[data-qa="dt-emoji-picker-group"]').at(6).find('[data-qa="dt-emoji-picker-emoji"]');
-      // Exclamation question mark - Symbols
-      const firstSymbols = wrapper.findAll('[data-qa="dt-emoji-picker-group"]').at(7).find('[data-qa="dt-emoji-picker-emoji"]');
-      // White flag - Flags
-      const firstFlags = wrapper.findAll('[data-qa="dt-emoji-picker-group"]').at(8).find('[data-qa="dt-emoji-picker-emoji"]');
-      // shipit - Customs
-      const firstCustoms = wrapper.findAll('[data-qa="dt-emoji-picker-group"]').at(-1).find('[data-qa="dt-emoji-picker-emoji"]');
+      const [
+        firstRecentlyUsed, // Thumbs up emoji - Recently used
+        firstPeople, // Skull and crossbones - People
+        firstNature, // Sun - Nature
+        firstFood, // Coffe - Food
+        firstActivity, // Soccer ball - Activity
+        firstTravel, // Anchor - Travel
+        firstObjects, // Keyboard - Objects
+        firstSymbols, // Exclamation question mark - Symbols
+        firstFlags, // White flag - Flags
+        firstCustoms, // shipit - Customs
+      ] = wrapper.findAll('[data-qa="dt-emoji-picker-group"]').map(group => group.find('[data-qa="dt-emoji-picker-emoji"]'));
 
       await firstRecentlyUsed.trigger('keydown.Tab');
 
