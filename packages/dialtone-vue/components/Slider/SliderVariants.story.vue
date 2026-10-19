@@ -194,14 +194,28 @@
         :step="1"
         :fill-origin="0"
         :show-marks="[{ value: -100, text: '-100%' }, { value: 0, text: '0%' }, { value: 100, text: '100%' }]"
+        readout="never"
       >
-        <template #label>
-          <dt-text
-            variant="label-md"
-            tone="secondary"
+        <template #label="{ value }">
+          <dt-stack
+            direction="row"
+            gap="100"
+            justify="space-between"
+            align="baseline"
           >
-            Percentage: {{ percentageValue }}%
-          </dt-text>
+            <dt-text
+              variant="label-md"
+              tone="secondary"
+            >
+              Percentage
+            </dt-text>
+            <dt-text
+              variant="code-sm"
+              tone="secondary"
+            >
+              {{ value }}%
+            </dt-text>
+          </dt-stack>
         </template>
       </dt-slider>
     </section>
@@ -264,14 +278,28 @@
           :max="120"
           :step="1"
           :get-value-text="(value, index) => index === 0 ? `Start: ${value} min` : `End: ${value} min`"
+          readout="never"
         >
-          <template #label>
-            <dt-text
-              variant="label-md"
-              tone="secondary"
+          <template #label="{ value }">
+            <dt-stack
+              direction="row"
+              gap="100"
+              justify="space-between"
+              align="baseline"
             >
-              Call duration filter: {{ durationFilter[0] }}–{{ durationFilter[1] }} min
-            </dt-text>
+              <dt-text
+                variant="label-md"
+                tone="secondary"
+              >
+                Call duration filter
+              </dt-text>
+              <dt-text
+                variant="code-sm"
+                tone="secondary"
+              >
+                {{ value[0] }}–{{ value[1] }} min
+              </dt-text>
+            </dt-stack>
           </template>
         </dt-slider>
 
@@ -283,14 +311,28 @@
           :step="2"
           :show-ticks="2"
           :show-marks="true"
+          readout="never"
         >
-          <template #label>
-            <dt-text
-              variant="label-md"
-              tone="secondary"
+          <template #label="{ value }">
+            <dt-stack
+              direction="row"
+              gap="100"
+              justify="space-between"
+              align="baseline"
             >
-              Chat text size: {{ fontSize }}px
-            </dt-text>
+              <dt-text
+                variant="label-md"
+                tone="secondary"
+              >
+                Chat text size
+              </dt-text>
+              <dt-text
+                variant="code-sm"
+                tone="secondary"
+              >
+                {{ value }}px
+              </dt-text>
+            </dt-stack>
           </template>
           <template #start>
             <dt-icon
@@ -315,14 +357,28 @@
           :show-ticks="1"
           :show-marks="[{ value: 0, text: 'Off' }, { value: 4, text: 'Max' }]"
           :get-value-text="(value) => ['Off', 'Low', 'Medium', 'High', 'Max'][value]"
+          readout="never"
         >
-          <template #label>
-            <dt-text
-              variant="label-md"
-              tone="secondary"
+          <template #label="{ value }">
+            <dt-stack
+              direction="row"
+              gap="100"
+              justify="space-between"
+              align="baseline"
             >
-              Noise cancellation: {{ ['Off', 'Low', 'Medium', 'High', 'Max'][noiseCancellation] }}
-            </dt-text>
+              <dt-text
+                variant="label-md"
+                tone="secondary"
+              >
+                Noise cancellation
+              </dt-text>
+              <dt-text
+                variant="code-sm"
+                tone="secondary"
+              >
+                {{ ['Off', 'Low', 'Medium', 'High', 'Max'][value] }}
+              </dt-text>
+            </dt-stack>
           </template>
           <template #start>
             <dt-icon
@@ -345,14 +401,28 @@
           :max="200"
           :step="25"
           :show-ticks="25"
+          readout="never"
         >
-          <template #label>
-            <dt-text
-              variant="label-md"
-              tone="secondary"
+          <template #label="{ value }">
+            <dt-stack
+              direction="row"
+              gap="100"
+              justify="space-between"
+              align="baseline"
             >
-              Playback speed: {{ (playbackSpeed / 100).toFixed(2) }}×
-            </dt-text>
+              <dt-text
+                variant="label-md"
+                tone="secondary"
+              >
+                Playback speed
+              </dt-text>
+              <dt-text
+                variant="code-sm"
+                tone="secondary"
+              >
+                {{ (value / 100).toFixed(2) }}×
+              </dt-text>
+            </dt-stack>
           </template>
           <template #start>
             🐢
@@ -370,14 +440,28 @@
           :step="25"
           :show-ticks="25"
           :show-marks="[50, 100, 150, 200]"
+          readout="never"
         >
-          <template #label>
-            <dt-text
-              variant="label-md"
-              tone="secondary"
+          <template #label="{ value }">
+            <dt-stack
+              direction="row"
+              gap="100"
+              justify="space-between"
+              align="baseline"
             >
-              Zoom level: {{ zoomLevel }}%
-            </dt-text>
+              <dt-text
+                variant="label-md"
+                tone="secondary"
+              >
+                Zoom level
+              </dt-text>
+              <dt-text
+                variant="code-sm"
+                tone="secondary"
+              >
+                {{ value }}%
+              </dt-text>
+            </dt-stack>
           </template>
           <template #start>
             <dt-icon
@@ -399,14 +483,28 @@
           :min="0"
           :max="100"
           :step="5"
+          readout="never"
         >
-          <template #label>
-            <dt-text
-              variant="label-md"
-              tone="secondary"
+          <template #label="{ value }">
+            <dt-stack
+              direction="row"
+              gap="100"
+              justify="space-between"
+              align="baseline"
             >
-              Mic sensitivity: {{ micSensitivity }}%
-            </dt-text>
+              <dt-text
+                variant="label-md"
+                tone="secondary"
+              >
+                Mic sensitivity
+              </dt-text>
+              <dt-text
+                variant="code-sm"
+                tone="secondary"
+              >
+                {{ value }}%
+              </dt-text>
+            </dt-stack>
           </template>
           <template #start>
             <dt-icon
@@ -430,14 +528,28 @@
           :step="1"
           :show-marks="[1, 30, 60, 90]"
           :get-value-text="(value, index) => index === 0 ? `From day ${value}` : `To day ${value}`"
+          readout="never"
         >
-          <template #label>
-            <dt-text
-              variant="label-md"
-              tone="secondary"
+          <template #label="{ value }">
+            <dt-stack
+              direction="row"
+              gap="100"
+              justify="space-between"
+              align="baseline"
             >
-              Auto-delete recordings after: {{ retentionRange[0] }}–{{ retentionRange[1] }} days
-            </dt-text>
+              <dt-text
+                variant="label-md"
+                tone="secondary"
+              >
+                Auto-delete recordings after
+              </dt-text>
+              <dt-text
+                variant="code-sm"
+                tone="secondary"
+              >
+                {{ value[0] }}–{{ value[1] }} days
+              </dt-text>
+            </dt-stack>
           </template>
           <template #start>
             <dt-icon
@@ -460,14 +572,28 @@
           :max="50"
           :step="5"
           :show-ticks="5"
+          readout="never"
         >
-          <template #label>
-            <dt-text
-              variant="label-md"
-              tone="secondary"
+          <template #label="{ value }">
+            <dt-stack
+              direction="row"
+              gap="100"
+              justify="space-between"
+              align="baseline"
             >
-              Battery saver threshold: {{ batteryThreshold }}%
-            </dt-text>
+              <dt-text
+                variant="label-md"
+                tone="secondary"
+              >
+                Battery saver threshold
+              </dt-text>
+              <dt-text
+                variant="code-sm"
+                tone="secondary"
+              >
+                {{ value }}%
+              </dt-text>
+            </dt-stack>
           </template>
           <template #start>
             <dt-icon
@@ -503,12 +629,13 @@
 import { ref } from 'vue';
 import DtSlider from './Slider.vue';
 import { DtIcon } from '@/components/Icon';
+import { DtStack } from '@/components/Stack';
 import { DtText } from '@/components/Text';
 
 export default {
   name: 'SliderVariants',
 
-  components: { DtSlider, DtIcon, DtText },
+  components: { DtSlider, DtIcon, DtStack, DtText },
 
   setup () {
     return {

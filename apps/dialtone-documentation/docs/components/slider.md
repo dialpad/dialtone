@@ -422,7 +422,10 @@ Use `dt-text` with `variant="label-md"` and `tone="secondary"` to match the defa
 ```vue demo
 <dt-slider :model-value="0" :min="-100" :max="100" :fill-origin="0">
   <template #label="{ value }">
-    <dt-text variant="label-md" tone="secondary">Balance: {{ value }}</dt-text>
+    <dt-stack direction="row" gap="100" justify="space-between" align="baseline">
+      <dt-text variant="label-md" tone="secondary">Balance</dt-text>
+      <dt-text variant="code-sm" tone="secondary">{{ value }}</dt-text>
+    </dt-stack>
   </template>
 </dt-slider>
 ```
@@ -436,7 +439,10 @@ Use `dt-text` with `variant="label-md"` and `tone="secondary"` to match the defa
   :show-ticks="25"
 >
   <template #label="{ value }">
-    <dt-text variant="label-md" tone="secondary">Playback speed: {{ (value / 100).toFixed(2) }}×</dt-text>
+    <dt-stack direction="row" gap="100" justify="space-between" align="baseline">
+      <dt-text variant="label-md" tone="secondary">Playback speed</dt-text>
+      <dt-text variant="code-sm" tone="secondary">{{ (value / 100).toFixed(2) }}×</dt-text>
+    </dt-stack>
   </template>
   <template #start>
     <span role="img" aria-label="slowest">🐢</span>

@@ -61,7 +61,15 @@ export default {
       label: { initialValue: 'Playback speed' },
       suffix: { initialValue: '×' },
       showTicks: { initialValue: true },
-      readout: { initialValue: 'always' },
+      readout: { initialValue: 'never' },
+    },
+    slots: {
+      label: {
+        initialValue: `<dt-stack direction="row" gap="100" justify="space-between" align="baseline">
+  <dt-text variant="label-md" tone="secondary">Playback speed</dt-text>
+  <dt-text variant="code-sm" tone="secondary">{{ value }}×</dt-text>
+</dt-stack>`,
+      },
     },
   },
 
