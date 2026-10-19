@@ -3,7 +3,7 @@
 // ============================================================================
 
 import type { DocumentationRecord, SearchResult } from '../types.js';
-import { keywordMatcher } from '../keyword-matching.js';
+import { keywordMatcher, normalizeKeywordText } from '../keyword-matching.js';
 import { directiveIdentifiers } from '../directive-identifiers.js';
 import { normalizeComponentName } from '../component-identity.js';
 
@@ -161,7 +161,10 @@ export function searchDocumentation(
 
   const queryName = normalizeComponentName(bounded);
   const matchKeywords = keywordMatcher(bounded);
-  const scored: Array<{ result: SearchResult; matchCount: number; titleMatch: boolean; exactTitle: boolean; keywordMatch: boolean }> = [];
+  const matchInContext = keywordMatcher(bounded, { includeContext: true });
+  const queryTokens = new Set(normalizeKeywordText(bounded).split(' ').filter(Boolean));
+  const wordGroups = words.map(word => normalizeKeywordText(word).split(' ').filter(Boolean));
+  const scored: Array<{ result: SearchResult; matchCount: number; titleMatch: boolean; exactTitle: boolean; keywordMatch: boolean; contextCoverage: number }> = [];
 
   for (const record of data) {
     const isDirective = record.docId.startsWith(DIRECTIVE_PREFIX);
@@ -177,10 +180,18 @@ export function searchDocumentation(
     // Explicit directives scope results to those directives and named counterparts.
     if (directives.length > 0 && !titleMatch) continue;
     const exactTitle = queryName === normalizeComponentName(record.docTitle);
-    const keywordMatch = matchKeywords(record.frontmatter.keywords).length > 0;
+    const wholeKeywords = matchKeywords(record.frontmatter.keywords);
+    const keywordMatch = wholeKeywords.length > 0;
+    // Explicit directive requests retain their existing scoped section scoring.
+    const contextKeywords = directives.length > 0 ? []
+      : matchInContext(record.frontmatter.keywords).filter(keyword => !wholeKeywords.includes(keyword));
+    const contextTerms = new Set(contextKeywords.flatMap(keyword => normalizeKeywordText(keyword).split(' ')));
+    const contextCoverage = [...queryTokens].filter(term => contextTerms.has(term)).length;
     const fullBlob = [record.docTitle, ...record.headingPath, record.frontmatter.description ?? '', record.content].join(' ');
     const sectionRegexes = selectedDirective && contractRegexes.length > 0 ? contractRegexes : regexes;
-    const matchCount = sectionRegexes.filter(r => r.test(fullBlob)).length;
+    const matchCount = sectionRegexes.filter((regex, index) => regex.test(fullBlob)
+      || (directives.length === 0 && wordGroups[index].length > 0
+        && wordGroups[index].every(term => contextTerms.has(term)))).length;
     // Include if content matched OR the document is specifically named in the query.
     if (matchCount === 0 && !titleMatch && !keywordMatch) continue;
 
@@ -199,6 +210,7 @@ export function searchDocumentation(
       titleMatch,
       exactTitle,
       keywordMatch,
+      contextCoverage,
     });
   }
 
@@ -206,7 +218,7 @@ export function searchDocumentation(
   //   1. Non-whats-new before whats-new (burial)
   //   2. Exact titles, then curated phrases, then other title matches
   //   3. Match count descending (more query terms matched = more relevant)
-  //   4. Sections with headings before intro stubs (non-empty headingPath wins ties)
+  //   4. Contextual keyword coverage, then headed sections before intro stubs
   scored.sort((a, b) => {
     const aIsNews = NEWS_DOC.test((a.result.details as DocumentationRecord).docId);
     const bIsNews = NEWS_DOC.test((b.result.details as DocumentationRecord).docId);
@@ -215,6 +227,7 @@ export function searchDocumentation(
       if (a[key] !== b[key]) return a[key] ? -1 : 1;
     }
     if (b.matchCount !== a.matchCount) return b.matchCount - a.matchCount;
+    if (b.contextCoverage !== a.contextCoverage) return b.contextCoverage - a.contextCoverage;
     // Prefer sections with actual headings over intro stubs (headingPath: [])
     const aIsIntro = (a.result.details as DocumentationRecord).headingPath.length === 0;
     const bIsIntro = (b.result.details as DocumentationRecord).headingPath.length === 0;

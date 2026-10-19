@@ -160,8 +160,11 @@ describe('component identity and import safety', () => {
     expect(formatComponentResults(result.results, 'ResizePane')).toContain("import { DtResizable } from '@dialpad/dialtone-vue'");
   });
 
-  test('all query words must match the same canonical name or alias', () => {
-    expect(searchComponents('resizable pane', [publicResizable]).results).toEqual([]);
+  test('a public name in context remains discovery without creating an exact alias', () => {
+    const found = searchComponents('resizable pane', [publicResizable]);
+    expect(found.results[0].name).toBe('DtResizable');
+    expect(found.exactMatch).toBe(false);
+    expect(found.results[0].details.identity).toEqual(publicResizable.identity);
   });
 
   test('an alias lookup imports the canonical component name within the preferred package', () => {

@@ -23,6 +23,17 @@ export const cases = [
   baseline('keyword-spinner', 'components', 'spinner', [
     order(['DtLoader']),
   ], { limit: 1 }),
+  baseline('keyword-context-spinner', 'components', 'loading spinner', [
+    order(['DtLoader']),
+  ], { limit: 1 }),
+  baseline('keyword-context-combobox-docs', 'documentation', 'typeahead autocomplete search', [], {
+    limit: 1,
+    checksByAdapter: {
+      core: [contains('source-page', '"docId":"components/combobox"')],
+      cli: [contains('source-page', '"docId":"components/combobox"')],
+      mcp: [contains('subject-heading', '### Combobox')],
+    },
+  }),
   baseline('keyword-notification-ambiguity', 'components', 'notification', [
     order(['DtBanner', 'DtNotice', 'DtToast']),
   ]),

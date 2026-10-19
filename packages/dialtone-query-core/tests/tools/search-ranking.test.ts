@@ -135,6 +135,79 @@ describe('curated public-page discovery', () => {
     expect(searchDocumentation(query, documentation).results[0].details.docId).toBe(docId);
   });
 
+  test.each([
+    ['spinner component', ['DtLoader'], 'components/loader'],
+    ['loading spinner', ['DtLoader'], 'components/loader'],
+    ['blank slate when the list has no results', ['DtEmptyState'], 'components/empty-state'],
+    ['typeahead autocomplete search', ['DtCombobox', 'DtComboboxWithPopover'], 'components/combobox'],
+    ['typeahead search for contacts', ['DtCombobox', 'DtComboboxWithPopover'], 'components/combobox'],
+    ['add a loader to the settings page', ['DtLoader'], 'components/loader'],
+  ])('%s retains complete discovery phrases in context', (query, expected, docId) => {
+    const found = searchComponents(query, components, componentDocumentation).results;
+    expect(found.slice(0, expected.length).map(result => result.name)).toEqual(expected);
+    expect(searchDocumentation(query, documentation).results[0].details.docId).toBe(docId);
+  });
+
+  test('recognizes complete phrases and exposes the keyword behind partial context', () => {
+    const catalog = withPages(componentDocumentation.pages
+      .filter(page => page.docId === 'components/loader')
+      .map(page => ({ ...page, keywords: ['blank slate', 'spinner'] })));
+    for (const query of ['slated', 'blanket', 'blank mortgage']) {
+      expect(searchComponents(query, components, catalog).results).toEqual([]);
+    }
+    const found = searchComponents('spinner mortgage', components, catalog);
+    expect(found.results[0].name).toBe('DtLoader');
+    expect(found.exactMatch).toBe(false);
+    expect(found.notes.find(note => note.includes('Curated keyword matches'))).toContain('spinner');
+  });
+
+  test('a complete public name beats a shorter name supplemented by a related keyword', () => {
+    const found = searchComponents('add a tab panel to the settings page', components, componentDocumentation);
+    expect(found.results[0].name).toBe('DtTabPanel');
+  });
+
+  test('name-only context uses selected public names without inventing keyword evidence', () => {
+    const found = searchComponents('add an input to the settings page', selected);
+    expect(found.results.map(result => result.name)).toEqual(['DtInput']);
+    expect(found.results[0].details.keywordSource).toBeUndefined();
+    expect(found.notes.some(note => note.includes('DtInput'))).toBe(true);
+    expect(searchComponents('add an icon to the settings page', components).results
+      .some(result => result.name === 'DtIcon')).toBe(false);
+  });
+
+  test('bounds text keyword evidence while retaining all authored phrases in results', () => {
+    const keywords = ['spinner one', 'spinner two', 'spinner three', 'spinner four',
+      'spinner five', 'spinner six', 'spinner seven', 'spinner eight', 'spinner nine', 'spinner ten'];
+    const catalog = withPages(componentDocumentation.pages
+      .filter(page => page.docId === 'components/loader')
+      .map(page => ({ ...page, keywords })));
+    const found = searchComponents(keywords.join(' '), components, catalog);
+    expect(found.results[0].details.keywordSource.keywords).toEqual(keywords);
+    const note = found.notes.find(note => note.includes('Curated keyword matches'))!;
+    expect(note).toContain('spinner eight');
+    expect(note).not.toContain('spinner nine');
+    expect(note).toContain('2 more');
+  });
+
+  test.each([
+    ['Dialtone CLI', 'guides/cli/index'],
+    ['MCP server configuration', 'guides/mcp-server/index'],
+    ['figma icon usage', 'foundations/icons/usage/index'],
+    ['vue2 removal', 'guides/migration/vue2-removal/index'],
+  ])('%s keeps explicit documentation intent', (query, docId) => {
+    expect(searchDocumentation(query, documentation).results[0].details.docId).toBe(docId);
+  });
+
+  test.each([
+    ['figma', ['design/icons/index', 'foundations/icons/usage/index', 'components/index', 'components/status/index', 'tokens/for-designers/index']],
+    ['storybook', ['components/index', 'components/status/index', 'guides/mcp-server/index']],
+    ['vue', ['guides/getting-started/index', 'guides/migration/vue2-removal/index', 'guides/migration/component-props/index', 'components/index']],
+    ['component', ['components/index', 'components/status/index', 'guides/migration/component-props/index', 'guides/cli/index', 'guides/mcp-server/index']],
+  ])('%s retains useful broad navigation without forcing a unique winner', (query, allowed) => {
+    const first = searchDocumentation(query, documentation).results.slice(0, 3);
+    expect(first.some(result => allowed.includes(result.details.docId))).toBe(true);
+  });
+
   test('a competing keyword does not displace canonical name and family matches', () => {
     const catalog = withPages(componentDocumentation.pages.map(page =>
       page.docId === 'components/banner' ? { ...page, keywords: [...(page.keywords ?? []), 'DtInput'] } : page));
@@ -151,6 +224,7 @@ describe('curated public-page discovery', () => {
   test('joins keywords only to API components in the selected dataset', () => {
     expect(searchComponents('text field', selected, componentDocumentation).results.map(r => r.name)).toEqual(['DtInput']);
     expect(searchComponents('spinner', selected, componentDocumentation).results).toEqual([]);
+    expect(searchComponents('spinner component', selected, componentDocumentation).results).toEqual([]);
     const companionOnly = withPages(componentDocumentation.pages
       .filter(page => page.docId === 'components/input')
       .map(page => ({ ...page, components: page.components.map(reference => ({ ...reference, relation: 'companion' })) })));
@@ -161,6 +235,7 @@ describe('curated public-page discovery', () => {
 
   test.each([
     { query: 'DtInput', data: selected, keywordEvidence: false },
+    { query: 'DtLoader', data: components, keywordEvidence: false },
     { query: 'text field', data: selected, keywordEvidence: true },
     { query: 'text field', data: selected.map(c => ({ ...c, metadata: { deprecated: true } })), keywordEvidence: false },
   ])('qualifies only retained keyword evidence for $query ($keywordEvidence)', ({ query, data, keywordEvidence }) => {
