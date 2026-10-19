@@ -155,6 +155,12 @@ Readable Markdown results preserve three named theme samples and token usage, la
 
 Discover Vue component candidates by UI element or name. Select a canonical component and use `get_component` to retrieve its available API contract.
 
+Component and documentation discovery reuse curated page keywords. `spinner` leads with `DtLoader`, `blank slate` with `DtEmptyState`, and `text field`, `text-field`, or `textbox` with `DtInput`. `autocomplete` and `typeahead` find the supported Combobox candidates. `notification` exposes `DtBanner`, `DtNotice`, and `DtToast` as distinct choices. Canonical component name and family matches keep their existing priority, followed by curated keywords and incidental API matches. Documentation ranks exact titles before keywords and incidental prose.
+
+For example, call `search_components` with `{ "query": "spinner" }`, then `get_component` with `{ "component": "DtLoader" }`. Use `search_documentation` with `{ "query": "blank slate" }` for Empty State guidance. Keywords never become component export aliases: `get_component` with `{ "component": "spinner" }` returns no match.
+
+Keyword associations come from bundled latest documentation and apply only to public components present in the selected data. They do not establish availability or compatibility with your installed Dialtone version.
+
 Directive identifiers such as `v-dt-tooltip` or `DtTooltipDirective` are not component names. Component search returns no components for them; use `search_documentation` for directive contracts.
 
 **Example queries:**
@@ -352,7 +358,7 @@ To request the latest published package when the server starts, use `npx -y @dia
 
 After updating the package and any version pin in your client configuration, restart the server or MCP client. A running server keeps the data it loaded at startup.
 
-Replies report bundled sources and versions. Updating the server does not verify your application's installed APIs or example behavior.
+Replies report bundled sources and versions. Updating the server refreshes its bundled data; it does not verify your application's installed APIs or example behavior. Documentation keywords can reach the site before the server: consumers receive them only after package publication, an update and a server restart. Local generation, builds and source merge do not publish keyword updates.
 
 ### Managing Connections
 

@@ -2,6 +2,7 @@ import { describe, test, expect, beforeAll } from 'vitest';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildRecords, chunkSections } from '@src/generators/build-public-docs.mjs';
+import { readKeywords } from '@src/utils/keywords.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const fixtureDir = resolve(__dirname, '../fixtures/public-docs');
@@ -119,6 +120,10 @@ describe('buildRecords — complete.md', () => {
   test('preserves frontmatter figmaUrl and storybook', () => {
     expect(records[0].frontmatter.figmaUrl).toBe('https://www.figma.com/design/example');
     expect(records[0].frontmatter.storybook).toContain('dialtone.dialpad.com');
+  });
+
+  test('preserves validated keywords on every section record', () => {
+    expect(records.map(r => r.frontmatter.keywords)).toEqual(records.map(() => ['spinner', 'activity indicator']));
   });
 
   test('inner text inside <dialtone-usage> is preserved in content', () => {
@@ -243,5 +248,17 @@ describe('buildRecords — edge cases', () => {
     const usage = records.find(r => r.headingPath.includes('Usage'));
     expect(usage).toBeDefined();
     expect(usage.content).toContain('More content after the fence');
+  });
+});
+
+// Public source keywords must reach both lookup adapters without a Vue rebuild.
+describe('readKeywords', () => {
+  test('trims authored keywords and keeps them optional', () => {
+    expect(readKeywords([' spinner ', 'activity indicator'], 'loader.md')).toEqual(['spinner', 'activity indicator']);
+    expect(readKeywords(undefined, 'loader.md')).toBeUndefined();
+  });
+
+  test.each([['spinner'], [['spinner', 42]], [[' ']], [[]]])('rejects malformed keywords %j', (keywords) => {
+    expect(() => readKeywords(keywords, 'loader.md')).toThrow(/Invalid keywords in loader\.md: expected an array of nonempty strings/);
   });
 });

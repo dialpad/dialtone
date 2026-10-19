@@ -3,6 +3,8 @@ import { buildComponentPage as build } from '../src/generators/build-component-d
 const identities = [
   'DtButton',
   'DtTabPanel',
+  'DtTabGroup',
+  'DtTab',
   'DtDropdownSeparator',
   'DtResizablePanel',
 ].map((canonicalName) => ({
@@ -85,4 +87,30 @@ it('locates live inline HTML in Markdown table cells', async () => {
   expect(page.components.map((reference) => reference.sourceLine)).toEqual([
     1, 5,
   ]);
+});
+
+it('carries page keywords and associates each documented compound part', async () => {
+  const source =
+    '---\ntitle: Tabs\nkeywords: [tab navigation]\n---\n<component-vue-api component-name="tabgroup" :also-import="[\'tab\', \'tabpanel\']" />\n<component-vue-api component-name="tabpanel" />\n<component-vue-api component-name="tab" />';
+  const page = await build('components/tabs.md', source, identities);
+  expect(page.keywords).toEqual(['tab navigation']);
+  expect(page.components.map((c) => [c.canonicalName, c.relation])).toEqual([
+    ['DtTabGroup', 'api'],
+    ['DtTab', 'companion'],
+    ['DtTabPanel', 'companion'],
+    ['DtTabPanel', 'api'],
+    ['DtTab', 'api'],
+  ]);
+});
+
+it('does not invent a component for a keyworded CSS-only page', async () => {
+  const page = await build('components/table.md', '---\nkeywords: [data table]\n---\n<table />', identities);
+  expect(page.components).toEqual([]);
+});
+
+it('rejects an internal identity as an API association', async () => {
+  const internal = { identity: { canonicalName: 'DtInternal', aliases: [], kind: 'internal' } };
+  await expect(
+    build('components/internal.md', '<component-vue-api component-name="DtInternal" />', [...identities, internal]),
+  ).rejects.toThrow(/Unresolved/);
 });

@@ -16,3 +16,13 @@ Apply to `apps/dialtone-documentation/**`.
 ## Verification
 
 - Run documentation lint/build checks when docs-site structure, nav, frontmatter, or VuePress components change.
+
+## Curated discovery keywords
+
+Use page frontmatter `keywords` as the maintained source for alternate names or interaction phrases. Add a nonempty string array only when likely searches are not already covered; do not copy synonyms into component descriptions, export aliases, or agent API inventories. The site search and CLI/MCP discovery reuse these terms.
+
+A public component page needs its normal exported identity and a live `<component-vue-api component-name="..." />` association. Keywords apply to the page's documented API components, including separately documented parts; companion-only imports do not inherit them. CSS patterns and directives must use their real identifiers and must not imply a nonexistent Vue component. Update associations when renaming, splitting, or removing components.
+
+Run `pnpm nx run-many -t build -p dialtone-cli dialtone-mcp-server` to regenerate public docs, page associations and bundled lookup data. For a meaningful new synonym, record a representative `dialtone search "<term>" --bundled` and `dialtone docs "<term>" --bundled` against the rebuilt candidate, checking the leading supported subjects and any legitimate ambiguity. Selected API lookup still needs a canonical component name.
+
+Documentation keywords are bundled latest references. Joining them to installed component data does not establish installed API compatibility or add absent components. Docs-only keyword edits are eligible for CLI/MCP releases through the existing release process, but can reach the site before package publication. Verify publication, update the installed tools and restart MCP; a source merge or local build does not publish keywords.

@@ -1,7 +1,7 @@
 ---
 title: Combobox With Popover
 description: Searchable input paired with popover-rendered option content.
-keywords: ["dropdown", "select", "autocomplete", "listbox", "append to body", "DtComboboxWithPopover", "dt-combobox-with-popover"]
+keywords: ["dropdown", "select", "autocomplete", "typeahead", "listbox", "append to body", "DtComboboxWithPopover", "dt-combobox-with-popover"]
 status: ready
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-combobox-with-popover--default

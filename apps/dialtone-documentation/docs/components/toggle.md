@@ -5,7 +5,7 @@ thumb: true
 description: Switch control for turning a setting on or off.
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-toggle--default
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=8272-20496
-keywords: ["switch", "checkbox", "on off", "d-toggle", "DtToggle", "dt-toggle", "flip switch"]
+keywords: ["switch", "on off", "d-toggle", "DtToggle", "dt-toggle", "flip switch"]
 combinator: DtToggle
 ---
 

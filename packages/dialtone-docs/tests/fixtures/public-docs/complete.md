@@ -4,6 +4,7 @@ description: A component for testing the public-docs producer.
 status: ready
 figma_url: https://www.figma.com/design/example
 storybook: https://dialtone.dialpad.com/vue/?path=/story/example
+keywords: [" spinner ", "activity indicator"]
 ---
 
 <code-well-header>

@@ -8,7 +8,7 @@ node --test scripts/retrieval/*.test.mjs
 node scripts/retrieval/run.mjs --report /tmp/dialtone-retrieval.json
 ```
 
-The 26 cases run against query-core, CLI JSON and live MCP stdio tools, with exact top results, required/forbidden facts, explicit negatives, migration/accessibility literals and output budgets. Positive cases require independent subject/content facts even when one feature assertion is an owned failure. Optional registry update-check I/O is disabled with a test preload; this is not a startup/network acceptance suite. Existing documentation-ID acceptance scenarios remain separate.
+The 29 cases run against query-core, CLI JSON and live MCP stdio tools, with exact top results, required/forbidden facts, explicit negatives, migration/accessibility literals and output budgets. Positive cases require independent subject/content facts even when one feature assertion is an owned failure. Optional registry update-check I/O is disabled with a test preload; this is not a startup/network acceptance suite. Existing documentation-ID acceptance scenarios remain separate.
 
 Every expected failure names one assertion, its issue, owner and removal condition. Other assertions still must pass. Setup errors, transport errors, timeouts, malformed responses and unrelated assertions always fail. An unexpected pass also fails: promote the case to a mandatory regression and remove its registration. When a feature introduces a detail tool or C2 provenance fields, replace its candidate detection with the exact integrated contract and promote it. Do not keep a passing behavior masked as an expected failure.
 
