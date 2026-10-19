@@ -1,4 +1,6 @@
 import type { Component, ComponentIdentity } from './types.js';
+import { normalizeComponentName } from './component-name.js';
+export { compactName, normalizeComponentName } from './component-name.js';
 
 export interface InstalledComponentExports {
   package: string;
@@ -69,20 +71,6 @@ export function componentImportNote(identity?: ComponentIdentity): string {
   return identity?.kind === 'internal'
     ? 'Import unavailable: this component is not exported by the documented package.'
     : 'Import unverified: upgrade component metadata or verify the exports of the installed package before importing.';
-}
-
-/** Lowercase and drop separators, keeping any "Dt" prefix. */
-export function compactName(name: string): string {
-  return name.toLowerCase().replace(/[^a-z0-9]/g, '');
-}
-
-/**
- * Canonical/alias comparisons accept authored camel, kebab and snake names and
- * an optional "Dt" prefix: "DtButtonGroup", "button-group" and "Button Group"
- * all become "buttongroup".
- */
-export function normalizeComponentName(name: string): string {
-  return compactName(name).replace(/^dt/, '');
 }
 
 export function componentNames(component: Component): string[] {

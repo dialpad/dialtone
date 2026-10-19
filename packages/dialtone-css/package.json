@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-css",
-  "version": "9.0.1",
+  "version": "9.1.1",
   "description": "Dialpad's design system",
   "keywords": [
     "Dialpad",
@@ -33,11 +33,6 @@
       "name": "Ignacio Ropolo",
       "email": "ignacio.ropolo@dialpad.com",
       "url": "https://github.com/iropolo"
-    },
-    {
-      "name": "Nina Repetto",
-      "email": "nina.repetto@dialpad.com",
-      "url": "https://github.com/ninamarina"
     },
     {
       "name": "Belu Montoya",

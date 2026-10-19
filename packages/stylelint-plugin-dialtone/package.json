@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/stylelint-plugin-dialtone",
-  "version": "1.4.0",
+  "version": "1.4.1",
   "description": "dialtone stylelint plugin",
   "keywords": [
     "Dialpad",
@@ -22,11 +22,6 @@
       "name": "Ignacio Ropolo",
       "email": "ignacio.ropolo@dialpad.com",
       "url": "https://github.com/iropolo"
-    },
-    {
-      "name": "Nina Repetto",
-      "email": "nina.repetto@dialpad.com",
-      "url": "https://github.com/ninamarina"
     },
     {
       "name": "Belu Montoya",

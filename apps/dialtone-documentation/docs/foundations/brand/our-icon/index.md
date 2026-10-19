@@ -25,7 +25,7 @@ keywords: ["app icon","favicon","brand mark"]
   <div class="d-d-grid d-g-600 d-g-cols1 md:d-g-cols3 d-ai-center">
     <div>
       <h2 class="d-docsite--header-3 d-mbs-0">Versions</h2>
-      <p class="d-docsite--paragraph">In most instances, the primary full brand gradient version should be used.</p>
+      <p class="d-docsite--paragraph">In most instances, the primary full brand gradient version should be used. The gradient app icon is a logo asset; it doesn't license gradient use elsewhere. See <dt-link to="/foundations/gradient/">Gradient</dt-link>.</p>
       <p class="d-docsite--paragraph">The Meetings app icon should only be used when referencing the meetings app.</p>
       <p class="d-docsite--paragraph"><dt-link to="/downloads/">Download icons</dt-link></p>
     </div>
@@ -45,15 +45,4 @@ keywords: ["app icon","favicon","brand mark"]
     </div>
   </div>
 
-  <figure class="d-bar-500 d-of-hidden">
-    <img src="/assets/images/color--sample-01.jpg" alt="" class="d-d-block d-w100p" />
-  </figure>
-
-  <figure class="d-bar-500 d-of-hidden">
-    <img src="/assets/images/color--sample-02.jpg" alt="" class="d-d-block d-w100p" />
-  </figure>
-
-  <figure class="d-bar-500 d-of-hidden">
-    <img src="/assets/images/color--sample-03.jpg" alt="" class="d-d-block d-w100p" />
-  </figure>
 </dt-stack>

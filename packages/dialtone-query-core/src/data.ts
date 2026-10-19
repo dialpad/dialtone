@@ -3,6 +3,10 @@
 // ============================================================================
 
 import type { UtilityClassesData, TokensData, Component, IconsData, DocumentationRecord } from './types.js';
+import type { BundledProvenance } from './retrieval.js';
+import type { ComponentDocCatalog } from './component-documentation.js';
+import bundledStamp from './generated/bundled-provenance.json' with { type: 'json' };
+import componentDocCatalog from '@dialpad/dialtone-docs/dist/component-doc-links.json' with { type: 'json' };
 import { normalizeComponents } from './component-identity.js';
 
 import utilityClassesData from '@dialpad/dialtone-css/lib/dist/dialtone-docs.json' with { type: 'json' };
@@ -16,3 +20,6 @@ export const tokens: TokensData = tokensData as unknown as TokensData;
 export const components: Component[] = normalizeComponents(componentsData as unknown as Component[]);
 export const icons: IconsData = iconsData as unknown as IconsData;
 export const documentation: DocumentationRecord[] = documentationData as unknown as DocumentationRecord[];
+
+export const bundledProvenance = bundledStamp as BundledProvenance;
+export const componentDocumentation = componentDocCatalog as ComponentDocCatalog;

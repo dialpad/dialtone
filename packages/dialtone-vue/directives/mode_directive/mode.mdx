@@ -14,17 +14,23 @@ For full documentation, see the [Mode Island page](https://dialtone.dialpad.com/
 
 ## Usage
 
-Import the directive from dialtone-vue
+Register the plugin before mounting your Vue 3 application:
 
 ```js
 import { DtModeDirective } from "@dialpad/dialtone-vue";
-```
-
-Install the directive into vue instance
-
-```js
 app.use(DtModeDirective);
 ```
+
+Use `v-dt-mode` by default on the element that already defines the region. It adds
+no wrapper and does not paint a background. If you need a new container, use a
+native element with the directive and add a surface explicitly when needed.
+
+Choose `DtModeIsland` when you deliberately want its container and automatic
+primary surface together, or cannot install the current directive plugin. See
+[Directive or component?](https://dialtone.dialpad.com/components/mode-island.html#directive-or-component)
+for the full decision table and server-rendering considerations. The component
+uses `mode="inverted"`; the directive and positioned components' `content-mode`
+prop use `invert`.
 
 ### Explicit modes
 
@@ -51,6 +57,11 @@ Bind a reactive variable to switch modes at runtime.
 ```
 
 ## Args
+
+Use the arguments `light`, `dark`, or `invert`; omitting the argument defaults
+to `invert`. The legacy argument `inverted` warns and maps to `invert`; other
+invalid arguments warn and fall back to `invert`. The directive does not read
+modifiers. Bind `false` to disable it and remove its mode attributes.
 
 <table>
   <thead>
@@ -91,5 +102,7 @@ Bind a reactive variable to switch modes at runtime.
 - Watches root for `data-dt-contrast` and `data-dt-material` changes via MutationObserver and keeps the bound element in sync
 - For `invert`, watches ancestor mode changes via MutationObserver and reacts automatically
 - Does **not** add the `d-mode-island` CSS class or set `background-color`
-- Interoperable with `<dt-mode-island>` — nesting either inside the other works naturally
-- `data-dt-brand` and `data-dt-material` cannot be overridden — brand and material are root-level by design (material is paired to brand for visual coherence). Mode is the only theming dimension the directive overrides locally.
+- Both the directive and `<dt-mode-island>` use `data-dt-mode` boundaries
+- Keep `data-dt-brand` and `data-dt-material` at the root; do not set local overrides on mode boundaries. Material is paired to brand for visual coherence. Mode is the only theming dimension the directive overrides locally.
+- Argument or activation changes reapply the mode. Disabling or unmounting disconnects observers and removes the mode, contrast, and material attributes.
+- The directive runs on client mount and does not provide server-rendered mode attributes. See the Mode Island page for server-rendering choices.

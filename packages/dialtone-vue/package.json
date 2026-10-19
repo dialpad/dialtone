@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-vue",
-  "version": "4.3.1",
+  "version": "4.4.0",
   "description": "Vue component library for Dialpad's design system Dialtone",
   "scripts": {
     "lint": "run-s lint:code lint:docs",
@@ -94,11 +94,6 @@
       "name": "Ignacio Ropolo",
       "email": "ignacio.ropolo@dialpad.com",
       "url": "https://github.com/iropolo"
-    },
-    {
-      "name": "Nina Repetto",
-      "email": "nina.repetto@dialpad.com",
-      "url": "https://github.com/ninamarina"
     },
     {
       "name": "Belu Montoya",
