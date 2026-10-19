@@ -645,14 +645,17 @@ describe('DtSlider Tests', () => {
         expect(tooltip.matches(':popover-open')).toBe(false);
       });
 
-      describe('Per-frame position check is throttled (performance)', () => {
-        // UseSliderTooltipReadout's checkFrame reschedules itself via rAF every
-        // frame regardless, but only runs its own expensive body (an anchor
-        // rect read + visibility check) once the throttle window has elapsed.
-        // Mocking requestAnimationFrame to capture callbacks instead of firing
-        // them lets this drive checkFrame with controlled timestamps — real
-        // browser frame timing can't deterministically land inside vs. past a
-        // 100ms window from a test.
+      describe('Per-frame position check runs every frame, not throttled', () => {
+        // A prior commit throttled this to once per ~100ms, on the theory
+        // that a transformed anchor or visibility flip is within human
+        // perception at that rate. In practice it throttled the reposition
+        // itself, not just the measurement — a continuously moving/
+        // transformed anchor (e.g. a dragged container) visibly lagged by up
+        // to the window's own length (reported: up to 60px during a drag, vs
+        // 5px before). Reverted; this pins it staying reverted. Mocking
+        // requestAnimationFrame to capture callbacks instead of firing them
+        // lets this drive checkFrame deterministically rather than racing
+        // real browser frame timing.
         let rafCallbacks;
         let rafSpy;
 
@@ -668,28 +671,25 @@ describe('DtSlider Tests', () => {
           rafSpy.mockRestore();
         });
 
-        function fireNextFrame(timestamp) {
+        function fireNextFrame() {
           const cb = rafCallbacks.shift();
-          cb?.(timestamp);
+          cb?.();
         }
 
-        it('skips the expensive per-frame check inside the throttle window, then runs it once the window elapses', async () => {
+        it('re-reads the anchor rect on every scheduled frame, with no throttle window', async () => {
           await thumbInputs[0].trigger('focus');
-          // The first checkFrame() runs synchronously (inside open(), timestamp
-          // defaults to 0) before this spy can intercept it — clear those
-          // calls so only the throttled, rAF-driven frames below are counted.
+          // The first checkFrame() runs synchronously (inside open()) before
+          // this spy can intercept it — clear that call so only the
+          // rAF-driven frames below are counted.
           const anchor = wrapper.find('[data-qa="dt-slider-thumb-visual"]').element;
           const rectSpy = vi.spyOn(anchor, 'getBoundingClientRect');
           rectSpy.mockClear();
 
-          // Still inside the 100ms window the synchronous first check (t=0)
-          // opened — the expensive body must not run.
-          fireNextFrame(50);
-          expect(rectSpy).not.toHaveBeenCalled();
+          fireNextFrame();
+          expect(rectSpy).toHaveBeenCalledTimes(1);
 
-          // Past that window — the gate reopens and the body runs.
-          fireNextFrame(150);
-          expect(rectSpy).toHaveBeenCalled();
+          fireNextFrame();
+          expect(rectSpy).toHaveBeenCalledTimes(2);
         });
       });
     });

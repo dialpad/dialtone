@@ -135,19 +135,22 @@ export function useSliderTooltipReadout(props, {
     // anchors and a stationary owner's visibility. Comparing against the rect
     // the last update used skips the frame after a watcher already ran. It
     // also replaces autoUpdate's layoutShift observer, which reacts after paint.
-    let nextFrameCheckAt = 0;
-    // A transformed anchor or a visibility flip is still well within human
-    // perception at a few checks a second — polling the full 60/s for as
-    // long as any readout is open re-measures a perfectly stationary tooltip
-    // 60 times a second for nothing. rAF's own timestamp (not Date.now)
-    // keeps this independent of when the tab last had focus.
-    const FRAME_CHECK_INTERVAL_MS = 100;
-    function checkFrame(timestamp = 0) {
-      if (timestamp >= nextFrameCheckAt) {
-        nextFrameCheckAt = timestamp + FRAME_CHECK_INTERVAL_MS;
-        if (!tooltip.matches(':popover-open') || !anchorRect || !sameRect(anchor.getBoundingClientRect(), anchorRect)) update();
-        else tooltip.style.visibility = currentVisibility();
-      }
+    //
+    // This used to throttle to a check every ~100ms instead of every frame,
+    // on the theory that a transformed anchor or visibility flip is still
+    // within human perception at that rate — but it throttled the reposition
+    // itself, not just the measurement: a continuously moving/transformed
+    // anchor (e.g. a dragged container) only got repositioned ~10x/sec
+    // instead of ~60x/sec, visibly lagging behind by as much as the window
+    // itself (Francis measured up to 60px during a drag, vs 5px before).
+    // Reverted — the actual expensive step (update()'s computePosition call
+    // and DOM writes) was already gated by the sameRect comparison below, so
+    // a stationary tooltip was never doing 60/s of real repositioning work;
+    // only this cheap rect-read-and-compare ran that often, which is not
+    // what was worth trading away responsiveness for.
+    function checkFrame() {
+      if (!tooltip.matches(':popover-open') || !anchorRect || !sameRect(anchor.getBoundingClientRect(), anchorRect)) update();
+      else tooltip.style.visibility = currentVisibility();
       if (isLive()) frame = requestAnimationFrame(checkFrame);
     }
 
