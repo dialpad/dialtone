@@ -105,7 +105,7 @@ const specs: Record<string, SearchSpec> = {
     domain: 'components',
     description:
       'Search components by name or feature with descriptions, sampled props/events/slots and import hints. Use get_component for the complete selected API.',
-    search: (text) => searchComponents(text, components),
+    search: (text) => searchComponents(text, components, componentDocumentation),
     format: formatComponentResults,
     followUp: {
       heading:

@@ -2,6 +2,7 @@ import type { ComponentIdentity } from './types.js';
 export interface ComponentDocPage {
   docId: string;
   title: string | null;
+  keywords?: string[];
   pageStatus: string;
   sourcePath: string;
   pagePath: string;

@@ -8,7 +8,7 @@
 import * as readline from 'readline';
 import {
   searchUtilityClasses, searchTokens, searchComponents,
-  utilityClasses, tokens, components,
+  utilityClasses, tokens, components, componentDocumentation,
 } from '@dialpad/dialtone-query-core';
 import type { UtilityClassesData, TokensData, Component } from '@dialpad/dialtone-query-core';
 
@@ -167,7 +167,7 @@ function performSearch(query: string): void {
   } else if (currentTool === 'tokens') {
     searchResult = searchTokens(query, tokens as TokensData);
   } else if (currentTool === 'components') {
-    searchResult = searchComponents(query, components as Component[]);
+    searchResult = searchComponents(query, components as Component[], componentDocumentation);
   }
 
   if (searchResult) {
