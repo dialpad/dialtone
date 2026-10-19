@@ -9,6 +9,7 @@ import { kebabCaseToPascalCase } from '../../common/utils/client.mjs';
 
 import { registerDialtoneTransforms, registerDialtonePreprocessors, registerRelativeColorWrap, isMaterialNamespaceRef, isFontSizeToken, isLineHeightToken, isPercentToken, isNegativeToken } from './dialtone-transforms.js';
 import { buildDocs } from './build-docs.js';
+import { isMobileExclusiveTheme, isMobileTheme, toMobilePlatforms, removeMobilePlatforms } from './mobile-theme-utils.js';
 const Root = JSON.parse(readFileSync('./tokens/root.json', 'utf8'));
 const BASE_FONT_SIZE = Root.font.size.root.value;
 
@@ -67,7 +68,7 @@ export async function run () {
 
     const themeName = `${theme.group}-${theme.name}`;
 
-    return {
+    const config = {
       source,
       preprocessors: ['tokens-studio', 'dt/relative-color/extract'],
       expand: {
@@ -282,6 +283,14 @@ export async function run () {
         },
       },
     };
+
+    if (isMobileExclusiveTheme(theme)) {
+      config.platforms = toMobilePlatforms(config.platforms);
+    } else if (!isMobileTheme(theme)) {
+      config.platforms = removeMobilePlatforms(config.platforms);
+    }
+
+    return config;
   });
 
   for (const cfg of configs) {
