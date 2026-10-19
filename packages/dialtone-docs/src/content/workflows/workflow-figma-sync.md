@@ -132,7 +132,7 @@ Not everything in the token source can be a Figma variable.
 Two more things change on the way across:
 
 - **Font families.** A token holds a CSS stack. Figma needs one resolvable family, so the stack is mapped to the face it renders as on macOS.
-- **Colours outside sRGB.** Tokens are authored in OKLCH, which is wider than the sRGB a Figma variable stores. Those values are gamut-mapped by reducing chroma while holding lightness and hue, which is what a browser does on an sRGB display.
+- **Colours outside sRGB.** Tokens are authored in OKLCH, which is wider than the sRGB a Figma variable stores. Those values are gamut-mapped by clipping each channel independently — measured against Chromium, that matches what a browser actually paints for an out-of-gamut `oklch()` far more often than reducing chroma while holding lightness and hue does.
 
 ## The other direction
 

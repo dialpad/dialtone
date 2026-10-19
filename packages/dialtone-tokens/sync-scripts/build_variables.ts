@@ -456,7 +456,7 @@ async function main (): Promise<void> {
   // meaningful after that call.
   const uniqueMapped = new Set(gamutMapped.map(g => g.from));
   if (uniqueMapped.size) {
-    console.log(`\ngamut-mapped    : ${uniqueMapped.size} distinct colours outside sRGB, chroma reduced`);
+    console.log(`\ngamut-mapped    : ${uniqueMapped.size} distinct colours outside sRGB, clipped to match browser rendering`);
     for (const from of [...uniqueMapped].slice(0, 5)) console.log(`  ${from}`);
   }
 
