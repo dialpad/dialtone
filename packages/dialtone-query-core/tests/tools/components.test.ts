@@ -165,6 +165,7 @@ describe('component identity and import safety', () => {
     expect(found.results[0].name).toBe('DtResizable');
     expect(found.exactMatch).toBe(false);
     expect(found.results[0].details.identity).toEqual(publicResizable.identity);
+    expect(found.notes.find(note => note.includes('Public names recognized'))).toContain('DtResizable');
   });
 
   test('an alias lookup imports the canonical component name within the preferred package', () => {

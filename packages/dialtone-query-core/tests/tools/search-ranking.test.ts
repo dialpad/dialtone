@@ -148,6 +148,11 @@ describe('curated public-page discovery', () => {
     expect(searchDocumentation(query, documentation).results[0].details.docId).toBe(docId);
   });
 
+  test('complete API-text matches lead before partial contextual discovery', () => {
+    const found = searchComponents('panel for tabs', components, componentDocumentation);
+    expect(found.results[0].name).toBe('DtTabGroup');
+  });
+
   test('recognizes complete phrases and exposes the keyword behind partial context', () => {
     const catalog = withPages(componentDocumentation.pages
       .filter(page => page.docId === 'components/loader')
@@ -171,8 +176,9 @@ describe('curated public-page discovery', () => {
     expect(found.results.map(result => result.name)).toEqual(['DtInput']);
     expect(found.results[0].details.keywordSource).toBeUndefined();
     expect(found.notes.some(note => note.includes('DtInput'))).toBe(true);
-    expect(searchComponents('add an icon to the settings page', components).results
-      .some(result => result.name === 'DtIcon')).toBe(false);
+    const excluded = searchComponents('add an icon to the settings page', components);
+    expect(excluded.results).toEqual([]);
+    expect(excluded.notes.some(note => note.includes('showing components'))).toBe(false);
   });
 
   test('bounds text keyword evidence while retaining all authored phrases in results', () => {

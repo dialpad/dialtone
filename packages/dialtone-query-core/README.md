@@ -36,7 +36,7 @@ All search functions return `{ results: SearchResult[]; notes: string[] }`. `sea
 
 | Function | Data Parameter | Description |
 | ---------- | --------------- | ------------- |
-| `searchComponents(query, components, catalog?)` | `Component[]`, optional `ComponentDocCatalog` | Priority search by name, contextual public names/curated page keywords, then description, props, events and slots. Exact-name candidates are preserved. Discovery phrases rank by query-token coverage; text notes identify retained evidence. Keywords require a catalog and reach only public API components present in `components`. |
+| `searchComponents(query, components, catalog?)` | `Component[]`, optional `ComponentDocCatalog` | Complete name/keyword matches lead; complete description, prop, event and slot matches precede partial contextual candidates. Exact-name candidates are preserved. Within each discovery tier, phrases rank by query-token coverage; text notes identify retained evidence. Keywords require a catalog and reach only public API components present in `components`. |
 | `searchTokens(query, tokens, options?)` | `TokensData` | Token search with optional `{ includeHsl: boolean }` |
 | `searchUtilityClasses(query, utilityClasses)` | `UtilityClassesData` | CSS class search with automatic px/rem conversion |
 | `searchIcons(query, icons)` | `IconsData` | Icon search by name, category, and keywords |

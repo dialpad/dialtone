@@ -244,11 +244,13 @@ export function searchComponents(query: string, components: Component[], catalog
 
   console.error(`[COMPONENT SEARCH DEBUG] Words:`, words);
 
-  // Preserve canonical name/family matches, then curated phrases before API text.
+  // Complete matches lead; partial contextual phrases supplement API-text matches.
   const target = normalizeComponentName(query);
   const candidates = target ? components.filter(c => componentNames(c).some(name => normalizeComponentName(name) === target)) : [];
   const discovery = searchByDiscoveryPhrases(query, components, catalog, candidates.length === 0);
-  const keywordMatches = discovery.map(match => match.result);
+  const queryTokenCount = new Set(normalizeKeywordText(query).split(' ').filter(Boolean)).size;
+  const keywordMatches = discovery.filter(match => match.coverage === queryTokenCount).map(match => match.result);
+  const contextMatches = discovery.filter(match => match.coverage < queryTokenCount).map(match => match.result);
   const nameMatches = searchByName(regexArray, components);
   const descriptionMatches = searchByDescription(regexArray, components);
   const propsMatches = searchByProps(regexArray, components);
@@ -264,7 +266,8 @@ export function searchComponents(query: string, components: Component[], catalog
     ...descriptionMatches,
     ...propsMatches,
     ...eventsMatches,
-    ...slotsMatches
+    ...slotsMatches,
+    ...contextMatches,
   ];
 
   // Remove duplicates (keep first occurrence)
@@ -282,12 +285,6 @@ export function searchComponents(query: string, components: Component[], catalog
   const exact = match && (!note || compactName(query) === compactName(match.displayName)) ? match : null;
   console.error(`[COMPONENT SEARCH DEBUG] Exact match: ${exact ? exact.displayName : 'none'}`);
 
-  // Add note if no name matches but other buckets have results
-  const searchNotes: string[] = [];
-  if (!exact && nameMatches.length === 0 && deduplicated.length > 0) {
-    searchNotes.push(`No component named '${query}', showing components with matching names in context/${catalog ? 'keywords/' : ''}description/props/events/slots`);
-  }
-
   // Apply smart filter (remove deprecated, swap discouraged with alternatives)
   const componentsData: { [key: string]: Component } = {};
   components.forEach((c: Component) => { componentsData[c.displayName] = c; });
@@ -301,6 +298,11 @@ export function searchComponents(query: string, components: Component[], catalog
   // still points to its replacement.
   // removeDuplicates also drops the exact match if the filter swapped it back in.
   const results = exact ? removeDuplicates([toSearchResult(exact), ...filtered]) : filtered;
+  // Add note if no name matches but other buckets have results
+  const searchNotes: string[] = [];
+  if (!exact && nameMatches.length === 0 && results.length > 0) {
+    searchNotes.push(`No component named '${query}', showing components with matching names in context/${catalog ? 'keywords/' : ''}description/props/events/slots`);
+  }
   const keywords = [...new Set<string>(results.flatMap(result => result.details.keywordSource?.keywords ?? []))];
   if (catalog && keywords.length) {
     searchNotes.unshift(`Curated keyword matches: ${evidenceList(keywords)}. Source: bundled documentation (${catalog.source.versionScope}; SHA256 ${catalog.source.hash}); installed compatibility is not checked.`);
