@@ -3986,6 +3986,35 @@ describe('DtSlider Tests', () => {
         const style = wrapper.find('[data-qa="dt-slider-thumb-readout-merged"]').attributes('style');
         expect(style).toContain('translateX(calc(-50% + 18px))');
       });
+
+      it('drops an already-applied offset immediately when orientation switches from horizontal to vertical', async () => {
+        // Same guard markStyle already has for marks (readoutEdgeOffsetPx
+        // itself isn't cleared on this switch — UseSliderCollisionAvoidance's
+        // own watcher is async and lags a reactive isVertical flip by one
+        // tick — it's readoutStyle's own !isVertical.value check that has
+        // to stop a now-stale offset from leaking into vertical mode's
+        // bottom-based position).
+        mockProps = { readout: 'always', modelValue: 50 };
+        updateWrapper();
+        await nextTick();
+
+        wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
+        const readout = wrapper.find('[data-qa="dt-slider-thumb-readout"]');
+        // Hangs 50px past the left edge — 18px beyond the 32px tolerance.
+        readout.element.getBoundingClientRect = () => rectWithCurrentOffset(readout.element, 50, 150);
+
+        thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
+        thumbInputs[0].element.value = '51';
+        await thumbInputs[0].trigger('input');
+        await settleCollisions();
+        // Sanity: the offset really did apply while still horizontal.
+        expect(wrapper.find('[data-qa="dt-slider-thumb-readout"]').attributes('style')).toContain('translateX(calc(');
+
+        await wrapper.setProps({ orientation: 'vertical' });
+
+        const styleAfter = wrapper.find('[data-qa="dt-slider-thumb-readout"]').attributes('style');
+        expect(styleAfter).not.toContain('translateX(calc(');
+      });
     });
 
     describe('Range readout collision merge', () => {

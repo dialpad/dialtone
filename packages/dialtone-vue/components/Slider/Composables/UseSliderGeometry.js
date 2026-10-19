@@ -172,8 +172,14 @@ export function useSliderGeometry(props, {
   // tighter than the control's own overflow-clip-margin tolerance.
   function readoutStyle(pct, offsetPx, edge) {
     if (edge && !isVertical.value) return positionStyle(pct, markEdgeInsetTransform(edge));
-    if (!offsetPx) return anchoredMarkStyle(pct);
-    return anchoredMarkStyle(pct, `translateX(calc(${centerInlineTransform()} + ${offsetPx}px))`);
+    // Same !isVertical.value guard as markStyle's own offset lookup above —
+    // UseSliderCollisionAvoidance's offset refs lag a reactive isVertical
+    // flip by one tick (its own watcher is async), so without this a stray
+    // translateX could leak into one render of the vertical (bottom-based)
+    // position before that watcher re-zeroes it.
+    const offset = !isVertical.value ? offsetPx : 0;
+    if (!offset) return anchoredMarkStyle(pct);
+    return anchoredMarkStyle(pct, `translateX(calc(${centerInlineTransform()} + ${offset}px))`);
   }
 
   const mergedReadoutPct = computed(() => {
