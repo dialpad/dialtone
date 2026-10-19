@@ -67,6 +67,14 @@ export interface Variable {
   resolvedType: 'BOOLEAN' | 'FLOAT' | 'STRING' | 'COLOR'
   valuesByMode: { [modeId: string]: VariableValue }
   remote: boolean
+  /**
+   * Set when a variable was deleted in the Figma UI but is still referenced
+   * by a style or another variable, so the REST API keeps returning it
+   * alongside the live one of the same name. Must be skipped the same way
+   * `remote` is — matching by name alone cannot otherwise tell a ghost
+   * copy from the real variable to update.
+   */
+  deletedButReferenced?: boolean
   description: string
   hiddenFromPublishing: boolean
   scopes: VariableScope[]

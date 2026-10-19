@@ -1026,6 +1026,90 @@ describe('generatePostVariablesPayload', () => {
     )
   })
 
+  it('ignores a deleted-but-referenced variable even when it shadows a live one of the same name', () => {
+    const localVariablesResponse: ApiGetLocalVariablesResponse = {
+      status: 200,
+      error: false,
+      meta: {
+        variableCollections: {
+          'VariableCollectionId:1:1': {
+            id: 'VariableCollectionId:1:1',
+            name: 'collection',
+            modes: [{ modeId: '1:0', name: 'mode1' }],
+            defaultModeId: '1:0',
+            remote: false,
+            hiddenFromPublishing: false,
+          },
+        },
+        variables: {
+          'VariableID:2:1': {
+            id: 'VariableID:2:1',
+            name: 'var1',
+            key: 'variable_key',
+            variableCollectionId: 'VariableCollectionId:1:1',
+            resolvedType: 'STRING',
+            valuesByMode: {
+              '1:0': 'hello world!',
+            },
+            remote: false,
+            description: '',
+            hiddenFromPublishing: false,
+            scopes: ['ALL_SCOPES'],
+            codeSyntax: {},
+          },
+          // A ghost of a deleted variable, still returned because something
+          // references it, sharing the live variable's name and appearing
+          // after it — the exact ordering that would let it overwrite the
+          // live entry in a name-only lookup if deletedButReferenced were
+          // not checked. Its differing value would turn the noop below into
+          // a spurious update if the ghost won.
+          'VariableID:2:3': {
+            id: 'VariableID:2:3',
+            name: 'var1',
+            key: 'variable_key_deleted',
+            variableCollectionId: 'VariableCollectionId:1:1',
+            resolvedType: 'STRING',
+            valuesByMode: {
+              '1:0': 'stale deleted value',
+            },
+            remote: false,
+            deletedButReferenced: true,
+            description: '',
+            hiddenFromPublishing: false,
+            scopes: ['ALL_SCOPES'],
+            codeSyntax: {},
+          },
+        },
+      },
+    }
+
+    const tokensByFile: FlattenedTokensByFile = {
+      'collection.mode1.json': {
+        var1: {
+          $type: 'string',
+          $value: 'hello world!',
+          $description: '',
+          $extensions: {
+            'com.figma': {
+              hiddenFromPublishing: false,
+              scopes: ['ALL_SCOPES'],
+              codeSyntax: {},
+            },
+          },
+        },
+      },
+    }
+
+    const result = generatePostVariablesPayload(tokensByFile, localVariablesResponse)
+
+    expect(result).toEqual({
+      variableCollections: [],
+      variableModes: [],
+      variables: [],
+      variableModeValues: [],
+    })
+  })
+
   it('throws on unsupported token types', async () => {
     const localVariablesResponse = {
       status: 200,
