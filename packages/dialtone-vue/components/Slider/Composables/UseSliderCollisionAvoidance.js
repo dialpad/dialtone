@@ -1,5 +1,5 @@
 import { ref, computed, watch, nextTick, onMounted, onBeforeUnmount } from 'vue';
-import { SLIDER_EDGE_CLAMP_TOLERANCE_PX } from '../SliderConstants';
+import { SLIDER_EDGE_CLAMP_TOLERANCE_PX, SLIDER_READOUT_EDGE_CLAMP_TOLERANCE_PX } from '../SliderConstants';
 import { edgeClampOffset, measureEdgeInsetPx, mirrorPct, sameValues } from '../utils';
 
 // Two kinds of collision: low/high readouts overlapping each other as thumbs
@@ -48,6 +48,10 @@ export function useSliderCollisionAvoidance(props, {
   // centered position would exceed this margin does it need nudging inward;
   // see markEdgeOffsetPx (UseSliderGeometry's markStyle reads it) below.
   const EDGE_CLAMP_TOLERANCE_PX = SLIDER_EDGE_CLAMP_TOLERANCE_PX;
+  // Readouts get no tolerance allowance (unlike marks above) — see
+  // SLIDER_READOUT_EDGE_CLAMP_TOLERANCE_PX's own comment for why reusing the
+  // mark allowance isn't safe here.
+  const READOUT_EDGE_CLAMP_TOLERANCE_PX = SLIDER_READOUT_EDGE_CLAMP_TOLERANCE_PX;
 
   function rectsOverlap(a, b, padding = 0) {
     return !(
@@ -174,7 +178,7 @@ export function useSliderCollisionAvoidance(props, {
     function clampOffset(el, prevOffset) {
       if (!el || !canClampEdges) return 0;
       const r = el.getBoundingClientRect();
-      return edgeClampOffset(r.left - prevOffset, r.right - prevOffset, controlRect, EDGE_CLAMP_TOLERANCE_PX);
+      return edgeClampOffset(r.left - prevOffset, r.right - prevOffset, controlRect, READOUT_EDGE_CLAMP_TOLERANCE_PX);
     }
 
     function updateMergedOffset() {

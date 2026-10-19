@@ -3896,13 +3896,15 @@ describe('DtSlider Tests', () => {
 
     describe('Edge-aware readout label clamping (readout="always")', () => {
       // Mirrors "Edge-aware mark label clamping" above — same edgeClampOffset
-      // helper, same 32px tolerance, same offset-backing-out rationale — but
-      // for the readout='always' pill(s), which (unlike marks until this
-      // fix) never got any edge-clamp protection at all. Only covers a
-      // value NEAR but not exactly at min/max: an exact match takes the
-      // structural flush-edge path instead (see "flush-aligns..." above,
-      // same describe block as the anchoring tests), which has no measured
-      // offset to clamp in the first place.
+      // helper, same offset-backing-out rationale — but for the
+      // readout='always' pill(s), which (unlike marks until this fix) never
+      // got any edge-clamp protection at all, and with ZERO tolerance (not
+      // marks' 32px allowance) — see SLIDER_READOUT_EDGE_CLAMP_TOLERANCE_PX's
+      // own comment for why a readout can't safely reuse the mark allowance.
+      // Only covers a value NEAR but not exactly at min/max: an exact match
+      // takes the structural flush-edge path instead (see "flush-aligns..."
+      // above, same describe block as the anchoring tests), which has no
+      // measured offset to clamp in the first place.
       const controlRect = { top: 0, left: 100, right: 400, bottom: 20 };
 
       function rectWithCurrentOffset(el, naturalLeft, naturalRight) {
@@ -3911,14 +3913,15 @@ describe('DtSlider Tests', () => {
         return { top: 0, left: naturalLeft + offset, right: naturalRight + offset, bottom: 20 };
       }
 
-      it('shifts an individual readout inward once its overflow exceeds the 32px tolerance', async () => {
+      it('shifts an individual readout inward by its full overflow, with no tolerance allowance', async () => {
         mockProps = { readout: 'always', modelValue: 50 };
         updateWrapper();
         await nextTick();
 
         wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
         const readout = wrapper.find('[data-qa="dt-slider-thumb-readout"]');
-        // Hangs 50px past the left edge — 18px beyond the 32px tolerance.
+        // Hangs 50px past the left edge — fully shifted back in, not just
+        // the excess past some allowance (readouts get none).
         readout.element.getBoundingClientRect = () => rectWithCurrentOffset(readout.element, 50, 150);
 
         thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
@@ -3927,18 +3930,18 @@ describe('DtSlider Tests', () => {
         await settleCollisions();
 
         const style = wrapper.find('[data-qa="dt-slider-thumb-readout"]').attributes('style');
-        expect(style).toContain('translateX(calc(-50% + 18px))');
+        expect(style).toContain('translateX(calc(-50% + 50px))');
       });
 
-      it('does not shift a readout whose overflow already fits within the 32px tolerance', async () => {
+      it('does not shift a readout that does not overflow the control edge at all', async () => {
         mockProps = { readout: 'always', modelValue: 50 };
         updateWrapper();
         await nextTick();
 
         wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
         const readout = wrapper.find('[data-qa="dt-slider-thumb-readout"]');
-        // Hangs 20px past the left edge — within the 32px tolerance.
-        readout.element.getBoundingClientRect = () => ({ top: 0, left: 80, right: 150, bottom: 20 });
+        // Sits fully inside the control's own edges — no overflow to clamp.
+        readout.element.getBoundingClientRect = () => ({ top: 0, left: 150, right: 250, bottom: 20 });
 
         thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
         thumbInputs[0].element.value = '51';
@@ -3964,7 +3967,8 @@ describe('DtSlider Tests', () => {
         expect(wrapper.find('[data-qa="dt-slider-thumb-readout-merged"]').exists()).toBe(true);
 
         const merged = wrapper.find('[data-qa="dt-slider-thumb-readout-merged"]');
-        // Hangs 50px past the left edge — 18px beyond the 32px tolerance.
+        // Hangs 50px past the left edge — shifted back in by the full
+        // amount, readouts getting no tolerance allowance.
         // rectWithCurrentOffset (not a flat stub): the merge-forming settle
         // above already measured this same element once against jsdom's
         // zero-rect default, applying SOME offset — the "back out any
@@ -3984,7 +3988,7 @@ describe('DtSlider Tests', () => {
         await settleCollisions();
 
         const style = wrapper.find('[data-qa="dt-slider-thumb-readout-merged"]').attributes('style');
-        expect(style).toContain('translateX(calc(-50% + 18px))');
+        expect(style).toContain('translateX(calc(-50% + 50px))');
       });
 
       it('drops an already-applied offset immediately when orientation switches from horizontal to vertical', async () => {
@@ -4000,7 +4004,7 @@ describe('DtSlider Tests', () => {
 
         wrapper.find('[data-qa="dt-slider-control"]').element.getBoundingClientRect = () => controlRect;
         const readout = wrapper.find('[data-qa="dt-slider-thumb-readout"]');
-        // Hangs 50px past the left edge — 18px beyond the 32px tolerance.
+        // Hangs 50px past the left edge.
         readout.element.getBoundingClientRect = () => rectWithCurrentOffset(readout.element, 50, 150);
 
         thumbInputs = wrapper.findAll('[data-qa="dt-slider-thumb"]');
