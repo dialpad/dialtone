@@ -148,7 +148,7 @@ export async function run () {
           actions: ['buildDocJson'],
           prefix: `dt_${themeName}`,
           theme: themeName,
-          buildPath: 'dist/android/res/values/',
+          buildPath: 'dist/android/src/res/values/',
           files: [
             {
               destination: `colors-${themeName}.xml`,
@@ -173,7 +173,7 @@ export async function run () {
           ],
           prefix: 'dt',
           theme: themeName,
-          buildPath: 'dist/android/res/values/',
+          buildPath: 'dist/android/src/res/values/',
           files: [
             ...(themeName === 'base-light' ? [{
               destination: 'dimens-base.xml',
@@ -223,14 +223,14 @@ export async function run () {
           actions: ['buildDocJson'],
           prefix: 'dt',
           theme: themeName,
-          buildPath: 'dist/android/java/',
+          buildPath: 'dist/android/src/kotlin/tokens/',
           files: [
             {
               destination: `tokens-${themeName}.kt`,
               format: 'compose/object',
               options: {
                 import: ['androidx.compose.ui.graphics.Color', 'androidx.compose.ui.unit.*', 'androidx.compose.ui.text.font.FontWeight', 'androidx.compose.ui.text.font.FontFamily'],
-                packageName: 'dialtone.dialpad',
+                packageName: 'dialtone.dialpad.tokens',
                 className: `DialtoneTokens${kebabCaseToPascalCase(themeName)}`,
               },
 

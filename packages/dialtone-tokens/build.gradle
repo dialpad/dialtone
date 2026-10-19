@@ -23,9 +23,9 @@ android {
     compileSdkVersion libs.versions.androidCompileSdk.get().toInteger()
     sourceSets {
         main {
-            java.srcDirs = ['dist/android/java']
-            res.srcDirs = ['dist/android/res']
-            manifest.srcFile 'dist/android/AndroidManifest.xml'
+            java.srcDirs = ['dist/android/src/kotlin']
+            res.srcDirs = ['dist/android/src/res']
+            manifest.srcFile 'dist/android/src/AndroidManifest.xml'
         }
     }
     defaultConfig {
@@ -49,11 +49,6 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-}
-
-task androidSourcesJar(type: Jar) {
-    archiveClassifier.set('sources')
-    from android.sourceSets.main.java.srcDirs
 }
 
 
