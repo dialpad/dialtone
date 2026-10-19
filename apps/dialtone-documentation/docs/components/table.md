@@ -4,7 +4,7 @@ status: ready
 thumb: true
 description: Structured data grid for comparing and analyzing rows.
 figma_url: https://www.figma.com/design/W58r5BkO8qTw3vem9YieJd/DT9-Component-Library--Rebrand-2025-?node-id=5544-21729
-keywords: ["data table", "grid", "rows", "d-table", "DtTable", "dt-table", "datagrid", "data list"]
+keywords: ["data table", "grid", "rows", "d-table", "datagrid", "data list"]
 ---
 
 ## Variants and Examples

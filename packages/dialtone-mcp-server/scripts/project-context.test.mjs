@@ -16,7 +16,10 @@ test('tools and resources share installed data and preserve availability routing
     const fixture = await createConsumerFixture(parent, 'dt9-legacy', {
       packages: {
         '@dialpad/dialtone': {
-          'dist/vue3/component-documentation.json': [{ displayName: 'DtButton', props: [{ name: 'legacy-prop' }] }],
+          'dist/vue3/component-documentation.json': [
+            { displayName: 'DtButton', props: [{ name: 'legacy-prop' }] },
+            { displayName: 'DtToggle' },
+          ],
         },
       },
     });
@@ -25,7 +28,7 @@ test('tools and resources share installed data and preserve availability routing
     const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
     manifest.exports['./vue'] = './dist/vue3/entry.js';
     await writeFile(manifestPath, JSON.stringify(manifest));
-    await writeFile(join(pkg, 'dist/vue3/entry.js'), 'import button from \'./button.js\'; export { button as DtButton, button as ARROW_KEYS };\n');
+    await writeFile(join(pkg, 'dist/vue3/entry.js'), 'import button from \'./button.js\'; export { button as DtButton, button as DtToggle, button as ARROW_KEYS };\n');
     const transport = new StdioClientTransport({
       command: process.execPath,
       args: [fileURLToPath(new URL('../build/index.js', import.meta.url))],
@@ -54,8 +57,12 @@ test('tools and resources share installed data and preserve availability routing
     }
     const button = await client.callTool({ name: 'get_component', arguments: { component: 'DtButton', projection: 'props' } });
     assert.equal(button.structuredContent.items[0].contract.name, 'legacy-prop');
+    const keyword = await client.callTool({ name: 'search_components', arguments: { query: 'switch' } });
+    assert.match(keyword.content.map(item => item.text).join('\n'), /\*\*DtToggle\*\*/);
+    const absentKeyword = await client.callTool({ name: 'search_components', arguments: { query: 'spinner' } });
+    assert.doesNotMatch(absentKeyword.content.map(item => item.text).join('\n'), /\*\*DtLoader\*\*/);
     const resource = await client.readResource({ uri: 'dialtone://components' });
-    assert.deepEqual(JSON.parse(resource.contents[0].text).map(record => record.displayName), ['DtButton']);
+    assert.deepEqual(JSON.parse(resource.contents[0].text).map(record => record.displayName), ['DtButton', 'DtToggle']);
     assert.equal(resource._meta.dialtone.source.hash, result.structuredContent.source.domains.components.hash);
   } finally {
     await client?.close();

@@ -120,6 +120,7 @@ export interface IconsData {
 }
 
 export interface DocumentationFrontmatter {
+  keywords?: string[];
   title?: string;
   description?: string;
   status?: 'ready' | 'planned' | 'beta' | 'wip';

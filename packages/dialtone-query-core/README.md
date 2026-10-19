@@ -9,11 +9,11 @@ This package is the shared foundation used by both [`@dialpad/dialtone-mcp-serve
 ```typescript
 import {
   searchComponents, searchTokens, searchUtilityClasses, searchIcons,
-  components, tokens, utilityClasses, icons,
+  components, componentDocumentation, tokens, utilityClasses, icons,
 } from '@dialpad/dialtone-query-core';
 
-// Search components
-const { results, notes } = searchComponents('button', components);
+// Search components; the optional page catalog adds curated keyword discovery
+const { results, notes } = searchComponents('spinner', components, componentDocumentation);
 
 // Search tokens (HSL decomposition tokens filtered by default)
 const tokenResults = searchTokens('color foreground', tokens);
@@ -36,11 +36,11 @@ All search functions return `{ results: SearchResult[]; notes: string[] }`. `sea
 
 | Function | Data Parameter | Description |
 |----------|---------------|-------------|
-| `searchComponents(query, components)` | `Component[]` | 5-bucket priority search (name, description, props, events, slots). An exact name match comes first. |
+| `searchComponents(query, components, catalog?)` | `Component[]`, optional `ComponentDocCatalog` | Priority search by name, curated page keywords (when a catalog is passed), description, props, events and slots. An exact name match comes first. Keywords reach only public API components present in `components`. |
 | `searchTokens(query, tokens, options?)` | `TokensData` | Token search with optional `{ includeHsl: boolean }` |
 | `searchUtilityClasses(query, utilityClasses)` | `UtilityClassesData` | CSS class search with automatic px/rem conversion |
 | `searchIcons(query, icons)` | `IconsData` | Icon search by name, category, and keywords |
-| `searchDocumentation(query, documentation)` | `DocumentationRecord[]` | Search reference sections; explicit directive identifiers scope results to named directives and component comparisons |
+| `searchDocumentation(query, documentation)` | `DocumentationRecord[]` | Search reference sections; exact page titles, then curated page keywords, rank first; explicit directive identifiers scope results to named directives and component comparisons |
 
 Directive identifiers such as `v-dt-tooltip` or `DtTooltipDirective` return no component results, with a note directing callers to documentation search. Use `searchDocumentation` for their contracts.
 
