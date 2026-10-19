@@ -1,11 +1,15 @@
 <template>
   <kbd
+    data-qa="dt-keyboard-shortcut"
     :class="[
       'd-keyboard-shortcut',
       { 'd-keyboard-shortcut--inverted': inverted },
     ]"
   >
-    <span class="d-keyboard-shortcut--sr-only">
+    <span
+      class="d-keyboard-shortcut--sr-only"
+      data-qa="dt-keyboard-shortcut-sr-text"
+    >
       {{ screenReaderText || generatedScreenReaderText }}
     </span>
     <template
@@ -31,6 +35,7 @@
         :density="400"
         tone="tertiary"
         aria-hidden="true"
+        data-qa="dt-keyboard-shortcut-item"
         :class="[
           'd-keyboard-shortcut__item',
           { 'd-keyboard-shortcut__item--inverted': inverted },

@@ -1,5 +1,8 @@
 <template>
-  <div class="d-emoji-picker__data">
+  <div
+    class="d-emoji-picker__data"
+    data-qa="dt-emoji-picker-description"
+  >
     <img
       v-if="emoji"
       class="d-icon d-icon--size-500"

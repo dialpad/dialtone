@@ -2,9 +2,13 @@
 <template>
   <dt-stack
     class="d-datepicker"
+    data-qa="dt-datepicker"
     gap="100"
   >
-    <div class="d-datepicker__hd">
+    <div
+      class="d-datepicker__hd"
+      data-qa="dt-datepicker-header"
+    >
       <month-year-picker
         ref="monthYearPicker"
         :selected-date="selectedDate"
@@ -17,7 +21,10 @@
         @close-datepicker="$emit('close-datepicker')"
       />
     </div>
-    <div class="d-datepicker__bd">
+    <div
+      class="d-datepicker__bd"
+      data-qa="dt-datepicker-body"
+    >
       <calendar
         ref="calendar"
         :calendar-days="calendarDays"

@@ -26,7 +26,7 @@ describe('DtEmoji Tests', () => {
       props: { ...baseProps, ...mockProps },
     });
 
-    emoji = wrapper.find('img');
+    emoji = wrapper.find('[data-qa="dt-emoji-image"]');
   };
 
   beforeEach(() => {
@@ -46,6 +46,7 @@ describe('DtEmoji Tests', () => {
       });
 
       it('renders the correct emoji', () => {
+        expect(wrapper.attributes('data-qa')).toBe('dt-emoji');
         expect(emoji.attributes('src')).toBe(MOCK_EXPECTED_SMILE_SRC);
       });
 

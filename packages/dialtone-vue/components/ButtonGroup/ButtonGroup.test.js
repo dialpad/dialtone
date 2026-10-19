@@ -1,6 +1,5 @@
 import { mount } from '@vue/test-utils';
 import DtButtonGroup from './ButtonGroup.vue';
-import { DtButton } from '../Button';
 import ButtonsFixture from './ButtonsDecorator.vue';
 
 const MOCK_DEFAULT_PROP = DtButtonGroup.props.alignment;
@@ -18,7 +17,7 @@ describe('DtButtonGroup Tests', () => {
       slots: { ...baseSlots, ...mockSlots },
     });
 
-    buttonGroup = wrapper.find('.d-btn-group');
+    buttonGroup = wrapper.find('[data-qa="dt-button-group"]');
   };
 
   beforeEach(() => {
@@ -36,7 +35,7 @@ describe('DtButtonGroup Tests', () => {
       });
 
       it('should not have buttons', () => {
-        expect(wrapper.findAllComponents(DtButton).length).toBe(0);
+        expect(wrapper.findAll('[data-qa="dt-button"]').length).toBe(0);
       });
     });
 
@@ -47,7 +46,7 @@ describe('DtButtonGroup Tests', () => {
 
           updateWrapper();
 
-          expect(wrapper.findAllComponents(DtButton).length).toBe(2);
+          expect(wrapper.findAll('[data-qa="dt-button"]').length).toBe(2);
         });
       });
     });

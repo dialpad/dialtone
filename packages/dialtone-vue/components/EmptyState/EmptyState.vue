@@ -1,10 +1,12 @@
 <template>
   <dt-stack
     :class="emptyStateClasses"
+    data-qa="dt-empty-state"
   >
     <span
       v-if="showIllustration"
       :class="['d-empty-state__illustration', illustrationClass]"
+      data-qa="dt-empty-state-illustration"
     >
       <!-- @slot Slot for the illustration. Displays when size is 'lg' or 'md'. Overrides icon. -->
       <slot name="illustration" />
@@ -13,6 +15,7 @@
     <span
       v-if="showIcon"
       :class="['d-empty-state__icon', iconClass]"
+      data-qa="dt-empty-state-icon"
     >
       <!-- @slot Slot for the icon. Displayed if illustration is not provided. -->
       <slot
@@ -32,6 +35,7 @@
         wrap="balance"
         as="div"
         class="d-empty-state__header-text"
+        data-qa="dt-empty-state-header"
       >
         {{ headerText }}
       </dt-text>
@@ -45,6 +49,7 @@
         wrap="balance"
         as="p"
         class="d-empty-state__body-text"
+        data-qa="dt-empty-state-body-text"
       >
         {{ bodyText }}
       </dt-text>
@@ -53,6 +58,7 @@
     <div
       v-if="hasSlotContent(slots.body)"
       :class="bodyClass"
+      data-qa="dt-empty-state-body-slot"
     >
       <slot name="body" />
     </div>
