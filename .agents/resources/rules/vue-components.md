@@ -104,7 +104,7 @@ When adding or reviewing a slot:
 - Icons: separate numeric scale `100`–`800`, distinct from the `100`-`500` component scale (do not remap icon values onto the component scale). Icon-family `size` props (`Icon`, `Loader`, `Emoji`, `EmojiTextWrapper`, `ProgressCircle`, `ToastLayoutAlternateIcon`) still use `[String, Number]`.
 - Use each component's constants for supported values.
 - Shared scale definition: `packages/dialtone-vue/common/constants/sizes.js`.
-- Export from `*Constants.js` or `*Constants.ts`: `COMPONENT_SIZE_MODIFIERS` object with both numeric and t-shirt keys.
+- Export a component-specific `<COMPONENT>_SIZE_MODIFIERS` object (e.g., `BUTTON_SIZE_MODIFIERS`) from `*Constants.js` or `*Constants.ts`, with numeric and t-shirt keys. `COMPONENT_SIZES` is the shared scale mapping.
 
 ## Logical Naming
 
