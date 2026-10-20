@@ -1,0 +1,24 @@
+apps/dialtone-documentation/docs/_data/site-nav.json
+  s_93aeca3805a6ee::t_2de602c5f39218 235-237
+  s_93aeca3805a6ee::t_db718dc9ce4ed3 234
+apps/dialtone-documentation/docs/guides/migration/visual-changes/index.md
+  s_93aeca3805a6ee::t_cfdbba985b8051 1-261
+apps/dialtone-documentation/docs/guides/migration/index.md
+  s_93aeca3805a6ee::t_6b0f7541a8403c 6
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.10",
+  "base_commit_sha": "a75cef814b85fc4d8085f2da9e174b6be04e624c",
+  "prompts": {},
+  "sessions": {
+    "s_93aeca3805a6ee": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "6eac0ba6-144f-46e1-9c25-fb0c29ab1e02",
+        "model": "claude-fable-5"
+      },
+      "human_author": "Paulo Reis <paulo.reis@dialpad.com>"
+    }
+  }
+}
