@@ -3,6 +3,7 @@ import { resolve, dirname, relative } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { createRequire } from 'node:module';
 import { createHash } from 'node:crypto';
+import { readKeywords } from '../utils/keywords.mjs';
 import { parseMarkdownFrontmatter } from '../../../../apps/dialtone-documentation/scripts/lib/frontmatter.mjs';
 import { mapOutputPath } from '../../../../apps/dialtone-documentation/scripts/lib/source-page.mjs';
 import { SITE_URL } from '../../../../apps/dialtone-documentation/docs/.vuepress/site-reference.js';
@@ -134,6 +135,7 @@ export async function buildComponentPage(filePathRelative, source, identities) {
   return {
     docId: filePathRelative.replace(/\.md$/, ''),
     title: data.title ?? data.heading ?? null,
+    keywords: readKeywords(data.keywords, filePathRelative),
     pageStatus: data.status ?? 'unspecified',
     sourcePath: `apps/dialtone-documentation/docs/${filePathRelative}`,
     pagePath,

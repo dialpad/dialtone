@@ -28,6 +28,17 @@ const fixture: Component[] = [
 
 const iconNote = 'DtIcon is deprecated. Individual icon components from @dialpad/dialtone-icons';
 
+describe('explicit directive identifiers', () => {
+  test.each(['v-dt-tooltip directive', 'DtTooltipDirective', 'v-dt-unknown', 'DtUnknownDirective'])('%s never falls back to a component', (query) => {
+    const incidental = [component('DtSplitButton', { description: `${query} configuration` })];
+    const { results, notes, exactMatch, warning } = searchComponents(query, incidental);
+    expect(results).toEqual([]);
+    expect(exactMatch).toBe(false);
+    expect(warning).toBeNull();
+    expect(notes.join(' ')).toContain('documentation');
+  });
+});
+
 describe('searchComponents exact name matching', () => {
   test.each([
     ['DtText', 'DtText'],

@@ -17,7 +17,7 @@ export function selectComponent(name: string, components: Component[]): Componen
     // An empty query would match every component.
     return { ok: false, message: 'Component name is empty.' };
   }
-  const { results, exactMatch, warning } = searchComponents(name, components);
+  const { results, exactMatch, warning, notes } = searchComponents(name, components);
   if (exactMatch) {
     return { ok: true, result: results[0], warning };
   }
@@ -29,6 +29,11 @@ export function selectComponent(name: string, components: Component[]): Componen
   }
   if (warning) {
     lines.push(`Note: ${warning}`);
+  }
+  if (results.length === 0) {
+    for (const note of new Set(notes)) {
+      if (note !== warning) lines.push(`Note: ${note}`);
+    }
   }
   return { ok: false, message: lines.join('\n') };
 }

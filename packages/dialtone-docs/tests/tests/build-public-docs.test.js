@@ -2,9 +2,33 @@ import { describe, test, expect, beforeAll } from 'vitest';
 import { resolve, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { buildRecords, chunkSections } from '@src/generators/build-public-docs.mjs';
+import { readKeywords } from '@src/utils/keywords.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const fixtureDir = resolve(__dirname, '../fixtures/public-docs');
+const directiveRoot = resolve(__dirname, '../../../dialtone-vue/directives');
+
+describe('public directive MDX records', () => {
+  test.each(['tooltip', 'scrollbar', 'mode', 'focusgroup', 'focustrap'])('%s retains its public contract and source reference', (name) => {
+    const records = buildRecords(resolve(directiveRoot, `${name}_directive/${name}.mdx`));
+    expect(records[0].docId).toBe(`directives/${name}`);
+    expect(records[0].category).toBe('directives');
+    const content = records.map(record => record.content).join(' ');
+    expect(content).toContain(`v-dt-${name}`);
+    expect(content).toContain(`Dt${name[0].toUpperCase()}${name.slice(1)}Directive`);
+    expect(content).toContain('app.use');
+    expect(content).toContain('```js\nimport {');
+    expect(content).not.toMatch(/import \*|<Meta|<Canvas|Stories|addon-docs/);
+    for (const record of records) expect(record.content.trim()).not.toBe('');
+  });
+
+  test('source qualification and Storybook identity are derived for a public directive', () => {
+    const { frontmatter } = buildRecords(resolve(directiveRoot, 'tooltip_directive/tooltip.mdx'))[0];
+    expect(frontmatter.sourcePackage).toBe('@dialpad/dialtone-vue');
+    expect(frontmatter.sourceVersion).toMatch(/^\d+\.\d+\.\d+/);
+    expect(frontmatter.storybook).toBe('https://dialtone.dialpad.com/vue/?path=/docs/directives-tooltip--docs');
+  });
+});
 
 // ─── chunkSections unit tests ────────────────────────────────────────────────
 
@@ -98,6 +122,10 @@ describe('buildRecords — complete.md', () => {
     expect(records[0].frontmatter.storybook).toContain('dialtone.dialpad.com');
   });
 
+  test('preserves validated keywords on every section record', () => {
+    expect(records.map(r => r.frontmatter.keywords)).toEqual(records.map(() => ['spinner', 'activity indicator']));
+  });
+
   test('inner text inside <dialtone-usage> is preserved in content', () => {
     const usageRecord = records.find(r => r.headingPath.includes('Usage'));
     expect(usageRecord).toBeDefined();
@@ -159,6 +187,16 @@ describe('buildRecords — status filter (blacklist)', () => {
 // ─── Edge case tests ─────────────────────────────────────────────────────────
 
 describe('buildRecords — edge cases', () => {
+  test('Tooltip prose keeps the literal wrapper independently of examples and source identity', () => {
+    const tooltip = resolve(__dirname, '../../../../apps/dialtone-documentation/docs/components/tooltip.md');
+    const record = buildRecords(tooltip).find(r => r.headingPath.includes('Tooltip as a Component'));
+    expect(record.content).toContain('wrap the button in a `<span>` element');
+    expect(record.content).toContain('disabled elements do not fire mouse events');
+    expect(record.content).not.toContain('<dt-tooltip');
+    expect(record.filePath).toBe('apps/dialtone-documentation/docs/components/tooltip.md');
+    expect(record.frontmatter.storybook).toContain('components-tooltip');
+  });
+
   test('file with no H2/H3 emits one record with empty headingPath', () => {
     const records = buildRecords(resolve(fixtureDir, 'no-headings.md'));
     expect(records).toHaveLength(1);
@@ -210,5 +248,17 @@ describe('buildRecords — edge cases', () => {
     const usage = records.find(r => r.headingPath.includes('Usage'));
     expect(usage).toBeDefined();
     expect(usage.content).toContain('More content after the fence');
+  });
+});
+
+// Public source keywords must reach both lookup adapters without a Vue rebuild.
+describe('readKeywords', () => {
+  test('trims authored keywords and keeps them optional', () => {
+    expect(readKeywords([' spinner ', 'activity indicator'], 'loader.md')).toEqual(['spinner', 'activity indicator']);
+    expect(readKeywords(undefined, 'loader.md')).toBeUndefined();
+  });
+
+  test.each([['spinner'], [['spinner', 42]], [[' ']], [[]]])('rejects malformed keywords %j', (keywords) => {
+    expect(() => readKeywords(keywords, 'loader.md')).toThrow(/Invalid keywords in loader\.md: expected an array of nonempty strings/);
   });
 });

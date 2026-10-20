@@ -15,17 +15,19 @@ The Dialtone MCP Server lets compatible AI clients search Dialtone through Model
 
 ## What It Does
 
-The Dialtone MCP Server provides AI assistants with real-time search access to:
+The Dialtone MCP Server searches data bundled with the installed server package. Replies identify source packages, versions, and hashes; the server does not check compatibility with your project's installed Dialtone packages.
 
-- **3,315 CSS utility classes** - Find classes like `d-p8`, `d-d-flex`, `d-w100p`
-- **5,691 design tokens** - Find tokens like `--dt-color-foreground-primary`, `--dt-spacing-100`
-- **87 Vue components** - Discover `DtButton`, `DtModal` with full API documentation
-- **594 icons** - Find icons like `bell-ring`, `arrow-up`, `calendar-plus`
+Search across:
+
+- **CSS utility classes** - Find classes like `d-p-100`, `d-d-flex`, `d-w100p`
+- **Design tokens** - Find tokens like `--dt-color-foreground-primary`, `--dt-spacing-100`
+- **Vue components** - Discover `DtButton` and `DtModal` with sampled API summaries, then use `get_component` for complete available records
+- **Icons** - Find icons like `bell-ring`, `arrow-up`, `calendar-plus`
 - **Public documentation** - `search_documentation`: Search usage prose, recipes, accessibility rules, migration guides, and design principles. Use for "how-to" and "why" questions that go beyond component/token/icon lookups.
 
 ### Smart Features
 
-- **Filters deprecated items** - Automatically removes outdated classes and components
+- **Filters deprecated discovery results** - Exact legacy utility and token names retain their contract and migration guidance
 - **Recommends alternatives** - Suggests better patterns when discouraged classes are found
 - **AI-optimized results** - Smart scoring provides the most relevant matches first
 - **Design system aware** - Understands Dialtone's conventions and patterns
@@ -90,13 +92,9 @@ claude mcp add dialtone --scope user -- npx -y @dialpad/dialtone-mcp-server
 
 This stores configuration in `~/.claude/mcp.json`.
 
-### HTTP Transport (Coming Soon)
+### Transport
 
-Remote server deployment for enterprise use.
-
-```bash
-claude mcp add dialtone-http --transport http --scope user https://mcp.dialtone.dialpad.com
-```
+The packaged server uses stdio. Configure your MCP client to launch the server process, as shown above.
 
 > [!INFO] Version Checking
 > Startup does not wait for the update check. A successful check writes a version or update notice to stderr; failed or malformed responses are ignored. The check is cancelled after two seconds or during shutdown.
@@ -157,6 +155,14 @@ Readable Markdown results preserve three named theme samples and token usage, la
 
 Discover Vue component candidates by UI element or name. Select a canonical component and use `get_component` to retrieve its available API contract.
 
+Component and documentation discovery reuse curated page keywords. `spinner` leads with `DtLoader`, `blank slate` with `DtEmptyState`, and `text field`, `text-field`, or `textbox` with `DtInput`. `autocomplete` and `typeahead` find the supported Combobox candidates. `notification` exposes `DtBanner`, `DtNotice`, and `DtToast` as distinct choices. Canonical component name and family matches keep their existing priority, followed by curated keywords and incidental API matches. Documentation ranks exact titles before keywords and incidental prose.
+
+For example, call `search_components` with `{ "query": "spinner" }`, then `get_component` with `{ "component": "DtLoader" }`. Use `search_documentation` with `{ "query": "blank slate" }` for Empty State guidance. Keywords never become component export aliases: `get_component` with `{ "component": "spinner" }` returns no match.
+
+Keyword associations come from bundled latest documentation and apply only to public components present in the selected data. They do not establish availability or compatibility with your installed Dialtone version.
+
+Directive identifiers such as `v-dt-tooltip` or `DtTooltipDirective` are not component names. Component search returns no components for them; use `search_documentation` for directive contracts.
+
 **Example queries:**
 
 ```text
@@ -204,6 +210,8 @@ Search returns exact section IDs, 500-character excerpts and detail calls. Pass 
 
 `textLimit` defaults to 6000 Unicode code points (1–10000); `textOffset` defaults to zero (0–1000000). Follow the returned continuation to read remaining content. Prose retrieval does not verify example code or consumer compatibility.
 
+Directive documentation includes source code snippets and registration guidance. Component documentation can omit code fences or page-level scripts, so retrieving a complete record does not necessarily return a complete working example. Check required imports, CSS/theme setup, state, and behavior against your application before using a snippet.
+
 The five search tools return readable Markdown only, with bundled package/version/hash provenance and text continuation calls. All execute and advertise a default limit of 15. They accept plain string queries, fractional numeric limits, harmless numeric-string limits and extra arguments. Whitespace-only queries return a clear no-match message; long inputs follow the existing domain search rules. Only `get_component` and `get_documentation` return structured envelopes and matching JSON text fallbacks; their selected detail schemas remain strict. Installed compatibility is not checked.
 
 ### Icons
@@ -234,6 +242,19 @@ Find icons from Dialtone's icon library and learn how to use icon components. Ic
 - `query` (required): Icon name, category, or keyword
 - `limit` (optional): Maximum returned icons (default 15)
 - `offset` (optional): Integer record offset (0–100000, default 0)
+
+### Documentation
+
+**Tool:** `search_documentation`
+
+Search usage guidance, accessibility responsibilities and directive contracts, including imports, registration, arguments and modifiers.
+
+```text
+"v-dt-tooltip"
+"DtModeDirective registration"
+```
+
+Directive replies identify the source package and version and link to the Storybook reference. Documentation uses bundled data; compatibility with the project's installed packages is not checked.
 
 ## Usage Examples
 
@@ -330,9 +351,12 @@ npm update -g @dialpad/dialtone-mcp-server
 ```
 
 **User-scoped (npx):**
-No action needed - npx always uses the latest version.
+
+To request the latest published package when the server starts, use `npx -y @dialpad/dialtone-mcp-server@latest` in your client configuration.
 
 After updating, restart your Claude Code conversation to load the new version.
+
+Updating the server refreshes its bundled data. It does not verify your application's installed APIs or example behavior. A change merged into Dialtone source reaches an installed server only after publication and an update to that package. Docs-only keyword edits can reach the site first: server release commit selection watches server and query-core changes, so maintainers must explicitly arrange a server publication through the existing release process. Local generation, builds, and source merge do not publish keyword updates.
 
 ### Managing Connections
 

@@ -1,3 +1,10 @@
+# [5.3.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v5.2.1...dialtone-icons/v5.3.0) (2026-10-15)
+
+
+### Features
+
+* **Dialtone Icons:** DLT-3663 add stop-stroke ([#1468](https://github.com/dialpad/dialtone/issues/1468)) ([eb72e37](https://github.com/dialpad/dialtone/commit/eb72e37b0da5de82d6776af063338829097d0d5a))
+
 ## [5.2.1](https://github.com/dialpad/dialtone/compare/dialtone-icons/v5.2.0...dialtone-icons/v5.2.1) (2026-10-13)
 
 # [5.2.0](https://github.com/dialpad/dialtone/compare/dialtone-icons/v5.1.0...dialtone-icons/v5.2.0) (2026-09-29)

@@ -24,6 +24,7 @@ const domains = {
   components: {
     search: 'searchComponents',
     data: 'components',
+    catalog: 'componentDocumentation',
     format: 'formatComponentResults',
     tool: 'search_components',
     type: 'component',
@@ -98,7 +99,7 @@ function textNames(text, domain) {
   return [...text.matchAll(expression)].map((match) => match[1]);
 }
 async function query(testCase, adapter) {
-  const { search, data, format, tool, type } = domains[testCase.domain];
+  const { search, data, catalog, format, tool, type } = domains[testCase.domain];
   if (adapter === 'core') {
     // The stamped dt9-legacy projection establishes lookup facts, with no install/build claim.
     const dataset =
@@ -108,7 +109,7 @@ async function query(testCase, adapter) {
     let result;
     try {
       console.error = () => {};
-      result = core[search](testCase.query, dataset);
+      result = core[search](testCase.query, dataset, catalog && core[catalog]);
     } finally {
       console.error = stderr;
     }
@@ -139,7 +140,7 @@ async function query(testCase, adapter) {
           '--format',
           'json',
           '--limit',
-          testCase.domain === 'icons' ? '20' : String(testCase.limit),
+          testCase.domain === 'icons' ? '0' : String(testCase.limit),
           '--',
           testCase.query,
         ],

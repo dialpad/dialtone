@@ -15,10 +15,8 @@ keywords:
     "numbered",
     "ordered",
     "unordered",
-    "icon",
-    "ul",
-    "ol",
-    "li",
+    "semantic list",
+    "list marker",
   ]
 combinator: DtTextList
 ---

@@ -20,6 +20,15 @@ export const cases = [
     order(['DtButton']),
     contains('description', 'allows users to take an action'),
   ]),
+  baseline('keyword-spinner', 'components', 'spinner', [
+    order(['DtLoader']),
+  ], { limit: 1 }),
+  baseline('keyword-notification-ambiguity', 'components', 'notification', [
+    order(['DtBanner', 'DtNotice', 'DtToast']),
+  ]),
+  baseline('keyword-text-field-docs', 'documentation', 'text-field', [
+    order(['Input > Usage']),
+  ], { limit: 1 }),
   baseline('input-exact', 'components', 'DtInput', [
     order(['DtInput', 'DtInputGroup']),
     contains('label-slot', 'label'),
@@ -91,7 +100,7 @@ export const cases = [
     'utility-display-facts',
     'utilities',
     'display flex',
-    [contains('flex-value', 'flex')],
+    [order(['d-d-flex']), contains('flex-value', 'flex')],
     { limit: 1 },
   ),
   missing(
@@ -260,36 +269,4 @@ export const checksFor = (testCase, adapter) => [
     value: adapter === 'mcp' ? 16000 : 100000,
   },
 ];
-const failure = (issue, owner, assertion, removeWhen) => ({
-  issue,
-  owner,
-  assertion,
-  removeWhen,
-});
-// One owned failure for every adapter that runs the case.
-const everyAdapter = (caseId, entry) =>
-  Object.fromEntries(
-    cases
-      .find((value) => value.id === caseId)
-      .adapters.map((adapter) => [`${caseId}/${adapter}`, entry]),
-  );
-export const expectedFailures = {
-  ...everyAdapter(
-    'utility-pixel-ranking',
-    failure(
-      'DLT-3651',
-      'ranking and migration guidance',
-      'top-results',
-      'padding 8px ranks the value-preserving d-p-100 utility before component internals',
-    ),
-  ),
-  ...everyAdapter(
-    'tooltip-wrapper-literal',
-    failure(
-      'DLT-3653',
-      'documentation fidelity',
-      'span-literal',
-      'raw inline HTML literal survives generation and retrieval',
-    ),
-  ),
-};
+export const expectedFailures = {};

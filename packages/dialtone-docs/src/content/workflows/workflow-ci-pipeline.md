@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [ci, github-actions, workflows, unit-tests, visual-tests, a11y, percy, deploy, bundle-size, lint, nx, gcp, storybook]
 ai_summary: All GitHub Actions workflows in Dialtone — what each does, what triggers it, required checks before merge, and the tools used at each step.
-last_updated: 2026-10-13
+last_updated: 2026-10-14
 related_packages: [dialtone-vue, dialtone-documentation, dialtone-query-core, dialtone-cli, dialtone-mcp-server, dialtone-docs]
 ---
 
@@ -50,11 +50,16 @@ These checks are required on every PR:
 | `test`            | `packages/dialtone-vue/**`                                                                                          | `pnpm nx run dialtone-vue:test:coverage`                                                                                                                                                              |
 | `test-tokens`     | `packages/dialtone-tokens/**`                                                                                       | `pnpm nx run dialtone-tokens:test`                                                                                                                                                                    |
 | `test-combinator` | `packages/combinator/**`                                                                                            | `pnpm nx run dialtone-combinator:test`                                                                                                                                                                |
+| `test-lint-plugins` | Lint packages, canonical migration guidance, its generator and this workflow | Guidance generation check and Stylelint package tests |
 | `test-cli`        | Lookup adapters, their source datasets/generators/tests, documentation pages, ESLint, and shared retrieval fixtures | Build CLI/MCP and their datasets; run query-core, CLI, AI docs and ESLint tests; run the public-identity generator suite, shared fixture/cache contracts, cross-adapter retrieval regressions, MCP query protocol contracts, MCP startup/shutdown and shared-core release selection, and existing documentation search scenarios |
 
 The `test` job outputs a coverage report in JSON and HTML. Coverage thresholds enforced: 80% branches, 70% functions, 85% lines and statements. Build fails if thresholds are not met.
 
 The lookup build runs `pnpm nx run-many -t build -p dialtone-cli dialtone-mcp-server`. It generates the component, token, utility, icon, and documentation data the tests consume. Changes to source content also run these suites, so a component, icon, CSS rule, or docs-page change can expose retrieval regressions on the same PR.
+
+Directive MDX sources (`packages/dialtone-vue/directives/**/*.mdx`) also feed the corpus and route to `test-cli`. They run `docs_tests.yml` as well, which builds the corpus before testing extraction.
+
+The lookup job also checks generated utility metadata and recommendation strings with `node --test scripts/tests/dialtone-recommendations.test.mjs packages/dialtone-css/postcss/dialtone-docs.test.cjs`. A separate `test-lint-plugins` job checks generated migration guidance against the unchanged helper configs and runs Stylelint. ESLint runs once in `test-cli`.
 
 Documentation-link inputs also include the shared component-name normalizer, site-reference, frontmatter and source-page helpers. MCP protocol contracts run with `pnpm --dir packages/dialtone-mcp-server test:protocol`; the documentation suite runs once and includes source-derived link checks.
 
