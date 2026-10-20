@@ -359,19 +359,39 @@ interface CreatePaintStylesResult {
 }
 
 /**
- * Figma's gradientTransform is a 2x3 matrix, not an angle — CSS's angle
- * convention doesn't map onto it directly. Calibrated empirically against a
- * red-to-blue test gradient at 0/90/135deg (screenshotted and compared to
- * what the same angle renders as in CSS): the sign that matches CSS is
- * `(90 - angleDeg)`, not the more obvious `(angleDeg - 90)`.
+ * Figma's `gradientTransform` maps a point in the shape's own 0-1 space to
+ * gradient space — the INVERSE direction of what the matrix's row/column
+ * shape suggests — so it's the stop's *coefficients*, not a length, that
+ * must shrink to make the visible line longer. Confirmed directly, rendering
+ * both sides and reading pixels back: a pure rotation (the previous formula)
+ * reproduces CSS's direction exactly but not its extent, because CSS's
+ * gradient line on a non-axis-aligned angle is longer than the box's own
+ * side (√2× at 45°/135° on a square) while a rotation alone stays unit
+ * length — every diagonal gradient's stops landed too close to the center,
+ * confirmed at 135°: stop 10%/90% rendered at ~22%/~78% instead.
+ *
+ * `dirX/dirY` is CSS's own gradient-line unit direction (0deg = up, clockwise
+ * — see https://www.w3.org/TR/css-images-3/#linear-gradients); `length` is
+ * that same spec's line-length formula for a unit square. Dividing the
+ * direction by it is what makes a stop's coefficient in gradient space
+ * shrink exactly enough to compensate for the line being longer, so a point
+ * at a given fraction along CSS's longer line still reads back the same
+ * fraction here. The perpendicular row stays a plain unit rotation — no
+ * length correction needed, since nothing about it depends on the box's
+ * aspect ratio along the gradient axis.
  */
 function gradientTransform (angleDeg: number): Transform {
-  const phi = (90 - angleDeg) * Math.PI / 180;
-  const cos = Math.cos(phi);
-  const sin = Math.sin(phi);
+  const rad = angleDeg * Math.PI / 180;
+  const dirX = Math.sin(rad);
+  const dirY = -Math.cos(rad);
+  const length = Math.abs(Math.sin(rad)) + Math.abs(Math.cos(rad));
+  const a = dirX / length;
+  const b = dirY / length;
+  const c = -b;
+  const d = a;
   return [
-    [cos, -sin, 0.5 - 0.5 * cos + 0.5 * sin],
-    [sin, cos, 0.5 - 0.5 * sin - 0.5 * cos],
+    [a, b, 0.5 * (1 - a - b)],
+    [c, d, 0.5 * (1 - c - d)],
   ];
 }
 
