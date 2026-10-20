@@ -1,0 +1,104 @@
+packages/dialtone-docs/src/content/development/development-css-utilities.md
+  s_7f1d1d64baa803::t_8dd9068adf3021 18,28-33
+  s_7f1d1d64baa803::t_6f15cac4466ff0 34
+  s_7f1d1d64baa803::t_da2274190cbf64 35
+packages/dialtone-css/postcss/dialtone-docs.test.cjs
+  s_7f1d1d64baa803::t_9131739c6e1baf 36
+  s_7f1d1d64baa803::t_44d8090318f1c4 40-41
+  s_7f1d1d64baa803::t_5ff7d54f5bc791 1-20,23-35,37-39,47-58
+  s_7f1d1d64baa803::t_523ab2a2252e28 21-22,42-46
+packages/dialtone-css/postcss/migration-metadata.cjs
+  s_7f1d1d64baa803::t_9131739c6e1baf 1,3-14,16-27,30-32,34-63
+  s_7f1d1d64baa803::t_6f15cac4466ff0 2,15,28-29,33
+packages/dialtone-docs/src/content/architecture/architecture-design-token-pipeline.md
+  s_7f1d1d64baa803::t_8dd9068adf3021 6,143
+  s_7f1d1d64baa803::t_c7f2f8a903a4f3 144
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/migration-guidance.cjs
+  s_7f1d1d64baa803::t_6f15cac4466ff0 1-100
+.agents/resources/rules/css-utilities.md
+  s_7f1d1d64baa803::t_710b053a1f9f48 8
+.claude/rules/css-utilities.md
+  s_7f1d1d64baa803::t_9dc733876dab62 14,50-51,54
+.github/workflows/unit_tests.yml
+  s_7f1d1d64baa803::t_51ff55c4974b58 11-20,32-41,63,80-87,90-95,164-193
+apps/dialtone-documentation/docs/guides/mcp-server/index.md
+  s_7f1d1d64baa803::t_a1574bd80f514f 20,28
+packages/dialtone-cli/README.md
+  s_7f1d1d64baa803::t_4f71da5fdf1728 40,44,48,123-124
+packages/dialtone-cli/src/commands/token.ts
+  s_7f1d1d64baa803::t_f082c4ff86dbac 10-11,18-22,26,29,33-37
+packages/dialtone-cli/tests/cli.smoke.test.ts
+  s_7f1d1d64baa803::t_38acfa21c33cd4 100-112
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/size-to-layout.mjs
+  s_7f1d1d64baa803::t_1f5d638eac1cfd 1-2,17,19,88,99,107,120,125,128
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/space-to-spacing.mjs
+  s_7f1d1d64baa803::t_589d7a87e79cb9 3-4
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/configs/utility-class-to-token-stops.mjs
+  s_7f1d1d64baa803::t_eff048492675cf 1-4
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/size-to-layout.test.mjs
+  s_7f1d1d64baa803::t_1aaf97935f335c 88-104
+packages/dialtone-css/lib/build/js/dialtone_migration_helper/tests/space-to-spacing.test.mjs
+  s_7f1d1d64baa803::t_6442e5f91dc17b 1-12
+packages/dialtone-css/postcss/dialtone-docs.cjs
+  s_7f1d1d64baa803::t_7ce88fa51b424b 4,87,96-97,155-157,214,295-296
+packages/dialtone-docs/src/content/workflows/workflow-ci-pipeline.md
+  s_7f1d1d64baa803::t_7de9637f3b0c96 6,44,53-61
+packages/dialtone-mcp-server/client-rules.json
+  s_7f1d1d64baa803::t_acb456b4652181 57
+packages/dialtone-query-core/src/tools/docs.ts
+  s_7f1d1d64baa803::t_3e8dd893814b49 163-164
+packages/dialtone-query-core/src/tools/icons.ts
+  s_7f1d1d64baa803::t_cd0dca731a961a 13-14,61-62
+packages/dialtone-query-core/src/tools/tokens.ts
+  s_7f1d1d64baa803::t_1bec86434275fe 19-20,23,105-109,151,167-174
+packages/dialtone-query-core/src/tools/utility-classes.ts
+  s_7f1d1d64baa803::t_fb5a393c2adb78 41,114-115,156-169,194-204
+packages/dialtone-query-core/tests/tools/recommendations.test.ts
+  s_7f1d1d64baa803::t_b198290deab609 1-28
+packages/dialtone-query-core/tests/tools/search-ranking.test.ts
+  s_7f1d1d64baa803::t_4edc23fb4ed823 1-86
+packages/dialtone-tokens/build-docs.js
+  s_7f1d1d64baa803::t_d5308bef9eaa0d 24
+packages/dialtone-tokens/tests/build-docs.test.js
+  s_7f1d1d64baa803::t_6f5e7fc8dd441f 1-17
+packages/eslint-plugin-dialtone/lib/generated/migration-guidance.json
+  s_7f1d1d64baa803::t_cb5dcdf2680731 1-100
+packages/eslint-plugin-dialtone/lib/rules/deprecated-flex-gap-classes.js
+  s_7f1d1d64baa803::t_0a185511ff4ad0 6,23
+packages/eslint-plugin-dialtone/lib/rules/deprecated-grid-gap-classes.js
+  s_7f1d1d64baa803::t_458d80eab9417c 6,23
+packages/eslint-plugin-dialtone/lib/rules/deprecated-pixel-utility-classes.js
+  s_7f1d1d64baa803::t_ef96666983a070 11-15,55
+packages/eslint-plugin-dialtone/lib/rules/deprecated-radius-utility-classes.js
+  s_7f1d1d64baa803::t_81bd3c56c0a3a9 10
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-flex-gap-classes.js
+  s_7f1d1d64baa803::t_fdbf4cae27dae0 51
+packages/eslint-plugin-dialtone/tests/lib/rules/deprecated-grid-gap-classes.js
+  s_7f1d1d64baa803::t_a082b4327c3bdc 57
+packages/stylelint-plugin-dialtone/docs/rules/no-deprecated-space-tokens.md
+  s_7f1d1d64baa803::t_02777eb79ac408 3,13-15,19,39,42-43,46-48
+packages/stylelint-plugin-dialtone/lib/generated/migration-guidance.json
+  s_7f1d1d64baa803::t_9fb8eed73380e9 1-18
+packages/stylelint-plugin-dialtone/lib/rules/no-deprecated-space-tokens.js
+  s_7f1d1d64baa803::t_50ae086957e620 2,12-15,19,39-42,48
+packages/stylelint-plugin-dialtone/tests/lib/rules/no-deprecated-space-tokens.mjs
+  s_7f1d1d64baa803::t_00346888e54201 34,39,45-46,51-115
+scripts/generate-migration-guidance.mjs
+  s_7f1d1d64baa803::t_bbe0bb46110f2b 1-21
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "412e3af135f2bd4bf4c04de021f942eadcd14e42",
+  "prompts": {},
+  "sessions": {
+    "s_7f1d1d64baa803": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a10e04-06fa-7453-9a82-18b540e53d66",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
