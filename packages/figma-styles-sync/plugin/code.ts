@@ -52,6 +52,12 @@ function boundVarId (bv: Record<string, VariableAlias | undefined> | undefined, 
   return bv?.[field]?.id ?? null;
 }
 
+function resolveVariable (varByName: Map<string, Variable>, name: string): Variable {
+  const found = varByName.get(name);
+  if (!found) throw new Error(`missing variable: ${name}`);
+  return found;
+}
+
 function textStyleFingerprint (input: TextStyleFingerprintInput): string {
   return JSON.stringify(input);
 }
@@ -80,10 +86,19 @@ async function createTextStyles (specs: TextStyleSpec[]): Promise<CreateTextStyl
   const errors: CreateTextStylesResult['errors'] = [];
 
   for (const spec of specs) {
+    let isNew = false;
+    let style: TextStyle | undefined;
     try {
-      let style = styleByName.get(spec.name);
-      const isNew = !style;
-      if (!style) style = figma.createTextStyle();
+      // Resolve every variable before touching the document: an existing
+      // style must come away untouched if any lookup below fails, and a
+      // newly-created one must not be left behind empty.
+      const famVar = resolveVariable(varByName, spec.fontFamily.variable);
+      const sizeVar = resolveVariable(varByName, spec.fontSize.variable);
+      const weightVar = resolveVariable(varByName, spec.fontWeight.variable);
+
+      const existing = styleByName.get(spec.name);
+      isNew = !existing;
+      style = existing ?? figma.createTextStyle();
 
       const before = isNew ? null : textStyleFingerprint({
         fontFamily: style.fontName.family,
@@ -100,16 +115,6 @@ async function createTextStyles (specs: TextStyleSpec[]): Promise<CreateTextStyl
       // Baseline before binding, so setBoundVariable('fontWeight', …) has a
       // loaded starting point to resolve the nearest named style from.
       style.fontName = { family: spec.figmaFamily, style: spec.fontStyleName };
-
-      const famVar = varByName.get(spec.fontFamily.variable);
-      const sizeVar = varByName.get(spec.fontSize.variable);
-      const weightVar = varByName.get(spec.fontWeight.variable);
-      if (!famVar || !sizeVar || !weightVar) {
-        const missing = !famVar
-          ? spec.fontFamily.variable
-          : !sizeVar ? spec.fontSize.variable : spec.fontWeight.variable;
-        throw new Error(`missing variable: ${missing}`);
-      }
       style.setBoundVariable('fontFamily', famVar);
       style.setBoundVariable('fontSize', sizeVar);
       style.setBoundVariable('fontWeight', weightVar);
@@ -134,6 +139,10 @@ async function createTextStyles (specs: TextStyleSpec[]): Promise<CreateTextStyl
         (before === after ? unchanged : updated).push(style.name);
       }
     } catch (e) {
+      // A style this run itself created never survives a failed attempt —
+      // otherwise it lingers as an empty, unbound orphan that matches this
+      // spec's name on every future run and repeats the same error forever.
+      if (isNew && style) style.remove();
       errors.push({ name: spec.name, error: String(e) });
     }
   }
@@ -239,13 +248,11 @@ async function createEffectStyles (specs: EffectStyleSpec[]): Promise<CreateEffe
   const errors: CreateEffectStylesResult['errors'] = [];
 
   for (const spec of specs) {
+    let isNew = false;
+    let style: EffectStyle | undefined;
     try {
-      let style = styleByName.get(spec.name);
-      const isNew = !style;
-      if (!style) style = figma.createEffectStyle();
-      const before = isNew ? null : effectsFingerprint(style.effects);
-      style.name = spec.name;
-
+      // Build and validate every layer's effect up front — no mutation of
+      // the document happens until every variable in every layer resolves.
       const effects: Effect[] = spec.layers.map(layer => {
         let effect: Effect = {
           type: spec.isInset ? 'INNER_SHADOW' : 'DROP_SHADOW',
@@ -258,17 +265,23 @@ async function createEffectStyles (specs: EffectStyleSpec[]): Promise<CreateEffe
         };
 
         for (const field of EFFECT_BINDABLE_FIELDS) {
-          const variable = varByName.get(layer.variables[field]);
-          if (!variable) throw new Error(`missing variable: ${layer.variables[field]}`);
+          const variable = resolveVariable(varByName, layer.variables[field]);
           effect = figma.variables.setBoundVariableForEffect(effect, EFFECT_FIELD_TO_API[field], variable);
         }
         return effect;
       });
 
+      const existing = styleByName.get(spec.name);
+      isNew = !existing;
+      style = existing ?? figma.createEffectStyle();
+      const before = isNew ? null : effectsFingerprint(style.effects);
+      style.name = spec.name;
       style.effects = effects;
+
       if (isNew) created.push(style.name);
       else (before === effectsFingerprint(effects) ? unchanged : updated).push(style.name);
     } catch (e) {
+      if (isNew && style) style.remove();
       errors.push({ name: spec.name, error: String(e) });
     }
   }
@@ -355,17 +368,13 @@ async function createPaintStyles (specs: PaintStyleSpec[]): Promise<CreatePaintS
   const errors: CreatePaintStylesResult['errors'] = [];
 
   for (const spec of specs) {
+    let isNew = false;
+    let style: PaintStyle | undefined;
     try {
-      let style = styleByName.get(spec.name);
-      const isNew = !style;
-      if (!style) style = figma.createPaintStyle();
-      const before = isNew ? null : paintsFingerprint(style.paints);
-      style.name = spec.name;
-
+      // Resolve every stop's variable before touching the document.
       const stops: ColorStop[] = spec.stops.map(stop => {
         if (stop.variable) {
-          const variable = varByName.get(stop.variable);
-          if (!variable) throw new Error(`missing variable: ${stop.variable}`);
+          const variable = resolveVariable(varByName, stop.variable);
           const firstModeId = Object.keys(variable.valuesByMode)[0];
           const resolved = variable.valuesByMode[firstModeId] as RGBA;
           return {
@@ -386,11 +395,18 @@ async function createPaintStyles (specs: PaintStyleSpec[]): Promise<CreatePaintS
         opacity: 1,
         blendMode: 'NORMAL',
       }];
+
+      const existing = styleByName.get(spec.name);
+      isNew = !existing;
+      style = existing ?? figma.createPaintStyle();
+      const before = isNew ? null : paintsFingerprint(style.paints);
+      style.name = spec.name;
       style.paints = paints;
 
       if (isNew) created.push(style.name);
       else (before === paintsFingerprint(paints) ? unchanged : updated).push(style.name);
     } catch (e) {
+      if (isNew && style) style.remove();
       errors.push({ name: spec.name, error: String(e) });
     }
   }
