@@ -78,7 +78,15 @@ it('refuses retained metadata when the verified installed entry omits its export
   };
   for (const record of [internal, records[0]]) {
     expect(getComponentDetail({ component: 'DtButton' }, [record], ['DtText']))
-      .toMatchObject({ match: 'unavailable', reason: 'not-exported', component: null, items: [], available: [] });
+      .toMatchObject({
+        match: 'unavailable',
+        reason: 'not-exported',
+        component: null,
+        items: [],
+        available: [],
+        unknown: [],
+        unknownContractFields: [],
+      });
   }
   expect(getComponentDetail({ component: 'DtButton' }, [internal]).match).toBe('exact');
   const aliased: Component = { ...records[0], identity: { ...identity('DtButton'), aliases: ['ActionButton'] } };
