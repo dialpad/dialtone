@@ -11,7 +11,7 @@ Apply to `packages/dialtone-vue/components/**`. These are shared authoring rules
 ## Props
 
 - Use `validator` — NEVER `validate`. Vue silently ignores `validate`.
-- Import allowed values from `*Constants.js` or `*Constants.ts`. Never hardcode valid value arrays in components or tests.
+- Import allowed values from `*Constants.js` or `*Constants.ts` in component validators; never hardcode valid value arrays in components. Validator tests may declare expected public values independently of production constants.
 - Add JSDoc with `@values` annotation.
 - Boolean visibility toggles: use positive polarity (`showClose`, `showHeader`, `showArrow`). Never use negative names (`hideX`, `preventX`, `skipX`).
 
