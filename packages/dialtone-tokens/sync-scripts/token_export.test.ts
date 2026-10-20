@@ -313,13 +313,20 @@ describe('tokenFilesFromLocalVariables', () => {
           'VariableCollectionId:1:1': {
             id: 'VariableCollectionId:1:1',
             name: 'primitives',
-            modes: [{ modeId: '1:0', name: 'mode1' }],
+            modes: [
+              { modeId: '1:0', name: 'mode1' },
+              { modeId: '1:1', name: 'mode2' },
+            ],
             defaultModeId: '1:0',
             remote: false,
             hiddenFromPublishing: false,
           },
         },
         variables: {
+          // Deliberately different per mode, so resolving the alias against
+          // the wrong mode (e.g. grabbing valuesByMode's first entry instead
+          // of indexing by the composed color's own modeId) produces a
+          // different, wrong colour instead of coincidentally matching.
           'VariableID:2:1': {
             id: 'VariableID:2:1',
             name: 'color/black/900',
@@ -328,6 +335,7 @@ describe('tokenFilesFromLocalVariables', () => {
             resolvedType: 'COLOR',
             valuesByMode: {
               '1:0': { r: 0.1, g: 0.2, b: 0.3, a: 1 },
+              '1:1': { r: 0.9, g: 0.8, b: 0.7, a: 1 },
             },
             remote: false,
             description: '',
@@ -348,6 +356,10 @@ describe('tokenFilesFromLocalVariables', () => {
                 color: { type: 'VARIABLE_ALIAS', id: 'VariableID:2:1' },
                 opacity: 50,
               },
+              '1:1': {
+                color: { type: 'VARIABLE_ALIAS', id: 'VariableID:2:1' },
+                opacity: 50,
+              },
             },
             remote: false,
             description: '',
@@ -363,6 +375,8 @@ describe('tokenFilesFromLocalVariables', () => {
 
     expect(tokenFiles['primitives.mode1.json'].color.surface['primary-opaque'].$value)
       .toBe('#1a334d80')
+    expect(tokenFiles['primitives.mode2.json'].color.surface['primary-opaque'].$value)
+      .toBe('#e6ccb380')
   })
 
   it('handles aliases', () => {
