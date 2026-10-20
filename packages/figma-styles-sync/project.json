@@ -8,6 +8,13 @@
         "command": "pnpm lint"
       }
     },
+    "typecheck": {
+      "executor": "nx:run-commands",
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "pnpm typecheck"
+      }
+    },
     "test": {
       "executor": "nx:run-commands",
       "dependsOn": [
