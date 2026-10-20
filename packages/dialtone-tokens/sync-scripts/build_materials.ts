@@ -43,6 +43,7 @@ import { parseColor, colorApproximatelyEqual } from './color.js';
 import { resolveModes, ResolvedToken } from './resolve_tokens.js';
 import { classify, FigmaType } from './variable_policy.js';
 import { toNumber as toNumberWithUnits } from './utils.js';
+import { staleOverrides } from './stale_overrides.js';
 
 // See the matching override in build_variables.ts: the preview file names
 // its collection differently so its CI job can't collide with the main file's.
@@ -283,11 +284,6 @@ async function main (): Promise<void> {
       // is a no-op the way the main sync is.
       .filter(o => !sameValue(existing[o.variableId]?.[o.modeId], o.value));
 
-    // An override Figma still holds that this material no longer wants, because
-    // the token now agrees with the parent. Nothing in the payload above would
-    // touch it, so without this the run reports "up to date" while Figma keeps
-    // showing the old value.
-    //
     // Deleted outright, via `value: null` on the extended mode — confirmed
     // directly against a real extended collection that this removes the
     // override and lets inheritance resume, which REST's own docs for
@@ -298,13 +294,8 @@ async function main (): Promise<void> {
     // `color.black.100`, where `black.100` itself still varies by material —
     // would have that alias permanently severed in favour of a frozen,
     // parent-only literal, silently wrong for every material from then on.
-    const stale: { variableId: string; modeId: string }[] = [];
-    for (const [variableId, byMode] of Object.entries(existing)) {
-      for (const modeId of Object.keys(byMode)) {
-        if (wanted.has(`${variableId}/${modeId}`)) continue;
-        stale.push({ variableId, modeId });
-      }
-    }
+    // See `staleOverrides` for why this is skipped whenever addressing failed.
+    const stale = staleOverrides(existing, wanted, unaddressable);
 
     report(name, 'overrides could not be addressed, no such variable or mode', unaddressable);
     if (unaddressable.length > 0) incomplete = true;
