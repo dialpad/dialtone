@@ -50,6 +50,11 @@ export async function resolveEffectStyles (): Promise<EffectStyleSpec[]> {
     shadowName: string;
     layerIndex: number | null;
     fields: Partial<Record<BindableField, string>>;
+    /**
+     * Resolved value per field, keyed the same as `fields` — used only to spot
+     * a whole-shadow alias (see `isInset` below), never exposed on the spec.
+     */
+    values: Partial<Record<BindableField, string>>;
   }
   const groups = new Map<string, LayerGroup>();
 
@@ -64,8 +69,10 @@ export async function resolveEffectStyles (): Promise<EffectStyleSpec[]> {
     const layerIndex = hasIndex ? Number(rest.at(-1)) : null;
 
     const key = `${shadowName}|${layerIndex}`;
-    if (!groups.has(key)) groups.set(key, { shadowName, layerIndex, fields: {} });
-    groups.get(key)!.fields[field as BindableField] = figmaName(token.name);
+    if (!groups.has(key)) groups.set(key, { shadowName, layerIndex, fields: {}, values: {} });
+    const group = groups.get(key)!;
+    group.fields[field as BindableField] = figmaName(token.name);
+    group.values[field as BindableField] = String(token.modes.light.resolved);
   }
 
   const byShadow = new Map<string, LayerGroup[]>();
@@ -73,6 +80,26 @@ export async function resolveEffectStyles (): Promise<EffectStyleSpec[]> {
     if (!byShadow.has(g.shadowName)) byShadow.set(g.shadowName, []);
     byShadow.get(g.shadowName)!.push(g);
   }
+
+  function valueFingerprint (layers: LayerGroup[]): string {
+    return JSON.stringify(
+      [...layers].sort((a, b) => (a.layerIndex ?? 0) - (b.layerIndex ?? 0)).map(l => l.values),
+    );
+  }
+
+  // A composite that's a pure whole-object alias of another shadow (e.g.
+  // `shadow.focus` aliasing `{shadow.focus-inset}`) loses that relationship
+  // once Style Dictionary explodes it into per-field tokens — every field
+  // resolves straight to the alias target's own primitives, with no trace of
+  // the composite-level reference left to follow. Two shadows whose resolved
+  // values match layer-for-layer are, in practice, the same shadow under two
+  // names, so the suffix-named one's inset-ness is the one that's authoritative.
+  const regexInset = new Map<string, boolean>();
+  for (const shadowName of byShadow.keys()) regexInset.set(shadowName, /(^|-)inset$/.test(shadowName));
+
+  const insetFingerprints = new Set(
+    [...byShadow.entries()].filter(([name]) => regexInset.get(name)).map(([, layers]) => valueFingerprint(layers)),
+  );
 
   const specs: EffectStyleSpec[] = [];
   for (const [shadowName, layers] of byShadow) {
@@ -83,9 +110,11 @@ export async function resolveEffectStyles (): Promise<EffectStyleSpec[]> {
       throw new Error(`${shadowName}: missing field(s) ${missing.join(', ')} on some layer`);
     }
 
+    const isInset = regexInset.get(shadowName) || insetFingerprints.has(valueFingerprint(layers));
+
     specs.push({
       name: figmaName(`shadow.${shadowName}`),
-      isInset: /(^|-)inset$/.test(shadowName),
+      isInset,
       layers: layers.map(l => ({ variables: l.fields as Record<BindableField, string> })),
     });
   }
