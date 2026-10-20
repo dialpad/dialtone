@@ -23,9 +23,7 @@
   },
   "dependencies": {
     "@dialpad/dialtone-tokens": "workspace:*",
-    "@dialpad/dialtone-vue": "workspace:vue3-next",
     "@figma/plugin-typings": "^1.100.0",
-    "dotenv": "^16.3.1",
     "tsx": "^4.19.0"
   },
   "devDependencies": {

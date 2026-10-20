@@ -6,10 +6,10 @@ have no write endpoint — Figma only exposes `createTextStyle()`,
 `createEffectStyle()` and `createPaintStyle()` through the Plugin API, so
 this package builds a Figma plugin rather than a script.
 
-Lives separately from `packages/dialtone-tokens/` because it depends on
-`dialtone-vue` (to measure real rendered components), and the dependency
-graph runs `dialtone-tokens → dialtone-css → dialtone-vue` — keeping it in
-`dialtone-tokens` would create a cycle.
+Lives separately from `packages/dialtone-tokens/` because it ships a Figma
+plugin rather than a script `dialtone-tokens` could just run — a different
+build and distribution surface (`manifest.json`, a bundled `code.js`, a UI
+panel) that doesn't belong in a tokens package.
 
 Component variant sets are a separate package,
 [`@dialpad/dialtone-figma-components-sync`](../figma-components-sync/README.md)
