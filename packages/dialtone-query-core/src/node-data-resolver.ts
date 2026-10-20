@@ -353,7 +353,8 @@ function validData(domain: Domain, data: unknown): boolean {
 const bundledStamp = (stamp: DomainStamp, fallbackReason: string | null): DomainStamp =>
   ({ ...stamp, selection: 'bundled', fallbackReason });
 const bundledDomains = (fallbackReason: string | null): Record<string, DomainStamp> => Object.fromEntries(
-  Object.entries(bundledProvenance.domains).map(([key, stamp]) => [key, bundledStamp(stamp, fallbackReason)]));
+  Object.entries(bundledProvenance.domains).map(([key, stamp]) => [key,
+    bundledStamp(stamp, key === 'documentation' || key === 'componentDocumentation' ? null : fallbackReason)]));
 
 /** Explicit, bounded MCP selection. CLI callers retain resolveData's policy. */
 export function resolveProjectData(projectRoot?: string, lookupRoot?: string): ProjectData {

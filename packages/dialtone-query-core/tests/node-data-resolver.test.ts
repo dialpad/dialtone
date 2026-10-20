@@ -101,6 +101,11 @@ test('invalid explicit configuration preserves bundled discovery and source-qual
   expect(resolveProjectData(undefined, '/absolute/workspace').provenance.domains.components.fallbackReason).toBe('project-root-required');
   const invalid = resolveProjectData('relative/app');
   expect(invalid.configured).toBe(true);
+  for (const selected of [context, invalid]) {
+    expect(selected.provenance.domains.documentation.fallbackReason).toBeNull();
+    expect(selected.provenance.domains.componentDocumentation.fallbackReason).toBeNull();
+  }
+  expect(invalid.provenance.domains.components.fallbackReason).toBe('project-and-lookup-roots-must-be-absolute');
   for (const query of ['spinner', 'blank slate', 'flip switch']) {
     expect(searchComponents(query, invalid.data.components, componentDocumentation).results)
       .toEqual(searchComponents(query, context.data.components, componentDocumentation).results);

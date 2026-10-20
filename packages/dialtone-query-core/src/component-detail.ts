@@ -71,13 +71,18 @@ export function getComponentDetail(
       : candidates.length === 1
         ? candidates[0]
         : null;
+  const installedNotExported = component?.identity?.kind === 'internal'
+    && installedExports !== undefined && installedExports !== null
+    && !installedExports.some(exported => normalizeComponentName(exported) === key);
   const sections =
     args.projection && args.projection !== 'all'
       ? [args.projection]
       : COMPONENT_SECTIONS;
-  if (!component) {
-    const reason = candidates.length ? null : missingReason(name, key, installedExports);
-    const match: MatchState = candidates.length ? 'candidate'
+  if (!component || installedNotExported) {
+    const reason = installedNotExported ? 'not-exported'
+      : candidates.length ? null : missingReason(name, key, installedExports);
+    const match: MatchState = installedNotExported ? 'unavailable'
+      : candidates.length ? 'candidate'
       : reason === 'not-exported' ? 'unavailable'
         : reason ? 'unverified' : 'no-match';
     return {
@@ -85,7 +90,7 @@ export function getComponentDetail(
       reason,
       component: null,
       items: [],
-      available: candidates.map((record) => record.displayName),
+      available: installedNotExported ? [] : candidates.map((record) => record.displayName),
       unknown: [],
       unknownContractFields: [],
     };

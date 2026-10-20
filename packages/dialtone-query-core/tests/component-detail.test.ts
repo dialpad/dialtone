@@ -71,6 +71,16 @@ it.each([
   expect(getComponentDetail({ component }, [], names).match).toBe(match);
 });
 
+it('refuses retained metadata when the verified installed entry omits its export', () => {
+  const internal: Component = {
+    ...records[0],
+    identity: { ...identity('DtButton'), kind: 'internal', imports: [] },
+  };
+  expect(getComponentDetail({ component: 'DtButton' }, [internal], ['DtText']))
+    .toMatchObject({ match: 'unavailable', reason: 'not-exported', component: null, items: [], available: [] });
+  expect(getComponentDetail({ component: 'DtButton' }, [internal]).match).toBe('exact');
+});
+
 describe('selected component contract', () => {
   it('constrains kind to Button and retains complete values/default/deprecation tags', () => {
     const result = detail({
