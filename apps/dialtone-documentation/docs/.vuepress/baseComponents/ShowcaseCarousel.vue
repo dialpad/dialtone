@@ -1,52 +1,69 @@
 <!-- eslint-disable max-len -->
 <template>
-  <div ref="carouselContainerRef" class="showcase-carousel">
-    <dt-stack ref="carouselTrackRef" direction="row" gap="800" class="showcase-carousel__track">
-      <div
-        v-for="item in showcaseItems"
-        :key="item.name"
-        :style="{
-          alignSelf: item.alignSelf,
-          inlineSize: item.sizes,
-        }"
-        class="showcase-carousel__item"
-      >
-        <!-- For video tiles this lazy, responsive still doubles as the poster: shown
-             before playback and under reduced motion, without an eager poster request. -->
-        <picture class="d-d-block">
-          <source :srcset="item.avifSrcset" :sizes="item.sizes" type="image/avif">
-          <source :srcset="item.webpSrcset" :sizes="item.sizes" type="image/webp">
-          <img
-            :src="item.fallbackSrc"
+  <div class="showcase-carousel-wrapper">
+    <div ref="carouselContainerRef" class="showcase-carousel">
+      <dt-stack ref="carouselTrackRef" direction="row" gap="800" class="showcase-carousel__track">
+        <div
+          v-for="item in showcaseItems"
+          :key="item.name"
+          :style="{
+            alignSelf: item.alignSelf,
+            inlineSize: item.sizes,
+          }"
+          class="showcase-carousel__item"
+        >
+          <!-- For video tiles this lazy, responsive still doubles as the poster: shown
+               before playback and under reduced motion, without an eager poster request. -->
+          <picture class="d-d-block">
+            <source :srcset="item.avifSrcset" :sizes="item.sizes" type="image/avif">
+            <source :srcset="item.webpSrcset" :sizes="item.sizes" type="image/webp">
+            <img
+              :src="item.fallbackSrc"
+              :width="item.sourceWidth"
+              :height="item.sourceHeight"
+              class="d-bar-500 d-d-block showcase-carousel__image"
+              alt=""
+              loading="lazy"
+              decoding="async"
+              fetchpriority="low"
+              draggable="false"
+            >
+          </picture>
+          <video
+            v-if="item.type === 'video'"
             :width="item.sourceWidth"
             :height="item.sourceHeight"
-            class="d-bar-500 d-d-block showcase-carousel__image"
-            alt=""
-            loading="lazy"
-            decoding="async"
-            fetchpriority="low"
+            class="d-bar-500 d-d-block showcase-carousel__video"
+            aria-hidden="true"
+            muted
+            loop
+            playsinline
+            disablepictureinpicture
+            preload="none"
             draggable="false"
           >
-        </picture>
-        <video
-          v-if="item.type === 'video'"
-          :width="item.sourceWidth"
-          :height="item.sourceHeight"
-          class="d-bar-500 d-d-block showcase-carousel__video"
-          aria-hidden="true"
-          muted
-          loop
-          playsinline
-          disablepictureinpicture
-          preload="none"
-          draggable="false"
-        >
-          <!-- Tiles keep fixed widths at every breakpoint, so pick the encode by pixel density. -->
-          <source :src="item.videoSrc2x" type="video/mp4" media="(min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2)">
-          <source :src="item.videoSrc1x" type="video/mp4">
-        </video>
-      </div>
-    </dt-stack>
+            <!-- Tiles keep fixed widths at every breakpoint, so pick the encode by pixel density. -->
+            <source :src="item.videoSrc2x" type="video/mp4" media="(min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2)">
+            <source :src="item.videoSrc1x" type="video/mp4">
+          </video>
+        </div>
+      </dt-stack>
+    </div>
+    <!-- WCAG 2.2.2: the carousel and its videos move on their own, so give everyone a way to stop them. -->
+    <div class="showcase-carousel__controls">
+      <dt-button
+        v-dt-tooltip="isPaused ? 'Play showcase' : 'Pause showcase'"
+        :aria-label="isPaused ? 'Play showcase' : 'Pause showcase'"
+        kind="muted"
+        importance="outlined"
+        size="300"
+        @click="togglePause"
+      >
+        <template #icon="{ iconSize }">
+          <dt-icon :name="isPaused ? 'play' : 'pause'" :size="iconSize" />
+        </template>
+      </dt-button>
+    </div>
   </div>
 </template>
 
@@ -129,8 +146,15 @@ const RESIZE_DEBOUNCE = 150;
 
 const carouselContainerRef = ref(null);
 const carouselTrackRef = ref(null);
+const isPaused = ref(false);
 
 let cleanupCarousel = () => {};
+let applyPauseState = () => {};
+
+const togglePause = () => {
+  isPaused.value = !isPaused.value;
+  applyPauseState();
+};
 
 onMounted(() => {
   const carouselContainer = carouselContainerRef.value;
@@ -167,7 +191,7 @@ onMounted(() => {
     });
 
     const playVideo = (video) => {
-      if (reducedMotionQuery.matches || document.hidden) return;
+      if (isPaused.value || reducedMotionQuery.matches || document.hidden) return;
       video.play().catch(() => {});
     };
 
@@ -191,7 +215,7 @@ onMounted(() => {
     // paused on their posters. IntersectionObserver doesn't report a hidden tab,
     // so page visibility is checked here too (and re-synced on visibilitychange).
     const syncVideoPlayback = () => {
-      if (!videoObserver || reducedMotionQuery.matches || document.hidden) {
+      if (!videoObserver || isPaused.value || reducedMotionQuery.matches || document.hidden) {
         carouselVideos.forEach(video => video.pause());
         return;
       }
@@ -291,6 +315,7 @@ onMounted(() => {
     const startAnimation = () => {
       if (
         !isVisible ||
+        isPaused.value ||
         isTouchScrolling ||
         reducedMotionQuery.matches ||
         carouselPeriod <= 0
@@ -303,6 +328,15 @@ onMounted(() => {
 
       if (animationId !== null) return;
       animationId = requestAnimationFrame(animateCarousel);
+    };
+
+    applyPauseState = () => {
+      if (isPaused.value) {
+        stopAnimation();
+      } else {
+        startAnimation();
+      }
+      syncVideoPlayback();
     };
 
     const handleReducedMotionChange = () => {
@@ -429,7 +463,10 @@ onMounted(() => {
   }
 });
 
-onUnmounted(() => cleanupCarousel());
+onUnmounted(() => {
+  cleanupCarousel();
+  applyPauseState = () => {};
+});
 </script>
 
 <style scoped>
@@ -444,6 +481,20 @@ onUnmounted(() => cleanupCarousel());
   touch-action: pan-x pan-y;
   user-select: none;
   -webkit-overflow-scrolling: touch;
+}
+
+.showcase-carousel__controls {
+  display: flex;
+  justify-content: flex-end;
+  padding-block-start: var(--dt-space-400);
+  padding-inline: var(--dt-space-500);
+}
+
+/* Nothing moves under reduced motion, so there's nothing to pause. */
+@media (prefers-reduced-motion: reduce) {
+  .showcase-carousel__controls {
+    display: none;
+  }
 }
 
 .showcase-carousel::-webkit-scrollbar {
