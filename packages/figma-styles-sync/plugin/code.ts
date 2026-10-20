@@ -52,8 +52,27 @@ function boundVarId (bv: Record<string, VariableAlias | undefined> | undefined, 
   return bv?.[field]?.id ?? null;
 }
 
-function resolveVariable (varByName: Map<string, Variable>, name: string): Variable {
-  const found = varByName.get(name);
+/**
+ * A Figma variable name is unique only within its own collection, not across
+ * the file — `getLocalVariablesAsync()` returns every local collection at
+ * once, so two unrelated collections sharing a variable name is a real
+ * possibility, not a hypothetical. Collapsing that straight into
+ * `Map(name -> variable)` would let whichever collection's variable happens
+ * to iterate last silently win, binding a style to the wrong collection with
+ * no error. Recording the collision instead and failing loudly on lookup
+ * turns that into a clear error pointing at the ambiguous name.
+ */
+function indexVariablesByName (vars: Variable[]): Map<string, Variable | 'ambiguous'> {
+  const index = new Map<string, Variable | 'ambiguous'>();
+  for (const v of vars) index.set(v.name, index.has(v.name) ? 'ambiguous' : v);
+  return index;
+}
+
+function resolveVariable (index: Map<string, Variable | 'ambiguous'>, name: string): Variable {
+  const found = index.get(name);
+  if (found === 'ambiguous') {
+    throw new Error(`variable "${name}" exists in more than one local collection — cannot bind unambiguously`);
+  }
   if (!found) throw new Error(`missing variable: ${name}`);
   return found;
 }
@@ -75,8 +94,7 @@ async function createTextStyles (specs: TextStyleSpec[]): Promise<CreateTextStyl
   );
   for (const key of fontsNeeded) await figma.loadFontAsync(JSON.parse(key) as FontName);
 
-  const vars = await figma.variables.getLocalVariablesAsync();
-  const varByName = new Map(vars.map(v => [v.name, v]));
+  const varIndex = indexVariablesByName(await figma.variables.getLocalVariablesAsync());
   const existingStyles = await figma.getLocalTextStylesAsync();
   const styleByName = new Map(existingStyles.map(s => [s.name, s]));
 
@@ -92,9 +110,9 @@ async function createTextStyles (specs: TextStyleSpec[]): Promise<CreateTextStyl
       // Resolve every variable before touching the document: an existing
       // style must come away untouched if any lookup below fails, and a
       // newly-created one must not be left behind empty.
-      const famVar = resolveVariable(varByName, spec.fontFamily.variable);
-      const sizeVar = resolveVariable(varByName, spec.fontSize.variable);
-      const weightVar = resolveVariable(varByName, spec.fontWeight.variable);
+      const famVar = resolveVariable(varIndex, spec.fontFamily.variable);
+      const sizeVar = resolveVariable(varIndex, spec.fontSize.variable);
+      const weightVar = resolveVariable(varIndex, spec.fontWeight.variable);
 
       const existing = styleByName.get(spec.name);
       isNew = !existing;
@@ -237,8 +255,7 @@ function effectsFingerprint (effects: readonly Effect[]): string {
  * per-mode style object, which Figma has no concept of.
  */
 async function createEffectStyles (specs: EffectStyleSpec[]): Promise<CreateEffectStylesResult> {
-  const vars = await figma.variables.getLocalVariablesAsync();
-  const varByName = new Map(vars.map(v => [v.name, v]));
+  const varIndex = indexVariablesByName(await figma.variables.getLocalVariablesAsync());
   const existingStyles = await figma.getLocalEffectStylesAsync();
   const styleByName = new Map(existingStyles.map(s => [s.name, s]));
 
@@ -265,7 +282,7 @@ async function createEffectStyles (specs: EffectStyleSpec[]): Promise<CreateEffe
         };
 
         for (const field of EFFECT_BINDABLE_FIELDS) {
-          const variable = resolveVariable(varByName, layer.variables[field]);
+          const variable = resolveVariable(varIndex, layer.variables[field]);
           effect = figma.variables.setBoundVariableForEffect(effect, EFFECT_FIELD_TO_API[field], variable);
         }
         return effect;
@@ -357,8 +374,7 @@ function paintsFingerprint (paints: readonly Paint[]): string {
  * the fallback swatch until the variable resolves.
  */
 async function createPaintStyles (specs: PaintStyleSpec[]): Promise<CreatePaintStylesResult> {
-  const vars = await figma.variables.getLocalVariablesAsync();
-  const varByName = new Map(vars.map(v => [v.name, v]));
+  const varIndex = indexVariablesByName(await figma.variables.getLocalVariablesAsync());
   const existingStyles = await figma.getLocalPaintStylesAsync();
   const styleByName = new Map(existingStyles.map(s => [s.name, s]));
 
@@ -374,7 +390,7 @@ async function createPaintStyles (specs: PaintStyleSpec[]): Promise<CreatePaintS
       // Resolve every stop's variable before touching the document.
       const stops: ColorStop[] = spec.stops.map(stop => {
         if (stop.variable) {
-          const variable = resolveVariable(varByName, stop.variable);
+          const variable = resolveVariable(varIndex, stop.variable);
           const firstModeId = Object.keys(variable.valuesByMode)[0];
           const resolved = variable.valuesByMode[firstModeId] as RGBA;
           return {
