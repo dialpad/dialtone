@@ -67,7 +67,7 @@ describe('DtLoader Tests', function () {
       });
 
       it('Should not render the spinner track', () => {
-        expect(wrapper.find('.d-loader__icon-track').exists()).toBe(false);
+        expect(wrapper.find('[data-qa="dt-loader-icon-track"]').exists()).toBe(false);
       });
     });
 
@@ -82,7 +82,7 @@ describe('DtLoader Tests', function () {
       });
 
       it('Should render the track and the spinning icon', () => {
-        expect(wrapper.find('.d-loader__icon-track').exists()).toBe(true);
+        expect(wrapper.find('[data-qa="dt-loader-icon-track"]').exists()).toBe(true);
         expect(loadingIcon.exists()).toBe(true);
       });
 
@@ -93,7 +93,7 @@ describe('DtLoader Tests', function () {
       it('Should apply the size to both SVGs', () => {
         mockProps = { kind: 'spinner', size: '200' };
         updateWrapper();
-        expect(wrapper.find('.d-loader__icon-track').classes()).toContain('d-icon--size-200');
+        expect(wrapper.find('[data-qa="dt-loader-icon-track"]').classes()).toContain('d-icon--size-200');
         expect(loadingIcon.classes()).toContain('d-icon--size-200');
       });
     });
