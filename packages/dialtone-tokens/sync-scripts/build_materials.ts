@@ -194,6 +194,14 @@ async function main (): Promise<void> {
   }
   console.log(`parent      : "${PARENT}", ${parentCollection.variableIds.length} variables\n`);
 
+  // Set whenever a material posts less than its full desired state — an
+  // override this run knows about but couldn't address or convert. The loop
+  // still posts everything else it safely can; this only decides the
+  // process's own exit status, so CI stops treating that as a clean run (the
+  // workflow's "✅ Synced" comment is driven by the job's exit code, and
+  // reads every material as fully in sync otherwise).
+  let incomplete = false;
+
   for (const material of MATERIALS) {
     const name = collectionNameFor(material);
     const tokens = await resolveAll([`base/material/${material}`]);
@@ -291,6 +299,7 @@ async function main (): Promise<void> {
     };
     report('overrides could not be addressed, no such variable or mode', unaddressable);
     report('wanted overrides could not be converted to a Figma value', unconvertibleOverrides);
+    if (unaddressable.length > 0 || unconvertibleOverrides.length > 0) incomplete = true;
 
     if (dryRun) {
       console.log(`${name}: ${wanted.size} overrides, ${payload.length} to write, ${stale.length} stale to delete`);
@@ -308,6 +317,11 @@ async function main (): Promise<void> {
       `${name}: wrote ${payload.length} overrides` +
       (stale.length ? `, deleted ${stale.length} stale` : ''));
     local = await getLocal();
+  }
+
+  if (incomplete) {
+    console.error('\nfailed: one or more materials left unaddressed or unconvertible overrides — see above');
+    process.exitCode = 1;
   }
 }
 
