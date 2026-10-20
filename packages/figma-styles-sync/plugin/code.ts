@@ -244,27 +244,35 @@ function roundColor (c: RGBA): RGBA {
   return { r: round4(c.r), g: round4(c.g), b: round4(c.b), a: round4(c.a) };
 }
 
-// We only ever build DROP_SHADOW/INNER_SHADOW effects, so color/offset/
-// radius/spread are always present — no need to guard per field.
+// We only ever WRITE DROP_SHADOW/INNER_SHADOW effects, but the "before"
+// fingerprint reads whatever an existing style already has, which a human
+// could have set to any member of the Effect union (LAYER_BLUR,
+// BACKGROUND_BLUR, …). Reading shadow-only fields off one of those throws —
+// confirmed directly: a pre-existing blur reached `roundColor(undefined)` and
+// crashed before the style's effects were ever replaced, leaving the blur in
+// place and repeating the same crash every subsequent run. Every other member
+// gets a shape-appropriate, still-comparable fingerprint instead.
 function normalizeEffect (e: Effect) {
-  const shadow = e as Effect & { color: RGBA; offset: Vector; radius: number; spread?: number };
-  const bv = shadow.boundVariables;
-  return {
-    type: shadow.type,
-    visible: shadow.visible,
-    blendMode: shadow.blendMode,
-    color: roundColor(shadow.color),
-    offset: { x: round4(shadow.offset.x), y: round4(shadow.offset.y) },
-    radius: round4(shadow.radius),
-    spread: round4(shadow.spread ?? 0),
-    boundVariables: {
-      color: boundVarId(bv, 'color'),
-      radius: boundVarId(bv, 'radius'),
-      offsetX: boundVarId(bv, 'offsetX'),
-      offsetY: boundVarId(bv, 'offsetY'),
-      spread: boundVarId(bv, 'spread'),
-    },
-  };
+  if (e.type === 'DROP_SHADOW' || e.type === 'INNER_SHADOW') {
+    const bv = e.boundVariables;
+    return {
+      type: e.type,
+      visible: e.visible,
+      blendMode: e.blendMode,
+      color: roundColor(e.color),
+      offset: { x: round4(e.offset.x), y: round4(e.offset.y) },
+      radius: round4(e.radius),
+      spread: round4(e.spread ?? 0),
+      boundVariables: {
+        color: boundVarId(bv, 'color'),
+        radius: boundVarId(bv, 'radius'),
+        offsetX: boundVarId(bv, 'offsetX'),
+        offsetY: boundVarId(bv, 'offsetY'),
+        spread: boundVarId(bv, 'spread'),
+      },
+    };
+  }
+  return { type: e.type, visible: e.visible };
 }
 
 function effectsFingerprint (effects: readonly Effect[]): string {
