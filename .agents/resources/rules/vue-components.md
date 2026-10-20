@@ -14,9 +14,9 @@ Apply to `packages/dialtone-vue/components/**`.
 - Use `modelValue` / `update:modelValue` for the v-model prop and emitted event
   contract. In Vue templates, follow the existing linted listener spelling,
   for example `@update:model-value`.
-- Use `update:open` for new overlays; preserve legacy `update:show` for Modal, Tooltip, and Toast.
+- Use `update:open` for overlay visibility; verify the existing component's emitted events before changing its contract.
 - Overlay slots use `headerContent` / `footerContent`; structural slots use `header` / `footer`.
-- Interactive component sizes are `xs`, `sm`, `md`, `lg`, `xl`; icon sizes use the numeric `100`-`800` scale.
+- Component sizes use the numeric ordinal scale in `packages/dialtone-vue/common/constants/sizes.js`; use each component's constants for supported values. T-shirt aliases are legacy. Icon sizes use their separate numeric `100`-`800` scale.
 - New directional props, slots, values, and events use logical naming. Load `.agents/resources/rules/logical-naming.md` when direction names are added or changed.
 
 ## Structure

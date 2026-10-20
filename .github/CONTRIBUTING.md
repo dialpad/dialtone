@@ -60,6 +60,14 @@ The second is to check with the Dialtone team (in the #dialtone Dialpad channel)
 
 ## How to contribute
 
+### Working with coding assistants
+
+Dialtone maintains separate [Codex instructions](../AGENTS.md) and
+[Claude Code instructions](../CLAUDE.md), with task-specific rules and workflows.
+The [loading and coverage matrix](../.agents/resources/agent-tooling-parity.md)
+explains which files each client uses and what has been checked. When your change
+affects contributor guidance, include the necessary updates in the same PR.
+
 ### Feature request
 
 To request a new Dialtone feature or enhancement, submit a [feature request](https://dialpad.atlassian.net/secure/CreateIssue.jspa?issuetype=10975&pid=12508) to our Jira.

@@ -39,10 +39,17 @@ If breaking changes found: ensure `BREAKING CHANGE:` footer in commits, suggest 
 
 ### 3. Documentation Completeness
 
-For each changed component, verify all 6 documentation artifacts are updated per project rules.
+For each changed component, assess the artifacts in the root `CLAUDE.md`
+Documentation Pipeline, including CLI/MCP lookup data and Combinator outputs.
+Record which artifacts changed and why others need no change.
 
 - **New utilities**: verify docs JSON inclusion and documentation page
 - **New tokens**: verify platform outputs generated and documentation page
+
+For every change, assess contributor rules, skills, routed resources and client
+configuration alongside public guides. Report updated surfaces, a reason no
+change is needed, or a named follow-up owner and gate. Reassess after material
+review/integration changes; the owning PR carries necessary instruction updates.
 
 ### 4. Test Verification
 

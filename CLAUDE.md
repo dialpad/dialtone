@@ -2,6 +2,14 @@
 
 Dialtone is Dialpad's design system — a monorepo providing tokens, CSS utilities, Vue components, documentation, and developer tooling for building consistent UIs across Dialpad products.
 
+## Working Safely
+
+- Branch from `staging` unless the user or PR target says otherwise. Do not edit directly on `staging`, `production`, `main`, or `master`. Use `<type>/DLT-1234-short-purpose` or an explicitly chosen `chore/NO-JIRA-short-purpose`.
+- Preserve unrelated modified, staged and untracked files. Stage explicit files or hunks; never use `git add .` or `git add -A`. Do not force-push or discard/stash user work without explicit authorization.
+- Use the pnpm version declared in `package.json`. Use `pnpm install --frozen-lockfile` for ordinary setup; change `pnpm-lock.yaml` only for an intentional dependency change and explain it in the PR.
+- Keep private links, secrets, customer data and internal-only context out of committed files and PR descriptions.
+- During planning and before PR readiness, assess contributor-instruction and public-guide impacts. Update affected guidance with the owning change, or record why no change is needed or a named follow-up and gate. Reassess after material review or integration changes; see the instruction-maintenance section in `.agents/resources/agent-tooling-parity.md`.
+
 ## Monorepo Structure
 
 ```text
@@ -80,7 +88,7 @@ chore: NO-JIRA update dependencies
 ## Jira
 
 - Project: **DLT** (Dialtone)
-- All work requires a Jira ticket — create one via the Atlassian MCP if none exists
+- Use the task's existing Jira ticket, or `NO-JIRA` only when the user explicitly chose it. Jira creation is a separate explicit action; never create a ticket from commit, PR or review workflows.
 - The Atlassian MCP server is not bundled with this project — it must be configured per-user in your Claude Code MCP settings
 - Ticket URL format: `https://dialpad.atlassian.net/browse/DLT-XXX`
 
@@ -102,7 +110,7 @@ When creating or updating a component, ALL must stay in sync:
 3. **Storybook stories**: `.stories.js` + `.mdx`
 4. **Component docs JSON**: via `scripts/build-dialtone-vue-docs.mjs`
 5. **VuePress documentation**: `apps/dialtone-documentation/docs/`, sidebar in `_data/site-nav.json`. Use fenced ` ```vue demo ` blocks for code examples (see `.claude/rules/documentation-writing.md`)
-6. **MCP server data**: `packages/dialtone-mcp-server/src/data.ts`
+6. **CLI/MCP lookup data**: rebuild the generated datasets consumed through `packages/dialtone-query-core`; run `pnpm nx run-many -t build -p dialtone-cli dialtone-mcp-server` rather than hand-editing generated records.
 7. **Combinator variant file**: `packages/combinator/src/variants/variants_<component>.js` plus registration in `packages/combinator/src/variants/variants.js`. Required for prop, slot, value, and visual-state changes. See `.claude/rules/combinator-variants.md`.
 8. **Component wall thumbnail**: auto-generated PNG at `apps/dialtone-documentation/docs/.vuepress/public/assets/images/components/<slug>-{light,dark}.png`. Run `pnpm nx run dialtone-documentation:thumbs` to regen (pre-commit hook fires automatically on relevant staged changes). If the Combinator default doesn't render well as a thumbnail, author an override at `apps/dialtone-documentation/thumbs/<slug>.vue`; see `apps/dialtone-documentation/thumbs/README.md`. Preview live at `pnpm nx run dialtone-documentation:thumbs:preview` (picker at `/`, full grid at `/?gallery`).
 9. **Public docs JSON**: `packages/dialtone-docs/dist/public-docs.json`, built by `packages/dialtone-docs/src/generators/build-public-docs.mjs` from `apps/dialtone-documentation/docs/**/*.md` and the public directives' MDX pages. Directive references also read their `.stories.js` titles, `dialtone-vue/index.js` exports, `dialtone-vue/package.json` and the shared `SITE_URL`. Consumed by `dialtone-mcp-server` (`search_documentation`) and `dialtone-cli` (`dialtone docs`) via `@dialpad/dialtone-query-core`. Rebuilt by `pnpm nx run dialtone-docs:build`; Nx inputs include these sources.
@@ -116,7 +124,7 @@ When creating or updating a component, ALL must stay in sync:
 
 ## Doc Sync Tooling
 
-Hooks and tools that keep `packages/dialtone-docs/src/content/` in sync with source code changes. Requires the `dialtone-docs` package (PR #1051) to be merged.
+Hooks and tools that keep `packages/dialtone-docs/src/content/` in sync with source code changes.
 
 ### How it works
 

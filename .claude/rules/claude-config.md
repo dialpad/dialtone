@@ -38,6 +38,7 @@ color: green                     # purely cosmetic
 Body is the system prompt for the subagent — written in second person ("You are…").
 
 Rules:
+
 - `name` MUST match the filename (`doc-janitor` → `doc-janitor.md`)
 - `description` MUST include at least one `<example>` block so Claude can match natural-language triggers
 - Subagents do NOT inherit project rules — they only see `~/.claude/rules/*.md` and `.claude/rules/*.md` files they explicitly read
@@ -48,6 +49,7 @@ Rules:
 Slash command triggers as `.md` files. Filename = command name (`/review` → `review.md`).
 
 Rules:
+
 - Commands are thin invokers — they call a skill or agent. Business logic belongs in the skill, not the command.
 - One sentence of context, then the trigger
 - Don't duplicate skill documentation in the command — the skill is the single source of truth
@@ -57,6 +59,7 @@ Rules:
 Shell scripts triggered by Claude Code events (PreToolUse, PostToolUse, Stop, etc.). Registered in `settings.json`.
 
 Rules:
+
 - Always `#!/bin/bash` shebang + `set -e` for fail-fast
 - Read tool info from stdin as JSON: `tool_info=$(cat); tool_name=$(echo "$tool_info" | jq -r '.tool_name')`
 - Use `jq` for JSON parsing — already a dependency in CI
@@ -71,13 +74,16 @@ Rules:
 Path-scoped review/development rules loaded by the `/review` skill and as context injection by Claude Code.
 
 Rules:
+
 - Every package-specific rule file has YAML frontmatter with a `paths:` field listing glob patterns:
+
   ```yaml
   ---
   paths:
     - "packages/dialtone-vue/**/*.vue"
   ---
   ```
+
 - `general-rules.md` is the ONE exception — no `paths:` field, always loaded
 - Rules are prescriptive: forward-looking guidance, not a description of every file
 - One match in the codebase is enough to validate a pattern — bias toward adding rules, not removing them
@@ -87,11 +93,14 @@ Rules:
 
 Reusable workflows. Two forms:
 
-1. **Single-file skill**: `.claude/skills/<name>.md`
-2. **Directory skill**: `.claude/skills/<name>/SKILL.md` (use when the skill needs supporting files)
+1. **Native skill**: `.claude/skills/<name>/SKILL.md`.
+2. **Legacy workflow reference**: `.claude/skills/<name>.md`. Read it explicitly
+   when a command or task points to it; do not assume its frontmatter makes it
+   a natively discovered skill.
 
 Rules:
-- Directory form is preferred when the skill loads other files (templates, sub-prompts, helper scripts)
+
+- Use the directory form for new native skills, with or without supporting files
 - `SKILL.md` is the canonical entry — no `index.md`, no `README.md`
 - Skill body is written as procedural instructions for Claude, not as user-facing documentation
 
@@ -109,7 +118,8 @@ Project-level Claude Code settings. Common fields:
 ```
 
 Rules:
-- Local-only overrides go in `.claude/settings.local.md` or `.local.json` (gitignored)
+
+- Local-only overrides go in `.claude/settings.local.json` (gitignored)
 - Don't commit secrets — `env` values are visible to anyone with repo access
 - Adding a hook here without also adding the script in `hooks/` is broken — they ship together
 
@@ -125,8 +135,10 @@ These MUST stay gitignored. If you find one tracked, remove it.
 
 - Duplicating logic between an agent and its caller skill — pick one place
 - Hardcoding paths in agents/skills/hooks that break when the repo is cloned to a different location — use `$(git rev-parse --show-toplevel)` or relative paths
-- Adding rules with no `paths:` and no `general-rules.md` exemption — they'd never load
+- Omitting `paths:` from a rule intended to be conditional — it loads at launch instead of only for matching files
 - Skills with conflicting trigger phrases — be specific in descriptions to avoid ambiguous routing
 - Hooks that write to stdout — only stderr is safe for hook output; stdout corrupts the JSON-RPC frame
 - Commands with embedded logic — refactor into a skill, leave the command as a thin trigger
 - Editing global Claude Code rules (`~/.claude/rules/*.md`) instead of project-scoped ones — global rules affect every project the user opens
+
+For current loading behavior, check the official [memory and rules guide](https://code.claude.com/docs/en/memory) and [skills guide](https://code.claude.com/docs/en/skills). A configured instruction path does not prove that an assistant followed the instruction.
