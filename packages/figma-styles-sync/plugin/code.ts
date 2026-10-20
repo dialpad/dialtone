@@ -68,12 +68,28 @@ function indexVariablesByName (vars: Variable[]): Map<string, Variable | 'ambigu
   return index;
 }
 
-function resolveVariable (index: Map<string, Variable | 'ambiguous'>, name: string): Variable {
+/**
+ * A right-named, unambiguous variable can still be the wrong Figma type — a
+ * stray manual edit, or a variable recreated with the wrong type during some
+ * other cleanup, both leave the name intact. `setBoundVariable` rejects a
+ * type mismatch, but only once called, which validating existence alone
+ * doesn't catch: the resolve-everything-before-mutating guard this function
+ * exists for only holds if resolving also fails on a type that could never
+ * have bound in the first place.
+ */
+function resolveVariable (
+  index: Map<string, Variable | 'ambiguous'>,
+  name: string,
+  expectedType: VariableResolvedDataType,
+): Variable {
   const found = index.get(name);
   if (found === 'ambiguous') {
     throw new Error(`variable "${name}" exists in more than one local collection — cannot bind unambiguously`);
   }
   if (!found) throw new Error(`missing variable: ${name}`);
+  if (found.resolvedType !== expectedType) {
+    throw new Error(`variable "${name}" is ${found.resolvedType}, expected ${expectedType}`);
+  }
   return found;
 }
 
@@ -110,9 +126,9 @@ async function createTextStyles (specs: TextStyleSpec[]): Promise<CreateTextStyl
       // Resolve every variable before touching the document: an existing
       // style must come away untouched if any lookup below fails, and a
       // newly-created one must not be left behind empty.
-      const famVar = resolveVariable(varIndex, spec.fontFamily.variable);
-      const sizeVar = resolveVariable(varIndex, spec.fontSize.variable);
-      const weightVar = resolveVariable(varIndex, spec.fontWeight.variable);
+      const famVar = resolveVariable(varIndex, spec.fontFamily.variable, 'STRING');
+      const sizeVar = resolveVariable(varIndex, spec.fontSize.variable, 'FLOAT');
+      const weightVar = resolveVariable(varIndex, spec.fontWeight.variable, 'FLOAT');
 
       const existing = styleByName.get(spec.name);
       isNew = !existing;
@@ -188,6 +204,14 @@ interface CreateEffectStylesResult {
   errors: { name: string; error: string }[];
   totalStyles: number;
 }
+
+const EFFECT_FIELD_TYPE: Record<EffectBindableField, VariableResolvedDataType> = {
+  blur: 'FLOAT',
+  color: 'COLOR',
+  offsetX: 'FLOAT',
+  offsetY: 'FLOAT',
+  spread: 'FLOAT',
+};
 
 /** `radius` is the field name `setBoundVariableForEffect` expects for blur. */
 const EFFECT_FIELD_TO_API: Record<EffectBindableField, VariableBindableEffectField> = {
@@ -282,7 +306,7 @@ async function createEffectStyles (specs: EffectStyleSpec[]): Promise<CreateEffe
         };
 
         for (const field of EFFECT_BINDABLE_FIELDS) {
-          const variable = resolveVariable(varIndex, layer.variables[field]);
+          const variable = resolveVariable(varIndex, layer.variables[field], EFFECT_FIELD_TYPE[field]);
           effect = figma.variables.setBoundVariableForEffect(effect, EFFECT_FIELD_TO_API[field], variable);
         }
         return effect;
@@ -390,7 +414,7 @@ async function createPaintStyles (specs: PaintStyleSpec[]): Promise<CreatePaintS
       // Resolve every stop's variable before touching the document.
       const stops: ColorStop[] = spec.stops.map(stop => {
         if (stop.variable) {
-          const variable = resolveVariable(varIndex, stop.variable);
+          const variable = resolveVariable(varIndex, stop.variable, 'COLOR');
           const firstModeId = Object.keys(variable.valuesByMode)[0];
           const resolved = variable.valuesByMode[firstModeId] as RGBA;
           return {
