@@ -1,6 +1,6 @@
 # Dialtone Agent Resources
 
-Use this as the routing table for repo-local Codex skills. Keep default context small: load a skill only when its trigger matches the task, then load only the resources that skill references.
+Use this as the routing table for repo-local Codex skills. Shared contributor policy in `AGENTS.md` and `resources/rules/vue-components.md` also serves Claude; keep client-specific workflows separate. Keep default context small: load a skill only when its trigger matches the task, then load only the resources that skill references.
 
 ## Skills
 
@@ -39,7 +39,7 @@ no change is needed, or a named follow-up owner and gate. Reassess after materia
 review or integration changes. The PR introducing the behavior owns these updates.
 
 Keep root instructions short; update the owning rule, skill or resource instead
-of copying API facts into several files. Preserve required Claude/Codex peers.
+of copying API facts into several files. Preserve required Claude/Codex entrypoints. For shared topics, update the maintained policy once and keep both routes valid; do not recreate a copied peer.
 The [client loading and coverage matrix](resources/agent-tooling-parity.md)
 identifies the existing entrypoints and baseline responsibilities. It does not
 replace either client's workflows or guarantee model compliance.

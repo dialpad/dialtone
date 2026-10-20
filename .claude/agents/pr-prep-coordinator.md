@@ -39,8 +39,9 @@ If breaking changes found: ensure `BREAKING CHANGE:` footer in commits, suggest 
 
 ### 3. Documentation Completeness
 
-For each changed component, assess the artifacts in the root `CLAUDE.md`
-Documentation Pipeline, including CLI/MCP lookup data and Combinator outputs.
+For each changed component, read `.agents/resources/rules/vue-components.md`
+and assess its Component Artifact Pipeline, including CLI/MCP lookup data and
+Combinator outputs.
 Record which artifacts changed and why others need no change.
 
 - **New utilities**: verify docs JSON inclusion and documentation page

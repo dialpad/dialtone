@@ -37,18 +37,14 @@ When this command is used, Claude should:
    - New vs modified files
 
 5. **Resolve Jira ticket:**
-   - Check the oldest commit message on the branch for `DLT-\d+` pattern
-   - Check the branch name for patterns like `feat/DLT-123-description`
-   - Check recent commits for `DLT-\d+` pattern
-   - If no ticket found, create one via `mcp__atlassian__createJiraIssue`:
-     1. Get cloud ID from `mcp__atlassian__getAccessibleAtlassianResources`
-     2. Create issue with `projectKey: "DLT"`, `issueTypeName: "Task"`, and a summary derived from the PR changes
-   - If Jira MCP unavailable, use `NO-JIRA`
-   - Format as: `[DLT-XXX](https://dialpad.atlassian.net/browse/DLT-XXX)`
+   - Follow the shared ticket policy in root `AGENTS.md`.
+   - Use the current task's ticket or the ticket in the branch name. Ask if unresolved; do not guess from unrelated commit history.
+   - Keep `NO-JIRA` only when explicitly chosen. This workflow does not create Jira tickets.
+   - Use the plain ticket key in the public PR body.
 
 6. **Validate and set PR title:**
    - Must follow commitlint format (see CLAUDE.md Commit Convention)
-   - If the current PR title does not match, derive the correct title from the oldest commit message or the changes
+   - If the current PR title does not match, derive the correct title from the actual changes and resolved ticket
    - Update with `gh pr edit <PR_NUMBER> --title "<VALIDATED_TITLE>"`
 
 7. **Generate template with smart defaults:**
@@ -64,7 +60,7 @@ When this command is used, Claude should:
    Before generating the PR body, check for stale work artifacts (PLAN-*.md, SESSION_*.md, *.backup, etc.) in the working tree. If any are found, suggest running `/doc-janitor` to clean them up before opening the PR. Do not block — just inform the user and continue.
 
 10. **Flag documentation artifacts:**
-    Check all 6 documentation artifacts are updated (see CLAUDE.md Documentation Pipeline). Add a "Documentation Artifacts" section listing which are relevant to the changes. Mark artifacts already updated with a checkmark and those needing attention with a flag.
+    Read `.agents/resources/rules/vue-components.md` and assess its complete Component Artifact Pipeline. Add a "Documentation Artifacts" section listing which are relevant to the changes. Mark artifacts already updated with a checkmark and those needing attention with a flag.
 
 11. **Strip Co-Authored-By lines:**
     Before writing the final PR body, remove any `Co-Authored-By:` lines from the generated content. These must never appear in PR descriptions.
@@ -83,7 +79,7 @@ When this command is used, Claude should:
 
 ## Template Sections to Auto-Fill
 
-- PR Title (commitlint format, from oldest commit), Type of Change, Jira Ticket (linked URL)
+- PR Title (commitlint format, actual changes), Type of Change, Jira Ticket (plain key)
 - Description (summarized changes), Cross-Package Impact (if multi-package)
 - Documentation Artifacts (flagging what needs updates), Relevant checklists (based on file changes)
 
@@ -99,7 +95,7 @@ When this command is used, Claude should:
 - [x] Feature
 
 ## :book: Jira Ticket
-[DLT-123](https://dialpad.atlassian.net/browse/DLT-123)
+DLT-123
 
 ## :book: Description
 Add a new tooltip component to Dialtone with configurable placement,
@@ -125,7 +121,7 @@ Dependency flow: tokens --> **CSS** --> **Vue** --> docs/MCP/language-server
 | Storybook stories | Updated | Stories for all variants |
 | Component docs JSON | Updated | Props and events documented |
 | VuePress docs | Needs attention | Component page not yet created |
-| MCP server data | Needs attention | New component not yet registered |
+| CLI/MCP lookup data | Needs attention | Generated datasets need rebuilding |
 
 ## :bulb: Context
 

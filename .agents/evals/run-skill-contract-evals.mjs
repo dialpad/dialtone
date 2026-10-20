@@ -132,7 +132,7 @@ const claudeRuleParityAllowlist = new Map([
   ['dialtone-query-core', 'Skip exact-name parity'],
   ['general-rules', 'Skip exact-name parity'],
   ['link-and-button-navigation', 'Defer'],
-  ['slot-class-props', 'Defer'],
+  ['slot-class-props', 'Skip exact-name parity'],
 ]);
 
 const agentRuleParityAllowlist = new Map([
@@ -426,6 +426,22 @@ for (const [skillName, config] of Object.entries(skills)) {
 const ruleMap = read('.agents/resources/rule-map.md');
 const codexToolingRules = read('.agents/resources/rules/codex-tooling.md');
 const agentToolingParity = read('.agents/resources/agent-tooling-parity.md');
+assert(
+  /^@AGENTS\.md$/m.test(read('CLAUDE.md')),
+  'CLAUDE.md must import the shared root AGENTS.md policy',
+  failures,
+);
+for (const ruleName of ['vue-components', 'slot-class-props']) {
+  const sharedRule = '.agents/resources/rules/vue-components.md';
+  const adapter = `.claude/rules/${ruleName}.md`;
+  assert(
+    read(adapter).includes(`](../../${sharedRule})`) &&
+      existsSync(join(repoRoot, sharedRule)) &&
+      ruleMap.includes(sharedRule),
+    `${adapter} and the Codex rule map must route to ${sharedRule}`,
+    failures,
+  );
+}
 const badRuleParityFixture = `
 | Claude rule | Codex peer or status | Decision | Rationale |
 | --- | --- | --- | --- |
