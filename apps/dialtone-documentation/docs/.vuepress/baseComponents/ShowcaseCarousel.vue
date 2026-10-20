@@ -175,6 +175,8 @@ onMounted(() => {
 
     const fineHoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
     const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    // The pause control, reduced motion, and a hidden page all stop the scroll and the videos.
+    const isMotionStopped = () => isPaused.value || reducedMotionQuery.matches || document.hidden;
 
     // Clones don't inherit Vue's `muted` prop binding, and browsers block
     // unmuted autoplay, so mute every video (originals and clones) explicitly.
@@ -192,7 +194,7 @@ onMounted(() => {
     });
 
     const playVideo = (video) => {
-      if (isPaused.value || reducedMotionQuery.matches || document.hidden) return;
+      if (isMotionStopped()) return;
       video.play().catch(() => {});
     };
 
@@ -216,7 +218,7 @@ onMounted(() => {
     // paused on their posters. IntersectionObserver doesn't report a hidden tab,
     // so page visibility is checked here too (and re-synced on visibilitychange).
     const syncVideoPlayback = () => {
-      if (!videoObserver || isPaused.value || reducedMotionQuery.matches || document.hidden) {
+      if (!videoObserver || isMotionStopped()) {
         carouselVideos.forEach(video => video.pause());
         return;
       }
@@ -314,13 +316,7 @@ onMounted(() => {
     };
 
     const startAnimation = () => {
-      if (
-        !isVisible ||
-        isPaused.value ||
-        isTouchScrolling ||
-        reducedMotionQuery.matches ||
-        carouselPeriod <= 0
-      ) return;
+      if (!isVisible || isTouchScrolling || isMotionStopped() || carouselPeriod <= 0) return;
 
       if (usesCompositorAutoplay) {
         carousel.classList.remove('showcase-carousel__track--autoplay-paused');
@@ -331,8 +327,10 @@ onMounted(() => {
       animationId = requestAnimationFrame(animateCarousel);
     };
 
-    applyPauseState = () => {
-      if (isPaused.value) {
+    // Re-applies motion state after a pause toggle, a reduced-motion change, or a page
+    // visibility change, including the compositor animation on touch devices.
+    const syncMotion = () => {
+      if (isMotionStopped()) {
         stopAnimation();
       } else {
         startAnimation();
@@ -340,14 +338,7 @@ onMounted(() => {
       syncVideoPlayback();
     };
 
-    const handleReducedMotionChange = () => {
-      if (reducedMotionQuery.matches) {
-        stopAnimation();
-      } else {
-        startAnimation();
-      }
-      syncVideoPlayback();
-    };
+    applyPauseState = syncMotion;
 
     const clearScrollIdleTimer = () => {
       if (scrollIdleTimer === null) return;
@@ -430,8 +421,8 @@ onMounted(() => {
     carouselContainer.addEventListener('touchcancel', handleTouchEnd, { passive: true });
     carouselContainer.addEventListener('scroll', handleScroll, { passive: true });
     carouselContainer.addEventListener('scrollend', handleScrollEnd);
-    reducedMotionQuery.addEventListener('change', handleReducedMotionChange);
-    document.addEventListener('visibilitychange', syncVideoPlayback);
+    reducedMotionQuery.addEventListener('change', syncMotion);
+    document.addEventListener('visibilitychange', syncMotion);
     window.addEventListener('resize', handleResize);
 
     if ('IntersectionObserver' in window) {
@@ -457,8 +448,8 @@ onMounted(() => {
       carouselContainer.removeEventListener('touchcancel', handleTouchEnd);
       carouselContainer.removeEventListener('scroll', handleScroll);
       carouselContainer.removeEventListener('scrollend', handleScrollEnd);
-      reducedMotionQuery.removeEventListener('change', handleReducedMotionChange);
-      document.removeEventListener('visibilitychange', syncVideoPlayback);
+      reducedMotionQuery.removeEventListener('change', syncMotion);
+      document.removeEventListener('visibilitychange', syncMotion);
       window.removeEventListener('resize', handleResize);
     };
   }
