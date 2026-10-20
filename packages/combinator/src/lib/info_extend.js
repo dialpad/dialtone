@@ -28,10 +28,11 @@ export function extendMember (member) {
 }
 
 export function extendBinding (member, defaults) {
-  const defaultValue = Object.entries(defaults).find(([name]) => {
+  const defaultEntry = Object.entries(defaults).find(([name]) => {
     return name === member.name;
   })?.[1];
 
+  const defaultValue = defaultEntry?.default;
   const defaultType = typeOfMemberValue(defaultValue);
 
   delete member.defaultValue;
@@ -42,6 +43,10 @@ export function extendBinding (member, defaults) {
 
   if (defaultType) {
     member.defaultType = defaultType;
+  }
+
+  if (defaultEntry?.validator) {
+    member.validator = defaultEntry.validator;
   }
 }
 

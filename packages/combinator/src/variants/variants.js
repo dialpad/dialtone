@@ -49,6 +49,7 @@ import DtScroller from './variants_scroller.js';
 import DtSegmentedControl from './variants_segmented_control.js';
 import DtSelectMenu from './variants_select_menu.js';
 import DtSkeleton from './variants_skeleton.js';
+import DtSlider from './variants_slider.js';
 import DtSplitButton from './variants_split_button.js';
 import DtStack from './variants_stack.js';
 import DtTabGroup from './variants_tab_group.js';
@@ -112,6 +113,7 @@ export default function variants () {
     DtSegmentedControl,
     DtSelectMenu,
     DtSkeleton,
+    DtSlider,
     DtSplitButton,
     DtStack,
     DtTabGroup,
