@@ -78,6 +78,58 @@ const fixture: DocumentationRecord[] = [
 
 // ─── Basic search behavior ───────────────────────────────────────────────────
 
+describe('explicit directive documentation routing', () => {
+  test.each([
+    ['v-dt-mode', 'mode', ['@dialpad/dialtone-vue', 'app.use(DtModeDirective)']],
+    ['v-dt-mode mode', 'mode', ['app.use(DtModeDirective)']],
+    ['DtScrollbarDirective registration', 'scrollbar', ['app.use(DtScrollbarDirective)', 'single child']],
+    ['v-dt-mode:dark', 'mode', ['<section v-dt-mode:dark>', '<section v-dt-mode:light>']],
+    ['v-dt-focusgroup.horizontal', 'focusgroup', ['horizontal', 'Left/Right', 'bound value', 'ignores arguments and modifiers']],
+    ['DtFocustrapDirective', 'focustrap', ['app.use(DtFocustrapDirective)', 'accessible name']],
+    ['DtTooltipDirective modifiers', 'tooltip', ['no-delay', 'no-transition']],
+    ['v-dt-tooltip options', 'tooltip', ['message', 'showArrow']],
+  ])('%s selects its requested public contract facts', (query, name, facts) => {
+    const { results } = searchDocumentation(query, documentation);
+    expect(results.map(result => result.details.docId)).toEqual([`directives/${name}`]);
+    const text = formatDocumentationResults(results, query).replace(/\s+/g, ' ');
+    for (const fact of facts) expect(text).toContain(fact);
+  });
+
+  test('a directive excerpt qualifies its source and links the authoritative Storybook contract', () => {
+    const { results } = searchDocumentation('DtTooltipDirective', documentation);
+    const text = formatDocumentationResults(results, 'DtTooltipDirective');
+    expect(text).toContain('Source reference: @dialpad/dialtone-vue@');
+    expect(text).toContain('installed compatibility not checked');
+    expect(text).toContain('[Storybook](https://dialtone.dialpad.com/vue/?path=/docs/directives-tooltip--docs)');
+  });
+
+  test.each(['v-dt-unknown directive', 'v-dt-focus-group'])('%s does not return incidental directive or component prose', (query) => {
+    const { results, notes } = searchDocumentation(query, documentation);
+    expect(results).toEqual([]);
+    expect(notes.join(' ')).toContain('No directive documentation');
+  });
+
+  test('reports every missing directive while retaining the known contract', () => {
+    const { results, notes } = searchDocumentation(
+      'v-dt-tooltip and v-dt-unknown and DtMissingDirective', documentation,
+    );
+    expect(results.map(result => result.details.docId)).toEqual(['directives/tooltip']);
+    expect(notes).toEqual([
+      'No directive documentation found for "unknown".',
+      'No directive documentation found for "missing".',
+    ]);
+  });
+
+  test.each([
+    ['v-dt-focusgroup versus DtFocustrapDirective', ['directives/focusgroup', 'directives/focustrap']],
+    ['DtModeIsland versus v-dt-mode', ['components/mode-island', 'directives/mode']],
+    ['DtModal and DtFocustrapDirective', ['components/modal', 'directives/focustrap']],
+  ])('%s retains both specifically named contracts', (query, expected) => {
+    const { results } = searchDocumentation(query, documentation);
+    expect(results.map(result => result.details.docId).sort()).toEqual(expected);
+  });
+});
+
 describe('searchDocumentation', () => {
   test('returns empty results for empty query', () => {
     const { results, notes } = searchDocumentation('', fixture);
@@ -218,6 +270,17 @@ describe('formatDocumentationResults', () => {
     const { results } = searchDocumentation('button', fixture);
     const formatted = formatDocumentationResults(results, 'button');
     expect(formatted).toContain('dialtone.dialpad.com');
+  });
+
+  test.each(['`', '~'])('closes a truncated directive %s fence before its links', marker => {
+    const result = searchDocumentation('button', fixture).results[0];
+    const fence = marker.repeat(4);
+    const content = `${fence}html\n${marker.repeat(3)}\n${'example\n'.repeat(100)}${fence}`;
+    const details = { ...result.details, docId: 'directives/example', content };
+    const formatted = formatDocumentationResults([{ ...result, details }], 'example');
+    expect(formatted).toContain(`...\n${fence}\n[Storybook]`);
+    const ordinary = formatDocumentationResults([{ ...result, details: { ...details, docId: 'example' } }], 'example');
+    expect(ordinary).toContain('...\n[Storybook]');
   });
 
   test('reports the unmatched documentation query explicitly', () => {
