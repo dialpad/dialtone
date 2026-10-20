@@ -1,5 +1,5 @@
 import { rgbToHex } from './color.js';
-import { ApiGetLocalVariablesResponse, Variable } from './figma_api.js';
+import { ApiGetLocalVariablesResponse, Color, Variable, VariableAlias } from './figma_api.js';
 import { Token, TokensFile } from './token_types.js';
 
 function tokenTypeFromVariable (variable: Variable) {
@@ -32,6 +32,22 @@ function getCustomType (variable: Variable) {
   return customTypeMap[variableNames[0]][variableNames[1]] || customTypeMap[variableNames[0]][variableNames[0]];
 }
 
+/** Resolves a colour channel that may itself be an alias, to a literal. */
+function resolveColorChannel (
+  value: Color | VariableAlias,
+  localVariables: { [id: string]: Variable },
+  modeId: string,
+): Color {
+  if (!('type' in value)) return value;
+
+  const aliased = localVariables[value.id];
+  const aliasedValue = aliased.valuesByMode[modeId];
+  if (typeof aliasedValue !== 'object' || !('r' in aliasedValue)) {
+    throw new Error(`composedColor's colour alias did not resolve to a literal colour: ${aliased.name}`);
+  }
+  return aliasedValue;
+}
+
 function tokenValueFromVariable (
   variable: Variable,
   modeId: string,
@@ -44,6 +60,23 @@ function tokenValueFromVariable (
       return `{${aliasedVariable.name.replace(/\//g, '.')}}`;
     } else if ('r' in value) {
       return rgbToHex(value);
+    } else if ('color' in value && 'opacity' in value) {
+      // A VariableComposedColor — build_variables.ts's write side for a
+      // Tokens Studio `alpha` modifier (see token_types.ts's `composedColor`
+      // doc). There's no alias-plus-modify form to round-trip here that this
+      // export format already has a place for, so this flattens it to the
+      // literal it currently paints as, same as any other colour this
+      // exporter hands back — a value a consumer with no Figma-specific
+      // knowledge can still use, which is this whole format's point.
+      const color = resolveColorChannel(value.color, localVariables, modeId);
+      // The write side only ever composes a literal opacity (see
+      // build_variables.ts's own `composedColor`), never an aliased one — an
+      // aliased opacity has no literal to flatten to, so there's nothing
+      // sensible to export.
+      if (typeof value.opacity !== 'number') {
+        throw new Error('composedColor with an aliased opacity cannot be flattened to a literal');
+      }
+      return rgbToHex({ ...color, a: value.opacity / 100 });
     }
 
     throw new Error(`Format of variable value is invalid: ${value}`);

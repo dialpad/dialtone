@@ -304,6 +304,67 @@ describe('tokenFilesFromLocalVariables', () => {
     })
   })
 
+  it('flattens a VariableComposedColor to the literal it currently paints as', () => {
+    const localVariablesResponse: ApiGetLocalVariablesResponse = {
+      status: 200,
+      error: false,
+      meta: {
+        variableCollections: {
+          'VariableCollectionId:1:1': {
+            id: 'VariableCollectionId:1:1',
+            name: 'primitives',
+            modes: [{ modeId: '1:0', name: 'mode1' }],
+            defaultModeId: '1:0',
+            remote: false,
+            hiddenFromPublishing: false,
+          },
+        },
+        variables: {
+          'VariableID:2:1': {
+            id: 'VariableID:2:1',
+            name: 'color/black/900',
+            key: 'variable_key1',
+            variableCollectionId: 'VariableCollectionId:1:1',
+            resolvedType: 'COLOR',
+            valuesByMode: {
+              '1:0': { r: 0.1, g: 0.2, b: 0.3, a: 1 },
+            },
+            remote: false,
+            description: '',
+            hiddenFromPublishing: false,
+            scopes: ['ALL_SCOPES'],
+            codeSyntax: {},
+          },
+          // An alpha-modified alias to color/black/900 — build_variables.ts's
+          // write side for a Tokens Studio `alpha` modifier.
+          'VariableID:2:2': {
+            id: 'VariableID:2:2',
+            name: 'color/surface/primary-opaque',
+            key: 'variable_key2',
+            variableCollectionId: 'VariableCollectionId:1:1',
+            resolvedType: 'COLOR',
+            valuesByMode: {
+              '1:0': {
+                color: { type: 'VARIABLE_ALIAS', id: 'VariableID:2:1' },
+                opacity: 50,
+              },
+            },
+            remote: false,
+            description: '',
+            hiddenFromPublishing: false,
+            scopes: ['ALL_SCOPES'],
+            codeSyntax: {},
+          },
+        },
+      },
+    }
+
+    const tokenFiles = tokenFilesFromLocalVariables(localVariablesResponse)
+
+    expect(tokenFiles['primitives.mode1.json'].color.surface['primary-opaque'].$value)
+      .toBe('#1a334d80')
+  })
+
   it('handles aliases', () => {
     const localVariablesResponse: ApiGetLocalVariablesResponse = {
       status: 200,
