@@ -285,6 +285,14 @@ export const HIDDEN: HiddenRule[] = [
     match: t => RAW_COLOUR_RAMP.test(t.name),
   },
   {
+    // `spacing.base` (8px) and `layout.base` (64px) are the foundational
+    // multiplier each scale is built from, not a usable stop on it —
+    // `layout.base` isn't even a literal, it's `{size.base} * 8`. Neither is
+    // meant to be bound in a design the way `spacing.200` or `layout.400` is.
+    label: 'base multiplier, not a usable scale stop',
+    match: t => t.name === 'spacing.base' || t.name === 'layout.base',
+  },
+  {
     // Not a reference-only or deprecated case like the others above — this one
     // is actively broken if used as its own scope invites: Figma always reads
     // a bound line-height variable's number as PIXELS, never as the unitless

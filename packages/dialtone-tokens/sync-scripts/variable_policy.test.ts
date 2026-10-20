@@ -110,6 +110,13 @@ describe('hidden from publishing', () => {
     expect(hiddenRuleFor(base('opacity.100', 'number'))).toBeNull()
     expect(hiddenRuleFor(base('shadow.small'))).toBeNull()
   })
+
+  it('hides spacing.base and layout.base — the scale\'s multiplier, not one of its stops', () => {
+    expect(hiddenRuleFor(token('spacing.base'))).toMatch(/base multiplier/)
+    expect(hiddenRuleFor(token('layout.base'))).toMatch(/base multiplier/)
+    // Not a prefix match — a stop that merely contains "base" stays visible.
+    expect(hiddenRuleFor(token('spacing.base-ish'))).toBeNull()
+  })
 })
 
 describe('exclusions', () => {
