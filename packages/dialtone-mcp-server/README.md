@@ -206,6 +206,9 @@ pnpm nx run dialtone-mcp-server:test-startup
 
 From the package directory, `pnpm run test:startup` invokes `node --test` directly
 and requires an existing server build. Use the Nx target above to build first.
+Protocol checks likewise build first with `pnpm nx run dialtone-mcp-server:test-protocol`.
+The package-level `pnpm run test:protocol` is a direct Node/tsx runner and requires
+a current build; CI builds both adapters before invoking it.
 Release-path regressions run with `pnpm run test:release-paths`.
 Both regression suites run in the path-filtered Unit Tests workflow.
 
