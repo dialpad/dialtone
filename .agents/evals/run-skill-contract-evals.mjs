@@ -447,7 +447,6 @@ assert(
   failures,
 );
 for (const ruleName of ['vue-components', 'slot-class-props']) {
-  const sharedRule = '.agents/resources/rules/vue-components.md';
   const adapter = `.claude/rules/${ruleName}.md`;
   assert(
     /^---\npaths:\n {2}- ["']packages\/dialtone-vue\/components\/\*\*["']\n---/.test(
@@ -457,10 +456,10 @@ for (const ruleName of ['vue-components', 'slot-class-props']) {
     failures,
   );
   assert(
-    read(adapter).includes(`](../../${sharedRule})`) &&
-      existsSync(join(repoRoot, sharedRule)) &&
-      ruleMap.includes(sharedRule),
-    `${adapter} and the Codex rule map must route to ${sharedRule}`,
+    read(adapter).includes(`](../../${sharedVueRule})`) &&
+      existsSync(join(repoRoot, sharedVueRule)) &&
+      ruleMap.includes(sharedVueRule),
+    `${adapter} and the Codex rule map must route to ${sharedVueRule}`,
     failures,
   );
 }

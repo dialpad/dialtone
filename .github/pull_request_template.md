@@ -31,7 +31,7 @@ These types will not increment the version number, but will still deploy to docu
 
 ## :book: Jira Ticket
 
-<!--- Enter the plain Jira ticket key associated with this PR; keep private tracker links out of this public repository -->
+<!--- Enter the plain Jira ticket key associated with this PR, or NO-JIRA when explicitly chosen; keep private tracker links out of this public repository -->
 
 ## :book: Description
 

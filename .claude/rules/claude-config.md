@@ -15,7 +15,7 @@ Per-project Claude Code configuration: agents, commands, hooks, rules, skills, a
 ├── commands/      # Slash command triggers (thin invokers)
 ├── hooks/         # Shell scripts triggered by Claude Code events
 ├── rules/         # Path-scoped rule files (this directory)
-├── skills/        # Reusable workflows (Markdown or directory with SKILL.md)
+├── skills/        # Native skills (<name>/SKILL.md) and legacy workflow references (<name>.md)
 ├── plans/         # Plan files (gitignored — local working state)
 ├── tsc-cache/     # Session cache (gitignored)
 └── settings.json  # Project-level Claude Code settings
