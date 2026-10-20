@@ -62,11 +62,11 @@ The second is to check with the Dialtone team (in the #dialtone Dialpad channel)
 
 ### Working with coding assistants
 
-Dialtone maintains separate [Codex instructions](../AGENTS.md) and
-[Claude Code instructions](../CLAUDE.md), with task-specific rules and workflows.
+Dialtone's [shared contributor guide](../AGENTS.md) is read by Codex and imported
+by [Claude Code's entrypoint](../CLAUDE.md). Each client retains its own task routing and workflows.
 The [loading and coverage matrix](../.agents/resources/agent-tooling-parity.md)
-explains which files each client uses and what has been checked. When your change
-affects contributor guidance, include the necessary updates in the same PR.
+explains which files each client uses, what has been checked and how to maintain
+the affected guidance with your change.
 
 ### Feature request
 
@@ -104,7 +104,7 @@ This is why it is important to evaluate the change carefully and assess its impa
 Any new components or updates to existing components require the following:
 
 - Unit tests covering the entire change.
-- Storybook documentation including a live rendered component via controls and MDX. See [the documentation](https://dialtone.dialpad.com/vue/?path=/docs/docs-storybook-getting-started--docs)
+- Storybook documentation including a live rendered component via controls; maintain MDX where the component uses it. See [the documentation](https://dialtone.dialpad.com/vue/?path=/docs/docs-storybook-getting-started--docs)
 - Component is accessible according to requirements.
   - Navigable by keyboard.
   - Read by a screen reader.

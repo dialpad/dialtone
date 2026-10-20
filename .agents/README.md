@@ -33,16 +33,7 @@ Use this as the routing table for repo-local Codex skills. Shared contributor po
 
 ## Instruction Maintenance
 
-When planning a change and before PR readiness, assess the affected contributor
-instructions alongside public documentation. Record which guidance changed, why
-no change is needed, or a named follow-up owner and gate. Reassess after material
-review or integration changes. The PR introducing the behavior owns these updates.
-
-Keep root instructions short; update the owning rule, skill or resource instead
-of copying API facts into several files. Preserve required Claude/Codex entrypoints. For shared topics, update the maintained policy once and keep both routes valid; do not recreate a copied peer.
-The [client loading and coverage matrix](resources/agent-tooling-parity.md)
-identifies the existing entrypoints and baseline responsibilities. It does not
-replace either client's workflows or guarantee model compliance.
+Follow the root contributor guide and the [instruction-maintenance procedure](resources/agent-tooling-parity.md#instruction-maintenance) during planning, PR readiness and material review/integration changes. Update shared policy once and keep the required client routes valid.
 
 ## Eval Commands
 

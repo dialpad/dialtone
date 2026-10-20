@@ -5,6 +5,4 @@ paths:
 
 # Slot Class Props Convention
 
-Before component work or review, read the [shared Vue conventions and artifact pipeline](../../.agents/resources/rules/vue-components.md). Apply its API, slot-class, size and artifact rules; maintain that resource rather than a second copy here.
-
-This file retains Claude's path-scoped trigger. The link is an instruction to read the shared resource, not an automatic import.
+The [component-local CLAUDE.md](../../packages/dialtone-vue/components/CLAUDE.md) imports the [shared Vue conventions and artifact pipeline](../../.agents/resources/rules/vue-components.md) when Claude works in this subtree. Maintain policy in that shared resource; this adapter retains the existing scoped rule name.

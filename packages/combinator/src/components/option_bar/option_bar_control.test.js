@@ -66,4 +66,241 @@ describe('option_bar_control.vue test', function () {
 
     expect(wrapper.findComponent({ name: 'DtcControlString' }).props('label')).toBe('fallback label');
   });
+
+  describe('RAW JSON toggle', function () {
+    const textareaSelector = 'textarea[data-qa=dt-input-input]';
+
+    // Simulates a member like Slider's modelValue: Number | Number[] — the
+    // active control is scalar (number), but validControls also lists
+    // 'array' so a consumer can switch representations via raw JSON.
+    const numberOrArrayMember = {
+      controlData: controlMap.number,
+      validControls: ['number', 'array'],
+      label: 'range',
+      description: 'range description',
+      value: 50,
+    };
+
+    // Scalar controls (e.g. DtcControlNumber's clearable shell) render their
+    // own <button> too, so a bare `find('button')` can pick up the wrong
+    // one — filter by the RAW toggle's own text instead.
+    function findRawButton (w) {
+      return w.findAll('button').find((b) => b.text().trim() === 'RAW');
+    }
+
+    it('shows the RAW toggle when validControls includes array, even though the active control is scalar', function () {
+      wrapper = mount(DtcOptionBarControl, { props: numberOrArrayMember });
+      expect(findRawButton(wrapper)).toBeTruthy();
+    });
+
+    it('hides the RAW toggle when validControls has neither array nor object and the control is scalar', function () {
+      wrapper = mount(DtcOptionBarControl, {
+        props: { ...numberOrArrayMember, validControls: ['number'] },
+      });
+      expect(findRawButton(wrapper)).toBeUndefined();
+    });
+
+    it('hides the RAW toggle for a string|array|object union (e.g. any *Class prop)', function () {
+      // Every *Class prop across the library (labelClass, iconClass, etc.) is
+      // typed [String, Array, Object] — validControls always includes
+      // 'string' for these. Without excluding 'string', the toggle would
+      // show up on virtually every class-override control, not just
+      // genuinely array/object-shaped props like Slider's modelValue.
+      wrapper = mount(DtcOptionBarControl, {
+        props: { ...numberOrArrayMember, validControls: ['string', 'array', 'object'], value: '' },
+      });
+      expect(findRawButton(wrapper)).toBeUndefined();
+    });
+
+    it('shows the RAW toggle for an array control component regardless of validControls', function () {
+      wrapper = mount(DtcOptionBarControl, {
+        props: {
+          controlData: controlMap.array,
+          validControls: ['array'],
+          label: 'list',
+          value: [1, 2, 3],
+        },
+      });
+      expect(findRawButton(wrapper)).toBeTruthy();
+    });
+
+    it('enters raw mode and seeds the textarea with the JSON5-serialized current value', async function () {
+      wrapper = mount(DtcOptionBarControl, { props: numberOrArrayMember });
+      await findRawButton(wrapper).trigger('click');
+      const textarea = wrapper.find(textareaSelector);
+      expect(textarea.exists()).toBe(true);
+      expect(textarea.element.value).toBe('50');
+    });
+
+    it('emits the parsed value as the user edits valid JSON5, switching a scalar to an array', async function () {
+      wrapper = mount(DtcOptionBarControl, { props: numberOrArrayMember });
+      await findRawButton(wrapper).trigger('click');
+      await wrapper.find(textareaSelector).setValue('[20, 70]');
+      const emitted = wrapper.emitted('update:value');
+      expect(emitted).toBeTruthy();
+      expect(emitted[emitted.length - 1][0]).toEqual([20, 70]);
+    });
+
+    it('does not emit while the raw text is invalid JSON5', async function () {
+      wrapper = mount(DtcOptionBarControl, { props: numberOrArrayMember });
+      await findRawButton(wrapper).trigger('click');
+      const beforeCount = (wrapper.emitted('update:value') || []).length;
+      await wrapper.find(textareaSelector).setValue('[20, 70'); // unclosed bracket
+      const after = wrapper.emitted('update:value') || [];
+      expect(after.length).toBe(beforeCount);
+    });
+
+    it('switches back out of raw mode when toggled again, hiding the textarea', async function () {
+      // The RAW button sits under the same dynamic <component :is="rawMode
+      // ? 'dt-text' : controlComponent"> that swaps between the scalar
+      // control and dt-text, so it's remounted on every toggle — a wrapper
+      // reference found before the toggle points at a detached node
+      // afterward. Re-find it fresh each time rather than caching it.
+      wrapper = mount(DtcOptionBarControl, { props: numberOrArrayMember });
+      await findRawButton(wrapper).trigger('click');
+      expect(wrapper.find(textareaSelector).exists()).toBe(true);
+      await findRawButton(wrapper).trigger('click');
+      expect(wrapper.find(textareaSelector).exists()).toBe(false);
+    });
+
+    it('re-seeds the textarea from the latest value when re-entering raw mode', async function () {
+      wrapper = mount(DtcOptionBarControl, { props: numberOrArrayMember });
+      await findRawButton(wrapper).trigger('click');
+      await findRawButton(wrapper).trigger('click'); // back to the scalar control
+      await wrapper.setProps({ value: 75 });
+      await findRawButton(wrapper).trigger('click'); // re-enter raw mode
+      expect(wrapper.find(textareaSelector).element.value).toBe('75');
+    });
+
+    it('does not emit an update just from opening raw mode, before any edit', async function () {
+      wrapper = mount(DtcOptionBarControl, { props: numberOrArrayMember });
+      await findRawButton(wrapper).trigger('click');
+      expect(wrapper.emitted('update:value')).toBeFalsy();
+    });
+
+    it('still emits a real edit made right after reopening raw mode with an unchanged value', async function () {
+      // Reopening with the SAME value means rawText is reassigned the exact
+      // string it already held — Vue's watch() never fires for a no-op
+      // assignment, so a naive "always suppress the next change" flag would
+      // never get consumed and would incorrectly swallow the edit below.
+      wrapper = mount(DtcOptionBarControl, { props: numberOrArrayMember });
+      await findRawButton(wrapper).trigger('click');
+      await findRawButton(wrapper).trigger('click'); // close, value never changed
+      await findRawButton(wrapper).trigger('click'); // reopen — re-seeds the same "50"
+      await wrapper.find(textareaSelector).setValue('51');
+      const emitted = wrapper.emitted('update:value');
+      expect(emitted).toBeTruthy();
+      expect(emitted[emitted.length - 1][0]).toBe(51);
+    });
+
+    it('does not emit an update when the textarea is reseeded by an external value change', async function () {
+      wrapper = mount(DtcOptionBarControl, { props: numberOrArrayMember });
+      await findRawButton(wrapper).trigger('click');
+      await wrapper.setProps({ value: 75 });
+      expect(wrapper.emitted('update:value')).toBeFalsy();
+    });
+
+    it('does not emit a raw-edited value whose shape is not in validControls', async function () {
+      // numberOrArrayMember's validControls is ['number', 'array'] — a
+      // string is neither, so typing one should never reach the component.
+      wrapper = mount(DtcOptionBarControl, { props: numberOrArrayMember });
+      await findRawButton(wrapper).trigger('click');
+      await wrapper.find(textareaSelector).setValue('"hello"');
+      expect(wrapper.emitted('update:value')).toBeFalsy();
+    });
+
+    it('does not emit a raw-edited array whose length fails the live prop validator', async function () {
+      // Mimics Slider's modelValue: Number | Number[], but only a 2-element
+      // array is actually valid — validControls alone can't express that,
+      // so RAW mode needs the component's own validator to catch it.
+      wrapper = mount(DtcOptionBarControl, {
+        props: {
+          ...numberOrArrayMember,
+          args: { validator: (value) => !Array.isArray(value) || value.length === 2 },
+        },
+      });
+      await findRawButton(wrapper).trigger('click');
+      await wrapper.find(textareaSelector).setValue('[10, 20, 30]');
+      expect(wrapper.emitted('update:value')).toBeFalsy();
+    });
+
+    it('still emits a raw-edited array that passes the live prop validator', async function () {
+      wrapper = mount(DtcOptionBarControl, {
+        props: {
+          ...numberOrArrayMember,
+          args: { validator: (value) => !Array.isArray(value) || value.length === 2 },
+        },
+      });
+      await findRawButton(wrapper).trigger('click');
+      await wrapper.find(textareaSelector).setValue('[10, 20]');
+      const emitted = wrapper.emitted('update:value');
+      expect(emitted).toBeTruthy();
+      expect(emitted[emitted.length - 1][0]).toEqual([10, 20]);
+    });
+
+    it('emits a raw-edited array of any length for a generic array control (no validator)', async function () {
+      wrapper = mount(DtcOptionBarControl, {
+        props: {
+          controlData: controlMap.array,
+          validControls: ['array'],
+          label: 'list',
+          value: [1, 2, 3],
+        },
+      });
+      await findRawButton(wrapper).trigger('click');
+      await wrapper.find(textareaSelector).setValue('[1, 2, 3, 4, 5]');
+      const emitted = wrapper.emitted('update:value');
+      expect(emitted).toBeTruthy();
+      expect(emitted[emitted.length - 1][0]).toEqual([1, 2, 3, 4, 5]);
+    });
+
+    it('emits null from raw mode even though null is not itself listed in validControls', async function () {
+      wrapper = mount(DtcOptionBarControl, { props: numberOrArrayMember });
+      await findRawButton(wrapper).trigger('click');
+      await wrapper.find(textareaSelector).setValue('null');
+      const emitted = wrapper.emitted('update:value');
+      expect(emitted).toBeTruthy();
+      expect(emitted[emitted.length - 1][0]).toBeNull();
+    });
+
+    it('does not emit a raw-edited null for a required member — required members are not clearable', async function () {
+      // option_bar_member_group.vue's extendMember already computes
+      // clearable: false for required members — RAW mode typing 'null'
+      // directly must not be able to sidestep that same restriction.
+      wrapper = mount(DtcOptionBarControl, { props: { ...numberOrArrayMember, required: true } });
+      await findRawButton(wrapper).trigger('click');
+      await wrapper.find(textareaSelector).setValue('null');
+      expect(wrapper.emitted('update:value')).toBeFalsy();
+    });
+
+    it('does not emit a raw-edited null for an optional member marked non-clearable via args', async function () {
+      // required is the common reason a member isn't clearable, but not the
+      // only one — extendMember also computes clearable: false for an
+      // optional member with a meaningful non-nullish default, or an
+      // explicit override, and threads it through as args.clearable. RAW
+      // mode must honor that too, not just the required flag.
+      wrapper = mount(DtcOptionBarControl, {
+        props: { ...numberOrArrayMember, args: { clearable: false } },
+      });
+      await findRawButton(wrapper).trigger('click');
+      await wrapper.find(textareaSelector).setValue('null');
+      expect(wrapper.emitted('update:value')).toBeFalsy();
+    });
+
+    it.each([
+      ['locked', { locked: true }],
+      ['disabled', { disabled: true }],
+    ])('disables the RAW textarea and blocks edits from emitting when %s', async function (_label, extraProps) {
+      wrapper = mount(DtcOptionBarControl, { props: { ...numberOrArrayMember, ...extraProps } });
+      await findRawButton(wrapper).trigger('click');
+      const textarea = wrapper.find(textareaSelector);
+      expect(textarea.attributes('disabled')).toBeDefined();
+
+      // setValue() drives the DOM node directly, bypassing the disabled
+      // attribute the same way a stray programmatic write could — this is
+      // exactly what the watcher's own locked/disabled guard defends against.
+      await textarea.setValue('51');
+      expect(wrapper.emitted('update:value')).toBeFalsy();
+    });
+  });
 });

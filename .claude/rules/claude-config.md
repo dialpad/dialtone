@@ -84,7 +84,7 @@ Rules:
   ---
   ```
 
-- `general-rules.md` is the ONE exception — no `paths:` field, always loaded
+- Rules without `paths:` load at launch, including `general-rules.md`, `logical-naming.md` and `link-and-button-navigation.md`. Use a scope when guidance applies only to selected files.
 - Rules are prescriptive: forward-looking guidance, not a description of every file
 - One match in the codebase is enough to validate a pattern — bias toward adding rules, not removing them
 - Keep each file scoped — `vue-components.md` for components, `vue-tests.md` for tests, etc. Don't pile unrelated rules into one file.

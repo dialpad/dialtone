@@ -427,13 +427,35 @@ const ruleMap = read('.agents/resources/rule-map.md');
 const codexToolingRules = read('.agents/resources/rules/codex-tooling.md');
 const agentToolingParity = read('.agents/resources/agent-tooling-parity.md');
 assert(
-  /^@AGENTS\.md$/m.test(read('CLAUDE.md')),
+  read('CLAUDE.md').startsWith('@AGENTS.md\n'),
   'CLAUDE.md must import the shared root AGENTS.md policy',
+  failures,
+);
+const componentInstructions = 'packages/dialtone-vue/components/CLAUDE.md';
+const sharedVueRule = '.agents/resources/rules/vue-components.md';
+assert(
+  existsSync(join(repoRoot, componentInstructions)) &&
+    read(componentInstructions).trim() === `@../../../${sharedVueRule}` &&
+    existsSync(
+      resolve(
+        repoRoot,
+        dirname(componentInstructions),
+        `../../../${sharedVueRule}`,
+      ),
+    ),
+  `${componentInstructions} must import the shared Vue policy`,
   failures,
 );
 for (const ruleName of ['vue-components', 'slot-class-props']) {
   const sharedRule = '.agents/resources/rules/vue-components.md';
   const adapter = `.claude/rules/${ruleName}.md`;
+  assert(
+    /^---\npaths:\n {2}- ["']packages\/dialtone-vue\/components\/\*\*["']\n---/.test(
+      read(adapter),
+    ),
+    `${adapter} must remain scoped to Vue component files`,
+    failures,
+  );
   assert(
     read(adapter).includes(`](../../${sharedRule})`) &&
       existsSync(join(repoRoot, sharedRule)) &&

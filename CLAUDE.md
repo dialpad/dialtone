@@ -62,11 +62,11 @@ Read [.github/COMMIT_CONVENTION.md](.github/COMMIT_CONVENTION.md) before prepari
 
 - Project: **DLT** (Dialtone)
 - The Atlassian MCP server is not bundled with this project — it must be configured per-user in your Claude Code MCP settings
-- Ticket URL format: `https://dialpad.atlassian.net/browse/DLT-XXX`
+- Use the plain ticket key in public PR bodies; follow the shared public-repo and ticket-selection policy in `AGENTS.md`.
 
 ## Vue Conventions and Component Artifacts
 
-Before component work, read the [shared Vue conventions and complete artifact pipeline](.agents/resources/rules/vue-components.md). Claude's path-scoped component and slot-class rules route to the same resource. API policy and the artifact list are maintained there, including Combinator variants, thumbnails and CLI/MCP lookup data.
+Before component work, read the [shared Vue conventions and complete artifact pipeline](.agents/resources/rules/vue-components.md). The component-local `packages/dialtone-vue/components/CLAUDE.md` imports that resource when Claude reads, writes or edits component files; scoped rule adapters retain their existing names. API policy and the artifact list are maintained there, including Combinator variants, thumbnails and CLI/MCP lookup data.
 
 ## Release Process
 

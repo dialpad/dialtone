@@ -11,7 +11,7 @@ Apply to `packages/dialtone-vue/components/**`. These are shared authoring rules
 ## Props
 
 - Use `validator` — NEVER `validate`. Vue silently ignores `validate`.
-- Import allowed values from `*_constants.js`. Never hardcode valid value arrays in components or tests.
+- Import allowed values from `*Constants.js` or `*Constants.ts`. Never hardcode valid value arrays in components or tests.
 - Add JSDoc with `@values` annotation.
 - Boolean visibility toggles: use positive polarity (`showClose`, `showHeader`, `showArrow`). Never use negative names (`hideX`, `preventX`, `skipX`).
 
@@ -104,7 +104,7 @@ When adding or reviewing a slot:
 - Icons: separate numeric scale `100`–`800`, distinct from the `100`-`500` component scale (do not remap icon values onto the component scale). Icon-family `size` props (`Icon`, `Loader`, `Emoji`, `EmojiTextWrapper`, `ProgressCircle`, `ToastLayoutAlternateIcon`) still use `[String, Number]`.
 - Use each component's constants for supported values.
 - Shared scale definition: `packages/dialtone-vue/common/constants/sizes.js`.
-- Export from `*_constants.js`: `COMPONENT_SIZE_MODIFIERS` object with both numeric and t-shirt keys.
+- Export from `*Constants.js` or `*Constants.ts`: `COMPONENT_SIZE_MODIFIERS` object with both numeric and t-shirt keys.
 
 ## Logical Naming
 
@@ -118,16 +118,20 @@ New directional props, slots, values and events use logical naming. Read [logica
 
 ## File Structure (per component directory)
 
-- `component_name.vue` — implementation
-- `component_name_constants.js` — exported constants
-- `component_name.test.js` — Vitest tests
-- `component_name.stories.js` — Storybook stories
-- `component_name.mdx` — Storybook docs
+Follow the existing directory's layout and casing. Common files are:
+
+- `<Name>.vue` — implementation
+- `<Name>Constants.js` or `<Name>Constants.ts` — constants when needed
+- `<Name>.test.js` — Vitest tests
+- `<Name>.stories.js` — Storybook stories
+- `<Name>*.story.vue` — story components when used
+- `<Name>.mdx` — optional Storybook documentation
 - `index.js` — barrel export
-- `utils.js` — utility/helper functions (optional)
-- `validators.js` — prop/value validators (optional)
-- `modules/` — sub-components for complex components (optional, e.g. emoji_picker, datepicker)
-- `composables/` — composition functions (optional, e.g. `useCalendar.js`, `useKeyboardNavigation.js`)
+- `Utils.js` / `Validators.js` — optional helpers; retain existing component-specific names or casing
+- `modules/` — optional sub-components; preserve existing names
+- `composables/` or `Composables/` — optional composition functions; follow local conventions
+
+This describes authoring locations, not a mandate to rename existing files.
 
 ## Component Artifact Pipeline
 
@@ -135,9 +139,9 @@ When creating or updating a component, ALL must stay in sync:
 
 1. **Vue source**: `packages/dialtone-vue/components/`
 2. **Tests**: `.test.js` using Vitest + @vue/test-utils
-3. **Storybook stories**: `.stories.js` + `.mdx`
+3. **Storybook stories**: `.stories.js`, any `.story.vue` components, and `.mdx` where maintained
 4. **Component docs JSON**: via `scripts/build-dialtone-vue-docs.mjs`
-5. **VuePress documentation**: `apps/dialtone-documentation/docs/`, sidebar in `_data/site-nav.json`. Use fenced ` ```vue demo ` blocks for code examples (see `.agents/resources/rules/documentation-writing.md`)
+5. **VuePress documentation**: `apps/dialtone-documentation/docs/`, sidebar in `_data/site-nav.json`. Use fenced ` ```vue demo ` blocks for code examples (see [shared documentation-writing guidance](documentation-writing.md#documentation-site-examples))
 6. **CLI/MCP lookup data**: rebuild the generated datasets consumed through `packages/dialtone-query-core`; run `pnpm nx run-many -t build -p dialtone-cli dialtone-mcp-server` rather than hand-editing generated records.
 7. **Combinator variant file**: `packages/combinator/src/variants/variants_<component>.js` plus registration in `packages/combinator/src/variants/variants.js`. Required for prop, slot, value, and visual-state changes. See `.agents/resources/rules/combinator-variants.md`.
 8. **Component wall thumbnail**: auto-generated PNG at `apps/dialtone-documentation/docs/.vuepress/public/assets/images/components/<slug>-{light,dark}.png`. Run `pnpm nx run dialtone-documentation:thumbs` to regen (pre-commit hook fires automatically on relevant staged changes). If the Combinator default doesn't render well as a thumbnail, author an override at `apps/dialtone-documentation/thumbs/<slug>.vue`; see `apps/dialtone-documentation/thumbs/README.md`. Preview live at `pnpm nx run dialtone-documentation:thumbs:preview` (picker at `/`, full grid at `/?gallery`).
