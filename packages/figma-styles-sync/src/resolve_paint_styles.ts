@@ -10,6 +10,14 @@
  * more than the resolved one: resolution substitutes `{color.brand.magenta}`
  * with magenta's own oklch literal, discarding exactly the reference this
  * needs to bind. Reading `raw` instead keeps it.
+ *
+ * Light only, deliberately: a Figma paint STYLE (unlike a variable) has no
+ * per-mode values, so a literal stop can only ever hold one number. Dialtone's
+ * baked-literal gradient (`gold-red-magenta-purple`) actually has different
+ * stop positions in dark mode — real divergence, not rounding noise — which
+ * this sync cannot represent and silently resolves to light's. A referenced
+ * stop (`magenta-purple`) doesn't have this problem: its variable binding
+ * still switches with the file's own mode at view time.
  */
 
 import { fileURLToPath } from 'url';
