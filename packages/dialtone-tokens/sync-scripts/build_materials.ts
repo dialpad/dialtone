@@ -202,10 +202,27 @@ async function main (): Promise<void> {
   // reads every material as fully in sync otherwise).
   let incomplete = false;
 
+  // Said out loud rather than dropped. A silent skip here reads as a clean
+  // run while Figma holds a value nothing in the tokens asks for.
+  const report = (name: string, label: string, items: string[]) => {
+    if (items.length === 0) return;
+    console.log(`${name}: ${items.length} ${label}`);
+    for (const item of items.slice(0, 10)) console.log(`    ${item}`);
+    if (items.length > 10) console.log(`    … and ${items.length - 10} more`);
+  };
+
   for (const material of MATERIALS) {
     const name = collectionNameFor(material);
     const tokens = await resolveAll([`base/material/${material}`]);
     const { overrides, unconvertible: unconvertibleOverrides } = overridesFor(parent, tokens, types);
+
+    // Checked here, not after the collection-creation branch below: a
+    // brand-new material's `continue` on --dry-run (right below) never
+    // reaches that later check, which silently dropped this exact report in
+    // precisely the one case — --dry-run against a material with no
+    // collection yet — this flag exists to stop happening.
+    report(name, 'wanted overrides could not be converted to a Figma value', unconvertibleOverrides);
+    if (unconvertibleOverrides.length > 0) incomplete = true;
 
     let collection = Object.values(local.meta.variableCollections).find(c => c.name === name);
 
@@ -289,17 +306,8 @@ async function main (): Promise<void> {
       }
     }
 
-    // Said out loud rather than dropped. A silent skip here reads as a clean
-    // run while Figma holds a value nothing in the tokens asks for.
-    const report = (label: string, items: string[]) => {
-      if (items.length === 0) return;
-      console.log(`${name}: ${items.length} ${label}`);
-      for (const item of items.slice(0, 10)) console.log(`    ${item}`);
-      if (items.length > 10) console.log(`    … and ${items.length - 10} more`);
-    };
-    report('overrides could not be addressed, no such variable or mode', unaddressable);
-    report('wanted overrides could not be converted to a Figma value', unconvertibleOverrides);
-    if (unaddressable.length > 0 || unconvertibleOverrides.length > 0) incomplete = true;
+    report(name, 'overrides could not be addressed, no such variable or mode', unaddressable);
+    if (unaddressable.length > 0) incomplete = true;
 
     if (dryRun) {
       console.log(`${name}: ${wanted.size} overrides, ${payload.length} to write, ${stale.length} stale to delete`);
