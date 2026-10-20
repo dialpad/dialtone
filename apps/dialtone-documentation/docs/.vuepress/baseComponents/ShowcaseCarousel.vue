@@ -72,6 +72,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { withBase } from 'vuepress/client';
 
 import {
+  advanceScrollPosition,
   getCarouselPeriod,
   getLoopedScrollPosition,
   smoothCarouselVelocity,
@@ -235,6 +236,7 @@ onMounted(() => {
     let animationId = null;
     let lastFrameTime = null;
     let currentVelocity = DEFAULT_VELOCITY;
+    let scrollPosition = 0;
     let isTouchScrolling = false;
     let isNativeScrolling = false;
     let isTouchActive = false;
@@ -304,11 +306,14 @@ onMounted(() => {
           VELOCITY_SMOOTHING,
           elapsedTime,
         );
-        carouselContainer.scrollLeft = getLoopedScrollPosition(
-          carouselContainer.scrollLeft + currentVelocity * elapsedTime,
+        scrollPosition = advanceScrollPosition(
+          scrollPosition,
+          carouselContainer.scrollLeft,
+          currentVelocity * elapsedTime,
           carouselPeriod,
           maxScrollPosition,
         );
+        carouselContainer.scrollLeft = scrollPosition;
       }
 
       lastFrameTime = timestamp;
