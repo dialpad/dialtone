@@ -1,71 +1,54 @@
 <template>
   <span
-    ref="contentRef"
+    data-qa="dt-motion-text"
     :class="motionTextClasses"
     :style="componentStyles"
-    :data-text-content="isStaticAnimationMode ? text : undefined"
     :aria-live="isAnimating ? 'polite' : 'off'"
     :aria-label="screenReaderText || undefined"
   >
     <!-- Screen reader content -->
     <span
       v-if="screenReaderText"
+      data-qa="dt-motion-text-sr-only"
       class="d-motion-text__sr-only"
     >
       {{ screenReaderText }}
     </span>
 
-    <!-- Gradient-sweep and shimmer modes: Simple static text with gradient animation -->
-    <template v-if="isStaticAnimationMode">
-      {{ text }}
-      <slot v-if="!text" />
-    </template>
-
-    <!-- Character-by-character animated content for other modes -->
+    <!-- Whole-text modes animate the root, so the text and slot render as-is and stay live -->
     <span
-      v-else
-      :key="animationKey"
+      v-if="isWholeText"
+      ref="slotRef"
+      data-qa="dt-motion-text-content"
       class="d-motion-text__content"
-      :aria-hidden="isAnimating"
+      :aria-hidden="screenReaderText ? 'true' : undefined"
+    >{{ text }}<slot v-if="!text" /></span>
+
+    <!-- Word-by-word animated content -->
+    <span
+      v-else-if="words.length"
+      ref="contentRef"
+      :key="animationKey"
+      data-qa="dt-motion-text-content"
+      class="d-motion-text__content"
+      :aria-hidden="screenReaderText ? 'true' : undefined"
     >
       <template
         v-for="(word, wordIdx) in words"
         :key="`${animationKey}-${wordIdx}`"
       >
-        <Transition
-          :name="`d-motion-text-word-${animationMode}`"
-        >
-          <span
-            v-if="wordIdx < visibleWordCount"
-            class="d-motion-text__word"
-            :data-text-content="word.text"
-            :style="{ '--word-index': wordIdx }"
-          >
-            <template
-              v-for="(char, charIdx) in word.chars"
-              :key="`${animationKey}-${wordIdx}-${charIdx}`"
-            >
-              <Transition
-                :name="`d-motion-text-char-${animationMode}`"
-              >
-                <span
-                  v-if="charIdx < visibleCharsPerWord[wordIdx]"
-                  class="d-motion-text__char"
-                  :style="{
-                    '--char-index': charIdx,
-                    '--char-delay': `${charIdx * timing.characterDelay}ms`,
-                  }"
-                >{{ char }}</span>
-              </Transition>
-            </template>
-          </span>
-        </Transition>
+        <span
+          data-qa="dt-motion-text-word"
+          class="d-motion-text__word"
+          :style="wordStyles[wordIdx]"
+        >{{ word.text }}</span>{{ word.space }}
       </template>
     </span>
 
-    <!-- Fallback slot content -->
+    <!-- Slot content, rendered until its text has been split into words -->
     <span
-      v-if="!words.length && !text && !isStaticAnimationMode"
+      v-else
+      ref="slotRef"
       class="d-motion-text__fallback"
     >
       <slot />
@@ -73,8 +56,20 @@
   </span>
 </template>
 
+
 <script>
-import { MOTION_TEXT_ANIMATION_MODES, MOTION_TEXT_SPEEDS, MOTION_TEXT_TIMING_PRESETS } from './MotionTextConstants';
+import {
+  MOTION_TEXT_ANIMATION_MODES,
+  MOTION_TEXT_MODE_SETTINGS,
+  MOTION_TEXT_SPEEDS,
+  MOTION_TEXT_TIMING_PRESETS,
+  MOTION_TEXT_TRACKS,
+} from './MotionTextConstants';
+import { getGradientSlices, splitWords } from './utils';
+
+const DEFAULT_PRESET = MOTION_TEXT_TIMING_PRESETS['300'];
+// Unsupported modes render the text at rest, like 'none'
+const RESTING_SETTINGS = { tracks: [], gradient: false, loopHold: 0 };
 
 export default {
   name: 'DtMotionText',
@@ -90,8 +85,8 @@ export default {
     },
 
     /**
-     * The animation mode to use for the text reveal.
-     * @values gradient-in, fade-in, slide-in, gradient-sweep, shimmer, none
+     * The animation mode to use for the text reveal. `none` renders the text without animation.
+     * @values gradient-in, fade-in, slide-in, slide-in-gradient, gradient-sweep, shimmer, none
      */
     animationMode: {
       type: String,
@@ -100,7 +95,7 @@ export default {
     },
 
     /**
-     * Animation speed.
+     * Animation speed. 300 plays the motion spec as designed; lower values are faster.
      * @values 100, 200, 300, 400, 500
      */
     speed: {
@@ -149,19 +144,19 @@ export default {
 
   emits: [
     /**
-     * Emitted when the animation starts.
+     * Emitted when the animation starts, and at the start of each looped cycle.
      * @event start
      */
     'start',
 
     /**
-     * Emitted when the animation completes.
+     * Emitted when the animation completes, and at the end of each looped cycle.
      * @event complete
      */
     'complete',
 
     /**
-     * Emitted during animation progress.
+     * Emitted as each word finishes animating.
      * @event progress
      * @type {{ wordsComplete: number, totalWords: number, progress: number }}
      */
@@ -182,47 +177,99 @@ export default {
 
   data () {
     return {
-      words: [],
-      visibleWordCount: 0,
-      visibleCharsPerWord: [],
+      words: splitWords(this.text),
+      wordWidths: [],
+      isRtl: false,
       isAnimating: false,
       isPaused: false,
+      isComplete: false,
+      isRestarting: false,
       isLooped: false,
+      isUnmounted: false,
       animationTimeouts: [],
+      timelineStartedAt: 0,
+      timelineElapsed: 0,
       prefersReducedMotion: false,
       animationKey: 0,
+      cssIterations: 1,
     };
   },
 
   computed: {
-    /**
-     * Get timing preset based on speed prop
-     */
-    timing () {
-      return MOTION_TEXT_TIMING_PRESETS[String(this.speed)];
+    modeSettings () {
+      return MOTION_TEXT_MODE_SETTINGS[this.animationMode] ?? RESTING_SETTINGS;
+    },
+
+    isWholeText () {
+      return Boolean(this.modeSettings.wholeText);
     },
 
     /**
-     * Computed styles with timing CSS variables
+     * Multiplier applied to every motion timing for the current speed.
+     */
+    speedScale () {
+      const preset = MOTION_TEXT_TIMING_PRESETS[String(this.speed)] ?? DEFAULT_PRESET;
+      return preset.duration / DEFAULT_PRESET.duration;
+    },
+
+    /**
+     * Track timings for the current mode as CSS variables, e.g. --d-motion-text-enter-stagger
      */
     componentStyles () {
-      return {
-        '--d-motion-text-duration': `${this.timing.duration}ms`,
-        '--d-motion-text-char-duration': `${this.timing.duration}ms`,
-        '--d-motion-text-word-duration': `${this.timing.duration * 2}ms`,
-      };
+      const styles = {};
+      this.modeSettings.tracks.forEach(track => {
+        Object.entries(MOTION_TEXT_TRACKS[track]).forEach(([key, value]) => {
+          styles[`--d-motion-text-${track}-${key}`] = `${Math.round(value * this.speedScale)}ms`;
+        });
+      });
+      return styles;
     },
 
     /**
-     * Check if current animation mode is static (gradient-sweep or shimmer)
+     * Per-word index (drives the stagger) and, in gradient modes, the slice of the shared gradient
+     * each word shows so it reads as one continuous gradient across the text.
      */
-    isStaticAnimationMode () {
-      return this.animationMode === 'gradient-sweep' || this.animationMode === 'shimmer';
+    wordStyles () {
+      const slices = this.modeSettings.gradient ? getGradientSlices(this.wordWidths, this.isRtl) : [];
+
+      return this.words.map((word, index) => {
+        const slice = slices[index];
+        return {
+          '--d-motion-text-word-index': index,
+          ...(slice && {
+            '--d-motion-text-gradient-size': slice.size,
+            '--d-motion-text-gradient-position': slice.position,
+          }),
+        };
+      });
     },
 
     /**
-     * Computed classes for the motion text element
+     * Time (ms) at which each word finishes its last track
      */
+    wordEndTimes () {
+      return this.words.map((word, index) => {
+        const ends = this.modeSettings.tracks.map(track => {
+          const { delay, stagger, duration } = MOTION_TEXT_TRACKS[track];
+          return delay + stagger * index + duration;
+        });
+        return Math.max(0, ...ends) * this.speedScale;
+      });
+    },
+
+    /**
+     * Time (ms) at which one cycle of the animation ends
+     */
+    cycleDuration () {
+      if (!this.isWholeText) return Math.max(0, ...this.wordEndTimes);
+
+      const ends = this.modeSettings.tracks.map(track => {
+        const { delay, duration } = MOTION_TEXT_TRACKS[track];
+        return delay + duration;
+      });
+      return Math.max(0, ...ends) * this.speedScale * this.cssIterations;
+    },
+
     motionTextClasses () {
       return [
         'd-motion-text',
@@ -230,7 +277,10 @@ export default {
         {
           'd-motion-text--animating': this.isAnimating,
           'd-motion-text--paused': this.isPaused,
+          'd-motion-text--complete': this.isComplete,
+          'd-motion-text--restarting': this.isRestarting,
           'd-motion-text--looped': this.isLooped,
+          'd-motion-text--respects-reduced-motion': this.respectsReducedMotion,
         },
       ];
     },
@@ -238,13 +288,69 @@ export default {
 
   watch: {
     text () {
+      // Whole-text modes render the text live and keep animating, as they always have
+      if (this.isWholeText) {
+        this.words = splitWords(this.text);
+
+        // A finished single play runs again for the new text; a loop stopped with skipToEnd() stays at rest
+        if (this.isComplete && this.autoStart && !this.loop) {
+          this.reset();
+          this.$nextTick(() => this.start());
+        }
+        return;
+      }
+
       this.reset();
-      this.initializeContent();
+
+      if (this.text) {
+        this.initializeContent();
+        return;
+      }
+
+      // Slot content only renders once the words are cleared, so read it on the next tick
+      this.words = [];
+      this.$nextTick(() => this.initializeContent());
+    },
+
+    animationMode (mode, oldMode) {
+      const wasWholeText = Boolean(MOTION_TEXT_MODE_SETTINGS[oldMode]?.wholeText);
+
+      // Whole-text modes render the slot live, so read it again when switching to or from word mode
+      if (!this.text && wasWholeText !== this.isWholeText) {
+        const wasAnimating = this.isAnimating;
+        this.reset();
+        this.words = [];
+        this.$nextTick(() => {
+          this.words = splitWords(this.getSlotText());
+          this.wordWidths = [];
+          if (wasAnimating) this.$nextTick(() => this.start());
+        });
+        return;
+      }
+
+      this.restartIfAnimating();
+    },
+
+    autoStart (value) {
+      if (value && !this.isAnimating && (this.isWholeText || this.words.length)) {
+        this.$nextTick(() => this.start());
+      }
+    },
+
+    speed () {
+      this.restartIfAnimating();
     },
 
     loop: {
       handler (newVal) {
         this.isLooped = newVal;
+
+        // Reschedule so the current cycle ends (or restarts) according to the new value
+        if (this.isAnimating && !this.isPaused) {
+          this.timelineElapsed = Date.now() - this.timelineStartedAt;
+          this.clearTimeouts();
+          this.runTimeline();
+        }
       },
 
       immediate: true,
@@ -252,65 +358,60 @@ export default {
   },
 
   mounted () {
-    this.checkReducedMotion();
+    this.initWatchReducedMotion();
     this.initializeContent();
+
+    // Word widths change once web fonts load, which would misalign the gradient slices
+    document.fonts?.ready.then(() => {
+      if (!this.isUnmounted && this.isAnimating) this.measureWords();
+    });
   },
 
   beforeUnmount () {
+    this.isUnmounted = true;
     this.clearTimeouts();
+    this.stopWatchingReducedMotion?.();
   },
 
   methods: {
     /**
-     * Self-contained text processing from DOM nodes
+     * Collect the text of slot content, ignoring markup
      */
-    processTextToChars (node) {
-      const words = [];
+    getSlotText () {
+      return this.$refs.slotRef?.textContent || '';
+    },
 
-      const processNode = (node, index = 0) => {
-        if (node.nodeType === Node.TEXT_NODE) {
-          const matches = node.textContent?.match(/\S+\s*/g) || [];
-          words.push(...matches.map((text, i) => ({
-            text,
-            chars: text.split(''),
-            index: index + i,
-          })));
-          return index + matches.length;
-        } else if (node.nodeType === Node.ELEMENT_NODE) {
-          let currentIdx = index;
-          Array.from(node.childNodes).forEach(child => {
-            currentIdx = processNode(child, currentIdx);
-          });
-          return currentIdx;
-        }
-        return index;
+    /**
+     * Track the reduced motion preference, finishing any running animation if it turns on
+     */
+    initWatchReducedMotion () {
+      if (typeof window === 'undefined' || !window.matchMedia) return;
+
+      const query = window.matchMedia('(prefers-reduced-motion: reduce)');
+      const onChange = (event) => {
+        this.prefersReducedMotion = event.matches;
+        if (event.matches && this.respectsReducedMotion && this.isAnimating) this.skipToEnd();
       };
 
-      processNode(node);
-      return words;
+      this.prefersReducedMotion = query.matches;
+      query.addEventListener?.('change', onChange);
+      this.stopWatchingReducedMotion = () => query.removeEventListener?.('change', onChange);
     },
 
     /**
-     * Process direct text prop into word/character data
+     * Measure rendered word widths so each word can show its slice of the gradient.
+     * Falls back to character counts when layout is unavailable (e.g. not yet rendered).
      */
-    processDirectText (text) {
-      if (!text) return [];
+    measureWords () {
+      if (!this.modeSettings.gradient) return;
 
-      const matches = text.match(/\S+\s*/g) || [];
-      return matches.map((wordText, i) => ({
-        text: wordText,
-        chars: wordText.split(''),
-        index: i,
-      }));
-    },
+      const wordEls = this.$refs.contentRef?.querySelectorAll('.d-motion-text__word') || [];
+      const widths = Array.from(wordEls, el => el.getBoundingClientRect().width);
 
-    /**
-     * Check for reduced motion preference
-     */
-    checkReducedMotion () {
-      if (typeof window !== 'undefined' && window.matchMedia) {
-        this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      }
+      this.isRtl = window.getComputedStyle(this.$el).direction === 'rtl';
+      this.wordWidths = widths.length === this.words.length && widths.every(width => width > 0)
+        ? widths
+        : this.words.map(word => word.text.length);
     },
 
     /**
@@ -321,15 +422,58 @@ export default {
       this.animationTimeouts = [];
     },
 
+    schedule (delay, callback) {
+      this.animationTimeouts.push(setTimeout(callback, Math.max(0, delay)));
+    },
+
+    /**
+     * Schedule progress, completion and (when looping) restart events for the remainder
+     * of the current cycle. CSS runs the animation itself; this keeps events in step with it.
+     */
+    runTimeline () {
+      const elapsed = this.timelineElapsed;
+      const totalWords = this.words.length;
+      const cycleEnd = this.cycleDuration;
+
+      this.timelineStartedAt = Date.now() - elapsed;
+
+      // Whole-text modes have no per-word progress
+      const wordEnds = this.isWholeText ? [] : this.wordEndTimes;
+      wordEnds.forEach((end, index) => {
+        if (end <= elapsed) return;
+        this.schedule(end - elapsed, () => {
+          this.$emit('progress', {
+            wordsComplete: index + 1,
+            totalWords,
+            progress: (index + 1) / totalWords,
+          });
+        });
+      });
+
+      if (cycleEnd > elapsed) {
+        this.schedule(cycleEnd - elapsed, () => this.completeAnimation());
+      }
+
+      if (this.loop) {
+        const restartAt = cycleEnd + this.modeSettings.loopHold * this.speedScale;
+        this.schedule(restartAt - elapsed, () => this.restartCycle());
+      } else if (cycleEnd <= elapsed) {
+        // The cycle already ended while looping (e.g. loop turned off during the hold)
+        this.finishAnimation();
+      }
+    },
+
     /**
      * Start the animation
      * @public
      */
     start () {
-      if (this.isAnimating) return;
+      if (this.isAnimating || this.isUnmounted) return;
 
+      this.clearTimeouts();
       this.isAnimating = true;
       this.isPaused = false;
+      this.isComplete = false;
       this.$emit('start');
 
       // Skip animation if reduced motion is preferred and enabled
@@ -338,18 +482,25 @@ export default {
         return;
       }
 
-      if (this.animationMode === 'none') {
+      if (!this.modeSettings.tracks.length || (!this.isWholeText && !this.words.length)) {
         this.showAllContent();
         return;
       }
 
-      // For gradient-sweep and shimmer modes, just mark as animating (CSS handles the animation)
-      if (this.isStaticAnimationMode) {
-        return;
-      }
+      this.measureWords();
+      this.cssIterations = this.readCssIterations();
+      this.timelineElapsed = 0;
+      this.runTimeline();
+    },
 
-      // Start the word-by-word animation for "-in" modes
-      this.showNextWord();
+    /**
+     * Whole-text animations honor a consumer's animation-iteration-count override (e.g. 2 sweeps)
+     */
+    readCssIterations () {
+      if (!this.isWholeText || this.loop) return 1;
+
+      const count = parseFloat(window.getComputedStyle(this.$el).animationIterationCount);
+      return Number.isFinite(count) && count > 1 ? count : 1;
     },
 
     /**
@@ -359,8 +510,9 @@ export default {
     pause () {
       if (!this.isAnimating || this.isPaused) return;
 
-      this.isPaused = true;
+      this.timelineElapsed = Date.now() - this.timelineStartedAt;
       this.clearTimeouts();
+      this.isPaused = true;
       this.$emit('pause');
     },
 
@@ -373,7 +525,7 @@ export default {
 
       this.isPaused = false;
       this.$emit('resume');
-      this.showNextWord();
+      this.runTimeline();
     },
 
     /**
@@ -384,9 +536,11 @@ export default {
       this.clearTimeouts();
       this.isAnimating = false;
       this.isPaused = false;
-      this.visibleWordCount = 0;
-      this.visibleCharsPerWord = Array(this.words.length).fill(0);
+      this.isComplete = false;
+      this.timelineElapsed = 0;
       this.animationKey++;
+      // Whole-text modes animate the root, which re-keying the words doesn't reset
+      this.replayAnimations();
     },
 
     /**
@@ -398,110 +552,74 @@ export default {
     },
 
     /**
-     * Show all content immediately
+     * Show all content immediately in its resting state
      */
     showAllContent () {
-      this.visibleWordCount = this.words.length;
-      this.visibleCharsPerWord = this.words.map(word => word.chars.length);
-      setTimeout(() => {
-        this.isAnimating = false;
-        this.$emit('complete');
-      }, 0);
+      this.finishAnimation();
+      this.isPaused = false;
+      this.schedule(0, () => this.$emit('complete'));
+    },
+
+    finishAnimation () {
+      this.clearTimeouts();
+      this.isAnimating = false;
+      this.isComplete = true;
+    },
+
+    restartIfAnimating () {
+      if (!this.isAnimating) return;
+
+      this.reset();
+      this.$nextTick(() => this.start());
     },
 
     /**
-     * Show next word in sequence
-     */
-    showNextWord () {
-      if (this.isPaused || this.visibleWordCount >= this.words.length) {
-        if (this.visibleWordCount >= this.words.length) {
-          this.completeAnimation();
-        }
-        return;
-      }
-
-      const timeout = setTimeout(() => {
-        this.visibleWordCount++;
-        this.$emit('progress', {
-          wordsComplete: this.visibleWordCount,
-          totalWords: this.words.length,
-          progress: this.visibleWordCount / this.words.length,
-        });
-
-        this.animateCharsForWord(this.visibleWordCount - 1);
-      }, this.timing.wordDelay);
-
-      this.animationTimeouts.push(timeout);
-    },
-
-    /**
-     * Animate characters for a specific word
-     */
-    animateCharsForWord (wordIdx) {
-      if (this.isPaused || wordIdx >= this.words.length) return;
-
-      this.visibleCharsPerWord[wordIdx] = 0;
-      const chars = this.words[wordIdx].chars.length;
-
-      const revealChar = () => {
-        if (this.isPaused || this.visibleCharsPerWord[wordIdx] >= chars) {
-          if (this.visibleCharsPerWord[wordIdx] >= chars) {
-            this.showNextWord();
-          }
-          return;
-        }
-
-        this.visibleCharsPerWord[wordIdx]++;
-        const timeout = setTimeout(revealChar, this.timing.characterDelay);
-        this.animationTimeouts.push(timeout);
-      };
-
-      revealChar();
-    },
-
-    /**
-     * Complete the animation
+     * End of a cycle. Looped animations keep animating through the hold before restarting.
      */
     completeAnimation () {
-      this.isAnimating = false;
-      this.clearTimeouts();
-
       this.$emit('complete');
+      if (!this.loop) this.finishAnimation();
+    },
 
-      if (this.loop) {
-        const timeout = setTimeout(() => {
-          this.reset();
-          this.$nextTick(() => {
-            this.start();
-          });
-        }, 500);
+    /**
+     * Drop the CSS animations for one style pass so they replay from their first frame on the same
+     * elements, keeping text selection and not re-inserting anything into the aria-live region.
+     */
+    replayAnimations (callback) {
+      this.isRestarting = true;
 
-        this.animationTimeouts.push(timeout);
-      }
+      this.$nextTick(() => {
+        // Flush styles while the animations are removed
+        this.$el?.getBoundingClientRect?.();
+        this.isRestarting = false;
+        callback?.();
+      });
+    },
+
+    /**
+     * Restart a looped animation: everything returns to its starting state at once
+     */
+    restartCycle () {
+      if (this.isUnmounted) return;
+
+      this.clearTimeouts();
+      this.replayAnimations(() => {
+        this.measureWords();
+        this.timelineElapsed = 0;
+        this.$emit('start');
+        this.runTimeline();
+      });
     },
 
     /**
      * Initialize content based on text prop or slot content
      */
     initializeContent () {
-      // For gradient-sweep and shimmer modes, skip word/character processing
-      if (this.isStaticAnimationMode) {
-        if (this.autoStart) {
-          this.$nextTick(() => this.start());
-        }
-        return;
-      }
+      this.words = splitWords(this.text || this.getSlotText());
+      this.wordWidths = [];
 
-      if (this.text) {
-        this.words = this.processDirectText(this.text);
-      } else if (this.$refs.contentRef) {
-        this.words = this.processTextToChars(this.$refs.contentRef);
-      }
-
-      this.visibleCharsPerWord = Array(this.words.length).fill(0);
-      this.visibleWordCount = 0;
-
-      if (this.autoStart && this.words.length > 0) {
+      // Whole-text modes start even while empty, e.g. a slot that streams its content in
+      if (this.autoStart && (this.isWholeText || this.words.length > 0)) {
         this.$nextTick(() => this.start());
       }
     },
