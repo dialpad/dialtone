@@ -3,7 +3,7 @@ type: workflow
 category: workflows
 keywords: [release, semantic-release, versioning, changelog, tags, tuesday, cron, staging, production, npm-publish]
 ai_summary: How Dialtone releases work — Tuesday cron, semantic-release per package, tag format, changelogs, and staging-to-production merge.
-last_updated: 2026-03-04
+last_updated: 2026-10-06
 related_packages: [dialtone-vue, dialtone-css, dialtone-tokens, dialtone-icons]
 ---
 
@@ -52,6 +52,8 @@ Examples:
 - `dialtone-mcp-server/v1.2.0`
 
 Tags are what NX and semantic-release use to determine what has changed since the last release. The tag prefix is what lets semantic-release distinguish which package a tag belongs to in the monorepo — missing or wrong `tagFormat` breaks the release for that package.
+
+The CLI and MCP server bundle query-core. Their release configurations include `packages/dialtone-query-core` in `commitPaths`, so release-triggering shared-core commits also select both adapters for release. `semantic-release-plus` passes these paths to `git log` as Git pathspecs. Test-only or documentation-only commits retain the usual no-release behavior.
 
 ## Packages Released
 

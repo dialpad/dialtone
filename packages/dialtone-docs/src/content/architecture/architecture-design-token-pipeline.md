@@ -140,6 +140,8 @@ Components and CSS classes reference **semantic tokens only**. This is what enab
 4. `generateThemeFiles()` — JavaScript theme bundle generation
 5. `vite build` — bundles JS theme exports
 
+`build-docs.js` preserves zero values and source token deprecation reasons in documentation data. The CSS documentation generator carries those reasons into search metadata and adds context-qualified legacy migrations from the preferred migration helper's shared maps; see [Migration Guidance](../development/development-css-utilities.md#migration-guidance).
+
 ### Custom Transforms
 
 `dialtone-transforms.js` registers two key transforms:

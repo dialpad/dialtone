@@ -1,6 +1,6 @@
 ---
 title: Dialtone CLI
-description: Search the Dialtone version installed in your project from the command line.
+description: Search Dialtone APIs and documentation from the command line.
 status: ready
 keywords:
   [
@@ -14,7 +14,7 @@ keywords:
   ]
 ---
 
-The Dialtone CLI searches components, design tokens, CSS utility classes, icons, and documentation from your terminal. Run it from your project to get results that match the version of Dialtone you have installed.
+The Dialtone CLI searches components, design tokens, CSS utility classes, icons, and documentation from your terminal. Run it from your project to use available installed package data. Missing data falls back to the CLI's bundled data; documentation always uses bundled content. Check the source line to see which data each lookup uses.
 
 Use the CLI for direct lookups, shell scripts, and compact context for coding agents. Use the [Dialtone MCP Server](/guides/mcp-server/) when you want an AI assistant to search Dialtone through Model Context Protocol (MCP) tools.
 
@@ -68,8 +68,8 @@ dialtone component button --format json
 | Command                     | Use it to                                                             |
 | --------------------------- | --------------------------------------------------------------------- |
 | `dialtone search <query>`   | Search components, documentation, tokens, utility classes, and icons. |
-| `dialtone component <name>` | Read a component's API, including props, events, slots, and examples. |
-| `dialtone token <query>`    | Find design tokens and inspect theme values.                          |
+| `dialtone component <name>` | Read props, events, slots, and qualified import hints.                |
+| `dialtone token [query]`    | Find design tokens by query or `--name` and inspect theme values.     |
 | `dialtone utility <query>`  | Find CSS utility classes by property or value.                        |
 | `dialtone docs <query>`     | Search usage guidance, recipes, accessibility guidance, and patterns. |
 | `dialtone prompt <name>`    | Generate compact component context for a coding agent.                |
@@ -85,6 +85,18 @@ dialtone search "button"
 dialtone search "padding 8px"
 dialtone search "notification"
 ```
+
+Component and documentation discovery reuse curated page keywords. Try familiar interaction terms, then inspect a returned canonical component:
+
+```bash
+dialtone search "spinner"
+dialtone docs "text-field"
+dialtone component DtLoader
+```
+
+`spinner` leads with `DtLoader`; `blank slate` finds `DtEmptyState`; `text field`, `text-field`, and `textbox` find `DtInput`; `autocomplete` and `typeahead` find the supported Combobox candidates. `notification` presents `DtBanner`, `DtNotice`, and `DtToast` as distinct choices. Canonical component name and family matches keep their existing priority, followed by curated keywords and incidental API matches. Documentation ranks exact titles before keywords and incidental prose.
+
+Keywords are discovery terms. `dialtone component spinner` still exits with no selected component; `component switch` rejects the name and suggests `DtToggle`. Use the canonical result for API lookup.
 
 Separate terms with `|` to search for any of them:
 
@@ -105,9 +117,17 @@ The CLI does not have a separate icon command. Search by an icon's name, categor
 dialtone search "calendar" --format json
 ```
 
+Broad searches share the 20-result limit across all result types. Include later icon matches with `--limit 0`; icon records in JSON have `type: "icon"`:
+
+```bash
+dialtone search "notification" --limit 0 --format json
+```
+
 ### Inspect a component
 
-Use `component` to inspect a component's public API. The name must match exactly, ignoring case, separators, and the `Dt` prefix, so `button`, `dt-button`, and `DtButton` all work. For any other name, the CLI lists close matches on stderr and exits with an error. A deprecated component still works by its full name, with a note naming its replacement.
+Use `component` to inspect a component's public API. The name must match exactly, ignoring case, separators, and the `Dt` prefix, so `button`, `dt-button`, and `DtButton` all work. Other names exit with an error, listing close matches when available. A deprecated component still works by its full name, with a note naming its replacement.
+
+Directive identifiers such as `v-dt-tooltip` or `DtTooltipDirective` are not component names and return no component match. Use `docs` for their imports, registration and behavior.
 
 ```bash
 dialtone component button
@@ -127,6 +147,8 @@ dialtone component button --examples
 
 `--prop` returns the prop type, description, and accepted values. If the prop does not exist, the CLI lists the available prop names.
 
+`--examples` currently returns an import hint when a public export route is verified, followed by a minimal component tag. It does not supply a complete working example with required props, slots, state, or application setup. With `--format json`, it returns component metadata rather than example code.
+
 ### Find a design token
 
 Use `token` to search by a token name, category, semantic purpose, or value:
@@ -134,6 +156,18 @@ Use `token` to search by a token name, category, semantic purpose, or value:
 ```bash
 dialtone token "color foreground primary"
 dialtone token "spacing 400"
+```
+
+Use `--name` for a canonical CSS token identifier that begins with `--`. It takes precedence when both a name and a positional query are supplied:
+
+```bash
+dialtone token --name=--dt-spacing-100 --values
+```
+
+An exact legacy name remains available for migration inspection. The CLI reports its deprecation reason and qualified alternatives on stderr; add `--values --format json` to include metadata and theme values in JSON:
+
+```bash
+dialtone token --name=--dt-space-400 --values --format json
 ```
 
 Use `--values` to show theme values for the first match:
@@ -158,7 +192,7 @@ dialtone utility "display flex"
 dialtone utility "margin auto"
 ```
 
-Search results include the class name and its CSS declaration. Deprecated utilities are filtered from the results.
+Search results include the class name and its CSS declaration. General searches filter deprecated utilities; exact legacy names retain their contract and migration metadata in JSON output.
 
 ### Search documentation
 
@@ -168,9 +202,12 @@ Use `docs` for questions about how or why to use Dialtone. It searches public gu
 dialtone docs "how to choose button importance"
 dialtone docs "accessible tooltip labels"
 dialtone docs "migrate physical properties to logical properties"
+dialtone docs "v-dt-tooltip"
 ```
 
 Documentation is bundled with the CLI rather than resolved from your project's installed Dialtone packages. Update the CLI to refresh this content.
+
+Readable results from `dialtone docs` contain excerpts. `dialtone docs "v-dt-tooltip" --format json` returns the complete available documentation records, which can include directive code snippets. A complete record can still omit component examples or page-level scripts; neither format establishes that a snippet runs in your application.
 
 ### Generate context for a coding agent
 
@@ -218,7 +255,11 @@ The source line lists any data that came from somewhere other than the main pack
 
 Import hints in `component` and `prompt` output appear only for verified public exports. Installed `@dialpad/dialtone` data uses its verified `@dialpad/dialtone/vue` route, or `@dialpad/dialtone/vue3` for versions before 9.173 that expose that route. Installed `@dialpad/dialtone-vue` data and bundled component data use verified routes from `@dialpad/dialtone-vue`.
 
+Curated component keywords also come from bundled documentation and join only to public components present in the selected component data. They are latest documentation references, not proof of installed API availability or behavior. An older or unverified component dataset can lack these associations.
+
 Bundled import hints are verified against the bundled Vue source version. They do not establish that `@dialpad/dialtone-vue` is installed at that version or that the import is compatible with your project's dependencies.
+
+Export verification checks the stated package entry. It does not establish that peer dependencies, application setup, or runtime behavior are correct. Validate code against your installed packages before using it.
 
 Use `--bundled` when you want to ignore installed packages and query the CLI's bundled data:
 
@@ -248,7 +289,7 @@ The CLI checks npm for a newer version in the background, and gives up after 3 s
 npm install -g @dialpad/dialtone-cli@latest
 ```
 
-Updating refreshes bundled documentation and the fallback data used outside a Dialtone project.
+Updating refreshes bundled documentation, discovery keywords, and the fallback data used outside a Dialtone project. Docs-only keyword edits can reach the site before the CLI: release commit selection watches CLI and query-core changes, so maintainers must explicitly arrange a CLI publication through the existing release process. Source merge and local builds do not update installed tools.
 
 ## Troubleshooting
 

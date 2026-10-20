@@ -1,3 +1,40 @@
+# [1.5.0](https://github.com/dialpad/dialtone/compare/dialtone-cli/v1.4.0...dialtone-cli/v1.5.0) (2026-10-20)
+
+
+### Bug Fixes
+
+* **Dialtone Query Core, Dialtone Docs:** DLT-3085 retrieve directive guidance ([#1463](https://github.com/dialpad/dialtone/issues/1463)) ([d28b2f7](https://github.com/dialpad/dialtone/commit/d28b2f70c004937758ebb85070a525d0a4b4c8ef))
+
+
+### Features
+
+* **Dialtone Query Core:** DLT-3659 share curated discovery keywords ([#1472](https://github.com/dialpad/dialtone/issues/1472)) ([1033549](https://github.com/dialpad/dialtone/commit/1033549e2ec8087fee4adced26c9293d04a02953))
+
+# [1.4.0](https://github.com/dialpad/dialtone/compare/dialtone-cli/v1.3.0...dialtone-cli/v1.4.0) (2026-10-15)
+
+
+### Bug Fixes
+
+* **Dialtone Query Core:** DLT-3651 align search and migration guidance ([#1461](https://github.com/dialpad/dialtone/issues/1461)) ([84ac078](https://github.com/dialpad/dialtone/commit/84ac078aa8f09fde46fecb9c1bc71e1f275f35dc))
+
+
+### Features
+
+* **Dialtone Mcp Server:** DLT-3650 add complete API retrieval and provenance ([#1462](https://github.com/dialpad/dialtone/issues/1462)) ([c23dc8c](https://github.com/dialpad/dialtone/commit/c23dc8c3cc4aa99aabf3651a0d024ce7bb935609))
+
+# [1.3.0](https://github.com/dialpad/dialtone/compare/dialtone-cli/v1.2.0...dialtone-cli/v1.3.0) (2026-10-13)
+
+
+### Bug Fixes
+
+* **Dialtone Mcp Server, Dialtone Cli:** DLT-3655 unblock startup and shared releases ([#1454](https://github.com/dialpad/dialtone/issues/1454)) ([2f72801](https://github.com/dialpad/dialtone/commit/2f728014ed1964152f08d47361dd617383a4e026))
+* **Dialtone Mcp Server, Dialtone Query Core:** DLT-3640 correct guidance and version metadata ([#1452](https://github.com/dialpad/dialtone/issues/1452)) ([6dcebc5](https://github.com/dialpad/dialtone/commit/6dcebc5dd6adc2e9b1dbf1c27901dd1bbf27e578))
+
+
+### Features
+
+* **Dialtone Query Core:** DLT-3649 align public component identity ([#1455](https://github.com/dialpad/dialtone/issues/1455)) ([94d7d56](https://github.com/dialpad/dialtone/commit/94d7d560a53403c22069b5724e213e10087badb8))
+
 # [1.2.0](https://github.com/dialpad/dialtone/compare/dialtone-cli/v1.1.0...dialtone-cli/v1.2.0) (2026-10-06)
 
 

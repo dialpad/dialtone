@@ -47,6 +47,13 @@ describe('selectComponent', () => {
     });
   });
 
+  test('routes a directive name to documentation without selecting a component', () => {
+    expect(selectComponent('v-dt-tooltip', components)).toEqual({
+      ok: false,
+      message: 'No component found matching "v-dt-tooltip".\nNote: Directive identifiers are not component names. Search documentation for the directive contract and registration.',
+    });
+  });
+
   test('reports an unknown name', () => {
     expect(selectComponent('zzz', components)).toEqual({ ok: false, message: 'No component found matching "zzz".' });
   });

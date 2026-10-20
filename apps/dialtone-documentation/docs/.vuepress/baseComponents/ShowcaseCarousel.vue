@@ -2,29 +2,50 @@
 <template>
   <div ref="carouselContainerRef" class="showcase-carousel">
     <dt-stack ref="carouselTrackRef" direction="row" gap="800" class="showcase-carousel__track">
-      <picture
-        v-for="image in showcaseImages"
-        :key="image.name"
+      <div
+        v-for="item in showcaseItems"
+        :key="item.name"
         :style="{
-          alignSelf: image.alignSelf,
-          inlineSize: image.sizes,
+          alignSelf: item.alignSelf,
+          inlineSize: item.sizes,
         }"
         class="showcase-carousel__item"
       >
-        <source :srcset="image.avifSrcset" :sizes="image.sizes" type="image/avif">
-        <source :srcset="image.webpSrcset" :sizes="image.sizes" type="image/webp">
-        <img
-          :src="image.fallbackSrc"
-          :width="image.sourceWidth"
-          :height="image.sourceHeight"
-          class="d-bar-500 d-d-block showcase-carousel__image"
-          alt=""
-          loading="lazy"
-          decoding="async"
-          fetchpriority="low"
+        <!-- For video tiles this lazy, responsive still doubles as the poster: shown
+             before playback and under reduced motion, without an eager poster request. -->
+        <picture class="d-d-block">
+          <source :srcset="item.avifSrcset" :sizes="item.sizes" type="image/avif">
+          <source :srcset="item.webpSrcset" :sizes="item.sizes" type="image/webp">
+          <img
+            :src="item.fallbackSrc"
+            :width="item.sourceWidth"
+            :height="item.sourceHeight"
+            class="d-bar-500 d-d-block showcase-carousel__image"
+            alt=""
+            loading="lazy"
+            decoding="async"
+            fetchpriority="low"
+            draggable="false"
+          >
+        </picture>
+        <video
+          v-if="item.type === 'video'"
+          :width="item.sourceWidth"
+          :height="item.sourceHeight"
+          class="d-bar-500 d-d-block showcase-carousel__video"
+          aria-hidden="true"
+          muted
+          loop
+          playsinline
+          disablepictureinpicture
+          preload="none"
           draggable="false"
         >
-      </picture>
+          <!-- Tiles keep fixed widths at every breakpoint, so pick the encode by pixel density. -->
+          <source :src="item.videoSrc2x" type="video/mp4" media="(min-resolution: 2dppx), (-webkit-min-device-pixel-ratio: 2)">
+          <source :src="item.videoSrc1x" type="video/mp4">
+        </video>
+      </div>
     </dt-stack>
   </div>
 </template>
@@ -66,15 +87,38 @@ const createShowcaseImage = ({
   };
 };
 
-const showcaseImages = [
+const SHOWCASE_VIDEO_ROOT = '/assets/videos';
+// Brand samples delivered as motion: a 1x/2x still (the poster) plus 1x/2x encodes.
+// sourceWidth/sourceHeight are the 2x dimensions.
+const createShowcaseVideo = ({
+  name,
+  alignSelf,
+  renderedWidth,
+  sourceWidth,
+  sourceHeight,
+}) => ({
+  ...createShowcaseImage({
+    name,
+    alignSelf,
+    renderedWidth,
+    sourceWidth,
+    sourceHeight,
+    candidateWidths: [renderedWidth, renderedWidth * 2],
+  }),
+  type: 'video',
+  videoSrc1x: withBase(`${SHOWCASE_VIDEO_ROOT}/home-showcase--${name}-${renderedWidth}w.mp4`),
+  videoSrc2x: withBase(`${SHOWCASE_VIDEO_ROOT}/home-showcase--${name}-${renderedWidth * 2}w.mp4`),
+});
+
+const showcaseItems = [
   createShowcaseImage({ name: '01', alignSelf: 'flex-start', renderedWidth: 468, sourceWidth: 1068, sourceHeight: 736, candidateWidths: [468, 936, 1068] }),
-  createShowcaseImage({ name: '02', alignSelf: 'flex-end', renderedWidth: 546, sourceWidth: 1258, sourceHeight: 926, candidateWidths: [546, 1092, 1258] }),
+  createShowcaseVideo({ name: '02', alignSelf: 'flex-end', renderedWidth: 546, sourceWidth: 1092, sourceHeight: 728 }),
   createShowcaseImage({ name: '03', alignSelf: 'flex-start', renderedWidth: 352, sourceWidth: 1180, sourceHeight: 1284, candidateWidths: [352, 704, 1180] }),
-  createShowcaseImage({ name: '04', alignSelf: 'center', renderedWidth: 400, sourceWidth: 1180, sourceHeight: 782, candidateWidths: [400, 800, 1180] }),
-  createShowcaseImage({ name: '05', alignSelf: 'flex-end', renderedWidth: 480, sourceWidth: 1270, sourceHeight: 964, candidateWidths: [480, 960, 1270] }),
-  createShowcaseImage({ name: '06', alignSelf: 'flex-start', renderedWidth: 628, sourceWidth: 1882, sourceHeight: 1220, candidateWidths: [628, 1256, 1882] }),
+  createShowcaseVideo({ name: '04', alignSelf: 'center', renderedWidth: 480, sourceWidth: 960, sourceHeight: 540 }),
+  createShowcaseVideo({ name: '05', alignSelf: 'flex-end', renderedWidth: 320, sourceWidth: 640, sourceHeight: 800 }),
+  createShowcaseVideo({ name: '06', alignSelf: 'flex-start', renderedWidth: 628, sourceWidth: 1256, sourceHeight: 812 }),
   createShowcaseImage({ name: '07', alignSelf: 'center', renderedWidth: 438, sourceWidth: 722, sourceHeight: 453, candidateWidths: [438, 722] }),
-  createShowcaseImage({ name: '08', alignSelf: 'flex-end', renderedWidth: 404, sourceWidth: 1212, sourceHeight: 1162, candidateWidths: [404, 808, 1212] }),
+  createShowcaseVideo({ name: '08', alignSelf: 'flex-end', renderedWidth: 404, sourceWidth: 808, sourceHeight: 808 }),
   createShowcaseImage({ name: '09', alignSelf: 'flex-start', renderedWidth: 438, sourceWidth: 1440, sourceHeight: 1344, candidateWidths: [438, 876, 1440] }),
 ];
 
@@ -111,6 +155,56 @@ onMounted(() => {
 
     const fineHoverQuery = window.matchMedia('(hover: hover) and (pointer: fine)');
     const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    // Clones don't inherit Vue's `muted` prop binding, and browsers block
+    // unmuted autoplay, so mute every video (originals and clones) explicitly.
+    const carouselVideos = Array.from(carousel.querySelectorAll('video'));
+
+    // The video stays transparent over its poster still until it has frames to show.
+    const revealVideo = ({ target }) => {
+      target.classList.add('showcase-carousel__video--ready');
+    };
+
+    carouselVideos.forEach((video) => {
+      video.muted = true;
+      video.defaultMuted = true;
+      video.addEventListener('playing', revealVideo);
+    });
+
+    const playVideo = (video) => {
+      if (reducedMotionQuery.matches || document.hidden) return;
+      video.play().catch(() => {});
+    };
+
+    // Only play videos while they're on screen, so the cloned sets
+    // don't all decode at once.
+    const handleVideoVisibilityChange = (entries) => {
+      entries.forEach(({ target, isIntersecting }) => {
+        if (isIntersecting) {
+          playVideo(target);
+        } else {
+          target.pause();
+        }
+      });
+    };
+
+    const videoObserver = 'IntersectionObserver' in window
+      ? new IntersectionObserver(handleVideoVisibilityChange)
+      : null;
+
+    // Without an observer there's no reliable visibility check, so videos stay
+    // paused on their posters. IntersectionObserver doesn't report a hidden tab,
+    // so page visibility is checked here too (and re-synced on visibilitychange).
+    const syncVideoPlayback = () => {
+      if (!videoObserver || reducedMotionQuery.matches || document.hidden) {
+        carouselVideos.forEach(video => video.pause());
+        return;
+      }
+
+      // Re-observing fires a fresh callback for each video's current visibility.
+      videoObserver.disconnect();
+      carouselVideos.forEach(video => videoObserver.observe(video));
+    };
     const usesCompositorAutoplay = !fineHoverQuery.matches;
     const supportsScrollEnd = 'onscrollend' in carouselContainer;
 
@@ -227,6 +321,7 @@ onMounted(() => {
       } else {
         startAnimation();
       }
+      syncVideoPlayback();
     };
 
     const handlePointerEnter = (event) => {
@@ -334,6 +429,7 @@ onMounted(() => {
     }
 
     measureCarouselPeriod();
+    syncVideoPlayback();
 
     carouselContainer.addEventListener('pointerenter', handlePointerEnter);
     carouselContainer.addEventListener('pointermove', handlePointerMove);
@@ -344,6 +440,7 @@ onMounted(() => {
     carouselContainer.addEventListener('scroll', handleScroll, { passive: true });
     carouselContainer.addEventListener('scrollend', handleScrollEnd);
     reducedMotionQuery.addEventListener('change', handleReducedMotionChange);
+    document.addEventListener('visibilitychange', syncVideoPlayback);
     window.addEventListener('resize', handleResize);
 
     if ('IntersectionObserver' in window) {
@@ -359,6 +456,11 @@ onMounted(() => {
       clearScrollIdleTimer();
       window.clearTimeout(resizeTimer);
       visibilityObserver?.disconnect();
+      videoObserver?.disconnect();
+      carouselVideos.forEach((video) => {
+        video.pause();
+        video.removeEventListener('playing', revealVideo);
+      });
       carouselContainer.removeEventListener('pointerenter', handlePointerEnter);
       carouselContainer.removeEventListener('pointermove', handlePointerMove);
       carouselContainer.removeEventListener('pointerleave', handlePointerLeave);
@@ -368,6 +470,7 @@ onMounted(() => {
       carouselContainer.removeEventListener('scroll', handleScroll);
       carouselContainer.removeEventListener('scrollend', handleScrollEnd);
       reducedMotionQuery.removeEventListener('change', handleReducedMotionChange);
+      document.removeEventListener('visibilitychange', syncVideoPlayback);
       window.removeEventListener('resize', handleResize);
     };
   }
@@ -401,8 +504,21 @@ onUnmounted(() => cleanupCarousel());
 }
 
 .showcase-carousel__item {
+  position: relative;
   display: block;
   flex: none;
+}
+
+.showcase-carousel__video {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  opacity: 0;
+}
+
+.showcase-carousel__video--ready {
+  opacity: 1;
 }
 
 .showcase-carousel__image {

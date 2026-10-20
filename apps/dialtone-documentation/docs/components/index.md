@@ -1,7 +1,7 @@
 ---
 title: Components
 description: Reusable components solving common UI needs, designed and built to be assembled in countless combinations.
-keywords: ["vue components", "ui components", "DtButton", "DtModal", "storybook", "figma"]
+keywords: ["vue components", "ui components", "storybook", "figma"]
 no_preview: true
 next:
   text: Component Status
@@ -86,6 +86,19 @@ next:
       <DtStack>
         <dt-text as="h3" kind="headline" size="200">DtSegmentedControl</dt-text>
         <dt-text as="p" kind="body" size="200" wrap="pretty">Single-select control for switching views, scopes, or modes.</dt-text>
+      </DtStack>
+    </DtStack>
+  </DtLink>
+  <DtLink to="/components/slider.html" tone="muted" :underline="false" class="d-d-block d-bar-400 h:d-td-none">
+    <DtStack direction="row" gap="200">
+      <DtBox :padding="viewport.pick({ default: '100', md: '200' })" border-width="100" border-color="subtle" border-radius="400" surface="secondary">
+        <DtStack>
+          <dt-icon class="d-fc-tertiary" name="component" :size="viewport.pick({ default: '300', md: '500' })" />
+        </DtStack>
+      </DtBox>
+      <DtStack>
+        <dt-text as="h3" kind="headline" size="200">DtSlider</dt-text>
+        <dt-text as="p" kind="body" size="200" wrap="pretty">Track-based control for selecting a numeric value or range.</dt-text>
       </DtStack>
     </DtStack>
   </DtLink>

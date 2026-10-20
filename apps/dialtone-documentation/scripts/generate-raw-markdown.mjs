@@ -15,6 +15,7 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, existsSy
 import { resolve, basename, dirname, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { mapOutputPath } from './lib/source-page.mjs';
 import { parseSourceMarkdown } from './lib/parse-source-markdown.mjs';
 import { parseMarkdownFrontmatter } from './lib/frontmatter.mjs';
 import { rewriteAbsoluteLinks, resolveRawLink } from './lib/utils.mjs';
@@ -93,22 +94,6 @@ function walkDir (dir, rootDir = dir) {
     }
   }
   return results;
-}
-
-/**
- * Map a relative source path to an output filename for nested sections.
- * - "colors/index.md" → "colors.md"
- * - "typography/marketing.md" → "typography/marketing.md"
- * - "index.md" (section root) → kept as-is, caller handles
- */
-function mapOutputPath (relPath) {
-  const base = basename(relPath);
-  const dir = dirname(relPath);
-  if (base === 'index.md') {
-    if (dir === '.') return 'index.md';
-    return dir + '.md';
-  }
-  return relPath;
 }
 
 /**
@@ -220,7 +205,17 @@ function appendSubdirectoryLinks (outputBase) {
  */
 function loadAllDataSources () {
   const componentDocs = loadJson(COMPONENT_DOCS_JSON, 'component-documentation.json');
-  setComponentDocs(componentDocs || []);
+  const docsManifest = loadJson(resolve(ROOT, 'package.json'), 'docs package.json');
+  const vueManifest = loadJson(resolve(ROOT, '../../packages/dialtone-vue/package.json'), 'dialtone-vue package.json');
+  const dependency = docsManifest?.devDependencies?.[vueManifest?.name]
+    ?? docsManifest?.dependencies?.[vueManifest?.name];
+  // Workspace docs use this source package. Other dependency ranges need their
+  // own installed metadata before a generated import can be certified.
+  const profile = typeof dependency === 'string' && typeof vueManifest?.name === 'string' && typeof vueManifest?.version === 'string'
+    && (dependency.startsWith('workspace:') || dependency === vueManifest.version)
+    ? { package: vueManifest.name, version: vueManifest.version, dependency }
+    : null;
+  setComponentDocs(componentDocs || [], profile);
 
   const utilityDocs = loadJson(UTILITY_DOCS_JSON, 'dialtone-docs.json');
   setUtilityClassDocs(utilityDocs || {});
@@ -665,6 +660,10 @@ function main () {
     console.log(`[generate-raw-markdown] ${section.name}: ${successCount} generated, ${errorCount} errors`);
     totalSuccess += successCount;
     totalError += errorCount;
+  }
+
+  if (totalError > 0) {
+    throw new Error(`[generate-raw-markdown] Failed: ${totalError} source pages could not be generated. Fix the diagnostics above before building the documentation site.`);
   }
 
   const rawBase = resolve(ROOT, 'docs/.vuepress/public/md');

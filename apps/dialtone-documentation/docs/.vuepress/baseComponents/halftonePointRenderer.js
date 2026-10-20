@@ -16,8 +16,9 @@ import {
 
 /** Geometry defaults shared by the hero and footer surfaces. */
 export const HERO_GEOMETRY = Object.freeze({
-  dotSpacingCss: 20,
-  maxDotSizeCss: 4,
+  // Finer lattice per the Resolve halftone spec: small dots, max radius ~0.2x spacing.
+  dotSpacingCss: 12,
+  maxDotSizeCss: 2.5,
   center: Object.freeze([50, 104]),
   burstRadiusFrac: 1.07,
   burstScale: 1,

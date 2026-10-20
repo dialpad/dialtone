@@ -1,0 +1,732 @@
+//
+//  DIALTONE
+//  COMPONENTS: SLIDER
+//
+//  These are slider classes for Dialpad's design system Dialtone.
+//  For further documentation of these and other classes,
+//  visit https://dialtone.dialpad.com/components/slider
+//
+//  TABLE OF CONTENTS
+//  • VARIABLES
+//  • SLIDER
+//    - Base Style
+//    - Track & Indicator
+//    - Thumb
+//    - Ticks, Marks & Readout
+//    - States (disabled, inverted)
+//    - Vertical orientation
+//  • REDUCED MOTION
+//
+
+@layer dialtone.components {
+
+//  $  SLIDER
+//  ============================================================================
+.d-slider {
+    //  Component CSS vars — override these for size/state modifiers
+    --slider-track-height: var(--dt-size-border-300);         // 4px
+    --slider-track-color: var(--dt-color-border-default);
+    // Same "checked" background DtCheckbox/DtRadio/DtToggle use, rather than
+    // a dedicated slider token — keeps the filled track visually consistent
+    // with other controls' selected state (see radio-checkbox.less, toggle.less).
+    --slider-indicator-color: var(--dt-checkbox-color-background-checked);
+    // foreground-primary, not --dt-color-link-primary — properly
+    // high-contrast body text in both themes, unlike link-primary (tuned for
+    // links inside body copy, too low-contrast for a bold number sitting
+    // alone in dark mode) which used to need a separate dark-mode override.
+    --slider-readout-color: var(--dt-color-foreground-primary);
+    --slider-thumb-size: var(--dt-layout-20px);                // 20px — control row height; actual hit target is --dt-spacing-550 below
+    --slider-thumb-visual-size: calc(var(--slider-thumb-size) * 0.8); // 20% smaller than the hit target
+    // Same color as the filled track/indicator, not a neutral knob color —
+    // the thumb reads as part of the same "selected" affordance.
+    --slider-thumb-color: var(--slider-indicator-color);
+    // Matches the thumb face itself — the border reinforces the thumb's own
+    // edge rather than contrasting against it.
+    --slider-thumb-border-color: var(--slider-thumb-color);
+    --slider-thumb-border-width: var(--dt-size-border-150);
+    // NOT --dt-shadow-focus — that token is an INSET ring, sized for
+    // controls much larger than this thumb's small circle; inset, it ate a
+    // visible chunk out of the thumb's own face instead of reading as a
+    // focus affordance around it. --dt-shadow-focus-outset is the system's
+    // own outward ring, already used by chip.less for the same small-circle
+    // case (its close button).
+    --slider-focus-shadow: var(--dt-shadow-focus-outset);
+    --slider-disabled-track-color: var(--dt-inputs-color-background-disabled);
+    --slider-disabled-indicator-color: var(--dt-inputs-color-foreground-disabled);
+    --slider-disabled-border-color: var(--dt-inputs-color-border-disabled);
+    --slider-tick-color: var(--dt-color-border-bold); // darker than the passive track for legibility
+    --slider-tick-width: var(--dt-size-border-200); // 3.2px diameter dot
+    --slider-boundary-color: var(--dt-color-foreground-tertiary);
+    --slider-track-length: var(--dt-layout-300);               // 192px — used as block-size in vertical mode
+    --slider-mark-offset: var(--dt-spacing-150);               // gap from track/thumb to marks & readout
+    // The band the thumb (and ticks, which share its travel) anchor within —
+    // sized to the thumb's own worst-case rendered radius, including the
+    // --active state's 1.05x drag scale bump (see
+    // .d-slider__thumb-visual--active below), so the thumb can never render
+    // past this inset, even mid-drag. No separate border-width term:
+    // .d-slider__thumb-visual is box-sizing: border-box, so its border
+    // already lives inside --slider-thumb-visual-size — adding it again here
+    // would widen the inset past the thumb's own rendered edge, leaving a
+    // sliver of .d-slider__track visibly uncovered beside the thumb. A
+    // consumer's own `overflow: hidden` wrapper has none of
+    // .d-slider__control's internal overflow-clip-margin generosity below —
+    // it clips flush at its own edge, so this has to be exact. The 1.05
+    // scale factor (rather than a bigger, more visually obvious bump) keeps
+    // this same inset small enough that it reads as flush at rest too — the
+    // gap between an at-rest thumb's own (unscaled) edge and this inset is
+    // the scale bump's own delta, imperceptible at 1.05x. .d-slider__track
+    // itself deliberately stays flush with the true 0%/100% edges regardless
+    // — only the indicator's own thumb-tracking edges reuse this band too,
+    // so they land under the thumb instead of poking a sliver of color past
+    // its rendered circle — see UseSliderGeometry's indicatorStyle.
+    --slider-edge-inset: calc(var(--slider-thumb-visual-size) * 1.05 / 2);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--dt-spacing-25);
+    inline-size: 100%;
+}
+
+//  $$  LABEL
+//  ----------------------------------------------------------------------------
+.d-slider__label {
+    display: block;
+}
+
+//  $$  BODY
+//  ----------------------------------------------------------------------------
+.d-slider__body {
+    display: flex;
+    gap: var(--dt-spacing-150);
+    align-items: center;
+    inline-size: 100%;
+}
+
+// Marks/readout (see below) are position:absolute against .d-slider__control,
+// so they don't naturally reserve layout space the way in-flow content would
+// — without this, a sibling right after <dt-slider> renders on top of them.
+// Fixed allowance (not exact measurement) sized for one line of mark/readout text.
+.d-slider__body--reserve-annotation-space {
+    padding-block-end: var(--dt-spacing-200);
+}
+
+.d-slider__start,
+.d-slider__end {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    color: var(--slider-boundary-color);
+}
+
+//  $$  CONTROL AREA (track + thumbs container)
+//  ----------------------------------------------------------------------------
+.d-slider__control {
+    position: relative;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    box-sizing: content-box;
+    margin-block-start: var(--dt-spacing-25-negative);
+
+    // A mark/readout near 0%/100% is centered on its value (translateX(-50%)),
+    // so it naturally renders partly outside this box — there's nothing left
+    // of 0% or right of 100% to center into. That's fine and expected (it's
+    // what keeps "0"/"100" looking centered rather than nudged inward), but
+    // left uncontained it registers as real layout overflow: an ancestor
+    // container's scrollWidth grows as the thumb approaches an edge, adding a
+    // horizontal scrollbar with no visual indication of why. overflow-clip-margin
+    // gives it room to render past this box's own edge without being clipped,
+    // while still giving the browser a bounded, finite region to clip beyond —
+    // capping the maximum any ancestor's scrollWidth can grow by, regardless of
+    // how long the value/mark text is. Needs overflow-x AND -y both set to clip
+    // (not just one) for the margin to actually apply in current browsers.
+    // overflow-clip-margin also can't take a Dialtone spacing token — every
+    // --dt-spacing-* token is defined as calc(--dt-spacing-base * n), and this
+    // property doesn't resolve ANY math function to a used value, not just
+    // var()-wrapped ones: calc(32px) alone (zero arithmetic, no var at all)
+    // still computes to 0px here, same as min()/max(). Only a bare <length>
+    // token works. So this one property is a raw px value instead of the
+    // token reference used everywhere else in this file; 32px matches
+    // --dt-spacing-400 and SLIDER_EDGE_CLAMP_TOLERANCE_PX for marks. Tooltip
+    // readouts paint in the top layer and are not bounded by this allowance.
+    overflow: clip;
+    cursor: default;
+    block-size: var(--slider-thumb-size);
+    // No WCAG 2.5.5 touch-target padding here — .d-slider__thumb-hit (below)
+    // already guarantees its own 44×44px (--dt-spacing-550) hit target,
+    // independent of this control's own block-size. Padding the whole
+    // control out to 44px too only padded the row's overall height, not
+    // the thumb's actual interactive target, so it's gone — this keeps the
+    // row tight enough to sit flush with sibling form controls (DtInput,
+    // DtSelectMenu) when stacked at the same gap.
+    /* stylelint-disable-next-line meowtec/no-px */
+    overflow-clip-margin: 32px;
+}
+
+//  $$  TRACK
+//  ----------------------------------------------------------------------------
+.d-slider__track {
+    position: absolute;
+    // Always flush with the container's own true edges — only the thumb
+    // (and ticks, anchored to its same travel band) stop short of them; see
+    // --slider-edge-inset's own comment.
+    inset-inline: 0;
+    block-size: var(--slider-track-height);
+    background-color: var(--slider-track-color);
+    border-radius: var(--dt-size-radius-pill);
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+
+    // Track vs. indicator (and, below, enabled vs. disabled) are otherwise
+    // distinguished only by background-color — forced-colors mode commonly
+    // collapses author background-colors on non-form elements to a single
+    // system color, erasing the fill/no-fill distinction that is the whole
+    // point of a slider. A border keeps the track's own boundary visible.
+    @media (forced-colors: active) {
+        border: var(--dt-size-border-100) solid GrayText;
+    }
+}
+
+//  $$  INDICATOR (filled portion)
+//  ----------------------------------------------------------------------------
+.d-slider__indicator {
+    position: absolute;
+    // Explicit stacking (not DOM order) so it paints over .d-slider__tick on
+    // its own filled span regardless of where either sits in the template —
+    // .d-slider__thumb-visual's own z-index still paints above this.
+    z-index: var(--zi-base1);
+    block-size: var(--slider-track-height);
+    background-color: var(--slider-indicator-color);
+    border-radius: var(--dt-size-radius-pill);
+    inset-block-start: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+
+    @media (forced-colors: active) {
+        background-color: Highlight;
+        border: var(--dt-size-border-100) solid Highlight;
+    }
+    // Orientation (below) and dragging state (further below) both override
+    // this variable rather than the transition property directly, so the two
+    // stay a plain same-specificity, same-selector-shape contest resolved by
+    // source order — see the .d-slider--dragging override near the bottom of
+    // this file for why dragging is declared last.
+    --slider-indicator-transition: width var(--td100) var(--ttf-ease), inset-inline-start var(--td100) var(--ttf-ease), inset-inline-end var(--td100) var(--ttf-ease), background-color var(--td100) var(--ttf-ease);
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: var(--slider-indicator-transition);
+    }
+}
+
+//  $$  VISUAL THUMB (the styled handle)
+//  ----------------------------------------------------------------------------
+.d-slider__thumb-visual {
+    position: absolute;
+    z-index: 1;
+    background-color: var(--slider-thumb-color);
+    border: var(--slider-thumb-border-width) solid var(--slider-thumb-border-color);
+    border-radius: var(--dt-size-radius-circle);
+    pointer-events: none;
+    inline-size: var(--slider-thumb-visual-size);
+    block-size: var(--slider-thumb-visual-size);
+    inset-block-start: 50%;
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: box-shadow var(--td150) var(--ttf-ease), inline-size var(--td150) var(--ttf-ease), block-size var(--td150) var(--ttf-ease);
+    }
+}
+
+.d-slider__thumb-visual--focused {
+    box-shadow: var(--slider-focus-shadow);
+
+    // box-shadow is suppressed under forced-colors mode (e.g. Windows High
+    // Contrast), leaving a focused thumb visually identical to an unfocused
+    // one — an outline survives forced-colors and isn't suppressed the way
+    // box-shadow is.
+    @media (forced-colors: active) {
+        outline: var(--dt-size-border-200) solid Highlight;
+        outline-offset: var(--dt-size-border-100);
+    }
+}
+
+//  $$  ACTIVE (grabbed/dragging) STATE
+//  Lifts the thumb slightly, as if picked up off the track.
+//  ----------------------------------------------------------------------------
+.d-slider__thumb-visual--active {
+    // Matches --slider-edge-inset's own scale factor (see its comment) — any
+    // bigger and the gap this leaves at rest, between an unscaled thumb's own
+    // edge and the inset sized for this larger one, stops being imperceptible.
+    inline-size: calc(var(--slider-thumb-visual-size) * 1.05);
+    block-size: calc(var(--slider-thumb-visual-size) * 1.05);
+    box-shadow: var(--dt-shadow-small);
+
+    // A pure pointer/touch drag never sets --focused, so without its own
+    // outline here, forced-colors mode would have no legible affordance at
+    // all once box-shadow is suppressed — just the (also-suppressed) subtle
+    // scale bump.
+    @media (forced-colors: active) {
+        outline: var(--dt-size-border-200) solid Highlight;
+        outline-offset: var(--dt-size-border-100);
+    }
+}
+
+.d-slider__thumb-visual--active.d-slider__thumb-visual--focused {
+    box-shadow: var(--dt-shadow-small), var(--slider-focus-shadow);
+}
+
+//  $$  THUMB HIT AREA (min 44×44px transparent touch target per thumb)
+//  ----------------------------------------------------------------------------
+.d-slider__thumb-hit {
+    position: absolute;
+    z-index: 2;
+    min-inline-size: var(--dt-spacing-550);
+    min-block-size: var(--dt-spacing-550);
+    border-radius: var(--dt-size-radius-circle);
+    cursor: grab;
+    inset-block-start: 50%;
+}
+
+//  $$  NATIVE INPUT (transparent, a11y + keyboard carrier)
+//  ----------------------------------------------------------------------------
+.d-slider__thumb {
+    position: absolute;
+    margin: 0;
+    padding: 0;
+    cursor: pointer;
+    opacity: 0;
+    -webkit-appearance: none;
+    appearance: none;
+    pointer-events: none;
+    inline-size: 100%;
+    block-size: 100%;
+    inset: 0;
+
+    &::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+    }
+
+    &::-moz-range-thumb {
+        background: transparent;
+        border: none;
+        appearance: none;
+    }
+}
+
+//  $$  TICKS
+//  A small round dot sitting ON the track itself (same centerline as the
+//  track/indicator), not below it — same footprint regardless of
+//  orientation, so the vertical-mode override below only needs to
+//  reposition it, not resize it. .d-slider__indicator's own z-index (above)
+//  covers whichever ticks fall within its filled span, regardless of
+//  template order — a tick only shows through on the track's own unfilled
+//  portion.
+//  ----------------------------------------------------------------------------
+.d-slider__tick {
+    position: absolute;
+    background-color: var(--slider-tick-color);
+    border-radius: var(--dt-size-radius-circle);
+    pointer-events: none;
+    inline-size: var(--slider-tick-width);
+    block-size: var(--slider-tick-width);
+    inset-block-start: 50%;
+    // Centers the dot's own box on the 50% line instead of just anchoring
+    // its top edge there — no transform (tickPositionStyle's own inline
+    // transform only ever handles the inline axis), so this has to be a
+    // plain negative margin.
+    margin-block-start: calc(var(--slider-tick-width) / 2 * -1);
+}
+
+//  $$  MARKS (text annotations centered under a track position)
+//  Independent of ticks; set via the marks prop.
+//  ----------------------------------------------------------------------------
+.d-slider__mark {
+    position: absolute;
+    overflow: hidden;
+    color: var(--slider-boundary-color);
+    font: var(--dt-text-body-xs);
+    font-size: var(--dt-font-size-125);
+    line-height: var(--dt-font-line-height-100);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transform: translateX(-50%);
+    pointer-events: none;
+    // Custom mark/value text has no length guarantee — without this, long
+    // text in a narrow control hard-clips mid-character against
+    // .d-slider__control's own overflow: clip, with no ellipsis/affordance
+    // that anything was cut off. 100% is relative to .d-slider__control
+    // (the nearest positioned ancestor), so it scales with the control
+    // itself rather than an arbitrary fixed width.
+    max-inline-size: 100%;
+    inset-block-start: calc(50% + var(--slider-track-height) / 2 + var(--slider-mark-offset));
+
+    // translateX(-50%) centers the mark on its insetInlineStart anchor — a
+    // physical shift that doesn't mirror under dir="rtl" the way
+    // insetInlineStart does, so the anchor and the compensating shift
+    // disagree unless this flips too.
+    &:dir(rtl) {
+        transform: translateX(50%);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: opacity var(--td150) var(--ttf-ease);
+    }
+}
+
+//  Hidden in favor of the live readout when the two would visually overlap
+//  (JS-measured — see the "Mark / readout collision avoidance" comment in
+//  Slider.vue). visibility, not display: none, so it keeps its layout slot
+//  and can be measured again once it's no longer colliding.
+.d-slider__mark--collision-hidden {
+    visibility: hidden;
+    opacity: 0;
+}
+
+//  $$  READOUT (live value, tracks the thumb — same size and position as
+//  marks, sharing the same row below the track; distinguished from them
+//  only by color, since it reflects the current value rather than a
+//  fixed reference point)
+//  ----------------------------------------------------------------------------
+.d-slider__readout {
+    position: absolute;
+    overflow: hidden;
+    color: var(--slider-readout-color);
+    font: var(--dt-text-body-xs);
+    font-weight: var(--dt-font-weight-bold);
+    font-size: var(--dt-font-size-125);
+    line-height: var(--dt-font-line-height-100);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    transform: translateX(-50%);
+    pointer-events: none;
+    // Same rationale as .d-slider__mark's own max-inline-size above.
+    max-inline-size: 100%;
+    inset-block-start: calc(50% + var(--slider-track-height) / 2 + var(--slider-mark-offset));
+
+    // Same rationale as .d-slider__mark's :dir(rtl) override above.
+    &:dir(rtl) {
+        transform: translateX(50%);
+    }
+
+    @media (prefers-reduced-motion: no-preference) {
+        transition: inset-inline-start var(--td100) var(--ttf-ease), bottom var(--td100) var(--ttf-ease), opacity var(--td150) var(--ttf-ease);
+    }
+}
+
+//  Same rationale as the indicator: don't let a transition meant for discrete
+//  jumps make a continuous drag look like the readout is lagging the thumb.
+.d-slider--dragging .d-slider__readout {
+    transition: none;
+}
+
+.d-slider__readout--hide {
+    visibility: hidden;
+    opacity: 0;
+}
+
+.d-slider__readout--show {
+    visibility: visible;
+    opacity: 1;
+}
+
+//  $$  TOOLTIP-STYLED READOUT (readout="tooltip")
+//  Native popovers retain DOM inheritance while escaping ancestor clipping.
+//  Floating UI positions against the rendered thumb in viewport coordinates.
+//  ----------------------------------------------------------------------------
+.d-slider__readout-tooltip {
+    position: fixed;
+    display: none;
+    margin: 0;
+    overflow: visible;
+    font-variant-numeric: tabular-nums;
+    border: 0;
+    pointer-events: none;
+    inset: auto;
+    inline-size: max-content;
+    max-inline-size: min(var(--dt-layout-350), calc(100dvw - var(--dt-spacing-100) * 2));
+
+    &:popover-open {
+        display: block;
+    }
+
+    // --slider-tooltip-arrow-x is computed in UseSliderTooltipReadout from
+    // physical viewport coordinates (Floating UI's own result.x, the
+    // anchor's physical rect.left) — data-side is likewise always a
+    // physical Floating UI placement ('top'/'bottom'/'left'/'right', never
+    // '-start'/'-end'). A bare physical property (left/right/
+    // border-left-color/border-right-color) would say this correctly, but
+    // the pre-commit autofixer (stylelint-plugin-dialtone's
+    // fix-logical-properties.js) silently rewrites any bare physical
+    // property name back to its logical form on every commit — there is no
+    // disable-comment escape hatch for it. So this stays logical-only: the
+    // LTR-correct logical property, overridden under :dir(rtl) by the
+    // logical property that maps to the SAME physical side under RTL
+    // (inline-end -> physical left, inline-start -> physical right there),
+    // with the base property reset to transparent/auto so only one edge is
+    // ever colored/anchored at a time.
+    //
+    // :dir(rtl) is placed on THIS element (before ::after), not nested
+    // inside the ::after block — `::after:dir(rtl)` (a pseudo-class after a
+    // pseudo-element) is not a thing browsers match; it silently never
+    // applies, leaving the base (buggy) declaration active under RTL.
+    &[data-side="top"]::after {
+        transform: translateX(-50%);
+        inset-block-start: 100%;
+        inset-inline-start: var(--slider-tooltip-arrow-x);
+        border-block-start-color: var(--tooltip-color-background);
+    }
+
+    &:dir(rtl)[data-side="top"]::after {
+        inset-inline: auto var(--slider-tooltip-arrow-x);
+    }
+
+    &[data-side="bottom"]::after {
+        transform: translateX(-50%);
+        inset-block-end: 100%;
+        inset-inline-start: var(--slider-tooltip-arrow-x);
+        border-block-end-color: var(--tooltip-color-background);
+    }
+
+    &:dir(rtl)[data-side="bottom"]::after {
+        inset-inline: auto var(--slider-tooltip-arrow-x);
+    }
+
+    &[data-side="left"]::after {
+        transform: translateY(-50%);
+        inset-block-start: var(--slider-tooltip-arrow-y);
+        inset-inline-start: 100%;
+        border-inline-start-color: var(--tooltip-color-background);
+    }
+
+    &:dir(rtl)[data-side="left"]::after {
+        inset-inline: auto 100%;
+        border-inline-start-color: transparent;
+        border-inline-end-color: var(--tooltip-color-background);
+    }
+
+    &[data-side="right"]::after {
+        transform: translateY(-50%);
+        inset-block-start: var(--slider-tooltip-arrow-y);
+        inset-inline-end: 100%;
+        border-inline-end-color: var(--tooltip-color-background);
+    }
+
+    &:dir(rtl)[data-side="right"]::after {
+        inset-inline: 100% auto;
+        border-inline-end-color: transparent;
+        border-inline-start-color: var(--tooltip-color-background);
+    }
+}
+
+.d-slider__tooltip-content {
+    display: block;
+    overflow: hidden;
+    overflow-wrap: anywhere;
+}
+
+//  $$  DRAGGING STATE
+//  ----------------------------------------------------------------------------
+.d-slider--dragging {
+    .d-slider__control,
+    .d-slider__thumb-hit {
+        cursor: grabbing;
+    }
+}
+
+//  $$  DISABLED STATE
+//  ----------------------------------------------------------------------------
+.d-slider--disabled {
+    .d-slider__control,
+    .d-slider__thumb-hit {
+        cursor: not-allowed;
+    }
+
+    .d-slider__track {
+        background-color: var(--slider-disabled-track-color);
+    }
+
+    .d-slider__indicator {
+        background-color: var(--slider-disabled-indicator-color);
+    }
+
+    .d-slider__readout {
+        color: var(--slider-disabled-indicator-color);
+    }
+
+    // Marks/ticks otherwise stay at full, un-dimmed contrast alongside a
+    // visibly muted track/indicator/thumb, reading as half-disabled.
+    .d-slider__mark {
+        color: var(--slider-disabled-indicator-color);
+    }
+
+    .d-slider__tick {
+        background-color: var(--slider-disabled-indicator-color);
+    }
+
+    @media (forced-colors: active) {
+        .d-slider__track,
+        .d-slider__indicator {
+            border-color: GrayText;
+        }
+
+        .d-slider__indicator {
+            background-color: GrayText;
+        }
+    }
+
+    // Grey, but opaque — the thumb straddles both the indicator and the bare
+    // track, and --dt-inputs-color-background-disabled is translucent (meant
+    // for a uniform backdrop like a badge), so each showed through
+    // differently on either side and made the thumb look off-center rather
+    // than disabled. Same relative-color-syntax pattern the opacity utility
+    // classes use: keep the actual disabled-background token as the source
+    // of truth, just force its alpha to 1 at the point of use.
+    .d-slider__thumb-visual {
+        --slider-thumb-color: oklch(from var(--dt-inputs-color-background-disabled) l c h / 1);
+
+        border-color: var(--slider-disabled-border-color);
+    }
+}
+
+//  $$  INVERTED STATE
+//  (indicator is already positioned by the Vue component via :style)
+//  Class provided for consumer overrides.
+// .d-slider--inverted {}
+
+//  $$  VERTICAL ORIENTATION
+//  ----------------------------------------------------------------------------
+.d-slider--vertical {
+    inline-size: auto;
+    block-size: var(--slider-track-length);
+
+    .d-slider__body {
+        flex-direction: column;
+        align-items: center;
+        block-size: 100%;
+    }
+
+    .d-slider__control {
+        inline-size: var(--slider-thumb-size);
+        block-size: auto;
+        flex: 1;
+        flex-direction: column;
+        margin-block-start: var(--dt-spacing-50);
+        // No touch-target padding-inline here either — same reasoning as the
+        // horizontal control's own rule above; .d-slider__thumb-hit's 44px
+        // minimum doesn't depend on it.
+        // Marks/readout sit beside the (narrow) vertical control by a fixed,
+        // value-independent offset — not the value-dependent inline overflow
+        // the horizontal clip above guards against — so there's no equivalent
+        // growing-scrollWidth risk here. Restore full visibility.
+        overflow: visible;
+    }
+
+    .d-slider__track {
+        inset-inline: unset;
+        inline-size: var(--slider-track-height);
+        // Flush with .d-slider__control, same as the horizontal track above
+        // (no cap extension past the control's own bounds) — ticks and the
+        // thumb's own travel (UseSliderGeometry's EDGE_INSET) are what stay
+        // inset from the true edge, not the track itself.
+        block-size: 100%;
+        inset-inline-start: 50%;
+        inset-block-start: 0;
+        transform: translateX(-50%);
+
+        // insetInlineStart:50% still mirrors under dir="rtl" even in
+        // vertical orientation — it's the CSS inline axis (unaffected by
+        // this component's own orientation prop), so the centering
+        // transform has to flip the same way it does horizontally.
+        &:dir(rtl) {
+            transform: translateX(50%);
+        }
+    }
+
+    .d-slider__indicator {
+        inline-size: var(--slider-track-height);
+        block-size: auto;
+        inset-inline-start: 50%;
+        inset-block-start: unset;
+        transform: translateX(-50%);
+        // Overrides the variable, not the transition property itself — see
+        // the comment on the base .d-slider__indicator rule for why, and
+        // .d-slider--dragging .d-slider__indicator near the end of this file
+        // for the same-specificity override that must win over this one.
+        --slider-indicator-transition: height var(--td100) var(--ttf-ease), bottom var(--td100) var(--ttf-ease), top var(--td100) var(--ttf-ease), background-color var(--td100) var(--ttf-ease);
+
+        // Same rationale as .d-slider__track's :dir(rtl) override above.
+        &:dir(rtl) {
+            transform: translateX(50%);
+        }
+    }
+
+    .d-slider__thumb-visual {
+        inset-inline-start: 50%;
+        inset-block-start: unset;
+        // bottom and transform (incl. the dir(rtl) mirror) are set inline via
+        // style — thumbPositionStyle (UseSliderGeometry) always sets a
+        // transform in both orientations, so a CSS fallback here would never
+        // actually apply (inline style always wins with no !important).
+    }
+
+    .d-slider__thumb-hit {
+        inset-inline-start: 50%;
+        inset-block-start: unset;
+    }
+
+    .d-slider__tick {
+        // A circle's footprint doesn't change with orientation — only swap
+        // which axis centers it onto the track's own centerline, same as
+        // every other swap in this block.
+        inset-block-start: unset;
+        inset-inline-start: 50%;
+        margin-inline-start: calc(var(--slider-tick-width) / 2 * -1);
+        margin-block-start: 0;
+        // bottom and transform set inline via style — tickPositionStyle
+        // (UseSliderGeometry) always sets a transform, so a CSS fallback
+        // here would never actually apply.
+    }
+
+    .d-slider__mark,
+    .d-slider__readout {
+        // The base rule's max-inline-size: 100% is relative to
+        // .d-slider__control — a meaningful cap in horizontal mode, but here
+        // the control's own inline-size is just the thumb's narrow width,
+        // which these sit BESIDE, not within. Left at 100%, even a short
+        // unit-bearing label ellipsized despite the real free space. 20ch
+        // matches filter-pill's own cap for similarly short label text.
+        max-inline-size: 20ch;
+    }
+
+    .d-slider__mark {
+        inset-block-start: unset;
+        inset-inline-start: calc(50% + var(--slider-thumb-size) / 2 + var(--slider-mark-offset));
+        transform: translateY(50%);
+        // bottom set inline via style
+    }
+
+    .d-slider__readout {
+        inset-block-start: unset;
+        inset-inline-start: calc(50% + var(--slider-thumb-size) / 2 + var(--slider-mark-offset));
+        transform: translateY(50%);
+        // bottom set inline via style
+    }
+}
+
+//  $$  DRAGGING OVERRIDES THAT OUTRANK ORIENTATION
+//  Same (0,2,0) specificity, same descendant shape, as the orientation
+//  override above — placed after it in source order on purpose, so dragging
+//  always wins regardless of which orientation is active. Keep this after
+//  .d-slider--vertical.
+//  ----------------------------------------------------------------------------
+//  While dragging, the indicator's position is driven by the pointer on
+//  every pointermove — the transition above is for discrete value jumps
+//  (click-to-position, keyboard) and only makes a continuous drag look
+//  like it's lagging behind the thumb.
+.d-slider--dragging .d-slider__indicator {
+    --slider-indicator-transition: none;
+}
+
+} // @layer

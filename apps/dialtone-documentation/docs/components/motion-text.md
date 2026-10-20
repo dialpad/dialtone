@@ -214,9 +214,9 @@ Each word is real text separated by real spaces, so screen readers read the sent
 
 ## Best Practices
 
-1. **Match the effect to the moment**: Use `slide-in-gradient` or `gradient-in` for hero and headline moments, `fade-in` or `slide-in` for quieter reveals, and a looping `gradient-sweep` or `shimmer` for thinking and loading states.
-2. **Use gradient effects on headline-size text**: The lightest gradient stops fall below 4.5:1 contrast on light surfaces and the darkest below 3:1 on dark surfaces, so reserve `gradient-in`, `slide-in-gradient`, and `gradient-sweep` for large text.
-3. **Keep the text short**: Every word adds to the stagger, so long passages take longer to finish. Reserve effects for headlines and short phrases.
+1. **Match the effect to the moment**: Reserve the gradient modes (`gradient-in`, `slide-in-gradient`, and `gradient-sweep`) for AI-generated text inside product UI. Don't use them on brand headlines or hero sections (see [Gradient](/foundations/gradient/)). Use `fade-in` or `slide-in` for quieter reveals and body text, and a looping `gradient-sweep` or `shimmer` for thinking and loading states.
+2. **Keep the gradient brief**: The lightest gradient stops fall below 4.5:1 contrast on light surfaces and the darkest below 3:1 on dark surfaces. The reveal modes show the gradient only briefly before the text settles to solid ink, so avoid holding text on the gradient where people need to read it.
+3. **Keep the text short**: Every word adds to the stagger, so long passages take longer to finish. Reserve effects for short phrases.
 4. **Start with the default speed**: `300` is the designed timing. Use `200` when the effect needs to finish quickly, and `400` or `500` for slower, more deliberate moments.
 5. **Don't overuse**: Too many animated elements on one screen compete for attention.
 6. **Test with reduced motion**: Make sure your UI still reads well when the text renders at rest.

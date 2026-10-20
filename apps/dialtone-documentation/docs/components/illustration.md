@@ -9,8 +9,38 @@ keywords: ["image", "graphic", "artwork", "d-illustration", "DtIllustration", "d
 combinator: DtIllustration
 ---
 
-Check out our [illustration catalog](/foundations/illustrations/index.md), and our [brand section](/foundations/brand/index.md) for information on how to use this component.
+Use illustrations in product UI, paired with inline text in [empty states](/components/empty-state.html), onboarding, and announcements. Spot illustrations are retired from brand and marketing work; use [Resolve graphics](/foundations/graphic-system/) there instead.
+
+## Usage
+
+Pass the illustration's `name` in kebab-case. Each name in the catalog below is a valid value.
+
+```vue demo
+<dt-illustration name="access-denied" />
+```
+
+## Catalog
+
+<icons illustration kind="spot" size="large" :excluded-icons="excludedIllustrations"></icons>
 
 ## Vue API
 
-<component-vue-api component-name="icon" />
+<component-vue-api component-name="illustration" />
+
+## Accessibility
+
+- Illustrations are decorative by default. Without an `aria-label`, they render with `aria-hidden="true"`, so screen readers skip them.
+- Add an `aria-label` only when the illustration carries meaning that the surrounding text doesn't, for example `<dt-illustration name="access-denied" aria-label="Access denied" />`.
+- Don't rely on an illustration alone to communicate. Pair it with a heading and body text, as in [Empty State](/components/empty-state.html).
+
+<script setup>
+// Temporarily exclude illustrations from being shown on the docsite
+const excludedIllustrations = [
+  'mind',
+  'blank-space',
+  'vector-vortex',
+  'atomic-pathway',
+  'black-hole',
+  'orbital-harmony',
+];
+</script>

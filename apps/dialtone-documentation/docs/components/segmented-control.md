@@ -4,7 +4,7 @@ description: Single-select control for switching views, scopes, or modes.
 status: new
 thumb: true
 storybook: https://dialtone.dialpad.com/vue/?path=/story/components-segmented-control--default
-keywords: ["segmented control", "toggle group", "button toggle", "radio group", "d-segmented-control", "DtSegmentedControl", "dt-segmented-control", "select", "scope", "content switcher"]
+keywords: ["segmented control", "toggle group", "button toggle", "radio group", "d-segmented-control", "DtSegmentedControl", "dt-segmented-control", "single selection", "scope", "content switcher"]
 combinator: DtSegmentedControl
 ---
 

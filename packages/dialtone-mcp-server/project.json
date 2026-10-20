@@ -6,14 +6,24 @@
       "dependsOn": ["dialtone-query-core:build"],
       "inputs": [
         "{projectRoot}/src/**/*",
+        "{projectRoot}/client-rules.json",
         "{projectRoot}/package.json",
         "{projectRoot}/tsconfig.json",
-        "{projectRoot}/rollup.config.js"
+        "{projectRoot}/rollup.config.js",
+        { "dependentTasksOutputFiles": "**/*.{js,json,d.ts}", "transitive": true }
       ],
       "outputs": ["{projectRoot}/build"],
       "options": {
         "cwd": "{projectRoot}",
         "command": "pnpm exec rollup -c"
+      }
+    },
+    "test-startup": {
+      "executor": "nx:run-commands",
+      "dependsOn": ["build"],
+      "options": {
+        "cwd": "{projectRoot}",
+        "command": "node --test tests/startup.test.mjs"
       }
     },
     "start": {

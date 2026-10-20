@@ -2,7 +2,10 @@
 // COMPONENTS SEARCH TOOL
 // ============================================================================
 
+import type { ComponentDocCatalog } from '../component-documentation.js';
+import { keywordMatcher } from '../keyword-matching.js';
 import { applySmartFilter } from '../utils/filters.js';
+import { directiveIdentifiers } from '../directive-identifiers.js';
 import { normalizeComponents, normalizeComponentName, compactName, componentNames, componentImportStatement, componentImportNote } from '../component-identity.js';
 import type {
   Component,
@@ -10,6 +13,7 @@ import type {
   ComponentEvent,
   ComponentSlot,
   SearchResult,
+  SearchPage,
   ValueObject
 } from '../types.js';
 
@@ -155,6 +159,29 @@ function searchBySlots(regexArray: RegExp[], components: Component[]): SearchRes
   return matches;
 }
 
+/** Join discovery evidence only to public records present in the selected dataset. */
+function searchByKeywords(query: string, components: Component[], catalog?: ComponentDocCatalog): SearchResult[] {
+  if (!catalog) return [];
+  const match = keywordMatcher(query);
+  const pages = catalog.pages.map(page => ({ page, keywords: match(page.keywords) }))
+    .filter(match => match.keywords.length > 0);
+  return components.flatMap(component => {
+    const identity = component.identity;
+    if (identity?.kind !== 'public') return [];
+    const matches = pages.filter(({ page }) => page.components.some(reference =>
+      reference.relation === 'api' && reference.canonicalName === identity.canonicalName));
+    if (!matches.length) return [];
+    const result = toSearchResult(component);
+    result.details.keywordSource = {
+      ...catalog.source,
+      docIds: matches.map(({ page }) => page.docId),
+      keywords: [...new Set(matches.flatMap(match => match.keywords))],
+      installedCompatibility: 'not_checked',
+    };
+    return [result];
+  });
+}
+
 function legacyNote(component: Component): string | null {
   const metadata = component.metadata;
   if (metadata?.deprecated) {
@@ -168,9 +195,17 @@ function legacyNote(component: Component): string | null {
 }
 
 /**
- * Search Vue components by name, description, props, events, and slots
+ * Search Vue components by name, curated page keywords, description, props, events, and slots
  */
-export function searchComponents(query: string, components: Component[]): { results: SearchResult[]; notes: string[]; exactMatch: boolean; warning: string | null } {
+export function searchComponents(query: string, components: Component[], catalog?: ComponentDocCatalog): { results: SearchResult[]; notes: string[]; exactMatch: boolean; warning: string | null } {
+  if (directiveIdentifiers(query).length > 0) {
+    return {
+      results: [],
+      notes: ['Directive identifiers are not component names. Search documentation for the directive contract and registration.'],
+      exactMatch: false,
+      warning: null,
+    };
+  }
   components = normalizeComponents(components);
   console.error(`\n[COMPONENT SEARCH DEBUG] Query: "${query}"`);
 
@@ -189,7 +224,8 @@ export function searchComponents(query: string, components: Component[]): { resu
 
   console.error(`[COMPONENT SEARCH DEBUG] Words:`, words);
 
-  // Search in 5 separate buckets
+  // Preserve canonical name/family matches, then curated phrases before API text.
+  const keywordMatches = searchByKeywords(query, components, catalog);
   const nameMatches = searchByName(regexArray, components);
   const descriptionMatches = searchByDescription(regexArray, components);
   const propsMatches = searchByProps(regexArray, components);
@@ -201,6 +237,7 @@ export function searchComponents(query: string, components: Component[]): { resu
   // Combine in priority order
   const combined = [
     ...nameMatches,
+    ...keywordMatches,
     ...descriptionMatches,
     ...propsMatches,
     ...eventsMatches,
@@ -227,7 +264,7 @@ export function searchComponents(query: string, components: Component[]): { resu
   // Add note if no name matches but other buckets have results
   const searchNotes: string[] = [];
   if (!exact && nameMatches.length === 0 && deduplicated.length > 0) {
-    searchNotes.push(`No component named '${query}', showing components with matching description/props/events/slots`);
+    searchNotes.push(`No component named '${query}', showing components with matching ${catalog ? 'keywords/' : ''}description/props/events/slots`);
   }
 
   // Apply smart filter (remove deprecated, swap discouraged with alternatives)
@@ -241,9 +278,12 @@ export function searchComponents(query: string, components: Component[]): { resu
 
   // The note also covers a bare "icon": DtIcon is filtered out, but the note
   // still points to its replacement.
-  const allNotes = [...(note ? [note] : []), ...searchNotes, ...filterNotes];
   // removeDuplicates also drops the exact match if the filter swapped it back in.
   const results = exact ? removeDuplicates([toSearchResult(exact), ...filtered]) : filtered;
+  if (catalog && results.some(result => result.details.keywordSource)) {
+    searchNotes.unshift(`Curated keyword matches use bundled documentation (${catalog.source.versionScope}; SHA256 ${catalog.source.hash}); installed compatibility is not checked.`);
+  }
+  const allNotes = [...(note ? [note] : []), ...searchNotes, ...filterNotes];
   return { results, notes: allNotes, exactMatch: exact !== null, warning: note };
 }
 
@@ -254,15 +294,17 @@ function deprecatedWarning(reason?: string): string {
 /**
  * Format component search results
  */
-export function formatComponentResults(results: SearchResult[], query: string): string {
+export function formatComponentResults(results: SearchResult[], query: string, page?: SearchPage): string {
   if (results.length === 0) {
     return `No components found for "${query}".\n\nTry searching with:\n- Component name (e.g., "button", "modal", "avatar")\n- Partial name (e.g., "badge", "card")\n- Component feature (e.g., "dropdown", "tooltip")`;
   }
 
-  let output = `Found ${results.length} component${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
+  let output = page
+    ? `Showing ${results.length} of ${page.total} component${page.total === 1 ? '' : 's'} for "${query}" (results ${page.offset + 1}–${page.offset + results.length}):\n\n`
+    : `Found ${results.length} component${results.length > 1 ? 's' : ''} for "${query}":\n\n`;
 
   results.forEach((result: SearchResult, index: number) => {
-    output += `${index + 1}. **${result.name}**\n`;
+    output += `${(page?.offset ?? 0) + index + 1}. **${result.name}**\n`;
 
     // Show metadata warnings if present
     if (result.metadata) {
@@ -288,7 +330,7 @@ export function formatComponentResults(results: SearchResult[], query: string): 
 
     // Show key props (up to 5)
     if (result.details.props && result.details.props.length > 0) {
-      output += `   **Key Props:**\n`;
+      output += `   **Props (first ${Math.min(5, result.details.props.length)} of ${result.details.props.length}):**\n`;
       const propsToShow = result.details.props.slice(0, 5);
       propsToShow.forEach((prop: ComponentProp) => {
         const typeName = prop.type?.name || 'unknown';

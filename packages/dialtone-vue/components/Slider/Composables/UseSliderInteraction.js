@@ -1,0 +1,509 @@
+import { ref, watch, nextTick } from 'vue';
+import { measureEdgeInsetPx } from '../utils';
+
+// Keys that actually navigate the thumb's value (natively or via
+// largeStepDelta below) — used to scope the Escape-dismissal reopen to real
+// navigation, not every keydown the thumb receives (a bare modifier press
+// like Shift/Control, held with focus but no navigation, shouldn't reopen a
+// tooltip the user just dismissed).
+const THUMB_NAV_KEYS = new Set([
+  'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End', 'PageUp', 'PageDown',
+]);
+
+// Pointer drag, native keyboard events, focus/hover tracking, and the
+// interactive value-update path (updateThumbValue/commitIfChanged) — as
+// opposed to UseSliderValue's normalization of externally-driven changes.
+export function useSliderInteraction(props, emit, {
+  controlRef,
+  thumbRefs,
+  internalValues,
+  isRange,
+  isVertical,
+  decimalPlaces,
+  snapToStep,
+  lastCommittedValues,
+  findMagneticSnapPoint,
+  activeSnapValue,
+  isRtl,
+}) {
+  const isDragging = ref(false);
+  const activeThumbIndex = ref(null);
+  // Unlike activeThumbIndex (cleared on pointerup so the --active visual class
+  // turns off), this persists across drags — it's what lets a pointerdown on
+  // two coincident thumbs route to whichever one wasn't grabbed last time,
+  // instead of always defaulting back to the same thumb once they touch.
+  const lastActiveThumbIndex = ref(null);
+  const focusedThumbIndex = ref(null);
+  const hoveredThumbIndex = ref(null);
+  // Escape's job is "suppress until the next real show-trigger", not "turn
+  // off forever" — DtTooltip's own onLeaveAnchor does the same thing
+  // (internalShow = false, reopens on the next mouseenter/focusin). Reusing
+  // focused/hoveredThumbIndex for this would force Escape to blur the thumb
+  // to take effect, losing further keyboard nav — so it's tracked separately
+  // and cleared by whichever handler fires on the next genuine trigger.
+  const escapeDismissedIndex = ref(null);
+  // Not reactive on purpose: set synchronously right before a pointer-driven
+  // focus() call and read/cleared synchronously in the 'focus' handler it
+  // triggers, within the same task. See onPointerDown.
+  let isPointerFocus = false;
+
+  // Not reactive — which pointer owns the current drag. setPointerCapture
+  // only retargets POINTER events for this pointerId; an unrelated second
+  // pointer (e.g. a second touch) still reaches the same listeners, and its
+  // pointerup could otherwise end and commit the real drag, leaving the
+  // owning pointer's further movement silently inert.
+  let activePointerId = null;
+
+  // Not reactive — whether THIS drag's own pointerdown landed on an already-
+  // coincident pair, the only case resolveCoincidentHandoff should apply in.
+  // A drag that grabbed a clearly distinct thumb and happens to converge with
+  // its sibling mid-gesture should stop there, not hand off mid-flight.
+  let dragStartedCoincident = false;
+
+  // A consumer can flip :disabled reactively while a thumb is focused or
+  // hovered — the native input's own focus ring clears automatically, but
+  // focusedThumbIndex/hoveredThumbIndex are separate internal state (also
+  // drive the tooltip readout), so without this they'd keep pointing at
+  // a thumb that's no longer interactive, leaving its focus ring/readout
+  // stuck open.
+  watch(
+    () => props.disabled,
+    (isDisabled) => {
+      if (isDisabled) {
+        focusedThumbIndex.value = null;
+        hoveredThumbIndex.value = null;
+      }
+    },
+  );
+
+  // A controlled modelValue switching from range to single mode shrinks
+  // internalValues (and thumbRefs, via its self-cleaning function ref) to
+  // length 1 — unmounting thumb index 1's native input. If it held focus,
+  // the browser drops focus to <body> with nothing to restore it, silently
+  // breaking keyboard navigation. Restore it to the one remaining thumb.
+  watch(
+    () => internalValues.value.length,
+    (newLength, oldLength) => {
+      // focusedThumbIndex alone misses a pointer-driven drag — onPointerDown
+      // deliberately never sets it (see isPointerFocus/onThumbFocus above), so
+      // the far more common mouse-drag-then-shrink case needs the real DOM
+      // focus as a second signal, checked before the unmount this tick is about
+      // to cause moves it to <body>.
+      const wasFocused = focusedThumbIndex.value === 1 || document.activeElement === thumbRefs.value[1];
+      if (newLength === 1 && oldLength === 2 && wasFocused) {
+        nextTick(() => thumbRefs.value[0]?.focus());
+      }
+      // An external modelValue update mid-drag (e.g. range -> single) can
+      // shrink internalValues below the thumb being dragged — the next
+      // pointermove would still target that now-gone index (its own guard
+      // only checks for null), recreating a second input the public model no
+      // longer has. isDragging is left alone; the eventual pointerup/
+      // pointercancel still arrives and ends it normally.
+      if (activeThumbIndex.value !== null && activeThumbIndex.value >= newLength) {
+        activeThumbIndex.value = null;
+      }
+    },
+  );
+
+  // ─── Value update ─────────────────────────────────────────────────────────
+
+  function updateThumbValue(thumbIndex, newVal, { allowSnap = false } = {}) {
+    let clamped = Math.min(props.max, Math.max(props.min, newVal));
+    const magneticValue = allowSnap ? findMagneticSnapPoint(clamped, thumbIndex) : null;
+    clamped = magneticValue ?? snapToStep(clamped);
+
+    const next = [...internalValues.value];
+
+    if (isRange.value) {
+      // The low thumb can never pass the high thumb (and vice versa) — they
+      // may only meet. minGapSteps, when set, widens this into a
+      // larger required gap instead of a bare touch. Clamped to 0 — an
+      // unvalidated negative minGapSteps would otherwise flip the sign below
+      // and invert the crossing clamp instead of disabling it.
+      // Rounded — minGapSteps is a COUNT of steps, and a fractional value
+      // would make this gap not a multiple of props.step, so the
+      // re-quantize in onPointerUp could never land back on-grid once this
+      // clamp pulls the value to the boundary.
+      const gap = Math.max(0, Math.round(props.minGapSteps) * props.step);
+      if (thumbIndex === 0) {
+        clamped = Math.min(clamped, (next[1] ?? props.max) - gap);
+      } else {
+        clamped = Math.max(clamped, (next[0] ?? props.min) + gap);
+      }
+
+      // Whether the crossing clamp above left an active magnetic snap point
+      // untouched — if so, keep that exact (deliberately off-grid) value
+      // instead of re-rounding it below, which used to clear a magnetic hold
+      // the clamp never actually touched (single-thumb mode has no crossing
+      // clamp and always held it correctly).
+      const heldMagneticValue = magneticValue != null && clamped === magneticValue;
+      if (!heldMagneticValue) {
+        // gap is a product of two decimals (e.g. 3 * 0.1) and can carry IEEE-754
+        // noise (0.30000000000000004) that snapToStep's rounding, applied
+        // earlier in this function, never sees — round it out the same way
+        // before it reaches internalValues/the emitted modelValue.
+        const dp = Math.max(decimalPlaces(props.min), decimalPlaces(props.step));
+        clamped = parseFloat(clamped.toFixed(dp));
+        clamped = Math.min(props.max, Math.max(props.min, clamped));
+      }
+
+      // The crossing clamp above can pull the thumb away from the magnetic
+      // point findMagneticSnapPoint just latched hysteresis onto — the thumb
+      // never actually reached it. Left uncleared, hysteresis keeps comparing
+      // future drag positions against that unreachable point and can freeze
+      // the thumb at the other thumb's boundary across a wide swath of the
+      // release radius. Clearing it lets the next move re-evaluate fresh.
+      if (magneticValue != null && clamped !== magneticValue) {
+        delete activeSnapValue.value[thumbIndex];
+      }
+    }
+
+    if (next[thumbIndex] === clamped) {
+      // Nothing logically changed, but a native keyboard step (plain Arrow/
+      // Home/End) may have already written a different value into the native
+      // input's own DOM .value — it isn't range-clamped the way this is.
+      // Vue's :value binding won't re-patch an unchanged reactive value, so
+      // correct the DOM directly or it silently drifts from internalValues.
+      const el = thumbRefs.value[thumbIndex];
+      if (el && el.value !== String(clamped)) {
+        el.value = String(clamped);
+      }
+      return;
+    }
+    next[thumbIndex] = clamped;
+    internalValues.value = next;
+
+    const payload = isRange.value ? [...next] : next[0];
+    emit('update:modelValue', payload);
+  }
+
+  function commitIfChanged() {
+    const cur = internalValues.value;
+    const last = lastCommittedValues.value;
+    const changed = cur.length !== last.length || cur.some((v, i) => v !== last[i]);
+    if (!changed) return;
+    lastCommittedValues.value = [...cur];
+    const payload = isRange.value ? [...cur] : cur[0];
+    emit('change', payload);
+  }
+
+  // ─── Pointer drag ─────────────────────────────────────────────────────────
+
+  // Resolved once per gesture (onPointerDown), not on every pointermove —
+  // --slider-edge-inset is effectively static for the duration of a single
+  // drag, and remeasuring via a DOM probe on every move event would mean
+  // inserting/removing a node per frame.
+  let cachedEdgeInsetPx = 0;
+
+  function getValueFromPointerEvent(event) {
+    const rect = controlRef.value.getBoundingClientRect();
+    const sizePx = isVertical.value ? rect.height : rect.width;
+    // Mirrors anchorPct's own inset band (UseSliderGeometry) — the thumb's
+    // rendered position is compressed into [inset, size - inset], not flush
+    // across the control's full true edges, so the inverse (pointer position
+    // -> value) has to apply the same compression. Without this, clicking
+    // exactly on the rendered thumb at min/max computes a few percent off
+    // from 0/100 instead of landing on it, since the raw pointer position
+    // spans the whole control while the thumb itself stops short of it.
+    const span = sizePx - 2 * cachedEdgeInsetPx;
+    let pct;
+    if (isVertical.value) {
+      // Distance from the bottom edge — matches thumbPositionStyle's own
+      // `bottom: anchorPct(pct)`.
+      const rawPx = rect.bottom - event.clientY;
+      pct = span > 0 ? (rawPx - cachedEdgeInsetPx) / span : rawPx / sizePx;
+    } else {
+      const rawPx = event.clientX - rect.left;
+      pct = span > 0 ? (rawPx - cachedEdgeInsetPx) / span : rawPx / sizePx;
+      // The visual track is positioned with insetInlineStart, so the browser
+      // already mirrors it under dir="rtl" — min renders on the physical right
+      // instead of the left. clientX is always a physical coordinate, so the
+      // pointer-to-value mapping has to mirror the same way by hand.
+      if (isRtl.value) pct = 1 - pct;
+    }
+    pct = Math.min(1, Math.max(0, pct));
+    return props.min + pct * (props.max - props.min);
+  }
+
+  function getNearestThumbIndex(val) {
+    if (!isRange.value || internalValues.value.length < 2) return 0;
+    const [lo, hi] = internalValues.value;
+    if (lo === hi) {
+      // When thumbs overlap, route to the one opposite last-active
+      return lastActiveThumbIndex.value === 0 ? 1 : 0;
+    }
+    return Math.abs(val - lo) <= Math.abs(val - hi) ? 0 : 1;
+  }
+
+  // Only meaningful when a drag STARTS on a coincident pair (see
+  // dragStartedCoincident in onPointerDown) — which thumb that initial touch
+  // actually means to grab is genuinely ambiguous, unlike a drag that picked
+  // a clearly distinct thumb and simply happened to reach its sibling along
+  // the way (that one should stop there, same as a plain keyboard press).
+  // Without this, the active thumb can be pinned at its sibling by the
+  // crossing clamp (low can never pass high) with no way to free it for the
+  // rest of this same gesture. Hands off to the sibling, which this same
+  // move CAN actually satisfy.
+  function resolveCoincidentHandoff(idx, rawVal) {
+    if (!isRange.value) return idx;
+    const [lo, hi] = internalValues.value;
+    if (lo !== hi) return idx;
+    if (idx === 0 && rawVal > lo) return 1;
+    if (idx === 1 && rawVal < hi) return 0;
+    return idx;
+  }
+
+  function onPointerDown(event) {
+    if (props.disabled) return;
+    // Only handle primary pointer button
+    if (event.pointerType === 'mouse' && event.button !== 0) return;
+    // A second pointer touching down mid-drag must not steal ownership —
+    // the real pointer's own eventual pointerup would then be evaluated
+    // against the hijacked activePointerId and silently dropped by the
+    // ownership guard in onPointerMove/onPointerUp, stranding the drag with
+    // no commit and isDragging stuck true.
+    if (isDragging.value && event.pointerId !== activePointerId) return;
+
+    // Suppresses the browser's native mousedown default action, which would
+    // otherwise shift focus to the nearest scrollable ancestor after our own
+    // thumbRefs.focus() call below runs.
+    event.preventDefault();
+
+    cachedEdgeInsetPx = measureEdgeInsetPx(controlRef.value);
+
+    const rawVal = getValueFromPointerEvent(event);
+    const idx = getNearestThumbIndex(rawVal);
+    const [lo, hi] = internalValues.value;
+    dragStartedCoincident = isRange.value && internalValues.value.length === 2 && lo === hi;
+
+    if (escapeDismissedIndex.value === idx) escapeDismissedIndex.value = null;
+    activeThumbIndex.value = idx;
+    lastActiveThumbIndex.value = idx;
+    isDragging.value = true;
+    activePointerId = event.pointerId;
+    controlRef.value.setPointerCapture(event.pointerId);
+    // Pointer capture routes every subsequent pointer event to controlRef, so
+    // the non-dragged thumb's own pointerenter/pointerleave never fire again
+    // once the drag starts — without this, a thumb hovered right before the
+    // drag began would keep its tooltip readout stuck open for the rest
+    // of the drag. The dragged thumb's own readout is unaffected — it's driven
+    // by activeThumbIndex, not hoveredThumbIndex.
+    hoveredThumbIndex.value = null;
+
+    updateThumbValue(idx, rawVal, { allowSnap: true });
+    // Marks the focus() below as pointer-driven so onThumbFocus skips the
+    // keyboard-focus ring — :focus-visible can't tell, since browsers treat
+    // range inputs as always focus-visible on click. Only call focus() when
+    // the thumb isn't already active: an already-focused element fires no
+    // 'focus' event, so the flag would never clear and would corrupt the
+    // next real keyboard focus.
+    const thumbEl = thumbRefs.value[idx];
+    if (thumbEl && document.activeElement !== thumbEl) {
+      isPointerFocus = true;
+      thumbEl.focus();
+    } else if (focusedThumbIndex.value === idx) {
+      // Already keyboard-focused, so focus() above is skipped (no 'focus'
+      // event fires) — clear the ring by hand, or it'd stay combined with
+      // the --active drag style even though input switched to pointer.
+      focusedThumbIndex.value = null;
+    }
+  }
+
+  function onPointerMove(event) {
+    if (!isDragging.value || activeThumbIndex.value === null) return;
+    // Pointer capture only retargets the owning pointer's events — an
+    // unrelated second pointer's own move/up/cancel still reaches this.
+    if (event.pointerId !== activePointerId) return;
+
+    // A consumer can flip :disabled reactively mid-drag (e.g. async
+    // validation) — stop accepting input immediately rather than waiting for
+    // the pointer to be released, matching a native disabled control.
+    if (props.disabled) {
+      onPointerUp();
+      return;
+    }
+
+    // The primary button can be released outside this document (e.g. over a
+    // parent frame, or outside the OS window) without a pointerup ever
+    // reaching us, leaving isDragging stuck true. event.buttons reflects the
+    // actual current button state, so this self-heals on the next move.
+    if (event.buttons === 0) {
+      onPointerUp();
+      return;
+    }
+
+    const rawVal = getValueFromPointerEvent(event);
+    const idx = dragStartedCoincident
+      ? resolveCoincidentHandoff(activeThumbIndex.value, rawVal)
+      : activeThumbIndex.value;
+    if (idx !== activeThumbIndex.value) {
+      // The abandoned thumb is no longer being dragged — updateThumbValue
+      // (and the findMagneticSnapPoint call inside it) will never run for
+      // its index again this gesture, so its old hold would otherwise sit
+      // there stale, read as "actively held" by UseSliderValue's watchers
+      // long after the handoff moved on.
+      delete activeSnapValue.value[activeThumbIndex.value];
+      if (escapeDismissedIndex.value === idx) escapeDismissedIndex.value = null;
+      activeThumbIndex.value = idx;
+      lastActiveThumbIndex.value = idx;
+    }
+
+    updateThumbValue(idx, rawVal, { allowSnap: true });
+  }
+
+  // Same off-grid detection as UseSliderValue's thumbNativeStep (duplicated
+  // rather than threaded through as a dependency for one caller) — also
+  // naturally false for a non-finite value, so it can't misfire there.
+  function isOffGrid(val) {
+    if (props.step <= 0) return false;
+    const stepsFromMin = (val - props.min) / props.step;
+    return Math.abs(stepsFromMin - Math.round(stepsFromMin)) > 1e-9;
+  }
+
+  // event is omitted for the internal end-of-drag calls above (disabled
+  // flip, buttons===0 self-heal) — our own decision, not a pointer event to
+  // validate. A real pointerup/pointercancel always passes one.
+  function onPointerUp(event) {
+    if (!isDragging.value) return;
+    if (event && event.pointerId !== activePointerId) return;
+    isDragging.value = false;
+    activePointerId = null;
+    // A magnetic snap point can leave the thumb off the step grid (fine
+    // while dragging — thumbNativeStep sets step="any" for it) — but left in
+    // place, the NEXT plain Arrow-key press is handled natively using
+    // step="any"'s own default increment instead of props.step. Re-quantize
+    // onto the grid now that the drag has ended.
+    const idx = activeThumbIndex.value;
+    if (idx !== null && isOffGrid(internalValues.value[idx])) {
+      updateThumbValue(idx, internalValues.value[idx]);
+    }
+    commitIfChanged();
+    activeThumbIndex.value = null;
+    activeSnapValue.value = {};
+  }
+
+  // ─── Keyboard events on native inputs ──────────────────────────────────────
+
+  function onThumbInput(i, event) {
+    // Fires from native arrow keys / Home / End on the hidden input
+    updateThumbValue(i, Number(event.target.value));
+  }
+
+  // +1/-1/0 for a largeStep nudge, or 0 for any other key. increaseKey/
+  // decreaseKey are resolved by the caller (onThumbKeydown) rather than here,
+  // so this stays a flat, low-complexity lookup — see the comment there for
+  // why they're sometimes 'ArrowLeft'/'ArrowRight' and sometimes swapped.
+  function largeStepDelta(key, shiftKey, increaseKey, decreaseKey) {
+    if (key === 'PageUp') return 1;
+    if (key === 'PageDown') return -1;
+    if (!shiftKey) return 0;
+    if (key === 'ArrowUp' || key === increaseKey) return 1;
+    if (key === 'ArrowDown' || key === decreaseKey) return -1;
+    return 0;
+  }
+
+  // Rounding largeStep to the NEAREST step-grid point can round backward to
+  // the start value when step is more than ~2x largeStep (step=25,
+  // largeStep=10: 100+10=110 rounds back to 100 — a silent no-op). Converting
+  // to a whole number of steps first, at least one, guarantees it always moves.
+  function largeStepValue() {
+    if (props.step <= 0) return props.largeStep;
+    const stepsCount = Math.max(1, Math.round(props.largeStep / props.step));
+    return stepsCount * props.step;
+  }
+
+  function onThumbKeydown(i, event) {
+    // focus() only fires once per session, so a click-to-focus then keyboard
+    // nav would never show the ring without setting this explicitly.
+    if (focusedThumbIndex.value !== i) {
+      focusedThumbIndex.value = i;
+    }
+
+    // The native input swaps which of Left/Right increments under dir="rtl" —
+    // largeStepDelta's Shift+Arrow must swap the same way, or Shift+ArrowRight
+    // would contradict plain ArrowRight on the same key. Up/Down never swap.
+    // Applies in vertical mode too — aria-orientation is purely an ARIA hint,
+    // the native input is never actually reoriented, so dir still swaps Left/
+    // Right there exactly as it does horizontally.
+    const rtlKeys = isRtl.value;
+    const increaseKey = rtlKeys ? 'ArrowLeft' : 'ArrowRight';
+    const decreaseKey = rtlKeys ? 'ArrowRight' : 'ArrowLeft';
+    const delta = largeStepDelta(event.key, event.shiftKey, increaseKey, decreaseKey);
+    if (delta !== 0) {
+      event.preventDefault();
+      updateThumbValue(i, internalValues.value[i] + delta * largeStepValue());
+    }
+    // Matches DtTooltip's own Escape handling: dismiss without moving focus,
+    // so nav keys on this thumb still work afterward. A THUMB_NAV_KEYS press
+    // (even Home/End/plain arrows, which are handled natively above) is a
+    // fresh show-trigger — same convention as onPointerDown/the coincident
+    // handoff/onThumbFocus/onThumbHitPointerEnter below, all of which clear
+    // the dismissal on their own re-trigger. Scoped to nav keys specifically
+    // (not "any key") so a bare modifier press — Shift/Control held with
+    // focus but no actual navigation — doesn't reopen a tooltip the user just
+    // dismissed. Without this, continuing to arrow-step the value after an
+    // Escape would leave the readout hidden until blur+refocus or mouse
+    // leave+re-enter, unlike drag (which does re-trigger it).
+    if (event.key === 'Escape') {
+      escapeDismissedIndex.value = i;
+    } else if (THUMB_NAV_KEYS.has(event.key) && escapeDismissedIndex.value === i) {
+      escapeDismissedIndex.value = null;
+    }
+    // Plain arrow keys, Home, End handled natively by <input type="range">
+    // (also RTL-aware natively, so no extra handling needed here).
+  }
+
+  function onThumbFocus(i, event) {
+    // Skip the keyboard-focus ring and focus-driven tooltip readout for a
+    // pointer-driven focus — a mouse drag already gets its own affordance via
+    // activeThumbIndex while the pointer is down. Tab/keyboard focus falls
+    // through and sets focusedThumbIndex normally.
+    if (isPointerFocus) {
+      isPointerFocus = false;
+    } else {
+      if (escapeDismissedIndex.value === i) escapeDismissedIndex.value = null;
+      focusedThumbIndex.value = i;
+    }
+    emit('focus', event);
+  }
+
+  function onThumbBlur(i, event) {
+    focusedThumbIndex.value = null;
+    commitIfChanged();
+    emit('blur', event);
+  }
+
+  function onThumbHitPointerEnter(i) {
+    if (escapeDismissedIndex.value === i) escapeDismissedIndex.value = null;
+    hoveredThumbIndex.value = i;
+  }
+
+  function onThumbHitPointerLeave(i) {
+    if (hoveredThumbIndex.value === i) hoveredThumbIndex.value = null;
+  }
+
+  function isReadoutOpen(i) {
+    if (props.readout === 'always') return true;
+    if (escapeDismissedIndex.value === i) return false;
+    return activeThumbIndex.value === i || focusedThumbIndex.value === i || hoveredThumbIndex.value === i;
+  }
+
+  return {
+    isDragging,
+    activeThumbIndex,
+    focusedThumbIndex,
+    hoveredThumbIndex,
+    updateThumbValue,
+    commitIfChanged,
+    onPointerDown,
+    onPointerMove,
+    onPointerUp,
+    onThumbInput,
+    onThumbKeydown,
+    onThumbFocus,
+    onThumbBlur,
+    onThumbHitPointerEnter,
+    onThumbHitPointerLeave,
+    isReadoutOpen,
+  };
+}
