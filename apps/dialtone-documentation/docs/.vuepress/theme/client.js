@@ -12,23 +12,15 @@ import { flushPromises } from '@workspaceRoot/common/utils/client.mjs';
 import { syncBrowserThemeColor } from './utils/browserThemeColor.js';
 
 // Layered Theming System - Base layers (always loaded). Material override CSS
-// loads here so all materials are available for attribute-driven switching;
-// brand CSS (dp by default) loads after, so brand wins at the same specificity.
-//
-// Sandstone has no override file — it's the default ramp baked into
-// `tokens-base-colors.css` and applies whenever `data-dt-material` is absent
-// or set to `'sandstone'` (no `[data-dt-material="sandstone"]` selector exists
-// to match against, so the bare base selectors govern).
+// is no longer imported here — setMaterialConfig (see useThemeManager.js)
+// injects the matching material's CSS itself, the same way setBrand/setContrast
+// inject their own theme CSS. Brand CSS (dp by default) loads after core/base
+// colors, so brand wins at the same specificity.
 import '@dialpad/dialtone-tokens/layered/tokens-core.css';
 import '@dialpad/dialtone-tokens/layered/tokens-base-colors.css';
-import '@dialpad/dialtone-tokens/layered/material/tokens-steel.css';
-import '@dialpad/dialtone-tokens/layered/material/tokens-graphite.css';
-import '@dialpad/dialtone-tokens/layered/material/tokens-iron.css';
-import '@dialpad/dialtone-tokens/layered/material/tokens-amethyst.css';
-import '@dialpad/dialtone-tokens/layered/material/tokens-jade.css';
 import '@dialpad/dialtone-tokens/layered/tokens-dp-colors.css';
 
-import { VALID_MATERIALS } from '@dialpad/dialtone-tokens/themes/config';
+import { VALID_MATERIALS, setMaterial as setMaterialConfig } from '@dialpad/dialtone-tokens/themes/config';
 import { DEFAULT_MATERIAL, DEFAULT_MODE, MODES } from './constants/themes.js';
 
 // Normalize stale localStorage values from removed/renamed entries (e.g.
@@ -47,13 +39,16 @@ if (typeof localStorage !== 'undefined') {
   }
 }
 
-// Pre-mount bootstrap: apply the persisted material via the data-dt-material
-// attribute before Vue hydrates so the page paints with the user's saved choice.
-// All material CSS is loaded above; the attribute selects which set wins.
+// Pre-mount bootstrap: apply the persisted material before Vue hydrates so the
+// page paints with the user's saved choice instead of flashing sandstone.
+// Goes through setMaterialConfig (not a bare attribute set) since material CSS
+// is injected on demand now — reusing it here avoids duplicating that logic,
+// and the later onMounted call in useThemeManager.js re-applying the same
+// material is a no-op upsert, not a second injection.
 if (typeof document !== 'undefined' && typeof localStorage !== 'undefined') {
   const saved = localStorage.getItem('preferredMaterial');
   if (saved) {
-    document.documentElement.setAttribute('data-dt-material', saved);
+    setMaterialConfig(saved, document.documentElement);
   }
 }
 

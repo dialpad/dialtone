@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone",
-  "version": "10.0.0",
+  "version": "10.6.0",
   "packageManager": "pnpm@11.9.0",
   "description": "Dialpad's Dialtone design system monorepo",
   "scripts": {
@@ -117,6 +117,7 @@
     "@dialpad/conventional-changelog-angular": "^1.1.1",
     "@dialpad/dialtone-cli": "workspace:*",
     "@dialpad/semantic-release-changelog-json": "^1.0.0",
+    "@dialpad/stylelint-plugin-dialtone": "workspace:*",
     "@eslint/js": "^9.0.0",
     "@faker-js/faker": "8.4.1",
     "@percy/cli": "1.32.3",
@@ -125,6 +126,8 @@
     "@semantic-release/exec": "^6.0.3",
     "@semantic-release/git": "^10.0.1",
     "@types/node": "^20.4.5",
+    "@typescript-eslint/eslint-plugin": "^8.44.1",
+    "@typescript-eslint/parser": "^8.44.1",
     "@vitejs/plugin-vue": "^6.0.5",
     "@vitest/coverage-v8": "^4.1.0",
     "@vue/tsconfig": "^0.4.0",
@@ -154,6 +157,7 @@
     "lint-staged": "^15.2.0",
     "markdownlint": "^0.38.0",
     "markdownlint-cli": "^0.49.0",
+    "minimatch": "9.0.3",
     "npm-run-all": "^4.1.5",
     "nx": "19.8.0",
     "playwright": "^1.60.0",
@@ -176,6 +180,7 @@
     "vue-docgen-api": "^4.75.0",
     "vue-template-compiler": "^2.7.16",
     "wait-on": "^7.2.0",
+    "yaml": "2.8.3",
     "yo": "^5.0.0"
   },
   "engines": {

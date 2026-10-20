@@ -144,6 +144,7 @@ jobs:
     env:
       HUSKY: 0
       FILE_KEY: ${{ vars.FILE_KEY }}
+      COLLECTION_NAME: ${{ vars.COLLECTION_NAME }}
     steps:
       - uses: actions/checkout@v4
         with:

@@ -1,3 +1,4 @@
+import { nextTick } from 'vue';
 import { mount } from '@vue/test-utils';
 import DtScroller from './Scroller.vue';
 import CoreScroller from './Modules/CoreScroller.vue';
@@ -195,6 +196,23 @@ describe('DtScroller Tests', () => {
         wrapper.trigger('scroll');
 
         expect(defaultContent.element.scrollTop).toBe(450);
+      });
+    });
+
+    describe('When unmounted before the mounted nextTick callback fires', () => {
+      it('does not throw reading scrollTop off a null root element', () => {
+        // Mount and unmount synchronously, in the same tick, so the
+        // onMounted(() => nextTick(...)) callback is still pending when we
+        // unmount — reproducing the post-unmount null-ref crash.
+        const freshWrapper = mount(DtScroller, {
+          props: baseProps,
+          slots: baseSlots,
+        });
+        freshWrapper.unmount();
+
+        // Throws before the fix, since the deferred mounted callback still
+        // dereferences the now-null scroller ref.
+        return nextTick();
       });
     });
   });

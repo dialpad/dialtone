@@ -73,14 +73,14 @@ import {
 import Tmo from '@dialpad/dialtone/themes/tmo';
 import HighContrast from '@dialpad/dialtone/themes/high-contrast';
 
-setMode('dark');           // toggles data-dt-mode
+setMode('dark');           // toggles data-dt-mode, no injection
 setBrand(Tmo);             // injects brand CSS, sets data-dt-brand
-setMaterial('steel');      // toggles data-dt-material
+setMaterial('steel');      // injects material CSS, sets data-dt-material
 setContrast(HighContrast); // injects contrast CSS, sets data-dt-contrast
 setContrast(null);         // remove contrast override
 ```
 
-`setMode` and `setMaterial` toggle attributes against pre-bundled CSS — no injection. `setBrand` and `setContrast` inject per-theme override CSS.
+`setMode` toggles an attribute against pre-bundled CSS — no injection. `setBrand`, `setMaterial`, and `setContrast` inject per-theme override CSS.
 
 ---
 

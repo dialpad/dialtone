@@ -2,16 +2,19 @@
 
 import { join, normalize } from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
-import { hideBin } from 'yargs/helpers';
-import yargs from 'yargs';
-import {
+import { assertOptionalPeerDeps } from '../dialtone_migration_helper/optional-peer-deps.mjs';
+
+await assertOptionalPeerDeps(['yargs']);
+const { hideBin } = await import('yargs/helpers');
+const { default: yargs } = await import('yargs');
+const {
   error,
   getAllFileContents,
   getConfigFileList,
   inquireForFile,
   modifyFileContents,
   readConfigFile,
-} from '../dialtone_migration_helper/helpers.mjs';
+} = await import('../dialtone_migration_helper/helpers.mjs');
 import { runMergeMigration } from './merge-migrate.mjs';
 
 const CONFIG_FOLDER = fileURLToPath(new URL('../dialtone_migration_helper/configs', import.meta.url));

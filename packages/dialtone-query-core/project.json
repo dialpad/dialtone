@@ -7,16 +7,25 @@
       "inputs": [
         "{projectRoot}/src/**/*",
         "{projectRoot}/package.json",
-        "{projectRoot}/tsconfig.json"
+        "{projectRoot}/tsconfig.json",
+        "{projectRoot}/scripts/**/*",
+        "{workspaceRoot}/scripts/lib/component-name.mjs",
+        "{workspaceRoot}/packages/dialtone-css/package.json",
+        "{workspaceRoot}/packages/dialtone-vue/package.json",
+        "{workspaceRoot}/packages/dialtone-icons/package.json",
+        "{workspaceRoot}/packages/dialtone-docs/package.json",
+        "!{projectRoot}/src/generated/**",
+        { "dependentTasksOutputFiles": "**/*.json", "transitive": true }
       ],
-      "outputs": ["{projectRoot}/build"],
+      "outputs": ["{projectRoot}/build", "{projectRoot}/src/generated"],
       "options": {
         "cwd": "{projectRoot}",
-        "command": "pnpm exec tsc"
+        "command": "node scripts/build-bundled-provenance.mjs && pnpm exec tsc"
       }
     },
     "test": {
       "executor": "nx:run-script",
+      "dependsOn": ["build"],
       "options": { "script": "test" }
     }
   }

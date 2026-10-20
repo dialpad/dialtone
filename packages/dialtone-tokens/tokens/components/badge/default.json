@@ -45,9 +45,14 @@
           "value": "{color.black.1000}",
           "type": "color"
         },
-        "success": {
+        "positive": {
           "value": "{color.green.1000}",
           "type": "color"
+        },
+        "success": {
+          "value": "{badge.color.foreground.positive}",
+          "type": "color",
+          "$deprecated": "Use positive instead."
         },
         "bulletin": {
           "value": "{color.black.50}",

@@ -367,6 +367,14 @@ export function generatePostVariablesPayload(
       return
     }
 
+    // A deleted-but-referenced variable shares its name with the live one it
+    // replaced. Figma keeps returning it because a style or another variable
+    // still points at it, but writing to it would update a ghost copy rather
+    // than the real variable — which name-only matching can't tell apart.
+    if (variable.deletedButReferenced) {
+      return
+    }
+
     if (!localVariablesByCollectionAndName[variable.variableCollectionId]) {
       localVariablesByCollectionAndName[variable.variableCollectionId] = {}
     }

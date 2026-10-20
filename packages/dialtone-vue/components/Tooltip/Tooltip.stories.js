@@ -15,6 +15,7 @@ export const argsData = {
   anchor: 'Hover over me to see a tooltip',
   default: `This is a simple tooltip. You can set the position of the tooltip using the placement prop!`,
   onShown: action('shown'),
+  showArrow: true,
   showTooltip: null,
 };
 
@@ -68,6 +69,9 @@ export const argTypesData = {
   },
 
   enabled: {
+    type: 'boolean',
+  },
+  showArrow: {
     type: 'boolean',
   },
   open: {

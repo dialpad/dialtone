@@ -22,7 +22,7 @@ dialtone search "input|select|menu"   # OR search
 
 ### `dialtone component <name>`
 
-Show full component documentation.
+Show full component documentation. The name must match exactly, ignoring case, separators, and the `Dt` prefix, so `button`, `dt-button`, and `DtButton` all work. For any other name, the CLI lists close matches on stderr and exits with an error.
 
 ```bash
 dialtone component button
@@ -35,16 +35,17 @@ dialtone component button --slots              # slots only
 dialtone component button --examples           # usage example
 ```
 
-### `dialtone token <query>`
+### `dialtone token [query]`
 
-Look up design tokens.
+Look up design tokens. Use `--name=--dt-*` for canonical CSS names so the leading dashes are parsed as a value. Exact legacy names retain their values and qualified migration guidance; add `--values --format json` to inspect that metadata.
 
 ```bash
 dialtone token "color foreground"
-dialtone token "space 400"
+dialtone token "spacing 100"
 dialtone token "color foreground" --values     # show theme values
 dialtone token "color foreground" --all        # include HSL tokens
 dialtone token "color foreground" --limit 0    # show all results
+dialtone token --name=--dt-spacing-100 --values # canonical CSS token identifier
 ```
 
 ### `dialtone utility <query>`
@@ -77,6 +78,14 @@ All commands support `--format`:
 | `--format markdown` | Markdown |
 | `--format json` | Structured JSON |
 
+## Debug Output
+
+Set `DIALTONE_DEBUG=1` to print the search engine's debug output to stderr:
+
+```bash
+DIALTONE_DEBUG=1 dialtone search button
+```
+
 ## Updating
 
 The CLI checks for updates automatically. To update:
@@ -85,7 +94,7 @@ The CLI checks for updates automatically. To update:
 npm install -g @dialpad/dialtone-cli@latest
 ```
 
-The data (components, tokens, utilities, icons) is bundled at build time. Update the CLI to get the latest design system data.
+Run from a project, the CLI uses the Dialtone data installed there (components, tokens, utilities, icons). Anything it can't find comes from data bundled with the CLI at build time, and documentation search always uses bundled content. Updating the CLI refreshes that bundled data. See [Data sources](https://dialtone.dialpad.com/guides/cli/#data-sources) for how the CLI finds a project's data.
 
 ## Claude Code Integration
 
@@ -111,7 +120,10 @@ When working with Dialtone components, tokens, or utility classes, use the `dial
 - Structured data: add `--format json` to any command
 
 Prefer the CLI over reading source files for design system information. It searches
-the full published API and filters deprecated items automatically.
+the generated API and leaves deprecated items out of general discovery. Exact
+legacy component, utility or token names retain their contract. Use `--format json`
+to inspect utility migration metadata. Token lookups print migration notes to stderr
+in all formats; add `--values --format json` for structured metadata.
 ```
 
 ### Skills

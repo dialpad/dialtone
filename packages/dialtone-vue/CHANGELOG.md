@@ -1,3 +1,63 @@
+# [4.4.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.3.1...dialtone-vue/v4.4.0) (2026-10-13)
+
+
+### Documentation
+
+* **Mode:** DLT-3658 document v-dt-mode as the default ([#1459](https://github.com/dialpad/dialtone/issues/1459)) ([183bea2](https://github.com/dialpad/dialtone/commit/183bea296bdb648c7922693d969b4943464c08c7))
+
+
+### Features
+
+* **Stack:** DLT-3657 add wrap prop ([#1458](https://github.com/dialpad/dialtone/issues/1458)) ([9699220](https://github.com/dialpad/dialtone/commit/9699220b7d24b66c8b7cf28601b6c474b30981d2))
+
+## [4.3.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.3.0...dialtone-vue/v4.3.1) (2026-10-06)
+
+
+### Bug Fixes
+
+* DLT-3646 crash when hover element removed ([#1450](https://github.com/dialpad/dialtone/issues/1450)) ([5b2f2fb](https://github.com/dialpad/dialtone/commit/5b2f2fbd3d69ffb4dabd02c062329e256c584750))
+
+# [4.3.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.2.0...dialtone-vue/v4.3.0) (2026-10-06)
+
+
+### Bug Fixes
+
+* **Modal:** DLT-3476 do not close when drag starts inside dialog and ends on backdrop ([#1445](https://github.com/dialpad/dialtone/issues/1445)) ([c6fb6ef](https://github.com/dialpad/dialtone/commit/c6fb6ef70e24515a21706eeb848968e24a13c319))
+
+
+### Features
+
+* **Tooltip:** DP-211073 make arrow optional ([#1447](https://github.com/dialpad/dialtone/issues/1447)) ([67b7afb](https://github.com/dialpad/dialtone/commit/67b7afbb3be11761236a3b82c5871c364d21c198))
+
+# [4.2.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.1.0...dialtone-vue/v4.2.0) (2026-09-29)
+
+
+### Features
+
+* **Rich Text Editor:** DP-209950 linkify pending URL before send when no trailing space ([#1439](https://github.com/dialpad/dialtone/issues/1439)) ([234cf7f](https://github.com/dialpad/dialtone/commit/234cf7f7ad24e7a93608744e7ef0e443ceaaf652))
+
+# [4.1.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.0.2...dialtone-vue/v4.1.0) (2026-09-23)
+
+
+### Features
+
+* **Split Button:** DLT-3630 DLT-3631 add startButtonClass and endButtonClass props ([#1440](https://github.com/dialpad/dialtone/issues/1440)) ([7d30032](https://github.com/dialpad/dialtone/commit/7d30032165c7719bf609751b199409848078da0d))
+
+## [4.0.2](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.0.1...dialtone-vue/v4.0.2) (2026-09-22)
+
+
+### Bug Fixes
+
+* **Scroller:** DLT-3616 guard CoreScroller against post-unmount null ref ([#1437](https://github.com/dialpad/dialtone/issues/1437)) ([141966c](https://github.com/dialpad/dialtone/commit/141966cb5737a009a4ba30ef6a97db9f3ab84160))
+
+## [4.0.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.0.0...dialtone-vue/v4.0.1) (2026-09-22)
+
+
+### Bug Fixes
+
+* **Popover:** DLT-3607 return a rect fallback and guard tippy init against a null anchor ([#1434](https://github.com/dialpad/dialtone/issues/1434)) ([12d936d](https://github.com/dialpad/dialtone/commit/12d936dba262089ac35877bee538634c62e822b3))
+* **Rich Text Editor:** DP-188940 keep cursor in place when removing a code block ([#1435](https://github.com/dialpad/dialtone/issues/1435)) ([3d2449b](https://github.com/dialpad/dialtone/commit/3d2449b0750886e8e308983486cf7e94349ba06b))
+
 # [4.0.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v3.226.0...dialtone-vue/v4.0.0) (2026-09-16)
 
 

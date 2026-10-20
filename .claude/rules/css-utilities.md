@@ -11,7 +11,7 @@ Utilities live in `packages/dialtone-css/lib/build/less/utilities/`. The 11 file
 
 ## Naming Convention
 
-Pattern: `d-<property-shorthand><value>` (e.g., `d-p8`, `d-d-flex`, `d-w100p`, `d-mt-auto`, `d-fs-200`).
+Use token-stop names such as `d-p-100` and `d-pbs-100`. Other utilities include `d-d-flex`, `d-w100p` and `d-mbs-auto`.
 
 Common shorthands: `d`=display, `p`=padding, `m`=margin (with `t/r/b/l/x/y`), `w`=width, `h`=height, `fw`=font-weight, `fs`=font-size, `c`=color, `bgc`=background-color.
 
@@ -47,11 +47,11 @@ ALWAYS use `var(--dt-*)` custom properties. Never hardcode raw values.
 
 ```less
 // CORRECT
-.d-p8 {
-  padding: var(--dt-space-400);
+.d-p-100 {
+  padding: var(--dt-spacing-100);
 }
 // WRONG
-.d-p8 {
+.d-p-100 {
   padding: 8px;
 }
 ```

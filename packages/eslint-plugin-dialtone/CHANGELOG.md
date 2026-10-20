@@ -1,3 +1,17 @@
+## [1.14.2](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.14.1...eslint-plugin-dialtone/v1.14.2) (2026-10-13)
+
+
+### Bug Fixes
+
+* **Eslint Plugin Dialtone:** DLT-3645 enable umbrella checks and skip undeclared installs ([#1453](https://github.com/dialpad/dialtone/issues/1453)) ([64147d4](https://github.com/dialpad/dialtone/commit/64147d47ec288981683a55b1bb47a14a111d580f))
+
+## [1.14.1](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.14.0...eslint-plugin-dialtone/v1.14.1) (2026-09-22)
+
+
+### Bug Fixes
+
+* NO-JIRA widen dialtone-vue peer range to include v4 ([#1438](https://github.com/dialpad/dialtone/issues/1438)) ([f7d4267](https://github.com/dialpad/dialtone/commit/f7d42670ab62a199f5795e536fa9bab60d8f2239))
+
 # [1.14.0](https://github.com/dialpad/dialtone/compare/eslint-plugin-dialtone/v1.13.0...eslint-plugin-dialtone/v1.14.0) (2026-09-16)
 
 

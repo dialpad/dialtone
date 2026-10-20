@@ -34,13 +34,9 @@ reviews:
     - reviewers:
         - handle: "braddialpad"
           type: "user"
-        - handle: "ninarepetto"
-          type: "user"
       instructions: "Assign when the PR modifies the documentation site under apps/dialtone-documentation/ or icons under packages/dialtone-icons/."
     - reviewers:
         - handle: "francisrupert"
-          type: "user"
-        - handle: "ninarepetto"
           type: "user"
         - handle: "belumontoya"
           type: "user"
@@ -100,6 +96,9 @@ reviews:
 
         - Accessibility: ARIA correctness, keyboard navigation, focus management
           in modals/overlays, screen reader announcements via aria-live.
+
+        - New user-facing strings must use FTL localization keys
+          (packages/dialtone-vue/localization). Flag hardcoded English.
 
         Follow the conventions in .claude/rules/vue-components.md.
 
@@ -294,6 +293,9 @@ reviews:
 
         - Sidebar navigation is in _data/site-nav.json — new pages must be added there.
 
+        - This documentation site is not localized. Plain English is expected in Markdown
+          and documentation-site Vue components. Do not request FTL keys or i18n wrappers here.
+
         Follow the conventions in .claude/rules/documentation-site.md.
 
     # General (all files)
@@ -308,4 +310,5 @@ reviews:
         - Flag non-tree-shakeable imports at entry points and heavy dependencies
           added without justification.
 
-        - New user-facing strings must use FTL localization keys. Flag hardcoded English.
+        - Only dialtone-vue component strings are localized (FTL). Do not flag hardcoded
+          English in documentation, READMEs, CLI or MCP output, or tooling.

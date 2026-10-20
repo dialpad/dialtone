@@ -161,8 +161,15 @@ export function figmaTypeFor (type: string): FigmaType | null {
  * primitives — what Francis means by "base colours" when he asks for them to
  * be hidden from publishing. Shared between `SCOPES` and `HIDDEN` so the two
  * policies cannot drift apart on what counts as a raw ramp.
+ *
+ * `material.<name>.<stop>` (e.g. `material.jade.500`) is the same shape under
+ * a different namespace — every one of the 140 `material.*` tokens is a bare
+ * numbered ramp, confirmed against `tokens/base/refs/default.json`, no
+ * exceptions. Same discourage-direct-use reasoning applies: a material is a
+ * swapped-in alternative to the `color.black.*` ramp, not something to bind a
+ * stop of directly.
  */
-const RAW_COLOUR_RAMP = /^color\.[a-z-]+\.(\d+|black|white|transparent|gold|magenta|purple|red|green|blue)$/;
+const RAW_COLOUR_RAMP = /^(color|material)\.[a-z-]+\.(\d+|black|white|transparent|gold|magenta|purple|red|green|blue)$/;
 
 /**
  * Every `lineHeight` field: the six shared primitives (`font.lineHeight.400`)
@@ -269,13 +276,6 @@ export const HIDDEN: HiddenRule[] = [
     match: t => INVERTED_WORD.test(t.name),
   },
   {
-    // Kept apart from the colour ramps below, added separately and later —
-    // Francis called that one a "controversial", deliberate call, not a
-    // mechanical follow-on to this one.
-    label: 'base primitive, reference only',
-    match: t => t.filePath.startsWith('tokens/base/') && !RAW_COLOUR_RAMP.test(t.name),
-  },
-  {
     // The deliberate one: discourage picking a raw hue/stop directly in
     // favour of a semantic colour token, in product and in prototypes alike.
     // These were left visible on purpose (see the SCOPES comment above) while
@@ -283,6 +283,14 @@ export const HIDDEN: HiddenRule[] = [
     // them now reverses that, not extends it.
     label: 'base colour ramp, discourage direct use',
     match: t => RAW_COLOUR_RAMP.test(t.name),
+  },
+  {
+    // `spacing.base` (8px) and `layout.base` (64px) are the foundational
+    // multiplier each scale is built from, not a usable stop on it —
+    // `layout.base` isn't even a literal, it's `{size.base} * 8`. Neither is
+    // meant to be bound in a design the way `spacing.200` or `layout.400` is.
+    label: 'base multiplier, not a usable scale stop',
+    match: t => t.name === 'spacing.base' || t.name === 'layout.base',
   },
   {
     // Not a reference-only or deprecated case like the others above — this one

@@ -330,6 +330,10 @@ const _sortViews = () => {
 };
 
 const _updateVisibleItems = (checkItem, checkPositionDiff = false) => {
+  // Deferred callers (the `sizes` watcher and the mounted nextTick) can fire
+  // after the root element unmounts, when `scroller.value` is already null.
+  if (!scroller.value) return;
+
   const itemSize = props.itemSize;
   const minItemSize = computedMinItemSize;
   const keyField = simpleArray.value ? null : props.keyField;

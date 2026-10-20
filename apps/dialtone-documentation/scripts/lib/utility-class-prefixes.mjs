@@ -3,8 +3,9 @@
  * to prefix filters for dialtone-docs.json lookup.
  *
  * - prefixes: array of key prefixes to match against dialtone-docs.json keys
- * - cssProperty: optional CSS property string to disambiguate prefix collisions
- *   (matched against the `prop` field in each value entry)
+ * - cssProperty: optional property-name substring for prefixes that also match
+ *   unrelated classes. Omit it when prefixes identify the intended classes.
+ *   A class is kept if any of its `values[].prop` entries includes the string.
  */
 export const UTILITY_CLASS_MAPPING = {
   // Borders
@@ -18,7 +19,7 @@ export const UTILITY_CLASS_MAPPING = {
   'layout/z-index': { prefixes: ['d-zi-'] },
   'layout/position': { prefixes: ['d-ps-'] },
   'layout/visibility': { prefixes: ['d-vi-'] },
-  'layout/box-sizing': { prefixes: ['d-box-'] },
+  'layout/box-sizing': { prefixes: ['d-box-'], cssProperty: 'box-sizing' },
 
   // Interactivity
   'interactivity/outline': { prefixes: ['d-ol-'] },

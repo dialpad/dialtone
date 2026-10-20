@@ -774,6 +774,10 @@ export default {
     isOpen (isOpen, isPrev) {
       if (isOpen) {
         this.isDialogAriaHidden = false;
+        // Guard against isOpen flipping true before mounted() has resolved an anchorEl
+        // (e.g. an immediate `open` prop watcher firing pre-mount) — creating a tippy
+        // instance with no anchor leaves a stale getReferenceClientRect wired up.
+        if (!this.anchorEl) return;
         this.initTippyInstance();
         this.tip?.show();
       } else if (!isOpen && isPrev !== isOpen) {
@@ -1149,7 +1153,13 @@ export default {
      * @param error
      */
     getReferenceClientRect (error) {
-      const anchorReferenceRect = this.anchorEl?.getBoundingClientRect();
+      // Popper's own debounced forceUpdate() can invoke this callback for the lifetime of the
+      // tippy instance, including after anchorEl has gone null (e.g. isOpen flips true before
+      // mounted() resolves an anchor). Returning undefined here throws inside that debounced
+      // call, so fall back to a zero rect instead.
+      const anchorReferenceRect = this.anchorEl?.getBoundingClientRect() ?? {
+        width: 0, height: 0, top: 0, left: 0, right: 0, bottom: 0, x: 0, y: 0,
+      };
 
       if (this.appendTo !== 'root' || error) return anchorReferenceRect;
 

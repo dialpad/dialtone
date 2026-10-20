@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/eslint-plugin-dialtone",
-  "version": "1.14.0",
+  "version": "1.14.2",
   "description": "dialtone eslint plugin",
   "keywords": [
     "Dialpad",
@@ -24,11 +24,6 @@
       "name": "Ignacio Ropolo",
       "email": "ignacio.ropolo@dialpad.com",
       "url": "https://github.com/iropolo"
-    },
-    {
-      "name": "Nina Repetto",
-      "email": "nina.repetto@dialpad.com",
-      "url": "https://github.com/ninamarina"
     },
     {
       "name": "Belu Montoya",
@@ -70,7 +65,7 @@
     "node": "^14.17.0 || ^16.0.0 || >= 18.0.0"
   },
   "peerDependencies": {
-    "@dialpad/dialtone-vue": "^3",
+    "@dialpad/dialtone-vue": "^3 || ^4",
     "eslint": ">=7",
     "vue-eslint-parser": ">=9"
   },

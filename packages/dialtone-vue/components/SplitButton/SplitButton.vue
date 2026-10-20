@@ -222,6 +222,14 @@ export default {
     },
 
     /**
+     * Used to customize the start button (aka left)
+     */
+    startButtonClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
      * Used to customize the start label container
      */
     startLabelClass: {
@@ -415,6 +423,14 @@ export default {
     },
 
     /**
+     * Used to customize the end button (aka right)
+     */
+    endButtonClass: {
+      type: [String, Array, Object],
+      default: '',
+    },
+
+    /**
      * HTML button disabled attribute for end button only
      * <a class="d-link" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#disabled" target="_blank">
      *  (Reference)
@@ -590,6 +606,7 @@ export default {
         assertiveOnFocus: this.assertiveOnFocus,
         disabled: this.disabled || (this.alphaDisabled ?? this.startDisabled),
         iconPosition: this.alphaIconPosition ?? this.startIconPosition,
+        class: this.startButtonClass,
         labelClass: this.alphaLabelClass ?? this.startLabelClass,
         leadingClass: this.alphaLeadingClass ?? this.startLeadingClass,
         trailingClass: this.alphaTrailingClass ?? this.startTrailingClass,
@@ -603,7 +620,6 @@ export default {
         href: this.startHref,
         target: this.startTarget,
         rel: this.startRel,
-        class: this.$attrs.class,
         style: this.$attrs.style,
       };
     },
@@ -614,11 +630,11 @@ export default {
         active: this.omegaActive ?? this.endActive,
         ariaLabel: this.omegaAriaLabel ?? this.endAriaLabel,
         disabled: this.disabled || (this.omegaDisabled ?? this.endDisabled),
+        class: this.endButtonClass,
         importance: this.importance,
         kind: this.kind,
         size: this.size,
         tooltipText: this.omegaTooltipText ?? this.endTooltipText,
-        class: this.$attrs.class,
         style: this.$attrs.style,
       };
     },

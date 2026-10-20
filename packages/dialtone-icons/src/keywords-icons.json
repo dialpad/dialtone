@@ -300,6 +300,7 @@
       "mastercard": [],
       "messenger": [],
       "microsoft-dynamics-365": [],
+      "microsoft-sharepoint": [],
       "microsoft-teams": [],
       "microsoft": [],
       "miro": [],
@@ -412,6 +413,7 @@
         "brand"
       ],
       "github": [],
+      "slack-mono": [],
       "storybook": [],
       "waveform": [
         "brand"
@@ -468,6 +470,13 @@
         "letter",
         "read"
       ],
+      "mail-rejected": [
+        "Mail",
+        "email",
+        "decline",
+        "ignore",
+        "dismiss"
+      ],
       "mail": [
         "email",
         "message",
@@ -482,6 +491,13 @@
         "mailing list",
         "newsletter",
         "copy"
+      ],
+      "message-rejected": [
+        "Message",
+        "chat",
+        "decline",
+        "ignore",
+        "dismiss"
       ],
       "message": [
         "chat",
@@ -1012,6 +1028,11 @@
       "stop-filled": [
         "square",
         "pause"
+      ],
+      "stop-stroke": [
+        "square",
+        "outline",
+        "media"
       ],
       "table": [
         "sheet",

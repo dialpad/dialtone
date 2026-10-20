@@ -212,7 +212,8 @@
       },
       "success-hover": {
         "value": "{color.foreground.positive-strong}",
-        "type": "color"
+        "type": "color",
+        "$deprecated": "Use positive-hover instead."
       },
       "warning": {
         "value": "{color.foreground.warning}",

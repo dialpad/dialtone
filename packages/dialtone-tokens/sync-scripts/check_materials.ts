@@ -29,7 +29,9 @@ import { Color } from './figma_api.js';
 import { resolveModes, ResolvedToken } from './resolve_tokens.js';
 import { classify, FigmaType } from './variable_policy.js';
 
-const PARENT = 'Dialtone 2026';
+// See the matching override in build_variables.ts: the preview file names
+// its collection differently so its CI job can't collide with the main file's.
+const PARENT = process.env.COLLECTION_NAME ?? 'Dialtone 2026';
 const MATERIALS = ['steel', 'graphite', 'iron', 'amethyst', 'jade'];
 const MODES = { light: 'Light', dark: 'Dark' } as const;
 const GROUPS = ['base', 'dp'];
@@ -37,11 +39,11 @@ const GROUPS = ['base', 'dp'];
 /**
  * A colour as a comparable 8-bit key.
  *
- * Uses the sync's own `parseColor`, which gamut-maps by reducing chroma rather
- * than clipping channels. Converting any other way makes the check disagree
- * with the sync on precisely the fifteen colours that sit outside sRGB, and
- * report a difference that only exists because the check did the conversion
- * differently.
+ * Uses the sync's own `parseColor`, which gamut-maps by clipping channels to
+ * match what a browser actually paints. Converting any other way makes the
+ * check disagree with the sync on precisely the colours that sit outside
+ * sRGB (89 of them), and report a difference that only exists because the
+ * check did the conversion differently.
  */
 /** The raw colour, for equality — quantising here reintroduces the exact
  * boundary problem `colorApproximatelyEqual`'s tolerance exists to avoid. */
@@ -113,6 +115,10 @@ async function main (): Promise<void> {
   }
   const byName = new Map<string, string>();
   for (const [id, variable] of Object.entries(local.meta.variables)) {
+    // See the matching guard in build_materials.ts: a deleted-but-referenced
+    // ghost shares the live variable's name, and would make the WRITE pass
+    // below compare against its stale value instead.
+    if (variable.deletedButReferenced) continue;
     if (variable.variableCollectionId === parentCollection.id) byName.set(variable.name, id);
   }
 

@@ -19,7 +19,8 @@ initContext(useBundled);
 
 async function checkVersion() {
   try {
-    const response = await fetch(`https://registry.npmjs.org/${pkg.name}/latest`);
+    // A pending request keeps the process alive after the command has printed its answer.
+    const response = await fetch(`https://registry.npmjs.org/${pkg.name}/latest`, { signal: AbortSignal.timeout(3000) });
     const data = await response.json();
     if (data.version && data.version !== pkg.version) {
       console.error('');

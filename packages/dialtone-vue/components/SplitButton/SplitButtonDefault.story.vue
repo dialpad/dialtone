@@ -2,6 +2,7 @@
   <dt-split-button
     :start-active="$attrs.startActive"
     :start-aria-label="$attrs.startAriaLabel"
+    :start-button-class="$attrs.startButtonClass"
     :start-icon-position="$attrs.startIconPosition"
     :start-label-class="$attrs.startLabelClass"
     :start-loading="$attrs.startLoading"
@@ -13,6 +14,7 @@
     :kind="$attrs.kind"
     :end-active="$attrs.endActive"
     :end-aria-label="$attrs.endAriaLabel"
+    :end-button-class="$attrs.endButtonClass"
     :end-id="$attrs.endId"
     :end-tooltip-text="$attrs.endTooltipText"
     :class="$attrs.class"

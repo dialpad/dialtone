@@ -6,7 +6,7 @@
  */
 
 import { readFileSync } from 'node:fs';
-import { escapeTableCell, codeCell, slugToPascalComponentName } from './utils.mjs';
+import { escapeTableCell, codeCell, findComponentRecord, componentImportLine } from './utils.mjs';
 
 let _componentDocData = null;
 
@@ -36,10 +36,7 @@ export function setComponentDocs (data) {
  */
 export function findComponent (componentName) {
   if (!_componentDocData) return null;
-  const pascalName = slugToPascalComponentName(componentName);
-  return _componentDocData.find(
-    c => c.displayName && c.displayName.toLowerCase() === pascalName.toLowerCase(),
-  ) || null;
+  return findComponentRecord(_componentDocData, componentName);
 }
 
 /**
@@ -75,6 +72,12 @@ function buildApiTable (heading, items, headers, formatRow) {
   return output;
 }
 
+function importLines (component, alsoImport) {
+  const line = componentImportLine(_componentDocData, component, alsoImport);
+  if (!line) return ['<!-- Import unavailable: upgrade metadata or verify the public export route. -->', ''];
+  return ['```js', line, '```', ''];
+}
+
 /**
  * Generate markdown tables for a component's Vue API.
  * @param {string} componentName - kebab-case name, e.g. "avatar"
@@ -92,15 +95,7 @@ export function transformVueApi (componentName, { showImport = true, alsoImport 
   const output = [];
 
   if (showImport) {
-    const names = [component.displayName];
-    for (const name of alsoImport) {
-      const entry = findComponent(name);
-      if (entry) names.push(entry.displayName);
-    }
-    output.push('```js');
-    output.push(`import { ${names.join(', ')} } from '@dialpad/dialtone-vue';`);
-    output.push('```');
-    output.push('');
+    output.push(...importLines(component, alsoImport));
   }
 
   const props = component.props ? Object.values(component.props) : [];

@@ -39,6 +39,20 @@ describe('DtStack Tests', () => {
     });
   });
 
+  describe('Wrapping', () => {
+    it('should only apply the wrap modifier while wrapping is enabled', async () => {
+      const stack = wrapper.find('[data-qa="dt-stack"]');
+
+      expect(stack.classes()).not.toContain('d-stack--wrap');
+
+      await wrapper.setProps({ wrap: true });
+      expect(stack.classes()).toContain('d-stack--wrap');
+
+      await wrapper.setProps({ wrap: false });
+      expect(stack.classes()).not.toContain('d-stack--wrap');
+    });
+  });
+
   describe('When `direction` prop is provided with', () => {
     describe('expected string value', () => {
       it('should set the proper class and override the default value', async () => {

@@ -14,6 +14,7 @@ export default {
     nodeResolve(),
     commonjs(),
     json(),
-    typescript(),
+    // The plugin only warns on type errors by default.
+    typescript({ noEmitOnError: true }),
   ],
 };

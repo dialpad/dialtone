@@ -39,6 +39,12 @@ function exclusionFor (t: ResolvedToken): string | null {
   return excluded.length ? excluded[0].reason : null
 }
 
+/** The rule that hid a token from publishing, or null if it stays visible. */
+function hiddenRuleFor (t: ResolvedToken): string | null {
+  const { emit } = classify([t])
+  return emit.length ? emit[0].hiddenRule : null
+}
+
 describe('figmaTypeFor', () => {
   it('maps the token types we emit', () => {
     expect(figmaTypeFor('color')).toBe('COLOR')
@@ -78,6 +84,38 @@ describe('figmaFontFamily', () => {
   it('returns null when nothing in the stack is recognised', () => {
     expect(figmaFontFamily('Comic Sans MS, cursive')).toBeNull()
     expect(figmaFontFamily('')).toBeNull()
+  })
+})
+
+describe('hidden from publishing', () => {
+  it('hides theme, inverted and the raw colour ramp', () => {
+    expect(hiddenRuleFor(token('theme.color.base'))).toMatch(/theme/)
+    expect(hiddenRuleFor(token('color.surface.primary-inverted'))).toMatch(/inverted/)
+    expect(hiddenRuleFor(token('color.blue.500'))).toMatch(/colour ramp/)
+  })
+
+  it('does not hide layout, spacing, size, font, opacity or shadow primitives — these are bound directly in Dialtone 10 product code (e.g. --dt-spacing-200), unlike theme/inverted/raw colour', () => {
+    // filePath matters here: the removed "base primitive, reference only" rule
+    // matched on `filePath.startsWith('tokens/base/')`, not on name — a token
+    // under any OTHER path was never caught by it, fix or no fix. Without this
+    // override these assertions would pass identically whether or not the
+    // rule still existed, proving nothing about the regression this test is
+    // meant to guard.
+    const base = (name: string, type = 'dimension') => token(name, type, { filePath: 'tokens/base/default.json' })
+    expect(hiddenRuleFor(base('layout.100'))).toBeNull()
+    expect(hiddenRuleFor(base('spacing.100'))).toBeNull()
+    expect(hiddenRuleFor(base('size.radius.300'))).toBeNull()
+    expect(hiddenRuleFor(base('size.border.100'))).toBeNull()
+    expect(hiddenRuleFor(base('font.family.body', 'fontFamily'))).toBeNull()
+    expect(hiddenRuleFor(base('opacity.100', 'number'))).toBeNull()
+    expect(hiddenRuleFor(base('shadow.small'))).toBeNull()
+  })
+
+  it('hides spacing.base and layout.base — the scale\'s multiplier, not one of its stops', () => {
+    expect(hiddenRuleFor(token('spacing.base'))).toMatch(/base multiplier/)
+    expect(hiddenRuleFor(token('layout.base'))).toMatch(/base multiplier/)
+    // Not a prefix match — a stop that merely contains "base" stays visible.
+    expect(hiddenRuleFor(token('spacing.base-ish'))).toBeNull()
   })
 })
 

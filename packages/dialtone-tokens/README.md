@@ -36,14 +36,16 @@ Token CSS is wrapped in `@layer dialtone.base`. If your project can't use CSS Ca
 
 This mirrors the [no-layers build](https://dialtone.dialpad.com/guides/migration/css-cascade-layers/#no-layers-build) available in `@dialpad/dialtone-css` and `@dialpad/dialtone` — use it if you import token CSS directly rather than through those packages. Every token CSS file that carries `@layer` has a no-layers counterpart at the same path under `no-layers/`.
 
-If you theme at runtime with `initDialtoneTheme` from `themes/config`, pass `{ layers: false }` to load the no-layers core tokens instead — `setBrand`/`setContrast`/`setMaterial` need no equivalent option since brand, contrast, and material overrides were never wrapped in `@layer`:
+If you theme at runtime, use `initDialtoneThemeNoLayers` from `themes/config-no-layers` to load the no-layers core tokens — `setBrand`/`setContrast`/`setMaterial` need no equivalent option since brand, contrast, and material overrides were never wrapped in `@layer`:
 
 ```js
-import { initDialtoneTheme } from '@dialpad/dialtone-tokens/themes/config';
+import { initDialtoneThemeNoLayers } from '@dialpad/dialtone-tokens/themes/config-no-layers';
 import Dp from '@dialpad/dialtone-tokens/themes/dp';
 
-initDialtoneTheme(Dp, 'light', document.documentElement, { layers: false });
+initDialtoneThemeNoLayers(Dp, 'light', document.documentElement);
 ```
+
+`initDialtoneTheme(..., { layers: false })` from `themes/config` still works too, but resolves the no-layers core via a runtime dynamic import, so it applies a moment after the call returns rather than synchronously — prefer `initDialtoneThemeNoLayers` for new code.
 
 dialtone-tokens provides a postcss plugin that you can use to convert all tokens using rem to px. This could be useful if you are using dialtone in an embedded situation where you don't have control over the root font size.
 

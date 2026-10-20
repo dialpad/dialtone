@@ -1,5 +1,6 @@
 /* eslint-disable complexity */
 import Core from '@/themes/core.js';
+import Materials from '@/themes/materials.js';
 // Not statically imported — the no-layers core is only needed when initDialtoneTheme
 // is called with { layers: false }. Dynamically importing it here lets bundlers
 // code-split it out of the default (layers: true) path, so apps that never opt into
@@ -7,9 +8,12 @@ import Core from '@/themes/core.js';
 
 /**
  * Names of all materials, including the default (sandstone). Material switching
- * is attribute-driven: setMaterial sets `data-dt-material` on the rootNode,
- * and the bundled per-material CSS (loaded once at app startup) applies via
- * the matching `[data-dt-material="<name>"]` selector.
+ * injects CSS the same way setBrand/setContrast do: setMaterial looks up the
+ * named entry in the bundled `Materials` map, writes its CSS into a
+ * `#dialtone-css-material` style tag, then sets `data-dt-material` on the
+ * rootNode. Sandstone is the exception — it's the default ramp baked into the
+ * base CSS, has no override entry in `Materials`, and clearing simply removes
+ * the style tag.
  */
 export const VALID_MATERIALS = Object.freeze(['sandstone', 'steel', 'graphite', 'iron', 'amethyst', 'jade']);
 const VALID_MATERIALS_SET = new Set(VALID_MATERIALS);
@@ -88,8 +92,8 @@ let initializationState = null;
  * @example
  * // Apply a brand overlay after initDialtoneTheme has set the base
  * import { initDialtoneTheme, setBrand } from '@dialpad/dialtone/themes/config';
- * import Dp from '@dialpad/dialtone/themes/dp.json';
- * import Tmo from '@dialpad/dialtone/themes/tmo.json';
+ * import Dp from '@dialpad/dialtone/themes/dp';
+ * import Tmo from '@dialpad/dialtone/themes/tmo';
  *
  * initDialtoneTheme(Dp, 'light');   // base brand = dp
  * setBrand(Tmo);                    // overlay: tmo overrides on top of dp
@@ -121,7 +125,7 @@ export function setBrand (theme, rootNode = document.documentElement, contrastTh
     _removeStyleTag('dialtone-css-brand', rootNode?.shadowRoot ?? rootNode);
     if (initializationState) {
       rootNode?.setAttribute('data-dt-brand', initializationState.brand);
-      rootNode?.setAttribute('data-dt-material', initializationState.material ?? 'sandstone');
+      _applyMaterial(initializationState.material ?? 'sandstone', rootNode);
     }
     return;
   }
@@ -185,7 +189,7 @@ function _setBrandLayered(theme, rootNode = document.documentElement) {
     if (baseBrand && theme.brand.name === baseBrand) {
       _removeStyleTag('dialtone-css-brand', styleRoot);
       rootNode?.setAttribute('data-dt-brand', baseBrand);
-      rootNode?.setAttribute('data-dt-material', initializationState?.material ?? 'sandstone');
+      _applyMaterial(initializationState?.material ?? 'sandstone', rootNode);
     } else {
       _setStyleTag('dialtone-css-brand', theme.brand.css, styleRoot);
       rootNode?.setAttribute('data-dt-brand', theme.brand.name);
@@ -208,33 +212,48 @@ function _setBrandLayered(theme, rootNode = document.documentElement) {
  * when a repeated initDialtoneTheme() call changes the layers option.
  *
  * Sets `coreTokensLoaded` only once the core CSS has actually been applied —
- * synchronously for the layered core, or after the dynamic import resolves
- * for the no-layers core — so a failed import doesn't falsely report core
- * tokens as loaded.
+ * synchronously for the layered core and for a caller-supplied `presetCore`,
+ * or after the dynamic import resolves for the no-layers fallback path — so
+ * a failed import doesn't falsely report core tokens as loaded.
  *
  * Also guards against a stale in-flight no-layers import: if this function
  * (or resetBrand) runs again before that import resolves, the earlier
  * generation is discarded instead of clobbering newer core CSS.
+ *
+ * @param {boolean} layers
+ * @param {ThemeRootNode} styleRoot
+ * @param {CoreTheme|null} [presetCore] - Pre-resolved core CSS (e.g. from
+ *   initDialtoneThemeNoLayers' static import). When provided, the no-layers
+ *   core is applied synchronously and the dynamic import is skipped entirely.
  */
-function _loadCoreTokens (layers, styleRoot) {
+function _loadCoreTokens (layers, styleRoot, presetCore = null) {
   const generation = ++coreLoadGeneration;
   if (layers) {
     _setStyleTag('dialtone-css-core', Core.core, styleRoot);
     coreTokensLoaded = true;
-  } else {
-    // Reserve the tag's DOM position synchronously so the base-colors/brand
-    // tags appended below still land after it, then fill in its content once
-    // the dynamic import resolves.
-    _setStyleTag('dialtone-css-core', '', styleRoot);
-    import('@/themes/core-no-layers.js').then(({ default: CoreNoLayers }) => {
-      if (generation !== coreLoadGeneration) return; // superseded — discard
-      _setStyleTag('dialtone-css-core', CoreNoLayers.core, styleRoot);
-      coreTokensLoaded = true;
-    }).catch((error) => {
-      if (generation !== coreLoadGeneration) return; // superseded — discard
-      console.error('[Dialtone] initDialtoneTheme: failed to load no-layers core tokens.', error);
-    });
+    return;
   }
+
+  if (presetCore) {
+    // Caller already resolved the no-layers core via a static import
+    // (initDialtoneThemeNoLayers) — apply it directly, no import() needed.
+    _setStyleTag('dialtone-css-core', presetCore.core, styleRoot);
+    coreTokensLoaded = true;
+    return;
+  }
+
+  // Reserve the tag's DOM position synchronously so the base-colors/brand
+  // tags appended below still land after it, then fill in its content once
+  // the dynamic import resolves.
+  _setStyleTag('dialtone-css-core', '', styleRoot);
+  import('@/themes/core-no-layers.js').then(({ default: CoreNoLayers }) => {
+    if (generation !== coreLoadGeneration) return; // superseded — discard
+    _setStyleTag('dialtone-css-core', CoreNoLayers.core, styleRoot);
+    coreTokensLoaded = true;
+  }).catch((error) => {
+    if (generation !== coreLoadGeneration) return; // superseded — discard
+    console.error('[Dialtone] initDialtoneTheme: failed to load no-layers core tokens.', error);
+  });
 }
 
 /**
@@ -327,7 +346,7 @@ export function setMode(mode, rootNode = document.documentElement) {
  * @example
  * // Standard brand switching
  * import { setBaseBrand } from '@dialpad/dialtone/themes/config';
- * import Tmo from '@dialpad/dialtone/themes/tmo.json';
+ * import Tmo from '@dialpad/dialtone/themes/tmo';
  * setBaseBrand(Tmo);
  *
  * @example
@@ -389,12 +408,11 @@ function _applyBrandLockedMaterial(brandTheme, rootNode) {
   const lockName = brandTheme.material?.name;
   if (!lockName) return;
 
-  // Skip the round-trip through setMaterial — caller (setBaseBrand) already
-  // resolved shadowRoot, and we'd just hit the same VALID_MATERIALS_SET
-  // lookup. Set the attribute directly; preserve the brand-context warn
-  // for unknown names so token-JSON typos surface clearly.
+  // Routes through _applyMaterial so a brand-locked material injects CSS the
+  // same way an explicit setMaterial() call does — preserve the brand-context
+  // warn for unknown names so token-JSON typos surface clearly.
   if (VALID_MATERIALS_SET.has(lockName)) {
-    rootNode?.setAttribute('data-dt-material', lockName);
+    _applyMaterial(lockName, rootNode);
     return;
   }
 
@@ -402,7 +420,26 @@ function _applyBrandLockedMaterial(brandTheme, rootNode) {
     `[Dialtone] setBaseBrand: brand '${brandTheme.brand.name}' ` +
     `declares unknown material '${lockName}'; falling back to sandstone.`,
   );
-  rootNode?.setAttribute('data-dt-material', 'sandstone');
+  _applyMaterial('sandstone', rootNode);
+}
+
+/**
+ * Apply a material by name: inject its override CSS (if it has one) into
+ * `#dialtone-css-material`, then set `data-dt-material`. Shared by
+ * setMaterial() and _applyBrandLockedMaterial() so a brand-locked material
+ * goes through the same CSS-injection path as an explicit setMaterial() call.
+ * `name` must already be a validated member of VALID_MATERIALS.
+ */
+function _applyMaterial(name, rootNode) {
+  const styleRoot = rootNode?.shadowRoot ?? rootNode;
+  const materialTheme = Materials[name];
+  if (materialTheme) {
+    _setStyleTag('dialtone-css-material', materialTheme.css, styleRoot);
+  } else {
+    // sandstone has no override entry — it's the bare base ramp.
+    _removeStyleTag('dialtone-css-material', styleRoot);
+  }
+  rootNode?.setAttribute('data-dt-material', name);
 }
 
 /**
@@ -453,19 +490,23 @@ export function setContrast(contrastTheme, rootNode = document.documentElement) 
 }
 
 /**
- * Set the active material — toggles `data-dt-material` on the rootNode. The
- * matching `[data-dt-material="<name>"][data-dt-mode="..."]` CSS (loaded once
- * in the layered bundle) re-binds `--dt-color-black-*` for that subtree.
+ * Set the active material by name — injects that material's override CSS
+ * into a `#dialtone-css-material` style tag and sets `data-dt-material` on
+ * the rootNode, the same way setBrand/setContrast inject their theme's CSS.
+ * Unlike those, setMaterial takes a string rather than an imported theme
+ * object: there are only 5 non-default materials, so their CSS is bundled
+ * together in `themes/materials.js` and looked up by name — no per-material
+ * module to import.
  *
  * Pass `null`, `undefined`, or `'sandstone'` to clear the override (sandstone
  * is the default neutral ramp baked into the base CSS, so it has no override
- * selector — the attribute simply matches nothing and the bare base values
+ * entry — clearing just removes the style tag and the bare base values
  * apply). Pass a known string name to apply that material.
  *
  * Unknown material names emit a `console.warn` and fall back to sandstone.
  *
  * @param {MaterialName|null} name - Material name, or null/undefined to reset to sandstone
- * @param {ThemeRootNode} [rootNode=document.documentElement] - Root element to apply the attribute to
+ * @param {ThemeRootNode} [rootNode=document.documentElement] - Root element for style injection
  *
  * @example
  * setMaterial('steel');
@@ -491,11 +532,11 @@ export function setMaterial (name, rootNode = document.documentElement) {
     console.warn(
       `[Dialtone] setMaterial: unknown material '${name}'; falling back to sandstone.`,
     );
-    rootNode?.setAttribute('data-dt-material', 'sandstone');
+    _applyMaterial('sandstone', rootNode);
     return;
   }
 
-  rootNode?.setAttribute('data-dt-material', resolved);
+  _applyMaterial(resolved, rootNode);
 }
 
 /**
@@ -515,11 +556,17 @@ export function setMaterial (name, rootNode = document.documentElement) {
  *   already unlayered either way — this only affects the shared core tokens initDialtoneTheme loads.
  *   The no-layers core is loaded via a dynamic import (not bundled into the default path), so with
  *   `layers: false` the core token styles apply asynchronously, a moment after this call returns.
+ *   **Prefer `initDialtoneThemeNoLayers()` from `@dialpad/dialtone-tokens/themes/config-no-layers`
+ *   instead of `{ layers: false }`** — it statically imports the no-layers core so it applies
+ *   synchronously, with the same bundle-splitting benefit (layered-only apps never pay for the
+ *   no-layers CSS string). `{ layers: false }` remains supported for backwards compatibility.
+ * @param {CoreTheme} [options.core] - Pre-resolved core theme to use instead of the default layered
+ *   core (internal — set by initDialtoneThemeNoLayers). Most callers should not pass this directly.
  *
  * @example
  * // Standard usage (non-Shadow DOM)
  * import { initDialtoneTheme } from '@dialpad/dialtone/themes/config';
- * import Dp from '@dialpad/dialtone/themes/dp.json';
+ * import Dp from '@dialpad/dialtone/themes/dp';
  *
  * initDialtoneTheme(Dp, 'light');
  *
@@ -528,8 +575,13 @@ export function setMaterial (name, rootNode = document.documentElement) {
  * initDialtoneTheme(Dp, 'light', document.documentElement);
  *
  * @example
- * // No CSS Cascade Layers support
+ * // No CSS Cascade Layers support (loads the no-layers core asynchronously)
  * initDialtoneTheme(Dp, 'light', document.documentElement, { layers: false });
+ *
+ * @example
+ * // No CSS Cascade Layers support, loaded synchronously (preferred)
+ * import { initDialtoneThemeNoLayers } from '@dialpad/dialtone/themes/config-no-layers';
+ * initDialtoneThemeNoLayers(Dp, 'light', document.documentElement);
  *
  * @example
  * // ❌ WRONG - In Web Components, forgetting rootNode causes styles to inject into document!
@@ -552,7 +604,7 @@ export function setMaterial (name, rootNode = document.documentElement) {
  * }
  */
 export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = document.documentElement, options = {}) {
-  const { layers = true } = options;
+  const { layers = true, core = null } = options;
   // Validation: brandTheme must be an object
   if (!brandTheme || typeof brandTheme !== 'object') {
     throw new TypeError(
@@ -635,7 +687,7 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
         `[Dialtone] Theme already initialized with brand '${brandTheme.brand.name}' and mode '${mode}' ` +
         `using layers=${existing.layers}. Reloading core tokens with layers=${layers}.`,
       );
-      _loadCoreTokens(layers, styleRoot);
+      _loadCoreTokens(layers, styleRoot, core);
       initializationState.layers = layers;
       return;
     } else {
@@ -650,7 +702,7 @@ export function initDialtoneTheme(brandTheme, mode = 'light', rootNode = documen
   }
 
   // Load core tokens (once per JavaScript instance)
-  _loadCoreTokens(layers, styleRoot);
+  _loadCoreTokens(layers, styleRoot, core);
 
   // Load base colors (once) — identical CSS whether layers is true or false
   // (tokens-base-colors.css was never wrapped in @layer), so no branching needed.
@@ -739,9 +791,8 @@ export function resetBrand(rootNode = document.documentElement) {
   // can't recreate the #dialtone-css-core tag we're about to remove.
   coreLoadGeneration++;
 
-  // Remove all theme style tags. Material no longer injects a style tag
-  // (attribute-driven), but resetBrand should still scrub any pre-existing
-  // injection from older code paths.
+  // Remove all theme style tags, including the material override tag
+  // setMaterial()/_applyBrandLockedMaterial() may have injected.
   _removeStyleTag('dialtone-css-core', styleRoot);
   _removeStyleTag('dialtone-css-base-colors', styleRoot);
   _removeStyleTag('dialtone-css-material', styleRoot);

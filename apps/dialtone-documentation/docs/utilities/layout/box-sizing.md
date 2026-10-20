@@ -6,14 +6,14 @@ keywords: ["border box", "content box"]
 
 ## Examples
 
-All examples below have a 128px height and width. You can see how `.d-box-border` elements includes the padding and border into the overall box's height and width.
+Each example sets its width and height to 128px. `.d-box-border` includes padding and border within that size. `.d-box-content` adds them outside it. Because `box-sizing` is not inherited, `.d-box-unset` resets to `content-box` and has the same outer size as `.d-box-content`.
 
 ```vue demo
 <!-- @wrapper -->
 <dt-stack direction="row" gap="200" class="d-fl-center d-w100p">
-  <dt-stack direction="row" align="center" justify="center" class="d-size-200 d-p-100 d-ba d-baw4 d-bas-dashed d-bar-300 d-bc-default d-bgc-moderate d-box-border"><dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p-100 d-bgc-moderate-opaque d-bar-200 d-code--sm">d-box-border</dt-stack></dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-size-200 d-p-100 d-ba d-baw4 d-bas-dashed d-bar-300 d-bc-default d-bgc-moderate d-box-content"><dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p-100 d-bgc-moderate-opaque d-bar-200 d-code--sm">d-box-content</dt-stack></dt-stack>
-  <dt-stack direction="row" align="center" justify="center" class="d-size-200 d-p-100 d-ba d-baw4 d-bas-dashed d-bar-300 d-bc-default d-bgc-moderate d-box-unset"><dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p-100 d-bgc-moderate-opaque d-bar-200 d-code--sm">d-box-unset</dt-stack></dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-box-border d-size-200 d-p-100 d-ba d-baw4 d-bas-dashed d-bar-300 d-bc-default d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p-100 d-bgc-moderate-opaque d-bar-200 d-code--sm">d-box-border</dt-stack></dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-box-content d-size-200 d-p-100 d-ba d-baw4 d-bas-dashed d-bar-300 d-bc-default d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p-100 d-bgc-moderate-opaque d-bar-200 d-code--sm">d-box-content</dt-stack></dt-stack>
+  <dt-stack direction="row" align="center" justify="center" class="d-box-unset d-size-200 d-p-100 d-ba d-baw4 d-bas-dashed d-bar-300 d-bc-default d-bgc-moderate"><dt-stack direction="row" align="center" justify="center" class="d-fl1 d-as-stretch d-p-100 d-bgc-moderate-opaque d-bar-200 d-code--sm">d-box-unset</dt-stack></dt-stack>
 </dt-stack>
 ```
 
@@ -22,9 +22,17 @@ All examples below have a 128px height and width. You can see how `.d-box-border
 <utility-class-table>
   <template #content>
     <tbody>
-      <tr v-for="i in ['content', 'split']">
-        <th class="d-code--sm d-docsite-code">d-box-{{ i }}</th>
-        <td class="d-code--sm">box-sizing: {{ i }}-box;</td>
+      <tr>
+        <th scope="row" class="d-code--sm d-docsite-code">d-box-border</th>
+        <td class="d-code--sm">box-sizing: border-box !important;</td>
+      </tr>
+      <tr>
+        <th scope="row" class="d-code--sm d-docsite-code">d-box-content</th>
+        <td class="d-code--sm">box-sizing: content-box !important;</td>
+      </tr>
+      <tr>
+        <th scope="row" class="d-code--sm d-docsite-code">d-box-unset</th>
+        <td class="d-code--sm">box-sizing: unset !important;</td>
       </tr>
     </tbody>
   </template>
