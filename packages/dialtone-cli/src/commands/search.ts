@@ -14,13 +14,22 @@ function searchAll(query: string): { results: SearchResult[]; notes: string[] } 
   const componentResults = searchComponents(query, components, componentDocumentation);
   const iconResults = searchIcons(query, icons as IconsData);
   const docResults = searchDocumentation(query, documentation);
+  const values = [...tokenResults.results, ...classResults.results];
+  // Keep concrete value matches ahead of partial component hints, without
+  // changing complete component matches or searches with no value results.
+  const completeNames = values.length ? new Set(searchComponents(query, components, componentDocumentation,
+    { includePartialContext: false }).results.map(result => result.name)) : null;
+  const complete = componentResults.results.filter(result => !completeNames || completeNames.has(result.name));
+  const partial = completeNames ? componentResults.results.filter(result => !completeNames.has(result.name)) : [];
+  const prioritizeValues = partial.length > 0;
 
   return {
     results: [
-      ...componentResults.results,
+      ...complete,
+      ...(prioritizeValues ? values : []),
+      ...partial,
       ...docResults.results,
-      ...tokenResults.results,
-      ...classResults.results,
+      ...(prioritizeValues ? [] : values),
       ...iconResults.results,
     ],
     notes: [

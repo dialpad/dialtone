@@ -148,9 +148,46 @@ describe('curated public-page discovery', () => {
     expect(searchDocumentation(query, documentation).results[0].details.docId).toBe(docId);
   });
 
-  test('complete API-text matches lead before partial contextual discovery', () => {
-    const found = searchComponents('panel for tabs', components, componentDocumentation);
-    expect(found.results[0].name).toBe('DtTabGroup');
+  test.each([
+    ['panel for tabs', 'DtTabGroup'],
+    ['top left', 'DtBanner'],
+  ])('%s keeps complete API-text matches before partial contextual discovery', (query, expected) => {
+    expect(searchComponents(query, components, componentDocumentation).results[0].name).toBe(expected);
+  });
+
+  test.each([
+    ['text fields', 'DtInput'],
+    ['tab panels', 'DtTabPanel'],
+    ['add empty states to the settings page', 'DtEmptyState'],
+  ])('%s recognizes regular plurals of complete discovery phrases', (query, expected) => {
+    expect(searchComponents(query, components, componentDocumentation).results[0].name).toBe(expected);
+  });
+
+  test('selects a source section rather than repeating page keywords as section evidence', () => {
+    const usage = { ...doc('components/text', 'Text', 'Semantic typography.'), frontmatter: { keywords: ['font', 'strength'] } };
+    const strength = { ...usage, id: 'components/text#strength', headingPath: ['Variants', 'Strength'], content: 'Choose font weight using strength.' };
+    expect(searchDocumentation('font strength', [usage, strength]).results[0].details.id).toBe(strength.id);
+  });
+
+  test('a named component size request keeps its source page ahead of generic size keywords', () => {
+    expect(searchDocumentation('icon size', documentation).results[0].details.docId).toBe('components/icon');
+    expect(searchDocumentation('dark mode theme', documentation).results.slice(0, 3).map(result => result.details.docId))
+      .toContain('directives/mode');
+  });
+
+  test('filler does not become contextual evidence, while an explicit keyword still works', () => {
+    const page = { ...doc('guides/routing', 'Routing', 'Navigation.'), frontmatter: { keywords: ['to'] } };
+    expect(searchDocumentation('to a for', [page]).results).toEqual([]);
+    expect(searchDocumentation('to', [page]).results[0].details.docId).toBe(page.docId);
+    expect(searchComponents('focusgroup directive', components, componentDocumentation).results.map(result => result.name))
+      .not.toContain('DtModeIsland');
+  });
+
+  test('authored text-box and scroll-area vocabulary reaches its existing sources', () => {
+    const found = searchComponents('a text box for the user email with validation', components, componentDocumentation);
+    expect(found.results[0].name).toBe('DtInput');
+    expect(found.results[0].details.keywordSource.keywords).toContain('text box');
+    expect(searchDocumentation('scroll area', documentation).results[0].details.docId).toBe('components/scrollbar');
   });
 
   test('recognizes complete phrases and exposes the keyword behind partial context', () => {
@@ -178,7 +215,7 @@ describe('curated public-page discovery', () => {
     expect(found.notes.some(note => note.includes('DtInput'))).toBe(true);
     const excluded = searchComponents('add an icon to the settings page', components);
     expect(excluded.results).toEqual([]);
-    expect(excluded.notes.some(note => note.includes('showing components'))).toBe(false);
+    expect(excluded.notes.some(note => note.includes('No component named'))).toBe(false);
   });
 
   test('bounds text keyword evidence while retaining all authored phrases in results', () => {

@@ -12,16 +12,42 @@ function normalizedKeyword(keyword: string): string {
   return phrase;
 }
 
+const CONTEXT_FILLER = new Set([
+  'a', 'an', 'the', 'and', 'or', 'to', 'for', 'of', 'in', 'on', 'with', 'how',
+  'component', 'components', 'directive', 'directives',
+]);
+
+/** Opt-in discovery accepts a regular plural of a known token, without stemming. */
+export function matchesDiscoveryWord(actual: string | undefined, expected: string): boolean {
+  return actual === expected || (expected.length >= 3 && !expected.endsWith('s') && actual === `${expected}s`);
+}
+
+export function matchesDiscoveryPhrase(words: readonly string[], phrase: readonly string[]): boolean {
+  return phrase.length > 0 && words.some((_, index) =>
+    phrase.every((part, offset) => matchesDiscoveryWord(words[index + offset], part)));
+}
+
+/** Separate authored phrases cannot combine into a stronger complete phrase. */
+export function discoveryPhraseCoverage(words: readonly string[], phrases: readonly string[]): number {
+  return Math.max(0, ...phrases.map(phrase => {
+    const parts = normalizedKeyword(phrase).split(' ');
+    return words.filter(word => parts.some(part => matchesDiscoveryWord(word, part))).length;
+  }));
+}
+
 /** Match one authored phrase; discovery may also recognize that complete phrase inside a request. */
-export function keywordMatcher(query: string, { includeContext = false }: { includeContext?: boolean } = {}): (keywords?: readonly string[]) => string[] {
+export function keywordMatcher(query: string, { includeContext = false, includePartialContext = true }: { includeContext?: boolean; includePartialContext?: boolean } = {}): (keywords?: readonly string[]) => string[] {
   const normalized = normalizeKeywordText(query);
-  const context = ` ${normalized} `;
-  const patterns = normalized.split(' ').filter(Boolean)
+  const words = normalized.split(' ').filter(Boolean);
+  const patterns = words
     .map(word => new RegExp(`\\b${word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}\\b`));
   if (!patterns.length) return () => [];
   return (keywords = []) => keywords.filter((keyword) => {
     const phrase = normalizedKeyword(keyword);
+    const parts = phrase.split(' ').filter(Boolean);
     return patterns.every(pattern => pattern.test(phrase))
-      || (includeContext && phrase.length > 0 && context.includes(` ${phrase} `));
+      || (includeContext && parts.some(part => !CONTEXT_FILLER.has(part))
+        && (words.every(word => parts.some(part => matchesDiscoveryWord(word, part)))
+          || (includePartialContext && matchesDiscoveryPhrase(words, parts))));
   });
 }

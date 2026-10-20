@@ -122,4 +122,16 @@ describe('dialtone CLI (built)', { timeout: 30_000 }, () => {
     expect(r.status).toBe(0);
     expect(r.stderr).not.toMatch(DEBUG_TAG);
   });
+
+  test('broad search keeps concrete utility facts ahead of partial component hints', () => {
+    const r = run(['search', 'padding 8px', '--format', 'json', '--limit', '0']);
+    expect(r.status).toBe(0);
+    const results = JSON.parse(r.stdout);
+    const box = results.findIndex((result: { name: string }) => result.name === 'DtBox');
+    const utility = results.findIndex((result: { type: string; name: string }) => result.type === 'utility-class' && result.name === 'd-p-100');
+    expect(utility).toBeGreaterThanOrEqual(0);
+    expect(box).toBeGreaterThan(utility);
+    expect(results[0].type).toBe('utility-class');
+    expect(r.stderr).not.toMatch(DEBUG_TAG);
+  });
 });

@@ -3,7 +3,7 @@
 // ============================================================================
 
 import type { ComponentDocCatalog } from '../component-documentation.js';
-import { keywordMatcher, normalizeKeywordText } from '../keyword-matching.js';
+import { keywordMatcher, normalizeKeywordText, matchesDiscoveryPhrase, discoveryPhraseCoverage } from '../keyword-matching.js';
 import { applySmartFilter } from '../utils/filters.js';
 import { directiveIdentifiers } from '../directive-identifiers.js';
 import { normalizeComponents, normalizeComponentName, compactName, componentNames, componentImportStatement, componentImportNote } from '../component-identity.js';
@@ -162,12 +162,9 @@ function searchBySlots(regexArray: RegExp[], components: Component[]): SearchRes
 /** Join discovery phrases only to public records present in the selected dataset. */
 function searchByDiscoveryPhrases(query: string, components: Component[], catalog: ComponentDocCatalog | undefined, includeContext: boolean) {
   const match = keywordMatcher(query, { includeContext });
-  const context = ` ${normalizeKeywordText(query)} `;
-  const queryTokens = new Set(normalizeKeywordText(query).split(' ').filter(Boolean));
-  const coverage = (phrases: string[]) => {
-    const terms = new Set(phrases.flatMap(phrase => normalizeKeywordText(phrase).split(' ')));
-    return [...queryTokens].filter(term => terms.has(term)).length;
-  };
+  const words = normalizeKeywordText(query).split(' ').filter(Boolean);
+  const queryTokens = [...new Set(words)];
+  const coverage = (phrases: string[]) => discoveryPhraseCoverage(queryTokens, phrases);
   const pages = (catalog?.pages ?? []).map(page => ({ page, keywords: match(page.keywords) }))
     .filter(match => match.keywords.length > 0);
   return components.flatMap(component => {
@@ -175,7 +172,7 @@ function searchByDiscoveryPhrases(query: string, components: Component[], catalo
     if (identity?.kind !== 'public') return [];
     const names = includeContext ? componentNames(component)
       .map(name => normalizeKeywordText(name).replace(/^dt /, ''))
-      .filter(name => name && context.includes(` ${name} `)) : [];
+      .filter(name => matchesDiscoveryPhrase(words, name.split(' '))) : [];
     const matches = pages.filter(({ page }) => page.components.some(reference =>
       reference.relation === 'api' && reference.canonicalName === identity.canonicalName));
     const keywords = [...new Set(matches.flatMap(match => match.keywords))];
@@ -217,7 +214,7 @@ function legacyNote(component: Component): string | null {
 /**
  * Search Vue components by name, curated page keywords, description, props, events, and slots
  */
-export function searchComponents(query: string, components: Component[], catalog?: ComponentDocCatalog): { results: SearchResult[]; notes: string[]; exactMatch: boolean; warning: string | null } {
+export function searchComponents(query: string, components: Component[], catalog?: ComponentDocCatalog, { includePartialContext = true }: { includePartialContext?: boolean } = {}): { results: SearchResult[]; notes: string[]; exactMatch: boolean; warning: string | null } {
   if (directiveIdentifiers(query).length > 0) {
     return {
       results: [],
@@ -250,7 +247,8 @@ export function searchComponents(query: string, components: Component[], catalog
   const discovery = searchByDiscoveryPhrases(query, components, catalog, candidates.length === 0);
   const queryTokenCount = new Set(normalizeKeywordText(query).split(' ').filter(Boolean)).size;
   const keywordMatches = discovery.filter(match => match.coverage === queryTokenCount).map(match => match.result);
-  const contextMatches = discovery.filter(match => match.coverage < queryTokenCount).map(match => match.result);
+  const contextMatches = includePartialContext
+    ? discovery.filter(match => match.coverage < queryTokenCount).map(match => match.result) : [];
   const nameMatches = searchByName(regexArray, components);
   const descriptionMatches = searchByDescription(regexArray, components);
   const propsMatches = searchByProps(regexArray, components);
@@ -301,7 +299,7 @@ export function searchComponents(query: string, components: Component[], catalog
   // Add note if no name matches but other buckets have results
   const searchNotes: string[] = [];
   if (!exact && nameMatches.length === 0 && results.length > 0) {
-    searchNotes.push(`No component named '${query}', showing components with matching names in context/${catalog ? 'keywords/' : ''}description/props/events/slots`);
+    searchNotes.push(`No component named '${query}'; component candidates match names in context/${catalog ? 'keywords/' : ''}description/props/events/slots`);
   }
   const keywords = [...new Set<string>(results.flatMap(result => result.details.keywordSource?.keywords ?? []))];
   if (catalog && keywords.length) {

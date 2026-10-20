@@ -3,7 +3,7 @@
 // ============================================================================
 
 import type { DocumentationRecord, SearchResult } from '../types.js';
-import { keywordMatcher, normalizeKeywordText } from '../keyword-matching.js';
+import { keywordMatcher, normalizeKeywordText, matchesDiscoveryWord } from '../keyword-matching.js';
 import { directiveIdentifiers } from '../directive-identifiers.js';
 import { normalizeComponentName } from '../component-identity.js';
 
@@ -150,21 +150,24 @@ export function searchDocumentation(
   const checkTitleMatch = (record: DocumentationRecord): boolean => {
     const titleLower = record.docTitle.toLowerCase();
     if (words.some(w => {
-      if (w === titleLower) return true;
+      if (matchesDiscoveryWord(w, titleLower)) return true;
       if (w.startsWith('dt') && w.length > 2 && w.slice(2) === titleLower) return true;
       return false;
     })) return true;
     // Multi-word title: every word in the title must appear in the query terms.
     const titleWords = titleLower.split(/\s+/).filter(t => t.length >= 2);
-    return titleWords.length > 1 && titleWords.every(tw => words.includes(tw));
+    return titleWords.length > 1 && titleWords.every(tw => words.some(word => matchesDiscoveryWord(word, tw)));
   };
 
+  // A named API subject needs its source sections, not contextual keyword boosts.
+  const namedSubject = data.some(record =>
+    (record.category === 'components' || record.docId.startsWith(DIRECTIVE_PREFIX)) && checkTitleMatch(record));
   const queryName = normalizeComponentName(bounded);
-  const matchKeywords = keywordMatcher(bounded);
+  const matchKeywords = keywordMatcher(bounded, { includeContext: true, includePartialContext: false });
   const matchInContext = keywordMatcher(bounded, { includeContext: true });
   const queryTokens = new Set(normalizeKeywordText(bounded).split(' ').filter(Boolean));
   const wordGroups = words.map(word => normalizeKeywordText(word).split(' ').filter(Boolean));
-  const scored: Array<{ result: SearchResult; matchCount: number; titleMatch: boolean; exactTitle: boolean; keywordMatch: boolean; contextCoverage: number }> = [];
+  const scored: Array<{ result: SearchResult; matchCount: number; actualCount: number; titleMatch: boolean; exactTitle: boolean; keywordMatch: boolean; contextCoverage: number }> = [];
 
   for (const record of data) {
     const isDirective = record.docId.startsWith(DIRECTIVE_PREFIX);
@@ -183,15 +186,16 @@ export function searchDocumentation(
     const wholeKeywords = matchKeywords(record.frontmatter.keywords);
     const keywordMatch = wholeKeywords.length > 0;
     // Explicit directive requests retain their existing scoped section scoring.
-    const contextKeywords = directives.length > 0 ? []
+    const contextKeywords = directives.length > 0 || namedSubject ? []
       : matchInContext(record.frontmatter.keywords).filter(keyword => !wholeKeywords.includes(keyword));
     const contextTerms = new Set(contextKeywords.flatMap(keyword => normalizeKeywordText(keyword).split(' ')));
-    const contextCoverage = [...queryTokens].filter(term => contextTerms.has(term)).length;
+    const contextCoverage = [...queryTokens].filter(term => [...contextTerms].some(part => matchesDiscoveryWord(term, part))).length;
     const fullBlob = [record.docTitle, ...record.headingPath, record.frontmatter.description ?? '', record.content].join(' ');
     const sectionRegexes = selectedDirective && contractRegexes.length > 0 ? contractRegexes : regexes;
+    const actualCount = sectionRegexes.filter(regex => regex.test(fullBlob)).length;
     const matchCount = sectionRegexes.filter((regex, index) => regex.test(fullBlob)
       || (directives.length === 0 && wordGroups[index].length > 0
-        && wordGroups[index].every(term => contextTerms.has(term)))).length;
+        && wordGroups[index].every(term => [...contextTerms].some(part => matchesDiscoveryWord(term, part))))).length;
     // Include if content matched OR the document is specifically named in the query.
     if (matchCount === 0 && !titleMatch && !keywordMatch) continue;
 
@@ -207,12 +211,26 @@ export function searchDocumentation(
         metadata: null,
       },
       matchCount,
+      actualCount,
       titleMatch,
       exactTitle,
       keywordMatch,
       contextCoverage,
     });
   }
+
+  // Page keywords help discovery; the chosen section still needs source evidence.
+  const pages = new Map<string, typeof scored[number]>();
+  for (const entry of scored) {
+    const id = (entry.result.details as DocumentationRecord).docId;
+    const prior = pages.get(id);
+    if (!prior || entry.matchCount > prior.matchCount
+      || (entry.matchCount === prior.matchCount && entry.actualCount > prior.actualCount)
+      || (entry.matchCount === prior.matchCount && entry.actualCount === prior.actualCount
+        && !(prior.result.details as DocumentationRecord).headingPath.length
+        && (entry.result.details as DocumentationRecord).headingPath.length > 0)) pages.set(id, entry);
+  }
+  scored.splice(0, scored.length, ...pages.values());
 
   // Sort priority (highest to lowest):
   //   1. Non-whats-new before whats-new (burial)
@@ -234,17 +252,8 @@ export function searchDocumentation(
     if (aIsIntro !== bIsIntro) return aIsIntro ? 1 : -1;
     return 0;
   });
-  // Deduplicate by docId — keep only the highest-scoring section per document.
-  // The sort guarantees the best section per doc is first, so the first occurrence wins.
-  const seenDocIds = new Set<string>();
-  const results = scored
-    .map(s => s.result)
-    .filter(r => {
-      const docId = (r.details as DocumentationRecord).docId;
-      if (seenDocIds.has(docId)) return false;
-      seenDocIds.add(docId);
-      return true;
-    });
+  const seenDocIds = new Set(pages.keys());
+  const results = scored.map(s => s.result);
 
   const notes: string[] = [];
   for (const name of directives) {
