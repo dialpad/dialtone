@@ -177,7 +177,7 @@ pageClass: dialpad-design-home
     </dt-stack>
   </dt-box>
 </dt-box>
-<halftone-surface flip-x class="home-halftone-footer d-h-500 d-pbs-800" />
+<halftone-surface flip-x class="home-halftone-footer d-h-600 d-pbs-800" />
 
 <style lang="less">
 .dialpad-design-home {
@@ -246,6 +246,11 @@ pageClass: dialpad-design-home
 
 .home-section-blog-preview {
   max-inline-size: 1200px;
+}
+
+/* The footer halftone fades out before the container's top edge instead of being cut off there. */
+.home-halftone-footer .halftone-surface__shader {
+  mask-image: linear-gradient(to top, #000 45%, transparent 90%);
 }
 
 </style>
