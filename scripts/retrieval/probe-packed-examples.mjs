@@ -48,6 +48,8 @@ try {
   assert.throws(() => run(['docs', '--id', 'examples/unknown']), /No documentation found/);
   const missing = await client.callTool({ name: 'get_documentation', arguments: { id: 'examples/unknown' } });
   assert.equal(missing.structuredContent.match, 'no-match');
+  assert.ok(missing.structuredContent.notes.some(note => note.includes('examples/button-default')));
+  assert.equal(missing.structuredContent.continuation.tool, 'search_documentation');
   const legacy = JSON.parse(run(['component', 'DtButton', '--examples', '--format', 'json']));
   assert.equal(legacy.name, 'DtButton');
   assert.ok(!legacy.examples);
@@ -62,6 +64,16 @@ try {
   }
   const search = await client.callTool({ name: 'search_components', arguments: { query: 'DtButton' } });
   assert.match(search.content[0].text, /examples\/button-default/);
+  for (const query of ['stack', 'link']) {
+    const unrelated = await client.callTool({ name: 'search_components', arguments: { query } });
+    assert.doesNotMatch(unrelated.content[0].text, /Source examples/);
+  }
+  for (const name of ['search_components', 'search_documentation']) {
+    const contextual = await client.callTool({ name, arguments: { query: 'I need a complete working Vue 3 example of a disabled Dialtone button that shows a tooltip on hover' } });
+    assert.match(contextual.content[0].text, /examples\/button-disabled-tooltip/);
+  }
+  assert.doesNotMatch(run(['component', 'DtStack', '--examples']), /examples\/button-/);
+  assert.match(run(['docs', 'button with a tooltip']), /examples\/button-disabled-tooltip/);
 } finally {
   await client.close();
 }

@@ -11,6 +11,10 @@ it('keeps selected examples exact-addressable without changing broad discovery',
   }
   expect(getDocumentationDetail({ id: 'examples/unknown' }, documentation).match).toBe('no-match');
   expect(getDocumentationExampleIds('DtButton', documentation)).toEqual(['examples/button-default', 'examples/button-disabled-tooltip']);
-  expect(getDocumentationExampleIds('DtTooltipDirective', documentation)).toEqual([]);
+  expect(getDocumentationExampleIds('DtStack', documentation)).toEqual([]);
+  expect(getDocumentationExampleIds('DtTooltipDirective', documentation)).toEqual(['examples/button-disabled-tooltip']);
+  expect(getDocumentationExampleIds('DtTooltip', documentation)).toEqual(['examples/button-disabled-tooltip']);
+  expect(getDocumentationExampleIds('components/button#variants-disabled', documentation)).toEqual(['examples/button-disabled-tooltip']);
+  expect(getDocumentationExampleIds('components/button#loading', documentation)).toEqual(['examples/button-default', 'examples/button-disabled-tooltip']);
   expect(searchDocumentation('button', documentation)).toEqual(searchDocumentation('button', documentation.filter(record => !record.example)));
 });

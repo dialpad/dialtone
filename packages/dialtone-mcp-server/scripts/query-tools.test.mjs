@@ -5,6 +5,23 @@ import { Client } from '@modelcontextprotocol/sdk/client/index.js';
 import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
 import { components, bundledProvenance } from '@dialpad/dialtone-query-core';
 import * as module from '../src/query-tools.ts';
+test('example discovery follows subjects/source sections and unknown IDs retain recovery', () => {
+  for (const query of ['stack', 'layout', 'flex row gap', 'link']) {
+    const text = module.executeQueryTool('search_components', { query }).content[0].text;
+    assert.doesNotMatch(text, /Source examples/);
+  }
+  for (const query of ['button example', 'button with a tooltip', 'tooltip on a disabled button', 'complete button example with setup', 'I need a complete working Vue 3 example of a disabled Dialtone button that shows a tooltip on hover']) {
+    const text = module.executeQueryTool('search_components', { query }).content[0].text;
+    assert.match(text, /examples\/button-/);
+  }
+  const docs = module.executeQueryTool('search_documentation', { query: 'how do I show a tooltip on a disabled button' }).content[0].text;
+  assert.match(docs, /examples\/button-disabled-tooltip/);
+  const missing = module.executeQueryTool('get_documentation', { id: 'examples/button-defualt' }).structuredContent;
+  assert.equal(missing.match, 'no-match');
+  assert.deepEqual(missing.items, []);
+  assert.ok(missing.notes.some(note => note.includes('examples/button-default')));
+  assert.equal(missing.continuation.tool, 'search_documentation');
+});
 async function fixture(run) {
   const server = new McpServer(
     { name: 'test-dialtone', version: '1.5.0' },

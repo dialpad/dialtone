@@ -6,6 +6,7 @@ import type { DocumentationRecord, SearchResult } from '../types.js';
 import { keywordMatcher } from '../keyword-matching.js';
 import { directiveIdentifiers } from '../directive-identifiers.js';
 import { normalizeComponentName } from '../component-identity.js';
+import { componentDocumentation } from '../data.js';
 
 const CONTENT_EXCERPT_MAX = 500;
 const DIRECTIVE_PREFIX = 'directives/';
@@ -297,9 +298,20 @@ export function getDocumentationDetail(args: { id: string; textOffset?: number; 
   };
 }
 
-/** Exact example IDs for a component; each adapter renders its own fetch syntax. */
-export function getDocumentationExampleIds(componentName: string, data: DocumentationRecord[]): string[] {
-  return data.filter(record => record.example?.components.some(identity =>
-    normalizeComponentName(identity.canonicalName) === normalizeComponentName(componentName)))
+/** Example subjects/source sections are discovery associations; imports are assembly only. */
+export function getDocumentationExampleIds(subject: string, data: DocumentationRecord[]): string[] {
+  const examples = data.filter(record => record.example);
+  const exact = examples.filter(record => record.example!.source.id === subject);
+  if (exact.length) return exact.map(record => record.id);
+  const source = data.find(record => record.id === subject);
+  const key = normalizeComponentName(source
+    ? source.docId.startsWith(DIRECTIVE_PREFIX) ? source.docId.slice(DIRECTIVE_PREFIX.length) : source.docTitle
+    : subject);
+  const pages = new Set(componentDocumentation.pages.filter(page => page.components.some(reference =>
+    ['api', 'companion'].includes(reference.relation) && normalizeComponentName(reference.canonicalName) === key))
+    .map(page => page.docId));
+  return examples.filter(record => record.docId === (source?.docId ?? subject) || pages.has(record.docId)
+    || record.example!.directives.some(name => directiveIdentifiers(name).some(directive =>
+      normalizeComponentName(directive) === key || directiveIdentifiers(subject).includes(directive))))
     .map(record => record.id);
 }
