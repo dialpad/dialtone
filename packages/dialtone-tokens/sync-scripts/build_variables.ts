@@ -39,7 +39,10 @@ import { toNumber as toNumberWithUnits } from './utils.js';
 
 const toNumber = (value: unknown): number | null => toNumberWithUnits(value, 'px|rem|em|%');
 
-const COLLECTION = 'Dialtone 2026';
+// The preview file holds a same-shaped collection under a different name, so
+// its own CI job doesn't collide with the main file's — see COLLECTION_NAME
+// in the preview job of sync-variables-to-figma.yml.
+const COLLECTION = process.env.COLLECTION_NAME ?? 'Dialtone 2026';
 const MODES = { light: 'Light', dark: 'Dark' } as const;
 
 /** The theme groups to compose. `base` holds the primitives, `dp` the semantics. */

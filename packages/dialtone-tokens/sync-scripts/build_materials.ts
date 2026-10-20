@@ -44,7 +44,9 @@ import { resolveModes, ResolvedToken } from './resolve_tokens.js';
 import { classify, FigmaType } from './variable_policy.js';
 import { toNumber as toNumberWithUnits } from './utils.js';
 
-const PARENT = 'Dialtone 2026';
+// See the matching override in build_variables.ts: the preview file names
+// its collection differently so its CI job can't collide with the main file's.
+const PARENT = process.env.COLLECTION_NAME ?? 'Dialtone 2026';
 
 /** Sandstone is the default and lives in the parent, so it is not a material here. */
 const MATERIALS = ['steel', 'graphite', 'iron', 'amethyst', 'jade'];
