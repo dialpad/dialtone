@@ -1,5 +1,5 @@
 import { rgbToHex } from './color.js';
-import { ApiGetLocalVariablesResponse, Color, Variable, VariableAlias } from './figma_api.js';
+import { ApiGetLocalVariablesResponse, Color, Variable, VariableAlias, VariableValue } from './figma_api.js';
 import { Token, TokensFile } from './token_types.js';
 
 function tokenTypeFromVariable (variable: Variable) {
@@ -32,20 +32,34 @@ function getCustomType (variable: Variable) {
   return customTypeMap[variableNames[0]][variableNames[1]] || customTypeMap[variableNames[0]][variableNames[0]];
 }
 
-/** Resolves a colour channel that may itself be an alias, to a literal. */
+// Real generated data chains more than one hop — `color/surface/primary-opaque`
+// aliases `color/surface/secondary`, itself an alias to `color/black/100` — so
+// resolving only the immediate target isn't enough. 10 hops is far more than
+// any real alias chain in this codebase ever needs; past it this is almost
+// certainly a cycle, and failing loudly beats recursing forever.
+const MAX_ALIAS_HOPS = 10;
+
+/** Resolves a colour channel that may itself be an alias, to a literal — following the full chain, not just one hop. */
 function resolveColorChannel (
   value: Color | VariableAlias,
   localVariables: { [id: string]: Variable },
   modeId: string,
 ): Color {
-  if (!('type' in value)) return value;
-
-  const aliased = localVariables[value.id];
-  const aliasedValue = aliased.valuesByMode[modeId];
-  if (typeof aliasedValue !== 'object' || !('r' in aliasedValue)) {
-    throw new Error(`composedColor's colour alias did not resolve to a literal colour: ${aliased.name}`);
+  let current: VariableValue = value;
+  let name = '(composedColor)';
+  for (let hop = 0; hop < MAX_ALIAS_HOPS; hop++) {
+    if (typeof current !== 'object') {
+      throw new Error(`composedColor's colour alias did not resolve to a colour: ${name}`);
+    }
+    if ('r' in current) return current;
+    if (!('type' in current) || current.type !== 'VARIABLE_ALIAS') {
+      throw new Error(`composedColor's colour alias did not resolve to a colour: ${name}`);
+    }
+    const aliased = localVariables[current.id];
+    name = aliased.name;
+    current = aliased.valuesByMode[modeId];
   }
-  return aliasedValue;
+  throw new Error(`composedColor's colour alias chain is more than ${MAX_ALIAS_HOPS} hops deep — likely a cycle: ${name}`);
 }
 
 function tokenValueFromVariable (
