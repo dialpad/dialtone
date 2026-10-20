@@ -321,10 +321,12 @@ function searchFooter(
   args: { query: string; limit: number; offset: number; projection?: string },
   pagination: ReturnType<typeof paginate>,
   provenance: BundledProvenance,
+  warnings: string[],
 ) {
   const { page, total, nextOffset } = pagination;
   const returned = page.length;
   let footer = `\n\n**Results:** ${returned} of ${total}; offset ${args.offset}.\n${sourceText(name, provenance)}`;
+  if (warnings.length) footer += `\n${warnings.join('\n')}`;
   if (args.limit > 0 && returned && nextOffset !== null && nextOffset <= 100000)
     footer += `\n**Continue:** ${callText(name, { ...args, offset: nextOffset })}`;
   else if (nextOffset !== null)
@@ -365,7 +367,7 @@ export function executeQueryTool(name: string, input: unknown, context: ProjectD
     }
     if (name === 'get_component') {
       const args = detailSchema.parse(input ?? {});
-      const selected = getComponentDetail(args, data.components, context.configured ? context.componentExports : undefined);
+      const selected = getComponentDetail(args, data.components, provenance.domains.components.selection === 'installed' ? context.componentExports : undefined);
       const component = selected.component;
       // A missing field retries the component; any miss except a verified absence can still be searched.
       const continuation = component
@@ -464,7 +466,7 @@ export function executeQueryTool(name: string, input: unknown, context: ProjectD
         : `No exact token source name matched "${pageArgs.query}". Use ${callText(name, { query: pageArgs.query, projection: 'summary' })} and select a returned name.`;
       return readableReply(
         output +
-          searchFooter(name, pageArgs, pagination, provenance),
+          searchFooter(name, pageArgs, pagination, provenance, data.warnings),
       );
     }
     const found = pageArgs.query.trim()
@@ -484,7 +486,7 @@ export function executeQueryTool(name: string, input: unknown, context: ProjectD
       output +=
         spec.followUp.heading + page.map(spec.followUp.line).join('\n');
     return readableReply(
-      output + searchFooter(name, pageArgs, pagination, provenance),
+      output + searchFooter(name, pageArgs, pagination, provenance, data.warnings),
     );
   } catch (error) {
     const notes =

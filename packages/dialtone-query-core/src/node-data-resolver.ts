@@ -136,8 +136,8 @@ function tryRead(fromDir: string, specifier: string, domain: Domain, policy?: Re
     if (policy && (name !== packageName || typeof version !== 'string' || !version || !validData(domain, data)))
       return fail('malformed-or-unsupported-dataset');
     return { data, file, source: { kind: 'local', package: packageName, version }, exports: exports ?? {}, module: exports ? undefined : module, dependencies: dependencies ?? {}, hash: policy ? createHash('sha256').update(bytes).digest('hex') : '', root };
-  } catch {
-    return fail('missing-or-unreadable-dataset');
+  } catch (error) {
+    return fail(error instanceof SyntaxError ? 'malformed-or-unsupported-dataset' : 'missing-or-unreadable-dataset');
   }
 }
 
@@ -330,6 +330,8 @@ function validData(domain: Domain, data: unknown): boolean {
     (record.schemaVersion === undefined || record.schemaVersion === 1 || record.schemaVersion === 2) &&
     ['props', 'events', 'slots', 'methods', 'expose'].every(key =>
       record[key] === undefined || (Array.isArray(record[key]) && record[key].every(item => object(item) && typeof item.name === 'string' && optionalText(item.description)))) &&
+    (record.props === undefined || (record.props as Record<string, unknown>[]).every(prop =>
+      prop.values === undefined || (Array.isArray(prop.values) && prop.values.every(value => typeof value === 'string')))) &&
     (record.identity === undefined || (object(record.identity) &&
       typeof record.identity.canonicalName === 'string' &&
       ['public', 'internal', 'unknown'].includes(record.identity.kind as string) &&
@@ -348,27 +350,17 @@ function validData(domain: Domain, data: unknown): boolean {
     object(category) && Object.values(category).every(words => Array.isArray(words) && words.every(word => typeof word === 'string')));
 }
 
-const bundledStamp = (stamp: DomainStamp, fallbackReason: string): DomainStamp =>
+const bundledStamp = (stamp: DomainStamp, fallbackReason: string | null): DomainStamp =>
   ({ ...stamp, selection: 'bundled', fallbackReason });
-const bundledDomains = (fallbackReason: string): Record<string, DomainStamp> => Object.fromEntries(
+const bundledDomains = (fallbackReason: string | null): Record<string, DomainStamp> => Object.fromEntries(
   Object.entries(bundledProvenance.domains).map(([key, stamp]) => [key, bundledStamp(stamp, fallbackReason)]));
-
-// A configured project's bundled fallback components keep no verified import hint.
-function unverifyBundledComponents(data: ResolvedData) {
-  data.components = normalizeComponents(data.components, {
-    package: bundledProvenance.domains.components.package,
-    version: bundledProvenance.domains.components.version,
-    from: data.componentImportPath,
-    names: null,
-  });
-}
 
 /** Explicit, bounded MCP selection. CLI callers retain resolveData's policy. */
 export function resolveProjectData(projectRoot?: string, lookupRoot?: string): ProjectData {
   const configured = projectRoot !== undefined || lookupRoot !== undefined;
   const fallback = (reason: string): ProjectData => {
     const data = assemble();
-    if (configured) unverifyBundledComponents(data);
+    if (configured) data.warnings.push(`Installed project data was not selected: ${reason}. Using bundled references; installed compatibility is not checked.`);
     return { data, configured, componentExports: null, provenance: { ...bundledProvenance, domains: bundledDomains(reason) } };
   };
   if (!configured) return fallback('project-root-not-configured');
@@ -389,18 +381,29 @@ export function resolveProjectData(projectRoot?: string, lookupRoot?: string): P
   } catch {
     return fallback('project-root-or-manifest-unavailable');
   }
-  const spec = declaredSpec(manifest, '@dialpad/dialtone');
   for (const dir of ancestors(root)) {
     if (existsSync(join(dir, '.git'))) { boundary = dir; break; }
     if (dir === boundary) break;
   }
+  // Only the explicit lookup boundary authorizes ancestor declarations. The
+  // closest declaring manifest wins; never combine declarations across apps.
+  const packageNames = ['@dialpad/dialtone', '@dialpad/dialtone-vue', '@dialpad/dialtone-css', '@dialpad/dialtone-icons'];
+  for (const dir of ancestors(root)) {
+    const candidate = dir === root ? manifest : readManifest(join(dir, 'package.json'));
+    if (object(candidate) && packageNames.some(name => declaredSpec(candidate, name) !== null)) {
+      manifest = candidate;
+      break;
+    }
+    if (dir === boundary) break;
+  }
+  const spec = declaredSpec(manifest, '@dialpad/dialtone');
   const policy: ReadPolicy = { boundary, failures: {} };
   const parts = spec !== null ? umbrellaParts(root, policy)
     : individualParts(root, policy, name => declaredSpec(manifest, name) !== null);
   const componentExports = parts.components ? installedComponentNames(parts.components, componentImportPath(parts.components)) : null;
   const data = assemble([parts], componentExports);
   const domainKeys = { components: 'components', utilities: 'utilityClasses', tokens: 'tokens', icons: 'icons' } as const;
-  const domains = bundledDomains('documentation-is-bundled');
+  const domains = bundledDomains(null);
   for (const [domain, key] of Object.entries(domainKeys) as Array<[keyof Parts, string]>) {
     const found = parts[domain];
     domains[key] = found ? {
@@ -410,9 +413,10 @@ export function resolveProjectData(projectRoot?: string, lookupRoot?: string): P
       selection: 'installed', fallbackReason: null,
     } : bundledStamp(bundledProvenance.domains[key], policy.failures[domain] ?? 'declared-installed-data-unavailable');
   }
-  if (!parts.components) unverifyBundledComponents(data);
   const anchor = anchorOf(parts);
   if (spec && anchor) data.warnings = mismatchWarnings(spec, anchor.source.version);
+  const failed = Object.entries(domainKeys).filter(([domain]) => !parts[domain as keyof Parts]);
+  if (failed.length) data.warnings.push(`Installed data unavailable for ${failed.map(([domain]) => `${domain} (${policy.failures[domain as Domain] ?? 'declared-installed-data-unavailable'})`).join(', ')}. Using bundled references for those domains; installed compatibility is not checked.`);
   return {
     data, configured, componentExports,
     provenance: { ...bundledProvenance, domains },

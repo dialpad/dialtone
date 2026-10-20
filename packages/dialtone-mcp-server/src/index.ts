@@ -52,6 +52,7 @@ async function checkVersion(signal: AbortSignal) {
 
 async function main() {
   const context = resolveProjectData(process.env.DIALTONE_PROJECT_ROOT, process.env.DIALTONE_LOOKUP_ROOT);
+  for (const warning of context.data.warnings) console.error(`[DATA] ${warning}`);
   const { utilityClasses, tokens, components, icons, documentation } = context.data;
   const sourceMeta = (domain: string) =>
     ({ dialtone: { source: context.provenance.domains[domain], installedCompatibility: "not_checked" } });

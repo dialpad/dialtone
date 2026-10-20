@@ -90,6 +90,8 @@ Import filesystem-based resolution from `@dialpad/dialtone-query-core/node`. The
 | `resolveData(forceBundled?, cwd?)` | Apply the CLI's existing installed-data policy from `cwd` (default: `process.cwd()`), or use bundled data when `forceBundled` is true. |
 | `resolveProjectData(projectRoot?, lookupRoot?)` | Select MCP startup data within explicit absolute project/lookup roots. Returns `data`, per-domain `provenance`, static `componentExports` and `configured`; missing or invalid configuration reports a bundled fallback reason. Documentation remains bundled. |
 
+Failed MCP selection preserves bundled discovery and source-verified imports, with explicit fallback warnings; it never claims installed verification. Normal bundled documentation/links carry no fallback reason. An explicit lookup boundary also authorizes the nearest ancestor Dialtone declaration, without crossing a Git boundary or combining app declarations.
+
 These policies differ deliberately. Reading export names verifies neither runtime importability nor peer dependency compatibility. See the [MCP guide](../../apps/dialtone-documentation/docs/guides/mcp-server/index.md) for root configuration and fallback limits.
 
 ### Data Exports

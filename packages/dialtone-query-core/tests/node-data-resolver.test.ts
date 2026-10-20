@@ -4,6 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createConsumerFixture, sha256 } from '../../../scripts/retrieval/fixtures.mjs';
 import { resolveProjectData } from '../src/node-data-resolver.js';
+import { getComponentDetail, searchComponents, componentDocumentation } from '../src/index.js';
 
 let parent: string;
 afterEach(async () => { if (parent) await rm(parent, { recursive: true, force: true, maxRetries: 5 }); });
@@ -59,7 +60,7 @@ test('a declared umbrella never borrows stray standalone or undeclared installat
   await writeFile(join(app.dependencyRoot, 'package.json'), '{}');
   const context = resolveProjectData(app.dependencyRoot);
   expect(context.provenance.domains.components.fallbackReason).toBe('package-not-declared');
-  expect(context.data.components.every(record => record.identity?.imports.length === 0)).toBe(true);
+  expect(context.data.components.some(record => record.identity?.imports.some(route => route.verification === 'source-export'))).toBe(true);
 });
 
 test('symlinked packages are accepted inside the boundary and refused outside it', async () => {
@@ -83,16 +84,16 @@ test('symlinked packages are accepted inside the boundary and refused outside it
   expect(resolveProjectData(app.dependencyRoot).provenance.domains.components).toMatchObject({ selection: 'bundled', fallbackReason: 'outside-lookup-boundary' });
 });
 
-test.each([null, { displayName: 'DtButton' }, [{ displayName: 'DtButton', props: {} }], [{ displayName: 'DtButton', schemaVersion: 99 }]])('malformed or unknown component data stays unverified: %j', async data => {
+test.each([null, { displayName: 'DtButton' }, [{ displayName: 'DtButton', props: {} }], [{ displayName: 'DtButton', props: [{ name: 'kind', values: 'primary' }] }], [{ displayName: 'DtButton', schemaVersion: 99 }]])('malformed component data falls back to qualified bundled metadata: %j', async data => {
   const app = await fixture('dt9-legacy', data);
   const context = resolveProjectData(app.dependencyRoot);
   expect(context.componentExports).toBeNull();
   expect(context.data.sources.components.kind).toBe('bundled');
-  expect(context.data.components.every(record => record.identity?.kind === 'unknown')).toBe(true);
+  expect(context.data.components.some(record => record.identity?.kind === 'public')).toBe(true);
   expect(context.provenance.domains.components.fallbackReason).toBe('malformed-or-unsupported-dataset');
 });
 
-test('missing configuration preserves bundled identity while invalid explicit configuration cannot claim exports', () => {
+test('invalid explicit configuration preserves bundled discovery and source-qualified identity', () => {
   const context = resolveProjectData();
   expect(context.configured).toBe(false);
   expect(context.provenance.domains.components.fallbackReason).toBe('project-root-not-configured');
@@ -100,7 +101,33 @@ test('missing configuration preserves bundled identity while invalid explicit co
   expect(resolveProjectData(undefined, '/absolute/workspace').provenance.domains.components.fallbackReason).toBe('project-root-required');
   const invalid = resolveProjectData('relative/app');
   expect(invalid.configured).toBe(true);
-  expect(invalid.data.components.every(record => record.identity?.kind === 'unknown')).toBe(true);
+  for (const query of ['spinner', 'blank slate', 'flip switch']) {
+    expect(searchComponents(query, invalid.data.components, componentDocumentation).results)
+      .toEqual(searchComponents(query, context.data.components, componentDocumentation).results);
+  }
+  expect(getComponentDetail({ component: 'DtButton' }, invalid.data.components).match).toBe('exact');
+  expect(getComponentDetail({ component: 'DtMadeUp' }, invalid.data.components).match).toBe('no-match');
+  expect(invalid.data.components.flatMap(record => record.identity?.imports ?? [])
+    .every(route => route.verification === 'source-export')).toBe(true);
+});
+
+test('workspace-root declarations apply only inside the explicit authorized boundary', async () => {
+  const app = await fixture('nested-umbrella');
+  await rename(join(app.dependencyRoot, 'node_modules'), join(app.directory, 'node_modules'));
+  await rename(join(app.dependencyRoot, 'package.json'), join(app.directory, 'package.json'));
+  await writeFile(join(app.dependencyRoot, 'package.json'), '{}');
+  expect(resolveProjectData(app.dependencyRoot).data.sources.components.kind).toBe('bundled');
+  const selected = resolveProjectData(app.dependencyRoot, app.directory);
+  expect(selected.data.sources.components).toMatchObject({ kind: 'local', version: '10.5.1' });
+  expect(selected.provenance.domains.documentation.fallbackReason).toBeNull();
+  await mkdir(join(app.dependencyRoot, '.git'));
+  expect(resolveProjectData(app.dependencyRoot, app.directory).data.sources.components.kind).toBe('bundled');
+});
+
+test('invalid JSON is distinguished from a missing installed dataset', async () => {
+  const app = await fixture();
+  await writeFile(join(app.pkg, 'dist/vue3/component-documentation.json'), '{');
+  expect(resolveProjectData(app.dependencyRoot).provenance.domains.components.fallbackReason).toBe('malformed-or-unsupported-dataset');
 });
 
 test('standalone, CSS-only and icons-only installs select only their installed domains', async () => {

@@ -15,8 +15,6 @@ The Dialtone MCP Server lets compatible AI clients search Dialtone through Model
 
 ## What It Does
 
-The Dialtone MCP Server uses bundled lookup data by default, or installed data from an explicitly configured project. Replies identify each domain's source packages, versions, hashes and fallback reasons. Source selection and static export checks do not establish installed runtime compatibility.
-
 Search across:
 
 - **CSS utility classes** - Find classes like `d-p-100`, `d-d-flex`, `d-w100p`
@@ -99,9 +97,11 @@ The packaged server uses stdio. Configure your MCP client to launch the server p
 > [!INFO] Version Checking
 > Startup does not wait for the update check. A successful check writes a version or update notice to stderr; failed or malformed responses are ignored. The check is cancelled after two seconds or during shutdown.
 
-## Select installed project data
+<a id="select-installed-project-data"></a>
 
-Set `DIALTONE_PROJECT_ROOT` to the absolute directory containing your application's `package.json` and dependency installation. The server does not infer this directory from its launch location, scan for nested applications, or request client workspace roots.
+## Configure MCP to use your installed Dialtone version
+
+The project root setting, `DIALTONE_PROJECT_ROOT`, tells the MCP server which installed Dialtone version to use. Set it to the absolute directory containing your application's `package.json` and dependency installation. The server does not infer this directory from its launch location, scan for nested applications, or request client workspace roots.
 
 For a nested application, point at the application rather than the repository root:
 
@@ -122,9 +122,9 @@ For dependencies hoisted into an ancestor workspace, also set `DIALTONE_LOOKUP_R
 
 In pnpm workspaces, and other layouts where package symlinks resolve outside the application folder, also set `DIALTONE_LOOKUP_ROOT` to the workspace root.
 
-A declared `@dialpad/dialtone` takes precedence over standalone packages. Otherwise, only directly declared standalone Vue, CSS and icon packages supply installed data. Missing or malformed domains fall back separately to bundled data with a reason. Documentation, component-page links and client rules remain bundled references. Without configuration, existing bundled lookups continue; invalid configuration never silently falls back to the launch directory.
+A declared `@dialpad/dialtone` takes precedence over standalone packages. Otherwise, declared standalone Vue, CSS and icon packages supply installed data. With an explicit lookup root, declarations can come from the nearest ancestor workspace manifest inside that boundary; the closest manifest declaring Dialtone packages wins. Missing or malformed domains fall back separately to bundled data with a reason. Documentation, component-page links and client rules remain bundled references. Without configuration, existing bundled lookups continue; invalid configuration never silently falls back to the launch directory.
 
-Search replies remain Markdown, with actual source package versions, hashes and fallback reasons. Structured detail reports per-domain installed or bundled sources. Resource JSON uses the same selected data, with source information in the result's `_meta.dialtone`. A statically verified entry can establish that a component is not exported; absent metadata alone cannot. Fallback component hints are unverified. These checks do not run application imports or verify peers, runtime behavior or the active theme.
+Search replies remain Markdown, with actual source package versions, hashes and fallback reasons. Structured detail reports per-domain installed or bundled sources. Resource JSON uses the same selected data, with source information in the result's `_meta.dialtone`. A statically verified entry can establish that a component is not exported; absent metadata alone cannot. Bundled fallback retains its source-verified component names and import hints; it does not verify your installation. Startup stderr and search/detail replies report fallback and version-mismatch warnings. Bundled documentation is an expected latest reference, so it is not labelled as a failed installed-data lookup. These checks do not run application imports or verify peers, runtime behavior or the active theme.
 
 Restart the server after changing configuration or dependencies. It captures one context at startup and does not watch installations for changes. This feature requires a server package version containing it; a source merge does not update an existing installed server. Check a component detail response after setup: its selected source should name the installed package/version, or explain the bundled fallback. A server version that predates this feature can ignore the new environment settings.
 

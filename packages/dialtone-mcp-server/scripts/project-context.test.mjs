@@ -29,6 +29,10 @@ test('tools and resources share installed data and preserve availability routing
     manifest.exports['./vue'] = './dist/vue3/entry.js';
     await writeFile(manifestPath, JSON.stringify(manifest));
     await writeFile(join(pkg, 'dist/vue3/entry.js'), 'import button from \'./button.js\'; export { button as DtButton, button as DtToggle, button as ARROW_KEYS };\n');
+    const projectManifest = join(fixture.dependencyRoot, 'package.json');
+    const project = JSON.parse(await readFile(projectManifest, 'utf8'));
+    project.dependencies['@dialpad/dialtone'] = '^10';
+    await writeFile(projectManifest, JSON.stringify(project));
     const transport = new StdioClientTransport({
       command: process.execPath,
       args: [fileURLToPath(new URL('../build/index.js', import.meta.url))],
@@ -40,8 +44,11 @@ test('tools and resources share installed data and preserve availability routing
       },
       stderr: 'pipe',
     });
+    let diagnostics = '';
+    transport.stderr.on('data', chunk => { diagnostics += chunk; });
     client = new Client({ name: 'dialtone-installed-project-test', version: '1.0.0' });
     await client.connect(transport);
+    assert.match(diagnostics, /\[DATA\].*9\.185\.0.*Reinstall dependencies/);
     const result = await client.callTool({ name: 'get_component', arguments: { component: 'DtText' } });
     assert.equal(result.structuredContent.match, 'unavailable');
     assert.deepEqual(result.structuredContent.items, []);
@@ -59,6 +66,14 @@ test('tools and resources share installed data and preserve availability routing
     assert.equal(button.structuredContent.items[0].contract.name, 'legacy-prop');
     const keyword = await client.callTool({ name: 'search_components', arguments: { query: 'switch' } });
     assert.match(keyword.content.map(item => item.text).join('\n'), /\*\*DtToggle\*\*/);
+    assert.match(keyword.content[0].text, /9\.185\.0.*Reinstall dependencies/);
+    for (const [name, args] of [
+      ['search_documentation', { query: 'button' }],
+      ['search_tokens', { query: '--dt-color-black-1000', projection: 'themes' }],
+    ]) {
+      const response = await client.callTool({ name, arguments: args });
+      assert.match(response.content[0].text, /9\.185\.0.*Reinstall dependencies/);
+    }
     const absentKeyword = await client.callTool({ name: 'search_components', arguments: { query: 'spinner' } });
     assert.doesNotMatch(absentKeyword.content.map(item => item.text).join('\n'), /\*\*DtLoader\*\*/);
     const resource = await client.readResource({ uri: 'dialtone://components' });

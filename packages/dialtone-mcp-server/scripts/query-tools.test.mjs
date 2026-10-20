@@ -6,6 +6,19 @@ import { InMemoryTransport } from '@modelcontextprotocol/sdk/inMemory.js';
 import { components, bundledProvenance } from '@dialpad/dialtone-query-core';
 import { resolveProjectData } from '@dialpad/dialtone-query-core/node';
 import * as module from '../src/query-tools.ts';
+test('failed project selection keeps bundled discovery and honest exact/no-match recovery', () => {
+  const context = resolveProjectData('relative/app');
+  const search = module.executeQueryTool('search_components', { query: 'spinner' }, context);
+  assert.match(search.content[0].text, /\*\*DtLoader\*\*/);
+  assert.match(search.content[0].text, /Using bundled references/);
+  const button = module.executeQueryTool('get_component', { component: 'DtButton' }, context).structuredContent;
+  assert.equal(button.match, 'exact');
+  assert.equal(button.source.selection, 'bundled');
+  assert.ok(button.canonicalIdentity.imports.every(route => route.verification === 'source-export'));
+  const unknown = module.executeQueryTool('get_component', { component: 'DtMadeUp' }, context).structuredContent;
+  assert.equal(unknown.match, 'no-match');
+  assert.equal(unknown.continuation.tool, 'search_components');
+});
 async function fixture(run) {
   const server = new McpServer(
     { name: 'test-dialtone', version: '1.5.0' },

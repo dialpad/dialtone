@@ -40,8 +40,6 @@ Using local Dialtone data: @dialpad/dialtone@10.4.0 (icons: @dialpad/dialtone-ic
 
 Without local Dialtone data, the line reads `Using bundled Dialtone data (@dialpad/dialtone-cli@<version>)`.
 
-The MCP server uses a separate [explicit project configuration](/guides/mcp-server/#select-installed-project-data). `DIALTONE_PROJECT_ROOT` and `DIALTONE_LOOKUP_ROOT` configure MCP only; CLI commands continue to resolve from their working directory or use `--bundled`.
-
 ## Quick start
 
 Search across Dialtone when you do not know which command to use:
@@ -246,6 +244,8 @@ Every command accepts `--format`:
 For programmatic use, prefer `--format json` instead of parsing the default terminal output.
 
 ## Data sources
+
+MCP uses [explicit project configuration](/guides/mcp-server/#select-installed-project-data). Its environment settings do not configure CLI commands, which resolve from their working directory or use `--bundled`.
 
 The CLI looks for installed packages the way Node does, in the `node_modules` folders in and above the directory you run it from:
 
