@@ -76,9 +76,13 @@ it('refuses retained metadata when the verified installed entry omits its export
     ...records[0],
     identity: { ...identity('DtButton'), kind: 'internal', imports: [] },
   };
-  expect(getComponentDetail({ component: 'DtButton' }, [internal], ['DtText']))
-    .toMatchObject({ match: 'unavailable', reason: 'not-exported', component: null, items: [], available: [] });
+  for (const record of [internal, records[0]]) {
+    expect(getComponentDetail({ component: 'DtButton' }, [record], ['DtText']))
+      .toMatchObject({ match: 'unavailable', reason: 'not-exported', component: null, items: [], available: [] });
+  }
   expect(getComponentDetail({ component: 'DtButton' }, [internal]).match).toBe('exact');
+  const aliased: Component = { ...records[0], identity: { ...identity('DtButton'), aliases: ['ActionButton'] } };
+  expect(getComponentDetail({ component: 'ActionButton' }, [aliased], ['DtButton']).match).toBe('exact');
 });
 
 describe('selected component contract', () => {

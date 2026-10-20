@@ -71,9 +71,9 @@ export function getComponentDetail(
       : candidates.length === 1
         ? candidates[0]
         : null;
-  const installedNotExported = component?.identity?.kind === 'internal'
+  const installedNotExported = component !== null
     && installedExports !== undefined && installedExports !== null
-    && !installedExports.some(exported => normalizeComponentName(exported) === key);
+    && !installedExports.some(exported => normalizeComponentName(exported) === normalizeComponentName(component.displayName));
   const sections =
     args.projection && args.projection !== 'all'
       ? [args.projection]
