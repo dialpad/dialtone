@@ -137,8 +137,8 @@ const showcaseItems = [
   createShowcaseImage({ name: '09', alignSelf: 'flex-start', renderedWidth: 438, sourceWidth: 1440, sourceHeight: 1344, candidateWidths: [438, 876, 1440] }),
 ];
 
-// Scroll speed in px/ms (45px/s). Also sets the CSS autoplay duration on touch devices.
-const DEFAULT_VELOCITY = 0.045;
+// Scroll speed in px/ms (35px/s). Also sets the CSS autoplay duration on touch devices.
+const DEFAULT_VELOCITY = 0.035;
 // Eases speed back up after a touch scroll; the carousel otherwise runs at a constant speed.
 const VELOCITY_SMOOTHING = 0.15;
 const MAX_FRAME_DURATION = 50;
