@@ -1,9 +1,5 @@
 const REFERENCE_FRAME_DURATION = 1000 / 60;
 
-export function canUseHoverSteering (pointerType, supportsFineHover) {
-  return pointerType === 'mouse' && supportsFineHover;
-}
-
 export function getCarouselPeriod (firstOriginal, firstClone) {
   if (!firstOriginal || !firstClone) return 0;
   return firstClone.offsetLeft - firstOriginal.offsetLeft;
@@ -18,15 +14,6 @@ export function getLoopedScrollPosition (position, period, maxPosition) {
   if (position < edgeBuffer) return position + period;
   if (position > maxPosition - edgeBuffer) return position - period;
   return position;
-}
-
-export function getHoverVelocity (relativePosition, deadZone, maxVelocity, curveExponent) {
-  const distanceFromCenter = Math.min(Math.abs(relativePosition), 1);
-  if (distanceFromCenter <= deadZone) return 0;
-
-  const adjustedPosition = (distanceFromCenter - deadZone) / (1 - deadZone);
-  const velocity = Math.pow(adjustedPosition, curveExponent) * maxVelocity;
-  return velocity * Math.sign(relativePosition);
 }
 
 export function smoothCarouselVelocity (current, target, smoothingFactor, elapsedTime) {

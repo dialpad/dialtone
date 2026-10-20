@@ -55,9 +55,7 @@ import { ref, onMounted, onUnmounted } from 'vue';
 import { withBase } from 'vuepress/client';
 
 import {
-  canUseHoverSteering,
   getCarouselPeriod,
-  getHoverVelocity,
   getLoopedScrollPosition,
   smoothCarouselVelocity,
 } from './showcaseCarouselMotion.js';
@@ -123,11 +121,8 @@ const showcaseItems = [
 ];
 
 const DEFAULT_VELOCITY = 0.12;
-const DEAD_ZONE = 0.01;
-const MAX_HOVER_VELOCITY = 1.2;
-const CURVE_EXPONENT = 2.5;
-const SMOOTHING_ACTIVE = 0.5;
-const SMOOTHING_INACTIVE = 0.15;
+// Eases speed back up after a touch scroll; the carousel otherwise runs at a constant speed.
+const VELOCITY_SMOOTHING = 0.15;
 const MAX_FRAME_DURATION = 50;
 const TOUCH_SCROLL_IDLE_FALLBACK = 200;
 const RESIZE_DEBOUNCE = 150;
@@ -212,10 +207,7 @@ onMounted(() => {
     let maxScrollPosition = 0;
     let animationId = null;
     let lastFrameTime = null;
-    let targetVelocity = DEFAULT_VELOCITY;
     let currentVelocity = DEFAULT_VELOCITY;
-    let isHovering = false;
-    let hoverRect = null;
     let isTouchScrolling = false;
     let isNativeScrolling = false;
     let isTouchActive = false;
@@ -258,7 +250,6 @@ onMounted(() => {
       window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(() => {
         measureCarouselPeriod();
-        if (isHovering) hoverRect = carouselContainer.getBoundingClientRect();
       }, RESIZE_DEBOUNCE);
     };
 
@@ -280,11 +271,10 @@ onMounted(() => {
 
       if (lastFrameTime !== null) {
         const elapsedTime = Math.min(timestamp - lastFrameTime, MAX_FRAME_DURATION);
-        const smoothingFactor = isHovering ? SMOOTHING_ACTIVE : SMOOTHING_INACTIVE;
         currentVelocity = smoothCarouselVelocity(
           currentVelocity,
-          targetVelocity,
-          smoothingFactor,
+          DEFAULT_VELOCITY,
+          VELOCITY_SMOOTHING,
           elapsedTime,
         );
         carouselContainer.scrollLeft = getLoopedScrollPosition(
@@ -324,32 +314,6 @@ onMounted(() => {
       syncVideoPlayback();
     };
 
-    const handlePointerEnter = (event) => {
-      if (!canUseHoverSteering(event.pointerType, fineHoverQuery.matches)) return;
-      isHovering = true;
-      targetVelocity = 0;
-      hoverRect = carouselContainer.getBoundingClientRect();
-      startAnimation();
-    };
-
-    const handlePointerMove = (event) => {
-      if (!isHovering || !canUseHoverSteering(event.pointerType, fineHoverQuery.matches)) return;
-
-      const relativePosition = (event.clientX - hoverRect.left - hoverRect.width / 2) / (hoverRect.width / 2);
-      targetVelocity = getHoverVelocity(
-        relativePosition,
-        DEAD_ZONE,
-        MAX_HOVER_VELOCITY,
-        CURVE_EXPONENT,
-      );
-    };
-
-    const handlePointerLeave = (event) => {
-      if (!canUseHoverSteering(event.pointerType, fineHoverQuery.matches)) return;
-      isHovering = false;
-      targetVelocity = DEFAULT_VELOCITY;
-    };
-
     const clearScrollIdleTimer = () => {
       if (scrollIdleTimer === null) return;
       window.clearTimeout(scrollIdleTimer);
@@ -363,7 +327,6 @@ onMounted(() => {
       isTouchScrolling = false;
       isNativeScrolling = false;
       currentVelocity = 0;
-      targetVelocity = DEFAULT_VELOCITY;
       startAnimation();
     };
 
@@ -382,9 +345,7 @@ onMounted(() => {
       clearScrollIdleTimer();
       isTouchScrolling = true;
       isNativeScrolling = false;
-      isHovering = false;
       currentVelocity = 0;
-      targetVelocity = DEFAULT_VELOCITY;
       stopAnimation();
     };
 
@@ -415,8 +376,6 @@ onMounted(() => {
       if (isVisible) {
         startAnimation();
       } else {
-        isHovering = false;
-        targetVelocity = DEFAULT_VELOCITY;
         stopAnimation();
       }
     };
@@ -431,9 +390,6 @@ onMounted(() => {
     measureCarouselPeriod();
     syncVideoPlayback();
 
-    carouselContainer.addEventListener('pointerenter', handlePointerEnter);
-    carouselContainer.addEventListener('pointermove', handlePointerMove);
-    carouselContainer.addEventListener('pointerleave', handlePointerLeave);
     carouselContainer.addEventListener('touchstart', handleTouchStart, { passive: true });
     carouselContainer.addEventListener('touchend', handleTouchEnd, { passive: true });
     carouselContainer.addEventListener('touchcancel', handleTouchEnd, { passive: true });
@@ -461,9 +417,6 @@ onMounted(() => {
         video.pause();
         video.removeEventListener('playing', revealVideo);
       });
-      carouselContainer.removeEventListener('pointerenter', handlePointerEnter);
-      carouselContainer.removeEventListener('pointermove', handlePointerMove);
-      carouselContainer.removeEventListener('pointerleave', handlePointerLeave);
       carouselContainer.removeEventListener('touchstart', handleTouchStart);
       carouselContainer.removeEventListener('touchend', handleTouchEnd);
       carouselContainer.removeEventListener('touchcancel', handleTouchEnd);
