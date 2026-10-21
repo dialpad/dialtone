@@ -32,6 +32,36 @@ represents an intentional `undefined`.
 `getControlByValue(value)` applies when the current value already implies a
 better active control. `null`, `undefined`, and `UNSET` map to `null`.
 
+## Explicit slider opt-in
+
+For a property suited to exploration along a numeric scale, add editor metadata:
+
+```js
+progress: { slider: { min: 0, max: 100, step: 1, suffix: '%' } },
+```
+
+The first slice enables only `DtProgressCircle.progress`. Eligibility requires a
+scalar number with no enum values or token metadata. Bounds and step must be
+finite, with a positive finite span, a positive step no larger than the span,
+and a maximum exactly reconstructable on the step grid. The optional suffix is
+a string. Named presets replace this settings object shallowly; supply the
+complete configuration when overriding it. Metadata does not set a prop value.
+
+DtSlider is the sole value editor, with its default tooltip readout and native
+keyboard operation. It writes numeric values through the existing options
+model. Off-grid, invalid, or unset parent values show a non-editable readout;
+they never mount a normalizing slider or fall back to manual entry. Presets and
+Reset can restore a valid value. Disabled and locked controls cannot edit.
+
+Keep segmented controls for small choice sets and selection controls for
+categorical values. Numeric type or choice count alone never opts in. Avatar
+and Datepicker remain unchanged; numeric-enum and optional-value adoption need
+separate design work.
+
+The slider uses the shared clearable shell. Its Remove button is disabled
+because progress has a concrete component default, matching the other
+non-clearable properties. Optional-value activation/removal remains deferred.
+
 ## Current controls
 
 - `base`: fallback string control for unsupported values. It forwards label,
@@ -43,6 +73,7 @@ better active control. `null`, `undefined`, and `UNSET` map to `null`.
 - `event`: displays event data when used by latent event-console code.
 - `selection`: searchable value selection.
 - `segmented`: compact selection for small enums.
+- `slider`: explicitly opted-in scalar scale using DtSlider and its tooltip readout.
 - `icon-slot`: searchable Dialtone icon picker for icon-like slots.
 - `suggestion`: standalone suggestion input used by the demo app's component
   picker. It delegates input behavior to the string control, including label,
