@@ -32,8 +32,11 @@ import { writeFileSync } from 'fs';
 import FigmaApi, { ApiGetLocalVariablesResponse, loadLocalSnapshot } from './figma_api.js';
 import { generatePostVariablesPayload, FlattenedTokensByFile } from './token_import.js';
 import { gamutMapped, resetGamutLog } from './color.js';
-import { resolveModes, compareTokenNames, ResolvedToken, ValueOf } from './resolve_tokens.js';
-import { classify, Classified, ScopeViolation, figmaFontFamily, LINE_HEIGHT_FAMILY } from './variable_policy.js';
+import { resolveModes, compareTokenNames, ResolvedToken, ValueOf, TokenValue } from './resolve_tokens.js';
+import {
+  classify, Classified, ScopeViolation, figmaFontFamily, LINE_HEIGHT_FAMILY,
+  FigmaType, VariableScope,
+} from './variable_policy.js';
 import type { Token } from './token_types.js';
 import { toNumber as toNumberWithUnits } from './utils.js';
 

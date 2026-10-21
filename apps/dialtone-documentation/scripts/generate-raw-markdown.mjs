@@ -205,7 +205,17 @@ function appendSubdirectoryLinks (outputBase) {
  */
 function loadAllDataSources () {
   const componentDocs = loadJson(COMPONENT_DOCS_JSON, 'component-documentation.json');
-  setComponentDocs(componentDocs || []);
+  const docsManifest = loadJson(resolve(ROOT, 'package.json'), 'docs package.json');
+  const vueManifest = loadJson(resolve(ROOT, '../../packages/dialtone-vue/package.json'), 'dialtone-vue package.json');
+  const dependency = docsManifest?.devDependencies?.[vueManifest?.name]
+    ?? docsManifest?.dependencies?.[vueManifest?.name];
+  // Workspace docs use this source package. Other dependency ranges need their
+  // own installed metadata before a generated import can be certified.
+  const profile = typeof dependency === 'string' && typeof vueManifest?.name === 'string' && typeof vueManifest?.version === 'string'
+    && (dependency.startsWith('workspace:') || dependency === vueManifest.version)
+    ? { package: vueManifest.name, version: vueManifest.version, dependency }
+    : null;
+  setComponentDocs(componentDocs || [], profile);
 
   const utilityDocs = loadJson(UTILITY_DOCS_JSON, 'dialtone-docs.json');
   setUtilityClassDocs(utilityDocs || {});
@@ -650,6 +660,10 @@ function main () {
     console.log(`[generate-raw-markdown] ${section.name}: ${successCount} generated, ${errorCount} errors`);
     totalSuccess += successCount;
     totalError += errorCount;
+  }
+
+  if (totalError > 0) {
+    throw new Error(`[generate-raw-markdown] Failed: ${totalError} source pages could not be generated. Fix the diagnostics above before building the documentation site.`);
   }
 
   const rawBase = resolve(ROOT, 'docs/.vuepress/public/md');

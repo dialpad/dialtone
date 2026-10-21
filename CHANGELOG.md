@@ -1,3 +1,36 @@
+# [10.8.0](https://github.com/dialpad/dialtone/compare/dialtone/v10.7.0...dialtone/v10.8.0) (2026-10-20)
+
+
+### Bug Fixes
+
+* **Dialtone Docs:** DLT-3653 preserve documentation contracts ([#1460](https://github.com/dialpad/dialtone/issues/1460)) ([a46ac06](https://github.com/dialpad/dialtone/commit/a46ac063beb0bd07239b9f03d6a013d7983764e3))
+* **Dialtone Query Core, Dialtone Docs:** DLT-3085 retrieve directive guidance ([#1463](https://github.com/dialpad/dialtone/issues/1463)) ([d28b2f7](https://github.com/dialpad/dialtone/commit/d28b2f70c004937758ebb85070a525d0a4b4c8ef))
+
+
+### Documentation
+
+* **Dialtone Documentation:** DLT-3665 clarify CLI and MCP guides ([#1470](https://github.com/dialpad/dialtone/issues/1470)) ([1450a8d](https://github.com/dialpad/dialtone/commit/1450a8d70536891ae1d4c7837232e867f4776a72))
+* **Foundations:** DLT-3662 align brand guidance with resolve brand ([#1467](https://github.com/dialpad/dialtone/issues/1467)) ([c6e12aa](https://github.com/dialpad/dialtone/commit/c6e12aa9e378c65a060857c12f9e457ffa6c2719))
+
+
+### Features
+
+* **Dialtone Query Core:** DLT-3659 share curated discovery keywords ([#1472](https://github.com/dialpad/dialtone/issues/1472)) ([1033549](https://github.com/dialpad/dialtone/commit/1033549e2ec8087fee4adced26c9293d04a02953))
+
+# [10.7.0](https://github.com/dialpad/dialtone/compare/dialtone/v10.6.0...dialtone/v10.7.0) (2026-10-15)
+
+
+### Bug Fixes
+
+* **Dialtone Query Core:** DLT-3651 align search and migration guidance ([#1461](https://github.com/dialpad/dialtone/issues/1461)) ([84ac078](https://github.com/dialpad/dialtone/commit/84ac078aa8f09fde46fecb9c1bc71e1f275f35dc))
+* **Docs:** DLT-3664 normalize icon catalog search ([#1469](https://github.com/dialpad/dialtone/issues/1469)) ([588b248](https://github.com/dialpad/dialtone/commit/588b248d330e0bb5525f921820557af8ec79d42a))
+
+
+### Features
+
+* **Dialtone Icons:** DLT-3663 add stop-stroke ([#1468](https://github.com/dialpad/dialtone/issues/1468)) ([eb72e37](https://github.com/dialpad/dialtone/commit/eb72e37b0da5de82d6776af063338829097d0d5a))
+* **Dialtone Mcp Server:** DLT-3650 add complete API retrieval and provenance ([#1462](https://github.com/dialpad/dialtone/issues/1462)) ([c23dc8c](https://github.com/dialpad/dialtone/commit/c23dc8c3cc4aa99aabf3651a0d024ce7bb935609))
+
 # [10.6.0](https://github.com/dialpad/dialtone/compare/dialtone/v10.5.1...dialtone/v10.6.0) (2026-10-13)
 
 

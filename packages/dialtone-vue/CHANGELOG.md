@@ -1,3 +1,10 @@
+## [4.4.1](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.4.0...dialtone-vue/v4.4.1) (2026-10-20)
+
+
+### Bug Fixes
+
+* **Dialtone Query Core, Dialtone Docs:** DLT-3085 retrieve directive guidance ([#1463](https://github.com/dialpad/dialtone/issues/1463)) ([d28b2f7](https://github.com/dialpad/dialtone/commit/d28b2f70c004937758ebb85070a525d0a4b4c8ef))
+
 # [4.4.0](https://github.com/dialpad/dialtone/compare/dialtone-vue/v4.3.1...dialtone-vue/v4.4.0) (2026-10-13)
 
 

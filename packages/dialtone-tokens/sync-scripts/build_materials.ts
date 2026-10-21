@@ -232,6 +232,22 @@ async function main (): Promise<void> {
         console.log(`${name}: would create, ${overrides.length} overrides`);
         continue;
       }
+      if (snapshot) {
+        // Creating still needs a live read afterward (see below) to learn
+        // the new collection's real modeIds — nothing else can tell us
+        // those. If REST is stale enough that --local-snapshot was reached
+        // for, that same staleness can make the live read miss the
+        // collection this just created, throwing "Could not create" below
+        // for a collection that now genuinely exists — and the snapshot
+        // can't be used to retry, since it predates the creation. Failing
+        // here instead keeps that outcome from happening silently: create
+        // this one material without --local-snapshot, then fold its
+        // resulting collection into the snapshot for the rest.
+        throw new Error(
+          `${name}: no collection yet, and --local-snapshot can't create one ` +
+          '— run this material without --local-snapshot first, then add its ' +
+          'collection to the snapshot file.');
+      }
       const created = await api.postVariables(fileKey, {
         variableCollections: [{
           action: 'CREATE',
@@ -242,6 +258,14 @@ async function main (): Promise<void> {
       } as never);
       const id = (created as { meta?: { tempIdToRealId?: Record<string, string> } })
         .meta?.tempIdToRealId?.[`temp-${material}`];
+      // A real REST read, not `getLocal()` — the branch above already ruled
+      // out --local-snapshot for this path. The POST response only echoes
+      // tempIdToRealId, never the created collection's modes, and this
+      // material's real modeIds (needed just below) exist nowhere else to
+      // read them from. `local` reverts to the snapshot on the next refresh
+      // (see the end of this loop), so this one live read does not leak into
+      // how later materials resolve their own, differently-named
+      // collections.
       local = await api.getLocalVariables(fileKey);
       collection = Object.values(local.meta.variableCollections).find(c => c.id === id);
       if (!collection) throw new Error(`Could not create ${name}`);

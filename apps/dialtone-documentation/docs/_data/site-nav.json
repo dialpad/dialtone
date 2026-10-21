@@ -254,6 +254,25 @@
           "link": "/foundations/size-and-space/"
         },
         {
+          "text": "Gradient",
+          "link": "/foundations/gradient/",
+          "navigateToFirstChildWhenPersistent": true,
+          "children": [
+            {
+              "text": "Overview",
+              "link": "/foundations/gradient/"
+            },
+            {
+              "text": "Gradient in Product",
+              "link": "/foundations/gradient/product.html"
+            }
+          ]
+        },
+        {
+          "text": "Halftone",
+          "link": "/foundations/halftone/"
+        },
+        {
           "text": "Icons",
           "link": "/foundations/icons/",
           "navigateToFirstChildWhenPersistent": true,
@@ -273,25 +292,6 @@
           ]
         },
         {
-          "text": "Gradient",
-          "link": "/foundations/gradient/",
-          "navigateToFirstChildWhenPersistent": true,
-          "children": [
-            {
-              "text": "Overview",
-              "link": "/foundations/gradient/"
-            },
-            {
-              "text": "Gradient in Marketing",
-              "link": "/foundations/gradient/marketing.html"
-            },
-            {
-              "text": "Gradient in Product",
-              "link": "/foundations/gradient/product.html"
-            }
-          ]
-        },
-        {
           "text": "Motion",
           "link": "/foundations/motion/"
         },
@@ -305,16 +305,20 @@
               "link": "/foundations/graphic-system/"
             },
             {
-              "text": "Abstract Graphics",
-              "link": "/foundations/graphic-system/abstract-graphics.html"
-            },
-            {
-              "text": "Illustrations",
-              "link": "/foundations/illustrations/"
-            },
-            {
               "text": "Data Visualizations",
               "link": "/foundations/graphic-system/data-visualizations.html"
+            },
+            {
+              "text": "Glyphs",
+              "link": "/foundations/graphic-system/glyphs.html"
+            },
+            {
+              "text": "Schematic Line Art",
+              "link": "/foundations/graphic-system/schematic-line-art.html"
+            },
+            {
+              "text": "Transformation Grid",
+              "link": "/foundations/graphic-system/transformation-grid.html"
             }
           ]
         },
@@ -553,6 +557,10 @@
         {
           "text": "Skeleton",
           "link": "/components/skeleton.html"
+        },
+        {
+          "text": "Slider",
+          "link": "/components/slider.html"
         },
         {
           "text": "Split Button",

@@ -1,6 +1,6 @@
 {
   "name": "@dialpad/dialtone-cli",
-  "version": "1.3.0",
+  "version": "1.5.0",
   "description": "CLI for searching and exploring the Dialtone Design System",
   "main": "build/index.js",
   "type": "module",
