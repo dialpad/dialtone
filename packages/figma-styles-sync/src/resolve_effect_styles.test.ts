@@ -20,9 +20,13 @@ describe('resolveEffectStyles', () => {
     expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b)))
   })
 
-  it('flags only the -inset shadow as an inner shadow', () => {
-    const inset = specs.filter(s => s.isInset).map(s => s.name)
-    expect(inset).toEqual(['shadow/focus-inset'])
+  it('flags the -inset shadow as an inner shadow, and its alias along with it', () => {
+    // `shadow.focus` is a pure alias of `shadow.focus-inset` in the token
+    // source, and the production CSS it feeds renders as an inner ring — but
+    // the alias doesn't survive Style Dictionary's per-field explosion, so
+    // this can only be caught by the two shadows resolving to identical values.
+    const inset = specs.filter(s => s.isInset).map(s => s.name).sort()
+    expect(inset).toEqual(['shadow/focus', 'shadow/focus-inset'])
   })
 
   it('gives every layer a variable for every bindable field', () => {

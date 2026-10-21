@@ -16,7 +16,8 @@ import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
 
 import type { resolveModes as ResolveModes } from '../../dialtone-tokens/sync-scripts/resolve_tokens.ts';
-import type { parseColor as ParseColor, Color } from '../../dialtone-tokens/sync-scripts/color.ts';
+import type { parseColor as ParseColor } from '../../dialtone-tokens/sync-scripts/color.ts';
+import type { Color } from '../../dialtone-tokens/sync-scripts/figma_api.ts';
 
 const DIALTONE_TOKENS_DIR = resolve(dirname(fileURLToPath(import.meta.url)), '../../dialtone-tokens');
 process.chdir(DIALTONE_TOKENS_DIR);

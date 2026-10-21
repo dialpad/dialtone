@@ -52,6 +52,47 @@ function boundVarId (bv: Record<string, VariableAlias | undefined> | undefined, 
   return bv?.[field]?.id ?? null;
 }
 
+/**
+ * A Figma variable name is unique only within its own collection, not across
+ * the file — `getLocalVariablesAsync()` returns every local collection at
+ * once, so two unrelated collections sharing a variable name is a real
+ * possibility, not a hypothetical. Collapsing that straight into
+ * `Map(name -> variable)` would let whichever collection's variable happens
+ * to iterate last silently win, binding a style to the wrong collection with
+ * no error. Recording the collision instead and failing loudly on lookup
+ * turns that into a clear error pointing at the ambiguous name.
+ */
+function indexVariablesByName (vars: Variable[]): Map<string, Variable | 'ambiguous'> {
+  const index = new Map<string, Variable | 'ambiguous'>();
+  for (const v of vars) index.set(v.name, index.has(v.name) ? 'ambiguous' : v);
+  return index;
+}
+
+/**
+ * A right-named, unambiguous variable can still be the wrong Figma type — a
+ * stray manual edit, or a variable recreated with the wrong type during some
+ * other cleanup, both leave the name intact. `setBoundVariable` rejects a
+ * type mismatch, but only once called, which validating existence alone
+ * doesn't catch: the resolve-everything-before-mutating guard this function
+ * exists for only holds if resolving also fails on a type that could never
+ * have bound in the first place.
+ */
+function resolveVariable (
+  index: Map<string, Variable | 'ambiguous'>,
+  name: string,
+  expectedType: VariableResolvedDataType,
+): Variable {
+  const found = index.get(name);
+  if (found === 'ambiguous') {
+    throw new Error(`variable "${name}" exists in more than one local collection — cannot bind unambiguously`);
+  }
+  if (!found) throw new Error(`missing variable: ${name}`);
+  if (found.resolvedType !== expectedType) {
+    throw new Error(`variable "${name}" is ${found.resolvedType}, expected ${expectedType}`);
+  }
+  return found;
+}
+
 function textStyleFingerprint (input: TextStyleFingerprintInput): string {
   return JSON.stringify(input);
 }
@@ -69,8 +110,7 @@ async function createTextStyles (specs: TextStyleSpec[]): Promise<CreateTextStyl
   );
   for (const key of fontsNeeded) await figma.loadFontAsync(JSON.parse(key) as FontName);
 
-  const vars = await figma.variables.getLocalVariablesAsync();
-  const varByName = new Map(vars.map(v => [v.name, v]));
+  const varIndex = indexVariablesByName(await figma.variables.getLocalVariablesAsync());
   const existingStyles = await figma.getLocalTextStylesAsync();
   const styleByName = new Map(existingStyles.map(s => [s.name, s]));
 
@@ -80,10 +120,19 @@ async function createTextStyles (specs: TextStyleSpec[]): Promise<CreateTextStyl
   const errors: CreateTextStylesResult['errors'] = [];
 
   for (const spec of specs) {
+    let isNew = false;
+    let style: TextStyle | undefined;
     try {
-      let style = styleByName.get(spec.name);
-      const isNew = !style;
-      if (!style) style = figma.createTextStyle();
+      // Resolve every variable before touching the document: an existing
+      // style must come away untouched if any lookup below fails, and a
+      // newly-created one must not be left behind empty.
+      const famVar = resolveVariable(varIndex, spec.fontFamily.variable, 'STRING');
+      const sizeVar = resolveVariable(varIndex, spec.fontSize.variable, 'FLOAT');
+      const weightVar = resolveVariable(varIndex, spec.fontWeight.variable, 'FLOAT');
+
+      const existing = styleByName.get(spec.name);
+      isNew = !existing;
+      style = existing ?? figma.createTextStyle();
 
       const before = isNew ? null : textStyleFingerprint({
         fontFamily: style.fontName.family,
@@ -100,16 +149,6 @@ async function createTextStyles (specs: TextStyleSpec[]): Promise<CreateTextStyl
       // Baseline before binding, so setBoundVariable('fontWeight', …) has a
       // loaded starting point to resolve the nearest named style from.
       style.fontName = { family: spec.figmaFamily, style: spec.fontStyleName };
-
-      const famVar = varByName.get(spec.fontFamily.variable);
-      const sizeVar = varByName.get(spec.fontSize.variable);
-      const weightVar = varByName.get(spec.fontWeight.variable);
-      if (!famVar || !sizeVar || !weightVar) {
-        const missing = !famVar
-          ? spec.fontFamily.variable
-          : !sizeVar ? spec.fontSize.variable : spec.fontWeight.variable;
-        throw new Error(`missing variable: ${missing}`);
-      }
       style.setBoundVariable('fontFamily', famVar);
       style.setBoundVariable('fontSize', sizeVar);
       style.setBoundVariable('fontWeight', weightVar);
@@ -134,6 +173,10 @@ async function createTextStyles (specs: TextStyleSpec[]): Promise<CreateTextStyl
         (before === after ? unchanged : updated).push(style.name);
       }
     } catch (e) {
+      // A style this run itself created never survives a failed attempt —
+      // otherwise it lingers as an empty, unbound orphan that matches this
+      // spec's name on every future run and repeats the same error forever.
+      if (isNew && style) style.remove();
       errors.push({ name: spec.name, error: String(e) });
     }
   }
@@ -161,6 +204,14 @@ interface CreateEffectStylesResult {
   errors: { name: string; error: string }[];
   totalStyles: number;
 }
+
+const EFFECT_FIELD_TYPE: Record<EffectBindableField, VariableResolvedDataType> = {
+  blur: 'FLOAT',
+  color: 'COLOR',
+  offsetX: 'FLOAT',
+  offsetY: 'FLOAT',
+  spread: 'FLOAT',
+};
 
 /** `radius` is the field name `setBoundVariableForEffect` expects for blur. */
 const EFFECT_FIELD_TO_API: Record<EffectBindableField, VariableBindableEffectField> = {
@@ -193,27 +244,35 @@ function roundColor (c: RGBA): RGBA {
   return { r: round4(c.r), g: round4(c.g), b: round4(c.b), a: round4(c.a) };
 }
 
-// We only ever build DROP_SHADOW/INNER_SHADOW effects, so color/offset/
-// radius/spread are always present — no need to guard per field.
+// We only ever WRITE DROP_SHADOW/INNER_SHADOW effects, but the "before"
+// fingerprint reads whatever an existing style already has, which a human
+// could have set to any member of the Effect union (LAYER_BLUR,
+// BACKGROUND_BLUR, …). Reading shadow-only fields off one of those throws —
+// confirmed directly: a pre-existing blur reached `roundColor(undefined)` and
+// crashed before the style's effects were ever replaced, leaving the blur in
+// place and repeating the same crash every subsequent run. Every other member
+// gets a shape-appropriate, still-comparable fingerprint instead.
 function normalizeEffect (e: Effect) {
-  const shadow = e as Effect & { color: RGBA; offset: Vector; radius: number; spread?: number };
-  const bv = shadow.boundVariables;
-  return {
-    type: shadow.type,
-    visible: shadow.visible,
-    blendMode: shadow.blendMode,
-    color: roundColor(shadow.color),
-    offset: { x: round4(shadow.offset.x), y: round4(shadow.offset.y) },
-    radius: round4(shadow.radius),
-    spread: round4(shadow.spread ?? 0),
-    boundVariables: {
-      color: boundVarId(bv, 'color'),
-      radius: boundVarId(bv, 'radius'),
-      offsetX: boundVarId(bv, 'offsetX'),
-      offsetY: boundVarId(bv, 'offsetY'),
-      spread: boundVarId(bv, 'spread'),
-    },
-  };
+  if (e.type === 'DROP_SHADOW' || e.type === 'INNER_SHADOW') {
+    const bv = e.boundVariables;
+    return {
+      type: e.type,
+      visible: e.visible,
+      blendMode: e.blendMode,
+      color: roundColor(e.color),
+      offset: { x: round4(e.offset.x), y: round4(e.offset.y) },
+      radius: round4(e.radius),
+      spread: round4(e.spread ?? 0),
+      boundVariables: {
+        color: boundVarId(bv, 'color'),
+        radius: boundVarId(bv, 'radius'),
+        offsetX: boundVarId(bv, 'offsetX'),
+        offsetY: boundVarId(bv, 'offsetY'),
+        spread: boundVarId(bv, 'spread'),
+      },
+    };
+  }
+  return { type: e.type, visible: e.visible };
 }
 
 function effectsFingerprint (effects: readonly Effect[]): string {
@@ -228,8 +287,7 @@ function effectsFingerprint (effects: readonly Effect[]): string {
  * per-mode style object, which Figma has no concept of.
  */
 async function createEffectStyles (specs: EffectStyleSpec[]): Promise<CreateEffectStylesResult> {
-  const vars = await figma.variables.getLocalVariablesAsync();
-  const varByName = new Map(vars.map(v => [v.name, v]));
+  const varIndex = indexVariablesByName(await figma.variables.getLocalVariablesAsync());
   const existingStyles = await figma.getLocalEffectStylesAsync();
   const styleByName = new Map(existingStyles.map(s => [s.name, s]));
 
@@ -239,13 +297,11 @@ async function createEffectStyles (specs: EffectStyleSpec[]): Promise<CreateEffe
   const errors: CreateEffectStylesResult['errors'] = [];
 
   for (const spec of specs) {
+    let isNew = false;
+    let style: EffectStyle | undefined;
     try {
-      let style = styleByName.get(spec.name);
-      const isNew = !style;
-      if (!style) style = figma.createEffectStyle();
-      const before = isNew ? null : effectsFingerprint(style.effects);
-      style.name = spec.name;
-
+      // Build and validate every layer's effect up front — no mutation of
+      // the document happens until every variable in every layer resolves.
       const effects: Effect[] = spec.layers.map(layer => {
         let effect: Effect = {
           type: spec.isInset ? 'INNER_SHADOW' : 'DROP_SHADOW',
@@ -258,17 +314,23 @@ async function createEffectStyles (specs: EffectStyleSpec[]): Promise<CreateEffe
         };
 
         for (const field of EFFECT_BINDABLE_FIELDS) {
-          const variable = varByName.get(layer.variables[field]);
-          if (!variable) throw new Error(`missing variable: ${layer.variables[field]}`);
+          const variable = resolveVariable(varIndex, layer.variables[field], EFFECT_FIELD_TYPE[field]);
           effect = figma.variables.setBoundVariableForEffect(effect, EFFECT_FIELD_TO_API[field], variable);
         }
         return effect;
       });
 
+      const existing = styleByName.get(spec.name);
+      isNew = !existing;
+      style = existing ?? figma.createEffectStyle();
+      const before = isNew ? null : effectsFingerprint(style.effects);
+      style.name = spec.name;
       style.effects = effects;
+
       if (isNew) created.push(style.name);
       else (before === effectsFingerprint(effects) ? unchanged : updated).push(style.name);
     } catch (e) {
+      if (isNew && style) style.remove();
       errors.push({ name: spec.name, error: String(e) });
     }
   }
@@ -297,19 +359,39 @@ interface CreatePaintStylesResult {
 }
 
 /**
- * Figma's gradientTransform is a 2x3 matrix, not an angle — CSS's angle
- * convention doesn't map onto it directly. Calibrated empirically against a
- * red-to-blue test gradient at 0/90/135deg (screenshotted and compared to
- * what the same angle renders as in CSS): the sign that matches CSS is
- * `(90 - angleDeg)`, not the more obvious `(angleDeg - 90)`.
+ * Figma's `gradientTransform` maps a point in the shape's own 0-1 space to
+ * gradient space — the INVERSE direction of what the matrix's row/column
+ * shape suggests — so it's the stop's *coefficients*, not a length, that
+ * must shrink to make the visible line longer. Confirmed directly, rendering
+ * both sides and reading pixels back: a pure rotation (the previous formula)
+ * reproduces CSS's direction exactly but not its extent, because CSS's
+ * gradient line on a non-axis-aligned angle is longer than the box's own
+ * side (√2× at 45°/135° on a square) while a rotation alone stays unit
+ * length — every diagonal gradient's stops landed too close to the center,
+ * confirmed at 135°: stop 10%/90% rendered at ~22%/~78% instead.
+ *
+ * `dirX/dirY` is CSS's own gradient-line unit direction (0deg = up, clockwise
+ * — see https://www.w3.org/TR/css-images-3/#linear-gradients); `length` is
+ * that same spec's line-length formula for a unit square. Dividing the
+ * direction by it is what makes a stop's coefficient in gradient space
+ * shrink exactly enough to compensate for the line being longer, so a point
+ * at a given fraction along CSS's longer line still reads back the same
+ * fraction here. The perpendicular row stays a plain unit rotation — no
+ * length correction needed, since nothing about it depends on the box's
+ * aspect ratio along the gradient axis.
  */
 function gradientTransform (angleDeg: number): Transform {
-  const phi = (90 - angleDeg) * Math.PI / 180;
-  const cos = Math.cos(phi);
-  const sin = Math.sin(phi);
+  const rad = angleDeg * Math.PI / 180;
+  const dirX = Math.sin(rad);
+  const dirY = -Math.cos(rad);
+  const length = Math.abs(Math.sin(rad)) + Math.abs(Math.cos(rad));
+  const a = dirX / length;
+  const b = dirY / length;
+  const c = -b;
+  const d = a;
   return [
-    [cos, -sin, 0.5 - 0.5 * cos + 0.5 * sin],
-    [sin, cos, 0.5 - 0.5 * sin - 0.5 * cos],
+    [a, b, 0.5 * (1 - a - b)],
+    [c, d, 0.5 * (1 - c - d)],
   ];
 }
 
@@ -344,8 +426,7 @@ function paintsFingerprint (paints: readonly Paint[]): string {
  * the fallback swatch until the variable resolves.
  */
 async function createPaintStyles (specs: PaintStyleSpec[]): Promise<CreatePaintStylesResult> {
-  const vars = await figma.variables.getLocalVariablesAsync();
-  const varByName = new Map(vars.map(v => [v.name, v]));
+  const varIndex = indexVariablesByName(await figma.variables.getLocalVariablesAsync());
   const existingStyles = await figma.getLocalPaintStylesAsync();
   const styleByName = new Map(existingStyles.map(s => [s.name, s]));
 
@@ -355,17 +436,13 @@ async function createPaintStyles (specs: PaintStyleSpec[]): Promise<CreatePaintS
   const errors: CreatePaintStylesResult['errors'] = [];
 
   for (const spec of specs) {
+    let isNew = false;
+    let style: PaintStyle | undefined;
     try {
-      let style = styleByName.get(spec.name);
-      const isNew = !style;
-      if (!style) style = figma.createPaintStyle();
-      const before = isNew ? null : paintsFingerprint(style.paints);
-      style.name = spec.name;
-
+      // Resolve every stop's variable before touching the document.
       const stops: ColorStop[] = spec.stops.map(stop => {
         if (stop.variable) {
-          const variable = varByName.get(stop.variable);
-          if (!variable) throw new Error(`missing variable: ${stop.variable}`);
+          const variable = resolveVariable(varIndex, stop.variable, 'COLOR');
           const firstModeId = Object.keys(variable.valuesByMode)[0];
           const resolved = variable.valuesByMode[firstModeId] as RGBA;
           return {
@@ -386,11 +463,18 @@ async function createPaintStyles (specs: PaintStyleSpec[]): Promise<CreatePaintS
         opacity: 1,
         blendMode: 'NORMAL',
       }];
+
+      const existing = styleByName.get(spec.name);
+      isNew = !existing;
+      style = existing ?? figma.createPaintStyle();
+      const before = isNew ? null : paintsFingerprint(style.paints);
+      style.name = spec.name;
       style.paints = paints;
 
       if (isNew) created.push(style.name);
       else (before === paintsFingerprint(paints) ? unchanged : updated).push(style.name);
     } catch (e) {
+      if (isNew && style) style.remove();
       errors.push({ name: spec.name, error: String(e) });
     }
   }
