@@ -43,6 +43,7 @@ import { parseColor, colorApproximatelyEqual } from './color.js';
 import { resolveModes, ResolvedToken } from './resolve_tokens.js';
 import { classify, FigmaType } from './variable_policy.js';
 import { toNumber as toNumberWithUnits } from './utils.js';
+import { staleOverrides } from './stale_overrides.js';
 
 // See the matching override in build_variables.ts: the preview file names
 // its collection differently so its CI job can't collide with the main file's.
@@ -130,12 +131,9 @@ function overridesFor (
   types: Map<string, FigmaType>,
 ): { overrides: Override[]; unconvertible: string[] } {
   const out: Override[] = [];
-  // Named and reported at the call site, not dropped — the stale-reset pass
-  // 120 lines below hits the identical figmaValue() failure and reports it
-  // via `unresettable`; this path silently `continue`d on the exact same
-  // failure, which is the one thing this file's own comment on that other
-  // path warns against: "a silent skip here reads as a clean run while
-  // Figma holds a value nothing in the tokens asks for."
+  // Named and reported at the call site, not dropped — a silent `continue`
+  // here reads as a clean run while Figma holds a value nothing in the
+  // tokens asks for.
   const unconvertible: string[] = [];
 
   for (const token of material) {
@@ -197,10 +195,35 @@ async function main (): Promise<void> {
   }
   console.log(`parent      : "${PARENT}", ${parentCollection.variableIds.length} variables\n`);
 
+  // Set whenever a material posts less than its full desired state — an
+  // override this run knows about but couldn't address or convert. The loop
+  // still posts everything else it safely can; this only decides the
+  // process's own exit status, so CI stops treating that as a clean run (the
+  // workflow's "✅ Synced" comment is driven by the job's exit code, and
+  // reads every material as fully in sync otherwise).
+  let incomplete = false;
+
+  // Said out loud rather than dropped. A silent skip here reads as a clean
+  // run while Figma holds a value nothing in the tokens asks for.
+  const report = (name: string, label: string, items: string[]) => {
+    if (items.length === 0) return;
+    console.log(`${name}: ${items.length} ${label}`);
+    for (const item of items.slice(0, 10)) console.log(`    ${item}`);
+    if (items.length > 10) console.log(`    … and ${items.length - 10} more`);
+  };
+
   for (const material of MATERIALS) {
     const name = collectionNameFor(material);
     const tokens = await resolveAll([`base/material/${material}`]);
     const { overrides, unconvertible: unconvertibleOverrides } = overridesFor(parent, tokens, types);
+
+    // Checked here, not after the collection-creation branch below: a
+    // brand-new material's `continue` on --dry-run (right below) never
+    // reaches that later check, which silently dropped this exact report in
+    // precisely the one case — --dry-run against a material with no
+    // collection yet — this flag exists to stop happening.
+    report(name, 'wanted overrides could not be converted to a Figma value', unconvertibleOverrides);
+    if (unconvertibleOverrides.length > 0) incomplete = true;
 
     let collection = Object.values(local.meta.variableCollections).find(c => c.name === name);
 
@@ -261,62 +284,28 @@ async function main (): Promise<void> {
       // is a no-op the way the main sync is.
       .filter(o => !sameValue(existing[o.variableId]?.[o.modeId], o.value));
 
-    // An override Figma still holds that this material no longer wants, because
-    // the token now agrees with the parent. Nothing in the payload above would
-    // touch it, so without this the run reports "up to date" while Figma keeps
-    // showing the old value.
-    //
-    // REST has no way to delete an override — the plugin API's
-    // `removeOverridesForVariable` has no counterpart here — so the next best
-    // thing is to write the parent's own value, which is what the material
-    // resolves to now. The entry survives as an override that happens to match,
-    // and every run rewrites the full desired state, so a later parent change
-    // is picked up on the following run rather than propagating on its own.
-    const nameById = new Map<string, string>();
-    for (const [n, id] of byName) nameById.set(id, n);
-    const modeNameById = new Map<string, string>(
-      collection.modes.map(m => [m.modeId, m.name]));
-    const modeKeyFor = new Map<string, keyof typeof MODES>(
-      (Object.keys(MODES) as (keyof typeof MODES)[]).map(k => [MODES[k], k]));
+    // Deleted outright, via `value: null` on the extended mode — confirmed
+    // directly against a real extended collection that this removes the
+    // override and lets inheritance resume, which REST's own docs for
+    // `VariableModeValue` also state. Writing the parent's own resolved value
+    // here instead (an earlier version of this script did) looks equivalent
+    // but isn't: a semantic that merely *aliases* a primitive with its own
+    // material override — `color.surface.primary` referencing
+    // `color.black.100`, where `black.100` itself still varies by material —
+    // would have that alias permanently severed in favour of a frozen,
+    // parent-only literal, silently wrong for every material from then on.
+    // See `staleOverrides` for why this is skipped whenever addressing failed.
+    const stale = staleOverrides(existing, wanted, unaddressable);
 
-    const stale: { variableId: string; modeId: string; value: unknown }[] = [];
-    const unresettable: string[] = [];
-    for (const [variableId, byMode] of Object.entries(existing)) {
-      for (const modeId of Object.keys(byMode)) {
-        if (wanted.has(`${variableId}/${modeId}`)) continue;
-        const tokenName = nameById.get(variableId)?.split('/').join('.');
-        const modeKey = modeKeyFor.get(modeNameById.get(modeId) ?? '');
-        const token = tokenName ? parent.get(tokenName) : undefined;
-        const figmaType = tokenName ? types.get(tokenName) : undefined;
-        if (!token || !modeKey || figmaType === undefined) {
-          unresettable.push(`${tokenName ?? variableId} [${modeId}]`);
-          continue;
-        }
-        const value = figmaValue(figmaType, token.modes[modeKey].resolved);
-        if (value === null) { unresettable.push(`${tokenName} [${modeKey}]`); continue; }
-        if (sameValue(byMode[modeId], value)) continue;
-        stale.push({ variableId, modeId, value });
-      }
-    }
-
-    // Said out loud rather than dropped. A silent skip here reads as a clean
-    // run while Figma holds a value nothing in the tokens asks for.
-    const report = (label: string, items: string[]) => {
-      if (items.length === 0) return;
-      console.log(`${name}: ${items.length} ${label}`);
-      for (const item of items.slice(0, 10)) console.log(`    ${item}`);
-      if (items.length > 10) console.log(`    … and ${items.length - 10} more`);
-    };
-    report('overrides could not be addressed, no such variable or mode', unaddressable);
-    report('wanted overrides could not be converted to a Figma value', unconvertibleOverrides);
-    report('stale overrides could not be reset', unresettable);
+    report(name, 'overrides could not be addressed, no such variable or mode', unaddressable);
+    if (unaddressable.length > 0) incomplete = true;
 
     if (dryRun) {
-      console.log(`${name}: ${wanted.size} overrides, ${payload.length} to write, ${stale.length} stale to reset`);
+      console.log(`${name}: ${wanted.size} overrides, ${payload.length} to write, ${stale.length} stale to delete`);
       continue;
     }
 
-    const writes = [...payload, ...stale];
+    const writes = [...payload, ...stale.map(s => ({ ...s, value: null }))];
     if (writes.length === 0) {
       console.log(`${name}: up to date`);
       continue;
@@ -325,8 +314,13 @@ async function main (): Promise<void> {
     await api.postVariables(fileKey, { variableModeValues: writes } as never);
     console.log(
       `${name}: wrote ${payload.length} overrides` +
-      (stale.length ? `, reset ${stale.length} stale` : ''));
+      (stale.length ? `, deleted ${stale.length} stale` : ''));
     local = await getLocal();
+  }
+
+  if (incomplete) {
+    console.error('\nfailed: one or more materials left unaddressed or unconvertible overrides — see above');
+    process.exitCode = 1;
   }
 }
 

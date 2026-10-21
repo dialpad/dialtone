@@ -101,7 +101,13 @@ export interface VariableChange
 export interface VariableModeValue {
   variableId: string
   modeId: string
-  value: VariableValue
+  /**
+   * `null` deletes the override at this mode instead of setting one — only
+   * meaningful when `modeId` addresses an extended collection's own mode, and
+   * confirmed directly against a real extended collection: the override is
+   * removed and the variable's value there reverts to following the parent.
+   */
+  value: VariableValue | null
 }
 
 export interface ApiGetLocalVariablesResponse {
