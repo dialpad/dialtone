@@ -1,0 +1,35 @@
+packages/combinator/src/components/renderer/renderer_spec_sheet.vue
+  s_c3b12373d86df3::t_5ab5ff6563783b 163-168
+  s_c3b12373d86df3::t_4b7ef51afb6676 1-162,169-212
+packages/combinator/src/lib/use_theme_island.js
+  s_c3b12373d86df3::t_6f7d82bbe91231 1-52
+packages/combinator/src/lib/variant_state.js
+  s_c3b12373d86df3::t_af2de0dbd6b13c 1-102
+packages/combinator/src/components/renderer/renderer.vue
+  s_c3b12373d86df3::t_14240fe0d3fc21 97-100,103
+  s_c3b12373d86df3::t_ba9c15f3ae4433 29,31
+packages/combinator/src/components/combinator.vue
+  s_c3b12373d86df3::t_8a4fd59cf641f5 286
+  s_c3b12373d86df3::t_81b1c20e5cd190 152,162-170
+  s_c3b12373d86df3::t_566615fe842e5a 26,28-30,32-109
+  s_c3b12373d86df3::t_7631f92e084f60 206,214
+  s_c3b12373d86df3::t_81a8edf369aa77 235
+  s_c3b12373d86df3::t_6af86cbc4324b3 444-447,449,451,453-455
+  s_c3b12373d86df3::t_f6d05ae775a8a1 516-536
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.5.6",
+  "base_commit_sha": "e55200fbf43b6acd26733c1bfa1eb3119377bd22",
+  "prompts": {},
+  "sessions": {
+    "s_c3b12373d86df3": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f1ddcc08-3576-4872-b773-84c8083715f1",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    }
+  }
+}

@@ -1,0 +1,32 @@
+packages/dialtone-icons/src/svg/icons/controls/stop-stroke.svg
+  s_22978f81eaeea4::t_8070a9e88969b0 1-3
+packages/dialtone-icons/src/keywords-icons.json
+  s_22978f81eaeea4::t_cb1a6fd8d45902 1032-1036
+apps/dialtone-documentation/docs/.vuepress/views/IconCatalog.vue
+  s_8910b19a75b2ec::t_5aa95340bf671f 204-205,211-213
+  s_8910b19a75b2ec::t_1c21a620b8d4d9 214
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "588b248d330e0bb5525f921820557af8ec79d42a",
+  "prompts": {},
+  "sessions": {
+    "s_22978f81eaeea4": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "141bcbd3-bdc6-4ff0-82c1-9cefcaa7af9c",
+        "model": "claude-sonnet-5-5"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    },
+    "s_8910b19a75b2ec": {
+      "agent_id": {
+        "tool": "codex",
+        "id": "01a13c95-4afd-76c3-bfa6-9ddba8b6f260",
+        "model": "gpt-6.1-sol"
+      },
+      "human_author": "francisrupert <francis.rupert@dialpad.com>"
+    }
+  }
+}
