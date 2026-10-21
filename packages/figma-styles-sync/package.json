@@ -4,6 +4,7 @@
   "description": "Writes Dialtone text, effect, and paint styles into Figma via the Plugin API",
   "scripts": {
     "lint": "eslint --fix src plugin",
+    "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "sync:styles:serve": "tsx src/serve.ts",
     "sync:styles:build-plugin": "esbuild plugin/code.ts --bundle --outfile=plugin/code.js --target=es2017"
@@ -23,9 +24,7 @@
   },
   "dependencies": {
     "@dialpad/dialtone-tokens": "workspace:*",
-    "@dialpad/dialtone-vue": "workspace:vue3-next",
     "@figma/plugin-typings": "^1.100.0",
-    "dotenv": "^16.3.1",
     "tsx": "^4.19.0"
   },
   "devDependencies": {

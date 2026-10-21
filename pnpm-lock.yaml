@@ -999,15 +999,9 @@ importers:
       '@dialpad/dialtone-tokens':
         specifier: workspace:*
         version: link:../dialtone-tokens
-      '@dialpad/dialtone-vue':
-        specifier: workspace:vue3-next
-        version: link:../dialtone-vue
       '@figma/plugin-typings':
         specifier: ^1.100.0
         version: 1.138.0
-      dotenv:
-        specifier: ^16.3.1
-        version: 16.6.1
       tsx:
         specifier: ^4.19.0
         version: 4.21.0

@@ -42,4 +42,17 @@ describe('resolvePaintStyles', () => {
       expect(stop.color).toBeDefined()
     }
   })
+
+  it('resolves the literal gradient to light mode\'s stop positions, not dark\'s', () => {
+    // Known, accepted limitation, not an oversight: dark mode genuinely moves
+    // these three stops (tokens/base/dark.json), but a Figma paint style has
+    // no per-mode values for a baked literal to switch between. Pinned here
+    // so a future change to either mode's token is a visible test failure
+    // rather than a silent drift in which mode the style actually reflects.
+    const goldRedMagentaPurple = specs.find(s => s.name === 'color/gradient/gold-red-magenta-purple')!
+    const positions = goldRedMagentaPurple.stops.map(s => s.position)
+    expect(positions[7]).toBeCloseTo(0.7008, 4)
+    expect(positions[8]).toBeCloseTo(0.9002, 4)
+    expect(positions[9]).toBeCloseTo(0.9729, 4)
+  })
 })

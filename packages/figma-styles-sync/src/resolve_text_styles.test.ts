@@ -35,9 +35,14 @@ describe('resolveTextStyles', () => {
     expect(bodyMd!.fontStyleName).toBe('Regular')
   })
 
-  it('derives fontStyleName from the numeric weight, not the raw CSS value', () => {
-    for (const spec of specs) {
-      expect(['Regular', 'Medium', 'Semibold', 'Bold']).toContain(spec.fontStyleName)
-    }
+  it('maps each real weight in use to its own named style, not just a valid one', () => {
+    // Membership in the valid-name list alone would still pass with any two
+    // entries of WEIGHT_TO_STYLE transposed, since every real weight here
+    // maps to a *different* name — assert the exact pairing per weight instead.
+    const byWeight = new Map(specs.map(s => [s.fontWeight.value, s.fontStyleName]))
+    expect(byWeight.get('400')).toBe('Regular')
+    expect(byWeight.get('500')).toBe('Medium')
+    expect(byWeight.get('600')).toBe('Semibold')
+    expect(byWeight.get('700')).toBe('Bold')
   })
 })
