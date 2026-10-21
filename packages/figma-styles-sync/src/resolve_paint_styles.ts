@@ -1,10 +1,11 @@
 /**
- * Resolves Dialtone's 2 gradient tokens into the shape the Figma plugin needs:
+ * Resolves Dialtone's gradient tokens into the shape the Figma plugin needs:
  * one paint style per gradient, with each stop either a variable to bind
  * (when the token's raw value references another token) or a literal colour
  * (when it doesn't) — `color.gradient.magenta-purple` is two stops, both
- * references; `color.gradient.gold-red-magenta-purple` is eleven, all baked
- * `oklch()` literals with no token behind them.
+ * references; `color.gradient.gold-red-magenta-purple` and
+ * `color.gradient.orange-red-magenta-purple` are baked `oklch()` literals
+ * with no token behind them.
  *
  * A gradient is the one case in this whole sync where the RAW value matters
  * more than the resolved one: resolution substitutes `{color.brand.magenta}`

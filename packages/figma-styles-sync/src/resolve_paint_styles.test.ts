@@ -9,10 +9,11 @@ describe('resolvePaintStyles', () => {
     specs = await resolvePaintStyles()
   })
 
-  it('resolves both gradient tokens', () => {
+  it('resolves every gradient token', () => {
     expect(specs.map(s => s.name)).toEqual([
       'color/gradient/gold-red-magenta-purple',
       'color/gradient/magenta-purple',
+      'color/gradient/orange-red-magenta-purple',
     ])
   })
 
