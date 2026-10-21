@@ -31,6 +31,7 @@
           disabledValues: getDisabledValues(key, props.exclusionRules, props.propValues, props.slotValues),
           clearable: member.clearable,
           validator: member.validator,
+          sliderConfig: member.sliderConfig,
         }"
         @update:value="e => updateMember(e, key)"
         @update:control="e => updateControl(e, key)"
@@ -44,6 +45,7 @@ import DtcOptionBarControl from './option_bar_control.vue';
 import { MEMBER_UPDATE_EVENT } from '@/src/lib/constants';
 import { computed, reactive, watch } from 'vue';
 import { convert } from '@/src/lib/convert';
+import { getSliderControlConfig } from '@/src/lib/slider_control';
 import { controlMap } from '@/src/lib/control';
 import { buildDependencyMap, shouldHideProp } from '@/src/lib/prop_dependencies';
 import { shouldDisable, shouldClear, getDisabledValues } from '@/src/lib/exclusion_rules';
@@ -320,6 +322,7 @@ function extendMember (member) {
     clearable,
     deprecated,
     disableControl: inactive,
+    sliderConfig: getSliderControlConfig(member),
   };
 }
 

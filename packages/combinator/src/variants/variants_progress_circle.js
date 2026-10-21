@@ -1,6 +1,7 @@
 export default {
   defaults: {
     props: {
+      progress: { slider: { min: 0, max: 100, step: 1, suffix: '%' } },
       size: { tokenCategory: 'icon-size' },
       kind: { tokenCategory: 'color:d-progress-circle--:--progress-color' },
     },

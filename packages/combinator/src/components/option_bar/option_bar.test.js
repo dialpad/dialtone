@@ -435,3 +435,27 @@ describe('option_bar.vue test', function () {
     ).toBeTruthy();
   });
 });
+
+describe('explicit slider selection', () => {
+  const slider = { min: 0, max: 100, step: 1 };
+  function select (member, value) {
+    const wrapper = mountWrapper({ props: [{ name: 'progress', ...member }] });
+    const selector = wrapper.findComponent({ name: 'DtcOptionBarMemberGroup' }).props('controlSelector');
+    const result = selector(member, value);
+    wrapper.unmount();
+    return result;
+  }
+
+  it.each([66, 66.5, null, undefined, 'invalid'])('keeps the slider selected for current value %j', value => {
+    expect(select({ types: ['number'], slider }, value)).toEqual([['slider', 'null'], 'slider']);
+  });
+
+  it('preserves ordinary number, enum and mixed inference', () => {
+    expect(select({ types: ['number'] }, 66)).toEqual([['number', 'null'], 'number']);
+    expect(select({ types: ['number'], slider: { ...slider, step: 0 } }, 66)[1]).toBe('number');
+    expect(select({ types: ['number'], slider, tokenCategory: 'size' }, 66)[1]).toBe('number');
+    expect(select({ types: ['number', 'string'], slider }, 66)[0]).toEqual(['number', 'string', 'null']);
+    expect(select({ types: ['number'], slider, values: [0, 1] }, 66)[1]).toBe('segmented');
+    expect(select({ types: ['number'], values: Array.from({ length: 10 }, (_, i) => i) }, 66)[1]).toBe('selection');
+  });
+});

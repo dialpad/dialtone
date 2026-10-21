@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getControlByMemberType } from './control';
+import { getControlByMemberType, getControlByValue, controlMap } from './control';
 import { extendMember } from './info_extend';
 
 describe('control.js test', function () {
@@ -47,5 +47,12 @@ describe('control.js test', function () {
 
       expect(member.values).toEqual(['\'body\'', '\'parent\'']);
     });
+  });
+});
+
+describe('slider registry', () => {
+  it('does not change value inference or fabricate a slider default', () => {
+    expect(getControlByValue(66)).toBe('number');
+    expect(controlMap.slider.default()).toBeUndefined();
   });
 });
