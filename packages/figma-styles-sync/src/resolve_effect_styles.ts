@@ -11,16 +11,7 @@
  * style objects, which Figma has no concept of anyway.
  */
 
-import { fileURLToPath } from 'url';
-import { dirname, resolve } from 'path';
-
-import type { resolveModes as ResolveModes } from '../../dialtone-tokens/sync-scripts/resolve_tokens.ts';
-
-const DIALTONE_TOKENS_DIR = resolve(dirname(fileURLToPath(import.meta.url)), '../../dialtone-tokens');
-process.chdir(DIALTONE_TOKENS_DIR);
-
-const { resolveModes } = await import('../../dialtone-tokens/sync-scripts/resolve_tokens.ts') as
-  { resolveModes: typeof ResolveModes };
+import { resolveModes, figmaName } from './tokens_env.ts';
 
 const BINDABLE_FIELDS = ['blur', 'color', 'offsetX', 'offsetY', 'spread'] as const;
 type BindableField = (typeof BINDABLE_FIELDS)[number];
@@ -36,10 +27,6 @@ export interface EffectStyleSpec {
   /** A name ending `-inset` is an inner shadow; every other shadow is a drop shadow. */
   isInset: boolean;
   layers: EffectLayerSpec[];
-}
-
-function figmaName (path: string): string {
-  return path.split('.').join('/');
 }
 
 export async function resolveEffectStyles (): Promise<EffectStyleSpec[]> {

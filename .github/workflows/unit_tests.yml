@@ -96,11 +96,12 @@ jobs:
               - 'packages/dialtone-vue/**'
             tokens:
               - 'packages/dialtone-tokens/**'
-            # Imports dialtone-tokens' sync-scripts directly across the
-            # package boundary, so a token-side change can break it too.
+            # Imports dialtone-tokens' sync-scripts and reads its token data
+            # directly across the package boundary, so either side changing
+            # can break it — not just sync-scripts/**.
             figma_styles_sync:
               - 'packages/figma-styles-sync/**'
-              - 'packages/dialtone-tokens/sync-scripts/**'
+              - 'packages/dialtone-tokens/**'
             combinator:
               - 'packages/combinator/**'
             # Lookup adapters, their source datasets/generators, and the shared retrieval fixtures.

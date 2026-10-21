@@ -21,18 +21,11 @@
  * still switches with the file's own mode at view time.
  */
 
-import { fileURLToPath } from 'url';
-import { dirname, resolve } from 'path';
-
-import type { resolveModes as ResolveModes } from '../../dialtone-tokens/sync-scripts/resolve_tokens.ts';
 import type { parseColor as ParseColor } from '../../dialtone-tokens/sync-scripts/color.ts';
 import type { Color } from '../../dialtone-tokens/sync-scripts/figma_api.ts';
 
-const DIALTONE_TOKENS_DIR = resolve(dirname(fileURLToPath(import.meta.url)), '../../dialtone-tokens');
-process.chdir(DIALTONE_TOKENS_DIR);
+import { resolveModes, figmaName } from './tokens_env.ts';
 
-const { resolveModes } = await import('../../dialtone-tokens/sync-scripts/resolve_tokens.ts') as
-  { resolveModes: typeof ResolveModes };
 const { parseColor } = await import('../../dialtone-tokens/sync-scripts/color.ts') as
   { parseColor: typeof ParseColor };
 
@@ -50,10 +43,6 @@ export interface PaintStyleSpec {
   name: string;
   angleDeg: number;
   stops: GradientStopSpec[];
-}
-
-function figmaName (path: string): string {
-  return path.split('.').join('/');
 }
 
 /** `{a.b.c}` and nothing else — same rule `resolve_tokens.ts` uses for a whole-token alias. */

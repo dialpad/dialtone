@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "description": "Writes Dialtone text, effect, and paint styles into Figma via the Plugin API",
   "scripts": {
-    "lint": "eslint --fix src plugin",
+    "lint": "eslint src plugin",
+    "lint:fix": "eslint --fix src plugin",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "sync:styles:serve": "tsx src/serve.ts",

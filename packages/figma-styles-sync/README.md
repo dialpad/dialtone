@@ -64,7 +64,9 @@ one correct style; with matching counts, one style with every field bound
 renders correctly in both modes for free.
 
 A shadow's name decides its Figma effect `type`: anything ending `-inset`
-(only `focus-inset`) is `INNER_SHADOW`; everything else is `DROP_SHADOW`.
+(`focus-inset`) is `INNER_SHADOW`, and so is any shadow whose resolved values
+match an `-inset` shadow layer-for-layer (`focus`, a whole-object alias of
+`focus-inset`); everything else is `DROP_SHADOW`.
 Confirmed against the built CSS, not the token data — every layer's own
 `type` field says `dropShadow` even for the inset one, since CSS expresses
 `inset` as a trailing keyword on the shared `box-shadow` property rather than
@@ -73,14 +75,16 @@ value carrying a trailing ` inset`, tied to the token name, not the layer.
 
 ## Paint styles
 
-`src/resolve_paint_styles.ts` resolves Dialtone's 2 gradient tokens
-(`color.gradient.magenta-purple`, `color.gradient.gold-red-magenta-purple`)
-into one `GRADIENT_LINEAR` paint style each.
+`src/resolve_paint_styles.ts` resolves Dialtone's 3 gradient tokens
+(`color.gradient.magenta-purple`, `color.gradient.gold-red-magenta-purple`,
+`color.gradient.orange-red-magenta-purple`) into one `GRADIENT_LINEAR` paint
+style each.
 
 A gradient stop binds a variable when its token's RAW value references
 another token (`magenta-purple`'s 2 stops both do), and falls back to a
-literal `oklch()` colour when it doesn't (all 11 stops of
-`gold-red-magenta-purple` are baked literals with no token behind them). The
+literal `oklch()` colour when it doesn't (every stop of
+`gold-red-magenta-purple` and `orange-red-magenta-purple` is a baked literal
+with no token behind it). The
 resolver reads `raw`, not `resolved` — resolution substitutes a reference
 with the referenced token's own literal, discarding exactly what needs
 binding. There's no `setBoundVariableForColorStop` helper; the plugin sets
@@ -88,11 +92,13 @@ binding. There's no `setBoundVariableForColorStop` helper; the plugin sets
 a literal `color` that Figma uses as the stop's fallback swatch until the
 binding resolves.
 
-**`gradientTransform` angle sign is `(90 - angleDeg)`, not `(angleDeg - 90)`.**
-Figma's `gradientTransform` is a 2x3 affine matrix, not a CSS-style angle —
-naively porting the more obvious `(angleDeg - 90)` formula from other
-tooling renders every gradient with its direction mirrored (verified by
-screenshotting a red-to-blue calibration gradient at 0°, 90°, and 135° and
-comparing against what those angles render as in CSS: the output was
-consistently `180 - input`). The corrected sign was confirmed the same way
-before being used on the real gradients.
+**`gradientTransform` needs the stop coefficients to shrink, not just rotate.**
+Figma's `gradientTransform` maps a point in the shape's own 0-1 space to
+gradient space — the inverse of what the matrix's row/column shape suggests.
+A pure rotation reproduces CSS's direction exactly but not its extent: CSS's
+gradient line on a non-axis-aligned angle is longer than the box's own side
+(√2× at 45°/135° on a square), so a stop's coefficients must shrink to
+compensate, or every diagonal gradient's stops land too close to the center
+(verified at 135°: a 10%/90% stop pair rendered at ~22%/~78% instead).
+Confirmed by rendering both sides and reading pixels back before using the
+corrected formula on the real gradients.

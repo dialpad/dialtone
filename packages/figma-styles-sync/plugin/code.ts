@@ -6,21 +6,9 @@
  * by `ui.html`, which does have fetch — see that file for why.
  */
 
-interface TextStyleField {
-  value: string | number;
-  variable: string;
-}
-
-interface TextStyleSpec {
-  name: string;
-  fontFamily: TextStyleField;
-  fontSize: TextStyleField;
-  fontWeight: TextStyleField;
-  lineHeight: TextStyleField;
-  textCase: string;
-  fontStyleName: string;
-  figmaFamily: string;
-}
+import type { TextStyleSpec } from '../src/resolve_text_styles.ts';
+import type { EffectStyleSpec } from '../src/resolve_effect_styles.ts';
+import type { PaintStyleSpec } from '../src/resolve_paint_styles.ts';
 
 interface CreateTextStylesResult {
   created: string[];
@@ -181,21 +169,14 @@ async function createTextStyles (specs: TextStyleSpec[]): Promise<CreateTextStyl
     }
   }
 
-  return { created, updated, unchanged, errors, totalStyles: (await figma.getLocalTextStylesAsync()).length };
+  return {
+    created, updated, unchanged, errors,
+    totalStyles: created.length + updated.length + unchanged.length + errors.length,
+  };
 }
 
 const EFFECT_BINDABLE_FIELDS = ['blur', 'color', 'offsetX', 'offsetY', 'spread'] as const;
 type EffectBindableField = (typeof EFFECT_BINDABLE_FIELDS)[number];
-
-interface EffectLayerSpec {
-  variables: Record<EffectBindableField, string>;
-}
-
-interface EffectStyleSpec {
-  name: string;
-  isInset: boolean;
-  layers: EffectLayerSpec[];
-}
 
 interface CreateEffectStylesResult {
   created: string[];
@@ -335,19 +316,10 @@ async function createEffectStyles (specs: EffectStyleSpec[]): Promise<CreateEffe
     }
   }
 
-  return { created, updated, unchanged, errors, totalStyles: (await figma.getLocalEffectStylesAsync()).length };
-}
-
-interface GradientStopSpec {
-  position: number;
-  variable?: string;
-  color?: { r: number; g: number; b: number; a?: number };
-}
-
-interface PaintStyleSpec {
-  name: string;
-  angleDeg: number;
-  stops: GradientStopSpec[];
+  return {
+    created, updated, unchanged, errors,
+    totalStyles: created.length + updated.length + unchanged.length + errors.length,
+  };
 }
 
 interface CreatePaintStylesResult {
@@ -419,6 +391,34 @@ function paintsFingerprint (paints: readonly Paint[]): string {
   return JSON.stringify(paints.map(normalizePaint));
 }
 
+const MAX_ALIAS_HOPS = 10;
+
+/**
+ * A bound colour variable's value at a given mode can itself be a
+ * `VariableAlias` rather than an `RGBA` — Dialtone's semantic-to-primitive
+ * chains are exactly this shape — so reading `valuesByMode[modeId]` once and
+ * casting straight to `RGBA` can silently produce a color with undefined
+ * channels. Follows the chain through the collection's own `defaultModeId`
+ * (not an arbitrary object key) until it lands on a literal, bounded so a
+ * cycle fails loudly instead of hanging.
+ */
+async function resolveColor (variable: Variable): Promise<RGBA> {
+  let current: Variable = variable;
+  for (let hop = 0; hop < MAX_ALIAS_HOPS; hop++) {
+    const collection = await figma.variables.getVariableCollectionByIdAsync(current.variableCollectionId);
+    if (!collection) throw new Error(`missing variable collection for "${current.name}"`);
+    const value = current.valuesByMode[collection.defaultModeId];
+    if (value && typeof value === 'object' && 'type' in value && value.type === 'VARIABLE_ALIAS') {
+      const next = await figma.variables.getVariableByIdAsync(value.id);
+      if (!next) throw new Error(`missing variable aliased from "${current.name}"`);
+      current = next;
+      continue;
+    }
+    return value as RGBA;
+  }
+  throw new Error(`colour alias chain from "${variable.name}" is more than ${MAX_ALIAS_HOPS} hops deep`);
+}
+
 /**
  * A bound stop still needs a literal `color` alongside `boundVariables` —
  * Figma has no dedicated `setBoundVariableForColorStop` helper, so the alias
@@ -440,11 +440,10 @@ async function createPaintStyles (specs: PaintStyleSpec[]): Promise<CreatePaintS
     let style: PaintStyle | undefined;
     try {
       // Resolve every stop's variable before touching the document.
-      const stops: ColorStop[] = spec.stops.map(stop => {
+      const stops: ColorStop[] = await Promise.all(spec.stops.map(async stop => {
         if (stop.variable) {
           const variable = resolveVariable(varIndex, stop.variable, 'COLOR');
-          const firstModeId = Object.keys(variable.valuesByMode)[0];
-          const resolved = variable.valuesByMode[firstModeId] as RGBA;
+          const resolved = await resolveColor(variable);
           return {
             position: stop.position,
             color: { r: resolved.r, g: resolved.g, b: resolved.b, a: resolved.a ?? 1 },
@@ -453,7 +452,7 @@ async function createPaintStyles (specs: PaintStyleSpec[]): Promise<CreatePaintS
         }
         const c = stop.color!;
         return { position: stop.position, color: { r: c.r, g: c.g, b: c.b, a: c.a ?? 1 } };
-      });
+      }));
 
       const paints: Paint[] = [{
         type: 'GRADIENT_LINEAR',
@@ -479,7 +478,10 @@ async function createPaintStyles (specs: PaintStyleSpec[]): Promise<CreatePaintS
     }
   }
 
-  return { created, updated, unchanged, errors, totalStyles: (await figma.getLocalPaintStylesAsync()).length };
+  return {
+    created, updated, unchanged, errors,
+    totalStyles: created.length + updated.length + unchanged.length + errors.length,
+  };
 }
 
 figma.showUI(__html__, { width: 360, height: 400 });
