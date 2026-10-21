@@ -1,5 +1,8 @@
 import axios from 'axios'
 import { readFileSync } from 'fs'
+import type { VariableScope } from './variable_policy.js'
+
+export type { VariableScope }
 
 export interface VariableMode {
   modeId: string
@@ -52,10 +55,6 @@ export interface VariableComposedColor {
 }
 
 export type VariableValue = boolean | number | string | Color | VariableAlias | VariableComposedColor
-
-export type VariableScope = 'ALL_SCOPES' | VariableFloatScopes | VariableColorScopes
-type VariableFloatScopes = 'TEXT_CONTENT' | 'WIDTH_HEIGHT' | 'GAP'
-type VariableColorScopes = 'ALL_FILLS' | 'FRAME_FILL' | 'SHAPE_FILL' | 'TEXT_FILL' | 'STROKE_COLOR'
 
 export type VariableCodeSyntax = { WEB?: string; ANDROID?: string; iOS?: string }
 

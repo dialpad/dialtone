@@ -242,6 +242,13 @@ async function main (): Promise<void> {
       } as never);
       const id = (created as { meta?: { tempIdToRealId?: Record<string, string> } })
         .meta?.tempIdToRealId?.[`temp-${material}`];
+      // A real REST read, not `getLocal()` — deliberately ignores
+      // --local-snapshot. The POST response only echoes tempIdToRealId, never
+      // the created collection's modes, and this material's real modeIds
+      // (needed just below) exist nowhere else to read them from, snapshot or
+      // not. `local` reverts to the snapshot on the next refresh (see the end
+      // of this loop), so this one live read does not leak into how later
+      // materials resolve their own, differently-named collections.
       local = await api.getLocalVariables(fileKey);
       collection = Object.values(local.meta.variableCollections).find(c => c.id === id);
       if (!collection) throw new Error(`Could not create ${name}`);

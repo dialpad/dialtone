@@ -35,7 +35,10 @@ Run it yourself after the change is in:
 cd packages/dialtone-tokens
 pnpm sync:variables
 
-# Only if the change touched tokens/base/material/*
+# Always run, not gated on which files changed — a material override can go
+# stale from a PARENT token changing, without tokens/base/material/* itself
+# being touched. The sync is idempotent, so this costs an extra diff, never
+# a wrong write.
 pnpm sync:materials
 ```
 
@@ -100,7 +103,7 @@ The sync is idempotent. It reads the file first and sends only the difference, s
 
 Locally, put both in `packages/dialtone-tokens/.env`, which is gitignored and loaded via `dotenv/config`.
 
-In CI they come from a GitHub environment rather than a plain repo secret, so a run started from a pull request cannot reach the token without approval.
+In CI they come from a GitHub environment rather than a plain repo secret, which keeps `figma-tokens-sync-main` and `figma-tokens-sync-preview` as two separate credential scopes. Neither environment currently has a required-reviewer rule configured — the actual gate on a pull-request-started run is the `authorize` job's commenter-permission and same-repo checks (see below), not an environment approval.
 
 ## CI, in detail
 
