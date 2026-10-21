@@ -26,6 +26,20 @@ export interface Token {
       hiddenFromPublishing?: boolean
       scopes?: VariableScope[]
       codeSyntax?: VariableCodeSyntax
+      /**
+       * A colour token whose source applied a Tokens Studio `alpha` modifier
+       * to another token. `$value` still carries the flattened literal — for
+       * any consumer that doesn't know this field, or as the fallback if
+       * `colorAlias` can't be resolved — but when present, token_import.ts
+       * writes a real Figma VariableComposedColor instead: a genuine alias to
+       * the source colour, with only the opacity channel diverging.
+       */
+      composedColor?: {
+        /** Dotted token name, same format an ordinary `{a.b.c}` alias uses. */
+        colorAlias: string
+        /** A percentage 0-100, matching VariableComposedColor.opacity. */
+        opacity: number
+      }
     }
   },
   $customType?: 'sizing' | 'spacing' | 'borderWidth' | 'borderRadius'

@@ -1,4 +1,6 @@
-import { colorApproximatelyEqual, parseColor, rgbToHex } from './color.js'
+import { describe, it, expect, beforeEach } from 'vitest'
+
+import { colorApproximatelyEqual, parseColor, parseCssColor, rgbToHex, gamutMapped, resetGamutLog } from './color.js'
 
 describe('colorApproximatelyEqual', () => {
   it('compares by hex value', () => {
@@ -54,6 +56,29 @@ describe('parseColor', () => {
     expect(() => parseColor('#0000000')).toThrowError('Invalid color format')
     expect(() => parseColor('#000000000')).toThrowError('Invalid color format')
     expect(() => parseColor('#hhh')).toThrowError('Invalid color format')
+  })
+})
+
+describe('parseCssColor', () => {
+  beforeEach(() => {
+    resetGamutLog()
+  })
+
+  it('passes an in-gamut colour straight through', () => {
+    const color = parseCssColor('oklch(0.6 0.1 250)')
+    expect(gamutMapped).toHaveLength(0)
+    // sanity check: round-trips to a plausible blue, not clamped to black/white
+    const hex = rgbToHex(color)
+    expect(hex).toMatch(/^#[0-9a-f]{6}$/)
+  })
+
+  it('clips an out-of-gamut colour to match what a browser paints, not a hue-preserving chroma reduction', () => {
+    // shell/color/foreground/warning, dark mode — confirmed against Chromium:
+    // clipping renders amber (#ffd561), chroma-reduction renders a washed-out
+    // pale peach (#ffe3c2) that does not match the product.
+    const color = parseCssColor('oklch(0.93 0.16 71.7)', 'shell/color/foreground/warning')
+    expect(rgbToHex(color)).toBe('#ffd561')
+    expect(gamutMapped).toEqual([{ name: 'shell/color/foreground/warning', from: 'oklch(0.93 0.16 71.7)' }])
   })
 })
 
