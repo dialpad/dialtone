@@ -89,6 +89,21 @@ Mutual exclusions need both directions:
 }
 ```
 
+### `hideValues`
+
+Removes specific values from a prop's selectable list, so the control only
+lists the values that apply. Use it when a value can never be valid for the
+current state; use `disableValues` when users should still see the value and why
+it is unavailable. Pair it with `clear` so a selected value that becomes hidden
+is reset.
+
+```js
+{
+  when: { kind: 'counter' },
+  hideValues: { props: { variant: ['neutral', 'info'] } },
+}
+```
+
 ### `clear`
 
 Clears a member value by writing `null` when the rule matches.

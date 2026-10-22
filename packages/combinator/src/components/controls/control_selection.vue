@@ -244,6 +244,10 @@ const props = defineProps({
     type: Set,
     default: undefined,
   },
+  hiddenValues: {
+    type: Set,
+    default: undefined,
+  },
   generatePreviewComponent: {
     type: Function,
     default: null,
@@ -272,7 +276,7 @@ function onInput (e) {
 }
 
 const options = computed(() => {
-  return props.validValues?.map(selection => {
+  return props.validValues?.filter(selection => !props.hiddenValues?.has(String(selection))).map(selection => {
     const optionDisabled = props.disabledValues?.has(String(selection)) ?? false;
     const rawResolved = props.tokenCategory
       ? resolveTokenValue(props.tokenCategory, selection, props.propValues)

@@ -24,15 +24,19 @@
   --badge-color-text: var(--dt-badge-color-foreground-default);
   --badge-color-background: var(--dt-badge-color-background-default);
   --badge-color-outline: var(--dt-badge-color-border-default);
-  --badge-radius: var(--dt-size-radius-300);
-  --badge-line-height: calc(var(--dt-spacing-200) + var(--dt-spacing-25));
-  --badge-font-size: var(--dt-font-size-100);
-  --badge-font-weight: var(--dt-font-weight-semi-bold);
-  --badge-gap: var(--dt-spacing-25);
-  --badge-letter-spacing: calc(var(--dt-spacing-1) / 2);
-  --badge-padding-y: var(--dt-spacing-1);
+  --badge-radius: var(--dt-size-radius-350);
+  --badge-font-family: var(--dt-font-family-body);
+  --badge-font-size: var(--dt-font-size-75);
+  // SHORTCUT: block sizes are literal rem values (18-28px); no size tokens exist for them.
+  // Upgrade when a badge/control block-size token scale is added.
+  --badge-line-height: 2rem;
+  --badge-font-weight: var(--dt-font-weight-medium);
+  --badge-gap: var(--dt-spacing-1);
+  --badge-letter-spacing: var(--dt-spacing-0);
+  --badge-padding-y: var(--dt-spacing-0);
   --badge-padding-x: var(--dt-spacing-50);
   --badge-label-padding-x: var(--dt-spacing-25);
+  --badge-min-inline-size: auto;
   --badge-text-case: none;
   --badge-decorative-color: var(--dt-color-black-900);
 
@@ -43,41 +47,95 @@
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
-  min-inline-size: calc(var(--dt-layout-25) * 1.5);
   padding: var(--badge-padding-y) var(--badge-padding-x);
   color: var(--badge-color-text);
   font-weight: var(--badge-font-weight);
   font-size: var(--badge-font-size);
+  font-family: var(--badge-font-family);
   line-height: var(--badge-line-height);
   letter-spacing: var(--badge-letter-spacing);
   text-align: center;
   text-transform: var(--badge-text-case);
   background-color: var(--badge-color-background);
   border-radius: var(--badge-radius);
+  min-inline-size: var(--badge-min-inline-size);
+
+  //  SIZE
+  //  --------------------------------------------------------------------------
+  &--size-100 {
+    --badge-font-size: var(--dt-font-size-50);
+    --badge-line-height: 1.8rem;
+    --badge-padding-x: var(--dt-spacing-25);
+    --badge-radius: var(--dt-size-radius-350);
+  }
+
+  &--size-200 {
+    --badge-font-size: var(--dt-font-size-75);
+    --badge-line-height: 2rem;
+    --badge-padding-x: var(--dt-spacing-50);
+    --badge-radius: var(--dt-size-radius-350);
+  }
+
+  &--size-300 {
+    --badge-font-size: var(--dt-font-size-100);
+    --badge-line-height: 2.2rem;
+    --badge-padding-x: var(--dt-spacing-50);
+    --badge-radius: var(--dt-size-radius-400);
+  }
+
+  &--size-400 {
+    --badge-font-size: var(--dt-font-size-150);
+    --badge-line-height: 2.4rem;
+    --badge-padding-x: var(--dt-spacing-50);
+    --badge-radius: var(--dt-size-radius-400);
+  }
+
+  &--size-500 {
+    --badge-font-size: var(--dt-font-size-200);
+    --badge-line-height: 2.8rem;
+    --badge-padding-x: var(--dt-spacing-75);
+    // No radius token between 400 (8px) and 450 (12px).
+    --badge-radius: calc(var(--dt-size-radius-400) + var(--dt-size-radius-200));
+  }
 
   //  Kind
   //  --------------------------------------------------------------------------
-  &--count {
-    --badge-radius: var(--dt-size-radius-pill);
-    --badge-padding-x: calc(var(--dt-spacing-100) - var(--dt-spacing-1));
-    --badge-padding-y: var(--dt-spacing-50);
-    --badge-line-height: var(--dt-layout-25);
-    --badge-label-padding-x: var(--dt-spacing-0);
-    --badge-gap: var(--dt-spacing-50);
+  //  Counter group
+  &--count,
+  &--mention {
+    --badge-font-weight: var(--dt-font-weight-semi-bold);
+    --badge-min-inline-size: var(--badge-line-height);
   }
 
-  //  TYPE
+  //  VARIANTS AND EMPHASIS
   //  --------------------------------------------------------------------------
-  &--info {
+  //  Badges come in groups (status, counter, release, lifecycle). Colors come from the
+  //  component tokens (--dt-badge-color-*), which point at semantic tokens where
+  //  one exists.
+  //
+  //  STATUS: neutral, info, positive, warning, critical. Emphasis: base, strong.
+  &--neutral,
+  &--draft,
+  &--archived {
+    --badge-color-text: var(--dt-badge-color-foreground-default);
+    --badge-color-background: var(--dt-badge-color-background-default);
+  }
+
+  &--info,
+  &--edited,
+  &--scheduled {
     --badge-color-background: var(--dt-badge-color-background-info);
   }
 
   &--positive,
-  &--success {
+  &--success,
+  &--saved,
+  &--published {
     --badge-color-background: var(--dt-badge-color-background-positive);
   }
 
-  &--warning {
+  &--warning,
+  &--unsaved {
     --badge-color-background: var(--dt-badge-color-background-warning);
   }
 
@@ -85,15 +143,79 @@
     --badge-color-background: var(--dt-badge-color-background-critical);
   }
 
-  &--bulletin {
+  //  RELEASE: pre-release, release.
+  //  Emphasis (how important the feature is): subtle = outline, base = light
+  //  fill, strong = solid fill. pre-release is purple; release fades to gray
+  //  once a feature has launched. Teams decide when a badge moves from one
+  //  stage to the next. "bulletin" is the legacy name for pre-release.
+  &--bulletin,
+  &--pre-release {
     --badge-color-text: var(--dt-badge-color-foreground-bulletin);
     --badge-color-background: var(--dt-badge-color-background-bulletin);
+    --badge-color-outline: var(--dt-badge-color-background-bulletin);
 
+    &:not(.d-badge--strong),
     &.d-badge--subtle {
       --badge-color-text: var(--dt-badge-color-foreground-bulletin-subtle);
       --badge-color-background: var(--dt-badge-color-background-bulletin-subtle);
       --badge-color-outline: var(--dt-badge-color-border-bulletin-subtle);
     }
+  }
+
+  &--release {
+    --badge-color-text: var(--dt-badge-color-foreground-default);
+    --badge-color-background: var(--dt-badge-color-background-default);
+  }
+
+  //  LIFECYCLE: draft, edited, unsaved, saved, published, archived, scheduled.
+  //  The state of a piece of content. Each variant uses a status color (see
+  //  STATUS above): draft and archived are neutral, edited and scheduled are
+  //  info, unsaved is warning, saved and published are positive.
+
+  //  subtle: outline, no fill
+  &--bulletin&--outlined,
+  &--pre-release&--outlined,
+  &--release&--outlined {
+    --badge-color-background: var(--dt-color-neutral-transparent);
+  }
+
+  &--strong {
+    --badge-color-text: var(--dt-badge-color-foreground-strong);
+  }
+
+  &--neutral&--strong,
+  &--draft&--strong,
+  &--archived&--strong,
+  &--release&--strong {
+    --badge-color-background: var(--dt-badge-color-background-default-strong);
+  }
+
+  &--count&--strong,
+  &--mention&--strong {
+    // A nested counter sets --badge-count-strong-background (see NESTED BADGES) to stay distinct from its parent.
+    --badge-color-background: var(--badge-count-strong-background, var(--dt-badge-color-background-count-strong));
+  }
+
+  &--info&--strong,
+  &--edited&--strong,
+  &--scheduled&--strong {
+    --badge-color-background: var(--dt-badge-color-background-info-strong);
+  }
+
+  &--positive&--strong,
+  &--saved&--strong,
+  &--published&--strong {
+    --badge-color-background: var(--dt-badge-color-background-positive-strong);
+  }
+
+  &--warning&--strong,
+  &--unsaved&--strong {
+    --badge-color-text: var(--dt-badge-color-foreground-warning-strong);
+    --badge-color-background: var(--dt-badge-color-background-warning-strong);
+  }
+
+  &--critical&--strong {
+    --badge-color-background: var(--dt-badge-color-background-critical-strong);
   }
 
   &--ai {
@@ -139,10 +261,10 @@
     --badge-size: calc(var(--dt-layout-25) / 2);
 
     display: inline-flex;
-    inline-size: var(--badge-size);
-    block-size: var(--badge-size);
     background-color: var(--badge-decorative-color);
     border-radius: var(--dt-size-radius-200);
+    inline-size: var(--badge-size);
+    block-size: var(--badge-size);
     margin-inline-start: var(--dt-spacing-25);
   }
 
@@ -152,6 +274,8 @@
     padding-inline: var(--badge-label-padding-x);
   }
 
+  &__leading,
+  &__trailing,
   &__icon-left,
   &__icon-right {
     display: flex;
@@ -164,5 +288,33 @@
   &__icon-right {
     padding-inline-end: var(--dt-spacing-1);
   }
+}
+
+//  NESTED BADGES
+//  ----------------------------------------------------------------------------
+//  A badge inside another badge (in its label or its leading, trailing, or icon slots) is inset:
+//  slightly shorter than its parent, with a smaller radius and half the horizontal padding. This is
+//  pure CSS; the component does not need to know it is nested.
+.d-badge__label,
+.d-badge__leading,
+.d-badge__trailing,
+.d-badge__icon-left,
+.d-badge__icon-right {
+  --badge-nested-inset: 0.2rem;
+  --badge-nested-block-size: calc(var(--badge-line-height) - 2 * var(--badge-nested-inset));
+  --badge-nested-radius: calc(var(--badge-radius) - var(--badge-nested-inset));
+  --badge-nested-padding-x: calc(var(--badge-padding-x) / 2);
+}
+
+:where(.d-badge) .d-badge {
+  --badge-line-height: var(--badge-nested-block-size);
+  --badge-radius: var(--badge-nested-radius);
+  --badge-padding-x: var(--badge-nested-padding-x);
+  --badge-count-strong-background: var(--dt-badge-color-background-count-strong-nested);
+}
+
+// A nested badge in the trailing slot sits the same distance from the end edge as from the top and bottom.
+.d-badge:where(:has(> .d-badge__trailing > .d-badge)) {
+  padding-inline-end: 0.2rem;
 }
 }
