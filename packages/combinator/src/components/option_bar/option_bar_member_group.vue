@@ -53,7 +53,7 @@ import { isClassProp, shouldDisableSlotClassProp } from '@/src/lib/utils';
 const ICON_SLOT_ORDER = ['startIcon', 'endIcon', 'blockStartIcon', 'blockEndIcon', 'icon'];
 
 const PROP_PRIORITY = [
-  'title', 'as', 'variant', 'kind', 'importance', 'size', 'family', 'label', 'presence',
+  'title', 'as', 'kind', 'variant', 'emphasis', 'importance', 'size', 'family', 'label', 'presence',
   'placement', 'tone', 'density', 'strength', 'align',
   'type', 'underline', 'selected', 'active', 'disabled',
   'deferSelection', 'readOnly', 'showClear', 'useDropdown',
